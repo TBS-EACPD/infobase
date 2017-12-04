@@ -8,6 +8,7 @@ import { Welcome } from '@storybook/react/demo';
 import './story-bootstrap.js';
 
 
+
 const req = require.context('../src/', true, /\.stories\.js$/)
 
 function loadStories() {
@@ -16,4 +17,5 @@ function loadStories() {
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome />);
 
-configure(loadStories,module)
+configure(loadStories, module);
+  
