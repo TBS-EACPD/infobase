@@ -8,7 +8,6 @@ import { Welcome } from '@storybook/react/demo';
 import './story-bootstrap.js';
 
 
-
 const req = require.context('../src/', true, /\.stories\.js$/)
 
 function loadStories() {
