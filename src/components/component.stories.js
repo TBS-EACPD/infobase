@@ -8,6 +8,7 @@ import {
   TabularPercentLegend,
 } from '../charts/declarative_charts.js';
 
+<<<<<<< 19140187343eb309150c8d74d6d3e8b986b84f08
 import { AutoAccordion } from './Accordions.js';
 
 import { Details } from './Details.js';
@@ -21,6 +22,12 @@ import { SortIndicators } from './SortIndicators.js';
 import { TabbedContent } from './TabbedContent.js';
 
 import { TwoLevelSelect } from './TwoLevelSelect.js'
+=======
+import { RadioButtons } from '../util_components.js';
+
+import { Details } from './Details.js';
+
+>>>>>>> split up stories, add a new <Details> component
 
 const separator_style = {padding: "20px", maxWidth: "800px", border:"2px dashed black"};
 storiesOf('flat design modifications', module)
