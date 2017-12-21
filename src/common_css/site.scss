@@ -439,17 +439,16 @@ a, a:visited {
   }
 }
 
-#wb-lng > .row > div > ul > li > a {
+#wb-lng > a {
   text-decoration: underline;
 }
 
+/*
 .easy-access > span > a,
 ol.breadcrumb > li > :last-child {
-  font-family: Helvetica,Arial,sans-serif;
-  font-weight: $mediumFontWeight;
-  text-decoration: underline;
   color: $wetLinkColor;
 }
+*/
 
 ol.breadcrumb > li:last-child > :last-child {
   text-decoration: none;
@@ -483,9 +482,20 @@ b, strong {
   font-weight: $heavyFontWeight;
 }
 
+<<<<<<< f9164c469c4a671024aed281fb4918893ca9eebe
 header, h1, h2, h3, h4, h5, h6 {
   font-weight: $lightFontWeight;
   font-family: $fontFamily;
+=======
+#app, #wb-bc, .app-font, .easy-access, wb-lng {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+.xplorer-node-expanded-content {
+  text-align: right;
+  padding: 1px 10px 2px 0px;
+>>>>>>> new container page
 }
 
 #app, #wb-bc, .app-font {
