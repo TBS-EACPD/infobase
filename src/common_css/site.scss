@@ -439,10 +439,6 @@ a, a:visited {
   }
 }
 
-#wb-lng > a {
-  text-decoration: underline;
-}
-
 /*
 .easy-access > span > a,
 ol.breadcrumb > li > :last-child {
@@ -482,11 +478,11 @@ b, strong {
   font-weight: $heavyFontWeight;
 }
 
-<<<<<<< f9164c469c4a671024aed281fb4918893ca9eebe
 header, h1, h2, h3, h4, h5, h6 {
   font-weight: $lightFontWeight;
   font-family: $fontFamily;
-=======
+}
+
 #app, #wb-bc, .app-font, .easy-access, wb-lng {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
@@ -495,7 +491,6 @@ header, h1, h2, h3, h4, h5, h6 {
 .xplorer-node-expanded-content {
   text-align: right;
   padding: 1px 10px 2px 0px;
->>>>>>> new container page
 }
 
 #app, #wb-bc, .app-font {
@@ -515,4 +510,13 @@ header, h1, h2, h3, h4, h5, h6 {
 
 .igoc-table > tbody > tr > td {
   padding: 5px 0;
+}
+
+dl.org-profile > dt:first-child,
+dl.org-profile > dd:nth-child(2) {
+  border: none !important;
+}
+
+dl.org-profile { 
+  margin-bottom: 0;
 }
