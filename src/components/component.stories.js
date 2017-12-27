@@ -2,6 +2,7 @@ import { storiesOf } from '@storybook/react';
 
 import { WellList } from '../graphs/intro_graphs/WellList.js';
 
+<<<<<<< b9e7b87cb0d228b5542550cce8b11c632bf1c29d
 //attach globals that module expect to have
 import {
   GraphLegend,
@@ -9,6 +10,8 @@ import {
 } from '../charts/declarative_charts.js';
 
 <<<<<<< 19140187343eb309150c8d74d6d3e8b986b84f08
+=======
+>>>>>>> pses visualization progress
 import { AutoAccordion } from './Accordions.js';
 
 import { Details } from './Details.js';
@@ -74,56 +77,6 @@ storiesOf('flat design modifications', module)
     </div>
   )
 
-
-storiesOf("chart components", module)
-  .add("horizontal chart legend",()=>
-    <div style={separator_style}>
-      <GraphLegend
-        isHorizontal
-        items={[
-          {
-            "active": true,
-            "label": "Dépenses",
-            "id": "Dépenses",
-            "color": "#1f77b4",
-          },
-          {
-            "active": true,
-            "label": "ETP",
-            "id": "ETP",
-            "color": "#ff7f0e",
-          },
-        ]}
-      />
-    </div>
-  )
-  .add("tabular chart legend",()=>
-    <div style={separator_style}>
-      <TabularPercentLegend 
-        items={[
-          {
-            "value": 0.8632482535044061,
-            "label": "Période indéterminée",
-            "color": "#335075",
-            "id": "Période indéterminée",
-          },
-          {
-            "value": 0.0867608784986987,
-            "label": "Période déterminée",
-            "color": "#2ca02c",
-            "id": "Période déterminée",
-          },
-          {
-            "value": 0.0867608784986987,
-            "label": "Période déterminée",
-            "color": "#2ca02c",
-            "id": "other option",
-          },
-        ]}
-        get_right_content={ _.property('value') }
-      />
-    </div>
-  )
 
 storiesOf("John Radio", module)
   .add("radio", ()=> <StatefulRadioExample /> )
