@@ -232,7 +232,7 @@ const create_result_tree_content_renderer = ({
                     width: "100%",
                     padding: "0 10px 0 5px",
                     textAlign: "right",
-                    flex: "0 0 150px",
+                    flex: "0 0.5 150px",
                     opacity: 0.8,
                   }}
                   aria-hidden={true}

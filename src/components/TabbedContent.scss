@@ -51,4 +51,9 @@ div.tabbed_content_pane {
   border-radius: 0px 0px 5px 5px;
   padding: 15px 35px 0px 35px;
   background-color: $backgroundColor;
+
+  @media(max-width: 992px){
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
 }
