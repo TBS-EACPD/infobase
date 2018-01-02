@@ -1,0 +1,205 @@
+/* 
+  TODO: some parts of this still feel hacky 
+    * table_common requiring this to check for pre_public_accounts
+      * A lot of stuff in lookups.yaml is non-constant over time. 
+      * It may be of interest for other modules to query what period we're in, for instance
+      * Under the current model, they would be forced to awkwardly go here and look into template_globals
+    * Some of this logic should be done at compile time,
+        so that modules can opt to use their own templates in special cases
+  
+  
+  There are two core structures here, 
+  one is the default set of text that will get passed to every template. 
+  This is a key/val store with strings as values.
+  All of this comes from a single lookups.yaml
+
+  the 2nd structure is all the templates.
+  * They come from various modules registering it through the add_text_bundle function this module exposes.
+  * These are stored as key/val pairs, but the pairs are object, with the string (or compiled template function) stored on the text property
+  * They are often defined with en/fr pairs in yaml, but we always map the correct language to the text property
+  * this part makes use of the first part to pass the default template arguments 
+
+*/
+
+const template_globals_file = require('../common_text/template_globals.csv');
+
+//this will look like { key, en, fr }
+const template_globals_parsed = d4.csvParse(template_globals_file);
+
+const additionnal_globals = _.chain(template_globals_parsed)
+  .filter( ({key})=> key.match(/year?.?.$/) )
+  .map( ({key,en,fr}) => {
+    const short_year_first = fr.slice(0,4);
+    const short_year_second = fr.slice(5,9);
+    return [
+      {
+        key: key+'_short_first',  
+        en: short_year_first,
+        fr: short_year_first,
+      },
+      {
+        key: key+'_short_second',  
+        en: short_year_second,
+        fr: short_year_second,
+      },
+      {
+        key: key+'_end_ticks',
+        en: "March 31st, "+short_year_second,
+        fr: "31 mars "+short_year_second,
+      },
+    ];
+  })
+  .flatten()
+  .value();
+
+const full_template_global_records = [
+  ...template_globals_parsed,
+  ...additionnal_globals,
+];
+
+const app_constants = {
+  pre_public_accounts : window.pre_public_accounts,
+  lang: window.lang,
+  is_mobile: window.is_mobile,
+}
+
+//turn [{key,en,fr }, ... ] into a big object of { [key]: val of current lang, ... } 
+const template_globals = _.chain(full_template_global_records)
+  .map( ({key, en, fr}) => [ key, window.lang === 'en' ? en : fr ] )
+  .fromPairs()
+  .extend(app_constants)
+  .value();
+
+
+//calls handlebars templates with standard args,
+// plus any others passed
+const run_template = function(s,extra_args={}){
+  // 1. `s` is the (or array of) raw handlebars template
+  // 2. `extra_args` are additional arguments for hbs context 
+
+  if(!_.isObject(extra_args)){ extra_args={}; } 
+  if (_.isArray(s)){
+    return _.map(s,function(__){ return run_template(__,extra_args);});
+  }
+  // build common arguments object which will be passed
+  // to all templates
+  const args = _.extend({},extra_args, template_globals); //FIXME: extra_args should take precedence over template globals. Don't have time to test this right now.
+  // combine the `extra_args` with the common arguments
+  if (s){
+    let _template;
+    if (_.isString(s)){
+      _template = Handlebars.compile(_.trim(s));
+    } else { //it's a function -> already compiled
+      _template = s;
+    }
+    return _.trim( _template(args) )
+  }
+  return '';
+};
+
+
+//above this point is the first part: default template arguments
+//below is the second part: templates
+    
+
+
+
+Handlebars._partials = {};
+const template_store = {};
+
+/*@param text_bundle 
+  text_bundle is a key/val store of objects of the form {
+  transforms: Array,
+  en and fr OR text : strings (which might be hbs + markdown templates)
+  } 
+  OR {
+    precompile: bool,  text: hbs as string 
+  }
+  OR {
+    handlebars_partial: bool, text : hbs as string
+  }
+  
+  this function will get rid of all en/fr and replace it with text 
+
+*/
+const add_text_bundle = (text_bundle) => {
+  const to_add = {};
+  _.each(text_bundle,(text_obj,key) => {
+    if (text_obj.handlebars_partial) {
+      Handlebars.registerPartial(key, text_obj.text);
+      return;
+    }
+
+    //partials are the only case we don't add to the global text registry
+    to_add[key] = text_obj;
+
+    //get rid of language specific props
+    text_obj.text = text_obj[window.lang]  || text_obj.text;
+    delete text_obj.en;
+    delete text_obj.fr;
+
+    if (text_obj.pre_compile === true){
+      const hbs_content = text_obj[window.lang] || text_obj.text;
+      text_obj.text = Handlebars.compile(hbs_content);
+      text_obj.handlebars_compiled = true;
+    }
+
+  });
+  _.extend(template_store, to_add); 
+}
+
+
+
+const text_maker = (key,context={}) => {
+
+  // 1. lookup the key to get the text object
+  // 2. note that by the time this function gets called, we've already stripped out language
+  // 3. loop over the transform attribute on the text object
+  //    and apply the requested transform i.e. handlebars
+  //    and markdown
+  if(!_.isObject(context)){ context={}; }
+
+
+  const text_obj =  template_store[key];
+  if(_.isString(text_obj)) return text_obj;
+
+  let rtn = text_obj.text;
+  _.each(text_obj.transform, transform => {
+    if (transform === 'handlebars'){
+      if (!text_obj.handlebars_compiled){
+        text_obj.text = Handlebars.compile(rtn);
+        text_obj.handlebars_compiled  = true;
+      }
+      rtn = run_template(rtn,context);
+    } else if (transform === 'markdown'){
+      rtn = marked(rtn,{sanitize:false,gfm:true});
+    } else if (transform === 'embeded-markdown'){
+      const temp_dom_node =  $("<div>").html(rtn);
+      temp_dom_node.find(".embeded-markdown").each(function(){
+        $(this).html(marked($(this).html(), {sanitize:false,gfm:true}));
+      });
+      rtn = temp_dom_node.html();
+    }
+  });
+  if (_.has(text_obj, "outside_html")){
+    rtn = Handlebars.compile(text_obj.outside_html)({
+      content : rtn,
+    });
+  }
+  return rtn;
+}
+
+
+
+module.exports = exports = {
+  template_globals, //this is currently only exposed to table_common because it wants the pre_public_accounts variable.
+  tx_load : add_text_bundle, //shorthand because used very often
+  run_template,
+  text_maker,
+  template_store, 
+};
+window._text_maker = text_maker;
+window._run_template = run_template;
+window._template_store = template_store;
+window._template_globlals = template_globals;
+window.add_text_bundle = add_text_bundle;

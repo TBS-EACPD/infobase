@@ -1,0 +1,572 @@
+@import "common-variables";
+
+/* deatils, widget view and infrograph view header */
+table.igoc-table  {
+  background-color: transparent;
+}
+table.igoc-table > tbody > tr > td {
+ border: none;
+ border-bottom: 1px rgba(35, 64, 111,0.2) solid;
+}
+table.igoc-table > tbody > tr > td > p {
+  margin: 0px;
+}
+
+dl.igoc-data-list {
+  margin-bottom: 0px;
+  & > dt:first-of-type,
+  & > dd:first-of-type {
+    border-top: none;
+  }
+}
+
+div.int{width: 95px;text-align:center;}
+div.big_int{width: 100px;text-align:right;}
+div.big_int_real,
+div.decimal, 
+div.short-str,
+div.decimal1 {
+  width: 100px;
+  text-align:right;
+}
+div.str{
+  width: 150px;
+  color: #31708f; /* overide the WET standard for .str */
+}
+div.str1{
+  width: 90px;
+  color: #31708f; /* overide the WET standard for .str */
+}
+div.wide-str{
+  width: 300px;
+}
+div.percentage{
+  width: 90px;text-align:center;
+}
+div.percentage1{
+  width: 100px;text-align:right;
+}
+div.date{
+  width: 90px;
+}
+div.ordinal{
+  width: 150px;text-align:center;
+}
+table.infobase-table > thead > tr > th div.big_int{text-align: center;}
+
+.nav-header {
+  display: block;
+  padding: 3px 15px;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 20px;
+  color: rgb(35, 68, 126);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+ /* mini tables */
+.right_number {
+   white-space: nowrap;
+  text-align: right;
+}
+.left-text {
+  font-weight: bold;
+  text-align: left;
+}
+.left-text_plain{
+  text-align: left;
+}
+.right-text {
+  font-weight: bold;
+  text-align: right;
+}
+.center-text {
+  text-align: center;
+}
+tr.total-row {
+  font-weight : bold;
+}
+tr.odd {
+  background-color: rgba(35, 68, 126,0.1);
+}
+.success {
+  background-color: #dff0d8;
+}
+/* added for IE9, this adds a transparents 1x1 png file
+ * so that mouseneter events can be registered on 
+ * empty divs */
+.transparent_div {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=);
+}
+
+.col-0-padding {
+  padding: 0 !important;
+}
+
+/* pattern: .equal-height-cols > col-md-* > div w/ height:100% will have equal height columns */
+/* hacky reminder: Make sure that if you use this on col, that col-xs-12 is provided, otherwise you'll get some weird x-overflow. */
+.row.equal-height-cols {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.row.equal-height-cols > [class*='col-'] {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+.row.always-equal-height-cols > [class*='col-'] > div  {
+  height: 100%;
+}
+
+.panel.panel-contained {
+  height: 100%;
+}
+
+
+/* utility class. Apply class to a container if you want its content (no matter what kind) centered */
+
+
+.centerer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width:100%;
+}
+
+
+/* our app-wide a:visited: black is overriding all the bootstrap white on dark blue styles...  */
+.nav-pills > li.active > a {
+  color: white !important;
+}
+.btn-success, .btn-info, .btn-ib-info, .btn-danger, .btn-warning {
+  color: white !important;
+}
+
+.btn-responsive-fixed-width {
+  margin-left: auto;
+  min-width: 150px;
+  align-self: center;
+}
+
+@media (max-width:700px) {
+  .btn-responsive-fixed-width {
+    max-width: 150px;
+  }
+}
+
+/* similar to bootstrap list-group but without the stupid hover/active colors.*/
+ul.fancy-ul {
+  margin-bottom: 20px;
+  padding-left: 0;  
+}
+
+ul.fancy-ul > li {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+ul.fancy-ul > li:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+ul.fancy-ul > li:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.fancy-ul-span-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+
+.fancy-ul-title-row {
+  width: 100%;
+  text-align: center;
+  font-weight: bold; 
+  font-size: 16px;
+}
+
+/* use when you don't want an h3/4/5/6 */
+.agnostic-header {
+  margin-top: 15px;
+  font-weight: 500;
+  font-size: 12pt;
+}
+
+.agnostic-header.extra-margin {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.agnostic-header.no-top-margin {
+  margin-top: 0;
+}
+
+.crso-extra-margin {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+
+
+table.metadata-table > tbody > tr > td:last-child {
+  text-align: right;
+}
+
+ul.footnote-list {
+  padding-left: 5px;
+}
+
+.dead-element {
+  opacity: 0.75;
+}
+
+.dead-element>:first-child:before {
+  color:#EFC98F;
+  content: "\e107";
+  display: inline-block;
+  margin-right: 5px;
+  font-family: "Glyphicons Halflings";
+  margin-left: 2px;
+  zoom:0.8;
+}
+
+.text-overflow {
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 80%;
+  white-space: nowrap;
+  margin-bottom: 0px
+}
+
+.text-overflow > span {
+  font-weight: normal;
+  color: black;
+}
+
+.p_glyphicon {
+    font-family: inherit;
+    font-weight: bold;
+    display: inline-block
+}
+.glyphicon:after {
+    font-weight: bold;
+    font-family:'Glyphicons Halflings';
+}
+
+.panel {
+  box-shadow: 0 0 transparent;
+}
+.panel-body > .row > .source {
+  opacity: 0.8;
+}
+
+/* 
+  Fixes Safari-specific bug, does nothing on other browsers. 
+  Only needed on larger screens. 
+*/
+@media (min-width:1000px){
+  .panel-body .row.equal-height-cols::before {
+    content: none!important;
+  }
+}
+
+a.source-link {
+  font-weight: bold;
+}
+
+@media (min-width:1000px){
+  .panel-heading {
+    padding: 15px 15px; /* bootstrap default is 10 15 */
+  }
+}
+
+@media (max-width:1000px){
+  /* on mobile, we need way less padding */
+  .panel-heading {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+  .panel-body {
+    padding: 1rem;
+  }
+
+}
+
+/* Styles for height clipped bar graphs */
+div.height-clipped-graph-area {
+  min-height: 400px;
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+div.height-clipped-bar-area {
+  position: relative;
+  margin-bottom: 10px;
+  left: -20px; /* graph needs to be shifted left to avoid x-overflow with height clipper */
+}
+
+div.height-clipped-bar-area > div.tick {
+  margin-left: 15px; /* ticks need to be padded to position properly after bar area shifted left */
+}
+
+@media(max-width: 992px){
+  .glyphicon--desktop{
+    display: none;
+  }
+}
+
+.survey-link-box {
+  font-size: 1.4em;
+  background-color: #d7faff;
+  border-color: #269abc;
+  box-shadow: 1px 3px 5px #ccc;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  color: #214a5f;
+  display: flex;
+}
+
+.survey-link-close-container {
+  /* top right corner */
+  margin-bottom: auto;
+  align-self: flex-start;
+}
+.survey-link-close-container > button  {
+  background-color: #d7faff;
+}
+.survey-link-content-container {
+  width: 100%; /* IE11 */
+  margin: auto;
+  padding: 20px 20px 15px 35px
+}
+
+.gradient.gradient-strong {
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1)) !important;
+}
+
+/* Modifiers for GCWeb alert boxes */
+.alert-no-symbol > :first-child {
+    margin-left: 0px !important;
+}
+
+.alert-no-symbol > :first-child::before {
+    content: "" !important;
+}
+
+.alert--is-bordered { 
+  border-width: 2px 2px 2px 8px;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.alert { 
+  background-color: $backgroundColor;
+}
+
+/* extending bootstrap nav style */
+ul.nav.nav-underline-active > li { 
+  border-bottom: 3px solid rgba(0,0,0,0); /* invisible to remain same height as the active */
+}
+ul.nav.nav-underline-active > li.active {
+  border-bottom: 3px solid #00BCD4;
+}
+
+/* extending bootstrap well which does not look good in regular GoC background */
+.well.dark-well {
+  background-color: #ebebeb;
+  border: 1px solid #bfbfbf;
+
+}
+
+.badge.badge--is-new {
+  background-color: #c70505; 
+  color: #fcfcfc;
+}
+
+.lg-grid-panel30.key_concept_term {
+  max-width: 29%;
+}
+
+.lg-grid-panel70.key_concept_def {
+  max-width: 69%;
+}
+
+@media (max-width:900px){
+  .lg-grid-panel30.key_concept_term,
+  .lg-grid-panel70.key_concept_def {
+    max-width: none;
+    width: 100%;
+  }
+  .lg-grid-panel30.key_concept_term{
+    border: none;
+    padding-top: 20px;
+  }
+}
+
+.table-dark-bordered, 
+.table-dark-bordered>tbody>tr>td, 
+.table-dark-bordered>tbody>tr>th,
+.table-dark-bordered>tfoot>tr>td,
+.table-dark-bordered>tfoot>tr>th,
+.table-dark-bordered>thead>tr>td,
+.table-dark-bordered>thead>tr>th {
+  border: 0px solid rgba(0,0,0,0);
+  border-collapse: separate;
+  min-width: 102px;
+  border-spacing: 5px;
+  font-weight: 500;
+}
+
+/* Styles for ppl share pie graphs */
+.ppl-share-pie-area > .ppl-share-pie-legend > .centerer > .centerer-IE-fix{
+  width: 100%;
+  flex-grow: 1;
+}
+.ppl-share-pie-area > .ppl-share-pie-legend .ppl-share-percent-header{
+  display: inline-block;
+  width: 100%;
+  text-align: right;
+  font-weight: bold;
+}
+@media (min-width:992px){
+  div.ppl-share-pie-area{
+    display: flex;
+    justify-content: space-around;
+  }
+  .ppl-share-pie-area > .ppl-share-pie-graph{
+    flex: 0 1 50%;
+  }
+  .ppl-share-pie-area > .ppl-share-pie-graph > div{
+    width: 100%;
+  }
+  .ppl-share-pie-area > .ppl-share-pie-legend{
+    flex: 0 1 50%;
+    align-items: center;
+    margin-right: 100px;
+  }
+  .ppl-share-pie-area > .ppl-share-pie-legend > .centerer {
+    height: 100%;
+  }
+}
+
+// Link styles from flat redesign
+a, a:visited {
+  text-decoration: none;
+  color: $ibLinkColor;
+}
+
+#wb-lng > .row > div > ul > li > a,
+#wb-info > .wb-navcurr > ul > li > a,
+#wb-info > .brand > .container > .row > nav > ul > li > a {
+  color: $wetLinkColor;
+  &:visited {
+    color: $wetLinkVisitedColor;
+  }
+}
+
+#wb-lng > .row > div > ul > li > a {
+  text-decoration: underline;
+}
+
+.easy-access > span > a,
+ol.breadcrumb > li > :last-child {
+  font-family: Helvetica,Arial,sans-serif;
+  font-weight: 400;
+  text-decoration: underline;
+  color: $wetLinkColor;
+}
+
+ol.breadcrumb > li:last-child > :last-child {
+  text-decoration: none;
+  color: #333;
+}
+
+// Misc. styles from flat redesign
+.well-sm {
+  border-radius: 10px;
+  background-color: hsla(211, 15%, 55%, 1);
+  text-align: center;
+  border-color: hsla(211, 15%, 55%, 1);
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.form-control.input-lg {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  box-shadow: none;
+  opacity: 1;
+  background: none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255);
+}
+
+body {
+  background-color: $backgroundColor;
+}
+
+b, strong, header, h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+}
+
+#app, #wb-bc, .app-font {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+.xplorer-node-expanded-content {
+  text-align: right;
+  padding: 1px 10px 2px 0px;
+}
+
+.tabbed_content {
+  margin: 0px -15px;
+}
+
+@media (max-width: 1100px){
+  .canada-intro-grid {
+    margin: 0px !important;
+  }
+}
+
+.igoc-table > tbody > tr:last-child > td {
+  border: none !important;
+}
+
+.igoc-table > tbody > tr > td {
+  padding: 5px 0;
+}
+
+dl.org-profile > dt:first-child,
+dl.org-profile > dd:nth-child(2) {
+  border: none !important;
+}
+
+dl.org-profile { 
+  margin-bottom: 0;
+}

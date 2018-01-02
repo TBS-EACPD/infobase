@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /ennojs*.html$
+Disallow: /frnojs*.html$

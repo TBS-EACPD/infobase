@@ -1,0 +1,240 @@
+# home_sub_title:
+#   en: The TBS InfoBase is a searchable database where you can find information on Government of Canada finances, people and results.
+#   fr: L'InfoBase du SCT est une base de données interrogeable où vous trouverez de l'information sur les dépenses, la gestion des personnes et les résultats du gouvernement du Canada.
+
+home_finance_title:
+  en: Finances
+  fr: Finances
+
+home_finance_intro:
+  transform: [handlebars,markdown]
+  en: In {{pa_last_year}}, we spent <em class="bolder">{{fmt_compact_written spent_last_year}}</em>
+  fr: En {{pa_last_year}}, nous avons dépensé <em class="bolder">{{fmt_compact_written spent_last_year}}</em>
+
+
+home_finance_link:
+  en: See how it was spent
+  fr: Voir comment cela a été dépensé
+
+home_ppl_title:
+  en: People
+  fr: Gestion du personnel
+
+home_ppl_intro:
+  transform: [handlebars,markdown]
+  en: By the end of fiscal year {{pa_last_year_2}}, the Federal Public Service counted <em class="bolder">{{fmt_big_int_real headcount_last_year}}</em> employees
+  fr: À la fin de l'exercice {{pa_last_year_2}}, la Fonction publique fédérale comptait <em class="bolder">{{fmt_big_int_real headcount_last_year}}</em> employés
+
+home_ppl_link:
+  en: See who they are 
+  fr: Voir qui nous sommes
+
+home_results_title:
+  en: Results
+  fr: Résultats
+
+home_results_intro:
+  transform: [handlebars,markdown]
+  en: |
+    In {{pa_last_year}}, <em class="bolder">{{past_targets_met}}</em> targets were met
+  fr: |
+    En {{pa_last_year}}, <em class="bolder">{{past_targets_met}}</em> objectifs ont été atteints
+
+home_results_link:
+  en: See the results
+  fr: Voir les résultats
+
+home_sub_title:
+  en: Interactive infographics and data helping you understand the federal government
+  fr: Données et infographies interactives permettant de mieux comprendre le gouvernement fédéral
+
+
+partition_home_title:
+  en: The government at a glance
+  fr: Coup d'œil sur le gouvernement
+
+partition_home_text:
+  en: See how government resources flow across different tagging schemes
+  fr: Voir comment les ressources gouvernementales sont distribuées d'un mécanisme à l'autre
+
+planet_home_title:
+  en: Explore the magnitude of the federal government
+  fr: Découvrir l'ampleur du secteur publique fédéral
+
+planet_home_text:
+  en: Compare how much organizations spend and how many people they employ
+  fr: Comparer les dépenses des organisations et le nombre d'employés à leur service
+
+featured_data_title:
+  en: Quick links
+  fr: Liens directs
+
+explorer_home_title: 
+  en: Pick a topic to explore
+  fr: Choisir le sujet à explorer
+
+explorer_home_text: 
+  en: Search by organization, program, or keyword "tag" to explore data on your area of interest
+  fr: Recherche par organisation, programme ou mot clé pour étudier les données dans le domaine qui vous intéresse
+
+
+other_ways_of_exploring_title:
+  en: Other ways to explore the data
+  fr: Autres moyens d'exploration des données
+
+
+dashboard_home:
+  en: Search by topic to build your own customized dashboard
+  fr: Recherche par sujet pour bâtir un tableau de bord personnalisé
+
+home_build_a_report: 
+  en: Build your data report
+  fr: Créer votre propre rapport de données
+
+report_builder_home_desc:
+  en: Create a customized and exportable report on the data you want to analyze
+  fr: Créer un rapport adapté et exportable sur les données que vous voulez analyser
+
+igoc_home_title:
+  en: List of organizations (A to Z)
+  fr: Liste des organisations (A à Z)
+
+igoc_home_desc:
+  en: A comprehensive listing of federal organizations and interests
+  fr: Une liste exhaustive des organisations et intérêts fédéraux
+
+glossary_home_title:
+  en: Glossary
+  fr: Glossaire
+
+glossary_home_desc:
+  en: A searchable list of definitions for terms used in the InfoBase
+  fr: Liste interrogeable des définitions pour les termes employés dans l'InfoBase
+
+glossary_home_link_text:
+  en: Search the glossary
+  fr: Faire une recherche du glossaire
+
+metadata_home_title:
+  en: Datasets
+  fr: Données
+
+metadata_home_desc: 
+  en: See more details on the data and links to Open Data
+  fr: Voir le complément d'information sur les données et sur les liens vers des sites de données ouvertes
+
+metadata_home_link_text: 
+  en: See the data
+  fr: Voir les données
+
+whats_new:
+  en: What's new?
+  fr: Quoi de neuf?
+
+planned_spending_by_program_home:
+  en: Planned spending by Program
+  fr: Dépenses prévues par Programme
+  
+planned_ftes_by_program_home:
+  en: Number of employees (FTEs) we plan to employ by Program
+  fr: Nombre d'employés (ETP) que nous prévoyons employer par Programme
+
+table4_home_link:
+  transform: [handlebars]
+  en: | 
+    {{pa_last_year}} Public Accounts
+		
+  fr: Comptes publics {{pa_last_year}}
+
+tabled_estimates_home:
+  en: Tabled Estimates
+  fr: Budget des dépenses déposés
+
+DRR_1617:
+  en: 2016-17 Departmental Results Reports
+  fr: Rapport sur les résultats ministériels de 2016-2017
+
+DP_1718:
+  en: 2017-18 Departmental Plans
+  fr: Plan ministériels de 2017-2018
+
+lapse_home_title:
+  transform: [handlebars]
+  en: | 
+    {{lapse_in_year}} Gross Lapse Forecast at Year End 
+  fr: Prévision des fonds inutilisés bruts à la fin de l'exercice {{lapse_in_year}}
+
+CFMRS_exp_title:
+  transform: [handlebars]
+  en: |
+    {{lapse_in_year}} Voted Expenditures as of {{p}}
+  fr: Dépenses votées en date de {{p}} {{lapse_in_year}}
+
+
+upcoming_features_content:
+  en: Upcoming features and content
+  fr: Fonctions et contenu à venir
+
+prog_by_vote_stat:
+  en: Program expenditures by authority type (discretionary and mandatory spending)
+  fr: Dépenses de programme par type d'autorisation (dépenses discrétionnaires et obligatoires)
+
+prog_by_so:
+  en: Program by standard object (spending by category of expenditures)
+  fr: Programme par articles courants (par catégories de dépenses)
+
+infographs_for_crso:
+  en: Core Responsibility/Strategic Outcome Infographics on spending and results
+  fr: Infographies sur les dépenses et les résultats pour les responsabilités essentielles et les résultats stratégiques
+
+survey_link:
+  en: https://www.surveymonkey.ca/r/ifs-sri-eng
+  fr: https://fr.surveymonkey.ca/r/ifs-sri-fra
+
+survey_link_text:
+  transform: [ handlebars ]
+  en: |
+    Did InfoBase help you find what you were looking for? Help us make improvements by <a class="survey-link" href='{{gt "survey_link"}}' target="_blank"> telling us about your experience! </a>
+  fr: |
+    L’InfoBase vous a-t-elle été utile pour trouver ce que vous cherchiez? Aidez-nous à l’améliorer en <a class="survey-link" href='{{gt "survey_link"}}' target="_blank">nous relatant votre expérience!</a>
+
+home_featured_row_title:
+  en: Featured content
+  fr: En vedette
+
+home_explore_row_title:
+  en: Search and build
+  fr: Chercher et construire
+
+home_misc_row_title:
+  en: Helpful resources 
+  fr: Ressources utiles
+
+start_exp_link:
+  en: Start exploring
+  fr: Commencer l'exploration
+
+start_build_link:
+  en: Start building
+  fr: Commencer à créer
+
+start_search_link:
+  en: Start searching
+  fr: Commencer la recherche
+
+feed_home_title:
+  en: Feedback
+  fr: Rétroaction
+
+feed_home_text:
+  en: Help improve the current InfoBase and prioritize new features
+  fr: Aidez-nous à améliorer l'InfoBase et à établir l'ordre de priorité pour les nouvelles fonctionnalités
+
+feed_home_link:
+  en: Take the survey
+  fr: Participer au sondage
+
+check_home_link:
+  en: Check it out!
+  fr: Consultez-le !
+

@@ -1,0 +1,447 @@
+﻿"Key","FR_Term","Definition_FR"
+"ACT","Activité","Une activité est un processus de travail interne d'un ministère qui utilise des intrants pour produire des extrants, comme la formation, la recherche, la construction, la négociation et les enquêtes."
+"ACTIV_PEOPLE","Employés actifs","Par « employés actifs », on entend les employés qui ne sont pas en congé non payé."
+"ADJUS","Redressements, mandats et virements","Redressements, mandats et virements comprennent :
+* les virements entre portefeuilles ministériels, tels que les crédits 5, 10, 15, 25, 30 et 33 du Conseil du Trésor ou les modifications dans les responsabilités ministérielles;
+* les virements à l'intérieur du portefeuille ministériel d'un crédit à un autre (en vertu d'une autorisation parlementaire) ou entre paiements de transfert;
+* les montants non engagés de ou à d'autres portefeuilles ministériels comme des affectations réputées, conformément à l'article 31.1 de la Loi sur la gestion des finances publiques;
+* les modifications aux montants législatifs suite à des redressements aux estimés de dépenses comprises dans les Budgets des dépenses, suite à l'annulation ou la modification aux lois ou suite à des redressements des autorisations d'emprunt des sociétés d'État;
+* les montants du suremploi des autorisations des exercices antérieurs versés ou réglés au cours de l'exercice et le produit de la vente de biens excédentaires de l'État; 
+* les mandats spéciaux du gouverneur général pour couvrir les paiements requis lorsque le Parlement est dissous pour une élection générale."
+"AM_IGOC","Ministres de tutelle","Ministres désignés au sein d’une organisation aux fins de la reddition de compte."
+"APP_ACT","Loi de crédits","Une loi de crédits est un mécanisme d’autorisation de dépenses imputées au Trésor pour payer des programmes et services du gouvernement.
+
+Les lois de crédits commencent sous forme de projets de loi élaborés pour le budget principal des dépenses et les budgets supplémentaires."
+"ARLU","Mise à jour annuelle des niveaux de référence (MJANR)","La mise à jour annuelle des niveaux de référence (MJANR) sert à établir le niveau de base des dépenses de programmes directes du Plan budgétaire reflété dans le budget fédéral annuel et à définir un point de référence au regard des crédits demandés au Parlement dans le cadre du budget principal des dépenses suivant.
+"
+"AUTH","Autorisations","Par « autorisation » , on entend le montant précis, approuvé par le Parlement, qu’une organisation gouvernementale peut dépenser. Il y a deux façons d’accorder les autorisations de dépenses :
+
+* Lois de crédit annuelles, qui précisent les montants et les fins pour lesquelles les fonds seront consacrés;
+* Autres textes législatifs qui autorisent des paiements et fixent les montants et les délais de versement.
+ 
+L'autorisation de dépenser accordée à une organisation au moyen de lois de crédit peut être complétée par des affectations des crédits centraux 5, 10, 15, 25, 30 et 33 du Conseil du Trésor."
+"AVAIL","Reports des exercices antérieurs","Autorisations de dépenses reportées des exercices antérieurs. Comprennent seulement les autorisations pour lesquelles il existe une limite spécifique quant au montant total à être dépensé, ou sur le solde cumulatif en circulation pour les crédits pour lesquels il est permis de dépenser les recettes et rentrées de fonds. Ces crédits représentent généralement soit des autorisations relatives à des fonds renouvelables, au produit de la vente de biens excédentaires de l'État ou à des prêts. Ces montants sont disponibles pour être dépensés sans aucune autre autorisation du Parlement."
+"BUD_AUTH_CURRENT","Autorisation budgétaire utilisée dans l'exercice en cours","Montants dépensés pendant l’exercice en cours (moins les recettes et rentrées de fonds disponibles pour dépenser)."
+"BUD_EXP","Dépenses budgétaires","Par « dépenses budgétaires », on entend les dépenses faites conformément à des crédits précis ou à d’autres autorisations figurant aux budgets des dépenses, ou encore à des crédits législatifs ou à d'autres autorisations figurant dans diverses lois et ailleurs. Les dépenses budgétaires comprennent les dépenses liées au service de la dette publique, les dépenses de fonctionnement et en capital, les paiements de transfert versés à d'autres ordres de gouvernement, à des organisations ou à des personnes, ainsi que les paiements versés à des sociétés d'État."
+"BUD_REV","Recettes budgétaires","Par « recettes budgétaires », on entend les recettes fiscales et les frais d'utilisation payables ou prélevés en vertu d’une loi, d’un règlement ou d'une autorisation de passation de marché. Toutes les recettes fiscales sont de nature législative, et les codes d'autorisation relatifs aux recettes non fiscales établissent les bases à partir desquelles les ministères peuvent exiger des frais aux utilisateurs pour la fourniture de produits et de services, y compris des biens, des services réglementaires et facultatifs, des produits d'information, des services liés à des droits et à des privilèges (licences, permis, brevets, droits d'auteur, etc.), ainsi que des frais pour l'utilisation de services publics."
+"CAP","Crédit pour dépenses en capital","Le crédit pour dépenses en capital est une autorisation de crédit non législative (en application d'une loi de crédits) accordée pour des dépenses en capital (c.-à-d. un programme où le capital s'élève à 5 millions de dollars ou plus)."
+"CASUAL_PEOPLE","Type d'employé  : Employé occasionnel","Les employés occasionnels sont des travailleurs embauchés aux termes de l’article 50 de la Loi sur l’emploi dans la fonction publique pour une période déterminée ne dépassant pas 90 jours ouvrables par année civile au sein d'un  ministère ou d’une organisation dont les nominations sont assujetties au pouvoir exclusif de la Commission de la fonction publique. Les employés occasionnels peuvent travailler à temps plein ou à temps partiel :
+ * Employé occasionnel à temps plein * tout employé dont l'horaire de travail correspond aux heures normales de travail, telles qu'elles sont définies dans la convention collective pertinente, mais qui n'est pas membre de l'unité de négociation.
+ * Employé occasionnel à temps partiel * tout employé dont le nombre d'heures travaillées est inférieur aux heures normales de travail, telles qu'elles sont définies dans la convention collective pertinente, mais qui n'est pas membre de l'unité de négociation."
+"CFMRS","Système central de gestion des rapports financiers (SCGRF)","Le SCGRF est un système central de la suite des systèmes centraux de TPSGC. Le SCGRF comprend les soldes des comptes ministériels dans le cadre de la structure du codage à l'échelle du gouvernement."
+"CONT_TP","Contribution","Une contribution est un paiement de transfert effectué avec des conditions de rendement spécifiées dans une entente de financement. Une contribution est assujettie à une reddition de comptes et sujette à vérification."
+"CPA","Administration publique centrale (APC)","Par « administration publique centrale » (APC), on entend les organisations mentionnées aux annexes I et IV de la Loi sur la gestion des finances publiques (LGFP). L'APC compte plus de 75 ministères, organismes et commissions. Le Conseil du Trésor est désigné comme l'employeur de cette partie de la fonction publique."
+"CR","Responsabilité essentielle","Fonction ou rôle permanent exercé par un ministère. Les intentions du ministère concernant une responsabilité essentielle se traduisent par un ou plusieurs résultats ministériels auxquels le ministère cherche à contribuer ou sur lesquels il veut avoir une influence."
+"CROWN_SA","Sociétés d’État qui reçoivent des crédits","Les sociétés d’État qui reçoivent des crédits incluent toute société d’État qui reçoit un crédit dans une année donnée ."
+"DP","Plans ministériels (PM)","Les plans ministériels (PM) – anciennement appelés « rapports sur les plans et les priorités (RPP) » –  sont des documents prospectifs sur ce que compte faire les ministères et organismes (sauf les sociétés d’État). On y décrit les priorités ministérielles, les résultats escomptés et les besoins connexes en ressources pour trois exercices financiers. Les renseignements concernant le premier exercice complètent l’information figurant au budget principal des dépenses.
+
+
+Les PM sont déposés au Parlement par le président du Conseil du Trésor pour le compte des ministres responsables des ministères et organismes dépendant des crédits votés qui sont désignés aux annexes I, I.1 et II de la _Loi sur la gestion des finances publiques_, au plus tard le 31 mars. À l’instar des rapports ministériels sur le rendement, ils sont une composante de la partie III (Plans de dépenses des ministères) des budgets des dépenses."
+"DR","Résultat ministériel","Changements sur lesquels les ministères veulent exercer une influence. Ils devraient subir l’influence des résultats des programmes, mais ils échappent généralement au contrôle direct des ministères."
+"DRF","Cadre ministériel des résultats","Comprend les responsabilités essentielles, les résultats ministériels et les indicateurs des résultats ministériels.
+
+
+Nota : En 2017-2018, les sept ministères suivants ont adopté la nouvelle structure redditionnelle, composée d’un cadre ministériel des résultats et d’un répertoire des programmes, visant à clarifier la responsabilité redditionnelle des ministères eu égard à ce qu’ils accomplissent et à la façon d’évaluer le succès aux termes de la Politique sur les résultats :
+* Commission canadienne des droits de la personne 
+* Agence du revenu du Canada 
+* Office national de l'énergie 
+* Bureau du commissaire au lobbying 
+* Commission des libérations conditionnelles du Canada 
+* Secrétariat du Conseil du Trésor du Canada 
+* Bureau de la sécurité des transports du Canada
+
+
+Cette nouvelle structure, qui sera adoptée par toutes les organisations d’ici 2018-2019, remplace l'architecture d'alignement des programmes établie par la Politique sur la structure de la gestion, des ressources et des résultats du SCT, maintenant annulée."
+"DRR","Rapport sur les résultats ministériels","Les rapports sur les résultats ministériels (RRM) – anciennement appelés « rapports ministériels sur le rendement (RMR) » – sont une reddition de compte des réalisations des ministères et organismes par rapport aux plans, priorités et résultats escomptés établis dans leur plan ministériel (PM). Les PM et les RRM forment la partie III (Plans de dépenses des ministères) des budgets des dépenses. 
+
+
+
+Dans le RRM, les ministères et organismes donnent de l’information sur les progrès accomplis vers l’atteinte de leurs objectifs stratégiques. Les RRM couvrent l’exercice précédent et sont habituellement déposés à l’automne."
+"EFF_ID","Efficience","Mesure dans laquelle les ressources sont utilisées de manière à produire un plus grand niveau d’extrants avec le même niveau d’intrants, ou le même niveau d’extrants avec un plus faible niveau d’intrants. Les niveaux d’intrants et d’extrants peuvent se traduire par des hausses ou des baisses de qualité, de quantité, ou les deux."
+"EI_IGOC","Instruments habilitants","Instrument utilisé pour créer une organisation et lui donner les moyens de faire quelque chose"
+"EST_DOC","Document budgétaires","Les documents budgétaires comprennent :
+* le budget principal des dépenses;
+* le budget supplémentaire des dépenses A;
+* le budget supplémentaire des dépenses B; et
+* le budget supplémentaire des dépenses C."
+"EST_PROC","Processus du budget des dépenses","* Le gouvernement demande au Parlement d’approuver les dépenses annuelles au moyen du Budget des dépenses. Le Budget des dépenses (Budget principal des dépenses et budgets supplémentaires des dépenses A, B et C) fournit de l’information concernant les niveaux de dépenses prévus pour chaque ministère et organisme.
+* Le Budget supplémentaire des dépenses présente des renseignements au Parlement sur les besoins en dépenses du Canada qui n’ont pas été suffisamment établis à temps pour être intégrés au Budget principal des dépenses; il comprend parfois les dépenses urgentes et imprévues, notamment en cas de catastrophe naturelle.
+* À l’occasion, les organismes peuvent identifier des besoins de dépenses additionnels durant l’année. Le budget supplémentaire des dépenses permet aux organismes de recevoir d’avantage d’autorisations pour rencontrer ces exigences. 
+* Le budget supplémentaire des dépenses est publié au cours de l'exercice. Chaque publication est désignée en ordre alphabétique (A, B, C, etc.)."
+"ETYPE_PEOPLE","Type d'employé","Par « type d'employé », on entend la nature de la nomination à la fonction publique. Il y a quatre types d'employé : employé occasionnel, étudiant, employé nommé pour une période déterminée et employé nommé pour une période indéterminée (incluant employé saisonnier nommé pour une période indéterminée)."
+"EXP","Dépenses","Les dépenses représentent les frais liés aux travaux effectués, aux biens reçus et aux services rendus, les paiements de transfert comme les subventions et les contributions accordées à des parties externes ainsi que les frais internes du gouvernement."
+"EXT_REV","Dépenses internes","Par « dépenses internes », on entend les dépenses engagées à la suite d'une opération conclue avec un autre ministère ou organisme faisant partie de l'entité comptable du gouvernement du Canada."
+"EXT_REV","Recettes externes","Frais ou charges payées par des intervenants externes, c’est-à-dire autre que des ministères ou des organismes gouvernementaux."
+"FAA_HR_IGOC","Annexes de la LGFP sur les RH","Les deux annexes de la _Loi sur la gestion des finances publiques_ qui précisent, aux fins des ressources humaines, la partie  « administration publique centrale » *(l’annexe IV) et la partie « organismes distincts » (l’annexe V). 
+
+
+Nota : le reste de l'administration publique centrale est composée d’organisations figurant à l’annexe 1 (ministères) de la _Loi sur la gestion des finances publiques_."
+"FAA_IGOC","Annexes institutionnelles de la LGFP","Ensemble d’annexes de la _Loi sur la gestion des finances publiques_ qui font la distinction entre les différentes structures institutionnelles aux fins de l’administration financière."
+"FB_IGOC","Représentants fédéraux au conseil d’administration","Représentants du gouvernement fédéral au sein de l’organe directeur d’une société dans laquelle le Canada détient des intérêts (p. ex. le conseil d’administration),  par suite d’une nomination ou d’une désignation."
+"FIN_DATA","Données financières","Les données financières décrivent les autorisations de dépenser votées par le parlement, ainsi que les dépenses effectives selon les Comptes publics du Canada."
+"FPS","Fonction publique fédérale (FPF)","La fonction publique fédérale (FPF) comprend les organisations incluses dans l'administration publique centrale (ministères et organismes mentionnés aux annexes I et IV de la Loi sur la gestion des finances publiques (LGFP), pour lesquels le Conseil du Trésor est l'employeur) et les organismes distincts (les organisations citées à l'annexe V de la LGFP)."
+"FTE","Équivalent temps plein (ETP)","Les équivalents temps plein (ETP) sont la mesure utilisée pour représenter une année-personne complète d'un employé dans le budget ministériel. Les ETP sont calculés en fonction du coefficient des heures de travail assignées et des heures de travail prescrites, tel que stipulé dans les conventions collectives. Dans le cas des employés nommés pour une période déterminée et des employés saisonniers, le calcul des ETP est rajusté en fonction de la proportion des semaines payées dans une année."
+"FULL_PEOPLE","Employé à temps plein","Employé à plein temps correspond à une personne nommée à la fonction publique qui doit habituellement effectuer le nombre d'heures de travail prévu dans la convention collective applicable ou déterminé par l'employeur, le cas échéant."
+"FY","Exercice financier","L’année financière du gouvernement du Canada commence le 1er avril et se termine le 31 mars. Elle peut varier dans certaines organisations (p. ex. les sociétés d’État)."
+"G&C","Crédit pour subventions et contributions","Le crédit pour subventions et contributions est une autorisation de crédit non législative (en application d'une loi de crédits) pour des dépenses consacrées à des subventions et des contributions (c.-à-d. un programme de subventions et de contributions dont les montants s'élèvent à 5 millions de dollars ou plus)."
+"GOV_EXP","Plan de dépenses du gouvernement (partie I)","Dans la partie I du Plan de dépenses du gouvernement, on trouve le sommaire et les faits saillants des changements apportés d'une année sur l'autre dans les dépenses ministérielles et les paiements de transfert afin de mettre en perspective les grands enjeux qui influencent les prévisions de dépenses du gouvernement. C’est la première partie du processus d’établissement du budget des dépenses du gouvernement."
+"GOV_FRAM","Cadre pangouvernemental","Le cadre pangouvernemental établit les liens entre les contributions financières et non financières des ministères, organismes et sociétés d'État qui reçoivent des crédits et un ensemble de seize grands secteurs d'activités du gouvernement du Canada dans quatre secteurs de dépenses, notamment les affaires économiques, sociales, internationales et gouvernementales."
+"GRANT_TP","Subvention","Une subvention est un paiement de transfert effectué en fonction de critères d'admissibilité préétablis et d’autres critères . Une subvention n'est ni assujettie à une reddition de comptes par le bénéficiaire ni, en règle générale, à une vérification par le ministère. Le bénéficiaire peut  tenu de faire état des  résultats obtenus."
+"HEAD","Relevé des effectifs","Par « relevé des effectifs », on entend le dénombrement des employés, toutes situations d’emploi confondues (employés nommés pour une période indéterminée ou déterminée, occasionnels et étudiants),  des personnes nommées par décret, des sous-ministres et des juges nommés par le gouvernement fédéral au  31 mars de chaque année. Les employés en congé non payé ne sont pas compris. Le relevé comprend les employés des organisations figurant aux annexes I, IV, et V de la Loi sur la gestion des finances publiques. Aucun rajustement n’a été apporté pour les heures de travail."
+"IF_IGOC","Structure institutionnelle","Expression utilisée pour classifier différents types d'organisations et d'intérêts fédéraux."
+"IFORM_APARL","Structure institutionnelle : Agents du parlement","Les agents du Parlement sont un type d’organismes spécialisés formant un groupe unique de titulaires de charge indépendante dont le rôle est de surveiller de près les activités du gouvernement. Dans ce rôle de surveillance, ils sont au service du Parlement et relèvent de lui plutôt que d’un ministre en particulier. En temps normal, les agents remettent au Parlement un rapport dans lequel ils rendent compte de leurs activités, leur administrateur général étant nommé par l’adoption de résolutions spéciales à la Chambre des communes et au Sénat. L’influence exercée par le pouvoir exécutif du gouvernement est minime, ce qui permet aux agents du Parlement de maintenir leur autonomie."
+"IFORM_CC","Structure institutionnelle : Sociétés d’État","Les sociétés d’État sont des organisations fédérales qui mènent leurs activités selon un modèle propre au secteur privé, mais elles ont généralement des objectifs stratégiques qui sont à la fois commerciaux et publics. Les sociétés d’État mères sont des sociétés qui relèvent directement du gouvernement du Canada, et elles sont créées au moyen de lois, de lettres patentes ou de statuts constitutifs en vertu de la Loi canadienne sur les sociétés par actions."
+"IFORM_CCACC","Structure institutionnelle : Sociétés d’État  mandataires","Les sociétés d’État, au sens de la partie X de la Loi sur la gestion des finances publiques, ont la qualité de mandataires de Sa Majesté par déclaration ou disposition expresse d’une loi fédérale. En général, le Parlement accorde une telle qualité à une société d’État en vue de lui conférer les privilèges et immunités de la Couronne. Les sociétés d’État mandataires, par exemple, ne sont pas assujetties aux lois fiscales et aux prélèvements des administrations provinciales et municipales."
+"IFORM_CCS","Structure institutionnelle : Filiales de sociétés d’État","Les filiales de sociétés d’État sont des personnes morales qui appartiennent, en totalité ou en partie, à une ou à plusieurs sociétés d’État mères et qui peuvent être constituées en sociétés en vertu d’une loi provinciale ou fédérale. Sauf dans les situations où une filiale en propriété exclusive a été priée par le gouvernement de faire rapport comme si elle était une société d’État mère, toutes les filiales sont gérées par leur société d’État mère, et elles doivent faire rapport à elles ainsi qu’à d’autres actionnaires et non directement au gouvernement."
+"IFORM_DEPT","Structure institutionnelle : Ministères","Les ministères sont des organisations gouvernementales créées par voie législative et dirigées par un ministre. Souvent appelés « portefeuilles ministériels », leur mandat couvre habituellement un large secteur stratégique, par exemple, l’industrie, la justice et la santé. Les ministères sont financés par crédits parlementaires et sont organisés de différentes façons pour répondre à divers besoins stratégiques et administratifs."
+"IFORM_DEPTCORP","Structure institutionnelle : Établissements publics","Les établissements publics sont des entités spécialisées créées en vertu d’une loi dont le rôle consiste à dispenser des services ou à exécuter des fonctions de recherche ou des fonctions réglementaires. Ils sont financés principalement au moyen de crédits parlementaires (et par prélèvement de certains frais d’utilisation), et ils sont généralement régis par un conseil d’administration ou un autre type de conseil de gestion."
+"IFORM_IO","Structure institutionnelle : Organisations internationales","Les organisations internationales sont des sociétés créées en vertu d’accords internationaux selon lesquels le Canada détient des actions ou est habilité à nommer ou à élire un certain nombre de membres à un groupe de direction. Un ministre représente le gouvernement dans l’exécution des droits et des responsabilités accordés au Canada par l’accord."
+"IFORM_JE","Structure institutionnelle : Entreprises en coparticipation","Les entreprises en coparticipation sont des sociétés dont le gouvernement du Canada détient une partie des actions, le reste appartenant à un autre ordre de gouvernement. Un ministre représente le gouvernement fédéral en tant qu’actionnaire et exécute les droits et les responsabilités s’y rapportant."
+"IFORM_ME","Structure institutionnelle : Entreprises mixtes","Les entreprises mixtes sont des sociétés dont le gouvernement du Canada détient une partie des actions, le reste appartenant à des intervenants du secteur privé. Un ministre représente le gouvernement en tant qu’actionnaire et exécute les droits et les responsabilités s’y rapportant."
+"IFORM_SA","Structure institutionnelle : Organisme de service","Par « organisme de service », on entend un type d’établissement public spécialisé créé par une loi spéciale pour exercer une fonction ou fournir un service hautement opérationnel qui, en règle générale, ne concurrence pas le secteur privé. Les organismes de service sont financés au moyen de crédits parlementaires et de frais d’utilisation. Les conseils de gestion qui dirigent ces organismes ainsi que les modalités et responsabilités organisationnelles sont énoncés dans la loi constitutive. Le degré d’autonomie varie donc d’un organisme de service à l’autre."
+"IFORM_SGC","Structure institutionnelle : Sociétés à régie partagée","Les sociétés à régie partagée sont des sociétés sans capital-actions pour lesquelles le gouvernement du Canada a le droit, directement ou par l’intermédiaire d’une société d’État, de nommer un ou plusieurs membres à un groupe de direction."
+"IFORM_SOA","Structure institutionnelle : Organismes de services spéciaux","Par «  organisme de service spécial », on entend une unité opérationnelle au sein d’un ministère ou d’un organisme qui dispose d’une certaine latitude de gestion, d’une certaine autonomie et d’une responsabilité distincte. Leur fonctionnement est régi par un accord cadre approuvé par le sous ministre, le ministre et le Conseil du Trésor, mais il n’est visé par aucune loi. Ces organismes ont un mandat clair et assurent des services facilement accessibles et reconnaissables qui font partie du cadre législatif du ministère. Ils sont considérés comme faisant partie du ministère d’accueil et non comme étant des entités juridiques séparées."
+"IFORM_STATOA","Structure institutionnelle : Organismes ministériels","Les organismes ministériels sont des entités ministérielles dont le mandat est défini plus étroitement que celui des ministères, qui est généralement précisé dans leur loi constitutive ou d’autres instruments. Leurs fonctions précises varient beaucoup, mais sont généralement de nature opérationnelle. En général, les organismes mènent leurs activités à une certaine distance du gouvernement et leur degré d’autonomie varie considérablement. Ces organismes inclus"
+"INACT_PEOPLE","Employés inactifs","Par « employés inactifs », on entend les employés embauchés à la fonction publique qui ne touchent pas de rémunération pour le moment. Un employé peut être en congé non payé pour différentes raisons (congé parental, congé de maladie non payé, congé avec étalement du revenu, etc.) ou sa rémunération peut avoir été suspendue pour d'autres raisons telles que les mises à pied saisonnières ou les périodes de mises à pied saisonnière (à la Chambre des communes, statut d'employé inactif ou statut d'employé excédentaire non rémunéré (12 mois))."
+"IND_RESULT","Indicateur","Méthode de mesure qualitative ou quantitative d’un extrant permettant d’apprécier le rendement d’une organisation, d’un programme, d’une politique ou d’une initiative par rapport au résultat escompté, comprenant des :
+* indicateurs de résultat escompté : utilisés pour la reddition de compte des programmes sous l’architecture d’alignement des programmes jusqu’à la fin de la transition vers la structure des répertoires  des programmes, aux termes de la Politique sur les résultats, en 2018-2019;
+* indicateurs d’extrant de programme : utilisés pour la reddition de compte des programmes sous la structure des répertoires  des programmes, aux termes de la Politique sur les résultats;
+* indicateurs de résultat ministériel : utilisés pour la reddition de compte sous le Cadre ministériel des résultats, aux termes de la Politique sur les résultats."
+"INDET_PEOPLE","Type d'employé : Employé permanent ou nommé pour une période indéterminée","Par « employé permanent ou nommé pour une période indéterminée », on entend toute personne nommée à un poste de la fonction publique pour une période indéfinie."
+"INFORM_FED_INS","Structures institutionnelles : organisations fédérales","Les organisations fédérales comprennent les entités parlementaires et les organisations figurant aux annexes I, I.1, II et III de la _Loi sur la gestion des finances publiques (LGFP)_ :
+* Ministères – LGFP, annexe I;
+* Organismes – LGFP, annexe I.1;
+ * Agents du Parlement (sous-ensemble d’organismes) — LGFP, annexe I.1;
+* Établissements publics – LGFP, annexe II;
+ * Organismes de service (sous-ensemble d’établissements publics — LGFP, annexe II; 
+* Sociétés d’État mères – LGFP, annexe III (bien qu’il y ait neuf autres sociétés d’État mères dont la structure de gouvernance est dictée dans une large mesure par la loi constitutive et dans une moindre mesure par la partie X de la LGFP)."
+"INT_REV","Recettes internes","Par « recettes internes », on entend les recettes provenant d'une opération conclue avec une organisation faisant partie de l'entité comptable du gouvernement du Canada."
+"INT_SERVICES","Services internes","Les services internes sont des groupes d'activités et de ressources connexes qui sont gérés de façon à répondre aux besoins des programmes et des autres obligations générales d'une organisation.
+
+Ces groupes sont les suivants : 
+* Services de gestion et de surveillance
+* Services des communications
+* Services juridiques
+* Services de gestion des ressources humaines
+* Services de gestion des finances
+* Services de gestion de l'information
+* Services des technologies de l'information
+* Services de gestion des biens
+* Services de gestion du matériel
+* Services de gestion des acquisitions
+* Voyages et autres services administratifs.
+
+Les services internes sont uniquement des activités et des ressources offerts au sein d’une organisation et non celles applicables à un programme en particulier. 
+"
+"INV","Répertoire des organisations et intérêts fédéraux","Le Répertoire des organisations et intérêts fédéraux dresse la liste complète des organisations fédérales et des sociétés dans lesquelles le Canada détient des intérêts, que l’on peut regrouper en diverses catégories (p. ex. par portefeuille)."
+"LT_IGOC","Appellation légale","Le nom figurant dans la loi habilitante, la proclamation, le décret ou tout autre instrument utilisé pour créer un organe gouvernemental."
+"MACHINERY","Changement à l'appareil gouvernemental","Les changements à l'appareil gouvernemental comprennent:
+* les mandats confiés aux ministres
+* la structure du Cabinet, ses comités et leurs processus décisionnels
+* la structure et l'organisation des portefeuilles du gouvernement
+* les rôles et responsabilités des titulaires de charge publique de haut rang
+* les transitions gouvernementales
+"
+"MAINS","Budget principal des dépenses","Le budget principal des dépenses est le document qui appuie directement la loi de crédits adoptée pour commencer un exercice. On y trouve une liste des ressources dont les ministères et organismes auront besoin pour l’exécution des programmes dont ils sont responsables au cours du prochain exercice. Il fait état des autorisations de dépenser (crédits) et des montants qui figureront dans les prochains projets de loi de crédits que le gouvernement cherchera à faire approuver par le Parlement pour mettre en œuvre ses plans de dépenses. Ce document est traditionnellement appelé « Livre bleu »."
+"MAN_IGOC","Description / raison d’être","Fondement de l’existence d’une organisation."
+"NB_AUTH","Autorisations non budgétaires","Les autorisations non budgétaires sont des autorisations pour des opérations portant sur des obligations et des biens relatifs à des emprunts, à des investissements et à des avances, ou des comptes à fins déterminées, établies en vertu de lois précises ou d'autorisations non législatives figurant dans le Budget des dépenses et ailleurs. Les opérations non budgétaires portent sur des dépenses et des recettes qui sont liées aux réclamations et aux obligations financières du gouvernement à l'égard de tiers. Elles représentent des opérations relatives aux emprunts, aux investissements, aux avances, à l'encaisse et aux débiteurs, à des fonds publics reçus ou perçus à des fins particulières."
+"NONE_STAT","Dépenses non législatives","Les dépenses non législatives sont des dépenses approuvées annuellement par le Parlement à la suite de l'adoption d'une loi de crédits. Une fois approuvés, le libellé d'un crédit et l'autorisation de dépenses attribuables à chaque crédit constituent alors les dispositions qui régissent l’engagement de ces dépenses."
+"OP","Crédit pour dépenses de programmes et pour dépenses de fonctionnement","Le crédit pour dépenses de programmes et pour dépenses de fonctionnement est une autorisation (en application d'une loi de crédits) accordée aux ministères pour ces dépenses (incluant les dépenses en capital , les subventions et les contributions lorsque le montant de chacune de ces rubriques est inférieur à 5 millions de dollars pour un programme donné)."
+"OTHER_TP","Autre paiement de transfert","Par « autre paiement de transfert », on entend un paiement de transfert autre qu'une subvention ou une contribution, qui est fondé sur une loi ou un quelconque arrangement que l’on pourrait calculer au moyen d’une formule. Par exemple, les transferts à d'autres ordres de gouvernement, tels que les paiements de péréquation et les paiements des programmes de transfert canadien en matière de santé et de services sociaux, font partie de la catégorie « autre paiement de transfert »."
+"OUT","Résultat","Le résultat est une conséquence externe attribuable, en partie, à une organisation, à une politique, à un programme ou à une initiative."
+"OUT_AREA","Secteurs d'activités du gouvernement du Canada","Les activités du gouvernement du Canada consistent en 16 grandes activités pangouvernementales, regroupés en quatre secteurs de dépenses : les affaires économiques, les affaires sociales, les affaires internationales et les affaires gouvernementales."
+"PA","Comptes publics du Canada","Les Comptes publics du Canada constituent le rapport du gouvernement du Canada préparé annuellement par le receveur général, comme l'exige l'article 64 de la Loi sur la gestion des finances publiques. Il couvre l'exercice du gouvernement se terminant le 31 mars.
+
+L'information contenue dans le rapport provient de deux sources de données :
+* le sommaire des opérations financières présentées dans les comptes du Canada, tenus par le receveur général; et
+* les registres détaillés, tenus par les ministères et organismes.
+
+Chaque ministère et organisme est responsable de la conciliation de ses comptes avec les comptes de contrôle du receveur général, et de tenir des registres détaillés des opérations qui y sont portées.
+"
+"PAA","Architecture d'alignement des programmes","L’architecture d'alignement des programmes (AAP) est un répertoire de tous les programmes créés par un ministère. Ces programmes sont présentés selon les liens logiques qui existent entre eux et les résultats stratégiques auxquels ils contribuent. L’AAP est le document initial dont se sert un ministère pour établir sa structure de gestion, des ressources et des résultats. D’ici 2018-2019, l'architecture d'alignement des programmes sera complètement remplacée par la nouvelle structure composée du Cadre ministériel des résultats et du Répertoire des programmes."
+"PARL_ORG","Entités parlementaires qui reçoivent des crédits","Organisations couvertes par la Loi sur le Parlement du Canada"
+"PART_PEOPLE","Employé à temps partiel","Un Employé à temps partiel est une personne qui doit travailler un nombre d'heures inférieur à l'horaire de travail quotidien ou hebdomadaire prévu pour un employé à temps plein de mêmes groupe et niveau. Les heures de travail prescrites sont établies dans les conventions collectives ou par l'employeur."
+"PART1","Plan de dépenses du gouvernement","Le Plan de dépenses du gouvernement correspond à la partie I du processus d'établissement du budget des dépenses. Il présente un résumé et les faits saillants des changements qui se produisent d'une année à l'autre dans les dépenses ministérielles et les paiements de transfert afin de mettre en perspective les grands enjeux qui influencent les prévisions de dépenses du gouvernement."
+"PEOPLE","Données sur les fonctionaires",""
+"PEOPLE_DATA","Gestion du personnel","Les données sur la gestion du personnel décrivent les caractéristiques démographiques des employées travaillant au sein de la fonction publique fédérale."
+"PERC_IGOC","Pourcentage de la participation fédérale","Actions détenues par le gouvernement fédéral dans une société dans laquelle le Canada détient des intérêts."
+"PI","Répertoire de programmes","Compilation de tous les programmes du ministère et description de la façon dont les ressources sont organisées pour permettre au ministère d’exercer ses responsabilités essentielles et d’atteindre les résultats.
+
+
+Nota : En 2017-2018, les sept ministères suivants ont adopté la nouvelle structure redditionnelle, composée d’un cadre ministériel des résultats et d’un répertoire des programmes, visant à clarifier la responsabilité redditionnelle des ministères eu égard à ce qu’ils accomplissent et à la façon d’évaluer le succès aux termes de la Politique sur les résultats :
+* Commission canadienne des droits de la personne 
+* Agence du revenu du Canada 
+* Office national de l'énergie 
+* Bureau du commissaire au lobbying 
+* Commission des libérations conditionnelles du Canada 
+* Secrétariat du Conseil du Trésor du Canada 
+* Bureau de la sécurité des transports du Canada
+
+
+Cette nouvelle structure, qui sera adoptée par toutes les organisations d’ici 2018-2019, remplace l'architecture d'alignement des programmes établie par la Politique sur la structure de la gestion, des ressources et des résultats du SCT, maintenant annulée."
+"PLAN_DATA","Données relatives à la planification",""
+"PLANNED_EXP","Dépenses prévues","Pour les plans ministériels (PM) et les rapports sur les résultats ministériels (RRM), on entend par « dépenses prévues » les montants approuvés par le Conseil du Trésor en date du 1er février. Les dépenses prévues (y compris les crédits votés et les postes législatifs) peuvent donc comprendre les sommes supplémentaires figurant au budget principal des dépenses."
+"PLANNED_FTE","ETP prévus","Les équivalents temps plein (ETP) prévus sont la mesure utilisée pour représenter une année-personne complète d'un employé dans le budget ministériel. Les ETP sont calculés en fonction du coefficient des heures de travail assignées et des heures de travail prescrites. Les heures de travail prescrites sont établies dans les conventions collectives."
+"PO","Résultat du programme","Changement ou conséquence attribuable à des extrants ou auquel contribuent d’autres extrants ou résultats du programme. Les résultats des programmes peuvent être à court, à moyen ou à long terme; généralement, ils subissent davantage l’influence des ministères et relèvent davantage de leur contrôle direct que les résultats ministériels. Les résultats des programmes se trouvent au niveau des programmes, alors que les résultats ministériels se situent au niveau des responsabilités essentielles."
+"POL_RES","Politique sur les résultats","La politique vise tous les programmes des organismes et décrit la façon dont les ressources sont mises à contribution des responsabilités essentielles et aux résultats du Ministère."
+"POP_IGOC","Code de la population","Ancien code utilisé aux fins de la classification des RH."
+"PROG","Programme","Par « programme », on entend un groupe d'intrants constitué de ressources et d'activités connexes qui est géré pour répondre à des besoins précis et atteindre les résultats visés, et qui est souvent traité comme une unité budgétaire."
+"QFR","Rapports financiers trimestriels (RFT)","Pour les ministères et organismes, il s’agit de tableaux comparant les dépenses prévues et réelles tant pour le trimestre que pour le cumul de l’exercice en cours, ainsi que de l’information comparative par rapport à l’exercice précédent.
+ 
+Les rapports contiennent également une section narrative qui fournit des commentaires concis sur les changements importants touchant les résultats financiers du trimestre visé et du cumul de l’exercice, de même que les changements concernant le fonctionnement, l’effectif et les programmes.
+ 
+Les rapports financiers trimestriels complètent les rapports de fin d’année des organisations fédérales. Chaque rapport comprend les crédits budgétaires alloués dans les budgets principal et supplémentaires des dépenses, ainsi que tout virement d’affectation approuvé par le Conseil du Trésor qui est devenu disponible pour utilisation par l’institution à la fin du trimestre.
+
+Les ministères, les organismes et les sociétés d’État doivent publier sur leur site Web un rapport financier trimestriel pour chacun des trois premiers trimestres de l’exercice financier. Ces rapports doivent être rendus publics au plus tard 60 jours après la fin de la période visée."
+"QFR_DEPT","Ministères et organismes devant publier un rapport financier trimestriel","Conformément à la _Norme comptable 1.3 du Conseil du Trésor - Rapport financier trimestriel des ministères et des organismes_, tous les ministères et organismes définis comme des ministères au sens de l'article 2 de la _Loi sur la gestion des finances publiques_ (LGFP) sont tenus de publier un rapport financier trimestriel pour les trois premiers trimestres de chaque exercice.
+
+
+Selon l'article 2 de la LGFP, s'entend de « ministère » :
+* a) L'un des ministères mentionnés à l'annexe I;
+* a.1) l’un des secteurs de l’administration publique fédérale mentionnés à la colonne I de l’annexe I.1;
+* b) toute commission nommée sous le régime de la Loi sur les enquêtes désignée comme telle, pour l'application de la présente loi, par décret du gouverneur en conseil;
+* c) le personnel du Sénat, celui de la Chambre des communes, celui de la bibliothèque du Parlement, celui du bureau du conseiller sénatorial en éthique et celui du bureau du commissaire aux conflits d'intérêts et à l'éthique;
+* d) tout établissement public."
+"RESULT","Résultats","Par résultat, on entend une conséquence externe attribuable, en partie, à une organisation, à une politique, à un programme ou à une initiative. Des résultats sont fixés dans les diverses zones de contrôle de l’organisation, notamment les :
+* résultat escomptés : utilisés pour la reddition de compte des programmes sous l’architecture d’alignement des programmes jusqu’à la fin de la transition vers la structure des répertoires  des programmes, aux termes de la Politique sur les résultats, en 2018-2019;
+* extrants de programme : utilisés pour la reddition de compte des programmes sous la structure des répertoires  des programmes, aux termes de la Politique sur les résultats;
+* résultats ministériels : utilisés pour la reddition de compte sous le Cadre ministériel des résultats, aux termes de la Politique sur les résultats."
+"SA","Secteurs de dépenses du gouvernement du Canada","Les secteurs de dépenses du gouvernement du Canada sont quatre secteurs de dépenses pangouvernementaux sur lesquels les dépenses budgétaires sont alignées."
+"SE_PEOPLE","Organismes distincts","Les organismes distincts sont des organisations où l’employeur n’est pas le Conseil du Trésor, mais pour lesquelles la Commission de la fonction publique a autorité exclusive sur les nominations. Ces organisations représentent une partie de l'administration publique centrale et sont énumérées à l'Annexe V de la Loi sur la gestion des finances publiques."
+"SEAS_PEOPLE","Type d'employé  : Employé saisonnier","Employé saisonnier correspond à une personne embauchée pour travailler une période précise de l'année (saison) chaque année."
+"SO","Résultat stratégique","Un résultat stratégique est un avantage durable à long terme pour les Canadiens qui découle du mandat et de la vision d'un ministère. Il représente un résultat qu’un ministère entend obtenir au profit de la population canadienne, qui devrait être mesurable et devrait s’inscrire dans la sphère d’influence du ministère en question."
+"SOBJ","Articles courants","Par « articles courants », on entend le niveau de classification le plus élevé que le Parlement et le pouvoir exécutif utilisent pour les dépenses; les articles courants figurent dans le budget principal des dépenses, les budgets supplémentaires et les Comptes publics. Voici en quoi consistent les articles courants : 
+1. Personnel 
+2. Transports et communications 
+3. Information 
+4. Services professionnels et spéciaux 
+5. Location 
+6. Achat de services de réparation et d'entretien 
+7. Services publics, fournitures et approvisionnements 
+8. Acquisition de terrains, de bâtiments et d'ouvrages 
+9. Acquisition de machines et de matériel 
+10. Paiements de transfert 
+11. Service de la dette publique 
+12. Autres subventions et paiements"
+"SOBJ1","Personnel","L’article courant 01 englobe toutes les dépenses liées au personnel, entre autres ce qui suit :
+
+* Traitements et salaires, rétribution des heures supplémentaires, indemnité de cessation d'emploi, salaire rétroactif et autres rémunérations spéciales de tout le personnel civil permanent (à temps plein) ou engagé pour une période déterminée (à temps partiel, saisonnier ou occasionnel), à l'exclusion des employés des sociétés d'État mandataires et propriétaires, ainsi que des membres des forces militaires et de la Gendarmerie royale du Canada.
+* Traitements des juges, du gouverneur général et des lieutenants-gouverneurs et indemnités des membres des deux chambres du Parlement, ainsi que tout genre d'indemnité versée aux employés permanents ou engagés pour une période déterminée ou à leur intention, comme les indemnités de subsistance, suppléments provisoires, indemnités de service à l'étranger, indemnités d'isolement, indemnités de pension et de subsistance, primes de postes, et autres allocations du genre.
+* Allocations pour automobile des ministres et indemnités de dépenses des sénateurs et des députés. 
+* Contributions de l'État à divers régimes d'avantages sociaux des employés (Compte de pension de retraite de la fonction publique, Compte de prestations de retraite supplémentaires, Compte du Régime de pensions du Canada, Régime des rentes du Québec, Compte de prestations de décès de la fonction publique et Compte d'assurance-emploi).
+* Compte de pension de retraite de la Gendarmerie royale du Canada, Compte de pension de retraite des Forces canadiennes et Compte d'allocations de retraite des membres du Parlement; contributions de l'État aux régimes d'assurance-maladie et d'assurance-hospitalisation provinciaux et autres; frais de personnel supplémentaire pour diverses fins."
+"SOBJ10","Paiements de transfert","L’article courant 10 englobe toutes les dépenses liées aux paiements de transfert, entre autres ce qui suit :
+
+* Subventions et contributions, subsides et tous les paiements faits par l'État.
+* Paiements importants relatifs au bien-être versés à des particuliers, comme les pensions de vieillesse et les allocations de ce genre, les allocations et les pensions des anciens combattants.
+* Subventions et paiements aux provinces et aux territoires en vertu de la Loi constitutionnelle, de la Loi sur les arrangements fiscaux entre le gouvernement fédéral et les provinces et du Transfert canadien en matière de santé et de programmes sociaux et pour les langues officielles.
+* Paiements aux Indiens et aux Inuits, afin de soutenir les initiatives d'autonomie gouvernementale et les programmes dans le domaine social, de la santé, de l'éducation et du développement communautaire, et ce, en conformité avec les revendications des Autochtones. 
+* Paiements aux gouvernements territoriaux en vertu des ententes de financement conclues par le ministre des Finances et les ministres des Finances des territoires. 
+* Subventions et capitaux consentis à l'industrie; subventions aux fins de recherches et autres mesures d'aide relatives aux recherches effectuées par des organisations non gouvernementales; bourses d'études. 
+* Subventions de soutien consenties à de nombreux organismes nationaux et internationaux sans but lucratif.
+* Contributions à des organismes internationaux et droits d'affiliation à ces organismes, comme la contribution au programme d'aide alimentaire internationale et la cotisation du Canada aux Nations Unies."
+"SOBJ11","Service de la dette publique","L’article courant 11 englobe toutes les dépenses liées au service de la dette publique, entre autres ce qui suit :
+
+* Intérêts de la dette non échue du Canada (y compris les bons du Trésor) et autres passifs comme le fonds de fiducie et autres fonds spéciaux. 
+* Frais d'émission de nouveaux emprunts, amortissement de l'escompte à l'émission d'obligations, primes et commissions afférentes aux obligations.
+* Frais administratifs et afférents à la dette publique."
+"SOBJ12","Autre subventions et paiements","L’article courant 12 englobe toutes les dépenses sous forme de subventions et de paiements non mentionnées dans un autre article courant, entre autres ce qui suit :
+
+* Paiements à des sociétés d'État, y compris les versements destinés à combler les déficits de fonctionnement et les autres paiements de transfert faits aux sociétés d'État.
+* Versements à certains comptes non budgétaires (comme les contributions de l'État au compte de stabilisation des prix des produits agricoles ou les prestations relatives à la Loi sur les terres destinées aux anciens combattants), ainsi que l'amortissement de plusieurs types de pertes, le rajustement annuel des réserves pour les créances et certains autres postes « Divers ».
+ 
+Sous le titre « Divers », figurent certaines dépenses comme les licences, les permis et droits de bassin, de touage, de mise à quai et d'amarrage, le cautionnement d'employés de l'État, la perte d'effets personnels et les dépenses relatives à de petits articles et à divers services. Sont compris également des fonds pour de nombreux articles de dépense et services qui ne peuvent être mentionnés sous les diverses rubriques du présent sommaire."
+"SOBJ2","Transport et communications","L’article courant 02 englobe toutes les dépenses liées aux transports et aux communications, entre autres ce qui suit :
+
+* Frais de voyage et de transport des employés du gouvernement ainsi que des membres des Forces armées et de la Gendarmerie royale du Canada; frais de réinstallation de ces personnes et des personnes à leur charge, frais de subsistance et autres frais payés par ces personnes en voyage commandé; dépenses de voyage des juges; dépenses et indemnités de voyage payables aux sénateurs et aux députés.
+* Transport de personnes par contrat, nolisement ou autres moyens, y compris les frais de voyage de personnes qui s'occupent de travaux d'arpentage, d'inspections et d'études sur le terrain; frais de déplacement et de transport de personnes qui ne sont pas des employés de l'État, comme les frais de transport d'anciens combattants demandant des traitements ou des pensions. 
+* Affranchissement ordinaire, courrier aérien, recommandé, colis postal, courrier exprès, ainsi que location de cases postales et tous les autres frais postaux.
+* Frais de transport de marchandises à l'égard d'un achat, autres que le coût initial de livraison (compris dans l'article courant applicable au coût de l'achat même), y compris les frais de services de messagerie offerts par l'entreprise privée.
+* Tous les frais des services de télécommunication par téléphone, télégraphe, câble, télétype, radio et T.S.F. (droits, taxes, etc.) et autres frais de communication, tels ceux qui découlent des services de messagerie assurés à forfait par des entreprises de l'extérieur et des services de communication fournis par contrat ou entente."
+"SOBJ3","Information","L’article courant 03 englobe toutes les dépenses liées à  l’élaboration de l’information gouvernementale et à sa diffusion au public, entre autres ce qui suit :
+
+* Services de promotion pour publicité et autres fins, achetés aux agences de publicité pour du temps d'antenne ou pour des médias imprimés, des placards extérieurs ou des panneaux-réclame. Cela comprend les services de promotion et de création tels que le graphisme. 
+* Services d'édition pour la passation de commandes, la mise en marché, la distribution et la vente de publications commanditées par le ministère, et pour l'achat de publications connexes de l'État. Sont aussi compris les services d'impression, de duplication, de photocopie, de préparation des textes, de graphisme, de mise en pages et les services techniques et consultatifs tels que le traitement informatique des textes et la transmission en masse des imprimés. De plus, y sont compris les services d'exposition tels que les services d'exposition et les services audiovisuels correspondants se rapportant à des expositions et à des étalages.
+* Services des relations publiques et des affaires publiques pour des sondages sur les comportements, de promotion des ventes, de commercialisation, de mise en valeur des exportations, de relations publiques et de publicité les sondages d'opinion et les marchés concernant l'organisation et l'exploitation des services de contrôle des médias et des groupes cibles. Sont aussi compris les services de rédaction des discours et les services liés aux communiqués de presse, aux séances d'information, aux conférences de presse et aux événements spéciaux."
+"SOBJ4","Services professionnels et spéciaux","L’article courant 04 englobe toutes les dépenses rattachées aux services professionnels et aux services spéciaux, entre autres ce qui suit :
+
+* Services professionnels offerts par des particuliers ou des organismes comprenant des versements sous forme d'honoraires, de commissions, etc., pour les services de comptables, d'avocats, d'architectes, d'ingénieurs, d'analystes scientifiques, de sténographes judiciaires, de traducteurs; versements aux enseignants œuvrant à différents niveaux dans les établissements d'enseignement; paiements pour les services de médecins, d'infirmières et autre personnel médical; paiement de services de gestion, de services d'informatique et de toute autre aide technique, professionnelle et spécialisée de l'extérieur.
+* Paiement de traitements hospitaliers, de soins aux anciens combattants et de services d'assistance sociale; paiement de services d'informatique, paiement des frais de scolarité des Indiens inscrits à des institutions d'enseignement qui ne sont pas des écoles fédérales; achat de services de formation en vertu de la Loi sur la formation professionnelle des adultes et paiements à l'École de la fonction publique du Canada pour des cours de formation.
+* Paiements pour les services du Corps des commissionnaires et autres services contractuels de fonctionnement et d'entretien tels que le service d'autos blindées, les services de buanderie et de nettoyage à sec, les services de nettoyage dans les immeubles, les services d'aide temporaire, les services d'accueil, de stockage, d'entreposage et autres services commerciaux, ainsi que les paiements faits au ministère des Travaux publics et des Services gouvernementaux pour l'administration de marchés."
+"SOBJ5","Location","L’article courant 05 englobe les dépenses liées à  la location de biens ou d’équipement, exception faite des services de stockage et d’entreposage (voir l’article courant 04), entre autres ce qui suit :
+
+
+* Location, par le ministère des Travaux publics et des Services gouvernementaux, d’immeubles requis à certaines fins par divers ministères et pour y aménager des locaux à bureaux et des services du gouvernement.
+* Location et affrètement — avec ou sans équipage — de navires, aéronefs, véhicules motorisés et autre matériel, et location d'appareils de télécommunication et de matériel de bureau, y compris les ordinateurs."
+"SOBJ6","Achat de services de réparation et d’entretien","L’article courant 06 englobe toutes les dépenses liées à  l’achat de services d’entretien et de réparation, entre autres ce qui suit :
+
+* Travaux de réparation et d'entretien de biens durables mentionnés à l'article courant 08 pour l'Acquisition de terrains, de bâtiments et travaux ci-dessous, exécutés à forfait, ainsi que du matériel visé par l'article courant no 9 pour l'Acquisition de machines et de matériel.
+* Paiements faits au ministère des Travaux publics et des Services gouvernementaux pour les services offerts aux locataires.
+* Le coût des matériaux et des fournitures et les autres frais pour les travaux exécutés directement par un ministère sont inscrits sous d'autres rubriques, selon la nature de l'achat."
+"SOBJ7","Services publics, matériaux et fournitures","L’article courant 07 englobe toutes les dépenses liées à  l’achat de services publics, de matériaux et de fournitures, entre autres ce qui suit :
+
+* Dépenses relatives à un genre de service normalement assuré par une municipalité ou un service public, comme l'eau, l'électricité, le gaz, etc. Y figurent donc les taxes d'eau, les frais d'éclairage, d'énergie et de gaz, et le paiement de ces services, qu'ils soient obtenus de la municipalité ou d'ailleurs. 
+* Achat des fournitures et approvisionnements requis pour assurer le fonctionnement et le maintien réguliers des services de l'État. Sont inclus : 
+ * essence et huile achetées en grandes quantités, combustible ou carburant pour navires, avions, transport, chauffage
+ * provendes
+ * aliments et autres fournitures pour navires et établissements
+ * bestiaux achetés pour consommation ou revente
+ * graines de semence
+ * livres et autres publications achetés pour diffusion à l'extérieur 
+ * uniformes et fourniment
+ * photographies, cartes terrestres et marines achetées à des fins d'administration et de fonctionnement
+ * fournitures scientifiques et de laboratoire, y compris échantillons pour essais
+ * fournitures pour dessin, tirage de bleus et travaux d'art; fournitures pour les levés topographiques, études
+ * produits chimiques
+ * fournitures hospitaliers, chirurgicaux et médicaux
+ * œuvres d'art pour expositions et documents historiques pour galeries, musées et archives 
+ * bois et charbon
+ * fournitures électriques
+ * pièces de réparation autres que les pièces accompagnant normalement le matériel au moment de l'achat d'aéronefs, de navires, de véhicules routiers, de matériel de communication et autre équipement, et autres fournitures et approvisionnements
+ * produits métaux
+ * papeterie et fournitures de bureau."
+"SOBJ8","Acquisition de terrains, de bâtiments et d’ouvrages","L’article courant 08 englobe toutes les dépenses liées à  l'acquisition de terrains, de bâtiments et d’ouvrages gouvernementaux. Les dépenses liées à des contrats pour de nouvelles constructions pour les employés occasionnels embauchés ou pour les employés permanents qui travaillent à temps plein ou à temps partiel à des projets précis, les frais de déplacement, les services professionnels, la location de matériel, l'entretien de matériel et les matériaux achetés spécialement pour servir à ces travaux sont imputés aux articles courants pertinents (articles courants 01 à 09), entre autres ce qui suit :
+
+* Toutes les dépenses relatives à l’acquisition de bâtiments, chemins, ouvrages d'irrigation, canaux, aéroports, quais, ponts et toute autre immobilisation de ce genre. 
+* Améliorations comportant des rajouts ou des modifications de structure, ainsi que le coût d'installation du matériel fixe qui fait partie intégrante des travaux ou de la structure, comme les ascenseurs, les appareils de chauffage et d'aération. 
+* Tous les travaux de reconstruction de ces types de biens matériels comme les projets réalisés en vertu d'un contrat ou d'un accord.
+* Achat de terrains."
+"SOBJ9","Acquisition de machines et de matériel","L’article courant 09 englobe toutes les dépenses liées à  l'acquisition de machines et de matériel, entre autres ce qui suit :
+
+* Dépenses relatives à l'acquisition de toutes les machines, de tout le matériel, des fournitures et du mobilier de bureau, du matériel informatique et électronique ou de tout autre accessoire de bureau.
+* Matériel et accessoires à microfilmer, matériel de communication entre bureaux, machines à affranchir avec compteur, cylindres pour machines enregistreuses et autres accessoires de bureau.
+* Véhicules automobiles, avions, tracteurs, matériel de voirie, matériel de télécommunications et autre appareillage du même genre; matériel scientifique et de laboratoire, navires, brise-glaces et matériel auxiliaire de la navigation, ainsi que tout autre genre de matériel lourd et léger; munitions et divers genres de matériel pour le ministère de la Défense nationale, tels que navires, avions, matériel mécanique, véhicules de combat, armes, moteurs et pièces de rechange habituellement achetées avec ce matériel au moment de l'achat."
+"SPEC_WARR","Mandat spécial du gouverneur général","Par « mandat spécial du gouverneur général », on entend le processus établi pour obtenir les fonds requis de toute urgence dans l’intérêt public à la dissolution du Parlement par suite du déclenchement d’une élection générale."
+"SSP","Sous-programme (ou sous-sous-programme)","Les sous-programmes sont des programmes identifiables plus modestes ayant un lien logique avec le programme dans l’architecture d’alignement des programmes. De même, sous chaque sous-programme figurent des sous-sous-programmes, qui sont les plus petits programmes faisant logiquement partie d'un sous-programme.
+
+
+La portée et l'étendue des programmes qui figurent à chaque échelon sont les éléments distinctifs des trois échelons de l'AAP. Les programmes du niveau des programmes sont de grande portée et visent de vastes créneaux d'intervention sociétale, tandis que ceux du niveau des sous-programmes sont très ciblés et visent un groupe et un créneau d'intervention plus restreints. Par conséquent, la définition et la portée sont plus étroites au niveau d’extrants des sous-sous-programmes que dans les programmes et sous-programmes.
+
+
+La relation est similaire entre le niveau des sous-programmes et celui des sous-sous-programmes.
+
+
+Nota : D’ici 2018-2019, l'architecture d'alignement des programmes sera complètement remplacée par la nouvelle structure composée du Cadre ministériel des résultats et du Répertoire des programmes. Cela permettra de clarifier ce que les ministères accomplissent et leur façon d’évaluer le succès dans le cadre d’une reddition de compte fondée sur un seul niveau de programmes."
+"STAT","Autorisations législatives","Par « autorisation législatives », on entend les autorisations de dépenses accordées aux termes d’autres lois"
+"STAT_EXP","Dépenses législatives","Les dépenses législatives sont celles qui ont été approuvées par le Parlement à la suite de l'adoption d'une loi (autre qu'une loi de crédits) qui établit l'objet des dépenses et les conditions aux termes desquels elles peuvent être engagées."
+"STATUS_IGOC","État","État de l’organisation (p. ex. active)."
+"STATUS_PEOPLE","Statut de l'employé","Le statut de l'employé détermine si celui-ci est actif ou inactif."
+"STUD_PEOPLE","Type d'employé : Étudiant","Par « étudiant », on entend une personne admissible à un emploi dans la fonction publique fédérale dans le cadre de l'un des programmes d'emploi pour les étudiants. La personne doit :
+* être inscrite à temps plein dans une institution reconnue d'enseignement secondaire ou postsecondaire;
+* être présentement considérée comme étudiant à temps plein par l''établissement d'enseignement;
+* reprendre ses études à temps plein au semestre suivant."
+"SUPPS","Budget supplémentaire","Les budgets supplémentaires des dépenses font partie du processus normal d'approbation parlementaire qui permet de veiller à ce que les initiatives gouvernementales planifiées au préalable reçoivent le financement nécessaire pour aller de l'avant et répondre aux besoins des Canadiens. Ils présentent au Parlement de l'information sur les besoins en matière de dépenses du gouvernement du Canada qui n'étaient pas suffisamment élaborés au moment du dépôt du budget principal des dépenses, et de temps à autre, ils incluent des dépenses urgentes, mais imprévues comme les dépenses engagées en cas de catastrophes naturelles (p. ex. une tempête de verglas et H1N1). Les budgets supplémentaires des dépenses appuient directement une loi de crédits. 
+
+Les budgets supplémentaires des dépenses sont publiés à différents moments au cours de l'exercice. Ces publications sont désignées en ordre alphabétique croissant (A, B, C, etc.)."
+"SUPPSA","Budget supplémentaire des dépenses (A)","Le budget supplémentaire des dépenses (A) est déposé en mai, et la loi de crédits qui s'y rattache reçoit la sanction royale et devient loi en juin. Il fournit aux organisations fédérales les fonds dont elles ont besoin au début de l'année."
+"SUPPSB","Budget supplémentaire des dépenses (B)","Le budget supplémentaire des dépenses (B) est déposé à la fin octobre ou au début de novembre, et la loi de crédits qui s'y rattache reçoit la sanction royale en décembre."
+"SUPPSC","Budget supplémentaire des dépenses (C)","Le budget supplémentaire des dépenses (C) est déposé en février, et la loi de crédits qui s'y rattache reçoit la sanction royale en mars."
+"TAG","Étiquetage de programme","Les étiquettes définissent les attributs standards des programmes. Elles s’avèrent utiles pour la création de produits d’information horizontaux à l’échelle pangouvernementale favorisant la production d’analyses plus rigoureuses, qui donnent aux parlementaires et aux Canadiens une meilleure idée des programmes gouvernementaux, ce qui accroît la transparence générale de ses activités.
+
+
+Programme de métadonnées, comprenant ce qui suit : 1) des étiquettes de lien qui précisent comment les programmes, les responsabilités essentielles, les priorités du gouvernement et les résultats du ministère sont reliés; 2) des étiquettes descriptives qui précisent les caractéristiques standards des programmes dans le Répertoire des programmes du Ministère, tels que la méthode d’intervention  (c.-à-d. comment nous aidons)."
+"TARGET","Cible","Rendement mesurables ou niveau de réussite qu'une organisation, un programme ou une initiative compte atteindre au cours d’une période donnée. Les cibles peuvent être quantitatives ou qualitatives et sont établies pour les extrants et résultats énoncés par les types d'indicateurs suivants :
+* indicateurs de résultat escompté : utilisés pour la reddition de compte des programmes sous l’architecture d’alignement des programmes jusqu’à la fin de la transition vers la structure des répertoires  des programmes, aux termes de la Politique sur les résultats, en 2018-2019;
+* indicateurs d’extrant de programme : utilisés pour la reddition de compte des programmes sous la structure des répertoires  des programmes, aux termes de la Politique sur les résultats;
+* indicateurs de résultat ministériel : utilisés pour la reddition de compte sous le Cadre ministériel des résultats, aux termes de la Politique sur les résultats."
+"TB","Crédits centraux du Conseil du Trésor","Les crédits centraux du Conseil du Trésor sont utilisés pour financer d’autres affectations de fonds. Ils sont soumis à l'approbation du Conseil du Trésor et servent aux fins suivantes: 
+
+* Éventualités du gouvernement (crédit 5 du CT)
+* Initiatives pangouvernementales (crédit 10 du CT)
+* Rajustements de la rémunération (crédit 15 du CT)
+* Report du budget de fonctionnement (crédit 25 du CT)
+* Besoins en matière de rémunération (crédit 30 du CT)
+* Report du budget de dépenses en capital (crédit 33 du CT)"
+"TB10","Crédit 10 du CT : Initiatives pangouverne-mentales","Le crédit 10 du Conseil du Trésor affecte des fonds supplémentaires à la mise en œuvre d'initiatives de gestion stratégique qui touchent de nombreux ministères. ."
+"TB15","Crédit 15 du CT : Rajustements de la rémunération","Le crédit 15 du Conseil du Trésor affecte des fonds supplémentaires aux rajustements des  conditions de service ou d'emploi dans l'administration publique fédérale à la suite de négociations collectives."
+"TB25","Crédit 25 du CT : Report du budget de fonctionnement","Le crédit 25 du Conseil du Trésor affecte des fonds supplémentaires pour le mécanisme de gestion des dépenses liées au report du budget de fonctionnement. Les ministères sont autorisés à reporter les fonds inutilisés admissibles d'un exercice à l'autre pour un montant allant jusqu'à 5 % des budgets de fonctionnement figurant dans le Budget principal des dépenses."
+"TB30","Crédit 30 du CT : Besoins en matière de rémunération","Le crédit 30 du Conseil du Trésor affecte des fonds supplémentaires pour remplir les obligations juridiques de l'employeur telles que le congé parental et de maternité et les droits découlant d’une cessation de service ou d'emploi."
+"TB33","Crédit 33 du CT : Report du budget de dépenses en capital","Le crédit 33 du Conseil du Trésor affecte des fonds supplémentaires pour le mécanisme de gestion des dépenses liées au report du budget de dépenses en capital. Les ministères sont autorisés à reporter les fonds non utilisés admissibles d'un exercice financier à l'autre pour un montant allant jusqu'à 20 % de leur crédit pour dépenses en capital."
+"TB5","Crédit 5 du CT : Éventualités du gouvernement","Le crédit 5 du Conseil du Trésor alloue des avances temporaires pour des besoins urgents ou imprévus qui requièrent un préfinancement du prochain Budget supplémentaire des dépenses et du projet de loi de crédits associé."
+"TERM_PEOPLE","Type d'employé : Employé nommé pour une période déterminée","Par « employé nommé pour une période déterminée », on entend une personne nommée pour une période définie aux termes de l'article 58 de la Loi sur l'emploi dans la fonction publique (LEFP)."
+"TOT_AVAIL","Autorisation budgétaire totale utilisable","Par « autorisation budgétaire totale utilisable », on entend les autorisations de dépenser pendant l'exercice en cours (après déduction des revenus et rentrées qu’il est permis de dépenser)."
+"TP","Paiement de transfert","Par « paiement de transfert », on entend un paiement monétaire ou un transfert de biens, de services ou d'actifs effectué en fonction de crédits à une tierce partie bénéficiaire, y compris une société d'État, et qui n'a pas pour résultat l'acquisition de biens, de services ou d'actifs par le gouvernement du Canada. Les paiements de transfert comportent les catégories suivantes : les subventions, les contributions et les autres paiements de transfert. Les paiements de transfert n'incluent pas les investissements, les prêts ni les garanties d'emprunt."
+"VOTED","Montants votés","Par «  votés », on entend les montants autorisés aux termes des lois de crédits"
+"YI_IGOC","Année de constitution en société","Année au cours de laquelle l’organisation a été légalement constituée en société."
+"MRRS","Politique sur la structure de la gestion, des ressources et des résultats","La Politique sur la structure de gestion, des ressources et des résultats (SGRR) vise à faciliter l'élaboration d'une approche pangouvernementale commune pour la désignation des programmes, et pour la collecte, la gestion et la déclaration de données financières et non financières relatives à ces programmes. La Politique fournit aux ministères la marge de manœuvre et les pouvoirs discrétionnaires dont ils ont besoin pour concevoir et gérer leurs programmes de la manière la plus susceptible de fournir des résultats pour les Canadiens."
+"GEO","Données géographique",""
+"ESTIMATES","Budget des dépenses",""
+"OC_PEOPLE","Catégorie professionnelle","Un système de classification généralisé du type de travail de chaque employé;  la classification d'un employé individuel est déterminée en fonction de sa convention collective et, par conséquent, ne décrit pas forcément le travail de cet employé de façon précise ou exhaustive."
+"RPS","Système régional de paye (SRP)","Le Système régional de paye (SRP) sert de source principale de données aux fins d'établissement de rapports centraux, notamment les rapports démographiques, les analyses, les données ouvertes et les extractions de données en réponse aux demandes de renseignements en matière de gestion des personnes. En 2011, le Bureau du dirigeant principal des ressources humaines (BDPRH) du Secrétariat du Conseil du Trésor (SCT) du Canada a récupéré neuf anciens fichiers de données des Ressources humaines (RH) auprès de Travaux publics et Services gouvernementaux Canada (TPSGC). Ces fichiers sont désignés collectivement comme étant le Service d'intégration des données sur les ressources humaines (SIDRH). Certaines données du SIDRH sont également fournies à de nombreux utilisateurs du SCT et envoyées à divers ministères et organismes, agents négociateurs et autres organisations."
+"FOL","Première langue officielle","La langue (le français ou l'anglais) à laquelle l'employé s'identifie le mieux (la langue officielle dans laquelle une personne est généralement la plus compétente)."
+"EX_LVL","Niveaux des cadres supérieurs",""
+"SUPPRESSED_DATA","Données supprimées",""
+"GOCA","Secteurs de dépenses et de grandes activités du gouvernement du Canada","Les organisations fédérales qui reçoivent des crédits doivent planifier leurs opérations, les gérer et rendre compte de leur rendement par rapport à des résultats stratégiques ou des résultats ministériels.
+
+
+En plus, elles doivent indiquer comment leurs activités de programmes s’alignent avec les 16 grands secteurs d'activités faisant partie de quatre secteurs de dépenses du gouvernement du Canada. 
+* affaires économiques 
+* affaires sociales 
+* affaires internationales
+* affaires gouvernementales. 
+
+Pour les besoins de l’InfoBase, les services internes et les sociétés d'État sont présentés comme étant des domaines de dépenses de l’État.
+
+
+**Harmonisation des objectifs du programme avec le cadre pangouvernemental**
+
+Les ministères et organismes doivent indiquer en quoi les activités de programmes s’alignent avec les secteurs d'activités du gouvernement du Canada. Comme l’alignement permet de calculer les dépenses en fonction des secteurs d'activités du gouvernement du Canada et de déterminer correctement le total des dépenses gouvernementales, une activité de programme s’aligne seulement avec un grand secteur d'activité du gouvernement du Canada. Une responsabilité essentielle et un résultat stratégique peuvent toutefois contribuer à plusieurs activités.
+
+
+Remarque: En navigant l'InfoBase, vous remarquerez les références aux termes ""Domaines de travail"" et ""Activités"" pour désigner les secteurs des dépenses et les secteurs d'activités du gouvernement. Ceci est fait à titre indicatif seulement."
+"GOC001","Secteur de grandes activités du gouvernement du Canada: Emploi et sécurité du revenu","fondement de l’existence d’une organisation."
+"GOC002","Secteur de grandes activités du gouvernement du Canada: Croissance économique","Les activités de programme qui visent à créer un environnement propice à la croissance économique et à favoriser le développement de tous les secteurs de l’économie dans l’ensemble des régions du Canada."
+"GOC003","Secteur de grandes activités du gouvernement du Canada: Recherche et développement","Les activités de programme qui visent à préparer le Canada à relever les défis futurs en investissant dans la recherche et le développement d’avant-garde et dans la formation et l’enseignement spécialisés."
+"GOC004","Secteur de grandes activités du gouvernement du Canada: Environnement","Les activités de programme qui visent à améliorer et à protéger l’environnement du Canada et à veiller à ce que les ressources naturelles soient utilisées de manière durable pour que les générations futures puissent également en profiter."
+"GOC005","Secteur de grandes activités du gouvernement du Canada: Intégrité du marché, réglementation et concurrence","Les activités de programme qui visent à favoriser la croissance de l’investissement privé et des activités commerciales et à préserver l’intégrité du marché canadien."
+"GOC006","Secteur de grandes activités du gouvernement du Canada: Santé","Les activités de programme qui visent à créer un système de santé responsable, facile d’accès et durable. Ce secteur d'activités comprend également le Transfert canadien en matière de santé."
+"GOC007","Secteur de grandes activités du gouvernement du Canada: Sécurité et sûreté","Les activités de programme qui visent à préserver la sécurité du Canada et de ses citoyens en veillant à la prévention du crime, au maintien de l’ordre, à la sécurité des frontières du pays et à la mise en place de mesures d’urgence."
+"GOC008","Secteur de grandes activités du gouvernement du Canada: Inclusion sociale","Les activités de programme qui visent à promouvoir et à protéger les langues officielles du Canada, les droits de la personne (y compris le droit à un niveau de vie acceptable) ainsi que la participation de tous les groupes à la société canadienne."
+"GOC009","Secteur de grandes activités du gouvernement du Canada: Patrimoine et culture","Les activités de programme qui visent à soutenir la culture canadienne et à améliorer les connaissances en ce qui concerne l’histoire et le patrimoine culturel du Canada, notamment l’histoire militaire et les sites historiques nationaux."
+"GOC010","Secteur de grandes activités du gouvernement du Canada: Engagement international","Les activités de programme qui visent à promouvoir la paix et la sécurité, la liberté, la démocratie, les droits de la personne et la primauté du droit dans le monde, ainsi qu'à assurer la représentation du Canada à l'étranger. Cela se fait en apportant un soutien militaire et policier, en fournissant des services aux Canadiens à l'étranger, et en menant des activités dans le domaine de la diplomatie internationale."
+"GOC011","Secteur de grandes activités du gouvernement du Canada: Développement international","Les activités de programme qui visent à contribuer au développement durable dans les pays en développement. Cela comprend un appui à des activités contribuant au développement social et économique et à la sécurité alimentaire, la fourniture de ressources d’aide internationale d’urgence et l'allégement de la dette, les activités visant à renforcer l’efficacité des institutions publiques, non gouvernementales et internationales, à amener les Canadiens à s’impliquer, et à influencer l’agenda de l’aide à l’échelle internationale."
+"GOC012","Secteur de grandes activités du gouvernement du Canada: Partenariat nord-américain","Les activités de programme qui visent à améliorer le bien-être socioéconomique et la sécurité des citoyens de tout le continent. Les efforts déployés par le Canada à cet effet touchent divers aspects, notamment la sécurité, la facilitation des échanges commerciaux, les transports, l’environnement et la santé publique."
+"GOC013","Secteur de grandes activités du gouvernement du Canada: Commerce et investissements internationaux","Les activités de programme qui visent à favoriser et à soutenir le commerce et les investissements internationaux au profit du Canada et des entreprises canadiennes au moyen de la promotion des produits et des services canadiens à l’étranger, de la négociation d’accords commerciaux internationaux et de la réglementation des produits canadiens en vue de veiller à leur conformité aux exigences du marché international."
+"GOC014","Secteur de grandes activités du gouvernement du Canada: Institutions démocratiques","Les activités de programme qui comprennent les fonctions exercées par les trois pouvoirs du gouvernement  – le pouvoir judiciaire, le pouvoir législatif et le pouvoir exécutif – ainsi que les activités qui visent à appuyer ces institutions et à préserver leur indépendance. Cela se fait par la prestation de services et de conseils aux pouvoirs judiciaire, législatif et exécutif, et par la mise en œuvre de diverses lois et de divers codes."
+"GOC015","Secteur de grandes activités du gouvernement du Canada: Transparent et responsable","Les activités de programme qui visent à maintenir la confiance du public et à renforcer l’interaction entre le gouvernement et les citoyens canadiens. Cela se fait par la prestation de services qui répondent aux besoins des citoyens et par des mesures visant à assurer la responsabilisation de l’administration publique, le respect des règles et la possibilité de demander des recours."
+"GOC016","Secteur de grandes activités du gouvernement du Canada: Activités gouvernementales","Les activités de programme qui visent à appuyer le gouvernement dans l’exécution de ses activités essentielles et à assurer l’administration rigoureuse des ressources financières, des actifs et des ressources humaines. Cela comprend le Trésor fédéral, le recouvrement de l’impôt, le recrutement et le perfectionnement dans la fonction publique, la prestation de services linguistiques et de services d’approvisionnement, et les tribunaux administratifs."
+"IFORM_INT","Intérêts","Intérêts sont des institutions dans lesquelles le gouvernement fédéral détient des intérêts (par l’actionnariat) ou participe à la surveillance (avec le droit de nommer un membre de l’organe directeur de l’organisation ou de présenter une candidature)."
+"RESULTS_STATUS","Statut du résultat","Si la date butoir d’atteinte de la cible est **avant ou d’ici la fin de l’exercice 2016-2017 (31 mars 2017)** :
+* La cible est atteinte : Le résultat est supérieur à la cible minimale, inférieur à la cible maximale, dans la fourchette cible ou exactement égal à la valeur unique de la cible.
+* Attention requise: Le résultat est inférieur à la cible minimale, supérieur à la cible maximal, hors de la fourchette cible ou n’est pas égal à la valeur unique de la cible. 
+* Aucune cible/la cible ne s’applique plus : La cible n'est pas disponible ou n’est plus pertinente parce que la politique a été modifiée ou en raison des circonstances (p. ex. la dissolution d’un ministère, le changement d’orientation du gouvernement).
+* Non disponible : Le résultat n’a pas été consigné ou n’est pas disponible pour toute autre raison. 
+
+
+Si la date butoir d’atteinte de la cible dépasse la fin de l’exercice 2016-2017 (après le 31 mars 2017) :
+* En voie d'être atteinte: Forte probabilité d’atteindre la cible ou aucune raison de croire que la cible ne sera pas atteinte.
+* Attention requise : Il y a des raisons de croire que la cible ne sera pas atteinte à la date butoir.
+* Aucune cible/la cible ne s’applique plus : La cible n'est pas disponible ou n’est plus pertinente parce que la politique a été modifiée ou en raison des circonstances (p. ex. la dissolution d’un ministère, le changement d’orientation du gouvernement).
+* Non disponible : S’il n’est pas possible de prédire si la cible sera rencontrée ou non d’ici la date butoir."
+"HWM","Méthode d’intervention","« Méthode d’intervention » renvoie aux moyens avec lesquels on vise les objectifs stratégiques. Les programmes utilisent cette méthode pour atteindre un résultat souhaité (par exemple des règlements, des paiements de transfert, etc.). 
+
+Chaque programme devrait avoir une méthode d’intervention principale. Toutefois, dans certains cas, il y a une méthode d’intervention secondaire (par exemple si un programme comprend des subventions et des contributions)."
+"RESULTS_MET","Atteinte","Si la date butoir d’atteinte de la cible est **avant ou d’ici l’a fin de l’exercice 2016-2017 (31 mars 2017)** :
+* La cible est atteinte : Le résultat  est supérieur à la cible minimale, inférieur à la cible maximale, dans la fourchette cible ou exactement égal à la valeur unique de la cible."
+"RESULTS_AR","Attention requise","Si la date butoir d’atteinte de la cible est **avant ou d’ici l’a fin de l’exercice 2016-2017 (31 mars 2017)** :
+* Attention requise: Le résultat est inférieur à la cible minimale, supérieur à la cible maximal, hors de la fourchette cible ou n’est pas égal à la valeur unique de la cible. 
+
+
+Si la date butoir d’atteinte de la cible dépasse la fin de l’exercice 2016-2017 (après le 31 mars 2017) :
+* Attention requise : Il y a des raisons de croire que la cible ne sera pas atteinte à la date butoir."
+"RESULTS_NOTAPP","Ne s'applique plus","Si la date butoir d’atteinte de la cible est **avant ou d’ici l’a fin de l’exercice 2016-2017 (31 mars 2017)** :
+* Aucune cible/la cible ne s’applique plus : La cible n'est pas disponible ou n’est plus pertinente parce que la politique a été modifiée ou en raison des circonstances (p. ex. la dissolution d’un ministère, le changement d’orientation du gouvernement).
+
+
+Si la date butoir d’atteinte de la cible dépasse la fin de l’exercice 2016-2017 (après le 31 mars 2017) :
+* Aucune cible/la cible ne s’applique plus : La cible n'est pas disponible ou n’est plus pertinente parce que la politique a été modifiée ou en raison des circonstances (p. ex. la dissolution d’un ministère, le changement d’orientation du gouvernement)."
+"RESULTS_NA","Non disponible","Si la date butoir d’atteinte de la cible est **avant ou d’ici l’a fin de l’exercice 2016-2017 (31 mars 2017)** :
+* Non disponible : Le résultat n’a pas été consigné ou n’est pas disponible pour toute autre raison. 
+
+
+Si la date butoir d’atteinte de la cible dépasse la fin de l’exercice 2016-2017 (après le 31 mars 2017) :
+* Non disponible : S’il n’est pas possible de prédire si la cible sera rencontrée ou non d’ici la date butoir."
+"RESULTS_OT","En voie d'être atteinte","Si la date butoir d’atteinte de la cible dépasse la fin de l’exercice 2016-2017 (après le 31 mars 2017) :
+* En voie d'être atteinte: Forte probabilité d’atteindre la cible ou aucune raison de croire que la cible ne sera pas atteinte."
+"RESULTS_COUNT","Décompte d'indicateurs",""
+

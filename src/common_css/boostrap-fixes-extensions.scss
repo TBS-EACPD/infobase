@@ -1,0 +1,503 @@
+@import "common-variables";
+
+/* tooltips */
+.glossary-tooltip-link,
+.glossary-tooltip-link:visited  {
+  text-decoration: none !important;
+  border-bottom: 1px dashed #113e78 !important;
+  color: #113e78 !important;
+}
+
+.tooltip-arrow {
+  border-top-color: #31708f !important;
+}
+
+.tooltip-inner {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  text-align: left !important;
+  border: 2px solid #8a6d3b;
+}
+
+@media (min-width:1200px){
+  .tooltip-inner {  
+    max-width: 600px !important;
+    line-height: 1.6em;
+    
+  }
+}
+
+@media (min-width:900px) and (max-width: 1199px) {
+  .tooltip-inner {  
+    max-width: 60vw !important;
+  }
+}
+
+@media (max-width:899px){
+  .tooltip-inner {  
+    max-width: 90vw !important;
+  }
+}
+/* /tooltips */
+
+/* reseting WET styles*/
+
+em {
+  /* kill the italic */
+  font-style: inherit;
+}
+
+.link-unstyled,
+.link-unstyled:link,
+.link-unstyled:hover,
+.link-unstyled:visited {
+  color: inherit;
+  text-decoration: inherit;
+}
+.clickable {
+  cursor: pointer;
+}
+
+
+.button-unstyled {
+  border: none;
+  background-color: inherit;
+  outline: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+
+.breadcrumb-external-link {
+  opacity: 0.7;
+}
+
+#wb-lng {
+  padding-top: 0 !important;
+}
+
+.wb-slc {
+  z-index: 0 !important;
+}
+
+.wb-sl {
+  z-index: 0 !important; 
+}
+
+#wb-sm .menu>li a {
+  color: #fcfcfc;
+}
+
+#wb-bc {
+  background-color: #F0F0F0;
+}
+
+@media(max-width:1000px){
+  main.container {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}
+
+#app {
+  border-top: 4px;
+  min-height: 400px;
+}
+
+div#app:focus{
+  outline: none!important;
+}
+
+h1 {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+h2 {
+  margin-top: 15px;
+  font-size: 140%;
+}
+#app {
+  font-size: 90%
+}
+
+.font-large {
+  font-size: 100%;
+}
+.font-xlarge {
+  font-size: 120%;
+}
+.font-small {
+  font-size: 80%;
+}
+.font-xsmall {
+  font-size: 70%;
+}
+.font-smaller {
+  font-size: 90%;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.bold {
+  font-weight: 500;
+}
+.bolder {
+  font-weight: bolder;
+}
+
+table.infobase-table > thead > tr > th, 
+table.infobase-table > tbody > tr > td {
+padding: 8px;
+vertical-align: top;
+} 
+table.infobase-table > thead > tr > th{
+  text-align: center;
+}
+.gradient {
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.75));
+}
+.bold {
+  font-weight : 500;
+}
+table.border,
+table.border > tbody > tr > td {
+  border: none;
+  border-collapse: separate;
+  border-spacing: 5px;
+  font-size: 13px;
+}
+.right-border {
+  border-right: 1px solid #CCC;
+}                   
+.input-sm {
+height: 25px;
+font-size: 12px;
+line-height: 1;
+}
+div.label {
+  border: none;
+  line-height: 1.5;
+  color: black;
+}
+.details-header{
+ border-top: 1px #bce9f1 solid;
+ border-bottom: 1px #bce9f1 solid;
+ margin-bottom: 20px;
+}
+.details-header h2{
+  margin: 0px;
+}
+details.details summary,
+details .toggler {
+  color: #23406F;
+  font-weight: 500;
+  padding: 5px;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+}
+details.details summary:hover{
+ border: 1px solid #ccc;
+}
+.border-bottom{
+ border-bottom: 1px solid #ccc;
+}
+.paddng-bttm-md{
+  padding-bottom: 10px;
+}
+.line{
+  width : 100%
+}
+
+details.details summary h1,
+details.details summary h2,
+details.details summary h3,
+details.details summary h4{
+  display: inline;
+}
+details[open] {
+    padding-bottom: 0px;
+}
+details > * {
+    margin-left: 0px;
+}
+
+.huge_panel_text {
+  font-size: 1.8em;
+  line-height: 2.2em;
+}
+
+.large_panel_text {
+  font-size: 1.4em;
+  line-height: 1.8em;
+}
+
+.medium_panel_text {
+  font-size: 1.2em;
+  line-height: 1.8em;
+}
+
+.small_panel_text {
+  font-size: 0.8em;
+  line-height: normal;
+}
+
+.glyphicon.v-centered {
+  position: inherit;
+  vertical-align: middle;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+
+
+/* to be used with light-background */
+a.btn-ib-light {
+  color: inherit;
+}
+.btn-ib-light {
+  background-color: inherit;
+  border: 2px solid $buttonPrimaryColor;
+  color: inherit;
+  border-radius: 10px; 
+  
+  &:focus,
+  &:active,
+  &:hover {
+    background-color: $buttonPrimaryColor;
+    color: $backgroundColor !important;
+  }
+}
+
+.btn-ib-primary { 
+   background-color: $backgroundColor;
+   border: 2px solid $buttonPrimaryColor;
+   color: $buttonPrimaryColor !important;
+   border-radius: 10px;
+}
+.btn-ib-primary:hover,
+.btn-ib-primary:active,
+.btn-ib-primary:focus, { 
+  background-color: $buttonPrimaryColor;
+  color: $backgroundColor !important;
+}
+.btn-ib-info {
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+
+.btn-height-clipper {
+  background-color: rgb(202,219,228);
+  border-color: rgb(51, 80, 117);
+  padding: 0px 40px;
+  font-weight: 500;
+  border-width: 2px;
+}
+
+li.list-group-item {
+  border: 1px solid #7b8b9e;
+  &:first-child {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  &:last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+}
+.list-group-item:hover:not(.active),
+.list-group-item:focus:not(.active) {
+  color: #555;
+  background-color: #f5f5f5;
+}
+list-group-item.active a {
+  color: white;
+}
+
+/* fix alignment when window is ex-small */
+.table-controls .control-label {
+  /* (height of .form-control) - (margin of .control-label) */
+  height: 32px;
+}
+
+/* fix odd twitter typeahead style*/
+.form-inline .form-control {
+    vertical-align: middle !important;
+}
+
+.twitter-typeahead, .twitter-typeahead input {
+	width: 100% !important;
+}
+
+
+/* for wide tables */
+.sidescroll { 
+  overflow-x: auto;
+}
+/*  faq  */
+#faq {
+  line-height: 1.5;
+}
+/* glossry */
+#glossary-key {
+  line-height: 1.5;
+}
+#glossary-key dt{
+  font-size: 1.2em;
+}
+#glossary-key dt{
+  font-size: 1.4em;
+}
+#glossary-key dt:not(:first-child){
+  border-top: 1px solid #ccc;
+  margin-top: 15px;
+  padding-top: 5px;
+}
+
+/* for top header */
+table.table-blue > thead > tr {
+  background-color : #d9edf7;
+}
+table.table-blue > thead > tr > th{
+  background-color : #d9edf7;
+  color : #31708f;
+  font-weight : 500;
+  border: none;
+  font-size: 13px;
+}
+tr.background-blue > td {
+  background-color : #d9edf7;
+  color : #31708f;
+}
+tr.background-blue > td > a{
+  color : #31708f;
+}
+
+/* 
+  The below callouts are part of the bootstrap documentation 
+  but for some reason are not included in bootstrap's bundle 
+*/
+.bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+.bs-callout h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.bs-callout p:last-child {
+    margin-bottom: 0;
+}
+.bs-callout code {
+    border-radius: 3px;
+}
+.bs-callout+.bs-callout {
+    margin-top: -5px;
+}
+.bs-callout-default {
+    border-left-color: #777;
+}
+.bs-callout-default h4 {
+    color: #777;
+}
+.bs-callout-primary {
+    border-left-color: #428bca;
+}
+.bs-callout-primary h4 {
+    color: #428bca;
+}
+.bs-callout-success {
+    border-left-color: #5cb85c;
+}
+.bs-callout-success h4 {
+    color: #5cb85c;
+}
+.bs-callout-danger {
+    border-left-color: #d9534f;
+}
+.bs-callout-danger h4 {
+    color: #d9534f;
+}
+.bs-callout-warning {
+    border-left-color: #f0ad4e;
+    background: #f9f4d4;
+    border-color: #f90;
+}
+.bs-callout-warning h4 {
+    color: #f0ad4e;
+}
+.bs-callout-info {
+    border-left-color: #5bc0de;
+    background: #d7faff; 
+    border-color: #269abc;
+}
+.bs-callout-info h4 {
+    color: #5bc0de;
+}
+
+.panel.panel-info.panel-flat {
+  margin-bottom: 23px;
+  background-color: $backgroundColor;
+  border-radius: 10px;
+  border: 2px solid $primaryColor;
+}
+
+.panel.panel-info.panel-flat > .panel-heading {
+  color: $backgroundColor;
+  background-color: $primaryColor;
+}
+
+section.panel {
+  background-color: $primaryColor;
+  border-radius: 10px;
+  border: 2px solid $primaryColor;
+  overflow:hidden
+}
+
+section.panel  > .panel-heading {
+  color: $backgroundColor;
+  background-color: inherit;
+  border: none;
+}
+
+section.panel > .panel-body {
+  background-color: $backgroundColor;
+}
+
+span.status-icon-table__icon .glyphicon.v-centered {
+  vertical-align: text-top !important;
+  position: relative;
+}
+span.inline-status-icon .glyphicon.v-centered {
+  vertical-align: top !important;
+  position: relative;
+}
+
+ol, ul {
+  margin-bottom: 12px;
+}
+
+.table-striped>tbody>tr:nth-child(odd) {
+  background-color: #f5f5f5;
+}
+
+.table-striped>tbody>tr:nth-child(even) {
+  background-color: #d9edf7;
+}
+
+table.table-blue > thead > tr > th,
+tr.background-blue > td {
+  background-color: rgb(37, 114, 180);
+  color: $backgroundColor;
+}
+li.checkbox > label {
+  font-weight: 300;
+}

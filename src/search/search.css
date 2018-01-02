@@ -1,0 +1,80 @@
+.tt-input ,
+.tt-query {
+   width: 500px
+}
+.tt-query {
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.tt-hint {
+    color: #999
+}
+
+.tt-dropdown-menu {
+  width: 100%;
+  margin-top: 12px;
+  padding: 8px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+  max-height: 400px;
+  overflow-y: auto;
+  max-width: 100vw;
+}
+
+.tt-suggestion {
+  padding: 3px 20px;
+  font-size: 1.4em;
+  line-height: 1.8em;
+  cursor: pointer;
+}
+
+.tt-suggestion:not(:first-child){
+  border-top: 1px solid #eee;
+}
+
+.multi-search .tt-suggestion:last-child {
+  margin-bottom: 24px;
+}
+
+[class*='tt-dataset-'] > header {
+  margin-top: 0px;
+  padding: 0px 20px 3px 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 1.8em;
+  line-height: 1.8em;
+}
+
+.tt-suggestion.tt-cursor {
+    color: #fff;
+    background-color: #aec8d8;
+
+}
+.tt-suggestion p {
+    margin: 0;
+}
+
+input.tt-query.form-control.tt-input {
+  background-color: white;
+}
+
+input::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.twitter-typeahead > .search-glyphicon-container {
+  position: absolute; 
+  height: 100%; 
+  right: 8px; 
+  top: 0px; 
+  display: flex; 
+  align-items: center;
+}
+
+.twitter-typeahead > .search-glyphicon-container > .glyphicon-search {
+  font-size: 25px;
+  color: #777;
+}

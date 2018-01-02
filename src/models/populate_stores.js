@@ -1,0 +1,313 @@
+const {
+  Ministry, 
+  Program, 
+  Dept, 
+  Tag, 
+  CRSO,
+  Minister,
+  InstForm,
+} = require("./subject");
+const { GlossaryEntry } = require('./glossary.js');
+const { fetch_and_inflate } =require('../core/utils.js');
+const { text_maker } = require("./text");
+const { populate_global_footnotes } = require('./populate_footnotes.js');
+
+
+module.exports.populate_stores = function(){
+  return (
+    window.binary_download && !window.isIE() ? 
+    fetch_and_inflate(`lookups_${window.lang}_min.html`) :
+    $.ajax({url : `lookups_${window.lang}.html`})
+  ).then( text => {
+    process_lookups(JSON.parse(text));
+  });
+};
+
+function process_lookups(data){
+  
+  //convert the csv's to rows and drop their headers
+  _.chain(data)
+    .omit('global_footnotes') //global footnotes already has its header dropped
+    .each( (csv_str,key) => {
+      data[key] = d4.csvParseRows($.trim(csv_str));
+      data[key].shift(); // drop the header
+    })
+    .value()
+
+ 
+  //TODO: stop referring to data by the names of its csv, design an interface with copy_static_assets.js
+  populate_igoc_models({
+    dept_to_table_id: data['DeptcodetoTableID.csv'],
+    org_to_minister: data['OrgtoMinister.csv'],
+    inst_forms: data['InstForm.csv'],
+    ministers: data['Minister.csv'],
+    ministries: data['Ministry.csv'],
+    urls: data['URL.csv'],
+    igoc_rows: data['IGOC.csv'],
+  });
+
+  populate_glossary(data["Glossary.csv"]);
+
+  create_tag_branches(data["program_tag_types.csv"]);
+  populate_program_tags(data["program_tags.csv"]);
+  populate_socr_tags(data["CRSODefinition.csv"]);
+  populate_programs(data["program.csv"]);
+
+  //once all programs and tags are created, link them 
+  populate_program_tag_linkages(data["tags_m2m_programs.csv"]);
+
+  populate_global_footnotes(data.global_footnotes);
+
+};
+
+const url_id = num => `_${num}`; //make sure the regular keys from the pipeline aren't interpreted as array indices
+function populate_igoc_models({
+  dept_to_table_id,
+  org_to_minister,
+  inst_forms,
+  ministers,
+  ministries,
+  urls,
+  igoc_rows,
+}){
+  //populate ministry models
+  _.each(ministries, ([id, name]) => {
+    Ministry.create_and_register(id,name);
+  });
+  //populate minister models
+  _.each(ministers, ([id,name]) => {
+    Minister.create_and_register(id,name);
+  });
+
+  //populate institutional forms hierarchy model
+  _.each(inst_forms, ([id, parent_id, name]) => {
+    InstForm.create_and_register(id, name);      
+  });
+  //once they're all created, create bi-directional parent-children links
+  _.each(inst_forms, ([id, parent_id, name]) => {
+    const inst = InstForm.lookup(id);
+    if(!_.isEmpty(parent_id)){
+      const parent = InstForm.lookup(parent_id);
+      parent.children_forms.push(inst)
+      inst.parent_form = parent;
+    }
+  });
+
+  //populate a temporary URL store
+  const url_lookup = _.chain(urls)
+    .map(([id,url])=> [url_id(id), url]) //force it to be a string just in case interpreted as array
+    .fromPairs()
+    .value();
+
+  //populate temporary org-to-minister store
+  //structured as [org_id, minister_id]
+  const minister_by_org_id = _.chain(org_to_minister)
+    .groupBy(0)
+    .mapValues( (group, org_id) => _.map(group,1) )
+    .value();
+
+
+  const statuses = [
+    null,
+    text_maker('active'),
+    text_maker('transferred'),
+    text_maker('dissolved'),
+  ];
+
+  _.each(igoc_rows, row => {
+    const [
+      org_id,
+      dept_code,
+      fancy_acronym,
+      legal_name,
+      applied_title,
+      status,
+      _legislation,
+      mandate,
+      pas_code,
+      schedule,
+      faa_hr,
+      auditor_str,
+      incorp_yr,
+      fed_ownership,
+      end_yr,
+      notes,
+      _dp_status,
+      ministry_id,
+      inst_form_id,
+      qfr_url_id,
+      eval_url_id,
+      dp_url_id,
+      website_url_id,
+      article1,
+      article2,
+      other_lang_fancy_acronym,
+      other_lang_applied_title, 
+    ] = row;
+
+
+    const [
+      qfr_url,
+      eval_url,
+      dp_url,
+      website_url,
+    ] = _.map([ 
+      qfr_url_id,
+      eval_url_id,
+      dp_url_id,
+      website_url_id,
+    ], url_key => url_lookup[url_id(url_key)]);
+
+    const def_obj = {
+      unique_id: +org_id,
+      acronym: dept_code,
+      fancy_acronym,
+      legal_name,
+      applied_title,
+      status: statuses[+status],
+      _legislation, //no longer array based
+      mandate,
+      pas_code,
+      schedule,
+      faa_hr,
+      //note auditor is no longer an array, it's either comma separated or 'and' separated
+      auditor_str, 
+      incorp_yr,
+      fed_ownership,
+      end_yr,
+      notes,
+      _dp_status: +_dp_status,
+      qfr_url,
+      eval_url,
+      dp_url,
+      website_url,
+      le_la: article1 || "",
+      du_de_la: article2 || "",
+      other_lang_fancy_acronym,
+      other_lang_applied_title, 
+    };
+
+    const org_instance = Dept.create_and_register(def_obj)
+
+    if(!_.isEmpty(ministry_id)){
+      //create two way link to ministry
+      const ministry = Ministry.lookup(ministry_id);
+      org_instance.ministry = ministry;
+      ministry.orgs.push(org_instance);
+    }
+    
+    //create one way link to ministers
+    const ministers = _.map(
+      minister_by_org_id[org_id],
+      minister_id => Minister.lookup(minister_id)
+    );
+    org_instance.ministers = ministers;
+
+    //create two way link to inst form
+    const inst_form = InstForm.lookup(inst_form_id);
+    org_instance.inst_form = inst_form;
+    inst_form.orgs.push(org_instance);
+    
+  });
+
+  //for each row in dept_to_table_id
+  //attach table_ids to org 
+  _.each(dept_to_table_id, ([dept_code, table_id])=> {
+    Dept.lookup(dept_code).table_ids.push(table_id);
+  });
+
+}
+
+
+function populate_glossary(lines){
+  //const [key, title_en, title_fr, def_en, def_fr, link_en, link_fr ] = [0,1,2,3,4,5,6];
+  const [key, term, markdown_def ] = [0,1,2];
+  
+  lines.forEach( line => {
+    GlossaryEntry.register(
+      line[key],
+      new GlossaryEntry(
+        line[key], 
+        line[term],
+        line[markdown_def]
+      )
+    );
+  });
+}
+
+function create_tag_branches(program_tag_types){
+  const l = window.lang === "en";
+  _.each(program_tag_types, row => {
+    Tag.create_new_root({
+      id : row[0],
+      cardinality : row[1],
+      name : row[l ? 2 :3],
+      description : row[l ? 4 :5],
+    });
+  });
+};
+
+
+function populate_program_tags(tag_rows){
+  // assumes the parent tags will be listed first
+  const l = window.lang === "en";
+  const [ name_en,name_fr,desc_en,desc_fr,tag_id,parent_id] = d4.range(0,6);
+  _.each(tag_rows, row => {
+    const parent_tag = Tag.lookup(row[parent_id]);
+    //HACKY: Note that parent rows must precede child rows
+    const instance = Tag.create_and_register({
+      id : row[tag_id],
+      name : row[l? name_en: name_fr],
+      description : row[l? desc_en: desc_fr],
+      root: parent_tag.root,
+      parent_tag,
+    });
+    parent_tag.children_tags.push(instance);
+  });
+};
+
+function populate_socr_tags(rows){
+  const [ id, dept_code,  title, desc, active] = [0,1,2,3,4];
+  _.each(rows,row => {
+    const dept = Dept.lookup(row[dept_code]);
+    const instance = CRSO.create_and_register({
+      dept,
+      id: row[id],
+      name:  row[title],
+      description: row[desc],
+      dead_so: !(+row[active]),
+    })
+    dept.crsos.push(instance);
+
+  });
+};
+
+function populate_programs(rows){
+  const [ title,dept, activity_code , crso_id, desc, active, is_internal_service] = [0,1,2,4,5,6,7];
+  _.each(rows,row => {
+    const crso = CRSO.lookup(row[crso_id]);
+    const instance = Program.create_and_register({
+      crso,
+      activity_code: row[activity_code],
+      dept: Dept.lookup(row[dept]),
+      data : {},
+      description : $.trim(row[desc].replace(/^<p>/i,"").replace(/<\/p>$/i,"")),
+      name :  row[title],
+      dead_program: !(+row[active]),
+      is_internal_service: row[is_internal_service] === "1",
+    });
+    crso.programs.push(instance);
+  });
+};
+
+
+function populate_program_tag_linkages(programs_m2m_tags){
+  const [ dept, activity, tagID] = [0,1,2];
+  _.each(programs_m2m_tags, row => {
+    const program = Program.lookup(Program.unique_id(row[dept],row[activity]));
+    const tag = Tag.lookup(row[tagID]);
+    program.tags.push(tag)
+    tag.programs.push(program)
+  }); 
+};
+

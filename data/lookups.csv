@@ -1,0 +1,107 @@
+Comments,common_key,individual_key,English Value,French Value
+,sos,1,Personnel,Personnel
+,sos,2,Transportation and Telecommunications,Transports et communications
+,sos,3,Information,Information
+,sos,4,Professional and Special Services,Services professionnels et spéciaux
+,sos,5,Rentals,Location
+,sos,6,Purchased Repair and Maintenance,Achat de services de réparation et d'entretien
+,sos,7,"Utilities, Materials and Supplies","Services publics, fournitures et approvisionnements"
+,sos,8,"Acquisition of Land, Buildings, and Works","Acquisition de terrains, de bâtiments et d'ouvrages"
+,sos,9,Acquisition of Machinery and Equipment,Acquisition de machines et de matériel
+,sos,10,Transfer Payments,Paiements de transfert
+,sos,11,Public Debt Charges,Frais de la dette
+,sos,12,Other Subsidies and Payments,Autres subventions et paiements
+,sos,20,Revenues,Revenus
+,sos,21,External Revenues,Revenus externes
+,sos,22,Internal Revenues,Revenus internes
+,tenure,Indeterminate,Indeterminate,Période indéterminée
+,tenure,Term,Term,Période déterminée
+,tenure,Casual,Casual,Employé occasionnel
+,tenure,Student,Student,Étudiant
+,provinces,AB,Alberta,Alberta
+,provinces,Abroad,Abroad,À l'étranger
+,provinces,BC,British Columbia,Colombie-Britannique
+,provinces,MB,Manitoba,Manitoba
+,provinces,NB,New Brunswick,Nouveau-Brunswick
+,provinces,NCR ON,Ontario (NCR),Ontario (RCN)
+,provinces,NCR QC,Quebec (NCR),Québec (RCN)
+,provinces,NS,Nova Scotia,Nouvelle-Écosse
+,provinces,NT,Northwest Territories,Territoires du Nord-Ouest
+,provinces,NU,Nunavut,Nunavut
+,provinces,ON (minus NCR),Ontario (non-NCR),Ontario (hors RCN)
+,provinces,PE,Prince Edward Island,Île-du-Prince-Édouard
+,provinces,QC (minus NCR),Quebec (non-NCR),Québec (hors RCN)
+,provinces,SK,Saskatchewan,Saskatchewan
+,provinces,YT,Yukon,Yukon
+,provinces,NL,Newfoundland and Labrador,Terre-Neuve-et-Labrador
+,provinces,Unknown,Not Available,Non disponible
+,provCodes,AB,AB,AB
+,provCodes,Abroad,Abroad,À l'étranger
+,provCodes,BC,BC,BC
+,provCodes,MB,MB,MB
+,provCodes,NB,NB,NB
+,provCodes,NCR,NCR,RCN
+,provCodes,NS,NS,NE
+,provCodes,NT,NT,TN
+,provCodes,NU,NU,NU
+,provCodes,ON,ON,ON
+,provCodes,PE,PE,PE
+,provCodes,QC,QC,QC
+,provCodes,SK,SK,SK
+,provCodes,YT,YT,YT
+,provCodes,NL,NL,NL
+,provCodes,Unknown,N.A.,N.D.
+,template_lookups,pre_public_accounts,FALSE,FALSE
+,template_lookups,in_year_month_name,January,Janvier
+,template_lookups,qfr_last_year,2015-16,2015-2016
+,template_lookups,qfr_in_year,2016-17,2016-2017
+,template_lookups,qfr_month_name,September 30th,30 septembre
+,template_lookups,qfr_month_quarter_names,July to September,juillet à septembre
+,template_lookups,qfr_in_year_end,"March 31st, 2017",31 mars 2017
+,template_lookups,qfr_last_year_end,"March 31st, 2016",31 mars 2016
+,template_lookups,people_fiscal_year,2015-16,2015-2016
+,template_lookups,pa_last_year,2015-16,2015-2016
+,template_lookups,pa_last_year_2,2014-15,2014-2015
+,template_lookups,pa_last_year_3,2013-14,2013-2014
+,template_lookups,pa_last_year_4,2012-13,2012-2013
+,template_lookups,pa_last_year_5,2011-12,2011-2012
+,template_lookups,open_year,2016-17,2016-2017
+,template_lookups,est_in_year,2016-17,2016-2017
+,template_lookups,est_last_year,2015-16,2015-2016
+,template_lookups,est_last_year_2,2014-15,2014-2015
+,template_lookups,est_next_year,2017-18,2017-2018
+,template_lookups,lapse_in_year,2016-17,2016-2017
+,template_lookups,lapse_last_year,2015-16,2015-2016
+,template_lookups,planning_year_1,2016-17,2016-2017
+,template_lookups,planning_year_2,2017-18,2017-2018
+,template_lookups,planning_year_3,2018-19,2018-2019
+,template_lookups,Gov,Government of Canada,Gouvernement du Canada
+,template_lookups,mar_31,March 31st,31 mars
+,template_lookups,short_thousand," <span class=""text-nowra"">($000)</span> "," <span class=""text-nowra"">(000$)</span>"
+,template_lookups,last_estimates,Supplementary Estimates C,Budget supplémentaire des dépenses C
+,template_lookups,mains_date,late February,À la fin de février
+,template_lookups,quarter_name,Q2,deuxième trimestre
+,template_lookups,p,P10,P10
+,template_lookups,tabled_estimates,2,2
+,template_lookups,lapse_historical,3,3
+,template_lookups,allotments,4,4
+,template_lookups,so,5,5
+,template_lookups,employee_type,6,6
+,template_lookups,geographic_region,7,7
+,template_lookups,employee_age,8,8
+,template_lookups,occupation_category,9,9
+,template_lookups,sick_leave,10,10
+,template_lookups,planned_expenditures,11,11
+,template_lookups,planned_ftes,12,12
+,template_lookups,maf_last_year,2015-16,2015-2016
+,template_lookups,maf_last_year_2,2014-15,2014-2015
+,template_lookups,ppl_last_year,2015-16,2015-2016
+,template_lookups,ppl_last_year_2,2014-15,2014-2015
+,template_lookups,ppl_last_year_3,2013-14,2013-2014
+,template_lookups,ppl_last_year_4,2012-13,2012-2013
+,template_lookups,ppl_last_year_5,2011-12,2011-2012
+,template_lookups,ppl_sick_leave_year,2014-15,2014-2015
+,template_lookups,ppl_sick_leave_year_2,2013-14,2013-2014
+,template_lookups,ppl_sick_leave_year_3,2012-13,2012-2013
+,template_lookups,ppl_sick_leave_year_4,2011-12,2011-2012
+,template_lookups,ppl_sick_leave_year_5,2010-11,2010-2011

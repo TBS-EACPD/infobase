@@ -1,0 +1,114 @@
+explore_common_text:
+  transform: [handlebars, markdown]
+  en: |
+   Click on the circles below to visually compare how much organizations spend and how many people they employ.  
+   
+   
+   To get started, choose from one of the following exploration perspectives: 
+   * By **Total Spending** shows federal organizations grouped by ministerial portfolio and total {{gl_tt "expenditures" "EXP"}}.
+   * By **Total Number of Employees** shows federal organizations grouped by the number of employees they employ.
+   * By **Types of Organizations** shows federal organizations grouped by their organization type (e.g. Departments, Crown Corporations).
+
+  fr: |
+   Cliquez sur les cercles ci-dessous pour comparer visuellement combien les organisations dépensent et combien de personnes elles emploient.  
+   
+   
+   Pour commencer, choisissez à partir de l’une des perspectives d’exploration suivantes : 
+   * Par **dépenses totales** – montre les organisations fédérales groupées par portefeuille ministériel et {{gl_tt "dépenses" "EXP"}} totales.
+   * Par **nombre total d’employés** – montre les organisations fédérales groupées selon le nombre total d’employés qu'elles emploient.
+   * Par **types d’organisations** – montre les organisations fédérales groupées par leur type d’organisation (p. ex. ministères, sociétés d’État).
+
+explore_dept_text:
+  transform: [handlebars, markdown]
+  en: |
+   Organizations are grouped by their ministerial portfolio size based on their total 
+   expenditures in **{{pa_last_year}}** (totaling **{{fmt_compact_written gov_exp_pa_last_year}}** for the government).  Click on any 
+   of the groupings to see the organizations or ministries within.
+
+  fr: |
+   Les organisations sont regroupées selon la taille de leur portefeuille ministériel, laquelle est 
+   déterminée par le total de leurs dépenses pour **{{pa_last_year}}** (un total de **{{fmt_compact_written gov_exp_pa_last_year}}** pour le gouvernement). 
+   Cliquez sur l’un des groupes pour voir les organisations ou ministères qu’il contient.
+
+explore_dept-type_text:
+  transform: [handlebars, markdown]
+  en: |
+   These organizations are grouped by [types of Organizations](http://www.tbs-sct.gc.ca/reports-rapports/cc-se/institution/forms-formulaires-eng.asp) 
+   and by their size based respectively on the 
+   [Inventory of Federal Organizations and Interests](http://www.tbs-sct.gc.ca/reports-rapports/cc-se/index-eng.asp) and their expenditures for {{pa_last_year}}. 
+   Click on each grouping to see the organizations within.
+
+  fr: |
+   Ces organisations sont regroupées selon leur [type d’organisation](http://www.tbs-sct.gc.ca/reports-rapports/cc-se/institution/forms-formulaires-fra.asp), 
+   tel qu’il figure au [Répertoire des organisations et intérêts fédéraux](http://www.tbs-sct.gc.ca/reports-rapports/cc-se/index-fra.asp) et 
+   selon leurs dépenses pour {{pa_last_year}}. Cliquez sur chaque groupe pour voir les organisations qu’il contient.
+
+explore_people-total_text:
+  transform: [handlebars, markdown]
+  en: |
+   Organizations are grouped by their size based on their total number of {{gl_tt "Full-Time Equivalents (FTEs)" "FTE"}} in **{{pa_last_year}}** (totaling **{{fmt_big_int_real gov_fte_pa_last_year}}** FTEs for the government). 
+   Click on any of the groupings to see the number of FTEs per organizations.
+
+  fr: |
+    Les organisations sont regroupées en fonction du nombre {{gl_tt "d'équivalents temps-plein (ETP)" "FTE"}} employés en **{{pa_last_year}}** (totalisant **{{fmt_compact_written gov_fte_pa_last_year}}** pour le gouvernement). 
+    Cliquez sur n'importe quel groupe pour connaître le nombre d'ETP par organisation.
+
+
+
+explore_common_t:
+  transform: [handlebars]
+  text: |
+   <div class='row'>
+   <div class="col-sm-12 col-md-12">
+    <div class='explore_description'>{{{gt "explore_common_text"}}}</div>
+    <div class="buttons mrgn-bttm-md"> 
+     <ul class='nav nav-pills nav-justified '>
+          {{#each buttons}}
+             {{#if this.active}}
+             <li class='active'>
+             <a title="{{gt 'change_layout'}}"  disabled="disabled">
+                {{this.button_text}}
+              </a>
+             {{else}}
+             <li >
+             <a title="{{gt 'change_layout'}}" href="{{this.href}}">
+                {{this.button_text}}
+              </a>
+             {{/if}}
+             </li>
+          {{/each}}
+        </ul>
+     </div>
+
+     {{{__details}}}
+
+     <div style='margin: 10px auto'>
+       <div id="__dept_search" ></div>
+     </div>
+   </div>
+   </div>
+   
+explore_t:
+  text: |
+   <div class='common_content mrgn-bttm-md'></div>
+   <div class='container dept-explore-container'>
+     <div class='row'>
+      <div class='dept-explore breadcrumb-parent well border-all col-sm-12' aria-hidden="true">
+        <div class="dept-explore breadcrumb">
+        </div>
+      </div>
+     </div>
+     <div class='row'>
+      <div class="dept-explore svg-container well col-sm-12">
+      </div>
+     </div>
+   </div>
+
+a11y_see_infograph_for:
+  transform: [handlebars]
+  en: See an infograph for {{subject.name}}
+  fr: Voir une infographie pour {{subject.name}}
+
+a11y_drill_down_label:
+  en: Drill down
+  fr: Approfondir

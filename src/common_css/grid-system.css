@@ -1,0 +1,183 @@
+/* 
+ * set o classes for grid-base text 
+*/
+.grid-row {
+  display : flex;
+  justify-content: center;
+  align-items: stretch;
+}
+.inner-grid p{
+  margin: 0px;
+}
+.grid-title {
+  padding: 10px;
+  text-align:center;
+  font-weight: 500;
+}
+.inner-grid {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.inner-grid > .small,
+.inner-grid > .tiny,
+.inner-grid > .large{
+  align-self:center;
+  text-align: center;
+  padding: 5px;
+  width: 100%
+}
+.inner-grid > .small {
+  font-size: 1em;
+}
+.inner-grid > .tiny {
+  font-size: 0.7em;
+}
+.inner-grid > .large {
+  font-size: 2em;
+}
+
+@media (min-width: 900px){
+  .lg-hide {
+     width: 0px;
+     height: 0px;
+     overflow: hidden;
+  }
+  .sm-hide {
+     display: block;
+  }
+  [class*='lg-grid-panel'] {
+    padding: 5px;
+    /* nested flex containers for cross browser (safari doesn't let children of flex use height:100% properly) support */
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+  }
+  .lg-grid-panel20 {
+    flex-grow:0;
+    flex-shrink:0;
+    flex-basis: 20%;
+    max-width: 20%;
+  }
+  .lg-grid-panel30 {
+    flex-grow:0;
+    flex-shrink:0;
+    flex-basis: 30%;
+    max-width: 30%;
+  }
+  .lg-grid-panel40 {
+    /*width : 40%;*/
+    flex-grow:0;
+    flex-shrink:0;
+    flex-basis: 40%;
+    max-width: 40%;
+  }
+  .lg-grid-panel50 {
+    flex-grow:0;
+    flex-shrink:0;
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+  .lg-grid-panel70 {
+    flex-grow:0;
+    flex-shrink:0;
+    flex-basis: 70%;
+    max-width: 70%;
+  }
+  .lg-grid-panel80 {
+    flex-grow:0;
+    flex-shrink:0;
+    flex-basis: 80%;
+    max-width: 80%;
+    /*flex: 0 0 80%;*/
+    /*padding: 5px;*/
+  }
+  .lg-grid-panel100 {
+    flex-grow:0;
+    flex-shrink:0;
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+  .lg-grid-panel-auto {
+    flex-grow: 1;
+    flex-shrink:1;
+    flex-basis: auto;
+    width: 100%; /* also really hacky but necessary for IE11 */
+    min-width: 0px; /* hacky but necessary to sort of apply min-width: auto */
+  }
+  .lg-1third {
+    flex-grow:0;
+    flex-shrink:0;
+    flex-basis: 33%;
+    max-width: 33%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .lg-1half {
+    flex-grow:0;
+    flex-shrink:0;
+    flex-basis: 50%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+}
+@media (max-width: 1100px){
+  .inner-grid > .large {
+    font-size: 1.5em;
+  }
+}
+@media (max-width: 900px){
+  .sm-grid-panel {
+    width : 100%;
+    padding: 5px;
+  }
+  .grid-row {
+    flex-direction:column;
+  }
+  .lg-hide {
+     display: show;
+  }
+  .sm-hide {
+     display: none;
+  }
+  .md-clearfix{
+    clear: both;
+  }
+  .sm-full {
+    width: 100%;
+  }
+}
+
+/* .lg-grid > .grid-row > lg-grid-panel30.key_concept_term */
+
+.key_concept_term {
+  border-bottom: 1px solid rgb(123, 139, 157);
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 20px;
+  color: #333333;
+  font-weight: 500;
+}
+
+/* .lg-grid > .grid-row > lg-grid-panel70.key_concept_def */
+.key_concept_def {
+  border-bottom: 1px solid rgb(123, 139, 157);
+  padding: 10px;
+  padding-top: 20px;
+  background-color: #fdfdfd;
+}
+
+.key_concept_header {
+  color: #fdfdfd;
+  background-color: rgba(37,114,180,0.7);
+  border: 1px solid rgba(37,114,180,0.9);
+  text-align: center;
+  padding: 10px;
+}
+
+.grid-row:last-child > .key_concept_term,
+.grid-row:last-child > .key_concept_def {
+  border: none;
+}

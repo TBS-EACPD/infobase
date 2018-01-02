@@ -1,0 +1,67 @@
+gov_dp_summary_title:
+  transform: [handlebars]
+  en: Summary of planned results ({{planning_year_1}})
+  fr: Sommaire des résultats planifiés ({{planning_year_1}})
+
+gov_results_intro_text:
+  transform: [handlebars,markdown]
+  en: | 
+    Each year, the Government of Canada tables forward looking spending plans in Parliament. In previous years, these were known as Reports on Plans and Priorities (RPPs).  
+    
+    
+    With the introduction of the new [Policy on Results](https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300), RPPs were replaced with {{gl_tt "Departmental Plans" "DP"}} and {{gl_tt "Departmental Results Reports" "DRR"}} for the 2017-18 fiscal year. These documents describe:
+    * How departments intend to allocate resources (funding and employees) across {{gl_tt "programs" "PROG"}} over a three year period;
+    * The {{gl_tt "Results" "RESULT"}} they seek to achieve with these resources; and,
+    * The detailed {{gl_tt "indicators" "IND_RESULT"}} to measure their performance in attaining these results.
+    
+    
+    The [Policy on Results](https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300) also introduced a new reporting structure. Under the former [Policy on Management, Resources and Results Structures](http://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=18218) departments were only required to report against a small number of {{gl_tt "Strategic Outcomes" "SO"}}.  Now, organizations will report against 
+    {{gl_tt "Departmental Results Frameworks" "DRF"}} designed to provide a better indication of the results a departments wants to achieve and how they intend to achieve them.
+
+
+    <strong>7 out of a total of 83 organizations required to table a Departmental Plan started reporting under the new format in the 2017-18 fiscal year.</strong> 
+
+  fr: |
+    Le gouvernement du Canada dépose chaque année des plans prospectifs des ministères au Parlement, appelés antérieurement "rapports sur les plans et les priorités".
+
+
+    Avec l'adoption de la nouvelle Politique sur les résultats, les RPP ont été remplacés par les {{gl_tt "plans ministériels" "DP"}} et les {{gl_tt "rapports sur les résultats ministériels" "DRR"}} pour l'exercice 2017-2018. Ces documents précisent:
+    * la répartition des ressources (financement et employés) parmi les {{gl_tt "programmes" "PROG"}} du ministère sur une période de trois ans;
+    * les {{gl_tt "résultats" "RESULT"}} à atteindre avec ces ressources;
+    * les {{gl_tt "indicateurs" "IND_RESULT"}} pour mesurer le rendement dans l'atteinte des résultats.
+
+
+    La [politique sur les résultats](https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300) crée ainsi une nouvelle structure rédditionnelle. Aux termes de l'ancienne [Politique sur la SGRR](https://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=18218), les ministères ne devaient rendre compte que d'un nombre 
+    restreint de {{gl_tt "résultats stratégiques" "SO"}}. Dorénavant, la reddition des compte des organisations se fait en fonction des {{gl_tt "cadres ministériel des résultats" "DRF"}}, qui précisent plus clairement les résultats que le ministère veut atteindre et comment il compte s'y prendre pour le faire.
+
+
+    <strong>7 des 83 organisations qui doivent déposer un plan ministériel ont amorcé la production de rapports pour l'exercice 2017-2018 selon la nouvelle formule.</strong>
+
+gov_paa_title:
+  transform: [handlebars,markdown]
+  text: |
+    {{gl_title "MRRS"}} ({{gl_tt (gt "PAA") "PAA"}})
+
+gov_paa_text:
+  transform: [handlebars,markdown]
+  en: |
+    To find a specific organization that report under the old [{{gt "MRRS"}}](http://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=18218) and learn more about its planned results, search a complete list of organizations in the [Explorer](#resource-explorer).
+  fr: |
+    Pour trouver une organisation précise qui rend compte aux termes de l'ancienne [{{gt "MRRS"}}](http://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=18218) et en savoir plus sur ses résultats escomptés, chercher une liste complète des organisations dans [l'explorateur](#resource-explorer).
+
+
+gov_drf_title:
+  transform: [handlebars,markdown]
+  text: |
+    {{gl_title "POL_RES"}} ({{gl_tt (gt "DRF") "DRF"}})
+
+
+gov_drf_text:
+  transform: [handlebars,markdown]
+  en: |
+    The following organizations report under the new [{{gl_title "POL_RES"}}](https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300). You can simply click on the name of an organization to learn more on their planned results.
+  fr: |
+    Les organisations suivantes rendent compte aux termes de la nouvelle [politique sur les résultats](https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300). Il suffit de cliquer sur le nom d'une organisation pour en savoir plus sur ses résultats escomptés. 
+
+
+

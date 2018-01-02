@@ -1,0 +1,199 @@
+
+.tag-cloud.tag-cloud-main {
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid #aaa;
+  margin: 10px 5px; 
+}
+
+.tag-cloud.tag-cloud-legend {
+  display: inline;
+}
+
+
+.tag-cloud > li {
+  display: inline;
+  padding: 5px 8px 5px 8px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 2px;
+  margin: 5px;
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce9f1;
+  line-height: 1.8em;;
+  font-size: 1em;
+}
+
+.tag-cloud > li > button {
+  background-color: #d9edf7;
+  color: #31708f;
+}
+
+.tag-cloud-main > li:active, 
+.tag-cloud-main > li:hover, 
+.tag-cloud-main > li > button:focus {
+  border: 1px solid #31708f;
+}
+
+.tag-cloud > li.active {
+  color: #fff;
+  background-color: #2572b4;
+  border-color: #2572b4;
+}
+
+
+.tag-cloud > li.active > button {
+  color: #fff;
+  background-color: #2572b4;
+}
+
+
+.item-cloud-row {
+  min-height: 300px;
+  margin-bottom: 100px;  
+  padding: 0;
+}
+
+@media (min-width: 992px) { 
+  .item-cloud-col {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .item-cloud-col > div {
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 992px) { 
+  .item-cloud-col > div {
+    margin: 10px;
+  }
+}
+
+
+.item-card {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: rgba(37,114,180,1);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-item: stretch;
+}
+
+.item-card > .item-title {
+  padding: 40px 5px;
+  font-weight: 500;
+  text-align:center;
+  color: #31708f;
+  background-color: rgba(37,114,180,0.2);
+  border-color: rgba(37,114,180,1);
+  height: 40px;
+}
+
+
+.item-card > .item-title.active {
+  color: #fff;
+  background-color: #2572b4;
+  border-color: #2572b4;
+  transition: background-color 500ms ease-in;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+
+.item-card-footer {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  min-height: 50px;
+
+}
+
+.item-tag-container {
+  max-width: 85%;
+  width: 85%;
+}
+
+.item-select > button {
+  width: 100px;
+  min-height: 35px !important
+}
+
+
+.item-card .item-description {
+  padding: 10px;
+}
+
+.item-tags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  line-height: 1em;
+  font-size: 0.8em;
+  padding: 0;
+}
+
+.item-tags > .item-tag {
+  display: inline;
+  padding: 5px 7px;
+  margin: 5px 10px 0 0;
+  transition: background-color 500ms ease-in;
+  color: black;
+  background-color: #d9edf7;
+  border-radius: 0;
+  border-style: solid;
+  border-width: 0 0 0 4px;
+  border-color: #269abc;
+}
+
+.item-tags > .item-tag.active {
+  color: #fff;
+  background-color: #2572b4;
+  border-color: #2572b4;
+}
+
+.item-card > .item-select {
+  line-height: 1em;
+  font-size: 0.8em;
+  padding: 5px 10px;
+  align-self: flex-end;
+  padding: 5px;
+}
+
+.transi-height-enter {
+  max-height: 1px;
+  opacity: 0.01;
+}
+
+.transi-height-enter-active {
+  max-height: 500px;
+  opacity: 1;
+  transition: max-height 500ms ease-in, opacity 500ms ease-in;
+}
+
+.transi-height-leave {
+  max-height: 500px;
+  opacity: 1;
+}
+
+.transi-height-leave-active {
+  max-height: 1px;
+  opacity: 0.01;
+  transition: max-height 500ms ease-out, opacity 500ms ease-out;
+
+}
+
+/* our app-wide a:visited: black is overriding all the bootstrap white on dark blue styles...  */
+.nav-pills > li.active > a {
+  color: white !important;
+}

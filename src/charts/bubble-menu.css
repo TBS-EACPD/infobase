@@ -1,0 +1,195 @@
+.button-unstyled.bubble-button {
+  border-style: solid;
+  border-width: 2px;
+  text-align: center;
+  font-weight: 300;
+  padding: 10px;
+}
+
+.bubble-menu > .bubble-button .title,
+.bubble-menu > .bubble-button .sub-title {
+  min-width: 100%;
+}
+
+@media (min-width: 1000px){
+
+
+  .bubble-menu {
+    display: flex;
+    min-height: 350px;
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bubble-button {
+    text-decoration: none;
+    margin: 5px;
+    padding: 15px;
+    display: flex;
+    border-radius: 100%;
+  }
+
+  .bubble-button.active {
+    line-height: 1.8em;
+  }
+
+
+  .bubble-button .sub-title{
+    overflow: hidden;
+    display: block;
+
+  }
+
+  .bubble-button .sub-title > header{
+    font-weight: bolder;  
+    margin-bottom: 5px;
+    font-size: 1.2em;
+  }
+
+  .bubble-menu > .bubble-button .title {
+    display: block;
+  }
+
+
+}
+
+
+@media (max-width: 999px){
+  .bubble-menu {
+    display: flex;
+    flex-direction: column;
+  }
+  .bubble-button  {
+    margin: 2px;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100% !important;
+    height: auto !important;
+
+  }
+  
+}
+
+/* data-type colors 
+ .bubble-button.<type>-bubble refers to a bubble button 
+ .bubble-button.<type>-bubble.active refers to a bubble button that is currently picked
+
+  the bubbles have many inline styles set by d3 for animation purposes. Only colours should be used here.
+
+*/
+
+.bubble-button {
+  transition: background-color 150ms ease, color  350ms ease;
+}
+.bubble-button:not(.active):not(:hover):not(:active):not(:focus) {
+  background-color: transparent;
+}
+
+.bubble-button.active,
+.bubble-button:focus,
+.bubble-button:active,
+.bubble-button:hover {
+  color: #fff;
+}
+
+
+.bubble-button.finance-data-type {
+  border-color: #823BB1;
+}
+.bubble-button.finance-data-type:not(.active):not(:hover):not(:focus):not(:active) {
+  color: #823BB1;
+  border-color: #823BB1;
+}
+
+.bubble-button.finance-data-type.active,
+.bubble-button.finance-data-type:focus,
+.bubble-button.finance-data-type:active,
+.bubble-button.finance-data-type:hover {
+  background-color: #823BB1;
+}
+
+.bubble-button.ppl-data-type{
+  border-color:#2070B9;
+}
+.bubble-button.ppl-data-type:not(.active):not(:hover):not(:focus):not(:active) {
+  color:#2070B9;
+}
+
+.bubble-button.ppl-data-type.active,
+.bubble-button.ppl-data-type:focus,
+.bubble-button.ppl-data-type:active,
+.bubble-button.ppl-data-type:hover {
+  background-color:#2070B9;
+}
+
+
+.bubble-button.results-data-type {
+  border-color:#48998c;
+}
+.bubble-button.results-data-type:not(.active):not(:hover):not(:focus):not(:active) {
+  color:#48998c;
+}
+
+.bubble-button.results-data-type.active,
+.bubble-button.results-data-type:focus,
+.bubble-button.results-data-type:active,
+.bubble-button.results-data-type:hover {
+  background-color:#48998c;
+}
+
+.bubble-button.intro-data-type {
+  border-color: #587291;
+}
+.bubble-button.intro-data-type:not(.active):not(:hover):not(:focus):not(:active) {
+  color: #587291;
+}
+
+.bubble-button.intro-data-type.active,
+.bubble-button.intro-data-type:focus,
+.bubble-button.intro-data-type:active,
+.bubble-button.intro-data-type:hover {
+  background-color: #587291;
+}
+
+.bubble-button.related-data-type {
+  border-color: #114B5F;
+}
+.bubble-button.related-data-type:not(.active):not(:hover):not(:focus):not(:active) {
+  color: #114B5F;
+}
+
+.bubble-button.related-data-type.active,
+.bubble-button.related-data-type:focus,
+.bubble-button.related-data-type:active,
+.bubble-button.related-data-type:hover {
+  background-color: #114B5F;
+}
+
+.bubble-button.structure-data-type {
+  border-color: #3E931F;
+}
+.bubble-button.structure-data-type:not(.active):not(:hover):not(:focus):not(:active) {
+  color: #3E931F;
+}
+
+.bubble-button.structure-data-type.active,
+.bubble-button.structure-data-type:focus,
+.bubble-button.structure-data-type:active,
+.bubble-button.structure-data-type:hover {
+  background-color: #3E931F;
+}
+
+.bubble-button.all_data-data-type {
+  border-color: #009652;
+}
+.bubble-button.all_data-data-type:not(.active):not(:hover):not(:focus) {
+  color: #009652;
+}
+
+.bubble-button.all_data-data-type.active,
+.bubble-button.all_data-data-type:focus,
+.bubble-button.all_data-data-type:active,
+.bubble-button.all_data-data-type:hover {
+  background-color: #009652;
+}

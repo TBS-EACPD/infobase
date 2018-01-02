@@ -1,0 +1,51 @@
+pa_title:
+  en: Public Accounts of Canada
+  fr: Comptes publics du Canada
+
+qfr_title:
+  en: Quarterly Financial Reports (QFR)
+  fr: Rapports financiers trimestriels (RFT)
+
+estimates_title:
+  en: Main Estimates and Supplementary Estimates (A, B and C)
+  fr: Budget principal de dépenses et budgets supplémentaires de dépenses (A, B et C)
+
+cfmrs_title:
+  en: Central Financial Management Reporting System (CFMRS)
+  fr: Système central de gestion des rapports financiers (SCGRF)
+
+rps_title:
+  en: Regional Pay System (People Management Data)
+  fr: Système régional de paye (Données sur la gestion des personnes)
+
+dp_title:
+  en: Departmental Plans
+  fr: Plans Ministériels
+
+drr_title:
+  en: Departmental Results Reports
+  fr: Rapport sur les résultats ministériels
+
+igoc_source_title:
+  en: Inventory of Federal Organizations and Interests
+  fr: Répertoire des organisations et intérêts fédéraux
+
+igoc_source_desc:
+  en: The Inventory of Federal Organizations and Interests provides a comprehensive listing of federal organizations and interests that can be grouped by various categories (e.g., by portfolio).
+  fr: Le Répertoire des organisations et intérêts fédéraux dresse la liste complète des organisations fédérales et des sociétés dans lesquelles le Canada détient des intérêts, que l’on peut regrouper en diverses catégories (p. ex. par portefeuille). 
+
+
+drr_results_item_name:
+  en: Performance information (results and indicators) by Program and by Organization
+  fr: Information sur le rendement (résultats et indicateurs) par programme et par organisation
+
+dp_results_item_name:
+  en: Planned performance information by Program and by Organization
+  fr: Information sur le rendement prévu par programme et par organisation
+
+igoc_item_name:
+  en: Federal organizations and interests
+  fr: Organisations et intérêts fédéraux
+
+
+

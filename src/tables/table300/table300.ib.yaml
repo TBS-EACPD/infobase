@@ -1,0 +1,51 @@
+table300_short: 
+  transform: [handlebars,markdown]
+  en: |
+   Using data from the  {{gl_tt "Central Financial Management Reporting System (CFMRS)" "CFMRS"}}, this table presents {{gl_tt "Program" "PROG"}} {{gl_tt "expenditures" "BUD_EXP"}} by authority type ({{gl_tt "voted" "VOTED"}} and {{gl_tt "statutory" "STAT"}}) for {{pa_last_year}}.
+
+  fr: |
+   Ce tableau présente les {{gl_tt "dépenses" "BUD_EXP"}} de {{gl_tt "programme" "PROG"}} par type d’autorisation ({{gl_tt "votées" "VOTED"}} et {{gl_tt "législatives" "STAT"}}) pour {{pa_last_year}}, selon les données du {{gl_tt "Système central de gestion des rapports financiers (SCGRF)" "CFMRS"}}.
+
+table300: 
+  transform: [handlebars,markdown]
+  en: |
+   {{{gt "table300_short"}}}
+
+   * Data for Program expenditures by authority type is not available for the Canadian Security Intelligence Service and the Communications Security Establishment. As such, totals for all Program expenditures found in this table will not match total government spending.
+
+   * Where data on Program expenditures by authority type are available, totals at the Program and organization level presented in the InfoBase will correspond to information published in the Public Accounts of Canada. 
+
+   * To ensure comparability over time, Program names and structures used in the InfoBase are sourced from the Public Accounts of Canada which may differ from an organization’s Departmental Plan.
+ 
+  fr: |
+   {{{gt "table300_short"}}}
+
+   * Les données sur les dépenses de programme par type d’autorisation ne sont pas disponibles pour le Service Canadien du renseignement de sécurité et le Centre de la sécurité des télécommunications. Par conséquent, dans le présent tableau, les totaux de toutes les dépenses de programme ne correspondront pas aux dépenses gouvernementales totales. 
+
+   * Lorsque les données sur les dépenses de programme par type d’autorisation sont disponibles, les totaux au niveau des programmes et de l’organisation figurant à l’InfoBase correspondront à l'information publiée dans les Comptes publics du Canada. 
+
+   * Pour assurer la comparabilité au fil du temps, le nom et la structure des programmes figurant à l’InfoBase proviennent des Comptes publics du Canada qui peuvent différer du plan ministériel de l’organisation.
+
+
+
+program_vote_stat_split_text:
+  transform: [handlebars, markdown]
+  en: |
+    Organizations receive authority to spend from Parliament through {{gl_tt "statutory" "STAT"}} and {{gl_tt "voted" "VOTED"}} authorities. Of the **{{fmt_compact_written program_total_exp}}** spent on this program in {{pa_last_year}}, **{{fmt_percentage1 program_stat_pct}} ({{fmt_compact_written program_stat_exp}})** came from statutory authorities and  **{{fmt_percentage1 program_voted_pct}} ({{fmt_compact_written program_voted_exp}})** came from voted authorities.
+  fr: |
+    Le Parlement accorde des autorisations de dépenser aux ministères au moyen de d’autorisations {{gl_tt "législatives" "STAT"}} et {{gl_tt "votées" "VOTED"}}. Des **{{fmt_compact_written program_total_exp}}** consacrés à ce programme en {{pa_last_year}}, **{{fmt_percentage1 program_stat_pct}} ({{fmt_compact_written program_stat_exp}})** proviennent d’autorisations législatives et **{{fmt_percentage1 program_voted_pct}} ({{fmt_compact_written program_voted_exp}})** d’autorisations votées.
+
+
+tag_vote_stat_split_text:
+  transform: [handlebars, markdown]
+  en: |
+   Organizations receive authority to spend from Parliament through {{gl_tt "statutory" "STAT"}} and {{gl_tt "voted" "VOTED"}} authorities. Of the maximum amount of **{{fmt_compact_written tag_total_exp}}** spent on all programs falling under the "**{{subj_name subject}}**" tag in {{pa_last_year}}, **{{fmt_percentage1 tag_stat_pct}}** (**{{fmt_compact_written tag_stat_exp}}**) came from statutory authorities and **{{fmt_percentage1 tag_voted_pct}}** (**{{fmt_compact_written tag_voted_exp}}**) came from voted authorities.
+
+  fr: |
+   Le Parlement accorde des autorisations de dépenser aux ministères au moyen de d’autorisations {{gl_tt "législatives" "STAT"}} et {{gl_tt "votées" "VOTED"}}. Sur le montant maximal de **{{fmt_compact_written tag_total_exp}}** dépensé pour tous les programmes étiquetés sous l'étiquette «**{{subj_name subject}}**» en {{pa_last_year}}, **{{fmt_percentage1 tag_stat_pct}}** (**{{fmt_compact_written tag_stat_exp}}**) proviennent d’autorisations législatives et **{{fmt_percentage1 tag_voted_pct}}** (**{{fmt_compact_written tag_voted_exp}}**) d’autorisations votées.
+
+vote_stat_split_title:
+  transform: [handlebars,markdown]
+  en: Voted and Statutory Split ({{pa_last_year}})
+  fr: Division des autorisations votées et législatives ({{pa_last_year}})
+

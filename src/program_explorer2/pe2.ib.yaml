@@ -1,0 +1,420 @@
+## Popup components
+partition_top_row:
+  handlebars_partial: true
+  text: |
+    <div class='mrgn-bttm-md popup-row-top popup-font-m popup-row-bottom-border'>
+      {{> "partition_popup_year"}}
+      {{> "partition_popup_spending_and_fte_values"}}
+    </div>
+partition_popup_year:
+  handlebars_partial: true
+  text: |
+    <span class='stat1 popup-font-l'> 
+      {{year}}
+    </span>
+partition_popup_spending_and_fte_values:
+  handlebars_partial: true
+  text: |
+    {{#if fte}}
+      {{> "partition_popup_spending_value_split"}}
+      {{> "partition_popup_fte_value_split"}}
+    {{else}}
+      {{> "partition_popup_spending_value_full"}}
+    {{/if}}
+partition_popup_spending_value_full:
+  handlebars_partial: true
+  text: |
+    <span class='stat1 popup-font-m'>
+    {{> "partition_popup_spending_value_common"}}
+partition_popup_spending_value_split:
+  handlebars_partial: true
+  text: |
+    <span class='stat2 stat-split popup-font-m'>
+    {{> "partition_popup_spending_value_common"}}
+partition_popup_spending_value_common:
+  handlebars_partial: true
+  text: |
+    {{#if up_to}}
+      {{gt "spent_up_to"}}
+    {{else}}
+      {{gt "spent"}}
+    {{/if}}
+      </br>
+      {{#if exp_is_negative}}
+        <text style='color:red;'>
+          {{fmt_compact1 exp}}
+        </text>
+        </br>
+        <div class='popup-revenue-text popup-font-s'>
+          {{gt "partition_revenue_explained"}} 
+        </div>
+      {{else}}
+        {{fmt_compact1 exp}}
+      {{/if}}
+    </span>
+partition_popup_fte_value_split:
+  handlebars_partial: true
+  text: |
+    <span class='stat2 right_number popup-font-m'>
+      {{#if up_to}}
+        {{gt "employed_up_to"}}
+      {{else}}
+        {{gt "employed"}}
+      {{/if}}
+      </br> 
+      {{fmt_big_int_real fte}} {{gt "ftes"}}
+    </span>
+partition_popup_name:
+  handlebars_partial: true
+  text: |
+    <div class='mrgn-bttm-md popup-row-bottom-border popup-font-xl'>
+      {{name}}
+    </div>
+partition_popup_description:
+  handlebars_partial: true
+  text: |
+    <div class='popup-font-ml'>
+      {{gt "description"}}:
+    </div>
+    <div class='mrgn-bttm-md popup-row-bottom-border popup-decription-text'>
+      {{{description}}}
+    </div>
+partition_popup_infograph_link:
+  handlebars_partial: true
+  text: |
+    <a href='#orgs/{{level}}/{{id}}/infograph' 
+      class='btn btn-xs btn-block mrgn-bttm-sm infographic' 
+      style='background-color:{{color}};'>
+      {{gt "partition_infograph_link"}}
+    </a>
+partition_popup_focus_button:
+  handlebars_partial: true
+  text: |
+    <a href='#' 
+      class='btn btn-xs btn-block mrgn-bttm-sm magnify'  
+      style='background-color:{{color}};'>
+      {{focus_text}}
+    </a> 
+
+## Templated popups
+partition_program_popup:
+  transform: [handlebars]
+  text: |
+    {{> "partition_top_row"}}
+    {{> "partition_popup_name"}}
+    <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
+      <a href='#orgs/dept/{{dept_id}}/infograph' class='infographic' style='color:inherit;'> 
+        {{dept_name}}
+      </a>
+    </div>
+    {{> "partition_popup_description"}}
+    <span class='bold' style='color:#333'>
+      {{gt 'tag'}}(s)
+    </span>
+    <ul class='list-unstyled'>
+      {{#each tags}}
+      <li>
+        <a href='#orgs/tag/{{id}}/infograph' class='infographic'>
+          {{name}}
+        </a>
+      </li>
+      {{/each}}
+    </ul>
+    {{> "partition_popup_infograph_link"}}
+partition_org_or_goca_popup:
+  transform: [handlebars]
+  text: |
+    {{> "partition_top_row"}}
+    {{> "partition_popup_name"}}
+    {{> "partition_popup_description"}}
+    {{> "partition_popup_infograph_link"}}
+partition_so_popup:
+  transform: [handlebars,markdown]
+  text: |
+    {{> "partition_top_row"}}
+    {{> "partition_popup_name"}}
+    {{> "partition_popup_description"}}
+partition_ministry_or_sa_popup:
+  transform: [handlebars]
+  text: |
+    {{> "partition_top_row"}}
+    {{> "partition_popup_name"}}
+    {{> "partition_popup_focus_button"}}
+partition_hwh_tag_popup:
+  transform: [handlebars]
+  text: |
+    {{> "partition_top_row"}}
+    {{> "partition_popup_name"}}
+    {{> "partition_popup_description"}}
+    {{> "partition_popup_infograph_link"}}
+    {{> "partition_popup_focus_button"}}
+
+## Other popups
+partition_intro_popup:
+  transform: [handlebars,markdown]
+  en: |
+    <div class="mrgn-bttm-md popup-row-bottom-border intro-popup-color">
+      <span class="stat1 popup-font-l"> 
+        The Government at a Glance
+      </span>
+    </div>
+    <div class="intro-popup-color popup-font-ml">
+      Description:
+    </div>
+    <div class="mrgn-bttm-md popup-intro-text popup-row-bottom-border popup-font-sm">
+      The Government at a Glance diagram provides a snapshot of federal government [spending]{{gl "EXP"}} and 
+      [full-time equivalent (FTE)]{{gl "FTE"}} data across various [tagging]{{gl "TAG"}} schemes by means of a single flow chart.
+      </br>
+      </br>
+      This chart was inspired by the work of the [USAFacts](https://usafacts.org/the-big-picture/spending) team.
+    </div>
+    <div class="intro-popup-color popup-font-ml">
+      Using the Diagram:
+    </div>
+    <div class="mrgn-bttm-md popup-intro-text popup-row-bottom-border popup-font-sm">
+      <ul>
+        <li>
+          Use the "Select the Data" field to choose from one of the following types of data: [Spending]{{gl "EXP"}} (how much we spent) and [Full-Time Equivalents (FTEs)]{{gl "FTE"}} (how many we employed).
+        </li>
+        <li>
+          Use the "Select a Perspective" field to choose from one of the following [tagging]{{gl "TAG"}} schemes: Ministerial Portfolios, [Spending Areas]{{gl "SA"}}, [How we Help]{{gl "HWM"}} 
+          (mechanisms to deliver programs), and [Types of Spending]{{gl "SOBJ"}} (Standard Objects).
+        </li>
+        <li>
+          Note: the Types of Spending perspective is only available if Spending is selected in the "Select the Data" field.
+        </li>
+        <li>
+          Clicking on an item in the diagram opens a popup containing details and a link to any available infographics.
+        </li>
+        <li>
+          In the popup for any item from the first column, choose “focus” to rescale the diagram using a smaller subset of the data.
+        </li>
+        <li>
+          The "Filter by Name and Description" search bar can help you find specific items. You can reset the flow chart after a search by simply erasing the text in the search bar.
+        </li>
+      </ul>
+    </div>
+    <div class="mrgn-bttm-md popup-intro-text popup-font-sm">
+      To access the underlying data in a tabular form, try our [Explorer](#resource-explorer).
+    </div>
+    <div class="popup-pointer-up"></div>
+  fr: |
+    <div class="mrgn-bttm-md popup-row-bottom-border intro-popup-color">
+      <span class="stat1 popup-font-l"> 
+        Coup d’œil sur le gouvernement
+      </span>
+    </div>
+    <div class="intro-popup-color popup-font-ml">
+      Description:
+    </div>
+    <div class="mrgn-bttm-md popup-intro-text popup-row-bottom-border popup-font-sm">
+      Le diagramme « Coup d’œil sur le gouvernement » donne un aperçu des données du gouvernement fédéral sur les [dépenses]{{gl "EXP"}} et les 
+      [équivalents temps plein (ETP)]{{gl "FTE"}} selon différents mécanismes [d’étiquetage]{{gl "TAG"}} au moyen d’un seul graphique.
+      </br>
+      </br>
+      Pour ce graphique, on s’est inspiré du travail de l’équipe [_USAFacts_](https://usafacts.org/the-big-picture/spending).
+    </div>
+    <div class="intro-popup-color popup-font-ml">
+      Dans le diagramme:
+    </div>
+    <div class="mrgn-bttm-md popup-intro-text popup-row-bottom-border popup-font-sm">
+      <ul>
+        <li>
+          Cliquez sur « Sélectionner les données » pour choisir l’un des types suivants de données : « [Dépenses]{{gl "EXP"}} » (combien nous avons dépensé) et « [Équivalents temps plein (ETP)]{{gl "FTE"}} » 
+          (combien de personnes étaient employées).
+        </li>
+        <li>
+          Cliquez sur « Sélectionner la perspective » pour choisir l’un des mécanismes [d’étiquetage]{{gl "TAG"}} suivants : « Portefeuilles ministériels », « [Secteurs de dépenses]{{gl "SA"}} », 
+          « [Comment nous aidons]{{gl "HWM"}} » (mécanismes d’exécution des programmes) et « [Types de dépenses]{{gl "SOBJ"}}  » (articles courants).
+        </li>
+        <li>
+          Nota : la fenêtre « Types de dépenses » est seulement accessible lorsque « Dépenses » a été sélectionné dans le champ « Sélectionner les données ».
+        </li>
+        <li>
+          Cliquer sur un élément du diagramme ouvre une fenêtre contextuelle contenant des renseignements ainsi qu’un lien vers une infographie.
+        </li>
+        <li>
+          Pour tout élément de la première colonne dans la fenêtre contextuelle, sélectionnez « Converger » pour redimensionner le diagramme au moyen d’un plus petit sous-ensemble de données.
+        </li>
+        <li>
+          La barre de recherche « Filtrer par le nom et la description » peut être utile pour trouver des éléments précis. Vous pouvez réinitialiser le diagramme après une recherche, il suffit d’effacer 
+          le texte dans la barre de recherche.
+        </li>
+      </ul>
+    </div>
+    <div class="mrgn-bttm-md popup-intro-text popup-font-sm">
+      Pour accéder aux données sous-jacentes sous forme de tableau, essayez notre application [_Explorer_](#resource-explorer).
+    </div>
+    <div class="popup-pointer-up"></div>
+
+## Partition specific warning grids
+program_SOBJ_warning:
+  transform: [handlebars,markdown]
+  en: |
+    <div class="lg-grid">
+      <div class="grid-row">
+        <div class="lg-grid-panel30 key_concept_term">
+          Totals for all Program expenditures do not match the total government spending
+        </div>
+        <div class="lg-grid-panel70 key_concept_def"> 
+          Data for Program expenditures by Standard Object are not available for the Canadian Security Intelligence Service and the Communication Security Establishment. As such, totals for all Program expenditures do not match the total government spending.
+        </div>
+      </div>
+    </div> 
+  fr: |
+    <div class="lg-grid">
+      <div class="grid-row">
+        <div class="lg-grid-panel30 key_concept_term">
+          Les totaux de toutes les dépenses de programmes ne correspondent pas aux dépenses totales du gouvernement
+        </div>
+        <div class="lg-grid-panel70 key_concept_def"> 
+          Les données pour les dépenses de programme par article courant ne sont pas disponibles pour le Service Canadien du renseignement de sécurité et le Centre de la sécurité des télécommunications. À ce titre, les totaux de toutes les dépenses de programmes ne correspondent pas aux dépenses totales du gouvernement.
+        </div>
+      </div>
+    </div>
+
+
+## Misc. components
+partition_spending_was:
+  transform: [handlebars]
+  en: |
+    {{#if show_root_rollup}}
+    We spent   
+    <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_compact x}}</a></p>
+    in
+    {{/if}}
+    <span class='text-nowrap'>{{pa_last_year}}</span>
+  fr: |
+    {{#if show_root_rollup}}
+    Nous avons dépensé   
+    <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_compact x}}</a></p>
+    en
+    {{/if}}
+    <span class='text-nowrap'>{{pa_last_year}}</span>
+partition_fte_was:
+  transform: [handlebars]
+  en: |
+    {{#if show_root_rollup}}
+    We employed  
+    <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int_real x}}</a></p>
+    FTEs in
+    {{/if}}
+    <span class='text-nowrap'>{{pa_last_year}}</span> 
+  fr: |
+    {{#if show_root_rollup}}
+    Nous avons employé  
+    <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int_real x}}</a></p>
+    ETP en
+    {{/if}}
+    <span class='text-nowrap'>{{pa_last_year}}</span>
+planned_spending_will_be:
+  transform: [handlebars]
+  en: |
+    {{#if show_root_rollup}}
+    We will be spending   
+    <p class='amount'><a class="infographic" href='#orgs/gov/gov/infograph/financial'>{{rawfmt_compact x}}</a></p>
+    in
+    {{/if}}
+    <span class='text-nowrap'>{{planning_year_1}}</span>
+  fr: |
+    {{#if show_root_rollup}}
+    Nous dépenserons
+    <p class='amount'><a class="infographic" href='#orgs/gov/gov/infograph/financial'>{{rawfmt_compact x}}</a></p>
+    en
+    {{/if}}
+    <span class='text-nowrap'>{{planning_year_1}}</span>
+planned_fte_will_be:
+  transform: [handlebars]
+  en: |
+    {{#if show_root_rollup}}
+    We will be employing   
+    <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int_real x}}</a></p>
+    in
+    {{/if}}
+    <span class='text-nowrap'>{{planning_year_1}}</span> 
+  fr: |
+    {{#if show_root_rollup}}
+    Nous emploieront   
+    <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int_real x}}</a></p>
+    ETP en
+    {{/if}}
+    <span class='text-nowrap'>{{planning_year_1}}</span> 
+partition_controls:
+  transform: [handlebars]
+  text: |
+    <form class="form-horizontal">
+       <div id="partition-control-info-button" class="partition-control-block" style="width:65px;">
+         <span class="glyphicon glyphicon-info-sign" tabindex="0"></span>     
+       </div>
+       <div class="partition-control-block">
+         <text>
+           {{gt "partiton_select_data"}}
+         </text>
+         <select class="form-control select_value_attr">
+           {{#each sort_vals}}
+             <option value='{{id}}'>{{text}}</option>
+           {{/each}}
+         </select>
+       </div>
+       <div class="partition-control-block">
+         <text>
+           {{gt "partiton_select_context"}}
+         </text>
+         <select class="form-control select_root">
+           {{#each presentation_schemes}}
+            <option value='{{id}}'>{{text}}</option>
+          {{/each}}
+         </select>
+       </div>
+       {{#if search}}
+       <div
+         class="partition-control-block"
+         style="width:50%; max-width:800px;">
+         <text>
+           {{gt "partiton_search_filter"}}
+         </text>
+         <input 
+           aria-label="Type at least 5 characters before submitting" 
+           type="text" 
+           class="form-control search" 
+           placeholder="{{gt "everything_search_placeholder"}}" 
+           style=" width:100%;
+           id="">
+         </input>
+       </div>
+       {{/if}}
+    </form>
+
+
+## Misc. lang
+partition_title:
+  en: The Government at a Glance
+  fr: Coup d'œil sur le gouvernement
+partition_sr_only_content:
+  transform: [markdown]
+  en: For a more accessible experience, visit the resource [explorer](#resource-explorer), which covers the same datasets.
+  fr: Pour une expérience plus accessible,  veuillez essayer [l’explorateur](#resource-explorer), qui couvre les mêmes données. 
+partition_focus_button:
+  en: Focus
+  fr: Converger
+partition_unfocus_button:
+  en: Unfocus
+  fr: Diverger
+partiton_search_filter:
+  en: Filter by Name and Description
+  fr: Filtrer par le nom et la description
+partiton_select_data:
+  en: Select the Data
+  fr: Sélectionner les données
+partiton_select_context:
+  en: Select a Perspective
+  fr: Sélectionner la perspective
+partition_infograph_link:
+  en: See the Infographic
+  fr: Voir l’infographie
+partition_revenue_explained:
+  en: Negative figures indicate that revenues exceed expenditures
+  fr: Les chiffres négatifs indiquent que les recettes dépassent les dépense
+up_to:
+  en: up to
+  fr: jusqu'à

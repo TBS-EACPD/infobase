@@ -1,0 +1,118 @@
+nav_panel:
+  transform: [handlebars]
+  text: |
+   <div class='row'>
+   </div>
+
+help_section_t:
+  transform: [handlebars]
+  text: |
+    <span class=''>
+    <a href='#glossary'>{{gt "glossary"}}</a>
+    </span>
+    <span class='mrgn-lft-md'>
+      <a href='#metadata'>{{gt "metadata"}}</a>
+    </span>
+
+
+
+details_partial_t:
+  transform: [handlebars]
+  handlebars_partial: true
+  text: |
+    {{#if summary}}
+    <details class="details">
+      <summary tabindex="0"  class='title' >
+        {{{summary}}}
+      </summary>
+      <div class='content togglee'>
+      {{#if details_partial}}
+          {{> (lookup . 'details_partial') }}
+        {{else}}
+          {{{details_content}}}
+        {{/if}}
+      </div>
+    </details>
+    {{/if}}
+
+
+
+panel_t:
+  transform: [handlebars]
+  text: |
+   <section 
+     class='panel panel-info mrgn-bttm-md' 
+     style="padding:0px;"
+    >
+     <header class='panel-heading'>
+       <div class='panel-title'>
+       </div>
+     </header>
+     <div class='panel-body'>
+       <div>
+         <div class='row equal-height-cols content'>
+           <div 
+              class='col-xs-12 col-sm-{{colsm}} {{text_class}} text'
+              style='
+               display:flex;
+               flex-direction: column;
+               justify-content: space-around;
+               -webkit-justify-content: space-around;'>
+             <div class='inner'>
+             </div>
+           </div>
+           <div class='col-xs-12 col-sm-{{colsm}} graphic'>
+             <div class='fixed-inner'>
+               <div class="inner" style='position:relative'>
+               </div>
+             </div>
+           </div>
+           <div class='clearfix'></div>
+         </div>
+        </div>
+       <div class='row'>
+         <div class='col-sm-12  mrgn-tp-md source'> </div>
+       </div>
+       <div class='row'>
+        <div class='col-sm-12 footnotes mrgn-tp-md mrgn-bttm-0'></div>
+      </div>
+   </section>
+
+source_link_text:
+  en: | 
+    See the data: 
+  fr: | 
+    Voir les données: 
+
+panel_source_t:
+  transform: [handlebars]
+  text: |
+    <span>
+      <span aria-hidden="true"> {{gt "source_link_text"}} </span>
+      <span class="sr-only"> {{gt "a11y_source_expl"}} </span>
+      <ul class="list-unstyled list-inline" style="display:inline;">
+      {{#each links}}
+        <li>
+          <a class="source-link" href="{{this.href}}">{{{this.html}}}</a>{{#unless @last}}, {{/unless}}
+        </li>
+      {{/each}}
+      </ul>
+    </span>
+
+a11y_source_expl:
+  en: To see the data in a tabular format, see the following links
+  fr: Pour voir les donées en forme tabulaire, veuillez voir les liens suivants
+
+footnotes_t:
+  transform: [handlebars,embeded-markdown]
+  text: |
+   <div  style='padding:10px'>
+   <ul class='footnote-list'>
+   {{#each footnotes}}
+     <li>
+         {{{this.text}}}
+     </li>
+   {{/each}}
+   </ul>
+   </div>
+

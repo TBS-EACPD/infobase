@@ -1,0 +1,349 @@
+sos:
+  1: 
+    text: Personnel
+  2:
+    en: Transportation and Telecommunications
+    fr: Transports et communications
+  3: 
+    text: Information
+  4:
+    en: Professional and Special Services
+    fr: Services professionnels et spéciaux
+  5:
+    en: Rentals
+    fr: Location
+  6:
+    en: Purchased Repair and Maintenance
+    fr: Achat de services de réparation et d'entretien
+  7:
+    en: Utilities, Materials and Supplies
+    fr: Services publics, fournitures et approvisionnements
+  8:
+    en: Acquisition of Land, Buildings, and Works
+    fr: Acquisition de terrains, de bâtiments et d'ouvrages
+  9: 
+    en: Acquisition of Machinery and Equipment
+    fr: Acquisition de machines et de matériel
+  10:
+    en: Transfer Payments
+    fr: Paiements de transfert
+  11:
+    en: Public Debt Charges
+    fr: Frais de la dette
+  12:
+    en: Other Subsidies and Payments
+    fr: Autres subventions et paiements
+  20:
+    en: Revenues
+    fr: Revenus
+  21:
+    en: External Revenues
+    fr: Revenus externes
+  22:
+    en: Internal Revenues
+    fr: Revenus internes
+
+tenure:
+  Indeterminate:
+    en: Indeterminate
+    fr: Période indéterminée
+  Term:
+    en: Term
+    fr: Période déterminée
+  Casual:
+    en: Casual
+    fr: Employé occasionnel
+  Student:
+    en: Student
+    fr: Étudiant
+
+
+provinces:
+  AB:
+    en: Alberta
+    fr: Alberta
+  Abroad:
+    en: Abroad
+    fr: À l'étranger
+  BC:
+    en: British Columbia
+    fr: Colombie-Britannique
+  MB:
+    en: Manitoba
+    fr: Manitoba
+  NB:
+    en: New Brunswick
+    fr: Nouveau-Brunswick
+  'NCR ON':
+    en: Ontario (NCR)
+    fr: Ontario (RCN)
+  'NCR QC':
+    en: Quebec (NCR)
+    fr: Québec (RCN)
+  NS:
+    en: Nova Scotia
+    fr: Nouvelle-Écosse
+  NT:
+    en: Northwest Territories
+    fr: Territoires du Nord-Ouest
+  NU: 
+    text: Nunavut
+  ON:
+    text: Ontario
+  'ON (minus NCR)':
+    en: Ontario (non-NCR)
+    fr: Ontario (hors RCN)
+  PE:
+    en: Prince Edward Island
+    fr: Île-du-Prince-Édouard
+  QC:
+    en: Quebec
+    fr: Québec
+  'QC (minus NCR)':
+    en: Quebec (non-NCR)
+    fr: Québec (hors RCN)
+  SK: 
+    text: Saskatchewan
+  YT: 
+    text: Yukon
+  NL:
+    en: Newfoundland and Labrador
+    fr: Terre-Neuve-et-Labrador,
+  Unknown:
+    en: Not Available
+    fr: Non disponible
+
+    
+provinces_short:
+  AB:
+    text: AB
+  Abroad:
+    en: Abroad
+    fr: À l'étranger
+  BC:
+    text: BC
+  MB:
+    text: MB
+  NB:
+    text: NB
+  'NCR ON':
+    en: ON (NCR)
+    fr: ON (RCN)
+  'NCR QC':
+    en: QC (NCR)
+    fr: QC (RCN)
+  NCR:
+    en: NCR
+    fr: RCN
+  NS:
+    en: NS
+    fr: NE
+  NT:
+    en: NT
+    fr: TN
+  NU: 
+    text: NU
+  ON:
+    text: ON
+  'ON (minus NCR)':
+    en: ON (non-NCR)
+    fr: ON (hors RCN)
+  PE:
+    text: PE
+  QC:
+    text: QC
+  'QC (minus NCR)':
+    en: QC (non-NCR)
+    fr: QC (hors RCN)
+  SK: 
+    text: SK
+  YT: 
+    text: YT
+  NL:
+    text: NL
+  Unknown:
+    en: N.A.
+    fr: N.D.
+
+occupational_category:
+  'Administration and Foreign Service':
+    key: admin_and_for
+    en: Administration and Foreign Service
+    fr: Administration et service extérieur 
+  'Administrative Support':
+    key: admin_support
+    en: Administrative Support
+    fr: Soutien administratif
+  Executive:
+    en: Executive and Law Management
+    fr: Cadres supérieurs et gestion du droit
+  Operational:
+    en: Operational
+    fr: Exploitation
+  Other:
+    en: Other
+    fr: Autre
+  'Scientific and Professional':
+    key: sci_n_prof
+    en: Scientific and Professional
+    fr: Scientifique et professionnel
+  Technical: 
+    en: Technical
+    fr: Technique
+
+
+FOL:
+  eng:
+    en: English
+    fr: Anglais
+  fre:
+    en: French
+    fr: Français
+  unknown:
+    en: Not Available
+    fr: Non disponible
+  sup:
+    en: Suppressed Data
+    fr: Données supprimées    
+    
+gender:
+  male:
+    en: Men
+    fr: Hommes
+  female:
+    en: Women
+    fr: Femmes
+  unknown:
+    en: Not Available
+    fr: Non disponible
+  sup:
+    en: Suppressed Data
+    fr: Données supprimées
+
+result_statuses:
+  past_success:
+    en: Met
+    fr: Cible atteinte
+  past_failure:
+    en: Attention required (past due)
+    fr: Attention requise (échu)
+  past_not_appl:
+    en: No longer applicable
+    fr: Ne s'applique plus
+  past_not_avail:
+    en: Not available
+    fr: Non disponible
+
+  future_success:
+    en: On track to meet target
+    fr: En voie d'atteindre la cible
+  future_failure:
+    en: Attention required
+    fr: Attention requise 
+  future_not_appl:
+    en: No longer applicable
+    fr: Ne s'applique plus
+  future_not_avail:
+    en: Not available
+    fr: Non disponible
+
+  other_success:
+    en: Met
+    fr: Cible atteinte
+  other_failure:
+    en: Attention required (past due)
+    fr: Attention requise (échu)
+  other_not_appl:
+    en: No longer applicable
+    fr: Ne s'applique plus
+  other_not_avail:
+    en: No longer applicable
+    fr: Ne s'applique plus
+
+
+result_simple_statuses:
+  success:
+    en: Met
+    fr: Cible atteinte
+  ontrack:
+    en: On track
+    fr: En voie
+  failure:
+    en: Attention required
+    fr: Attention requise
+  not_appl:
+    en: No longer applicable
+    fr: Ne s'applique plus
+  not_avail:
+    en: Not available
+    fr: Non disponible
+  
+
+
+months:
+  0:
+    text: ""
+  1: 
+    en: January
+    fr: Janvier
+  2:
+    en: February
+    fr: Février
+  3: 
+    en: March
+    fr: Mars
+  4:
+    en: April
+    fr: Avril
+  5:
+    en: May
+    fr: Mai
+  6:
+    en: June
+    fr: Juin
+  7:
+    en: July
+    fr: Juillet
+  8:
+    en: August
+    fr: Août
+  9: 
+    en: September
+    fr: Septembre
+  10:
+    en: October
+    fr: Octobre
+  11:
+    en: November
+    fr: Novembre
+  12:
+    en: December
+    fr: Décembre
+
+# fps (schedule I || faa_hr in [IV,V] )
+#   cpa: (schedule I || faa_hr IV)
+#     min_depts (schedule I)
+#     cpa_other_portion (faa_hr IV)
+#   separate_agencies (faa_hr V)
+# na (schedule !== I, faa_hr NULL)
+
+population_groups:
+  fps:
+    en: Federal Public Service
+    fr: Fonction publique fédérale
+  cpa:
+    en: Core Public Administration
+    fr: Administration publique centrale
+  cpa_min_depts:
+    en: Ministerial Departments
+    fr: Ministères
+  cpa_other_portion:
+    en: Other Portions of the Core Public Administration
+    fr: Autres secteurs de l’administration publique centrale
+  separate_agencies:
+    en: Separate Agencies
+    fr: Organismes distincts
+  na:
+    en: Not applicable
+    fr: Sans objet
+

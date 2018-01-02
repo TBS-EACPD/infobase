@@ -1,0 +1,166 @@
+require("../../graphs/spend_rev_split");
+require("../../graphs/top_spending_areas");
+require("../../graphs/detailed_program_spending_split");
+//require("../../graphs/spend_by_so_hist"); //we arent showing this stuff.
+
+exports = module.exports;
+require("./table305.ib.yaml");
+// see [here](../table_definition.html) for description
+// of the table spec
+const {
+  text_maker, 
+  years: {std_years},
+  business_constants: {
+    sos,
+  },
+} = require("../table_common");
+
+const { Program } = require("../../models/subject");
+
+
+
+module.exports = {
+  "id": "table305",
+  source: [ "CFMRS" ],
+  "tags" : [ 
+    "PA",
+    "SOBJ",
+    "EXP",
+    "PROG",
+  ],
+  "name": { 
+    "en": "Program Expenditures by Standard Object",
+    "fr": "Dépenses par programmes par article courant",
+  },
+  "title": { 
+    "en": "Program Expenditures by Standard Object {{pa_last_year}} ($000)",
+    "fr": "Dépenses par programmes par article courant {{pa_last_year}} (en milliers de dollars)",
+  },
+  add_cols () {
+    this.add_col( {
+      "type":"int",
+      "key" : true,
+      "hidden" : true,
+      "nick" : "dept",
+      "header":'',
+    });
+    this.add_col({
+      "type":"string",
+      "key" : true,
+      "hidden" : true,
+      "nick" : "activity_code",
+    });
+    this.add_col({
+      "key" : true,
+      "type":"wide-str",
+      'nick' : 'prgm',
+      "header":{
+        "en":"Program",
+        "fr":"Programme",
+      },
+    });
+    this.add_col( {
+      "key" : true,
+      "type":"int",
+      "hidden" : true,
+      "nick" : 'so_num',
+    });
+    this.add_col( {
+      "key" : true,
+      "type":"str",
+      "nick" : 'so',
+      "header":{
+        "en":"Standard Object",
+        "fr":"Article courant",
+      },
+    });
+    const years = _.takeRight(std_years,2);
+    years.forEach(yr=> {
+      this.add_col({ 
+        "type":"big_int",
+        "nick":yr,
+        "simple_default": true,
+        "header":yr,
+        "description": {
+          "en": "Corresponds to the funds spent by standard object during the fiscal year " + yr,
+          "fr": "Correspond aux dépenses effectuées par article courant durant l'exercice financier " + yr,
+        },
+      });
+    });
+  },
+  sort (rows, lang) {  
+    return _.sortBy(rows, row => row.so_num);
+  },
+  mapper (row) {
+    const program = Program.get_from_activity_code(row[0], row[1]);
+    row.splice(2,0,program.name);
+    row.splice(4,0, sos[row[3]].text);
+    return row;
+  },
+  process_mapped_row (mapped_row){
+    const program_obj = Program.get_from_activity_code(mapped_row.dept, mapped_row.activity_code);
+    if(!this.programs.get(program_obj)){ 
+      this.programs.set(program_obj, []) 
+    }
+    this.programs.get(program_obj).push(mapped_row); 
+  },
+  "dimensions" : [
+    {
+      title_key :"so",
+      include_in_report_builder : false,
+
+      filter_func: function(options){
+        return function(row){
+          return row.so;
+        };
+      },
+    },
+    {
+      title_key :"so_cat",
+      include_in_report_builder : true,
+
+      filter_func: function(options){
+        return function(row){
+          if (row.so_num > 0 && row.so_num <= 7){
+            return text_maker("op_spending");
+          } else if (row.so_num > 7 && row.so_num <= 9) {
+            return text_maker("capital_spending");
+          } else if (row.so_num === 21  || row.so_num  === 22) {
+            return text_maker("revenues");
+          }
+          return row.so;
+        };
+      },
+    },
+    {
+      title_key : "gov_outcome",
+      include_in_report_builder : true,
+
+      filter_func :  function(options){
+        var func  = function(row){
+          const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
+          const goco = prog.tags_by_scheme.GOCO && prog.tags_by_scheme.GOCO[0];
+          return (goco && goco.name) || text_maker('unknown');
+        };
+        return func;
+      },
+    },
+    {
+      title_key :"gov_goco",
+      include_in_report_builder : true,
+
+      filter_func : function(options){
+        var func  = function(row){
+          //FIXME: this is because I found a program without a goco, 
+          const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
+          const goco = prog.tags_by_scheme.GOCO && prog.tags_by_scheme.GOCO[0];
+          return (goco && goco.parent_tag.name) || text_maker('unknown');
+        };
+        return func;
+      },
+    },
+  ],
+};
+
+
+

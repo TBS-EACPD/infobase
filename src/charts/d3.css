@@ -1,0 +1,521 @@
+svg {
+ overflow : hidden;
+}
+
+rect.gov_bubble {
+  stroke: #ff7f0e;
+  stroke-width: .5px;
+}
+
+text.parent {
+  fill: #1f77b4;
+}
+
+circle.gray {
+  fill: #ccc;
+  stroke: #999;
+  pointer-events: all;
+}
+circle.parent {
+  fill: #1f77b4;
+  fill-opacity: .1;
+  stroke: steelblue;
+  stroke-width: 2;
+}
+circle.grand-parent {
+  stroke : #000;
+  fill-opacity: 0;
+}
+circle.parent:hover {
+  stroke: #ff7f0e;
+  stroke-width: .5px;
+}
+circle.child {
+  pointer-events: none;
+}
+circle.hidden {
+  display : none;
+}
+div.tick,
+.axis text {
+  color: #333;
+  font-size :85%;
+  font-weight : 500;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: auto;
+}
+
+.axis.black line,
+.axis.black path {
+  stroke: #000;
+}
+.axis.black div.tick,
+.axis.black text {
+  fill: #000;
+}
+
+.y.axis text {
+  font-size : 85%;
+}
+.legend > li{
+  margin-top: 5px;
+}
+ul.legend.horizontal{
+ margin-bottom: 0px; 
+}
+.legend.horizontal > li {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+.ul-pieLegend{
+  display: block
+}
+
+.li-pieLegend{
+  border-bottom: 1px dotted black;
+  padding: 5px;
+  display: flex
+}
+.li-pieLegend:last-child{
+  border-bottom: none;
+}
+
+.tree-map-node { 
+  position: absolute;
+  line-height: 12px;
+  border-radius: 5px;
+  overflow: hidden;
+  text-indent:5px;
+  border: solid 1px white;
+}
+.heatmap-square {
+  cursor: pointer;
+}
+.heatmap-square.hover {
+  background: white !important;
+}
+.tree-map-node.isSelected { 
+  z-index: 999 !important;
+  background: #e73827 !important; /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover,  #e73827 0%, #f02f17 29%, #f16f5c 50%, #f85032 100%) !important; /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#e73827), color-stop(29%,#f02f17), color-stop(50%,#f16f5c), color-stop(100%,#f85032)) !important; /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover,  #e73827 0%,#f02f17 29%,#f16f5c 50%,#f85032 100%) !important; /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover,  #e73827 0%,#f02f17 29%,#f16f5c 50%,#f85032 100%) !important; /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover,  #e73827 0%,#f02f17 29%,#f16f5c 50%,#f85032 100%) !important; /* IE10+ */
+  background: radial-gradient(ellipse at center,  #e73827 0%,#f02f17 29%,#f16f5c 50%,#f85032 100%) !important; /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e73827', endColorstr='#f85032',GradientType=1 ) !important; /* IE6-9 fallback on horizontal gradient */
+}
+
+a.boxclose {
+  text-decoration: none;
+  cursor: pointer;
+  color: #F00;
+  font-size: 3em;
+  font-weight: 500;
+  padding: 11px 3px;
+}
+
+.boxclose:before{
+  content: "\00d7";
+}
+
+/* Partition diagram */
+.partition-container.__partition__ {
+  width: 98vw;
+  margin-top: 10px;
+}
+
+.__partition__ > .visual{
+  min-width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.__partition__ > .visual > .diagram-notes {
+  margin-bottom: 10px;
+  overflow-y: hidden;
+}
+
+.__partition__ > .visual > .controls{
+  width: inherit;
+  min-width: inherit;
+  background-color: rgb(4, 18, 37);
+  border-bottom: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+.__partition__ > .visual > .controls > .form-horizontal {
+  position: relative;
+  padding: 15px;
+  padding-top: 9px;
+  width: inherit;
+  min-width: inherit;
+}
+
+.partition-control-block {
+  display: inline-block; 
+  text-align: left;
+  padding-right: 9px;
+  overflow: hidden;
+}
+
+.partition-control-block > text {
+  display: block;
+  width: inherit;
+  color: #fff;
+  font-size: 20px;
+}
+
+.partition-control-block > input {
+  display: inline;
+  width: 100%;
+}
+
+.partition-control-block > select {
+  display: inline;
+}
+
+.partition-control-block > .glyphicon {
+  font-size: 54px;
+  position: absolute;
+  color: rgb(69, 161, 227);
+  margin-top: 17px;
+  z-index: 101;
+  cursor: pointer;
+}
+
+.partition-control-block > input.form-control.search::-ms-clear {
+  width : 0;
+  height: 0;
+}
+
+/* Over-ride bootstrap .form-control width style */
+.partition-control-block > select.form-control {
+  min-width: 100%;
+  max-width: none;
+}
+
+.__partition__.diagram {
+  background-color:rgb(4, 18, 37);
+  min-width: inherit;
+}
+
+.__partition__.diagram > .header{
+  position: absolute;
+  text-align: center;
+  color: rgb(169, 183, 199);
+  font-size: 20px;
+  top: 0px;
+}
+
+.partition-content{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  color: #efefef;
+  cursor: pointer;
+  font-size: 12px;
+}
+.partition-content-title{ 
+  margin-left: 20px;
+  padding: 0px 5px;
+  font-weight: 500;
+}
+.partition-content-title.fat{ 
+  background-color: rgb(4, 18, 37) !important;
+  max-width: 85%;
+  padding: 0px 15px;
+  min-width: 10%;
+  min-height: 100%;
+  line-height: 1;
+}
+
+.partition-content.negative-value{
+  background-image: repeating-linear-gradient(-45deg, transparent, transparent 1px, rgba(8, 40, 86,.5) 1px, rgba(8, 40, 86,.5) 5px);
+}
+.partition-negative-title-backing{
+    align-items: center;
+    background-color: rgb(4, 18, 37) ;
+    display: flex;
+    height: 100%;
+    margin-left: 20px;
+}
+.partition-negative-title-backing > .partition-content-title{
+  margin-left: 0px;
+}
+.partition-content-title.negative-value {
+  color: red;
+}
+
+.partition-right-ie-fix.fat{
+  height: 100%;
+}
+
+.partition-content-title.fat.right{
+  position:absolute;
+  right: 5px;
+  text-align: right;
+}
+
+.partition-content.root{
+  display: flex;
+  cursor: default;
+  text-align: center;
+  font-size: 36px;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.partition-content.root > .partition-content-title{
+  margin-left: 10px;
+}
+
+.partition-content.root .amount{
+  font-size: 48px;
+}
+.partition-content.root .amount a{
+  color: #fff!important;
+}
+
+.partition-content.faded{
+  opacity: 0.2;
+}
+
+.popup-row-bottom-border {
+  border-bottom: 1px solid #ccc;
+}
+.popup-font-xl {
+  font-size: 28px;
+}
+.popup-font-l {
+  font-size: 24px;
+}
+.popup-font-ml {
+  font-size: 20px;
+}
+.popup-font-m {
+  font-size: 18px;
+}
+.popup-font-sm {
+  font-size: 16px;
+}
+.popup-font-s {
+  font-size: 12px;
+}
+
+.partition-popup {
+  border-radius: 10px;
+  z-index: 100;
+  text-align: left;
+  color: black;
+  position: absolute;
+  width: 400px;
+  background-color: #fefefe;
+  padding: 20px;
+}
+.partition-popup > .popup-row-top > .stat1 {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+.partition-popup > .popup-row-top > .stat2 {
+  display: inline-block;
+  width: 49%;
+  text-align: center;
+}
+.partition-popup > .popup-row-top > .stat-split {
+  border-right: 1px solid #ccc;
+}
+.partition-popup > .popup-row-top > span > .popup-revenue-text {
+  line-height: 1; 
+  text-align: center; 
+  color: #333; 
+  width: 70%; 
+  margin-left: auto; 
+  margin-right: auto;
+  display: inline-flex;
+}
+.partition-popup > .popup-decription-text {
+  max-height: 200px;
+  overflow-y: auto;
+  line-height: 1;
+  text-align: justify;
+  color: #333;
+  padding-right: 4px;
+  font-weight: 500;
+}
+.partition-popup > .btn {
+  color: #fefefe!important;
+}
+.partition-popup > .popup-pointer {
+  position: absolute;
+	width: 0;
+	height: 0;
+  left: -40px;
+	border-top: 25px solid transparent;
+	border-right: 40px solid #efefef;
+	border-bottom: 25px solid transparent;
+}
+.partition-popup a.children {
+  font-size: 10px;
+}
+
+.partition-popup.partition-intro {
+  z-index: 102;
+  border: 3px solid rgb(69, 161, 227); 
+  top: 100px; 
+  left: 0px;
+  width: 800px;
+}
+.partition-popup.partition-intro > .intro-popup-color { 
+  color:rgb(69, 161, 227);
+}
+.partition-popup.partition-intro > .popup-intro-text {
+  line-height:1; 
+  text-align:left; 
+}
+.partition-popup.partition-intro > .popup-pointer-up {
+  top: -40px;
+  left: 14px;
+  position: absolute;
+	width: 0;
+	height: 0;
+	border-left: 25px solid transparent;
+	border-bottom: 40px solid #efefef;
+	border-right: 25px solid transparent;
+}
+
+.__partition__ > .visual > .partition-diagram-fader {
+  height: 100%;
+  position: absolute;
+  background-color: rgba(4, 18, 37, 0.81);
+  border-radius: 10px;
+  z-index: 101;  
+}
+
+.partition-content:focus a.minimize.hovering,
+.partition-content:hover a.minimize.hovering {
+  display: inline;
+}
+
+polygon.partition-svg-link.large,
+polygon.partition-svg-link.medium{
+   opacity: 0.5;
+   stroke-width: 0px;
+}
+polygon.partition-svg-link.tiny{
+   opacity: 0.6;
+   stroke-width: 1px;
+}
+
+polygon.partition-svg-link.large.faded,
+polygon.partition-svg-link.medium.faded{
+   opacity: 0.2;
+}
+polygon.partition-svg-link.tiny.faded{
+   opacity: 0.4;
+}
+
+polygon.partition-svg-link.large.highlighted,
+polygon.partition-svg-link.medium.highlighted{
+   opacity: 0.9;
+}
+polygon.partition-svg-link.tiny.highlighted{
+   opacity: 1;
+}
+
+.bar-amount-neg {
+  color: red;
+}
+
+div.d3-list, {
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.legend-container {
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 10px;
+  padding-left: 10px;
+  border: 1px solid #7b8c9d;
+  background-color: #fdfdfd;
+  border-radius: 10px;
+}
+
+.legend-container.horizontal {
+  width: 90%;
+  margin-left: 9%;
+}
+
+.legend-list-el {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.legend-list-inline {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+@media(min-width: 600px){
+  .legend-list-inline.horizontal {
+    flex-direction: row;
+  }
+}
+
+.tabular-legend-list-el {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px 0;
+}
+.tabular-legend-list-el:not(:first-child){
+  border-top: 1px solid #ccc;
+}
+
+.legend-color-checkbox {
+  float: left;
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border-radius: 3px;
+}
+
+.tick {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.tick > text {
+  font-size: 12px!important;
+  font-weight: 500;
+}
+
+.axis-label {
+  font-size: 13px!important;
+  font-weight: 500;
+  text-anchor: start;
+}
+
+.__label {
+  font-weight: 500;
+}

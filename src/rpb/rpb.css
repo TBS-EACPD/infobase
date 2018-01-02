@@ -1,0 +1,226 @@
+.mode-title {
+  /* border-bottom: 1px solid #ccc; */
+
+}
+
+.table-rpb {
+  margin: 0 auto;
+  min-width: 75%;
+}
+
+
+td.data-col-cell {
+  text-align: right;
+}
+
+td.key-col-cell {
+  text-align: left;
+}
+
+li.select-list-item {
+  margin: 5px 0;
+}
+
+@media(min-width: 992px){
+  .rpb-config-item.col-selection.simple {
+    max-height: 200px;
+    overflow-y: auto; 
+  }
+
+  .rpb-config-item.col-selection.granular {
+    max-height: 200px;
+    overflow-y: auto; 
+  }
+
+  .md-half-width{
+    min-width: 50%;
+    display: inline-block;
+    padding-left: 10px; 
+  }
+
+  .md-gutter-right {
+    padding-right: 10px;
+  }
+
+  .md-gutter-left {
+    padding-left: 10px;
+  }
+
+}
+
+.rpb-option {
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+.rpb-option-label {
+  display: flex;
+  padding: 10px;
+  font-size: 1.2em;
+  color: white;
+  background-color: rgba(37,114,180,0.7);
+  border: 2px solid rgba(37,114,180,0.9) ;
+}
+.rpb-option-label-text {
+  align-self: center;
+}
+.rpb-option-content {
+  display: flex;
+  border-right: 1px solid rgba(37,114,180,0.9) ;
+  border-bottom: 1px solid rgba(37,114,180,0.9) ;
+  background-color: white;
+  padding: 10px 10px 10px 10px;
+}
+/* hacky flexbox bug, even in chrome! */
+.rpb-option-content > div {
+  width: 100%;
+}
+@media (min-width: 900px){
+  .rpb-option-label {
+    width:18%;
+    border-radius: 0px 10px 10px 0px;
+    /* make the blue rounded part go over the content rpb-option-content */
+    margin-right: -8px;
+    z-index: 1;
+  }
+  .rpb-option-content {
+    border-top: 1px solid rgba(37,114,180,0.9) ;
+    display:flex;
+    width:82%;
+  }
+  .rpb-option-content details{
+    width:100%;
+    align-self:center;
+  }
+  .rpb-option-content details summary{
+    border: 0px;
+  }
+}
+@media (max-width: 900px){
+  .rpb-option-label {
+    width:100%;
+  }
+  .rpb-option-content {
+    width:100%;
+  }
+}
+
+.rpb-option-fancy-ul-container {
+  padding: 20px 20px 0px 20px; 
+  width: 100%;
+}
+
+.graph_report { 
+  border: 1px solid rgba(37,114,180,0.9) ;
+}
+
+.rpb-config-item {
+  margin-right: 0px;
+  margin-bottom: 5px;
+  padding: 5px; 
+}
+
+.rpb-simple .rpb-config-item:not(:last-child) {
+  border-bottom: 0.5px solid #ccc;
+}
+
+.rpb-config-header {
+  display: block;
+  padding: 3px 0;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+  color: rgb(35, 68, 126);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+
+.rpb-simple-select {
+  width: 100%;
+}
+
+#rpb_graph_legend > div {
+  height: 240px !important;
+}
+
+.graph_total_and_col_expl {
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 1px solid #7b8c9d;
+  background-color: #fdfdfd;
+  border-radius: 10px;
+  height: 240px; 
+  padding: 25px; 
+}
+
+
+.table-dark-blue > thead > tr {
+  background-color: rgb(37, 114, 180);
+}
+.table-dark-blue > thead > tr > th {
+  color: white;
+}
+
+.table-dark-blue > tbody > tr {
+  transition: background-color 500ms ease-in;
+}
+
+.table-dark-blue > tbody > tr:nth-child(even) {
+  background-color: #f4f4f4;
+}
+
+.table-dark-blue > tbody > tr:nth-child(odd) {
+  background-color: rgba(37,114,180,0.2);
+}
+
+.table-dark-blue:not(.no-total-row) > tbody > tr:last-child {
+  background-color: rgb(37, 114, 180);
+}
+
+.table-dark-blue:not(.no-total-row) > tbody > tr:last-child > td {
+  color: white;
+}
+
+.table-dark-blue:not(.no-total-row) > tbody > tr:last-child > td:not(:last-child) {
+  border-right: 1px solid #bbb !important;
+}
+
+
+
+/* only use with react-virtualized table, which by default disabled text wrapping */
+.allow-text-wrapping {
+ white-space: normal !important;
+ overflow-wrap: break-word;
+}
+
+.rpb-data-cell {
+  text-align: right;
+}
+
+.rpb-key-cell {
+  text-align: left;
+}
+
+/* allows bootstrap columns to stick together */
+@media(min-width: 992px){
+  .md-no-right-gutter {
+    padding-right: 0;
+  }
+  .md-no-left-gutter {
+    padding-left: 0;
+  }
+}
+
+.rpb-sort-indicator {
+  background-color: rgba(0, 0, 0, 0) /* stupid IE issue doesn't inherit background color properly */
+}
+.rpb-sort-indicator:focus {
+  border: 1px dotted white;   
+}
+
+.pagination-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

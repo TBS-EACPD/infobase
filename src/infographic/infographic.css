@@ -1,0 +1,56 @@
+.no-cursor {
+  pointer-events: 'none'
+}
+
+.previous_and_next_bubble_link_row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.previous_bubble_link {
+  margin-left: 15px;
+}
+
+.next_bubble_link {
+  margin-right: 15px;
+}
+
+.previous_bubble_link,
+.next_bubble_link {
+  text-align: center;
+  flex: 0 1 33%;
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+}
+
+.infograph-panel-container {
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+
+@media(min-width: 1200px){
+  .super-wide-container-parent{
+    display:flex; 
+    flex-direction:column; 
+    align-items: center;
+  }
+}
+
+@media(min-width: 1200px){
+  .super-wide-container {
+    width: 90vw; 
+    overflow-x: visible;
+  }
+}
+
+@media( min-width: 1600px ){
+  .super-wide-container {
+    width: 85vw; 
+    overflow-x: visible;
+  }
+}
+

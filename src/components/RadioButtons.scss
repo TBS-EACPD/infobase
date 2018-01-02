@@ -1,0 +1,52 @@
+@import '../common_css/common-variables';
+
+.radio-buttons {
+  display: inline-flex;
+  width: 700px;
+  border: 2px solid $buttonPrimaryColor;
+  border-radius: 10px;
+  font-size: 1.2em;
+  font-weight: 300;
+  background-color: inherit;
+}
+
+.radio-buttons__option {
+flex: 1;
+padding: 5px 15px;
+color: change-color($color: $buttonPrimaryColor, $alpha: 0.75);
+border-radius: 0px;
+background-color: transparent;
+position: relative;
+}
+
+.radio-buttons__option.radio-buttons__option--active {
+  background-color: inherit;
+  color: $backgroundColor;
+  background-color: $buttonPrimaryColor;
+  border-radius: 7px;
+  cursor: default;
+  font-weight: 500;
+}
+
+.radio-buttons__option:not(:last-child):after {
+  content: "";
+  margin-left: 10px;
+  height: 27px;
+  border: solid $buttonPrimaryColor;
+  border-width: 0 0 0 2px;
+  position: absolute;
+  right: -3px;
+}
+
+.radio-buttons__option.radio-buttons__option--active:after {
+  display: none;
+}
+
+.radio-buttons__option:not(.radio-buttons__option--active):hover,
+.radio-buttons__option:not(.radio-buttons__option--active):active,
+.radio-buttons__option:not(.radio-buttons__option--active):focus { 
+  background-color: change-color($color: $buttonPrimaryColor, $alpha: 0.75);
+  color: $backgroundColor !important;
+  border-radius: 7px;
+  font-weight: 500;
+}

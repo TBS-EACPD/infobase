@@ -1,0 +1,64 @@
+DP_results_option_title:
+  transform: [handlebars]
+  en: Planned Results for {{planning_year_1}}
+  fr: Résultats planifiés pour {{planning_year_1}}
+
+DRR_results_option_title:
+  transform: [handlebars]
+  en: Actual Results for {{pa_last_year}}
+  fr: Résultats actuels pour {{pa_last_year}}
+  
+drr_summary_title:
+  transform: [handlebars]
+  en: |
+    {{pa_last_year}} Department Results Report Summary
+  fr: |
+    Sommaire du Rapport sur les résultats ministériels de {{pa_last_year}}
+
+
+# this a multi-level text 
+drr_summary_text:
+  transform: [handlebars,markdown]
+  en: |
+    {{#if is_gov}}
+      In {{pa_last_year}}, **{{num_depts}}** organizations required to produce a {{gl_tt "Departmental Results Report" "DR"}} sought to achieve **{{drr16_results}}** results.
+      Progress towards meeting these results was {{gl_tt "measured" "RESULTS_STATUS"}} using **{{drr16_total}}** {{gl_tt "indicators" "IND_RESULT"}}.
+    {{else}}
+      In {{pa_last_year}}, {{subj_name subject}} sought to achieve **{{drr16_results}}** results.
+      Progress towards meeting these results was {{gl_tt "measured" "RESULTS_STATUS"}} using **{{drr16_total}}** {{gl_tt "indicators" "IND_RESULT"}}.
+    {{/if}}
+
+    {{#if drr16_past_total}} Of those indicators: {{/if}}
+    {{#if drr16_future_total}}{{#unless  drr16_past_total}} Of those indicators: {{/unless}}{{/if}}
+
+    {{#if drr16_past_total}} * **{{drr16_indicators_past_success}}** out of the **{{drr16_past_total}}** (or **{{fmt_percentage1 (divide drr16_indicators_past_success drr16_past_total)}}**) that were seeking to achieve their target by March 31, 2017 **{{gl_tt "met" "RESULTS_MET"}} their target**. {{/if}}
+    {{#if drr16_future_total}} * **{{drr16_indicators_future_success}}** out of the **{{drr16_future_total}}** (or **{{fmt_percentage1 (divide drr16_indicators_future_success drr16_future_total)}}**) that are seeking to achieve their target after March 31, 2017 or on an ongoing basis are **{{gl_tt "on track" "RESULTS_OT"}} of meeting them**. {{/if}}
+
+    
+  fr: |
+    {{#if is_gov}}
+      En {{pa_last_year}}, **{{num_depts}}** organisations qui devaient produire un {{gl_tt "Rapport sur les résultats ministériel" "DR"}} ont cherché à rencontrer **{{drr16_results}}** résultats.
+       Les progrès accomplis dans l'atteinte de ces résultats ont été {{gl_tt "mesurés" "RESULTS_STATUS"}} au moyen de **{{drr16_total}}** {{gl_tt "indicateurs" "IND_RESULT"}}. 
+    {{else}}
+      En {{pa_last_year}}, {{subj_name subject}} a cherché à atteindre **{{drr16_results}}** résultats.
+      Les progrès accomplis dans l'atteinte de ces résultats ont été {{gl_tt "mesurés" "RESULTS_STATUS"}} au moyen de **{{drr16_total}}** {{gl_tt "indicateurs" "IND_RESULT"}}. 
+    {{/if}}
+
+    {{#if drr16_past_total}} De ces indicateurs: {{/if}}
+    {{#if drr16_future_total}}{{#unless  drr16_past_total}} De ces indicateurs: {{/unless}}{{/if}}
+
+    {{#if drr16_past_total}} * **{{drr16_indicators_past_success}}** des **{{drr16_past_total}}** (ou **{{fmt_percentage1 (divide drr16_indicators_past_success drr16_past_total)}}**) cibles qui devaient être atteintes au plus tard le 31 mars 2017 ont été {{gl_tt "atteintes" "RESULTS_MET"}}. {{/if}}
+    {{#if drr16_future_total}} * **{{drr16_indicators_future_success}}** des **{{drr16_future_total}}** (ou **{{fmt_percentage1 (divide drr16_indicators_future_success drr16_future_total)}}**) cibles récurrentes ou dont la date-butoir est ultérieure au 31 mars 2017 sont {{gl_tt "en voie d'être atteintes" "RESULTS_OT"}}. {{/if}}
+
+gov_drr_summary_org_table_text:
+  transform: [handlebars,markdown]
+  en: |
+    To learn more on the result and their associated performance indicators for an organization, 
+    simply click on the name of the organization you want to explore to be redirected toward their specific results infographic.
+    
+  fr: |
+    Pour en savoir plus sur les résultats et les indicateurs de rendement d'une organisation, il suffit de cliquer sur le nom de l'organisation pour être dirigé vers l'infographie où figurent ses résultats particuliers.
+
+show_all_orgs:
+  en: Show all organizations
+  fr: Montrer toutes les organisations

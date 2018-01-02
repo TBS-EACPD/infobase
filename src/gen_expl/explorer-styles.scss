@@ -1,0 +1,301 @@
+/* base styles */
+@import "../common_css/common-variables";
+
+.xplorer-node-container {
+}
+
+.xplorer-node {
+  padding-top: 12px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+
+  /* default borders that are overridden by even/odd/is-search_match */
+  border-radius: 10px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(0,0,0,0);
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  background-color: #FFF;
+
+  font-size: 12pt;
+}
+
+
+li:nth-child(odd) > .xplorer-node-container  > .xplorer-node:not(.is-search-match),
+.xplorer-node.default-blue {
+  border-color: rgb(123, 123, 123);
+  background-color: rgba(123, 123, 123, 0.05)
+}
+
+li:nth-child(even) > .xplorer-node-container  > .xplorer-node:not(.is-search-match) {
+  border-color: #a1adba;
+}
+
+.xplorer-node.is-search-match {
+  border-color: #599b17;
+  background-color: hsla(90, 100%, 35%, 0.1);
+}
+
+/* everything right of the caret-container */
+.xplorer-node-content-container {
+  flex: 1 1 auto;
+}
+
+
+
+/* this is the clickable portion, what is seen when collapsed */
+.xplorer-node-intro {
+  cursor: pointer;
+}
+
+.xplorer-expander-container {
+  width: 45px;
+  flex: 0 0 45px; /* never grow or shrink, and set the default flex width */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; 
+  cursor:pointer;
+}
+
+/* to be combined with .button-unstyled */
+.xplorer-expander {
+  border: 1px solid rgba(0,0,0,0);
+  background-color: rgba(0,0,0,0); /*make bg transparent because of common css issue*/
+
+  text-decoration:none;
+  font-size: 12px;
+  padding-top: 3px;
+  /* define an invisible border so that :focus/:active doesn't make ancestor elements change size*/
+}
+
+/* a11y demands a marker for focused elements */
+.xplorer-expander:active, 
+.xplorer-expander:focus {
+  border-color: #333;
+}
+
+
+.xplorer-node-inner-collapsible-content { 
+  margin-top: 5px;
+}
+
+.xplorer-collapsible-children-container {
+  margin-left: 24px; 
+}
+
+
+/* results specific styles */
+
+.indicator-container-container {
+  padding-right:10px;
+  padding-top:10px;
+}
+
+.indicator-container { }
+
+  /*slight twists on bootstrap's regular table */
+table.xplorer-planned-resource-table {
+  margin-bottom: 0;
+  max-width: 500px; 
+  margin-top: 5px;
+}
+
+table.xplorer-planned-resource-table > tbody > tr > td,
+table.xplorer-planned-resource-table > tbody > tr > th {
+  border-top-color: #ccc !important;
+}
+
+
+
+/* styles outside totally outside the explorer */
+.search-clear-container {
+  border: 1px solid #ccc;
+  background-color: #eee;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+
+.loading-overlay {
+  z-index:50;
+  background-color: rgba(200,200,200,0.5);
+  height: 100%;
+  width: 100%;
+  position:absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content : center;
+  align-items: flex-start;
+}
+
+
+
+/* resource-explorer */
+.hierarchy-selection {
+  border-radius: 5px;
+  border: 1px solid $primaryColor;
+  margin-bottom: 30px;
+  background-color: $primaryColor;
+}
+
+.hierarchy-selection-header {
+  color: #fcfcfc;
+  padding: 5px 0 10px 0;
+  font-weight: 300;
+  font-size: 1.4em;
+  text-align: center;
+}
+.hierarchy-selection-items {
+
+}
+
+
+.hierarchy-selection-item:focus,
+.hierarchy-selection-item:active {
+  outline: 2px solid #222;
+}
+
+.hierarchy-selection-item {
+  background-color: #fcfcfc;
+  color: #222;
+  padding: 10px;
+  cursor: pointer;
+  /* make the <button> act like a div */
+  display: block; 
+  min-width:100%;
+  text-align: left;
+  border-radius: 0;
+}
+.hierarchy-selection-item.active {
+  background-color: #dedede;
+}
+.hierarchy-selection-item:not(:last-child){
+  border-bottom: 1px solid $primaryColor;
+}
+
+@media(min-width:992px){
+  .hierarchy-selection-item {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start; 
+    padding: 0;
+  }
+
+  .hierarchy-selection-item > .hierarchy-selection-item__header,
+  .hierarchy-selection-item > .hierarchy-selection-item__description {
+    padding: 15px 10px 15px 25px;
+
+  }
+
+  .hierarchy-selection-item > .hierarchy-selection-item__header {
+    flex: 0 0 30%;
+    width: 100%;
+    max-width:100%;
+    font-size: 1.2em;
+    font-weight: 300;
+    border-right: 1px solid $primaryColor;
+  }
+
+  .hierarchy-selection-item > .hierarchy-selection-item__description {
+    width: 100%;
+    max-width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+
+@media(max-width:992px){
+  .hierarchy-selection-item {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start; 
+    padding-bottom: 10px;
+  }
+
+  .hierarchy-selection-item > .hierarchy-selection-item__header,
+  .hierarchy-selection-item > .hierarchy-selection-item__description {
+    padding: 5px;
+  }
+
+  .hierarchy-selection-item > .hierarchy-selection-item__header {
+    font-size: 1.2em;
+    font-weight: 500;
+  }
+
+}
+
+.hierarchy-selection-item:last-child {
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.xplorer-resource-row {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  padding-right: 5px;
+  padding-bottom: 3px;
+}
+.xplorer-resource-row > .xplorer-name-col {
+  margin-right: auto; 
+  flex: 1 1 0%;
+  width:100%; /* IE */
+}
+.xplorer-resource-row > .xplorer-spend-col,
+.xplorer-resource-row > .xplorer-fte-col {
+  width:100%; /* IE */
+  padding: 0 5px 0 5px;
+  text-align: right;
+  flex: 0 0 200px;
+}
+
+.xplorer-resource-row > .xplorer-fte-col {
+  padding-right: 10px;
+}
+.xplorer-resource-row > .xplorer-spend-col {
+  margin-left: auto; /* will push this and the next item to the right */
+}
+
+@media(max-width: 992px){
+  .xplorer-resource-row > .xplorer-spend-col,
+  .xplorer-resource-row > .xplorer-fte-col {
+    flex: 0 0 80px;
+  }
+  .xplorer-resource-row > .xplorer-fte-col {
+    padding-right: 4px;
+  }
+}
+@media(max-width: 600px){
+  .xplorer-resource-row > .xplorer-spend-col,
+  .xplorer-resource-row > .xplorer-fte-col {
+    flex: 0 0 45px;
+    padding: 0 4px 0 4px;
+  }
+}
+
+.resource-explorer-header {
+  background-color: $primaryColor;
+  color: $backgroundColor;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 10px;
+}
+.resource-explorer-header > .xplorer-name-col {
+  text-align: center; 
+}
+.resource-explorer-header > .xplorer-name-col,
+.resource-explorer-header > .xplorer-spend-col,
+.resource-explorer-header > .xplorer-fte-col{
+  cursor: pointer;
+}

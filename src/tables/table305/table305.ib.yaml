@@ -1,0 +1,113 @@
+table305_short: 
+  transform: [handlebars,markdown]
+  en: |
+   Using {{gl_tt "Central Financial Management Reporting System (CFMRS)" "CFMRS"}} data, this table presents {{gl_tt "Program" "PROG"}} {{gl_tt "expenditures" "BUD_EXP"}} by {{gl_tt "standard object" "SOBJ"}} for {{pa_last_year}}.
+  fr: |
+   Selon les données tiréss du {{gl_tt "Système central de gestion des rapports financiers (SCGRF)" "CFMRS"}}, ce tableau présente les {{gl_tt "dépenses" "BUD_EXP"}} de {{gl_tt "programme" "PROG"}} par {{gl_tt "article courant" "SOBJ"}} pour {{pa_last_year}}.
+
+table305: 
+  transform: [handlebars,markdown]
+  en: |
+   {{{gt "table305_short"}}}
+
+
+   **Notes:**
+   * Data for Program expenditures by Standard Object are not available for the Canadian Security Intelligence Service and the Communication Security Establishment. As such, totals for all Program expenditures found in this table **will not** match total government spending.    
+   * Where data on Program expenditures by Standard Object are available, totals at the Program and organization presented in the InfoBase will correspond to information published in the {{pa_last_year}} Public Accounts of Canada. 
+   * To ensure comparability over time, Program names and structures used in the InfoBase are sourced from the Public Accounts of Canada and may differ from an organization Departmental Plan.
+
+
+   In cases where machinery of government changes (such as merging or eliminating organizations) have occurred, the data has not been adjusted.
+  
+  fr: |
+   {{{gt "table305_short"}}}
+   
+    
+
+   **Remarques:**
+
+   * Les données pour les dépenses de programme par article courant ne sont pas disponibles pour le Service Canadien du renseignement de sécurité et le Centre de la sécurité des télécommunications. À ce titre, les totaux de toutes les dépenses de programmes qui se trouvent dans ce tableau ne correspondront pas aux dépenses gouvernementales totales.
+   * Lorsque les données pour les dépenses de programme par article courant sont disponibles, les totaux des dépenses de programmes et d’organisations publiés dans l'InfoBase correspondent à l'information publiée dans les Comptes publics du Canada {{pa_last_year}}.
+   * Pour assurer la comparabilité au fil du temps, la composition et le nom des programmes présentés dans l'InfoBase correspondent à ceux utilisés dans les Comptes Publics du Canada et pourraient différer du plan ministériel d’une organisation.
+
+
+   Dans le cas où des changements dans l’appareil
+   gouvernemental (comme la fusion ou l'élimination d’organisations) se sont produits, les données
+   n’ont pas été rajustées. 
+
+top_spending_areas_title:
+  transform: [handlebars]
+  en: Gross Spending by Standard Object ({{pa_last_year}})
+  fr: Dépenses brutes par article courant ({{pa_last_year}})
+
+std_obj_quick_def:
+  transform: [handlebars, markdown]
+  en: |
+    {{gl_tt "Standard Objects" "SOBJ"}} are the highest level of classification for categorizing expenditures. 
+  fr: |
+    Les {{gl_tt "articles courants" "SOBJ"}} représentent le niveau le plus élevé de classification des dépenses.
+
+
+tag_top_spending_areas_text:
+  transform: [handlebars, markdown]
+  en: |
+    {{{gt "std_obj_quick_def"}}} In {{pa_last_year}}, the largest share of expenditures recorded by programs tagged under the "**{{subj_name subject}}**" tag were recorded under the 
+    "**{{tag_top_so_name}}**" standard object **({{fmt_compact_written tag_top_so_spent}})**, representing **{{fmt_percentage1 tag_top_so_pct}}** of the maximum *gross* total of **{{fmt_compact_written tag_total_spent}}**.
+
+  fr: |
+    {{{gt "std_obj_quick_def"}}} En {{pa_last_year}}, la partie la plus importante des dépenses des programmes étiquetés sous l'étiquette «**{{subj_name subject}}**» a été enregistrée
+    sous l'article courant «**{{tag_top_so_name}}**» **({{fmt_compact_written tag_top_so_spent}})**, représentant **{{fmt_percentage1 tag_top_so_pct}}** des dépenses *brutes* maximales de **{{fmt_compact_written tag_total_spent}}**.
+
+
+program_top_spending_areas_text:
+  transform: [handlebars, markdown]
+  en: | 
+    {{{gt "std_obj_quick_def"}}} In {{pa_last_year}}, the largest share of expenditures for "**{{subj_name subject}}**" were recorded under the 
+    "**{{program_top_so_name}}**" standard object **({{fmt_compact_written program_top_so_spent}})**, representing **{{fmt_percentage1 program_top_so_pct}}** of the program's total *gross* expenditures of **{{fmt_compact_written program_total_spent}}**.
+  
+  fr: |
+    {{{gt "std_obj_quick_def"}}} En {{pa_last_year}}, la partie la plus importante des dépenses du programme «**{{subj_name subject}}**» a été enregistrée 
+    sous l'article courant «**{{program_top_so_name}}**» **({{fmt_compact_written program_top_so_spent}})**, soit **{{fmt_percentage1 program_top_so_pct}}** des dépenses *brutes* du programme totalisant **{{fmt_compact_written program_total_spent}}**.
+
+
+
+detailed_program_spending_split_title:
+  transform: [handlebars]
+  en: Program Spending
+  fr: Dépenses par programme
+
+tag_spend_rev_split_text:
+  transform: [handlebars, markdown]
+  en: |
+   In {{pa_last_year}}, Programs falling under the "**{{subj_name subject}}**"
+   tag recorded revenues of **{{fmt_compact_written tag_exp_rev_neg_minus}}**.
+   Netting these revenues from the maximum *gross* expenditures of **{{fmt_compact_written tag_exp_rev_gross}}** of tagged programs results in 
+   **{{fmt_compact_written tag_exp_rev_net}}** in *net* expenditures.
+  fr: |
+    En {{pa_last_year}}, des recettes de **{{fmt_compact_written tag_exp_rev_neg_minus}}** 
+    ont été enregistrées pour les programmes liés à l’étiquette «**{{subj_name subject}}**».
+    Après compensation de ces recettes maximales par rapport aux dépenses *brutes* maximales de **{{fmt_compact_written tag_exp_rev_gross}}** pour l’étiquette, 
+    les dépenses maximal *nettes* s’élèvent à **{{fmt_compact_written tag_exp_rev_net}}**.
+
+program_spend_rev_split_text:
+  transform: [handlebars, markdown]
+  en: |
+    In {{pa_last_year}}, revenues of **{{fmt_compact_written program_exp_rev_neg_minus}}** were recorded for the program "**{{subj_name subject}}**".
+    Netting these revenues from the total *gross* expenditures of **{{fmt_compact_written program_exp_rev_gross}}** dedicated to this program leaves **{{fmt_compact_written program_exp_rev_net}}** in *net* expenditures.
+   
+  fr: |
+    En {{pa_last_year}}, des recettes de **{{fmt_compact_written program_exp_rev_neg_minus}}** ont été enregistré pour le programme «**{{subj_name subject}}**».
+    Après compensation de ces recettes par rapport aux dépenses *brutes* de **{{fmt_compact_written program_exp_rev_gross}}** consacrées au programme, les dépenses *nettes* s'élèvent à **{{fmt_compact_written program_exp_rev_net}}**.
+
+filter_by_so:
+  en: Filter by Standard Object
+  fr: Filtrer par article courant
+
+other_sos:
+  en: All Other Standard Objects
+  fr: Tous les autres articles courants
+
+so_spend_by_prog:
+  transform: [handlebars,markdown]
+  en: Standard Object Spending by Program ({{pa_last_year}})
+  fr: Dépenses par article courant, par programmes ({{pa_last_year}})

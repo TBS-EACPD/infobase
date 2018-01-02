@@ -1,0 +1,19 @@
+/*color constants*/
+$primaryColor: #165a9b;
+$backgroundColor: #fdfdfd;
+$secondaryColor:#7b8c9d;
+
+$buttonPrimaryColor: #2a4364;
+$buttonSecondaryColor: #5bc0de;
+
+$wetLinkColor: #284162;
+$wetLinkVisitedColor: #7834bc;
+$ibLinkColor: #0059b3;
+
+@mixin unstyled-button {
+  border: none;
+  background-color: inherit;
+  outline: none;
+  padding: 0;
+  border-radius: 0;
+}

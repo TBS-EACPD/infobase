@@ -1,0 +1,69 @@
+{
+  "plugins": [
+    "react"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "env": {
+      "browser": true,
+      "commonjs": true,
+      "es6": true
+  },
+  "extends": [ "eslint:recommended", "plugin:react/recommended" ],
+  "rules": {
+      "indent": [
+          "warn",
+          2,
+          {
+            "SwitchCase" : 1,
+            "ignoredNodes": ["ConditionalExpression"],
+            "flatTernaryExpressions": true
+          }
+      ],
+      "comma-dangle":[ "warn", "always-multiline" ],
+      "linebreak-style": [
+          "off",
+          "unix"
+      ],
+      "semi": [
+          "off",
+          "always"
+      ],
+      "no-unused-vars": [
+        "warn",
+        { "args": "none" }
+      ],
+      "no-extra-semi": ["off"],
+      "react/prop-types" : [ "off" ],
+      "react/no-string-refs" : [ "off" ],
+      "react/display-name" : [ "off" ],
+      "react/no-find-dom-node" : [ "off" ]
+  },
+  "globals": {
+    "window": true,
+    "DEV":true,
+    "d3": true,
+    "infobase_colors": true,
+    "_": true,
+    "marked": true,
+    "hasher": true,
+    "$":true,
+    "Handlebars": true,
+    "React": true,
+    "ReactDOM":true,
+    "d4": true,
+    "Spinner":true,
+    "accounting":true,
+    "lang":true,
+    "TextDecoderLite": true,
+    "pako":true,
+    "ga":true,
+    "APPLICATION_LANGUAGE":true,
+    "SHA":true,
+    "PRE_PUBLIC_ACCOUNTS":true
+  }
+}

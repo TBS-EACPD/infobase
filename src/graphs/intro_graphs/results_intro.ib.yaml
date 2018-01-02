@@ -1,0 +1,159 @@
+what_is_policy_on_results_q:
+  en: What is the Policy on Results? 
+  fr: Qu’est-ce que la Politique sur les résultats? 
+
+what_is_policy_on_results_a:
+  transform: [handlebars, markdown]
+  en: |
+    The [Policy on Results](https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300) sets out the fundamental requirements for federal departmental accountability for performance information and evaluation, while highlighting the importance of results in management and spending decision making, as well as public reporting. It seeks to improve the achievement of results across governmentand enhancing understanding of the results the government seeks to achieve, does achieve, and the resources used to so. 
+  fr: |
+    La [politique sur les résultats](https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300) établit les exigences fondamentales de la responsabilité ministérielle fédérale canadienne concernant l’information sur le rendement et l’évaluation, tout en soulignant l’importance des résultats dans la prise de décisions liées à la gestion, aux dépenses et aux rapports publics. La politique cherche à obtenir de meilleurs résultats à l'échelle gouvernementale et mieux comprendre les résultats que le gouvernement cherche à atteindre et réussit à atteindre, ainsi que les ressources utilisées pour ce faire.
+
+what_is_diff_with_mrrs_q:
+  en: How does it differ from the Policy on Management, Resources and Results Structure (MRRS)? 
+  fr: Comment la Politique sur les résultats diffère de la Politique sur la structure de la gestion, des ressources et des résultats (SGRR)? 
+
+
+what_is_diff_with_mrrs_a:
+  transform: [handlebars, markdown]
+  en: |
+    The Policy on Results represents a transition from old reporting structures [(Policy on MRRS)](https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=18218) to emphasize results. Previously, organizations were required to report against a small number of {{gl_tt "Strategic Outcomes" "SO"}}. 
+    
+    
+    Departments now report against {{gl_tt "Core Responsibilities" "CR"}} under a Departmental Results Frameworks designed to provide a clearer picture of what the departments is trying to achieve.  
+
+    
+    
+    Under the MRRS policy, departments reported against a Program Alignment Architecture (PAA) which had two and sometimes three layers of programs (i.e. programs, sub-programs, and sub-sub programs). Under the Policy on Results, organizations still report on programs, however 
+    departments must now report on a clearer set of programs, describe how they are organized to fulfill their mandates and link each program to a Core Responsibility.
+
+    
+    This means that programs under the new policy are to be roughly equivalent, in the level of granularity, to the organization’s previous sub-programs or, where they have them, sub-sub programs, but the new Policy provides a clearer indication of how these programs help the departments achieve its objectives. 
+  fr: |
+    La politique sur les résultats marque un virage par rapport aux anciennes structures redditionnelles ([Politique sur la SGRR](https://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=18218 )) de manière à mettre l’accent sur les résultats. Auparavant, les organisations devaient rendre compte d’un nombre restreint de {{gl_tt "résultats stratégiques" "SO"}}.
+    
+    
+    Dorénavant, les ministères doivent rendre compte des {{gl_tt "responsabilités essentielles" "CR"}} figurant à leur Cadre ministériel des résultats, qui brosse un tableau plus clair de ce que le ministère cherche à accomplir.
+
+     
+    En vertu de la Politique sur la SGRR, la reddition des comptes se fait en fonction d'architectures d'alignement des programmes comportant deux, et parfois même trois paliers (programmes, sous-programmes et sous-sous-programmes). Aux termes de la nouvelle Politique sur les résultats, les organisations doivent encore rendre compte de leur programmes, mais l'ensemble est plus clair et les ministères décrivent comment chaque programme les aides à réaliser leur mandat et le relie à une responsabilité essentielle.
+
+     
+    Ceci signifie que les programmes assujettis à la nouvelle politique devront avoir un niveau de détail équivalent aux sous-programmes des ministères, ou à leurs sous-sous-programmes, s’il y a lieu. La nouvelle politique précise toutefois plus clairement l'utilité de ces programmes dans l’atteinte des objectifs du ministère.
+
+
+
+which_orgs_policy_on_results_q:
+  en: Which organizations report under the Policy on Results?
+  fr: Quelles organisations rapportent sous la politique sur les résultats?
+
+which_orgs_policy_on_results_a:
+  transform: [handlebars, markdown]
+  en: |
+    Seven organization will report under the new format in the 2017-18 fiscal year:
+
+      * Canadian Human Rights Commission
+      * Canadian Transportation Accident Investigation and Safety Board
+      * Canada Revenue Agency
+      * National Energy Board
+      * Office of the Commissioner of Lobbying
+      * Parole Board of Canada
+      * Treasury Board of Canada Secretariat
+
+    By the 2018-19 fiscal year this new format will be adopted by all organizations, replacing the Program Alignment Architecture instituted by the rescinded TBS Policy on MRRS.
+  fr: |
+    Au cours de l’exercice 2017-2018, une nouvelle forme de présentation de rapports a été adoptée par sept organisations, conformément à la Politique sur les résultats :
+
+    * Agence du revenu du Canada 
+    * Bureau canadien d'enquête sur les accidents de transport et de la sécurité des transports
+    * Bureau du commissaire au lobbying 
+    * Commission canadienne des droits de la personne 
+    * Commission des libérations conditionnelles du Canada 
+    * Office national de l'énergie 
+    * Secrétariat du Conseil du Trésor du Canada 
+
+    D’ici l’exercice 2018-2019, toutes les organisations auront adopté cette formule, qui remplace l’architecture d’alignement des programmes sous la politique sur la SGRR.
+
+
+
+what_is_a_drf_q:
+  en: What is a Departmental Results Framework?
+  fr: Qu’est-ce qu’un cadre ministériel des résultats?
+
+
+what_is_a_drf_a:
+  transform: [handlebars, markdown] 
+  en: |
+    It describes:
+    * What the department does (i.e. Core Responsibility)
+    * What results the department is trying to achieve (i.e. Departmental Results)
+    * How progress will be assessed (i.e. Departmental Indicators)
+  
+  fr: |
+    Il décrit :
+    * ce que le ministère fait (c.-à-d. ses responsabilités essentielles);
+    * les résultats que le ministère cherche à obtenir (c.-à-d. les Résultats Ministériels);
+    * la manière dont les progrès seront évalués (c.-à-d. les Indicateurs des Résultats Ministériels).
+
+what_is_a_cr_q:
+  en: What is a Core Responsibility?
+  fr: Qu’est-ce qu’une responsabilité essentielle?
+
+
+what_is_a_cr_a:
+  transform: [handlebars, markdown]
+  en: |
+    Core responsibilities describe the areas in which the department acts or has authority to operate on behalf of Canadians. A Core Responsibility corresponds to a department’s enduring function or role.
+  fr: |
+    Les responsabilités essentielles décrivent les domaines de haut niveau à l’intérieur desquels l’organisation agit ou pour lesquels elle a le pouvoir de mener ses activités au nom des Canadiens. Une responsabilité essentielle correspond à une fonction ou au rôle permanent exercé par un ministère.
+
+how_do_orgs_measure_perf_q:
+  en: How do organizations measure performance?
+  fr: Comment les organisations mesurent-elles le rendement?
+
+how_do_orgs_measure_perf_a:
+  transform: [handlebars, markdown]
+  en: |
+    With their Departmental Plans, organizations set or adjust what they want to achieve (results), the level they want to reach (targets) and how they will measure performance (indicators). 
+
+    Organizations will then report at the end of the fiscal year through their Departmental Results Report on how they did using their indicators to measure if they have met the targets they set at the start of the year.    
+  fr: |
+    Avec leur plan ministériel, les organisations établissent ou modifient ce qu’elles cherchent à accomplir (résultats) et à quel degré (cibles), ainsi que la façon dont elles mesurent le rendement (indicateurs). 
+
+    En fin d’exercice, les organisations rendront compte de leurs réalisations dans le rapport sur les résultats ministériels à l’aide des indicateurs qu’elles ont établis pour mesurer l’atteinte des cibles fixées au début de l'année.    
+
+
+what_are_DPs_and_DRRs_q:
+  en: What are Departmental Plans (DP) and Departmental Results Reports (DRR)?
+  fr: Que sont les plans ministériels et les rapports sur les résultats ministériels?
+
+
+what_are_DPs_and_DRRs_a:
+  transform: [handlebars, markdown]
+  en: |
+    To ensure clear, transparent, and accessible reporting on performance, the Government of Canada annually tables {{gl_tt "Departmental Plans" "DP"}} and {{gl_tt "Departmental Results Reports" "DRR"}}. 
+
+    These reports allow parliamentarians and the public to  hold the government accountable by requiring organizations to describe how resources are allocated to each of their {{gl_tt "Programs" "PROG"}}, what they intend to achieve with these resources, and how they will measure progress toward the results they seek to achieve over a three-year period. This is done through a reporting framework consisting of:
+
+    * Planned Resources ({{gl_tt "Spending" "PLANNED_EXP"}} and {{gl_tt "Full-time Equivalents" "FTE"}});
+    * Intended {{gl_tt "Results" "RESULT"}} for delivery; and
+    * Detailed {{gl_tt "Indicators" "IND_RESULT"}} to measure performance.
+    
+    Note that Crown corporations, parliamentary entities, the Office of the Governor General and some departments and agencies are not required to submit Departmental Plans and Departmental Results Reports.  Consequently, no results information is available for these organizations.
+  fr: |
+    Afin d’assurer la clarté, la transparence et l’accessibilité des rapports sur le rendement, le gouvernement du Canada dépose chaque année des {{gl_tt "plans ministériels" "DP"}} et des {{gl_tt "rapports sur les résultats ministériels" "DRR"}}.  
+
+
+    Ces rapports permettent aux parlementaires et au public de tenir le gouvernement responsable en exigeant des organisations qu’elles décrivent comment les ressources qui leur ont été attribuées seront allouées à chacun de leurs {{gl_tt "programmes" "PROG"}}, ce qu’elles se proposent de réaliser avec ces ressources, ainsi que la façon dont elles mesureront les progrès menant aux résultats qu’elles souhaitent atteindre au cours d’une période de trois ans. Ce processus se déroule selon un cadre de présentation de rapports composé des éléments suivants :
+    * ressources prévues ({{gl_tt "dépenses" "PLANNED_EXP"}} et {{gl_tt "équivalents temps plein" "FTE"}});
+    * {{gl_tt "résultats" "RESULT"}} escomptés à fournir;
+    * {{gl_tt "indicateurs" "IND_RESULT"}} détaillés pour mesurer le rendement.
+
+    Veillez noter que les société d'État, les entités parlementaires, le Bureau du gouverneur général et certains ministères et organismes ne sont pas tenus de présenter des plans ministériels et des rapports sur les résultats ministériels. Par conséquant, aucun renseignment sur les résultats n'est disponible pour ces organisastions.   
+    
+
+
+
+
+
+

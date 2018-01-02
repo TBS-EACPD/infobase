@@ -1,0 +1,96 @@
+table4_short:
+  transform: [handlebars,markdown]
+  en: |
+   Using {{gl_tt "Public Accounts" "PA"}} data, this table presents net budgetary {{gl_tt "authorities" "AUTH"}} and {{gl_tt "expenditures" "BUD_EXP"}} by {{gl_tt "vote" "VOTED"}} and {{gl_tt "statutory" "STAT"}} items for {{pa_last_year_5}} to {{pa_last_year}}.
+  fr: |
+   Selon les données des {{gl_tt "Comptes publics" "PA"}}, ce tableau présente les {{gl_tt "autorisations" "AUTH"}} et {{gl_tt "dépenses budgétaires" "BUD_EXP"}} nettes par {{gl_tt "crédit" "VOTED"}} et par {{gl_tt "poste législatifs" "STAT"}} pour {{pa_last_year_5}} à {{pa_last_year}}.
+
+table4:
+  transform: [handlebars,markdown]
+  en: |
+   {{{gt "table4_short"}}}
+
+
+   All figures presented reflect information previously published in the 
+   Public Accounts of Canada, although totals may not match or agree with those presented in these documents due to rounding.
+   In cases where machinery of government changes (such as merging or eliminating organizations) 
+   have occurred, the data has not been adjusted.
+
+  fr: |
+   {{{gt "table4_short"}}}
+
+   Toutes les données présentées correspondent à l’information qui a été publiée dans les Comptes publics du Canada, 
+   quoique les totaux pourraient ne pas correspondre ou coïncider à ceux présentées dans ces documents, du fait que les chiffres ont été arrondis. Dans le cas où des changements dans l’appareil 
+   gouvernemental (comme la fusion ou l'élimination' d’organisations) se sont produits, 
+   les données n’ont pas été rajustées.
+
+historical_auth_exp_title:
+  transform: [handlebars]
+  en: Authorities and Expenditures ({{pa_last_year_5}} to {{pa_last_year}})
+  fr: Utilisation des autorisations parlementaires ({{pa_last_year_5}} à {{pa_last_year}})
+
+gov_historical_auth_exp_text:
+  transform: [handlebars,markdown]
+  en: |
+   Parliamentary authority to spend typically expires at the end of the fiscal year. For example, authorities approved through all appropriation acts for the fiscal year {{pa_last_year}} expired on {{ppl_last_year_end_ticks}} for most organizations. 
+   
+   
+   Over the last five years, the government has spent an average of **{{fmt_compact_written gov_hist_diff_average}}**
+   less per year than what had been authorized by Parliament. On average, unused authorities represented **{{fmt_percentage1 gov_hist_avg_tot_pct}}** of approuved authorities.
+  
+  fr: |
+   L'autorisation parlementaire de dépenser expire habituellement à la fin de l'exercice. Par exemple, pour la plupart des organisations, les autorisations approuvées au moyen des lois de crédits pour {{pa_last_year}} ont expiré le {{ppl_last_year_end_ticks}}. 
+   
+   
+   Au cours des cinq dernières années, le gouvernement a dépensé en moyenne **{{fmt_compact_written gov_hist_diff_average}}** de moins que le montant autorisé par le Parlement. En moyenne, les autorités non utilisées représentaient **{{fmt_percentage1 gov_hist_avg_tot_pct}}**  des autorités approuvées.
+
+
+dept_historical_auth_exp_text:
+  transform: [handlebars,markdown]
+  en: |
+   Parliamentary authority to spend typically expires at the end of the fiscal year. For example, authorities approved through all appropriation acts for the fiscal year {{pa_last_year}} expired on {{ppl_last_year_end_ticks}} for most organzations. 
+   
+
+   Over the last five years, **{{subj_name dept}}** has spent an average of **{{fmt_compact_written dept_hist_diff_average}}** less per year than what had been authorized by Parliament. On average, unused authorities represented **{{fmt_percentage1 dept_hist_avg_tot_pct}}**  of approuved authorities.
+
+
+  fr: |
+   L'autorisation parlementaire de dépenser expire habituellement à la fin de l'exercice. Par exemple, pour la plupart des organisations, les autorisations approuvées au moyen des lois de crédits pour {{pa_last_year}} ont expiré le {{ppl_last_year_end_ticks}}. 
+   
+
+   Au cours des cinq dernières années **{{le_dept dept}}** a dépensé en moyenne **{{fmt_compact_written dept_hist_diff_average}}** de moins par exercice que le montant autorisé par le Parlement. En moyenne, les autorités non utilisées représentaient **{{fmt_percentage1 dept_hist_avg_tot_pct}}**  des autorités approuvées.
+  
+
+dept_historical_voted_spending_title: 
+  transform: [handlebars]
+  en: Detailed Net Authorities by Voted Items ({{pa_last_year_5}} to {{pa_last_year}})
+  fr: Détail des autorisations nettes par crédits ministériels votés ({{pa_last_year_5}} à {{pa_last_year}})
+dept_historical_voted_spending_text: 
+  transform: [handlebars,markdown]
+  en: |
+   From {{pa_last_year_5}} to {{pa_last_year}}, **{{subj_name subject}}** had average voted 
+   authorities of **{{fmt_compact_written dept_voted_five_year_auth_average}}** per year, with the highest being
+   in {{fmt_compact_written dept_voted_five_year_auth_max_year}} (**{{fmt_compact_written dept_voted_five_year_auth_max}}**) and
+   the lowest being in {{fmt_compact_written dept_voted_five_year_auth_min_year}} (**{{fmt_compact_written dept_voted_five_year_auth_min}}**).
+
+  fr: |
+   Entre {{pa_last_year_5}} et {{pa_last_year}}, **{{le_dept dept}}** s’est vu accorder en moyenne des 
+   autorisations votées de **{{fmt_compact_written dept_voted_five_year_auth_average}}** par année, les plus fortes autorisations (**{{fmt_compact_written dept_voted_five_year_auth_max}}**) ayant été 
+   reçues en {{fmt_compact_written dept_voted_five_year_auth_max_year}}, et les moins élevées (**{{fmt_compact_written dept_voted_five_year_auth_min}}**) en {{fmt_compact_written dept_voted_five_year_auth_min_year}}.
+
+dept_historical_stat_spending_title: 
+  transform: [handlebars]
+  en:  Detailed Net Authorities by Statutory Items ({{pa_last_year_5}} to {{pa_last_year}})
+  fr:  Détail des autorisations nettes par secteur de dépenses législatives ({{pa_last_year_5}} à {{pa_last_year}})
+dept_historical_stat_spending_text: 
+  transform: [handlebars,markdown]
+  en: |
+   From {{pa_last_year_5}} to {{pa_last_year}}, **{{subj_name subject}}** had average statutory 
+   authorities of **{{fmt_compact_written dept_stat_five_year_auth_average}}** per year, with the highest being
+   in {{fmt_compact_written dept_stat_five_year_auth_max_year}} (**{{fmt_compact_written dept_stat_five_year_auth_max}}**) and
+   the lowest being in  {{fmt_compact_written dept_stat_five_year_auth_min_year}} (**{{fmt_compact_written dept_stat_five_year_auth_min}}**).
+  fr: |
+   Entre {{pa_last_year_5}} et {{pa_last_year}}, **{{le_dept dept}}** s’est vu accorder en moyenne des 
+   autorisations législatives de **{{fmt_compact_written dept_stat_five_year_auth_average}}** par année, les plus fortes autorisations (**{{fmt_compact_written dept_stat_five_year_auth_max}}**) ayant été 
+   reçues en {{fmt_compact_written dept_stat_five_year_auth_max_year}}, et les moins élevées (**{{fmt_compact_written dept_stat_five_year_auth_min}}**) en {{fmt_compact_written dept_stat_five_year_auth_min_year}}.
+

@@ -1,0 +1,358 @@
+﻿"ProgElemID","ParentID","Name_FR","Description_FR","Active"
+"ACOA-SO0021","ACOA","Une économie concurrentielle au Canada atlantique","",1
+"ACOA-SO1999","ACOA","Services internes","",1
+"AECB-SO0331","AECB","Des installations et des processus nucléaires sûrs et sécuritaires qui ne sont utilisés qu'à des fins pacifiques et un public informé sur l'efficacité du régime de réglementation nucléaire du Canada","",1
+"AECB-SO1999","AECB","Services internes","",1
+"AECL-SO0031","AECL","Être le principal fournisseur mondial de produits et de services nucléaires. Protéger la santé et la sécurité du public, de notre personnel et de l'environnement. Réduire au minimum les obligations liées aux déchets nucléaires pour les générations futures","",1
+"AGR-SO0011","AGR","Un secteur de l'agriculture, de l'agroalimentaire et des produits agro-industriels compétitif et axé sur le marché qui gère les risques de manière proactive","",1
+"AGR-SO0012","AGR","Un secteur innovateur et durable de l'agriculture, de l'agroalimentaire et des produits agro-industriels","",1
+"AGR-SO0013","AGR","Un secteur de l'agriculture, de l'agroalimentaire et des produits agro-industriels respectueux de l'environnement","",0
+"AGR-SO1999","AGR","Services internes","",1
+"AHRAC-SO0051","AHRAC","Protection et promotion de la santé et de la sécurité des Canadiens relativement à la procréation assistée et à la recherche connexe, dans un cadre éthique rigoureux","",0
+"AHRAC-SO1999","AHRAC","Services internes","",0
+"APPRT-SO0141","APPRT","La protection et le respect des droits des artistes et des producteurs prévus à la partie II de la Loi sur le statut de l'artiste","",0
+"APPRT-SO1999","APPRT","Services internes","",0
+"ATSSC-SO0001","ATSSC","Services efficients et efficaces qui appuient les présidents et les membres des tribunaux dans l'exercice de leurs responsabilités légales et protègent leur indépendance de façon à promouvoir la confiance des Canadiens dans le système des tribunaux fédéraux","",1
+"ATSSC-SO1999","ATSSC","Services internes","",1
+"CAS-SO0471","CAS","Le public a accès en temps opportun et de manière équitable aux processus judiciaires de la Cour d'appel fédérale, de la Cour fédérale, de la Cour d’appel de la cour martiale du Canada et de la Cour canadienne de l'impôt","",1
+"CAS-SO1999","CAS","Services internes","",1
+"CAT-SO1301","CAT","Le milieu des transports du Canada a accès à un processus équitable et impartial de révision des décisions relatives à l'application des règlements ou à la délivrance des permis prises par le ministre des Transports","",0
+"CAT-SO1999","CAT","Services internes","",0
+"CATSA-SO0131","CATSA","Les programmes de contrôle aux aéroports désignés du Canada protègent les voyageurs","",1
+"CB-SO0451","CB","Instaurer un processus décisionnel équitable qui incite à la création et à l'utilisation des oeuvres protégées par un droit d'auteur","",1
+"CB-SO1999","CB","Services internes","",1
+"CBC-SO0151","CBC","Un service de radiodiffusion public national dont le contenu est principalement canadien et qui rassemble les citoyens autour d'un contenu canadien","",1
+"CBSA-SO0061","CBSA","Le commerce international et les déplacements sont favorisés à la frontière du Canada et la population du Canada est protégée des risques liés aux frontières","",1
+"CBSA-SO1999","CBSA","Services internes","",1
+"CC-SO0071","CC","Un secteur artistique vif et dynamique au Canada","",1
+"CCC-SO0171","CCC","Un meilleur accès aux marchés pour les exportateurs canadiens en ce qui concerne les marchés complexes du secteur public international","",0
+"CCMD-SO0121","CCMD","Les fonctionnaires fédéraux ont les connaissances, les habiletés et les compétences communes dont ils ont besoin pour exercer leurs responsabilités envers les Canadiens","",1
+"CCMD-SO1999","CCMD","Services internes","",1
+"CCOHS-SO0161","CCOHS","Conditions de travail et pratiques en milieu de travail améliorées qui mettent en valeur la santé, la sécurité et le mieux-être des travailleurs canadiens","",1
+"CCOHS-SO1999","CCOHS","Services internes","",1
+"CCRA-BRA00","CCRA","Impôt","S’assurer que le système fiscal d’autocotisation volontaire du Canada est maintenu en fournissant aux contribuables le soutien et les renseignements nécessaires pour comprendre et pour respecter leurs obligations fiscales, et prendre des mesures d’observation et d’exécution au besoin pour maintenir l’intégrité du système, en offrant des moyens de recours lorsque les contribuables pourraient être en désaccord avec une cotisation ou une décision.",1
+"CCRA-BRB00","CCRA","Prestations","S’assurer que les Canadiens obtiennent le soutien et les renseignements dont ils ont besoin pour obtenir l’appui et les renseignements nécessaires pour savoir quelles sont les prestations auxquels ils pourraient avoir droit, pour qu’ils reçoivent leurs paiements de prestations en temps opportun, et qu’ils aient des moyens de recours lorsqu’ils sont en désaccord avec une décision sur leur admissibilité aux prestations.",1
+"CCRA-BRC00","CCRA","Ombudsman des contribuables","Les Canadiens ont accès à un examen crédible et indépendant des plaintes liées au service au sujet de l'ARC.",1
+"CCRA-ISS00","CCRA","Services internes","Les Services internes comprennent les groupes d'activités et de ressources connexes que le gouvernement fédéral considère comme étant des services à l'appui de programmes ou nécessaires pour permettre à une organisation de s'acquitter de ses obligations générales. Les Services internes désignent les activités et ressources des dix services distincts qui soutiennent l'exécution des programmes au sein de l'organisation, peu importe le modèle de prestation des Services internes utilisé.
+Ces services sont  Services de gestion des acquisitions, Services de communication, Services de gestion financière, Services de gestion des ressources humaines, Services de gestion de l'information, Services de technologie de l'information, Services juridiques, Services de gestion du matériel, Services de gestion et de surveillance, Services de gestion des biens immobiliers.",1
+"CCRA-SO0111","CCRA","Les familles et les particuliers admissibles reçoivent en temps opportun les paiements exacts auxquels ils ont droit","",0
+"CCRA-SO0112","CCRA","Les contribuables et les bénéficiaires de prestations obtiennent un examen impartial et indépendant à l'égard de leurs plaintes liées au service","",0
+"CCRA-SO0113","CCRA","Les contribuables s'acquittent de leurs obligations et l'assiette fiscale du Canada est protégée","",0
+"CCRA-SO1999","CCRA","Services internes","",0
+"CDC-SO0181","CDC","Accroître la vitalité de l'industrie laitière canadienne au profit de tous les partenaires de l'industrie","",1
+"CEAA-SO0191","CEAA","Évaluations environnementales de grande qualité et en temps opportun des grands projets pour protéger l'environnement et favoriser la croissance économique","",1
+"CEAA-SO1999","CEAA","Services internes","",1
+"CEO-SO0411","CEO","Un cadre électoral accessible que les Canadiens utilisent avec confiance","",1
+"CEO-SO1999","CEO","Services internes","",1
+"CFDC-SO1261","CFDC","Contenu audiovisuel de qualité créé par des Canadiens et promu auprès des auditoires du Canada et du monde entier","",1
+"CFDC-SO1999","CFDC","Services internes","",1
+"CFGB-SO0731","CFGB","Le Chef d'état-major de la Défense et les membres des Forces armées canadiennes bénéficient d'un examen équitable, indépendant et opportun des griefs militaires","",1
+"CFGB-SO1999","CFGB","Services internes","",1
+"CFIA-SO0201","CFIA","Un approvisionnement alimentaire et des ressources animales et végétales sûrs et accessibles","",1
+"CFIA-SO1999","CFIA","Services internes","",1
+"CGC-SO0211","CGC","Le grain du Canada est salubre, fiable et commercialisable, et les producteurs de grain canadiens sont rémunérés convenablement pour les livraisons de grain aux compagnies céréalières agréées","",1
+"CGC-SO0212","CGC","Le grain du Canada est salubre, fiable et commercialisable et les producteurs de grain canadien sont protégés","",0
+"CGC-SO1999","CGC","Services internes","",1
+"CH-SO0221","CH","Les expressions artistiques et le contenu culturel canadiens sont créés et accessibles au pays et à l'étranger","",1
+"CH-SO0222","CH","Les Canadiens participent et excellent dans le sport","",1
+"CH-SO0223","CH","Les Canadiens partagent, expriment et apprécient leur identité canadienne","",1
+"CH-SO1999","CH","Services internes","",1
+"CHRC-BSA00","CHRC","Mobilisation et promotion des intérêts","Agir à titre de porte-parole crédible pour l’égalité au Canada – Mon Canada inclut tout le monde; promouvoir les droits de la personne à grande échelle au Canada en sensibilisant le public aux enjeux liés aux droits de la personne et mobiliser la société civile, les gouvernements, les employeurs et le public dans le dialogue et l’action afin d’influencer le changement à l’égard des droits de la personne.",1
+"CHRC-BSB00","CHRC","Plaintes relatives aux droits de la personne","Fournir à la population Canadienne un mécanisme permettant de déposer des plaintes relatives aux droits de la personne et de fournir des recours aux victimes de discrimination; réduire les cas de discrimination systémique; représenter l’intérêt du public dans les affaires juridiques pour faire progresser les droits de la personne au Canada.",1
+"CHRC-BSC00","CHRC","Vérifications d'équité en matière d'emploi","Assurer la conformité des employeurs relativement aux exigences législatives d’équité en matière d’emploi; encourager les employeurs à identifier les obstacles à l’emploi et à mettre en œuvre des pratiques exemplaires afin d’éliminer les écarts dans la représentation des femmes, des groupes de minorités visibles, des Autochtones et des personnes handicapées.",1
+"CHRC-ISS00","CHRC","Services internes","Les Services internes comprennent les groupes d'activités et de ressources connexes que le gouvernement fédéral considère comme étant des services à l'appui de programmes ou nécessaires pour permettre à une organisation de s'acquitter de ses obligations générales. Les Services internes désignent les activités et ressources des dix services distincts qui soutiennent l'exécution des programmes au sein de l'organisation, peu importe le modèle de prestation des Services internes utilisé.
+Ces services sont  Services de gestion des acquisitions, Services de communication, Services de gestion financière, Services de gestion des ressources humaines, Services de gestion de l'information, Services de technologie de l'information, Services juridiques, Services de gestion du matériel, Services de gestion et de surveillance, Services de gestion des biens immobiliers.",1
+"CHRC-SO0231","CHRC","Égalité des chances et respect des droits de la personne","",0
+"CHRC-SO1999","CHRC","Services internes","",0
+"CHRT-SO0241","CHRT","Les individus ont accès, en vertu de la Loi canadienne sur les droits de la personne et de la Loi sur l'équité en matière d'emploi, au règlement juste et équitable des affaires portant sur les droits de la personne et sur l'équité en matière d'emploi qui sont entendues par le Tribunal canadien des droits de la personne","",0
+"CHRT-SO1999","CHRT","Services internes","",0
+"CI-SO0421","CI","Mouvement migratoire familial et humanitaire qui réunifie les familles et offre une protection aux personnes déplacées et persécutées","",1
+"CI-SO0422","CI","Gestion des mouvements migratoires et facilitation des déplacements qui favorisent les intérêts canadiens et protègent la santé et la sécurité des Canadiens","",1
+"CI-SO0423","CI","Mouvement migratoire de résidents permanents et temporaires qui renforce l'économie canadienne","",1
+"CI-SO0424","CI","Participation des nouveaux arrivants et des citoyens à l'appui d'une société intégrée","",1
+"CI-SO0581","CI","Services de commerce international et consulaires destinés aux Canadiens - Les Canadiens sont satisfaits des services commerciaux et consulaires","",0
+"CI-SO1999","CI","Services internes","",1
+"CICS-SO0261","CICS","Les services aux conférences intergouvernementales de haut niveau sont exécutés avec professionnalisme et avec succès","",1
+"CICS-SO1999","CICS","Services internes","",1
+"CIDA-SO0582","CIDA","Réduction de la pauvreté dans les pays où le Canada mène des activités de développement international","",0
+"CIDA-SO1999","CIDA","Services internes","",0
+"CIHR-SO0251","CIHR","Le Canada est un chef de file mondial dans la création, la dissémination et l'application de connaissances issues de la recherche en santé","",1
+"CIHR-SO0252","CIHR","Une entreprise de recherche en santé de renommée mondiale qui crée, dissémine et applique de nouvelles connaissances dans tous les domaines de la recherche en santé","",0
+"CIHR-SO1999","CIHR","Services internes","",1
+"CIRB-SO0081","CIRB","Services efficaces de règlement des différents qui favorisent l'établissement de relations de travail constructives dans les secteurs régis par le Code canadien du travail ainsi que des relations professionnelles constructives dans les secteurs régis par la Loi sur le statut de l'artiste","",0
+"CIRB-SO1999","CIRB","Services internes","",0
+"CITT-SO0271","CITT","Règlement équitable, opportun et transparent de causes de commerce international, de causes liées aux marchés publics et d'enquêtes sur instructions du gouvernement qui relèvent de la compétence du Tribunal","",0
+"CITT-SO1999","CITT","Services internes","",0
+"CLVM-SO0991","CLVM","Un parc urbain consacré aux loisirs et aux activités touristiques et culturelles en vue de sauvegarder le patrimoine culturel du Vieux-Port de Montréal et d'en faire la promotion tout en facilitant l'accès du public au bord de l'eau","",0
+"CMC-SO0291","CMC","Connaissance, appréciation et respect des réalisations culturelles humaines et du comportement humain, et intérêt pour ceux-ci, grâce à des collections d'objets historiques et culturels, des expositions, des programmes et des recherches reflétant un point de vue canadien","",1
+"CMHC-SO0091","CMHC","Le Canada dispose d'un système de logement stable, compétitif et novateur","",1
+"CMHC-SO0092","CMHC","Les Canadiens dans le besoin ont accès à des logements abordables","",1
+"CMHC-SO0093","CMHC","Compétitivité accrue et innovation dans le secteur de l'habitation dans le but de combler les besoins des Canadiens en matière de logement","",0
+"CMHC-SO0094","CMHC","Accroître l'accès à des logements sûrs et abordables pour les Canadiens dans le besoin incluant les Autochtones","",0
+"CMHC-SO0095","CMHC","Le système canadien du logement demeure l'un des meilleurs du monde","",0
+"CMHR-SO0281","CMHR","Connaissance approfondie des droits de la personne, en mettant un accent particulier sur le Canada, en vue d'accroître la compréhension du public à cet égard, de promouvoir le respect des autres et d'encourager la réflexion et le dialogue","",1
+"CMI-SO0301","CMI","Les Canadiens et Canadiennes participent à la création et à l'exploration des récits, des thèmes et de l'histoire de l'immigration au Canada, qui se poursuit de nos jours","",1
+"CMN-SO0311","CMN","L'intérêt et le respect à l'égard de la nature de même que la connaissance et le degré d'appréciation, par la collecte d'objets d'histoire naturelle, les programmes d'éducation du public et la recherche offrant une perspective principalement axée sur le Canada","",1
+"CNEDA-SO0321","CNEDA","Les économies territoriales développées et diversifiées qui soutiennent la prospérité de tous les résidants du Nord","",1
+"CNEDA-SO1999","CNEDA","Services internes","",1
+"CNMI-SO0721","CNMI","Un service de traversier sûr, fiable, efficace, abordable et écologique entre l'île de Terre-Neuve et la province de la Nouvelle-Écosse","",1
+"CPC-SO0101","CPC","Compensation pour la prestation de services liés au courrier parlementaire et à la documentation à l'usage des personnes aveugles transmis en franchise en vertu de la Loi sur la Société canadienne des postes","",1
+"CPCC-SO0341","CPCC","Accroissement des connaissances sur les régions polaires du Canada","",0
+"CPCC-SO0342","CPCC","Le Canada a une science et une technologie arctiques de calibre mondial qui appuient le développement et la gérance du Nord canadien, et il est reconnu comme un chef de file dans les questions associées à la recherche circumpolaire","",1
+"CPCC-SO1999","CPCC","Services internes","",1
+"CRTC-SO0351","CRTC","Les Canadiens ont accès à un système de communication de calibre mondial","",1
+"CRTC-SO0352","CRTC","Les  canadiens  ont  accès  à une grande variété d'émissions canadiennes de haute qualité  et  à  des  services  de  télécommunication fiables, abordables et de haute qualité","",0
+"CRTC-SO1999","CRTC","Services internes","",1
+"CSA-SO0371","CSA","Les activités du Canada en matière d'exploration spatiale, de prestation de services depuis l'espace et de développement de capacités spatiales répondent aux besoins nationaux en matière de connaissances scientifiques, d'innovation et d'information","",1
+"CSA-SO1999","CSA","Services internes","",1
+"CSC-SO0461","CSC","La garde, les interventions correctionnelles et la surveillance des délinquants dans la collectivité et dans les établissements contribuent à la sécurité publique","",1
+"CSC-SO1999","CSC","Services internes","",1
+"CSEC-SO0441","CSEC","Les capacités en matière de renseignement électromagnétique étranger et de sécurité technique font progresser et protègent les intérêts vitaux du Canada","",1
+"CSEC-SO0785","CSEC","Les opérations de la Défense contribuent à faire régner la paix, la stabilité et la sécurité partout où elles sont menées","",0
+"CSIS-SO0361","CSIS","Les renseignements servent à assurer la sécurité du Canada et des Canadiens","",1
+"CT-SO1131","CT","Audiences accessibles, équitables, transparentes et efficaces liées au mandat du Tribunal","",0
+"CT-SO1999","CT","Services internes","",0
+"CTA-SO0401","CTA","Règlement des différends et réglementation économique du réseau de transport national transparents, justes et rapides","",1
+"CTA-SO1999","CTA","Services internes","",1
+"CTAIB-BWA00","CTAIB","Enquêtes indépendantes de sécurité et communication des risques dans le réseau de transport","L’unique objectif du BST consiste à promouvoir la sécurité du transport aérien, maritime, ferroviaire et par pipeline. Il s’acquitte de son mandat en procédant à des enquêtes indépendantes sur les événements de transport choisis afin de déterminer les causes et les facteurs contributifs des événements, ainsi que les lacunes en matière de sécurité mises en évidence par de tels événements. Le BST formule ensuite des recommandations visant à réduire ou à éliminer les lacunes sur le plan de la sécurité et rend compte publiquement de ses enquêtes. Le BST assure ensuite le suivi auprès des parties intéressées pour s’assurer que les mesures de sécurité sont prises pour réduire les risques et améliorer la sécurité.",1
+"CTAIB-ISS00","CTAIB","Services internes","Les Services internes comprennent les groupes d'activités et de ressources connexes que le gouvernement fédéral considère comme étant des services à l'appui de programmes ou nécessaires pour permettre à une organisation de s'acquitter de ses obligations générales. Les Services internes désignent les activités et ressources des dix services distincts qui soutiennent l'exécution des programmes au sein de l'organisation, peu importe le modèle de prestation des Services internes utilisé.
+Ces services sont  Services de gestion des acquisitions, Services de communication, Services de gestion financière, Services de gestion des ressources humaines, Services de gestion de l'information, Services de technologie de l'information, Services juridiques, Services de gestion du matériel, Services de gestion et de surveillance, Services de gestion des biens immobiliers.",1
+"CTAIB-SO0391","CTAIB","Les enquêtes indépendantes sur les événements de transport contribuent à rendre le réseau des transports plus sécuritaire","",0
+"CTAIB-SO1999","CTAIB","Services internes","",0
+"EA-SO0581","EA","Services de commerce international et consulaires destinés aux Canadiens - Les Canadiens sont satisfaits des services commerciaux et consulaires","",1
+"EA-SO0582","EA","Réduction de la pauvreté dans les pays où le Canada mène des activités de développement international","",0
+"EA-SO0583","EA","Réseau du Canada à l'étranger - Le ministère entretient un réseau de missions offrant une infrastructure et des services qui permettent au gouvernement du Canada d'atteindre ses priorités internationales","",1
+"EA-SO0584","EA","Programme international du Canada - Le programme international est modelé pour faire avancer la sécurité, la prospérité, les intérêts et les valeurs du Canada","",1
+"EA-SO0585","EA","Développement international et réduction de la pauvreté - La pauvreté est réduite et la sécurité internationale et la démocratie sont accrues pour les gens vivant dans des pays où le Canada intervient","",1
+"EA-SO1999","EA","Services internes","",1
+"EC-SO0511","EC","L'environnement naturel du Canada est préservé et restauré pour les générations actuelles et futures","",1
+"EC-SO0512","EC","La population canadienne est équipée pour prendre des décisions éclairées quant aux conditions changeantes du temps, de l'eau et du climat","",1
+"EC-SO0513","EC","Les menaces que représente la pollution pour les Canadiens ainsi que pour leur environnement sont minimisées","",1
+"EC-SO1999","EC","Services internes","",1
+"ECBC-SO0501","ECBC","Une économie cap-bretonaise durable et concurrentielle","",0
+"EDC-SO0581","EDC","Services de commerce international et consulaires destinés aux Canadiens - Les Canadiens sont satisfaits des services commerciaux et consulaires","",0
+"ERC-SO1161","ERC","Un processus décisionnel équitable et transparent en matière de relations de travail qui renforce la responsabilité","",1
+"ERC-SO1999","ERC","Services internes","",0
+"FBCL-SO0521","FBCL","Le transport sécuritaire et efficient sur l'infrastructure est maintenu, exploité et géré par La Société des ponts fédéraux Limitée","",1
+"FCAC-SO0542","FCAC","Les droits des consommateurs de produits et services financiers sont protégés et la littératie financière des Canadiens est renforcée","",0
+"FEDSO-SO0531","FEDSO","Une économie compétitive dans le Sud de l'Ontario","",1
+"FEDSO-SO0532","FEDSO","L'économie du Sud de l'Ontario est concurrentielle et diversifiée","",0
+"FEDSO-SO1999","FEDSO","Services internes","",1
+"FIN-SO0541","FIN","Une économie forte et de saines finances publiques pour les Canadiens","",1
+"FIN-SO1999","FIN","Services internes","",1
+"FJA-SO0431","FJA","Une magistrature fédérale indépendante et efficace","",1
+"FJA-SO1999","FJA","Services internes","",1
+"FNSI-SO0561","FNSI","Les Premières nations, les gouvernements et les autres intervenants profiteront de renseignements et d'analyses statistiques précis et pertinents sur les conditions financières, économiques et sociales des Premières nations","",0
+"FO-SO0571","FO","Des secteurs maritimes et des pêches économiquement prospères","",1
+"FO-SO0572","FO","Des eaux sécuritaires et sécurisées","",1
+"FO-SO0573","FO","Des écosystèmes aquatiques durables","",1
+"FO-SO1999","FO","Services internes","",1
+"FORDQ-SO0481","FORDQ","Les régions du Québec ont une économie en croissance","",1
+"FORDQ-SO0482","FORDQ","Les régions du Québec ont une économie compétitive et diversifiée","",0
+"FORDQ-SO1999","FORDQ","Services internes","",1
+"FTRAC-SO0551","FTRAC","Un système financier canadien réfractaire au blanchiment d'argent et du financement des activités terroristes","",1
+"FTRAC-SO0552","FTRAC","Les activités de détection et de dissuasion du blanchiment d'argent et du financement des activités terroristes de CANAFE favorisent la sécurité publique des Canadiens et permettent de protéger l'intégrité du système financier du Canada","",0
+"FTRAC-SO1999","FTRAC","Services internes","",1
+"GG-SO0591","GG","Le gouverneur général, représentant la Reine au Canada, est habilité à exécuter ses rôles constitutionnel, d'état, cérémonial et public","",1
+"GG-SO1999","GG","Services internes","",1
+"GSC-SO1121","GSC","Services et programmes centraux de haute qualité qui répondent aux besoins des organisations fédérales, assurant ainsi l'intendance et de meilleurs résultats à la population canadienne","",1
+"GSC-SO1999","GSC","Services internes","",1
+"H-SO0611","H","Un système de santé qui répond aux besoins des Canadiens","",1
+"H-SO0612","H","Les collectivités des Premières nations et des Inuits bénéficient de services de santé et de prestations qui répondent à leurs besoins de sorte à améliorer leur état de santé","",1
+"H-SO0613","H","Les risques et avantages pour la santé associés aux aliments, aux produits, aux substances et aux facteurs environnementaux sont gérés de façon appropriée et sont communiqués aux Canadiens","",1
+"H-SO0614","H","Les Canadiens sont informés des risques pour la santé associés aux aliments, aux  produits, aux substances et aux environnements, protégés contre ces mêmes risques et au fait des avantages  inhérents  à  une  saine  alimentation","",0
+"H-SO1999","H","Services internes","",1
+"HC-SO0621","HC","Soutien administratif et professionnel efficace aux députés, individuellement et collectivement, dans le cadre de leurs rôles de législateurs et de représentants de 338 circonscriptions, à la Chambre, en comité et en caucus","",1
+"HMIRC-SO0601","HMIRC","Les secrets commerciaux concernant les produits chimiques sont protégés et l'information requise portant sur la santé et la sécurité dans les milieux de travail canadiens est conforme","",0
+"HMIRC-SO1999","HMIRC","Services internes","",0
+"HRSD-SO0491","HRSD","Une main-d'oeuvre qualifiée, inclusive et capable de s'adapter, et un marché du travail efficace","",1
+"HRSD-SO0492","HRSD","Sécurité du revenu, accès aux possibilités et mieux-être des personnes, des familles et des collectivités","",1
+"HRSD-SO0493","HRSD","Milieux de travail sécuritaires, équitables et productifs, et relations de travail coopératives","",1
+"HRSD-SO0494","HRSD","Excellence du service pour les Canadiens","",0
+"HRSD-SO0495","HRSD","Excellence du service à l'échelle du gouvernement","",1
+"HRSD-SO1999","HRSD","Services internes","",1
+"IDRC-SO0671","IDRC","Faire en sorte que les pays en développement accroissent leurs capacités de recherche et de proposer des solutions afin d'appuyer le développement durable et équitable, ainsi que la lutte contre la pauvreté","",1
+"IJC-SO0681","IJC","Prévention et/ou résolution prompte et efficace des différends possibles sous le régime du Traité des eaux limitrophes et de l'Accord relatif à la qualité de l'eau dans les Grands Lacs pour éviter et prévenir des répercussions nuisibles aux relations canado-américaines","",1
+"INAC-SO0641","INAC","Le gouvernement - Soutenir la bonne gouvernance, les droits et les intérêts des peuples autochtones","",1
+"INAC-SO0642","INAC","Les terres et l'économie - Participation entière des personnes et des collectivités des Premières Nations, des Métis, des Indiens non inscrits et des inuits à l'économie","",1
+"INAC-SO0643","INAC","Le Nord - Autonomie, prospérité et bien-être des gens et des collectivités du Nord","",1
+"INAC-SO0644","INAC","Les gens - Bien-être des personnes, des familles et des collectivités des Premières Nations et des Inuits","",1
+"INAC-SO0645","INAC","Le gouvernement - Bonne gouvernance et relations de coopération pour les Premières Nations, les Métis, les Indiens non inscrits, les Inuit et les résidents du Nord","",0
+"INAC-SO0646","INAC","Le Bureau de l'interlocuteur fédéral - Bien-être socioéconomique des Métis, des Indiens non inscrits et des Autochtones vivant en milieu urbain","",0
+"INAC-SO1999","INAC","Services internes","",1
+"IPC-SO0981","IPC","Les droits en vertu de la Loi sur l'accès à l'information sont protégés","",1
+"IPC-SO0982","IPC","Le droit des personnes à la protection de la vie privée est protégé","",1
+"IPC-SO1999","IPC","Services internes","",1
+"IRB-SO0631","IRB","Régler, de manière efficace, équitable et conforme à la loi, les cas d'immigration et de statut de réfugié devant la Commission de l'immigration et du statut de réfugié du Canada","",1
+"IRB-SO1999","IRB","Services internes","",1
+"ISC-SO0661","ISC","Les progrès réalisés dans les domaines des sciences et de la technologie, des connaissances et de l'innovation renforcent l'économie canadienne","",1
+"ISC-SO0662","ISC","Les entreprises et les collectivités canadiennes sont compétitives","",1
+"ISC-SO0663","ISC","Le marché canadien est efficace et concurrentiel","",1
+"ISC-SO1999","ISC","Services internes","",1
+"JCCB-SO1271","JCCB","Passage efficace et sécuritaire sur les infrastructures entretenues, exploitées et gérées par Les ponts Jacques-Cartier et Champlain Incorporée","",1
+"JUS-SO0691","JUS","Un gouvernement fédéral secondé par des services juridiques de haute qualité","",1
+"JUS-SO0692","JUS","Un système de justice canadien équitable, adapté et accessible","",1
+"JUS-SO1999","JUS","Services internes","",1
+"LAC-SO0701","LAC","Le patrimoine documentaire du Canada est préservé et rendu accessible aux générations actuelles et futures","",1
+"LAC-SO0702","LAC","L'information gouvernementale courante est gérée afin d'assurer la responsabilisation du gouvernement","",1
+"LAC-SO1999","LAC","Services internes","",1
+"LP-SO0711","LP","Un Parlement informé et accessible","",1
+"LP-SO1999","LP","Services internes","",1
+"MPCC-SO0741","MPCC","La Commission d'examen des plaintes concernant la police militaire assure que la police militaire des Forces canadiennes applique les normes déontologiques les plus élevées, conformément aux meilleures pratiques du droit et de la police, et soit libre de toute forme d'ingérence dans ses enquêtes","",1
+"MPCC-SO1999","MPCC","Services internes","",1
+"NAC-SO0751","NAC","Arts d'interprétation forts et dynamiques dans la région de la capitale nationale et à travers le Canada","",1
+"NBC-SO0761","NBC","Le parc des Champs-de-Bataille de Québec est un site historique et urbain prestigieux, naturel, accessible, sécuritaire et éducatif","",1
+"NBC-SO1999","NBC","Services internes","",1
+"NCC-SO0771","NCC","La région de la capitale du Canada revêt une importance nationale et constitue une source de fierté pour les Canadiennes et les Canadiens","",1
+"ND-SO0781","ND","Les opérations et services de la Défense améliorent la stabilité et la sécurité, et promeuvent les valeurs et intérêts canadiens","",1
+"ND-SO0782","ND","La Défense demeure continuellement préparée à s'acquitter de la défense nationale et des services de la Défense en conformité avec les valeurs et intérêts canadiens","",1
+"ND-SO0783","ND","La Défense nationale est prête à répondre aux attentes du gouvernement en matière de défense","",0
+"ND-SO0784","ND","L'acquisition de ressources en vue de répondre aux attentes du gouvernement en matière de défense","",0
+"ND-SO0785","ND","Les opérations de la Défense contribuent à faire régner la paix, la stabilité et la sécurité partout où elles sont menées","",0
+"ND-SO0786","ND","Soins et soutien aux Forces canadiennes et contribution à la société canadienne","",0
+"ND-SO1999","ND","Services internes","",1
+"NEB-BTB00","NEB","Surveillance de la sécurité et de l'environnement","Fixer des attentes réglementaires pour les sociétés réglementées par l’Office national de l’énergie et veiller à l’exécution tout le long du cycle de vie des activités liées à l’énergie – de la construction à l’exploitation, puis à la cessation d’exploitation. Les activités concernent des pipelines et des installations connexes, des lignes internationales de transport d’électricité, des droits et tarifs, des exportations et des importations d’énergie, l’exploration pétrolière et gazière et le forage dans certaines zones situées dans le Nord et au large des côtes du Canada.",1
+"NEB-BTC00","NEB","Information sur l'énergie","Recueillir, surveiller, analyser et publier des renseignements sur les marchés et la demande d’énergie, les sources d’énergie, la sécurité et la sûreté des pipelines et des lignes internationales de transport d’électricité.",1
+"NEB-BTD00","NEB","Mobilisation","Mener des activités d’engagement auprès des parties prenantes et des Autochtones relativement à des sujets qui concernent le mandat et le rôle de l’Office national de l’énergie, au-delà de la participation relative aux projets précis.",1
+"NEB-ISS00","NEB","Services internes","Les Services internes comprennent les groupes d'activités et de ressources connexes que le gouvernement fédéral considère comme étant des services à l'appui de programmes ou nécessaires pour permettre à une organisation de s'acquitter de ses obligations générales. Les Services internes désignent les activités et ressources des dix services distincts qui soutiennent l'exécution des programmes au sein de l'organisation, peu importe le modèle de prestation des Services internes utilisé.
+Ces services sont  Services de gestion des acquisitions, Services de communication, Services de gestion financière, Services de gestion des ressources humaines, Services de gestion de l'information, Services de technologie de l'information, Services juridiques, Services de gestion du matériel, Services de gestion et de surveillance, Services de gestion des biens immobiliers.",1
+"NEB-SO0791","NEB","La réglementation des pipelines et des lignes de transport d'électricité, de la mise en valeur des ressources énergétiques et du commerce de l'énergie contribue à assurer la sécurité des Canadiens et Canadiennes, la protection de l'environnement et l'existence d'une infrastructure et de marchés énergétiques efficients, le tout dans le respect des droits et des intérêts des parties touchées par les décisions et les recommandations de l'Office","",0
+"NEB-SO0792","NEB","Processus décisionnel","",1
+"NEB-SO1999","NEB","Services internes","",0
+"NFB-SO0801","NFB","Les histoires et les perspectives canadiennes sont présentes dans les médias audiovisuels et rendues accessibles à la population du Canada et du reste du monde","",1
+"NFB-SO1999","NFB","Services internes","",1
+"NGC-SO0811","NGC","Grâce à des collections d'oeuvres d'art anciennes et contemporaines, à des programmes et à de la recherche reflétant un point de vue particulier mais non exclusif sur le Canada, favoriser l'intérêt, l","",1
+"NMST-SO0821","NMST","Intérêt, connaissance, appréciation et respect à l'égard de la science et la technologie par l'entremise de la collection des objets scientifiques et technologiques, des programmes et de la recherche reflétant un point de vue canadien","",1
+"NPA-SO0871","NPA","S'assurer que la planification et la construction du tronçon canadien du projet de gazoduc de la route de l'Alaska s'effectuent de façon efficace et rapide tout en garantissant la protection de l'environnement et des retombées socioéconomiques pour les Canadiens","",1
+"NPB-BUA00","NPB","Décisions relatives à la mise en liberté sous condition","La mise en liberté sous condition est fondée sur le principe selon lequel la mise en liberté graduelle des délinquants, lorsqu'elle est justifiée, améliore la sécurité de la collectivité. Les décisions judicieuses fondées sur le risque de récidive ainsi que le recours à des programmes et à des traitements efficaces et à une surveillance efficace dans la collectivité sont tous des éléments qui contribuent au processus. Dans le cadre de cette responsabilité principale, le personnel de la CLCC fournit en temps utile aux commissaires des renseignements exacts pour la prise de décisions, et il élabore des programmes de formation et des politiques qui constituent des outils essentiels pour l'évaluation du risque et la prise de décisions.",1
+"NPB-BUB00","NPB","Application transparente et responsable du processus de mise en liberté sous condition","Cette responsabilité principale permet à la CLCC d'exercer ses activités de manière transparente et responsable, conformément aux dispositions de la Loi sur le système correctionnel et la mise en liberté sous condition (LSCMLC). Elle concerne les victimes d'actes criminels et le grand public, car il consiste à fournir de l'information, notamment l'accès au registre des décisions de la CLCC, et à donner de l'aide aux personnes qui assistent aux audiences à titre d'observateurs. La responsabilité principale sert aussi à encourager la participation des citoyens, à mener des enquêtes sur des incidents tragiques survenus dans la collectivité, à surveiller le rendement de la CLCC et à rendre compte des processus de mise en liberté sous condition.",1
+"NPB-BUC00","NPB","Décisions relatives à la suspension du casier et recommandations concernant la clémence","La suspension du casier vise à faciliter la réinsertion sociale d’une personne, s’il y a lieu. C'est une mesure officielle dont l'objet est d'effacer la honte rattachée au fait d'avoir un casier judiciaire chez les personnes reconnues coupables d'une infraction à une loi fédérale et qui, après avoir purgé la peine qui leur avait été imposée et avoir laissé s'écouler une période d'attente déterminée, se conduisent en citoyens respectueux des lois.  La suspension du casier peut être révoquée ou annulée si une personne est condamnée pour une nouvelle infraction punissable par voie de mise en accusation ou, dans certains cas, une infraction punissable par procédure sommaire, si la personne a cessé de bien se conduire, ou s’il existe des preuves qu’elle avait fait une déclaration inexacte ou trompeuse ou avait caché de l’information.  Dans le cadre de cette responsabilité principale, la CLCC vérifie l'admissibilité des demandeurs et s'assure que tous les renseignements exigés figurent bel et bien dans la demande de suspension du casier, réunit les renseignements nécessaires pour rendre ses décisions et élabore des politiques qui orientent les processus décisionnels.  La responsabilité principale consiste aussi à évaluer les demandes de personnes qui désirent bénéficier de la prérogative royale de clémence (clémence) et à formuler des recommandations à cet égard, ainsi qu’à donner des avis au ministre sur le bien fondé de chaque cas. La clémence n’est accordée que dans des circonstances exceptionnelles dans des cas où le bien fondé de la demande a été établi et où il est question d’infractions à des lois fédérales, lorsque la loi ne prévoit aucun autre moyen de réduire les effets négatifs graves des sanctions imposées pour des actes criminels.
+",1
+"NPB-ISS00","NPB","Services internes","Les Services internes comprennent les groupes d'activités et de ressources connexes que le gouvernement fédéral considère comme étant des services à l'appui de programmes ou nécessaires pour permettre à une organisation de s'acquitter de ses obligations générales. Les Services internes désignent les activités et ressources des dix services distincts qui soutiennent l'exécution des programmes au sein de l'organisation, peu importe le modèle de prestation des Services internes utilisé.
+Ces services sont  Services de gestion des acquisitions, Services de communication, Services de gestion financière, Services de gestion des ressources humaines, Services de gestion de l'information, Services de technologie de l'information, Services juridiques, Services de gestion du matériel, Services de gestion et de surveillance, Services de gestion des biens immobiliers.",1
+"NPB-SO1021","NPB","Décisions relatives à la mise en liberté sous condition et à la suspension du casier, et processus décisionnels visant à protéger les collectivités canadiennes","",0
+"NPB-SO1999","NPB","Services internes","",0
+"NR-SO0851","NR","Les secteurs des ressources naturelles canadiens sont concurrentiels à l'échelle mondiale","",1
+"NR-SO0852","NR","Les Canadiens ont l'information nécessaire pour gérer leurs terres et leurs ressources naturelles, et sont protégés contre les risques associés","",1
+"NR-SO0853","NR","Les secteurs des ressources naturelles et les consommateurs sont respectueux de l'environnement","",1
+"NR-SO0854","NR","Le Canada est un chef de file mondial en matière de responsabilité environnementale sur le plan de la mise en valeur et de l'utilisation des ressources naturelles","",0
+"NR-SO0855","NR","Les connaissances sur les ressources naturelles et la masse continentale et les systèmes de gestion renforcent la sûreté et la sécurité des Canadiens et contribuent à l'intendance des ressources naturelles et des terres du Canada","",0
+"NR-SO0856","NR","Les secteurs des ressources naturelles sont concurrentiels à l'échelle internationale, productifs du point de vue économique et contribuent au bien-être social des Canadiens","",0
+"NR-SO1999","NR","Services internes","",1
+"NRC-SO0831","NRC","Les entreprises canadiennes prospèrent grâce à l'innovation technologique","",1
+"NRC-SO0832","NRC","Infrastructure de recherche et développement pour une économie du savoir novatrice","",1
+"NRC-SO0833","NRC","Progrès dans le développement et le déploiement de technologies novatrices dans des secteurs industriels canadiens ciblés et des domaines prioritaires nationaux à l'appui des priorités du gouvernement fédéral en innovation, en science et en technologie","",0
+"NRC-SO0834","NRC","Accès des Canadiens à l'information en recherche et développement et aux infrastructures de recherche et développement","",0
+"NRC-SO1999","NRC","Services internes","",1
+"NRTEE-SO0841","NRTEE","Les conseils sur les questions de développement durable touchant l'environnement et l'économie influencent l'élaboration des politiques fédérales et les décisions dans d'autres secteurs clés","",0
+"NRTEE-SO1999","NRTEE","Services internes","",0
+"NSERC-SO0861","NSERC","Le Canada est un chef de file mondial dans l'avancement, la mise à profit et l'application des nouvelles connaissances en sciences naturelles et en génie","",1
+"NSERC-SO0862","NSERC","La découverte: recherche concurrentielle de haute qualité en sciences naturelles et en génie au Canada","",0
+"NSERC-SO0863","NSERC","L'innovation: les connaissances et les compétences en sciences naturelles et en génie sont transférées au secteur des utilisateurs au Canada et appliquées de manière productive par ce dernier","",0
+"NSERC-SO0864","NSERC","Les gens: des professionnels hautement qualifiés en sciences et en génie au Canada","",0
+"NSERC-SO1999","NSERC","Services internes","",1
+"OAG-SO0041","OAG","Par nos travaux d'audit législatif, nous contribuons, pour le compte des Canadiens, à ce que le gouvernement soit bien géré et responsable","",1
+"OCI-SO0941","OCI","Les problèmes des délinquants au sein du système correctionnel fédéral sont définis et traités au moment opportun et de façon raisonnable","",1
+"OCI-SO1999","OCI","Services internes","",1
+"OCOL-SO0901","OCOL","Les droits garantis en vertu de la Loi sur les langues officielles sont protégés et la dualité linguistique est promue comme une valeur fondamentale de la société canadienne","",1
+"OCOL-SO1999","OCOL","Services internes","",1
+"OCSEC-SO0911","OCSEC","Le Centre de la sécurité des télécommunications s'acquitte de son mandat et de ses fonctions conformément aux lois du Canada et avec le souci du respect de la vie privée des Canadiens","",1
+"OCSEC-SO1999","OCSEC","Services internes","",1
+"ODPP-SO0951","ODPP","Poursuivre les infractions criminelles et les infractions règlementaires prévues par des lois fédérales d'une manière indépendante, impartiale et juste","",1
+"ODPP-SO0952","ODPP","Les activités de conformité et d'application aux termes de la Loi électorale du Canada et de la Loi référendaire sont menées par le commissaire aux élections fédérales de manière indépendante, impartiale et équitable","",1
+"ODPP-SO1999","ODPP","Services internes","",1
+"OEC-SO0921","OEC","Le public peut avoir confiance que les titulaires de charge publique ainsi que les députés rencontrent les exigences des mesures d'observation régissant leur conduite en ce qui concerne les conflits d'intérêts","",1
+"OEC-SO1999","OEC","Services internes","",1
+"OICC-SO0881","OICC","Des infrastructures publiques pour un Canada plus prospère","",1
+"OICC-SO0882","OICC","Du financement est versé pour une infrastructure publique rentable et de qualité qui répond aux besoins des Canadiens dans une économie concurrentielle, un environnement propre et des collectivités habitables","",0
+"OICC-SO0883","OICC","Les projets d'infrastructure prêts à être construits reçoivent un financement fédéral","",0
+"OICC-SO1999","OICC","Services internes","",1
+"OPSIC-SO0961","OPSIC","Des mesures sont prises à l'égard des actes répréhensibles au sein du secteur public fédéral et les fonctionnaires sont protégés en cas de représailles","",1
+"OPSIC-SO1999","OPSIC","Services internes","",1
+"ORL-BVA00","ORL","Assurer la transparence et l'obligation de rendre compte des activités de lobbying effectuées auprès de titulaires d'une charge publique pour contribuer à la confiance à l'égard de l'intégrité des décisions prises par le gouvernement","L'objet de la Loi sur le lobbying et du Code de déontologie des lobbyistes est de rassurer le public canadien que le lobbying est fait d’une manière transparente et selon des normes d'éthique élevées de façon à rehausser la confiance du public dans l'intégrité de la prise de décisions du gouvernement. Le mandat du Commissaire au lobbying est de créer et gérer le Registre des lobbyistes, d’élaborer et mettre en œuvre des programmes d’éducation pour faire connaître la Loi et le Code, et d’assurer la conformité à la Loi et au Code.",1
+"ORL-ISS00","ORL","Services internes","Les Services internes comprennent les groupes d'activités et de ressources connexes que le gouvernement fédéral considère comme étant des services à l'appui de programmes ou nécessaires pour permettre à une organisation de s'acquitter de ses obligations générales. Les Services internes désignent les activités et ressources des dix services distincts qui soutiennent l'exécution des programmes au sein de l'organisation, peu importe le modèle de prestation des Services internes utilisé.
+Ces services sont  Services de gestion des acquisitions, Services de communication, Services de gestion financière, Services de gestion des ressources humaines, Services de gestion de l'information, Services de technologie de l'information, Services juridiques, Services de gestion du matériel, Services de gestion et de surveillance, Services de gestion des biens immobiliers.",1
+"ORL-SO0891","ORL","Assurer la transparence et l'obligation de rendre compte des activités de lobbying effectuées auprès de titulaires d'une charge publique pour contribuer à la confiance à l'égard de l'intégrité des décisions prises par le gouvernement","",0
+"ORL-SO1999","ORL","Services internes","",0
+"OSEO-SO1191","OSEO","Les sénateurs respectent les obligations découlant du Code régissant les conflits d'intérêts de manière à aider à assurer l'intégrité du Sénat en tant qu'institution","",1
+"OSFI-SO0971","OSFI","Un système public canadien de revenu à la retraite sûr et viable sur le plan financier","",1
+"OSFI-SO0972","OSFI","Un système financier canadien sûr et stable","",1
+"OSFI-SO1999","OSFI","Services internes","",1
+"PACS-SO1061","PACS","Assurer la mise en place de processus équitables et axés sur les compétences pour le recrutement et la sélection d'individus compétents en ce qui concerne les nominations faites par le gouverneur en conseil au sein des organismes, des commissions et des conseils, ainsi que des sociétés d'État","",0
+"PACS-SO1999","PACS","Services internes","",0
+"PCA-SO1001","PCA","Les Canadiens éprouvent un fort sentiment d'appartenance à l'égard des parcs nationaux, des lieux historiques nationaux, les canaux patrimoniaux et des aires marines nationales de conservation du pays, et ils profitent de ces endroits protégés tout en s'efforçant de les laisser intacts pour les générations d'aujourd'hui et de demain","",1
+"PCA-SO1999","PCA","Services internes","",1
+"PCC-SO1171","PCC","Confiance du public envers la Gendarmerie royale du Canada","",1
+"PCC-SO1999","PCC","Services internes","",1
+"PCO-SO1051","PCO","Appuyer et mettre en oeuvre le programme et les décisions du gouvernement, et soutenir les institutions et leur fonctionnement","",1
+"PCO-SO1999","PCO","Services internes","",1
+"PHAC-SO1071","PHAC","Protéger les Canadiens et les aider à améliorer leur santé","",1
+"PHAC-SO1072","PHAC","Un Canada capable de promouvoir la santé, de réduire les disparités en matière de santé et de prévenir et d'atténuer les maladies et les blessures","",0
+"PHAC-SO1999","PHAC","Services internes","",1
+"PMPRB-SO1031","PMPRB","Les médicaments brevetés ne peuvent être vendus au Canada à des prix excessifs, afin de protéger les intérêts de la population canadienne. La population canadienne est également tenue informée","",1
+"PMPRB-SO1999","PMPRB","Services internes","",1
+"PPP-SO1041","PPP","Transformer le Canada en chef de file des partenariats public-privé","",1
+"PPS-SO1011","PPS","La sécurité physique des parlementaires, des employés, des visiteurs, des immeubles ou parties d'immeubles faisant partie de la Cité parlementaire, y compris les biens qui y sont situés ou les événements qui s'y déroulent, et de la Colline parlementaire","",1
+"PSC-SO1091","PSC","Une fonction publique hautement compétente, non partisane et représentative, capable d'offrir des services dans les deux langues officielles et où les nominations sont fondées sur le mérite et les valeurs que sont la justice, l'accès, la représentativité et la transparence","",1
+"PSC-SO1999","PSC","Services internes","",1
+"PSEP-SO1081","PSEP","Un Canada sécuritaire et résilient","",1
+"PSEP-SO1999","PSEP","Services internes","",1
+"PSSRB-SO1101","PSSRB","Règlement impartial des questions liées aux relations de travail dans la fonction publique fédérale et au Parlement","",0
+"PSSRB-SO1999","PSSRB","Services internes","",0
+"PSST-SO1111","PSST","Résolution juste et impartiale de différends survenant dans le Résolution juste et impartiale de différends survenant dans le cadre des nominations internes et des mises en disponibilité dans la fonction publique fédérale","",0
+"PSST-SO1999","PSST","Services internes","",0
+"RCMP-SO1155","RCMP","Collaboration et assistance de la police canadienne sur la scène internationale, tout en maintenant le riche patrimoine de la police nationale","",1
+"RCMP-SO1156","RCMP","Réduction des activités criminelles touchant les Canadiens","",1
+"RCMP-SO1157","RCMP","Sécurité du revenu pour les membres de la GRC et leurs survivants en cas de décès ou d'invalidité","",1
+"RCMP-SO1999","RCMP","Services internes","",1
+"RPSDP-SO1112","RPSDP","Résolution juste et impartiale de différends survenant dans le Résolution juste et impartiale de différends survenant dans le cadre des nominations internes et des mises en disponibilité dans la fonction publique fédérale","",0
+"RSCT-SO1141","RSCT","Administration efficace du Tribunal des revendications particulières","",0
+"RSCT-SO1999","RSCT","Services internes","",0
+"SC-SO1231","SC","Les Canadiens ont accès à des renseignements statistiques actuels, pertinents et de qualité sur l'économie et la société canadiennes en pleine évolution, et qui servent à alimenter les débats de fond, la recherche et la prise de décisions sur des questions d'ordre social et économique","",1
+"SC-SO1241","SC","Les besoins particuliers des clients en matière de services statistiques de grande qualité offerts en temps opportuns sont satisfaits","",1
+"SC-SO1999","SC","Services internes","",1
+"SCA-SO1221","SCA","Le Canada dispose d'un Système national de normes efficient et efficace","",1
+"SCC-SO1251","SCC","L'administration du tribunal de dernier ressort du Canada est efficace et indépendante","",1
+"SCC-SO1999","SCC","Services internes","",1
+"SEN-SO1281","SEN","Faire en sorte que le contexte soit le plus propice possible à une contribution efficace des sénateurs à la législation fédérale et aux politiques publiques dans l'intérêt supérieur de tous les Canadiens","",1
+"SEN-SO1282","SEN","Permettre au Sénat d'exercer son rôle constitutionnel et de gérer son propre fonctionnement","",0
+"SHARE-SO1201","SHARE","Services d'infrastructure de technologie de l'information modernes, fiables, sécuritaires et économiques à l'appui des priorités et de la prestation des programmes du gouvernement","",1
+"SHARE-SO1999","SHARE","Services internes","",1
+"SIRC-SO1181","SIRC","Le Service canadien du renseignement de sécurité remplit ses tâches et ses fonctions conformément aux lois, aux politiques et les instructions du ministre","",1
+"SIRC-SO1999","SIRC","Services internes","",1
+"SSHRC-SO1211","SSHRC","Que le Canada ait la capacité organisationnelle pour favoriser la recherche et les activités connexes dans le domaine des sciences humaines, des sciences naturelles, du génie et de la santé","",1
+"SSHRC-SO1212","SSHRC","Le Canada est un chef de file mondial de la recherche et de la formation en sciences humaines","",1
+"SSHRC-SO1213","SSHRC","La recherche: de nouvelles connaissances fondées sur l'excellence de la recherche en sciences humaines","",0
+"SSHRC-SO1214","SSHRC","La mobilisation de connaissances: faciliter l'usage des connaissances en sciences humaines au sein du milieu universitaire et à l'extérieur","",0
+"SSHRC-SO1999","SSHRC","Services internes","",1
+"SWC-SO0931","SWC","Promotion et avancement de l'égalité entre femmes et hommes au Canada","",1
+"SWC-SO0932","SWC","Égalité entre les sexes et pleine participation des femmes à la vie économique, sociale et démocratique du Canada","",0
+"SWC-SO1999","SWC","Services internes","",1
+"TBC-BXA00","TBC","Surveillance des dépenses","Revoir les propositions et les autorisations de dépenses; revoir les programmes gouvernementaux actuels et proposés quant à l’efficience, l’efficacité et la pertinence; informer le Parlement et les Canadiens sur les dépenses du gouvernement.",1
+"TBC-BXB00","TBC","Leadership administratif","Diriger des initiatives pangouvernementales; élaborer des politiques et établir l’orientation stratégique de l’administration publique sur la prestation de services et l’accès à l’information gouvernementale, et sur la gestion des actifs, des finances, de l’information et de la technologie.",1
+"TBC-BXC00","TBC","Employeur","Élaborer des politiques et établir l’orientation stratégique sur la gestion des personnes dans la fonction publique; gérer la rémunération totale (comprenant les pensions et les avantages sociaux) et les relations de travail; entreprendre des projets d’amélioration du rendement à l’appui des objectifs de recrutement et de maintien en poste des employés.",1
+"TBC-BXD00","TBC","Surveillance réglementaire","Élaborer et surveiller les politiques afin de promouvoir de bonnes pratiques réglementaires, revoir les projets de règlement afin de s’assurer qu’ils répondent aux exigences des politiques du gouvernement, et favoriser la coopération en matière de réglementation entre les différentes sphères de compétences.",1
+"TBC-ISS00","TBC","Services internes","Les Services internes comprennent les groupes d'activités et de ressources connexes que le gouvernement fédéral considère comme étant des services à l'appui de programmes ou nécessaires pour permettre à une organisation de s'acquitter de ses obligations générales. Les Services internes désignent les activités et ressources des dix services distincts qui soutiennent l'exécution des programmes au sein de l'organisation, peu importe le modèle de prestation des Services internes utilisé.
+Ces services sont  Services de gestion des acquisitions, Services de communication, Services de gestion financière, Services de gestion des ressources humaines, Services de gestion de l'information, Services de technologie de l'information, Services juridiques, Services de gestion du matériel, Services de gestion et de surveillance, Services de gestion des biens immobiliers.",1
+"TBC-SO1311","TBC","Le gouvernement est bien géré et responsable, et des ressources sont attribuées pour atteindre des résultats","",0
+"TBC-SO1312","TBC","Une bonne gouvernance et gérance saine en vue de faciliter le service efficient et efficace aux Canadiens","",0
+"TBC-SO1999","TBC","Services internes","",0
+"TC-SO1291","TC","Un réseau de transport respectueux de l'environnement","",1
+"TC-SO1292","TC","Un réseau de transport sécuritaire et sûr","",1
+"TC-SO1293","TC","Un réseau de transport efficient","",1
+"TC-SO1999","TC","Services internes","",1
+"TOUR-SO0381","TOUR","L'économie canadienne profite de la demande touristique soutenue des marchés de la Commission canadienne du tourisme","",1
+"TRC-SO0651","TRC","Divulguer et reconnaître la vérité concernant les pensionnats indiens afin de favoriser la guérison et la réconciliation parmi les personnes et les communautés touchées","",0
+"TRC-SO1999","TRC","Services internes","",0
+"VAC-SO1321","VAC","Les Canadiens se souviennent de ceux et celles qui ont servi le Canada en temps de guerre et de paix et en situation de conflit armé, et leur témoignent de la reconnaissance","",1
+"VAC-SO1322","VAC","Mieux-être financier, physique et mental des vétérans admissibles","",1
+"VAC-SO1323","VAC","Les droits des vétérans relativement aux services et aux avantages qui satisfont à leurs besoins sont pris en considération par le portefeuille des Anciens Combattants","",1
+"VAC-SO1324","VAC","Le bien-être des anciens combattants et des autres clients admissibles","",0
+"VAC-SO1999","VAC","Services internes","",1
+"VIA-SO1341","VIA","Un service ferroviaire voyageurs national sûr, sécuritaire, efficient, fiable et durable sur le plan de l'environnement qui répond aux besoins des voyageurs canadiens","",1
+"VRAB-SO1331","VRAB","Processus d'appel équitable et indépendant pour les décisions rendues par Anciens Combattants Canada au sujet des pensions, des indemnités et des allocations d'invalidité","",1
+"WDBA-SO1361","WDBA","Pont sécuritaire, sûr et efficient pour le trafic de véhicules commerciaux et de passagers au-dessus de la rivière Détroit","",1
+"WDO-SO1351","WDO","Une économie diversifiée et en croissance dans l'Ouest canadien","",1
+"WDO-SO1352","WDO","Une économie épanouie et diversifiée dans l'Ouest canadien","",0
+"WDO-SO1999","WDO","Services internes","",1
+
