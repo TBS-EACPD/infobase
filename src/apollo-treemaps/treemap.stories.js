@@ -4,16 +4,15 @@ import React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { get_client, LoadingHoc } from '../graphql_utils.js';
 
+//import { ResultTreemapConfig } from './result-treemap.js';
 
-import { QuestionGridConfig } from './pses-components.js';
+storiesOf('treemaps',module)
+  .add('result treemap', ()=> {
 
-storiesOf('pses_components',module)
-  .add('appollo__pses_question_grid', ()=> {
+    //const El = LoadingHoc(ResultTreemapConfig);
 
-    const El = LoadingHoc(QuestionGridConfig);
     return (
       <ApolloProvider client={get_client()}>
-        <El />
       </ApolloProvider>
     );
   });

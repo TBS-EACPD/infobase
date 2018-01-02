@@ -61,7 +61,7 @@ const QuestionDef = ({ name, id }) => (
 );
 
 
-export const QuestionGrid = ({ questions, acronym }) => <div className="question-grid">
+export const QuestionGrid = ({ data: { questions, acronym } }) => <div className="question-grid">
   {_.map(questions, ({ name, id, org_data, gov_data }) => 
     <div key={id} className="question-row">
       <div className="question-cell question-cell-left">
@@ -100,22 +100,24 @@ const fragments = gql`
 
 const query = gql`
   query {
-    pses_questions {
-      name: name_en
-      id
-      type
-    }
-
-    org	(org_id:"133") {
-      acronym
-      pses_data(year: "2017"){
-        ...question_data
+    root(lang: "en"){
+      pses_questions {
+        name
+        id
+        type
       }
-    }
 
-    gov {
-      pses_data(year: "2017"){
-        ...question_data
+      org	(org_id:"133") {
+        acronym
+        pses_data(year: "2017"){
+          ...question_data
+        }
+      }
+
+      gov {
+        pses_data(year: "2017"){
+          ...question_data
+        }
       }
     }
   }
@@ -131,7 +133,7 @@ const to_answer_data = obj => ({
   pct_agree: obj.agree/100,
 });
 
-const data_to_props = ({
+const data_to_props = ({ root: {
   pses_questions: question_metadata, 
   org: { 
     acronym,
@@ -140,7 +142,7 @@ const data_to_props = ({
   gov: {
     pses_data: gov_questions,
   },
-})=> {
+}})=> {
 
   const joined_questions = _.chain(question_metadata)
     .filter({type:"numeric"})
@@ -158,11 +160,6 @@ const data_to_props = ({
   };
 }
 
-export const QuestionGridConfig = {
-  query,
-  Component: QuestionGrid,
-  data_to_props,
-};
 
 const GradientBar = ({ series, startsPositive, height, width, labels }) => {
   const [ leftLabel, rightLabel ] = labels;
@@ -242,10 +239,16 @@ const GradientBar = ({ series, startsPositive, height, width, labels }) => {
                 height: "120%",
                 top: "-10%",
               }}
-            />
+            />,
           ])}
         </div>
       </div>
     </div>
   );
 }
+
+export const QuestionGridConfig = {
+  query,
+  Component: QuestionGrid,
+  data_to_props,
+};

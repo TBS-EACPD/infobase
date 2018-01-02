@@ -8,12 +8,14 @@ import { get_client } from '../graphql_utils.js';
 
 import { InfoGraph }  from './NewInfograph';
 
+import { panel_def as result_tree_panel_def } from '../apollo-treemaps/result-treemap.js';
+
 
 
 const example_panel_def = {
   key: "org_and_program_names",
 
-  component: ({ org_name, programs }) => {
+  component: ({ data: { org_name, programs } }) => {
     return (
       <div>
         name: { org_name }
@@ -25,21 +27,25 @@ const example_panel_def = {
   },
 
   query: gql`
-    query my_panel_query($org_id: String) {
-      org(org_id: $org_id){
-        name
-        programs {
-          id
+    query my_panel_query($org_id: String, $lang: String!) {
+      root(lang: $lang){
+        org(org_id: $org_id){
           name
+          programs {
+            id
+            name
+          }
         }
       }
     }
   `,
 
   data_to_props({
-    org: {
-      name,
-      programs,
+    root: {
+      org: {
+        name,
+        programs,
+      },
     },
   }){ 
     return ({
@@ -48,10 +54,44 @@ const example_panel_def = {
     });
   },
 
+
 }
+
+
+const example_panel_def2 = {
+  key: "org_description",
+
+  component: ({ data: { root: { org: { name, description }}}}) => {
+    return (
+      <div>
+        name: { name }
+        description: {description}
+      </div>
+    );
+  },
+
+  query: gql`
+    query my_panel_query($org_id: String, $lang: String!) {
+      root(lang: $lang){
+        org(org_id: $org_id){
+          name
+          legal_title
+        }
+      }
+    }
+  `,
+
+  data_to_props: _.identity,
+
+}
+
+
+
 
 const panel_defs = [
   example_panel_def,
+  example_panel_def2,
+  result_tree_panel_def,
 ];
 
 storiesOf('New Infograph',module)
@@ -70,6 +110,6 @@ storiesOf('New Infograph',module)
         />
       </ApolloProvider>
     );
-});
+  });
 
 

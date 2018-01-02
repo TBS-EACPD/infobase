@@ -32,12 +32,22 @@ const InnerLoadingHoc = ({Component, data_to_props}) => props => {
   if(props.data.loading){
     return <div> Loading ... </div>
   } else {
-    return <Component {...data_to_props(props.data)} />;
+    return (
+      <Component
+        data={data_to_props(props.data)} 
+        gql_props={{
+          refetch: props.data.refetch,
+          variables: props.data.variables,
+        }}
+      />
+    );
   }
 }
 
 //for use in development only
-export const LoadingHoc = ({Component,query,data_to_props}) => apollo_connect(query)(InnerLoadingHoc({Component,data_to_props}))
+export const LoadingHoc = ({Component,query,data_to_props,variables}) => apollo_connect(query, {
+  options: variables ? { variables } : {},
+})(InnerLoadingHoc({Component,data_to_props}))
 
 
 
@@ -51,11 +61,5 @@ query {
 `;
 
 window.query_client = () => {
-  return client.query({ query }).then(function(){
-
-    var a = 1;
-    a = 2;
-    client;
-
-  });
+  return client.query({ query });
 }
