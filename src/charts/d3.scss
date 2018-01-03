@@ -214,8 +214,9 @@ a.boxclose {
 .__partition__.diagram > .header{
   position: absolute;
   text-align: center;
-  color: rgb(169, 183, 199);
+  color: #fff;
   font-size: 20px;
+  font-weight: $lightFontWeight;
   top: 0px;
 }
 

@@ -526,6 +526,7 @@
 .people-box:hover, .people-box:active, .people-box:focus,
 .finance-box:hover, .finance-box:active .finance-box:focus {
   background-color: #a2cdf2;
+  color: #333; 
 }
 
 .results-box,
@@ -539,13 +540,6 @@
 .people-box .h-img-card__title,
 .finance-box .h-img-card__title {
   font-weight: $mediumFontWeight;
-}
-
-
-.results-box:hover, .results-box:focus, .results-box:active, 
-.finance-box:hover, .finance-box:focus, .finance-box:active,
-.people-box:hover, .people-box:focus, .people-box:active {
-  color: #333; 
 }
 
 .results-box, .people-box, .finance-box {
