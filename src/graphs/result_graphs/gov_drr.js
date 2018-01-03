@@ -144,7 +144,7 @@ class HorizontalStatusTable extends React.Component {
         .value()
     );
 
-    return <div>
+    return <div style={{overflowX: "auto"}}>
       <table className="table table-dark-blue table-dark-bordered no-total-row">
         <caption> <TM k="indicator_targets" />  </caption>
         <thead>
