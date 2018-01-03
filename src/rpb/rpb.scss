@@ -163,6 +163,11 @@ li.select-list-item {
 .table-dark-blue > thead > tr > th {
   color: white;
 }
+.table-dark-blue > thead > tr > td,
+.table-dark-blue > thead > tr > th {
+  font-weight: $mediumFontWeight;
+}
+
 
 .table-dark-blue > tbody > tr {
   transition: background-color 500ms ease-in;

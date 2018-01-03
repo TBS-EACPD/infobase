@@ -51,7 +51,7 @@ const StatusTable = ({
 
   return (
     <div style={{overflowX: "auto"}}>
-      <table className="table table-dark-bordered drr-summary-table">
+      <table className="table table-dark-bordered table-light-background drr-summary-table">
         <caption> <TM k="indicator_targets" />  </caption>
         <thead>
           <tr className="active">
