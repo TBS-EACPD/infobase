@@ -173,6 +173,7 @@ a.boxclose {
   width: inherit;
   color: #fff;
   font-size: 20px;
+  font-weight: $lightFontWeight;
 }
 
 .partition-control-block > input {
@@ -202,6 +203,7 @@ a.boxclose {
 .partition-control-block > select.form-control {
   min-width: 100%;
   max-width: none;
+  font-weight: $mediumFontWeight;
 }
 
 .__partition__.diagram {
@@ -229,7 +231,7 @@ a.boxclose {
 .partition-content-title{ 
   margin-left: 20px;
   padding: 0px 5px;
-  font-weight: $heavyFontWeight;
+  font-weight: $mediumFontWeight;
 }
 .partition-content-title.fat{ 
   background-color: rgb(4, 18, 37) !important;
@@ -352,7 +354,7 @@ a.boxclose {
   text-align: justify;
   color: #333;
   padding-right: 4px;
-  font-weight: $heavyFontWeight;
+  font-weight: $mediumFontWeight;
 }
 .partition-popup > .btn {
   color: #fefefe!important;
