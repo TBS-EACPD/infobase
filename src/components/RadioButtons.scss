@@ -16,6 +16,8 @@ padding: 5px 15px;
 color: change-color($color: $buttonPrimaryColor, $alpha: 0.75);
 border-radius: 0px;
 background-color: transparent;
+margin-top: -1px;
+margin-bottom: -1px;
 position: relative;
 }
 
@@ -31,11 +33,12 @@ position: relative;
 .radio-buttons__option:not(:last-child):after {
   content: "";
   margin-left: 10px;
-  height: 27px;
+  height: 80%;
+  top: 10%;
   border: solid $buttonPrimaryColor;
   border-width: 0 0 0 2px;
   position: absolute;
-  right: -3px;
+  right: -1.5px;
 }
 
 .radio-buttons__option.radio-buttons__option--active:after {
