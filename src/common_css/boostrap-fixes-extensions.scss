@@ -158,9 +158,6 @@ table.infobase-table > thead > tr > th{
 .gradient {
   background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.75));
 }
-.bold {
-  font-weight : 500;
-}
 table.border,
 table.border > tbody > tr > td {
   border: none;
@@ -364,18 +361,26 @@ table.table-blue > thead > tr {
   background-color : #d9edf7;
 }
 table.table-blue > thead > tr > th{
-  background-color : #d9edf7;
-  color : #31708f;
-  font-weight : 500;
+  background-color: rgb(37, 114, 180);
+  color: $backgroundColor;
+  font-weight : $mediumFontWeight;
   border: none;
   font-size: 13px;
 }
 tr.background-blue > td {
-  background-color : #d9edf7;
-  color : #31708f;
+  background-color: rgb(37, 114, 180);
+  color: $backgroundColor;
 }
 tr.background-blue > td > a{
   color : #31708f;
+}
+
+.table-striped>tbody>tr:nth-child(odd) {
+  background-color: #f5f5f5;
+}
+
+.table-striped>tbody>tr:nth-child(even) {
+  background-color: #d9edf7;
 }
 
 /* 
@@ -485,19 +490,6 @@ ol, ul {
   margin-bottom: 12px;
 }
 
-.table-striped>tbody>tr:nth-child(odd) {
-  background-color: #f5f5f5;
-}
-
-.table-striped>tbody>tr:nth-child(even) {
-  background-color: #d9edf7;
-}
-
-table.table-blue > thead > tr > th,
-tr.background-blue > td {
-  background-color: rgb(37, 114, 180);
-  color: $backgroundColor;
-}
 li.checkbox > label {
   font-weight: $mediumFontWeight;
 }
