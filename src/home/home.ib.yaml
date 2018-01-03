@@ -8,8 +8,8 @@ home_finance_title:
 
 home_finance_intro:
   transform: [handlebars,markdown]
-  en: In {{pa_last_year}}, we spent <em class="bolder">{{fmt_compact_written spent_last_year}}</em>
-  fr: En {{pa_last_year}}, nous avons dépensé <em class="bolder">{{fmt_compact_written spent_last_year}}</em>
+  en: In {{pa_last_year}}, we spent <strong class="medium-weight">{{fmt_compact_written spent_last_year}}</strong>
+  fr: En {{pa_last_year}}, nous avons dépensé <strong class="medium-weight">{{fmt_compact_written spent_last_year}}</strong>
 
 
 home_finance_link:
@@ -22,8 +22,8 @@ home_ppl_title:
 
 home_ppl_intro:
   transform: [handlebars,markdown]
-  en: By the end of fiscal year {{pa_last_year_2}}, the Federal Public Service counted <em class="bolder">{{fmt_big_int_real headcount_last_year}}</em> employees
-  fr: À la fin de l'exercice {{pa_last_year_2}}, la Fonction publique fédérale comptait <em class="bolder">{{fmt_big_int_real headcount_last_year}}</em> employés
+  en: By the end of fiscal year {{pa_last_year_2}}, the Federal Public Service counted <strong class="medium-weight">{{fmt_big_int_real headcount_last_year}}</strong> employees
+  fr: À la fin de l'exercice {{pa_last_year_2}}, la Fonction publique fédérale comptait <strong class="medium-weight">{{fmt_big_int_real headcount_last_year}}</strong> employés
 
 home_ppl_link:
   en: See who they are 
@@ -36,9 +36,9 @@ home_results_title:
 home_results_intro:
   transform: [handlebars,markdown]
   en: |
-    In {{pa_last_year}}, <em class="bolder">{{past_targets_met}}</em> targets were met
+    In {{pa_last_year}}, <strong class="medium-weight">{{past_targets_met}}</strong> targets were met
   fr: |
-    En {{pa_last_year}}, <em class="bolder">{{past_targets_met}}</em> objectifs ont été atteints
+    En {{pa_last_year}}, <strong class="medium-weight">{{past_targets_met}}</strong> objectifs ont été atteints
 
 home_results_link:
   en: See the results

@@ -39,13 +39,13 @@
 .intro-box > h1 {
   border: none;
   font-size: 55px;
-  font-weight: $mediumFontWeight;
+  font-weight: $lightFontWeight;
   margin-top: 25px;
   margin-bottom:0;
 }
 
 .intro-box > h2 {
-  font-weight: $mediumFontWeight;
+  font-weight: $lightFontWeight;
   font-size: 20px;
   margin: 5px auto 35px;
 }
@@ -54,7 +54,6 @@
   .intro-box > h1 {
     font-size: 3.5em;
   }
-
 }
 
 .intro-box > .search-box {
@@ -116,7 +115,7 @@
 .external-row-descriptor {
   font-size: 2em;
   margin-top: 25px;
-  font-weight: $heavyFontWeight;
+  font-weight: $mediumFontWeight;
   border-bottom: 1px solid #333;
 }
 
@@ -207,7 +206,7 @@
   .row-descriptor__content {
     font-size: 1.6em;
     font-family: Georgia,serif;
-    font-weight: $heavyFontWeight;
+    font-weight: $lightFontWeight;
   }
 
 }
@@ -533,7 +532,7 @@
 .people-box,
 .finance-box {
   color: #fff;
-  font-weight: $mediumFontWeight;
+  font-weight: $lightFontWeight;
 }
 
 .results-box .h-img-card__title,
