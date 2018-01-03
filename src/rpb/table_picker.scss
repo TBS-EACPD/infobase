@@ -1,3 +1,4 @@
+@import '../common_css/common-variables';
 
 .tag-cloud.tag-cloud-main {
   display: flex;
@@ -91,7 +92,7 @@
 
 .item-card > .item-title {
   padding: 40px 5px;
-  font-weight: 500;
+  font-weight: $heavyFontWeight;
   text-align:center;
   color: #31708f;
   background-color: rgba(37,114,180,0.2);

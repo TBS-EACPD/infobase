@@ -14,7 +14,8 @@ const {
 } = require('../models/text.js');
 require("./home.ib.yaml");
 
-require('./home.css');
+require('./home.scss');
+require('./home-pngs.css');
 
 const {
   TextMaker,

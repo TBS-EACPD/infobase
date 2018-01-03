@@ -211,7 +211,7 @@ ul.fancy-ul > li:last-child {
 /* use when you don't want an h3/4/5/6 */
 .agnostic-header {
   margin-top: 15px;
-  font-weight: 500;
+  font-weight: $heavyFontWeight;
   font-size: 12pt;
 }
 
@@ -441,7 +441,7 @@ ul.nav.nav-underline-active > li.active {
   border-collapse: separate;
   min-width: 102px;
   border-spacing: 5px;
-  font-weight: 500;
+  font-weight: $heavyFontWeight;
 }
 
 /* Styles for ppl share pie graphs */
@@ -498,7 +498,7 @@ a, a:visited {
 .easy-access > span > a,
 ol.breadcrumb > li > :last-child {
   font-family: Helvetica,Arial,sans-serif;
-  font-weight: 400;
+  font-weight: $mediumFontWeight;
   text-decoration: underline;
   color: $wetLinkColor;
 }
@@ -530,13 +530,17 @@ body {
   background-color: $backgroundColor;
 }
 
-b, strong, header, h1, h2, h3, h4, h5, h6 {
-  font-weight: 500;
+header, h1, h2, h3, h4, h5, h6 {
+  font-weight: $lightFontWeight;
+}
+
+b, strong {
+  font-weight: $heavyFontWeight;
 }
 
 #app, #wb-bc, .app-font {
   font-family: 'Roboto', sans-serif;
-  font-weight: 300;
+  font-weight: $mediumFontWeight;
 }
 
 .xplorer-node-expanded-content {

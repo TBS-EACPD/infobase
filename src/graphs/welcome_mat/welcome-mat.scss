@@ -1,3 +1,5 @@
+@import '../../common_css/common-variables';
+
 /* 
   The parts of the old grid-system.css, as used by welcome-mat, rewritten in BEM and SASS
 
@@ -86,7 +88,7 @@
 .mat-grid__title {
   padding: 10px;
   text-align: center;
-  font-weight: 500;
+  font-weight: $heavyFontWeight;
 }
 
 .mat-grid__inner-grid {

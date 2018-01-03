@@ -1,3 +1,5 @@
+@import '../common_css/common-variables';
+
 @media(max-width: 1000px){
   .home-root {
     padding-left: 1rem;
@@ -37,13 +39,13 @@
 .intro-box > h1 {
   border: none;
   font-size: 55px;
-  font-weight: 300; 
+  font-weight: $mediumFontWeight;
   margin-top: 25px;
   margin-bottom:0;
 }
 
 .intro-box > h2 {
-  font-weight: 300;
+  font-weight: $mediumFontWeight;
   font-size: 20px;
   margin: 5px auto 35px;
 }
@@ -114,7 +116,7 @@
 .external-row-descriptor {
   font-size: 2em;
   margin-top: 25px;
-  font-weight: 500;
+  font-weight: $heavyFontWeight;
   border-bottom: 1px solid #333;
 }
 
@@ -205,7 +207,7 @@
   .row-descriptor__content {
     font-size: 1.6em;
     font-family: Georgia,serif;
-    font-weight: 500;
+    font-weight: $heavyFontWeight;
   }
 
 }
@@ -357,7 +359,7 @@
 
   .h-img-card__title {
     font-size: 1.6em;
-    font-weight: 500;
+    font-weight: $heavyFontWeight;
     text-align: center;
     width:100%;
     max-width:100%;
@@ -472,7 +474,7 @@
 }
 
 .v-img-card__title {
-  font-weight: 500;
+  font-weight: $heavyFontWeight;
   font-size: 1.4em;
   width:100%;
   min-width:100%;
@@ -531,13 +533,13 @@
 .people-box,
 .finance-box {
   color: #fff;
-  font-weight: 300;
+  font-weight: $mediumFontWeight;
 }
 
 .results-box .h-img-card__title,
 .people-box .h-img-card__title,
 .finance-box .h-img-card__title {
-  font-weight: 300;
+  font-weight: $mediumFontWeight;
 }
 
 
@@ -567,15 +569,4 @@
   z-index: 1;
   background-size: 70px;
   background-repeat: no-repeat;
-}
-
-.finance-box:before {
-  background-image: url('png/expend.png');
-}
-
-.people-box:before {
-  background-image: url('png/people.png');
-}
-.results-box:before {
-  background-image: url('png/results.png');
 }

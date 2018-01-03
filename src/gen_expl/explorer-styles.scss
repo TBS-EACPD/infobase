@@ -149,7 +149,7 @@ table.xplorer-planned-resource-table > tbody > tr > th {
 .hierarchy-selection-header {
   color: #fcfcfc;
   padding: 5px 0 10px 0;
-  font-weight: 300;
+  font-weight: $mediumFontWeight;
   font-size: 1.4em;
   text-align: center;
 }
@@ -200,7 +200,7 @@ table.xplorer-planned-resource-table > tbody > tr > th {
     width: 100%;
     max-width:100%;
     font-size: 1.2em;
-    font-weight: 300;
+    font-weight: $mediumFontWeight;
     border-right: 1px solid $primaryColor;
   }
 
@@ -230,7 +230,7 @@ table.xplorer-planned-resource-table > tbody > tr > th {
 
   .hierarchy-selection-item > .hierarchy-selection-item__header {
     font-size: 1.2em;
-    font-weight: 500;
+    font-weight: $heavyFontWeight;
   }
 
 }

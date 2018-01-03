@@ -47,7 +47,7 @@ module.exports = exports = function start({spinner, app_el}){
   
   WebFont.load({
     google: {
-      families: ["Roboto:300,300i,500,500i"],
+      families: ["Roboto:400,400i,700,700i"],
     },
   });
 

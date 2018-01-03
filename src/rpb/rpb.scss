@@ -1,3 +1,5 @@
+@import '../common_css/common-variables';
+
 .mode-title {
   /* border-bottom: 1px solid #ccc; */
 
@@ -129,7 +131,7 @@ li.select-list-item {
   display: block;
   padding: 3px 0;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: $heavyFontWeight;
   line-height: 20px;
   color: rgb(35, 68, 126);
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);

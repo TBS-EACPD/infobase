@@ -10,6 +10,10 @@ $wetLinkColor: #284162;
 $wetLinkVisitedColor: #7834bc;
 $ibLinkColor: #0059b3;
 
+$lightFontWeight: 100;
+$mediumFontWeight: 400;
+$heavyFontWeight: 700;
+
 @mixin unstyled-button {
   border: none;
   background-color: inherit;

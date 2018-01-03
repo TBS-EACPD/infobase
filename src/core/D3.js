@@ -7,7 +7,7 @@ exports = module.exports = require("../charts/core");
 // file is needed to provide extra information from the application
 // to the graphs in a neutral format 
 
-require('../charts/d3.css');
+require('../charts/d3.scss');
 
 const {text_maker} = require('../models/text.js');
 const FORMAT = require('./format');

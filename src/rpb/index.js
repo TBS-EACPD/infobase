@@ -1,6 +1,6 @@
 const { text_maker } = require('../models/text');
 require("./rpb.ib.yaml");
-require('./rpb.css');
+require('./rpb.scss');
 
 //data and state stuff
 const {
@@ -252,7 +252,7 @@ class RPB extends React.Component {
                 lineHeight : 1.5,
                 padding: "0px 20px 0px 20px",
                 borderRadius: "5px",
-                fontWeight: 300,
+                fontWeight: 400,
               }}
             >
               <TablePicker onSelect={id=> this.pickTable(id)} />

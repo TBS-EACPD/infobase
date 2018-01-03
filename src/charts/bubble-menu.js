@@ -1,4 +1,4 @@
-require('./bubble-menu.css');
+require('./bubble-menu.scss');
 const classNames = require('classnames');
 
 class BubbleMenu extends React.Component {

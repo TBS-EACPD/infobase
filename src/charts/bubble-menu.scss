@@ -1,8 +1,10 @@
+@import '../common_css/common-variables';
+
 .button-unstyled.bubble-button {
   border-style: solid;
   border-width: 2px;
   text-align: center;
-  font-weight: 300;
+  font-weight: $mediumFontWeight;
   padding: 10px;
 }
 
@@ -12,7 +14,6 @@
 }
 
 @media (min-width: 1000px){
-
 
   .bubble-menu {
     display: flex;
@@ -42,7 +43,7 @@
   }
 
   .bubble-button .sub-title > header{
-    font-weight: bolder;  
+    font-weight: $lightFontWeight;  
     margin-bottom: 5px;
     font-size: 1.2em;
   }
@@ -50,7 +51,6 @@
   .bubble-menu > .bubble-button .title {
     display: block;
   }
-
 
 }
 

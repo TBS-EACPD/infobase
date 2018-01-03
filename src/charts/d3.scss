@@ -1,3 +1,5 @@
+@import '../common_css/common-variables';
+
 svg {
  overflow : hidden;
 }
@@ -118,7 +120,7 @@ a.boxclose {
   cursor: pointer;
   color: #F00;
   font-size: 3em;
-  font-weight: 500;
+  font-weight: $heavyFontWeight;
   padding: 11px 3px;
 }
 
@@ -227,7 +229,7 @@ a.boxclose {
 .partition-content-title{ 
   margin-left: 20px;
   padding: 0px 5px;
-  font-weight: 500;
+  font-weight: $heavyFontWeight;
 }
 .partition-content-title.fat{ 
   background-color: rgb(4, 18, 37) !important;
@@ -350,7 +352,7 @@ a.boxclose {
   text-align: justify;
   color: #333;
   padding-right: 4px;
-  font-weight: 500;
+  font-weight: $heavyFontWeight;
 }
 .partition-popup > .btn {
   color: #fefefe!important;
@@ -502,20 +504,20 @@ div.d3-list, {
 
 .tick {
   font-size: 12px;
-  font-weight: 500;
+  font-weight: $mediumFontWeight;
 }
 
 .tick > text {
   font-size: 12px!important;
-  font-weight: 500;
+  font-weight: $mediumFontWeight;
 }
 
 .axis-label {
   font-size: 13px!important;
-  font-weight: 500;
+  font-weight: $mediumFontWeight;
   text-anchor: start;
 }
 
 .__label {
-  font-weight: 500;
+  font-weight: $mediumFontWeight;
 }

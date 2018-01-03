@@ -1,4 +1,4 @@
-require('./table_picker.css');
+require('./table_picker.scss');
 const {Table} = require('../core/TableClass.js');
 const {GlossaryEntry } = require('../models/glossary.js');
 const ReactCSSTransitionGroup  = require('react-addons-css-transition-group');

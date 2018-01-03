@@ -141,7 +141,7 @@ h2 {
 }
 
 .bold {
-  font-weight: 500;
+  font-weight: $heavyFontWeight;
 }
 .bolder {
   font-weight: bolder;
@@ -192,7 +192,7 @@ div.label {
 details.details summary,
 details .toggler {
   color: #23406F;
-  font-weight: 500;
+  font-weight: $heavyFontWeight;
   padding: 5px;
   border: 1px solid #e3e3e3;
   border-radius: 4px;
@@ -295,7 +295,7 @@ a.btn-ib-light {
   background-color: rgb(202,219,228);
   border-color: rgb(51, 80, 117);
   padding: 0px 40px;
-  font-weight: 500;
+  font-weight: $heavyFontWeight;
   border-width: 2px;
 }
 
@@ -499,5 +499,5 @@ tr.background-blue > td {
   color: $backgroundColor;
 }
 li.checkbox > label {
-  font-weight: 300;
+  font-weight: $mediumFontWeight;
 }

@@ -45,7 +45,7 @@
 .line-quadrant-dl > div > dt {
   display: block;
   order: 2;
-  font-weight: 300;
+  font-weight: $mediumFontWeight;
 }
 .quadrant-dl > div > dd,
 .line-quadrant-dl > div > dd {
@@ -68,7 +68,7 @@
 table.drr-summary-table th {
   background-color: #d7e5f0 !important;
   color: #333;
-  font-weight: 500;
+  font-weight: $heavyFontWeight;
   vertical-align: top !important;
 }
 /* total row */
@@ -235,7 +235,7 @@ dl.indicator-item__dl dt+dd {
   text-align: center;
   margin-top: 0.5em;
   margin-bottom: 0.7em;
-  font-weight: 500;
+  font-weight: $heavyFontWeight;
   padding: 7px 0px;
 }
 

@@ -33,7 +33,7 @@ const {
 
 const activeStyle = {
   color: '#333333',
-  fontWeight: '300',
+  fontWeight: '400',
   padding: '5px',
 };
 
