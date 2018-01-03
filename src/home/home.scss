@@ -311,7 +311,6 @@
     border-right: 1px solid hsla(191, 32%, 40%, 1);
     padding:5px;
 
-    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -367,6 +366,7 @@
 
   .h-img-card__text {
     font-size: 1.2em;
+    font-weight: $mediumFontWeight;
     width:100%;
     max-width:100%;
     margin-top: 10px;
@@ -533,7 +533,7 @@
 .people-box,
 .finance-box {
   color: #fff;
-  font-weight: $lightFontWeight;
+  font-weight: $mediumFontWeight;
 }
 
 .results-box .h-img-card__title,
