@@ -36,7 +36,7 @@ gov_historical_auth_exp_text:
    
    
    Over the last five years, the government has spent an average of **{{fmt_compact_written gov_hist_diff_average}}**
-   less per year than what had been authorized by Parliament. On average, unused authorities represented **{{fmt_percentage1 gov_hist_avg_tot_pct}}** of approuved authorities.
+   less per year than what had been authorized by Parliament. On average, unused authorities represented **{{fmt_percentage1 gov_hist_avg_tot_pct}}** of approved authorities.
   
   fr: |
    L'autorisation parlementaire de dépenser expire habituellement à la fin de l'exercice. Par exemple, pour la plupart des organisations, les autorisations approuvées au moyen des lois de crédits pour {{pa_last_year}} ont expiré le {{ppl_last_year_end_ticks}}. 
@@ -51,7 +51,7 @@ dept_historical_auth_exp_text:
    Parliamentary authority to spend typically expires at the end of the fiscal year. For example, authorities approved through all appropriation acts for the fiscal year {{pa_last_year}} expired on {{ppl_last_year_end_ticks}} for most organzations. 
    
 
-   Over the last five years, **{{subj_name dept}}** has spent an average of **{{fmt_compact_written dept_hist_diff_average}}** less per year than what had been authorized by Parliament. On average, unused authorities represented **{{fmt_percentage1 dept_hist_avg_tot_pct}}**  of approuved authorities.
+   Over the last five years, **{{subj_name dept}}** has spent an average of **{{fmt_compact_written dept_hist_diff_average}}** less per year than what had been authorized by Parliament. On average, unused authorities represented **{{fmt_percentage1 dept_hist_avg_tot_pct}}** of approved authorities.
 
 
   fr: |
