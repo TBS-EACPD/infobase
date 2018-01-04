@@ -215,12 +215,9 @@ table.xplorer-planned-resource-table > tbody > tr > th {
 
 
 @media(max-width:992px){
-  .hierarchy-selection-item {
+  .hierarchy-selection-items {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start; 
-    padding-bottom: 10px;
   }
 
   .hierarchy-selection-item > .hierarchy-selection-item__header,
