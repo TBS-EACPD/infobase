@@ -13,7 +13,7 @@
 .radio-buttons__option {
 flex: 1;
 padding: 5px 15px;
-color: change-color($color: $buttonPrimaryColor, $alpha: 0.75);
+color: $buttonPrimaryColor;
 border-radius: 0px;
 background-color: transparent;
 margin-top: -1px;

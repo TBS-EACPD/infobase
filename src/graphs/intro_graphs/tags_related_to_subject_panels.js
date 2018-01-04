@@ -24,10 +24,10 @@ const {
 
 
 //this is re-used often enough by users of WellList
-const tag_root_display = tag_root => <header>
-  <div> <strong> {tag_root.name} </strong> </div>
+const tag_root_display = tag_root => <div>
+  <div> {tag_root.name} </div>
   <div className="small_panel_text"> {tag_root.description} </div>
-</header>;
+</div>;
 
 new PanelGraph({
   level: 'dept',
@@ -284,7 +284,7 @@ new PanelGraph({
     const list_args = _.chain(subject.programs)
       .groupBy(prog => prog.dept.id)
       .map( (prog_group, dept_id) => ({
-        display : <strong>{Dept.lookup(dept_id).name}</strong>,
+        display : <div>{Dept.lookup(dept_id).name}</div>,
         href: infograph_href_template(Dept.lookup(dept_id)),
         children: _.chain(prog_group)
           .sortBy('dead_program')

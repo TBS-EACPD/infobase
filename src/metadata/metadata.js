@@ -31,7 +31,7 @@ const MetaData = () => {
               {source.title()}
             </h3>
           </div>
-          <div style={{opacity: 0.8}}>
+          <div style={{fontWeight: "400", opacity: 0.8}}>
             <TextMaker text_key="refreshed"/> {source.frequency.text}
           </div>
         </header>
