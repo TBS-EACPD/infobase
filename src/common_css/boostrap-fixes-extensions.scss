@@ -278,9 +278,14 @@ a.btn-ib-light {
 }
 .btn-ib-primary:hover,
 .btn-ib-primary:active,
-.btn-ib-primary:focus, { 
+.btn-ib-primary:focus { 
   background-color: $buttonPrimaryColor;
   color: $backgroundColor !important;
+}
+.btn-ib-primary.btn-ib-primary--selected { 
+  background-color: $buttonPrimaryColor;
+  color: $backgroundColor !important;
+  cursor: default;
 }
 .btn-ib-info {
     color: #fff;

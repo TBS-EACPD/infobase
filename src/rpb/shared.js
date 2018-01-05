@@ -181,13 +181,12 @@ const ReportDatasets = ({
 const SubjectFilterPicker = ({ subject, onSelect })=> <div style={{paddingTop: '6px'}}>
   <div className="md-half-width md-gutter-right">
     <button 
-      disabled={ subject.guid==="gov_gov" }
       onClick={
         subject.guid==="gov_gov" ? 
         null : 
         ()=> { onSelect(Gov) } 
       }
-      className="btn btn-ib-primary"
+      className={classNames("btn btn-ib-primary", {"btn-ib-primary--selected": subject.guid==="gov_gov"})}
       style={{ 
         width: '100%',
       }}
