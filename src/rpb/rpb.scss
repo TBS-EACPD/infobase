@@ -77,6 +77,9 @@ li.select-list-item {
 .rpb-option-content > div {
   width: 100%;
 }
+.rpb-option-content > .IBDetails {
+  padding-top: 15px;
+}
 @media (min-width: 901px){
   .rpb-option-label {
     width:18%;
