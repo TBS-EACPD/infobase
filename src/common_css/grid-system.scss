@@ -153,6 +153,16 @@
 
 /* .lg-grid > .grid-row > lg-grid-panel30.key_concept_term */
 
+.lg-grid-panel30.key_concept_term {
+  max-width: 29%;
+  @media (max-width:900px){
+    max-width: none;
+    width: 100%;
+    border: none;
+    padding-top: 20px;
+  }
+}
+
 .key_concept_term {
   border-bottom: 1px solid rgb(123, 139, 157);
   display: flex;
@@ -164,6 +174,14 @@
 }
 
 /* .lg-grid > .grid-row > lg-grid-panel70.key_concept_def */
+.lg-grid-panel70.key_concept_def {
+  max-width: 69%;
+  @media (max-width:900px){
+    max-width: none;
+    width: 100%;
+  }
+}
+
 .key_concept_def {
   border-bottom: 1px solid rgb(123, 139, 157);
   padding: 10px;
