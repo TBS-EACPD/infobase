@@ -43,3 +43,11 @@ show_orgs_without_data:
 by_pop_group:
   en: By population group
   fr: Par groupe de population
+
+padded_minister_span:
+  transform: [handlebars]
+  text: | 
+    <span style="padding-right: 13px"> 
+      {{gt "minister"}}
+    </span>
+    

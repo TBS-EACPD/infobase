@@ -10,13 +10,13 @@ const {
   AccordionEnterExit,
   FirstChild,
 } = require('../util_components.js');
-const {abbrev } = require('../core/utils.js'); 
+const { abbrev } = require('../core/utils.js'); 
 const { GeneralTree } = require('../gen_expl/GeneralTree.js');
 const { InstForm } = require('../models/subject.js');
 
 const DlItem = ({ term, def }) => [
-  <dt key="dd"> {term} </dt>,
-  <dd key="dt"> {def} </dd>,
+  <dt key="dt"> {term} </dt>,
+  <dd key="dd"> {def} </dd>,
 ];
 
 
@@ -58,7 +58,7 @@ const SubjectFields = ({ subject, grouping }) => <div style={{marginTop: "2em"}}
     {
       _.nonEmpty(subject.ministers) && 
       <DlItem
-        term={<TM k ="minister"/>}
+        term={<TM k="padded_minister_span"/>}
         def={ _.map(subject.ministers,'name').join(", ") }
       />
     }
