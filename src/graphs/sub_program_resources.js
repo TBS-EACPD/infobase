@@ -395,6 +395,7 @@ class SubProgramResourceTree extends React.Component {
       doc,
       set_doc,
       sort_col,
+      is_descending,
       sort_func,
       col_click,
       
@@ -423,6 +424,7 @@ class SubProgramResourceTree extends React.Component {
               doc,
               sort_col,
               sort_func,
+              is_descending,
               col_click,
             },
           })
