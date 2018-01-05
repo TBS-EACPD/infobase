@@ -82,10 +82,14 @@ li:nth-child(even) > .xplorer-node-container  > .xplorer-node:not(.is-search-mat
   margin-top: 5px;
 }
 
+.xplorer-node-expanded-content {
+  text-align: right;
+  padding: 1px 10px 2px 0px;
+}
+
 .xplorer-collapsible-children-container {
   margin-left: 24px; 
 }
-
 
 /* results specific styles */
 

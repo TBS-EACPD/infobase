@@ -1,5 +1,9 @@
 @import "../common_css/common-variables";
 
+div.tabbed_content {
+  margin: 0px -15px;
+}
+
 ul.tabbed_content_label_bar {
   position: relative;
   left: -38px;
