@@ -11,7 +11,7 @@
   }
   .row > [class*='col-'] {
     padding-left: 10px;
-    padding-right:10px;
+    padding-right: 10px;
   }
 }
 
@@ -23,8 +23,8 @@
   color: white;
   position: relative;
   margin-top: 15px;
-  margin-bottom :15px;
-  border-radius:10px;
+  margin-bottom: 15px;
+  border-radius: 10px;
 }
 @media(max-width:992px){
   .intro-box {
@@ -41,12 +41,13 @@
   font-size: 55px;
   font-weight: $lightFontWeight;
   margin-top: 25px;
-  margin-bottom:0;
+  margin-bottom: 0;
 }
 
 .intro-box > h2 {
   font-weight: $lightFontWeight;
   font-size: 20px;
+  max-width: 700px;
   margin: 5px auto 35px;
 }
 
@@ -62,15 +63,15 @@
 }
 
 .search-box > .search-container {
-  max-width:700px;
+  max-width: 700px;
   text-align: left;
-  margin:0 auto; 
+  margin: 0 auto; 
 
 }
 
 
 .intro-box input[type="text"] {
-  text-align:center;  
+  text-align: center;  
 }
 .intro-box [class*='tt-dataset-'] > header {
   color: #333;
@@ -105,8 +106,8 @@
 }
 
 .caricature-img {
-  width:100%;
-  max-width:100%;
+  width: 100%;
+  max-width: 100%;
   border-radius: 10px;
   margin-bottom: 8px;
 }
@@ -154,7 +155,7 @@
 
   .equal-height-col {
     /*padding: 5px 15px;*/
-    padding:0;
+    padding: 0;
     display: flex;
   }
 
@@ -174,12 +175,12 @@
   /* this class breaks component separation, it should be added to another component.*/
   /* it will ensure .col-content-child takes up the full height of .col-content */
   .col-content-child {
-    flex:auto;
+    flex: auto;
   }
 
 
   .equal-height-row--has-descriptor {
-    position:relative;
+    position: relative;
   }
 
   .row-descriptor {
@@ -187,7 +188,7 @@
     flex: 1;
     min-height: 100%;
     align-self: stretch;
-    padding:1px 25px;
+    padding: 1px 25px;
     width: 300px;
     left: -300px;
     display: flex;
@@ -197,7 +198,7 @@
   .row-descriptor__container {
     flex: 1 1 auto;
     display: flex;
-    justify-content:center;
+    justify-content: center;
     align-items: flex-start;
     border-top: 1px solid black;
     padding-top: 10px;
@@ -302,33 +303,33 @@
 */
   .h-img-card {
     display: flex;
-    width:100%;
-    max-width:100%;
+    width: 100%;
+    max-width: 100%;
     flex-direction: row;
     align-items: stretch;
-    min-height:1px; /* IE11 image bug */
+    min-height: 1px; /* IE11 image bug */
   }
 
   .h-img-card__left { 
     flex: 0 0 30%;
     border-right: 1px solid hsla(191, 32%, 40%, 1);
-    padding:5px;
+    padding: 5px;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    width:100%;
-    max-width:100%;
-    min-height:1px; /* IE11 image bug */
+    width: 100%;
+    max-width: 100%;
+    min-height: 1px; /* IE11 image bug */
     font-size: 3.5em; /* for glyphicons */
   }
 
   .h-img-card__img-link {
-    width:100%;
-    max-width:100%;
-    min-height:1px; /* IE11 image bug */
+    width:1 00%;
+    max-width: 100%;
+    min-height: 1px; /* IE11 image bug */
 
     /* for glyphicons */
     text-align: center; 
@@ -337,21 +338,21 @@
   }
 
   .h-img-card__img {
-    width:100%;
-    max-width:100%;
-    min-height:1px; /* IE11 image bug */
+    width: 100%;
+    max-width: 100%;
+    min-height: 1px; /* IE11 image bug */
   }
 
   .h-img-card__right-container {
     display: flex;
-    width:100%;
-    max-width:100%;
+    width: 100%;
+    max-width: 100%;
   }
 
   .h-img-card__right {
     display: flex;
-    width:100%;
-    max-width:100%;
+    width: 100%;
+    max-width: 100%;
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
@@ -362,30 +363,30 @@
     font-size: 1.6em;
     font-weight: $mediumFontWeight;
     text-align: center;
-    width:100%;
-    max-width:100%;
+    width: 100%;
+    max-width: 100%;
     padding: 8px;
   }
 
   .h-img-card__text {
     font-size: 1.2em;
     font-weight: $mediumFontWeight;
-    width:100%;
-    max-width:100%;
+    width: 100%;
+    max-width: 100%;
     margin-top: 10px;
-    width:100%;
-    max-width:100%;
-    text-align:left;
+    width: 100%;
+    max-width: 100%;
+    text-align: left;
     padding: 0 20px;
   }
 
   .h-img-card__bottom-right {
     text-align: right;
-    width:100%;
-    max-width:100%;
+    width: 100%;
+    max-width: 100%;
     margin-top: auto;
-    padding-top:10px;
-    font-size:1.2em;
+    padding-top: 10px;
+    font-size: 1.2em;
     padding: 15px 20px;
   }
 
@@ -422,13 +423,13 @@
   display: flex;
   flex-direction: column;
   justify-content: stretch;
-  width:100%;
-  max-width:100%;
+  width: 100%;
+  max-width: 100%;
 }
 
 .v-img-card__top-container {
-  width:100%;
-  max-width:100%;
+  width: 100%;
+  max-width: 100%;
   display: flex;
   flex-direction: row;
   align-content: center;
@@ -440,14 +441,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex:auto;
-  width:100%;
-  max-width:100%;
+  flex: auto;
+  width: 100%;
+  max-width: 100%;
 }
 
 @media(min-width:992px){
   .v-img-card__img {
-    width:100%;  
+    width: 100%;  
     max-height: 250px; 
   }
 }
@@ -460,42 +461,40 @@
 }
 
 .v-img-card__bottom-container {
-  flex:auto;
+  flex: auto;
   display: flex;
-  width:100%;
-  max-width:100%;
+  width: 100%;
+  max-width: 100%;
 }
 .v-img-card__bottom {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
-  flex:auto;
-  width:100%;
-  max-width:100%;
+  flex: auto;
+  width: 100%;
+  max-width: 100%;
 }
 
 .v-img-card__title {
   font-weight: $mediumFontWeight;
   font-size: 1.6em;
-  width:100%;
-  min-width:100%;
-
+  width: 100%;
+  min-width: 100%;
   border-top: 1px solid #333333;
   padding: 10px;
-  
 }
 
 .v-img-card__text {
   font-size: 1.2em;
-  width:100%;
-  max-width:100%;
+  width: 100%;
+  max-width: 100%;
   padding: 10px;
 }
 
 .v-img-card__bottom-right {
-  width:100%;
-  max-width:100%;
+  width: 100%;
+  max-width: 100%;
 
   margin-top: auto; /* flex hack to emulate justify-self: flex-end */
   padding: 15px 10px 10px 10px;
@@ -516,7 +515,7 @@
   border-top: 10px solid hsla(208, 70%, 69%, 1);
 }
 .results-box {
-  border-top:10px solid hsla(208, 77%, 52%, 1); 
+  border-top: 10px solid hsla(208, 77%, 52%, 1); 
 
   border-bottom-right-radius: 10px;
 }
@@ -551,7 +550,7 @@
 .results-box, .people-box, .finance-box {
   transition: background-color 500ms ease, color 500ms ease;
   cursor: pointer;
-  position:relative;
+  position: relative;
 }
 
 .finance-box:before,
