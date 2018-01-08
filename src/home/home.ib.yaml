@@ -45,8 +45,8 @@ home_results_link:
   fr: Voir les résultats
 
 home_sub_title:
-  en: Interactive infographics and data helping you understand the federal government
-  fr: Données et infographies interactives permettant de mieux comprendre le gouvernement fédéral
+  en: The government’s interactive data-visualization tool, explaining financial, people, and results data to Canadians
+  fr: Outil interactif de visualisation des données qui explique aux Canadiens l’information gouvernementale relative aux résultats, aux finances, à la gestion des personnes
 
 
 partition_home_title:
@@ -134,7 +134,7 @@ whats_new:
 planned_spending_by_program_home:
   en: Planned spending by Program
   fr: Dépenses prévues par Programme
-  
+   
 planned_ftes_by_program_home:
   en: Number of employees (FTEs) we plan to employ by Program
   fr: Nombre d'employés (ETP) que nous prévoyons employer par Programme
