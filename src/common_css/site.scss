@@ -509,16 +509,13 @@ body {
   background-color: $backgroundColor;
 }
 
-b.medium-weight, strong.medium-weight {
-  font-weight: $mediumFontWeight;
-}
-
 b, strong {
   font-weight: $heavyFontWeight;
 }
 
 header, h1, h2, h3, h4, h5, h6 {
   font-weight: $lightFontWeight;
+  font-family: $fontFamily;
 }
 
 #app, #wb-bc, .app-font {

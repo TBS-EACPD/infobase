@@ -115,7 +115,7 @@
 .external-row-descriptor {
   font-size: 2em;
   margin-top: 25px;
-  font-weight: $mediumFontWeight;
+  font-weight: $lightFontWeight;
   border-bottom: 1px solid #333;
 }
 
@@ -360,7 +360,7 @@
 
   .h-img-card__title {
     font-size: 1.6em;
-    font-weight: $heavyFontWeight;
+    font-weight: $mediumFontWeight;
     text-align: center;
     width:100%;
     max-width:100%;
@@ -476,8 +476,8 @@
 }
 
 .v-img-card__title {
-  font-weight: $heavyFontWeight;
-  font-size: 1.4em;
+  font-weight: $mediumFontWeight;
+  font-size: 1.6em;
   width:100%;
   min-width:100%;
 
@@ -529,20 +529,23 @@
 .people-box:hover, .people-box:active, .people-box:focus,
 .finance-box:hover, .finance-box:active .finance-box:focus {
   background-color: #a2cdf2;
-  color: #333; 
+  color: #333;
 }
 
 .results-box,
 .people-box,
 .finance-box {
   color: #fff;
-  font-weight: $mediumFontWeight;
+  font-weight: $lightFontWeight;
 }
 
 .results-box .h-img-card__title,
 .people-box .h-img-card__title,
-.finance-box .h-img-card__title {
-  font-weight: $mediumFontWeight;
+.finance-box .h-img-card__title,
+.results-box .h-img-card__text,
+.people-box .h-img-card__text,
+.finance-box .h-img-card__text {
+  font-weight: $lightFontWeight;
 }
 
 .results-box, .people-box, .finance-box {
