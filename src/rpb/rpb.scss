@@ -196,14 +196,6 @@ li.select-list-item {
   border-right: 1px solid #bbb !important;
 }
 
-
-
-/* only use with react-virtualized table, which by default disabled text wrapping */
-.allow-text-wrapping {
- white-space: normal !important;
- overflow-wrap: break-word;
-}
-
 .rpb-data-cell {
   text-align: right;
 }

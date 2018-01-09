@@ -1,5 +1,5 @@
 var yaml = require('js-yaml');
-var _ = require("underscore");
+var _ = require("lodash");
 
 module.exports = function(src){
   this.cacheable();
@@ -7,17 +7,17 @@ module.exports = function(src){
   var lang = this.query.lang;
 
   var obj = yaml.load(src);
- _.chain(obj)
-  .map(function(val,key){
+ _.each(obj, function(val,key){
     if( !_.isObject(val) ){ return [key,val]; }
     if (lang === "en" ){
       delete val.fr;
     } else {
       delete val.en;
     }
-    return [key,val];
-  })
-  .object();
+
+  });
+
+
   //var filtered_dump =  yaml.dump(obj);
   var filtered_dump =  JSON.stringify(obj);
   
