@@ -2,16 +2,12 @@ import { storiesOf } from '@storybook/react';
 
 import { WellList } from '../graphs/intro_graphs/WellList.js';
 
-<<<<<<< b9e7b87cb0d228b5542550cce8b11c632bf1c29d
 //attach globals that module expect to have
 import {
   GraphLegend,
   TabularPercentLegend,
 } from '../charts/declarative_charts.js';
 
-<<<<<<< 19140187343eb309150c8d74d6d3e8b986b84f08
-=======
->>>>>>> pses visualization progress
 import { AutoAccordion } from './Accordions.js';
 
 import { Details } from './Details.js';
@@ -25,12 +21,6 @@ import { SortIndicators } from './SortIndicators.js';
 import { TabbedContent } from './TabbedContent.js';
 
 import { TwoLevelSelect } from './TwoLevelSelect.js'
-=======
-import { RadioButtons } from '../util_components.js';
-
-import { Details } from './Details.js';
-
->>>>>>> split up stories, add a new <Details> component
 
 const separator_style = {padding: "20px", maxWidth: "800px", border:"2px dashed black"};
 storiesOf('flat design modifications', module)
