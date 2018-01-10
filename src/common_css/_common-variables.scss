@@ -16,6 +16,7 @@ $mediumFontWeight: 400;
 $heavyFontWeight: 700;
 
 @mixin unstyled-button {
+  text-align: left;
   border: none;
   background-color: inherit;
   outline: none;

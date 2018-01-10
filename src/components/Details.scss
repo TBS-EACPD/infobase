@@ -40,7 +40,7 @@ $borderColor: transparent;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
 
   &.IBDetails__Summary--open {
     border-bottom: 1px solid $borderColor;
