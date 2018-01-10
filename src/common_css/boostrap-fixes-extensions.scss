@@ -19,26 +19,13 @@
   border: none;
   padding: 1px 20px;
   border-radius: 5px;
-}
 
-@media (min-width:1200px){
-  .tooltip-inner {  
+  @media (min-width:1200px){
     max-width: 600px !important;
     line-height: 1.6em;
-    
   }
-}
-
-@media (min-width:900px) and (max-width: 1199px) {
-  .tooltip-inner {  
-    max-width: 60vw !important;
-  }
-}
-
-@media (max-width:899px){
-  .tooltip-inner {  
-    max-width: 90vw !important;
-  }
+  @media (min-width:900px) and (max-width: 1199px) { max-width: 60vw !important }
+  @media (max-width:899px){ max-width: 90vw !important }
 }
 /* /tooltips */
 

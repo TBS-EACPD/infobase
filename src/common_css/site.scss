@@ -218,6 +218,10 @@ ul.fancy-ul > li:last-child {
   font-size: 12pt;
 }
 
+.agnostic-header.agnostic-header--medium-weight {
+  font-weight: $mediumFontWeight;
+}
+
 .agnostic-header.extra-margin {
   margin-top: 30px;
   margin-bottom: 10px;

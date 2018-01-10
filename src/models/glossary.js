@@ -34,7 +34,7 @@ const compiled_definitions = _.memoize( glossary_id => marked(GlossaryEntry.look
 
 const glossary_display = item => `<div>
   <span class="sr-only"> A definition follows </span>
-  <header class="agnostic-header"> ${text_maker('definition')} : ${item.title} </header>
+  <header class="agnostic-header agnostic-header--medium-weight"> ${text_maker('definition')} : ${item.title} </header>
   <div>${item.definition}</div>
 </div>`;
 
