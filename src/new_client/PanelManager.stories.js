@@ -6,7 +6,7 @@ import { ApolloProvider } from 'react-apollo';
 
 import { get_client } from '../graphql_utils.js';
 
-import { InfoGraph }  from './NewInfograph';
+import { PanelManager }  from './PanelManager.js';
 
 import { panel_def as result_tree_panel_def } from '../apollo-treemaps/result-treemap.js';
 
@@ -94,12 +94,12 @@ const panel_defs = [
   result_tree_panel_def,
 ];
 
-storiesOf('New Infograph',module)
-  .add('Infograph', ()=> {
+storiesOf('PanelManager',module)
+  .add('PanelManager', ()=> {
 
     return (
       <ApolloProvider client={get_client()}>
-        <InfoGraph 
+        <PanelManager 
           panel_defs={panel_defs}
           subject_context={{
             id: "1",

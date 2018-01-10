@@ -5,15 +5,15 @@ import gql from 'graphql-tag';
 
 
 
-const PresentationalInfograph = props => {
+const Presentational = props => {
   const { panel_defs } = props;
-  const isInfoGraphicLoading = !_.chain(panel_defs)
+  const arePanelDepsLoading = !_.chain(panel_defs)
     .filter("query") //note that due to a bug in apollo, even if 'skip' is set to true, loading will not be set to false
     .reject( ({key}) => _.includes([2,3,4], _.get(props, `${key}.networkStatus`))) //refetch, fetchMore and variable-changing queries should not  hold back InfoGraphic from rendering
     .every( ({key}) => _.get(props, `${key}.loading`) === false )
     .value();
 
-  if(isInfoGraphicLoading){
+  if(arePanelDepsLoading){
     return null;
 
   } else {
@@ -81,7 +81,7 @@ function panel_def_to_connecter(panel_def, subject_context){
 };
 
 
-export class InfoGraph extends React.PureComponent {
+export class PanelManager extends React.PureComponent {
   render(){
     const { 
       panel_defs,
@@ -90,7 +90,7 @@ export class InfoGraph extends React.PureComponent {
 
     const panel_connecters = _.map(panel_defs, def => panel_def_to_connecter(def, subject_context));
 
-    const Component = compose(...panel_connecters)(PresentationalInfograph);
+    const Component = compose(...panel_connecters)(Presentational);
 
     return <Component {...this.props} />;
   }
