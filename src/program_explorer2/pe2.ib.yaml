@@ -275,6 +275,14 @@ program_SOBJ_warning:
 
 
 ## Misc. components
+partition_orgs_was:
+  transform: [handlebars]
+  en: |
+    We have
+    <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_compact x}}</a></p>
+    Federal Organizations and Interests
+  fr: |
+    TODO
 partition_spending_was:
   transform: [handlebars]
   en: |

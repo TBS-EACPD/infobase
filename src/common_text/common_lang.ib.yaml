@@ -256,6 +256,9 @@ org:
 orgs: 
   en: Organizations
   fr: Organisations
+org(s):
+  en: Organization(s)
+  fr: Organisation(s)
 tag:
   en: Tag
   fr: Étiquette
