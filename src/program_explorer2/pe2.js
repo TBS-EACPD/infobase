@@ -528,7 +528,7 @@ class GovPartition {
       });
    
     this.value_formater = d => !d.data.is("dept") ?
-      wrap_in_brackets(formaters[this.value_attr](d[this.value_attr]) + " " + text_maker("org(s)")):
+      wrap_in_brackets(formaters[this.value_attr](d[this.value_attr]) + " " + text_maker("orgs")):
       "";
 
     this.popup_template = function(d){
