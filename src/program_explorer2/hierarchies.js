@@ -4,6 +4,7 @@ const {GlossaryEntry} = require("../models/glossary");
 const {Table} = require('../core/TableClass.js');
 const {text_maker} = require("../models/text");
 const {sos} = require('../models/businessConstants.js');
+const { InstForm } = require('../models/subject.js');
 
 const absolute_value_sort = (a,b) => - ( Math.abs(a.value) - Math.abs(b.value) );
 
@@ -93,7 +94,7 @@ exports.create_ministry_hierarchy = function(value_attr,skip_crsos,root_id){
 };
 
 exports.create_tag_hierarchy = function(root,value_attr,root_id) {
-  const hierarchy =  d4.hierarchy(Subject.Tag.tag_roots[root],
+  const hierarchy = d4.hierarchy(Subject.Tag.tag_roots[root],
     node => {
       if (node.is("tag")){
         return node.children_tags.length > 0 ? node.children_tags : node.programs;
@@ -193,3 +194,42 @@ exports.create_spend_type_hierarchy = function(value_attr,root_id) {
     .sort( absolute_value_sort );
 };
 
+exports.create_org_info_hierarchy = function(value_attr,root_id) {
+  return d4.hierarchy(Subject.gov,
+    node => {
+      if (node.is("gov")){
+        return Subject.Ministry.get_all();
+      } else if (node.is("ministry")){
+        return _.chain(node.orgs)
+          .reject("is_dead")
+          .groupBy("inst_form.id")
+          .map( (orgs, parent_form_id) => {
+            return _.chain(orgs)
+              .groupBy("inst_form.id")
+              .map( (orgs, type_id) => ({
+                id: type_id,
+                description: "todo",
+                name: InstForm.lookup(type_id).name,
+                is: __type__ => __type__ === "inst_form",
+                orgs: orgs,
+              }) )
+              .value()
+          })
+          .flatten()
+          .value();
+      } else if (node.is("inst_form")) {
+        return node.orgs;
+      }
+    })
+    .eachAfter(node =>{
+      node.id_ancestry = get_id_ancestry(root_id,node);
+      if (node.data.is("dept")){
+        node[value_attr] = node.value = node.data.value = 1;
+      } else {
+        node.children = _.filter(node.children,d=>d.value!==false && d.value !== 0);
+        node[value_attr] = node.value = d4.sum(node.children, d=>d.value);
+      }
+      post_traversal_search_string_set(node);
+    })
+    .sort( (a,b) => a.data.name.toLowerCase().localeCompare (b.data.name.toLowerCase() ) );
+};

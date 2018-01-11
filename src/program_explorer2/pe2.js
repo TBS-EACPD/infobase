@@ -11,6 +11,7 @@ const {
   create_ministry_hierarchy,
   create_spend_type_hierarchy,
   create_tag_hierarchy,
+  create_org_info_hierarchy,
   mock_model,
 } = require("./hierarchies"); 
 const { reactAdapter } = require('../core/reactAdapter');
@@ -158,7 +159,7 @@ class GovPartition {
       { id: "hwh", text: Subject.Tag.tag_roots.HWH.name },
       { id: "st", text: text_maker("type_of_spending") },
       { id: "org_info_all", text: text_maker("by_all") },
-      { id: "org_info_with_data", text: text_maker("all_org_info_with_data") },
+      { id: "org_info_with_data", text: text_maker("all_orgs_with_data") },
     ];
 
     const presentation_schemes = _.chain(this.all_presentation_schemes)
@@ -516,7 +517,7 @@ class GovPartition {
   }
   org_info(only_orgs_with_data){
     this.value_attr = "org_info";
-    //this.hierarchy_factory = ()=>create_spend_type_hierarchy( this.value_attr,  this.root_id+=1 );
+    this.hierarchy_factory = ()=>create_org_info_hierarchy( this.value_attr, this.root_id+=1 );
     this.hierarchy = this.hierarchy_factory(value_functions[this.value_attr]);
     
     this.hierarchy
@@ -524,10 +525,7 @@ class GovPartition {
         node.__value__ = node.value;
         node.open = true
         node.how_many_to_show = Infinity;
-      })
-      .each(node => {
-        node.children = show_partial_children(node);
-      })
+      });
    
     this.value_formater = d => !d.data.is("dept") ?
       wrap_in_brackets(formaters[this.value_attr](d[this.value_attr]) + " " + text_maker("org(s)")):
@@ -541,7 +539,7 @@ class GovPartition {
             description: d.data.mandate,
           })
         );
-      } else if (d.data.is("org_type")) {
+      } else if (d.data.is("inst_form")) {
         return text_maker("partition_org_or_goca_popup", 
           _.extend(common_popup_options, {
             description: d.data.mandate,
