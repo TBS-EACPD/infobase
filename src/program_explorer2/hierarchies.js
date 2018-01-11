@@ -211,6 +211,7 @@ exports.create_org_info_hierarchy = function(value_attr,root_id) {
                 description: "todo",
                 name: InstForm.lookup(type_id).name,
                 is: __type__ => __type__ === "inst_form",
+                plural:()=> text_maker("type"),
                 orgs: orgs,
               }) )
               .value()
