@@ -194,7 +194,7 @@ exports.create_spend_type_hierarchy = function(value_attr,root_id) {
     .sort( absolute_value_sort );
 };
 
-exports.create_org_info_hierarchy = function(value_attr,root_id) {
+exports.create_org_info_hierarchy = function(value_attr,root_id,only_orgs_with_data) {
   const glossary_entry_from_inst_form_type_id = (type_id) => {
     const type_id_to_glossary_suffix_map = {
       "agents_parl": "APARL",
@@ -224,6 +224,7 @@ exports.create_org_info_hierarchy = function(value_attr,root_id) {
       } else if (node.is("ministry")){
         return _.chain(node.orgs)
           .reject("is_dead")
+          .filter(org => !only_orgs_with_data || (org.tables && org.tables.length > 1))
           .groupBy("inst_form.id")
           .map( (orgs, parent_form_id) => {
             return _.chain(orgs)
@@ -234,7 +235,7 @@ exports.create_org_info_hierarchy = function(value_attr,root_id) {
                 name: InstForm.lookup(type_id).name,
                 is: __type__ => __type__ === "inst_form",
                 plural:()=> text_maker("type"),
-                orgs: orgs,
+                orgs: _.filter(orgs, org => !only_orgs_with_data || (org.tables && org.tables.length > 1)),
               }) )
               .value()
           })

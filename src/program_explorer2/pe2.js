@@ -518,7 +518,7 @@ class GovPartition {
   }
   org_info(only_orgs_with_data){
     this.value_attr = "org_info";
-    this.hierarchy_factory = ()=>create_org_info_hierarchy( this.value_attr, this.root_id+=1 );
+    this.hierarchy_factory = ()=>create_org_info_hierarchy( this.value_attr, this.root_id+=1, only_orgs_with_data);
     this.hierarchy = this.hierarchy_factory(value_functions[this.value_attr]);
     
     this.hierarchy
