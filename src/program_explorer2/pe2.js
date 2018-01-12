@@ -154,7 +154,7 @@ class GovPartition {
     const sort_vals = this.sort_vals = _.sortBy([ 
       { id: "exp", text: text_maker("spending"), presentation_schemes: ["goca", "dept", "hwh", "st"] },
       { id: "fte", text: text_maker("fte_written"), presentation_schemes: ["goca", "dept", "hwh"] },
-      { id: "org_info", text: text_maker("orgs"), presentation_schemes: ["org_info_all", "org_info_with_data"] },  
+      { id: "org_info", text: text_maker("orgs"), presentation_schemes: ["org_info_with_data", "org_info_all"] },  
     ], d => d.id === value_attr ? -Infinity : Infinity);
 
     this.all_presentation_schemes = [
@@ -162,8 +162,8 @@ class GovPartition {
       { id: "dept", text: text_maker("ministries") },
       { id: "hwh", text: Subject.Tag.tag_roots.HWH.name },
       { id: "st", text: text_maker("type_of_spending") },
-      { id: "org_info_all", text: text_maker("by_all") },
       { id: "org_info_with_data", text: text_maker("all_orgs_with_data") },
+      { id: "org_info_all", text: text_maker("by_all") },
     ];
 
     const presentation_schemes = _.chain(this.all_presentation_schemes)
