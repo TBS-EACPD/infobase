@@ -101,7 +101,11 @@ partition_popup_org_info_child_org_count:
     <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
         {{gt "parent_of"}}
         {{fmt_big_int_real org_info}}
-        {{gt "org(s)"}}
+        {{#if plural_child_orgs}}
+          {{gt "orgs"}}
+        {{else}}
+          {{gt "org"}}
+        {{/if}}
     </div>
 partition_popup_ministry_name:
   handlebars_partial: true

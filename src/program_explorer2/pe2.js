@@ -557,11 +557,13 @@ class GovPartition {
           _.extend(common_popup_options, {
             description: d.data.description,
             ministry_name: d.parent.data.name,
+            plural_child_orgs: d.value !== 1,
           })
         );
       } else if (d.data.is("ministry")) {
         return text_maker("partition_org_info_ministry_popup", 
           _.extend(common_popup_options, {
+            plural_child_orgs: d.value !== 1,
             focus_text: d.magnified ? text_maker("partition_unfocus_button") : text_maker("partition_focus_button"),
           })
         );
