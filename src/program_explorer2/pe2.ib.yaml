@@ -95,6 +95,17 @@ partition_popup_focus_button:
       style='background-color:{{color}};'>
       {{focus_text}}
     </a> 
+partiton_org_info_top_row:
+  handlebars_partial: true
+  text: |
+    <div class='mrgn-bttm-md popup-row-top popup-font-m popup-row-bottom-border'>
+      <span class='stat1 popup-font-m'>
+        {{gt "parent_of"}}
+        </br>
+        {{fmt_big_int_real org_info}}
+        {{gt "orgs"}}
+      </span>
+    </div>
 
 ## Templated popups
 partition_program_popup:
@@ -157,11 +168,13 @@ partition_org_info_org_popup:
 partition_org_info_inst_form_popup:
   transform: [handlebars]
   text: |
+    {{> "partiton_org_info_top_row"}}
     {{> "partition_popup_name"}}
     {{> "partition_popup_description"}}
 partition_org_info_ministry_popup:
   transform: [handlebars]
   text: |
+    {{> "partiton_org_info_top_row"}}
     {{> "partition_popup_name"}}
     {{> "partition_popup_focus_button"}}
 
@@ -442,3 +455,6 @@ partition_revenue_explained:
 up_to:
   en: up to
   fr: jusqu'à
+parent_of:
+  en: Parent of
+  fr: todo

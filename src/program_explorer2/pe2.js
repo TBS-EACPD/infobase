@@ -123,6 +123,7 @@ const get_common_popup_options = d => {
     exp: d.exp,
     exp_is_negative: d.exp < 0,
     fte: d.fte,
+    org_info: d.org_info,
     name: d.data.name,
     tags: d.data.tags,
     level: d.data.level,
@@ -537,12 +538,15 @@ class GovPartition {
         return text_maker("partition_org_info_org_popup", 
           _.extend(common_popup_options, {
             description: d.data.mandate,
+            inst_form: d.parent.data.name,
+            ministry: d.parent.parent.data.name, 
           })
         );
       } else if (d.data.is("inst_form")) {
         return text_maker("partition_org_info_inst_form_popup", 
           _.extend(common_popup_options, {
             description: d.data.description,
+            ministry: d.parent.data.name,
           })
         );
       } else if (d.data.is("ministry")) {

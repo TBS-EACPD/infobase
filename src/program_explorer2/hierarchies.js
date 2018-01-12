@@ -217,7 +217,6 @@ exports.create_org_info_hierarchy = function(value_attr,root_id) {
     return GlossaryEntry.lookup(glossary_key).definition;
   }
 
-
   return d4.hierarchy(Subject.gov,
     node => {
       if (node.is("gov")){
