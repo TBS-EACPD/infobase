@@ -232,5 +232,11 @@ exports.create_org_info_hierarchy = function(value_attr,root_id) {
       }
       post_traversal_search_string_set(node);
     })
-    .sort( (a,b) => a.data.name.toLowerCase().localeCompare (b.data.name.toLowerCase() ) );
+    .sort( (a,b) => {
+      if (!a.data.is("ministry")) {
+        return a.data.name.toLowerCase().localeCompare( b.data.name.toLowerCase() );
+      } else {
+        return absolute_value_sort(a,b);
+      }
+    });
 };
