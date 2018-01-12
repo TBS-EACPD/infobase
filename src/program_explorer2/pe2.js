@@ -26,10 +26,13 @@ const formaters = {
   "org_info" : big_int_real,
 };
 const wrap_in_brackets = (text) => " (" + text + ")";
-const templates = {
-  "exp" : "partition_spending_was",
-  "fte" : "partition_fte_was",
-  "org_info" : "partition_org_info_was",
+const get_root_text_key = (value_attr, method) => {
+  const text_keys_by_value_attr = {
+    "exp" : "partition_spending_was",
+    "fte" : "partition_fte_was",
+    "org_info" : method === "org_info_all" ? "partition_org_info_was" : "partition_org_info_with_data_was",
+  };
+  return text_keys_by_value_attr[value_attr];
 }
 const url_template = (method,value)=>`#partition/${method}/${value}`;
 const search_required_chars = 1;
@@ -567,7 +570,7 @@ class GovPartition {
   render(){
     const default_formater = d => formaters[this.value_attr](d[this.value_attr]);
     const value_formater = this.value_formater || default_formater;
-    const template = templates[this.value_attr];
+    const root_text_key = get_root_text_key(this.value_attr, this.method);
     const wrapper = new PARTITION.DataWrapper(
       this.hierarchy,
       show_partial_children,
@@ -590,7 +593,7 @@ class GovPartition {
         } else if ( !should_add_value && d !== wrapper.root){
           name =  utils.abbrev(d.data.name, 80);
         } else if ( d === wrapper.root ) {
-          name = text_maker(template, {x:wrapper.root.value, show_root_rollup});
+          name = text_maker(root_text_key, {x:wrapper.root.value, show_root_rollup});
         }
         return name;
       },

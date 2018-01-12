@@ -325,6 +325,14 @@ partition_org_info_was:
     Federal Orgs and Interests
   fr: |
     TODO
+partition_org_info_with_data_was:
+  transform: [handlebars]
+  en: |
+    We have data for
+    <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    Federal Orgs and Interests
+  fr: |
+    TODO
 partition_spending_was:
   transform: [handlebars]
   en: |
@@ -388,7 +396,8 @@ planned_fte_will_be:
     <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int_real x}}</a></p>
     ETP en
     {{/if}}
-    <span class='text-nowrap'>{{planning_year_1}}</span> 
+    <span class='text-nowrap'>{{planning_year_1}}</span>
+
 partition_controls:
   transform: [handlebars]
   text: |
