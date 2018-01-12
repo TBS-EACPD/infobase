@@ -195,6 +195,29 @@ exports.create_spend_type_hierarchy = function(value_attr,root_id) {
 };
 
 exports.create_org_info_hierarchy = function(value_attr,root_id) {
+  const glossary_entry_from_inst_form_type_id = (type_id) => {
+    const type_id_to_glossary_suffix_map = {
+      "agents_parl": "APARL",
+      "crown_corp": "CC",
+      "dept_agency": "STATOA",
+      "dept_corp": "DEPTCORP",
+      "inter_org": "IO",
+      "joint_enterprise": "JE",
+      "min_dept": "DEPT",
+      "parl_ent": "todo",
+      "serv_agency": "SA",
+      "shared_gov_corp": "SGC",
+      "spec_op_agency": "SOA",
+    }
+
+    const glossary_key = type_id === "parl_ent" ?
+      "PARL_ORG" :
+      "IFORM_"+type_id_to_glossary_suffix_map[type_id];
+
+    return GlossaryEntry.lookup(glossary_key).definition;
+  }
+
+
   return d4.hierarchy(Subject.gov,
     node => {
       if (node.is("gov")){
@@ -208,7 +231,7 @@ exports.create_org_info_hierarchy = function(value_attr,root_id) {
               .groupBy("inst_form.id")
               .map( (orgs, type_id) => ({
                 id: type_id,
-                description: "todo",
+                description: glossary_entry_from_inst_form_type_id(type_id),
                 name: InstForm.lookup(type_id).name,
                 is: __type__ => __type__ === "inst_form",
                 plural:()=> text_maker("type"),

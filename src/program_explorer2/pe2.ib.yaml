@@ -148,6 +148,22 @@ partition_hwh_tag_popup:
     {{> "partition_popup_description"}}
     {{> "partition_popup_infograph_link"}}
     {{> "partition_popup_focus_button"}}
+partition_org_info_org_popup:
+  transform: [handlebars]
+  text: |
+    {{> "partition_popup_name"}}
+    {{> "partition_popup_description"}}
+    {{> "partition_popup_infograph_link"}}
+partition_org_info_inst_form_popup:
+  transform: [handlebars]
+  text: |
+    {{> "partition_popup_name"}}
+    {{> "partition_popup_description"}}
+partition_org_info_ministry_popup:
+  transform: [handlebars]
+  text: |
+    {{> "partition_popup_name"}}
+    {{> "partition_popup_focus_button"}}
 
 ## Other popups
 partition_intro_popup:
@@ -279,7 +295,7 @@ partition_org_info_was:
   transform: [handlebars]
   en: |
     We have
-    <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_compact x}}</a></p>
+    <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
     Federal Orgs and Interests
   fr: |
     TODO

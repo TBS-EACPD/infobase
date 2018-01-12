@@ -534,19 +534,19 @@ class GovPartition {
     this.popup_template = function(d){
       const common_popup_options = get_common_popup_options(d);
       if (d.data.is("dept")) {
-        return text_maker("partition_org_or_goca_popup", 
+        return text_maker("partition_org_info_org_popup", 
           _.extend(common_popup_options, {
             description: d.data.mandate,
           })
         );
       } else if (d.data.is("inst_form")) {
-        return text_maker("partition_org_or_goca_popup", 
+        return text_maker("partition_org_info_inst_form_popup", 
           _.extend(common_popup_options, {
-            description: d.data.mandate,
+            description: d.data.description,
           })
         );
       } else if (d.data.is("ministry")) {
-        return text_maker("partition_ministry_or_sa_popup", 
+        return text_maker("partition_org_info_ministry_popup", 
           _.extend(common_popup_options, {
             focus_text: d.magnified ? text_maker("partition_unfocus_button") : text_maker("partition_focus_button"),
           })
