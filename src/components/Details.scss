@@ -11,21 +11,17 @@ $borderColor: transparent;
 
   border-radius: 4px;
   border: 1px solid $borderColor;
-
 }
 
 .IBDetails__Summary {
-  
   @include unstyled-button;
   background-color: transparent; /* override unstyle-button's inherit because IE11 won't apply it */
   width: 100%;
-
 
   color: #23406F;
   font-weight: $heavyFontWeight;
   padding: 5px;
   cursor: pointer;
-
 
   &:hover,
   &:active,
@@ -34,7 +30,6 @@ $borderColor: transparent;
     color: #0535d2;
     text-decoration: underline;
   }
-
 
   display: flex;
   flex-direction: row;
@@ -45,15 +40,8 @@ $borderColor: transparent;
   &.IBDetails__Summary--open {
     border-bottom: 1px solid $borderColor;
   }
-
-
 }
 
 .IBDetails__TogglerIcon {
   margin-right: 5px;
-}
-
-.IBDetails__Content {
-  padding: 0px;
-
 }
