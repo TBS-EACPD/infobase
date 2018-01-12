@@ -1,5 +1,5 @@
 ## Popup components
-partition_top_row:
+partition_popup_top_row:
   handlebars_partial: true
   text: |
     <div class='mrgn-bttm-md popup-row-top popup-font-m popup-row-bottom-border'>
@@ -95,23 +95,33 @@ partition_popup_focus_button:
       style='background-color:{{color}};'>
       {{focus_text}}
     </a> 
-partiton_org_info_top_row:
+partition_popup_org_info_child_org_count:
   handlebars_partial: true
   text: |
-    <div class='mrgn-bttm-md popup-row-top popup-font-m popup-row-bottom-border'>
-      <span class='stat1 popup-font-m'>
+    <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
         {{gt "parent_of"}}
-        </br>
         {{fmt_big_int_real org_info}}
-        {{gt "orgs"}}
-      </span>
+        {{gt "org(s)"}}
     </div>
+partition_popup_ministry_name:
+  handlebars_partial: true
+  text: |
+    <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
+      <strong>{{gt "ministry"}}:</strong> {{ministry_name}}
+    </div>
+partition_popup_inst_form_name:
+  handlebars_partial: true
+  text: |
+    <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
+      <strong>{{gt "type"}}:</strong> {{inst_form_name}}
+    </div>
+
 
 ## Templated popups
 partition_program_popup:
   transform: [handlebars]
   text: |
-    {{> "partition_top_row"}}
+    {{> "partition_popup_top_row"}}
     {{> "partition_popup_name"}}
     <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
       <a href='#orgs/dept/{{dept_id}}/infograph' class='infographic' style='color:inherit;'> 
@@ -135,26 +145,26 @@ partition_program_popup:
 partition_org_or_goca_popup:
   transform: [handlebars]
   text: |
-    {{> "partition_top_row"}}
+    {{> "partition_popup_top_row"}}
     {{> "partition_popup_name"}}
     {{> "partition_popup_description"}}
     {{> "partition_popup_infograph_link"}}
 partition_so_popup:
   transform: [handlebars,markdown]
   text: |
-    {{> "partition_top_row"}}
+    {{> "partition_popup_top_row"}}
     {{> "partition_popup_name"}}
     {{> "partition_popup_description"}}
 partition_ministry_or_sa_popup:
   transform: [handlebars]
   text: |
-    {{> "partition_top_row"}}
+    {{> "partition_popup_top_row"}}
     {{> "partition_popup_name"}}
     {{> "partition_popup_focus_button"}}
 partition_hwh_tag_popup:
   transform: [handlebars]
   text: |
-    {{> "partition_top_row"}}
+    {{> "partition_popup_top_row"}}
     {{> "partition_popup_name"}}
     {{> "partition_popup_description"}}
     {{> "partition_popup_infograph_link"}}
@@ -163,19 +173,22 @@ partition_org_info_org_popup:
   transform: [handlebars]
   text: |
     {{> "partition_popup_name"}}
+    {{> "partition_popup_inst_form_name"}}
+    {{> "partition_popup_ministry_name"}}
     {{> "partition_popup_description"}}
     {{> "partition_popup_infograph_link"}}
 partition_org_info_inst_form_popup:
   transform: [handlebars]
   text: |
-    {{> "partiton_org_info_top_row"}}
     {{> "partition_popup_name"}}
+    {{> "partition_popup_ministry_name"}}
+    {{> "partition_popup_org_info_child_org_count"}}
     {{> "partition_popup_description"}}
 partition_org_info_ministry_popup:
   transform: [handlebars]
   text: |
-    {{> "partiton_org_info_top_row"}}
     {{> "partition_popup_name"}}
+    {{> "partition_popup_org_info_child_org_count"}}
     {{> "partition_popup_focus_button"}}
 
 ## Other popups

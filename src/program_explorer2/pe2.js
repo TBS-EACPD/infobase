@@ -538,15 +538,15 @@ class GovPartition {
         return text_maker("partition_org_info_org_popup", 
           _.extend(common_popup_options, {
             description: d.data.mandate,
-            inst_form: d.parent.data.name,
-            ministry: d.parent.parent.data.name, 
+            inst_form_name: d.parent.data.name,
+            ministry_name: d.parent.parent.data.name, 
           })
         );
       } else if (d.data.is("inst_form")) {
         return text_maker("partition_org_info_inst_form_popup", 
           _.extend(common_popup_options, {
             description: d.data.description,
-            ministry: d.parent.data.name,
+            ministry_name: d.parent.data.name,
           })
         );
       } else if (d.data.is("ministry")) {
