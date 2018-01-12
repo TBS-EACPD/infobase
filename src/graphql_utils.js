@@ -5,7 +5,6 @@ import gql from 'graphql-tag';
 import { graphql as apollo_connect } from 'react-apollo';
 
 
-
 const api_url = "http://127.0.0.1:1337/?";
 
 let client = null;
@@ -19,7 +18,7 @@ export function get_client(){
       cache: new InMemoryCache(),
       defaultOptions: {
         query: {
-          fetchPolicy: "network-only",
+          fetchPolicy: "cache-first",
         },
       },
     });
@@ -45,7 +44,7 @@ const InnerLoadingHoc = ({Component, data_to_props}) => props => {
 }
 
 //for use in development only
-export const LoadingHoc = ({Component,query,data_to_props,variables}) => apollo_connect(query, {
+export const LoadingHoc = ({Component,query,data_to_props=_.identity,variables}) => apollo_connect(query, {
   options: variables ? { variables } : {},
 })(InnerLoadingHoc({Component,data_to_props}))
 

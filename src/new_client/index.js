@@ -5,12 +5,24 @@ import { App, app_reducer } from './App.js';
 
 import ReactDOM from 'react-dom';
 
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { 
+  createStore, 
+  combineReducers, 
+  applyMiddleware,
+} from 'redux';
+
 import { Provider } from 'react-redux';
 
-import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';
+import { 
+  ConnectedRouter, 
+  routerReducer, 
+  routerMiddleware, 
+  //push,
+} from 'react-router-redux';
 import createHistory from 'history/createHashHistory';
 
+import { ApolloProvider } from 'react-apollo';
+import { get_client } from '../graphql_utils.js';
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory()
@@ -35,11 +47,14 @@ ReactDOM.render(
   <Provider store={store}>
     { /* ConnectedRouter will use the store from Provider automatically */ }
     <ConnectedRouter history={history}>
-      <App />
+      { /* ApolloProvider allows components anywhere in the tree to use the 'graphql' decorator */ }
+      <ApolloProvider client={get_client()}>
+        <App />
+      </ApolloProvider>
     </ConnectedRouter>
   </Provider>,
   document.getElementById('app')
-)
+);
 
 
 

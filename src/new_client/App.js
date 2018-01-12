@@ -2,7 +2,10 @@ import { Route, Switch } from 'react-router';
 import { Link, NavLink } from 'react-router-dom';
 import { Infograph } from './Infograph.js';
 
-export const app_reducer = (state={}, { type, payload }) => {
+
+window.lang = APPLICATION_LANGUAGE;
+
+export const app_reducer = (state={ lang: window.lang }, { type, payload }) => {
   //doesn't do anything yet...
   return state;
 };
@@ -14,8 +17,8 @@ export const app_reducer = (state={}, { type, payload }) => {
 const Nav = () => <div>
   <ul>
     <li> <NavLink to="/"> Home </NavLink> </li>
-    <li> <NavLink to="about"> About </NavLink> </li>
-    <li> <NavLink to="topics"> Topics </NavLink> </li>
+    <li> <NavLink to="/about"> About </NavLink> </li>
+    <li> <NavLink to="/topics"> Topics </NavLink> </li>
   </ul>
 </div>
 
@@ -48,7 +51,7 @@ export class App extends React.Component {
           <Route exact path="/" component={Home}/>
           <Route exact path="/about" component={About}/>
           <Route exact path="/topics" component={Topics}/>
-          <Route exact path="/infographic/:level/:id/:bubble" component={Infograph} />
+          <Route exact path="/infographic/:level/:id/:bubble?" component={Infograph} />
           <Route component={Page404} />
         </Switch>
       </div>

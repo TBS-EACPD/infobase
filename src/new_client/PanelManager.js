@@ -2,16 +2,21 @@
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 
-
-
-
 const Presentational = props => {
-  const { panel_defs } = props;
+  const { panel_defs, subject_context } = props;
+
   const arePanelDepsLoading = !_.chain(panel_defs)
-    .filter("query") //note that due to a bug in apollo, even if 'skip' is set to true, loading will not be set to false
-    .reject( ({key}) => _.includes([2,3,4], _.get(props, `${key}.networkStatus`))) //refetch, fetchMore and variable-changing queries should not  hold back InfoGraphic from rendering
+    .filter("query") //filter out static panels
+    .reject( ({key}) => {
+      //See apollo docs on networkStatus, the following values cover refetch's, fetchMore's and other special use-cases
+      //in these cases, we don't want the entire infographic to block rendering.
+
+      const networkStatus = _.get(props, `${key}.networkStatus`);
+      return _.includes([2,3,4], networkStatus);
+
+    }) 
     .every( ({key}) => _.get(props, `${key}.loading`) === false )
-    .value();
+    .value(); 
 
   if(arePanelDepsLoading){
     return null;
@@ -25,7 +30,11 @@ const Presentational = props => {
 
       return (
         <Component
-          data={data_to_props(data_props)}
+          data={
+            _.isFunction(data_to_props) ? 
+            data_to_props(data_props) : 
+            null  // static panels won't have data_to_props nor data_props
+          }
           gql_props={
             _.pick(data_props, [
               'refetch',
@@ -33,6 +42,7 @@ const Presentational = props => {
               'loading', //note that in the case of refetches, component data may still be loading! 
             ])
           }
+          subject_context={subject_context}
           key={key}
         />
       );
@@ -44,7 +54,7 @@ const Presentational = props => {
 
 
 const global_graphql_vars = {
-  lang: "en",
+  lang: window.lang,
 };
 
 const dummy_query = gql`
@@ -58,6 +68,10 @@ const dummy_query = gql`
 function panel_def_to_connecter(panel_def, subject_context){
 
   const { key, query: query_func, vars: vars_func } = panel_def;
+
+  if(!panel_def.query){
+    return null;
+  }
   
   let query = _.isFunction(query_func) ? query_func(subject_context) : query_func;
   if(!query){
@@ -88,7 +102,10 @@ export class PanelManager extends React.PureComponent {
       subject_context,
     } = this.props;
 
-    const panel_connecters = _.map(panel_defs, def => panel_def_to_connecter(def, subject_context));
+    const panel_connecters = _.chain(panel_defs)
+      .map(def => panel_def_to_connecter(def, subject_context))
+      .compact() //yank out the nulls created by static panels
+      .value();
 
     const Component = compose(...panel_connecters)(Presentational);
 
