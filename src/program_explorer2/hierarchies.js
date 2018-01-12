@@ -256,7 +256,7 @@ exports.create_org_info_hierarchy = function(value_attr,root_id,only_orgs_with_d
       post_traversal_search_string_set(node);
     })
     .sort( (a,b) => {
-      if (!a.data.is("ministry")) {
+      if (a.data.is("dept")) {
         return a.data.name.toLowerCase().localeCompare( b.data.name.toLowerCase() );
       } else {
         return absolute_value_sort(a,b);

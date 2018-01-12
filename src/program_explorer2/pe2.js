@@ -259,7 +259,7 @@ class GovPartition {
     this.hierarchy
       .each(node => {
         node.__value__ = node.value;
-        node.open = true
+        node.open = true;
         if (node.data.is("gov")){
           node.how_many_to_show = 8;
         } else if (node.data.is("ministry")){
@@ -331,7 +331,7 @@ class GovPartition {
     this.hierarchy
       .each(node => {
         node.__value__ = node.value;
-        node.open = true
+        node.open = true;
         if (node.data.is("tag") && node.children[0].data.is("tag")){
           node.how_many_to_show = Infinity;
         }else if (node.data.is("tag") && node.children[0].data.is("program")){
@@ -393,7 +393,7 @@ class GovPartition {
     this.hierarchy
       .each(node => {
         node.__value__ = node.value;
-        node.open = true
+        node.open = true;
         if (node.data.is("tag") && node.children && node.children[0] && node.children[0].data.is("tag")){
           node.how_many_to_show = Infinity;
         } else if (node.data.is("tag") && node.children[0].data.is("program")){
@@ -458,7 +458,7 @@ class GovPartition {
     this.hierarchy
       .each(node => {
         node.__value__ = node.value;
-        node.open = true
+        node.open = true;
         if (node.data.is("gov") ||  node.data.is("type_of_spending") ){
           node.how_many_to_show = Infinity;
         } else if (node.data.is("so") ){
@@ -527,13 +527,20 @@ class GovPartition {
     this.hierarchy
       .each(node => {
         node.__value__ = node.value;
-        node.open = true
+        node.open = true;
         node.how_many_to_show = Infinity;
       });
    
-    this.value_formater = d => !d.data.is("dept") ?
-      wrap_in_brackets(formaters[this.value_attr](d[this.value_attr]) + " " + text_maker("orgs")):
-      "";
+    this.value_formater = d => {
+      return !d.data.is("dept") ?
+        wrap_in_brackets(
+          formaters[this.value_attr](d[this.value_attr]) + " " + (d[this.value_attr] > 1 ? 
+            text_maker("orgs") : 
+            text_maker("org")
+          )
+        ) :
+        "";
+    };
 
     this.popup_template = function(d){
       const common_popup_options = get_common_popup_options(d);
@@ -565,7 +572,13 @@ class GovPartition {
 
     this.enable_search_bar();
 
-    this.render();
+    // If search active then reapply to new hierarchy, else normal render
+    const query = this.container.select("input.search").node().value.toLowerCase();
+    if(query.length >= search_required_chars){
+      this.search_actual(query);
+    } else {
+      this.render();
+    }
   }
   render(){
     const default_formater = d => formaters[this.value_attr](d[this.value_attr]);
