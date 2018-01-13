@@ -398,11 +398,16 @@ export class Partition {
       .flatten(true)
       .filter(link => lowest_node_id_ancestry.includes(link.target.id_ancestry))
       .value();
-    this.graph_area.selectAll("polygon.partition-svg-link")
-      .data(links,polygon_key)
-      .filter(d=> links.length > 0 ? _.includes(links,d) : true)
-      .classed("faded", false)
-      .classed("highlighted",true);
+    
+    const unfade_parent_polygons = (polygon_selector) => {
+      this.graph_area.selectAll(polygon_selector)
+        .data(links,polygon_key)
+        .filter(d=> links.length > 0 ? _.includes(links,d) : true)
+        .classed("faded", false)
+        .classed("highlighted",true);
+    }
+    unfade_parent_polygons("polygon.partition-svg-link.root-polygon");
+    unfade_parent_polygons("polygon.partition-svg-link");
 
     this.html.selectAll("div.partition-content")
       .data(data,content_key)
