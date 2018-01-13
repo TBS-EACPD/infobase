@@ -50,18 +50,12 @@ panel_t:
      </header>
      <div class='panel-body'>
        <div>
-         <div class='row equal-height-cols content'>
-           <div 
-              class='col-xs-12 col-sm-{{colsm}} {{text_class}} text'
-              style='
-               display:flex;
-               flex-direction: column;
-               justify-content: space-around;
-               -webkit-justify-content: space-around;'>
-             <div class='inner'>
+         <div class='frow middle-xs'>
+           <div class='fcol-xs-12 fcol-sm-{{colsm}}  {{text_class}} text'>
+             <div class='inner frow'>
              </div>
            </div>
-           <div class='col-xs-12 col-sm-{{colsm}} graphic'>
+           <div class='fcol-xs-12 fcol-sm-{{colsm}} graphic' style="position:relative;">
              <div class='fixed-inner'>
                <div class="inner" style='position:relative'>
                </div>
@@ -70,11 +64,11 @@ panel_t:
            <div class='clearfix'></div>
          </div>
         </div>
-       <div class='row'>
-         <div class='col-sm-12  mrgn-tp-md source'> </div>
+       <div class='frow'>
+         <div class='fcol-sm-12  mrgn-tp-md source'> </div>
        </div>
-       <div class='row'>
-        <div class='col-sm-12 footnotes mrgn-tp-md mrgn-bttm-0'></div>
+       <div class='frow'>
+        <div class='fcol-sm-12 footnotes mrgn-tp-md mrgn-bttm-0'></div>
       </div>
    </section>
 

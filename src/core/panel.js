@@ -103,25 +103,34 @@ class Panel {
       text_sum = d4.sum(text_layout);
 
       _.each(text_layout, function(span,i){
-        text.append("div").classed("col-md-"+span+ " x"+(i+1) ,true);
+        text.append("div")
+          .classed(`fcol-md-${span} x${i+1}`,true);
       });
     } else {
       text_sum = text_layout
-      this.el.select(".text").classed("col-md-"+text_layout,true);
+      this.el.select(".text").classed("fcol-md-"+text_layout,true);
     }
     if (_.isArray(graph_layout)){
       graph_sum = d4.sum(graph_layout);
       if (text_sum + graph_sum <= 12){
         graph_layout = _.map(graph_layout, function(x){return 12/graph_layout.length;});
-        this.el.select(".graphic").classed("col-md-"+graph_sum,true);
+        this.el.select(".graphic")
+          .classed(`fcol-md-${graph_sum}`,true);
       }
+
+      const graph_row = graph
+        .append('div')
+        .classed("frow",true);
+
       _.each(graph_layout, function(span,i){
-        graph.append("div").classed("col-md-"+span+ " x"+(i+1),true).style("padding","0px");
-        graph.append("div").classed("md-clearfix",true);
+        graph_row.append("div")
+          .classed(`fcol-md-${span} x${i+1}`,true)
+          .style("padding","0px")
+          .style('position','relative');
 
       });
     } else {
-      this.el.select(".graphic").classed("col-md-"+graph_layout,true);
+      this.el.select(".graphic").classed("fcol-md-"+graph_layout,true);
     }
 
   } 
@@ -139,7 +148,7 @@ class Panel {
   }
   areas(){
     return {
-      text :  this.el.select(".text .inner"),
+      text :  this.el.select(".text"),
       title_right :  this.el.select(".title-right"),
       title :  this.el.select(".panel-title"),
       source : this.el.select(".source"),
