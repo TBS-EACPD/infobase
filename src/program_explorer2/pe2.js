@@ -528,7 +528,22 @@ class GovPartition {
       .each(node => {
         node.__value__ = node.value;
         node.open = true;
-        node.how_many_to_show = Infinity;
+        if (node.data.is("inst_form") ){
+          node.how_many_to_show = function(_node){
+            if (_node.children.length <= 1){ return [_node.children,[]];}
+            const number_to_show = 1;
+            const show = _.take(_node.children, number_to_show);
+            const hide = _.slice(_node.children, number_to_show);
+            return [show, hide];
+          };
+        } else {
+          node.how_many_to_show = function(_node){
+            return [_node.children,[]];
+          };
+        }
+      })
+      .each(node => {
+        node.children = show_partial_children(node);
       });
    
     this.value_formater = d => {
