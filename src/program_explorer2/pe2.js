@@ -158,9 +158,9 @@ class GovPartition {
         id: "org_info", 
         text: text_maker("orgs"), 
         presentation_schemes: [
-          "org_info_with_data", 
-          "org_info_all", 
+          "org_info_with_data",
           "org_info_skip_ministry_level_with_data", 
+          "org_info_all", 
           "org_info_skip_ministry_level_all",
         ],
       },  
@@ -172,8 +172,8 @@ class GovPartition {
       { id: "hwh", text: Subject.Tag.tag_roots.HWH.name },
       { id: "st", text: text_maker("type_of_spending") },
       { id: "org_info_with_data", text: text_maker("partiton_org_info_by_min_with_data") },
-      { id: "org_info_all", text: text_maker("partiton_org_info_by_min_all") },
       { id: "org_info_skip_ministry_level_with_data", text: text_maker("partiton_org_info_by_inst_form_with_data") },
+      { id: "org_info_all", text: text_maker("partiton_org_info_by_min_all") },
       { id: "org_info_skip_ministry_level_all", text: text_maker("partiton_org_info_by_inst_form_all") },
     ];
 
@@ -588,6 +588,7 @@ class GovPartition {
             description: d.data.mandate,
             inst_form_name: d.parent.data.name,
             ministry_name: d.parent.parent.data.name, 
+            not_skipping_ministry_level: !skip_ministry_level,
           })
         );
       } else if (d.data.is("inst_form")) {
@@ -596,8 +597,8 @@ class GovPartition {
             description: d.data.description,
             ministry_name: d.parent.data.name,
             plural_child_orgs: d.value !== 1,
-            is_not_first_column: !skip_ministry_level,
-            is_first_column: skip_ministry_level,
+            not_skipping_ministry_level: !skip_ministry_level,
+            skipping_ministry_level: skip_ministry_level,
             focus_text: d.magnified ? text_maker("partition_unfocus_button") : text_maker("partition_focus_button"),
           })
         );
