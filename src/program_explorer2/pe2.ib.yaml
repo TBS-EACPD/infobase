@@ -185,9 +185,14 @@ partition_org_info_inst_form_popup:
   transform: [handlebars]
   text: |
     {{> "partition_popup_name"}}
-    {{> "partition_popup_ministry_name"}}
+    {{#if is_not_first_column}}
+      {{> "partition_popup_ministry_name"}}
+    {{/if}}
     {{> "partition_popup_org_info_child_org_count"}}
     {{> "partition_popup_description"}}
+    {{#if is_first_column}}
+      {{> "partition_popup_focus_button"}}
+    {{/if}}
 partition_org_info_ministry_popup:
   transform: [handlebars]
   text: |

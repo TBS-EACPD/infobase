@@ -596,6 +596,9 @@ class GovPartition {
             description: d.data.description,
             ministry_name: d.parent.data.name,
             plural_child_orgs: d.value !== 1,
+            is_not_first_column: !skip_ministry_level,
+            is_first_column: skip_ministry_level,
+            focus_text: d.magnified ? text_maker("partition_unfocus_button") : text_maker("partition_focus_button"),
           })
         );
       } else if (d.data.is("ministry")) {
