@@ -154,7 +154,16 @@ class GovPartition {
     const sort_vals = this.sort_vals = _.sortBy([ 
       { id: "exp", text: text_maker("spending"), presentation_schemes: ["goca", "dept", "hwh", "st"] },
       { id: "fte", text: text_maker("fte_written"), presentation_schemes: ["goca", "dept", "hwh"] },
-      { id: "org_info", text: text_maker("orgs"), presentation_schemes: ["org_info_with_data", "org_info_all"] },  
+      { 
+        id: "org_info", 
+        text: text_maker("orgs"), 
+        presentation_schemes: [
+          "org_info_with_data", 
+          "org_info_all", 
+          "org_info_skip_ministry_level_with_data", 
+          "org_info_skip_ministry_level_all",
+        ],
+      },  
     ], d => d.id === value_attr ? -Infinity : Infinity);
 
     this.all_presentation_schemes = [
@@ -162,8 +171,10 @@ class GovPartition {
       { id: "dept", text: text_maker("ministries") },
       { id: "hwh", text: Subject.Tag.tag_roots.HWH.name },
       { id: "st", text: text_maker("type_of_spending") },
-      { id: "org_info_with_data", text: text_maker("all_orgs_with_data") },
-      { id: "org_info_all", text: text_maker("by_all") },
+      { id: "org_info_with_data", text: text_maker("partiton_org_info_by_min_with_data") },
+      { id: "org_info_all", text: text_maker("partiton_org_info_by_min_all") },
+      { id: "org_info_skip_ministry_level_with_data", text: text_maker("partiton_org_info_by_inst_form_with_data") },
+      { id: "org_info_skip_ministry_level_all", text: text_maker("partiton_org_info_by_inst_form_all") },
     ];
 
     const presentation_schemes = _.chain(this.all_presentation_schemes)
@@ -513,15 +524,27 @@ class GovPartition {
   }
   org_info_all(){
     const only_orgs_with_data = false;
-    this.org_info(only_orgs_with_data);
+    const skip_ministry_level = false;
+    this.org_info(skip_ministry_level, only_orgs_with_data);
   }
   org_info_with_data(){
     const only_orgs_with_data = true;
-    this.org_info(only_orgs_with_data);
+    const skip_ministry_level = false;
+    this.org_info(skip_ministry_level, only_orgs_with_data);
   }
-  org_info(only_orgs_with_data){
+  org_info_skip_ministry_level_all(){
+    const only_orgs_with_data = false;
+    const skip_ministry_level = true;
+    this.org_info(skip_ministry_level, only_orgs_with_data);
+  }
+  org_info_skip_ministry_level_with_data(){
+    const only_orgs_with_data = true;
+    const skip_ministry_level = true;
+    this.org_info(skip_ministry_level, only_orgs_with_data);
+  }
+  org_info(skip_ministry_level, only_orgs_with_data){
     this.value_attr = "org_info";
-    this.hierarchy_factory = ()=>create_org_info_hierarchy( this.value_attr, this.root_id+=1, only_orgs_with_data);
+    this.hierarchy_factory = ()=>create_org_info_hierarchy( this.value_attr, this.root_id+=1, skip_ministry_level, only_orgs_with_data);
     this.hierarchy = this.hierarchy_factory(value_functions[this.value_attr]);
     
     this.hierarchy

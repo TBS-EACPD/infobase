@@ -194,7 +194,7 @@ exports.create_spend_type_hierarchy = function(value_attr,root_id) {
     .sort( absolute_value_sort );
 };
 
-exports.create_org_info_hierarchy = function(value_attr,root_id,only_orgs_with_data) {
+exports.create_org_info_hierarchy = function(value_attr,root_id,skip_ministry_level,only_orgs_with_data) {
   const glossary_entry_from_inst_form_type_id = (type_id) => {
     const type_id_to_glossary_suffix_map = {
       "agents_parl": "APARL",
@@ -216,12 +216,20 @@ exports.create_org_info_hierarchy = function(value_attr,root_id,only_orgs_with_d
 
     return GlossaryEntry.lookup(glossary_key).definition;
   }
+  
+  const hierarchy_root = Subject.gov;
+  if (skip_ministry_level) {
+    hierarchy_root.orgs = _.chain( Subject.Ministry.get_all() )
+      .map(ministry => ministry.orgs)
+      .flatten()
+      .value();
+  }
 
   return d4.hierarchy(Subject.gov,
     node => {
-      if (node.is("gov")){
+      if (node.is("gov") && !skip_ministry_level){
         return Subject.Ministry.get_all();
-      } else if (node.is("ministry")){
+      } else if (node.is("ministry") || ( node.is("gov") && skip_ministry_level )){
         return _.chain(node.orgs)
           .reject("is_dead")
           .filter(org => !only_orgs_with_data || (org.tables && org.tables.length > 1))

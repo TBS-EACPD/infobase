@@ -478,6 +478,22 @@ partition_infograph_link:
 partition_revenue_explained:
   en: Negative figures indicate that revenues exceed expenditures
   fr: Les chiffres négatifs indiquent que les recettes dépassent les dépense
+partiton_org_info_by_min_with_data:
+  transform: [handlebars]
+  text: |
+    {{gt "all_orgs_with_data"}} - {{gt "by"}} {{gt "by_portfolio"}}
+partiton_org_info_by_min_all:
+  transform: [handlebars]
+  text: |
+    {{gt "by_all"}} - {{gt "by"}} {{gt "by_portfolio"}}
+partiton_org_info_by_inst_form_with_data:
+  transform: [handlebars]
+  text: |
+    {{gt "all_orgs_with_data"}} - {{gt "by"}} {{gt "type"}}
+partiton_org_info_by_inst_form_all:
+  transform: [handlebars]
+  text: |
+    {{gt "by_all"}} - {{gt "by"}} {{gt "type"}}
 up_to:
   en: up to
   fr: jusqu'à
