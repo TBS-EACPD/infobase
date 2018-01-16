@@ -130,16 +130,15 @@ exports.create_ppl_share_pie = function({
 exports.create_height_clipped_graph_with_legend = function(panel,create_graph_with_legend_options) {
   const panel_body = d4.select(find_parent(panel.areas().graph.node(), n => d4.select(n).classed("panel-body")));
   const new_row = panel_body
-    .insert("div",".panel-body > div.row")
-    .classed("row",true)
+    .insert("div",".panel-body > div.frow:not(.middle-xs)")
+    .classed("frow middle-xs",true)
     .style("margin-top", "-20px");
 
   reactAdapter.render(
-    <div className="mrgn-bttm-sm">
+    <div className="fcol-xs-12 fcol-sm- graphic fcol-md-12 mrgn-bttm-sm">
       <HeightClipper clipHeight={185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient gradient-strong"}>
         <div className="height-clipped-graph-area" aria-hidden={true}>
           <D3GraphWithLegend panel={panel} options={create_graph_with_legend_options}/>
-          <div className='clearfix'></div>
         </div>
       </HeightClipper>
     </div>, 

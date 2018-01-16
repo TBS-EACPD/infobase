@@ -113,7 +113,7 @@ class D3GraphWithLegend extends React.Component {
     return (
       <div 
         ref="graph_area"
-        className="height-clipped-graph-area frow" 
+        className="frow" 
       >
         <div 
           className={"x1 fcol-xs-12 fcol-md-"+this.state.legend_col_full_size}
