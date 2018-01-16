@@ -357,9 +357,9 @@ class SimpleView extends React.Component {
     ));
 
     return (
-      <div>
-        <div className="mrgn-tp-md">
-          <div className="col-md-6">
+      <div className="fcontainer">
+        <div className="mrgn-tp-md frow">
+          <div className="fcol-md-6 fcol-xs-12">
             <div className="graph_total_and_col_expl well" >
               <dl> 
                 <dt style={{borderBottom: '1px solid #ccc'}}> 
@@ -382,7 +382,7 @@ class SimpleView extends React.Component {
               </dl>
             </div>
           </div>
-          <div className="col-md-6">
+          <div className="fcol-md-6 fcol-xs-12">
             { shouldShowLegend && 
             <div id="rpb_graph_legend">
               <div className="well legend-container">
@@ -410,7 +410,6 @@ class SimpleView extends React.Component {
             </div>
             }
           </div>
-          <div className="clearfix" />
         </div>
 
         <div style={{position:'relative'}}>

@@ -102,42 +102,6 @@ tr.odd {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=);
 }
 
-.col-0-padding {
-  padding: 0 !important;
-}
-
-/* pattern: .equal-height-cols > col-md-* > div w/ height:100% will have equal height columns */
-/* hacky reminder: Make sure that if you use this on col, that col-xs-12 is provided, otherwise you'll get some weird x-overflow. */
-.row.equal-height-cols {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-}
-.row.equal-height-cols > [class*='col-'] {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-.row.always-equal-height-cols > [class*='col-'] > div  {
-  height: 100%;
-}
-
-.panel.panel-contained {
-  height: 100%;
-}
-
 
 /* utility class. Apply class to a container if you want its content (no matter what kind) centered */
 

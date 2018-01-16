@@ -21,7 +21,7 @@ exports.concept_explorer = class concept_explorer {
     this.tags_area = _graph_area.append("g").attr("class","tags");
     this.labels_area = this.html
       .append("div")
-      .classed("col-sm-12", "true")
+      .classed("fcol-sm-12", "true")
       .classed("labels", "true");
     
     this.html.select(".__svg__").attr("preserve_labels_on_update", true);

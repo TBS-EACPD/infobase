@@ -1,4 +1,3 @@
-const MediaQuery = require('react-responsive');
 const {
   PanelGraph,
   reactAdapter,
@@ -125,43 +124,20 @@ const StatusTable = ({
 
 const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts }) => {
 
-  const graph_column_content = <div>
-    <StatusTable
-      {...counts}
-    />
-  </div>;
-
-  const text_content = <div>
-    <TM 
-      k="drr_summary_text"
-      args={Object.assign({ subject, num_depts, is_gov }, verbose_counts)} />
-  </div>;
-
-
   return (
-    <div>
-      <MediaQuery minWidth={992}>
-        { matches => matches ?
-          <div style={{display: 'flex', justifyContent:'space-between', marginBottom: "30px"}}>
-            <div className="medium_panel_text" style={{flex: "0 1 45%", display:'flex',alignItems:'center',justifyContent:'flexStart'}}>
-              {text_content}
-            </div>
-            <div style={{flex: "0 1 50%"}}>
-              {graph_column_content}
-            </div>
-          </div> :
-          <div>
-            <div className="medium_panel_text">
-              {text_content}
-            </div>
-            <div>
-              {graph_column_content}
-            </div>
-          </div>
-        }
-      </MediaQuery>
+    <div className="frow middle-xs between-md" style={{marginBottom: "30px"}}>
+      <div className="fcol-md-5 col-xs-12 medium_panel_text" >
+        <TM 
+          k="drr_summary_text"
+          args={Object.assign({ subject, num_depts, is_gov }, verbose_counts)} 
+        />
+      </div>
+      <div className="fcol-md-6 col-xs-12">
+        <StatusTable {...counts} />
+      </div>
     </div>
   );
+
 
 }
 
