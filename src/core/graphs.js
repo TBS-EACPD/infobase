@@ -8,6 +8,7 @@ const FootNote = require('../models/footnotes.js');
 const {  tables_for_statistics } = require('./Statistics.js');
 const {rpb_link } = require('../rpb/rpb_link.js');
 const { Details } = require('../components/Details.js');
+const { FootnoteList } = require('../util_components.js');
 const { reactAdapter } = require('./reactAdapter.js')
 
 const graphs = {}
@@ -206,7 +207,7 @@ class PanelGraph {
           summary_content={text_maker("footnotes")}
           content={
             <FootnoteList
-              footnotes={footnotes}
+              footnotes={_.map(footnotes, 'text')}
             />
           }
         />,
@@ -259,16 +260,8 @@ function tables_for_graph( graph_key, subject_level  ){
     .uniqBy()
     .value();
 }
+  
 
-const FootnoteList = ({ footnotes }) => <div style={{padding:"10px"}}>
-  <ul>
-    {footnotes.map( ({id,text}) => 
-      <li key={id}>
-        <div dangerouslySetInnerHTML={{__html: text}} />
-      </li>
-    )}
-  </ul>
-</div>;
 
 exports = module.exports = {
   layout_types : {
