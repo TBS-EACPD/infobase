@@ -13,6 +13,7 @@ export const Panel = ({ title, sources, footnotes, children }) => (
     </header>
     <div className='panel-body'>
       { children }
+      <div className="mrgn-tp-md" />
       {_.nonEmpty(sources) && 
         <div>
           <TM
@@ -22,14 +23,16 @@ export const Panel = ({ title, sources, footnotes, children }) => (
         </div>
       }
       {_.nonEmpty(footnotes) && 
-        <Details
-          summary_content={ <TM k="footnotes" /> }
-          content={
-            <FootnoteList
-              footnotes={footnotes}
-            />
-          }
-        />
+        <div className="mrgn-tp-md">
+          <Details
+            summary_content={ <TM k="footnotes" /> }
+            content={
+              <FootnoteList
+                footnotes={footnotes}
+              />
+            }
+          />
+        </div>
       }
     </div>
   </section>
