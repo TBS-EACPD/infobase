@@ -109,153 +109,154 @@ class ReactPanelGraph extends React.Component {
 }
 
 
-const no_matching_panel = function( container, options={} ){
 
-  d4.select(container)
-    .html("")
-    .append("div")
-    .classed("well",true)
-    .styles({
-      "display" : "flex",
-      "justify-content" : "center",
-      "height" : "100%",
-      "margin-bottom": "15px",
-    })
-    .append("span")
-    .styles({
-      "font-size" : "24px",
-      "align-self" : "center",
-    })
-    .html(text_maker("no_matching_data"));
+//Compare-Infographics is disabled at the moment. Not sure if below code would even work
+// const no_matching_panel = function( container, options={} ){
+
+//   d4.select(container)
+//     .html("")
+//     .append("div")
+//     .classed("well",true)
+//     .styles({
+//       "display" : "flex",
+//       "justify-content" : "center",
+//       "height" : "100%",
+//       "margin-bottom": "15px",
+//     })
+//     .append("span")
+//     .styles({
+//       "font-size" : "24px",
+//       "align-self" : "center",
+//     })
+//     .html(text_maker("no_matching_data"));
 
 
-};
+// };
 
 //this is function and not a class because it is stateless. 
 //If you want to change panel selection or subject, run the function again.
-const defaultDelay = 300;
-const statelessDoublePanelView = ({
-  container, 
-  right_subject, 
-  left_subject, 
-  panel_keys, 
-  onComplete, //callback is called when everything is done rendering
-  delay,
-  noPanelMessage="",
-}) => {
-  delay = delay || defaultDelay;
-  container.innerHTML = "";
-  if(!right_subject && !left_subject){ 
-    return; 
-  }
-  /*
-    build a data-structure of the form...
-    [ 
-      {
-        graph_key,
-        right: graphObj, 
-        left: graphObj, 
-      }
-    ]
-    the array indicates the order in which things should be displayed.
-    then, we run through the array appending elements to the container.
+// const defaultDelay = 300;
+// const statelessDoublePanelView = ({
+//   container, 
+//   right_subject, 
+//   left_subject, 
+//   panel_keys, 
+//   onComplete, //callback is called when everything is done rendering
+//   delay,
+//   noPanelMessage="",
+// }) => {
+//   delay = delay || defaultDelay;
+//   container.innerHTML = "";
+//   if(!right_subject && !left_subject){ 
+//     return; 
+//   }
+//   /*
+//     build a data-structure of the form...
+//     [ 
+//       {
+//         graph_key,
+//         right: graphObj, 
+//         left: graphObj, 
+//       }
+//     ]
+//     the array indicates the order in which things should be displayed.
+//     then, we run through the array appending elements to the container.
 
-  */
+//   */
 
-  const panel_options = {
-    layout: 'half',
-  };
+//   const panel_options = {
+//     layout: 'half',
+//   };
 
-  _.reduce(
-    panel_keys, 
-    (promise_chain,graph_key) => promise_chain.then(()=>{
+//   _.reduce(
+//     panel_keys, 
+//     (promise_chain,graph_key) => promise_chain.then(()=>{
 
-      const right_graph = right_subject && PanelGraph.lookup( graph_key, right_subject.level);
-      const right_calc = right_graph && right_graph.calculate(right_subject, _.clone(panel_options));
+//       const right_graph = right_subject && PanelGraph.lookup( graph_key, right_subject.level);
+//       const right_calc = right_graph && right_graph.calculate(right_subject, _.clone(panel_options));
 
-      const left_graph = left_subject &&  PanelGraph.lookup( graph_key, left_subject.level);
-      const left_calc =  left_graph && left_graph.calculate(left_subject, _.clone(panel_options));
+//       const left_graph = left_subject &&  PanelGraph.lookup( graph_key, left_subject.level);
+//       const left_calc =  left_graph && left_graph.calculate(left_subject, _.clone(panel_options));
 
-      if(!right_calc && !left_calc){ 
-        return; 
-      }
-      const single_render_prom = $.Deferred();
+//       if(!right_calc && !left_calc){ 
+//         return; 
+//       }
+//       const single_render_prom = $.Deferred();
       
-      setTimeout(()=>{
+//       setTimeout(()=>{
 
-        const el =  document.createElement('div');
-        const left_el =  document.createElement('div');
-        const right_el =  document.createElement('div');
-        const clr_fix = document.createElement('div')
-        el.classList.add('row');
-        el.classList.add('equal-height-cols');
-        el.classList.add('compare-row');
+//         const el =  document.createElement('div');
+//         const left_el =  document.createElement('div');
+//         const right_el =  document.createElement('div');
+//         const clr_fix = document.createElement('div')
+//         el.classList.add('row');
+//         el.classList.add('equal-height-cols');
+//         el.classList.add('compare-row');
 
-        left_el.classList.add('left');
-        left_el.classList.add('col-lg-6');
-        left_el.classList.add('compare-container');
+//         left_el.classList.add('left');
+//         left_el.classList.add('col-lg-6');
+//         left_el.classList.add('compare-container');
 
-        right_el.classList.add('col-lg-6');
-        right_el.classList.add('right');
-        right_el.classList.add('compare-container');
+//         right_el.classList.add('col-lg-6');
+//         right_el.classList.add('right');
+//         right_el.classList.add('compare-container');
 
-        clr_fix.classList.add('clearfix')
-        el.appendChild(left_el); 
-        el.appendChild(right_el); 
-        el.appendChild(clr_fix);
-        container.appendChild(el);
+//         clr_fix.classList.add('clearfix')
+//         el.appendChild(left_el); 
+//         el.appendChild(right_el); 
+//         el.appendChild(clr_fix);
+//         container.appendChild(el);
 
-        if(left_calc){
-          left_graph.render(d4.select(left_el),left_calc, _.clone(panel_options) )
-        } else {
-          no_matching_panel(left_el)
-        }
+//         if(left_calc){
+//           left_graph.render(d4.select(left_el),left_calc, _.clone(panel_options) )
+//         } else {
+//           no_matching_panel(left_el)
+//         }
 
-        if(right_calc){
-          right_graph.render(d4.select(right_el), right_calc, _.clone(panel_options))
-        } else {
-          no_matching_panel(right_el)
-        }
+//         if(right_calc){
+//           right_graph.render(d4.select(right_el), right_calc, _.clone(panel_options))
+//         } else {
+//           no_matching_panel(right_el)
+//         }
 
-        single_render_prom.resolve();
-      }, delay );    
+//         single_render_prom.resolve();
+//       }, delay );    
 
-      return single_render_prom;
-    }),
-    $.Deferred().resolve()
-  ).then(()=>{
-    if(_.isEmpty(container.querySelectorAll('.panel'))){
-      container.innerHTML = noPanelMessage;
-    }
+//       return single_render_prom;
+//     }),
+//     $.Deferred().resolve()
+//   ).then(()=>{
+//     if(_.isEmpty(container.querySelectorAll('.panel'))){
+//       container.innerHTML = noPanelMessage;
+//     }
 
-    d4.select(container)
-      .selectAll('.compare-row')
-      .each(function(sel){
-        const left_heading = this.querySelector('.left .panel-heading')
-        const right_heading = this.querySelector('.right .panel-heading')
+//     d4.select(container)
+//       .selectAll('.compare-row')
+//       .each(function(sel){
+//         const left_heading = this.querySelector('.left .panel-heading')
+//         const right_heading = this.querySelector('.right .panel-heading')
 
-        //did both panels render? then make their header height match.
-        if(left_heading && right_heading){ 
-          const new_heading_height = _.max([left_heading.offsetHeight, right_heading.offsetHeight])
-          left_heading.style.height = new_heading_height+'px';
-          right_heading.style.height = new_heading_height+'px';
-        }
+//         //did both panels render? then make their header height match.
+//         if(left_heading && right_heading){ 
+//           const new_heading_height = _.max([left_heading.offsetHeight, right_heading.offsetHeight])
+//           left_heading.style.height = new_heading_height+'px';
+//           right_heading.style.height = new_heading_height+'px';
+//         }
 
-      })
+//       })
 
-    d4.select(container)
-      .selectAll('.right .panel-info')
-      .classed('panel-info', false)
-      .classed('panel-success', true);
+//     d4.select(container)
+//       .selectAll('.right .panel-info')
+//       .classed('panel-info', false)
+//       .classed('panel-success', true);
     
-    onComplete()
+//     onComplete()
 
-  });
+//   });
 
-}
+// }
 
 module.exports = exports = {
   renderPanelCollection,
-  statelessDoublePanelView,
   ReactPanelGraph,
 };
