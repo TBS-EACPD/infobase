@@ -153,7 +153,8 @@ class Panel {
       title :  this.el.select(".panel-title"),
       source : this.el.select(".source"),
       footnotes : this.el.select('.footnotes'),
-      graph : this.el.select(".graphic .inner"),
+      //graph : this.el.select(".graphic .inner"),
+      graph : this.el.select(".graphic"),
     };
   }
 }

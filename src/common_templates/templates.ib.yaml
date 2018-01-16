@@ -40,37 +40,31 @@ details_partial_t:
 panel_t:
   transform: [handlebars]
   text: |
-   <section 
-     class='panel panel-info mrgn-bttm-md' 
-     style="padding:0px;"
+    <section 
+      class='panel panel-info mrgn-bttm-md' 
     >
-     <header class='panel-heading'>
-       <div class='panel-title'>
-       </div>
-     </header>
-     <div class='panel-body'>
-       <div>
-         <div class='frow middle-xs'>
-           <div class='fcol-xs-12 fcol-sm-{{colsm}}  {{text_class}} text'>
-             <div class='inner frow'>
-             </div>
-           </div>
-           <div class='fcol-xs-12 fcol-sm-{{colsm}} graphic' style="position:relative;">
-             <div class='fixed-inner'>
-               <div class="inner" style='position:relative'>
-               </div>
-             </div>
-           </div>
-           <div class='clearfix'></div>
-         </div>
+      <header class='panel-heading'>
+        <div class='panel-title'></div>
+      </header>
+
+      <div class='panel-body'>
+        <div class='frow middle-xs'>
+          <div class='fcol-xs-12 fcol-sm-{{colsm}}  {{text_class}} text'>
+          </div>
+          <div class='fcol-xs-12 fcol-sm-{{colsm}} graphic' style='position:relative'>
+          </div>
         </div>
-       <div class='frow'>
-         <div class='fcol-sm-12  mrgn-tp-md source'> </div>
-       </div>
-       <div class='frow'>
-        <div class='fcol-sm-12 footnotes mrgn-tp-md mrgn-bttm-0'></div>
+
+        <div class='frow'>
+          <div class='fcol-xs-12  mrgn-tp-md source'> </div>
+        </div>
+
+        <div class='frow'>
+          <div class='fcol-xs-12 footnotes mrgn-tp-md mrgn-bttm-0'></div>
+        </div>
       </div>
-   </section>
+        
+    </section>
 
 source_link_text:
   en: | 
