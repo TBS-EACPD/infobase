@@ -413,10 +413,10 @@ partition_controls:
   transform: [handlebars]
   text: |
     <form class="form-horizontal">
-       <div id="partition-control-info-button" class="partition-control-block" style="width:65px;">
+       <div id="partition-control-info-button" class="partition-control-element" style="width:65px;">
          <span class="glyphicon glyphicon-info-sign" tabindex="0"></span>     
        </div>
-       <div class="partition-control-block">
+       <div class="partition-control-element">
          <text>
            {{gt "partiton_select_data"}}
          </text>
@@ -426,7 +426,7 @@ partition_controls:
            {{/each}}
          </select>
        </div>
-       <div class="partition-control-block">
+       <div class="partition-control-element">
          <text>
            {{gt "partiton_select_context"}}
          </text>
@@ -438,8 +438,8 @@ partition_controls:
        </div>
        {{#if search}}
        <div
-         class="partition-control-block"
-         style="width:50%; max-width:800px;">
+         class="partition-control-element"
+         style="flex-grow:1;max-width:800px;">
          <text>
            {{gt "partiton_search_filter"}}
          </text>
@@ -448,7 +448,6 @@ partition_controls:
            type="text" 
            class="form-control search" 
            placeholder="{{gt "everything_search_placeholder"}}" 
-           style=" width:100%;
            id="">
          </input>
        </div>

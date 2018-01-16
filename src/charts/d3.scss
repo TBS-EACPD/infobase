@@ -154,38 +154,26 @@ a.boxclose {
 }
 
 .__partition__ > .visual > .controls > .form-horizontal {
+  display: flex;
+  flex-direction: row;
   position: relative;
   padding: 15px;
   padding-top: 9px;
-  width: inherit;
-  min-width: inherit;
 }
 
-.partition-control-block {
-  display: inline-block; 
-  text-align: left;
+.partition-control-element {
+  display: flex;
+  flex-direction: column;
   padding-right: 9px;
-  overflow: hidden;
 }
 
-.partition-control-block > text {
-  display: block;
-  width: inherit;
+.partition-control-element > text {
   color: #fff;
   font-size: 20px;
   font-weight: $lightFontWeight;
 }
 
-.partition-control-block > input {
-  display: inline;
-  width: 100%;
-}
-
-.partition-control-block > select {
-  display: inline;
-}
-
-.partition-control-block > .glyphicon {
+.partition-control-element > .glyphicon {
   font-size: 54px;
   position: absolute;
   color: rgb(69, 161, 227);
@@ -194,15 +182,13 @@ a.boxclose {
   cursor: pointer;
 }
 
-.partition-control-block > input.form-control.search::-ms-clear {
-  width : 0;
+.partition-control-element > input.form-control.search::-ms-clear {
+  width: 0;
   height: 0;
 }
 
 /* Over-ride bootstrap .form-control width style */
-.partition-control-block > select.form-control {
-  min-width: 100%;
-  max-width: none;
+.partition-control-element > select.form-control {
   font-weight: $mediumFontWeight;
 }
 

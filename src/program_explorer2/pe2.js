@@ -198,8 +198,8 @@ class GovPartition {
 
     this.container.select(".select_value_attr").on("change", this.change_value_attr.bind(this));
     this.container.select(".select_root").on("change", this.reroot.bind(this));
-    this.container.select(".partition-control-block > .glyphicon").on("click", this.add_intro_popup.bind(this));
-    this.container.select(".partition-control-block > .glyphicon").on("keydown", () => {
+    this.container.select(".partition-control-element > .glyphicon").on("click", this.add_intro_popup.bind(this));
+    this.container.select(".partition-control-element > .glyphicon").on("keydown", () => {
       if(d4.event.which == 13){
         this.add_intro_popup.call(this);
       }
@@ -658,7 +658,7 @@ class GovPartition {
   }
   enable_search_bar(){
     const partition_control_search_block = this.container
-      .selectAll(".partition-control-block")
+      .selectAll(".partition-control-element")
       .filter(function(){
         return this.querySelectorAll(".form-control.search").length;
       });
@@ -677,7 +677,7 @@ class GovPartition {
   }
   disable_search_bar(){
     const partition_control_search_block = this.container
-      .selectAll(".partition-control-block")
+      .selectAll(".partition-control-element")
       .filter(function(){
         return this.querySelectorAll(".form-control.search").length;
       });
