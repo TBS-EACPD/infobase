@@ -73,12 +73,14 @@ partition_popup_name:
 partition_popup_description:
   handlebars_partial: true
   text: |
-    <div class='popup-font-ml'>
-      {{gt "description"}}:
-    </div>
-    <div class='mrgn-bttm-md popup-row-bottom-border popup-decription-text'>
-      {{{description}}}
-    </div>
+    {{#if description}}
+      <div class='popup-font-ml'>
+        {{gt "description"}}:
+      </div>
+      <div class='mrgn-bttm-md popup-row-bottom-border popup-decription-text'>
+        {{{description}}}
+      </div>
+    {{/if}}
 partition_popup_infograph_link:
   handlebars_partial: true
   text: |
@@ -90,11 +92,13 @@ partition_popup_infograph_link:
 partition_popup_focus_button:
   handlebars_partial: true
   text: |
-    <a href='#' 
-      class='btn btn-xs btn-block mrgn-bttm-sm magnify'  
-      style='background-color:{{color}};'>
-      {{focus_text}}
-    </a> 
+    {{#if first_column}} 
+      <a href='#' 
+        class='btn btn-xs btn-block mrgn-bttm-sm magnify'  
+        style='background-color:{{color}};'>
+        {{focus_text}}
+      </a> 
+    {{/if}}
 partition_popup_org_info_child_org_count:
   handlebars_partial: true
   text: |
@@ -110,16 +114,19 @@ partition_popup_org_info_child_org_count:
 partition_popup_ministry_name:
   handlebars_partial: true
   text: |
-    <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
-      <strong>{{gt "ministry"}}:</strong> {{ministry_name}}
-    </div>
+    {{#if ministry_name}}
+      <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
+        <strong>{{gt "ministry"}}:</strong> {{ministry_name}}
+      </div>
+    {{/if}}
 partition_popup_inst_form_name:
   handlebars_partial: true
   text: |
-    <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
-      <strong>{{gt "type"}}:</strong> {{inst_form_name}}
-    </div>
-
+    {{#if inst_form_name}}
+      <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
+        <strong>{{gt "type"}}:</strong> {{inst_form_name}}
+      </div>
+    {{/if}}
 
 ## Templated popups
 partition_program_popup:
@@ -185,14 +192,10 @@ partition_org_info_inst_form_popup:
   transform: [handlebars]
   text: |
     {{> "partition_popup_name"}}
-    {{#if not_skipping_ministry_level}}
-      {{> "partition_popup_ministry_name"}}
-    {{/if}}
+    {{> "partition_popup_ministry_name"}}
     {{> "partition_popup_org_info_child_org_count"}}
     {{> "partition_popup_description"}}
-    {{#if skipping_ministry_level}}
-      {{> "partition_popup_focus_button"}}
-    {{/if}}
+    {{> "partition_popup_focus_button"}}
 partition_org_info_ministry_popup:
   transform: [handlebars]
   text: |

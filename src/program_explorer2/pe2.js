@@ -132,6 +132,7 @@ const get_common_popup_options = d => {
     level: d.data.level,
     id: d.data.id,
     color: d.color,
+    first_column: d.depth === 1,
   };
 }
 
@@ -594,10 +595,8 @@ class GovPartition {
         return text_maker("partition_org_info_inst_form_popup", 
           _.extend(common_popup_options, {
             description: d.data.description,
-            ministry_name: d.parent.data.name,
+            ministry_name: d.parent.data.is("ministry") ? d.parent.data.name : false,
             plural_child_orgs: d.value !== 1,
-            not_skipping_ministry_level: !skip_ministry_level,
-            skipping_ministry_level: skip_ministry_level,
             focus_text: d.magnified ? text_maker("partition_unfocus_button") : text_maker("partition_focus_button"),
           })
         );
