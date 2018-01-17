@@ -587,8 +587,7 @@ class GovPartition {
           _.extend(common_popup_options, {
             description: d.data.mandate,
             inst_form_name: d.parent.data.name,
-            ministry_name: d.parent.parent.data.name, 
-            not_skipping_ministry_level: !skip_ministry_level,
+            ministry_name: d.data.ministry.name, 
           })
         );
       } else if (d.data.is("inst_form")) {

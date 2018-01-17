@@ -178,9 +178,7 @@ partition_org_info_org_popup:
   text: |
     {{> "partition_popup_name"}}
     {{> "partition_popup_inst_form_name"}}
-    {{#if not_skipping_ministry_level}}
-      {{> "partition_popup_ministry_name"}}
-    {{/if}}
+    {{> "partition_popup_ministry_name"}}
     {{> "partition_popup_description"}}
     {{> "partition_popup_infograph_link"}}
 partition_org_info_inst_form_popup:
