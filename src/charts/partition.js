@@ -56,7 +56,7 @@ export class Partition {
     const height = this.options.height;
     const horizontal0_padding = 50;
     const horizontal_padding = 150;
-    const col0_width = 200;
+    const col0_width = 250;
     const col_width = 350;
     const total_width = this.total_width = (_.keys(levels).length-1) * (col_width+ horizontal_padding) +  col0_width + horizontal0_padding;
     const yscale = d4.scaleLinear()

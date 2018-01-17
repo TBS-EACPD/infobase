@@ -266,7 +266,8 @@ a.boxclose {
 }
 
 .partition-content.root > .partition-content-title{
-  margin-left: 10px;
+  width: inherit;
+  margin-left: 0px;
 }
 
 .partition-content.root .amount{
