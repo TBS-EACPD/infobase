@@ -7,6 +7,7 @@ const {sos} = require('../models/businessConstants.js');
 const { InstForm } = require('../models/subject.js');
 
 const absolute_value_sort = (a,b) => - ( Math.abs(a.value) - Math.abs(b.value) );
+const alphabetic_name_Sort = (a,b) => a.data.name.toLowerCase().localeCompare( b.data.name.toLowerCase() );
 
 const mock_model = exports.mock_model = function(id,name, description,type, extra_attrs={} ){
   return Object.assign({
@@ -194,78 +195,102 @@ exports.create_spend_type_hierarchy = function(value_attr,root_id) {
     .sort( absolute_value_sort );
 };
 
-exports.create_org_info_hierarchy = function(value_attr,root_id,skip_ministry_level,only_orgs_with_data) {
-  const glossary_entry_from_inst_form_type_id = (type_id) => {
-    const type_id_to_glossary_suffix_map = {
-      "agents_parl": "APARL",
-      "crown_corp": "CC",
-      "dept_agency": "STATOA",
-      "dept_corp": "DEPTCORP",
-      "inter_org": "IO",
-      "joint_enterprise": "JE",
-      "min_dept": "DEPT",
-      "parl_ent": "todo",
-      "serv_agency": "SA",
-      "shared_gov_corp": "SGC",
-      "spec_op_agency": "SOA",
-    }
-
-    const glossary_key = type_id === "parl_ent" ?
-      "PARL_ORG" :
-      "IFORM_"+type_id_to_glossary_suffix_map[type_id];
-
-    return GlossaryEntry.lookup(glossary_key).definition;
+const glossary_entry_from_inst_form_type_id = (type_id) => {
+  const type_id_to_glossary_suffix_map = {
+    "agents_parl": "APARL",
+    "crown_corp": "CC",
+    "dept_agency": "STATOA",
+    "dept_corp": "DEPTCORP",
+    "inter_org": "IO",
+    "joint_enterprise": "JE",
+    "min_dept": "DEPT",
+    "parl_ent": "todo",
+    "serv_agency": "SA",
+    "shared_gov_corp": "SGC",
+    "spec_op_agency": "SOA",
   }
-  
-  const hierarchy_root = Subject.gov;
-  if (skip_ministry_level) {
-    hierarchy_root.orgs = _.chain( Subject.Ministry.get_all() )
-      .map(ministry => ministry.orgs)
-      .flatten()
-      .value();
-  }
+  const glossary_key = type_id === "parl_ent" ?
+    "PARL_ORG" :
+    "IFORM_"+type_id_to_glossary_suffix_map[type_id];
+  return GlossaryEntry.lookup(glossary_key).definition;
+}
 
+const org_info_post_traversal_rule_set = (node,value_attr,root_id) => {
+  node.id_ancestry = get_id_ancestry(root_id,node);
+  if (node.data.is("dept")){
+    node[value_attr] = node.value = node.data.value = 1;
+  } else {
+    node.children = _.filter(node.children,d=>d.value!==false && d.value !== 0);
+    node[value_attr] = node.value = d4.sum(node.children, d=>d.value);
+  }
+}
+
+const orgs_to_inst_form_nodes = (orgs, only_orgs_with_data) => {
+  return _.chain(orgs)
+    .reject("is_dead")
+    .filter(org => !only_orgs_with_data || (org.tables && org.tables.length > 1))
+    .groupBy("inst_form.id")
+    .map( (orgs, parent_form_id) => {
+      return _.chain(orgs)
+        .groupBy("inst_form.id")
+        .map( (orgs, type_id) => ({
+          id: type_id,
+          description: glossary_entry_from_inst_form_type_id(type_id),
+          name: InstForm.lookup(type_id).name,
+          is: __type__ => __type__ === "inst_form",
+          plural:()=> text_maker("type"),
+          orgs: _.filter(orgs, org => !only_orgs_with_data || (org.tables && org.tables.length > 1)),
+        }) )
+        .value()
+    })
+    .flatten()
+    .value();
+}
+
+exports.create_org_info_ministry_hierarchy = function(value_attr,root_id,only_orgs_with_data) {
   return d4.hierarchy(Subject.gov,
     node => {
-      if (node.is("gov") && !skip_ministry_level){
+      if (node.is("gov")){
         return Subject.Ministry.get_all();
-      } else if (node.is("ministry") || ( node.is("gov") && skip_ministry_level )){
-        return _.chain(node.orgs)
-          .reject("is_dead")
-          .filter(org => !only_orgs_with_data || (org.tables && org.tables.length > 1))
-          .groupBy("inst_form.id")
-          .map( (orgs, parent_form_id) => {
-            return _.chain(orgs)
-              .groupBy("inst_form.id")
-              .map( (orgs, type_id) => ({
-                id: type_id,
-                description: glossary_entry_from_inst_form_type_id(type_id),
-                name: InstForm.lookup(type_id).name,
-                is: __type__ => __type__ === "inst_form",
-                plural:()=> text_maker("type"),
-                orgs: _.filter(orgs, org => !only_orgs_with_data || (org.tables && org.tables.length > 1)),
-              }) )
-              .value()
-          })
-          .flatten()
-          .value();
+      } else if (node.is("ministry")){
+        return orgs_to_inst_form_nodes(node.orgs,only_orgs_with_data);
       } else if (node.is("inst_form")) {
         return node.orgs;
       }
     })
     .eachAfter(node =>{
-      node.id_ancestry = get_id_ancestry(root_id,node);
-      if (node.data.is("dept")){
-        node[value_attr] = node.value = node.data.value = 1;
-      } else {
-        node.children = _.filter(node.children,d=>d.value!==false && d.value !== 0);
-        node[value_attr] = node.value = d4.sum(node.children, d=>d.value);
-      }
+      org_info_post_traversal_rule_set(node,value_attr,root_id);
       post_traversal_search_string_set(node);
     })
     .sort( (a,b) => {
       if (a.data.is("dept")) {
-        return a.data.name.toLowerCase().localeCompare( b.data.name.toLowerCase() );
+        return alphabetic_name_Sort(a,b);
+      } else {
+        return absolute_value_sort(a,b);
+      }
+    });
+};
+
+exports.create_org_info_inst_form_groups_hierarchy = function(value_attr,root_id,only_orgs_with_data) {
+  return d4.hierarchy(Subject.gov,
+    node => {
+      if (node.is("gov")){
+        const orgs = _.chain(Subject.Ministry.get_all())
+          .map(ministry => ministry.orgs)
+          .flatten()
+          .value();
+        return orgs_to_inst_form_nodes(orgs,only_orgs_with_data);
+      } else if (node.is("inst_form")) {
+        return node.orgs;
+      }
+    })
+    .eachAfter(node =>{
+      org_info_post_traversal_rule_set(node,value_attr,root_id);
+      post_traversal_search_string_set(node);
+    })
+    .sort( (a,b) => {
+      if (a.data.is("dept")) {
+        return alphabetic_name_Sort(a,b);
       } else {
         return absolute_value_sort(a,b);
       }

@@ -196,7 +196,7 @@ partition_org_info_inst_form_popup:
     {{> "partition_popup_org_info_child_org_count"}}
     {{> "partition_popup_description"}}
     {{> "partition_popup_focus_button"}}
-partition_org_info_ministry_popup:
+partition_org_info_ministry_or_inst_form_groups_popup:
   transform: [handlebars]
   text: |
     {{> "partition_popup_name"}}
