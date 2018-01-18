@@ -487,3 +487,30 @@ ol, ul {
 li.checkbox > label {
   font-weight: $mediumFontWeight;
 }
+
+.well {
+ -webkit-box-shadow: none;
+ box-shadow: none;
+ border: none; 
+}
+
+ul.fancy-ul > li:first-child {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+ul.fancy-ul > li:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+ul.fancy-ul > li {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid #7b8b9e;
+  font-size: 16px;
+}
