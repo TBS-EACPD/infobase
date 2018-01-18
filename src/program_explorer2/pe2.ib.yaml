@@ -334,7 +334,7 @@ partition_org_info_was:
   en: |
     We have
     <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
-    Federal Orginizations and Interests
+    Federal Organizations and Interests
   fr: |
     TODO
 partition_org_info_with_data_was:
@@ -342,7 +342,7 @@ partition_org_info_with_data_was:
   en: |
     We have data for
     <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
-    Federal Orginizations and Interests
+    Federal Organizations and Interests
   fr: |
     TODO
 partition_spending_was:
