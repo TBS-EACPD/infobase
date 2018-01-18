@@ -276,9 +276,8 @@ export class Partition {
 
   add_polygons(target){
     const source = target.parent
-    if (target === source.children.filter( c => c.data.name !== "-" )[0]){
+    if (target === source.children.filter( c => _.isUndefined(c.no_polygon) || !c.no_polygon )[0]){
       // (re)set vertical counter to source.top if drawing first polygon for this source
-      // Filter out minimize button, "-", children as polygons aren't drawn to them
       source.vertical_counter = source.top;
     }
     if (!target.open || !source.open) { 

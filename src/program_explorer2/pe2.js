@@ -92,6 +92,7 @@ const show_partial_children = function(node){
           "compressed",
           {hidden_children :  to_be_compressed}
         ),
+        no_polygon : false,
       }
     );
     children = to_be_shown.concat(new_compressed_child);
@@ -110,10 +111,11 @@ const show_all_children = function(node){
     delete compressed.data.hidden_children;
     compressed.data.id = "minimize"+compressed.id_ancestry;
     compressed.value =  1;
-    compressed.data.name = "-";
+    compressed.data.name = "—";
     _.each(children,_node=> {
       _node.parent=node;
     });
+    compressed.no_polygon = true;
   } else {
     children = node.children;
   }
