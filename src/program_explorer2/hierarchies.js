@@ -3,9 +3,11 @@ const Subject = require("../models/subject");
 const {GlossaryEntry} = require("../models/glossary");
 const {Table} = require('../core/TableClass.js');
 const {text_maker} = require("../models/text");
-const {sos} = require('../models/businessConstants.js');
+const { 
+  sos,
+  population_groups,
+} = require('../models/businessConstants.js');
 const { InstForm } = require('../models/subject.js');
-
 const absolute_value_sort = (a,b) => - ( Math.abs(a.value) - Math.abs(b.value) );
 const alphabetic_name_Sort = (a,b) => a.data.name.toLowerCase().localeCompare( b.data.name.toLowerCase() );
 
@@ -250,9 +252,9 @@ const orgs_to_inst_form_nodes = (orgs, only_orgs_with_data) => {
 exports.create_org_info_ministry_hierarchy = function(value_attr,root_id,only_orgs_with_data) {
   return d4.hierarchy(Subject.gov,
     node => {
-      if (node.is("gov")){
+      if (node.is("gov")) {
         return Subject.Ministry.get_all();
-      } else if (node.is("ministry")){
+      } else if (node.is("ministry")) {
         return orgs_to_inst_form_nodes(node.orgs,only_orgs_with_data);
       } else if (node.is("inst_form")) {
         return node.orgs;
@@ -274,7 +276,7 @@ exports.create_org_info_ministry_hierarchy = function(value_attr,root_id,only_or
 exports.create_org_info_inst_form_groups_hierarchy = function(value_attr,root_id,only_orgs_with_data) {
   return d4.hierarchy(Subject.gov,
     node => {
-      if (node.is("gov")){
+      if (node.is("gov")) {
         const orgs = _.chain(Subject.Ministry.get_all())
           .map(ministry => ministry.orgs)
           .flatten()
@@ -314,6 +316,62 @@ exports.create_org_info_inst_form_groups_hierarchy = function(value_attr,root_id
         return alphabetic_name_Sort(a,b);
       } else {
         return absolute_value_sort(a,b);
+      }
+    });
+};
+
+exports.create_org_info_population_group_hierarchy = function(value_attr,root_id,only_orgs_with_data) {
+  const get_pop_group_glossary_entry = (pop_group_id) => {
+    if (pop_group_id === "cpa") {
+      return GlossaryEntry.lookup("CPA").definition;
+    } else if (pop_group_id === "separate_agencies") {
+      return GlossaryEntry.lookup("SE_PEOPLE").definition;
+    } else {
+      return "";
+    }
+  }
+
+  return d4.hierarchy(Subject.gov,
+    node => {
+      if (node.is("gov")) {
+        return _.chain(Subject.Ministry.get_all())
+          .map(ministry => ministry.orgs)
+          .flatten()
+          .reject("is_dead")
+          .filter(org => !only_orgs_with_data || (org.tables && org.tables.length > 1))
+          .groupBy("pop_group_parent_key")
+          .map( (orgs, parent_form_id) => {
+            return _.chain(orgs)
+              .groupBy("pop_group_parent_key")
+              .map( (orgs, pop_group_id) => ({
+                id: _.has(population_groups, pop_group_id) ? pop_group_id : "na",
+                description: get_pop_group_glossary_entry(pop_group_id),
+                name: _.has(population_groups, pop_group_id) ? population_groups[pop_group_id].text : population_groups["na"].text,
+                is: __type__ => __type__ === "pop_group",
+                plural: ()=> text_maker("pop_group"),
+                orgs: orgs,
+              }) )
+              .value()
+          })
+          .flatten()
+          .value();
+      } else if (node.is("pop_group")) {
+        return orgs_to_inst_form_nodes(node.orgs,only_orgs_with_data);
+      } else if (node.is("inst_form")) {
+        return node.orgs;
+      }
+    })
+    .eachAfter(node =>{
+      org_info_post_traversal_rule_set(node,value_attr,root_id);
+      post_traversal_search_string_set(node);
+    })
+    .sort( (a,b) => {
+      if (a.data.is("dept")) {
+        return alphabetic_name_Sort(a,b);
+      } else {
+        return a.data.id === "na" ? Infinity :
+          b.data.id === "na" ? -Infinity :
+            absolute_value_sort(a,b);
       }
     });
 };
