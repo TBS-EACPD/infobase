@@ -273,8 +273,10 @@ export class Partition {
       this.fade();
     }
 
-    if (this.are_any_children_magnified()){
+    if (!_.isUndefined(this.unmagnify_all_popup)){
       this.remove_unmagnify_all_button();
+    }
+    if (this.are_any_children_magnified()){
       this.add_unmagnify_all_button();
     }
   }
