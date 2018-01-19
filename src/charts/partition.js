@@ -202,11 +202,24 @@ export class Partition {
           .select(".partition-right-ie-fix")
           .classed("fat", d.more_than_fair_space )
           .style("margin-top", function(d){
-            // use top-margin to fix vertical placement of +/- 
+            // use margin-top to fix vertical placement of +/-
             const content_height = this.parentElement.style.pixelHeight;
-            return (content_height - 12) < 0 ? 
-              (content_height - 12) + "px" :
-              0 + "px";
+            const font_size = 12;
+            if (d.more_than_fair_space && (content_height - font_size) < 0 ){
+              return (content_height - font_size) + "px";
+            } else {
+              return "0px";
+            }
+          })
+          .style("padding-top", function(d){
+            // use padding-top to fix vertical placement of +/-
+            const content_height = this.parentElement.style.pixelHeight;
+            const font_size = 12;
+            if (!d.more_than_fair_space){
+              return (content_height*0.5 - font_size*0.75) + "px";
+            } else {
+              return "0px";
+            }
           });
       })
       .style("background-color",d=> { 
