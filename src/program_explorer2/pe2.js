@@ -149,9 +149,16 @@ class GovPartition {
     this.container = container.append("div")
       .classed("partition-container",true)
       .style("margin-left", -d4.select("main.container").node().offsetLeft+"px");
-    window.addEventListener("resize", () => {
-      this.container.style("margin-left", -d4.select("main.container").node().offsetLeft+"px");
-    });
+    
+    const adjust_partition_diagram_margin_on_resize = function(){
+      const partition_container = d4.select(".partition-container.__partition__");
+      if ( partition_container.node() ){
+        partition_container.style("margin-left", -d4.select("main.container").node().offsetLeft+"px");
+      } else {
+        window.removeEventListener("resize", adjust_partition_diagram_margin_on_resize);
+      }
+    };
+    window.addEventListener("resize", adjust_partition_diagram_margin_on_resize);
 
     this.chart = new PARTITION.Partition(this.container, {
       height : 700,
