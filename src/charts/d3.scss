@@ -222,8 +222,8 @@ a.boxclose {
 }
 .partition-content-title.fat{ 
   background-color: rgb(4, 18, 37) !important;
-  max-width: 85%;
   padding: 0px 15px;
+  max-width: 85%;
   min-width: 10%;
   min-height: 100%;
   line-height: 1;
@@ -250,9 +250,10 @@ a.boxclose {
   height: 100%;
 }
 
-.partition-content-title.fat.right{
-  position:absolute;
+.partition-content-title.right{
+  position: absolute;
   right: 5px;
+  padding: 0px 15px;
   text-align: right;
 }
 
