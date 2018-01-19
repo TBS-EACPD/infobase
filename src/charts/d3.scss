@@ -389,14 +389,14 @@ a.boxclose {
 }
 
 .partition-popup.fixed-popup.unfocus-all-button-container {
-  bottom: 0px;
-  right: 0px;
-  width: 145px;
-  padding: 15px;
-  border-left: 3px solid #45a1e3;
-  border-top: 3px solid #45a1e3;
-  border-bottom-left-radius: 0px;
-  border-top-right-radius: 0px;
+    bottom: 0px;
+    right: 0px;
+    width: 145px;
+    padding: 15px;
+    border-left: 3px solid #45a1e3;
+    border-top: 3px solid #45a1e3;
+    border-radius: 0px;
+    border-top-left-radius: 10px;
   & > a.btn {
     background-color: rgb(69, 161, 227);
 

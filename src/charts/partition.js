@@ -273,6 +273,10 @@ export class Partition {
       this.fade();
     }
 
+    if (this.are_any_children_magnified()){
+      this.remove_unmagnify_all_button();
+      this.add_unmagnify_all_button();
+    }
   }
 
   add_polygons(target){
@@ -553,34 +557,39 @@ export class Partition {
     d4.event.preventDefault();
   }
   unmagnify_all(){
-    _.each(this.data.root.children, node => { if ( this.data.magnified(node) ){ this.unmagnify(node) } });
+    _.each(this.data.root.children, node => { if ( this.data.magnified(node) ){ this.data.unmagnify(node) } });
+    if (this.should_remove_unmagnify_all_button()){
+      this.remove_unmagnify_all_button();
+    }
   }
   unmagnify(node){
     this.data.unmagnify(node)
     if (this.should_remove_unmagnify_all_button()){
-      this.remove_unmaginfy_all_button();
+      this.remove_unmagnify_all_button();
     }
   }
   magnify(node){
     this.data.magnify(node);
-    if (_.isUndefined(this.unfocus_all_popup)){
-      this.add_magnify_all_button();
+    if (_.isUndefined(this.unmagnify_all_popup)){
+      this.add_unmagnify_all_button();
     }
-  } 
-  add_magnify_all_button(){
-    this.unfocus_all_popup = this.html.append("div")
+  }
+  add_unmagnify_all_button(){
+    this.unmagnify_all_popup = this.html.append("div")
       .html(text_maker("partition_unfocus_all_popup"));
   }
   should_remove_unmagnify_all_button(){
-    return !_.isUndefined(this.unfocus_all_popup) && 
-      !_.chain(this.data.root.children)
-        .map(node => node.magnified)
-        .some()
-        .value();
+    return !_.isUndefined(this.unmagnify_all_popup) && !this.are_any_children_magnified();
   }
-  remove_unmaginfy_all_button(){
-    this.unfocus_all_popup.remove();
-    delete this.unfocus_all_popup;
+  are_any_children_magnified(){
+    return _.chain(this.data.root.children)
+      .map(node => node.magnified)
+      .some()
+      .value();
+  }
+  remove_unmagnify_all_button(){
+    this.unmagnify_all_popup.remove();
+    delete this.unmagnify_all_popup;
   }
 };
 
