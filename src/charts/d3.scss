@@ -145,7 +145,7 @@ a.boxclose {
   overflow-y: hidden;
 }
 
-.__partition__ > .visual > .controls{
+.__partition__ > .visual > .controls {
   width: inherit;
   min-width: inherit;
   background-color: rgb(4, 18, 37);
@@ -313,6 +313,9 @@ a.boxclose {
   background-color: #fefefe;
   padding: 20px;
 }
+.partition-popup.fixed-popup {
+  position: fixed;
+}
 .partition-popup > .popup-row-top > .stat1 {
   display: inline-block;
   width: 100%;
@@ -383,6 +386,18 @@ a.boxclose {
 	border-left: 25px solid transparent;
 	border-bottom: 40px solid #efefef;
 	border-right: 25px solid transparent;
+}
+
+.partition-popup.fixed-popup.unfocus-all-button-container {
+  bottom: 15px;
+  right: 15px;
+  width: 145px;
+  padding: 15px;
+  border: 3px solid rgb(69, 161, 227);
+  & > a.btn {
+    background-color: rgb(69, 161, 227);
+
+  }
 }
 
 .__partition__ > .visual > .partition-diagram-fader {

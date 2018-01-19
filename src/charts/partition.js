@@ -1,5 +1,6 @@
 const D3CORE = require("./core");
 const utils = require("../core/utils");
+const {text_maker} = require("../models/text");
 const vertical_placement_counters = {};
 const cycle_colors = function(i){
   return d4.color(window.darkCategory10Colors[i % 10]);
@@ -489,7 +490,10 @@ export class Partition {
     let content = utils.find_parent(d4.event.target,dom=>d4.select(dom).classed("partition-content"))
     // get a reference to the content 
     if (content === false) {
-      if (this.pop_up){
+      if ( target.classed("unmagnify-all") ) {
+        this.unmagnify_all();
+        this.render();
+      } else if (this.pop_up){
         this.remove_pop_up();
       } 
       // we're done with this event, ensure no further propogation
@@ -519,7 +523,7 @@ export class Partition {
         this.data.show_all_children(d.parent);
       } else if ( this.data.collapsed(d) ) {
         this.data.unhide_all_children(d);
-        this.data.magnify(d); 
+        this.magnify(d); 
       }
       this.render();
       d4.event.stopImmediatePropagation();
@@ -533,11 +537,11 @@ export class Partition {
     } else if ( target.classed("magnify") ) {
       this.remove_pop_up();
       if (d.magnified) {
-        this.data.unmagnify(d);
+        this.unmagnify(d);
       } else {
-        this.data.magnify(d);
+        this.magnify(d);
       }
-      this.render();      
+      this.render();
     } else {
       if (this.pop_up){
         this.remove_pop_up();
@@ -547,6 +551,36 @@ export class Partition {
     }
     d4.event.stopImmediatePropagation();
     d4.event.preventDefault();
+  }
+  unmagnify_all(){
+    _.each(this.data.root.children, node => { if ( this.data.magnified(node) ){ this.unmagnify(node) } });
+  }
+  unmagnify(node){
+    this.data.unmagnify(node)
+    if (this.should_remove_unmagnify_all_button()){
+      this.remove_unmaginfy_all_button();
+    }
+  }
+  magnify(node){
+    this.data.magnify(node);
+    if (_.isUndefined(this.unfocus_all_popup)){
+      this.add_magnify_all_button();
+    }
+  } 
+  add_magnify_all_button(){
+    this.unfocus_all_popup = this.html.append("div")
+      .html(text_maker("partition_unfocus_all_popup"));
+  }
+  should_remove_unmagnify_all_button(){
+    return !_.isUndefined(this.unfocus_all_popup) && 
+      !_.chain(this.data.root.children)
+        .map(node => node.magnified)
+        .some()
+        .value();
+  }
+  remove_unmaginfy_all_button(){
+    this.unfocus_all_popup.remove();
+    delete this.unfocus_all_popup;
   }
 };
 

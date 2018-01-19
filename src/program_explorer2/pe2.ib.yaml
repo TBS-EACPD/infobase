@@ -204,6 +204,15 @@ partition_org_info_ministry_or_inst_form_groups_popup:
     {{> "partition_popup_focus_button"}}
 
 ## Other popups
+partition_unfocus_all_popup:
+  transform: [handlebars,markdown]
+  text: |
+    <div class="partition-popup fixed-popup unfocus-all-button-container">
+      <a href='#' 
+        class='btn btn-xs btn-block unmagnify-all'>
+        {{gt "partition_unfocus_button"}} {{gt "all"}}
+      </a> 
+    </div>
 partition_intro_popup:
   transform: [handlebars,markdown]
   en: |
