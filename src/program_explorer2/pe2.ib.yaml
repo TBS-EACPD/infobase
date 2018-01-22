@@ -202,13 +202,6 @@ partition_org_info_ministry_or_inst_form_groups_popup:
     {{> "partition_popup_name"}}
     {{> "partition_popup_org_info_child_org_count"}}
     {{> "partition_popup_focus_button"}}
-partition_org_info_pop_groups_popup:
-  transform: [handlebars]
-  text: |
-    {{> "partition_popup_name"}}
-    {{> "partition_popup_org_info_child_org_count"}}
-    {{> "partition_popup_description"}}
-    {{> "partition_popup_focus_button"}}
 
 ## Other popups
 partition_unfocus_all_popup:
@@ -517,14 +510,6 @@ partiton_org_info_by_inst_form_all:
   transform: [handlebars]
   text: |
     {{gt "by_all"}} - {{gt "by"}} {{gt "type"}}
-partiton_org_info_by_population_groups_with_data:
-  transform: [handlebars]
-  text: |
-    {{gt "all_orgs_with_data"}} - {{gt "by"}} {{gt "pop_group"}}
-partiton_org_info_by_population_groups:
-  transform: [handlebars]
-  text: |
-    {{gt "by_all"}} - {{gt "by"}} {{gt "pop_group"}}
 up_to:
   en: up to
   fr: jusqu'à
