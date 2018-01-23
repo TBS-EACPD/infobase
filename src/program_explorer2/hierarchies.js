@@ -224,10 +224,9 @@ const org_info_post_traversal_rule_set = (node,value_attr,root_id) => {
   }
 }
 
-const orgs_to_inst_form_nodes = (orgs, only_orgs_with_data) => {
+const orgs_to_inst_form_nodes = (orgs) => {
   return _.chain(orgs)
     .reject("is_dead")
-    .filter(org => !only_orgs_with_data || (org.tables && org.tables.length > 1))
     .groupBy("inst_form.id")
     .map( (orgs, parent_form_id) => {
       return _.chain(orgs)
@@ -246,13 +245,13 @@ const orgs_to_inst_form_nodes = (orgs, only_orgs_with_data) => {
     .value();
 }
 
-exports.create_org_info_ministry_hierarchy = function(value_attr,root_id,only_orgs_with_data) {
+exports.create_org_info_ministry_hierarchy = function(value_attr,root_id) {
   return d4.hierarchy(Subject.gov,
     node => {
       if (node.is("gov")) {
         return Subject.Ministry.get_all();
       } else if (node.is("ministry")) {
-        return orgs_to_inst_form_nodes(node.orgs,only_orgs_with_data);
+        return orgs_to_inst_form_nodes(node.orgs);
       } else if (node.is("inst_form")) {
         return node.orgs;
       }
@@ -270,7 +269,7 @@ exports.create_org_info_ministry_hierarchy = function(value_attr,root_id,only_or
     });
 };
 
-exports.create_org_info_inst_form_groups_hierarchy = function(value_attr,root_id,only_orgs_with_data) {
+exports.create_org_info_inst_form_groups_hierarchy = function(value_attr,root_id) {
   return d4.hierarchy(Subject.gov,
     node => {
       if (node.is("gov")) {
@@ -278,28 +277,23 @@ exports.create_org_info_inst_form_groups_hierarchy = function(value_attr,root_id
           .map(ministry => ministry.orgs)
           .flatten()
           .value();
-        if (only_orgs_with_data) {
-          return orgs_to_inst_form_nodes(orgs,only_orgs_with_data);
-        } else {
-          const inst_form_groups = _.chain(orgs)
-            .reject("is_dead")
-            .filter(org => !only_orgs_with_data || (org.tables && org.tables.length > 1))
-            .groupBy("inst_form.parent_form.parent_form.id")
-            .map( (orgs, inst_form_group_id) => {
-              return {
-                id: inst_form_group_id,
-                name: InstForm.lookup(inst_form_group_id).name,
-                is: __type__ => __type__ === "inst_form_groups",
-                plural: ()=> text_maker("parent_form"),
-                orgs: orgs,
-              }
-            })
-            .flatten()
-            .value();
-          return inst_form_groups;
-        }
+        const inst_form_groups = _.chain(orgs)
+          .reject("is_dead")
+          .groupBy("inst_form.parent_form.parent_form.id")
+          .map( (orgs, inst_form_group_id) => {
+            return {
+              id: inst_form_group_id,
+              name: InstForm.lookup(inst_form_group_id).name,
+              is: __type__ => __type__ === "inst_form_groups",
+              plural: ()=> text_maker("parent_form"),
+              orgs: orgs,
+            }
+          })
+          .flatten()
+          .value();
+        return inst_form_groups;
       } else if (node.is("inst_form_groups")) {
-        return orgs_to_inst_form_nodes(node.orgs,only_orgs_with_data);
+        return orgs_to_inst_form_nodes(node.orgs);
       } else if (node.is("inst_form")) {
         return node.orgs;
       }

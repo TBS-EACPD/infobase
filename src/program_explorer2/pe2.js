@@ -31,7 +31,7 @@ const get_root_text_key = (value_attr, method) => {
   const text_keys_by_value_attr = {
     "exp" : "partition_spending_was",
     "fte" : "partition_fte_was",
-    "org_info" : method === "org_info_by_ministry" ? "partition_org_info_was" : "partition_org_info_with_data_was",
+    "org_info" : "partition_org_info_was",
   };
   return text_keys_by_value_attr[value_attr];
 }
@@ -170,8 +170,6 @@ class GovPartition {
         id: "org_info", 
         text: text_maker("orgs"), 
         presentation_schemes: [
-          "org_info_by_ministry_with_data",
-          "org_info_by_inst_form_groups_with_data",
           "org_info_by_ministry", 
           "org_info_by_inst_form_groups",
         ],
@@ -183,10 +181,8 @@ class GovPartition {
       { id: "dept", text: text_maker("ministries") },
       { id: "hwh", text: Subject.Tag.tag_roots.HWH.name },
       { id: "st", text: text_maker("type_of_spending") },
-      { id: "org_info_by_ministry_with_data", text: text_maker("partiton_org_info_by_min_with_data") },
-      { id: "org_info_by_inst_form_groups_with_data", text: text_maker("partiton_org_info_by_inst_form_with_data") },
-      { id: "org_info_by_ministry", text: text_maker("partiton_org_info_by_min_all") },
-      { id: "org_info_by_inst_form_groups", text: text_maker("partiton_org_info_by_inst_form_all") },
+      { id: "org_info_by_ministry", text: text_maker("partiton_org_info_by_min") },
+      { id: "org_info_by_inst_form_groups", text: text_maker("partiton_org_info_by_inst_form") },
     ];
 
     const presentation_schemes = _.chain(this.all_presentation_schemes)
@@ -529,23 +525,11 @@ class GovPartition {
     this.render();
   }
   org_info_by_ministry(){
-    const only_orgs_with_data = false;
-    this.hierarchy_factory = ()=>create_org_info_ministry_hierarchy( this.value_attr, this.root_id+=1, only_orgs_with_data);
-    this.org_info();
-  }
-  org_info_by_ministry_with_data(){
-    const only_orgs_with_data = true;
-    this.hierarchy_factory = ()=>create_org_info_ministry_hierarchy( this.value_attr, this.root_id+=1, only_orgs_with_data);
+    this.hierarchy_factory = ()=>create_org_info_ministry_hierarchy( this.value_attr, this.root_id+=1);
     this.org_info();
   }
   org_info_by_inst_form_groups(){
-    const only_orgs_with_data = false;
-    this.hierarchy_factory = ()=>create_org_info_inst_form_groups_hierarchy( this.value_attr, this.root_id+=1, only_orgs_with_data);
-    this.org_info();
-  }
-  org_info_by_inst_form_groups_with_data(){
-    const only_orgs_with_data = true;
-    this.hierarchy_factory = ()=>create_org_info_inst_form_groups_hierarchy( this.value_attr, this.root_id+=1, only_orgs_with_data);
+    this.hierarchy_factory = ()=>create_org_info_inst_form_groups_hierarchy( this.value_attr, this.root_id+=1);
     this.org_info();
   }
   org_info(){
