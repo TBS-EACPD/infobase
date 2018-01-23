@@ -23,7 +23,7 @@ glossary_t:
        {{#each this.items}}
          <dt 
           {{#if @first}} 
-            id="__{{../../letter}}" 
+            id="__{{../letter}}" 
             tabindex="0"
           {{/if}}
         >
