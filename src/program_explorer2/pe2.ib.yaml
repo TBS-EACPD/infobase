@@ -346,12 +346,20 @@ partition_org_info_was:
     Federal Organizations and Interests
   fr: |
     TODO
-partition_org_info_with_data_was:
+partition_org_info_federal_orgs_by_inst_form_was:
   transform: [handlebars]
   en: |
-    We have data for
+    We have
     <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
-    Federal Organizations and Interests
+    Federal Organizations
+  fr: |
+    TODO
+partition_org_info_interests_by_inst_form_was:
+  transform: [handlebars]
+  en: |
+    We have
+    <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    Interests
   fr: |
     TODO
 partition_spending_was:
@@ -498,10 +506,14 @@ partiton_org_info_by_min:
   transform: [handlebars]
   text: |
     {{gt "by_all"}} {{gt "by"}} {{gt "by_portfolio"}}
-partiton_org_info_by_inst_form:
+partiton_org_info_federal_orgs_by_inst_form:
   transform: [handlebars]
   text: |
-    {{gt "by_all"}} - {{gt "by"}} {{gt "type"}}
+    {{gt "inst_form_filter"}} {{gt "by"}} {{gt "type"}}
+partiton_org_info_interests_by_inst_form:
+  transform: [handlebars]
+  text: |
+    {{gt "corp_int_filter"}} {{gt "by"}} {{gt "type"}}
 up_to:
   en: up to
   fr: jusqu'à
