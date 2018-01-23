@@ -12,7 +12,7 @@ const {
   create_spend_type_hierarchy,
   create_tag_hierarchy,
   create_org_info_ministry_hierarchy,
-  create_org_info_inst_form_groups_hierarchy,
+  create_org_info_inst_form_hierarchy,
   mock_model,
 } = require("./hierarchies"); 
 const { reactAdapter } = require('../core/reactAdapter');
@@ -171,7 +171,7 @@ class GovPartition {
         text: text_maker("orgs"), 
         presentation_schemes: [
           "org_info_by_ministry", 
-          "org_info_by_inst_form_groups",
+          "org_info_by_inst_form",
         ],
       },  
     ], d => d.id === value_attr ? -Infinity : Infinity);
@@ -182,7 +182,7 @@ class GovPartition {
       { id: "hwh", text: Subject.Tag.tag_roots.HWH.name },
       { id: "st", text: text_maker("type_of_spending") },
       { id: "org_info_by_ministry", text: text_maker("partiton_org_info_by_min") },
-      { id: "org_info_by_inst_form_groups", text: text_maker("partiton_org_info_by_inst_form") },
+      { id: "org_info_by_inst_form", text: text_maker("partiton_org_info_by_inst_form") },
     ];
 
     const presentation_schemes = _.chain(this.all_presentation_schemes)
@@ -528,8 +528,8 @@ class GovPartition {
     this.hierarchy_factory = ()=>create_org_info_ministry_hierarchy( this.value_attr, this.root_id+=1);
     this.org_info();
   }
-  org_info_by_inst_form_groups(){
-    this.hierarchy_factory = ()=>create_org_info_inst_form_groups_hierarchy( this.value_attr, this.root_id+=1);
+  org_info_by_inst_form(){
+    this.hierarchy_factory = ()=>create_org_info_inst_form_hierarchy( this.value_attr, this.root_id+=1);
     this.org_info();
   }
   org_info(){
