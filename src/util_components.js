@@ -32,7 +32,6 @@ const {
 const { TwoLevelSelect } = require('./components/TwoLevelSelect.js');
 
 // Misc. utility components that don't justify having their own file in ./components, for various reasons
-const ClearFix = () => <div className="clearfix" />
 
 function lang(obj){ return obj[window.lang] || obj.text || "" }
 
@@ -122,7 +121,6 @@ module.exports = exports = {
   AutoAccordion,
   HeightClipper,
   TabbedContent,
-  ClearFix,
   Format,
   FancyUL,
   DeptSearch,

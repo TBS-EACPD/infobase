@@ -19,8 +19,11 @@ const prov_split_render = function(panel,data,options){
 
   let historical_graph_container;
 
-  const legend_area = panel.areas().graph.select(".x1");
-  const graph_area = panel.areas().graph.select(".x2");
+  const row = panel.areas().graph.append("div").classed("frow no-container",true);
+  const legend_area = row.append("div").classed("fcol-md-3 fcol-xs-12",true);
+  const graph_area = row.append("div")
+    .classed("fcol-md-9 fcol-xs-12",true)
+    .style("position","relative");
   
   const has_qc = _.chain(graph_args.years_by_province)
     .map(d => _.has(d, "QC (minus NCR)"))
@@ -280,8 +283,8 @@ new PanelGraph({
     'table10_gov_info',
   ],
   layout : {
-    full : {text : 12, graph: [3,9]},
-    half : {text : 12, graph: [12,12]},
+    full : {text : 12, graph: 12},
+    half : {text : 12, graph: 12},
   },
 
   text :  "gov_historical_employee_prov_text",

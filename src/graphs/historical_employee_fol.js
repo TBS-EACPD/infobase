@@ -18,8 +18,8 @@ const employee_fol_render = function(panel, data){
     const text_parent_node = text_node.parentNode;
     
     // Give text node full panel width
-    text_parent_node.classList.remove("col-md-7");
-    text_parent_node.classList.add("col-md-12");
+    text_parent_node.classList.remove("fcol-md-7");
+    text_parent_node.classList.add("fcol-md-12");
     
     // Insert suppression explanation text
     text_node.innerHTML = text_maker("employee_FOL_all_suppressed_desc", {dept_name: subject.sexy_name});
@@ -31,7 +31,7 @@ const employee_fol_render = function(panel, data){
         legend_col_full_size : 4,
         graph_col_full_size : 8,
         graph_col_class : "height-clipped-bar-area",
-        legend_class : 'col-sm-12 col-md-8 col-md-offset-1',
+        legend_class : 'fcol-sm-11 fcol-md-11',
         y_axis : text_maker("employees"),
         ticks : _.map(people_years, y => `${run_template(y)}`),
         height : this.height,

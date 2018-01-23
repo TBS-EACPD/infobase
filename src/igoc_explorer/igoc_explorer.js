@@ -153,7 +153,7 @@ ROUTER.add_container_route("igoc/:grouping:","_igoc_explorer", function(containe
 
   reactAdapter.render(
     <div className="medium_panel_text">
-      <div style={{marginBottom:"3em"}}>
+      <div style={{marginBottom:"1.5em"}}>
         <TM k="about_inventory"/>
       </div>
       <ExplorerContainer 

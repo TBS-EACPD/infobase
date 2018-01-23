@@ -110,10 +110,22 @@ class D3GraphWithLegend extends React.Component {
     };
   }
   render(){
-    return <div ref="graph_area" className={"height-clipped-graph-area"} style={{position:'relative'}}>
-      <div className={"x1 col-xs-12 col-md-"+this.state.legend_col_full_size}></div>
-      <div className={"x2 col-xs-12 col-md-"+this.state.graph_col_full_size+" "+this.state.graph_col_class} tabIndex="-1"></div>
-    </div>
+    return (
+      <div 
+        ref="graph_area"
+        className="frow" 
+      >
+        <div 
+          className={"x1 fcol-xs-12 fcol-md-"+this.state.legend_col_full_size}
+          style={{position:"relative"}}
+        />
+        <div 
+          className={"x2 fcol-xs-12 fcol-md-"+this.state.graph_col_full_size+" "+this.state.graph_col_class}
+          style={{position:"relative"}}
+          tabIndex="-1"
+        />
+      </div>
+    );
   }
   _render(){
     this.graph_instance.render(

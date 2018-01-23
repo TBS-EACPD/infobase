@@ -13,7 +13,7 @@ const exec_level_render = function(panel,data){
   const {graph_args} = data;
 
   return D3.create_graph_with_legend.call({panel},{
-    legend_class : 'col-sm-12 col-md-8 col-md-offset-1', 
+    legend_class : 'fcol-sm-11 fcol-md-11', 
     y_axis : text_maker("employees"),
     ticks : _.map(people_years, y => `${run_template(y)}`),
     height : this.height,

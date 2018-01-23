@@ -52,7 +52,7 @@ simplographic_results_title:
 simplographic_results_text:
   transform: [handlebars,markdown]
   en: |
-    In {{pa_last_year}}, the federal government sought to achieve **{{num_results}}**. Progress towards meeting these results was measured using **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicators" "IND_RESULT"}}. 
+    In {{pa_last_year}}, the federal government sought to achieve **{{num_results}}** results. Progress towards meeting these results was measured using **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicators" "IND_RESULT"}}. 
     Of those indicators, **{{fmt_big_int_real num_ontrack_or_met}}** (**{{fmt_percentage pct_ontrack_or_met}}**) {{gl_tt "met" "RESULTS_MET"}} or are {{gl_tt "on track" "RESULTS_OT"}} to meet their target.
   fr: |
     En {{pa_last_year}}, le gouvernement fédéral a cherché à rencontrer **{{num_results}}** résultats. Les progrès accomplis dans l'atteinte de ces résultats ont été mesurés au moyen de **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicateurs" "IND_RESULT"}}. 

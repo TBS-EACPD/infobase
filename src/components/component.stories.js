@@ -48,7 +48,7 @@ storiesOf('flat design modifications', module)
   .add("panel", ()=>
     <div style={separator_style}>
       <div style={{overflow:'hidden'}}>
-        <div className="panel panel-info panel-flat col-sm-12 col-md-12 mrgn-bttm-md" style={{padding:0}}>
+        <div className="panel panel-info panel-flat fcol-sm-12 fcol-md-12 mrgn-bttm-md" style={{padding:0}}>
           <div className="panel-heading">
             <h3 className="panel-title">
               Panel title

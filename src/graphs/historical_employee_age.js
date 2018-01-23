@@ -180,7 +180,7 @@ new PanelGraph({
 //  const avg_age_options = {
 //    legend_col_full_size : 4,
 //    graph_col_full_size : 8,
-//    legend_class : 'col-sm-12 col-md-8 col-md-offset-1',
+//    legend_class : 'fcol-sm-11 fcol-md-11',
 //    stacked : false,
 //    y_axis : text_maker("avgage"),
 //    ticks : ticks,

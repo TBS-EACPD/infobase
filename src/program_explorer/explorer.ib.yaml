@@ -37,71 +37,6 @@ tag_nav_fte_header_drr16:
   fr: |
     Nombre d'ETP pour {{pa_last_year}} 
 
-tag_nav_search_placeholder:
-  en: Search for a tag, a program or an organization
-  fr: Rechercher une étiquette, un programme ou une organisation
-
-explorer_related_tags: 
-  en: Programs under this tag also appear under the following tags
-  fr: Les programmes relevant de cette étiquette relèvent également des étiquettes suivantes
-
-featured:
-  en: Featured
-  fr: En vedette
-
-tag_nav_sort_arrows:
-  transform: [handlebars]
-  handlebars_partial : true
-  text: |
-    <div class='text-nowrap'>
-     <a 
-      role='button' 
-      href='#' 
-      class='sorter asc' 
-      data-direction='asc'  
-      data-attr='{{.}}'
-      aria-label="{{gt 'a11y_sort_asc'}}"
-    >△</a>
-     <a 
-      role='button' 
-      href='#' 
-      class='sorter desc' 
-      data-direction='desc' 
-      data-attr='{{.}}'
-      aria-label="{{gt 'a11y_sort_desc'}}"
-    >▽</a>
-    </div>
-
-tag_nav_options_header:
-  transform: [handlebars]
-  handlebars_partial : true
-  text: |
-    <div 
-      class='bg-primary center-text' 
-      style='
-        padding: 10px;
-        border-top-right-radius: 4px;
-        border-top-left-radius: 4px;
-      '
-    >
-      <strong>{{gt .}}</strong>
-    </div>
-
-tag_nav_search:
-  transform: [handlebars]
-  handlebars_partial : true
-  text: |
-    <form class="form-horizontal" style='padding:10px'>
-      <label class="control-label wb-inv">Search:</label>
-      <input 
-        aria-label='{{gt "explorer_search_a11y"}}'
-        type="text" 
-        class="form-control search" 
-        placeholder="{{gt "tag_nav_search_placeholder"}}" 
-        style=" width: 100%;"
-        id=""
-      />
-    </form>
 
 tag_nav_intro_text:
   transform: [handlebars, markdown]
@@ -129,16 +64,6 @@ tag_nav_intro_text:
     3.	À tout moment, cliquez sur **« Voir toutes les données »**  pour voir un résumé graphique lié à cette section particulière. 
     4.  Vous pouvez naviguez les données selon ce qui a été dépensé (Ressources utilisées en {{pa_last_year}}) ou ce que est prévu être dépensé (Ressources prévues en {{planning_year_1}}).
 
-
-add_dashboard_button:
-  transform: [handlebars]
-  handlebars_partial: true
-  text: |
-   {{> add_line }}
-   <div class='mrgn-bttm-sm mrgn-rght-sm pull-right'>
-     <a class="build-db-btn" href="{{.}}" >{{gt "see_data"}}</a>
-   </div>
-   <div class='clearfix'></div>
 
 select_to_expand_a11y:
   en: Expand this node

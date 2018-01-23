@@ -487,3 +487,9 @@ ol, ul {
 li.checkbox > label {
   font-weight: $mediumFontWeight;
 }
+
+.well {
+ -webkit-box-shadow: none;
+ box-shadow: none;
+ border: none; 
+}

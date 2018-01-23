@@ -107,7 +107,7 @@ D3.create_graph_with_legend = function(options){
   let list;
   let data_to_series_format;
   let colors = options.colors;
-  options.legend_class = options.legend_class || 'col-sm-11 col-md-11';
+  options.legend_class = options.legend_class || 'fcol-sm-11 fcol-md-11';
 
   options.get_series_label= options.get_series_label || _.property('label');
   options.sort_data = _.isUndefined(options.sort_data) ? true :  options.sort_data;
