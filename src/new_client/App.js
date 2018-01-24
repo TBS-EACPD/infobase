@@ -1,7 +1,6 @@
 import { Route, Switch } from 'react-router';
 import { Link, NavLink } from 'react-router-dom';
 import { Infograph } from './Infograph.js';
-import { SearchComponent } from './search_component.js';
 
 
 window.lang = APPLICATION_LANGUAGE;
@@ -44,11 +43,10 @@ const Page404 = () => <div>
 
 </div>
 
-export class App extends React.Component { 
+export class App extends React.Component {
   render(){
     return (
-      <div>
-        <SearchComponent />
+      <div tabIndex={-1} id="app-focus-root">
         <Nav />
         <Switch>
           <Route exact path="/" component={Home}/>

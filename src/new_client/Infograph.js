@@ -2,12 +2,16 @@ import { PanelManager } from './PanelManager.js';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
+import { SearchComponent } from './search_component.js';
+
+
 import panel1_def from './panels/example-panel1.js';
 import panel2_def from './panels/example-panel2.js';
 import panel3_def from './panels/example-panel3.js';
 import panel4_def from './panels/example-panel4.js';
 import panel5_def from './panels/example-panel5.js';
 import static_panel_def from './panels/static-panel-example.js';
+import pses_panel from './panels/pses-panel.js';
 
 const BubbleMenu = ({ bubbles, onSelectBubble }) => {
 
@@ -47,7 +51,7 @@ function get_panel_definitions(level, bubble){
     if(bubble==="intro"){
       return [ panel1_def, panel2_def ];
     } else if(bubble==="fin"){
-      return [ panel3_def, panel4_def ];
+      return [ panel3_def, panel4_def, pses_panel ];
     } else if(bubble==="ppl"){
       return [ panel5_def, static_panel_def ];
     }
@@ -97,6 +101,9 @@ class Infograph_ extends React.Component {
           <div> Loading ... </div> :
           <h1> { name } </h1>
         }
+      </div>
+      <div>
+        <SearchComponent />
       </div>
       <div>
         <BubbleMenu

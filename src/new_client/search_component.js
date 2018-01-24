@@ -48,6 +48,7 @@ const _SearchComponent = ({ client, history }) => <div>
     }
     onAction={ item => {
       history.push(hashless_infograph_link(item.level,item.id));
+      document.getElementById("app-focus-root").focus();
     }}
   > 
   
