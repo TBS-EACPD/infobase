@@ -1,6 +1,7 @@
 import { Route, Switch } from 'react-router';
 import { Link, NavLink } from 'react-router-dom';
 import { Infograph } from './Infograph.js';
+import { SearchComponent } from './search_component.js';
 
 
 window.lang = APPLICATION_LANGUAGE;
@@ -19,7 +20,7 @@ const Nav = () => <div>
     <li> <NavLink to="/"> Home </NavLink> </li>
     <li> <NavLink to="/about"> About </NavLink> </li>
     <li> <NavLink to="/topics"> Topics </NavLink> </li>
-    <li> <NavLink to="/infographic/dept/1/"> Infographic </NavLink> </li>
+    <li> <NavLink to="/infographic/org/1/"> Infographic </NavLink> </li>
   </ul>
 </div>
 
@@ -47,6 +48,7 @@ export class App extends React.Component {
   render(){
     return (
       <div>
+        <SearchComponent />
         <Nav />
         <Switch>
           <Route exact path="/" component={Home}/>

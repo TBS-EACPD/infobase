@@ -43,7 +43,7 @@ const bubbles = [
 ];
 
 function get_panel_definitions(level, bubble){
-  if(level === "dept"){
+  if(level === "org"){
     if(bubble==="intro"){
       return [ panel1_def, panel2_def ];
     } else if(bubble==="fin"){
