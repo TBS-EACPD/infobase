@@ -2,7 +2,7 @@ const {
   TM,
 } = require('../util_components.js');
 require('./igoc_explorer.ib.yaml');
-require('./igoc_explorer.css');
+require('./igoc_explorer.scss');
 
 const {createSelector} = require('reselect');
 const ROUTER = require("../core/router");

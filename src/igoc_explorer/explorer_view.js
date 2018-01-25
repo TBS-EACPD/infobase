@@ -289,6 +289,8 @@ class Explorer extends React.Component {
     const { loading } = this.state;
 
     const root = get_root(flat_nodes);
+    
+    const org_count = _.countBy(flat_nodes, node => !node.children).true;
 
     return <div>
       <div>
@@ -322,7 +324,7 @@ class Explorer extends React.Component {
             onChange={evt => this.handleQueryChange(evt.target.value)}
           />
         </form>
-        <div>
+        <div className="igoc-checkbox-and-count-row">
           <label>
             <input 
               type="checkbox"
@@ -332,6 +334,9 @@ class Explorer extends React.Component {
             />
             <TM k="show_orgs_without_data"/>
           </label>
+          <div>
+            <TM k="displayed_orgs_count" args={{org_count}}/>
+          </div>
         </div>
       </div>
       <div 
