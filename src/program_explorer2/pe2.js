@@ -533,12 +533,12 @@ class GovPartition {
     this.org_info();
   }
   org_info_federal_orgs_by_inst_form(){
-    const grand_parent_inst_form_group = "fps";
+    const grand_parent_inst_form_group = "fed_int_gp";
     this.hierarchy_factory = ()=>create_org_info_inst_form_hierarchy( this.value_attr, this.root_id+=1, grand_parent_inst_form_group);
     this.org_info();
   }
   org_info_interests_by_inst_form(){
-    const grand_parent_inst_form_group = "na";
+    const grand_parent_inst_form_group = "corp_int_gp";
     this.hierarchy_factory = ()=>create_org_info_inst_form_hierarchy( this.value_attr, this.root_id+=1, grand_parent_inst_form_group);
     this.org_info();
   }

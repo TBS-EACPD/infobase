@@ -277,7 +277,7 @@ exports.create_org_info_inst_form_hierarchy = function(value_attr,root_id,grand_
         const orgs = _.chain(Subject.Ministry.get_all())
           .map(ministry => ministry.orgs)
           .flatten()
-          .filter(org => org.pop_group_gp_key === grand_parent_inst_form_group)
+          .filter(org => org.inst_form.parent_form.parent_form.id === grand_parent_inst_form_group)
           .value();
         return orgs_to_inst_form_nodes(orgs);
       } else if (node.is("inst_form")) {
