@@ -514,6 +514,10 @@ partiton_org_info_interests_by_inst_form:
   transform: [handlebars]
   text: |
     {{gt "corp_int_filter"}} {{gt "by"}} {{gt "type"}}
+partition_spending_data:
+  transform: [handlebars]
+  text: |
+    {{gt "spending"}} ($)
 up_to:
   en: up to
   fr: jusqu'à

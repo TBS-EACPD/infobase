@@ -166,7 +166,7 @@ class GovPartition {
       height : 700,
     });
     const sort_vals = this.sort_vals = _.sortBy([ 
-      { id: "exp", text: text_maker("spending"), presentation_schemes: ["goca", "dept", "hwh", "st"] },
+      { id: "exp", text: text_maker("partition_spending_data"), presentation_schemes: ["goca", "dept", "hwh", "st"] },
       { id: "fte", text: text_maker("fte_written"), presentation_schemes: ["goca", "dept", "hwh"] },
       { 
         id: "org_info", 
