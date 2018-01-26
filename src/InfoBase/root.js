@@ -11,4 +11,4 @@ $(()=>{
     const start = require('./InfoBase.js');
     start({app_el, spinner}); 
   });
-})
+});

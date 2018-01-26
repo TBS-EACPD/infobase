@@ -142,7 +142,6 @@ class Panel {
     this.el.select(".source")
       .html(text_maker('panel_source_t',{
         links: sources,
-        a11y_links: sources,
       }));
     return this;
   }

@@ -16,4 +16,5 @@ function loadStories() {
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome />);
 
-configure(loadStories,module)
+configure(loadStories, module);
+  

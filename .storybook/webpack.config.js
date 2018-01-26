@@ -96,6 +96,7 @@ const plugins = [
     PRE_PUBLIC_ACCOUNTS: false,
     TEST: false,
   }),
+  new webpack.IgnorePlugin(/\.js\.flow$/), //for some reason webpack tries to load .js.flow files...
 ];
 
 // Export a function. Accept the base config as the only param.
