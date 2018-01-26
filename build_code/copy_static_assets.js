@@ -5,11 +5,13 @@ const fse = require('fs-extra');
 const fs = require("fs");
 const cp = require("child_process");
 const _ = require("lodash");
+const Handlebars = require('handlebars');
 
 global._ = _; //global is the 'window' on the node environment
 
 const { write_result_bundles } = require('./write_result_bundles.js');
 const { get_footnote_file_defs } = require('./write_footnote_bundles.js');
+const { index_lang_lookups } = require("../src/InfoBase/index_data.js");
 
 /*
 What this is
@@ -43,6 +45,10 @@ const external_deps_names = glob.sync('external-dependencies/*.js')
 const public_data_dir = "data/";
 
 const public_dir_prefixer = file_name => public_data_dir+file_name;
+
+function file_to_str(path){
+  return fs.readFileSync(path).toString('utf8');
+}
 
 const common_lookups = _.map(
   [
@@ -133,6 +139,8 @@ const common_png = [
   'src/graphs/intro_graphs/Graph.svg',
   'src/graphs/intro_graphs/Money.svg',
   'src/graphs/intro_graphs/People.svg',
+
+  'src/InfoBase/goc--header-logo.svg',
 ];
 
 const IB_tables = [
@@ -174,8 +182,23 @@ var IB = {
   csv: csv_from_table_names(IB_tables),
   png: common_png,
   js: external_deps_names,
-  other: [ 'src/robots/robots.txt','src/InfoBase/index-eng.html', 'src/InfoBase/index-fra.html'],
+  other: [ 'src/robots/robots.txt','src/common_css/container-page.css'],
 };
+
+function get_index_pages(){
+  const template = file_to_str("./src/InfoBase/index.hbs.html");
+  const func = Handlebars.compile(template);
+
+  const en_lang_lookups = _.mapValues(index_lang_lookups, 'en');
+  const fr_lang_lookups = _.mapValues(index_lang_lookups, 'fr');
+
+  return {
+    en: func(en_lang_lookups),
+    fr: func(fr_lang_lookups),
+  };
+
+
+}
 
 function make_dir_if_exists(dir_name){
   if (!fse.existsSync(dir_name)){
@@ -282,6 +305,14 @@ var build_proj = function(PROJ){
     console.log('copying:' + small_name);
     fse.copySync(f_name, dir+'/'+small_name, {clobber:true});
   });
+  _.each(get_index_pages(), (file, lang) => {
+    const lang_suffix = lang === 'en' ? "eng" : "fra";
+    fs.writeFileSync(
+      `${dir}/index-${lang_suffix}.html`,
+      file
+    );
+  });
+
   console.log("\n done \n");
 };
 

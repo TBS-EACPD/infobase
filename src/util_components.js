@@ -113,6 +113,16 @@ const FancyUL = ({children, ul_class})=> (
   </ul>
 );
 
+const FootnoteList = ({ footnotes }) => <div style={{padding:"10px"}}>
+  <ul>
+    {footnotes.map( (text,ix) => 
+      <li key={ix}>
+        <div dangerouslySetInnerHTML={{__html: text}} />
+      </li>
+    )}
+  </ul>
+</div>;
+
 module.exports = exports = {
   FirstChild,
   AccordionEnterExit,
@@ -134,4 +144,5 @@ module.exports = exports = {
   DebouncedUncontrolledInput,
   SortIndicators,
   RadioButtons,
+  FootnoteList,
 }

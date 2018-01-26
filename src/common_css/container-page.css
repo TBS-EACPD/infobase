@@ -1,0 +1,57 @@
+#ib-site-header {
+  background-color: #335075;
+  padding: 1.15rem;
+  line-height: 0;
+}
+@media (min-width: 768px) {
+  #ib-site-header {
+    padding: 1.5rem 2rem;
+  }
+}
+.canada-logo {
+  height: 2rem;
+}
+@media (max-width: 767px) {
+  #ib-site-header .container {
+    padding: 0;
+  }
+  #ib-site-header .container .row {
+    width: 100%;
+  }
+}
+.ib-site-header-logo:after {
+  bottom: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+#wb-lng {
+  display: block;
+  text-align: right;
+  width: 100%;
+}
+#wb-lng > a.lang-switcher {
+  display: inline-block;
+  color: #FFFFFF;
+  display: inline-block;
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-top: 0.75rem;
+  text-align: center;
+  padding-bottom: 1rem;
+}
+
+
+@media (min-width: 992px) {
+  #wb-lng > a.lang-switcher {
+    font-weight: 200;
+    font-size: 2rem;
+  }
+}
+@media (min-width: 768px) {
+  #wb-lng > a.lang-switcher {
+    font-size: 1.5rem;
+  }
+}

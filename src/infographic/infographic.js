@@ -47,7 +47,7 @@ ROUTER.add_container_route(
 const name_for_title = subject => {
   if(subject.level === 'program' && !_.isEmpty(subject.dept.fancy_acronym)){
     return `${subject.name} (${subject.dept.fancy_acronym})`
-  } else if(subject.level === 'dept'){
+  } else if(subject.level === 'org'){
     return subject.legal_name;
   } else {
     return subject.name;
