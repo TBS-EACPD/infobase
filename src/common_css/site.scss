@@ -439,17 +439,12 @@ a, a:visited {
   }
 }
 
-#wb-lng > .row > div > ul > li > a {
-  text-decoration: underline;
-}
-
+/*
 .easy-access > span > a,
 ol.breadcrumb > li > :last-child {
-  font-family: Helvetica,Arial,sans-serif;
-  font-weight: $mediumFontWeight;
-  text-decoration: underline;
   color: $wetLinkColor;
 }
+*/
 
 ol.breadcrumb > li:last-child > :last-child {
   text-decoration: none;
@@ -488,6 +483,16 @@ header, h1, h2, h3, h4, h5, h6 {
   font-family: $fontFamily;
 }
 
+#app, #wb-bc, .app-font, .easy-access, wb-lng {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+.xplorer-node-expanded-content {
+  text-align: right;
+  padding: 1px 10px 2px 0px;
+}
+
 #app, #wb-bc, .app-font {
   font-family: 'Roboto', sans-serif;
   font-weight: $mediumFontWeight;
@@ -505,4 +510,13 @@ header, h1, h2, h3, h4, h5, h6 {
 
 .igoc-table > tbody > tr > td {
   padding: 5px 0;
+}
+
+dl.org-profile > dt:first-child,
+dl.org-profile > dd:nth-child(2) {
+  border: none !important;
+}
+
+dl.org-profile { 
+  margin-bottom: 0;
 }

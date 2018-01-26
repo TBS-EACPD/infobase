@@ -1,15 +1,15 @@
 <!DOCTYPE html><!--[if lt IE 9]><html class="no-js lt-ie9" lang="en" dir="ltr"><![endif]--><!--[if gt IE 8]><!-->
-<html class="no-js" lang="en" dir="ltr">
+<html class="no-js" lang="{{lang}}" dir="ltr">
 <!--<![endif]-->
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
 wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licence-fr.html -->
-<title>InfoBase</title>
+<title>{{page_title}}</title>
 <meta content="width=device-width,initial-scale=1" name="viewport">
 <!-- Meta data -->
-<meta name="description" content="Access various reports about Government of Canada finances and expenditures.">
+<meta name="description" content="{{meta_description}}">
 <!-- Meta data-->
 <!--[if gte IE 9 | !IE ]><!-->
 <link href="./GCWeb/assets/favicon.ico" rel="icon" type="image/x-icon">
@@ -37,35 +37,30 @@ wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licenc
 <noscript><iframe title="Google Tag Manager" src="//www.googletagmanager.com/ns.html?id=GTM-TLGQ9K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer1'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer1','GTM-TLGQ9K');</script>
 <!-- End Google Tag Manager -->
-<ul style="margin-bottom:0">
-<li class="wb-slc"> <a class="wb-sl" id="skip-nav" href="#">Skip to main content</a> </li>
-</ul>
-<header >
+<header>
   <div id="ib-site-header">
     <div class="container">
         <div class="row">
             <div class="col-xs-4">
-              <a href="https://www.canada.ca/en.html" class="ib-site-header-logo gl-FIP" aria-label="Government of Canada">
-                <object type="image/svg+xml" tabindex="-1" role="img" data="./png/goc--header-logo.svg" aria-label="Symbol of the Government of Canada" class="canada-logo"></object>
+              <a href="{{logo_link}}" class="ib-site-header-logo gl-FIP" aria-label="{{logo_a11y_label}}">
+                <object type="image/svg+xml" tabindex="-1" role="img" data="./png/goc--header-logo.svg" aria-label="{{logo_a11y_label_2}}" class="canada-logo"></object>
               </a>
             </div>
             <div class="col-xs-8">
                 <div id="wb-lng">
-                  <a lang="fr" href="index-eng.html">Français</a>
+                  <a class="lang-switcher" lang="fr" href="{{other_lang_href}}">{{other_lang_name}}</a>
                 </div>
             </div>
         </div>
     </div>
   </div>
-
-
 <nav id="wb-bc" property="breadcrumb">
-<h2>You are here:</h2>
+<h2>{{you_are_here}}</h2>
 <div class="container">
 <div class="row">
   <div class="col-md-9">
     <ol class="breadcrumb" style='padding: 8px 0'>
-      <li class="infobase-home-breadcrumb-link">  <a href="">  InfoBase</a></li> 
+      <li class="infobase-home-breadcrumb-link">  <a href="">InfoBase</a></li> 
     </ol>
   </div>
   <div class='col-md-3 easy-access' style='padding-top:8px; padding-bottom: 8px; text-align:right;'></div>
@@ -76,8 +71,8 @@ wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licenc
 </header>
 <main class="container mrgn-bttm-xl" property="mainContentOfPage" style="min-height: 50vh">
   <noscript> 
-  <h1> Please enable javascript </h1>
-  <p>This web application requires javascript</p>
+  <h1>{{please_enable_js}}</h1>
+  <p>{{app_requires_js}}</p>
   </noscript>
   <div id='app' style="min-height: 200px">
     <div class='row'> <div class='nav_area container' > </div> </div>
@@ -88,20 +83,16 @@ wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licenc
 <div class="container">
 <div class="row">
 <nav class="col-md-10 ftr-urlt-lnk">
-<h2 class="wb-inv">About this site</h2>
+<h2 class="wb-inv">{{about_this_site}}</h2>
 <ul>
-<li><a href="https://www.canada.ca/en/social.html">Social media</a></li>
-<li><a href="https://www.canada.ca/en/mobile.html">Mobile applications</a></li>
-<li><a href="https://www1.canada.ca/en/newsite.html">About Canada.ca</a></li>
-<li><a href="https://www.canada.ca/en/transparency/terms.html">Terms and conditions</a></li>
-<li><a href="https://www.canada.ca/en/transparency/privacy.html">Privacy</a></li>
+  {{{footer_lis}}}
 </ul>
 </nav>
 <div class="col-xs-6 visible-sm visible-xs tofpg">
-<a href="#wb-cont">Top of Page <span class="glyphicon glyphicon-chevron-up"></span></a>
+<a href="#wb-cont">{{top_of_page}}<span class="glyphicon glyphicon-chevron-up"></span></a>
 </div>
 <div class="col-xs-6 col-md-2 text-right">
-<object type="image/svg+xml" tabindex="-1" role="img" data="./GCWeb/assets/wmms-blk.svg" aria-label="Symbol of the Government of Canada"></object>
+<object type="image/svg+xml" tabindex="-1" role="img" data="./GCWeb/assets/wmms-blk.svg" aria-label="{{logo_a11y_label_2}}"></object>
 </div>
 </div>
 </div>
@@ -112,7 +103,7 @@ wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licenc
 <script src="./GCWeb/js/theme.min.js"></script>
 
 <script src="./js/polyfill.min.js"></script>
-<script src="app-en.min.js"></script>
+<script src="app-{{lang}}.min.js"></script>
 
 <script type="text/javascript">
        var _gaq = _gaq || [];
