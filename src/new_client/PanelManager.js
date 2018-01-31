@@ -3,7 +3,7 @@ import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 
 const Presentational = props => {
-  const { panel_defs, subject_context } = props;
+  const { panel_defs, subject_context, a11y_mode } = props;
 
   const arePanelDepsLoading = !_.chain(panel_defs)
     .filter("query") //filter out static panels
@@ -18,14 +18,16 @@ const Presentational = props => {
     .every( ({key}) => _.get(props, `${key}.loading`) === false )
     .value(); 
 
+
+  let children;
   if(arePanelDepsLoading){
-    return null;
+    children = null;
 
   } else {
 
     const data_by_panel_key = _.pick(props, _.map(panel_defs,'key'));
 
-    return _.map(panel_defs, ({key, data_to_props, component: Component}) => {
+    children = _.map(panel_defs, ({key, data_to_props, component: Component}) => {
       const data_props = data_by_panel_key[key];
 
       return (
@@ -48,6 +50,26 @@ const Presentational = props => {
       );
     });
   
+  }
+
+  if(a11y_mode){
+
+    return <div>
+      <div
+        role="alert"
+        aria-live="assertive"
+        className="sr-only"
+      >
+        { arePanelDepsLoading ? 
+          "Content is loading, please wait..." :
+          "Content is loaded"
+        }
+      </div>
+      { children } 
+    </div>;
+
+  } else {
+    return children;
   }
 
 };

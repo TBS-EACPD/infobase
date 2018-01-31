@@ -17,15 +17,25 @@ const file_to_str = path => fs.readFileSync(path).toString('utf8');
 
 
 function get_index_pages(){
-  const template = file_to_str("./src/new_client/index.hbs.html");
-  const func = Handlebars.compile(template);
+  const main_template = file_to_str("./src/new_client/index.hbs.html");
+  const main_func = Handlebars.compile(main_template);
+
+  const a11y_template = file_to_str("./src/new_client/a11y/index.hbs.html");
+  const a11y_func = Handlebars.compile(a11y_template);
 
   const en_lang_lookups = _.mapValues(index_lang_lookups, 'en');
   const fr_lang_lookups = _.mapValues(index_lang_lookups, 'fr');
 
+
   return {
-    en: func(en_lang_lookups),
-    fr: func(fr_lang_lookups),
+    main: {
+      en: main_func(en_lang_lookups),
+      fr: main_func(fr_lang_lookups),
+    },
+    a11y: {
+      en: a11y_func(en_lang_lookups),
+      fr: a11y_func(fr_lang_lookups),
+    }
   };
 
 }
@@ -78,12 +88,18 @@ var build_proj = function(){
     });
   }); 
 
-  _.each(get_index_pages(), (file, lang) => {
-    const lang_suffix = lang === 'en' ? "eng" : "fra";
-    fs.writeFileSync(
-      `${dir}/index-${lang_suffix}.html`,
-      file
-    );
+  _.each(get_index_pages(), (proj, proj_key) => {
+    const proj_prefix = proj_key === "a11y" ? "a11y" : "index";
+    _.each(proj, (markup_file, lang_key) => {
+
+      const lang_suffix = lang_key === 'en' ? "eng" : "fra";
+
+      fs.writeFileSync(
+        `${dir}/${proj_prefix}-${lang_suffix}.html`,
+        markup_file
+      );
+
+    });
   });
 
   console.log("\n done \n");
