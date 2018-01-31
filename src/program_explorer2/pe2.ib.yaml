@@ -103,7 +103,7 @@ partition_popup_org_info_child_org_count:
   handlebars_partial: true
   text: |
     <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
-        {{gt "parent_of"}}
+        {{gt "contains"}}
         {{fmt_big_int_real org_info}}
         {{#if plural_child_orgs}}
           {{gt "orgs"}}
@@ -527,6 +527,6 @@ partition_spending_data:
 up_to:
   en: up to
   fr: jusqu'à
-parent_of:
-  en: Parent of
-  fr: todo
+contains:
+  en: Contains
+  fr: Contient
