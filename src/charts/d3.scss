@@ -135,7 +135,7 @@ a.boxclose {
 }
 
 .__partition__ > .visual{
-  min-width: 1500px;
+  min-width: 1000px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -145,7 +145,7 @@ a.boxclose {
   overflow-y: hidden;
 }
 
-.__partition__ > .visual > .controls{
+.__partition__ > .visual > .controls {
   width: inherit;
   min-width: inherit;
   background-color: rgb(4, 18, 37);
@@ -154,38 +154,26 @@ a.boxclose {
 }
 
 .__partition__ > .visual > .controls > .form-horizontal {
+  display: flex;
+  flex-direction: row;
   position: relative;
   padding: 15px;
   padding-top: 9px;
-  width: inherit;
-  min-width: inherit;
 }
 
-.partition-control-block {
-  display: inline-block; 
-  text-align: left;
+.partition-control-element {
+  display: flex;
+  flex-direction: column;
   padding-right: 9px;
-  overflow: hidden;
 }
 
-.partition-control-block > text {
-  display: block;
-  width: inherit;
+.partition-control-element > text {
   color: #fff;
   font-size: 20px;
   font-weight: $lightFontWeight;
 }
 
-.partition-control-block > input {
-  display: inline;
-  width: 100%;
-}
-
-.partition-control-block > select {
-  display: inline;
-}
-
-.partition-control-block > .glyphicon {
+.partition-control-element > .glyphicon {
   font-size: 54px;
   position: absolute;
   color: rgb(69, 161, 227);
@@ -194,15 +182,13 @@ a.boxclose {
   cursor: pointer;
 }
 
-.partition-control-block > input.form-control.search::-ms-clear {
-  width : 0;
+.partition-control-element > input.form-control.search::-ms-clear {
+  width: 0;
   height: 0;
 }
 
 /* Over-ride bootstrap .form-control width style */
-.partition-control-block > select.form-control {
-  min-width: 100%;
-  max-width: none;
+.partition-control-element > select.form-control {
   font-weight: $mediumFontWeight;
 }
 
@@ -236,8 +222,8 @@ a.boxclose {
 }
 .partition-content-title.fat{ 
   background-color: rgb(4, 18, 37) !important;
-  max-width: 85%;
   padding: 0px 15px;
+  max-width: 85%;
   min-width: 10%;
   min-height: 100%;
   line-height: 1;
@@ -260,13 +246,14 @@ a.boxclose {
   color: red;
 }
 
-.partition-right-ie-fix.fat{
+.partition-right-ie-fix{
   height: 100%;
 }
 
-.partition-content-title.fat.right{
-  position:absolute;
+.partition-content-title.right{
+  position: absolute;
   right: 5px;
+  padding: 0px 15px;
   text-align: right;
 }
 
@@ -280,7 +267,8 @@ a.boxclose {
 }
 
 .partition-content.root > .partition-content-title{
-  margin-left: 10px;
+  width: inherit;
+  margin-left: 0px;
 }
 
 .partition-content.root .amount{
@@ -325,6 +313,9 @@ a.boxclose {
   width: 400px;
   background-color: #fefefe;
   padding: 20px;
+}
+.partition-popup.fixed-popup {
+  position: fixed;
 }
 .partition-popup > .popup-row-top > .stat1 {
   display: inline-block;
@@ -396,6 +387,21 @@ a.boxclose {
 	border-left: 25px solid transparent;
 	border-bottom: 40px solid #efefef;
 	border-right: 25px solid transparent;
+}
+
+.partition-popup.fixed-popup.unfocus-all-button-container {
+    bottom: 0px;
+    right: 0px;
+    width: 145px;
+    padding: 15px;
+    border-left: 3px solid #45a1e3;
+    border-top: 3px solid #45a1e3;
+    border-radius: 0px;
+    border-top-left-radius: 10px;
+  & > a.btn {
+    background-color: rgb(69, 161, 227);
+
+  }
 }
 
 .__partition__ > .visual > .partition-diagram-fader {

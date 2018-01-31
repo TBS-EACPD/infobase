@@ -1,5 +1,5 @@
 ## Popup components
-partition_top_row:
+partition_popup_top_row:
   handlebars_partial: true
   text: |
     <div class='mrgn-bttm-md popup-row-top popup-font-m popup-row-bottom-border'>
@@ -73,12 +73,14 @@ partition_popup_name:
 partition_popup_description:
   handlebars_partial: true
   text: |
-    <div class='popup-font-ml'>
-      {{gt "description"}}:
-    </div>
-    <div class='mrgn-bttm-md popup-row-bottom-border popup-decription-text'>
-      {{{description}}}
-    </div>
+    {{#if description}}
+      <div class='popup-font-ml'>
+        {{gt "description"}}:
+      </div>
+      <div class='mrgn-bttm-md popup-row-bottom-border popup-decription-text'>
+        {{{description}}}
+      </div>
+    {{/if}}
 partition_popup_infograph_link:
   handlebars_partial: true
   text: |
@@ -90,17 +92,47 @@ partition_popup_infograph_link:
 partition_popup_focus_button:
   handlebars_partial: true
   text: |
-    <a href='#' 
-      class='btn btn-xs btn-block mrgn-bttm-sm magnify'  
-      style='background-color:{{color}};'>
-      {{focus_text}}
-    </a> 
+    {{#if first_column}} 
+      <a href='#' 
+        class='btn btn-xs btn-block mrgn-bttm-sm magnify'  
+        style='background-color:{{color}};'>
+        {{focus_text}}
+      </a> 
+    {{/if}}
+partition_popup_org_info_child_org_count:
+  handlebars_partial: true
+  text: |
+    <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
+        {{gt "contains"}}
+        {{fmt_big_int_real org_info}}
+        {{#if plural_child_orgs}}
+          {{gt "orgs"}}
+        {{else}}
+          {{gt "org"}}
+        {{/if}}
+    </div>
+partition_popup_ministry_name:
+  handlebars_partial: true
+  text: |
+    {{#if ministry_name}}
+      <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
+        <strong>{{gt "ministry"}}:</strong> {{ministry_name}}
+      </div>
+    {{/if}}
+partition_popup_inst_form_name:
+  handlebars_partial: true
+  text: |
+    {{#if inst_form_name}}
+      <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
+        <strong>{{gt "type"}}:</strong> {{inst_form_name}}
+      </div>
+    {{/if}}
 
 ## Templated popups
 partition_program_popup:
   transform: [handlebars]
   text: |
-    {{> "partition_top_row"}}
+    {{> "partition_popup_top_row"}}
     {{> "partition_popup_name"}}
     <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
       <a href='#orgs/dept/{{dept_id}}/infograph' class='infographic' style='color:inherit;'> 
@@ -124,32 +156,63 @@ partition_program_popup:
 partition_org_or_goca_popup:
   transform: [handlebars]
   text: |
-    {{> "partition_top_row"}}
+    {{> "partition_popup_top_row"}}
     {{> "partition_popup_name"}}
     {{> "partition_popup_description"}}
     {{> "partition_popup_infograph_link"}}
 partition_so_popup:
   transform: [handlebars,markdown]
   text: |
-    {{> "partition_top_row"}}
+    {{> "partition_popup_top_row"}}
     {{> "partition_popup_name"}}
     {{> "partition_popup_description"}}
 partition_ministry_or_sa_popup:
   transform: [handlebars]
   text: |
-    {{> "partition_top_row"}}
+    {{> "partition_popup_top_row"}}
     {{> "partition_popup_name"}}
     {{> "partition_popup_focus_button"}}
 partition_hwh_tag_popup:
   transform: [handlebars]
   text: |
-    {{> "partition_top_row"}}
+    {{> "partition_popup_top_row"}}
     {{> "partition_popup_name"}}
     {{> "partition_popup_description"}}
     {{> "partition_popup_infograph_link"}}
     {{> "partition_popup_focus_button"}}
+partition_org_info_org_popup:
+  transform: [handlebars]
+  text: |
+    {{> "partition_popup_name"}}
+    {{> "partition_popup_inst_form_name"}}
+    {{> "partition_popup_ministry_name"}}
+    {{> "partition_popup_description"}}
+    {{> "partition_popup_infograph_link"}}
+partition_org_info_inst_form_popup:
+  transform: [handlebars]
+  text: |
+    {{> "partition_popup_name"}}
+    {{> "partition_popup_ministry_name"}}
+    {{> "partition_popup_org_info_child_org_count"}}
+    {{> "partition_popup_description"}}
+    {{> "partition_popup_focus_button"}}
+partition_org_info_ministry_or_inst_form_groups_popup:
+  transform: [handlebars]
+  text: |
+    {{> "partition_popup_name"}}
+    {{> "partition_popup_org_info_child_org_count"}}
+    {{> "partition_popup_focus_button"}}
 
 ## Other popups
+partition_unfocus_all_popup:
+  transform: [handlebars,markdown]
+  text: |
+    <div class="partition-popup fixed-popup unfocus-all-button-container">
+      <a href='#' 
+        class='btn btn-xs btn-block unmagnify-all'>
+        {{gt "partition_unfocus_button"}} {{gt "all"}}
+      </a> 
+    </div>
 partition_intro_popup:
   transform: [handlebars,markdown]
   en: |
@@ -275,6 +338,36 @@ program_SOBJ_warning:
 
 
 ## Misc. components
+partition_org_info_was:
+  transform: [handlebars]
+  en: |
+    We have
+    <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    Federal Organizations and Interests
+  fr: |
+    Nous avons
+    <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    organisations et intérêts fédéraux
+partition_org_info_federal_orgs_by_inst_form_was:
+  transform: [handlebars]
+  en: |
+    We have
+    <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    Federal Organizations
+  fr: |
+    Nous avons
+    <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    organisations fédérales
+partition_org_info_interests_by_inst_form_was:
+  transform: [handlebars]
+  en: |
+    We have
+    <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    Interests
+  fr: |
+    Nous avons
+    <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    intérêts
 partition_spending_was:
   transform: [handlebars]
   en: |
@@ -338,15 +431,16 @@ planned_fte_will_be:
     <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int_real x}}</a></p>
     ETP en
     {{/if}}
-    <span class='text-nowrap'>{{planning_year_1}}</span> 
+    <span class='text-nowrap'>{{planning_year_1}}</span>
+
 partition_controls:
   transform: [handlebars]
   text: |
     <form class="form-horizontal">
-       <div id="partition-control-info-button" class="partition-control-block" style="width:65px;">
+       <div id="partition-control-info-button" class="partition-control-element" style="width:65px;">
          <span class="glyphicon glyphicon-info-sign" tabindex="0"></span>     
        </div>
-       <div class="partition-control-block">
+       <div class="partition-control-element">
          <text>
            {{gt "partiton_select_data"}}
          </text>
@@ -356,7 +450,7 @@ partition_controls:
            {{/each}}
          </select>
        </div>
-       <div class="partition-control-block">
+       <div class="partition-control-element">
          <text>
            {{gt "partiton_select_context"}}
          </text>
@@ -368,8 +462,8 @@ partition_controls:
        </div>
        {{#if search}}
        <div
-         class="partition-control-block"
-         style="width:50%; max-width:800px;">
+         class="partition-control-element"
+         style="flex-grow:1;max-width:800px;">
          <text>
            {{gt "partiton_search_filter"}}
          </text>
@@ -378,7 +472,6 @@ partition_controls:
            type="text" 
            class="form-control search" 
            placeholder="{{gt "everything_search_placeholder"}}" 
-           style=" width:100%;
            id="">
          </input>
        </div>
@@ -415,6 +508,25 @@ partition_infograph_link:
 partition_revenue_explained:
   en: Negative figures indicate that revenues exceed expenditures
   fr: Les chiffres négatifs indiquent que les recettes dépassent les dépense
+partiton_org_info_by_min:
+  transform: [handlebars]
+  text: |
+    {{gt "by_all"}} {{gt "by"}} {{gt "by_portfolio"}}
+partiton_org_info_federal_orgs_by_inst_form:
+  transform: [handlebars]
+  text: |
+    {{gt "inst_form_filter"}} {{gt "by"}} {{gt "type"}}
+partiton_org_info_interests_by_inst_form:
+  transform: [handlebars]
+  text: |
+    {{gt "corp_int_filter"}} {{gt "by"}} {{gt "type"}}
+partition_spending_data:
+  transform: [handlebars]
+  text: |
+    {{gt "spending"}} ($)
 up_to:
   en: up to
   fr: jusqu'à
+contains:
+  en: Contains
+  fr: Contient

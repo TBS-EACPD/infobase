@@ -1,5 +1,6 @@
 const D3CORE = require("./core");
 const utils = require("../core/utils");
+const {text_maker} = require("../models/text");
 const vertical_placement_counters = {};
 const cycle_colors = function(i){
   return d4.color(window.darkCategory10Colors[i % 10]);
@@ -56,7 +57,7 @@ export class Partition {
     const height = this.options.height;
     const horizontal0_padding = 50;
     const horizontal_padding = 150;
-    const col0_width = 200;
+    const col0_width = 250;
     const col_width = 350;
     const total_width = this.total_width = (_.keys(levels).length-1) * (col_width+ horizontal_padding) +  col0_width + horizontal0_padding;
     const yscale = d4.scaleLinear()
@@ -201,11 +202,24 @@ export class Partition {
           .select(".partition-right-ie-fix")
           .classed("fat", d.more_than_fair_space )
           .style("margin-top", function(d){
-            // use top-margin to fix vertical placement of +/- 
+            // use margin-top to fix vertical placement of +/-
             const content_height = this.parentElement.style.pixelHeight;
-            return (content_height - 12) < 0 ? 
-              (content_height - 12) + "px" :
-              0 + "px";
+            const font_size = 12;
+            if (d.more_than_fair_space && (content_height - font_size) < 0 ){
+              return (content_height - font_size) + "px";
+            } else {
+              return "0px";
+            }
+          })
+          .style("padding-top", function(d){
+            // use padding-top to fix vertical placement of +/-
+            const content_height = this.parentElement.style.pixelHeight;
+            const font_size = 12;
+            if (!d.more_than_fair_space){
+              return (content_height*0.5 - font_size*0.75) + "px";
+            } else {
+              return "0px";
+            }
           });
       })
       .style("background-color",d=> { 
@@ -272,13 +286,18 @@ export class Partition {
       this.fade();
     }
 
+    if (!_.isUndefined(this.unmagnify_all_popup)){
+      this.remove_unmagnify_all_button();
+    }
+    if (this.are_any_children_magnified()){
+      this.add_unmagnify_all_button();
+    }
   }
 
   add_polygons(target){
     const source = target.parent
-    if (target === source.children.filter( c => c.data.name !== "-" )[0]){
+    if (target === source.children.filter( c => _.isUndefined(c.no_polygon) || !c.no_polygon )[0]){
       // (re)set vertical counter to source.top if drawing first polygon for this source
-      // Filter out minimize button, "-", children as polygons aren't drawn to them
       source.vertical_counter = source.top;
     }
     if (!target.open || !source.open) { 
@@ -398,11 +417,16 @@ export class Partition {
       .flatten(true)
       .filter(link => lowest_node_id_ancestry.includes(link.target.id_ancestry))
       .value();
-    this.graph_area.selectAll("polygon.partition-svg-link")
-      .data(links,polygon_key)
-      .filter(d=> links.length > 0 ? _.includes(links,d) : true)
-      .classed("faded", false)
-      .classed("highlighted",true);
+    
+    const unfade_parent_polygons = (polygon_selector) => {
+      this.graph_area.selectAll(polygon_selector)
+        .data(links,polygon_key)
+        .filter(d=> links.length > 0 ? _.includes(links,d) : true)
+        .classed("faded", false)
+        .classed("highlighted",true);
+    }
+    unfade_parent_polygons("polygon.partition-svg-link.root-polygon");
+    unfade_parent_polygons("polygon.partition-svg-link");
 
     this.html.selectAll("div.partition-content")
       .data(data,content_key)
@@ -485,7 +509,10 @@ export class Partition {
     let content = utils.find_parent(d4.event.target,dom=>d4.select(dom).classed("partition-content"))
     // get a reference to the content 
     if (content === false) {
-      if (this.pop_up){
+      if ( target.classed("unmagnify-all") ) {
+        this.unmagnify_all();
+        this.render();
+      } else if (this.pop_up){
         this.remove_pop_up();
       } 
       // we're done with this event, ensure no further propogation
@@ -515,7 +542,7 @@ export class Partition {
         this.data.show_all_children(d.parent);
       } else if ( this.data.collapsed(d) ) {
         this.data.unhide_all_children(d);
-        this.data.magnify(d); 
+        this.magnify(d); 
       }
       this.render();
       d4.event.stopImmediatePropagation();
@@ -529,11 +556,11 @@ export class Partition {
     } else if ( target.classed("magnify") ) {
       this.remove_pop_up();
       if (d.magnified) {
-        this.data.unmagnify(d);
+        this.unmagnify(d);
       } else {
-        this.data.magnify(d);
+        this.magnify(d);
       }
-      this.render();      
+      this.render();
     } else {
       if (this.pop_up){
         this.remove_pop_up();
@@ -543,6 +570,41 @@ export class Partition {
     }
     d4.event.stopImmediatePropagation();
     d4.event.preventDefault();
+  }
+  unmagnify_all(){
+    _.each(this.data.root.children, node => { if ( this.data.magnified(node) ){ this.data.unmagnify(node) } });
+    if (this.should_remove_unmagnify_all_button()){
+      this.remove_unmagnify_all_button();
+    }
+  }
+  unmagnify(node){
+    this.data.unmagnify(node)
+    if (this.should_remove_unmagnify_all_button()){
+      this.remove_unmagnify_all_button();
+    }
+  }
+  magnify(node){
+    this.data.magnify(node);
+    if (_.isUndefined(this.unmagnify_all_popup)){
+      this.add_unmagnify_all_button();
+    }
+  }
+  add_unmagnify_all_button(){
+    this.unmagnify_all_popup = this.html.append("div")
+      .html(text_maker("partition_unfocus_all_popup"));
+  }
+  should_remove_unmagnify_all_button(){
+    return !_.isUndefined(this.unmagnify_all_popup) && !this.are_any_children_magnified();
+  }
+  are_any_children_magnified(){
+    return _.chain(this.data.root.children)
+      .map(node => node.magnified)
+      .some()
+      .value();
+  }
+  remove_unmagnify_all_button(){
+    this.unmagnify_all_popup.remove();
+    delete this.unmagnify_all_popup;
   }
 };
 

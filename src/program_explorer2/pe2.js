@@ -11,6 +11,8 @@ const {
   create_ministry_hierarchy,
   create_spend_type_hierarchy,
   create_tag_hierarchy,
+  create_org_info_ministry_hierarchy,
+  create_org_info_inst_form_hierarchy,
   mock_model,
 } = require("./hierarchies"); 
 const { reactAdapter } = require('../core/reactAdapter');
@@ -22,10 +24,18 @@ const {
 const formaters = {
   "exp" : compact1,
   "fte" : big_int_real,
+  "org_info" : big_int_real,
 };
-const templates = {
-  "exp" : "partition_spending_was",
-  "fte" : "partition_fte_was",
+const wrap_in_brackets = (text) => " (" + text + ")";
+const get_root_text_key = (value_attr, method) => {
+  const text_keys_by_value_attr = {
+    "exp" : "partition_spending_was",
+    "fte" : "partition_fte_was",
+    "org_info" : method === "org_info_by_ministry" ? "partition_org_info_was" :
+      method === "org_info_federal_orgs_by_inst_form" ? "partition_org_info_federal_orgs_by_inst_form_was" :
+        "partition_org_info_interests_by_inst_form_was",
+  };
+  return text_keys_by_value_attr[value_attr];
 }
 const url_template = (method,value)=>`#partition/${method}/${value}`;
 const search_required_chars = 1;
@@ -84,6 +94,7 @@ const show_partial_children = function(node){
           "compressed",
           {hidden_children :  to_be_compressed}
         ),
+        no_polygon : false,
       }
     );
     children = to_be_shown.concat(new_compressed_child);
@@ -102,10 +113,11 @@ const show_all_children = function(node){
     delete compressed.data.hidden_children;
     compressed.data.id = "minimize"+compressed.id_ancestry;
     compressed.value =  1;
-    compressed.data.name = "-";
+    compressed.data.name = "—";
     _.each(children,_node=> {
       _node.parent=node;
     });
+    compressed.no_polygon = true;
   } else {
     children = node.children;
   }
@@ -119,11 +131,14 @@ const get_common_popup_options = d => {
     exp: d.exp,
     exp_is_negative: d.exp < 0,
     fte: d.fte,
+    org_info: d.org_info,
     name: d.data.name,
     tags: d.data.tags,
     level: d.data.level,
     id: d.data.id,
     color: d.color,
+    first_column: d.depth === 1,
+    focus_text: d.magnified ? text_maker("partition_unfocus_button") : text_maker("partition_focus_button"),
   };
 }
 
@@ -136,16 +151,32 @@ class GovPartition {
     this.container = container.append("div")
       .classed("partition-container",true)
       .style("margin-left", -d4.select("main.container").node().offsetLeft+"px");
-    window.addEventListener("resize", () => {
-      this.container.style("margin-left", -d4.select("main.container").node().offsetLeft+"px");
-    });
+    
+    const adjust_partition_diagram_margin_on_resize = function(){
+      const partition_container = d4.select(".partition-container.__partition__");
+      if ( partition_container.node() ){
+        partition_container.style("margin-left", -d4.select("main.container").node().offsetLeft+"px");
+      } else {
+        window.removeEventListener("resize", adjust_partition_diagram_margin_on_resize);
+      }
+    };
+    window.addEventListener("resize", adjust_partition_diagram_margin_on_resize);
 
     this.chart = new PARTITION.Partition(this.container, {
       height : 700,
     });
     const sort_vals = this.sort_vals = _.sortBy([ 
-      { id: "exp", text: text_maker("spending"), presentation_schemes: ["goca", "dept", "hwh", "st"] },
-      { id: "fte", text: text_maker("fte_written"), presentation_schemes: ["goca", "dept", "hwh"] }, 
+      { id: "exp", text: text_maker("partition_spending_data"), presentation_schemes: ["goca", "dept", "hwh", "st"] },
+      { id: "fte", text: text_maker("fte_written"), presentation_schemes: ["goca", "dept", "hwh"] },
+      { 
+        id: "org_info", 
+        text: text_maker("orgs"), 
+        presentation_schemes: [
+          "org_info_by_ministry", 
+          "org_info_federal_orgs_by_inst_form",
+          "org_info_interests_by_inst_form",
+        ],
+      },  
     ], d => d.id === value_attr ? -Infinity : Infinity);
 
     this.all_presentation_schemes = [
@@ -153,6 +184,9 @@ class GovPartition {
       { id: "dept", text: text_maker("ministries") },
       { id: "hwh", text: Subject.Tag.tag_roots.HWH.name },
       { id: "st", text: text_maker("type_of_spending") },
+      { id: "org_info_by_ministry", text: text_maker("partiton_org_info_by_min") },
+      { id: "org_info_federal_orgs_by_inst_form", text: text_maker("partiton_org_info_federal_orgs_by_inst_form") },
+      { id: "org_info_interests_by_inst_form", text: text_maker("partiton_org_info_interests_by_inst_form") },
     ];
 
     const presentation_schemes = _.chain(this.all_presentation_schemes)
@@ -176,8 +210,8 @@ class GovPartition {
 
     this.container.select(".select_value_attr").on("change", this.change_value_attr.bind(this));
     this.container.select(".select_root").on("change", this.reroot.bind(this));
-    this.container.select(".partition-control-block > .glyphicon").on("click", this.add_intro_popup.bind(this));
-    this.container.select(".partition-control-block > .glyphicon").on("keydown", () => {
+    this.container.select(".partition-control-element > .glyphicon").on("click", this.add_intro_popup.bind(this));
+    this.container.select(".partition-control-element > .glyphicon").on("keydown", () => {
       if(d4.event.which == 13){
         this.add_intro_popup.call(this);
       }
@@ -240,7 +274,7 @@ class GovPartition {
     this.hierarchy
       .each(node => {
         node.__value__ = node.value;
-        node.open = true
+        node.open = true;
         if (node.data.is("gov")){
           node.how_many_to_show = 8;
         } else if (node.data.is("ministry")){
@@ -267,7 +301,7 @@ class GovPartition {
         }
       })
 
-    this.value_formater = d => formaters[this.value_attr](d[this.value_attr]);
+    this.value_formater = d => wrap_in_brackets(formaters[this.value_attr](d[this.value_attr]));
     
     this.popup_template = function(d){
       const common_popup_options = get_common_popup_options(d);
@@ -287,9 +321,7 @@ class GovPartition {
         );
       } else if (d.data.is("ministry")) {
         return text_maker("partition_ministry_or_sa_popup", 
-          _.extend(common_popup_options, {
-            focus_text: d.magnified ? text_maker("partition_unfocus_button") : text_maker("partition_focus_button"),
-          })
+          common_popup_options
         );
       }
     }
@@ -312,7 +344,7 @@ class GovPartition {
     this.hierarchy
       .each(node => {
         node.__value__ = node.value;
-        node.open = true
+        node.open = true;
         if (node.data.is("tag") && node.children[0].data.is("tag")){
           node.how_many_to_show = Infinity;
         }else if (node.data.is("tag") && node.children[0].data.is("program")){
@@ -330,8 +362,8 @@ class GovPartition {
       });
 
     this.value_formater = d => d.data.is("tag") ?
-      text_maker("up_to") + " " + formaters[this.value_attr](d[this.value_attr]) :
-      formaters[this.value_attr](d[this.value_attr]);
+      wrap_in_brackets(text_maker("up_to") + " " + formaters[this.value_attr](d[this.value_attr])) :
+      wrap_in_brackets(formaters[this.value_attr](d[this.value_attr]));
     
     this.popup_template = function(d){
       const common_popup_options = get_common_popup_options(d);
@@ -349,7 +381,6 @@ class GovPartition {
           _.extend(common_popup_options, {
             up_to: true,
             description: d.data.description,
-            focus_text: d.magnified ? text_maker("partition_unfocus_button") : text_maker("partition_focus_button"),
           })
         );
       }
@@ -374,7 +405,7 @@ class GovPartition {
     this.hierarchy
       .each(node => {
         node.__value__ = node.value;
-        node.open = true
+        node.open = true;
         if (node.data.is("tag") && node.children && node.children[0] && node.children[0].data.is("tag")){
           node.how_many_to_show = Infinity;
         } else if (node.data.is("tag") && node.children[0].data.is("program")){
@@ -391,7 +422,7 @@ class GovPartition {
         node.children = show_partial_children(node);
       })
    
-    this.value_formater = d => formaters[this.value_attr](d[this.value_attr]);
+    this.value_formater = d => wrap_in_brackets(formaters[this.value_attr](d[this.value_attr]));
     
     this.popup_template = function(d){
       const common_popup_options = get_common_popup_options(d);
@@ -413,7 +444,6 @@ class GovPartition {
         return text_maker("partition_ministry_or_sa_popup", 
           _.extend(common_popup_options, {
             description: d.data.description,
-            focus_text: d.magnified ? text_maker("partition_unfocus_button") : text_maker("partition_focus_button"),
           })
         );
       }
@@ -439,7 +469,7 @@ class GovPartition {
     this.hierarchy
       .each(node => {
         node.__value__ = node.value;
-        node.open = true
+        node.open = true;
         if (node.data.is("gov") ||  node.data.is("type_of_spending") ){
           node.how_many_to_show = Infinity;
         } else if (node.data.is("so") ){
@@ -456,7 +486,7 @@ class GovPartition {
         node.children = show_partial_children(node);
       })
    
-    this.value_formater = d => formaters[this.value_attr](d[this.value_attr]);
+    this.value_formater = d => wrap_in_brackets(formaters[this.value_attr](d[this.value_attr]));
 
     this.popup_template = function(d){
       const common_popup_options = get_common_popup_options(d);
@@ -479,9 +509,7 @@ class GovPartition {
         );
       } else if (d.data.is("type_of_spending")) {
         return text_maker("partition_ministry_or_sa_popup", 
-          _.extend(common_popup_options, {
-            focus_text: d.magnified ? text_maker("partition_unfocus_button") : text_maker("partition_focus_button"),
-          })
+          common_popup_options
         );
       }
     }
@@ -492,10 +520,100 @@ class GovPartition {
 
     this.render();
   }
+  org_info_by_ministry(){
+    this.hierarchy_factory = ()=>create_org_info_ministry_hierarchy( this.value_attr, this.root_id+=1);
+    this.org_info();
+  }
+  org_info_federal_orgs_by_inst_form(){
+    const grand_parent_inst_form_group = "fed_int_gp";
+    this.hierarchy_factory = ()=>create_org_info_inst_form_hierarchy( this.value_attr, this.root_id+=1, grand_parent_inst_form_group);
+    this.org_info();
+  }
+  org_info_interests_by_inst_form(){
+    const grand_parent_inst_form_group = "corp_int_gp";
+    this.hierarchy_factory = ()=>create_org_info_inst_form_hierarchy( this.value_attr, this.root_id+=1, grand_parent_inst_form_group);
+    this.org_info();
+  }
+  org_info(){
+    this.value_attr = "org_info";
+    this.hierarchy = this.hierarchy_factory(value_functions[this.value_attr]);
+    
+    this.hierarchy
+      .each(node => {
+        node.__value__ = node.value;
+        node.open = true;
+        if ( node.data.is("ministry") || node.data.is("inst_form") ){
+          node.how_many_to_show = function(_node){
+            if (_node.children.length <= 2){ return [_node.children,[]];}
+            const number_to_show = 1;
+            const show = _.take(_node.children, number_to_show);
+            const hide = _.slice(_node.children, number_to_show);
+            return [show, hide];
+          };
+        } else {
+          node.how_many_to_show = function(_node){
+            return [_node.children,[]];
+          };
+        }
+      })
+      .each(node => {
+        node.children = show_partial_children(node);
+      });
+   
+    this.value_formater = d => {
+      return !d.data.is("dept") ?
+        wrap_in_brackets(
+          formaters[this.value_attr](d[this.value_attr]) + " " + (d[this.value_attr] > 1 ? 
+            text_maker("orgs") : 
+            text_maker("org")
+          )
+        ) :
+        "";
+    };
+
+    this.popup_template = function(d){
+      const common_popup_options = get_common_popup_options(d);
+      if (d.data.is("dept")) {
+        return text_maker("partition_org_info_org_popup", 
+          _.extend(common_popup_options, {
+            description: d.data.mandate,
+            inst_form_name: d.parent.data.name,
+            ministry_name: d.data.ministry.name, 
+          })
+        );
+      } else if (d.data.is("inst_form")) {
+        return text_maker("partition_org_info_inst_form_popup", 
+          _.extend(common_popup_options, {
+            description: d.data.description,
+            ministry_name: d.parent.data.is("ministry") ? d.parent.data.name : false,
+            plural_child_orgs: d.value !== 1,
+          })
+        );
+      } else if (d.data.is("ministry")) { 
+        return text_maker("partition_org_info_ministry_or_inst_form_groups_popup", 
+          _.extend(common_popup_options, {
+            plural_child_orgs: d.value !== 1,
+          })
+        );
+      }
+    }
+
+    this.update_diagram_notes();
+
+    this.enable_search_bar();
+
+    // If search active then reapply to new hierarchy, else normal render
+    const query = this.container.select("input.search").node().value.toLowerCase();
+    if(query.length >= search_required_chars){
+      this.search_actual(query);
+    } else {
+      this.render();
+    }
+  }
   render(){
     const default_formater = d => formaters[this.value_attr](d[this.value_attr]);
     const value_formater = this.value_formater || default_formater;
-    const template = templates[this.value_attr];
+    const root_text_key = get_root_text_key(this.value_attr, this.method);
     const wrapper = new PARTITION.DataWrapper(
       this.hierarchy,
       show_partial_children,
@@ -514,11 +632,11 @@ class GovPartition {
         );
         let name;
         if (should_add_value && d !== wrapper.root) {
-          name = d.data.name + " (" + value_formater(d) + ")";
+          name = d.data.name + value_formater(d);
         } else if ( !should_add_value && d !== wrapper.root){
           name =  utils.abbrev(d.data.name, 80);
         } else if ( d === wrapper.root ) {
-          name = text_maker(template, {x:wrapper.root.value, show_root_rollup});
+          name = text_maker(root_text_key, {x:wrapper.root.value, show_root_rollup});
         }
         return name;
       },
@@ -526,7 +644,7 @@ class GovPartition {
   }
   enable_search_bar(){
     const partition_control_search_block = this.container
-      .selectAll(".partition-control-block")
+      .selectAll(".partition-control-element")
       .filter(function(){
         return this.querySelectorAll(".form-control.search").length;
       });
@@ -545,7 +663,7 @@ class GovPartition {
   }
   disable_search_bar(){
     const partition_control_search_block = this.container
-      .selectAll(".partition-control-block")
+      .selectAll(".partition-control-element")
       .filter(function(){
         return this.querySelectorAll(".form-control.search").length;
       });
