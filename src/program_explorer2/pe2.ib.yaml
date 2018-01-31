@@ -400,7 +400,7 @@ partition_fte_was:
     ETP en
     {{/if}}
     <span class='text-nowrap'>{{pa_last_year}}</span>
-planned_spending_will_be:
+partition_spending_will_be:
   transform: [handlebars]
   en: |
     {{#if show_root_rollup}}
@@ -416,7 +416,7 @@ planned_spending_will_be:
     en
     {{/if}}
     <span class='text-nowrap'>{{planning_year_1}}</span>
-planned_fte_will_be:
+partition_fte_will_be:
   transform: [handlebars]
   en: |
     {{#if show_root_rollup}}
@@ -524,6 +524,19 @@ partition_spending_data:
   transform: [handlebars]
   text: |
     {{gt "spending"}} ($)
+partition_planned_spending_data:
+  transform: [handlebars]
+  text: |
+    {{gt "planned_spending"}} ($)
+partition_vote_state_perspective:
+  transform: [handlebars]
+  en: |
+    {{gt "votestat"}} Type
+  fr: |
+    {{gt "votestat"}} todo
+partition_est_inst_perspective:
+  en: Estimates Instrument
+  fr: Instrument des dépenses
 up_to:
   en: up to
   fr: jusqu'à
