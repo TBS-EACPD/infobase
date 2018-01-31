@@ -345,7 +345,9 @@ partition_org_info_was:
     <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
     Federal Organizations and Interests
   fr: |
-    TODO
+    Nous avons
+    <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    organisations et intérêts fédéraux
 partition_org_info_federal_orgs_by_inst_form_was:
   transform: [handlebars]
   en: |
@@ -353,7 +355,9 @@ partition_org_info_federal_orgs_by_inst_form_was:
     <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
     Federal Organizations
   fr: |
-    TODO
+    Nous avons
+    <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    organisations fédérales
 partition_org_info_interests_by_inst_form_was:
   transform: [handlebars]
   en: |
@@ -361,7 +365,9 @@ partition_org_info_interests_by_inst_form_was:
     <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
     Interests
   fr: |
-    TODO
+    Nous avons
+    <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    intérêts
 partition_spending_was:
   transform: [handlebars]
   en: |
@@ -523,7 +529,4 @@ up_to:
   fr: jusqu'à
 parent_of:
   en: Parent of
-  fr: todo
-parent_form:
-  en: Parent Form
   fr: todo
