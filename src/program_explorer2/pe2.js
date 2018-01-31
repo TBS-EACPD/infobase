@@ -258,14 +258,6 @@ class GovPartition {
       .transition()
       .duration(100)
       .ease(d4.easeLinear)
-      .style("background-color", "#ffffff")
-      .transition()
-      .duration(100)
-      .ease(d4.easeLinear)
-      .style("background-color", "#b8d3f9")
-      .transition()
-      .duration(200)
-      .ease(d4.easeLinear)
       .style("background-color", "#ffffff");
 
     this[this.method]();
