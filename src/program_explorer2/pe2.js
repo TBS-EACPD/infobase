@@ -630,28 +630,24 @@ class GovPartition {
     this.hierarchy_factory = ()=>create_planned_spending_hierarchy( this.value_attr, this.root_id+=1, presentation_scheme );
     const hierarchy = this.hierarchy = this.hierarchy_factory(value_functions[this.value_attr]);
 
-    //this.hierarchy
-    //  .each(node => {
-    //    node.__value__ = node.value;
-    //    node.open = true;
-    //    if (node.data.is("gov") ||  node.data.is("type_of_spending") ){
-    //      node.how_many_to_show = Infinity;
-    //    } else if (node.data.is("so") ){
-    //      node.how_many_to_show = function(_node){
-    //        if (_node.children.length <= 1){ return [_node.children,[]];}
-    //        const show = [_.head(_node.children)];
-    //        const hide = _.tail(_node.children);
-    //        const unhide = _.filter(hide, __node=> __node.value > hierarchy.value/100);
-    //        return [show.concat(unhide),_.difference(hide,unhide)];
-    //      };
-    //    }
-    //  })
-    //  .each(node => {
-    //    node.children = show_partial_children(node);
-    //  })
-    //
-    //this.value_formater = d => wrap_in_brackets(formaters[this.value_attr](d[this.value_attr]));
-    //
+    this.hierarchy
+      .each(node => {
+        node.__value__ = node.value;
+        node.open = true;
+        node.how_many_to_show = function(_node){
+          if (_node.children.length <= 1){ return [_node.children,[]];}
+          const show = [_.head(_node.children)];
+          const hide = _.tail(_node.children);
+          const unhide = _.filter(hide, __node=> __node.value > hierarchy.value/100);
+          return [show.concat(unhide),_.difference(hide,unhide)];
+        }
+      })
+      .each(node => {
+        node.children = show_partial_children(node);
+      })
+    
+    this.value_formater = d => wrap_in_brackets(formaters[this.value_attr](d[this.value_attr]));
+    
     //this.popup_template = function(d){
     //  const common_popup_options = get_common_popup_options(d);
     //  if (d.data.is("program_fragment")) {

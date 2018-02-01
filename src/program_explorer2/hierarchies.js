@@ -306,12 +306,53 @@ const orgs_with_planned_spending = () => {
     .value();
 }
 
-const build_vs_type_node = (dept_estimates_data) => {
-  return false;
+const table8_common_node_mapping = (data_for_node_mapping) => {
+  return _.chain(data_for_node_mapping)
+    .groupBy("id")
+    .map( grouped_rows => {
+      const first_row = grouped_rows[0];
+      const value_sum = _.reduce(grouped_rows, (sum, row) => sum + row.value, 0); 
+      return {
+        id: first_row.id,
+        name: first_row.name,
+        description: first_row.description,
+        is: first_row.is,
+        plural: first_row.plural,
+        value: value_sum,
+      }
+    })
+    .filter( node => node.value !== 0)
+    .value();
 }
 
-const build_est_inst_node = (dept_estimates_data) => {
-  return false;
+const table8_org_data_to_vs_type_nodes = (dept_estimates_data) => {
+  const data_for_node_mapping = _.map(dept_estimates_data, row => {
+    return {
+      id: row.votestattype,
+      name: row.desc,
+      description: "foo",
+      value: row["{{est_in_year}}_estimates"],
+      is: __type__ => __type__ === "vs_type",
+      plural: ()=> text_maker("partition_vote_state_perspective"),
+    }
+  });
+
+  return table8_common_node_mapping(data_for_node_mapping);
+}
+
+const table8_org_data_to_est_inst_nodes = (dept_estimates_data) => {
+  const data_for_node_mapping = _.map(dept_estimates_data, row => {
+    return {
+      id: row.est_doc_code,
+      name: row.est_doc,
+      description: "foo",
+      value: row["{{est_in_year}}_estimates"],
+      is: __type__ => __type__ === "est_inst",
+      plural: ()=> text_maker("partition_est_inst_perspective"),
+    }
+  });
+
+  return table8_common_node_mapping(data_for_node_mapping);
 }
 
 const planned_spending_post_traversal_rule_set = (node,value_attr,root_id) => {
@@ -324,7 +365,7 @@ const planned_spending_post_traversal_rule_set = (node,value_attr,root_id) => {
   }
 }
 
-exports.create_planned_spending_hierarchy = function(value_attr,root_id,planned_spending_perspective,presentation_scheme) {
+exports.create_planned_spending_hierarchy = function(value_attr,root_id,presentation_scheme) {
   const table8 = Table.lookup('table8');
 
   return d4.hierarchy(Subject.gov,
@@ -334,9 +375,9 @@ exports.create_planned_spending_hierarchy = function(value_attr,root_id,planned_
       } else if (node.is("dept")){
         const dept_estimates_data = table8.q(node).data;
         if (presentation_scheme === "vs_type"){
-          return build_vs_type_node(dept_estimates_data);
+          return table8_org_data_to_vs_type_nodes(dept_estimates_data);
         } else if (presentation_scheme === "est_inst"){
-          return build_est_inst_node(dept_estimates_data);
+          return table8_org_data_to_est_inst_nodes(dept_estimates_data);
         }
       }
     })
