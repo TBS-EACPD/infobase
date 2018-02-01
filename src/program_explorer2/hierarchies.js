@@ -15,7 +15,7 @@ const mock_model = exports.mock_model = function(id,name, description,type, extr
     name,
     is : __type__ => __type__ === type,
   }, extra_attrs);
-};
+}
 
 // a node can be uniquely identified by its full ancestry, which is saved as a property of each node for easy look-up
 const get_id_ancestry = (root_id,node) => {
@@ -24,7 +24,7 @@ const get_id_ancestry = (root_id,node) => {
   } else {
     return root_id ? "root:"+root_id : "root";
   }
-};
+}
 
 const value_functions = exports.value_functions = {
   "exp" : function(node){
@@ -41,7 +41,7 @@ const value_functions = exports.value_functions = {
     }
     return _.first(table12.programs.get(node))["{{pa_last_year}}"];
   },
-};
+}
 
 const post_traversal_value_set = exports.post_traversal_value_set = function(node,value_attr,root_id){
   node.id_ancestry = get_id_ancestry(root_id,node);
@@ -57,7 +57,7 @@ const post_traversal_value_set = exports.post_traversal_value_set = function(nod
     node.fte = d4.sum(node.children, d=>d.fte);
     node.value = d4.sum(node.children, d=>d.value);
   }
-};
+}
 
 const post_traversal_search_string_set = function(node){
   node.data.search_string = "";
@@ -67,7 +67,7 @@ const post_traversal_search_string_set = function(node){
   if (node.data.description){
     node.data.search_string += _.deburr(node.data.description.replace(/<(?:.|\n)*?>/gm, '').toLowerCase());
   }
-};
+}
 
 exports.create_ministry_hierarchy = function(value_attr,skip_crsos,root_id){
   return d4.hierarchy(Subject.gov,
@@ -192,7 +192,7 @@ exports.create_spend_type_hierarchy = function(value_attr,root_id) {
       post_traversal_search_string_set(node);
     })
     .sort( absolute_value_sort );
-};
+}
 
 
 const glossary_entry_from_inst_form_type_id = (type_id) => {
@@ -215,16 +215,6 @@ const glossary_entry_from_inst_form_type_id = (type_id) => {
   return GlossaryEntry.lookup(glossary_key).definition;
 }
 
-const org_info_post_traversal_rule_set = (node,value_attr,root_id) => {
-  node.id_ancestry = get_id_ancestry(root_id,node);
-  if (node.data.is("dept")){
-    node[value_attr] = node.value = node.data.value = 1;
-  } else {
-    node.children = _.filter(node.children,d=>d.value!==false && d.value !== 0);
-    node[value_attr] = node.value = d4.sum(node.children, d=>d.value);
-  }
-}
-
 const orgs_to_inst_form_nodes = (orgs) => {
   return _.chain(orgs)
     .reject("is_dead")
@@ -244,6 +234,16 @@ const orgs_to_inst_form_nodes = (orgs) => {
     })
     .flatten()
     .value();
+}
+
+const org_info_post_traversal_rule_set = (node,value_attr,root_id) => {
+  node.id_ancestry = get_id_ancestry(root_id,node);
+  if (node.data.is("dept")){
+    node[value_attr] = node.value = node.data.value = 1;
+  } else {
+    node.children = _.filter(node.children,d=>d.value!==false && d.value !== 0);
+    node[value_attr] = node.value = d4.sum(node.children, d=>d.value);
+  }
 }
 
 exports.create_org_info_ministry_hierarchy = function(value_attr,root_id) {
@@ -268,7 +268,7 @@ exports.create_org_info_ministry_hierarchy = function(value_attr,root_id) {
         return absolute_value_sort(a,b);
       }
     });
-};
+}
 
 exports.create_org_info_inst_form_hierarchy = function(value_attr,root_id,grand_parent_inst_form_group) {
   return d4.hierarchy(Subject.gov,
@@ -295,4 +295,54 @@ exports.create_org_info_inst_form_hierarchy = function(value_attr,root_id,grand_
         return absolute_value_sort(a,b);
       }
     });
-};
+}
+
+
+const orgs_with_planned_spending = () => { 
+  return _.chain(Subject.Ministry.get_all())
+    .map(ministry => ministry.orgs)
+    .flatten()
+    .filter( org => _.indexOf(org.table_ids, "table8") !== -1)
+    .value();
+}
+
+const build_vs_type_node = (dept_estimates_data) => {
+  return false;
+}
+
+const build_est_inst_node = (dept_estimates_data) => {
+  return false;
+}
+
+const planned_spending_post_traversal_rule_set = (node,value_attr,root_id) => {
+  node.id_ancestry = get_id_ancestry(root_id,node);
+  if (node.data.is("vs_type") || node.data.is("est_inst")){
+    node[value_attr] = node.value = node.data.value;
+  } else {
+    node.children = _.filter(node.children, d => d.value !== false && d.value !== 0);
+    node[value_attr] = node.value = d4.sum(node.children, d=>d.value);
+  }
+}
+
+exports.create_planned_spending_hierarchy = function(value_attr,root_id,planned_spending_perspective,presentation_scheme) {
+  const table8 = Table.lookup('table8');
+
+  return d4.hierarchy(Subject.gov,
+    node => {
+      if (node.is("gov")){
+        return orgs_with_planned_spending();
+      } else if (node.is("dept")){
+        const dept_estimates_data = table8.q(node).data;
+        if (presentation_scheme === "vs_type"){
+          return build_vs_type_node(dept_estimates_data);
+        } else if (presentation_scheme === "est_inst"){
+          return build_est_inst_node(dept_estimates_data);
+        }
+      }
+    })
+    .eachAfter(node =>{
+      planned_spending_post_traversal_rule_set(node,value_attr,root_id);
+      post_traversal_search_string_set(node);
+    })
+    .sort( absolute_value_sort );
+}
