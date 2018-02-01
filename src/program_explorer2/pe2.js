@@ -184,7 +184,7 @@ class GovPartition {
       //    "org_info_interests_by_inst_form",
       //  ],
       //},
-      { id: "planned_exp", text: text_maker("partition_planned_spending_data"), presentation_schemes: ["vs_type", "est_inst"] },
+      { id: "planned_exp", text: text_maker("partition_planned_spending_data"), presentation_schemes: ["est_inst", "vs_type"] },
     ], d => d.id === value_attr ? -Infinity : Infinity);
 
     this.all_presentation_schemes = [
@@ -195,8 +195,8 @@ class GovPartition {
       //{ id: "org_info_by_ministry", text: text_maker("partiton_org_info_by_min") },
       //{ id: "org_info_federal_orgs_by_inst_form", text: text_maker("partiton_org_info_federal_orgs_by_inst_form") },
       //{ id: "org_info_interests_by_inst_form", text: text_maker("partiton_org_info_interests_by_inst_form") },
-      { id: "vs_type", text: text_maker("partition_vote_state_perspective") },
       { id: "est_inst", text: text_maker("partition_est_inst_perspective") },
+      { id: "vs_type", text: text_maker("partition_vote_state_perspective") },
     ];
 
     const presentation_schemes = _.chain(this.all_presentation_schemes)
