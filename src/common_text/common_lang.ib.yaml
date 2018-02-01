@@ -38,6 +38,9 @@ spent:
 spent_up_to:
   en: Spent up to
   fr: Dépensé jusqu'à 
+will_spend:
+  en: Will spend
+  fr: Va dépenser
 expand_all:
   en: Expand all
   fr: Afficher tout

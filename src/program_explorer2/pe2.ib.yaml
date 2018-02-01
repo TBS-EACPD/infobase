@@ -6,6 +6,13 @@ partition_popup_top_row:
       {{> "partition_popup_year"}}
       {{> "partition_popup_spending_and_fte_values"}}
     </div>
+partition_popup_planned_spending_top_row:
+  handlebars_partial: true
+  text: |
+    <div class='mrgn-bttm-md popup-row-top popup-font-m popup-row-bottom-border'>
+      {{> "partition_popup_year"}}
+      {{> "partition_popup_planned_spending_value"}}
+    </div>
 partition_popup_year:
   handlebars_partial: true
   text: |
@@ -31,6 +38,20 @@ partition_popup_spending_value_split:
   text: |
     <span class='stat2 stat-split popup-font-m'>
     {{> "partition_popup_spending_value_common"}}
+partition_popup_planned_spending_value:
+  handlebars_partial: true
+  text: |
+    <span class='stat1 popup-font-m'>
+      {{gt "will_spend"}}
+      </br>
+      {{#if planned_exp_is_negative}}
+        <text style='color:red;'>
+          {{fmt_compact1 planned_exp}}
+        </text>
+      {{else}}
+        {{fmt_compact1 planned_exp}}
+      {{/if}}
+    </span>
 partition_popup_spending_value_common:
   handlebars_partial: true
   text: |
@@ -180,6 +201,7 @@ partition_hwh_tag_popup:
     {{> "partition_popup_description"}}
     {{> "partition_popup_infograph_link"}}
     {{> "partition_popup_focus_button"}}
+
 partition_org_info_org_popup:
   transform: [handlebars]
   text: |
@@ -202,6 +224,14 @@ partition_org_info_ministry_or_inst_form_groups_popup:
     {{> "partition_popup_name"}}
     {{> "partition_popup_org_info_child_org_count"}}
     {{> "partition_popup_focus_button"}}
+
+partition_planned_spending_org_popup:
+  transform: [handlebars]
+  text: |
+    {{> "partition_popup_planned_spending_top_row"}}
+    {{> "partition_popup_name"}}
+    {{> "partition_popup_description"}}
+    {{> "partition_popup_infograph_link"}}
 
 ## Other popups
 partition_unfocus_all_popup:

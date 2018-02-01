@@ -648,31 +648,36 @@ class GovPartition {
     
     this.value_formater = d => wrap_in_brackets(formaters[this.value_attr](d[this.value_attr]));
     
-    //this.popup_template = function(d){
-    //  const common_popup_options = get_common_popup_options(d);
-    //  if (d.data.is("program_fragment")) {
-    //    return text_maker("partition_program_popup", 
-    //      _.extend(common_popup_options, {
-    //        up_to: false,
-    //        dept_name: d.data.dept.name,
-    //        dept_id: d.data.dept.id,
-    //        level: "program",
-    //        id: d.data.program_id,
-    //        description: d.data.description,
-    //      })
-    //    );
-    //  } else if (d.data.is("so")) {
-    //    return text_maker("partition_so_popup", 
-    //      _.extend(common_popup_options, {
-    //        description: d.data.description,
-    //      })
-    //    );
-    //  } else if (d.data.is("type_of_spending")) {
-    //    return text_maker("partition_ministry_or_sa_popup", 
-    //      common_popup_options
-    //    );
-    //  }
-    //}
+    this.popup_template = function(d){
+      const common_popup_options = _.assign(
+        {}, 
+        get_common_popup_options(d),
+        {
+          year: run_template("{{est_in_year}}"),
+          planned_exp: d.value,
+          planned_exp_is_negative: d.value < 0,
+        }
+      );
+
+      if ( d.data.is("vs_Type") || d.data.is("est_inst") ) {
+        return text_maker("partition_program_popup", 
+          _.extend(common_popup_options, {
+            up_to: false,
+            dept_name: d.data.dept.name,
+            dept_id: d.data.dept.id,
+            level: "program",
+            id: d.data.program_id,
+            description: d.data.description,
+          })
+        );
+      } else if (d.data.is("dept")) {
+        return text_maker("partition_planned_spending_org_popup", 
+          _.extend(common_popup_options, {
+            description: d.data.mandate,
+          })
+        );
+      }
+    }
 
     this.update_diagram_notes();
 
