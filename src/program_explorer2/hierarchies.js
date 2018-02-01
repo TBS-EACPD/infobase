@@ -5,8 +5,11 @@ const {Table} = require('../core/TableClass.js');
 const {text_maker} = require("../models/text");
 const { sos } = require('../models/businessConstants.js');
 const { InstForm } = require('../models/subject.js');
+
 const absolute_value_sort = (a,b) => - ( Math.abs(a.value) - Math.abs(b.value) );
 const alphabetic_name_Sort = (a,b) => a.data.name.toLowerCase().localeCompare( b.data.name.toLowerCase() );
+
+const get_glossary_entry = (glossary_key) => GlossaryEntry.lookup(glossary_key).definition;
 
 const mock_model = exports.mock_model = function(id,name, description,type, extra_attrs={} ){
   return Object.assign({
@@ -144,7 +147,7 @@ exports.create_spend_type_hierarchy = function(value_attr,root_id) {
           return mock_model(
             so.text+so_num, 
             so.text,
-            GlossaryEntry.lookup(glossary_key).definition,
+            get_glossary_entry(glossary_key),
             "so",
             {plural,so_num}
           );
@@ -212,7 +215,7 @@ const glossary_entry_from_inst_form_type_id = (type_id) => {
   const glossary_key = type_id === "parl_ent" ?
     "PARL_ORG" :
     "IFORM_"+type_id_to_glossary_suffix_map[type_id];
-  return GlossaryEntry.lookup(glossary_key).definition;
+  return get_glossary_entry(glossary_key);
 }
 
 const orgs_to_inst_form_nodes = (orgs) => {
@@ -306,7 +309,7 @@ const orgs_with_planned_spending = () => {
     .value();
 }
 
-const table8_common_node_mapping = (data_for_node_mapping) => {
+const estimates_common_node_mapping = ({data_for_node_mapping, is, plural, glossary_entry_by_id_func}) => {
   return _.chain(data_for_node_mapping)
     .groupBy("id")
     .map( grouped_rows => {
@@ -315,9 +318,9 @@ const table8_common_node_mapping = (data_for_node_mapping) => {
       return {
         id: first_row.id,
         name: first_row.name,
-        description: first_row.description,
-        is: first_row.is,
-        plural: first_row.plural,
+        description: glossary_entry_by_id_func(first_row.id),
+        is: is,
+        plural: plural,
         value: value_sum,
       }
     })
@@ -325,34 +328,60 @@ const table8_common_node_mapping = (data_for_node_mapping) => {
     .value();
 }
 
-const table8_org_data_to_vs_type_nodes = (dept_estimates_data) => {
-  const data_for_node_mapping = _.map(dept_estimates_data, row => {
+const org_estimates_data_to_vs_type_nodes = (org_estimates_data) => {
+
+  const vs_type_to_glossary_key_dictionary = {
+    bull: "shit",
+  };
+  const get_glossary_entry_by_vs_type = (vs_type) => {
+    const glossary_key = vs_type_to_glossary_key_dictionary[vs_type]
+    return glossary_key ? get_glossary_entry(glossary_key) : false;
+  }
+
+  const data_for_node_mapping = _.map(org_estimates_data, row => {
     return {
       id: row.votestattype,
-      name: row.desc,
-      description: "foo",
+      name: text_maker("vstype"+row.votestattype),
       value: row["{{est_in_year}}_estimates"],
-      is: __type__ => __type__ === "vs_type",
-      plural: ()=> text_maker("partition_vote_state_perspective"),
     }
   });
 
-  return table8_common_node_mapping(data_for_node_mapping);
+  return estimates_common_node_mapping({
+    data_for_node_mapping,
+    is: __type__ => __type__ === "vs_type",
+    plural: ()=> text_maker("partition_vote_state_perspective"),
+    glossary_entry_by_id_func: get_glossary_entry_by_vs_type,
+  });
 }
 
-const table8_org_data_to_est_inst_nodes = (dept_estimates_data) => {
-  const data_for_node_mapping = _.map(dept_estimates_data, row => {
+const org_estimates_data_to_est_inst_nodes = (org_estimates_data) => {
+
+  const est_doc_code_to_glossary_key_dictionary = {
+    MAINS: "MAINS",
+    VA: "VOTED",
+    SEA: "SUPPSA",
+    SEB: "SUPPSB",
+    SEC: "SUPPSC",
+  };
+  const get_glossary_entry_by_est_doc_code = (est_doc_code) => {
+    const glossary_key = est_doc_code_to_glossary_key_dictionary[est_doc_code]
+    return glossary_key ? get_glossary_entry(glossary_key) : false;
+  }
+
+  const data_for_node_mapping = _.map(org_estimates_data, row => {
     return {
       id: row.est_doc_code,
       name: row.est_doc,
-      description: "foo",
       value: row["{{est_in_year}}_estimates"],
-      is: __type__ => __type__ === "est_inst",
-      plural: ()=> text_maker("partition_est_inst_perspective"),
-    }
+    };
   });
 
-  return table8_common_node_mapping(data_for_node_mapping);
+  return estimates_common_node_mapping({
+    data_for_node_mapping,
+    is: __type__ => __type__ === "est_inst",
+    plural: ()=> text_maker("partition_est_inst_perspective"),
+    glossary_entry_by_id_func: get_glossary_entry_by_est_doc_code,
+  });
 }
 
 const planned_spending_post_traversal_rule_set = (node,value_attr,root_id) => {
@@ -373,11 +402,11 @@ exports.create_planned_spending_hierarchy = function(value_attr,root_id,presenta
       if (node.is("gov")){
         return orgs_with_planned_spending();
       } else if (node.is("dept")){
-        const dept_estimates_data = table8.q(node).data;
+        const org_estimates_data = table8.q(node).data;
         if (presentation_scheme === "vs_type"){
-          return table8_org_data_to_vs_type_nodes(dept_estimates_data);
+          return org_estimates_data_to_vs_type_nodes(org_estimates_data);
         } else if (presentation_scheme === "est_inst"){
-          return table8_org_data_to_est_inst_nodes(dept_estimates_data);
+          return org_estimates_data_to_est_inst_nodes(org_estimates_data);
         }
       }
     })
