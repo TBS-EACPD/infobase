@@ -9,6 +9,8 @@ import panel4_def from '../panels/example-panel4.js';
 import panel5_def from '../panels/example-panel5.js';
 import static_panel_def from '../panels/static-panel-example.js';
 import basic_trend_panel from './panels/basic_trend_panel.js';
+import pa_vote_stat from './panels/pa-vote-stat-panel.js';
+import program_resources from './panels/program-resources.js';
 
 import { NavLink } from 'react-router-dom';
 
@@ -32,10 +34,13 @@ function get_panel_definitions(level, bubble){
     if(bubble==="intro"){
       return [ basic_trend_panel, panel1_def, panel2_def ];
     } else if(bubble==="fin"){
-      return [ panel3_def, panel4_def];
+      return [ pa_vote_stat, panel3_def, panel4_def];
     } else if(bubble==="ppl"){
-      return [ panel5_def, static_panel_def ];
+      return [ program_resources, panel5_def, static_panel_def ];
     }
+  }
+  if(level === 'gov'){
+    return [ basic_trend_panel ];
   }
 }
 
@@ -45,9 +50,9 @@ function get_panel_definitions(level, bubble){
   alternatively, use an interface type and create a schema-field called infograph name
 */ 
 const query = gql`
-  query BaseInfographQuery($lang: String!, $org_id: String!) {
+  query BaseInfographQuery($lang: String!, $id: String!, $level: Level!) {
     root(lang: $lang){
-      org(org_id:$org_id){
+      subject(level: $level, id: $id){
         name
       }
     }
@@ -66,7 +71,7 @@ class Infograph_ extends React.Component {
     } = this.props;
 
     const { loading } = data;
-    const name = _.get(data, "root.org.name");
+    const name = _.get(data, "root.subject.name");
 
 
     return <div>
@@ -78,7 +83,7 @@ class Infograph_ extends React.Component {
       </div>
       <div>
         <nav>
-          <ul>
+          <ul role="tablist">
             {bubbles.map( ({name, key}) => 
               <li key={key}>
                 <NavLink 
@@ -122,7 +127,8 @@ export const Infograph = graphql(
       },
     }) => ({
       variables: {
-        org_id: id,
+        level,
+        id,
         lang: window.lang,
       },
     }),

@@ -5,6 +5,8 @@ const {
   everythingSearch,
 } = require('./search/search.js');
 
+const { run_template } = require('./models/text.js');
+
 // Import utility components from the ./components directory, to be re-exported here for easy requiring in the InfoBase
 const {
   FirstChild,
@@ -123,6 +125,8 @@ const FootnoteList = ({ footnotes }) => <div style={{padding:"10px"}}>
   </ul>
 </div>;
 
+const Year = ({y}) => run_template(`{{${y}}}`);
+
 module.exports = exports = {
   FirstChild,
   AccordionEnterExit,
@@ -145,4 +149,5 @@ module.exports = exports = {
   SortIndicators,
   RadioButtons,
   FootnoteList,
+  Year,
 }

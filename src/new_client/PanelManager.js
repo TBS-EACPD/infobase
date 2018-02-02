@@ -2,8 +2,83 @@
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 
+
+
+
+/*
+
+# Panel API 
+
+
+Panels definitions are of the form: {
+  key: String,
+  levels: LevelArg,
+  query: gql query document OR level-indexed gql query documents OR null
+  data_to_props: ({ root }, subject ) => any kind of props
+  component: ({ 
+    data: ...props_returned_from_above_data_to_props,
+    subject_context: { id, level },
+
+  }) => ReactElement
+}
+
+LevelArg = "*", ["org", "gov", "program"]
+
+
+
+
+
+
+
+*/ 
+
+
+
+
+
+
+
+
+//hacky duck-typing check to separate cases of just query  vs level-indexed queries
+const is_gql_query = obj => obj && obj.kind === "Document" && obj.loc;
+
+
+const dummy_query = gql`
+  query dummy_query($lang: String!) {
+    root(lang: $lang){
+      non_field
+    }
+}
+`;
+const get_level_appropriate_query_for_panel = (panel_def, level) => {
+
+  const { levels, query, key } = panel_def;
+
+
+  if(!_.includes(levels, level) && levels !== "*"){
+    throw `Panel ${key} does not support ${level}`;
+  }
+
+  //if the query is not a level-indexed object of queries, or if it's empty, use that
+  if(is_gql_query(query)){
+    return query;
+  }
+
+  if(!query){
+    return dummy_query;
+  }
+
+  if(query){
+    return query[level]  || query["*"];
+  }
+  
+
+};
+
 const Presentational = props => {
   const { panel_defs, subject_context, a11y_mode } = props;
+
+  const { level } = subject_context;
 
   const arePanelDepsLoading = !_.chain(panel_defs)
     .filter("query") //filter out static panels
@@ -34,7 +109,7 @@ const Presentational = props => {
         <Component
           data={
             _.isFunction(data_to_props) ? 
-            data_to_props(data_props) : 
+            data_to_props(data_props, level) : 
             null  // static panels won't have data_to_props nor data_props
           }
           gql_props={
@@ -79,26 +154,17 @@ const global_graphql_vars = {
   lang: window.lang,
 };
 
-const dummy_query = gql`
-  query dummy_query($lang: String!) {
-    root(lang: $lang){
-      non_field
-    }
-}
-`;
+
 
 function panel_def_to_connecter(panel_def, subject_context){
 
-  const { key, query: query_func, vars: vars_func } = panel_def;
+  const { key, vars: vars_func } = panel_def;
 
   if(!panel_def.query){
     return null;
   }
   
-  let query = _.isFunction(query_func) ? query_func(subject_context) : query_func;
-  if(!query){
-    query = dummy_query;
-  }
+  let query = get_level_appropriate_query_for_panel(panel_def, subject_context.level);
   let vars = _.isFunction(vars_func) ? vars_func(subject_context) : vars_func;
 
   

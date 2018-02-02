@@ -9,6 +9,7 @@ const Component = ({subject_context}) => <div>
 export default {
   //static panels are identified by those having no query property.
   //data_to_props will also be ignored in this case
+  levels: ["*"],
   query: null,
   key: "static-panel-example",
   component: Component,

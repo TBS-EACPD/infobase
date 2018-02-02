@@ -31,6 +31,7 @@ function data_to_props({ root: { org: { programs  }} }){
 }
 
 export default {
+  levels: [ 'org' ],
   key: "example1",
   query,
   component: Component,
