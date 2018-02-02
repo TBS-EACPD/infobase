@@ -331,7 +331,14 @@ const estimates_common_node_mapping = ({data_for_node_mapping, is, plural, gloss
 const org_estimates_data_to_vs_type_nodes = (org_estimates_data) => {
 
   const vs_type_to_glossary_key_dictionary = {
-    bull: "shit",
+    "1": "OP",
+    "2": "CAP",
+    "3": "G&C",
+    "4": false, // Debt Forgiveness
+    "5": false, // Payments to Crown Corps
+    "6": "TB",
+    "9": false, // Other
+    "999": "STAT",
   };
   const get_glossary_entry_by_vs_type = (vs_type) => {
     const glossary_key = vs_type_to_glossary_key_dictionary[vs_type]
@@ -358,7 +365,9 @@ const org_estimates_data_to_est_inst_nodes = (org_estimates_data) => {
 
   const est_doc_code_to_glossary_key_dictionary = {
     MAINS: "MAINS",
+    MYA: false, // Multi Year Appropriations
     VA: "VOTED",
+    SA: false, // Statutory Adjustments
     SEA: "SUPPSA",
     SEB: "SUPPSB",
     SEC: "SUPPSC",
