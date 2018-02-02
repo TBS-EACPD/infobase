@@ -232,9 +232,9 @@ a.boxclose {
 .partition-content.negative-value{
   background-image: repeating-linear-gradient(-45deg, transparent, transparent 1px, rgba(8, 40, 86,.5) 1px, rgba(8, 40, 86,.5) 5px);
 }
-.partition-negative-title-backing.fat:not(.partition-right-ie-fix){
-  display: inherit;
-  align-items: inherit;
+.partition-negative-title-backing:not(.partition-right-ie-fix){
+  display: inherit !important;
+  align-items: inherit !important;
 }
 .partition-negative-title-backing:not(.fat){
     align-items: center;
