@@ -584,7 +584,7 @@ partition_vote_state_perspective:
   en: |
     {{gt "votestat"}} Type
   fr: |
-    {{gt "votestat"}} todo
+    Type de {{gt "votestat"}}
 partition_est_inst_perspective:
   en: Estimates Instrument
   fr: Instrument des dépenses
