@@ -42,7 +42,7 @@ partition_popup_planned_spending_value:
   handlebars_partial: true
   text: |
     <span class='stat1 popup-font-m'>
-      {{gt "will_be_spending_spend"}}
+      {{gt "plans_to_spend"}}
       </br>
       {{#if planned_exp_is_negative}}
         <text style='color:red;'>
@@ -455,14 +455,14 @@ partition_spending_will_be:
   transform: [handlebars]
   en: |
     {{#if show_root_rollup}}
-    We will be spending   
+    We plan on spending  
     <p class='amount'><a class="infographic" href='#orgs/gov/gov/infograph/financial'>{{rawfmt_compact x}}</a></p>
     in
     {{/if}}
     <span class='text-nowrap'>{{planning_year_1}}</span>
   fr: |
     {{#if show_root_rollup}}
-    Nous dépenserons
+    todo
     <p class='amount'><a class="infographic" href='#orgs/gov/gov/infograph/financial'>{{rawfmt_compact x}}</a></p>
     en
     {{/if}}

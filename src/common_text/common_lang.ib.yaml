@@ -44,6 +44,9 @@ will_spend:
 will_be_spending_spend:
   en: Will be spending
   fr: Dépenserons
+plans_to_spend:
+  en: Plans to spend
+  fr: todo
 expand_all:
   en: Expand all
   fr: Afficher tout
