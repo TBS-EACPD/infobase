@@ -91,6 +91,14 @@ partition_popup_name:
     <div class='mrgn-bttm-md popup-row-bottom-border popup-font-xl'>
       {{name}}
     </div>
+partition_popup_parent_dept_name:
+  handlebars_partial: true
+  text: |
+    <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
+      <a href='#orgs/dept/{{dept_id}}/infograph' class='infographic' style='color:inherit;'> 
+        {{dept_name}}
+      </a>
+    </div>
 partition_popup_description:
   handlebars_partial: true
   text: |
@@ -155,11 +163,7 @@ partition_program_popup:
   text: |
     {{> "partition_popup_top_row"}}
     {{> "partition_popup_name"}}
-    <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
-      <a href='#orgs/dept/{{dept_id}}/infograph' class='infographic' style='color:inherit;'> 
-        {{dept_name}}
-      </a>
-    </div>
+    {{> "partition_popup_parent_dept_name"}}
     {{> "partition_popup_description"}}
     <span class='bold' style='color:#333'>
       {{gt 'tag'}}(s)
@@ -237,6 +241,7 @@ partition_planned_vs_type_or_est_inst:
   text: |
     {{> "partition_popup_planned_spending_top_row"}}
     {{> "partition_popup_name"}}
+    {{> "partition_popup_parent_dept_name"}}
     {{> "partition_popup_description"}}
     
 
