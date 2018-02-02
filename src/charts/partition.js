@@ -129,20 +129,19 @@ export class Partition {
       .each(function(d){
         let sel = d4.select(this)
         
-        if (d.value <0) {
-          // Used in blanking out the striped negative value background consistently (for both fat and non-fat titles),
-          // improves readability
-          sel = sel
-            .append("div")
-            .classed("partition-negative-title-backing",true);
-        } else if(d.data.is("compressed") && window.isIE()){
-          // IE css for flex box and align-item are inconsistent, need an extra div
+        if ((d.data.is("compressed") && window.isIE()) || d.value < 0){
+          // partition-right-ie-fix: IE css for flex box and align-item are inconsistent, need an extra div
           // between the .content div and the .partition-content-title div to (partially) fix vertical alignment
+
+          // partition-negative-title-backing: Used in blanking out the striped negative value background consistently
+          // (for both fat and non-fat titles),improves readability
+
           sel = sel
             .append("div")
-            .classed("partition-right-ie-fix",true);
+            .classed("partition-right-ie-fix", d.data.is("compressed") && window.isIE())
+            .classed("partition-negative-title-backing", d.value < 0)
         }
-        
+          
         sel
           .append("div")
           .attr("tabindex", 0)
@@ -194,8 +193,12 @@ export class Partition {
         d.more_than_fair_space = title.offsetHeight > d.scaled_height;
         d_node
           .select(".partition-content-title")
-          .classed("fat", d => d.more_than_fair_space && d.value >= 0 )
+          .classed("fat", d => d.more_than_fair_space)
           .classed("negative-value", d => d.value <0);
+        
+        d_node
+          .select(".partition-negative-title-backing")
+          .classed("fat", d => d.more_than_fair_space);
 
         // IE fixes:  
         d_node
