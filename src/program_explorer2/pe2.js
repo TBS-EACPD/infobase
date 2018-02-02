@@ -659,14 +659,9 @@ class GovPartition {
         }
       );
 
-      if ( d.data.is("vs_Type") || d.data.is("est_inst") ) {
-        return text_maker("partition_program_popup", 
+      if ( d.data.is("vs_type") || d.data.is("est_inst") ) {
+        return text_maker("partition_planned_vs_type_or_est_inst", 
           _.extend(common_popup_options, {
-            up_to: false,
-            dept_name: d.data.dept.name,
-            dept_id: d.data.dept.id,
-            level: "program",
-            id: d.data.program_id,
             description: d.data.description,
           })
         );

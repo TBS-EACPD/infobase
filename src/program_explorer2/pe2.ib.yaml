@@ -232,6 +232,13 @@ partition_planned_spending_org_popup:
     {{> "partition_popup_name"}}
     {{> "partition_popup_description"}}
     {{> "partition_popup_infograph_link"}}
+partition_planned_vs_type_or_est_inst:
+  transform: [handlebars]
+  text: |
+    {{> "partition_popup_planned_spending_top_row"}}
+    {{> "partition_popup_name"}}
+    {{> "partition_popup_description"}}
+    
 
 ## Other popups
 partition_unfocus_all_popup:
