@@ -184,7 +184,7 @@ class GovPartition {
       //    "org_info_interests_by_inst_form",
       //  ],
       //},
-      { id: "planned_exp", text: text_maker("partition_planned_spending_data"), presentation_schemes: ["est_inst", "vs_type", "org_planned_spend"] },
+      { id: "planned_exp", text: text_maker("partition_planned_spending_data"), presentation_schemes: ["org_planned_spend", "est_inst", "vs_type"] },
     ], d => d.id === value_attr ? -Infinity : Infinity);
 
     this.all_presentation_schemes = [
@@ -195,9 +195,9 @@ class GovPartition {
       //{ id: "org_info_by_ministry", text: text_maker("partiton_org_info_by_min") },
       //{ id: "org_info_federal_orgs_by_inst_form", text: text_maker("partiton_org_info_federal_orgs_by_inst_form") },
       //{ id: "org_info_interests_by_inst_form", text: text_maker("partiton_org_info_interests_by_inst_form") },
+      { id: "org_planned_spend", text: text_maker("orgs") },
       { id: "est_inst", text: text_maker("partition_est_inst_perspective") },
       { id: "vs_type", text: text_maker("partition_vote_state_perspective") },
-      { id: "org_planned_spend", text: text_maker("orgs") },
     ];
 
     const presentation_schemes = _.chain(this.all_presentation_schemes)
@@ -360,7 +360,7 @@ class GovPartition {
           node.how_many_to_show = Infinity;
         }else if (node.data.is("tag") && node.children[0].data.is("program")){
           node.how_many_to_show = function(_node){
-            if (_node.children.length <= 1){ return [_node.children,[]];}
+            if (_node.children.length <= 2){ return [_node.children,[]];}
             const show = [_.head(_node.children)];
             const hide = _.tail(_node.children);
             const unhide = _.filter(hide, __node=> __node.value > hierarchy.value/100);
@@ -421,7 +421,7 @@ class GovPartition {
           node.how_many_to_show = Infinity;
         } else if (node.data.is("tag") && node.children[0].data.is("program")){
           node.how_many_to_show = function(_node){
-            if (_node.children.length <= 1){ return [_node.children,[]];}
+            if (_node.children.length <= 2){ return [_node.children,[]];}
             const show = [_.head(_node.children)];
             const hide = _.tail(_node.children);
             const unhide = _.filter(hide, __node=> __node.value > hierarchy.value/100);
@@ -484,7 +484,7 @@ class GovPartition {
           node.how_many_to_show = Infinity;
         } else if (node.data.is("so") ){
           node.how_many_to_show = function(_node){
-            if (_node.children.length <= 1){ return [_node.children,[]];}
+            if (_node.children.length <= 2){ return [_node.children,[]];}
             const show = [_.head(_node.children)];
             const hide = _.tail(_node.children);
             const unhide = _.filter(hide, __node=> __node.value > hierarchy.value/100);
@@ -639,7 +639,7 @@ class GovPartition {
         node.__value__ = node.value;
         node.open = true;
         node.how_many_to_show = function(_node){
-          if (_node.children.length <= 1){ return [_node.children,[]];}
+          if (_node.children.length <= 2){ return [_node.children,[]];}
           const show = [_.head(_node.children)];
           const hide = _.tail(_node.children);
           const unhide = _.filter(hide, __node=> __node.value > hierarchy.value/100);
@@ -663,13 +663,35 @@ class GovPartition {
         }
       );
 
-      if ( d.data.is("vs_type") || d.data.is("est_inst") ) {
+      if (d.data.is("vote")) {
         return text_maker("partition_planned_vs_type_or_est_inst", 
           _.extend(common_popup_options, {
             description: d.data.description,
             rpb_link: d.data.rpb_link,
             dept_name: d.parent.data.name,
             dept_id: d.parent.data.id,
+          })
+        );
+      } else if ( d.data.is("vs_type") || d.data.is("est_inst") ) {
+
+        let dept_name, dept_id;
+        if (presentation_scheme === "org_planned_spend") {
+          if (d.data.is("vs_type")) {
+            dept_name = d.parent.parent.data.name;
+            dept_id = d.parent.parent.data.id;
+          } else if (d.data.is("est_inst")) {
+            dept_name = d.parent.data.name;
+            dept_id = d.parent.data.id;
+          }
+        }
+
+        return text_maker("partition_planned_vs_type_or_est_inst", 
+          _.extend(common_popup_options, {
+            description: d.data.description,
+            rpb_link: d.data.rpb_link,
+            show_parent_dept_name: presentation_scheme === "org_planned_spend",
+            dept_name,
+            dept_id,
           })
         );
       } else if (d.data.is("dept")) {

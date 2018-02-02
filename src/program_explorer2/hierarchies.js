@@ -344,7 +344,7 @@ const get_glossary_entry_by_vs_type = (vs_type) => {
 
 const vs_type_node_mapping_common_options = {
   is: __type__ => __type__ === "vs_type",
-  plural: ()=> text_maker("partition_vote_state_perspective"),
+  plural: () => text_maker("partition_vote_state_perspective"),
   glossary_entry_by_id_func: get_glossary_entry_by_vs_type,
 };
 
@@ -386,7 +386,7 @@ const get_glossary_entry_by_est_doc_code = (est_doc_code) => {
 
 const est_inst_node_mapping_common_options = {
   is: __type__ => __type__ === "est_inst",
-  plural: ()=> text_maker("partition_est_inst_perspective"),
+  plural: () => text_maker("partition_est_inst_perspective"),
   glossary_entry_by_id_func: get_glossary_entry_by_est_doc_code,
 };
 
@@ -414,15 +414,19 @@ const subject_to_est_inst_nodes = (node) => {
 
 const vote_node_mapping_common_options = {
   is: __type__ => __type__ === "vote",
-  plural: () => "todo",
+  plural: () => text_maker("votestat_item"),
   glossary_entry_by_id_func: () => false,
 };
 
 const est_inst_or_vs_type_node_to_vote_nodes = (node) => {
   const data_for_node_mapping = _.map(node.data_for_children, row => {
     return {
-      id: row.votenum,
-      name: "vote " + row.votenum,
+      id: row.votenum === "S" ? 
+        row.desc :
+        row.votenum,
+      name: row.votenum === "S" ? 
+        text_maker("stat") + ": " + row.desc :
+        text_maker("vote_num") + ": " + row.votenum,
       value: row["{{est_in_year}}_estimates"],
       data_for_children: false,
     };
@@ -437,10 +441,31 @@ const est_inst_or_vs_type_node_to_vote_nodes = (node) => {
   );
 }
 
+const est_inst_node_to_vs_type_nodes = (node) => {
+  const data_for_node_mapping = _.map(node.data_for_children, row => {
+    return {
+      id: row.votestattype,
+      name: row.votestattype !== 999 ? text_maker("vstype"+row.votestattype) : text_maker("stat_items"),
+      value: row["{{est_in_year}}_estimates"],
+      data_for_children: _.omit(row, ["csv_index", "est_doc_code", "est_doc"]),
+    };
+  });
+
+  return estimates_common_node_mapping(
+    _.extend(
+      {},
+      {data_for_node_mapping}, 
+      vs_type_node_mapping_common_options
+    )
+  );
+}
+
 const est_inst_node_rules = (node) => {
   if (node.is("gov")){
     return subject_to_est_inst_nodes(node);
   }  else if (node.is("est_inst")){
+    return est_inst_node_to_vs_type_nodes(node);
+  } else if (node.is("vs_type")){
     return est_inst_or_vs_type_node_to_vote_nodes(node);
   }
 }
@@ -459,25 +484,6 @@ const orgs_with_planned_spending = () => {
     .flatten()
     .filter( org => _.indexOf(org.table_ids, "table8") !== -1)
     .value();
-}
-
-const est_inst_node_to_vs_type_nodes = (node) => {
-  const data_for_node_mapping = _.map(node.data_for_children, row => {
-    return {
-      id: row.votestattype,
-      name: row.votestattype !== 999 ? text_maker("vstype"+row.votestattype) : text_maker("stat_items"),
-      value: row["{{est_in_year}}_estimates"],
-      data_for_children: {},
-    };
-  });
-
-  return estimates_common_node_mapping(
-    _.extend(
-      {},
-      {data_for_node_mapping}, 
-      vs_type_node_mapping_common_options
-    )
-  );
 }
 
 const org_planned_spend_node_rules = (node) => {

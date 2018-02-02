@@ -250,10 +250,18 @@ partition_planned_vs_type_or_est_inst:
   text: |
     {{> "partition_popup_planned_spending_top_row"}}
     {{> "partition_popup_name"}}
-    {{> "partition_popup_parent_dept_name"}}
+    {{#if show_parent_dept_name}}
+      {{> "partition_popup_parent_dept_name"}}
+    {{/if}}
     {{> "partition_popup_description"}}
     {{> "partition_popup_rpb_link"}}
-    
+partition_planned_vote_popup:
+  transform: [handlebars]
+  text: |
+    {{> "partition_popup_planned_spending_top_row"}}
+    {{> "partition_popup_name"}}
+    {{> "partition_popup_description"}}
+    {{> "partition_popup_rpb_link"}}
 
 ## Other popups
 partition_unfocus_all_popup:

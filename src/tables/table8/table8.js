@@ -175,7 +175,7 @@ module.exports = {
       "nick" : "desc",
       "header":{
         "en":"Vote / Statutory Description",
-        "fr":"Crédit / Poste législatifDescription",
+        "fr":"Crédit / Poste législatif Description",
       },
     });
     this.add_col({

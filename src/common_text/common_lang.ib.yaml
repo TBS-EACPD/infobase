@@ -507,11 +507,20 @@ so_cat:
   en: Standard Object Categories
   fr: Regroupement d'article courants
 stat:
-  en: Statutory
+  en: Statutory item
   fr: Poste législatif
 votestat:
   en: Vote / Statutory
   fr: Crédit / poste législatif
+votestat_num:
+  en: Vote / Statutory Number
+  fr: Crédit / Poste législatif Numéro
+votestat_item:
+  en: Vote / Statutory Item
+  fr: Crédit / Poste législatif
+vote_num:
+  en: Vote Number
+  fr: Crédit numéro
 fte:
   en: FTE
   fr: ETP
