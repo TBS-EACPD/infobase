@@ -426,7 +426,7 @@ const est_inst_or_vs_type_node_to_vote_nodes = (node) => {
         row.votenum,
       name: row.votenum === "S" ? 
         text_maker("stat") + ": " + row.desc :
-        text_maker("vote_num") + ": " + row.votenum,
+        row.desc,
       value: row["{{est_in_year}}_estimates"],
       data_for_children: false,
     };
