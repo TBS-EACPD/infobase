@@ -308,7 +308,11 @@ const estimates_common_node_mapping = ({data_for_node_mapping, is, plural, gloss
     .map( grouped_rows => {
       const first_row = grouped_rows[0];
       const value_sum = _.reduce(grouped_rows, (sum, row) => sum + row.value, 0); 
-      const data_for_children = _.map(grouped_rows, row => row.data_for_children); 
+      const data_for_children = _.chain(grouped_rows)
+        .map(row => row.data_for_children)
+        .filter(data => data)
+        .value();
+
       return {
         id: first_row.id,
         name: first_row.name,
@@ -410,7 +414,7 @@ const subject_to_est_inst_nodes = (node) => {
 
 const vote_node_mapping_common_options = {
   is: __type__ => __type__ === "vote",
-  plural: ()=> "todo",
+  plural: () => "todo",
   glossary_entry_by_id_func: () => false,
 };
 
@@ -418,9 +422,9 @@ const est_inst_or_vs_type_node_to_vote_nodes = (node) => {
   const data_for_node_mapping = _.map(node.data_for_children, row => {
     return {
       id: row.votenum,
-      name: row.votenum,
+      name: "vote " + row.votenum,
       value: row["{{est_in_year}}_estimates"],
-      data_for_children: {},
+      data_for_children: false,
     };
   });
 
@@ -490,7 +494,7 @@ const planned_spending_post_traversal_rule_set = (node,value_attr,root_id) => {
   const table8 = Table.lookup('table8');
 
   node.id_ancestry = get_id_ancestry(root_id,node);
-  if (node.data.is("vs_type") || node.data.is("est_inst")){
+  if (node.data.is("vs_type") || node.data.is("est_inst") || node.data.is("vote")){
     node[value_attr] = node.value = node.data.value;
     node.data.rpb_link = rpb_link({ table: table8.id });
   } else {
