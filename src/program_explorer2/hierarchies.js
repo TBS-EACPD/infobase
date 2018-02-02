@@ -336,7 +336,7 @@ const org_estimates_data_to_vs_type_nodes = (org_estimates_data) => {
     "2": "CAP",
     "3": "G&C",
     "4": false, // Debt Forgiveness
-    "5": "PAY_CC", // Payments to Crown Corps
+    "5": "PAY_CC",
     "6": "TB",
     "9": false, // Other
     "999": "STAT",
