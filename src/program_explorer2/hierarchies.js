@@ -349,7 +349,7 @@ const org_estimates_data_to_vs_type_nodes = (org_estimates_data) => {
   const data_for_node_mapping = _.map(org_estimates_data, row => {
     return {
       id: row.votestattype,
-      name: text_maker("vstype"+row.votestattype),
+      name: row.votestattype !== 999 ? text_maker("vstype"+row.votestattype) : text_maker("stat_items"),
       value: row["{{est_in_year}}_estimates"],
     }
   });

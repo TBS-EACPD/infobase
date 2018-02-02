@@ -669,6 +669,9 @@ by_estimates_doc:
 by_estimates_doc_compressed:
   en: By Estimates Mechanism (aggregated carry forwards and transfers)
   fr: Par mécanisme budgétaire (reports de budget et transfers agrégées)
+stat_items:
+  en: Statutory Items
+  fr: Postes législatifs
 all_other_stat_items:
   en: All Other Statutory Items
   fr: Tous les autres postes législatifs
