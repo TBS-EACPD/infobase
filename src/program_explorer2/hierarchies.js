@@ -10,7 +10,7 @@ const {rpb_link}  = require('../link_utils.js');
 const absolute_value_sort = (a,b) => - ( Math.abs(a.value) - Math.abs(b.value) );
 const alphabetic_name_Sort = (a,b) => a.data.name.toLowerCase().localeCompare( b.data.name.toLowerCase() );
 
-const get_glossary_entry = (glossary_key) => GlossaryEntry.lookup(glossary_key).definition;
+const get_glossary_entry = (glossary_key) => GlossaryEntry.lookup(glossary_key) ? GlossaryEntry.lookup(glossary_key).definition : false;
 
 const mock_model = exports.mock_model = function(id,name, description,type, extra_attrs={} ){
   return Object.assign({
@@ -336,7 +336,7 @@ const org_estimates_data_to_vs_type_nodes = (org_estimates_data) => {
     "2": "CAP",
     "3": "G&C",
     "4": false, // Debt Forgiveness
-    "5": false, // Payments to Crown Corps
+    "5": "PAY_CC", // Payments to Crown Corps
     "6": "TB",
     "9": false, // Other
     "999": "STAT",
@@ -366,9 +366,9 @@ const org_estimates_data_to_est_inst_nodes = (org_estimates_data) => {
 
   const est_doc_code_to_glossary_key_dictionary = {
     MAINS: "MAINS",
-    MYA: false, // Multi Year Appropriations
+    MYA: "MYA",
     VA: "VOTED",
-    SA: false, // Statutory Adjustments
+    SA: "ADJUS",
     SEA: "SUPPSA",
     SEB: "SUPPSB",
     SEC: "SUPPSC",
