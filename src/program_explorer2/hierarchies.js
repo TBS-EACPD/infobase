@@ -3,8 +3,9 @@ const Subject = require("../models/subject");
 const {GlossaryEntry} = require("../models/glossary");
 const {Table} = require('../core/TableClass.js');
 const {text_maker} = require("../models/text");
-const { sos } = require('../models/businessConstants.js');
-const { InstForm } = require('../models/subject.js');
+const {sos} = require('../models/businessConstants.js');
+const {InstForm}  = require('../models/subject.js');
+const {rpb_link}  = require('../link_utils.js');
 
 const absolute_value_sort = (a,b) => - ( Math.abs(a.value) - Math.abs(b.value) );
 const alphabetic_name_Sort = (a,b) => a.data.name.toLowerCase().localeCompare( b.data.name.toLowerCase() );
@@ -393,10 +394,11 @@ const org_estimates_data_to_est_inst_nodes = (org_estimates_data) => {
   });
 }
 
-const planned_spending_post_traversal_rule_set = (node,value_attr,root_id) => {
+const planned_spending_post_traversal_rule_set = (node,value_attr,root_id,table8) => {
   node.id_ancestry = get_id_ancestry(root_id,node);
   if (node.data.is("vs_type") || node.data.is("est_inst")){
     node[value_attr] = node.value = node.data.value;
+    node.data.rpb_link = rpb_link({ table: table8.id });
   } else {
     node.children = _.filter(node.children, d => d.value !== false && d.value !== 0);
     node[value_attr] = node.value = d4.sum(node.children, d=>d.value);
@@ -420,7 +422,7 @@ exports.create_planned_spending_hierarchy = function(value_attr,root_id,presenta
       }
     })
     .eachAfter(node =>{
-      planned_spending_post_traversal_rule_set(node,value_attr,root_id);
+      planned_spending_post_traversal_rule_set(node,value_attr,root_id,table8);
       post_traversal_search_string_set(node);
     })
     .sort( absolute_value_sort );

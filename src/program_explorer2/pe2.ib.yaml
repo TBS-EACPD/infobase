@@ -42,7 +42,7 @@ partition_popup_planned_spending_value:
   handlebars_partial: true
   text: |
     <span class='stat1 popup-font-m'>
-      {{gt "will_spend"}}
+      {{gt "will_be_spending_spend"}}
       </br>
       {{#if planned_exp_is_negative}}
         <text style='color:red;'>
@@ -117,6 +117,14 @@ partition_popup_infograph_link:
       class='btn btn-xs btn-block mrgn-bttm-sm infographic' 
       style='background-color:{{color}};'>
       {{gt "partition_infograph_link"}}
+    </a>
+partition_popup_rpb_link:
+  handlebars_partial: true
+  text: |
+    <a href='{{rpb_link}}' 
+      class='btn btn-xs btn-block mrgn-bttm-sm infographic' 
+      style='background-color:{{color}};'>
+      {{gt "see_data"}}
     </a>
 partition_popup_focus_button:
   handlebars_partial: true
@@ -243,6 +251,7 @@ partition_planned_vs_type_or_est_inst:
     {{> "partition_popup_name"}}
     {{> "partition_popup_parent_dept_name"}}
     {{> "partition_popup_description"}}
+    {{> "partition_popup_rpb_link"}}
     
 
 ## Other popups

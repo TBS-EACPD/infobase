@@ -122,9 +122,10 @@ metadata_home_desc:
   en: See more details on the data and links to Open Data
   fr: Voir le complément d'information sur les données et sur les liens vers des sites de données ouvertes
 
-metadata_home_link_text: 
-  en: See the data
-  fr: Voir les données
+metadata_home_link_text:
+  transform: [handlebars]
+  text: |
+    {{gt "see_data"}}
 
 whats_new:
   en: What's new?
