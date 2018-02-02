@@ -184,7 +184,7 @@ class GovPartition {
       //    "org_info_interests_by_inst_form",
       //  ],
       //},
-      { id: "planned_exp", text: text_maker("partition_planned_spending_data"), presentation_schemes: ["est_inst", "vs_type"] },
+      { id: "planned_exp", text: text_maker("partition_planned_spending_data"), presentation_schemes: ["est_inst", "vs_type", "org_planned_spend"] },
     ], d => d.id === value_attr ? -Infinity : Infinity);
 
     this.all_presentation_schemes = [
@@ -197,6 +197,7 @@ class GovPartition {
       //{ id: "org_info_interests_by_inst_form", text: text_maker("partiton_org_info_interests_by_inst_form") },
       { id: "est_inst", text: text_maker("partition_est_inst_perspective") },
       { id: "vs_type", text: text_maker("partition_vote_state_perspective") },
+      { id: "org_planned_spend", text: text_maker("orgs") },
     ];
 
     const presentation_schemes = _.chain(this.all_presentation_schemes)
@@ -619,10 +620,13 @@ class GovPartition {
       this.render();
     }
   }
+  est_inst(){
+    this.planned_spending();
+  }
   vs_type(){
     this.planned_spending();
   }
-  est_inst(){
+  org_planned_spend(){
     this.planned_spending();
   }
   planned_spending(){

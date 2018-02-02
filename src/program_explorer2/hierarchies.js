@@ -302,14 +302,6 @@ exports.create_org_info_inst_form_hierarchy = function(value_attr,root_id,grand_
 }
 
 
-const orgs_with_planned_spending = () => { 
-  return _.chain(Subject.Ministry.get_all())
-    .map(ministry => ministry.orgs)
-    .flatten()
-    .filter( org => _.indexOf(org.table_ids, "table8") !== -1)
-    .value();
-}
-
 const estimates_common_node_mapping = ({data_for_node_mapping, is, plural, glossary_entry_by_id_func}) => {
   return _.chain(data_for_node_mapping)
     .groupBy("id")
@@ -329,7 +321,9 @@ const estimates_common_node_mapping = ({data_for_node_mapping, is, plural, gloss
     .value();
 }
 
-const org_estimates_data_to_vs_type_nodes = (org_estimates_data) => {
+const subject_to_vs_type_nodes = (node) => {
+  const table8 = Table.lookup('table8');
+  const estimates_data = table8.q(node).data;
 
   const vs_type_to_glossary_key_dictionary = {
     "1": "OP",
@@ -346,7 +340,7 @@ const org_estimates_data_to_vs_type_nodes = (org_estimates_data) => {
     return glossary_key ? get_glossary_entry(glossary_key) : false;
   }
 
-  const data_for_node_mapping = _.map(org_estimates_data, row => {
+  const data_for_node_mapping = _.map(estimates_data, row => {
     return {
       id: row.votestattype,
       name: row.votestattype !== 999 ? text_maker("vstype"+row.votestattype) : text_maker("stat_items"),
@@ -362,7 +356,9 @@ const org_estimates_data_to_vs_type_nodes = (org_estimates_data) => {
   });
 }
 
-const org_estimates_data_to_est_inst_nodes = (org_estimates_data) => {
+const subject_to_est_inst_nodes = (node) => {
+  const table8 = Table.lookup('table8');
+  const estimates_data = table8.q(node).data;
 
   const est_doc_code_to_glossary_key_dictionary = {
     MAINS: "MAINS",
@@ -378,7 +374,7 @@ const org_estimates_data_to_est_inst_nodes = (org_estimates_data) => {
     return glossary_key ? get_glossary_entry(glossary_key) : false;
   }
 
-  const data_for_node_mapping = _.map(org_estimates_data, row => {
+  const data_for_node_mapping = _.map(estimates_data, row => {
     return {
       id: row.est_doc_code,
       name: row.est_doc,
@@ -394,7 +390,51 @@ const org_estimates_data_to_est_inst_nodes = (org_estimates_data) => {
   });
 }
 
-const planned_spending_post_traversal_rule_set = (node,value_attr,root_id,table8) => {
+const est_inst_or_vs_type_node_to_vote_nodes = (node) => {
+  // todo
+}
+
+const est_inst_node_rules = (node) => {
+  if (node.is("gov")){
+    return subject_to_est_inst_nodes(node);
+  }  else if (node.is("est_inst")){
+    return est_inst_or_vs_type_node_to_vote_nodes(node);
+  }
+}
+
+const vs_type_node_rules = (node) => {
+  if (node.is("gov")){
+    return subject_to_vs_type_nodes(node);
+  } else if (node.is("est_inst")){
+    return est_inst_or_vs_type_node_to_vote_nodes(node);
+  }
+}
+
+const orgs_with_planned_spending = () => { 
+  return _.chain(Subject.Ministry.get_all())
+    .map(ministry => ministry.orgs)
+    .flatten()
+    .filter( org => _.indexOf(org.table_ids, "table8") !== -1)
+    .value();
+}
+
+const est_inst_node_to_vs_type_nodes = (node) => {
+  // todo
+}
+
+const org_planned_spend_node_rules = (node) => {
+  if (node.is("gov")){
+    return orgs_with_planned_spending();
+  } else if (node.is("dept")){
+    return subject_to_est_inst_nodes(node);
+  } else if (node.is("est_inst")){
+    return est_inst_node_to_vs_type_nodes(node);
+  }
+}
+
+const planned_spending_post_traversal_rule_set = (node,value_attr,root_id) => {
+  const table8 = Table.lookup('table8');
+
   node.id_ancestry = get_id_ancestry(root_id,node);
   if (node.data.is("vs_type") || node.data.is("est_inst")){
     node[value_attr] = node.value = node.data.value;
@@ -406,23 +446,18 @@ const planned_spending_post_traversal_rule_set = (node,value_attr,root_id,table8
 }
 
 exports.create_planned_spending_hierarchy = function(value_attr,root_id,presentation_scheme) {
-  const table8 = Table.lookup('table8');
-
   return d4.hierarchy(Subject.gov,
     node => {
-      if (node.is("gov")){
-        return orgs_with_planned_spending();
-      } else if (node.is("dept")){
-        const org_estimates_data = table8.q(node).data;
-        if (presentation_scheme === "vs_type"){
-          return org_estimates_data_to_vs_type_nodes(org_estimates_data);
-        } else if (presentation_scheme === "est_inst"){
-          return org_estimates_data_to_est_inst_nodes(org_estimates_data);
-        }
+      if (presentation_scheme === "est_inst") {
+        return est_inst_node_rules(node);
+      } else if (presentation_scheme === "vs_type") {
+        return vs_type_node_rules(node);
+      } else if (presentation_scheme === "org_planned_spend") {
+        return org_planned_spend_node_rules(node);
       }
     })
     .eachAfter(node =>{
-      planned_spending_post_traversal_rule_set(node,value_attr,root_id,table8);
+      planned_spending_post_traversal_rule_set(node,value_attr,root_id);
       post_traversal_search_string_set(node);
     })
     .sort( absolute_value_sort );
