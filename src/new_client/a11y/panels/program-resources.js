@@ -26,13 +26,17 @@ class Component extends React.Component {
       .value();
 
     return <Panel title="Resources by Program">
-      <select
-        value={doc}
-        onChange={ evt => this.setState({ doc: evt.target.value }) }
-      >
-        <option value="drr16"> Drr 16-17 </option>
-        <option value="dp17"> DP 17-18 </option>
-      </select>
+      <label>
+        Select data by year
+        <select
+          style={{marginLeft: "5px"}}
+          value={doc}
+          onChange={ evt => this.setState({ doc: evt.target.value }) }
+        >
+          <option value="drr16"> Drr 16-17 </option>
+          <option value="dp17"> DP 17-18 </option>
+        </select>
+      </label>
       <ul>
         {_.map(mapped_programs, prog => 
           <li key={prog.id}>
@@ -58,6 +62,7 @@ function program_mapper(program, doc){
     id,
     name,
     description,
+    level: "program",
     spend,
     ftes,
     sub_programs: _.chain(sub_programs)
@@ -96,7 +101,6 @@ function sub_program_mapper(sub, doc){
     description,
     spend,
     ftes,
-    level: "program",
     sub_programs: _.chain(sub_programs)
       .map(sub => sub_program_mapper(sub, doc))
       .filter(({ spend, ftes}) => spend || ftes )
