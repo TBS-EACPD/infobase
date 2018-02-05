@@ -3,14 +3,10 @@
 .tag-cloud.tag-cloud-main {
   display: flex;
   flex-direction:row;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
   flex-wrap: wrap;
   border-radius: 5px;
-  padding: 10px;
-  border: 1px solid #aaa;
-  margin: 10px 5px; 
+  padding: 0px;
+  margin: 10px 0px; 
 }
 
 .tag-cloud.tag-cloud-legend {
@@ -19,40 +15,42 @@
 
 
 .tag-cloud > li {
-  display: inline;
-  padding: 5px 8px 5px 8px;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 2px;
-  margin: 5px;
-  color: #31708f;
-  background-color: #d9edf7;
-  border-color: #bce9f1;
+  display: flex;
+  flex: 1 1 auto;
+  padding: 0px;
+  border: none;
+  margin: 1px;
+  background-color: transparent;
   line-height: 1.8em;;
   font-size: 1em;
 }
 
 .tag-cloud > li > button {
-  background-color: #d9edf7;
-  color: #31708f;
-}
-
-.tag-cloud-main > li:active, 
-.tag-cloud-main > li:hover, 
-.tag-cloud-main > li > button:focus {
-  border: 1px solid #31708f;
-}
-
-.tag-cloud > li.active {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: $secondaryColor;
+  padding: 5px 20px 5px 20px;
+  border-radius: 3px;
   color: #fff;
-  background-color: #2572b4;
-  border-color: #2572b4;
+  border: none;
 }
 
+.tag-cloud-main > li > button:hover,
+.tag-cloud-main > li > button:active,
+.tag-cloud-main > li > button:focus,
+//.tag-cloud-main > li.active > button:hover,
+//.tag-cloud-main > li.active > button:active,
+//.tag-cloud-main > li.active > button:focus,
+ {
+  background-color: #49739C;
+}
 
 .tag-cloud > li.active > button {
   color: #fff;
-  background-color: #2572b4;
+  background-color: $primaryColor;
 }
 
 
@@ -60,12 +58,14 @@
   min-height: 300px;
   margin-bottom: 100px;  
   padding: 0;
+  margin-left: -5px;
+  margin-right: -5px;
 }
 
 @media (min-width: 992px) { 
   .item-cloud-col {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 6px;
+    padding-right: 6px;
   }
   .item-cloud-col > div {
     margin: 10px 0;
@@ -80,35 +80,34 @@
 
 
 .item-card {
-  border-width: 1px;
+  border-width: 2px;
   border-style: solid;
-  border-radius: 5px;
-  border-color: rgba(37,114,180,1);
+  border-radius: 10px;
+  border-color: $primaryColor;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-item: stretch;
 }
 
 .item-card > .item-title {
-  padding: 40px 5px;
-  font-weight: $heavyFontWeight;
+  padding: 10px 0px 0px 0px;
+  margin-bottom: -5px;
+  font-weight: $mediumFontWeight;
   text-align:center;
-  color: #31708f;
-  background-color: rgba(37,114,180,0.2);
-  border-color: rgba(37,114,180,1);
+  color: $primaryColor;
+  background-color: transparent;
+  border-color: $primaryColor;
+  border-radius: 8px 8px 0 0;
   height: 40px;
+  //transition: background-color 500ms ease-in, color 500ms ease-in;
 }
 
 
 .item-card > .item-title.active {
   font-weight: $mediumFontWeight;
   color: #fff;
-  background-color: #2572b4;
-  border-color: #2572b4;
-  transition: background-color 500ms ease-in;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
+  background-color: $primaryColor;
+  //transition: background-color 500ms ease-in, color 500ms ease-in;
 }
 
 .item-card-footer {
@@ -149,7 +148,6 @@
   display: inline;
   padding: 5px 7px;
   margin: 5px 10px 0 0;
-  transition: background-color 500ms ease-in;
   color: black;
   background-color: #d9edf7;
   border-radius: 0;
@@ -175,6 +173,7 @@
 .transi-height-enter {
   max-height: 1px;
   opacity: 0.01;
+  transition: max-height 500ms ease-in, opacity 500ms ease-in;
 }
 
 .transi-height-enter-active {
@@ -186,6 +185,7 @@
 .transi-height-leave {
   max-height: 500px;
   opacity: 1;
+  transition: max-height 500ms ease-in, opacity 500ms ease-in;
 }
 
 .transi-height-leave-active {
