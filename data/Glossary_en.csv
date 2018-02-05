@@ -321,7 +321,7 @@ A similar situation occurs for the relationship between the Sub-Program and the 
 
 
 Note: by the 2018-19 fiscal year the Program Alignment Architecture format for reporting results will be fully replaced by the new Departmental Results Framework and Program Inventory. This will bring greater clarity to presenting what organizations achieve and how they assess success across a single line of program-based reporting."
-"STAT","Statutory authorities","Statutory authorities are the expenditure authorities provided through other statutes."
+"STAT","Statutory authorities","Statutory authorities are the expenditure authorities approved by Parliament through legislation (other than Appropriations Acts). The legislation sets out the purpose of the expenditures and the terms and conditions under which they may be made."
 "STAT_EXP","Statutory expenditures","Statutory expenditures are expenditures approved by Parliament through legislation (other than Appropriations Acts). The legislation sets out the purpose of the expenditures and the terms and conditions under which they may be made."
 "STATUS_IGOC","Status","The status of an organization (e.g., active)."
 "STATUS_PEOPLE","Employee status","Employee Status is the identifier to classify whether an employee is active or inactive."
@@ -448,4 +448,34 @@ If the date to achieve target is **ongoing or after the end of fiscal year 2016-
 "RESULTS_OT","On track","If the date to achieve target is **ongoing or after the end of fiscal year 2016-17 (after March 31,2017)**:
 * On track: If there is a high probability that the actual result will be higher than the minimum target; lower than the maximum target; within the target range; or will be exactly equal to the unique value target."
 "RESULTS_COUNT","Count of Indicators",""
+"MYA","Multi-Year Appropriation","A multi-year appropriation is an appropriation with a specific purpose and monetary limit granted by Parliament that can be utilized over more than one fiscal year."
+"PAY_CC","Payments to Crown Corporation","The Payments to Crown Corporations includes all the voted and statutory authorities approved by Parliament through Appropriations Acts and legislation to Crown Corporation"
+"INTER_EST","Interim Estimates","In June 2017, the House of Commons approved a motion to change Standing Order 81. This means that, for the duration of this parliament :
+* On or by March 1, the Government will table an Interim Estimates to support Parliament’s scrutiny of interim supply;
+* The deadline for the tabling of Main Estimates is delayed to April 16, increasing the likelihood that the Budget will precede rather than follow it.
+
+
+These changes address the government’s commitment to provide more coherent information to Parliament and to align the federal budget and the estimates.
+
+
+Given that voted spending authorities expire at the end of each fiscal year, the Government must seek sufficient spending authorities to begin the fiscal year. This will be done through the first appropriation act of 2018–19, for approval by the end of March. The first appropriation act will be supported by this new document, called “Interim Estimates”.
+
+
+These **2018–19 Interim Estimates** include:
+* an overview of spending requirements for the first three months of the fiscal year as they compare to 2017–18 Estimates;
+* a listing of planned grants to allow organizations to make grant payments effective April 1, 2018; and,
+* the proposed schedules to the first appropriation bill.
+
+
+This funding supports the government’s financial requirements for the first three months of the fiscal year. In March 2018, the Government will introduce a supply bill and Parliament will vote on appropriations for the 2018–19 Interim Estimates.
+
+_Other Estimates in 2018–19_
+The Government will table a full Main Estimates, including planned voted and statutory expenditures for the full fiscal year, on or by April 16, 2018. These Main Estimates will likely be tabled after the 2018 Federal Budget and therefore be able to reflect Budget priorities. The Government will introduce another appropriation act in June to reflect the additional amounts requested in the Main Estimates.  
+
+
+Supplementary Estimates will continue to present information on additional spending requirements which were either not sufficiently developed in time for inclusion in the Main Estimates, or have subsequently been refined to account for developments in particular programs and services. Two Supplementary Estimates are planned for 2018–19, to be tabled in the fall of 2018 and in early 2019, and the associated appropriation acts will follow shortly thereafter.
+
+
+"
+"NB_EXP","Non-budgetary expenditures","Non-budgetary expenditures – or loans, investments and advances – are outlays that represent changes in the composition of the Government’s financial assets. Negative figures indicate that recoveries exceed expenditures."
 

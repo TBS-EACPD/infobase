@@ -1,11 +1,11 @@
 ﻿"DeptCode","Vote","VoteStatType","AuthorityCode_Text_English","AuthorityCode_Text_French","Item","FY2014","FY2015","FY2016","FY2017"
 "ACOA",1,1,"Operating and Program","Fonctionnement et Programme","ME",63873388,64399896,64222120,63351960
 "ACOA",1,1,"Operating and Program","Fonctionnement et Programme","SEC",35962,0,0,0
-"ACOA",1,1,"Operating and Program","Fonctionnement et Programme","VA",4695032,3252679,3219995,3211106
+"ACOA",1,1,"Operating and Program","Fonctionnement et Programme","VA",4695032,3252679,3219995,6586778
 "ACOA",5,3,"Grants & Contributions","Subventions et Contributions","ME",216270293,225573493,235160493,240222493
 "ACOA",5,3,"Grants & Contributions","Subventions et Contributions","SEA",0,0,8300000,0
 "ACOA",5,3,"Grants & Contributions","Subventions et Contributions","SEB",11184057,0,1678001,43594308
-"ACOA",5,3,"Grants & Contributions","Subventions et Contributions","SEC",179398,5172480,17340746,0
+"ACOA",5,3,"Grants & Contributions","Subventions et Contributions","SEC",179398,5172480,17340746,154401
 "ACOA",5,3,"Grants & Contributions","Subventions et Contributions","VA",4444802,0,0,0
 "ACOA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",8340703,8609600,8814591,7970491
 "ACOA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-132225,-800201,-914400,0
@@ -16,7 +16,7 @@
 "AECB",1,1,"Operating and Program","Fonctionnement et Programme","ME",36578266,38921080,38686934,37939524
 "AECB",1,1,"Operating and Program","Fonctionnement et Programme","SEB",0,0,86001,0
 "AECB",1,1,"Operating and Program","Fonctionnement et Programme","SEC",167265,103491,0,0
-"AECB",1,1,"Operating and Program","Fonctionnement et Programme","VA",6003821,2626785,1897892,1845846
+"AECB",1,1,"Operating and Program","Fonctionnement et Programme","VA",6003821,2626785,1897892,2175889
 "AECB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",4166487,4501548,4608973,4190809
 "AECB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",9491461,8862237,8494883,0
 "AECB","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",49602,58000,56449,0
@@ -32,16 +32,16 @@
 "AGR",1,1,"Operating and Program","Fonctionnement et Programme","ME",544949432,548177880,534827658,535624241
 "AGR",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,-7400000,2127657,6175775
 "AGR",1,1,"Operating and Program","Fonctionnement et Programme","SEB",5588731,0,1993716,1270503
-"AGR",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,6851667,344107670,0
-"AGR",1,1,"Operating and Program","Fonctionnement et Programme","VA",34923299,30072472,30185322,29241383
+"AGR",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,6851667,344107670,-199000
+"AGR",1,1,"Operating and Program","Fonctionnement et Programme","VA",34923299,30072472,30185322,63584723
 "AGR",10,3,"Grants & Contributions","Subventions et Contributions","ME",365352000,367238619,343252000,335932000
 "AGR",10,3,"Grants & Contributions","Subventions et Contributions","SEA",0,32996000,0,39950000
 "AGR",10,3,"Grants & Contributions","Subventions et Contributions","SEB",42662022,0,30074850,18875983
-"AGR",10,3,"Grants & Contributions","Subventions et Contributions","SEC",0,35521769,0,0
+"AGR",10,3,"Grants & Contributions","Subventions et Contributions","SEC",0,35521769,0,1
 "AGR",5,2,"Capital","Capital","ME",27872294,27872294,74750000,74339571
 "AGR",5,2,"Capital","Capital","SEA",0,15450000,7242500,650000
 "AGR",5,2,"Capital","Capital","SEB",1280700,0,1300500,2827000
-"AGR",5,2,"Capital","Capital","SEC",0,5452738,8004489,0
+"AGR",5,2,"Capital","Capital","SEC",0,5452738,8004489,2319622
 "AGR",5,2,"Capital","Capital","VA",4222979,6714391,6181577,0
 "AGR","S",0,"Canadian Cattlemen's Association Legacy Fund","Fonds pour l'avenir de la Canadian Cattlemen's Association","ME",2859547,0,0,0
 "AGR","S",0,"Canadian Cattlemen's Association Legacy Fund","Fonds pour l'avenir de la Canadian Cattlemen's Association","SA",-153481,-205473,0,0
@@ -85,7 +85,7 @@
 "ATSSC",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,0,2654421,2656949
 "ATSSC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",0,0,218046,443165
 "ATSSC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,0,602187,0
-"ATSSC",1,1,"Operating and Program","Fonctionnement et Programme","VA",0,2480042,3553015,3322498
+"ATSSC",1,1,"Operating and Program","Fonctionnement et Programme","VA",0,2480042,3553015,5657913
 "ATSSC",2,1,"Operating and Program","Fonctionnement et Programme","SEB",1,0,0,0
 "ATSSC",2,1,"Operating and Program","Fonctionnement et Programme","VA",28606712,0,0,0
 "ATSSC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",0,8598993,9145173,8391224
@@ -94,10 +94,12 @@
 "ATSSC","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",0,242,1018,0
 "CAS",1,1,"Operating and Program","Fonctionnement et Programme","ME",61260445,57320466,65199516,68590696
 "CAS",1,1,"Operating and Program","Fonctionnement et Programme","SEB",0,0,2205425,1000000
-"CAS",1,1,"Operating and Program","Fonctionnement et Programme","VA",4296686,11449548,1573314,3062116
+"CAS",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,0,0,3475320
+"CAS",1,1,"Operating and Program","Fonctionnement et Programme","VA",4296686,11449548,1573314,4908871
 "CAS","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",6784298,6632121,7152127,6657003
 "CAS","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",116429,50208,-522063,0
 "CAS","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,0,30382,0
+"CAS","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,0,0,317988
 "CAS","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",104700,11300,8950,0
 "CAS","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",12386,2875,7786,0
 "CAT",1,1,"Operating and Program","Fonctionnement et Programme","ME",1295394,0,0,0
@@ -110,51 +112,51 @@
 "CATSA",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEC",0,6513787,0,0
 "CATSA",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",0,26800000,0,0
 "CB",1,1,"Operating and Program","Fonctionnement et Programme","ME",2829969,2818917,2813641,2802641
-"CB",1,1,"Operating and Program","Fonctionnement et Programme","VA",167018,143281,140946,123052
+"CB",1,1,"Operating and Program","Fonctionnement et Programme","VA",167018,143281,140946,285943
 "CB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",286343,291796,298083,272088
 "CB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-7036,-36582,-56879,0
 "CBC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",929278212,928331798,927306798,1076202798
 "CBC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",0,0,75000000,0
-"CBC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",5586,0,0,0
+"CBC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",5586,0,0,34059687
 "CBC",10,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",104740000,105692000,106717000,107821000
 "CBC",5,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",4000000,4000000,4000000,4000000
 "CBSA",1,1,"Operating and Program","Fonctionnement et Programme","ME",1397915271,1411403312,1357329190,1388555431
 "CBSA",1,1,"Operating and Program","Fonctionnement et Programme","MYA",93576414,48402960,39351236,122503987
 "CBSA",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,1700001,5311942,198962446
 "CBSA",1,1,"Operating and Program","Fonctionnement et Programme","SEB",-56831060,0,3542805,12426243
-"CBSA",1,1,"Operating and Program","Fonctionnement et Programme","SEC",1399050,24404463,133070712,0
-"CBSA",1,1,"Operating and Program","Fonctionnement et Programme","VA",258301032,26995530,21054257,0
+"CBSA",1,1,"Operating and Program","Fonctionnement et Programme","SEC",1399050,24404463,133070712,3391914
+"CBSA",1,1,"Operating and Program","Fonctionnement et Programme","VA",258301032,26995530,21054257,25039899
 "CBSA",5,2,"Capital","Capital","ME",161905641,180203476,130999015,202466241
 "CBSA",5,2,"Capital","Capital","MYA",50196648,27562002,25758753,86893790
 "CBSA",5,2,"Capital","Capital","SEA",0,15425965,19614850,5431431
 "CBSA",5,2,"Capital","Capital","SEB",49793186,0,19353840,70000
-"CBSA",5,2,"Capital","Capital","SEC",15636163,28239010,-969040,0
+"CBSA",5,2,"Capital","Capital","SEC",15636163,28239010,-969040,1664211
 "CBSA",5,2,"Capital","Capital","VA",-1,0,0,0
 "CBSA","S",0,"Collection Agency Fees","Honoraires - Agence de recouvrement","SA",0,0,67,0
 "CBSA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",176570197,182608133,184711348,170674564
 "CBSA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",20000301,-2348126,-33268672,0
 "CBSA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,0,670229,13200805
 "CBSA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,0,350019,1204918
-"CBSA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",921816,6540556,19086897,0
+"CBSA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",921816,6540556,19086897,622489
 "CBSA","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",140081,8742,15355,0
 "CBSA","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",623167,656087,1016181,0
 "CC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",182092916,182097387,182347387,257347387
 "CC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEA",0,0,40000000,0
 "CC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",127001,0,127001,441001
-"CC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEC",0,127001,100001,0
-"CC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",4471,0,0,0
+"CC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEC",0,127001,100001,200001
+"CC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",4471,0,0,725919
 "CCC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",15654204,8880000,3510000,0
 "CCC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",2196,0,0,0
 "CCMD",1,1,"Operating and Program","Fonctionnement et Programme","ME",39921868,53794403,69217505,63416105
 "CCMD",1,1,"Operating and Program","Fonctionnement et Programme","SEB",799707,0,0,0
-"CCMD",1,1,"Operating and Program","Fonctionnement et Programme","VA",1627737,1996093,2236801,2878301
+"CCMD",1,1,"Operating and Program","Fonctionnement et Programme","VA",1627737,1996093,2236801,4831770
 "CCMD","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",5568160,5802267,7972617,8093730
 "CCMD","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",2712160,2677570,14282746,0
 "CCMD","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",18205,4376,9615,0
 "CCMD","S",0,"Spending of revenues pursuant to subsection 18(2) of the Canada School of Public Service Act","Dépense des revenus conformément au paragraphe 18(2) de la Loi sur l'École de la fonction publique du Canada","ME",40000000,11283013,6054822,6067702
 "CCMD","S",0,"Spending of revenues pursuant to subsection 18(2) of the Canada School of Public Service Act","Dépense des revenus conformément au paragraphe 18(2) de la Loi sur l'École de la fonction publique du Canada","SA",30470092,28862766,-6054822,0
 "CCOHS",1,1,"Operating and Program","Fonctionnement et Programme","ME",3978250,3969600,3969600,3956267
-"CCOHS",1,1,"Operating and Program","Fonctionnement et Programme","VA",409009,347584,150652,0
+"CCOHS",1,1,"Operating and Program","Fonctionnement et Programme","VA",409009,347584,150652,231974
 "CCOHS","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",1080791,1100669,682772,621134
 "CCOHS","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-27872,-54889,387225,0
 "CCOHS","S",0,"Spending of Revenues pursuant to Section 6(1)(g) of the Canadian Centre for Occupational Health and Safety Act","Dépenses des recettes conformément au paragraphe 6(1)(g) de la Loi sur le Centre canadien d'hygiène et de sécurité au travail","ME",0,0,4300000,4300000
@@ -162,8 +164,8 @@
 "CCRA",1,1,"Operating and Program","Fonctionnement et Programme","ME",2877504675,2898927871,3032118914,3173383552
 "CCRA",1,1,"Operating and Program","Fonctionnement et Programme","MYA",292514316,214322492,227536319,182213512
 "CCRA",1,1,"Operating and Program","Fonctionnement et Programme","SEB",55583156,0,139583733,44941394
-"CCRA",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,72931825,25941118,0
-"CCRA",1,1,"Operating and Program","Fonctionnement et Programme","VA",166267565,81889528,163943903,8903205
+"CCRA",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,72931825,25941118,19241916
+"CCRA",1,1,"Operating and Program","Fonctionnement et Programme","VA",166267565,81889528,163943903,302328642
 "CCRA",5,2,"Capital","Capital","ME",72447985,80496902,37066000,59363678
 "CCRA",5,2,"Capital","Capital","MYA",46710758,47122623,49889737,21437880
 "CCRA",5,2,"Capital","Capital","SEB",4255062,0,6477217,0
@@ -171,9 +173,9 @@
 "CCRA","S",0,"Children's special allowance payments","Versements d'allocations spéciales pour enfants","ME",246000000,237000000,289000000,340000000
 "CCRA","S",0,"Children's special allowance payments","Versements d'allocations spéciales pour enfants","SA",-31238801,72173282,30659267,0
 "CCRA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",405914620,418871260,432845663,424347682
-"CCRA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",34479423,5032432,306044,0
+"CCRA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",34479423,5032432,306044,911632
 "CCRA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",7280589,0,17233987,7044253
-"CCRA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,8889970,2185037,0
+"CCRA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,8889970,2185037,1016889
 "CCRA","S",0,"Court Awards","Montants adjugés par une cour","SA",3398465,1487951,530013,0
 "CCRA","S",0,"Disbursements to provinces under the Softwood Lumber Products Export Charge Act, 2006","Versements aux provinces en vertu de la Loi de 2006 sur les droits d'exportation de produits de bois d'œuvre","ME",80000000,0,128000000,0
 "CCRA","S",0,"Disbursements to provinces under the Softwood Lumber Products Export Charge Act, 2006","Versements aux provinces en vertu de la Loi de 2006 sur les droits d'exportation de produits de bois d'œuvre","SA",-15118882,121481095,-2509802,0
@@ -187,19 +189,19 @@
 "CCRA","S",0,"Spending of revenues received through the conduct of its operations pursuant to section 60 of the Canada Revenue Agency Act","Dépenses des recettes résultant de la poursuite des opérations en vertu de l'article 60 de la Loi sur l'Agence du revenu du Canada","ME",179308529,169466255,166604106,165720262
 "CCRA","S",0,"Spending of revenues received through the conduct of its operations pursuant to section 60 of the Canada Revenue Agency Act","Dépenses des recettes résultant de la poursuite des opérations en vertu de l'article 60 de la Loi sur l'Agence du revenu du Canada","SA",-13223240,-433678,-2870427,0
 "CDC",1,1,"Operating and Program","Fonctionnement et Programme","ME",3610936,3605377,3599617,3599617
-"CDC",1,1,"Operating and Program","Fonctionnement et Programme","VA",275841,125881,183577,0
+"CDC",1,1,"Operating and Program","Fonctionnement et Programme","VA",275841,125881,183577,239560
 "CEAA",1,1,"Operating and Program","Fonctionnement et Programme","ME",28227786,15591619,27512578,30640824
 "CEAA",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,6234050,4679144,0
 "CEAA",1,1,"Operating and Program","Fonctionnement et Programme","SEB",122211,0,4504360,1631948
-"CEAA",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,0,1000001,0
-"CEAA",1,1,"Operating and Program","Fonctionnement et Programme","VA",704023,7330405,652210,1539929
+"CEAA",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,0,1000001,1000001
+"CEAA",1,1,"Operating and Program","Fonctionnement et Programme","VA",704023,7330405,652210,3361752
 "CEAA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",2736320,1760251,3398457,3452410
 "CEAA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",156318,-466341,-835267,0
 "CEAA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,343000,534042,0
 "CEAA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",16842,0,228997,33626
 "CEAA","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",0,111,111,0
 "CEO",1,1,"Operating and Program","Fonctionnement et Programme","ME",30538285,29204976,29212735,29253454
-"CEO",1,1,"Operating and Program","Fonctionnement et Programme","VA",1044361,2089550,1500968,1460637
+"CEO",1,1,"Operating and Program","Fonctionnement et Programme","VA",1044361,2089550,1500968,3048928
 "CEO","S",0,"Collection Agency Fees","Honoraires - Agence de recouvrement","SA",0,0,66,0
 "CEO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",6417216,7714744,7036011,6785056
 "CEO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",885830,1056097,-480934,0
@@ -211,21 +213,21 @@
 "CFDC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",95363072,95453551,95453551,100453551
 "CFDC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",0,0,0,2500001
 "CFDC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEC",0,0,2000000,0
-"CFDC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",90479,0,0,0
+"CFDC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",90479,0,0,618484
 "CFGB",1,1,"Operating and Program","Fonctionnement et Programme","ME",6144993,6143503,6141086,6160384
 "CFGB",1,1,"Operating and Program","Fonctionnement et Programme","SEB",0,0,0,594400
-"CFGB",1,1,"Operating and Program","Fonctionnement et Programme","VA",337578,309033,326473,307054
+"CFGB",1,1,"Operating and Program","Fonctionnement et Programme","VA",337578,309033,326473,428673
 "CFGB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",585584,598307,612859,562442
 "CFGB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",42353,57992,-10607,0
 "CFIA",1,1,"Operating and Program","Fonctionnement et Programme","ME",470029881,537749431,512042839,525744799
 "CFIA",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,7400001,32107561,30858352
 "CFIA",1,1,"Operating and Program","Fonctionnement et Programme","SEB",29109517,0,22648704,6901001
-"CFIA",1,1,"Operating and Program","Fonctionnement et Programme","SEC",34764879,263581,-886980,0
-"CFIA",1,1,"Operating and Program","Fonctionnement et Programme","VA",126677893,22127933,30090411,24582004
+"CFIA",1,1,"Operating and Program","Fonctionnement et Programme","SEC",34764879,263581,-886980,17244054
+"CFIA",1,1,"Operating and Program","Fonctionnement et Programme","VA",126677893,22127933,30090411,30375302
 "CFIA",5,2,"Capital","Capital","ME",24264263,25783194,93074099,49256401
 "CFIA",5,2,"Capital","Capital","SEA",0,31116639,2068410,534343
 "CFIA",5,2,"Capital","Capital","SEB",1207703,0,4219340,100000
-"CFIA",5,2,"Capital","Capital","SEC",0,262501,-1100000,0
+"CFIA",5,2,"Capital","Capital","SEC",0,262501,-1100000,-812500
 "CFIA",5,2,"Capital","Capital","VA",2487207,4846645,3907200,14577435
 "CFIA","S",0,"Collection Agency Fees","Honoraires - Agence de recouvrement","SA",895,2440,0,0
 "CFIA","S",0,"Compensation payments in accordance with requirements established by Regulations under the Health of Animals Act and the Plant Protection Act, and authorized pursuant to the Canadian Food Inspection Agency Act","Paiements d'indemnisation conformes aux exigences prévues par les règlements pris en application de la Loi sur la santé des animaux et de la Loi sur la protection des végétaux et autorisés en vertu de la Loi sur l'Agence canadienne d'inspection des aliments","ME",3500000,3500000,3500000,3500000
@@ -234,13 +236,13 @@
 "CFIA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",11358119,-4724062,-12297469,0
 "CFIA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,866933,4592875,4412235
 "CFIA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",3014388,0,1980436,0
-"CFIA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",4442690,0,0,0
+"CFIA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",4442690,0,0,3146935
 "CFIA","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",87753,77521,28416,0
 "CFIA","S",0,"Spending of Revenues pursuant to Section 30 of the Canadian Food Inspection Agency Act","Dépense des recettes conformément au paragraphe 30 de la Loi sur l'Agence canadienne d'inspection des aliments","ME",53161000,53161000,53161000,53161000
 "CFIA","S",0,"Spending of Revenues pursuant to Section 30 of the Canadian Food Inspection Agency Act","Dépense des recettes conformément au paragraphe 30 de la Loi sur l'Agence canadienne d'inspection des aliments","SA",40709400,14991314,8094625,0
 "CFIA","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",971390,945127,581095,0
 "CGC",1,1,"Operating and Program","Fonctionnement et Programme","ME",7537076,4883698,4776362,4746362
-"CGC",1,1,"Operating and Program","Fonctionnement et Programme","VA",829314,244685,35777,34574
+"CGC",1,1,"Operating and Program","Fonctionnement et Programme","VA",829314,244685,35777,659380
 "CGC","S",0,"Canadian Grain Commission Revolving Fund","Fonds renouvelable de la Commission canadienne des grains","ME",7946483,0,0,0
 "CGC","S",0,"Canadian Grain Commission Revolving Fund","Fonds renouvelable de la Commission canadienne des grains","SA",36871867,69002815,95887325,0
 "CGC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",900335,591479,605562,552751
@@ -249,18 +251,18 @@
 "CH",1,1,"Operating and Program","Fonctionnement et Programme","ME",178337991,173741400,183944057,208821920
 "CH",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,0,1363555,262951
 "CH",1,1,"Operating and Program","Fonctionnement et Programme","SEB",5274720,0,5752612,6472260
-"CH",1,1,"Operating and Program","Fonctionnement et Programme","SEC",-100000,1381293,15862376,0
-"CH",1,1,"Operating and Program","Fonctionnement et Programme","VA",8914336,11039057,4557625,9274843
+"CH",1,1,"Operating and Program","Fonctionnement et Programme","SEC",-100000,1381293,15862376,719942
+"CH",1,1,"Operating and Program","Fonctionnement et Programme","VA",8914336,11039057,4557625,15261222
 "CH",5,3,"Grants & Contributions","Subventions et Contributions","ME",1187709835,1056279039,1084961970,1210058005
 "CH",5,3,"Grants & Contributions","Subventions et Contributions","SEA",0,-1340000,95539579,6577100
 "CH",5,3,"Grants & Contributions","Subventions et Contributions","SEB",86465621,0,1552146,25076577
-"CH",5,3,"Grants & Contributions","Subventions et Contributions","SEC",497798,8351933,22916476,0
+"CH",5,3,"Grants & Contributions","Subventions et Contributions","SEC",497798,8351933,22916476,23031529
 "CH",5,3,"Grants & Contributions","Subventions et Contributions","VA",-1162500,5499825,0,0
 "CH","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",21904861,22577022,23496951,23715445
 "CH","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",883968,-737083,-3518750,0
 "CH","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,0,220038,41400
 "CH","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",11259,0,24069,143898
-"CH","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,387795,1029487,0
+"CH","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,387795,1029487,369235
 "CH","S",0,"Payments under the Lieutenant Governors Superannuation Act","Paiements en vertu de la Loi sur la pension de retraite des lieutenants-gouverneurs","ME",637000,637000,637000,637000
 "CH","S",0,"Payments under the Lieutenant Governors Superannuation Act","Paiements en vertu de la Loi sur la pension de retraite des lieutenants-gouverneurs","SA",227369,323833,269832,0
 "CH","S",0,"Salaries of the Lieutenant Governors","Traitements des lieutenants-gouverneurs","ME",1196000,1196000,1196000,1196000
@@ -272,7 +274,7 @@
 "CH","S",0,"Supplementary retirement benefits - Former Lieutenant Governors","Prestations de retraite supplémentaires - Lieutenants-gouverneurs précédents","ME",182000,182000,182000,182000
 "CH","S",0,"Supplementary retirement benefits - Former Lieutenant Governors","Prestations de retraite supplémentaires - Lieutenants-gouverneurs précédents","SA",6506,20994,2914,0
 "CHRC",1,1,"Operating and Program","Fonctionnement et Programme","ME",19639234,19650241,19307335,19222932
-"CHRC",1,1,"Operating and Program","Fonctionnement et Programme","VA",1371985,983249,751868,1019117
+"CHRC",1,1,"Operating and Program","Fonctionnement et Programme","VA",1371985,983249,751868,1630102
 "CHRC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",2460492,2512177,2841837,2600188
 "CHRC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",217554,102974,-396245,0
 "CHRC","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",0,195,753,0
@@ -283,12 +285,13 @@
 "CI",1,1,"Operating and Program","Fonctionnement et Programme","ME",556389499,566527428,604119156,545294901
 "CI",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,0,60844619,75135757
 "CI",1,1,"Operating and Program","Fonctionnement et Programme","SEB",10773749,177970047,1239060,71610650
-"CI",1,1,"Operating and Program","Fonctionnement et Programme","SEC",4573156,-4448871,12936277,0
-"CI",1,1,"Operating and Program","Fonctionnement et Programme","VA",40443421,21227887,25496995,26681622
+"CI",1,1,"Operating and Program","Fonctionnement et Programme","SEC",4573156,-4448871,12936277,12934271
+"CI",1,1,"Operating and Program","Fonctionnement et Programme","VA",40443421,21227887,25496995,70250158
 "CI",10,3,"Grants & Contributions","Subventions et Contributions","ME",0,0,1152355205,1170171545
 "CI",10,3,"Grants & Contributions","Subventions et Contributions","SEA",0,0,118477516,60879389
 "CI",10,3,"Grants & Contributions","Subventions et Contributions","SEB",0,0,-354450,0
-"CI",10,3,"Grants & Contributions","Subventions et Contributions","SEC",0,0,30654000,0
+"CI",10,3,"Grants & Contributions","Subventions et Contributions","SEC",0,0,30654000,119120000
+"CI",13,4,"Debt Forgiveness","Radiation de dettes","SEC",0,0,0,397019
 "CI",5,2,"Capital","Capital","ME",0,0,13706741,23756038
 "CI",5,2,"Capital","Capital","SEA",0,0,4474340,4119500
 "CI",5,2,"Capital","Capital","SEB",0,0,865285,9651453
@@ -303,7 +306,7 @@
 "CI","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",2869949,-2682382,-8144376,0
 "CI","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,0,4416277,7089483
 "CI","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",554295,2332849,219370,2650505
-"CI","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",191594,1986858,737302,0
+"CI","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",191594,1986858,737302,606946
 "CI","S",0,"Court Awards","Montants adjugés par une cour","SA",234237,24833,13036,0
 "CI","S",0,"Fees returned in connection with a terminated application","Remboursement de frais à l'égard de demande terminée","ME",47250000,29500000,0,0
 "CI","S",0,"Fees returned in connection with a terminated application","Remboursement de frais à l'égard de demande terminée","SA",-18523130,5531544,2226889,0
@@ -318,7 +321,7 @@
 "CI","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","SA",0,-583,224,0
 "CI","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",38645,30513,42429,0
 "CICS",1,1,"Operating and Program","Fonctionnement et Programme","ME",5548958,5549653,5547133,5534133
-"CICS",1,1,"Operating and Program","Fonctionnement et Programme","VA",293336,277448,277483,277357
+"CICS",1,1,"Operating and Program","Fonctionnement et Programme","VA",293336,277448,277483,350930
 "CICS","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",408205,417888,427837,390526
 "CICS","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-90189,-103321,-151308,0
 "CIHR",1,1,"Operating and Program","Fonctionnement et Programme","ME",47112396,47463563,47308587,52633510
@@ -328,7 +331,7 @@
 "CIHR",5,3,"Grants & Contributions","Subventions et Contributions","ME",932143424,955287128,972339220,1027148842
 "CIHR",5,3,"Grants & Contributions","Subventions et Contributions","SEA",0,1,13550000,0
 "CIHR",5,3,"Grants & Contributions","Subventions et Contributions","SEB",14057537,0,38044356,5183564
-"CIHR",5,3,"Grants & Contributions","Subventions et Contributions","SEC",14000000,16533614,853567,0
+"CIHR",5,3,"Grants & Contributions","Subventions et Contributions","SEC",14000000,16533614,853567,3515023
 "CIHR",5,3,"Grants & Contributions","Subventions et Contributions","VA",0,2465076,0,0
 "CIHR","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",5696142,5833308,5972196,5818621
 "CIHR","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",147034,-267631,-649021,0
@@ -346,22 +349,26 @@
 "CITT","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",119,0,0,0
 "CMC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",63430033,83369477,66199477,71600477
 "CMC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",170000,0,11547000,624000
-"CMC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",5323683,217778,0,0
+"CMC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEC",0,0,0,188044
+"CMC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",5323683,217778,0,1545666
 "CMHC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",2097353000,2025629000,2027901048,2735001048
 "CMHC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEA",0,0,1069800000,40880175
 "CMHC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",0,0,78100000,1500001
-"CMHC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEC",0,0,300001,0
+"CMHC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEC",0,0,300001,674585
 "CMHR",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",21700000,21700000,21700000,24865000
 "CMHR",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",0,0,11904000,0
+"CMHR",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",0,0,0,487335
 "CMI",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",9900000,7700000,7700000,7820000
 "CMI",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",0,0,200000,0
+"CMI",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",0,0,0,142724
 "CMN",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",26127096,26129112,26129112,32515112
 "CMN",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",0,0,3312000,0
-"CMN",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",149722,323481,329185,0
+"CMN",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",149722,323481,329185,687312
 "CNEDA",1,1,"Operating and Program","Fonctionnement et Programme","ME",11231366,14409590,8874718,13199586
 "CNEDA",1,1,"Operating and Program","Fonctionnement et Programme","SEA",2698469,0,4668559,0
 "CNEDA",1,1,"Operating and Program","Fonctionnement et Programme","SEB",70531,0,0,313028
-"CNEDA",1,1,"Operating and Program","Fonctionnement et Programme","VA",605168,561568,720480,443736
+"CNEDA",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,0,0,-21600
+"CNEDA",1,1,"Operating and Program","Fonctionnement et Programme","VA",605168,561568,720480,738411
 "CNEDA",5,3,"Grants & Contributions","Subventions et Contributions","ME",18641803,35001622,16423487,35500000
 "CNEDA",5,3,"Grants & Contributions","Subventions et Contributions","SEA",17000000,0,23763634,0
 "CNEDA",5,3,"Grants & Contributions","Subventions et Contributions","SEB",975525,0,0,4537297
@@ -400,7 +407,7 @@
 "CSA",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,690000,0,0
 "CSA",1,1,"Operating and Program","Fonctionnement et Programme","SEB",6026643,0,0,8582533
 "CSA",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,13840001,0,0
-"CSA",1,1,"Operating and Program","Fonctionnement et Programme","VA",8149427,7763300,0,5000000
+"CSA",1,1,"Operating and Program","Fonctionnement et Programme","VA",8149427,7763300,0,10826383
 "CSA",10,3,"Grants & Contributions","Subventions et Contributions","ME",39306853,45356265,45748000,60966000
 "CSA",10,3,"Grants & Contributions","Subventions et Contributions","SEB",2586001,0,10193500,0
 "CSA",10,3,"Grants & Contributions","Subventions et Contributions","SEC",0,0,1,0
@@ -415,17 +422,18 @@
 "CSA","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",69927,60508,48203,0
 "CSC",1,1,"Operating and Program","Fonctionnement et Programme","ME",1913020536,1928746713,1925556005,1962343216
 "CSC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",1589000,0,31590964,12037835
-"CSC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",-22928,1788446,0,0
-"CSC",1,1,"Operating and Program","Fonctionnement et Programme","VA",249018058,62866960,70158639,81963990
+"CSC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",-22928,1788446,0,113395250
+"CSC",1,1,"Operating and Program","Fonctionnement et Programme","VA",249018058,62866960,70158639,147164942
 "CSC",5,2,"Capital","Capital","ME",184244519,176944519,185711724,208941724
 "CSC",5,2,"Capital","Capital","SEA",0,8850000,0,0
 "CSC",5,2,"Capital","Capital","SEB",-5214180,0,0,212731
-"CSC",5,2,"Capital","Capital","SEC",0,2251554,-1138315,0
+"CSC",5,2,"Capital","Capital","SEC",0,2251554,-1138315,-7297614
 "CSC",5,2,"Capital","Capital","VA",78549004,51670278,45618773,46000077
 "CSC","S",0,"CORCAN Revolving Fund","Fonds renouvelable CORCAN","SA",5263437,4245148,4155690,0
 "CSC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",237417337,244797694,251324350,229424223
 "CSC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-682247,-26284711,-43240050,0
 "CSC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,0,22540,866518
+"CSC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,0,0,21132808
 "CSC","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",34216,27805,1846,0
 "CSC","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",2371800,1464084,1914968,0
 "CSEC",1,1,"Operating and Program","Fonctionnement et Programme","ME",796802239,503831701,546109459,560506384
@@ -453,14 +461,14 @@
 "CT","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",159137,0,0,0
 "CT","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-66307,0,0,0
 "CTA",1,1,"Operating and Program","Fonctionnement et Programme","ME",24299370,24313366,24290330,27714765
-"CTA",1,1,"Operating and Program","Fonctionnement et Programme","VA",1598974,1527352,927405,1214517
+"CTA",1,1,"Operating and Program","Fonctionnement et Programme","VA",1598974,1527352,927405,2284405
 "CTA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",3351252,3420038,3501757,3199401
 "CTA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-130845,-188794,-423168,0
 "CTA","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",9621,13,0,0
 "CTAIB",1,1,"Operating and Program","Fonctionnement et Programme","ME",25757380,26290301,26267261,26202261
 "CTAIB",1,1,"Operating and Program","Fonctionnement et Programme","SEB",0,0,0,1538000
 "CTAIB",1,1,"Operating and Program","Fonctionnement et Programme","SEC",301000,0,0,0
-"CTAIB",1,1,"Operating and Program","Fonctionnement et Programme","VA",2677687,789398,1186501,1309114
+"CTAIB",1,1,"Operating and Program","Fonctionnement et Programme","VA",2677687,789398,1186501,2430224
 "CTAIB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",3285011,3439498,3521391,3214293
 "CTAIB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",197604,-21107,-206870,0
 "CTAIB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,0,0,307600
@@ -470,11 +478,11 @@
 "EA",1,1,"Operating and Program","Fonctionnement et Programme","ME",1379893098,1451334915,1458048856,1557659937
 "EA",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,0,39074405,18214402
 "EA",1,1,"Operating and Program","Fonctionnement et Programme","SEB",24636914,0,72308682,86520370
-"EA",1,1,"Operating and Program","Fonctionnement et Programme","SEC",53238798,78262528,33459898,0
-"EA",1,1,"Operating and Program","Fonctionnement et Programme","VA",133113409,71772470,62974763,74658771
+"EA",1,1,"Operating and Program","Fonctionnement et Programme","SEC",53238798,78262528,33459898,20758063
+"EA",1,1,"Operating and Program","Fonctionnement et Programme","VA",133113409,71772470,62974763,115450086
 "EA",10,3,"Grants & Contributions","Subventions et Contributions","ME",3431944508,3573409668,3529676551,3903486753
 "EA",10,3,"Grants & Contributions","Subventions et Contributions","SEB",-379803,0,402983496,297169210
-"EA",10,3,"Grants & Contributions","Subventions et Contributions","SEC",235509851,365071670,319305774,0
+"EA",10,3,"Grants & Contributions","Subventions et Contributions","SEC",235509851,365071670,319305774,395370000
 "EA",12,9,"Other","Autre","SEB",1,0,0,0
 "EA",15,1,"Operating and Program","Fonctionnement et Programme","ME",50779000,50779000,50779000,66273000
 "EA",15,1,"Operating and Program","Fonctionnement et Programme","SEB",0,0,13927000,0
@@ -482,22 +490,22 @@
 "EA",15,1,"Operating and Program","Fonctionnement et Programme","VA",0,10023000,0,0
 "EA",17,4,"Debt Forgiveness","Radiation de dettes","SEC",0,0,18009733,0
 "EA",20,9,"Other","Autre","ME",0,1,1,1
-"EA",20,9,"Other","Autre","SEC",0,1,0,0
+"EA",20,9,"Other","Autre","SEC",0,1,0,1
 "EA",5,2,"Capital","Capital","ME",145274489,103546437,124444220,106313014
 "EA",5,2,"Capital","Capital","SEA",133617958,0,0,0
 "EA",5,2,"Capital","Capital","SEB",628443,0,81973271,63906882
-"EA",5,2,"Capital","Capital","SEC",2505001,25690092,-28541013,0
+"EA",5,2,"Capital","Capital","SEC",2505001,25690092,-28541013,-2100000
 "EA",5,2,"Capital","Capital","VA",41407646,51523284,35540741,27029549
 "EA","S",0,"Advance Market Commitment for Pneumococcal Vaccines","Mécanisme de garantie de marchés pour le vaccin antipneumococcique","SEB",10915566,0,0,0
 "EA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",96141162,102248879,107091769,140842162
 "EA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",8954619,-1344721,-13051973,0
 "EA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",422823,0,1847715,800179
 "EA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",1273553,0,2301769,2583470
-"EA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",3957209,5273049,3187372,0
+"EA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",3957209,5273049,3187372,3867531
 "EA","S",0,"Losses on Foreign Exchange","Pertes d'opérations de change","SA",142710469,36763571,28965984,0
 "EA","S",0,"Payments to International Financial Institutions - Direct payments","Paiements aux institutions financières internationales - Paiements directs","ME",245000000,245000000,245000000,227048000
 "EA","S",0,"Payments to International Financial Institutions - Direct payments","Paiements aux institutions financières internationales - Paiements directs","SA",-5977373,-4960045,-4227359,0
-"EA","S",0,"Payments to International Financial Institutions - Direct payments","Paiements aux institutions financières internationales - Paiements directs","SEC",0,47500000,0,0
+"EA","S",0,"Payments to International Financial Institutions - Direct payments","Paiements aux institutions financières internationales - Paiements directs","SEC",0,47500000,0,5443748
 "EA","S",0,"Payments under the Diplomatic Service (Special) Superannuation Act","Paiements en vertu de la Loi sur la pension spéciale du service diplomatique","ME",250000,250000,250000,250000
 "EA","S",0,"Payments under the Diplomatic Service (Special) Superannuation Act","Paiements en vertu de la Loi sur la pension spéciale du service diplomatique","SA",-47770,-8795,131467,0
 "EA","S",0,"Pursuant to section 24.1 of the Financial Administration Act, to forgive an amount up to $449,533,044 owed by the Government of the Islamic Republic of Pakistan, in relation to loan agreements, subject to the conditions described in the Memorandum of Understanding signed on April 20, 2006 between the Government of Canada and the Government of the Islamic Republic of Pakistan","Conformément à l'article 24.1 de la Loi sur la gestion des finances publiques, faire grâce d'un montant jusqu'à concurrence de 449 533 044 $ que doit le gouvernement de la République islamique du Pakistan relativement à des ententes de prêt, sous réserve des conditions énoncées dans le protocole d'entente signé le 20 avril 2006 entre le gouvernement du Canada et le gouvernement de la République islamique du Pakistan","SA",172252006,124639977,124639977,0
@@ -508,12 +516,12 @@
 "EC",1,1,"Operating and Program","Fonctionnement et Programme","ME",687165091,695731283,605313460,700976667
 "EC",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,9550278,93571679,11484108
 "EC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",16005105,0,13742768,20470022
-"EC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",6489324,-198461,-1000000,0
-"EC",1,1,"Operating and Program","Fonctionnement et Programme","VA",47852335,38788039,39216348,34695457
+"EC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",6489324,-198461,-1000000,18272704
+"EC",1,1,"Operating and Program","Fonctionnement et Programme","VA",47852335,38788039,39216348,84813152
 "EC",10,3,"Grants & Contributions","Subventions et Contributions","ME",107286053,114340903,154303510,119485748
 "EC",10,3,"Grants & Contributions","Subventions et Contributions","SEA",0,4000000,-22569049,11140000
 "EC",10,3,"Grants & Contributions","Subventions et Contributions","SEB",24994612,0,14698898,1082500
-"EC",10,3,"Grants & Contributions","Subventions et Contributions","SEC",34560,885077,3000000,0
+"EC",10,3,"Grants & Contributions","Subventions et Contributions","SEC",34560,885077,3000000,177568640
 "EC",5,2,"Capital","Capital","ME",52789150,63297504,60539382,82361087
 "EC",5,2,"Capital","Capital","SEA",0,7550000,2867000,250000
 "EC",5,2,"Capital","Capital","SEB",1737610,0,1174025,-118000
@@ -536,17 +544,18 @@
 "ERC",1,1,"Operating and Program","Fonctionnement et Programme","ME",858554,848114,1447634,847634
 "ERC",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,600001,0,0
 "ERC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",710001,0,0,835946
-"ERC",1,1,"Operating and Program","Fonctionnement et Programme","VA",41539,42928,42406,32152
+"ERC",1,1,"Operating and Program","Fonctionnement et Programme","VA",41539,42928,42406,39400
 "ERC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",102864,104734,107228,97876
 "ERC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",51657,49396,48905,0
 "ERC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,0,0,91189
 "FBCL",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",21040000,35281996,31414312,22885386
 "FBCL",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",0,0,2011135,0
-"FBCL",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEC",0,0,8356417,0
+"FBCL",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEC",0,0,8356417,698501
 "FCAC","S",0,"Payments under section 13 of the Financial Consumer Agency of Canada Act","Paiements en vertu de l'article 13 de la Loi sur l'Agence de la consommation en matière financière du Canada","SA",17890076,16272429,17426626,0
 "FCAC","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",290,136,38,0
 "FEDSO",1,1,"Operating and Program","Fonctionnement et Programme","ME",26037429,25859077,25753625,24394707
-"FEDSO",1,1,"Operating and Program","Fonctionnement et Programme","VA",1281101,1301871,1116225,1287422
+"FEDSO",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,0,0,-21600
+"FEDSO",1,1,"Operating and Program","Fonctionnement et Programme","VA",1281101,1301871,1116225,2087789
 "FEDSO",5,3,"Grants & Contributions","Subventions et Contributions","ME",177631522,186239502,205479871,242198502
 "FEDSO",5,3,"Grants & Contributions","Subventions et Contributions","SEA",0,0,22200000,0
 "FEDSO",5,3,"Grants & Contributions","Subventions et Contributions","SEC",0,-4000000,0,0
@@ -557,8 +566,8 @@
 "FEDSO","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",33545,0,0,0
 "FIN",1,1,"Operating and Program","Fonctionnement et Programme","ME",114981053,99936668,90740545,89280597
 "FIN",1,1,"Operating and Program","Fonctionnement et Programme","SEB",3048896,0,5820073,32020582
-"FIN",1,1,"Operating and Program","Fonctionnement et Programme","SEC",4692664,4452906,1500000,0
-"FIN",1,1,"Operating and Program","Fonctionnement et Programme","VA",5050899,4732865,14536562,4542777
+"FIN",1,1,"Operating and Program","Fonctionnement et Programme","SEC",4692664,4452906,1500000,3892641
+"FIN",1,1,"Operating and Program","Fonctionnement et Programme","VA",5050899,4732865,14536562,9762753
 "FIN",10,9,"Other","Autre","ME",0,1,0,0
 "FIN",5,3,"Grants & Contributions","Subventions et Contributions","ME",5035000,3035000,0,0
 "FIN",5,9,"Other","Autre","ME",0,0,1,1
@@ -568,11 +577,11 @@
 "FIN",9,9,"Other","Autre","SEC",1,0,0,0
 "FIN","S",0,"Additional Fiscal Equalization Offset Payment to Nova Scotia (Nova Scotia and Newfoundland and Labrador Additional Fiscal Equalization Offset Payments Act)","Paiement de péréquation compensatoire supplémentaire - Nouvelle-Écosse (Loi sur les paiements de péréquation compensatoires supplémentaires à la Nouvelle-Écosse et à Terre-Neuve-et-Labrador)","ME",64481000,36779000,33255000,19957000
 "FIN","S",0,"Additional fiscal equalization to Nova Scotia (Part I - Federal-Provincial Fiscal Arrangements Act)","Paiement de péréquation supplémentaire - Nouvelle-Écosse (Partie I - Loi sur les arrangements fiscaux entre le gouvernement fédéral et les provinces)","ME",138275000,79348000,16026000,-27918000
-"FIN","S",0,"Additional fiscal equalization to Nova Scotia (Part I - Federal-Provincial Fiscal Arrangements Act)","Paiement de péréquation supplémentaire - Nouvelle-Écosse (Partie I - Loi sur les arrangements fiscaux entre le gouvernement fédéral et les provinces)","SEC",-7091000,8838000,-5428000,0
+"FIN","S",0,"Additional fiscal equalization to Nova Scotia (Part I - Federal-Provincial Fiscal Arrangements Act)","Paiement de péréquation supplémentaire - Nouvelle-Écosse (Partie I - Loi sur les arrangements fiscaux entre le gouvernement fédéral et les provinces)","SEC",-7091000,8838000,-5428000,44325000
 "FIN","S",0,"Alternative Payments for Standing Programs (Part VI - Federal-Provincial Fiscal Arrangements Act)","Paiements de remplacement au titre des programmes permanents (Partie VI - Loi sur les arrangements fiscaux entre le gouvernement fédéral et les provinces)","ME",-3702944000,-3872657000,-4043422000,-4022927000
 "FIN","S",0,"Alternative Payments for Standing Programs (Part VI - Federal-Provincial Fiscal Arrangements Act)","Paiements de remplacement au titre des programmes permanents (Partie VI - Loi sur les arrangements fiscaux entre le gouvernement fédéral et les provinces)","SA",195205000,183316000,164244000,0
 "FIN","S",0,"Alternative Payments for Standing Programs (Part VI - Federal-Provincial Fiscal Arrangements Act)","Paiements de remplacement au titre des programmes permanents (Partie VI - Loi sur les arrangements fiscaux entre le gouvernement fédéral et les provinces)","SEB",6922000,0,290772000,123333000
-"FIN","S",0,"Alternative Payments for Standing Programs (Part VI - Federal-Provincial Fiscal Arrangements Act)","Paiements de remplacement au titre des programmes permanents (Partie VI - Loi sur les arrangements fiscaux entre le gouvernement fédéral et les provinces)","SEC",34159000,48589000,-58062000,0
+"FIN","S",0,"Alternative Payments for Standing Programs (Part VI - Federal-Provincial Fiscal Arrangements Act)","Paiements de remplacement au titre des programmes permanents (Partie VI - Loi sur les arrangements fiscaux entre le gouvernement fédéral et les provinces)","SEC",34159000,48589000,-58062000,-51962000
 "FIN","S",0,"Canada Health Transfer (Part V.1 - Federal-Provincial Fiscal Arrangements Act)","Transfert canadien en matière de santé (Partie V.1 - Loi sur les arrangements fiscaux entre le gouvernement fédéral et les provinces)","ME",32114033000,34026107000,36067673000,37149703000
 "FIN","S",0,"Canada Health Transfer (Part V.1 - Federal-Provincial Fiscal Arrangements Act)","Transfert canadien en matière de santé (Partie V.1 - Loi sur les arrangements fiscaux entre le gouvernement fédéral et les provinces)","SA",-241637,-1489145,-10091737,0
 "FIN","S",0,"Canada Health Transfer (Part V.1 - Federal-Provincial Fiscal Arrangements Act)","Transfert canadien en matière de santé (Partie V.1 - Loi sur les arrangements fiscaux entre le gouvernement fédéral et les provinces)","SEC",215000,0,0,0
@@ -582,7 +591,7 @@
 "FIN","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",11938081,12097341,12221830,11036737
 "FIN","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-530104,-1202945,-1814964,0
 "FIN","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",177293,0,81917,109820
-"FIN","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",45113,131578,0,0
+"FIN","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",45113,131578,0,524773
 "FIN","S",0,"Debt payments on behalf of poor countries to international organizations pursuant to section 18(1) of the Economic Recovery Act","Paiements de dettes à des organisations internationales au nom des pays pauvres en vertu du paragraphe 18(1) de la Loi sur la reprise économique","ME",51200000,51200000,51200000,51200000
 "FIN","S",0,"Establishment of a Canadian Securities Regulation Regime and Canadian Regulatory Authority (Budget Implementation Act, 2009)","Mise sur pied d'un régime canadien et d'un organisme national de réglementation des valeurs mobilières (Loi d'exécution du budget de 2009)","SA",18200000,0,0,0
 "FIN","S",0,"Establishment of a Canadian Securities Regulation Regime and Canadian Regulatory Authority (Budget Implementation Act, 2009)","Mise sur pied d'un régime canadien et d'un organisme national de réglementation des valeurs mobilières (Loi d'exécution du budget de 2009)","SEB",115800000,0,0,0
@@ -596,13 +605,14 @@
 "FIN","S",0,"Interest on Unmatured Debt","Intérêt sur la dette non échue","ME",18147000000,17988000000,15688000000,14924000000
 "FIN","S",0,"Interest on Unmatured Debt","Intérêt sur la dette non échue","SA",-1417672981,-335921560,-651349414,0
 "FIN","S",0,"Interest on Unmatured Debt","Intérêt sur la dette non échue","SEB",-329677655,0,124000000,-196000000
-"FIN","S",0,"Interest on Unmatured Debt","Intérêt sur la dette non échue","SEC",-1047672626,-2551000000,-1022000000,0
+"FIN","S",0,"Interest on Unmatured Debt","Intérêt sur la dette non échue","SEC",-1047672626,-2551000000,-1022000000,-503000000
 "FIN","S",0,"Losses on Foreign Exchange","Pertes d'opérations de change","SA",78362168,55377329,22752076,0
 "FIN","S",0,"Other Interest Costs","Autres frais d'intérêts","ME",8150000000,7630000000,7094000000,6566000000
 "FIN","S",0,"Other Interest Costs","Autres frais d'intérêts","SA",17772416,-65586566,81348310,0
 "FIN","S",0,"Other Interest Costs","Autres frais d'intérêts","SEB",2755580,0,-5000000,1000000
-"FIN","S",0,"Other Interest Costs","Autres frais d'intérêts","SEC",-34483433,-21000000,-143000000,0
+"FIN","S",0,"Other Interest Costs","Autres frais d'intérêts","SEC",-34483433,-21000000,-143000000,35000000
 "FIN","S",0,"Payment of liabilities previously recorded as revenue","Paiement de dettes comptabilisées antérieurement à titre de revenus","SA",3677143,3013084,4658431,0
+"FIN","S",0,"Payment to the Canada Infrastructure Bank","Paiements à la Banque d'infrastructures du Canada","SEC",0,0,0,19006000
 "FIN","S",0,"Payment to the International Bank for reconstruction and development for the Agriculture Advance Market commitment (Bretton Woods and Related Agreements Act, section 8)","Paiement à la Banque internationale pour la reconstruction et le développement pour les garanties de marché en matière d'agriculture (Loi sur les accords de Bretton Woods et les accords connexes, section 8)","ME",10000000,0,0,0
 "FIN","S",0,"Payments to International Development Association","Paiements à l'Association internationale de développement","ME",441610000,441610000,441620000,441610000
 "FIN","S",0,"Payments to International Development Association","Paiements à l'Association internationale de développement","SEB",441610000,0,0,0
@@ -621,42 +631,43 @@
 "FIN","S",0,"Youth Allowances Recovery (Federal-Provincial Fiscal Revision Act, 1964)","Recouvrement ayant trait aux allocations aux jeunes (Loi de 1964 sur la révision des arrangements fiscaux entre le gouvernement fédéral et les provinces)","ME",-815902000,-853046000,-890667000,-888654000
 "FIN","S",0,"Youth Allowances Recovery (Federal-Provincial Fiscal Revision Act, 1964)","Recouvrement ayant trait aux allocations aux jeunes (Loi de 1964 sur la révision des arrangements fiscaux entre le gouvernement fédéral et les provinces)","SA",39258489,31543134,34476715,0
 "FIN","S",0,"Youth Allowances Recovery (Federal-Provincial Fiscal Revision Act, 1964)","Recouvrement ayant trait aux allocations aux jeunes (Loi de 1964 sur la révision des arrangements fiscaux entre le gouvernement fédéral et les provinces)","SEB",1831000,0,66033000,27231000
-"FIN","S",0,"Youth Allowances Recovery (Federal-Provincial Fiscal Revision Act, 1964)","Recouvrement ayant trait aux allocations aux jeunes (Loi de 1964 sur la révision des arrangements fiscaux entre le gouvernement fédéral et les provinces)","SEC",7665000,10889000,-14377000,0
+"FIN","S",0,"Youth Allowances Recovery (Federal-Provincial Fiscal Revision Act, 1964)","Recouvrement ayant trait aux allocations aux jeunes (Loi de 1964 sur la révision des arrangements fiscaux entre le gouvernement fédéral et les provinces)","SEC",7665000,10889000,-14377000,-10802000
 "FJA",1,1,"Operating and Program","Fonctionnement et Programme","ME",8643425,7942728,7833778,8779358
 "FJA",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,1000000,1141190,0
 "FJA",1,1,"Operating and Program","Fonctionnement et Programme","SEB",66419,0,431450,0
-"FJA",1,1,"Operating and Program","Fonctionnement et Programme","VA",457196,450907,444470,405439
+"FJA",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,0,0,265150
+"FJA",1,1,"Operating and Program","Fonctionnement et Programme","VA",457196,450907,444470,754379
 "FJA",5,1,"Operating and Program","Fonctionnement et Programme","ME",1513611,1513611,1513611,3525036
 "FJA",5,1,"Operating and Program","Fonctionnement et Programme","SEA",0,2000000,1500000,0
 "FJA",5,1,"Operating and Program","Fonctionnement et Programme","SEB",1600000,0,0,700000
-"FJA",5,1,"Operating and Program","Fonctionnement et Programme","VA",98853,75681,97102,75681
+"FJA",5,1,"Operating and Program","Fonctionnement et Programme","VA",98853,75681,97102,129079
 "FJA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",666777,964338,988156,910616
 "FJA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",158940,-186791,-222955,0
 "FJA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,0,11400,0
 "FJA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,0,18220,0
+"FJA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,0,0,18580
 "FJA","S",0,"Judges' salaries, allowances and annuities, annuities to spouses and children of judges and lump sum payments to spouses of judges who die while in office","Traitements, indemnités et pensions des juges, pensions aux conjoints et aux enfants des juges et montants forfaitaires versés aux conjoints des juges qui décèdent pendant leur mandat","ME",500885033,514430443,544838708,558662575
 "FJA","S",0,"Judges' salaries, allowances and annuities, annuities to spouses and children of judges and lump sum payments to spouses of judges who die while in office","Traitements, indemnités et pensions des juges, pensions aux conjoints et aux enfants des juges et montants forfaitaires versés aux conjoints des juges qui décèdent pendant leur mandat","SA",4804580,18212602,-9951775,0
 "FJA","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",269,211,211,0
 "FO",1,1,"Operating and Program","Fonctionnement et Programme","ME",1101569625,1181570672,1238519588,1258375596
 "FO",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,46471301,131283518,215272236
 "FO",1,1,"Operating and Program","Fonctionnement et Programme","SEB",20433573,0,19885737,5607697
-"FO",1,1,"Operating and Program","Fonctionnement et Programme","SEC",22391186,50263172,7222088,0
-"FO",1,1,"Operating and Program","Fonctionnement et Programme","VA",74355503,46248449,60996324,51593839
+"FO",1,1,"Operating and Program","Fonctionnement et Programme","SEC",22391186,50263172,7222088,-999856
+"FO",1,1,"Operating and Program","Fonctionnement et Programme","VA",74355503,46248449,60996324,116947638
 "FO",10,3,"Grants & Contributions","Subventions et Contributions","ME",57853950,88932871,65510981,70969884
 "FO",10,3,"Grants & Contributions","Subventions et Contributions","SEA",0,4303802,28939067,64265647
 "FO",10,3,"Grants & Contributions","Subventions et Contributions","SEB",33117499,0,4990846,21343917
-"FO",10,3,"Grants & Contributions","Subventions et Contributions","SEC",538517,3685087,2557557,0
-"FO",10,3,"Grants & Contributions","Subventions et Contributions","VA",0,0,0,1500000
+"FO",10,3,"Grants & Contributions","Subventions et Contributions","SEC",538517,3685087,2557557,3159860
 "FO",5,2,"Capital","Capital","ME",325273149,495982360,809655097,751805774
 "FO",5,2,"Capital","Capital","SEA",0,152552709,138943032,79887440
 "FO",5,2,"Capital","Capital","SEB",123236424,0,1588390,28362326
-"FO",5,2,"Capital","Capital","SEC",0,128775063,7940611,0
+"FO",5,2,"Capital","Capital","SEC",0,128775063,7940611,881
 "FO",5,2,"Capital","Capital","VA",37870228,65716950,106791425,112710012
 "FO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",120533824,122672345,127280423,119721274
 "FO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",1153473,-8981695,-17981643,0
 "FO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,1501938,3883689,15936478
 "FO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",1371870,0,1841055,1154471
-"FO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",403550,1762180,230063,0
+"FO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",403550,1762180,230063,128703
 "FO","S",0,"Losses on Foreign Exchange","Pertes sur opérations de change","SA",564483,0,14155,0
 "FO","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",94510,770457,24129,0
 "FO","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","ME",80300,82100,83500,84400
@@ -664,7 +675,8 @@
 "FO","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",3183217,4041765,6417822,0
 "FORDQ",1,1,"Operating and Program","Fonctionnement et Programme","ME",37907218,38266985,38180803,36755088
 "FORDQ",1,1,"Operating and Program","Fonctionnement et Programme","SEB",412021,0,0,0
-"FORDQ",1,1,"Operating and Program","Fonctionnement et Programme","VA",2025089,1895361,1913349,1909040
+"FORDQ",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,0,0,-9600
+"FORDQ",1,1,"Operating and Program","Fonctionnement et Programme","VA",2025089,1895361,1913349,3993037
 "FORDQ",5,3,"Grants & Contributions","Subventions et Contributions","ME",205309446,217995801,260021718,262729505
 "FORDQ",5,3,"Grants & Contributions","Subventions et Contributions","SEA",0,0,15600000,0
 "FORDQ",5,3,"Grants & Contributions","Subventions et Contributions","SEB",6858605,0,-160000,5885000
@@ -676,7 +688,7 @@
 "FTRAC",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,3839764,0,0
 "FTRAC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",1634256,0,473938,420000
 "FTRAC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,127996,0,0
-"FTRAC",1,1,"Operating and Program","Fonctionnement et Programme","VA",2133950,2335132,2167459,2552125
+"FTRAC",1,1,"Operating and Program","Fonctionnement et Programme","VA",2133950,2335132,2167459,3597468
 "FTRAC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",5385654,5495520,5654561,5282731
 "FTRAC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-418578,-458115,-777616,0
 "FTRAC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",19559,0,86062,0
@@ -684,7 +696,7 @@
 "FTRAC","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",0,0,46,0
 "GG",1,1,"Operating and Program","Fonctionnement et Programme","ME",17150426,17165126,20034516,19705766
 "GG",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,1793008,0,0
-"GG",1,1,"Operating and Program","Fonctionnement et Programme","VA",1009829,764577,412554,747403
+"GG",1,1,"Operating and Program","Fonctionnement et Programme","VA",1009829,764577,412554,1189280
 "GG","S",0,"Annuities payable under the Governor General's Act","Pensions payables en vertu de la Loi sur le gouverneur général(L.R.C. (1985), ch. G-9)","ME",555000,631700,573620,646920
 "GG","S",0,"Annuities payable under the Governor General's Act","Pensions payables en vertu de la Loi sur le gouverneur général(L.R.C. (1985), ch. G-9)","SA",-3639,-71514,-6151,0
 "GG","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",2008173,2051125,2249601,2103339
@@ -696,18 +708,19 @@
 "GSC",1,1,"Operating and Program","Fonctionnement et Programme","ME",1786071771,1651054220,1563893483,2134161650
 "GSC",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,40400000,290359023,0
 "GSC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",-209308452,0,52350000,-1681518
-"GSC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",51614121,40491592,40634322,0
-"GSC",1,1,"Operating and Program","Fonctionnement et Programme","VA",92532262,44028940,57984110,56795057
+"GSC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",51614121,40491592,40634322,140598519
+"GSC",1,1,"Operating and Program","Fonctionnement et Programme","VA",92532262,44028940,57984110,108140464
 "GSC",5,2,"Capital","Capital","ME",759963628,1099063968,1183196646,1441927728
 "GSC",5,2,"Capital","Capital","SEA",0,29800000,60943600,0
 "GSC",5,2,"Capital","Capital","SEB",334498855,0,5000000,-6974827
-"GSC",5,2,"Capital","Capital","SEC",0,42559132,59277525,0
+"GSC",5,2,"Capital","Capital","SEC",0,42559132,59277525,73639764
 "GSC",5,2,"Capital","Capital","VA",64027170,155873847,91075681,44020011
 "GSC","S",0,"Collection Agency Fees","Honoraires - Agence de recouvrement","SA",6292,0,0,0
 "GSC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",112067505,116552819,121005086,107826353
 "GSC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-5625570,-9776013,-21879862,0
 "GSC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,0,304209,0
 "GSC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,0,3320000,0
+"GSC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,0,0,13828072
 "GSC","S",0,"Defence Production Revolving Fund","Fonds renouvelable de la production de défense","SA",100000000,100000000,100000000,0
 "GSC","S",0,"Optional Services Revolving Fund","Fonds renouvelable des services optionnels","SA",34010271,28648673,27542676,0
 "GSC","S",0,"Payment in lieu of taxes to municipalities and other taxing authorities","Paiement en remplacement d'impôts fonciers versés aux municipalités et à d'autres autorités taxatrices","SA",0,310,31455045,0
@@ -722,8 +735,8 @@
 "H",1,1,"Operating and Program","Fonctionnement et Programme","ME",1774856975,1777987439,1768947706,1943584804
 "H",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,0,53561618,13146424
 "H",1,1,"Operating and Program","Fonctionnement et Programme","SEB",6402558,0,105976247,124156375
-"H",1,1,"Operating and Program","Fonctionnement et Programme","SEC",-19540204,-3043900,5337329,0
-"H",1,1,"Operating and Program","Fonctionnement et Programme","VA",85171117,57148430,53298149,55156889
+"H",1,1,"Operating and Program","Fonctionnement et Programme","SEC",-19540204,-3043900,5337329,34034996
+"H",1,1,"Operating and Program","Fonctionnement et Programme","VA",85171117,57148430,53298149,100268184
 "H",10,3,"Grants & Contributions","Subventions et Contributions","ME",1683745108,1678425178,1785339382,2116553920
 "H",10,3,"Grants & Contributions","Subventions et Contributions","SEA",0,0,101715753,48315710
 "H",10,3,"Grants & Contributions","Subventions et Contributions","SEB",49986725,0,116609626,139735313
@@ -732,7 +745,7 @@
 "H",5,2,"Capital","Capital","ME",31656363,28035364,25407249,37230214
 "H",5,2,"Capital","Capital","SEA",0,0,6223645,310000
 "H",5,2,"Capital","Capital","SEB",777001,0,618301,720000
-"H",5,2,"Capital","Capital","SEC",0,310001,0,0
+"H",5,2,"Capital","Capital","SEC",0,310001,0,540000
 "H",5,2,"Capital","Capital","VA",3493417,6594089,4337638,7317367
 "H","S",0,"Canada Health Infoway Inc.","Inforoute Santé du Canada Inc.","SA",87956664,82700467,37877924,0
 "H","S",0,"Collection Agency Fees","Honoraires - Agence de recouvrement","SA",10776,7732,1756,0
@@ -740,7 +753,7 @@
 "H","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",6274540,-6421384,-15305675,85465
 "H","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,0,3730802,692100
 "H","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",1061481,0,1014139,5839835
-"H","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,1960451,104072,0
+"H","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,1960451,104072,2790166
 "H","S",0,"Court Awards","Montants adjugés par une cour","SA",247179,13000,687003,0
 "H","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",635102,306597,233066,0
 "H","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","ME",80300,82100,83500,84400
@@ -766,55 +779,55 @@
 "HRSD",1,1,"Operating and Program","Fonctionnement et Programme","ME",571067134,561409860,607999524,576846158
 "HRSD",1,1,"Operating and Program","Fonctionnement et Programme","SEA",8964980,0,12452090,4197739
 "HRSD",1,1,"Operating and Program","Fonctionnement et Programme","SEB",-1260542,0,22855045,93384298
-"HRSD",1,1,"Operating and Program","Fonctionnement et Programme","SEC",17171212,59086199,4644845,0
-"HRSD",1,1,"Operating and Program","Fonctionnement et Programme","VA",43238131,27298552,84231376,32441600
+"HRSD",1,1,"Operating and Program","Fonctionnement et Programme","SEC",17171212,59086199,4644845,-133659
+"HRSD",1,1,"Operating and Program","Fonctionnement et Programme","VA",43238131,27298552,84231376,54055299
 "HRSD",5,3,"Grants & Contributions","Subventions et Contributions","ME",1227675995,1712658484,1692443880,1846494791
 "HRSD",5,3,"Grants & Contributions","Subventions et Contributions","SEA",475235798,0,280194535,580429054
 "HRSD",5,3,"Grants & Contributions","Subventions et Contributions","SEB",52486202,0,40245000,33010935
-"HRSD",5,3,"Grants & Contributions","Subventions et Contributions","SEC",0,1369224,10685341,0
-"HRSD",5,3,"Grants & Contributions","Subventions et Contributions","VA",0,3750000,0,0
-"HRSD",7,4,"Debt Forgiveness","Radiation de dettes","SEC",294647678,62859,178370098,0
+"HRSD",5,3,"Grants & Contributions","Subventions et Contributions","SEC",0,1369224,10685341,14288916
+"HRSD",5,3,"Grants & Contributions","Subventions et Contributions","VA",0,3750000,0,25000000
+"HRSD",7,4,"Debt Forgiveness","Radiation de dettes","SEC",294647678,62859,178370098,203470823
 "HRSD",9,4,"Debt Forgiveness","Radiation de dettes","SEC",0,175959012,0,0
 "HRSD","S",0,"Allowance payments (Old Age Security Act)","Versements d'allocations (Loi sur la sécurité de la vieillesse)","ME",544293849,545938258,515877981,497000000
 "HRSD","S",0,"Allowance payments (Old Age Security Act)","Versements d'allocations (Loi sur la sécurité de la vieillesse)","SA",-8669195,-11510481,47236046,0
-"HRSD","S",0,"Allowance payments (Old Age Security Act)","Versements d'allocations (Loi sur la sécurité de la vieillesse)","SEC",-4210730,-21860911,-32877981,0
+"HRSD","S",0,"Allowance payments (Old Age Security Act)","Versements d'allocations (Loi sur la sécurité de la vieillesse)","SEC",-4210730,-21860911,-32877981,23374450
 "HRSD","S",0,"Canada Disability Savings Bond payments to Registered Disability Savings Plan issuers on behalf of Registered Disability Savings Plan beneficiaries to encourage long-term financial security of eligible individuals with disabilities","Paiements de Bons canadiens pour l'épargne-invalidité aux émetteurs de régimes enregistrés d'épargne-invalidité au nom des bénéficiaires du régime enregistrés d'épargne-invalidité afin d'encourager la sécurité financière à long terme des personnes handicapées admissibles","ME",85700000,131000000,142200000,200600000
 "HRSD","S",0,"Canada Disability Savings Bond payments to Registered Disability Savings Plan issuers on behalf of Registered Disability Savings Plan beneficiaries to encourage long-term financial security of eligible individuals with disabilities","Paiements de Bons canadiens pour l'épargne-invalidité aux émetteurs de régimes enregistrés d'épargne-invalidité au nom des bénéficiaires du régime enregistrés d'épargne-invalidité afin d'encourager la sécurité financière à long terme des personnes handicapées admissibles","SA",-7108345,29169689,8317592,0
-"HRSD","S",0,"Canada Disability Savings Bond payments to Registered Disability Savings Plan issuers on behalf of Registered Disability Savings Plan beneficiaries to encourage long-term financial security of eligible individuals with disabilities","Paiements de Bons canadiens pour l'épargne-invalidité aux émetteurs de régimes enregistrés d'épargne-invalidité au nom des bénéficiaires du régime enregistrés d'épargne-invalidité afin d'encourager la sécurité financière à long terme des personnes handicapées admissibles","SEC",26404474,0,29400000,0
+"HRSD","S",0,"Canada Disability Savings Bond payments to Registered Disability Savings Plan issuers on behalf of Registered Disability Savings Plan beneficiaries to encourage long-term financial security of eligible individuals with disabilities","Paiements de Bons canadiens pour l'épargne-invalidité aux émetteurs de régimes enregistrés d'épargne-invalidité au nom des bénéficiaires du régime enregistrés d'épargne-invalidité afin d'encourager la sécurité financière à long terme des personnes handicapées admissibles","SEC",26404474,0,29400000,2084000
 "HRSD","S",0,"Canada Disability Savings Grant payments to Registered Disability Savings Plan issuers on behalf of Registered Disability Savings Plan beneficiaries to encourage long-term financial security of eligible individuals disabilities","Paiements de Subventions canadiennes pour l'épargne-invalidité aux émetteurs de régimes enregistrés d'épargne-invalidité au nom des bénéficiaires du régime enregistré d'épargne-invalidité afin d'encourager la sécurité financière à long terme des personnes handicapées admissibles","ME",228300000,266900000,322900000,371500000
 "HRSD","S",0,"Canada Disability Savings Grant payments to Registered Disability Savings Plan issuers on behalf of Registered Disability Savings Plan beneficiaries to encourage long-term financial security of eligible individuals disabilities","Paiements de Subventions canadiennes pour l'épargne-invalidité aux émetteurs de régimes enregistrés d'épargne-invalidité au nom des bénéficiaires du régime enregistré d'épargne-invalidité afin d'encourager la sécurité financière à long terme des personnes handicapées admissibles","SA",-13849009,6350623,-5319609,0
-"HRSD","S",0,"Canada Disability Savings Grant payments to Registered Disability Savings Plan issuers on behalf of Registered Disability Savings Plan beneficiaries to encourage long-term financial security of eligible individuals disabilities","Paiements de Subventions canadiennes pour l'épargne-invalidité aux émetteurs de régimes enregistrés d'épargne-invalidité au nom des bénéficiaires du régime enregistré d'épargne-invalidité afin d'encourager la sécurité financière à long terme des personnes handicapées admissibles","SEC",16118788,0,2600000,0
+"HRSD","S",0,"Canada Disability Savings Grant payments to Registered Disability Savings Plan issuers on behalf of Registered Disability Savings Plan beneficiaries to encourage long-term financial security of eligible individuals disabilities","Paiements de Subventions canadiennes pour l'épargne-invalidité aux émetteurs de régimes enregistrés d'épargne-invalidité au nom des bénéficiaires du régime enregistré d'épargne-invalidité afin d'encourager la sécurité financière à long terme des personnes handicapées admissibles","SEC",16118788,0,2600000,14012000
 "HRSD","S",0,"Canada Education Savings grant payments to Registered Educations Savings Plans (RESPs) trustees on behalf of RESP beneficiaries to encourage Canadians to save for post-secondary education for their children","Paiements de Subventions canadiennes pour l'épargne-études aux fiduciaires de régimes enregistrés d'épargne-études (REEE) au nom des bénéficiaires des REEE afin d'encourager les Canadiens à épargner pour les études postsecondaires de leurs enfants","ME",773000000,800000000,824000000,843000000
 "HRSD","S",0,"Canada Education Savings grant payments to Registered Educations Savings Plans (RESPs) trustees on behalf of RESP beneficiaries to encourage Canadians to save for post-secondary education for their children","Paiements de Subventions canadiennes pour l'épargne-études aux fiduciaires de régimes enregistrés d'épargne-études (REEE) au nom des bénéficiaires des REEE afin d'encourager les Canadiens à épargner pour les études postsecondaires de leurs enfants","SA",1081862,13635620,26638013,0
-"HRSD","S",0,"Canada Education Savings grant payments to Registered Educations Savings Plans (RESPs) trustees on behalf of RESP beneficiaries to encourage Canadians to save for post-secondary education for their children","Paiements de Subventions canadiennes pour l'épargne-études aux fiduciaires de régimes enregistrés d'épargne-études (REEE) au nom des bénéficiaires des REEE afin d'encourager les Canadiens à épargner pour les études postsecondaires de leurs enfants","SEC",7000000,7000000,8000000,0
+"HRSD","S",0,"Canada Education Savings grant payments to Registered Educations Savings Plans (RESPs) trustees on behalf of RESP beneficiaries to encourage Canadians to save for post-secondary education for their children","Paiements de Subventions canadiennes pour l'épargne-études aux fiduciaires de régimes enregistrés d'épargne-études (REEE) au nom des bénéficiaires des REEE afin d'encourager les Canadiens à épargner pour les études postsecondaires de leurs enfants","SEC",7000000,7000000,8000000,37000000
 "HRSD","S",0,"Canada Learning Bond payments to Registered Education Savings Plan trustees on behalf of Registered Education Savings Plan beneficiaries to support access to post-secondary education for children from low-income families","Paiements de Bons d'études canadiens aux fiduciaires de régimes enregistrés d'épargne-études au nom des bénéficiaires des régimes enregistré d'épargne-études afin d'appuyer l'accès à l'éducation postsecondaire des enfants de familles à faible revenu","ME",127000000,130000000,133000000,143000000
 "HRSD","S",0,"Canada Learning Bond payments to Registered Education Savings Plan trustees on behalf of Registered Education Savings Plan beneficiaries to support access to post-secondary education for children from low-income families","Paiements de Bons d'études canadiens aux fiduciaires de régimes enregistrés d'épargne-études au nom des bénéficiaires des régimes enregistré d'épargne-études afin d'appuyer l'accès à l'éducation postsecondaire des enfants de familles à faible revenu","SA",-8867538,906530,343188,0
-"HRSD","S",0,"Canada Learning Bond payments to Registered Education Savings Plan trustees on behalf of Registered Education Savings Plan beneficiaries to support access to post-secondary education for children from low-income families","Paiements de Bons d'études canadiens aux fiduciaires de régimes enregistrés d'épargne-études au nom des bénéficiaires des régimes enregistré d'épargne-études afin d'appuyer l'accès à l'éducation postsecondaire des enfants de familles à faible revenu","SEC",-14000000,-12000000,0,0
+"HRSD","S",0,"Canada Learning Bond payments to Registered Education Savings Plan trustees on behalf of Registered Education Savings Plan beneficiaries to support access to post-secondary education for children from low-income families","Paiements de Bons d'études canadiens aux fiduciaires de régimes enregistrés d'épargne-études au nom des bénéficiaires des régimes enregistré d'épargne-études afin d'appuyer l'accès à l'éducation postsecondaire des enfants de familles à faible revenu","SEC",-14000000,-12000000,0,7000000
 "HRSD","S",0,"Canada Student Grants to qualifying full and part-time students pursuant to the Canada Student Financial Assistance Act","Bourses canadiennes aux fins d'études destinées aux étudiants à temps plein et à temps partiel admissibles aux termes de la Loi fédérale sur l'aide financière aux étudiants","ME",722619884,756113051,763845037,1135015909
 "HRSD","S",0,"Canada Student Grants to qualifying full and part-time students pursuant to the Canada Student Financial Assistance Act","Bourses canadiennes aux fins d'études destinées aux étudiants à temps plein et à temps partiel admissibles aux termes de la Loi fédérale sur l'aide financière aux étudiants","SA",-28912974,-42185821,14613362,0
-"HRSD","S",0,"Canada Student Grants to qualifying full and part-time students pursuant to the Canada Student Financial Assistance Act","Bourses canadiennes aux fins d'études destinées aux étudiants à temps plein et à temps partiel admissibles aux termes de la Loi fédérale sur l'aide financière aux étudiants","SEC",13132724,0,196112903,0
+"HRSD","S",0,"Canada Student Grants to qualifying full and part-time students pursuant to the Canada Student Financial Assistance Act","Bourses canadiennes aux fins d'études destinées aux étudiants à temps plein et à temps partiel admissibles aux termes de la Loi fédérale sur l'aide financière aux étudiants","SEC",13132724,0,196112903,123836742
 "HRSD","S",0,"Civil Service Insurance actuarial liability adjustments","Redressement du passif actuariel de l'assurance de la fonction publique","ME",145000,145000,145000,145000
 "HRSD","S",0,"Civil Service Insurance actuarial liability adjustments","Redressement du passif actuariel de l'assurance de la fonction publique","SA",-145000,-75460,-145000,0
 "HRSD","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",222011536,227360391,241708033,231417662
-"HRSD","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",6822829,-3253116,-20519562,9945979
+"HRSD","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",6822829,-3253116,-20519562,12788890
 "HRSD","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",799222,0,1983822,703997
 "HRSD","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",-666944,0,3737491,11454451
 "HRSD","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",2374751,6309710,324050,0
 "HRSD","S",0,"Energy Cost Benefit","Prestation liée au coût de l'énergie","SA",-250,-250,0,0
 "HRSD","S",0,"Guaranteed Income Supplement Payments (Old Age Security Act)","Versements du Supplément de revenu garanti (Loi sur la sécurité de la vieillesse)","ME",10122657233,10605508948,10804379368,11848000000
 "HRSD","S",0,"Guaranteed Income Supplement Payments (Old Age Security Act)","Versements du Supplément de revenu garanti (Loi sur la sécurité de la vieillesse)","SA",41351265,-338672215,-180576163,0
-"HRSD","S",0,"Guaranteed Income Supplement Payments (Old Age Security Act)","Versements du Supplément de revenu garanti (Loi sur la sécurité de la vieillesse)","SEC",-97856032,-345176781,298620632,0
+"HRSD","S",0,"Guaranteed Income Supplement Payments (Old Age Security Act)","Versements du Supplément de revenu garanti (Loi sur la sécurité de la vieillesse)","SEC",-97856032,-345176781,298620632,-29060192
 "HRSD","S",0,"Old Age Security payments (Old Age Security Act)","Versements de la Sécurité de la vieillesse (Loi sur la sécurité de la vieillesse)","ME",33554711274,34920970054,37086489507,38810000000
 "HRSD","S",0,"Old Age Security payments (Old Age Security Act)","Versements de la Sécurité de la vieillesse (Loi sur la sécurité de la vieillesse)","SA",303712688,-180051925,-15832718,0
-"HRSD","S",0,"Old Age Security payments (Old Age Security Act)","Versements de la Sécurité de la vieillesse (Loi sur la sécurité de la vieillesse)","SEC",-322916684,309554470,-321489507,0
+"HRSD","S",0,"Old Age Security payments (Old Age Security Act)","Versements de la Sécurité de la vieillesse (Loi sur la sécurité de la vieillesse)","SEC",-322916684,309554470,-321489507,-92715906
 "HRSD","S",0,"Payments of compensation respecting government employees (Government Employees Compensation Act) and merchant seamen (Merchant Seamen Compensation Act)","Paiements d'indemnités à des agents de l'État (Loi sur l'indemnisation des agents de l'État) et à des marins marchands (Loi sur l'indemnisation des marins marchands)","ME",44000000,44000000,44000000,44000000
 "HRSD","S",0,"Payments of compensation respecting government employees (Government Employees Compensation Act) and merchant seamen (Merchant Seamen Compensation Act)","Paiements d'indemnités à des agents de l'État (Loi sur l'indemnisation des agents de l'État) et à des marins marchands (Loi sur l'indemnisation des marins marchands)","SA",-6627084,-14346235,-3770867,0
 "HRSD","S",0,"Payments related to the direct financing arrangement under the Apprentice Loans Act","Paiements liés aux modalités de financement direct accordés en vertu de la Loi sur les prêts aux apprentis","ME",0,1458760,4272751,3219095
 "HRSD","S",0,"Payments related to the direct financing arrangement under the Apprentice Loans Act","Paiements liés aux modalités de financement direct accordés en vertu de la Loi sur les prêts aux apprentis","SA",-2000000,-759547,-695306,0
-"HRSD","S",0,"Payments related to the direct financing arrangement under the Apprentice Loans Act","Paiements liés aux modalités de financement direct accordés en vertu de la Loi sur les prêts aux apprentis","SEC",2000000,951114,107231,0
+"HRSD","S",0,"Payments related to the direct financing arrangement under the Apprentice Loans Act","Paiements liés aux modalités de financement direct accordés en vertu de la Loi sur les prêts aux apprentis","SEC",2000000,951114,107231,-229516
 "HRSD","S",0,"Payments related to the direct financing arrangement under the Canada Student Financial Assistance Act","Paiements liés aux modalités de financement direct accordés en vertu de la Loi fédérale sur l'aide financière aux étudiants","ME",581204968,658646004,705088437,795376247
 "HRSD","S",0,"Payments related to the direct financing arrangement under the Canada Student Financial Assistance Act","Paiements liés aux modalités de financement direct accordés en vertu de la Loi fédérale sur l'aide financière aux étudiants","SA",1248720,-12013503,-10975102,0
-"HRSD","S",0,"Payments related to the direct financing arrangement under the Canada Student Financial Assistance Act","Paiements liés aux modalités de financement direct accordés en vertu de la Loi fédérale sur l'aide financière aux étudiants","SEC",48067976,-28268604,-31734024,0
+"HRSD","S",0,"Payments related to the direct financing arrangement under the Canada Student Financial Assistance Act","Paiements liés aux modalités de financement direct accordés en vertu de la Loi fédérale sur l'aide financière aux étudiants","SEC",48067976,-28268604,-31734024,-26347227
 "HRSD","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",1077092,506805,188471,0
 "HRSD","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","ME",164600,168200,167000,168800
 "HRSD","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","SA",0,-1166,316,0
@@ -836,22 +849,22 @@
 "HRSD","S",0,"Wage Earner Protection Program payments to eligible applicants owed wages and vacation pay, severance pay and termination pay from employers who are either bankrupt or in receivership as well as payments to trustees and receivers who will provide the necessary information to determine eligibility","Paiements en vertu du Programme de protection des salariés aux personnes admissibles pour les salaires et les indemnités de vacances, les indemnités de départ et les indemnités de cessation d'emploi qui sont dus par les employeurs en faillite ou mis sous séquestre, de même que les paiements aux syndics et aux séquestres qui fourniront les renseignements nécessaires pour déterminer l'admissibilité","SA",-26419285,-25848681,-30278874,0
 "IDRC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",188019646,183478242,149205625,138705625
 "IDRC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEC",2000001,0,0,0
-"IDRC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",4136,0,0,0
+"IDRC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",4136,0,0,1246261
 "IJC",1,1,"Operating and Program","Fonctionnement et Programme","ME",6169457,6172075,6169075,9434410
 "IJC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",0,0,250000,0
-"IJC",1,1,"Operating and Program","Fonctionnement et Programme","VA",544948,343765,308604,308454
+"IJC",1,1,"Operating and Program","Fonctionnement et Programme","VA",544948,343765,308604,417847
 "IJC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",577500,588969,602992,615283
 "IJC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-88007,-102977,-163877,0
 "IJC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,0,25000,0
 "INAC",1,1,"Operating and Program","Fonctionnement et Programme","ME",1215376476,1069154628,658200538,892342724
 "INAC",1,1,"Operating and Program","Fonctionnement et Programme","SEA",93848714,278127454,204799222,19831837
 "INAC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",46821056,0,117375502,91888537
-"INAC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",1116055,110333479,-13184525,0
-"INAC",1,1,"Operating and Program","Fonctionnement et Programme","VA",43940403,28574728,29358572,24879894
+"INAC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",1116055,110333479,-13184525,-43038426
+"INAC",1,1,"Operating and Program","Fonctionnement et Programme","VA",43940403,28574728,29358572,53851665
 "INAC",10,3,"Grants & Contributions","Subventions et Contributions","ME",6654152734,6936151589,6652765968,8966692676
 "INAC",10,3,"Grants & Contributions","Subventions et Contributions","SEA",209312269,109462639,981831046,699089958
 "INAC",10,3,"Grants & Contributions","Subventions et Contributions","SEB",79042978,0,520600017,350088546
-"INAC",10,3,"Grants & Contributions","Subventions et Contributions","SEC",114640722,120354069,105077732,0
+"INAC",10,3,"Grants & Contributions","Subventions et Contributions","SEC",114640722,120354069,105077732,-2849211
 "INAC",10,3,"Grants & Contributions","Subventions et Contributions","VA",0,-566972,0,0
 "INAC",5,2,"Capital","Capital","ME",5695536,35946145,41432179,44496010
 "INAC",5,2,"Capital","Capital","SEA",10600001,4501519,13266026,0
@@ -885,12 +898,15 @@
 "INAC","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","ME",80300,82100,83500,84400
 "INAC","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","SA",0,228,0,0
 "INAC","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",3445197,3051372,2774078,0
+"INDSC",13,3,"Grants & Contributions","Subventions et Contributions","SEC",0,0,0,253685391
+"INDSC",3,1,"Operating and Program","Fonctionnement et Programme","SEC",0,0,0,105920875
+"INDSC",7,2,"Capital","Capital","SEC",0,0,0,1
 "IPC",1,1,"Operating and Program","Fonctionnement et Programme","ME",9897674,9927361,9927361,9946659
 "IPC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",0,0,3131113,1804207
-"IPC",1,1,"Operating and Program","Fonctionnement et Programme","VA",728769,149040,515666,496368
+"IPC",1,1,"Operating and Program","Fonctionnement et Programme","VA",728769,149040,515666,734928
 "IPC",5,1,"Operating and Program","Fonctionnement et Programme","ME",21949100,21908457,22036920,22075133
 "IPC",5,1,"Operating and Program","Fonctionnement et Programme","SEB",-66100,0,0,0
-"IPC",5,1,"Operating and Program","Fonctionnement et Programme","VA",1845093,662619,873703,1082596
+"IPC",5,1,"Operating and Program","Fonctionnement et Programme","VA",1845093,662619,873703,1804545
 "IPC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",3674639,3750848,3845049,3517184
 "IPC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",112910,-297244,-496799,0
 "IPC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,0,221308,0
@@ -898,7 +914,7 @@
 "IRB",1,1,"Operating and Program","Fonctionnement et Programme","ME",107869316,99542732,100834047,113251545
 "IRB",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,0,0,3226219
 "IRB",1,1,"Operating and Program","Fonctionnement et Programme","SEC",-1045042,1485620,4942848,0
-"IRB",1,1,"Operating and Program","Fonctionnement et Programme","VA",9174642,6308049,4645022,4446678
+"IRB",1,1,"Operating and Program","Fonctionnement et Programme","VA",9174642,6308049,4645022,8254360
 "IRB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",13191333,13166759,13668619,13832325
 "IRB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-506185,-1417856,-2314566,0
 "IRB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,0,0,420180
@@ -907,17 +923,17 @@
 "ISC",1,1,"Operating and Program","Fonctionnement et Programme","ME",297683017,303247705,342868928,356511722
 "ISC",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,8549955,7933481,1288806
 "ISC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",34986954,0,2883103,21854710
-"ISC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,-240490,1752258,0
-"ISC",1,1,"Operating and Program","Fonctionnement et Programme","VA",28520344,41498500,19152085,22093146
+"ISC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,-240490,1752258,148546
+"ISC",1,1,"Operating and Program","Fonctionnement et Programme","VA",28520344,41498500,19152085,35836519
 "ISC",10,3,"Grants & Contributions","Subventions et Contributions","ME",557723370,645876909,723984677,2038304873
 "ISC",10,3,"Grants & Contributions","Subventions et Contributions","SEA",0,85011275,587190573,19000000
 "ISC",10,3,"Grants & Contributions","Subventions et Contributions","SEB",34588242,0,271750173,163495969
-"ISC",10,3,"Grants & Contributions","Subventions et Contributions","SEC",0,2063041,0,0
+"ISC",10,3,"Grants & Contributions","Subventions et Contributions","SEC",0,2063041,0,4520900
 "ISC",10,3,"Grants & Contributions","Subventions et Contributions","VA",0,917000,0,0
 "ISC",5,2,"Capital","Capital","ME",16840692,16528241,7833000,11234609
 "ISC",5,2,"Capital","Capital","SEA",0,4422876,8518900,4795516
 "ISC",5,2,"Capital","Capital","SEB",3315690,0,3347508,0
-"ISC",5,2,"Capital","Capital","SEC",0,1933042,0,0
+"ISC",5,2,"Capital","Capital","SEC",0,1933042,0,630000
 "ISC",5,2,"Capital","Capital","VA",4099000,528578,911594,915536
 "ISC","S",0,"Canada Foundation for Sustainable Development Technology Grant","Subvention pour la Fondation du Canada pour l'appui technologique au développement durable","SA",0,0,27476242,0
 "ISC","S",0,"Canadian Intellectual Property Office Revolving Fund","Fonds renouvelable de l'Office de la propriété intellectuelle du Canada","ME",8817682,8631168,18959066,28029265
@@ -927,7 +943,7 @@
 "ISC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",2264752,-245665,-8336681,0
 "ISC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,51006,451349,0
 "ISC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",443587,0,288999,1505781
-"ISC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,0,218839,0
+"ISC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,0,218839,48153
 "ISC","S",0,"Grant and Contribution to Genome Canada","Subventions et Contributions à Génome Canada","ME",63700000,70800000,68000000,33100000
 "ISC","S",0,"Grant and Contribution to Genome Canada","Subventions et Contributions à Génome Canada","SA",-16400000,-10900000,-6100000,0
 "ISC","S",0,"Grant to Sustainable Development Technology Canada (SDTC) for the NextGen Biofuels Fund","Subvention à Technologies du développement durable Canada (TDDC) pour le Fonds de biocarburants ProGen","ME",0,0,0,800000
@@ -944,12 +960,12 @@
 "JUS",1,1,"Operating and Program","Fonctionnement et Programme","ME",236861079,241797227,234999799,234300919
 "JUS",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,627474,0,5122201
 "JUS",1,1,"Operating and Program","Fonctionnement et Programme","SEB",11356519,0,4366915,-433790
-"JUS",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,5089448,0,0
-"JUS",1,1,"Operating and Program","Fonctionnement et Programme","VA",48245249,32253142,31141065,26330153
+"JUS",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,5089448,0,50001
+"JUS",1,1,"Operating and Program","Fonctionnement et Programme","VA",48245249,32253142,31141065,33224709
 "JUS",5,3,"Grants & Contributions","Subventions et Contributions","ME",317485223,354900159,365233777,350315319
 "JUS",5,3,"Grants & Contributions","Subventions et Contributions","SEA",0,1325371,0,40000000
 "JUS",5,3,"Grants & Contributions","Subventions et Contributions","SEB",38950000,0,16082500,0
-"JUS",5,3,"Grants & Contributions","Subventions et Contributions","SEC",0,2220000,2500001,0
+"JUS",5,3,"Grants & Contributions","Subventions et Contributions","SEC",0,2220000,2500001,4000000
 "JUS","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",76161272,77087388,78543454,71459018
 "JUS","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",144586,-4848060,-9199498,0
 "JUS","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,28579,0,771524
@@ -961,8 +977,8 @@
 "JUS","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",3937,3545,2832,0
 "LAC",1,1,"Operating and Program","Fonctionnement et Programme","ME",86431409,83183100,94905525,92746852
 "LAC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",0,0,560000,1989884
-"LAC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",1000001,7086016,1756001,0
-"LAC",1,1,"Operating and Program","Fonctionnement et Programme","VA",6774191,3688379,4246305,4695976
+"LAC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",1000001,7086016,1756001,2738908
+"LAC",1,1,"Operating and Program","Fonctionnement et Programme","VA",6774191,3688379,4246305,11215003
 "LAC",5,2,"Capital","Capital","ME",0,0,11937824,12153065
 "LAC",5,2,"Capital","Capital","SEB",0,0,138588,0
 "LAC",5,2,"Capital","Capital","SEC",0,0,-1300000,0
@@ -970,16 +986,18 @@
 "LAC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",9433379,9828389,10015218,10319298
 "LAC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",1553995,378886,89137,0
 "LAC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,0,0,87164
+"LAC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,0,0,241666
 "LAC","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",164970,57486,36662,0
 "LP",1,1,"Operating and Program","Fonctionnement et Programme","ME",37117035,37754035,37899035,42510256
 "LP",1,1,"Operating and Program","Fonctionnement et Programme","SEB",0,0,0,375000
-"LP",1,1,"Operating and Program","Fonctionnement et Programme","SEC",200000,0,0,0
+"LP",1,1,"Operating and Program","Fonctionnement et Programme","SEC",200000,0,0,2380000
 "LP","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",4852972,4985560,5172204,5247241
 "LP","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-126442,-477368,-602390,0
 "LP","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,0,0,21980
+"LP","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,0,0,373660
 "MPCC",1,1,"Operating and Program","Fonctionnement et Programme","ME",5171097,5158208,4217527,4207948
 "MPCC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",2381486,0,0,0
-"MPCC",1,1,"Operating and Program","Fonctionnement et Programme","VA",187950,260138,279331,210876
+"MPCC",1,1,"Operating and Program","Fonctionnement et Programme","VA",187950,260138,279331,246165
 "MPCC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",447423,456606,467784,430352
 "MPCC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-101151,-81242,-96954,0
 "MPCC","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",0,287,376,0
@@ -987,9 +1005,9 @@
 "NAC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEA",0,20500000,38000000,0
 "NAC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",150001,0,17912375,0
 "NAC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEC",600001,0,0,0
-"NAC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",352207,174337,0,0
+"NAC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",352207,174337,0,1289675
 "NBC",1,1,"Operating and Program","Fonctionnement et Programme","ME",11940643,10759494,6461761,7520761
-"NBC",1,1,"Operating and Program","Fonctionnement et Programme","VA",322001,597032,537975,323088
+"NBC",1,1,"Operating and Program","Fonctionnement et Programme","VA",322001,597032,537975,415054
 "NBC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",360466,367342,375953,343166
 "NBC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",146123,118378,110469,0
 "NBC","S",0,"Expenditures pursuant to Paragraph 29.1(1) of Financial Administration Act","Dépenses aux termes du paragraphe 29.1(1) de la Loi sur la gestion des finances publiques","ME",1850000,1850000,1850000,1850000
@@ -1004,21 +1022,22 @@
 "ND",1,1,"Operating and Program","Fonctionnement et Programme","ME",12513999319,13483693376,13765146779,14201614868
 "ND",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,111652445,0,0
 "ND",1,1,"Operating and Program","Fonctionnement et Programme","SEB",881614659,0,178290762,320571973
-"ND",1,1,"Operating and Program","Fonctionnement et Programme","SEC",142026509,211861594,77968835,0
-"ND",1,1,"Operating and Program","Fonctionnement et Programme","VA",279739360,357344311,282769502,308030068
+"ND",1,1,"Operating and Program","Fonctionnement et Programme","SEC",142026509,211861594,77968835,724840344
+"ND",1,1,"Operating and Program","Fonctionnement et Programme","VA",279739360,357344311,282769502,395832768
 "ND",10,3,"Grants & Contributions","Subventions et Contributions","ME",178183820,168742820,164592820,164695408
 "ND",10,3,"Grants & Contributions","Subventions et Contributions","SEB",581066,0,9500000,0
-"ND",10,3,"Grants & Contributions","Subventions et Contributions","SEC",0,0,-11100000,0
+"ND",10,3,"Grants & Contributions","Subventions et Contributions","SEC",0,0,-11100000,12308014
 "ND",10,3,"Grants & Contributions","Subventions et Contributions","VA",0,-3190521,0,0
 "ND",5,2,"Capital","Capital","ME",4730059209,4020883722,3395930409,3102710864
 "ND",5,2,"Capital","Capital","SEA",0,108194584,0,0
 "ND",5,2,"Capital","Capital","SEB",-6227688,0,46207136,666207731
-"ND",5,2,"Capital","Capital","SEC",-1200500,-23610074,-37899772,0
+"ND",5,2,"Capital","Capital","SEC",-1200500,-23610074,-37899772,33328079
 "ND",5,2,"Capital","Capital","VA",112926761,0,100000000,80035373
 "ND","S",0,"Collection Agency Fees","Honoraires - Agence de recouvrement","SA",28,0,0,0
 "ND","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",272159658,283120971,301573636,273777210
 "ND","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-5671490,-24128528,-45960684,0
 "ND","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,0,65060,2854335
+"ND","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,0,0,9476332
 "ND","S",0,"Contributions to employee benefit plans (Members of the Military)","Contributions aux régimes d'avantages sociaux des employés - Membres militaires","ME",961624109,980000568,1009616089,916558484
 "ND","S",0,"Contributions to employee benefit plans (Members of the Military)","Contributions aux régimes d'avantages sociaux des employés - Membres militaires","SA",363508304,286037030,201429825,0
 "ND","S",0,"Contributions to employee benefit plans (Members of the Military)","Contributions aux régimes d'avantages sociaux des employés - Membres militaires","SEB",9221,0,5043600,66619353
@@ -1052,20 +1071,20 @@
 "NGC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",35770723,35773542,35888410,46203410
 "NGC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEA",0,0,1000000,0
 "NGC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",0,0,1190000,0
-"NGC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",537546,2003219,48975,0
+"NGC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",537546,2003219,48975,733504
 "NGC",5,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",8000000,8000000,8000000,8000000
 "NMST",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",26862194,29754746,59979776,144527796
 "NMST",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEA",0,29355000,45624000,0
 "NMST",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",0,0,2569000,20001
 "NMST",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEC",6279080,0,0,0
-"NMST",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",229121,490831,255498,0
+"NMST",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",229121,490831,255498,663194
 "NPA",1,1,"Operating and Program","Fonctionnement et Programme","ME",701325,701215,701095,465000
 "NPA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",48675,49560,50740,29830
 "NPA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-11210,-19474,-47403,0
 "NPB",1,1,"Operating and Program","Fonctionnement et Programme","ME",41357732,40021838,40671103,40677794
 "NPB",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,613916,0,0
 "NPB",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,299150,0,0
-"NPB",1,1,"Operating and Program","Fonctionnement et Programme","VA",4110025,1866887,2283332,2315795
+"NPB",1,1,"Operating and Program","Fonctionnement et Programme","VA",4110025,1866887,2283332,3616556
 "NPB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",5771262,5893912,6118853,5586177
 "NPB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",528583,-97191,-364246,0
 "NPB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,82475,0,0
@@ -1075,12 +1094,12 @@
 "NR",1,1,"Operating and Program","Fonctionnement et Programme","ME",649823365,654814321,450234684,496759758
 "NR",1,1,"Operating and Program","Fonctionnement et Programme","SEA",195000000,237888974,67120072,631875
 "NR",1,1,"Operating and Program","Fonctionnement et Programme","SEB",28102896,0,23749559,18686741
-"NR",1,1,"Operating and Program","Fonctionnement et Programme","SEC",-2000000,21959690,500000,0
-"NR",1,1,"Operating and Program","Fonctionnement et Programme","VA",42296876,30954623,23640448,24104691
+"NR",1,1,"Operating and Program","Fonctionnement et Programme","SEC",-2000000,21959690,500000,1096567
+"NR",1,1,"Operating and Program","Fonctionnement et Programme","VA",42296876,30954623,23640448,51513289
 "NR",10,3,"Grants & Contributions","Subventions et Contributions","ME",444039000,306608750,292249050,324921046
 "NR",10,3,"Grants & Contributions","Subventions et Contributions","SEA",0,0,-8583582,7949000
 "NR",10,3,"Grants & Contributions","Subventions et Contributions","SEB",6000000,0,3899000,18265000
-"NR",10,3,"Grants & Contributions","Subventions et Contributions","SEC",0,300001,13000,0
+"NR",10,3,"Grants & Contributions","Subventions et Contributions","SEC",0,300001,13000,62775575
 "NR",5,2,"Capital","Capital","ME",12777080,14700394,53318447,55781300
 "NR",5,2,"Capital","Capital","SEA",0,39586996,29270500,0
 "NR",5,2,"Capital","Capital","SEB",400001,0,230000,737387
@@ -1094,7 +1113,7 @@
 "NR","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-260679,-3947159,-8635038,0
 "NR","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,312352,6087814,122834
 "NR","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",464416,0,441005,989914
-"NR","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,530255,0,0
+"NR","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,530255,0,78126
 "NR","S",0,"Geomatics Canada Revolving Fund","Fonds renouvelable de Géomatique Canada","SA",6835057,6366602,6838671,0
 "NR","S",0,"Grant to the Canada Foundation for Sustainable Development Technology for the Next Generation Biofuels Fund","Subvention à la Fondation du Canada pour l'appui technologique au développement durable pour le Fonds des biocarburants de la prochaine génération","ME",79338000,0,0,0
 "NR","S",0,"Grant to the Canada Foundation for Sustainable Development Technology for the Next Generation Biofuels Fund","Subvention à la Fondation du Canada pour l'appui technologique au développement durable pour le Fonds des biocarburants de la prochaine génération","SA",-79338000,337616,2290112,0
@@ -1110,12 +1129,12 @@
 "NRC",1,1,"Operating and Program","Fonctionnement et Programme","ME",374598983,350027685,400731653,349138111
 "NRC",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,46953832,924300,52378832
 "NRC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",7960000,0,1618017,-1485000
-"NRC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",-1793774,-4500000,-18321369,0
+"NRC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",-1793774,-4500000,-18321369,-2504339
 "NRC",1,1,"Operating and Program","Fonctionnement et Programme","VA",84558821,5115392,17489217,12310672
 "NRC",10,3,"Grants & Contributions","Subventions et Contributions","ME",249891385,255318385,319874894,353335834
 "NRC",10,3,"Grants & Contributions","Subventions et Contributions","SEA",25000000,52340807,50000000,10000000
 "NRC",10,3,"Grants & Contributions","Subventions et Contributions","SEB",6372943,0,10000000,85001
-"NRC",10,3,"Grants & Contributions","Subventions et Contributions","SEC",1793775,13120800,18321370,0
+"NRC",10,3,"Grants & Contributions","Subventions et Contributions","SEC",1793775,13120800,18321370,14400000
 "NRC",5,2,"Capital","Capital","ME",30742000,30703000,108758789,90392058
 "NRC",5,2,"Capital","Capital","SEA",0,25600000,3350000,2247723
 "NRC",5,2,"Capital","Capital","SEB",935001,0,0,0
@@ -1126,6 +1145,7 @@
 "NRC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",14089556,4761908,5279391,0
 "NRC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,7221168,9000,7221168
 "NRC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",460000,0,195211,0
+"NRC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,0,0,73790
 "NRC","S",0,"Losses on Foreign Exchange","Pertes d'opérations de change","SA",0,274891,0,0
 "NRC","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",367012,229861,294078,0
 "NRC","S",0,"Spending of revenues pursuant to paragraph 5(1)(e) of the National Research Council Act","Dépense des recettes conformément à l'alinéa 5(1)e) de la Loi sur le Conseil national de recherches (L.R.C. (1985), ch. N-15)","ME",197300000,175000000,175000000,168000000
@@ -1134,44 +1154,47 @@
 "NSERC",1,1,"Operating and Program","Fonctionnement et Programme","ME",42776701,43581132,43401516,44692641
 "NSERC",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,0,707625,0
 "NSERC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",845000,0,1410000,141000
+"NSERC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,0,0,367500
 "NSERC",1,1,"Operating and Program","Fonctionnement et Programme","VA",2145847,2145788,2179057,2170076
 "NSERC",5,3,"Grants & Contributions","Subventions et Contributions","ME",1015471014,1037790619,1071265060,1156971837
 "NSERC",5,3,"Grants & Contributions","Subventions et Contributions","SEA",0,1,7170275,0
 "NSERC",5,3,"Grants & Contributions","Subventions et Contributions","SEB",22568003,0,64137103,6369142
-"NSERC",5,3,"Grants & Contributions","Subventions et Contributions","SEC",461175,31158317,-445622,0
+"NSERC",5,3,"Grants & Contributions","Subventions et Contributions","SEC",461175,31158317,-445622,3740934
 "NSERC",5,3,"Grants & Contributions","Subventions et Contributions","VA",0,320000,0,0
 "NSERC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",4926534,5019795,5139314,4786888
 "NSERC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",20657,93365,-242550,0
 "NSERC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,0,74000,0
 "NSERC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",30000,0,101000,16200
+"NSERC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,0,0,34000
 "NSERC","S",0,"Spending of Revenues pursuant to subsection 4.2 of the Natural Sciences and Engineering Research Council Act","Dépenses des revenus en vertu du paragraphe 4.2 de la Loi sur le Conseil de recherches en sciences naturelles et en génie","ME",0,178779,378779,578779
 "NSERC","S",0,"Spending of Revenues pursuant to subsection 4.2 of the Natural Sciences and Engineering Research Council Act","Dépenses des revenus en vertu du paragraphe 4.2 de la Loi sur le Conseil de recherches en sciences naturelles et en génie","SA",0,-81618,-206957,0
 "NSERC","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",962,929,997,0
 "NSICP",3,1,"Operating and Program","Fonctionnement et Programme","SEB",0,0,0,2187779
+"NSICP",3,1,"Operating and Program","Fonctionnement et Programme","SEC",0,0,0,2073828
 "NSICP","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,0,0,65124
 "OAG",1,1,"Operating and Program","Fonctionnement et Programme","ME",67947936,68269099,68269099,68269099
 "OAG",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,0,0,1
-"OAG",1,1,"Operating and Program","Fonctionnement et Programme","VA",8759454,4722897,6291538,3538955
+"OAG",1,1,"Operating and Program","Fonctionnement et Programme","VA",8759454,4722897,6291538,4237845
 "OAG","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",9793894,10025921,10264633,9232872
 "OAG","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-681625,-1219773,-2074301,188000
 "OAG","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",13981,3989,2399,0
 "OCI",1,1,"Operating and Program","Fonctionnement et Programme","ME",4120298,4106381,4102301,4102301
-"OCI",1,1,"Operating and Program","Fonctionnement et Programme","VA",339589,217277,275111,183214
+"OCI",1,1,"Operating and Program","Fonctionnement et Programme","VA",339589,217277,275111,199860
 "OCI","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",539354,549160,562235,513203
 "OCI","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-12900,-39717,-66488,0
 "OCOL",1,1,"Operating and Program","Fonctionnement et Programme","ME",18623744,18556100,18559402,18595492
-"OCOL",1,1,"Operating and Program","Fonctionnement et Programme","VA",1970677,345853,963895,927970
+"OCOL",1,1,"Operating and Program","Fonctionnement et Programme","VA",1970677,345853,963895,1476940
 "OCOL","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",2153208,2277425,2332217,2134492
 "OCOL","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",195635,-161485,-227628,0
 "OCOL","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",991,516,608,0
 "OCSEC",1,1,"Operating and Program","Fonctionnement et Programme","ME",1847027,1850071,1940071,1940071
-"OCSEC",1,1,"Operating and Program","Fonctionnement et Programme","VA",101994,92351,85435,97004
+"OCSEC",1,1,"Operating and Program","Fonctionnement et Programme","VA",101994,92351,85435,119175
 "OCSEC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",177261,180996,185306,169145
 "OCSEC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-1889,-3106,-15145,0
 "ODPP",1,1,"Operating and Program","Fonctionnement et Programme","ME",149579834,149298354,163791495,161657167
 "ODPP",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,8000000,0,0
 "ODPP",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,3972030,0,0
-"ODPP",1,1,"Operating and Program","Fonctionnement et Programme","VA",7838748,8705928,9031231,8761182
+"ODPP",1,1,"Operating and Program","Fonctionnement et Programme","VA",7838748,8705928,9031231,10225915
 "ODPP","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",18236040,18878245,19881960,18215455
 "ODPP","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-1371070,-3044147,-3581749,0
 "ODPP","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,645265,0,0
@@ -1186,7 +1209,7 @@
 "OICC",1,1,"Operating and Program","Fonctionnement et Programme","SEA",71101228,10000000,14690666,0
 "OICC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",-277984,0,2404232,83706418
 "OICC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,49285925,600000,0
-"OICC",1,1,"Operating and Program","Fonctionnement et Programme","VA",2206091,4658574,3880799,5502039
+"OICC",1,1,"Operating and Program","Fonctionnement et Programme","VA",2206091,4658574,3880799,6500681
 "OICC",10,3,"Grants & Contributions","Subventions et Contributions","ME",0,1569894628,1612886500,4282963173
 "OICC",10,3,"Grants & Contributions","Subventions et Contributions","SEA",0,0,1383566000,0
 "OICC",10,3,"Grants & Contributions","Subventions et Contributions","SEB",0,0,20969937,0
@@ -1208,13 +1231,13 @@
 "OICC","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","ME",0,82100,83500,84400
 "OICC","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","SA",80300,228,0,0
 "OPSIC",1,1,"Operating and Program","Fonctionnement et Programme","ME",4923694,4934882,4936421,4957842
-"OPSIC",1,1,"Operating and Program","Fonctionnement et Programme","VA",287273,245724,266165,244821
+"OPSIC",1,1,"Operating and Program","Fonctionnement et Programme","VA",287273,245724,266165,321556
 "OPSIC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",502540,513560,526053,483539
 "OPSIC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-55517,-115288,-131081,0
 "OPSIC","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",46,0,0,0
 "ORL",1,1,"Operating and Program","Fonctionnement et Programme","ME",4015579,4026414,4026414,4026414
 "ORL",1,1,"Operating and Program","Fonctionnement et Programme","SEB",0,0,0,400000
-"ORL",1,1,"Operating and Program","Fonctionnement et Programme","VA",325908,185118,201321,130314
+"ORL",1,1,"Operating and Program","Fonctionnement et Programme","VA",325908,185118,201321,216064
 "ORL","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",416721,426126,436272,398225
 "ORL","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",18612,-21459,-56457,0
 "ORL","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",0,58,12,0
@@ -1226,11 +1249,13 @@
 "OSFI","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",3789,1867,1888,0
 "OSFI","S",0,"Spending of revenues pursuant to subsection 17(2) of the Office of the Superintendent of Financial Institutions Act","Dépense des revenus conformément au paragraphe 17(2) de la Loi sur le Bureau du surintendant des institutions financières","ME",141825838,146989054,148758898,149215269
 "OSFI","S",0,"Spending of revenues pursuant to subsection 17(2) of the Office of the Superintendent of Financial Institutions Act","Dépense des revenus conformément au paragraphe 17(2) de la Loi sur le Bureau du surintendant des institutions financières","SA",75396443,66744904,67792599,0
+"PBO",3,1,"Operating and Program","Fonctionnement et Programme","SEC",0,0,0,690652
+"PBO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,0,0,40575
 "PCA",1,1,"Operating and Program","Fonctionnement et Programme","ME",451381399,571135767,997202390,1258090149
 "PCA",1,1,"Operating and Program","Fonctionnement et Programme","MYA",125049224,55592998,145403966,257559545
 "PCA",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,349432181,81867207,38364509
 "PCA",1,1,"Operating and Program","Fonctionnement et Programme","SEB",62251611,0,20499057,-14784576
-"PCA",1,1,"Operating and Program","Fonctionnement et Programme","SEC",-3500000,3540198,3000000,0
+"PCA",1,1,"Operating and Program","Fonctionnement et Programme","SEC",-3500000,3540198,3000000,26981302
 "PCA",1,1,"Operating and Program","Fonctionnement et Programme","VA",17452189,6321478,4052186,0
 "PCA",5,9,"Other","Autre","ME",3500000,500000,500000,500000
 "PCA",5,9,"Other","Autre","SEB",0,0,0,25045821
@@ -1238,23 +1263,23 @@
 "PCA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",484717,-2273928,-2781275,0
 "PCA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,4680663,393761,168000
 "PCA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",170751,0,415740,118317
-"PCA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,154179,0,0
+"PCA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,154179,0,521010
 "PCA","S",0,"Expenditures equivalent to revenues resulting from the conduct of operations pursuant to section 20 of the Parks Canada Agency Act","Dépenses qui équivalent aux revenus résultant de la poursuite des opérations en vertu de l'article 20 de la Loi sur l'Agence Parcs Canada","ME",111000000,118000000,123000000,81000000
 "PCA","S",0,"Expenditures equivalent to revenues resulting from the conduct of operations pursuant to section 20 of the Parks Canada Agency Act","Dépenses qui équivalent aux revenus résultant de la poursuite des opérations en vertu de l'article 20 de la Loi sur l'Agence Parcs Canada","SA",17677779,45136474,43348040,18231387
 "PCC",1,1,"Operating and Program","Fonctionnement et Programme","ME",9049115,9032529,9025809,9020809
-"PCC",1,1,"Operating and Program","Fonctionnement et Programme","VA",245195,452456,451626,451290
+"PCC",1,1,"Operating and Program","Fonctionnement et Programme","VA",245195,452456,451626,653888
 "PCC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",961267,979194,1002508,915080
 "PCC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-80228,2557,-156746,0
 "PCO",1,1,"Operating and Program","Fonctionnement et Programme","ME",105754626,104454216,105746416,129915146
 "PCO",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,0,23250293,33132276
 "PCO",1,1,"Operating and Program","Fonctionnement et Programme","SEB",0,0,10955328,33841052
-"PCO",1,1,"Operating and Program","Fonctionnement et Programme","SEC",2232365,3644076,3960442,0
-"PCO",1,1,"Operating and Program","Fonctionnement et Programme","VA",5760036,5291481,3071804,5291071
+"PCO",1,1,"Operating and Program","Fonctionnement et Programme","SEC",2232365,3644076,3960442,1173970
+"PCO",1,1,"Operating and Program","Fonctionnement et Programme","VA",5760036,5291481,3071804,7593062
 "PCO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",12722263,14123363,14598564,14616209
 "PCO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",111207,-1064977,-4134276,0
 "PCO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,0,603049,1287971
 "PCO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,0,1343389,477107
-"PCO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",370614,452278,82495,0
+"PCO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",370614,452278,82495,397024
 "PCO","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",0,0,37,0
 "PCO","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","ME",330100,255700,339400,343200
 "PCO","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","SA",-80381,-50883,-50935,0
@@ -1263,28 +1288,28 @@
 "PHAC",1,1,"Operating and Program","Fonctionnement et Programme","ME",312527662,317729513,333171729,322134984
 "PHAC",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,0,1548503,0
 "PHAC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",206757,0,2853669,7392063
-"PHAC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",23301326,4005541,525000,0
-"PHAC",1,1,"Operating and Program","Fonctionnement et Programme","VA",29798514,15427428,15029352,16531029
+"PHAC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",23301326,4005541,525000,-4625092
+"PHAC",1,1,"Operating and Program","Fonctionnement et Programme","VA",29798514,15427428,15029352,25226803
 "PHAC",10,3,"Grants & Contributions","Subventions et Contributions","ME",253014798,199999484,206779000,200927114
 "PHAC",10,3,"Grants & Contributions","Subventions et Contributions","SEA",0,0,0,15400000
 "PHAC",10,3,"Grants & Contributions","Subventions et Contributions","SEB",-1913225,0,3069623,5995366
-"PHAC",10,3,"Grants & Contributions","Subventions et Contributions","SEC",0,7000000,-14650000,0
+"PHAC",10,3,"Grants & Contributions","Subventions et Contributions","SEC",0,7000000,-14650000,3416750
 "PHAC",10,3,"Grants & Contributions","Subventions et Contributions","VA",0,250000,0,0
 "PHAC",5,2,"Capital","Capital","ME",6100596,5705314,5853695,7199069
 "PHAC",5,2,"Capital","Capital","SEB",1605685,0,650000,350000
-"PHAC",5,2,"Capital","Capital","SEC",0,2300001,0,0
+"PHAC",5,2,"Capital","Capital","SEC",0,2300001,0,2243000
 "PHAC",5,2,"Capital","Capital","VA",1053985,443926,0,548224
 "PHAC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",29373939,29780316,30520636,28261022
 "PHAC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-409747,-1510509,-4061643,0
 "PHAC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,0,148604,0
 "PHAC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",20210,0,279995,252388
-"PHAC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",144615,354132,0,0
+"PHAC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",144615,354132,0,54053
 "PHAC","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",0,0,15,0
 "PHAC","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",74353,218927,70965,0
 "PHAC","S",0,"Spending of revenues from other departments for which the Minister is responsible, pursuant to subsection 4.2(4) of the Department of Health Act","Dépense des recettes provenant des autres ministères pour lesquels le ministre est responsable, conformément au paragraphe 4.2(4) de la Loi sur le ministère de la Santé","ME",13679690,13937794,13412742,13412742
 "PHAC","S",0,"Spending of revenues from other departments for which the Minister is responsible, pursuant to subsection 4.2(4) of the Department of Health Act","Dépense des recettes provenant des autres ministères pour lesquels le ministre est responsable, conformément au paragraphe 4.2(4) de la Loi sur le ministère de la Santé","SA",-1155498,-1683161,-2161048,0
 "PMPRB",1,1,"Operating and Program","Fonctionnement et Programme","ME",9949348,9947595,9943258,9930556
-"PMPRB",1,1,"Operating and Program","Fonctionnement et Programme","VA",407122,375750,393178,373663
+"PMPRB",1,1,"Operating and Program","Fonctionnement et Programme","VA",407122,375750,393178,558156
 "PMPRB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",977682,997586,1021850,935765
 "PMPRB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-137098,-71772,-113934,0
 "PMPRB","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",114,47,448,0
@@ -1300,14 +1325,14 @@
 "PPS",3,1,"Operating and Program","Fonctionnement et Programme","SEC",0,16887833,0,0
 "PPS",3,1,"Operating and Program","Fonctionnement et Programme","VA",0,28752947,0,0
 "PPS","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",0,0,5801403,6162800
-"PPS","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",0,2796962,-1077113,0
+"PPS","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",0,2796962,-1077113,200000
 "PPS","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,0,0,422673
 "PPS","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,298200,366667,489226
 "PPS","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,275532,90000,0
 "PSC",1,1,"Operating and Program","Fonctionnement et Programme","ME",71676677,71397504,71160178,72137719
 "PSC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",504001,0,252001,252001
 "PSC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,504001,0,0
-"PSC",1,1,"Operating and Program","Fonctionnement et Programme","VA",4724389,4296434,4282475,4270609
+"PSC",1,1,"Operating and Program","Fonctionnement et Programme","VA",4724389,4296434,4282475,7158661
 "PSC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",12016810,12203512,12442885,11373214
 "PSC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-1880832,-2605451,-3334789,0
 "PSC","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",1328,0,220,0
@@ -1315,17 +1340,18 @@
 "PSEP",1,1,"Operating and Program","Fonctionnement et Programme","ME",115159335,113188545,128080019,123231161
 "PSEP",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,4512167,0,4234441
 "PSEP",1,1,"Operating and Program","Fonctionnement et Programme","SEB",3746855,0,1717304,4983298
-"PSEP",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,50801,288017,0
-"PSEP",1,1,"Operating and Program","Fonctionnement et Programme","VA",6917858,8152521,28174408,3934452
+"PSEP",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,50801,288017,2649033
+"PSEP",1,1,"Operating and Program","Fonctionnement et Programme","VA",6917858,8152521,28174408,10315493
 "PSEP",5,3,"Grants & Contributions","Subventions et Contributions","ME",993008766,1022476287,952867801,914540358
 "PSEP",5,3,"Grants & Contributions","Subventions et Contributions","SEA",95000000,-22678263,0,0
 "PSEP",5,3,"Grants & Contributions","Subventions et Contributions","SEB",-41854342,0,65799283,14687541
-"PSEP",5,3,"Grants & Contributions","Subventions et Contributions","SEC",0,2568148,1282074,0
-"PSEP",5,3,"Grants & Contributions","Subventions et Contributions","VA",0,3190521,16000000,39595900
+"PSEP",5,3,"Grants & Contributions","Subventions et Contributions","SEC",0,2568148,1282074,17095540
+"PSEP",5,3,"Grants & Contributions","Subventions et Contributions","VA",0,3190521,16000000,521270
 "PSEP","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",14519955,14689319,15927088,14737940
 "PSEP","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-909265,-1003471,-1802715,0
 "PSEP","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,262929,0,261424
 "PSEP","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,0,212821,164612
+"PSEP","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,0,0,252078
 "PSEP","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","ME",80300,82100,83500,84400
 "PSEP","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","SA",0,228,0,0
 "PSSRB",1,1,"Operating and Program","Fonctionnement et Programme","ME",12501779,0,0,0
@@ -1340,27 +1366,27 @@
 "RCMP",1,1,"Operating and Program","Fonctionnement et Programme","ME",1766280232,1726192674,1835514525,1888011496
 "RCMP",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,42126263,0,0
 "RCMP",1,1,"Operating and Program","Fonctionnement et Programme","SEB",12236390,0,95925030,136110223
-"RCMP",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,69299168,72769011,0
-"RCMP",1,1,"Operating and Program","Fonctionnement et Programme","VA",207261092,69169026,112989842,139942225
+"RCMP",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,69299168,72769011,226624189
+"RCMP",1,1,"Operating and Program","Fonctionnement et Programme","VA",207261092,69169026,112989842,247809841
 "RCMP",10,3,"Grants & Contributions","Subventions et Contributions","ME",163636131,180351933,194973483,223573483
 "RCMP",10,3,"Grants & Contributions","Subventions et Contributions","SEB",2821386,0,13100000,5000000
-"RCMP",10,3,"Grants & Contributions","Subventions et Contributions","SEC",0,6600000,5000000,0
+"RCMP",10,3,"Grants & Contributions","Subventions et Contributions","SEC",0,6600000,5000000,4500000
 "RCMP",5,2,"Capital","Capital","ME",246469709,261996018,246780724,327465645
 "RCMP",5,2,"Capital","Capital","SEA",0,6902000,0,0
 "RCMP",5,2,"Capital","Capital","SEB",8681258,0,26622281,10005743
-"RCMP",5,2,"Capital","Capital","SEC",0,25404082,14997371,0
+"RCMP",5,2,"Capital","Capital","SEC",0,25404082,14997371,22750300
 "RCMP",5,2,"Capital","Capital","VA",45396808,37238222,24334860,37607468
 "RCMP","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",87318054,71762731,75385138,70293491
 "RCMP","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-17215159,-6678900,-8890770,0
 "RCMP","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,42220,0,0
 "RCMP","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",512625,0,0,3933891
-"RCMP","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,2457694,78821,0
+"RCMP","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,2457694,78821,2652384
 "RCMP","S",0,"Court Awards","Montants adjugés par une cour","SA",1069096,0,0,0
 "RCMP","S",0,"Pensions and other employee benefits - Members of the Force","Pensions et autres prestations des employés - Membres de la Gendarmerie royale du Canada","ME",349272217,376754340,395673964,363214725
 "RCMP","S",0,"Pensions and other employee benefits - Members of the Force","Pensions et autres prestations des employés - Membres de la Gendarmerie royale du Canada","SA",85993576,56032709,177910996,0
 "RCMP","S",0,"Pensions and other employee benefits - Members of the Force","Pensions et autres prestations des employés - Membres de la Gendarmerie royale du Canada","SEA",0,292380,0,0
 "RCMP","S",0,"Pensions and other employee benefits - Members of the Force","Pensions et autres prestations des employés - Membres de la Gendarmerie royale du Canada","SEB",1781816,0,0,14506847
-"RCMP","S",0,"Pensions and other employee benefits - Members of the Force","Pensions et autres prestations des employés - Membres de la Gendarmerie royale du Canada","SEC",0,6493777,529313,0
+"RCMP","S",0,"Pensions and other employee benefits - Members of the Force","Pensions et autres prestations des employés - Membres de la Gendarmerie royale du Canada","SEC",0,6493777,529313,2960042
 "RCMP","S",0,"Pensions under the Royal Canadian Mounted Police Pension Continuation Act","Pensions aux termes de la Loi sur la continuation des pensions de la Gendarmerie royale du Canada","ME",13000000,13000000,11000000,10000000
 "RCMP","S",0,"Pensions under the Royal Canadian Mounted Police Pension Continuation Act","Pensions aux termes de la Loi sur la continuation des pensions de la Gendarmerie royale du Canada","SA",-1599195,-2608217,-1607837,0
 "RCMP","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",46265,233884,1098718,0
@@ -1377,7 +1403,7 @@
 "SC",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,1,0,0
 "SC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",40474682,0,0,14348243
 "SC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,0,-4299428,0
-"SC",1,1,"Operating and Program","Fonctionnement et Programme","VA",42889692,10838627,23941374,39627349
+"SC",1,1,"Operating and Program","Fonctionnement et Programme","VA",42889692,10838627,23941374,85000185
 "SC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",56811148,69078477,78837028,65491660
 "SC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",3180661,1749117,-8783289,0
 "SC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",6570813,0,0,1250298
@@ -1391,7 +1417,8 @@
 "SCC",1,1,"Operating and Program","Fonctionnement et Programme","ME",22307652,22304846,23362704,24916433
 "SCC",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,0,977041,0
 "SCC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",118300,0,118039,131691
-"SCC",1,1,"Operating and Program","Fonctionnement et Programme","VA",1159920,1427725,1475760,1168135
+"SCC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,0,0,28909
+"SCC",1,1,"Operating and Program","Fonctionnement et Programme","VA",1159920,1427725,1475760,2971943
 "SCC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",2325669,2371107,2429056,2257574
 "SCC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",396214,219234,122565,0
 "SCC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,0,36239,0
@@ -1408,18 +1435,18 @@
 "SHARE",1,1,"Operating and Program","Fonctionnement et Programme","ME",1176098834,1169183901,1192407135,1263902106
 "SHARE",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,0,109675247,0
 "SHARE",1,1,"Operating and Program","Fonctionnement et Programme","SEB",43038410,0,2937947,14722326
-"SHARE",1,1,"Operating and Program","Fonctionnement et Programme","SEC",10816305,25832848,36478300,0
-"SHARE",1,1,"Operating and Program","Fonctionnement et Programme","VA",76880219,34493020,36402008,79975057
+"SHARE",1,1,"Operating and Program","Fonctionnement et Programme","SEC",10816305,25832848,36478300,21909032
+"SHARE",1,1,"Operating and Program","Fonctionnement et Programme","VA",76880219,34493020,36402008,97679234
 "SHARE",5,2,"Capital","Capital","ME",216592917,203868605,268084298,379955130
 "SHARE",5,2,"Capital","Capital","SEA",0,0,161808663,0
 "SHARE",5,2,"Capital","Capital","SEB",15510658,0,1728012,8808448
-"SHARE",5,2,"Capital","Capital","SEC",29109260,28018231,-2276129,0
+"SHARE",5,2,"Capital","Capital","SEC",29109260,28018231,-2276129,2665190
 "SHARE",5,2,"Capital","Capital","VA",21677989,36911852,13871597,59882102
 "SHARE","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",80631826,70991519,89363268,81687804
 "SHARE","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",2615517,8078248,-18975139,0
 "SHARE","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,0,598563,0
 "SHARE","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",41434,0,52729,0
-"SHARE","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,363228,15101,0
+"SHARE","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,363228,15101,199606
 "SHARE","S",0,"Pensions and other employee benefits - Members of Royal Canadian Mounted Police","Pensions et autres prestations des employés - Membres de la Gendarmerie royale du Canada","SA",4375903,3965501,3794495,0
 "SHARE","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",10762,0,291,0
 "SIRC",1,1,"Operating and Program","Fonctionnement et Programme","ME",2477760,2479321,2477401,4476578
@@ -1439,7 +1466,7 @@
 "SSHRC",5,3,"Grants & Contributions","Subventions et Contributions","ME",666664097,690998526,693536144,751814696
 "SSHRC",5,3,"Grants & Contributions","Subventions et Contributions","SEA",0,1,15459850,0
 "SSHRC",5,3,"Grants & Contributions","Subventions et Contributions","SEB",22668975,0,39650045,-34801
-"SSHRC",5,3,"Grants & Contributions","Subventions et Contributions","SEC",-34999,1833667,825391,0
+"SSHRC",5,3,"Grants & Contributions","Subventions et Contributions","SEC",-34999,1833667,825391,5146424
 "SSHRC",5,3,"Grants & Contributions","Subventions et Contributions","VA",0,1265000,0,0
 "SSHRC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",2509410,2609046,2715944,2565927
 "SSHRC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",215904,210871,3547,0
@@ -1451,12 +1478,12 @@
 "SWC",1,1,"Operating and Program","Fonctionnement et Programme","ME",9370497,9364355,9801615,15608148
 "SWC",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,412083,0,0
 "SWC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",150000,0,3884600,2902093
-"SWC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,76000,0,0
-"SWC",1,1,"Operating and Program","Fonctionnement et Programme","VA",498397,499497,562160,490081
+"SWC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,76000,0,2749083
+"SWC",1,1,"Operating and Program","Fonctionnement et Programme","VA",498397,499497,562160,826959
 "SWC",5,3,"Grants & Contributions","Subventions et Contributions","ME",19033333,18950000,20630000,20580000
 "SWC",5,3,"Grants & Contributions","Subventions et Contributions","SEA",0,480000,0,0
 "SWC",5,3,"Grants & Contributions","Subventions et Contributions","SEB",0,0,0,-50000
-"SWC",5,3,"Grants & Contributions","Subventions et Contributions","SEC",0,105001,0,0
+"SWC",5,3,"Grants & Contributions","Subventions et Contributions","SEC",0,105001,0,300000
 "SWC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",1203900,1228722,1304709,1787273
 "SWC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",69436,-16622,-141440,0
 "SWC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,53283,0,0
@@ -1466,33 +1493,33 @@
 "TBC",1,1,"Operating and Program","Fonctionnement et Programme","ME",231214433,219601334,209531439,222912616
 "TBC",1,1,"Operating and Program","Fonctionnement et Programme","SEA",74920000,17102060,43371793,26392686
 "TBC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",-1049706,0,91802806,30671729
-"TBC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,42682760,5872708,0
-"TBC",1,1,"Operating and Program","Fonctionnement et Programme","VA",16673889,23708083,16228470,11176733
+"TBC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,42682760,5872708,10330068
+"TBC",1,1,"Operating and Program","Fonctionnement et Programme","VA",16673889,23708083,16228470,18992405
 "TBC",10,6,"Treasury Board Central","Crédit du Conseil du Trésor","ME",3193000,2090470,3193000,3193000
 "TBC",10,6,"Treasury Board Central","Crédit du Conseil du Trésor","VA",-3090000,0,-2500000,-2500000
 "TBC",15,6,"Treasury Board Central","Crédit du Conseil du Trésor","SEB",151651354,0,6183243,654565472
-"TBC",15,6,"Treasury Board Central","Crédit du Conseil du Trésor","SEC",0,0,95448569,0
-"TBC",15,6,"Treasury Board Central","Crédit du Conseil du Trésor","VA",-151651354,0,-101631812,0
+"TBC",15,6,"Treasury Board Central","Crédit du Conseil du Trésor","SEC",0,0,95448569,36120434
+"TBC",15,6,"Treasury Board Central","Crédit du Conseil du Trésor","VA",-151651354,0,-101631812,-654565472
 "TBC",20,6,"Treasury Board Central","Crédit du Conseil du Trésor","ME",2260002208,2250070604,2337061397,2398570604
 "TBC",20,6,"Treasury Board Central","Crédit du Conseil du Trésor","SEA",0,0,1909207,0
 "TBC",20,6,"Treasury Board Central","Crédit du Conseil du Trésor","SEB",0,0,44700000,253209974
-"TBC",20,6,"Treasury Board Central","Crédit du Conseil du Trésor","SEC",246132199,469200000,76400000,0
+"TBC",20,6,"Treasury Board Central","Crédit du Conseil du Trésor","SEC",246132199,469200000,76400000,622900000
 "TBC",25,6,"Treasury Board Central","Crédit du Conseil du Trésor","ME",1600000000,1600000000,1600000000,1600000000
-"TBC",25,6,"Treasury Board Central","Crédit du Conseil du Trésor","VA",-1139888174,-1148400616,-1095172936,-1372777423
+"TBC",25,6,"Treasury Board Central","Crédit du Conseil du Trésor","VA",-1139888174,-1148400616,-1095172936,-1377002308
 "TBC",30,6,"Treasury Board Central","Crédit du Conseil du Trésor","ME",1450000000,1000000000,600000000,600000000
 "TBC",30,6,"Treasury Board Central","Crédit du Conseil du Trésor","SEA",0,0,0,625000000
-"TBC",30,6,"Treasury Board Central","Crédit du Conseil du Trésor","SEC",400000000,0,545000000,0
-"TBC",30,6,"Treasury Board Central","Crédit du Conseil du Trésor","VA",-1241808024,-252533321,-222871780,-1100000
+"TBC",30,6,"Treasury Board Central","Crédit du Conseil du Trésor","SEC",400000000,0,545000000,250000000
+"TBC",30,6,"Treasury Board Central","Crédit du Conseil du Trésor","VA",-1241808024,-252533321,-222871780,-584832577
 "TBC",33,6,"Treasury Board Central","Crédit du Conseil du Trésor","ME",600000000,600000000,600000000,600000000
 "TBC",33,6,"Treasury Board Central","Crédit du Conseil du Trésor","VA",-462665689,-491221855,-526141284,-557779981
 "TBC",5,6,"Treasury Board Central","Crédit du Conseil du Trésor","ME",750000000,750000000,750000000,750000000
 "TBC",5,6,"Treasury Board Central","Crédit du Conseil du Trésor","SEB",0,519572387,0,0
-"TBC",5,6,"Treasury Board Central","Crédit du Conseil du Trésor","VA",0,-519572387,-114357229,-41095900
+"TBC",5,6,"Treasury Board Central","Crédit du Conseil du Trésor","VA",0,-519572387,-114357229,-25000000
 "TBC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",27434173,27599825,27936693,27100744
 "TBC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-36611,-1424668,-3630348,0
 "TBC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,52956,305599,242190
 "TBC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,0,2039868,1167458
-"TBC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,5622,367677,0
+"TBC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,5622,367677,784625
 "TBC","S",0,"Employer contributions made under the Public Service Superannuation Act and other retirement acts and the Employment Insurance Act","Contributions aux régimes d'avantages sociaux des employés","ME",443000000,443000000,443000000,340000000
 "TBC","S",0,"Employer contributions made under the Public Service Superannuation Act and other retirement acts and the Employment Insurance Act","Contributions aux régimes d'avantages sociaux des employés","SA",1043497,719000000,-256356,0
 "TBC","S",0,"Employer contributions made under the Public Service Superannuation Act and other retirement acts and the Employment Insurance Act","Contributions aux régimes d'avantages sociaux des employés","SEB",0,0,-103000000,0
@@ -1504,12 +1531,12 @@
 "TC",1,1,"Operating and Program","Fonctionnement et Programme","ME",513898673,551124773,480702203,596606256
 "TC",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,0,71576716,40968956
 "TC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",45635029,0,32100498,34400302
-"TC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",5327913,20015160,0,0
-"TC",1,1,"Operating and Program","Fonctionnement et Programme","VA",79636443,98141047,21598528,24267423
+"TC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",5327913,20015160,0,751854
+"TC",1,1,"Operating and Program","Fonctionnement et Programme","VA",79636443,98141047,21598528,45465049
 "TC",10,3,"Grants & Contributions","Subventions et Contributions","ME",757956898,683312718,258354429,113975543
 "TC",10,3,"Grants & Contributions","Subventions et Contributions","SEA",0,-15425964,0,0
 "TC",10,3,"Grants & Contributions","Subventions et Contributions","SEB",20518009,0,-450000,0
-"TC",10,3,"Grants & Contributions","Subventions et Contributions","SEC",1,21844683,0,0
+"TC",10,3,"Grants & Contributions","Subventions et Contributions","SEC",1,21844683,0,-698500
 "TC",15,3,"Grants & Contributions","Subventions et Contributions","ME",0,0,103219554,185061604
 "TC",15,3,"Grants & Contributions","Subventions et Contributions","SEA",0,0,19031976,0
 "TC",15,3,"Grants & Contributions","Subventions et Contributions","SEB",0,0,6407437,25116838
@@ -1525,7 +1552,7 @@
 "TC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",2172047,209358,-12826124,0
 "TC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,0,2595054,4306323
 "TC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",622923,0,3703355,1585832
-"TC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",272428,392822,0,0
+"TC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",272428,392822,0,122361
 "TC","S",0,"Northumberland Strait Crossing Subsidy Payment under the Northumberland Strait Crossing Act","Paiement de subvention pour l'ouvrage de franchissement du détroit de Northumberland selon la Loi sur l'ouvrage de franchissement du détroit de Northumberland","ME",62836173,63789074,65343888,65845012
 "TC","S",0,"Northumberland Strait Crossing Subsidy Payment under the Northumberland Strait Crossing Act","Paiement de subvention pour l'ouvrage de franchissement du détroit de Northumberland selon la Loi sur l'ouvrage de franchissement du détroit de Northumberland","SA",-1103227,-1454444,-1755610,0
 "TC","S",0,"Payments in respect of St. Lawrence Seaway agreements under the Canada Marine Act","Paiements versés conformément aux ententes de la Voie maritime du Saint-Laurent conclues dans le cadre de la Loi maritime du Canada","ME",103350000,135300000,127200000,92821122
@@ -1540,7 +1567,7 @@
 "TOUR",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",57972388,57975770,70475770,95475770
 "TOUR",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEA",0,0,25000000,0
 "TOUR",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEC",0,5000000,0,0
-"TOUR",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",3382,0,0,0
+"TOUR",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",3382,0,0,269103
 "TRC",1,1,"Operating and Program","Fonctionnement et Programme","ME",2062393,3600757,0,0
 "TRC",1,1,"Operating and Program","Fonctionnement et Programme","SEA",3521303,0,0,0
 "TRC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",677613,0,0,0
@@ -1551,12 +1578,12 @@
 "VAC",1,1,"Operating and Program","Fonctionnement et Programme","ME",855453817,855502774,870518397,931958962
 "VAC",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,7565681,0,0
 "VAC",1,1,"Operating and Program","Fonctionnement et Programme","SEB",8433478,0,62011580,18459904
-"VAC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,29528515,65448828,0
-"VAC",1,1,"Operating and Program","Fonctionnement et Programme","VA",16205637,11028417,17926892,12127119
+"VAC",1,1,"Operating and Program","Fonctionnement et Programme","SEC",0,29528515,65448828,45015873
+"VAC",1,1,"Operating and Program","Fonctionnement et Programme","VA",16205637,11028417,17926892,24718468
 "VAC",5,3,"Grants & Contributions","Subventions et Contributions","ME",2685987300,2639248000,2725592000,3728239000
 "VAC",5,3,"Grants & Contributions","Subventions et Contributions","SEA",0,15900000,0,0
 "VAC",5,3,"Grants & Contributions","Subventions et Contributions","SEB",2416602,0,66470000,7400000
-"VAC",5,3,"Grants & Contributions","Subventions et Contributions","SEC",0,80862000,69400000,0
+"VAC",5,3,"Grants & Contributions","Subventions et Contributions","SEC",0,80862000,69400000,132157000
 "VAC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",35260349,27048301,31890805,30920220
 "VAC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",1156330,4955579,3492365,0
 "VAC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,314078,0,0
@@ -1579,7 +1606,7 @@
 "VIA",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",148600000,0,35690000,0
 "VIA",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEC",0,38790134,0,0
 "VRAB",1,1,"Operating and Program","Fonctionnement et Programme","ME",9478024,9460756,9451156,9449156
-"VRAB",1,1,"Operating and Program","Fonctionnement et Programme","VA",651292,473901,473038,472558
+"VRAB",1,1,"Operating and Program","Fonctionnement et Programme","VA",651292,473901,473038,653637
 "VRAB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",1409914,1435807,1469993,1341796
 "VRAB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-67303,-111044,-302790,0
 "WDBA",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",0,58469905,215989827,258916050
@@ -1590,11 +1617,11 @@
 "WDBA",3,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEC",2403354,0,0,0
 "WDO",1,1,"Operating and Program","Fonctionnement et Programme","ME",36928959,36995191,34870554,34394598
 "WDO",1,1,"Operating and Program","Fonctionnement et Programme","SEA",0,0,0,251070
-"WDO",1,1,"Operating and Program","Fonctionnement et Programme","VA",2178110,1846448,1849760,2843528
+"WDO",1,1,"Operating and Program","Fonctionnement et Programme","VA",2178110,1846448,1849760,3972047
 "WDO",5,3,"Grants & Contributions","Subventions et Contributions","ME",117863000,118733000,134432914,161523000
 "WDO",5,3,"Grants & Contributions","Subventions et Contributions","SEA",0,0,23100000,11635409
 "WDO",5,3,"Grants & Contributions","Subventions et Contributions","SEB",4369026,0,1427010,11531673
-"WDO",5,3,"Grants & Contributions","Subventions et Contributions","SEC",0,3515119,4600000,0
+"WDO",5,3,"Grants & Contributions","Subventions et Contributions","SEC",0,3515119,4600000,5000000
 "WDO","S",0,"Collection Agency Fees","Honoraires - Agence de recouvrement","SA",3802,0,0,0
 "WDO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",4113993,4183723,4088068,3701461
 "WDO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",127341,-158872,-278800,0

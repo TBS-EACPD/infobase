@@ -51,7 +51,6 @@ Ces services sont  Services de gestion des acquisitions, Services de communicati
 "CFIA-SO0201","CFIA","Un approvisionnement alimentaire et des ressources animales et végétales sûrs et accessibles","",1
 "CFIA-SO1999","CFIA","Services internes","",1
 "CGC-SO0211","CGC","Le grain du Canada est salubre, fiable et commercialisable, et les producteurs de grain canadiens sont rémunérés convenablement pour les livraisons de grain aux compagnies céréalières agréées","",1
-"CGC-SO0212","CGC","Le grain du Canada est salubre, fiable et commercialisable et les producteurs de grain canadien sont protégés","",0
 "CGC-SO1999","CGC","Services internes","",1
 "CH-SO0221","CH","Les expressions artistiques et le contenu culturel canadiens sont créés et accessibles au pays et à l'étranger","",1
 "CH-SO0222","CH","Les Canadiens participent et excellent dans le sport","",1
@@ -87,7 +86,6 @@ Ces services sont  Services de gestion des acquisitions, Services de communicati
 "CMC-SO0291","CMC","Connaissance, appréciation et respect des réalisations culturelles humaines et du comportement humain, et intérêt pour ceux-ci, grâce à des collections d'objets historiques et culturels, des expositions, des programmes et des recherches reflétant un point de vue canadien","",1
 "CMHC-SO0091","CMHC","Le Canada dispose d'un système de logement stable, compétitif et novateur","",1
 "CMHC-SO0092","CMHC","Les Canadiens dans le besoin ont accès à des logements abordables","",1
-"CMHC-SO0093","CMHC","Compétitivité accrue et innovation dans le secteur de l'habitation dans le but de combler les besoins des Canadiens en matière de logement","",0
 "CMHC-SO0094","CMHC","Accroître l'accès à des logements sûrs et abordables pour les Canadiens dans le besoin incluant les Autochtones","",0
 "CMHC-SO0095","CMHC","Le système canadien du logement demeure l'un des meilleurs du monde","",0
 "CMHR-SO0281","CMHR","Connaissance approfondie des droits de la personne, en mettant un accent particulier sur le Canada, en vue d'accroître la compréhension du public à cet égard, de promouvoir le respect des autres et d'encourager la réflexion et le dialogue","",1
@@ -108,7 +106,6 @@ Ces services sont  Services de gestion des acquisitions, Services de communicati
 "CSC-SO0461","CSC","La garde, les interventions correctionnelles et la surveillance des délinquants dans la collectivité et dans les établissements contribuent à la sécurité publique","",1
 "CSC-SO1999","CSC","Services internes","",1
 "CSEC-SO0441","CSEC","Les capacités en matière de renseignement électromagnétique étranger et de sécurité technique font progresser et protègent les intérêts vitaux du Canada","",1
-"CSEC-SO0785","CSEC","Les opérations de la Défense contribuent à faire régner la paix, la stabilité et la sécurité partout où elles sont menées","",0
 "CSIS-SO0361","CSIS","Les renseignements servent à assurer la sécurité du Canada et des Canadiens","",1
 "CT-SO1131","CT","Audiences accessibles, équitables, transparentes et efficaces liées au mandat du Tribunal","",0
 "CT-SO1999","CT","Services internes","",0
@@ -132,11 +129,9 @@ Ces services sont  Services de gestion des acquisitions, Services de communicati
 "ECBC-SO0501","ECBC","Une économie cap-bretonaise durable et concurrentielle","",0
 "EDC-SO0581","EDC","Services de commerce international et consulaires destinés aux Canadiens - Les Canadiens sont satisfaits des services commerciaux et consulaires","",0
 "ERC-SO1161","ERC","Un processus décisionnel équitable et transparent en matière de relations de travail qui renforce la responsabilité","",1
-"ERC-SO1999","ERC","Services internes","",0
 "FBCL-SO0521","FBCL","Le transport sécuritaire et efficient sur l'infrastructure est maintenu, exploité et géré par La Société des ponts fédéraux Limitée","",1
 "FCAC-SO0542","FCAC","Les droits des consommateurs de produits et services financiers sont protégés et la littératie financière des Canadiens est renforcée","",0
 "FEDSO-SO0531","FEDSO","Une économie compétitive dans le Sud de l'Ontario","",1
-"FEDSO-SO0532","FEDSO","L'économie du Sud de l'Ontario est concurrentielle et diversifiée","",0
 "FEDSO-SO1999","FEDSO","Services internes","",1
 "FIN-SO0541","FIN","Une économie forte et de saines finances publiques pour les Canadiens","",1
 "FIN-SO1999","FIN","Services internes","",1
@@ -148,10 +143,8 @@ Ces services sont  Services de gestion des acquisitions, Services de communicati
 "FO-SO0573","FO","Des écosystèmes aquatiques durables","",1
 "FO-SO1999","FO","Services internes","",1
 "FORDQ-SO0481","FORDQ","Les régions du Québec ont une économie en croissance","",1
-"FORDQ-SO0482","FORDQ","Les régions du Québec ont une économie compétitive et diversifiée","",0
 "FORDQ-SO1999","FORDQ","Services internes","",1
 "FTRAC-SO0551","FTRAC","Un système financier canadien réfractaire au blanchiment d'argent et du financement des activités terroristes","",1
-"FTRAC-SO0552","FTRAC","Les activités de détection et de dissuasion du blanchiment d'argent et du financement des activités terroristes de CANAFE favorisent la sécurité publique des Canadiens et permettent de protéger l'intégrité du système financier du Canada","",0
 "FTRAC-SO1999","FTRAC","Services internes","",1
 "GG-SO0591","GG","Le gouverneur général, représentant la Reine au Canada, est habilité à exécuter ses rôles constitutionnel, d'état, cérémonial et public","",1
 "GG-SO1999","GG","Services internes","",1
@@ -224,6 +217,7 @@ Ces services sont  Services de gestion des acquisitions, Services de communicati
 "NGC-SO0811","NGC","Grâce à des collections d'oeuvres d'art anciennes et contemporaines, à des programmes et à de la recherche reflétant un point de vue particulier mais non exclusif sur le Canada, favoriser l'intérêt, l","",1
 "NMST-SO0821","NMST","Intérêt, connaissance, appréciation et respect à l'égard de la science et la technologie par l'entremise de la collection des objets scientifiques et technologiques, des programmes et de la recherche reflétant un point de vue canadien","",1
 "NPA-SO0871","NPA","S'assurer que la planification et la construction du tronçon canadien du projet de gazoduc de la route de l'Alaska s'effectuent de façon efficace et rapide tout en garantissant la protection de l'environnement et des retombées socioéconomiques pour les Canadiens","",1
+"NPA-SO1999","NPA","Services internes","",0
 "NPB-BUA00","NPB","Décisions relatives à la mise en liberté sous condition","La mise en liberté sous condition est fondée sur le principe selon lequel la mise en liberté graduelle des délinquants, lorsqu'elle est justifiée, améliore la sécurité de la collectivité. Les décisions judicieuses fondées sur le risque de récidive ainsi que le recours à des programmes et à des traitements efficaces et à une surveillance efficace dans la collectivité sont tous des éléments qui contribuent au processus. Dans le cadre de cette responsabilité principale, le personnel de la CLCC fournit en temps utile aux commissaires des renseignements exacts pour la prise de décisions, et il élabore des programmes de formation et des politiques qui constituent des outils essentiels pour l'évaluation du risque et la prise de décisions.",1
 "NPB-BUB00","NPB","Application transparente et responsable du processus de mise en liberté sous condition","Cette responsabilité principale permet à la CLCC d'exercer ses activités de manière transparente et responsable, conformément aux dispositions de la Loi sur le système correctionnel et la mise en liberté sous condition (LSCMLC). Elle concerne les victimes d'actes criminels et le grand public, car il consiste à fournir de l'information, notamment l'accès au registre des décisions de la CLCC, et à donner de l'aide aux personnes qui assistent aux audiences à titre d'observateurs. La responsabilité principale sert aussi à encourager la participation des citoyens, à mener des enquêtes sur des incidents tragiques survenus dans la collectivité, à surveiller le rendement de la CLCC et à rendre compte des processus de mise en liberté sous condition.",1
 "NPB-BUC00","NPB","Décisions relatives à la suspension du casier et recommandations concernant la clémence","La suspension du casier vise à faciliter la réinsertion sociale d’une personne, s’il y a lieu. C'est une mesure officielle dont l'objet est d'effacer la honte rattachée au fait d'avoir un casier judiciaire chez les personnes reconnues coupables d'une infraction à une loi fédérale et qui, après avoir purgé la peine qui leur avait été imposée et avoir laissé s'écouler une période d'attente déterminée, se conduisent en citoyens respectueux des lois.  La suspension du casier peut être révoquée ou annulée si une personne est condamnée pour une nouvelle infraction punissable par voie de mise en accusation ou, dans certains cas, une infraction punissable par procédure sommaire, si la personne a cessé de bien se conduire, ou s’il existe des preuves qu’elle avait fait une déclaration inexacte ou trompeuse ou avait caché de l’information.  Dans le cadre de cette responsabilité principale, la CLCC vérifie l'admissibilité des demandeurs et s'assure que tous les renseignements exigés figurent bel et bien dans la demande de suspension du casier, réunit les renseignements nécessaires pour rendre ses décisions et élabore des politiques qui orientent les processus décisionnels.  La responsabilité principale consiste aussi à évaluer les demandes de personnes qui désirent bénéficier de la prérogative royale de clémence (clémence) et à formuler des recommandations à cet égard, ainsi qu’à donner des avis au ministre sur le bien fondé de chaque cas. La clémence n’est accordée que dans des circonstances exceptionnelles dans des cas où le bien fondé de la demande a été établi et où il est question d’infractions à des lois fédérales, lorsque la loi ne prévoit aucun autre moyen de réduire les effets négatifs graves des sanctions imposées pour des actes criminels.
@@ -235,9 +229,6 @@ Ces services sont  Services de gestion des acquisitions, Services de communicati
 "NR-SO0851","NR","Les secteurs des ressources naturelles canadiens sont concurrentiels à l'échelle mondiale","",1
 "NR-SO0852","NR","Les Canadiens ont l'information nécessaire pour gérer leurs terres et leurs ressources naturelles, et sont protégés contre les risques associés","",1
 "NR-SO0853","NR","Les secteurs des ressources naturelles et les consommateurs sont respectueux de l'environnement","",1
-"NR-SO0854","NR","Le Canada est un chef de file mondial en matière de responsabilité environnementale sur le plan de la mise en valeur et de l'utilisation des ressources naturelles","",0
-"NR-SO0855","NR","Les connaissances sur les ressources naturelles et la masse continentale et les systèmes de gestion renforcent la sûreté et la sécurité des Canadiens et contribuent à l'intendance des ressources naturelles et des terres du Canada","",0
-"NR-SO0856","NR","Les secteurs des ressources naturelles sont concurrentiels à l'échelle internationale, productifs du point de vue économique et contribuent au bien-être social des Canadiens","",0
 "NR-SO1999","NR","Services internes","",1
 "NRC-SO0831","NRC","Les entreprises canadiennes prospèrent grâce à l'innovation technologique","",1
 "NRC-SO0832","NRC","Infrastructure de recherche et développement pour une économie du savoir novatrice","",1
@@ -315,15 +306,12 @@ Ces services sont  Services de gestion des acquisitions, Services de communicati
 "SCC-SO1251","SCC","L'administration du tribunal de dernier ressort du Canada est efficace et indépendante","",1
 "SCC-SO1999","SCC","Services internes","",1
 "SEN-SO1281","SEN","Faire en sorte que le contexte soit le plus propice possible à une contribution efficace des sénateurs à la législation fédérale et aux politiques publiques dans l'intérêt supérieur de tous les Canadiens","",1
-"SEN-SO1282","SEN","Permettre au Sénat d'exercer son rôle constitutionnel et de gérer son propre fonctionnement","",0
 "SHARE-SO1201","SHARE","Services d'infrastructure de technologie de l'information modernes, fiables, sécuritaires et économiques à l'appui des priorités et de la prestation des programmes du gouvernement","",1
 "SHARE-SO1999","SHARE","Services internes","",1
 "SIRC-SO1181","SIRC","Le Service canadien du renseignement de sécurité remplit ses tâches et ses fonctions conformément aux lois, aux politiques et les instructions du ministre","",1
 "SIRC-SO1999","SIRC","Services internes","",1
 "SSHRC-SO1211","SSHRC","Que le Canada ait la capacité organisationnelle pour favoriser la recherche et les activités connexes dans le domaine des sciences humaines, des sciences naturelles, du génie et de la santé","",1
 "SSHRC-SO1212","SSHRC","Le Canada est un chef de file mondial de la recherche et de la formation en sciences humaines","",1
-"SSHRC-SO1213","SSHRC","La recherche: de nouvelles connaissances fondées sur l'excellence de la recherche en sciences humaines","",0
-"SSHRC-SO1214","SSHRC","La mobilisation de connaissances: faciliter l'usage des connaissances en sciences humaines au sein du milieu universitaire et à l'extérieur","",0
 "SSHRC-SO1999","SSHRC","Services internes","",1
 "SWC-SO0931","SWC","Promotion et avancement de l'égalité entre femmes et hommes au Canada","",1
 "SWC-SO0932","SWC","Égalité entre les sexes et pleine participation des femmes à la vie économique, sociale et démocratique du Canada","",0
@@ -347,7 +335,6 @@ Ces services sont  Services de gestion des acquisitions, Services de communicati
 "VAC-SO1321","VAC","Les Canadiens se souviennent de ceux et celles qui ont servi le Canada en temps de guerre et de paix et en situation de conflit armé, et leur témoignent de la reconnaissance","",1
 "VAC-SO1322","VAC","Mieux-être financier, physique et mental des vétérans admissibles","",1
 "VAC-SO1323","VAC","Les droits des vétérans relativement aux services et aux avantages qui satisfont à leurs besoins sont pris en considération par le portefeuille des Anciens Combattants","",1
-"VAC-SO1324","VAC","Le bien-être des anciens combattants et des autres clients admissibles","",0
 "VAC-SO1999","VAC","Services internes","",1
 "VIA-SO1341","VIA","Un service ferroviaire voyageurs national sûr, sécuritaire, efficient, fiable et durable sur le plan de l'environnement qui répond aux besoins des voyageurs canadiens","",1
 "VRAB-SO1331","VRAB","Processus d'appel équitable et indépendant pour les décisions rendues par Anciens Combattants Canada au sujet des pensions, des indemnités et des allocations d'invalidité","",1

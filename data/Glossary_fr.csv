@@ -322,7 +322,7 @@ La relation est similaire entre le niveau des sous-programmes et celui des sous-
 
 
 Nota : D’ici 2018-2019, l'architecture d'alignement des programmes sera complètement remplacée par la nouvelle structure composée du Cadre ministériel des résultats et du Répertoire des programmes. Cela permettra de clarifier ce que les ministères accomplissent et leur façon d’évaluer le succès dans le cadre d’une reddition de compte fondée sur un seul niveau de programmes."
-"STAT","Autorisations législatives","Par « autorisation législatives », on entend les autorisations de dépenses accordées aux termes d’autres lois"
+"STAT","Autorisations législatives","Par « autorisations législatives », on entend les autorisations de dépenses accordées par le Parlement à la suite de l'adoption d'une loi (autre qu'une loi de crédits) qui établit l'objet des dépenses et les conditions aux termes desquels elles peuvent être engagées."
 "STAT_EXP","Dépenses législatives","Les dépenses législatives sont celles qui ont été approuvées par le Parlement à la suite de l'adoption d'une loi (autre qu'une loi de crédits) qui établit l'objet des dépenses et les conditions aux termes desquels elles peuvent être engagées."
 "STATUS_IGOC","État","État de l’organisation (p. ex. active)."
 "STATUS_PEOPLE","Statut de l'employé","Le statut de l'employé détermine si celui-ci est actif ou inactif."
@@ -444,4 +444,33 @@ Si la date butoir d’atteinte de la cible dépasse la fin de l’exercice 2016-
 "RESULTS_OT","En voie d'être atteinte","Si la date butoir d’atteinte de la cible dépasse la fin de l’exercice 2016-2017 (après le 31 mars 2017) :
 * En voie d'être atteinte: Forte probabilité d’atteindre la cible ou aucune raison de croire que la cible ne sera pas atteinte."
 "RESULTS_COUNT","Décompte d'indicateurs",""
+"MYA","Crédit pluriannuel","Le crédit pluriannuel est une autorisation de dépenser donnée par le Parlement à une fin spécifique dont le montant est défini et  qui peut être utilisée sur plus d'une année fiscale."
+"PAY_CC","Payments aux sociétés d'État","Les payments aux sociétés d'État inclus les « autorisations votées et législatives » ccordées par le Parlement à la suite de l'adoption d'une loi de crédits ou d'une loi aux sociétés d'État."
+"INTER_EST","Budget provisoire des dépenses","En juin 2017, la Chambre des communes a approuvé une motion visant à modifier l?article 81 du Règlement de la Chambre. Cela signifie que pour la durée de la présente législature :
+* le gouvernement déposera un budget provisoire des dépenses le ou avant le 1er mars, afin de faciliter l’examen des crédits provisoires par le Parlement;
+* le délai pour le dépôt du budget principal des dépenses est reporté au 16 avril, ce qui augmente la probabilité que le budget fédéral soit déposé avant plutôt qu?après le budget principal des dépenses.
+
+
+Ces changements donnent suite à l’engagement du gouvernement à fournir des renseignements plus cohérents au Parlement et à harmoniser le budget fédéral et le budget des dépenses.
+
+
+Comme les autorisations votées expirent à la fin de chaque exercice, le gouvernement doit demander des autorisations de dépenser afin de disposer d’un financement suffisant au début du nouvel exercice. Cette demande s?effectue par le truchement de la première loi de crédits de 2018-2019 aux fins d?approbation avant la fin de mars. La première loi de crédits sera appuyée par ce nouveau document, appelé « budget provisoire des dépenses ».
+
+
+Le **Budget provisoire des dépenses 2018-2019** comprend :
+* un aperçu des besoins de dépenses pour les trois premiers mois de l’exercice, par rapport au budget des dépenses 2017-2018;
+* une liste des subventions prévues pour permettre aux organisations d?effectuer des paiements de subventions à compter du 1er avril 2018;
+* les annexes proposées pour le premier projet de loi de crédits.
+
+
+Ce financement vise à soutenir les besoins financiers du gouvernement pour les trois premiers mois de l’exercice. En mars 2018, le gouvernement présentera un projet de loi de crédits, et le Parlement votera les crédits afférents au Budget provisoire des dépenses 2018-2019.
+
+
+_Autres budgets pour 2018-2019_
+Le gouvernement déposera un budget principal des dépenses complet, incluant les dépenses votées prévues et les dépenses législatives prévues pour l?ensemble de l’exercice, le ou avant le 16 avril 2018. Le budget principal des dépenses sera probablement déposé après la présentation du budget fédéral de 2018 et pourra donc prendre en compte les priorités du budget annuel. Le gouvernement déposera un autre projet de loi de crédits en juin pour tenir compte des montants supplémentaires demandés dans le budget principal des dépenses. 
+
+
+Les budgets supplémentaires des dépenses continueront de présenter de l’information sur les besoins supplémentaires en matière de dépenses, besoins qui n’étaient pas suffisamment étoffés au moment du dépôt du budget principal des dépenses ou qui ont été peaufinés par la suite pour prendre en compte les changements apportés à des programmes ou des services particuliers. Deux budgets supplémentaires
+des dépenses sont prévus pour 2018-2019, lesquels seront déposés au Parlement à l’automne 2018 et au début de 2019, et les lois de crédits connexes suivront peu après."
+"NB_EXP","Dépenses non budgétaires","Les dépenses non budgétaires, ou les prêts, placements et avances, sont des dépenses qui correspondent à des modifications de la valeur des actifs financiers du gouvernement. Les montants négatifs indiquent que les recouvrements sont supérieurs aux dépenses."
 

@@ -50,7 +50,6 @@
 "CFIA-SO0201","CFIA","A safe and accessible food supply and plant and animal resource base","",1
 "CFIA-SO1999","CFIA","Internal Services","",1
 "CGC-SO0211","CGC","Canada's grain is safe, reliable and marketable and Canadian grain producers are properly compensated for grain deliveries to licensed grain companies","",1
-"CGC-SO0212","CGC","Canada's grain is safe, reliable and marketable and Canadian grain producers are protected","",0
 "CGC-SO1999","CGC","Internal Services","",1
 "CH-SO0221","CH","Canadian artistic expressions and cultural content are created and accessible at home and abroad","",1
 "CH-SO0222","CH","Canadians participate and excel in sport","",1
@@ -85,7 +84,6 @@
 "CMC-SO0291","CMC","Interest in, knowledge of and appreciation and respect for human cultural achievements and human behaviour through collections of historical and cultural objects, exhibitions, programs and research reflecting a Canadian perspective","",1
 "CMHC-SO0091","CMHC","Canada has a stable, competitive and innovative housing system","",1
 "CMHC-SO0092","CMHC","Canadians in need have access to affordable housing","",1
-"CMHC-SO0093","CMHC","Strengthened competitiveness and innovation of the housing sector in order to meet the housing needs of Canadians","",0
 "CMHC-SO0094","CMHC","Increased availability of safe, affordable housing for Canadians in need, including Aboriginal Canadians","",0
 "CMHC-SO0095","CMHC","The Canadian housing system remains one of the best in the world","",0
 "CMHR-SO0281","CMHR","Enhanced knowledge of human rights, with special but not exclusive reference to Canada, in order to enhance the public's understanding of human rights, to promote respect for others and to encourage reflection and dialogue","",1
@@ -106,7 +104,6 @@
 "CSC-SO0461","CSC","The custody, correctional interventions, and supervision of offenders in communities and in institutions, contribute to public safety","",1
 "CSC-SO1999","CSC","Internal Services","",1
 "CSEC-SO0441","CSEC","Foreign signals intelligence and technical security capabilities advance and protect Canada's vital interests","",1
-"CSEC-SO0785","CSEC","Defence operations improve peace, stability and security wherever deployed","",0
 "CSIS-SO0361","CSIS","Intelligence is used to protect the security and safety of Canada and its citizens","",1
 "CT-SO1131","CT","Open, fair, transparent and expeditious hearings related to the Tribunal's jurisdiction","",0
 "CT-SO1999","CT","Internal Services","",0
@@ -129,11 +126,9 @@
 "ECBC-SO0501","ECBC","A competitive and sustainable Cape Breton economy","",0
 "EDC-SO0581","EDC","International Commercial and Consular Services for Canadians - Canadians are satisfied with commercial and consular services","",0
 "ERC-SO1161","ERC","Fair and transparent labour relations decision-making that reinforces accountability","",1
-"ERC-SO1999","ERC","Internal Services","",0
 "FBCL-SO0521","FBCL","Safe and efficient transit on the infrastructure maintained, operated and managed by The Federal Bridge Corporation Limited","",1
 "FCAC-SO0542","FCAC","The rights of financial consumers are protected and the financial literacy of Canadians is strengthened","",0
 "FEDSO-SO0531","FEDSO","A Competitive Southern Ontario Economy","",1
-"FEDSO-SO0532","FEDSO","The economy of Southern Ontario is competitive and diversified","",0
 "FEDSO-SO1999","FEDSO","Internal Services","",1
 "FIN-SO0541","FIN","A strong economy and sound public finances for Canadians","",1
 "FIN-SO1999","FIN","Internal Services","",1
@@ -145,10 +140,8 @@
 "FO-SO0573","FO","Sustainable Aquatic Ecosystems","",1
 "FO-SO1999","FO","Internal Services","",1
 "FORDQ-SO0481","FORDQ","Quebec's regions have a growing economy","",1
-"FORDQ-SO0482","FORDQ","A competitive and diversified economy for the regions of Quebec","",0
 "FORDQ-SO1999","FORDQ","Internal Services","",1
 "FTRAC-SO0551","FTRAC","A Canadian financial system resistant to money laundering and terrorist financing","",1
-"FTRAC-SO0552","FTRAC","FINTRAC's detection and deterrence of money laundering and terrorist financing contributes to the public safety of Canadians and helps protect the integrity of Canada's financial system","",0
 "FTRAC-SO1999","FTRAC","Internal Services","",1
 "GG-SO0591","GG","The Governor General, representing The Queen in Canada, is enabled to fulfill constitutional, state, ceremonial and public duties","",1
 "GG-SO1999","GG","Internal Services","",1
@@ -220,6 +213,7 @@
 "NGC-SO0811","NGC","Interest in, knowledge of and appreciation and respect for visual art through collections of historic and contemporary works of art, programs and research that reflect a special but not exclusive perspective on Canada","",1
 "NMST-SO0821","NMST","Interest in, knowledge of and appreciation and respect for science and technology through collections of scientific and technological objects, programs and research reflecting a Canadian perspective","",1
 "NPA-SO0871","NPA","The planning and construction of the Canadian portion of the Alaska Highway Gas Pipeline project is efficient and expeditious while ensuring environmental protection and social and economic benefits for Canadians","",1
+"NPA-SO1999","NPA","Internal Services","",0
 "NPB-BUA00","NPB","Conditional Release Decisions","Conditional release is based on the principle that community safety is enhanced by the gradual release of offenders to the community when appropriate.  Quality decisions based on the risk of re-offending in conjunction with effective programs and treatment, and effective community supervision all contribute to the process.  Through this core responsibility, PBC staff provides timely, accurate information for Board member decision-making, and develops training and policies that are essential tools for risk assessment and decision-making.",1
 "NPB-BUB00","NPB","Conditional Release Openness and Accountability","This core responsibility ensures that the PBC operates in an open and accountable manner, consistent with the provisions of the Corrections and Conditional Release Act (CCRA).  This core responsibility works with victims of crime and the general public by providing information, including access to the PBC's registry of decisions, as well as providing assistance for observers at hearings.  The core responsibility also works to encourage citizen engagement, investigates tragic incidents in the community, monitors the PBC's performance and reports on conditional release processes.",1
 "NPB-BUC00","NPB","Record Suspension Decisions/Clemency Recommendations","A record suspension is designed to support the successful reintegration of an individual into society where appropriate.  It is a formal attempt to remove the stigma of a criminal record for people found guilty of a federal offence and who, after satisfying their sentence and specified waiting period, have shown themselves to be responsible law-abiding citizens.  Record suspensions can be revoked or cease to have effect if an individual is convicted of a new indictable offence, or in some cases a summary offence, found to no longer be of good conduct,  found to have made a false or misleading statement or hidden information.  Through this core responsibility the PBC screens applications for completeness and the eligibility of each applicant, collects information for decision-making and develops policy to guide decision processes.  This program is also responsible for assessing requests and providing recommendations under the Royal Prerogative of Mercy (i.e. clemency) and providing advice to the Minister on the merits of each case.  Clemency is granted in exceptional circumstances in deserving cases involving federal offences, where no other remedy exists in law to reduce severe negative effects of criminal sanctions.
@@ -230,9 +224,6 @@
 "NR-SO0851","NR","Canada's natural resource sectors are globally competitive","",1
 "NR-SO0852","NR","Canadians have information to manage their lands and natural resources, and are protected from related risks","",1
 "NR-SO0853","NR","Natural Resource Sectors and Consumers are Environmentally Responsible","",1
-"NR-SO0854","NR","Canada is a world leader on environmental responsibility in the development and use of natural resources","",0
-"NR-SO0855","NR","Natural resources knowledge, landmass knowledge and management systems strengthen the safety and security of Canadians and the stewardship of Canada's natural resources and lands","",0
-"NR-SO0856","NR","Natural resources sectors are internationally competitive, economically productive, and contribute to the social well-being of Canadians","",0
 "NR-SO1999","NR","Internal Services","",1
 "NRC-SO0831","NRC","Canadian businesses prosper from innovative technologies","",1
 "NRC-SO0832","NRC","Research and Development infrastructure for an innovative and knowledge-based economy","",1
@@ -309,15 +300,12 @@
 "SCC-SO1251","SCC","The administration of Canada's final court of appeal is effective and independent","",1
 "SCC-SO1999","SCC","Internal Services","",1
 "SEN-SO1281","SEN","To provide the best possible environment for Senators to effectively contribute to federal legislation and public policy issues in the best interest of all Canadians","",1
-"SEN-SO1282","SEN","To enable the Senate to carry out its constitutional role and to administer the affairs of the Senate","",0
 "SHARE-SO1201","SHARE","Modern, reliable, secure and cost-effective information technology (IT) infrastructure services to support government priorities and program delivery","",1
 "SHARE-SO1999","SHARE","Internal Services","",1
 "SIRC-SO1181","SIRC","Canadian Security Intelligence Service performs its duties and functions in accordance with the law, policy and ministerial direction","",1
 "SIRC-SO1999","SIRC","Internal Services","",1
 "SSHRC-SO1211","SSHRC","Canada has the institutional capacity to enable research and research-related activities in social sciences and humanities, natural sciences and engineering and health","",1
 "SSHRC-SO1212","SSHRC","Canada is a world leader in social sciences and humanities research and research training","",1
-"SSHRC-SO1213","SSHRC","Research: New knowledge based on excellent research in the social sciences and humanities","",0
-"SSHRC-SO1214","SSHRC","Knowledge mobilization: Facilitating the use of social sciences and humanities knowledge within and beyond academia","",0
 "SSHRC-SO1999","SSHRC","Internal Services","",1
 "SWC-SO0931","SWC","Equality between women and men is promoted and advanced in Canada","",1
 "SWC-SO0932","SWC","Equality for women and their full participation in the economic, social and democratic life of Canada","",0
@@ -340,7 +328,6 @@
 "VAC-SO1321","VAC","Canadians remember and demonstrate their recognition of all those who served in Canada's efforts during war, military conflict and peace","",1
 "VAC-SO1322","VAC","Financial, physical and mental well being of eligible Veterans","",1
 "VAC-SO1323","VAC","Veterans' rights to services and benefits that address their needs are considered by the Veterans Affairs Portfolio","",1
-"VAC-SO1324","VAC","Well-being of eligible Veterans and other clients","",0
 "VAC-SO1999","VAC","Internal Services","",1
 "VIA-SO1341","VIA","A national passenger rail transportation service that is safe, secure, efficient, reliable, and environmentally sustainable and that meets the needs of travellers in Canada","",1
 "VRAB-SO1331","VRAB","An independent and fair appeal process for disability pension, award and allowance decisions made by Veterans Affairs Canada","",1
