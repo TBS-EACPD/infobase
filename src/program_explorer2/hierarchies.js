@@ -351,7 +351,19 @@ const vs_type_node_mapping_common_options = {
 const subject_to_vs_type_nodes = (node) => {
   const table8 = Table.lookup('table8');
   const estimates_data = table8.q(node).data;
+  return subject_to_vs_type_nodes_common(estimates_data);
+}
 
+const subject_to_vs_type_nodes_filtered_by_est_doc_code = (node, est_doc_code) => {
+  const table8 = Table.lookup('table8');
+  const estimates_data = _.chain(table8.q(node).data)
+    .filter( row => row.est_doc_code === est_doc_code)
+    .value();
+
+  return estimates_data.length === 0 ? false : subject_to_vs_type_nodes_common(estimates_data);
+}
+
+const subject_to_vs_type_nodes_common = (estimates_data) => {
   const data_for_node_mapping = _.map(estimates_data, row => {
     return {
       id: row.votestattype,
@@ -460,6 +472,25 @@ const est_inst_node_to_vs_type_nodes = (node) => {
   );
 }
 
+const orgs_with_planned_spending = () => { 
+  return _.chain(Subject.Ministry.get_all())
+    .map(ministry => ministry.orgs)
+    .flatten()
+    .filter( org => _.indexOf(org.table_ids, "table8") !== -1)
+    .value();
+}
+
+const orgs_in_est_doc = (est_doc_code) => {
+  const table8 = Table.lookup('table8');
+
+  return _.chain(Subject.Ministry.get_all())
+    .map(ministry => ministry.orgs)
+    .flatten()
+    .filter( org => _.indexOf(org.table_ids, "table8") !== -1)
+    .filter( org => _.some(table8.q(org).data, row => row.est_doc_code === est_doc_code))
+    .value();
+}
+
 const est_inst_node_rules = (node) => {
   if (node.is("gov")){
     return subject_to_est_inst_nodes(node);
@@ -478,14 +509,6 @@ const vs_type_node_rules = (node) => {
   }
 }
 
-const orgs_with_planned_spending = () => { 
-  return _.chain(Subject.Ministry.get_all())
-    .map(ministry => ministry.orgs)
-    .flatten()
-    .filter( org => _.indexOf(org.table_ids, "table8") !== -1)
-    .value();
-}
-
 const org_planned_spend_node_rules = (node) => {
   if (node.is("gov")){
     return orgs_with_planned_spending();
@@ -493,6 +516,16 @@ const org_planned_spend_node_rules = (node) => {
     return subject_to_est_inst_nodes(node);
   } else if (node.is("est_inst")){
     return est_inst_node_to_vs_type_nodes(node);
+  }
+}
+
+const specific_est_doc_node_rules = (node, est_doc_code) => {
+  if (node.is("gov")){
+    return orgs_in_est_doc(est_doc_code);
+  } else if (node.is("dept")){
+    return subject_to_vs_type_nodes_filtered_by_est_doc_code(node, est_doc_code);
+  } else if (node.is("vs_type")){
+    return est_inst_or_vs_type_node_to_vote_nodes(node);
   }
 }
 
@@ -531,6 +564,9 @@ exports.create_planned_spending_hierarchy = function(value_attr,root_id,presenta
         return vs_type_node_rules(node);
       } else if (presentation_scheme === "org_planned_spend") {
         return org_planned_spend_node_rules(node);
+      } else if (presentation_scheme.startsWith("est_doc_")) {
+        const est_doc_code = presentation_scheme.replace("est_doc_", "");
+        return specific_est_doc_node_rules(node, est_doc_code);
       }
     })
     .eachAfter(node =>{

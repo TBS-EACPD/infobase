@@ -175,7 +175,18 @@ class GovPartition {
     const sort_vals = this.sort_vals = _.sortBy([
       { id: "exp", text: text_maker("partition_spending_data"), presentation_schemes: ["goca", "dept", "hwh", "st"] },
       { id: "fte", text: text_maker("fte_written"), presentation_schemes: ["goca", "dept", "hwh"] },
-      { id: "planned_exp", text: text_maker("partition_planned_spending_data"), presentation_schemes: ["org_planned_spend", "est_inst", "vs_type"] },
+      { 
+        id: "planned_exp", 
+        text: text_maker("partition_planned_spending_data"), 
+        presentation_schemes: [
+          "org_planned_spend", 
+          "est_inst", 
+          "vs_type", 
+          "est_doc_MAINS",
+          "est_doc_SEA",
+          "est_doc_SEB",
+        ],
+      },
       { 
         id: "org_info", 
         text: text_maker("orgs"), 
@@ -195,6 +206,9 @@ class GovPartition {
       { id: "org_planned_spend", text: text_maker("orgs") },
       { id: "est_inst", text: text_maker("partition_est_inst_perspective") },
       { id: "vs_type", text: text_maker("partition_vote_state_perspective") },
+      { id: "est_doc_MAINS", text: "MAINS"},
+      { id: "est_doc_SEA", text: "SEA"},
+      { id: "est_doc_SEB", text: "SEB"},
       { id: "org_info_by_ministry", text: text_maker("partiton_org_info_by_min") },
       { id: "org_info_federal_orgs_by_inst_form", text: text_maker("partiton_org_info_federal_orgs_by_inst_form") },
       { id: "org_info_interests_by_inst_form", text: text_maker("partiton_org_info_interests_by_inst_form") },
@@ -627,6 +641,15 @@ class GovPartition {
     this.planned_spending();
   }
   org_planned_spend(){
+    this.planned_spending();
+  }
+  est_doc_MAINS(){
+    this.planned_spending();
+  }
+  est_doc_SEA(){
+    this.planned_spending();
+  }
+  est_doc_SEB(){
     this.planned_spending();
   }
   planned_spending(){
