@@ -495,6 +495,45 @@ partition_fte_will_be:
     {{/if}}
     <span class='text-nowrap'>{{planning_year_1}}</span>
 
+partition_spending_will_be_by_est_doc_partial_en:
+  handlebars_partial: true
+  text: |
+    allocates
+    <p class='amount'><a class="infographic" href='#orgs/gov/gov/infograph/financial'>{{rawfmt_compact x}}</a></p>
+    of planned spending for
+    <span class='text-nowrap'>{{planning_year_1}}</span>
+partition_spending_will_be_by_est_doc_partial_fr:
+  handlebars_partial: true
+  text: |
+    todo
+    <p class='amount'><a class="infographic" href='#orgs/gov/gov/infograph/financial'>{{rawfmt_compact x}}</a></p>
+    todo
+    <span class='text-nowrap'>{{planning_year_1}}</span>
+partition_spending_will_be_by_mains:
+  transform: [handlebars]
+  en: |
+    {{gt "est_doc_mains"}} {{> "partition_spending_will_be_by_est_doc_partial_en"}}
+  fr: |
+    {{gt "est_doc_mains"}} {{> "partition_spending_will_be_by_est_doc_partial_fr"}}
+partition_spending_will_be_by_sea:
+  transform: [handlebars]
+  en: |
+    {{gt "est_doc_sea"}} {{> "partition_spending_will_be_by_est_doc_partial_en"}}
+  fr: |
+    {{gt "est_doc_sea"}} {{> "partition_spending_will_be_by_est_doc_partial_fr"}}
+partition_spending_will_be_by_seb:
+  transform: [handlebars]
+  en: |
+    {{gt "est_doc_seb"}} {{> "partition_spending_will_be_by_est_doc_partial_en"}}
+  fr: |
+    {{gt "est_doc_seb"}} {{> "partition_spending_will_be_by_est_doc_partial_fr"}}
+partition_spending_will_be_by_sec:
+  transform: [handlebars]
+  en: |
+    {{gt "est_doc_sec"}} {{> "partition_spending_will_be_by_est_doc_partial_en"}}
+  fr: |
+    {{gt "est_doc_sec"}} {{> "partition_spending_will_be_by_est_doc_partial_fr"}}
+
 partition_controls:
   transform: [handlebars]
   text: |
@@ -599,6 +638,10 @@ partition_vote_state_perspective:
 partition_est_inst_perspective:
   en: Estimates Instrument
   fr: Instrument des dépenses
+by_organization:
+  transform: [handlebars]
+  text: |
+    {{gt "by"}} {{gt "org"}}
 up_to:
   en: up to
   fr: jusqu'à

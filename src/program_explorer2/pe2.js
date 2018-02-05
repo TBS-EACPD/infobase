@@ -32,15 +32,22 @@ const formaters = {
 const wrap_in_brackets = (text) => " (" + text + ")";
 
 const get_root_text_key = (value_attr, method) => {
-  const text_keys_by_value_attr = {
-    "exp" : "partition_spending_was",
-    "fte" : "partition_fte_was",
-    "planned_exp" : "partition_spending_will_be",
-    "org_info" : method === "org_info_by_ministry" ? "partition_org_info_was" :
-      method === "org_info_federal_orgs_by_inst_form" ? "partition_org_info_federal_orgs_by_inst_form_was" :
-        "partition_org_info_interests_by_inst_form_was",
-  };
-  return text_keys_by_value_attr[value_attr];
+  switch (value_attr){
+    case "exp" : return "partition_spending_was";
+    case "fte" : return "partition_fte_was";
+    case "planned_exp" : switch (method){
+      case "est_doc_MAINS" : return "partition_spending_will_be_by_mains";
+      case "est_doc_SEA" : return "partition_spending_will_be_by_sea";
+      case "est_doc_SEB" : return "partition_spending_will_be_by_seb";
+      case "est_doc_SEC" : return "partition_spending_will_be_by_sec";
+      default : return "partition_spending_will_be";
+      }
+    case "org_info" : switch (method){
+      case "org_info_by_ministry" : return "partition_org_info_was";
+      case "org_info_federal_orgs_by_inst_form" : return "partition_org_info_federal_orgs_by_inst_form_was";
+      case "org_info_interests_by_inst_form" : return "partition_org_info_interests_by_inst_form_was";
+      }
+  }
 }
 
 const url_template = (method,value)=>`#partition/${method}/${value}`;
@@ -206,9 +213,9 @@ class GovPartition {
       { id: "org_planned_spend", text: text_maker("orgs") },
       { id: "est_inst", text: text_maker("partition_est_inst_perspective") },
       { id: "vs_type", text: text_maker("partition_vote_state_perspective") },
-      { id: "est_doc_MAINS", text: "MAINS"},
-      { id: "est_doc_SEA", text: "SEA"},
-      { id: "est_doc_SEB", text: "SEB"},
+      { id: "est_doc_MAINS", text: text_maker("est_doc_mains")},
+      { id: "est_doc_SEA", text: text_maker("est_doc_sea")},
+      { id: "est_doc_SEB", text: text_maker("est_doc_seb")},
       { id: "org_info_by_ministry", text: text_maker("partiton_org_info_by_min") },
       { id: "org_info_federal_orgs_by_inst_form", text: text_maker("partiton_org_info_federal_orgs_by_inst_form") },
       { id: "org_info_interests_by_inst_form", text: text_maker("partiton_org_info_interests_by_inst_form") },
