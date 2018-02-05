@@ -694,7 +694,7 @@ class GovPartition {
         }
       );
 
-      if (d.data.is("vote")) {
+      if (d.data.is("stat_item")) {
         return text_maker("partition_planned_vs_type_or_est_inst", 
           _.extend(common_popup_options, {
             description: d.data.description,
