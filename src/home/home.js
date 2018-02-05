@@ -103,14 +103,14 @@ const featured_content_items = [
     is_new: true,
   },
   {
-    text_key: "supps_b",
+    text_key: "supps_c",
     href: rpb_link({ 
       table: 'table8', 
       columns: [ "{{est_in_year}}_estimates"], 
       dimension: 'by_estimates_doc', 
       filter: ({ //TODO: D.R.Y this against table8
-        "en":"Supp. Estimates B",
-        "fr":"Budget supp. B",
+        "en":"Supp. Estimates C",
+        "fr":"Budget supp. C",
       })[window.lang],
     }),
     is_new: true,
