@@ -499,13 +499,26 @@ const org_planned_spend_node_rules = (node) => {
 const planned_spending_post_traversal_rule_set = (node,value_attr,root_id) => {
   const table8 = Table.lookup('table8');
 
+  const common_rpb_link_options = { 
+    columns: ["{{est_in_year}}_estimates"],
+    mode: "details",
+    dimension: "voted_stat",
+    filter: "All",
+    table: table8.id,
+    preferDeptBreakout: true,
+    descending: false,
+  }
+
   node.id_ancestry = get_id_ancestry(root_id,node);
   if (node.data.is("vs_type") || node.data.is("est_inst") || node.data.is("vote")){
     node[value_attr] = node.value = node.data.value;
-    node.data.rpb_link = rpb_link({ table: table8.id });
+    node.data.rpb_link = rpb_link( _.extend({}, common_rpb_link_options, {subject: "gov_gov"}) );
   } else {
     node.children = _.filter(node.children, d => d.value !== false && d.value !== 0);
     node[value_attr] = node.value = d4.sum(node.children, d=>d.value);
+    if (node.data.is("dept")){
+      node.data.rpb_link = rpb_link( _.extend({}, common_rpb_link_options, {subject: "dept_" + node.data.id}) );
+    }
   }
 }
 

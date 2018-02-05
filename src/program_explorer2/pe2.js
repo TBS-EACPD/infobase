@@ -660,6 +660,7 @@ class GovPartition {
           year: run_template("{{est_in_year}}"),
           planned_exp: d.value,
           planned_exp_is_negative: d.value < 0,
+          rpb_link: d.data.rpb_link,
         }
       );
 
@@ -667,7 +668,6 @@ class GovPartition {
         return text_maker("partition_planned_vs_type_or_est_inst", 
           _.extend(common_popup_options, {
             description: d.data.description,
-            rpb_link: d.data.rpb_link,
             dept_name: d.parent.data.name,
             dept_id: d.parent.data.id,
           })
@@ -688,7 +688,6 @@ class GovPartition {
         return text_maker("partition_planned_vs_type_or_est_inst", 
           _.extend(common_popup_options, {
             description: d.data.description,
-            rpb_link: d.data.rpb_link,
             show_parent_dept_name: presentation_scheme === "org_planned_spend",
             dept_name,
             dept_id,
