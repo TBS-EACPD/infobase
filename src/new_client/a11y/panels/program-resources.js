@@ -37,7 +37,7 @@ class Component extends React.Component {
           <option value="dp17"> DP 17-18 </option>
         </select>
       </label>
-      <ul>
+      <ul style={{maxHeight: "600px", overflow: "auto"}}>
         {_.map(mapped_programs, prog => 
           <li key={prog.id}>
             <Node {...prog} />

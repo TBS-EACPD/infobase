@@ -2,15 +2,15 @@ import { PanelManager } from '../PanelManager.js';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
-import panel1_def from '../panels/example-panel1.js';
-import panel2_def from '../panels/example-panel2.js';
 import panel3_def from '../panels/example-panel3.js';
 import panel4_def from '../panels/example-panel4.js';
 import panel5_def from '../panels/example-panel5.js';
 import static_panel_def from '../panels/static-panel-example.js';
 import basic_trend_panel from './panels/basic_trend_panel.js';
 import pa_vote_stat from './panels/pa-vote-stat-panel.js';
+import estimates_vote_stat from './panels/estimates-vote-stat-panel.js'
 import program_resources from './panels/program-resources.js';
+import std_obj from './panels/std-obj-panel.js';
 
 import { NavLink } from 'react-router-dom';
 
@@ -32,7 +32,7 @@ const bubbles = [
 function get_panel_definitions(level, bubble){
   if(level === "org"){
     if(bubble==="intro"){
-      return [ basic_trend_panel, panel1_def, panel2_def ];
+      return [ basic_trend_panel, estimates_vote_stat, std_obj ];
     } else if(bubble==="fin"){
       return [ pa_vote_stat, panel3_def, panel4_def];
     } else if(bubble==="ppl"){
