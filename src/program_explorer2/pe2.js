@@ -25,8 +25,8 @@ const {
 const formaters = {
   "exp" : compact1,
   "fte" : big_int_real,
-  "org_info" : big_int_real,
   "planned_exp" : compact1,
+  "org_info" : big_int_real,
 };
 
 const wrap_in_brackets = (text) => " (" + text + ")";
@@ -35,10 +35,10 @@ const get_root_text_key = (value_attr, method) => {
   const text_keys_by_value_attr = {
     "exp" : "partition_spending_was",
     "fte" : "partition_fte_was",
+    "planned_exp" : "partition_spending_will_be",
     "org_info" : method === "org_info_by_ministry" ? "partition_org_info_was" :
       method === "org_info_federal_orgs_by_inst_form" ? "partition_org_info_federal_orgs_by_inst_form_was" :
         "partition_org_info_interests_by_inst_form_was",
-    "planned_exp" : "partition_spending_will_be",
   };
   return text_keys_by_value_attr[value_attr];
 }
@@ -175,16 +175,16 @@ class GovPartition {
     const sort_vals = this.sort_vals = _.sortBy([
       { id: "exp", text: text_maker("partition_spending_data"), presentation_schemes: ["goca", "dept", "hwh", "st"] },
       { id: "fte", text: text_maker("fte_written"), presentation_schemes: ["goca", "dept", "hwh"] },
-      //{ 
-      //  id: "org_info", 
-      //  text: text_maker("orgs"), 
-      //  presentation_schemes: [
-      //    "org_info_by_ministry", 
-      //    "org_info_federal_orgs_by_inst_form",
-      //    "org_info_interests_by_inst_form",
-      //  ],
-      //},
       { id: "planned_exp", text: text_maker("partition_planned_spending_data"), presentation_schemes: ["org_planned_spend", "est_inst", "vs_type"] },
+      { 
+        id: "org_info", 
+        text: text_maker("orgs"), 
+        presentation_schemes: [
+          "org_info_by_ministry", 
+          "org_info_federal_orgs_by_inst_form",
+          "org_info_interests_by_inst_form",
+        ],
+      },
     ], d => d.id === value_attr ? -Infinity : Infinity);
 
     this.all_presentation_schemes = [
@@ -192,12 +192,12 @@ class GovPartition {
       { id: "dept", text: text_maker("ministries") },
       { id: "hwh", text: Subject.Tag.tag_roots.HWH.name },
       { id: "st", text: text_maker("type_of_spending") },
-      //{ id: "org_info_by_ministry", text: text_maker("partiton_org_info_by_min") },
-      //{ id: "org_info_federal_orgs_by_inst_form", text: text_maker("partiton_org_info_federal_orgs_by_inst_form") },
-      //{ id: "org_info_interests_by_inst_form", text: text_maker("partiton_org_info_interests_by_inst_form") },
       { id: "org_planned_spend", text: text_maker("orgs") },
       { id: "est_inst", text: text_maker("partition_est_inst_perspective") },
       { id: "vs_type", text: text_maker("partition_vote_state_perspective") },
+      { id: "org_info_by_ministry", text: text_maker("partiton_org_info_by_min") },
+      { id: "org_info_federal_orgs_by_inst_form", text: text_maker("partiton_org_info_federal_orgs_by_inst_form") },
+      { id: "org_info_interests_by_inst_form", text: text_maker("partiton_org_info_interests_by_inst_form") },
     ];
 
     const presentation_schemes = _.chain(this.all_presentation_schemes)
