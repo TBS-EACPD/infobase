@@ -275,10 +275,11 @@ a.boxclose {
   margin-left: 0px;
 }
 
-.partition-content.root .amount{
+.partition-content.root > .partition-content-title > .amount{
   font-size: 48px;
+  margin: 0px;
 }
-.partition-content.root .amount a{
+.partition-content.root .partition-content-title > .amount > a{
   color: #fff!important;
 }
 
