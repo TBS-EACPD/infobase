@@ -524,11 +524,12 @@ const specific_est_doc_node_rules = (node, est_doc_code) => {
 const planned_spending_post_traversal_rule_set = (node,value_attr,root_id) => {
   const table8 = Table.lookup('table8');
 
-  const common_rpb_link_options = { 
+  const default_rpb_link_options = { 
     columns: ["{{est_in_year}}_estimates"],
+    subject: "gov_gov",
     mode: "details",
     dimension: "voted_stat",
-    filter: "All",
+    filter: text_maker("all"),
     table: table8.id,
     preferDeptBreakout: true,
     descending: false,
@@ -537,12 +538,23 @@ const planned_spending_post_traversal_rule_set = (node,value_attr,root_id) => {
   node.id_ancestry = get_id_ancestry(root_id,node);
   if (node.data.is("vs_type") || node.data.is("est_inst") || node.data.is("stat_item")){
     node[value_attr] = node.value = node.data.value;
-    node.data.rpb_link = rpb_link( _.extend({}, common_rpb_link_options, {subject: "gov_gov"}) );
+    if (node.data.is("vs_type")) {
+      node.data.rpb_link = rpb_link( 
+        _.extend({}, default_rpb_link_options, {
+          dimension: node.data.id === 999 ? "voted_stat" : "major_voted_stat",
+          filter: node.data.id === 999 ? text_maker("stat") : node.data.name,
+        }) 
+      );
+    } else if (node.data.is("est_inst")) {
+      node.data.rpb_link = rpb_link( _.extend({}, default_rpb_link_options, {dimension: "by_estimates_doc", filter: node.data.name}) );
+    } else if (node.data.is("stat_item")) {
+      node.data.rpb_link = rpb_link( _.extend({}, default_rpb_link_options, {dimension: "voted_stat", filter: text_maker("stat")}) );
+    }
   } else {
     node.children = _.filter(node.children, d => d.value !== false && d.value !== 0);
     node[value_attr] = node.value = d4.sum(node.children, d=>d.value);
     if (node.data.is("dept")){
-      node.data.rpb_link = rpb_link( _.extend({}, common_rpb_link_options, {subject: "dept_" + node.data.id}) );
+      node.data.rpb_link = rpb_link( _.extend({}, default_rpb_link_options, {subject: "dept_" + node.data.id}) );
     }
   }
 }
