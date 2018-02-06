@@ -78,6 +78,10 @@ const get_level_appropriate_query_for_panel = (panel_def, level) => {
 const Presentational = props => {
   const { panel_defs, subject_context, a11y_mode } = props;
 
+  if(_.chain(panel_defs).map('key').uniq().value().length < panel_defs.length){
+    throw "error: panel keys are not unique"
+  }
+
   const { level } = subject_context;
 
   const arePanelDepsLoading = !_.chain(panel_defs)
