@@ -473,7 +473,7 @@ partition_spending_will_be:
     <span class='text-nowrap'>{{planning_year_1}}</span>
   fr: |
     {{#if show_root_rollup}}
-    todo
+    Nous prévoyons dépenser
     <p class='amount'><a class="infographic" href='#orgs/gov/gov/infograph/financial'>{{rawfmt_compact x}}</a></p>
     en
     {{/if}}
@@ -498,41 +498,38 @@ partition_fte_will_be:
 partition_spending_will_be_by_est_doc_partial_en:
   handlebars_partial: true
   text: |
-    allocates
     <p class='amount'><a class="infographic" href='#orgs/gov/gov/infograph/financial'>{{rawfmt_compact x}}</a></p>
-    of planned spending for
+    in planned budgetary expenditures were tabled in the 
     <span class='text-nowrap'>{{planning_year_1}}</span>
 partition_spending_will_be_by_est_doc_partial_fr:
   handlebars_partial: true
   text: |
-    todo
     <p class='amount'><a class="infographic" href='#orgs/gov/gov/infograph/financial'>{{rawfmt_compact x}}</a></p>
-    todo
-    <span class='text-nowrap'>{{planning_year_1}}</span>
+    en dépenses budgétaires prévues présenté dans le
 partition_spending_will_be_by_mains:
   transform: [handlebars]
   en: |
-    {{gt "est_doc_mains"}} {{> "partition_spending_will_be_by_est_doc_partial_en"}}
+    {{> "partition_spending_will_be_by_est_doc_partial_en"}} {{gt "est_doc_mains"}}
   fr: |
-    {{gt "est_doc_mains"}} {{> "partition_spending_will_be_by_est_doc_partial_fr"}}
+    {{> "partition_spending_will_be_by_est_doc_partial_fr"}} {{gt "est_doc_mains"}} de <span class='text-nowrap'>{{planning_year_1}}</span>
 partition_spending_will_be_by_sea:
   transform: [handlebars]
   en: |
-    {{gt "est_doc_sea"}} {{> "partition_spending_will_be_by_est_doc_partial_en"}}
+    {{> "partition_spending_will_be_by_est_doc_partial_en"}} {{gt "est_doc_sea"}}
   fr: |
-    {{gt "est_doc_sea"}} {{> "partition_spending_will_be_by_est_doc_partial_fr"}}
+    {{> "partition_spending_will_be_by_est_doc_partial_fr"}} {{gt "est_doc_sea"}} de <span class='text-nowrap'>{{planning_year_1}}</span>
 partition_spending_will_be_by_seb:
   transform: [handlebars]
   en: |
-    {{gt "est_doc_seb"}} {{> "partition_spending_will_be_by_est_doc_partial_en"}}
+    {{> "partition_spending_will_be_by_est_doc_partial_en"}} {{gt "est_doc_seb"}}
   fr: |
-    {{gt "est_doc_seb"}} {{> "partition_spending_will_be_by_est_doc_partial_fr"}}
+    {{> "partition_spending_will_be_by_est_doc_partial_fr"}} {{gt "est_doc_seb"}} de <span class='text-nowrap'>{{planning_year_1}}</span>
 partition_spending_will_be_by_sec:
   transform: [handlebars]
   en: |
-    {{gt "est_doc_sec"}} {{> "partition_spending_will_be_by_est_doc_partial_en"}}
+    {{> "partition_spending_will_be_by_est_doc_partial_en"}} {{gt "est_doc_sec"}}
   fr: |
-    {{gt "est_doc_sec"}} {{> "partition_spending_will_be_by_est_doc_partial_fr"}}
+    {{> "partition_spending_will_be_by_est_doc_partial_fr"}} {{gt "est_doc_sec"}} de <span class='text-nowrap'>{{planning_year_1}}</span>
 
 partition_controls:
   transform: [handlebars]
@@ -636,8 +633,8 @@ partition_vote_state_perspective:
   fr: |
     Type de {{gt "votestat"}}
 partition_est_inst_perspective:
-  en: Estimates Instrument
-  fr: Instrument des dépenses
+  en: Estimates Type
+  fr: Instrument de budget des dépenses
 by_organization:
   transform: [handlebars]
   text: |
