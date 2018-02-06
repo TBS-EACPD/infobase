@@ -521,12 +521,24 @@ const specific_est_doc_node_rules = (node, est_doc_code) => {
   }
 }
 
-const planned_spending_post_traversal_rule_set = (node,value_attr,root_id) => {
-  const table8 = Table.lookup('table8');
+const get_rpb_subject_code_from_context = (node, presentation_scheme) => {
+  if ( node.depth !== 0 && (presentation_scheme === "org_planned_spend" || presentation_scheme.startsWith("est_doc_")) ) {
+    return "dept_" + ( node.data.is("dept") ?
+      node.data.id :
+      node.parent.data.is("dept") ?
+        node.parent.data.id :
+        node.parent.parent.data.id );
+  } else {
+    return "gov_gov";
+  }
+}
 
+const planned_spending_post_traversal_rule_set = (node,value_attr,root_id,presentation_scheme) => {
+  const table8 = Table.lookup('table8');
+  
   const default_rpb_link_options = { 
     columns: ["{{est_in_year}}_estimates"],
-    subject: "gov_gov",
+    subject: get_rpb_subject_code_from_context(node, presentation_scheme),
     mode: "details",
     dimension: "voted_stat",
     filter: text_maker("all"),
@@ -536,6 +548,7 @@ const planned_spending_post_traversal_rule_set = (node,value_attr,root_id) => {
   }
 
   node.id_ancestry = get_id_ancestry(root_id,node);
+
   if (node.data.is("vs_type") || node.data.is("est_inst") || node.data.is("stat_item")){
     node[value_attr] = node.value = node.data.value;
     if (node.data.is("vs_type")) {
@@ -554,7 +567,7 @@ const planned_spending_post_traversal_rule_set = (node,value_attr,root_id) => {
     node.children = _.filter(node.children, d => d.value !== false && d.value !== 0);
     node[value_attr] = node.value = d4.sum(node.children, d=>d.value);
     if (node.data.is("dept")){
-      node.data.rpb_link = rpb_link( _.extend({}, default_rpb_link_options, {subject: "dept_" + node.data.id}) );
+      node.data.rpb_link = rpb_link(default_rpb_link_options);
     }
   }
 }
@@ -574,7 +587,7 @@ exports.create_planned_spending_hierarchy = function(value_attr,root_id,presenta
       }
     })
     .eachAfter(node =>{
-      planned_spending_post_traversal_rule_set(node,value_attr,root_id);
+      planned_spending_post_traversal_rule_set(node,value_attr,root_id,presentation_scheme);
       post_traversal_search_string_set(node);
     })
     .sort( absolute_value_sort );
