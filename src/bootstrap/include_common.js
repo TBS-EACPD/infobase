@@ -10,6 +10,7 @@ require('../../external-dependencies/textencoder-lite.min.exec.js');
 require('../../external-dependencies/pako_inflate.min.exec.js');
 require('../../external-dependencies/typeahead.min.exec.js');
 require('../../external-dependencies/tooltip.exec.js');
+require('../../external-dependencies/jquery-ui-focusable-tabbable.exec.js');
 
 
 //dev helper globals 
