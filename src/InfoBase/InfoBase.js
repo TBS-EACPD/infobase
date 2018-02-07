@@ -33,6 +33,7 @@ require("../dept_explore/dept_explore");
 require("../rpb/index.js");
 require("../glossary/glossary");
 require("../metadata/metadata.js");
+require("../about/about.js");
 require("../infographic/infographic");
 
 require('../gen_expl/gen_expl.js');

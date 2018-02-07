@@ -1,0 +1,153 @@
+about_title:
+  en: About Us
+  fr: Qui sommes-nous?
+
+
+about_body_text:
+  transform: [handlebars, markdown]
+  en: |
+
+    The GC InfoBase is a government’s interactive data-visualization tool, which transforms complex financial, people, and results data into simple stories.
+
+
+    By placing years’ worth of federal government data at user’s fingertips and using interactive data visualizations users are able to access data and more importantly, understand it. The InfoBase provides Canadians with a better grasp on how the government spends its funds, manages its people and achieve results.
+
+
+    InfoBase presents performance results and indicators data that were previously scattered across close to 100 annual reports. Users can search by organization, program or keywords to explore spending and results at the government-wide and departmental levels. InfoBase allows users the flexibility to better explore the information according to their own needs.
+
+
+    ## GC InfoBase Principles
+
+
+
+    *	Credible: Anchored in public documents such as the Public Accounts, Estimates and Departmental Plans. The data you will find here will correspond to what you can find in those publicly available government reports. 
+    *	Objective: Being data-driven; it relies exclusively on the data sourced from government reports. 
+    *	Comprehensive: Offers a horizontal view of spending, people management and results for all federal government levels (such as organizations, programs and areas of interest) by showing the full picture in one place, rather than through many different sources (thousands of siloed government publications). 
+    *	Brings government data to life/Understandable: We translate complex government concepts into a user-friendly format that’s easy to understand and navigate. So you can understand how tax dollars are actually spent to achieve results. 
+    *	Living document: Relies on open sources technologies; it is constantly evolving and adapting using new technologies to meet requirements and user’s needs. 
+
+
+    ## History
+
+
+    The GC InfoBase was developed in response to a Parliamentary request for better access to information on government finances.  It also responded to a general public demand for better integration of financial planning and reporting documents that were, until the GC InfoBase, presented in a variety of forms.
+
+
+    The GC InfoBase was launch in April 2013 under the name Expenditure Database. As it grew and incorporated new data (such as people management and results data), the tool was renamed to its current name the GC InfoBase. The creation of InfoBase has involved an iterative process of development involving the team, departments and key stakeholders.
+
+
+    ## Who is the team behind the InfoBase?
+
+
+
+    We are a small multi-disciplinary team of policy analysts, economists and data scientists housed in the Expenditure Management Sector of the Treasury Board of Canada Secretariat, with a mandate to experiment with innovative solutions for analyzing and presenting government management data to Canadians. We are experts in data management and passionate about simplifying complex concepts into clear and understandable formats using innovative tools and solutions. We know that government is complex and understanding how tax dollars are used is complicated. The InfoBase is our attempt to bring clarity and help Canadians understand how their government spends its funds, manages its people and achieve results.
+
+
+
+
+    ## What are our sources? 
+
+
+
+    We rely on several governmental publications (i.e. Public Accounts, Estimates, Departmental Plans and Quarterly Financial Reports). The main data sources are can be found in our Datasets page.
+
+
+    ## How can I access the raw data?
+
+
+
+    The InfoBase presents the data in a particular way, but we know that some people prefer accessing directly the data to do their own analysis. So we ensure that all the data contain in the tool is also available on the Government of Canada Open Data Portal in a format that allows you to download the csv and conduct your own analysis.  
+
+
+    Individual links to the corresponding Open datasets for each table in InfoBase can be found in our Datasets page.
+
+
+    ## What technologies are behind the InfoBase?
+
+
+    The GC InfoBase was developed using open-source technologies such as bootstrap, d3 and React. The Agile development methodology was used to rapidly iterate a prototype from requirements to new features. 
+
+
+    We also get inspiration from work done across the globe. For instance, our [Government at a Glance diagram](#partition) was inspired by [USAFacts.org](USAFacts.org).
+
+
+    ## Recognition
+
+
+    The InfoBase has been recognized as the authoritative source of Government expenditure information by the Parliamentary Budget Officer (PBO) and was identified as an innovation in the public sector by the Organisation for Economic Co-operation and Development (OECD) and Observatory of Public Sector Innovation (OPSI).
+
+
+    ## We want to hear from you!
+
+
+    We are always looking for ideas and suggestions to help us improve the current version of the InfoBase. If you would like to share some ideas, or comments regarding your experience with the tool, please take a few minutes to complete our online survey. 
+  fr: |  
+    
+    L’InfoBase du GC est un outil interactif de visualisation des données qui traduit en termes simples l’information gouvernementale sur les finances, les résultats et la gestion des personnes. 
+
+
+    En mettant plusieurs années de renseignements gouvernementaux à portée de la main des utilisateurs, l’InfoBase permet non seulement d’accéder aux données, mais surtout d’en comprendre le sens grâce à la visualisation interactive de l’information. L’InfoBase permet aux Canadiens de mieux comprendre comment le gouvernement dépense les fonds publics, gère ses employés et obtient des résultats. 
+
+
+    Les données sur les résultats et les indicateurs de rendement figurant à l’InfoBase étaient auparavant éparpillées dans une centaine de rapports annuels. On peut effectuer une recherche par organisation, programme ou mot clé pour explorer les dépenses et les résultats d’un ministère ou de l’ensemble du gouvernement. L’InfoBase offre la souplesse nécessaire pour explorer l’information selon ses besoins.
+    
+    
+    ## Principes de l’InfoBase du GC
+
+
+    *	Crédible : L’InfoBase est enracinée dans des documents publics tels que les comptes publics, les budgets des dépenses et les plans ministériels. Les données figurant à l’InfoBase correspondent à celles qui figurent dans ces rapports gouvernementaux accessibles au public. 
+    *	Objectif : Comme elle repose sur des données, l’InfoBase se fie exclusivement aux données tirées des rapports du gouvernement. 
+    *	Complet : L’InfoBase présente une vue d’ensemble horizontale des dépenses, de la gestion des personnes et des résultats à tous les niveaux du gouvernement fédéral (p. ex. organisations, programmes, domaines d’intérêt) à un seul endroit plutôt que dans un nombre considérable de sources différentes (les milliers de documents gouvernementaux publiés en vase clos). 
+    *	Convivial et compréhensible : Nous traduisons des concepts gouvernementaux complexes dans un format convivial facile à comprendre et à explorer pour que vous sachiez comment les fonds publics sont dépensés dans l’atteinte des résultats. 
+    *	Document évolutif : L’InfoBase s’appuie sur les technologies à libre accès. Elle est en constante évolution s’adapte constamment à l’aide des nouvelles technologies pour satisfaire aux exigences et aux besoins des utilisateurs. 
+
+    ## Historique 
+    
+    
+    
+    L’InfoBase du GC a été élaboré par suite de la demande du Parlement d’améliorer l’accès à l’information sur les finances publiques et de la demande du grand public de mieux intégrer les documents redditionnels et de planification financière présentés jusqu’à maintenant sous diverses formes. 
+
+
+    L’InfoBase du GC a été inaugurée en avril 2013 sous le nom de « Base de données des dépenses ». Elle a été renommée au cours de sa croissance et de l’intégration de nouvelles données (p. ex. les données sur les résultats et la gestion des personnes) et s’appelle aujourd’hui « InfoBase du GC ». La création de l’InfoBase comprend un processus répétitif de développement auquel participent l’équipe, les ministères et les intervenants clés.
+
+
+    ## Quelle est l’équipe responsable de l’InfoBase?
+
+
+    Nous sommes une petite équipe multidisciplinaire du Secteur de la gestion des dépenses, du Secrétariat du Conseil du Trésor du Canada, composée d’analystes des politiques, d’économistes et de scientifiques des données dont le mandat consiste à mettre à l’essai des solutions novatrices pour l’analyse et la présentation aux Canadiens de données sur la gestion gouvernementale. Experts de la gestion de données, nous sommes passionnés par la simplification de concepts complexes en formats clairs et compréhensibles à l’aide de solutions et d’outils novateurs. Nous savons que l’appareil gouvernemental est complexe et que l’utilisation des fonds publics est compliquée. L’InfoBase est le résultat de nos efforts pour clarifier et rendre compréhensible auprès des Canadiens la façon dont le gouvernement dépense les fonds publics, gère ses employés et obtient des résultats.
+
+
+    ## Quelles sont nos sources? 
+
+
+    Les publications gouvernementales (p. ex. comptes publics, budgets des dépenses, plans ministériels et rapports financiers trimestriels). Les sources principales sont dans notre page sur les données.
+
+
+
+    ## Comment puis-je accéder aux données brutes?
+    L’InfoBase présente les données d’une façon particulière, mais nous savons que certains préfèrent avoir un accès direct aux données pour faire leur propre analyse. C’est pourquoi on veille à ce que toutes les données contenues dans l’outil figurent aussi dans le Portail de données ouvertes du gouvernement du Canada dans un format qui vous permet de télécharger le fichier CSV et mener votre propre analyse. 
+
+
+    Les ensembles de données ouvertes correspondant à chaque tableau de l’InfoBase se trouvent dans la page sur les données.
+
+
+    ## Quelles sont les technologies derrière l’InfoBase?
+
+
+    L’InfoBase du GC a été développée au moyen de technologies (comme JavaScript, CSS et HTML) et de bibliothèques (comme Bootstrap, D3.js et React) en libre accès pour la production des données et la conception du site Web respectivement. La méthode de développement « Agile » a été utilisée afin de répéter rapidement un prototype à partir des besoins jusqu’aux nouvelles caractéristiques. 
+
+
+    On s’est aussi inspiré d’autres travaux effectués à l’échelle internationale. Par exemple, pour  Coup d’œil sur le gouvernement, on s’est inspiré du « Partition Diagram » conçu par l’équipe de USAFacts.org.
+
+
+    ## Reconnaissance
+
+
+    L’InfoBase a été reconnue par le directeur parlementaire du budget (DPB) comme étant la source d’information faisant autorité en matière de dépenses gouvernementales et est considérée comme une innovation dans le secteur public par l’Observatoire sur l’innovation dans le secteur public (OISP) de l’Organisation de coopération et de développement économiques (OCDE). 
+
+
+
+    ## La parole est à vous!
+
+
+    Nous sommes constamment à la recherche d’idées et de suggestions pour améliorer la version actuelle de l’InfoBase. Le cas échéant, veuillez prendre quelques minutes pour remplir notre sondage en ligne.

@@ -234,3 +234,14 @@ check_home_link:
   en: Check it out!
   fr: Consultez-le !
 
+about_home_title:
+  en: About Us
+  fr: Qui sommes-nous?
+
+about_home_desc:
+  en: Learn about who we are, how we built the InfoBase, what are our guiding principles and help us improve the tool
+  fr: TODO 
+
+about_home_link:
+  en: Learn about us!
+  fr: Apprenez!

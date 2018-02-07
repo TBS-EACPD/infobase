@@ -556,17 +556,17 @@ const HomeLayout = props => (
             <div className="h-img-card__right-container">
               <div className="h-img-card__right">
                 <header className="h-img-card__title">
-                  <TM k="feed_home_title" />
+                  <TM k="about_home_title" />
                 </header>
                 <div className="h-img-card__text">
-                  <TM k="feed_home_text" />
+                  <TM k="about_home_desc" />
                 </div>
                 <div className="h-img-card__bottom-right">
                   <a
                     target="_blank" 
-                    href={text_maker("survey_link")}
+                    href={"#about"}
                   >
-                    <TM k="feed_home_link" />
+                    <TM k="about_home_link" />
                   </a>
                 </div>
               </div>
