@@ -57,19 +57,13 @@ const index_lang_lookups = {
   },
   footer_lis: {
     en: `
-      <li><a href="https://www.canada.ca/en/social.html">Social media</a></li>
-      <li><a href="https://www.canada.ca/en/mobile.html">Mobile applications</a></li>
-      <li><a href="https://www1.canada.ca/en/newsite.html">About Canada.ca</a></li>
-      <li><a href="https://www.canada.ca/en/transparency/terms.html">Terms and conditions</a></li>
-      <li><a href="https://www.canada.ca/en/transparency/privacy.html">Privacy</a></li>
+      <li><a href="https://www.canada.ca/en/contact.html">Contact us</a></li>
+      <li><a href="https://www.canada.ca/en.html">Visit Canada.ca</a></li>
 
     `,
     fr: `
-      <li><a href="https://www.canada.ca/fr/sociaux.html">Médias sociaux</a></li>
-      <li><a href="https://www.canada.ca/fr/mobile.html">Applications mobiles</a></li>
-      <li><a href="https://www1.canada.ca/fr/nouveausite.html">À propos de Canada.ca</a></li>
-      <li><a href="https://www.canada.ca/fr/transparence/avis.html">Avis</a></li>
-      <li><a href="https://www.canada.ca/fr/transparence/confidentialite.html">Confidentialité</a></li>
+      <li><a href="https://www.canada.ca/fr/contact.html">Contactez-nous</a></li>
+      <li><a href="https://www.canada.ca/fr.html">Visiter Canada.ca</a></li>
     `,
   },
 };
