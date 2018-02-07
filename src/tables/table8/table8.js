@@ -14,17 +14,23 @@ const {
   text_maker, 
   Statistics, 
   years : {
-    estimates_years : past_est_years,
+    estimates_years,
   },
 } = require("../table_common");
 
-const years = past_est_years;
+const years = estimates_years;
 const est_cols = _.map(years, yr=> yr+"_estimates");
 
 const in_year_col = est_cols[3];
 const last_year_col = est_cols[2];
 
 window.estimates_docs = {
+  "IM":{
+    en:"Interim Estimates",
+    fr:"Budget provisoire des dépenses",
+    order: 0,
+    tabled: true,
+  },
   "MAINS":{
     "en":"Main Estimates",
     "fr":"Budget principal",

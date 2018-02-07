@@ -64,7 +64,7 @@ new PanelGraph({
   key : "in_year_estimates_split",
 
   layout : {
-    "full" : {text : 5, graph: 7},
+    "full" : {text : 6, graph: 6},
     "half" : {text : 12, graph: 12},
   },
 
@@ -82,7 +82,7 @@ new PanelGraph({
   key : "in_year_estimates_split",
 
   layout : {
-    "full" : {text : 5, graph: 7},
+    "full" : {text : 6, graph: 6},
     "half" : {text : 12, graph: 12},
   },
 

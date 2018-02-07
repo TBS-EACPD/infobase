@@ -724,6 +724,16 @@ main_estimates:
     {{est_in_year}} Main Estimates
   fr: Budget principal des dépenses {{est_in_year}}
 
+
+interim_mains:
+  transform: [handlebars]
+  ## the {{ upsets the YAML parser, so string beginning with
+  # { have to be raw
+  en: |
+    {{est_next_year}} Interim Estimates
+  fr: Budget provisoire des dépenses {{est_in_year}}
+
+
 tabled_estimates:
   transform: [handlebars]
   en: Currently Tabled But Not Approved Estimates
