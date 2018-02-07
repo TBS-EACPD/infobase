@@ -405,7 +405,16 @@ a.boxclose {
     border-top-left-radius: 10px;
   & > a.btn {
     background-color: rgb(69, 161, 227);
+  }
+}
 
+ul.partition-intro-two-col-list {
+  width: 100%;
+  display: inline-block;
+  & > li {
+    float: left;
+    width: 50%;
+    padding-right: 20px;
   }
 }
 
