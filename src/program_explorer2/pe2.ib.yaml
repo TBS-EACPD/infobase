@@ -331,11 +331,11 @@ partition_intro_popup:
           [Institutional Form]{{gl "IF_IGOC"}}
         </li>
       </ul>
-      **Notes:** 
+      **Note:** The available tagging schemes depend on the type of data you have selected.
+      </br>
+      </br>
+      **Helpful tips:**
       <ul>
-        <li>
-          The available tagging schemes depend on the type of data you have selected.
-        </li>
         <li>
           Clicking on any item in the diagram opens a popup containing further details and links to relevant pages.
         </li>
@@ -405,11 +405,11 @@ partition_intro_popup:
            [type d’organisations]{{gl "IF_IGOC"}}
         </li>
       </ul>
-      **Remarques:** 
+      **Remarqus:** La disponibilité des mécanismes d’étiquetage dépend du type de donnée sélectionné.
+      </br>
+      </br>
+      **Conseils utiles:**
       <ul>
-        <li>
-          La disponibilité des mécanismes d’étiquetage dépend du type de donnée sélectionné. 
-        </li>
         <li>
           Cliquer sur un élément du diagramme ouvre une fenêtre contextuelle contenant des renseignements ainsi qu’un lien vers une infographie.
         </li>
