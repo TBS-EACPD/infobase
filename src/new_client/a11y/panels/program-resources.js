@@ -202,7 +202,7 @@ function data_to_props({ root: { org : { programs } } }, level){
 
 export default {
   levels: [ "org" ],
-  key: "pa_vote_stat",
+  key: "program-resources",
   query,
   component: Component,
   data_to_props, //we don't use the data at this layer, we just take advantage of the side-effect for cache to be pre-loaded
