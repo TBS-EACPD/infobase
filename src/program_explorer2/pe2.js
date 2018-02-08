@@ -36,10 +36,10 @@ const get_root_text_key = (value_attr, method) => {
     case "exp" : return "partition_spending_was";
     case "fte" : return "partition_fte_was";
     case "planned_exp" : switch (method){
-      case "est_doc_MAINS" : return "partition_spending_will_be_by_mains";
-      case "est_doc_SEA" : return "partition_spending_will_be_by_sea";
-      case "est_doc_SEB" : return "partition_spending_will_be_by_seb";
-      case "est_doc_SEC" : return "partition_spending_will_be_by_sec";
+      case "est_doc_mains" : return "partition_spending_will_be_by_mains";
+      case "est_doc_sea" : return "partition_spending_will_be_by_sea";
+      case "est_doc_seb" : return "partition_spending_will_be_by_seb";
+      case "est_doc_sec" : return "partition_spending_will_be_by_sec";
       default : return "partition_spending_will_be";
       }
     case "org_info" : switch (method){
@@ -189,9 +189,9 @@ class GovPartition {
           "org_planned_spend", 
           "est_type", 
           "vs_type", 
-          "est_doc_MAINS",
-          "est_doc_SEA",
-          "est_doc_SEB",
+          "est_doc_mains",
+          "est_doc_sea",
+          "est_doc_seb",
         ],
       },
       { 
@@ -213,9 +213,9 @@ class GovPartition {
       { id: "org_planned_spend", text: text_maker("orgs") },
       { id: "est_type", text: text_maker("partition_est_type_perspective") },
       { id: "vs_type", text: text_maker("partition_vote_state_perspective") },
-      { id: "est_doc_MAINS", text: text_maker("est_doc_mains")},
-      { id: "est_doc_SEA", text: text_maker("est_doc_sea")},
-      { id: "est_doc_SEB", text: text_maker("est_doc_seb")},
+      { id: "est_doc_mains", text: text_maker("est_doc_mains")},
+      { id: "est_doc_sea", text: text_maker("est_doc_sea")},
+      { id: "est_doc_seb", text: text_maker("est_doc_seb")},
       { id: "org_info_by_ministry", text: text_maker("partiton_org_info_by_min") },
       { id: "org_info_federal_orgs_by_inst_form", text: text_maker("partiton_org_info_federal_orgs_by_inst_form") },
       { id: "org_info_interests_by_inst_form", text: text_maker("partiton_org_info_interests_by_inst_form") },
@@ -650,13 +650,13 @@ class GovPartition {
   org_planned_spend(){
     this.planned_spending();
   }
-  est_doc_MAINS(){
+  est_doc_mains(){
     this.planned_spending();
   }
-  est_doc_SEA(){
+  est_doc_sea(){
     this.planned_spending();
   }
-  est_doc_SEB(){
+  est_doc_seb(){
     this.planned_spending();
   }
   planned_spending(){

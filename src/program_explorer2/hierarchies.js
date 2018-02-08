@@ -582,7 +582,7 @@ exports.create_planned_spending_hierarchy = function(value_attr,root_id,presenta
       } else if (presentation_scheme === "org_planned_spend") {
         return org_planned_spend_node_rules(node);
       } else if (presentation_scheme.startsWith("est_doc_")) {
-        const est_doc_code = presentation_scheme.replace("est_doc_", "");
+        const est_doc_code = presentation_scheme.replace("est_doc_", "").toUpperCase();
         return specific_est_doc_node_rules(node, est_doc_code);
       }
     })
