@@ -2,12 +2,13 @@ const {text_maker} = require('../models/text.js');
 
 function should_add_survey_banner(){
   //if we add more surveys, we can use 'opened/ignored_survey1'
-  if(window.has_local_storage && (window.localStorage.getItem('ignored_survey1') || window.localStorage.getItem('opened_survey1') )) {
+  //note that we're now using ignored_survey1_1, so that those who ignored it and potentially didn't fill it out can get another chance
+  if(window.has_local_storage && (window.localStorage.getItem('ignored_survey1_1') || window.localStorage.getItem('opened_survey1') )) {
 
     return false;
 
   } else {
-    const should_randomly_add_survey = _.random(1,10) > 8;
+    const should_randomly_add_survey = _.random(1,10) > 6;
     return should_randomly_add_survey;
   }
 }
