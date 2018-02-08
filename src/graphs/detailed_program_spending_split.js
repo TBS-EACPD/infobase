@@ -55,6 +55,10 @@ const info_deps_by_level = {
 
       const table_data = table305.q(subject).data;
 
+      if(_.isEmpty(table_data)){
+        return false;
+      }
+
       const flat_data = _.map(table_data, row => ({
         program: Program.get_from_activity_code(row.dept, row.activity_code),
         so_num: row.so_num,
@@ -76,13 +80,6 @@ const info_deps_by_level = {
         .take(3)
         .value();
 
-
-      if( //if there is less than 3 sobjs or if revenues is one of the top 3, bail on this graph.
-        top_3_so_nums.length < 3 || 
-        !_.chain(top_3_so_nums).intersection([21,22]).isEmpty() 
-      ){
-        return false;
-      }
 
       //maps so_nums to new so_labels
       const higher_level_mapping = so_num => {
