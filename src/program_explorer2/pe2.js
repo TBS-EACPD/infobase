@@ -732,7 +732,11 @@ class GovPartition {
       }
     }
 
-    this.update_diagram_notes();
+    if (presentation_scheme === "est_doc_INTERIM_EST") {
+      this.update_diagram_notes("partition_interim_estimates_def");
+    } else {
+      this.update_diagram_notes();
+    }
 
     this.enable_search_bar();
 
