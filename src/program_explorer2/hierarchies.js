@@ -396,13 +396,13 @@ const get_glossary_entry_by_est_doc_code = (est_doc_code) => {
   return glossary_key ? get_glossary_entry(glossary_key) : false;
 }
 
-const est_inst_node_mapping_common_options = {
-  is: __type__ => __type__ === "est_inst",
-  plural: () => text_maker("partition_est_inst_perspective"),
+const est_type_node_mapping_common_options = {
+  is: __type__ => __type__ === "est_type",
+  plural: () => text_maker("partition_est_type_perspective"),
   glossary_entry_by_id_func: get_glossary_entry_by_est_doc_code,
 };
 
-const subject_to_est_inst_nodes = (node) => {
+const subject_to_est_type_nodes = (node) => {
   const table8 = Table.lookup('table8');
   const estimates_data = table8.q(node).data;
 
@@ -419,12 +419,12 @@ const subject_to_est_inst_nodes = (node) => {
     _.extend(
       {},
       {data_for_node_mapping}, 
-      est_inst_node_mapping_common_options
+      est_type_node_mapping_common_options
     )
   );
 }
 
-const est_inst_or_vs_type_node_to_stat_item_nodes = (node) => {
+const est_type_or_vs_type_node_to_stat_item_nodes = (node) => {
   const data_for_node_mapping = _.chain(node.data_for_children)
     .filter( row => row.votenum === "S")
     .map( row => {
@@ -447,7 +447,7 @@ const est_inst_or_vs_type_node_to_stat_item_nodes = (node) => {
     });
 }
 
-const est_inst_node_to_vs_type_nodes = (node) => {
+const est_type_node_to_vs_type_nodes = (node) => {
   const data_for_node_mapping = _.map(node.data_for_children, row => {
     return {
       id: row.votestattype,
@@ -485,13 +485,13 @@ const orgs_in_est_doc = (est_doc_code) => {
     .value();
 }
 
-const est_inst_node_rules = (node) => {
+const est_type_node_rules = (node) => {
   if (node.is("gov")){
-    return subject_to_est_inst_nodes(node);
-  }  else if (node.is("est_inst")){
-    return est_inst_node_to_vs_type_nodes(node);
+    return subject_to_est_type_nodes(node);
+  }  else if (node.is("est_type")){
+    return est_type_node_to_vs_type_nodes(node);
   } else if (node.is("vs_type")){
-    return est_inst_or_vs_type_node_to_stat_item_nodes(node);
+    return est_type_or_vs_type_node_to_stat_item_nodes(node);
   }
 }
 
@@ -499,7 +499,7 @@ const vs_type_node_rules = (node) => {
   if (node.is("gov")){
     return subject_to_vs_type_nodes(node);
   } else if (node.is("vs_type")){
-    return est_inst_or_vs_type_node_to_stat_item_nodes(node);
+    return est_type_or_vs_type_node_to_stat_item_nodes(node);
   }
 }
 
@@ -507,9 +507,9 @@ const org_planned_spend_node_rules = (node) => {
   if (node.is("gov")){
     return orgs_with_planned_spending();
   } else if (node.is("dept")){
-    return subject_to_est_inst_nodes(node);
-  } else if (node.is("est_inst")){
-    return est_inst_node_to_vs_type_nodes(node);
+    return subject_to_est_type_nodes(node);
+  } else if (node.is("est_type")){
+    return est_type_node_to_vs_type_nodes(node);
   }
 }
 
@@ -549,7 +549,7 @@ const planned_spending_post_traversal_rule_set = (node,value_attr,root_id,presen
 
   node.id_ancestry = get_id_ancestry(root_id,node);
 
-  if (node.data.is("vs_type") || node.data.is("est_inst") || node.data.is("stat_item")){
+  if (node.data.is("vs_type") || node.data.is("est_type") || node.data.is("stat_item")){
     node[value_attr] = node.value = node.data.value;
     if (node.data.is("vs_type")) {
       node.data.rpb_link = rpb_link( 
@@ -558,7 +558,7 @@ const planned_spending_post_traversal_rule_set = (node,value_attr,root_id,presen
           filter: node.data.id === 999 ? text_maker("stat") : node.data.name,
         }) 
       );
-    } else if (node.data.is("est_inst")) {
+    } else if (node.data.is("est_type")) {
       node.data.rpb_link = rpb_link( _.extend({}, default_rpb_link_options, {dimension: "by_estimates_doc", filter: node.data.name}) );
     } else if (node.data.is("stat_item")) {
       node.data.rpb_link = rpb_link( _.extend({}, default_rpb_link_options, {dimension: "voted_stat", filter: text_maker("stat")}) );
@@ -575,8 +575,8 @@ const planned_spending_post_traversal_rule_set = (node,value_attr,root_id,presen
 exports.create_planned_spending_hierarchy = function(value_attr,root_id,presentation_scheme) {
   return d4.hierarchy(Subject.gov,
     node => {
-      if (presentation_scheme === "est_inst") {
-        return est_inst_node_rules(node);
+      if (presentation_scheme === "est_type") {
+        return est_type_node_rules(node);
       } else if (presentation_scheme === "vs_type") {
         return vs_type_node_rules(node);
       } else if (presentation_scheme === "org_planned_spend") {

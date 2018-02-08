@@ -187,7 +187,7 @@ class GovPartition {
         text: text_maker("partition_planned_spending_data"), 
         presentation_schemes: [
           "org_planned_spend", 
-          "est_inst", 
+          "est_type", 
           "vs_type", 
           "est_doc_MAINS",
           "est_doc_SEA",
@@ -211,7 +211,7 @@ class GovPartition {
       { id: "hwh", text: Subject.Tag.tag_roots.HWH.name },
       { id: "st", text: text_maker("type_of_spending") },
       { id: "org_planned_spend", text: text_maker("orgs") },
-      { id: "est_inst", text: text_maker("partition_est_inst_perspective") },
+      { id: "est_type", text: text_maker("partition_est_type_perspective") },
       { id: "vs_type", text: text_maker("partition_vote_state_perspective") },
       { id: "est_doc_MAINS", text: text_maker("est_doc_mains")},
       { id: "est_doc_SEA", text: text_maker("est_doc_sea")},
@@ -641,7 +641,7 @@ class GovPartition {
       this.render();
     }
   }
-  est_inst(){
+  est_type(){
     this.planned_spending();
   }
   vs_type(){
@@ -695,27 +695,27 @@ class GovPartition {
       );
 
       if (d.data.is("stat_item")) {
-        return text_maker("partition_planned_vs_type_or_est_inst", 
+        return text_maker("partition_planned_vs_type_or_est_type", 
           _.extend(common_popup_options, {
             description: d.data.description,
             dept_name: d.parent.data.name,
             dept_id: d.parent.data.id,
           })
         );
-      } else if ( d.data.is("vs_type") || d.data.is("est_inst") ) {
+      } else if ( d.data.is("vs_type") || d.data.is("est_type") ) {
 
         let dept_name, dept_id;
         if (presentation_scheme === "org_planned_spend") {
           if (d.data.is("vs_type")) {
             dept_name = d.parent.parent.data.name;
             dept_id = d.parent.parent.data.id;
-          } else if (d.data.is("est_inst")) {
+          } else if (d.data.is("est_type")) {
             dept_name = d.parent.data.name;
             dept_id = d.parent.data.id;
           }
         }
 
-        return text_maker("partition_planned_vs_type_or_est_inst", 
+        return text_maker("partition_planned_vs_type_or_est_type", 
           _.extend(common_popup_options, {
             description: d.data.description,
             show_parent_dept_name: presentation_scheme === "org_planned_spend",
