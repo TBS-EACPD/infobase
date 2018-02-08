@@ -524,6 +524,11 @@
   background-color: hsla(208, 74%, 30%, 1);
 }
 
+
+.finance-box, .people-box {
+  border-right: 1px solid white;
+}
+
 .results-box:hover, .results-box:active, .results-box:focus,
 .people-box:hover, .people-box:active, .people-box:focus,
 .finance-box:hover, .finance-box:active .finance-box:focus {
