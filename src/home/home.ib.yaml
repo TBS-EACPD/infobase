@@ -8,8 +8,10 @@ home_finance_title:
 
 home_finance_intro:
   transform: [handlebars,markdown]
-  en: In {{pa_last_year}}, we spent <strong>{{fmt_compact_written spent_last_year}}</strong>
-  fr: En {{pa_last_year}}, nous avons dépensé <strong>{{fmt_compact_written spent_last_year}}</strong>
+  old_en: In {{pa_last_year}}, we spent <strong>{{fmt_compact_written spent_last_year}}</strong>
+  old_fr: En {{pa_last_year}}, nous avons dépensé <strong>{{fmt_compact_written spent_last_year}}</strong>
+  en: See how we spent <strong>{{fmt_compact_written spent_last_year}}</strong> in {{pa_last_year}}
+  fr: Voir comment les <strong>{{fmt_compact_written spent_last_year}}</strong> ont été dépensé en {{pa_last_year}}
 
 
 home_finance_link:
@@ -22,8 +24,8 @@ home_ppl_title:
 
 home_ppl_intro:
   transform: [handlebars,markdown]
-  en: By the end of fiscal year {{pa_last_year_2}}, the Federal Public Service counted <strong>{{fmt_big_int_real headcount_last_year}}</strong> employees
-  fr: À la fin de l'exercice {{pa_last_year_2}}, la Fonction publique fédérale comptait <strong>{{fmt_big_int_real headcount_last_year}}</strong> employés
+  en: See who are the <strong>{{fmt_big_int_real headcount_last_year}}</strong> employees in the Federal Public Service at the end of the fiscal year {{pa_last_year}}
+  fr: Voir qui sont les <strong>{{fmt_big_int_real headcount_last_year}}</strong> employés de la Fonction publique fédérale à la fin de l'exercise {{pa_last_year}}
 
 home_ppl_link:
   en: See who they are 
@@ -36,9 +38,9 @@ home_results_title:
 home_results_intro:
   transform: [handlebars,markdown]
   en: |
-    In {{pa_last_year}}, <strong>{{past_targets_met}}</strong> targets were met
+    See the results of the <strong>{{past_targets_met}}</strong> targets that were met in {{pa_last_year}}
   fr: |
-    En {{pa_last_year}}, <strong>{{past_targets_met}}</strong> objectifs ont été atteints
+    Voir les résultats des <strong>{{past_targets_met}}</strong> objectifs atteints en {{pa_last_year}}
 
 home_results_link:
   en: See the results
