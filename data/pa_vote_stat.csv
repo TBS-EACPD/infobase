@@ -1,4 +1,4 @@
-﻿"Deptcode","Vote","Votestattype","DescEn","Descfr","Auth2012","Exp2012","Auth2013","Exp2013","Auth2014","Exp2014","Auth2015","Exp2015","Auth2016","Exp2016"
+﻿"dept_code","vote_num","vs_type","name_en","name_fr","pa_last_year_5_auth","pa_last_year_5_exp","pa_last_year_4_auth","pa_last_year_4_exp","pa_last_year_3_auth","pa_last_year_3_exp","pa_last_year_2_auth","pa_last_year_2_exp","pa_last_year_auth","pa_last_year_exp"
 "ACOA",1,1,"Operating/Program","Fonctionnement/Programme",82386685,72981202,74725659.00,69058793.00,68604382,65978345.00,67652575,63025130,67442115,61978440
 "ACOA",5,3,"Grants & Contributions","Subventions et Contributions",241592300,233185297,236733470.00,236733461.00,232078550,231078546.00,230745973,230745966,262479240,262479231
 "ACOA","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",9470228,9470228,8346591.00,8346591.00,8208478,8208478.00,7809399,7809399,7900191,7900191

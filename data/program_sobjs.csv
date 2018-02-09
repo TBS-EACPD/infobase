@@ -1,4 +1,4 @@
-﻿"DeptCode","ActivityCode","SObj","Expenditures_2015","Expenditures_2016"
+﻿"dept_code","activity_code","so_num","pa_last_year_2","pa_last_year"
 "ACOA","ABH00",1,22014314.00,22521735.71
 "ACOA","ABH00",2,1111886.46,936006.81
 "ACOA","ABH00",3,17223.31,82591.79

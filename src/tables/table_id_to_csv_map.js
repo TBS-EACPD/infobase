@@ -6,13 +6,13 @@ exports = module.exports = {
     url: "table2.csv",
   },
   "table4": {
-    url: "table4.csv",
+    url: "pa_vote_stat.csv",
   },
   "table5":{
-    url: "table5.csv",
+    url: "org_sobjs.csv",
   },
   "table6":{
-    url: "Table6.csv",
+    url: "program_spending.csv",
   },
   "table7":{
     url: "transfer_payments.csv",
@@ -30,13 +30,13 @@ exports = module.exports = {
     url:"table11.csv",
   },
   "table12":{ 
-    url: "Table12.csv",
+    url: "program_ftes.csv",
   },
   "table300": { 
-    url: "program_by_votestat.csv",
+    url: "program_vote_stat.csv",
   },
   "table305": { 
-    url: "prog_by_sobj.csv",
+    url: "program_sobjs.csv",
   },
   "table302": { 
     url: "ENT_TABLE302.csv",

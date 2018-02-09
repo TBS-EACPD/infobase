@@ -110,6 +110,19 @@ module.exports = {
           },
         ]);
     });
+    this.add_col({
+      "type":"big_int",
+      "nick": "drr_last_year",
+      "hidden" : true,
+      "header":{
+        "en": "{{pa_last_year}} - Planned Spending",
+        "fr": "{{pa_last_year}} - Dépenses prévues",
+      },
+      "description": {
+        "en": `Corresponds to total planned spending for the fiscal year {{pa_last_year}}, including additional funds approved by Treasury Board.`,
+        "fr": `Correspondent au total des dépenses prévues pour l'exercice {{pa_last_year}}, y compris les fonds approuvés par le Conseil du Trésor.`,
+      },
+    });
     _.each(planning_years, (header) =>{
       this.add_col(header)
         .add_child([
@@ -127,19 +140,7 @@ module.exports = {
           },
         ]);
     });
-    this.add_col({
-      "type":"big_int",
-      "nick": "drr_last_year",
-      "hidden" : true,
-      "header":{
-        "en": "{{pa_last_year}} - Planned Spending",
-        "fr": "{{pa_last_year}} - Dépenses prévues",
-      },
-      "description": {
-        "en": `Corresponds to total planned spending for the fiscal year {{pa_last_year}}, including additional funds approved by Treasury Board.`,
-        "fr": `Correspondent au total des dépenses prévues pour l'exercice {{pa_last_year}}, y compris les fonds approuvés par le Conseil du Trésor.`,
-      },
-    });
+
   },
 
   "dimensions" : [

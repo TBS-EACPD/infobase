@@ -1,4 +1,4 @@
-﻿"DeptCode","ActivityCode","AuthorityType","Expenditures_2015","Expenditures_2016"
+﻿"dept_code","activity_code","vs_type","pa_last_year_2","pa_last_year"
 "ACOA","ABH00","S",2992431.30,2869105.30
 "ACOA","ABH00","V",168971771.97,183362765.19
 "ACOA","ABK00","S",1339646.27,1430196.86

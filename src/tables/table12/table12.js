@@ -78,6 +78,20 @@ module.exports = {
           },
         });
     });
+
+    this.add_col({ 
+      "type":"big_int_real",
+      "nick": "drr_last_year" ,
+      "hidden" : true,
+      "header":{
+        "en": "{{pa_last_year}}  "+ m("Planned FTEs"),
+        "fr": "{{pa_last_year}}  "+ m("ETP prévus"),
+      },
+      "description": {
+        "en": `Corresponds to the total number of planned FTEs for the fiscal year {{pa_last_year}}`,
+        "fr": `Correspond au nombre total d'équivalents temps plein (ETP) prévus pour l'exercice {{pa_last_year}}`,
+      },
+    });
     _.each(planning_years, (header)=>{
       this.add_col({ 
         "type":"big_int_real",
@@ -93,19 +107,6 @@ module.exports = {
       });
     });
 
-    this.add_col({ 
-      "type":"big_int_real",
-      "nick": "drr_last_year" ,
-      "hidden" : true,
-      "header":{
-        "en": "{{pa_last_year}}  "+ m("Planned FTEs"),
-        "fr": "{{pa_last_year}}  "+ m("ETP prévus"),
-      },
-      "description": {
-        "en": `Corresponds to the total number of planned FTEs for the fiscal year {{pa_last_year}}`,
-        "fr": `Correspond au nombre total d'équivalents temps plein (ETP) prévus pour l'exercice {{pa_last_year}}`,
-      },
-    });
   },
 
   "dimensions" : [
