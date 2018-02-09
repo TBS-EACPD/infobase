@@ -73,6 +73,7 @@ storiesOf("IconArray")
         <IconArray 
           data={data}
           dotRadius={10}
+          height={400}
         />
       </div>
     )

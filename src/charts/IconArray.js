@@ -3,13 +3,13 @@ import {
   layout as icon_layout,
   scale as icon_scale,
 } from 'd3-iconarray';
+import { shallowEqualObjectsOverKeys } from '../core/utils.js';
 
 export const IconArray = props => (
   <AutoSizer>
-    {({height, width}) =>
+    {({width}) => width &&
       <IconArray_
         width={width}
-        height={height}
         {...props}
       />
     }
@@ -23,6 +23,9 @@ class IconArray_ extends React.Component {
   componentDidUpdate(){
     this._update()
   }
+  // shouldComponentUpdate(nextProps){
+  //   return !shallowEqualObjectsOverKeys(this.props, nextProps, ['data', 'width', 'dotRadius']);
+  // }
   render(){
     return (
       <div 
@@ -31,9 +34,8 @@ class IconArray_ extends React.Component {
     );
   }
   _update(){
-    const { height, width, data, dotRadius } = this.props;
+    const { width, data, height, dotRadius } = this.props;
     const layout = icon_layout();
-
 
     const grid = layout(data);
 
@@ -41,19 +43,23 @@ class IconArray_ extends React.Component {
       .domain([ 0, layout.maxDimension(data.length) ])
       .range([0, width])
 
+    
+
     this.el.innerHTML = "";
 
     const root = d3.select(this.el)
       .append('div')
       .style('position','relative')
-      .attr('width',`${width}px`)
-      .attr('height',`${height}px`)
+      .style('overflow',"auto")
+      .style('width',`${width}px`)
+      .style('height',`${height}px`)
 
     root.selectAll('div')
       .data(grid)
       .enter()
       .append('div')
       .style('position','absolute')
+      .style('overflow',"visible")
       //.attr('transform', d => `translate(${arrayScale(d.position.x)},${arrayScale(d.position.y)}` ) 
       .style('left',  d=> `${arrayScale(d.position.x)}px`)
       .style('top', d=> `${arrayScale(d.position.y)}px`)
@@ -76,5 +82,9 @@ class IconArray_ extends React.Component {
         //   .attr('y',dotRadius*6/4)
         //   .attr('x',dotRadius)	
       })
+
+
+      //const lowest_element = _.maxBy(grid, 'y');
+
   }
 }
