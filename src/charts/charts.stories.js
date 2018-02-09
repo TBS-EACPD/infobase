@@ -64,16 +64,64 @@ storiesOf("chart components", module)
   )
 
 
+const fail_now = { color: 'red', className: "fas fa-times-circle"  },
+      pass_now = { color: "green", className: "fas fa-check-circle" },
+      fail_future = { color: "orange", className: "fas fa-clock"  },
+      pass_future = { color: "green", className: "fas fa-clock" };
+
+const order = [ pass_now, fail_now, pass_future, fail_future ];
+
+const icon_freq = [
+  fail_now,
+  fail_now,
+  pass_now,
+  pass_now,
+  pass_now,
+  pass_now,
+  pass_now,
+  fail_future,
+  fail_future,
+  pass_future,
+  pass_future,
+  pass_future,
+]
+
+const data = _.chain(d3.range(1, 145, 1))
+  .map(() => _.clone(icon_freq[_.random(0, icon_freq.length-1, false)]) )
+  .sortBy(item => _.findIndex(order, item))
+  .value();
+
 storiesOf("IconArray")
   .add("basic usage", () => {
-    const data = d3.range(1, 145, 1);
+  
+    return (
+      <div style={_.assign({ height: "400px" }, separator_style)}>
+        <IconArray 
+          data={data}
+          render_item={ ({ data: { className, color } }, max_dim) => {
+            return `<i class="${className}" style="color:${color}; font-size:${0.8*max_dim}px;"></i>`;
+          }}
+          height={600}
+          items_per_row={20}
+          widthFirst
+        />
+      </div>
+    )
+
+  })
+  .add("filling dimensions", () => {
 
     return (
       <div style={_.assign({ height: "400px" }, separator_style)}>
         <IconArray 
           data={data}
-          dotRadius={10}
-          height={400}
+          render_item={ ({ data: { color } }, max_dim) => {
+            console;
+            return `<div style="background-color:${color};width: ${max_dim*1.0}px; height: ${max_dim*1.0}px;"></div>`
+          }}
+          height={600}
+          items_per_row={20}
+          widthFirst={false}
         />
       </div>
     )
