@@ -302,6 +302,16 @@ exports.create_org_info_inst_form_hierarchy = function(value_attr,root_id,grand_
 }
 
 
+let year;
+
+const set_year_by_presentation_scheme = (presentation_scheme) => {
+  if (presentation_scheme === "est_doc_im") { 
+    year = "{{est_next_year}}_estimates";
+  } else {
+    year = "{{est_in_year}}_estimates";
+  }
+}
+
 const estimates_common_node_mapping = ({data_for_node_mapping, is, plural, glossary_entry_by_id_func}) => {
   return _.chain(data_for_node_mapping)
     .groupBy("id")
@@ -368,7 +378,7 @@ const subject_to_vs_type_nodes_common = (estimates_data) => {
     return {
       id: row.votestattype,
       name: row.votestattype !== 999 ? text_maker("vstype"+row.votestattype) : text_maker("stat_items"),
-      value: row["{{est_in_year}}_estimates"],
+      value: row[year],
       data_for_children: _.omit(row, ["csv_index", "votestattype", "votestattype"]),
     }
   });
@@ -410,7 +420,7 @@ const subject_to_est_type_nodes = (node) => {
     return {
       id: row.est_doc_code,
       name: row.est_doc,
-      value: row["{{est_in_year}}_estimates"],
+      value: row[year],
       data_for_children: _.omit(row, ["csv_index", "est_doc_code", "est_doc"]),
     };
   });
@@ -431,7 +441,7 @@ const est_type_or_vs_type_node_to_stat_item_nodes = (node) => {
       return {
         id: row.desc,
         name: row.desc,
-        value: row["{{est_in_year}}_estimates"],
+        value: row[year],
         data_for_children: false,
       };
     })
@@ -452,7 +462,7 @@ const est_type_node_to_vs_type_nodes = (node) => {
     return {
       id: row.votestattype,
       name: row.votestattype !== 999 ? text_maker("vstype"+row.votestattype) : text_maker("stat_items"),
-      value: row["{{est_in_year}}_estimates"],
+      value: row[year],
       data_for_children: _.omit(row, ["csv_index", "est_doc_code", "est_doc"]),
     };
   });
@@ -537,7 +547,7 @@ const planned_spending_post_traversal_rule_set = (node,value_attr,root_id,presen
   const table8 = Table.lookup('table8');
   
   const default_rpb_link_options = { 
-    columns: ["{{est_in_year}}_estimates"],
+    columns: [year],
     subject: get_rpb_subject_code_from_context(node, presentation_scheme),
     mode: "details",
     dimension: "voted_stat",
@@ -573,6 +583,8 @@ const planned_spending_post_traversal_rule_set = (node,value_attr,root_id,presen
 }
 
 exports.create_planned_spending_hierarchy = function(value_attr,root_id,presentation_scheme) {
+  set_year_by_presentation_scheme(presentation_scheme);
+
   return d4.hierarchy(Subject.gov,
     node => {
       if (presentation_scheme === "est_type") {

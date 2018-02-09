@@ -40,6 +40,7 @@ const get_root_text_key = (value_attr, method) => {
       case "est_doc_sea" : return "partition_spending_will_be_by_sea";
       case "est_doc_seb" : return "partition_spending_will_be_by_seb";
       case "est_doc_sec" : return "partition_spending_will_be_by_sec";
+      case "est_doc_im" : return "partition_spending_will_be_by_im";
       default : return "partition_spending_will_be";
       }
     case "org_info" : switch (method){
@@ -697,7 +698,7 @@ class GovPartition {
         {}, 
         get_common_popup_options(d),
         {
-          year: run_template("{{est_in_year}}"),
+          year: presentation_scheme === "est_doc_im" ? run_template("{{est_next_year}}") : run_template("{{est_in_year}}"),
           planned_exp: d.value,
           planned_exp_is_negative: d.value < 0,
           rpb_link: d.data.rpb_link,

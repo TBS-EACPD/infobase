@@ -583,7 +583,6 @@ partition_spending_will_be_by_est_doc_partial_en:
       </a>
     </p>
     in planned budgetary expenditures were tabled in the 
-    <span class='text-nowrap'>{{planning_year_1}}</span>
 partition_spending_will_be_by_est_doc_partial_fr:
   handlebars_partial: true
   text: |
@@ -596,33 +595,33 @@ partition_spending_will_be_by_est_doc_partial_fr:
 partition_spending_will_be_by_mains:
   transform: [handlebars]
   en: |
-    {{> "partition_spending_will_be_by_est_doc_partial_en"}} {{gt "est_doc_mains"}}
+    {{> "partition_spending_will_be_by_est_doc_partial_en"}} <span class='text-nowrap'>{{est_in_year}}</span> {{gt "est_doc_mains"}}
   fr: |
-    {{> "partition_spending_will_be_by_est_doc_partial_fr"}} {{gt "est_doc_mains"}} de <span class='text-nowrap'>{{planning_year_1}}</span>
+    {{> "partition_spending_will_be_by_est_doc_partial_fr"}} {{gt "est_doc_mains"}} de <span class='text-nowrap'>{{est_in_year}}</span>
 partition_spending_will_be_by_im:
   transform: [handlebars]
   en: |
-    {{> "partition_spending_will_be_by_est_doc_partial_en"}} {{gt "est_doc_im"}}
+    {{> "partition_spending_will_be_by_est_doc_partial_en"}} <span class='text-nowrap'>{{est_next_year}}</span> {{gt "est_doc_im"}}
   fr: |
-    {{> "partition_spending_will_be_by_est_doc_partial_fr"}} {{gt "est_doc_im"}} de <span class='text-nowrap'>{{planning_year_1}}</span>
+    {{> "partition_spending_will_be_by_est_doc_partial_fr"}} {{gt "est_doc_im"}} de <span class='text-nowrap'>{{est_next_year}}</span>
 partition_spending_will_be_by_sea:
   transform: [handlebars]
   en: |
-    {{> "partition_spending_will_be_by_est_doc_partial_en"}} {{gt "est_doc_sea"}}
+    {{> "partition_spending_will_be_by_est_doc_partial_en"}} <span class='text-nowrap'>{{est_in_year}}</span> {{gt "est_doc_sea"}}
   fr: |
-    {{> "partition_spending_will_be_by_est_doc_partial_fr"}} {{gt "est_doc_sea"}} de <span class='text-nowrap'>{{planning_year_1}}</span>
+    {{> "partition_spending_will_be_by_est_doc_partial_fr"}} {{gt "est_doc_sea"}} de <span class='text-nowrap'>{{est_in_year}}</span>
 partition_spending_will_be_by_seb:
   transform: [handlebars]
   en: |
-    {{> "partition_spending_will_be_by_est_doc_partial_en"}} {{gt "est_doc_seb"}}
+    {{> "partition_spending_will_be_by_est_doc_partial_en"}} <span class='text-nowrap'>{{est_in_year}}</span> {{gt "est_doc_seb"}}
   fr: |
-    {{> "partition_spending_will_be_by_est_doc_partial_fr"}} {{gt "est_doc_seb"}} de <span class='text-nowrap'>{{planning_year_1}}</span>
+    {{> "partition_spending_will_be_by_est_doc_partial_fr"}} {{gt "est_doc_seb"}} de <span class='text-nowrap'>{{est_in_year}}</span>
 partition_spending_will_be_by_sec:
   transform: [handlebars]
   en: |
-    {{> "partition_spending_will_be_by_est_doc_partial_en"}} {{gt "est_doc_sec"}}
+    {{> "partition_spending_will_be_by_est_doc_partial_en"}} <span class='text-nowrap'>{{est_in_year}}</span> {{gt "est_doc_sec"}}
   fr: |
-    {{> "partition_spending_will_be_by_est_doc_partial_fr"}} {{gt "est_doc_sec"}} de <span class='text-nowrap'>{{planning_year_1}}</span>
+    {{> "partition_spending_will_be_by_est_doc_partial_fr"}} {{gt "est_doc_sec"}} de <span class='text-nowrap'>{{est_in_year}}</span>
 
 partition_controls:
   transform: [handlebars]
