@@ -15,7 +15,7 @@ exports = module.exports = {
     url: "Table6.csv",
   },
   "table7":{
-    url: "table7.csv",
+    url: "transfer_payments.csv",
   },
   "table8": {
     url: "table8.csv",

@@ -347,3 +347,14 @@ population_groups:
     en: Not applicable
     fr: Sans objet
 
+
+transfer_payments:
+  c:
+    en: Contribution
+    fr: Contribution
+  g:
+    en: Grant
+    fr: Subvention
+  o:
+    en: Other Transfer Payment
+    fr: Autre paiement de transfert

@@ -10,6 +10,9 @@ const {
   text_maker, 
   Statistics, 
   years : {std_years},
+  business_constants: {
+    transfer_payments,
+  },
 } = require("../table_common");
 
 module.exports = {
@@ -141,11 +144,10 @@ module.exports = {
   },
 
   "mapper": function (row) {
+    row[1] = transfer_payments[row[1]].text;
     if (this.lang === 'en') {
-      row.splice(2, 1);
       row.splice(3, 1);
     } else {
-      row.splice(1, 1);
       row.splice(2, 1);
     }
     // remove acronym and vote type
