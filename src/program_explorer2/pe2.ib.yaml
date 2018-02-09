@@ -599,12 +599,12 @@ partition_spending_will_be_by_mains:
     {{> "partition_spending_will_be_by_est_doc_partial_en"}} {{gt "est_doc_mains"}}
   fr: |
     {{> "partition_spending_will_be_by_est_doc_partial_fr"}} {{gt "est_doc_mains"}} de <span class='text-nowrap'>{{planning_year_1}}</span>
-partition_spending_will_be_by_interim_est:
+partition_spending_will_be_by_im:
   transform: [handlebars]
   en: |
-    {{> "partition_spending_will_be_by_est_doc_partial_en"}} {{gt "est_doc_interim_est"}}
+    {{> "partition_spending_will_be_by_est_doc_partial_en"}} {{gt "est_doc_im"}}
   fr: |
-    {{> "partition_spending_will_be_by_est_doc_partial_fr"}} {{gt "est_doc_interim_est"}} de <span class='text-nowrap'>{{planning_year_1}}</span>
+    {{> "partition_spending_will_be_by_est_doc_partial_fr"}} {{gt "est_doc_im"}} de <span class='text-nowrap'>{{planning_year_1}}</span>
 partition_spending_will_be_by_sea:
   transform: [handlebars]
   en: |

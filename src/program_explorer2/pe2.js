@@ -192,6 +192,8 @@ class GovPartition {
           "est_doc_mains",
           "est_doc_sea",
           "est_doc_seb",
+          "est_doc_sec",
+          "est_doc_im",
         ],
       },
       { 
@@ -216,6 +218,8 @@ class GovPartition {
       { id: "est_doc_mains", text: text_maker("est_doc_mains")},
       { id: "est_doc_sea", text: text_maker("est_doc_sea")},
       { id: "est_doc_seb", text: text_maker("est_doc_seb")},
+      { id: "est_doc_sec", text: text_maker("est_doc_sec")},
+      { id: "est_doc_im", text: text_maker("est_doc_im")},
       { id: "org_info_by_ministry", text: text_maker("partiton_org_info_by_min") },
       { id: "org_info_federal_orgs_by_inst_form", text: text_maker("partiton_org_info_federal_orgs_by_inst_form") },
       { id: "org_info_interests_by_inst_form", text: text_maker("partiton_org_info_interests_by_inst_form") },
@@ -659,6 +663,12 @@ class GovPartition {
   est_doc_seb(){
     this.planned_spending();
   }
+  est_doc_sec(){
+    this.planned_spending();
+  }
+  est_doc_im(){
+    this.planned_spending();
+  }
   planned_spending(){
     const presentation_scheme = this.method;
     this.hierarchy_factory = ()=>create_planned_spending_hierarchy( this.value_attr, this.root_id+=1, presentation_scheme );
@@ -732,7 +742,7 @@ class GovPartition {
       }
     }
 
-    if (presentation_scheme === "est_doc_INTERIM_EST") {
+    if (presentation_scheme === "est_doc_im") {
       this.update_diagram_notes("partition_interim_estimates_def");
     } else {
       this.update_diagram_notes();
