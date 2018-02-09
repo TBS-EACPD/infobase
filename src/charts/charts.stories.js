@@ -1,5 +1,6 @@
 import { storiesOf } from '@storybook/react';
 import React from 'react';
+import { IconArray }  from './IconArray.js';
 
 import {
   GraphLegend,
@@ -61,3 +62,18 @@ storiesOf("chart components", module)
       />
     </div>
   )
+
+
+storiesOf("IconArray")
+  .add("basic usage", () => {
+    const data = d3.range(1, 145, 1);
+
+    return (
+      <div style={_.assign({ height: "400px" }, separator_style)}>
+        <IconArray 
+          data={data}
+          dotRadius={10}
+        />
+      </div>
+    )
+  })
