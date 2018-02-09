@@ -456,21 +456,21 @@ partition_interim_estimates_def:
   en: |
     <div class="lg-grid">
       <div class="grid-row">
-        <div class="lg-grid-panel100 key_concept_def"> 
-          On {DATE}, the 2018-19 Interim Estimates were tabled in Parliament to begin the new fiscal year. This funding supports the government’s financial requirements for the first three months of the fiscal year.
+        <div> 
+          On {DATE}, the 2018-19 [Interim Estimates]{{gl "INTER_EST"}} were tabled in Parliament to begin the new fiscal year. This funding supports the government’s financial requirements for the first three months of the fiscal year.
         </div>
       </div>
     </div> 
   fr: |
     <div class="lg-grid">
       <div class="grid-row">
-        <div class="lg-grid-panel100 key_concept_def"> 
-          Le Budget provisoire des dépenses pour 2018-2019 a été déposé le {DATE} afin de disposer d’un financement suffisant au début du nouvel exercice. Ce financement vise à soutenir les besoins financiers du gouvernement pour les trois premiers mois de l’exercice.
+        <div> 
+          Le [Budget provisoire]{{gl "INTER_EST"}} des dépenses pour 2018-2019 a été déposé le {DATE} afin de disposer d’un financement suffisant au début du nouvel exercice. Ce financement vise à soutenir les besoins financiers du gouvernement pour les trois premiers mois de l’exercice.
         </div>
       </div>
     </div>
 
-## Misc. components
+## Root item text
 partition_org_info_was:
   transform: [handlebars]
   en: |

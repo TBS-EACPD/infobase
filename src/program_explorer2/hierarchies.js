@@ -400,6 +400,7 @@ const est_doc_code_to_glossary_key_dictionary = {
   SEA: "SUPPSA",
   SEB: "SUPPSB",
   SEC: "SUPPSC",
+  IM: "INTER_EST",
 };
 const get_glossary_entry_by_est_doc_code = (est_doc_code) => {
   const glossary_key = est_doc_code_to_glossary_key_dictionary[est_doc_code]
