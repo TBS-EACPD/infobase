@@ -178,7 +178,7 @@ const ReportDatasets = ({
 
 //the parent flexbox styling screws stuff up and makes it impossible to center vertically,
 // a padding of 6px at the top seems to fix it ¯\_(ツ)_/¯
-const SubjectFilterPicker = ({ subject, onSelect })=> <div style={{paddingTop: '6px'}}>
+const SubjectFilterPicker = ({ subject, onSelect })=> <div style={{paddingTop: '10px'}}>
   <div className="md-half-width md-gutter-right">
     <button 
       onClick={

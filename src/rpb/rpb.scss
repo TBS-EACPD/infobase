@@ -37,7 +37,8 @@ li.select-list-item {
   .md-half-width{
     min-width: 50%;
     display: inline-block;
-    padding-left: 10px; 
+    padding-left: 20px;
+    padding-right: 10px; 
   }
 
   .md-gutter-right {
@@ -59,10 +60,11 @@ li.select-list-item {
 .rpb-option-label {
   display: flex;
   padding: 10px;
+  padding-left: 25px;
   font-size: 1.2em;
   color: white;
-  background-color: rgba(37,114,180,0.7);
-  border: 2px solid rgba(37,114,180,0.9) ;
+  background-color: $primaryColor;
+  min-height: 80px;
 }
 .rpb-option-label-text {
   align-self: center;
@@ -78,7 +80,8 @@ li.select-list-item {
   width: 100%;
 }
 .rpb-option-content > .IBDetails {
-  padding-top: 10px;
+  padding-top: 15px;
+  padding-left: 20px;
 }
 @media (min-width: 901px){
   .rpb-option-label {
@@ -225,4 +228,8 @@ li.select-list-item {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+.rpb-option .input-lg {
+  height: 39px;
 }
