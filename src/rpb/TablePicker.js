@@ -197,7 +197,7 @@ class TaggedItemCloud extends React.Component {
                       .filter({item_id: id})
                       .map( ({tag_id}) => _.find(tags, {id:tag_id} ) )
                       .map( ({id, display, active}) => 
-                        <div key={id} className={classNames(active && "active", 'item-tag')}>
+                        <div key={id} className={classNames(active && "active", active && "active", 'item-tag')}>
                           {display}
                         </div>
                       )

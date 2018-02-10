@@ -90,12 +90,12 @@
 }
 
 .item-card > .item-title {
-  padding: 10px 0px 0px 0px;
+  padding: 0px;
   margin-bottom: -5px;
   font-weight: $mediumFontWeight;
   text-align:center;
-  color: $primaryColor;
-  background-color: transparent;
+  color: #fff;
+  background-color: $primaryColor;
   border-color: $primaryColor;
   border-radius: 8px 8px 0 0;
   height: 40px;
@@ -111,12 +111,13 @@
 }
 
 .item-card-footer {
-  padding: 10px;
+  padding: 15px;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   justify-content: space-between;
   min-height: 50px;
+  padding-top: 10px;
 
 }
 
@@ -141,16 +142,16 @@
   flex-wrap: wrap;
   line-height: 1em;
   font-size: 0.8em;
-  padding: 0;
+  padding: 0px;
 }
 
 .item-tags > .item-tag {
   display: inline;
-  padding: 5px 7px;
-  margin: 5px 10px 0 0;
+  padding: 6px 7px;
+  margin: 12px 12px 0 0;
   color: black;
   background-color: #d9edf7;
-  border-radius: 0;
+  border-radius: 0px 5px 5px 0px;
   border-style: solid;
   border-width: 0 0 0 4px;
   border-color: #269abc;
