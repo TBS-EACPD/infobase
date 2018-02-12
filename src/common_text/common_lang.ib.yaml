@@ -731,7 +731,7 @@ interim_mains:
   # { have to be raw
   en: |
     {{est_next_year}} Interim Estimates
-  fr: Budget provisoire des dépenses {{est_in_year}}
+  fr: Budget provisoire des dépenses {{est_next_year}}
 
 
 tabled_estimates:
