@@ -1,17 +1,11 @@
-# home_sub_title:
-#   en: The TBS InfoBase is a searchable database where you can find information on Government of Canada finances, people and results.
-#   fr: L'InfoBase du SCT est une base de données interrogeable où vous trouverez de l'information sur les dépenses, la gestion des personnes et les résultats du gouvernement du Canada.
-
 home_finance_title:
   en: Finances
   fr: Finances
 
 home_finance_intro:
   transform: [handlebars,markdown]
-  old_en: In {{pa_last_year}}, we spent <strong>{{fmt_compact_written spent_last_year}}</strong>
-  old_fr: En {{pa_last_year}}, nous avons dépensé <strong>{{fmt_compact_written spent_last_year}}</strong>
-  en: See how we spent <strong>{{fmt_compact_written spent_last_year}}</strong> in {{pa_last_year}}
-  fr: Voir comment les <strong>{{fmt_compact_written spent_last_year}}</strong> ont été dépensé en {{pa_last_year}}
+  en: We spent {{fmt_compact_written spent_last_year}} in {{pa_last_year}}
+  fr: Nous avons dépensé {{fmt_compact_written spent_last_year}} en {{pa_last_year}}
 
 
 home_finance_link:
@@ -24,8 +18,8 @@ home_ppl_title:
 
 home_ppl_intro:
   transform: [handlebars,markdown]
-  en: See who are the <strong>{{fmt_big_int_real headcount_last_year}}</strong> employees in the Federal Public Service at the end of the fiscal year {{pa_last_year}}
-  fr: Voir qui sont les <strong>{{fmt_big_int_real headcount_last_year}}</strong> employés de la Fonction publique fédérale à la fin de l'exercise {{pa_last_year}}
+  en: The Federal Public Service counted {{fmt_big_int_real headcount_last_year}} employees at the end of the fiscal year {{pa_last_year}}
+  fr: La Fonction publique fédérale comptait {{fmt_big_int_real headcount_last_year}} employés à la fin de l'exercice {{pa_last_year}}
 
 home_ppl_link:
   en: See who they are 
@@ -38,9 +32,9 @@ home_results_title:
 home_results_intro:
   transform: [handlebars,markdown]
   en: |
-    See the results of the <strong>{{past_targets_met}}</strong> targets that were met in {{pa_last_year}}
+    We met {{past_targets_met}} targets in {{pa_last_year}}
   fr: |
-    Voir les résultats des <strong>{{past_targets_met}}</strong> objectifs atteints en {{pa_last_year}}
+    Nous avons atteint {{past_targets_met}} cibles en {{pa_last_year}}
 
 home_results_link:
   en: See the results
@@ -48,7 +42,7 @@ home_results_link:
 
 home_sub_title:
   en: Transforming complex government data into simple, visual stories
-  fr: Un outil interactif qui traduit en simples termes l'information gouvernementale 
+  fr: Traduit visuellement en termes simples l'information gouvernementale
 
 partition_home_title:
   en: The government at a glance
