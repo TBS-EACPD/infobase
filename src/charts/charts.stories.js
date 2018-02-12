@@ -64,10 +64,11 @@ storiesOf("chart components", module)
   )
 
 
-const fail_now = { color: 'red', className: "fas fa-times-circle"  },
-      pass_now = { color: "green", className: "fas fa-check-circle" },
+const fail_now = { color: 'red', className: "fas fa-times"  },
+      pass_now = { color: "green", className: "fas fa-check" },
       fail_future = { color: "orange", className: "fas fa-clock"  },
-      pass_future = { color: "green", className: "fas fa-clock" };
+      pass_future = { color: "green", className: "fas fa-clock" },
+      question_now = { color: "#aaa", className="far fa-question-circle" };
 
 const order = [ pass_now, fail_now, pass_future, fail_future ];
 
@@ -99,7 +100,23 @@ storiesOf("IconArray")
         <IconArray 
           data={data}
           render_item={ ({ data: { className, color } }, max_dim) => {
-            return `<i class="${className}" style="color:${color}; font-size:${0.8*max_dim}px;"></i>`;
+            return `
+              <div
+                style="
+                  background-color:${color};
+                  width: ${max_dim*0.9}px;
+                  height: ${max_dim*0.9}px;
+                  display:flex;
+                  justify-content: center;
+                  align-items:center;
+                "
+              >
+                <i 
+                  class="${className} fa-fw fa-sm"
+                  style="color: #fefefe; font-size:${0.8*max_dim}px;"
+                ></i>
+              </div>
+            `
           }}
           height={600}
           items_per_row={20}

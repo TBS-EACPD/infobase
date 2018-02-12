@@ -5,6 +5,9 @@ const {
     TM,
     Format,
   },
+  declarative_charts: {
+    GraphLegend,
+  },
 } = require("../shared");
 
 const { 
@@ -18,9 +21,169 @@ const {
 
 require("./drr_summary_text.ib.yaml");
 
+const {IconArray, FlexIconArray} = require('../../charts/IconArray.js');
+
+const grid_icons = {
+  fail : { color: 'red', className: "fas fa-times"  },
+  pass : { color: "green", className: "fas fa-check" },
+  fail_future : { color: "orange", className: "fas fa-clock"  },
+  pass_future : { color: "green", className: "fas fa-clock" },
+  question : { color: "#aaa", className: "far fa-question-circle" },
+};
+const icon_order = {
+  pass: 0,
+  fail: 5,
+  pass_future: 10,
+  fail_future: 15,
+  question: 25,
+};
+
+const status_keys_to_icon_keys = {
+  past_success: 'pass',
+  past_failure: 'fail',
+  past_not_appl: 'question',
+  past_not_avail: 'question',
+
+  future_success: 'pass_future',
+  future_failure: 'fail_future',
+  future_not_appl: 'question',
+  future_not_avail: 'question',
+
+  other_success: 'pass',
+  other_failure: 'fail',
+  other_not_appl: 'question',
+  other_not_avail: 'question',
+};
+
 
 const PctFormat = ({val}) => <Format type="percentage1" content={val} />;
-const StatusTable = ({
+const StatusGrid = props => {
+  const {
+    past_success, 
+    past_failure, 
+    past_not_appl, 
+    past_not_avail,
+
+    future_success, 
+    future_failure, 
+    future_not_appl,
+    future_not_avail,
+
+    other_success, 
+    other_failure, 
+    other_not_appl,
+    other_not_avail,
+  } = props;
+  
+  
+  const past_total = past_success + past_failure + past_not_avail + past_not_appl;
+  const future_total = future_success + future_failure + future_not_avail + future_not_appl;
+  const other_total = other_success + other_failure + other_not_appl + other_not_avail;
+
+  const include_future_col = future_total > 0;
+  const include_past_col = past_total > 0;
+  const include_other_col = other_total > 0;
+
+  const include_not_avail_row = other_not_avail + future_not_avail + past_not_avail > 0;
+  const include_not_appl_row = other_not_appl + future_not_appl + past_not_appl > 0;
+
+
+  let viz_data = _.chain(props)
+    .pickBy( (val,key) => status_keys_to_icon_keys[key] && val > 0 )
+    .toPairs()
+    .groupBy( ([key,val]) => status_keys_to_icon_keys[key] )
+    .map( (amounts, icon_key) => ({
+      icon_key,
+      count: _.sumBy(amounts,1)
+    }))
+    .pipe(data => {
+      //TODO: make maxSize responsive
+      const maxSize = 400;
+      const total = _.sumBy(data, 'count');
+      if(total > maxSize){
+        return _.map(data, obj => Object.assign(obj,{ count: obj.count/total*maxSize }) );
+      }
+      return data;
+    })
+    .sortBy(({icon_key}) => _.indexOf(icon_order, icon_key) )
+    .flatMap( ({count,icon_key}) => {
+      return _.range(1,count +1)
+        .map(()=> _.clone(grid_icons[icon_key])  );
+    })
+    .value()
+
+  const legend_data = _.chain(props)
+    .pickBy( (val,key) => status_keys_to_icon_keys[key] && val > 0 )
+    .toPairs()
+    .map( ([key,val])=> ({
+      color: grid_icons[status_keys_to_icon_keys[key]].color,
+      key,
+      order: _.indexOf(icon_order, status_keys_to_icon_keys[key]),
+    }))
+    .sortBy('order')
+    .value();
+
+
+
+
+  return (
+    <div 
+      style={{
+        maxHeight: "300px",
+        display: "flex",
+        flexDirection:"column",
+      }}
+    >
+      <GraphLegend
+        isHorizontal={true} 
+        items={ 
+          _.map(legend_data, ({key, color}) => ({
+            label: key,
+            id: key,
+            color,
+          }))
+        } 
+      />
+      {null&& <IconArray 
+        data={viz_data}
+        render_item={ ({ data: { className, color } }, max_dim) => {
+          return `
+            <div 
+              style="
+                background-color: ${color};
+                border-radius: 100%;
+                width: ${0.5*max_dim}px;
+                height: ${0.5*max_dim}px;
+                
+              "
+            >
+            </div>
+          `;
+        }}
+        height={50}
+        items_per_row={20}
+      />}
+      <FlexIconArray
+        items={viz_data}
+        render_item={ ({color}) => 
+          <div
+            style={{
+              width: "10px",
+              height: "10px",
+              margin: "5px",
+              backgroundColor: color,
+              borderRadius: "100%",
+            }}
+          >
+          </div>
+        }
+      />
+    </div>
+  )
+}
+
+
+const OldStatusTable = ({
   past_success, 
   past_failure, 
   past_not_appl, 
@@ -125,7 +288,7 @@ const StatusTable = ({
 const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts }) => {
 
   return (
-    <div className="frow middle-xs between-md" style={{marginBottom: "30px"}}>
+    <div className="frow middle top-xs between-md" style={{marginBottom: "30px"}}>
       <div className="fcol-md-5 col-xs-12 medium_panel_text" >
         <TM 
           k="drr_summary_text"
@@ -133,7 +296,7 @@ const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts }) => {
         />
       </div>
       <div className="fcol-md-6 col-xs-12">
-        <StatusTable {...counts} />
+        <StatusGrid {...counts} />
       </div>
     </div>
   );

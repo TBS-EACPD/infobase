@@ -1,24 +1,12 @@
-import { AutoSizer } from 'react-virtualized';
 import { 
   layout as icon_layout,
   scale as icon_scale,
 } from 'd3-iconarray';
 
-export const IconArray = props => (
-  <AutoSizer>
-    {({width}) => width &&
-      <IconArray_
-        width={width}
-        {...props}
-      />
-    }
-  </AutoSizer>
-);
-
 
 const padding = 15;
 
-class IconArray_ extends React.Component {
+export class IconArray extends React.Component {
   componentDidMount(){
     this._update();
   }
@@ -37,13 +25,14 @@ class IconArray_ extends React.Component {
   }
   _update(){
     let { 
-      width,
       data,
       height,
       items_per_row,
       widthFirst,
       render_item,
     } = this.props;
+
+    const width = this.el.offsetWidth;
 
     if(!width || !height){ 
       return;
@@ -96,5 +85,42 @@ class IconArray_ extends React.Component {
 
       //const lowest_element = _.maxBy(grid, 'y');
 
+  }
+}
+
+
+export class FlexIconArray extends React.Component {
+  render(){
+    const { 
+      render_item,
+      items,
+      heightFirst,
+    } = this.props;
+
+    const rendered_items = _.map(items, (item, ix) =>
+      <div
+        key={ix}
+        style={{
+          flex: "0 0 auto",
+        }}
+      >
+        {render_item(item)}
+      </div>
+    );
+
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "flex-start",
+          alignContent: "flex-start",
+          flexWrap: "wrap",
+          flexDirection: heightFirst ? "column" : "row",
+        }}
+      >
+        {rendered_items}
+      </div>
+    );
   }
 }
