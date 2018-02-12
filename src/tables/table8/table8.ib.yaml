@@ -196,7 +196,7 @@ gov_in_year_estimates_split_text:
    {{/each}}
 
 
-   On DATE, the {{est_next_year}} {{gl_tt "Interim Estimates" "INTER_EST"}} were tabled in Parliament seeking **{{fmt_compact_written gov_tabled_est_next_year}}** in {{gl_tt "spending authorities" "AUTH"}} to begin the new fiscal year. This funding supports the government's financial requirements for the first three months of the year.
+   On February 12th 2018, the {{est_next_year}} {{gl_tt "Interim Estimates" "INTER_EST"}} were tabled in Parliament seeking **{{fmt_compact_written gov_tabled_est_next_year}}** in {{gl_tt "spending authorities" "AUTH"}} to begin the new fiscal year. This funding supports the government's financial requirements for the first three months of the year.
   fr: |
    Pour l’exercice courant ({{est_in_year}}), le total de dépenses budgétaires prévues s’élève à 
    **{{fmt_compact_written gov_tabled_est_in_year}}** dans le(s) {{gl_tt "processus budgétaire(s)" "EST_PROC"}} et {{gl_tt "redressements et virements" "ADJUS"}} suivants:
@@ -205,7 +205,7 @@ gov_in_year_estimates_split_text:
    {{/each}}
 
 
-   Le {{gl_tt "Budget provisoire des dépenses" "INTER_EST"}} pour {{est_next_year}} a été déposé au Parlement le DATE, demandant l'autorisation de dépenser **{{fmt_compact_written gov_tabled_est_next_year}}** afin de disposer d'un financement suffisant au début du nouvel exercise. Ce financement vise à soutenir les besoins du gouvernement pour les trois premiers mois de l'exercise.
+   Le {{gl_tt "Budget provisoire des dépenses" "INTER_EST"}} pour {{est_next_year}} a été déposé au Parlement le 12 février 2018, demandant l'autorisation de dépenser **{{fmt_compact_written gov_tabled_est_next_year}}** afin de disposer d'un financement suffisant au début du nouvel exercice. Ce financement vise à soutenir les besoins du gouvernement pour les trois premiers mois de l'exercice.
 
 dept_in_year_estimates_split_text:
   transform: [handlebars,markdown]
@@ -217,7 +217,7 @@ dept_in_year_estimates_split_text:
    {{/each}}
 
 
-   On DATE, the {{est_next_year}} {{gl_tt "Interim Estimates" "INTER_EST"}} were tabled in Parliament seeking **{{fmt_compact_written dept_tabled_est_next_year_estimates}}** in {{gl_tt "spending authorities" "AUTH"}} to begin the new fiscal year. This funding supports the government's financial requirements for the first three months of the year.
+   On February 12th 2018, the {{est_next_year}} {{gl_tt "Interim Estimates" "INTER_EST"}} were tabled in Parliament seeking **{{fmt_compact_written dept_tabled_est_next_year_estimates}}** in {{gl_tt "spending authorities" "AUTH"}} to begin the new fiscal year. This funding supports the organization's financial requirements for the first three months of the year.
   fr: |
    En date du {{est_in_year}} {{last_estimates}}, pour **{{le_dept dept}}**, les dépenses budgétaires prévues de **{{fmt_compact_written dept_tabled_est_in_year_estimates}}** figurent 
    dans le(s) {{gl_tt "processus budgétaire(s)" "EST_PROC"}}  et {{gl_tt "redressements et virements" "ADJUS"}} suivants: 
@@ -226,7 +226,7 @@ dept_in_year_estimates_split_text:
    {{/each}}
 
 
-   Le {{gl_tt "Budget provisoire des dépenses" "INTER_EST"}} pour {{est_next_year}} a été déposé au Parlement le DATE, demandant l'autorisation de dépenser **{{fmt_compact_written dept_tabled_est_next_year_estimates}}** afin de disposer d'un financement suffisant au début du nouvel exercise. Ce financement vise à soutenir les besoins du gouvernement pour les trois premiers mois de l'exercise.
+   Le {{gl_tt "Budget provisoire des dépenses" "INTER_EST"}} pour {{est_next_year}} a été déposé au Parlement le 12 février 2018, demandant l'autorisation de dépenser **{{fmt_compact_written dept_tabled_est_next_year_estimates}}** afin de disposer d'un financement suffisant au début du nouvel exercice. Ce financement vise à soutenir les besoins de l'organisation pour les trois premiers mois de l'exercice.
 
 # crso_estimates_split:
 #   transform: [handlebars,markdown]
