@@ -1,11 +1,6 @@
 const _ = require("lodash");
 const d3_dsv = require('d3-dsv');
 
-const {
-  footnote: footnote_row_to_obj,
-  footnote_to_row,
-} = require('../src/models/csv_adapters.js');
-
 // models/results has no dependencies 
 let 
   all_footnotes, 
@@ -20,7 +15,7 @@ let
 
 
 
-function populate_stores(file_obj){
+function populate_stores(parsed_models){
 
   //initialize (or reset) the stores
   all_footnotes = [];
@@ -30,10 +25,6 @@ function populate_stores(file_obj){
 
   global_footnotes = [];
 
-  const rows_by_file = _.chain(file_obj)
-    .mapValues( csv_str => _.tail(d3_dsv.csvParseRows(_.trim(csv_str) ) ) )
-    .value();
-
   const {
     depts,
     crsos, 
@@ -41,30 +32,29 @@ function populate_stores(file_obj){
     tag_prog_links, 
 
     footnotes,
-  } = rows_by_file;
+  } = parsed_models;
 
-  _.each(crsos, ([ crso_id, dept_code ]) => {
-    crso_deptcodes[crso_id] = dept_code;
+  _.each(crsos, ({ id, dept_code }) => {
+    crso_deptcodes[id] = dept_code;
   });
 
-  _.each(programs, ([ title,dept_code, activity_code , useless, crso_id])=> {
+  _.each(programs, ({ dept_code, activity_code, crso_id })=> {
     const prog_id  = `${dept_code}-${activity_code}`;
     program_deptcodes[prog_id] = dept_code;
   });
 
-  _.each(tag_prog_links, ([dept_code, activity_code, tag_id]) => {
-    const prog_id  = `${dept_code}-${activity_code}`;
+  _.each(tag_prog_links, ({ program_id, tag_id }) => {
 
-    if(!program_tag_ids[prog_id]){
-      program_tag_ids[prog_id] = [];
+    if(!program_tag_ids[program_id]){
+      program_tag_ids[program_id] = [];
     }
-    program_tag_ids[prog_id].push(tag_id)
+    program_tag_ids[program_id].push(tag_id)
     
   });
 
   //initialize all depts and tags to have empty array of footnotes 
   footnotes_by_deptcode = _.chain(depts)
-    .map( ([org_id, dept_code]) => [dept_code, [] ] )
+    .map( ({org_id, dept_code}) => [dept_code, [] ] )
     .fromPairs()
     .value();
 
@@ -76,22 +66,19 @@ function populate_stores(file_obj){
     .fromPairs()
     .value();
 
-  _.each(footnotes, row => {
+  _.each(footnotes, obj => {
     //FIXME: once pipeline starts including unique IDs for each footnote, we can stop using index.
-    const obj = footnote_row_to_obj(row);
+    //"id","subject_class","subject_id","fyear1","fyear2","keys","footnote_en","footnote_fr"
     all_footnotes.push(obj);
 
-    const {
-      level_name,
-      subject_id,
-    } = obj;
+    const { subject_class, subject_id } = obj;
 
-    if(level_name==="gov" || subject_id === "*"){
+    if(subject_class==="gov" || subject_id === "*"){
       global_footnotes.push(obj);
 
     } else {
 
-      switch(level_name){
+      switch(subject_class){
         case 'dept': {
           const dept_code = subject_id; 
           footnotes_by_deptcode[dept_code].push(obj);
@@ -134,24 +121,31 @@ function populate_stores(file_obj){
 
 }
 
-function footnotes_to_csv_string(footnote_objs){
-  return d3_dsv.csvFormatRows(
-    _.map(footnote_objs, footnote_to_row )
-  );
+function footnotes_to_csv_string(footnote_objs,lang){
+  const other_lang = lang === "en" ? "fr" : "en";
+  const lang_specific_records = _.map(footnote_objs, obj => {
+    const new_obj = _.clone(obj);
+    new_obj['footnote'] = new_obj[`footnote_${lang}`];
+    delete new_obj[`footnote_${lang}`];
+    delete new_obj[`footnote_${other_lang}`];
+    return new_obj;
+  });
+
+  return d3_dsv.csvFormat(lang_specific_records)
 }
 
-function get_footnote_file_defs(file_obj){
+function get_footnote_file_defs(file_obj, lang){
   populate_stores(file_obj);
 
   return {
     depts: _.chain(footnotes_by_deptcode)
-      .mapValues(footnotes_to_csv_string)
+      .mapValues( val => footnotes_to_csv_string(val, lang))
       .value(),
     tags: _.chain(footnotes_by_tag_id)
-      .mapValues(footnotes_to_csv_string)
+      .mapValues(val => footnotes_to_csv_string(val, lang))
       .value(),
-    global: footnotes_to_csv_string(global_footnotes),
-    all: footnotes_to_csv_string(all_footnotes),
+    global: footnotes_to_csv_string(global_footnotes, lang),
+    all: footnotes_to_csv_string(all_footnotes, lang),
   };
 
 

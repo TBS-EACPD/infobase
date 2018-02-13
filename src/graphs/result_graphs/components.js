@@ -111,9 +111,9 @@ const SingleIndicatorDisplay = ({indicator}) => {
       <dd key="tgt-dd">
         <IndicatorResultDisplay
           data_type={indicator.target_type}
-          min={indicator.min}
-          max={indicator.max}
-          narrative={indicator.planned_target_str}
+          min={indicator.target_min}
+          max={indicator.target_max}
+          narrative={indicator.target_narrative}
         />
       </dd>
 
@@ -126,8 +126,8 @@ const SingleIndicatorDisplay = ({indicator}) => {
         <dd key="actual-result-dd">
           <IndicatorResultDisplay
             data_type={indicator.actual_datatype}
-            min={indicator.actual_target_str}
-            narrative={indicator.actual_target_str}
+            min={ indicator.actual_result }
+            narrative={indicator.actual_result}
           />
         </dd>,
       ]}

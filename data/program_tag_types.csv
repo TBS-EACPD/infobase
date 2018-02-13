@@ -1,4 +1,4 @@
-﻿"TagID","Type","Title_EN","Title_FR","Description_EN","Description_FR"
+﻿"id","type","name_en","name_fr","desc_en","desc_fr"
 "HWH","MtoM","How we help","Comment nous aidons","Information is organized according to how the Programs are delivered (e.g. grants, loans, etc.)","L’information est organisée selon le mécanisme de prestation des programmes (p. ex. bourse, prêts)"
 "GOCO","OtoM","What we do","Ce que nous faisons","Each governmental program is mapped to a high-level activity which is itself associated to a major area of work","Chaque programme gouvernemental est lié à une activité de haut niveau qui est elle-même associée à un domaine de travail important"
 

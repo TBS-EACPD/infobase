@@ -50,11 +50,11 @@ function process_lookups(data){
 
   create_tag_branches(data["program_tag_types.csv"]);
   populate_program_tags(data["program_tags.csv"]);
-  populate_socr_tags(data["CRSODefinition.csv"]);
+  populate_socr_tags(data["crso.csv"]);
   populate_programs(data["program.csv"]);
 
   //once all programs and tags are created, link them 
-  populate_program_tag_linkages(data["tags_m2m_programs.csv"]);
+  populate_program_tag_linkages(data["tags_to_programs.csv"]);
 
   populate_global_footnotes(data.global_footnotes);
 
@@ -70,21 +70,24 @@ function populate_igoc_models({
   urls,
   igoc_rows,
 }){
+
+  const is_en = window.lang === "en";
+
   //populate ministry models
-  _.each(ministries, ([id, name]) => {
-    Ministry.create_and_register(id,name);
+  _.each(ministries, ([id, name_en, name_fr]) => {
+    Ministry.create_and_register(id,is_en ? name_en : name_fr );
   });
   //populate minister models
-  _.each(ministers, ([id,name]) => {
-    Minister.create_and_register(id,name);
+  _.each(ministers, ([id,name_en, name_fr]) => {
+    Minister.create_and_register(id, is_en ? name_en : name_fr );
   });
 
   //populate institutional forms hierarchy model
-  _.each(inst_forms, ([id, parent_id, name]) => {
-    InstForm.create_and_register(id, name);      
+  _.each(inst_forms, ([id, parent_id, name_en, name_fr]) => {
+    InstForm.create_and_register(id, is_en ? name_en : name_fr );      
   });
   //once they're all created, create bi-directional parent-children links
-  _.each(inst_forms, ([id, parent_id, name]) => {
+  _.each(inst_forms, ([id, parent_id]) => {
     const inst = InstForm.lookup(id);
     if(!_.isEmpty(parent_id)){
       const parent = InstForm.lookup(parent_id);
@@ -95,7 +98,7 @@ function populate_igoc_models({
 
   //populate a temporary URL store
   const url_lookup = _.chain(urls)
-    .map(([id,url])=> [url_id(id), url]) //force it to be a string just in case interpreted as array
+    .map(([id,en, fr])=> [url_id(id), is_en ? en : fr ]) //force it to be a string just in case interpreted as array
     .fromPairs()
     .value();
 
@@ -103,18 +106,19 @@ function populate_igoc_models({
   //structured as [org_id, minister_id]
   const minister_by_org_id = _.chain(org_to_minister)
     .groupBy(0)
-    .mapValues( (group, org_id) => _.map(group,1) )
+    .mapValues( (group, org_id) => _.map(group, 1) )
     .value();
 
 
-  const statuses = [
-    null,
-    text_maker('active'),
-    text_maker('transferred'),
-    text_maker('dissolved'),
-  ];
+  const statuses = {
+    a:text_maker('active'),
+    t: text_maker('transferred'),
+    d: text_maker('dissolved'),
+  };
 
   _.each(igoc_rows, row => {
+
+    
     const [
       org_id,
       dept_code,
@@ -156,7 +160,7 @@ function populate_igoc_models({
       eval_url_id,
       dp_url_id,
       website_url_id,
-    ], url_key => url_lookup[url_id(url_key)]);
+    ], url_key => url_lookup[url_id(url_key)])
 
     const def_obj = {
       unique_id: +org_id,
@@ -164,7 +168,7 @@ function populate_igoc_models({
       fancy_acronym,
       legal_name,
       applied_title,
-      status: statuses[+status],
+      status: statuses[status],
       _legislation, //no longer array based
       mandate,
       pas_code,
@@ -251,7 +255,7 @@ function create_tag_branches(program_tag_types){
 function populate_program_tags(tag_rows){
   // assumes the parent tags will be listed first
   const l = window.lang === "en";
-  const [ name_en,name_fr,desc_en,desc_fr,tag_id,parent_id] = d4.range(0,6);
+  const [ tag_id, parent_id, name_en, name_fr, desc_en, desc_fr ] = d4.range(0,6);
   _.each(tag_rows, row => {
     const parent_tag = Tag.lookup(row[parent_id]);
     //HACKY: Note that parent rows must precede child rows
@@ -283,17 +287,17 @@ function populate_socr_tags(rows){
 };
 
 function populate_programs(rows){
-  const [ title,dept, activity_code , crso_id, desc, active, is_internal_service] = [0,1,2,4,5,6,7];
+  const [ dept_code, crso_id, activity_code, name, desc, is_crown, is_active, is_internal_service ] = [0,1,2,3,4,5,6,7];
   _.each(rows,row => {
     const crso = CRSO.lookup(row[crso_id]);
     const instance = Program.create_and_register({
       crso,
       activity_code: row[activity_code],
-      dept: Dept.lookup(row[dept]),
+      dept: Dept.lookup(row[dept_code]),
       data : {},
       description : $.trim(row[desc].replace(/^<p>/i,"").replace(/<\/p>$/i,"")),
-      name :  row[title],
-      dead_program: !(+row[active]),
+      name :  row[name],
+      dead_program: !(+row[is_active]),
       is_internal_service: row[is_internal_service] === "1",
     });
     crso.programs.push(instance);
@@ -302,10 +306,10 @@ function populate_programs(rows){
 
 
 function populate_program_tag_linkages(programs_m2m_tags){
-  const [ dept, activity, tagID] = [0,1,2];
   _.each(programs_m2m_tags, row => {
-    const program = Program.lookup(Program.unique_id(row[dept],row[activity]));
-    const tag = Tag.lookup(row[tagID]);
+    const [ program_id , tagID ] = row;
+    const program = Program.lookup(program_id);
+    const tag = Tag.lookup(tagID);
     program.tags.push(tag)
     tag.programs.push(program)
   }); 

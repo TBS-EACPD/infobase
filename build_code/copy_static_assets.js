@@ -6,6 +6,7 @@ const fs = require("fs");
 const cp = require("child_process");
 const _ = require("lodash");
 const Handlebars = require('handlebars');
+const d3_dsv = require('d3-dsv');
 
 global._ = _; //global is the 'window' on the node environment
 
@@ -52,7 +53,7 @@ function file_to_str(path){
 
 const common_lookups = _.map(
   [
-    'tags_m2m_programs.csv',
+    'tags_to_programs.csv',
     'program_tags.csv',
     'program_tag_types.csv',
     'DeptcodetoTableID.csv',
@@ -84,7 +85,7 @@ const common_result_bundle_fr = _.map(
 const common_lookups_en = _.map(
   [
     'program_en.csv',
-    'CRSODefinition_en.csv',
+    'crso_en.csv',
     'Glossary_en.csv',
     'InstForm_en.csv',
     'Minister_en.csv',
@@ -98,7 +99,7 @@ const common_lookups_en = _.map(
 const common_lookups_fr = _.map(
   [
     'program_fr.csv',
-    'CRSODefinition_fr.csv',
+    'crso_fr.csv',
     'Glossary_fr.csv',
     'InstForm_fr.csv',
     'Minister_fr.csv',
@@ -227,32 +228,43 @@ var build_proj = function(PROJ){
   make_dir_if_exists(results_dir);
   make_dir_if_exists(footnotes_dir);
 
+
+  const bilingual_model_files = {
+    depts: "IGOC.csv",
+    crsos: "CRSO.csv",
+    tag_prog_links: "tags_to_programs.csv",
+    programs: "program.csv",
+
+    sub_programs: "subprograms.csv",
+    results: "Results.csv",
+    indicators: "Indicators.csv",
+    PI_DR_links: "pi_dr_links.csv",
+
+    footnotes: "footnotes.csv",
+  };
+
+  const parsed_bilingual_models = _.mapValues(bilingual_model_files, file_name => (
+    d3_dsv.csvParse(
+      _.trim(
+        fs.readFileSync(
+          public_dir_prefixer(file_name)
+        ).toString("utf8")
+      )
+    )
+  ));
+
+  write_result_bundles(parsed_bilingual_models, results_dir);
+
+
   _.each(["en","fr"], lang => {
 
-    const files_obj = _.chain({
-      depts: `IGOC_${lang}.csv`,
-      crsos: `CRSODefinition_${lang}.csv`,
-      tag_prog_links: 'tags_m2m_programs.csv',
-      programs: `program_${lang}.csv`,
-
-      sub_programs: `Subprogram_${lang}.csv`,
-      results: `Results_${lang}.csv`,
-      indicators: `Indicator_${lang}.csv`,
-      PI_DR_links: 'PIDRLink.csv',
-
-      footnotes: `footnotes_${lang}.csv`,
-    })
-      .mapValues( file_name => fs.readFileSync(public_dir_prefixer(file_name)).toString('utf8') )
-      .value();
-      
-    write_result_bundles(files_obj, results_dir, lang );
 
     const {
       depts: dept_footnotes,
       tags: tag_footnotes,
       global: global_footnotes,
       all: all_footnotes,
-    } = get_footnote_file_defs(files_obj);
+    } = get_footnote_file_defs(parsed_bilingual_models, lang);
 
     _.each( _.merge(dept_footnotes, tag_footnotes), (file_str,subj_id)=>{
       const uncompressed_file_name =`${footnotes_dir}/fn_${lang}_${subj_id}.html`;
@@ -269,12 +281,15 @@ var build_proj = function(PROJ){
 
     // combine all the lookups into one big JSON blob
     // also, create a compressed version for modern browsers
-    const lookup_json_str = JSON.stringify(_.chain(PROJ["lookups_"+lang])
-      .map(file_name => [get_lookup_name(file_name), fs.readFileSync(file_name).toString("utf8")])
-      .concat([['global_footnotes', global_footnotes]]) //these should be loaded immediately, so they're included in the base lookups file.
-      .fromPairs()
-      .value())
+    const lookup_json_str = JSON.stringify(
+      _.chain(PROJ["lookups_"+lang])
+        .map(file_name => [ get_lookup_name(file_name), fs.readFileSync(file_name).toString("utf8") ])
+        .concat([['global_footnotes', global_footnotes]]) //these should be loaded immediately, so they're included in the base lookups file.
+        .fromPairs()
+        .value()
+    )
       .toString("utf8");
+
     fs.writeFileSync(`${dir}/lookups_${lang}.html`,lookup_json_str);
     cp.execSync(`gzip -c ${dir}/lookups_${lang}.html > ${dir}/lookups_${lang}_min.html`);
 

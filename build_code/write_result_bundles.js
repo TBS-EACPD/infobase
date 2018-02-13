@@ -4,18 +4,6 @@ const _ = require("lodash");
 const d3_dsv = require('d3-dsv');
 const { compute_counts_from_set } = require('../src/models/result_counts.js');
 
-const MOCK_DATA = false;
-
-const {
-  sub_program: sub_program_row_to_obj,
-  result: result_row_to_obj,
-  indicator : indicator_row_to_obj,
-  resource_explanation: resource_explanation_row_to_obj,
-  indicator_to_row,
-  result_to_row,
-  sub_program_to_row,
-} = require('../src/models/csv_adapters.js');
-
 _.mixin({pipe: (obj, func)=> func(obj) });
 
 // models/results has no dependencies 
@@ -29,12 +17,11 @@ let indicatorsByResultId = {};
 let sub_programs_by_id = {};
 let sub_programs_by_parent_id = {}; 
 let pi_dr_links_by_program_id = {};
-let resource_explanations_by_entity_id = {};
 
 
 const status_colors = ['success','success','failure', 'not_avail', 'not_appl'];
 const status_periods = ['past', 'future','past', 'future','future', 'future', 'other' ];
-function populate_stores(file_obj){
+function populate_stores(parsed_models){
 
   org_store = [];
   crso_by_deptcode = {};
@@ -46,9 +33,7 @@ function populate_stores(file_obj){
   sub_programs_by_id = {};
   sub_programs_by_parent_id = {}; 
   pi_dr_links_by_program_id = {};
-  resource_explanations_by_entity_id = {};
 
-  const rows_by_file = _.mapValues(file_obj, csv_str => _.tail(d3_dsv.csvParseRows(csv_str) ) );
 
   const {
     depts, 
@@ -59,25 +44,24 @@ function populate_stores(file_obj){
     sub_programs,
     results, 
     indicators, 
-    resource_explanations, 
     PI_DR_links,
-  } = rows_by_file;
+  } = parsed_models;
 
 
-  _.each(depts, ([ org_id, dept_code ])=> {
+  _.each(depts, ({org_id, dept_code})=> {
     if(dept_code){
       org_store.push({org_id, dept_code}) 
     }
   });
 
-  _.each(crsos, ([ crso_id, dept_code ]) => {
+  _.each(crsos, ({id, dept_code}) => {
     if(!crso_by_deptcode[dept_code]){
       crso_by_deptcode[dept_code] = [];
     }
-    crso_by_deptcode[dept_code].push(crso_id)
+    crso_by_deptcode[dept_code].push(id)
   });
 
-  _.each(programs, ([ title,dept_code, activity_code , useless, crso_id])=> {
+  _.each(programs, ({ dept_code, activity_code, crso_id })=> {
     const prog_id  = `${dept_code}-${activity_code}`;
 
     if(!programs_by_crso_id[crso_id]){
@@ -86,136 +70,57 @@ function populate_stores(file_obj){
     programs_by_crso_id[crso_id].push(prog_id);
   });
 
-  _.each(tag_prog_links, ([dept_code, activity_code, tag_id]) => {
-    const prog_id  = `${dept_code}-${activity_code}`;
+  _.each(tag_prog_links, ({program_id, tag_id}) => {
 
     if(!programs_by_tag_id[tag_id]){
       programs_by_tag_id[tag_id] = [];
     }
-    programs_by_tag_id[tag_id].push(prog_id)
+    programs_by_tag_id[tag_id].push(program_id)
     
   });
 
-  _.each(sub_programs, row => {
-    const obj = sub_program_row_to_obj(row);
 
-    //MOCK DATA
-    if(MOCK_DATA){
-      obj.spend_pa_last_year = obj.spend_planning_year_1;
-      obj.fte_pa_last_year = obj.fte_planning_year_1;
-      obj.planned_spend_pa_last_year = obj.spend_planning_year_1;
-      obj.planned_fte_pa_last_year = obj.fte_planning_year_1;
-    }
-
-    const { id, parentID } = obj;
+  _.each(sub_programs, obj => {
+    const { id, parent_id } = obj;
 
     const record = { 
       id, 
-      parentID,
-      row,
+      parent_id,
       obj,
     };
     sub_programs_by_id[id] = record;
 
-    if(!sub_programs_by_parent_id[parentID]){
-      sub_programs_by_parent_id[parentID] = []
+    if(!sub_programs_by_parent_id[parent_id]){
+      sub_programs_by_parent_id[parent_id] = []
     }
-    sub_programs_by_parent_id[parentID].push(record);
+    sub_programs_by_parent_id[parent_id].push(record);
   });
 
-  _.chain(results)
-    .map(row => result_row_to_obj(row))
-    .map(obj => {
-      const { id } = obj;
+  _.each(results, obj => {
+    const { subject_id } = obj;
+    if(!resultBySubjId[subject_id]){
+      resultBySubjId[subject_id] = [];
+    }
+    resultBySubjId[subject_id].push(obj);
 
-      if(MOCK_DATA){
-        const dp_obj = Object.assign({},obj, { doc: 'dp17' } );
-        const drr_obj = Object.assign({},obj, {
-          id: id+"_1", 
-          doc: 'drr16',
-        });
-        return [ dp_obj, drr_obj ];
-      } else {
-
-        return [obj];
-      }
-    
-    })
-    .flatten()
-    .each(obj => {
-    
-      const { subject_id } = obj;
-      if(!resultBySubjId[subject_id]){
-        resultBySubjId[subject_id] = [];
-      }
-      resultBySubjId[subject_id].push(obj);
-
-    })
-    .value() //value must be called in order for chain call to exec
+  });
 
   //TODO: once we have not-met/met etc. 
-  _.chain(indicators)
-    .map(row => indicator_row_to_obj(row) )
-    .map(obj =>  {
-      const { id, result_id, planned_target_str } = obj;
-
-      if(MOCK_DATA){
-
-        const dp_obj = Object.assign({}, obj,{ doc: 'dp17' })
-
-        const status_color = _.sample(status_colors);
-        const status_period = _.sample(status_periods);
-        const status_key = `${status_period}_${status_color}`;
-
-        const drr_obj = Object.assign({}, obj,{ 
-          id: id+"_1", 
-          result_id: result_id+"_1" , 
-          doc: 'drr16',
-          actual_target_str: planned_target_str,
-          status_color,
-          status_period,
-          status_key,
-        });
-        return [ dp_obj, drr_obj ];
-
-      } else {
-
-        //if(obj.doc === 'dp17'){
-          return [ obj ];
-        //} else {
-        //  //FIXME periods aren't working yet. Here's a hack
-        //  return [
-        //    Object.assign({},obj, { 
-        //      status_period: _.sample(status_periods),
-        //    }) 
-        //  ];
-        //}
-      }  
-    })
-    .flatten()
-    .each(obj => {
+  _.each(indicators, obj => {
       const { result_id } = obj;
       if(!indicatorsByResultId[result_id]){
         indicatorsByResultId[result_id] = [];
       }
       indicatorsByResultId[result_id].push(obj);
+      obj.status_key = obj.status_period && `${obj.status_period}_${obj.status_color}`;
     })
-    .value() //value must be called in order for chain call to exec
 
-  _.each(PI_DR_links, row => {
-    const [ program_id, dr_id ] = row;
+  _.each(PI_DR_links, obj => {
+    const { program_id } = obj;
     if(!pi_dr_links_by_program_id[program_id]){
       pi_dr_links_by_program_id[program_id] = [];
     }
-    pi_dr_links_by_program_id[program_id].push(row);
-  });
-
-  _.each(resource_explanations, row => {
-    const { id } = row;
-    if(!resource_explanations_by_entity_id[id]){
-      resource_explanations_by_entity_id[id] = [];
-    }
-    resource_explanations_by_entity_id[id].push(row);
+    pi_dr_links_by_program_id[program_id].push(obj);
   });
 
 }
@@ -268,14 +173,8 @@ function dept_result_data(dept_code){
     .compact()
     .value()
 
-  const resource_explanations = _.chain(entity_ids)
-    .map(id => resource_explanations_by_entity_id[id] )
-    .flatten()
-    .compact()
-    .value();
 
   return {
-    resource_explanations,
     pi_dr_links,
     results,
     indicators,
@@ -327,14 +226,7 @@ function tag_result_data(tag_id){
     .compact()
     .value()
 
-  const resource_explanations = _.chain(entity_ids)
-    .map(id => resource_explanations_by_entity_id[id] )
-    .flatten()
-    .compact()
-    .value();
-
   return {
-    resource_explanations,
     pi_dr_links,
     results,
     indicators,
@@ -348,13 +240,6 @@ function tag_result_data(tag_id){
 
 function get_all_data(){
   return {
-    resource_explanations: (
-      _.chain(resource_explanations_by_entity_id)
-        .map(_.identity)
-        .flatten()
-        .compact()
-        .value()
-    ),
     pi_dr_links: (
       _.chain(pi_dr_links_by_program_id)
         .map(_.identity)
@@ -387,7 +272,7 @@ function get_all_data(){
 
 }
 
-function write_result_bundles(file_obj, dir, lang){
+function write_result_bundles(file_obj, dir){
   populate_stores(file_obj);
  
   const data_by_dept = _.chain(org_store)
@@ -411,8 +296,7 @@ function write_result_bundles(file_obj, dir, lang){
       data_by_tag, 
       data_by_dept 
     ), 
-    dir,
-    lang
+    dir
   );
 
   write_summary_bundle(data_by_dept, data_by_tag, all_data, dir);
@@ -421,27 +305,66 @@ function write_result_bundles(file_obj, dir, lang){
 }
 
 
-function data_to_str(obj, key){
+const unilingual_keys_by_model = {
+  results: ["name"],
+  indicators: ["name","explanation","target_narrative","actual_result"],
+  sub_program : [
+    "name",
+    "description",
+    "dp_no_spending_expl",
+    "dp_spend_trend_expl",
+    "dp_no_fte_expl",
+    "dp_fte_trend_expl",
+    "drr_spend_expl",
+    "drr_fte_expl",
+  ],
+};
+
+
+function data_to_str(obj, lang){
+  const other_lang = lang === "en" ? "fr" : "en";
+
   return _.chain(obj)
-    .pipe(obj => Object.assign({}, obj, {
-      results: _.map(obj.results, result_to_row ),
-      indicators: _.map(obj.indicators, indicator_to_row ),
-      sub_programs: _.map(obj.sub_programs, sub_program_to_row),
-    }))
     .mapValues( (rows, key) => {
-      return d3_dsv.csvFormatRows(rows) 
+      const unilingual_keys = unilingual_keys_by_model[key] || [];
+      
+      const transformed_rows = _.map(rows, obj => {
+
+        const new_obj = _.clone(obj);
+
+        _.each(unilingual_keys, key => {
+
+          new_obj[key] = new_obj[`${key}_${lang}`];
+          delete new_obj[`${key}_${lang}`];
+          delete new_obj[`${key}_${other_lang}`];
+
+        });
+
+        return new_obj;
+
+      });
+
+      return d3_dsv.csvFormat(transformed_rows) 
+      
     })
     .pipe( obj => JSON.stringify(obj) )
     .value()
 }
 
-function write_result_bundles_from_data(obj, dir, lang){
+function write_result_bundles_from_data(obj, dir){
   _.each(obj, (data, key) =>  {
-    const file_name = `${dir}/results_bundle_${lang}_${key}.html`;
-    const compressed_file_name = `${dir}/results_bundle_${lang}_${key}_min.html`;
 
-    fs.writeFileSync(file_name, data_to_str(data,key) ) 
-    cp.execSync(`gzip -c ${file_name} > ${compressed_file_name}`);
+    _.each(["en","fr"], lang => {
+
+
+
+      const file_name = `${dir}/results_bundle_${lang}_${key}.html`;
+      const compressed_file_name = `${dir}/results_bundle_${lang}_${key}_min.html`;
+  
+      fs.writeFileSync(file_name, data_to_str(data,lang) ) 
+      cp.execSync(`gzip -c ${file_name} > ${compressed_file_name}`);
+    })
+    
 
   })
 

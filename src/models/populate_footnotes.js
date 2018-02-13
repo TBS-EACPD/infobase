@@ -1,6 +1,3 @@
-const {
-  footnote: footnote_row_to_obj,
-} = require('./csv_adapters.js');
 const { run_template } = require('./text.js');
 const Subject = require('./subject.js');
 
@@ -11,29 +8,35 @@ let _loaded_dept_or_tag_codes = {};
 
 function populate_footnotes_info(csv_str){
   const rows = _.map(
-    d4.csvParseRows(_.trim(csv_str)), 
-    row => _.map(row, item => _.trim(item) )
+    d4.csvParse(_.trim(csv_str)), 
+    row => _.mapValues(row, item => _.trim(item) )
   );
 
-  _.each(rows, row => {
-    const obj = footnote_row_to_obj(_.map(row, _.trim));
+  _.each(rows, obj => {
 
-    const glossary_keys = obj.topic_keys.split(",").map(key=> key.replace(" ",""));
+    const {
+      id,
+      subject_class,
+      subject_id,
+      fyear1,
+      fyear2,
+      topic_keys,
+      footnote,
+    } = obj;
+
+    const glossary_keys = topic_keys.split(",").map(key=> key.replace(" ",""));
     
-    const year1 = obj.year1.split("-")[0];
-    const year2 = obj.year2.split("-")[0];
+    const year1 = fyear1.split("-")[0];
+    const year2 = fyear2.split("-")[0];
 
     const text = marked(
-      run_template(obj.footnote),
-      {
-        sanitize: false, 
-        gfm: true,
-      }
+      run_template(footnote),
+      { sanitize: false,  gfm: true }
     );
 
-    if (obj.subject_id !== '*'){
+    if (subject_id !== '*'){
       
-      const subject = Subject[obj.level_name].lookup(obj.subject_id);
+      const subject = Subject[subject_class].lookup(subject_id);
       FootNote.create_and_register({
         id: obj.id,
         subject,
@@ -44,10 +47,10 @@ function populate_footnotes_info(csv_str){
       }); 
     } else {
 
-      const subject_class = Subject[obj.level_name];
+      const actual_subject_class = Subject[obj.level_name];
       FootNote.create_and_register({
-        id: obj.id,
-        subject_class,
+        id,
+        subject_class: actual_subject_class,
         year1,
         year2,
         glossary_keys,
