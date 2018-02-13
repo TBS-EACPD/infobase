@@ -1,9 +1,9 @@
 exports = module.exports = {  
   "table1":{ 
-    url: "table1.csv",
+    url: "qfr_vs.csv",
   },
   "table2": {
-    url: "table2.csv",
+    url: "qfr_sobj.csv",
   },
   "table4": {
     url: "pa_vote_stat.csv",
@@ -18,7 +18,7 @@ exports = module.exports = {
     url: "transfer_payments.csv",
   },
   "table8": {
-    url: "table8.csv",
+    url: "estimates_votestat.csv",
   },
   "table9":{
     url:"table9.csv",
