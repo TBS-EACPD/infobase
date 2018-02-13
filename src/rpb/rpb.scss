@@ -53,6 +53,8 @@ li.select-list-item {
 
 .rpb-option {
   margin-bottom: 10px;
+  margin-right: -3px;
+  margin-left: 5px;
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
@@ -71,7 +73,8 @@ li.select-list-item {
 }
 .rpb-option-content {
   display: flex;
-  border: 1px solid rgba(37,114,180,0.9);
+  border: 1px solid $primaryColor;
+  border-radius: 0 10px 10px 0;
   background-color: white;
   padding: 10px 10px 10px 10px;
 }
@@ -86,7 +89,7 @@ li.select-list-item {
 @media (min-width: 901px){
   .rpb-option-label {
     width:18%;
-    border-radius: 0px 10px 10px 0px;
+    border-radius: 10px 0px 0px 10px;
     /* make the blue rounded part go over the content rpb-option-content */
     margin-right: -8px;
     z-index: 1;
@@ -126,12 +129,13 @@ li.select-list-item {
 .rpb-config-item {
   margin-right: 0px;
   margin-bottom: 5px;
-  padding: 5px; 
+  padding: 5px;
+  min-height: 46px; 
 }
 
-.rpb-simple .rpb-config-item:not(:last-child) {
+/*.rpb-simple .rpb-config-item:not(:last-child) {
   border-bottom: 0.5px solid #ccc;
-}
+}*/
 
 .rpb-config-header {
   display: block;
@@ -146,6 +150,7 @@ li.select-list-item {
 
 .rpb-simple-select {
   width: 100%;
+  margin-top: -6px;
 }
 
 #rpb_graph_legend > div {
@@ -232,4 +237,12 @@ li.select-list-item {
 
 .rpb-option .input-lg {
   height: 39px;
+}
+
+.rpb-option-content .row {
+  margin: 0px;
+}
+
+.rpb-option-content .rpb-option-fancy-ul-container .fancy-ul {
+  margin: -6px -5px 12px 0px;
 }
