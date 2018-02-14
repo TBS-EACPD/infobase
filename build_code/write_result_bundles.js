@@ -129,28 +129,23 @@ function populate_stores(parsed_models){
 
 function dept_result_data(dept_code){
   const crsos = crso_by_deptcode[dept_code] || [];
-  const programs = _.chain(crsos)
+  const program_ids = _.chain(crsos)
     .map(id => programs_by_crso_id[id] )
     .flatten()
     .compact()
     .value();
 
-  const sub_programs = _.chain(programs)
-    .map(id => sub_programs_by_parent_id[id] )
-    .flatten()
-    .compact()
-    .value();
+  const sub_programs = get_subs_for_parent_ids(program_ids);
 
   const sub_subs = _.chain(sub_programs)
-    .map( ({id}) => sub_programs_by_parent_id[id] )
-    .flatten()
-    .compact()
-    .value();
+    .map('id')
+    .pipe(get_subs_for_parent_ids)
+    .value()
 
   const entity_ids = [
     dept_code,
     ...crsos,
-    ...programs,
+    ...program_ids,
     ..._.map(sub_programs, 'id'),
     ..._.map(sub_subs, 'id'),
   ];
@@ -167,7 +162,7 @@ function dept_result_data(dept_code){
     .compact()
     .value();
 
-  const pi_dr_links = _.chain(programs)
+  const pi_dr_links = _.chain(program_ids)
     .map( id => pi_dr_links_by_program_id[id] )
     .flatten()
     .compact()
@@ -178,32 +173,34 @@ function dept_result_data(dept_code){
     pi_dr_links,
     results,
     indicators,
-    sub_programs: _.map([
+    sub_programs: [
       ...sub_programs,
       ...sub_subs,
-    ], 
-    'obj'),
+    ],
   };
 
 }
 
-function tag_result_data(tag_id){
-  const programs = programs_by_tag_id[tag_id];
-
-  const sub_programs = _.chain(programs)
-    .map(id => sub_programs_by_parent_id[id] )
+const get_subs_for_parent_ids = parent_ids => _.chain(parent_ids)
+  .map(id => sub_programs_by_parent_id[id])
     .flatten()
     .compact()
+    .map('obj')
+    .compact()
     .value();
+
+function tag_result_data(tag_id){
+  const program_ids = programs_by_tag_id[tag_id];
+
+  const sub_programs = get_subs_for_parent_ids(program_ids);
 
   const sub_subs = _.chain(sub_programs)
-    .map( ({id}) => sub_programs_by_parent_id[id] )
-    .flatten()
-    .compact()
-    .value();
+    .map('id')
+    .pipe(get_subs_for_parent_ids)
+    .value()
 
   const entity_ids = [
-    ...programs,
+    ...program_ids,
     ..._.map(sub_programs, 'id'),
     ..._.map(sub_subs, 'id'),
   ];
@@ -220,7 +217,7 @@ function tag_result_data(tag_id){
     .compact()
     .value();
 
-  const pi_dr_links = _.chain(programs)
+  const pi_dr_links = _.chain(program_ids)
     .map( id => pi_dr_links_by_program_id[id] )
     .flatten()
     .compact()
@@ -230,10 +227,10 @@ function tag_result_data(tag_id){
     pi_dr_links,
     results,
     indicators,
-    sub_programs: _.map([
+    sub_programs: [
       ...sub_programs,
       ...sub_subs,
-    ], 'obj'),
+    ],
   };
 
 }
@@ -308,7 +305,7 @@ function write_result_bundles(file_obj, dir){
 const unilingual_keys_by_model = {
   results: ["name"],
   indicators: ["name","explanation","target_narrative","actual_result"],
-  sub_program : [
+  sub_programs : [
     "name",
     "description",
     "dp_no_spending_expl",

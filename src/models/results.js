@@ -16,7 +16,7 @@ class SubProgramEntity {
     return  sub_program_entities_by_id[id];
   }
   static create_and_register(def){
-    const { id, parentID } = def;
+    const { id, parent_id } = def;
 
     if(sub_program_entities_by_id[id]){
       return;
@@ -25,10 +25,10 @@ class SubProgramEntity {
     const inst = new SubProgramEntity(def)
 
 
-    if(!parent_indexed_sub_program_entities[parentID]){
-      parent_indexed_sub_program_entities[parentID] = [];
+    if(!parent_indexed_sub_program_entities[parent_id]){
+      parent_indexed_sub_program_entities[parent_id] = [];
     }
-    parent_indexed_sub_program_entities[parentID].push(inst);
+    parent_indexed_sub_program_entities[parent_id].push(inst);
     sub_program_entities_by_id[id] = inst;
 
   }
@@ -109,9 +109,9 @@ class SubProgramEntity {
       .value();
   }
   get level(){
-    const { parentID }  = this;
+    const { parent_id }  = this;
     return (
-      this.constructor.lookup(parentID) ?
+      this.constructor.lookup(parent_id) ?
       'sub_sub_program' :
       'sub_program'
     );
