@@ -90,7 +90,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
 
-    "debug_IB_base": "iron-node build_code/copy_static_assets.js IB",
+    "debug_IB_base": "node --inspect-brk build_code/copy_static_assets.js IB",
     "IB_base": "node build_code/copy_static_assets.js IB",
 
     "IB_dev": "node build_code/webpack_starter.js old_client BOTH",
