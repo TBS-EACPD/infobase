@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 //glob.sync takes a pattern and returns an array of  filenames matching that pattern
 //fse just adds the ability to do 'cp -r' to the regular filesystem tools for node
 const glob = require('glob');
@@ -53,95 +55,64 @@ function file_to_str(path){
 
 const common_lookups = _.map(
   [
+    //tag lookups are small enough to keep bilingual
     'tags_to_programs.csv',
     'program_tags.csv',
     'program_tag_types.csv',
+
+    //most igoc lookups are small enough to keep bilingual
     'DeptcodetoTableID.csv',
-    'OrgtoMinister.csv',
+    'org_to_minister.csv',
+    'ministers.csv',
+    'ministries.csv',
+    'inst_forms.csv',
+    'url_lookups.csv',
   ], 
   public_dir_prefixer 
 );
 
-const common_result_bundle_en = _.map(
-  [
-    'Indicator_en.csv',
-    'Results_en.csv',
-    'Subprogram_en.csv',
-    'PIDRLink.csv',
-  ],
-  public_dir_prefixer
-);
 
-const common_result_bundle_fr = _.map(
-  [
-    'Indicator_fr.csv',
-    'Results_fr.csv',
-    'Subprogram_fr.csv',
-    'PIDRLink.csv',
-  ],
-  public_dir_prefixer
-);
+//these files are big and are explicitly split by the pipeline (bilingual bundles are also used elsewhere, though) 
+const lang_specific_lookups = lang => [
+  "program",
+  "crso",
+  "Glossary",
+  "igoc",
+].map( name => `${name}_${lang}.csv`);
 
 const common_lookups_en = _.map(
-  [
-    'program_en.csv',
-    'crso_en.csv',
-    'Glossary_en.csv',
-    'InstForm_en.csv',
-    'Minister_en.csv',
-    'Ministry_en.csv',
-    'URL_en.csv',
-    'IGOC_en.csv',
-  ],
+  lang_specific_lookups("en"),
   public_dir_prefixer
 );
 
 const common_lookups_fr = _.map(
-  [
-    'program_fr.csv',
-    'crso_fr.csv',
-    'Glossary_fr.csv',
-    'InstForm_fr.csv',
-    'Minister_fr.csv',
-    'Ministry_fr.csv',
-    'URL_fr.csv',
-    'IGOC_fr.csv',
-  ],
+  lang_specific_lookups("fr"),
   public_dir_prefixer
 );
 
 const common_png = [
+  //top left corner brand
+  'src/InfoBase/goc--header-logo.svg',
 
-  'src/home/partition.svg',
-  'src/home/partition.png',
-
-  'src/home/structurePanel.svg',
-  'src/home/structure_panel.png',
-
-  'src/home/results.svg',
+  //small scma icons below home page search bar
   'src/home/results.png',
-
-  'src/home/expend.svg',
   'src/home/expend.png',
-
-  'src/home/people.svg',
   'src/home/people.png',
 
-  'src/home/bubbles.png',
-  'src/home/bubbles.png',
 
-  'src/home/Builder.svg',
+  //caricature images for main 5 pages
+  'src/home/partition.png',
+  'src/home/bubbles.png',
   'src/home/Builder.png',
-
-  'src/home/explorerVer2.svg',
+  'src/home/structure_panel.png',
   'src/home/explorer.png',
 
+  //simplographic images
   'src/graphs/intro_graphs/Check.svg',
   'src/graphs/intro_graphs/Graph.svg',
   'src/graphs/intro_graphs/Money.svg',
   'src/graphs/intro_graphs/People.svg',
 
-  'src/InfoBase/goc--header-logo.svg',
 ];
 
 const IB_tables = [
@@ -166,7 +137,7 @@ const IB_tables = [
 ];
 
 var csv_from_table_names = function(table_ids){
-  return _.map(table_ids, function(table_id){ 
+  return _.map(table_ids, function(table_id){
     const obj = csv_names_by_table_id[table_id];
     const prefix = public_data_dir;
 
@@ -178,8 +149,6 @@ var IB = {
   name: 'InfoBase',
   lookups_en  : common_lookups.concat(common_lookups_en),
   lookups_fr  : common_lookups.concat(common_lookups_fr),
-  result_bundle_en: common_result_bundle_en,
-  result_bundle_fr: common_result_bundle_fr,
   csv: csv_from_table_names(IB_tables),
   png: common_png,
   js: external_deps_names,
@@ -188,17 +157,15 @@ var IB = {
 
 function get_index_pages(){
   const template = file_to_str("./src/InfoBase/index.hbs.html");
-  const func = Handlebars.compile(template);
+  const template_func = Handlebars.compile(template);
 
   const en_lang_lookups = _.mapValues(index_lang_lookups, 'en');
   const fr_lang_lookups = _.mapValues(index_lang_lookups, 'fr');
 
   return {
-    en: func(en_lang_lookups),
-    fr: func(fr_lang_lookups),
+    en: template_func(en_lang_lookups),
+    fr: template_func(fr_lang_lookups),
   };
-
-
 }
 
 function make_dir_if_exists(dir_name){
@@ -207,31 +174,30 @@ function make_dir_if_exists(dir_name){
   }
 };
 
-var project = IB;
-
 function get_lookup_name(file_name){
   let str = file_name;
   _.each(['_en','_fr'], lang => {
     str = str.split(lang).join("");
-  })
+  });
   return _.last(str.split('/'));
 }
 
-var build_proj = function(PROJ){
+function build_proj(PROJ){
   
   const dir = 'build/'+PROJ.name
   const results_dir = `${dir}/results`;
   const footnotes_dir = `${dir}/footnotes`
 
-  make_dir_if_exists('build');
-  make_dir_if_exists(dir);
-  make_dir_if_exists(results_dir);
-  make_dir_if_exists(footnotes_dir);
-
+  _.each(
+    ['build', dir, results_dir, footnotes_dir], 
+    name => {
+      make_dir_if_exists(name)
+    }
+  )
 
   const bilingual_model_files = {
-    depts: "IGOC.csv",
-    crsos: "CRSO.csv",
+    depts: "igoc.csv",
+    crsos: "crso.csv",
     tag_prog_links: "tags_to_programs.csv",
     programs: "program.csv",
 
@@ -245,11 +211,7 @@ var build_proj = function(PROJ){
 
   const parsed_bilingual_models = _.mapValues(bilingual_model_files, file_name => (
     d3_dsv.csvParse(
-      _.trim(
-        fs.readFileSync(
-          public_dir_prefixer(file_name)
-        ).toString("utf8")
-      )
+      _.trim(file_to_str(public_dir_prefixer(file_name)))
     )
   ));
 
@@ -283,7 +245,7 @@ var build_proj = function(PROJ){
     // also, create a compressed version for modern browsers
     const lookup_json_str = JSON.stringify(
       _.chain(PROJ["lookups_"+lang])
-        .map(file_name => [ get_lookup_name(file_name), fs.readFileSync(file_name).toString("utf8") ])
+        .map(file_name => [ get_lookup_name(file_name), file_to_str(file_name) ])
         .concat([['global_footnotes', global_footnotes]]) //these should be loaded immediately, so they're included in the base lookups file.
         .fromPairs()
         .value()
@@ -292,8 +254,6 @@ var build_proj = function(PROJ){
 
     fs.writeFileSync(`${dir}/lookups_${lang}.html`,lookup_json_str);
     cp.execSync(`gzip -c ${dir}/lookups_${lang}.html > ${dir}/lookups_${lang}_min.html`);
-
-
 
   });
 
@@ -308,6 +268,7 @@ var build_proj = function(PROJ){
     make_dir_if_exists(this_dir);
     PROJ[type].forEach(function(f_name){
       const small_name = f_name.split('/').pop(); // dir/file.js -> file.js
+
       console.log('copying:' + small_name);
       fse.copySync(f_name, this_dir+'/'+small_name, {clobber: true});
       if (type === "csv"){
@@ -332,7 +293,7 @@ var build_proj = function(PROJ){
 };
 
 
-build_proj(project);
+build_proj(IB);
 
 
 

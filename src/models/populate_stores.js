@@ -38,12 +38,12 @@ function process_lookups(data){
   //TODO: stop referring to data by the names of its csv, design an interface with copy_static_assets.js
   populate_igoc_models({
     dept_to_table_id: data['DeptcodetoTableID.csv'],
-    org_to_minister: data['OrgtoMinister.csv'],
-    inst_forms: data['InstForm.csv'],
-    ministers: data['Minister.csv'],
-    ministries: data['Ministry.csv'],
-    urls: data['URL.csv'],
-    igoc_rows: data['IGOC.csv'],
+    org_to_minister: data['org_to_minister.csv'],
+    inst_forms: data['inst_forms.csv'],
+    ministers: data['ministers.csv'],
+    ministries: data['ministries.csv'],
+    urls: data['url_lookups.csv'],
+    igoc_rows: data['igoc.csv'],
   });
 
   populate_glossary(data["Glossary.csv"]);
