@@ -14,3 +14,21 @@
   }
 
 }
+
+.about-root {
+  h2, h3, h4 {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.8em;
+  }
+
+  h2 {
+    font-size: 30px;
+    margin-top: 1.8em;
+  }
+  h3 {
+    font-size: 20px;
+    margin-top: 1.2em;
+  }
+
+}
