@@ -152,7 +152,7 @@ table.xplorer-planned-resource-table > tbody > tr > th {
 
 .hierarchy-selection-header {
   color: #fcfcfc;
-  padding: 5px 0 10px 0;
+  padding: 10px 0 10px 0;
   font-size: 1.4em;
   text-align: center;
 }
@@ -170,12 +170,16 @@ table.xplorer-planned-resource-table > tbody > tr > th {
   background-color: #fcfcfc;
   color: #222;
   padding: 10px;
-  cursor: pointer;
+  
   /* make the <button> act like a div */
   display: block; 
   min-width:100%;
   text-align: left;
   border-radius: 0;
+
+  &button {
+    cursor: pointer;
+  }
 }
 .hierarchy-selection-item.active {
   background-color: #dedede;

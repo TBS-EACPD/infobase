@@ -1,4 +1,5 @@
 require("./about.ib.yaml");
+require('./about.scss');
 
 const ROUTER = require('../core/router.js');
 const {text_maker} = require('../models/text');

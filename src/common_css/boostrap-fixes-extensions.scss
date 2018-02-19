@@ -1,5 +1,11 @@
 @import "common-variables";
 
+
+hr {
+  //default is #eee, a little too bright
+  border-color: #ddd;
+}
+
 /* tooltips */
 .glossary-tooltip-link,
 .glossary-tooltip-link:visited  {
