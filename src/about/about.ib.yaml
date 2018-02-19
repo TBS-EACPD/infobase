@@ -1,6 +1,6 @@
 about_title:
   en: About Us
-  fr: Qui sommes-nous?
+  fr: À propos de nous?
 
 
 
@@ -181,7 +181,7 @@ about_body_text:
 
     {{{gt "dev_icon_block"}}}
 
-    The GC InfoBase was developed using open-source technologies such as bootstrap, d3 and React. The Agile development methodology was used to rapidly iterate a prototype from requirements to new features. 
+    The GC InfoBase was developed using open-source technologies such as Bootstrap, d3 and React. The Agile development methodology was used to rapidly iterate a prototype from requirements to new features. 
 
 
     We also get inspiration from work done across the globe. For instance, our [Government at a Glance diagram](#partition) was inspired by [USAFacts.org](USAFacts.org).
@@ -251,7 +251,7 @@ about_body_text:
 
     {{{gt "dev_icon_block"}}}
 
-    L’InfoBase du GC a été développée au moyen de librairies en libre accès (tel que Bootstrap, d3.js et React) pour la production des données et la conception du site Web respectivement. La méthode de développement « Agile » a été utilisée afin de répéter rapidement un prototype à partir des besoins jusqu’aux nouvelles caractéristiques. 
+    L’InfoBase du GC a été développée au moyen de librairies en libre accès (tel que Bootstrap, d3 et React) pour la production des données et la conception du site Web respectivement. La méthode de développement « Agile » a été utilisée afin de répéter rapidement un prototype à partir des besoins jusqu’aux nouvelles caractéristiques. 
 
 
     On s’est aussi inspiré d’autres travaux effectués à l’échelle internationale. Par exemple, pour  Coup d’œil sur le gouvernement, on s’est inspiré du « Partition Diagram » conçu par l’équipe de USAFacts.org.
