@@ -236,12 +236,12 @@ check_home_link:
 
 about_home_title:
   en: About Us
-  fr: Qui sommes-nous?
+  fr: À propos de nous
 
 about_home_desc:
-  en: Learn about who we are, how we built the InfoBase, what are our guiding principles and help us improve the tool
-  fr: TODO 
+  en: Learn more about our team, principles, data, technology and help us improve the InfoBase
+  fr: En apprendre d'avantage sur notre équipe, nos principes, nos données et technologies, et aidez-nous à améliorer l'InfoBase
 
 about_home_link:
   en: Learn about us!
-  fr: Apprenez!
+  fr: En savoir plus sur nous!
