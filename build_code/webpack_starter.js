@@ -61,7 +61,7 @@ gitsha(function(err,commit_sha){
 
 
   const langs = both ? [ 'en', 'fr' ] : ['en'];
-  const config = ['en','fr'].map(lang => create_config({
+  const config = langs.map(lang => create_config({
     commit_sha,
     language: lang,
     is_prod: prod,
