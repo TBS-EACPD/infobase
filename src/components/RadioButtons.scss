@@ -19,6 +19,8 @@ background-color: transparent;
 margin-top: -1px;
 margin-bottom: -1px;
 position: relative;
+-webkit-box-shadow: none;
+box-shadow: none;
 }
 
 .radio-buttons__option.radio-buttons__option--active {
@@ -52,4 +54,6 @@ position: relative;
   color: $backgroundColor !important;
   border-radius: 7px;
   font-weight: $mediumFontWeight;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }

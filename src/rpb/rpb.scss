@@ -25,12 +25,12 @@ li.select-list-item {
 
 @media(min-width: 992px){
   .rpb-config-item.col-selection.simple {
-    max-height: 200px;
+    max-height: 500px;
     overflow-y: auto; 
   }
 
   .rpb-config-item.col-selection.granular {
-    max-height: 200px;
+    max-height: 500px;
     overflow-y: auto; 
   }
 
@@ -237,10 +237,15 @@ li.select-list-item {
 
 .rpb-option .input-lg {
   height: 39px;
+  line-height: 0.9;
 }
 
 .rpb-option-content .row {
   margin: 0px;
+}
+
+.rpb-option-content .IBDetails .IBDetails__Summary {
+  padding-left: 0px;
 }
 
 .rpb-option-content .rpb-option-fancy-ul-container .fancy-ul {
