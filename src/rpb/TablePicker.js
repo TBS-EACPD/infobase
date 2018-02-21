@@ -2,13 +2,10 @@ require('./table_picker.scss');
 const {Table} = require('../core/TableClass.js');
 const {GlossaryEntry } = require('../models/glossary.js');
 const ReactCSSTransitionGroup  = require('react-addons-css-transition-group');
-const ReactTransitionGroup  = require('react-addons-transition-group');
 const classNames = require('classnames');
 const concepts_to_display_filter = require('./table_picker_concept_filter.js');
 const { 
   TextMaker,
-  FirstChild,
-  AccordionEnterExit,
 } = require('../util_components.js');
 
 
