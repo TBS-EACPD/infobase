@@ -25,19 +25,20 @@ li.select-list-item {
 
 @media(min-width: 992px){
   .rpb-config-item.col-selection.simple {
-    max-height: 200px;
+    max-height: 500px;
     overflow-y: auto; 
   }
 
   .rpb-config-item.col-selection.granular {
-    max-height: 200px;
+    max-height: 500px;
     overflow-y: auto; 
   }
 
   .md-half-width{
     min-width: 50%;
     display: inline-block;
-    padding-left: 10px; 
+    padding-left: 20px;
+    padding-right: 10px; 
   }
 
   .md-gutter-right {
@@ -52,6 +53,8 @@ li.select-list-item {
 
 .rpb-option {
   margin-bottom: 10px;
+  margin-right: -3px;
+  margin-left: 5px;
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
@@ -59,17 +62,19 @@ li.select-list-item {
 .rpb-option-label {
   display: flex;
   padding: 10px;
+  padding-left: 25px;
   font-size: 1.2em;
   color: white;
-  background-color: rgba(37,114,180,0.7);
-  border: 2px solid rgba(37,114,180,0.9) ;
+  background-color: $primaryColor;
+  min-height: 80px;
 }
 .rpb-option-label-text {
   align-self: center;
 }
 .rpb-option-content {
   display: flex;
-  border: 1px solid rgba(37,114,180,0.9);
+  border: 1px solid $primaryColor;
+  border-radius: 0 10px 10px 0;
   background-color: white;
   padding: 10px 10px 10px 10px;
 }
@@ -78,12 +83,16 @@ li.select-list-item {
   width: 100%;
 }
 .rpb-option-content > .IBDetails {
-  padding-top: 10px;
+  padding-top: 15px;
+  padding-left: 20px;
+  & > .IBDetails__Summary {
+    padding-left: 0px;
+  }
 }
 @media (min-width: 901px){
   .rpb-option-label {
     width:18%;
-    border-radius: 0px 10px 10px 0px;
+    border-radius: 10px 0px 0px 10px;
     /* make the blue rounded part go over the content rpb-option-content */
     margin-right: -8px;
     z-index: 1;
@@ -107,13 +116,17 @@ li.select-list-item {
   }
   .rpb-option-content {
     border-top: none;
+    border-radius: 0px;
     width: 100%;
   }
 }
 
 .rpb-option-fancy-ul-container {
-  padding: 20px 20px 0px 20px; 
+  padding: 14px 15px 12px 20px; 
   width: 100%;
+  & > .fancy-ul {
+    margin-bottom: 0px;
+  }
 }
 
 .graph_report { 
@@ -123,11 +136,11 @@ li.select-list-item {
 .rpb-config-item {
   margin-right: 0px;
   margin-bottom: 5px;
-  padding: 5px; 
-}
-
-.rpb-simple .rpb-config-item:not(:last-child) {
-  border-bottom: 0.5px solid #ccc;
+  padding: 5px;
+  min-height: 46px;
+  & > .row {
+    margin: 0px;
+  }
 }
 
 .rpb-config-header {
@@ -143,6 +156,7 @@ li.select-list-item {
 
 .rpb-simple-select {
   width: 100%;
+  margin-top: -6px;
 }
 
 #rpb_graph_legend > div {
@@ -225,4 +239,9 @@ li.select-list-item {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+.row-opition-content-search > div > div > span > span > .input-lg {
+  height: 39px;
+  line-height: 0.9;
 }

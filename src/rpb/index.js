@@ -214,7 +214,7 @@ class RPB extends React.Component {
             </p>
             <div className="md-half-width md-gutter-left">
               <button 
-                className="btn btn-ib-primary btn-lg"
+                className="btn btn-ib-primary"
                 style={{width: '100%'}}
                 onClick={()=>{ this.setState({table_picking: true})}}
               >

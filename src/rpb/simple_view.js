@@ -130,7 +130,7 @@ class SimpleView extends React.Component {
                 </div>
                 <div className="rpb-config-item">
                   <div className="row">
-                    <div className="col-md-2">
+                    <div className="col-md-2" style={{paddingLeft:"0px"}}>
                       <label className="rpb-config-header" htmlFor="dim-select"> <span className="nowrap"><TextMaker text_key="group_by" /></span> </label>
                     </div>
                     <div className="col-md-10">
@@ -148,7 +148,7 @@ class SimpleView extends React.Component {
                 { deptBreakoutMode &&
               <div className="rpb-config-item">
                 <div className="row">
-                  <div className="col-md-2">
+                  <div className="col-md-2" style={{paddingLeft:"0px"}}>
                     <label className="rpb-config-header" htmlFor="filt-select"> <TextMaker text_key="filter" /> </label>
                   </div>
                   <div className="col-md-10">
