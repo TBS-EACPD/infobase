@@ -5437,10 +5437,6 @@ react-style-proptype@^3.0.0:
   dependencies:
     prop-types "^15.5.4"
 
-react-table-container@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/react-table-container/-/react-table-container-0.1.0.tgz#cd72ef3e1a2babe9e262077517685f00c0767782"
-
 react-transition-group@^1.1.2, react-transition-group@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-1.2.0.tgz#b51fc921b0c3835a7ef7c571c79fc82c73e9204f"
