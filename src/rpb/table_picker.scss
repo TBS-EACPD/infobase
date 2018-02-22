@@ -41,9 +41,6 @@
 .tag-cloud-main > li > button:hover,
 .tag-cloud-main > li > button:active,
 .tag-cloud-main > li > button:focus,
-//.tag-cloud-main > li.active > button:hover,
-//.tag-cloud-main > li.active > button:active,
-//.tag-cloud-main > li.active > button:focus,
  {
   background-color: #49739C;
 }
@@ -105,7 +102,6 @@
   border-color: $primaryColor;
   border-radius: 8px 8px 0 0;
   height: 40px;
-  //transition: background-color 500ms ease-in, color 500ms ease-in;
 }
 
 
@@ -113,7 +109,6 @@
   font-weight: $mediumFontWeight;
   color: #fff;
   background-color: $primaryColor;
-  //transition: background-color 500ms ease-in, color 500ms ease-in;
 }
 
 .item-card-footer {
