@@ -115,10 +115,6 @@ var page_context = {
   reset_crumbs : function(title){
     this.bread_crumb.find(".infobase-links").remove();
   },
-  open_details : function(){ //TODO: figure out what this does
-    $(this.nav_area).find("details").attr("open",true);
-    $(this.nav_area).find(".wb-inv").removeClass("wb-inv");
-  },
   add_title : function(title){
     if (_.isString(title)){
       title = $('<h1>').html(text_maker(title));

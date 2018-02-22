@@ -24,8 +24,6 @@ ROUTER.add_container_route("explore-{method}","_explore",function(container,meth
   this.add_crumbs([{html: text_maker("dept_explore_title")}]);
   this.add_title("dept_explore_title");
 
-  this.open_details();
-
   d4.select(container).append('div').attr('class','sr-only')
     .html(a11y_markup({
       table4_link: rpb_link({
