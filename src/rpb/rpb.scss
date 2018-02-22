@@ -85,6 +85,9 @@ li.select-list-item {
 .rpb-option-content > .IBDetails {
   padding-top: 15px;
   padding-left: 20px;
+  & > .IBDetails__Summary {
+    padding-left: 0px;
+  }
 }
 @media (min-width: 901px){
   .rpb-option-label {
@@ -118,8 +121,11 @@ li.select-list-item {
 }
 
 .rpb-option-fancy-ul-container {
-  padding: 20px 20px 0px 20px; 
+  padding: 14px 15px 12px 20px; 
   width: 100%;
+  & > .fancy-ul {
+    margin-bottom: 0px;
+  }
 }
 
 .graph_report { 
@@ -130,7 +136,10 @@ li.select-list-item {
   margin-right: 0px;
   margin-bottom: 5px;
   padding: 5px;
-  min-height: 46px; 
+  min-height: 46px;
+  & > .row {
+    margin: 0px;
+  }
 }
 
 .rpb-config-header {
@@ -231,19 +240,7 @@ li.select-list-item {
   justify-content: center;
 }
 
-.rpb-option .input-lg {
+.row-opition-content-search > div > div > span > span > .input-lg {
   height: 39px;
   line-height: 0.9;
-}
-
-.rpb-option-content .row {
-  margin: 0px;
-}
-
-.rpb-option-content .IBDetails .IBDetails__Summary {
-  padding-left: 0px;
-}
-
-.rpb-option-content .rpb-option-fancy-ul-container .fancy-ul {
-  margin: -6px -5px 12px 0px;
 }
