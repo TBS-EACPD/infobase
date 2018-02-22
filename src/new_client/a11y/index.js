@@ -25,7 +25,7 @@ import { ApolloProvider } from 'react-apollo';
 import { get_client } from '../../graphql_utils.js';
 
 // Create a history of your choosing (we're using a browser history in this case)
-const history = createHistory()
+const history = createHistory({hashType: "noslash"});
 
 // Build the middleware for intercepting and dispatching navigation actions
 const middleware = routerMiddleware(history)
