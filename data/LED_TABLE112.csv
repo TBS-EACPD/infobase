@@ -1,4 +1,4 @@
-Dept,EX_level,Y1112,Y1213,Y1314,Y1415,Y1516,five_year_percent
+dept_code,dimension,ppl_last_year_5,ppl_last_year_4,ppl_last_year_3,ppl_last_year_2,ppl_last_year,avg_share
 ACOA,EX 01,18,16,16,19,22,0.029574
 ACOA,EX 02,9,7,7,8,8,0.012675
 ACOA,EX 03,8,7,7,8,8,0.01235

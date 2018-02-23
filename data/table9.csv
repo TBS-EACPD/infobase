@@ -1,4 +1,4 @@
-DeptCode,Tenure,Y1112,Y1213,Y1314,Y1415,Y1516,Five_year_avg_percent
+dept_code,dimension,ppl_last_year_5,ppl_last_year_4,ppl_last_year_3,ppl_last_year_2,ppl_last_year,avg_share
 ACOA,Casual,9,9,19,17,26,0.02600
 ACOA,Indeterminate,629,569,547,552,559,0.92818
 ACOA,Student,24,6,16,18,14,0.02535

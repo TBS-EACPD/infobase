@@ -1,4 +1,4 @@
-Dept,avgage,Y1112,Y1213,Y1314,Y1415,Y1516
+dept_code,dimension,ppl_last_year_5,ppl_last_year_4,ppl_last_year_3,ppl_last_year_2,ppl_last_year
 ACOA,avgage,43.867267,44.506915,45.017478,45.769403,46.443837
 AECB,avgage,45.823657,45.990887,46.470012,46.789549,45.61316
 AGR,avgage,44.679139,44.853935,44.879236,44.734763,44.875875

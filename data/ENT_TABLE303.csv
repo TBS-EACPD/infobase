@@ -1,4 +1,4 @@
-DeptCode,Age,Y1112,Y1213,Y1314,Y1415,Y1516,Five_year_avg_percent
+dept_code,dimension,ppl_last_year_5,ppl_last_year_4,ppl_last_year_3,ppl_last_year_2,ppl_last_year,avg_share
 ACOA,eng,441,376,378,403,408,0.65193
 ACOA,fre,235,213,212,200,206,0.34644
 ACOA,unknown,1,1,1,1,1,0.00162

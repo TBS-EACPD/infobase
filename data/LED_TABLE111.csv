@@ -1,4 +1,4 @@
-Dept,Occ_Cat,Y1112,Y1213,Y1314,Y1415,Y1516,Five_year_avg_percent
+dept_code,dimension,ppl_last_year_5,ppl_last_year_4,ppl_last_year_3,ppl_last_year_2,ppl_last_year,avg_share
 ACOA,Administration and Foreign Service,487,444,432,437,454,0.73253
 ACOA,Administrative Support,74,63,62,64,62,0.10562
 ACOA,Executive,39,35,35,39,42,0.06175

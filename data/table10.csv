@@ -1,4 +1,4 @@
-DeptCode,prov2,Y1112,Y1213,Y1314,Y1415,Y1516,Five_year_avg_percent
+dept_code,dimension,ppl_last_year_5,ppl_last_year_4,ppl_last_year_3,ppl_last_year_2,ppl_last_year,avg_share
 ACOA,Abroad,2,.,.,.,.,0.00065
 ACOA,MB,.,.,1,1,.,0.00065
 ACOA,NB,361,312,309,301,313,0.51869
