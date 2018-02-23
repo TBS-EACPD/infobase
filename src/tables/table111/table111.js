@@ -11,7 +11,7 @@ const {
   m, 
   Statistics,
   people_five_year_percentage_formula,
-  business_constants : { occupational_category },
+  business_constants : { occupational_categories },
   years : {
     people_years,
     people_years_short_second,
@@ -81,7 +81,7 @@ module.exports = {
   },
 
   "mapper": function (row) {
-    var new_value = occupational_category[row[1]].text;
+    var new_value = occupational_categories[row[1]].text;
     row.splice(1, 1, new_value);
     return row;
   },

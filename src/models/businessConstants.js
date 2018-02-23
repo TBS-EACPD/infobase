@@ -89,22 +89,22 @@ const ex_level_target = (
     'Non-cadres supérieursn',
   ]
 );
-const ex_level_map =  {
-  'EX 01' : ex_level_target[0], 
-  'EX 02' : ex_level_target[0],
-  'EX 03' : ex_level_target[0],
-  'EX 04' : ex_level_target[0], 
-  'EX 05' : ex_level_target[0], 
-  'Non-EX': ex_level_target[1],
+const compact_ex_level_map =  {
+  'ex1' : ex_level_target[0], 
+  'ex2' : ex_level_target[0],
+  'ex3' : ex_level_target[0],
+  'ex4' : ex_level_target[0], 
+  'ex5' : ex_level_target[0], 
+  'non': ex_level_target[1],
 };
 
-const ex_level_rev_map = _.chain(ex_level_map)
+const ex_level_rev_map = _.chain(compact_ex_level_map)
   .toPairs()
   .groupBy(function(key_val){ return key_val[1];})
   .map(function(val, key){ return [key, _.map(val,0)];})
   .fromPairs()
   .value();
 
-const ex_level_stuff = { ex_level_target, ex_level_map, ex_level_rev_map };  
+const ex_level_stuff = { ex_level_target, compact_ex_level_map, ex_level_rev_map };  
 
 window._businessConstants = module.exports = exports = Object.assign({}, yaml, emp_age_stuff, ex_level_stuff)

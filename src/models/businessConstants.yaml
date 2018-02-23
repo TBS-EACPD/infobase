@@ -200,32 +200,43 @@ age_groups:
     fr: N.D.
 
 
-occupational_category:
-  'Administration and Foreign Service':
-    key: admin_and_for
+occupational_categories:
+  adf:
     en: Administration and Foreign Service
     fr: Administration et service extérieur 
-  'Administrative Support':
-    key: admin_support
+  ads:
     en: Administrative Support
     fr: Soutien administratif
-  Executive:
+  exe:
     en: Executive and Law Management
     fr: Cadres supérieurs et gestion du droit
-  Operational:
+  opr:
     en: Operational
     fr: Exploitation
-  Other:
+  oth:
     en: Other
     fr: Autre
-  'Scientific and Professional':
-    key: sci_n_prof
+  sci:
     en: Scientific and Professional
     fr: Scientifique et professionnel
-  Technical: 
+  tec: 
     en: Technical
     fr: Technique
 
+
+ex_levels:
+  ex1:
+    text: EX 01
+  ex2:
+    text: EX 02
+  ex3:
+    text: EX 03
+  ex4:
+    text: EX 04
+  ex5:
+    text: EX 05
+  non:
+    text: Non-EX
 
 FOL:
   eng:
