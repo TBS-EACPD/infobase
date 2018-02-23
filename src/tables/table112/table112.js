@@ -12,7 +12,8 @@ const {
   Statistics,  
   people_five_year_percentage_formula,
   business_constants : {
-    ex_level_map,
+    compact_ex_level_map,
+    ex_levels,
   },
   years : {
     people_years,
@@ -83,7 +84,10 @@ module.exports = {
     });
   },
 
-  "mapper": _.identity,
+  "mapper": function (row) {
+    row.splice(1, 1, ex_levels[row[1]].text);
+    return row;
+  },
 
   "dimensions": [
     {
@@ -102,7 +106,7 @@ module.exports = {
 
       filter_func: function(options){
         return function(row){
-          return ex_level_map[row.ex_lvl];
+          return compact_ex_level_map[row.ex_lvl];
         };
       },
     },
@@ -121,7 +125,7 @@ module.exports = {
     },
     "summed_levels": function() {
       return _.groupBy(this.data, function(x){
-        return ex_level_map[x.ex_lvl];
+        return compact_ex_level_map[x.ex_lvl];
       });
     },
   },

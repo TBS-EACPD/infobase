@@ -3,9 +3,9 @@ const {
   text_maker,
   run_template,
   PanelGraph,
-  years : {people_years},
-  business_constants : {
-    ex_level_map, 
+  years: {people_years},
+  business_constants: {
+    ex_levels, 
   },
   D3} = require("./shared"); 
 
@@ -31,16 +31,16 @@ const exec_level_render = function(panel,data){
 new PanelGraph({
   level: "dept",
   depends_on: ['table112'],
-  key : "historical_employee_executive_level",
+  key: "historical_employee_executive_level",
 
   info_deps: [
     'table112_gov_info',
     'table112_dept_info',
   ],
 
-  layout : {
-    full : {text : 12, graph: [4,8]},
-    half: {text : 12, graph: [12,12]},
+  layout: {
+    full: {text: 12, graph: [4,8]},
+    half: {text: 12, graph: [12,12]},
   },
 
   text :  "dept_historical_employee_executive_level_text",
@@ -51,8 +51,8 @@ new PanelGraph({
     return (
       table112.q(dept).data
         .map(row => ({
-          label : row.ex_lvl,
-          data : people_years.map(year => row[year]),
+          label: row.ex_lvl,
+          data: people_years.map(year => row[year]),
           active: (row.ex_lvl !== "Non-EX"),
         })
         )
@@ -66,37 +66,35 @@ new PanelGraph({
 new PanelGraph({
   level: "gov",
   depends_on: ['table112'],
-  key : "historical_employee_executive_level",
+  key: "historical_employee_executive_level",
 
   info_deps: [
     'table112_gov_info',
   ],
 
-  layout : {
-    full : {text : 12, graph: [4,8]},
-    half: {text : 12, graph: [12,12]},
+  layout: {
+    full: {text: 12, graph: [4,8]},
+    half: {text: 12, graph: [12,12]},
   },
 
-  text :  "gov_historical_employee_executive_level_text",
-  title : "historical_employee_executive_level_title",
+  text: "gov_historical_employee_executive_level_text",
+  title: "historical_employee_executive_level_title",
 
   calculate(gov,info){
     const {table112} = this.tables;
     
-    return ( 
-      _.chain(ex_level_map)
-        .keys()
-        .map(exec_level => {
-          return {
-            label : exec_level,
-            data :  people_years.map(year => table112.horizontal(year,false)[exec_level]),
-            active: (exec_level !== "Non-EX"),
-          };
-        }
-        )
-        .sortBy(d => d.label)
-        .value()
-    )
+    return _.chain(ex_levels)
+      .values()
+      .map(ex_level => {
+        const ex_level_name = ex_level.text;
+        return {
+          label: ex_level_name,
+          data: people_years.map(year => table112.horizontal(year,false)[ex_level_name]),
+          active: (ex_level_name !== "Non-EX"),
+        };
+      })
+      .sortBy(d => d.label)
+      .value();
   },
 
   render: exec_level_render,

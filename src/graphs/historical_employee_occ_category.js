@@ -5,9 +5,9 @@ const {
   PanelGraph,
   create_ppl_share_pie,
   create_height_clipped_graph_with_legend,
-  years : {people_years},
-  business_constants : {
-    occupational_category,
+  years: {people_years},
+  business_constants: {
+    occupational_categories,
   },
 } = require("./shared"); 
 
@@ -38,7 +38,7 @@ const occ_cat_render = function(panel,data){
 
   // Create and render % share pie chart, either to the right of or below panel text
   create_ppl_share_pie({
-    pie_area : panel.areas().graph,
+    pie_area: panel.areas().graph,
     graph_args, 
     label_col_header : text_maker("occupational_cat"),
   });
@@ -46,33 +46,33 @@ const occ_cat_render = function(panel,data){
 
 new PanelGraph({
   level: "dept",
-  key : "historical_employee_occ_category",
-  depends_on : ['table111'],
+  key: "historical_employee_occ_category",
+  depends_on: ['table111'],
 
   info_deps: [
     'table111_dept_info',
     'table111_gov_info',
   ],
 
-  layout : {
-    full : {text : 12, graph: 12},
-    half: {text : 12, graph: 12},
+  layout: {
+    full: {text: 12, graph: 12},
+    half: {text: 12, graph: 12},
   },
 
-  text :  "dept_historical_employee_occ_category_text",
-  title : "historical_employee_occ_category_title",
+  text:  "dept_historical_employee_occ_category_text",
+  title: "historical_employee_occ_category_title",
 
   calculate(dept, info){
     const {table111} = this.tables;
 
-    return  ( 
+    return ( 
       table111.q(dept).data
         .map(row => 
           ({
-            label : row.occ_cat,
-            data : people_years.map(year => row[year]),
-            five_year_percent : row.five_year_percent,
-            active : true,
+            label: row.occ_cat,
+            data: people_years.map(year => row[year]),
+            five_year_percent: row.five_year_percent,
+            active: true,
           })
         )
         .filter(d => d4.sum(d.data) !== 0)
@@ -86,39 +86,38 @@ new PanelGraph({
 
 new PanelGraph({
   level: "gov",
-  key : "historical_employee_occ_category",
+  key: "historical_employee_occ_category",
 
   info_deps: [
     'table111_gov_info',
   ],
 
-  depends_on : ['table111'],
+  depends_on: ['table111'],
 
-  layout : {
-    full : {text : 12, graph: 12},
-    half: {text : 12, graph: 12},
+  layout: {
+    full: {text: 12, graph: 12},
+    half: {text: 12, graph: 12},
   },
 
-  text :  "gov_historical_employee_occ_category_text",
-  title : "historical_employee_occ_category_title",
+  text: "gov_historical_employee_occ_category_text",
+  title: "historical_employee_occ_category_title",
 
   calculate(gov, info){
     const {table111} = this.tables;
                               
-    return (
-      _.values(occupational_category).map(
-        occu_category => {
-          occu_category = occu_category.text;
-          const yearly_values = people_years.map(year => table111.horizontal(year,false)[occu_category]);
-          return {
-            label : occu_category,
-            data : yearly_values,
-            five_year_percent : yearly_values.reduce(function(sum, val) { return sum + val;}, 0)/info.gov_five_year_total_head_count,
-            active : true,
-          };
-        }
-      )
-    );
+    return _.chain(occupational_categories)
+      .values()
+      .map(occupational_category => {
+        occupational_category = occupational_category.text;
+        const yearly_values = people_years.map(year => table111.horizontal(year,false)[occupational_category]);
+        return {
+          label: occupational_category,
+          data: yearly_values,
+          five_year_percent: yearly_values.reduce(function(sum, val) { return sum + val;}, 0)/info.gov_five_year_total_head_count,
+          active: true,
+        };
+      })
+      .value();
 
   },
 

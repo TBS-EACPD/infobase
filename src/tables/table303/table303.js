@@ -12,7 +12,7 @@ const {
   m, 
   Statistics,
   people_five_year_percentage_formula,
-  business_constants : { FOL },
+  business_constants : { fol },
   years : { people_years, people_years_short_second },
 } = require("../table_common");
 
@@ -92,7 +92,7 @@ module.exports = {
   },
 
   "mapper":  function (row) {
-    row.splice(1, 1, FOL[row[1]].text);
+    row.splice(1, 1, fol[row[1]].text);
     return row;
   },
 
@@ -123,7 +123,7 @@ Statistics.create_and_register({
     const five_year_total = d4.sum(q.sum(people_years, {as_object: false}));
     
     // Filter out unknowns and suppressed values for sake of multi stats. Note: they're still included in the denominator used to calculate separate %'s below
-    const all_years_filtered = _.filter(all_years, d => ( (d[0] !== FOL.unknown.text) && (d[0] !== FOL.sup.text) ));
+    const all_years_filtered = _.filter(all_years, d => ( (d[0] !== fol.na.text) && (d[0] !== fol.sup.text) ));
 
     if (all_years_filtered.length >= 1) {
       STATS.year_over_year_multi_stats_active_years(add,"head_count_fol",all_years_filtered,false,people_years);
@@ -157,7 +157,7 @@ Statistics.create_and_register({
 
     // Filter out unknowns for sake of multi stats, note still included in denominator used to calculate separate %'s below
     // Also filter out suppressed (only for gov level stats)
-    const all_years = _.filter(q.gov_grouping(), d => ( (d[0] !== FOL.unknown.text) && (d[0] !== FOL.sup.text) ) ); 
+    const all_years = _.filter(q.gov_grouping(), d => ( (d[0] !== fol.na.text) && (d[0] !== fol.sup.text) ) ); 
     STATS.year_over_year_multi_stats_active_years(add,"head_count_fol",all_years,false,people_years);
     
     const five_year_total = d4.sum(q.sum(people_years, {as_object: false}));
