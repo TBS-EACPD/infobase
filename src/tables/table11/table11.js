@@ -11,7 +11,8 @@ const {STATS,
   formats, 
   people_five_year_percentage_formula,
   business_constants : {
-    emp_ages, 
+    age_groups,
+    compact_age_groups, 
     emp_age_map,
   },
   years : { 
@@ -82,6 +83,11 @@ module.exports = {
       "formula": people_five_year_percentage_formula("age",people_years),
     });
   },
+  
+  "mapper": function (row) {
+    row.splice(1, 1, age_groups[row[1]].text);
+    return row;
+  },
 
   "queries": {
     "gov_grouping": function() {
@@ -103,7 +109,7 @@ module.exports = {
     },
     "high_level_rows" : function(){
       var groups = this.high_level_age_split();
-      return _.map(emp_ages, function(age_group){
+      return _.map(compact_age_groups, function(age_group){
         var summed = _.map(people_years, function(year){
           if (groups[age_group]) {
             return d4.sum(groups[age_group], function(row){
@@ -132,7 +138,7 @@ module.exports = {
         var group_total = d4.sum(mini_column);
         return [key, fm1(group_total), fm2(group_total/dept_total)];
       };
-      return _.map(emp_ages, mapfunc);
+      return _.map(compact_age_groups, mapfunc);
     },
   },
 
@@ -158,8 +164,6 @@ module.exports = {
       },
     },
   ],
-
-  "mapper":  _.identity,
 
   "sort": function(mapped_rows, lang){
     return _.sortBy(mapped_rows, function(row){

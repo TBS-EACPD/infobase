@@ -169,6 +169,37 @@ provinces_short:
     en: N.A.
     fr: N.D.
 
+
+age_groups:
+  age20less:
+    text: < 20
+  age20to24:
+    text: 20-24
+  age25to29:
+    text: 25-29
+  age30to34:
+    text: 30-34
+  age35to39:
+    text: 35-39
+  age40to44:
+    text: 40-44
+  age45to49:
+    text: 45-49
+  age50to54:
+    text: 50-54
+  age55to59:
+    text: 55-59
+  age60to64:
+    text: 60-64
+  age65to69:
+    text: 65-69
+  age70plus:
+    text: 70 +
+  na:
+    en: N.A.
+    fr: N.D.
+
+
 occupational_category:
   'Administration and Foreign Service':
     key: admin_and_for
