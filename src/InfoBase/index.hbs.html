@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{{page_title}}</title>
+    <title id="document-title">{{page_title}}</title>
     <meta content="width=device-width,initial-scale=1" name="viewport">
-    <meta name="description" content="{{meta_description}}">
+    <meta id="document-description" name="description" content="{{meta_description}}">
     
     <link href="./GCWeb/assets/favicon.ico" rel="icon" type="image/x-icon">
     <link rel="stylesheet" href="./GCWeb/css/theme.min.css">
@@ -41,9 +41,9 @@
     <h2>{{you_are_here}}</h2>
     <div class="container">
     <div class="row">
-      <div class="col-md-9">
-        <ol class="breadcrumb" style='padding: 8px 0'>
-          <li class="infobase-home-breadcrumb-link">  <a href="">InfoBase</a></li> 
+      <div id="breadcrumb-trail" class="col-md-9">
+        <ol class="breadcrumb">
+          <li class="infobase-home-breadcrumb-link"><span>InfoBase</span></li> 
         </ol>
       </div>
       <div class='col-md-3 easy-access' style='padding-top:8px; padding-bottom: 8px; text-align:right;'></div>
@@ -58,7 +58,6 @@
       <p>{{app_requires_js}}</p>
       </noscript>
       <div id='app' style="min-height: 200px">
-        <div class='row'> <div class='nav_area container' > </div> </div>
       </div>
     </main>
     <footer id="wb-info">

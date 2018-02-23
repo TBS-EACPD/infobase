@@ -1,7 +1,9 @@
-const ROUTER = require('../core/router.js');
+import { DocumentDescription } from '../core/NavComponents';
+
+// const ROUTER = require('../core/router.js');
 const MediaQuery = require('react-responsive');
 const classNames = require('classnames');
-const { reactAdapter } = require('../core/reactAdapter.js');
+// const { reactAdapter } = require('../core/reactAdapter.js');
 const { 
   EverythingSearch,
 } = require('../util_components.js');
@@ -32,16 +34,17 @@ const { ResultCounts } = require('../models/results.js');
 const { Table } = require('../core/TableClass.js');
 
 
+const { StandardRouteContainer } = require('../core/NavComponents.js');
 
-ROUTER.add_default_route( "start", "start", function route_func(container){
-  this.add_crumbs();
-  const empty = document.createElement('span');
-  this.add_title(empty);
-  reactAdapter.render(<Container />, container);
-})
+// ROUTER.add_default_route( "start", "start", function route_func(container){
+//   this.add_crumbs();
+//   const empty = document.createElement('span');
+//   this.add_title(empty);
+//   reactAdapter.render(<Container />, container);
+// })
 
 
-class Container extends React.Component {
+export class Home extends React.Component {
   constructor(){
     super()
     this.state = { loading: true};
@@ -61,7 +64,11 @@ class Container extends React.Component {
   }
   render(){
     if(this.state.loading){
-      return <SpinnerWrapper scale={4} />;
+      return (
+        <StandardRouteContainer>
+          <SpinnerWrapper scale={4} />
+        </StandardRouteContainer>
+      );
     } else {
       const table5 = Table.lookup('table5');
       const table10 = Table.lookup('table10');
@@ -69,17 +76,21 @@ class Container extends React.Component {
 
      
       return (
-        <MediaQuery minWidth={992}>
-          {is_large =>  
-            <HomeLayout
-              past_targets_met={drr16_indicators_past_success}
-              past_targets_total={drr16_past_total}
-              spent_last_year={table5.col_from_nick('{{pa_last_year}}').formula(table5.data)}
-              headcount_last_year={table10.col_from_nick('{{ppl_last_year}}').formula(table10.data)}
-              is_large={is_large}
-            />
-          }
-        </MediaQuery>
+        <StandardRouteContainer>
+          <MediaQuery minWidth={992}>
+            {is_large =>
+              <div> 
+                <HomeLayout
+                  past_targets_met={drr16_indicators_past_success}
+                  past_targets_total={drr16_past_total}
+                  spent_last_year={table5.col_from_nick('{{pa_last_year}}').formula(table5.data)}
+                  headcount_last_year={table10.col_from_nick('{{ppl_last_year}}').formula(table10.data)}
+                  is_large={is_large}
+                />
+              </div>
+            }
+          </MediaQuery>
+        </StandardRouteContainer>
       );
 
     }
