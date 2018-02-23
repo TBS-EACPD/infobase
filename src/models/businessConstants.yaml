@@ -43,17 +43,18 @@ sos:
     en: Internal Revenues
     fr: Revenus internes
 
+
 tenure:
-  Indeterminate:
+  ind:
     en: Indeterminate
     fr: Période indéterminée
-  Term:
+  ter:
     en: Term
     fr: Période déterminée
-  Casual:
+  cas:
     en: Casual
     fr: Employé occasionnel
-  Student:
+  stu:
     en: Student
     fr: Étudiant
 
