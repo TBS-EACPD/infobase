@@ -10,10 +10,10 @@ const get_people_panels = subject => {
     "historical_employee_prov",
     "historical_employee_type",
     "historical_employee_age",
-    //"historical_employee_occ_category",
-    //"historical_employee_executive_level",
-    //"historical_employee_fol",
-    //"historical_employee_gender",
+    "historical_employee_occ_category",
+    "historical_employee_executive_level",
+    "historical_employee_fol",
+    "historical_employee_gender",
     is_gov && "ppl_open_data_info",
   ];
 };
