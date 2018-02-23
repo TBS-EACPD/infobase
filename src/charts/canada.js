@@ -19,22 +19,22 @@ exports = module.exports;
 var D3CORE =  require("./core");
 
 var ordering = {
-  YT: 1,
-  NT: 2,
-  NU: 3,
-  NL: 4,
-  BC: 5,
-  AB: 6,
-  SK: 7,
-  MB: 8,
+  yt: 1,
+  nt: 2,
+  nu: 3,
+  nl: 4,
+  bc: 5,
+  ab: 6,
+  sk: 7,
+  mb: 8,
   ON: 9,
   QC: 10,
-  NCR:11,
-  NB: 12,
-  NS: 13,
-  PE: 14,
-  Abroad: 15,
-  Unknown: 15,
+  ncr: 11,
+  nb: 12,
+  ns: 13,
+  pe: 14,
+  abroad: 15,
+  na: 15,
 };
 
 exports.canada = class canada {
@@ -101,16 +101,6 @@ exports.canada = class canada {
     //set the html of the svg
     // append the second div element which will hold the bar graph
 
-    //if (_.isUndefined(historical_graph_container)){
-    //   historical_graph_container = html.append("div")
-    //   .attrs("class","five-year-container")
-    //   .styles({
-    //     "margin" : "5px",
-    //     "height" : '200px',
-    //     "width" : this.outside_width+'px'
-    //   });
-    //}
-
     svg = html.select("svg");
 
 
@@ -152,43 +142,43 @@ exports.canada = class canada {
       .on("mouseenter", dispatch_mouseEnter)
       .on("mouseleave", dispatch_mouseLeave);
 
-    if(_.filter(data, function(d){return d.Abroad}).length === 0){
-      svg.selectAll(".province#CA-Abroad")
+    if(_.filter(data, function(d){return d.abroad}).length === 0){
+      svg.selectAll(".province#CA-abroad")
         .styles({
           "visibility" : "hidden",
         })
     }
     
-    if(_.filter(data, function(d){return d.Unknown}).length === 0){
-      svg.selectAll(".province#CA-Unknown")
+    if(_.filter(data, function(d){return d.na}).length === 0){
+      svg.selectAll(".province#CA-na")
         .styles({
           "visibility" : "hidden",
         })
     } 
 
-    if(_.filter(data, function(d){return d.PE}).length === 0){
-      svg.selectAll("path#CA-PE-Marker")
+    if(_.filter(data, function(d){return d.pe}).length === 0){
+      svg.selectAll("path#CA-pe-Marker")
         .styles({
           "visibility" : "hidden",
         })
     }
     
-    if(_.filter(data, function(d){return d.NS}).length === 0){
-      svg.selectAll("path#CA-NS-Marker")
+    if(_.filter(data, function(d){return d.ns}).length === 0){
+      svg.selectAll("path#CA-ns-Marker")
         .styles({
           "visibility" : "hidden",
         })
     } 
     
-    if(_.filter(data, function(d){return d.NB}).length === 0){
-      svg.selectAll("path#CA-NB-Marker")
+    if(_.filter(data, function(d){return d.nb}).length === 0){
+      svg.selectAll("path#CA-nb-Marker")
         .styles({
           "visibility" : "hidden",
         })
     } 
     
-    if(_.filter(data, function(d){return d.NCR}).length === 0){
-      svg.selectAll("path#CA-NCR-Marker")
+    if(_.filter(data, function(d){return d.ncr}).length === 0){
+      svg.selectAll("path#CA-ncr-Marker")
         .styles({
           "visibility" : "hidden",
         })
@@ -237,7 +227,7 @@ exports.canada = class canada {
 
         var provName = prov; //Default, uses prov code
         if (prov === 'ON' || prov === 'QC') {
-          prov += " (minus NCR)";
+          prov += "lessncr";
         }
         if (provinces[prov] && (scale > 0.5)) {
           //If the graph is large enough and the full name is defined, use full name

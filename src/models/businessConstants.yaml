@@ -60,109 +60,112 @@ tenure:
 
 
 provinces:
-  AB:
+  ab:
     en: Alberta
     fr: Alberta
-  Abroad:
+  abroad:
     en: Abroad
     fr: À l'étranger
-  BC:
+  bc:
     en: British Columbia
     fr: Colombie-Britannique
-  MB:
+  mb:
     en: Manitoba
     fr: Manitoba
-  NB:
+  nb:
     en: New Brunswick
     fr: Nouveau-Brunswick
-  'NCR ON':
+  onncr:
     en: Ontario (NCR)
     fr: Ontario (RCN)
-  'NCR QC':
+  qcncr:
     en: Quebec (NCR)
     fr: Québec (RCN)
-  NS:
+  ncr:
+    en: NCR
+    fr: RCN
+  ns:
     en: Nova Scotia
     fr: Nouvelle-Écosse
-  NT:
+  nt:
     en: Northwest Territories
     fr: Territoires du Nord-Ouest
-  NU: 
+  nu: 
     text: Nunavut
-  ON:
+  on:
     text: Ontario
-  'ON (minus NCR)':
+  onlessncr:
     en: Ontario (non-NCR)
     fr: Ontario (hors RCN)
-  PE:
+  pe:
     en: Prince Edward Island
     fr: Île-du-Prince-Édouard
-  QC:
+  qc:
     en: Quebec
     fr: Québec
-  'QC (minus NCR)':
+  qclessncr:
     en: Quebec (non-NCR)
     fr: Québec (hors RCN)
-  SK: 
+  sk: 
     text: Saskatchewan
-  YT: 
+  yt: 
     text: Yukon
-  NL:
+  nl:
     en: Newfoundland and Labrador
     fr: Terre-Neuve-et-Labrador,
-  Unknown:
+  na:
     en: Not Available
     fr: Non disponible
 
     
 provinces_short:
-  AB:
+  ab:
     text: AB
-  Abroad:
+  abroad:
     en: Abroad
     fr: À l'étranger
-  BC:
+  bc:
     text: BC
-  MB:
+  mb:
     text: MB
-  NB:
+  nb:
     text: NB
-  'NCR ON':
+  onncr:
     en: ON (NCR)
     fr: ON (RCN)
-  'NCR QC':
+  qcncr:
     en: QC (NCR)
     fr: QC (RCN)
-  NCR:
+  ncr:
     en: NCR
     fr: RCN
-  NS:
+  ns:
     en: NS
     fr: NE
-  NT:
+  nt:
     en: NT
     fr: TN
-  NU: 
+  nu: 
     text: NU
-  ON:
+  on:
     text: ON
-  'ON (minus NCR)':
+  onlessncr:
     en: ON (non-NCR)
     fr: ON (hors RCN)
-  PE:
+  pe:
     text: PE
-  QC:
+  qc:
     text: QC
-  'QC (minus NCR)':
+  qcnlesscr:
     en: QC (non-NCR)
     fr: QC (hors RCN)
-  SK: 
+  sk: 
     text: SK
-  YT: 
+  yt: 
     text: YT
-  NL:
+  nl:
     text: NL
-  Unknown:
+  na:
     en: N.A.
     fr: N.D.
 
