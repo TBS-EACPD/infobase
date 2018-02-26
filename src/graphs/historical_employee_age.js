@@ -4,7 +4,7 @@ const {formats,
   PanelGraph,
   years : {people_years},
   business_constants : {
-    emp_ages, 
+    compact_age_groups, 
   },
   D3,
   declarative_charts : {
@@ -29,7 +29,7 @@ const emp_age_render = function(panel,data,options){
     yaxis_formatter : formats["big_int_real_raw"],
     get_data :  row => row.data, 
     legend_title : "age_group",
-    data : graph_args.emp_age,
+    data : graph_args.age_group,
     no_a11y : true,
   };
   
@@ -44,7 +44,7 @@ const emp_age_render = function(panel,data,options){
     container: panel.areas().text.node(), 
     label_col_header: text_maker("age_group"), 
     data_col_headers: ticks, 
-    data: graph_args.emp_age, 
+    data: graph_args.age_group, 
     table_name: text_maker("historical_employee_age_title"),
   });
 };
@@ -71,16 +71,16 @@ new PanelGraph({
     const {table11} = this.tables;
     const series = table11.q(dept).high_level_rows();
     
-    const emp_age =  _.chain(emp_ages)
-      .map(emp_ages => {
+    const age_group =  _.chain(compact_age_groups)
+      .map(age_group => {
         const data = _.chain(series)
           .find(row => 
-            row[0] === emp_ages
+            row[0] === age_group
           )
           .tail()   
           .value();
         return {
-          label : emp_ages,
+          label : age_group,
           data : data,
           active : true,
         };
@@ -89,7 +89,7 @@ new PanelGraph({
       .value()
     
     return {
-      emp_age: emp_age,
+      age_group: age_group,
     };
   },
 
@@ -115,7 +115,7 @@ new PanelGraph({
   calculate(gov,info){
     const {table11} = this.tables;
     
-    const emp_age = emp_ages.map(age_range => {
+    const age_group = compact_age_groups.map(age_range => {
       return {
         label : age_range,
         active: true,
@@ -124,7 +124,7 @@ new PanelGraph({
     })
     
     return {
-      emp_age: emp_age,
+      age_group: age_group,
     };
   },
 
@@ -139,7 +139,7 @@ new PanelGraph({
 //  PanelGraph,
 //  years : {people_years},
 //  business_constants : {
-//    emp_ages, 
+//    compact_age_groups, 
 //  },
 //  D3,
 //  declarative_charts : {
@@ -174,7 +174,7 @@ new PanelGraph({
 //    yaxis_formatter : formats["big_int_real_raw"],
 //    get_data :  row => row.data, 
 //    legend_title : "age_group",
-//    data : graph_args.emp_age,
+//    data : graph_args.age_group,
 //    no_a11y : true,
 //  };
 //  const avg_age_options = {
@@ -228,7 +228,7 @@ new PanelGraph({
 //    container: panel.areas().text.node(), 
 //    label_col_header: text_maker("age_group"), 
 //    data_col_headers: ticks, 
-//    data: graph_args.emp_age, 
+//    data: graph_args.age_group, 
 //    table_name: text_maker("historical_employee_age_title"),
 //  });
 //  D3.create_a11y_table({
@@ -280,16 +280,16 @@ new PanelGraph({
 //        active : true,
 //      })
 //    
-//    const emp_age =  _.chain(emp_ages)
-//      .map(emp_ages => {
+//    const age_group =  _.chain(compact_age_groups)
+//      .map(age_group => {
 //        const data = _.chain(series)
 //          .find(row => 
-//            row[0] === emp_ages
+//            row[0] === age_group
 //          )
 //          .tail()   
 //          .value();
 //        return {
-//          label : emp_ages,
+//          label : age_group,
 //          data : data,
 //          active : true,
 //        };
@@ -299,7 +299,7 @@ new PanelGraph({
 //    
 //    return {
 //      avg_age: avg_age,
-//      emp_age: emp_age,
+//      age_group: age_group,
 //    };
 //  },
 //
@@ -333,7 +333,7 @@ new PanelGraph({
 //      active : true,
 //    }];
 //    
-//    const emp_age = emp_ages.map(age_range => {
+//    const age_group = compact_age_groups.map(age_range => {
 //      return {
 //        label : age_range,
 //        active: true,
@@ -343,7 +343,7 @@ new PanelGraph({
 //    
 //    return {
 //      avg_age: avg_age,
-//      emp_age: emp_age,
+//      age_group: age_group,
 //    };
 //  },
 //

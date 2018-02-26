@@ -101,7 +101,7 @@ module.exports = {
 
   "sort" : function(mapped_rows, lang){
     return _.sortBy(mapped_rows, function(row){
-      if (row.region === provinces.Abroad.text){
+      if (row.region === provinces.abroad.text){
         return "Z";
       } 
       if (row.region[0] === 'Î'){
@@ -129,15 +129,15 @@ module.exports = {
         fm1 = formats["big_int_real"],
         fm2 = formats.percentage,
         ncr = this.lang === 'en' ? "NCR" : "RCN",
-        non_ncr = "Non-NCR",
-        abroad = lk.Abroad.text,
+        non_ncr = "Non-"+ncr,
+        abroad = lk.abroad.text,
         dept_total = d4.sum(this.data, function (d) {
           return d[year];
         });
       var groups = _.groupBy(this.data, function (x) {
-        if (x.region_code === 'NCR ON' || x.region_code === 'NCR QC') {
+        if (x.region_code === 'onncr' || x.region_code === 'qcncr') {
           return ncr;
-        } else if (x.region_code === "Abroad") {
+        } else if (x.region_code === "abroad") {
           return abroad;
         } else {
           return non_ncr;

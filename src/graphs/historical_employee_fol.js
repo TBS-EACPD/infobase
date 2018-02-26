@@ -5,14 +5,14 @@ const {
   PanelGraph,
   create_ppl_share_pie,
   create_height_clipped_graph_with_legend, 
-  years : {people_years},
-  business_constants : { FOL },
+  years: {people_years},
+  business_constants: { fol },
 } = require("./shared"); 
 
 const employee_fol_render = function(panel, data){
   const {graph_args, subject } = data;
 
-  if ( (graph_args.length === 1) && (graph_args[0].label === FOL.sup.text) ){
+  if ( (graph_args.length === 1) && (graph_args[0].label === fol.sup.text) ){
     // If all data in last five years suppressed, replace text and graph with suppression explanation
     const text_node = panel.areas().text.node();
     const text_parent_node = text_node.parentNode;
@@ -50,26 +50,26 @@ const employee_fol_render = function(panel, data){
 
     // Create and render % share pie chart, either to the right of or below panel text
     create_ppl_share_pie({
-      pie_area : panel.areas().graph,
+      pie_area: panel.areas().graph,
       graph_args, 
-      label_col_header : text_maker("FOL"),
+      label_col_header: text_maker("FOL"),
     });
   }
 };
 
 new PanelGraph({
   level: "dept",
-  depends_on : ['table303'],
+  depends_on: ['table303'],
 
-  key : "historical_employee_fol",
+  key: "historical_employee_fol",
 
   info_deps: [
     'table303_dept_info',
   ],
 
-  layout : {
-    full : {text : 12, graph: 12},
-    half : {text : 12, graph: 12},
+  layout: {
+    full: {text: 12, graph: 12},
+    half: {text: 12, graph: 12},
   },
 
   text: "dept_historical_employee_fol_text",
@@ -80,10 +80,10 @@ new PanelGraph({
     return table303.q(dept).data
       .map(row =>
         ({
-          label : row.fol,
-          data : people_years.map(year =>row[year]),
-          five_year_percent : row.five_year_percent,
-          active : true,
+          label: row.fol,
+          data: people_years.map(year =>row[year]),
+          five_year_percent: row.five_year_percent,
+          active: true,
         })
       )
       .filter(d => d4.sum(d.data) !== 0 );
@@ -94,16 +94,16 @@ new PanelGraph({
 
 new PanelGraph({
   level: "gov",
-  depends_on : ['table303'],
-  key : "historical_employee_fol",
+  depends_on: ['table303'],
+  key: "historical_employee_fol",
 
   info_deps: [
     'table303_gov_info',
   ],
 
-  layout : {
-    full : {text : 12, graph: 12},
-    half: {text : 12, graph: 12},
+  layout: {
+    full: {text: 12, graph: 12},
+    half: {text: 12, graph: 12},
   },
 
   text: "gov_historical_employee_fol_text",
@@ -111,15 +111,15 @@ new PanelGraph({
 
   calculate(gov,info){
     const {table303} = this.tables;
-    return _.values(FOL)
-      .map(FOL_type => {
-        const FOL_text = FOL_type.text;
-        const yearly_values = people_years.map(year => table303.horizontal(year,false)[FOL_text]);
+    return _.values(fol)
+      .map(fol_type => {
+        const fol_text = fol_type.text;
+        const yearly_values = people_years.map(year => table303.horizontal(year,false)[fol_text]);
         return {
-          label : FOL_text,
-          data :  yearly_values,
-          five_year_percent : yearly_values.reduce(function(sum, val) { return sum + val;}, 0)/info.gov_five_year_total_head_count,
-          active : true,
+          label: fol_text,
+          data: yearly_values,
+          five_year_percent: yearly_values.reduce(function(sum, val) { return sum + val;}, 0)/info.gov_five_year_total_head_count,
+          active: true,
         };
       });
   },

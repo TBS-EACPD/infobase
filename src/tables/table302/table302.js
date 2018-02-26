@@ -123,7 +123,7 @@ Statistics.create_and_register({
     const five_year_total = d4.sum(q.sum(people_years, {as_object: false}));
     
     // Filter out unknowns and suppressed values for sake of multi stats. Note: they're still included in denominator used to calculate separate %'s below
-    const all_years_filtered = _.filter(all_years, d => ( (d[0] !== gender.unknown.text) && (d[0] !== gender.sup.text) ));
+    const all_years_filtered = _.filter(all_years, d => ( (d[0] !== gender.na.text) && (d[0] !== gender.sup.text) ));
     
     if (all_years_filtered.length >= 1) {
       STATS.year_over_year_multi_stats_active_years(add,"head_count_gender",all_years_filtered,false,people_years);
@@ -135,7 +135,7 @@ Statistics.create_and_register({
       add("head_count_gender_top_avg_percent_NA_included", _.max(avg_percent_shares));
       add("head_count_gender_bottom_avg_percent_NA_included", _.min(avg_percent_shares));
     } else {
-      // To avoid missing_info errors when all data is unknown or sup, add info using non-filtered data instead
+      // To avoid missing_info errors when all data is na or sup, add info using non-filtered data instead
       STATS.year_over_year_multi_stats_active_years(add,"head_count_gender",all_years,false,people_years);                     
       const avg_percent_shares = _.map(all_years, d => d4.sum(_.tail(d))/five_year_total);
       add("head_count_gender_single_type_flag", (avg_percent_shares.length <= 1)); // Flag to switch text between only showing the tip, or showing both the top and bottom percent shares
@@ -155,7 +155,7 @@ Statistics.create_and_register({
     
     // Filter out unknowns for sake of multi stats, note still included in denominator used to calculate separate %'s below
     // Also filter out suppressed (only for gov level stats)
-    const all_years = _.filter(q.gov_grouping(), d => ( (d[0] !== gender.unknown.text) && (d[0] !== gender.sup.text) )); 
+    const all_years = _.filter(q.gov_grouping(), d => ( (d[0] !== gender.na.text) && (d[0] !== gender.sup.text) )); 
 
     STATS.year_over_year_multi_stats_active_years(add,"head_count_gender",all_years,false,people_years);
     

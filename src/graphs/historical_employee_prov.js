@@ -26,11 +26,11 @@ const prov_split_render = function(panel,data,options){
     .style("position","relative");
   
   const has_qc = _.chain(graph_args.years_by_province)
-    .map(d => _.has(d, "QC (minus NCR)"))
+    .map(d => _.has(d, "qclessncr"))
     .some()
     .value();
   const has_on = _.chain(graph_args.years_by_province)
-    .map(d => _.has(d, "ON (minus NCR)"))
+    .map(d => _.has(d, "onlessncr"))
     .some()
     .value(); 
 
@@ -39,24 +39,24 @@ const prov_split_render = function(panel,data,options){
   const years_by_province = _.chain(graph_args.years_by_province)
     .map( obj => Object.assign({},obj) )  //deep clone each row  
     .each( year  => {
-      if (year['QC (minus NCR)']) {
-        year.QC = year['QC (minus NCR)'];
+      if (year['qclessncr']) {
+        year.qc = year['qclessncr'];
       } else if (has_qc) {
         graph_args.years_by_province
-        year.QC = 0;
+        year.qc = 0;
       }
-      if (year['ON (minus NCR)']) {
-        year.ON = year['ON (minus NCR)'];
+      if (year['onlessncr']) {
+        year.on = year['onlessncr'];
       } else if (has_on) {
-        year.ON = 0;
+        year.on = 0;
       }
-      if (year["NCR ON"] || year['NCR QC']) {
-        year.NCR = (year["NCR ON"] || 0 )+ (year['NCR QC'] || 0);
+      if (year["onncr"] || year['qcncr']) {
+        year.ncr = (year["onncr"] || 0 )+ (year['qcncr'] || 0);
       }
-      delete year['QC (minus NCR)'];
-      delete year['ON (minus NCR)'];
-      delete year['NCR ON'];
-      delete year['NCR QC'];
+      delete year['qclessncr'];
+      delete year['onlessncr'];
+      delete year['onncr'];
+      delete year['qcncr'];
     })
     .value()
 
@@ -118,11 +118,13 @@ const prov_split_render = function(panel,data,options){
 
 
   const province_graph_title = function(prov){
-    if (prov === 'ON' || prov === 'QC'){
-      prov += " (minus NCR)";
+    if (prov === 'on' || prov === 'qc'){
+      prov += "lessncr";
     }
-    if (prov === 'Canada' || prov === 'NCR'){
+    if (prov === 'Canada'){
       return text_maker("five_year_history") + " " + prov;
+    } else if (prov === 'ncr'){
+      return text_maker("five_year_history") + " " + (window.lang === 'en' ? "NCR" : "RCN");
     } else {
       return text_maker("five_year_history") + " " + provinces[prov].text;
     }
@@ -216,15 +218,15 @@ const prov_split_render = function(panel,data,options){
 
   // Add a11y table
   const ordered_provs = [ 
-    {key: 'NCR', display: "NCR" },
+    {key: 'ncr', display: "ncr" },
   ].concat(
     _.chain(provinces)
       .map( (val,key) => ({ key, display: val.text }) )
       .reject( ({key}) => _.includes([
-        'QC (minus NCR)',
-        'ON (minus NCR)',
-        "NCR ON",
-        'NCR QC',
+        'qclessncr',
+        'onlessncr',
+        "onncr",
+        'qcncr',
       ], key ) 
       )
       .value()

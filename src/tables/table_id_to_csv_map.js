@@ -32,6 +32,12 @@ exports = module.exports = {
   "table12":{ 
     url: "program_ftes.csv",
   },
+  "table111":{
+    url: "LED_TABLE111.csv",
+  },
+  "table112":{
+    url: "LED_TABLE112.csv",
+  },
   "table300": { 
     url: "program_vote_stat.csv",
   },
