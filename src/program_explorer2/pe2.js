@@ -1,9 +1,8 @@
 require("./pe2.ib.yaml");
-const ROUTER = require("../core/router.js");
 const { ensure_loaded } = require('../core/lazy_loader.js');
-const {text_maker,run_template} = require("../models/text");
-const {formats : {compact1,big_int_real}} = require('../core/format.js');
-const {PARTITION}= require("../core/D3");
+const { text_maker, run_template } = require("../models/text");
+const { formats : {compact1,big_int_real} } = require('../core/format.js');
+const { PARTITION }= require("../core/D3");
 const utils = require("../core/utils");
 const Subject = require("../models/subject");
 const {
@@ -17,10 +16,51 @@ const {
   mock_model,
 } = require("./hierarchies"); 
 const { reactAdapter } = require('../core/reactAdapter');
+const { StandardRouteContainer } = require('../core/NavComponents.js');
 const {
   TextMaker,
   AutoAccordion,
+  SpinnerWrapper,
 } = require('../util_components');
+
+
+export class Partition extends React.Component {
+  constructor(){
+    super()
+    this.state = {loading: true};
+    this.update_url = (method, value_attr) => this.props.history.push(`/partition/${method}/${value_attr}`);
+  }
+  componentDidMount(){
+    ensure_loaded({
+      table_keys: ['table6', 'table8', 'table12','table305'],
+    }).then( ()=> { 
+      this.setState({loading: false}) 
+    });
+  }
+  shouldComponentUpdate(){
+    return !_.isUndefined(this.refs.spinner);
+  }
+  componentDidUpdate(){
+    const method = this.props.match.method || "dept";
+    const value_attr = this.props.match.value_attr || "exp";
+    const container = ReactDOM.findDOMNode(this.refs.container);
+    new GovPartition(d4.select(container), this.update_url, method, value_attr);
+  }
+  render(){
+    return (
+      <StandardRouteContainer
+        ref="container"
+        breadcrumbs={[text_maker("partition_title")]}
+      >
+        { this.state.loading && <SpinnerWrapper ref="spinner" scale={4} /> }
+      </StandardRouteContainer>
+    );
+  }
+}
+
+
+const search_required_chars = 1;
+const search_debounce_time = 500;
 
 const formaters = {
   "exp" : compact1,
@@ -50,27 +90,6 @@ const get_root_text_key = (value_attr, method) => {
       }
   }
 }
-
-const url_template = (method,value)=>`#partition/${method}/${value}`;
-
-const search_required_chars = 1;
-const search_debounce_time = 500;
-
-ROUTER.add_container_route("partition/:method:/:value_attr:","partition",function(container,method="dept",value_attr="exp"){
-  
-  this.add_crumbs([{html: text_maker("partition_title")}]);
-  
-  const spinner = new Spinner({scale:4});
-  spinner.spin(document.querySelector('#app'));
-
-  ensure_loaded({
-    table_keys : ['table6', 'table8', 'table12','table305'],
-  }).done(()=> {
-    new GovPartition(this.app, d4.select(container), method,value_attr);
-  }).done(()=> {
-    spinner.stop();
-  });
-});
 
 const show_partial_children = function(node){
   if (!node.children ){
@@ -158,7 +177,9 @@ const get_common_popup_options = d => {
 }
 
 class GovPartition {
-  constructor(app, container,method,value_attr){
+  constructor(container, update_url, method, value_attr){
+    
+    this.update_url = update_url;
 
     // A negative margin-left value is explicitly set, and kept updated, on .partition-container so that the 
     // extra wide partition area can effectively escape the narrow main.container area, which we're forced in 
@@ -259,7 +280,7 @@ class GovPartition {
     this.method = presentation_schemes[0].id;
     this.value_attr = sort_vals[0].id;
     this.root_id = 0; // counter to append to root of each hierarchy, makes identifying ancestry_id values unique even in D3 merge step
-    ROUTER.navigate(url_template(this.method,this.value_attr),{navigate:false});
+    this.update_url(this.method,this.value_attr);
     this[this.method]();
   }
   change_value_attr(){
@@ -273,7 +294,7 @@ class GovPartition {
       .value();
     this.method = presentation_schemes[0].id;
 
-    ROUTER.navigate(url_template(this.method,this.value_attr),{navigate:false});
+    this.update_url(this.method,this.value_attr);
 
     // Update presentation_schemes dropdown options
     const presentation_scheme_dropdown = this.container.select(".select_root");
@@ -301,7 +322,7 @@ class GovPartition {
   }
   reroot(){
     this.method = d4.event.target.value;
-    ROUTER.navigate(url_template(this.method,this.value_attr),{navigate:false});
+    this.update_url(this.method,this.value_attr);
     this[this.method]();
   }
   dept(){

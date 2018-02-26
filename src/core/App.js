@@ -11,6 +11,7 @@ import { MetaData } from '../metadata/metadata.js';
 import { IgocExplorer } from "../igoc_explorer/igoc_explorer.js";
 import { ResourceExplorer } from "../program_explorer/resource-explorer.js";
 import { InfoGraph } from '../infographic/infographic.js';
+import { Partition } from '../program_explorer2/pe2.js';
 
 
 // Now you can dispatch navigation actions from anywhere!
@@ -27,6 +28,7 @@ export class App extends React.Component {
           <Route path="/igoc/:grouping?" component={IgocExplorer} />
           <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={ResourceExplorer} />
           <Route path="/orgs/:level/:id/infograph/:bubble?/" component={InfoGraph} />
+          <Route path="/partition/:method/:value_attr" component={Partition} />
           <Route component={Home} /> {/* 404 / catch all */}
         </Switch>
       </div>
