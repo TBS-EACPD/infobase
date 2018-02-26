@@ -53,20 +53,20 @@ const compact_age_groups = (
   ]
 );
 const emp_age_map =  {
-  '< 20'  : compact_age_groups[0], 
-  '20-24' : compact_age_groups[0],
-  '25-29' : compact_age_groups[0],
-  '30-34' : compact_age_groups[1], 
-  '35-39' : compact_age_groups[1], 
-  '40-44' : compact_age_groups[2],
-  '45-49' : compact_age_groups[2],
-  '50-54' : compact_age_groups[3], 
-  '55-59' : compact_age_groups[3],
-  '60-64' : compact_age_groups[4],
-  '65-69' : compact_age_groups[4], 
-  '70 +'  : compact_age_groups[4],
-  'N.A.'   : compact_age_groups[5],
-  'N.D.'   : compact_age_groups[5],
+  '< 20': compact_age_groups[0], 
+  '20-24': compact_age_groups[0],
+  '25-29': compact_age_groups[0],
+  '30-34': compact_age_groups[1], 
+  '35-39': compact_age_groups[1], 
+  '40-44': compact_age_groups[2],
+  '45-49': compact_age_groups[2],
+  '50-54': compact_age_groups[3], 
+  '55-59': compact_age_groups[3],
+  '60-64': compact_age_groups[4],
+  '65-69': compact_age_groups[4], 
+  '70 +': compact_age_groups[4],
+  'N.A.': compact_age_groups[5],
+  'N.D.': compact_age_groups[5],
 };
 
 const emp_age_rev_map = _.chain(emp_age_map)
@@ -90,12 +90,12 @@ const ex_level_target = (
   ]
 );
 const compact_ex_level_map =  {
-  'ex1' : ex_level_target[0], 
-  'ex2' : ex_level_target[0],
-  'ex3' : ex_level_target[0],
-  'ex4' : ex_level_target[0], 
-  'ex5' : ex_level_target[0], 
-  'non': ex_level_target[1],
+  'EX 01': ex_level_target[0], 
+  'EX 02': ex_level_target[0],
+  'EX 03': ex_level_target[0],
+  'EX 04': ex_level_target[0], 
+  'EX 05': ex_level_target[0], 
+  'Non-EX': ex_level_target[1],
 };
 
 const ex_level_rev_map = _.chain(compact_ex_level_map)

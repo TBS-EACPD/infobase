@@ -151,10 +151,10 @@ Statistics.create_and_register({
       .pipe( _.property('active') )
       .value();
 
-    const all_years_non_ex = _.filter(all_years, a => (a[0] !== "Non-EX"));
-    if ( !_.isEmpty(all_years_non_ex) ){
+    const all_years_only_ex = _.filter(all_years, a => (a[0] !== "Non-EX"));
+    if ( !_.isEmpty(all_years_only_ex) ){
 
-      STATS.year_over_year_multi_stats_active_years(add,"head_count_ex_level",all_years_non_ex,num_active_years);
+      STATS.year_over_year_multi_stats_active_years(add,"head_count_ex_level",all_years_only_ex,num_active_years);
       
       const ex_string = window.lang === 'en' ? 'Executive' : 'Cadres supérieurs';
       
