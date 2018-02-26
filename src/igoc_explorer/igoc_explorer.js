@@ -1,16 +1,10 @@
-import { Route } from 'react-router';
-const { StandardRouteContainer } = require('../core/NavComponents.js');
-const {
-  TM,
-} = require('../util_components.js');
 require('./igoc_explorer.ib.yaml');
 require('./igoc_explorer.scss');
 
-const {createSelector} = require('reselect');
-const ROUTER = require("../core/router");
+const { StandardRouteContainer } = require('../core/NavComponents.js');
 
-const { text_maker } =  require('../models/text.js');
-const { reactAdapter } = require('../core/reactAdapter.js');
+const {createSelector} = require('reselect');
+
 
 //treemap stuff
 const { combineReducers, createStore } = require('redux');
@@ -20,6 +14,13 @@ const { create_igoc_hierarchy } = require('./hierarchies.js')
 const { Explorer } = require('./explorer_view.js');
 
 const { filter_hierarchy } = require('../gen_expl/hierarchy_tools.js');
+
+
+const { text_maker } =  require('../models/text.js');
+const {
+  TM,
+} = require('../util_components.js');
+
 
 
 const {
@@ -58,10 +59,6 @@ const scheme = {
   ),
 
   dispatch_to_props: dispatch => ({
-    set_grouping: grouping => dispatch({
-      type: 'set_grouping',
-      payload: grouping,
-    }),
     on_toggle_orgs_without_data: ()=> dispatch({
       type: 'toggle_orgs_without_data',
     }),
@@ -156,36 +153,6 @@ class ExplorerContainer extends React.Component {
 }
 
 
-
-ROUTER.add_container_route("igoc/:grouping:","_igoc_explorer", function(container, grouping_param){
-
-  this.add_title("igoc");
-  this.add_crumbs([{html: text_maker("igoc")}]);
-  container.appendChild( new Spinner({scale:4}).spin().el );
-  
-  const initialGrouping = (
-    _.includes(['portfolio','all','historical','inst_form','pop_group'], grouping_param) ? 
-    grouping_param :
-    'portfolio'
-  );
-
-  container.innerHTML = `<div id="explorer-mount"></div>`;  
-
-  reactAdapter.render(
-    <div className="medium_panel_text">
-      <div style={{marginBottom:"1.5em"}}>
-        <TM k="about_inventory"/>
-      </div>
-      <ExplorerContainer 
-        initialGrouping={initialGrouping}
-      />
-    </div>,
-    container.querySelector('#explorer-mount')
-  );
-
-});
-
-
 export const IgocExplorer = ({match}) => {
   let grouping = _.get(match, "params.grouping");
   if(_.isEmpty(grouping)){
@@ -209,7 +176,3 @@ export const IgocExplorer = ({match}) => {
     </StandardRouteContainer>
   );
 };
-
-const props_to_url = ({ grouping }) => `#igoc/${grouping}`;
-
-

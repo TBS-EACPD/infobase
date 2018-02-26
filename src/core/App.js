@@ -1,5 +1,5 @@
 import { Route, Switch } from 'react-router';
-import { Link, NavLink } from 'react-router-dom';
+//import { Link, NavLink } from 'react-router-dom';
 
 export const app_reducer = (state={ lang: window.lang }, { type, payload }) => {
   //doesn't do anything yet...
@@ -7,8 +7,10 @@ export const app_reducer = (state={ lang: window.lang }, { type, payload }) => {
 };
 
 import { Home } from '../home/home.js';
-import { Metadata, MetaData } from '../metadata/metadata.js';
+import { MetaData } from '../metadata/metadata.js';
 import { IgocExplorer } from "../igoc_explorer/igoc_explorer.js";
+import { ResourceExplorer } from "../program_explorer/resource-explorer.js";
+import { InfoGraph } from '../infographic/infographic.js';
 
 
 // Now you can dispatch navigation actions from anywhere!
@@ -23,8 +25,10 @@ export class App extends React.Component {
           <Route exact path="/start" component={Home}/>
           <Route exact path="/metadata" component={MetaData}/>
           <Route path="/igoc/:grouping?" component={IgocExplorer} />
+          <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={ResourceExplorer} />
+          <Route path="/orgs/:level/:id/infograph/:bubble?/" component={InfoGraph} />
           <Route component={Home} /> {/* 404 / catch all */}
-          </Switch>
+        </Switch>
       </div>
     );
   }

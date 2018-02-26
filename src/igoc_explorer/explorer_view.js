@@ -282,7 +282,6 @@ class Explorer extends React.Component {
       should_show_orgs_without_data,
 
       sort_func,
-      set_grouping,
       on_toggle_orgs_without_data,
 
     } = this.props;

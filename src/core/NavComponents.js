@@ -1,5 +1,3 @@
-import { withRouter } from 'react-router';
-
 const {
   index_lang_lookups: {
     page_title: default_title,
