@@ -208,7 +208,7 @@ export function get_panels_for_subject(subject){
             throw `${key} is not a valid graph`;
           }
 
-          return panel_obj;
+          return panel_obj && key;
         })
         .value(),
     ])

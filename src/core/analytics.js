@@ -20,7 +20,7 @@ const dimensions = {
 
 const is_dev = String(window.location.hostname).indexOf("tbs-sct.gc.ca") === -1;
 
-window.initialize_analytics = ()=>{
+function initialize_analytics(){
   ga('create', 'UA-97024958-1', 'auto');
   ga('set', 'anonymizeIp', true);
 
@@ -99,4 +99,5 @@ module.exports = {
   log_page_view,
   dimensions,
   log_standard_event,
+  initialize_analytics,
 }; 

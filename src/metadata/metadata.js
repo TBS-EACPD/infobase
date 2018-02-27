@@ -24,6 +24,7 @@ export const MetaData = () => {
       title={text_maker("metadata")}
       breadcrumbs={[text_maker("metadata")]}
       description={text_maker("metadata_document_description")}
+      route_key="_metadata"
     >
       <div>
         <h1><TM k="metadata"/></h1>

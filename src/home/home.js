@@ -53,7 +53,7 @@ export class Home extends React.Component {
   render(){
     if(this.state.loading){
       return (
-        <StandardRouteContainer>
+        <StandardRouteContainer route_key="start">
           <SpinnerWrapper scale={4} />
         </StandardRouteContainer>
       );
@@ -64,7 +64,7 @@ export class Home extends React.Component {
 
      
       return (
-        <StandardRouteContainer>
+        <StandardRouteContainer route_key="start">
           <MediaQuery minWidth={992}>
             {is_large =>
               <div> 
