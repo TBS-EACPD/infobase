@@ -65,6 +65,7 @@ export class Partition extends React.Component {
       <StandardRouteContainer
         ref="container"
         breadcrumbs={[text_maker("partition_title")]}
+        route_key="partition"
       >
         { this.state.loading && <SpinnerWrapper ref="spinner" scale={4} /> }
       </StandardRouteContainer>
