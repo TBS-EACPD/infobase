@@ -1,6 +1,9 @@
 import './glossary.scss';
 import "./glossary.ib.yaml";
-import { StandardRouteContainer } from '../core/NavComponents.js';
+import { 
+  StandardRouteContainer,
+  ScrollToTargetContainer,
+} from '../core/NavComponents.js';
 import {autoComplete} from '../search/search.js';
 import  {text_maker} from '../models/text';
 import {GlossaryEntry} from '../models/glossary.js';
@@ -28,18 +31,6 @@ const GlossarySearch = withRouter(
     }
   }
 );
-
-function scrollToItem(key){
-  if (!_.isEmpty(key) && key !== "__"){
-    var el = document.querySelector("#"+key);
-    if (el){
-      scrollTo(0,el.offsetTop);
-      setTimeout(()=>{ 
-        el.focus(); 
-      });
-    }
-  }
-}
 
 function get_glossary_items_by_letter(){
   const glossary_items = GlossaryEntry.fully_defined_entries;
@@ -138,22 +129,6 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
 );
 
 export class Glossary extends React.Component {
-  scrollToItem(){
-    const { 
-      match: {
-        params : {
-          active_key,
-        },
-      },
-    } = this.props;
-    scrollToItem(active_key);
-  }
-  componentDidMount(){
-    this.scrollToItem();
-  }
-  componentDidUpdate(){
-    this.scrollToItem();
-  }
   render(){
     const { 
       match: {
@@ -173,10 +148,12 @@ export class Glossary extends React.Component {
         description={text_maker("glossary_meta_desc")}
       >
         <h1> <TM k="glossary" /> </h1>
-        <Glossary_
-          active_key={active_key}
-          items_by_letter={items_by_letter}
-        />
+        <ScrollToTargetContainer target_id={active_key}>
+          <Glossary_
+            active_key={active_key}
+            items_by_letter={items_by_letter}
+          />
+        </ScrollToTargetContainer>
       </StandardRouteContainer>
     );
   }

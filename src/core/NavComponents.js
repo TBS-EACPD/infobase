@@ -115,6 +115,34 @@ export class StandardRouteContainer extends React.Component {
   }
 }
 
+export class ScrollToTargetContainer extends React.Component {
+  scrollToItem(){
+    const { target_id } = this.props;
+
+    if (!_.isEmpty(target_id) && target_id !== "__"){
+      var el = document.querySelector("#"+target_id);
+      if (el){
+        setTimeout(()=>{ 
+          scrollTo(0,el.offsetTop);
+          el.focus(); 
+        });
+      }
+    };
+  }
+  componentDidMount(){
+    this.scrollToItem();
+  }
+  componentDidUpdate(){
+    this.scrollToItem();
+  }
+  render(){
+    const { 
+      children,
+    } = this.props;
+
+    return children;
+  }
+}
 
 class AnalyticsSynchronizer extends React.Component {
   render(){ return null; }
