@@ -56,7 +56,7 @@ require("../metadata/metadata.js");
 
 // require('../gen_expl/gen_expl.js');
 // require('../program_explorer/resource-explorer.js');
-// require('../program_explorer2/pe2.js');
+require('../program_explorer2/pe2.js');
 
 // require("../graph_route/graph_route.js");
 // require("../footnote_inventory/footnote_inventory.js");

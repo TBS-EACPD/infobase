@@ -40,9 +40,12 @@ export class Partition extends React.Component {
   shouldComponentUpdate(nextProps){
     if (!_.isUndefined(this.govPartition)){
       // Once the GovPartition diagram has been initialized, need to ensure it stays in sync whenever the path updates
-      const route_method = nextProps.match.params.method || "dept";
-      const route_value_attr = nextProps.match.params.value_attr || "exp";
-      this.ensureGovPartitionStateMatchesRouteState(route_method, route_value_attr)
+      const {
+        method, 
+        value_attr,
+      } = this.getValidatedRouteParams(nextProps);
+
+      this.ensureGovPartitionStateMatchesRouteState(method, value_attr);
     }
 
     // Should only need to update once, when the table dependencies finish loading and the spinner needs to be killed
@@ -50,8 +53,10 @@ export class Partition extends React.Component {
   }
   componentDidUpdate(){
     // Should only happen once, when the table dependencies finish loading and the spinner has been killed
-    const method = this.props.match.method || "dept";
-    const value_attr = this.props.match.value_attr || "exp";
+    const {
+      method, 
+      value_attr,
+    } = this.getValidatedRouteParams(this.props);
     this.container = d4.select(ReactDOM.findDOMNode(this.refs.container));
     this.govPartition = new GovPartition(this.container, this.update_url, method, value_attr);
   }
@@ -64,6 +69,34 @@ export class Partition extends React.Component {
         { this.state.loading && <SpinnerWrapper ref="spinner" scale={4} /> }
       </StandardRouteContainer>
     );
+  }
+  getValidatedRouteParams(props){
+    const route_method = props.match.params.method;
+    const route_value_attr = props.match.params.value_attr;
+
+    const route_value_attr_is_valid = _.chain(presentation_schemes_by_data_options)
+      .map( presentation_schemes_by_data_option => presentation_schemes_by_data_option.id )
+      .indexOf(route_value_attr)
+      .value() !== -1;
+
+    const route_method_is_valid = route_value_attr_is_valid &&  _.chain(presentation_schemes_by_data_options)
+      .find( presentation_schemes_by_data_option => presentation_schemes_by_data_option.id === route_value_attr )
+      .pick( "presentation_schemes" )
+      .flatMap()
+      .indexOf( route_method )
+      .value() !== -1;
+
+    if (route_value_attr_is_valid && route_method_is_valid){
+      return {
+        method: route_method,
+        value_attr: route_value_attr,
+      };
+    } else {
+      return {
+        method: "dept",
+        value_attr: "exp",
+      };
+    }
   }
   ensureGovPartitionStateMatchesRouteState(route_method, route_value_attr){
     const partition_method = this.govPartition.method;
@@ -87,8 +120,50 @@ export class Partition extends React.Component {
 }
       
 
-const search_required_chars = 1;
-const search_debounce_time = 500;
+const presentation_schemes_by_data_options = [
+  { 
+    id: "exp", 
+    text: text_maker("partition_spending_data"), 
+    presentation_schemes: [
+      "goca", 
+      "dept", 
+      "hwh", 
+      "st",
+    ],
+  },
+  { 
+    id: "fte", 
+    text: text_maker("fte_written"), 
+    presentation_schemes: [
+      "goca",
+      "dept",
+      "hwh",
+    ],
+  },
+  { 
+    id: "planned_exp", 
+    text: text_maker("partition_planned_spending_data"), 
+    presentation_schemes: [
+      "org_planned_spend", 
+      "est_type", 
+      "vs_type", 
+      "est_doc_mains",
+      "est_doc_sea",
+      "est_doc_seb",
+      "est_doc_sec",
+      "est_doc_im",
+    ],
+  },
+  { 
+    id: "org_info", 
+    text: text_maker("orgs"), 
+    presentation_schemes: [
+      "org_info_by_ministry", 
+      "org_info_federal_orgs_by_inst_form",
+      "org_info_interests_by_inst_form",
+    ],
+  },
+];
 
 const formaters = {
   "exp" : compact1,
@@ -204,6 +279,9 @@ const get_common_popup_options = d => {
   };
 }
 
+const search_required_chars = 1;
+const search_debounce_time = 500;
+
 class GovPartition {
   constructor(container, update_url, method, value_attr){
     
@@ -229,33 +307,7 @@ class GovPartition {
     this.chart = new PARTITION.Partition(this.container, {
       height : 700,
     });
-    const sort_vals = this.sort_vals = _.sortBy([
-      { id: "exp", text: text_maker("partition_spending_data"), presentation_schemes: ["goca", "dept", "hwh", "st"] },
-      { id: "fte", text: text_maker("fte_written"), presentation_schemes: ["goca", "dept", "hwh"] },
-      { 
-        id: "planned_exp", 
-        text: text_maker("partition_planned_spending_data"), 
-        presentation_schemes: [
-          "org_planned_spend", 
-          "est_type", 
-          "vs_type", 
-          "est_doc_mains",
-          "est_doc_sea",
-          "est_doc_seb",
-          "est_doc_sec",
-          "est_doc_im",
-        ],
-      },
-      { 
-        id: "org_info", 
-        text: text_maker("orgs"), 
-        presentation_schemes: [
-          "org_info_by_ministry", 
-          "org_info_federal_orgs_by_inst_form",
-          "org_info_interests_by_inst_form",
-        ],
-      },
-    ], d => d.id === value_attr ? -Infinity : Infinity);
+    const sort_vals = this.sort_vals = _.sortBy(presentation_schemes_by_data_options, d => d.id === value_attr ? -Infinity : Infinity);
 
     this.all_presentation_schemes = [
       { id: "goca", text: text_maker("spending_area_plural") },
