@@ -14,89 +14,117 @@ const { months } = require('../models/businessConstants');
 
 const FormattedDate = ({ day, month, year}) => <span>{months[month].text} {year}</span>;
 
-export const MetaData = () => {
+function scrollToItem(key){
+  if (!_.isEmpty(key) && key !== "__"){
+    var el = document.querySelector("#"+key);
+    if (el){
+      scrollTo(0,el.offsetTop);
+      setTimeout(()=>{ 
+        el.focus(); 
+      });
+    }
+  }
+}
 
-
-  const sorted_sources = _.sortBy(sources, source => source.title()); 
-
-  return (
-    <StandardRouteContainer
-      title={text_maker("metadata")}
-      breadcrumbs={[text_maker("metadata")]}
-      description={text_maker("metadata_document_description")}
-      route_key="_metadata"
-    >
-      <div>
-        <h1><TM k="metadata"/></h1>
-      </div>
-      <p> <TM k='metadata_t'/> </p>
-      {_.map(sorted_sources, (source) => (
-        <Panel key={source.key}>
-          <header className="panel-heading" id={source.key}>
-            <div style={{marginBottom:'3px'}}>
-              <h3 className="panel-title"> 
-                {source.title()}
-              </h3>
-            </div>
-            <div style={{fontWeight: "400", opacity: 0.8}}>
-              <TM k="refreshed"/> {source.frequency.text}
-            </div>
-          </header>
-
-          <PanelBody>
-            <div>
-              { source.description() }
-            </div>
-            <h4> <TM k='datasets' /> </h4>
-            <FancyUL>
-              {_.map(source.items(), ({id, text, inline_link, external_link }) => (
-                <span key={id} className="fancy-ul-span-flex">
-                  { 
-                    inline_link ? 
-                    <a 
-                      title={text_maker('rpb_link_text')}
-                      href={inline_link}
-                      style={{alignSelf: "center"}}
-                    >
-                      {text}
-                    </a>  :
-                    <span
-                      style={{alignSelf: "center"}}
-                    >
-                      {text}
-                    </span> 
-                  }
-                  {
-                    external_link &&
-                    <a 
-                      target="_blank" 
-                      className="btn btn-xs btn-ib-primary btn-responsive-fixed-width" 
-                      href={external_link}
-                    >
-                      <TM k="open_data_link"/>
-                    </a>
-                  }
-                </span>
-              ))}
-            </FancyUL>
-            <div className="fancy-ul-span-flex">
-              <div style={{opacity: 0.8 }}> 
-                <TM k="last_refresh" /> {FormattedDate(source.last_updated)}
+export class MetaData extends React.Component {
+  scrollToItem(){
+    const { 
+      match: {
+        params : {
+          data_source,
+        },
+      },
+    } = this.props;
+    scrollToItem(data_source);
+  }
+  componentDidMount(){
+    this.scrollToItem();
+  }
+  componentDidUpdate(){
+    this.scrollToItem();
+  }
+  render(){
+    const sorted_sources = _.sortBy(sources, source => source.title()); 
+  
+    return (
+      <StandardRouteContainer
+        title={text_maker("metadata")}
+        breadcrumbs={[text_maker("metadata")]}
+        description={text_maker("metadata_document_description")}
+        route_key="_metadata"
+      >
+        <div>
+          <h1><TM k="metadata"/></h1>
+        </div>
+        <p> <TM k='metadata_t'/> </p>
+        {_.map(sorted_sources, (source) => (
+          <Panel key={source.key}>
+            <header className="panel-heading" id={source.key}>
+              <div style={{marginBottom:'3px'}}>
+                <h3 className="panel-title"> 
+                  {source.title()}
+                </h3>
               </div>
-              { source.open_data &&
-                <a 
-                  style={{marginLeft:'auto'}} //fix a flexbox bug
-                  className="btn btn-ib-primary" 
-                  target="_blank" 
-                  href={source.open_data[window.lang]}
-                > 
-                  <TM k='open_data_link' /> 
-                </a>
-              }
-            </div>
-          </PanelBody>
-        </Panel>
-      ))}
-    </StandardRouteContainer>
-  );
+              <div style={{fontWeight: "400", opacity: 0.8}}>
+                <TM k="refreshed"/> {source.frequency.text}
+              </div>
+            </header>
+  
+            <PanelBody>
+              <div>
+                { source.description() }
+              </div>
+              <h4> <TM k='datasets' /> </h4>
+              <FancyUL>
+                {_.map(source.items(), ({id, text, inline_link, external_link }) => (
+                  <span key={id} className="fancy-ul-span-flex">
+                    { 
+                      inline_link ? 
+                      <a 
+                        title={text_maker('rpb_link_text')}
+                        href={inline_link}
+                        style={{alignSelf: "center"}}
+                      >
+                        {text}
+                      </a>  :
+                      <span
+                        style={{alignSelf: "center"}}
+                      >
+                        {text}
+                      </span> 
+                    }
+                    {
+                      external_link &&
+                      <a 
+                        target="_blank" 
+                        className="btn btn-xs btn-ib-primary btn-responsive-fixed-width" 
+                        href={external_link}
+                      >
+                        <TM k="open_data_link"/>
+                      </a>
+                    }
+                  </span>
+                ))}
+              </FancyUL>
+              <div className="fancy-ul-span-flex">
+                <div style={{opacity: 0.8 }}> 
+                  <TM k="last_refresh" /> {FormattedDate(source.last_updated)}
+                </div>
+                { source.open_data &&
+                  <a 
+                    style={{marginLeft:'auto'}} //fix a flexbox bug
+                    className="btn btn-ib-primary" 
+                    target="_blank" 
+                    href={source.open_data[window.lang]}
+                  > 
+                    <TM k='open_data_link' /> 
+                  </a>
+                }
+              </div>
+            </PanelBody>
+          </Panel>
+        ))}
+      </StandardRouteContainer>
+    );
+  }
 };

@@ -33,7 +33,7 @@ export class App extends React.Component {
         <ReactUnmounter />
         <Switch>
           <Route exact path="/start" component={Home}/>
-          <Route exact path="/metadata" component={MetaData}/>
+          <Route path="/metadata/:data_source?" component={MetaData}/>
           <Route path="/igoc/:grouping?" component={IgocExplorer} />
           <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={ResourceExplorer} />
           <Route path="/orgs/:level/:subject_id/infograph/:bubble?/" component={InfoGraph} />
