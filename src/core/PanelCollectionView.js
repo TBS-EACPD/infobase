@@ -1,3 +1,4 @@
+const { shallowEqualObjectsOverKeys } = require('./utils.js');
 const { PanelGraph } = require('../core/graphs.js');
 
 
@@ -6,15 +7,15 @@ class ReactPanelGraph extends React.Component {
     let {
       subject,
       graph_key,
-      graph_options,
     } = this.props;  
 
     const { main } = this.refs;
+    main.innerHTML = "";
 
     const graph_obj = PanelGraph.lookup(graph_key, subject.level)
 
+    const graph_options = {};
 
-    graph_options = graph_options || {};
 
     const calculations = graph_obj.calculate(subject, graph_options);
 
@@ -26,6 +27,9 @@ class ReactPanelGraph extends React.Component {
     graph_obj.render( d4.select(main), calculations, graph_options);
 
     
+  }
+  shouldComponentUpdate(nextProps){
+    return !shallowEqualObjectsOverKeys(nextProps, this.props, ['subject','graph_key']);
   }
   componentDidMount(){
     this._render();
@@ -43,6 +47,7 @@ class ReactPanelGraph extends React.Component {
       />
     );
   }
+  
 }
 
 

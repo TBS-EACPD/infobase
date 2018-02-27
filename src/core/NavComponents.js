@@ -1,3 +1,7 @@
+import withRouter from 'react-router/withRouter';
+import { reactAdapter } from './reactAdapter.js';
+
+const { log_page_view } = require('./analytics.js');
 const {
   index_lang_lookups: {
     page_title: default_title,
@@ -93,6 +97,7 @@ export class StandardRouteContainer extends React.Component {
       description,
       title,
       breadcrumbs,
+      route_key,
       children,
     } = this.props;
 
@@ -101,6 +106,7 @@ export class StandardRouteContainer extends React.Component {
         <DocumentTitle title_str={title} />
         <DocumentDescription description_str={description} />
         <BreadCrumbs crumbs={breadcrumbs} />
+        <AnalyticsSynchronizer route_key={route_key} />
         <div>
           {children}
         </div>
@@ -108,3 +114,50 @@ export class StandardRouteContainer extends React.Component {
     );
   }
 }
+
+
+class AnalyticsSynchronizer extends React.Component {
+  render(){ return null; }
+  componentDidUpdate(){ this._update(); }
+  componentDidMount(){ this._update(); }
+  shouldComponentUpdate(nextProps){
+    return this.props.route_key !== nextProps.route_key;
+  }
+  _update(){
+    log_page_view(this.props.route_key);
+  }
+}
+
+export const LangSynchronizer = withRouter(
+  class LangSynchronizer extends React.Component {
+    render(){ return null; }
+    componentDidUpdate(){ this._update(); }
+    componentDidMount(){ this._update(); }
+    shouldComponentUpdate(nextProps){
+      return this.props.location.pathname !== nextProps.location.pathname;
+    }
+    _update(){
+
+      //TODO: probabbly being too defensive here
+      const el_to_update = document.querySelector('#wb-lng a');
+      const newHash = document.location.hash.split("#")[1] || "";
+      if (_.get(el_to_update, "href")){
+        const link = _.first(el_to_update.href.split("#"));
+        if(link){
+          el_to_update.href = `${link}#${newHash}`;
+        }
+      }
+    }
+  }
+);
+
+export const ReactUnmounter = withRouter(
+  class ReactUnmounter_ extends React.Component {
+    render(){ return null; }
+    componentWillUpdate(nextProps){
+      if(this.props.location.pathname !== nextProps.location.pathname){
+        reactAdapter.unmountAll();
+      }
+    }
+  }
+);

@@ -109,3 +109,12 @@ see_an_infograph_for:
   en: See an infograph for {{subj_name subject}}
   fr: Voir une infographie pour {{subj_name subject}}
 
+
+
+# TODO: better text and different description for different levels (e.g. program infograph description should refer to parent org)
+infographic_description:
+  transform: [handlebars]
+  en: |
+    An interactive infographic providing details on {{subj_name subject}}
+  fr: |
+    Une infograhie interative contenant des détails sur {{subj_name subject}}

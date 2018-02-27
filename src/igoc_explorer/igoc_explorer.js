@@ -163,6 +163,7 @@ export const IgocExplorer = ({match}) => {
     <StandardRouteContainer
       breadcrumbs={[text_maker("igoc")]}
       title={text_maker("igoc")}
+      route_key="_igoc_explorer"
     >
       <div>
         <h1> <TM k="igoc" /> </h1>

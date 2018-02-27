@@ -100,7 +100,7 @@ module.exports  = function start({spinner, app_el}){
         </ConnectedRouter>
       </Provider>,
       document.getElementById('app')
-    );
+    ); 
 
 
 
