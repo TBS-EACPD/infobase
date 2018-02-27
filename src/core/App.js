@@ -15,6 +15,7 @@ import { ResourceExplorer } from "../program_explorer/resource-explorer.js";
 import { InfoGraph } from '../infographic/infographic.js';
 import { Partition } from '../program_explorer2/pe2.js';
 import { Glossary } from '../glossary/glossary.js';
+import { BubbleExplore } from '../dept_explore/dept_explore.js';
 import { initialize_analytics } from './analytics.js';
 
 
@@ -39,6 +40,7 @@ export class App extends React.Component {
           <Route path="/orgs/:level/:subject_id/infograph/:bubble?/" component={InfoGraph} />
           <Route path="/glossary/:active_key?" component={Glossary} />
           <Route path="/partition/:method?/:value_attr?" component={Partition} />
+          <Route path="/explore-:perspective?" component={BubbleExplore} />
           <Route component={Home} /> {/* 404 / catch all */}
         </Switch>
       </div>
