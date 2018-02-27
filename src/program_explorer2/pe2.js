@@ -37,14 +37,23 @@ export class Partition extends React.Component {
       this.setState({loading: false}) 
     });
   }
-  shouldComponentUpdate(){
+  shouldComponentUpdate(nextProps){
+    if (!_.isUndefined(this.govPartition)){
+      // Once the GovPartition diagram has been initialized, need to ensure it stays in sync whenever the path updates
+      const route_method = nextProps.match.params.method || "dept";
+      const route_value_attr = nextProps.match.params.value_attr || "exp";
+      this.ensureGovPartitionStateMatchesRouteState(route_method, route_value_attr)
+    }
+
+    // Should only need to update once, when the table dependencies finish loading and the spinner needs to be killed
     return !_.isUndefined(this.refs.spinner);
   }
   componentDidUpdate(){
+    // Should only happen once, when the table dependencies finish loading and the spinner has been killed
     const method = this.props.match.method || "dept";
     const value_attr = this.props.match.value_attr || "exp";
     const container = ReactDOM.findDOMNode(this.refs.container);
-    new GovPartition(d4.select(container), this.update_url, method, value_attr);
+    this.govPartition = new GovPartition(d4.select(container), this.update_url, method, value_attr);
   }
   render(){
     return (
@@ -55,6 +64,23 @@ export class Partition extends React.Component {
         { this.state.loading && <SpinnerWrapper ref="spinner" scale={4} /> }
       </StandardRouteContainer>
     );
+  }
+  ensureGovPartitionStateMatchesRouteState(route_method, route_value_attr){
+    const should_url_update = false;
+
+    const partition_method = this.govPartition.method;
+    const partition_value_attr = this.govPartition.value_attr;
+
+    if (route_method !== partition_method) {
+      this.govPartition.method = route_method;
+      this.govPartition.value_attr = route_value_attr;
+      
+      this.govPartition.reroot(should_url_update);
+    } else if (route_value_attr !== partition_value_attr) {
+      this.govPartition.value_attr = route_value_attr;
+      
+      this.govPartition.change_value_attr(should_url_update);
+    }
   }
 }
 
@@ -283,8 +309,10 @@ class GovPartition {
     this.update_url(this.method,this.value_attr);
     this[this.method]();
   }
-  change_value_attr(){
-    this.value_attr = d4.event.target.value;
+  change_value_attr(should_url_update){
+    if (d4.event){
+      this.value_attr = d4.event.target.value;
+    }
 
     // Filter presentation_schemes to those available on this method
     const sort_val = _.find(this.sort_vals, d => d.id === this.value_attr);
@@ -294,7 +322,9 @@ class GovPartition {
       .value();
     this.method = presentation_schemes[0].id;
 
-    this.update_url(this.method,this.value_attr);
+    if ( _.isUndefined(should_url_update) || (!_.isUndefined(should_url_update) && should_url_update) ) {
+      this.update_url(this.method,this.value_attr);
+    }
 
     // Update presentation_schemes dropdown options
     const presentation_scheme_dropdown = this.container.select(".select_root");
@@ -320,9 +350,13 @@ class GovPartition {
 
     this[this.method]();
   }
-  reroot(){
-    this.method = d4.event.target.value;
-    this.update_url(this.method,this.value_attr);
+  reroot(should_url_update){
+    if (d4.event){
+      this.method = d4.event.target.value;
+    }
+    if ( _.isUndefined(should_url_update) || (!_.isUndefined(should_url_update) && should_url_update) ) {
+      this.update_url(this.method,this.value_attr);
+    }
     this[this.method]();
   }
   dept(){
