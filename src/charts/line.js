@@ -292,17 +292,7 @@ exports.ordinal_line = class ordinal_line {
         .tickSizeOuter(0)
         .tickPadding(5);
 
-      if (!this.options.hide_gridlines){
-        D3CORE.add_grid_lines(
-          "vertical",
-          this.grid_line_area,
-          this.x,
-          this.y,
-          width,
-          height
-        );
-      }
-
+      
       var xaxis_node = this.graph_area.select(".x.axis");
 
       if (!xaxis_node.node()){
@@ -342,10 +332,13 @@ exports.ordinal_line = class ordinal_line {
           "left"  : function(d) {return that.x(d)-that.tick_width/2+that.margin.left+"px" ; },
         })
         .html(function(d){ return d;});
-
-
+      
       if (!this.x_axis_line){
         this.graph_area.select(".x.axis path").remove();
+      }
+
+      if (!this.options.hide_gridlines){
+        D3CORE.add_grid_lines("vertical", this.grid_line_area, xAxis, height);
       }
     }
 
@@ -359,15 +352,7 @@ exports.ordinal_line = class ordinal_line {
         .tickSizeOuter(0)
         .tickFormat(this.formater)
 
-      if (!this.options.hide_gridlines){
-        D3CORE.add_grid_lines(
-          "horizontal",
-          this.grid_line_area,
-          this.x,
-          this.y,
-          width,
-          height);
-      }
+      
 
       var yaxis_node = this.graph_area.select(".y.axis");
 
@@ -384,7 +369,11 @@ exports.ordinal_line = class ordinal_line {
         .attr("x", 0)
         .attr("y", -5)
         .text(this.options.y_axis || '');
-    }	
+    }
+
+    if (!this.options.hide_gridlines){
+      D3CORE.add_grid_lines("horizontal", this.grid_line_area, yAxis, width);
+    }
     
     this.dispatch.call("renderEnd",this);
   };

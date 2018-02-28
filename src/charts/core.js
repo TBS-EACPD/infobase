@@ -46,56 +46,36 @@ exports.get_html_parent = function(elem){
 };
 
 
-exports.add_grid_lines = function(direction, graph_area, x, y, width, height){
-  var ticks;
-  var attr;
+exports.add_grid_lines = function(direction, grid_line_area, axis, tick_size){
+  const axis_clone = _.cloneDeep(axis);
+  const tick_size_orientation = direction === "vertical" ? 1 : -1;
 
-  if (direction === 'horizontal'){
-    ticks = y.ticks(10);
-    attr = {
-      "x1" : 0,
-      "x2" : width,
-      "y1" : function(d) { return y(d);},
-      "y2" : function(d) { return y(d);},
-    };
-  } else if (direction ==='vertical'){
-    ticks = x.ticks ? x.ticks(10) : x.domain();
-    attr = {
-      "y1" : 0,
-      "y2" : height,
-      "x1" : function(d) { return x(d);},
-      "x2" : function(d) { return x(d);},
-    };
-  } else {
-    return;
-  }
+  grid_line_area
+    .selectAll(".grid"+direction)
+    .remove();
 
-  var grid = graph_area
-    .selectAll("line.grid"+direction)
-    .data(ticks);
-
-  var new_grid = grid
-    .enter()
-    .append("line")
-    .merge(grid)
+  grid_line_area
+    .call(axis_clone
+      .tickSize(tick_size_orientation*tick_size)
+      .tickFormat("")
+    )
+    .selectAll("g.tick")
+    .attr("class","grid"+direction)
+    .selectAll("line")
     .attrs({
-      "class":"grid"+direction,
-      "fill" : "none",
-      "shape-rendering" : "crispEdges",
+      "fill": "none",
+      "shape-rendering": "auto",
     })
     .styles({
-      "stroke" : "steelblue",
-      "stroke-opacity" : 0.3,
-      "stroke-width" : "1px",
+      "stroke": "steelblue",
+      "stroke-opacity": 0.3,
+      "stroke-width": "1px",
     });
 
-  grid.exit().remove();
-  
-  new_grid.attrs(attr);
-
+  grid_line_area
+    .selectAll("path.domain")
+    .remove();
 };
-
-
 
 exports.create_list = function(container, data,options){
   //

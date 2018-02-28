@@ -418,7 +418,7 @@ bar.prototype.render = function(options){
   }
       
   if (!hide_gridlines){
-    D3CORE.add_grid_lines("horizontal",this.grid_line_area,x0,y,width,height);
+    D3CORE.add_grid_lines("horizontal",this.grid_line_area,yAxis,width);
   }
     
   return this;
