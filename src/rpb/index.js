@@ -72,59 +72,6 @@ function slowScrollDown(){
     });
 }
 
-function route_func(container, args){
-  this.add_crumbs([{html: text_maker("self_serve")}]);
-  const title_prefix = text_maker('report_builder_title');
-  this.add_title($('<h1>').html(title_prefix));
-  const set_title = title_suffix => this.add_title($('<h1>').html(title_prefix+" - "+title_suffix));
-
-  let initialState = {};
-  if(args && args.length){
-    initialState = _.chain(args)
-      .pipe(str => JSURL.parse(str) )
-      .pipe(naive=> naive_to_real_state(naive) )
-      .value();
-  } else {
-    initialState = naive_to_real_state({});
-  }
-
-  if(initialState.table){
-    reactAdapter.render(
-      <SpinnerWrapper scale={3} />,
-      container
-    );
-
-    ensure_loaded({ 
-      table_keys: [ initialState.table ],
-      footnotes_for: 'all',
-    }).then( ()=> {
-
-      reactAdapter.render(
-        <div>
-          <Root 
-            initialState={initialState} 
-            set_title={set_title}
-          />
-        </div>, 
-        container
-      );
-
-    });
-
-  } else {
-
-    reactAdapter.render(
-      <div>
-        <Root 
-          initialState={initialState} 
-          set_title={set_title}
-        />
-      </div>, 
-      container
-    );
-  }
-}
-
 class Root extends React.Component {
   constructor(props){
     super(props);
