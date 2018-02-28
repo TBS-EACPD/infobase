@@ -20,6 +20,7 @@ import { BubbleExplore } from '../dept_explore/dept_explore.js';
 import { ReportBuilder } from '../rpb/index.js';
 import { TooltipActivator } from '../glossary/Tooltips';
 import { PotentialSurveyBox } from './survey_link';
+import { EasyAccess } from './EasyAccess';
 
 
 // Now you can dispatch navigation actions from anywhere!
@@ -36,6 +37,7 @@ export class App extends React.Component {
         <TooltipActivator />
         <ReactUnmounter />
         <PotentialSurveyBox />
+        <EasyAccess />
         <Switch>
           <Route exact path="/start" component={Home}/>
           <Route path="/metadata/:data_source?" component={MetaData}/>
