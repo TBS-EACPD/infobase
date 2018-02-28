@@ -1,3 +1,6 @@
+import { StandardRouteContainer } from '../core/NavComponents';
+import { createSelector } from 'reselect';
+import withRouter from 'react-router/withRouter';
 const { text_maker } = require('../models/text');
 require("./rpb.ib.yaml");
 require('./rpb.scss');
@@ -53,6 +56,18 @@ ROUTER.add_container_route(
   route_func
 );
 
+function slowScrollDown(){
+  const el = document.getElementById('rpb-main-content')
+  el.focus();
+  d4.select(el)
+    .transition()
+    .duration(1000)
+    .tween("uniquetweenname2", ()=>{
+      const i = d4.interpolateNumber(0, el.getBoundingClientRect().top);
+      return t => { window.scrollTo( 0, i(t) ); };
+    });
+}
+
 function route_func(container, args){
   this.add_crumbs([{html: text_maker("self_serve")}]);
   const title_prefix = text_maker('report_builder_title');
@@ -107,27 +122,43 @@ function route_func(container, args){
 }
 
 class Root extends React.Component {
-  render(){
-    const { 
-      initialState,
-      set_title,
-    } = this.props;
+  constructor(props){
+    super(props);
 
+    const { state } = this.props;
+    
     const mapStateToProps = create_mapStateToProps();
-
     const Container = connect(mapStateToProps, mapDispatchToProps)(RPB)
 
+    const store = createStore(reducer,state);
+
+    Object.assign(this, { store, Container });
+
+  }
+  componentWillUpdate(nextProps){
+    this.store.dispatch({
+      type: "navigate_to_new_state",
+      payload: nextProps.state,
+    });
+
+  }
+  shouldComponentUpdate(newProps){
+    return rpb_link(this.store.getState()) !== rpb_link(newProps.state)
+  }
+  render(){
+
+    const { 
+      Container,
+      store,
+    } = this;
+
     return (
-      <Provider store={createStore(reducer,initialState)}>
-        <Container 
-          set_title={set_title}
-        />
+      <Provider store={store}>
+        <Container />
       </Provider>
     );
 
   }
-
-
 }
 
 class RPB extends React.Component {
@@ -139,7 +170,7 @@ class RPB extends React.Component {
       };
 
       setTimeout(()=> {
-        this.slowScrollDown();
+        slowScrollDown();
       });
 
     } else {
@@ -164,21 +195,11 @@ class RPB extends React.Component {
       this.setState({ loading: false });
 
       setTimeout(()=> {
-        this.slowScrollDown();
+        slowScrollDown();
       })
     });
   }
-  slowScrollDown(){
-    document.querySelector('#'+sub_app_name).focus();
-    const el = document.getElementById('rpb-main-content')
-    d4.select(el)
-      .transition()
-      .duration(1000)
-      .tween("uniquetweenname2", ()=>{
-        const i = d4.interpolateNumber(0, el.getBoundingClientRect().top);
-        return t => { window.scrollTo( 0, i(t) ); };
-      });
-  }
+  
   render(){
 
     const {
@@ -191,10 +212,16 @@ class RPB extends React.Component {
     } = this.props;
 
 
-    return <div style={{minHeight:'800px', marginBottom: '100px'}}>
-      <URLSynchronizer {...this.props} />
-      <AnalyticsSynchronizer {...this.props} />
-      <TitleSynchronizer {...this.props} />
+    return <div style={{minHeight:'800px', marginBottom: '100px'}} id="">
+      <URLSynchronizer state={this.props} />
+      {
+        _.nonEmpty(table) && 
+        (
+          subject===Gov ? 
+          <h1>  {text_maker("report_builder_title")} </h1> : 
+          <h1>  {text_maker("report_builder_title")} - {subject.name} </h1>
+        )
+      }
       <div className='rpb-option'>
         <div className='rpb-option-label '>
           <div className='rpb-option-label-text '>
@@ -228,7 +255,7 @@ class RPB extends React.Component {
               if( this.state.table_picking ){
                 this.setState({ table_picking: false }); 
                 setTimeout(()=>{
-                  this.slowScrollDown();
+                  slowScrollDown();
                   document.querySelector('#'+sub_app_name).focus();
                 },200)
               }
@@ -313,34 +340,7 @@ class RPB extends React.Component {
   }
 }
 
-class TitleSynchronizer extends React.Component {
-  render(){ return null; }
-  componentDidMount(){
-    this.updateTitleImperatively();
-  }
-  componentDidUpdate(){
-    this.updateTitleImperatively();
-  }
-  shouldComponentUpdate(newProps){
-    return newProps.table !== this.props.table || newProps.subject !== this.props.subject;
-  }
-  updateTitleImperatively(){
-    const {
-      table, 
-      subject,
-      set_title,
-    } = this.props;
 
-    if( !_.isEmpty(table) ){
-      let title = table.title;
-      if(subject !== Gov){
-        title = `${title} - ${subject.name}`;
-      }
-      set_title(title);
-
-    }
-  }
-}
 
 class AnalyticsSynchronizer extends React.Component {
   //note that we do not update the URL when componentDidMount(). 
@@ -378,37 +378,108 @@ class AnalyticsSynchronizer extends React.Component {
 }
 
 
-class URLSynchronizer extends React.Component {
-  //note that we do not update the URL when componentDidMount(). 
-  //this is so that the URL isn't printed too often
-  //alternatively, we *can* overwrite the URL in componentDidMount() using replaceState().
-  render(){ return null; }
-  shouldComponentUpdate(new_props){
-    return !!(
-      new_props.table && 
-      rpb_link(this.props) !== rpb_link(new_props)
-    )
-  }
-  componentDidMount(){
-    this.updateURLImperatively();
-  }
-  componentDidUpdate(){
-    this.updateURLImperatively();
-  }
-  updateURLImperatively(){
-    const new_url = rpb_link(this.props)
-    ROUTER.navigate(new_url, {trigger:false});
+const URLSynchronizer = withRouter(
+  class URLSynchronizer_ extends React.Component {
+    //note that we do not update the URL when componentDidMount(). 
+    //this is so that the URL isn't printed too often
+    //alternatively, we *can* overwrite the URL in componentDidMount() using replaceState().
+    render(){ return null; }
+    shouldComponentUpdate(new_props){
+      return rpb_link(this.props.state) !== rpb_link(new_props.state);
+    }
+    componentDidUpdate(){
+      this.updateURLImperatively();
+    }
+    updateURLImperatively(){
+      const { history } = this.props;
+      const new_url = rpb_link(this.props.state, true);
+      history.push(new_url);
+    }
 
-    
-    //patch other lang to remove filters, which are not yet bilingual-proof
-    const all_in_other_lang = window.lang === 'en' ? "Tout" : "All";
-    const bilingual_proof_hash = rpb_link(_.immutate(this.props, { filter : all_in_other_lang }));
+  }
+);
 
-    const ref = $('#wb-lng a');
-    if (ref.length > 0){
-      const link = ref.attr("href").split("#")[0];
-      ref.attr("href",[link,bilingual_proof_hash].join(""));
+const url_state_selector = createSelector(_.identity, str => {
+  let state =  {};
+  if(_.nonEmpty(str)){
+    state = _.chain(str)
+      .pipe(str => JSURL.parse(str) )
+      .pipe(naive=> naive_to_real_state(naive) )
+      .value();
+  } else {
+    state = naive_to_real_state({});
+  }
+  return state;
+});
+
+export class ReportBuilder extends React.Component { 
+  constructor(props){
+    super(props);
+    const config_str = this.props.match.params.config;
+    this.state = {
+      loading: !!(url_state_selector(config_str).table),
     }
   }
+  loadDeps({table, subject}){
+    this.setState({
+      loading: true,
+    });
 
+    ensure_loaded({
+      table_keys: [table],
+      footnotes_for: 'all',
+    }).then(()=> {
+      this.setState({
+        loading: false,
+      });
+    });
+  }
+  componentWillMount(){
+    const config_str = this.props.match.params.config;
+    const state = url_state_selector(config_str);
+    if(state.table){
+      this.loadDeps(state);
+    }
+  }
+  shouldComponentUpdate(nextProps,nextState){
+    if(this.state.loading !== nextState.loading){
+      return true;
+    }
+    const old_config_str = this.props.match.params.config;
+    const new_config_str = nextProps.match.params.config;
+    return old_config_str !== new_config_str;
+  }
+  componentWillUpdate(nextProps){
+    const old_config_str = this.props.match.params.config;
+    const old_state = url_state_selector(old_config_str);
+    const new_config_str = nextProps.match.params.config;
+    const new_state =url_state_selector(new_config_str);
+
+    if(new_state.table && old_state !== new_state.table){  
+      this.loadDeps(new_state);
+    }
+    
+  }
+  render(){
+    const config_str = this.props.match.params.config
+    const title = text_maker("report_builder_title");
+
+    const state = url_state_selector(config_str);
+
+    return (
+      <StandardRouteContainer 
+        title={title}
+        breadcrumbs={[text_maker("self_serve")]}
+        description={text_maker("report_builder_meta_desc")}
+        route_name="_rpb"
+      >
+        <AnalyticsSynchronizer {...state} />
+        { 
+          this.state.loading ? 
+          <SpinnerWrapper scale={3} /> :
+          <Root state={state} />
+        }
+      </StandardRouteContainer>
+    )
+  }
 }

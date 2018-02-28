@@ -2,6 +2,10 @@ report_builder_title:
   en: Report Builder
   fr: Outil de création de rapport
 
+report_builder_meta_desc:
+  en: Create a customized and exportable report on the data you want to analyze
+  fr: Créer un rapport adapté et exportable sur les données que vous voulez analyser
+
 blue_text_pick_data:
   en: Select your data
   fr: Sélectionnez vos données

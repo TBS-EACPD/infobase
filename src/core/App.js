@@ -2,6 +2,7 @@ import { ReactUnmounter, LangSynchronizer } from './NavComponents';
 
 import { Route, Switch } from 'react-router';
 //import { Link, NavLink } from 'react-router-dom';
+import { initialize_analytics } from './analytics.js';
 
 export const app_reducer = (state={ lang: window.lang }, { type, payload }) => {
   //doesn't do anything yet...
@@ -16,7 +17,7 @@ import { InfoGraph } from '../infographic/infographic.js';
 import { Partition } from '../program_explorer2/pe2.js';
 import { Glossary } from '../glossary/glossary.js';
 import { BubbleExplore } from '../dept_explore/dept_explore.js';
-import { initialize_analytics } from './analytics.js';
+import { ReportBuilder } from '../rpb/index.js';
 
 
 // Now you can dispatch navigation actions from anywhere!
@@ -41,7 +42,8 @@ export class App extends React.Component {
           <Route path="/glossary/:active_key?" component={Glossary} />
           <Route path="/partition/:method?/:value_attr?" component={Partition} />
           <Route path="/explore-:perspective?" component={BubbleExplore} />
-          <Route component={Home} /> {/* 404 / catch all */}
+          <Route path="/rpb/:config?" component={ReportBuilder} />
+          <Route path="/start" component={Home} />
         </Switch>
       </div>
     );
