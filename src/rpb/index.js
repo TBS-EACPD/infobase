@@ -19,7 +19,15 @@ const { Provider, connect } = require('react-redux');
 const { Gov } = require('../models/subject.js');
 const { ensure_loaded } = require('../core/lazy_loader.js');
 
-
+const RPBTitle = ({ table_name, subject_name }) => {
+  const title_prefix = text_maker("report_builder_title"); 
+  if(!table_name){
+    return <h1> {title_prefix} </h1>;
+  } if(!subject_name){
+    return <h1> {title_prefix} - {table_name} </h1>;
+  }
+  return <h1> {title_prefix} - {table_name} - {subject_name} </h1>;
+}
 
 
 //re-usable view stuff
@@ -41,7 +49,6 @@ const { SubjectFilterPicker } = require('./shared.js');
 
 //misc app stuff
 const { rpb_link } = require('./rpb_link.js');
-const ROUTER = require('../core/router.js');
 const JSURL = require('jsurl');
 window.JSURL = JSURL;
 const analytics = require('../core/analytics.js');
@@ -49,12 +56,6 @@ const analytics = require('../core/analytics.js');
 const sub_app_name = "_rpb";
 
 
-
-ROUTER.add_container_route(
-  "rpb/:args:",
-  sub_app_name,
-  route_func
-);
 
 function slowScrollDown(){
   const el = document.getElementById('rpb-main-content')
@@ -229,14 +230,10 @@ class RPB extends React.Component {
           }
         }} 
       />
-      {
-        _.nonEmpty(table) && 
-        (
-          subject===Gov ? 
-          <h1>  {text_maker("report_builder_title")} </h1> : 
-          <h1>  {text_maker("report_builder_title")} - {subject.name} </h1>
-        )
-      }
+      <RPBTitle 
+        subject_name={subject !== Gov && subject && subject.name}
+        table_name={table && table.name}
+      />
       <div className='rpb-option'>
         <div className='rpb-option-label '>
           <div className='rpb-option-label-text '>
