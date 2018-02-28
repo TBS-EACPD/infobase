@@ -19,6 +19,7 @@ import { Glossary } from '../glossary/glossary.js';
 import { BubbleExplore } from '../dept_explore/dept_explore.js';
 import { ReportBuilder } from '../rpb/index.js';
 import { TooltipActivator } from '../glossary/Tooltips';
+import { PotentialSurveyBox } from './survey_link';
 
 
 // Now you can dispatch navigation actions from anywhere!
@@ -34,6 +35,7 @@ export class App extends React.Component {
       <div tabIndex={-1} id="app-focus-root">
         <TooltipActivator />
         <ReactUnmounter />
+        <PotentialSurveyBox />
         <Switch>
           <Route exact path="/start" component={Home}/>
           <Route path="/metadata/:data_source?" component={MetaData}/>
