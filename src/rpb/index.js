@@ -19,16 +19,6 @@ const { Provider, connect } = require('react-redux');
 const { Gov } = require('../models/subject.js');
 const { ensure_loaded } = require('../core/lazy_loader.js');
 
-const RPBTitle = ({ table_name, subject_name }) => {
-  const title_prefix = text_maker("report_builder_title"); 
-  if(!table_name){
-    return <h1> {title_prefix} </h1>;
-  } if(!subject_name){
-    return <h1> {title_prefix} - {table_name} </h1>;
-  }
-  return <h1> {title_prefix} - {table_name} - {subject_name} </h1>;
-}
-
 
 //re-usable view stuff
 const {
@@ -36,7 +26,6 @@ const {
   TextMaker,
   RadioButtons,
 } = require('../util_components.js');
-const { reactAdapter } = require('../core/reactAdapter.js');
 const AriaModal = require('react-aria-modal');
 
 
@@ -54,6 +43,18 @@ window.JSURL = JSURL;
 const analytics = require('../core/analytics.js');
 
 const sub_app_name = "_rpb";
+
+
+
+const RPBTitle = ({ table_name, subject_name }) => {
+  const title_prefix = text_maker("report_builder_title"); 
+  if(!table_name){
+    return <h1> {title_prefix} </h1>;
+  } if(!subject_name){
+    return <h1> {title_prefix} - {table_name} </h1>;
+  }
+  return <h1> {title_prefix} - {table_name} - {subject_name} </h1>;
+}
 
 
 
