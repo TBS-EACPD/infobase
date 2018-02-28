@@ -1,6 +1,7 @@
 import { StandardRouteContainer, LangSynchronizer } from '../core/NavComponents';
 import { createSelector } from 'reselect';
 import withRouter from 'react-router/withRouter';
+import { log_standard_event } from '../core/analytics.js';
 const { text_maker } = require('../models/text');
 require("./rpb.ib.yaml");
 require('./rpb.scss');
@@ -40,7 +41,6 @@ const { SubjectFilterPicker } = require('./shared.js');
 const { rpb_link } = require('./rpb_link.js');
 const JSURL = require('jsurl');
 window.JSURL = JSURL;
-const analytics = require('../core/analytics.js');
 
 const sub_app_name = "_rpb";
 
@@ -325,10 +325,10 @@ class AnalyticsSynchronizer extends React.Component {
     }
   }
   send_event(){
-    analytics.log_standard_event({
+    log_standard_event({
       SUBAPP: sub_app_name,
-      SUBJECT_GUID: this.props.subject.guid,
-      MISC1: this.props.table.id,
+      SUBJECT_GUID: this.props.subject,
+      MISC1: this.props.table,
       MISC2: this.props.mode,
     })
 

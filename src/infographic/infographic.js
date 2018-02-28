@@ -3,6 +3,7 @@ import "./infographic.ib.yaml";
 
 import { StandardRouteContainer } from '../core/NavComponents';
 import { createSelector } from 'reselect';
+import { log_standard_event } from '../core/analytics.js';
 
 
 
@@ -14,7 +15,7 @@ const { get_panels_for_subject } = require('./get_panels_for_subject.js');
 const { bubble_defs }  = require('./bubble_definitions.js'); 
 const { ReactPanelGraph } = require('../core/PanelCollectionView.js');
 const { BUBBLE_MENU : { BubbleMenu } } = require('../core/D3');
-const analytics = require('../core/analytics.js');
+
 
 const {
   TextMaker,
@@ -64,12 +65,16 @@ class AnalyticsSynchronizer extends React.Component {
     const { 
       bubble,
       level,
-      subject_id,
+      subject: {
+        guid,
+      },
     } = this.props;
 
-    analytics.log_standard_event({
+    log_standard_event;
+
+    log_standard_event({
       SUBAPP: sub_app_name,
-      SUBJECT_GUID: `${level}_,${subject_id}`,
+      SUBJECT_GUID: guid, 
       MISC1: level,
       MISC2: bubble,
     })

@@ -1,7 +1,7 @@
 import withRouter from 'react-router/withRouter';
 import { reactAdapter } from './reactAdapter.js';
+import { log_page_view } from './analytics.js';
 
-const { log_page_view } = require('./analytics.js');
 const {
   index_lang_lookups: {
     page_title: default_title,
