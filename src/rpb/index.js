@@ -1,4 +1,4 @@
-import { StandardRouteContainer } from '../core/NavComponents';
+import { StandardRouteContainer, LangSynchronizer } from '../core/NavComponents';
 import { createSelector } from 'reselect';
 import withRouter from 'react-router/withRouter';
 const { text_maker } = require('../models/text');
@@ -58,6 +58,9 @@ ROUTER.add_container_route(
 
 function slowScrollDown(){
   const el = document.getElementById('rpb-main-content')
+  if(!_.isElement(el)){ 
+    return;
+  }
   el.focus();
   d4.select(el)
     .transition()
@@ -214,6 +217,18 @@ class RPB extends React.Component {
 
     return <div style={{minHeight:'800px', marginBottom: '100px'}} id="">
       <URLSynchronizer state={this.props} />
+      <LangSynchronizer 
+        lang_modifier={hash=>{
+          const config_str = hash.split("rpb/")[1];
+          if(_.isEmpty(config_str)){ 
+            return hash;
+          } else {
+            let state = url_state_selector(config_str);
+            delete state.filter;
+            return rpb_link((state));
+          }
+        }} 
+      />
       {
         _.nonEmpty(table) && 
         (
@@ -472,6 +487,7 @@ export class ReportBuilder extends React.Component {
         breadcrumbs={[text_maker("self_serve")]}
         description={text_maker("report_builder_meta_desc")}
         route_name="_rpb"
+        shouldSyncLang={false}
       >
         <AnalyticsSynchronizer {...state} />
         { 

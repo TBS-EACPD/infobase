@@ -99,6 +99,7 @@ export class StandardRouteContainer extends React.Component {
       breadcrumbs,
       route_key,
       children,
+      shouldSyncLang,
     } = this.props;
 
     return (
@@ -107,6 +108,9 @@ export class StandardRouteContainer extends React.Component {
         <DocumentDescription description_str={description} />
         <BreadCrumbs crumbs={breadcrumbs} />
         <AnalyticsSynchronizer route_key={route_key} />
+        { shouldSyncLang !== false &&
+           <LangSynchronizer /> 
+        }
         <div>
           {children}
         </div>
@@ -161,14 +165,18 @@ export const LangSynchronizer = withRouter(
     render(){ return null; }
     componentDidUpdate(){ this._update(); }
     componentDidMount(){ this._update(); }
-    shouldComponentUpdate(nextProps){
-      return this.props.location.pathname !== nextProps.location.pathname;
-    }
     _update(){
-
+      const { lang_modifier } = this.props;
+      
       //TODO: probabbly being too defensive here
       const el_to_update = document.querySelector('#wb-lng a');
-      const newHash = document.location.hash.split("#")[1] || "";
+      let newHash = (
+        _.isFunction(lang_modifier) ? 
+        lang_modifier(document.location.hash) : 
+        document.location.hash
+      )
+      newHash = newHash.split("#")[1] || "";
+
       if (_.get(el_to_update, "href")){
         const link = _.first(el_to_update.href.split("#"));
         if(link){

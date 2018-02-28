@@ -1,7 +1,6 @@
 exports = module.exports;
 require("./goco.ib.yaml");
 
-const ROUTER = require('../../core/router.js');
 const {
   PanelGraph,
   Subject: { Tag },
@@ -62,7 +61,7 @@ new PanelGraph({
   },
   title: 'gocographic_title',
   calculate: _.constant(true),
-  render(panel,calculations){
+  render(panel,calculations, { history }){
     const graph_area = d4.select(panel.areas().graph.node());
 
     const text_area = d4.select(panel.areas().text.node());
@@ -112,13 +111,13 @@ new PanelGraph({
       .attr('id', 'goco_mount')
       .html(text_maker("goco_t"));
 
-    new Goco(graph_area.select('#goco_mount'));
+    new Goco(graph_area.select('#goco_mount'), history);
   },
 });
 
 class Goco {
-  constructor(container){
-
+  constructor(container, history){
+    this.history = history;
     this.container = container;
     const table6 = Table.lookup("table6");
     const table12 = Table.lookup("table12");
@@ -263,6 +262,7 @@ class Goco {
   }
   nav_to_dashboard(goco_name){
     const goco =  _.find(this.goco_data, d=>d.tick ===goco_name);
-    ROUTER.navigate(goco.href,{trigger:true});
+    const href = goco.href.replace("#","/");
+    this.history.push(href);
   }
 }

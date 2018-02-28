@@ -32,6 +32,7 @@ const rpb_link = (naive_state, useRouterFormat) => _.chain(naive_state)
     'preferTable',
     'sorting_column',
     'descending',
+    'filter',
   ])
   //.pipe(obj => JSON.stringify(obj))
   //.pipe( str => encodeURIComponent(str) )

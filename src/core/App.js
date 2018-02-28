@@ -1,4 +1,4 @@
-import { ReactUnmounter, LangSynchronizer } from './NavComponents';
+import { ReactUnmounter } from './NavComponents';
 
 import { Route, Switch } from 'react-router';
 //import { Link, NavLink } from 'react-router-dom';
@@ -31,7 +31,6 @@ export class App extends React.Component {
   render(){
     return (
       <div tabIndex={-1} id="app-focus-root">
-        <LangSynchronizer />
         <ReactUnmounter />
         <Switch>
           <Route exact path="/start" component={Home}/>
