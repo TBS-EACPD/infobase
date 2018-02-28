@@ -18,6 +18,7 @@ import { Partition } from '../program_explorer2/pe2.js';
 import { Glossary } from '../glossary/glossary.js';
 import { BubbleExplore } from '../dept_explore/dept_explore.js';
 import { ReportBuilder } from '../rpb/index.js';
+import { TooltipActivator } from '../glossary/Tooltips';
 
 
 // Now you can dispatch navigation actions from anywhere!
@@ -31,6 +32,7 @@ export class App extends React.Component {
   render(){
     return (
       <div tabIndex={-1} id="app-focus-root">
+        <TooltipActivator />
         <ReactUnmounter />
         <Switch>
           <Route exact path="/start" component={Home}/>
