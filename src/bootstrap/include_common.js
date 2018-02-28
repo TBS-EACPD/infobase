@@ -3,9 +3,6 @@
 module.exports = exports = {};
 
 require('./include_basic_dependencies.js');
-require('../../external-dependencies/signals.min.exec.js');
-require('../../external-dependencies/hasher.min.exec.js');
-require('../../external-dependencies/crossroads.min.exec.js');
 require('../../external-dependencies/textencoder-lite.min.exec.js');
 require('../../external-dependencies/pako_inflate.min.exec.js');
 require('../../external-dependencies/typeahead.min.exec.js');
