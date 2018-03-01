@@ -28,7 +28,17 @@ export class Partition extends React.Component {
   constructor(){
     super()
     this.state = {loading: true};
-    this.update_url = (method, value_attr) => this.props.history.push(`/partition/${method}/${value_attr}`);
+    this.update_url = (method, value_attr) => {
+      const new_path = `partition/${method}/${value_attr}`;
+
+      this.props.history.push('/'+new_path);
+
+      const el_to_update = document.querySelector('#wb-lng a');
+      const link = _.first(el_to_update.href.split("#"));
+      if(link){
+        el_to_update.href = `${link}#${new_path}`;
+      }
+    }
   }
   componentDidMount(){
     ensure_loaded({
