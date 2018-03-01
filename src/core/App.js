@@ -39,7 +39,6 @@ export class App extends React.Component {
         <PotentialSurveyBox />
         <EasyAccess />
         <Switch>
-          <Route exact path="/start" component={Home}/>
           <Route path="/metadata/:data_source?" component={MetaData}/>
           <Route path="/igoc/:grouping?" component={IgocExplorer} />
           <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={ResourceExplorer} />
@@ -48,7 +47,7 @@ export class App extends React.Component {
           <Route path="/partition/:method?/:value_attr?" component={Partition} />
           <Route path="/explore-:perspective?" component={BubbleExplore} />
           <Route path="/rpb/:config?" component={ReportBuilder} />
-          <Route path="/start" component={Home} />
+          <Route path="/" component={Home} />
         </Switch>
       </div>
     );
