@@ -223,13 +223,13 @@ class Explorer extends React.Component {
       }
       <div className="tabbed_content">
         <ul className="tabbed_content_label_bar">
-          <li className={classNames("tab_label", doc==="drr16" && "active_tab")}>
-            <a href={`#resource-explorer/${hierarchy_scheme}/drr166`} role="button" className="tab_label_text">
+          <li className={classNames("tab_label", doc==="drr16" && "active_tab")} onClick={()=> this.refs.drr166_link.click()}>
+            <a href={`#resource-explorer/${hierarchy_scheme}/drr166`} role="button" className="tab_label_text" ref="drr166_link">
               <TextMaker text_key="DRR_resources_option_title" />
             </a>
           </li>
-          <li className={classNames("tab_label", doc==="dp17" && "active_tab")}>
-            <a href={`#resource-explorer/${hierarchy_scheme}/dp17`} role="button" className="tab_label_text">
+          <li className={classNames("tab_label", doc==="dp17" && "active_tab")} onClick={()=> this.refs.dp17_link.click()}>
+            <a href={`#resource-explorer/${hierarchy_scheme}/dp17`} role="button" className="tab_label_text" ref="dp17_link">
               <TextMaker text_key="DP_resources_option_title" />
             </a>
           </li>

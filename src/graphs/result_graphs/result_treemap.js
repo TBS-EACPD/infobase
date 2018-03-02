@@ -217,24 +217,26 @@ class SingleSubjExplorer extends React.Component {
       return <div className="tabbed_content">
         <ul className="tabbed_content_label_bar">
           <li className={classNames("tab_label", doc==="drr16" && "active_tab")} onClick={()=> tab_on_click('drr16')}>
-            <a 
-              href="#" 
+            <span 
+              tabIndex={0}
               role="button" 
               className="tab_label_text" 
               onClick={()=> tab_on_click('drr16')}
+              onKeyPress={(e)=> e.charCode===13 && tab_on_click('drr16')}
             >
               <TextMaker text_key="DRR_results_option_title" />
-            </a>
+            </span>
           </li>
           <li className={classNames("tab_label", doc==="dp17" && "active_tab")} onClick={()=> tab_on_click('dp17')}>
-            <a 
-              href="#"
+            <span 
+              tabIndex={0}
               role="button"
               className="tab_label_text"
               onClick={()=> tab_on_click('dp17')}
+              onKeyPress={(e)=> e.charCode===13 && tab_on_click('dp17')}
             >
               <TextMaker text_key="DP_results_option_title" />
-            </a>
+            </span>
           </li>
         </ul>
         <div className="tabbed_content_pane">
