@@ -4,7 +4,7 @@ import "./infographic.ib.yaml";
 import { StandardRouteContainer } from '../core/NavComponents';
 import { createSelector } from 'reselect';
 import { log_standard_event } from '../core/analytics.js';
-
+import AccessibleBubbleMenu from './a11y_bubble_menu.js';
 
 
 const { shallowEqualObjectsOverKeys } = require('../core/utils.js');
@@ -17,8 +17,10 @@ const { ReactPanelGraph } = require('../core/PanelCollectionView.js');
 const { BUBBLE_MENU : { BubbleMenu } } = require('../core/D3');
 
 
+
 const {
   TextMaker,
+  TM,
   SpinnerWrapper,
   EverythingSearch,
 } = require('../util_components');
@@ -102,6 +104,7 @@ const sorted_bubbles_for_subj = createSelector(
           <header>${obj.title(subject)}</header>
           <p>${obj.description(subject)}</p>
         `,
+        a11y_description: `<p>${obj.description(subject)}</p>`,
         className: obj.className,
         active: obj.id === active_bubble,
       };
@@ -143,34 +146,42 @@ class InfoGraph_ extends React.Component {
 
     return <div>
       <AnalyticsSynchronizer {...this.props} />
-      <div className="row mrgn-bttm-md">
-        <div 
-          className="col-md-8" 
-        >
-          <EverythingSearch 
-            include_gov={false} 
-            href_template={subj => infograph_href_template(subj,null,true)}
-            search_text={text_maker('subject_search_placeholder')}
-            large={true}
-            include_tags={true}
-            include_programs={true}
-            include_glossary={false}
-            include_crsos={true}
-            include_tables={false}
-            org_scope="orgs_with_data_with_gov"
-          />
-        </div>
-        <div 
-          className="col-md-4" 
-        >
-          <a 
-            href="#resource-explorer" 
-            className="btn-lg btn btn-ib-primary btn-block"
-          > 
-            <TextMaker text_key="infograph_explorer_link" />
+      {
+        window.is_a11y_mode ? 
+        <div>
+          <a href="#resource_explorer">
+            <TM k="a11y_search_other_infographs" />
           </a>
+        </div> :
+        <div className="row mrgn-bttm-md">
+          <div 
+            className="col-md-8" 
+          >
+            <EverythingSearch 
+              include_gov={false} 
+              href_template={subj => infograph_href_template(subj,null,true)}
+              search_text={text_maker('subject_search_placeholder')}
+              large={true}
+              include_tags={true}
+              include_programs={true}
+              include_glossary={false}
+              include_crsos={true}
+              include_tables={false}
+              org_scope="orgs_with_data_with_gov"
+            />
+          </div>
+          <div 
+            className="col-md-4" 
+          >
+            <a 
+              href="#resource-explorer" 
+              className="btn-lg btn btn-ib-primary btn-block"
+            > 
+              <TextMaker text_key="infograph_explorer_link" />
+            </a>
+          </div>
         </div>
-      </div>
+      }
       <div>
         <Panel>
           <PanelHeading headerType="h3">
@@ -195,16 +206,29 @@ class InfoGraph_ extends React.Component {
                   <SpinnerWrapper scale={4} /> 
                 </div>
               }
-              <nav>
-                <BubbleMenu 
-                  items={sorted_bubbles}
-                />
-              </nav>
+              {
+                window.is_a11y_mode ? 
+                <AccessibleBubbleMenu items={sorted_bubbles} /> : 
+                <BubbleMenu items={sorted_bubbles} />
+              }
             </div>
           </PanelBody>
         </Panel>
       </div>
       <div>
+        { window.is_a11y_mode &&
+          <p
+            id="infographic-explanation-focus"
+            tabIndex={0}
+            aria-live="polite"        
+          >
+            { 
+              loading ? 
+              "Loading..." :
+              text_maker("a11y_infograph_description")
+            }
+          </p>
+        }
         { loading ? null : 
           _.map(panel_keys, graph_key => 
             <ReactPanelGraph 

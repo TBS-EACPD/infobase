@@ -1,3 +1,4 @@
+//TODO: this whole tree is basically dead code. Get rid of it but don't forget how apollo and panels can work together! 
 import '../../bootstrap/include_common.js';
 import '../../../external-dependencies/spin.min.exec.js';
 

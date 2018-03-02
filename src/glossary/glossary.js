@@ -55,13 +55,15 @@ function get_glossary_items_by_letter(){
 const Glossary_ = ({ active_key, items_by_letter }) => (
   <div id="#glossary-key">
     <div className="col-sm-12 col-md-8 col-md-offset-2 font-large">
-      <div 
-        aria-hidden={true}
-        id="glossary_search"
-        className='org_list font-xlarge mrgn-bttm-lg'
-      >
-        <GlossarySearch />
-      </div>
+      { !window.is_a11y_mode &&
+        <div 
+          aria-hidden={true}
+          id="glossary_search"
+          className='org_list font-xlarge mrgn-bttm-lg'
+        >
+          <GlossarySearch />
+        </div>
+      }
       <div
         aria-hidden={true}
         className="glossary-letters mrgn-bttm-xl"

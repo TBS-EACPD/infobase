@@ -99,6 +99,8 @@ class PanelGraph {
       return false; 
     }
 
+    info.is_a11y_mode = window.is_a11y_mode;
+
     const graph_args = calc_func.call(this,subject,info, options);
     if(graph_args === false){ return false; }
 

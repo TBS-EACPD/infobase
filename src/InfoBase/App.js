@@ -1,8 +1,8 @@
-import { ReactUnmounter } from './NavComponents';
+import { ReactUnmounter } from '../core/NavComponents';
 
 import { Route, Switch } from 'react-router';
 //import { Link, NavLink } from 'react-router-dom';
-import { initialize_analytics } from './analytics.js';
+import { initialize_analytics } from '../core/analytics.js';
 
 export const app_reducer = (state={ lang: window.lang }, { type, payload }) => {
   //doesn't do anything yet...
@@ -19,8 +19,8 @@ import { Glossary } from '../glossary/glossary.js';
 import { BubbleExplore } from '../dept_explore/dept_explore.js';
 import { ReportBuilder } from '../rpb/index.js';
 import { TooltipActivator } from '../glossary/Tooltips';
-import { PotentialSurveyBox } from './survey_link';
-import { EasyAccess } from './EasyAccess';
+import { PotentialSurveyBox } from '../core/survey_link';
+import { EasyAccess } from '../core/EasyAccess';
 
 
 // Now you can dispatch navigation actions from anywhere!

@@ -22,17 +22,18 @@ const app = a11y_client || new_client || old_client;
 
 
 const options_by_app = {
+  //new client is getting killed off, I'll leave the a11y part here in case we forget how apollo works.
   new_client: {
-    entry: './src/new_client/index.js',
+    entry: './src/new_client/a11y/index.js',
     get_output: language => ({
       path: path.resolve(__dirname, '../build/new_client/'),
-      filename: `app-${language}.min.js`,
+      filename: `app-a11y-${language}.min.js`,
     }),
   },
   a11y_client: {
-    entry: './src/new_client/a11y/index.js',
+    entry: './src/InfoBase/a11y_root.js',
     get_output: language =>({
-      path: path.resolve(__dirname, '../build/new_client/'),
+      path: path.resolve(__dirname, '../build/InfoBase/'),
       filename: `app-a11y-${language}.min.js`,
     }),
   },

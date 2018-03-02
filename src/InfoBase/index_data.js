@@ -66,6 +66,15 @@ const index_lang_lookups = {
       <li><a href="https://www.canada.ca/fr.html">Visiter Canada.ca</a></li>
     `,
   },
+  script_url: {
+    en: "app-en.min.js",
+    fr: "app-fr.min.js",
+  },
+  a11y_script_url: {
+    en: "app-a11y-en.min.js",
+    fr: "app-a11y-fr.min.js",
+  },
+
 };
   
 

@@ -1,4 +1,4 @@
-const { App, app_reducer }  = require('../core/App.js');
+require('../bootstrap/include_common.js');
 
 const ReactDOM = require('react-dom')
 
@@ -46,23 +46,7 @@ const table_defs = [
   require('../tables/table305/table305.js'), //prog_by_sobj
 ];
 
-require('../home/home.js');
-// require("../igoc_explorer/igoc_explorer.js");
-// require("../dept_explore/dept_explore");
-// require("../rpb/index.js");
-// require("../glossary/glossary");
-require("../metadata/metadata.js");
-// require("../infographic/infographic");
-
-// require('../gen_expl/gen_expl.js');
-// require('../program_explorer/resource-explorer.js');
-require('../program_explorer2/pe2.js');
-
-// require("../graph_route/graph_route.js");
-// require("../footnote_inventory/footnote_inventory.js");
-
-
-module.exports  = function start({spinner, app_el}){
+module.exports  = function bootstrap(App, app_reducer, done){
   
   WebFont.load({
     google: {
@@ -91,6 +75,7 @@ module.exports  = function start({spinner, app_el}){
 
     // Now you can dispatch navigation actions from anywhere!
     // store.dispatch(push('/foo'))
+    done();
 
     ReactDOM.render( 
       <Provider store={store}>
@@ -103,9 +88,6 @@ module.exports  = function start({spinner, app_el}){
     ); 
 
 
-
-    spinner.stop();
-    d4.select(app_el).attr('aria-busy', false);
 
   });
 

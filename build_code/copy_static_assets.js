@@ -162,10 +162,22 @@ function get_index_pages(){
   const en_lang_lookups = _.mapValues(index_lang_lookups, 'en');
   const fr_lang_lookups = _.mapValues(index_lang_lookups, 'fr');
 
-  return {
-    en: template_func(en_lang_lookups),
-    fr: template_func(fr_lang_lookups),
-  };
+
+  const a11y_template = file_to_str("./src/InfoBase/index.hbs.html");
+  const a11y_template_func = Handlebars.compile(a11y_template);
+
+  return [
+    {
+      file_prefix: "index",
+      en: template_func(en_lang_lookups),
+      fr: template_func(fr_lang_lookups),
+    },
+    {
+      file_prefix: "index-basic",
+      en: a11y_template_func(_.assign({}, en_lang_lookups, { script_url: en_lang_lookups.a11y_script_url })),
+      fr: a11y_template_func(_.assign({}, fr_lang_lookups, { script_url: fr_lang_lookups.a11y_script_url })),
+    },
+  ];
 }
 
 function make_dir_if_exists(dir_name){
@@ -281,11 +293,14 @@ function build_proj(PROJ){
     console.log('copying:' + small_name);
     fse.copySync(f_name, dir+'/'+small_name, {clobber:true});
   });
-  _.each(get_index_pages(), (file, lang) => {
-    const lang_suffix = lang === 'en' ? "eng" : "fra";
+  _.each(get_index_pages(), ({file_prefix, en, fr }) => {
     fs.writeFileSync(
-      `${dir}/index-${lang_suffix}.html`,
-      file
+      `${dir}/${file_prefix}-eng.html`,
+      en
+    );
+    fs.writeFileSync(
+      `${dir}/${file_prefix}-fra.html`,
+      fr
     );
   });
 
