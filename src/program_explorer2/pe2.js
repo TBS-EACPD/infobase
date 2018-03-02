@@ -1052,8 +1052,7 @@ class GovPartition {
 
       const intro_popup_fader = this.container.select(".visual")
         .insert("div",".controls")
-        .classed("partition-diagram-fader",true)
-        .style("width", this.container.select(".visual").node().offsetWidth+"px");
+        .classed("partition-diagram-fader",true);
 
       const intro_popup_cleanup = function(){
         intro_popup.remove();

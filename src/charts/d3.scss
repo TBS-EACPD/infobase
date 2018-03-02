@@ -420,10 +420,11 @@ ul.partition-intro-two-col-list {
 
 .__partition__ > .visual > .partition-diagram-fader {
   height: 100%;
+  width: inherit;
   position: absolute;
   background-color: rgba(4, 18, 37, 0.81);
   border-radius: 10px;
-  z-index: 101;  
+  z-index: 101;
 }
 
 .partition-content:focus a.minimize.hovering,
