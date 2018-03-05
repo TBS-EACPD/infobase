@@ -223,18 +223,17 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
             </span>
           </div>
           <div className="status-icon-table__word">
-            <a
+            <span
               className="link-unstyled"
-              aria-hidden="true" 
-              href="#"
+              tabIndex={0}
+              aria-hidden="true"
               data-glossary-key={icon_key_to_glossary_key[icon_key]}
               data-toggle="tooltip"
               data-html="true"
               data-container="body"
-              onClick={_.noop}
             >
               {result_simple_statuses[icon_key].text}
-            </a>
+            </span>
           </div>
 
         </button>
