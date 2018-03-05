@@ -280,36 +280,46 @@ class GranularView extends React.Component {
         </table>
 
         {!excel_mode && pages.length > 1 && 
-      <div className="pagination-container">
-        <p className="sr-only">
-          <TextMaker text_key="pagination_a11y" args={{current: page_num, total: pages.length }} />
-        </p>
-        <ul className="pagination">
-          {_.map(pages, (data,ix)=> 
-            <li 
-              key={ix}
-              className={classNames(ix===page_num && 'active')}
-            >
-              <a 
-                href="#" 
-                style={ix===page_num ? {color:'#fcfcfc'} : null }
-                disabled={page_num === ix}
-                role="button" 
-                onClick={ 
-                  ix === page_num ?
-                  null : 
-                  ()=> {
-                    on_set_page(ix);
-                    this.refs.table.focus();
-                  }
-                }
-              >
-                {ix+ 1}
-              </a>
-            </li>
-          )}
-        </ul> 
-      </div>
+          <div className="pagination-container">
+            <p className="sr-only">
+              <TextMaker text_key="pagination_a11y" args={{current: page_num, total: pages.length }} />
+            </p>
+            <ul className="pagination">
+              {_.map(pages, (data,ix)=> 
+                <li 
+                  key={ix}
+                  className={classNames(ix===page_num && 'active')}
+                >
+                  <span
+                    tabIndex={0}
+                    style={ix===page_num ? {color:'#fcfcfc'} : null }
+                    disabled={page_num === ix}
+                    role="button" 
+                    onClick={ 
+                      ix === page_num ?
+                        null : 
+                        ()=> {
+                          on_set_page(ix);
+                          this.refs.table.focus();
+                        }
+                    }
+                    onKeyPress={
+                      ix === page_num ?
+                        null : 
+                        (e)=> {
+                          if (e.charCode===13){
+                            on_set_page(ix);
+                            this.refs.table.focus();
+                          }
+                        }
+                    }
+                  >
+                    {ix+ 1}
+                  </span>
+                </li>
+              )}
+            </ul> 
+          </div>
         }
       </div>
     )
