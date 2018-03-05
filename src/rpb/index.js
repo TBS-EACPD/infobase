@@ -172,7 +172,7 @@ class RPB extends React.Component {
           if(_.isEmpty(config_str)){ 
             return hash;
           } else {
-            let state = url_state_selector(config_str);
+            let state = _.cloneDeep(url_state_selector(config_str));
             delete state.filter;
             return rpb_link((state));
           }
