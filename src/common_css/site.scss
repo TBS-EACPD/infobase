@@ -439,6 +439,13 @@ a, a:visited {
   }
 }
 
+.link-styled {
+  cursor: pointer;
+  text-decoration: none;
+  color: $ibLinkColor;
+  background-color: transparent;
+}
+
 /*
 .easy-access > span > a,
 ol.breadcrumb > li > :last-child {
