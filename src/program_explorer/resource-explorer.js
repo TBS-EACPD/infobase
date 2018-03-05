@@ -47,14 +47,15 @@ const { ensure_loaded } = require('../core/lazy_loader.js');
 
 const HierarchySelectionItem = ({title, text, active, url }) => (
   <a 
-    role="radio" 
+    role="radio"
+    title={title}
     className={classNames("link-unstyled hierarchy-selection-item", active && "active")}
     tabIndex={0}
     aria-checked={active}
     href={url}
   >
     <div className="hierarchy-selection-item__header">
-      <span><a href="#">{title}</a></span>
+      <span className="link-styled">{title}</span>
     </div>
     <div className="hierarchy-selection-item__description">
       {text}
