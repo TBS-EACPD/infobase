@@ -5,6 +5,9 @@ const {
   D3} = require("./shared"); 
 
 const total_employment_render = function(panel, data){
+  if(window.is_a11y_mode){
+    return;
+  }
   const args={
     height : this.height,
     font_size : "16",

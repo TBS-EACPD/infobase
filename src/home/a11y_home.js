@@ -62,10 +62,10 @@ export const Home = () => {
         <section>
           <h3>
             <a href="#rpb/">
-              <TM k="explorer_home_title" />
+              <TM k="home_build_a_report" />
             </a>
           </h3>
-          <TM k="explorer_home_text" />
+          <TM k="report_builder_home_desc" />
         </section>
 
       </section>

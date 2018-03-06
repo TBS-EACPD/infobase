@@ -934,3 +934,19 @@ related_tags_title:
 related_tags:
   en: Programs under this tag also appear under the following tags
   fr: Les programmes relevant de cette étiquette relèvent également des étiquettes suivantes
+
+
+
+
+explorer_search:
+  en: Search
+  fr: Recherchez
+
+explorer_focus_mount:
+  en: Search results below
+  fr: Résultat de votre recherche ci-dessous
+
+
+explorer_search_is_optional:
+  en: Optionally filter the below data using search
+  fr: Vous pouvez choisir de filtrer les données ci-dessous en utilisant une barre de recherche

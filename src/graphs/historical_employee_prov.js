@@ -14,16 +14,7 @@ const prov_split_render = function(panel,data,options){
 
   const { graph_args } = data;
 
-  const formater =  formats["big_int_real_raw"];
-  const color_a =  a => `rgba(31, 119, 180,${a})`;
 
-  let historical_graph_container;
-
-  const row = panel.areas().graph.append("div").classed("frow no-container",true);
-  const legend_area = row.append("div").classed("fcol-md-3 fcol-xs-12",true);
-  const graph_area = row.append("div")
-    .classed("fcol-md-9 fcol-xs-12",true)
-    .style("position","relative");
   
   const has_qc = _.chain(graph_args.years_by_province)
     .map(d => _.has(d, "qclessncr"))
@@ -60,192 +51,207 @@ const prov_split_render = function(panel,data,options){
     })
     .value()
 
-  // calculate the maximum value to set the darkest
-  // shading
-  const max = d4.max(d4.values(_.last(years_by_province)));
-  // use the max to calibrate the scale
 
-  const color_scale = d4.scaleLinear()
-    .domain([0,max])
-    .range([0.2,1]);
-
-  // add legend
-  var list = D3.create_list(
-    legend_area.node(),
-    _.map( color_scale.ticks(5).reverse(), tick => 
-      ({
-        label : tick, 
-        active : true,
-      })
-    ),
-    {
-      html : d => formater(d.label)+"+",
-      legend : true,
-      width : "100%",
-      title : text_maker("legend"),
-      ul_classes : "legend",
-      interactive : false,
-      colors : label => color_a(color_scale(accounting.unformat(label))),
-    }
-  );
-
-  const ticks = _.map(people_years, y => `${run_template(y)}`);
+  if(!window.is_a11y_mode){
+    const formater =  formats["big_int_real_raw"];
+    const color_a =  a => `rgba(31, 119, 180,${a})`;
   
-  const canada_graph = new D3.CANADA.canada(graph_area.node(), {
-    color : "rgb(31, 119, 180)",
-    data : years_by_province,
-    ticks : ticks,
-    color_scale : color_scale,
-    formater : formater,
-  })
-
-  if (!window.is_mobile) {
-    // if it's not mobile, then the graph can go next to the map , under the legend
-
-    historical_graph_container = d4.select(legend_area.node()).append("div");
-
-    // copy the class names and style properties of the legend to ensure the graph fits in nicely
-    historical_graph_container.node().className = list.legend.node().className;
-    historical_graph_container.node().style.cssText = list.legend.node().style.cssText;
-    
-    historical_graph_container.styles({ 
-      "margin-top" : "10px", 
-    });
-
-  } else {
-    historical_graph_container  = d4.select(graph_area.node()).append("div");
-  }
+    let historical_graph_container;
+  
+    const row = panel.areas().graph.append("div").classed("frow no-container",true);
+    const legend_area = row.append("div").classed("fcol-md-3 fcol-xs-12",true);
+    const graph_area = row.append("div")
+      .classed("fcol-md-9 fcol-xs-12",true)
+      .style("position","relative");
 
 
-  const province_graph_title = function(prov){
-    if (prov === 'on' || prov === 'qc'){
-      prov += "lessncr";
-    }
-    if (prov === 'Canada'){
-      return text_maker("five_year_history") + " " + prov;
-    } else if (prov === 'ncr'){
-      return text_maker("five_year_history") + " " + (window.lang === 'en' ? "NCR" : "RCN");
-    } else {
-      return text_maker("five_year_history") + " " + provinces[prov].text;
-    }
-  }
+    // calculate the maximum value to set the darkest shading
+    const max = d4.max(d4.values(_.last(years_by_province)));
+    // use the max to calibrate the scale
 
-  let active_prov;
-  const add_graph = function(prov){
+    const color_scale = d4.scaleLinear()
+      .domain([0,max])
+      .range([0.2,1]);
 
-    var prov_data;
-    var container = historical_graph_container;
-
-    var no_data = false;
-    if (prov !== "Canada") {
-      prov_data = _.map(years_by_province, prov);
-      no_data = _.every(prov_data,_.isUndefined);
-    } 
-    
-    if (prov ==='Canada' || no_data) {
-      prov = 'Canada';
-      prov_data = _.map(years_by_province,function(year_data){
-        return d4.sum(_.values(year_data));
-      });
-    }
-
-    if (container.datum() === prov){
-      return;
-    } else {
-      container.datum(prov);
-    }
-    //empty out the group
-    container.selectAll("*").remove();
-    // add title
-    container.append("p")
-      .classed("mrgn-bttm-0 mrgn-tp-0 centerer", true)
-      .html(province_graph_title(prov));
-    // add in the require div with relative positioning so the
-    // labels will line up with the graphics
-    container.append("div")
-      .styles({ 
-        "margin-bottom":"10px",
-        position:"relative",
-      });
-
-    if(window.is_mobile ){ // create a bar graph
-      (new D3.BAR.bar(
-        container.select("div").node(),
-        {
-          colors : ()=>"#1f77b4",
-          formater : formater,
-          series : {"":prov_data},
-          height : 200,
-          ticks : ticks,
-          margins: {top:10,bottom:10,left:10,right:10 },
-        }
-      )).render();
-
-      container.selectAll("rect").styles({
-        "opacity" :  color_scale(_.last(prov_data)) }); 
-      container.selectAll(".x.axis .tick text")
-        .styles({ 'font-size' : "10px" });
-    } else { //use hbar
-
-      (new D3.HBAR.hbar(
-        container.select("div").node(),
-        {
-          x_scale : d4.scaleLinear(),
-          // x_scale : d3.scale.linear(),
-          axisFormater : formater,
-          formater : formater,
-          tick_number : 5,
-          data : ticks.map((tick,i) => ({value : prov_data[i], name: tick}) ),
-        }
-      )).render();
-    }
-  };
-  canada_graph.dispatch.on('dataMouseEnter',prov => {
-    active_prov = true;
-    add_graph(prov);    
-  });
-  canada_graph.dispatch.on('dataMouseLeave',() => {
-    _.delay(() => {
-      if (!active_prov) {
-        add_graph("Canada");
+    // add legend
+    var list = D3.create_list(
+      legend_area.node(),
+      _.map( color_scale.ticks(5).reverse(), tick => 
+        ({
+          label : tick, 
+          active : true,
+        })
+      ),
+      {
+        html : d => formater(d.label)+"+",
+        legend : true,
+        width : "100%",
+        title : text_maker("legend"),
+        ul_classes : "legend",
+        interactive : false,
+        colors : label => color_a(color_scale(accounting.unformat(label))),
       }
-    }, 200);
-    active_prov = false;
+    );
 
-  });
-  canada_graph.render();
-  add_graph("Canada");
+    const ticks = _.map(people_years, y => `${run_template(y)}`);
+    
+    const canada_graph = new D3.CANADA.canada(graph_area.node(), {
+      color : "rgb(31, 119, 180)",
+      data : years_by_province,
+      ticks : ticks,
+      color_scale : color_scale,
+      formater : formater,
+    })
+
+    if (!window.is_mobile) {
+      // if it's not mobile, then the graph can go next to the map , under the legend
+
+      historical_graph_container = d4.select(legend_area.node()).append("div");
+
+      // copy the class names and style properties of the legend to ensure the graph fits in nicely
+      historical_graph_container.node().className = list.legend.node().className;
+      historical_graph_container.node().style.cssText = list.legend.node().style.cssText;
+      
+      historical_graph_container.styles({ 
+        "margin-top" : "10px", 
+      });
+
+    } else {
+      historical_graph_container  = d4.select(graph_area.node()).append("div");
+    }
+
+
+    const province_graph_title = function(prov){
+      if (prov === 'on' || prov === 'qc'){
+        prov += "lessncr";
+      }
+      if (prov === 'Canada'){
+        return text_maker("five_year_history") + " " + prov;
+      } else if (prov === 'ncr'){
+        return text_maker("five_year_history") + " " + (window.lang === 'en' ? "NCR" : "RCN");
+      } else {
+        return text_maker("five_year_history") + " " + provinces[prov].text;
+      }
+    }
+
+    let active_prov;
+    const add_graph = function(prov){
+
+      var prov_data;
+      var container = historical_graph_container;
+
+      var no_data = false;
+      if (prov !== "Canada") {
+        prov_data = _.map(years_by_province, prov);
+        no_data = _.every(prov_data,_.isUndefined);
+      } 
+      
+      if (prov ==='Canada' || no_data) {
+        prov = 'Canada';
+        prov_data = _.map(years_by_province,function(year_data){
+          return d4.sum(_.values(year_data));
+        });
+      }
+
+      if (container.datum() === prov){
+        return;
+      } else {
+        container.datum(prov);
+      }
+      //empty out the group
+      container.selectAll("*").remove();
+      // add title
+      container.append("p")
+        .classed("mrgn-bttm-0 mrgn-tp-0 centerer", true)
+        .html(province_graph_title(prov));
+      // add in the require div with relative positioning so the
+      // labels will line up with the graphics
+      container.append("div")
+        .styles({ 
+          "margin-bottom":"10px",
+          position:"relative",
+        });
+
+      if(window.is_mobile ){ // create a bar graph
+        (new D3.BAR.bar(
+          container.select("div").node(),
+          {
+            colors : ()=>"#1f77b4",
+            formater : formater,
+            series : {"":prov_data},
+            height : 200,
+            ticks : ticks,
+            margins: {top:10,bottom:10,left:10,right:10 },
+          }
+        )).render();
+
+        container.selectAll("rect").styles({
+          "opacity" :  color_scale(_.last(prov_data)) }); 
+        container.selectAll(".x.axis .tick text")
+          .styles({ 'font-size' : "10px" });
+      } else { //use hbar
+
+        (new D3.HBAR.hbar(
+          container.select("div").node(),
+          {
+            x_scale : d4.scaleLinear(),
+            // x_scale : d3.scale.linear(),
+            axisFormater : formater,
+            formater : formater,
+            tick_number : 5,
+            data : ticks.map((tick,i) => ({value : prov_data[i], name: tick}) ),
+          }
+        )).render();
+      }
+    };
+    canada_graph.dispatch.on('dataMouseEnter',prov => {
+      active_prov = true;
+      add_graph(prov);    
+    });
+    canada_graph.dispatch.on('dataMouseLeave',() => {
+      _.delay(() => {
+        if (!active_prov) {
+          add_graph("Canada");
+        }
+      }, 200);
+      active_prov = false;
+
+    });
+    canada_graph.render();
+    add_graph("Canada");
+    
+  }
+  
 
   // Add a11y table
-  const ordered_provs = [ 
-    {key: 'ncr', display: "ncr" },
-  ].concat(
-    _.chain(provinces)
-      .map( (val,key) => ({ key, display: val.text }) )
-      .reject( ({key}) => _.includes([
-        'qclessncr',
-        'onlessncr',
-        "onncr",
-        'qcncr',
-      ], key ) 
-      )
-      .value()
-  );
+  const ordered_provs = _.chain(provinces)
+    .map( (val,key) => ({ key, display: val.text }) )
+    .reject( ({key}) => _.includes([
+      'qclessncr',
+      'onlessncr',
+      "onncr",
+      'qcncr',
+    ], key ) 
+    )
+    .value();
   
-  D3.create_a11y_table({
-    container: panel.areas().graph, 
-    label_col_header: text_maker("prov"), 
-    data_col_headers: _.map(people_years, y => `${run_template(y)}`), 
-    data: _.map(ordered_provs, function(op){
-      return {
-        label: op.display,
-        data: _.map(years_by_province, function(ybp){
-          return ybp[op.key];
-        }),
-      };
-    }), 
-    table_name : text_maker("historical_employee_prov_title"),
-  });
+  if(window.is_a11y_mode){
+
+    D3.create_a11y_table({
+      container: panel.areas().graph, 
+      label_col_header: text_maker("prov"), 
+      data_col_headers: _.map(people_years, y => `${run_template(y)}`), 
+      data: _.map(ordered_provs, function(op){
+        return {
+          label: op.display,
+          data: _.map(years_by_province, function(ybp){
+            return ybp[op.key];
+          }),
+        };
+      }), 
+      table_name : text_maker("historical_employee_prov_title"),
+    });
+  }
 
 };
 

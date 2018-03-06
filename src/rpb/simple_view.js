@@ -256,7 +256,7 @@ class SimpleView extends React.Component {
                 key={nick}
                 onClick={()=>{ on_header_click(nick); }}
                 style={{cursor:'pointer'}}
-                scope="column"
+                scope="col"
               >
                 {display}
                 <SortIndicators 

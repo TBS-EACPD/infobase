@@ -352,13 +352,13 @@ class DetailedProgramSplit extends React.Component {
         <table>
           <thead>
             <tr>
-              <th scope="column">
+              <th scope="col">
                 <TextMaker text_key="program"/>
               </th>
-              <th scope="column">
+              <th scope="col">
                 <TextMaker text_key="so"/>
               </th>
-              <th scope="column">
+              <th scope="col">
                 {run_template("{{pa_last_year}}")} <TextMaker text_key="expenditures" /> 
               </th>
             </tr>

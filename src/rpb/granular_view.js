@@ -182,7 +182,7 @@ class GranularView extends React.Component {
           <thead>
             <tr className="table-header">
               <th 
-                scope="column"
+                scope="col"
                 style={{ cursor: 'pointer' }}
                 key="dept"
               > 
@@ -198,7 +198,7 @@ class GranularView extends React.Component {
                 ...data_columns,
               ].map( ({nick, fully_qualified_name}) => 
                 <th 
-                  scope="column"
+                  scope="col"
                   style={{ cursor: 'pointer' }}
                   key={nick}
                 >

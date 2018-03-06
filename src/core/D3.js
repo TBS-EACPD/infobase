@@ -312,11 +312,15 @@ D3.create_a11y_table = function({
     container = d4.select(container);
   }
   const a11y_area = container.append('div');
-  a11y_area.attr('class','sr-only');
+  if(!window.is_a11y_mode){
+    a11y_area.attr('class','sr-only');
+  }
   
   // Note: strips html from tick (ie. the </br> in most people year ticks)
   const table_content = <div>
-    <table>
+    <table
+      className="table table-striped table-bordered"
+    >
       <caption>
         <div> 
           { 
@@ -328,14 +332,30 @@ D3.create_a11y_table = function({
       </caption>
       <thead>
         <tr>
-          <td scope="column"> {label_col_header || ""} </td>
-          {_.map(data_col_headers, (tick,i) => <td key={i}> <span dangerouslySetInnerHTML={{__html:tick}} /> </td>)} 
+          <th 
+            scope={
+              label_col_header ? 
+              "col" :
+              null
+            }
+          >
+            {label_col_header || ""}
+          </th>
+          {_.map(data_col_headers, (tick,i) => <th key={i}> <span dangerouslySetInnerHTML={{__html:tick}} /> </th>)} 
         </tr>
       </thead>
       <tbody>
         {_.map(data, ({label, data}) => 
           <tr key={label}>
-            <th scope="row"> {label} </th>
+            <th 
+              scope={
+                !label_col_header ?
+                "row" :
+                null
+              }
+            >
+              {label}
+            </th>
             {
               _.isArray(data) ? 
               _.map(data, (d,i) => <td key={i}> {d} </td> ) :

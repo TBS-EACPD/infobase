@@ -317,12 +317,22 @@ class Explorer extends React.Component {
           }}
         >
           <input 
+            aria-label={text_maker("explorer_search_is_optional")}            
             className="form-control input-lg"
             type="text"
             style={{width:"100%", backgroundColor:"#fafafa"}}
             placeholder={text_maker('igoc_search_text')}
             onChange={evt => this.handleQueryChange(evt.target.value)}
+
           />
+          {
+            window.is_a11y_mode &&
+            <input 
+              type="submit"
+              name="search"
+              value={text_maker("explorer_search")}
+            />
+          }
         </form>
         <div className="igoc-checkbox-and-count-row">
           <label>
@@ -343,6 +353,7 @@ class Explorer extends React.Component {
         tabIndex={-1} 
         ref="focus_mount" 
         style={{position:'relative'}}
+        aria-label={text_maker("explorer_focus_mount")}
       >
         {loading && 
           <div className="loading-overlay">

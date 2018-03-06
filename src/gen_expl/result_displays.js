@@ -296,13 +296,12 @@ const standard_root_display = ({node, children}) => {
     <FlipMove
       staggerDurationBy="0"
       duration={500}
-      typeName="ul"
-      className="list-unstyled"
+      typeName="div"
     > 
       {_.map(children, ({element, node}) => 
-        <li key={node.id}>
+        <div key={node.id}>
           {element}
-        </li>
+        </div>
       )}
     </FlipMove>
   </div>
@@ -317,8 +316,8 @@ const single_subj_root_display = ({node, children}) => {
       <FlipMove
         staggerDurationBy="0"
         duration={500}
-        typeName="ul"
-        className="list-unstyled"
+        typeName="div"
+        className="div"
       > 
         {
           _.chain(children)

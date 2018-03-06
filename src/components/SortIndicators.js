@@ -4,11 +4,7 @@ const SortIndicator = ({ sortDirection, active }) => (
   <button
     className="button-unstyled rpb-sort-indicator"
     style={{ 
-      color: (
-        active ?  
-        "white" : 
-        'rgba(180,180,180,0.3)'
-      ),
+      color: "white",
       fontSize: '1.2em',
     }}
     aria-label={text_maker(
@@ -17,7 +13,17 @@ const SortIndicator = ({ sortDirection, active }) => (
       "a11y_sort_desc"  
     )}
   >
-    { sortDirection === 'ASC' ? "▲" : "▼" }
+    { 
+      active ? (
+        sortDirection === 'ASC' ? 
+        "▲" : 
+        "▼"         
+      ) : (
+        sortDirection === 'ASC' ? 
+        "△" : 
+        "▽"
+      )
+    }
   </button>
 );
 

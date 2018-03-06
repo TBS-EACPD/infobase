@@ -23,24 +23,31 @@ const total_hist_employment_render = function(panel,data){
   const { subject, graph_args } = data;
   const { series, ticks } = graph_args;
 
-  new D3.LINE.ordinal_line( panel.areas().graph.node(), {
-    series : series,
-    ticks : ticks,
-    colors : infobase_colors(),
-    add_yaxis : true,
-    add_xaxis : true,
-    y_axis : text_maker("employees"),
-    formater : formats["big_int_real_raw"],
-  }).render();
+  if(window.is_a11y_mode){
+    // Append the a11y table to the text area, as the whole graph area is aria-hidden. This will happen in any case where
+    // the graph area is not divided in to multiple areas.
+    D3.create_a11y_table({
+      // container: panel.areas().text, 
+      container: panel.areas().graph, 
+      label_col_header : text_maker("org"), 
+      data_col_headers: ticks, 
+      data : [{label: subject.sexy_name, data: series[""]}],
+    });
+  } else {
+    new D3.LINE.ordinal_line( panel.areas().graph.node(), {
+      series : series,
+      ticks : ticks,
+      colors : infobase_colors(),
+      add_yaxis : true,
+      add_xaxis : true,
+      y_axis : text_maker("employees"),
+      formater : formats["big_int_real_raw"],
+    }).render();
+  }
+  
 
-  // Append the a11y table to the text area, as the whole graph area is aria-hidden. This will happen in any case where
-  // the graph area is not divided in to multiple areas.
-  D3.create_a11y_table({
-    container: panel.areas().text, 
-    label_col_header : text_maker("org"), 
-    data_col_headers: ticks, 
-    data : [{label: subject.sexy_name, data: series[""]}],
-  });
+  
+  
   
 };
 

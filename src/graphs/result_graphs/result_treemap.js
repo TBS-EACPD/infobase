@@ -157,6 +157,7 @@ class SingleSubjExplorer extends React.Component {
       { _.get(base_hierarchy, "length") > 30 && 
         <div style={{marginTop: '15px'}}>
           <form
+
             style={{marginBottom: "15px"}}
             onSubmit={evt => {
               evt.preventDefault()
@@ -166,12 +167,21 @@ class SingleSubjExplorer extends React.Component {
             }}
           >
             <input 
+              aria-label={text_maker("explorer_search_is_optional")}
               className="form-control input-lg"
               type="text"
               style={{width:"100%"}}
               placeholder={text_maker("filter_results")}
               onChange={evt => this.handleQueryChange(evt.target.value)}
             />
+            {
+              window.is_a11y_mode &&
+              <input 
+                type="submit"
+                name="search"
+                value={text_maker("explorer_search")}
+              />
+            }
           </form>
         </div>
       }
@@ -179,6 +189,7 @@ class SingleSubjExplorer extends React.Component {
         tabIndex={-1} 
         ref="focus_mount" 
         style={{position:'relative'}}
+        aria-label={text_maker("explorer_focus_mount")}
       >
         {loading && 
           <div className="loading-overlay">

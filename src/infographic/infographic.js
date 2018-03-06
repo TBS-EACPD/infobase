@@ -149,7 +149,7 @@ class InfoGraph_ extends React.Component {
       {
         window.is_a11y_mode ? 
         <div>
-          <a href="#resource_explorer">
+          <a href="#resource-explorer">
             <TM k="a11y_search_other_infographs" />
           </a>
         </div> :

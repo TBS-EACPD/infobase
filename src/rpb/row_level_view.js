@@ -323,7 +323,7 @@ class RowLevelView extends React.Component {
           <thead>
             <tr className="table-header">
               <th 
-                scope="column"
+                scope="col"
                 style={{ cursor: 'pointer' }}
                 key="dept"
               > 
@@ -348,7 +348,7 @@ class RowLevelView extends React.Component {
                 ...sorted_col_objs,
               ].map(col => 
                 <th 
-                  scope="column"
+                  scope="col"
                   style={{ cursor: 'pointer' }}
                   key={col.nick}
                 >

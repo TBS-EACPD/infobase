@@ -410,10 +410,7 @@ class SubProgramResourceTree extends React.Component {
         {get_text(doc)}
       </div>
 
-      <div 
-        tabIndex={-1} 
-        ref="focus_mount" 
-      >
+      <div>
         { 
           React.createElement(GeneralTree, {
             root,

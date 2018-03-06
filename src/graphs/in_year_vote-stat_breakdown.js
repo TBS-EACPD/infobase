@@ -172,9 +172,9 @@ const TopTenTable = ({ rows, total_amt, complement_amt, isVoted }) => (
   >
     <thead>
       <tr className="table-header">
-        <th scope="column"><TextMaker text_key="org" /></th>
-        <th scope="column"><TextMaker text_key={ isVoted? "voted" : "stat" } /></th>
-        <th scope="column"><TextMaker text_key="authorities" /></th>
+        <th scope="col"><TextMaker text_key="org" /></th>
+        <th scope="col"><TextMaker text_key={ isVoted? "voted" : "stat" } /></th>
+        <th scope="col"><TextMaker text_key="authorities" /></th>
       </tr>
     </thead>
     <tbody>
