@@ -1,3 +1,5 @@
+import { log } from "async";
+
 const {
   formats,
   text_maker,
@@ -5,6 +7,9 @@ const {
   PanelGraph,
   years : {std_years},
   D3,
+  util_components: {
+    Format,
+  },
 } = require("./shared"); 
 const auth_cols = _.map(std_years, yr=>yr+"auth");
 const exp_cols = _.map(std_years, yr=>yr+"exp");
@@ -56,39 +61,63 @@ const calculate = function( subject,info,options ) {
 const render = function( panel, calculations, options ) {
 
   const ticks = _.map(std_years, run_template);
-  const colors = infobase_colors();
+  
   const graph_area = panel.areas().graph;
-  const legend_area = graph_area.append("div");
-  const new_graph_area = graph_area.append("div").style("position","relative");
   const {exp,auth,stacked} = calculations.graph_args;
-  let series_labels;
+  
+  const series_labels = (
+    stacked ? 
+    [text_maker("expenditures"),text_maker("unused_authorities" )] : 
+    [text_maker("authorities"),text_maker("expenditures")]
+  );
 
-  if (stacked){
-    series_labels = [text_maker("expenditures"),text_maker("unused_authorities" )];
-  } else {
-    series_labels = [text_maker("authorities"),text_maker("expenditures")];
-  }
-
-  D3.create_list(legend_area.node(), series_labels, {
-    colors ,
-    orientation : "horizontal",
-    legend : true,
-    ul_classes : "legend",
-  });
-
-  (new D3.BAR.bar( new_graph_area.node(),
-    {
-      colors ,
-      series_labels,
+  if(window.is_a11y_mode){
+    const data = _.zip(
       ticks,
-      stacked, 
-      formater : formats.compact_raw,
-      height : 400,
-      series : {
-        [series_labels[0]] :  stacked ? exp : auth,
-        [series_labels[1]] :  stacked ? auth : exp,
-      },
-    })).render();
+      (
+        stacked ? 
+        _.zip(exp, auth) :
+        _.zip(auth,exp)
+      )
+    ).map( ([label,data ])=>({
+      label,
+      /* eslint-disable react/jsx-key */
+      data: data.map( amt => <Format type="compact1" content={amt} /> ),
+    }));
+
+    D3.create_a11y_table({
+      container: graph_area,
+      data_col_headers: series_labels,
+      data,
+    });
+
+  } else {
+    const colors = infobase_colors();
+    const legend_area = graph_area.append("div");
+    const new_graph_area = graph_area.append("div").style("position","relative");
+
+    D3.create_list(legend_area.node(), series_labels, {
+      colors ,
+      orientation : "horizontal",
+      legend : true,
+      ul_classes : "legend",
+    });
+
+    (new D3.BAR.bar( new_graph_area.node(),
+      {
+        colors ,
+        series_labels,
+        ticks,
+        stacked, 
+        formater : formats.compact_raw,
+        height : 400,
+        series : {
+          [series_labels[0]] :  stacked ? exp : auth,
+          [series_labels[1]] :  stacked ? auth : exp,
+        },
+      })).render();
+  }
+  
 };
 
 new PanelGraph({
