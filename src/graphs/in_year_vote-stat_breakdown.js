@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 const {
   Subject,
   formats,
@@ -123,9 +124,11 @@ function graph_top({panel, calculations, isVoted}){
   };
   const graph_node = panel.areas().graph.node();
 
+  const show_pack = !window.is_a11y_mode;
+
   reactAdapter.render(
     <div className="row">
-      <div className="col-md-5 col-sm-12">
+      <div className={classNames(show_pack && "col-md-5","col-sm-12")}>
         <TopTenTable
           rows={rows}
           complement_amt={complement_amt}
@@ -133,33 +136,35 @@ function graph_top({panel, calculations, isVoted}){
           isVoted={isVoted}
         />
       </div>
-      <div className="col-md-7 col-sm-12"><div>
-        <CirclePack
-          {...{
-            zoomable : true,
-            data : packing_data,
-            value_attr : main_col,
-            colors: tbs_color(),
-            height : 500,
-            cycle_colours: true,
-            invisible_grand_parent : false,
-            top_font_size : 12,
-            hover_text_func(d){
-              let text = "";
+      { show_pack && 
+        <div className="col-md-7 col-sm-12"><div>
+          <CirclePack
+            {...{
+              zoomable : true,
+              data : packing_data,
+              value_attr : main_col,
+              colors: tbs_color(),
+              height : 500,
+              cycle_colours: true,
+              invisible_grand_parent : false,
+              top_font_size : 12,
+              hover_text_func(d){
+                let text = "";
 
-              if (d.depth === 0){ return; }
-              if (d.dept){
-                text += Subject.Dept.lookup(d.dept).sexy_name + " - ";
-              }
-              
-              text += d.data.desc + " - " + formats.compact1(d.value);
+                if (d.depth === 0){ return; }
+                if (d.dept){
+                  text += Subject.Dept.lookup(d.dept).sexy_name + " - ";
+                }
+                
+                text += d.data.desc + " - " + formats.compact1(d.value);
 
-              return text;
-            },
-            text_func,
-          }}
-        />
-      </div></div>
+                return text;
+              },
+              text_func,
+            }}
+          />
+        </div></div>
+      }
     </div>, 
     graph_node
   );

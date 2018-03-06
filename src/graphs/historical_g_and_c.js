@@ -24,24 +24,27 @@ const g_and_c_hist_render = function(panel, data){
     const g_and_c_data = graph_args.rows;
     const data_keys = Object.keys(g_and_c_data);
     // insert new row under the content row
-    const graph_parent = d4.select(find_parent(graph_area.node(),n=>d4.select(n).classed("panel-body"))); 
-    const new_row = graph_parent.insert("div",".row.source")
-      .classed("row",true)
-      .html(text_maker("historical_g_and_c_custom_new_row",{data_keys}));
     
-    new_row
-      .select("select")
-      .on("change", d => {
-        //The currently selected option index is kept in a
-        //property called selectedIndex on the select element.
-        //Selections are arrays, so elements can be accessed
-        //directly (e.g., selection[0][0]).
-        const target = d4.event.target;
-        const index = target.selectedIndex;
-        draw_graph(new_row, g_and_c_data[target[index].value]);
-      });
-    
-    draw_graph(new_row,g_and_c_data[data_keys[0]]);
+    if(!window.is_a11y_mode){
+      const graph_parent = d4.select(find_parent(graph_area.node(),n=>d4.select(n).classed("panel-body"))); 
+      const new_row = graph_parent.insert("div",".row.source")
+        .classed("row",true)
+        .html(text_maker("historical_g_and_c_custom_new_row",{data_keys}));
+      
+      new_row
+        .select("select")
+        .on("change", d => {
+          //The currently selected option index is kept in a
+          //property called selectedIndex on the select element.
+          //Selections are arrays, so elements can be accessed
+          //directly (e.g., selection[0][0]).
+          const target = d4.event.target;
+          const index = target.selectedIndex;
+          draw_graph(new_row, g_and_c_data[target[index].value]);
+        });
+      
+      draw_graph(new_row,g_and_c_data[data_keys[0]]);
+    }
 
     // Add a11y tables
     data_keys.forEach(d =>

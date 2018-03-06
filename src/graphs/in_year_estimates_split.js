@@ -1,7 +1,13 @@
+import { run_template } from "./shared";
+
 const {
   formats,
   PanelGraph,
   D3,
+  text_maker,
+  util_components: {
+    Format,
+  }
 } = require("./shared"); 
 
 const estimates_split_calculate = function(subject, info,options){
@@ -31,22 +37,44 @@ const estimates_split_render = function(panel,calculations,options){
     },
   } = calculations;
 
-  const static_bar_args = {
-    add_xaxis : true,
-    x_axis_line : true,
-    add_yaxis : false,
-    add_labels : true,
-    colors : infobase_colors(),
-    margin : {top: 20, right:20, left: 60, bottom: 80},
-    formater : formats.compact1,
-  };
+  if(window.is_a11y_mode){
+    const { series, ticks } = in_year_bar_args;
+    const data = _.chain(ticks)
+      .zip(series[""])
+      .map( ([label, amt])=> ({
+        label,
+        data: <Format type="compact1" content={amt} />,
+      }))
+      .value();
 
-  panel.areas().graph.attr('aria-hidden',"true")
 
-  let bar_mountpoint = panel.areas().graph;
+    D3.create_a11y_table({
+      // container: panel.areas().text, 
+      container: panel.areas().graph, 
+      label_col_header : text_maker("estimates_doc"), 
+      data_col_headers: [ run_template("{{est_in_year}}") ],
+      data : data,
+    });
+  } else {
 
-  const bar_instance = new D3.BAR.bar(bar_mountpoint.node(), static_bar_args);
-  bar_instance.render(in_year_bar_args);
+    const static_bar_args = {
+      add_xaxis : true,
+      x_axis_line : true,
+      add_yaxis : false,
+      add_labels : true,
+      colors : infobase_colors(),
+      margin : {top: 20, right:20, left: 60, bottom: 80},
+      formater : formats.compact1,
+    };
+
+    panel.areas().graph.attr('aria-hidden',"true")
+
+    let bar_mountpoint = panel.areas().graph;
+
+    const bar_instance = new D3.BAR.bar(bar_mountpoint.node(), static_bar_args);
+    bar_instance.render(in_year_bar_args);
+
+  }
 
 };
 

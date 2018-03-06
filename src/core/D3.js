@@ -127,147 +127,135 @@ D3.create_graph_with_legend = function(options){
   }
   data = data.value();
 
-  // if all the numbers are positive, then default to
-  // displaying to them in a stacked format  and add
-  // the extra option for percentage based display
-  if (_.isUndefined(options.stacked)){
-    stacked = _.every(data, d => _.every(d.data, dd =>  dd >= 0));
-  } else {
-    stacked = options.stacked;
-  }
-
-  // pick the best set of colours
-  if(_.isUndefined(colors)){
-    if (options.data.length <= 10){
-      colors = infobase_colors();
+  if(!window.is_a11y_mode){
+    // if all the numbers are positive, then default to
+    // displaying to them in a stacked format  and add
+    // the extra option for percentage based display
+    if (_.isUndefined(options.stacked)){
+      stacked = _.every(data, d => _.every(d.data, dd =>  dd >= 0));
     } else {
-      // colors = d3.scale.category20();
-      colors = d4.scaleOrdinal(d4.schemeCategory20);
+      stacked = options.stacked;
     }
-  }
 
-  // establish the domain of the color scale
-  colors.domain(_.map(data,_.property("label") ));
+    // pick the best set of colours
+    if(_.isUndefined(colors)){
+      if (options.data.length <= 10){
+        colors = infobase_colors();
+      } else {
+        // colors = d3.scale.category20();
+        colors = d4.scaleOrdinal(d4.schemeCategory20);
+      }
+    }
 
-  // create the list as a dynamic graph legend
+    // establish the domain of the color scale
+    colors.domain(_.map(data,_.property("label") ));
 
-  list = D3.create_list(graph_area.select(".x1").node(), data, {
-    html : _.property("label"),
-    align : options.align,
-    legend_class : options.legend_class,
-    orientation : options.legend_orientation,
-    colors : colors,
-    interactive : true,
-    title : legend_title,
-    height : 500,
-    legend : true,
-    ul_classes : "legend",
-  });
+    // create the list as a dynamic graph legend
+
+    list = D3.create_list(graph_area.select(".x1").node(), data, {
+      html : _.property("label"),
+      align : options.align,
+      legend_class : options.legend_class,
+      orientation : options.legend_orientation,
+      colors : colors,
+      interactive : true,
+      title : legend_title,
+      height : 500,
+      legend : true,
+      ul_classes : "legend",
+    });
 
 
-  if (options.bar && !options.no_toggle_graph && data.length > 1 && options.legend_orientation !== "horizontal"){
-    // add button to cycle ("toggle"?) graph type for bar graphs (between stacked, stacked & normalized, and non-stacked)
+    if (options.bar && !options.no_toggle_graph && data.length > 1 && options.legend_orientation !== "horizontal"){
+      // add button to cycle ("toggle"?) graph type for bar graphs (between stacked, stacked & normalized, and non-stacked)
+        
+      yaxis = normalized ? "%" : options.y_axis;
       
-    yaxis = normalized ? "%" : options.y_axis;
+      list.legend
+        .append("span","ul")
+        .classed("centerer",true)
+        .append("button")
+        .classed("btn-ib-primary",true)
+        .on("click",() => {
+          normalized = !normalized && stacked;
+          stacked = !stacked || normalized;
+          graph.render({
+            stacked : stacked,
+            normalized : normalized,
+            y_axis : normalized ? "%" : options.y_axis,
+          });
+        })
+        .append("span")
+        .html(text_maker("toggle_graph"));
+    }
+    data_to_series_format =  (all_active ?  _.chain(data)
+      .map(function(obj){ return [obj.label,obj.data];})
+      .fromPairs()
+      .value() : {});
+
     
-    list.legend
-      .append("span","ul")
-      .classed("centerer",true)
-      .append("button")
-      .classed("btn-ib-primary",true)
-      .on("click",() => {
-        normalized = !normalized && stacked;
-        stacked = !stacked || normalized;
-        graph.render({
-          stacked : stacked,
-          normalized : normalized,
-          y_axis : normalized ? "%" : options.y_axis,
-        });
-      })
-      .append("span")
-      .html(text_maker("toggle_graph"));
+    // create the graph
+    if (options.bar){
+      graph = new D3.BAR.bar(graph_area.select(".x2").node(),{
+        y_axis : yaxis,
+        colors : colors,
+        ticks : options.ticks,
+        stacked : stacked,
+        graph_areas : options.graph_areas,
+        normalized : normalized,
+        formater : yaxis_formatter,
+        normalized_formater : formats.percentage_raw,
+        series :  data_to_series_format,
+      });
+    } else {
+      graph = new D3.LINE.ordinal_line(graph_area.select(".x2").node(),{
+        y_axis : yaxis,
+        colors : colors,
+        ticks : options.ticks,
+        stacked : stacked,
+        add_line_diff : options.add_line_diff,
+        graph_areas : options.graph_areas,
+        normalized : normalized,
+        formater : yaxis_formatter,
+        normalized_formater : formats.percentage_raw,
+        series : data_to_series_format,
+        yBottom : y_bottom,
+        yTop : y_top,
+      });
+    }
+
+    if (options.onRenderEnd) {
+      graph.dispatch.on("renderEnd", options.onRenderEnd);
+    }
+    if (_.isFunction(options.on_render_end)){
+      graph.dispatch.on("renderEnd", options.on_render_end);
+    }
+
+    // hook the list dispatcher up to the graph
+    list.dispatch.on("click", D3.on_legend_click(graph,colors));
+
+    if (!all_active && data[0].active) {
+    // simulate the first item on the list being selected twice, so that, if it was already active but not all other items are active, it stays active 
+      list.dispatch.call("click","", data[0],0,list.first,list.new_lis);
+      list.dispatch.call("click","",data[0],0,list.first,list.new_lis);
+
+    } else if (!all_inactive && !data[0].active) {
+      // simulate the first item on the list being selected twice, so that, if it was already inactive and not all other items are inactive, it stays inactive 
+      list.dispatch.call("click","",data[0],0,list.first,list.new_lis);
+      list.dispatch.call("click","",data[0],0,list.first,list.new_lis);
+
+    } else if (all_inactive) {
+      // simulate the first item on the list being selected when all items are inactive
+      list.dispatch.call("click","",data[0],0,list.first,list.new_lis);
+
+    } else {
+      graph.render({});
+    }
+
   }
-  data_to_series_format =  (all_active ?  _.chain(data)
-    .map(function(obj){ return [obj.label,obj.data];})
-    .fromPairs()
-    .value() : {});
-
-  
-  // create the graph
-  if (options.bar){
-    graph = new D3.BAR.bar(graph_area.select(".x2").node(),{
-      y_axis : yaxis,
-      colors : colors,
-      ticks : options.ticks,
-      stacked : stacked,
-      graph_areas : options.graph_areas,
-      normalized : normalized,
-      formater : yaxis_formatter,
-      normalized_formater : formats.percentage_raw,
-      series :  data_to_series_format,
-    });
-  } else {
-    graph = new D3.LINE.ordinal_line(graph_area.select(".x2").node(),{
-      y_axis : yaxis,
-      colors : colors,
-      ticks : options.ticks,
-      stacked : stacked,
-      add_line_diff : options.add_line_diff,
-      graph_areas : options.graph_areas,
-      normalized : normalized,
-      formater : yaxis_formatter,
-      normalized_formater : formats.percentage_raw,
-      series : data_to_series_format,
-      yBottom : y_bottom,
-      yTop : y_top,
-    });
-  }
-
-  if (options.onRenderEnd) {
-    graph.dispatch.on("renderEnd", options.onRenderEnd);
-  }
-  if (_.isFunction(options.on_render_end)){
-    graph.dispatch.on("renderEnd", options.on_render_end);
-  }
-
-  // hook the list dispatcher up to the graph
-  list.dispatch.on("click", D3.on_legend_click(graph,colors));
-
-  if (!all_active && data[0].active) {
-  // simulate the first item on the list being selected twice, so that, if it was already active but not all other items are active, it stays active 
-    list.dispatch.call("click","", data[0],0,list.first,list.new_lis);
-    list.dispatch.call("click","",data[0],0,list.first,list.new_lis);
-
-  } else if (!all_inactive && !data[0].active) {
-    // simulate the first item on the list being selected twice, so that, if it was already inactive and not all other items are inactive, it stays inactive 
-    list.dispatch.call("click","",data[0],0,list.first,list.new_lis);
-    list.dispatch.call("click","",data[0],0,list.first,list.new_lis);
-
-  } else if (all_inactive) {
-    // simulate the first item on the list being selected when all items are inactive
-    list.dispatch.call("click","",data[0],0,list.first,list.new_lis);
-
-  } else {
-    graph.render({});
-  }
-
-  // add export button
-  //if (!window.is_mobile && window.download_attr) {
-  //  list.legend.append("button")
-  //          .html("Export")
-  //          .classed('btn', true)
-  //          .on('click', function() {
-  //            $(this).hide(); // convert to D3 selector
-  //            var loc = $(document).scrollTop();
-  //            export_graph(graph_area.node());
-  //            $(this).show();
-  //            setTimeout(function () { window.scrollTo(0, loc); });
-  //          });
-  //}
-
   
   // Add a11y table
-  if (!options.no_a11y) {
+  if (!options.no_a11y || !window.is_a11y_mode) {
     const a11y_table_title = options.a11y_table_title || this.panel.el.select(".panel-title").node().innerText;
     
     D3.create_a11y_table({
@@ -277,6 +265,9 @@ D3.create_graph_with_legend = function(options){
       data, 
       table_name: a11y_table_title,
     });
+
+    return;
+
   }
   return graph;
 };
@@ -317,7 +308,7 @@ D3.create_a11y_table = function({
   }
   
   // Note: strips html from tick (ie. the </br> in most people year ticks)
-  const table_content = <div>
+  const table_content = <div style={{overflow: "auto"}}>
     <table
       className="table table-striped table-bordered"
     >
