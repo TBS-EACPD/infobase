@@ -105,8 +105,9 @@
     "new_IB_dev": "node build_code/webpack_starter.js new_client BOTH",
 
     "new_IB_a11y_q": "node build_code/webpack_starter.js NO-BABEL a11y_client",
+    "new_IB_a11y_q_both": "node build_code/webpack_starter.js NO-BABEL BOTH a11y_client",
     "new_IB_a11y_dev_en": "node build_code/webpack_starter.js a11y_client",
-    "new_IB_a11y_dev": "node build_code/webpack_starter.js a11y_client both"
+    "new_IB_a11y_dev": "node build_code/webpack_starter.js a11y_client BOTH"
 
   },
   "author": [
