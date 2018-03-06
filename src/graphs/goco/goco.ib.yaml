@@ -1,15 +1,16 @@
 goco_t:
   transform: [handlebars,embeded-markdown, markdown]
   text: |
-    <div class='centerer mrgn-bttm-md'>
-      <div class='legend_area legend-container' style='padding-top:5px'> </div>
-    </div>
-    <div>
-      <div aria-hidden="true" class="medium_panel_text">
-        <div class='sa-diagram' style='position:relative'></div>
-        <div class='goco-diagram' style='position:relative; margin:40px 0px'></div>
+    <div class='a11y_area'></div>
+    <div class='graph_area'>
+      <div class='centerer mrgn-bttm-md'>
+        <div class='legend_area legend-container' style='padding-top:5px'> </div>
       </div>
-      <div id="goco-a11y-link" class="sr-only">
+      <div>
+        <div class="medium_panel_text">
+          <div class='sa-diagram' style='position:relative'></div>
+          <div class='goco-diagram' style='position:relative; margin:40px 0px'></div>
+        </div>
       </div>
     </div>
 

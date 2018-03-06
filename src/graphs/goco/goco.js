@@ -1,3 +1,5 @@
+const { Format } = require('../../util_components.js');
+
 exports = module.exports;
 require("./goco.ib.yaml");
 
@@ -12,7 +14,6 @@ const {
     GraphLegend,
   },
   D3,
-  rpb_link,
 } = require('../shared.js');
 
 
@@ -128,30 +129,6 @@ class Goco {
     this.colors = d4.scaleOrdinal(d4.schemeCategory10);
     const that = this;
 
-    const a11y_area =  this.container.select('#goco-a11y-link');
-  
-    a11y_area.append('p')
-      .html(text_maker("goco_accessible_note"));
-
-    a11y_area
-      .append('a')
-      .attr('href', rpb_link({
-        table: 'table6',
-        preferTable: true,
-        preferDeptBreakout: false,  
-      
-      }))
-      .html(text_maker("goco_accessible_spend_link"));
-
-    a11y_area
-      .append('a')
-      .attr('href', rpb_link({
-        table: 'table12',
-        preferTable: true,
-        preferDeptBreakout: false,  
-      }))
-      .html(text_maker("goco_accessible_fte_link"));
-
     this.data = _.chain(Tag.gocos_by_spendarea)
       .map(sa=> {
         const children = _.map(sa.children_tags, goco => {
@@ -179,6 +156,38 @@ class Goco {
       })
       .sortBy(d=>-d.spending)
       .value();
+
+    
+    if(window.is_a11y_mode){
+      container.select(".graph_area").remove();
+
+      const table_data = _.map(this.data, ({tick, spending, ftes}) => ({
+        label: tick,
+        /* eslint-disable react/jsx-key */
+        data: [
+          <Format type="compact1" content={spending} />,
+          <Format type="big_int_real" content={ftes} />
+        ],
+      }));
+
+      D3.create_a11y_table({
+        label_col_header: [ text_maker("spend_areas")],
+        data_col_headers: [text_maker("tag_nav_exp_header_dp17"), text_maker("tag_nav_fte_header_dp17")],
+        data: table_data,
+        container: container.select(".a11y_area"),
+      });
+
+      return; 
+
+    } else {
+      container.select(".a11y_area").remove();
+    }
+
+    
+
+
+
+
     const series1 = {
       label :  text_maker("spending"), 
       data : _.map(this.data,"spending"),
