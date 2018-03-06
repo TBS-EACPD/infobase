@@ -43,11 +43,7 @@ export class TabbedContent extends React.Component {
                 onClick={()=>{
                   this.setState({openTabKey: key});
                 }}
-                onKeyPress={(event)=>{
-                  if (event.key === " " || event.key === "Enter") {
-                    this.setState({openTabKey: key});
-                  }
-                }}
+                onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && this.setState({openTabKey: key})}
               >
                 <b>
                   {tabLabels[key]}

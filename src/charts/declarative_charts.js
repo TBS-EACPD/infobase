@@ -240,7 +240,7 @@ const GraphLegend = ({
             tabIndex={0}
             className="link-styled"
             onClick={()=> onClick(id)}
-            onKeyPress={(e)=> e.charCode===13 && onClick(id)}
+            onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && onClick(id)}
           > 
             label 
           </span> : 

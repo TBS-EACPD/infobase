@@ -222,7 +222,7 @@ class SingleSubjExplorer extends React.Component {
               role="button" 
               className="tab_label_text" 
               onClick={()=> tab_on_click('drr16')}
-              onKeyPress={(e)=> e.charCode===13 && tab_on_click('drr16')}
+              onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('drr16')}
             >
               <TextMaker text_key="DRR_results_option_title" />
             </span>
@@ -233,7 +233,7 @@ class SingleSubjExplorer extends React.Component {
               role="button"
               className="tab_label_text"
               onClick={()=> tab_on_click('dp17')}
-              onKeyPress={(e)=> e.charCode===13 && tab_on_click('dp17')}
+              onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32)&& tab_on_click('dp17')}
             >
               <TextMaker text_key="DP_results_option_title" />
             </span>

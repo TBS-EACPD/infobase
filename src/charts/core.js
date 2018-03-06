@@ -224,8 +224,8 @@ exports.create_list = function(container, data,options){
       .attr("tabindex", 0)
       .attr("class", "link-styled " + options.a_class)
       .on( "click", (d,i) => dispatch.call("click", "", d, i, d4.select(this), new_lis) )
-      .on( "keypress", (d,i) => {
-        if(d4.event.which == 13){
+      .on( "keydown", (d,i) => {
+        if(d4.event.which === 13 || d4.event.which === 32){
           dispatch.call("click", "", d, i, d4.select(this), new_lis)
         }
       })

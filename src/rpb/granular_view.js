@@ -303,11 +303,11 @@ class GranularView extends React.Component {
                           this.refs.table.focus();
                         }
                     }
-                    onKeyPress={
+                    onKeyDown={
                       ix === page_num ?
                         null : 
                         (e)=> {
-                          if (e.charCode===13){
+                          if (e.keyCode===13 || e.keyCode===32){
                             on_set_page(ix);
                             this.refs.table.focus();
                           }
