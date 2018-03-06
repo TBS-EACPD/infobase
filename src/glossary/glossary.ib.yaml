@@ -1,48 +1,8 @@
-glossary_t:
-  transform: [handlebars]
-  outside_html : |
-    <div class='col-sm-12 col-md-8 col-md-offset-2 font-large'>
-      {{{content}}}
-    </div>
-  text: |
-   <div aria-hidden="true" id="glossary_search" class='org_list font-xlarge mrgn-bttm-lg'> </div>
-   <div aria-hidden="true" style="text-align:center;" class="glossary-letters mrgn-bttm-xl">
-    <ul class="list-inline glossary-letter-list" style="display:inline;margin:0px">
-    {{#each glossary_items_by_letter}}
-      <li> 
-        <a class='scroll' href="#__{{this.letter}}" style='padding-left: 10px'>
-          {{this.letter}}
-        </a>
-      </li>
-    {{/each}}
-    </ul>
-   </div>
-   <div class="glossary-items">
-     <dl>
-     {{#each glossary_items_by_letter}}
-       {{#each this.items}}
-         <dt 
-          {{#if @first}} 
-            id="__{{../letter}}" 
-            tabindex="0"
-          {{/if}}
-        >
-           <span 
-            id='{{this.id}}'
-            tabindex="-1"
-           >
-             {{this.title}}
-           </span>
-         </dt>
-         <dd> 
-           {{{this.definition}}}
-         </dd>  
-       {{/each}}
-     {{/each}}
-     </dl>
-   </div>
-
-
 glossary_search:
   en: Search for a term used in the InfoBase
   fr: Rechercher un terme utilisé dans l’InfoBase
+
+glossary_meta_desc:
+  transform:
+  en: A searchable list of definitions for terms used in the InfoBase
+  fr: Liste interrogeable des définitions pour les termes employés dans l'InfoBase

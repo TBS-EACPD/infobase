@@ -1,7 +1,8 @@
-const ROUTER = require('../core/router.js');
+require('./home.scss');
+require('./home-pngs.css');
+
 const MediaQuery = require('react-responsive');
 const classNames = require('classnames');
-const { reactAdapter } = require('../core/reactAdapter.js');
 const { 
   EverythingSearch,
 } = require('../util_components.js');
@@ -14,11 +15,8 @@ const {
 } = require('../models/text.js');
 require("./home.ib.yaml");
 
-require('./home.scss');
-require('./home-pngs.css');
 
 const {
-  TextMaker,
   TM,
   SpinnerWrapper,
 } = require('../util_components.js');
@@ -31,17 +29,10 @@ const { ensure_loaded } = require('../core/lazy_loader.js');
 const { ResultCounts } = require('../models/results.js');
 const { Table } = require('../core/TableClass.js');
 
+const { StandardRouteContainer } = require('../core/NavComponents.js');
 
 
-ROUTER.add_default_route( "start", "start", function route_func(container){
-  this.add_crumbs();
-  const empty = document.createElement('span');
-  this.add_title(empty);
-  reactAdapter.render(<Container />, container);
-})
-
-
-class Container extends React.Component {
+export class Home extends React.Component {
   constructor(){
     super()
     this.state = { loading: true};
@@ -61,7 +52,11 @@ class Container extends React.Component {
   }
   render(){
     if(this.state.loading){
-      return <SpinnerWrapper scale={4} />;
+      return (
+        <StandardRouteContainer route_key="start">
+          <SpinnerWrapper scale={4} />
+        </StandardRouteContainer>
+      );
     } else {
       const table5 = Table.lookup('table5');
       const table10 = Table.lookup('table10');
@@ -69,17 +64,21 @@ class Container extends React.Component {
 
      
       return (
-        <MediaQuery minWidth={992}>
-          {is_large =>  
-            <HomeLayout
-              past_targets_met={drr16_indicators_past_success}
-              past_targets_total={drr16_past_total}
-              spent_last_year={table5.col_from_nick('{{pa_last_year}}').formula(table5.data)}
-              headcount_last_year={table10.col_from_nick('{{ppl_last_year}}').formula(table10.data)}
-              is_large={is_large}
-            />
-          }
-        </MediaQuery>
+        <StandardRouteContainer route_key="start">
+          <MediaQuery minWidth={992}>
+            {is_large =>
+              <div> 
+                <HomeLayout
+                  past_targets_met={drr16_indicators_past_success}
+                  past_targets_total={drr16_past_total}
+                  spent_last_year={table5.col_from_nick('{{pa_last_year}}').formula(table5.data)}
+                  headcount_last_year={table10.col_from_nick('{{ppl_last_year}}').formula(table10.data)}
+                  is_large={is_large}
+                />
+              </div>
+            }
+          </MediaQuery>
+        </StandardRouteContainer>
       );
 
     }
@@ -89,7 +88,7 @@ class Container extends React.Component {
 
 const FeaturedContentItem = ({ text_key, href, is_new }) => <li className="list-group-item list-group-item--is-darkened">
   { is_new && <span className="badge badge--is-new"> new </span> }
-  <a href={href}> <TextMaker text_key={text_key} /> </a>
+  <a href={href}> <TM k={text_key} /> </a>
 </li>;
 
 const featured_content_items = [
@@ -159,8 +158,8 @@ const featured_content_items = [
 const HomeLayout = props => (
   <div className="home-root">
     <div className="intro-box">
-      <h1> <TextMaker text_key="welcome" /> </h1>
-      <h2> <TextMaker text_key="home_sub_title" /> </h2>
+      <h1> <TM k="welcome" /> </h1>
+      <h2> <TM k="home_sub_title" /> </h2>
       <div className="search-box"><div className="search-container">
         <EverythingSearch 
           include_gov={false} 
@@ -423,11 +422,11 @@ const HomeLayout = props => (
             <div className="v-img-card__bottom-container">
               <div className="v-img-card__bottom">
                 <header className="v-img-card__title">
-                  <TextMaker text_key="explorer_home_title" />
+                  <TM k="explorer_home_title" />
                 </header>
 
                 <div className="v-img-card__text">
-                  <TextMaker text_key="explorer_home_text" />
+                  <TM k="explorer_home_text" />
                 </div>
 
                 <div className="v-img-card__bottom-right">
@@ -451,11 +450,11 @@ const HomeLayout = props => (
             <div className="v-img-card__bottom-container">
               <div className="v-img-card__bottom">
                 <header className="v-img-card__title">
-                  <TextMaker text_key="home_build_a_report" />
+                  <TM k="home_build_a_report" />
                 </header>
 
                 <div className="v-img-card__text">
-                  <TextMaker text_key="report_builder_home_desc" />
+                  <TM k="report_builder_home_desc" />
                 </div>
 
                 <div className="v-img-card__bottom-right">
@@ -479,11 +478,11 @@ const HomeLayout = props => (
             <div className="v-img-card__bottom-container">
               <div className="v-img-card__bottom">
                 <header className="v-img-card__title">
-                  <TextMaker text_key="igoc_home_title" />
+                  <TM k="igoc_home_title" />
                 </header>
 
                 <div className="v-img-card__text">
-                  <TextMaker text_key="igoc_home_desc" />
+                  <TM k="igoc_home_desc" />
                 </div>
 
                 <div className="v-img-card__bottom-right">
@@ -508,15 +507,15 @@ const HomeLayout = props => (
             <div className="h-img-card__right-container">
               <div className="h-img-card__right">
                 <header className="h-img-card__title">
-                  <TextMaker text_key="glossary_home_title" /> 
+                  <TM k="glossary_home_title" /> 
                 </header>
 
                 <div className="h-img-card__text">
-                  <TextMaker text_key="glossary_home_desc" /> 
+                  <TM k="glossary_home_desc" /> 
                 </div>
 
                 <div className="h-img-card__bottom-right">
-                  <a href="#glossary"> <TextMaker text_key="glossary_home_link_text" /> </a>
+                  <a href="#glossary"> <TM k="glossary_home_link_text" /> </a>
                 </div>
               </div>
             </div>
@@ -531,16 +530,16 @@ const HomeLayout = props => (
             <div className="h-img-card__right-container">
               <div className="h-img-card__right">
                 <header className="h-img-card__title">
-                  <TextMaker text_key="metadata_home_title" />
+                  <TM k="metadata_home_title" />
                 </header>
 
                 <div className="h-img-card__text">
-                  <TextMaker text_key="metadata_home_desc" />
+                  <TM k="metadata_home_desc" />
                 </div>
 
                 <div className="h-img-card__bottom-right">
                   <a href="#metadata"> 
-                    <TextMaker text_key="metadata_home_link_text" />
+                    <TM k="metadata_home_link_text" />
                   </a>
                 </div>
               </div>

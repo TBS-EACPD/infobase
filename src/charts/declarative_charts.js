@@ -234,15 +234,18 @@ const GraphLegend = ({
           }
           className="legend-color-checkbox"
         />
-        {React.createElement(  //only make it a link if clicking it does something
-          onClick ? 'a' : 'span',
-          { 
-            href: onClick ? "#" : null,
-            onClick: onClick ? ()=> { onClick(id) } : null,
-            role: onClick ? "button" : null, 
-          },
-          label
-        )} 
+        { onClick ?
+          <span
+            role="button"
+            tabIndex={0}
+            className="link-styled"
+            onClick={()=> onClick(id)}
+            onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && onClick(id)}
+          > 
+            label 
+          </span> : 
+          <span> label </span>
+        } 
       </li>
     )}
   </ul>

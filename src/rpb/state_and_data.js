@@ -98,6 +98,11 @@ const reducer = (state=initial_state, action) => {
 
   switch(type){
 
+    case 'navigate_to_new_state': {
+      const new_state = payload;
+      return new_state;
+    }
+
     case 'header_click': {
       const col_nick = payload;
       if(state.sort_col  === col_nick){

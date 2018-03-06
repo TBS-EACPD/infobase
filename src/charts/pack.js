@@ -575,7 +575,10 @@ export class pack {
       .attr("rid",d => d.rid)
       .html(this.text_func)
       .on("click", function(d){
-        d4.event.preventDefault();
+        const href = that.href_func(d);
+        if(_.isEmpty(href) || href === "#"){
+          d4.event.preventDefault();
+        }
         var matching_circle = that.svg.select("circle[rid='"+this.getAttribute("rid")+"']").node();
 
         that.dispatch.call("dataClick", matching_circle, d);

@@ -103,13 +103,12 @@ exports.create_list = function(container, data,options){
   options.colors = options.colors || function(d,i){ return "transparent";};
   options.legend = options.legend || false;
   options.html = options.html || function(d){return d;};
-  options.href = options.href || function(){return "#";};
   options.legend_class = options.legend_class || "";
   options.li_classes = options.li_classes || "";
   options.a_class = options.a_class || "";
   options.align = options.align || "center";
   const horizontal = options.orientation === 'horizontal'
-  var non_interactive_legend = !options.interactive && options.legend;
+  const non_interactive_legend = !options.interactive && options.legend;
 
   //added extra class to style legends with targetted specificity
   if (options.legend){
@@ -118,13 +117,13 @@ exports.create_list = function(container, data,options){
     options.li_classes = "legend-list-el " + options.li_classes;
   }
 
-  var dispatch = d4.dispatch("click", "hover");
+  const dispatch = d4.dispatch("click", "hover");
 
   container = d4
     .select(container)
     .append("div")
     .attr("aria-hidden", options.legend)
-    .classed("d3-list " + options.legend_class,true) ;
+    .classed("d3-list " + options.legend_class, true) ;
 
   if (horizontal) {
     options.ul_classes = "horizontal " + options.ul_classes;
@@ -134,7 +133,7 @@ exports.create_list = function(container, data,options){
   
   // the height will not always be specified
   if (options.height){
-    container.style("max-height",options.height+"px");
+    container.style("max-height", options.height+"px");
   }
 
   if (options.title && !horizontal) {
@@ -164,22 +163,22 @@ exports.create_list = function(container, data,options){
       .append("span")
       .attr("class", "legend-color-checkbox color-tag transparent_div")
       .styles({
-        "float" : "left",
-        "width" : "20px",
-        "height" : "20px",
-        "border-radius" : "3px",
-        "margin-left" : "5px",
-        "margin-right" : "5px",
+        "float": "left",
+        "width": "20px",
+        "height": "20px",
+        "border-radius": "3px",
+        "margin-left": "5px",
+        "margin-right": "5px",
       })
-      .styles({"border" : function(d,i){return "1px solid " + options.colors(options.html(d));}})
+      .styles({"border": function(d,i){return "1px solid " + options.colors(options.html(d));}})
       .filter(function(d){return d.active || non_interactive_legend;})
-      .styles({"background-color" : function(d,i){return options.colors(options.html(d));}});
+      .styles({"background-color": function(d,i){return options.colors(options.html(d));}});
   }
 
   new_lis
     .append("div")
     .styles({
-      "float" : "left",
+      "float": "left",
       "width": function(){
         if (horizontal){ return undefined; }
         return  "75%";
@@ -194,22 +193,22 @@ exports.create_list = function(container, data,options){
 
     // make the coloured square created above clickable 
     new_lis
-      .selectAll("div.color-tag")
+      .selectAll(".color-tag")
       .style("cursor", "pointer")
-      .on("click", (d,i) => 
-        dispatch.call("click","", d, i, d4.select(this), new_lis)
-      )
-    ;
+      .on( "click", (d,i) => dispatch.call("click","", d, i, d4.select(this), new_lis) );
 
     new_lis
       .selectAll('div')
-      .append("a")
+      .append("span")
       .attr("role", "button")
-      .attr("href",options.href)
-      .attr("class",options.a_class)
-      .on("click", (d,i) => 
-        dispatch.call("click", "", d, i, d4.select(this), new_lis)
-      )
+      .attr("tabindex", 0)
+      .attr("class", "link-styled " + options.a_class)
+      .on( "click", (d,i) => dispatch.call("click", "", d, i, d4.select(this), new_lis) )
+      .on( "keydown", (d,i) => {
+        if(d4.event.which === 13 || d4.event.which === 32){
+          dispatch.call("click", "", d, i, d4.select(this), new_lis)
+        }
+      })
       .html(options.html);
   }
   
@@ -223,8 +222,8 @@ exports.create_list = function(container, data,options){
   return {
     dispatch,
     new_lis,
-    first : d4.select(new_lis.node()),
-    legend : container,
+    first: d4.select(new_lis.node()),
+    legend: container,
   };
 };
 

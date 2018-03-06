@@ -1,4 +1,4 @@
-const {text_maker} = require('../models/text.js');
+import {text_maker} from '../models/text.js';
 
 function should_add_survey_banner(){
   //if we add more surveys, we can use 'opened/ignored_survey1'
@@ -62,7 +62,13 @@ function remove_survey_banner(){
   document.querySelector('#survey_link_container').innerHTML = "";
 }
 
-module.exports = {
-  add_survey_banner,
-  should_add_survey_banner,
-};
+export class PotentialSurveyBox extends React.Component {
+  componentWillMount(){
+    if(should_add_survey_banner()){
+      add_survey_banner();
+    }
+  }
+  render(){
+    return null;
+  }
+}

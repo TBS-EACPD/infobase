@@ -1,5 +1,6 @@
-const ROUTER = require("../core/router");
-const { shallowEqualObjectsOverKeys } = require('../core/utils.js');
+require('../graphs/intro_graphs/intro_lang.ib.yaml');
+require('../graphs/result_graphs/result_lang.ib.yaml');
+const { StandardRouteContainer } = require('../core/NavComponents');
 
 const { text_maker } =  require('../models/text.js');
 require("./explorer.ib.yaml");
@@ -7,8 +8,6 @@ require("./explorer.ib.yaml");
 const Subject = require('../models/subject.js');
 
 const { Tag } = Subject;
-
-const { reactAdapter } = require('../core/reactAdapter.js');
 
 const {
   TextMaker,
@@ -46,22 +45,25 @@ const {
 const { ensure_loaded } = require('../core/lazy_loader.js');
 
 
-const HierarchySelectionItem = ({title, text, active, onClick }) => (
-  <button 
-    role="radio" 
-    className={classNames("button-unstyled hierarchy-selection-item", active && "active")}
+const HierarchySelectionItem = ({title, text, active, url }) => (
+  <a 
+    role="radio"
+    title={title}
+    className={classNames("link-unstyled hierarchy-selection-item", active && "active")}
     tabIndex={0}
     aria-checked={active}
-    onClick={onClick}
+    href={url}
   >
     <div className="hierarchy-selection-item__header">
-      <span><a href="#">{title}</a></span>
+      <span className="link-styled">{title}</span>
     </div>
     <div className="hierarchy-selection-item__description">
       {text}
     </div>
-  </button>
+  </a>
 );
+
+
 
 
 class Explorer extends React.Component {
@@ -103,9 +105,7 @@ class Explorer extends React.Component {
       sort_col,
       sort_func,
       col_click,
-      set_hierarchy_scheme,
       doc,
-      set_doc,
       is_m2m,
     } = this.props;
 
@@ -194,8 +194,6 @@ class Explorer extends React.Component {
       </div>
     </div>;
     
-    const tab_on_click = (doc)=> set_doc!==doc && set_doc(doc);
-
     return <div>
       <div style={{marginBottom:'35px'}}>
         <TextMaker text_key="tag_nav_intro_text" el="div" />
@@ -213,7 +211,7 @@ class Explorer extends React.Component {
           {_.map([ min_props, dept_props, goco_props, hwh_props ],props =>
             <HierarchySelectionItem 
               key={props.id} 
-              onClick={()=> set_hierarchy_scheme(props.id)} 
+              url={`#resource-explorer/${props.id}/${doc}`}
               {...props} 
             />
           )}
@@ -226,13 +224,13 @@ class Explorer extends React.Component {
       }
       <div className="tabbed_content">
         <ul className="tabbed_content_label_bar">
-          <li className={classNames("tab_label", doc==="drr16" && "active_tab")} onClick={()=> tab_on_click('drr16')}>
-            <a href="#" role="button" className="tab_label_text" onClick={()=> tab_on_click('drr16')}>
+          <li className={classNames("tab_label", doc==="drr16" && "active_tab")} onClick={()=> this.refs.drr166_link.click()}>
+            <a href={`#resource-explorer/${hierarchy_scheme}/drr166`} role="button" className="tab_label_text" ref="drr166_link">
               <TextMaker text_key="DRR_resources_option_title" />
             </a>
           </li>
-          <li className={classNames("tab_label", doc==="dp17" && "active_tab")} onClick={()=> tab_on_click('dp17')}>
-            <a href="#" role="button" className="tab_label_text" onClick={()=> tab_on_click('dp17')}>
+          <li className={classNames("tab_label", doc==="dp17" && "active_tab")} onClick={()=> this.refs.dp17_link.click()}>
+            <a href={`#resource-explorer/${hierarchy_scheme}/dp17`} role="button" className="tab_label_text" ref="dp17_link">
               <TextMaker text_key="DP_resources_option_title" />
             </a>
           </li>
@@ -258,29 +256,10 @@ const map_state_to_props_from_memoized_funcs = memoized_funcs => {
   );
 }
 
-const props_to_url = ({ hierarchy_scheme, doc }) => `#resource-explorer/${hierarchy_scheme}/${doc}`;
-
-class URLSynchronizer extends React.Component {
-  render(){ return null; }
-  //this will only be called when the user switches data areas. 
-  //If the infograph changes, this might have to change as well...
-  componentWillReceiveProps(nextProps){
-    if(!shallowEqualObjectsOverKeys(this.props, nextProps, ['hierarchy_scheme','doc'])){
-      this.updateURLImperatively(nextProps);
-    }
-  }
-  updateURLImperatively(nextProps){
-    const new_url = props_to_url(nextProps);
-    ROUTER.navigate(new_url, {trigger:false});
-  }
-}
-
-
 
 class ExplorerContainer extends React.Component {
-  render(){
+  componentWillMount(){
     const { hierarchy_scheme, doc } = this.props;
-
     const scheme = resource_scheme;
     const scheme_key = scheme.key;
 
@@ -303,56 +282,86 @@ class ExplorerContainer extends React.Component {
 
     const connecter = connect(mapStateToProps, mapDispatchToProps);
     const Container = connecter(Explorer);
-    const URLConnectedComponent = connecter(URLSynchronizer);
     const store = createStore(reducer,initialState);
-  
-    return [
-      <Provider key={"a"} store={store}>
+
+    this.Container = Container;
+    this.store = store;
+
+  }
+  componentWillUpdate(nextProps){
+    const { hierarchy_scheme, doc } = nextProps;
+    const { store } = this;
+
+    resource_scheme.set_hierarchy_and_doc(store,hierarchy_scheme,doc);
+  }
+  render(){
+    const { store, Container } = this;
+    return (
+      <Provider store={store}>
         <Container />
-      </Provider>,
-      <Provider key={"b"} store={store}>
-        <URLConnectedComponent />
-      </Provider>,
-    ];
+      </Provider>
+    );
 
   }
 
 }
 
-ROUTER.add_container_route("resource-explorer/:hierarchy_scheme:/:doc:","_resource-explorer", function(container, hierarchy_param, doc_param){
 
-  this.add_title("tag_nav");
-  this.add_crumbs([{html: text_maker("tag_nav")}]);
-  container.appendChild( new Spinner({scale:4}).spin().el );
+export class ResourceExplorer extends React.Component {
+  constructor(){
+    super();
+    this.state = { loading: true };
+  }
+  componentWillMount(){
+    ensure_loaded({ 
+      table_keys: ['table6', 'table12'],
+    }).then(()=> {
+      this.setState({loading: false});
+    })
+  }
+  render(){
+    const { match } = this.props;
+    const route_container_args = {
+      title: text_maker("tag_nav"),
+      breadcrumbs: [text_maker("tag_nav")],
+      route_key:"_resource-explorer",
+    };
+    const header = <h1><TM k="tag_nav" /></h1>;
 
+    if(this.state.loading){
+      return (
+        <StandardRouteContainer {...route_container_args}>
+          {header}
+          <SpinnerWrapper scale={4} />
+        </StandardRouteContainer>
+      );
+    }
+    let { 
+      params : {
+        hierarchy_scheme,
+        doc,
+      },
+    } = match;
 
-  const initial_hierarchy_scheme = (
-    _.includes(['min','dept','GOCO','HWH'], hierarchy_param) ? 
-    hierarchy_param :
-    'min'
-  );
-  
-  const initial_doc = (
-    _.includes(['drr16','dp17'], doc_param) ? 
-    doc_param :
-    'drr16'
-  );
-
-  ensure_loaded({ 
-    table_keys: ['table6', 'table12'],
-  }).then( ()=>{
-    container.innerHTML = `<div id="explorer-mount"></div>`;  
-
-    reactAdapter.render(
-      <div>
-        <ExplorerContainer 
-          hierarchy_scheme={initial_hierarchy_scheme} 
-          doc={initial_doc}
-        />
-      </div>,
-      container.querySelector('#explorer-mount')
+    hierarchy_scheme = (
+      _.includes(['min','dept','GOCO','HWH'], hierarchy_scheme) ? 
+      hierarchy_scheme :
+      'min'
+    );
+    
+    doc = (
+      _.includes(['drr16','dp17'], doc) ? 
+      doc :
+      'drr16'
     );
 
-  })
-});
+    return (
+      <StandardRouteContainer {...route_container_args}>
+        {header}
+        <ExplorerContainer {...{hierarchy_scheme, doc}} />
+      </StandardRouteContainer>
+    );
+
+  }
+}
 

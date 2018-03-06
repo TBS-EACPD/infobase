@@ -239,6 +239,9 @@ li.select-list-item {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  & > .pagination > li > span {
+    padding: 10px 16px;
+  } 
 }
 
 .row-opition-content-search > div > div > span > span > .input-lg {

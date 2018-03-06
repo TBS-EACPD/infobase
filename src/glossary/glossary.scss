@@ -1,0 +1,13 @@
+dt.glossary-dt {
+  font-size: 1.4em;
+
+  &:not(:first-child){
+    border-top: 1px solid #ccc;
+    margin-top: 15px;
+    padding-top: 5px;
+  }
+}
+
+.glossary-letter-link {
+  padding-left: 10px;
+}

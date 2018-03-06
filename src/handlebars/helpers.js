@@ -544,7 +544,7 @@ Handlebars.registerHelper("gl",function(key){
 Handlebars.registerHelper("gl_tt",function(display, key){
   const href = glossary_href(GlossaryEntry.lookup(key));
   return new Handlebars.SafeString(
-    `<a class="nowrap glossary-tooltip-link" aria-hidden="true" href="#" data-glossary-key="${key}" data-toggle="tooltip" data-html="true" data-container="body">${display}</a><a href="${href}" class="sr-only" title="${text_maker('glossary_link_title')}">${display}</a>`
+    `<span class="nowrap glossary-tooltip-link" tabindex="0" aria-hidden="true" data-glossary-key="${key}" data-toggle="tooltip" data-html="true" data-container="body">${display}</span><a href="${href}" class="sr-only" title="${text_maker('glossary_link_title')}">${display}</a>`
   );
 });
 

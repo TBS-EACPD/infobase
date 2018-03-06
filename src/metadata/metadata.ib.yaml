@@ -1,3 +1,7 @@
+metadata_document_description:
+  en: Index of datasets featured in the InfoBase, and their download links
+  fr: Index des ensembles de données de l'InfoBase, et des liens vers leurs données brutes
+
 metadata_t:
   transform: [handlebars,markdown]
   en: |

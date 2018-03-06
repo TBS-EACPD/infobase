@@ -1,6 +1,5 @@
-'use strict';
 require('./search.css')
-const ROUTER = require('../core/router.js');
+
 const {
   escapeSingleQuotes,
 } = require('../core/utils.js');
@@ -223,14 +222,15 @@ function autoComplete({container, search_configs, onSelect, placeholder, minLeng
 function deptSearch(container, options={}){
   const {
     include_orgs_without_data,
-    href_template, 
+    href_template,
+    history,
   } = options;
 
   let { onSelect } = options;
   
   if(!onSelect && href_template){
     onSelect = item => { 
-      ROUTER.navigate( href_template(item), { trigger: true });
+      history.push(href_template(item));
     }
   }
 
@@ -261,6 +261,7 @@ function everythingSearch(container, options={}){
     include_glossary,
     include_crsos,
     org_scope,
+    history,
   } = options;
 
 
@@ -272,7 +273,7 @@ function everythingSearch(container, options={}){
   
   if(!onSelect && href_template){
     onSelect = item => { 
-      ROUTER.navigate( href_template(item), { trigger: true });
+      history.push(href_template(item));
     }
   }
 

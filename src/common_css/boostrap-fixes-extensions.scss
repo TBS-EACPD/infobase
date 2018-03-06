@@ -330,25 +330,7 @@ list-group-item.active a {
 .sidescroll { 
   overflow-x: auto;
 }
-/*  faq  */
-#faq {
-  line-height: 1.5;
-}
-/* glossry */
-#glossary-key {
-  line-height: 1.5;
-}
-#glossary-key dt{
-  font-size: 1.2em;
-}
-#glossary-key dt{
-  font-size: 1.4em;
-}
-#glossary-key dt:not(:first-child){
-  border-top: 1px solid #ccc;
-  margin-top: 15px;
-  padding-top: 5px;
-}
+
 
 /* for top header */
 table.table-blue > thead > tr {
@@ -492,4 +474,8 @@ li.checkbox > label {
  -webkit-box-shadow: none;
  box-shadow: none;
  border: none; 
+}
+
+ol.breadcrumb {
+  padding: 8px 0;
 }

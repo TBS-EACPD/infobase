@@ -1,9 +1,8 @@
 require("./pe2.ib.yaml");
-const ROUTER = require("../core/router.js");
 const { ensure_loaded } = require('../core/lazy_loader.js');
-const {text_maker,run_template} = require("../models/text");
-const {formats : {compact1,big_int_real}} = require('../core/format.js');
-const {PARTITION}= require("../core/D3");
+const { text_maker, run_template } = require("../models/text");
+const { formats : {compact1,big_int_real} } = require('../core/format.js');
+const { PARTITION }= require("../core/D3");
 const utils = require("../core/utils");
 const Subject = require("../models/subject");
 const {
@@ -17,10 +16,190 @@ const {
   mock_model,
 } = require("./hierarchies"); 
 const { reactAdapter } = require('../core/reactAdapter');
+const { StandardRouteContainer } = require('../core/NavComponents.js');
 const {
   TextMaker,
   AutoAccordion,
+  SpinnerWrapper,
 } = require('../util_components');
+
+
+export class Partition extends React.Component {
+  constructor(){
+    super()
+    this.state = {loading: true};
+    this.update_url = (method, value_attr) => {
+      const new_path = `partition/${method}/${value_attr}`;
+
+      this.props.history.push('/'+new_path);
+
+      const el_to_update = document.querySelector('#wb-lng a');
+      const link = _.first(el_to_update.href.split("#"));
+      if(link){
+        el_to_update.href = `${link}#${new_path}`;
+      }
+    }
+  }
+  componentDidMount(){
+    ensure_loaded({
+      table_keys: ['table6', 'table8', 'table12','table305'],
+    }).then( ()=> { 
+      this.setState({loading: false}) 
+    });
+  }
+  shouldComponentUpdate(nextProps){
+    if (!_.isUndefined(this.govPartition)){
+      // Once the GovPartition diagram has been initialized, need to ensure it stays in sync whenever the path updates
+      const {
+        method, 
+        value_attr,
+      } = this.getValidatedRouteParams(nextProps);
+
+      this.ensureGovPartitionStateMatchesRouteState(method, value_attr);
+    }
+
+    // Should only need to update once, when the table dependencies finish loading and the spinner needs to be killed
+    return !_.isUndefined(this.refs.spinner);
+  }
+  componentDidUpdate(){
+    // Should only happen once, when the table dependencies finish loading and the spinner has been killed
+    const {
+      method, 
+      value_attr,
+    } = this.getValidatedRouteParams(this.props);
+    this.container = d4.select(ReactDOM.findDOMNode(this.refs.container));
+    this.govPartition = new GovPartition(this.container, this.update_url, method, value_attr);
+  }
+  render(){
+    return (
+      <StandardRouteContainer
+        ref="container"
+        breadcrumbs={[text_maker("partition_title")]}
+        route_key="partition"
+      >
+        { this.state.loading && <SpinnerWrapper ref="spinner" scale={4} /> }
+      </StandardRouteContainer>
+    );
+  }
+  getValidatedRouteParams(props){
+    const route_method = props.match.params.method;
+    const route_value_attr = props.match.params.value_attr;
+
+    const route_value_attr_is_valid = _.chain(presentation_schemes_by_data_options)
+      .map( presentation_schemes_by_data_option => presentation_schemes_by_data_option.id )
+      .indexOf(route_value_attr)
+      .value() !== -1;
+
+    const route_method_is_valid = route_value_attr_is_valid &&  _.chain(presentation_schemes_by_data_options)
+      .find( presentation_schemes_by_data_option => presentation_schemes_by_data_option.id === route_value_attr )
+      .pick( "presentation_schemes" )
+      .flatMap()
+      .indexOf( route_method )
+      .value() !== -1;
+
+    if (route_value_attr_is_valid && route_method_is_valid){
+      return {
+        method: route_method,
+        value_attr: route_value_attr,
+      };
+    } else {
+      return {
+        method: "dept",
+        value_attr: "exp",
+      };
+    }
+  }
+  ensureGovPartitionStateMatchesRouteState(route_method, route_value_attr){
+    const partition_method = this.govPartition.method;
+    const partition_value_attr = this.govPartition.value_attr;
+
+    if ( (route_method !== partition_method) && (route_value_attr === partition_value_attr) ) {
+      this.govPartition.method = route_method;
+      
+      this.container.select(".select_root")
+        .property("value", route_method)
+        .dispatch("change");
+    } else if (route_value_attr !== partition_value_attr) {
+      this.govPartition.method = route_method;
+      this.govPartition.value_attr = route_value_attr;
+
+      this.container.select(".select_value_attr")
+        .property("value", route_value_attr)
+        .dispatch("change");
+    }
+  }
+}
+
+class DiagramNotes extends React.Component {
+  constructor(){
+    super()
+  }
+  componentDidMount(){
+    const autoAccordion = d4.select(ReactDOM.findDOMNode(this.refs.autoAccordion));
+    autoAccordion.select(".pull-down-accordion-header").node().click();
+  }
+  render(){
+    const { note_text_key } = this.props;
+    return (
+      <div className="mrgn-bttm-sm">
+        <AutoAccordion
+          title={text_maker("some_things_to_keep_in_mind")}
+          usePullDown={true}
+          ref="autoAccordion"
+        >
+          <div style={{paddingLeft: '10px', paddingRight:'10px'}}>
+            <TextMaker text_key={note_text_key} />
+          </div>
+        </AutoAccordion>
+      </div>
+    );
+  }
+}
+
+const presentation_schemes_by_data_options = [
+  { 
+    id: "exp", 
+    text: text_maker("partition_spending_data"), 
+    presentation_schemes: [
+      "goca", 
+      "dept", 
+      "hwh", 
+      "st",
+    ],
+  },
+  { 
+    id: "fte", 
+    text: text_maker("fte_written"), 
+    presentation_schemes: [
+      "goca",
+      "dept",
+      "hwh",
+    ],
+  },
+  { 
+    id: "planned_exp", 
+    text: text_maker("partition_planned_spending_data"), 
+    presentation_schemes: [
+      "org_planned_spend", 
+      "est_type", 
+      "vs_type", 
+      "est_doc_mains",
+      "est_doc_sea",
+      "est_doc_seb",
+      "est_doc_sec",
+      "est_doc_im",
+    ],
+  },
+  { 
+    id: "org_info", 
+    text: text_maker("orgs"), 
+    presentation_schemes: [
+      "org_info_by_ministry", 
+      "org_info_federal_orgs_by_inst_form",
+      "org_info_interests_by_inst_form",
+    ],
+  },
+];
 
 const formaters = {
   "exp" : compact1,
@@ -50,27 +229,6 @@ const get_root_text_key = (value_attr, method) => {
       }
   }
 }
-
-const url_template = (method,value)=>`#partition/${method}/${value}`;
-
-const search_required_chars = 1;
-const search_debounce_time = 500;
-
-ROUTER.add_container_route("partition/:method:/:value_attr:","partition",function(container,method="dept",value_attr="exp"){
-  
-  this.add_crumbs([{html: text_maker("partition_title")}]);
-  
-  const spinner = new Spinner({scale:4});
-  spinner.spin(document.querySelector('#app'));
-
-  ensure_loaded({
-    table_keys : ['table6', 'table8', 'table12','table305'],
-  }).done(()=> {
-    new GovPartition(this.app, d4.select(container), method,value_attr);
-  }).done(()=> {
-    spinner.stop();
-  });
-});
 
 const show_partial_children = function(node){
   if (!node.children ){
@@ -157,8 +315,13 @@ const get_common_popup_options = d => {
   };
 }
 
+const search_required_chars = 1;
+const search_debounce_time = 500;
+
 class GovPartition {
-  constructor(app, container,method,value_attr){
+  constructor(container, update_url, method, value_attr){
+    
+    this.update_url = update_url;
 
     // A negative margin-left value is explicitly set, and kept updated, on .partition-container so that the 
     // extra wide partition area can effectively escape the narrow main.container area, which we're forced in 
@@ -180,33 +343,7 @@ class GovPartition {
     this.chart = new PARTITION.Partition(this.container, {
       height : 700,
     });
-    const sort_vals = this.sort_vals = _.sortBy([
-      { id: "exp", text: text_maker("partition_spending_data"), presentation_schemes: ["goca", "dept", "hwh", "st"] },
-      { id: "fte", text: text_maker("fte_written"), presentation_schemes: ["goca", "dept", "hwh"] },
-      { 
-        id: "planned_exp", 
-        text: text_maker("partition_planned_spending_data"), 
-        presentation_schemes: [
-          "org_planned_spend", 
-          "est_type", 
-          "vs_type", 
-          "est_doc_mains",
-          "est_doc_sea",
-          "est_doc_seb",
-          "est_doc_sec",
-          "est_doc_im",
-        ],
-      },
-      { 
-        id: "org_info", 
-        text: text_maker("orgs"), 
-        presentation_schemes: [
-          "org_info_by_ministry", 
-          "org_info_federal_orgs_by_inst_form",
-          "org_info_interests_by_inst_form",
-        ],
-      },
-    ], d => d.id === value_attr ? -Infinity : Infinity);
+    const sort_vals = this.sort_vals = _.sortBy(presentation_schemes_by_data_options, d => d.id === value_attr ? -Infinity : Infinity);
 
     this.all_presentation_schemes = [
       { id: "goca", text: text_maker("spending_area_plural") },
@@ -259,7 +396,7 @@ class GovPartition {
     this.method = presentation_schemes[0].id;
     this.value_attr = sort_vals[0].id;
     this.root_id = 0; // counter to append to root of each hierarchy, makes identifying ancestry_id values unique even in D3 merge step
-    ROUTER.navigate(url_template(this.method,this.value_attr),{navigate:false});
+    this.update_url(this.method,this.value_attr);
     this[this.method]();
   }
   change_value_attr(){
@@ -273,7 +410,7 @@ class GovPartition {
       .value();
     this.method = presentation_schemes[0].id;
 
-    ROUTER.navigate(url_template(this.method,this.value_attr),{navigate:false});
+    this.update_url(this.method,this.value_attr);
 
     // Update presentation_schemes dropdown options
     const presentation_scheme_dropdown = this.container.select(".select_root");
@@ -301,7 +438,7 @@ class GovPartition {
   }
   reroot(){
     this.method = d4.event.target.value;
-    ROUTER.navigate(url_template(this.method,this.value_attr),{navigate:false});
+    this.update_url(this.method,this.value_attr);
     this[this.method]();
   }
   dept(){
@@ -940,8 +1077,7 @@ class GovPartition {
 
       const intro_popup_fader = this.container.select(".visual")
         .insert("div",".controls")
-        .classed("partition-diagram-fader",true)
-        .style("width", this.container.select(".visual").node().offsetWidth+"px");
+        .classed("partition-diagram-fader",true);
 
       const intro_popup_cleanup = function(){
         intro_popup.remove();
@@ -970,7 +1106,7 @@ class GovPartition {
       // NOTE: the react isn't unmounted here, timing that to happen after the transition would be
       // more hacky than it is worth. Unmounting is done at the start of the next content-containing update
     } else {
-      // unmount any existing (but currently hidden) notes
+      // unmount any existing (including currently hidden) notes
       ReactDOM.unmountComponentAtNode(diagram_note_div.node());
 
       // reset diagram-note div height and opacity
@@ -978,21 +1114,7 @@ class GovPartition {
         .style("height", "100%")
         .style("opacity", 1);
 
-      // update the diagram-note div with react AutoAccordian containing note content
-      const view = <div className="mrgn-bttm-sm">
-        <AutoAccordion 
-          title={text_maker("some_things_to_keep_in_mind")}
-          usePullDown={true}
-        >
-          <div style={{paddingLeft: '10px', paddingRight:'10px'}}>
-            <TextMaker text_key={note_text_key} />
-          </div>
-        </AutoAccordion>
-      </div>;
-      reactAdapter.render( view, diagram_note_div.node());
-
-      // now open the AutoAccordian, to get the nice height transition
-      diagram_note_div.select(".pull-down-accordion-header").node().click();
+      reactAdapter.render(<DiagramNotes note_text_key={note_text_key}/>, diagram_note_div.node());
     }
   }
 }

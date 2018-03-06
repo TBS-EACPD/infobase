@@ -495,13 +495,21 @@ const resource_scheme = {
   },
   tree_renderer: node_renderer,
   dispatch_to_props: dispatch => ({ 
-    set_hierarchy_scheme: key => dispatch({type: 'set_hierarchy_scheme', payload: key}),  
     col_click : col_key => dispatch({type: 'column_header_click', payload: col_key }),
-    set_doc: doc => dispatch({type: 'set_doc', payload: doc }),
   }),
+  //this helps the URL override store actions. 
+  set_hierarchy_and_doc(store, hierarchy_scheme, doc){
+    store.dispatch({
+      type: "set_hierarchy_and_doc",
+      payload: { hierarchy_scheme, doc }, 
+    });
+  },
   reducer: (state=get_initial_resource_state({}), action) => {
     const { type, payload } = action;
-    if(type === 'set_hierarchy_scheme'){
+    if(type === 'set_hierarchy_and_doc'){
+      const { hierarchy_scheme, doc } = payload;
+      return _.immutate(state, { hierarchy_scheme, doc })
+    } else if(type === 'set_hierarchy_scheme'){
       return _.immutate(state, {hierarchy_scheme: payload });
     } else if(type === 'column_header_click'){
       const { is_descending, sort_col } = state;
