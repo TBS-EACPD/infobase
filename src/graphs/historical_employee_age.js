@@ -30,7 +30,6 @@ const emp_age_render = function(panel,data,options){
     get_data :  row => row.data, 
     legend_title : "age_group",
     data : graph_args.age_group,
-    no_a11y : true,
   };
   
   if (!window.is_a11y_mode){
@@ -175,7 +174,6 @@ new PanelGraph({
 //    get_data :  row => row.data, 
 //    legend_title : "age_group",
 //    data : graph_args.age_group,
-//    no_a11y : true,
 //  };
 //  const avg_age_options = {
 //    legend_col_full_size : 4,
@@ -192,7 +190,6 @@ new PanelGraph({
 //    data : graph_args.avg_age,
 //    yBottom : avg_age_yBottom, // Pre-calculated lower y-axis value
 //    yTop : avg_age_yTop, // Pre-calculated upper y-axis value
-//    no_a11y : true,
 //  };
 //    
 //  if (!window.is_a11y_mode){

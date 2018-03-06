@@ -28,7 +28,6 @@ const occ_cat_render = function(panel,data){
       legend_title : "occupational_cat",
       get_data :  function(row){ return row.data; },
       data : graph_args,
-      no_a11y : true, // prevent create_graph_with_legend from making the a11y table, it would be aria-hidden
       a11y_table_title : text_maker("historical_employee_occ_category_title"), // create_height_clipped_graph_with_legend still makes an a11y table separatly, outside of the height clipper
     };     
     
