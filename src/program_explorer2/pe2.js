@@ -129,7 +129,32 @@ export class Partition extends React.Component {
     }
   }
 }
-      
+
+class DiagramNotes extends React.Component {
+  constructor(){
+    super()
+  }
+  componentDidMount(){
+    const autoAccordion = d4.select(ReactDOM.findDOMNode(this.refs.autoAccordion));
+    autoAccordion.select(".pull-down-accordion-header").node().click();
+  }
+  render(){
+    const { note_text_key } = this.props;
+    return (
+      <div className="mrgn-bttm-sm">
+        <AutoAccordion
+          title={text_maker("some_things_to_keep_in_mind")}
+          usePullDown={true}
+          ref="autoAccordion"
+        >
+          <div style={{paddingLeft: '10px', paddingRight:'10px'}}>
+            <TextMaker text_key={note_text_key} />
+          </div>
+        </AutoAccordion>
+      </div>
+    );
+  }
+}
 
 const presentation_schemes_by_data_options = [
   { 
@@ -1081,7 +1106,7 @@ class GovPartition {
       // NOTE: the react isn't unmounted here, timing that to happen after the transition would be
       // more hacky than it is worth. Unmounting is done at the start of the next content-containing update
     } else {
-      // unmount any existing (but currently hidden) notes
+      // unmount any existing (including currently hidden) notes
       ReactDOM.unmountComponentAtNode(diagram_note_div.node());
 
       // reset diagram-note div height and opacity
@@ -1089,21 +1114,7 @@ class GovPartition {
         .style("height", "100%")
         .style("opacity", 1);
 
-      // update the diagram-note div with react AutoAccordian containing note content
-      const view = <div className="mrgn-bttm-sm">
-        <AutoAccordion 
-          title={text_maker("some_things_to_keep_in_mind")}
-          usePullDown={true}
-        >
-          <div style={{paddingLeft: '10px', paddingRight:'10px'}}>
-            <TextMaker text_key={note_text_key} />
-          </div>
-        </AutoAccordion>
-      </div>;
-      reactAdapter.render( view, diagram_note_div.node());
-
-      // now open the AutoAccordian, to get the nice height transition
-      diagram_note_div.select(".pull-down-accordion-header").node().click();
+      reactAdapter.render(<DiagramNotes note_text_key={note_text_key}/>, diagram_note_div.node());
     }
   }
 }
