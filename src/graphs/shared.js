@@ -129,30 +129,32 @@ exports.create_ppl_share_pie = function({
 
 // Adds a new row to the bottom of a panel containing a height clipped create_graph_with_legend graph. Adds a11y tables outside of HeightClipper.
 exports.create_height_clipped_graph_with_legend = function(panel,create_graph_with_legend_options) {
-  const panel_body = d4.select(find_parent(panel.areas().graph.node(), n => d4.select(n).classed("panel-body")));
-  const new_row = panel_body
-    .insert("div",".panel-body > div.frow:not(.middle-xs)")
-    .classed("frow middle-xs",true)
-    .style("margin-top", "-20px");
-
-  reactAdapter.render(
-    <div className="fcol-xs-12 fcol-sm- graphic fcol-md-12 mrgn-bttm-sm">
-      <HeightClipper clipHeight={185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient gradient-strong"}>
-        <div className="height-clipped-graph-area" aria-hidden={true}>
-          <D3GraphWithLegend panel={panel} options={create_graph_with_legend_options}/>
-        </div>
-      </HeightClipper>
-    </div>, 
-    new_row.node()
-  );
+  if (!window.is_a11y_mode){
+    const panel_body = d4.select(find_parent(panel.areas().graph.node(), n => d4.select(n).classed("panel-body")));
+    const new_row = panel_body
+      .insert("div",".panel-body > div.frow:not(.middle-xs)")
+      .classed("frow middle-xs",true)
+      .style("margin-top", "-20px");
   
-  D3.create_a11y_table({
-    container: panel.areas().graph.node(),
-    label_col_header: text_maker(create_graph_with_legend_options.legend_title), 
-    data_col_headers: create_graph_with_legend_options.ticks, 
-    data: create_graph_with_legend_options.data, 
-    table_name: create_graph_with_legend_options.a11y_table_title,
-  });
+    reactAdapter.render(
+      <div className="fcol-xs-12 fcol-sm- graphic fcol-md-12 mrgn-bttm-sm">
+        <HeightClipper clipHeight={185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient gradient-strong"}>
+          <div className="height-clipped-graph-area" aria-hidden={true}>
+            <D3GraphWithLegend panel={panel} options={create_graph_with_legend_options}/>
+          </div>
+        </HeightClipper>
+      </div>, 
+      new_row.node()
+    );
+  } else {
+    D3.create_a11y_table({
+      container: panel.areas().graph.node(),
+      label_col_header: text_maker(create_graph_with_legend_options.legend_title), 
+      data_col_headers: create_graph_with_legend_options.ticks, 
+      data: create_graph_with_legend_options.data, 
+      table_name: create_graph_with_legend_options.a11y_table_title,
+    });
+  }
 };
 
 exports.collapse_by_so = function(programs,table,filter){
