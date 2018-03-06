@@ -245,9 +245,9 @@ const GraphLegend = ({
             onClick={()=> onClick(id)}
             onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && onClick(id)}
           > 
-            label 
+            { label }
           </span> : 
-          <span> label </span>
+          <span> { label } </span>
         } 
       </li>
     )}
