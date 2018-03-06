@@ -43,7 +43,6 @@ const emp_age_render = function(panel,data,options){
       label_col_header: text_maker("age_group"), 
       data_col_headers: ticks, 
       data: graph_args.age_group, 
-      table_name: text_maker("a11y_table_title_default"),
     });
   }
 };
@@ -225,14 +224,12 @@ new PanelGraph({
 //      label_col_header: text_maker("age_group"), 
 //      data_col_headers: ticks, 
 //      data: graph_args.age_group, 
-//      table_name: text_maker("a11y_table_title_default"),
 //    });
 //    D3.create_a11y_table({
 //      container: panel.areas().text.node(), 
 //      label_col_header: text_maker("avgage"), 
 //      data_col_headers: ticks, 
 //      data: graph_args.avg_age, 
-//      table_name: text_maker("a11y_table_title_default"),
 //    });
 //  }
 //};

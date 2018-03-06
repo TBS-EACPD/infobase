@@ -27,7 +27,6 @@ const employee_type_render = function(panel, data){
       legend_title : "employee_type",
       get_data :  _.property("data"),
       data : graph_args,
-      a11y_table_title : text_maker("historical_employee_type_title"), // create_height_clipped_graph_with_legend still makes an a11y table separatly, outside of the height clipper
     };
 
     // Inserts new row under the text/pie chart row containing bar graph, collapsed by a HeightCliper.

@@ -28,7 +28,6 @@ const occ_cat_render = function(panel,data){
       legend_title : "occupational_cat",
       get_data :  function(row){ return row.data; },
       data : graph_args,
-      a11y_table_title : text_maker("historical_employee_occ_category_title"), // create_height_clipped_graph_with_legend still makes an a11y table separatly, outside of the height clipper
     };     
     
     // Inserts new row under the text/pie chart row containing bar graph, collapsed by a HeightCliper.

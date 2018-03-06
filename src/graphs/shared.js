@@ -152,7 +152,6 @@ exports.create_height_clipped_graph_with_legend = function(panel,create_graph_wi
       label_col_header: text_maker(create_graph_with_legend_options.legend_title), 
       data_col_headers: create_graph_with_legend_options.ticks, 
       data: create_graph_with_legend_options.data, 
-      table_name: create_graph_with_legend_options.a11y_table_title,
     });
   }
 };
