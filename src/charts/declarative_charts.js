@@ -128,12 +128,15 @@ class D3GraphWithLegend extends React.Component {
     );
   }
   _render(){
-    this.graph_instance.render(
-      _.chain(this.props.options)
-        .extend({graph_area : d4.select(this.refs.graph_area)})
-        .clone()
-        .value()
-    );
+    if(!window.is_a11y_mode){
+      this.graph_instance.render(
+        _.chain(this.props.options)
+          .extend({graph_area : d4.select(this.refs.graph_area)})
+          .clone()
+          .value()
+      );
+    }
+    
   }
   componentDidMount(){
     this.graph_instance = create_graph_with_legend.call(
