@@ -255,7 +255,7 @@ D3.create_graph_with_legend = function(options){
   }
   
   // Add a11y table
-  if (!options.no_a11y || window.is_a11y_mode) {
+  if (!options.no_a11y && window.is_a11y_mode) {
     const a11y_table_title = options.a11y_table_title || "";
     
     D3.create_a11y_table({

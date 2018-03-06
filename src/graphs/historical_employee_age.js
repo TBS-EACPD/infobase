@@ -33,20 +33,20 @@ const emp_age_render = function(panel,data,options){
     no_a11y : true,
   };
   
-  // Render TabbedContent in panel graph area
-  reactAdapter.render(
-    <D3GraphWithLegend panel={panel} options={age_group_options}/>, 
-    panel.areas().graph.node() 
-  );
-  
-  // Create agre group and avgage a11y tables
-  D3.create_a11y_table({
-    container: panel.areas().text.node(), 
-    label_col_header: text_maker("age_group"), 
-    data_col_headers: ticks, 
-    data: graph_args.age_group, 
-    table_name: text_maker("historical_employee_age_title"),
-  });
+  if (!window.is_a11y_mode){
+    reactAdapter.render(
+      <D3GraphWithLegend panel={panel} options={age_group_options}/>, 
+      panel.areas().graph.node() 
+    );
+  } else {
+    D3.create_a11y_table({
+      container: panel.areas().text.node(), 
+      label_col_header: text_maker("age_group"), 
+      data_col_headers: ticks, 
+      data: graph_args.age_group, 
+      table_name: text_maker("a11y_table_title_default"),
+    });
+  }
 };
 
 new PanelGraph({
@@ -194,50 +194,50 @@ new PanelGraph({
 //    yTop : avg_age_yTop, // Pre-calculated upper y-axis value
 //    no_a11y : true,
 //  };
-//  
-//  // Render TabbedContent in panel graph area
-//  reactAdapter.render(
-//    <TabbedContent
-//      tabKeys={["age_group","avgage"]}
-//      tabLabels={{
-//        age_group : text_maker("age_group"),
-//        avgage : text_maker("avgage"),
-//      }}
-//      tabPaneContents={{
-//        age_group: <div 
-//          id={"emp_age_tab_pane"}
-//          aria-hidden={true}
-//        >
-//          <D3GraphWithLegend panel={panel} options={age_group_options}/>
-//          <div className='clearfix'></div>
-//        </div>, 
-//        avgage: <div 
-//          id={"emp_age_tab_pane"}
-//          aria-hidden={true}
-//        >
-//          <D3GraphWithLegend panel={panel} options={avg_age_options}/>
-//          <div className='clearfix'></div>
-//        </div>,
-//      }}
-//    />, 
-//    panel.areas().graph.node() 
-//  );
-//  
-//  // Create agre group and avgage a11y tables
-//  D3.create_a11y_table({
-//    container: panel.areas().text.node(), 
-//    label_col_header: text_maker("age_group"), 
-//    data_col_headers: ticks, 
-//    data: graph_args.age_group, 
-//    table_name: text_maker("historical_employee_age_title"),
-//  });
-//  D3.create_a11y_table({
-//    container: panel.areas().text.node(), 
-//    label_col_header: text_maker("avgage"), 
-//    data_col_headers: ticks, 
-//    data: graph_args.avg_age, 
-//    table_name: text_maker("avgage_graph_title"),
-//  });
+//    
+//  if (!window.is_a11y_mode){
+//    reactAdapter.render(
+//      <TabbedContent
+//        tabKeys={["age_group","avgage"]}
+//        tabLabels={{
+//          age_group : text_maker("age_group"),
+//          avgage : text_maker("avgage"),
+//        }}
+//        tabPaneContents={{
+//          age_group: <div 
+//            id={"emp_age_tab_pane"}
+//            aria-hidden={true}
+//          >
+//            <D3GraphWithLegend panel={panel} options={age_group_options}/>
+//            <div className='clearfix'></div>
+//          </div>, 
+//          avgage: <div 
+//            id={"emp_age_tab_pane"}
+//            aria-hidden={true}
+//          >
+//            <D3GraphWithLegend panel={panel} options={avg_age_options}/>
+//            <div className='clearfix'></div>
+//          </div>,
+//        }}
+//      />, 
+//      panel.areas().graph.node() 
+//    );
+//  } else {
+//    D3.create_a11y_table({
+//      container: panel.areas().text.node(), 
+//      label_col_header: text_maker("age_group"), 
+//      data_col_headers: ticks, 
+//      data: graph_args.age_group, 
+//      table_name: text_maker("a11y_table_title_default"),
+//    });
+//    D3.create_a11y_table({
+//      container: panel.areas().text.node(), 
+//      label_col_header: text_maker("avgage"), 
+//      data_col_headers: ticks, 
+//      data: graph_args.avg_age, 
+//      table_name: text_maker("a11y_table_title_default"),
+//    });
+//  }
 //};
 //
 //new PanelGraph({
