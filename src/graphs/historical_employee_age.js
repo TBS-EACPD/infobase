@@ -41,8 +41,10 @@ const emp_age_render = function(panel,data,options){
     D3.create_a11y_table({
       container: panel.areas().text.node(), 
       label_col_header: text_maker("age_group"), 
-      data_col_headers: ticks, 
-      data: graph_args.age_group, 
+      data_col_headers: [...ticks, text_maker("five_year_percent_header")], 
+      data: _.map(graph_args.age_group, dimension => { 
+        return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]} 
+      }),
     });
   }
 };
@@ -69,22 +71,24 @@ new PanelGraph({
     const {table11} = this.tables;
     const series = table11.q(dept).high_level_rows();
     
-    const age_group =  _.chain(compact_age_groups)
-      .map(age_group => {
-        const data = _.chain(series)
-          .find(row => 
-            row[0] === age_group
-          )
-          .tail()   
-          .value();
+    const dept_five_year_total_head_count = _.chain(series)
+      .map(row => d4.sum(_.drop(row)))
+      .reduce((sum, val) => sum + val, 0)
+      .value();
+
+    const age_group =  _.chain(series)
+      .map(row => {
+        const label = _.head(row)
+        const data = _.drop(row);
         return {
-          label : age_group,
-          data : data,
+          label,
+          data,
+          five_year_percent : d4.sum(data)/dept_five_year_total_head_count,
           active : true,
         };
       })
       .filter(d => d4.sum(d.data) !== 0)
-      .value()
+      .value();
     
     return {
       age_group: age_group,
@@ -112,12 +116,19 @@ new PanelGraph({
 
   calculate(gov,info){
     const {table11} = this.tables;
-    
+
+    const gov_five_year_total_head_count =_.chain(table11.q().gov_grouping())
+      .map(row => d4.sum(_.drop(row)))
+      .reduce((sum, val) => sum + val, 0)
+      .value();
+
     const age_group = compact_age_groups.map(age_range => {
+      const yearly_values = people_years.map( year =>  table11.horizontal(year,false)[age_range]);
       return {
         label : age_range,
         active: true,
-        data : people_years.map( year =>  table11.horizontal(year,false)[age_range]),
+        data : yearly_values,
+        five_year_percent : yearly_values.reduce(function(sum, val) { return sum + val;}, 0)/gov_five_year_total_head_count,
       };
     })
     
@@ -222,8 +233,10 @@ new PanelGraph({
 //    D3.create_a11y_table({
 //      container: panel.areas().text.node(), 
 //      label_col_header: text_maker("age_group"), 
-//      data_col_headers: ticks, 
-//      data: graph_args.age_group, 
+//      data_col_headers: [...ticks, text_maker("five_year_percent_header")], 
+//      data: _.map(graph_args.age_group, dimension => { 
+//        return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]} 
+//      }),
 //    });
 //    D3.create_a11y_table({
 //      container: panel.areas().text.node(), 
@@ -274,22 +287,24 @@ new PanelGraph({
 //        active : true,
 //      })
 //    
-//    const age_group =  _.chain(compact_age_groups)
-//      .map(age_group => {
-//        const data = _.chain(series)
-//          .find(row => 
-//            row[0] === age_group
-//          )
-//          .tail()   
-//          .value();
+//    const dept_five_year_total_head_count = _.chain(series)
+//      .map(row => d4.sum(_.drop(row)))
+//      .reduce((sum, val) => sum + val, 0)
+//      .value();
+//
+//    const age_group =  _.chain(series)
+//      .map(row => {
+//        const label = _.head(row)
+//        const data = _.drop(row);
 //        return {
-//          label : age_group,
-//          data : data,
+//          label,
+//          data,
+//          five_year_percent : d4.sum(data)/dept_five_year_total_head_count,
 //          active : true,
 //        };
 //      })
 //      .filter(d => d4.sum(d.data) !== 0)
-//      .value()
+//      .value();
 //    
 //    return {
 //      avg_age: avg_age,
@@ -327,11 +342,18 @@ new PanelGraph({
 //      active : true,
 //    }];
 //    
+//    const gov_five_year_total_head_count =_.chain(table11.q().gov_grouping())
+//      .map(row => d4.sum(_.drop(row)))
+//      .reduce((sum, val) => sum + val, 0)
+//      .value()
+//
 //    const age_group = compact_age_groups.map(age_range => {
+//      const yearly_values = people_years.map( year =>  table11.horizontal(year,false)[age_range]);
 //      return {
 //        label : age_range,
 //        active: true,
-//        data : people_years.map( year =>  table11.horizontal(year,false)[age_range]),
+//        data : yearly_values,
+//        five_year_percent : yearly_values.reduce(function(sum, val) { return sum + val;}, 0)/gov_five_year_total_head_count,
 //      };
 //    })
 //    
