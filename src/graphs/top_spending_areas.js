@@ -3,10 +3,18 @@ const {
 } = require("../core/Statistics");
 
 const {
+  util_components: {
+    Format,
+  },
   text_maker, 
   PanelGraph, 
   collapse_by_so,
   common_react_donut,
+  D3,
+  run_template,
+  years: {
+    std_years,
+  },
 } = require("./shared"); 
 
 const is_non_revenue = d => +(d.so_num) < 19;
@@ -103,7 +111,7 @@ new PanelGraph({
     return  common_cal([subject], this.tables.table305);
   },
   footnotes : ["SOBJ"],
-  render: common_react_donut,
+  render: window.is_a11y_mode ? a11y_render :  common_react_donut,
 });
 
 new PanelGraph({
@@ -122,6 +130,24 @@ new PanelGraph({
 
     return  common_cal(subject.programs, this.tables.table305);
   },
-  render: common_react_donut,
+  render: window.is_a11y_mode ? a11y_render : common_react_donut,
 });
 
+
+function a11y_render(
+  panel,
+  { graph_args: top_3_sos_and_remainder }
+){
+  D3.create_a11y_table({
+    container: panel.areas().graph,
+    data: _.map(top_3_sos_and_remainder, ({label, value}) => ({
+      label,
+      data: <Format type="compact1" content={value} />,
+    })),
+    label_col_header: text_maker("so"),
+    data_col_headers: [ `${run_template(_.last(std_years))} ${text_maker("spending")}` ],
+  })
+
+
+
+}
