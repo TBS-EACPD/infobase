@@ -117,7 +117,7 @@ const prov_split_render = function(panel,data,options){
       });
 
     } else {
-      historical_graph_container  = d4.select(graph_area.node()).append("div");
+      historical_graph_container = d4.select(graph_area.node()).append("div");
     }
 
 
@@ -241,14 +241,17 @@ const prov_split_render = function(panel,data,options){
       container: panel.areas().graph, 
       label_col_header: text_maker("prov"), 
       data_col_headers: _.map(people_years, y => `${run_template(y)}`), 
-      data: _.map(ordered_provs, function(op){
-        return {
-          label: op.display,
-          data: _.map(years_by_province, function(ybp){
-            return ybp[op.key];
-          }),
-        };
-      }), 
+      data: _.chain(ordered_provs)
+        .map(function(op){
+          return {
+            label: op.display,
+            data: _.map(years_by_province, function(ybp){
+              return ybp[op.key];
+            }),
+          };
+        })
+        .filter(row => _.some(row.data, data => !_.isUndefined(data)))
+        .value(), 
       table_name : text_maker("historical_employee_prov_title"),
     });
   }
