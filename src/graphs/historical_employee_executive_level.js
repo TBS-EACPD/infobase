@@ -11,18 +11,28 @@ const {
 
 const exec_level_render = function(panel,data){
   const {graph_args} = data;
+  
+  let ticks =_.map(people_years, y => `${run_template(y)}`);
+  let graph_data = graph_args;
+
+  if (window.is_a11y_mode){
+    ticks = [...ticks, text_maker("five_year_percent_header")];
+    graph_data = _.map(graph_args, dimension => { 
+      return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]} 
+    });
+  }
 
   return D3.create_graph_with_legend.call({panel},{
     legend_class : 'fcol-sm-11 fcol-md-11', 
     y_axis : text_maker("employees"),
-    ticks : _.map(people_years, y => `${run_template(y)}`),
+    ticks : ticks,
     height : this.height,
     bar : true,
     colors: infobase_colors(),
     yaxis_formatter : formats["big_int_real_raw"],
     legend_title : "ex_level",
     get_data :  function(row){ return row.data; },
-    data : graph_args,
+    data : graph_data,
     "sort_data" : false,
   }); 
 
@@ -53,6 +63,7 @@ new PanelGraph({
         .map(row => ({
           label: row.ex_lvl,
           data: people_years.map(year => row[year]),
+          five_year_percent: row.five_year_percent,
           active: (row.ex_lvl !== "Non-EX"),
         })
         )
@@ -87,9 +98,11 @@ new PanelGraph({
       .values()
       .map(ex_level => {
         const ex_level_name = ex_level.text;
+        const yearly_values = people_years.map(year => table112.horizontal(year,false)[ex_level_name]);
         return {
           label: ex_level_name,
-          data: people_years.map(year => table112.horizontal(year,false)[ex_level_name]),
+          data: yearly_values,
+          five_year_percent : yearly_values.reduce(function(sum, val) { return sum + val;}, 0)/info.gov_five_year_total_head_count,
           active: (ex_level_name !== "Non-EX"),
         };
       })
