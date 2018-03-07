@@ -14,7 +14,7 @@ import { MetaData } from '../metadata/metadata.js';
 import { IgocExplorer } from "../igoc_explorer/igoc_explorer.js";
 import { ResourceExplorer } from "../program_explorer/resource-explorer.js";
 import { InfoGraph } from '../infographic/infographic.js';
-import { Partition } from '../program_explorer2/pe2.js';
+import { PartitionRoute } from '../partition/partition.js';
 import { Glossary } from '../glossary/glossary.js';
 import { BubbleExplore } from '../dept_explore/dept_explore.js';
 import { ReportBuilder } from '../rpb/index.js';
@@ -44,7 +44,7 @@ export class App extends React.Component {
           <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={ResourceExplorer} />
           <Route path="/orgs/:level/:subject_id/infograph/:bubble?/" component={InfoGraph} />
           <Route path="/glossary/:active_key?" component={Glossary} />
-          <Route path="/partition/:method?/:value_attr?" component={Partition} />
+          <Route path="/partition/:method?/:value_attr?" component={PartitionRoute} />
           <Route path="/explore-:perspective?" component={BubbleExplore} />
           <Route path="/rpb/:config?" component={ReportBuilder} />
           <Route path="/" component={Home} />

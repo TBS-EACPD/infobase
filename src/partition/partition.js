@@ -1,8 +1,10 @@
-require("./pe2.ib.yaml");
+require("./partition.ib.yaml");
+require("./partition.scss")
 const { ensure_loaded } = require('../core/lazy_loader.js');
 const { text_maker, run_template } = require("../models/text");
 const { formats : {compact1,big_int_real} } = require('../core/format.js');
-const { PARTITION }= require("../core/D3");
+const { PartitionDiagram } = require("./PartitionDiagram.js");
+const { PartitionDataWrapper } = require("./PartitionDataWrapper.js");
 const utils = require("../core/utils");
 const Subject = require("../models/subject");
 const {
@@ -24,7 +26,7 @@ const {
 } = require('../util_components');
 
 
-export class Partition extends React.Component {
+export class PartitionRoute extends React.Component {
   constructor(){
     super()
     this.state = {loading: true};
@@ -48,14 +50,14 @@ export class Partition extends React.Component {
     });
   }
   shouldComponentUpdate(nextProps){
-    if (!_.isUndefined(this.govPartition)){
-      // Once the GovPartition diagram has been initialized, need to ensure it stays in sync whenever the path updates
+    if (!_.isUndefined(this.partition)){
+      // Once the Partition diagram has been initialized, need to ensure it stays in sync whenever the path updates
       const {
         method, 
         value_attr,
       } = this.getValidatedRouteParams(nextProps);
 
-      this.ensureGovPartitionStateMatchesRouteState(method, value_attr);
+      this.ensurePartitionStateMatchesRouteState(method, value_attr);
     }
 
     // Should only need to update once, when the table dependencies finish loading and the spinner needs to be killed
@@ -68,7 +70,7 @@ export class Partition extends React.Component {
       value_attr,
     } = this.getValidatedRouteParams(this.props);
     this.container = d4.select(ReactDOM.findDOMNode(this.refs.container));
-    this.govPartition = new GovPartition(this.container, this.update_url, method, value_attr);
+    this.partition = new Partition(this.container, this.update_url, method, value_attr);
   }
   render(){
     return (
@@ -111,19 +113,19 @@ export class Partition extends React.Component {
       };
     }
   }
-  ensureGovPartitionStateMatchesRouteState(route_method, route_value_attr){
-    const partition_method = this.govPartition.method;
-    const partition_value_attr = this.govPartition.value_attr;
+  ensurePartitionStateMatchesRouteState(route_method, route_value_attr){
+    const partition_method = this.partition.method;
+    const partition_value_attr = this.partition.value_attr;
 
     if ( (route_method !== partition_method) && (route_value_attr === partition_value_attr) ) {
-      this.govPartition.method = route_method;
+      this.partition.method = route_method;
       
       this.container.select(".select_root")
         .property("value", route_method)
         .dispatch("change");
     } else if (route_value_attr !== partition_value_attr) {
-      this.govPartition.method = route_method;
-      this.govPartition.value_attr = route_value_attr;
+      this.partition.method = route_method;
+      this.partition.value_attr = route_value_attr;
 
       this.container.select(".select_value_attr")
         .property("value", route_value_attr)
@@ -320,7 +322,7 @@ const get_common_popup_options = d => {
 const search_required_chars = 1;
 const search_debounce_time = 500;
 
-class GovPartition {
+class Partition {
   constructor(container, update_url, method, value_attr){
     
     this.update_url = update_url;
@@ -342,7 +344,7 @@ class GovPartition {
     };
     window.addEventListener("resize", adjust_partition_diagram_margin_on_resize);
 
-    this.chart = new PARTITION.Partition(this.container, {
+    this.chart = new PartitionDiagram(this.container, {
       height : 700,
     });
     const sort_vals = this.sort_vals = _.sortBy(presentation_schemes_by_data_options, d => d.id === value_attr ? -Infinity : Infinity);
@@ -445,7 +447,7 @@ class GovPartition {
   }
   dept(){
     const skip_crsos = true;
-    this.hierarchy_factory =  ()=>create_ministry_hierarchy(this.value_attr,skip_crsos,this.root_id+=1);
+    this.hierarchy_factory = ()=>create_ministry_hierarchy(this.value_attr,skip_crsos,this.root_id+=1);
     const hierarchy = this.hierarchy = this.hierarchy_factory(value_functions[this.value_attr]);
     this.hierarchy
       .each(node => {
@@ -902,7 +904,7 @@ class GovPartition {
     const default_formater = d => formaters[this.value_attr](d[this.value_attr]);
     const value_formater = this.value_formater || default_formater;
     const root_text_key = get_root_text_key(this.value_attr, this.method);
-    const wrapper = new PARTITION.DataWrapper(
+    const wrapper = new PartitionDataWrapper(
       this.hierarchy,
       show_partial_children,
       show_all_children

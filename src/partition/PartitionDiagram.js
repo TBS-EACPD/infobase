@@ -1,6 +1,6 @@
-const D3CORE = require("./core");
 const utils = require("../core/utils");
 const {text_maker} = require("../models/text");
+
 const vertical_placement_counters = {};
 const cycle_colors = function(i){
   return d4.color(window.darkCategory10Colors[i % 10]);
@@ -15,8 +15,9 @@ const assign_colors_recursively = function(node,color){
 const content_key = d=>d.id_ancestry;
 const polygon_key = d=>d.target.id_ancestry;
 
-export class Partition {
+export class PartitionDiagram {
   constructor(container,options){
+    this.options = options;
     this.outer_html = container.classed("__partition__",true);
     this.outer_html.html(`
       <div class='accessible sr-only'></div>
@@ -26,13 +27,21 @@ export class Partition {
          <div class='diagram'>  </div>
       </div>
     `);
-    container = this.outer_html.select(".diagram");
-    D3CORE.setup_graph_instance(this,container,options);
+    this.html = this.outer_html.select(".diagram");
+    
+    this.svg = this.html
+      .attr("aria-hidden","true")
+      .append("div")
+      .classed("__svg__",true)
+      .append("svg");
+
     this.defs = this.svg
       .append("defs");
+
     this.graph_area  = this.svg
       .append("g")
       .attr("class","graph_area");
+    
     this.html
       .classed("__partition__",true)
       .style("position","relative")
@@ -608,144 +617,5 @@ export class Partition {
   remove_unmagnify_all_button(){
     this.unmagnify_all_popup.remove();
     delete this.unmagnify_all_popup;
-  }
-};
-
-
-
-export class DataWrapper {
-  constructor(root,show_partial_children,show_all_children){
-    this.root = root;
-    this.__show_partial_children = show_partial_children;
-    this.__show_all_children = show_all_children;
-  }
-  to_open_levels(){
-    const levels = {};
-    this.root.each(node => {
-      return (levels[node.depth] = levels[node.depth] || []).push(node)
-    });
-    return levels; 
-  }
-  links(){
-    return _.chain(this.branches())
-      .map(source=>source.children.map(target=>({source,target})))
-      .flatten(true)
-      .value();
-  }
-  branches(){
-    return _.filter([this.root].concat(this.root.descendants()), node=> node.children);
-  }
-  show_partial_children(node){
-    let children;
-    // get rid of the minimize placeholder node
-    node.children = node.children.filter(d=>_.isUndefined(d.data.unhidden_children));
-    if (node.children) {
-      children = this.__show_partial_children(node);
-    }
-    node.children = children
-    return children;
-  }
-  show_all_children(node){
-    if (!this.magnified(node)) {
-      node.value = node.__value__;
-    }
-    if (node.children){
-      const children = this.__show_all_children(node);
-      _.chain(children)
-        .difference(node.children)
-        .filter(node=>node.value!==0)
-        .each(child=>{
-          child.eachAfter(d=>{
-            if (d.children){
-              d.children = this.__show_partial_children(d)
-            }
-          })
-        })
-        .value();
-      node.children = children;
-      node.eachAfter(c=> {
-        if (!this.collapsed(c)) {
-          c.open=true
-        }
-      });
-      return children;
-    }
-  }
-  hide_all_children(node){
-    node.eachAfter(c=> c.open=c===node);
-  }
-  unhide_all_children(node){
-    node.eachAfter(c=> c.open=true);
-  }
-  restore(node){
-    if (!node.data.hidden_children && !node.data.unhidden_children) {
-      node.value = node.__value__;
-      this.show_partial_children(node);
-    } else if (this.is_placeholder(node) && !_.isUndefined(node.data.hidden_children)) {
-      node.value = d4.sum(node.data.hidden_children, child => child.__value__);
-    }
-  }
-  unmagnify(node){
-    node.value = node.__value__;
-    const factor = 1/node.magnified;
-    this.resize_children(node,factor);
-    node.value = node.__value__;
-    node.magnified = false;
-    const parent = node.parent;
-    if (!_.some(parent.children, d=> d.magnified)){
-      parent.children
-        .forEach(d=>{
-          this.restore(d);
-          this.unhide_all_children(d);
-        })
-    } else {
-      node.value = 0;
-      this.hide_all_children(node);
-    }
-  }
-  magnify(node){
-    const parent = node.parent;
-    const top_sibling = parent.children[0];
-    node.value = node.__value__;
-    let factor;
-    if ( node.value > 0.7 * top_sibling.__value__) {
-      factor = 2;
-    } else {
-      factor = Math.abs(top_sibling.__value__/node.__value__);
-    }
-    this.resize_children(node,factor);
-    node.magnified = factor;
-    const siblings = parent.children.filter( d=> (
-      d !== node && 
-      !this.magnified(d)  &&
-      d.value !== 0
-    )); 
-    _.each(siblings, d=>{
-      d.value = 0
-      this.hide_all_children(d);
-    })
-  }                     
-  resize_children(node,factor){
-    node.value *= factor;
-    node.open = true;
-    if (node.children){
-      _.each(node.children, d=>{
-        this.resize_children( d, factor );
-      })
-    }
-    if (node.data.hidden_children){
-      _.each(node.data.hidden_children, d=>{
-        this.resize_children( d, factor );
-      })
-    } 
-  }
-  is_placeholder(node){
-    return node.data.hidden_children || node.data.unhidden_children;
-  }
-  collapsed(node){
-    return _.some(node.ancestors(), d=>d.value === 0);
-  }
-  magnified(node){
-    return _.some(node.ancestors(), d=>d.magnified);
   }
 };

@@ -32,7 +32,6 @@ D3.HBAR_Composition = require("../charts/hbar_composition");
 D3.PROGRESS_DONUT = require("../charts/progress_donut");
 D3.TWO_SERIES_BAR = require("../charts/two_series_bar");
 D3.BUBBLE_MENU = require("../charts/bubble-menu");
-D3.PARTITION = require("../charts/partition");
 //this is currently not used, treemap should not necessarily be deleted though.
 //D3.TREEMAP  = require("../charts/treemap");
 window.D3 = D3;
