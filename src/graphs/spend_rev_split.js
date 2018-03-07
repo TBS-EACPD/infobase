@@ -6,7 +6,11 @@ const {
   formats,
   text_maker,
   PanelGraph,
-  D3} = require("./shared"); 
+  D3,
+  util_components: {
+    Format,
+  },
+} = require("./shared"); 
 const is_revenue = so_num => +so_num > 19;
 const last_year_col = "{{pa_last_year}}";
 
@@ -43,17 +47,24 @@ function render(panel,calculations, options) {
     _ticks.push('net');
   }
   const ticks = _ticks.map(text_maker);
-  new D3.BAR.bar(panel.areas().graph.node(),{
-    series,
-    ticks,
-    add_xaxis : true,
-    add_yaxis : false,
-    add_labels : true,                                  
-    x_axis_line : true,                                
-    colors : infobase_colors(),
-    formater : formats.compact1_raw,
-    margin : {top: 20, right:20, left: 60, bottom: 80} ,
-  }).render();
+
+  if(window.is_a11y_mode){
+    //all information is contained in text
+    return;
+  } else {
+    new D3.BAR.bar(panel.areas().graph.node(),{
+      series,
+      ticks,
+      add_xaxis : true,
+      add_yaxis : false,
+      add_labels : true,                                  
+      x_axis_line : true,                                
+      colors : infobase_colors(),
+      formater : formats.compact1_raw,
+      margin : {top: 20, right:20, left: 60, bottom: 80} ,
+    }).render();
+  }
+  
 }
 
 const key = "spend_rev_split";

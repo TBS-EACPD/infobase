@@ -3,7 +3,12 @@ const {
   PanelGraph,
   years : {std_years},
   business_constants : {sos},
-  D3} = require("./shared"); 
+  text_maker,
+  D3,
+  util_components: {
+    Format,
+  },
+} = require("./shared"); 
 
 new PanelGraph({
   level: "gov",
@@ -31,19 +36,37 @@ new PanelGraph({
   render(panel,calculations){
     const {info, graph_args} = calculations;
 
-    new D3.LINE.ordinal_line(
-      panel.areas().graph.node(),
-      {
-        series : graph_args.series,
-        ticks : info.last_years,
-        colors : D3.tbs_color(),
-        add_yaxis : true,
-        add_xaxis : true,
-        y_axis: "($)",
-        formater : formats.compact1_raw,
-      }
-    ).render();
+    if(window.is_a11y_mode){
+      D3.create_a11y_table({
+        container: panel.areas().graph,
+        data_col_headers: [ text_maker("spending") ],
+        data: _.chain(info.last_years)
+          .zip(graph_args.series["0"])
+          .map( ([label, amt]) => ({
+            label,
+            data: <Format type="compact1" content={amt} />,
+          }))
+          .value(),
+      })
 
+
+    } else {
+
+
+      new D3.LINE.ordinal_line(
+        panel.areas().graph.node(),
+        {
+          series : graph_args.series,
+          ticks : info.last_years,
+          colors : D3.tbs_color(),
+          add_yaxis : true,
+          add_xaxis : true,
+          y_axis: "($)",
+          formater : formats.compact1_raw,
+        }
+      ).render();
+
+    }
   },
 });
 

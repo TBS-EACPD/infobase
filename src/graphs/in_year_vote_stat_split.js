@@ -26,7 +26,7 @@ new PanelGraph({
       {value:info.dept_voted_est_in_year, label :text_maker("voted") },
     ];
   },
-  render: common_react_donut,
+  render: window.is_a11y_mode ? _.noop : common_react_donut,
 });
 
 new PanelGraph({
@@ -47,6 +47,6 @@ new PanelGraph({
       {value:info.gov_voted_est_in_year, label :text_maker("voted") },
     ];
   },
-  render: common_react_donut,
+  render: window.is_a11y_mode ? _.noop : common_react_donut,
 });
 

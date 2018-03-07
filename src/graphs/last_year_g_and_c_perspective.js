@@ -38,6 +38,12 @@ new PanelGraph({
     // this graph will compare both the total
     // g&c spend of this department with the govenrment
     // and with the rest of the it's budget using
+
+    if(window.is_a11y_mode){
+      //all information is contained in text
+      return;
+    }
+
     const { subject, graph_args } = calculations; 
     const colors = infobase_colors();
     new D3.CIRCLE.circle_pie_chart( 

@@ -8,6 +8,10 @@ const {
   },
   D3,
   formats,
+  text_maker,
+  util_components: {
+    Format,
+  },
 } = require("./shared"); 
 
 function spend_by_so_hist_render (panel,calculations){
@@ -15,15 +19,30 @@ function spend_by_so_hist_render (panel,calculations){
   const {ticks, data} = graph_args;
   const legend_title = "so";
 
-  return D3.create_graph_with_legend.call({panel},{
-    get_data: _.property('data'), 
-    data,
-    ticks,
-    y_axis : "$",
-    yaxis_formatter: formats.compact1_raw,
-    sort_data: false,
-    legend_title: legend_title,
-  });
+  if(window.is_a11y_mode){
+    D3.create_a11y_table({
+      container: panel.areas().graph,
+      data: data.map( ({label, data}) => ({
+        label,
+        /* eslint-disable react/jsx-key */
+        data: data.map(amt => <Format type="compact1" content={amt} />),
+      })),
+      label_col_header: text_maker("so"),
+      data_col_headers: ticks, 
+    })
+  } else {
+    D3.create_graph_with_legend.call({panel},{
+      get_data: _.property('data'), 
+      data,
+      ticks,
+      y_axis : "$",
+      yaxis_formatter: formats.compact1_raw,
+      sort_data: false,
+      legend_title: legend_title,
+    });
+  }
+
+  
 };      
 
 _.each(['gov', 'dept'], lvl => {
