@@ -212,6 +212,7 @@ class HistoricalProgramBars extends React.Component {
     if(window.is_a11y_mode){
       return <div>
         <A11YTable 
+          table_name={text_maker("historical_prog_title")}
           data={_.map(data, ({label, data})=>({
             label,
             /* eslint-disable react/jsx-key */
@@ -341,6 +342,7 @@ class DetailedProgramSplit extends React.Component {
         <div className="row">
           <div className="results-separator" >
             <table className="table table-striped table-bordered">
+              <caption><TextMaker text_key="so_spend_by_prog" /></caption>
               <thead>
                 <tr>
                   <th scope="col">
