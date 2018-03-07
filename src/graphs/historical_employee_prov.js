@@ -223,31 +223,42 @@ const prov_split_render = function(panel,data,options){
   }
   
 
-  // Add a11y table
-  const ordered_provs = _.chain(provinces)
-    .map( (val,key) => ({ key, display: val.text }) )
-    .reject( ({key}) => _.includes([
-      'qclessncr',
-      'onlessncr',
-      "onncr",
-      'qcncr',
-    ], key ) 
-    )
-    .value();
-  
+  // Add a11y table  
   if(window.is_a11y_mode){
+    const ordered_provs = _.chain(provinces)
+      .map( (val,key) => ({ key, display: val.text }) )
+      .reject( ({key}) => _.includes([
+        'qclessncr',
+        'onlessncr',
+        "onncr",
+        'qcncr',
+      ], key ) 
+      )
+      .value();
+    
+    const all_year_headcount_total = _.chain(years_by_province)
+      .map(year_by_province => d4.sum(_.values(year_by_province)))
+      .reduce( (sum, value) => sum +value, 0)
+      .value();
 
     D3.create_a11y_table({
       container: panel.areas().graph, 
       label_col_header: text_maker("prov"), 
-      data_col_headers: _.map(people_years, y => `${run_template(y)}`), 
+      data_col_headers: [..._.map(people_years, y => `${run_template(y)}`), text_maker("five_year_percent_header")], 
       data: _.chain(ordered_provs)
         .map(function(op){
+          const yearly_headcounts = _.map(years_by_province, function(ybp){
+            return ybp[op.key];
+          });
+
+          const five_year_avg_share = d4.sum(yearly_headcounts)/all_year_headcount_total;
+          const formated_avg_share =  five_year_avg_share > 0 ? 
+            formats["percentage1_raw"](five_year_avg_share) :
+            undefined;
+
           return {
             label: op.display,
-            data: _.map(years_by_province, function(ybp){
-              return ybp[op.key];
-            }),
+            data: [...yearly_headcounts, formated_avg_share],
           };
         })
         .filter(row => _.some(row.data, data => !_.isUndefined(data)))
