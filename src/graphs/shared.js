@@ -51,109 +51,84 @@ exports.create_ppl_share_pie = function({
   label_col_header,
   sort_func,
 }) {
-  if (!window.is_a11y_mode){
-    sort_func = sort_func || ((a,b) => b.value-a.value);
-  
-    const data = graph_args
-      .map( d => 
-        ({
-          value : d.five_year_percent, 
-          label : d.label,
-        })
-      ).sort(function (a, b) {
-        return sort_func(a,b);
-      });
-  
-    const color_scale = infobase_colors();
-  
-    const legend_items = _.map(data, ({value, label }) => ({
-      value,
-      label,
-      color: color_scale(label),
-      id: label,
-    }));
-  
-    reactAdapter.render(
-      <div aria-hidden={true}
-        className="ppl-share-pie-area"
-      >
-        <div className="ppl-share-pie-graph">
-          <SafePie 
-            label_attr={false}
-            showLabels={false}
-            color={color_scale}
-            pct_formatter={formats.percentage1}
-            data={data}
-            inner_radius={true}
-            inner_text={true}
-            inner_text_fmt={formats.compact1_raw}
-            inner_text_content={label_col_header}
-          />
-        </div>
-        <div className="ppl-share-pie-legend">
-          <div className="centerer">
-            <div className="centerer-IE-fix">
-              <span className="ppl-share-percent-header">
-                {text_maker("five_year_percent_header")}
-              </span>
-              <TabularPercentLegend
-                items={legend_items}
-                get_right_content={item => 
-                  <span>
-                    <Format type="percentage1" content={item.value} />
-                  </span>
-                }
-              />
-            </div>
+  sort_func = sort_func || ((a,b) => b.value-a.value);
+
+  const data = graph_args
+    .map( d => 
+      ({
+        value : d.five_year_percent, 
+        label : d.label,
+      })
+    ).sort(function (a, b) {
+      return sort_func(a,b);
+    });
+
+  const color_scale = infobase_colors();
+
+  const legend_items = _.map(data, ({value, label }) => ({
+    value,
+    label,
+    color: color_scale(label),
+    id: label,
+  }));
+
+  reactAdapter.render(
+    <div aria-hidden={true}
+      className="ppl-share-pie-area"
+    >
+      <div className="ppl-share-pie-graph">
+        <SafePie 
+          label_attr={false}
+          showLabels={false}
+          color={color_scale}
+          pct_formatter={formats.percentage1}
+          data={data}
+          inner_radius={true}
+          inner_text={true}
+          inner_text_fmt={formats.compact1_raw}
+          inner_text_content={label_col_header}
+        />
+      </div>
+      <div className="ppl-share-pie-legend">
+        <div className="centerer">
+          <div className="centerer-IE-fix">
+            <span className="ppl-share-percent-header">
+              {text_maker("five_year_percent_header")}
+            </span>
+            <TabularPercentLegend
+              items={legend_items}
+              get_right_content={item => 
+                <span>
+                  <Format type="percentage1" content={item.value} />
+                </span>
+              }
+            />
           </div>
         </div>
-      </div>,
-      pie_area.node()
-    );
-  } else {
-    // Pie a11y table
-    D3.create_a11y_table({
-      container: pie_area.node().parentElement, 
-      label_col_header : label_col_header, 
-      data_col_headers: [text_maker("five_year_percent_header")], 
-      data : graph_args
-        .map( d => 
-          ({
-            data : (d.five_year_percent*100).toFixed(1) + "%", 
-            label : d.label,
-          })
-        ),
-    });
-  }
+      </div>
+    </div>,
+    pie_area.node()
+  );
 };
 
 // Adds a new row to the bottom of a panel containing a height clipped create_graph_with_legend graph. Adds a11y tables outside of HeightClipper.
 exports.create_height_clipped_graph_with_legend = function(panel,create_graph_with_legend_options) {
-  if (!window.is_a11y_mode){
-    const panel_body = d4.select(find_parent(panel.areas().graph.node(), n => d4.select(n).classed("panel-body")));
-    const new_row = panel_body
-      .insert("div",".panel-body > div.frow:not(.middle-xs)")
-      .classed("frow middle-xs",true)
-      .style("margin-top", "-20px");
-  
-    reactAdapter.render(
-      <div className="fcol-xs-12 fcol-sm- graphic fcol-md-12 mrgn-bttm-sm">
-        <HeightClipper clipHeight={185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient gradient-strong"}>
-          <div className="height-clipped-graph-area" aria-hidden={true}>
-            <D3GraphWithLegend panel={panel} options={create_graph_with_legend_options}/>
-          </div>
-        </HeightClipper>
-      </div>, 
-      new_row.node()
-    );
-  } else {
-    D3.create_a11y_table({
-      container: panel.areas().graph.node(),
-      label_col_header: text_maker(create_graph_with_legend_options.legend_title), 
-      data_col_headers: create_graph_with_legend_options.ticks, 
-      data: create_graph_with_legend_options.data, 
-    });
-  }
+  const panel_body = d4.select(find_parent(panel.areas().graph.node(), n => d4.select(n).classed("panel-body")));
+  const new_row = panel_body
+    .insert("div",".panel-body > div.frow:not(.middle-xs)")
+    .classed("frow middle-xs",true)
+    .style("margin-top", "-20px");
+
+  reactAdapter.render(
+    <div className="fcol-xs-12 fcol-sm- graphic fcol-md-12 mrgn-bttm-sm">
+      <HeightClipper clipHeight={185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient gradient-strong"}>
+        <div className="height-clipped-graph-area" aria-hidden={true}>
+          <D3GraphWithLegend panel={panel} options={create_graph_with_legend_options}/>
+        </div>
+      </HeightClipper>
+    </div>, 
+    new_row.node()
+  );
 };
 
 exports.collapse_by_so = function(programs,table,filter){

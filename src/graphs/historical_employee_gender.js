@@ -5,35 +5,25 @@ const {
   PanelGraph,
   create_ppl_share_pie,
   create_height_clipped_graph_with_legend,
+  D3,
   years : {people_years},
   business_constants : { gender },
 } = require("./shared"); 
 
 const employee_gender_render = function(panel, data){
-  const {graph_args, subject } = data;
+  const {graph_args} = data;
   
-  if ( (graph_args.length === 1) && (graph_args[0].label === gender.sup.text) ){
-    // If all data in last five years suppressed, replace text and graph with suppression explanation
-    const text_node = panel.areas().text.node();
-    const text_parent_node = text_node.parentNode;
-    
-    // Give text node full panel width
-    text_parent_node.classList.remove("fcol-md-7");
-    text_parent_node.classList.add("fcol-md-12");
-    
-    // Insert suppression explanation text
-    text_node.innerHTML = text_maker("employee_gender_all_suppressed_desc", {dept_name: subject.sexy_name});
-    
-  } else {
-    
-    if (this.level === "dept"){
+  const ticks = _.map(people_years, y => `${run_template(y)}`);
+
+  if (!window.is_a11y_mode){
+    if (this.level === "dept" || window.is_a11y_mode){
       const create_graph_with_legend_options = {
         legend_col_full_size : 4,
         graph_col_full_size : 8,
         graph_col_class : "height-clipped-bar-area",
         legend_class : 'fcol-sm-11 fcol-md-11',
         y_axis : text_maker("employees"),
-        ticks : _.map(people_years, y => `${run_template(y)}`),
+        ticks : ticks,
         height : this.height,
         bar : true,
         stacked : false,
@@ -52,6 +42,15 @@ const employee_gender_render = function(panel, data){
       pie_area : panel.areas().graph,
       graph_args, 
       label_col_header : text_maker("employee_gender"),
+    });
+  } else {
+    D3.create_a11y_table({
+      container: panel.areas().text.node(), 
+      label_col_header: text_maker("age_group"), 
+      data_col_headers: [...ticks, text_maker("five_year_percent_header")], 
+      data: _.map(graph_args, dimension => { 
+        return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]} 
+      }),
     });
   }
 };
