@@ -322,3 +322,9 @@ resource_structure_title:
   transform: [handlebars]
   en: Resource Structure
   fr: Structure des ressources  
+
+
+historical_prog_title:
+  transform: [handlebars]
+  en:  Historical Program Spending ({{pa_last_year_5}} to {{pa_last_year}})
+  fr:  Historique des dépenses de Programmes ({{pa_last_year_5}} à {{pa_last_year}})

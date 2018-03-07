@@ -108,6 +108,6 @@ other_sos:
   fr: Tous les autres articles courants
 
 so_spend_by_prog:
-  transform: [handlebars,markdown]
+  transform: [handlebars]
   en: Standard Object Spending by Program ({{pa_last_year}})
   fr: Dépenses par article courant, par programmes ({{pa_last_year}})

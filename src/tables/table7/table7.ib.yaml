@@ -137,25 +137,3 @@ historical_g_and_c_custom_new_row:
       </div>
       <div class='clearfix'></div>
     </div>
-
-
-historical_prog_title:
-  transform: [handlebars]
-  en:  Historical Program Spending ({{pa_last_year_5}} to {{pa_last_year}})
-  fr:  Historique des dépenses de Programmes ({{pa_last_year_5}} à {{pa_last_year}})
-
-historical_prog_new_row:
-  transform: [handlebars]
-  text: |
-    <div class="results-separator"> </div>
-    <div aria-hidden='true' >
-      <div style='padding-bottom:10px'  class='center-text font-xlarge'>
-       <strong>{{gt "historical_prog_title"}}</strong>
-      </div>
-      <div class="x1 col-xs-12 col-md-4">
-      </div>
-      <div class="x2 col-xs-12 col-md-8" style='position:relative'>
-      </div>
-      <div class='clearfix'></div>
-    </div>
-

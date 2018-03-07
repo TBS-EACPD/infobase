@@ -6,21 +6,21 @@ const {
   text_maker,
   run_template,
   PanelGraph,
-  utils : {find_parent},
-  D3,
   reactAdapter,
   util_components: {
     TextMaker,
     Select,
+    Format,
   },
   infograph_href_template,
   years : {std_years},
+  declarative_charts: {
+    Bar,
+    GraphLegend,
+    StackedHbarChart,
+    A11YTable,
+  },
 } = require("./shared"); 
-
-const {
-  StackedHbarChart,
-  GraphLegend,
-} = require('../charts/declarative_charts.js');
 
 const { sos } = require('../models/businessConstants.js');
 
@@ -120,11 +120,11 @@ const info_deps_by_level = {
 
     render(panel, calculations, options){
       const {
-        info,
         graph_args: {
           flat_data,
           higher_level_mapping,
           top_3_so_nums,
+          table6_data,
         },
       } = calculations;
 
@@ -156,81 +156,119 @@ const info_deps_by_level = {
       const node = panel.areas().graph.node();
 
       reactAdapter.render(
-        <DetailedProgramSplit
-          flat_data={flat_data}
-          arrangements={arrangements}
-          top_3_so_nums={top_3_so_nums}
-        />,
+        <div>
+          <div>
+            <DetailedProgramSplit
+              flat_data={flat_data}
+              arrangements={arrangements}
+              top_3_so_nums={top_3_so_nums}
+            />
+          </div>
+          <div>
+            <HistoricalProgramBars
+              data={_.map(table6_data, ({label,data},ix) => ({
+                label,
+                data,
+                id: `${ix}-${label}`,  //need unique id, program names don't always work!
+              }))}
+            />
+          </div>
+        </div>,
         node
       ); 
-
-      const graph_area = panel.areas().graph;
-  
-      const graph_parent = d4.select(
-        find_parent(graph_area.node(), n => d4.select(n).classed("panel-body"))
-      ); 
-  
-      const new_row = graph_parent
-        .insert("div",".panel-body > div.row")
-        .classed("row",true)
-        .html(text_maker("historical_prog_new_row"));
-       
-  
-      const draw_graph = function(area, data){
-        const legend_area =area.select(".x1");
-        const graph_area = area.select(".x2");
-        const colors = d4.scaleOrdinal(d4.schemeCategory20);
-  
-        area.selectAll(".x1 .d3-list, .x2 *").remove();
-  
-        // create the list as a dynamic graph legend
-        const list = D3.create_list(legend_area.node(), data, {
-          html : d => d.label,
-          colors : colors,
-          width : "400px",
-          interactive : true,
-          height : 400,
-          // title : mapped_data[0].type,
-          legend : true,
-          ul_classes : "legend",
-          multi_select : true,
-        });
-  
-        const all_active = _.every(data,"active");
-        const data_to_series_format =  all_active ?  
-          _.chain(data)
-            .map(function(obj){ return [obj.label,obj.data];})
-            .fromPairs()
-            .value() : 
-          {};
-  
-        const graph = new D3.BAR.bar(
-          graph_area.node(),
-          { 
-            add_xaxis : true,                                   
-            x_axis_line : true,                                
-            add_yaxis : true,                                  
-            // add_labels : true,
-            stacked: true,                               
-            margin : {top: 20, right:20, left: 60, bottom: 20} ,
-            formater : formats.compact1_raw,
-            y_axis : "($)",
-            series: data_to_series_format, 
-            ticks : info.last_years,
-          }
-        )
-  
-        // hook the list dispatcher up to the graph
-        list.dispatch.on("click", D3.on_legend_click(graph,colors));
-        // simulate the first item on the list being selected
-  
-        list.dispatch.call("click","",data[0],0,list.first,list.new_lis); 
-      }
-      draw_graph(new_row, calculations.graph_args.table6_data)
 
     },
   });
 });
+
+class HistoricalProgramBars extends React.Component {
+  constructor(props){
+    super(props);
+    const { data } = this.props;
+
+    //start by picking the 3 largest programs that existed in pa_last_year
+    const active_last_year_progs = _.chain(data)
+      .sortBy(({data}) => _.last(data) || 0)
+      .takeRight(3)
+      .map('id')
+      .value();
+
+    this.state = {
+      selected: active_last_year_progs,
+    };
+  }
+  render(){
+    const { data } = this.props;
+    const ticks = std_years.map(yr => run_template(yr));
+    const { selected } = this.state;
+
+    const colors = d4.scaleOrdinal(d4.schemeCategory20);
+    const graph_data = _.chain(data)
+      .filter( ({id}) => _.includes(selected, id) )
+      .map( ({label, data }) => [ label, data ])
+      .fromPairs()
+      .value();
+
+    if(window.is_a11y_mode){
+      return <div>
+        <A11YTable 
+          data={_.map(data, ({label, data})=>({
+            label,
+            /* eslint-disable react/jsx-key */
+            data: data.map(amt => <Format type="compact1" content={amt} />),
+          }))}
+          label_col_header={text_maker("program")}
+          data_col_headers={ticks}
+        />
+      </div>
+    }
+
+    return <div>
+      <div className="results-separator" />
+      <div style={{paddingBottom:'10px'}} className='center-text font-xlarge'>
+        <strong><TextMaker text_key="historical_prog_title" /></strong>
+      </div>
+      <div className="frow">
+        <div className="fcol-md-4">
+          <div
+            className="well legend-container"
+            style={{ maxHeight: "400px" }}
+          >
+            <GraphLegend
+              items={_.chain(data)
+                .sortBy(({data}) => _.last(data) || 0 )
+                .reverse()
+                .map( ({ label, id }) => ({
+                  label,
+                  active: _.includes(selected, id),
+                  id,
+                  color: colors(label),
+                }))
+                .value()
+              }
+              onClick={id => {
+                this.setState({
+                  selected: _.toggle_list(selected, id),
+                });
+              }}
+            />
+          </div>
+        </div>
+        <div className="fcol-md-8">
+          <Bar
+            series={graph_data}
+            ticks={ticks}
+            stacked={true}
+            margin={{ top: 20, right: 20, left: 60, bottom: 20 }}
+            formater={formats.compact1_raw}
+            y_axis="($)"
+            colors={colors}
+          />
+        </div>
+      </div>
+    </div>;
+  }
+}
 
 class DetailedProgramSplit extends React.Component {
   constructor(){
@@ -298,83 +336,90 @@ class DetailedProgramSplit extends React.Component {
       })
       .value();
 
+    if(window.is_a11y_mode){
+      return (
+        <div className="row">
+          <div className="results-separator" >
+            <table className="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">
+                    <TextMaker text_key="program"/>
+                  </th>
+                  <th scope="col">
+                    <TextMaker text_key="so"/>
+                  </th>
+                  <th scope="col">
+                    {run_template("{{pa_last_year}}")} <TextMaker text_key="expenditures" /> 
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {_.map( flat_data, ({so_label, program, value }) => 
+                  <tr key={program.id+so_label}>
+                    <td> {program.name} </td>
+                    <td> {so_label} </td>
+                    <td> <Format type="compact1" content={value} /> </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      );
+    }
 
-    return <div className="row">
+    return <div>
       <div className="results-separator" />
       <div style={{paddingBottom:'10px'}} className='center-text font-xlarge'>
         <strong><TextMaker text_key="so_spend_by_prog" /></strong>
       </div>
-      <div className="col-md-4">
-        <label>
-          <TextMaker text_key="filter_by_so" />
-          <Select 
-            selected={selected_arrangement}
-            options={_.map(arrangements, ({id, label}) => ({ 
-              id,
-              display: label,
-            }))}
-            onSelect={id=> this.setState({selected_arrangement: id}) }
+      <div className="frow">
+        <div className="fcol-md-4">
+          <label>
+            <TextMaker text_key="filter_by_so" />
+            <Select 
+              selected={selected_arrangement}
+              options={_.map(arrangements, ({id, label}) => ({ 
+                id,
+                display: label,
+              }))}
+              onSelect={id=> this.setState({selected_arrangement: id}) }
+              style={{
+                display: 'block',
+                margin: '10px auto',
+              }}
+              className="form-control"
+            />
+          </label>
+          { !_.isEmpty(legend_items) &&
+            <div className="well legend-container">
+              <GraphLegend
+                items={legend_items}  
+              />
+            </div>
+          }
+        </div> 
+        <div className="fcol-md-8">
+          <div 
             style={{
-              display: 'block',
-              margin: '10px auto',
+              maxHeight: '500px',
+              overflowY: 'auto',
+              overflowX: 'hidden',
             }}
-            className="form-control"
-          />
-        </label>
-        { !_.isEmpty(legend_items) &&
-          <div className="well legend-container">
-            <GraphLegend
-              items={legend_items}  
+          >
+            <StackedHbarChart
+              font_size="12px"
+              bar_height={60} 
+              data={graph_ready_data}
+              formater={formats.compact1}
+              colors={colors}
+              bar_label_formater={ ({label,href}) => `<a href="${href}"> ${label} </a>` }
             />
           </div>
-        }
-      </div> 
-      <div className="col-md-8">
-        <div 
-          style={{
-            maxHeight: '500px',
-            overflowY: 'auto',
-            overflowX: 'hidden',
-          }}
-        >
-          <StackedHbarChart
-            font_size="12px"
-            bar_height={60} 
-            data={graph_ready_data}
-            formater={formats.compact1}
-            colors={colors}
-            bar_label_formater={ ({label,href}) => `<a href="${href}"> ${label} </a>` }
-          />
         </div>
       </div> 
-      <div className="clearfix" />
-      <div className="sr-only">
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">
-                <TextMaker text_key="program"/>
-              </th>
-              <th scope="col">
-                <TextMaker text_key="so"/>
-              </th>
-              <th scope="col">
-                {run_template("{{pa_last_year}}")} <TextMaker text_key="expenditures" /> 
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {_.map( flat_data, ({so_label, program, value }) => 
-              <tr key={program.id+so_label}>
-                <td> {program.name} </td>
-                <td> {so_label} </td>
-                <td> {value} </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-    </div>
+    </div>;
 
   }
 
