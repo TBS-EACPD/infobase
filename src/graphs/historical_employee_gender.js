@@ -109,6 +109,11 @@ new PanelGraph({
 
   calculate(gov,info){
     const {table302} = this.tables;
+    
+    const gov_five_year_total_head_count =_.chain(table302.q().gov_grouping())
+      .map(row => d4.sum(_.drop(row)))
+      .reduce((sum, val) => sum + val, 0)
+      .value();
 
     return _.values(gender)
       .map(gender_type => {
@@ -117,7 +122,7 @@ new PanelGraph({
         return {
           label : gender_text,
           data :  yearly_values,
-          five_year_percent : yearly_values.reduce(function(sum, val) { return sum + val;}, 0)/info.gov_five_year_total_head_count,
+          five_year_percent : yearly_values.reduce(function(sum, val) { return sum + val;}, 0)/gov_five_year_total_head_count,
           active : true,
         };
       });
