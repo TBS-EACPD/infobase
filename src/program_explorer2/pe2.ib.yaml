@@ -673,6 +673,9 @@ partition_controls:
 partition_title:
   en: The Government at a Glance
   fr: Coup d'œil sur le gouvernement
+partition_route_description:
+  en: The Government at a Glance diagram provides an overview of the federal government operations across various tagging schemes by means of a single interactive chart.
+  fr: Le diagramme « Coup d’œil sur le gouvernement » donne un aperçu des opérations du gouvernement fédéral selon différents mécanismes d’étiquetage au moyen d’un seul graphique interactif.
 partition_sr_only_content:
   transform: [markdown]
   en: For a more accessible experience, visit the resource [explorer](#resource-explorer), which covers the same datasets.

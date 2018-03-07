@@ -74,6 +74,8 @@ export class Partition extends React.Component {
     return (
       <StandardRouteContainer
         ref="container"
+        title={text_maker("partition_title")}
+        description={text_maker("partition_route_description")}
         breadcrumbs={[text_maker("partition_title")]}
         route_key="partition"
       >
