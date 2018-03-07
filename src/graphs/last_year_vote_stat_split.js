@@ -32,7 +32,7 @@ new PanelGraph({
 
     return vote_stat;
   },
-  render: common_react_donut,
+  render: window.is_a11y_mode ? _.noop : common_react_donut,
 });
 
 
@@ -61,7 +61,7 @@ new PanelGraph({
       })
       .value();
   },
-  render: common_react_donut,
+  render: window.is_a11y_mode ? _.noop : common_react_donut,
 });
 
 
