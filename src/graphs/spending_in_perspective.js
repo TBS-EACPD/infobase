@@ -156,6 +156,10 @@ new PanelGraph({
   text :"",
 
   calculate(subject,info,options){
+    if(window.is_a11y_mode){
+      //turn off this panel in a11y mode
+      return false;
+    }
     if(subject.dead_program){
       return false;
     }
