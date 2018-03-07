@@ -230,7 +230,8 @@ class SingleSubjExplorer extends React.Component {
           <li className={classNames("tab_label", doc==="drr16" && "active_tab")} onClick={()=> tab_on_click('drr16')}>
             <span 
               tabIndex={0}
-              role="button" 
+              role="button"
+              aria-pressed={doc === "drr16"}
               className="tab_label_text" 
               onClick={()=> tab_on_click('drr16')}
               onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('drr16')}
@@ -242,6 +243,7 @@ class SingleSubjExplorer extends React.Component {
             <span 
               tabIndex={0}
               role="button"
+              aria-pressed={doc === "dp17"}
               className="tab_label_text"
               onClick={()=> tab_on_click('dp17')}
               onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32)&& tab_on_click('dp17')}

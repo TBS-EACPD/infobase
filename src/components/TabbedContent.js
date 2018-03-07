@@ -40,6 +40,7 @@ export class TabbedContent extends React.Component {
                 tabIndex={0} 
                 className={"tab_label_text"}
                 role="button"
+                aria-pressed={key === openTabKey}
                 onClick={()=>{
                   this.setState({openTabKey: key});
                 }}
