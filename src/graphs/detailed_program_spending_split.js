@@ -1,6 +1,7 @@
 const {
   Subject: {
     Program,
+    Dept,
   },
   formats,
   text_maker,
@@ -50,6 +51,8 @@ const info_deps_by_level = {
     title : "detailed_program_spending_split_title",
     text :  text_keys[level_name],
     calculate(subject,info,options){
+
+      const is_tag = subject.level === "tag";
   
       const {table305, table6} = this.tables;
 
@@ -101,7 +104,7 @@ const info_deps_by_level = {
         })
         .map(row => 
           ({
-            label : row.prgm ,
+            label : is_tag ? `${row.prgm} (${Dept.lookup(row.dept).acronym})` : row.prgm,
             data : exp_cols.map(col => row[col]),
             active : false,
           })
