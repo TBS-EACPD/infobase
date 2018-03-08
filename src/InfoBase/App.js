@@ -12,7 +12,7 @@ export const app_reducer = (state={ lang: window.lang }, { type, payload }) => {
 import { Home } from '../home/home.js';
 import { MetaData } from '../metadata/metadata.js';
 import { IgocExplorer } from "../igoc_explorer/igoc_explorer.js";
-import { ResourceExplorer } from "../program_explorer/resource-explorer.js";
+import { ResourceExplorer } from "../resource_explorer/resource-explorer.js";
 import { InfoGraph } from '../infographic/infographic.js';
 import { PartitionRoute } from '../partition/partition.js';
 import { Glossary } from '../glossary/glossary.js';
