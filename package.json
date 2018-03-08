@@ -87,29 +87,22 @@
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-
     "debug_IB_base": "node --inspect-brk build_code/copy_static_assets.js IB",
     "IB_base": "node build_code/copy_static_assets.js IB",
-
     "IB_dev": "node build_code/webpack_starter.js old_client BOTH",
     "IB_dev_en": "node build_code/webpack_starter.js old_client",
     "IB_q": "node build_code/webpack_starter.js NO-BABEL old_client",
     "IB_q_both": "node build_code/webpack_starter.js NO-BABEL BOTH old_client",
     "IB_prod": "node build_code/webpack_starter.js PROD BOTH old_client",
-    
-
     "new_clients_base": "node new_client_build_code/cp_static.js",
-
     "new_IB_q": "node build_code/webpack_starter.js NO-BABEL new_client",
     "new_IB_dev_en": "node build_code/webpack_starter.js new_client",
     "new_IB_dev": "node build_code/webpack_starter.js new_client BOTH",
-
     "new_IB_a11y_q": "node build_code/webpack_starter.js NO-BABEL a11y_client",
     "new_IB_a11y_q_both": "node build_code/webpack_starter.js NO-BABEL BOTH a11y_client",
     "new_IB_a11y_dev_en": "node build_code/webpack_starter.js a11y_client",
     "new_IB_a11y_dev": "node build_code/webpack_starter.js a11y_client BOTH",
     "new_IB_a11y_prod": "node build_code/webpack_starter.js a11y_client BOTH PROD"
-
   },
   "author": [
     "Andrew Gibson",
