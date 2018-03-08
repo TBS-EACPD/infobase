@@ -1,23 +1,32 @@
 @import '../common_css/common-variables';
 
 /* Partition diagram */
-.partition-container.__partition__ {
+.partition-container {
   width: 98vw;
   margin-top: 10px;
 }
 
-.__partition__ > .visual{
+.__partition__ {
   min-width: 1000px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.__partition__ > .visual > .diagram-notes {
+.__partition__ > .partition-diagram-fader {
+  height: 100%;
+  width: inherit;
+  position: absolute;
+  background-color: rgba(4, 18, 37, 0.81);
+  border-radius: 10px;
+  z-index: 101;
+}
+
+.__partition__ > .partition-notes {
   margin-bottom: 10px;
   overflow-y: hidden;
 }
 
-.__partition__ > .visual > .controls {
+.__partition__ > .partition-controls {
   width: inherit;
   min-width: inherit;
   background-color: rgb(4, 18, 37);
@@ -25,13 +34,14 @@
   border-radius: 5px;
 }
 
-.__partition__ > .visual > .controls > .form-horizontal {
+.__partition__ > .partition-controls > .form-horizontal {
   display: flex;
   flex-direction: row;
   position: relative;
   padding: 15px;
   padding-top: 9px;
 }
+
 
 .partition-control-element {
   display: flex;
@@ -64,12 +74,12 @@
   font-weight: $mediumFontWeight;
 }
 
-.__partition__.diagram {
+.partition-diagram {
   background-color:rgb(4, 18, 37);
   min-width: inherit;
 }
 
-.__partition__.diagram > .header{
+.partition-diagram > .header{
   position: absolute;
   text-align: center;
   color: #fff;
@@ -288,15 +298,6 @@ ul.partition-intro-two-col-list {
     width: 50%;
     padding-right: 20px;
   }
-}
-
-.__partition__ > .visual > .partition-diagram-fader {
-  height: 100%;
-  width: inherit;
-  position: absolute;
-  background-color: rgba(4, 18, 37, 0.81);
-  border-radius: 10px;
-  z-index: 101;
 }
 
 .partition-content:focus a.minimize.hovering,

@@ -18,19 +18,17 @@ const polygon_key = d=>d.target.id_ancestry;
 export class PartitionDiagram {
   constructor(container,options){
     this.options = options;
-    this.outer_html = container.classed("__partition__",true);
+    this.outer_html = container;
     this.outer_html.html(`
-      <div class='accessible sr-only'></div>
-      <div class='visual' aria-hidden='true'>
-         <div class='diagram-notes'>  </div>
-         <div class='controls'>  </div>
-         <div class='diagram'>  </div>
+      <div class='__partition__' aria-hidden='true'>
+         <div class='partition-notes'>  </div>
+         <div class='partition-controls'>  </div>
+         <div class='partition-diagram'>  </div>
       </div>
     `);
-    this.html = this.outer_html.select(".diagram");
+    this.html = this.outer_html.select(".partition-diagram");
     
     this.svg = this.html
-      .attr("aria-hidden","true")
       .append("div")
       .classed("__svg__",true)
       .append("svg");
@@ -43,7 +41,6 @@ export class PartitionDiagram {
       .attr("class","graph_area");
     
     this.html
-      .classed("__partition__",true)
       .style("position","relative")
       .style("zoom",0.4)
       .on("keydown", this.keydown_dispatch.bind(this))
@@ -76,12 +73,9 @@ export class PartitionDiagram {
     _.each(data.root.children, (node,i)=> { 
       assign_colors_recursively(node, cycle_colors(i));
     });
-    this.html.style("width",total_width + "px");
 
-    this.outer_html.select(".visual")
+    this.outer_html.select(".__partition__")
       .style("width",total_width + "px");
-
-    this.html_viewport_width = this.outer_html.node().offsetWidth;
     
     this.svg.attr("width", total_width);
     _.chain(levels)

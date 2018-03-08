@@ -326,6 +326,10 @@ class Partition {
   constructor(container, update_url, method, value_attr){
     
     this.update_url = update_url;
+    
+    container.append("div")
+      .classed("accessible sr-only",true)
+      .html(text_maker("partition_sr_only_content"));
 
     // A negative margin-left value is explicitly set, and kept updated, on .partition-container so that the 
     // extra wide partition area can effectively escape the narrow main.container area, which we're forced in 
@@ -334,8 +338,11 @@ class Partition {
       .classed("partition-container",true)
       .style("margin-left", -d4.select("main.container").node().offsetLeft+"px");
     
+    this.container.append("div").classed("partition-notes",true);
+    this.container.append("div").classed("partition-controls",true);
+
     const adjust_partition_diagram_margin_on_resize = function(){
-      const partition_container = d4.select(".partition-container.__partition__");
+      const partition_container = d4.select(".partition-container");
       if ( partition_container.node() ){
         partition_container.style("margin-left", -d4.select("main.container").node().offsetLeft+"px");
       } else {
@@ -347,6 +354,7 @@ class Partition {
     this.chart = new PartitionDiagram(this.container, {
       height : 700,
     });
+
     const sort_vals = this.sort_vals = _.sortBy(presentation_schemes_by_data_options, d => d.id === value_attr ? -Infinity : Infinity);
 
     this.all_presentation_schemes = [
@@ -372,7 +380,7 @@ class Partition {
       .sortBy(d => d.id === method ? -Infinity : Infinity)
       .value();
 
-    this.container.select(".controls").html(text_maker("partition_controls",{
+    this.container.select(".partition-controls").html(text_maker("partition_controls",{
       presentation_schemes,sort_vals,search:true, 
     }));
     
@@ -1080,7 +1088,7 @@ class Partition {
         .attr("tabindex", 0);
 
       const intro_popup_fader = this.container.select(".visual")
-        .insert("div",".controls")
+        .insert("div",".partition-controls")
         .classed("partition-diagram-fader",true);
 
       const intro_popup_cleanup = function(){
@@ -1097,7 +1105,7 @@ class Partition {
     }
   }
   update_diagram_notes(note_text_key){
-    const diagram_note_div = this.container.select(".diagram-notes");
+    const diagram_note_div = this.container.select(".partition-notes");
     if (!note_text_key) {
       // smoothly transition the height and opacity 0
       diagram_note_div
