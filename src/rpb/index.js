@@ -25,6 +25,7 @@ const { ensure_loaded } = require('../core/lazy_loader.js');
 const {
   SpinnerWrapper,
   TextMaker,
+  TM,
   RadioButtons,
 } = require('../util_components.js');
 const AriaModal = require('react-aria-modal');
@@ -36,6 +37,7 @@ const { SimpleView } = require('./simple_view.js');
 const { GranularView } = require('./granular_view.js');
 const { SubjectFilterPicker } = require('./shared.js');
 
+const { Table } = require('../core/TableClass.js');
 
 //misc app stuff
 const { rpb_link } = require('./rpb_link.js');
@@ -191,6 +193,7 @@ class RPB extends React.Component {
         <div className='rpb-option-content'>
           <div className="centerer">
             <p 
+              id="picker-label"
               className="md-half-width md-gutter-right"
               style={{margin: 0}}
             >
@@ -200,51 +203,63 @@ class RPB extends React.Component {
               } 
             </p>
             <div className="md-half-width md-gutter-left">
-              <button 
-                className="btn btn-ib-primary"
-                style={{width: '100%'}}
-                onClick={()=>{ this.setState({table_picking: true})}}
-              >
-                <TextMaker text_key={table ? 'select_another_table_button' : 'select_table_button'} /> 
-              </button>
+              { 
+                window.is_a11y_mode ?
+                <AccessibleTablePicker
+                  onSelect={id => this.pickTable(id)}
+                  tables={_.reject(Table.get_all(), 'reference_table')}
+                  selected={_.get(table, 'id')}
+                /> :
+                <button 
+                  className="btn btn-ib-primary"
+                  style={{width: '100%'}}
+                  onClick={()=>{ this.setState({table_picking: true})}}
+                >
+                  <TextMaker text_key={table ? 'select_another_table_button' : 'select_table_button'} /> 
+                </button>
+              }
             </div>
           </div>
-          <AriaModal
-            mounted={this.state.table_picking}
-            onExit={()=>{ 
-              if( this.state.table_picking ){
-                this.setState({ table_picking: false }); 
-                setTimeout(()=>{
-                  slowScrollDown();
-                  document.querySelector('#'+sub_app_name).focus();
-                },200)
-              }
-            }}
-            titleId="tbp-title"
-            getApplicationNode={()=>document.getElementById('app')}
-            verticallyCenter={true}
-            underlayStyle={{
-              paddingTop:"50px",
-              paddingBottom:"50px",
-            }}
-            focusDialog={true}
-          >
-            <div 
-              tabIndex={-1}
-              id="modal-child"
-              className="container app-font"
-              style={{
-                backgroundColor: 'white',
-                overflow: 'auto',
-                lineHeight : 1.5,
-                padding: "0px 20px 0px 20px",
-                borderRadius: "5px",
-                fontWeight: 400,
+          { 
+            !window.is_a11y_mode &&
+
+            <AriaModal
+              mounted={this.state.table_picking}
+              onExit={()=>{ 
+                if( this.state.table_picking ){
+                  this.setState({ table_picking: false }); 
+                  setTimeout(()=>{
+                    slowScrollDown();
+                    document.querySelector('#'+sub_app_name).focus();
+                  },200)
+                }
               }}
+              titleId="tbp-title"
+              getApplicationNode={()=>document.getElementById('app')}
+              verticallyCenter={true}
+              underlayStyle={{
+                paddingTop:"50px",
+                paddingBottom:"50px",
+              }}
+              focusDialog={true}
             >
-              <TablePicker onSelect={id=> this.pickTable(id)} />
-            </div>
-          </AriaModal>
+              <div 
+                tabIndex={-1}
+                id="modal-child"
+                className="container app-font"
+                style={{
+                  backgroundColor: 'white',
+                  overflow: 'auto',
+                  lineHeight : 1.5,
+                  padding: "0px 20px 0px 20px",
+                  borderRadius: "5px",
+                  fontWeight: 400,
+                }}
+              >
+                <TablePicker onSelect={id=> this.pickTable(id)} />
+              </div>
+            </AriaModal>
+          }
         </div>
       </div>
       {
@@ -444,3 +459,20 @@ export class ReportBuilder extends React.Component {
     )
   }
 }
+
+
+
+const AccessibleTablePicker = ({ tables, onSelect, selected }) => (
+  <select 
+    aria-labeledby="#picker-label"
+    className="form-control rpb-simple-select"
+    value={selected}
+    onChange={evt => onSelect(evt.target.value)}
+  >
+    {_.map(tables, ({id, name}) =>
+      <option value={id}>
+        {name}
+      </option>
+    )}
+  </select>
+);

@@ -281,9 +281,11 @@ class GranularView extends React.Component {
 
         {!excel_mode && pages.length > 1 && 
           <div className="pagination-container">
-            <p className="sr-only">
-              <TextMaker text_key="pagination_a11y" args={{current: page_num, total: pages.length }} />
-            </p>
+            {window.is_a11y_mode && 
+              <p>
+                <TextMaker text_key="pagination_a11y" args={{current: page_num, total: pages.length }} />
+              </p>
+            }
             <ul className="pagination">
               {_.map(pages, (data,ix)=> 
                 <li 

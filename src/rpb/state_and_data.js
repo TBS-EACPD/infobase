@@ -353,7 +353,7 @@ function create_mapStateToProps(){
     }
   );
 
-  const get_shouldGraph = state => !state.preferTable && get_canGraph(state);
+  const get_shouldGraph = state => !window.is_a11y_mode && !state.preferTable && get_canGraph(state);
 
   const get_deptBreakoutMode = state => state.subject === 'gov_gov' && state.preferDeptBreakout;
 
@@ -527,7 +527,7 @@ function create_mapStateToProps(){
 
       //simple view props,
       deptBreakoutMode: get_deptBreakoutMode(state),
-      canGraph: state.table && get_canGraph(state),
+      canGraph: !window.is_a11y_mode && state.table && get_canGraph(state),
       shouldGraph: state.table && get_shouldGraph(state),
       graph_data: state.table && state.mode === 'simple' && get_graph_split_data(state),
       simple_table_rows: state.table && state.mode === 'simple' && get_simple_table_rows(state),
