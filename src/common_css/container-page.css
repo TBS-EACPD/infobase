@@ -55,3 +55,25 @@
     font-size: 1.5rem;
   }
 }
+
+.a11y-version-link {
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+}
+
+.a11y-version-link:focus, .a11y-version-link:active {
+  clip: rect(auto, auto, auto, auto);
+  height: inherit;
+  margin: inherit;
+  overflow: inherit;
+  position: static;
+  width: inherit;
+
+  color: #fff;
+  text-decoration: none;
+}
+
