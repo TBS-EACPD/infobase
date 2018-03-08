@@ -25,7 +25,6 @@ const { ensure_loaded } = require('../core/lazy_loader.js');
 const {
   SpinnerWrapper,
   TextMaker,
-  TM,
   RadioButtons,
 } = require('../util_components.js');
 const AriaModal = require('react-aria-modal');

@@ -1,5 +1,4 @@
 import { rpb_link } from '../rpb/rpb_link.js';
-import { text_maker } from '../models/text.js';
 
 export default function(a11y_mode){
   const featured_content_items = [

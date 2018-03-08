@@ -2,7 +2,7 @@ const {
   formats,
   text_maker,
   PanelGraph,
-  years : {std_years, planning_years},
+  years : {planning_years},
   declarative_charts: {
     Bar,
     GraphLegend,

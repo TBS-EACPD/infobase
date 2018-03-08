@@ -7,7 +7,7 @@ const {
   text_maker,
   util_components: {
     Format,
-  }
+  },
 } = require("./shared"); 
 
 const estimates_split_calculate = function(subject, info,options){

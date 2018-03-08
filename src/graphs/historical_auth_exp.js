@@ -1,5 +1,3 @@
-import { log } from "async";
-
 const {
   formats,
   text_maker,

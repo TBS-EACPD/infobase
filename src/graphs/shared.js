@@ -2,7 +2,6 @@ exports = module.exports
 const {text_maker, run_template } = require( "../models/text");
 const {formats} = require('../core/format.js');
 const {PanelGraph, layout_types} = require("../core/graphs.js");
-const D3 = exports.D3 = require("../core/D3");
 const { reactAdapter } = require('../core/reactAdapter');
 const { 
   HeightClipper,
@@ -20,6 +19,7 @@ const {
 } = declarative_charts;
 
 const util_components = require('../util_components');
+exports.D3 = require("../core/D3");
 exports.declarative_charts = declarative_charts;
 exports.Table = require('../core/TableClass.js').Table;
 exports.rpb_link = require('../rpb/rpb_link.js').rpb_link;

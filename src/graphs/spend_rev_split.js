@@ -7,9 +7,6 @@ const {
   text_maker,
   PanelGraph,
   D3,
-  util_components: {
-    Format,
-  },
 } = require("./shared"); 
 const is_revenue = so_num => +so_num > 19;
 const last_year_col = "{{pa_last_year}}";

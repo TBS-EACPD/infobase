@@ -22,9 +22,6 @@ const {
   SpinnerWrapper,
 } = require('../util_components.js');
 
-const {
-  rpb_link,
-} = require('../rpb/rpb_link.js');
 
 const { ensure_loaded } = require('../core/lazy_loader.js');
 const { ResultCounts } = require('../models/results.js');

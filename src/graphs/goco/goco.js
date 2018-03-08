@@ -166,7 +166,7 @@ class Goco {
         /* eslint-disable react/jsx-key */
         data: [
           <Format type="compact1" content={spending} />,
-          <Format type="big_int_real" content={ftes} />
+          <Format type="big_int_real" content={ftes} />,
         ],
       }));
 
