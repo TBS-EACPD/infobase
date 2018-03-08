@@ -1,3 +1,4 @@
+import "./employee_type.ib.yaml"
 import {
   formats,
   text_maker,
@@ -60,7 +61,7 @@ const employee_type_render = function(panel, data){
 new PanelGraph({
   level: "dept",
   depends_on: ['table9'],
-  key: "historical_employee_type",
+  key: "employee_type",
 
   info_deps: [
     'table9_gov_info',
@@ -72,8 +73,8 @@ new PanelGraph({
     half: {text: 12, graph: 12},
   },
 
-  text: "dept_historical_employee_type_text",
-  title: "historical_employee_type_title",
+  text: "dept_employee_type_text",
+  title: "employee_type_title",
 
   calculate(dept,info){
     const {table9} = this.tables;
@@ -95,7 +96,7 @@ new PanelGraph({
 new PanelGraph({
   level: "gov",
   depends_on: ['table9'],
-  key: "historical_employee_type",
+  key: "employee_type",
 
   info_deps: [
     'table9_gov_info',
@@ -106,8 +107,8 @@ new PanelGraph({
     half: {text: 12, graph: 12},
   },
   
-  text: "gov_historical_employee_type_text",
-  title: "historical_employee_type_title",
+  text: "gov_employee_type_text",
+  title: "employee_type_title",
 
   calculate(gov,info){
     const {table9} = this.tables;				  

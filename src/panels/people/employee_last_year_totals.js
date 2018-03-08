@@ -1,3 +1,4 @@
+import "./employee_last_year_totals.ib.yaml";
 import {
   formats,
   text_maker,
@@ -28,7 +29,7 @@ new PanelGraph({
     'table9_dept_info',
     'table9_gov_info',
   ],
-  key: "last_year_total_employment",
+  key: "employee_last_year_totals",
 
   layout: {
     full: {text: 8, graph: 4},
@@ -36,8 +37,8 @@ new PanelGraph({
   },
 
   height: 300,
-  title: "dept_last_year_total_employment_title",
-  text:  "dept_last_year_total_employment_text",
+  title: "dept_employee_last_year_totals_title",
+  text:  "dept_employee_last_year_totals_text",
 
   calculate(subject,info){
     return { 

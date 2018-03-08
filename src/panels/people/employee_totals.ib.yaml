@@ -1,0 +1,27 @@
+gov_employee_totals_title:
+  transform: [handlebars]
+  en: Total Federal Public Service Population ({{ppl_last_year_5}} to {{ppl_last_year}})
+  fr: Population totale de la fonction publique fédérale ({{ppl_last_year_5}} à {{ppl_last_year}})
+
+dept_employee_totals_title:
+  transform: [handlebars]
+  en: Population Trend ({{ppl_last_year_5}} to {{ppl_last_year}})
+  fr: Tendance de la population ({{ppl_last_year_5}} à {{ppl_last_year}})
+
+gov_employee_totals_text:
+  transform: [handlebars, markdown]
+  en: |
+   In **{{ppl_last_year}}**, there were **{{fmt_big_int_real gov_head_count_ppl_last_year}}** employees in the 
+   **{{gl_tt "Federal Public Service" "FPS"}}**. 
+   From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, the **Federal Public Service** employed an average of **{{fmt_big_int_real gov_head_count_avg}}** people.
+  fr: |
+   Au **{{ppl_last_year}}**, la {{gl_tt "fonction publique fédérale" "FPS"}} comptait **{{fmt_big_int_real gov_head_count_ppl_last_year}}** employés.
+   L’effectif moyen de la **fonction publique fédérale** de **{{ppl_last_year_5}}** à **{{ppl_last_year}}** est de **{{fmt_big_int_real gov_head_count_avg}}** employés.
+
+dept_employee_totals_text:
+  transform: [handlebars,markdown]
+  en: |
+   From **{{fmt_big_int_real dept_head_count_type_first_active_year}}** to **{{fmt_big_int_real dept_head_count_type_last_active_year}}**, **{{subj_name subject}}** employed an average of 
+   **{{fmt_big_int_real dept_head_count_avg}}** people.
+  fr: |
+   De **{{fmt_big_int_real dept_head_count_type_first_active_year}}** à **{{fmt_big_int_real dept_head_count_type_last_active_year}}**, **{{le_dept dept}}** comptait en moyenne **{{fmt_big_int_real dept_head_count_avg}}** employés. 

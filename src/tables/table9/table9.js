@@ -2,15 +2,18 @@ exports = module.exports;
 
 import "./table9.ib.yaml";
 
-const {
+import {
   STATS, 
   text_maker, 
   m, 
   Statistics,
   people_five_year_percentage_formula,
-  business_constants : {tenure},
-  years : { people_years, people_years_short_second},
-} = require("../table_common");
+  business_constants,
+  years,
+} from "../table_common";
+
+const {tenure} = business_constants;
+const {people_years, people_years_short_second} = years;
 
 module.exports = {
   "id": "table9",

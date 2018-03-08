@@ -18,10 +18,10 @@ const get_people_panels = subject => {
   return [
     'people_intro',
     "march_snapshot_warning",
-    !is_gov && "last_year_total_employment",
-    "historical_employee_totals",
+    !is_gov && "employee_last_year_totals",
+    "employee_totals",
     "historical_employee_prov",
-    "historical_employee_type",
+    "employee_type",
     "historical_employee_age",
     //"historical_employee_occ_category",
     //"historical_employee_executive_level",

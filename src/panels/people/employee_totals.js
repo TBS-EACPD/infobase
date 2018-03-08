@@ -1,3 +1,4 @@
+import "./employee_totals.ib.yaml"
 import {
   formats,
   text_maker,
@@ -53,15 +54,15 @@ new PanelGraph({
     'table9_gov_info',
     'table9_dept_info',
   ],
-  key: "historical_employee_totals",
+  key: "employee_totals",
 
   layout: {
     full: {text : 4, graph: 8},
     half: {text : 12, graph: 12},
   },
 
-  text: "dept_historical_employee_totals_text",
-  title: "dept_historical_employee_totals_title",
+  text: "dept_employee_totals_text",
+  title: "dept_employee_totals_title",
   calculate: total_hist_employment_calc,
   render: total_hist_employment_render,
 });
@@ -69,7 +70,7 @@ new PanelGraph({
 new PanelGraph({
   level: "gov",
   depends_on: ['table9'],
-  key: "historical_employee_totals",
+  key: "employee_totals",
   info_deps: [
     'table9_gov_info',
   ],
@@ -78,8 +79,8 @@ new PanelGraph({
     half: {text: 12, graph: 12},
   },
 
-  text: "gov_historical_employee_totals_text",
-  title: "gov_historical_employee_totals_title",
+  text: "gov_employee_totals_text",
+  title: "gov_employee_totals_title",
   calculate: total_hist_employment_calc,
   render: total_hist_employment_render,
 });
