@@ -2,20 +2,20 @@ exports = module.exports;
 
 require("./table6.ib.yaml");
 
-require('../../graphs/historical_auth_exp');
-//require('../../graphs/historical_dept_by_crso');
-require('../../graphs/top_3_dept_graph');
-require('../../graphs/spending_in_perspective');
+require('../../panels/historical_auth_exp');
+//require('../../panels/historical_dept_by_crso');
+require('../../panels/top_3_dept_graph');
+require('../../panels/spending_in_perspective');
 
-require("../../graphs/last_year_vote_stat_split");
-require('../../graphs/planned_program_spending');
-require('../../graphs/planned_prgm_crso_split');
-require('../../graphs/crso_program_resources.js');
+require("../../panels/last_year_vote_stat_split");
+require('../../panels/planned_program_spending');
+require('../../panels/planned_prgm_crso_split');
+require('../../panels/crso_program_resources.js');
 
-require('../../graphs/sub_program_resources.js');
-require('../../graphs/drr_planned_actual.js');
-require('../../graphs/goco/goco.js');
-require('../../graphs/resource_structure.js');
+require('../../panels/sub_program_resources.js');
+require('../../panels/drr_planned_actual.js');
+require('../../panels/goco/goco.js');
+require('../../panels/resource_structure.js');
 
 // see [here](../table_definition.html) for description
 // of the table spec

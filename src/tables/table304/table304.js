@@ -3,7 +3,7 @@ exports = module.exports;
 // see [here](../table_definition.html) for description
 // of the table spec
 require("./table304.ib.yaml");
-//require("../../graphs/historical_employee_average_age"); // Graph incorporated in to historical_employee_age graph, don't need historical_employee_average_age
+//require("../../panels/historical_employee_average_age"); // Graph incorporated in to historical_employee_age graph, don't need historical_employee_average_age
 
 const {
   text_maker, 

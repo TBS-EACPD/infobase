@@ -1,6 +1,6 @@
 const { 
   planned_resource_fragment,
-} = require('../graphs/result_graphs/results_common.js');
+} = require('../panels/result_graphs/results_common.js');
 
 
 function get_resources_for_subject(subject, table6, table12, year){

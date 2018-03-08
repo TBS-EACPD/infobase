@@ -2,9 +2,9 @@ exports = module.exports;
 // see [here](../table_definition.html) for description
 // of the table spec
 require("./table9.ib.yaml");
-require("../../graphs/last_year_total_employment");
-require("../../graphs/historical_employee_totals");
-require("../../graphs/historical_employee_type");
+require("../../panels/last_year_total_employment");
+require("../../panels/historical_employee_totals");
+require("../../panels/historical_employee_type");
 
 const {
   STATS, 

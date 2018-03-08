@@ -2,8 +2,8 @@ exports = module.exports;
 // see [here](../table_definition.html) for description
 // of the table spec
 require("./table7.ib.yaml");
-require("../../graphs/last_year_g_and_c_perspective");
-require("../../graphs/historical_g_and_c");
+require("../../panels/last_year_g_and_c_perspective");
+require("../../panels/historical_g_and_c");
 
 const {
   STATS, 

@@ -4,7 +4,7 @@ exports = module.exports;
 // of the table spec
 require("./table303.ib.yaml");
 
-require("../../graphs/historical_employee_fol");
+require("../../panels/historical_employee_fol");
 
 const {
   STATS, 

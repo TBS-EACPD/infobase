@@ -2,10 +2,10 @@
 // of the table spec
 exports = module.exports;
 require("./table8.ib.yaml");
-require("../../graphs/in_year_estimates");
-require("../../graphs/in_year_estimates_split");
-require("../../graphs/in_year_vote_stat_split");
-require("../../graphs/in_year_vote-stat_breakdown");
+require("../../panels/in_year_estimates");
+require("../../panels/in_year_estimates_split");
+require("../../panels/in_year_vote_stat_split");
+require("../../panels/in_year_vote-stat_breakdown");
 var FORMAT = require('../../core/format');
 
 const {

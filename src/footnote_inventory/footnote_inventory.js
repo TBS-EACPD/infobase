@@ -348,7 +348,7 @@ class FootnoteInspector extends React.Component {
 
 
     if(mode === 'graphs'){
-      return `#footnotes/graphs/${selected_graph}/${selected_level}`;
+      return `#footnotes/panels/${selected_graph}/${selected_level}`;
     } else {
       return `#footnotes/concepts/${selected_concept}`;
     }

@@ -4,7 +4,7 @@ exports = module.exports;
 require("./table10.ib.yaml");
 require("./canada_map.ib.yaml");
 
-require("../../graphs/historical_employee_prov");
+require("../../panels/historical_employee_prov");
 
 const {
   STATS, 

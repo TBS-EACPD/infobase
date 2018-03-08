@@ -3,7 +3,7 @@ exports = module.exports;
 // see [here](../table_definition.html) for description
 // of the table spec
 require("./table302.ib.yaml");
-require("../../graphs/historical_employee_gender");
+require("../../panels/historical_employee_gender");
 
 const {
   STATS, 

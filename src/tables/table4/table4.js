@@ -1,7 +1,7 @@
 // see [here](../table_definition.html) for description
 // of the table spec
-require("../../graphs/historical_stat_spending");
-require("../../graphs/historical_voted_spending");
+require("../../panels/historical_stat_spending");
+require("../../panels/historical_voted_spending");
 
 require("./table4.ib.yaml");
 

@@ -6,7 +6,7 @@ const { Indicator } = require('../models/results.js');
 const { 
   IndicatorDisplay,
   InlineStatusIconList,
-} = require('../graphs/result_graphs/components.js');
+} = require('../panels/result_graphs/components.js');
 const ReactTransitionGroup  = require('react-addons-transition-group');
 const FlipMove = require('react-flip-move');
 const {

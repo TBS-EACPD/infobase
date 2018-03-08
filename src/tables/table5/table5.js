@@ -1,9 +1,9 @@
 exports = module.exports;
 require("./table5.ib.yaml");
-require("../../graphs/spend_by_so_hist");
-require("../../graphs/top_spending_areas");
-require("../../graphs/personel_spend");
-require("../../graphs/spend_rev_split.js");
+require("../../panels/spend_by_so_hist");
+require("../../panels/top_spending_areas");
+require("../../panels/personel_spend");
+require("../../panels/spend_rev_split.js");
 
 // see [here](../table_definition.html) for description
 // of the table spec

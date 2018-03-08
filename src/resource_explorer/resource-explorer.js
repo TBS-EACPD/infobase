@@ -1,5 +1,5 @@
-require('../graphs/intro_graphs/intro_lang.ib.yaml');
-require('../graphs/result_graphs/result_lang.ib.yaml');
+require('../panels/intro_graphs/intro_lang.ib.yaml');
+require('../panels/result_graphs/result_lang.ib.yaml');
 const { StandardRouteContainer } = require('../core/NavComponents');
 
 const { text_maker } =  require('../models/text.js');
