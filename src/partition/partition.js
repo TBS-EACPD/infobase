@@ -235,8 +235,8 @@ const get_root_text_key = (value_attr, method) => {
 }
 
 const show_partial_children = function(node){
-  if (!node.children ){
-    return ;
+  if (!node.children){
+    return;
   }
   if( !_.isUndefined(_.last(node.children).data.hidden_children)){ 
     return node.children;
@@ -253,7 +253,7 @@ const show_partial_children = function(node){
       to_be_compressed = _.tail(node.children,node.how_many_to_show);
     }
   }
-  if ( to_be_compressed.length > 0  ) {
+  if (to_be_compressed.length > 0) {
     new_compressed_child = Object.assign(
       d4.hierarchy({}),
       {  
@@ -269,7 +269,7 @@ const show_partial_children = function(node){
           "+",
           "",
           "compressed",
-          {hidden_children :  to_be_compressed}
+          {hidden_children : to_be_compressed}
         ),
         no_polygon : false,
       }
@@ -291,8 +291,8 @@ const show_all_children = function(node){
     compressed.data.id = "minimize"+compressed.id_ancestry;
     compressed.value =  1;
     compressed.data.name = "—";
-    _.each(children,_node=> {
-      _node.parent=node;
+    _.each(children,_node => {
+      _node.parent = node;
     });
     compressed.no_polygon = true;
   } else {
@@ -338,9 +338,6 @@ class Partition {
       .classed("partition-container",true)
       .style("margin-left", -d4.select("main.container").node().offsetLeft+"px");
     
-    this.container.append("div").classed("partition-notes",true);
-    this.container.append("div").classed("partition-controls",true);
-
     const adjust_partition_diagram_margin_on_resize = function(){
       const partition_container = d4.select(".partition-container");
       if ( partition_container.node() ){
@@ -351,9 +348,7 @@ class Partition {
     };
     window.addEventListener("resize", adjust_partition_diagram_margin_on_resize);
 
-    this.chart = new PartitionDiagram(this.container, {
-      height : 700,
-    });
+    this.chart = new PartitionDiagram(this.container, {height: 700});
 
     const sort_vals = this.sort_vals = _.sortBy(presentation_schemes_by_data_options, d => d.id === value_attr ? -Infinity : Infinity);
 
@@ -365,11 +360,11 @@ class Partition {
       { id: "org_planned_spend", text: text_maker("orgs") },
       { id: "est_type", text: text_maker("partition_est_type_perspective") },
       { id: "vs_type", text: text_maker("partition_vote_state_perspective") },
-      { id: "est_doc_mains", text: text_maker("est_doc_mains")},
-      { id: "est_doc_sea", text: text_maker("est_doc_sea")},
-      { id: "est_doc_seb", text: text_maker("est_doc_seb")},
-      { id: "est_doc_sec", text: text_maker("est_doc_sec")},
-      { id: "est_doc_im", text: text_maker("est_doc_im")},
+      { id: "est_doc_mains", text: text_maker("est_doc_mains") },
+      { id: "est_doc_sea", text: text_maker("est_doc_sea") },
+      { id: "est_doc_seb", text: text_maker("est_doc_seb") },
+      { id: "est_doc_sec", text: text_maker("est_doc_sec") },
+      { id: "est_doc_im", text: text_maker("est_doc_im" )},
       { id: "org_info_by_ministry", text: text_maker("partiton_org_info_by_min") },
       { id: "org_info_federal_orgs_by_inst_form", text: text_maker("partiton_org_info_federal_orgs_by_inst_form") },
       { id: "org_info_interests_by_inst_form", text: text_maker("partiton_org_info_interests_by_inst_form") },
@@ -380,9 +375,13 @@ class Partition {
       .sortBy(d => d.id === method ? -Infinity : Infinity)
       .value();
 
-    this.container.select(".partition-controls").html(text_maker("partition_controls",{
-      presentation_schemes,sort_vals,search:true, 
-    }));
+    this.container.select(".partition-controls").html(
+      text_maker("partition_controls",{
+        presentation_schemes, 
+        sort_vals, 
+        search: true, 
+      })
+    );
     
     this.container.select("input.search").on("keydown", () => {
       // Prevent enter key from submitting input form 
@@ -455,7 +454,7 @@ class Partition {
   }
   dept(){
     const skip_crsos = true;
-    this.hierarchy_factory = ()=>create_ministry_hierarchy(this.value_attr,skip_crsos,this.root_id+=1);
+    this.hierarchy_factory = () => create_ministry_hierarchy(this.value_attr,skip_crsos,this.root_id+=1);
     const hierarchy = this.hierarchy = this.hierarchy_factory(value_functions[this.value_attr]);
     this.hierarchy
       .each(node => {
@@ -469,7 +468,7 @@ class Partition {
             const show = [_.head(_node.children)];
             const hide = _.tail(_node.children);
             const unhide = _.filter(hide, __node=> __node.value > hierarchy.value/50);
-            return [show.concat(unhide),_.difference(hide,unhide)];
+            return [show.concat(unhide), _.difference(hide,unhide)];
           }
         } else if (node.data.is("dept") || node.data.is("crso")){
           node.how_many_to_show = function(_node){
@@ -477,7 +476,7 @@ class Partition {
             const show = [_.head(_node.children)];
             const hide = _.tail(_node.children);
             const unhide = _.filter(hide, __node=> __node.value > hierarchy.value/50);
-            return [show.concat(unhide),_.difference(hide,unhide)];
+            return [show.concat(unhide), _.difference(hide,unhide)];
           }
         }
       })
@@ -525,7 +524,7 @@ class Partition {
     }
   }
   hwh(){
-    this.hierarchy_factory = ()=>create_tag_hierarchy("HWH",this.value_attr,this.root_id+=1);
+    this.hierarchy_factory = () => create_tag_hierarchy("HWH",this.value_attr,this.root_id+=1);
     const hierarchy = this.hierarchy = this.hierarchy_factory(value_functions[this.value_attr]);
     this.hierarchy
       .each(node => {
@@ -585,7 +584,7 @@ class Partition {
     }
   }
   goca(){
-    this.hierarchy_factory = ()=>create_tag_hierarchy("GOCO",this.value_attr,this.root_id+=1);
+    this.hierarchy_factory = () => create_tag_hierarchy("GOCO",this.value_attr,this.root_id+=1);
     const hierarchy = this.hierarchy = this.hierarchy_factory(value_functions[this.value_attr]);
 
     this.hierarchy
@@ -596,11 +595,11 @@ class Partition {
           node.how_many_to_show = Infinity;
         } else if (node.data.is("tag") && node.children[0].data.is("program")){
           node.how_many_to_show = function(_node){
-            if (_node.children.length <= 2){ return [_node.children,[]];}
+            if (_node.children.length <= 2){ return [_node.children, []] }
             const show = [_.head(_node.children)];
             const hide = _.tail(_node.children);
             const unhide = _.filter(hide, __node=> __node.value > hierarchy.value/100);
-            return [show.concat(unhide),_.difference(hide,unhide)];
+            return [show.concat(unhide), _.difference(hide,unhide)];
           }
         }
       })
@@ -648,22 +647,22 @@ class Partition {
     }
   }
   st(){
-    this.hierarchy_factory = ()=>create_spend_type_hierarchy( this.value_attr,  this.root_id+=1 );
+    this.hierarchy_factory = () => create_spend_type_hierarchy( this.value_attr,  this.root_id+=1 );
     const hierarchy = this.hierarchy = this.hierarchy_factory(value_functions[this.value_attr]);
 
     this.hierarchy
       .each(node => {
         node.__value__ = node.value;
         node.open = true;
-        if (node.data.is("gov") ||  node.data.is("type_of_spending") ){
+        if ( node.data.is("gov") ||  node.data.is("type_of_spending") ){
           node.how_many_to_show = Infinity;
-        } else if (node.data.is("so") ){
+        } else if ( node.data.is("so")){
           node.how_many_to_show = function(_node){
-            if (_node.children.length <= 2){ return [_node.children,[]];}
+            if (_node.children.length <= 2){ return [_node.children, []] }
             const show = [_.head(_node.children)];
             const hide = _.tail(_node.children);
             const unhide = _.filter(hide, __node=> __node.value > hierarchy.value/100);
-            return [show.concat(unhide),_.difference(hide,unhide)];
+            return [show.concat(unhide), _.difference(hide,unhide)];
           };
         }
       })
@@ -729,7 +728,7 @@ class Partition {
         node.open = true;
         if ( node.data.is("ministry") || node.data.is("inst_form") ){
           node.how_many_to_show = function(_node){
-            if (_node.children.length <= 2){ return [_node.children,[]];}
+            if (_node.children.length <= 2){ return [_node.children, []]}
             const number_to_show = 1;
             const show = _.take(_node.children, number_to_show);
             const hide = _.slice(_node.children, number_to_show);
@@ -748,7 +747,8 @@ class Partition {
     this.value_formater = d => {
       return !d.data.is("dept") ?
         wrap_in_brackets(
-          formaters[this.value_attr](d[this.value_attr]) + " " + (d[this.value_attr] > 1 ? 
+          formaters[this.value_attr](d[this.value_attr]) + " " + 
+          (d[this.value_attr] > 1 ? 
             text_maker("orgs") : 
             text_maker("org")
           )
@@ -821,7 +821,7 @@ class Partition {
   }
   planned_spending(){
     const presentation_scheme = this.method;
-    this.hierarchy_factory = ()=>create_planned_spending_hierarchy( this.value_attr, this.root_id+=1, presentation_scheme );
+    this.hierarchy_factory = () => create_planned_spending_hierarchy( this.value_attr, this.root_id+=1, presentation_scheme );
     const hierarchy = this.hierarchy = this.hierarchy_factory(value_functions[this.value_attr]);
 
     this.hierarchy
@@ -829,11 +829,11 @@ class Partition {
         node.__value__ = node.value;
         node.open = true;
         node.how_many_to_show = function(_node){
-          if (_node.children.length <= 2){ return [_node.children,[]];}
+          if (_node.children.length <= 2){ return [_node.children, []]}
           const show = [_.head(_node.children)];
           const hide = _.tail(_node.children);
           const unhide = _.filter(hide, __node=> __node.value > hierarchy.value/100);
-          return [show.concat(unhide),_.difference(hide,unhide)];
+          return [show.concat(unhide), _.difference(hide,unhide)];
         }
       })
       .each(node => {
