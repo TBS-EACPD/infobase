@@ -1,7 +1,6 @@
 exports = module.exports;
 
 import "./table10.ib.yaml";
-import "./canada_map.ib.yaml";
 
 const {
   STATS, 

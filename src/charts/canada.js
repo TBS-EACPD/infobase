@@ -1,7 +1,9 @@
 "use strict";
 
-const {provinces,
-  provinces_short} = require('../models/businessConstants.js');
+import {
+  provinces,
+  provinces_short,
+} from '../models/businessConstants.js';
 
 exports = module.exports;
 /* 1,043 × 1010 style="opacity:0.65822784;fill:#000000;fill-opacity:1;stroke:none" width="94.350761" height="81.185539" */ // base map obtained from [here](http://commons.wikimedia.org/wiki/File:Canada_blank_map.svg) 
@@ -16,7 +18,8 @@ exports = module.exports;
 //  with the data being assumed to be ordered by fiscal year
 //
 
-var D3CORE =  require("./core");
+import D3CORE from "./core";
+import "./canada.ib.yaml";
 
 var ordering = {
   yt: 1,

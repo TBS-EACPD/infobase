@@ -1,20 +1,20 @@
-const {
+import "./employee_prov.ib.yaml";
+import {
   formats,
   text_maker,
   run_template,
   PanelGraph,
-  years : {people_years},
+  years,
   D3,
-} = require("../shared"); 
+} from "../shared"; 
 
-const {provinces} = require('../../models/businessConstants.js');
+import {provinces} from '../../models/businessConstants.js';
 
+const {people_years} = years;
 
 const prov_split_render = function(panel,data,options){
 
   const { graph_args } = data;
-
-
   
   const has_qc = _.chain(graph_args.years_by_province)
     .map(d => _.has(d, "qclessncr"))
@@ -53,8 +53,8 @@ const prov_split_render = function(panel,data,options){
 
 
   if(!window.is_a11y_mode){
-    const formater =  formats["big_int_real_raw"];
-    const color_a =  a => `rgba(31, 119, 180,${a})`;
+    const formater = formats["big_int_real_raw"];
+    const color_a = a => `rgba(31, 119, 180,${a})`;
   
     let historical_graph_container;
   
@@ -76,31 +76,31 @@ const prov_split_render = function(panel,data,options){
     // add legend
     var list = D3.create_list(
       legend_area.node(),
-      _.map( color_scale.ticks(5).reverse(), tick => 
+      _.map(color_scale.ticks(5).reverse(), tick => 
         ({
-          label : tick, 
-          active : true,
+          label: tick, 
+          active: true,
         })
       ),
       {
-        html : d => formater(d.label)+"+",
-        legend : true,
-        width : "100%",
-        title : text_maker("legend"),
-        ul_classes : "legend",
-        interactive : false,
-        colors : label => color_a(color_scale(accounting.unformat(label))),
+        html: d => formater(d.label)+"+",
+        legend: true,
+        width: "100%",
+        title: text_maker("legend"),
+        ul_classes: "legend",
+        interactive: false,
+        colors: label => color_a(color_scale(accounting.unformat(label))),
       }
     );
 
     const ticks = _.map(people_years, y => `${run_template(y)}`);
     
     const canada_graph = new D3.CANADA.canada(graph_area.node(), {
-      color : "rgb(31, 119, 180)",
-      data : years_by_province,
-      ticks : ticks,
-      color_scale : color_scale,
-      formater : formater,
+      color: "rgb(31, 119, 180)",
+      data: years_by_province,
+      ticks: ticks,
+      color_scale: color_scale,
+      formater: formater,
     })
 
     if (!window.is_mobile) {
@@ -113,7 +113,7 @@ const prov_split_render = function(panel,data,options){
       historical_graph_container.node().style.cssText = list.legend.node().style.cssText;
       
       historical_graph_container.styles({ 
-        "margin-top" : "10px", 
+        "margin-top": "10px", 
       });
 
     } else {
@@ -176,30 +176,29 @@ const prov_split_render = function(panel,data,options){
         (new D3.BAR.bar(
           container.select("div").node(),
           {
-            colors : ()=>"#1f77b4",
-            formater : formater,
-            series : {"":prov_data},
-            height : 200,
-            ticks : ticks,
-            margins: {top:10,bottom:10,left:10,right:10 },
+            colors: ()=>"#1f77b4",
+            formater: formater,
+            series: {"": prov_data},
+            height: 200,
+            ticks: ticks,
+            margins: {top: 10, bottom: 10, left: 10, right: 10},
           }
         )).render();
 
         container.selectAll("rect").styles({
-          "opacity" :  color_scale(_.last(prov_data)) }); 
+          "opacity":  color_scale(_.last(prov_data)) }); 
         container.selectAll(".x.axis .tick text")
-          .styles({ 'font-size' : "10px" });
+          .styles({ 'font-size': "10px" });
       } else { //use hbar
 
         (new D3.HBAR.hbar(
           container.select("div").node(),
           {
-            x_scale : d4.scaleLinear(),
-            // x_scale : d3.scale.linear(),
-            axisFormater : formater,
-            formater : formater,
-            tick_number : 5,
-            data : ticks.map((tick,i) => ({value : prov_data[i], name: tick}) ),
+            x_scale: d4.scaleLinear(),
+            axisFormater: formater,
+            formater: formater,
+            tick_number: 5,
+            data: ticks.map((tick,i) => ({value : prov_data[i], name: tick}) ),
           }
         )).render();
       }
@@ -263,7 +262,7 @@ const prov_split_render = function(panel,data,options){
         })
         .filter(row => _.some(row.data, data => !_.isUndefined(data)))
         .value(), 
-      table_name : text_maker("historical_employee_prov_title"),
+      table_name : text_maker("employee_prov_title"),
     });
   }
 
@@ -271,22 +270,22 @@ const prov_split_render = function(panel,data,options){
 
 new PanelGraph({
   level: "dept",
-  key : "historical_employee_prov",
+  key: "employee_prov",
   info_deps: [
     'table10_dept_info',
     'table10_gov_info',
   ],
   depends_on: ['table10'],
 
-  layout : {
-    full : {text : 12, graph: [3,9]},
-    half : {text : 12, graph: [12,12]},
+  layout: {
+    full: {text: 12, graph: [3,9]},
+    half: {text: 12, graph: [12,12]},
   },
 
-  text :  "dept_historical_employee_prov_text",
-  title : "historical_employee_prov_title",
-  include_in_bubble_menu : true,
-  bubble_text_label : "geo_region",
+  text: "dept_employee_prov_text",
+  title: "employee_prov_title",
+  include_in_bubble_menu: true,
+  bubble_text_label: "geo_region",
 
   calculate(subject){
     const {table10} = this.tables;
@@ -298,21 +297,21 @@ new PanelGraph({
 
 new PanelGraph({
   level: "gov",
-  key : "historical_employee_prov",
+  key: "employee_prov",
   depends_on: ['table10'],
 
   info_deps: [
     'table10_gov_info',
   ],
-  layout : {
-    full : {text : 12, graph: 12},
-    half : {text : 12, graph: 12},
+  layout: {
+    full: {text: 12, graph: 12},
+    half: {text: 12, graph: 12},
   },
 
-  text :  "gov_historical_employee_prov_text",
-  title : "historical_employee_prov_title",
-  include_in_bubble_menu : true,
-  bubble_text_label : "geo_region",
+  text: "gov_employee_prov_text",
+  title: "employee_prov_title",
+  include_in_bubble_menu: true,
+  bubble_text_label: "geo_region",
 
   calculate(){
     const {table10} = this.tables;
