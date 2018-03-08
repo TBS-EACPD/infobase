@@ -1,18 +1,21 @@
 import "./table10.ib.yaml";
 
-const {
+import {
   STATS, 
   text_maker, 
   m, 
   Statistics, 
   formats, 
   people_five_year_percentage_formula,
-  business_constants : {provinces},
-  years : { 
-    people_years, 
-    people_years_short_second,
-  },
-} = require("../table_common");
+  business_constants,
+  years,
+} from "../table_common";
+
+const {provinces} = business_constants;
+const { 
+  people_years, 
+  people_years_short_second,
+} = years;
 
 export default {
   "id": "table10",
