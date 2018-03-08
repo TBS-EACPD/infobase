@@ -348,6 +348,7 @@ class Partition {
     };
     window.addEventListener("resize", adjust_partition_diagram_margin_on_resize);
 
+    // Be aware, constructor of PartitionDiagram has side-effects on this.container, DOM stuff being what it is
     this.chart = new PartitionDiagram(this.container, {height: 700});
 
     const sort_vals = this.sort_vals = _.sortBy(presentation_schemes_by_data_options, d => d.id === value_attr ? -Infinity : Infinity);
@@ -375,14 +376,21 @@ class Partition {
       .sortBy(d => d.id === method ? -Infinity : Infinity)
       .value();
 
-    this.container.select(".partition-controls").html(
-      text_maker("partition_controls",{
-        presentation_schemes, 
-        sort_vals, 
-        search: true, 
-      })
-    );
+    this.container.select(".__partition__")
+      .insert("div", ":first-child")
+      .classed("partition-controls", true)
+      .html(
+        text_maker("partition_controls",{
+          presentation_schemes, 
+          sort_vals, 
+          search: true, 
+        })
+      );
     
+    this.container.select(".__partition__")
+      .insert("div", ":first-child")
+      .classed("partition-notes", true);
+
     this.container.select("input.search").on("keydown", () => {
       // Prevent enter key from submitting input form 
       // (listening on the submit event seems less consistent than this approach)

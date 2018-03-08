@@ -21,8 +21,6 @@ export class PartitionDiagram {
     this.outer_html = container;
     this.outer_html.html(`
       <div class='__partition__' aria-hidden='true'>
-         <div class='partition-notes'>  </div>
-         <div class='partition-controls'>  </div>
          <div class='partition-diagram'>  </div>
       </div>
     `);
@@ -30,27 +28,27 @@ export class PartitionDiagram {
     
     this.svg = this.html
       .append("div")
-      .classed("__svg__",true)
+      .classed("__svg__", true)
       .append("svg");
 
     this.defs = this.svg
       .append("defs");
 
-    this.graph_area  = this.svg
+    this.graph_area = this.svg
       .append("g")
-      .attr("class","graph_area");
+      .attr("class", "graph_area");
     
     this.html
-      .style("position","relative")
-      .style("zoom",0.4)
+      .style("position", "relative")
+      .style("zoom", 0.4)
       .on("keydown", this.keydown_dispatch.bind(this))
       .on("focusin", this.focusin_dispatch.bind(this))
       .on("focusout", this.focusout_dispatch.bind(this))
       .on("click", this.click_dispatch.bind(this))
       .transition()
       .duration(500)
-      .style("zoom",1)
-      .on("end",this.render.bind(this));
+      .style("zoom", 1)
+      .on("end", this.render.bind(this));
   }
   render(options = {} ) {
     this.options = _.extend(this.options,options);
