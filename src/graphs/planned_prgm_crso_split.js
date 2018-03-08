@@ -137,6 +137,12 @@ new PanelGraph({
   title :"planned_prg_crso_split_title",
   text : "planned_prg_crso_split_text",
   calculate(subject,info){
+
+    if(window.is_a11y_mode){
+      return false;
+      //this panel is covered entirely by crso_program_resources
+    }
+
     // check for negative voted or statutory values
     const {table6} = this.tables;
     const table6_data = table6.q(subject).data;
