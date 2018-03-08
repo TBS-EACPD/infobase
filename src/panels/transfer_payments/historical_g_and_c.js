@@ -1,11 +1,16 @@
-const {
+import './gnc-text.ib.yaml';
+import {
   formats,
   text_maker,
   run_template,
   PanelGraph,
-  utils : {find_parent},
-  years : {std_years},
-  D3} = require("./shared"); 
+  utils,
+  years,
+  D3,
+} from "../shared";
+
+const { std_years } = years;
+const { find_parent } = utils;
 
 const exp_years = std_years.map(year=> year+'exp');
 
@@ -25,7 +30,7 @@ const g_and_c_hist_render = function(panel, data){
     const data_keys = Object.keys(g_and_c_data);
     // insert new row under the content row
     
-    if(!window.is_a11y_mode){
+    if(!window.is_a11y_e){
       const graph_parent = d4.select(find_parent(graph_area.node(),n=>d4.select(n).classed("panel-body"))); 
       const new_row = graph_parent.insert("div",".row.source")
         .classed("row",true)

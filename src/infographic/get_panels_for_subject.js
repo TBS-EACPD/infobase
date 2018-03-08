@@ -1,4 +1,7 @@
-const { PanelGraph } = require('../core/graphs.js');
+import "../panels/transfer_payments/last_year_g_and_c_perspective";
+import "../panels/transfer_payments/historical_g_and_c";
+
+import { PanelGraph } from '../core/graphs.js';
 
 const get_people_panels = subject => {
   const is_gov = subject.level === "gov";

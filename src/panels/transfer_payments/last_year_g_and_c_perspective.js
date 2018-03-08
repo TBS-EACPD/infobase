@@ -1,7 +1,10 @@
-const {Subject,
+import './gnc-text.ib.yaml';
+import {
+  Subject,
   formats,
   PanelGraph,
-  D3} = require("./shared"); 
+  D3,
+} from "../shared";
 
 new PanelGraph({
   level: "dept",
