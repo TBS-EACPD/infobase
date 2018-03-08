@@ -3,7 +3,6 @@ exports = module.exports;
 
 
 require("./table2.ib.yaml");
-require('../../graphs/qfr_graphs.js');
 
 const { Statistics } = require('../../core/Statistics.js');
 const {sos} = require('../../models/businessConstants.js');

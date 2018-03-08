@@ -5,8 +5,6 @@ require("./table1.ib.yaml");
 // see [here](../table_definition.html) for description
 // of the table spec
 
-require('../../graphs/qfr_graphs.js');
-
 const {  vote_stat_dimension, major_vote_stat } = require('../table_common.js');
 const { Statistics } = require('../../core/Statistics.js');
 const FORMAT = require('../../core/format');
