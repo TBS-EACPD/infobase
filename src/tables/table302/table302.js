@@ -1,9 +1,7 @@
 "use strict";
 exports = module.exports;
-// see [here](../table_definition.html) for description
-// of the table spec
-require("./table302.ib.yaml");
-require("../../panels/historical_employee_gender");
+
+import "./table302.ib.yaml";
 
 const {
   STATS, 

@@ -7,7 +7,7 @@ const {
   business_constants: {
     ex_levels, 
   },
-  D3} = require("./shared"); 
+  D3} = require("../shared"); 
 
 const exec_level_render = function(panel,data){
   const {graph_args} = data;

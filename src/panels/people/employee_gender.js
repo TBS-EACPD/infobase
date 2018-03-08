@@ -8,7 +8,7 @@ const {
   D3,
   years : {people_years},
   business_constants : { gender },
-} = require("./shared"); 
+} = require("../shared"); 
 
 const employee_gender_render = function(panel, data){
   const {graph_args} = data;

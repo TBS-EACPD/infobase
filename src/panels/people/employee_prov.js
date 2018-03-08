@@ -5,9 +5,9 @@ const {
   PanelGraph,
   years : {people_years},
   D3,
-} = require("./shared"); 
+} = require("../shared"); 
 
-const {provinces} = require('../models/businessConstants.js');
+const {provinces} = require('../../models/businessConstants.js');
 
 
 const prov_split_render = function(panel,data,options){

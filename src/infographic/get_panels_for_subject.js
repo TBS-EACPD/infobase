@@ -1,6 +1,16 @@
 import "../panels/transfer_payments/last_year_g_and_c_perspective";
 import "../panels/transfer_payments/historical_g_and_c";
 
+import "../panels/people/employee_last_year_totals";
+import "../panels/people/employee_totals";
+import "../panels/people/employee_type";
+import "../panels/people/employee_prov";
+import "../panels/people/employee_age";
+import "../panels/people/employee_occ_category";
+import "../panels/people/employee_executive_level";
+import "../panels/people/employee_gender";
+import "../panels/people/employee_fol";
+
 import { PanelGraph } from '../core/graphs.js';
 
 const get_people_panels = subject => {

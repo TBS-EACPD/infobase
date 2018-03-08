@@ -1,10 +1,6 @@
 exports = module.exports;
-// see [here](../table_definition.html) for description
-// of the table spec
-require("./table9.ib.yaml");
-require("../../panels/last_year_total_employment");
-require("../../panels/historical_employee_totals");
-require("../../panels/historical_employee_type");
+
+import "./table9.ib.yaml";
 
 const {
   STATS, 

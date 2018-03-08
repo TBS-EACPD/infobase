@@ -1,10 +1,7 @@
 exports = module.exports;
-// see [here](../table_definition.html) for description
-// of the table spec
-require("./table10.ib.yaml");
-require("./canada_map.ib.yaml");
 
-require("../../panels/historical_employee_prov");
+import "./table10.ib.yaml";
+import "./canada_map.ib.yaml";
 
 const {
   STATS, 

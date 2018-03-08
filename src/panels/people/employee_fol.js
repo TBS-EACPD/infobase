@@ -8,7 +8,7 @@ const {
   D3,
   years: {people_years},
   business_constants: { fol },
-} = require("./shared"); 
+} = require("../shared"); 
 
 const employee_fol_render = function(panel, data){
   const {graph_args} = data;

@@ -1,9 +1,7 @@
 "use strict";
 exports = module.exports;
-// see [here](../table_definition.html) for description
-// of the table spec
-require("./table111.ib.yaml");
-require("../../panels/historical_employee_occ_category");
+
+import "./table111.ib.yaml";
 
 const {
   STATS, 

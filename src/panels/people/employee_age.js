@@ -10,7 +10,7 @@ const {formats,
   declarative_charts : {
     D3GraphWithLegend,
   },
-  reactAdapter} = require("./shared");
+  reactAdapter} = require("../shared");
  
 const emp_age_render = function(panel,data,options){
   const { graph_args } = data;

@@ -10,7 +10,7 @@ const {
   business_constants: {
     occupational_categories,
   },
-} = require("./shared"); 
+} = require("../shared"); 
 
 const occ_cat_render = function(panel,data){
   const { graph_args } = data;

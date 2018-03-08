@@ -1,8 +1,6 @@
 exports = module.exports;
-// see [here](../table_definition.html) for description
-// of the table spec
-require("./table11.ib.yaml");
-require("../../panels/historical_employee_age");
+
+import "./table11.ib.yaml";
 
 const {STATS, 
   text_maker, 

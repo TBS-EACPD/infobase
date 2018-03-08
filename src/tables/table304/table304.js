@@ -1,9 +1,7 @@
 "use strict";
 exports = module.exports;
-// see [here](../table_definition.html) for description
-// of the table spec
-require("./table304.ib.yaml");
-//require("../../panels/historical_employee_average_age"); // Graph incorporated in to historical_employee_age graph, don't need historical_employee_average_age
+
+import "./table304.ib.yaml";
 
 const {
   text_maker, 
