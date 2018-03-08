@@ -59,21 +59,6 @@ program_spending_in_tag_perspective_text:
     En {{planning_year_1}}, les dépenses liées au programme «**{{subj_name subject}}**» représentera **{{fmt_percentage1 tag_exp_pct}}**
     du total maximal de **{{fmt_compact_written tag_spend}}** en dépenses prévues pour l'étiquette **"{{infograph_link tag}}"**.
 
-crso_prg_full_spending_title:
-  transform: [handlebars]
-  en: |
-   Spending by Program
-  
-  fr: |
-   Dépenses par Programme
-
-dept_historical_program_spending_title:
-  transform: [handlebars]
-  en: |
-   Spending by Program
-  
-  fr: |
-   Dépenses par Programme
 
 historical_dept_by_CRSO_title:
   transform: [handlebars]
@@ -162,39 +147,6 @@ dept_historical_program_spending_text:
    _**{{fmt_compact_written dept_prg_top1}}**_ (**{{fmt_compact_written dept_prg_top1_amnt}}**).Durant les cinq dernières années, {{fmt_compact_written dept_prg_top1}} a dépensé en moyenne {{fmt_compact_written dept_prg_five_year_top_avg}}.
    {{/if}}
 
-historical_program_spending_text:
-  transform: [handlebars,markdown]
-  en: |
-   In {{planning_year_1}}, {{pluralize prg.crso_prg_num '[Program]'}}{{gl "PROG"}} fell under this {{cr_or_so subject}}
-   {{#if prg.is_fte}}
-   with **{{fmt_compact_written prg.crso_prg_top1}}** ({{fmt_big_int_real prg.crso_prg_top1_amnt}} FTEs) being the largest
-   {{#if prg.crso_prg_top2_amnt}}
-   followed by **{{fmt_compact_written prg.crso_prg_top2}}** ({{fmt_big_int_real prg.crso_prg_top2_amnt}} FTEs).
-   {{else}}.
-   {{/if}}
-   {{else}}
-   with **{{fmt_compact_written prg.crso_prg_top1}}** ({{fmt_compact_written prg.crso_prg_top1_amnt}}) being the largest
-   {{#if prg.crso_prg_top2_amnt}}
-   followed by **{{fmt_compact_written prg.crso_prg_top2}}** ({{fmt_compact_written prg.crso_prg_top2_amnt}}).
-   {{else}}.
-   {{/if}}
-   {{/if}}
-  
-  fr: |
-   En {{planning_year_1}}, {{ce_crso subject}} comptait {{pluralize prg.crso_prg_num '[programme]'}}{{gl "PROG"}}.
-   {{#if prg.is_fte}}
-   Le plus important étant **{{fmt_compact_written prg.crso_prg_top1}}** ({{fmt_big_int_real prg.crso_prg_top1_amnt}} ETP)
-   {{#if prg.crso_prg_top2_amnt}}
-   suivi par **{{fmt_compact_written prg.crso_prg_top2}}** ({{fmt_big_int_real prg.crso_prg_top2_amnt}} ETP).
-   {{else}}.
-   {{/if}}
-   {{else}}
-   Le plus important étant **{{fmt_compact_written prg.crso_prg_top1}}** ({{fmt_compact_written prg.crso_prg_top1_amnt}})
-   {{#if prg.crso_prg_top2_amnt}}
-   suivi par **{{fmt_compact_written prg.crso_prg_top2}}** ({{fmt_compact_written prg.crso_prg_top2_amnt}}).
-   {{else}}.
-   {{/if}}
-   {{/if}}
 
 tag_Progam_activity_spending_text:
   transform: [handlebars,markdown]
@@ -328,3 +280,41 @@ historical_prog_title:
   transform: [handlebars]
   en:  Historical Program Spending ({{pa_last_year_5}} to {{pa_last_year}})
   fr:  Historique des dépenses de Programmes ({{pa_last_year_5}} à {{pa_last_year}})
+
+
+
+
+crso_by_prog_exp_or_ftes:
+  transform: [handlebars,markdown]
+  en: |
+   In {{planning_year_1}}, {{pluralize crso_prg_num '[Program]'}}{{gl "PROG"}} fell under this {{gt "core_resp"}}
+   {{#if is_fte}}
+   with **{{crso_prg_top1}}** ({{fmt_big_int_real crso_prg_top1_amnt}} FTEs) being the largest in terms of of employment,
+   {{#if crso_prg_top2_amnt}} followed by **{{crso_prg_top2}}** ({{fmt_big_int_real crso_prg_top2_amnt}} FTEs). {{else}}. {{/if}}
+   {{else}}
+   with **{{fmt_compact_written crso_prg_top1}}** ({{fmt_compact_written crso_prg_top1_amnt}}) being the largest in terms of spending,
+   {{#if crso_prg_top2_amnt}} followed by **{{crso_prg_top2}}** ({{fmt_compact_written crso_prg_top2_amnt}}). {{else}}. {{/if}}
+   {{/if}}
+  
+  fr: |
+   En {{planning_year_1}}, cette responsabilité essentielle comptait {{pluralize crso_prg_num '[programme]'}}{{gl "PROG"}}.
+   {{#if is_fte}}
+   Le plus important en termes d'employés étant **{{crso_prg_top1}}** ({{fmt_big_int_real crso_prg_top1_amnt}} ETP)
+   {{#if crso_prg_top2_amnt}} suivi par **{{crso_prg_top2}}** ({{fmt_big_int_real crso_prg_top2_amnt}} ETP). {{else}}. {{/if}}
+   {{else}}
+   Le plus important en terme de dépenses étant **{{crso_prg_top1}}** ({{fmt_compact_written crso_prg_top1_amnt}})
+   {{#if crso_prg_top2_amnt}} suivi par **{{crso_prg_top2}}** ({{fmt_compact_written crso_prg_top2_amnt}}). {{else}}. {{/if}}
+   {{/if}}
+
+
+
+crso_by_prog_exp_title:
+  transform: [handlebars]
+  en: Spending by Program ({{planning_year_1}} to {{planning_year_3}})
+  fr: Dépenses par Programme ({{planning_year_1}} à {{planning_year_3}})
+
+
+crso_by_prog_fte_title:
+  transform: [handlebars]
+  en: Employment by Program ({{planning_year_1}} to {{planning_year_3}})
+  fr: Dépenses par Programme ({{planning_year_1}} à {{planning_year_3}})

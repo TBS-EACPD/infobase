@@ -130,8 +130,9 @@ const get_crso_panels = subject => {
       'dead_crso_warning',
       'financial_intro',
       'welcome_mat',
-
-      'crso_prg_full_spending',
+      
+      'crso_by_prog_exp',
+      'crso_by_prog_fte',
       'planned_prg_crso_split',
     ],
     results: subject.dept.dp_status && !subject.is_internal_service && [

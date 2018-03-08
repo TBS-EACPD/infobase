@@ -3,7 +3,6 @@ exports = module.exports;
 require("./table6.ib.yaml");
 
 require('../../graphs/historical_auth_exp');
-require('../../graphs/historical_program_spending');
 //require('../../graphs/historical_dept_by_crso');
 require('../../graphs/top_3_dept_graph');
 require('../../graphs/spending_in_perspective');
@@ -11,7 +10,7 @@ require('../../graphs/spending_in_perspective');
 require("../../graphs/last_year_vote_stat_split");
 require('../../graphs/planned_program_spending');
 require('../../graphs/planned_prgm_crso_split');
-require('../../graphs/exp_ftes_line_chart');
+require('../../graphs/crso_program_resources.js');
 
 require('../../graphs/sub_program_resources.js');
 require('../../graphs/drr_planned_actual.js');
