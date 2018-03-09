@@ -65,11 +65,11 @@ function slowScrollDown(){
     return;
   }
   el.focus();
-  d4.select(el)
+  d3.select(el)
     .transition()
     .duration(1000)
     .tween("uniquetweenname2", ()=>{
-      const i = d4.interpolateNumber(0, el.getBoundingClientRect().top);
+      const i = d3.interpolateNumber(0, el.getBoundingClientRect().top);
       return t => { window.scrollTo( 0, i(t) ); };
     });
 }

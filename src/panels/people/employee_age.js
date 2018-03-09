@@ -72,7 +72,7 @@ new PanelGraph({
     const series = table11.q(dept).high_level_rows();
     
     const dept_five_year_total_head_count = _.chain(series)
-      .map(row => d4.sum(_.drop(row)))
+      .map(row => d3.sum(_.drop(row)))
       .reduce((sum, val) => sum + val, 0)
       .value();
 
@@ -83,11 +83,11 @@ new PanelGraph({
         return {
           label,
           data,
-          five_year_percent : d4.sum(data)/dept_five_year_total_head_count,
+          five_year_percent : d3.sum(data)/dept_five_year_total_head_count,
           active : true,
         };
       })
-      .filter(d => d4.sum(d.data) !== 0)
+      .filter(d => d3.sum(d.data) !== 0)
       .value();
     
     return {
@@ -118,7 +118,7 @@ new PanelGraph({
     const {table11} = this.tables;
 
     const gov_five_year_total_head_count =_.chain(table11.q().gov_grouping())
-      .map(row => d4.sum(_.drop(row)))
+      .map(row => d3.sum(_.drop(row)))
       .reduce((sum, val) => sum + val, 0)
       .value();
 
@@ -280,7 +280,7 @@ new PanelGraph({
 //          active : true,
 //        })
 //      )
-//      .filter(d => d4.sum(d.data) !== 0)
+//      .filter(d => d3.sum(d.data) !== 0)
 //      .concat({
 //        label : text_maker("fps"),
 //        data : people_years.map(year => table304.GOC[0][year]),
@@ -288,7 +288,7 @@ new PanelGraph({
 //      })
 //    
 //    const dept_five_year_total_head_count = _.chain(series)
-//      .map(row => d4.sum(_.drop(row)))
+//      .map(row => d3.sum(_.drop(row)))
 //      .reduce((sum, val) => sum + val, 0)
 //      .value();
 //
@@ -299,11 +299,11 @@ new PanelGraph({
 //        return {
 //          label,
 //          data,
-//          five_year_percent : d4.sum(data)/dept_five_year_total_head_count,
+//          five_year_percent : d3.sum(data)/dept_five_year_total_head_count,
 //          active : true,
 //        };
 //      })
-//      .filter(d => d4.sum(d.data) !== 0)
+//      .filter(d => d3.sum(d.data) !== 0)
 //      .value();
 //    
 //    return {
@@ -343,7 +343,7 @@ new PanelGraph({
 //    }];
 //    
 //    const gov_five_year_total_head_count =_.chain(table11.q().gov_grouping())
-//      .map(row => d4.sum(_.drop(row)))
+//      .map(row => d3.sum(_.drop(row)))
 //      .reduce((sum, val) => sum + val, 0)
 //      .value()
 //

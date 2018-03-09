@@ -122,7 +122,7 @@ D3.create_graph_with_legend = function(options){
       active : all_active ? true :row.active,
     }));
   if (options.sort_data) {
-    data = data.sortBy(d =>  -d4.sum(d.data) );
+    data = data.sortBy(d =>  -d3.sum(d.data) );
   }
   data = data.value();
 
@@ -142,7 +142,7 @@ D3.create_graph_with_legend = function(options){
         colors = infobase_colors();
       } else {
         // colors = d3.scale.category20();
-        colors = d4.scaleOrdinal(d4.schemeCategory20);
+        colors = d3.scaleOrdinal(d3.schemeCategory20);
       }
     }
 
@@ -299,7 +299,7 @@ D3.create_a11y_table = function({
   //       ...
   //     ]
   if(_.isElement(container)){ //if container is not a d3 selection, wrap it in a d3 selection
-    container = d4.select(container);
+    container = d3.select(container);
   }
   const a11y_area = container.append('div');
   if(!window.is_a11y_mode){

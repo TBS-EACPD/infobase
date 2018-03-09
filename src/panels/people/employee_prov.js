@@ -66,10 +66,10 @@ const prov_split_render = function(panel,data,options){
 
 
     // calculate the maximum value to set the darkest shading
-    const max = d4.max(d4.values(_.last(years_by_province)));
+    const max = d3.max(d3.values(_.last(years_by_province)));
     // use the max to calibrate the scale
 
-    const color_scale = d4.scaleLinear()
+    const color_scale = d3.scaleLinear()
       .domain([0,max])
       .range([0.2,1]);
 
@@ -106,7 +106,7 @@ const prov_split_render = function(panel,data,options){
     if (!window.is_mobile) {
       // if it's not mobile, then the graph can go next to the map , under the legend
 
-      historical_graph_container = d4.select(legend_area.node()).append("div");
+      historical_graph_container = d3.select(legend_area.node()).append("div");
 
       // copy the class names and style properties of the legend to ensure the graph fits in nicely
       historical_graph_container.node().className = list.legend.node().className;
@@ -117,7 +117,7 @@ const prov_split_render = function(panel,data,options){
       });
 
     } else {
-      historical_graph_container = d4.select(graph_area.node()).append("div");
+      historical_graph_container = d3.select(graph_area.node()).append("div");
     }
 
 
@@ -149,7 +149,7 @@ const prov_split_render = function(panel,data,options){
       if (prov ==='Canada' || no_data) {
         prov = 'Canada';
         prov_data = _.map(years_by_province,function(year_data){
-          return d4.sum(_.values(year_data));
+          return d3.sum(_.values(year_data));
         });
       }
 
@@ -194,7 +194,7 @@ const prov_split_render = function(panel,data,options){
         (new D3.HBAR.hbar(
           container.select("div").node(),
           {
-            x_scale: d4.scaleLinear(),
+            x_scale: d3.scaleLinear(),
             axisFormater: formater,
             formater: formater,
             tick_number: 5,
@@ -236,7 +236,7 @@ const prov_split_render = function(panel,data,options){
       .value();
     
     const all_year_headcount_total = _.chain(years_by_province)
-      .map(year_by_province => d4.sum(_.values(year_by_province)))
+      .map(year_by_province => d3.sum(_.values(year_by_province)))
       .reduce( (sum, value) => sum +value, 0)
       .value();
 
@@ -250,7 +250,7 @@ const prov_split_render = function(panel,data,options){
             return ybp[op.key];
           });
 
-          const five_year_avg_share = d4.sum(yearly_headcounts)/all_year_headcount_total;
+          const five_year_avg_share = d3.sum(yearly_headcounts)/all_year_headcount_total;
           const formated_avg_share =  five_year_avg_share > 0 ? 
             formats["percentage1_raw"](five_year_avg_share) :
             undefined;

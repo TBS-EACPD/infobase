@@ -67,7 +67,7 @@ export function load_results_counts(){
   } else {
     return $.ajax({url : `results/results_summary.html` })
       .then(response => {
-        const rows = d4.csvParse(response);
+        const rows = d3.csvParse(response);
         _.each(rows, row => {
           _.each(row, (val,key) => {
             if(!_.isNaN(+val)){
@@ -85,7 +85,7 @@ export function load_results_counts(){
 function populate_results_info(data){
   //most of the results data is csv-row based, without headers.
   _.each(['results', 'indicators', 'pi_dr_links', 'sub_programs'], key => {
-    data[key] = d4.csvParse(data[key]);
+    data[key] = d3.csvParse(data[key]);
   })
 
   const {

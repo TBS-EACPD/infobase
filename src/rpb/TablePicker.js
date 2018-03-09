@@ -141,7 +141,7 @@ class TablePicker extends React.Component {
   fadeOutAndSelectTable(table_id){
     this.setState({ exiting: true })
     const initialHeight = this.refs.main.offsetHeight;
-    d4.select(this.refs.main)
+    d3.select(this.refs.main)
       .style('max-height',initialHeight+'px')
       .style('opacity', 1)
       .transition()

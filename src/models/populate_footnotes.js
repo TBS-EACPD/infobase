@@ -8,7 +8,7 @@ let _loaded_dept_or_tag_codes = {};
 
 function populate_footnotes_info(csv_str){
   const rows = _.map(
-    d4.csvParse(_.trim(csv_str)), 
+    d3.csvParse(_.trim(csv_str)), 
     row => _.mapValues(row, item => _.trim(item) )
   );
 

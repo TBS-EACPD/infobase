@@ -12,7 +12,7 @@ exports.circle_pie_chart = class circle_pie_chart {
     //         "series 2" : [y1,y2,y3]}
     // ticks = ["tick1","tick2"."tick3"]
     // ```
-    D3CORE.setup_graph_instance(this,d4.select(container),options);
+    D3CORE.setup_graph_instance(this,d3.select(container),options);
     this.graph_area =  this.svg.append("g").attr("class","_graph_area");
   };
 
@@ -33,9 +33,9 @@ exports.circle_pie_chart = class circle_pie_chart {
     var title = this.options.title;
     var data = this.options.data;
     // based on the min dimension of the pane
-    var scale = d4.scalePow()
+    var scale = d3.scalePow()
       .exponent(0.5)
-      .domain([1,d4.max(data, function(d){return d.value;})])
+      .domain([1,d3.max(data, function(d){return d.value;})])
       .range([1,min_dim/2]);
     var x_offset = (margin.left + width/2);
 

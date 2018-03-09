@@ -56,7 +56,7 @@ new PanelGraph({
       .map((lines, key)=> {
         return {
           label : key,
-          value : d4.sum(lines,_.property("{{pa_last_year}}")),
+          value : d3.sum(lines,_.property("{{pa_last_year}}")),
         }
       })
       .value();

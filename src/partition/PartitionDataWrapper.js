@@ -67,7 +67,7 @@ export class PartitionDataWrapper {
       node.value = node.__value__;
       this.show_partial_children(node);
     } else if (this.is_placeholder(node) && !_.isUndefined(node.data.hidden_children)) {
-      node.value = d4.sum(node.data.hidden_children, child => child.__value__);
+      node.value = d3.sum(node.data.hidden_children, child => child.__value__);
     }
   }
   unmagnify(node){

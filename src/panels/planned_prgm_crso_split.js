@@ -46,7 +46,7 @@ const prg_crso_split_render = function(panel, calculations, options){
     .reverse()
     .value()
 
-  const data_sum = d4.sum(_.map(unfiltered_data, "value"));
+  const data_sum = d3.sum(_.map(unfiltered_data, "value"));
 
   const data = _.filter(
     unfiltered_data, 
@@ -147,7 +147,7 @@ new PanelGraph({
     const {table6} = this.tables;
     const table6_data = table6.q(subject).data;
 
-    if(d4.sum(_.map(table6_data, yr => yr["{{planning_year_1}}"])) === 0){
+    if(d3.sum(_.map(table6_data, yr => yr["{{planning_year_1}}"])) === 0){
       return false
     } 
 

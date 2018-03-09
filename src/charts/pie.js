@@ -18,7 +18,7 @@ exports.pie = class PIE {
     //  in other words, it's up to the person calling this function
     //  to define what the label and data attrs will be
     //
-    D3CORE.setup_graph_instance(this,d4.select(container),options);
+    D3CORE.setup_graph_instance(this,d3.select(container),options);
     
     const _graph_area  = this.svg.append("g").attr("class","_graph_area");
     this.graph_area = _graph_area.append("g").attr("class","inner_graph_area");
@@ -54,17 +54,17 @@ exports.pie = class PIE {
     const inner_text_content = this.options.inner_text_content;
     const inner_text_fmt = this.options.inner_text_fmt;
 
-    const arc = d4.arc()
+    const arc = d3.arc()
       .outerRadius(radius - 10)
       .innerRadius(inner_radius || 0);
 
-    const pie = d4.pie()
+    const pie = d3.pie()
       .sort(null)
       .startAngle(this.options.start_angle || 0)
       .endAngle(this.options.end_angle || 2*Math.PI)
       .value(_.property(data_attr));
 
-    const total = d4.sum(this.options.data,_.property(data_attr));
+    const total = d3.sum(this.options.data,_.property(data_attr));
 
     const pct_formatter = this.options.pct_formatter;
 
@@ -218,7 +218,7 @@ exports.pie = class PIE {
           },
         })
         .each(function(d){
-          var el = d4.select(this);
+          var el = d3.select(this);
           var x = html_offset.left + d.label_length * Math.cos(d.label_angle - Math.PI / 2);
           if (d.label_angle > Math.PI){
             el.style("right", width - x + "px");
@@ -246,7 +246,7 @@ exports.pie = class PIE {
           const angle = d.label_angle;
           const diff = d.label_length;
 
-          return d4.radialLine()([[angle, radius, diff],[angle,diff,0]])
+          return d3.radialLine()([[angle, radius, diff],[angle,diff,0]])
 
         });
     }

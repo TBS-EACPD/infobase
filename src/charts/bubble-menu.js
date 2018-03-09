@@ -25,7 +25,7 @@ class BubbleMenu extends React.Component {
   }
 
   _update(){
-    const sel =  d4.select(this.refs.main)
+    const sel =  d3.select(this.refs.main)
       .selectAll('a')
       .data(this.props.items)
 
@@ -41,7 +41,7 @@ class BubbleMenu extends React.Component {
       .html(d => get_html(d) ) 
       .transition()
       .duration(300)
-      .ease(d4.easeLinear)
+      .ease(d3.easeLinear)
       .style('height', d=> d.active ? '300px' : '150px' )
       .style('width', d=> d.active ? '300px' : '150px' );
   }

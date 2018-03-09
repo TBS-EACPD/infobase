@@ -112,7 +112,7 @@ export default {
           return [key].concat(years);
         })
         .sortBy(function(row){
-          return d4.sum(_.tail(row));
+          return d3.sum(_.tail(row));
         })
         .value();
     },
@@ -125,7 +125,7 @@ export default {
         ncr = this.lang === 'en' ? "NCR" : "RCN",
         non_ncr = "Non-"+ncr,
         abroad = lk.abroad.text,
-        dept_total = d4.sum(this.data, function (d) {
+        dept_total = d3.sum(this.data, function (d) {
           return d[year];
         });
       var groups = _.groupBy(this.data, function (x) {
@@ -140,7 +140,7 @@ export default {
       return _.map([ncr, non_ncr, abroad], function (key) {
         var relevant_group = groups[key];
         var sub_column = _.map(relevant_group, year);
-        var group_total = d4.sum(sub_column);
+        var group_total = d3.sum(sub_column);
         if (format) {
           return [key, fm1(group_total), fm2(group_total / dept_total)];
         } else {

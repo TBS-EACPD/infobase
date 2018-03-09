@@ -24,7 +24,7 @@
 const template_globals_file = require('../common_text/template_globals.csv');
 
 //this will look like { key, en, fr }
-const template_globals_parsed = d4.csvParse(template_globals_file);
+const template_globals_parsed = d3.csvParse(template_globals_file);
 
 const additionnal_globals = _.chain(template_globals_parsed)
   .filter( ({key})=> key.match(/year?.?.$/) )

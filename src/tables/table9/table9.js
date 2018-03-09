@@ -102,7 +102,7 @@ export default {
           return [key].concat(years);
         })
         .sortBy(function(row){
-          return d4.sum(_.tail(row));
+          return d3.sum(_.tail(row));
         })
         .value();
     },
@@ -138,12 +138,12 @@ Statistics.create_and_register({
     STATS.year_over_year_multi_stats_active_years(add,"head_count_type",all_years,false,people_years);
 	
     const total_head_count_by_year = _.chain(people_years)
-      .map( y => d4.sum( _.map(q.data, _.property(y) ) ) )
+      .map( y => d3.sum( _.map(q.data, _.property(y) ) ) )
       .value();
 
     add(
       "head_count_avg", 
-      d4.sum(total_head_count_by_year)/ ( _.filter(total_head_count_by_year, d => d > 0).length )
+      d3.sum(total_head_count_by_year)/ ( _.filter(total_head_count_by_year, d => d > 0).length )
     );
 	
     const first_active_year_index = _.findIndex(total_head_count_by_year, d=> d !== 0);
@@ -175,7 +175,7 @@ Statistics.create_and_register({
     const q = table.q(subject);
     const col =  "{{ppl_last_year}}";
     const yearly_total_head_counts = q.sum(people_years, {as_object: false});
-    const five_year_total_head_count = d4.sum(yearly_total_head_counts);
+    const five_year_total_head_count = d3.sum(yearly_total_head_counts);
 
     c.emp_types = _.uniqBy(q.get_col("employee_type"));
     add( "head_count_ppl_last_year", q.sum(col));

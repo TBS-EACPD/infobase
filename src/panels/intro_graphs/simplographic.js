@@ -68,7 +68,7 @@ new PanelGraph({
       _.chain(table10.prov_code("{{ppl_last_year}}",Gov))
         .toPairs()
         .groupBy( ([prov_code, prov_total]) =>  prov_code.startsWith('NCR') ? "ncr" : "non_ncr" )
-        .map( (group, group_name) => [ group_name , d4.sum(_.map(group,1)) ] )
+        .map( (group, group_name) => [ group_name , d3.sum(_.map(group,1)) ] )
         .fromPairs()
         .value()
     );

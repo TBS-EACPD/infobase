@@ -84,7 +84,7 @@ new PanelGraph({
           active : true,
         })
       )
-      .filter(d => d4.sum(d.data) !== 0 );
+      .filter(d => d3.sum(d.data) !== 0 );
   },
 
   render: employee_gender_render,
@@ -111,7 +111,7 @@ new PanelGraph({
     const {table302} = this.tables;
     
     const gov_five_year_total_head_count =_.chain(table302.q().gov_grouping())
-      .map(row => d4.sum(_.drop(row)))
+      .map(row => d3.sum(_.drop(row)))
       .reduce((sum, val) => sum + val, 0)
       .value();
 

@@ -9,7 +9,7 @@ const lapse_item_dimension = options => row => row.lapse_item;
 function major_vote_stat(options){
 
 
-  var by_type_and_desc = d4.nest()
+  var by_type_and_desc = d3.nest()
     .key(function(d){return d.votestattype;})
     .key(function(d){return d.desc;})
     .object(options.table.data);
@@ -102,12 +102,12 @@ function people_five_year_percentage_formula(col_name,col_names_to_be_averaged){
             total_totals[i] = total_totals[i] + d[year]  || d[year];
           }
         });
-        sum = d4.sum(row, function(d){return d[year];});
+        sum = d3.sum(row, function(d){return d[year];});
         cat_totals[i] = cat_totals[i] + sum  || sum;
       });
       // now divide the category totals by the total totals
       // and produce the average
-      calculated =  d4.sum(cat_totals)/d4.sum(total_totals);
+      calculated =  d3.sum(cat_totals)/d3.sum(total_totals);
     } else if (_.isArray(row) && row.length === 1){
       // scenario 5
       calculated =  row[0].five_year_percent;

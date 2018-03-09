@@ -87,7 +87,7 @@ new PanelGraph({
           active: true,
         })
       )
-      .filter(d => d4.sum(d.data) !== 0 );
+      .filter(d => d3.sum(d.data) !== 0 );
   },
 
   render: employee_type_render,

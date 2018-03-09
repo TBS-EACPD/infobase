@@ -114,7 +114,7 @@ exports.create_ppl_share_pie = function({
 
 // Adds a new row to the bottom of a panel containing a height clipped create_graph_with_legend graph. Adds a11y tables outside of HeightClipper.
 exports.create_height_clipped_graph_with_legend = function(panel,create_graph_with_legend_options) {
-  const panel_body = d4.select(find_parent(panel.areas().graph.node(), n => d4.select(n).classed("panel-body")));
+  const panel_body = d3.select(find_parent(panel.areas().graph.node(), n => d3.select(n).classed("panel-body")));
   const new_row = panel_body
     .insert("div",".panel-body > div.frow:not(.middle-xs)")
     .classed("frow middle-xs",true)
@@ -147,7 +147,7 @@ exports.collapse_by_so = function(programs,table,filter){
     .map(key_value => ({
       label : key_value[0], 
       so_num : key_value[1][0].so_num,
-      value : d4.sum(key_value[1],d=>d["{{pa_last_year}}"]),
+      value : d3.sum(key_value[1],d=>d["{{pa_last_year}}"]),
     }))
     .filter(filter || (()=>true))
     .sortBy(d=>-d.value)
@@ -172,7 +172,7 @@ exports.common_react_donut = function render(panel, calculations, options){
 
   const color_scale = infobase_colors();
 
-  const total = d4.sum(graph_args, _.property('value'));
+  const total = d3.sum(graph_args, _.property('value'));
 
   const has_neg = _.chain(graph_args)
     .map('value')

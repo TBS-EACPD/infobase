@@ -14,7 +14,7 @@ exports.ordinal_line = class ordinal_line {
     // ticks = ["tick1","tick2"."tick3"]
     // ```
 
-    D3CORE.setup_graph_instance(this,d4.select(container),options);
+    D3CORE.setup_graph_instance(this,d3.select(container),options);
 
     var _graph_area  = this.svg.append("g").attr("class","_graph_area");
     this.grid_line_area = _graph_area.append("g").attr("class","grid_lines");
@@ -54,8 +54,8 @@ exports.ordinal_line = class ordinal_line {
 
     this.formater = this.normalized ? this.normalized_formater : this.number_formater;
     this.series = this.options.series;
-    this.values = d4.values(this.series);
-    this.series_labels = d4.keys(this.series);
+    this.values = d3.values(this.series);
+    this.series_labels = d3.keys(this.series);
     this.colors = this.options.colors;
     // restrict either the beginning or end of the ticks
     // if there are no associated values  
@@ -67,14 +67,14 @@ exports.ordinal_line = class ordinal_line {
       )
     )
 
-    this.x = d4.scalePoint()
+    this.x = d3.scalePoint()
       .domain(this.ticks)
       .range([0, width]);
 
 
     var x_range = this.x.range();
     this.tick_width = x_range[1]- x_range[0];
-    this.extent = d4.extent(d4.merge(this.values));
+    this.extent = d3.extent(d3.merge(this.values));
 
     if (this.series_labels.length === 0){
       return;
@@ -115,12 +115,12 @@ exports.ordinal_line = class ordinal_line {
       .sortBy("index")
       .value()
 
-    var stack_layout = d4.stack()
+    var stack_layout = d3.stack()
       .keys(keys);
 
     if (this.normalized){
       _.each(series, (serie, ix, series) => {
-        var sum = d4.sum(
+        var sum = d3.sum(
           _.chain(serie)
             .omit("year")
             .values()
@@ -138,13 +138,13 @@ exports.ordinal_line = class ordinal_line {
 
     // calculate the maximum value for any of the ticks to calibrate
     // the y scale value
-    max_value = d4.max(stacks, function(d) {  return d4.max(d, function(d) { return d[1]; });  })
+    max_value = d3.max(stacks, function(d) {  return d3.max(d, function(d) { return d[1]; });  })
 
-    this.y = d4.scaleLinear()
+    this.y = d3.scaleLinear()
       .domain([0, max_value])
       .range([height, 0]);
 
-    var area = d4.area()
+    var area = d3.area()
       .x((d,i) =>  this.x(d.data.year))
       .y0(d => this.y(d[0]))
       .y1(d=> this.y(d[1]));
@@ -185,13 +185,13 @@ exports.ordinal_line = class ordinal_line {
     // not just 0 - max
     var y_bottom = that.options.yBottom || (this.extent[0] > 0 ? 0.9 * this.extent[0] : 1.1 * this.extent[0]);
     var y_top = that.options.yTop || (this.extent[1] < 0 ? 0 : 1.1 * this.extent[1]);
-    this.y = d4.scaleLinear()
+    this.y = d3.scaleLinear()
       .domain([y_bottom, y_top])
       .range([height, 0]);
 
     var lines = this.graph_area
       .selectAll("g.line")
-      .data(d4.keys(this.series), d=> d)
+      .data(d3.keys(this.series), d=> d)
 
     lines.exit().remove();
 
@@ -204,7 +204,7 @@ exports.ordinal_line = class ordinal_line {
         // d = the series name
         // i = the index
 
-        var g = d4.select(this);
+        var g = d3.select(this);
 
         // pair the data with the ticks, any undefined
         // data values will cause the tick not to be marked
@@ -218,7 +218,7 @@ exports.ordinal_line = class ordinal_line {
         var xfunc = function(_d){ return that.x(_d[0]);};
         var yfunc = function(_d){ return that.y(_d[1]);};
       
-        var line = d4.line() 
+        var line = d3.line() 
           .x(xfunc)
           .y(yfunc);
 
@@ -287,7 +287,7 @@ exports.ordinal_line = class ordinal_line {
     
     if (this.add_xaxis){
 
-      var xAxis = d4.axisBottom()
+      var xAxis = d3.axisBottom()
         .scale(this.x)
         .tickSizeOuter(0)
         .tickPadding(5);
@@ -346,7 +346,7 @@ exports.ordinal_line = class ordinal_line {
 
       this.graph_area.select(".y.axis").remove();
 
-      var yAxis = d4.axisLeft()
+      var yAxis = d3.axisLeft()
         .scale(this.y)
         .ticks(5)
         .tickSizeOuter(0)

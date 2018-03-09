@@ -140,7 +140,7 @@ Statistics.create_and_register({
     add("pa_last_year_rev", pa_last_year_rev);
     add("pa_last_year_rev_minus", -pa_last_year_rev);
 
-    add("pa_last_year_gross_exp", d4.sum(_.map(_.range(1,13), i => last_year_spend[i] || 0)));
+    add("pa_last_year_gross_exp", d3.sum(_.map(_.range(1,13), i => last_year_spend[i] || 0)));
     const last_year = q.get_top_x(["so","{{pa_last_year}}"],Infinity,{zip:true,sort_col:"{{pa_last_year}}"});
     const all_years = q.get_top_x(["so"].concat(std_years),Infinity,{zip:true});
     STATS.one_year_top3(add, "so",last_year);

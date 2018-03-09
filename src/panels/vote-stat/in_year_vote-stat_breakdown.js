@@ -59,7 +59,7 @@ const planned_vote_or_stat_calculate = vs => function(subject, info){
   ret.data.push({
     desc : text_maker(`all_other_${vs}_items`),
     others : true,
-    [main_col] : d4.sum(_.tail(all_rows,10), d => d[main_col]),
+    [main_col] : d3.sum(_.tail(all_rows,10), d => d[main_col]),
   });
   //options.links = [this.create_links({
   // "dimension" : "voted_stat",
@@ -110,7 +110,7 @@ function graph_top({panel, calculations, isVoted}){
   const col = "{{est_in_year}}_estimates";
   const top_10_rows = _.take(data, 10);
   const complement_amt =  _.last(data)[col];
-  const total_amt = d4.sum(data, _.property(col) );
+  const total_amt = d3.sum(data, _.property(col) );
 
   const rows= _.map(top_10_rows, obj => ({
     name: Subject.Dept.lookup(obj.dept).sexy_name,

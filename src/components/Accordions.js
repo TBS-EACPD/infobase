@@ -14,11 +14,11 @@ class AccordionEnterExit extends React.Component {
     const initialHeight = node.offsetHeight;
     const that = this;
   
-    d4.select(node)
+    d3.select(node)
       .style('opacity', 1 )
       .style('max-height', initialHeight+'px')
       .transition()
-      .ease(d4.easeLinear)
+      .ease(d3.easeLinear)
       .duration(this.props.collapseDuration)
       .style('opacity', 1e-6 )
       .style('max-height', '1px')
@@ -32,16 +32,16 @@ class AccordionEnterExit extends React.Component {
   componentWillEnter(done){
     const node = ReactDOM.findDOMNode(this);
     const that = this;
-    d4.select(node)
+    d3.select(node)
       .style('max-height', "0px")
       .style('opacity', 1e-6)
       .transition()
-      .ease(d4.easeLinear)
+      .ease(d3.easeLinear)
       .duration(this.props.expandDuration)
       .style( 'max-height', this.props.maxHeight || defaultMaxHeight )
       .style('opacity', '1')
       .on('end',function(){
-        d4.select(node).style('max-height', 'none' );
+        d3.select(node).style('max-height', 'none' );
         if(!that.props.cancel && document.body.contains(node)){
           done();
         }

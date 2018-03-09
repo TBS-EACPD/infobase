@@ -82,7 +82,7 @@ module.exports = {
           return [key].concat(people_years);
         })
         .sortBy(function(row){
-          return d4.sum(_.tail(row));
+          return d3.sum(_.tail(row));
         })
         .value();
     },
@@ -117,7 +117,7 @@ Statistics.create_and_register({
     c.dept = subject;
 
     const all_years = q.get_top_x(["fol"].concat(people_years),Infinity,{zip:true})
-    const five_year_total = d4.sum(q.sum(people_years, {as_object: false}));
+    const five_year_total = d3.sum(q.sum(people_years, {as_object: false}));
     
     // Filter out unknowns and suppressed values for sake of multi stats. Note: they're still included in the denominator used to calculate separate %'s below
     const all_years_filtered = _.filter(all_years, d => ( (d[0] !== fol.na.text) && (d[0] !== fol.sup.text) ));
@@ -125,9 +125,9 @@ Statistics.create_and_register({
     if (all_years_filtered.length >= 1) {
       STATS.year_over_year_multi_stats_active_years(add,"head_count_fol",all_years_filtered,false,people_years);
       
-      const five_year_total = d4.sum(q.sum(people_years, {as_object: false}));
+      const five_year_total = d3.sum(q.sum(people_years, {as_object: false}));
       
-      const avg_percent_shares = _.map(all_years_filtered, d => d4.sum(_.tail(d))/five_year_total);
+      const avg_percent_shares = _.map(all_years_filtered, d => d3.sum(_.tail(d))/five_year_total);
       
       add("head_count_fol_single_type_flag", (avg_percent_shares.length <= 1)); // Flag to switch text between only showing the tip, or showing both the top and bottom percent shares
       
@@ -136,7 +136,7 @@ Statistics.create_and_register({
     } else {
       // To avoid missing_info errors when all data is unknown or sup, add info using non-filtered data instead
       STATS.year_over_year_multi_stats_active_years(add,"head_count_fol",all_years,false,people_years);
-      const avg_percent_shares = _.map(all_years, d => d4.sum(_.tail(d))/five_year_total);
+      const avg_percent_shares = _.map(all_years, d => d3.sum(_.tail(d))/five_year_total);
       add("head_count_fol_single_type_flag", (avg_percent_shares.length <= 1)); // Flag to switch text between only showing the tip, or showing both the top and bottom percent shares
       add("head_count_fol_top_avg_percent_NA_included", _.max(avg_percent_shares));
       add("head_count_fol_bottom_avg_percent_NA_included", _.min(avg_percent_shares));
@@ -157,9 +157,9 @@ Statistics.create_and_register({
     const all_years = _.filter(q.gov_grouping(), d => ( (d[0] !== fol.na.text) && (d[0] !== fol.sup.text) ) ); 
     STATS.year_over_year_multi_stats_active_years(add,"head_count_fol",all_years,false,people_years);
     
-    const five_year_total = d4.sum(q.sum(people_years, {as_object: false}));
+    const five_year_total = d3.sum(q.sum(people_years, {as_object: false}));
    
-    const avg_percent_shares = _.map(all_years, d => d4.sum(_.tail(d))/five_year_total);
+    const avg_percent_shares = _.map(all_years, d => d3.sum(_.tail(d))/five_year_total);
     
     add("head_count_fol_top_avg_percent_NA_included", _.max(avg_percent_shares));
     add("head_count_fol_bottom_avg_percent_NA_included", _.min(avg_percent_shares));

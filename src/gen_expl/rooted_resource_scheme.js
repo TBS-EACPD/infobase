@@ -45,7 +45,7 @@ function create_rooted_resource_hierarchy({doc,root_subject}){
     },
   };
   
-  const d3_hierarchy = d4.hierarchy(root, node => {
+  const d3_hierarchy = d3.hierarchy(root, node => {
 
     const {
       id: parent_id,

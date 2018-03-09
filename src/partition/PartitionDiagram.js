@@ -3,7 +3,7 @@ const {text_maker} = require("../models/text");
 
 const vertical_placement_counters = {};
 const cycle_colors = function(i){
-  return d4.color(window.darkCategory10Colors[i % 10]);
+  return d3.color(window.darkCategory10Colors[i % 10]);
 };
 const assign_colors_recursively = function(node,color){
   node.color = color;
@@ -64,7 +64,7 @@ export class PartitionDiagram {
     const col0_width = 250;
     const col_width = 350;
     const total_width = this.total_width = (_.keys(levels).length-1) * (col_width+ horizontal_padding) +  col0_width + horizontal0_padding;
-    const yscale = d4.scaleLinear()
+    const yscale = d3.scaleLinear()
       .domain([0,data.root.value])
       .range([0,height]);
 
@@ -116,7 +116,7 @@ export class PartitionDiagram {
       )
       .style("height" ,"")
       .each(function(d){
-        d4.select(this)
+        d3.select(this)
           .select("div.partition-content-title")
           .classed("fat",false)
           .classed("right",d.data.is("compressed"))
@@ -128,7 +128,7 @@ export class PartitionDiagram {
       .enter()
       .append("div")
       .each(function(d){
-        let sel = d4.select(this)
+        let sel = d3.select(this)
         
         if ((d.data.is("compressed") && window.isIE()) || d.value < 0){
           // partition-right-ie-fix: IE css for flex box and align-item are inconsistent, need an extra div
@@ -189,7 +189,7 @@ export class PartitionDiagram {
         return d.rendered_height + "px";
       })
       .each(d=>{
-        const d_node = d4.select(d.DOM);
+        const d_node = d3.select(d.DOM);
         const title =  d_node.select(".partition-content-title").node();
         d.more_than_fair_space = title.offsetHeight > d.scaled_height;
         d_node
@@ -231,7 +231,7 @@ export class PartitionDiagram {
       })
       .each(function(d){
         const level = d.depth;
-        const title =  d4.select(d.DOM).select(".partition-content-title").node();
+        const title =  d3.select(d.DOM).select(".partition-content-title").node();
         const current_top =  vertical_placement_counters[level];
         const parent_top = d.parent ? d.parent.top : 0;
         const diff = (title.offsetHeight-d.DOM.offsetHeight)/2;
@@ -268,7 +268,7 @@ export class PartitionDiagram {
       .classed("partition-svg-link",true)
       .merge(link_polygons)
       .each(function(d){
-        d.source.polygon_links.set(d.target, d4.select(this));
+        d.source.polygon_links.set(d.target, d3.select(this));
       });
 
     this.html.selectAll("div.partition-content")
@@ -279,7 +279,7 @@ export class PartitionDiagram {
       })
       .on("start",d=> {
         if (d.children){
-          d.height_of_all_children = d4.sum(d.children, child=>child.scaled_height || 0);
+          d.height_of_all_children = d3.sum(d.children, child=>child.scaled_height || 0);
         }
         if (d.parent && !d.data.unhidden_children) {
           this.add_polygons(d)
@@ -343,8 +343,8 @@ export class PartitionDiagram {
       .classed("root-polygon", d => d.source.parent === null)
       .style("fill",target.color)
       .attr("points", function(d){
-        if (d4.select(this).attr("points")){
-          return d4.select(this).attr("points");
+        if (d3.select(this).attr("points")){
+          return d3.select(this).attr("points");
         } else if (d.source.parent === null) {
           return `${tl} ${bl} ${bl} ${[0,bl[1]]} ${[0,tl[1]]} ${tl}`;
         } else {
@@ -443,8 +443,8 @@ export class PartitionDiagram {
       return;
     }
     this.fade();
-    d4.select(d.DOM).node().focus();
-    const content = d4.select(d.DOM);
+    d3.select(d.DOM).node().focus();
+    const content = d3.select(d.DOM);
     const popup_html = this.popup_template(d);
     let arrow_at_top;
     let pop_up_top;
@@ -488,8 +488,8 @@ export class PartitionDiagram {
     this.pop_up = d;
   }
   remove_pop_up(){
-    d4.select(this.pop_up.DOM).select(".partition-popup").remove();
-    d4.select(this.pop_up.DOM).node().focus();
+    d3.select(this.pop_up.DOM).select(".partition-popup").remove();
+    d3.select(this.pop_up.DOM).node().focus();
     this.fade();
     this.unfade();
     this.svg.selectAll("polygon.partition-svg-link")
@@ -497,7 +497,7 @@ export class PartitionDiagram {
     delete this.pop_up;
   }
   keydown_dispatch(){
-    if (d4.event.keyCode === 13) {
+    if (d3.event.keyCode === 13) {
       this.click_dispatch();
     }
   }
@@ -509,8 +509,8 @@ export class PartitionDiagram {
   }
   click_dispatch(){
     // hold a reference to the current target
-    const target = d4.select(d4.event.target);
-    let content = utils.find_parent(d4.event.target,dom=>d4.select(dom).classed("partition-content"))
+    const target = d3.select(d3.event.target);
+    let content = utils.find_parent(d3.event.target,dom=>d3.select(dom).classed("partition-content"))
     // get a reference to the content 
     if (content === false) {
       if ( target.classed("unmagnify-all") ) {
@@ -520,18 +520,18 @@ export class PartitionDiagram {
         this.remove_pop_up();
       } 
       // we're done with this event, ensure no further propogation
-      d4.event.stopImmediatePropagation();
-      d4.event.preventDefault();
+      d3.event.stopImmediatePropagation();
+      d3.event.preventDefault();
       return;
     } 
-    content = d4.select(content);
+    content = d3.select(content);
     const d = content.datum();
     if (d.DOM.className.includes("faded")){
       if (this.pop_up){
         this.remove_pop_up();
       } 
-      d4.event.stopImmediatePropagation();
-      d4.event.preventDefault();
+      d3.event.stopImmediatePropagation();
+      d3.event.preventDefault();
       return;
     }
     if ( d.data.hidden_children 
@@ -549,8 +549,8 @@ export class PartitionDiagram {
         this.magnify(d); 
       }
       this.render();
-      d4.event.stopImmediatePropagation();
-      d4.event.preventDefault();
+      d3.event.stopImmediatePropagation();
+      d3.event.preventDefault();
       return;
     }
 
@@ -572,8 +572,8 @@ export class PartitionDiagram {
         this.add_pop_up(d); 
       }
     }
-    d4.event.stopImmediatePropagation();
-    d4.event.preventDefault();
+    d3.event.stopImmediatePropagation();
+    d3.event.preventDefault();
   }
   unmagnify_all(){
     _.each(this.data.root.children, node => { if ( this.data.magnified(node) ){ this.data.unmagnify(node) } });

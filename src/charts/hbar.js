@@ -16,7 +16,7 @@ exports.hbar = class hbar {
   // ]
   //```
 
-    D3CORE.setup_graph_instance(this,d4.select(container),options);
+    D3CORE.setup_graph_instance(this,d3.select(container),options);
 
     var _graph_area  = this.svg.append("g").attr("class","_graph_area");
     this.graph_area = _graph_area.append("g").attr("class","inner_graph_area");
@@ -68,14 +68,14 @@ exports.hbar = class hbar {
       .attr("width", this.width+this.margins.left+this.margins.right)
       .attr("height", this.height+this.margins.top+this.margins.bottom);
 
-    var y = d4.scaleBand()
+    var y = d3.scaleBand()
       .domain(_.map(data, "name"))
       .rangeRound([0, this.height])
       .padding(this.padding);
 
     var margins = this.margins;
     var href = this.options.href;
-    var extent = d4.extent(data, function(d){return d.value;});
+    var extent = d3.extent(data, function(d){return d.value;});
     var x_left = extent[0] > 0 ? 0 : extent[0];
     var x_right = extent[1] < 0 ? 0 : extent[1];
     var formater = this.options.formater || _.identity;
@@ -113,7 +113,7 @@ exports.hbar = class hbar {
       this.html.select("div.total").html(total);
     }
 
-    var xAxis = d4
+    var xAxis = d3
       .axisTop(this.x_scale)
       .ticks(tick_number || 7)
           ;
@@ -182,7 +182,7 @@ exports.hbar = class hbar {
         "padding": "0 10px", 
       })
       .each(function(){
-        var that = d4.select(this);
+        var that = d3.select(this);
         if (href){
           that
             .append("a")
@@ -200,7 +200,7 @@ exports.hbar = class hbar {
 
     new_text.each(function(d,i){
 
-      var single = d4.select(this);
+      var single = d3.select(this);
       single
         .transition()
         .duration(750)
@@ -220,7 +220,7 @@ exports.hbar = class hbar {
     new_g.each(function(d,i){
       var x_val = y(d.name);
       var single;
-      single = d4.select(this);
+      single = d3.select(this);
       single
         .transition()
         .duration(750)
@@ -241,8 +241,8 @@ exports.hbar = class hbar {
       
       single
         .selectAll("rect")
-        .filter(function(d, i) {return d4.select(this).attr("class") === null;})
-        .attr("width", d4.max(x_scale.range()));
+        .filter(function(d, i) {return d3.select(this).attr("class") === null;})
+        .attr("width", d3.max(x_scale.range()));
     });
   };
 }

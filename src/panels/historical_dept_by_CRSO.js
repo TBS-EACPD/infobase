@@ -35,7 +35,7 @@ new PanelGraph({
       label: crso.name,
       active: false,
       data:  _.map(planning_years, yr => 
-        d4.sum(_.map(this.tables.table6.q(crso).data, prg => prg[yr]))
+        d3.sum(_.map(this.tables.table6.q(crso).data, prg => prg[yr]))
       ),
     })
     );

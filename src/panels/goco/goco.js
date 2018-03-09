@@ -63,9 +63,9 @@ new PanelGraph({
   title: 'gocographic_title',
   calculate: _.constant(true),
   render(panel,calculations, { history }){
-    const graph_area = d4.select(panel.areas().graph.node());
+    const graph_area = d3.select(panel.areas().graph.node());
 
-    const text_area = d4.select(panel.areas().text.node());
+    const text_area = d3.select(panel.areas().text.node());
 
     const table6 = Table.lookup("table6");
     const table12 = Table.lookup("table12");
@@ -76,10 +76,10 @@ new PanelGraph({
     const fte_spend_data = _.chain(Tag.gocos_by_spendarea)
       .map(sa=> {
         const children = _.map(sa.children_tags, goco => {
-          const spending = d4.sum(goco.programs, p => {
+          const spending = d3.sum(goco.programs, p => {
             return table6.programs.get(p) ? _.first(table6.programs.get(p))[spend_yr] : 0;
           });
-          const ftes = d4.sum(goco.programs, p => {
+          const ftes = d3.sum(goco.programs, p => {
             return table12.programs.get(p) ? _.first(table12.programs.get(p))[fte_yr] : 0;
           });             
           return {
@@ -87,8 +87,8 @@ new PanelGraph({
             ftes,
           };
         });
-        const spending = d4.sum(children, c=>c.spending);
-        const ftes = d4.sum(children, c=>c.ftes);
+        const spending = d3.sum(children, c=>c.spending);
+        const ftes = d3.sum(children, c=>c.ftes);
         return {
           sa_name: sa.name,
           spending,
@@ -100,9 +100,9 @@ new PanelGraph({
 
     const total_fte_spend = {
       max_sa: _.first(_.map(fte_spend_data,"sa_name")),
-      max_sa_share: (_.first(_.map(fte_spend_data,"spending")) / d4.sum(_.map(fte_spend_data, "spending"))),
-      spending: d4.sum(_.map(fte_spend_data, "spending")),
-      ftes: d4.sum(_.map(fte_spend_data, "ftes")),
+      max_sa_share: (_.first(_.map(fte_spend_data,"spending")) / d3.sum(_.map(fte_spend_data, "spending"))),
+      spending: d3.sum(_.map(fte_spend_data, "spending")),
+      ftes: d3.sum(_.map(fte_spend_data, "ftes")),
     }
  
     text_area
@@ -126,16 +126,16 @@ class Goco {
     const fte_col = "{{pa_last_year}}";
     const legend_area = this.container.select(".legend_area");
 
-    this.colors = d4.scaleOrdinal(d4.schemeCategory10);
+    this.colors = d3.scaleOrdinal(d3.schemeCategory10);
     const that = this;
 
     this.data = _.chain(Tag.gocos_by_spendarea)
       .map(sa=> {
         const children = _.map(sa.children_tags, goco => {
-          const spending = d4.sum(goco.programs, p => {
+          const spending = d3.sum(goco.programs, p => {
             return table6.programs.get(p) ? _.first(table6.programs.get(p))[spend_col] : 0;
           });
-          const ftes = d4.sum(goco.programs, p => {
+          const ftes = d3.sum(goco.programs, p => {
             return table12.programs.get(p) ? _.first(table12.programs.get(p))[fte_col] : 0;
           });               
           return {
@@ -145,8 +145,8 @@ class Goco {
             ftes,
           };
         });
-        const spending = d4.sum(children, c=>c.spending);
-        const ftes = d4.sum(children, c=>c.ftes);
+        const spending = d3.sum(children, c=>c.spending);
+        const ftes = d3.sum(children, c=>c.ftes);
         return {
           tick : sa.name,
           spending,

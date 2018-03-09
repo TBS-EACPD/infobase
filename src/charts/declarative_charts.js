@@ -63,7 +63,7 @@ class StackedHbarChart extends React.Component {
 
     //setup
     this.graph_instance = new HBarComposition(
-      d4.select(this.refs.graph_area).node(),
+      d3.select(this.refs.graph_area).node(),
       {
         bar_label_formater,
         bar_height,
@@ -89,7 +89,7 @@ class ProgressDonut extends React.Component {
   }
   componentDidMount(){
     this.graph_instance = new SafeProgressDonut(
-      d4.select(this.refs.graph_area),
+      d3.select(this.refs.graph_area),
       _.clone(this.props)
     );
     this._render()
@@ -131,7 +131,7 @@ class D3GraphWithLegend extends React.Component {
     if(!window.is_a11y_mode){
       this.graph_instance.render(
         _.chain(this.props.options)
-          .extend({graph_area : d4.select(this.refs.graph_area)})
+          .extend({graph_area : d3.select(this.refs.graph_area)})
           .clone()
           .value()
       );
@@ -140,9 +140,9 @@ class D3GraphWithLegend extends React.Component {
   }
   componentDidMount(){
     this.graph_instance = create_graph_with_legend.call(
-      d4.select(this.refs.graph_area).node(),
+      d3.select(this.refs.graph_area).node(),
       _.chain(this.props.options)
-        .extend({graph_area : d4.select(this.refs.graph_area)})
+        .extend({graph_area : d3.select(this.refs.graph_area)})
         .clone()
         .value()
     );
@@ -163,7 +163,7 @@ class Bar extends React.Component {
   }
   componentDidMount(){
     this.graph_instance = new bar(
-      d4.select(this.refs.graph_area).node(),
+      d3.select(this.refs.graph_area).node(),
       _.clone(this.props)
     );
     this._render()
@@ -203,7 +203,7 @@ class Line extends React.Component {
   }
   componentDidMount(){
     this.graph_instance = new ordinal_line(
-      d4.select(this.refs.graph_area).node(),
+      d3.select(this.refs.graph_area).node(),
       _.clone(this.props)
     );
     this._render()
@@ -313,7 +313,7 @@ class CirclePack extends React.Component {
   }
   componentDidMount(){
     this.graph_instance = new pack(
-      d4.select(this.refs.graph_area),
+      d3.select(this.refs.graph_area),
       _.clone(this.props)
     );
     this._render()

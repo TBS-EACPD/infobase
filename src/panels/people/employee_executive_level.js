@@ -67,7 +67,7 @@ new PanelGraph({
           active: (row.ex_lvl !== "Non-EX"),
         })
         )
-        .filter(d => d4.sum(d.data) !== 0)
+        .filter(d => d3.sum(d.data) !== 0)
     );
   },
 
@@ -95,7 +95,7 @@ new PanelGraph({
     const {table112} = this.tables;
     
     const gov_five_year_total_head_count =_.chain(table112.q().gov_grouping())
-      .map(row => d4.sum(_.drop(row)))
+      .map(row => d3.sum(_.drop(row)))
       .reduce((sum, val) => sum + val, 0)
       .value();
 

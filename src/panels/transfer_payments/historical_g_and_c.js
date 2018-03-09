@@ -31,7 +31,7 @@ const g_and_c_hist_render = function(panel, data){
     // insert new row under the content row
     
     if(!window.is_a11y_e){
-      const graph_parent = d4.select(find_parent(graph_area.node(),n=>d4.select(n).classed("panel-body"))); 
+      const graph_parent = d3.select(find_parent(graph_area.node(),n=>d3.select(n).classed("panel-body"))); 
       const new_row = graph_parent.insert("div",".row.source")
         .classed("row",true)
         .html(text_maker("historical_g_and_c_custom_new_row",{data_keys}));
@@ -43,7 +43,7 @@ const g_and_c_hist_render = function(panel, data){
           //property called selectedIndex on the select element.
           //Selections are arrays, so elements can be accessed
           //directly (e.g., selection[0][0]).
-          const target = d4.event.target;
+          const target = d3.event.target;
           const index = target.selectedIndex;
           draw_graph(new_row, g_and_c_data[target[index].value]);
         });
@@ -63,7 +63,7 @@ const g_and_c_hist_render = function(panel, data){
             data : std_years.map(year => row[year+"exp"]),
           })
           )
-          .sortBy( x => -d4.sum(x.data))
+          .sortBy( x => -d3.sum(x.data))
           .value(),
         table_name: text_maker("historical_g_and_c_title") + ", " + d,
       })
@@ -78,7 +78,7 @@ const g_and_c_hist_render = function(panel, data){
         active : true,
       })
     )
-    .sortBy(x => -d4.sum(x.data))
+    .sortBy(x => -d3.sum(x.data))
     .value();
 
 
@@ -106,7 +106,7 @@ const draw_graph = function(area, data){
       data : std_years.map(year => row[year+"exp"] ),
       active : false,
     }))
-    .sortBy( x => -d4.sum(x.data))
+    .sortBy( x => -d3.sum(x.data))
     .value();
 
   // create the list as a dynamic graph legend

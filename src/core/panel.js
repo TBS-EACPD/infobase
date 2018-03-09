@@ -34,7 +34,7 @@ class Panel {
     });
     
 
-    this.el = d4.select(new_temp_element.firstChild);
+    this.el = d3.select(new_temp_element.firstChild);
     options.target.node().appendChild(new_temp_element.firstChild);
 
     if (options.classes) {
@@ -100,7 +100,7 @@ class Panel {
     var text_sum;
     var graph_sum;
     if (_.isArray(text_layout)){
-      text_sum = d4.sum(text_layout);
+      text_sum = d3.sum(text_layout);
 
       _.each(text_layout, function(span,i){
         text.append("div")
@@ -111,7 +111,7 @@ class Panel {
       this.el.select(".text").classed("fcol-md-"+text_layout,true);
     }
     if (_.isArray(graph_layout)){
-      graph_sum = d4.sum(graph_layout);
+      graph_sum = d3.sum(graph_layout);
       if (text_sum + graph_sum <= 12){
         graph_layout = _.map(graph_layout, function(x){return 12/graph_layout.length;});
         this.el.select(".graphic")

@@ -239,7 +239,7 @@ class RowLevelView extends React.Component {
 
     const headers_and_rows = [col_headers].concat(array_based_rows);
     
-    return d4.csvFormatRows(headers_and_rows);
+    return d3.csvFormatRows(headers_and_rows);
   }
   get_data(){
     const {

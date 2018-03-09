@@ -12,7 +12,7 @@ exports.TWO_SERIES_BAR = class TWO_SERIES_BAR  {
   // ticks = ["tick1","tick2"."tick3"]
   // ```
 
-    D3CORE.setup_graph_instance(this,d4.select(container),options);
+    D3CORE.setup_graph_instance(this,d3.select(container),options);
     ;
     const _graph_area  = this.svg.append("g").attr("class","_graph_area");
     this.grid_line_area = _graph_area.append("g").attr("class","grid_lines");
@@ -39,10 +39,10 @@ exports.TWO_SERIES_BAR = class TWO_SERIES_BAR  {
       .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
 
     const series1 = _.clone(this.options.series1);
-    series1.extent = d4.extent(series1.data);
+    series1.extent = d3.extent(series1.data);
     series1.extent[0] = series1.extent[0] < 0 ?  series1.extent[0] : 0;
     const series2 = _.clone(this.options.series2);
-    series2.extent = d4.extent(series2.data);
+    series2.extent = d3.extent(series2.data);
     series2.extent[0] = series2.extent[0] < 0 ?  series2.extent[0] : 0;
     const larger = (series1.extent[1] - series1.extent[0]) >= (series2.extent[1] - series2.extent[0]) ? series1 : series2;
     const smaller = larger === series1 ? series2 : series1;
@@ -55,17 +55,17 @@ exports.TWO_SERIES_BAR = class TWO_SERIES_BAR  {
     // of the series
     // `x1` uses the chunks of space from x0 to then create
     // sub-spaces for each of the labels
-    const x0 = d4.scaleBand()
+    const x0 = d3.scaleBand()
       .domain(ticks)
       .rangeRound([0, width])
       .padding(0.1);
 
-    const x1 = d4.scaleBand()
+    const x1 = d3.scaleBand()
       .domain(series_labels)
       .rangeRound([0, x0.bandwidth()])
       .padding(0.2);
 
-    const xAxis = d4.axisBottom()
+    const xAxis = d3.axisBottom()
       .scale(x0)
       .tickPadding(5);
 
@@ -90,11 +90,11 @@ exports.TWO_SERIES_BAR = class TWO_SERIES_BAR  {
       larger.extent[1] = smaller_positive_proportion *  larger_pos_proportion;
     }
     
-    larger.y = d4.scaleLinear()
+    larger.y = d3.scaleLinear()
       .domain(larger.extent)
       .range([height,0]);
 
-    smaller.mapper_to_larger = d4.scaleLinear()
+    smaller.mapper_to_larger = d3.scaleLinear()
       .domain(smaller.extent)
       .range(larger.extent);
 
@@ -250,7 +250,7 @@ exports.TWO_SERIES_BAR = class TWO_SERIES_BAR  {
         this.dispatch.call("dataClick","fade_out",d)
       })
       .on("keydown", (d)=>{
-        if (d4.event.keyCode === 13) {
+        if (d3.event.keyCode === 13) {
           this.dispatch.call("dataClick", d);
         }
       })

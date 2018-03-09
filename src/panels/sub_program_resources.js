@@ -78,7 +78,7 @@ function create_resource_hierarchy({program, doc}){
     data: {},
   };
   
-  const d3_hierarchy = d4.hierarchy(root,node => {
+  const d3_hierarchy = d3.hierarchy(root,node => {
     if(node.root){
       return _.map(SubProgramEntity.sub_programs(program.id), sub => sub_to_node(sub,doc) );
 

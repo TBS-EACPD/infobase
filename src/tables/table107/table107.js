@@ -243,14 +243,14 @@ new PanelGraph({
       .uniqBy()
       .value();  
     var z_vals = _.uniqBy(_.map(graph_series, "z"));
-    var z_extent = d4.extent(z_vals);
+    var z_extent = d3.extent(z_vals);
     z_extent[0] *= -1;
-    var max_abs = d4.max(z_extent);
+    var max_abs = d3.max(z_extent);
     // can't feed negative values into the sqrt scale
-    var neg_color_scale = d4.scaleSqrt()
+    var neg_color_scale = d3.scaleSqrt()
       .domain([-max_abs,0])
       .range([1,0]);
-    var pos_color_scale = d4.scaleSqrt()
+    var pos_color_scale = d3.scaleSqrt()
       .domain([0,max_abs])
       .range([0,1]);
     var formater =  formats["big_int_real_raw"];
@@ -328,7 +328,7 @@ new PanelGraph({
         });
 
       (new HBAR.hbar( actual_graph.node(), {
-        x_scale : d4.scaleLinear(),
+        x_scale : d3.scaleLinear(),
         axisFormater : formater,
         formater : formater,
         tick_number : 5,

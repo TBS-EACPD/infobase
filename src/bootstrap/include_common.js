@@ -67,5 +67,5 @@ window.darkCategory10Colors = [
 ];
 
 
-window.infobase_colors = () => d4.scaleOrdinal().range(colors);
+window.infobase_colors = () => d3.scaleOrdinal().range(colors);
 

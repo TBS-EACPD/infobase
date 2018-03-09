@@ -34,7 +34,7 @@ const calculate = function( subject,info,options ) {
     const row = _.first(table6.programs.get(subject));
     auth = _.map(auth_cols, col => row[col] );
     exp =   _.map(exp_cols, col => row[col] );
-    if (d4.sum(auth) === 0 && d4.sum(exp)===0 ) {
+    if (d3.sum(auth) === 0 && d3.sum(exp)===0 ) {
       return false;
     }
   } else if (  subject.level === 'tag') {

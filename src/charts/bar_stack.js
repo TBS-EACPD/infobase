@@ -21,9 +21,9 @@ module.exports = exports = function barStack(data) {
       } 
     });
   }
-  data.extent= d4.extent(
-    d4.merge(
-      d4.merge(
+  data.extent= d3.extent(
+    d3.merge(
+      d3.merge(
         data.map(function(e) { 
           return e.data.map(function(f) { 
             return [f.y0,f.y0-f.size];

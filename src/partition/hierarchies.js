@@ -57,9 +57,9 @@ const post_traversal_value_set = exports.post_traversal_value_set = function(nod
     node.value = false;
   } else {
     node.children = _.filter(node.children,d=>d.value!==false && d.value !== 0);
-    node.exp = d4.sum(node.children, d=>d.exp);
-    node.fte = d4.sum(node.children, d=>d.fte);
-    node.value = d4.sum(node.children, d=>d.value);
+    node.exp = d3.sum(node.children, d=>d.exp);
+    node.fte = d3.sum(node.children, d=>d.fte);
+    node.value = d3.sum(node.children, d=>d.value);
   }
 }
 
@@ -74,7 +74,7 @@ const post_traversal_search_string_set = function(node){
 }
 
 exports.create_ministry_hierarchy = function(value_attr,skip_crsos,root_id){
-  return d4.hierarchy(Subject.gov,
+  return d3.hierarchy(Subject.gov,
     node => {
       if (node.is("gov")){
         return Subject.Ministry.get_all();
@@ -98,7 +98,7 @@ exports.create_ministry_hierarchy = function(value_attr,skip_crsos,root_id){
 };
 
 exports.create_tag_hierarchy = function(root,value_attr,root_id) {
-  const hierarchy = d4.hierarchy(Subject.Tag.tag_roots[root],
+  const hierarchy = d3.hierarchy(Subject.Tag.tag_roots[root],
     node => {
       if (node.is("tag")){
         return node.children_tags.length > 0 ? node.children_tags : node.programs;
@@ -116,7 +116,7 @@ exports.create_tag_hierarchy = function(root,value_attr,root_id) {
 };
 
 exports.create_spend_type_hierarchy = function(value_attr,root_id) {
-  return d4.hierarchy(Subject.gov,
+  return d3.hierarchy(Subject.gov,
     node => {
       let _mock_model;
       if (node.is("gov")){
@@ -191,7 +191,7 @@ exports.create_spend_type_hierarchy = function(value_attr,root_id) {
         node.exp = node.value = node.data.value;
       } else {
         node.children = _.filter(node.children,d=>d.value!==false && d.value !== 0);
-        node.exp = node.value = d4.sum(node.children, d=>d.value);
+        node.exp = node.value = d3.sum(node.children, d=>d.value);
       }
       post_traversal_search_string_set(node);
     })
@@ -246,12 +246,12 @@ const org_info_post_traversal_rule_set = (node,value_attr,root_id) => {
     node[value_attr] = node.value = node.data.value = 1;
   } else {
     node.children = _.filter(node.children,d=>d.value!==false && d.value !== 0);
-    node[value_attr] = node.value = d4.sum(node.children, d=>d.value);
+    node[value_attr] = node.value = d3.sum(node.children, d=>d.value);
   }
 }
 
 exports.create_org_info_ministry_hierarchy = function(value_attr,root_id) {
-  return d4.hierarchy(Subject.gov,
+  return d3.hierarchy(Subject.gov,
     node => {
       if (node.is("gov")) {
         return Subject.Ministry.get_all();
@@ -275,7 +275,7 @@ exports.create_org_info_ministry_hierarchy = function(value_attr,root_id) {
 }
 
 exports.create_org_info_inst_form_hierarchy = function(value_attr,root_id,grand_parent_inst_form_group) {
-  return d4.hierarchy(Subject.gov,
+  return d3.hierarchy(Subject.gov,
     node => {
       if (node.is("gov")) {
         const orgs = _.chain(Subject.Ministry.get_all())
@@ -576,7 +576,7 @@ const planned_spending_post_traversal_rule_set = (node,value_attr,root_id,presen
     }
   } else {
     node.children = _.filter(node.children, d => d.value !== false && d.value !== 0);
-    node[value_attr] = node.value = d4.sum(node.children, d=>d.value);
+    node[value_attr] = node.value = d3.sum(node.children, d=>d.value);
     if (node.data.is("dept")){
       node.data.rpb_link = rpb_link(default_rpb_link_options);
     }
@@ -586,7 +586,7 @@ const planned_spending_post_traversal_rule_set = (node,value_attr,root_id,presen
 exports.create_planned_spending_hierarchy = function(value_attr,root_id,presentation_scheme) {
   set_year_by_presentation_scheme(presentation_scheme);
 
-  return d4.hierarchy(Subject.gov,
+  return d3.hierarchy(Subject.gov,
     node => {
       if (presentation_scheme === "est_type") {
         return est_type_node_rules(node);

@@ -30,7 +30,7 @@ const common_cal = (programs,table305) => {
     top_3_sos.length > cut_off_index -1 ? 
     {
       label : text_maker("other"), 
-      value : d4.sum(_.tail(rows_by_so,cut_off_index),_.property("value")),
+      value : d3.sum(_.tail(rows_by_so,cut_off_index),_.property("value")),
     } : 
     []
   );
@@ -52,7 +52,7 @@ Statistics.create_and_register({
       value : top_so_amount,
     } = _.first(rows_by_so);
 
-    const total_spent =  d4.sum(rows_by_so, _.property('value'))
+    const total_spent =  d3.sum(rows_by_so, _.property('value'))
 
     const top_so_pct = top_so_amount/total_spent;
 
@@ -78,7 +78,7 @@ Statistics.create_and_register({
       value : top_so_amount,
     } = _.first(rows_by_so);
 
-    const total_spent =  d4.sum(rows_by_so, _.property('value'))
+    const total_spent =  d3.sum(rows_by_so, _.property('value'))
 
     const top_so_pct = top_so_amount/total_spent;
 

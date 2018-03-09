@@ -507,8 +507,8 @@ new PanelGraph({
     let exp_graph_data =  _.map(c.exp,col => _.first(table6.programs.get(subject))[col]); 
     let fte_graph_data =  pd ? _.map(c.fte,col => _.first(table12.programs.get(subject))[col]) : undefined;
     const new_program = (
-      d4.sum(std_years, (d,i)=> exp_graph_data[i]) === 0 && 
-      (fte_graph_data ? d4.sum(std_years, (d,i)=> fte_graph_data[i]) === 0: true)
+      d3.sum(std_years, (d,i)=> exp_graph_data[i]) === 0 && 
+      (fte_graph_data ? d3.sum(std_years, (d,i)=> fte_graph_data[i]) === 0: true)
     );
 
     if (new_program){
@@ -615,27 +615,27 @@ new PanelGraph({
     const crso_fte_data = this.tables.table12.q(subject).data;
 
     const sum_fte_Data = _.map(c.fte, function(row) {
-      return d4.sum(_.map(crso_fte_data, xx => xx[row]))
+      return d3.sum(_.map(crso_fte_data, xx => xx[row]))
     })
     
     //Changed variable definition in the declaration phase in subject.js 
-    const pd =  subject.has_planned_spending && d4.sum(sum_fte_Data) !== 0 ;
+    const pd =  subject.has_planned_spending && d3.sum(sum_fte_Data) !== 0 ;
     const psd = subject.has_planned_spending
 
     // let exp_graph_data =  _.map(c.exp, col => this.tables.table6.q(subject)[col]); 
     let exp_graph_data = _.map(c.exp, function(row) {
-      return d4.sum(_.map(crso_exp_data, xx => xx[row]))
+      return d3.sum(_.map(crso_exp_data, xx => xx[row]))
     });
 
     // let fte_graph_data =  pd ? _.map(c.fte,col => this.tables.table12.q(subject)[col]) : undefined;
     let fte_graph_data = pd ? _.map(c.fte, function(row) {
-      return d4.sum(_.map(crso_fte_data, xx => xx[row]))
+      return d3.sum(_.map(crso_fte_data, xx => xx[row]))
     })
       : undefined ;
 
     const new_program = (
-      d4.sum(std_years, (d,i)=> exp_graph_data[i]) === 0 && 
-      (fte_graph_data ? d4.sum(std_years, (d,i)=> fte_graph_data[i]) === 0: true)
+      d3.sum(std_years, (d,i)=> exp_graph_data[i]) === 0 && 
+      (fte_graph_data ? d3.sum(std_years, (d,i)=> fte_graph_data[i]) === 0: true)
     );
 
     if (new_program){

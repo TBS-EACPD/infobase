@@ -366,7 +366,7 @@ class GranularView extends React.Component {
       .value();
 
     const headers_and_rows = [headers].concat(array_based_rows);
-    return d4.csvFormatRows(headers_and_rows);
+    return d3.csvFormatRows(headers_and_rows);
   }
 
 

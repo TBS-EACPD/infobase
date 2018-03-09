@@ -151,8 +151,8 @@ new PanelGraph({
       .map( (group, dp_status) => [
         dp_status,
         {
-          results: d4.sum(_.map(group, 'results') ),
-          indicators: d4.sum(_.map(group, 'indicators') ),
+          results: d3.sum(_.map(group, 'results') ),
+          indicators: d3.sum(_.map(group, 'indicators') ),
         },
       ])
       .fromPairs()

@@ -114,8 +114,8 @@ p.by_min_dept = function(){
       return {
         name : min_name,
         children : depts,
-        value : d4.sum(depts, _.property('value')),
-        __value__ : d4.sum(depts, _.property('__value__')),
+        value : d3.sum(depts, _.property('value')),
+        __value__ : d3.sum(depts, _.property('__value__')),
       };
     })
     .value();
@@ -151,8 +151,8 @@ p.by_dept_type = function(){
     .map( (depts, type) => ({
       name : type,
       children : depts,
-      value : d4.sum(depts, _.property('value')),
-      __value__ : d4.sum(depts, _.property('__value__')),
+      value : d3.sum(depts, _.property('value')),
+      __value__ : d3.sum(depts, _.property('__value__')),
     }))
     .value();
 
@@ -190,11 +190,11 @@ p.nest_data_for_exploring = function(to_be_nested, top_name, rangeRound){
 
   var data = PACK.pack_data(to_be_nested,text_maker("smaller_orgs"),{
     soften : true,
-    scale : d4.scaleSqrt()
-      .domain(d4.extent(to_be_nested, _.property('value')))
+    scale : d3.scaleSqrt()
+      .domain(d3.extent(to_be_nested, _.property('value')))
       .rangeRound(rangeRound),
     per_group : grp => {
-      grp._value = d4.sum(grp.children,_.property('__value__'));
+      grp._value = d3.sum(grp.children,_.property('__value__'));
     },
   });
 
@@ -223,9 +223,9 @@ p.build_graphic = function(data,depts,formater){
       );
     },
   });
-  d4.select(dept_search_node).attr('aria-hidden', true);
+  d3.select(dept_search_node).attr('aria-hidden', true);
   
-  const colors = d4.scaleOrdinal(d4.schemeCategory10);
+  const colors = d3.scaleOrdinal(d3.schemeCategory10);
 
   chart = new PACK.pack(
     container.select('.svg-container'),
@@ -276,17 +276,17 @@ p.build_graphic = function(data,depts,formater){
     parents.reverse();
 
     // create the scale for sizing the radius of the circles
-    scale = d4.scaleLinear()
+    scale = d3.scaleLinear()
       .domain([0,parents[0].r])
       .range([1.5,height/2]);
 
     // remove the link which might have been left over from
     // a department having previous been clicked on
-    d4.select(".info_graph_link").remove();
+    d3.select(".info_graph_link").remove();
 
     // bind the parents using the `rid` which is added by
-    // [d4.pack.js](d3/pack.js)
-    crumbs = d4.select("div.breadcrumb")
+    // [d3.pack.js](d3/pack.js)
+    crumbs = d3.select("div.breadcrumb")
       .selectAll("div.crumb")
       .data(parents,function(x){ return x.rid;});
 
@@ -337,8 +337,8 @@ p.build_graphic = function(data,depts,formater){
     // set to auto, so we'll get a scroll bar
     container.select("div.breadcrumb").style("width",parents.length*210+"px");
 
-    d4.select("div.breadcrumb .clear").remove();
-    d4.select("div.breadcrumb").append("div").attr("class","clear");
+    d3.select("div.breadcrumb .clear").remove();
+    d3.select("div.breadcrumb").append("div").attr("class","clear");
 
   });
 
@@ -378,7 +378,7 @@ class BubbleExplore_ extends React.Component {
 
     el.innerHTML = "";
     
-    const sub_app_container = d4.select(el).append('div').attr('aria-hidden',true);
+    const sub_app_container = d3.select(el).append('div').attr('aria-hidden',true);
 
     const spin_el =  new Spinner({scale:4}).spin().el;
     el.appendChild(spin_el)

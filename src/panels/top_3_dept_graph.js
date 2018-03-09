@@ -75,7 +75,7 @@ new PanelGraph({
     const text_area=  panel.areas().text;
     text_area.html(text_maker("tag_top_3_depts_text",Object.assign({top_3_depts},info)));
 
-    const row = d4.select(graph_area.node())
+    const row = d3.select(graph_area.node())
       .append('div')
       .append('ul')
       .styles({"padding":"0"})
@@ -114,7 +114,7 @@ new PanelGraph({
       .style('padding-left', 0)
       .each(function(d,i){
         new D3.SAFE_PROGRESS_DONUT.SafeProgressDonut(
-          d4.select(this).node(),
+          d3.select(this).node(),
           { 
             data: [
               { label: subject.sexy_name, value: d.tag_spent},

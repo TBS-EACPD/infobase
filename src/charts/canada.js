@@ -43,7 +43,7 @@ export class canada {
 
     options.alternative_svg = D3CORE.templates("canada");
   
-    D3CORE.setup_graph_instance(this,d4.select(container),options);
+    D3CORE.setup_graph_instance(this,d3.select(container),options);
   };
 
   render(options){
@@ -120,21 +120,21 @@ export class canada {
 
     svg.selectAll(".province")
       .each(function(d){
-        var that = d4.select(this);
+        var that = d3.select(this);
         var prov = that.attr("id").split("-")[1];
-        d4.select(this).datum([prov,undefined]);
+        d3.select(this).datum([prov,undefined]);
       })
       .styles({
         "fill" : "#1f77b4",
         "fill-opacity" : function(d,i){
-          var prov = d4.select(this).attr("id").replace("CA-","");
+          var prov = d3.select(this).attr("id").replace("CA-","");
           var val = last_year_data[prov];
           return color_scale(val || 0);
         },
         "stroke-width" : "2px",
         "stroke" : "#1f77b4",
         "stroke-opacity" : function(d,i){
-          var prov = d4.select(this).attr("id").replace("CA-","");
+          var prov = d3.select(this).attr("id").replace("CA-","");
           var val = last_year_data[prov];
           return color_scale(val || 0);
         },
@@ -204,14 +204,14 @@ export class canada {
       .each(function(d,i){
         var prov = d[0];
         var label = svg.selectAll("g.label").filter(function(){
-          return d4.select(this).attr("id").replace("label-","") === prov;
+          return d3.select(this).attr("id").replace("label-","") === prov;
         });
         var coords = label.attr("transform")
           .replace(/(translate\(|\)|)/g,"")
           .replace(","," ")
           .split(" ");
 
-        d4.select(this)
+        d3.select(this)
           .styles({
             "border-radius" : "5px",
             "position" : "absolute",
@@ -237,12 +237,12 @@ export class canada {
           provName = provinces_short[prov].text; 
         }
         
-        d4.select(this)
+        d3.select(this)
           .append("div")
           .html(provName);
 
 
-        d4.select(this)
+        d3.select(this)
           .append("a")
           .attr('tabindex',-1)
           .styles({

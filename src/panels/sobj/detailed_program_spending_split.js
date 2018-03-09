@@ -77,7 +77,7 @@ const info_deps_by_level = {
         .toPairs()
         .map( ([so_num, group]) =>  ({
           so_num : +so_num, 
-          sum: d4.sum(group, _.property('value')),
+          sum: d3.sum(group, _.property('value')),
         }))
         .sortBy('sum')
         .reverse()
@@ -102,7 +102,7 @@ const info_deps_by_level = {
       const exp_cols = _.map(std_years, yr=>yr+"exp");
       const table6_data = _.chain( table6.q(subject).data)
         .filter(row => {
-          return d4.sum(auth_cols.concat(exp_cols), col=> row[col]) !== 0;
+          return d3.sum(auth_cols.concat(exp_cols), col=> row[col]) !== 0;
         })
         .map(row => 
           ({
@@ -111,7 +111,7 @@ const info_deps_by_level = {
             active : false,
           })
         )
-        .sortBy(x => -d4.sum(x.data))
+        .sortBy(x => -d3.sum(x.data))
         .value()
 
       return {
@@ -207,7 +207,7 @@ class HistoricalProgramBars extends React.Component {
     const ticks = std_years.map(yr => run_template(yr));
     const { selected } = this.state;
 
-    const colors = d4.scaleOrdinal(d4.schemeCategory20);
+    const colors = d3.scaleOrdinal(d3.schemeCategory20);
     const graph_data = _.chain(data)
       .filter( ({id}) => _.includes(selected, id) )
       .map( ({label, data }) => [ label, data ])
@@ -333,7 +333,7 @@ class DetailedProgramSplit extends React.Component {
             .groupBy('so_label')
             .map((group, label) => ({
               label,
-              data: d4.sum(group, _.property('value')),
+              data: d3.sum(group, _.property('value')),
             }))
             .sortBy('data')
             .reverse()

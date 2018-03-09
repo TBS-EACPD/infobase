@@ -23,18 +23,18 @@ new PanelGraph({
     const table6_data = table6.q(subject).data;
 
     const planning_data = _.map(planning_years, function(row) {
-      return d4.sum(_.map(table6_data, xx => xx[row]))
+      return d3.sum(_.map(table6_data, xx => xx[row]))
     })
 
 
-    if (d4.sum(planning_data) === 0) {
+    if (d3.sum(planning_data) === 0) {
       return false;      
     }
     
     return  (
       _.chain( table6.q(subject).data)
         .filter(row => {
-          return d4.sum(planning_years, col=> row[col]) !== 0;
+          return d3.sum(planning_years, col=> row[col]) !== 0;
         })
         .map(row => 
           ({
@@ -43,7 +43,7 @@ new PanelGraph({
             active : false,
           })
         )
-        .sortBy(x => -d4.sum(x.data))
+        .sortBy(x => -d3.sum(x.data))
         .value()
     );
   },
@@ -81,17 +81,17 @@ new PanelGraph({
     const fte_data = table12.q(subject).data
 
     const planning_data = _.map(planning_years, function(row) {
-      return d4.sum(_.map(fte_data, xx => xx[row]))
+      return d3.sum(_.map(fte_data, xx => xx[row]))
     })
 
-    if (d4.sum(planning_data) === 0) {
+    if (d3.sum(planning_data) === 0) {
       return false;      
     }
     
     return  (
       _.chain(fte_data)
         .filter(row => {
-          return d4.sum(planning_years, col=> row[col]) !== 0;
+          return d3.sum(planning_years, col=> row[col]) !== 0;
         })
         .map(row => 
           ({
@@ -100,7 +100,7 @@ new PanelGraph({
             active : false,
           })
         )
-        .sortBy(x => -d4.sum(x.data))
+        .sortBy(x => -d3.sum(x.data))
         .value()
     );
   },

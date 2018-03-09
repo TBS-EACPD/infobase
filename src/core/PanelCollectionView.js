@@ -27,7 +27,7 @@ export const ReactPanelGraph = withRouter(
         return;
       }
       
-      graph_obj.render( d4.select(main), calculations, graph_options);
+      graph_obj.render( d3.select(main), calculations, graph_options);
 
       
     }

@@ -16,7 +16,7 @@ exports.tbs_color = function(){
 // conversion to RGB
 //
 //
-  return d4.scaleOrdinal()
+  return d3.scaleOrdinal()
     .range([ 
       '#005172', 
       '#3095B4', 
@@ -117,9 +117,9 @@ exports.create_list = function(container, data,options){
     options.li_classes = "legend-list-el " + options.li_classes;
   }
 
-  const dispatch = d4.dispatch("click", "hover");
+  const dispatch = d3.dispatch("click", "hover");
 
-  container = d4
+  container = d3
     .select(container)
     .append("div")
     .attr("aria-hidden", options.legend)
@@ -195,7 +195,7 @@ exports.create_list = function(container, data,options){
     new_lis
       .selectAll(".color-tag")
       .style("cursor", "pointer")
-      .on( "click", (d,i) => dispatch.call("click","", d, i, d4.select(this), new_lis) );
+      .on( "click", (d,i) => dispatch.call("click","", d, i, d3.select(this), new_lis) );
 
     new_lis
       .selectAll('div')
@@ -203,10 +203,10 @@ exports.create_list = function(container, data,options){
       .attr("role", "button")
       .attr("tabindex", 0)
       .attr("class", "link-styled " + options.a_class)
-      .on( "click", (d,i) => dispatch.call("click", "", d, i, d4.select(this), new_lis) )
+      .on( "click", (d,i) => dispatch.call("click", "", d, i, d3.select(this), new_lis) )
       .on( "keydown", (d,i) => {
-        if(d4.event.which === 13 || d4.event.which === 32){
-          dispatch.call("click", "", d, i, d4.select(this), new_lis)
+        if(d3.event.which === 13 || d3.event.which === 32){
+          dispatch.call("click", "", d, i, d3.select(this), new_lis)
         }
       })
       .html(options.html);
@@ -222,7 +222,7 @@ exports.create_list = function(container, data,options){
   return {
     dispatch,
     new_lis,
-    first: d4.select(new_lis.node()),
+    first: d3.select(new_lis.node()),
     legend: container,
   };
 };
@@ -350,7 +350,7 @@ exports.setup_graph_instance = function(instance,container,options = {}) {
 
   instance.html = container; 
 
-  instance.dispatch = options.dispatch = d4.dispatch.apply(this,
+  instance.dispatch = options.dispatch = d3.dispatch.apply(this,
     base_dispatch_events.concat(options.events || [])
   );
 

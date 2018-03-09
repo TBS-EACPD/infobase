@@ -89,7 +89,7 @@ _.each(['gov', 'dept'], lvl => {
                 "active": false,
               })
             )
-            .filter(d => d4.sum(d.data) )
+            .filter(d => d3.sum(d.data) )
             .value()
         ),
         ticks: info.last_years,

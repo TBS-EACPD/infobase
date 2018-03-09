@@ -117,7 +117,7 @@ module.exports = {
           return [key].concat(years);
         })
         .sortBy(function(row){
-          return d4.sum(_.tail(row));
+          return d3.sum(_.tail(row));
         })
         .value();
     },
@@ -144,7 +144,7 @@ Statistics.create_and_register({
     const num_active_years = _.chain( all_years )
       .map( group => _.tail(group) )
       .pipe( groups => _.zip.apply(null, groups) )
-      .map( zipped_groups => d4.sum(zipped_groups) )
+      .map( zipped_groups => d3.sum(zipped_groups) )
       .countBy( total => total === 0 ? 'inactive' : 'active' ) 
       .pipe( _.property('active') )
       .value();
@@ -159,13 +159,13 @@ Statistics.create_and_register({
       const ex_lev_EX_avg = _.chain( q.summed_levels() )
         .pipe( _.property(ex_string) )
         .pipe( ex_levels => _.map(people_years, y => 
-          d4.sum( _.map(ex_levels, _.property(y)) )
+          d3.sum( _.map(ex_levels, _.property(y)) )
         ))
-        .pipe( totals_by_year => d4.sum(totals_by_year)/num_active_years )
+        .pipe( totals_by_year => d3.sum(totals_by_year)/num_active_years )
         .value();
         
       add("head_count_ex_level_avg_ex", ex_lev_EX_avg );
-      add("head_count_ex_avg_share", (ex_lev_EX_avg*num_active_years)/d4.sum(_.map(all_years, a => d4.sum(a.slice(1)))));
+      add("head_count_ex_avg_share", (ex_lev_EX_avg*num_active_years)/d3.sum(_.map(all_years, a => d3.sum(a.slice(1)))));
     } else {
 
       const not_avail_str = window.lang === 'en' ? 'N.A' : 'S.A';
@@ -199,8 +199,8 @@ Statistics.create_and_register({
     const all_years = _.filter(all_years_unfiltered, a => a[0] !== "Non-EX");
     STATS.year_over_year_multi_stats(add,"head_count_ex_level",all_years);
     const year_group_vals = _.map(all_years, group => _.tail(group) );
-    const year_totals = _.map(year_group_vals, d => d4.sum(d) );
-    add("head_count_ex_level_avg_ex", d4.sum(year_totals)/5);
-    add("head_count_ex_avg_share", (d4.sum(year_totals)/d4.sum(q.sum(people_years, {as_object: false}))));
+    const year_totals = _.map(year_group_vals, d => d3.sum(d) );
+    add("head_count_ex_level_avg_ex", d3.sum(year_totals)/5);
+    add("head_count_ex_avg_share", (d3.sum(year_totals)/d3.sum(q.sum(people_years, {as_object: false}))));
   },
 });

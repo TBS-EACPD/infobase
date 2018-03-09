@@ -141,7 +141,7 @@ function d3_build_table(options){
 
   // if a node isn't provided then create a new one
   options.node = options.node || document.createElement("div");
-  var table = d4.select(options.node).append("div").append("table");
+  var table = d3.select(options.node).append("div").append("table");
 
   var data_key_func = options.key_func || function(d,i){return i;};
   
@@ -186,7 +186,7 @@ function d3_build_table(options){
     })
     .each(function(d){ 
       if(d.css)
-        d4.select(this).style(d.css)
+        d3.select(this).style(d.css)
     })
     .attr("id",function(d){
       return d.id;
@@ -236,13 +236,13 @@ function d3_build_table(options){
     .attr("class",function(d){return d.__table_opts__["class"];})
     .each(function(d){ 
       if(d.__table_opts__.css)
-        d4.select(this).style(d.__table_opts__.css)
+        d3.select(this).style(d.__table_opts__.css)
     });
 
   if (options.stripe){
     new_rows.each(function(d,i){
       if (i % 2 === 1 ){
-        d4.select(this).classed("odd",true);
+        d3.select(this).classed("odd",true);
       }
     });
   }

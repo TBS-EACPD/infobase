@@ -69,7 +69,7 @@ export class PartitionRoute extends React.Component {
       method, 
       value_attr,
     } = this.getValidatedRouteParams(this.props);
-    this.container = d4.select(ReactDOM.findDOMNode(this.refs.container));
+    this.container = d3.select(ReactDOM.findDOMNode(this.refs.container));
     this.partition = new Partition(this.container, this.update_url, method, value_attr);
   }
   render(){
@@ -139,7 +139,7 @@ class DiagramNotes extends React.Component {
     super()
   }
   componentDidMount(){
-    const autoAccordion = d4.select(ReactDOM.findDOMNode(this.refs.autoAccordion));
+    const autoAccordion = d3.select(ReactDOM.findDOMNode(this.refs.autoAccordion));
     autoAccordion.select(".pull-down-accordion-header").node().click();
   }
   render(){
@@ -255,15 +255,15 @@ const show_partial_children = function(node){
   }
   if (to_be_compressed.length > 0) {
     new_compressed_child = Object.assign(
-      d4.hierarchy({}),
+      d3.hierarchy({}),
       {  
         height : node.height-1,
         depth : node.depth+1,
         id_ancestry : _.reduce(to_be_compressed, (memo,x)=>memo+"-"+x.data.id, "compressed>")+"-<compressed-"+node.id_ancestry,
         open : true,
         parent : node,
-        value : d4.sum( to_be_compressed,x=>x.value),
-        __value__ : d4.sum( to_be_compressed,x=>x.value),
+        value : d3.sum( to_be_compressed,x=>x.value),
+        __value__ : d3.sum( to_be_compressed,x=>x.value),
         data : mock_model(
           _.map( to_be_compressed , x=>x.data.id)+"compressed",
           "+",
@@ -336,12 +336,12 @@ class Partition {
     // to by the Canada.ca banner/WET. Styling this would be so much easier without that...
     this.container = container.append("div")
       .classed("partition-container",true)
-      .style("margin-left", -d4.select("main.container").node().offsetLeft+"px");
+      .style("margin-left", -d3.select("main.container").node().offsetLeft+"px");
     
     const adjust_partition_diagram_margin_on_resize = function(){
-      const partition_container = d4.select(".partition-container");
+      const partition_container = d3.select(".partition-container");
       if ( partition_container.node() ){
-        partition_container.style("margin-left", -d4.select("main.container").node().offsetLeft+"px");
+        partition_container.style("margin-left", -d3.select("main.container").node().offsetLeft+"px");
       } else {
         window.removeEventListener("resize", adjust_partition_diagram_margin_on_resize);
       }
@@ -394,9 +394,9 @@ class Partition {
     this.container.select("input.search").on("keydown", () => {
       // Prevent enter key from submitting input form 
       // (listening on the submit event seems less consistent than this approach)
-      if(d4.event.which == 13){
-        d4.event.stopPropagation();
-        d4.event.preventDefault();
+      if(d3.event.which == 13){
+        d3.event.stopPropagation();
+        d3.event.preventDefault();
       }
     });
     this.container.select("input.search").on("keyup", this.search_handler.bind(this));
@@ -405,7 +405,7 @@ class Partition {
     this.container.select(".select_root").on("change", this.reroot.bind(this));
     this.container.select(".partition-control-element > .glyphicon").on("click", this.add_intro_popup.bind(this));
     this.container.select(".partition-control-element > .glyphicon").on("keydown", () => {
-      if(d4.event.which == 13){
+      if(d3.event.which == 13){
         this.add_intro_popup.call(this);
       }
     });
@@ -419,7 +419,7 @@ class Partition {
     this[this.method]();
   }
   change_value_attr(){
-    this.value_attr = d4.event.target.value;
+    this.value_attr = d3.event.target.value;
 
     // Filter presentation_schemes to those available on this method
     const sort_val = _.find(this.sort_vals, d => d.id === this.value_attr);
@@ -446,17 +446,17 @@ class Partition {
     presentation_scheme_dropdown
       .transition()
       .duration(200)
-      .ease(d4.easeLinear)
+      .ease(d3.easeLinear)
       .style("background-color", "#b8d3f9")
       .transition()
       .duration(100)
-      .ease(d4.easeLinear)
+      .ease(d3.easeLinear)
       .style("background-color", "#ffffff");
 
     this[this.method]();
   }
   reroot(){
-    this.method = d4.event.target.value;
+    this.method = d3.event.target.value;
     this.update_url(this.method,this.value_attr);
     this[this.method]();
   }
@@ -962,7 +962,7 @@ class Partition {
       partition_control_search_block
         .transition()
         .duration(300)
-        .ease(d4.easeLinear)
+        .ease(d3.easeLinear)
         .style("opacity", "1")
         .style("height", partition_control_search_block.node().previousElementSibling.offsetHeight + "px");
     }
@@ -983,7 +983,7 @@ class Partition {
       partition_control_search_block
         .transition()
         .duration(300)
-        .ease(d4.easeLinear)
+        .ease(d3.easeLinear)
         .style("opacity", "0")
         .style("height", "0px");
     }
@@ -1047,9 +1047,9 @@ class Partition {
   }
   // Deals with event details and debouncing
   search_handler(){
-    d4.event.stopImmediatePropagation();
-    d4.event.preventDefault();
-    const query = d4.event.target.value.toLowerCase();
+    d3.event.stopImmediatePropagation();
+    d3.event.preventDefault();
+    const query = d3.event.target.value.toLowerCase();
     this.search_matching = [] || this.search_matching;
 
     this.debounced_search = this.debounced_search || _.debounce(this.search_actual, search_debounce_time);
@@ -1060,11 +1060,11 @@ class Partition {
       this[this.method]();
     }, search_debounce_time/2);
 
-    if (d4.event.keyCode === 13 ||
-        d4.event.keyCode === 37 ||
-        d4.event.keyCode === 38 ||
-        d4.event.keyCode === 39 ||
-        d4.event.keyCode === 40) {
+    if (d3.event.keyCode === 13 ||
+        d3.event.keyCode === 37 ||
+        d3.event.keyCode === 38 ||
+        d3.event.keyCode === 39 ||
+        d3.event.keyCode === 40) {
       // Bail on enter and arrow keys. Note: this DOESN'T bail already debounced searches
       return;
     }
@@ -1119,7 +1119,7 @@ class Partition {
       diagram_note_div
         .style("height", this.offsetHeight+"px")
         .transition()
-        .ease(d4.easePoly)
+        .ease(d3.easePoly)
         .duration(600)
         .style("height", "0px")
         .style("opacity", 0);

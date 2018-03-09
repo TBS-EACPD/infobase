@@ -104,7 +104,7 @@ module.exports = {
           return [key].concat(years);
         })
         .sortBy(function(row){
-          return d4.sum(_.tail(row));
+          return d3.sum(_.tail(row));
         })
         .value();
     },
@@ -141,9 +141,9 @@ Statistics.create_and_register({
       const exec_vals = _.map(people_years, y => exec_row[y] )
       const dept_rows = table.depts[subject.id];
 
-      const total_dept_vals = _.map(people_years, y => d4.sum( _.map(dept_rows, _.property(y))));
+      const total_dept_vals = _.map(people_years, y => d3.sum( _.map(dept_rows, _.property(y))));
               
-      avg_ex_share = d4.sum(exec_vals)/d4.sum(total_dept_vals);
+      avg_ex_share = d3.sum(exec_vals)/d3.sum(total_dept_vals);
 
     } else {
       avg_ex_share = 0;
@@ -161,7 +161,7 @@ Statistics.create_and_register({
     const table = tables.table111;
     const q = table.q(subject);
     
-    add( "five_year_total_head_count", d4.sum(q.sum(people_years, {as_object: false}))); // Used to calculate %'s for gov pie chart
+    add( "five_year_total_head_count", d3.sum(q.sum(people_years, {as_object: false}))); // Used to calculate %'s for gov pie chart
     
     const all_years = q.gov_grouping();
     
@@ -180,10 +180,10 @@ Statistics.create_and_register({
         
     const exec_totals = _.map(
       people_years,
-      y => d4.sum( _.map(exec_rows, _.property(y) ))
+      y => d3.sum( _.map(exec_rows, _.property(y) ))
     );
     
-    add("head_count_occ_cat_avg_share_ex", d4.sum(exec_totals)/d4.sum(q.sum(people_years, {as_object: false})));
+    add("head_count_occ_cat_avg_share_ex", d3.sum(exec_totals)/d3.sum(q.sum(people_years, {as_object: false})));
 
   },
 });

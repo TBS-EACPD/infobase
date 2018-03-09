@@ -99,7 +99,7 @@ module.exports = {
         "type": "big_int",
         "formula" : function(table,row){
           if (_.isArray(row)){
-            return d4.sum(_.map(row,"authorities")) -  d4.sum(_.map(row,"expenditures"));
+            return d3.sum(_.map(row,"authorities")) -  d3.sum(_.map(row,"expenditures"));
           }
           return  row.authorities - row.expenditures;
         },
@@ -116,7 +116,7 @@ module.exports = {
         "type": "percentage",
         "formula" : function(table,row){
           if (_.isArray(row)){
-            return 1 - d4.sum(_.map(row,"expenditures")) /  d4.sum(_.map(row,"authorities"));
+            return 1 - d3.sum(_.map(row,"expenditures")) /  d3.sum(_.map(row,"authorities"));
           }
           return 1 - row.expenditures/row.authorities;
         },
@@ -171,7 +171,7 @@ module.exports = {
         "nick": "lapse_PA_pct",
         "formula" : function(table,row){
           if (_.isArray(row)){
-            return d4.sum(_.map(row,"lapse_PA")) /  d4.sum(_.map(row,"authorities"));
+            return d3.sum(_.map(row,"lapse_PA")) /  d3.sum(_.map(row,"authorities"));
           }
           return row.lapse_PA/row.authorities;
         },                      
@@ -226,7 +226,7 @@ module.exports = {
         "nick": "lapse_net_pct",
         "formula" : function(table,row){
           if (_.isArray(row)){
-            return d4.sum(_.map(row,"lapse_net")) /  d4.sum(_.map(row,"authorities"));
+            return d3.sum(_.map(row,"lapse_net")) /  d3.sum(_.map(row,"authorities"));
           }
           return row.lapse_net/row.authorities;
         },           
@@ -329,7 +329,7 @@ module.exports = {
     // the average rows 
     "rowseach" : function(_this,d,i){
       if (d[1].val === text_maker("sub_avg")){
-        d4.select(_this).attr("class","success");
+        d3.select(_this).attr("class","success");
       }
     },
     "modify_for_presentation" : function(col_objs,rows){

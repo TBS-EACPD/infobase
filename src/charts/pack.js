@@ -3,8 +3,8 @@ const D3CORE = require("./core");
 export const navigate_class = "navigate_packing";
 
 var _setup_events = function(container){
-  d4.select(container).on("click."+navigate_class, function(d){
-    var target = d4.select(d4.event.target);
+  d3.select(container).on("click."+navigate_class, function(d){
+    var target = d3.select(d3.event.target);
     var data = target.datum();
     if (!target.classed(navigate_class)){
       return;
@@ -42,7 +42,7 @@ var _navigate_packing = function(dispatcher,parents,speed){
     return;
   }
   var head = _.head(parents);
-  var matching_circle = d4.select("circle[rid='"+head.rid+"']").node();
+  var matching_circle = d3.select("circle[rid='"+head.rid+"']").node();
   var navigate_to_next = function(){
     dispatcher.on("renderEnd.__nav__",undefined);
     _.delay(function(){
@@ -82,12 +82,12 @@ export const pack_data = function(data, level_name,options = {}){
   let soften =  _.isUndefined(options.soften) ? true : options.soften;
   let levels = options.levels || 2;
   let accessor = _.property(attr);
-  let extent = d4.extent(_.map(data,accessor));
-  let scale = options.scale || d4.scaleLog()
+  let extent = d3.extent(_.map(data,accessor));
+  let scale = options.scale || d3.scaleLog()
     .domain(extent)
     .rangeRound([0,levels]);
 
-  let groups = d4.nest()
+  let groups = d3.nest()
     .key(d =>scale(accessor(d)))
     .entries(data);
 
@@ -100,7 +100,7 @@ export const pack_data = function(data, level_name,options = {}){
   _.each(sorted,function(group,i){
     var softened = soften ? soften_spread(group.values,attr):  group.values;
     if (i === 0){
-      __value__ = d4.sum(softened, _.property("__value__"));
+      __value__ = d3.sum(softened, _.property("__value__"));
       rtn = {
         name:level_name, 
         children:softened, 
@@ -108,7 +108,7 @@ export const pack_data = function(data, level_name,options = {}){
       };
     } else if (i === groups.length -1){
       softened = softened.concat(rtn);
-      __value__ = d4.sum(softened, _.property("__value__"))
+      __value__ = d3.sum(softened, _.property("__value__"))
       rtn = {
         name:"", 
         children:softened, 
@@ -116,7 +116,7 @@ export const pack_data = function(data, level_name,options = {}){
       };
     } else {
       softened = softened.concat(rtn);
-      __value__ = d4.sum(softened, _.property("__value__"));
+      __value__ = d3.sum(softened, _.property("__value__"));
       rtn = {
         name:level_name, 
         children:softened, 
@@ -134,8 +134,8 @@ export function soften_spread(data,attr = "value",p = 0.005){
   // expected array of objects with one particular attribute
   // whose value ranges from 0 upwards
   let accessor = _.property(attr);
-  let max = d4.max(data,accessor);
-  let map = d4.scaleLinear().domain([0,max]).range([p*max,max]);
+  let max = d3.max(data,accessor);
+  let map = d3.scaleLinear().domain([0,max]).range([p*max,max]);
   _.each(data, d => {
     d[attr] = map(d[attr]);
   });
@@ -231,7 +231,7 @@ export class pack {
         .attr("class","zoom-out-link btn btn-sm btn-ib-primary")
         .html("Zoom Out")
         .on("click",function(d){
-          d4.event.preventDefault();
+          d3.event.preventDefault();
           var matching_circle = that.svg.select("circle[rid='"+d.parent.rid+"']").node();
           that.dispatch.call("dataClick", matching_circle, d.parent);
         });
@@ -321,15 +321,15 @@ export class pack {
     this.on_focusout = this.options.on_focusout || _.noop;
     this.on_focusin = this.options.on_focusin || _.noop;
     this.radius = Math.min(this.outside_width, this.outside_height)-11;
-    this.x_scale = d4.scaleLinear().range([0,this.radius]);
-    this.y_scale = d4.scaleLinear().range([0,this.radius]);
+    this.x_scale = d3.scaleLinear().range([0,this.radius]);
+    this.y_scale = d3.scaleLinear().range([0,this.radius]);
 
     let value_attr = this.options.value_attr || "value";
     
     if (!this.pack) {
-      this.pack = d4.pack();
+      this.pack = d3.pack();
 
-      const root = this.root = d4.hierarchy(data)
+      const root = this.root = d3.hierarchy(data)
         .sum(function(d) {return d[value_attr]; })
         .sort((a, b) =>  {return (b.value - a.value)});
     
@@ -405,8 +405,8 @@ export class pack {
       .value();
 
 
-    var font_scale  = d4.scaleLinear()
-      .domain(d4.extent(nodes_with_text, _.property('zoom_r')))
+    var font_scale  = d3.scaleLinear()
+      .domain(d3.extent(nodes_with_text, _.property('zoom_r')))
       .rangeRound([this.bottom_font_size,this.top_font_size]);
 
     // join the filtered data to the circles
@@ -425,7 +425,7 @@ export class pack {
       .filter(d => !(d.depth === 0 && that.invisible_grand_parent ))
       .on("click", function(d){
           
-        d4.event.preventDefault();
+        d3.event.preventDefault();
         if(d.parent !== null){
           var matching_circle = that.svg.select("circle[rid='"+d.parent.rid+"']").node();
           that.dispatch.call("dataClick", matching_circle, d);
@@ -577,7 +577,7 @@ export class pack {
       .on("click", function(d){
         const href = that.href_func(d);
         if(_.isEmpty(href) || href === "#"){
-          d4.event.preventDefault();
+          d3.event.preventDefault();
         }
         var matching_circle = that.svg.select("circle[rid='"+this.getAttribute("rid")+"']").node();
 
@@ -609,7 +609,7 @@ export class pack {
         var t = d.zoom_pos.y - this.offsetHeight/2 + font_scale(d.zoom_r);
 
         var l = that.translate[0] + d.zoom_pos.x - this.offsetWidth/2; 
-        d4.select(this).styles({
+        d3.select(this).styles({
           "top": t+'px',
           "left" : l+"px",
         });

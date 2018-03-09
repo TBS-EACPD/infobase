@@ -112,7 +112,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
 
   }
   
-  const d3_hierarchy = d4.hierarchy(root, node => {
+  const d3_hierarchy = d3.hierarchy(root, node => {
 
     if(!_.isEmpty(node.children)){
       return node.children; //if children is already defined, use it.

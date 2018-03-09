@@ -104,7 +104,7 @@ exports.Table = class Table extends mix().with(staticStoreMixin){
       .each(function(col){
         col.formula = function(data){
           if (_.isArray(data)){
-            return d4.sum(_.map(data,col.nick || col.wcag));
+            return d3.sum(_.map(data,col.nick || col.wcag));
           }
           return  data;
         };
@@ -281,7 +281,7 @@ exports.Table = class Table extends mix().with(staticStoreMixin){
   populate_with_data(data){
     data= $.trim(data);
     const row_transf = this.get_row_func()
-    const parsed_data = d4.csvParseRows(data);
+    const parsed_data = d3.csvParseRows(data);
 
     data = _.chain(parsed_data)
       .tail()

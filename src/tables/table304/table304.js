@@ -88,7 +88,7 @@ module.exports = {
           return [key].concat(people_years);
         })
         .sortBy(function(row){
-          return d4.sum(_.tail(row));
+          return d3.sum(_.tail(row));
         })
         .value();
     },

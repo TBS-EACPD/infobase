@@ -251,7 +251,7 @@ Statistics.create_and_register({
 
     const CRSO_data = _.map(crsos, crso => ({
       crso:crso,
-      data:  d4.sum(_.map(table.q(crso).data, prg => prg["{{planning_year_1}}"])),
+      data:  d3.sum(_.map(table.q(crso).data, prg => prg["{{planning_year_1}}"])),
     })
     )
 
@@ -326,7 +326,7 @@ Statistics.create_and_register({
 
     add("crso", crso);
 
-    const crso_exps = d4.sum(_.map(table.q(crso).data, prg => prg["{{planning_year_1}}"]))
+    const crso_exps = d3.sum(_.map(table.q(crso).data, prg => prg["{{planning_year_1}}"]))
     add("crso_exps", crso_exps);
 
     add("crso_exp_prg_share", c.program_exp_planning_year_1/crso_exps)
