@@ -304,10 +304,6 @@ div.height-clipped-bar-area {
   left: -20px; /* graph needs to be shifted left to avoid x-overflow with height clipper */
 }
 
-div.height-clipped-bar-area > div.tick {
-  margin-left: 15px; /* ticks need to be padded to position properly after bar area shifted left */
-}
-
 @media(max-width: 992px){
   .glyphicon--desktop{
     display: none;
