@@ -19,32 +19,3 @@ table302:
     {{{gt "table302_short"}}}
     
     {{> ochro_includes_excludes_fr}}
-
-historical_employee_gender_title:
-  transform: [handlebars]
-  en: Population by Gender ({{ppl_last_year_5}} to {{ppl_last_year}})
-  fr: Population selon le sexe ({{ppl_last_year_5}} à {{ppl_last_year}})
-
-gov_historical_employee_gender_text:
-  transform: [handlebars,markdown]
-  en: |
-    From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, **{{gov_head_count_gender_top}}** accounted for an average of **{{fmt_percentage1 gov_head_count_gender_top_avg_percent_NA_included}}** of the **Federal Public Service**,
-    while **{{gov_head_count_gender_bottom}}** accounted for an average of **{{fmt_percentage1 gov_head_count_gender_bottom_avg_percent_NA_included}}**.
-  fr: |
-    De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, les **{{gov_head_count_gender_top}}** constituaient en moyenne **{{fmt_percentage1 gov_head_count_gender_top_avg_percent_NA_included}}** de la **fonction publique fédérale**, 
-    comparativement à **{{fmt_percentage1 gov_head_count_gender_bottom_avg_percent_NA_included}}** pour les **{{gov_head_count_gender_bottom}}**.
-
-dept_historical_employee_gender_text:
-  transform: [handlebars,markdown]
-  en: |
-    From **{{dept_head_count_gender_first_active_year}}** to **{{dept_head_count_gender_last_active_year}}**, **{{dept_head_count_gender_top}}** accounted for an average of **{{fmt_percentage1 dept_head_count_gender_top_avg_percent_NA_included}}** of **{{subj_name subject}}**’s workforce{{#isEqual dept_head_count_gender_single_type_flag true}}.{{else}}, while **{{dept_head_count_gender_bottom}}** accounted for an average of **{{fmt_percentage1 dept_head_count_gender_bottom_avg_percent_NA_included}}**.{{/isEqual}}
-  fr: |
-    De **{{dept_head_count_gender_first_active_year}}** à **{{dept_head_count_gender_last_active_year}}**, les **{{dept_head_count_gender_top}}** constituaient en moyenne **{{fmt_percentage1 dept_head_count_gender_top_avg_percent_NA_included}}** de l’effectif **{{de_dept dept}}**{{#isEqual dept_head_count_gender_single_type_flag true}}.{{else}}, comparativement à **{{fmt_percentage1 dept_head_count_gender_bottom_avg_percent_NA_included}}** pour les **{{dept_head_count_gender_bottom}}**.{{/isEqual}}
-
-employee_gender_all_suppressed_desc:
-  transform: [handlebars,markdown]
-  en: |
-    Personal Information is suppressed in significantly small groupings to protect privacy. 
-    From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, the gender distribution of **{{dept_name}}** has been suppressed.
-  fr: |
-    Les renseignements personnels sont supprimés en très petits groupes pour protéger la vie privée. De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, la répartition par sexe **{{de_dept dept}}** est supprimée.     
