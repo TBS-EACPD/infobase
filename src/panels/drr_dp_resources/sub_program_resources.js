@@ -1,51 +1,58 @@
-const {
+import "./sub_program_resources.ib.yaml";
+
+
+import { createSelector } from 'reselect';
+import classNames from 'classnames';
+import ReactTransitionGroup from 'react-addons-transition-group';
+import FlipMove from 'react-flip-move';
+import { combineReducers, createStore }  from 'redux';
+import { Provider, connect } from 'react-redux';
+
+import {
   PanelGraph,
   reactAdapter,
-  Subject: { get_by_guid },
+  Subject,
   PlannedActualTable,
-  util_components: {
-    TextMaker,
-    Format,
-    FirstChild,
-    AccordionEnterExit,
-    SortIndicators,
-  },
+  util_components,
   text_maker,
-  Results : {
-    SubProgramEntity,
-    ResultCounts,
-  },
-} = require("./shared");
+  Results,
+  utils,
+} from "../shared";
 
-require("./sub_program_resources.ib.yaml");
 
-const { createSelector } = require('reselect');
-const classNames = require('classnames');
-
-const { abbrev } = require('../core/utils.js');
-
-const ReactTransitionGroup  = require('react-addons-transition-group');
-const FlipMove = require('react-flip-move');
-
-//treemap stuff
-const { combineReducers, createStore } = require('redux');
-const { Provider, connect } = require('react-redux');
-
-const {
+import {
   get_root,
   filter_hierarchy,
   convert_d3_hierarchy_to_explorer_hierarchy,
-} = require('../gen_expl/hierarchy_tools.js');
+} from '../../gen_expl/hierarchy_tools.js';
 
-const { GeneralTree } = require('../gen_expl/GeneralTree.js');
+import { GeneralTree } from '../../gen_expl/GeneralTree.js';
 
-const {
+import {
   get_memoized_funcs,
   initial_root_state,
   root_reducer,
   map_state_to_root_props_from_memoized_funcs,
   map_dispatch_to_root_props,
-} = require('../gen_expl/state_and_memoizing');
+} from '../../gen_expl/state_and_memoizing';
+
+const { get_by_guid } = Subject;
+
+const {
+  SubProgramEntity,
+  ResultCounts,
+} = Results;
+
+const {
+  TextMaker,
+  Format,
+  FirstChild,
+  AccordionEnterExit,
+  SortIndicators,
+} = util_components;
+
+const { abbrev } = utils;
+
 
 
 const sub_to_node = (sub,doc) => ({

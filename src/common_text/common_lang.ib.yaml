@@ -527,6 +527,11 @@ fte:
 actual_ftes:
   en: Actual FTEs
   fr: ETP réels
+
+planned_fte:
+  en: Planned FTE
+  fr: ETP prévus
+
 planned_ftes:
   en: Planned FTEs
   fr: ETP prévus

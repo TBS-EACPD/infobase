@@ -1,18 +1,16 @@
-const {
+import "./drr_planned_actual.ib.yaml";
+
+import {
   reactAdapter,
   PanelGraph,
   FootNote,
   PlannedActualTable,
-  util_components:{
-    TM,
-  },
-} = require('./shared.js');
+  util_components,
+} from '../shared.js';
 
+import { ResultCounts } from '../result_graphs/results_common.js';
 
-const { ResultCounts } = require('./result_graphs/results_common.js');
-
-require("./drr_planned_actual.ib.yaml");
-
+const { TM } = util_components;
 
 
 _.each(['dept','program'], level => {

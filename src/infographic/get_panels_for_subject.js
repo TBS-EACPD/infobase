@@ -30,6 +30,12 @@ import "../panels/sobj/personel_spend.js";
 import "../panels/sobj/spend_rev_split.js";
 
 
+//dp/drr stuff but not results
+import '../panels/drr_dp_resources/drr_planned_actual.js';
+import '../panels/drr_dp_resources/sub_program_resources.js';
+import '../panels/drr_dp_resources/resource_structure.js'
+import '../panels/drr_dp_resources/goco.js';
+
 import { PanelGraph } from '../core/graphs.js';
 
 const get_people_panels = subject => {

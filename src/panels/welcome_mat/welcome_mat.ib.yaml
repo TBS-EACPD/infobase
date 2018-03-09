@@ -155,21 +155,6 @@ no_spend_auth_this_year:
   fr: | 
     <div class="mat-grid__inner-panel mat-grid__inner-panel--small">Information sur les dépenses non-disponibles</div>
 
-planned_program_spending_title:
-  transform: [handlebars]
-  en: |
-   Detailed Planned Spending by Program ({{planning_year_1}} to {{planning_year_3}})
-  
-  fr: |
-   Dépenses détaillées prévues par programme ({{planning_year_1}} à {{planning_year_3}})
-
-planned_program_fte_title:
-  transform: [handlebars]
-  en: |
-   Planned Full-Time Equivalent (FTE) by Program ({{planning_year_1}} to {{planning_year_3}})
-  
-  fr: |
-   Équivalent Temps-plein (ETP) prévues par Programme ({{planning_year_1}} à {{planning_year_3}})
 
 gov_welcome_mat_spending_summary:
   transform: [handlebars, markdown]

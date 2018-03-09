@@ -1,37 +1,34 @@
-const classNames = require('classnames');
+import classNames from 'classnames';
+import { combineReducers, createStore }  from 'redux';
+import { Provider, connect } from 'react-redux';
 
-const {
+import { get_root } from '../../gen_expl/hierarchy_tools.js';
+
+import {
   PanelGraph,
   reactAdapter,
-  util_components: {
-    TM,
-  },
-} = require("./shared"); 
+  util_components,
+} from "../shared";
 
-//treemap stuff
-const { combineReducers, createStore } = require('redux');
-const { Provider, connect } = require('react-redux');
 
-const {
-  get_root,
-} = require('../gen_expl/hierarchy_tools.js');
-
-const { 
+import { 
   create_rooted_resource_scheme,
   get_initial_resource_state,
   node_renderer,
-} = require('../gen_expl/rooted_resource_scheme.js');
+} from '../../gen_expl/rooted_resource_scheme.js';
 
-const { GeneralTree } = require('../gen_expl/GeneralTree.js');
+import { GeneralTree } from '../../gen_expl/GeneralTree.js';
 
 
-const {
+import {
   get_memoized_funcs,
   initial_root_state,
   root_reducer,
   map_state_to_root_props_from_memoized_funcs,
   map_dispatch_to_root_props,
-} = require('../gen_expl/state_and_memoizing');
+} from '../../gen_expl/state_and_memoizing';
+
+const { TM } = util_components;
 
 
 class RootedResourceExplorer extends React.Component {

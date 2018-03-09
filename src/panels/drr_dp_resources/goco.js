@@ -1,20 +1,20 @@
-const { Format } = require('../../util_components.js');
+import "./goco.ib.yaml";
 
-exports = module.exports;
-require("./goco.ib.yaml");
-
-const {
+import {
   PanelGraph,
-  Subject: { Tag },
+  Subject,
   text_maker,
   reactAdapter,  
   Table,
   formats,
-  declarative_charts: {
-    GraphLegend,
-  },
+  declarative_charts,
+  util_components,
   D3,
-} = require('../shared.js');
+} from '../shared.js';
+
+const { GraphLegend } = declarative_charts;
+const { Format } = util_components;
+const { Tag } = Subject;
 
 
 const state = {active_spend_area : null};

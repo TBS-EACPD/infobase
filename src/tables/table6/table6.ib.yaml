@@ -166,26 +166,6 @@ dept_tag_spent_text:
   fr: |
     **{{infograph_link dept}}** a dépensé jusqu'à **{{fmt_compact_written tag_spent}}** sur les programmes étiquetés sous  cette étiquette, qui représente {{fmt_percentage tag_spent_pct}} des dépenses totales de l'organisation.
 
-planned_program_spending_text:
-  transform: [handlebars,markdown]
-  en: |
-   Over the next three years, **{{crso_parent}}** will spend a total of {{fmt_compact_written crso_planned_exp_total}} on {{pluralize crso_prg_num '[Program]'}}{{gl "PROG"}}
-   falling under this {{cr_or_so subject}}
-   with **{{fmt_compact_written crso_prg_top1}}** ({{fmt_compact_written crso_prg_top1_amnt}}) being the largest
-   {{#if crso_prg_top2}}
-   followed by **{{fmt_compact_written crso_prg_top2}}** ({{fmt_compact_written crso_prg_top2_amnt}}).
-   {{else}}.
-   {{/if}}
-
-  
-  fr: |
-   Au cours des trois prochines années, **{{crso_parent}}** va dépenser un total de  {{fmt_compact_written crso_planned_exp_total}} sur {{pluralize crso_prg_num '[Program]'}}{{gl "PROG"}}
-   sous {{ce_crso subject}}
-   Avec **{{fmt_compact_written crso_prg_top1}}** ({{fmt_compact_written crso_prg_top1_amnt}}) étant le plus important programme
-   {{#if crso_prg_top2}}
-   suivi par **{{fmt_compact_written crso_prg_top2}}** ({{fmt_compact_written crso_prg_top2_amnt}}).
-   {{else}}.
-   {{/if}}
 
 dept_voted_spent_text:
   transform: [handlebars, markdown]
