@@ -1,14 +1,17 @@
-const {
+import './sobj-panel-text.ib.yaml';
+import {
   formats,
   PanelGraph,
-  years : {std_years},
-  business_constants : {sos},
+  years,
+  business_constants,
   text_maker,
   D3,
-  util_components: {
-    Format,
-  },
-} = require("./shared"); 
+  util_components,
+} from "../shared";
+
+const { sos } = business_constants;
+const { std_years } = years;
+const { Format } = util_components;
 
 new PanelGraph({
   level: "gov",

@@ -1,18 +1,17 @@
+import './sobj-panel-text.ib.yaml';
 const {
   PanelGraph,
-  business_constants  : {
-    sos,
-  },
-  years : {
-    std_years,
-  },
+  business_constants,
+  years,
   D3,
   formats,
   text_maker,
-  util_components: {
-    Format,
-  },
-} = require("./shared"); 
+  util_components,
+} = require("../shared"); 
+
+const { sos } = business_constants;
+const { std_years } = years;
+const { Format } = util_components;
 
 function spend_by_so_hist_render (panel,calculations){
   const { graph_args } = calculations;

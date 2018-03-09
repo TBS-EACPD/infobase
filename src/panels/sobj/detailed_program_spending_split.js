@@ -1,3 +1,4 @@
+import './sobj-panel-text.ib.yaml';
 const {
   Subject: {
     Program,
@@ -21,9 +22,10 @@ const {
     StackedHbarChart,
     A11YTable,
   },
-} = require("./shared"); 
+  business_constants,
+} = require("../shared"); 
 
-const { sos } = require('../models/businessConstants.js');
+const { sos } = business_constants;
 
 const text_keys = {
   dept: "dept_historical_program_spending_text", //note that we're recycling another's graph text, we'll clean this up later once we confirm we're good with this.

@@ -40,6 +40,7 @@ exports.panel_components = require('../panel_components');
 exports.infograph_href_template = require('../infographic/routes.js').infograph_href_template;
 exports.glossary_href = require('../link_utils.js').glossary_href;
 exports.Results = require('../models/results.js');
+exports.Statistics = require('../core/Statistics.js').Statistics;
 
 const {
   Format,

@@ -1,6 +1,4 @@
-require("../../panels/spend_rev_split");
-require("../../panels/top_spending_areas");
-require("../../panels/detailed_program_spending_split");
+
 //require("../../panels/spend_by_so_hist"); //we arent showing this stuff.
 
 exports = module.exports;

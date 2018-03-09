@@ -1,21 +1,19 @@
-const {
-  Statistics,
-} = require("../core/Statistics");
+import './top_spending_areas.ib.yaml';
 
-const {
-  util_components: {
-    Format,
-  },
+import {
+  util_components,
   text_maker, 
   PanelGraph, 
   collapse_by_so,
   common_react_donut,
   D3,
   run_template,
-  years: {
-    std_years,
-  },
-} = require("./shared"); 
+  years,
+  Statistics,
+} from "../shared";
+
+const { std_years } =  years;
+const { Format } = util_components;
 
 const is_non_revenue = d => +(d.so_num) < 19;
 

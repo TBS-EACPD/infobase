@@ -20,6 +20,15 @@ import "../panels/vote-stat/in_year_vote_stat_split";
 import "../panels/vote-stat/in_year_vote-stat_breakdown";
 import "../panels/vote-stat/last_year_vote_stat_split";
 
+//standard object
+import "../panels/sobj/spend_rev_split";
+import "../panels/sobj/top_spending_areas";
+import "../panels/sobj/detailed_program_spending_split";
+import "../panels/sobj/spend_by_so_hist";
+import "../panels/sobj/top_spending_areas.js";
+import "../panels/sobj/personel_spend.js";
+import "../panels/sobj/spend_rev_split.js";
+
 
 import { PanelGraph } from '../core/graphs.js';
 

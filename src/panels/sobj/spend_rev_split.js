@@ -1,13 +1,13 @@
-const {
-  Statistics,
-} = require("../core/Statistics");
+import './spend_rev_split.ib.yaml';
 
-const {
+import {
+  Statistics,
   formats,
   text_maker,
   PanelGraph,
   D3,
-} = require("./shared"); 
+} from "../shared";
+
 const is_revenue = so_num => +so_num > 19;
 const last_year_col = "{{pa_last_year}}";
 
