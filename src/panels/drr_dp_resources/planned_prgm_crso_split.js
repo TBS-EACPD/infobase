@@ -1,19 +1,21 @@
-const {
+import './crso_resource_text.ib.yaml';
+import {Program} from '../../models/subject.js';
+
+import {
   reactAdapter,
   formats,
   PanelGraph,
-  util_components: {
-    Format,
-  },
-} = require("./shared"); 
-
-const {Program} = require('../models/subject.js');
+  util_components,
+  declarative_charts,
+} from "../shared";
 
 const {
   Bar,
   SafePie,
   TabularPercentLegend,
-} = require('../charts/declarative_charts.js');
+} = declarative_charts;
+
+const { Format } = util_components;
 
 const prg_crso_split_render = function(panel, calculations, options){
   const { subject, info } = calculations;

@@ -1,21 +1,25 @@
-const {
+import './perspective_text.ib.yaml';
+import {
   D3, 
   text_maker,
   PanelGraph, 
   formats,
   sum_a_tag_col,
   reactAdapter,
-  util_components:{ 
-    Select,
-    Format,
-    TextMaker,
-  },
-} = require("./shared");
+  util_components,
+  declarative_charts,
+} from "../shared";
 
 const {
   SafePie,
   TabularPercentLegend,
-} = require('../charts/declarative_charts.js');
+} = declarative_charts;
+
+const { 
+  Select,
+  Format,
+  TextMaker,
+} = util_components;
 
 const col = "{{planning_year_1}}";
 

@@ -1,3 +1,5 @@
+import '../panels/welcome_mat/welcome_mat.js';
+
 //transfer payments
 import "../panels/transfer_payments/last_year_g_and_c_perspective";
 import "../panels/transfer_payments/historical_g_and_c";
@@ -23,18 +25,28 @@ import "../panels/vote-stat/last_year_vote_stat_split";
 //standard object
 import "../panels/sobj/spend_rev_split";
 import "../panels/sobj/top_spending_areas";
-import "../panels/sobj/detailed_program_spending_split";
 import "../panels/sobj/spend_by_so_hist";
 import "../panels/sobj/top_spending_areas.js";
 import "../panels/sobj/personel_spend.js";
 import "../panels/sobj/spend_rev_split.js";
 
+import "../panels/detailed_program_spending_split/detailed_program_spending_split.js";
+
+
+import '../panels/historical_auth_exp/historical_auth_exp.js';
+
+
+//tag-only panels
+import '../panels/tag_panels/resource_structure.js'
+import '../panels/tag_panels/goco.js';
+import '../panels/tag_panels/top_3_dept_graph.js';
 
 //dp/drr stuff but not results
 import '../panels/drr_dp_resources/drr_planned_actual.js';
 import '../panels/drr_dp_resources/sub_program_resources.js';
-import '../panels/drr_dp_resources/resource_structure.js'
-import '../panels/drr_dp_resources/goco.js';
+import '../panels/drr_dp_resources/planned_prgm_crso_split.js';
+import '../panels/drr_dp_resources/crso_program_resources.js';
+import '../panels/drr_dp_resources/spending_in_perspective.js';
 
 import { PanelGraph } from '../core/graphs.js';
 

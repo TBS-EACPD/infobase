@@ -1,14 +1,19 @@
-const {
+import './historical_auth_exp.ib.yaml';
+
+import {
   formats,
   text_maker,
   run_template,
   PanelGraph,
-  years : {std_years},
+  years,
   D3,
-  util_components: {
-    Format,
-  },
-} = require("./shared"); 
+  util_components,
+} from "../shared";
+
+const { std_years } = years;
+const { Format } = util_components;
+
+
 const auth_cols = _.map(std_years, yr=>yr+"auth");
 const exp_cols = _.map(std_years, yr=>yr+"exp");
 

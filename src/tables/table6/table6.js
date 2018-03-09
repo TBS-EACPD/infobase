@@ -2,13 +2,6 @@ exports = module.exports;
 
 require("./table6.ib.yaml");
 
-require('../../panels/historical_auth_exp');
-require('../../panels/top_3_dept_graph');
-require('../../panels/spending_in_perspective');
-
-require('../../panels/planned_prgm_crso_split');
-require('../../panels/crso_program_resources.js');
-
 
 // see [here](../table_definition.html) for description
 // of the table spec

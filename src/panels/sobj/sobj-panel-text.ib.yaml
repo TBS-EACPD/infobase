@@ -1,24 +1,3 @@
-detailed_program_spending_split_title:
-  transform: [handlebars]
-  en: Program Spending
-  fr: Dépenses par programme
-
-
-
-filter_by_so:
-  en: Filter by Standard Object
-  fr: Filtrer par article courant
-
-other_sos:
-  en: All Other Standard Objects
-  fr: Tous les autres articles courants
-
-so_spend_by_prog:
-  transform: [handlebars]
-  en: Standard Object Spending by Program ({{pa_last_year}})
-  fr: Dépenses par article courant, par programmes ({{pa_last_year}})
-
-
 dept_fin_spend_by_so_hist_title:
   transform: [handlebars]
   en: Spending by Standard Objects ({{pa_last_year_5}} to {{pa_last_year}})

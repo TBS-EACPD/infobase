@@ -1,21 +1,27 @@
-const {
+import './crso_resource_text.ib.yaml';
+import {
   formats,
   text_maker,
   PanelGraph,
-  years : {planning_years},
-  declarative_charts: {
-    Bar,
-    GraphLegend,
-    A11YTable,
-  },
-  util_components:{
-    TextMaker,
-    Format,
-  },
+  years,
+  declarative_charts,
+  util_components,
   run_template,
   reactAdapter,
-} = require("./shared"); 
+} from "../shared";
 
+const { 
+  TextMaker,
+  Format,
+} = util_components;
+
+const {
+  Bar,
+  GraphLegend,
+  A11YTable,
+} = declarative_charts;
+
+const { planning_years } = years;
 
 function calculate(subject,info){
   if(subject.dead_so){

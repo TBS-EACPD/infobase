@@ -1,10 +1,11 @@
-const {
+import {
   D3, 
   text_maker,
   PanelGraph, 
-  Subject :   { Dept},
-} = require("./shared");
+  Subject,
+} from "../shared";
 
+const { Dept } = Subject;
 
 new PanelGraph({
   level: "tag",

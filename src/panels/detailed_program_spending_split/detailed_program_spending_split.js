@@ -1,4 +1,5 @@
-import './sobj-panel-text.ib.yaml';
+import './detailed_program_spending_split.ib.yaml';
+
 const {
   Subject: {
     Program,

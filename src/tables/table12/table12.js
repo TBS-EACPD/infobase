@@ -3,7 +3,6 @@ require("./table12.ib.yaml");
 // see [here](../table_definition.html) for description
 // of the table spec
 //
-require('../../panels/welcome_mat/welcome_mat');
 
 
 const {
