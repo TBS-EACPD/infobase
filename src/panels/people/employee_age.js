@@ -13,13 +13,13 @@ import {
 
 const { people_years } = years;
 const { compact_age_groups } = business_constants;
-const { charts_indexGraphWithLegend } = declarative_charts;
+const { D3GraphWithLegend } = declarative_charts;
 
 const emp_age_render = function(panel,data,options){
   const { graph_args } = data;
   const ticks = _.map(people_years, y => `${run_template(y)}`);
   
-  // Options for charts_indexGraphWithLegend React components
+  // Options for D3GraphWithLegend React components
   const age_group_options = {
     legend_col_full_size: 4,
     graph_col_full_size: 8,
@@ -37,7 +37,7 @@ const emp_age_render = function(panel,data,options){
   
   if (!window.is_a11y_mode){
     reactAdapter.render(
-      <charts_indexGraphWithLegend panel={panel} options={age_group_options}/>, 
+      <D3GraphWithLegend panel={panel} options={age_group_options}/>, 
       panel.areas().graph.node() 
     );
   } else {
@@ -155,7 +155,7 @@ new PanelGraph({
 //  },
 //  charts_index,
 //  declarative_charts : {
-//    charts_indexGraphWithLegend,
+//    D3GraphWithLegend,
 //  },
 //  TabbedContent,
 //  reactAdapter} = require("./shared");
@@ -173,7 +173,7 @@ new PanelGraph({
 //  const avg_age_yBottom = (Math.floor(_.min(all_avg_ages)*2)/2).toFixed(1);
 //  const avg_age_yTop = (Math.ceil(_.max(all_avg_ages)*2)/2).toFixed(1);
 //  
-//  // Options for charts_indexGraphWithLegend React components
+//  // Options for D3GraphWithLegend React components
 //  const age_group_options = {
 //    legend_col_full_size : 4,
 //    graph_col_full_size : 8,
@@ -218,14 +218,14 @@ new PanelGraph({
 //            id={"emp_age_tab_pane"}
 //            aria-hidden={true}
 //          >
-//            <charts_indexGraphWithLegend panel={panel} options={age_group_options}/>
+//            <D3GraphWithLegend panel={panel} options={age_group_options}/>
 //            <div className='clearfix'></div>
 //          </div>, 
 //          avgage: <div 
 //            id={"emp_age_tab_pane"}
 //            aria-hidden={true}
 //          >
-//            <charts_indexGraphWithLegend panel={panel} options={avg_age_options}/>
+//            <D3GraphWithLegend panel={panel} options={avg_age_options}/>
 //            <div className='clearfix'></div>
 //          </div>,
 //        }}

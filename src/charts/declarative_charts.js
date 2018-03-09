@@ -100,7 +100,7 @@ class ProgressDonut extends React.Component {
   }
 }
 
-class charts_indexGraphWithLegend extends React.Component {
+class D3GraphWithLegend extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -327,7 +327,7 @@ class CirclePack extends React.Component {
 module.exports = exports = {
   StackedHbarChart,
   GraphLegend,
-  charts_indexGraphWithLegend,
+  D3GraphWithLegend,
   Bar,
   Line,
   A11YTable,
