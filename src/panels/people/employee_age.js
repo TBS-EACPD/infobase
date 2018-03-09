@@ -23,7 +23,6 @@ const emp_age_render = function(panel,data,options){
   const age_group_options = {
     legend_col_full_size: 4,
     graph_col_full_size: 8,
-    graph_col_class: "height-clipped-bar-area",
     ticks: ticks,
     y_axis: text_maker("employees"),
     bar: true,
