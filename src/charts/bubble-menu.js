@@ -29,6 +29,8 @@ class BubbleMenu extends React.Component {
       .selectAll('a')
       .data(this.props.items)
 
+    sel.exit().remove();
+
     sel.enter()
       .append('a')
       .style('height', d => d.active ? '300px' : '150px' )
