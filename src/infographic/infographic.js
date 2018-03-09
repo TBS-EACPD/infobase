@@ -33,10 +33,7 @@ const {
 
 const { infograph_href_template } = require('./routes.js');
 
-//these are stray panels not required anywhere on the app. 
-require('../panels/intro_graphs/intro_graphs.js');
-require('../panels/result_graphs/result_graphs.js');
-require('../panels/igoc/igoc_panel.js');
+
 
 const sub_app_name = "infographic_org";
 

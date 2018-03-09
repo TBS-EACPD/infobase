@@ -1,5 +1,10 @@
 import '../panels/welcome_mat/welcome_mat.js';
 
+
+import '../panels/intro_graphs/intro_graphs.js';
+import '../panels/result_graphs/result_graphs.js';
+import '../panels/igoc/igoc_panel.js';
+
 //transfer payments
 import "../panels/transfer_payments/last_year_g_and_c_perspective";
 import "../panels/transfer_payments/historical_g_and_c";
