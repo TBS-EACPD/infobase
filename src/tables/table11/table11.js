@@ -1,22 +1,24 @@
 import "./table11.ib.yaml";
 
-const {STATS, 
+import {STATS, 
   text_maker, 
   m, 
   Statistics, 
   formats, 
   people_five_year_percentage_formula,
-  business_constants : {
-    age_groups,
-    compact_age_groups, 
-    emp_age_map,
-  },
-  years : { 
-    people_years,
-    people_years_short_second,
-  },
-} = require("../table_common");
+  business_constants,
+  years,
+} from "../table_common";
 
+const {
+  age_groups,
+  compact_age_groups, 
+  emp_age_map,
+} = business_constants;
+const { 
+  people_years,
+  people_years_short_second,
+} = years;
 
 export default {
   "id": "table11",

@@ -21,24 +21,3 @@ table304:
     {{{gt "table304_short"}}}
 
     {{> ochro_includes_excludes_en}}
-
-avgage_graph_title:
-  transform: [handlebars]
-  en: Average Employee Age ({{ppl_last_year_5}} to {{ppl_last_year}})  
-  fr: Âge moyen des employés ({{ppl_last_year_5}} à {{ppl_last_year}}) 
-
-gov_avgage_graph_desc:
-  transform: [handlebars,markdown]
-  en: | 
-   From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, the average age of **Federal Public Service** employees **{{two_value_changed_to gov_avgage_last_year_5 gov_avgage_last_year "fmt_decimal1"}}**, with an average March-to-March change of **{{plus_or_minus_val gov_avgage_avg_change "fmt_decimal"}}**.
-  fr: |
-   De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, l’âge moyen des employés de la **fonction publique fédérale** **{{fr_two_value_changed_to gov_avgage_last_year_5 gov_avgage_last_year "f" "p" "fmt_decimal1"}}**, l’écart moyen de mars à mars étant **{{plus_or_minus_val gov_avgage_avg_change "fmt_decimal"}}**.
-
-dept_avgage_graph_desc:
-  transform: [handlebars,markdown]
-  en: |
-   From **{{dept_avgage_first_active_year}}** to **{{dept_avgage_last_active_year}}**, the average age of **{{subj_name subject}}** employees **{{two_value_changed_to dept_avgage_first_active_value dept_avgage_last_active_value "fmt_decimal1"}}**, with an average March-to-March change of **{{plus_or_minus_val dept_avgage_avg_change "fmt_decimal"}}**.
-   For comparison, from **{{dept_avgage_first_active_year}}** to **{{dept_avgage_last_active_year}}**, the average March-to-March change for the overall **Federal Public Service** was **{{plus_or_minus_val dept_gov_avgage_avg_change "fmt_decimal"}}**.
-   fr: |
-   De **{{dept_avgage_first_active_year}}** à **{{dept_avgage_last_active_year}}**, l’âge moyen des employés **{{de_dept dept}}** **{{fr_two_value_changed_to dept_avgage_first_active_value dept_avgage_last_active_value "f" "p" "fmt_decimal1"}}**, l’écart moyen de mars à mars étant **{{plus_or_minus_val dept_avgage_avg_change "fmt_decimal"}}**.
-   Aux fins de comparaison, de **{{dept_avgage_first_active_year}}** à **{{dept_avgage_last_active_year}}**, l’écart moyen de mars à mars pour l’ensemble de la **fonction publique fédérale** était **{{plus_or_minus_val dept_gov_avgage_avg_change "fmt_decimal"}}**.

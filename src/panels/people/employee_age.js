@@ -1,35 +1,38 @@
-const {formats,
+import "employee_age.ib.yaml";
+import {
+  formats,
   text_maker,
   run_template,
   PanelGraph,
-  years : {people_years},
-  business_constants : {
-    compact_age_groups, 
-  },
+  years,
+  business_constants,
   D3,
-  declarative_charts : {
-    D3GraphWithLegend,
-  },
-  reactAdapter} = require("../shared");
- 
+  declarative_charts,
+  reactAdapter,
+} from "../shared";
+
+const { people_years } = years;
+const { compact_age_groups } = business_constants;
+const { D3GraphWithLegend } = declarative_charts;
+
 const emp_age_render = function(panel,data,options){
   const { graph_args } = data;
   const ticks = _.map(people_years, y => `${run_template(y)}`);
   
   // Options for D3GraphWithLegend React components
   const age_group_options = {
-    legend_col_full_size : 4,
-    graph_col_full_size : 8,
-    graph_col_class : "height-clipped-bar-area",
-    ticks : ticks,
-    y_axis : text_maker("employees"),
-    bar : true,
-    stacked : false,
-    sort_data : false,
-    yaxis_formatter : formats["big_int_real_raw"],
-    get_data :  row => row.data, 
-    legend_title : "age_group",
-    data : graph_args.age_group,
+    legend_col_full_size: 4,
+    graph_col_full_size: 8,
+    graph_col_class: "height-clipped-bar-area",
+    ticks: ticks,
+    y_axis: text_maker("employees"),
+    bar: true,
+    stacked: false,
+    sort_data: false,
+    yaxis_formatter: formats["big_int_real_raw"],
+    get_data:  row => row.data, 
+    legend_title: "age_group",
+    data: graph_args.age_group,
   };
   
   if (!window.is_a11y_mode){
@@ -51,21 +54,21 @@ const emp_age_render = function(panel,data,options){
 
 new PanelGraph({
   level: "dept",
-  depends_on : ['table11'],
-  key : "historical_employee_age",
+  depends_on: ['table11'],
+  key: "employee_age",
   
   info_deps: [
     'table11_dept_info',
     'table11_gov_info',
   ],
 
-  layout : {
-    full : {text : 12, graph: 12},
-    half: {text : 12, graph: 12},
+  layout: {
+    full: {text: 12, graph: 12},
+    half: {text: 12, graph: 12},
   },
 
-  text: "dept_historical_employee_age_text_temporary_no_avg_age",
-  title: "historical_employee_age_title",
+  text: "dept_employee_age_text_temporary_no_avg_age",
+  title: "employee_age_title",
 
   calculate(dept){
     const {table11} = this.tables;
@@ -100,19 +103,19 @@ new PanelGraph({
 
 new PanelGraph({
   level: "gov",
-  depends_on : ['table11'],
+  depends_on: ['table11'],
   info_deps: [
     'table11_gov_info',
   ],
-  key : "historical_employee_age",
+  key: "employee_age",
 
-  layout : {
-    full : {text : 12, graph: 12},
-    half: {text : 12, graph: 12},
+  layout: {
+    full: {text: 12, graph: 12},
+    half: {text: 12, graph: 12},
   },
 
-  text: "gov_historical_employee_age_text_temporary_no_avg_age",
-  title: "historical_employee_age_title",
+  text: "gov_employee_age_text_temporary_no_avg_age",
+  title: "employee_age_title",
 
   calculate(gov,info){
     const {table11} = this.tables;
@@ -123,12 +126,12 @@ new PanelGraph({
       .value();
 
     const age_group = compact_age_groups.map(age_range => {
-      const yearly_values = people_years.map( year =>  table11.horizontal(year,false)[age_range]);
+      const yearly_values = people_years.map( year => table11.horizontal(year,false)[age_range]);
       return {
-        label : age_range,
+        label: age_range,
         active: true,
-        data : yearly_values,
-        five_year_percent : yearly_values.reduce(function(sum, val) { return sum + val;}, 0)/gov_five_year_total_head_count,
+        data: yearly_values,
+        five_year_percent: yearly_values.reduce(function(sum, val) { return sum + val }, 0)/gov_five_year_total_head_count,
       };
     })
     
@@ -250,7 +253,7 @@ new PanelGraph({
 //new PanelGraph({
 //  level: "dept",
 //  depends_on : ['table11', 'table304'],
-//  key : "historical_employee_age",
+//  key : "employee_age",
 //  
 //  info_deps: [
 //    'table11_dept_info',
@@ -264,8 +267,8 @@ new PanelGraph({
 //    half: {text : 12, graph: 12},
 //  },
 //
-//  text: "dept_historical_employee_age_text",
-//  title: "historical_employee_age_title",
+//  text: "dept_employee_age_text",
+//  title: "employee_age_title",
 //
 //  calculate(dept){
 //    const {table11} = this.tables;
@@ -322,15 +325,15 @@ new PanelGraph({
 //    'table11_gov_info',
 //    'table304_gov_info',
 //  ],
-//  key : "historical_employee_age",
+//  key : "employee_age",
 //
 //  layout : {
 //    full : {text : 12, graph: 12},
 //    half: {text : 12, graph: 12},
 //  },
 //
-//  text: "gov_historical_employee_age_text",
-//  title: "historical_employee_age_title",
+//  text: "gov_employee_age_text",
+//  title: "employee_age_title",
 //
 //  calculate(gov,info){
 //    const {table11} = this.tables;
