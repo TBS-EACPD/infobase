@@ -1,39 +1,42 @@
-const {
+import "employee_executive_level.ib.yaml";
+import {
   formats,
   text_maker,
   run_template,
   PanelGraph,
-  years: {people_years},
-  business_constants: {
-    ex_levels, 
-  },
-  D3} = require("../shared"); 
+  years,
+  business_constants,
+  D3,
+} from "../shared"; 
+
+const { people_years } = years;
+const { ex_levels } = business_constants;
 
 const exec_level_render = function(panel,data){
-  const {graph_args} = data;
+  const { graph_args } = data;
   
-  let ticks =_.map(people_years, y => `${run_template(y)}`);
+  let ticks = _.map(people_years, y => `${run_template(y)}`);
   let graph_data = graph_args;
 
   if (window.is_a11y_mode){
     ticks = [...ticks, text_maker("five_year_percent_header")];
     graph_data = _.map(graph_args, dimension => { 
-      return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]} 
+      return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]};
     });
   }
 
   return D3.create_graph_with_legend.call({panel},{
-    legend_class : 'fcol-sm-11 fcol-md-11', 
-    y_axis : text_maker("employees"),
-    ticks : ticks,
-    height : this.height,
-    bar : true,
+    legend_class: 'fcol-sm-11 fcol-md-11', 
+    y_axis: text_maker("employees"),
+    ticks: ticks,
+    height: this.height,
+    bar: true,
     colors: infobase_colors(),
-    yaxis_formatter : formats["big_int_real_raw"],
-    legend_title : "ex_level",
-    get_data :  function(row){ return row.data; },
-    data : graph_data,
-    "sort_data" : false,
+    yaxis_formatter: formats["big_int_real_raw"],
+    legend_title: "ex_level",
+    get_data: function(row){ return row.data },
+    data: graph_data,
+    "sort_data": false,
   }); 
 
 };
@@ -41,7 +44,7 @@ const exec_level_render = function(panel,data){
 new PanelGraph({
   level: "dept",
   depends_on: ['table112'],
-  key: "historical_employee_executive_level",
+  key: "employee_executive_level",
 
   info_deps: [
     'table112_gov_info',
@@ -53,8 +56,8 @@ new PanelGraph({
     half: {text: 12, graph: [12,12]},
   },
 
-  text :  "dept_historical_employee_executive_level_text",
-  title : "historical_employee_executive_level_title",
+  text:  "dept_employee_executive_level_text",
+  title: "employee_executive_level_title",
 
   calculate(dept, info){
     const {table112} = this.tables;
@@ -77,7 +80,7 @@ new PanelGraph({
 new PanelGraph({
   level: "gov",
   depends_on: ['table112'],
-  key: "historical_employee_executive_level",
+  key: "employee_executive_level",
 
   info_deps: [
     'table112_gov_info',
@@ -88,8 +91,8 @@ new PanelGraph({
     half: {text: 12, graph: [12,12]},
   },
 
-  text: "gov_historical_employee_executive_level_text",
-  title: "historical_employee_executive_level_title",
+  text: "gov_employee_executive_level_text",
+  title: "employee_executive_level_title",
 
   calculate(gov,info){
     const {table112} = this.tables;
@@ -107,7 +110,7 @@ new PanelGraph({
         return {
           label: ex_level_name,
           data: yearly_values,
-          five_year_percent : yearly_values.reduce(function(sum, val) { return sum + val;}, 0)/gov_five_year_total_head_count,
+          five_year_percent : yearly_values.reduce(function(sum, val) { return sum + val }, 0)/gov_five_year_total_head_count,
           active: (ex_level_name !== "Non-EX"),
         };
       })

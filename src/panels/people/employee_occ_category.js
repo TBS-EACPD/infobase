@@ -52,7 +52,7 @@ const occ_cat_render = function(panel,data){
       label_col_header: text_maker("age_group"), 
       data_col_headers: [...ticks, text_maker("five_year_percent_header")], 
       data: _.map(graph_args, dimension => { 
-        return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]} 
+        return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]};
       }),
     });
   }
