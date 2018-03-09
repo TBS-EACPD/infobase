@@ -1,6 +1,3 @@
-"use strict";
-exports = module.exports;
-
 import "./table304.ib.yaml";
 
 const {
@@ -10,7 +7,7 @@ const {
   years : { people_years, people_years_short_second },
 } = require("../table_common");
 
-module.exports = {
+export default {
   "id": "table304",
   source: ["RPS"],
   "tags" : [

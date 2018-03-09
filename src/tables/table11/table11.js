@@ -1,6 +1,7 @@
 import "./table11.ib.yaml";
 
-import {STATS, 
+import {
+  STATS, 
   text_maker, 
   m, 
   Statistics, 
