@@ -60,37 +60,3 @@ dept_historical_auth_exp_text:
 
    Au cours des cinq dernières années **{{le_dept dept}}** a dépensé en moyenne **{{fmt_compact_written dept_hist_diff_average}}** de moins par exercice que le montant autorisé par le Parlement. En moyenne, les autorités non utilisées représentaient **{{fmt_percentage1 dept_hist_avg_tot_pct}}**  des autorités approuvées.
   
-
-dept_historical_voted_spending_title: 
-  transform: [handlebars]
-  en: Detailed Net Authorities by Voted Items ({{pa_last_year_5}} to {{pa_last_year}})
-  fr: Détail des autorisations nettes par crédits ministériels votés ({{pa_last_year_5}} à {{pa_last_year}})
-dept_historical_voted_spending_text: 
-  transform: [handlebars,markdown]
-  en: |
-   From {{pa_last_year_5}} to {{pa_last_year}}, **{{subj_name subject}}** had average voted 
-   authorities of **{{fmt_compact_written dept_voted_five_year_auth_average}}** per year, with the highest being
-   in {{fmt_compact_written dept_voted_five_year_auth_max_year}} (**{{fmt_compact_written dept_voted_five_year_auth_max}}**) and
-   the lowest being in {{fmt_compact_written dept_voted_five_year_auth_min_year}} (**{{fmt_compact_written dept_voted_five_year_auth_min}}**).
-
-  fr: |
-   Entre {{pa_last_year_5}} et {{pa_last_year}}, **{{le_dept dept}}** s’est vu accorder en moyenne des 
-   autorisations votées de **{{fmt_compact_written dept_voted_five_year_auth_average}}** par année, les plus fortes autorisations (**{{fmt_compact_written dept_voted_five_year_auth_max}}**) ayant été 
-   reçues en {{fmt_compact_written dept_voted_five_year_auth_max_year}}, et les moins élevées (**{{fmt_compact_written dept_voted_five_year_auth_min}}**) en {{fmt_compact_written dept_voted_five_year_auth_min_year}}.
-
-dept_historical_stat_spending_title: 
-  transform: [handlebars]
-  en:  Detailed Net Authorities by Statutory Items ({{pa_last_year_5}} to {{pa_last_year}})
-  fr:  Détail des autorisations nettes par secteur de dépenses législatives ({{pa_last_year_5}} à {{pa_last_year}})
-dept_historical_stat_spending_text: 
-  transform: [handlebars,markdown]
-  en: |
-   From {{pa_last_year_5}} to {{pa_last_year}}, **{{subj_name subject}}** had average statutory 
-   authorities of **{{fmt_compact_written dept_stat_five_year_auth_average}}** per year, with the highest being
-   in {{fmt_compact_written dept_stat_five_year_auth_max_year}} (**{{fmt_compact_written dept_stat_five_year_auth_max}}**) and
-   the lowest being in  {{fmt_compact_written dept_stat_five_year_auth_min_year}} (**{{fmt_compact_written dept_stat_five_year_auth_min}}**).
-  fr: |
-   Entre {{pa_last_year_5}} et {{pa_last_year}}, **{{le_dept dept}}** s’est vu accorder en moyenne des 
-   autorisations législatives de **{{fmt_compact_written dept_stat_five_year_auth_average}}** par année, les plus fortes autorisations (**{{fmt_compact_written dept_stat_five_year_auth_max}}**) ayant été 
-   reçues en {{fmt_compact_written dept_stat_five_year_auth_max_year}}, et les moins élevées (**{{fmt_compact_written dept_stat_five_year_auth_min}}**) en {{fmt_compact_written dept_stat_five_year_auth_min_year}}.
-

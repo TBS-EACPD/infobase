@@ -1,14 +1,14 @@
-import { run_template } from "./shared";
-
-const {
+import './vote-stat-text.ib.yaml';
+import {
   formats,
   PanelGraph,
   D3,
   text_maker,
-  util_components: {
-    Format,
-  },
-} = require("./shared"); 
+  util_components,
+  run_template,
+} from "../shared";
+
+const { Format } = util_components;
 
 const estimates_split_calculate = function(subject, info,options){
   const in_year_estimates_split = info[subject.level+"_in_year_estimates_split"];

@@ -1,3 +1,4 @@
+import './vote-stat-text.ib.yaml';
 import classNames from 'classnames';
 const {
   Subject,
@@ -17,7 +18,7 @@ const {
     CirclePack,
   },
   infograph_href_template,
-} = require("./shared"); 
+} = require("../shared"); 
 
 const main_col = "{{est_in_year}}_estimates";
 

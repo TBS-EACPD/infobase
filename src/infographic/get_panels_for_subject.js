@@ -1,6 +1,8 @@
+//transfer payments
 import "../panels/transfer_payments/last_year_g_and_c_perspective";
 import "../panels/transfer_payments/historical_g_and_c";
 
+//ppl panels
 import "../panels/people/employee_last_year_totals";
 import "../panels/people/employee_totals";
 import "../panels/people/employee_type";
@@ -10,6 +12,14 @@ import "../panels/people/employee_occ_category";
 import "../panels/people/employee_executive_level";
 import "../panels/people/employee_gender";
 import "../panels/people/employee_fol";
+
+//vote-stat
+import "../panels/vote-stat/in_year_estimates";
+import "../panels/vote-stat/in_year_estimates_split";
+import "../panels/vote-stat/in_year_vote_stat_split";
+import "../panels/vote-stat/in_year_vote-stat_breakdown";
+import "../panels/vote-stat/last_year_vote_stat_split";
+
 
 import { PanelGraph } from '../core/graphs.js';
 

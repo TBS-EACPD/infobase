@@ -1,11 +1,8 @@
 // see [here](../table_definition.html) for description
 // of the table spec
 exports = module.exports;
+require('../../common_text/estimates_lang.ib.yaml');
 require("./table8.ib.yaml");
-require("../../panels/in_year_estimates");
-require("../../panels/in_year_estimates_split");
-require("../../panels/in_year_vote_stat_split");
-require("../../panels/in_year_vote-stat_breakdown");
 var FORMAT = require('../../core/format');
 
 const {

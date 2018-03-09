@@ -1,8 +1,8 @@
-const {
+import './vote-stat-text.ib.yaml';
+import {
   PanelGraph,
   common_react_donut,
-} = require("./shared"); 
-
+} from "../shared";
 
 new PanelGraph({
   key: 'vote_stat_split',

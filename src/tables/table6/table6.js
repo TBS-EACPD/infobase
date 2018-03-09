@@ -7,7 +7,6 @@ require('../../panels/historical_auth_exp');
 require('../../panels/top_3_dept_graph');
 require('../../panels/spending_in_perspective');
 
-require("../../panels/last_year_vote_stat_split");
 require('../../panels/planned_program_spending');
 require('../../panels/planned_prgm_crso_split');
 require('../../panels/crso_program_resources.js');

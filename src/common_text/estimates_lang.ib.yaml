@@ -1,0 +1,24 @@
+est_doc_mains:
+  en: Main Estimates
+  fr: Budget principal
+est_doc_im:
+  en: Interim Estimates
+  fr: Budget provisoire
+est_doc_mya:
+  en: Multi Year Appropriations
+  fr: Crédits disponibles des précédents exercices
+est_doc_va:
+  en: Voted Adjustments
+  fr: Réajustement votés
+est_doc_sa:
+  en: Statutory Adjustments
+  fr: Réajustements législatifs
+est_doc_sea:
+  en: Supp. Estimates A
+  fr: Budget supp. A
+est_doc_seb:
+  en: Supp. Estimates B
+  fr: Budget supp. B
+est_doc_sec:
+  en: Supp. Estimates C
+  fr: Budget supp. C

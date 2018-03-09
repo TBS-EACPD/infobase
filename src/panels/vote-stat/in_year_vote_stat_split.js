@@ -1,8 +1,9 @@
-const {
+import './vote-stat-text.ib.yaml';
+import {
   text_maker,
   common_react_donut,
   PanelGraph,
-} = require("./shared"); 
+} from "../shared";
 
 new PanelGraph({
   level: "dept",

@@ -1,10 +1,14 @@
-const {
+import './vote-stat-text.ib.yaml';
+import {
   formats,
   text_maker,
   run_template,
   PanelGraph,
-  years : {estimates_years},
-  D3} = require("./shared"); 
+  years,
+  D3,
+} from "../shared";
+
+const { estimates_years } = years;
 
 const common_calc = function( subject,info,options) {
   const {table8} = this.tables;
