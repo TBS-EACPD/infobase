@@ -60,7 +60,7 @@ const get_people_panels = subject => {
     "employee_prov",
     "employee_type",
     "employee_age",
-    //"historical_employee_occ_category",
+    //"employee_occ_category",
     //"historical_employee_executive_level",
     //"historical_employee_fol",
     //"historical_employee_gender",

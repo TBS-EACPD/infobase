@@ -1,0 +1,26 @@
+employee_occ_category_title:
+  transform: [handlebars]
+  en: Population by Occupational Category ({{ppl_last_year_5}} to {{ppl_last_year}})
+  fr: Population selon la catégorie professionnelle ({{ppl_last_year_5}} à {{ppl_last_year}})
+
+gov_employee_occ_category_text:
+  transform: [handlebars,markdown]
+  en: |
+   From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, employees classified in the **{{fmt_big_int_real gov_head_count_occ_cat_top}}** {{gl_tt "category" "OC_PEOPLE"}} accounted for the largest average share of the **Federal Public Service**, representing, on average, **{{fmt_percentage1 gov_head_count_occ_cat_top_avg_percent}}** of the employee population.
+   
+   Over this data period, the **Executive and Law Management** category accounted for an average of **{{fmt_percentage1 gov_head_count_occ_cat_avg_share_ex}}** of the **Federal Public Service**. 
+  fr: |
+   De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, les employés classifiés dans la {{gl_tt "catégorie" "OC_PEOPLE"}} **« {{fmt_big_int_real gov_head_count_occ_cat_top}} »** constituaient en moyenne la plus grande partie de l'effectif de la **fonction publique fédérale**, soit en moyenne **{{fmt_percentage1 gov_head_count_occ_cat_top_avg_percent}}** de l’effectif.
+   
+   Au cours de cette période, la catégorie **« cadres supérieurs et gestion du droit »** représentait en moyenne **{{fmt_percentage1 gov_head_count_occ_cat_avg_share_ex}}** de la **fonction publique fédérale**.
+
+dept_employee_occ_category_text:
+  transform: [handlebars,markdown]
+  en: |
+   From **{{fmt_big_int_real dept_head_count_occ_cat_first_active_year}}** to **{{fmt_big_int_real dept_head_count_occ_cat_last_active_year}}**, employees classified in the **{{fmt_big_int_real dept_head_count_occ_cat_top}}** {{gl_tt "category" "OC_PEOPLE"}} accounted for the largest average share of **{{subj_name subject}}**, representing, on average, **{{fmt_percentage1 dept_head_count_occ_cat_top_avg_percent}}** of employees.
+   
+   Over this data period, employees in the **Executive and Law Management** category accounted for an average of  **{{fmt_percentage1 dept_head_count_occ_cat_avg_share_ex}}** of **{{subj_name subject}}**.  
+  fr: |
+   De **{{fmt_big_int_real dept_head_count_occ_cat_first_active_year}}** à **{{fmt_big_int_real dept_head_count_occ_cat_last_active_year}}**, les employés classifiés dans la {{gl_tt "catégorie" "OC_PEOPLE"}} **« {{fmt_big_int_real dept_head_count_occ_cat_top}} »** constituaient en moyenne la plus grande partie de l'effectif **{{de_dept dept}}**, soit en moyenne **{{fmt_percentage1 dept_head_count_occ_cat_top_avg_percent}}** de l’effectif.
+   
+   Au cours de cette période, la catégorie **« cadres supérieurs et gestion du droit »** représentait en moyenne **{{fmt_percentage1 gov_head_count_occ_cat_avg_share_ex}}** **{{de_dept dept}}**.

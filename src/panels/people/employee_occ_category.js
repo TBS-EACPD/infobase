@@ -1,4 +1,5 @@
-const {
+import "employee_occ_category.ib.yaml";
+import {
   formats,
   text_maker,
   run_template,
@@ -6,11 +7,12 @@ const {
   create_ppl_share_pie,
   create_height_clipped_graph_with_legend,
   D3,
-  years: {people_years},
-  business_constants: {
-    occupational_categories,
-  },
-} = require("../shared"); 
+  years,
+  business_constants,
+} from "../shared"; 
+
+const { people_years } = years;
+const { occupational_categories } = business_constants;
 
 const occ_cat_render = function(panel,data){
   const { graph_args } = data;
@@ -20,18 +22,18 @@ const occ_cat_render = function(panel,data){
   if (!window.is_a11y_mode){
     if (this.level === "dept"){
       const create_graph_with_legend_options = {
-        legend_col_full_size : 4,
-        graph_col_full_size : 8,
-        graph_col_class : "height-clipped-bar-area",
-        legend_class : 'fcol-sm-11 fcol-md-11',
-        y_axis : text_maker("employees"),
-        ticks : ticks,
-        height : this.height,
-        bar : true,
-        yaxis_formatter : formats["big_int_real_raw"],
-        legend_title : "occupational_cat",
-        get_data :  function(row){ return row.data; },
-        data : graph_args,
+        legend_col_full_size: 4,
+        graph_col_full_size: 8,
+        graph_col_class: "height-clipped-bar-area",
+        legend_class: 'fcol-sm-11 fcol-md-11',
+        y_axis: text_maker("employees"),
+        ticks: ticks,
+        height: this.height,
+        bar: true,
+        yaxis_formatter: formats["big_int_real_raw"],
+        legend_title: "occupational_cat",
+        get_data: function(row){ return row.data },
+        data: graph_args,
       };     
       
       // Inserts new row under the text/pie chart row containing bar graph, collapsed by a HeightCliper.
@@ -42,7 +44,7 @@ const occ_cat_render = function(panel,data){
     create_ppl_share_pie({
       pie_area: panel.areas().graph,
       graph_args, 
-      label_col_header : text_maker("occupational_cat"),
+      label_col_header: text_maker("occupational_cat"),
     });
   } else {
     D3.create_a11y_table({
@@ -58,7 +60,7 @@ const occ_cat_render = function(panel,data){
 
 new PanelGraph({
   level: "dept",
-  key: "historical_employee_occ_category",
+  key: "employee_occ_category",
   depends_on: ['table111'],
 
   info_deps: [
@@ -71,8 +73,8 @@ new PanelGraph({
     half: {text: 12, graph: 12},
   },
 
-  text:  "dept_historical_employee_occ_category_text",
-  title: "historical_employee_occ_category_title",
+  text:  "dept_employee_occ_category_text",
+  title: "employee_occ_category_title",
 
   calculate(dept, info){
     const {table111} = this.tables;
@@ -98,7 +100,7 @@ new PanelGraph({
 
 new PanelGraph({
   level: "gov",
-  key: "historical_employee_occ_category",
+  key: "employee_occ_category",
 
   info_deps: [
     'table111_gov_info',
@@ -111,8 +113,8 @@ new PanelGraph({
     half: {text: 12, graph: 12},
   },
 
-  text: "gov_historical_employee_occ_category_text",
-  title: "historical_employee_occ_category_title",
+  text: "gov_employee_occ_category_text",
+  title: "employee_occ_category_title",
 
   calculate(gov, info){
     const {table111} = this.tables;
@@ -130,7 +132,7 @@ new PanelGraph({
         return {
           label: occupational_category,
           data: yearly_values,
-          five_year_percent: yearly_values.reduce(function(sum, val) { return sum + val;}, 0)/gov_five_year_total_head_count,
+          five_year_percent: yearly_values.reduce(function(sum, val) { return sum + val }, 0)/gov_five_year_total_head_count,
           active: true,
         };
       })
