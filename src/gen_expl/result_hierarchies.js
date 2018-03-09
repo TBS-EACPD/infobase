@@ -1,3 +1,6 @@
+import { get_resources_for_subject } from './resource_utils.js';
+import { Table } from '../core/TableClass.js';
+
 const Subject = require('../models/subject.js');
 const { 
   Dept, 
@@ -34,47 +37,30 @@ function result_to_node(result, parent_id, doc){
 }
 
 const get_sub_program_resources = (sub_program, doc) => ({
-  data: (
-    doc === 'drr16' ? 
-    _.pick(sub_program, [
-      "spend_pa_last_year",
-      "fte_pa_last_year",
-      "planned_spend_pa_last_year",
-      "planned_fte_pa_last_year",
-    ]) :
-    _.pick(sub_program, [
-      "spend_planning_year_1",
-      "spend_planning_year_2",
-      "spend_planning_year_3", 
-      "fte_planning_year_1", 
-      "fte_planning_year_2", 
-      "fte_planning_year_3",
-    ])
+  spending: (
+    doc === "drr16" ?
+    sub_program.spend_pa_last_year :
+    sub_program.spend_planning_year_1
   ),
-  footnotes: (
-    _.chain( 
-      doc === 'drr16' ? 
-      [ 
-
-      ] : [
-        'dp_no_spending_expl',
-        'dp_spend_trend_expl',
-        'dp_no_fte_expl',
-        'dp_fte_trend_expl',
-      ]
-    )
-      .map(key => sub_program[key])
-      .compact()
-      .map( txt => marked(txt, { 
-        sanitize: false, 
-        gfm: true,
-      }))
-      .value()
+  ftes: (
+    doc === "drr16" ? 
+    sub_program.fte_pa_last_year :
+    sub_program.fte_planning_year_1
   ),
 });
-  
+
 
 export function create_full_results_hierarchy({subject_guid, doc, allow_no_result_branches}){
+
+
+  const table6 = Table.lookup('table6');
+  const table12 = Table.lookup('table12');
+  const year = (
+    doc === 'dp17' ? 
+    '{{planning_year_1}}' : 
+    '{{pa_last_year}}'
+  );
+  const get_resources = subject => get_resources_for_subject(subject, table6,table12,year);
 
   const root_subject = Subject.get_by_guid(subject_guid);
 
@@ -190,6 +176,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
                 subject: crso,
                 type: 'cr',
                 name: crso.name,
+                resources: get_resources(crso),
               }, 
             }))
             .value()
@@ -204,6 +191,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
               subject: prog,
               type: 'program',
               name: prog.name,
+              resources: get_resources(prog),
             }, 
           }));
 
@@ -220,6 +208,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
             name: prog.name,
             subject: prog,
             type: 'program',
+            resources: get_resources(prog),
           }, 
         }));
 
@@ -239,6 +228,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
             name: prog.name,
             subject: prog,
             type: 'program',
+            resources: get_resources(prog),
           }, 
         }));
 

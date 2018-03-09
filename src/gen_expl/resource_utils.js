@@ -1,9 +1,7 @@
-const { 
-  planned_resource_fragment,
-} = require('../panels/result_graphs/results_common.js');
+import { planned_resource_fragment } from '../panels/result_graphs/results_common.js';
 
 
-function get_resources_for_subject(subject, table6, table12, year){
+export function get_resources_for_subject(subject, table6, table12, year){
   const fragment = planned_resource_fragment({subject, table6, table12});
 
 
@@ -19,8 +17,4 @@ function get_resources_for_subject(subject, table6, table12, year){
   } else {
     return null;
   }
-}
-
-module.exports = exports = {
-  get_resources_for_subject,
 }

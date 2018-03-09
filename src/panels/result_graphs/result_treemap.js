@@ -432,8 +432,10 @@ const title_key = "result_treemap_title";
 _.each(['program','dept','crso'], lvl => {
 
   new PanelGraph({
+    source: false,
     level: lvl,
     footnotes: false,
+    depends_on: ["table6", "table12"],
     requires_results: true,
     key: "explore_results",
     layout: {

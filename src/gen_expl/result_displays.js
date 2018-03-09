@@ -1,3 +1,5 @@
+import { createSelector } from 'reselect';
+
 const { text_maker } = require('../models/text.js');
 const { abbrev } = require('../core/utils.js');
 const classNames = require('classnames');
@@ -14,95 +16,39 @@ const {
   TM,
   FirstChild,
   AccordionEnterExit,
-  Select,
+  Format,
 } = require('../util_components.js');
 
 
+const spending_header = createSelector(
+  doc => doc, 
+  doc => (
+    <TextMaker 
+      text_key={
+        doc === 'dp17' ?
+        "tag_nav_exp_header_dp17" :
+        'tag_nav_exp_header_drr16' 
+      }
+    />
+  )
+);
 
-const results_sidebar = ({
-  arrangement,
-  include_PAA,
-  include_DRF,
-  include_POs,
-  include_dp,
-  include_drr_met,
-  include_drr_not_met,
-  paa_org_count,
-  drf_org_count,
-  set_arrangement,
-  toggle_include_PAA,
-  toggle_include_DRF,
-}) => (
-  <div>
-    <div>
-      <label>
-        Arrange by 
-        <Select
-          selected={arrangement}
-          options={[
-            {id: 'simple', display: 'Condensed Scheme : Min > CRSO > results'},
-            {id: 'granular', display: 'Lowest Level (as per DP/DRR)'},
-          ]}
-          style={{fontSize:'1em'}}
-          className="form-control"
-          onSelect={id => set_arrangement(id) }
-        />
-      </label>
-    </div>
-    <div className="checkbox">
-      <label>
-        <input type="checkbox" checked={include_DRF} onChange={toggle_include_DRF} />
-        DFR ({drf_org_count} <TextMaker text_key="orgs" /> )
-      </label>
-    </div>
-    <div className="checkbox">
-      <label>
-        <input type="checkbox" checked={include_PAA} onChange={toggle_include_PAA}/>
-        PAA ({paa_org_count} <TextMaker text_key="orgs" /> )
-      </label>
-    </div>
-    <div className="checkbox">
-      <label>
-        <input type="checkbox" value=""/>
-        Planned Results 2017-18
-      </label>
-    </div>
-    <div className="checkbox">
-      <label>
-        <input type="checkbox" value=""/>
-        Actual Results 2016-17
-      </label>
-    </div>
-    <ul style={{listStyle:'none',paddingLeft:'20px'}}>
-      <li>
-        <div className="checkbox">
-          <label>
-            <input type="checkbox" value="" />
-              Met
-          </label>
-        </div>
-      </li>
-      <li>
-        <div className="checkbox">
-          <label>
-            <input type="checkbox" value=""/>
-              Not met
-          </label>
-        </div>
-      </li>
-      <li>
-        <div className="checkbox">
-          <label>
-            <input type="checkbox" value=""/>
-              In progress
-          </label>
-        </div>
-      </li>
-    </ul>
-  </div>
-)
+const fte_header = createSelector(
+  doc => doc,
+  doc => (
+    <TextMaker 
+      text_key={
+        doc === 'dp17' ?
+        "tag_nav_fte_header_dp17" :
+        'tag_nav_fte_header_drr16' 
+      }
+    />
+  )
+);
 
-const get_type_header = node => {
+
+
+export const get_type_header = node => {
   switch(node.data.type){
     case 'dept': 
       return text_maker('orgs');
@@ -133,9 +79,7 @@ const get_type_header = node => {
   }
 };
 
-const create_result_tree_content_renderer = ({
-  root_renderer,
-}) => props => {
+export const result_tree_content_renderer = props => {
   const {
     node,
     node: {
@@ -145,6 +89,7 @@ const create_result_tree_content_renderer = ({
         result,
         type,
         name,
+        resources,
       },
       isExpanded,
       is_search_match,
@@ -268,6 +213,17 @@ const create_result_tree_content_renderer = ({
           >
             {isExpanded &&
               <div className="xplorer-node-inner-collapsible-content">
+                { resources &&
+                  <dl 
+                    className="dl-horizontal"
+                    style={{fontSize: "0.8em"}}
+                  >
+                    <dt> {spending_header(doc) } </dt>
+                    <dd> <Format type="compact1" content={resources.spending} /> </dd>
+                    <dt> {fte_header(doc) } </dt>
+                    <dd> <Format type="big_int_real" content={resources.ftes} /> </dd>
+                  </dl>
+                }
                 { _.includes(['program','dept', 'cr', 'so'], type) && 
                    <div className='xplorer-node-expanded-content'>
                      <a href={infograph_href_template(subject)}> 
@@ -291,25 +247,8 @@ const create_result_tree_content_renderer = ({
 
 }
 
-const standard_root_display = ({node, children}) => {
-  return <div>
-    <FlipMove
-      staggerDurationBy="0"
-      duration={500}
-      typeName="div"
-    > 
-      {_.map(children, ({element, node}) => 
-        <div key={node.id}>
-          {element}
-        </div>
-      )}
-    </FlipMove>
-  </div>
 
-
-}
-
-const single_subj_root_display = ({node, children}) => {
+const root_renderer = ({node, children}) => {
 
   return (
     <div>
@@ -380,12 +319,3 @@ const ResultNodeContent = ({
     }
   </div>
 );
-
-
-module.exports = {
-  standard_root_display,
-  create_result_tree_content_renderer,
-  results_sidebar,
-  single_subj_root_display,
-  get_type_header,
-};
