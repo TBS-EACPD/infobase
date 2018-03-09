@@ -16,7 +16,7 @@ var D3 = require("../../core/D3");
 var HEATMAP = D3.HEATMAP;
 var HBAR = D3.HBAR;
 
-const PanelGraph = require('../../core/graphs.js').PanelGraph;
+const { PanelGraph } = require('../../core/PanelGraph.js');
 
 const {text_maker} = require("../../models/text");
 const {run_template} = require('../../models/text');

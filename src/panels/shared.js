@@ -1,7 +1,7 @@
 exports = module.exports
 const {text_maker, run_template } = require( "../models/text");
 const {formats} = require('../core/format.js');
-const {PanelGraph, layout_types} = require("../core/graphs.js");
+const {PanelGraph, layout_types} = require("../core/PanelGraph.js");
 const { reactAdapter } = require('../core/reactAdapter');
 const { 
   HeightClipper,

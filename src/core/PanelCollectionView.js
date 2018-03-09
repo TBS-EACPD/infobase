@@ -1,7 +1,7 @@
 import withRouter from 'react-router/withRouter';
 
 const { shallowEqualObjectsOverKeys } = require('./utils.js');
-const { PanelGraph } = require('../core/graphs.js');
+const { PanelGraph } = require('../core/PanelGraph.js');
 
 export const ReactPanelGraph = withRouter(
   class ReactPanelGraph_ extends React.Component {

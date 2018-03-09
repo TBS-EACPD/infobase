@@ -48,7 +48,7 @@ import '../panels/drr_dp_resources/planned_prgm_crso_split.js';
 import '../panels/drr_dp_resources/crso_program_resources.js';
 import '../panels/drr_dp_resources/spending_in_perspective.js';
 
-import { PanelGraph } from '../core/graphs.js';
+import { PanelGraph } from '../core/PanelGraph.js';
 
 const get_people_panels = subject => {
   const is_gov = subject.level === "gov";

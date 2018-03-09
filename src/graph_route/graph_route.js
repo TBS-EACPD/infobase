@@ -13,7 +13,7 @@ const {
   EverythingSearch,
 }  = require('../util_components.js');
 
-var PanelGraph = require('../core/graphs').PanelGraph;
+const {PanelGraph} = require('../core/PanelGraph');
 
 function url_template(subject, graph){
   return `#graph/${subject.constructor.type_name}/${graph.key}/${subject.id}/`
