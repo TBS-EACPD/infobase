@@ -1,14 +1,20 @@
 import "./table303.ib.yaml";
 
-const {
+import {
   STATS, 
   text_maker, 
   m, 
   Statistics,
   people_five_year_percentage_formula,
-  business_constants : { fol },
-  years : { people_years, people_years_short_second },
-} = require("../table_common");
+  business_constants,
+  years,
+} from "../table_common";
+
+const { fol } = business_constants;
+const { 
+  people_years, 
+  people_years_short_second,
+} = years;
 
 export default {
   "id": "table303",
@@ -36,23 +42,23 @@ export default {
 
   "add_cols" : function(){
     this.add_col({
-      "type":"int",
-      "key" : true,
-      "hidden" : true,
-      "nick" : "dept",
-      "header":'',
+      "type": "int",
+      "key": true,
+      "hidden": true,
+      "nick": "dept",
+      "header": '',
     });
     this.add_col({
-      "key" : true,
+      "key": true,
       "type": "int",
-      "nick" : 'fol',
+      "nick": 'fol',
       "header": text_maker("FOL"),
     });
     _.each(people_years,(header,ix)=>{
       this.add_col({
         "simple_default": ix === 4,
-        "type":"big_int_real",
-        "nick":header,
+        "type": "big_int_real",
+        "nick": header,
         "header": m("{{mar_31}}") + ", " + people_years_short_second[ix],
         "description": {
           "en": "Corresponds to the active employee population by First Official Language, as of March 31 " + people_years_short_second[ix],
@@ -68,12 +74,12 @@ export default {
         "en": text_maker("five_year_percent_description"),
         "fr": text_maker("five_year_percent_description"),
       },
-      "formula"  : people_five_year_percentage_formula("fol",people_years),
+      "formula": people_five_year_percentage_formula("fol",people_years),
     });
   },
 
-  "queries" : {
-    "gov_grouping" : function() {
+  "queries": {
+    "gov_grouping": function() {
       return _.chain(this.table.horizontal(people_years,false))
         .map(function(people_years, key){
           return [key].concat(people_years);
@@ -90,10 +96,10 @@ export default {
     return row;
   },
 
-  "dimensions" : [
+  "dimensions": [
     {
-      title_key :"horizontal",
-      include_in_report_builder : true,
+      title_key: "horizontal",
+      include_in_report_builder: true,
 
       filter_func: function(options){
         return function(row){

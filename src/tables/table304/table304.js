@@ -1,11 +1,16 @@
 import "./table304.ib.yaml";
 
-const {
+import {
   text_maker, 
   m, 
   Statistics, 
-  years : { people_years, people_years_short_second },
-} = require("../table_common");
+  years,
+} from "../table_common";
+
+const {
+  people_years,
+  people_years_short_second,
+} = years;
 
 export default {
   "id": "table304",

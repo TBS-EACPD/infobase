@@ -62,7 +62,7 @@ const get_people_panels = subject => {
     "employee_age",
     //"employee_occ_category",
     //"employee_executive_level",
-    //"historical_employee_fol",
+    //"employee_fol",
     //"employee_gender",
     is_gov && "ppl_open_data_info",
   ];

@@ -1,4 +1,5 @@
-const {
+import "employee_fol.ib.yaml";
+import {
   formats,
   text_maker,
   run_template,
@@ -6,9 +7,12 @@ const {
   create_ppl_share_pie,
   create_height_clipped_graph_with_legend,
   D3,
-  years: {people_years},
-  business_constants: { fol },
-} = require("../shared"); 
+  years,
+  business_constants,
+} from "../shared"; 
+
+const { people_years } = years;
+const { fol } = business_constants;
 
 const employee_fol_render = function(panel, data){
   const {graph_args} = data;
@@ -58,7 +62,7 @@ new PanelGraph({
   level: "dept",
   depends_on: ['table303'],
 
-  key: "historical_employee_fol",
+  key: "employee_fol",
 
   info_deps: [
     'table303_dept_info',
@@ -69,8 +73,8 @@ new PanelGraph({
     half: {text: 12, graph: 12},
   },
 
-  text: "dept_historical_employee_fol_text",
-  title: "historical_employee_fol_title",
+  text: "dept_employee_fol_text",
+  title: "employee_fol_title",
 
   calculate(dept,info){
     const {table303} = this.tables;
@@ -92,7 +96,7 @@ new PanelGraph({
 new PanelGraph({
   level: "gov",
   depends_on: ['table303'],
-  key: "historical_employee_fol",
+  key: "employee_fol",
 
   info_deps: [
     'table303_gov_info',
@@ -103,8 +107,8 @@ new PanelGraph({
     half: {text: 12, graph: 12},
   },
 
-  text: "gov_historical_employee_fol_text",
-  title:"historical_employee_fol_title",
+  text: "gov_employee_fol_text",
+  title:"employee_fol_title",
 
   calculate(gov,info){
     const {table303} = this.tables;
