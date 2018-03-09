@@ -3,7 +3,6 @@ exports = module.exports;
 require("./table6.ib.yaml");
 
 require('../../panels/historical_auth_exp');
-//require('../../panels/historical_dept_by_crso');
 require('../../panels/top_3_dept_graph');
 require('../../panels/spending_in_perspective');
 

@@ -60,14 +60,6 @@ program_spending_in_tag_perspective_text:
     du total maximal de **{{fmt_compact_written tag_spend}}** en dépenses prévues pour l'étiquette **"{{infograph_link tag}}"**.
 
 
-historical_dept_by_CRSO_title:
-  transform: [handlebars]
-  en: |
-   Planned spending by {{dept_cr_or_so subject}}
-  
-  fr: |
-   Dépenses prévues par {{dept_cr_or_so subject}}
-
 program_historical_auth_exp_text:
   transform: [handlebars,markdown]
   en: |
@@ -230,14 +222,6 @@ planned_prg_crso_split_text:
   #* <a href={{this.link}}>{{this.label}}</a>:  **{{fmt_compact_written this.value}}**
   # {{/each}}
 
-historical_dept_by_CRSO_text:
-  transform: [handlebars,markdown]
-  en: |
-     Over the next three years, **{{subj_name subject}}** anticipates that it will spend an annual average of **{{fmt_compact_written dept_planned_exp_average}}**.
-     In {{est_in_year}}, it will contribute to a total of **{{dept_crso_num}}** {{dept_crs_or_sos subject}}, where **{{dept_crso_max.crso.name}}** is the largest {{dept_cr_or_so subject}} with planned spending of **{{fmt_compact_written dept_crso_max.data}}**.
-  fr: |
-     Au cours des trois prochaines années, **{{subj_name subject}}** prévoit dépenser et employer en moyenne par année **{{fmt_compact_written dept_planned_exp_average}}**.
-     En {{est_in_year}}, il contribuera à un total de **{{dept_crso_num}}** {{dept_crs_or_sos subject}}, où **{{dept_crso_max.crso.name}}** est le plus important avec des dépenses prévues de **{{fmt_compact_written dept_crso_max.data}}**.
 
 program_spending_in_crso_perspective_text:
   transform: [handlebars, markdown]
