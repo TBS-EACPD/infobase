@@ -6,7 +6,7 @@ import {
   PanelGraph,
   years,
   business_constants,
-  D3,
+  charts_index,
 } from "../shared"; 
 
 const { people_years } = years;
@@ -25,7 +25,7 @@ const exec_level_render = function(panel,data){
     });
   }
 
-  return D3.create_graph_with_legend.call({panel},{
+  return charts_index.create_graph_with_legend.call({panel},{
     legend_class: 'fcol-sm-11 fcol-md-11', 
     y_axis: text_maker("employees"),
     ticks: ticks,

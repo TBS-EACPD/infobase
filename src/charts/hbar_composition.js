@@ -1,6 +1,6 @@
 exports = module.exports;
 
-const D3CORE = require('./core');
+const common_charts_utils = require('./common_charts_utils');
 
 exports.HBarComposition = class HBarComposition {
   constructor(container, options){
@@ -19,7 +19,7 @@ exports.HBarComposition = class HBarComposition {
     //  horizontal bar chart with equal sized bars showing the relative 
     //  split
     //
-    D3CORE.setup_graph_instance(this,d3.select(container),options);
+    common_charts_utils.setup_graph_instance(this,d3.select(container),options);
     this.graph_area  = this.svg.append("g").attr("class","_graph_area");
     // keep reference to container to modify the height based on the number of 
     // bars to be drawn

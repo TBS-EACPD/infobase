@@ -6,7 +6,7 @@ const {
   text_maker,
   PanelGraph,
   utils : { abbrev },
-  D3: {
+  charts_index: {
     tbs_color,
   },
   reactAdapter,

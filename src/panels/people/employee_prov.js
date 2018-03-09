@@ -6,7 +6,7 @@ import {
   PanelGraph,
   years,
   business_constants,
-  D3,
+  charts_index,
 } from "../shared"; 
 
 const { provinces } = business_constants;
@@ -74,7 +74,7 @@ const prov_split_render = function(panel,data,options){
       .range([0.2,1]);
 
     // add legend
-    var list = D3.create_list(
+    var list = charts_index.create_list(
       legend_area.node(),
       _.map(color_scale.ticks(5).reverse(), tick => 
         ({
@@ -95,7 +95,7 @@ const prov_split_render = function(panel,data,options){
 
     const ticks = _.map(people_years, y => `${run_template(y)}`);
     
-    const canada_graph = new D3.CANADA.canada(graph_area.node(), {
+    const canada_graph = new charts_index.CANADA.canada(graph_area.node(), {
       color: "rgb(31, 119, 180)",
       data: years_by_province,
       ticks: ticks,
@@ -173,7 +173,7 @@ const prov_split_render = function(panel,data,options){
         });
 
       if(window.is_mobile ){ // create a bar graph
-        (new D3.BAR.bar(
+        (new charts_index.BAR.bar(
           container.select("div").node(),
           {
             colors: ()=>"#1f77b4",
@@ -191,7 +191,7 @@ const prov_split_render = function(panel,data,options){
           .styles({ 'font-size': "10px" });
       } else { //use hbar
 
-        (new D3.HBAR.hbar(
+        (new charts_index.HBAR.hbar(
           container.select("div").node(),
           {
             x_scale: d3.scaleLinear(),
@@ -240,7 +240,7 @@ const prov_split_render = function(panel,data,options){
       .reduce( (sum, value) => sum +value, 0)
       .value();
 
-    D3.create_a11y_table({
+    charts_index.create_a11y_table({
       container: panel.areas().graph, 
       label_col_header: text_maker("prov"), 
       data_col_headers: [..._.map(people_years, y => `${run_template(y)}`), text_maker("five_year_percent_header")], 

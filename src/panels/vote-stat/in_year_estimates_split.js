@@ -2,7 +2,7 @@ import './vote-stat-text.ib.yaml';
 import {
   formats,
   PanelGraph,
-  D3,
+  charts_index,
   text_maker,
   util_components,
   run_template,
@@ -48,7 +48,7 @@ const estimates_split_render = function(panel,calculations,options){
       .value();
 
 
-    D3.create_a11y_table({
+    charts_index.create_a11y_table({
       // container: panel.areas().text, 
       container: panel.areas().graph, 
       label_col_header : text_maker("estimates_doc"), 
@@ -71,7 +71,7 @@ const estimates_split_render = function(panel,calculations,options){
 
     let bar_mountpoint = panel.areas().graph;
 
-    const bar_instance = new D3.BAR.bar(bar_mountpoint.node(), static_bar_args);
+    const bar_instance = new charts_index.BAR.bar(bar_mountpoint.node(), static_bar_args);
     bar_instance.render(in_year_bar_args);
 
   }

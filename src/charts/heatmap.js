@@ -1,12 +1,12 @@
 "use strict";
-var D3CORE = require('./core');
+var common_charts_utils = require('./common_charts_utils');
 
 var heatmap = function(container,options){
 
 
   d3.select(container).select('*').remove();
 
-  D3CORE.setup_graph_instance(this,d3.select(container),options);
+  common_charts_utils.setup_graph_instance(this,d3.select(container),options);
   this.graph_area  = this.svg.append("g").attr("class","_graph_area");
   this.inner_graph_area = this.graph_area.append("g").attr("class","inner_graph_area");
   // recorded in RGB format for easy sharing between SVG and HTML

@@ -3,7 +3,7 @@ const {
   PanelGraph,
   business_constants,
   years,
-  D3,
+  charts_index,
   formats,
   text_maker,
   util_components,
@@ -19,7 +19,7 @@ function spend_by_so_hist_render (panel,calculations){
   const legend_title = "so";
 
   if(window.is_a11y_mode){
-    D3.create_a11y_table({
+    charts_index.create_a11y_table({
       container: panel.areas().graph,
       data: data.map( ({label, data}) => ({
         label,
@@ -30,7 +30,7 @@ function spend_by_so_hist_render (panel,calculations){
       data_col_headers: ticks, 
     })
   } else {
-    D3.create_graph_with_legend.call({panel},{
+    charts_index.create_graph_with_legend.call({panel},{
       get_data: _.property('data'), 
       data,
       ticks,

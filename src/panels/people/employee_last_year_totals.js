@@ -3,7 +3,7 @@ import {
   formats,
   text_maker,
   PanelGraph,
-  D3,
+  charts_index,
 } from "../shared"; 
 
 const total_employment_render = function(panel, data){
@@ -19,7 +19,7 @@ const total_employment_render = function(panel, data){
     data: data.graph_args.vals,
     center: data.graph_args.center,
   };
-  new D3.CIRCLE.circle_pie_chart(panel.areas().graph.node(),args).render();
+  new charts_index.CIRCLE.circle_pie_chart(panel.areas().graph.node(),args).render();
 };
 
 new PanelGraph({

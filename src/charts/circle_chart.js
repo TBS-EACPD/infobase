@@ -1,7 +1,7 @@
 "use strict";
 exports = module.exports;
 
-var D3CORE = require('./core');
+var common_charts_utils = require('./common_charts_utils');
 
 exports.circle_pie_chart = class circle_pie_chart {
   
@@ -12,7 +12,7 @@ exports.circle_pie_chart = class circle_pie_chart {
     //         "series 2" : [y1,y2,y3]}
     // ticks = ["tick1","tick2"."tick3"]
     // ```
-    D3CORE.setup_graph_instance(this,d3.select(container),options);
+    common_charts_utils.setup_graph_instance(this,d3.select(container),options);
     this.graph_area =  this.svg.append("g").attr("class","_graph_area");
   };
 
@@ -23,7 +23,7 @@ exports.circle_pie_chart = class circle_pie_chart {
       bottom: 20,
       left: 10};
     var hide_labels = this.options.hide_labels;
-    var colors = this.options.colors || D3CORE.tbs_color();
+    var colors = this.options.colors || common_charts_utils.tbs_color();
     var centre = this.options.centre || false;
     var width = this.outside_width - margin.left - margin.right;
     var height = this.outside_height - margin.top - margin.bottom;

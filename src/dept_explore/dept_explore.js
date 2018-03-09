@@ -9,7 +9,7 @@ const { text_maker } = require('../models/text.js')
 require("./dept_explore.ib.yaml");
 const { Dept, Gov } = require('../models/subject.js');
 const { infograph_href_template } = require('../link_utils.js');
-const { PACK } = require('../core/D3');
+const { PACK } = require('../core/charts_index');
 const { abbrev } = require("../core/utils.js");
 const { Table } = require('../core/TableClass.js');
 const { deptSearch } = require('../search/search.js');

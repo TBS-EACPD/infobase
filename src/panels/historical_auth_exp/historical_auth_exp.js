@@ -6,7 +6,7 @@ import {
   run_template,
   PanelGraph,
   years,
-  D3,
+  charts_index,
   util_components,
 } from "../shared";
 
@@ -88,7 +88,7 @@ const render = function( panel, calculations, options ) {
       data: data.map( amt => <Format type="compact1" content={amt} /> ),
     }));
 
-    D3.create_a11y_table({
+    charts_index.create_a11y_table({
       container: graph_area,
       data_col_headers: series_labels,
       data,
@@ -99,14 +99,14 @@ const render = function( panel, calculations, options ) {
     const legend_area = graph_area.append("div");
     const new_graph_area = graph_area.append("div").style("position","relative");
 
-    D3.create_list(legend_area.node(), series_labels, {
+    charts_index.create_list(legend_area.node(), series_labels, {
       colors ,
       orientation : "horizontal",
       legend : true,
       ul_classes : "legend",
     });
 
-    (new D3.BAR.bar( new_graph_area.node(),
+    (new charts_index.BAR.bar( new_graph_area.node(),
       {
         colors ,
         series_labels,

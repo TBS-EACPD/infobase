@@ -1,5 +1,5 @@
 import {
-  D3, 
+  charts_index, 
   text_maker,
   PanelGraph, 
   Subject,
@@ -114,7 +114,7 @@ new PanelGraph({
       .classed('col-xs-4',true)
       .style('padding-left', 0)
       .each(function(d,i){
-        new D3.SAFE_PROGRESS_DONUT.SafeProgressDonut(
+        new charts_index.SAFE_PROGRESS_DONUT.SafeProgressDonut(
           d3.select(this).node(),
           { 
             data: [

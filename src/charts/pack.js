@@ -1,4 +1,4 @@
-const D3CORE = require("./core");
+const common_charts_utils = require("./common_charts_utils");
 
 export const navigate_class = "navigate_packing";
 
@@ -154,7 +154,7 @@ export class pack {
     //  }
     //  ```
 
-    D3CORE.setup_graph_instance(this,container,options);
+    common_charts_utils.setup_graph_instance(this,container,options);
 
     var _graph_area  = this.svg.append("g").attr("class","_graph_area");
     this.graph_area = _graph_area.append("g").attr("class","inner_graph_area");
@@ -166,7 +166,7 @@ export class pack {
   }
 
   absolute_zoom_position(x,y){                         
-    var offset = D3CORE.get_offset(this.svg);    
+    var offset = common_charts_utils.get_offset(this.svg);    
     var pos = this.zoom_position(x,y);
     return {x:pos.x+offset.left,y:pos.y+offset.top};
   }
@@ -305,7 +305,7 @@ export class pack {
     
     this.options = _.extend(this.options,options);
     this.fill_func = this.options.fill_func || false;;
-    this.colors = this.options.colors || D3CORE.tbs_color();
+    this.colors = this.options.colors || common_charts_utils.tbs_color();
     this.invisible_grand_parent = _.isUndefined(this.options.invisible_grand_parent) ? true  : this.options.invisible_grand_parent;
     // be default just add the empty # as the href 
     this.href_func = this.options.href_func || _.constant("#");
@@ -340,7 +340,7 @@ export class pack {
       this.nodes = this.pack(root).descendants();
 
       // assign a unique id to each node
-      _.each(this.nodes, n => n.rid = D3CORE.make_unique() );
+      _.each(this.nodes, n => n.rid = common_charts_utils.make_unique() );
     }
 
     this.translate = [(this.outside_width - this.radius)/2,10];

@@ -12,9 +12,9 @@ const {
   },
   Statistics,
 } = require('../table_common.js');
-var D3 = require("../../core/D3");
-var HEATMAP = D3.HEATMAP;
-var HBAR = D3.HBAR;
+var charts_index = require("../../core/charts_index");
+var HEATMAP = charts_index.HEATMAP;
+var HBAR = charts_index.HBAR;
 
 const { PanelGraph } = require('../../core/PanelGraph.js');
 
@@ -284,7 +284,7 @@ new PanelGraph({
       .map(tick => ({label: tick, active:true}) )
       .value();
        
-    D3.create_list(
+    charts_index.create_list(
       legend_area.node(),
       legend_items,
       {html : d => formater(d.label), 

@@ -2,7 +2,7 @@
 exports = module.exports;
 
 // this file depends on a template called "panel_t", it is 
-// expect a function to be attached to D3 called "get_template"
+// expect a function to be attached to charts_index called "get_template"
 // which will allow 
 //
 

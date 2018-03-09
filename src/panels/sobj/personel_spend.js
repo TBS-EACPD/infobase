@@ -5,7 +5,7 @@ import {
   years,
   business_constants,
   text_maker,
-  D3,
+  charts_index,
   util_components,
 } from "../shared";
 
@@ -40,7 +40,7 @@ new PanelGraph({
     const {info, graph_args} = calculations;
 
     if(window.is_a11y_mode){
-      D3.create_a11y_table({
+      charts_index.create_a11y_table({
         container: panel.areas().graph,
         data_col_headers: [ text_maker("spending") ],
         data: _.chain(info.last_years)
@@ -56,12 +56,12 @@ new PanelGraph({
     } else {
 
 
-      new D3.LINE.ordinal_line(
+      new charts_index.LINE.ordinal_line(
         panel.areas().graph.node(),
         {
           series : graph_args.series,
           ticks : info.last_years,
-          colors : D3.tbs_color(),
+          colors : charts_index.tbs_color(),
           add_yaxis : true,
           add_xaxis : true,
           y_axis: "($)",

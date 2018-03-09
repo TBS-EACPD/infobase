@@ -15,7 +15,7 @@ import {
 //  with the data being assumed to be ordered by fiscal year
 //
 
-import D3CORE from "./core";
+import common_charts_utils from "./common_charts_utils";
 import "./canada.ib.yaml";
 
 var ordering = {
@@ -41,9 +41,9 @@ export class canada {
   
   constructor(container,options){
 
-    options.alternative_svg = D3CORE.templates("canada");
+    options.alternative_svg = common_charts_utils.templates("canada");
   
-    D3CORE.setup_graph_instance(this,d3.select(container),options);
+    common_charts_utils.setup_graph_instance(this,d3.select(container),options);
   };
 
   render(options){

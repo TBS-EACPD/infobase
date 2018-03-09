@@ -6,7 +6,7 @@ import {
   PanelGraph,
   utils,
   years,
-  D3,
+  charts_index,
 } from "../shared";
 
 const { std_years } = years;
@@ -53,7 +53,7 @@ const g_and_c_hist_render = function(panel, data){
 
     // Add a11y tables
     data_keys.forEach(d =>
-      D3.create_a11y_table({
+      charts_index.create_a11y_table({
         container: graph_area, 
         label_col_header :d, 
         data_col_headers : std_years.map(run_template),
@@ -82,7 +82,7 @@ const g_and_c_hist_render = function(panel, data){
     .value();
 
 
-  D3.create_graph_with_legend.call({panel},{  
+  charts_index.create_graph_with_legend.call({panel},{  
     get_data :  row => row.data,
     data :  to_graph,
     legend_orientation : "horizontal",
@@ -112,7 +112,7 @@ const draw_graph = function(area, data){
   // create the list as a dynamic graph legend
   // debugger;
 
-  const list = D3.create_list(legend_area.node(), mapped_data, {
+  const list = charts_index.create_list(legend_area.node(), mapped_data, {
     html : d => d.label,
     colors : colors,
     width : "400px",
@@ -125,7 +125,7 @@ const draw_graph = function(area, data){
   });
   // create the graph
 
-  const graph = new D3.LINE.ordinal_line(
+  const graph = new charts_index.LINE.ordinal_line(
     graph_area.node(),
     {
       ticks : std_years.map(run_template),
@@ -135,7 +135,7 @@ const draw_graph = function(area, data){
     });
 
   // hook the list dispatcher up to the graph
-  list.dispatch.on("click", D3.on_legend_click(graph,colors));
+  list.dispatch.on("click", charts_index.on_legend_click(graph,colors));
   // simulate the first item on the list being selected
   list.dispatch.call("click","",mapped_data[0],0,list.first,list.new_lis);
 }

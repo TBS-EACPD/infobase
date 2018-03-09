@@ -5,7 +5,7 @@ import {
   formats,
   text_maker,
   PanelGraph,
-  D3,
+  charts_index,
 } from "../shared";
 
 const is_revenue = so_num => +so_num > 19;
@@ -49,7 +49,7 @@ function render(panel,calculations, options) {
     //all information is contained in text
     return;
   } else {
-    new D3.BAR.bar(panel.areas().graph.node(),{
+    new charts_index.BAR.bar(panel.areas().graph.node(),{
       series,
       ticks,
       add_xaxis : true,

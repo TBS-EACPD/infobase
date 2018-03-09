@@ -1,6 +1,6 @@
 exports = module.exports;
 
-const D3CORE = require('./core');
+const common_charts_utils = require('./common_charts_utils');
 const PIE = require("./pie").pie;
 const BAR = require("./bar").bar;
 const bar_options = {
@@ -9,7 +9,7 @@ const bar_options = {
   add_yaxis : false,                                  
   add_labels : true,                                  
   margin : {top: 20, right:20, left: 60, bottom: 80} ,
-  formater : D3CORE.formats.compact1,
+  formater : common_charts_utils.formats.compact1,
 };                         
 
 exports.PieOrBar = class PieOrBar {

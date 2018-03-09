@@ -14,7 +14,7 @@ const { ensure_loaded } = require('../core/lazy_loader.js');
 const { get_panels_for_subject } = require('./get_panels_for_subject.js');
 const { bubble_defs }  = require('./bubble_definitions.js'); 
 const { ReactPanelGraph } = require('../core/PanelCollectionView.js');
-const { BUBBLE_MENU : { BubbleMenu } } = require('../core/D3');
+const { BUBBLE_MENU : { BubbleMenu } } = require('../core/charts_index');
 
 
 

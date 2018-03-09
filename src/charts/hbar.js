@@ -1,7 +1,7 @@
 "use strict";
 exports = module.exports;
 
-var D3CORE = require('./core');
+var common_charts_utils = require('./common_charts_utils');
 
 
 exports.hbar = class hbar {
@@ -16,7 +16,7 @@ exports.hbar = class hbar {
   // ]
   //```
 
-    D3CORE.setup_graph_instance(this,d3.select(container),options);
+    common_charts_utils.setup_graph_instance(this,d3.select(container),options);
 
     var _graph_area  = this.svg.append("g").attr("class","_graph_area");
     this.graph_area = _graph_area.append("g").attr("class","inner_graph_area");

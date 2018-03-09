@@ -1,49 +1,49 @@
 "use strict";
-exports = module.exports = require("../charts/core");
+exports = module.exports = require("../charts/common_charts_utils");
 
-// The D3 graphs were created with an intent of using them even
+// The charts_index graphs were created with an intent of using them even
 // outside of this application, therefore, there are no linkages
 // between the graphs and the InfoBase. Accordingly, this adapter
 // file is needed to provide extra information from the application
 // to the graphs in a neutral format 
 
-require('../charts/d3.scss');
+require('../charts/charts.scss');
 
 const {text_maker} = require('../models/text.js');
 const FORMAT = require('./format');
 const UTILS = require("./utils");
-const D3 = exports;
-D3.make_unique = UTILS.make_unique;
-D3.BAR = require("../charts/bar");
-D3.HBAR = require("../charts/hbar");
-D3.CIRCLE = require("../charts/circle_chart");
-D3.PIE = require("../charts/pie");
-D3.PIE_OR_BAR = require("../charts/pie_or_bar");
-D3.SAFE_PROGRESS_DONUT = require("../charts/safe_progress_donut.js");
-D3.LINE = require("../charts/line");
-D3.CANADA = require("../charts/canada");
+const charts_index = exports;
+charts_index.make_unique = UTILS.make_unique;
+charts_index.BAR = require("../charts/bar");
+charts_index.HBAR = require("../charts/hbar");
+charts_index.CIRCLE = require("../charts/circle_chart");
+charts_index.PIE = require("../charts/pie");
+charts_index.PIE_OR_BAR = require("../charts/pie_or_bar");
+charts_index.SAFE_PROGRESS_DONUT = require("../charts/safe_progress_donut.js");
+charts_index.LINE = require("../charts/line");
+charts_index.CANADA = require("../charts/canada");
 //being phased out
-//D3.BUBBLE_MENU = require("../charts/bubble-menu");
-D3.ARROW  = require("../charts/arrow");
-D3.PACK  = require("../charts/pack");
-D3.HEATMAP  = require("../charts/heatmap");
-D3.CONCEPTEXPLORE  = require("../charts/concept-explorer");
-D3.HBAR_Composition = require("../charts/hbar_composition");
-D3.PROGRESS_DONUT = require("../charts/progress_donut");
-D3.TWO_SERIES_BAR = require("../charts/two_series_bar");
-D3.BUBBLE_MENU = require("../charts/bubble-menu");
+//charts_index.BUBBLE_MENU = require("../charts/bubble-menu");
+charts_index.ARROW  = require("../charts/arrow");
+charts_index.PACK  = require("../charts/pack");
+charts_index.HEATMAP  = require("../charts/heatmap");
+charts_index.CONCEPTEXPLORE  = require("../charts/concept-explorer");
+charts_index.HBAR_Composition = require("../charts/hbar_composition");
+charts_index.PROGRESS_DONUT = require("../charts/progress_donut");
+charts_index.TWO_SERIES_BAR = require("../charts/two_series_bar");
+charts_index.BUBBLE_MENU = require("../charts/bubble-menu");
 //this is currently not used, treemap should not necessarily be deleted though.
-//D3.TREEMAP  = require("../charts/treemap");
-window.D3 = D3;
+//charts_index.TREEMAP  = require("../charts/treemap");
+window.charts_index = charts_index;
 var formats = FORMAT.formats;
 
 
 const { reactAdapter } = require('./reactAdapter.js');
 const { TextMaker } = require('../util_components.js');
 
-D3.templates = text_maker;
+charts_index.templates = text_maker;
 
-D3.create_graph_with_legend = function(options){
+charts_index.create_graph_with_legend = function(options){
   //
   // the potential values for options are:
   // * `get_series_label` :  will extract the label from each data item 
@@ -151,7 +151,7 @@ D3.create_graph_with_legend = function(options){
 
     // create the list as a dynamic graph legend
 
-    list = D3.create_list(graph_area.select(".x1").node(), data, {
+    list = charts_index.create_list(graph_area.select(".x1").node(), data, {
       html : _.property("label"),
       align : options.align,
       legend_class : options.legend_class,
@@ -195,7 +195,7 @@ D3.create_graph_with_legend = function(options){
     
     // create the graph
     if (options.bar){
-      graph = new D3.BAR.bar(graph_area.select(".x2").node(),{
+      graph = new charts_index.BAR.bar(graph_area.select(".x2").node(),{
         y_axis : yaxis,
         colors : colors,
         ticks : options.ticks,
@@ -207,7 +207,7 @@ D3.create_graph_with_legend = function(options){
         series :  data_to_series_format,
       });
     } else {
-      graph = new D3.LINE.ordinal_line(graph_area.select(".x2").node(),{
+      graph = new charts_index.LINE.ordinal_line(graph_area.select(".x2").node(),{
         y_axis : yaxis,
         colors : colors,
         ticks : options.ticks,
@@ -231,7 +231,7 @@ D3.create_graph_with_legend = function(options){
     }
 
     // hook the list dispatcher up to the graph
-    list.dispatch.on("click", D3.on_legend_click(graph,colors));
+    list.dispatch.on("click", charts_index.on_legend_click(graph,colors));
 
     if (!all_active && data[0].active) {
     // simulate the first item on the list being selected twice, so that, if it was already active but not all other items are active, it stays active 
@@ -257,7 +257,7 @@ D3.create_graph_with_legend = function(options){
   if (window.is_a11y_mode) {
     const a11y_table_title = options.a11y_table_title || "";
     
-    D3.create_a11y_table({
+    charts_index.create_a11y_table({
       container: graph_area, 
       label_col_header: legend_title, 
       data_col_headers: options.ticks, 
@@ -271,7 +271,7 @@ D3.create_graph_with_legend = function(options){
   return graph;
 };
 
-D3.create_a11y_table = function({
+charts_index.create_a11y_table = function({
   container,  //
   data, 
   label_col_header,  //optional

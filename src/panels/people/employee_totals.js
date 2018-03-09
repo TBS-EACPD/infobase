@@ -4,7 +4,7 @@ import {
   text_maker,
   run_template,
   PanelGraph, 
-  D3,
+  charts_index,
   years,
 } from "../shared"; 
 
@@ -28,14 +28,14 @@ const total_hist_employment_render = function(panel,data){
   const { series, ticks } = graph_args;
 
   if(window.is_a11y_mode){
-    D3.create_a11y_table({
+    charts_index.create_a11y_table({
       container: panel.areas().graph, 
       label_col_header: text_maker("org"), 
       data_col_headers: ticks, 
       data: [{label: subject.sexy_name, data: series[""]}],
     });
   } else {
-    new D3.LINE.ordinal_line(panel.areas().graph.node(), {
+    new charts_index.LINE.ordinal_line(panel.areas().graph.node(), {
       series: series,
       ticks: ticks,
       colors: infobase_colors(),

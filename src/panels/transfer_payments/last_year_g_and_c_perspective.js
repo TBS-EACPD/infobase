@@ -3,7 +3,7 @@ import {
   Subject,
   formats,
   PanelGraph,
-  D3,
+  charts_index,
 } from "../shared";
 
 new PanelGraph({
@@ -49,7 +49,7 @@ new PanelGraph({
 
     const { subject, graph_args } = calculations; 
     const colors = infobase_colors();
-    new D3.CIRCLE.circle_pie_chart( 
+    new charts_index.CIRCLE.circle_pie_chart( 
       panel.areas().graph.select(".x1").node(),
       {
         height : this.height,
@@ -62,7 +62,7 @@ new PanelGraph({
     )
       .render();
 
-    new D3.CIRCLE.circle_pie_chart( 
+    new charts_index.CIRCLE.circle_pie_chart( 
       panel.areas().graph.select(".x2").node(),
       {
         height : this.height,

@@ -1,7 +1,7 @@
 "use strict";
 exports = module.exports;
 
-var D3CORE = require('./core');
+var common_charts_utils = require('./common_charts_utils');
 
 var base_colour =  'rgba(49,91,126,0.5)' ;
 var hover_colour = 'rgba(49,91,126,1)';
@@ -14,7 +14,7 @@ exports.concept_explorer = class concept_explorer {
   
   constructor(container,options){
    
-    D3CORE.setup_graph_instance(this,d3.select(container),options);
+    common_charts_utils.setup_graph_instance(this,d3.select(container),options);
     var _graph_area  = this._graph_area = this.svg.append("g").attr("class","_graph_area");
     this.arc_area = _graph_area.append("g").attr("class","arcs");
     this.links_area = _graph_area.append("g").attr("class","links");

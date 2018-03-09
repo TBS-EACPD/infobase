@@ -1,6 +1,6 @@
 import './perspective_text.ib.yaml';
 import {
-  D3, 
+  charts_index, 
   text_maker,
   PanelGraph, 
   formats,
@@ -222,7 +222,7 @@ new PanelGraph({
        
       chart_area.html("");
 
-      new D3.PIE_OR_BAR.PieOrBar(
+      new charts_index.PIE_OR_BAR.PieOrBar(
         chart_area,
         {
           color :  infobase_colors(),

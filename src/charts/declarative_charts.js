@@ -2,7 +2,7 @@ const { HBarComposition } = require('./hbar_composition.js');
 const { bar } = require('./bar.js'); 
 const { PieOrBar } = require('./pie_or_bar.js');
 const { ordinal_line } = require('./line.js');
-const { create_graph_with_legend, create_a11y_table } = require('../core/D3.js');
+const { create_graph_with_legend, create_a11y_table } = require('../core/charts_index.js');
 const { SafeProgressDonut } = require('./safe_progress_donut.js');
 const { pack } = require("./pack");
 
@@ -100,7 +100,7 @@ class ProgressDonut extends React.Component {
   }
 }
 
-class D3GraphWithLegend extends React.Component {
+class charts_indexGraphWithLegend extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -327,7 +327,7 @@ class CirclePack extends React.Component {
 module.exports = exports = {
   StackedHbarChart,
   GraphLegend,
-  D3GraphWithLegend,
+  charts_indexGraphWithLegend,
   Bar,
   Line,
   A11YTable,

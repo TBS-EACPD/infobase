@@ -6,7 +6,7 @@ import {
   PanelGraph, 
   collapse_by_so,
   common_react_donut,
-  D3,
+  charts_index,
   run_template,
   years,
   Statistics,
@@ -136,7 +136,7 @@ function a11y_render(
   panel,
   { graph_args: top_3_sos_and_remainder }
 ){
-  D3.create_a11y_table({
+  charts_index.create_a11y_table({
     container: panel.areas().graph,
     data: _.map(top_3_sos_and_remainder, ({label, value}) => ({
       label,

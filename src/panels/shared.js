@@ -15,11 +15,11 @@ const declarative_charts = require('../charts/declarative_charts.js');
 const {
   SafePie,
   TabularPercentLegend,
-  D3GraphWithLegend,
+  charts_indexGraphWithLegend,
 } = declarative_charts;
 
 const util_components = require('../util_components');
-exports.D3 = require("../core/D3");
+exports.charts_index = require("../core/charts_index");
 exports.declarative_charts = declarative_charts;
 exports.Table = require('../core/TableClass.js').Table;
 exports.rpb_link = require('../rpb/rpb_link.js').rpb_link;
@@ -124,7 +124,7 @@ exports.create_height_clipped_graph_with_legend = function(panel,create_graph_wi
     <div className="fcol-xs-12 fcol-sm- graphic fcol-md-12 mrgn-bttm-sm">
       <HeightClipper clipHeight={185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient gradient-strong"}>
         <div className="height-clipped-graph-area" aria-hidden={true}>
-          <D3GraphWithLegend panel={panel} options={create_graph_with_legend_options}/>
+          <charts_indexGraphWithLegend panel={panel} options={create_graph_with_legend_options}/>
         </div>
       </HeightClipper>
     </div>, 

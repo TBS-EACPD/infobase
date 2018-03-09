@@ -6,7 +6,7 @@ import {
   PanelGraph,
   create_ppl_share_pie,
   create_height_clipped_graph_with_legend,
-  D3,
+  charts_index,
   years,
 } from "../shared"; 
 
@@ -47,7 +47,7 @@ const employee_type_render = function(panel, data){
       label_col_header: text_maker("employee_type"),
     });
   } else {
-    D3.create_a11y_table({
+    charts_index.create_a11y_table({
       container: panel.areas().text.node(), 
       label_col_header: text_maker("age_group"), 
       data_col_headers: [...ticks, text_maker("five_year_percent_header")], 

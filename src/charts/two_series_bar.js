@@ -1,5 +1,5 @@
 exports = module.exports;
-const D3CORE = require('./core');
+const common_charts_utils = require('./common_charts_utils');
 
 exports.TWO_SERIES_BAR = class TWO_SERIES_BAR  {
   
@@ -12,7 +12,7 @@ exports.TWO_SERIES_BAR = class TWO_SERIES_BAR  {
   // ticks = ["tick1","tick2"."tick3"]
   // ```
 
-    D3CORE.setup_graph_instance(this,d3.select(container),options);
+    common_charts_utils.setup_graph_instance(this,d3.select(container),options);
     ;
     const _graph_area  = this.svg.append("g").attr("class","_graph_area");
     this.grid_line_area = _graph_area.append("g").attr("class","grid_lines");
@@ -48,7 +48,7 @@ exports.TWO_SERIES_BAR = class TWO_SERIES_BAR  {
     const smaller = larger === series1 ? series2 : series1;
     const series_labels = [larger.label, smaller.label];
     const label_font_size = 12; // this is in pt, not px
-    const colors = this.options.colors || D3CORE.tbs_color()
+    const colors = this.options.colors || common_charts_utils.tbs_color()
     const ticks = this.options.ticks;
 
     // `x0` scale sets out the chunks of space for each

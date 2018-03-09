@@ -5,7 +5,7 @@ import {
   run_template,
   PanelGraph,
   years,
-  D3,
+  charts_index,
 } from "../shared";
 
 const { estimates_years } = years;
@@ -56,7 +56,7 @@ const common_render = function( panel,calculations,options) {
       data :  series[label],
     }));
 
-    D3.create_graph_with_legend.call({panel},{
+    charts_index.create_graph_with_legend.call({panel},{
       get_data: _.property('data'), 
       data,
       ticks : ticks,
@@ -71,7 +71,7 @@ const common_render = function( panel,calculations,options) {
 
   } else {
 
-    new D3.BAR.bar(
+    new charts_index.BAR.bar(
       graph_area.node(),
       { 
         add_xaxis : true,                                   

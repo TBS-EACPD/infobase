@@ -1,4 +1,4 @@
-#D3 shared code
+#charts_index shared code
 
 [back up](../__module__.html)
 

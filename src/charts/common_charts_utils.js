@@ -231,7 +231,7 @@ exports.on_legend_click = function(graph, _colors){
   return function(d,i,el,list){
     //
     //  works with list which were bound using the 
-    //  `D3.create_legend` function
+    //  `charts_index.create_legend` function
     //  *  `d` : the data bound to the element
     //  *  `i` : the index of the clicked item 
     //  *  `el` : the actual clicked element

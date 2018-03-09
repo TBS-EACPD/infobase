@@ -414,7 +414,7 @@ class Partition {
 
     this.method = presentation_schemes[0].id;
     this.value_attr = sort_vals[0].id;
-    this.root_id = 0; // counter to append to root of each hierarchy, makes identifying ancestry_id values unique even in D3 merge step
+    this.root_id = 0; // counter to append to root of each hierarchy, makes identifying ancestry_id values unique even in charts_index merge step
     this.update_url(this.method,this.value_attr);
     this[this.method]();
   }

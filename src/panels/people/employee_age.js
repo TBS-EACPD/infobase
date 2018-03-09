@@ -6,20 +6,20 @@ import {
   PanelGraph,
   years,
   business_constants,
-  D3,
+  charts_index,
   declarative_charts,
   reactAdapter,
 } from "../shared";
 
 const { people_years } = years;
 const { compact_age_groups } = business_constants;
-const { D3GraphWithLegend } = declarative_charts;
+const { charts_indexGraphWithLegend } = declarative_charts;
 
 const emp_age_render = function(panel,data,options){
   const { graph_args } = data;
   const ticks = _.map(people_years, y => `${run_template(y)}`);
   
-  // Options for D3GraphWithLegend React components
+  // Options for charts_indexGraphWithLegend React components
   const age_group_options = {
     legend_col_full_size: 4,
     graph_col_full_size: 8,
@@ -37,11 +37,11 @@ const emp_age_render = function(panel,data,options){
   
   if (!window.is_a11y_mode){
     reactAdapter.render(
-      <D3GraphWithLegend panel={panel} options={age_group_options}/>, 
+      <charts_indexGraphWithLegend panel={panel} options={age_group_options}/>, 
       panel.areas().graph.node() 
     );
   } else {
-    D3.create_a11y_table({
+    charts_index.create_a11y_table({
       container: panel.areas().text.node(), 
       label_col_header: text_maker("age_group"), 
       data_col_headers: [...ticks, text_maker("five_year_percent_header")], 
@@ -153,9 +153,9 @@ new PanelGraph({
 //  business_constants : {
 //    compact_age_groups, 
 //  },
-//  D3,
+//  charts_index,
 //  declarative_charts : {
-//    D3GraphWithLegend,
+//    charts_indexGraphWithLegend,
 //  },
 //  TabbedContent,
 //  reactAdapter} = require("./shared");
@@ -173,7 +173,7 @@ new PanelGraph({
 //  const avg_age_yBottom = (Math.floor(_.min(all_avg_ages)*2)/2).toFixed(1);
 //  const avg_age_yTop = (Math.ceil(_.max(all_avg_ages)*2)/2).toFixed(1);
 //  
-//  // Options for D3GraphWithLegend React components
+//  // Options for charts_indexGraphWithLegend React components
 //  const age_group_options = {
 //    legend_col_full_size : 4,
 //    graph_col_full_size : 8,
@@ -218,14 +218,14 @@ new PanelGraph({
 //            id={"emp_age_tab_pane"}
 //            aria-hidden={true}
 //          >
-//            <D3GraphWithLegend panel={panel} options={age_group_options}/>
+//            <charts_indexGraphWithLegend panel={panel} options={age_group_options}/>
 //            <div className='clearfix'></div>
 //          </div>, 
 //          avgage: <div 
 //            id={"emp_age_tab_pane"}
 //            aria-hidden={true}
 //          >
-//            <D3GraphWithLegend panel={panel} options={avg_age_options}/>
+//            <charts_indexGraphWithLegend panel={panel} options={avg_age_options}/>
 //            <div className='clearfix'></div>
 //          </div>,
 //        }}
@@ -233,7 +233,7 @@ new PanelGraph({
 //      panel.areas().graph.node() 
 //    );
 //  } else {
-//    D3.create_a11y_table({
+//    charts_index.create_a11y_table({
 //      container: panel.areas().text.node(), 
 //      label_col_header: text_maker("age_group"), 
 //      data_col_headers: [...ticks, text_maker("five_year_percent_header")], 
@@ -241,7 +241,7 @@ new PanelGraph({
 //        return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]} 
 //      }),
 //    });
-//    D3.create_a11y_table({
+//    charts_index.create_a11y_table({
 //      container: panel.areas().text.node(), 
 //      label_col_header: text_maker("avgage"), 
 //      data_col_headers: ticks, 

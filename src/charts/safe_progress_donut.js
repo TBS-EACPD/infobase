@@ -1,6 +1,6 @@
 exports = module.exports;
 
-const D3CORE = require('./core');
+const common_charts_utils = require('./common_charts_utils');
 const BAR = require("./bar").bar;
 const { ProgressDonut} = require('./progress_donut.js');
 
@@ -10,7 +10,7 @@ const bar_options = {
   add_yaxis : false,                                  
   add_labels : true,                                  
   margin : {top: 0, right:0, left: 0, bottom: 0} ,
-  formater : D3CORE.formats.compact1,
+  formater : common_charts_utils.formats.compact1,
 };                         
 
 exports.SafeProgressDonut = class SafeProgressDonut {

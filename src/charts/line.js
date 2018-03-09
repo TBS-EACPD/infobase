@@ -1,7 +1,7 @@
 "use strict";
 exports = module.exports;
 
-var D3CORE = require('./core');
+var common_charts_utils = require('./common_charts_utils');
 
 exports.ordinal_line = class ordinal_line {
   
@@ -14,7 +14,7 @@ exports.ordinal_line = class ordinal_line {
     // ticks = ["tick1","tick2"."tick3"]
     // ```
 
-    D3CORE.setup_graph_instance(this,d3.select(container),options);
+    common_charts_utils.setup_graph_instance(this,d3.select(container),options);
 
     var _graph_area  = this.svg.append("g").attr("class","_graph_area");
     this.grid_line_area = _graph_area.append("g").attr("class","grid_lines");
@@ -338,7 +338,7 @@ exports.ordinal_line = class ordinal_line {
       }
 
       if (!this.options.hide_gridlines){
-        D3CORE.add_grid_lines("vertical", this.grid_line_area, xAxis, height);
+        common_charts_utils.add_grid_lines("vertical", this.grid_line_area, xAxis, height);
       }
     }
 
@@ -372,7 +372,7 @@ exports.ordinal_line = class ordinal_line {
     }
 
     if (!this.options.hide_gridlines){
-      D3CORE.add_grid_lines("horizontal", this.grid_line_area, yAxis, width);
+      common_charts_utils.add_grid_lines("horizontal", this.grid_line_area, yAxis, width);
     }
     
     this.dispatch.call("renderEnd",this);

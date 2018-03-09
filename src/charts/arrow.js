@@ -1,7 +1,7 @@
 "use strict";
 exports = module.exports;
   
-var D3CORE =  require("./core");
+var common_charts_utils =  require("./common_charts_utils");
 
 
 function add_arrow(sel){
@@ -23,7 +23,7 @@ exports.arrows = class arrows {
   
   constructor(container,options){
 
-    D3CORE.setup_graph_instance(this,d3.select(container),options);
+    common_charts_utils.setup_graph_instance(this,d3.select(container),options);
     this.graph_area  = this.svg.append("g").attr("class","graph_area");
   };
 
@@ -34,7 +34,7 @@ exports.arrows = class arrows {
       right: 10, 
       bottom: 30, 
       left: 10};
-    var color = this.options.color || D3CORE.tbs_color();
+    var color = this.options.color || common_charts_utils.tbs_color();
     var formater = this.options.formater;
     var arrow_width = 60;
     var arrow_height = 100;

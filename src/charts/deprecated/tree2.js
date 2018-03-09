@@ -1,8 +1,8 @@
 $(function(){
-  var D3 = ns('D3');
-  var TREE = ns('D3.TREE');
+  var charts_index = ns('charts_index');
+  var TREE = ns('charts_index.TREE');
 
-  TREE.make_horizontal_tree2 = D3.extend_base(function(svg, index){
+  TREE.make_horizontal_tree2 = charts_index.extend_base(function(svg, index){
     var text_func = this.text_func;
     var dispatch  = this.dispatch;
     var root = this.root;
@@ -16,7 +16,7 @@ $(function(){
     var bar_width = 500;
     var current_node;
 
-    var html = d3.select(D3.get_html_parent(svg));
+    var html = d3.select(charts_index.get_html_parent(svg));
 
     // set the tree layout assuming an initial size of 300 width and 200
     // height

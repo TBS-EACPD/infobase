@@ -1,6 +1,6 @@
 exports = module.exports;
 const barStack = require("./bar_stack");
-const D3CORE = require('./core');
+const common_charts_utils = require('./common_charts_utils');
 
 
 
@@ -11,7 +11,7 @@ const bar = exports.bar =  function(container,options){
 //         "series 2" : [y1,y2,y3]}
 // ticks = ["tick1","tick2"."tick3"]
 // ```
-  D3CORE.setup_graph_instance(this, d3.select(container),options);
+  common_charts_utils.setup_graph_instance(this, d3.select(container),options);
 
   var _graph_area  = this.svg.append("g").attr("class","_graph_area");
   this.grid_line_area = _graph_area.append("g").attr("class","grid_lines");
@@ -55,7 +55,7 @@ bar.prototype.render = function(options){
   const stacked = this.options.stacked;
   const label_font_size = 12;
   const add_labels = this.options.add_labels;
-  const colors = this.options.colors || D3CORE.tbs_color()
+  const colors = this.options.colors || common_charts_utils.tbs_color()
   const title = this.options.title;
   const y_axis = this.options.y_axis || '';
   const ticks = this.options.ticks;
@@ -418,7 +418,7 @@ bar.prototype.render = function(options){
   }
       
   if (!hide_gridlines){
-    D3CORE.add_grid_lines("horizontal",this.grid_line_area,yAxis,width);
+    common_charts_utils.add_grid_lines("horizontal",this.grid_line_area,yAxis,width);
   }
     
   return this;
