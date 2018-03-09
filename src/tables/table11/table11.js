@@ -34,11 +34,13 @@ export default {
     "fr": "http://ouvert.canada.ca/data/fr/dataset/d712930d-66f4-4377-a2bf-5d55d09c1186",
   },
 
-  "name": { "en":  "Population by Employee Age Group",
+  "name": { 
+    "en": "Population by Employee Age Group",
     "fr": "Population selon le groupe d’âge",
   },
 
-  "title": { "en": "Population by Employee Age Group",
+  "title": { 
+    "en": "Population by Employee Age Group",
     "fr": "Population selon le groupe d’âge",
   },
 
@@ -53,7 +55,7 @@ export default {
     this.add_col({
       "key": true,
       "type": "short-str",
-      "nick" : 'age',
+      "nick": 'age',
       "header": {
         "en": "Age Group",
         "fr": "Groupe d’âge",
@@ -106,7 +108,7 @@ export default {
         return emp_age_map[x.age];
       });
     },
-    "high_level_rows" : function(){
+    "high_level_rows": function(){
       var groups = this.high_level_age_split();
       return _.map(compact_age_groups, function(age_group){
         var summed = _.map(people_years, function(year){
@@ -121,7 +123,7 @@ export default {
         return [age_group].concat(summed);
       });
     },
-    "high_level_rows_with_percentage" : function(year) {
+    "high_level_rows_with_percentage": function(year) {
       var fm1 = formats["big_int_real"];
       var fm2 = formats.percentage;
       var column = _.map(this.data, year);
@@ -141,10 +143,10 @@ export default {
     },
   },
 
-  "dimensions" : [
+  "dimensions": [
     {
-      title_key : "age_group_condensed",
-      include_in_report_builder : true,
+      title_key: "age_group_condensed",
+      include_in_report_builder: true,
 
       filter_func: function(options){
         return function(row){
@@ -153,8 +155,8 @@ export default {
       },
     },
     {
-      title_key : "age_group",
-      include_in_report_builder : true,
+      title_key: "age_group",
+      include_in_report_builder: true,
 
       filter_func: function(options){
         return function(row){
@@ -180,7 +182,7 @@ export default {
 
 Statistics.create_and_register({
   id: 'table11_dept_info', 
-  table_deps: [ 'table11'],
+  table_deps: ['table11'],
   level: 'dept',
   compute: (subject, tables, infos, add, c) => {
     const table = tables.table11;
@@ -199,7 +201,7 @@ Statistics.create_and_register({
 
 Statistics.create_and_register({
   id: 'table11_gov_info', 
-  table_deps: [ 'table11'],
+  table_deps: ['table11'],
   level: 'gov',
   compute: (subject, tables, infos, add, c) => {
     const table = tables.table11;

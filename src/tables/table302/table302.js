@@ -19,7 +19,7 @@ const {
 export default {
   "id": "table302",
   source: ["RPS"],
-  "tags" : [ 
+  "tags": [ 
     "PEOPLE",
     "FPS",
     "SUPPRESSED_DATA",
@@ -31,8 +31,8 @@ export default {
   },
   
   "name": { 
-    "en":  "Population by Employee Gender",
-    "fr":  "Population selon le sexe",
+    "en": "Population by Employee Gender",
+    "fr": "Population selon le sexe",
   },
 
   "title": { 
@@ -40,25 +40,25 @@ export default {
     "fr": "Population selon le sexe",
   },
 
-  "add_cols" : function(){
+  "add_cols": function(){
     this.add_col({
       "type":"int",
-      "key" : true,
-      "hidden" : true,
-      "nick" : "dept",
-      "header":'',
+      "key": true,
+      "hidden": true,
+      "nick": "dept",
+      "header": '',
     });
     this.add_col({
-      "key" : true,
+      "key": true,
       "type": "int",
-      "nick" : 'gender',
+      "nick": 'gender',
       "header": text_maker("employee_gender"),
     });
     _.each(people_years,(header,ix)=>{
       this.add_col({
         "simple_default": ix === 4,
-        "type":"big_int_real",
-        "nick":header,
+        "type": "big_int_real",
+        "nick": header,
         "header": m("{{mar_31}}") + ", " + people_years_short_second[ix],
         "description": {
           "en": "Corresponds to the active employee population by Gender, as of March 31 " + people_years_short_second[ix],
@@ -74,12 +74,12 @@ export default {
         "en": text_maker("five_year_percent_description"),
         "fr": text_maker("five_year_percent_description"),
       },
-      "formula"  : people_five_year_percentage_formula("gender",people_years),
+      "formula": people_five_year_percentage_formula("gender",people_years),
     });
   },
 
-  "queries" : {
-    "gov_grouping" : function() {
+  "queries": {
+    "gov_grouping": function() {
       return _.chain(this.table.horizontal(people_years,false))
         .map(function(people_years, key){
           return [key].concat(people_years);
@@ -91,10 +91,10 @@ export default {
     },
   },
 
-  "dimensions" : [
+  "dimensions": [
     {
-      "title_key" :"horizontal",
-      include_in_report_builder : true,
+      "title_key": "horizontal",
+      include_in_report_builder: true,
 
       filter_func: function(options){
         return function(row){
@@ -166,6 +166,5 @@ Statistics.create_and_register({
     
     add("head_count_gender_top_avg_percent_NA_included", _.max(avg_percent_shares));
     add("head_count_gender_bottom_avg_percent_NA_included", _.min(avg_percent_shares));
-    add( "five_year_total_head_count", five_year_total); // Used to calculate %'s for gov pie chart
   },
 });

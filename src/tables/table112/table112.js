@@ -34,8 +34,8 @@ export default {
   },
 
   "name": {
-    "en":  "Population by Executive Level",
-    "fr":  "Population selon les niveaux des cadres supérieurs",
+    "en": "Population by Executive Level",
+    "fr": "Population selon les niveaux des cadres supérieurs",
   },
 
   "title": {
@@ -90,17 +90,17 @@ export default {
   "dimensions": [
     {
       "title_key": "horizontal",
-      include_in_report_builder : true,
+      include_in_report_builder: true,
 
-      filter_func : function(options){
+      filter_func: function(options){
         return function(row){
           return row.ex_lvl;
         };
       },
     },
     {
-      title_key : "ex_level_condensed",
-      include_in_report_builder : true,
+      title_key: "ex_level_condensed",
+      include_in_report_builder: true,
 
       filter_func: function(options){
         return function(row){
@@ -131,7 +131,7 @@ export default {
 
 Statistics.create_and_register({
   id: 'table112_dept_info', 
-  table_deps: [ 'table112'],
+  table_deps: ['table112'],
   level: 'dept',
   compute: (subject, tables, infos, add, c) => {
     const table = tables.table112;
@@ -189,7 +189,7 @@ Statistics.create_and_register({
 
 Statistics.create_and_register({
   id: 'table112_gov_info', 
-  table_deps: [ 'table112'],
+  table_deps: ['table112'],
   level: 'gov',
   compute: (subject, tables, infos, add, c) => {
     const table = tables.table112;

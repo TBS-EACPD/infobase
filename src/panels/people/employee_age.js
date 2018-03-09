@@ -1,4 +1,4 @@
-import "employee_age.ib.yaml";
+import "./employee_age.ib.yaml";
 import {
   formats,
   text_maker,
@@ -30,7 +30,7 @@ const emp_age_render = function(panel,data,options){
     stacked: false,
     sort_data: false,
     yaxis_formatter: formats["big_int_real_raw"],
-    get_data:  row => row.data, 
+    get_data: row => row.data, 
     legend_title: "age_group",
     data: graph_args.age_group,
   };
@@ -46,7 +46,7 @@ const emp_age_render = function(panel,data,options){
       label_col_header: text_maker("age_group"), 
       data_col_headers: [...ticks, text_maker("five_year_percent_header")], 
       data: _.map(graph_args.age_group, dimension => { 
-        return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]} 
+        return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]};
       }),
     });
   }

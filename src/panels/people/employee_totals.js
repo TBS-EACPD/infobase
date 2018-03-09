@@ -32,7 +32,7 @@ const total_hist_employment_render = function(panel,data){
       container: panel.areas().graph, 
       label_col_header: text_maker("org"), 
       data_col_headers: ticks, 
-      data : [{label: subject.sexy_name, data: series[""]}],
+      data: [{label: subject.sexy_name, data: series[""]}],
     });
   } else {
     new D3.LINE.ordinal_line(panel.areas().graph.node(), {
@@ -57,8 +57,8 @@ new PanelGraph({
   key: "employee_totals",
 
   layout: {
-    full: {text : 4, graph: 8},
-    half: {text : 12, graph: 12},
+    full: {text: 4, graph: 8},
+    half: {text: 12, graph: 12},
   },
 
   text: "dept_employee_totals_text",

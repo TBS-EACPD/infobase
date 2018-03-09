@@ -1,4 +1,4 @@
-import "employee_executive_level.ib.yaml";
+import "./employee_executive_level.ib.yaml";
 import {
   formats,
   text_maker,

@@ -1,4 +1,4 @@
-import "employee_occ_category.ib.yaml";
+import "./employee_occ_category.ib.yaml";
 import {
   formats,
   text_maker,

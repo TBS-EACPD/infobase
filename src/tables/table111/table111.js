@@ -31,8 +31,8 @@ export default {
   },
   
   "name": {
-    "en":  "Population by Occupational Category",
-    "fr":  "Population selon la catégorie professionnelle",
+    "en": "Population by Occupational Category",
+    "fr": "Population selon la catégorie professionnelle",
   },
 
   "title": {
@@ -113,7 +113,7 @@ export default {
 
 Statistics.create_and_register({
   id: 'table111_dept_info', 
-  table_deps: [ 'table111'],
+  table_deps: ['table111'],
   level: 'dept',
   compute: (subject, tables, infos, add, c) => {
     const table = tables.table111;
@@ -127,7 +127,7 @@ Statistics.create_and_register({
     const exec_row = _.find(
       q.data, 
       {
-        occ_cat : (
+        occ_cat: (
           window.lang === 'en' ?  
           "Executive and Law Management" :
           "Cadres supérieurs et gestion du droit"
@@ -138,7 +138,7 @@ Statistics.create_and_register({
         
     let avg_ex_share;
     if (exec_row) {
-      const exec_vals = _.map(people_years, y => exec_row[y] )
+      const exec_vals = _.map(people_years, y => exec_row[y])
       const dept_rows = table.depts[subject.id];
 
       const total_dept_vals = _.map(people_years, y => d3.sum( _.map(dept_rows, _.property(y))));
@@ -155,13 +155,11 @@ Statistics.create_and_register({
 
 Statistics.create_and_register({
   id: 'table111_gov_info', 
-  table_deps: [ 'table111'],
+  table_deps: ['table111'],
   level: 'gov',
   compute: (subject, tables, infos, add, c) => {
     const table = tables.table111;
     const q = table.q(subject);
-    
-    add( "five_year_total_head_count", d3.sum(q.sum(people_years, {as_object: false}))); // Used to calculate %'s for gov pie chart
     
     const all_years = q.gov_grouping();
     

@@ -32,8 +32,8 @@ export default {
   },
 
   "name": {
-    "en":  "Population by Geographic Region",
-    "fr":  "Population selon la région géographique",
+    "en": "Population by Geographic Region",
+    "fr": "Population selon la région géographique",
   },
 
   "title": {
@@ -85,7 +85,7 @@ export default {
       "description": {
         "en": text_maker("five_year_percent_description"),
         "fr": text_maker("five_year_percent_description"),
-      }  ,
+      },
       "formula": people_five_year_percentage_formula("region",people_years),
     });
   },
@@ -96,7 +96,7 @@ export default {
     return row;
   },
 
-  "sort" : function(mapped_rows, lang){
+  "sort": function(mapped_rows, lang){
     return _.sortBy(mapped_rows, function(row){
       if (row.region === provinces.abroad.text){
         return "Z";
@@ -155,13 +155,13 @@ export default {
 
   "dimensions": [
     {
-      title_key : "prov"  ,
+      title_key: "prov",
       filter_func: _.constant(_.property('region') ),
     },
     {
-      title_key : "prov_code",
-      exclude_from_rpb : true,
-      filter_func : _.constant( _.property('region_code') ),
+      title_key: "prov_code",
+      exclude_from_rpb: true,
+      filter_func: _.constant( _.property('region_code') ),
     },
   ],
 };

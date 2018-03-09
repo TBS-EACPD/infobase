@@ -1,4 +1,4 @@
-import "employee_fol.ib.yaml";
+import "./employee_fol.ib.yaml";
 import {
   formats,
   text_maker,
@@ -22,18 +22,18 @@ const employee_fol_render = function(panel, data){
   if (!window.is_a11y_mode){
     if (this.level === "dept" || window.is_a11y_mode){
       const create_graph_with_legend_options = {
-        legend_col_full_size : 4,
-        graph_col_full_size : 8,
-        graph_col_class : "height-clipped-bar-area",
-        legend_class : 'fcol-sm-11 fcol-md-11',
-        y_axis : text_maker("employees"),
-        ticks : ticks,
-        height : this.height,
-        bar : true,
-        yaxis_formatter : formats["big_int_real_raw"],
-        legend_title : "FOL",
-        get_data :  _.property("data"),
-        data : graph_args,
+        legend_col_full_size: 4,
+        graph_col_full_size: 8,
+        graph_col_class: "height-clipped-bar-area",
+        legend_class: 'fcol-sm-11 fcol-md-11',
+        y_axis: text_maker("employees"),
+        ticks: ticks,
+        height: this.height,
+        bar: true,
+        yaxis_formatter: formats["big_int_real_raw"],
+        legend_title: "FOL",
+        get_data: _.property("data"),
+        data: graph_args,
       };     
       
       // Inserts new row under the text/pie chart row containing bar graph, collapsed by a HeightCliper.
@@ -52,7 +52,7 @@ const employee_fol_render = function(panel, data){
       label_col_header: text_maker("age_group"), 
       data_col_headers: [...ticks, text_maker("five_year_percent_header")], 
       data: _.map(graph_args, dimension => { 
-        return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]} 
+        return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]};
       }),
     });
   }
@@ -125,7 +125,7 @@ new PanelGraph({
         return {
           label: fol_text,
           data: yearly_values,
-          five_year_percent: yearly_values.reduce(function(sum, val) { return sum + val;}, 0)/gov_five_year_total_head_count,
+          five_year_percent: yearly_values.reduce(function(sum, val) { return sum + val }, 0)/gov_five_year_total_head_count,
           active: true,
         };
       });

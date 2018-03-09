@@ -5,11 +5,11 @@ import {
   run_template,
   PanelGraph,
   years,
+  business_constants,
   D3,
 } from "../shared"; 
 
-import {provinces} from '../../models/businessConstants.js';
-
+const { provinces } = business_constants;
 const {people_years} = years;
 
 const prov_split_render = function(panel,data,options){

@@ -81,7 +81,7 @@ new PanelGraph({
     return table9.q(dept).data
       .map(row =>
         ({
-          label:  row.employee_type,
+          label: row.employee_type,
           data: people_years.map(year => row[year]),
           five_year_percent: row.five_year_percent,
           active: true,

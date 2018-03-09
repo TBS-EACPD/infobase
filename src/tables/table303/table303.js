@@ -19,7 +19,7 @@ const {
 export default {
   "id": "table303",
   source: ["RPS"],
-  "tags" : [
+  "tags": [
     "PEOPLE",
     "FPS",
     "SUPPRESSED_DATA",
@@ -31,8 +31,8 @@ export default {
   }, 
  
   "name": { 
-    "en":  "Population by First Official Language",
-    "fr":  "Population selon la première langue officielle",
+    "en": "Population by First Official Language",
+    "fr": "Population selon la première langue officielle",
   },
 
   "title": { 
@@ -40,7 +40,7 @@ export default {
     "fr": "Population selon la première langue officielle",
   },
 
-  "add_cols" : function(){
+  "add_cols": function(){
     this.add_col({
       "type": "int",
       "key": true,
@@ -166,6 +166,5 @@ Statistics.create_and_register({
     
     add("head_count_fol_top_avg_percent_NA_included", _.max(avg_percent_shares));
     add("head_count_fol_bottom_avg_percent_NA_included", _.min(avg_percent_shares));
-    add( "five_year_total_head_count", five_year_total); // Used to calculate %'s for gov pie chart
   },
 });

@@ -1,4 +1,4 @@
-import "employee_gender.ib.yaml";
+import "./employee_gender.ib.yaml";
 import {
   formats,
   text_maker,

@@ -10,8 +10,11 @@ import {
   years,
 } from "../table_common";
 
-const {tenure} = business_constants;
-const {people_years, people_years_short_second} = years;
+const { tenure } = business_constants;
+const {
+  people_years,
+  people_years_short_second,
+} = years;
 
 export default {
   "id": "table9",
@@ -85,10 +88,10 @@ export default {
 
   "dimensions": [
     {
-      title_key : "employee_type",
-      include_in_report_builder : true,
+      title_key: "employee_type",
+      include_in_report_builder: true,
 
-      filter_func : function(options){
+      filter_func: function(options){
         return function(row){
           return row.employee_type;
         };
@@ -111,7 +114,7 @@ export default {
 
 Statistics.create_and_register({
   id: 'table9_dept_info', 
-  table_deps: [ 'table9'],
+  table_deps: ['table9'],
   level: 'dept',
   compute: (subject, tables, infos, add, c) => {
     const table = tables.table9;
@@ -129,8 +132,8 @@ Statistics.create_and_register({
       q.get_top_x(
         ["employee_type",col],
         {
-          zip : true,
-          sort_col : col,
+          zip: true,
+          sort_col: col,
         }
       )
     );
@@ -168,12 +171,12 @@ Statistics.create_and_register({
 
 Statistics.create_and_register({
   id: 'table9_gov_info', 
-  table_deps: [ 'table9'],
+  table_deps: ['table9'],
   level: 'gov',
   compute: (subject, tables, infos, add, c) => {
     const table = tables.table9;
     const q = table.q(subject);
-    const col =  "{{ppl_last_year}}";
+    const col = "{{ppl_last_year}}";
     const yearly_total_head_counts = q.sum(people_years, {as_object: false});
     const five_year_total_head_count = d3.sum(yearly_total_head_counts);
 
