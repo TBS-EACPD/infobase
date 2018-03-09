@@ -29,6 +29,64 @@ const { Table } = require('../core/TableClass.js');
 
 const { StandardRouteContainer } = require('../core/NavComponents.js');
 
+const HImageCard = ({
+  title_key,
+  text_key,
+  link_key,
+  link_href,
+  text_args,
+}) => (
+  <div className="h-img-card col-content-child">
+    <div className="h-img-card__right-container">
+      <div className="h-img-card__right">
+        <header className="h-img-card__title">
+          <TM k={title_key}/>
+        </header>
+        <div className="h-img-card__text">
+          <TM k={text_key} args={text_args} />
+        </div>
+        <div className="h-img-card__bottom-right">
+          <a href={link_href}>
+            <TM k={link_key} /> →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+)
+
+const VImageCard = ({
+  img_src,
+  title_key,
+  text_key,
+  link_key,
+  link_href,
+}) => (
+  <div className="v-img-card col-content-child">
+    <div className="v-img-card__top-container">
+      <div aria-hidden={true} className="v-img-card__top">
+        <a className="v-img-card__img-link" href={link_href}>
+          <img src={img_src} className="v-img-card__img" />
+        </a>
+      </div>
+    </div>
+    <div className="v-img-card__bottom-container">
+      <div className="v-img-card__bottom">
+        <header className="v-img-card__title">
+          <TM k={title_key} />
+        </header>
+        <div className="v-img-card__text">
+          <TM k={text_key} />
+        </div>
+
+        <div className="v-img-card__bottom-right">
+          <a href={link_href}><TM k={link_key} /></a>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 
 export class Home extends React.Component {
   constructor(){
@@ -92,8 +150,6 @@ const FeaturedContentItem = ({ text_key, href, is_new }) => <li className="list-
   { is_new && <span className="badge badge--is-new"> new </span> }
   <a href={href}> <TM k={text_key} /> </a>
 </li>;
-
-
 
 
 const HomeLayout = props => (
@@ -204,74 +260,35 @@ const HomeLayout = props => (
       <div className={classNames("equal-height-row equal-height-row--home-row")}>
         <div className="equal-height-col is-1-third">
           <div className="col-content misc-col-content">
-            <div className="h-img-card col-content-child">
-              <div className="h-img-card__right-container">
-                <div className="h-img-card__right">
-                  <header className="h-img-card__title">
-                    <TM k="home_finance_title" />
-                  </header>
-
-                  <div className="h-img-card__text">
-                    <TM k="home_finance_intro" args={props} />
-                  </div>
-
-                  <div className="h-img-card__bottom-right">
-                    <a href="#orgs/gov/gov/infograph/financial">
-                      <TM k="home_finance_link" /> →
-                    </a>
-                  </div>
-                </div>
-              </div>
-    
-            </div>
+            <HImageCard
+              link_href="#orgs/gov/gov/infograph/financial"
+              title_key="home_finance_title"
+              text_key="home_finance_intro"
+              link_key="home_finance_link"
+              text_args={props}
+            />
           </div>
         </div>
         <div className="equal-height-col is-1-third">
           <div className="col-content misc-col-content">
-            <div className="h-img-cardcol-content-child">
-              <div className="h-img-card__right-container">
-                <div className="h-img-card__right">
-                  <header className="h-img-card__title">
-                    <TM k="home_ppl_title"  />
-                  </header>
-
-                  <div className="h-img-card__text">
-                    <TM k="home_ppl_intro" args={props} />
-                  </div>
-
-                  <div className="h-img-card__bottom-right">
-                    <a href="#orgs/gov/gov/infograph/people">
-                      <TM k="home_ppl_link"/> →
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-            </div>
+            <HImageCard
+              link_href="#orgs/gov/gov/infograph/people"
+              title_key="home_ppl_title"
+              text_key="home_ppl_intro"
+              link_key="home_ppl_link"
+              text_args={props}
+            />
           </div>
         </div>
         <div className="equal-height-col is-1-third">
           <div className="col-content misc-col-content">
-            <div className="h-img-card col-content-child" >
-              <div className="h-img-card__right-container">
-                <div className="h-img-card__right">
-                  <header className="h-img-card__title">
-                    <TM k="home_results_title" />
-                  </header>
-
-                  <div className="h-img-card__text">
-                    <TM k="home_results_intro" args={props} />
-                  </div>
-
-                  <div className="h-img-card__bottom-right">
-                    <a href="#orgs/gov/gov/infograph/results">
-                      <TM k="home_results_link" /> →
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-            </div>
+            <HImageCard
+              link_href="#orgs/gov/gov/infograph/results"
+              title_key="home_results_title"
+              text_key="home_results_intro"
+              link_key="home_results_link"
+              text_args={props}
+            />
           </div>
         </div>
       </div>
@@ -283,55 +300,24 @@ const HomeLayout = props => (
     <div className="equal-height-row equal-height-row--home-row">
       <div aria-hidden={true} className="equal-height-col is-1-third">
         <div className="col-content featured-col-content">
-          <div className="v-img-card col-content-child">
-            <div className="v-img-card__top-container">
-              <div aria-hidden={true} className="v-img-card__top">
-                <a className="v-img-card__img-link" href="#partition/dept/exp">
-                  <img src="./png/partition.png" className="v-img-card__img" />
-                </a>
-              </div>
-            </div>
-            <div className="v-img-card__bottom-container">
-              <div className="v-img-card__bottom">
-                <header className="v-img-card__title">
-                  <TM k="partition_home_title" />
-                </header>
-                <div className="v-img-card__text">
-                  <TM k="partition_home_text" />
-                </div>
-
-                <div className="v-img-card__bottom-right">
-                  <a href="#partition/dept/exp"><TM k="check_home_link" /></a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <VImageCard
+            img_src="./png/partition.png"
+            title_key="partition_home_title"
+            text_key="partition_home_text"
+            link_key="check_home_link"
+            link_href="#partition/dept/exp"
+          />
         </div>
       </div>
       <div aria-hidden={true} className="equal-height-col is-1-third">
         <div className="col-content featured-col-content">
-          <div className="v-img-card col-content-child">
-            <div className="v-img-card__top-container">
-              <div aria-hidden={true} className="v-img-card__top">
-                <a className="v-img-card__img-link" href="#explore-dept">
-                  <img src="./png/bubbles.png" className="v-img-card__img" />
-                </a>
-              </div>
-            </div>
-            <div className="v-img-card__bottom-container">
-              <div className="v-img-card__bottom">
-                <header className="v-img-card__title">
-                  <TM k="planet_home_title" />
-                </header>
-                <div className="v-img-card__text">
-                  <TM k="planet_home_text" />
-                </div>
-                <div className="v-img-card__bottom-right">
-                  <a href="#explore-dept"> <TM k="check_home_link" /> </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <VImageCard
+            img_src="./png/bubbles.png"
+            title_key="planet_home_title"
+            text_key="planet_home_text"
+            link_key="check_home_link"
+            link_href="#explore-dept"
+          />
         </div>
       </div>
       <div className="equal-height-col is-1-third">
@@ -354,86 +340,35 @@ const HomeLayout = props => (
     <div className='equal-height-row equal-height-row--home-row'>
       <div className="equal-height-col is-1-third">
         <section className="col-content explore-col-content">
-          <div className="v-img-card col-content-child">
-            <div className="v-img-card__top-container">
-              <div aria-hidden={true} className="v-img-card__top">
-                <a className="v-img-card__img-link" href="#resource-explorer">
-                  <img src="./png/explorer.png" className="v-img-card__img"  />
-                </a>
-              </div>
-            </div>
-            <div className="v-img-card__bottom-container">
-              <div className="v-img-card__bottom">
-                <header className="v-img-card__title">
-                  <TM k="explorer_home_title" />
-                </header>
-
-                <div className="v-img-card__text">
-                  <TM k="explorer_home_text" />
-                </div>
-
-                <div className="v-img-card__bottom-right">
-                  <a href="#resource-explorer"> <TM k="start_exp_link" /> </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <VImageCard
+            img_src="./png/explorer.png"
+            title_key="explorer_home_title"
+            text_key="explorer_home_text"
+            link_key="start_exp_link"
+            link_href="#resource-explorer"
+          />
         </section>
       </div>
       <div className="equal-height-col is-1-third">
         <section className="col-content explore-col-content">
-          <div className="v-img-card col-content-child">
-            <div className="v-img-card__top-container">
-              <div aria-hidden={true} className="v-img-card__top">
-                <a className="v-img-card__img-link" href="#rpb">
-                  <img src="./png/Builder.png" className="v-img-card__img" />
-                </a>
-              </div>
-            </div>
-            <div className="v-img-card__bottom-container">
-              <div className="v-img-card__bottom">
-                <header className="v-img-card__title">
-                  <TM k="home_build_a_report" />
-                </header>
-
-                <div className="v-img-card__text">
-                  <TM k="report_builder_home_desc" />
-                </div>
-
-                <div className="v-img-card__bottom-right">
-                  <a href="#rpb"> <TM k="start_build_link" /> </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <VImageCard
+            img_src="./png/Builder.png"
+            title_key="home_build_a_report"
+            text_key="report_builder_home_desc"
+            link_key="start_build_link"
+            link_href="#rpb"
+          />
         </section>
       </div>
       <div className="equal-height-col is-1-third">
         <section className="col-content explore-col-content">
-          <div className="v-img-card col-content-child">
-            <div className="v-img-card__top-container">
-              <div aria-hidden={true} className="v-img-card__top">
-                <a className="v-img-card__img-link" href="#igoc">
-                  <img src="./png/structure_panel.png" className="v-img-card__img" />
-                </a>
-              </div>
-            </div>
-            <div className="v-img-card__bottom-container">
-              <div className="v-img-card__bottom">
-                <header className="v-img-card__title">
-                  <TM k="igoc_home_title" />
-                </header>
-
-                <div className="v-img-card__text">
-                  <TM k="igoc_home_desc" />
-                </div>
-
-                <div className="v-img-card__bottom-right">
-                  <a href="#igoc"><TM k="start_search_link" /> </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <VImageCard
+            img_src="./png/structure_panel.png"
+            title_key="igoc_home_title"
+            text_key="igoc_home_desc"
+            link_key="start_search_link"
+            link_href="#igoc"
+          />
         </section>
       </div>
     </div>
@@ -468,52 +403,23 @@ const HomeLayout = props => (
 
       <div className="equal-height-col is-1-third">
         <section className="col-content misc-col-content">
-          <div className="h-img-card col-content-child">
-
-            <div className="h-img-card__right-container">
-              <div className="h-img-card__right">
-                <header className="h-img-card__title">
-                  <TM k="metadata_home_title" />
-                </header>
-
-                <div className="h-img-card__text">
-                  <TM k="metadata_home_desc" />
-                </div>
-
-                <div className="h-img-card__bottom-right">
-                  <a href="#metadata"> 
-                    <TM k="metadata_home_link_text" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <HImageCard
+            link_href="#metadata"
+            title_key="metadata_home_title"
+            text_key="metadata_home_desc"
+            link_key="metadata_home_link_text"
+          />
         </section>
       </div>
 
       <div className="equal-height-col is-1-third">
         <section className="col-content misc-col-content">
-          <div className="h-img-card col-content-child">
-
-            <div className="h-img-card__right-container">
-              <div className="h-img-card__right">
-                <header className="h-img-card__title">
-                  <TM k="feed_home_title" />
-                </header>
-                <div className="h-img-card__text">
-                  <TM k="feed_home_text" />
-                </div>
-                <div className="h-img-card__bottom-right">
-                  <a
-                    target="_blank" 
-                    href={text_maker("survey_link")}
-                  >
-                    <TM k="feed_home_link" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <HImageCard
+            link_href={text_maker("survey_link")}
+            title_key="feed_home_title"
+            text_key="feed_home_text"
+            link_key="feed_home_link"
+          />
         </section>
       </div>
     </div> 
