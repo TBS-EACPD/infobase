@@ -1,5 +1,3 @@
-exports = module.exports;
-
 import "./table9.ib.yaml";
 
 import {
@@ -15,7 +13,7 @@ import {
 const {tenure} = business_constants;
 const {people_years, people_years_short_second} = years;
 
-module.exports = {
+export default {
   "id": "table9",
   source: ["RPS"],
   "tags": [

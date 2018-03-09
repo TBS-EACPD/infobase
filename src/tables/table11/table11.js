@@ -1,5 +1,3 @@
-exports = module.exports;
-
 import "./table11.ib.yaml";
 
 const {STATS, 
@@ -20,7 +18,7 @@ const {STATS,
 } = require("../table_common");
 
 
-module.exports = {
+export default {
   "id": "table11",
   source: ["RPS"],
   "tags": [

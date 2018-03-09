@@ -1,11 +1,8 @@
-"use strict";
-
 import {
   provinces,
   provinces_short,
 } from '../models/businessConstants.js';
 
-exports = module.exports;
 /* 1,043 × 1010 style="opacity:0.65822784;fill:#000000;fill-opacity:1;stroke:none" width="94.350761" height="81.185539" */ // base map obtained from [here](http://commons.wikimedia.org/wiki/File:Canada_blank_map.svg) 
 //
 // data in the following format:
@@ -40,7 +37,7 @@ var ordering = {
   na: 15,
 };
 
-exports.canada = class canada {
+export class canada {
   
   constructor(container,options){
 
