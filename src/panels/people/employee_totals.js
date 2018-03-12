@@ -20,7 +20,7 @@ const total_hist_employment_calc = function(subject,info){
   const q = table9.q(subject);
   return { 
     series: { '': people_years.map(y => q.sum(y)) },
-    ticks: _.map(people_years_short_second, y => `${months[3].text} <br> ${run_template(y)}`),
+    ticks: _.map(people_years_short_second, y => `${months[3].text}<br>${run_template(y)}`),
   };
 };
 const total_hist_employment_render = function(panel,data){
