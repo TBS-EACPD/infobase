@@ -1,26 +1,28 @@
+import "./drr_summary_text.ib.yaml";
 import classNames from 'classnames';
-const {
+import {
   PanelGraph,
   reactAdapter,
-  util_components: {
-    TM,
-    Format,
-  },
+  util_components,
   text_maker,
-} = require("../shared");
+  declarative_charts,
+} from "../shared";
+import { IconArray } from '../../charts/IconArray.js';
 
-const { 
+
+import { 
   row_to_drr_status_counts,
-  result_statuses,
   compute_counts_from_set,
   Result,
   Indicator,
   ResultCounts,
-} = require('./results_common.js');
+} from './results_common.js';
 
-require("./drr_summary_text.ib.yaml");
 
-const { IconArray } = require('../../charts/IconArray.js');
+
+
+const { TM } = util_components;
+const { A11YTable } = declarative_charts
 
 const grid_colors = {
   fail: "results-icon-array-fail",
@@ -87,7 +89,6 @@ const MiniLegend = ({ items }) => (
   </div>
 )
 
-const PctFormat = ({val}) => <Format type="percentage1" content={val} />;
 const StatusGrid = props => {
   const {
     past_success, 
@@ -100,23 +101,14 @@ const StatusGrid = props => {
     future_not_appl,
     future_not_avail,
 
-    other_success, 
-    other_failure, 
-    other_not_appl,
-    other_not_avail,
   } = props;
   
   
   const past_total = past_success + past_failure + past_not_avail + past_not_appl;
   const future_total = future_success + future_failure + future_not_avail + future_not_appl;
-  const other_total = other_success + other_failure + other_not_appl + other_not_avail;
 
   const include_future_col = future_total > 0;
   const include_past_col = past_total > 0;
-  const include_other_col = other_total > 0;
-
-  const include_not_avail_row = other_not_avail + future_not_avail + past_not_avail > 0;
-  const include_not_appl_row = other_not_appl + future_not_appl + past_not_appl > 0;
 
   const maxSize = 800;
   const non_other_total = past_total + future_total;
@@ -136,10 +128,10 @@ const StatusGrid = props => {
       .groupBy( ([key,val]) => status_keys_to_icon_keys[key] )
       .map( (amounts, icon_key) => {
         const key_total = _.sumBy(amounts,1);
-        
+
         return {
           icon_key,
-          count: (
+          viz_count: (
             shouldFactorDown ? 
             Math.ceil(
             period === "past"  ?
@@ -148,16 +140,23 @@ const StatusGrid = props => {
             ) : 
             key_total
           ),
+          real_count: key_total,
         };
       })
       .value();
 
 
+    const period_title= (
+      period === "past" ?
+      text_maker("icon_array_past_header") :
+      text_maker("icon_array_future_header")
+    );
+
     return {
       viz_data: _.chain(data)
-        .sortBy(({icon_key}) => _.indexOf(icon_order, icon_key) )
-        .flatMap( ({count,icon_key}) => {
-          return _.range(0,count)
+        .sortBy(({icon_key}) => icon_order[icon_key] )
+        .flatMap( ({viz_count,icon_key}) => {
+          return _.range(0,viz_count)
             .map(()=> ({ 
               className: grid_colors[icon_key], 
             }));
@@ -168,22 +167,38 @@ const StatusGrid = props => {
           className: grid_colors[icon_key],
           id: icon_key,
           label: text_maker(`${period}_${icon_key}`),
-          order: _.indexOf(icon_order, icon_key),
+          order: icon_order[icon_key],
         }))
         .sortBy('order')
         .value(),
-      title: (
-        period === "past" ?
-        text_maker("icon_array_past_header") :
-        text_maker("icon_array_future_header")
-      ),
+      a11y_data: is_a11y_mode && {
+        label_col_header: text_maker('status'),
+        data: _.map(data, ({icon_key, real_count}) => ({
+          label: text_maker(`${period}_${icon_key}`),
+          data: [ real_count ] ,
+        })),
+        data_col_headers: [ period_title ],
+      },
     };
   });
+
+  if(is_a11y_mode){
+
+    return <div>
+      <A11YTable
+        {...past_config.a11y_data}
+      />
+      <A11YTable
+        {...future_config.a11y_data}
+      />
+    </div>
+  }
 
   const to_visualize = include_past_col ? [ past_config ] : [];
   if(include_future_col){ 
     to_visualize.push(future_config);
   }
+
 
   return (
     <div>
@@ -209,108 +224,6 @@ const StatusGrid = props => {
   );
 }
 
-
-const OldStatusTable = ({
-  past_success, 
-  past_failure, 
-  past_not_appl, 
-  past_not_avail,
-
-  future_success, 
-  future_failure, 
-  future_not_appl,
-  future_not_avail,
-
-  other_success, 
-  other_failure, 
-  other_not_appl,
-  other_not_avail,
-}) => {
-  const past_total = past_success + past_failure + past_not_avail + past_not_appl;
-  const future_total = future_success + future_failure + future_not_avail + future_not_appl;
-  const other_total = other_success + other_failure + other_not_appl + other_not_avail;
-
-  const include_future_col = future_total > 0;
-  const include_past_col = past_total > 0;
-  const include_other_col = other_total > 0;
-
-  const include_not_avail_row = other_not_avail + future_not_avail + past_not_avail > 0;
-  const include_not_appl_row = other_not_appl + future_not_appl + past_not_appl > 0;
-
-
-  return (
-    <div style={{overflowX: "auto"}}>
-      <table className="table table-dark-bordered table-light-background drr-summary-table">
-        <caption> <TM k="indicator_targets" />  </caption>
-        <thead>
-          <tr className="active">
-            <th className="center-text" scope="row"></th>
-            { include_past_col && <th className="center-text" scope="col"> <TM k="targets_to_achieve_past" /> </th> }
-            { include_future_col && <th className="center-text" scope="col"> <TM k="targets_to_achieve_future_and_ongoing" /> </th> }
-            { include_other_col && <th className="center-text" scope="col"> <TM k="targets_to_achieve_other" /> </th> }
-          </tr>
-        </thead>
-        <tbody>
-          <tr className="active">
-            <th scope="row">
-              {result_statuses.past_success.text}
-            </th>
-            { include_past_col && <td className="right_number success"> <PctFormat val={past_success/past_total}/> </td> }
-            { include_future_col && <td className="right_number success disabled-success"></td> }
-            { include_other_col && <td className="right_number success"> <PctFormat val={other_success/other_total}/> </td> }
-          </tr>
-          { include_future_col && 
-            <tr className="active">
-              <th scope="row">
-                {result_statuses.future_success.text}
-              </th>
-              { include_past_col && <td className="right_number disabled-success success"></td> }
-              { include_future_col && <td className="right_number success"> <PctFormat val={future_success/future_total}/> </td> }
-              { include_other_col && <td className="right_number disabled-success success"> </td> }
-            </tr>
-          }
-          <tr className="active">
-            <th scope="row">
-              {result_statuses.future_failure.text}
-            </th>
-            { include_past_col && <td className="right_number danger"> <PctFormat val={past_failure/past_total}/> </td> }
-            { include_future_col && <td className="right_number warning"> <PctFormat val={future_failure/future_total}/> </td> }
-            { include_other_col &&  <td className="right_number warning"> <PctFormat val={other_failure/other_total}/> </td> }
-          </tr>
-
-          { include_not_avail_row && 
-            <tr className="active">
-              <th scope="row">
-                {result_statuses.past_not_avail.text}
-              </th>
-              { include_past_col && <td className="right_number"> <PctFormat val={past_not_avail/past_total} /> </td> }
-              { include_future_col && <td className="right_number"> <PctFormat val={future_not_avail/future_total}/> </td> }
-              { include_other_col && <td className="right_number"> <PctFormat val={other_not_avail/other_total}/> </td> }
-            </tr>
-          }
-          { include_not_appl_row && 
-            <tr className="active">
-              <th scope="row">
-                {result_statuses.past_not_appl.text}
-              </th>
-              { include_past_col && <td className="right_number"> <PctFormat val={past_not_appl/past_total} /> </td> }
-              { include_future_col && <td className="right_number"> <PctFormat val={future_not_appl/future_total}/> </td> }
-              { include_other_col && <td className="right_number"> <PctFormat val={other_not_appl/other_total}/> </td> }
-            </tr>
-          }
-          <tr>
-            <th scope="row">
-              <TM k="total" />
-            </th>
-            { include_past_col && <td className="right_number"> <PctFormat val={1} /> ({past_total}) </td> }
-            { include_future_col && <td className="right_number"> <PctFormat val={1}/> ({future_total}) </td> }
-            { include_other_col && <td className="right_number"> <PctFormat val={1}/> ({other_total}) </td> }
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  );
-}
 
 export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts }) => {
 
