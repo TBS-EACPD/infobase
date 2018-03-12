@@ -215,3 +215,24 @@ div.d3-list, {
 .__label {
   font-weight: $mediumFontWeight;
 }
+
+
+
+
+.IconArrayItem {
+  width: 15px;
+  height: 15px;
+  margin: 0.5px;
+
+  &.IconArrayItem__Small {
+    width: 10px;
+    height: 10px;
+  }
+
+  &.IconArrayItem__Large {
+    width: 20px;
+    height: 20px;
+  }
+
+
+}

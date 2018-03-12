@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 const {
   PanelGraph,
   reactAdapter,
@@ -5,9 +6,7 @@ const {
     TM,
     Format,
   },
-  declarative_charts: {
-    GraphLegend,
-  },
+  text_maker,
 } = require("../shared");
 
 const { 
@@ -23,36 +22,33 @@ require("./drr_summary_text.ib.yaml");
 
 const { IconArray } = require('../../charts/IconArray.js');
 
-const grid_icons = {
-  fail : { color: 'red', className: "fas fa-times"  },
-  pass : { color: "green", className: "fas fa-check" },
-  fail_future : { color: "orange", className: "fas fa-clock"  },
-  pass_future : { color: "green", className: "fas fa-clock" },
-  question : { color: "#aaa", className: "far fa-question-circle" },
+const grid_colors = {
+  fail: "results-icon-array-fail",
+  pass: "results-icon-array-pass",
+  na:  "results-icon-array-na",
 };
+
 const icon_order = {
   pass: 0,
   fail: 5,
-  pass_future: 10,
-  fail_future: 15,
-  question: 25,
+  na: 10,
 };
 
 const status_keys_to_icon_keys = {
   past_success: 'pass',
   past_failure: 'fail',
-  past_not_appl: 'question',
-  past_not_avail: 'question',
+  past_not_appl: 'na',
+  past_not_avail: 'na',
 
-  future_success: 'pass_future',
-  future_failure: 'fail_future',
-  future_not_appl: 'question',
-  future_not_avail: 'question',
+  future_success: 'pass',
+  future_failure: 'fail',
+  future_not_appl: 'na',
+  future_not_avail: 'na',
 
   other_success: 'pass',
   other_failure: 'fail',
-  other_not_appl: 'question',
-  other_not_avail: 'question',
+  other_not_appl: 'na',
+  other_not_avail: 'na',
 };
 
 
@@ -61,26 +57,27 @@ const MiniLegend = ({ items }) => (
     style={{
       display: "flex",
       justifyContent: "flex-start",
-
+      flexWrap: "wrap",
+      fontSize: "0.8em",
     }}
   >
-    {_.map(items, ({label, id, color}) =>
+    {_.map(items, ({label, id, className}) =>
       <div
         key={id}
         style={{
           display: "flex",
           justifyContent: "flex-start",
           alignItems: "center",
-          margin: "5px",
+          margin: "5px 5px 5px 0",
         }}
       >
-        <div style={{
-          backgroundColor: color,
-          borderRadius: "100%",
-          width: "10px",
-          height: "10px",
-          marginRight: "5px",
-        }}
+        <div 
+          style={{
+            width: "20px",
+            height: "20px",
+            marginRight: "10px",
+          }}
+          className={className}
         />
         <span> {label} </span>
       </div>
@@ -121,79 +118,95 @@ const StatusGrid = props => {
   const include_not_avail_row = other_not_avail + future_not_avail + past_not_avail > 0;
   const include_not_appl_row = other_not_appl + future_not_appl + past_not_appl > 0;
 
+  const maxSize = 800;
+  const non_other_total = past_total + future_total;
+  const shouldFactorDown = non_other_total > maxSize;
+  const max_past_size = Math.ceil(past_total/non_other_total*maxSize);
+  const max_future_size = Math.ceil(future_total/non_other_total*maxSize);
+  const icon_array_size_class = classNames("IconArrayItem", non_other_total > 200 && "IconArrayItem__Small", non_other_total < 100  && "IconArrayItem__Large");
 
-  let viz_data = _.chain(props)
-    .pickBy( (val,key) => status_keys_to_icon_keys[key] && val > 0 )
-    .toPairs()
-    .groupBy( ([key,val]) => status_keys_to_icon_keys[key] )
-    .map( (amounts, icon_key) => ({
-      icon_key,
-      count: _.sumBy(amounts,1)
-    }))
-    .pipe(data => {
-      //TODO: make maxSize responsive
-      const maxSize = 400;
-      const total = _.sumBy(data, 'count');
-      if(total > maxSize){
-        return _.map(data, obj => Object.assign(obj,{ count: obj.count/total*maxSize }) );
-      }
-      return data;
-    })
-    .sortBy(({icon_key}) => _.indexOf(icon_order, icon_key) )
-    .flatMap( ({count,icon_key}) => {
-      return _.range(1,count +1)
-        .map(()=> _.clone(grid_icons[icon_key])  );
-    })
-    .value()
-
-  const legend_data = _.chain(props)
-    .pickBy( (val,key) => status_keys_to_icon_keys[key] && val > 0 )
-    .toPairs()
-    .map( ([key,val])=> ({
-      color: grid_icons[status_keys_to_icon_keys[key]].color,
-      key,
-      order: _.indexOf(icon_order, status_keys_to_icon_keys[key]),
-    }))
-    .sortBy('order')
-    .value();
+  const [ past_config, future_config ]  = _.map(["past","future"], period => {
+    const data = _.chain(props)
+      .pickBy( (val,key) => (
+        _.startsWith(key, period) && 
+        status_keys_to_icon_keys[key] && 
+        val > 0 
+      ))
+      .toPairs()
+      .groupBy( ([key,val]) => status_keys_to_icon_keys[key] )
+      .map( (amounts, icon_key) => {
+        const key_total = _.sumBy(amounts,1);
+        
+        return {
+          icon_key,
+          count: (
+            shouldFactorDown ? 
+            Math.ceil(
+            period === "past"  ?
+              (key_total/past_total)*max_past_size :
+              (key_total/future_total)*max_future_size
+            ) : 
+            key_total
+          ),
+        };
+      })
+      .value();
 
 
+    return {
+      viz_data: _.chain(data)
+        .sortBy(({icon_key}) => _.indexOf(icon_order, icon_key) )
+        .flatMap( ({count,icon_key}) => {
+          return _.range(0,count)
+            .map(()=> ({ 
+              className: grid_colors[icon_key], 
+            }));
+        })
+        .value(),
+      legend_data: _.chain(data)
+        .map( ({icon_key}) => ({
+          className: grid_colors[icon_key],
+          id: icon_key,
+          label: text_maker(`${period}_${icon_key}`),
+          order: _.indexOf(icon_order, icon_key),
+        }))
+        .sortBy('order')
+        .value(),
+      title: (
+        period === "past" ?
+        text_maker("icon_array_past_header") :
+        text_maker("icon_array_future_header")
+      ),
+    };
+  });
 
+  const to_visualize = include_past_col ? [ past_config ] : [];
+  if(include_future_col){ 
+    to_visualize.push(future_config);
+  }
 
   return (
-    <div 
-      style={{
-        maxHeight: "300px",
-        display: "flex",
-        flexDirection:"column",
-      }}
-    >
-      <MiniLegend
-        items={ 
-          _.map(legend_data, ({key, color}) => ({
-            label: key,
-            id: key,
-            color,
-          }))
-        } 
-      />
-      <IconArray
-        items={viz_data}
-        render_item={ ({color}) => 
-          <div
-            style={{
-              width: "10px",
-              height: "10px",
-              margin: "5px",
-              backgroundColor: color,
-              borderRadius: "100%",
-            }}
-          >
+    <div>
+      {_.map( to_visualize, ({ viz_data, legend_data, title },ix) => 
+        <div key={ix}>
+          <div className="h4">
+            {title}
           </div>
-        }
-      />
+          <MiniLegend items={legend_data}  />
+          <div>
+            <IconArray
+              items={viz_data}
+              render_item={ ({className}) => 
+                <div 
+                  className={classNames(icon_array_size_class, className)} 
+                />
+              }
+            />
+          </div>
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
 
@@ -299,11 +312,11 @@ const OldStatusTable = ({
   );
 }
 
-const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts }) => {
+export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts }) => {
 
   return (
-    <div className="frow middle top-xs between-md" style={{marginBottom: "30px"}}>
-      <div className="fcol-md-5 col-xs-12 medium_panel_text" >
+    <div className="frow middle-xs between-md" style={{marginBottom: "30px"}}>
+      <div className="fcol-md-5 fcol-xs-12 medium_panel_text" >
         <TM 
           k="drr_summary_text"
           args={Object.assign({ subject, num_depts, is_gov }, verbose_counts)} 
@@ -404,9 +417,3 @@ new PanelGraph({
     ); 
   },
 });
-
-//gov results will re-use the component in a larger panel, so it must be exported.
-module.exports = exports = {
-  DrrSummary,
-};
-

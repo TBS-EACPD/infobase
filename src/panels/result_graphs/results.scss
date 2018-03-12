@@ -262,3 +262,17 @@ dl.indicator-item__dl dt+dd {
   padding-left: 1px;
   color:#000;
 }
+
+
+/* color classes for icon-array viz */
+.results-icon-array-pass {
+  background-color:hsla(120, 85%, 30%, 0.8);
+}
+
+.results-icon-array-fail {
+  background-color: hsla(0, 100%, 55%, 0.8);
+}
+
+.results-icon-array-na {
+  background-color:hsla(39, 100%, 50%,0.8);
+}

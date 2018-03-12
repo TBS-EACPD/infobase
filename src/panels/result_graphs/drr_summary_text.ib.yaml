@@ -62,3 +62,38 @@ gov_drr_summary_org_table_text:
 show_all_orgs:
   en: Show all organizations
   fr: Montrer toutes les organisations
+
+
+
+past_pass:
+  en: Target met
+  fr: Cible atteinte
+
+past_fail:
+  en: Attention required (past due)
+  fr: Attention requise (échu)
+  
+past_na:
+  en: Not available/no longer applicable
+  fr: Non disponible/ne s'applique plus
+
+future_pass:
+  en: On track to meet target
+  fr: En voie d'atteindre la cible
+future_fail:
+  en: Attention required
+  fr: Attention requise 
+future_na:
+  en: Not available/no longer applicable
+  fr: Non disponible/ne s'applique plus
+
+
+icon_array_past_header:
+  transform: [handlebars]
+  en: Targets to be achieved by March 31, 2017
+  fr: Cibles à atteindre au plus tard le 31 mars 2017
+
+
+icon_array_future_header:
+  en: Targets to be achieved after March 31, 2017
+  fr: Cicles Permanent ou à atteindre après le 31 mars 2017
