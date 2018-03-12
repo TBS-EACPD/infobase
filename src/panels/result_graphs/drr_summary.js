@@ -171,6 +171,7 @@ const StatusGrid = props => {
         }))
         .sortBy('order')
         .value(),
+      title: period_title,
       a11y_data: is_a11y_mode && {
         label_col_header: text_maker('status'),
         data: _.map(data, ({icon_key, real_count}) => ({
