@@ -21,7 +21,7 @@ const {
 
 require("./drr_summary_text.ib.yaml");
 
-const {IconArray, FlexIconArray} = require('../../charts/IconArray.js');
+const { IconArray } = require('../../charts/IconArray.js');
 
 const grid_icons = {
   fail : { color: 'red', className: "fas fa-times"  },
@@ -55,6 +55,40 @@ const status_keys_to_icon_keys = {
   other_not_avail: 'question',
 };
 
+
+const MiniLegend = ({ items }) => (
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "flex-start",
+
+    }}
+  >
+    {_.map(items, ({label, id, color}) =>
+      <div
+        key={id}
+        style={{
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          margin: "5px",
+        }}
+      >
+        <div style={{
+          backgroundColor: color,
+          borderRadius: "100%",
+          width: "10px",
+          height: "10px",
+          marginRight: "5px",
+        }}
+        />
+        <span> {label} </span>
+      </div>
+    )}
+    
+
+  </div>
+)
 
 const PctFormat = ({val}) => <Format type="percentage1" content={val} />;
 const StatusGrid = props => {
@@ -134,8 +168,7 @@ const StatusGrid = props => {
         flexDirection:"column",
       }}
     >
-      <GraphLegend
-        isHorizontal={true} 
+      <MiniLegend
         items={ 
           _.map(legend_data, ({key, color}) => ({
             label: key,
@@ -144,26 +177,7 @@ const StatusGrid = props => {
           }))
         } 
       />
-      {null&& <IconArray 
-        data={viz_data}
-        render_item={ ({ data: { className, color } }, max_dim) => {
-          return `
-            <div 
-              style="
-                background-color: ${color};
-                border-radius: 100%;
-                width: ${0.5*max_dim}px;
-                height: ${0.5*max_dim}px;
-                
-              "
-            >
-            </div>
-          `;
-        }}
-        height={50}
-        items_per_row={20}
-      />}
-      <FlexIconArray
+      <IconArray
         items={viz_data}
         render_item={ ({color}) => 
           <div
