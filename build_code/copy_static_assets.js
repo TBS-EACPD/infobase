@@ -108,10 +108,10 @@ const common_png = [
   'src/home/explorer.png',
 
   //simplographic images
-  'src/graphs/intro_graphs/Check.svg',
-  'src/graphs/intro_graphs/Graph.svg',
-  'src/graphs/intro_graphs/Money.svg',
-  'src/graphs/intro_graphs/People.svg',
+  'src/panels/intro_graphs/Check.svg',
+  'src/panels/intro_graphs/Graph.svg',
+  'src/panels/intro_graphs/Money.svg',
+  'src/panels/intro_graphs/People.svg',
 
 ];
 
