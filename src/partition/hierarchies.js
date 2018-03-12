@@ -340,7 +340,7 @@ const estimates_common_node_mapping = ({data_for_node_mapping, is, plural, gloss
 const vs_type_to_glossary_key_dictionary = {
   "1": "OP",
   "2": "CAP",
-  "3": "G&C",
+  "3": "G_AND_C",
   "4": false, // Debt Forgiveness
   "5": "PAY_CC",
   "6": "TB",
