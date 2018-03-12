@@ -72,8 +72,7 @@ exports.ordinal_line = class ordinal_line {
       .range([0, width]);
 
 
-    var x_range = this.x.range();
-    this.tick_width = x_range[1]- x_range[0];
+    this.tick_width = this.x.step();
     this.extent = d3.extent(d3.merge(this.values));
 
     if (this.series_labels.length === 0){
@@ -324,12 +323,12 @@ exports.ordinal_line = class ordinal_line {
 
       ticks.merge(ticks_enter)
         .styles({
-          "position" : "absolute",
-          "overflow-x" : "hidden",
-          "text-align" : "center",
-          "top" : height+this.margin.top+10+"px",
+          "position": "absolute",
+          "overflow-x": "hidden",
+          "text-align": "center",
+          "top": height+this.margin.top+10+"px",
           "width": this.tick_width+"px",
-          "left"  : function(d) {return that.x(d)-that.tick_width/2+that.margin.left+"px" ; },
+          "left": d => this.x(d)-this.tick_width/2+this.margin.left+"px",
         })
         .html(function(d){ return d;});
       
