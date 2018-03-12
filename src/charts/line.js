@@ -265,8 +265,7 @@ exports.ordinal_line = class ordinal_line {
   render_common(){
     var height = this.outside_height - this.margin.top - this.margin.bottom;
     var width = this.outside_width - this.margin.left - this.margin.right;
-    var that = this;
-
+    
     // add the title
     if (this.options.title){
       this.svg.select("text.title").remove();
