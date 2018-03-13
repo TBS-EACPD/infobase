@@ -157,9 +157,7 @@ const StatusGrid = props => {
         .sortBy(({icon_key}) => icon_order[icon_key] )
         .flatMap( ({viz_count,icon_key}) => {
           return _.range(0,viz_count)
-            .map(()=> ({ 
-              className: grid_colors[icon_key], 
-            }));
+            .map(()=> ({ icon_key }));
         })
         .value(),
       legend_data: _.chain(data)
@@ -210,14 +208,23 @@ const StatusGrid = props => {
           </div>
           <MiniLegend items={legend_data}  />
           <div>
-            <IconArray
-              items={viz_data}
-              render_item={ ({className}) => 
-                <div 
-                  className={classNames(icon_array_size_class, className)} 
-                />
-              }
-            />
+            { 
+              _.chain(viz_data)
+                .groupBy("icon_key")
+                .map( (group, icon_key) => ([group,icon_key]) )
+                .sortBy( ([group,icon_key]) => icon_order[icon_key] )
+                .map( ([group, icon_key]) => 
+                  <IconArray
+                    key={icon_key}
+                    items={group}
+                    render_item={ ({icon_key}) => 
+                      <div 
+                        className={classNames(icon_array_size_class, grid_colors[icon_key])} 
+                      />
+                    }
+                  />
+                ).value()
+            }
           </div>
         </div>
       )}
