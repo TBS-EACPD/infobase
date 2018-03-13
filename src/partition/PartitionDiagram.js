@@ -1,5 +1,5 @@
 const utils = require("../core/utils");
-const {text_maker} = require("../models/text");
+const { text_maker } = require("../models/text");
 
 const vertical_placement_counters = {};
 const cycle_colors = function(i){
@@ -7,21 +7,21 @@ const cycle_colors = function(i){
 };
 const assign_colors_recursively = function(node,color){
   node.color = color;
-  if (_.isUndefined(node.children)){ return; }
+  if ( _.isUndefined(node.children) ){ return; }
   _.each(node.children,(child,i)=>{
     assign_colors_recursively(child,color.brighter(0.15));
   });
 };
-const content_key = d=>d.id_ancestry;
-const polygon_key = d=>d.target.id_ancestry;
+const content_key = d => d.id_ancestry;
+const polygon_key = d => d.target.id_ancestry;
 
 export class PartitionDiagram {
-  constructor(container,options){
+  constructor(container, options){
     this.options = options;
     this.outer_html = container;
     this.outer_html.html(`
       <div class='__partition__' aria-hidden='true'>
-         <div class='partition-diagram'>  </div>
+         <div class='partition-diagram'></div>
       </div>
     `);
     this.html = this.outer_html.select(".partition-diagram");
@@ -50,37 +50,37 @@ export class PartitionDiagram {
       .style("zoom", 1)
       .on("end", this.render.bind(this));
   }
-  render(options = {} ) {
+  render( options = {} ) {
     this.options = _.extend(this.options,options);
     this.popup_template = this.options.popup_template;
     this.dont_fade = this.options.dont_fade || [];
     const html_func = this.options.html_func;
     const data = this.data = this.options.data; 
-    this.links =  this.data.links();
+    this.links = this.data.links();
     const levels = data.to_open_levels();
     const height = this.options.height;
     const horizontal0_padding = 50;
     const horizontal_padding = 150;
     const col0_width = 250;
     const col_width = 350;
-    const total_width = this.total_width = (_.keys(levels).length-1) * (col_width+ horizontal_padding) +  col0_width + horizontal0_padding;
+    const total_width = this.total_width = (_.keys(levels).length-1) * (col_width+ horizontal_padding) + col0_width + horizontal0_padding;
     const yscale = d3.scaleLinear()
       .domain([0,data.root.value])
       .range([0,height]);
 
-    _.each(data.root.children, (node,i)=> { 
+    _.each(data.root.children, (node,i) => { 
       assign_colors_recursively(node, cycle_colors(i));
     });
 
     this.outer_html.select(".__partition__")
-      .style("width",total_width + "px");
+      .style("width", total_width + "px");
     
     this.svg.attr("width", total_width);
     _.chain(levels)
       .keys()
       .each( key => vertical_placement_counters[key]= +key*30 )
       .value();
-    const horizontal_placement_counters = _.mapValues(levels, (vals, key)=> {
+    const horizontal_placement_counters = _.mapValues(levels, (vals, key) => {
       return +key === 0 ? 0 : col0_width + horizontal0_padding + (key-1)*(col_width+horizontal_padding);
     });
 
@@ -89,16 +89,16 @@ export class PartitionDiagram {
     this.html.selectAll("div.header")
       .data(_.keys(levels).sort().reverse())
       .enter()
-      .filter(d=>d!=="0")
+      .filter(d => d!=="0")
       .append("div")
-      .classed("header",true)
-      .style("left", (d,i)=>horizontal_placement_counters[+d]+"px") 
+      .classed("header", true)
+      .style("left", (d,i) => horizontal_placement_counters[+d]+"px") 
       .style("width", col_width+"px")
-      .html(d=>{
+      .html(d => {
         const has_plural = (
           _.chain(levels[+d])
             .map("data")
-            .filter(d=>d.plural)
+            .filter(d => d.plural)
             .compact()
             .head()
             .value()
@@ -111,26 +111,26 @@ export class PartitionDiagram {
 
     const html_content_join = this.html.selectAll("div.partition-content")
       .data(
-        data.root.descendants().filter(d=>d.open), 
+        data.root.descendants().filter(d => d.open), 
         content_key
       )
       .style("height" ,"")
       .each(function(d){
         d3.select(this)
           .select("div.partition-content-title")
-          .classed("fat",false)
-          .classed("right",d.data.is("compressed"))
+          .classed("fat", false)
+          .classed("right", d.data.is("compressed"))
           .html(html_func);
-      }) ; //reset the calculated heights 
+      }); //reset the calculated heights 
     html_content_join.exit().remove();
 
     const html_content_join_enter = html_content_join
       .enter()
       .append("div")
       .each(function(d){
-        let sel = d3.select(this)
+        let sel = d3.select(this);
         
-        if ((d.data.is("compressed") && window.isIE()) || d.value < 0){
+        if ( ( d.data.is("compressed") && window.isIE() ) || d.value < 0 ){
           // partition-right-ie-fix: IE css for flex box and align-item are inconsistent, need an extra div
           // between the .content div and the .partition-content-title div to (partially) fix vertical alignment
 
@@ -140,37 +140,37 @@ export class PartitionDiagram {
           sel = sel
             .append("div")
             .classed("partition-right-ie-fix", d.data.is("compressed") && window.isIE())
-            .classed("partition-negative-title-backing", d.value < 0)
+            .classed("partition-negative-title-backing", d.value < 0);
         }
           
         sel
           .append("div")
           .attr("tabindex", 0)
-          .classed("partition-content-title",true)
+          .classed("partition-content-title", true)
           .classed("right",d.data.is("compressed"))
           .html(html_func);
       })
-      .attr("class",d=>{
+      .attr("class",d => {
         let cls = 'partition-content';
-        if (d===this.data.root){
-          cls+= " root";
+        if (d === this.data.root){
+          cls += " root";
         }
         return cls;
       })
       .style("border-bottom","")
-      .style("top",d=>{
-        if (_.isNull(d.parent)){ 
+      .style("top", d => {
+        if ( _.isNull(d.parent) ){ 
           return "0px";
         }
-        const index =  d.parent.children.indexOf(d);
+        const index = d.parent.children.indexOf(d);
 
         if ( index === 0 ){
           return d.parent.top + "px"
         } else {
-          return d.parent.children[index-0].top +  d.parent.children[index-0].rendered_height + "px";
+          return d.parent.children[index-0].top + d.parent.children[index-0].rendered_height + "px";
         }
       })
-      .style("width", d=>{
+      .style("width", d => {
         d.width = (d === data.root ? col0_width : col_width);
         return d.width + "px";
       });
@@ -183,14 +183,14 @@ export class PartitionDiagram {
         d.polygon_links = new Map();
       })
       .classed("negative-value", d => d.value <0)
-      .style("left", (d,i)=>horizontal_placement_counters[d.depth]+"px") 
+      .style("left", (d,i) => horizontal_placement_counters[d.depth]+"px") 
       .style("height", d =>{
         d.rendered_height = Math.floor(d.scaled_height)+1;
         return d.rendered_height + "px";
       })
-      .each(d=>{
+      .each(d => {
         const d_node = d3.select(d.DOM);
-        const title =  d_node.select(".partition-content-title").node();
+        const title = d_node.select(".partition-content-title").node();
         d.more_than_fair_space = title.offsetHeight > d.scaled_height;
         d_node
           .select(".partition-content-title")
@@ -201,7 +201,7 @@ export class PartitionDiagram {
           .select(".partition-negative-title-backing")
           .classed("fat", d => d.more_than_fair_space);
 
-        // IE fixes:  
+        // IE fixes:
         d_node
           .select(".partition-right-ie-fix")
           .classed("fat", d.more_than_fair_space )
@@ -226,13 +226,13 @@ export class PartitionDiagram {
             }
           });
       })
-      .style("background-color",d=> { 
-        return d.color
+      .style("background-color",d => { 
+        return d.color;
       })
       .each(function(d){
         const level = d.depth;
-        const title =  d3.select(d.DOM).select(".partition-content-title").node();
-        const current_top =  vertical_placement_counters[level];
+        const title = d3.select(d.DOM).select(".partition-content-title").node();
+        const current_top = vertical_placement_counters[level];
         const parent_top = d.parent ? d.parent.top : 0;
         const diff = (title.offsetHeight-d.DOM.offsetHeight)/2;
         let top_vertical_margin;
@@ -246,7 +246,7 @@ export class PartitionDiagram {
         }
         const top = Math.max(parent_top, current_top);
         const height = Math.max(d.rendered_height, d.DOM.offsetHeight, title.offsetHeight);
-        vertical_placement_counters[level] = top + height +  top_vertical_margin;
+        vertical_placement_counters[level] = top + height + top_vertical_margin;
         d.top = top + top_vertical_margin;
       })
       .order();
@@ -256,7 +256,7 @@ export class PartitionDiagram {
     this.svg.attr("height", total_height);
 
     const link_polygons = this.graph_area.selectAll("polygon.partition-svg-link")
-      .data(_.filter(this.links,link => {
+      .data(_.filter(this.links, link => {
         return link.source.open && link.target.open && !link.target.data.unhidden_children;
       }), polygon_key);
 
@@ -265,7 +265,7 @@ export class PartitionDiagram {
     link_polygons
       .enter()
       .append("polygon")
-      .classed("partition-svg-link",true)
+      .classed("partition-svg-link", true)
       .merge(link_polygons)
       .each(function(d){
         d.source.polygon_links.set(d.target, d3.select(this));
@@ -277,7 +277,7 @@ export class PartitionDiagram {
       .style("top", function(d){ 
         return d.top + "px";
       })
-      .on("start",d=> {
+      .on("start",d => {
         if (d.children){
           d.height_of_all_children = d3.sum(d.children, child=>child.scaled_height || 0);
         }
@@ -286,14 +286,14 @@ export class PartitionDiagram {
         }
       });
 
-    if (this.dont_fade.length >0){
+    if (this.dont_fade.length > 0){
       this.fade();
     }
 
-    if (!_.isUndefined(this.unmagnify_all_popup)){
+    if ( !_.isUndefined(this.unmagnify_all_popup) ){
       this.remove_unmagnify_all_button();
     }
-    if (this.are_any_children_magnified()){
+    if ( this.are_any_children_magnified() ){
       this.add_unmagnify_all_button();
     }
   }
@@ -305,7 +305,7 @@ export class PartitionDiagram {
       source.vertical_counter = source.top;
     }
     if (!target.open || !source.open) { 
-      return ; 
+      return; 
     }
     const target_x = target.DOM.offsetLeft;
     const target_y = target.top;
@@ -314,11 +314,11 @@ export class PartitionDiagram {
     const source_height = source.rendered_height * target.scaled_height/source.height_of_all_children;
     let tr,tl,br,bl,klass;
     tr = [target_x, target_y]; 
-    tl = [source_x, source.vertical_counter];                      
+    tl = [source_x, source.vertical_counter];
     br = [target_x, target_y + target_height]; 
-    bl = [source_x, tl[1] + source_height];  
+    bl = [source_x, tl[1] + source_height];
     
-    klass = bl[1] - tl[1] <= 1 ? "tiny" :  bl[1] - tl[1] < 5 ? "medium" :  'large';
+    klass = bl[1] - tl[1] <= 1 ? "tiny" : bl[1] - tl[1] < 5 ? "medium" : 'large';
 
     const gradient_def_id = target.color.toString().replace(/\(|\)|, /g,"-")+"grad";
     if (!this.defs.select("#"+gradient_def_id).node()) {
@@ -362,7 +362,7 @@ export class PartitionDiagram {
       })
       .attr("stroke", "url(#"+gradient_def_id+")");
 
-    source.vertical_counter += source_height ;
+    source.vertical_counter += source_height;
   }
 
   fade(data){
@@ -383,28 +383,28 @@ export class PartitionDiagram {
       data = data || this.data.root.descendants();
     }
     const links = _.chain(data)
-      .filter(source=>_.isArray(source.children))
-      .map(source=> _.map(source.children, target=>({source,target})))
+      .filter(source =>_.isArray(source.children))
+      .map(source => _.map(source.children, target=>({source,target})))
       .flatten(true)
       .value();
     this.graph_area.selectAll("polygon.partition-svg-link")
       .data(links,polygon_key)
-      .filter(d=> links.length > 0 ? _.includes(links,d) : true)
+      .filter(d => links.length > 0 ? _.includes(links,d) : true)
       .classed("faded", false)
-      .classed("highlighted",false);
+      .classed("highlighted", false);
     
     // The above doesn't select root polygons. If the data contains root, unfade root polygons here
     if (_.some(data, d => d.parent === null)) {
       this.graph_area
         .selectAll("polygon.partition-svg-link.root-polygon")
         .classed("faded", false)
-        .classed("highlighted",false);
+        .classed("highlighted", false);
     }
 
     this.html.selectAll("div.partition-content")
       .data(data,content_key)
-      .filter(d=> data.length > 0 ? _.includes(data,d) : true)
-      .classed("faded",false);
+      .filter(d => data.length > 0 ? _.includes(data,d) : true)
+      .classed("faded", false);
   }
   
   // Same as unfade, but more discerning of polygons selected
@@ -416,8 +416,8 @@ export class PartitionDiagram {
     }
     const lowest_node_id_ancestry = data[0].id_ancestry;
     const links = _.chain(data)
-      .filter(source=>_.isArray(source.children))
-      .map(source=> _.map(source.children, target=>({source,target})))
+      .filter(source =>_.isArray(source.children))
+      .map(source=> _.map(source.children, target => ({source,target})))
       .flatten(true)
       .filter(link => lowest_node_id_ancestry.includes(link.target.id_ancestry))
       .value();
@@ -425,17 +425,17 @@ export class PartitionDiagram {
     const unfade_parent_polygons = (polygon_selector) => {
       this.graph_area.selectAll(polygon_selector)
         .data(links,polygon_key)
-        .filter(d=> links.length > 0 ? _.includes(links,d) : true)
+        .filter(d => links.length > 0 ? _.includes(links,d) : true)
         .classed("faded", false)
-        .classed("highlighted",true);
+        .classed("highlighted", true);
     }
     unfade_parent_polygons("polygon.partition-svg-link.root-polygon");
     unfade_parent_polygons("polygon.partition-svg-link");
 
     this.html.selectAll("div.partition-content")
       .data(data,content_key)
-      .filter(d=> data.length > 0 ? _.includes(data,d) : true)
-      .classed("faded",false);
+      .filter(d => data.length > 0 ? _.includes(data,d) : true)
+      .classed("faded", false);
   }
 
   add_pop_up(d){
@@ -450,27 +450,27 @@ export class PartitionDiagram {
     let pop_up_top;
     const pop_up = content
       .append("div")
-      .classed("partition-popup",true)
+      .classed("partition-popup", true)
       .style("border", `3px solid ${d.color}`)
-      .style("left",0.9*d.DOM.offsetWidth +"px")
-      .style("color",d.color)
+      .style("left", 0.9*d.DOM.offsetWidth +"px")
+      .style("color", d.color)
       .html(popup_html);
 
     pop_up
       .style("top", function(d){
-        let calculated_middle =  ( d.DOM.offsetHeight  - this.offsetHeight)/2;
-        arrow_at_top =  d.DOM.offsetTop +  calculated_middle < 0 ;
+        let calculated_middle = ( d.DOM.offsetHeight - this.offsetHeight)/2;
+        arrow_at_top = d.DOM.offsetTop + calculated_middle < 0 ;
         if (arrow_at_top){
           calculated_middle = -30;
         }
         pop_up_top = calculated_middle;
-        return  calculated_middle  + "px";
+        return calculated_middle + "px";
       })
 
     // Pointer triangle made with css
     const popup_pointer = pop_up
       .append("div")    
-      .attr("class","popup-pointer")
+      .attr("class", "popup-pointer")
       .style("visibility", "hidden");
 
     const pointer_height = popup_pointer.node().offsetHeight;
@@ -493,19 +493,13 @@ export class PartitionDiagram {
     this.fade();
     this.unfade();
     this.svg.selectAll("polygon.partition-svg-link")
-      .classed("highlighted",false);
+      .classed("highlighted", false);
     delete this.pop_up;
   }
   keydown_dispatch(){
     if (d3.event.keyCode === 13) {
       this.click_dispatch();
     }
-  }
-  focusin_dispatch(d){
-
-  }
-  focusout_dispatch(d){
-
   }
   click_dispatch(){
     // hold a reference to the current target
@@ -559,7 +553,7 @@ export class PartitionDiagram {
       return;
     } else if ( target.classed("magnify") ) {
       this.remove_pop_up();
-      if (d.magnified) {
+      if (d.magnified){
         this.unmagnify(d);
       } else {
         this.magnify(d);
@@ -577,19 +571,19 @@ export class PartitionDiagram {
   }
   unmagnify_all(){
     _.each(this.data.root.children, node => { if ( this.data.magnified(node) ){ this.data.unmagnify(node) } });
-    if (this.should_remove_unmagnify_all_button()){
+    if ( this.should_remove_unmagnify_all_button() ){
       this.remove_unmagnify_all_button();
     }
   }
   unmagnify(node){
     this.data.unmagnify(node)
-    if (this.should_remove_unmagnify_all_button()){
+    if ( this.should_remove_unmagnify_all_button() ){
       this.remove_unmagnify_all_button();
     }
   }
   magnify(node){
     this.data.magnify(node);
-    if (_.isUndefined(this.unmagnify_all_popup)){
+    if ( _.isUndefined(this.unmagnify_all_popup) ){
       this.add_unmagnify_all_button();
     }
   }
