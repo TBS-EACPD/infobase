@@ -338,14 +338,20 @@ class Partition {
       .classed("partition-container",true)
       .style("margin-left", -d3.select("main.container").node().offsetLeft+"px");
     
+    const clear_partition_events_on_leaving_partition_route = function(e){
+      const not_on_partition_route = !e.newURL.includes('#partition');
+      if (not_on_partition_route){
+        window.removeEventListener("hashchange", clear_partition_events_on_leaving_partition_route);
+        window.removeEventListener("resize", adjust_partition_diagram_margin_on_resize);
+      }
+    };
     const adjust_partition_diagram_margin_on_resize = function(){
       const partition_container = d3.select(".partition-container");
       if ( partition_container.node() ){
         partition_container.style("margin-left", -d3.select("main.container").node().offsetLeft+"px");
-      } else {
-        window.removeEventListener("resize", adjust_partition_diagram_margin_on_resize);
-      }
+      } 
     };
+    window.addEventListener("hashchange", clear_partition_events_on_leaving_partition_route);
     window.addEventListener("resize", adjust_partition_diagram_margin_on_resize);
 
     // Be aware, constructor of PartitionDiagram has side-effects on this.container, DOM stuff being what it is
