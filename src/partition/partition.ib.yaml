@@ -632,7 +632,7 @@ partition_controls:
        </div>
        <div class="partition-control-element">
          <text>
-           {{gt "partiton_select_data"}}
+           {{gt "partition_select_data"}}
          </text>
          <select class="form-control select_value_attr">
            {{#each sort_vals}}
@@ -642,7 +642,7 @@ partition_controls:
        </div>
        <div class="partition-control-element">
          <text>
-           {{gt "partiton_select_context"}}
+           {{gt "partition_select_context"}}
          </text>
          <select class="form-control select_root">
            {{#each presentation_schemes}}
@@ -655,7 +655,7 @@ partition_controls:
          class="partition-control-element"
          style="flex-grow:1;max-width:800px;">
          <text>
-           {{gt "partiton_search_filter"}}
+           {{gt "partition_search_filter"}}
          </text>
          <input 
            aria-label="Type at least 5 characters before submitting" 
@@ -686,13 +686,13 @@ partition_focus_button:
 partition_unfocus_button:
   en: Unfocus
   fr: Diverger
-partiton_search_filter:
+partition_search_filter:
   en: Filter by Name and Description
   fr: Filtrer par le nom et la description
-partiton_select_data:
+partition_select_data:
   en: Select the Data
   fr: Sélectionner les données
-partiton_select_context:
+partition_select_context:
   en: Select a Perspective
   fr: Sélectionner la perspective
 partition_infograph_link:
@@ -701,15 +701,15 @@ partition_infograph_link:
 partition_revenue_explained:
   en: Negative figures indicate that revenues exceed expenditures
   fr: Les chiffres négatifs indiquent que les recettes dépassent les dépense
-partiton_org_info_by_min:
+partition_org_info_by_min:
   transform: [handlebars]
   text: |
     {{gt "by_all"}} {{gt "by"}} {{gt "by_portfolio"}}
-partiton_org_info_federal_orgs_by_inst_form:
+partition_org_info_federal_orgs_by_inst_form:
   transform: [handlebars]
   text: |
     {{gt "inst_form_filter"}} {{gt "by"}} {{gt "type"}}
-partiton_org_info_interests_by_inst_form:
+partition_org_info_interests_by_inst_form:
   transform: [handlebars]
   text: |
     {{gt "corp_int_filter"}} {{gt "by"}} {{gt "type"}}

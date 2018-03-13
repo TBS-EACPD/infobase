@@ -1,10 +1,10 @@
 require("./partition.ib.yaml");
 require("./partition.scss")
-const { ensure_loaded } = require('../core/lazy_loader.js');
 const { text_maker, run_template } = require("../models/text");
 const { formats : {compact1,big_int_real} } = require('../core/format.js');
 const { PartitionDiagram } = require("./PartitionDiagram.js");
 const { PartitionDataWrapper } = require("./PartitionDataWrapper.js");
+const { PartitionDiagramNotes } = require("./PartitionDiagramNotes.js");
 const utils = require("../core/utils");
 const Subject = require("../models/subject");
 const {
@@ -18,147 +18,7 @@ const {
   mock_model,
 } = require("./hierarchies"); 
 const { reactAdapter } = require('../core/reactAdapter');
-const { StandardRouteContainer } = require('../core/NavComponents.js');
-const {
-  TextMaker,
-  AutoAccordion,
-  SpinnerWrapper,
-} = require('../util_components');
 
-
-export class PartitionRoute extends React.Component {
-  constructor(){
-    super()
-    this.state = {loading: true};
-    this.update_url = (method, value_attr) => {
-      const new_path = `partition/${method}/${value_attr}`;
-
-      this.props.history.push('/'+new_path);
-
-      const el_to_update = document.querySelector('#wb-lng a');
-      const link = _.first(el_to_update.href.split("#"));
-      if(link){
-        el_to_update.href = `${link}#${new_path}`;
-      }
-    }
-  }
-  componentDidMount(){
-    ensure_loaded({
-      table_keys: ['table6', 'table8', 'table12','table305'],
-    }).then( ()=> { 
-      this.setState({loading: false}) 
-    });
-  }
-  shouldComponentUpdate(nextProps){
-    if (!_.isUndefined(this.partition)){
-      // Once the Partition diagram has been initialized, need to ensure it stays in sync whenever the path updates
-      const {
-        method, 
-        value_attr,
-      } = this.getValidatedRouteParams(nextProps);
-
-      this.ensurePartitionStateMatchesRouteState(method, value_attr);
-    }
-
-    // Should only need to update once, when the table dependencies finish loading and the spinner needs to be killed
-    return !_.isUndefined(this.refs.spinner);
-  }
-  componentDidUpdate(){
-    // Should only happen once, when the table dependencies finish loading and the spinner has been killed
-    const {
-      method, 
-      value_attr,
-    } = this.getValidatedRouteParams(this.props);
-    this.container = d3.select(ReactDOM.findDOMNode(this.refs.container));
-    this.partition = new Partition(this.container, this.update_url, method, value_attr);
-  }
-  render(){
-    return (
-      <StandardRouteContainer
-        ref="container"
-        title={text_maker("partition_title")}
-        description={text_maker("partition_route_description")}
-        breadcrumbs={[text_maker("partition_title")]}
-        route_key="partition"
-      >
-        { this.state.loading && <SpinnerWrapper ref="spinner" scale={4} /> }
-      </StandardRouteContainer>
-    );
-  }
-  getValidatedRouteParams(props){
-    const route_method = props.match.params.method;
-    const route_value_attr = props.match.params.value_attr;
-
-    const route_value_attr_is_valid = _.chain(presentation_schemes_by_data_options)
-      .map( presentation_schemes_by_data_option => presentation_schemes_by_data_option.id )
-      .indexOf(route_value_attr)
-      .value() !== -1;
-
-    const route_method_is_valid = route_value_attr_is_valid &&  _.chain(presentation_schemes_by_data_options)
-      .find( presentation_schemes_by_data_option => presentation_schemes_by_data_option.id === route_value_attr )
-      .pick( "presentation_schemes" )
-      .flatMap()
-      .indexOf( route_method )
-      .value() !== -1;
-
-    if (route_value_attr_is_valid && route_method_is_valid){
-      return {
-        method: route_method,
-        value_attr: route_value_attr,
-      };
-    } else {
-      return {
-        method: "dept",
-        value_attr: "exp",
-      };
-    }
-  }
-  ensurePartitionStateMatchesRouteState(route_method, route_value_attr){
-    const partition_method = this.partition.method;
-    const partition_value_attr = this.partition.value_attr;
-
-    if ( (route_method !== partition_method) && (route_value_attr === partition_value_attr) ) {
-      this.partition.method = route_method;
-      
-      this.container.select(".select_root")
-        .property("value", route_method)
-        .dispatch("change");
-    } else if (route_value_attr !== partition_value_attr) {
-      this.partition.method = route_method;
-      this.partition.value_attr = route_value_attr;
-
-      this.container.select(".select_value_attr")
-        .property("value", route_value_attr)
-        .dispatch("change");
-    }
-  }
-}
-
-class DiagramNotes extends React.Component {
-  constructor(){
-    super()
-  }
-  componentDidMount(){
-    const autoAccordion = d3.select(ReactDOM.findDOMNode(this.refs.autoAccordion));
-    autoAccordion.select(".pull-down-accordion-header").node().click();
-  }
-  render(){
-    const { note_text_key } = this.props;
-    return (
-      <div className="mrgn-bttm-sm">
-        <AutoAccordion
-          title={text_maker("some_things_to_keep_in_mind")}
-          usePullDown={true}
-          ref="autoAccordion"
-        >
-          <div style={{paddingLeft: '10px', paddingRight:'10px'}}>
-            <TextMaker text_key={note_text_key} />
-          </div>
-        </AutoAccordion>
-      </div>
-    );
-  }
-}
 
 const presentation_schemes_by_data_options = [
   { 
@@ -211,8 +71,6 @@ const formaters = {
   "planned_exp" : compact1,
   "org_info" : big_int_real,
 };
-
-const wrap_in_brackets = (text) => " (" + text + ")";
 
 const get_root_text_key = (value_attr, method) => {
   switch (value_attr){
@@ -289,7 +147,7 @@ const show_all_children = function(node){
     compressed.data.unhidden_children = compressed.data.hidden_children
     delete compressed.data.hidden_children;
     compressed.data.id = "minimize"+compressed.id_ancestry;
-    compressed.value =  1;
+    compressed.value = 1;
     compressed.data.name = "—";
     _.each(children,_node => {
       _node.parent = node;
@@ -319,6 +177,8 @@ const get_common_popup_options = d => {
   };
 }
 
+const wrap_in_brackets = (text) => " (" + text + ")";
+
 const search_required_chars = 1;
 const search_debounce_time = 500;
 
@@ -327,6 +187,8 @@ class Partition {
     
     this.update_url = update_url;
     
+    this.presentation_schemes_by_data_options = presentation_schemes_by_data_options;
+
     container.append("div")
       .classed("accessible sr-only",true)
       .html(text_maker("partition_sr_only_content"));
@@ -372,9 +234,9 @@ class Partition {
       { id: "est_doc_seb", text: text_maker("est_doc_seb") },
       { id: "est_doc_sec", text: text_maker("est_doc_sec") },
       { id: "est_doc_im", text: text_maker("est_doc_im" )},
-      { id: "org_info_by_ministry", text: text_maker("partiton_org_info_by_min") },
-      { id: "org_info_federal_orgs_by_inst_form", text: text_maker("partiton_org_info_federal_orgs_by_inst_form") },
-      { id: "org_info_interests_by_inst_form", text: text_maker("partiton_org_info_interests_by_inst_form") },
+      { id: "org_info_by_ministry", text: text_maker("partition_org_info_by_min") },
+      { id: "org_info_federal_orgs_by_inst_form", text: text_maker("partition_org_info_federal_orgs_by_inst_form") },
+      { id: "org_info_interests_by_inst_form", text: text_maker("partition_org_info_interests_by_inst_form") },
     ];
 
     const presentation_schemes = _.chain(this.all_presentation_schemes)
@@ -1140,7 +1002,9 @@ class Partition {
         .style("height", "100%")
         .style("opacity", 1);
 
-      reactAdapter.render(<DiagramNotes note_text_key={note_text_key}/>, diagram_note_div.node());
+      reactAdapter.render(<PartitionDiagramNotes note_text_key={note_text_key}/>, diagram_note_div.node());
     }
   }
 }
+
+export { Partition, presentation_schemes_by_data_options };
