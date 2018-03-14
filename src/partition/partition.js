@@ -1,13 +1,13 @@
-require("./partition.ib.yaml");
-require("./partition.scss")
-const { text_maker, run_template } = require("../models/text");
-const { formats : {compact1,big_int_real} } = require('../core/format.js');
-const { PartitionDiagram } = require("./PartitionDiagram.js");
-const { PartitionDataWrapper } = require("./PartitionDataWrapper.js");
-const { PartitionDiagramNotes } = require("./PartitionDiagramNotes.js");
-const utils = require("../core/utils");
-const Subject = require("../models/subject");
-const {
+import "./partition.ib.yaml";
+import "./partition.scss";
+import { text_maker, run_template } from "../models/text";
+import { formats } from '../core/format.js';
+import { PartitionDiagram } from "./PartitionDiagram.js";
+import { PartitionDataWrapper } from "./PartitionDataWrapper.js";
+import { PartitionDiagramNotes } from "./PartitionDiagramNotes.js";
+import * as utils from "../core/utils";
+import * as Subject from "../models/subject";
+import {
   value_functions,
   create_ministry_hierarchy,
   create_spend_type_hierarchy,
@@ -15,10 +15,10 @@ const {
   create_org_info_ministry_hierarchy,
   create_org_info_inst_form_hierarchy,
   create_planned_spending_hierarchy,
-  mock_model,
-} = require("./hierarchies"); 
-const { reactAdapter } = require('../core/reactAdapter');
+} from "./partition_content/hierarchies"; 
+import { reactAdapter } from '../core/reactAdapter';
 
+const { compact1, big_int_real } = formats; 
 
 const presentation_schemes_by_data_options = [
   { 
@@ -66,10 +66,10 @@ const presentation_schemes_by_data_options = [
 ];
 
 const formaters = {
-  "exp" : compact1,
-  "fte" : big_int_real,
-  "planned_exp" : compact1,
-  "org_info" : big_int_real,
+  "exp": compact1,
+  "fte": big_int_real,
+  "planned_exp": compact1,
+  "org_info": big_int_real,
 };
 
 const get_root_text_key = (value_attr, method) => {
@@ -91,73 +91,6 @@ const get_root_text_key = (value_attr, method) => {
       }
   }
 }
-
-const show_partial_children = function(node){
-  if (!node.children){
-    return;
-  }
-  if( !_.isUndefined(_.last(node.children).data.hidden_children)){ 
-    return node.children;
-  }
-  let to_be_shown,to_be_compressed, new_compressed_child, children;
-  if (_.isFunction(node.how_many_to_show)){
-    [to_be_shown,to_be_compressed] = node.how_many_to_show(node);
-  } else {
-    if (node.how_many_to_show >= node.children.length){
-      to_be_shown = node.children;
-      to_be_compressed = [];
-    } else {
-      to_be_shown = _.take(node.children,node.how_many_to_show);
-      to_be_compressed = _.tail(node.children,node.how_many_to_show);
-    }
-  }
-  if (to_be_compressed.length > 0) {
-    new_compressed_child = Object.assign(
-      d3.hierarchy({}),
-      {  
-        height : node.height-1,
-        depth : node.depth+1,
-        id_ancestry : _.reduce(to_be_compressed, (memo,x)=>memo+"-"+x.data.id, "compressed>")+"-<compressed-"+node.id_ancestry,
-        open : true,
-        parent : node,
-        value : d3.sum( to_be_compressed,x=>x.value),
-        __value__ : d3.sum( to_be_compressed,x=>x.value),
-        data : mock_model(
-          _.map( to_be_compressed , x=>x.data.id)+"compressed",
-          "+",
-          "",
-          "compressed",
-          {hidden_children : to_be_compressed}
-        ),
-        no_polygon : false,
-      }
-    );
-    children = to_be_shown.concat(new_compressed_child);
-  } else {
-    children = to_be_shown;
-  }
-  return children;
-};
-
-const show_all_children = function(node){
-  let children;
-  const compressed = _.last(node.children);
-  if (!_.isUndefined(compressed.data.hidden_children)){
-    children = node.children.concat(compressed.data.hidden_children);
-    compressed.data.unhidden_children = compressed.data.hidden_children
-    delete compressed.data.hidden_children;
-    compressed.data.id = "minimize"+compressed.id_ancestry;
-    compressed.value = 1;
-    compressed.data.name = "—";
-    _.each(children,_node => {
-      _node.parent = node;
-    });
-    compressed.no_polygon = true;
-  } else {
-    children = node.children;
-  }
-  return children;
-};
 
 const get_common_popup_options = d => {
   return {
@@ -190,14 +123,14 @@ class Partition {
     this.presentation_schemes_by_data_options = presentation_schemes_by_data_options;
 
     container.append("div")
-      .classed("accessible sr-only",true)
+      .classed("accessible sr-only", true)
       .html(text_maker("partition_sr_only_content"));
 
     // A negative margin-left value is explicitly set, and kept updated, on .partition-container so that the 
     // extra wide partition area can effectively escape the narrow main.container area, which we're forced in 
     // to by the Canada.ca banner/WET. Styling this would be so much easier without that...
     this.container = container.append("div")
-      .classed("partition-container",true)
+      .classed("partition-container", true)
       .style("margin-left", -d3.select("main.container").node().offsetLeft+"px");
     
     const clear_partition_events_on_leaving_partition_route = function(e){
@@ -283,7 +216,7 @@ class Partition {
     this.method = presentation_schemes[0].id;
     this.value_attr = sort_vals[0].id;
     this.root_id = 0; // counter to append to root of each hierarchy, makes identifying ancestry_id values unique even in charts_index merge step
-    this.update_url(this.method,this.value_attr);
+    this.update_url(this.method, this.value_attr);
     this[this.method]();
   }
   change_value_attr(){
@@ -297,7 +230,7 @@ class Partition {
       .value();
     this.method = presentation_schemes[0].id;
 
-    this.update_url(this.method,this.value_attr);
+    this.update_url(this.method, this.value_attr);
 
     // Update presentation_schemes dropdown options
     const presentation_scheme_dropdown = this.container.select(".select_root");
@@ -325,12 +258,12 @@ class Partition {
   }
   reroot(){
     this.method = d3.event.target.value;
-    this.update_url(this.method,this.value_attr);
+    this.update_url(this.method, this.value_attr);
     this[this.method]();
   }
   dept(){
     const skip_crsos = true;
-    this.hierarchy_factory = () => create_ministry_hierarchy(this.value_attr,skip_crsos,this.root_id+=1);
+    this.hierarchy_factory = () => create_ministry_hierarchy(this.value_attr, skip_crsos, this.root_id+=1);
     const hierarchy = this.hierarchy = this.hierarchy_factory(value_functions[this.value_attr]);
     this.hierarchy
       .each(node => {
@@ -343,22 +276,22 @@ class Partition {
             if (_node.children.length === 2){ return [_node.children,[]];}
             const show = [_.head(_node.children)];
             const hide = _.tail(_node.children);
-            const unhide = _.filter(hide, __node=> __node.value > hierarchy.value/50);
-            return [show.concat(unhide), _.difference(hide,unhide)];
+            const unhide = _.filter(hide, __node => __node.value > hierarchy.value/50);
+            return [show.concat(unhide), _.difference(hide, unhide)];
           }
         } else if (node.data.is("dept") || node.data.is("crso")){
           node.how_many_to_show = function(_node){
             if (_node.children.length === 2){ return [_node.children,[]];}
             const show = [_.head(_node.children)];
             const hide = _.tail(_node.children);
-            const unhide = _.filter(hide, __node=> __node.value > hierarchy.value/50);
-            return [show.concat(unhide), _.difference(hide,unhide)];
+            const unhide = _.filter(hide, __node => __node.value > hierarchy.value/50);
+            return [show.concat(unhide), _.difference(hide, unhide)];
           }
         }
       })
       .each(node => { 
         if (! _.isUndefined(node.children) ) {
-          node.children = show_partial_children(node);
+          node.children = PartitionDataWrapper.__show_partial_children(node);
         }
       })
 
@@ -400,7 +333,7 @@ class Partition {
     }
   }
   hwh(){
-    this.hierarchy_factory = () => create_tag_hierarchy("HWH",this.value_attr,this.root_id+=1);
+    this.hierarchy_factory = () => create_tag_hierarchy("HWH", this.value_attr, this.root_id+=1);
     const hierarchy = this.hierarchy = this.hierarchy_factory(value_functions[this.value_attr]);
     this.hierarchy
       .each(node => {
@@ -410,16 +343,16 @@ class Partition {
           node.how_many_to_show = Infinity;
         }else if (node.data.is("tag") && node.children[0].data.is("program")){
           node.how_many_to_show = function(_node){
-            if (_node.children.length <= 2){ return [_node.children,[]];}
+            if (_node.children.length <= 2){ return [_node.children, []]; }
             const show = [_.head(_node.children)];
             const hide = _.tail(_node.children);
-            const unhide = _.filter(hide, __node=> __node.value > hierarchy.value/100);
-            return [show.concat(unhide),_.difference(hide,unhide)];
+            const unhide = _.filter(hide, __node => __node.value > hierarchy.value/100);
+            return [show.concat(unhide), _.difference(hide, unhide)];
           }
         }
       })
       .each(node => {
-        node.children = show_partial_children(node);
+        node.children = PartitionDataWrapper.__show_partial_children(node);
       });
 
     this.value_formater = d => d.data.is("tag") ?
@@ -460,7 +393,7 @@ class Partition {
     }
   }
   goca(){
-    this.hierarchy_factory = () => create_tag_hierarchy("GOCO",this.value_attr,this.root_id+=1);
+    this.hierarchy_factory = () => create_tag_hierarchy("GOCO", this.value_attr,this.root_id+=1);
     const hierarchy = this.hierarchy = this.hierarchy_factory(value_functions[this.value_attr]);
 
     this.hierarchy
@@ -474,14 +407,14 @@ class Partition {
             if (_node.children.length <= 2){ return [_node.children, []] }
             const show = [_.head(_node.children)];
             const hide = _.tail(_node.children);
-            const unhide = _.filter(hide, __node=> __node.value > hierarchy.value/100);
-            return [show.concat(unhide), _.difference(hide,unhide)];
+            const unhide = _.filter(hide, __node => __node.value > hierarchy.value/100);
+            return [show.concat(unhide), _.difference(hide, unhide)];
           }
         }
       })
       .each(node => {
-        node.children = show_partial_children(node);
-      })
+        node.children = PartitionDataWrapper.__show_partial_children(node);
+      });
    
     this.value_formater = d => wrap_in_brackets(formaters[this.value_attr](d[this.value_attr]));
     
@@ -523,7 +456,7 @@ class Partition {
     }
   }
   st(){
-    this.hierarchy_factory = () => create_spend_type_hierarchy( this.value_attr,  this.root_id+=1 );
+    this.hierarchy_factory = () => create_spend_type_hierarchy(this.value_attr, this.root_id+=1);
     const hierarchy = this.hierarchy = this.hierarchy_factory(value_functions[this.value_attr]);
 
     this.hierarchy
@@ -532,19 +465,19 @@ class Partition {
         node.open = true;
         if ( node.data.is("gov") ||  node.data.is("type_of_spending") ){
           node.how_many_to_show = Infinity;
-        } else if ( node.data.is("so")){
+        } else if (node.data.is("so")){
           node.how_many_to_show = function(_node){
             if (_node.children.length <= 2){ return [_node.children, []] }
             const show = [_.head(_node.children)];
             const hide = _.tail(_node.children);
-            const unhide = _.filter(hide, __node=> __node.value > hierarchy.value/100);
+            const unhide = _.filter(hide, __node => __node.value > hierarchy.value/100);
             return [show.concat(unhide), _.difference(hide,unhide)];
           };
         }
       })
       .each(node => {
-        node.children = show_partial_children(node);
-      })
+        node.children = PartitionDataWrapper.__show_partial_children(node);
+      });
    
     this.value_formater = d => wrap_in_brackets(formaters[this.value_attr](d[this.value_attr]));
 
@@ -581,17 +514,17 @@ class Partition {
     this.render();
   }
   org_info_by_ministry(){
-    this.hierarchy_factory = ()=>create_org_info_ministry_hierarchy( this.value_attr, this.root_id+=1);
+    this.hierarchy_factory = () => create_org_info_ministry_hierarchy(this.value_attr, this.root_id+=1);
     this.org_info();
   }
   org_info_federal_orgs_by_inst_form(){
     const grand_parent_inst_form_group = "fed_int_gp";
-    this.hierarchy_factory = ()=>create_org_info_inst_form_hierarchy( this.value_attr, this.root_id+=1, grand_parent_inst_form_group);
+    this.hierarchy_factory = () => create_org_info_inst_form_hierarchy(this.value_attr, this.root_id+=1, grand_parent_inst_form_group);
     this.org_info();
   }
   org_info_interests_by_inst_form(){
     const grand_parent_inst_form_group = "corp_int_gp";
-    this.hierarchy_factory = ()=>create_org_info_inst_form_hierarchy( this.value_attr, this.root_id+=1, grand_parent_inst_form_group);
+    this.hierarchy_factory = () => create_org_info_inst_form_hierarchy(this.value_attr, this.root_id+=1, grand_parent_inst_form_group);
     this.org_info();
   }
   org_info(){
@@ -612,12 +545,12 @@ class Partition {
           };
         } else {
           node.how_many_to_show = function(_node){
-            return [_node.children,[]];
+            return [_node.children, []];
           };
         }
       })
       .each(node => {
-        node.children = show_partial_children(node);
+        node.children = PartitionDataWrapper.__show_partial_children(node);
       });
    
     this.value_formater = d => {
@@ -697,7 +630,7 @@ class Partition {
   }
   planned_spending(){
     const presentation_scheme = this.method;
-    this.hierarchy_factory = () => create_planned_spending_hierarchy( this.value_attr, this.root_id+=1, presentation_scheme );
+    this.hierarchy_factory = () => create_planned_spending_hierarchy(this.value_attr, this.root_id+=1, presentation_scheme);
     const hierarchy = this.hierarchy = this.hierarchy_factory(value_functions[this.value_attr]);
 
     this.hierarchy
@@ -708,12 +641,12 @@ class Partition {
           if (_node.children.length <= 2){ return [_node.children, []]}
           const show = [_.head(_node.children)];
           const hide = _.tail(_node.children);
-          const unhide = _.filter(hide, __node=> __node.value > hierarchy.value/100);
+          const unhide = _.filter(hide, __node => __node.value > hierarchy.value/100);
           return [show.concat(unhide), _.difference(hide,unhide)];
         }
       })
       .each(node => {
-        node.children = show_partial_children(node);
+        node.children = PartitionDataWrapper.__show_partial_children(node);
       })
     
     this.value_formater = d => wrap_in_brackets(formaters[this.value_attr](d[this.value_attr]));
@@ -788,18 +721,14 @@ class Partition {
     const default_formater = d => formaters[this.value_attr](d[this.value_attr]);
     const value_formater = this.value_formater || default_formater;
     const root_text_key = get_root_text_key(this.value_attr, this.method);
-    const wrapper = new PartitionDataWrapper(
-      this.hierarchy,
-      show_partial_children,
-      show_all_children
-    );
+    const wrapper = new PartitionDataWrapper(this.hierarchy);
     const show_root_rollup = this.method !== "hwh" && this.method !== "st";
 
     this.chart.render({
       data : wrapper,
       popup_template: this.popup_template,
-      dont_fade : this.dont_fade,
-      html_func : function(d){
+      dont_fade: this.dont_fade,
+      html_func: function(d){
         const should_add_value = (
           Math.abs(d.value) / wrapper.root.value > 0.02 &&
            _.isUndefined(d.data.hidden_children)
@@ -864,7 +793,7 @@ class Partition {
     const search_tree = this.hierarchy_factory();
     const deburred_query = _.deburr(query).toLowerCase();
 
-    search_tree.each(node=>{
+    search_tree.each(node => {
       if (
         node.data.is("dept") && 
            (
@@ -881,12 +810,12 @@ class Partition {
       }
     });  
     const to_open = _.chain(this.search_matching)
-      .map(n=>n.ancestors())
+      .map(n => n.ancestors())
       .flatten(true)
       .uniq()
       .value();
-    const how_many_to_be_shown = node=> {
-      const partition =  _.partition(node.children, child=>_.includes(to_open,child))
+    const how_many_to_be_shown = node => {
+      const partition = _.partition(node.children, child => _.includes(to_open,child))
       return partition;
     }; 
     
@@ -894,7 +823,7 @@ class Partition {
       .each(node => {
         node.value = node[this.value_attr],
         node.__value__ = node.value;
-        node.open =  true;
+        node.open = true;
         node.how_many_to_show = how_many_to_be_shown
         if (_.includes(this.search_matching,node)){
           this.dont_fade.push(node);
@@ -902,10 +831,10 @@ class Partition {
         }
       })
       .each(node => {
-        node.children = show_partial_children(node);
+        node.children = PartitionDataWrapper.__show_partial_children(node);
       });
-    _.each(_.last(search_tree.children).data.hidden_children, node =>{
-      node.eachAfter(d=>{
+    _.each(_.last(search_tree.children).data.hidden_children, node => {
+      node.eachAfter(d => {
         d.how_many_to_show = 1;
       });
     });
@@ -956,7 +885,7 @@ class Partition {
         .html(text_maker("partition_intro_popup"));
 
       const tab_catch_before = intro_popup.append("a")
-        .attr("id","tab-catch-before")
+        .attr("id", "tab-catch-before")
         .attr("tabindex", 0);
 
       const tab_catch_after = partition_control_info.insert("a", ".glyphicon")
@@ -964,8 +893,8 @@ class Partition {
         .attr("tabindex", 0);
 
       const intro_popup_fader = this.container.select(".visual")
-        .insert("div",".partition-controls")
-        .classed("partition-diagram-fader",true);
+        .insert("div", ".partition-controls")
+        .classed("partition-diagram-fader", true);
 
       const intro_popup_cleanup = function(){
         intro_popup.remove();

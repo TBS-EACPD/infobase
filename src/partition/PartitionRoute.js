@@ -1,8 +1,8 @@
-const { Partition, presentation_schemes_by_data_options } = require('./Partition.js');
-const { ensure_loaded } = require('../core/lazy_loader.js');
-const { StandardRouteContainer } = require('../core/NavComponents.js');
-const { SpinnerWrapper } = require('../util_components');
-const { text_maker } = require("../models/text");
+import { Partition, presentation_schemes_by_data_options } from './Partition.js';
+import { ensure_loaded } from '../core/lazy_loader.js';
+import { StandardRouteContainer } from '../core/NavComponents.js';
+import { SpinnerWrapper } from '../util_components';
+import { text_maker } from "../models/text";
 
 export class PartitionRoute extends React.Component {
   constructor(){
@@ -23,7 +23,7 @@ export class PartitionRoute extends React.Component {
   componentDidMount(){
     ensure_loaded({
       table_keys: ['table6', 'table8', 'table12','table305'],
-    }).then( ()=> { 
+    }).then( () => { 
       this.setState({loading: false}) 
     });
   }

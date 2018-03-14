@@ -1,11 +1,11 @@
 module.exports = exports;
-const Subject = require("../models/subject");
-const {GlossaryEntry} = require("../models/glossary");
-const {Table} = require('../core/TableClass.js');
-const {text_maker} = require("../models/text");
-const {sos} = require('../models/businessConstants.js');
-const {InstForm}  = require('../models/subject.js');
-const {rpb_link}  = require('../link_utils.js');
+const Subject = require("../../models/subject");
+const {GlossaryEntry} = require("../../models/glossary");
+const {Table} = require('../../core/TableClass.js');
+const {text_maker} = require("../../models/text");
+const {sos} = require('../../models/businessConstants.js');
+const {InstForm} = require('../../models/subject.js');
+const {rpb_link} = require('../../link_utils.js');
 
 const absolute_value_sort = (a,b) => - ( Math.abs(a.value) - Math.abs(b.value) );
 const alphabetic_name_Sort = (a,b) => a.data.name.toLowerCase().localeCompare( b.data.name.toLowerCase() );

@@ -1,5 +1,5 @@
-const utils = require("../core/utils");
-const { text_maker } = require("../models/text");
+import * as utils from "../core/utils";
+import { text_maker } from "../models/text";
 
 const vertical_placement_counters = {};
 const cycle_colors = function(i){
@@ -42,8 +42,6 @@ export class PartitionDiagram {
       .style("position", "relative")
       .style("zoom", 0.4)
       .on("keydown", this.keydown_dispatch.bind(this))
-      .on("focusin", this.focusin_dispatch.bind(this))
-      .on("focusout", this.focusout_dispatch.bind(this))
       .on("click", this.click_dispatch.bind(this))
       .transition()
       .duration(500)
