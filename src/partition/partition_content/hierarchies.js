@@ -30,7 +30,7 @@ const get_id_ancestry = (root_id,node) => {
   }
 }
 
-const value_functions = exports.value_functions = {
+const value_functions = {
   "exp" : function(node){
     const table6 = Table.lookup('table6');
     if ( !table6.programs.has(node)){  
@@ -47,7 +47,7 @@ const value_functions = exports.value_functions = {
   },
 }
 
-const post_traversal_value_set = exports.post_traversal_value_set = function(node,value_attr,root_id){
+const post_traversal_value_set = function(node,value_attr,root_id){
   node.id_ancestry = get_id_ancestry(root_id,node);
   if (node.data.is("program")){
     node.exp = value_functions["exp"](node.data);

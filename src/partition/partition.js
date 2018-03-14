@@ -8,7 +8,6 @@ import { PartitionDiagramNotes } from "./PartitionDiagramNotes.js";
 import * as utils from "../core/utils";
 import * as Subject from "../models/subject";
 import {
-  value_functions,
   create_ministry_hierarchy,
   create_spend_type_hierarchy,
   create_tag_hierarchy,
@@ -91,6 +90,8 @@ const get_root_text_key = (value_attr, method) => {
       }
   }
 }
+
+const hierarchy_factory_node_func = node => node[this.value_attr];
 
 const get_common_popup_options = d => {
   return {
@@ -261,10 +262,13 @@ class Partition {
     this.update_url(this.method, this.value_attr);
     this[this.method]();
   }
+  hierarchy_factory_node_func(node){
+    return node[this.value_attr];
+  }
   dept(){
     const skip_crsos = true;
     this.hierarchy_factory = () => create_ministry_hierarchy(this.value_attr, skip_crsos, this.root_id+=1);
-    const hierarchy = this.hierarchy = this.hierarchy_factory(value_functions[this.value_attr]);
+    const hierarchy = this.hierarchy = this.hierarchy_factory(hierarchy_factory_node_func);
     this.hierarchy
       .each(node => {
         node.__value__ = node.value;
@@ -328,7 +332,7 @@ class Partition {
   }
   hwh(){
     this.hierarchy_factory = () => create_tag_hierarchy("HWH", this.value_attr, this.root_id+=1);
-    const hierarchy = this.hierarchy = this.hierarchy_factory(value_functions[this.value_attr]);
+    const hierarchy = this.hierarchy = this.hierarchy_factory(hierarchy_factory_node_func);
     this.hierarchy
       .each(node => {
         node.__value__ = node.value;
@@ -382,7 +386,7 @@ class Partition {
   }
   goca(){
     this.hierarchy_factory = () => create_tag_hierarchy("GOCO", this.value_attr,this.root_id+=1);
-    const hierarchy = this.hierarchy = this.hierarchy_factory(value_functions[this.value_attr]);
+    const hierarchy = this.hierarchy = this.hierarchy_factory(hierarchy_factory_node_func);
 
     this.hierarchy
       .each(node => {
@@ -439,7 +443,7 @@ class Partition {
   }
   st(){
     this.hierarchy_factory = () => create_spend_type_hierarchy(this.value_attr, this.root_id+=1);
-    const hierarchy = this.hierarchy = this.hierarchy_factory(value_functions[this.value_attr]);
+    const hierarchy = this.hierarchy = this.hierarchy_factory(hierarchy_factory_node_func);
 
     this.hierarchy
       .each(node => {
@@ -511,7 +515,7 @@ class Partition {
   }
   org_info(){
     this.value_attr = "org_info";
-    this.hierarchy = this.hierarchy_factory(value_functions[this.value_attr]);
+    this.hierarchy = this.hierarchy_factory(hierarchy_factory_node_func);
     
     this.hierarchy
       .each(node => {
@@ -607,7 +611,7 @@ class Partition {
   planned_spending(){
     const presentation_scheme = this.method;
     this.hierarchy_factory = () => create_planned_spending_hierarchy(this.value_attr, this.root_id+=1, presentation_scheme);
-    const hierarchy = this.hierarchy = this.hierarchy_factory(value_functions[this.value_attr]);
+    const hierarchy = this.hierarchy = this.hierarchy_factory(hierarchy_factory_node_func);
 
     this.hierarchy
       .each(node => {
