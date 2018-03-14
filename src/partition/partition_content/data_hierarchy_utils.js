@@ -9,14 +9,14 @@ const get_glossary_entry = (glossary_key) => GlossaryEntry.lookup(glossary_key) 
 // a node can be uniquely identified by its full ancestry, which is saved as a property of each node for easy look-up
 const get_id_ancestry = (root_id,node) => {
   if (node.parent && !_.isUndefined(node.parent.data.id)) {
-    return node.data.id + '-' + get_id_ancestry(root_id,node.parent);
+    return node.data.id + '-' + get_id_ancestry(root_id, node.parent);
   } else {
     return root_id ? "root:"+root_id : "root";
   }
 }
 
-const post_traversal_value_set = function(node,value_attr,root_id){
-  node.id_ancestry = get_id_ancestry(root_id,node);
+const post_traversal_value_set = function(node,value_attr, root_id){
+  node.id_ancestry = get_id_ancestry(root_id, node);
   if (node.data.is("program")){
     node.exp = value_functions["exp"](node.data);
     node.fte = value_functions["fte"](node.data);
@@ -24,10 +24,10 @@ const post_traversal_value_set = function(node,value_attr,root_id){
   } else if (_.isUndefined(node.children)){
     node.value = false;
   } else {
-    node.children = _.filter(node.children,d=>d.value!==false && d.value !== 0);
-    node.exp = d3.sum(node.children, d=>d.exp);
-    node.fte = d3.sum(node.children, d=>d.fte);
-    node.value = d3.sum(node.children, d=>d.value);
+    node.children = _.filter(node.children,d => d.value !== false && d.value !== 0);
+    node.exp = d3.sum(node.children, d => d.exp);
+    node.fte = d3.sum(node.children, d => d.fte);
+    node.value = d3.sum(node.children, d => d.value);
   }
 }
 

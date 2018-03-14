@@ -10,7 +10,7 @@ import {
   post_traversal_search_string_set,
 } from './data_hierarchy_utils.js'
 
-const mock_model = function(id,name, description,type, extra_attrs={}){
+const mock_model = function(id, name, description, type, extra_attrs={}){
   return Object.assign({
     id,
     description,
@@ -19,18 +19,18 @@ const mock_model = function(id,name, description,type, extra_attrs={}){
   }, extra_attrs);
 }
 
-const create_spend_type_hierarchy = function(value_attr,root_id){
+const create_spend_type_hierarchy = function(value_attr, root_id){
   return d3.hierarchy(Subject.gov,
     node => {
       let _mock_model;
       if (node.is("gov")){
-        _mock_model = function(id,name,type){
+        _mock_model = function(id, name, type){
           return mock_model(
             id,
             name,
             '',
             type,
-            {plural:()=> text_maker("type_of_spending")}
+            {plural: () => text_maker("type_of_spending")}
           );
         };
         return [
@@ -42,7 +42,7 @@ const create_spend_type_hierarchy = function(value_attr,root_id){
         ];
       } else if (node.is("type_of_spending")){
         _mock_model = function(so){
-          const plural = function(){ return text_maker("sos")};
+          const plural = function(){ return text_maker("sos") };
           const so_num = so.so_num;
           const glossary_key = so_num < 21 ? 
             "SOBJ"+so_num :
@@ -58,18 +58,18 @@ const create_spend_type_hierarchy = function(value_attr,root_id){
           );
         };
         const children = {
-          "op_spending" : [sos["1"], sos["2"],sos["3"],sos["4"],sos["5"],sos["6"],sos["7"]],
-          "capital_spending" : [sos["8"],sos["9"]],
-          [sos["10"].text] : [sos["10"]], 
-          [sos["11"].text] : [sos["11"]], 
-          "revenues" : [sos["21"],sos["22"]],
+          "op_spending": [sos["1"], sos["2"], sos["3"], sos["4"], sos["5"], sos["6"], sos["7"]],
+          "capital_spending": [sos["8"], sos["9"]],
+          [sos["10"].text]: [sos["10"]], 
+          [sos["11"].text]: [sos["11"]], 
+          "revenues": [sos["21"], sos["22"]],
         }[node.id];
         return _.map(children, _mock_model);
       } else if (node.is("so")){
         _mock_model = function(row){
-          const unique_id = Subject.Program.unique_id(row.dept,row.activity_code); 
+          const unique_id = Subject.Program.unique_id(row.dept, row.activity_code); 
           const program = Subject.Program.lookup(unique_id);
-          const data = Object.assign({},{value:row["{{pa_last_year}}"]});
+          const data = Object.assign({}, {value: row["{{pa_last_year}}"]});
           return mock_model(
             unique_id + row.so_num, 
             program.name + " - " + text_maker("program_slice_of", {so_name: row.so}),
@@ -85,17 +85,17 @@ const create_spend_type_hierarchy = function(value_attr,root_id){
           );
         };
         return Table.lookup('table305').data
-          .filter(row=>row.so_num===node.so_num)
+          .filter(row => row.so_num === node.so_num)
           .map(_mock_model);
       }
     })
-    .eachAfter(node =>{
+    .eachAfter(node => {
       node.id_ancestry = get_id_ancestry(root_id,node);
-      if (node.data.is("program_fragment")){
+      if ( node.data.is("program_fragment") ){
         node.exp = node.value = node.data.value;
       } else {
-        node.children = _.filter(node.children,d=>d.value!==false && d.value !== 0);
-        node.exp = node.value = d3.sum(node.children, d=>d.value);
+        node.children = _.filter(node.children, d => d.value !== false && d.value !== 0);
+        node.exp = node.value = d3.sum(node.children, d => d.value);
       }
       post_traversal_search_string_set(node);
     })

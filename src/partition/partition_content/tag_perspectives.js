@@ -7,7 +7,7 @@ import {
   post_traversal_search_string_set,
 } from './data_hierarchy_utils.js';
 
-const create_tag_hierarchy = function(root,value_attr,root_id) {
+const create_tag_hierarchy = function(root, value_attr, root_id) {
   const hierarchy = d3.hierarchy(Subject.Tag.tag_roots[root],
     node => {
       if (node.is("tag")){
@@ -15,7 +15,7 @@ const create_tag_hierarchy = function(root,value_attr,root_id) {
       }
     })
     .eachAfter(node => {
-      post_traversal_value_set(node,value_attr,root_id);
+      post_traversal_value_set(node, value_attr, root_id);
       post_traversal_search_string_set(node);
     })
     .sort( absolute_value_sort );

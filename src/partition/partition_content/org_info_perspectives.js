@@ -85,29 +85,29 @@ const create_org_info_ministry_hierarchy = function(value_attr,root_id) {
     });
 }
 
-const create_org_info_inst_form_hierarchy = function(value_attr,root_id,grand_parent_inst_form_group) {
+const create_org_info_inst_form_hierarchy = function(value_attr, root_id, grand_parent_inst_form_group) {
   return d3.hierarchy(Subject.gov,
     node => {
-      if (node.is("gov")) {
-        const orgs = _.chain(Subject.Ministry.get_all())
+      if ( node.is("gov") ) {
+        const orgs = _.chain( Subject.Ministry.get_all() )
           .map(ministry => ministry.orgs)
           .flatten()
           .filter(org => org.inst_form.parent_form.parent_form.id === grand_parent_inst_form_group)
           .value();
         return orgs_to_inst_form_nodes(orgs);
-      } else if (node.is("inst_form")) {
+      } else if ( node.is("inst_form") ) {
         return node.orgs;
       }
     })
-    .eachAfter(node =>{
-      org_info_post_traversal_rule_set(node,value_attr,root_id);
+    .eachAfter(node => {
+      org_info_post_traversal_rule_set(node, value_attr, root_id);
       post_traversal_search_string_set(node);
     })
-    .sort( (a,b) => {
-      if (a.data.is("dept")) {
-        return alphabetic_name_sort(a,b);
+    .sort( (a, b) => {
+      if ( a.data.is("dept") ) {
+        return alphabetic_name_sort(a, b);
       } else {
-        return absolute_value_sort(a,b);
+        return absolute_value_sort(a, b);
       }
     });
 }

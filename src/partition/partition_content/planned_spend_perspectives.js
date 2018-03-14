@@ -284,14 +284,14 @@ const planned_spending_post_traversal_rule_set = (node,value_attr,root_id,presen
     }
   } else {
     node.children = _.filter(node.children, d => d.value !== false && d.value !== 0);
-    node[value_attr] = node.value = d3.sum(node.children, d=>d.value);
+    node[value_attr] = node.value = d3.sum(node.children, d => d.value);
     if (node.data.is("dept")){
       node.data.rpb_link = rpb_link(default_rpb_link_options);
     }
   }
 }
 
-const create_planned_spending_hierarchy = function(value_attr,root_id,presentation_scheme) {
+const create_planned_spending_hierarchy = function(value_attr, root_id, presentation_scheme) {
   set_year_by_presentation_scheme(presentation_scheme);
 
   return d3.hierarchy(Subject.gov,
@@ -308,7 +308,7 @@ const create_planned_spending_hierarchy = function(value_attr,root_id,presentati
       }
     })
     .eachAfter(node =>{
-      planned_spending_post_traversal_rule_set(node,value_attr,root_id,presentation_scheme);
+      planned_spending_post_traversal_rule_set(node,value_attr, root_id, presentation_scheme);
       post_traversal_search_string_set(node);
     })
     .sort( absolute_value_sort );
