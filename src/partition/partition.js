@@ -324,13 +324,7 @@ class Partition {
 
     this.enable_search_bar();
 
-    // If search active then reapply to new hierarchy, else normal render
-    const query = this.container.select("input.search").node().value.toLowerCase();
-    if(query.length >= search_required_chars){
-      this.search_actual(query);
-    } else {
-      this.render();
-    }
+    this.render();
   }
   hwh(){
     this.hierarchy_factory = () => create_tag_hierarchy("HWH", this.value_attr, this.root_id+=1);
@@ -384,13 +378,7 @@ class Partition {
 
     this.enable_search_bar();
 
-    // If search active then reapply to new hierarchy, else normal render
-    const query = this.container.select("input.search").node().value.toLowerCase();
-    if(query.length >= search_required_chars){
-      this.search_actual(query);
-    } else {
-      this.render();
-    }
+    this.render();
   }
   goca(){
     this.hierarchy_factory = () => create_tag_hierarchy("GOCO", this.value_attr,this.root_id+=1);
@@ -447,13 +435,7 @@ class Partition {
 
     this.enable_search_bar();
 
-    // If search active then reapply to new hierarchy, else normal render
-    const query = this.container.select("input.search").node().value.toLowerCase();
-    if(query.length >= search_required_chars){
-      this.search_actual(query);
-    } else {
-      this.render();
-    }
+    this.render();
   }
   st(){
     this.hierarchy_factory = () => create_spend_type_hierarchy(this.value_attr, this.root_id+=1);
@@ -596,13 +578,7 @@ class Partition {
 
     this.enable_search_bar();
 
-    // If search active then reapply to new hierarchy, else normal render
-    const query = this.container.select("input.search").node().value.toLowerCase();
-    if(query.length >= search_required_chars){
-      this.search_actual(query);
-    } else {
-      this.render();
-    }
+    this.render();
   }
   est_type(){
     this.planned_spending();
@@ -709,41 +685,42 @@ class Partition {
 
     this.enable_search_bar();
 
+    this.render();
+  } 
+  render(skip_search = false){
     // If search active then reapply to new hierarchy, else normal render
-    const query = this.container.select("input.search").node().value.toLowerCase();
-    if(query.length >= search_required_chars){
+    const search_node = this.container.select("input.search").node();
+    const query = search_node.value.toLowerCase();
+    if ( !skip_search && !search_node.disabled && query.length >= search_required_chars ){
       this.search_actual(query);
     } else {
-      this.render();
+      const default_formater = d => formaters[this.value_attr](d[this.value_attr]);
+      const value_formater = this.value_formater || default_formater;
+      const root_text_key = get_root_text_key(this.value_attr, this.method);
+      const wrapper = new PartitionDataWrapper(this.hierarchy);
+      const show_root_rollup = this.method !== "hwh" && this.method !== "st";
+  
+      this.chart.render({
+        data : wrapper,
+        popup_template: this.popup_template,
+        dont_fade: this.dont_fade,
+        html_func: function(d){
+          const should_add_value = (
+            Math.abs(d.value)/wrapper.root.value > 0.02 &&
+             _.isUndefined(d.data.hidden_children)
+          );
+          let name;
+          if (should_add_value && d !== wrapper.root) {
+            name = d.data.name + value_formater(d);
+          } else if ( !should_add_value && d !== wrapper.root ){
+            name = utils.abbrev(d.data.name, 80);
+          } else if ( d === wrapper.root ) {
+            name = text_maker(root_text_key, {x: wrapper.root.value, show_root_rollup});
+          }
+          return name;
+        },
+      });
     }
-  }
-  render(){
-    const default_formater = d => formaters[this.value_attr](d[this.value_attr]);
-    const value_formater = this.value_formater || default_formater;
-    const root_text_key = get_root_text_key(this.value_attr, this.method);
-    const wrapper = new PartitionDataWrapper(this.hierarchy);
-    const show_root_rollup = this.method !== "hwh" && this.method !== "st";
-
-    this.chart.render({
-      data : wrapper,
-      popup_template: this.popup_template,
-      dont_fade: this.dont_fade,
-      html_func: function(d){
-        const should_add_value = (
-          Math.abs(d.value) / wrapper.root.value > 0.02 &&
-           _.isUndefined(d.data.hidden_children)
-        );
-        let name;
-        if (should_add_value && d !== wrapper.root) {
-          name = d.data.name + value_formater(d);
-        } else if ( !should_add_value && d !== wrapper.root){
-          name =  utils.abbrev(d.data.name, 80);
-        } else if ( d === wrapper.root ) {
-          name = text_maker(root_text_key, {x:wrapper.root.value, show_root_rollup});
-        }
-        return name;
-      },
-    });
   }
   enable_search_bar(){
     const partition_control_search_block = this.container
@@ -840,7 +817,9 @@ class Partition {
     });
 
     this.hierarchy = search_tree;
-    this.render();
+
+    const skip_search = true;
+    this.render(skip_search);
   }
   // Deals with event details and debouncing
   search_handler(){
