@@ -12,7 +12,7 @@ const alphabetic_name_Sort = (a,b) => a.data.name.toLowerCase().localeCompare( b
 
 const get_glossary_entry = (glossary_key) => GlossaryEntry.lookup(glossary_key) ? GlossaryEntry.lookup(glossary_key).definition : false;
 
-const mock_model = exports.mock_model = function(id,name, description,type, extra_attrs={} ){
+const mock_model = function(id,name, description,type, extra_attrs={} ){
   return Object.assign({
     id,
     description,

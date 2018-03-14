@@ -1,5 +1,3 @@
-import { mock_model } from "./partition_content/hierarchies"; 
-
 export class PartitionDataWrapper {
   constructor(root){
     this.root = root;
@@ -34,13 +32,14 @@ export class PartitionDataWrapper {
           parent: node,
           value: d3.sum(to_be_compressed,x => x.value),
           __value__: d3.sum(to_be_compressed,x => x.value),
-          data: mock_model(
-            _.map(to_be_compressed, x => x.data.id)+"compressed",
-            "+",
-            "",
-            "compressed",
-            {hidden_children: to_be_compressed}
-          ),
+          data: {
+            id: _.map(to_be_compressed, x => x.data.id)+"compressed",
+            name: "+",
+            description: "",
+            type: "compressed",
+            is : __type__ => __type__ === "compressed",
+            hidden_children: to_be_compressed,
+          },
           no_polygon: false,
         }
       );
