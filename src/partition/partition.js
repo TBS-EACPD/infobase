@@ -14,7 +14,7 @@ import {
   create_org_info_ministry_hierarchy,
   create_org_info_inst_form_hierarchy,
   create_planned_spending_hierarchy,
-} from "./partition_content/hierarchies"; 
+} from "./partition_content/index.js"; 
 import { reactAdapter } from '../core/reactAdapter';
 
 const { compact1, big_int_real } = formats; 
