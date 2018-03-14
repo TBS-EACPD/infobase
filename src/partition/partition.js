@@ -113,15 +113,15 @@ const get_common_popup_options = d => {
 
 const wrap_in_brackets = (text) => " (" + text + ")";
 
-const search_required_chars = 1;
-const search_debounce_time = 500;
-
 class Partition {
   constructor(container, update_url, method, value_attr){
     
     this.update_url = update_url;
     
     this.presentation_schemes_by_data_options = presentation_schemes_by_data_options;
+    
+    this.search_required_chars = 1;
+    this.search_debounce_time = 500;
 
     container.append("div")
       .classed("accessible sr-only", true)
@@ -695,7 +695,7 @@ class Partition {
     // If search active then reapply to new hierarchy, else normal render
     const search_node = this.container.select("input.search").node();
     const query = search_node.value.toLowerCase();
-    if ( !skip_search && !search_node.disabled && query.length >= search_required_chars ){
+    if ( !skip_search && !search_node.disabled && query.length >= this.search_required_chars ){
       this.search_actual(query);
     } else {
       const default_formater = d => formaters[this.value_attr](d[this.value_attr]);
@@ -832,13 +832,13 @@ class Partition {
     const query = d3.event.target.value.toLowerCase();
     this.search_matching = [] || this.search_matching;
 
-    this.debounced_search = this.debounced_search || _.debounce(this.search_actual, search_debounce_time);
+    this.debounced_search = this.debounced_search || _.debounce(this.search_actual, this.search_debounce_time);
 
     this.debounced_refresh = this.debounced_refresh || _.debounce(function(){
       this.dont_fade = [];
       this.search_matching = [];
       this[this.method]();
-    }, search_debounce_time/2);
+    }, this.search_debounce_time/2);
 
     if (d3.event.keyCode === 13 ||
         d3.event.keyCode === 37 ||
@@ -848,7 +848,7 @@ class Partition {
       // Bail on enter and arrow keys. Note: this DOESN'T bail already debounced searches
       return;
     }
-    if (query.length < search_required_chars) {
+    if (query.length < this.search_required_chars) {
       this.debounced_search.cancel();
       if (query.length === 0){
         this.debounced_refresh.call(this);
