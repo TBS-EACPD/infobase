@@ -504,39 +504,33 @@ partition_org_info_interests_by_inst_form_was:
 partition_spending_was:
   transform: [handlebars]
   en: |
-    {{#if show_root_rollup}}
     We spent   
     <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_compact x}}</a></p>
     in
-    {{/if}}
     <span class='text-nowrap'>{{pa_last_year}}</span>
   fr: |
-    {{#if show_root_rollup}}
     Nous avons dépensé   
     <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_compact x}}</a></p>
     en
-    {{/if}}
     <span class='text-nowrap'>{{pa_last_year}}</span>
 partition_fte_was:
   transform: [handlebars]
   en: |
-    {{#if show_root_rollup}}
     We employed  
     <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int_real x}}</a></p>
     FTEs in
-    {{/if}}
     <span class='text-nowrap'>{{pa_last_year}}</span> 
   fr: |
-    {{#if show_root_rollup}}
     Nous avons employé  
     <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int_real x}}</a></p>
     ETP en
-    {{/if}}
     <span class='text-nowrap'>{{pa_last_year}}</span>
+partiton_default_was_root:
+  transform: [handlebars]
+  text: <span class='text-nowrap'>{{pa_last_year}}</span>
 partition_spending_will_be:
   transform: [handlebars]
   en: |
-    {{#if show_root_rollup}}
     We plan on spending
     <p class='amount'>
       <a class="infographic" href="#rpb/~(columns~(~'*7b*7best_in_year*7d*7d_estimates)~subject~'gov_gov~mode~'details~dimension~'by_estimates_doc~filter~'All~table~'table8~preferDeptBreakout~true~descending~false)">
@@ -544,10 +538,8 @@ partition_spending_will_be:
       </a>
     </p>
     in
-    {{/if}}
     <span class='text-nowrap'>{{planning_year_1}}</span>
   fr: |
-    {{#if show_root_rollup}}
     Nous prévoyons dépenser
     <p class='amount'>
       <a class="infographic" href="#rpb/~(columns~(~'*7b*7best_in_year*7d*7d_estimates)~subject~'gov_gov~mode~'details~dimension~'by_estimates_doc~filter~'Tout~table~'table8~preferDeptBreakout~true~descending~false)">
@@ -555,23 +547,18 @@ partition_spending_will_be:
       </a>
     </p>
     en
-    {{/if}}
     <span class='text-nowrap'>{{planning_year_1}}</span>
 partition_fte_will_be:
   transform: [handlebars]
   en: |
-    {{#if show_root_rollup}}
     We will be employing   
     <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int_real x}}</a></p>
     in
-    {{/if}}
     <span class='text-nowrap'>{{planning_year_1}}</span> 
   fr: |
-    {{#if show_root_rollup}}
     Nous emploieront   
     <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int_real x}}</a></p>
     ETP en
-    {{/if}}
     <span class='text-nowrap'>{{planning_year_1}}</span>
 
 partition_spending_will_be_by_est_doc_partial_en:
@@ -634,9 +621,9 @@ partition_controls:
          <text>
            {{gt "partition_select_data"}}
          </text>
-         <select class="form-control select_value_attr">
-           {{#each sort_vals}}
-             <option value='{{id}}'>{{text}}</option>
+         <select class="form-control select_data_type">
+           {{#each data_type_options}}
+             <option value='{{id}}'>{{name}}</option>
            {{/each}}
          </select>
        </div>
@@ -644,9 +631,9 @@ partition_controls:
          <text>
            {{gt "partition_select_context"}}
          </text>
-         <select class="form-control select_root">
-           {{#each presentation_schemes}}
-            <option value='{{id}}'>{{text}}</option>
+         <select class="form-control select_perspective">
+           {{#each perspective_options}}
+            <option value='{{id}}'>{{name}}</option>
           {{/each}}
          </select>
        </div>

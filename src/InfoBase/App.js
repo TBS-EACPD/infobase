@@ -44,7 +44,7 @@ export class App extends React.Component {
           <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={ResourceExplorer} />
           <Route path="/orgs/:level/:subject_id/infograph/:bubble?/" component={InfoGraph} />
           <Route path="/glossary/:active_key?" component={Glossary} />
-          <Route path="/partition/:method?/:value_attr?" component={PartitionRoute} />
+          <Route path="/partition/:perspective?/:data_type?" component={PartitionRoute} />
           <Route path="/explore-:perspective?" component={BubbleExplore} />
           <Route path="/rpb/:config?" component={ReportBuilder} />
           <Route path="/" component={Home} />

@@ -1,4 +1,5 @@
-import { Partition, presentation_schemes_by_data_options } from './Partition.js';
+import { Partition } from './Partition.js';
+import { get_all_perspectives, all_data_types } from './partition_content/index.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
 import { StandardRouteContainer } from '../core/NavComponents.js';
 import { SpinnerWrapper } from '../util_components';
@@ -8,8 +9,8 @@ export class PartitionRoute extends React.Component {
   constructor(){
     super()
     this.state = {loading: true};
-    this.update_url = (method, value_attr) => {
-      const new_path = `partition/${method}/${value_attr}`;
+    this.url_update_callback = (perspective, data_type) => {
+      const new_path = `partition/${perspective}/${data_type}`;
 
       this.props.history.push('/'+new_path);
 
@@ -23,7 +24,8 @@ export class PartitionRoute extends React.Component {
   componentDidMount(){
     ensure_loaded({
       table_keys: ['table6', 'table8', 'table12','table305'],
-    }).then( () => { 
+    }).then( () => {
+      this.all_perspectives = get_all_perspectives();
       this.setState({loading: false}) 
     });
   }
@@ -31,11 +33,11 @@ export class PartitionRoute extends React.Component {
     if (!_.isUndefined(this.partition)){
       // Once the Partition diagram has been initialized, need to ensure it stays in sync whenever the path updates
       const {
-        method, 
-        value_attr,
+        perspective, 
+        data_type,
       } = this.getValidatedRouteParams(nextProps);
 
-      this.ensurePartitionStateMatchesRouteState(method, value_attr);
+      this.ensurePartitionStateMatchesRouteState(perspective, data_type);
     }
 
     // Should only need to update once, when the table dependencies finish loading and the spinner needs to be killed
@@ -44,11 +46,11 @@ export class PartitionRoute extends React.Component {
   componentDidUpdate(){
     // Should only happen once, when the table dependencies finish loading and the spinner has been killed
     const {
-      method, 
-      value_attr,
+      perspective, 
+      data_type,
     } = this.getValidatedRouteParams(this.props);
     this.container = d3.select(ReactDOM.findDOMNode(this.refs.container));
-    this.partition = new Partition(this.container, this.update_url, method, value_attr);
+    this.partition = new Partition(this.container, this.all_perspectives, all_data_types, perspective, data_type, this.url_update_callback);
   }
   render(){
     return (
@@ -64,49 +66,47 @@ export class PartitionRoute extends React.Component {
     );
   }
   getValidatedRouteParams(props){
-    const route_method = props.match.params.method;
-    const route_value_attr = props.match.params.value_attr;
+    const route_perspective = props.match.params.perspective;
+    const route_data_type = props.match.params.data_type;
 
-    const route_value_attr_is_valid = _.chain(presentation_schemes_by_data_options)
-      .map( presentation_schemes_by_data_option => presentation_schemes_by_data_option.id )
-      .indexOf(route_value_attr)
+    const route_data_type_is_valid = _.chain(this.all_perspectives)
+      .map( perspective => perspective.data_type )
+      .indexOf(route_data_type)
       .value() !== -1;
 
-    const route_method_is_valid = route_value_attr_is_valid &&  _.chain(presentation_schemes_by_data_options)
-      .find( presentation_schemes_by_data_option => presentation_schemes_by_data_option.id === route_value_attr )
-      .pick( "presentation_schemes" )
-      .flatMap()
-      .indexOf( route_method )
+    const route_perspective_is_valid = route_data_type_is_valid &&  _.chain(this.all_perspectives)
+      .map( perspective => perspective.id )
+      .indexOf(route_data_type)
       .value() !== -1;
 
-    if (route_value_attr_is_valid && route_method_is_valid){
+    if (route_data_type_is_valid && route_perspective_is_valid){
       return {
-        method: route_method,
-        value_attr: route_value_attr,
+        perspective: route_perspective,
+        data_type: route_data_type,
       };
     } else {
       return {
-        method: "dept",
-        value_attr: "exp",
+        perspective: "dept",
+        data_type: "exp",
       };
     }
   }
-  ensurePartitionStateMatchesRouteState(route_method, route_value_attr){
-    const partition_method = this.partition.method;
-    const partition_value_attr = this.partition.value_attr;
+  ensurePartitionStateMatchesRouteState(route_perspective, route_data_type){
+    const partition_perspective = this.partition.perspective;
+    const partition_data_type = this.partition.data_type;
 
-    if ( (route_method !== partition_method) && (route_value_attr === partition_value_attr) ) {
-      this.partition.method = route_method;
+    if ( (route_perspective !== partition_perspective) && (route_data_type === partition_data_type) ) {
+      this.partition.perspective = route_perspective;
       
-      this.container.select(".select_root")
-        .property("value", route_method)
+      this.container.select(".select_perspective")
+        .property("value", route_perspective)
         .dispatch("change");
-    } else if (route_value_attr !== partition_value_attr) {
-      this.partition.method = route_method;
-      this.partition.value_attr = route_value_attr;
+    } else if (route_data_type !== partition_data_type) {
+      this.partition.perspective = route_perspective;
+      this.partition.data_type = route_data_type;
 
-      this.container.select(".select_value_attr")
-        .property("value", route_value_attr)
+      this.container.select(".select_data_type")
+        .property("value", route_data_type)
         .dispatch("change");
     }
   }

@@ -7,20 +7,37 @@ const alphabetic_name_sort = (a,b) => a.data.name.toLowerCase().localeCompare( b
 const get_glossary_entry = (glossary_key) => GlossaryEntry.lookup(glossary_key) ? GlossaryEntry.lookup(glossary_key).definition : false;
 
 // a node can be uniquely identified by its full ancestry, which is saved as a property of each node for easy look-up
-const get_id_ancestry = (root_id,node) => {
+const get_id_ancestry = (distinct_root_identifier, node) => {
   if (node.parent && !_.isUndefined(node.parent.data.id)) {
-    return node.data.id + '-' + get_id_ancestry(root_id, node.parent);
+    return node.data.id + '-' + get_id_ancestry(distinct_root_identifier, node.parent);
   } else {
-    return root_id ? "root:"+root_id : "root";
+    return distinct_root_identifier ? "root:"+distinct_root_identifier : "root";
   }
 }
 
-const post_traversal_value_set = function(node,value_attr, root_id){
-  node.id_ancestry = get_id_ancestry(root_id, node);
+const value_functions = {
+  "exp" : function(node){
+    const table6 = Table.lookup('table6');
+    if ( !table6.programs.has(node) ){  
+      return false;
+    }
+    return _.first(table6.programs.get(node))["{{pa_last_year}}exp"];
+  },
+  "fte" : function(node){
+    const table12 = Table.lookup('table12');
+    if ( !table12.programs.has(node) ){  
+      return false;
+    }
+    return _.first(table12.programs.get(node))["{{pa_last_year}}"];
+  },
+}
+
+const post_traversal_value_set = function(node, data_type, distinct_root_identifier){
+  node.id_ancestry = get_id_ancestry(distinct_root_identifier, node);
   if (node.data.is("program")){
     node.exp = value_functions["exp"](node.data);
     node.fte = value_functions["fte"](node.data);
-    node.value = node[value_attr];
+    node.value = node[data_type];
   } else if (_.isUndefined(node.children)){
     node.value = false;
   } else {
@@ -39,23 +56,6 @@ const post_traversal_search_string_set = function(node){
   if (node.data.description){
     node.data.search_string += _.deburr(node.data.description.replace(/<(?:.|\n)*?>/gm, '').toLowerCase());
   }
-}
-
-const value_functions = {
-  "exp" : function(node){
-    const table6 = Table.lookup('table6');
-    if ( !table6.programs.has(node)){  
-      return false;
-    }
-    return _.first(table6.programs.get(node))["{{pa_last_year}}exp"];
-  },
-  "fte" : function(node){
-    const table12 = Table.lookup('table12');
-    if ( !table12.programs.has(node)){  
-      return false;
-    }
-    return _.first(table12.programs.get(node))["{{pa_last_year}}"];
-  },
 }
 
 export {

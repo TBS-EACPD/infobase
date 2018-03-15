@@ -1,131 +1,28 @@
 import "./partition.ib.yaml";
 import "./partition.scss";
-import { text_maker, run_template } from "../models/text";
-import { formats } from '../core/format.js';
+import { text_maker } from "../models/text";
 import { PartitionDiagram } from "./PartitionDiagram.js";
 import { PartitionDataWrapper } from "./PartitionDataWrapper.js";
 import { PartitionDiagramNotes } from "./PartitionDiagramNotes.js";
 import * as utils from "../core/utils";
-import * as Subject from "../models/subject";
-import {
-  create_ministry_hierarchy,
-  create_spend_type_hierarchy,
-  create_tag_hierarchy,
-  create_org_info_ministry_hierarchy,
-  create_org_info_inst_form_hierarchy,
-  create_planned_spending_hierarchy,
-} from "./partition_content/index.js"; 
 import { reactAdapter } from '../core/reactAdapter';
 
-const { compact1, big_int_real } = formats; 
-
-const presentation_schemes_by_data_options = [
-  { 
-    id: "exp", 
-    text: text_maker("partition_spending_data"), 
-    presentation_schemes: [
-      "goca", 
-      "dept", 
-      "hwh", 
-      "st",
-    ],
-  },
-  { 
-    id: "fte", 
-    text: text_maker("fte_written"), 
-    presentation_schemes: [
-      "goca",
-      "dept",
-      "hwh",
-    ],
-  },
-  { 
-    id: "planned_exp", 
-    text: text_maker("partition_planned_spending_data"), 
-    presentation_schemes: [
-      "org_planned_spend", 
-      "est_type", 
-      "vs_type", 
-      "est_doc_mains",
-      "est_doc_sea",
-      "est_doc_seb",
-      "est_doc_sec",
-      "est_doc_im",
-    ],
-  },
-  { 
-    id: "org_info", 
-    text: text_maker("orgs"), 
-    presentation_schemes: [
-      "org_info_by_ministry", 
-      "org_info_federal_orgs_by_inst_form",
-      "org_info_interests_by_inst_form",
-    ],
-  },
-];
-
-const formaters = {
-  "exp": compact1,
-  "fte": big_int_real,
-  "planned_exp": compact1,
-  "org_info": big_int_real,
-};
-
-const get_root_text_key = (value_attr, method) => {
-  switch (value_attr){
-    case "exp" : return "partition_spending_was";
-    case "fte" : return "partition_fte_was";
-    case "planned_exp" : switch (method){
-      case "est_doc_mains" : return "partition_spending_will_be_by_mains";
-      case "est_doc_sea" : return "partition_spending_will_be_by_sea";
-      case "est_doc_seb" : return "partition_spending_will_be_by_seb";
-      case "est_doc_sec" : return "partition_spending_will_be_by_sec";
-      case "est_doc_im" : return "partition_spending_will_be_by_im";
-      default : return "partition_spending_will_be";
-      }
-    case "org_info" : switch (method){
-      case "org_info_by_ministry" : return "partition_org_info_was";
-      case "org_info_federal_orgs_by_inst_form" : return "partition_org_info_federal_orgs_by_inst_form_was";
-      case "org_info_interests_by_inst_form" : return "partition_org_info_interests_by_inst_form_was";
-      }
-  }
-}
-
-const hierarchy_factory_node_func = node => node[this.value_attr];
-
-const get_common_popup_options = d => {
-  return {
-    year: run_template("{{pa_last_year}}"),
-    up_to: false,
-    exp: d.exp,
-    exp_is_negative: d.exp < 0,
-    fte: d.fte,
-    org_info: d.org_info,
-    name: d.data.name,
-    tags: d.data.tags,
-    level: d.data.level,
-    id: d.data.id,
-    color: d.color,
-    first_column: d.depth === 1,
-    focus_text: d.magnified ? text_maker("partition_unfocus_button") : text_maker("partition_focus_button"),
-  };
-}
-
-const wrap_in_brackets = (text) => " (" + text + ")";
-
-class Partition {
-  constructor(container, update_url, method, value_attr){
-    
-    this.update_url = update_url;
-    
-    this.presentation_schemes_by_data_options = presentation_schemes_by_data_options;
-    
+export class Partition {
+  constructor(container, all_perspectives, all_data_types, initial_perspective_id, initial_data_type_id, url_update_callback){
     this.search_required_chars = 1;
     this.search_debounce_time = 500;
 
+    this.all_perspectives = all_perspectives;
+    this.all_data_types = all_data_types;
+    this.url_update_callback = url_update_callback;
+    
+    this.current_perspective_id = initial_perspective_id;
+    this.current_data_type = initial_data_type_id;
+ 
+
     container.append("div")
       .classed("accessible sr-only", true)
-      .html(text_maker("partition_sr_only_content"));
+      .html( text_maker("partition_sr_only_content") );
 
     // A negative margin-left value is explicitly set, and kept updated, on .partition-container so that the 
     // extra wide partition area can effectively escape the narrow main.container area, which we're forced in 
@@ -151,31 +48,17 @@ class Partition {
     window.addEventListener("resize", adjust_partition_diagram_margin_on_resize);
 
     // Be aware, constructor of PartitionDiagram has side-effects on this.container, DOM stuff being what it is
-    this.chart = new PartitionDiagram(this.container, {height: 700});
+    this.diagram = new PartitionDiagram(this.container, {height: 700});
 
-    const sort_vals = this.sort_vals = _.sortBy(presentation_schemes_by_data_options, d => d.id === value_attr ? -Infinity : Infinity);
-
-    this.all_presentation_schemes = [
-      { id: "goca", text: text_maker("spending_area_plural") },
-      { id: "dept", text: text_maker("ministries") },
-      { id: "hwh", text: Subject.Tag.tag_roots.HWH.name },
-      { id: "st", text: text_maker("type_of_spending") },
-      { id: "org_planned_spend", text: text_maker("orgs") },
-      { id: "est_type", text: text_maker("partition_est_type_perspective") },
-      { id: "vs_type", text: text_maker("partition_vote_state_perspective") },
-      { id: "est_doc_mains", text: text_maker("est_doc_mains") },
-      { id: "est_doc_sea", text: text_maker("est_doc_sea") },
-      { id: "est_doc_seb", text: text_maker("est_doc_seb") },
-      { id: "est_doc_sec", text: text_maker("est_doc_sec") },
-      { id: "est_doc_im", text: text_maker("est_doc_im" )},
-      { id: "org_info_by_ministry", text: text_maker("partition_org_info_by_min") },
-      { id: "org_info_federal_orgs_by_inst_form", text: text_maker("partition_org_info_federal_orgs_by_inst_form") },
-      { id: "org_info_interests_by_inst_form", text: text_maker("partition_org_info_interests_by_inst_form") },
-    ];
-
-    const presentation_schemes = _.chain(this.all_presentation_schemes)
-      .filter(d => _.indexOf(sort_vals[0].presentation_schemes, d.id) !== -1)
-      .sortBy(d => d.id === method ? -Infinity : Infinity)
+    const current_perspective_options = _.chain(this.all_perspectives)
+      .filter(perspective => perspective.data_type === this.current_data_type)
+      .sortBy(perspective => perspective.id === this.initial_perspective_id ? -Infinity : Infinity)
+      .map(perspective => {
+        return {
+          id: perspective.id,
+          name: perspective.name,
+        };
+      })
       .value();
 
     this.container.select(".__partition__")
@@ -183,8 +66,8 @@ class Partition {
       .classed("partition-controls", true)
       .html(
         text_maker("partition_controls",{
-          presentation_schemes, 
-          sort_vals, 
+          perspective_options: current_perspective_options, 
+          data_type_options: this.all_data_types, 
           search: true, 
         })
       );
@@ -203,8 +86,8 @@ class Partition {
     });
     this.container.select("input.search").on("keyup", this.search_handler.bind(this));
 
-    this.container.select(".select_value_attr").on("change", this.change_value_attr.bind(this));
-    this.container.select(".select_root").on("change", this.reroot.bind(this));
+    this.container.select(".select_data_type").on("change", this.change_data_type.bind(this));
+    this.container.select(".select_perspective").on("change", this.change_perspective.bind(this));
     this.container.select(".partition-control-element > .glyphicon").on("click", this.add_intro_popup.bind(this));
     this.container.select(".partition-control-element > .glyphicon").on("keydown", () => {
       if(d3.event.which == 13){
@@ -214,31 +97,32 @@ class Partition {
 
     this.container.select(".accessible.sr-only").html(text_maker("partition_sr_only_content"));
 
-    this.method = presentation_schemes[0].id;
-    this.value_attr = sort_vals[0].id;
-    this.root_id = 0; // counter to append to root of each hierarchy, makes identifying ancestry_id values unique even in charts_index merge step
-    this.update_url(this.method, this.value_attr);
-    this[this.method]();
+    this.update();
   }
-  change_value_attr(){
-    this.value_attr = d3.event.target.value;
+  change_data_type(){
+    this.current_data_type = d3.event.target.value;
 
-    // Filter presentation_schemes to those available on this method
-    const sort_val = _.find(this.sort_vals, d => d.id === this.value_attr);
-    const presentation_schemes = _.chain(this.all_presentation_schemes)
-      .filter(d => _.indexOf(sort_val.presentation_schemes, d.id) !== -1)
-      .sortBy(d => d.id === this.method ? -Infinity : Infinity)
+    const current_perspective_options = _.chain(this.all_perspectives)
+      .filter(perspective => perspective.data_type === this.current_data_type)
+      .sortBy(perspective => perspective.id === this.current_perspective_id ? -Infinity : Infinity)
+      .map(perspective => {
+        return {
+          id: perspective.id,
+          text: perspective.name,
+        };
+      })
       .value();
-    this.method = presentation_schemes[0].id;
 
-    this.update_url(this.method, this.value_attr);
+    this.current_perspective_id = current_perspective_options[0].id;
+
+    this.url_update_callback(this.current_perspective_id, this.current_data_type);
 
     // Update presentation_schemes dropdown options
-    const presentation_scheme_dropdown = this.container.select(".select_root");
+    const presentation_scheme_dropdown = this.container.select(".select_perspective");
     presentation_scheme_dropdown.selectAll('option').remove();
     presentation_scheme_dropdown
       .selectAll('option')
-      .data(presentation_schemes)
+      .data(current_perspective_options)
       .enter()
       .append('option')
       .attr('value', d => d.id)
@@ -255,476 +139,65 @@ class Partition {
       .ease(d3.easeLinear)
       .style("background-color", "#ffffff");
 
-    this[this.method]();
+    this.update();
   }
-  reroot(){
-    this.method = d3.event.target.value;
-    this.update_url(this.method, this.value_attr);
-    this[this.method]();
+  change_perspective(){
+    this.current_perspective_id = d3.event.target.value;
+    this.url_update_callback(this.current_perspective_id, this.current_data_type);
+    this.update();
   }
-  hierarchy_factory_node_func(node){
-    return node[this.value_attr];
-  }
-  dept(){
-    const skip_crsos = true;
-    this.hierarchy_factory = () => create_ministry_hierarchy(this.value_attr, skip_crsos, this.root_id+=1);
-    const hierarchy = this.hierarchy = this.hierarchy_factory(hierarchy_factory_node_func);
-    this.hierarchy
-      .each(node => {
-        node.__value__ = node.value;
-        node.open = true;
-        if (node.data.is("gov")){
-          node.how_many_to_show = 8;
-        } else if (node.data.is("ministry")){
-          node.how_many_to_show = function(_node){
-            if (_node.children.length === 2){ return [_node.children,[]];}
-            const show = [_.head(_node.children)];
-            const hide = _.tail(_node.children);
-            const unhide = _.filter(hide, __node => __node.value > hierarchy.value/50);
-            return [show.concat(unhide), _.difference(hide, unhide)];
-          }
-        } else if (node.data.is("dept") || node.data.is("crso")){
-          node.how_many_to_show = function(_node){
-            if (_node.children.length === 2){ return [_node.children,[]];}
-            const show = [_.head(_node.children)];
-            const hide = _.tail(_node.children);
-            const unhide = _.filter(hide, __node => __node.value > hierarchy.value/50);
-            return [show.concat(unhide), _.difference(hide, unhide)];
-          }
-        }
+  update(){
+    this.current_perspective = _.chain(this.all_perspectives)
+      .pickBy(perspective => {
+        return perspective.id === this.current_perspective_id && 
+          perspective.data_type === this.current_data_type;
       })
-      .each(node => { 
-        if (! _.isUndefined(node.children) ) {
-          node.children = PartitionDataWrapper.__show_partial_children(node);
-        }
-      })
+      .thru( object => object[_.keys(object)[0]] )
+      .value();
 
-    this.value_formater = d => wrap_in_brackets(formaters[this.value_attr](d[this.value_attr]));
-    
-    this.popup_template = function(d){
-      const common_popup_options = get_common_popup_options(d);
-      if (d.data.is("program")) {
-        return text_maker("partition_program_popup", 
-          _.extend(common_popup_options, {
-            description: d.data.description,
-            dept_name: d.data.dept.name,
-            dept_id: d.data.dept.id,
-          })
-        );
-      } else if (d.data.is("dept")) {
-        return text_maker("partition_org_or_goca_popup", 
-          _.extend(common_popup_options, {
-            description: d.data.mandate,
-          })
-        );
-      } else if (d.data.is("ministry")) {
-        return text_maker("partition_ministry_or_sa_popup", 
-          common_popup_options
-        );
-      }
-    }
+    this.update_diagram_notes(this.current_perspective.diagram_notes);
 
-    this.update_diagram_notes();
-
-    this.enable_search_bar();
-
-    this.render();
-  }
-  hwh(){
-    this.hierarchy_factory = () => create_tag_hierarchy("HWH", this.value_attr, this.root_id+=1);
-    const hierarchy = this.hierarchy = this.hierarchy_factory(hierarchy_factory_node_func);
-    this.hierarchy
-      .each(node => {
-        node.__value__ = node.value;
-        node.open = true;
-        if (node.data.is("tag") && node.children[0].data.is("tag")){
-          node.how_many_to_show = Infinity;
-        }else if (node.data.is("tag") && node.children[0].data.is("program")){
-          node.how_many_to_show = function(_node){
-            if (_node.children.length <= 2){ return [_node.children, []]; }
-            const show = [_.head(_node.children)];
-            const hide = _.tail(_node.children);
-            const unhide = _.filter(hide, __node => __node.value > hierarchy.value/100);
-            return [show.concat(unhide), _.difference(hide, unhide)];
-          }
-        }
-      })
-      .each(node => {
-        node.children = PartitionDataWrapper.__show_partial_children(node);
-      });
-
-    this.value_formater = d => d.data.is("tag") ?
-      wrap_in_brackets(text_maker("up_to") + " " + formaters[this.value_attr](d[this.value_attr])) :
-      wrap_in_brackets(formaters[this.value_attr](d[this.value_attr]));
-    
-    this.popup_template = function(d){
-      const common_popup_options = get_common_popup_options(d);
-      if (d.data.is("program")) {
-        return text_maker("partition_program_popup", 
-          _.extend(common_popup_options, {
-            up_to: false,
-            dept_name: d.data.dept.name,
-            dept_id: d.data.dept.id,
-            description: d.data.description,
-          })
-        );
-      } else if (d.data.is("tag")) {
-        return text_maker("partition_hwh_tag_popup", 
-          _.extend(common_popup_options, {
-            up_to: true,
-            description: d.data.description,
-          })
-        );
-      }
-    }
-
-    this.update_diagram_notes("MtoM_tag_warning");
-
-    this.enable_search_bar();
-
-    this.render();
-  }
-  goca(){
-    this.hierarchy_factory = () => create_tag_hierarchy("GOCO", this.value_attr,this.root_id+=1);
-    const hierarchy = this.hierarchy = this.hierarchy_factory(hierarchy_factory_node_func);
-
-    this.hierarchy
-      .each(node => {
-        node.__value__ = node.value;
-        node.open = true;
-        if (node.data.is("tag") && node.children && node.children[0] && node.children[0].data.is("tag")){
-          node.how_many_to_show = Infinity;
-        } else if (node.data.is("tag") && node.children[0].data.is("program")){
-          node.how_many_to_show = function(_node){
-            if (_node.children.length <= 2){ return [_node.children, []] }
-            const show = [_.head(_node.children)];
-            const hide = _.tail(_node.children);
-            const unhide = _.filter(hide, __node => __node.value > hierarchy.value/100);
-            return [show.concat(unhide), _.difference(hide, unhide)];
-          }
-        }
-      })
-      .each(node => {
-        node.children = PartitionDataWrapper.__show_partial_children(node);
-      });
-   
-    this.value_formater = d => wrap_in_brackets(formaters[this.value_attr](d[this.value_attr]));
-    
-    this.popup_template = function(d){
-      const common_popup_options = get_common_popup_options(d);
-      if (d.data.is("program")) {
-        return text_maker("partition_program_popup", 
-          _.extend(common_popup_options, {
-            dept_name: d.data.dept.name,
-            dept_id: d.data.dept.id,
-            description: d.data.description,
-          })
-        );
-      } else if (d.data.is("tag") && d.children[0].data.is("program")) {
-        return text_maker("partition_org_or_goca_popup", 
-          _.extend(common_popup_options, {
-            description: d.data.description,
-          })
-        );
-      } else if (d.data.is("tag") && d.children[0].data.is("tag")) {
-        return text_maker("partition_ministry_or_sa_popup", 
-          _.extend(common_popup_options, {
-            description: d.data.description,
-          })
-        );
-      }
-    }
-
-    this.update_diagram_notes();
-
-    this.enable_search_bar();
-
-    this.render();
-  }
-  st(){
-    this.hierarchy_factory = () => create_spend_type_hierarchy(this.value_attr, this.root_id+=1);
-    const hierarchy = this.hierarchy = this.hierarchy_factory(hierarchy_factory_node_func);
-
-    this.hierarchy
-      .each(node => {
-        node.__value__ = node.value;
-        node.open = true;
-        if ( node.data.is("gov") ||  node.data.is("type_of_spending") ){
-          node.how_many_to_show = Infinity;
-        } else if (node.data.is("so")){
-          node.how_many_to_show = function(_node){
-            if (_node.children.length <= 2){ return [_node.children, []] }
-            const show = [_.head(_node.children)];
-            const hide = _.tail(_node.children);
-            const unhide = _.filter(hide, __node => __node.value > hierarchy.value/100);
-            return [show.concat(unhide), _.difference(hide,unhide)];
-          };
-        }
-      })
-      .each(node => {
-        node.children = PartitionDataWrapper.__show_partial_children(node);
-      });
-   
-    this.value_formater = d => wrap_in_brackets(formaters[this.value_attr](d[this.value_attr]));
-
-    this.popup_template = function(d){
-      const common_popup_options = get_common_popup_options(d);
-      if (d.data.is("program_fragment")) {
-        return text_maker("partition_program_popup", 
-          _.extend(common_popup_options, {
-            up_to: false,
-            dept_name: d.data.dept.name,
-            dept_id: d.data.dept.id,
-            level: "program",
-            id: d.data.program_id,
-            description: d.data.description,
-          })
-        );
-      } else if (d.data.is("so")) {
-        return text_maker("partition_so_popup", 
-          _.extend(common_popup_options, {
-            description: d.data.description,
-          })
-        );
-      } else if (d.data.is("type_of_spending")) {
-        return text_maker("partition_ministry_or_sa_popup", 
-          common_popup_options
-        );
-      }
-    }
-
-    this.update_diagram_notes("program_SOBJ_warning");
-
-    this.disable_search_bar();
-
-    this.render();
-  }
-  org_info_by_ministry(){
-    this.hierarchy_factory = () => create_org_info_ministry_hierarchy(this.value_attr, this.root_id+=1);
-    this.org_info();
-  }
-  org_info_federal_orgs_by_inst_form(){
-    const grand_parent_inst_form_group = "fed_int_gp";
-    this.hierarchy_factory = () => create_org_info_inst_form_hierarchy(this.value_attr, this.root_id+=1, grand_parent_inst_form_group);
-    this.org_info();
-  }
-  org_info_interests_by_inst_form(){
-    const grand_parent_inst_form_group = "corp_int_gp";
-    this.hierarchy_factory = () => create_org_info_inst_form_hierarchy(this.value_attr, this.root_id+=1, grand_parent_inst_form_group);
-    this.org_info();
-  }
-  org_info(){
-    this.value_attr = "org_info";
-    this.hierarchy = this.hierarchy_factory(hierarchy_factory_node_func);
-    
-    this.hierarchy
-      .each(node => {
-        node.__value__ = node.value;
-        node.open = true;
-        if ( node.data.is("ministry") || node.data.is("inst_form") ){
-          node.how_many_to_show = function(_node){
-            if (_node.children.length <= 2){ return [_node.children, []]}
-            const number_to_show = 1;
-            const show = _.take(_node.children, number_to_show);
-            const hide = _.slice(_node.children, number_to_show);
-            return [show, hide];
-          };
-        } else {
-          node.how_many_to_show = function(_node){
-            return [_node.children, []];
-          };
-        }
-      })
-      .each(node => {
-        node.children = PartitionDataWrapper.__show_partial_children(node);
-      });
-   
-    this.value_formater = d => {
-      return !d.data.is("dept") ?
-        wrap_in_brackets(
-          formaters[this.value_attr](d[this.value_attr]) + " " + 
-          (d[this.value_attr] > 1 ? 
-            text_maker("orgs") : 
-            text_maker("org")
-          )
-        ) :
-        "";
-    };
-
-    this.popup_template = function(d){
-      const common_popup_options = get_common_popup_options(d);
-      if (d.data.is("dept")) {
-        return text_maker("partition_org_info_org_popup", 
-          _.extend(common_popup_options, {
-            description: d.data.mandate,
-            inst_form_name: d.parent.data.name,
-            ministry_name: d.data.ministry.name, 
-          })
-        );
-      } else if (d.data.is("inst_form")) {
-        return text_maker("partition_org_info_inst_form_popup", 
-          _.extend(common_popup_options, {
-            description: d.data.description,
-            ministry_name: d.parent.data.is("ministry") ? d.parent.data.name : false,
-            plural_child_orgs: d.value !== 1,
-          })
-        );
-      } else if (d.data.is("ministry")) { 
-        return text_maker("partition_org_info_ministry_or_inst_form_groups_popup", 
-          _.extend(common_popup_options, {
-            plural_child_orgs: d.value !== 1,
-          })
-        );
-      }
-    }
-
-    this.update_diagram_notes();
-
-    this.enable_search_bar();
-
-    this.render();
-  }
-  est_type(){
-    this.planned_spending();
-  }
-  vs_type(){
-    this.planned_spending();
-  }
-  org_planned_spend(){
-    this.planned_spending();
-  }
-  est_doc_mains(){
-    this.planned_spending();
-  }
-  est_doc_sea(){
-    this.planned_spending();
-  }
-  est_doc_seb(){
-    this.planned_spending();
-  }
-  est_doc_sec(){
-    this.planned_spending();
-  }
-  est_doc_im(){
-    this.planned_spending();
-  }
-  planned_spending(){
-    const presentation_scheme = this.method;
-    this.hierarchy_factory = () => create_planned_spending_hierarchy(this.value_attr, this.root_id+=1, presentation_scheme);
-    const hierarchy = this.hierarchy = this.hierarchy_factory(hierarchy_factory_node_func);
-
-    this.hierarchy
-      .each(node => {
-        node.__value__ = node.value;
-        node.open = true;
-        node.how_many_to_show = function(_node){
-          if (_node.children.length <= 2){ return [_node.children, []]}
-          const show = [_.head(_node.children)];
-          const hide = _.tail(_node.children);
-          const unhide = _.filter(hide, __node => __node.value > hierarchy.value/100);
-          return [show.concat(unhide), _.difference(hide,unhide)];
-        }
-      })
-      .each(node => {
-        node.children = PartitionDataWrapper.__show_partial_children(node);
-      })
-    
-    this.value_formater = d => wrap_in_brackets(formaters[this.value_attr](d[this.value_attr]));
-    
-    this.popup_template = function(d){
-      const common_popup_options = _.assign(
-        {}, 
-        get_common_popup_options(d),
-        {
-          year: presentation_scheme === "est_doc_im" ? run_template("{{est_next_year}}") : run_template("{{est_in_year}}"),
-          planned_exp: d.value,
-          planned_exp_is_negative: d.value < 0,
-          rpb_link: d.data.rpb_link,
-        }
-      );
-
-      if (d.data.is("stat_item")) {
-        return text_maker("partition_planned_vs_type_or_est_type", 
-          _.extend(common_popup_options, {
-            description: d.data.description,
-            dept_name: d.parent.data.name,
-            dept_id: d.parent.data.id,
-          })
-        );
-      } else if ( d.data.is("vs_type") || d.data.is("est_type") ) {
-
-        let dept_name, dept_id;
-        if (presentation_scheme === "org_planned_spend") {
-          if (d.data.is("vs_type")) {
-            dept_name = d.parent.parent.data.name;
-            dept_id = d.parent.parent.data.id;
-          } else if (d.data.is("est_type")) {
-            dept_name = d.parent.data.name;
-            dept_id = d.parent.data.id;
-          }
-        }
-
-        return text_maker("partition_planned_vs_type_or_est_type", 
-          _.extend(common_popup_options, {
-            description: d.data.description,
-            show_parent_dept_name: presentation_scheme === "org_planned_spend",
-            dept_name,
-            dept_id,
-          })
-        );
-      } else if (d.data.is("dept")) {
-        return text_maker("partition_planned_spending_org_popup", 
-          _.extend(common_popup_options, {
-            description: d.data.mandate,
-          })
-        );
-      }
-    }
-
-    if (presentation_scheme === "est_doc_im") {
-      this.update_diagram_notes("partition_interim_estimates_def");
+    if (this.current_perspective.disable_search_bar){
+      this.disable_search_bar()
     } else {
-      this.update_diagram_notes();
+      this.enable_search_bar()
     }
 
-    this.enable_search_bar();
-
-    this.render();
-  } 
-  render(skip_search = false){
     // If search active then reapply to new hierarchy, else normal render
     const search_node = this.container.select("input.search").node();
     const query = search_node.value.toLowerCase();
-    if ( !skip_search && !search_node.disabled && query.length >= this.search_required_chars ){
+    
+    if ( !search_node.disabled && query.length >= this.search_required_chars ){
       this.search_actual(query);
     } else {
-      const default_formater = d => formaters[this.value_attr](d[this.value_attr]);
-      const value_formater = this.value_formater || default_formater;
-      const root_text_key = get_root_text_key(this.value_attr, this.method);
-      const wrapper = new PartitionDataWrapper(this.hierarchy);
-      const show_root_rollup = this.method !== "hwh" && this.method !== "st";
-  
-      this.chart.render({
-        data : wrapper,
-        popup_template: this.popup_template,
-        dont_fade: this.dont_fade,
-        html_func: function(d){
-          const should_add_value = (
-            Math.abs(d.value)/wrapper.root.value > 0.02 &&
-             _.isUndefined(d.data.hidden_children)
-          );
-          let name;
-          if (should_add_value && d !== wrapper.root) {
-            name = d.data.name + value_formater(d);
-          } else if ( !should_add_value && d !== wrapper.root ){
-            name = utils.abbrev(d.data.name, 80);
-          } else if ( d === wrapper.root ) {
-            name = text_maker(root_text_key, {x: wrapper.root.value, show_root_rollup});
-          }
-          return name;
-        },
-      });
+      const apply_node_hiding_rules = true;
+      const hierarchy = this.current_perspective.hierarchy_factory(apply_node_hiding_rules);
+      this.render_diagram(hierarchy);
     }
+  }
+  render_diagram(hierarchy){
+    const wrapper = new PartitionDataWrapper(hierarchy);
+  
+    this.diagram.render({
+      data: wrapper,
+      popup_template: this.current_perspective.popup_template,
+      dont_fade: this.dont_fade,
+      html_func: (d) => {
+        const should_add_value = (
+          Math.abs(d.value)/wrapper.root.value > 0.02 &&
+           _.isUndefined(d.data.hidden_children)
+        );
+        let name;
+        if (should_add_value && d !== wrapper.root) {
+          name = d.data.name + this.current_perspective.formater(d);
+        } else if ( !should_add_value && d !== wrapper.root ){
+          name = utils.abbrev(d.data.name, 80);
+        } else if ( d === wrapper.root ) {
+          name = this.current_perspective.root_text_func(wrapper.root.value);
+        }
+        return name;
+      },
+    });
   }
   enable_search_bar(){
     const partition_control_search_block = this.container
@@ -771,7 +244,8 @@ class Partition {
     this.dont_fade = [];
     this.search_matching = [];
     
-    const search_tree = this.hierarchy_factory();
+    const apply_node_hiding_rules = false;
+    const search_tree = this.current_perspective.hierarchy_factory(apply_node_hiding_rules);
     const deburred_query = _.deburr(query).toLowerCase();
 
     search_tree.each(node => {
@@ -802,7 +276,7 @@ class Partition {
     
     search_tree
       .each(node => {
-        node.value = node[this.value_attr],
+        node.value = node[this.current_data_type],
         node.__value__ = node.value;
         node.open = true;
         node.how_many_to_show = how_many_to_be_shown
@@ -820,10 +294,7 @@ class Partition {
       });
     });
 
-    this.hierarchy = search_tree;
-
-    const skip_search = true;
-    this.render(skip_search);
+    this.render_diagram(search_tree);
   }
   // Deals with event details and debouncing
   search_handler(){
@@ -837,7 +308,7 @@ class Partition {
     this.debounced_refresh = this.debounced_refresh || _.debounce(function(){
       this.dont_fade = [];
       this.search_matching = [];
-      this[this.method]();
+      this.update();
     }, this.search_debounce_time/2);
 
     if (d3.event.keyCode === 13 ||
@@ -918,5 +389,3 @@ class Partition {
     }
   }
 }
-
-export { Partition, presentation_schemes_by_data_options };
