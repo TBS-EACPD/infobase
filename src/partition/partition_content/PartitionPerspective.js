@@ -18,7 +18,7 @@ export class PartitionPerspective {
     } else {
       const optional_args = {
         diagram_notes: args.diagram_notes || false,
-        disable_search_bar: args.disable_search || false,
+        disable_search_bar: args.disable_search_bar || false,
       }
       Object.assign(this, required_args, optional_args);
     }
