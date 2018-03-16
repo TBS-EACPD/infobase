@@ -148,11 +148,11 @@ export class Partition {
   }
   update(){
     this.current_perspective = _.chain(this.all_perspectives)
-      .pickBy(perspective => {
+      .filter(perspective => {
         return perspective.id === this.current_perspective_id && 
           perspective.data_type === this.current_data_type;
       })
-      .thru( object => object[_.keys(object)[0]] )
+      .head()
       .value();
 
     this.update_diagram_notes(this.current_perspective.diagram_notes);
