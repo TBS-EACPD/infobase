@@ -158,9 +158,9 @@ export class PartitionSubApp {
     this.update_diagram_notes(this.current_perspective.diagram_note_content);
 
     if (this.current_perspective.disable_search_bar){
-      this.disable_search_bar()
+      this.disable_search_bar();
     } else {
-      this.enable_search_bar()
+      this.enable_search_bar();
     }
 
     // If search active then reapply to new hierarchy, else normal render
@@ -288,6 +288,7 @@ export class PartitionSubApp {
       .each(node => {
         node.children = PartitionDataWrapper.__show_partial_children(node);
       });
+      
     _.each(_.last(search_tree.children).data.hidden_children, node => {
       node.eachAfter(d => {
         d.how_many_to_show = 1;

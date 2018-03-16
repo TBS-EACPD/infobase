@@ -3,15 +3,14 @@ import './PartitionDiagram.scss';
 import * as utils from "../../core/utils";
 import { text_maker } from "../../models/text";
 
-const vertical_placement_counters = {};
 const cycle_colors = function(i){
   return d3.color(window.darkCategory10Colors[i % 10]);
 };
-const assign_colors_recursively = function(node,color){
+const assign_colors_recursively = function(node, color){
   node.color = color;
   if ( _.isUndefined(node.children) ){ return; }
-  _.each(node.children,(child,i)=>{
-    assign_colors_recursively(child,color.brighter(0.15));
+  _.each(node.children, (child,i) => {
+    assign_colors_recursively(child, color.brighter(0.15));
   });
 };
 const content_key = d => d.id_ancestry;
@@ -59,11 +58,14 @@ export class PartitionDiagram {
     this.links = this.data.links();
     const levels = data.to_open_levels();
     const height = this.options.height;
+
     const horizontal0_padding = 50;
     const horizontal_padding = 150;
     const col0_width = 250;
     const col_width = 350;
-    const total_width = this.total_width = (_.keys(levels).length-1) * (col_width+ horizontal_padding) + col0_width + horizontal0_padding;
+
+    const total_width = this.total_width = (_.keys(levels).length-1) * (col_width + horizontal_padding) + col0_width + horizontal0_padding;
+
     const yscale = d3.scaleLinear()
       .domain([0,data.root.value])
       .range([0,height]);
@@ -74,12 +76,15 @@ export class PartitionDiagram {
 
     this.outer_html.select(".__partition__")
       .style("width", total_width + "px");
-    
+
     this.svg.attr("width", total_width);
-    _.chain(levels)
+
+    const vertical_placement_counters = _.chain(levels)
       .keys()
-      .each( key => vertical_placement_counters[key]= +key*30 )
+      .map( key => [key, +key*30] )
+      .fromPairs()
       .value();
+      
     const horizontal_placement_counters = _.mapValues(levels, (vals, key) => {
       return +key === 0 ? 0 : col0_width + horizontal0_padding + (key-1)*(col_width+horizontal_padding);
     });
@@ -95,14 +100,12 @@ export class PartitionDiagram {
       .style("left", (d,i) => horizontal_placement_counters[+d]+"px") 
       .style("width", col_width+"px")
       .html(d => {
-        const has_plural = (
-          _.chain(levels[+d])
-            .map("data")
-            .filter(d => d.plural)
-            .compact()
-            .head()
-            .value()
-        );
+        const has_plural = _.chain(levels[+d])
+          .map("data")
+          .filter(d => d.plural)
+          .compact()
+          .head()
+          .value();
         if (has_plural){
           return has_plural.plural();
         } 
@@ -114,7 +117,7 @@ export class PartitionDiagram {
         data.root.descendants().filter(d => d.open), 
         content_key
       )
-      .style("height" ,"")
+      .style("height", "")
       .each(function(d){
         d3.select(this)
           .select("div.partition-content-title")
@@ -226,7 +229,7 @@ export class PartitionDiagram {
             }
           });
       })
-      .style("background-color",d => { 
+      .style("background-color", d => { 
         return d.color;
       })
       .each(function(d){
@@ -335,13 +338,13 @@ export class PartitionDiagram {
       gradient_def
         .append("stop")
         .attr("offset", "95%")
-        .attr("stop-color", target.color)
+        .attr("stop-color", target.color);
     }
 
     source.polygon_links.get(target)
       .classed(klass, true)
       .classed("root-polygon", d => d.source.parent === null)
-      .style("fill",target.color)
+      .style("fill", target.color)
       .attr("points", function(d){
         if (d3.select(this).attr("points")){
           return d3.select(this).attr("points");
@@ -366,14 +369,14 @@ export class PartitionDiagram {
   }
 
   fade(data){
-    const to_fade =  _.filter(data || this.data.root.descendants(),d=>!_.includes(this.dont_fade,d));
+    const to_fade = _.filter(data || this.data.root.descendants(), d => !_.includes(this.dont_fade,d));
     this.svg.selectAll("polygon.partition-svg-link")
-      .filter(d=> _.includes(to_fade,d.target))
-      .classed("faded",true)
-      .classed("highlighted",false);
+      .filter(d => _.includes(to_fade, d.target))
+      .classed("faded", true)
+      .classed("highlighted", false);
     this.html.selectAll("div.partition-content")
-      .filter(d=> _.includes(to_fade,d))
-      .classed("faded",true);
+      .filter(d => _.includes(to_fade, d))
+      .classed("faded", true);
   }
 
   unfade(data){
@@ -384,17 +387,17 @@ export class PartitionDiagram {
     }
     const links = _.chain(data)
       .filter(source =>_.isArray(source.children))
-      .map(source => _.map(source.children, target=>({source,target})))
+      .map( source => _.map( source.children, target => ({source,target}) ) )
       .flatten(true)
       .value();
     this.graph_area.selectAll("polygon.partition-svg-link")
-      .data(links,polygon_key)
-      .filter(d => links.length > 0 ? _.includes(links,d) : true)
+      .data(links, polygon_key)
+      .filter(d => links.length > 0 ? _.includes(links, d) : true)
       .classed("faded", false)
       .classed("highlighted", false);
     
     // The above doesn't select root polygons. If the data contains root, unfade root polygons here
-    if (_.some(data, d => d.parent === null)) {
+    if ( _.some(data, d => d.parent === null) ) {
       this.graph_area
         .selectAll("polygon.partition-svg-link.root-polygon")
         .classed("faded", false)
@@ -402,8 +405,8 @@ export class PartitionDiagram {
     }
 
     this.html.selectAll("div.partition-content")
-      .data(data,content_key)
-      .filter(d => data.length > 0 ? _.includes(data,d) : true)
+      .data(data, content_key)
+      .filter(d => data.length > 0 ? _.includes(data, d) : true)
       .classed("faded", false);
   }
   
@@ -417,7 +420,7 @@ export class PartitionDiagram {
     const lowest_node_id_ancestry = data[0].id_ancestry;
     const links = _.chain(data)
       .filter(source =>_.isArray(source.children))
-      .map(source=> _.map(source.children, target => ({source,target})))
+      .map(source => _.map(source.children, target => ({source,target})))
       .flatten(true)
       .filter(link => lowest_node_id_ancestry.includes(link.target.id_ancestry))
       .value();
@@ -458,7 +461,7 @@ export class PartitionDiagram {
 
     pop_up
       .style("top", function(d){
-        let calculated_middle = ( d.DOM.offsetHeight - this.offsetHeight)/2;
+        let calculated_middle = (d.DOM.offsetHeight - this.offsetHeight)/2;
         arrow_at_top = d.DOM.offsetTop + calculated_middle < 0 ;
         if (arrow_at_top){
           calculated_middle = -30;
@@ -528,9 +531,9 @@ export class PartitionDiagram {
       d3.event.preventDefault();
       return;
     }
-    if ( d.data.hidden_children 
-      || d.data.unhidden_children 
-      || this.data.collapsed(d)) {
+    if ( d.data.hidden_children ||
+         d.data.unhidden_children ||
+         this.data.collapsed(d) ) {
       if (this.pop_up){
         this.remove_pop_up();
       } 
@@ -589,7 +592,7 @@ export class PartitionDiagram {
   }
   add_unmagnify_all_button(){
     this.unmagnify_all_popup = this.html.append("div")
-      .html(text_maker("partition_unfocus_all_popup"));
+      .html( text_maker("partition_unfocus_all_popup") );
   }
   should_remove_unmagnify_all_button(){
     return !_.isUndefined(this.unmagnify_all_popup) && !this.are_any_children_magnified();
