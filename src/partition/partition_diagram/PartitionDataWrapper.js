@@ -6,11 +6,11 @@ export class PartitionDataWrapper {
     if (!node.children){
       return;
     }
-    if( !_.isUndefined(_.last(node.children).data.hidden_children)){ 
+    if( !_.isUndefined(_.last(node.children).data.hidden_children) ){ 
       return node.children;
     }
     let to_be_shown,to_be_compressed, new_compressed_child, children;
-    if (_.isFunction(node.how_many_to_show)){
+    if ( _.isFunction(node.how_many_to_show) ){
       [to_be_shown,to_be_compressed] = node.how_many_to_show(node);
     } else {
       if (node.how_many_to_show >= node.children.length){
@@ -21,7 +21,7 @@ export class PartitionDataWrapper {
         to_be_compressed = _.tail(node.children, node.how_many_to_show);
       }
     }
-    if (to_be_compressed.length > 0) {
+    if (to_be_compressed.length > 0){
       new_compressed_child = Object.assign(
         d3.hierarchy({}),
         {  
@@ -37,7 +37,7 @@ export class PartitionDataWrapper {
             name: "+",
             description: "",
             type: "compressed",
-            is : __type__ => __type__ === "compressed",
+            is: __type__ => __type__ === "compressed",
             hidden_children: to_be_compressed,
           },
           no_polygon: false,
@@ -52,14 +52,14 @@ export class PartitionDataWrapper {
   static __show_all_children(node){
     let children;
     const compressed = _.last(node.children);
-    if (!_.isUndefined(compressed.data.hidden_children)){
+    if ( !_.isUndefined(compressed.data.hidden_children) ){
       children = node.children.concat(compressed.data.hidden_children);
       compressed.data.unhidden_children = compressed.data.hidden_children
       delete compressed.data.hidden_children;
       compressed.data.id = "minimize"+compressed.id_ancestry;
       compressed.value = 1;
       compressed.data.name = "—";
-      _.each(children,_node => {
+      _.each(children, _node => {
         _node.parent = node;
       });
       compressed.no_polygon = true;
@@ -130,7 +130,7 @@ export class PartitionDataWrapper {
     if (!node.data.hidden_children && !node.data.unhidden_children) {
       node.value = node.__value__;
       this.show_partial_children(node);
-    } else if (this.is_placeholder(node) && !_.isUndefined(node.data.hidden_children)) {
+    } else if ( this.is_placeholder(node) && !_.isUndefined(node.data.hidden_children) ) {
       node.value = d3.sum(node.data.hidden_children, child => child.__value__);
     }
   }
@@ -141,7 +141,7 @@ export class PartitionDataWrapper {
     node.value = node.__value__;
     node.magnified = false;
     const parent = node.parent;
-    if (!_.some(parent.children, d => d.magnified)){
+    if ( !_.some(parent.children, d => d.magnified) ){
       parent.children
         .forEach(d => {
           this.restore(d);
@@ -157,7 +157,7 @@ export class PartitionDataWrapper {
     const top_sibling = parent.children[0];
     node.value = node.__value__;
     let factor;
-    if ( node.value > 0.7 * top_sibling.__value__) {
+    if (node.value > 0.7 * top_sibling.__value__){
       factor = 2;
     } else {
       factor = Math.abs(top_sibling.__value__/node.__value__);
@@ -173,13 +173,13 @@ export class PartitionDataWrapper {
       d.value = 0
       this.hide_all_children(d);
     })
-  }                     
+  }
   resize_children(node,factor){
     node.value *= factor;
     node.open = true;
     if (node.children){
       _.each(node.children, d => {
-        this.resize_children( d, factor );
+        this.resize_children(d, factor);
       })
     }
     if (node.data.hidden_children){

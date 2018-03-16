@@ -1,8 +1,8 @@
-import * as Subject from '../../models/subject';
-import { InstForm } from '../../models/subject.js';
-import { text_maker } from '../../models/text';
-import { PartitionDataWrapper } from "../PartitionDataWrapper.js";
-import { PartitionPerspective } from '../PartitionPerspective.js';
+import * as Subject from '../../../models/subject';
+import { InstForm } from '../../../models/subject.js';
+import { text_maker } from '../../../models/text';
+import { PartitionDataWrapper } from "../../partition_diagram/PartitionDataWrapper.js";
+import { PartitionPerspective } from './PartitionPerspective.js';
 
 import {
   absolute_value_sort,

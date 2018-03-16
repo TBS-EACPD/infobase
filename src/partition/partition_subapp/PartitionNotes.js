@@ -1,7 +1,7 @@
-import { AutoAccordion } from '../util_components';
-import { text_maker } from "../models/text";
+import { AutoAccordion } from '../../util_components';
+import { text_maker } from "../../models/text";
 
-export class PartitionDiagramNotes extends React.Component {
+export class PartitionNotes extends React.Component {
   constructor(){
     super()
   }

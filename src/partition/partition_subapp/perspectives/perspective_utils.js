@@ -1,6 +1,6 @@
 import './perspective_utils.ib.yaml';
-import { text_maker, run_template } from "../../models/text";
-import { formats } from '../../core/format.js';
+import { text_maker, run_template } from "../../../models/text";
+import { formats } from '../../../core/format.js';
 
 const get_common_popup_options = d => {
   return {

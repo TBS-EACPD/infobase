@@ -1,7 +1,7 @@
 import './PartitionDiagram.ib.yaml';
 import './PartitionDiagram.scss';
-import * as utils from "../core/utils";
-import { text_maker } from "../models/text";
+import * as utils from "../../core/utils";
+import { text_maker } from "../../models/text";
 
 const vertical_placement_counters = {};
 const cycle_colors = function(i){

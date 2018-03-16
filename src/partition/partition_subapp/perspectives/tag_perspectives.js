@@ -1,9 +1,9 @@
-import * as Subject from '../../models/subject.js';
-import { text_maker } from '../../models/text';
-import { TextMaker } from '../../util_components';
-import { Table } from '../../core/TableClass.js';
-import { PartitionDataWrapper } from "../PartitionDataWrapper.js";
-import { PartitionPerspective } from '../PartitionPerspective.js';
+import * as Subject from '../../../models/subject.js';
+import { text_maker } from '../../../models/text';
+import { TextMaker } from '../../../util_components';
+import { Table } from '../../../core/TableClass.js';
+import { PartitionDataWrapper } from "../../partition_diagram/PartitionDataWrapper.js";
+import { PartitionPerspective } from './PartitionPerspective.js';
 
 import {
   absolute_value_sort,

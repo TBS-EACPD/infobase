@@ -1,13 +1,13 @@
-import "./Partition.ib.yaml";
-import "./Partition.scss";
-import { text_maker } from "../models/text";
-import { PartitionDiagram } from "./PartitionDiagram.js";
-import { PartitionDataWrapper } from "./PartitionDataWrapper.js";
-import { PartitionDiagramNotes } from "./PartitionDiagramNotes.js";
-import * as utils from "../core/utils";
-import { reactAdapter } from '../core/reactAdapter';
+import "./PartitionSubApp.ib.yaml";
+import "./PartitionSubApp.scss";
+import { text_maker } from "../../models/text";
+import { PartitionDiagram } from "../partition_diagram/PartitionDiagram.js";
+import { PartitionDataWrapper } from "../partition_diagram/PartitionDataWrapper.js";
+import { PartitionNotes } from "./PartitionNotes.js";
+import * as utils from "../../core/utils";
+import { reactAdapter } from '../../core/reactAdapter';
 
-export class Partition {
+export class PartitionSubApp {
   constructor(container, all_perspectives, all_data_types, initial_perspective_id, initial_data_type_id, url_update_callback){
     this.search_required_chars = 1;
     this.search_debounce_time = 500;
@@ -388,7 +388,7 @@ export class Partition {
         .style("height", "100%")
         .style("opacity", 1);
 
-      reactAdapter.render(<PartitionDiagramNotes note_content={note_content}/>, diagram_note_div.node());
+      reactAdapter.render(<PartitionNotes note_content={note_content}/>, diagram_note_div.node());
     }
   }
 }

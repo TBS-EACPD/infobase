@@ -1,9 +1,9 @@
-import { Partition } from './Partition.js';
-import { get_all_perspectives, all_data_types } from './partition_perspectives/index.js';
-import { ensure_loaded } from '../core/lazy_loader.js';
-import { StandardRouteContainer } from '../core/NavComponents.js';
-import { SpinnerWrapper } from '../util_components';
-import { text_maker } from "../models/text";
+import { PartitionSubApp } from './PartitionSubApp.js';
+import { get_all_perspectives, all_data_types } from './perspectives/index.js';
+import { ensure_loaded } from '../../core/lazy_loader.js';
+import { StandardRouteContainer } from '../../core/NavComponents.js';
+import { SpinnerWrapper } from '../../util_components';
+import { text_maker } from "../../models/text";
 
 export class PartitionRoute extends React.Component {
   constructor(){
@@ -50,7 +50,7 @@ export class PartitionRoute extends React.Component {
       data_type,
     } = this.getValidatedRouteParams(this.props);
     this.container = d3.select(ReactDOM.findDOMNode(this.refs.container));
-    this.partition = new Partition(this.container, this.all_perspectives, all_data_types, perspective, data_type, this.url_update_callback);
+    this.partition = new PartitionSubApp(this.container, this.all_perspectives, all_data_types, perspective, data_type, this.url_update_callback);
   }
   render(){
     return (

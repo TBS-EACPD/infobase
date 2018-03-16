@@ -14,7 +14,7 @@ import { MetaData } from '../metadata/metadata.js';
 import { IgocExplorer } from "../igoc_explorer/igoc_explorer.js";
 import { ResourceExplorer } from "../resource_explorer/resource-explorer.js";
 import { InfoGraph } from '../infographic/infographic.js';
-import { PartitionRoute } from '../partition/PartitionRoute.js';
+import { PartitionRoute } from '../partition/partition_subapp/PartitionRoute.js';
 import { Glossary } from '../glossary/glossary.js';
 import { BubbleExplore } from '../dept_explore/dept_explore.js';
 import { ReportBuilder } from '../rpb/index.js';
