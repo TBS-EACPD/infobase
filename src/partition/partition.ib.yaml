@@ -708,7 +708,7 @@ partition_planned_spending_data:
   transform: [handlebars]
   text: |
     {{gt "planned_spending"}} ($)
-partition_vote_state_perspective:
+partition_vote_stat_perspective:
   transform: [handlebars]
   en: |
     {{gt "votestat"}} Type

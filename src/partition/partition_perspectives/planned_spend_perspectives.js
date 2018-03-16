@@ -72,7 +72,7 @@ const get_glossary_entry_by_vs_type = (vs_type) => {
 
 const vs_type_node_mapping_common_options = {
   is: __type__ => __type__ === "vs_type",
-  plural: () => text_maker("partition_vote_state_perspective"),
+  plural: () => text_maker("partition_vote_stat_perspective"),
   glossary_entry_by_id_func: get_glossary_entry_by_vs_type,
 };
 
@@ -402,7 +402,7 @@ const get_name = (presentation_scheme) => {
   switch (presentation_scheme){
     case "org_planned_spend" : return text_maker("orgs");
     case "est_type" : return text_maker("partition_est_type_perspective");
-    case "vs_type" : return text_maker("partition_vote_state_perspective");
+    case "vs_type" : return text_maker("partition_vote_stat_perspective");
     case "est_doc_mains" : return text_maker("est_doc_mains");
     case "est_doc_sea" : return text_maker("est_doc_sea");
     case "est_doc_seb" : return text_maker("est_doc_seb");
