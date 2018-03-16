@@ -1,7 +1,7 @@
 import {
   make_dept_exp_perspective,
   make_dept_fte_perspective,
-} from './dept_perspective.js';
+} from './dept_perspectives.js';
 import {
   make_goca_exp_perspective,
   make_goca_fte_perspective,
@@ -51,7 +51,7 @@ const get_all_perspectives = () => {
     make_planned_spend_est_doc_seb_perspective(),
     make_planned_spend_est_doc_sec_perspective(),
     make_planned_spend_est_doc_im_perspective(),
-  ]
+  ];
 };
 
 export {

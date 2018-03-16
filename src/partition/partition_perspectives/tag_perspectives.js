@@ -1,8 +1,9 @@
 import * as Subject from '../../models/subject.js';
 import { text_maker } from '../../models/text';
+import { TextMaker } from '../../util_components';
 import { Table } from '../../core/TableClass.js';
 import { PartitionDataWrapper } from "../PartitionDataWrapper.js";
-import { PartitionPerspective } from './PartitionPerspective.js';
+import { PartitionPerspective } from '../PartitionPerspective.js';
 
 import {
   absolute_value_sort,
@@ -167,7 +168,7 @@ const hwh_perspective_factory = (data_type) => new PartitionPerspective({
   hierarchy_factory: _.curry(hwh_hierarchy_factory)(data_type),
   popup_template: hwh_perspective_popup_template,
   root_text_func: root_value => text_maker("partiton_default_was_root", {x: root_value}),
-  diagram_notes: "MtoM_tag_warning",
+  diagram_note_content: <TextMaker text_key={"MtoM_tag_warning"} />,
 })
 
 const make_goca_exp_perspective = () => goca_perspective_factory("exp");

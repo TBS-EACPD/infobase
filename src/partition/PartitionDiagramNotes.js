@@ -1,8 +1,5 @@
-const {
-  TextMaker,
-  AutoAccordion,
-} = require('../util_components');
-const { text_maker } = require("../models/text");
+import { AutoAccordion } from '../util_components';
+import { text_maker } from "../models/text";
 
 export class PartitionDiagramNotes extends React.Component {
   constructor(){
@@ -13,7 +10,7 @@ export class PartitionDiagramNotes extends React.Component {
     autoAccordion.select(".pull-down-accordion-header").node().click();
   }
   render(){
-    const { note_text_key } = this.props;
+    const { note_content } = this.props;
     return (
       <div className="mrgn-bttm-sm">
         <AutoAccordion
@@ -22,7 +19,7 @@ export class PartitionDiagramNotes extends React.Component {
           ref="autoAccordion"
         >
           <div style={{paddingLeft: '10px', paddingRight:'10px'}}>
-            <TextMaker text_key={note_text_key} />
+            { note_content }
           </div>
         </AutoAccordion>
       </div>

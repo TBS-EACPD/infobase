@@ -155,7 +155,7 @@ export class Partition {
       .head()
       .value();
 
-    this.update_diagram_notes(this.current_perspective.diagram_notes);
+    this.update_diagram_notes(this.current_perspective.diagram_note_content);
 
     if (this.current_perspective.disable_search_bar){
       this.disable_search_bar()
@@ -366,9 +366,9 @@ export class Partition {
       partition_control_info.select("a.tab-catch-after").remove();
     }
   }
-  update_diagram_notes(note_text_key){
+  update_diagram_notes(note_content){
     const diagram_note_div = this.container.select(".partition-notes");
-    if (!note_text_key) {
+    if (!note_content) {
       // smoothly transition the height and opacity 0
       diagram_note_div
         .style("height", this.offsetHeight+"px")
@@ -388,7 +388,7 @@ export class Partition {
         .style("height", "100%")
         .style("opacity", 1);
 
-      reactAdapter.render(<PartitionDiagramNotes note_text_key={note_text_key}/>, diagram_note_div.node());
+      reactAdapter.render(<PartitionDiagramNotes note_content={note_content}/>, diagram_note_div.node());
     }
   }
 }

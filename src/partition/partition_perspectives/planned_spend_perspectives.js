@@ -1,9 +1,10 @@
 import * as Subject from '../../models/subject';
 import { Table } from '../../core/TableClass.js';
 import { text_maker, run_template } from '../../models/text';
+import { TextMaker } from '../../util_components';
 import { rpb_link } from '../../link_utils.js';
 import { PartitionDataWrapper } from "../PartitionDataWrapper.js";
-import { PartitionPerspective } from './PartitionPerspective.js';
+import { PartitionPerspective } from '../PartitionPerspective.js';
 
 import {
   absolute_value_sort,
@@ -429,7 +430,7 @@ const planned_exp_perspective_factory = (presentation_scheme) => new PartitionPe
   hierarchy_factory: _.curry(planned_spending_hierarchy_factory)(presentation_scheme),
   popup_template: _.curry(planned_exp_popup_template)(presentation_scheme),
   root_text_func: root_value => text_maker(get_root_text_key(presentation_scheme), {x: root_value}),
-  diagram_notes: presentation_scheme === "est_doc_im" ? "partition_interim_estimates_def" : false,
+  diagram_note_content: presentation_scheme === "est_doc_im" ? <TextMaker text_key={"partition_interim_estimates_def"} /> : false,
 })
 
 

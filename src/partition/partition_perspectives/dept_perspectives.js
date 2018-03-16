@@ -1,7 +1,7 @@
 import * as Subject from '../../models/subject.js';
 import { text_maker } from '../../models/text';
 import { PartitionDataWrapper } from "../PartitionDataWrapper.js";
-import { PartitionPerspective } from './PartitionPerspective.js';
+import { PartitionPerspective } from '../PartitionPerspective.js';
 
 import {
   absolute_value_sort,

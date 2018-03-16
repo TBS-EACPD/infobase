@@ -17,7 +17,7 @@ export class PartitionPerspective {
       throw `Partition diagram perspective ${args.name} is missing required arguments.`;
     } else {
       const optional_args = {
-        diagram_notes: args.diagram_notes || false,
+        diagram_note_content: args.diagram_note_content || false,
         disable_search_bar: args.disable_search_bar || false,
       }
       Object.assign(this, required_args, optional_args);

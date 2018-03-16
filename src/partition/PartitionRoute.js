@@ -1,5 +1,5 @@
 import { Partition } from './Partition.js';
-import { get_all_perspectives, all_data_types } from './partition_content/index.js';
+import { get_all_perspectives, all_data_types } from './partition_perspectives/index.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
 import { StandardRouteContainer } from '../core/NavComponents.js';
 import { SpinnerWrapper } from '../util_components';

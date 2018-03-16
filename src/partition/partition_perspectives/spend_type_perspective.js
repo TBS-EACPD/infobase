@@ -1,9 +1,10 @@
 import * as Subject from '../../models/subject.js';
 import { sos } from '../../models/businessConstants.js';
 import { text_maker } from '../../models/text.js';
+import { TextMaker } from '../../util_components';
 import { Table } from '../../core/TableClass.js';
 import { PartitionDataWrapper } from "../PartitionDataWrapper.js";
-import { PartitionPerspective } from './PartitionPerspective.js';
+import { PartitionPerspective } from '../PartitionPerspective.js';
 
 import {
   absolute_value_sort,
@@ -178,7 +179,7 @@ const make_spend_type_perspective = () => new PartitionPerspective({
   hierarchy_factory: spend_type_hierarchy_factory,
   popup_template: spend_type_perspective_popup_template,
   root_text_func: root_value => text_maker("partition_spending_was", {x: root_value}),
-  diagram_notes: "program_SOBJ_warning",
+  diagram_note_content: <TextMaker text_key={"program_SOBJ_warning"} />,
   disable_search_bar: true,
 })
 
