@@ -26,7 +26,7 @@ export class PartitionRoute extends React.Component {
       table_keys: ['table6', 'table8', 'table12','table305'],
     }).then( () => {
       this.all_perspectives = get_all_perspectives();
-      this.setState({loading: false}) 
+      this.setState({loading: false});
     });
   }
   shouldComponentUpdate(nextProps){

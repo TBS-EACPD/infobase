@@ -1,3 +1,5 @@
+import './perspective_content.ib.yaml';
+
 import {
   make_dept_exp_perspective,
   make_dept_fte_perspective,
