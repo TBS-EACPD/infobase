@@ -69,17 +69,12 @@ export class PartitionRoute extends React.Component {
     const route_perspective = props.match.params.perspective;
     const route_data_type = props.match.params.data_type;
 
-    const route_data_type_is_valid = _.chain(this.all_perspectives)
-      .map( perspective => perspective.data_type )
-      .indexOf(route_data_type)
-      .value() !== -1;
+    const route_data_type_and_perspective_combination_is_valid = !_.chain(this.all_perspectives)
+      .filter( perspective => perspective.data_type === route_data_type && perspective.id === route_perspective )
+      .isEmpty()
+      .value();
 
-    const route_perspective_is_valid = route_data_type_is_valid &&  _.chain(this.all_perspectives)
-      .map( perspective => perspective.id )
-      .indexOf(route_data_type)
-      .value() !== -1;
-
-    if (route_data_type_is_valid && route_perspective_is_valid){
+    if (route_data_type_and_perspective_combination_is_valid){
       return {
         perspective: route_perspective,
         data_type: route_data_type,
@@ -92,18 +87,18 @@ export class PartitionRoute extends React.Component {
     }
   }
   ensurePartitionStateMatchesRouteState(route_perspective, route_data_type){
-    const partition_perspective = this.partition.perspective;
-    const partition_data_type = this.partition.data_type;
+    const partition_perspective = this.partition.current_perspective_id;
+    const partition_data_type = this.partition.current_data_type;
 
     if ( (route_perspective !== partition_perspective) && (route_data_type === partition_data_type) ) {
-      this.partition.perspective = route_perspective;
+      this.partition.current_perspective_id = route_perspective;
       
       this.container.select(".select_perspective")
         .property("value", route_perspective)
         .dispatch("change");
     } else if (route_data_type !== partition_data_type) {
-      this.partition.perspective = route_perspective;
-      this.partition.data_type = route_data_type;
+      this.partition.current_perspective_id = route_perspective;
+      this.partition.current_data_type = route_data_type;
 
       this.container.select(".select_data_type")
         .property("value", route_data_type)
