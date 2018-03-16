@@ -1,5 +1,5 @@
-import "./partition.ib.yaml";
-import "./partition.scss";
+import "./Partition.ib.yaml";
+import "./Partition.scss";
 import { text_maker } from "../models/text";
 import { PartitionDiagram } from "./PartitionDiagram.js";
 import { PartitionDataWrapper } from "./PartitionDataWrapper.js";

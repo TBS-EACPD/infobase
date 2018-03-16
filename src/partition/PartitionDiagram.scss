@@ -1,0 +1,229 @@
+@import '../common_css/common-variables';
+
+.__partition__ {
+  min-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.partition-diagram {
+  background-color:rgb(4, 18, 37);
+  min-width: inherit;
+}
+
+.partition-diagram > .header{
+  position: absolute;
+  text-align: center;
+  color: #fff;
+  font-size: 20px;
+  font-weight: $lightFontWeight;
+  top: 0px;
+}
+
+.partition-content{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  color: #efefef;
+  cursor: pointer;
+  font-size: 12px;
+}
+.partition-content-title{ 
+  margin-left: 20px;
+  padding: 0px 5px;
+  font-weight: $mediumFontWeight;
+}
+.partition-content-title.fat{ 
+  background-color: rgb(4, 18, 37) !important;
+  padding: 0px 15px;
+  max-width: 85%;
+  min-width: 10%;
+  min-height: 100%;
+  line-height: 1;
+}
+
+.partition-content.negative-value{
+  background-image: repeating-linear-gradient(-45deg, transparent, transparent 1px, rgba(8, 40, 86,.5) 1px, rgba(8, 40, 86,.5) 5px);
+}
+.partition-negative-title-backing:not(.partition-right-ie-fix){
+  display: inherit !important;
+  align-items: inherit !important;
+}
+.partition-negative-title-backing:not(.fat){
+    align-items: center;
+    background-color: rgb(4, 18, 37) ;
+    display: flex;
+    height: 100%;
+    margin-left: 20px;
+}
+.partition-negative-title-backing:not(.fat) > .partition-content-title{
+  margin-left: 0px;
+}
+.partition-content-title.negative-value {
+  color: red;
+}
+
+.partition-right-ie-fix{
+  height: 100%;
+}
+
+.partition-content-title.right{
+  position: absolute;
+  right: 5px;
+  padding: 0px 15px;
+  text-align: right;
+}
+
+.partition-content.root{
+  display: flex;
+  cursor: default;
+  text-align: center;
+  font-size: 36px;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.partition-content.root > .partition-content-title{
+  width: inherit;
+  margin-left: 0px;
+}
+
+.partition-content.root > .partition-content-title > .amount{
+  font-size: 48px;
+  margin: 0px;
+  & > a {
+    color: #fff!important;
+  }
+}
+
+.partition-content.faded{
+  opacity: 0.2;
+}
+
+.popup-row-bottom-border {
+  border-bottom: 1px solid #ccc;
+}
+.popup-font-xl {
+  font-size: 28px;
+}
+.popup-font-l {
+  font-size: 24px;
+}
+.popup-font-ml {
+  font-size: 20px;
+}
+.popup-font-m {
+  font-size: 18px;
+}
+.popup-font-sm {
+  font-size: 16px;
+}
+.popup-font-s {
+  font-size: 12px;
+}
+
+.partition-popup {
+  border-radius: 10px;
+  z-index: 100;
+  text-align: left;
+  color: black;
+  position: absolute;
+  width: 400px;
+  background-color: #fefefe;
+  padding: 20px;
+}
+.partition-popup.fixed-popup {
+  position: fixed;
+}
+.partition-popup > .popup-row-top > .stat1 {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+.partition-popup > .popup-row-top > .stat2 {
+  display: inline-block;
+  width: 49%;
+  text-align: center;
+}
+.partition-popup > .popup-row-top > .stat-split {
+  border-right: 1px solid #ccc;
+}
+.partition-popup > .popup-row-top > span > .popup-revenue-text {
+  line-height: 1; 
+  text-align: center; 
+  color: #333; 
+  width: 70%; 
+  margin-left: auto; 
+  margin-right: auto;
+  display: inline-flex;
+}
+.partition-popup > .popup-decription-text {
+  max-height: 200px;
+  overflow-y: auto;
+  line-height: 1;
+  text-align: justify;
+  color: #333;
+  padding-right: 4px;
+  font-weight: $mediumFontWeight;
+}
+.partition-popup > .btn {
+  color: #fefefe!important;
+}
+.partition-popup > .popup-pointer {
+  position: absolute;
+	width: 0;
+	height: 0;
+  left: -40px;
+	border-top: 25px solid transparent;
+	border-right: 40px solid #efefef;
+	border-bottom: 25px solid transparent;
+}
+.partition-popup a.children {
+  font-size: 10px;
+}
+
+.partition-popup.fixed-popup.unfocus-all-button-container {
+    bottom: 0px;
+    right: 0px;
+    width: 145px;
+    padding: 15px;
+    border-left: 3px solid #45a1e3;
+    border-top: 3px solid #45a1e3;
+    border-radius: 0px;
+    border-top-left-radius: 10px;
+  & > a.btn {
+    background-color: rgb(69, 161, 227);
+  }
+}
+
+.partition-content:focus a.minimize.hovering,
+.partition-content:hover a.minimize.hovering {
+  display: inline;
+}
+
+polygon.partition-svg-link.large,
+polygon.partition-svg-link.medium{
+   opacity: 0.5;
+   stroke-width: 0px;
+}
+polygon.partition-svg-link.tiny{
+   opacity: 0.6;
+   stroke-width: 1px;
+}
+
+polygon.partition-svg-link.large.faded,
+polygon.partition-svg-link.medium.faded{
+   opacity: 0.2;
+}
+polygon.partition-svg-link.tiny.faded{
+   opacity: 0.4;
+}
+
+polygon.partition-svg-link.large.highlighted,
+polygon.partition-svg-link.medium.highlighted{
+   opacity: 0.9;
+}
+polygon.partition-svg-link.tiny.highlighted{
+   opacity: 1;
+}

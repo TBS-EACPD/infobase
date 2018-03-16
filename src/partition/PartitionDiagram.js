@@ -1,3 +1,5 @@
+import './PartitionDiagram.ib.yaml';
+import './PartitionDiagram.scss';
 import * as utils from "../core/utils";
 import { text_maker } from "../models/text";
 
