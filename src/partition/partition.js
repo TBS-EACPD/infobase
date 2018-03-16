@@ -360,7 +360,9 @@ export class Partition {
       tab_catch_before.on("focusout", intro_popup_cleanup);
       tab_catch_after.on("focusout", intro_popup_cleanup);
     } else {
-      this.container.select(".partition-diagram-fader").on("click")();
+      partition_control_info.select("div.partition-popup.partition-intro").remove();
+      partition_control_info.select("div.partition-diagram-fader").remove();
+      partition_control_info.select("a.tab-catch-after").remove();
     }
   }
   update_diagram_notes(note_text_key){
