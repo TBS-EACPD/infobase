@@ -115,8 +115,6 @@ export class PartitionSubApp {
 
     this.current_perspective_id = current_perspective_options[0].id;
 
-    this.url_update_callback(this.current_perspective_id, this.current_data_type);
-
     // Update presentation_schemes dropdown options
     const presentation_scheme_dropdown = this.container.select(".select_perspective");
     presentation_scheme_dropdown.selectAll('option').remove();
@@ -143,10 +141,11 @@ export class PartitionSubApp {
   }
   change_perspective(){
     this.current_perspective_id = d3.event.target.value;
-    this.url_update_callback(this.current_perspective_id, this.current_data_type);
     this.update();
   }
   update(){
+    this.url_update_callback(this.current_perspective_id, this.current_data_type);
+
     this.current_perspective = _.chain(this.all_perspectives)
       .filter(perspective => {
         return perspective.id === this.current_perspective_id && 
@@ -288,7 +287,7 @@ export class PartitionSubApp {
       .each(node => {
         node.children = PartitionDataWrapper.__show_partial_children(node);
       });
-      
+
     _.each(_.last(search_tree.children).data.hidden_children, node => {
       node.eachAfter(d => {
         d.how_many_to_show = 1;

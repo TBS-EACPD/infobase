@@ -12,12 +12,15 @@ export class PartitionRoute extends React.Component {
     this.url_update_callback = (perspective, data_type) => {
       const new_path = `partition/${perspective}/${data_type}`;
 
-      this.props.history.push('/'+new_path);
-
-      const el_to_update = document.querySelector('#wb-lng a');
-      const link = _.first(el_to_update.href.split("#"));
-      if(link){
-        el_to_update.href = `${link}#${new_path}`;
+      if( this.props.history.location.pathname !== ('/'+new_path) ){
+  
+        this.props.history.push('/'+new_path);
+  
+        const el_to_update = document.querySelector('#wb-lng a');
+        const link = _.first(el_to_update.href.split("#"));
+        if(link){
+          el_to_update.href = `${link}#${new_path}`;
+        }
       }
     }
   }
