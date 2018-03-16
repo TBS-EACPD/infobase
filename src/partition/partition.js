@@ -311,12 +311,13 @@ export class Partition {
       this.update();
     }, this.search_debounce_time/2);
 
-    if (d3.event.keyCode === 13 ||
+    if (d3.event.keyCode === 9 ||
+        d3.event.keyCode === 13 ||
         d3.event.keyCode === 37 ||
         d3.event.keyCode === 38 ||
         d3.event.keyCode === 39 ||
         d3.event.keyCode === 40) {
-      // Bail on enter and arrow keys. Note: this DOESN'T bail already debounced searches
+      // Bail on enter, tab, and arrow keys. Note: this DOESN'T bail already debounced searches
       return;
     }
     if (query.length < this.search_required_chars) {
