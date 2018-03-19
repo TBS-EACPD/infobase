@@ -1,12 +1,12 @@
 import * as Subject from '../../../models/subject.js';
 import { text_maker } from '../../../models/text';
-import { PartitionDataWrapper } from "../../partition_diagram/PartitionDataWrapper.js";
 import { PartitionPerspective } from './PartitionPerspective.js';
 
 import {
   absolute_value_sort,
   post_traversal_value_set,
   post_traversal_search_string_set,
+  partition_show_partial_children,
 } from './data_hierarchy_utils.js';
 
 import { 
@@ -74,7 +74,7 @@ const dept_hierarchy_factory = (data_type, apply_node_hiding_rules) => {
       })
       .each(node => { 
         if (! _.isUndefined(node.children) ) {
-          node.children = PartitionDataWrapper.__show_partial_children(node);
+          node.children = partition_show_partial_children(node);
         }
       });
   }

@@ -3,7 +3,6 @@ import { Table } from '../../../core/TableClass.js';
 import { text_maker, run_template } from '../../../models/text';
 import { TextMaker } from '../../../util_components';
 import { rpb_link } from '../../../link_utils.js';
-import { PartitionDataWrapper } from "../../partition_diagram/PartitionDataWrapper.js";
 import { PartitionPerspective } from './PartitionPerspective.js';
 
 import {
@@ -11,6 +10,7 @@ import {
   get_glossary_entry,
   get_id_ancestry,
   post_traversal_search_string_set,
+  partition_show_partial_children,
 } from './data_hierarchy_utils.js';
 
 import { 
@@ -343,7 +343,7 @@ const planned_spending_hierarchy_factory = (presentation_scheme, apply_node_hidi
         }
       })
       .each(node => {
-        node.children = PartitionDataWrapper.__show_partial_children(node);
+        node.children = partition_show_partial_children(node);
       });
   }
 

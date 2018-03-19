@@ -1,7 +1,6 @@
 import * as Subject from '../../../models/subject';
 import { InstForm } from '../../../models/subject.js';
 import { text_maker } from '../../../models/text';
-import { PartitionDataWrapper } from "../../partition_diagram/PartitionDataWrapper.js";
 import { PartitionPerspective } from './PartitionPerspective.js';
 
 import {
@@ -10,6 +9,7 @@ import {
   get_glossary_entry,
   get_id_ancestry,
   post_traversal_search_string_set,
+  partition_show_partial_children,
 } from './data_hierarchy_utils';
 
 import { 
@@ -151,7 +151,7 @@ const org_info_hierarchy_factory = (grandparent_inst_form_group, apply_node_hidi
         }
       })
       .each(node => {
-        node.children = PartitionDataWrapper.__show_partial_children(node);
+        node.children = partition_show_partial_children(node);
       });
   }
 

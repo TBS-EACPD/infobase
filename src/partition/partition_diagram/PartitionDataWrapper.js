@@ -1,73 +1,55 @@
-export class PartitionDataWrapper {
+const partition_show_partial_children = (node) => {
+  if (!node.children){
+    return;
+  }
+  if( !_.isUndefined(_.last(node.children).data.hidden_children) ){ 
+    return node.children;
+  }
+  let to_be_shown, to_be_compressed, new_compressed_child, children;
+  if ( _.isFunction(node.how_many_to_show) ){
+    [to_be_shown,to_be_compressed] = node.how_many_to_show(node);
+  } else {
+    if (node.how_many_to_show >= node.children.length){
+      to_be_shown = node.children;
+      to_be_compressed = [];
+    } else {
+      to_be_shown = _.take(node.children, node.how_many_to_show);
+      to_be_compressed = _.tail(node.children, node.how_many_to_show);
+    }
+  }
+  if (to_be_compressed.length > 0){
+    new_compressed_child = Object.assign(
+      d3.hierarchy({}),
+      {  
+        height: node.height-1,
+        depth: node.depth+1,
+        id_ancestry: _.reduce(to_be_compressed, (memo,x) => memo+"-"+x.data.id, "compressed>")+"-<compressed-"+node.id_ancestry,
+        open: true,
+        parent: node,
+        value: d3.sum(to_be_compressed,x => x.value),
+        __value__: d3.sum(to_be_compressed,x => x.value),
+        data: {
+          id: _.map(to_be_compressed, x => x.data.id)+"compressed",
+          name: "+",
+          description: "",
+          type: "compressed",
+          is: __type__ => __type__ === "compressed",
+          hidden_children: to_be_compressed,
+        },
+        no_polygon: false,
+      }
+    );
+    children = to_be_shown.concat(new_compressed_child);
+  } else {
+    children = to_be_shown;
+  }
+  return children;
+}
+
+class PartitionDataWrapper {
   constructor(root){
     this.root = root;
   }
-  static __show_partial_children(node){
-    if (!node.children){
-      return;
-    }
-    if( !_.isUndefined(_.last(node.children).data.hidden_children) ){ 
-      return node.children;
-    }
-    let to_be_shown,to_be_compressed, new_compressed_child, children;
-    if ( _.isFunction(node.how_many_to_show) ){
-      [to_be_shown,to_be_compressed] = node.how_many_to_show(node);
-    } else {
-      if (node.how_many_to_show >= node.children.length){
-        to_be_shown = node.children;
-        to_be_compressed = [];
-      } else {
-        to_be_shown = _.take(node.children, node.how_many_to_show);
-        to_be_compressed = _.tail(node.children, node.how_many_to_show);
-      }
-    }
-    if (to_be_compressed.length > 0){
-      new_compressed_child = Object.assign(
-        d3.hierarchy({}),
-        {  
-          height: node.height-1,
-          depth: node.depth+1,
-          id_ancestry: _.reduce(to_be_compressed, (memo,x) => memo+"-"+x.data.id, "compressed>")+"-<compressed-"+node.id_ancestry,
-          open: true,
-          parent: node,
-          value: d3.sum(to_be_compressed,x => x.value),
-          __value__: d3.sum(to_be_compressed,x => x.value),
-          data: {
-            id: _.map(to_be_compressed, x => x.data.id)+"compressed",
-            name: "+",
-            description: "",
-            type: "compressed",
-            is: __type__ => __type__ === "compressed",
-            hidden_children: to_be_compressed,
-          },
-          no_polygon: false,
-        }
-      );
-      children = to_be_shown.concat(new_compressed_child);
-    } else {
-      children = to_be_shown;
-    }
-    return children;
-  }
-  static __show_all_children(node){
-    let children;
-    const compressed = _.last(node.children);
-    if ( !_.isUndefined(compressed.data.hidden_children) ){
-      children = node.children.concat(compressed.data.hidden_children);
-      compressed.data.unhidden_children = compressed.data.hidden_children
-      delete compressed.data.hidden_children;
-      compressed.data.id = "minimize"+compressed.id_ancestry;
-      compressed.value = 1;
-      compressed.data.name = "—";
-      _.each(children, _node => {
-        _node.parent = node;
-      });
-      compressed.no_polygon = true;
-    } else {
-      children = node.children;
-    }
-    return children;
-  };
   to_open_levels(){
     const levels = {};
     this.root.each(node => {
@@ -89,7 +71,7 @@ export class PartitionDataWrapper {
     // get rid of the minimize placeholder node
     node.children = node.children.filter(d => _.isUndefined(d.data.unhidden_children));
     if (node.children) {
-      children = PartitionDataWrapper.__show_partial_children(node);
+      children = partition_show_partial_children(node);
     }
     node.children = children
     return children;
@@ -99,14 +81,31 @@ export class PartitionDataWrapper {
       node.value = node.__value__;
     }
     if (node.children){
-      const children = PartitionDataWrapper.__show_all_children(node);
+      let children;
+
+      const compressed = _.last(node.children);
+      if ( !_.isUndefined(compressed.data.hidden_children) ){
+        children = node.children.concat(compressed.data.hidden_children);
+        compressed.data.unhidden_children = compressed.data.hidden_children
+        delete compressed.data.hidden_children;
+        compressed.data.id = "minimize"+compressed.id_ancestry;
+        compressed.value = 1;
+        compressed.data.name = "—";
+        _.each(children, _node => {
+          _node.parent = node;
+        });
+        compressed.no_polygon = true;
+      } else {
+        children = node.children;
+      }
+
       _.chain(children)
         .difference(node.children)
         .filter(node => node.value!==0)
         .each(child => {
           child.eachAfter(d => {
             if (d.children){
-              d.children = PartitionDataWrapper.__show_partial_children(d);
+              d.children = partition_show_partial_children(d);
             }
           })
         })
@@ -197,4 +196,9 @@ export class PartitionDataWrapper {
   magnified(node){
     return _.some(node.ancestors(), d => d.magnified);
   }
+};
+
+export {
+  partition_show_partial_children,
+  PartitionDataWrapper,
 };

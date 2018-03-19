@@ -1,10 +1,8 @@
 import "./PartitionSubApp.ib.yaml";
 import "./PartitionSubApp.scss";
 import { text_maker } from "../../models/text";
-import { PartitionDiagram } from "../partition_diagram/PartitionDiagram.js";
-import { PartitionDataWrapper } from "../partition_diagram/PartitionDataWrapper.js";
+import { PartitionDiagram, partition_show_partial_children } from "../partition_diagram/index.js";
 import { PartitionNotes } from "./PartitionNotes.js";
-import * as utils from "../../core/utils";
 import { reactAdapter } from '../../core/reactAdapter';
 
 export class PartitionSubApp {
@@ -175,27 +173,12 @@ export class PartitionSubApp {
     }
   }
   render_diagram(hierarchy){
-    const wrapper = new PartitionDataWrapper(hierarchy);
-  
     this.diagram.render({
-      data: wrapper,
-      popup_template: this.current_perspective.popup_template,
+      data: hierarchy,
       dont_fade: this.dont_fade,
-      html_func: (d) => {
-        const should_add_value = (
-          Math.abs(d.value)/wrapper.root.value > 0.02 &&
-           _.isUndefined(d.data.hidden_children)
-        );
-        let name;
-        if (should_add_value && d !== wrapper.root) {
-          name = d.data.name + this.current_perspective.formater(d);
-        } else if ( !should_add_value && d !== wrapper.root ){
-          name = utils.abbrev(d.data.name, 80);
-        } else if ( d === wrapper.root ) {
-          name = this.current_perspective.root_text_func(wrapper.root.value);
-        }
-        return name;
-      },
+      formatter: this.current_perspective.formater,
+      root_text_func: this.current_perspective.root_text_func,
+      popup_template: this.current_perspective.popup_template,
     });
   }
   enable_search_bar(){
@@ -285,7 +268,7 @@ export class PartitionSubApp {
         }
       })
       .each(node => {
-        node.children = PartitionDataWrapper.__show_partial_children(node);
+        node.children = partition_show_partial_children(node);
       });
 
     _.each(_.last(search_tree.children).data.hidden_children, node => {

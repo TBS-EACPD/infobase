@@ -1,5 +1,6 @@
 import './PartitionDiagram.ib.yaml';
 import './PartitionDiagram.scss';
+import { PartitionDataWrapper } from './PartitionDataWrapper.js';
 import * as utils from "../../core/utils";
 import { text_maker } from "../../models/text";
 
@@ -53,8 +54,29 @@ export class PartitionDiagram {
     this.options = _.extend(this.options,options);
     this.popup_template = this.options.popup_template;
     this.dont_fade = this.options.dont_fade || [];
-    const html_func = this.options.html_func;
-    const data = this.data = this.options.data; 
+    
+    const data = this.data = new PartitionDataWrapper(this.options.data); 
+
+    this.formatter = this.options.formatter || _.identity;
+    this.root_text_func = this.options.root_text_func || _.identity;
+
+    const default_html_func = (d) => {
+      const should_add_value = (
+        Math.abs(d.value)/this.data.root.value > 0.02 &&
+         _.isUndefined(d.data.hidden_children)
+      );
+      let name;
+      if (should_add_value && d !== this.data.root) {
+        name = d.data.name + this.formatter(d);
+      } else if ( !should_add_value && d !== this.data.root ){
+        name = utils.abbrev(d.data.name, 80);
+      } else if ( d === this.data.root ) {
+        name = this.root_text_func(this.data.root.value);
+      }
+      return name;
+    };
+    const html_func = this.options.html_func || default_html_func;
+
     this.links = this.data.links();
     const levels = data.to_open_levels();
     const height = this.options.height;

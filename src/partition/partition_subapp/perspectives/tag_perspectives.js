@@ -2,13 +2,13 @@ import * as Subject from '../../../models/subject.js';
 import { text_maker } from '../../../models/text';
 import { TextMaker } from '../../../util_components';
 import { Table } from '../../../core/TableClass.js';
-import { PartitionDataWrapper } from "../../partition_diagram/PartitionDataWrapper.js";
 import { PartitionPerspective } from './PartitionPerspective.js';
 
 import {
   absolute_value_sort,
   post_traversal_value_set,
   post_traversal_search_string_set,
+  partition_show_partial_children,
 } from './data_hierarchy_utils.js';
 
 import { 
@@ -60,7 +60,7 @@ const hwh_hierarchy_factory = (data_type, apply_node_hiding_rules) => {
         }
       })
       .each(node => {
-        node.children = PartitionDataWrapper.__show_partial_children(node);
+        node.children = partition_show_partial_children(node);
       });
   }
 
@@ -88,7 +88,7 @@ const goca_hierarchy_factory = (data_type, apply_node_hiding_rules) => {
         }
       })
       .each(node => {
-        node.children = PartitionDataWrapper.__show_partial_children(node);
+        node.children = partition_show_partial_children(node);
       });
   }
  
