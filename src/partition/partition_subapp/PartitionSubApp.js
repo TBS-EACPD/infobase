@@ -49,8 +49,8 @@ export class PartitionSubApp {
     this.diagram = new PartitionDiagram(this.container, {height: 700});
 
     const current_perspective_options = _.chain(this.all_perspectives)
-      .filter(perspective => perspective.data_type === this.current_data_type)
-      .sortBy(perspective => perspective.id === this.initial_perspective_id ? -Infinity : Infinity)
+      .filter(perspective => perspective.data_type === initial_data_type_id)
+      .sortBy(perspective => perspective.id === initial_perspective_id ? -Infinity : Infinity)
       .map(perspective => {
         return {
           id: perspective.id,
