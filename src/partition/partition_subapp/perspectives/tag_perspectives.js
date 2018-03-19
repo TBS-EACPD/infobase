@@ -8,7 +8,6 @@ import {
   absolute_value_sort,
   post_traversal_value_set,
   post_traversal_search_string_set,
-  partition_show_partial_children,
 } from './data_hierarchy_utils.js';
 
 import { 
@@ -38,61 +37,20 @@ const create_tag_hierarchy = function(tag_scheme, data_type) {
   return hierarchy;
 };
 
-
-const hwh_hierarchy_factory = (data_type, apply_node_hiding_rules) => {
-  const hierarchy = create_tag_hierarchy("HWH", data_type);
-
-  if (apply_node_hiding_rules){
-    hierarchy
-      .each(node => {
-        node.__value__ = node.value;
-        node.open = true;
-        if (node.data.is("tag") && node.children[0].data.is("tag")){
-          node.how_many_to_show = Infinity;
-        }else if (node.data.is("tag") && node.children[0].data.is("program")){
-          node.how_many_to_show = function(_node){
-            if (_node.children.length <= 2){ return [_node.children, []]; }
-            const show = [_.head(_node.children)];
-            const hide = _.tail(_node.children);
-            const unhide = _.filter(hide, __node => __node.value > hierarchy.value/100);
-            return [show.concat(unhide), _.difference(hide, unhide)];
-          }
-        }
-      })
-      .each(node => {
-        node.children = partition_show_partial_children(node);
-      });
+const tag_data_wrapper_node_rules = (node) => {
+  node.__value__ = node.value;
+  node.open = true;
+  if (node.data.is("tag") && node.children[0].data.is("tag")){
+    node.how_many_to_show = Infinity;
+  }else if (node.data.is("tag") && node.children[0].data.is("program")){
+    node.how_many_to_show = function(_node){
+      if (_node.children.length <= 2){ return [_node.children, []]; }
+      const show = [_.head(_node.children)];
+      const hide = _.tail(_node.children);
+      const unhide = _.filter(hide, __node => __node.value > _.last(_node.ancestors()).value/100);
+      return [show.concat(unhide), _.difference(hide, unhide)];
+    }
   }
-
-  return hierarchy;
-}
-
-const goca_hierarchy_factory = (data_type, apply_node_hiding_rules) => {
-  const hierarchy = create_tag_hierarchy("GOCO", data_type);
-
-  if (apply_node_hiding_rules){
-    hierarchy
-      .each(node => {
-        node.__value__ = node.value;
-        node.open = true;
-        if (node.data.is("tag") && node.children && node.children[0] && node.children[0].data.is("tag")){
-          node.how_many_to_show = Infinity;
-        } else if (node.data.is("tag") && node.children[0].data.is("program")){
-          node.how_many_to_show = function(_node){
-            if (_node.children.length <= 2){ return [_node.children, []] }
-            const show = [_.head(_node.children)];
-            const hide = _.tail(_node.children);
-            const unhide = _.filter(hide, __node => __node.value > hierarchy.value/100);
-            return [show.concat(unhide), _.difference(hide, unhide)];
-          }
-        }
-      })
-      .each(node => {
-        node.children = partition_show_partial_children(node);
-      });
-  }
- 
-  return hierarchy;
 }
 
 
@@ -148,7 +106,8 @@ const goca_perspective_factory = (data_type) => new PartitionPerspective({
   name: text_maker("spending_area_plural"),
   data_type: data_type,
   formater: node_data => wrap_in_brackets(formats_by_data_type[data_type](node_data[data_type])),
-  hierarchy_factory: _.curry(goca_hierarchy_factory)(data_type),
+  hierarchy_factory: () => create_tag_hierarchy("GOCO", data_type),
+  data_wrapper_node_rules: tag_data_wrapper_node_rules,
   popup_template: goca_perspective_popup_template,
   root_text_func: root_value => {
     const text_key = data_type === "exp" ? "partition_spending_was" : "partition_fte_was";
@@ -165,7 +124,8 @@ const hwh_perspective_factory = (data_type) => new PartitionPerspective({
       wrap_in_brackets(text_maker("up_to") + " " + formats_by_data_type[data_type](node_data[data_type])) :
       wrap_in_brackets(formats_by_data_type[data_type](node_data[data_type]))
   },
-  hierarchy_factory: _.curry(hwh_hierarchy_factory)(data_type),
+  hierarchy_factory: () => create_tag_hierarchy("HWH", data_type),
+  data_wrapper_node_rules: tag_data_wrapper_node_rules, 
   popup_template: hwh_perspective_popup_template,
   root_text_func: root_value => text_maker("partiton_default_was_root", {x: root_value}),
   diagram_note_content: <TextMaker text_key={"MtoM_tag_warning"} />,

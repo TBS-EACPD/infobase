@@ -10,7 +10,6 @@ import {
   get_glossary_entry,
   get_id_ancestry,
   post_traversal_search_string_set,
-  partition_show_partial_children,
 } from './data_hierarchy_utils.js';
 
 import { 
@@ -326,31 +325,6 @@ const create_planned_spending_hierarchy = function(data_type, presentation_schem
 }
 
 
-const planned_spending_hierarchy_factory = (presentation_scheme, apply_node_hiding_rules) => {
-  const hierarchy = create_planned_spending_hierarchy("planned_exp", presentation_scheme);
-
-  if (apply_node_hiding_rules){
-    hierarchy
-      .each(node => {
-        node.__value__ = node.value;
-        node.open = true;
-        node.how_many_to_show = function(_node){
-          if (_node.children.length <= 2){ return [_node.children, []]}
-          const show = [_.head(_node.children)];
-          const hide = _.tail(_node.children);
-          const unhide = _.filter(hide, __node => __node.value > hierarchy.value/100);
-          return [show.concat(unhide), _.difference(hide,unhide)];
-        }
-      })
-      .each(node => {
-        node.children = partition_show_partial_children(node);
-      });
-  }
-
-  return hierarchy;
-}
-
-
 const planned_exp_popup_template = function(presentation_scheme, d){
   const common_popup_options = _.assign(
     {}, 
@@ -427,7 +401,7 @@ const planned_exp_perspective_factory = (presentation_scheme) => new PartitionPe
   name: get_name(presentation_scheme),
   data_type: "planned_exp",
   formater: node_data => wrap_in_brackets(formats_by_data_type["planned_exp"](node_data["planned_exp"])),
-  hierarchy_factory: _.curry(planned_spending_hierarchy_factory)(presentation_scheme),
+  hierarchy_factory: () => create_planned_spending_hierarchy("planned_exp", presentation_scheme),
   popup_template: _.curry(planned_exp_popup_template)(presentation_scheme),
   root_text_func: root_value => text_maker(get_root_text_key(presentation_scheme), {x: root_value}),
   diagram_note_content: presentation_scheme === "est_doc_im" ? <TextMaker text_key={"partition_interim_estimates_def"} /> : false,

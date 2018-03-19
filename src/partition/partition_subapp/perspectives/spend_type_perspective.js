@@ -10,7 +10,6 @@ import {
   get_glossary_entry,
   get_id_ancestry,
   post_traversal_search_string_set,
-  partition_show_partial_children,
 } from './data_hierarchy_utils.js'
 
 import { 
@@ -114,33 +113,20 @@ const create_spend_type_hierarchy = function(){
     .sort( absolute_value_sort );
 }
 
-
-const spend_type_hierarchy_factory = (apply_node_hiding_rules) => {
-  const hierarchy = create_spend_type_hierarchy();
-  
-  if (apply_node_hiding_rules){
-    hierarchy
-      .each(node => {
-        node.__value__ = node.value;
-        node.open = true;
-        if ( node.data.is("gov") ||  node.data.is("type_of_spending") ){
-          node.how_many_to_show = Infinity;
-        } else if (node.data.is("so")){
-          node.how_many_to_show = function(_node){
-            if (_node.children.length <= 2){ return [_node.children, []] }
-            const show = [_.head(_node.children)];
-            const hide = _.tail(_node.children);
-            const unhide = _.filter(hide, __node => __node.value > hierarchy.value/100);
-            return [show.concat(unhide), _.difference(hide,unhide)];
-          };
-        }
-      })
-      .each(node => {
-        node.children = partition_show_partial_children(node);
-      });
+const spend_type_data_wrapper_node_rules = node => {
+  node.__value__ = node.value;
+  node.open = true;
+  if ( node.data.is("gov") ||  node.data.is("type_of_spending") ){
+    node.how_many_to_show = Infinity;
+  } else if (node.data.is("so")){
+    node.how_many_to_show = function(_node){
+      if (_node.children.length <= 2){ return [_node.children, []] }
+      const show = [_.head(_node.children)];
+      const hide = _.tail(_node.children);
+      const unhide = _.filter(hide, __node => __node.value > _.last(_node.ancestors()).value/100);
+      return [show.concat(unhide), _.difference(hide,unhide)];
+    };
   }
-
-  return hierarchy;
 }
 
 
@@ -176,7 +162,8 @@ const make_spend_type_perspective = () => new PartitionPerspective({
   name: text_maker("type_of_spending"),
   data_type: "exp",
   formater: node_data => wrap_in_brackets(formats_by_data_type["exp"](node_data["exp"])),
-  hierarchy_factory: spend_type_hierarchy_factory,
+  hierarchy_factory: () => create_spend_type_hierarchy(),
+  data_wrapper_node_rules: spend_type_data_wrapper_node_rules,
   popup_template: spend_type_perspective_popup_template,
   root_text_func: root_value => text_maker("partition_spending_was", {x: root_value}),
   diagram_note_content: <TextMaker text_key={"program_SOBJ_warning"} />,

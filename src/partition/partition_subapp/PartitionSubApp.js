@@ -1,7 +1,7 @@
 import "./PartitionSubApp.ib.yaml";
 import "./PartitionSubApp.scss";
 import { text_maker } from "../../models/text";
-import { PartitionDiagram, partition_show_partial_children } from "../partition_diagram/index.js";
+import { PartitionDiagram } from "../partition_diagram/PartitionDiagram.js";
 import { PartitionNotes } from "./PartitionNotes.js";
 import { reactAdapter } from '../../core/reactAdapter';
 
@@ -167,14 +167,18 @@ export class PartitionSubApp {
     if ( !search_node.disabled && query.length >= this.search_required_chars ){
       this.search_actual(query);
     } else {
-      const apply_node_hiding_rules = true;
-      const hierarchy = this.current_perspective.hierarchy_factory(apply_node_hiding_rules);
+      const hierarchy = this.current_perspective.hierarchy_factory();
       this.render_diagram(hierarchy);
     }
   }
-  render_diagram(hierarchy){
+  render_diagram(hierarchy, alternate_data_wrapper_node_rules){
+    const data_wrapper_node_rules = alternate_data_wrapper_node_rules ? 
+      alternate_data_wrapper_node_rules :
+      this.current_perspective.data_wrapper_node_rules;
+
     this.diagram.render({
       data: hierarchy,
+      data_wrapper_node_rules: data_wrapper_node_rules,
       dont_fade: this.dont_fade,
       formatter: this.current_perspective.formater,
       root_text_func: this.current_perspective.root_text_func,
@@ -226,8 +230,7 @@ export class PartitionSubApp {
     this.dont_fade = [];
     this.search_matching = [];
     
-    const apply_node_hiding_rules = false;
-    const search_tree = this.current_perspective.hierarchy_factory(apply_node_hiding_rules);
+    const search_tree = this.current_perspective.hierarchy_factory();
     const deburred_query = _.deburr(query).toLowerCase();
 
     search_tree.each(node => {
@@ -241,43 +244,34 @@ export class PartitionSubApp {
            )
       ) {
         this.search_matching.push(node);
-        _.each(node.children, children => this.search_matching.push(children));
+        _.each(node.children, children => {
+          this.search_matching.push(children);
+          this.dont_fade.push(node);
+        });
       } else if (node.data.search_string.indexOf(deburred_query) !== -1){
         this.search_matching.push(node);
+        this.dont_fade.push(node);
       }
-    });  
+    });
+
     const to_open = _.chain(this.search_matching)
       .map(n => n.ancestors())
       .flatten(true)
       .uniq()
       .value();
     const how_many_to_be_shown = node => {
-      const partition = _.partition(node.children, child => _.includes(to_open,child))
+      const partition = _.partition(node.children, child => _.includes(to_open, child));
       return partition;
-    }; 
+    };
     
-    search_tree
-      .each(node => {
-        node.value = node[this.current_data_type],
-        node.__value__ = node.value;
-        node.open = true;
-        node.how_many_to_show = how_many_to_be_shown
-        if (_.includes(this.search_matching,node)){
-          this.dont_fade.push(node);
-          node.id += "found";
-        }
-      })
-      .each(node => {
-        node.children = partition_show_partial_children(node);
-      });
+    const search_data_wrapper_node_rules = (node) => {
+      node.value = node[this.current_data_type],
+      node.__value__ = node.value;
+      node.open = true;
+      node.how_many_to_show = how_many_to_be_shown;
+    }
 
-    _.each(_.last(search_tree.children).data.hidden_children, node => {
-      node.eachAfter(d => {
-        d.how_many_to_show = 1;
-      });
-    });
-
-    this.render_diagram(search_tree);
+    this.render_diagram(search_tree, search_data_wrapper_node_rules);
   }
   // Deals with event details and debouncing
   search_handler(){

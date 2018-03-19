@@ -50,12 +50,12 @@ export class PartitionDiagram {
       .style("zoom", 1)
       .on("end", this.render.bind(this));
   }
-  render( options = {} ) {
+  render( options = {} ){
     this.options = _.extend(this.options,options);
     this.popup_template = this.options.popup_template;
     this.dont_fade = this.options.dont_fade || [];
     
-    const data = this.data = new PartitionDataWrapper(this.options.data); 
+    this.data = new PartitionDataWrapper(this.options.data, this.options.data_wrapper_node_rules); 
 
     this.formatter = this.options.formatter || _.identity;
     this.root_text_func = this.options.root_text_func || _.identity;
@@ -68,17 +68,20 @@ export class PartitionDiagram {
       let name;
       if (should_add_value && d !== this.data.root) {
         name = d.data.name + this.formatter(d);
-      } else if ( !should_add_value && d !== this.data.root ){
+      } else if ( !should_add_value && d !== this.data.root ) {
         name = utils.abbrev(d.data.name, 80);
       } else if ( d === this.data.root ) {
         name = this.root_text_func(this.data.root.value);
       }
       return name;
     };
-    const html_func = this.options.html_func || default_html_func;
+    this.options.html_func = this.options.html_func || default_html_func;
 
+    this.update();
+  }
+  update(){
     this.links = this.data.links();
-    const levels = data.to_open_levels();
+    const levels = this.data.to_open_levels();
     const height = this.options.height;
 
     const horizontal0_padding = 50;
@@ -89,10 +92,10 @@ export class PartitionDiagram {
     const total_width = this.total_width = (_.keys(levels).length-1) * (col_width + horizontal_padding) + col0_width + horizontal0_padding;
 
     const yscale = d3.scaleLinear()
-      .domain([0,data.root.value])
+      .domain([0, this.data.root.value])
       .range([0,height]);
 
-    _.each(data.root.children, (node,i) => { 
+    _.each(this.data.root.children, (node,i) => { 
       assign_colors_recursively(node, cycle_colors(i));
     });
 
@@ -134,9 +137,11 @@ export class PartitionDiagram {
         return "";
       });
 
+    const html_func = this.options.html_func;
+
     const html_content_join = this.html.selectAll("div.partition-content")
       .data(
-        data.root.descendants().filter(d => d.open), 
+        this.data.root.descendants().filter(d => d.open), 
         content_key
       )
       .style("height", "")
@@ -196,7 +201,7 @@ export class PartitionDiagram {
         }
       })
       .style("width", d => {
-        d.width = (d === data.root ? col0_width : col_width);
+        d.width = (d === this.data.root ? col0_width : col_width);
         return d.width + "px";
       });
 
@@ -534,7 +539,7 @@ export class PartitionDiagram {
     if (content === false) {
       if ( target.classed("unmagnify-all") ) {
         this.unmagnify_all();
-        this.render();
+        this.update();
       } else if (this.pop_up){
         this.remove_pop_up();
       } 
@@ -567,7 +572,7 @@ export class PartitionDiagram {
         this.data.unhide_all_children(d);
         this.magnify(d); 
       }
-      this.render();
+      this.update();
       d3.event.stopImmediatePropagation();
       d3.event.preventDefault();
       return;
@@ -583,7 +588,7 @@ export class PartitionDiagram {
       } else {
         this.magnify(d);
       }
-      this.render();
+      this.update();
     } else {
       if (this.pop_up){
         this.remove_pop_up();

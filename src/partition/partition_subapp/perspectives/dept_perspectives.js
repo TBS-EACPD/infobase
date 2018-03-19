@@ -6,7 +6,6 @@ import {
   absolute_value_sort,
   post_traversal_value_set,
   post_traversal_search_string_set,
-  partition_show_partial_children,
 } from './data_hierarchy_utils.js';
 
 import { 
@@ -43,43 +42,20 @@ const create_ministry_hierarchy = function(data_type, skip_crsos = true){
     .sort(absolute_value_sort);
 }
 
-
-const dept_hierarchy_factory = (data_type, apply_node_hiding_rules) => {
-  const hierarchy = create_ministry_hierarchy(data_type);
-  
-  if (apply_node_hiding_rules){
-    hierarchy
-      .each(node => {
-        node.__value__ = node.value;
-        node.open = true;
-        if (node.data.is("gov")){
-          node.how_many_to_show = 8;
-        } else if (node.data.is("ministry")){
-          node.how_many_to_show = function(_node){
-            if (_node.children.length === 2){ return [_node.children, []];}
-            const show = [_.head(_node.children)];
-            const hide = _.tail(_node.children);
-            const unhide = _.filter(hide, __node => __node.value > hierarchy.value/50);
-            return [show.concat(unhide), _.difference(hide, unhide)];
-          }
-        } else if (node.data.is("dept") || node.data.is("crso")){
-          node.how_many_to_show = function(_node){
-            if (_node.children.length === 2){ return [_node.children, []];}
-            const show = [_.head(_node.children)];
-            const hide = _.tail(_node.children);
-            const unhide = _.filter(hide, __node => __node.value > hierarchy.value/50);
-            return [show.concat(unhide), _.difference(hide, unhide)];
-          }
-        }
-      })
-      .each(node => { 
-        if (! _.isUndefined(node.children) ) {
-          node.children = partition_show_partial_children(node);
-        }
-      });
+const dept_data_wrapper_node_rules = (node) => {
+  node.__value__ = node.value;
+  node.open = true;
+  if (node.data.is("gov")){
+    node.how_many_to_show = 8;
+  } else if (node.data.is("ministry") || node.data.is("dept") || node.data.is("crso")){
+    node.how_many_to_show = function(_node){
+      if (_node.children.length === 2){ return [_node.children, []];}
+      const show = [_.head(_node.children)];
+      const hide = _.tail(_node.children);
+      const unhide = _.filter(hide, __node => __node.value > _.last(_node.ancestors()).value/50);
+      return [show.concat(unhide), _.difference(hide, unhide)];
+    }
   }
-
-  return hierarchy;
 }
 
 
@@ -110,7 +86,8 @@ const dept_perspective_factory = (data_type) => new PartitionPerspective({
   name: text_maker("ministries"),
   data_type: data_type,
   formater: node_data => wrap_in_brackets(formats_by_data_type[data_type](node_data[data_type])),
-  hierarchy_factory: _.curry(dept_hierarchy_factory)(data_type),
+  hierarchy_factory: () => create_ministry_hierarchy(data_type),
+  data_wrapper_node_rules: dept_data_wrapper_node_rules,
   popup_template: dept_perspective_popup_template,
   root_text_func: root_value => {
     const text_key = data_type === "exp" ? "partition_spending_was" : "partition_fte_was";

@@ -1,4 +1,3 @@
-import { partition_show_partial_children } from '../../partition_diagram/index.js';
 import { GlossaryEntry } from '../../../models/glossary';
 import { Table } from '../../../core/TableClass.js';
 
@@ -67,5 +66,4 @@ export {
   post_traversal_value_set,
   post_traversal_search_string_set,
   value_functions,
-  partition_show_partial_children,
 };
