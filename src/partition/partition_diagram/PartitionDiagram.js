@@ -48,18 +48,19 @@ export class PartitionDiagram {
       .transition()
       .duration(500)
       .style("zoom", 1)
-      .on("end", this.render.bind(this));
+      .on("end", this.configure_then_render.bind(this));
   }
-  render( options = {} ){
+  configure_then_render( options = {} ){
     this.options = _.extend(this.options,options);
-    this.popup_template = this.options.popup_template;
+
+    this.data = new PartitionDataWrapper(this.options.data, this.options.data_wrapper_node_rules);
+
     this.dont_fade = this.options.dont_fade || [];
     
-    this.data = new PartitionDataWrapper(this.options.data, this.options.data_wrapper_node_rules); 
+    this.popup_template = this.options.popup_template;
 
     this.formatter = this.options.formatter || _.identity;
     this.root_text_func = this.options.root_text_func || _.identity;
-
     const default_html_func = (d) => {
       const should_add_value = (
         Math.abs(d.value)/this.data.root.value > 0.02 &&
@@ -75,11 +76,12 @@ export class PartitionDiagram {
       }
       return name;
     };
+
     this.options.html_func = this.options.html_func || default_html_func;
 
-    this.update();
+    this.render();
   }
-  update(){
+  render(){
     this.links = this.data.links();
     const levels = this.data.to_open_levels();
     const height = this.options.height;
@@ -539,7 +541,7 @@ export class PartitionDiagram {
     if (content === false) {
       if ( target.classed("unmagnify-all") ) {
         this.unmagnify_all();
-        this.update();
+        this.render();
       } else if (this.pop_up){
         this.remove_pop_up();
       } 
@@ -572,7 +574,7 @@ export class PartitionDiagram {
         this.data.unhide_all_children(d);
         this.magnify(d); 
       }
-      this.update();
+      this.render();
       d3.event.stopImmediatePropagation();
       d3.event.preventDefault();
       return;
@@ -588,7 +590,7 @@ export class PartitionDiagram {
       } else {
         this.magnify(d);
       }
-      this.update();
+      this.render();
     } else {
       if (this.pop_up){
         this.remove_pop_up();

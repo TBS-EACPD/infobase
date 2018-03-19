@@ -6,7 +6,6 @@ export class PartitionDataWrapper {
       node.open = true;
       node.how_many_to_show = function(_node){
         if (_node.children.length <= 2){ return [_node.children, []] }
-        _.last(_node.ancestors())
         const show = [_.head(_node.children)];
         const hide = _.tail(_node.children);
         const unhide = _.filter(hide, __node => __node.value > hierarchy.value/100);

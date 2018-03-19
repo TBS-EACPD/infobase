@@ -176,7 +176,7 @@ export class PartitionSubApp {
       alternate_data_wrapper_node_rules :
       this.current_perspective.data_wrapper_node_rules;
 
-    this.diagram.render({
+    this.diagram.configure_then_render({
       data: hierarchy,
       data_wrapper_node_rules: data_wrapper_node_rules,
       dont_fade: this.dont_fade,
