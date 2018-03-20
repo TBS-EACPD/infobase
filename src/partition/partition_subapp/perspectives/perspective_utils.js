@@ -49,4 +49,9 @@ const data_types = [
   }, 
 ];
 
-export { get_common_popup_options, wrap_in_brackets, formats_by_data_type, data_types };
+export { 
+  get_common_popup_options, 
+  wrap_in_brackets, 
+  formats_by_data_type, 
+  data_types,
+};

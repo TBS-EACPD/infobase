@@ -33,6 +33,12 @@ import { data_types } from './perspective_utils.js';
 
 const all_data_types = data_types;
 
+// Should explain this, it's mildly hacky.
+// The perspectives are full of implicit loading dependencies on tables (and subjects and text, but ensuring tables have loaded is enough), 
+// so each perspective can't just be evaluated whenever. Right now PartitionRoute is the place that ingests all the perspectives,
+// and all table dependencies are ensured to have loaded there (from a hardcoded list).
+// Best would be if each perspective explicitly handled loading dependencies, or at least declared them so that the list in 
+// PartitionRoute didn't have to be hard coded. Fix is a todo
 const get_all_perspectives = () => {
   return [
     make_dept_exp_perspective(),
