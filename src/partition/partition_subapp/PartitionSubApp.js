@@ -59,13 +59,15 @@ export class PartitionSubApp {
       })
       .value();
 
+    const sorted_data_types_options = _.sortBy(this.all_data_types, data_type => data_type.id === initial_data_type_id ? -Infinity : Infinity);
+
     this.container.select(".__partition__")
       .insert("div", ":first-child")
       .classed("partition-controls", true)
       .html(
         text_maker("partition_controls",{
           perspective_options: current_perspective_options, 
-          data_type_options: this.all_data_types, 
+          data_type_options: sorted_data_types_options, 
           search: true, 
         })
       );
