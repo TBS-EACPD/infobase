@@ -16,6 +16,8 @@ const {
 
 const { load_footnotes_bundle } = require('../models/populate_footnotes.js');
 
+const { BudgetMeasure } = require('../models/subject.js'); 
+const { load_budget_measures } = require('../models/populate_budget_measures.js');
 
 // given an array of tables, returns a promise when they are all loaded.
 function load(table_objs){
@@ -35,6 +37,7 @@ function ensure_loaded({
   subject_level, 
   results, 
   subject, 
+  subject_name,
   require_result_counts, 
   footnotes_for: footnotes_subject,
 }){
@@ -86,6 +89,10 @@ function ensure_loaded({
       .value()
   );
 
+  const should_load_budget_measures = (
+    subject_name === "BudgetMeasure" &&
+    _.isEmpty(BudgetMeasure.get_all())
+  );
 
   const results_prom = (
     should_load_results ?
@@ -104,12 +111,19 @@ function ensure_loaded({
     load_footnotes_bundle(footnotes_subject) :
     $.Deferred().resolve()
   );
+
+  const budget_measures_prom = (
+    should_load_budget_measures ?
+    load_budget_measures() :
+    $.Deferred().resolve()
+  );
   
   return $.when(
     load(table_set),
     results_prom,
     result_counts_prom,
-    footnotes_prom
+    footnotes_prom,
+    budget_measures_prom
   );
 
 }

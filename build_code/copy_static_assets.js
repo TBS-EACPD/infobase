@@ -67,9 +67,6 @@ const common_lookups = _.map(
     'ministries.csv',
     'inst_forms.csv',
     'url_lookups.csv',
-
-    'budget_measure_lookups.csv',
-    'budget_measure_allocations.csv',
   ], 
   public_dir_prefixer 
 );
@@ -147,11 +144,19 @@ var csv_from_table_names = function(table_ids){
   });
 };
 
+const other_csvs = _.map(
+  [
+    'budget_measure_allocations.csv',
+    'budget_measure_lookups.csv',
+  ],
+  public_dir_prefixer
+);
+
 var IB = {
   name: 'InfoBase',
   lookups_en  : common_lookups.concat(common_lookups_en),
   lookups_fr  : common_lookups.concat(common_lookups_fr),
-  csv: csv_from_table_names(IB_tables),
+  csv: csv_from_table_names(IB_tables).concat(other_csvs),
   png: common_png,
   js: external_deps_names,
   other: [ 'src/robots/robots.txt','src/common_css/container-page.css'],

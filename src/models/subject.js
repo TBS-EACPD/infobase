@@ -524,7 +524,6 @@ class BudgetMeasure extends common(){
     super();
     this.id = id;
     this.name = name;
-    this.description = "";
     this.orgs = _.map(allocations, allocation => allocation[1]);
     this.allocations = allocations; 
   }
