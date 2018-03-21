@@ -6,7 +6,7 @@ const parse_csv_string = csv_string => _.tail(d3.csvParseRows($.trim(csv_string)
 const load_csv = csv_name => (
   window.binary_download && !window.isIE() ? 
     fetch_and_inflate(`csv/${csv_name}.csv_min.html`) :
-    $.ajax({ url: `csv/${csv_name}.html` })   
+    $.ajax({ url: `csv/${csv_name}.csv` })   
 ).then( csv_string => parse_csv_string(csv_string) );
 
 const populate_budget_measures = (budget_measures, budget_measure_allocations) => {
