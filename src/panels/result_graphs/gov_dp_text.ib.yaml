@@ -37,28 +37,16 @@ gov_results_intro_text:
 
     <strong>7 des 83 organisations qui doivent déposer un plan ministériel ont amorcé la production de rapports pour l'exercice 2017-2018 selon la nouvelle formule.</strong>
 
-gov_paa_title:
-  transform: [handlebars,markdown]
-  text: |
-    {{gl_title "MRRS"}} ({{gl_tt (gt "PAA") "PAA"}})
 
-gov_paa_text:
+
+gov_dp_text:
   transform: [handlebars,markdown]
   en: |
-    To find a specific organization that report under the old [{{gt "MRRS"}}](http://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=18218) and learn more about its planned results, search a complete list of organizations in the [Explorer](#resource-explorer).
+    Starting in April 2018, all organizations have migrated to a new {{gl_tt "reporting structure" "DRF"}} based on results. 
+    
+    Organization group their **programs** and **{{gl_tt "departmental results" "DR"}}** by their **{{gl_tt "Core Responsibilities" "CR"}}**. In addition, programs also have {{gl_tt "results" "PO"}}. Progress for each result is measured by {{gl_tt "indicator targets" "IND_RESULT"}}. 
+
+
+    This year, organizations have **1293** results to achieve, measured by **2312** indicators. Assessed performance against these indicators will be reported in Fall 2019.
   fr: |
-    Pour trouver une organisation précise qui rend compte aux termes de l'ancienne [{{gt "MRRS"}}](http://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=18218) et en savoir plus sur ses résultats escomptés, chercher une liste complète des organisations dans [l'explorateur](#resource-explorer).
-
-
-gov_drf_title:
-  transform: [handlebars,markdown]
-  text: |
-    {{gl_title "POL_RES"}} ({{gl_tt (gt "DRF") "DRF"}})
-
-
-gov_drf_text:
-  transform: [handlebars,markdown]
-  en: |
-    The following organizations report under the new [{{gl_title "POL_RES"}}](https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300). You can simply click on the name of an organization to learn more on their planned results.
-  fr: |
-    Les organisations suivantes rendent compte aux termes de la nouvelle [politique sur les résultats](https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300). Il suffit de cliquer sur le nom d'une organisation pour en savoir plus sur ses résultats escomptés. 
+    En Avril 2018, les organisations du gouvernement on 
