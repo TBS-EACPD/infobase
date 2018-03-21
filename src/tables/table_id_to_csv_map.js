@@ -21,19 +21,19 @@ exports = module.exports = {
     url: "estimates_votestat.csv",
   },
   "table9":{
-    url:"table9.csv",
+    url:"employee_type.csv",
   },
   "table10":{ 
-    url:"table10.csv",
+    url:"employee_region.csv",
   },
   "table11":{ 
-    url:"table11.csv",
+    url:"employee_age_group.csv",
   },
   "table12":{ 
     url: "program_ftes.csv",
   },
   "table112":{
-    url: "LED_TABLE112.csv",
+    url: "employee_ex_lvl.csv",
   },
   "table300": { 
     url: "program_vote_stat.csv",
@@ -42,12 +42,12 @@ exports = module.exports = {
     url: "program_sobjs.csv",
   },
   "table302": { 
-    url: "ENT_TABLE302.csv",
+    url: "employee_gender.csv",
   },
   "table303": {
-    url:"ENT_TABLE303.csv",
+    url:"employee_fol.csv",
   },
   "table304" :{
-    url: "ENT_TABLE304.csv",
+    url: "employee_avg_age.csv",
   },
 };
