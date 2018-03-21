@@ -161,10 +161,6 @@ class HorizontalStatusTable extends React.Component {
               <TM k="targets_to_achieve_future_and_ongoing" />
             </th>
 
-            <th className="center-text" role="col">
-              <TM k="targets_to_achieve_other" />
-            </th>
-
           </tr>
         </thead>
         <tbody>
@@ -176,7 +172,7 @@ class HorizontalStatusTable extends React.Component {
                 </a>
               </td> 
 
-              {_.map(['drr16_past_total', 'drr16_future_total', 'drr16_other_total'], status => 
+              {_.map(['drr16_past_total', 'drr16_future_total'], status => 
                 <td key={status} className="right_number">
                   {counts[status]}
                 </td>

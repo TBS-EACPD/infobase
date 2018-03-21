@@ -88,12 +88,8 @@ future_na:
   fr: Non disponible/ne s'applique plus
 
 
-icon_array_past_header:
+results_icon_array_title:
   transform: [handlebars]
-  en: Targets to be achieved by March 31, 2017
-  fr: Cibles à atteindre au plus tard le 31 mars 2017
-
-
-icon_array_future_header:
-  en: Targets to be achieved after March 31, 2017
-  fr: Cicles Permanent ou à atteindre après le 31 mars 2017
+  en: |
+    {{pa_last_year}} Performance Indicators
+  fr: Indicateurs de performance {{pa_last_year}}

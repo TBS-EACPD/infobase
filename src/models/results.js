@@ -383,10 +383,6 @@ const status_key_to_icon_key = {
   future_not_avail: 'not_appl',
   future_not_appl: 'not_appl',
 
-  other_success: 'success',
-  other_failure: 'failure',
-  other_not_appl: 'not_appl',
-  other_not_avail: 'not_avail',
 };
 
 

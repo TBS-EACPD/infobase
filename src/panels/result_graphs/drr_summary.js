@@ -46,11 +46,6 @@ const status_keys_to_icon_keys = {
   future_failure: 'fail',
   future_not_appl: 'na',
   future_not_avail: 'na',
-
-  other_success: 'pass',
-  other_failure: 'fail',
-  other_not_appl: 'na',
-  other_not_avail: 'na',
 };
 
 
@@ -148,8 +143,8 @@ const StatusGrid = props => {
 
     const period_title= (
       period === "past" ?
-      text_maker("icon_array_past_header") :
-      text_maker("icon_array_future_header")
+      text_maker("targets_to_achieve_past") :
+      text_maker("targets_to_achieve_future_and_ongoing")
     );
 
     return {
@@ -201,9 +196,12 @@ const StatusGrid = props => {
 
   return (
     <div>
+      <div className="h4">
+        <TM k="results_icon_array_title" />
+      </div>
       {_.map( to_visualize, ({ viz_data, legend_data, title },ix) => 
         <div key={ix}>
-          <div className="h4">
+          <div className="h5">
             {title}
           </div>
           <MiniLegend items={legend_data}  />

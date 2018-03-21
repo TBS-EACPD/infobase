@@ -269,19 +269,6 @@ result_statuses:
     en: Not available
     fr: Non disponible
 
-  other_success:
-    en: Met
-    fr: Cible atteinte
-  other_failure:
-    en: Attention required (past due)
-    fr: Attention requise (échu)
-  other_not_appl:
-    en: No longer applicable
-    fr: Ne s'applique plus
-  other_not_avail:
-    en: No longer applicable
-    fr: Ne s'applique plus
-
 
 result_simple_statuses:
   success:

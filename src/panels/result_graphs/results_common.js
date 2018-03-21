@@ -124,10 +124,6 @@ const row_to_drr_status_counts = ({
   drr16_indicators_future_not_appl: future_not_appl,
   drr16_indicators_future_not_avail: future_not_avail,
 
-  drr16_indicators_other_success: other_success,
-  drr16_indicators_other_failure: other_failure,
-  drr16_indicators_other_not_appl: other_not_appl,
-  drr16_indicators_other_not_avail: other_not_avail,
 }) => ({
   past_success,
   past_failure,
@@ -139,10 +135,6 @@ const row_to_drr_status_counts = ({
   future_not_avail,
   future_not_appl,
 
-  other_success,
-  other_failure,
-  other_not_avail,
-  other_not_appl,
 });
 
 
