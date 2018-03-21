@@ -391,7 +391,13 @@ FOL:
 employee_gender:
   en: Employee Gender
   fr: Employés par sexe
-  
+budget_measure:
+  en: Budget Measure
+  fr: TODO
+budget_measures:
+  en: Budget Measures
+  fr: Mesures budgétaires
+
 #######################################
 #  data type titles
 #######################################

@@ -7,6 +7,7 @@ const {
   CRSO,
   Minister,
   InstForm,
+  BudgetMeasure,
 } = require("./subject");
 const { GlossaryEntry } = require('./glossary.js');
 const { fetch_and_inflate } =require('../core/utils.js');
@@ -61,6 +62,7 @@ function process_lookups(data){
 
   populate_global_footnotes(data.global_footnotes);
 
+  populate_budget_measures(data["budget_measure_lookups.csv"], data["budget_measure_allocations.csv"]);
 };
 
 const url_id = num => `_${num}`; //make sure the regular keys from the pipeline aren't interpreted as array indices
@@ -320,3 +322,15 @@ function populate_program_tag_linkages(programs_m2m_tags){
   }); 
 };
 
+function populate_budget_measures(budget_measures, budget_measure_allocations){
+  const name_col_index = window.lang === "en" ? 1 : 2;
+  const budget_allocations_by_measure = _.groupBy(budget_measure_allocations, row => row[0]);
+
+  _.each(budget_measures, row => {
+    BudgetMeasure.create_and_register({
+      id: row[0],
+      name: row[name_col_index],
+      allocations: budget_allocations_by_measure[row[0]],
+    });
+  }); 
+}

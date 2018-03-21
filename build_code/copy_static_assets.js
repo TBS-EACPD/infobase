@@ -67,6 +67,9 @@ const common_lookups = _.map(
     'ministries.csv',
     'inst_forms.csv',
     'url_lookups.csv',
+
+    'budget_measure_lookups.csv',
+    'budget_measure_allocations.csv',
   ], 
   public_dir_prefixer 
 );
@@ -176,7 +179,7 @@ function get_index_pages(){
     },
     {
       file_prefix: "index-basic",
-      en: a11y_template_func(_.assign({}, en_lang_lookups, { script_url: en_lang_lookups.a11y_script_url, other_lang_href: en_lang_lookups.a11y_other_lang_href, is_a11y_mode: true  })),
+      en: a11y_template_func(_.assign({}, en_lang_lookups, { script_url: en_lang_lookups.a11y_script_url, other_lang_href: en_lang_lookups.a11y_other_lang_href, is_a11y_mode: true })),
       fr: a11y_template_func(_.assign({}, fr_lang_lookups, { script_url: fr_lang_lookups.a11y_script_url, other_lang_href: fr_lang_lookups.a11y_other_lang_href, is_a11y_mode: true })),
     },
   ];
