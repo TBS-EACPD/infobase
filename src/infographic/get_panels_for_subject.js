@@ -15,7 +15,6 @@ import "../panels/people/employee_totals";
 import "../panels/people/employee_type";
 import "../panels/people/employee_prov";
 import "../panels/people/employee_age";
-import "../panels/people/employee_occ_category";
 import "../panels/people/employee_executive_level";
 import "../panels/people/employee_gender";
 import "../panels/people/employee_fol";
@@ -65,7 +64,6 @@ const get_people_panels = subject => {
     "employee_prov",
     "employee_type",
     "employee_age",
-    //"employee_occ_category",
     //"employee_executive_level",
     //"employee_fol",
     //"employee_gender",

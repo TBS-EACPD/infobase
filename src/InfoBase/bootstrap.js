@@ -37,7 +37,6 @@ const table_defs = [
   require("../tables/table10/table10").default,
   require("../tables/table11/table11").default,
   require("../tables/table12/table12"),
-  //require("../tables/table111/table111").default,
   //require("../tables/table112/table112").default,
   require('../tables/table300/table300.js'), //prog_by_vote/stat
   //require('../tables/table302/table302').default,
