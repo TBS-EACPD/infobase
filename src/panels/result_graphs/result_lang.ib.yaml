@@ -256,3 +256,8 @@ filter_results:
 all_drrs_link:
   en: https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html 
   fr: https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement.html
+
+
+unspecified_date_to_achieve:
+  en: Unspecified
+  fr: Non spécifié

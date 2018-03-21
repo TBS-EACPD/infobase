@@ -356,7 +356,7 @@ class Indicator {
     } else if(_.nonEmpty(target_year)){ //target_year === "other" | "ongoing"
       return text_maker(target_year);
     } else {
-      return text_maker("other");
+      return text_maker("unspecified_date_to_achieve");
     }
   }
   get icon_key(){

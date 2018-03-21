@@ -60,8 +60,8 @@ const sub_to_node = (sub,doc) => ({
   data: {
     name: sub.name,
     resources: {
-      ftes: doc === 'drr16' ? sub.fte_pa_last_year : sub.fte_planning_year_1,
-      spending: doc === 'drr16' ? sub.spend_pa_last_year : sub.spend_planning_year_1,
+      ftes: (doc === 'drr16' ? sub.fte_pa_last_year : sub.fte_planning_year_1) || 0,
+      spending: (doc === 'drr16' ? sub.spend_pa_last_year : sub.spend_planning_year_1) || 0,
     },
     description: sub.description,
     notes: sub.resource_notes(doc),
