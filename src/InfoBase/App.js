@@ -15,6 +15,7 @@ import { IgocExplorer } from "../igoc_explorer/igoc_explorer.js";
 import { ResourceExplorer } from "../resource_explorer/resource-explorer.js";
 import { InfoGraph } from '../infographic/infographic.js';
 import { PartitionRoute } from '../partition/partition_subapp/PartitionRoute.js';
+import { BudgetMeasuresRoute } from '../partition/budget_measures_subapp/BudgetMeasuresRoute.js';
 import { Glossary } from '../glossary/glossary.js';
 import { BubbleExplore } from '../dept_explore/dept_explore.js';
 import { ReportBuilder } from '../rpb/index.js';
@@ -46,6 +47,7 @@ export class App extends React.Component {
           <Route path="/orgs/:level/:subject_id/infograph/:bubble?/" component={InfoGraph} />
           <Route path="/glossary/:active_key?" component={Glossary} />
           <Route path="/partition/:perspective?/:data_type?" component={PartitionRoute} />
+          <Route path="/budget-measures" component={BudgetMeasuresRoute} />
           <Route path="/explore-:perspective?" component={BubbleExplore} />
           <Route path="/rpb/:config?" component={ReportBuilder} />
           <Route path="/about" component={About} />
