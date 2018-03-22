@@ -1,9 +1,7 @@
 import { PartitionDiagram } from '../partition_diagram/PartitionDiagram.js';
-import { formats } from '../../core/format.js';;
+import { formats } from '../../core/format.js';
 
-const hierarchy_factory = (first_column) => {
-  // TODO, probably move it to its own module, going to be a lot of data plumbing related to this
-}
+import { budget_measures_hierarchy_factory } from './budget_measures_hierarchy_factory.js';
 
 const formatter = node_data => " (" + formats.compact1(node_data.__value__) + ")";
 
@@ -15,7 +13,7 @@ const popup_template = node_data => {
 
 const update_diagram = (diagram, props) => {
   diagram.configure_then_render({
-    data: hierarchy_factory(props.first_column),
+    data: budget_measures_hierarchy_factory(props.first_column),
     formatter: formatter,
     root_text_func: root_text_func,
     popup_template: popup_template,

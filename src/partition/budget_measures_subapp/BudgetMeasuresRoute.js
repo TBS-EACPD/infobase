@@ -13,10 +13,10 @@ export class BudgetMeasuresRoute extends React.Component {
     this.state = {loading: true};
   }
   componentWillMount(){
-    //const first_column = this.props.match.params.first_column;
-    //if (first_column !== "TODO: check for valid first column option"){
-    //  this.props.history.push('/budget-measures/TODO default column route')
-    //}
+    const first_column = this.props.match.params.first_column;
+    if (first_column !== "budget-measure" || first_column !== "dept"){
+      this.props.history.push('/budget-measures/dept')
+    }
   }
   componentDidMount(){
     ensure_loaded({
