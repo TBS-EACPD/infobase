@@ -4,8 +4,6 @@ const absolute_value_sort = (a,b) => - ( Math.abs(a.value) - Math.abs(b.value) )
 
 
 const budget_measure_first_hierarchy_factory = () => {
-  const distinct_root_identifier = (new Date).getTime();
-
   return d3.hierarchy(Subject.gov,
     node => {
       if (node.is("gov")){
@@ -15,7 +13,7 @@ const budget_measure_first_hierarchy_factory = () => {
       }
     })
     .eachAfter(node => {
-      post_traversal_value_set(node, distinct_root_identifier);
+      post_traversal_value_set(node);
     })
     .sort(absolute_value_sort);
 }

@@ -7,7 +7,6 @@ import {
   absolute_value_sort,
   alphabetic_name_sort,
   get_glossary_entry,
-  get_id_ancestry,
   post_traversal_search_string_set,
 } from './data_hierarchy_utils';
 
@@ -59,8 +58,7 @@ const orgs_to_inst_form_nodes = (orgs) => {
     .value();
 }
 
-const org_info_post_traversal_rule_set = (node, data_type, distinct_root_identifier) => {
-  node.id_ancestry = get_id_ancestry(distinct_root_identifier, node);
+const org_info_post_traversal_rule_set = (node, data_type) => {
   if ( node.data.is("dept") ){
     node[data_type] = node.value = node.data.value = 1;
   } else {
@@ -70,8 +68,6 @@ const org_info_post_traversal_rule_set = (node, data_type, distinct_root_identif
 }
 
 const create_org_info_ministry_hierarchy = function(data_type) {
-  const distinct_root_identifier = (new Date).getTime();
-
   return d3.hierarchy(Subject.gov,
     node => {
       if (node.is("gov")) {
@@ -83,7 +79,7 @@ const create_org_info_ministry_hierarchy = function(data_type) {
       }
     })
     .eachAfter(node => {
-      org_info_post_traversal_rule_set(node, data_type, distinct_root_identifier);
+      org_info_post_traversal_rule_set(node, data_type);
       post_traversal_search_string_set(node);
     })
     .sort( (a, b) => {
@@ -96,8 +92,6 @@ const create_org_info_ministry_hierarchy = function(data_type) {
 }
 
 const create_org_info_inst_form_hierarchy = function(data_type, grandparent_inst_form_group) {
-  const distinct_root_identifier = (new Date).getTime();
-
   return d3.hierarchy(Subject.gov,
     node => {
       if ( node.is("gov") ) {
@@ -112,7 +106,7 @@ const create_org_info_inst_form_hierarchy = function(data_type, grandparent_inst
       }
     })
     .eachAfter(node => {
-      org_info_post_traversal_rule_set(node, data_type, distinct_root_identifier);
+      org_info_post_traversal_rule_set(node, data_type);
       post_traversal_search_string_set(node);
     })
     .sort( (a, b) => {

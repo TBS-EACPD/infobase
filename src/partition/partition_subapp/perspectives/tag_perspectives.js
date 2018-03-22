@@ -18,8 +18,6 @@ import {
 
 
 const create_tag_hierarchy = function(tag_scheme, data_type) {
-  const distinct_root_identifier = (new Date).getTime();
-
   const hierarchy = d3.hierarchy(Subject.Tag.tag_roots[tag_scheme],
     node => {
       if (node.is("tag")){
@@ -27,7 +25,7 @@ const create_tag_hierarchy = function(tag_scheme, data_type) {
       }
     })
     .eachAfter(node => {
-      post_traversal_value_set(node, data_type, distinct_root_identifier);
+      post_traversal_value_set(node, data_type);
       post_traversal_search_string_set(node);
     })
     .sort( absolute_value_sort );

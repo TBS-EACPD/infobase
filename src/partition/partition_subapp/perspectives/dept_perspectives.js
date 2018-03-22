@@ -17,8 +17,6 @@ import {
 // Would like to change the use of dept in this perspective to "ministry", but the use of dept is grandfathered in to the route itself...
 
 const create_ministry_hierarchy = function(data_type, skip_crsos = true){
-  const distinct_root_identifier = (new Date).getTime();
-
   return d3.hierarchy(Subject.gov,
     node => {
       if (node.is("gov")){
@@ -36,7 +34,7 @@ const create_ministry_hierarchy = function(data_type, skip_crsos = true){
       } 
     })
     .eachAfter(node => {
-      post_traversal_value_set(node, data_type, distinct_root_identifier);
+      post_traversal_value_set(node, data_type);
       post_traversal_search_string_set(node);
     })
     .sort(absolute_value_sort);

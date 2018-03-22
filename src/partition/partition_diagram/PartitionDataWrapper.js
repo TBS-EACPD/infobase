@@ -1,5 +1,6 @@
 export class PartitionDataWrapper {
   constructor(hierarchy, alternate_data_wrapper_node_rules){
+    const distinct_root_identifier = (new Date).getTime();
 
     const default_data_wrapper_node_rules = (node) => {
       node.__value__ = node.value;
@@ -15,8 +16,17 @@ export class PartitionDataWrapper {
 
     const data_wrapper_node_rules = alternate_data_wrapper_node_rules ? alternate_data_wrapper_node_rules : default_data_wrapper_node_rules;
 
+    const get_id_ancestry = (node) => {
+      if (node.parent && !_.isUndefined(node.parent.data.id)) {
+        return node.data.id + '-' + get_id_ancestry(node.parent);
+      } else {
+        return "root:" + distinct_root_identifier;
+      }
+    }
+
     hierarchy
       .each( node => data_wrapper_node_rules(node) )
+      .each( node => node.id_ancestry = get_id_ancestry(node) )
       .each( node => node.children = this.process_node_children_for_compression(node) );
 
     this.root = hierarchy;

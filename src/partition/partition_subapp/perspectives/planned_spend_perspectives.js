@@ -8,7 +8,6 @@ import { PartitionPerspective } from './PartitionPerspective.js';
 import {
   absolute_value_sort,
   get_glossary_entry,
-  get_id_ancestry,
   post_traversal_search_string_set,
 } from './data_hierarchy_utils.js';
 
@@ -257,7 +256,7 @@ const get_rpb_subject_code_from_context = (node, presentation_scheme) => {
   }
 }
 
-const planned_spending_post_traversal_rule_set = (node,data_type,distinct_root_identifier,presentation_scheme) => {
+const planned_spending_post_traversal_rule_set = (node,data_type, presentation_scheme) => {
   const table8 = Table.lookup('table8');
   
   const default_rpb_link_options = { 
@@ -270,8 +269,6 @@ const planned_spending_post_traversal_rule_set = (node,data_type,distinct_root_i
     preferDeptBreakout: true,
     descending: false,
   }
-
-  node.id_ancestry = get_id_ancestry(distinct_root_identifier,node);
 
   if ( node.data.is("vs_type") || node.data.is("est_type") || node.data.is("stat_item") ){
     node[data_type] = node.value = node.data.value;
@@ -297,7 +294,6 @@ const planned_spending_post_traversal_rule_set = (node,data_type,distinct_root_i
 }
 
 const create_planned_spending_hierarchy = function(data_type, presentation_scheme){
-  const distinct_root_identifier = (new Date).getTime();
   set_year_by_presentation_scheme(presentation_scheme);
 
   return d3.hierarchy(Subject.gov,
@@ -314,7 +310,7 @@ const create_planned_spending_hierarchy = function(data_type, presentation_schem
       }
     })
     .eachAfter(node =>{
-      planned_spending_post_traversal_rule_set(node, data_type, distinct_root_identifier, presentation_scheme);
+      planned_spending_post_traversal_rule_set(node, data_type, presentation_scheme);
       post_traversal_search_string_set(node);
     })
     .sort(absolute_value_sort);

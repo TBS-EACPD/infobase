@@ -8,7 +8,6 @@ import { PartitionPerspective } from './PartitionPerspective.js';
 import {
   absolute_value_sort,
   get_glossary_entry,
-  get_id_ancestry,
   post_traversal_search_string_set,
 } from './data_hierarchy_utils.js'
 
@@ -29,8 +28,6 @@ const mock_model = function(id, name, description, type, extra_attrs={}){
 }
 
 const create_spend_type_hierarchy = function(){
-  const distinct_root_identifier = (new Date).getTime();
-
   return d3.hierarchy(Subject.gov,
     node => {
       let _mock_model;
@@ -101,7 +98,6 @@ const create_spend_type_hierarchy = function(){
       }
     })
     .eachAfter(node => {
-      node.id_ancestry = get_id_ancestry(distinct_root_identifier, node);
       if ( node.data.is("program_fragment") ){
         node.exp = node.value = node.data.value;
       } else {
