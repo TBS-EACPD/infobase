@@ -1,4 +1,6 @@
 import get_home_content from './home-data.js';
+import { log_standard_event } from '../core/analytics.js';
+
 require('./home.scss');
 require('./home-pngs.css');
 
@@ -169,6 +171,14 @@ const HomeLayout = props => (
           include_glossary={true}
           org_scope="orgs_with_data_with_gov"
           href_template={ general_href_for_item }
+          onNewQuery={ query => { 
+            log_standard_event({
+              SUBAPP: "home",
+              SUBJECT_GUID: null, 
+              MISC1: "home_search",
+              MISC2: query,
+            });
+          }}
         />
       </div></div>
 
