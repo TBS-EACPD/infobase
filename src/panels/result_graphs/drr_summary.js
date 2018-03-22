@@ -56,6 +56,7 @@ const MiniLegend = ({ items }) => (
       justifyContent: "flex-start",
       flexWrap: "wrap",
       fontSize: "0.8em",
+      marginBottom: "5px",
     }}
   >
     {_.map(items, ({label, id, className}) =>
@@ -65,14 +66,14 @@ const MiniLegend = ({ items }) => (
           display: "flex",
           justifyContent: "flex-start",
           alignItems: "center",
-          margin: "5px 5px 5px 0",
+          margin: "5px 15px 5px 0",
         }}
       >
         <div 
           style={{
             width: "20px",
             height: "20px",
-            marginRight: "10px",
+            marginRight: "5px",
           }}
           className={className}
         />
