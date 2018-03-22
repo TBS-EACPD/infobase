@@ -17,11 +17,6 @@ export class PartitionSubApp {
     this.current_perspective_id = initial_perspective_id;
     this.current_data_type = initial_data_type_id;
  
-
-    container.append("div")
-      .classed("accessible sr-only", true)
-      .html( text_maker("partition_sr_only_content") );
-
     // A negative margin-left value is explicitly set, and kept updated, on .partition-container so that the 
     // extra wide partition area can effectively escape the narrow main.container area, which we're forced in 
     // to by the Canada.ca banner/WET. Styling this would be so much easier without that...
@@ -94,8 +89,6 @@ export class PartitionSubApp {
         this.add_intro_popup.call(this);
       }
     });
-
-    this.container.select(".accessible.sr-only").html(text_maker("partition_sr_only_content"));
 
     this.update();
   }
