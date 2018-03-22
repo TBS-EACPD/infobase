@@ -3,7 +3,7 @@ import { formats } from '../../core/format.js';
 
 import { budget_measures_hierarchy_factory } from './budget_measures_hierarchy_factory.js';
 
-const formatter = node_data => " (" + formats.compact1(node_data.__value__) + ")";
+const formatter = node_data => " (" + formats.compact1(node_data.__value__*1000000) + ")";
 
 const root_text_func = root_value => "Text TODO" //text_maker("budget_measures_partition_root", {root_value});
 
@@ -29,8 +29,8 @@ export class BudgetMeasuresPartition extends React.Component {
     this.diagram = new PartitionDiagram(this.container, {height: 700});
     update_diagram(this.diagram, this.props);
   }
-  shouldComponentUpdate(){
-    update_diagram(this.diagram, this.props);
+  shouldComponentUpdate(nextProps){
+    update_diagram(this.diagram, nextProps);
     return false;
   }
   render(){
