@@ -7,7 +7,7 @@ import { text_maker } from "../../models/text";
 
 export class PartitionRoute extends React.Component {
   constructor(){
-    super()
+    super();
     this.state = {loading: true};
     this.url_update_callback = (perspective, data_type) => {
       const new_path = `partition/${perspective}/${data_type}`;
