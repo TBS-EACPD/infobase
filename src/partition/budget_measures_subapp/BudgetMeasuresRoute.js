@@ -37,13 +37,19 @@ export class BudgetMeasuresRoute extends React.Component {
         route_key="budget-measures"
       >
         { this.state.loading && <SpinnerWrapper ref="spinner" scale={4} /> }
-        { !this.state.loading &&
+        { !this.state.loading && !window.is_a11y_mode &&
           <div className="budget-measures">
             <BudgetMeasuresTop/>
             <div className="budget-measures-partition-and-controls">
               <BudgetMeasuresControls first_column={first_column} history={this.props.history} />
               <BudgetMeasuresPartition first_column={first_column} />
             </div>
+          </div>
+        }
+        { !this.state.loading && window.is_a11y_mode &&
+          <div className="budget-measures">
+            <BudgetMeasuresTop/>
+            {/* TODO a11y presentation of data, probably just a table */}
           </div>
         }
       </StandardRouteContainer>
