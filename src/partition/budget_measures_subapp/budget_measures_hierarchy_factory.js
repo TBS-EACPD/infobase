@@ -29,16 +29,30 @@ const budget_measure_first_hierarchy_factory = () => {
           ))
         return budgetMeasureNodes;
       } else if (node.type === "budget_measure"){
-        const orgNodes = _.map(node.allocations, allocation_row => {
-          return _.assign(
-            {},
-            Subject.Dept.lookup(allocation_row[1]),
-            { 
-              type: "dept",
-              value: +allocation_row[2],
+        const orgNodes = _.chain(node.allocations)
+          .map(allocation_row => {
+            if (allocation_row[1] === "non_allocated"){
+              return _.assign(
+                {},
+                { 
+                  name: "TODO: non allocated",
+                  description: "TODO",
+                  type: "non_allocated",
+                  value: +allocation_row[2],
+                }
+              );
+            } else {
+              return _.assign(
+                {},
+                Subject.Dept.lookup(allocation_row[1]),
+                { 
+                  type: "dept",
+                  value: +allocation_row[2],
+                }
+              );
             }
-          )
-        });
+          })
+          .value();
         return orgNodes;
       }
     })
