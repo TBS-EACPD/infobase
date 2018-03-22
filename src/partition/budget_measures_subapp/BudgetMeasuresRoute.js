@@ -14,7 +14,7 @@ export class BudgetMeasuresRoute extends React.Component {
   }
   componentWillMount(){
     const first_column = this.props.match.params.first_column;
-    if (first_column !== "budget-measure" || first_column !== "dept"){
+    if (first_column !== "budget-measure" && first_column !== "dept"){
       this.props.history.push('/budget-measures/dept')
     }
   }

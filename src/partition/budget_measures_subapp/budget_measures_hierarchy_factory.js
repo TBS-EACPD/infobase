@@ -2,18 +2,45 @@ import * as Subject from '../../models/subject';
 
 const absolute_value_sort = (a,b) => - ( Math.abs(a.value) - Math.abs(b.value) );
 
+const get_total_budget_measure_allocations = () => {
+  return _.chain( Subject.BudgetMeasure.get_all() )
+    .flatMap( budgetMeasure => budgetMeasure.allocations )
+    .reduce( (sum, allocation_row) => sum + (+allocation_row[2]), 0)
+    .value()
+}
 
 const budget_measure_first_hierarchy_factory = () => {
-  return d3.hierarchy(Subject.gov,
+  return d3.hierarchy(
+    {
+      id: "root",
+      type: "root", 
+      value: get_total_budget_measure_allocations(),
+    },
     node => {
-      if (node.is("gov")){
-        return Subject.BudgetMeasure.get_all();
-      } else if ( node.is("budget_measure") ){
-        return _.map( node.orgs, org_id => Subject.Dept.lookup(org_id) );
+      if (node.id === "root"){
+        const budgetMeasureNodes = _.map(Subject.BudgetMeasure.get_all(), 
+          budgetMeasure => _.assign(
+            {},
+            budgetMeasure, 
+            { 
+              type: "budget_measure",
+              value: _.reduce(budgetMeasure.allocations, (sum, allocation_row) => sum + (+allocation_row[2]), 0),
+            }
+          ))
+        return budgetMeasureNodes;
+      } else if (node.type === "budget_measure"){
+        const orgNodes = _.map(node.allocations, allocation_row => {
+          return _.assign(
+            {},
+            Subject.Dept.lookup(allocation_row[1]),
+            { 
+              type: "dept",
+              value: +allocation_row[2],
+            }
+          )
+        });
+        return orgNodes;
       }
-    })
-    .eachAfter(node => {
-      post_traversal_value_set(node);
     })
     .sort(absolute_value_sort);
 }
