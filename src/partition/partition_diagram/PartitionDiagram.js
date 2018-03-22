@@ -151,7 +151,7 @@ export class PartitionDiagram {
         d3.select(this)
           .select("div.partition-content-title")
           .classed("fat", false)
-          .classed("right", d.data.is("compressed"))
+          .classed("right", d.data.type === "compressed")
           .html(html_func);
       }); //reset the calculated heights 
     html_content_join.exit().remove();
@@ -162,7 +162,7 @@ export class PartitionDiagram {
       .each(function(d){
         let sel = d3.select(this);
         
-        if ( ( d.data.is("compressed") && window.isIE() ) || d.value < 0 ){
+        if ( ( d.data.type === "compressed" && window.isIE() ) || d.value < 0 ){
           // partition-right-ie-fix: IE css for flex box and align-item are inconsistent, need an extra div
           // between the .content div and the .partition-content-title div to (partially) fix vertical alignment
 
@@ -171,7 +171,7 @@ export class PartitionDiagram {
 
           sel = sel
             .append("div")
-            .classed("partition-right-ie-fix", d.data.is("compressed") && window.isIE())
+            .classed("partition-right-ie-fix", d.data.type === "compressed" && window.isIE())
             .classed("partition-negative-title-backing", d.value < 0);
         }
           
@@ -179,7 +179,7 @@ export class PartitionDiagram {
           .append("div")
           .attr("tabindex", 0)
           .classed("partition-content-title", true)
-          .classed("right",d.data.is("compressed"))
+          .classed("right", d.data.type === "compressed")
           .html(html_func);
       })
       .attr("class",d => {
