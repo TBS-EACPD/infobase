@@ -1,3 +1,4 @@
+import './tag_panel_text.ib.yaml';
 import {
   charts_index, 
   text_maker,
