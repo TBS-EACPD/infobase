@@ -61,20 +61,16 @@ new PanelGraph({
       .uniqBy()
       .value()
 
-    const { 
-      non_ncr : empl_count_non_ncr, 
-      ncr : empl_count_ncr, 
-    }  = ( 
-      _.chain(table10.prov_code("{{ppl_last_year}}",Gov))
-        .toPairs()
-        .groupBy( ([prov_code, prov_total]) =>  prov_code.startsWith('NCR') ? "ncr" : "non_ncr" )
-        .map( (group, group_name) => [ group_name , d3.sum(_.map(group,1)) ] )
-        .fromPairs()
-        .value()
-    );
 
-    const empl_count_total = empl_count_non_ncr + empl_count_ncr;
-    const empl_count_ncr_ratio =  empl_count_ncr/empl_count_total;
+
+    //People calcs
+    const employee_by_prov = table10.prov_code("{{ppl_last_year}}", Gov);
+    const total_employees = _.chain(employee_by_prov).values().sum().value();
+    const ncr_employees = employee_by_prov.onncr + employee_by_prov.qcncr;
+    const empl_count_ncr_ratio =  ncr_employees/total_employees;
+
+
+
 
     const gov_counts = ResultCounts.get_gov_counts();
 
@@ -114,7 +110,7 @@ new PanelGraph({
       {
         largest_items,
         gov_exp_pa_last_year,
-        empl_count_total,
+        empl_count_total: total_employees,
         empl_count_ncr_ratio,
         num_federal_inst: federal_institutions.length,
         num_ministries: ministries.length,
