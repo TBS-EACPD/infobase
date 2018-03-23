@@ -108,8 +108,8 @@ dept_in_year_estimates_text:
 
 in_year_estimates_title:                                                     
   transform: [handlebars]
-  en: Estimates ({{est_in_year}})
-  fr: Budgets des dépenses ({{est_in_year}})
+  en: Estimates ({{est_last_year_3}} to {{est_next_year}})
+  fr: Budgets des dépenses ({{est_last_year_3}} à {{est_next_year}})
 
 
 
