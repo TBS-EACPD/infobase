@@ -5,8 +5,8 @@ const absolute_value_sort = (a,b) => - ( Math.abs(a.value) - Math.abs(b.value) )
 const get_total_budget_measure_allocations = () => {
   return _.chain( Subject.BudgetMeasure.get_all() )
     .flatMap( budgetMeasure => budgetMeasure.allocations )
-    .reduce( (sum, allocation_row) => sum + (+allocation_row[2]), 0)
-    .value()
+    .reduce( (sum, allocation_row) => sum + (+allocation_row[2]), 0 )
+    .value();
 }
 
 const budget_measure_first_hierarchy_factory = () => {
@@ -26,7 +26,7 @@ const budget_measure_first_hierarchy_factory = () => {
               type: "budget_measure",
               value: _.reduce(budgetMeasure.allocations, (sum, allocation_row) => sum + (+allocation_row[2]), 0),
             }
-          ))
+          ));
         return budgetMeasureNodes;
       } else if (node.type === "budget_measure"){
         const orgNodes = _.chain(node.allocations)
@@ -63,7 +63,7 @@ const budget_measure_first_hierarchy_factory = () => {
 
 const dept_first_hierarchy_factory = () => {
   const budget_measure_allocations_by_org_id = _.chain( Subject.BudgetMeasure.get_all() )
-    .flatMap( budgetMeasure => budgetMeasure.allocations)
+    .flatMap( budgetMeasure => budgetMeasure.allocations )
     .groupBy( allocation_row => allocation_row[1] )
     .value();
    
@@ -110,7 +110,7 @@ const dept_first_hierarchy_factory = () => {
               value: allocation_row[2],
             }
           );
-        })
+        });
         return budgetMeasureNodes;
       }
     })

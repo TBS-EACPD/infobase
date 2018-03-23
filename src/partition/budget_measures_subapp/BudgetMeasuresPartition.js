@@ -10,7 +10,7 @@ const root_text_func = root_value => "Text TODO" //text_maker("budget_measures_p
 const popup_template = node_data => {
   return "TODO" // May want to enact the planned popup template refactor before going forward with this...
 }
-
+ 
 const update_diagram = (diagram, props) => {
   diagram.configure_then_render({
     data: budget_measures_hierarchy_factory(props.first_column),
@@ -35,9 +35,7 @@ export class BudgetMeasuresPartition extends React.Component {
   }
   render(){
     return (
-      <div className="budget-measures-partition">
-        <div ref="container"/>
-      </div>
+      <div className="budget-measures-partition" ref="container"/>
     );
   }
 }
