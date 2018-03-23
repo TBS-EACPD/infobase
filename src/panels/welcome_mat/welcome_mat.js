@@ -120,19 +120,19 @@ const GridRow = props => {
     _key === 'exp' ? 
     <GraphEl
       {...{
-        margin : {top:5,bottom:5,left:55,right:5},
+        margin : {top:5,bottom:5,left:75,right:5},
         height : 200,
         add_xaxis : false,
         hide_gridlines : true,
         ticks,
         colors : graph_color,
-        formater : formats.compact_raw,
+        formater : formats.compact1_raw,
         series : {"0": calcs.exp.graph_data},
       }} 
     /> :
     <GraphEl
       {...{
-        margin : {top:5,bottom:5,left:55,right:5},
+        margin : {top:5,bottom:5,left:75,right:5},
         height : 200,
         add_xaxis : false,
         axis_class : "black",
