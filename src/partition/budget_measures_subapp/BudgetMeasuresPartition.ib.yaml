@@ -1,0 +1,11 @@
+budget_measures_partition_root:
+  transform: [handlebars]
+  en: |
+    Budget 2018 Measures allocate
+    <p class='amount'>
+      {{rawfmt_compact1 root_value}}
+    </p>
+    for
+    <span class='text-nowrap'>{{planning_year_2}}</span>
+  fr: |
+    TODO

@@ -9,6 +9,7 @@ const get_total_budget_measure_allocations = () => {
     .value();
 }
 
+
 const budget_measure_first_hierarchy_factory = () => {
   return d3.hierarchy(
     {
@@ -58,7 +59,6 @@ const budget_measure_first_hierarchy_factory = () => {
     })
     .sort(absolute_value_sort);
 }
-
 
 
 const dept_first_hierarchy_factory = () => {
@@ -116,6 +116,7 @@ const dept_first_hierarchy_factory = () => {
     })
     .sort(absolute_value_sort);
 }
+
 
 export function budget_measures_hierarchy_factory(first_column){
   if (first_column === "budget-measure"){
