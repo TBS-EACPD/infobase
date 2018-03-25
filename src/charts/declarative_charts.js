@@ -5,6 +5,7 @@ const { ordinal_line } = require('./line.js');
 const { create_graph_with_legend, create_a11y_table } = require('../core/charts_index.js');
 const { SafeProgressDonut } = require('./safe_progress_donut.js');
 const { pack } = require("./pack");
+const { circle_pie_chart } = require('./circle_chart.js');
 
 const classNames = require('classnames');
 
@@ -324,6 +325,26 @@ class CirclePack extends React.Component {
   }
 }
 
+class CirclePieChart extends React.Component {
+  render(){
+    return <div ref="graph_area" style={{position:'relative'}} />
+  }
+  _render(){
+    this.graph_instance.render(_.clone(this.props));
+  }
+  componentDidMount(){
+    this.graph_instance = new circle_pie_chart(
+      this.refs.graph_area,
+      _.clone(this.props)
+    );
+    this._render()
+
+  }
+  componentDidUpdate(){
+    this._render();
+  }
+}
+
 module.exports = exports = {
   StackedHbarChart,
   GraphLegend,
@@ -334,5 +355,6 @@ module.exports = exports = {
   TabularPercentLegend,
   SafePie,
   ProgressDonut,
-  CirclePack, 
+  CirclePack,
+  CirclePieChart,
 };

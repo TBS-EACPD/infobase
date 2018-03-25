@@ -107,9 +107,9 @@ const get_dept_panels = subject => {
     financial : _.includes(subject.tables,'table6') && [
       "financial_intro", 
       "welcome_mat",
+      "estimates_in_perspective",
       "historical_auth_exp",
       "in_year_estimates_split",
-      "in_year_estimates",
       "in_year_voted_stat_split",
       "spend_by_so_hist",
       "last_year_g_and_c_perspective",

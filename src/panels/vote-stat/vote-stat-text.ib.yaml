@@ -52,70 +52,6 @@ vote_stat_split_title:
   fr: Division des autorisations votées et législatives ({{pa_last_year}})
 
 
-
-
-
-gov_in_year_estimates_text:
-  transform: [handlebars, markdown]
-  en: |
-   As of the {{est_in_year}} {{last_estimates}}, the government has presented Parliament with planned {{gl_tt "budgetary" 'BUD_EXP'}} expenditure estimates 
-   totaling **{{fmt_compact_written gov_tabled_est_in_year}}**. 
-
-   {{! only to be used when next year's estiamates have just been tabled}}
-   {{#if false}}
-   On {{mains_date}}, the {{est_next_year}} {{gl_tt "Main Estimates" "MAINS"}} were tabled in Parliament outlining **{{fmt_compact_written gov_tabled_est_next_year}}** 
-   in planned spending, **{{changing_by  gov_mains_tabled_diff "fmt_percentage1"}}** from last year.
-
-   {{/if}}
-
-  fr: |
-   En date du {{last_estimates}} {{est_in_year}}, les dépenses {{gl_tt "budgétaires" 'BUD_EXP'}} prévues 
-   présentées par le gouvernement au Parlement s’élèvent à **{{fmt_compact_written gov_tabled_est_in_year}}** de dollars.
-
-   {{! only to be used when next year's estimates have just been tabled}}
-   {{#if false}}
-   Le {{mains_date}}, le {{gl_tt "Budget principal des dépenses" "MAINS"}} de {{est_next_year}} a été déposé au Parlement présentant 
-   **{{fmt_compact_written gov_tabled_est_next_year}}** en dépenses prévues. 
-   Il s'agit d'**{{fr_changing_by  gov_mains_tabled_diff "m" "s" "fmt_percentage1"}}** par rapport à l'année précédente. 
-   {{/if}}
-
-dept_in_year_estimates_text:
-  transform: [handlebars,markdown]
-  en: |
-   As of the {{est_in_year}} {{last_estimates}}, the government has presented Parliament with planned {{gl_tt "budgetary" 'BUD_EXP'}} expenditure estimates
-   totaling **{{fmt_compact_written gov_tabled_est_in_year}}**. Of this amount, **{{fmt_compact_written dept_tabled_est_in_year_estimates}}** will be allocated to **{{subj_name subject}}**.
-
-   {{! only to be used near year end when a main estimates for the following year has been tabled}}
-   {{#if false}}
-   On {{mains_date}}, the {{est_next_year}} {{gl_tt "Main Estimates" "MAINS"}} were tabled in Parliament 
-   outlining **{{fmt_compact_written dept_tabled_est_next_year_estimates}}** 
-   in planned expenditures **{{changing_by  dept_mains_tabled_diff "fmt_percentage1"}}** from last year.
-   
-   {{/if}}
-
-  fr: |
-   En date du {{last_estimates}} {{est_in_year}} , le gouvernement a présenté au Parlement des dépenses budgétaires prévues d'un total de **{{fmt_compact_written gov_tabled_est_in_year}}**. De ce montant, **{{fmt_compact_written dept_tabled_est_in_year_estimates}}** seront attribués à **{{subj_name subject}}**. 
-
-
-   {{! only to be used near year end when a main estimates for the following year has been tabled}}
-   {{#if false}}
-   Le {{mains_date}}, le {{gl_tt "Budget principal des dépenses" "MAINS"}} de {{est_next_year}} a été déposé au 
-   Parlement présentant **{{fmt_compact_written dept_tabled_est_next_year_estimates}}** en dépenses prévues.  
-   Il s'agit d'**{{fr_changing_by  dept_mains_tabled_diff "m" "s" "fmt_percentage1"}}** par rapport à l'année précédente. 
-   
-   {{/if}}
-
-
-in_year_estimates_title:                                                     
-  transform: [handlebars]
-  en: Estimates ({{est_last_year_3}} to {{est_next_year}})
-  fr: Budgets des dépenses ({{est_last_year_3}} à {{est_next_year}})
-
-
-
-
-
-
 in_year_voted_stat_split_title:
   transform: [handlebars]
   en: Voted and Statutory Split ({{est_in_year}})
@@ -206,4 +142,37 @@ dept_in_year_estimates_split_text:
 
 
    Le {{gl_tt "Budget provisoire des dépenses" "INTER_EST"}} pour {{est_next_year}} a été déposé au Parlement le 12 février 2018, demandant l'autorisation de dépenser **{{fmt_compact_written dept_tabled_est_next_year_estimates}}** afin de disposer d'un financement suffisant au début du nouvel exercice. Ce financement vise à soutenir les besoins de l'organisation pour les trois premiers mois de l'exercice.
+
+
+
+estimates_perspective_title:
+  transform: [handlebars]
+  en: Planned Spending in Perspective ({{est_in_year}})
+  fr: Dépenses prévues en perspective ({{est_in_year}})
+
+estimates_perspective_text:
+  transform: [handlebars,markdown]
+  en: |
+   As of the {{est_in_year}} {{last_estimates}}, the government has presented Parliament with planned {{gl_tt "budgetary" 'BUD_EXP'}} expenditure estimates
+   totaling **{{fmt_compact_written gov_tabled_est_in_year}}**. Of this amount, **{{fmt_compact_written dept_tabled_est_in_year_estimates}}** (or **{{fmt_percentage1 (divide dept_tabled_est_in_year_estimates gov_tabled_est_in_year)}}**) will be allocated to **{{subj_name subject}}**.
+
+   {{! only to be used near year end when a main estimates for the following year has been tabled}}
+   {{#if false}}
+   On {{mains_date}}, the {{est_next_year}} {{gl_tt "Main Estimates" "MAINS"}} were tabled in Parliament 
+   outlining **{{fmt_compact_written dept_tabled_est_next_year_estimates}}** 
+   in planned expenditures **{{changing_by  dept_mains_tabled_diff "fmt_percentage1"}}** from last year.
+   
+   {{/if}}
+
+  fr: |
+   En date du {{last_estimates}} {{est_in_year}} , le gouvernement a présenté au Parlement des dépenses budgétaires prévues d'un total de **{{fmt_compact_written gov_tabled_est_in_year}}**. De ce montant, **{{fmt_compact_written dept_tabled_est_in_year_estimates}}** (ou **{{fmt_percentage1 (divide dept_tabled_est_in_year_estimates gov_tabled_est_in_year)}}**) seront attribués à **{{subj_name subject}}**. 
+
+
+   {{! only to be used near year end when a main estimates for the following year has been tabled}}
+   {{#if false}}
+   Le {{mains_date}}, le {{gl_tt "Budget principal des dépenses" "MAINS"}} de {{est_next_year}} a été déposé au 
+   Parlement présentant **{{fmt_compact_written dept_tabled_est_next_year_estimates}}** en dépenses prévues.  
+   Il s'agit d'**{{fr_changing_by  dept_mains_tabled_diff "m" "s" "fmt_percentage1"}}** par rapport à l'année précédente. 
+   
+   {{/if}}
 
