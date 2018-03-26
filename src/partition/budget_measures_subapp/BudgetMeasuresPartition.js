@@ -10,12 +10,23 @@ const year = run_template("{{planning_year_2}}");
 
 const formatter = node => {
   const in_billions = node.__value__ >= 1000;
-  if (in_billions){
-    return " (" + formats.compact1(node.__value__*1000000) + ")";
+  const format = in_billions ? formats.compact1 : formats.compact;
+  return " (" + format(node.__value__*1000000) + ")";
+}
+
+const get_level_headers = (first_column) => {
+  if (first_column === "dept"){
+    return {
+      "1": text_maker("org"),
+      "2": text_maker("budget_measure"),
+    };
   } else {
-    return " (" + formats.compact(node.__value__*1000000) + ")";
+    return {
+      "1": text_maker("budget_measure"),
+      "2": text_maker("org"),
+    };
   }
-};
+}
 
 const root_text_func = root_value => text_maker("budget_measures_partition_root", {root_value: root_value*1000000, year});
 
@@ -48,6 +59,7 @@ const update_diagram = (diagram, props) => {
   diagram.configure_then_render({
     data: budget_measures_hierarchy_factory(props.first_column),
     formatter: formatter,
+    level_headers: get_level_headers(props.first_column),
     root_text_func: root_text_func,
     popup_template: popup_template,
   });

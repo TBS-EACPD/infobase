@@ -86,6 +86,11 @@ const dept_perspective_factory = (data_type) => new PartitionPerspective({
   formater: node_data => wrap_in_brackets(formats_by_data_type[data_type](node_data[data_type])),
   hierarchy_factory: () => create_ministry_hierarchy(data_type),
   data_wrapper_node_rules: dept_data_wrapper_node_rules,
+  level_headers: {
+    "1": text_maker("ministry"),
+    "2": text_maker("org"),
+    "3": text_maker("program"),
+  },
   popup_template: dept_perspective_popup_template,
   root_text_func: root_value => {
     const text_key = data_type === "exp" ? "partition_spending_was" : "partition_fte_was";

@@ -49,7 +49,6 @@ const orgs_to_inst_form_nodes = (orgs) => {
           description: glossary_entry_from_inst_form_type_id(type_id),
           name: InstForm.lookup(type_id).name,
           is: __type__ => __type__ === "inst_form",
-          plural: () => text_maker("type"),
           orgs: orgs,
         }) )
         .value()
@@ -185,6 +184,11 @@ const make_org_info_ministry_perspective = () => new PartitionPerspective({
   hierarchy_factory: () => create_org_info_ministry_hierarchy("org_info"),
   data_wrapper_node_rules: org_info_data_wrapper_node_rules,
   popup_template: org_info_perspective_popup_template,
+  level_headers: { 
+    "1": text_maker("ministry"),
+    "2": text_maker("type"),
+    "3": text_maker("org"),
+  },
   root_text_func: root_value => text_maker("partition_org_info_was", {x: root_value}),
 });
 
@@ -196,6 +200,10 @@ const make_org_info_federal_perspective = () => new PartitionPerspective({
   hierarchy_factory: () => create_org_info_inst_form_hierarchy("org_info", "fed_int_gp"),
   data_wrapper_node_rules: org_info_data_wrapper_node_rules,
   popup_template: org_info_perspective_popup_template,
+  level_headers: {
+    "1": text_maker("type"),
+    "2": text_maker("org"),
+  },
   root_text_func: root_value => text_maker("partition_org_info_federal_orgs_by_inst_form_was", {x: root_value}),
 });
 
@@ -207,6 +215,10 @@ const make_org_info_interests_perspective = () => new PartitionPerspective({
   hierarchy_factory: () => create_org_info_inst_form_hierarchy("org_info", "corp_int_gp"),
   data_wrapper_node_rules: org_info_data_wrapper_node_rules,
   popup_template: org_info_perspective_popup_template,
+  level_headers: {
+    "1": text_maker("type"),
+    "2": text_maker("org"),
+  },
   root_text_func: root_value => text_maker("partition_org_info_interests_by_inst_form_was", {x: root_value}),
 });
 

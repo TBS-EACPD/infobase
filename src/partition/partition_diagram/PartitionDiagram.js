@@ -57,6 +57,8 @@ export class PartitionDiagram {
 
     this.dont_fade = this.options.dont_fade || [];
     
+    this.level_headers = this.options.level_headers || false;
+
     this.popup_template = this.options.popup_template;
 
     this.formatter = this.options.formatter || _.identity;
@@ -118,26 +120,19 @@ export class PartitionDiagram {
 
     this.html.selectAll("div.header").remove();
 
-    this.html.selectAll("div.header")
-      .data(_.keys(levels).sort().reverse())
-      .enter()
-      .filter(d => d!=="0")
-      .append("div")
-      .classed("header", true)
-      .style("left", (d,i) => horizontal_placement_counters[+d]+"px") 
-      .style("width", col_width+"px")
-      .html(d => {
-        const has_plural = _.chain(levels[+d])
-          .map("data")
-          .filter(d => d.plural)
-          .compact()
-          .head()
-          .value();
-        if (has_plural){
-          return has_plural.plural();
-        } 
-        return "";
-      });
+    if (this.level_headers) {
+      this.html.selectAll("div.header")
+        .data(_.keys(levels).sort().reverse())
+        .enter()
+        .filter(d => d!=="0")
+        .append("div")
+        .classed("header", true)
+        .style("left", (d,i) => horizontal_placement_counters[+d]+"px") 
+        .style("width", col_width+"px")
+        .html(d => {
+          return _.has(this.level_headers, d) ? this.level_headers[d] : "";
+        });
+    }
 
     const html_func = this.options.html_func;
 
