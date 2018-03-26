@@ -33,7 +33,7 @@ budget_measure_popup_template:
         {{#if first_column}}
           {{gt "total"}}
         {{else}}
-          {{gt "single_word_for"}} {{parent_name}}
+          {{gt "single_word_for"}} </br> {{parent_name}}
         {{/if}}
       </span>
     </div>
