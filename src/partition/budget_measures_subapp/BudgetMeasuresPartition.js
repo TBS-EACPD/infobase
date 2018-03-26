@@ -2,17 +2,39 @@ import './BudgetMeasuresPartition.ib.yaml';
 
 import { PartitionDiagram } from '../partition_diagram/PartitionDiagram.js';
 import { formats } from '../../core/format.js';
-import { text_maker } from "../../models/text";
+import { text_maker, run_template } from "../../models/text";
 
 import { budget_measures_hierarchy_factory } from './budget_measures_hierarchy_factory.js';
 
+const year = run_template("{{planning_year_2}}");
 
-const formatter = node_data => " (" + formats.compact1(node_data.__value__*1000000) + ")";
+const formatter = node => {
+  const in_billions = node.__value__ >= 1000;
+  if (in_billions){
+    return " (" + formats.compact1(node.__value__*1000000) + ")";
+  } else {
+    return " (" + formats.compact(node.__value__*1000000) + ")";
+  }
+};
 
-const root_text_func = root_value => text_maker("budget_measures_partition_root", {root_value: root_value*1000000});
+const root_text_func = root_value => text_maker("budget_measures_partition_root", {root_value: root_value*1000000, year});
 
-const popup_template = node_data => {
-  return "TODO"; // May want to enact the planned popup template refactor before going forward with this...
+const popup_template = node => {
+  const popup_options = {
+    year,
+    value: node.__value__*1000000,
+    value_is_negative: node.__value__ < 0,
+    parent_name: node.parent.data.name,
+    is_dept: node.data.type === "dept",
+    level: node.data.level,
+    id: node.data.level,
+    name: node.data.name,
+    color: node.color,
+    description: !_.isUndefined(node.data.mandate) && node.data.mandate,
+    first_column: node.depth === 1,
+    focus_text: node.magnified ? text_maker("partition_unfocus_button") : text_maker("partition_focus_button"),
+  };
+  return text_maker("budget_measure_popup_template", popup_options);
 }
 
 

@@ -397,6 +397,15 @@ budget_measure:
 budget_measures:
   en: Budget Measures
   fr: Mesures budgétaires
+allocated:
+  en: Allocated
+  fr: TODO
+is_allocated:
+  en: Is allocated
+  fr: TODO
+see_the_infographic:
+  en: See the Infographic
+  fr: Voir l’infographie
 
 #######################################
 #  data type titles

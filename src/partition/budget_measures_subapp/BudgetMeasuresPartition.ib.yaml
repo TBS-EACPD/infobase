@@ -6,6 +6,59 @@ budget_measures_partition_root:
       {{rawfmt_compact1 root_value}}
     </p>
     for
-    <span class='text-nowrap'>{{planning_year_2}}</span>
+    <span class='text-nowrap'>{{year}}</span>
   fr: |
     TODO
+
+single_word_for:
+  en: for
+  fr: pour
+
+budget_measure_popup_template:
+  transform: [handlebars]
+  text: |
+    <div class='mrgn-bttm-md popup-row-top popup-font-m popup-row-bottom-border'>
+      <span class='stat1 popup-font-l'> 
+        {{year}}
+      </span>
+      <span class='stat1 popup-font-m'>
+        {{gt "allocated"}}
+        {{#if value_is_negative}}
+          <text style='color:red;'>
+            {{fmt_compact1 value}}
+          </text>
+        {{else}}
+          {{fmt_compact1 value}}
+        {{/if}}
+        {{#if first_column}}
+          {{gt "total"}}
+        {{else}}
+          {{gt "single_word_for"}} {{parent_name}}
+        {{/if}}
+      </span>
+    </div>
+    <div class='mrgn-bttm-md popup-row-bottom-border popup-font-xl'>
+      {{name}}
+    </div>
+    {{#if description}}
+      <div class='popup-font-ml'>
+        {{gt "description"}}:
+      </div>
+      <div class='mrgn-bttm-md popup-row-bottom-border popup-decription-text'>
+        {{{description}}}
+      </div>
+    {{/if}}
+    {{#if is_dept}}
+      <a href='#orgs/{{level}}/{{id}}/infograph' 
+        class='btn btn-xs btn-block mrgn-bttm-sm infographic' 
+        style='background-color:{{color}};'>
+        {{gt "see_the_infographic"}}
+      </a>
+    {{/if}}
+    {{#if first_column}} 
+      <a href='#' 
+        class='btn btn-xs btn-block mrgn-bttm-sm magnify'  
+        style='background-color:{{color}};'>
+        {{focus_text}}
+      </a> 
+    {{/if}}

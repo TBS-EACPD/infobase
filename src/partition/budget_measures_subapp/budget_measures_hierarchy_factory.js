@@ -37,7 +37,7 @@ const budget_measure_first_hierarchy_factory = () => {
                 {},
                 { 
                   name: "TODO: non allocated",
-                  description: "TODO",
+                  mandate: "TODO",
                   type: "non_allocated",
                   value: +allocation_row[2],
                 }
@@ -81,7 +81,7 @@ const dept_first_hierarchy_factory = () => {
               {},
               { 
                 name: "TODO: non allocated",
-                description: "TODO",
+                mandate: "TODO",
                 type: "non_allocated",
                 value: _.reduce(allocation_rows, (sum, allocation_row) => sum + (+allocation_row[2]), 0),
                 allocation_rows,
@@ -121,7 +121,7 @@ const dept_first_hierarchy_factory = () => {
 export function budget_measures_hierarchy_factory(first_column){
   if (first_column === "budget-measure"){
     return budget_measure_first_hierarchy_factory();
-  } else if(first_column === "dept"){
+  } else if (first_column === "dept"){
     return dept_first_hierarchy_factory();
   }
 }
