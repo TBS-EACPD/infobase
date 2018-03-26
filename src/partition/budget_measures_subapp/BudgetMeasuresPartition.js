@@ -1,4 +1,5 @@
 import './BudgetMeasuresPartition.ib.yaml';
+import './BudgetMeasuresPartition.scss';
 
 import { PartitionDiagram } from '../partition_diagram/PartitionDiagram.js';
 import { formats } from '../../core/format.js';
@@ -63,16 +64,16 @@ const update_diagram = (diagram, props) => {
     root_text_func: root_text_func,
     popup_template: popup_template,
     colors: [
-      "#750070",
-      "#AF0004",
-      "#B06600",
-      "#B09100",
-      "#8BAA00",
-      "#078F00",
-      "#054172",
-      "#3E1CB6",
+      d3.color("#F04BA5").brighter(0.5),
+      d3.color("#47E3B8").brighter(0.5),
+      d3.color("#FFC64F").brighter(0.5),
+      d3.color("#9D53E5").brighter(0.9),
+      d3.color("#BEF94E").brighter(0.5),
+      d3.color("#FF8E4F").brighter(0.5),
+      d3.color("#5880E5").brighter(0.5),
+      d3.color("#FFF54F").brighter(0.5),
     ],
-    background_color: "#250404",
+    background_color: "#f0f0f0",
   });
 }
 

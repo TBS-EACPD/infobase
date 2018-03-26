@@ -1,0 +1,19 @@
+@import '../../common_css/common-variables';
+
+.budget-measure-partiton-area > .__partition__ > .partition-diagram > .header{
+  color: #333;
+  font-weight: $heavyFontWeight;
+}
+
+.budget-measure-partiton-area > .__partition__ > .partition-diagram > .partition-content{
+  color: #333;
+  & > .partition-content-title{
+    font-weight: $heavyFontWeight;
+  }
+  &.root > .partition-content-title{
+    font-weight: $heavyFontWeight;
+    & > a{
+      color: #333!important;
+    }
+  }
+}
