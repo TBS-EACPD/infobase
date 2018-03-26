@@ -4,9 +4,6 @@ import { PartitionDataWrapper } from './PartitionDataWrapper.js';
 import * as utils from "../../core/utils";
 import { text_maker } from "../../models/text";
 
-const cycle_colors = function(i){
-  return d3.color(window.darkCategory10Colors[i % 10]);
-};
 const assign_colors_recursively = function(node, color){
   node.color = color;
   if ( _.isUndefined(node.children) ){ return; }
@@ -55,6 +52,10 @@ export class PartitionDiagram {
 
     this.data = new PartitionDataWrapper(this.options.data, this.options.data_wrapper_node_rules);
 
+    this.colors = this.options.colors;
+    this.background_color = this.options.background_color;
+    this.html.style("background-color", this.background_color)
+
     this.dont_fade = this.options.dont_fade || [];
     
     this.level_headers = this.options.level_headers || false;
@@ -98,6 +99,10 @@ export class PartitionDiagram {
     const yscale = d3.scaleLinear()
       .domain([0, this.data.root.value])
       .range([0,height]);
+    
+    const cycle_colors = (i) => {
+      return d3.color(this.colors[i % this.colors.length]);
+    };
 
     _.each(this.data.root.children, (node,i) => { 
       assign_colors_recursively(node, cycle_colors(i));
@@ -175,6 +180,7 @@ export class PartitionDiagram {
           .attr("tabindex", 0)
           .classed("partition-content-title", true)
           .classed("right", d.data.type === "compressed")
+          .style("background-color", this.background_color)
           .html(html_func);
       })
       .attr("class",d => {
@@ -222,11 +228,21 @@ export class PartitionDiagram {
         d_node
           .select(".partition-content-title")
           .classed("fat", d => d.more_than_fair_space)
-          .classed("negative-value", d => d.value <0);
+          .classed("negative-value", d => d.value <0)
+          .style("background-color", null);
         
         d_node
+          .select(".partition-content-title.fat")
+          .style("background-color", this.background_color);
+
+        d_node
           .select(".partition-negative-title-backing")
-          .classed("fat", d => d.more_than_fair_space);
+          .classed("fat", d => d.more_than_fair_space)
+          .style("background-color", null);
+        
+        d_node
+          .select(".partition-negative-title-backing:not(.fat)")
+          .style("background-color", this.background_color);
 
         // IE fixes:
         d_node

@@ -7,7 +7,6 @@
 }
 
 .partition-diagram {
-  background-color:rgb(4, 18, 37);
   min-width: inherit;
 }
 
@@ -35,7 +34,6 @@
   font-weight: $mediumFontWeight;
 }
 .partition-content-title.fat{ 
-  background-color: rgb(4, 18, 37) !important;
   padding: 0px 15px;
   max-width: 85%;
   min-width: 10%;
@@ -51,11 +49,10 @@
   align-items: inherit !important;
 }
 .partition-negative-title-backing:not(.fat){
-    align-items: center;
-    background-color: rgb(4, 18, 37) ;
-    display: flex;
-    height: 100%;
-    margin-left: 20px;
+  align-items: center;
+  display: flex;
+  height: 100%;
+  margin-left: 20px;
 }
 .partition-negative-title-backing:not(.fat) > .partition-content-title{
   margin-left: 0px;

@@ -62,6 +62,17 @@ const update_diagram = (diagram, props) => {
     level_headers: get_level_headers(props.first_column),
     root_text_func: root_text_func,
     popup_template: popup_template,
+    colors: [
+      "#750070",
+      "#AF0004",
+      "#B06600",
+      "#B09100",
+      "#8BAA00",
+      "#078F00",
+      "#054172",
+      "#3E1CB6",
+    ],
+    background_color: "#250404",
   });
 }
 
@@ -94,7 +105,10 @@ export class BudgetMeasuresPartition extends React.Component {
           marginTop: "10px",
         }}
       >
-        <div ref="container"/>
+        <div 
+          className="budget-measure-partiton-area" 
+          ref="container"
+        />
       </div>
     );
   }

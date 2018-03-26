@@ -179,6 +179,8 @@ export class PartitionSubApp {
       level_headers: this.current_perspective.level_headers,
       root_text_func: this.current_perspective.root_text_func,
       popup_template: this.current_perspective.popup_template,
+      colors: window.darkCategory10Colors,
+      background_color: "#041225",
     });
   }
   enable_search_bar(){
