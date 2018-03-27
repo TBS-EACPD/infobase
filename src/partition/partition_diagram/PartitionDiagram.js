@@ -224,7 +224,7 @@ export class PartitionDiagram {
       .each(d => {
         const d_node = d3.select(d.DOM);
         const title = d_node.select(".partition-content-title").node();
-        d.more_than_fair_space = title.offsetHeight > d.scaled_height;
+        d.more_than_fair_space = title.offsetHeight > Math.ceil(d.scaled_height);
         d_node
           .select(".partition-content-title")
           .classed("fat", d => d.more_than_fair_space)
