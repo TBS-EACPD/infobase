@@ -65,7 +65,7 @@ const update_diagram = (diagram, props) => {
     popup_template: popup_template,
     colors: [
       d3.color("#CB6E94").brighter(0.3),
-      d3.color("#E8EB7F").brighter(0.2),
+      d3.color("#E8EB7F").darker(0.1),
       d3.color("#ECAB80").brighter(0.2),
       d3.color("#59779B").brighter(2),
       d3.color("#ABD774").brighter(0.2),
