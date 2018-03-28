@@ -391,7 +391,7 @@ export class PartitionDiagram {
         if (d3.select(this).attr("points")){
           return d3.select(this).attr("points");
         } else if (d.source.parent === null) {
-          return `${tl} ${bl} ${bl} ${[left_side_padding,bl[1]]} ${[left_side_padding,tl[1]]} ${tl}`;
+          return `${tl} ${bl} ${[bl[0],bl[1]+0.1]} ${[left_side_padding,bl[1]+0.1]} ${[left_side_padding,tl[1]-0.1]} ${[tl[0],tl[1]-0.1]}`;
         } else {
           return `${tl} ${bl} ${bl} ${tl}`;
         }
@@ -400,7 +400,7 @@ export class PartitionDiagram {
       .duration(1000)
       .attr("points", function(d){
         if (d.source.parent === null) {
-          return `${tr} ${br} ${bl} ${[left_side_padding,bl[1]]} ${[left_side_padding,tl[1]]} ${tl}`;
+          return `${tr} ${br} ${[bl[0],bl[1]+0.1]} ${[left_side_padding,bl[1]+0.1]} ${[left_side_padding,tl[1]-0.1]} ${[tl[0],tl[1]-0.1]}`;
         } else {
           return `${tr} ${br} ${bl} ${tl}`;
         }
