@@ -1,5 +1,10 @@
 @import '../../common_css/common-variables';
 
+// Partition diagram Style overwrites
+.budget-measure-partiton-area > .__partition__ > .partition-diagram {
+  border-radius: 10px;
+}
+
 .budget-measure-partiton-area > .__partition__ > .partition-diagram > .header {
   color: #333;
   font-weight: $heavyFontWeight;
@@ -8,7 +13,10 @@
 .budget-measure-partiton-area > .__partition__ > .partition-diagram > .partition-content {
   color: #333;
   & > .partition-content-title {
-    font-weight: $mediumFontWeight;
+    font-weight: $heavyFontWeight;
+    &.negative-value {
+      color: #d60000;
+    }
   }
   &.root > .partition-content-title {
     font-weight: $heavyFontWeight;

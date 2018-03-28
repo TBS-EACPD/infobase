@@ -64,16 +64,15 @@ const update_diagram = (diagram, props) => {
     root_text_func: root_text_func,
     popup_template: popup_template,
     colors: [
-      d3.color("#CB6E94").brighter(0.3),
-      d3.color("#E8EB7F").darker(0.1),
-      d3.color("#ECAB80").brighter(0.2),
-      d3.color("#59779B").brighter(2),
-      d3.color("#ABD774").brighter(0.2),
-      d3.color("#87589D").brighter(2.25),
-      d3.color("#529789").brighter(0.8),
-      d3.color("#ECC280").brighter(0.2),
+      "#FFD180",
+      "#FF9E80",
+      "#FF8A80",
+      "#B388FF",
+      "#8C9EFF",
+      "#80D8FF",
+      "#9E9E9E",
     ],
-    background_color: "#fdfdfd",
+    background_color: d3.color("#fdfdfd").darker(0.2),
   });
 }
 
