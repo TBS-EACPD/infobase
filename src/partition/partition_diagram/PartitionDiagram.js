@@ -89,12 +89,13 @@ export class PartitionDiagram {
     const levels = this.data.to_open_levels();
     const height = this.options.height;
 
+    const side_padding = this.side_padding = 50;
     const horizontal0_padding = 50;
     const horizontal_padding = 150;
     const col0_width = 250;
     const col_width = 350;
 
-    const total_width = this.total_width = (_.keys(levels).length-1) * (col_width + horizontal_padding) + col0_width + horizontal0_padding;
+    const total_width = this.total_width = (_.keys(levels).length-1) * col_width + (_.keys(levels).length-2) * horizontal_padding + col0_width + horizontal0_padding + side_padding;
 
     const yscale = d3.scaleLinear()
       .domain([0, this.data.root.value])
@@ -120,7 +121,7 @@ export class PartitionDiagram {
       .value();
       
     const horizontal_placement_counters = _.mapValues(levels, (vals, key) => {
-      return +key === 0 ? 0 : col0_width + horizontal0_padding + (key-1)*(col_width+horizontal_padding);
+      return side_padding/2 + (+key === 0 ? 0 : col0_width + horizontal0_padding + (key-1)*(col_width+horizontal_padding));
     });
 
     this.html.selectAll("div.header").remove();
@@ -224,7 +225,7 @@ export class PartitionDiagram {
       .each(d => {
         const d_node = d3.select(d.DOM);
         const title = d_node.select(".partition-content-title").node();
-        d.more_than_fair_space = title.offsetHeight > d.scaled_height+2;
+        d.more_than_fair_space = title.offsetHeight > d.scaled_height+4;
         d_node
           .select(".partition-content-title")
           .classed("fat", d => d.more_than_fair_space)
@@ -355,6 +356,7 @@ export class PartitionDiagram {
     const target_height = target.rendered_height;
     const source_x = source.DOM.offsetLeft + source.width; 
     const source_height = source.rendered_height * target.scaled_height/source.height_of_all_children;
+    const left_side_padding = this.side_padding/2;
     let tr,tl,br,bl,klass;
     tr = [target_x, target_y]; 
     tl = [source_x, source.vertical_counter];
@@ -389,7 +391,7 @@ export class PartitionDiagram {
         if (d3.select(this).attr("points")){
           return d3.select(this).attr("points");
         } else if (d.source.parent === null) {
-          return `${tl} ${bl} ${bl} ${[0,bl[1]]} ${[0,tl[1]]} ${tl}`;
+          return `${tl} ${bl} ${bl} ${[left_side_padding,bl[1]]} ${[left_side_padding,tl[1]]} ${tl}`;
         } else {
           return `${tl} ${bl} ${bl} ${tl}`;
         }
@@ -398,7 +400,7 @@ export class PartitionDiagram {
       .duration(1000)
       .attr("points", function(d){
         if (d.source.parent === null) {
-          return `${tr} ${br} ${bl} ${[0,bl[1]]} ${[0,tl[1]]} ${tl}`;
+          return `${tr} ${br} ${bl} ${[left_side_padding,bl[1]]} ${[left_side_padding,tl[1]]} ${tl}`;
         } else {
           return `${tr} ${br} ${bl} ${tl}`;
         }
