@@ -17,6 +17,7 @@ const populate_budget_measures = (budget_measures, budget_measure_allocations) =
     BudgetMeasure.create_and_register({
       id: row[0],
       name: row[name_col_index],
+      chapter_key: row[3],
       allocations: budget_allocations_by_measure[row[0]],
     });
   }); 

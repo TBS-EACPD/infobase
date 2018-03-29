@@ -367,3 +367,21 @@ transfer_payments:
   o:
     en: Other Transfer Payment
     fr: Autre paiement de transfert
+
+
+budget_chapters:
+  adv:
+    en: Advancement
+    fr: Avancement
+  grw:
+    en: Growth
+    fr: Croissance
+  prg:
+    en: Progress
+    fr: Progrès
+  rec:
+    en: Reconciliation
+    fr: Réconciliation
+  n_a:
+    en: Chapter Not Specified in Budget
+    fr: NA TODO
