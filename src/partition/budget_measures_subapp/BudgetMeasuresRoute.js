@@ -47,7 +47,10 @@ export class BudgetMeasuresRoute extends React.Component {
         { !this.state.loading && window.is_a11y_mode &&
           <div className="budget-measures">
             <BudgetMeasuresTop/>
-            {/* TODO a11y presentation of data, probably just a table */}
+            {
+              // TODO a11y presentation of data, probably just a table, but might require 
+              // controls to match alternate versions available in the diagram?
+            }
           </div>
         }
       </StandardRouteContainer>

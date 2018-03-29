@@ -43,14 +43,21 @@ export class BudgetMeasuresTop extends React.Component {
 
     return (
       <div>
-        <StackedHbarChart
-          colors = { colors_func }
-          formater = { formats.compact1 }
-          font_size = "14px"
-          bar_height = { 40 }
-          bar_label_formater = { ({label}) => label }
-          data={this.allocation_by_chapter}
-        />
+        {"TODO: intro text"}
+        { !window.is_a11y_mode &&
+          <StackedHbarChart
+            colors = { colors_func }
+            formater = { formats.compact1 }
+            font_size = "14px"
+            bar_height = { 40 }
+            bar_label_formater = { ({label}) => label }
+            data={this.allocation_by_chapter}
+          />
+        }
+        { window.is_a11y_mode &&
+          <div/> // TODO: table version of graphic
+        }
+        {"TODO: some more text, to break up page between the two diagrams"}
       </div>
     );
   }
