@@ -260,7 +260,7 @@ new PanelGraph({
     half : {text: [], graph: 12},
   },
   title : "drr_summary_title",
-  footnotes: ["RESULTS_COUNTS"],
+  footnotes: ["RESULTS_COUNTS","RESULTS"],
   calculate(subject){
     const verbose_counts = ResultCounts.get_dept_counts(subject.acronym);
     const counts = row_to_drr_status_counts(verbose_counts);
@@ -302,7 +302,7 @@ new PanelGraph({
     half : {text: [], graph: 12},
   },
   title : "drr_summary_title",
-  footnotes: ["RESULTS_COUNTS"],
+  footnotes: ["RESULTS_COUNTS","RESULTS"],
   calculate(subject){
     const all_results = Result.get_flat_results(subject);
     const all_indicators = Indicator.get_flat_indicators(subject);
