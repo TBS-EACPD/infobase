@@ -10,9 +10,9 @@ import { budget_measures_hierarchy_factory } from './budget_measures_hierarchy_f
 const year = run_template("{{planning_year_2}}");
 
 const formatter = node => {
-  const in_billions = node.__value__ >= 1000;
+  const in_billions = node.__value__ >= 1*Math.pow(10,9);
   const format = in_billions ? formats.compact1 : formats.compact;
-  return " (" + format(node.__value__*1000000) + ")";
+  return " (" + format(node.__value__) + ")";
 }
 
 const get_level_headers = (first_column) => {
@@ -29,12 +29,12 @@ const get_level_headers = (first_column) => {
   }
 }
 
-const root_text_func = root_value => text_maker("budget_measures_partition_root", {root_value: root_value*1000000, year});
+const root_text_func = root_value => text_maker("budget_measures_partition_root", {root_value: root_value, year});
 
 const popup_template = node => {
   const popup_options = {
     year,
-    value: node.__value__*1000000,
+    value: node.__value__,
     value_is_negative: node.__value__ < 0,
     parent_name: node.parent.data.name,
     is_dept: node.data.type === "dept",
@@ -72,7 +72,7 @@ const update_diagram = (diagram, props) => {
       "#7cd0f6",
       "#b0bec5",
     ],
-    background_color: "#9c9c9c",
+    background_color: "#a49c9c",
   });
 }
 

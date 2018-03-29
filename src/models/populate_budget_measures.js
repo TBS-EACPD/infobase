@@ -11,7 +11,12 @@ const load_csv = csv_name => (
 
 const populate_budget_measures = (budget_measures, budget_measure_allocations) => {
   const name_col_index = window.lang === "en" ? 1 : 2;
-  const budget_allocations_by_measure = _.groupBy(budget_measure_allocations, row => row[0]);
+  const budget_measure_allocations_in_millions = _.map(budget_measure_allocations, row => [
+    row[0], 
+    row[1], 
+    row[2] * 1000000,
+  ]);
+  const budget_allocations_by_measure = _.groupBy(budget_measure_allocations_in_millions, row => row[0]);
 
   _.each(budget_measures, row => {
     BudgetMeasure.create_and_register({

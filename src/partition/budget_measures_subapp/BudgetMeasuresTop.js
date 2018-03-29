@@ -23,7 +23,7 @@ export class BudgetMeasuresTop extends React.Component {
           label: budget_chapters[chapter_key].text,
           data: [{
             label: chapter_key,
-            data: allocation_total * 1000000,
+            data: allocation_total,
           }],
         };
       })
@@ -31,7 +31,7 @@ export class BudgetMeasuresTop extends React.Component {
 
   }
   render(){
-    // Using the colours from budget.gc.ca here
+    // Using the chapter colours from budget.gc.ca here
     const colors_by_chapter_key = {
       adv: "#279948",
       grw: "#5e4b8c",
