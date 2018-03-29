@@ -1,7 +1,10 @@
 import * as Subject from '../../models/subject';
 import * as businessConstants from '../../models/businessConstants.yaml';
-import { StackedHbarChart } from '../../charts/declarative_charts.js';
 import { formats } from '../../core/format.js';
+import { 
+  StackedHbarChart, 
+  A11YTable
+} from '../../charts/declarative_charts.js';
 
 const { BudgetMeasure } = Subject;
 const { budget_chapters } = businessConstants;
@@ -51,11 +54,14 @@ export class BudgetMeasuresTop extends React.Component {
             font_size = "14px"
             bar_height = { 40 }
             bar_label_formater = { ({label}) => label }
-            data={this.allocation_by_chapter}
+            data = { this.allocation_by_chapter }
           />
         }
         { window.is_a11y_mode &&
-          <div/> // TODO: table version of graphic
+          <A11YTable
+            data_col_headers = { ["TODO: text key for budget chapter", "TODO: text key for allocations ($)"] }
+            data = { _.map(this.allocation_by_chapter, obj => [obj.label, obj.data[0].data]) }
+          />
         }
         {"TODO: some more text, to break up page between the two diagrams"}
       </div>
