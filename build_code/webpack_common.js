@@ -1,6 +1,8 @@
 const _ = require('lodash');
 var webpack = require('webpack');
 
+const CDN_URL = process.env.CDN_URL || ".";
+
 const get_rules = ({ 
   should_use_babel,
   language,
@@ -90,7 +92,7 @@ const prod_plugins = [
 ]
 
 function get_plugins({ is_prod, language, commit_sha, envs }){
-  const CDN_URL = process.env.CDN_URL || ".";
+  
   const plugins = [
     new webpack.DefinePlugin({
       SHA : JSON.stringify(commit_sha),
@@ -118,10 +120,16 @@ function create_config({
   should_use_babel,
 }){
 
+  const new_output = _.clone(output);
+  if(CDN_URL !== "."){
+    new_output.crossOriginLoading = "anonymous";
+    new_output.publicPath = `${CDN_URL}/`;
+  }
+
   return {
     name: language,
     entry,
-    output,
+    output: new_output,
     module: {
       rules: get_rules({ should_use_babel, language}),
       noParse: /\.csv$/,
