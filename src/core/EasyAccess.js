@@ -20,4 +20,11 @@ const EasyAccess_ = () => [
   >
     <TM k="metadata" />
   </a>,
+  <a
+    key="c"
+    href="#about"
+    className="mrgn-lft-md"
+  >
+    <TM k="about_title" />
+  </a>,
 ];

@@ -95,21 +95,13 @@ principle_3_desc:
 
 
 principle_4_name:
-  en: Brings government data to life/Understandable
-  fr: Convivial et compréhensible
-
-principle_4_desc:
-  en: We translate complex government concepts into a user-friendly format that’s easy to understand and navigate. So you can understand how tax dollars are actually spent to achieve results.
-  fr: Nous traduisons des concepts gouvernementaux complexes dans un format convivial facile à comprendre et à explorer pour que vous sachiez comment les fonds publics sont dépensés dans l’atteinte des résultats.
-
-
-principle_5_name:
   en: User-driven
   fr: Information adaptée aux besoins des utilisateurs
 
-principle_5_desc:
+principle_4_desc:
   en: Employing open sources technologies; the GC InfoBase is always evolving and adapting to meet user needs and offer a better experience.
   fr: Usage de technologies à libre accès; l’InfoBase du GC évolue sans cesse, s’adapte aux besoins des utilisateurs et leur offre une meilleure expérience.
+
 
 about_body_text:
   transform: [handlebars, markdown]
