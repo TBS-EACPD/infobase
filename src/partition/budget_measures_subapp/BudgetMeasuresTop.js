@@ -3,7 +3,7 @@ import * as businessConstants from '../../models/businessConstants.yaml';
 import { formats } from '../../core/format.js';
 import { 
   StackedHbarChart, 
-  A11YTable
+  A11YTable,
 } from '../../charts/declarative_charts.js';
 
 const { BudgetMeasure } = Subject;

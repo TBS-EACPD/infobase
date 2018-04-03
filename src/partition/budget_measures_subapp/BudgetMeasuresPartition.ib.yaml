@@ -1,3 +1,22 @@
+budget_in_year:
+  en: Budget 2018
+  fr: Le budget de 2018
+
+allocates:
+  en: allocates
+  fr: TODO
+
+total_lower_case:
+  text: total
+
+single_word_for:
+  en: for
+  fr: pour
+
+single_word_to:
+  en: to
+  fr: TODO
+
 budget_measures_partition_root:
   transform: [handlebars]
   en: |
@@ -10,19 +29,15 @@ budget_measures_partition_root:
   fr: |
     TODO
 
-single_word_for:
-  en: for
-  fr: pour
-
 budget_measure_popup_template:
-  transform: [handlebars]
+  transform: [handlebars, markdown]
   text: |
-    <div class='mrgn-bttm-md popup-row-top popup-font-m popup-row-bottom-border'>
-      <span class='stat1 popup-font-l'> 
-        {{year}}
-      </span>
-      <span class='stat1 popup-font-m'>
-        {{gt "allocated"}}
+    <div class='mrgn-bttm-md popup-row-top popup-font-m'>
+      <span class='stat1 popup-font-m' >
+        <text style='color:#fdfdfd'>
+          {{gt "budget_in_year"}}
+          {{gt "allocates"}}
+        </text>
         {{#if value_is_negative}}
           <text style='color:red;'>
             {{fmt_compact1 value}}
@@ -30,24 +45,34 @@ budget_measure_popup_template:
         {{else}}
           {{fmt_compact1 value}}
         {{/if}}
-        {{#if first_column}}
-          {{gt "total"}}
-        {{else}}
-          {{gt "single_word_for"}} </br> {{parent_name}}
-        {{/if}}
+        <text style='color:#fdfdfd'>
+          {{#if first_column}}
+            {{gt "total_lower_case"}} 
+          {{/if}}
+          {{#if is_dept}}
+            {{gt "single_word_to"}}
+          {{else}}
+            {{gt "single_word_for"}} 
+          {{/if}}
+        </text>
       </span>
+      <span class='stat1 popup-font-l'>
+        {{name}}
+      </span>
+      {{#if first_column}}
+      {{else}}
+        <span class='stat1 popup-font-m' style='color:#fdfdfd'>
+          {{#if is_dept}}
+            {{gt "single_word_for"}}
+          {{else}}
+            {{gt "single_word_to"}} 
+          {{/if}}
+        </span>
+        <span class='stat1 popup-font-l'>
+          {{parent_name}}
+        </span>
+      {{/if}}
     </div>
-    <div class='mrgn-bttm-md popup-row-bottom-border popup-font-xl'>
-      {{name}}
-    </div>
-    {{#if description}}
-      <div class='popup-font-ml'>
-        {{gt "description"}}:
-      </div>
-      <div class='mrgn-bttm-md popup-row-bottom-border popup-decription-text'>
-        {{{description}}}
-      </div>
-    {{/if}}
     {{#if is_dept}}
       <a href='#orgs/{{level}}/{{id}}/infograph' 
         class='btn btn-xs btn-block mrgn-bttm-sm infographic' 
