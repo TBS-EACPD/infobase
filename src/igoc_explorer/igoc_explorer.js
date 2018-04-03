@@ -1,14 +1,10 @@
-const {
-  TM,
-} = require('../util_components.js');
 require('./igoc_explorer.ib.yaml');
 require('./igoc_explorer.scss');
 
-const {createSelector} = require('reselect');
-const ROUTER = require("../core/router");
+const { StandardRouteContainer } = require('../core/NavComponents.js');
 
-const { text_maker } =  require('../models/text.js');
-const { reactAdapter } = require('../core/reactAdapter.js');
+const {createSelector} = require('reselect');
+
 
 //treemap stuff
 const { combineReducers, createStore } = require('redux');
@@ -18,6 +14,13 @@ const { create_igoc_hierarchy } = require('./hierarchies.js')
 const { Explorer } = require('./explorer_view.js');
 
 const { filter_hierarchy } = require('../gen_expl/hierarchy_tools.js');
+
+
+const { text_maker } =  require('../models/text.js');
+const {
+  TM,
+} = require('../util_components.js');
+
 
 
 const {
@@ -56,10 +59,6 @@ const scheme = {
   ),
 
   dispatch_to_props: dispatch => ({
-    set_grouping: grouping => dispatch({
-      type: 'set_grouping',
-      payload: grouping,
-    }),
     on_toggle_orgs_without_data: ()=> dispatch({
       type: 'toggle_orgs_without_data',
     }),
@@ -98,90 +97,83 @@ const scheme = {
 }
 
 
-const ExplorerContainer = ({ initialGrouping}) => {
-  const scheme_key = scheme.key;
+//This code is a little strange. This components exists as an intermediary between redux and react-router. 
+//Trying to use a functional component here results in re-creating the redux store, connecter functions and Container component. 
+//Instead, this component will own those long-term objects and keep the store updated with URL changes. 
+class ExplorerContainer extends React.Component {
+  componentWillMount(){
+    const { grouping } = this.props;
 
-  const reducer = combineReducers({
-    root: root_reducer, 
-    [scheme_key]: scheme.reducer,
-  });
+    const scheme_key = scheme.key;
 
-  const mapStateToProps = map_state_to_props_from_memoized_funcs(get_memoized_funcs([scheme]));
+    const reducer = combineReducers({
+      root: root_reducer, 
+      [scheme_key]: scheme.reducer,
+    });
 
-  const mapDispatchToProps = dispatch => _.immutate(
-    map_dispatch_to_root_props(dispatch),
-    scheme.dispatch_to_props(dispatch)
-  );
+    const mapStateToProps = map_state_to_props_from_memoized_funcs(get_memoized_funcs([scheme]));
 
-  const initialState = {
-    root: _.immutate(initial_root_state, {scheme_key}),
-    [scheme_key]: { 
-      grouping: initialGrouping,
-      should_show_orgs_without_data: true,
-    },
-  };
+    const mapDispatchToProps = dispatch => _.immutate(
+      map_dispatch_to_root_props(dispatch),
+      scheme.dispatch_to_props(dispatch)
+    );
+
+    const initialState = {
+      root: _.immutate(initial_root_state, {scheme_key}),
+      [scheme_key]: { 
+        grouping,
+        should_show_orgs_without_data: true,
+      },
+    };
 
 
-  const connecter = connect(mapStateToProps, mapDispatchToProps);
-  const Container = connecter(Explorer);
-  const URLConnectedComponent = connecter(URLSynchronizer);
-  const store = createStore(reducer,initialState);
+    const connecter = connect(mapStateToProps, mapDispatchToProps);
+    const Container = connecter(Explorer);
+    const store = createStore(reducer,initialState);
 
-  return [
-    <Provider key={"a"} store={store}>
-      <Container />
-    </Provider>,
-    <Provider key={"b"} store={store}>
-      <URLConnectedComponent />
-    </Provider>,
-  ];
+    this.store = store;
+    this.Container = Container;
+  }
+  componentWillUpdate(nextProps){
+    const { grouping } = nextProps;
+    this.store.dispatch({
+      type: 'set_grouping',
+      payload: grouping,
+    });
+  }
+  render(){
+    const { store, Container } = this;
+
+    return (
+      <Provider store={store}>
+        <Container />
+      </Provider>
+    );
+  }
 }
 
-ROUTER.add_container_route("igoc/:grouping:","_igoc_explorer", function(container, grouping_param){
 
-  this.add_title("igoc");
-  this.add_crumbs([{html: text_maker("igoc")}]);
-  container.appendChild( new Spinner({scale:4}).spin().el );
-  
-  const initialGrouping = (
-    _.includes(['portfolio','all','historical','inst_form','pop_group'], grouping_param) ? 
-    grouping_param :
-    'portfolio'
-  );
-
-  container.innerHTML = `<div id="explorer-mount"></div>`;  
-
-  reactAdapter.render(
-    <div className="medium_panel_text">
-      <div style={{marginBottom:"1.5em"}}>
-        <TM k="about_inventory"/>
+export const IgocExplorer = ({match}) => {
+  let grouping = _.get(match, "params.grouping");
+  if(_.isEmpty(grouping)){
+    grouping = "portfolio";
+  }
+  //sanitize grouping param
+  return (
+    <StandardRouteContainer
+      breadcrumbs={[text_maker("igoc")]}
+      title={text_maker("igoc")}
+      route_key="_igoc_explorer"
+    >
+      <div>
+        <h1> <TM k="igoc" /> </h1>
       </div>
-      <ExplorerContainer 
-        initialGrouping={initialGrouping}
-      />
-    </div>,
-    container.querySelector('#explorer-mount')
+      <div className="medium_panel_text">
+        <div style={{marginBottom:"1.5em"}}>
+          <TM k="about_inventory"/>
+        </div>
+        <ExplorerContainer grouping={grouping} />
+      </div>
+    </StandardRouteContainer>
   );
-
-});
-
-const props_to_url = ({ grouping }) => `#igoc/${grouping}`;
-
-class URLSynchronizer extends React.Component {
-  render(){ return null; }
-  //this will only be called when the user switches data areas. 
-  //If the infograph changes, this might have to change as well...
-  componentWillReceiveProps(nextProps){
-    if(
-      _.nonEmpty(this.props.grouping) && 
-      this.props.grouping !== nextProps.grouping
-    ){
-      this.updateURLImperatively(nextProps);
-    }
-  }
-  updateURLImperatively(nextProps){
-    const new_url = props_to_url(nextProps);
-    ROUTER.navigate(new_url, {trigger:false});
-  }
-}
-
+};

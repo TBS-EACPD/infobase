@@ -33,7 +33,7 @@ _.each(yaml.months, (obj,ix) => {
 
 
 //TODO : why are employee ages so awkward?
-const emp_ages = (
+const compact_age_groups = (
   window.lang === 'en' ? 
   [
     'Age 29 and less',
@@ -53,19 +53,20 @@ const emp_ages = (
   ]
 );
 const emp_age_map =  {
-  '< 20'  : emp_ages[0], 
-  '20-24' : emp_ages[0],
-  '25-29' : emp_ages[0],
-  '30-34' : emp_ages[1], 
-  '35-39' : emp_ages[1], 
-  '40-44' : emp_ages[2],
-  '45-49' : emp_ages[2],
-  '50-54' : emp_ages[3], 
-  '55-59' : emp_ages[3],
-  '60-64' : emp_ages[4],
-  '65-69' : emp_ages[4], 
-  '70 +'  : emp_ages[4],
-  'N/A'   : emp_ages[5],
+  '< 20': compact_age_groups[0], 
+  '20-24': compact_age_groups[0],
+  '25-29': compact_age_groups[0],
+  '30-34': compact_age_groups[1], 
+  '35-39': compact_age_groups[1], 
+  '40-44': compact_age_groups[2],
+  '45-49': compact_age_groups[2],
+  '50-54': compact_age_groups[3], 
+  '55-59': compact_age_groups[3],
+  '60-64': compact_age_groups[4],
+  '65-69': compact_age_groups[4], 
+  '70 +': compact_age_groups[4],
+  'N.A.': compact_age_groups[5],
+  'N.D.': compact_age_groups[5],
 };
 
 const emp_age_rev_map = _.chain(emp_age_map)
@@ -75,7 +76,7 @@ const emp_age_rev_map = _.chain(emp_age_map)
   .fromPairs()
   .value();
 
-const emp_age_stuff = { emp_ages, emp_age_map, emp_age_rev_map };
+const emp_age_stuff = { compact_age_groups, emp_age_map, emp_age_rev_map };
 
 const ex_level_target = (
   window.lang === 'en' ? 
@@ -88,22 +89,22 @@ const ex_level_target = (
     'Non-cadres supérieursn',
   ]
 );
-const ex_level_map =  {
-  'EX 01' : ex_level_target[0], 
-  'EX 02' : ex_level_target[0],
-  'EX 03' : ex_level_target[0],
-  'EX 04' : ex_level_target[0], 
-  'EX 05' : ex_level_target[0], 
+const compact_ex_level_map =  {
+  'EX 01': ex_level_target[0], 
+  'EX 02': ex_level_target[0],
+  'EX 03': ex_level_target[0],
+  'EX 04': ex_level_target[0], 
+  'EX 05': ex_level_target[0], 
   'Non-EX': ex_level_target[1],
 };
 
-const ex_level_rev_map = _.chain(ex_level_map)
+const ex_level_rev_map = _.chain(compact_ex_level_map)
   .toPairs()
   .groupBy(function(key_val){ return key_val[1];})
   .map(function(val, key){ return [key, _.map(val,0)];})
   .fromPairs()
   .value();
 
-const ex_level_stuff = { ex_level_target, ex_level_map, ex_level_rev_map };  
+const ex_level_stuff = { ex_level_target, compact_ex_level_map, ex_level_rev_map };  
 
 window._businessConstants = module.exports = exports = Object.assign({}, yaml, emp_age_stuff, ex_level_stuff)

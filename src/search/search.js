@@ -1,6 +1,5 @@
-'use strict';
 require('./search.css')
-const ROUTER = require('../core/router.js');
+
 const {
   escapeSingleQuotes,
 } = require('../core/utils.js');
@@ -132,8 +131,10 @@ class A11YSearch extends React.Component {
   }
 }
 
+
 //general typeahead component to be wrapped by DeptSearch, DeptGovSearch, GlossarySearch, etc. 
-function autoComplete({container, search_configs, onSelect, placeholder, minLength, large  }){
+function autoComplete({container, search_configs, onSelect, placeholder, minLength, large, onNewQuery }){
+  const debouncedOnQueryCallback = _.isFunction(onNewQuery) ? _.debounce(onNewQuery, 750) : _.noop;
   minLength = minLength || 3;
   placeholder = placeholder || text_maker("org_search");
 
@@ -154,6 +155,7 @@ function autoComplete({container, search_configs, onSelect, placeholder, minLeng
     const get_matches_for_query = query_matcher();
     return {
       source: (query_str,cb) => {
+        debouncedOnQueryCallback(query_str);
         cb(get_matches_for_query(query_str));
       },
       templates : {
@@ -223,14 +225,16 @@ function autoComplete({container, search_configs, onSelect, placeholder, minLeng
 function deptSearch(container, options={}){
   const {
     include_orgs_without_data,
-    href_template, 
+    href_template,
+    history,
+    onNewQuery,
   } = options;
 
   let { onSelect } = options;
   
   if(!onSelect && href_template){
     onSelect = item => { 
-      ROUTER.navigate( href_template(item), { trigger: true });
+      history.push(href_template(item));
     }
   }
 
@@ -243,13 +247,15 @@ function deptSearch(container, options={}){
     container, 
     search_configs: [ search_config ],
     onSelect,
+    onNewQuery,
   });
 }
 
 
 function everythingSearch(container, options={}){
   const {
-    href_template, 
+    href_template,
+    onNewQuery,
   } = options;
 
   //by default just includes organizations
@@ -261,6 +267,7 @@ function everythingSearch(container, options={}){
     include_glossary,
     include_crsos,
     org_scope,
+    history,
   } = options;
 
 
@@ -272,7 +279,7 @@ function everythingSearch(container, options={}){
   
   if(!onSelect && href_template){
     onSelect = item => { 
-      ROUTER.navigate( href_template(item), { trigger: true });
+      history.push(href_template(item));
     }
   }
 
@@ -292,6 +299,7 @@ function everythingSearch(container, options={}){
     onSelect,
     large: !!options.large,
     placeholder: options.placeholder || text_maker('everything_search_placeholder'),
+    onNewQuery,
   });
 }
 

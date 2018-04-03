@@ -10,7 +10,7 @@ const general_href_for_item = item => {
 
   if(item.level){ //subject entity
 
-    return infograph_href_template(item);
+    return infograph_href_template(item, null, true);
 
   } else if(item.table && item.table.constructor === Table){
 

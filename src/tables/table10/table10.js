@@ -1,26 +1,23 @@
-exports = module.exports;
-// see [here](../table_definition.html) for description
-// of the table spec
-require("./table10.ib.yaml");
-require("./canada_map.ib.yaml");
+import "./table10.ib.yaml";
 
-require("../../graphs/historical_employee_prov");
-
-const {
+import {
   STATS, 
   text_maker, 
   m, 
   Statistics, 
   formats, 
   people_five_year_percentage_formula,
-  business_constants : {provinces},
-  years : { 
-    people_years, 
-    people_years_short_second,
-  },
-} = require("../table_common");
+  business_constants,
+  years,
+} from "../table_common";
 
-module.exports = {
+const {provinces} = business_constants;
+const { 
+  people_years, 
+  people_years_short_second,
+} = years;
+
+export default {
   "id": "table10",
   source: ["RPS"],
   "tags": [
@@ -35,8 +32,8 @@ module.exports = {
   },
 
   "name": {
-    "en":  "Population by Geographic Region",
-    "fr":  "Population selon la région géographique",
+    "en": "Population by Geographic Region",
+    "fr": "Population selon la région géographique",
   },
 
   "title": {
@@ -88,7 +85,7 @@ module.exports = {
       "description": {
         "en": text_maker("five_year_percent_description"),
         "fr": text_maker("five_year_percent_description"),
-      }  ,
+      },
       "formula": people_five_year_percentage_formula("region",people_years),
     });
   },
@@ -99,9 +96,9 @@ module.exports = {
     return row;
   },
 
-  "sort" : function(mapped_rows, lang){
+  "sort": function(mapped_rows, lang){
     return _.sortBy(mapped_rows, function(row){
-      if (row.region === provinces.Abroad.text){
+      if (row.region === provinces.abroad.text){
         return "Z";
       } 
       if (row.region[0] === 'Î'){
@@ -118,7 +115,7 @@ module.exports = {
           return [key].concat(years);
         })
         .sortBy(function(row){
-          return d4.sum(_.tail(row));
+          return d3.sum(_.tail(row));
         })
         .value();
     },
@@ -129,15 +126,15 @@ module.exports = {
         fm1 = formats["big_int_real"],
         fm2 = formats.percentage,
         ncr = this.lang === 'en' ? "NCR" : "RCN",
-        non_ncr = "Non-NCR",
-        abroad = lk.Abroad.text,
-        dept_total = d4.sum(this.data, function (d) {
+        non_ncr = "Non-"+ncr,
+        abroad = lk.abroad.text,
+        dept_total = d3.sum(this.data, function (d) {
           return d[year];
         });
       var groups = _.groupBy(this.data, function (x) {
-        if (x.region_code === 'NCR ON' || x.region_code === 'NCR QC') {
+        if (x.region_code === 'onncr' || x.region_code === 'qcncr') {
           return ncr;
-        } else if (x.region_code === "Abroad") {
+        } else if (x.region_code === "abroad") {
           return abroad;
         } else {
           return non_ncr;
@@ -146,7 +143,7 @@ module.exports = {
       return _.map([ncr, non_ncr, abroad], function (key) {
         var relevant_group = groups[key];
         var sub_column = _.map(relevant_group, year);
-        var group_total = d4.sum(sub_column);
+        var group_total = d3.sum(sub_column);
         if (format) {
           return [key, fm1(group_total), fm2(group_total / dept_total)];
         } else {
@@ -158,13 +155,13 @@ module.exports = {
 
   "dimensions": [
     {
-      title_key : "prov"  ,
+      title_key: "prov",
       filter_func: _.constant(_.property('region') ),
     },
     {
-      title_key : "prov_code",
-      exclude_from_rpb : true,
-      filter_func : _.constant( _.property('region_code') ),
+      title_key: "prov_code",
+      exclude_from_rpb: true,
+      filter_func: _.constant( _.property('region_code') ),
     },
   ],
 };

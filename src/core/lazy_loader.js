@@ -2,7 +2,7 @@ const { Table } = require('./TableClass.js');
 const { 
   PanelGraph,
   tables_for_graph,
-} = require('./graphs.js');
+} = require('./PanelGraph.js');
 
 const { 
   Statistics,

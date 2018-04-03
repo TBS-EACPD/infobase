@@ -1,9 +1,8 @@
-"use strict";
+import {
+  provinces,
+  provinces_short,
+} from '../models/businessConstants.js';
 
-const {provinces,
-  provinces_short} = require('../models/businessConstants.js');
-
-exports = module.exports;
 /* 1,043 × 1010 style="opacity:0.65822784;fill:#000000;fill-opacity:1;stroke:none" width="94.350761" height="81.185539" */ // base map obtained from [here](http://commons.wikimedia.org/wiki/File:Canada_blank_map.svg) 
 //
 // data in the following format:
@@ -16,34 +15,35 @@ exports = module.exports;
 //  with the data being assumed to be ordered by fiscal year
 //
 
-var D3CORE =  require("./core");
+import common_charts_utils from "./common_charts_utils";
+import "./canada.ib.yaml";
 
 var ordering = {
-  YT: 1,
-  NT: 2,
-  NU: 3,
-  NL: 4,
-  BC: 5,
-  AB: 6,
-  SK: 7,
-  MB: 8,
+  yt: 1,
+  nt: 2,
+  nu: 3,
+  nl: 4,
+  bc: 5,
+  ab: 6,
+  sk: 7,
+  mb: 8,
   ON: 9,
   QC: 10,
-  NCR:11,
-  NB: 12,
-  NS: 13,
-  PE: 14,
-  Abroad: 15,
-  Unknown: 15,
+  ncr: 11,
+  nb: 12,
+  ns: 13,
+  pe: 14,
+  abroad: 15,
+  na: 15,
 };
 
-exports.canada = class canada {
+export class canada {
   
   constructor(container,options){
 
-    options.alternative_svg = D3CORE.templates("canada");
+    options.alternative_svg = common_charts_utils.templates("canada");
   
-    D3CORE.setup_graph_instance(this,d4.select(container),options);
+    common_charts_utils.setup_graph_instance(this,d3.select(container),options);
   };
 
   render(options){
@@ -101,16 +101,6 @@ exports.canada = class canada {
     //set the html of the svg
     // append the second div element which will hold the bar graph
 
-    //if (_.isUndefined(historical_graph_container)){
-    //   historical_graph_container = html.append("div")
-    //   .attrs("class","five-year-container")
-    //   .styles({
-    //     "margin" : "5px",
-    //     "height" : '200px',
-    //     "width" : this.outside_width+'px'
-    //   });
-    //}
-
     svg = html.select("svg");
 
 
@@ -130,21 +120,21 @@ exports.canada = class canada {
 
     svg.selectAll(".province")
       .each(function(d){
-        var that = d4.select(this);
+        var that = d3.select(this);
         var prov = that.attr("id").split("-")[1];
-        d4.select(this).datum([prov,undefined]);
+        d3.select(this).datum([prov,undefined]);
       })
       .styles({
         "fill" : "#1f77b4",
         "fill-opacity" : function(d,i){
-          var prov = d4.select(this).attr("id").replace("CA-","");
+          var prov = d3.select(this).attr("id").replace("CA-","");
           var val = last_year_data[prov];
           return color_scale(val || 0);
         },
         "stroke-width" : "2px",
         "stroke" : "#1f77b4",
         "stroke-opacity" : function(d,i){
-          var prov = d4.select(this).attr("id").replace("CA-","");
+          var prov = d3.select(this).attr("id").replace("CA-","");
           var val = last_year_data[prov];
           return color_scale(val || 0);
         },
@@ -152,43 +142,43 @@ exports.canada = class canada {
       .on("mouseenter", dispatch_mouseEnter)
       .on("mouseleave", dispatch_mouseLeave);
 
-    if(_.filter(data, function(d){return d.Abroad}).length === 0){
-      svg.selectAll(".province#CA-Abroad")
+    if(_.filter(data, function(d){return d.abroad}).length === 0){
+      svg.selectAll(".province#CA-abroad")
         .styles({
           "visibility" : "hidden",
         })
     }
     
-    if(_.filter(data, function(d){return d.Unknown}).length === 0){
-      svg.selectAll(".province#CA-Unknown")
+    if(_.filter(data, function(d){return d.na}).length === 0){
+      svg.selectAll(".province#CA-na")
         .styles({
           "visibility" : "hidden",
         })
     } 
 
-    if(_.filter(data, function(d){return d.PE}).length === 0){
-      svg.selectAll("path#CA-PE-Marker")
+    if(_.filter(data, function(d){return d.pe}).length === 0){
+      svg.selectAll("path#CA-pe-Marker")
         .styles({
           "visibility" : "hidden",
         })
     }
     
-    if(_.filter(data, function(d){return d.NS}).length === 0){
-      svg.selectAll("path#CA-NS-Marker")
+    if(_.filter(data, function(d){return d.ns}).length === 0){
+      svg.selectAll("path#CA-ns-Marker")
         .styles({
           "visibility" : "hidden",
         })
     } 
     
-    if(_.filter(data, function(d){return d.NB}).length === 0){
-      svg.selectAll("path#CA-NB-Marker")
+    if(_.filter(data, function(d){return d.nb}).length === 0){
+      svg.selectAll("path#CA-nb-Marker")
         .styles({
           "visibility" : "hidden",
         })
     } 
     
-    if(_.filter(data, function(d){return d.NCR}).length === 0){
-      svg.selectAll("path#CA-NCR-Marker")
+    if(_.filter(data, function(d){return d.ncr}).length === 0){
+      svg.selectAll("path#CA-ncr-Marker")
         .styles({
           "visibility" : "hidden",
         })
@@ -214,14 +204,14 @@ exports.canada = class canada {
       .each(function(d,i){
         var prov = d[0];
         var label = svg.selectAll("g.label").filter(function(){
-          return d4.select(this).attr("id").replace("label-","") === prov;
+          return d3.select(this).attr("id").replace("label-","") === prov;
         });
         var coords = label.attr("transform")
           .replace(/(translate\(|\)|)/g,"")
           .replace(","," ")
           .split(" ");
 
-        d4.select(this)
+        d3.select(this)
           .styles({
             "border-radius" : "5px",
             "position" : "absolute",
@@ -237,7 +227,7 @@ exports.canada = class canada {
 
         var provName = prov; //Default, uses prov code
         if (prov === 'ON' || prov === 'QC') {
-          prov += " (minus NCR)";
+          prov += "lessncr";
         }
         if (provinces[prov] && (scale > 0.5)) {
           //If the graph is large enough and the full name is defined, use full name
@@ -247,12 +237,12 @@ exports.canada = class canada {
           provName = provinces_short[prov].text; 
         }
         
-        d4.select(this)
+        d3.select(this)
           .append("div")
           .html(provName);
 
 
-        d4.select(this)
+        d3.select(this)
           .append("a")
           .attr('tabindex',-1)
           .styles({

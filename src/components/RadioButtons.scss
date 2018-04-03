@@ -19,6 +19,8 @@ background-color: transparent;
 margin-top: -1px;
 margin-bottom: -1px;
 position: relative;
+-webkit-box-shadow: none;
+box-shadow: none;
 }
 
 .radio-buttons__option.radio-buttons__option--active {
@@ -33,12 +35,12 @@ position: relative;
 .radio-buttons__option:not(:last-child):after {
   content: "";
   margin-left: 10px;
-  height: 80%;
-  top: 10%;
+  height: 76%;
+  top: 13%;
   border: solid $buttonPrimaryColor;
   border-width: 0 0 0 2px;
   position: absolute;
-  right: -1.5px;
+  right: -3px;
 }
 
 .radio-buttons__option.radio-buttons__option--active:after {
@@ -52,4 +54,6 @@ position: relative;
   color: $backgroundColor !important;
   border-radius: 7px;
   font-weight: $mediumFontWeight;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }

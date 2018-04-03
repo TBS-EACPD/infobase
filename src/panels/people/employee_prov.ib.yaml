@@ -1,0 +1,47 @@
+gov_employee_prov_text:
+  transform: [handlebars,markdown]
+  en: |
+   From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, the largest average share of **Federal Public Service** employees (**{{fmt_percentage1 gov_head_count_region_top_avg_percent}}**) worked in **{{fmt_big_int_real gov_head_count_region_top}}**.
+   
+   
+   * The National Capital Region (NCR) includes employees working in both Ottawa (Ontario) and Gatineau (Quebec).
+   
+   
+   * <div aria-hidden="true"> Hover over or tap a province or territory in the map below to see the number of **Federal Public Service** employees working in that region over the last five snapshots. Note that the scale may change to accommodate the data displayed. </div>
+   
+
+  fr: |
+   De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, le plus fort contingent d’employés de la **fonction publique fédérale** (**{{fmt_percentage1 gov_head_count_region_top_avg_percent}}**) travaillait dans **{{fmt_big_int_real gov_head_count_region_top}}**.
+   
+   
+   * La région de la capitale nationale (RCN) inclut à la fois les employés qui travaillent à Ottawa (Ontario) et ceux qui travaillent à Gatineau (Québec).
+   
+   
+   * <div aria-hidden="true"> Cliquez ou pointez avec votre curseur sur une province ou territoire figurant à la carte ci dessous pour voir le nombre d’employés de la **fonction publique fédérale** travaillant dans cette région au moment des cinq derniers aperçus. Prière de retenir que l’échelle peut varier en fonction des données affichées. </div>
+    
+employee_prov_title: 
+  transform: [handlebars]
+  en: Population by Geographic Region ({{ppl_last_year_5}} to {{ppl_last_year}})
+  fr: Population selon la région géographique ({{ppl_last_year_5}} à {{ppl_last_year}})
+
+
+dept_employee_prov_text:
+  transform: [handlebars,markdown]
+  en: |
+   From **{{fmt_big_int_real dept_head_count_region_first_active_year}}** to **{{fmt_big_int_real dept_head_count_region_last_active_year}}**, the largest average share of **{{subj_name subject}}** employees (**{{fmt_percentage1 dept_head_count_region_top_avg_percent}}**) worked in **{{fmt_big_int_real dept_head_count_region_top}}**.
+
+
+   * The **National Capital Region (NCR)** includes employees working in both Ottawa (Ontario) and Gatineau (Quebec).
+   
+
+   {{#unless is_a11y_mode}}* Hover over or tap a province or territory in the map below to see the number of **{{subj_name subject}}** employees working in that region over the last five snapshots. Note that the scale may change to accommodate the data displayed. {{/unless}}
+   
+
+  fr: |
+   De **{{fmt_big_int_real dept_head_count_region_first_active_year}}** à **{{fmt_big_int_real dept_head_count_region_last_active_year}}**, le plus fort contingent d’employés **{{de_dept dept}}** (**{{fmt_percentage1 dept_head_count_region_top_avg_percent}}**) travaillait dans **{{fmt_big_int_real dept_head_count_region_top}}**.  
+
+   
+   * La **région de la capitale nationale (RCN)** inclut à la fois les employés qui travaillent à Ottawa (Ontario) et ceux qui travaillent à Gatineau (Québec).
+   
+   
+   {{#unless is_a11y_mode}}* Cliquez ou pointez avec votre curseur sur une province ou territoire figurant à la carte ci dessous pour voir le nombre d’employés **{{de_dept dept}}** travaillant dans cette région au moment des cinq derniers aperçus. Prière de retenir que l’échelle peut varier en fonction des données affichées. {{/unless}}

@@ -1,0 +1,238 @@
+@import '../common_css/common-variables';
+
+svg {
+ overflow : hidden;
+}
+
+rect.gov_bubble {
+  stroke: #ff7f0e;
+  stroke-width: .5px;
+}
+
+text.parent {
+  fill: #1f77b4;
+}
+
+circle.gray {
+  fill: #ccc;
+  stroke: #999;
+  pointer-events: all;
+}
+circle.parent {
+  fill: #1f77b4;
+  fill-opacity: .1;
+  stroke: steelblue;
+  stroke-width: 2;
+}
+circle.grand-parent {
+  stroke : #000;
+  fill-opacity: 0;
+}
+circle.parent:hover {
+  stroke: #ff7f0e;
+  stroke-width: .5px;
+}
+circle.child {
+  pointer-events: none;
+}
+circle.hidden {
+  display : none;
+}
+div.tick,
+.axis text {
+  color: #333;
+  font-size: 85%;
+  font-weight: $mediumFontWeight;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: auto;
+}
+
+.axis.black line,
+.axis.black path {
+  stroke: #000;
+}
+.axis.black div.tick,
+.axis.black text {
+  fill: #000;
+}
+
+.y.axis text {
+  font-size : 85%;
+}
+.legend > li{
+  margin-top: 5px;
+}
+ul.legend.horizontal{
+ margin-bottom: 0px; 
+}
+.legend.horizontal > li {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+.ul-pieLegend{
+  display: block
+}
+
+.li-pieLegend{
+  border-bottom: 1px dotted black;
+  padding: 5px;
+  display: flex
+}
+.li-pieLegend:last-child{
+  border-bottom: none;
+}
+
+.tree-map-node { 
+  position: absolute;
+  line-height: 12px;
+  border-radius: 5px;
+  overflow: hidden;
+  text-indent:5px;
+  border: solid 1px white;
+}
+.heatmap-square {
+  cursor: pointer;
+}
+.heatmap-square.hover {
+  background: white !important;
+}
+.tree-map-node.isSelected { 
+  z-index: 999 !important;
+  background: #e73827 !important; /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover,  #e73827 0%, #f02f17 29%, #f16f5c 50%, #f85032 100%) !important; /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#e73827), color-stop(29%,#f02f17), color-stop(50%,#f16f5c), color-stop(100%,#f85032)) !important; /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover,  #e73827 0%,#f02f17 29%,#f16f5c 50%,#f85032 100%) !important; /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover,  #e73827 0%,#f02f17 29%,#f16f5c 50%,#f85032 100%) !important; /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover,  #e73827 0%,#f02f17 29%,#f16f5c 50%,#f85032 100%) !important; /* IE10+ */
+  background: radial-gradient(ellipse at center,  #e73827 0%,#f02f17 29%,#f16f5c 50%,#f85032 100%) !important; /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e73827', endColorstr='#f85032',GradientType=1 ) !important; /* IE6-9 fallback on horizontal gradient */
+}
+
+a.boxclose {
+  text-decoration: none;
+  cursor: pointer;
+  color: #F00;
+  font-size: 3em;
+  font-weight: $heavyFontWeight;
+  padding: 11px 3px;
+}
+
+.boxclose:before{
+  content: "\00d7";
+}
+
+.bar-amount-neg {
+  color: red;
+}
+
+div.d3-list, {
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.legend-container {
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 10px;
+  padding-left: 10px;
+  border: 1px solid #7b8c9d;
+  background-color: #fdfdfd;
+  border-radius: 10px;
+}
+
+.legend-container.horizontal {
+  width: 90%;
+  margin-left: 9%;
+}
+
+.legend-list-el {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.legend-list-inline {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+@media(min-width: 600px){
+  .legend-list-inline.horizontal {
+    flex-direction: row;
+  }
+}
+
+.tabular-legend-list-el {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px 0;
+}
+.tabular-legend-list-el:not(:first-child){
+  border-top: 1px solid #ccc;
+}
+
+.legend-color-checkbox {
+  float: left;
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border-radius: 3px;
+}
+
+.tick {
+  font-size: 12px;
+  font-weight: $mediumFontWeight;
+}
+
+.tick > text {
+  font-size: 12px!important;
+  font-weight: $mediumFontWeight;
+}
+
+.axis-label {
+  font-size: 13px!important;
+  font-weight: $mediumFontWeight;
+  text-anchor: start;
+}
+
+.__label {
+  font-weight: $mediumFontWeight;
+}
+
+
+
+
+.IconArrayItem {
+  width: 15px;
+  height: 15px;
+  margin: 0.5px;
+
+  &.IconArrayItem__Small {
+    width: 10px;
+    height: 10px;
+  }
+
+  &.IconArrayItem__Large {
+    width: 20px;
+    height: 20px;
+  }
+
+
+}

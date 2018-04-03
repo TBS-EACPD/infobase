@@ -13,7 +13,7 @@ const {
   EverythingSearch,
 }  = require('../util_components.js');
 
-var PanelGraph = require('../core/graphs').PanelGraph;
+const {PanelGraph} = require('../core/PanelGraph');
 
 function url_template(subject, graph){
   return `#graph/${subject.constructor.type_name}/${graph.key}/${subject.id}/`
@@ -123,7 +123,7 @@ ROUTER.add_container_route("graph/:level_type:/:graph:/:org_id:","graph_route",f
     );
 
     if(data_for_graph){
-      graph_obj.render(d4.select(container.querySelector('#main')), data_for_graph, options); 
+      graph_obj.render(d3.select(container.querySelector('#main')), data_for_graph, options); 
     }
   });
 

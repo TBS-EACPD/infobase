@@ -1,22 +1,22 @@
-exports = module.exports;
-// see [here](../table_definition.html) for description
-// of the table spec
-require("./table9.ib.yaml");
-require("../../graphs/last_year_total_employment");
-require("../../graphs/historical_employee_totals");
-require("../../graphs/historical_employee_type");
+import "./table9.ib.yaml";
 
-const {
+import {
   STATS, 
   text_maker, 
   m, 
   Statistics,
   people_five_year_percentage_formula,
-  business_constants : {tenure},
-  years : { people_years, people_years_short_second},
-} = require("../table_common");
+  business_constants,
+  years,
+} from "../table_common";
 
-module.exports = {
+const { tenure } = business_constants;
+const {
+  people_years,
+  people_years_short_second,
+} = years;
+
+export default {
   "id": "table9",
   source: ["RPS"],
   "tags": [
@@ -88,10 +88,10 @@ module.exports = {
 
   "dimensions": [
     {
-      title_key : "employee_type",
-      include_in_report_builder : true,
+      title_key: "employee_type",
+      include_in_report_builder: true,
 
-      filter_func : function(options){
+      filter_func: function(options){
         return function(row){
           return row.employee_type;
         };
@@ -105,7 +105,7 @@ module.exports = {
           return [key].concat(years);
         })
         .sortBy(function(row){
-          return d4.sum(_.tail(row));
+          return d3.sum(_.tail(row));
         })
         .value();
     },
@@ -114,7 +114,7 @@ module.exports = {
 
 Statistics.create_and_register({
   id: 'table9_dept_info', 
-  table_deps: [ 'table9'],
+  table_deps: ['table9'],
   level: 'dept',
   compute: (subject, tables, infos, add, c) => {
     const table = tables.table9;
@@ -132,8 +132,8 @@ Statistics.create_and_register({
       q.get_top_x(
         ["employee_type",col],
         {
-          zip : true,
-          sort_col : col,
+          zip: true,
+          sort_col: col,
         }
       )
     );
@@ -141,12 +141,12 @@ Statistics.create_and_register({
     STATS.year_over_year_multi_stats_active_years(add,"head_count_type",all_years,false,people_years);
 	
     const total_head_count_by_year = _.chain(people_years)
-      .map( y => d4.sum( _.map(q.data, _.property(y) ) ) )
+      .map( y => d3.sum( _.map(q.data, _.property(y) ) ) )
       .value();
 
     add(
       "head_count_avg", 
-      d4.sum(total_head_count_by_year)/ ( _.filter(total_head_count_by_year, d => d > 0).length )
+      d3.sum(total_head_count_by_year)/ ( _.filter(total_head_count_by_year, d => d > 0).length )
     );
 	
     const first_active_year_index = _.findIndex(total_head_count_by_year, d=> d !== 0);
@@ -171,14 +171,14 @@ Statistics.create_and_register({
 
 Statistics.create_and_register({
   id: 'table9_gov_info', 
-  table_deps: [ 'table9'],
+  table_deps: ['table9'],
   level: 'gov',
   compute: (subject, tables, infos, add, c) => {
     const table = tables.table9;
     const q = table.q(subject);
-    const col =  "{{ppl_last_year}}";
+    const col = "{{ppl_last_year}}";
     const yearly_total_head_counts = q.sum(people_years, {as_object: false});
-    const five_year_total_head_count = d4.sum(yearly_total_head_counts);
+    const five_year_total_head_count = d3.sum(yearly_total_head_counts);
 
     c.emp_types = _.uniqBy(q.get_col("employee_type"));
     add( "head_count_ppl_last_year", q.sum(col));

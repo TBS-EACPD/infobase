@@ -1,7 +1,7 @@
 "use strict";
 exports = module.exports;
 
-var D3CORE = require('./core');
+var common_charts_utils = require('./common_charts_utils');
 
 var base_colour =  'rgba(49,91,126,0.5)' ;
 var hover_colour = 'rgba(49,91,126,1)';
@@ -14,7 +14,7 @@ exports.concept_explorer = class concept_explorer {
   
   constructor(container,options){
    
-    D3CORE.setup_graph_instance(this,d4.select(container),options);
+    common_charts_utils.setup_graph_instance(this,d3.select(container),options);
     var _graph_area  = this._graph_area = this.svg.append("g").attr("class","_graph_area");
     this.arc_area = _graph_area.append("g").attr("class","arcs");
     this.links_area = _graph_area.append("g").attr("class","links");
@@ -313,7 +313,7 @@ exports.concept_explorer = class concept_explorer {
     // draw the visual flourish of the coloured arcs around the tags
     if (this.arc_area.select("path.arc").node() === null && num_sel === 0){
       var arcs = [
-        d4.arc()
+        d3.arc()
           .innerRadius(327)
           .outerRadius(this.width/2)
           .startAngle(to_rads(angle_offset))
@@ -321,7 +321,7 @@ exports.concept_explorer = class concept_explorer {
       ];
       if (!this.small_window){
         arcs.push(
-          d4.arc()
+          d3.arc()
             .innerRadius(327)
             .outerRadius(this.width/2)
             .startAngle(-to_rads(angle_offset))
@@ -435,10 +435,10 @@ exports.concept_explorer = class concept_explorer {
     tag_circles.merge(new_tag_circles)
       .attr("id", function(d) {return "tag-circle"+d.rid;})
       .on("mouseenter", function(d, i) {
-        d4.select(this).select("circle").attr("stroke", "#315b7e");
+        d3.select(this).select("circle").attr("stroke", "#315b7e");
         that.highlight_links(d, true);})
       .on("mouseleave", function(d, i) {
-        d4.select(this).select("circle").attr("stroke", "#bce8f1");
+        d3.select(this).select("circle").attr("stroke", "#bce8f1");
         that.highlight_links(d, false);})
       .attr("transform",function(d) {
         return "rotate(" + -d.angle + ") translate(" + d.dr + ")";
@@ -627,7 +627,7 @@ exports.concept_explorer = class concept_explorer {
             return "#f9f9f9";
           });
 
-        d4.select("button#tagged-label"+ d.target.rid)
+        d3.select("button#tagged-label"+ d.target.rid)
           .filter(function(dd){
             return dd.selected !== true;
           })

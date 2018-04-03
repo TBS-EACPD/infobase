@@ -1,3 +1,4 @@
+require('../gen_expl/explorer-styles.scss');
 const classNames = require('classnames');
 const ReactTransitionGroup  = require('react-addons-transition-group');
 const { infograph_href_template } = require('../link_utils.js');
@@ -281,7 +282,6 @@ class Explorer extends React.Component {
       should_show_orgs_without_data,
 
       sort_func,
-      set_grouping,
       on_toggle_orgs_without_data,
 
     } = this.props;
@@ -295,11 +295,11 @@ class Explorer extends React.Component {
     return <div>
       <div>
         <ul className="nav nav-justified nav-pills">
-          <li className={classNames(grouping==='portfolio' && 'active')}><a href="#"  role='button' onClick={()=>set_grouping("portfolio")}> <TM k="by_ministry" /> </a></li>
-          <li className={classNames(grouping==='inst_form' && 'active')}><a href="#"  role='button' onClick={()=>set_grouping("inst_form")}> <TM k="by_inst_form" /> </a></li>
-          <li className={classNames(grouping==='historical' && 'active')}><a href="#" role='button'  onClick={()=>set_grouping("historical")}> <TM k="by_historical" /></a></li>
-          <li className={classNames(grouping==='pop_group' && 'active')}><a href="#" role='button'  onClick={()=>set_grouping("pop_group")}> <TM k="by_pop_group" /></a></li>
-          <li className={classNames(grouping==='all' && 'active')}><a href="#" role='button'  onClick={()=>set_grouping("all")}> <TM k="by_all" /></a></li>
+          <li className={classNames(grouping==='portfolio' && 'active')}><a href="#igoc/portfolio" > <TM k="by_ministry" /> </a></li>
+          <li className={classNames(grouping==='inst_form' && 'active')}><a href="#igoc/inst_form" > <TM k="by_inst_form" /> </a></li>
+          <li className={classNames(grouping==='historical' && 'active')}><a href="#igoc/historical" > <TM k="by_historical" /></a></li>
+          <li className={classNames(grouping==='pop_group' && 'active')}><a href="#igoc/pop_group" > <TM k="by_pop_group" /></a></li>
+          <li className={classNames(grouping==='all' && 'active')}><a href="#igoc/all" > <TM k="by_all" /></a></li>
         </ul>
       </div>
       <div
@@ -317,12 +317,22 @@ class Explorer extends React.Component {
           }}
         >
           <input 
+            aria-label={text_maker("explorer_search_is_optional")}            
             className="form-control input-lg"
             type="text"
             style={{width:"100%", backgroundColor:"#fafafa"}}
             placeholder={text_maker('igoc_search_text')}
             onChange={evt => this.handleQueryChange(evt.target.value)}
+
           />
+          {
+            window.is_a11y_mode &&
+            <input 
+              type="submit"
+              name="search"
+              value={text_maker("explorer_search")}
+            />
+          }
         </form>
         <div className="igoc-checkbox-and-count-row">
           <label>
@@ -343,6 +353,7 @@ class Explorer extends React.Component {
         tabIndex={-1} 
         ref="focus_mount" 
         style={{position:'relative'}}
+        aria-label={text_maker("explorer_focus_mount")}
       >
         {loading && 
           <div className="loading-overlay">

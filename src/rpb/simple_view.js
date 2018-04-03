@@ -113,24 +113,26 @@ class SimpleView extends React.Component {
               </label>
             </div>
                 }
-                <div className="rpb-config-item">
-                  <label 
-                    className="rpb-config-header" 
-                    htmlFor='display_as' 
-                  > 
-                    <TextMaker text_key="display_as_table" />
-                    <input 
-                      type="checkbox"
-                      disabled={!canGraph}
-                      checked={!shouldGraph}
-                      onChange={on_toggle_preferTable}
-                      style={{ marginLeft: '15px' }}
-                    />
-                  </label>
-                </div>
+                {!window.is_a11y_mode &&
+                  <div className="rpb-config-item">
+                    <label 
+                      className="rpb-config-header" 
+                      htmlFor='display_as' 
+                    > 
+                      <TextMaker text_key="display_as_table" />
+                      <input 
+                        type="checkbox"
+                        disabled={!canGraph}
+                        checked={!shouldGraph}
+                        onChange={on_toggle_preferTable}
+                        style={{ marginLeft: '15px' }}
+                      />
+                    </label>
+                  </div>
+                }
                 <div className="rpb-config-item">
                   <div className="row">
-                    <div className="col-md-2">
+                    <div className="col-md-2" style={{paddingLeft:"0px"}}>
                       <label className="rpb-config-header" htmlFor="dim-select"> <span className="nowrap"><TextMaker text_key="group_by" /></span> </label>
                     </div>
                     <div className="col-md-10">
@@ -148,7 +150,7 @@ class SimpleView extends React.Component {
                 { deptBreakoutMode &&
               <div className="rpb-config-item">
                 <div className="row">
-                  <div className="col-md-2">
+                  <div className="col-md-2" style={{paddingLeft:"0px"}}>
                     <label className="rpb-config-header" htmlFor="filt-select"> <TextMaker text_key="filter" /> </label>
                   </div>
                   <div className="col-md-10">
@@ -256,7 +258,7 @@ class SimpleView extends React.Component {
                 key={nick}
                 onClick={()=>{ on_header_click(nick); }}
                 style={{cursor:'pointer'}}
-                scope="column"
+                scope="col"
               >
                 {display}
                 <SortIndicators 

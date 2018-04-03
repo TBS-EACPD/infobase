@@ -527,26 +527,34 @@ Handlebars.registerHelper("stripes", function(index) {
 });
 
 
-
 // register a handlebars helper for creating glossary links
 // If a markdown link is written accordingly:
 //  `[link text]({{gl ‘keytext’}}`
 //  will produce:
 // `[link text](#glossary-key "en/fr explanation that this links to a glossary")`
-Handlebars.registerHelper("gl",function(key){
+Handlebars.registerHelper("gl", function glossary_link(key){
   const href = glossary_href(GlossaryEntry.lookup(key));
   var str = `(${href} "${text_maker('glossary_link_title')}")`;
   // SafeString is used to avoid having to use the [Handlebars triple bracket syntax](http://handlebarsjs.com/#html_escaping)
   return new Handlebars.SafeString(str);
 });
 
+
 //produces a link with glossary tooltip
-Handlebars.registerHelper("gl_tt",function(display, key){
+function glossary_tooltip(display, key){
+  return new Handlebars.SafeString(
+    `<span class="nowrap glossary-tooltip-link" tabindex="0" aria-hidden="true" data-glossary-key="${key}" data-toggle="tooltip" data-html="true" data-container="body">${display}</span>`
+  );
+}
+
+function tooltip_a11y_fallback(display, key){
   const href = glossary_href(GlossaryEntry.lookup(key));
   return new Handlebars.SafeString(
-    `<a class="nowrap glossary-tooltip-link" aria-hidden="true" href="#" data-glossary-key="${key}" data-toggle="tooltip" data-html="true" data-container="body">${display}</a><a href="${href}" class="sr-only" title="${text_maker('glossary_link_title')}">${display}</a>`
+    `<a href=${href} title="${text_maker("glossary_link_title")}">${display}</a>`
   );
-});
+}
+
+Handlebars.registerHelper("gl_tt", window.is_a11y_mode ? tooltip_a11y_fallback : glossary_tooltip );
 
 
 Handlebars.registerHelper("gl_def",function(key){

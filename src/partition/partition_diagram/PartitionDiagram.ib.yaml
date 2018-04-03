@@ -1,0 +1,9 @@
+partition_unfocus_all_popup:
+  transform: [handlebars,markdown]
+  text: |
+    <div class="partition-popup fixed-popup unfocus-all-button-container">
+      <a href='#' 
+        class='btn btn-xs btn-block unmagnify-all'>
+        {{gt "partition_unfocus_button"}} {{gt "all"}}
+      </a> 
+    </div>

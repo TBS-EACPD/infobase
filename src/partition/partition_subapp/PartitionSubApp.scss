@@ -1,0 +1,108 @@
+@import '../../common_css/common-variables';
+
+.partition-container {
+  width: 98vw;
+  margin-top: 10px;
+}
+
+.__partition__ > .partition-diagram-fader {
+  height: 100%;
+  width: inherit;
+  position: absolute;
+  background-color: rgba(4, 18, 37, 0.81);
+  border-radius: 10px;
+  z-index: 101;
+}
+
+.__partition__ > .partition-notes {
+  margin-bottom: 10px;
+  overflow-y: hidden;
+}
+
+.__partition__ > .partition-controls {
+  width: inherit;
+  min-width: inherit;
+  background-color: rgb(4, 18, 37);
+  border-bottom: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+.__partition__ > .partition-controls > .form-horizontal {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  padding: 15px;
+  padding-top: 9px;
+}
+
+
+.partition-control-element {
+  display: flex;
+  flex-direction: column;
+  padding-right: 9px;
+}
+
+.partition-control-element > text {
+  color: #fff;
+  font-size: 20px;
+  font-weight: $lightFontWeight;
+}
+
+.partition-control-element > .glyphicon {
+  font-size: 54px;
+  position: absolute;
+  color: rgb(69, 161, 227);
+  margin-top: 17px;
+  z-index: 101;
+  cursor: pointer;
+}
+
+.partition-control-element > input.form-control.search {
+  &:disabled {
+    cursor: default;
+  }
+  &::-ms-clear {
+    width: 0;
+    height: 0;
+  }
+}
+
+/* Over-ride bootstrap .form-control width style */
+.partition-control-element > select.form-control {
+  font-weight: $mediumFontWeight;
+}
+
+ul.partition-intro-two-col-list {
+  width: 100%;
+  display: inline-block;
+  & > li {
+    float: left;
+    width: 50%;
+    padding-right: 20px;
+  }
+}
+
+.partition-popup.partition-intro {
+  z-index: 102;
+  border: 3px solid rgb(69, 161, 227); 
+  top: 100px; 
+  left: 0px;
+  width: 800px;
+}
+.partition-popup.partition-intro > .intro-popup-color { 
+  color:rgb(69, 161, 227);
+}
+.partition-popup.partition-intro > .popup-intro-text {
+  line-height:1; 
+  text-align:left; 
+}
+.partition-popup.partition-intro > .popup-pointer-up {
+  top: -40px;
+  left: 14px;
+  position: absolute;
+	width: 0;
+	height: 0;
+	border-left: 25px solid transparent;
+	border-bottom: 40px solid #efefef;
+	border-right: 25px solid transparent;
+}

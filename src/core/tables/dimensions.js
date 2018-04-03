@@ -91,7 +91,7 @@ const make_horizontal_func = function(func,table){
       include_dept = false;
     }
 
-    let nest = d4.nest()
+    let nest = d3.nest()
       .key(func({ 
         table,
         //col:_.isArray(col) ? col[0] : col

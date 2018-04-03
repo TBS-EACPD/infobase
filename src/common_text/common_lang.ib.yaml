@@ -385,9 +385,6 @@ ex_level_condensed:
 avgage:	
   en: Average Age	
   fr: Âge moyen
-occupational_cat:
-  en: Occupational Category
-  fr: Catégorie professionnelle
 FOL:
   en: First Official Language
   fr: Première langue officielle
@@ -527,6 +524,11 @@ fte:
 actual_ftes:
   en: Actual FTEs
   fr: ETP réels
+
+planned_fte:
+  en: Planned FTE
+  fr: ETP prévus
+
 planned_ftes:
   en: Planned FTEs
   fr: ETP prévus
@@ -672,6 +674,11 @@ major_voted_stat:
 voted_stat:
   en: Voted / Statutory
   fr: Crédit / poste législatif
+
+estimates_doc:
+  en: Estimates Mechanism
+  fr: Mécanisme budgétaire
+
 by_estimates_doc:
   en: By Estimates Mechanism
   fr: Par mécanisme budgétaire
@@ -934,3 +941,19 @@ related_tags_title:
 related_tags:
   en: Programs under this tag also appear under the following tags
   fr: Les programmes relevant de cette étiquette relèvent également des étiquettes suivantes
+
+
+
+
+explorer_search:
+  en: Search
+  fr: Recherchez
+
+explorer_focus_mount:
+  en: Search results below
+  fr: Résultat de votre recherche ci-dessous
+
+
+explorer_search_is_optional:
+  en: Optionally filter the below data using search
+  fr: Vous pouvez choisir de filtrer les données ci-dessous en utilisant une barre de recherche

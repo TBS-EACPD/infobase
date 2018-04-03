@@ -64,6 +64,7 @@
     "ga":true,
     "APPLICATION_LANGUAGE":true,
     "SHA":true,
-    "PRE_PUBLIC_ACCOUNTS":true
+    "PRE_PUBLIC_ACCOUNTS":true,
+    "is_a11y_mode": true
   }
 }

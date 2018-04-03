@@ -36,3 +36,4 @@ gruntdocs
 .git.zip
 npm-debug*
 /storybook-static
+yarn.lock

@@ -90,12 +90,12 @@ module.exports = exports = {
 
     var labels = _.map(amounts,0);
     var totals = _.map(amounts, function(row){
-      return d4.sum(_.tail(row));
+      return d3.sum(_.tail(row));
     });
     var averages = _.map(totals, function(d){
       return d/_.tail(amounts[0]).length;
     });
-    var max = d4.max(totals);
+    var max = d3.max(totals);
     var max_index = _.indexOf(totals,max);
     var max_row = amounts[max_index];
     var max_label = labels[max_index];
@@ -107,7 +107,7 @@ module.exports = exports = {
     add(context_prefix +"_top",max_label);
     add(context_prefix +"_top_amnt",max);
     add(context_prefix +"_top_avg",max_avg);
-    add(context_prefix +"_top_avg_percent",max/d4.sum(totals));
+    add(context_prefix +"_top_avg_percent",max/d3.sum(totals));
     add({
       key :  context_prefix+"_top_high_var",
       value :  max_co_var > 0.05,
@@ -115,7 +115,7 @@ module.exports = exports = {
     });
   
     if (amounts.length > 1) {
-      var min = d4.min(totals);
+      var min = d3.min(totals);
       var min_index = _.indexOf(totals,min);
       var min_row = amounts[min_index];
       var min_label = labels[min_index];
@@ -123,7 +123,7 @@ module.exports = exports = {
       add(context_prefix +"_bottom",min_label);
       add(context_prefix +"_bottom_amnt",min);
       add(context_prefix +"_bottom_avg",min_avg);
-      add(context_prefix +"_bottom_avg_percent",min/d4.sum(totals));
+      add(context_prefix +"_bottom_avg_percent",min/d3.sum(totals));
       
       var min_co_var =  Math.sqrt(_.reduce(_.tail(min_row), function(x,y){
         return x + Math.pow(y-min_avg,2);
@@ -155,7 +155,7 @@ module.exports = exports = {
       var amounts_temp = amounts;
       amounts_temp = _.map(amounts_temp, amounts_temp =>  _.tail(amounts_temp) );
       amounts_temp = _.zip.apply(_,amounts_temp); 
-      amounts_temp = _.map(amounts_temp, amounts_temp => d4.sum(amounts_temp) );
+      amounts_temp = _.map(amounts_temp, amounts_temp => d3.sum(amounts_temp) );
       //The following determines the first and last "active year" for a given department, 
       //assumes no middle stoppage
       var m = run_template;
@@ -178,12 +178,12 @@ module.exports = exports = {
 	
     var labels = _.map(amounts,0);
     var totals = _.map(amounts, function(row){
-      return d4.sum(_.tail(row));
+      return d3.sum(_.tail(row));
     });
     var averages = _.map(totals, function(d){
       return d/active_years;
     });
-    var max = d4.max(totals);
+    var max = d3.max(totals);
     var max_index = _.indexOf(totals,max);
     var max_row = amounts[max_index];
     var max_label = labels[max_index];
@@ -195,7 +195,7 @@ module.exports = exports = {
     add(context_prefix +"_top",max_label);
     add(context_prefix +"_top_amnt",max);
     add(context_prefix +"_top_avg",max_avg);
-    add(context_prefix +"_top_avg_percent",max/d4.sum(totals));
+    add(context_prefix +"_top_avg_percent",max/d3.sum(totals));
     add({
       key :  context_prefix+"_top_high_var",
       value :  max_co_var > 0.05,
@@ -203,7 +203,7 @@ module.exports = exports = {
     });
   
     if (amounts.length > 1) {
-      var min = d4.min(totals);
+      var min = d3.min(totals);
       var min_index = _.indexOf(totals,min);
       var min_row = amounts[min_index];
       var min_label = labels[min_index];
@@ -211,7 +211,7 @@ module.exports = exports = {
       add(context_prefix +"_bottom",min_label);
       add(context_prefix +"_bottom_amnt",min);
       add(context_prefix +"_bottom_avg",min_avg);
-      add(context_prefix +"_bottom_avg_percent",min/d4.sum(totals));
+      add(context_prefix +"_bottom_avg_percent",min/d3.sum(totals));
 
       var min_co_var =  Math.sqrt(_.reduce(_.tail(min_row), function(x,y){
         return x + Math.pow(y-min_avg,2);

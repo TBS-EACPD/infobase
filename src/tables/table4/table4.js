@@ -1,8 +1,5 @@
 // see [here](../table_definition.html) for description
 // of the table spec
-require("../../graphs/historical_stat_spending");
-require("../../graphs/historical_voted_spending");
-
 require("./table4.ib.yaml");
 
 const {
@@ -181,7 +178,7 @@ const vote_stat_query = function(vote_or_stat, cut_off){
     .map(_.clone)
     .flatten()
     .sortBy(function(d){
-      d.total = d4.sum(_.map(std_years, function(year){return d[year+"auth"];}));
+      d.total = d3.sum(_.map(std_years, function(year){return d[year+"auth"];}));
       total += d.total;
       return -d.total;
     })
@@ -239,9 +236,9 @@ Statistics.create_and_register({
       year =>  _.map(q.data, row => (row[year + "auth"] - row[year + "exp"]) ) 
     );
 
-    const unused_auth_sum = _.map(unused_auth_diff,d => d4.sum(d) );
+    const unused_auth_sum = _.map(unused_auth_diff,d => d3.sum(d) );
 
-    const unused_auth_avg = d4.sum(unused_auth_sum)/ unused_auth_sum.length
+    const unused_auth_avg = d3.sum(unused_auth_sum)/ unused_auth_sum.length
 
     add({
       key : "hist_diff_average", 

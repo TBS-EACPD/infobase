@@ -27,10 +27,7 @@ const index_lang_lookups = {
     en: "Français",
     fr: "English",
   },
-  other_lang_href: {
-    en: "index-fra.html",
-    fr: "index-eng.html",
-  },
+
   you_are_here: {
     en: "You are here",
     fr: "Vous êtes ici",
@@ -66,6 +63,31 @@ const index_lang_lookups = {
       <li><a href="https://www.canada.ca/fr.html">Visiter Canada.ca</a></li>
     `,
   },
+  script_url: {
+    en: "app-en.min.js",
+    fr: "app-fr.min.js",
+  },
+  a11y_script_url: {
+    en: "app-a11y-en.min.js",
+    fr: "app-a11y-fr.min.js",
+  },
+  other_lang_href: {
+    en: "index-fra.html",
+    fr: "index-eng.html",
+  },
+  a11y_other_lang_href: {
+    en: "index-basic-fra.html",
+    fr: "index-basic-eng.html",
+  },
+  a11y_version_url: {
+    en: "index-basic-eng.html",
+    fr: "index-basic-fra.html",
+  },
+  a11y_version_text: {
+    en: "Text based version",
+    fr: "Version basé en texte",
+  },
+
 };
   
 

@@ -59,31 +59,3 @@ table12:
     gouvernemental (comme la fusion ou l'élimination d’organisations) se sont produits, les données 
     n’ont pas été rajustées.
 
-planned_fte:
-  en: Planned FTE
-  fr: ETP prévus
-
-planned_program_fte_text:
-  transform: [handlebars,markdown]
-  en: |
-   Each organization is responsible for a number of {{gl_tt "Programs" "PROG"}}.
-   {{#if crso_prg_top2}} 
-   In {{planning_year_1}}, this {{cr_or_so subject}} had **{{crso_prg_num}}** planned Programs.
-   During that fiscal year, the largest Program was
-   **{{crso_prg_top1}}** (**{{fmt_big_int_real crso_prg_top1_amnt}} FTEs**)
-   followed by **{{crso_prg_top2}}** (**{{fmt_big_int_real crso_prg_top2_amnt}} FTEs**).
-   {{else}} In {{pa_last_year}}, **{{subj_name subject}}** had **{{crso_prg_num}}** Program. 
-   During that fiscal year, the largest Program was **{{crso_prg_top1}}** 
-   (**{{fmt_big_int_real crso_prg_top1_amnt}} FTEs**).
-   {{/if}}
-  
-  fr: |
-   Chaque ministère ou organisme a la responsabilité d’un certain nombre de {{gl_tt "programmes" "PROG"}}.
-   {{#if crso_prg_top2}} 
-   En {{planning_year_1}}, **{{subj_name subject}}** comptait **{{crso_prg_num}}** programmes.
-   Durant cet exercice, le plus important programme était **{{crso_prg_top1}}** (**{{fmt_big_int_real crso_prg_top1_amnt}} ETP**),
-   suivi de **{{crso_prg_top2}}** (**{{fmt_big_int_real crso_prg_top2_amnt}} ETP**).
-   {{else}} 
-   En {{pa_last_year}}, **{{subj_name subject}}** comptait **{{crso_prg_num}}** programme. 
-   Durant cet exercice, le plus important programme était **{{crso_prg_top1}}** (**{{fmt_big_int_real crso_prg_top1_amnt}} ETP**).
-   {{/if}}

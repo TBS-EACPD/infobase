@@ -2,13 +2,10 @@ require('./table_picker.scss');
 const {Table} = require('../core/TableClass.js');
 const {GlossaryEntry } = require('../models/glossary.js');
 const ReactCSSTransitionGroup  = require('react-addons-css-transition-group');
-const ReactTransitionGroup  = require('react-addons-transition-group');
 const classNames = require('classnames');
 const concepts_to_display_filter = require('./table_picker_concept_filter.js');
 const { 
   TextMaker,
-  FirstChild,
-  AccordionEnterExit,
 } = require('../util_components.js');
 
 
@@ -144,7 +141,7 @@ class TablePicker extends React.Component {
   fadeOutAndSelectTable(table_id){
     this.setState({ exiting: true })
     const initialHeight = this.refs.main.offsetHeight;
-    d4.select(this.refs.main)
+    d3.select(this.refs.main)
       .style('max-height',initialHeight+'px')
       .style('opacity', 1)
       .transition()
@@ -171,17 +168,6 @@ class TablePicker extends React.Component {
 
 //stateless presentational component
 class TaggedItemCloud extends React.Component {
-  constructor(){
-    super();
-    this.state = { 
-      active_item : null, 
-    };
-  }
-  setActive(id){
-    if(!this.props.exiting){
-      this.setState({ active_item: id}); 
-    }
-  }
   render(){
     const {
       tags,
@@ -192,42 +178,23 @@ class TaggedItemCloud extends React.Component {
       noItemsMessage,
     } = this.props;
 
-    const {
-      active_item,
-    } = this.state;
-
     const flat_items = _.map(items, ({display,id, description}) => (
-      <div 
-        key={id} 
-        onMouseOver={()=>{ this.setState({active_item : id})}}
-        onFocus={()=>{ this.setState({active_item : id})}}
-        tabIndex="0"
-      >
+      <div key={id}>
         <div className="item-card">
-          <div className={classNames("item-title centerer", active_item === id && 'active')}>
+          <div className="item-title centerer">
             {display}
           </div>
-          <ReactTransitionGroup component={FirstChild}>
-            { active_item === id && 
-          <AccordionEnterExit 
-            component="div"
-            expandDuration={500}
-            collapseDuration={500}
-            cancel={this.props.exiting}
-          >
+          <div className="item-card-John-fixed-it">
             <div>
-              <div className="item-description">
-                { description } 
-              </div>
               <div className="item-card-footer">
                 <div className="item-tag-container">
-                  <span role="heading"><u> <TextMaker text_key='covered_concepts' /> </u></span>
+                  <span role="heading" className="sr-only"><u> <TextMaker text_key='covered_concepts' /> </u></span>
                   <div className="item-tags">
                     {_.chain(item_tag_linkage)
                       .filter({item_id: id})
                       .map( ({tag_id}) => _.find(tags, {id:tag_id} ) )
                       .map( ({id, display, active}) => 
-                        <div key={id} className={classNames(active && "active", 'item-tag')}>
+                        <div key={id} className={classNames(active && "active", active && "active", 'item-tag')}>
                           {display}
                         </div>
                       )
@@ -240,21 +207,19 @@ class TaggedItemCloud extends React.Component {
                 </div>
               </div>
             </div>
-          </AccordionEnterExit>
-            }
-          </ReactTransitionGroup>
+          </div>
         </div>
       </div>
     ));
 
     const items_split = _.chain(flat_items)
       .map( (item,ix) => ({item,ix}) )
-      .partition( ({item,ix})=> ix%2===0 )
+      .groupBy( ({item,ix})=> ix%3 )
       .map( group => _.map(group, 'item') )
       .value();
     
     return <div>
-      <div style={{padding: '0px 40px'}}>
+      <div style={{padding: '0px'}}>
         <ul className="tag-cloud tag-cloud-main">
           {_.map(tags, ({display, id, active}) => 
             <li 
@@ -280,7 +245,7 @@ class TaggedItemCloud extends React.Component {
         <div>
           <div className="row item-cloud-row">
             <ReactCSSTransitionGroup 
-              className="col-md-6 item-cloud-col" 
+              className="col-md-4 item-cloud-col" 
               component="div"
               transitionName="transi-height"
               transitionEnterTimeout={500}
@@ -289,13 +254,22 @@ class TaggedItemCloud extends React.Component {
               {items_split[0]}
             </ReactCSSTransitionGroup>
             <ReactCSSTransitionGroup 
-              className="col-md-6 item-cloud-col"
+              className="col-md-4 item-cloud-col"
               component="div"
               transitionName="transi-height"
               transitionEnterTimeout={500}
               transitionLeaveTimeout={500}
             >
               {items_split[1]}
+            </ReactCSSTransitionGroup>
+            <ReactCSSTransitionGroup 
+              className="col-md-4 item-cloud-col"
+              component="div"
+              transitionName="transi-height"
+              transitionEnterTimeout={500}
+              transitionLeaveTimeout={500}
+            >
+              {items_split[2]}
             </ReactCSSTransitionGroup>
             <div className="clearfix" />
           </div>

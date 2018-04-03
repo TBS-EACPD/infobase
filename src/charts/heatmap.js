@@ -1,12 +1,12 @@
 "use strict";
-var D3CORE = require('./core');
+var common_charts_utils = require('./common_charts_utils');
 
 var heatmap = function(container,options){
 
 
-  d4.select(container).select('*').remove();
+  d3.select(container).select('*').remove();
 
-  D3CORE.setup_graph_instance(this,d4.select(container),options);
+  common_charts_utils.setup_graph_instance(this,d3.select(container),options);
   this.graph_area  = this.svg.append("g").attr("class","_graph_area");
   this.inner_graph_area = this.graph_area.append("g").attr("class","inner_graph_area");
   // recorded in RGB format for easy sharing between SVG and HTML
@@ -73,12 +73,12 @@ heatmap.prototype.render = function(options){
     .flatten(true)
     .value();
 
-  var x_scale = d4.scaleBand()
+  var x_scale = d3.scaleBand()
     .domain(x_values)
     .rangeRound([0,width])
     .padding(0);
 
-  var y_scale = d4.scaleBand()
+  var y_scale = d3.scaleBand()
     .domain(y_values)
     .rangeRound([height,0])
     .padding(0);
@@ -208,13 +208,13 @@ heatmap.prototype.render = function(options){
       graph_dispatcher.call("dataClick","",this,d);
     })
     .on('mouseenter',function(d){
-      d4.select(this)
+      d3.select(this)
         .classed('hover',true)
         .html(function(d){return hover_formatter(d.z)});
       graph_dispatcher.call("dataMouseEnter",this,d);
     }) 
     .on('mouseout',function(d){
-      d4.select(this)
+      d3.select(this)
         .classed('hover',false)
         .html('');
       graph_dispatcher.call("dataMouseLeave",this,d);

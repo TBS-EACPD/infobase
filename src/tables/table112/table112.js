@@ -1,26 +1,25 @@
-"use strict";
-exports = module.exports;
-// see [here](../table_definition.html) for description
-// of the table spec
-require("./table112.ib.yaml");
-require("../../graphs/historical_employee_executive_level");
+import "./table112.ib.yaml";
 
-const {
+import {
   STATS, 
   text_maker, 
   m, 
   Statistics,  
   people_five_year_percentage_formula,
-  business_constants : {
-    ex_level_map,
-  },
-  years : {
-    people_years,
-    people_years_short_second,
-  },
-} = require("../table_common");
+  business_constants,
+  years,
+} from "../table_common";
 
-module.exports = {
+const {
+  compact_ex_level_map,
+  ex_levels,
+} = business_constants;
+const {
+  people_years,
+  people_years_short_second,
+} = years;
+
+export default {
   "id": "table112",
   source: ["RPS"],
   "tags": [
@@ -35,8 +34,8 @@ module.exports = {
   },
 
   "name": {
-    "en":  "Population by Executive Level",
-    "fr":  "Population selon les niveaux des cadres supérieurs",
+    "en": "Population by Executive Level",
+    "fr": "Population selon les niveaux des cadres supérieurs",
   },
 
   "title": {
@@ -83,26 +82,29 @@ module.exports = {
     });
   },
 
-  "mapper": _.identity,
+  "mapper": function (row) {
+    row.splice(1, 1, ex_levels[row[1]].text);
+    return row;
+  },
 
   "dimensions": [
     {
       "title_key": "horizontal",
-      include_in_report_builder : true,
+      include_in_report_builder: true,
 
-      filter_func : function(options){
+      filter_func: function(options){
         return function(row){
           return row.ex_lvl;
         };
       },
     },
     {
-      title_key : "ex_level_condensed",
-      include_in_report_builder : true,
+      title_key: "ex_level_condensed",
+      include_in_report_builder: true,
 
       filter_func: function(options){
         return function(row){
-          return ex_level_map[row.ex_lvl];
+          return compact_ex_level_map[row.ex_lvl];
         };
       },
     },
@@ -115,13 +117,13 @@ module.exports = {
           return [key].concat(years);
         })
         .sortBy(function(row){
-          return d4.sum(_.tail(row));
+          return d3.sum(_.tail(row));
         })
         .value();
     },
     "summed_levels": function() {
       return _.groupBy(this.data, function(x){
-        return ex_level_map[x.ex_lvl];
+        return compact_ex_level_map[x.ex_lvl];
       });
     },
   },
@@ -129,7 +131,7 @@ module.exports = {
 
 Statistics.create_and_register({
   id: 'table112_dept_info', 
-  table_deps: [ 'table112'],
+  table_deps: ['table112'],
   level: 'dept',
   compute: (subject, tables, infos, add, c) => {
     const table = tables.table112;
@@ -142,28 +144,28 @@ Statistics.create_and_register({
     const num_active_years = _.chain( all_years )
       .map( group => _.tail(group) )
       .pipe( groups => _.zip.apply(null, groups) )
-      .map( zipped_groups => d4.sum(zipped_groups) )
+      .map( zipped_groups => d3.sum(zipped_groups) )
       .countBy( total => total === 0 ? 'inactive' : 'active' ) 
       .pipe( _.property('active') )
       .value();
 
-    const all_years_non_ex = _.filter(all_years, a => (a[0] !== "Non-EX"));
-    if ( !_.isEmpty(all_years_non_ex) ){
+    const all_years_only_ex = _.filter(all_years, a => (a[0] !== "Non-EX"));
+    if ( !_.isEmpty(all_years_only_ex) ){
 
-      STATS.year_over_year_multi_stats_active_years(add,"head_count_ex_level",all_years_non_ex,num_active_years);
+      STATS.year_over_year_multi_stats_active_years(add,"head_count_ex_level",all_years_only_ex,num_active_years);
       
       const ex_string = window.lang === 'en' ? 'Executive' : 'Cadres supérieurs';
       
       const ex_lev_EX_avg = _.chain( q.summed_levels() )
         .pipe( _.property(ex_string) )
         .pipe( ex_levels => _.map(people_years, y => 
-          d4.sum( _.map(ex_levels, _.property(y)) )
+          d3.sum( _.map(ex_levels, _.property(y)) )
         ))
-        .pipe( totals_by_year => d4.sum(totals_by_year)/num_active_years )
+        .pipe( totals_by_year => d3.sum(totals_by_year)/num_active_years )
         .value();
         
       add("head_count_ex_level_avg_ex", ex_lev_EX_avg );
-      add("head_count_ex_avg_share", (ex_lev_EX_avg*num_active_years)/d4.sum(_.map(all_years, a => d4.sum(a.slice(1)))));
+      add("head_count_ex_avg_share", (ex_lev_EX_avg*num_active_years)/d3.sum(_.map(all_years, a => d3.sum(a.slice(1)))));
     } else {
 
       const not_avail_str = window.lang === 'en' ? 'N.A' : 'S.A';
@@ -187,7 +189,7 @@ Statistics.create_and_register({
 
 Statistics.create_and_register({
   id: 'table112_gov_info', 
-  table_deps: [ 'table112'],
+  table_deps: ['table112'],
   level: 'gov',
   compute: (subject, tables, infos, add, c) => {
     const table = tables.table112;
@@ -197,8 +199,8 @@ Statistics.create_and_register({
     const all_years = _.filter(all_years_unfiltered, a => a[0] !== "Non-EX");
     STATS.year_over_year_multi_stats(add,"head_count_ex_level",all_years);
     const year_group_vals = _.map(all_years, group => _.tail(group) );
-    const year_totals = _.map(year_group_vals, d => d4.sum(d) );
-    add("head_count_ex_level_avg_ex", d4.sum(year_totals)/5);
-    add("head_count_ex_avg_share", (d4.sum(year_totals)/d4.sum(q.sum(people_years, {as_object: false}))));
+    const year_totals = _.map(year_group_vals, d => d3.sum(d) );
+    add("head_count_ex_level_avg_ex", d3.sum(year_totals)/5);
+    add("head_count_ex_avg_share", (d3.sum(year_totals)/d3.sum(q.sum(people_years, {as_object: false}))));
   },
 });

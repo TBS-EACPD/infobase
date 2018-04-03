@@ -1,18 +1,18 @@
-"use strict";
-exports = module.exports;
-// see [here](../table_definition.html) for description
-// of the table spec
-require("./table304.ib.yaml");
-//require("../../graphs/historical_employee_average_age"); // Graph incorporated in to historical_employee_age graph, don't need historical_employee_average_age
+import "./table304.ib.yaml";
 
-const {
+import {
   text_maker, 
   m, 
   Statistics, 
-  years : { people_years, people_years_short_second },
-} = require("../table_common");
+  years,
+} from "../table_common";
 
-module.exports = {
+const {
+  people_years,
+  people_years_short_second,
+} = years;
+
+export default {
   "id": "table304",
   source: ["RPS"],
   "tags" : [
@@ -90,7 +90,7 @@ module.exports = {
           return [key].concat(people_years);
         })
         .sortBy(function(row){
-          return d4.sum(_.tail(row));
+          return d3.sum(_.tail(row));
         })
         .value();
     },

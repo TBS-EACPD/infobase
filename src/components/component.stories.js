@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/react';
 
-import { WellList } from '../graphs/intro_graphs/WellList.js';
+import { WellList } from '../panels/intro_graphs/WellList.js';
 
 //attach globals that module expect to have
 import {

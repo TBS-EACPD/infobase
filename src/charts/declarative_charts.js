@@ -2,9 +2,10 @@ const { HBarComposition } = require('./hbar_composition.js');
 const { bar } = require('./bar.js'); 
 const { PieOrBar } = require('./pie_or_bar.js');
 const { ordinal_line } = require('./line.js');
-const { create_graph_with_legend, create_a11y_table } = require('../core/D3.js');
+const { create_graph_with_legend, create_a11y_table } = require('../core/charts_index.js');
 const { SafeProgressDonut } = require('./safe_progress_donut.js');
 const { pack } = require("./pack");
+const { circle_pie_chart } = require('./circle_chart.js');
 
 const classNames = require('classnames');
 
@@ -63,7 +64,7 @@ class StackedHbarChart extends React.Component {
 
     //setup
     this.graph_instance = new HBarComposition(
-      d4.select(this.refs.graph_area).node(),
+      d3.select(this.refs.graph_area).node(),
       {
         bar_label_formater,
         bar_height,
@@ -89,7 +90,7 @@ class ProgressDonut extends React.Component {
   }
   componentDidMount(){
     this.graph_instance = new SafeProgressDonut(
-      d4.select(this.refs.graph_area),
+      d3.select(this.refs.graph_area),
       _.clone(this.props)
     );
     this._render()
@@ -128,18 +129,21 @@ class D3GraphWithLegend extends React.Component {
     );
   }
   _render(){
-    this.graph_instance.render(
-      _.chain(this.props.options)
-        .extend({graph_area : d4.select(this.refs.graph_area)})
-        .clone()
-        .value()
-    );
+    if(!window.is_a11y_mode){
+      this.graph_instance.render(
+        _.chain(this.props.options)
+          .extend({graph_area : d3.select(this.refs.graph_area)})
+          .clone()
+          .value()
+      );
+    }
+    
   }
   componentDidMount(){
     this.graph_instance = create_graph_with_legend.call(
-      d4.select(this.refs.graph_area).node(),
+      d3.select(this.refs.graph_area).node(),
       _.chain(this.props.options)
-        .extend({graph_area : d4.select(this.refs.graph_area)})
+        .extend({graph_area : d3.select(this.refs.graph_area)})
         .clone()
         .value()
     );
@@ -160,7 +164,7 @@ class Bar extends React.Component {
   }
   componentDidMount(){
     this.graph_instance = new bar(
-      d4.select(this.refs.graph_area).node(),
+      d3.select(this.refs.graph_area).node(),
       _.clone(this.props)
     );
     this._render()
@@ -200,7 +204,7 @@ class Line extends React.Component {
   }
   componentDidMount(){
     this.graph_instance = new ordinal_line(
-      d4.select(this.refs.graph_area).node(),
+      d3.select(this.refs.graph_area).node(),
       _.clone(this.props)
     );
     this._render()
@@ -234,15 +238,18 @@ const GraphLegend = ({
           }
           className="legend-color-checkbox"
         />
-        {React.createElement(  //only make it a link if clicking it does something
-          onClick ? 'a' : 'span',
-          { 
-            href: onClick ? "#" : null,
-            onClick: onClick ? ()=> { onClick(id) } : null,
-            role: onClick ? "button" : null, 
-          },
-          label
-        )} 
+        { onClick ?
+          <span
+            role="button"
+            tabIndex={0}
+            className="link-styled"
+            onClick={()=> onClick(id)}
+            onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && onClick(id)}
+          > 
+            { label }
+          </span> : 
+          <span> { label } </span>
+        } 
       </li>
     )}
   </ul>
@@ -307,7 +314,27 @@ class CirclePack extends React.Component {
   }
   componentDidMount(){
     this.graph_instance = new pack(
-      d4.select(this.refs.graph_area),
+      d3.select(this.refs.graph_area),
+      _.clone(this.props)
+    );
+    this._render()
+
+  }
+  componentDidUpdate(){
+    this._render();
+  }
+}
+
+class CirclePieChart extends React.Component {
+  render(){
+    return <div ref="graph_area" style={{position:'relative'}} />
+  }
+  _render(){
+    this.graph_instance.render(_.clone(this.props));
+  }
+  componentDidMount(){
+    this.graph_instance = new circle_pie_chart(
+      this.refs.graph_area,
       _.clone(this.props)
     );
     this._render()
@@ -328,5 +355,6 @@ module.exports = exports = {
   TabularPercentLegend,
   SafePie,
   ProgressDonut,
-  CirclePack, 
+  CirclePack,
+  CirclePieChart,
 };

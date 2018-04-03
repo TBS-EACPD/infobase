@@ -1,10 +1,11 @@
+let initialized = false;
+
 //tool to create totally random IDs
 const uuid = function b(a) {
   return a ? (a ^ Math.random() * 16 >> a / 4).toString(16) :
       ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, b);
 };
 
-let initialized = false;
 
 const dimensions = {
   CLIENT_ID: 'dimension1', 
@@ -18,9 +19,11 @@ const dimensions = {
   DEV: "dimension9",
 };
 
-const is_dev = String(window.location.hostname).indexOf("tbs-sct.gc.ca") === -1;
 
-window.initialize_analytics = ()=>{
+
+function initialize_analytics(){
+  const is_dev = String(window.location.hostname).indexOf("tbs-sct.gc.ca") === -1;
+  
   ga('create', 'UA-97024958-1', 'auto');
   ga('set', 'anonymizeIp', true);
 
@@ -60,7 +63,7 @@ const dummy_event_obj = _.chain([
 
 function log_standard_event(dims){
   if(!initialized){ 
-    return; 
+    throw "analytics is uninitialized";
   }
 
   const send_obj = Object.assign(
@@ -88,15 +91,16 @@ function log_standard_event(dims){
 
 function log_page_view(page){
   if(!initialized){ 
-    return; 
+    throw "analytics is uninitialized";
   }
 
   ga('set', 'page', page);
   ga('send', 'pageview');
 }
 
-module.exports = { 
-  log_page_view,
-  dimensions,
+module.exports = {
   log_standard_event,
-}; 
+  log_page_view,
+  initialize_analytics,
+  dimensions,
+}

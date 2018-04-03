@@ -1,7 +1,5 @@
-require("../../graphs/spend_rev_split");
-require("../../graphs/top_spending_areas");
-require("../../graphs/detailed_program_spending_split");
-//require("../../graphs/spend_by_so_hist"); //we arent showing this stuff.
+
+//require("../../panels/spend_by_so_hist"); //we arent showing this stuff.
 
 exports = module.exports;
 require("./table305.ib.yaml");

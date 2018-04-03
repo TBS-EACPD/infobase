@@ -25,27 +25,3 @@ table300:
    * Lorsque les données sur les dépenses de programme par type d’autorisation sont disponibles, les totaux au niveau des programmes et de l’organisation figurant à l’InfoBase correspondront à l'information publiée dans les Comptes publics du Canada. 
 
    * Pour assurer la comparabilité au fil du temps, le nom et la structure des programmes figurant à l’InfoBase proviennent des Comptes publics du Canada qui peuvent différer du plan ministériel de l’organisation.
-
-
-
-program_vote_stat_split_text:
-  transform: [handlebars, markdown]
-  en: |
-    Organizations receive authority to spend from Parliament through {{gl_tt "statutory" "STAT"}} and {{gl_tt "voted" "VOTED"}} authorities. Of the **{{fmt_compact_written program_total_exp}}** spent on this program in {{pa_last_year}}, **{{fmt_percentage1 program_stat_pct}} ({{fmt_compact_written program_stat_exp}})** came from statutory authorities and  **{{fmt_percentage1 program_voted_pct}} ({{fmt_compact_written program_voted_exp}})** came from voted authorities.
-  fr: |
-    Le Parlement accorde des autorisations de dépenser aux ministères au moyen de d’autorisations {{gl_tt "législatives" "STAT"}} et {{gl_tt "votées" "VOTED"}}. Des **{{fmt_compact_written program_total_exp}}** consacrés à ce programme en {{pa_last_year}}, **{{fmt_percentage1 program_stat_pct}} ({{fmt_compact_written program_stat_exp}})** proviennent d’autorisations législatives et **{{fmt_percentage1 program_voted_pct}} ({{fmt_compact_written program_voted_exp}})** d’autorisations votées.
-
-
-tag_vote_stat_split_text:
-  transform: [handlebars, markdown]
-  en: |
-   Organizations receive authority to spend from Parliament through {{gl_tt "statutory" "STAT"}} and {{gl_tt "voted" "VOTED"}} authorities. Of the maximum amount of **{{fmt_compact_written tag_total_exp}}** spent on all programs falling under the "**{{subj_name subject}}**" tag in {{pa_last_year}}, **{{fmt_percentage1 tag_stat_pct}}** (**{{fmt_compact_written tag_stat_exp}}**) came from statutory authorities and **{{fmt_percentage1 tag_voted_pct}}** (**{{fmt_compact_written tag_voted_exp}}**) came from voted authorities.
-
-  fr: |
-   Le Parlement accorde des autorisations de dépenser aux ministères au moyen de d’autorisations {{gl_tt "législatives" "STAT"}} et {{gl_tt "votées" "VOTED"}}. Sur le montant maximal de **{{fmt_compact_written tag_total_exp}}** dépensé pour tous les programmes étiquetés sous l'étiquette «**{{subj_name subject}}**» en {{pa_last_year}}, **{{fmt_percentage1 tag_stat_pct}}** (**{{fmt_compact_written tag_stat_exp}}**) proviennent d’autorisations législatives et **{{fmt_percentage1 tag_voted_pct}}** (**{{fmt_compact_written tag_voted_exp}}**) d’autorisations votées.
-
-vote_stat_split_title:
-  transform: [handlebars,markdown]
-  en: Voted and Statutory Split ({{pa_last_year}})
-  fr: Division des autorisations votées et législatives ({{pa_last_year}})
-

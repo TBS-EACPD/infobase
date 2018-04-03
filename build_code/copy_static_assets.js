@@ -108,10 +108,10 @@ const common_png = [
   'src/home/explorer.png',
 
   //simplographic images
-  'src/graphs/intro_graphs/Check.svg',
-  'src/graphs/intro_graphs/Graph.svg',
-  'src/graphs/intro_graphs/Money.svg',
-  'src/graphs/intro_graphs/People.svg',
+  'src/panels/intro_graphs/Check.svg',
+  'src/panels/intro_graphs/Graph.svg',
+  'src/panels/intro_graphs/Money.svg',
+  'src/panels/intro_graphs/People.svg',
 
 ];
 
@@ -129,8 +129,7 @@ const IB_tables = [
   'table12',
   'table305',
   'table300',
-  //'table111', // waiting on data
-  //'table112',
+  //'table112', // waiting on data
   //'table302',
   //'table303',
   //'table304',
@@ -162,10 +161,22 @@ function get_index_pages(){
   const en_lang_lookups = _.mapValues(index_lang_lookups, 'en');
   const fr_lang_lookups = _.mapValues(index_lang_lookups, 'fr');
 
-  return {
-    en: template_func(en_lang_lookups),
-    fr: template_func(fr_lang_lookups),
-  };
+
+  const a11y_template = file_to_str("./src/InfoBase/index.hbs.html");
+  const a11y_template_func = Handlebars.compile(a11y_template);
+
+  return [
+    {
+      file_prefix: "index",
+      en: template_func(en_lang_lookups),
+      fr: template_func(fr_lang_lookups),
+    },
+    {
+      file_prefix: "index-basic",
+      en: a11y_template_func(_.assign({}, en_lang_lookups, { script_url: en_lang_lookups.a11y_script_url, other_lang_href: en_lang_lookups.a11y_other_lang_href, is_a11y_mode: true  })),
+      fr: a11y_template_func(_.assign({}, fr_lang_lookups, { script_url: fr_lang_lookups.a11y_script_url, other_lang_href: fr_lang_lookups.a11y_other_lang_href, is_a11y_mode: true })),
+    },
+  ];
 }
 
 function make_dir_if_exists(dir_name){
@@ -281,11 +292,14 @@ function build_proj(PROJ){
     console.log('copying:' + small_name);
     fse.copySync(f_name, dir+'/'+small_name, {clobber:true});
   });
-  _.each(get_index_pages(), (file, lang) => {
-    const lang_suffix = lang === 'en' ? "eng" : "fra";
+  _.each(get_index_pages(), ({file_prefix, en, fr }) => {
     fs.writeFileSync(
-      `${dir}/index-${lang_suffix}.html`,
-      file
+      `${dir}/${file_prefix}-eng.html`,
+      en
+    );
+    fs.writeFileSync(
+      `${dir}/${file_prefix}-fra.html`,
+      fr
     );
   });
 

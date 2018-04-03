@@ -8,8 +8,6 @@ const {
   years : { std_years},
 } = require("../table_common");
 
-require("../../graphs/last_year_vote_stat_split");
-
 module.exports = {
   id: "table300",
   tags : [

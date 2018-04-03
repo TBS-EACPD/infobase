@@ -1,14 +1,11 @@
-require('../bootstrap/include_common.js');
-require('../../external-dependencies/spin.min.exec.js');
+import pre_load from './pre_load';
 
 $(()=>{
-  const app_el =document.querySelector('#app');
-  const spinner =  new Spinner({scale:4});
-  spinner.spin(app_el)
-  app_el.setAttribute('aria-busy', 'true');
-
-  require.ensure(['./InfoBase.js'],()=> {
-    const start = require('./InfoBase.js');
-    start({app_el, spinner}); 
+  const kill_spinner = pre_load();
+  window.is_a11y_mode = false;
+  require.ensure(['./App.js', './bootstrap.js'],()=> {
+    const bootstrap = require('./bootstrap.js');
+    const { App, app_reducer } = require("./App.js")
+    bootstrap(App, app_reducer, kill_spinner);
   });
 });

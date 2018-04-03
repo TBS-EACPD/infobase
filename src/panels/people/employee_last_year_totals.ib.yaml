@@ -1,0 +1,13 @@
+dept_employee_last_year_totals_title:
+  transform: [handlebars]
+  en: Total Population ({{ppl_last_year}})
+  fr: Total des effectifs ({{ppl_last_year}})
+
+dept_employee_last_year_totals_text:
+  transform: [handlebars,markdown]
+  en: |
+    In **{{ppl_last_year}}**, **{{fmt_big_int_real dept_head_count_ppl_last_year}}** people were employed by **{{subj_name subject}}**, 
+    representing **{{fmt_percentage1 dept_head_count_dept_share_last_year}}** of the total {{gl_tt "Federal Public Service" "FPS"}} population. 
+
+  fr: |
+    En **{{ppl_last_year}}**, **{{fmt_big_int_real dept_head_count_ppl_last_year}}** personnes étaient à l’emploi **{{de_dept dept}}**, soit **{{fmt_percentage1 dept_head_count_dept_share_last_year}}** de l’effectif de la {{gl_tt "fonction publique fédérale" "FPS"}}.

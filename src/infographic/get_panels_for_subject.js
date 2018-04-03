@@ -1,19 +1,72 @@
-const { PanelGraph } = require('../core/graphs.js');
+import '../panels/welcome_mat/welcome_mat.js';
+
+
+import '../panels/intro_graphs/intro_graphs.js';
+import '../panels/result_graphs/result_graphs.js';
+import '../panels/igoc/igoc_panel.js';
+
+//transfer payments
+import "../panels/transfer_payments/last_year_g_and_c_perspective";
+import "../panels/transfer_payments/historical_g_and_c";
+
+//ppl panels
+import "../panels/people/employee_last_year_totals";
+import "../panels/people/employee_totals";
+import "../panels/people/employee_type";
+import "../panels/people/employee_prov";
+import "../panels/people/employee_age";
+import "../panels/people/employee_executive_level";
+import "../panels/people/employee_gender";
+import "../panels/people/employee_fol";
+
+//vote-stat
+import "../panels/vote-stat/in_year_estimates";
+import "../panels/vote-stat/in_year_estimates_split";
+import "../panels/vote-stat/in_year_vote_stat_split";
+import "../panels/vote-stat/in_year_vote-stat_breakdown";
+import "../panels/vote-stat/last_year_vote_stat_split";
+
+//standard object
+import "../panels/sobj/spend_rev_split";
+import "../panels/sobj/top_spending_areas";
+import "../panels/sobj/spend_by_so_hist";
+import "../panels/sobj/top_spending_areas.js";
+import "../panels/sobj/personel_spend.js";
+import "../panels/sobj/spend_rev_split.js";
+
+import "../panels/detailed_program_spending_split/detailed_program_spending_split.js";
+
+
+import '../panels/historical_auth_exp/historical_auth_exp.js';
+
+
+//tag-only panels
+import '../panels/tag_panels/resource_structure.js'
+import '../panels/tag_panels/goco.js';
+import '../panels/tag_panels/top_3_dept_graph.js';
+
+//dp/drr stuff but not results
+import '../panels/drr_dp_resources/drr_planned_actual.js';
+import '../panels/drr_dp_resources/sub_program_resources.js';
+import '../panels/drr_dp_resources/planned_prgm_crso_split.js';
+import '../panels/drr_dp_resources/crso_program_resources.js';
+import '../panels/drr_dp_resources/spending_in_perspective.js';
+
+import { PanelGraph } from '../core/PanelGraph.js';
 
 const get_people_panels = subject => {
   const is_gov = subject.level === "gov";
   return [
     'people_intro',
     "march_snapshot_warning",
-    !is_gov && "last_year_total_employment",
-    "historical_employee_totals",
-    "historical_employee_prov",
-    "historical_employee_type",
-    "historical_employee_age",
-    //"historical_employee_occ_category",
-    //"historical_employee_executive_level",
-    //"historical_employee_fol",
-    //"historical_employee_gender",
+    !is_gov && "employee_last_year_totals",
+    "employee_totals",
+    "employee_prov",
+    "employee_type",
+    "employee_age",
+    //"employee_executive_level",
+    //"employee_fol",
+    //"employee_gender",
     is_gov && "ppl_open_data_info",
   ];
 };
@@ -54,7 +107,7 @@ const get_dept_panels = subject => {
     financial : _.includes(subject.tables,'table6') && [
       "financial_intro", 
       "welcome_mat",
-      "in_year_estimates",
+      "estimates_in_perspective",
       "historical_auth_exp",
       "in_year_estimates_split",
       "in_year_voted_stat_split",
@@ -130,8 +183,9 @@ const get_crso_panels = subject => {
       'dead_crso_warning',
       'financial_intro',
       'welcome_mat',
-
-      'crso_prg_full_spending',
+      
+      'crso_by_prog_exp',
+      'crso_by_prog_fte',
       'planned_prg_crso_split',
     ],
     results: subject.dept.dp_status && !subject.is_internal_service && [
@@ -208,7 +262,7 @@ export function get_panels_for_subject(subject){
             throw `${key} is not a valid graph`;
           }
 
-          return panel_obj;
+          return panel_obj && key;
         })
         .value(),
     ])

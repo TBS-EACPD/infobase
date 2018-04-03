@@ -1,7 +1,7 @@
 "use strict";
 exports = module.exports;
   
-var D3CORE =  require("./core");
+var common_charts_utils =  require("./common_charts_utils");
 
 
 function add_arrow(sel){
@@ -23,7 +23,7 @@ exports.arrows = class arrows {
   
   constructor(container,options){
 
-    D3CORE.setup_graph_instance(this,d4.select(container),options);
+    common_charts_utils.setup_graph_instance(this,d3.select(container),options);
     this.graph_area  = this.svg.append("g").attr("class","graph_area");
   };
 
@@ -34,7 +34,7 @@ exports.arrows = class arrows {
       right: 10, 
       bottom: 30, 
       left: 10};
-    var color = this.options.color || D3CORE.tbs_color();
+    var color = this.options.color || common_charts_utils.tbs_color();
     var formater = this.options.formater;
     var arrow_width = 60;
     var arrow_height = 100;
@@ -44,14 +44,14 @@ exports.arrows = class arrows {
     var data = this.options.data;
 
     // based on the height of the pane
-    var scale = d4.scaleLinear()
-      .domain([0,d4.max(data, function(d){return Math.abs(d.value);})])
+    var scale = d3.scaleLinear()
+      .domain([0,d3.max(data, function(d){return Math.abs(d.value);})])
       .range([1,height/arrow_height])
       .clamp(true);
 
     // get offset to shift the arrows into the middle of the 
     // pane
-    var required_width = d4.sum(data, function(d){
+    var required_width = d3.sum(data, function(d){
       return scale(Math.abs(d.value))*arrow_width+padding;
     });
 
@@ -97,7 +97,7 @@ exports.arrows = class arrows {
         return d.scale >= 1.01;
       })
       .each(function(d,i){
-        add_arrow(d4.select(this));
+        add_arrow(d3.select(this));
       });
 
     new_arrow

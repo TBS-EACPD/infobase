@@ -43,24 +43,3 @@ table2:
    Les totaux peuvent ne pas correspondre ou coïncider à ceux présentés dans ces documents. Dans les cas de modifications à l’appareil 
    gouvernemental (comme la fusion ou l’élimination d’organismes), les données n’ont pas été rajustées.
 
-qfr_by_so_title: 
-  transform: [handlebars]
-  en: Expenditures by Standard Object as of {{quarter_name}} of {{qfr_in_year}}
-  fr: Dépenses par article courant au {{quarter_name}} de {{qfr_in_year}}
-
-qfr_by_so_text: 
-  transform: [handlebars,markdown]
-  en: |
-   **{{subj_name subject}}** spending can be divided by {{gl_tt "Standard Object" "SOBJ"}}. As of {{quarter_name}} of {{qfr_in_year}}, the 
-   highest expenditures were in **{{dept_qfr_so_top1}}** (**{{fmt_compact_written dept_qfr_so_top1_amnt}}**) {{#if dept_qfr_so_top2}} and **{{dept_qfr_so_top2}}** (**{{fmt_compact_written dept_qfr_so_top2_amnt}}**).
-   {{else}}**
-   {{/if}}
-
-  fr: |
-   Les dépenses **{{de_dept dept}}** peuvent être ventilées par {{gl_tt "article courant" "SOBJ"}}. En date du {{quarter_name}} de {{qfr_in_year}}, l'article courant avec les 
-   dépenses les plus importantes était **{{dept_qfr_so_top1}}** (**{{fmt_compact_written dept_qfr_so_top1_amnt}}**) {{#if dept_qfr_so_top2}} suivi de **{{dept_qfr_so_top2}}** (**{{fmt_compact_written dept_qfr_so_top2_amnt}}**).
-   {{else}}**
-   {{/if}}
-
-
-

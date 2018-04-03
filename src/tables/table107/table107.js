@@ -12,11 +12,11 @@ const {
   },
   Statistics,
 } = require('../table_common.js');
-var D3 = require("../../core/D3");
-var HEATMAP = D3.HEATMAP;
-var HBAR = D3.HBAR;
+var charts_index = require("../../core/charts_index");
+var HEATMAP = charts_index.HEATMAP;
+var HBAR = charts_index.HBAR;
 
-const PanelGraph = require('../../core/graphs.js').PanelGraph;
+const { PanelGraph } = require('../../core/PanelGraph.js');
 
 const {text_maker} = require("../../models/text");
 const {run_template} = require('../../models/text');
@@ -243,14 +243,14 @@ new PanelGraph({
       .uniqBy()
       .value();  
     var z_vals = _.uniqBy(_.map(graph_series, "z"));
-    var z_extent = d4.extent(z_vals);
+    var z_extent = d3.extent(z_vals);
     z_extent[0] *= -1;
-    var max_abs = d4.max(z_extent);
+    var max_abs = d3.max(z_extent);
     // can't feed negative values into the sqrt scale
-    var neg_color_scale = d4.scaleSqrt()
+    var neg_color_scale = d3.scaleSqrt()
       .domain([-max_abs,0])
       .range([1,0]);
-    var pos_color_scale = d4.scaleSqrt()
+    var pos_color_scale = d3.scaleSqrt()
       .domain([0,max_abs])
       .range([0,1]);
     var formater =  formats["big_int_real_raw"];
@@ -284,7 +284,7 @@ new PanelGraph({
       .map(tick => ({label: tick, active:true}) )
       .value();
        
-    D3.create_list(
+    charts_index.create_list(
       legend_area.node(),
       legend_items,
       {html : d => formater(d.label), 
@@ -328,7 +328,7 @@ new PanelGraph({
         });
 
       (new HBAR.hbar( actual_graph.node(), {
-        x_scale : d4.scaleLinear(),
+        x_scale : d3.scaleLinear(),
         axisFormater : formater,
         formater : formater,
         tick_number : 5,

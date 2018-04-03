@@ -182,7 +182,7 @@ class GranularView extends React.Component {
           <thead>
             <tr className="table-header">
               <th 
-                scope="column"
+                scope="col"
                 style={{ cursor: 'pointer' }}
                 key="dept"
               > 
@@ -198,7 +198,7 @@ class GranularView extends React.Component {
                 ...data_columns,
               ].map( ({nick, fully_qualified_name}) => 
                 <th 
-                  scope="column"
+                  scope="col"
                   style={{ cursor: 'pointer' }}
                   key={nick}
                 >
@@ -280,36 +280,48 @@ class GranularView extends React.Component {
         </table>
 
         {!excel_mode && pages.length > 1 && 
-      <div className="pagination-container">
-        <p className="sr-only">
-          <TextMaker text_key="pagination_a11y" args={{current: page_num, total: pages.length }} />
-        </p>
-        <ul className="pagination">
-          {_.map(pages, (data,ix)=> 
-            <li 
-              key={ix}
-              className={classNames(ix===page_num && 'active')}
-            >
-              <a 
-                href="#" 
-                style={ix===page_num ? {color:'#fcfcfc'} : null }
-                disabled={page_num === ix}
-                role="button" 
-                onClick={ 
-                  ix === page_num ?
-                  null : 
-                  ()=> {
-                    on_set_page(ix);
-                    this.refs.table.focus();
-                  }
-                }
-              >
-                {ix+ 1}
-              </a>
-            </li>
-          )}
-        </ul> 
-      </div>
+          <div className="pagination-container">
+            {window.is_a11y_mode && 
+              <p>
+                <TextMaker text_key="pagination_a11y" args={{current: page_num, total: pages.length }} />
+              </p>
+            }
+            <ul className="pagination">
+              {_.map(pages, (data,ix)=> 
+                <li 
+                  key={ix}
+                  className={classNames(ix===page_num && 'active')}
+                >
+                  <span
+                    tabIndex={0}
+                    style={ix===page_num ? {color:'#fcfcfc'} : null }
+                    disabled={page_num === ix}
+                    role="button" 
+                    onClick={ 
+                      ix === page_num ?
+                        null : 
+                        ()=> {
+                          on_set_page(ix);
+                          this.refs.table.focus();
+                        }
+                    }
+                    onKeyDown={
+                      ix === page_num ?
+                        null : 
+                        (e)=> {
+                          if (e.keyCode===13 || e.keyCode===32){
+                            on_set_page(ix);
+                            this.refs.table.focus();
+                          }
+                        }
+                    }
+                  >
+                    {ix+ 1}
+                  </span>
+                </li>
+              )}
+            </ul> 
+          </div>
         }
       </div>
     )
@@ -354,7 +366,7 @@ class GranularView extends React.Component {
       .value();
 
     const headers_and_rows = [headers].concat(array_based_rows);
-    return d4.csvFormatRows(headers_and_rows);
+    return d3.csvFormatRows(headers_and_rows);
   }
 
 

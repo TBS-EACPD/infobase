@@ -29,7 +29,7 @@ function process_lookups(data){
   _.chain(data)
     .omit('global_footnotes') //global footnotes already has its header dropped
     .each( (csv_str,key) => {
-      data[key] = d4.csvParseRows($.trim(csv_str));
+      data[key] = d3.csvParseRows($.trim(csv_str));
       data[key].shift(); // drop the header
     })
     .value()
@@ -255,7 +255,7 @@ function create_tag_branches(program_tag_types){
 function populate_program_tags(tag_rows){
   // assumes the parent tags will be listed first
   const l = window.lang === "en";
-  const [ tag_id, parent_id, name_en, name_fr, desc_en, desc_fr ] = d4.range(0,6);
+  const [ tag_id, parent_id, name_en, name_fr, desc_en, desc_fr ] = d3.range(0,6);
   _.each(tag_rows, row => {
     const parent_tag = Tag.lookup(row[parent_id]);
     //HACKY: Note that parent rows must precede child rows

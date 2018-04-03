@@ -1,6 +1,6 @@
 exports = module.exports;
 const barStack = require("./bar_stack");
-const D3CORE = require('./core');
+const common_charts_utils = require('./common_charts_utils');
 
 
 
@@ -11,7 +11,7 @@ const bar = exports.bar =  function(container,options){
 //         "series 2" : [y1,y2,y3]}
 // ticks = ["tick1","tick2"."tick3"]
 // ```
-  D3CORE.setup_graph_instance(this, d4.select(container),options);
+  common_charts_utils.setup_graph_instance(this, d3.select(container),options);
 
   var _graph_area  = this.svg.append("g").attr("class","_graph_area");
   this.grid_line_area = _graph_area.append("g").attr("class","grid_lines");
@@ -51,17 +51,17 @@ bar.prototype.render = function(options){
   let data;
 
   const series = this.options.series;
-  const series_labels = this.options.series_labels || d4.keys(series);
+  const series_labels = this.options.series_labels || d3.keys(series);
   const stacked = this.options.stacked;
   const label_font_size = 12;
   const add_labels = this.options.add_labels;
-  const colors = this.options.colors || D3CORE.tbs_color()
+  const colors = this.options.colors || common_charts_utils.tbs_color()
   const title = this.options.title;
   const y_axis = this.options.y_axis || '';
   const ticks = this.options.ticks;
-  const values = d4.values(series);
-  const extent = d4.extent(d4.merge(values));
-  this.number_of_bars_to_render = d4.merge(values).length;
+  const values = d3.values(series);
+  const extent = d3.extent(d3.merge(values));
+  this.number_of_bars_to_render = d3.merge(values).length;
   const x_axis_rotate = this.options.x_axis_rotate || null;
   // calculate to protect against trying to stack negative numbers
   let y_bottom;
@@ -74,12 +74,12 @@ bar.prototype.render = function(options){
   // height
   // `max`->merge will merge all the arrays into a single
   // and fine the max value
-  const x0 = d4.scaleBand()
+  const x0 = d3.scaleBand()
     .domain(ticks)
     .rangeRound([0, width])
     .padding(0.1);
 
-  const x1 = d4.scaleBand()
+  const x1 = d3.scaleBand()
     .domain(series_labels)
     .rangeRound([0,x0.bandwidth()])
     .padding(0.1);
@@ -88,13 +88,13 @@ bar.prototype.render = function(options){
   let bar_width;
   let bars;
 
-  const y = d4.scaleLinear();
+  const y = d3.scaleLinear();
 
-  const xAxis = d4.axisBottom()
+  const xAxis = d3.axisBottom()
     .scale(x0)
     .tickPadding(5);
 
-  const yAxis = d4.axisLeft()
+  const yAxis = d3.axisLeft()
     .scale(y)
     .ticks(5)
     .tickFormat(this.formater);
@@ -160,7 +160,7 @@ bar.prototype.render = function(options){
 
     if (normalized){
       _.each(ticks, function(tick,i){
-        var sum = d4.sum(_.map(data, function(serie){
+        var sum = d3.sum(_.map(data, function(serie){
           return serie.data[i].y;
         }));
         _.each(data, function(serie){
@@ -418,7 +418,7 @@ bar.prototype.render = function(options){
   }
       
   if (!hide_gridlines){
-    D3CORE.add_grid_lines("horizontal",this.grid_line_area,x0,y,width,height);
+    common_charts_utils.add_grid_lines("horizontal",this.grid_line_area,yAxis,width);
   }
     
   return this;

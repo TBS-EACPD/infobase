@@ -187,7 +187,7 @@ const create_igoc_hierarchy = grouping => {
     children: nodes,
   };
 
-  const d3_hierarchy = d4.hierarchy(root, node=>node.children );
+  const d3_hierarchy = d3.hierarchy(root, node=>node.children );
   const flat_nodes = convert_d3_hierarchy_to_explorer_hierarchy(d3_hierarchy);
 
 

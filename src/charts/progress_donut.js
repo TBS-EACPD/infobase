@@ -11,13 +11,13 @@ Though one could argue formats shouldn't rely on the infobase either
 
 const {formats} = require('../core/format.js');
 
-var D3CORE = require('./core');
+var common_charts_utils = require('./common_charts_utils');
 
 exports.ProgressDonut = class ProgressDonut {
   
   constructor(container,options){
   
-    D3CORE.setup_graph_instance(this,d4.select(container),options);
+    common_charts_utils.setup_graph_instance(this,d3.select(container),options);
     const _graph_area  = this.svg.append("g").attr("class","_graph_area");
     this.graph_area = _graph_area.append("g").attr("class","inner_graph_area");
     
@@ -61,7 +61,7 @@ exports.ProgressDonut = class ProgressDonut {
     const pie_area  = this.graph_area
       .attr("transform", "translate(" + (this.outside_width/2 )+ "," + this.outside_height/2 + ")");
 
-    const angle_to_arc_attr = angle => d4.arc()
+    const angle_to_arc_attr = angle => d3.arc()
       .innerRadius(innerRadius)
       .outerRadius(outerRadius)
       .startAngle(0)

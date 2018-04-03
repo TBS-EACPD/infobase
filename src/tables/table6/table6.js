@@ -2,21 +2,6 @@ exports = module.exports;
 
 require("./table6.ib.yaml");
 
-require('../../graphs/historical_auth_exp');
-require('../../graphs/historical_program_spending');
-//require('../../graphs/historical_dept_by_crso');
-require('../../graphs/top_3_dept_graph');
-require('../../graphs/spending_in_perspective');
-
-require("../../graphs/last_year_vote_stat_split");
-require('../../graphs/planned_program_spending');
-require('../../graphs/planned_prgm_crso_split');
-require('../../graphs/exp_ftes_line_chart');
-
-require('../../graphs/sub_program_resources.js');
-require('../../graphs/drr_planned_actual.js');
-require('../../graphs/goco/goco.js');
-require('../../graphs/resource_structure.js');
 
 // see [here](../table_definition.html) for description
 // of the table spec
@@ -253,7 +238,7 @@ Statistics.create_and_register({
 
     const CRSO_data = _.map(crsos, crso => ({
       crso:crso,
-      data:  d4.sum(_.map(table.q(crso).data, prg => prg["{{planning_year_1}}"])),
+      data:  d3.sum(_.map(table.q(crso).data, prg => prg["{{planning_year_1}}"])),
     })
     )
 
@@ -328,7 +313,7 @@ Statistics.create_and_register({
 
     add("crso", crso);
 
-    const crso_exps = d4.sum(_.map(table.q(crso).data, prg => prg["{{planning_year_1}}"]))
+    const crso_exps = d3.sum(_.map(table.q(crso).data, prg => prg["{{planning_year_1}}"]))
     add("crso_exps", crso_exps);
 
     add("crso_exp_prg_share", c.program_exp_planning_year_1/crso_exps)

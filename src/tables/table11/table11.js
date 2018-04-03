@@ -1,27 +1,27 @@
-exports = module.exports;
-// see [here](../table_definition.html) for description
-// of the table spec
-require("./table11.ib.yaml");
-require("../../graphs/historical_employee_age");
+import "./table11.ib.yaml";
 
-const {STATS, 
+import {
+  STATS, 
   text_maker, 
   m, 
   Statistics, 
   formats, 
   people_five_year_percentage_formula,
-  business_constants : {
-    emp_ages, 
-    emp_age_map,
-  },
-  years : { 
-    people_years,
-    people_years_short_second,
-  },
-} = require("../table_common");
+  business_constants,
+  years,
+} from "../table_common";
 
+const {
+  age_groups,
+  compact_age_groups, 
+  emp_age_map,
+} = business_constants;
+const { 
+  people_years,
+  people_years_short_second,
+} = years;
 
-module.exports = {
+export default {
   "id": "table11",
   source: ["RPS"],
   "tags": [
@@ -34,11 +34,13 @@ module.exports = {
     "fr": "http://ouvert.canada.ca/data/fr/dataset/d712930d-66f4-4377-a2bf-5d55d09c1186",
   },
 
-  "name": { "en":  "Population by Employee Age Group",
+  "name": { 
+    "en": "Population by Employee Age Group",
     "fr": "Population selon le groupe d’âge",
   },
 
-  "title": { "en": "Population by Employee Age Group",
+  "title": { 
+    "en": "Population by Employee Age Group",
     "fr": "Population selon le groupe d’âge",
   },
 
@@ -53,7 +55,7 @@ module.exports = {
     this.add_col({
       "key": true,
       "type": "short-str",
-      "nick" : 'age',
+      "nick": 'age',
       "header": {
         "en": "Age Group",
         "fr": "Groupe d’âge",
@@ -82,6 +84,11 @@ module.exports = {
       "formula": people_five_year_percentage_formula("age",people_years),
     });
   },
+  
+  "mapper": function (row) {
+    row.splice(1, 1, age_groups[row[1]].text);
+    return row;
+  },
 
   "queries": {
     "gov_grouping": function() {
@@ -90,7 +97,7 @@ module.exports = {
           return [key].concat(years);
         })
         .sortBy(function(row){
-          return d4.sum(_.tail(row));
+          return d3.sum(_.tail(row));
         })
         .value();
     },
@@ -101,12 +108,12 @@ module.exports = {
         return emp_age_map[x.age];
       });
     },
-    "high_level_rows" : function(){
+    "high_level_rows": function(){
       var groups = this.high_level_age_split();
-      return _.map(emp_ages, function(age_group){
+      return _.map(compact_age_groups, function(age_group){
         var summed = _.map(people_years, function(year){
           if (groups[age_group]) {
-            return d4.sum(groups[age_group], function(row){
+            return d3.sum(groups[age_group], function(row){
               return row[year];
             });
           } else {
@@ -116,11 +123,11 @@ module.exports = {
         return [age_group].concat(summed);
       });
     },
-    "high_level_rows_with_percentage" : function(year) {
+    "high_level_rows_with_percentage": function(year) {
       var fm1 = formats["big_int_real"];
       var fm2 = formats.percentage;
       var column = _.map(this.data, year);
-      var dept_total = d4.sum(column);
+      var dept_total = d3.sum(column);
       var groups = this.high_level_age_split();
       // delete missing rows
       //delete groups[undefined]
@@ -129,17 +136,17 @@ module.exports = {
       var mapfunc = function(key){
         var relevant_group = groups[key];
         var mini_column = _.map(relevant_group, year);
-        var group_total = d4.sum(mini_column);
+        var group_total = d3.sum(mini_column);
         return [key, fm1(group_total), fm2(group_total/dept_total)];
       };
-      return _.map(emp_ages, mapfunc);
+      return _.map(compact_age_groups, mapfunc);
     },
   },
 
-  "dimensions" : [
+  "dimensions": [
     {
-      title_key : "age_group_condensed",
-      include_in_report_builder : true,
+      title_key: "age_group_condensed",
+      include_in_report_builder: true,
 
       filter_func: function(options){
         return function(row){
@@ -148,8 +155,8 @@ module.exports = {
       },
     },
     {
-      title_key : "age_group",
-      include_in_report_builder : true,
+      title_key: "age_group",
+      include_in_report_builder: true,
 
       filter_func: function(options){
         return function(row){
@@ -158,8 +165,6 @@ module.exports = {
       },
     },
   ],
-
-  "mapper":  _.identity,
 
   "sort": function(mapped_rows, lang){
     return _.sortBy(mapped_rows, function(row){
@@ -177,7 +182,7 @@ module.exports = {
 
 Statistics.create_and_register({
   id: 'table11_dept_info', 
-  table_deps: [ 'table11'],
+  table_deps: ['table11'],
   level: 'dept',
   compute: (subject, tables, infos, add, c) => {
     const table = tables.table11;
@@ -196,7 +201,7 @@ Statistics.create_and_register({
 
 Statistics.create_and_register({
   id: 'table11_gov_info', 
-  table_deps: [ 'table11'],
+  table_deps: ['table11'],
   level: 'gov',
   compute: (subject, tables, infos, add, c) => {
     const table = tables.table11;

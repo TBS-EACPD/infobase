@@ -35,7 +35,7 @@ function completeAssign(target, ...sources) {
   return target;
 }
 
-const d4 = completeAssign({}, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
+const d3 = completeAssign({}, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
 if(typeof window !== 'undefined'){
-  window.d4 = d4;
+  window.d3 = d3;
 }

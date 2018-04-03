@@ -1,7 +1,11 @@
-const ROUTER = require('../core/router.js');
+import get_home_content from './home-data.js';
+import { log_standard_event } from '../core/analytics.js';
+
+require('./home.scss');
+require('./home-pngs.css');
+
 const MediaQuery = require('react-responsive');
 const classNames = require('classnames');
-const { reactAdapter } = require('../core/reactAdapter.js');
 const { 
   EverythingSearch,
 } = require('../util_components.js');
@@ -14,34 +18,79 @@ const {
 } = require('../models/text.js');
 require("./home.ib.yaml");
 
-require('./home.scss');
-require('./home-pngs.css');
 
 const {
-  TextMaker,
   TM,
   SpinnerWrapper,
 } = require('../util_components.js');
 
-const {
-  rpb_link,
-} = require('../rpb/rpb_link.js');
 
 const { ensure_loaded } = require('../core/lazy_loader.js');
 const { ResultCounts } = require('../models/results.js');
 const { Table } = require('../core/TableClass.js');
 
+const { StandardRouteContainer } = require('../core/NavComponents.js');
+
+const HImageCard = ({
+  title_key,
+  text_key,
+  link_key,
+  link_href,
+  text_args,
+}) => (
+  <div className="h-img-card col-content-child">
+    <div className="h-img-card__right-container">
+      <div className="h-img-card__right">
+        <header className="h-img-card__title">
+          <TM k={title_key}/>
+        </header>
+        <div className="h-img-card__text">
+          <TM k={text_key} args={text_args} />
+        </div>
+        <div className="h-img-card__bottom-right">
+          <a href={link_href}>
+            <TM k={link_key} /> →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+)
+
+const VImageCard = ({
+  img_src,
+  title_key,
+  text_key,
+  link_key,
+  link_href,
+}) => (
+  <div className="v-img-card col-content-child">
+    <div className="v-img-card__top-container">
+      <div aria-hidden={true} className="v-img-card__top">
+        <a className="v-img-card__img-link" href={link_href}>
+          <img src={img_src} className="v-img-card__img" />
+        </a>
+      </div>
+    </div>
+    <div className="v-img-card__bottom-container">
+      <div className="v-img-card__bottom">
+        <header className="v-img-card__title">
+          <TM k={title_key} />
+        </header>
+        <div className="v-img-card__text">
+          <TM k={text_key} />
+        </div>
+
+        <div className="v-img-card__bottom-right">
+          <a href={link_href}><TM k={link_key} /></a>
+        </div>
+      </div>
+    </div>
+  </div>
+);
 
 
-ROUTER.add_default_route( "start", "start", function route_func(container){
-  this.add_crumbs();
-  const empty = document.createElement('span');
-  this.add_title(empty);
-  reactAdapter.render(<Container />, container);
-})
-
-
-class Container extends React.Component {
+export class Home extends React.Component {
   constructor(){
     super()
     this.state = { loading: true};
@@ -60,8 +109,15 @@ class Container extends React.Component {
 
   }
   render(){
+
+    const { featured_content_items } = get_home_content();
+
     if(this.state.loading){
-      return <SpinnerWrapper scale={4} />;
+      return (
+        <StandardRouteContainer route_key="start">
+          <SpinnerWrapper scale={4} />
+        </StandardRouteContainer>
+      );
     } else {
       const table5 = Table.lookup('table5');
       const table10 = Table.lookup('table10');
@@ -69,17 +125,22 @@ class Container extends React.Component {
 
      
       return (
-        <MediaQuery minWidth={992}>
-          {is_large =>  
-            <HomeLayout
-              past_targets_met={drr16_indicators_past_success}
-              past_targets_total={drr16_past_total}
-              spent_last_year={table5.col_from_nick('{{pa_last_year}}').formula(table5.data)}
-              headcount_last_year={table10.col_from_nick('{{ppl_last_year}}').formula(table10.data)}
-              is_large={is_large}
-            />
-          }
-        </MediaQuery>
+        <StandardRouteContainer route_key="start">
+          <MediaQuery minWidth={992}>
+            {is_large =>
+              <div> 
+                <HomeLayout
+                  past_targets_met={drr16_indicators_past_success}
+                  past_targets_total={drr16_past_total}
+                  spent_last_year={table5.col_from_nick('{{pa_last_year}}').formula(table5.data)}
+                  headcount_last_year={table10.col_from_nick('{{ppl_last_year}}').formula(table10.data)}
+                  is_large={is_large}
+                  featured_content_items={featured_content_items}
+                />
+              </div>
+            }
+          </MediaQuery>
+        </StandardRouteContainer>
       );
 
     }
@@ -89,78 +150,15 @@ class Container extends React.Component {
 
 const FeaturedContentItem = ({ text_key, href, is_new }) => <li className="list-group-item list-group-item--is-darkened">
   { is_new && <span className="badge badge--is-new"> new </span> }
-  <a href={href}> <TextMaker text_key={text_key} /> </a>
+  <a href={href}> <TM k={text_key} /> </a>
 </li>;
-
-const featured_content_items = [
-  {
-    text_key: "interim_mains",
-    href: rpb_link({ 
-      table: 'table8', 
-      columns: [ "{{est_next_year}}_estimates"], 
-      dimension: 'by_estimates_doc', 
-    }),
-    is_new: true,
-  },
-  {
-    text_key: "supps_c",
-    href: rpb_link({ 
-      table: 'table8', 
-      columns: [ "{{est_in_year}}_estimates"], 
-      dimension: 'by_estimates_doc', 
-      filter: ({ //TODO: D.R.Y this against table8
-        "en":"Supp. Estimates C",
-        "fr":"Budget supp. C",
-      })[window.lang],
-    }),
-    is_new: true,
-  },
-  {
-    text_key: "DRR_1617",
-    href: rpb_link({ 
-      table: 'table12', 
-      columns: ['{{pa_last_year}}'], 
-      dimension: "gov_goco",
-    }),
-  },
-  {
-    text_key:"table4_home_link",
-    href: rpb_link({ 
-      table: 'table4', 
-      columns: ['{{pa_last_year}}auth','{{pa_last_year}}exp'], 
-      mode: 'details',
-    }),
-  },
-  {
-    text_key: "DP_1718",
-    href: rpb_link({ 
-      table: 'table6', 
-      columns: ['{{planning_year_1}}'], 
-      dimension: "gov_goco",
-    }),
-  },
-  { 
-    text_key: 'prog_by_vote_stat',
-    href : rpb_link({ 
-      table: 'table300', 
-      mode: 'details',
-    }),
-  },
-  { 
-    text_key: 'prog_by_so',
-    href : rpb_link({ 
-      table: 'table305', 
-      mode: 'details',
-    }),
-  },
-];
 
 
 const HomeLayout = props => (
   <div className="home-root">
     <div className="intro-box">
-      <h1> <TextMaker text_key="welcome" /> </h1>
-      <h2> <TextMaker text_key="home_sub_title" /> </h2>
+      <h1> <TM k="welcome" /> </h1>
+      <h2> <TM k="home_sub_title" /> </h2>
       <div className="search-box"><div className="search-container">
         <EverythingSearch 
           include_gov={false} 
@@ -173,6 +171,14 @@ const HomeLayout = props => (
           include_glossary={true}
           org_scope="orgs_with_data_with_gov"
           href_template={ general_href_for_item }
+          onNewQuery={ query => { 
+            log_standard_event({
+              SUBAPP: "home",
+              SUBJECT_GUID: null, 
+              MISC1: "home_search",
+              MISC2: query,
+            });
+          }}
         />
       </div></div>
 
@@ -259,81 +265,44 @@ const HomeLayout = props => (
       }
     </div>
 
-    {/* same content (finance, people, results), but different structure than what's above in the intro box */}
-    <div className={classNames("equal-height-row equal-height-row--home-row", props.is_large && "sr-only")}>
-      <div className="equal-height-col is-1-third">
-        <div className="col-content misc-col-content">
-          <div className="h-img-card col-content-child">
-            <div className="h-img-card__right-container">
-              <div className="h-img-card__right">
-                <header className="h-img-card__title">
-                  <TM k="home_finance_title" />
-                </header>
-
-                <div className="h-img-card__text">
-                  <TM k="home_finance_intro" args={props} />
-                </div>
-
-                <div className="h-img-card__bottom-right">
-                  <a href="#orgs/gov/gov/infograph/financial">
-                    <TM k="home_finance_link" /> →
-                  </a>
-                </div>
-              </div>
-            </div>
-  
+    {/* same content (finance, people, results), but for mobile */}
+    {!props.is_large && 
+      <div className={classNames("equal-height-row equal-height-row--home-row")}>
+        <div className="equal-height-col is-1-third">
+          <div className="col-content misc-col-content">
+            <HImageCard
+              link_href="#orgs/gov/gov/infograph/financial"
+              title_key="home_finance_title"
+              text_key="home_finance_intro"
+              link_key="home_finance_link"
+              text_args={props}
+            />
+          </div>
+        </div>
+        <div className="equal-height-col is-1-third">
+          <div className="col-content misc-col-content">
+            <HImageCard
+              link_href="#orgs/gov/gov/infograph/people"
+              title_key="home_ppl_title"
+              text_key="home_ppl_intro"
+              link_key="home_ppl_link"
+              text_args={props}
+            />
+          </div>
+        </div>
+        <div className="equal-height-col is-1-third">
+          <div className="col-content misc-col-content">
+            <HImageCard
+              link_href="#orgs/gov/gov/infograph/results"
+              title_key="home_results_title"
+              text_key="home_results_intro"
+              link_key="home_results_link"
+              text_args={props}
+            />
           </div>
         </div>
       </div>
-      <div className="equal-height-col is-1-third">
-        <div className="col-content misc-col-content">
-          <div className="h-img-cardcol-content-child">
-            <div className="h-img-card__right-container">
-              <div className="h-img-card__right">
-                <header className="h-img-card__title">
-                  <TM k="home_ppl_title"  />
-                </header>
-
-                <div className="h-img-card__text">
-                  <TM k="home_ppl_intro" args={props} />
-                </div>
-
-                <div className="h-img-card__bottom-right">
-                  <a href="#orgs/gov/gov/infograph/people">
-                    <TM k="home_ppl_link"/> →
-                  </a>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-      <div className="equal-height-col is-1-third">
-        <div className="col-content misc-col-content">
-          <div className="h-img-card col-content-child" >
-            <div className="h-img-card__right-container">
-              <div className="h-img-card__right">
-                <header className="h-img-card__title">
-                  <TM k="home_results_title" />
-                </header>
-
-                <div className="h-img-card__text">
-                  <TM k="home_results_intro" args={props} />
-                </div>
-
-                <div className="h-img-card__bottom-right">
-                  <a href="#orgs/gov/gov/infograph/results">
-                    <TM k="home_results_link" /> →
-                  </a>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
+    }
 
     <div className="external-row-descriptor">
       <TM k="home_featured_row_title" />
@@ -341,55 +310,24 @@ const HomeLayout = props => (
     <div className="equal-height-row equal-height-row--home-row">
       <div aria-hidden={true} className="equal-height-col is-1-third">
         <div className="col-content featured-col-content">
-          <div className="v-img-card col-content-child">
-            <div className="v-img-card__top-container">
-              <div aria-hidden={true} className="v-img-card__top">
-                <a className="v-img-card__img-link" href="#partition/dept/exp">
-                  <img src="./png/partition.png" className="v-img-card__img" />
-                </a>
-              </div>
-            </div>
-            <div className="v-img-card__bottom-container">
-              <div className="v-img-card__bottom">
-                <header className="v-img-card__title">
-                  <TM k="partition_home_title" />
-                </header>
-                <div className="v-img-card__text">
-                  <TM k="partition_home_text" />
-                </div>
-
-                <div className="v-img-card__bottom-right">
-                  <a href="#partition/dept/exp"><TM k="check_home_link" /></a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <VImageCard
+            img_src="./png/partition.png"
+            title_key="partition_home_title"
+            text_key="partition_home_text"
+            link_key="check_home_link"
+            link_href="#partition/dept/exp"
+          />
         </div>
       </div>
       <div aria-hidden={true} className="equal-height-col is-1-third">
         <div className="col-content featured-col-content">
-          <div className="v-img-card col-content-child">
-            <div className="v-img-card__top-container">
-              <div aria-hidden={true} className="v-img-card__top">
-                <a className="v-img-card__img-link" href="#explore-dept">
-                  <img src="./png/bubbles.png" className="v-img-card__img" />
-                </a>
-              </div>
-            </div>
-            <div className="v-img-card__bottom-container">
-              <div className="v-img-card__bottom">
-                <header className="v-img-card__title">
-                  <TM k="planet_home_title" />
-                </header>
-                <div className="v-img-card__text">
-                  <TM k="planet_home_text" />
-                </div>
-                <div className="v-img-card__bottom-right">
-                  <a href="#explore-dept"> <TM k="check_home_link" /> </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <VImageCard
+            img_src="./png/bubbles.png"
+            title_key="planet_home_title"
+            text_key="planet_home_text"
+            link_key="check_home_link"
+            link_href="#explore-dept"
+          />
         </div>
       </div>
       <div className="equal-height-col is-1-third">
@@ -399,7 +337,7 @@ const HomeLayout = props => (
           </header>
           <div style={{margin: 'auto 0'}}> {/* center in between title and bottom */}
             <ul className="list-group list-group--quick-links">
-              { _.map( featured_content_items, item => <FeaturedContentItem key={item.text_key} {...item} /> ) }
+              { _.map( props.featured_content_items, item => <FeaturedContentItem key={item.text_key} {...item} /> ) }
             </ul>
           </div>
         </section>
@@ -412,86 +350,35 @@ const HomeLayout = props => (
     <div className='equal-height-row equal-height-row--home-row'>
       <div className="equal-height-col is-1-third">
         <section className="col-content explore-col-content">
-          <div className="v-img-card col-content-child">
-            <div className="v-img-card__top-container">
-              <div aria-hidden={true} className="v-img-card__top">
-                <a className="v-img-card__img-link" href="#resource-explorer">
-                  <img src="./png/explorer.png" className="v-img-card__img"  />
-                </a>
-              </div>
-            </div>
-            <div className="v-img-card__bottom-container">
-              <div className="v-img-card__bottom">
-                <header className="v-img-card__title">
-                  <TextMaker text_key="explorer_home_title" />
-                </header>
-
-                <div className="v-img-card__text">
-                  <TextMaker text_key="explorer_home_text" />
-                </div>
-
-                <div className="v-img-card__bottom-right">
-                  <a href="#resource-explorer"> <TM k="start_exp_link" /> </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <VImageCard
+            img_src="./png/explorer.png"
+            title_key="explorer_home_title"
+            text_key="explorer_home_text"
+            link_key="start_exp_link"
+            link_href="#resource-explorer"
+          />
         </section>
       </div>
       <div className="equal-height-col is-1-third">
         <section className="col-content explore-col-content">
-          <div className="v-img-card col-content-child">
-            <div className="v-img-card__top-container">
-              <div aria-hidden={true} className="v-img-card__top">
-                <a className="v-img-card__img-link" href="#rpb">
-                  <img src="./png/Builder.png" className="v-img-card__img" />
-                </a>
-              </div>
-            </div>
-            <div className="v-img-card__bottom-container">
-              <div className="v-img-card__bottom">
-                <header className="v-img-card__title">
-                  <TextMaker text_key="home_build_a_report" />
-                </header>
-
-                <div className="v-img-card__text">
-                  <TextMaker text_key="report_builder_home_desc" />
-                </div>
-
-                <div className="v-img-card__bottom-right">
-                  <a href="#rpb"> <TM k="start_build_link" /> </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <VImageCard
+            img_src="./png/Builder.png"
+            title_key="home_build_a_report"
+            text_key="report_builder_home_desc"
+            link_key="start_build_link"
+            link_href="#rpb"
+          />
         </section>
       </div>
       <div className="equal-height-col is-1-third">
         <section className="col-content explore-col-content">
-          <div className="v-img-card col-content-child">
-            <div className="v-img-card__top-container">
-              <div aria-hidden={true} className="v-img-card__top">
-                <a className="v-img-card__img-link" href="#igoc">
-                  <img src="./png/structure_panel.png" className="v-img-card__img" />
-                </a>
-              </div>
-            </div>
-            <div className="v-img-card__bottom-container">
-              <div className="v-img-card__bottom">
-                <header className="v-img-card__title">
-                  <TextMaker text_key="igoc_home_title" />
-                </header>
-
-                <div className="v-img-card__text">
-                  <TextMaker text_key="igoc_home_desc" />
-                </div>
-
-                <div className="v-img-card__bottom-right">
-                  <a href="#igoc"><TM k="start_search_link" /> </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <VImageCard
+            img_src="./png/structure_panel.png"
+            title_key="igoc_home_title"
+            text_key="igoc_home_desc"
+            link_key="start_search_link"
+            link_href="#igoc"
+          />
         </section>
       </div>
     </div>
@@ -508,15 +395,15 @@ const HomeLayout = props => (
             <div className="h-img-card__right-container">
               <div className="h-img-card__right">
                 <header className="h-img-card__title">
-                  <TextMaker text_key="glossary_home_title" /> 
+                  <TM k="glossary_home_title" /> 
                 </header>
 
                 <div className="h-img-card__text">
-                  <TextMaker text_key="glossary_home_desc" /> 
+                  <TM k="glossary_home_desc" /> 
                 </div>
 
                 <div className="h-img-card__bottom-right">
-                  <a href="#glossary"> <TextMaker text_key="glossary_home_link_text" /> </a>
+                  <a href="#glossary"> <TM k="glossary_home_link_text" /> </a>
                 </div>
               </div>
             </div>
@@ -526,52 +413,23 @@ const HomeLayout = props => (
 
       <div className="equal-height-col is-1-third">
         <section className="col-content misc-col-content">
-          <div className="h-img-card col-content-child">
-
-            <div className="h-img-card__right-container">
-              <div className="h-img-card__right">
-                <header className="h-img-card__title">
-                  <TextMaker text_key="metadata_home_title" />
-                </header>
-
-                <div className="h-img-card__text">
-                  <TextMaker text_key="metadata_home_desc" />
-                </div>
-
-                <div className="h-img-card__bottom-right">
-                  <a href="#metadata"> 
-                    <TextMaker text_key="metadata_home_link_text" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <HImageCard
+            link_href="#metadata"
+            title_key="metadata_home_title"
+            text_key="metadata_home_desc"
+            link_key="metadata_home_link_text"
+          />
         </section>
       </div>
 
       <div className="equal-height-col is-1-third">
         <section className="col-content misc-col-content">
-          <div className="h-img-card col-content-child">
-
-            <div className="h-img-card__right-container">
-              <div className="h-img-card__right">
-                <header className="h-img-card__title">
-                  <TM k="about_home_title" />
-                </header>
-                <div className="h-img-card__text">
-                  <TM k="about_home_desc" />
-                </div>
-                <div className="h-img-card__bottom-right">
-                  <a
-                    target="_blank" 
-                    href={"#about"}
-                  >
-                    <TM k="about_home_link" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <HImageCard
+            link_href={"#about"}
+            title_key="about_home_title"
+            text_key="about_home_desc"
+            link_key="about_home_link"
+          />
         </section>
       </div>
     </div> 

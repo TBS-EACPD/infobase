@@ -1,0 +1,278 @@
+@import "../../common_css/common-variables";
+
+.quadrant-dl > div:first-child {
+  float:left;
+  border-bottom: none;
+  border-right: none;
+}
+
+.quadrant-dl > div:nth-child(2) {
+  float:right;
+  border-bottom: none;
+}
+
+.quadrant-dl > div:nth-child(3) {
+  float:left;
+  border-right: none;
+}
+
+.quadrant-dl > div:nth-child(4) {
+  float:right;
+}
+
+.quadrant-dl{
+  overflow: visible;
+  margin: 0;
+}
+.quadrant-dl > div {
+  width: 50%;
+}
+
+.number-box {
+  height: 125px;
+  border: 1px solid #ccc;
+  margin: 0;
+
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  background-color: rgba(37,114,180,0.7);
+  border: 1px solid rgba(37,114,180,0.9);
+}
+.quadrant-dl > div > dt,
+.line-quadrant-dl > div > dt {
+  display: block;
+  order: 2;
+  font-weight: $mediumFontWeight;
+}
+.quadrant-dl > div > dd,
+.line-quadrant-dl > div > dd {
+  display: flex;
+  order: 1;
+  align-items: center;
+  justify-content: center;
+  font-size : 40px;
+  margin-bottom: 0px;
+}
+
+/* TODO: get rid of this elsewhere and then delete it */
+.results-separator {
+  margin: 20px 60px 20px 60px;
+  border-top: 1px solid #ccc;
+}
+
+
+/* this extends a normal bootstrap table.dark-bordered-table.table */
+table.drr-summary-table th {
+  background-color: #d7e5f0 !important;
+  color: #333;
+  font-weight: $heavyFontWeight;
+  vertical-align: top !important;
+}
+/* total row */
+table.drr-summary-table > tbody > tr:last-child {
+  background-color: #d7e5f0 !important;
+  color: #333;
+}
+
+table.drr-summary-table td.success.disabled-success {
+  background-image: repeating-linear-gradient(-45deg, transparent, transparent, hsla(102, 23%, 78%, 0.7), hsla(102, 23%, 93%, 0.7) 5px)
+}
+
+
+
+ul.list-unstyled.indicator-list > li {
+  padding: 10px;
+  margin-left: -15px;
+  margin-right: 20px;
+  background-color: inherit;
+}
+
+ul.list-unstyled.indicator-list > li:not(:first-child) {
+  border-top: 1px solid #bbb;
+}
+
+.indicator-item__header {
+  font-size: 1.2em;
+  text-align:center;
+  margin-top: 10px; 
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+/* mostly resetting bootstrap's normalization of dd/dt */
+
+
+dl.indicator-item__dl {
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+dl.indicator-item__dl dt+dd {
+  padding-bottom: 10px;
+}
+
+@media(min-width: 768px){
+  dl.indicator-item__dl > dd,
+  dl.indicator-item__dl > dt {
+    margin-bottom:0;
+  }
+
+  dl.indicator-item__dl > dt:first-of-type,
+  dl.indicator-item__dl > dd:first-of-type {
+    border-top: none;
+  }
+}
+
+/* 
+  .status-icon-table
+    .status-icon-table__item
+    .status-icon-table__item
+      .status-icon-table__word
+      .status-icon-table__icon_count
+        .status-icon-table__icon
+        .status-icon-table__count
+*/
+.status-icon-table {
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
+
+.status-icon-table__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 32px 5px 32px;
+  flex: 1;
+  cursor: pointer;
+}
+
+.status-icon-table__item:hover,
+.status-icon-table__item:focus,
+.status-icon-table__item:active {
+  background-color: #e8e8e8;
+}
+
+
+.status-icon-table__eye {
+  width: 0px;
+  height: 0px;
+  align-self: center;
+}
+.status-icon-table__eye > .glyphicon {
+  top: -13px;
+  left: -67px;
+  font-size: 20px;
+}
+@media(max-width:992px) and (min-width:768px){
+  .status-icon-table__eye > .glyphicon {
+    left: -57px;
+  }
+}
+
+.status-icon-table__eye > .glyphicon-eye-open {
+  color: $primaryColor;
+}
+.status-icon-table__eye > .glyphicon-eye-close {
+  color: $secondaryColor;
+}
+
+@media(min-width:768px){
+  .status-icon-table {
+    max-width: 750px;
+    margin: 0 auto;
+  }
+  .status-icon-table__item {
+    border-style: solid;
+    border-width: 2px 2px 2px 0;
+    border-color: #2b4465;
+    color: #2c4566;
+  }
+  .status-icon-table__item:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-left-width: 2px;
+  }
+  .status-icon-table__item:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+}
+
+@media(max-width:768px){
+  .status-icon-table {
+    flex-direction: column;
+  }
+
+  .status-icon-table__item {
+    border-style: solid;
+    border-width: 0 1px 1px 1px;
+    border-color: #b0b0b0;
+    flex-basis: auto;
+  }
+
+  .status-icon-table__item:first-child {
+    border-top-width: 1px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+  }
+
+  .status-icon-table__item:last-child {
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+
+}
+
+
+
+.status-icon-table__word {
+  font-size: 1.05em;
+  text-align: center;
+  margin-top: 0.5em;
+  margin-bottom: 0.7em;
+  font-weight: $heavyFontWeight;
+  padding: 7px 0px;
+}
+
+.status-icon-table__icon-count {
+  text-align: center;
+}
+
+.status-icon-table__icon {
+  font-size: 2em; 
+  margin-left: 10px;
+}
+
+.status-icon-table__count {
+  font-size: 2em; 
+}
+
+
+.inline-status-icon {
+  padding-left: 6px; 
+  font-size:1.2em;
+  white-space: nowrap;
+}
+.inline-status-icon__count {
+  padding-left: 1px;
+  color:#000;
+}
+
+
+/* color classes for icon-array viz */
+.results-icon-array-pass {
+  background-color:hsla(120, 85%, 30%, 0.8);
+}
+
+.results-icon-array-fail {
+  background-color: hsla(0, 100%, 55%, 0.8);
+}
+
+.results-icon-array-na {
+  background-color:hsla(39, 100%, 50%,0.8);
+}

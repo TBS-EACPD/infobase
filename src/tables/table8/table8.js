@@ -1,11 +1,8 @@
 // see [here](../table_definition.html) for description
 // of the table spec
 exports = module.exports;
+require('../../common_text/estimates_lang.ib.yaml');
 require("./table8.ib.yaml");
-require("../../graphs/in_year_estimates");
-require("../../graphs/in_year_estimates_split");
-require("../../graphs/in_year_vote_stat_split");
-require("../../graphs/in_year_vote-stat_breakdown");
 var FORMAT = require('../../core/format');
 
 const {
@@ -268,7 +265,7 @@ module.exports = {
           if (filter){
             est_lines = _.filter(est_lines, filter);
           } 
-          est_amnt = d4.sum(_.map(est_lines, col));
+          est_amnt = d3.sum(_.map(est_lines, col));
           if (add_percentage) {
             return [est_doc, est_amnt, est_amnt/total];
           } else {
@@ -357,7 +354,7 @@ Statistics.create_and_register({
       add("tabled_"+yr,q.sum(yr));
     })
 
-    const voted_in_mains = d4.sum(
+    const voted_in_mains = d3.sum(
       _.filter(q.data, row => _.isNumber(row.votenum) && row.est_doc_code === "MAINS"),
       _.property(in_year_col)
     );
@@ -420,7 +417,7 @@ Statistics.create_and_register({
       .value()
       .length;
 
-    const voted_in_mains = d4.sum(
+    const voted_in_mains = d3.sum(
       _.filter(table.data, row => _.isNumber(row.votenum) && row.est_doc_code === "MAINS"),
       _.property(in_year_col)
     );

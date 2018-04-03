@@ -1,8 +1,8 @@
 $(function(){
-  var D3 = ns('D3');
-  var TREE = ns('D3.TREE');
+  var charts_index = ns('charts_index');
+  var TREE = ns('charts_index.TREE');
 
-  TREE.make_horizontal_tree = D3.extend_base(function(svg, index){
+  TREE.make_horizontal_tree = charts_index.extend_base(function(svg, index){
     var text_func = this.text_func;
     var dispatch  = this.dispatch;
     var root = this.root;
@@ -14,7 +14,7 @@ $(function(){
     var nodeRadius = 10;
     var horizontal_position_scale = d3.scale.linear()
       .range([1/4*width,4/5*width]);
-    var html = d3.select(D3.get_html_parent(svg));
+    var html = d3.select(charts_index.get_html_parent(svg));
     // create the zoom/pan listener, one zoomy/pany events like using the click
     // wheel or pinching on a touch browser, the zoomListener will 
     // perform some funky math and then call the on_zoom function 

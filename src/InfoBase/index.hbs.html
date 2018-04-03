@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{{page_title}}</title>
+    <title id="document-title">{{page_title}}</title>
     <meta content="width=device-width,initial-scale=1" name="viewport">
-    <meta name="description" content="{{meta_description}}">
+    <meta id="document-description" name="description" content="{{meta_description}}">
     
     <link href="./GCWeb/assets/favicon.ico" rel="icon" type="image/x-icon">
     <link rel="stylesheet" href="./GCWeb/css/theme.min.css">
@@ -24,6 +24,11 @@
     <header>
       <div id="ib-site-header">
         <div class="container">
+            {{#unless is_a11y_mode}}
+              <div style='margin:0 auto; text-align: center'>
+                <a class="a11y-version-link" href={{a11y_version_url}}>{{a11y_version_text}}</a>
+              </div>
+            {{/unless}}
             <div class="row">
                 <div class="col-xs-4">
                   <a href="{{logo_link}}" class="ib-site-header-logo gl-FIP" aria-label="{{logo_a11y_label}}">
@@ -42,12 +47,12 @@
     <h2>{{you_are_here}}</h2>
     <div class="container">
     <div class="row">
-      <div class="col-md-9">
-        <ol class="breadcrumb" style='padding: 8px 0'>
-          <li class="infobase-home-breadcrumb-link">  <a href="">InfoBase</a></li> 
+      <div id="breadcrumb-trail" class="col-md-9">
+        <ol class="breadcrumb">
+          <li class="infobase-home-breadcrumb-link"><span>InfoBase</span></li> 
         </ol>
       </div>
-      <div class='col-md-3 easy-access' style='padding-top:8px; padding-bottom: 8px; text-align:right;'></div>
+      <div id="easy-access" class='col-md-3 easy-access' style='padding-top:8px; padding-bottom: 8px; text-align:right;'></div>
     </div>
     </div>
     </nav>
@@ -59,7 +64,6 @@
       <p>{{app_requires_js}}</p>
       </noscript>
       <div id='app' style="min-height: 200px">
-        <div class='row'> <div class='nav_area container' > </div> </div>
       </div>
     </main>
     <footer id="wb-info">
@@ -85,8 +89,8 @@
     
 
     <script src="./js/polyfill.min.js"></script>
-    <script src="app-{{lang}}.min.js"></script>
-
+    <script src="{{script_url}}"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <!-- SCMA analytics script tag -->
     <script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-19331166-1'], ['_trackDownload'], ['_gat._anonymizeIp'] );_gaq.push(['_trackPageview']); (function(){ var ga = document.createElement('script');ga.type = 'text/javascript';ga.async = true;ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
     <script>

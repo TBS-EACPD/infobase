@@ -1,7 +1,7 @@
 const ROUTER = require('../core/router.js');
 const { reactAdapter } = require('../core/reactAdapter.js');
 const FootnoteModel = require('../models/footnotes.js');
-const { PanelGraph } = require('../core/graphs.js');
+const { PanelGraph } = require('../core/PanelGraph.js');
 
 const {
   Select,
@@ -348,7 +348,7 @@ class FootnoteInspector extends React.Component {
 
 
     if(mode === 'graphs'){
-      return `#footnotes/graphs/${selected_graph}/${selected_level}`;
+      return `#footnotes/panels/${selected_graph}/${selected_level}`;
     } else {
       return `#footnotes/concepts/${selected_concept}`;
     }

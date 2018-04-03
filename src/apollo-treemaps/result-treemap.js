@@ -69,7 +69,7 @@ function data_to_props({ root: { org: { programs  }} }){
     id: "root",
     data: {},
   }
-  const d3_h7y = d4.hierarchy(root, node => {
+  const d3_h7y = d3.hierarchy(root, node => {
     if(node === root){
       return _.map(programs,obj_to_node_mapper("program"));
     }

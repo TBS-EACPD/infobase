@@ -1,9 +1,9 @@
 (function() {
 
-  var D3 = ns('D3');
-  var STACKED = ns('D3.STACKED');
+  var charts_index = ns('charts_index');
+  var STACKED = ns('charts_index.STACKED');
 
-  STACKED.relaxed_stacked = D3.extend_base(function(svg,index){
+  STACKED.relaxed_stacked = charts_index.extend_base(function(svg,index){
     /* data in fhte format of
       *   "display_cols" : ["y 1","y 2","y 3"],
       *    "col_attrs"  : ["y1","y2","y3"]
@@ -22,7 +22,7 @@
       */
 
     var display_cols = this.display_cols,
-      html = d3.select(D3.get_html_parent(svg)),
+      html = d3.select(charts_index.get_html_parent(svg)),
       all_rows = this.rows,
       col_attrs = this.col_attrs,
       non_zero_rows = _.filter(all_rows, function(d){
@@ -40,7 +40,7 @@
       formater = this.formater,
       total_formater = this.total_formater,
       text_key = this.text_key,
-      colors = this.colors || D3.tbs_color(),
+      colors = this.colors || charts_index.tbs_color(),
       margin = this.margin || {top: 20, 
         right: 20, 
         bottom: 20, 

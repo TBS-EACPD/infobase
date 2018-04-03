@@ -1,6 +1,6 @@
 exports = module.exports;
 
-const D3CORE = require('./core');
+const common_charts_utils = require('./common_charts_utils');
 
 exports.HBarComposition = class HBarComposition {
   constructor(container, options){
@@ -19,11 +19,11 @@ exports.HBarComposition = class HBarComposition {
     //  horizontal bar chart with equal sized bars showing the relative 
     //  split
     //
-    D3CORE.setup_graph_instance(this,d4.select(container),options);
+    common_charts_utils.setup_graph_instance(this,d3.select(container),options);
     this.graph_area  = this.svg.append("g").attr("class","_graph_area");
     // keep reference to container to modify the height based on the number of 
     // bars to be drawn
-    this.container = d4.select(container);
+    this.container = d3.select(container);
   }
 
   render(options){
@@ -46,10 +46,10 @@ exports.HBarComposition = class HBarComposition {
     const  data = _.chain(this.options.data)
       .each(d => {
         const values = _.map(d.data,"data");
-        d.positive_sum = d4.sum(values.filter(v=>v>0));
-        d.negative_sum = d4.sum(values.filter(v=>v<0));
-        d.abs_sum = d4.sum(values.map(Math.abs));
-        d.sum = d4.sum(values);
+        d.positive_sum = d3.sum(values.filter(v=>v>0));
+        d.negative_sum = d3.sum(values.filter(v=>v<0));
+        d.abs_sum = d3.sum(values.map(Math.abs));
+        d.sum = d3.sum(values);
         x_max = d.positive_sum > x_max ? d.positive_sum : x_max;
         x_min = d.negative_sum < x_min ? d.negative_sum : x_min;
       })
@@ -89,7 +89,7 @@ exports.HBarComposition = class HBarComposition {
       neg_x_min_bar_pct;
 
     const graph_start = (label_pct + left_margin_pct ) * width;
-    const x = d4.scaleLinear()
+    const x = d3.scaleLinear()
       .domain([0,Math.abs(x_min)+x_max])
       .range([0,(1-label_pct-left_margin_pct-right_margin_pct) * width]);
 
@@ -217,9 +217,9 @@ exports.HBarComposition = class HBarComposition {
       })
       .each(function(d){
 
-        d4.select(this).html("");
+        d3.select(this).html("");
 
-        d4.select(this)
+        d3.select(this)
           .classed("bar-label",true)
           .append("div")
           .styles({
@@ -243,7 +243,7 @@ exports.HBarComposition = class HBarComposition {
           .html(bar_label_formater);
 
         if ( d.positive_sum > 0) {
-          d4.select(this)
+          d3.select(this)
             .append("div")
             .styles({
               "position" : "absolute",
@@ -273,7 +273,7 @@ exports.HBarComposition = class HBarComposition {
         }
 
         if ( d.negative_sum < 0) {
-          d4.select(this)
+          d3.select(this)
             .append("div")
             .styles({
               "position" : "absolute",

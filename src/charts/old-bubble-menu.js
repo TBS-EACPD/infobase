@@ -1,7 +1,7 @@
 "use strict";
 exports = module.exports;
 
-var D3CORE = require('./core');
+var common_charts_utils = require('./common_charts_utils');
   
 var rorate_point = function(r,i){
   var angle_increment = 35*Math.PI/180;
@@ -17,7 +17,7 @@ exports.bubble_menu = function(container,options){
 //         "series 2" : [y1,y2,y3]}
 // ticks = ["tick1","tick2"."tick3"]
 // ```
-  D3CORE.setup_graph_instance(this,container,options);
+  common_charts_utils.setup_graph_instance(this,container,options);
   this.html.select(".__svg__").attr("preserve_labels_on_update", true);
   var _graph_area  = this.svg.append("g").attr("class","_graph_area");
   this.graph_area = _graph_area.append("g").attr("class","inner_graph_area");
@@ -28,11 +28,11 @@ exports.bubble_menu = function(container,options){
     bottom: 20,
     left: 10};
   this.data = this.options.data;
-  this.colors = this.options.colors || D3CORE.tbs_color();
+  this.colors = this.options.colors || common_charts_utils.tbs_color();
   
   _.each(this.data, function(d,i){
     d.__index = i;
-    d.__rid__ = D3CORE.make_unique();
+    d.__rid__ = common_charts_utils.make_unique();
   });
   
   this.render(this.options);

@@ -1,3 +1,4 @@
+const {default: withRouter} =  require('react-router/withRouter');
 const {formats} = require('./core/format.js');
 const classNames = require('classnames');
 const { 
@@ -50,19 +51,23 @@ class Format extends React.PureComponent {
   }
 }
 
-class DeptSearch extends React.Component {
-  render(){ return <div ref="main" /> }
-  componentDidMount(){
-    deptSearch(this.refs.main, this.props);
+const DeptSearch = withRouter(
+  class DeptSearch_ extends React.Component {
+    render(){ return <div ref="main" /> }
+    componentDidMount(){
+      deptSearch(this.refs.main, this.props);
+    }
   }
-}
+);
 
-class EverythingSearch extends React.Component {
-  render(){ return <div ref="main" /> }
-  componentDidMount(){
-    everythingSearch(this.refs.main, this.props);
+const EverythingSearch = withRouter(
+  class EverythingSearch extends React.Component {
+    render(){ return <div ref="main" /> }
+    componentDidMount(){
+      everythingSearch(this.refs.main, this.props);
+    }
   }
-}
+);
 
 //will update its own text while only calling a callback in a debounced fashion. 
 /* provide a onQuery callback to be debounced, and a debounceTime */
@@ -127,7 +132,7 @@ const FootnoteList = ({ footnotes }) => <div style={{padding:"10px"}}>
 
 const Year = ({y}) => run_template(`{{${y}}}`);
 
-module.exports = exports = {
+module.exports = {
   FirstChild,
   AccordionEnterExit,
   StatelessPullDownAccordion,
