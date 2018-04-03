@@ -1,23 +1,25 @@
-require("./about.ib.yaml");
-require('./about.scss');
+import "./about.ib.yaml";
+import './about.scss';
 
-const ROUTER = require('../core/router.js');
-const {text_maker} = require('../models/text');
+import { StandardRouteContainer } from '../core/NavComponents.js';
 
-const { reactAdapter } = require('../core/reactAdapter.js');
-const { TextMaker }  = require('../util_components.js');
+import { text_maker } from '../models/text';
 
-const About = () => (
-  <div className="medium_panel_text about-root">
-    <TextMaker el="div" text_key="about_body_text" />
-  </div>
-);
+import { TextMaker } from '../util_components.js';
 
-
-ROUTER.add_container_route("about", "_about",function(container){
-  this.add_crumbs([{html: text_maker("about_title")}]);
-  this.add_title("about_title");
-   
-  reactAdapter.render( <About />, container );
-  
-});
+export class About extends React.Component {
+  render(){
+    return (
+      <StandardRouteContainer
+        title={text_maker("about_title")}
+        breadcrumbs={[text_maker("about_title")]}
+        //description={} TODO
+        route_key="_about"
+      >
+        <div className="medium_panel_text about-root">
+          <TextMaker el="div" text_key="about_body_text" />
+        </div>
+      </StandardRouteContainer>
+    );
+  }
+};
