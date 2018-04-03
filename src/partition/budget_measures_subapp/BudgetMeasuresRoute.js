@@ -25,7 +25,7 @@ export class BudgetMeasuresRoute extends React.Component {
   }
   componentWillMount(){
     const first_column = this.props.match.params.first_column;
-    if ( _.chain(first_column_options).map( option => option.id ).indexOf(first_column) === -1 ){
+    if ( _.chain(first_column_options).map( option => option.id ).indexOf(first_column).value() === -1 ){
       this.props.history.push('/budget-measures/dept');
     }
   }
