@@ -442,13 +442,6 @@ a, a:visited {
   background-color: transparent;
 }
 
-/*
-.easy-access > span > a,
-ol.breadcrumb > li > :last-child {
-  color: $wetLinkColor;
-}
-*/
-
 ol.breadcrumb > li:last-child > :last-child {
   text-decoration: none;
   color: #333;
@@ -489,6 +482,10 @@ header, h1, h2, h3, h4, h5, h6 {
 #app, #wb-bc, .app-font, .easy-access, wb-lng {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
+}
+
+.easy-access > a {
+  white-space: nowrap;
 }
 
 .xplorer-node-expanded-content {
