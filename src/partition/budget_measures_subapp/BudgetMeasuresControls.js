@@ -1,3 +1,7 @@
+import './BudgetMeasuresControls.scss';
+
+import { RadioButtons } from '../../util_components.js';
+
 export class BudgetMeasuresControls extends React.Component {
   constructor(){
     super();
@@ -6,11 +10,21 @@ export class BudgetMeasuresControls extends React.Component {
     const {
       first_column,
       history,
+      items,
     } = this.props;
 
     return (
-      <div>
-        {"TODO: controls for budget measures partition diagram, choose first column and push change to history if needed"}
+      <div className="budget-measures-partition-controls">
+        <RadioButtons
+          options={ _.map( items, ({id, display }) => ({ id, display, active: id === first_column }) ) }
+          onChange={ id => {
+            const new_path = `/budget-measures/${id}`;
+            if ( history.location.pathname !== new_path ){
+              // the first_column prop, and thus this button's active id, is updated through this route push
+              history.push(new_path);
+            }
+          }}
+        />
       </div>
     );
   }

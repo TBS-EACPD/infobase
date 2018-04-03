@@ -52,7 +52,7 @@ const popup_template = node => {
 
 function center_diagram(){
   if (this.refs.outer_container){
-    this.refs.outer_container.style.marginLeft = -d3.select("main.container").node().offsetLeft+"px";
+    this.refs.outer_container.style.marginLeft = ( -d3.select("main.container").node().offsetLeft + 5 ) + "px";
   }
 }
 

@@ -7,6 +7,17 @@ import { BudgetMeasuresTop } from './BudgetMeasuresTop.js';
 import { BudgetMeasuresControls } from './BudgetMeasuresControls.js';
 import { BudgetMeasuresPartition } from './BudgetMeasuresPartition.js';
 
+const first_column_options = [
+  {
+    id: "budget-measure",
+    display: text_maker("budget_measure"),
+  },
+  {
+    id: "dept",
+    display: text_maker("org"),
+  },
+];
+
 export class BudgetMeasuresRoute extends React.Component {
   constructor(){
     super();
@@ -14,7 +25,7 @@ export class BudgetMeasuresRoute extends React.Component {
   }
   componentWillMount(){
     const first_column = this.props.match.params.first_column;
-    if (first_column !== "budget-measure" && first_column !== "dept"){
+    if ( _.chain(first_column_options).map( option => option.id ).indexOf(first_column) === -1 ){
       this.props.history.push('/budget-measures/dept');
     }
   }
@@ -30,18 +41,22 @@ export class BudgetMeasuresRoute extends React.Component {
 
     return (
       <StandardRouteContainer
-        ref="container"
-        title={text_maker("budget_measures")}
-        description={"TODO"}
-        breadcrumbs={[text_maker("budget_measures")]}
-        route_key="budget-measures"
+        ref = "container"
+        title = { text_maker("budget_measures") }
+        description = { "TODO" }
+        breadcrumbs = { [text_maker("budget_measures")] }
+        route_key = "budget-measures"
       >
-        { this.state.loading && <SpinnerWrapper ref="spinner" scale={4} /> }
+        { this.state.loading && <SpinnerWrapper ref="spinner" scale = { 4 } /> }
         { !this.state.loading && !window.is_a11y_mode &&
-          <div className="budget-measures">
+          <div className = "budget-measures">
             <BudgetMeasuresTop/>
-            <BudgetMeasuresControls first_column={first_column} history={this.props.history} />
-            <BudgetMeasuresPartition first_column={first_column} />
+            <BudgetMeasuresControls 
+              first_column = { first_column } 
+              history = { this.props.history } 
+              items = { first_column_options }
+            />
+            <BudgetMeasuresPartition first_column = { first_column } />
           </div>
         }
         { !this.state.loading && window.is_a11y_mode &&

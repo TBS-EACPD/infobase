@@ -1,0 +1,36 @@
+@import '../../common_css/common-variables';
+
+.budget-measures-partition-controls {
+  @media (min-width: 720px){
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+.budget-measures-partition-controls > .radio-buttons {
+  height: 50px;
+  border-color: #a49c9c;
+  & > button {
+    font-size: 20px;
+  }
+  & > .radio-buttons__option {
+    color: #333;
+  }
+  
+  & > .radio-buttons__option.radio-buttons__option--active {
+    color: #333;
+    background-color: #a49c9c;
+  }
+  
+  & > .radio-buttons__option:not(:last-child):after {
+    border-color: #a49c9c;
+  }
+  
+  & > .radio-buttons__option:not(.radio-buttons__option--active):hover,
+  & > .radio-buttons__option:not(.radio-buttons__option--active):active,
+  & > .radio-buttons__option:not(.radio-buttons__option--active):focus { 
+    background-color: change-color($color: #a49c9c, $alpha: 0.75);
+    color: #333 !important;
+  }
+}
