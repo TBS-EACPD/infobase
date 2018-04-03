@@ -425,10 +425,10 @@ const HomeLayout = props => (
       <div className="equal-height-col is-1-third">
         <section className="col-content misc-col-content">
           <HImageCard
-            link_href={text_maker("survey_link")}
-            title_key="feed_home_title"
-            text_key="feed_home_text"
-            link_key="feed_home_link"
+            link_href={"#about"}
+            title_key="about_home_title"
+            text_key="about_home_desc"
+            link_key="about_home_link"
           />
         </section>
       </div>

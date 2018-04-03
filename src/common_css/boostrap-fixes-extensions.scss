@@ -1,5 +1,11 @@
 @import "common-variables";
 
+
+hr {
+  //default is #eee, a little too bright
+  border-color: #ddd;
+}
+
 /* tooltips */
 .glossary-tooltip-link,
 .glossary-tooltip-link:visited  {
@@ -98,12 +104,12 @@ div#app:focus{
 }
 
 h1 {
-  margin-top: 15px;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 h2 {
-  margin-top: 15px;
   font-size: 140%;
+  margin-top: 20px;
 }
 #app {
   font-size: 90%
