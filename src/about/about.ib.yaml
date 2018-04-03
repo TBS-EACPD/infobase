@@ -11,7 +11,7 @@ principles_title:
 
 dev_icon_block:
   text: |
-    <div aria-hidden class="about__icon-block">
+    <div aria-hidden="true" class="about__icon-block">
       <i class="fab fa-fw fa-html5"></i>
       <i class="fab fa-fw fa-node-js"></i>
       <i class="fab fa-fw fa-react"></i>
