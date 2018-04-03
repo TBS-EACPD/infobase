@@ -182,7 +182,7 @@ about_body_text:
     ### Who inspires us?
 
 
-    We draw inspiration from work done across the globe, in both the public and private sectors. Our [Government at a Glance diagram](#partition/dept/exp) was inspired by the excellent work of the [USAFacts.org] https://usafacts.org/the-big-picture/spending) team. Our minimal page header and footer were inspired by our colleagues at the [Canadian Digital Service](https://digital.canada.ca). We are regularly inspired to push our data visualizations even further by the D3 community at large, and through resources like the [D3 gallery](https://github.com/d3/d3/wiki/Gallery).
+    We draw inspiration from work done across the globe, in both the public and private sectors. Our [Government at a Glance diagram](#partition/dept/exp) was inspired by the excellent work of the [USAFacts.org](https://usafacts.org/the-big-picture/spending) team. Our minimal page header and footer were inspired by our colleagues at the [Canadian Digital Service](https://digital.canada.ca). We are regularly inspired to push our data visualizations even further by the D3 community at large, and through resources like the [D3 gallery](https://github.com/d3/d3/wiki/Gallery).
 
 
     {{{gt "feedback_h2"}}}
