@@ -46,7 +46,9 @@ export class BudgetMeasuresTop extends React.Component {
 
     return (
       <div>
-        {"TODO: intro text"}
+        <div style={{paddingBottom: "25px"}}>
+          {"TODO: intro text"}
+        </div>
         { !window.is_a11y_mode &&
           <StackedHbarChart
             colors = { colors_func }
@@ -63,7 +65,9 @@ export class BudgetMeasuresTop extends React.Component {
             data = { _.map(this.allocation_by_chapter, obj => [obj.label, obj.data[0].data]) }
           />
         }
-        {"TODO: some more text, to break up page between the two diagrams"}
+        <div style={{paddingBottom: "25px"}}>
+          {"TODO: some more text, to break up page between the two diagrams"}
+        </div>
       </div>
     );
   }

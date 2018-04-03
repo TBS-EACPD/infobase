@@ -100,7 +100,7 @@ export class BudgetMeasuresPartition extends React.Component {
       <div
         ref="outer_container"
         style={{
-          marginLeft: -d3.select("main.container").node().offsetLeft+"px",
+          marginLeft: ( -d3.select("main.container").node().offsetLeft + 5 ) + "px",
           width: "98vw",
           marginTop: "10px",
         }}

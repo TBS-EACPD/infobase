@@ -10,11 +10,11 @@ import { BudgetMeasuresPartition } from './BudgetMeasuresPartition.js';
 const first_column_options = [
   {
     id: "budget-measure",
-    display: text_maker("budget_measure"),
+    display: text_maker("by") + " " + text_maker("budget_measure"),
   },
   {
     id: "dept",
-    display: text_maker("org"),
+    display: text_maker("by") + " " + text_maker("org"),
   },
 ];
 
@@ -47,6 +47,9 @@ export class BudgetMeasuresRoute extends React.Component {
         breadcrumbs = { [text_maker("budget_measures")] }
         route_key = "budget-measures"
       >
+        <h1>
+          {text_maker("budget_measures")}
+        </h1>
         { this.state.loading && <SpinnerWrapper ref="spinner" scale = { 4 } /> }
         { !this.state.loading && !window.is_a11y_mode &&
           <div className = "budget-measures">
