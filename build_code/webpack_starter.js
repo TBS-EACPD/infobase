@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const webpack = require('webpack');
 const path = require('path');
 const gitsha = require('git-bundle-sha');
@@ -13,6 +14,7 @@ function choose(name){
 var prod = !!choose('PROD');
 var babel = !choose('NO-BABEL');
 var both = !!choose('BOTH');
+var NO_WATCH = !!choose("NO-WATCH")
 
 var a11y_client = choose('a11y_client');
 var new_client = choose('new_client');
@@ -71,7 +73,11 @@ gitsha(function(err,commit_sha){
     output: app_options.get_output(lang),
   }));
 
-
+  if(NO_WATCH){
+    webpack(config, function(err,stats){
+      console.log(stats.toString({cached:true,modules:true}));
+    });
+  }
   webpack(config)
     .watch({
       //uncomment these lines if watch isn't working properly
@@ -79,7 +85,8 @@ gitsha(function(err,commit_sha){
       //poll:true
     },function(err,stats){
       console.log(stats.toString({cached:true,modules:true}));
-    }
-    );
+      
+    });
+  
 })
 
