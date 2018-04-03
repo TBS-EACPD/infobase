@@ -1,4 +1,5 @@
 module.exports = exports = {};
+const  { get_static_url } = require("./static_url.js");
 const {query_adapter} = require('./tables/queries.js');
 const {
   attach_dimensions,
@@ -341,12 +342,12 @@ exports.Table = class Table extends mix().with(staticStoreMixin){
   load(){
     return (
       window.binary_download && !window.isIE() ? 
-      fetch_and_inflate(csv_names_by_table_id[this.id]+'_min.html')
+      fetch_and_inflate(get_static_url(`${csv_names_by_table_id[this.id]}_min.html`))
         .then( csv_string => {
           this.populate_with_data(csv_string);
           this.loaded = true;
         }) :
-      $.ajax(csv_names_by_table_id[this.id])
+      $.ajax(get_static_url(csv_names_by_table_id[this.id]))
         .then( data => { 
           this.populate_with_data(data) 
           this.loaded = true;

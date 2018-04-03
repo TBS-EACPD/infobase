@@ -1,3 +1,4 @@
+const  { get_static_url } = require("../core/static_url.js");
 const {
   Ministry, 
   Program, 
@@ -16,8 +17,10 @@ const { populate_global_footnotes } = require('./populate_footnotes.js');
 module.exports.populate_stores = function(){
   return (
     window.binary_download && !window.isIE() ? 
-    fetch_and_inflate(`lookups_${window.lang}_min.html`) :
-    $.ajax({url : `lookups_${window.lang}.html`})
+    fetch_and_inflate(get_static_url(`lookups_${window.lang}_min.html`)) :
+    $.ajax({
+      url : get_static_url(`lookups_${window.lang}.html`),
+    })
   ).then( text => {
     process_lookups(JSON.parse(text));
   });

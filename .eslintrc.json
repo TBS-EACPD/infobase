@@ -65,6 +65,8 @@
     "APPLICATION_LANGUAGE":true,
     "SHA":true,
     "PRE_PUBLIC_ACCOUNTS":true,
-    "is_a11y_mode": true
+    "is_a11y_mode": true,
+    "CDN_URL": true,
+    "process":true
   }
 }

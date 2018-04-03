@@ -1,3 +1,5 @@
+import { get_static_url } from '../core/static_url';
+
 const {
   Indicator, 
   Result, 
@@ -44,11 +46,13 @@ export function load_results_bundle(subject){
 
   return (
     window.binary_download && !window.isIE() ? 
-    fetch_and_inflate(`results/results_bundle_${lang}_${subject_code}_min.html`)
+    fetch_and_inflate( get_static_url(`results/results_bundle_${lang}_${subject_code}_min.html`))
       .then( inflated_resp => {
         populate_results_info(JSON.parse(inflated_resp));
       }) :
-    $.ajax({url : `results/results_bundle_${lang}_${subject_code}.html` })
+    $.ajax({
+      url : get_static_url(`results/results_bundle_${lang}_${subject_code}.html`),
+    })
       .then(response => {
         populate_results_info(JSON.parse(response));
       })
@@ -65,7 +69,9 @@ export function load_results_counts(){
     return $.Deferred().resolve();
 
   } else {
-    return $.ajax({url : `results/results_summary.html` })
+    return $.ajax({
+      url : get_static_url(`results/results_summary.html`),
+    })
       .then(response => {
         const rows = d3.csvParse(response);
         _.each(rows, row => {

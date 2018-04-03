@@ -68,7 +68,10 @@ const VImageCard = ({
     <div className="v-img-card__top-container">
       <div aria-hidden={true} className="v-img-card__top">
         <a className="v-img-card__img-link" href={link_href}>
-          <img src={img_src} className="v-img-card__img" />
+          <img
+            src={`${CDN_URL}/png/${img_src}`}
+            className="v-img-card__img" 
+          />
         </a>
       </div>
     </div>
@@ -311,7 +314,7 @@ const HomeLayout = props => (
       <div aria-hidden={true} className="equal-height-col is-1-third">
         <div className="col-content featured-col-content">
           <VImageCard
-            img_src="./png/partition.png"
+            img_src="partition.png"
             title_key="partition_home_title"
             text_key="partition_home_text"
             link_key="check_home_link"
@@ -322,7 +325,7 @@ const HomeLayout = props => (
       <div aria-hidden={true} className="equal-height-col is-1-third">
         <div className="col-content featured-col-content">
           <VImageCard
-            img_src="./png/bubbles.png"
+            img_src="bubbles.png"
             title_key="planet_home_title"
             text_key="planet_home_text"
             link_key="check_home_link"
@@ -351,7 +354,7 @@ const HomeLayout = props => (
       <div className="equal-height-col is-1-third">
         <section className="col-content explore-col-content">
           <VImageCard
-            img_src="./png/explorer.png"
+            img_src="explorer.png"
             title_key="explorer_home_title"
             text_key="explorer_home_text"
             link_key="start_exp_link"
@@ -362,7 +365,7 @@ const HomeLayout = props => (
       <div className="equal-height-col is-1-third">
         <section className="col-content explore-col-content">
           <VImageCard
-            img_src="./png/Builder.png"
+            img_src="Builder.png"
             title_key="home_build_a_report"
             text_key="report_builder_home_desc"
             link_key="start_build_link"
@@ -373,7 +376,7 @@ const HomeLayout = props => (
       <div className="equal-height-col is-1-third">
         <section className="col-content explore-col-content">
           <VImageCard
-            img_src="./png/structure_panel.png"
+            img_src="structure_panel.png"
             title_key="igoc_home_title"
             text_key="igoc_home_desc"
             link_key="start_search_link"

@@ -1,3 +1,4 @@
+const { get_static_url } = require('../core/static_url');
 const { run_template } = require('./text.js');
 const Subject = require('./subject.js');
 
@@ -93,8 +94,10 @@ function load_footnotes_bundle(subject){
 
   return (
     window.binary_download && !window.isIE() ? 
-    fetch_and_inflate(`footnotes/fn_${lang}_${subject_code}_min.html`) :
-    $.ajax({url : `footnotes/fn_${lang}_${subject_code}.html` })
+    fetch_and_inflate(get_static_url(`footnotes/fn_${lang}_${subject_code}_min.html`)) :
+    $.ajax({url : 
+      get_static_url(`footnotes/fn_${lang}_${subject_code}.html`),
+    })
   ).then( csv_str => {
 
     populate_footnotes_info(csv_str);

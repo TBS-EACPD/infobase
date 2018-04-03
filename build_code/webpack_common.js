@@ -89,13 +89,14 @@ const prod_plugins = [
   new webpack.optimize.ModuleConcatenationPlugin(),
 ]
 
-function get_plugins({ is_prod, language, commit_sha }){
-
+function get_plugins({ is_prod, language, commit_sha, envs }){
+  const CDN_URL = process.env.CDN_URL || ".";
   const plugins = [
     new webpack.DefinePlugin({
       SHA : JSON.stringify(commit_sha),
       DEV: !is_prod,
       APPLICATION_LANGUAGE: JSON.stringify(language),
+      CDN_URL: JSON.stringify(CDN_URL),
     }),
   ];
 

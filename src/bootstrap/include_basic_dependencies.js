@@ -8,6 +8,9 @@ if(typeof SHA !== "undefined"){
 if(typeof PRE_PUBLIC_ACCOUNTS !== "undefined"){
   window.pre_public_accounts = PRE_PUBLIC_ACCOUNTS;
 }
+if(typeof CDN_URL !== "undefined"){
+  window.CDN_URL = CDN_URL;
+}
 
 
 

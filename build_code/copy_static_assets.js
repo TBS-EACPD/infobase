@@ -155,11 +155,14 @@ var IB = {
 };
 
 function get_index_pages(){
+  const CDN_URL = process.env.CDN_URL || "."; 
+  console.log(`CDN_URL: ${CDN_URL}`);
   const template = file_to_str("./src/InfoBase/index.hbs.html");
   const template_func = Handlebars.compile(template);
 
   const en_lang_lookups = _.mapValues(index_lang_lookups, 'en');
   const fr_lang_lookups = _.mapValues(index_lang_lookups, 'fr');
+  _.each([en_lang_lookups, fr_lang_lookups], lookups => lookups.CDN_URL = CDN_URL );
 
 
   const a11y_template = file_to_str("./src/InfoBase/index.hbs.html");
