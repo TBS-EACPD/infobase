@@ -34,7 +34,7 @@ budget_measures_partition_root:
     TODO
 
 budget_measure_popup_template:
-  transform: [handlebars, markdown]
+  transform: [handlebars]
   text: |
     <div class='mrgn-bttm-md popup-row-top popup-font-m'>
       <span class='stat1 popup-font-m'>
