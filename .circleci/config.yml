@@ -12,12 +12,12 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - client-dependencies-{{ checksum "package-lock.json" }}
+            - ib-client-dependencies-{{ checksum "package-lock.json" }}
       - run: npm install
       - save_cache:
           paths:
             - node_modules
-          key: client-dependencies-{{ checksum "package-lock.json" }}
+          key: ib-client-dependencies-{{ checksum "package-lock.json" }}
       - run: npm run IB_base
       - run: npm run IB_prod_no_watch
       - run: npm run new_IB_a11y_prod_no_watch
