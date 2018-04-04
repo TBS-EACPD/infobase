@@ -3,7 +3,7 @@ jobs:
   build:
     branches:
       only:
-        - use-cdn
+        - master
     docker:
       - image: gcr.io/ib-api-first/ib-client-ci
         auth:
