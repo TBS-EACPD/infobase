@@ -27,4 +27,4 @@ jobs:
       - run: chmod +x ./.circleci/authenticate-gcloud.sh
       - run: ./.circleci/authenticate-gcloud.sh
       # TODO: copy entire build folder (cp -r)
-      - run: gsutil cp build/InfoBase/0.app-en.min.js build/InfoBase/app-en.min.js gs://ib-static-content/InfoBase
+      - run: gsutil cp build/InfoBase/0.app-en.min.js build/InfoBase/app-en.min.js gs://ib-static-bucket/InfoBase
