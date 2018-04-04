@@ -5,7 +5,10 @@ jobs:
       only:
         - use-cdn
     docker:
-      - image: launcher.gcr.io/google/nodejs
+      - image: gcr.io/ib-api-first/ib-client-ci
+        auth:
+          username: oauth2accesstoken
+          password: $GCR_PASSWORD
 
     steps:
       - checkout
