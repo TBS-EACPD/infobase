@@ -8,7 +8,7 @@ jobs:
       - image: gcr.io/ib-api-first/ib-client-ci
         auth:
           username: __json_key
-          password: $GCLOUD_SERVICE_KEY
+          password: $GCLOUD_AUTH_JSON
 
     steps:
       - checkout
