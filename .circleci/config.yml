@@ -26,5 +26,4 @@ jobs:
       - run: npm run new_IB_a11y_prod_no_watch
       - run: chmod +x ./.circleci/authenticate-gcloud.sh
       - run: ./.circleci/authenticate-gcloud.sh
-      # TODO: copy entire build folder (cp -r)
-      - run: gsutil cp build/InfoBase/0.app-en.min.js build/InfoBase/app-en.min.js gs://ib-static-bucket/InfoBase
+      - run: gsutil cp -r build/InfoBase gs://ib-static-bucket/InfoBase
