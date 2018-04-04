@@ -23,12 +23,7 @@
     "prop-types": "^15.6.0",
     "react-apollo": "^2.0.4",
     "react-router-dom": "^4.2.2",
-    "sass-loader": "^6.0.6"
-  },
-  "devDependencies": {
-    "@storybook/addon-actions": "^3.2.15",
-    "@storybook/addon-links": "^3.2.15",
-    "@storybook/react": "^3.2.15",
+    "sass-loader": "^6.0.6",
     "babel-core": "^6.8.0",
     "babel-loader": "^6.2.4",
     "babel-polyfill": "^6.9.1",
@@ -57,7 +52,6 @@
     "git-bundle-sha": "0.0.2",
     "glob": "^7.0.0",
     "history": "^4.7.2",
-    "http-server": "^0.8.0",
     "js-yaml": "3.6.1",
     "json-loader": "^0.5.2",
     "jsurl": "^0.1.5",
@@ -82,6 +76,12 @@
     "style-loader": "^0.12.3",
     "webfontloader": "^1.6.28",
     "webpack": "^3.8.1"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^3.2.15",
+    "@storybook/addon-links": "^3.2.15",
+    "@storybook/react": "^3.2.15",
+    "http-server": "^0.8.0"
   },
   "scripts": {
     "storybook": "start-storybook -p 6006",
