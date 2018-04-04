@@ -55,7 +55,7 @@ partition_intro_popup:
       Description:
     </div>
     <div class="mrgn-bttm-md popup-intro-text popup-row-bottom-border popup-font-sm">
-      The Government at a Glance diagram provides an overview of the federal government operations across various [tagging]{{gl "TAG"}} schemes by means of a single interactive chart.
+      {{gt "partition_route_description"}}
       </br>
       </br>
       This chart was inspired by the work of the [USAFacts](https://usafacts.org/the-big-picture/spending) team.
@@ -129,7 +129,7 @@ partition_intro_popup:
       Description:
     </div>
     <div class="mrgn-bttm-md popup-intro-text popup-row-bottom-border popup-font-sm">
-      Le diagramme « Coup d’œil sur le gouvernement » donne un aperçu des opérations du gouvernement fédéral selon différents mécanismes [d’étiquetage]{{gl "TAG"}} au moyen d’un seul graphique interactif.
+      {{gt "partition_route_description"}}
       </br>
       </br>
       Ce graphique a été inspiré par le travail de l’équipe [USAFacts](https://usafacts.org/the-big-picture/spending).
@@ -199,7 +199,7 @@ partition_title:
   en: The Government at a Glance
   fr: Coup d'œil sur le gouvernement
 partition_route_description:
-  en: The Government at a Glance diagram provides an overview of the federal government operations across various tagging schemes by means of a single interactive chart.
+  en: The Government at a Glance diagram provides an overview of federal government operations across various tagging schemes by means of a single interactive chart.
   fr: Le diagramme « Coup d’œil sur le gouvernement » donne un aperçu des opérations du gouvernement fédéral selon différents mécanismes d’étiquetage au moyen d’un seul graphique interactif.
 partition_search_filter:
   en: Filter by Name and Description
