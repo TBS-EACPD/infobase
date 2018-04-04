@@ -26,4 +26,4 @@ jobs:
       - run: npm run new_IB_a11y_prod_no_watch
       - run: chmod +x ./.circleci/authenticate-gcloud.sh
       - run: ./.circleci/authenticate-gcloud.sh
-      - run: gsutil cp -r build/InfoBase gs://ib-static-bucket/InfoBase
+      - run: gsutil -m rsync -d -r build/InfoBase gs://ib-static-bucket/InfoBase
