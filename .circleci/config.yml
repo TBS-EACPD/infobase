@@ -7,8 +7,8 @@ jobs:
     docker:
       - image: gcr.io/ib-api-first/ib-client-ci
         auth:
-          username: __json_key
-          password: $GCLOUD_AUTH_JSON
+          username: _json_key
+          password: $GCLOUD_JSON_AUTH
 
     steps:
       - checkout
