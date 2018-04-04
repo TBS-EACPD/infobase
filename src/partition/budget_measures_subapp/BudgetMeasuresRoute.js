@@ -9,14 +9,25 @@ import { BudgetMeasuresPartition } from './BudgetMeasuresPartition.js';
 
 const first_column_options = [
   {
-    id: "budget-measure",
-    display: text_maker("by") + " " + text_maker("budget_measure"),
-  },
-  {
     id: "dept",
     display: text_maker("by") + " " + text_maker("org"),
   },
+  {
+    id: "budget-measure",
+    display: text_maker("by") + " " + text_maker("budget_measure"),
+  },
 ];
+
+const first_column_ids =  _.map(first_column_options, option => option.id );
+
+const validate_first_column_route_param = (first_column, history) => {
+  if ( _.indexOf(first_column_ids, first_column) === -1 ){
+    history.push(`/budget-measures/${first_column_options[0].id}`);
+    return false;
+  } else {
+    return true;
+  }
+}
 
 export class BudgetMeasuresRoute extends React.Component {
   constructor(){
@@ -24,10 +35,10 @@ export class BudgetMeasuresRoute extends React.Component {
     this.state = {loading: true};
   }
   componentWillMount(){
-    const first_column = this.props.match.params.first_column;
-    if ( _.chain(first_column_options).map( option => option.id ).indexOf(first_column).value() === -1 ){
-      this.props.history.push('/budget-measures/dept');
-    }
+    validate_first_column_route_param(this.props.match.params.first_column, this.props.history);
+  }
+  shouldComponentUpdate(nextProps){
+    return validate_first_column_route_param(nextProps.match.params.first_column, this.props.history);
   }
   componentDidMount(){
     ensure_loaded({
