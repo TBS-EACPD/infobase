@@ -77,16 +77,17 @@ gitsha(function(err,commit_sha){
     webpack(config, function(err,stats){
       console.log(stats.toString({cached:true,modules:true}));
     });
-  }
-  webpack(config)
-    .watch({
-      //uncomment these lines if watch isn't working properly
-      //aggregateTimeout:300, 
-      //poll:true
-    },function(err,stats){
-      console.log(stats.toString({cached:true,modules:true}));
-      
-    });
-  
-})
+  } else {
+    webpack(config)
+      .watch({
+        //uncomment these lines if watch isn't working properly
+        //aggregateTimeout:300, 
+        //poll:true
+      },function(err,stats){
+        console.log(stats.toString({cached:true,modules:true}));
 
+      });
+  
+  }
+  
+});
