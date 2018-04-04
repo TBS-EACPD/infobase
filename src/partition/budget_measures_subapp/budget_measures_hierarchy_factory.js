@@ -39,6 +39,7 @@ const budget_measure_first_hierarchy_factory = () => {
                   name: "TODO: non allocated",
                   mandate: "TODO",
                   type: "non_allocated",
+                  id: 9999,
                   value: +allocation_row[2],
                 }
               );
@@ -83,6 +84,7 @@ const dept_first_hierarchy_factory = () => {
                 name: "TODO: non allocated",
                 mandate: "TODO",
                 type: "non_allocated",
+                id: 9999,
                 value: _.reduce(allocation_rows, (sum, allocation_row) => sum + (+allocation_row[2]), 0),
                 allocation_rows,
               }
