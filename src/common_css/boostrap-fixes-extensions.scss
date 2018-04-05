@@ -485,3 +485,16 @@ li.checkbox > label {
 ol.breadcrumb {
   padding: 8px 0;
 }
+
+dl.dl-horizontal.dl-long-terms {
+  @media(min-width:768px){
+    > dt {
+      // default set by bootstrap is 160px
+      width: 250px;
+    }
+    > dd {
+      // must match dt's width
+      margin-left: 250px;
+    }
+  }
+}

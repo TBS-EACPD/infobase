@@ -215,7 +215,7 @@ export const result_tree_content_renderer = props => {
               <div className="xplorer-node-inner-collapsible-content">
                 { resources &&
                   <dl 
-                    className="dl-horizontal"
+                    className="dl-horizontal dl-long-terms"
                     style={{fontSize: "0.8em"}}
                   >
                     <dt> {spending_header(doc) } </dt>
