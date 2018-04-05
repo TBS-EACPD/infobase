@@ -22,6 +22,8 @@ import { TabbedContent } from './TabbedContent.js';
 
 import { TwoLevelSelect } from './TwoLevelSelect.js'
 
+import { LabeledBox } from './LabeledBox.js';
+
 const separator_style = {padding: "20px", maxWidth: "800px", border:"2px dashed black"};
 storiesOf('flat design modifications', module)
   .add("button", ()=> 
@@ -371,4 +373,18 @@ storiesOf("Select menus",module)
         grouped_options={two_level_select_grouped_options}
       />
     </div>
+  )
+
+storiesOf("Option Box",module)
+  .add("Generic Content", ()=>
+    <LabeledBox
+      label="label"
+      content="content"
+    />
+  )
+  .add("Example: RadioButton", ()=>
+    <LabeledBox
+      label="Select something"
+      content={ <StatefulRadioExample/> }
+    />
   )

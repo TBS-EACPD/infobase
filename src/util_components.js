@@ -27,6 +27,8 @@ const { SortIndicators } = require('./components/SortIndicators.js');
 
 const { TabbedContent } = require('./components/TabbedContent.js');
 
+const { LabeledBox } = require('./components/LabeledBox.js');
+
 const { 
   TextMaker,
   TM,
@@ -140,6 +142,7 @@ module.exports = {
   AutoAccordion,
   HeightClipper,
   TabbedContent,
+  LabeledBox,
   Format,
   FancyUL,
   DeptSearch,
