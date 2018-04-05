@@ -53,10 +53,10 @@ budget_measure_popup_template:
           {{#if first_column}}
             {{gt "total_lower_case"}} 
           {{/if}}
-          {{#if is_dept}}
-            {{gt "single_word_to"}}
+          {{#if is_budget_measure}}
+            {{gt "single_word_for"}}
           {{else}}
-            {{gt "single_word_for"}} 
+            {{gt "single_word_to"}} 
           {{/if}}
         </text>
       </span>

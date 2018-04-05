@@ -38,6 +38,7 @@ const popup_template = node => {
     value_is_negative: node.__value__ < 0,
     parent_name: node.parent.data.name,
     is_dept: node.data.type === "dept",
+    is_budget_measure: node.data.type === "budget_measure",
     level: node.data.type,
     id: node.data.id,
     name: node.data.name,
