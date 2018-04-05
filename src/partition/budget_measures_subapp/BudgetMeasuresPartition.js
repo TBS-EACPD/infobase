@@ -72,7 +72,7 @@ const update_diagram = (diagram, props) => {
       "#7cd0f6",
       "#b0bec5",
     ],
-    background_color: "#a49c9c",
+    background_color: "#9c9c9c",
   });
 }
 

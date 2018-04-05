@@ -3,31 +3,31 @@
 .budget-measures-partition-controls > .labeled-box {
 
   & > .labeled-box-label {
-    background-color: darken(#a49c9c, 25%);
+    background-color: darken(#9c9c9c, 25%);
   }
 
   & > .labeled-box-content {
-    border-color: darken(#a49c9c, 25%);
+    border-color: darken(#9c9c9c, 25%);
 
     & > .centerer > .radio-buttons {
-      border-color: #a49c9c;
+      border-color: #9c9c9c;
       & > .radio-buttons__option {
         color: #333;
       }
       
       & > .radio-buttons__option.radio-buttons__option--active {
         color: #333;
-        background-color: #a49c9c;
+        background-color: #9c9c9c;
       }
       
       & > .radio-buttons__option:not(:last-child):after {
-        border-color: #a49c9c;
+        border-color: #9c9c9c;
       }
       
       & > .radio-buttons__option:not(.radio-buttons__option--active):hover,
       & > .radio-buttons__option:not(.radio-buttons__option--active):active,
       & > .radio-buttons__option:not(.radio-buttons__option--active):focus { 
-        background-color: change-color($color: #a49c9c, $alpha: 0.75);
+        background-color: change-color($color: #9c9c9c, $alpha: 0.75);
         color: #333 !important;
       }
     }
