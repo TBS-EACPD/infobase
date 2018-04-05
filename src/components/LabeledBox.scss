@@ -62,3 +62,11 @@
     width: 100%;
   }
 }
+
+.labeled-box-content > .IBDetails {
+  padding-top: 15px;
+  padding-left: 20px;
+  & > .IBDetails__Summary {
+    padding-left: 0px;
+  }
+}

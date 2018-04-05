@@ -1,9 +1,5 @@
 @import '../common_css/common-variables';
 
-.mode-title {
-  /* border-bottom: 1px solid #ccc; */
-
-}
 
 .table-rpb {
   margin: 0 auto;
@@ -49,77 +45,6 @@ li.select-list-item {
     padding-left: 10px;
   }
 
-}
-
-.rpb-option {
-  margin-bottom: 10px;
-  margin-right: -3px;
-  margin-left: 5px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-}
-.rpb-option-label {
-  display: flex;
-  padding: 10px;
-  padding-left: 25px;
-  font-size: 1.2em;
-  color: white;
-  background-color: $primaryColor;
-  min-height: 80px;
-}
-.rpb-option-label-text {
-  align-self: center;
-}
-.rpb-option-content {
-  display: flex;
-  border: 1px solid $primaryColor;
-  border-radius: 0 10px 10px 0;
-  background-color: white;
-  padding: 10px 10px 10px 10px;
-}
-/* hacky flexbox bug, even in chrome! */
-.rpb-option-content > div {
-  width: 100%;
-}
-@media (min-width: 901px){
-  .rpb-option-label {
-    width:18%;
-    border-radius: 10px 0px 0px 10px;
-    /* make the blue rounded part go over the content rpb-option-content */
-    margin-right: -8px;
-    z-index: 1;
-  }
-  .rpb-option-content {
-    border-left: none;
-    display: flex;
-    width: 82%;
-  }
-  .rpb-option-content details{
-    width: 100%;
-    align-self: center;
-  }
-  .rpb-option-content details summary{
-    border: 0px;
-  }
-}
-@media (max-width: 900px){
-  .rpb-option-label {
-    width: 100%;
-  }
-  .rpb-option-content {
-    border-top: none;
-    border-radius: 0px;
-    width: 100%;
-  }
-}
-
-.rpb-option-content > .IBDetails {
-  padding-top: 15px;
-  padding-left: 20px;
-  & > .IBDetails__Summary {
-    padding-left: 0px;
-  }
 }
 
 .rpb-option-fancy-ul-container {

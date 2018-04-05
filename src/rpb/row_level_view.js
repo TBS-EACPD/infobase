@@ -11,6 +11,7 @@ const {
   Format,
   Select,
   TwoLevelSelect,
+  LabeledBox,
 } = require('../util_components.js');
 const { 
   get_dimension_title_keys,
@@ -64,13 +65,9 @@ class RowLevelView extends React.Component {
 
     return (
       <div>
-        <div className="rpb-option">
-          <div className='rpb-option-label '>
-            <div className='rpb-option-label-text '>
-              <TextMaker text_key="blue_text_table_controls" />
-            </div>
-          </div>
-          <div className="rpb-option-content">
+        <LabeledBox
+          label={ <TextMaker text_key="blue_text_table_controls" /> }
+          content={
             <div className="row">
               <div className='col-md-6'>
                 <div className="rpb-config-item col-selection granular">
@@ -166,31 +163,21 @@ class RowLevelView extends React.Component {
               </div>
               <div className='clearfix'/>
             </div>
-          </div>
-        </div>
-        <div className="rpb-option">
-          <div className='rpb-option-label '>
-            <div className='rpb-option-label-text '>
-              <TextMaker text_key="blue_text_report_details" args={{table_name:Table.lookup(table).name}} />
-            </div>
-          </div>
-          <div className="rpb-option-content">
+          }
+        />
+        <LabeledBox
+          label={ <TextMaker text_key="blue_text_report_details" args={{table_name:Table.lookup(table).name}} /> }
+          content={
             <details>
               <summary> { Table.lookup(table).title } : {get_by_guid(subject).name}  </summary>
               <ReportDetails {...this.props} />
             </details>
-          </div>
-        </div>
-        <div className="rpb-option">
-          <div className='rpb-option-label '>
-            <div className='rpb-option-label-text '>
-              <TextMaker text_key="blue_text_report_data_sources"/>
-            </div>
-          </div>
-          <div className="rpb-option-content">
-            <ReportDatasets {...this.props} />
-          </div>
-        </div>
+          }
+        />
+        <LabeledBox
+          label={ <TextMaker text_key="blue_text_report_data_sources"/> }
+          content={ <ReportDatasets {...this.props} /> }
+        />
         <div id="rpb-main-content" >
           <AlertMessage table={table} />
           { 
