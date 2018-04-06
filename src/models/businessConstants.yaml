@@ -370,15 +370,15 @@ transfer_payments:
 
 
 budget_chapters:
-  adv:
-    en: Advancement
-    fr: Avancement
   grw:
     en: Growth
     fr: Croissance
   prg:
     en: Progress
     fr: Progrès
+  adv:
+    en: Advancement
+    fr: Avancement
   rec:
     en: Reconciliation
     fr: Réconciliation

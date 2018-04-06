@@ -18,7 +18,7 @@ const first_column_options = [
   },
 ];
 
-const first_column_ids =  _.map(first_column_options, option => option.id );
+const first_column_ids = _.map(first_column_options, option => option.id );
 
 const validate_first_column_route_param = (first_column, history) => {
   if ( _.indexOf(first_column_ids, first_column) === -1 ){
@@ -32,7 +32,10 @@ const validate_first_column_route_param = (first_column, history) => {
 export class BudgetMeasuresRoute extends React.Component {
   constructor(){
     super();
-    this.state = {loading: true};
+    this.state = {
+      loading: true,
+      filtered_chapter_keys: [],
+    };
   }
   componentWillMount(){
     validate_first_column_route_param(this.props.match.params.first_column, this.props.history);
@@ -47,8 +50,14 @@ export class BudgetMeasuresRoute extends React.Component {
       this.setState({loading: false});
     });
   }
+  toggleFilteredChapterKeys(key_to_toggle){
+    const new_filtered_chapter_keys = _.xor(this.state.filtered_chapter_keys, [key_to_toggle]);
+    this.setState({filtered_chapter_keys: new_filtered_chapter_keys});
+  }
   render(){
+    const loading = this.state.loading;
     const first_column = this.props.match.params.first_column;
+    const filtered_chapter_keys = this.state.filtered_chapter_keys;
 
     return (
       <StandardRouteContainer
@@ -61,19 +70,24 @@ export class BudgetMeasuresRoute extends React.Component {
         <h1>
           {text_maker("budget_measures")}
         </h1>
-        { this.state.loading && <SpinnerWrapper ref="spinner" scale = { 4 } /> }
-        { !this.state.loading && !window.is_a11y_mode &&
+        { loading && <SpinnerWrapper ref="spinner" scale = { 4 } /> }
+        { !loading && !window.is_a11y_mode &&
           <div className = "budget-measures">
             <BudgetMeasuresTop/>
             <BudgetMeasuresControls 
               first_column = { first_column } 
               history = { this.props.history } 
-              items = { first_column_options }
+              group_by_items = { first_column_options }
+              filtered_chapter_keys = { filtered_chapter_keys }
+              toggleFilteredChapterKeysCallback = { this.toggleFilteredChapterKeys }
             />
-            <BudgetMeasuresPartition first_column = { first_column } />
+            <BudgetMeasuresPartition 
+              first_column = { first_column }
+              filtered_chapter_keys = { filtered_chapter_keys }
+            />
           </div>
         }
-        { !this.state.loading && window.is_a11y_mode &&
+        { !loading && window.is_a11y_mode &&
           <div className="budget-measures">
             <BudgetMeasuresTop/>
             {

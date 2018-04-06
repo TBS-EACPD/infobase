@@ -1,3 +1,7 @@
 budget_measure_group_by_label:
   en: Group items by
   fr: TODO
+
+budget_measure_filter_by_chapter_key_label:
+  en: Filter items by
+  fr: TODO

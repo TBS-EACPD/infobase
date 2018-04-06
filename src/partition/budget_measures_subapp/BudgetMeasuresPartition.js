@@ -59,7 +59,7 @@ function center_diagram(){
 
 const update_diagram = (diagram, props) => {
   diagram.configure_then_render({
-    data: budget_measures_hierarchy_factory(props.first_column),
+    data: budget_measures_hierarchy_factory(props.first_column, props.filtered_chapter_keys),
     formatter: formatter,
     level_headers: get_level_headers(props.first_column),
     root_text_func: root_text_func,
