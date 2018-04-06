@@ -30,12 +30,26 @@ export class BudgetMeasuresControls extends React.Component {
       history,
       group_by_items,
       filtered_chapter_keys,
-      toggleFilteredChapterKeysCallback,
+      setFilteredChapterKeysCallback,
     } = this.props;
+    
+    const update_filtered_chapter_keys = (filtered_chapter_keys, chapter_key) => {
+      const all_chapter_keys = _.keys(budget_chapters);
 
-    const active_list = filtered_chapter_keys.length !== 0 ?
-      _.xor(_.keys(budget_chapters), filtered_chapter_keys) :
-      [];
+      const new_filtered_chapter_keys = filtered_chapter_keys.length === 0 ?
+      _.xor(all_chapter_keys, [chapter_key]) :
+      _.xor(filtered_chapter_keys, [chapter_key]);
+
+      if (new_filtered_chapter_keys.length === all_chapter_keys.length){
+        // Don't let everything be filtered at once
+        // User likely wanted un-do filtering in this case, so just clear filtered items
+        setFilteredChapterKeysCallback([]);
+      } else {
+        setFilteredChapterKeysCallback(new_filtered_chapter_keys);
+      }
+    }
+
+    const active_list = _.xor(_.keys(budget_chapters), filtered_chapter_keys);
 
     return (
       <div className="budget-measures-partition-controls">
@@ -70,14 +84,14 @@ export class BudgetMeasuresControls extends React.Component {
                   .map( chapter_key => ({chapter_key, count: this.state.measure_counts_by_chapter_key[chapter_key] || 0 }) )
                   .map( ({chapter_key, count }) =>
                     <button
-                      onClick={()=>toggleFilteredChapterKeysCallback(chapter_key)}
+                      onClick={ () => update_filtered_chapter_keys(filtered_chapter_keys, chapter_key) }
                       className={classNames("button-unstyled chapter-key-table__item", _.includes(active_list, chapter_key) && "chapter-key-table__item--active" )}
                       key={chapter_key}
                     >
                       <div 
                         className="chapter-key-table__eye"
                         style={{
-                          visibility: active_list.length !==0 ? "visible" : "hidden",
+                          visibility: filtered_chapter_keys.length !== 0 ? "visible" : "hidden",
                         }}
                       >
                         <span
@@ -94,8 +108,8 @@ export class BudgetMeasuresControls extends React.Component {
                           className="link-unstyled"
                           tabIndex={0}
                           aria-pressed={_.includes(active_list, chapter_key)}
-                          onClick={()=>toggleFilteredChapterKeysCallback(chapter_key)}
-                          onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && toggleFilteredChapterKeysCallback(chapter_key)}
+                          onClick={ () => update_filtered_chapter_keys(filtered_chapter_keys, chapter_key) }
+                          onKeyDown={ (e) => (e.keyCode===13 || e.keyCode===32) && update_filtered_chapter_keys(filtered_chapter_keys, chapter_key) }
                         >
                           {budget_chapters[chapter_key].text}
                         </span>

@@ -50,8 +50,7 @@ export class BudgetMeasuresRoute extends React.Component {
       this.setState({loading: false});
     });
   }
-  toggleFilteredChapterKeys(key_to_toggle){
-    const new_filtered_chapter_keys = _.xor(this.state.filtered_chapter_keys, [key_to_toggle]);
+  setFilteredChapterKeys(new_filtered_chapter_keys){
     this.setState({filtered_chapter_keys: new_filtered_chapter_keys});
   }
   render(){
@@ -79,7 +78,7 @@ export class BudgetMeasuresRoute extends React.Component {
               history = { this.props.history } 
               group_by_items = { first_column_options }
               filtered_chapter_keys = { filtered_chapter_keys }
-              toggleFilteredChapterKeysCallback = { this.toggleFilteredChapterKeys.bind(this) }
+              setFilteredChapterKeysCallback = { this.setFilteredChapterKeys.bind(this) }
             />
             <BudgetMeasuresPartition 
               first_column = { first_column }
