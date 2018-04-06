@@ -29,7 +29,9 @@ const get_level_headers = (first_column) => {
   }
 }
 
-const root_text_func = root_value => text_maker("budget_measures_partition_root", {root_value: root_value, year});
+const default_root_text_func = root_value => text_maker("budget_measures_partition_root", {root_value: root_value, year});
+
+const filtered_root_text_func = root_value => text_maker("budget_measures_partition_root_filtered", {root_value: root_value, year});
 
 const popup_template = node => {
   const popup_options = {
@@ -62,7 +64,9 @@ const update_diagram = (diagram, props) => {
     data: budget_measures_hierarchy_factory(props.first_column, props.filtered_chapter_keys),
     formatter: formatter,
     level_headers: get_level_headers(props.first_column),
-    root_text_func: root_text_func,
+    root_text_func: props.filtered_chapter_keys.length === 0 ? 
+      default_root_text_func : 
+      filtered_root_text_func,
     popup_template: popup_template,
     colors: [
       "#f6ca7c",

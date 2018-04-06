@@ -2,8 +2,9 @@ import * as Subject from '../../models/subject';
 
 const absolute_value_sort = (a,b) => - ( Math.abs(a.value) - Math.abs(b.value) );
 
-const get_total_budget_measure_allocations = () => {
+const get_total_budget_measure_allocations = (filtered_chapter_keys) => {
   return _.chain( Subject.BudgetMeasure.get_all() )
+    .filter( budgetMeasure => _.indexOf(filtered_chapter_keys, budgetMeasure.chapter_key) === -1 )
     .flatMap( budgetMeasure => budgetMeasure.allocations )
     .reduce( (sum, allocation_row) => sum + (+allocation_row[2]), 0 )
     .value();
@@ -15,7 +16,7 @@ const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
     {
       id: "root",
       type: "root", 
-      value: get_total_budget_measure_allocations(),
+      value: get_total_budget_measure_allocations(filtered_chapter_keys),
     },
     node => {
       if (node.id === "root"){
@@ -82,7 +83,7 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
     {
       id: "root",
       type: "root", 
-      value: get_total_budget_measure_allocations(),
+      value: get_total_budget_measure_allocations(filtered_chapter_keys),
     },
     node => {
       if (node.id === "root"){
