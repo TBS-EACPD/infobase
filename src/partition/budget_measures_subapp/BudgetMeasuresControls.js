@@ -109,7 +109,12 @@ export class BudgetMeasuresControls extends React.Component {
                           tabIndex={0}
                           aria-pressed={_.includes(active_list, chapter_key)}
                           onClick={ () => update_filtered_chapter_keys(filtered_chapter_keys, chapter_key) }
-                          onKeyDown={ (e) => (e.keyCode===13 || e.keyCode===32) && update_filtered_chapter_keys(filtered_chapter_keys, chapter_key) }
+                          onKeyDown={ (e) => {
+                            if (e.keyCode===13 || e.keyCode===32){ 
+                              e.preventDefault();
+                              update_filtered_chapter_keys(filtered_chapter_keys, chapter_key);
+                            }
+                          }}
                         >
                           {budget_chapters[chapter_key].text}
                         </span>
