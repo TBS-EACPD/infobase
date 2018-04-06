@@ -89,6 +89,11 @@ budget_measure_popup_template:
         {{gt "single_word_in"}} {{year}}
       </span>
     </div>
+    {{#if is_budget_measure}}
+      <div class='mrgn-bttm-md popup-row-bottom-border popup-row-top-border popup-font-m'>
+        {{gt "budget_chapter"}}: {{chapter}}
+      </div>
+    {{/if}}
     {{#if is_dept}}
       <a href='#orgs/{{level}}/{{id}}/infograph' 
         class='btn btn-xs btn-block mrgn-bttm-sm infographic' 

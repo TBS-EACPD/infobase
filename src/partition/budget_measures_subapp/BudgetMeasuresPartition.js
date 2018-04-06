@@ -7,6 +7,10 @@ import { text_maker, run_template } from "../../models/text";
 
 import { budget_measures_hierarchy_factory } from './budget_measures_hierarchy_factory.js';
 
+import * as businessConstants from '../../models/businessConstants.yaml';
+
+const { budget_chapters } = businessConstants;
+
 const year = run_template("{{planning_year_2}}");
 
 const formatter = node => {
@@ -46,6 +50,7 @@ const popup_template = node => {
     name: node.data.name,
     color: node.color,
     description: !_.isUndefined(node.data.mandate) && node.data.mandate,
+    chapter: !_.isUndefined(node.data.chapter_key) && budget_chapters[node.data.chapter_key].text,
     first_column: node.depth === 1,
     focus_text: node.magnified ? text_maker("partition_unfocus_button") : text_maker("partition_focus_button"),
   };

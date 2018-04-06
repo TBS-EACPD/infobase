@@ -75,7 +75,7 @@ export class BudgetMeasuresControls extends React.Component {
           content = {
             <div>
               <div className="centerer" style={{fontSize: "26px"}}>
-                <TextMaker text_key="budget_measure_filter_by_chapter_key_title" />
+                <TextMaker text_key="budget_chapters" />
               </div>
               <div 
                 className="chapter-key-table"

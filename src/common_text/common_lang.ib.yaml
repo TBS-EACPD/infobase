@@ -400,6 +400,12 @@ budget_measures:
 budget_measures_short:
   en: Measures
   fr: Mesures
+budget_chapters:
+  en: Budget Chapters
+  fr: TODO
+budget_chapter:
+  en: Budget Chapter
+  fr: TODO
 see_the_infographic:
   en: See the Infographic
   fr: Voir l’infographie
