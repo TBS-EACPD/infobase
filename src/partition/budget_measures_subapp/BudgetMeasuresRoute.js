@@ -79,7 +79,7 @@ export class BudgetMeasuresRoute extends React.Component {
               history = { this.props.history } 
               group_by_items = { first_column_options }
               filtered_chapter_keys = { filtered_chapter_keys }
-              toggleFilteredChapterKeysCallback = { this.toggleFilteredChapterKeys }
+              toggleFilteredChapterKeysCallback = { this.toggleFilteredChapterKeys.bind(this) }
             />
             <BudgetMeasuresPartition 
               first_column = { first_column }

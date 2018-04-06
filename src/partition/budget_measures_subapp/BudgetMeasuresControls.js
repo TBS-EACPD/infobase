@@ -1,6 +1,9 @@
 import './BudgetMeasuresControls.scss';
 import './BudgetMeasuresControls.ib.yaml';
 
+import classNames from 'classnames';
+
+import { text_maker } from "../../models/text";
 import { 
   LabeledBox,
   TextMaker,
@@ -27,9 +30,13 @@ export class BudgetMeasuresControls extends React.Component {
       history,
       group_by_items,
       filtered_chapter_keys,
-      toggleFilteredChapterKeysCallback
+      toggleFilteredChapterKeysCallback,
     } = this.props;
-    
+
+    const active_list = filtered_chapter_keys.length !== 0 ?
+      _.xor(_.keys(budget_chapters), filtered_chapter_keys) :
+      [];
+
     return (
       <div className="budget-measures-partition-controls">
         <LabeledBox 
@@ -52,7 +59,56 @@ export class BudgetMeasuresControls extends React.Component {
         <LabeledBox 
           label = { <TextMaker text_key="budget_measure_filter_by_chapter_key_label" /> }
           content = {
-            "todo"
+            <div>
+              <div className="centerer" style={{fontSize: "26px"}}>
+                <TextMaker text_key="budget_measure_filter_by_chapter_key_title" />
+              </div>
+              <div 
+                className="chapter-key-table"
+              >
+                {_.chain(this.state.chapter_keys)
+                  .map( chapter_key => ({chapter_key, count: this.state.measure_counts_by_chapter_key[chapter_key] || 0 }) )
+                  .map( ({chapter_key, count }) =>
+                    <button
+                      onClick={()=>toggleFilteredChapterKeysCallback(chapter_key)}
+                      className={classNames("button-unstyled chapter-key-table__item", _.includes(active_list, chapter_key) && "chapter-key-table__item--active" )}
+                      key={chapter_key}
+                    >
+                      <div 
+                        className="chapter-key-table__eye"
+                        style={{
+                          visibility: active_list.length !==0 ? "visible" : "hidden",
+                        }}
+                      >
+                        <span
+                          className={
+                            "glyphicon glyphicon-eye-" + 
+                              (_.includes(active_list, chapter_key) ? 
+                                "open" : 
+                                "close")
+                          }
+                        ></span>
+                      </div>
+                      <div className="chapter-key-table__word">
+                        <span
+                          className="link-unstyled"
+                          tabIndex={0}
+                          aria-pressed={_.includes(active_list, chapter_key)}
+                          onClick={()=>toggleFilteredChapterKeysCallback(chapter_key)}
+                          onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && toggleFilteredChapterKeysCallback(chapter_key)}
+                        >
+                          {budget_chapters[chapter_key].text}
+                        </span>
+                      </div>
+                      <div className="chapter-key-table__icon-count">
+                        <span className="chapter-key-table__count">
+                          {count} <br/> { text_maker("budget_measures_short") }
+                        </span>
+                      </div>
+                    </button>
+                  ).value()}
+              </div>
+            </div>
           }
         />
       </div>

@@ -397,6 +397,9 @@ budget_measure:
 budget_measures:
   en: Budget Measures
   fr: Mesures budgétaires
+budget_measures_short:
+  en: Measures
+  fr: Mesures
 see_the_infographic:
   en: See the Infographic
   fr: Voir l’infographie
