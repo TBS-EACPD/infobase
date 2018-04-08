@@ -55,6 +55,13 @@ module.exports = {
     })
     this.add_col({
       "key" : true,
+      "hidden" : true,
+      "type":"str",
+      'nick' : 'program_id',
+      "header": "",
+    });
+    this.add_col({
+      "key" : true,
       "type":"wide-str",
       'nick' : 'prgm',
       "header":{
@@ -160,7 +167,8 @@ module.exports = {
 
   "mapper": function (row) {
     const program = Program.get_from_activity_code(row[0], row[1]);
-    row.splice(2,0,program.name);
+    row.splice(2,0,program.id);
+    row.splice(3,0,program.name);
     return row;
   },
 

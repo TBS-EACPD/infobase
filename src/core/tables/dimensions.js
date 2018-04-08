@@ -1,7 +1,6 @@
-"use strict";
-const { Gov } = require("../../models/subject");
+import { Gov } from "../../models/subject.js"
 
-const { text_maker } = require('../../models/text.js');
+import { text_maker } from '../../models/text.js';
 
 // This module exists to  provides a common interface for querying
 // the data associated with each table
@@ -10,7 +9,7 @@ const { text_maker } = require('../../models/text.js');
 
 
 //for memoizing purposes
-var func_key = function (col,include_dept,rollup){
+function func_key(col,include_dept,rollup){
   /// distinction for col is needed because `[col].toString() === col`
   // and if col is an array, a different response is returned
 
@@ -164,18 +163,14 @@ const make_horizontal_func = function(func,table){
   return _.memoize(f,func_key);
 };
 
-const trivial_dimension = {
+export const trivial_dimension = {
   title_key :"all"  ,
   include_in_report_builder : true,
   filter_func: () => ()=> text_maker('all'),
 }
 
 
-function attach_dimensions(table){
-
-  if(_.isEmpty(table.dimensions)){
-    table.dimensions.push(trivial_dimension);
-  }
+export function attach_dimensions(table){
 
   // create additional, more specialized horizontal dimensions
   _.each(table.dimensions, (dimension,ix) => {
@@ -203,7 +198,7 @@ it will use the dimension_key attribute as the extra property on the table.data 
 */
 
 const enhanced_tables_by_id = {};
-function fill_dimension_columns(table){
+export function fill_dimension_columns(table){
   if(!enhanced_tables_by_id[table.id]){ 
 
     _.each(table.dimensions , dim_obj => {
@@ -217,11 +212,3 @@ function fill_dimension_columns(table){
     enhanced_tables_by_id[table.id] = true;
   }
 }
-
-module.exports = exports = { 
-  attach_dimensions,
-  fill_dimension_columns,
-};
-
-
-

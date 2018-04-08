@@ -4,6 +4,7 @@ const {query_adapter} = require('./tables/queries.js');
 const {
   attach_dimensions,
   fill_dimension_columns,
+  trivial_dimension,
 } = require('./tables/dimensions.js');
 const {text_maker,run_template} = require('../models/text.js');
 const {mix} = require('../generalUtils.js');
@@ -72,6 +73,7 @@ exports.Table = class Table extends mix().with(staticStoreMixin){
     );
 
     this.programs = new Map();
+    this.crs = new Map();
     this.val = this.id;
     this._cols = []; 
     this.flat_headers = [];
@@ -87,6 +89,10 @@ exports.Table = class Table extends mix().with(staticStoreMixin){
     //start using the table def!
     this.add_cols();
     this.add_fully_qualified_col_name(window.lang);
+
+    if(_.isEmpty(this.dimensions)){
+      this.dimensions = [trivial_dimension];
+    }
 
     const to_chain = _.chain(this.flat_headers);
 

@@ -68,10 +68,10 @@ function get_default_dimension_for_table(table){
 
 //Note that this will cause a memory leak as this closure will never get GC'd
 const get_filters_for_dim = _.memoize(
-  (table, dim_key)=> [
+  (table, dim_key)=> _.uniq([
     text_maker('all'),
     ..._.keys(table[dim_key]('*',true)),
-  ], 
+  ]), 
   (table,dim_key)=> `${table.id}-${dim_key}`
 )
 

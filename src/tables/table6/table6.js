@@ -54,7 +54,15 @@ module.exports = {
           "type":"str",
           'nick' : 'activity_code',
           "header": "",
-        }, {
+        },
+        {
+          "key" : true,
+          "hidden" : true,
+          "type":"str",
+          'nick' : 'program_id',
+          "header": "",
+        },
+        {
           "key" : true,
           "type":"wide-str",
           'nick' : 'prgm',
@@ -177,7 +185,8 @@ module.exports = {
 
   mapper: function (row) {
     const program = Program.get_from_activity_code(row[0], row[1]);
-    row.splice(2,0,program.name);
+    row.splice(2,0,program.id);
+    row.splice(3,0,program.name);
     return row;
   },
 
