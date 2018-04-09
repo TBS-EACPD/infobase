@@ -72,26 +72,25 @@ export class BudgetMeasuresRoute extends React.Component {
           {text_maker("budget_measures")}
         </h1>
         { loading && <SpinnerWrapper ref="spinner" scale = { 4 } /> }
-        { !loading && !window.is_a11y_mode &&
+        { !loading &&
           <div className = "budget-measures">
             <BudgetMeasuresTop/>
-            <BudgetMeasuresControls
-              first_column = { first_column } 
-              history = { this.props.history } 
-              group_by_items = { first_column_options }
-              filtered_chapter_keys = { filtered_chapter_keys }
-              setFilteredChapterKeysCallback = { this.setFilteredChapterKeys.bind(this) }
-            />
-            <BudgetMeasuresPartition
-              first_column = { first_column }
-              filtered_chapter_keys = { filtered_chapter_keys }
-            />
-          </div>
-        }
-        { !loading && window.is_a11y_mode &&
-          <div className="budget-measures">
-            <BudgetMeasuresTop/>
-            <BudgetMeasuresA11yContent/>
+            { !window.is_a11y_mode &&
+              <BudgetMeasuresControls
+                first_column = { first_column } 
+                history = { this.props.history } 
+                group_by_items = { first_column_options }
+                filtered_chapter_keys = { filtered_chapter_keys }
+                setFilteredChapterKeysCallback = { this.setFilteredChapterKeys.bind(this) }
+              />
+            }
+            { !window.is_a11y_mode &&
+              <BudgetMeasuresPartition
+                first_column = { first_column }
+                filtered_chapter_keys = { filtered_chapter_keys }
+              />
+            }
+            { window.is_a11y_mode && <BudgetMeasuresA11yContent/> }
           </div>
         }
       </StandardRouteContainer>
