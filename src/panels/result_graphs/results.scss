@@ -149,6 +149,7 @@ dl.indicator-item__dl dt+dd {
   padding: 15px 32px 5px 32px;
   flex: 1;
   cursor: pointer;
+  background-color: $backgroundColor;
 }
 
 .status-icon-table__item:hover,
