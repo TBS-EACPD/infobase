@@ -15,6 +15,7 @@ const {
   
 module.exports = {
   "id": "cr_spending",
+  subject_type: "cr",
   source: [ "PA" , "DP", "DRR" ],
   "tags" : [
     "PLANNED_EXP",

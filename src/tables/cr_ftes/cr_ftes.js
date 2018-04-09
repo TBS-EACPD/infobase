@@ -13,6 +13,7 @@ const {
 
 module.exports = {
   "id": "cr_ftes",
+  subject_type: "cr",
   source: [ "DP", "DRR" ],
   //"tags" : ["results", "expenditures", "FTE", "planning","report","RPP"],
   "tags" : [

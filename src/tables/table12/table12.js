@@ -16,6 +16,7 @@ const {
 
 module.exports = {
   "id": "table12",
+  subject_type:"program",
   source: [ "DP", "DRR" ],
   //"tags" : ["results", "expenditures", "FTE", "planning","report","RPP"],
   "tags" : [

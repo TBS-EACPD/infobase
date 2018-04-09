@@ -10,6 +10,7 @@ const {
 
 module.exports = {
   id: "table300",
+  subject_type: "program",
   tags : [
     "PROG",
     "PA",

@@ -1,5 +1,4 @@
 import { get_resources_for_subject } from './resource_utils.js';
-import { Table } from '../core/TableClass.js';
 
 const Subject = require('../models/subject.js');
 const { 
@@ -53,14 +52,7 @@ const get_sub_program_resources = (sub_program, doc) => ({
 export function create_full_results_hierarchy({subject_guid, doc, allow_no_result_branches}){
 
 
-  const table6 = Table.lookup('table6');
-  const table12 = Table.lookup('table12');
-  const year = (
-    doc === 'dp17' ? 
-    '{{planning_year_1}}' : 
-    '{{pa_last_year}}'
-  );
-  const get_resources = subject => get_resources_for_subject(subject, table6,table12,year);
+  const get_resources = subject => get_resources_for_subject(subject, doc);
 
   const root_subject = Subject.get_by_guid(subject_guid);
 

@@ -19,6 +19,7 @@ const exp_cols = _.map(std_years, yr=>yr+"exp");
 
 module.exports = {
   "id": "table6",
+  subject_type:"program",
   source: [ "PA" , "DP", "DRR" ],
   "tags" : [
     "GOV_FRAM",

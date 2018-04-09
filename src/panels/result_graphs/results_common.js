@@ -1,6 +1,4 @@
-const {
-  text_maker,
-} = require("../shared"); 
+const { Table } = require('../../core/TableClass.js');
 
 const {
   Result,
@@ -16,93 +14,88 @@ const link_to_results_infograph = subj => infograph_href_template(subj, 'results
 
 const {result_statuses} = require('../../models/businessConstants.js');
 
-const drr_and_dp_cols = [
-  "{{pa_last_year}}",
-  "{{planning_year_1}}",
-  "{{planning_year_2}}",
-  "{{planning_year_3}}",
-];
+function pick_table(subject,type,doc){
+  let table_id;
+  if(doc === "dp17" && _.includes(["dept","crso"], subject.level )){
+    table_id = (
+      type==="spending" ?
+      "cr_spending" : 
+      "cr_ftes"
+    );
+  } else {
+    table_id = (
+      type==="spending" ?
+      "table6" : 
+      "table12"
+    );
+  }
+  return Table.lookup(table_id);
+}
 
-//TODO: can we get rid of this variable?
-const planned_cols = [ 
-  "{{planning_year_1}}",
-  "{{planning_year_2}}",
-  "{{planning_year_3}}",
-];
-
-
-const get_rows_for_subject_from_table = _.memoize((subject,table) => {
-  let rows = [];
+const get_rows_for_subject_from_table = _.memoize((subject,type,doc) => {
+  const table = pick_table(subject,type,doc);
   if( subject.level === 'program'){
     const rows_or_record = table.programs.get(subject);
-    if(_.isArray(rows_or_record)){ 
-      rows = rows_or_record
-    } else {
-      rows = [ rows_or_record ];
+    if(!rows_or_record){
+      return null;
     }
-  } else if(!_.isEmpty(subject.programs)){
-    rows = _.chain(subject.programs)
-      .map(prog => get_rows_for_subject_from_table(prog,table) )
+    if(_.isArray(rows_or_record)){ 
+      return rows_or_record
+    } else {
+      return [ rows_or_record ];
+    }
+  } else if( doc==="dp17" && _.includes(["dept","crso"], subject.level)){
+    return table.q(subject).data;
+  }  else if(!_.isEmpty(subject.programs)){
+    return _.chain(subject.programs)
+      .map(prog => get_rows_for_subject_from_table(prog,type,doc) )
       .flatten()
       .value()
   } else if(subject.level === 'ministry'){
-    rows = _.chain(subject.orgs)
-      .map(org => get_rows_for_subject_from_table(org, table) )
+    return _.chain(subject.orgs)
+      .map(org => get_rows_for_subject_from_table(org, type,doc) )
       .flatten(true)
       .compact()
       .value();
   } else if(!_.isEmpty(subject.children_tags)){
-    rows = _.chain(subject.children_tags)
-      .map(tag => get_rows_for_subject_from_table(tag, table) )
+    return _.chain(subject.children_tags)
+      .map(tag => get_rows_for_subject_from_table(tag, type, doc) )
       .flatten(true)
       .uniqBy()
       .compact()
       .value();
+  } else {
+    return null;
   }
-  return rows;
 
-}, (subject,table) => `${subject.guid}-${table.id}` );
+}, (subject,type,doc) => `${subject.guid}-${type}-${doc}` );
 
-const get_planning_data_for_subject_from_table = (subject,table) => {
-  const rows = get_rows_for_subject_from_table(subject,table);
-  return _.chain(rows)
-    .compact()
-    .pipe( rows => _.chain(drr_and_dp_cols)
-      .map(col_nick => [
-        col_nick, 
-        table.col_from_nick(
-          table.id === 'table6' && col_nick === "{{pa_last_year}}" ? 
-          "{{pa_last_year}}exp" : 
-          col_nick
-        ).formula(rows),
-      ])
-      .fromPairs()
-      .value()
-    )
-    .value();
+const get_planning_data_for_subject_from_table = (subject, type, doc) => {
+  const rows = get_rows_for_subject_from_table(subject,type,doc);
+  const table = pick_table(subject,type,doc);
+
+  let col;
+  if(doc === "drr16"){
+    col = "{{pa_last_year}}";
+    if(type==="spending"){
+      col = "{{pa_last_year}}exp";
+    }
+  } else {
+    col = "{{planning_year_1}}";
+  }
+
+  return table.col_from_nick(col).formula(rows);
+
 };
 
-const planned_resource_fragment = ({ table6, table12, subject}) => {
-  const spending = get_planning_data_for_subject_from_table(subject, table6);
-  const ftes =  get_planning_data_for_subject_from_table(subject, table12);
+const planned_resource_fragment = (subject, doc) => {
+  const spending = get_planning_data_for_subject_from_table(subject, "spending", doc);
+  const ftes =  get_planning_data_for_subject_from_table(subject, "fte", doc);
 
-  const flat_data = _.map(
-    drr_and_dp_cols,
-    col_nick => ({
-      year: col_nick,
-      spending: (
-        _.isUndefined(spending[col_nick]) ? 
-        text_maker('unknown') : 
-        spending[col_nick] 
-      ),
-      ftes: (
-        _.isUndefined(ftes[col_nick]) ? 
-        text_maker('unknown') : 
-        ftes[col_nick] 
-      ),
-    })
-  );
-  return flat_data; 
+  return {
+    spending,
+    ftes,
+  }; 
 
 };
 
@@ -148,7 +141,6 @@ module.exports = exports = {
 
   planned_resource_fragment,
   link_to_results_infograph,
-  planned_cols,
   isBadDeptWithoutResults,
   row_to_drr_status_counts,
   result_statuses,

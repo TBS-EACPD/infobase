@@ -13,7 +13,6 @@ const {
   Dept, 
   Ministry, 
 } = Subject;
-const { Table } = require('../core/TableClass.js');
 
 const {
   filter_hierarchy,
@@ -22,14 +21,7 @@ const {
 
 function create_resource_hierarchy({hierarchy_scheme,doc}){
 
-  const table6 = Table.lookup('table6');
-  const table12 = Table.lookup('table12');
-  const year = (
-    doc === 'dp17' ? 
-    '{{planning_year_1}}' : 
-    '{{pa_last_year}}'
-  );
-  const get_resources = subject => get_resources_for_subject(subject, table6,table12,year);
+  const get_resources = subject => get_resources_for_subject(subject,doc);
 
   const root = {
     root: true,

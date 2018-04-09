@@ -377,9 +377,10 @@ export class ResourceExplorer extends React.Component {
     super();
     this.state = { loading: true };
   }
-  componentDidMount(){
-    ensure_loaded({
-      table_keys: ['table6', 'table12'],
+
+  UNSAFE_componentWillMount(){
+    ensure_loaded({ 
+      table_keys: ['table6', 'table12', "cr_spending", "cr_ftes"],
     }).then(()=> {
       this.setState({loading: false});
     })

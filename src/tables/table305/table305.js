@@ -19,6 +19,7 @@ const { Program } = require("../../models/subject");
 
 module.exports = {
   "id": "table305",
+  subject_type:"program",
   source: [ "CFMRS" ],
   "tags" : [ 
     "PA",
