@@ -397,6 +397,9 @@ budget_measure:
 budget_measures:
   en: Budget Measures
   fr: Mesures budgétaires
+budget_measure_descriptions:
+  en: Budget Measure Desciptions
+  fr: TODO
 budget_measures_short:
   en: Measures
   fr: Mesures

@@ -1,6 +1,18 @@
 budget_measures_partition_a11y_root:
   transform: [handlebars]
   en: |
-    {{gt "budget_in_year"}} Measures allocate {{rawfmt_compact1 root_value}} to federal organizations for {{year}}.
+    {{gt "budget_in_year"}} Measures allocate {{rawfmt_compact1 root_value}} to federal organizations for {{year}}
   fr: |
     TODO
+
+budget_measures_partition_a11y_chapter_table_caption:
+  transform: [handlebars]
+  en: |
+    Budget measures from the {{chapter}} chapter allocate {{rawfmt_compact1 value}} to federal organization in {{year}}. 
+    The following table contains further details on these {{chapter}} budget measures.
+  fr: |
+    TODO
+
+orgs_allocated_to_by_budget_measure:
+  en: Organizations Allocated Funds by Budget Measure
+  fr: TODO

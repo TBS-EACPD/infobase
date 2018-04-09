@@ -72,7 +72,7 @@ export class BudgetMeasuresRoute extends React.Component {
           {text_maker("budget_measures")}
         </h1>
         { loading && <SpinnerWrapper ref="spinner" scale = { 4 } /> }
-        { !loading && window.is_a11y_mode &&
+        { !loading && !window.is_a11y_mode &&
           <div className = "budget-measures">
             <BudgetMeasuresTop/>
             <BudgetMeasuresControls
@@ -88,7 +88,7 @@ export class BudgetMeasuresRoute extends React.Component {
             />
           </div>
         }
-        { !loading && !window.is_a11y_mode &&
+        { !loading && window.is_a11y_mode &&
           <div className="budget-measures">
             <BudgetMeasuresTop/>
             <BudgetMeasuresA11yContent/>
