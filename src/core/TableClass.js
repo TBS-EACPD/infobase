@@ -72,8 +72,11 @@ exports.Table = class Table extends mix().with(staticStoreMixin){
       }
     );
 
-    this.programs = new Map();
-    this.crs = new Map();
+    if(this.subject_type === "program"){
+      this.programs = new Map();
+    } else if(this.subject_type === "cr"){
+      this.crs = new Map();
+    }
     this.val = this.id;
     this._cols = []; 
     this.flat_headers = [];

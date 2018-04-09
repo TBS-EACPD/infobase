@@ -255,6 +255,7 @@ class Queries {
 }
 
 function query_adapter(subject){
+  //normalize different arguments API
   if(Subject.Dept.lookup(subject)){ //patch old dept-id based API
     subject = Subject.Dept.lookup(subject);
   }
@@ -270,6 +271,9 @@ function query_adapter(subject){
     return new Queries(this,rows,subject);
   } else if(this.programs && subject && subject.level === 'program'){
     const rows = this.programs.get(subject) || [];
+    return new Queries(this, rows, subject);
+  } else if(this.crs && "crso" === subject.level ){
+    const rows = this.crs.get(subject);
     return new Queries(this, rows, subject);
   }
 
