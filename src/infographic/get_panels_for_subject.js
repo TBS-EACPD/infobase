@@ -52,6 +52,7 @@ import '../panels/drr_dp_resources/sub_program_resources.js';
 import '../panels/drr_dp_resources/planned_prgm_crso_split.js';
 import '../panels/drr_dp_resources/crso_program_resources.js';
 import '../panels/drr_dp_resources/spending_in_perspective.js';
+import '../panels/drr_dp_resources/dp_rev_split.js';
 
 import { PanelGraph } from '../core/PanelGraph.js';
 
@@ -118,6 +119,7 @@ const get_dept_panels = subject => {
       "spend_rev_split",
       'detailed_program_spending_split',
       'drr_planned_actual',
+      "dp_rev_split",
     ],
     people: _.includes(subject.tables, 'table9') && get_people_panels(subject),
     results: subject.dp_status && [
@@ -158,6 +160,7 @@ const get_program_panels = subject => {
     
       'drr_planned_actual',
       'sub_program_resources',
+      "dp_rev_split",
     ],
     results: subject.dept.dp_status && !subject.is_internal_service && [
       "results_intro",
@@ -190,6 +193,7 @@ const get_crso_panels = subject => {
       'crso_by_prog_exp',
       'crso_by_prog_fte',
       'planned_prg_crso_split',
+      "dp_rev_split",
     ],
     results: subject.dept.dp_status && !subject.is_internal_service && [
       "results_intro",

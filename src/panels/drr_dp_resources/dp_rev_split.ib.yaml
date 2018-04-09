@@ -1,0 +1,31 @@
+dp_rev_split_title:
+  transform: [handlebars]
+  en: |
+     Gross and Net Planned Spending ({{planning_year_1}} to {{planning_year_3}})
+  fr: |
+    Dépenses prévues brutes et nettes ({{planning_year_1}} à {{planning_year_3}})
+
+
+dp_rev_split_text:
+  transform: [handlebars, markdown]
+  en: |
+    TODO
+  fr: |
+    TODO
+
+
+dp_net:
+  en: Planned Spending (net)
+  fr: Dépenses prévues (nettes)
+
+dp_gross:
+  en: Gross planned spending
+  fr: Dépenses brutes prévues
+
+dp_revenue:
+  en: Planned Revenues
+  fr: Recettes prévues
+
+dp_spa:
+  en: Planned Special Purpose Account Spending
+  fr: Dépenses prévues des comptes spécials
