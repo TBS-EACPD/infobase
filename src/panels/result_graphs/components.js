@@ -120,8 +120,6 @@ const SingleIndicatorDisplay = ({indicator}) => {
         />
       </dd>
 
-
-
       { is_drr && 
         <Fragment>
           <dt>
@@ -134,7 +132,8 @@ const SingleIndicatorDisplay = ({indicator}) => {
               narrative={indicator.actual_result}
             />
           </dd>
-        </Fragment>}
+        </Fragment>
+      }
 
       { !_.isEmpty(indicator.explanation) && 
         <Fragment>
@@ -144,7 +143,20 @@ const SingleIndicatorDisplay = ({indicator}) => {
           <dd>
             {indicator.explanation}  
           </dd>
-        </Fragment>}
+        </Fragment>
+      }
+
+
+      { !_.isEmpty(indicator.methodology) && 
+        <Fragment>
+          <dt>
+            <TM k="methodology" />
+          </dt>
+          <dd>
+            {indicator.methodology}  
+          </dd>
+        </Fragment>
+      }
     </dl>
   </div>
 }

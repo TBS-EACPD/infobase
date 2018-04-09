@@ -261,3 +261,7 @@ all_drrs_link:
 unspecified_date_to_achieve:
   en: Unspecified
   fr: Non spécifié
+
+methodology:
+  en: Methodology
+  fr: Méthodologie
