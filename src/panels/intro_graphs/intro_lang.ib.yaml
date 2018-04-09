@@ -190,3 +190,8 @@ crso_in_gov_title:
   transform: [handlebars]
   en: Where does this {{cr_or_so subject}} fit in the government reporting structure ?
   fr: Où s'inscrit {{ce_crso subject}} dans la structure de rapport du gouvernement ?
+
+
+additional_links:
+  en: Additional links
+  fr: Des liens vers l'information supplémentaire

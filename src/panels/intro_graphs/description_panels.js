@@ -1,7 +1,10 @@
-const {
+import {
   PanelGraph,
   reactAdapter,
-} = require("../shared"); 
+  util_components,
+} from '../shared.js';
+
+const { TM } = util_components;
 
 
 const title_keys = {
@@ -24,9 +27,28 @@ _.each(['tag','crso','program'], level => {
     render(panel,calculations){
       
       const {subject} = calculations;
+
+      let link_content = null;
+      if(subject.level==='program' && !_.isEmpty(subject.links)){
+        link_content = (
+          <div>
+            <TM k="additional_links" />
+            <ul>
+              {_.map(subject.links, href => 
+                <li key={href}>
+                  <a target="_blank" href={href}>
+                    {_.truncate(href, 50)}
+                  </a>
+                </li>
+              )}
+            </ul>
+          </div>
+        );
+      }
       
       const view = <div className="medium_panel_text">
         <p> {subject.description} </p>
+        { link_content }
       </div>;
 
       reactAdapter.render(
