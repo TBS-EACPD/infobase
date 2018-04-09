@@ -37,8 +37,8 @@ export class BudgetMeasuresControls extends React.Component {
       const all_chapter_keys = _.keys(budget_chapters);
 
       const new_filtered_chapter_keys = filtered_chapter_keys.length === 0 ?
-      _.xor(all_chapter_keys, [chapter_key]) :
-      _.xor(filtered_chapter_keys, [chapter_key]);
+        _.xor(all_chapter_keys, [chapter_key]) :
+        _.xor(filtered_chapter_keys, [chapter_key]);
 
       if (new_filtered_chapter_keys.length === all_chapter_keys.length){
         // Don't let everything be filtered at once
@@ -80,52 +80,48 @@ export class BudgetMeasuresControls extends React.Component {
               <div 
                 className="chapter-key-table"
               >
-                {_.chain(this.state.chapter_keys)
-                  .map( chapter_key => ({chapter_key, count: this.state.measure_counts_by_chapter_key[chapter_key] || 0 }) )
-                  .map( ({chapter_key, count }) =>
-                    <button
-                      onClick={ () => update_filtered_chapter_keys(filtered_chapter_keys, chapter_key) }
-                      className={classNames("button-unstyled chapter-key-table__item", _.includes(active_list, chapter_key) && "chapter-key-table__item--active" )}
-                      key={chapter_key}
-                    >
-                      <div 
-                        className="chapter-key-table__eye"
-                        style={{
-                          visibility: filtered_chapter_keys.length !== 0 ? "visible" : "hidden",
-                        }}
+                {
+                  _.chain(this.state.chapter_keys)
+                    .map( chapter_key => ({
+                      chapter_key, 
+                      count: this.state.measure_counts_by_chapter_key[chapter_key] || 0 ,
+                    }) )
+                    .map( ({chapter_key, count }) =>
+                      <button
+                        aria-pressed={ _.includes(active_list, chapter_key) }
+                        onClick={ () => update_filtered_chapter_keys(filtered_chapter_keys, chapter_key) }
+                        className={ classNames("button-unstyled chapter-key-table__item", _.includes(active_list, chapter_key) && "chapter-key-table__item--active" ) }
+                        key={chapter_key}
                       >
-                        <span
-                          className={
-                            "glyphicon glyphicon-eye-" + 
-                              (_.includes(active_list, chapter_key) ? 
-                                "open" : 
-                                "close")
-                          }
-                        ></span>
-                      </div>
-                      <div className="chapter-key-table__word">
-                        <span
-                          className="link-unstyled"
-                          tabIndex={0}
-                          aria-pressed={_.includes(active_list, chapter_key)}
-                          onClick={ () => update_filtered_chapter_keys(filtered_chapter_keys, chapter_key) }
-                          onKeyDown={ (e) => {
-                            if (e.keyCode===13 || e.keyCode===32){ 
-                              e.preventDefault();
-                              update_filtered_chapter_keys(filtered_chapter_keys, chapter_key);
-                            }
+                        <div 
+                          className="chapter-key-table__eye"
+                          style={{
+                            visibility: filtered_chapter_keys.length !== 0 ? "visible" : "hidden",
                           }}
                         >
-                          {budget_chapters[chapter_key].text}
-                        </span>
-                      </div>
-                      <div className="chapter-key-table__icon-count">
-                        <span className="chapter-key-table__count">
-                          {count} <br/> { text_maker("budget_measures_short") }
-                        </span>
-                      </div>
-                    </button>
-                  ).value()}
+                          <span
+                            className={
+                              "glyphicon glyphicon-eye-" + 
+                                (_.includes(active_list, chapter_key) ?
+                                  "open" : 
+                                  "close")
+                            }
+                          ></span>
+                        </div>
+                        <div className="chapter-key-table__word">
+                          <span className="link-unstyled">
+                            {budget_chapters[chapter_key].text}
+                          </span>
+                        </div>
+                        <div className="chapter-key-table__icon-count">
+                          <span className="chapter-key-table__count">
+                            {count} <br/> { text_maker("budget_measures_short") }
+                          </span>
+                        </div>
+                      </button>
+                    )
+                    .value()
+                }
               </div>
             </div>
           }

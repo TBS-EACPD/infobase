@@ -1,0 +1,6 @@
+budget_measures_partition_a11y_root:
+  transform: [handlebars]
+  en: |
+    {{gt "budget_in_year"}} Measures allocate {{rawfmt_compact1 root_value}} to federal organizations for {{year}}.
+  fr: |
+    TODO
