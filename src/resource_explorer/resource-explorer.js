@@ -262,26 +262,6 @@ class ExplorerPage extends React.Component {
           content={<TM k="where_can_find_subs_answer" />}
         />
       </div>
-
-      <div className="hierarchy-selection">
-        <header className="hierarchy-selection-header">
-          <TextMaker text_key="choose_explore_point" />
-        </header>
-        <div role="radiogroup" className="hierarchy-selection-items">
-          {_.map([ min_props, dept_props, goco_props, hwh_props ],props =>
-            <HierarchySelectionItem 
-              key={props.id} 
-              url={`#resource-explorer/${props.id}/${doc}`}
-              {...props} 
-            />
-          )}
-        </div>
-        
-      </div>
-   
-      { is_m2m && 
-        <div dangerouslySetInnerHTML={{__html: text_maker('m2m_warning_text')}} />
-      }
       <div className="tabbed_content">
         <ul className="tabbed_content_label_bar">
           <li className={classNames("tab_label", doc==="drr16" && "active_tab")} onClick={()=> this.refs.drr166_link.click()}>
@@ -296,7 +276,28 @@ class ExplorerPage extends React.Component {
           </li>
         </ul>
         <div className="tabbed_content_pane">
-          {inner_content}
+          <div className="hierarchy-selection" style={{marginTop:"20px"}}>
+            <header className="hierarchy-selection-header">
+              <TextMaker text_key="choose_explore_point" />
+            </header>
+            <div role="radiogroup" className="hierarchy-selection-items">
+              {_.map([ min_props, dept_props, goco_props, hwh_props ],props =>
+                <HierarchySelectionItem 
+                  key={props.id} 
+                  url={`#resource-explorer/${props.id}/${doc}`}
+                  {...props} 
+                />
+              )}
+            </div>
+            
+          </div>
+      
+          { is_m2m && 
+            <div dangerouslySetInnerHTML={{__html: text_maker('m2m_warning_text')}} />
+          }
+          <div>
+            {inner_content}
+          </div>
         </div>
       </div>
     </div>;
