@@ -14,10 +14,10 @@ const {
 } = require('./results_common.js');
 
 
-const ResultsIntroPanel = () => (
+const ResultsIntroPanel = ({counts}) => (
   <div className="frow middle-xs">
     <div className="fcol-md-7 medium_panel_text">
-      <TM k="gov_dp_text" />
+      <TM k="gov_dp_text" args={counts} />
     </div>
     <div className="fcol-md-5">
       <div
@@ -51,7 +51,12 @@ new PanelGraph({
   footnotes: false,
   render(panel, calculations){
     const node = panel.areas().graph.node();
-
-    reactAdapter.render(<ResultsIntroPanel />, node);
+    const counts = ResultCounts.get_gov_counts();
+    reactAdapter.render(
+      <ResultsIntroPanel 
+        counts={counts}
+      />, 
+      node
+    );
   },
 });
