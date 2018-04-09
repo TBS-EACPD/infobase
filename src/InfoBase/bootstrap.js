@@ -44,8 +44,9 @@ const table_defs = [
   require('../tables/table304/table304').default,
   require('../tables/table305/table305.js'), //prog_by_sobj
 
-  require('../tables/cr_spending/cr_spending.js'),
-  require('../tables/cr_ftes/cr_ftes.js'),
+  //turned off until we might need them
+  // require('../tables/cr_spending/cr_spending.js'),
+  // require('../tables/cr_ftes/cr_ftes.js'),
 ];
 
 module.exports  = function bootstrap(App, app_reducer, done){

@@ -15,21 +15,11 @@ const link_to_results_infograph = subj => infograph_href_template(subj, 'results
 const {result_statuses} = require('../../models/businessConstants.js');
 
 function pick_table(subject,type,doc){
-  let table_id;
-  if(doc === "dp17" && _.includes(["dept","crso"], subject.level )){
-    table_id = (
-      type==="spending" ?
-      "cr_spending" : 
-      "cr_ftes"
-    );
-  } else {
-    table_id = (
-      type==="spending" ?
-      "table6" : 
-      "table12"
-    );
-  }
-  return Table.lookup(table_id);
+  return Table.lookup(
+    type === "spending" ?
+    "table6" :
+    "table12"
+  );
 }
 
 const get_rows_for_subject_from_table = _.memoize((subject,type,doc) => {
