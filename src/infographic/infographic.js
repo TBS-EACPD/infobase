@@ -332,7 +332,7 @@ export const InfoGraph = ({
       description={text_maker("infographic_description", {subject})}
       route_key={sub_app_name}
     >
-      <h1> { title } </h1>
+      <h1 dangerouslySetInnerHTML={{__html:title }} />
       <InfoGraph_
         level={level}
         subject={subject}
