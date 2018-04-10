@@ -61,37 +61,33 @@ in_year_voted_stat_split_title:
 gov_in_year_voted_stat_split_text:
   transform: [handlebars, markdown]
   en: |
-   The government receives authority to spend from Parliament through {{gl_tt "statutory" "STAT"}} and {{gl_tt "voted" "VOTED"}} authorities. As of the {{est_in_year}} {{last_estimates}}, 
+   As of the {{est_in_year}} {{last_estimates}}, 
    the government has presented Parliament with planned {{gl_tt "budgetary" 'BUD_EXP'}} expenditure estimates totaling **{{fmt_compact_written gov_tabled_est_in_year}}**.
    
-   Of the **{{fmt_compact_written gov_tabled_est_in_year}}**, **{{fmt_compact_written gov_stat_est_in_year}}** (or **{{fmt_percentage1 gov_stat_percent_est_in_year}}**) 
-   will come from statutory authorities and **{{fmt_compact_written gov_voted_est_in_year}}** (or **{{fmt_percentage1 gov_voted_percent_est_in_year}}**) 
-   will come from voted authorities.
+   Of those planned expenditures, **{{fmt_compact_written gov_stat_est_in_year}}** (or **{{fmt_percentage1 gov_stat_percent_est_in_year}}**) 
+   will come from {{gl_tt "statutory authorities" "STAT"}} and **{{fmt_compact_written gov_voted_est_in_year}}** (or **{{fmt_percentage1 gov_voted_percent_est_in_year}}**) 
+   will come from {{gl_tt "voted authorities" "VOTED"}}.
 
 
   fr: |
-    Le gouvernement reçoit du Parlement l'autorisation de dépenser par le biais des {{gl_tt "autorisations législatives" "STAT"}} 
-    et des {{gl_tt "autorisations votées" "VOTED"}}. En date du {{est_in_year}} {{last_estimates}}, le gouvernement a présenté au Parlement des dépenses budgétaires prévues d'un total de **{{fmt_compact_written gov_tabled_est_in_year}}**. 
+    En date du {{est_in_year}} {{last_estimates}}, le gouvernement a présenté au Parlement des dépenses budgétaires prévues d'un total de **{{fmt_compact_written gov_tabled_est_in_year}}**. 
     
-    Des dépenses estimées à **{{fmt_compact_written gov_tabled_est_in_year}}** pour 
-    {{est_in_year}}, **{{fmt_compact_written gov_stat_est_in_year}}** (ou **{{fmt_percentage1 gov_stat_percent_est_in_year}}**) proviendront des autorisations législatives 
-    et **{{fmt_compact_written gov_voted_est_in_year}}** (ou **{{fmt_percentage1 gov_voted_percent_est_in_year}}**) des autorisations votées.
+    De ces dépenses prévues, **{{fmt_compact_written gov_stat_est_in_year}}** (ou **{{fmt_percentage1 gov_stat_percent_est_in_year}}**) proviendront des {{gl_tt "autorisations législatives" "STAT"}}
+    et **{{fmt_compact_written gov_voted_est_in_year}}** (ou **{{fmt_percentage1 gov_voted_percent_est_in_year}}**) des {{gl_tt "autorisations votées" "VOTED"}}.
 
 dept_in_year_voted_stat_split_text:
   transform: [handlebars,markdown]
   en: |
-   Organizations receive authority to spend from Parliament through {{gl_tt "statutory" "STAT"}} 
-   and {{gl_tt "voted" "VOTED"}} authorities. Of the **{{fmt_compact_written dept_tabled_est_in_year_estimates}}** estimated expenditures for 
+   Of the **{{fmt_compact_written dept_tabled_est_in_year_estimates}}** estimated expenditures for 
    **{{subj_name subject}}**, **{{fmt_percentage1 dept_stat_percent_est_in_year}}** (or **{{fmt_compact_written dept_stat_est_in_year}}**) 
-   will be funded from statutory authorities and **{{fmt_percentage1 dept_voted_percent_est_in_year}}** 
-   (or **{{fmt_compact_written dept_voted_est_in_year}}**) from voted authorities.
+   will be funded from {{gl_tt "statutory authorities" "STAT"}} and **{{fmt_percentage1 dept_voted_percent_est_in_year}}** 
+   (or **{{fmt_compact_written dept_voted_est_in_year}}**) from {{gl_tt "voted authorities" "VOTED"}}.
 
 
   fr: |
-   Le Parlement accorde des autorisations de dépenser aux organisations au moyen {{gl_tt "d'autorisations législatives" "STAT"}} 
-   et {{gl_tt "votées" "VOTED"}}. Sur les **{{fmt_compact_written dept_tabled_est_in_year_estimates}}** en dépenses budgétaires prévues pour **{{le_dept dept}}**, 
-   **{{fmt_compact_written dept_stat_est_in_year}}** (ou **{{fmt_percentage1 dept_stat_percent_est_in_year}}**) proviendra d'autorisations législatives et 
-   **{{fmt_compact_written dept_voted_est_in_year}}** (ou **{{fmt_percentage1 dept_voted_percent_est_in_year}}**) d'autorisations votées.
+   Sur les **{{fmt_compact_written dept_tabled_est_in_year_estimates}}** en dépenses budgétaires prévues pour **{{le_dept dept}}**, 
+   **{{fmt_compact_written dept_stat_est_in_year}}** (ou **{{fmt_percentage1 dept_stat_percent_est_in_year}}**) proviendra {{gl_tt "d'autorisations législatives" "STAT"}} et 
+   **{{fmt_compact_written dept_voted_est_in_year}}** (ou **{{fmt_percentage1 dept_voted_percent_est_in_year}}**) {{gl_tt "d'autorisations votées" "VOTED"}}.
 
 
 
@@ -165,7 +161,7 @@ estimates_perspective_text:
    {{/if}}
 
   fr: |
-   En date du {{last_estimates}} {{est_in_year}} , le gouvernement a présenté au Parlement des dépenses budgétaires prévues d'un total de **{{fmt_compact_written gov_tabled_est_in_year}}**. De ce montant, **{{fmt_compact_written dept_tabled_est_in_year_estimates}}** (ou **{{fmt_percentage1 (divide dept_tabled_est_in_year_estimates gov_tabled_est_in_year)}}**) seront attribués à **{{subj_name subject}}**. 
+   En date du {{last_estimates}} {{est_in_year}}, le gouvernement a présenté au Parlement des dépenses budgétaires prévues d'un total de **{{fmt_compact_written gov_tabled_est_in_year}}**. De ce montant, **{{fmt_compact_written dept_tabled_est_in_year_estimates}}** (ou **{{fmt_percentage1 (divide dept_tabled_est_in_year_estimates gov_tabled_est_in_year)}}**) seront attribués à **{{subj_name subject}}**. 
 
 
    {{! only to be used near year end when a main estimates for the following year has been tabled}}
