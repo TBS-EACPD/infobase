@@ -130,10 +130,10 @@ const IB_tables = [
   'table12',
   'table305',
   'table300',
-  //'table112', // waiting on data
-  //'table302',
-  //'table303',
-  //'table304',
+  'table112',
+  'table302',
+  'table303',
+  'table304',
 ];
 
 var csv_from_table_names = function(table_ids){

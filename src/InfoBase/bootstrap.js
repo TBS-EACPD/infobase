@@ -37,11 +37,11 @@ const table_defs = [
   require("../tables/table10/table10").default,
   require("../tables/table11/table11").default,
   require("../tables/table12/table12"),
-  //require("../tables/table112/table112").default,
+  require("../tables/table112/table112").default,
   require('../tables/table300/table300.js'), //prog_by_vote/stat
-  //require('../tables/table302/table302').default,
-  //require('../tables/table303/table303').default,
-  //require('../tables/table304/table304').default,
+  require('../tables/table302/table302').default,
+  require('../tables/table303/table303').default,
+  require('../tables/table304/table304').default,
   require('../tables/table305/table305.js'), //prog_by_sobj
 ];
 
