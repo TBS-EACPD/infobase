@@ -382,6 +382,6 @@ budget_chapters:
   rec:
     en: Reconciliation
     fr: Réconciliation
-  n_a:
-    en: Unspecified
-    fr: TODO
+  oth:
+    en: Other
+    fr: Autre

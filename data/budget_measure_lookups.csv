@@ -8,23 +8,26 @@ measure_id,measure_en,measure_fr,chapter_key
 7,A New Women Entrepreneurship Strategy,Une nouvelle stratégie pour les femmes en entrepreneuriat,prg
 8,A Strong Sanctions Regime,Un régime de sanctions solide,adv
 9,Adapting Canada's Weather and Water Services to Climate Change,Adapter les services météorologiques et les services liés à l’eau du Canada aux changements climatiques,adv
-10,Additional Funding for the Office of the Commissioner of Lobbying,Financement supplémentaire pour le Commissariat au lobbying du Canada,n_a
+10,Additional Funding for the Office of the Commissioner of Lobbying,Financement supplémentaire pour le Commissariat au lobbying du Canada,oth
 11,Additional Support for the Feminist International Assistance Policy Agenda,Mesures de soutien supplémentaires au programme de Politique d'aide internationale féministe,adv
 12,"Addressing ""Unfounded"" Cases of Sexual Assault and Better Supporting Victims",Aborder la question entourant les cas d’agression sexuelle « non fondés » et offrir un meilleur soutien aux victimes,adv
 13,Addressing Demand for Immigration and Refugee Legal Aid,Répondre à la demande d’aide juridique pour l’immigration et les réfugiés,adv
 14,Addressing the Opioid Crisis,Lutte contre la crise des opioïdes,adv
+15,Advancing Women Business Leaders,Faire progresser les femmes chefs d’entreprise,prg
 16,Better Services for Veterans,Offrir de meilleurs services aux anciens combattants,adv
 17,Building More Rental Housing for Canadian Families,Bâtir plus de logements locatifs pour les familles canadiennes,grw
 18,Canada Research Chairs,Chaires de recherche du Canada,prg
 19,Canada Summer Jobs 2019-20,Emplois d’été Canada 2019-2020,grw
-20,Canada's Co-Chairmanship of the G-20 Framework Working Group,Coprésidence canadienne du Groupe de travail sur le cadre du G20,n_a
+20,Canada's Co-Chairmanship of the G-20 Framework Working Group,Coprésidence canadienne du Groupe de travail sur le cadre du G20,oth
 21,Canadian Technology Accelerators Program,Programme des accélérateurs technologiques canadiens,prg
 22,Cannabis Public Education,Éducation publique sur le cannabis,adv
 23,Cemetery and Grave Maintenance,Entretien des cimetières et des tombes,adv
+24,Centre for Drug Research and Development,Le Centre de recherche et développement des médicaments,prg
 25,Centre of Excellence on the Canadian Federation,Centre d’excellence sur la fédération canadienne,prg
 26,Clean and Safe Drinking Water On Reserve,Eau potable propre et salubre dans les réserves,rec
 27,College and Community Innovation Program,Programme d'innovation dans les collèges et la communauté,prg
 28,Combatting Aggressive International Tax Avoidance,Lutter contre les pratiques agressives d’évitement fiscal international,grw
+29,Council of Canadian Academies,Conseil des académies canadiennes,prg
 30,Cracking Down on Tax Evasion and Combatting Tax Avoidance,Sévir contre l’évasion fiscale et lutter contre l’évitement fiscal,grw
 31,Creating a More Responsive Income Assistance Program That Addresses the Needs of First Nations Communities,Créer un Programme d’aide au revenu plus réceptif qui répond aux besoins des communautés des Premières Nations,rec
 32,Critical Infrastructure Security,Sécurité des infrastructures essentielles,adv
@@ -38,12 +41,14 @@ measure_id,measure_en,measure_fr,chapter_key
 40,Ensuring Rules-Based and Responsible Trade,Assurer un commerce responsable et axé sur les règles,grw
 41,Ensuring Security and Prosperity in the Digital Age,Assurer la sécurité et la prospérité à l’ère numérique,adv
 42,Ensuring That Indigenous Children Are Safe and Supported Within Their Communities,S’assurer que les enfants des Premières Nations sont en sécurité et reçoivent un soutien au sein de leur communauté,rec
-43,Ensuring the Safe Operation of Tankers,Garantir le fonctionnement sécuritaire des navires-citernes,n_a
+43,Ensuring the Safe Operation of Tankers,Garantir le fonctionnement sécuritaire des navires-citernes,oth
 44,Evidence-Based Policy,Politique fondée sur des données probantes,grw
 45,Expanding the Diversity of Entrepreneurs,Accroître la diversité des entrepreneurs,prg
-47,Finance Canada Analytical Capacity,Capacité analytique du ministère des Finances du Canada,n_a
+46,Expanding Unified Family Courts,Élargir les tribunaux unifiés de la famille,adv
+47,Finance Canada Analytical Capacity,Capacité analytique du ministère des Finances du Canada,oth
 48,Funding to support the establishment of a National Council for Reconciliation,Financement pour appuyer l’établissement d’un conseil national pour la réconciliation,rec
 49,Further Improving Mental Health Supports for Inmates,Améliorer davantage les services de soutien en santé mentale à l’intention des détenus,adv
+50,Gairdner Foundation,Fondation Gairdner,oth
 51,Getting Into and Staying in the Workforce and Career Pathways for Visible Minority Newcomer Women in Canada,"Intégrer le marché du travail et y demeurer, et parcours professionnels des femmes qui sont membres des minorités visibles et nouvellement arrivées au Canada",grw
 52,Granting Councils,Conseils subventionnaires,prg
 53,Harnessing Big Data,Exploiter les données massives,prg
@@ -51,7 +56,8 @@ measure_id,measure_en,measure_fr,chapter_key
 55,Horizontal Skills Review,Examen horizontal des compétences,grw
 56,Implementing the 2030 Sustainable Development Agenda,Mise en œuvre du Programme de développement durable à l’horizon 2030,adv
 57,Improving Access to the Canada Child Benefit and other Benefits,Améliorer l’accès à l’Allocation canadienne pour enfants et à d’autres prestations,grw
-59,Improving Access to the Digital Economy,Améliorer l’accès à l’économie numérique,n_a
+58,Improving Access to the Canada Workers Benefit,Améliorer l’accès à l’Allocation canadienne pour le travail,grw
+59,Improving Access to the Digital Economy,Améliorer l’accès à l’économie numérique,oth
 60,Improving Client Services at the Canada Revenue Agency,Améliorer les services à la clientèle offerts par l’Agence du revenu du Canada,adv
 61,Improving Support for Sexual Assault Crisis Centres on Campuses,Accroître le soutien aux centres de crise pour les agressions sexuelles dans les campus,adv
 62,Increased Health Support for Survivors of Indian Residential Schools and their Families,Soutien accru en santé pour les survivants des pensionnats indiens et leur famille,rec
@@ -61,17 +67,18 @@ measure_id,measure_en,measure_fr,chapter_key
 66,Indigenous Sport,Le sport chez les Autochtones,rec
 67,Industrial Research Assistance Program,Programme d’aide à la recherche industrielle,prg
 68,Innovation Canada,Innovation Canada,prg
+69,Institute for Quantum Computing,Institut d’informatique quantique,prg
 70,Investing in Canadian Content,Investir dans le contenu canadien,adv
 71,Investing in the Equipment Researchers Need - Canadian Foundation for Innovation,Investir dans l’équipement dont les chercheurs ont besoin - La Fondation canadienne pour l’innovation,prg
 72,Investment Canada Act - National Security Review of Foreign Investments,Loi sur Investissement Canada – Examen de la sécurité nationale des investissements étrangers,adv
 73,Irregular Migration: Managing the Border,Migration irrégulière : Gestion de la frontière,adv
-74,Long-Term Sustainability of the Coast Guard Fleet,Durabilité à long terme de la flotte de la Garde côtière,n_a
-75,Maintaining Rail Service to Remote Communities,Maintenir les services ferroviaires vers les communautés éloignées,n_a
-76,Maintaining Service Levels of the Controlled Goods Program,Maintenir les niveaux de service du Programme des marchandises contrôlées,n_a
+74,Long-Term Sustainability of the Coast Guard Fleet,Durabilité à long terme de la flotte de la Garde côtière,oth
+75,Maintaining Rail Service to Remote Communities,Maintenir les services ferroviaires vers les communautés éloignées,oth
+76,Maintaining Service Levels of the Controlled Goods Program,Maintenir les niveaux de service du Programme des marchandises contrôlées,oth
 77,Making Employment Insurance More Responsive and Effective,Rendre l’assurance-emploi mieux adaptée et plus efficace,grw
 78,Modernizing Canada’s Regulatory Framework,Moderniser le cadre réglementaire du Canada,prg
-79,Modernizing the Canadian Transportation Agency,Modernisation de l’Office des transports du Canada,n_a
-80,Modernizing VIA Rail Passenger Service,Moderniser les services aux passagers de VIA Rail,n_a
+79,Modernizing the Canadian Transportation Agency,Modernisation de l’Office des transports du Canada,oth
+80,Modernizing VIA Rail Passenger Service,Moderniser les services aux passagers de VIA Rail,oth
 81,More Women and Girls in Sport,Plus de femmes et de filles dans les sports,adv
 82,National Human Trafficking Hotline,Service national d’écoute téléphonique concernant la traite des personnes,adv
 83,National Research Council,Conseil national de recherches Canada,prg
@@ -81,21 +88,23 @@ measure_id,measure_en,measure_fr,chapter_key
 87,Pay Transparency,Transparence salariale,grw
 88,Permanent Bilateral Mechanisms,Mécanismes bilatéraux permanents,rec
 89,Placing Evidence at the Centre of Program Evaluation and Design,Une évaluation et une conception de programme axées sur des données probantes,prg
+90,POLAR Knowledge Canada,Savoir polaire Canada,oth
 91,Pre-apprenticeship Program,Programme de préparation à la formation d’apprenti,grw
 92,Predictable Funding for Employment Insurance Service Delivery,Financement prévisible pour la prestation de services liés à l’assurance-emploi,adv
+94,Pricing Carbon Pollution and Supporting Clean Growth,Tarification de la pollution par le carbone et soutien d’une croissance propre et durable,adv
 95,Protecting Air Travelers,Protéger les passagers du transport aérien,adv
 96,"Protecting Canada's Nature, Parks and Wild Spaces","Protéger la nature, les parcs et les espaces sauvages du Canada",adv
 97,Protecting Jobs in Eastern Canada's Forestry Sector,Protéger les emplois dans le secteur forestier de l’Est du Canada,prg
 98,Protecting Marine Life,Protéger la vie marine,adv
 99,Protecting Temporary Foreign Workers,Protéger les travailleurs étrangers temporaires,adv
-100,Protecting the Integrity of Transportation Infrastructure in Montreal,Protéger l’intégrité de l’infrastructure de transport à Montréal,n_a
+100,Protecting the Integrity of Transportation Infrastructure in Montreal,Protéger l’intégrité de l’infrastructure de transport à Montréal,oth
 101,Protecting Vulnerable Women and Girls,Protéger les femmes et les filles vulnérables,adv
 102,Providing Legal Support to Victims of Sexual Harassment in the Workplace,Offrir un soutien juridique aux victimes de harcèlement sexuel en milieu de travail,adv
-103,Public Service and Procurement Canada – Real Property Repairs and Maintenance,Services publics et Approvisionnement Canada – Travaux de réparation et d’entretien de biens immobiliers,n_a
-104,"Public Service Centre on Diversity, Inclusion and Wellness","Centre de diversité, d’inclusion et de mieux-être de la fonction publique",n_a
+103,Public Service and Procurement Canada – Real Property Repairs and Maintenance,Services publics et Approvisionnement Canada – Travaux de réparation et d’entretien de biens immobiliers,oth
+104,"Public Service Centre on Diversity, Inclusion and Wellness","Centre de diversité, d’inclusion et de mieux-être de la fonction publique",oth
 105,Pursuing New Markets,Chercher de nouveaux marchés,grw
-106,RCMP Cannabis Labs Repurposing,Réaffectation des laboratoires de la GRC sur le cannabis,n_a
-107,Rebalancing Elections Canada's Expenditures,Rééquilibrer les dépenses d’Élections Canada,n_a
+106,RCMP Cannabis Labs Repurposing,Réaffectation des laboratoires de la GRC sur le cannabis,oth
+107,Rebalancing Elections Canada's Expenditures,Rééquilibrer les dépenses d’Élections Canada,oth
 108,Regional Development Agencies,Agences de développement régional,prg
 109,Renewal of Base Funding for the Federal Economic Development Agency for Southern Ontario,Renouvellement du financement de base de l’Agence fédérale de développement économique pour le Sud de l’Ontario,prg
 110,Renewal of Economic Development Funding for the Canadian Northern Economic Development Agency,Renouvellement du financement de base pour le développement économique pour l’Agence canadienne de développement économique du Nord,prg
@@ -105,20 +114,20 @@ measure_id,measure_en,measure_fr,chapter_key
 114,Renewing Federal Laboratories,Modernisation des laboratoires fédéraux,prg
 115,Renewing the Matrimonial Real Property Implementation Support Program,Renouveler le Programme de soutien à la mise en œuvre des biens immobiliers matrimoniaux,rec
 116,Reopening the Penitentiary Farms at Joyceville and Collins Bay Institutions,Réouverture des fermes pénitentiaires aux établissements de Joyceville et de Collins Bay,adv
-117,Reprofile of Indigenous Infrastructure Allocation,Réaffectation de la provision pour l’infrastructure autochtone,n_a
+117,Reprofile of Indigenous Infrastructure Allocation,Réaffectation de la provision pour l’infrastructure autochtone,oth
 118,Research Support Fund,Fonds de soutien à la recherche,prg
 119,Revitalizing National Capital Commission Assets,Revitaliser les actifs de la Commission de la capitale nationale,adv
 120,Rick Hansen Institute,Institut Rick Hansen,prg
 121,Safeguarding Canadians with an Enhanced Passenger Protect Program,Protéger les Canadiens grâce au Programme de protection des passagers amélioré,adv
-122,Securing Market Access for Canada’s Agriculture and Agri-food Products,Garantir l’accès au marché des produits agricoles et agroalimentaires du Canada,n_a
-123,Service Income Security Insurance Plan and other Public Service Employee Benefits,Régime d’assurance-revenu militaire et autres avantages sociaux des employés de la fonction publique,n_a
+122,Securing Market Access for Canada’s Agriculture and Agri-food Products,Garantir l’accès au marché des produits agricoles et agroalimentaires du Canada,oth
+123,Service Income Security Insurance Plan and other Public Service Employee Benefits,Régime d’assurance-revenu militaire et autres avantages sociaux des employés de la fonction publique,oth
 124,Simpler and Better Procurement,Approvisionnement plus simple et meilleur,prg
 125,Stabilizing and Future Transformation of the Federal Government's Pay Administration (Phoenix),Stabilisation et transformation future de l’administration de la paye du gouvernement fédéral (Phénix),adv
-126,Strengthening Airports Serving Remote Communities,Renforcement des aéroports desservant les communautés éloignées,n_a
-127,Strengthening Canada’s Food Safety System,Renforcer le système canadien de salubrité des aliments,n_a
-128,Strengthening Capacity for Environmental Assessments,Renforcement de la capacité en matière d’évaluations environnementales,n_a
+126,Strengthening Airports Serving Remote Communities,Renforcement des aéroports desservant les communautés éloignées,oth
+127,Strengthening Canada’s Food Safety System,Renforcer le système canadien de salubrité des aliments,oth
+128,Strengthening Capacity for Environmental Assessments,Renforcement de la capacité en matière d’évaluations environnementales,oth
 129,Strengthening Indigenous Data and Research Capability,Renforcer la capacité des Autochtones en matière de données et de recherche,rec
-130,Strengthening Motor Vehicle Safety,Renforcement de la sécurité des véhicules à moteur,n_a
+130,Strengthening Motor Vehicle Safety,Renforcement de la sécurité des véhicules à moteur,oth
 131,Strengthening Multiculturalism and Addressing the Challenges Faced by Black Canadians,Renforcer le multiculturalisme et relever les défis auxquels sont confrontés les Canadiens de race noire,adv
 132,Strengthening the Canada Border Services Agency,Renforcer l’Agence des services frontaliers du Canada ,adv
 133,Strengthening the Canadian Judiciary,Renforcer la magistrature canadienne,adv
@@ -142,7 +151,8 @@ measure_id,measure_en,measure_fr,chapter_key
 151,Supporting The Next Generation of Rural Broadband,Mettre au point la nouvelle génération du service Internet à large bande en milieu rural,prg
 152,Supporting the Recognition of Rights and Self-Determination,Appuyer la reconnaissance des droits et l’autodétermination,rec
 153,Supporting Those That Keep Our Communities Safe,Soutenir les personnes qui assurent la sécurité de nos communautés,adv
-154,Sustainable Aquaculture Program,Programme d’aquaculture durable,n_a
+154,Sustainable Aquaculture Program,Programme d’aquaculture durable,oth
 155,"Taking Action to Prevent and Address Gender-based Violence, Harassment and Discrimination","Prendre des mesures pour prévenir et contrer la violence, le harcèlement et la discrimination fondés sur le sexe",adv
-156,The Office of the Auditor General,Bureau du vérificateur général du Canada,n_a
+156,The Office of the Auditor General,Bureau du vérificateur général du Canada,oth
+157,Transition Payments to Territories,Paiements de transition aux territoires,oth
 158,Upholding the Integrity of Canada's Elections,Maintenir l’intégrité des élections du Canada,adv
