@@ -213,10 +213,10 @@ export class PartitionDiagram {
       .merge(html_content_join)
       .each(function(d){
         d.DOM = this;
-        d.scaled_height = yscale(Math.abs(d.value));
+        d.scaled_height = yscale(Math.abs(d.value) || 1);
         d.polygon_links = new Map();
       })
-      .classed("negative-value", d => d.value <0)
+      .classed("negative-value", d => d.value < 0)
       .style("left", (d,i) => horizontal_placement_counters[d.depth]+"px") 
       .style("height", d =>{
         d.rendered_height = Math.floor(d.scaled_height)+1;
@@ -229,7 +229,7 @@ export class PartitionDiagram {
         d_node
           .select(".partition-content-title")
           .classed("fat", d => d.more_than_fair_space)
-          .classed("negative-value", d => d.value <0)
+          .classed("negative-value", d => d.value < 0)
           .style("background-color", null);
         
         d_node
