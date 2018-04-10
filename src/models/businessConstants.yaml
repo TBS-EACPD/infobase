@@ -57,6 +57,9 @@ tenure:
   stu:
     en: Student
     fr: Étudiant
+  na:
+    en: Not Available
+    fr: Non disponible
 
 
 provinces:
@@ -75,12 +78,6 @@ provinces:
   nb:
     en: New Brunswick
     fr: Nouveau-Brunswick
-  onncr:
-    en: Ontario (NCR)
-    fr: Ontario (RCN)
-  qcncr:
-    en: Quebec (NCR)
-    fr: Québec (RCN)
   ncr:
     en: NCR
     fr: RCN
@@ -130,12 +127,6 @@ provinces_short:
     text: MB
   nb:
     text: NB
-  onncr:
-    en: ON (NCR)
-    fr: ON (RCN)
-  qcncr:
-    en: QC (NCR)
-    fr: QC (RCN)
   ncr:
     en: NCR
     fr: RCN
@@ -191,10 +182,8 @@ age_groups:
     text: 55-59
   age60to64:
     text: 60-64
-  age65to69:
-    text: 65-69
-  age70plus:
-    text: 70 +
+  age65plus:
+    text: 65+
   na:
     en: N.A.
     fr: N.D.
