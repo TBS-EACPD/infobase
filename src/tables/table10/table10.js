@@ -132,7 +132,7 @@ export default {
           return d[year];
         });
       var groups = _.groupBy(this.data, function (x) {
-        if (x.region_code === 'onncr' || x.region_code === 'qcncr') {
+        if (x.region_code === 'ncr') {
           return ncr;
         } else if (x.region_code === "abroad") {
           return abroad;
@@ -176,20 +176,6 @@ Statistics.create_and_register({
     c.dept = subject;
 
     var all_years = q.get_top_x(["region"].concat(people_years),Infinity,{zip:true});
-    var NCR = all_years
-      .filter(d => 
-        (d[0].substring(d[0].length-5, d[0].length) === "(NCR)") ||
-                  (d[0].substring(d[0].length-5, d[0].length) === "(RCN)")
-      )
-      .reduce(function(reduced, d){
-        return reduced.map( (r,i) => (r +d[i]));
-      }, [0,0,0,0,0,0]);
-    NCR[0] = text_maker("the_NCR_full");
-    all_years = all_years.filter(d => 
-      (d[0].substring(d[0].length-5, d[0].length) !== "(NCR)") &&
-                  (d[0].substring(d[0].length-5, d[0].length) !== "(RCN)")
-    )
-      .concat([NCR]);
     STATS.year_over_year_multi_stats_active_years(add,"head_count_region",all_years,false,people_years);
   },
 });
@@ -203,20 +189,6 @@ Statistics.create_and_register({
     const q = table.q(subject);
     
     var all_years = q.gov_grouping();
-    var NCR = all_years
-      .filter(d => 
-        (d[0].substring(d[0].length-5, d[0].length) === "(NCR)") ||
-                  (d[0].substring(d[0].length-5, d[0].length) === "(RCN)")
-      )
-      .reduce(function(reduced, d){
-        return reduced.map( (r,i) => (r +d[i]));
-      }, [0,0,0,0,0,0]);
-    NCR[0] = text_maker("the_NCR_full");
-    all_years = all_years.filter(d => 
-      (d[0].substring(d[0].length-5, d[0].length) !== "(NCR)") &&
-                  (d[0].substring(d[0].length-5, d[0].length) !== "(RCN)")
-    )
-      .concat([NCR]);
     STATS.year_over_year_multi_stats_active_years(add,"head_count_region",all_years,false,people_years);
   },
 });
