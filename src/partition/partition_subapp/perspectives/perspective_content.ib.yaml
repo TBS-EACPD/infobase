@@ -388,15 +388,33 @@ partition_spending_will_be_value_and_rpb_link_partial:
         {{rawfmt_compact x}}
       </a>
     </p>
+partiton_planned_spending_was:
+  en: |
+    We planned to spend
+  fr: |
+    TODO: Alex please translate
+partiton_planned_spending_will_be:
+  en: |
+    We plan on spending
+  fr: |
+    Nous prévoyons dépenser
 partition_spending_will_be_variable_year:
   transform: [handlebars]
   en: |
-    We plan on spending
+    {{#if past_tense}}
+      {{gt "partiton_planned_spending_was"}}
+    {{else}}
+      {{gt "partiton_planned_spending_will_be"}}
+    {{/if}}
     {{> "partition_spending_will_be_value_and_rpb_link_partial"}}
     in
     <span class='text-nowrap'>{{rt year}}</span>
   fr: |
-    Nous prévoyons dépenser
+    {{#if past_tense}}
+      {{gt "partiton_planned_spending_was"}}
+    {{else}}
+      {{gt "partiton_planned_spending_will_be"}}
+    {{/if}}
     {{> "partition_spending_will_be_value_and_rpb_link_partial"}}
     en
     <span class='text-nowrap'>{{rt year}}</span>

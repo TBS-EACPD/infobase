@@ -422,6 +422,7 @@ const planned_exp_perspective_factory = (presentation_scheme) => new PartitionPe
       name: get_name_text_fragment(presentation_scheme),
       year: get_year(presentation_scheme), 
       clean_year: get_year(presentation_scheme).replace(/(\{)|(\})/g,""),
+      past_tense: get_year(presentation_scheme) !== "{{est_in_year}}",
     }
   ),
   diagram_note_content: presentation_scheme === "est_doc_im" ? <TextMaker text_key={"partition_interim_estimates_def"} /> : false,
