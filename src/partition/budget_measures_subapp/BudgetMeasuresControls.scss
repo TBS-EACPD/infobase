@@ -3,32 +3,34 @@
 .budget-measures-partition-controls > .labeled-box {
 
   & > .labeled-box-label {
-    background-color: darken(#9c9c9c, 25%);
+    background-color: #9c9c9c;
+    color: #333;
+    font-size: 20px;
   }
 
   & > .labeled-box-content {
-    border-color: darken(#9c9c9c, 25%);
+    border-color: #9c9c9c;
 
     & > .centerer > .radio-buttons {
-      border-color: #9c9c9c;
+      border-color: darken(#9c9c9c, 25%);
       & > .radio-buttons__option {
-        color: #333;
+        color: darken(#9c9c9c, 25%);
       }
       
       & > .radio-buttons__option.radio-buttons__option--active {
-        color: #333;
-        background-color: #9c9c9c;
+        color: #FFFFFF;
+        background-color: darken(#9c9c9c, 25%);
       }
       
       & > .radio-buttons__option:not(:last-child):after {
-        border-color: #9c9c9c;
+        border-color: darken(#9c9c9c, 25%);
       }
       
       & > .radio-buttons__option:not(.radio-buttons__option--active):hover,
       & > .radio-buttons__option:not(.radio-buttons__option--active):active,
       & > .radio-buttons__option:not(.radio-buttons__option--active):focus { 
-        background-color: change-color($color: #9c9c9c, $alpha: 0.75);
-        color: #333 !important;
+        background-color: change-color($color: darken(#9c9c9c, 25%), $alpha: 0.75);
+        color: #FFFFFF !important;
       }
     }
   }
@@ -137,5 +139,5 @@
 }
 
 .chapter-key-table__count {
-  font-size: 16px; 
+  font-size: 19px; 
 }
