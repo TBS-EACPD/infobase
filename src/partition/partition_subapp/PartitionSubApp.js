@@ -25,7 +25,7 @@ export class PartitionSubApp {
       .style("margin-left", -d3.select("main.container").node().offsetLeft+"px");
     
     const clear_partition_events_on_leaving_partition_route = function(e){
-      const not_on_partition_route = !e.newURL.includes('#partition');
+      const not_on_partition_route = !window.location.href.includes('#partition');
       if (not_on_partition_route){
         window.removeEventListener("hashchange", clear_partition_events_on_leaving_partition_route);
         window.removeEventListener("resize", adjust_partition_diagram_margin_on_resize);
