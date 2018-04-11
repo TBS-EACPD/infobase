@@ -36,7 +36,7 @@ export function BudgetMeasuresA11yContent(){
   const ordered_col_header_text_keys = [
     "budget_measures",
     "budget_measure_descriptions",
-    "orgs_allocated_to_by_budget_measure",
+    "orgs_funded_by_budget_measure",
   ];
 
   return (
