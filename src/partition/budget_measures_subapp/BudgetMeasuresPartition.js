@@ -42,6 +42,8 @@ const popup_template = node => {
     year,
     value: node.__value__,
     value_is_negative: node.__value__ < 0,
+    value_is_zero: node.__value__ === 0,
+    lang_is_en: window.lang === "en",
     parent_name: node.parent.data.name,
     is_dept: node.data.type === "dept",
     is_budget_measure: node.data.type === "budget_measure",

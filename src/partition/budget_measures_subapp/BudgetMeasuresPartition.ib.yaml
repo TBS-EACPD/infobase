@@ -51,12 +51,20 @@ budget_measure_popup_template:
           {{gt "budget_in_year"}}
           {{gt "allocates"}}
         </text>
-        {{#if value_is_negative}}
-          <text style='color:red;'>
-            {{fmt_compact1 value}}
-          </text>
+        {{#if value_is_zero}}
+          {{#if lang_is_en}}
+            $0
+          {{else}}
+            0$
+          {{/if}}
         {{else}}
-          {{fmt_compact1 value}}
+          {{#if value_is_negative}}
+            <text style='color:red;'>
+              {{fmt_compact1 value}}
+            </text>
+          {{else}}
+            {{fmt_compact1 value}}
+          {{/if}}
         {{/if}}
         <text style='color:#fdfdfd'>
           {{#if first_column}}
