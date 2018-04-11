@@ -1,6 +1,9 @@
 /* eslint-disable no-console, no-debugger */
 const Subject = require("../models/subject");
-const {text_maker} = require('../models/text');
+const {
+  text_maker,
+  run_template,
+} = require('../models/text');
 const { GlossaryEntry } = require('../models/glossary.js')
 const { 
   infograph_href_template,
@@ -298,6 +301,11 @@ Handlebars.registerHelper("plus_or_minus_val",function(val,formater,context){
 // the correct language 
 Handlebars.registerHelper("gt",function(context){
   return text_maker(context);
+});
+
+// {{rt "key"}} -> runs template 
+Handlebars.registerHelper("rt",function(context){
+  return run_template(context);
 });
 
 // taken from [this recipe](http://doginthehat.com.au/2012/02/comparison-block-helper-for-handlebars-templates/)

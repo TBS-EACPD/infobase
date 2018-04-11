@@ -22,11 +22,7 @@ import {
 let year;
 
 const set_year_by_presentation_scheme = (presentation_scheme) => {
-  if (presentation_scheme === "est_doc_im") { 
-    year = "{{est_next_year}}_estimates";
-  } else {
-    year = "{{est_in_year}}_estimates";
-  }
+  year = get_year(presentation_scheme) + "_estimates";
 }
 
 const estimates_common_node_mapping = ({data_for_node_mapping, is, plural, glossary_entry_by_id_func}) => {
@@ -117,7 +113,7 @@ const est_doc_code_to_glossary_key_dictionary = {
   SEA: "SUPPSA",
   SEB: "SUPPSB",
   SEC: "SUPPSC",
-  IM: "INTER_EST",
+  //IM: "INTER_EST",
 };
 const get_glossary_entry_by_est_doc_code = (est_doc_code) => {
   const glossary_key = est_doc_code_to_glossary_key_dictionary[est_doc_code]
@@ -330,7 +326,7 @@ const planned_exp_popup_template = function(presentation_scheme, d){
     {}, 
     get_common_popup_options(d),
     {
-      year: presentation_scheme === "est_doc_im" ? run_template("{{est_next_year}}") : run_template("{{est_in_year}}"),
+      year: run_template( get_year(presentation_scheme) ),
       planned_exp: d.value,
       planned_exp_is_negative: d.value < 0,
       rpb_link: d.data.rpb_link,
@@ -372,7 +368,19 @@ const planned_exp_popup_template = function(presentation_scheme, d){
   }
 }
 
-const get_name = (presentation_scheme) => {
+const get_year = (presentation_scheme) => {
+  switch (presentation_scheme){
+    case "vs_type" : return "{{est_in_year}}";
+    case "est_doc_mains" : return "{{est_in_year}}";
+    default : return "{{est_last_year}}";
+  }
+}
+
+const year_text_fragment = (presentation_scheme) => {
+  return "(" + run_template( get_year(presentation_scheme) ) + ")";
+}
+
+const get_name_text_fragment = (presentation_scheme) => {
   switch (presentation_scheme){
     case "org_planned_spend" : return text_maker("orgs");
     case "est_type" : return text_maker("partition_est_type_perspective");
@@ -381,18 +389,22 @@ const get_name = (presentation_scheme) => {
     case "est_doc_sea" : return text_maker("est_doc_sea");
     case "est_doc_seb" : return text_maker("est_doc_seb");
     case "est_doc_sec" : return text_maker("est_doc_sec");
-    case "est_doc_im" : return text_maker("est_doc_im" );
+    case "est_doc_im" : return text_maker("est_doc_im");
   }
+}
+
+const get_name = (presentation_scheme) => {
+  return get_name_text_fragment(presentation_scheme) + " " + year_text_fragment(presentation_scheme);
 }
 
 const get_root_text_key = (presentation_scheme) => {
   switch (presentation_scheme){
-    case "est_doc_mains" : return "partition_spending_will_be_by_mains";
-    case "est_doc_sea" : return "partition_spending_will_be_by_sea";
-    case "est_doc_seb" : return "partition_spending_will_be_by_seb";
-    case "est_doc_sec" : return "partition_spending_will_be_by_sec";
-    case "est_doc_im" : return "partition_spending_will_be_by_im";
-    default : return "partition_spending_will_be";
+    case "est_doc_mains" : return "partition_spending_will_be_by_est_doc";
+    case "est_doc_sea" : return "partition_spending_will_be_by_est_doc";
+    case "est_doc_seb" : return "partition_spending_will_be_by_est_doc";
+    case "est_doc_sec" : return "partition_spending_will_be_by_est_doc";
+    case "est_doc_im" : return "partition_spending_will_be_by_est_doc";
+    default : return "partition_spending_will_be_variable_year";
   }
 }
 
@@ -403,7 +415,15 @@ const planned_exp_perspective_factory = (presentation_scheme) => new PartitionPe
   formater: node_data => wrap_in_brackets(formats_by_data_type["planned_exp"](node_data["planned_exp"])),
   hierarchy_factory: () => create_planned_spending_hierarchy("planned_exp", presentation_scheme),
   popup_template: _.curry(planned_exp_popup_template)(presentation_scheme),
-  root_text_func: root_value => text_maker(get_root_text_key(presentation_scheme), {x: root_value}),
+  root_text_func: root_value => text_maker(
+    get_root_text_key(presentation_scheme), 
+    {
+      x: root_value,
+      name: get_name_text_fragment(presentation_scheme),
+      year: get_year(presentation_scheme), 
+      clean_year: get_year(presentation_scheme).replace(/(\{)|(\})/g,""),
+    }
+  ),
   diagram_note_content: presentation_scheme === "est_doc_im" ? <TextMaker text_key={"partition_interim_estimates_def"} /> : false,
 })
 
