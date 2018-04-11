@@ -3,41 +3,42 @@
 // Partition diagram Style overwrites
 .budget-measure-partiton-area > .__partition__ > .partition-diagram {
   border-radius: 10px;
-}
 
-.budget-measure-partiton-area > .__partition__ > .partition-diagram > .header {
-  color: #333;
-  font-weight: $mediumFontWeight;
-}
+  & > .header {
+    color: #333;
+    font-size: 22px;
+    font-weight: $mediumFontWeight;
+  }
 
-.budget-measure-partiton-area > .__partition__ > .partition-diagram > .partition-content {
-  color: #333;
-  & > .partition-content-title,
-  & > .partition-right-ie-fix > .partition-content-title {
-    font-weight: $heavyFontWeight;
-  }
-  & > .partition-content-title.negative-value,
-  & > .partition-negative-title-backing > .negative-value {
-    color: #6f0000;
-  }
-  &.root > .partition-content-title {
-    font-weight: $heavyFontWeight;
-    & > a {
-      color: #333!important;
+  & > .partition-content {
+    color: #333;
+    & > .partition-content-title,
+    & > .partition-right-ie-fix > .partition-content-title {
+      font-weight: $heavyFontWeight;
     }
-  }
-}
+    & > .partition-content-title.negative-value,
+    & > .partition-negative-title-backing > .negative-value {
+      color: #6f0000;
+    }
+    &.root > .partition-content-title {
+      font-weight: $heavyFontWeight;
+      & > a {
+        color: #333!important;
+      }
+    }
 
-.budget-measure-partiton-area > .__partition__ > .partition-diagram > .partition-content > .partition-popup {
-  color: #fdfdfd;
-  background-color: #00104a;
-  & > .popup-pointer {
-  	border-right: 40px solid #00104a;
-  }
-  & > .popup-decription-text {
-    color: #fdfdfd;
-  }
-  & > .btn {
-    color: #333!important;
+    & > .partition-popup {
+      color: #fdfdfd;
+      background-color: #00104a;
+      & > .popup-pointer {
+      	border-right: 40px solid #00104a;
+      }
+      & > .popup-decription-text {
+        color: #fdfdfd;
+      }
+      & > .btn {
+        color: #333!important;
+      }
+    }
   }
 }
