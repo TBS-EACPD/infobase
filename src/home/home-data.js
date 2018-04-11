@@ -11,7 +11,7 @@ export default function(a11y_mode){
             columns: [ "{{est_in_year}}_estimates"], 
             dimension: 'by_estimates_doc', 
           }) :
-          "#FIXME_STEPHEN"
+          "#partition/est_doc_mains/planned_exp"
       ),
       is_new: true,
     },

@@ -28,7 +28,7 @@ class PanelHeading extends React.Component {
           { 
             React.createElement(
               this.props.headerType, 
-              {className: 'panel-title'}, //added padding to fix the thing -StephenONeil
+              {className: 'panel-title'},
               this.props.children
             ) 
           }
