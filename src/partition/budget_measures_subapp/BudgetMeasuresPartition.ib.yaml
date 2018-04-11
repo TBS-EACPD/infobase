@@ -99,7 +99,7 @@ budget_measure_popup_template:
     </div>
     {{#if is_budget_measure}}
       <div class='mrgn-bttm-md popup-row-bottom-border popup-row-top-border popup-font-m'>
-        {{gt "budget_chapter"}}: {{chapter}}
+        <text style='color:#fdfdfd'> {{gt "budget_chapter"}}: </text> {{chapter}}
       </div>
     {{/if}}
     {{#if is_dept}}
