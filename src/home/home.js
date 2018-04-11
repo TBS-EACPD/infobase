@@ -6,7 +6,6 @@ import { log_standard_event } from '../core/analytics.js';
 import MediaQuery from 'react-responsive';
 import classNames from 'classnames';
 
-
 import { 
   EverythingSearch,
   TM,
@@ -96,7 +95,7 @@ const HomeLayout = props => (
       <h2> <TM k="home_sub_title" /> </h2>
       <div className="search-box"><div className="search-container">
         <EverythingSearch 
-          include_gov={false} 
+          include_gov={false}
           search_text={text_maker('everything_search_placeholder')}
           large={true}
           include_tags={true}

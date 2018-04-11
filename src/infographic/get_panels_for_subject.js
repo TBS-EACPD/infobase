@@ -92,6 +92,7 @@ const get_gov_panels = subject => ({
   people: get_people_panels(subject),
   results: [
     "results_intro",
+    "dp_coming_soon",
     "gov_dp",
     "gov_drr",
   ],
