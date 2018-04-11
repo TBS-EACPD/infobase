@@ -213,7 +213,7 @@ export class PartitionDiagram {
       .merge(html_content_join)
       .each(function(d){
         d.DOM = this;
-        d.scaled_height = yscale(Math.abs(d.value) || 1);
+        d.scaled_height = yscale(Math.abs(d.value) || 1.0);
         d.polygon_links = new Map();
       })
       .classed("negative-value", d => d.value < 0)

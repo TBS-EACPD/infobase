@@ -129,7 +129,7 @@ export class PartitionDataWrapper {
 
       _.chain(children)
         .difference(node.children)
-        .filter(node => node.value!==0)
+        .filter(node => node.value !== "collapsed")
         .each(child => {
           child.eachAfter(d => {
             if (d.children){
@@ -197,10 +197,10 @@ export class PartitionDataWrapper {
     const siblings = parent.children.filter(d => (
       d !== node && 
       !this.magnified(d)  &&
-      d.value !== 0
+      d.value !== "collapsed"
     )); 
     _.each(siblings, d => {
-      d.value = 0
+      d.value = "collapsed"
       this.hide_all_children(d);
     })
   }
@@ -222,7 +222,7 @@ export class PartitionDataWrapper {
     return node.data.hidden_children || node.data.unhidden_children;
   }
   collapsed(node){
-    return _.some(node.ancestors(), d => d.value === 0);
+    return _.some(node.ancestors(), d => d.value === "collapsed");
   }
   magnified(node){
     return _.some(node.ancestors(), d => d.magnified);
