@@ -318,13 +318,24 @@ const HomeLayout = props => (
     <div className="equal-height-row equal-height-row--home-row">
       <div aria-hidden={true} className="equal-height-col is-1-third">
         <div className="col-content featured-col-content">
-          <HImageCard
-            img_src="partition-budget.png"
-            title_key="budget_home_title"
-            text_key="budget_home_text"
-            link_key="check_home_link"
-            link_href="#budget-measures/dept"
-          />
+          <MediaQuery minWidth={992}>
+            <HImageCard
+              img_src="partition-budget.png"
+              title_key="budget_home_title"
+              text_key="budget_home_text"
+              link_key="check_home_link"
+              link_href="#budget-measures/dept"
+            />
+          </MediaQuery>
+          <MediaQuery maxWidth={991}>
+            <VImageCard
+              img_src="partition-budget.png"
+              title_key="budget_home_title"
+              text_key="budget_home_text"
+              link_key="check_home_link"
+              link_href="#budget-measures/dept"
+            />
+          </MediaQuery>
         </div>
       </div>
     </div>
