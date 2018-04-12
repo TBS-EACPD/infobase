@@ -525,8 +525,8 @@ class BudgetMeasure extends common(){
     this.id = id;
     this.name = name;
     this.chapter_key = chapter_key;
-    this.orgs = _.map(funds, fund_row => fund_row[1]);
-    this.funds = funds; 
+    this.orgs = _.map(funds, fund_row => fund_row.org_id);
+    this.funds = funds;
   }
 };
 

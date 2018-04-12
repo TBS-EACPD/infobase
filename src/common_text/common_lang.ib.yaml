@@ -409,6 +409,9 @@ budget_chapters:
 budget_chapter:
   en: Budget Chapter
   fr: TODO
+budget_allocation_tbd:
+  en: Allocation to be determined
+  fr: Affectation à determiner
 see_the_infographic:
   en: See the Infographic
   fr: Voir l’infographie

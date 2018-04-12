@@ -1,4 +1,6 @@
 import * as Subject from '../../models/subject';
+import { text_maker } from "../../models/text";
+
 
 const absolute_value_sort = (a,b) => - ( Math.abs(a.value) - Math.abs(b.value) );
 
@@ -6,7 +8,7 @@ const get_total_budget_measure_funds = (filtered_chapter_keys) => {
   return _.chain( Subject.BudgetMeasure.get_all() )
     .filter( budgetMeasure => _.indexOf(filtered_chapter_keys, budgetMeasure.chapter_key) === -1 )
     .flatMap( budgetMeasure => budgetMeasure.funds )
-    .reduce( (sum, fund_row) => sum + (+fund_row[2]), 0 )
+    .reduce( (sum, fund_row) => sum + (fund_row.fund), 0 )
     .value();
 }
 
@@ -31,7 +33,7 @@ const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
             { 
               type: "budget_measure",
               chapter_key: budgetMeasure.chapter_key,
-              value: _.reduce(budgetMeasure.funds, (sum, fund_row) => sum + (+fund_row[2]), 0),
+              value: _.reduce(budgetMeasure.funds, (sum, fund_row) => sum + (fund_row.fund), 0),
             }
           ))
           .value();
@@ -39,24 +41,37 @@ const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
       } else if (node.type === "budget_measure"){
         const orgNodes = _.chain(node.funds)
           .map(fund_row => {
-            if (fund_row[1] === "non_allocated"){
+            if (fund_row.org_id === "non_allocated"){
               return _.assign(
                 {},
                 {
-                  name: "TODO: non allocated",
+                  name: text_maker("budget_allocation_tbd"),
                   mandate: "TODO",
                   type: "non_allocated",
                   id: 9999,
-                  value: +fund_row[2],
+                  value: fund_row.fund,
+                }
+              );
+            } else if (fund_row.org_id === "net_adjust"){
+              const net_adjust_measure = Subject.BudgetMeasure.lookup("net_adjust");
+
+              return _.assign(
+                {},
+                {
+                  name: net_adjust_measure.name,
+                  mandate: "TODO",
+                  type: "net_adjust",
+                  id: 9998,
+                  value: fund_row.fund,
                 }
               );
             } else {
               return _.assign(
                 {},
-                Subject.Dept.lookup(fund_row[1]),
-                { 
+                Subject.Dept.lookup(fund_row.org_id),
+                {
                   type: "dept",
-                  value: +fund_row[2],
+                  value: fund_row.fund,
                 }
               );
             }
@@ -76,7 +91,7 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
       _.indexOf(filtered_chapter_keys, budgetMeasure.chapter_key) === -1 
     )
     .flatMap( budgetMeasure => budgetMeasure.funds )
-    .groupBy( fund_row => fund_row[1] )
+    .groupBy( fund_row => fund_row.org_id )
     .value();
    
   return d3.hierarchy(
@@ -92,10 +107,23 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
             return _.assign(
               {},
               { 
-                name: "TODO: non allocated",
+                name: text_maker("budget_allocation_tbd"),
                 mandate: "TODO",
                 type: "non_allocated",
                 id: 9999,
+                fund_rows,
+              }
+            );
+          } else if (org_id === "net_adjust"){
+            const net_adjust_measure = Subject.BudgetMeasure.lookup("net_adjust");
+
+            return _.assign(
+              {},
+              { 
+                name: net_adjust_measure.name,
+                mandate: "TODO",
+                type: "net_adjust",
+                id: 9998,
                 fund_rows,
               }
             );
@@ -111,16 +139,16 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
           }
         });
         return deptNodes;
-      } else if (node.type === "dept" || node.type === "non_allocated"){
+      } else if (node.type === "dept" || node.type === "non_allocated" || node.type === "net_adjust"){
         const budgetMeasureNodes = _.map(node.fund_rows, fund_row => {
-          const budgetMeasure = Subject.BudgetMeasure.lookup(fund_row[0]);
+          const budgetMeasure = Subject.BudgetMeasure.lookup(fund_row.measure_id);
           return _.assign(
             {},
             budgetMeasure,
             { 
               type: "budget_measure",
               chapter_key: budgetMeasure.chapter_key,
-              value: +fund_row[2],
+              value: fund_row.fund,
             }
           );
         });
