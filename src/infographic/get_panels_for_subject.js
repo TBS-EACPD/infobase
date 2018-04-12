@@ -44,7 +44,7 @@ import '../panels/historical_auth_exp/historical_auth_exp.js';
 //tag-only panels
 import '../panels/tag_panels/resource_structure.js'
 import '../panels/tag_panels/goco.js';
-import '../panels/tag_panels/top_3_dept_graph.js';
+// import '../panels/tag_panels/top_3_dept_graph.js';
 
 //dp/drr stuff but not results
 import '../panels/drr_dp_resources/drr_planned_actual.js';
@@ -218,17 +218,18 @@ const get_tag_panels = subject => {
       'tag_progs_by_dept',
     ],
     structure: [ 'resource_structure' ],
-    financial: [
-      'm2m_warning',
-      "financial_intro", 
-      "welcome_mat",
-      'tag_top_3_depts',
-      "historical_auth_exp",
-      "vote_stat_split",
-      'spend_rev_split',
-      'top_spending_areas',
-      'detailed_program_spending_split',
-    ],
+    //Financial turned off indefinitely
+    // financial: [
+    //   'm2m_warning',
+    //   "financial_intro", 
+    //   "welcome_mat",
+    //   'tag_top_3_depts',
+    //   "historical_auth_exp",
+    //   "vote_stat_split",
+    //   'spend_rev_split',
+    //   'top_spending_areas',
+    //   'detailed_program_spending_split',
+    // ],
     related: [
       'related_tags',
       'sibling_tags',

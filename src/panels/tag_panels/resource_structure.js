@@ -1,3 +1,4 @@
+import './tag_panel_text.ib.yaml';
 import classNames from 'classnames';
 import { combineReducers, createStore }  from 'redux';
 import { Provider, connect } from 'react-redux';
