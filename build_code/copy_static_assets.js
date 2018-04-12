@@ -102,6 +102,7 @@ const common_png = [
 
   //caricature images for main 5 pages
   'src/home/partition.png',
+  'src/home/partition-budget.png',
   'src/home/bubbles.png',
   'src/home/Builder.png',
   'src/home/structure_panel.png',

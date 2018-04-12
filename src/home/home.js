@@ -23,6 +23,7 @@ import { Table } from '../core/TableClass.js';
 import { StandardRouteContainer } from '../core/NavComponents.js';
 
 const HImageCard = ({
+  img_src,
   title_key,
   text_key,
   link_key,
@@ -30,6 +31,16 @@ const HImageCard = ({
   text_args,
 }) => (
   <div className="h-img-card col-content-child">
+    { img_src && 
+      <div className="h-img-card__left">
+        <a className="h-img-card__img-link" href={link_href}>
+          <img
+            src={`${CDN_URL}/png/${img_src}`}
+            className="h-img-card__img" 
+          />
+        </a>
+      </div>
+    }
     <div className="h-img-card__right-container">
       <div className="h-img-card__right">
         <header className="h-img-card__title">
@@ -303,6 +314,19 @@ const HomeLayout = props => (
 
     <div className="external-row-descriptor">
       <TM k="home_featured_row_title" />
+    </div>
+    <div className="equal-height-row equal-height-row--home-row">
+      <div aria-hidden={true} className="equal-height-col is-1-third">
+        <div className="col-content featured-col-content">
+          <HImageCard
+            img_src="partition-budget.png"
+            title_key="budget_home_title"
+            text_key="budget_home_text"
+            link_key="check_home_link"
+            link_href="#budget-measures/dept"
+          />
+        </div>
+      </div>
     </div>
     <div className="equal-height-row equal-height-row--home-row">
       <div aria-hidden={true} className="equal-height-col is-1-third">
