@@ -12,11 +12,11 @@ import { BudgetMeasuresA11yContent } from './BudgetMeasuresA11yContent.js';
 const first_column_options = [
   {
     id: "dept",
-    display: text_maker("by") + " " + text_maker("org"),
+    display: text_maker("org"),
   },
   {
     id: "budget-measure",
-    display: text_maker("by") + " " + text_maker("budget_measure"),
+    display: text_maker("budget_measure"),
   },
 ];
 
