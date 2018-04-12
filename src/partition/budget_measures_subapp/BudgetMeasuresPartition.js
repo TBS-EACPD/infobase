@@ -53,7 +53,8 @@ const popup_template = node => {
     color: node.color,
     description: !_.isUndefined(node.data.mandate) && node.data.mandate,
     chapter: !_.isUndefined(node.data.chapter_key) && budget_chapters[node.data.chapter_key].text,
-    first_column: node.depth === 1,
+    is_first_column: node.depth === 1,
+    add_reference_to_parent: node.depth === 2 && node.data.type !== "net_adjust",
     focus_text: node.magnified ? text_maker("partition_unfocus_button") : text_maker("partition_focus_button"),
   };
   return text_maker("budget_measure_popup_template", popup_options);

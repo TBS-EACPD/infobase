@@ -72,7 +72,7 @@ budget_measure_popup_template:
           {{/if}}
         {{/if}}
         <text style='color:#fdfdfd'>
-          {{#if first_column}}
+          {{#if is_first_column}}
             {{gt "total_lower_case"}} 
           {{else}}
             {{gt "single_word_in"}}
@@ -88,8 +88,7 @@ budget_measure_popup_template:
       <span class='stat1 popup-font-l'>
         {{name}}
       </span>
-      {{#if first_column}}
-      {{else}}
+      {{#if add_reference_to_parent}}
         <span class='stat1 popup-font-m' style='color:#fdfdfd'>
           {{#if is_dept}}
             {{gt "single_word_for"}}
@@ -117,7 +116,7 @@ budget_measure_popup_template:
         {{gt "see_the_infographic"}}
       </a>
     {{/if}}
-    {{#if first_column}} 
+    {{#if is_first_column}} 
       <a href='#' 
         class='btn btn-xs btn-block mrgn-bttm-sm magnify'  
         style='background-color:{{color}};'>
