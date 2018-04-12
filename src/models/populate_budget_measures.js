@@ -1,7 +1,7 @@
-import { BudgetMeasure }from './subject';
+import { BudgetMeasure } from './subject';
 import { fetch_and_inflate } from '../core/utils.js';
 
-const parse_csv_string = csv_string => _.tail(d3.csvParseRows($.trim(csv_string)));
+const parse_csv_string = csv_string => _.tail( d3.csvParseRows( $.trim(csv_string) ) );
 
 const load_csv = csv_name => (
   window.binary_download && !window.isIE() ? 

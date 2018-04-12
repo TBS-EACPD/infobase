@@ -14,7 +14,7 @@ const { budget_chapters } = businessConstants;
 const year = run_template("{{planning_year_2}}");
 
 const formatter = node => {
-  const in_billions = node.__value__ >= 1*Math.pow(10,9);
+  const in_billions = node.__value__ >= 1*Math.pow(10, 9);
   const format = in_billions ? formats.compact1 : formats.compact;
   return " (" + format(node.__value__) + ")";
 }
@@ -33,9 +33,9 @@ const get_level_headers = (first_column) => {
   }
 }
 
-const default_root_text_func = root_value => text_maker("budget_measures_partition_root", {root_value: root_value, year});
+const default_root_text_func = root_value => text_maker("budget_measures_partition_root", {root_value, year});
 
-const filtered_root_text_func = root_value => text_maker("budget_measures_partition_root_filtered", {root_value: root_value, year});
+const filtered_root_text_func = root_value => text_maker("budget_measures_partition_root_filtered", {root_value, year});
 
 const popup_template = node => {
   const popup_options = {
@@ -62,7 +62,7 @@ const popup_template = node => {
 
 function center_diagram(){
   if (this.refs.outer_container){
-    this.refs.outer_container.style.marginLeft = ( -d3.select("main.container").node().offsetLeft + 5 ) + "px";
+    this.refs.outer_container.style.marginLeft = ( -d3.select("main.container").node().offsetLeft + 4 ) + "px";
   }
 }
 
@@ -112,7 +112,7 @@ export class BudgetMeasuresPartition extends React.Component {
       <div
         ref="outer_container"
         style={{
-          marginLeft: ( -d3.select("main.container").node().offsetLeft + 5 ) + "px",
+          marginLeft: ( -d3.select("main.container").node().offsetLeft + 4 ) + "px",
           width: "98vw",
           marginTop: "10px",
         }}
