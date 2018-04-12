@@ -79,7 +79,7 @@ const example_data = [
       spend: "20000",
       ftes: "25",
     },
-    is_expanded: true,
+    isExpanded: true,
     children: [
       {
         id: 'a1',
@@ -99,6 +99,37 @@ const example_data = [
       spend: "23530",
       ftes: "42",
     },
+    isExpanded:true,
+    children_groups: [
+      {
+        display: "Programs",
+        node_group: [
+          {
+            id: 'a1eee',
+            data: {
+              name: "node 1.1",
+              spend: "2000",
+              ftes: "5",
+            },
+            is_search_match: true,
+          },
+        ],
+      },
+      {
+        display: "results",
+        node_group: [
+          {
+            id: 'b-results-1',
+            data: {
+              name: "b-results-1",
+              spend: "2000",
+              ftes: "5",
+            },
+            is_search_match: true,
+          },
+        ],
+      },
+    ],
   },
 ];
 
@@ -132,19 +163,71 @@ export const ExplorerHeader = ({column_defs, is_sortable, sort_col, is_descendin
 
 };
 
+/*
+  children_groups: [{display,node_group},...]
+*/
+const get_children_content = ({
+  node,
+  node: {
+    children,
+    children_groups,
+  },
+  explorer_context,
+  depth,
+}) => {
+  
+  const children_group_list = children_groups || !_.isEmpty(children) && [{ node_group:children }]
 
+  return _.map(children_group_list, ({display, node_group},ix) => (
+    <div
+      key={ix}
+      className="ExplorerNodeContainer__ChildrenContainer"
+    >
+      {display && 
+        <header 
+          className="ExplorerNodeContainer__ChildrenGroupHeader"
+          style={{
+            marginLeft: depth && `${depth*INDENT_SIZE}px`,
+          }}
+        >
+          {display}
+        </header>
+      }
+      <FlipMove
+        typeName="ul"
+        className="ExplorerNodeContainer__ChildrenList"  
+        staggerDurationBy="0"
+        duration={500}
+      >
+        {_.map(node_group, (child_node, ix) => 
+          <li key={child_node.id}>
+            <ExplorerNode
+              depth={depth}
+              explorer_context={explorer_context}
+              node={child_node}
+              mod_class={get_mod_class(child_node,ix,explorer_context)}
+            />
+          </li>
+        )}
+      </FlipMove>
+    </div>
+  ));
+
+};
 export const ExplorerNode = ({
   explorer_context,
   explorer_context: {
     column_defs,
     onClickExpand,
     computed_col_styles,
+    get_non_col_content,
+    children_grouper,
   },
   node,
   mod_class,
   node: {
     id,
-    is_expanded,
+    isExpanded,
     data,
     children,
   },
@@ -160,7 +243,7 @@ export const ExplorerNode = ({
           className={classNames("ExplorerNode__Expander", window.is_a11y_mode && "ExplorerNode__Expander--a11y-compliant")}
           onClick={()=>onClickExpand(id)}
         >
-          { is_expanded ? "▼" : "►" }
+          { isExpanded ? "▼" : "►" }
         </button>
       </div>
       <div className="ExplorerNode__ContentContainer">
@@ -185,40 +268,26 @@ export const ExplorerNode = ({
           </div>
         </div>
         <ReactTransitionGroup component={FirstChild}>
-          { is_expanded && 
+          { isExpanded && 
             <AccordionEnterExit
               component="div"
               expandDuration={500}
               collapseDuration={300}
             >
               <div className="ExplorerNode__SuppContent">
-                additional content
+                {_.isFunction(get_non_col_content) && get_non_col_content({node})}
               </div>
             </AccordionEnterExit>
           }
         </ReactTransitionGroup>
       </div>
     </div>
-    { is_expanded && !_.isEmpty(children) && 
-      <div className="ExplorerNodeContainer__ChildrenContainer">
-        <FlipMove
-          typeName="ul" 
-          className='ExplorerNodeContainer__ChildrenList'
-          staggerDurationBy="0"
-          duration={500}
-        >
-          {_.map(children, (child_node, ix) => 
-            <li key={child_node.id}>
-              <ExplorerNode
-                depth={depth+1}
-                explorer_context={explorer_context}
-                node={child_node}
-                mod_class={get_mod_class(child_node,ix,explorer_context)}
-              />
-            </li>
-          )}
-        </FlipMove>
-      </div>
+    { isExpanded && 
+      get_children_content({
+        node,
+        depth: depth+1,
+        explorer_context,
+      })
     }
   </div>
 );
@@ -378,6 +447,11 @@ export class DevStuff extends React.Component {
       sort_col: "name",
       is_descending: false,
       zebra_stripe: true,
+      get_non_col_content: ({node}) => (
+        <div className="ExplorerNode__BRLinkContainer">
+          <a href="#"> Infographic Link </a>
+        </div>
+      ),
     };
 
     return (
