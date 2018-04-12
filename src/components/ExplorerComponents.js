@@ -8,64 +8,64 @@ import {
   TM,
   SortIndicators,
 } from '../util_components.js';
+import { createSelector } from 'reselect';
 
+const INDENT_SIZE = 24;
 
 const example_col_defs = [
   {
     id: 'name',
-    style: {
-      marginRight: "auto",
-      flex: "1 1 250px",
-    },
-    header_style: {
-      marginRight: "auto",
-      flex: "1 1 250px",
-      textAlign: "center",
-    },
+    width: 250,
+    textAlign: "left",
     header_display: "Name",
     get_val: ({data}) => data.name,
   },
   {
     id: "spend",
-    style:{
-      padding: "0 5px 0 5px",
-      textAlign: "right",
-      flex: "0 0 200px",
-      marginLeft:"auto",
-    },
+    width: 150,
+    textAlign: "right",
+    header_display: "Spending",
+    get_val: ({data}) => data.spend,
+  },
+  {
+    id: "spend1",
+    width: 150,
+    textAlign: "right",
+    header_display: "Spending",
+    get_val: ({data}) => data.spend,
+  },
+  {
+    id: "spend11",
+    width: 150,
+    textAlign: "right",
+    header_display: "Spending",
+    get_val: ({data}) => data.spend,
+  },
+  {
+    id: "spend112",
+    width: 150,
+    textAlign: "right",
     header_display: "Spending",
     get_val: ({data}) => data.spend,
   },
   {
     id: "spend2",
-    style:{
-      padding: "0 5px 0 5px",
-      textAlign: "right",
-      flex: "0 0 200px",
-      marginLeft:"auto",
-    },
-    header_display: "Spending2",
+    width: 150,
+    textAlign: "right",
+    header_display: "Spending",
     get_val: ({data}) => data.spend,
   },
   {
     id: "spend3",
-    style:{
-      padding: "0 5px 0 5px",
-      textAlign: "right",
-      flex: "0 0 200px",
-      marginLeft:"auto",
-    },
-    header_display: "Spending3",
+    width: 150,
+    textAlign: "right",
+    header_display: "Spending",
     get_val: ({data}) => data.spend,
   },
   {
     id: "ftes",
-    style:{
-      padding: "0 5px 0 5px",
-      textAlign: "right",
-      flex: "0 0 200px",
-      paddingRight: "10px",
-    },
+    width: 150,
+    textAlign: "right",
     header_display: "FTEs",
     get_val: ({data}) => data.ftes,
   },
@@ -102,16 +102,20 @@ const example_data = [
   },
 ];
 
-export const ExplorerHeader = ({column_defs, is_sortable, sort_col, is_descending}) => {
+export const ExplorerHeader = ({column_defs, is_sortable, sort_col, is_descending, computed_col_styles}) => {
 
   return (
     <div className="ExplorerHeader ExplorerHeader--blue">
       <div className="ExplorerRow">
-        {_.map(column_defs, ({id, style, header_style, header_display})=> 
+        {_.map(column_defs, ({id, style, header_display}, ix)=> 
           <div
             key={id}
             className="ExplorerRow__Cell"
-            style={header_style || style}
+            style={
+              ix === 0 ? 
+              Object.assign({},computed_col_styles[id], { textAlign: "center" }) :
+              computed_col_styles[id]
+            }
           >
             {header_display}
             {is_sortable && 
@@ -134,6 +138,7 @@ export const ExplorerNode = ({
   explorer_context: {
     column_defs,
     onClickExpand,
+    computed_col_styles,
   },
   node,
   mod_class,
@@ -143,69 +148,80 @@ export const ExplorerNode = ({
     data,
     children,
   },
-}) => <div className="ExplorerNodeContainer">
-  <div className={classNames("ExplorerNode", mod_class)}>
-    <div className="ExplorerNode__ExpanderContainer">
-      <button
-        className={classNames("ExplorerNode__Expander", window.is_a11y_mode && "ExplorerNode__Expander--a11y-compliant")}
-        onClick={()=>onClickExpand(id)}
-      >
-        { is_expanded ? "▼" : "►" }
-      </button>
-    </div>
-    <div className="ExplorerNode__ContentContainer">
-      <div
-        className="ExplorerNode__RowContainer"
-        onClick={()=>onClickExpand(id)}
-      >
-        <div className="ExplorerRow">
-          {_.map(column_defs, ({id, style, get_val }) =>
-            <div 
-              key={id}
-              className="ExplorerRow__Cell"
-              style={style}
-            >
-              {get_val(node)}
-            </div>
-          )}
-        </div>
+  depth,
+}) => (
+  <div 
+    style={{marginLeft: depth && `${INDENT_SIZE}px`}}
+    className="ExplorerNodeContainer"
+  >
+    <div className={classNames("ExplorerNode", mod_class)}>
+      <div className="ExplorerNode__ExpanderContainer">
+        <button
+          className={classNames("ExplorerNode__Expander", window.is_a11y_mode && "ExplorerNode__Expander--a11y-compliant")}
+          onClick={()=>onClickExpand(id)}
+        >
+          { is_expanded ? "▼" : "►" }
+        </button>
       </div>
-      <ReactTransitionGroup component={FirstChild}>
-        { is_expanded && 
-          <AccordionEnterExit
-            component="div"
-            expandDuration={500}
-            collapseDuration={300}
-          >
-            <div className="ExplorerNode__SuppContent">
-              additional content
-            </div>
-          </AccordionEnterExit>
-        }
-      </ReactTransitionGroup>
+      <div className="ExplorerNode__ContentContainer">
+        <div
+          className="ExplorerNode__RowContainer"
+          onClick={()=>onClickExpand(id)}
+        >
+          <div className="ExplorerRow">
+            {_.map(column_defs, ({id, width, get_val },ix) =>
+              <div 
+                key={id}
+                className="ExplorerRow__Cell"
+                style={
+                  ix===0 ? 
+                  Object.assign({}, computed_col_styles[id], {flex : `1 0 ${width-depth*INDENT_SIZE}px`}) :
+                  computed_col_styles[id]
+                }
+              >
+                {get_val(node)}
+              </div>
+            )}
+          </div>
+        </div>
+        <ReactTransitionGroup component={FirstChild}>
+          { is_expanded && 
+            <AccordionEnterExit
+              component="div"
+              expandDuration={500}
+              collapseDuration={300}
+            >
+              <div className="ExplorerNode__SuppContent">
+                additional content
+              </div>
+            </AccordionEnterExit>
+          }
+        </ReactTransitionGroup>
+      </div>
     </div>
+    { is_expanded && !_.isEmpty(children) && 
+      <div className="ExplorerNodeContainer__ChildrenContainer">
+        <FlipMove
+          typeName="ul" 
+          className='ExplorerNodeContainer__ChildrenList'
+          staggerDurationBy="0"
+          duration={500}
+        >
+          {_.map(children, (child_node, ix) => 
+            <li key={child_node.id}>
+              <ExplorerNode
+                depth={depth+1}
+                explorer_context={explorer_context}
+                node={child_node}
+                mod_class={get_mod_class(child_node,ix,explorer_context)}
+              />
+            </li>
+          )}
+        </FlipMove>
+      </div>
+    }
   </div>
-  { is_expanded && !_.isEmpty(children) && 
-    <div className="ExplorerNodeContainer__ChildrenContainer">
-      <FlipMove
-        typeName="ul" 
-        className='ExplorerNodeContainer__ChildrenList'
-        staggerDurationBy="0"
-        duration={500}
-      >
-        {_.map(children, (child_node, ix) => 
-          <li key={child_node.id}>
-            <ExplorerNode
-              explorer_context={explorer_context}
-              node={child_node}
-              mod_class={get_mod_class(child_node,ix,explorer_context)}
-            />
-          </li>
-        )}
-      </FlipMove>
-    </div>
-  }
-</div>;
+);
 
 
 function get_mod_class(node, sibling_index, explorer_context){
@@ -232,6 +248,7 @@ const ExplorerRoot = ({nodes, explorer_context}) => <div>
           explorer_context={explorer_context}
           node={node}
           mod_class={get_mod_class(node,ix,explorer_context)}
+          depth={0}
         />
       </li>
     )}
@@ -261,9 +278,100 @@ const ExplorerRoot = ({nodes, explorer_context}) => <div>
 
 */ 
 
+const compute_col_styles = createSelector(_.identity, col_defs => {
+
+  return _.chain(col_defs)
+    .map( ({id, width, textAlign}, ix) => {
+      let marginRight = null;
+      let marginLeft = null;
+      let padding = "0 5px";
+      let flex = `0 0 ${width}px`;
+      if(ix===0){
+        flex = `1 1 ${width}px`;  
+        if(col_defs.length > 5){
+          flex = `1 1 ${width+300}px`;    
+        }
+        marginRight = "auto";
+      } else {
+        if(ix === example_col_defs.length - 1){ //last col
+          padding = "0 10px 0 5px";
+        } else {
+          marginLeft = "auto";
+        }
+      }
+
+      return [
+        id,
+        {
+          marginLeft,
+          marginRight,
+          padding,
+          flex,
+          textAlign,
+          width: "100%", //IE
+        },
+      ];
+
+
+    })
+    .fromPairs()
+    .value();
+
+});
+
+class ExplorerContainer extends React.Component {
+  componentDidMount(){
+    this.updateWidth();
+  }
+  componentDidUpdate(){
+    this.updateWidth();
+  }
+  updateWidth(){
+    const { width_setter_el } = this;
+    const width = _.get(
+      width_setter_el.querySelector(".ExplorerNode"),  //the first row, but not the header
+      "scrollWidth"
+    );
+    if(_.isNumber(width) && width > width_setter_el.parentNode.clientWidth){
+      width_setter_el.style.minWidth = `${width}px`;
+    } else {
+      width_setter_el.style.minWidth = null;
+    }
+
+  }
+  render(){
+
+    const { 
+      config,
+      config: {
+        column_defs,
+      },
+      nodes,
+    } = this.props;
+
+    const computed_col_styles = compute_col_styles(column_defs);
+    
+    const explorer_context = Object.assign({computed_col_styles}, config);
+
+    return (
+      <div style={{overflowX: "auto"}}>
+        <div ref={el => this.width_setter_el = el}> 
+          <ExplorerHeader {...explorer_context}/>
+          <ExplorerRoot
+            explorer_context={explorer_context}
+            nodes={nodes}
+          />
+        </div>
+      </div>
+    );
+  }
+}
+
+
 export class DevStuff extends React.Component {
   render(){
-    const explorer_context = {
+
+    const explorer_config = {
       column_defs: example_col_defs,
       onClickExpand: _.noop,
       is_sortable: true,
@@ -274,10 +382,9 @@ export class DevStuff extends React.Component {
 
     return (
       <div>
-        <ExplorerHeader {...explorer_context}/>
-        <ExplorerRoot
-          explorer_context={explorer_context}
+        <ExplorerContainer
           nodes={example_data}
+          config={explorer_config}
         />
       </div>
     );
