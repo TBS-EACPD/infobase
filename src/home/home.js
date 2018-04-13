@@ -317,7 +317,7 @@ const HomeLayout = props => (
     </div>
     <div className="equal-height-row equal-height-row--home-row">
       <div aria-hidden={true} className="equal-height-col is-1-third">
-        <div className="col-content featured-col-content">
+        <div className="col-content featured-col-content partition-budget-home-content">
           <MediaQuery minWidth={992}>
             <HImageCard
               img_src="partition-budget.png"

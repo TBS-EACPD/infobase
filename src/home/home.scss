@@ -580,3 +580,21 @@
     background-repeat: no-repeat;
   }
 }
+
+.partition-budget-home-content {
+  & > .h-img-card > .h-img-card__left {
+    flex: 0 0 32.5%;
+
+    & > a > img {
+      @media(min-width:1200px){
+        width: 316px;
+      }
+      @media(max-width:1199px){
+        width: 91%;
+      }
+    }
+  }
+  & > .v-img-card > .v-img-card__top-container > .v-img-card__top > a > img {
+    width: 360px;
+  }
+}
