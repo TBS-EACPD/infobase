@@ -385,17 +385,3 @@ budget_chapters:
   oth:
     en: Other
     fr: Autre
-
-budget_chapter_links:
-  grw:
-    en: https://www.budget.gc.ca/2018/docs/plan/chap-01-en.html
-    fr: https://www.budget.gc.ca/2018/docs/plan/chap-01-fr.html
-  prg:
-    en: https://www.budget.gc.ca/2018/docs/plan/chap-02-en.html
-    fr: https://www.budget.gc.ca/2018/docs/plan/chap-02-fr.html
-  adv:
-    en: https://www.budget.gc.ca/2018/docs/plan/chap-03-en.html
-    fr: https://www.budget.gc.ca/2018/docs/plan/chap-03-fr.html
-  rec:
-    en: https://www.budget.gc.ca/2018/docs/plan/chap-04-en.html
-    fr: https://www.budget.gc.ca/2018/docs/plan/chap-04-fr.html

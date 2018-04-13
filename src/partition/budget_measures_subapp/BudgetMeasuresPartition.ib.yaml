@@ -120,8 +120,8 @@ budget_measure_popup_template:
         {{{description}}}
       </div>
     {{/if}}
-    {{#if ref_id}}
-      <a href='{{chapter_link}}#{{ref_id}}' 
+    {{#if budget_link}}
+      <a href='{{budget_link}}' 
         class='btn btn-xs btn-block mrgn-bttm-sm infographic' 
         style='background-color:{{color}};'>
         {{gt "see_it_in_the_budget"}}
