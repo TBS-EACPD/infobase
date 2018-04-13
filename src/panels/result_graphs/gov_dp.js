@@ -1,6 +1,6 @@
 import './gov_dp_text.ib.yaml';
 
-const { DpComingSoonContent } = require('../../components/dp-coming-soon.js');
+const { DpComingSoonPanel } = require('../../components/dp-coming-soon.js');
 const {
   Subject: {
     Dept,
@@ -222,7 +222,7 @@ new PanelGraph({
   render(panel){
     const el = panel.areas().graph.node();
     reactAdapter.render(
-      <DpComingSoonContent />,
+      <DpComingSoonPanel />,
       el
     );
   },

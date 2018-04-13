@@ -2,34 +2,87 @@ import './dp-coming-soon.ib.yaml';
 import { Dept } from '../models/subject.js'
 import { 
   TM,
-  AutoAccordion,
 } from '../util_components.js';
 
+
+
 const late_depts = [
-  "HRSD",
-  "TBC",
-  "FIN",
-  "ACOA",
-  "ND",
+  86,
+  99,
+  297,
+  133,
+  128,
+  129,
+  348,
+  237,
+  238,
+  250,
+  135,
+  136,
+  282,
+  302,
+  305,
 ];
 
-export const DpComingSoon = () => <div>
-  <AutoAccordion 
-    title={<TM k="dp_coming_soon_title" />}
-    usePullDown
-  >
-    <div style={{margin: "1rem 1.5rem", fontSize: "1.2em"}}>
-      <DpComingSoonContent />
+export const DpComingSoonHomeComponent = () => {
+  
+  
+  return (
+    <div
+      style={{
+        border: "4px solid #576675",
+        borderRadius: "10px",
+        padding: "1rem 2rem",
+      }}
+      className="large_panel_text"
+    >
+      <div>      
+        <TM k="dp_coming_soon__depts" />
+      </div>
+      <div 
+        style={{
+          display: "flex",
+          flexWrap: "nowrap",
+          flexDirection: "row",
+          overflowX: "auto",
+        }}
+      >
+        {
+          _.chain(late_depts)
+            .map(dept_code =>  Dept.lookup(dept_code).sexy_name )
+            .sortBy() //alphebetical
+            .chunk(5)
+            .map( (group,ix) => 
+              <div 
+                key={ix}
+                style={{
+                  flex: "0 0 auto",
+                }}
+              >
+                <ul>
+                  {_.map(group, dept => 
+                    <li key={dept}>
+                      {dept}
+                    </li>
+                  )}
+                </ul>
+              </div>
+            )
+            .value()
+        }
+      </div>
     </div>
-  </AutoAccordion>
-</div>;
+  );
+}
 
 
-export const DpComingSoonContent = () => <div>
-  <TM k="dp_coming_soon__depts" />
+export const DpComingSoonPanel = () => <div>
+  <TM k="dp_coming_soon__depts"/>
   <ul>
     {_.map(late_depts, dept_code => 
       <li key={dept_code}> {Dept.lookup(dept_code).sexy_name} </li>
     )}
   </ul>
 </div>;
+
+

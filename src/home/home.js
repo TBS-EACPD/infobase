@@ -3,7 +3,7 @@ import './home.scss';
 import './home-pngs.css';
 import get_home_content from './home-data.js';
 import { log_standard_event } from '../core/analytics.js';
-import { DpComingSoon } from '../components/dp-coming-soon.js'
+import { DpComingSoonHomeComponent } from '../components/dp-coming-soon.js'
 import MediaQuery from 'react-responsive';
 import classNames from 'classnames';
 
@@ -151,7 +151,7 @@ const FeaturedContentItem = ({ text_key, href, is_new }) => <li className="list-
 const HomeLayout = props => (
   <div className="home-root">
     <div style={{padding: "10px 0"}}>
-      <DpComingSoon />
+      <DpComingSoonHomeComponent />
     </div>
     <div className="intro-box">
       <h1> <TM k="welcome" /> </h1>
