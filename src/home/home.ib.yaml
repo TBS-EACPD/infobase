@@ -18,8 +18,8 @@ home_ppl_title:
 
 home_ppl_intro:
   transform: [handlebars,markdown]
-  en: The Federal Public Service counted {{fmt_big_int_real headcount_last_year}} employees at the end of the fiscal year {{pa_last_year}}
-  fr: La Fonction publique fédérale comptait {{fmt_big_int_real headcount_last_year}} employés à la fin de l'exercice {{pa_last_year}}
+  en: The Federal Public Service counted {{fmt_big_int_real headcount_last_year}} employees at the end of {{ppl_last_year}}
+  fr: La Fonction publique fédérale comptait {{fmt_big_int_real headcount_last_year}} employés à la fin de {{ppl_last_year}}
 
 home_ppl_link:
   en: See who they are 
