@@ -28,6 +28,7 @@ _.each(["dept","crso","program"], level => {
       full: {graph: 12},       
     },
     machinery_footnotes : false,
+    footnotes : ["PLANNED_EXP"],
     title :"dp_rev_split_title",
     text : "dp_rev_split_text",
     calculate(subject,info){
