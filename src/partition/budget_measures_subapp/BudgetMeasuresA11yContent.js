@@ -11,6 +11,8 @@ import { TextMaker } from '../../util_components.js';
 
 import { budget_measures_hierarchy_factory } from './budget_measures_hierarchy_factory.js';
 
+import { make_budget_link } from './budget_utils.js';
+
 import * as businessConstants from '../../models/businessConstants.yaml';
 
 const { budget_chapters } = businessConstants;
@@ -36,6 +38,7 @@ export function BudgetMeasuresA11yContent(){
   const ordered_col_header_text_keys = [
     "budget_measures",
     "budget_measure_descriptions",
+    "budget_measure_link_header",
     "orgs_funded_by_budget_measure",
   ];
 
@@ -87,7 +90,28 @@ export function BudgetMeasuresA11yContent(){
                       scope="row"
                       rowSpan={ budget_measure.children.length }
                     >
-                      { "TODO: budget measure descriptions" }
+                      { !_.isEmpty(budget_measure.data.description) && 
+                        budget_measure.data.description 
+                      }
+                      { _.isEmpty(budget_measure.data.description) && 
+                        text_maker("not_found_in_budget_text") 
+                      }
+                    </td>
+                    <td
+                      key={ "measure_link" + budget_measure.data.id }
+                      scope="row"
+                      rowSpan={ budget_measure.children.length }
+                    >
+                      { budget_measure.data.chapter_key !== "oth" && !_.isEmpty(budget_measure.data.ref_id) && 
+                        <a
+                          href = {make_budget_link(budget_measure.data.chapter_key, budget_measure.data.ref_id)}
+                        >
+                          { text_maker("budget_section_for") + ": " + budget_measure.data.name }
+                        </a>
+                      }
+                      { budget_measure.data.chapter_key === "oth" || _.isEmpty(budget_measure.data.ref_id) && 
+                        text_maker("not_found_in_budget_text") 
+                      }
                     </td>
                     <td
                       key={ "measure" + budget_measure.data.id + "-org" + budget_measure.children[0].data.id }

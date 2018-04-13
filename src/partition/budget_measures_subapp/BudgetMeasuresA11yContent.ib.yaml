@@ -16,3 +16,17 @@ budget_measures_partition_a11y_chapter_table_caption:
 orgs_funded_by_budget_measure:
   en: Organizations Funded by Budget Measure
   fr: TODO
+
+budget_section_for:
+  en: Budget section for
+  fr: TODO
+
+budget_measure_link_header:
+  transform: [handlebars]
+  en: Link to section about this budget measure in {{gt "budget_in_year"}} 
+  fr: TODO
+
+not_found_in_budget_text:
+  transform: [handlebars]
+  en: Measure not found in {{gt "budget_in_year"}} text
+  fr: TODO
