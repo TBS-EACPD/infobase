@@ -45,6 +45,9 @@ budget_measures_partition_root_filtered:
     </p>
   fr: |
     TODO
+see_it_in_the_budget:
+  en: See it in the Budget
+  fr: TODO
 
 budget_measure_popup_template:
   transform: [handlebars]
@@ -105,9 +108,24 @@ budget_measure_popup_template:
       </span>
     </div>
     {{#if is_budget_measure}}
-      <div class='mrgn-bttm-md popup-row-bottom-border popup-row-top-border popup-font-m'>
+      <div class='mrgn-bttm-md popup-row-top-border popup-font-m'>
         <text style='color:#fdfdfd'> {{gt "budget_chapter"}}: </text> {{chapter}}
       </div>
+    {{/if}}
+    {{#if description}}
+      <div class='popup-font-ml popup-row-top-border'>
+        {{gt "description"}}:
+      </div>
+      <div class='mrgn-bttm-md popup-row-bottom-border popup-decription-text'>
+        {{{description}}}
+      </div>
+    {{/if}}
+    {{#if ref_id}}
+      <a href='{{chapter_link}}#{{ref_id}}' 
+        class='btn btn-xs btn-block mrgn-bttm-sm infographic' 
+        style='background-color:{{color}};'>
+        {{gt "see_it_in_the_budget"}}
+      </a>
     {{/if}}
     {{#if is_dept}}
       <a href='#orgs/{{level}}/{{id}}/infograph' 

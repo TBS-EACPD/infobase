@@ -9,7 +9,10 @@ import { budget_measures_hierarchy_factory } from './budget_measures_hierarchy_f
 
 import * as businessConstants from '../../models/businessConstants.yaml';
 
-const { budget_chapters } = businessConstants;
+const { 
+  budget_chapters, 
+  budget_chapter_links,
+} = businessConstants;
 
 const year = run_template("{{planning_year_2}}");
 
@@ -51,8 +54,10 @@ const popup_template = node => {
     id: node.data.id,
     name: node.data.name,
     color: node.color,
-    description: !_.isUndefined(node.data.mandate) && node.data.mandate,
+    description: !_.isUndefined(node.data.description) && !_.isEmpty(node.data.description) && node.data.description,
     chapter: !_.isUndefined(node.data.chapter_key) && budget_chapters[node.data.chapter_key].text,
+    chapter_link: !_.isUndefined(node.data.chapter_key) && node.data.chapter_key !== "oth" && budget_chapter_links[node.data.chapter_key].text,
+    ref_id: !_.isUndefined(node.data.ref_id) && !_.isUndefined(node.data.chapter_key) && node.data.chapter_key !== "oth" && node.data.ref_id,
     is_first_column: node.depth === 1,
     add_reference_to_parent: node.depth === 2 && node.data.type !== "net_adjust",
     focus_text: node.magnified ? text_maker("partition_unfocus_button") : text_maker("partition_focus_button"),

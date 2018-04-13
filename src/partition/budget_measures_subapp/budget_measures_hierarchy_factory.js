@@ -46,7 +46,7 @@ const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
                 {},
                 {
                   name: text_maker("budget_allocation_tbd"),
-                  mandate: "TODO",
+                  description: "TODO",
                   type: "non_allocated",
                   id: 9999,
                   value: fund_row.fund,
@@ -59,18 +59,20 @@ const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
                 {},
                 {
                   name: net_adjust_measure.name,
-                  mandate: "TODO",
+                  description: "TODO",
                   type: "net_adjust",
                   id: 9998,
                   value: fund_row.fund,
                 }
               );
             } else {
+              const dept = Subject.Dept.lookup(fund_row.org_id);
               return _.assign(
                 {},
-                Subject.Dept.lookup(fund_row.org_id),
+                dept,
                 {
                   type: "dept",
+                  description: dept.mandate,
                   value: fund_row.fund,
                 }
               );
@@ -108,7 +110,7 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
               {},
               { 
                 name: text_maker("budget_allocation_tbd"),
-                mandate: "TODO",
+                description: "TODO",
                 type: "non_allocated",
                 id: 9999,
                 fund_rows,
@@ -121,18 +123,21 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
               {},
               { 
                 name: net_adjust_measure.name,
-                mandate: "TODO",
+                description: "TODO",
                 type: "net_adjust",
                 id: 9998,
                 fund_rows,
               }
             );
           } else {
+            const dept =Subject.Dept.lookup(org_id);
+
             return _.assign(
               {},
-              Subject.Dept.lookup(org_id),
+              dept,
               { 
                 type: "dept",
+                description: dept.mandate,
                 fund_rows,
               }
             );
