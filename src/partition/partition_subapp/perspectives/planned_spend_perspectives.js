@@ -397,6 +397,22 @@ const get_name = (presentation_scheme) => {
   return get_name_text_fragment(presentation_scheme) + " " + year_text_fragment(presentation_scheme);
 }
 
+const get_lang_specific_filter_name = (presentation_scheme) => {
+  switch (presentation_scheme){
+    case "est_doc_mains" : return text_maker("est_doc_mains");
+    case "est_doc_sea" : return text_maker("est_doc_sea");
+    case "est_doc_seb" : return text_maker("est_doc_seb");
+    case "est_doc_sec" : return text_maker("est_doc_sec");
+    case "est_doc_im" : return text_maker("est_doc_im");
+    default : return "";
+  }
+}
+
+const get_rpb_filter = (presentation_scheme) => {
+  const rpb_filter_name = get_lang_specific_filter_name(presentation_scheme);
+  return !_.isEmpty(rpb_filter_name) ? `~filter~'${rpb_filter_name}` : rpb_filter_name;
+}
+
 const get_root_text_key = (presentation_scheme) => {
   switch (presentation_scheme){
     case "est_doc_mains" : return "partition_spending_will_be_by_est_doc";
@@ -423,6 +439,7 @@ const planned_exp_perspective_factory = (presentation_scheme) => new PartitionPe
       year: get_year(presentation_scheme), 
       clean_year: get_year(presentation_scheme).replace(/(\{)|(\})/g,""),
       past_tense: get_year(presentation_scheme) !== "{{est_in_year}}",
+      rpb_filter: get_rpb_filter(presentation_scheme),
     }
   ),
   diagram_note_content: presentation_scheme === "est_doc_im" ? <TextMaker text_key={"partition_interim_estimates_def"} /> : false,
