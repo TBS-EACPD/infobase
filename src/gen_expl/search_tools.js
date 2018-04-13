@@ -17,10 +17,10 @@ function node_to_match_tokens(node){
   if(type === "indicator"){
     return []; //searching will be done at the results level only.
   }
-  if(type === 'result'){
+  if(_.includes(["result", "dr"], type)){
     return _.chain(node.children)
       .map('data.indicator')
-      .map( indicator => [ indicator.name, indicator.explanation, indicator.narrative ])
+      .map( indicator => [ indicator.name, indicator.explanation, indicator.narrative, indicator.measure ])
       .flatten()
       .compact()
       .concat([ name ])
