@@ -50,7 +50,7 @@ const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
                 {},
                 {
                   name: text_maker("budget_allocation_tbd"),
-                  description: "TODO",
+                  description: "", //TODO: get explanation of this case, and use it for item description?
                   type: "non_allocated",
                   id: 9999,
                   value: fund_row.fund,
@@ -101,7 +101,7 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
               {},
               { 
                 name: text_maker("budget_allocation_tbd"),
-                description: "TODO",
+                description: "", //TODO: get explanation of this case, and use it for item description?
                 type: "non_allocated",
                 id: 9999,
                 fund_rows,
