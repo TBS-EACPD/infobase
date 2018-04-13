@@ -53,12 +53,12 @@ partition_home_text:
   fr: Voir comment les ressources gouvernementales sont distribuées d'un mécanisme à l'autre
 
 budget_home_title:
-  en: TODO title for budget measures partition route
-  fr: TODO
+  en: Budget 2018 Funding
+  fr: Fonds du budget de 2018
 
 budget_home_text:
-  en: TODO description of budget measures partition route. Try and make it applicable to both regular and a11y version of page, so don't explicitly refer to the diagram, just the content.
-  fr: TODO
+  en: See a breakout of new Budget 2018 measures which are being funded through Estimates.
+  fr: Voir une visualisation des nouvelles mesures du Budget 2018 qui seront financées par le Budget des dépenses.
 
 planet_home_title:
   en: Explore the magnitude of the federal government

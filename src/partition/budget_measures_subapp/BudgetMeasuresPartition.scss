@@ -22,6 +22,10 @@
     }
     &.root > .partition-content-title {
       font-weight: $heavyFontWeight;
+      & > .root-sub-note {
+        margin-top: 22px;
+        font-size: 20px;
+      }
       & > a {
         color: #333!important;
       }

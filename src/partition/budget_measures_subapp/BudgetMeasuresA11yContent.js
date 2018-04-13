@@ -27,8 +27,6 @@ const name_and_value_cell_formatter = node => {
 
 export function BudgetMeasuresA11yContent(){
   const hierarchical_budget_measures_data = budget_measures_hierarchy_factory("budget-measure", []);
-  
-  const root_value = hierarchical_budget_measures_data.value;
 
   const budget_measures_data_by_chapter = _.groupBy(
     hierarchical_budget_measures_data.children, 
@@ -44,7 +42,6 @@ export function BudgetMeasuresA11yContent(){
 
   return (
     <div style={{overflow: "auto"}}>
-      <TextMaker text_key="budget_measures_partition_a11y_root" args={{root_value, year}} />
       {
         _.map(_.keys(budget_chapters), chapter_key => {
           const budget_measures_for_chapter = budget_measures_data_by_chapter[chapter_key];
@@ -94,7 +91,7 @@ export function BudgetMeasuresA11yContent(){
                         budget_measure.data.description 
                       }
                       { _.isEmpty(budget_measure.data.description) && 
-                        text_maker("not_found_in_budget_text") 
+                        text_maker("other_budget_measure_chapter_description") 
                       }
                     </td>
                     <td

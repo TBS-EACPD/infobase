@@ -1,9 +1,13 @@
+import './BudgetMeasuresRoute.ib.yaml';
+
 import { ensure_loaded } from '../../core/lazy_loader.js';
 import { StandardRouteContainer } from '../../core/NavComponents.js';
-import { SpinnerWrapper } from '../../util_components';
+import { 
+  SpinnerWrapper,
+  TextMaker,
+} from '../../util_components';
 import { text_maker } from "../../models/text";
 
-import { BudgetMeasuresTop } from './BudgetMeasuresTop.js';
 import { BudgetMeasuresControls } from './BudgetMeasuresControls.js';
 import { BudgetMeasuresPartition } from './BudgetMeasuresPartition.js';
 
@@ -74,7 +78,15 @@ export class BudgetMeasuresRoute extends React.Component {
         { loading && <SpinnerWrapper ref="spinner" scale = { 4 } /> }
         { !loading &&
           <div className = "budget-measures">
-            <BudgetMeasuresTop/>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                fontSize: "19px",
+              }}
+            >
+              <TextMaker text_key="budget_route_top_text" />
+            </div>
             { !window.is_a11y_mode &&
               <BudgetMeasuresControls
                 first_column = { first_column } 

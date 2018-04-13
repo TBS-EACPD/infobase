@@ -1,10 +1,3 @@
-budget_measures_partition_a11y_root:
-  transform: [handlebars]
-  en: |
-    {{gt "budget_in_year"}} Measures provide {{rawfmt_compact1 root_value}} in funding to federal organizations for {{year}}
-  fr: |
-    TODO
-
 budget_measures_partition_a11y_chapter_table_caption:
   transform: [handlebars]
   en: |

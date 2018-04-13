@@ -130,7 +130,7 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
               }
             );
           } else {
-            const dept =Subject.Dept.lookup(org_id);
+            const dept = Subject.Dept.lookup(org_id);
 
             return _.assign(
               {},
@@ -153,6 +153,9 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
             { 
               type: "budget_measure",
               chapter_key: budgetMeasure.chapter_key,
+              description: budgetMeasure.chapter_key === "oth" ?
+                text_maker("other_budget_measure_chapter_description") :
+                budgetMeasure.description,
               value: fund_row.fund,
             }
           );
