@@ -6,6 +6,10 @@ budget_measures_partition_a11y_chapter_table_caption:
   fr: |
     TODO
 
+budget_measure_descriptions:
+  en: Budget Measure Desciptions
+  fr: TODO
+
 orgs_funded_by_budget_measure:
   en: Organizations Funded by Budget Measure
   fr: TODO

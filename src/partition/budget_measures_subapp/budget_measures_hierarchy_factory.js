@@ -32,6 +32,9 @@ const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
             budgetMeasure, 
             { 
               type: "budget_measure",
+              description: budgetMeasure.chapter_key === "oth" && budgetMeasure.id !== "net_adjust" ?
+                text_maker("other_budget_measure_chapter_description") :
+                budgetMeasure.description,
               chapter_key: budgetMeasure.chapter_key,
               value: _.reduce(budgetMeasure.funds, (sum, fund_row) => sum + (fund_row.fund), 0),
             }
@@ -40,6 +43,7 @@ const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
         return budgetMeasureNodes;
       } else if (node.type === "budget_measure"){
         const orgNodes = _.chain(node.funds)
+          .filter(fund_row => fund_row.org_id !== "net_adjust")
           .map(fund_row => {
             if (fund_row.org_id === "non_allocated"){
               return _.assign(
@@ -49,19 +53,6 @@ const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
                   description: "TODO",
                   type: "non_allocated",
                   id: 9999,
-                  value: fund_row.fund,
-                }
-              );
-            } else if (fund_row.org_id === "net_adjust"){
-              const net_adjust_measure = Subject.BudgetMeasure.lookup("net_adjust");
-
-              return _.assign(
-                {},
-                {
-                  name: net_adjust_measure.name,
-                  description: "TODO",
-                  type: "net_adjust",
-                  id: 9998,
                   value: fund_row.fund,
                 }
               );
@@ -121,12 +112,11 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
 
             return _.assign(
               {},
+              net_adjust_measure,
               { 
-                name: net_adjust_measure.name,
-                description: "TODO",
                 type: "net_adjust",
                 id: 9998,
-                fund_rows,
+                value: _.reduce(fund_rows, (sum, fund_row) => sum + fund_row.fund, 0),
               }
             );
           } else {
@@ -144,7 +134,7 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
           }
         });
         return deptNodes;
-      } else if (node.type === "dept" || node.type === "non_allocated" || node.type === "net_adjust"){
+      } else if (node.type === "dept" || node.type === "non_allocated" || node.type !== "net_adjust"){
         const budgetMeasureNodes = _.map(node.fund_rows, fund_row => {
           const budgetMeasure = Subject.BudgetMeasure.lookup(fund_row.measure_id);
           return _.assign(

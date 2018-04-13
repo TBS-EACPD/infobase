@@ -82,6 +82,7 @@ export class BudgetMeasuresRoute extends React.Component {
               style={{
                 display: "flex",
                 justifyContent: "center",
+                padding: "0px 20px 5px 20px",
                 fontSize: "19px",
               }}
             >
