@@ -97,7 +97,7 @@ export class PartitionDataWrapper {
   show_partial_children(node){
     let children;
     // get rid of the minimize placeholder node
-    node.children = node.children.filter(d => _.isUndefined(d.data.unhidden_children));
+    node.children = !_.isUndefined(node.children) && _.isArrayLike(node.children) && node.children.filter(d => _.isUndefined(d.data.unhidden_children));
     if (node.children) {
       node.children = children = this.process_node_children_for_compression(node);
     }
