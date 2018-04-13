@@ -39,8 +39,9 @@ _.each(["dept","crso","program"], level => {
         value: q.sum(col),
       }));
 
-      const has_special_vals = _.chain(special_cols)
-        .map(col => _.find(data, {col}).value )  
+      const has_special_vals = _.chain(data)
+        .filter( ({col}) => _.endsWith(col, "spa") || _.endsWith(col, "rev") )
+        .map('value')
         .some()
         .value();
 
@@ -66,11 +67,11 @@ _.each(["dept","crso","program"], level => {
         graph_args: data,
       } = calculations;
 
-      const { graph_area } = panel.areas();
+      const node = panel.areas().graph.node();
 
       reactAdapter.render(
         <div>
-          <table>
+          <table className="table">
             <thead>
               <tr>
                 <th scope="col"> <TM k="year" /> </th>
@@ -86,17 +87,17 @@ _.each(["dept","crso","program"], level => {
                   <th scope="row">
                     {run_template(year)}
                   </th>
-                  <td> <Format type="compact2" content={gross} /> </td>
-                  <td> <Format type="compact2" content={rev} /> </td>
-                  <td> <Format type="compact2" content={spa} /> </td>
-                  <td> <Format type="compact2" content={net} /> </td>
+                  <td> <Format type="compact1" content={gross} /> </td>
+                  <td> <Format type="compact1" content={rev} /> </td>
+                  <td> <Format type="compact1" content={spa} /> </td>
+                  <td> <Format type="compact1" content={net} /> </td>
                 </tr>
               )}
             </tbody>
 
           </table>
         </div>,
-        graph_area.node()
+        node
       );
       
 
