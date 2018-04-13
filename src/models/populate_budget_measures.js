@@ -23,11 +23,16 @@ const populate_budget_measures = (budget_measures, budget_measure_funds) => {
   });
   const budget_funds_by_measure = _.groupBy(budget_measure_funds_in_millions, "measure_id");
 
+  const ref_id_col_index = window.lang === "en" ? 4 : 5;
+  const desc_col_index = window.lang === "en" ? 6 : 7;
+
   _.each(budget_measures, row => {
     BudgetMeasure.create_and_register({
       id: row[0],
       name: row[name_col_index],
       chapter_key: row[3],
+      ref_id: row[ref_id_col_index],
+      description: row[desc_col_index],
       funds: budget_funds_by_measure[row[0]],
     });
   }); 

@@ -515,16 +515,18 @@ class BudgetMeasure extends common(){
   static get singular(){ return text_maker("budget_measure"); }
   static get plural(){ return text_maker("budget_measures"); }
 
-  static create_and_register({id, name, chapter_key, funds}){
-    const inst = new BudgetMeasure({id, name, chapter_key, funds});
-    this.register(id, inst);
+  static create_and_register(args){
+    const inst = new BudgetMeasure(args);
+    this.register(args.id, inst);
     return inst;
   }
-  constructor({id, name, chapter_key, funds}){
+  constructor({id, name, chapter_key, ref_id, description, funds}){
     super();
     this.id = id;
     this.name = name;
     this.chapter_key = chapter_key;
+    this.ref_id = ref_id;
+    this.description = description;
     this.orgs = _.map(funds, fund_row => fund_row.org_id);
     this.funds = funds;
   }
