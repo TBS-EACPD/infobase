@@ -305,7 +305,10 @@ function populate_programs(rows){
       name :  row[name],
       dead_program: !(+row[is_active]),
       is_internal_service: row[is_internal_service] === "1",
-      web_links: _.compact([link1, link2]),
+      web_links: _.compact([ 
+        row[link1], 
+        row[link2],
+      ]),
     });
     crso.programs.push(instance);
   });
