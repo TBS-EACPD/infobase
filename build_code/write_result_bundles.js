@@ -304,14 +304,10 @@ function write_result_bundles(file_obj, dir){
 
 const unilingual_keys_by_model = {
   results: ["name"],
-  indicators: ["name","explanation","target_narrative","actual_result"],
+  indicators: ["name","explanation","target_narrative","actual_result","methodology","measure"],
   sub_programs : [
     "name",
     "description",
-    "dp_no_spending_expl",
-    "dp_spend_trend_expl",
-    "dp_no_fte_expl",
-    "dp_fte_trend_expl",
     "drr_spend_expl",
     "drr_fte_expl",
   ],

@@ -125,8 +125,8 @@ export const spending_header = createSelector(
   doc => (
     <TextMaker 
       text_key={
-        doc === 'dp17' ?
-        "tag_nav_exp_header_dp17" :
+        doc === 'dp18' ?
+        "tag_nav_exp_header_dp18" :
         'tag_nav_exp_header_drr16' 
       }
     />
@@ -138,8 +138,8 @@ export const fte_header = createSelector(
   doc => (
     <TextMaker 
       text_key={
-        doc === 'dp17' ?
-        "tag_nav_fte_header_dp17" :
+        doc === 'dp18' ?
+        "tag_nav_fte_header_dp18" :
         'tag_nav_fte_header_drr16' 
       }
     />

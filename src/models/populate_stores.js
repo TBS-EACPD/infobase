@@ -273,7 +273,7 @@ function populate_program_tags(tag_rows){
 };
 
 function populate_socr_tags(rows){
-  const [ id, dept_code,  title, desc, active] = [0,1,2,3,4];
+  const [ id, dept_code,  title, desc, is_active, is_drf, is_internal_service ] = [0,1,2,3,4,5,6,7];
   _.each(rows,row => {
     const dept = Dept.lookup(row[dept_code]);
     const instance = CRSO.create_and_register({
@@ -281,7 +281,9 @@ function populate_socr_tags(rows){
       id: row[id],
       name:  row[title],
       description: row[desc],
-      dead_so: !(+row[active]),
+      dead_so: !(+row[is_active]),
+      is_drf: !!(+row[is_drf]),
+      is_internal_service: !!(+row[is_internal_service]),
     })
     dept.crsos.push(instance);
 
@@ -291,7 +293,7 @@ function populate_socr_tags(rows){
 function populate_programs(rows){
   //TODO what do we use is_crown for ? 
   /* eslint-disable no-unused-vars */
-  const [ dept_code, crso_id, activity_code, name, desc, is_crown, is_active, is_internal_service ] = [0,1,2,3,4,5,6,7];
+  const [ dept_code, crso_id, activity_code, name, desc, is_crown, is_active, is_internal_service, link1, link2 ] = [0,1,2,3,4,5,6,7,8,9,10];
   _.each(rows,row => {
     const crso = CRSO.lookup(row[crso_id]);
     const instance = Program.create_and_register({
@@ -303,6 +305,7 @@ function populate_programs(rows){
       name :  row[name],
       dead_program: !(+row[is_active]),
       is_internal_service: row[is_internal_service] === "1",
+      web_links: _.compact([link1, link2]),
     });
     crso.programs.push(instance);
   });

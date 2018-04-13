@@ -104,9 +104,10 @@ class Dept extends common(){
       def
     );
   }
-  get is_DRF(){
+  get is_first_wave(){
     return this.dp_status === 'fw'
   }
+
   get programs(){
     return _.chain(this.crsos)
       .map('programs')
@@ -132,9 +133,6 @@ class Dept extends common(){
         "Entités Parlementaires",
       ],this.type)
     );
-  }
-  get is_first_wave(){
-    return this.dp_status === "fw";
   }
   get is_rpp_org(){
     return this.dp_status !== false;
@@ -388,14 +386,15 @@ class CRSO extends common(){
   get has_planned_spending(){ 
     return _.some(this.programs, program => program.has_planned_spending);
   }
-  get is_internal_service(){
-    return _.some(this.programs, 'is_internal_service');
-  }
+  //TODO: confirm old SO's are tagged internal service correctly
+  // get is_internal_service(){
+  //   return _.some(this.programs, 'is_internal_service');
+  // }
   get is_cr(){
-    return !this.dead_so && this.dept.dp_status === "fw";
+    return this.is_drf;
   }
   get is_first_wave(){
-    return this.is_cr;
+    return this.dept.is_first_wave;
   }
 };
 

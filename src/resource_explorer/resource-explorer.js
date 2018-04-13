@@ -269,8 +269,8 @@ class ExplorerPage extends React.Component {
               <TextMaker text_key="DRR_resources_option_title" />
             </a>
           </li>
-          <li className={classNames("tab_label", doc==="dp17" && "active_tab")} aria-pressed={doc === "dp17"} onClick={()=> this.refs.dp17_link.click()}>
-            <a href={`#resource-explorer/${hierarchy_scheme}/dp17`} role="button" className="tab_label_text" ref="dp17_link">
+          <li className={classNames("tab_label", doc==="dp18" && "active_tab")} aria-pressed={doc === "dp18"} onClick={()=> this.refs.dp18_link.click()}>
+            <a href={`#resource-explorer/${hierarchy_scheme}/dp18`} role="button" className="tab_label_text" ref="dp18_link">
               <TextMaker text_key="DP_resources_option_title" />
             </a>
           </li>
@@ -417,7 +417,7 @@ export class ResourceExplorer extends React.Component {
     );
     
     doc = (
-      _.includes(['drr16','dp17'], doc) ? 
+      _.includes(['drr16','dp18'], doc) ? 
       doc :
       'drr16'
     );

@@ -157,7 +157,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
       }
       case 'dept': {
 
-        if(doc==='dp17' && subject.dp_status === 'fw'){
+        if(doc==='dp18'){
 
           return _.chain(subject.crsos)
             .filter('is_cr')
@@ -173,7 +173,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
             }))
             .value()
 
-        } else if(doc==='drr16' || subject.dp_status === 'sw'){
+        } else if(doc==='drr16'){
           //for PAA structures, the SO adds an annoying layer of drilling down for no reason
 
           return subject.programs.map(prog => ({

@@ -9,14 +9,14 @@ choose_explore_point:
   en: Select your exploration point
   fr: Choisir un point d'exploration
 
-tag_nav_exp_header_dp17:
+tag_nav_exp_header_dp18:
   transform: [handlebars]
   en: |
     {{planning_year_1}} Planned Spending
   fr: |
     Dépenses planifiées pour {{planning_year_1}}
 
-tag_nav_fte_header_dp17:
+tag_nav_fte_header_dp18:
   transform: [handlebars]
   en: |
     {{planning_year_1}} Number of Planned FTEs

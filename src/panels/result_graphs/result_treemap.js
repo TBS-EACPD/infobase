@@ -360,14 +360,14 @@ class SingleSubjExplorer extends React.Component {
               <TextMaker text_key="DRR_results_option_title" />
             </span>
           </li>
-          <li className={classNames("tab_label", doc==="dp17" && "active_tab")} onClick={()=> tab_on_click('dp17')}>
+          <li className={classNames("tab_label", doc==="dp18" && "active_tab")} onClick={()=> tab_on_click('dp18')}>
             <span 
               tabIndex={0}
               role="button"
-              aria-pressed={doc === "dp17"}
+              aria-pressed={doc === "dp18"}
               className="tab_label_text"
-              onClick={()=> tab_on_click('dp17')}
-              onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32)&& tab_on_click('dp17')}
+              onClick={()=> tab_on_click('dp18')}
+              onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32)&& tab_on_click('dp18')}
             >
               <TextMaker text_key="DP_results_option_title" />
             </span>
@@ -462,7 +462,7 @@ _.each(['program','dept','crso'], lvl => {
 
       const indicators = Indicator.get_flat_indicators(subject);
 
-      const has_dp_data = _.find(indicators, {doc: 'dp17'});
+      const has_dp_data = _.find(indicators, {doc: 'dp18'});
       const has_drr_data = _.find(indicators, {doc: 'drr16'});
 
       if(!has_dp_data && !has_drr_data){

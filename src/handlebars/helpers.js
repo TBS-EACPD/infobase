@@ -420,23 +420,6 @@ Handlebars.registerHelper('du_crso', crso => {
   }
 });
 
-Handlebars.registerHelper('dept_cr_or_so', dept => {
-  if(dept.is_DRF){
-    return text_maker('core_resp');
-  } else {
-    return text_maker('strategic_outcome')
-  }
-})
-
-//plural version of the above
-Handlebars.registerHelper('dept_crs_or_sos', dept => {
-  if(dept.is_DRF){
-    return text_maker('core_resps');
-  } else {
-    return text_maker('strategic_outcomes')
-  }
-})
-
 // looks up the name for the department if passed
 // a department object
 Handlebars.registerHelper("dept", context => {
