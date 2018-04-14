@@ -5,7 +5,7 @@ import * as Subject from '../../models/subject';
 
 import { PartitionDiagram } from '../partition_diagram/PartitionDiagram.js';
 import { formats } from '../../core/format.js';
-import { text_maker, run_template } from "../../models/text";
+import { text_maker } from "../../models/text";
 
 import { budget_measures_hierarchy_factory } from './budget_measures_hierarchy_factory.js';
 
@@ -15,10 +15,10 @@ const { budget_chapters } = businessConstants;
 
 import { make_budget_link } from './budget_utils.js';
 
-const year = run_template("{{planning_year_2}}");
+const year = text_maker("budget_route_year");
 
 const formatter = node => {
-  const in_billions = node.__value__ >= 1*Math.pow(10, 9);
+  const in_billions = node.__value__ >= Math.pow(10, 9);
   const format = in_billions ? formats.compact1 : formats.compact;
   return " (" + format(node.__value__) + ")";
 }

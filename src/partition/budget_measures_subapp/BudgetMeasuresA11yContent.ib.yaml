@@ -15,15 +15,15 @@ orgs_funded_by_budget_measure:
   fr: TODO
 
 link_to_budget_section_for:
-  en: Link to {{gt "budget_in_year"}} section for
+  en: Link to {{gt "budget_name"}} section for
   fr: TODO
 
 budget_measure_link_header:
   transform: [handlebars]
-  en: Link to section about this budget measure in {{gt "budget_in_year"}} 
+  en: Link to section about this budget measure in {{gt "budget_name"}} 
   fr: TODO
 
 not_found_in_budget_text:
   transform: [handlebars]
-  en: Measure not found in {{gt "budget_in_year"}} text
+  en: Measure not found in {{gt "budget_name"}} text
   fr: TODO

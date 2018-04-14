@@ -1,7 +1,3 @@
-provides:
-  en: provides
-  fr: TODO
-
 single_word_for:
   en: for
   fr: pour
@@ -27,13 +23,14 @@ in_funding_to:
   fr: TODO
 
 budget_measures_root_sub_note:
-  en: (2018-19 funding, presented on an Estimates basis as per Table A2.11 of Budget 2018)
+  transform: [handlebars]
+  en: ({{gt "budget_route_year"}} funding, presented on an Estimates basis as per Table A2.11 of {{gt "budget_name"}})
   fr: TODO
 
 budget_measures_partition_root:
   transform: [handlebars]
   text: |
-    {{gt "budget_in_year"}}:
+    {{gt "budget_name"}}:
     <p class='amount'>
       {{rawfmt_compact1 root_value}}
     </p>
@@ -52,7 +49,7 @@ budget_measure_popup_template:
     <div class='mrgn-bttm-md popup-row-top popup-font-m'>
       <span class='stat1 popup-font-m'>
         <text style='color:#fdfdfd'>
-          {{gt "budget_in_year"}}
+          {{gt "budget_name"}}
           </br>
           {{gt "provides"}}
         </text>
