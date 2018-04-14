@@ -103,7 +103,7 @@ export function BudgetMeasuresA11yContent(){
                         <a
                           href = {make_budget_link(budget_measure.data.chapter_key, budget_measure.data.ref_id)}
                         >
-                          { text_maker("budget_section_for") + ": " + budget_measure.data.name }
+                          { text_maker("link_to_budget_section_for") + ": " + budget_measure.data.name }
                         </a>
                       }
                       { budget_measure.data.chapter_key === "oth" || _.isEmpty(budget_measure.data.ref_id) && 

@@ -1,7 +1,7 @@
 budget_measures_partition_a11y_chapter_table_caption:
   transform: [handlebars]
   en: |
-    Budget measures from the {{chapter}} chapter provide funding of {{rawfmt_compact1 value}} to federal organization in {{year}}. 
+    Budget measures from the {{chapter}} chapter provide {rawfmt_compact1 value}} in funding to federal organization in {{year}}. 
     The following table contains further details on these {{chapter}} budget measures.
   fr: |
     TODO
@@ -14,8 +14,8 @@ orgs_funded_by_budget_measure:
   en: Organizations Funded by Budget Measure
   fr: TODO
 
-budget_section_for:
-  en: Budget section for
+link_to_budget_section_for:
+  en: Link to {{gt "budget_in_year"}} section for
   fr: TODO
 
 budget_measure_link_header:
