@@ -1,3 +1,7 @@
+provides:
+  en: provides
+  fr: TODO
+
 single_word_for:
   en: for
   fr: pour
