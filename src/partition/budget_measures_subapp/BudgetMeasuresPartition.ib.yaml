@@ -1,31 +1,6 @@
-budget_measures_partition_root:
-  transform: [handlebars]
-  en: |
-    {{gt "budget_in_year"}}:
-    <p class='amount'>
-      {{rawfmt_compact1 root_value}}
-    </p>
-    in funding for
-    <span class='text-nowrap'>
-      {{displayed_measure_count}}
-    </span>
-    {{gt "budget_measures"}}
-    <p class='root-sub-note'>
-      (2018-19 funding, presented on an Estimates basis as per Table A2.11 of Budget 2018)
-    </p>
-  fr: |
-    TODO
-
 provides:
   en: provides
   fr: TODO
-
-funding:
-  en: funding
-  fr: TODO
-
-total_lower_case:
-  text: total
 
 single_word_for:
   en: for
@@ -43,6 +18,34 @@ see_it_in_the_budget:
   en: See it in the Budget
   fr: TODO
 
+in_funding_for:
+  en: in funding for
+  fr: TODO
+
+in_funding_to:
+  en: in funding to
+  fr: TODO
+
+budget_measures_root_sub_note:
+  en: (2018-19 funding, presented on an Estimates basis as per Table A2.11 of Budget 2018)
+  fr: TODO
+
+budget_measures_partition_root:
+  transform: [handlebars]
+  text: |
+    {{gt "budget_in_year"}}:
+    <p class='amount'>
+      {{rawfmt_compact1 root_value}}
+    </p>
+    {{gt "in_funding_for"}}
+    <span class='text-nowrap'>
+      {{displayed_measure_count}}
+    </span>
+    {{gt "budget_measures"}}
+    <p class='root-sub-note'>
+      {{gt "budget_measures_root_sub_note"}}
+    </p>
+
 budget_measure_popup_template:
   transform: [handlebars]
   text: |
@@ -54,11 +57,7 @@ budget_measure_popup_template:
           {{gt "provides"}}
         </text>
         {{#if value_is_zero}}
-          {{#if lang_is_en}}
-            $0
-          {{else}}
-            0$
-          {{/if}}
+          {{lang_formated_zero}}
         {{else}}
           {{#if value_is_negative}}
             <text style='color:red;'>
@@ -69,16 +68,10 @@ budget_measure_popup_template:
           {{/if}}
         {{/if}}
         <text style='color:#fdfdfd'>
-          {{#if is_first_column}}
-            {{gt "total_lower_case"}} 
-          {{else}}
-            {{gt "single_word_in"}}
-          {{/if}}
-          {{gt "funding"}}
           {{#if is_budget_measure}}
-            {{gt "single_word_for"}}
+            {{gt "in_funding_for"}}
           {{else}}
-            {{gt "single_word_to"}} 
+            {{gt "in_funding_to"}} 
           {{/if}}
         </text>
       </span>
