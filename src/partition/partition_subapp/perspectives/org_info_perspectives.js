@@ -26,7 +26,6 @@ const glossary_entry_from_inst_form_type_id = (type_id) => {
     "inter_org": "IO",
     "joint_enterprise": "JE",
     "min_dept": "DEPT",
-    "parl_ent": "todo",
     "serv_agency": "SA",
     "shared_gov_corp": "SGC",
     "spec_op_agency": "SOA",
