@@ -125,6 +125,7 @@ class Panel {
       _.each(graph_layout, function(span,i){
         graph_row.append("div")
           .classed(`fcol-md-${span} x${i+1}`,true)
+          .style("width","100%")
           .style("padding","0px")
           .style('position','relative');
 

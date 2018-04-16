@@ -164,7 +164,7 @@ class PlannedProgramResources extends React.Component {
         { text } 
       </div>
       <div className="frow">
-        <div className="fcol-md-4">
+        <div className="fcol-md-4" style={{ width: "100%" }}>
           <div 
             style={{maxHeight: "400px"}}
             className="legend-container"
@@ -184,7 +184,7 @@ class PlannedProgramResources extends React.Component {
             />
           </div>
         </div>
-        <div className="fcol-md-8">
+        <div className="fcol-md-8" style={{ width: "100%" }}>
           <Bar
             series={graph_data}
             ticks={ticks}

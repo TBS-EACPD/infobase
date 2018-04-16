@@ -236,7 +236,7 @@ class HistoricalProgramBars extends React.Component {
         <strong><TextMaker text_key="historical_prog_title" /></strong>
       </div>
       <div className="frow">
-        <div className="fcol-md-4">
+        <div className="fcol-md-4" style={{ width: "100%" }}>
           <div
             className="well legend-container"
             style={{ maxHeight: "400px" }}
@@ -261,7 +261,7 @@ class HistoricalProgramBars extends React.Component {
             />
           </div>
         </div>
-        <div className="fcol-md-8">
+        <div className="fcol-md-8" style={{ width: "100%" }}>
           <Bar
             series={graph_data}
             ticks={ticks}
@@ -383,7 +383,7 @@ class DetailedProgramSplit extends React.Component {
         <strong><TextMaker text_key="so_spend_by_prog" /></strong>
       </div>
       <div className="frow">
-        <div className="fcol-md-4">
+        <div className="fcol-md-4" style={{ width: "100%" }}>
           <label>
             <TextMaker text_key="filter_by_so" />
             <Select 
@@ -408,7 +408,7 @@ class DetailedProgramSplit extends React.Component {
             </div>
           }
         </div> 
-        <div className="fcol-md-8">
+        <div className="fcol-md-8" style={{ width: "100%" }}>
           <div 
             style={{
               maxHeight: '500px',
