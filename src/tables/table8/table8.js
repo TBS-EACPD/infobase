@@ -18,8 +18,8 @@ const {
 const years = estimates_years;
 const est_cols = _.map(years, yr=> yr+"_estimates");
 
-const in_year_col = est_cols[3];
-const last_year_col = est_cols[2];
+const in_year_col = est_cols[4];
+const last_year_col = est_cols[3];
 
 window.estimates_docs = {
   "IM":{
