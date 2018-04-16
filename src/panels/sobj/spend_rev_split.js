@@ -75,7 +75,7 @@ new PanelGraph({
   key,
   depends_on : ["table4","table5"],
   layout,
-  footnotes : false,
+  footnotes : ["SOBJ_REV"],
   level : "dept",
   info_deps : ["table5_dept_info","table4_dept_info"],
   title,
