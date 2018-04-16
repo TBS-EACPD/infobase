@@ -54,14 +54,19 @@ class PanelGraph {
   }
 
   static register_instance(instance){
-    if (!_.includes(subjects, instance.level)){
+
+    const { 
+      full_key,
+      level,
+    } = instance;
+    if (!_.includes(subjects, level)){
       throw `graph ${instance.key} has an undefined level`;
     }
-    const lookup =  create_graph_key(instance.key,instance.level);
-    if (lookup in graphs){
+
+    if (full_key in graphs){
       throw `graph ${instance.key} has already been defined`;
     }
-    graphs[lookup] = instance;
+    graphs[full_key] = instance;
   }
 
   constructor(def){
@@ -72,10 +77,12 @@ class PanelGraph {
     this._inner_calculate = def.calculate || (()=> true)
     this._inner_render = def.render;
     const to_assign  = _.omit(def, [ 'render', 'calculate' ])
+    const full_key = create_graph_key(def.key,def.level);
     Object.assign(
       this,  
       default_args,
-      to_assign
+      to_assign,
+      { full_key }
     );
                      
     this.constructor.register_instance(this);

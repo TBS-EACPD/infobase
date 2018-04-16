@@ -1,4 +1,9 @@
-const ROUTER = require('../core/router.js');
+import  {createSelector } from 'reselect';
+import { StandardRouteContainer } from '../core/NavComponents';
+import { ReactPanelGraph } from '../core/PanelCollectionView.js';
+import { Link } from 'react-router-dom';
+
+const Subject = require('../models/subject.js');
 const {
   Dept, 
   Program, 
@@ -6,17 +11,17 @@ const {
   Tag, 
   Gov,
   CRSO,
-} = require('../models/subject.js');
+} = Subject;
 const { ensure_loaded } = require('../core/lazy_loader.js');
-const { reactAdapter } = require('../core/reactAdapter.js');
 const { 
   EverythingSearch,
+  SpinnerWrapper,
 }  = require('../util_components.js');
 
 const {PanelGraph} = require('../core/PanelGraph');
 
 function url_template(subject, graph){
-  return `#graph/${subject.constructor.type_name}/${graph.key}/${subject.id}/`
+  return `/graph/${subject.level}/${graph.key}/${subject.id}`
 }
 
 const defaultSubjectKeys = {
@@ -26,23 +31,23 @@ const defaultSubjectKeys = {
   crso: "TBC-BXA00",
 };
 
-const getSubj = (level, org_param) => {
+const getSubj = (level, id) => {
   let subject;
   switch(level){
     case 'dept':
-      subject =  Dept.lookup(org_param) || Dept.lookup(defaultSubjectKeys.dept);
+      subject =  Dept.lookup(id) || Dept.lookup(defaultSubjectKeys.dept);
       break;
     case 'tag':
-      subject = Tag.lookup(org_param) || Tag.lookup(defaultSubjectKeys.tag);
+      subject = Tag.lookup(id) || Tag.lookup(defaultSubjectKeys.tag);
       break;
     case 'program':
-      subject = Program.lookup(org_param) || Program.lookup(defaultSubjectKeys.program);
+      subject = Program.lookup(id) || Program.lookup(defaultSubjectKeys.program);
       break;
     case 'spendarea':
-      subject = SpendArea.lookup(org_param) || SpendArea.lookup(defaultSubjectKeys.spendarea);
+      subject = SpendArea.lookup(id) || SpendArea.lookup(defaultSubjectKeys.spendarea);
       break;
     case 'crso':
-      subject = CRSO.lookup(org_param) || CRSO.lookup( defaultSubjectKeys.crso );
+      subject = CRSO.lookup(id) || CRSO.lookup( defaultSubjectKeys.crso );
       break;
     default:
       subject =  Gov;
@@ -51,85 +56,8 @@ const getSubj = (level, org_param) => {
 
 }
 
-const link_to_footnotes = ( graph_key, level) => `#footnotes/graph/${graph_key}/${level}`;
-
-ROUTER.add_container_route("graph/:level_type:/:graph:/:org_id:","graph_route",function(container,level_type,graph_key, org_param){
-  const title = "graph inventory"
-  const h1 = document.createElement('h1');        // Create a <button> element
-  const txt_node = document.createTextNode(title);       // Create a text node
-  h1.appendChild(txt_node);       
-
-  this.add_title(h1);
-  this.add_crumbs([{html: title }]);
-
-
-  level_type = (level_type || 'gov').toLowerCase()
-  const subject = getSubj(level_type, org_param);
-
-  var graph_obj = PanelGraph.lookup(graph_key,level_type) || PanelGraph.lookup('financial_intro', 'gov');
-  const { similar_dependencies, same_key, rest }  = graphs_of_interest(graph_obj);
-
-  var template = (`
-    <div id="search_bar"></div>
-    <div id="intro"></div>
-    <div>
-      <div id="main"></div>
-      <h3> notes </h3>
-      <p id="notes"></p>
-    </div>
-    <div id="meta"></div>
-  `);
-
-
-  container.innerHTML=template;
-
-
-  
-  container.querySelector('#meta').innerHTML = graph_info_template(subject,graph_obj, same_key, similar_dependencies, rest);
-  container.querySelector('#notes').innerHTML = graph_obj.notes || "empty";
-
-  container.querySelector('#main').appendChild(new Spinner({scale:3}).spin().el)
-  ensure_loaded({ 
-    graph_keys : [ graph_key ],
-    subject_level: subject.level,
-    subject,
-  }).then( ()=> {
-    container.querySelector('#main').innerHTML = "";
-
-    const options = {}; 
-    var data_for_graph = graph_obj.calculate(subject,options);
-
-    container.querySelector('#intro').innerHTML = `
-      <p> you are currently looking at the graph: <strong>${graph_obj && graph_obj.key}</strong> 
-          for the subject <strong>${subject && subject.name}</strong>
-          ${ data_for_graph ? "" : "<br> <strong> this graph bailed because some calculations failed </strong>" }
-          <br> 
-          scroll down for a list of all graphs in the infobase 
-      </p>  
-      <a href=${link_to_footnotes(graph_obj.key, graph_obj.level)}> See all possible footnotes for this graph </a>
-    `
-
-    reactAdapter.render(
-      <div className="mrgn-bttm-lg">
-        <EverythingSearch 
-          placeholder="See this graph with another subject"
-          org_scope="all_orgs_with_gov"
-          include_tags={true}
-          include_programs={true}
-          href_template={ subj => url_template(subj, graph_obj) }
-        />
-      </div>,
-      container.querySelector('#search_bar')
-    );
-
-    if(data_for_graph){
-      graph_obj.render(d3.select(container.querySelector('#main')), data_for_graph, options); 
-    }
-  });
-
-
-  
-})
+// Bring back footnotes inventory ??
+// const link_to_footnotes = ( graph_key, level) => `#footnotes/graph/${graph_key}/${level}`;
 
 function graphs_of_interest(graph){
   const { depends_on, info_deps, key} = graph;
@@ -154,48 +82,215 @@ function graphs_of_interest(graph){
   return { same_key, similar_dependencies, rest };
 }  
 
-function graph_info_template(main_subject,main_graph, same_key, similar_dependencies, rest){
-  return (`
-    <h2> Related graphs </h2>
-    <table class='table table-bordered'>
+
+const get_subj = createSelector(
+  props => _.get(props, "match.params"),
+  ({level, id}) => {
+    if(_.isEmpty(level)){
+      level = "gov";
+    }
+    return getSubj(level, id);
+  }
+);
+
+const get_graph_obj = createSelector(
+  get_subj,
+  props => _.get(props, "match.params.graph"),
+  (subject, graph_key) => {
+    return PanelGraph.lookup(graph_key, subject.level) ||  PanelGraph.lookup('financial_intro', 'gov');
+  }
+);
+
+
+const get_related_graphs = createSelector(
+  get_graph_obj,
+  graph => graphs_of_interest(graph)
+);
+
+const get_derived_props = props => {
+  return {
+    subject: get_subj(props),
+    panel: get_graph_obj(props),
+    related_graphs: get_related_graphs(props), 
+  };
+}
+
+
+const RelatedInfo = ({ subject, panel, related_graphs }) => {
+
+  const {
+    similar_dependencies,
+    same_key,
+    rest,
+  } = related_graphs;
+
+  return <div>
+    <h2> Related Panels </h2>
+    <table className="table table-bordered">
       <thead>
-        <tr> 
+        <tr>
           <th> key </th>
           <th> level </th>
           <th> table deps </th>
           <th> info deps </th>
           <th> notes </th>
           <th> url </th>
+        </tr>
       </thead>
       <tbody>
-        ${ graph_templ(main_subject,main_graph, 'success') }
-        ${ same_key.map( g => graph_templ(main_subject,g, 'info')).join("")  }
-        ${ similar_dependencies.map( g => graph_templ(main_subject,g, 'warning')).join("")  }
-        ${ rest.map( g => graph_templ(main_subject, g, '')).join("") }
+        <PanelTableRow 
+          key="current_graph"
+          className="success"
+          panel={panel}
+          current_subject={subject}
+        />
+        {_.map(same_key, p => 
+          <PanelTableRow
+            key={p.full_key}
+            panel={p}
+            className="info"
+            current_subject={subject}
+          />
+        )}
+        {_.map(similar_dependencies, p => 
+          <PanelTableRow
+            key={p.full_key}
+            panel={p}
+            className="warning"
+            current_subject={subject}
+          />
+        )}
+        {_.map(rest, p => 
+          <PanelTableRow
+            key={p.full_key}
+            panel={p}
+            current_subject={subject}
+          />
+        )}
       </tbody>
     </table>
-  `);
+  </div>
 }
 
-function graph_templ(main_subject,graph, className){
-
+const PanelTableRow = ({ current_subject, panel, className }) => {
   const url = (
-    graph.level === main_subject.constructor.type_name ?
-    url_template( main_subject, graph ) :
+    panel.level === current_subject.level ?
+    url_template( current_subject, panel ) :
     url_template( 
-      getSubj(graph.level, main_subject.id),
-      graph
+      getSubj(panel.level, current_subject.id),
+      panel
     )
   );
 
-  return (`
-    <tr class=${className}>
-      <td> ${graph.key} </td>
-      <td> ${graph.level} </td>
-      <td> ${graph.depends_on.join(", ")} </td>
-      <td> ${graph.info_deps.join(", ")} </td>
-      <td> ${(graph.notes && graph.notes.substring(0,50)+'...') || 'none'} </td>
-      <td> <a href='${url}'> link </a> </td>
+  return (
+    <tr className={className}>
+      <td> {panel.key} </td>
+      <td> {panel.level} </td>
+      <td> {panel.depends_on.join(", ")} </td>
+      <td> {panel.info_deps.join(", ")} </td>
+      <td> {panel.notes} </td>
+      <td> <Link to={url}> link </Link> </td>
     </tr>
-  `);
+  );
+
+};
+
+
+export class GraphInventory extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      loading: true,
+    };
+  }
+  loadDeps({subject,panel}){
+
+    this.setState({
+      loading: true,
+    });
+    ensure_loaded({
+      graph_keys : [ panel.key ],
+      subject_level: subject.level,
+      subject,
+      footnotes_for: subject,
+    }).then(()=>{
+      this.setState({loading: false})
+    })
+  }
+  componentWillMount(){
+    this.loadDeps(get_derived_props(this.props));
+  }
+  componentWillReceiveProps(nextProps){
+    const old_derived_props = get_derived_props(this.props);
+    const new_derived_props = get_derived_props(nextProps);
+    if(_.isEqual(old_derived_props, new_derived_props)){
+      return;
+    }
+    this.loadDeps(new_derived_props);
+  }
+
+  render(){
+
+    const { 
+      subject,
+      panel,
+      related_graphs,
+    } = get_derived_props(this.props);
+    const { loading } = this.state; 
+
+    let content;
+    if(loading){
+      content = <SpinnerWrapper />;
+    } else {
+      content = <div>
+        <h1> graph inventory </h1>
+        <div className="mrgn-bttm-lg">
+          <EverythingSearch
+            placeholder="See this graph with another subject"
+            org_scope="all_orgs_with_gov"
+            include_tags={true}
+            include_programs={true}
+            href_template={ subj => url_template(subj, panel) }
+          />
+        </div>
+        <div>
+          <p> Selected subject: {subject.name} ({subject.level}) </p>
+          <p> selected graph: {panel.key} </p>
+        </div>
+        <div id="main">
+          <ReactPanelGraph 
+            graph_key={panel.key}
+            subject={subject}
+            key={`${panel.key}-${subject.guid}`}
+          />
+          {_.isEmpty(panel.notes) && 
+            <div>
+              <h3> Notes </h3>
+              { panel.notes }
+            </div>
+          }
+        </div>
+        <div id="meta">
+          <RelatedInfo {...{
+            panel, 
+            subject,
+            related_graphs,
+          }} />
+        </div>
+
+      </div>
+    }
+
+    return (
+      <StandardRouteContainer 
+        title="graph inventory"
+        breadcrumbs={["graph inventory"]}
+        description={null}
+        route_key={"graph_inventory"}
+      >
+        {content}
+      </StandardRouteContainer>
+    );
+
+  }
 }

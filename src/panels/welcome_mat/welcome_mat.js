@@ -438,7 +438,7 @@ new PanelGraph({
   key: 'welcome_mat',
   footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
 
-  depends_on : [ 'table6','table12'],
+  depends_on : [ 'table6','table12', 'table4', 'table8'],
   info_deps: ['table4_dept_info', 'table6_dept_info','table12_dept_info',  'table8_dept_info'],
   missing_info :'ok' ,
   layout: {
