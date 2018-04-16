@@ -26,8 +26,8 @@ export default {
   ],
 
   "link": {
-    "en": "http://open.canada.ca/data/en/", // TODO
-    "fr": "http://ouvert.canada.ca/data/fr/", // TODO
+    "en": "http://open.canada.ca/data/en/dataset/9582d4b0-4ba2-4a0f-9c5f-70c192567208",
+    "fr": "http://ouvert.canada.ca/data/fr/dataset/9582d4b0-4ba2-4a0f-9c5f-70c192567208",
   }, 
  
   "name": { 
