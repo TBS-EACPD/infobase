@@ -32,6 +32,7 @@ li.tab_label {
     color: inherit !important;
     cursor: pointer;
     font-size: 15.6px;
+    font-weight: $mediumFontWeight;
   }
 }
 
@@ -45,6 +46,7 @@ li.tab_label.active_tab {
   cursor: default;
   & > .tab_label_text {
     cursor: default;
+    font-weight: $heavyFontWeight;
   }
 }
 
