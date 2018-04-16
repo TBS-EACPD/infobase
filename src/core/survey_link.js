@@ -2,11 +2,6 @@
 import {text_maker} from '../models/text.js';
 
 function should_add_survey_banner(){
-  //SURVEY LINKS AREN'T WORKING RIGHT NOW (April 16th 2018)
-  //WILL RE-ACTIVATE ONCE SURVEYS ARE TURNED BACK ON
-  return false;
-
-
   //if we add more surveys, we can use 'opened/ignored_survey1'
   //note that we're now using ignored_survey1_1, so that those who ignored it and potentially didn't fill it out can get another chance
   if(window.has_local_storage && (window.localStorage.getItem('ignored_survey1_1') || window.localStorage.getItem('opened_survey1') )) {

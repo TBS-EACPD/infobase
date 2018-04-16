@@ -184,9 +184,9 @@ infographs_for_crso:
   fr: Infographies sur les dépenses et les résultats pour les responsabilités essentielles et les résultats stratégiques
 
 survey_link:
-  en: https://www.surveymonkey.ca/r/ifs-sri-eng
-  fr: https://fr.surveymonkey.ca/r/ifs-sri-fra
-
+  en: https://questionnaire.simplesurvey.com/f/l/ifs-sri?idlang=EN 
+  fr: https://questionnaire.simplesurvey.com/f/l/ifs-sri?idlang=FR
+  
 survey_link_text:
   transform: [ handlebars ]
   en: |
