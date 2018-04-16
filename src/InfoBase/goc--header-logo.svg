@@ -7,9 +7,9 @@
 	.st1{fill:#FF1606;}
 </style>
 <title>goc--header-logo</title>
-<rect x="36.8" class="st0" width="81.7" height="75"/>
-<rect class="st1" width="36.8" height="75"/>
-<rect x="118.5" class="st1" width="36.8" height="75"/>
+<rect x="36.8" class="st0" width="81.7" height="75" shape-render="crispedges"/>
+<rect class="st1" width="36.8" height="75" shape-render="crispedges"/>
+<rect x="118.5" class="st1" width="36.8" height="75" shape-render="crispedges"/>
 <path class="st1" d="M72.6,15.6l5.3-10.7l5.2,10.3c0.7,1.1,1.2,1,2.2,0.5l4.5-2.2l-2.9,14.4c-0.6,2.8,1,3.7,2.8,1.7l6.4-6.8l1.7,3.9
 	c0.6,1.2,1.4,1,2.6,0.8l6.6-1.4l-2.2,8.4v0.2c-0.3,1.1-0.8,2,0.4,2.5l2.3,1.2L93.8,49.8c-1.4,1.4-0.9,1.9-0.4,3.5l1.3,3.9l-12.7-2.3
 	c-1.6-0.4-2.7-0.4-2.7,0.9l0.5,14.6h-3.8l0.5-14.5c0-1.4-1.1-1.4-3.7-0.9L61,57.2l1.5-3.9c0.5-1.5,0.7-2.5-0.5-3.5L48.1,38.4
