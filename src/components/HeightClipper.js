@@ -62,7 +62,7 @@ export class HeightClipper extends React.Component {
         style={{
           position: 'relative',
           maxHeight: isClipped && pixelClipHeight, 
-          overflowY: isClipped && 'hidden',
+          overflow: isClipped && 'hidden',
         }}
       >
         {isClipped &&
