@@ -22,10 +22,10 @@ drr_summary_text:
   en: |
     {{#if is_gov}}
       In {{pa_last_year}}, **{{num_depts}}** organizations required to produce a {{gl_tt "Departmental Results Report" "DR"}} sought to achieve **{{drr16_results}}** results.
-      Progress towards meeting these results was {{gl_tt "measured" "RESULTS_STATUS"}} using **{{drr16_total}}** {{gl_tt "indicators" "IND_RESULT"}}.
+      Progress towards meeting these results was measured using **{{drr16_total}}** {{gl_tt "indicators" "IND_RESULT"}}.
     {{else}}
       In {{pa_last_year}}, {{subj_name subject}} sought to achieve **{{drr16_results}}** results.
-      Progress towards meeting these results was {{gl_tt "measured" "RESULTS_STATUS"}} using **{{drr16_total}}** {{gl_tt "indicators" "IND_RESULT"}}.
+      Progress towards meeting these results was measured using **{{drr16_total}}** {{gl_tt "indicators" "IND_RESULT"}}.
     {{/if}}
 
     {{#if drr16_past_total}} Of those indicators: {{/if}}
@@ -38,10 +38,10 @@ drr_summary_text:
   fr: |
     {{#if is_gov}}
       En {{pa_last_year}}, **{{num_depts}}** organisations qui devaient produire un {{gl_tt "Rapport sur les résultats ministériel" "DR"}} ont cherché à rencontrer **{{drr16_results}}** résultats.
-       Les progrès accomplis dans l'atteinte de ces résultats ont été {{gl_tt "mesurés" "RESULTS_STATUS"}} au moyen de **{{drr16_total}}** {{gl_tt "indicateurs" "IND_RESULT"}}. 
+       Les progrès accomplis dans l'atteinte de ces résultats ont été mesurés au moyen de **{{drr16_total}}** {{gl_tt "indicateurs" "IND_RESULT"}}. 
     {{else}}
       En {{pa_last_year}}, {{subj_name subject}} a cherché à atteindre **{{drr16_results}}** résultats.
-      Les progrès accomplis dans l'atteinte de ces résultats ont été {{gl_tt "mesurés" "RESULTS_STATUS"}} au moyen de **{{drr16_total}}** {{gl_tt "indicateurs" "IND_RESULT"}}. 
+      Les progrès accomplis dans l'atteinte de ces résultats ont été mesurés au moyen de **{{drr16_total}}** {{gl_tt "indicateurs" "IND_RESULT"}}. 
     {{/if}}
 
     {{#if drr16_past_total}} De ces indicateurs: {{/if}}

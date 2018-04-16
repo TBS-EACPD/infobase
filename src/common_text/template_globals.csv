@@ -2,7 +2,7 @@ key,en,fr
 qfr_month_name,June 30,30 juin
 qfr_in_year_end,"March 31st, 2017",31 mars 2017
 qfr_last_year_end,"March 31st, 2016",31 mars 2016
-last_estimates,Supplementary Estimates C,Budget supplémentaire C
+last_estimates,Main Estimates,Budget principal
 quarter_name,Q1,premier trimestre
 qfr_month_quarter_names,April to June,avril à juin
 in_year_month_name,April,April
@@ -14,11 +14,11 @@ pa_last_year_3,2014-15,2014-2015
 pa_last_year_4,2013-14,2013-2014
 pa_last_year_5,2012-13,2012-2013
 open_year,2016-17,2016-2017
-est_next_year,2018-19,2018-2019
-est_in_year,2017-18,2017-2018
-est_last_year,2016-17,2016-2017
-est_last_year_2,2015-16,2015-2016
-est_last_year_3,2014-15,2014-2015
+est_in_year,2018-19,2018-2019
+est_last_year,2017-18,2017-2018
+est_last_year_2,2016-17,2016-2017
+est_last_year_3,2015-16,2015-2016
+est_last_year_4,2014-15,2014-2015
 lapse_in_year,2016-17,2016-2017
 lapse_last_year,2015-16,2015-2016
 planning_year_1,2017-18,2017-2018
@@ -27,7 +27,7 @@ planning_year_3,2019-20,2019-2020
 Gov,Government of Canada,Gouvernement du Canada
 mar_31,March 31,31 mars
 short_thousand," <span class=""text-nowra"">($000)</span> "," <span class=""text-nowra"">(000$)</span>"
-mains_date,February 23rd,23 février
+mains_date,April 16th,16 avril
 p,P13,P13
 ppl_last_year,March 2016,mars 2016
 ppl_last_year_2,March 2015,mars 2015

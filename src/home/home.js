@@ -1,35 +1,26 @@
+import "./home.ib.yaml";
+import './home.scss';
+import './home-pngs.css';
 import get_home_content from './home-data.js';
 import { log_standard_event } from '../core/analytics.js';
+import { DpComingSoonHomeComponent } from '../components/dp-coming-soon.js'
+import MediaQuery from 'react-responsive';
+import classNames from 'classnames';
 
-require('./home.scss');
-require('./home-pngs.css');
 
-const MediaQuery = require('react-responsive');
-const classNames = require('classnames');
-const { 
+import { 
   EverythingSearch,
-} = require('../util_components.js');
-const {
-  general_href_for_item,
-} = require('../link_utils.js');
-
-const {
-  text_maker,
-} = require('../models/text.js');
-require("./home.ib.yaml");
-
-
-const {
   TM,
   SpinnerWrapper,
-} = require('../util_components.js');
+} from '../util_components.js';
 
+import { general_href_for_item } from '../link_utils.js';
+import { text_maker } from '../models/text.js';
+import { ensure_loaded } from '../core/lazy_loader.js';
+import { ResultCounts } from '../models/results.js';
+import { Table } from '../core/TableClass.js';
 
-const { ensure_loaded } = require('../core/lazy_loader.js');
-const { ResultCounts } = require('../models/results.js');
-const { Table } = require('../core/TableClass.js');
-
-const { StandardRouteContainer } = require('../core/NavComponents.js');
+import { StandardRouteContainer } from '../core/NavComponents.js';
 
 const HImageCard = ({
   title_key,
@@ -159,6 +150,9 @@ const FeaturedContentItem = ({ text_key, href, is_new }) => <li className="list-
 
 const HomeLayout = props => (
   <div className="home-root">
+    <div style={{padding: "10px 0"}}>
+      <DpComingSoonHomeComponent />
+    </div>
     <div className="intro-box">
       <h1> <TM k="welcome" /> </h1>
       <h2> <TM k="home_sub_title" /> </h2>

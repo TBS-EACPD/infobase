@@ -1,3 +1,4 @@
+/* eslint-disable no-unreachable */
 import {text_maker} from '../models/text.js';
 
 function should_add_survey_banner(){

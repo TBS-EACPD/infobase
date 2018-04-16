@@ -1,3 +1,6 @@
+import './gov_dp_text.ib.yaml';
+
+const { DpComingSoonPanel } = require('../../components/dp-coming-soon.js');
 const {
   Subject: {
     Dept,
@@ -11,7 +14,6 @@ const {
   },
 } = require("../shared");
 
-import './gov_dp_text.ib.yaml';
 
 const {
   link_to_results_infograph,
@@ -208,3 +210,20 @@ new PanelGraph({
     );
   },
 });
+
+new PanelGraph({
+  level: "gov",
+  key: "dp_coming_soon",
+  layout: {
+    full: {text: [], graph: 12},
+  },
+  title: "dp_coming_soon_title",
+  calculate:_.constant(true),
+  render(panel){
+    const el = panel.areas().graph.node();
+    reactAdapter.render(
+      <DpComingSoonPanel />,
+      el
+    );
+  },
+})

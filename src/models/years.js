@@ -10,11 +10,11 @@ export const years = {
     "{{est_in_year}}",
   ],
   estimates_years : [
+    "{{est_last_year_4}}",
     "{{est_last_year_3}}",
     "{{est_last_year_2}}",
     "{{est_last_year}}",
     "{{est_in_year}}",
-    "{{est_next_year}}",
   ],
   planning_years : [
     '{{planning_year_1}}',

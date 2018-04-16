@@ -201,6 +201,7 @@ exports.common_react_donut = function render(panel, calculations, options){
         inner_radius={true}
         inner_text={true}
         inner_text_fmt={formats.compact1_raw}
+        height={this.height || null}
       />
       { !has_neg && 
         <div className="centerer" style={{marginTop: "-40px"}}>

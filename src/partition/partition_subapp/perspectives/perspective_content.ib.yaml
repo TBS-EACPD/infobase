@@ -344,12 +344,12 @@ partition_spending_was:
   transform: [handlebars]
   en: |
     We spent   
-    <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_compact x}}</a></p>
+    <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_compact1 x}}</a></p>
     in
     <span class='text-nowrap'>{{pa_last_year}}</span>
   fr: |
     Nous avons dépensé   
-    <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_compact x}}</a></p>
+    <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_compact1 x}}</a></p>
     en
     <span class='text-nowrap'>{{pa_last_year}}</span>
 partition_fte_was:
@@ -367,26 +367,6 @@ partition_fte_was:
 partiton_default_was_root:
   transform: [handlebars]
   text: <span class='text-nowrap'>{{pa_last_year}}</span>
-partition_spending_will_be:
-  transform: [handlebars]
-  en: |
-    We plan on spending
-    <p class='amount'>
-      <a class="infographic" href="#rpb/~(columns~(~'*7b*7best_in_year*7d*7d_estimates)~subject~'gov_gov~mode~'details~dimension~'by_estimates_doc~filter~'All~table~'table8~preferDeptBreakout~true~descending~false)">
-        {{rawfmt_compact x}}
-      </a>
-    </p>
-    in
-    <span class='text-nowrap'>{{planning_year_1}}</span>
-  fr: |
-    Nous prévoyons dépenser
-    <p class='amount'>
-      <a class="infographic" href="#rpb/~(columns~(~'*7b*7best_in_year*7d*7d_estimates)~subject~'gov_gov~mode~'details~dimension~'by_estimates_doc~filter~'Tout~table~'table8~preferDeptBreakout~true~descending~false)">
-        {{rawfmt_compact x}}
-      </a>
-    </p>
-    en
-    <span class='text-nowrap'>{{planning_year_1}}</span>
 partition_fte_will_be:
   transform: [handlebars]
   en: |
@@ -400,54 +380,51 @@ partition_fte_will_be:
     ETP en
     <span class='text-nowrap'>{{planning_year_1}}</span>
 
-partition_spending_will_be_by_est_doc_partial_en:
+partition_spending_will_be_value_and_rpb_link_partial:
   handlebars_partial: true
   text: |
     <p class='amount'>
-      <a class="infographic" href="#rpb/~(columns~(~'*7b*7best_in_year*7d*7d_estimates)~subject~'gov_gov~mode~'details~dimension~'by_estimates_doc~filter~'All~table~'table8~preferDeptBreakout~true~descending~false)">
-        {{rawfmt_compact x}}
+      <a class="infographic" href="#rpb/~(columns~(~'*7b*7b{{clean_year}}*7d*7d_estimates)~subject~'gov_gov~mode~'details~dimension~'by_estimates_doc~filter~'All~table~'table8~preferDeptBreakout~true~descending~false{{rpb_filter}})">
+        {{rawfmt_compact1 x}}
       </a>
     </p>
-    in planned budgetary expenditures were tabled in the 
-partition_spending_will_be_by_est_doc_partial_fr:
-  handlebars_partial: true
-  text: |
-    <p class='amount'>
-      <a class="infographic" href="#rpb/~(columns~(~'*7b*7best_in_year*7d*7d_estimates)~subject~'gov_gov~mode~'details~dimension~'by_estimates_doc~filter~'Tout~table~'table8~preferDeptBreakout~true~descending~false)">
-        {{rawfmt_compact x}}
-      </a>
-    </p>
-    en dépenses budgétaires prévues présenté dans le
-partition_spending_will_be_by_mains:
+partiton_planned_spending_was:
+  en: |
+    We planned to spend
+  fr: |
+    Nous avons prévu de dépenser
+    
+partiton_planned_spending_will_be:
+  en: |
+    We plan on spending
+  fr: |
+    Nous prévoyons dépenser
+partition_spending_will_be_variable_year:
   transform: [handlebars]
   en: |
-    {{> "partition_spending_will_be_by_est_doc_partial_en"}} <span class='text-nowrap'>{{est_in_year}}</span> {{gt "est_doc_mains"}}
+    {{#if past_tense}}
+      {{gt "partiton_planned_spending_was"}}
+    {{else}}
+      {{gt "partiton_planned_spending_will_be"}}
+    {{/if}}
+    {{> "partition_spending_will_be_value_and_rpb_link_partial"}}
+    in
+    <span class='text-nowrap'>{{rt year}}</span>
   fr: |
-    {{> "partition_spending_will_be_by_est_doc_partial_fr"}} {{gt "est_doc_mains"}} de <span class='text-nowrap'>{{est_in_year}}</span>
-partition_spending_will_be_by_im:
+    {{#if past_tense}}
+      {{gt "partiton_planned_spending_was"}}
+    {{else}}
+      {{gt "partiton_planned_spending_will_be"}}
+    {{/if}}
+    {{> "partition_spending_will_be_value_and_rpb_link_partial"}}
+    en
+    <span class='text-nowrap'>{{rt year}}</span>
+partition_spending_will_be_by_est_doc:
   transform: [handlebars]
   en: |
-    {{> "partition_spending_will_be_by_est_doc_partial_en"}} <span class='text-nowrap'>{{est_next_year}}</span> {{gt "est_doc_im"}}
+    {{> "partition_spending_will_be_value_and_rpb_link_partial"}} in planned budgetary expenditures were tabled in the <span class='text-nowrap'>{{rt year}}</span> {{name}}
   fr: |
-    {{> "partition_spending_will_be_by_est_doc_partial_fr"}} {{gt "est_doc_im"}} de <span class='text-nowrap'>{{est_next_year}}</span>
-partition_spending_will_be_by_sea:
-  transform: [handlebars]
-  en: |
-    {{> "partition_spending_will_be_by_est_doc_partial_en"}} <span class='text-nowrap'>{{est_in_year}}</span> {{gt "est_doc_sea"}}
-  fr: |
-    {{> "partition_spending_will_be_by_est_doc_partial_fr"}} {{gt "est_doc_sea"}} de <span class='text-nowrap'>{{est_in_year}}</span>
-partition_spending_will_be_by_seb:
-  transform: [handlebars]
-  en: |
-    {{> "partition_spending_will_be_by_est_doc_partial_en"}} <span class='text-nowrap'>{{est_in_year}}</span> {{gt "est_doc_seb"}}
-  fr: |
-    {{> "partition_spending_will_be_by_est_doc_partial_fr"}} {{gt "est_doc_seb"}} de <span class='text-nowrap'>{{est_in_year}}</span>
-partition_spending_will_be_by_sec:
-  transform: [handlebars]
-  en: |
-    {{> "partition_spending_will_be_by_est_doc_partial_en"}} <span class='text-nowrap'>{{est_in_year}}</span> {{gt "est_doc_sec"}}
-  fr: |
-    {{> "partition_spending_will_be_by_est_doc_partial_fr"}} {{gt "est_doc_sec"}} de <span class='text-nowrap'>{{est_in_year}}</span>
+    {{> "partition_spending_will_be_value_and_rpb_link_partial"}} en dépenses budgétaires prévues présenté dans le {{name}} de <span class='text-nowrap'>{{rt year}}</span>
 
 ## Misc. lang
 partition_focus_button:

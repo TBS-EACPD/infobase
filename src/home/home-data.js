@@ -3,15 +3,15 @@ import { rpb_link } from '../rpb/rpb_link.js';
 export default function(a11y_mode){
   const featured_content_items = [
     {
-      text_key: "interim_mains",
+      text_key: "main_estimates",
       href: (
         window.is_a11y_mode ? 
           rpb_link({ 
             table: 'table8', 
-            columns: [ "{{est_next_year}}_estimates"], 
+            columns: [ "{{est_in_year}}_estimates"], 
             dimension: 'by_estimates_doc', 
           }) :
-          "#partition/est_doc_im/planned_exp"
+          "#partition/est_doc_mains/planned_exp"
       ),
       is_new: true,
     },

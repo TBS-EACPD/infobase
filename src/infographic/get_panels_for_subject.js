@@ -21,7 +21,8 @@ import "../panels/people/employee_fol";
 
 //vote-stat
 import "../panels/vote-stat/in_year_estimates";
-import "../panels/vote-stat/in_year_estimates_split";
+//turned off until supps A
+// import "../panels/vote-stat/in_year_estimates_split";
 import "../panels/vote-stat/in_year_vote_stat_split";
 import "../panels/vote-stat/in_year_vote-stat_breakdown";
 import "../panels/vote-stat/last_year_vote_stat_split";
@@ -80,7 +81,7 @@ const get_gov_panels = subject => ({
     "welcome_mat",
     'gocographic',
     "historical_auth_exp",
-    "in_year_estimates_split",
+    // "in_year_estimates_split",//turned off until supps A
     "in_year_voted_stat_split",
     "in_year_stat_breakdown",
     "in_year_voted_breakdown",
@@ -90,6 +91,7 @@ const get_gov_panels = subject => ({
   people: get_people_panels(subject),
   results: [
     "results_intro",
+    "dp_coming_soon",
     "gov_drr",
     "gov_dp",
   ],
@@ -109,7 +111,7 @@ const get_dept_panels = subject => {
       "welcome_mat",
       "estimates_in_perspective",
       "historical_auth_exp",
-      "in_year_estimates_split",
+      // "in_year_estimates_split",//turned off until supps A
       "in_year_voted_stat_split",
       "spend_by_so_hist",
       "last_year_g_and_c_perspective",

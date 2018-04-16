@@ -5,13 +5,16 @@ import {
   PanelGraph,
 } from "../shared";
 
+const pie_height = 300;
+
 new PanelGraph({
   level: "dept",
+  height: pie_height,
   key: 'in_year_voted_stat_split',
   depends_on :  ['table8'],
   info_deps: ['table8_dept_info', 'table8_gov_info' ],
   layout: {
-    full:  {text : 7, graph: 5},       
+    full:  {text : 6, graph: 6},       
     half : {text : 12, graph: 12},      
   },
   machinery_footnotes : false,
@@ -32,6 +35,7 @@ new PanelGraph({
 
 new PanelGraph({
   level: "gov",
+  height: pie_height,
   key: 'in_year_voted_stat_split',
   depends_on :  ['table8'],
   machinery_footnotes : false,
