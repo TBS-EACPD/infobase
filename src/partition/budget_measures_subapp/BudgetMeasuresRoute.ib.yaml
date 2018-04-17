@@ -32,13 +32,13 @@ budget_route_top_text:
     Presented below are the new spending measures listed in <a href="https://www.budget.gc.ca/2018/docs/plan/anx-02-en.html#41-Policy-Actions-and-Budget-Investments-by-Department-(Cash-Basis)">Table A2.11 of the 2018 Budget Plan</a>.
     These measures, totalling **$7.04 billion** in **2018-19**, are also listed in the 2018-19 Main Estimates Annex 1, thereby establishing a clear link between the Budget Plan and the Main Estimates.  
   fr: |
-   Présenté ci-dessous sont les Nouvelles mesures de dépenses figurant au <a href="https://www.budget.gc.ca/2018/docs/plan/anx-02-fr.html#41-Mesures-strategiques-et-investissements-du-budget-par-ministere-et-organisme-(selon-la-comptabilite-de-caisse)">tableau A2.11 du plan budgétaire de 2018</a>.
-   Ces mesures, totalisant **7,04 milliards** de dollars en **2018-19**, se retrouvent également dans l'annexe 1 du Budget principal des dépenses de 2018-2019, établissant ainsi un lien clair entre le Plan budgétaire et le Budget principal des dépenses.  
+    Présenté ci-dessous sont les Nouvelles mesures de dépenses figurant au <a href="https://www.budget.gc.ca/2018/docs/plan/anx-02-fr.html#41-Mesures-strategiques-et-investissements-du-budget-par-ministere-et-organisme-(selon-la-comptabilite-de-caisse)">tableau A2.11 du plan budgétaire de 2018</a>.
+    Ces mesures, totalisant **7,04 milliards** de dollars en **2018-19**, se retrouvent également dans l'annexe 1 du Budget principal des dépenses de 2018-2019, établissant ainsi un lien clair entre le Plan budgétaire et le Budget principal des dépenses.  
 
 other_budget_measure_chapter_description:
   en: Other Budget 2018 Measures, not included in budget chapters.
   fr: Autres mesures prévues dans le budget de 2018, non incluses dans les chapitres budgétaires.
 
 budget_measure_description_values_clarification:
-  en: Spending amounts presented in the description are in accrual terms and therefore may not match cash amounts presented in Table A2.11 of Budget 2018.
+  en: Spending amounts presented in the description are in accrual terms and therefore may not match cash amounts presented in Table A2.11 of {{gt "budget_name"}}.
   fr: TODO
