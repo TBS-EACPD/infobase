@@ -54,6 +54,7 @@ const popup_template = node => {
     name: node.data.name,
     color: node.color,
     description: !_.isUndefined(node.data.description) && !_.isEmpty(node.data.description) && node.data.description,
+    notes: !_.isUndefined(node.data.notes) && !_.isEmpty(node.data.notes) && node.data.notes,
     chapter: !_.isUndefined(node.data.chapter_key) && budget_chapters[node.data.chapter_key].text,
     budget_link: !_.isUndefined(node.data.chapter_key) && node.data.chapter_key !== "oth" && !_.isEmpty(node.data.ref_id) && make_budget_link(node.data.chapter_key, node.data.ref_id),
     is_first_column: node.depth === 1,

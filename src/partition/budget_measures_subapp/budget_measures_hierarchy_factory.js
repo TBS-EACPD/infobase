@@ -27,20 +27,28 @@ const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
             filtered_chapter_keys.length === 0 ||
             _.indexOf(filtered_chapter_keys, budgetMeasure.chapter_key) === -1 
           )
-          .map( budgetMeasure => _.assign(
-            {},
-            budgetMeasure, 
-            { 
-              type: "budget_measure",
-              description: budgetMeasure.chapter_key === "oth" && budgetMeasure.id !== "net_adjust" ?
-                text_maker("other_budget_measure_chapter_description") :
-                _.isEmpty(budgetMeasure.description) ?
-                  text_maker("not_available") :
-                  budgetMeasure.description,
-              chapter_key: budgetMeasure.chapter_key,
-              value: _.reduce(budgetMeasure.funds, (sum, fund_row) => sum + (fund_row.fund), 0),
-            }
-          ))
+          .map( budgetMeasure => {
+            
+            const has_chapter_other_and_not_net_adjust = budgetMeasure.chapter_key === "oth" && budgetMeasure.id !== "net_adjust";
+            const has_no_description = _.isEmpty(budgetMeasure.description);
+            const has_own_description = has_chapter_other_and_not_net_adjust && !has_no_description
+
+            return _.assign(
+              {},
+              budgetMeasure, 
+              { 
+                type: "budget_measure",
+                description: has_chapter_other_and_not_net_adjust ?
+                  text_maker("other_budget_measure_chapter_description") :
+                  has_no_description ?
+                    text_maker("not_available") :
+                    budgetMeasure.description,
+                notes: has_own_description ? text_maker("budget_measure_description_values_clarification") : false,
+                chapter_key: budgetMeasure.chapter_key,
+                value: _.reduce(budgetMeasure.funds, (sum, fund_row) => sum + (fund_row.fund), 0),
+              }
+            )
+          })
           .value();
         return budgetMeasureNodes;
       } else if (node.type === "budget_measure"){
@@ -139,17 +147,23 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
       } else if (node.type === "dept" || node.type === "non_allocated" || node.type !== "net_adjust"){
         const budgetMeasureNodes = _.map(node.fund_rows, fund_row => {
           const budgetMeasure = Subject.BudgetMeasure.lookup(fund_row.measure_id);
+
+          const has_chapter_other = budgetMeasure.chapter_key === "oth";
+          const has_no_description = _.isEmpty(budgetMeasure.description);
+          const has_own_description = !has_chapter_other && !has_no_description
+
           return _.assign(
             {},
             budgetMeasure,
             { 
               type: "budget_measure",
               chapter_key: budgetMeasure.chapter_key,
-              description: budgetMeasure.chapter_key === "oth" ?
+              description: has_chapter_other ?
                 text_maker("other_budget_measure_chapter_description") :
-                _.isEmpty(budgetMeasure.description) ?
+                has_no_description ?
                   text_maker("not_available") :
                   budgetMeasure.description,
+              notes: has_own_description ? text_maker("budget_measure_description_values_clarification") : false,
               value: fund_row.fund,
             }
           );

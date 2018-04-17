@@ -104,8 +104,16 @@ budget_measure_popup_template:
       <div class='popup-font-ml popup-row-top-border'>
         {{gt "description"}}:
       </div>
-      <div class='mrgn-bttm-md popup-row-bottom-border popup-decription-text'>
+      <div class='mrgn-bttm-sm popup-row-bottom-border popup-decription-text'>
         {{{description}}}
+      </div>
+    {{/if}}
+    {{#if notes}}
+      <div class='popup-font-ml'>
+        {{gt "notes"}}:
+      </div>
+      <div class='mrgn-bttm-sm popup-row-bottom-border popup-decription-text'>
+        {{{notes}}}
       </div>
     {{/if}}
     {{#if budget_link}}

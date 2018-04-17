@@ -38,3 +38,7 @@ budget_route_top_text:
 other_budget_measure_chapter_description:
   en: Other Budget 2018 Measures, not included in budget chapters.
   fr: Autres mesures prévues dans le budget de 2018, non incluses dans les chapitres budgétaires.
+
+budget_measure_description_values_clarification:
+  en: Spending amounts presented in the description are in accrual terms and therefore may not match cash amounts presented in Table A2.11 of Budget 2018.
+  fr: TODO

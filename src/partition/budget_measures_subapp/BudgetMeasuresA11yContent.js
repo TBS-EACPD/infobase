@@ -59,6 +59,8 @@ export function BudgetMeasuresA11yContent(){
                   year,
                 }} 
               />
+              <br/>
+              <TextMaker text_key="notes"/> <TextMaker text_key="budget_measure_description_values_clarification"/>
             </caption>
             <thead>
               <tr>
