@@ -3,6 +3,15 @@ import { rpb_link } from '../rpb/rpb_link.js';
 export default function(a11y_mode){
   const featured_content_items = [
     {
+      text_key: "DP_1819",
+      href: rpb_link({ 
+        table: 'table6', 
+        columns: ['{{planning_year_1}}'], 
+        dimension: "gov_goco",
+      }),
+      is_new: true,
+    },
+    {
       text_key: "table112_title",
       href: (
         rpb_link({ 
@@ -75,21 +84,12 @@ export default function(a11y_mode){
           }) :
           "#partition/est_doc_sec/planned_exp"
       ),
-      is_new: true,
     },
     {
       text_key: "DRR_1617",
       href: rpb_link({ 
         table: 'table12', 
         columns: ['{{pa_last_year}}'], 
-        dimension: "gov_goco",
-      }),
-    },
-    {
-      text_key: "DP_1718",
-      href: rpb_link({ 
-        table: 'table6', 
-        columns: ['{{planning_year_1}}'], 
         dimension: "gov_goco",
       }),
     },
