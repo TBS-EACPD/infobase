@@ -1,7 +1,12 @@
 #ib-site-header {
-  background-color: #335075;
+  background-color: #f8f8f8;
   padding: 1.15rem;
   line-height: 0;
+}
+
+#wb-bc {
+  background-color: #f8f8f8 !important;
+  border-bottom:4px solid #335075;
 }
 @media (min-width: 768px) {
   #ib-site-header {
@@ -34,7 +39,6 @@
 }
 #wb-lng > a.lang-switcher {
   display: inline-block;
-  color: #FFFFFF;
   display: inline-block;
   font-size: 1.25rem;
   font-weight: 400;
