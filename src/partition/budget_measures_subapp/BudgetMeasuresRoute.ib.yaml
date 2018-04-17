@@ -1,8 +1,12 @@
 ## text common to standard and a11y versions of route
 
-budget_name:
+budget_header_name:
   en: Budget 2018
   fr: Le budget de 2018
+
+budget_header:
+  en: Budget 2018
+  fr: le budget de 2018
 
 budget_route_year:
   text: 2018-19
