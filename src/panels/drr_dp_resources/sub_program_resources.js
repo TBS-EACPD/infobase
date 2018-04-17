@@ -529,6 +529,7 @@ new PanelGraph({
   key: "sub_program_resources",
   level: 'program',
   requires_results: true,
+  requires_result_counts: true,
   footnotes:false,
   depends_on : ['table12'],
   source: false,
