@@ -17,6 +17,7 @@ const late_depts = [
   135,
   136,
   305,
+  282,
 ];
 
 export const DpComingSoonHomeComponent = () => {
