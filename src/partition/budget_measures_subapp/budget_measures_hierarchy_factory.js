@@ -34,7 +34,9 @@ const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
               type: "budget_measure",
               description: budgetMeasure.chapter_key === "oth" && budgetMeasure.id !== "net_adjust" ?
                 text_maker("other_budget_measure_chapter_description") :
-                budgetMeasure.description,
+                _.isEmpty(budgetMeasure.description) ?
+                  text_maker("not_available") :
+                  budgetMeasure.description,
               chapter_key: budgetMeasure.chapter_key,
               value: _.reduce(budgetMeasure.funds, (sum, fund_row) => sum + (fund_row.fund), 0),
             }
@@ -145,7 +147,9 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
               chapter_key: budgetMeasure.chapter_key,
               description: budgetMeasure.chapter_key === "oth" ?
                 text_maker("other_budget_measure_chapter_description") :
-                budgetMeasure.description,
+                _.isEmpty(budgetMeasure.description) ?
+                  text_maker("not_available") :
+                  budgetMeasure.description,
               value: fund_row.fund,
             }
           );

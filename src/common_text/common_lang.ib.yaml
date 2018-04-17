@@ -394,6 +394,9 @@ employee_gender:
 see_the_infographic:
   en: See the Infographic
   fr: Voir l’infographie
+not_available:
+    en: Not Available
+    fr: Non disponible
 
 #######################################
 #  data type titles

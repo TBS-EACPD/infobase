@@ -90,9 +90,6 @@ export function BudgetMeasuresA11yContent(){
                       { !_.isEmpty(budget_measure.data.description) && 
                         budget_measure.data.description 
                       }
-                      { _.isEmpty(budget_measure.data.description) && 
-                        text_maker("other_budget_measure_chapter_description") 
-                      }
                     </td>
                     <td
                       key={ "measure_link" + budget_measure.data.id }
