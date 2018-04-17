@@ -71,67 +71,64 @@ const example_col_defs = [
   },
 ];
 
-const example_data = [
-  {
-    id: 'a',
-    data: {
-      name: "node 1",
-      spend: "20000",
-      ftes: "25",
-    },
-    isExpanded: true,
-    children: [
-      {
-        id: 'a1',
-        data: {
-          name: "node 1.1",
-          spend: "2000",
-          ftes: "5",
+const example_data = {
+  id: "root",
+  data: {},
+  children: [
+    {
+      id: 'a',
+      data: {
+        name: "node 1",
+        spend: "20000",
+        ftes: "25",
+      },
+      isExpanded: true,
+      children: [
+        {
+          id: 'a1',
+          data: {
+            name: "node 1.1",
+            spend: "2000",
+            ftes: "5",
+          },
+          is_search_match: true,
         },
-        is_search_match: true,
-      },
-    ],
-  },
-  {
-    id: 'b',
-    data: {
-      name: "node 2",
-      spend: "23530",
-      ftes: "42",
+      ],
     },
-    isExpanded:true,
-    children_groups: [
-      {
-        display: "Programs",
-        node_group: [
-          {
-            id: 'a1eee',
-            data: {
-              name: "node 1.1",
-              spend: "2000",
-              ftes: "5",
-            },
-            is_search_match: true,
-          },
-        ],
+    {
+      id: 'b',
+      data: {
+        name: "node 2",
+        spend: "23530",
+        ftes: "42",
+        type: "cr",
       },
-      {
-        display: "results",
-        node_group: [
-          {
-            id: 'b-results-1',
-            data: {
-              name: "b-results-1",
-              spend: "2000",
-              ftes: "5",
-            },
-            is_search_match: true,
+      isExpanded:true,
+      children: [
+        {
+          id: 'a1eee',
+          data: {
+            name: "node 1.1",
+            spend: "2000",
+            ftes: "5",
+            type: "result",
           },
-        ],
-      },
-    ],
-  },
-];
+          is_search_match: true,
+        },
+        {
+          id: 'b-results-1',
+          data: {
+            name: "b-results-1",
+            spend: "2000",
+            ftes: "5",
+            type:"program",
+          },
+          is_search_match: true,
+        },
+      ],
+    },
+  ],
+}
 
 export const ExplorerHeader = ({column_defs, is_sortable, sort_col, is_descending, computed_col_styles}) => {
 
@@ -170,15 +167,24 @@ const get_children_content = ({
   node,
   node: {
     children,
-    children_groups,
   },
   explorer_context,
+  explorer_context: {
+    children_grouper,
+  },
   depth,
 }) => {
   
-  const children_group_list = children_groups || !_.isEmpty(children) && [{ node_group:children }]
+  if(_.isEmpty(children)){
+    return null;
+  }
+  const children_groups = (
+    _.isFunction(children_grouper) ? 
+    children_grouper(node, children) : 
+    [{ node_group:children }]
+  );
 
-  return _.map(children_group_list, ({display, node_group},ix) => (
+  return _.map(children_groups, ({display, node_group},ix) => (
     <div
       key={ix}
       className="ExplorerNodeContainer__ChildrenContainer"
@@ -221,7 +227,6 @@ export const ExplorerNode = ({
     onClickExpand,
     computed_col_styles,
     get_non_col_content,
-    children_grouper,
   },
   node,
   mod_class,
@@ -229,7 +234,6 @@ export const ExplorerNode = ({
     id,
     isExpanded,
     data,
-    children,
   },
   depth,
 }) => (
@@ -304,24 +308,12 @@ function get_mod_class(node, sibling_index, explorer_context){
 
 }
 
-const ExplorerRoot = ({nodes, explorer_context}) => <div>
-  <FlipMove
-    typeName="ul" 
-    className='ExplorerRootList'
-    staggerDurationBy="0"
-    duration={500}
-  >
-    {_.map(nodes, (node,ix) => 
-      <li key={node.id}>
-        <ExplorerNode
-          explorer_context={explorer_context}
-          node={node}
-          mod_class={get_mod_class(node,ix,explorer_context)}
-          depth={0}
-        />
-      </li>
-    )}
-  </FlipMove>
+const ExplorerRoot = ({root, explorer_context}) => <div>
+  {get_children_content({
+    node: root,
+    explorer_context,
+    depth: 0,
+  })}
 </div>
 
 
@@ -415,7 +407,7 @@ class ExplorerContainer extends React.Component {
       config: {
         column_defs,
       },
-      nodes,
+      root,
     } = this.props;
 
     const computed_col_styles = compute_col_styles(column_defs);
@@ -428,7 +420,7 @@ class ExplorerContainer extends React.Component {
           <ExplorerHeader {...explorer_context}/>
           <ExplorerRoot
             explorer_context={explorer_context}
-            nodes={nodes}
+            root={root}
           />
         </div>
       </div>
@@ -452,12 +444,27 @@ export class DevStuff extends React.Component {
           <a href="#"> Infographic Link </a>
         </div>
       ),
+      children_grouper: (node, children) => {
+        const type = _.get(node, "data.type");
+        if(type === "cr"){
+          return _.chain(children)
+            .groupBy("data.type")
+            .toPairs()
+            .map( ([type, nodes]) => ({
+              display: type,
+              node_group: nodes,
+            }))
+            .sortBy('display')
+            .value()
+        }
+        return [{node_group: children}];
+      }
     };
 
     return (
       <div>
         <ExplorerContainer
-          nodes={example_data}
+          root={example_data}
           config={explorer_config}
         />
       </div>
