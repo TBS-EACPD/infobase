@@ -39,7 +39,11 @@ class BreadCrumbs extends React.Component {
             key={ix}
             className="infobase-home-breadcrumb-link"
           >
-            {display}
+            {
+                _.isString(display) ? //allow strings or react elements to be used here (note that some strings may have the weird french apostrophe that needs to non-escaped)
+                <span dangerouslySetInnerHTML={{__html:display}} /> :
+                display
+            }
           </li>
         )}
       </ol>
