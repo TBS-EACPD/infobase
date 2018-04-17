@@ -127,7 +127,7 @@ class PanelGraph {
         .map( table => {
 
           let appropriate_subject = subject;
-          if(subject.is('program')){ //rpb is useless at the program level
+          if(_.includes(["program","crso"], subject.level)){ //rpb is useless at the crso/program level
             appropriate_subject = subject.dept;
           } else if( subject.is('tag') && !table.programs) {
             appropriate_subject = Subject.Gov
