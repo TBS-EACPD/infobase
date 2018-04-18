@@ -259,7 +259,7 @@ function get_memoized_funcs(schemes){
 
 
   //hacky function that saves expensive hierarchy computations and toggling
-  let oldState, oldFlatNodes;
+  let oldState, oldFlatNodes, oldSortFunc;
   function shouldCompletelyRecomputeFlatNodes(oldState,newState){
 
     //every scheme can update its own state, 
@@ -273,6 +273,7 @@ function get_memoized_funcs(schemes){
     return (
       !oldState || //if oldState isn't defined yet, we of course have to recompute
       !oldFlatNodes ||  //ditto for oldFlatNodes
+      !oldSortFunc ||
       oldState.root.query !== newState.root.query ||
       oldState.root.scheme_key !== newState.root.scheme_key ||
       scheme_should_compute_func(oldState[scheme_key], newState[scheme_key])
@@ -281,8 +282,9 @@ function get_memoized_funcs(schemes){
 
   function get_flat_nodes(state){
     let flat_nodes;
+    const sort_func = get_scheme_sort_func(state);
+    
     if(shouldCompletelyRecomputeFlatNodes(oldState,state)){
-
       flat_nodes = get_sorted_filtered_hierarchy(state);
 
     } else if(
@@ -311,12 +313,16 @@ function get_memoized_funcs(schemes){
       );
 
 
+    } else if(sort_func !== oldSortFunc){
+      flat_nodes = sort_hierarchy(oldFlatNodes, sort_func);
+
     } else { //nothing changes
       flat_nodes = oldFlatNodes;
     }
     
     oldState = state; 
     oldFlatNodes = flat_nodes;
+    oldSortFunc = sort_func;
 
     return flat_nodes;
 

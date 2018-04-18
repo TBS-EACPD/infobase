@@ -174,7 +174,7 @@ const partial_scheme = {
     return !shallowEqualObjectsOverKeys(
       oldSchemeState, 
       newSchemeState, 
-      ["doc", "sort_col", "is_descending" ] 
+      ["is_descending" ] 
     );
   },
 }

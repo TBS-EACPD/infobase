@@ -198,7 +198,7 @@ const sub_program_resource_scheme = {
     return !shallowEqualObjectsOverKeys(
       oldSchemeState, 
       newSchemeState, 
-      ["doc", "sort_col", "is_descending" ] 
+      ["doc"] 
     );
   },
 }

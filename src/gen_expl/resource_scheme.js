@@ -300,7 +300,7 @@ const resource_scheme = {
     return !shallowEqualObjectsOverKeys(
       oldSchemeState, 
       newSchemeState, 
-      ['hierarchy_scheme', 'doc', "sort_col", "is_descending" ] 
+      ['hierarchy_scheme', 'doc' ] 
     );
   },
 }
