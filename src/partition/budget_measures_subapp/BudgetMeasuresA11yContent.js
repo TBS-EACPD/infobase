@@ -89,8 +89,7 @@ export function BudgetMeasuresA11yContent(){
                     </th>
                     <td
                       key={ "measure_description" + budget_measure.data.id }
-                      scope="row"
-                      rowSpan={ rows_to_span}
+                      rowSpan={ rows_to_span }
                     >
                       { !_.isEmpty(budget_measure.data.description) && 
                         budget_measure.data.description 
@@ -98,7 +97,6 @@ export function BudgetMeasuresA11yContent(){
                     </td>
                     <td
                       key={ "measure_link" + budget_measure.data.id }
-                      scope="row"
                       rowSpan={ rows_to_span }
                     >
                       { budget_measure.data.chapter_key !== "oth" && !_.isEmpty(budget_measure.data.ref_id) && 
