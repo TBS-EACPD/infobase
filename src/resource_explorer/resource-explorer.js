@@ -132,7 +132,7 @@ function render_non_col_content({node}){
   } = node;
 
   return (
-    <div className="xplorer-node-inner-collapsible-content">
+    <div>
       { !_.isEmpty(defs) && 
         <dl className="dl-horizontal">
           {_.map(defs, ({ term, def },ix) => [ 
