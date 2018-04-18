@@ -56,6 +56,7 @@ budget_measure_popup_top_line:
         </br>
         {{gt "provides"}}
       </text>
+      <span class='popup-font-ml'>
       {{#if value_is_zero}}
         {{lang_formated_zero}}
       {{else}}
@@ -67,8 +68,9 @@ budget_measure_popup_top_line:
           {{fmt_compact1 value}}
         {{/if}}
       {{/if}}
+      </span>
       <text style='color:#fdfdfd'>
-        {{gt "in_funding"}}
+        {{gt "in_funding"}} ...
       </text>
     </span>
 
