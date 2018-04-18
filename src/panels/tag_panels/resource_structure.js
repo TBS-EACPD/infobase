@@ -3,6 +3,7 @@ import { combineReducers, createStore }  from 'redux';
 import { Provider, connect } from 'react-redux';
 import { infograph_href_template } from '../../link_utils.js';
 import { get_root } from '../../gen_expl/hierarchy_tools.js';
+import { get_col_defs } from '../../gen_expl/resource-explorer-common.js';
 
 import { Explorer } from '../../components/ExplorerComponents.js';
 
@@ -31,7 +32,6 @@ import {
 const { 
   TM, 
   TextMaker,
-  Format,
 } = util_components;
 
 
@@ -68,49 +68,6 @@ const get_non_col_content = ({node}) => {
     </div>
   );
 };
-
-
-const get_col_defs = ({doc}) => [
-  {
-    id: 'name',
-    width: 250,
-    textAlign: "left",
-    header_display: <TM k="name" />,
-    get_val: ({data}) => data.name,
-  },
-  {
-    id: "spending",
-    width: 150,
-    textAlign: "right",
-    header_display: (
-      <TextMaker 
-        text_key={ 
-          doc === 'dp17' ? 
-          "tag_nav_exp_header_dp17" : 
-          'tag_nav_exp_header_drr16' 
-        } 
-      />
-    ),
-    get_val: node => _.get(node, "data.resources.spending"),
-    val_display: val => <Format type="compact1" content={val} />,
-  },
-  {
-    id: "ftes",
-    width: 150,
-    textAlign: "right",
-    header_display: (
-      <TextMaker 
-        text_key={ 
-          doc === 'dp17' ? 
-          "tag_nav_fte_header_dp17" : 
-          'tag_nav_fte_header_drr16' 
-        } 
-      />
-    ),
-    get_val: node => _.get(node, "data.resources.ftes"),
-    val_display: val => <Format type="big_int_real" content={val} />,
-  },
-];
 
 class RootedResourceExplorer extends React.Component {
   render(){

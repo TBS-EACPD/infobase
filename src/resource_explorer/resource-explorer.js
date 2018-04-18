@@ -5,6 +5,10 @@ require('../panels/result_graphs/result_lang.ib.yaml');
 const { infograph_href_template } = require('../link_utils.js');
 const { StandardRouteContainer } = require('../core/NavComponents');
 
+const {
+  get_col_defs,
+} = require('../gen_expl/resource-explorer-common.js');
+
 const { text_maker } =  require('../models/text.js');
 require("./explorer.ib.yaml");
 
@@ -16,7 +20,6 @@ const {
   TextMaker,
   TM,
   SpinnerWrapper,
-  Format,
 } = require('../util_components.js');
 const { Details } = require('../components/Details.js');
 const classNames = require('classnames');
@@ -80,47 +83,6 @@ const children_grouper = (node, children) => {
     .value();
 }
 
-const get_col_defs = ({doc}) => [
-  {
-    id: 'name',
-    width: 250,
-    textAlign: "left",
-    header_display: <TM k="name" />,
-    get_val: ({data}) => data.name,
-  },
-  {
-    id: "spending",
-    width: 150,
-    textAlign: "right",
-    header_display: (
-      <TextMaker 
-        text_key={ 
-          doc === 'dp17' ? 
-          "tag_nav_exp_header_dp17" : 
-          'tag_nav_exp_header_drr16' 
-        } 
-      />
-    ),
-    get_val: node => _.get(node, "data.resources.spending"),
-    val_display: val => <Format type="compact1" content={val} />,
-  },
-  {
-    id: "ftes",
-    width: 150,
-    textAlign: "right",
-    header_display: (
-      <TextMaker 
-        text_key={ 
-          doc === 'dp17' ? 
-          "tag_nav_fte_header_dp17" : 
-          'tag_nav_fte_header_drr16' 
-        } 
-      />
-    ),
-    get_val: node => _.get(node, "data.resources.ftes"),
-    val_display: val => <Format type="big_int_real" content={val} />,
-  },
-];
 
 function render_non_col_content({node}){
 
@@ -144,7 +106,7 @@ function render_non_col_content({node}){
         </dl>
       }
       { ( _.includes(['program','dept'], subject.level) || subject.is_cr || subject.is_lowest_level_tag ) && 
-        <div className='xplorer-node-expanded-content'>
+        <div className='ExplorerNode__BRLinkContainer'>
           <a href={infograph_href_template(subject)}> 
             <TextMaker text_key="see_infographic" />
           </a>
