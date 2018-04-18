@@ -1,10 +1,10 @@
 ## text common to standard and a11y versions of route
 
-budget_header_name:
+budget_name_header:
   en: Budget 2018
   fr: Le budget de 2018
 
-budget_header:
+budget_name:
   en: Budget 2018
   fr: le budget de 2018
 
@@ -44,5 +44,6 @@ other_budget_measure_chapter_description:
   fr: Autres mesures prévues dans le budget de 2018, non incluses dans les chapitres budgétaires.
 
 budget_measure_description_values_clarification:
+  transform: [handlebars]
   en: Spending amounts presented in the description are in accrual terms and therefore may not match cash amounts presented in Table A2.11 of {{gt "budget_name"}}.
   fr: TODO
