@@ -4,6 +4,7 @@ const {
   filter_hierarchy,
   toggleExpandedFlat,
   ensureVisibility,
+  sort_hierarchy,
 } = require('./hierarchy_tools.js');
 
 const { substr_search_generator } = require('./search_tools.js');
@@ -172,9 +173,9 @@ const map_dispatch_to_root_props = dispatch  => {
 
 const scheme_defaults = {
   get_filter_func_selector: () => _.constant(_.identity),
+  get_sort_func_selector: ()=> _.constant(_.identity),
   get_props_selector: () => _.constant({}),
   shouldUpdateFlatNodes: (oldSchemeState, newSchemeState) => oldSchemeState !== newSchemeState,
-
 }
 
 function get_memoized_funcs(schemes){
@@ -210,12 +211,21 @@ function get_memoized_funcs(schemes){
   const get_scheme_filter_func = state => scheme_filter_func_selectors[state.root.scheme_key](state);
 
 
+  const scheme_sort_func_selectors = _.chain(schemes)
+    .map(scheme => [ scheme.key, scheme.get_sort_func_selector() ] )
+    .fromPairs()
+    .value();
+
+  const get_scheme_sort_func = state => scheme_sort_func_selectors[state.root.scheme_key](state);
+  
+
   const is_filtering = state => state.root.query.length > 3;
 
   const get_query_filter_func = createSelector(
     [ get_base_hierarchy ],
     base_hierarchy => substr_search_generator( base_hierarchy )
   );
+
 
   const get_query_filtered_hierarchy = createSelector(
     [ get_base_hierarchy, get_query_filter_func, state => state.root.query ],
@@ -236,6 +246,14 @@ function get_memoized_funcs(schemes){
       return scheme_filter_func(query_filtered_hierarchy);
     }
   );
+
+
+  const get_sorted_filtered_hierarchy = createSelector(
+    [ get_fully_filtered_hierarchy, get_scheme_sort_func ],
+    (filtered_hierarchy, sort_func) => {
+      return sort_hierarchy(filtered_hierarchy, sort_func);
+    }
+  )
 
 
 
@@ -265,7 +283,7 @@ function get_memoized_funcs(schemes){
     let flat_nodes;
     if(shouldCompletelyRecomputeFlatNodes(oldState,state)){
 
-      flat_nodes = get_fully_filtered_hierarchy(state);
+      flat_nodes = get_sorted_filtered_hierarchy(state);
 
     } else if(
       oldState.root.userCollapsed !== state.root.userCollapsed || 

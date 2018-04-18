@@ -283,6 +283,27 @@ function simplify_hierarchy(flat_nodes, is_simple_parent, bottom_layer_filter){
 
 }
 
+//children_transform: [ ...node, ] => [ ...node, ] without modifying individual nodes
+function sort_hierarchy(flat_nodes, children_transform){
+  const old_root = get_root(flat_nodes);
+  const new_root = _sort_hierarchy(old_root, children_transform);
+
+  return [ new_root, ...flat_descendants(new_root) ];
+}
+
+function _sort_hierarchy(node, children_transform){
+  const new_children = _.chain(node.children)
+    .pipe(children_transform)
+    .map(child => _sort_hierarchy(child, children_transform) )
+    .value();
+
+  return Object.assign(
+    {},
+    node,
+    { children: new_children }
+  );
+}
+
 module.exports = exports = {
   filter_hierarchy,
   get_leaves,
@@ -292,4 +313,5 @@ module.exports = exports = {
   toggleExpandedFlat,
   convert_d3_hierarchy_to_explorer_hierarchy,
   simplify_hierarchy,
+  sort_hierarchy,
 };

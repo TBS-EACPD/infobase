@@ -130,7 +130,7 @@ const example_data = {
   ],
 }
 
-export const ExplorerHeader = ({column_defs, is_sortable, sort_col, is_descending, computed_col_styles}) => {
+export const ExplorerHeader = ({column_defs, is_sortable, sort_col, is_descending, computed_col_styles, col_click}) => {
 
   return (
     <div className="ExplorerHeader ExplorerHeader--blue">
@@ -144,6 +144,9 @@ export const ExplorerHeader = ({column_defs, is_sortable, sort_col, is_descendin
               Object.assign({},computed_col_styles[id], { textAlign: "center" }) :
               computed_col_styles[id]
             }
+            onClick={()=>col_click(id)}
+            tabIndex={0}
+            role="button"
           >
             {header_display}
             {is_sortable && 
@@ -245,7 +248,7 @@ export const ExplorerNode = ({
       <div className="ExplorerNode__ExpanderContainer">
         <button
           className={classNames("ExplorerNode__Expander", window.is_a11y_mode && "ExplorerNode__Expander--a11y-compliant")}
-          onClick={()=>onClickExpand(id)}
+          onClick={()=>onClickExpand(node)}
         >
           { isExpanded ? "▼" : "►" }
         </button>
@@ -253,10 +256,10 @@ export const ExplorerNode = ({
       <div className="ExplorerNode__ContentContainer">
         <div
           className="ExplorerNode__RowContainer"
-          onClick={()=>onClickExpand(id)}
+          onClick={()=>onClickExpand(node)}
         >
           <div className="ExplorerRow">
-            {_.map(column_defs, ({id, width, get_val },ix) =>
+            {_.map(column_defs, ({id, width, get_val, val_display },ix) =>
               <div 
                 key={id}
                 className="ExplorerRow__Cell"
@@ -266,7 +269,11 @@ export const ExplorerNode = ({
                   computed_col_styles[id]
                 }
               >
-                {get_val(node)}
+                {
+                  _.isFunction(val_display) ? 
+                  val_display(get_val(node)) :
+                  get_val(node)
+                }
               </div>
             )}
           </div>
@@ -286,13 +293,23 @@ export const ExplorerNode = ({
         </ReactTransitionGroup>
       </div>
     </div>
-    { isExpanded && 
-      get_children_content({
-        node,
-        depth: depth+1,
-        explorer_context,
-      })
-    }
+    <ReactTransitionGroup component={FirstChild}>
+      { isExpanded && 
+        <AccordionEnterExit
+          component="div"
+          expandDuration={500}
+          collapseDuration={300}
+        >
+          {
+            get_children_content({
+              node,
+              depth: depth+1,
+              explorer_context,
+            })
+          }
+        </AccordionEnterExit>
+      }
+    </ReactTransitionGroup>
   </div>
 );
 
@@ -380,7 +397,7 @@ const compute_col_styles = createSelector(_.identity, col_defs => {
 
 });
 
-class ExplorerContainer extends React.Component {
+export class Explorer extends React.Component {
   componentDidMount(){
     this.updateWidth();
   }
@@ -407,6 +424,7 @@ class ExplorerContainer extends React.Component {
       config: {
         column_defs,
       },
+      col_state,
       root,
     } = this.props;
 
@@ -417,7 +435,10 @@ class ExplorerContainer extends React.Component {
     return (
       <div style={{overflowX: "auto"}}>
         <div ref={el => this.width_setter_el = el}> 
-          <ExplorerHeader {...explorer_context}/>
+          <ExplorerHeader
+            {...explorer_context}
+            {...col_state}
+          />
           <ExplorerRoot
             explorer_context={explorer_context}
             root={root}
@@ -436,8 +457,6 @@ export class DevStuff extends React.Component {
       column_defs: example_col_defs,
       onClickExpand: _.noop,
       is_sortable: true,
-      sort_col: "name",
-      is_descending: false,
       zebra_stripe: true,
       get_non_col_content: ({node}) => (
         <div className="ExplorerNode__BRLinkContainer">
@@ -463,9 +482,13 @@ export class DevStuff extends React.Component {
 
     return (
       <div>
-        <ExplorerContainer
+        <Explorer
           root={example_data}
           config={explorer_config}
+          col_state={{
+            sort_col: "name",
+            is_descending: false,
+          }}
         />
       </div>
     );

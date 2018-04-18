@@ -1,5 +1,8 @@
 require('../panels/intro_graphs/intro_lang.ib.yaml');
 require('../panels/result_graphs/result_lang.ib.yaml');
+
+
+const { infograph_href_template } = require('../link_utils.js');
 const { StandardRouteContainer } = require('../core/NavComponents');
 
 const { text_maker } =  require('../models/text.js');
@@ -13,6 +16,7 @@ const {
   TextMaker,
   TM,
   SpinnerWrapper,
+  Format,
 } = require('../util_components.js');
 const { Details } = require('../components/Details.js');
 const classNames = require('classnames');
@@ -31,9 +35,6 @@ const {
   get_initial_resource_state,
 } = require('../gen_expl/resource_scheme.js');
 
-const { GeneralTree } = require('../gen_expl/GeneralTree.js');
-
-
 const {
   get_memoized_funcs,
   initial_root_state,
@@ -44,6 +45,7 @@ const {
 
 const { ensure_loaded } = require('../core/lazy_loader.js');
 
+const { Explorer } = require('../components/ExplorerComponents.js');
 
 const HierarchySelectionItem = ({title, text, active, url }) => (
   <a 
@@ -64,9 +66,97 @@ const HierarchySelectionItem = ({title, text, active, url }) => (
 );
 
 
+const children_grouper = (node, children) => {
+  if(node.root){
+    return [{node_group: children}];
+  }
+
+  return _.chain(children)
+    .groupBy(child => child.data.subject.plural() )
+    .map( (node_group,plural) => ({
+      display: plural,
+      node_group,
+    }))
+    .value();
+}
+
+const get_col_defs = ({doc}) => [
+  {
+    id: 'name',
+    width: 250,
+    textAlign: "left",
+    header_display: <TM k="name" />,
+    get_val: ({data}) => data.name,
+  },
+  {
+    id: "spending",
+    width: 150,
+    textAlign: "right",
+    header_display: (
+      <TextMaker 
+        text_key={ 
+          doc === 'dp17' ? 
+          "tag_nav_exp_header_dp17" : 
+          'tag_nav_exp_header_drr16' 
+        } 
+      />
+    ),
+    get_val: node => _.get(node, "data.resources.spending"),
+    val_display: val => <Format type="compact1" content={val} />,
+  },
+  {
+    id: "ftes",
+    width: 150,
+    textAlign: "right",
+    header_display: (
+      <TextMaker 
+        text_key={ 
+          doc === 'dp17' ? 
+          "tag_nav_fte_header_dp17" : 
+          'tag_nav_fte_header_drr16' 
+        } 
+      />
+    ),
+    get_val: node => _.get(node, "data.resources.ftes"),
+    val_display: val => <Format type="big_int_real" content={val} />,
+  },
+];
+
+function render_non_col_content({node}){
+
+  const {
+    data: {
+      subject,
+      defs,
+    },
+  } = node;
+
+  return (
+    <div className="xplorer-node-inner-collapsible-content">
+      { !_.isEmpty(defs) && 
+        <dl className="dl-horizontal">
+          {_.map(defs, ({ term, def },ix) => [ 
+            /* eslint-disable react/jsx-key */
+            <dt key={"dt-"+ix}> { term } </dt>,
+            /* eslint-disable react/jsx-key */
+            <dd key={"dd-"+ix}> { def } </dd>,
+          ])}
+        </dl>
+      }
+      { ( _.includes(['program','dept'], subject.level) || subject.is_cr || subject.is_lowest_level_tag ) && 
+        <div className='xplorer-node-expanded-content'>
+          <a href={infograph_href_template(subject)}> 
+            <TextMaker text_key="see_infographic" />
+          </a>
+        </div>
+      }
+    </div>
+  )
+}
 
 
-class Explorer extends React.Component {
+
+class ExplorerPage extends React.Component {
   constructor(){
     super()
     this.state = { _query : "" };
@@ -103,11 +193,21 @@ class Explorer extends React.Component {
       hierarchy_scheme,
       is_descending,
       sort_col,
-      sort_func,
       col_click,
       doc,
       is_m2m,
     } = this.props;
+
+
+    const explorer_config = {
+      column_defs: get_col_defs({doc}),
+      onClickExpand: id => toggle_node(id),
+      is_sortable: true,
+      zebra_stripe: true,
+      get_non_col_content: render_non_col_content,
+      children_grouper,
+      col_click,
+    } 
 
     const { loading } = this.state;
 
@@ -118,7 +218,7 @@ class Explorer extends React.Component {
       Tag.lookup("HWH"),
     ].map( ({ description, name, id }) => ({
       title: name,
-      text: description,
+      text: description,  
       active: hierarchy_scheme === id,
       id,
     }));
@@ -184,21 +284,12 @@ class Explorer extends React.Component {
             <TextMaker text_key="search_no_results" />
           </div>
         }
-        <GeneralTree
-          {...{
-            root,
-            onToggleNode: toggle_node,
-            renderNodeContent: resource_scheme.tree_renderer,
-            sort_func,
-            is_searching : is_filtering,
-            scheme_props: { 
-              hierarchy_scheme, 
-              sort_func, 
-              sort_col, 
-              col_click, 
-              is_descending,
-              doc,
-            },
+        <Explorer 
+          config={explorer_config}
+          root={root}
+          col_state={{
+            sort_col,
+            is_descending,
           }}
         />
       </div>
@@ -267,7 +358,7 @@ const map_state_to_props_from_memoized_funcs = memoized_funcs => {
 }
 
 
-class ExplorerContainer extends React.Component {
+class OldExplorerContainer extends React.Component {
   componentWillMount(){
     const { hierarchy_scheme, doc } = this.props;
     const scheme = resource_scheme;
@@ -291,7 +382,7 @@ class ExplorerContainer extends React.Component {
     };
 
     const connecter = connect(mapStateToProps, mapDispatchToProps);
-    const Container = connecter(Explorer);
+    const Container = connecter(ExplorerPage);
     const store = createStore(reducer,initialState);
 
     this.Container = Container;
@@ -368,7 +459,7 @@ export class ResourceExplorer extends React.Component {
     return (
       <StandardRouteContainer {...route_container_args}>
         {header}
-        <ExplorerContainer {...{hierarchy_scheme, doc}} />
+        <OldExplorerContainer {...{hierarchy_scheme, doc}} />
       </StandardRouteContainer>
     );
 
