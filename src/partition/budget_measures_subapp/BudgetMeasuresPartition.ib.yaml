@@ -120,7 +120,7 @@ budget_measure_popup_bottom_rows:
       <div class='popup-font-ml popup-row-top-border'>
         {{gt "description"}}:
       </div>
-      <div class='mrgn-bttm-sm popup-row-bottom-border popup-decription-text'>
+      <div class='mrgn-bttm-sm popup-row-bottom-border popup-decription-text' style='min-height:20px;'>
         {{{description}}}
       </div>
     {{/if}}
@@ -128,7 +128,7 @@ budget_measure_popup_bottom_rows:
       <div class='popup-font-ml'>
         {{gt "notes"}}:
       </div>
-      <div class='mrgn-bttm-sm popup-row-bottom-border popup-decription-text'>
+      <div class='mrgn-bttm-sm popup-row-bottom-border popup-decription-text' style='min-height:40px;'>
         {{{notes}}}
       </div>
     {{/if}}
