@@ -4,7 +4,7 @@ provides:
 
 single_word_for:
   en: For
-  fr: pour
+  fr: Pour
 
 single_word_to:
   en: To
@@ -75,11 +75,11 @@ budget_measure_popup_top_line:
 budget_measure_popup_dept_line:
   handlebars_partial: true
   text: |
-    <div class="budget-measure-popup-name-row">
-      <span class='popup-font-ml name-row-left' style='color:#fdfdfd'>
+    <div class="budget-measure-popup-name-row popup-font-m">
+      <span class='name-row-left' style='color:#fdfdfd'>
         {{gt "single_word_to"}}
       </span>
-      <span class='popup-font-ml name-row-right'>
+      <span class='name-row-right'>
         {{dept_name}}
       </span>
     </div>
@@ -87,11 +87,11 @@ budget_measure_popup_dept_line:
 budget_measure_popup_measure_line:
   handlebars_partial: true
   text: |
-    <div class="budget-measure-popup-name-row">
-      <span class='popup-font-ml name-row-left' style='color:#fdfdfd'>
+    <div class="budget-measure-popup-name-row popup-font-m">
+      <span class='name-row-left' style='color:#fdfdfd'>
         {{gt "single_word_for"}}
       </span>
-      <span class='popup-font-ml name-row-right'>
+      <span class='name-row-right'>
         {{measure_name}}
       </span>
     </div>
@@ -99,11 +99,11 @@ budget_measure_popup_measure_line:
 budget_measure_popup_year_line:
   handlebars_partial: true
   text: |
-    <div class="budget-measure-popup-name-row">
-      <span class='popup-font-ml name-row-left' style='color:#fdfdfd'>
+    <div class="budget-measure-popup-name-row popup-font-m">
+      <span class='name-row-left' style='color:#fdfdfd'>
         {{gt "single_word_in"}}
       </span>
-      <span class='popup-font-l name-row-right'>
+      <span class='name-row-right'>
         {{year}}
       </span>
     </div>

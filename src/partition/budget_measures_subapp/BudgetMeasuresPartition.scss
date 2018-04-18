@@ -57,14 +57,14 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border-right: 1px solid white;
     flex-basis: 50px;
     flex-shrink: 0;
-    text-align: center;
+    border-right: 1px solid white;
   }
 
   & > .name-row-right {
     flex-grow: 1;
+    max-width: 305px;
     text-align: center;
   }
 }
