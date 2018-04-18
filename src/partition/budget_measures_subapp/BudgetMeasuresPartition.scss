@@ -46,3 +46,25 @@
     }
   }
 }
+
+.budget-measure-popup-name-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 5px 0px 5px 0px;
+
+  & > .name-row-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid white;
+    flex-basis: 50px;
+    flex-shrink: 0;
+    text-align: center;
+  }
+
+  & > .name-row-right {
+    flex-grow: 1;
+    text-align: center;
+  }
+}

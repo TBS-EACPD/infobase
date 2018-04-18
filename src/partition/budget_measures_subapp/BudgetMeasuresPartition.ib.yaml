@@ -3,27 +3,27 @@ provides:
   fr: TODO
 
 single_word_for:
-  en: for
+  en: For
   fr: pour
 
 single_word_to:
-  en: to
+  en: To
   fr: TODO
 
 single_word_in:
-  en: in
-  fr: dans
+  en: In
+  fr: En
 
 see_it_in_the_budget:
   en: See it in the Budget
   fr: TODO
 
-in_funding_for:
-  en: in funding for
+in_funding:
+  en: in funding
   fr: TODO
 
-in_funding_to:
-  en: in funding to
+in_funding_for:
+  en: in funding for
   fr: TODO
 
 budget_measures_root_sub_note:
@@ -47,56 +47,72 @@ budget_measures_partition_root:
       {{gt "budget_measures_root_sub_note"}}
     </p>
 
-budget_measure_popup_template:
-  transform: [handlebars]
+budget_measure_popup_top_line:
+  handlebars_partial: true
   text: |
-    <div class='mrgn-bttm-md popup-row-top popup-font-m'>
-      <span class='stat1 popup-font-m'>
-        <text style='color:#fdfdfd'>
-          {{gt "budget_name"}}
-          </br>
-          {{gt "provides"}}
-        </text>
-        {{#if value_is_zero}}
-          {{lang_formated_zero}}
-        {{else}}
-          {{#if value_is_negative}}
-            <text style='color:red;'>
-              {{fmt_compact1 value}}
-            </text>
-          {{else}}
+    <span class='stat1 popup-font-m'>
+      <text style='color:#fdfdfd'>
+        {{gt "budget_name"}}
+        </br>
+        {{gt "provides"}}
+      </text>
+      {{#if value_is_zero}}
+        {{lang_formated_zero}}
+      {{else}}
+        {{#if value_is_negative}}
+          <text style='color:red;'>
             {{fmt_compact1 value}}
-          {{/if}}
+          </text>
+        {{else}}
+          {{fmt_compact1 value}}
         {{/if}}
-        <text style='color:#fdfdfd'>
-          {{#if is_budget_measure}}
-            {{gt "in_funding_for"}}
-          {{else}}
-            {{gt "in_funding_to"}} 
-          {{/if}}
-        </text>
-      </span>
-      <span class='stat1 popup-font-l'>
-        {{name}}
-      </span>
-      {{#if add_reference_to_parent}}
-        <span class='stat1 popup-font-m' style='color:#fdfdfd'>
-          {{#if is_dept}}
-            {{gt "single_word_for"}}
-          {{else}}
-            {{gt "single_word_to"}} 
-          {{/if}}
-        </span>
-        <span class='stat1 popup-font-l'>
-          {{parent_name}}
-        </span>
       {{/if}}
-      <span class='stat1 popup-font-m' style='color:#fdfdfd'>
-        {{gt "single_word_in"}} {{year}}
+      <text style='color:#fdfdfd'>
+        {{gt "in_funding"}}
+      </text>
+    </span>
+
+budget_measure_popup_dept_line:
+  handlebars_partial: true
+  text: |
+    <div class="budget-measure-popup-name-row">
+      <span class='popup-font-ml name-row-left' style='color:#fdfdfd'>
+        {{gt "single_word_to"}}
+      </span>
+      <span class='popup-font-ml name-row-right'>
+        {{dept_name}}
       </span>
     </div>
+
+budget_measure_popup_measure_line:
+  handlebars_partial: true
+  text: |
+    <div class="budget-measure-popup-name-row">
+      <span class='popup-font-ml name-row-left' style='color:#fdfdfd'>
+        {{gt "single_word_for"}}
+      </span>
+      <span class='popup-font-ml name-row-right'>
+        {{measure_name}}
+      </span>
+    </div>
+
+budget_measure_popup_year_line:
+  handlebars_partial: true
+  text: |
+    <div class="budget-measure-popup-name-row">
+      <span class='popup-font-ml name-row-left' style='color:#fdfdfd'>
+        {{gt "single_word_in"}}
+      </span>
+      <span class='popup-font-l name-row-right'>
+        {{year}}
+      </span>
+    </div>
+
+budget_measure_popup_bottom_rows:
+  handlebars_partial: true
+  text: |
     {{#if is_budget_measure}}
-      <div class='mrgn-bttm-md popup-row-top-border popup-font-m'>
+      <div class='mrgn-bttm-sm popup-row-top-border popup-font-m'>
         <text style='color:#fdfdfd'> {{gt "budget_chapter"}}: </text> {{chapter}}
       </div>
     {{/if}}
@@ -137,3 +153,23 @@ budget_measure_popup_template:
         {{focus_text}}
       </a> 
     {{/if}}
+
+budget_measure_popup_template:
+  transform: [handlebars]
+  text: |
+    <div class='mrgn-bttm-md popup-row-top popup-font-m'>
+      {{> budget_measure_popup_top_line}}
+      {{#if dept_is_first_column}}
+        {{#if is_budget_measure}}
+          {{> budget_measure_popup_measure_line}}
+        {{/if}}
+        {{> budget_measure_popup_dept_line}}
+      {{else}}
+        {{#if is_dept}}
+          {{> budget_measure_popup_dept_line}}
+        {{/if}}
+        {{> budget_measure_popup_measure_line}}
+      {{/if}}
+      {{> budget_measure_popup_year_line}}
+    </div>
+    {{> budget_measure_popup_bottom_rows}}
