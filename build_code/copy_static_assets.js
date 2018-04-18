@@ -92,7 +92,8 @@ const common_lookups_fr = _.map(
 
 const common_png = [
   //top left corner brand
-  'src/InfoBase/goc--header-logo.svg',
+  'src/InfoBase/sig-blk-en.svg',
+  'src/InfoBase/sig-blk-fr.svg',
 
   //small scma icons below home page search bar
   'src/home/results.png',

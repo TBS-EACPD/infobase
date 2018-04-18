@@ -1,20 +1,17 @@
 #ib-site-header {
-  background-color: #f8f8f8;
+  background-color: #335075;
   padding: 1.15rem;
   line-height: 0;
 }
 
-#wb-bc {
-  background-color: #f8f8f8 !important;
-  border-bottom:4px solid #335075;
-}
 @media (min-width: 768px) {
   #ib-site-header {
     padding: 1.5rem 2rem;
   }
 }
 .canada-logo {
-  height: 2rem;
+  height: 3rem;
+  max-width: 50vw;
 }
 @media (max-width: 767px) {
   #ib-site-header .container {
@@ -39,7 +36,7 @@
 }
 #wb-lng > a.lang-switcher {
   display: inline-block;
-  display: inline-block;
+  color: #ffffff;
   font-size: 1.25rem;
   font-weight: 400;
   margin-top: 0.75rem;
