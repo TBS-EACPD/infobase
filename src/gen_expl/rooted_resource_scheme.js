@@ -12,7 +12,7 @@ const {
 
 
 const { get_resources_for_subject } = require('./resource_utils.js');
-
+const { provide_sort_func_selector } = require('./resource-explorer-common.js');
 
 
 function create_rooted_resource_hierarchy({doc,root_subject}){
@@ -146,31 +146,7 @@ const get_initial_resource_state = ({subject, has_drr_data, has_dp_data }) => ({
 
 const partial_scheme = {
   key: 'rooted_resources',
-  get_sort_func_selector: () => {
-    const attr_getters = {
-      ftes: node => _.get(node, "data.resources.ftes") || 0,
-      spending:node => _.get(node,"data.resources.spending") || 0,
-      name:  node => node.data.name,
-    };
-
-    const reverse_array = arr => _.clone(arr).reverse();
-
-    return createSelector(
-      [
-        aug_state => aug_state.rooted_resources.is_descending, 
-        aug_state => aug_state.rooted_resources.sort_col, 
-      ],
-      (is_descending, sort_col) => {
-
-        const attr_getter = attr_getters[sort_col];
-
-        return list => _.chain(list) 
-          .sortBy(attr_getter)
-          .pipe( is_descending ? reverse_array : _.identity )
-          .value();
-      }
-    );
-  },
+  get_sort_func_selector: () => provide_sort_func_selector('rooted_resources'),
   get_props_selector: () => {
     return augmented_state => _.clone(augmented_state.rooted_resources);
   },

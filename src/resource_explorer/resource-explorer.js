@@ -5,9 +5,7 @@ require('../panels/result_graphs/result_lang.ib.yaml');
 const { infograph_href_template } = require('../link_utils.js');
 const { StandardRouteContainer } = require('../core/NavComponents');
 
-const {
-  get_col_defs,
-} = require('../gen_expl/resource-explorer-common.js');
+const { get_col_defs } = require('../gen_expl/resource-explorer-common.js');
 
 const { text_maker } =  require('../models/text.js');
 require("./explorer.ib.yaml");

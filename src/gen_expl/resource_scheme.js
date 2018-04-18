@@ -1,7 +1,7 @@
 const { createSelector } = require('reselect');
 const { infograph_href_template } = require('../link_utils.js');
 const { text_maker } = require('../models/text.js');
-
+const { provide_sort_func_selector } = require('./resource-explorer-common.js');
 const { shallowEqualObjectsOverKeys } = require('../core/utils.js');
 
 
@@ -246,32 +246,7 @@ const get_initial_resource_state = ({hierarchy_scheme, doc}) => ({
 
 const resource_scheme = {
   key: 'resources',
-  get_sort_func_selector: () => {
-
-    const attr_getters = {
-      ftes: node => _.get(node,'data.resources.ftes') || 0,
-      spending:node => _.get(node,"data.resources.spending") || 0,
-      name:  node => node.data.name,
-    };
-
-    const reverse_array = arr => _.clone(arr).reverse();
-    
-    return createSelector(
-      [
-        aug_state => aug_state.resources.is_descending, 
-        aug_state => aug_state.resources.sort_col, 
-      ],
-      (is_descending, sort_col) => {
-
-        const attr_getter = attr_getters[sort_col];
-
-        return list => _.chain(list) //sort by search relevance, than the initial sort func
-          .sortBy(attr_getter)
-          .pipe( is_descending ? reverse_array : _.identity )
-          .value();
-      }
-    );
-  },
+  get_sort_func_selector: () =>  provide_sort_func_selector('resources'),
   get_props_selector: () => {
 
     return augmented_state => _.immutate( 

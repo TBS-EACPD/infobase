@@ -1,10 +1,14 @@
 import "./sub_program_resources.ib.yaml";
 
-import { get_col_defs } from '../../gen_expl/resource-explorer-common.js';
 import { createSelector } from 'reselect';
 import classNames from 'classnames';
 import { combineReducers, createStore }  from 'redux';
 import { Provider, connect } from 'react-redux';
+
+import { 
+  get_col_defs,
+  provide_sort_func_selector,
+} from '../../gen_expl/resource-explorer-common.js';
 
 import {
   PanelGraph,
@@ -157,31 +161,7 @@ const initial_sub_program_state = {
 
 const sub_program_resource_scheme = {
   key: 'sub_program_resource',
-  get_sort_func_selector: () => {
-    const attr_getters = {
-      ftes: node => _.get(node, "data.resources.ftes") || 0,
-      spending:node => _.get(node,"data.resources.spending") || 0,
-      name:  node => node.data.name,
-    };
-
-    const reverse_array = arr => _.clone(arr).reverse();
-
-    return createSelector(
-      [
-        aug_state => aug_state.sub_program_resource.is_descending, 
-        aug_state => aug_state.sub_program_resource.sort_col, 
-      ],
-      (is_descending, sort_col) => {
-
-        const attr_getter = attr_getters[sort_col];
-
-        return list => _.chain(list) 
-          .sortBy(attr_getter)
-          .pipe( is_descending ? reverse_array : _.identity )
-          .value();
-      }
-    );
-  },
+  get_sort_func_selector: ()=> provide_sort_func_selector("sub_program_resource"),
   get_props_selector: () => {
     return augmented_state => _.clone(augmented_state.sub_program_resource);
   },
