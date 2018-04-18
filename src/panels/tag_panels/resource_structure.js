@@ -1,8 +1,10 @@
 import classNames from 'classnames';
 import { combineReducers, createStore }  from 'redux';
 import { Provider, connect } from 'react-redux';
-
+import { infograph_href_template } from '../../link_utils.js';
 import { get_root } from '../../gen_expl/hierarchy_tools.js';
+
+import { Explorer } from '../../components/ExplorerComponents.js';
 
 import {
   PanelGraph,
@@ -14,10 +16,8 @@ import {
 import { 
   create_rooted_resource_scheme,
   get_initial_resource_state,
-  node_renderer,
 } from '../../gen_expl/rooted_resource_scheme.js';
 
-import { GeneralTree } from '../../gen_expl/GeneralTree.js';
 
 
 import {
@@ -28,8 +28,89 @@ import {
   map_dispatch_to_root_props,
 } from '../../gen_expl/state_and_memoizing';
 
-const { TM } = util_components;
+const { 
+  TM, 
+  TextMaker,
+  Format,
+} = util_components;
 
+
+const get_non_col_content = ({node}) => { 
+  const {
+    data:{
+      defs,
+      subject,
+    },
+  } = node;
+  return (
+    <div>
+      {
+        !_.isEmpty(defs) && 
+        <dl className="dl-horizontal">
+          {_.map(defs, ({ term, def }, ix) => [ 
+            /* eslint-disable react/jsx-key */
+            <dt key={`dt-${ix}`}> { term } </dt>,
+            /* eslint-disable react/jsx-key */
+            <dd key={`dd-${ix}`}> { def } </dd>,
+          ])}
+        </dl>
+      }
+      { (
+        _.includes(['program','dept', 'crso'], subject.level) || 
+        subject.level === 'tag' && !_.isEmpty(subject.programs) //only tags with programs (i.e. not tags that are just group of tags) have infographics
+      ) && 
+        <div className='ExplorerNode__BRLinkContainer'>
+          <a href={infograph_href_template(subject)}> 
+            <TextMaker text_key="see_infographic" />
+          </a>
+        </div>
+      }
+    </div>
+  );
+};
+
+
+const get_col_defs = ({doc}) => [
+  {
+    id: 'name',
+    width: 250,
+    textAlign: "left",
+    header_display: <TM k="name" />,
+    get_val: ({data}) => data.name,
+  },
+  {
+    id: "spending",
+    width: 150,
+    textAlign: "right",
+    header_display: (
+      <TextMaker 
+        text_key={ 
+          doc === 'dp17' ? 
+          "tag_nav_exp_header_dp17" : 
+          'tag_nav_exp_header_drr16' 
+        } 
+      />
+    ),
+    get_val: node => _.get(node, "data.resources.spending"),
+    val_display: val => <Format type="compact1" content={val} />,
+  },
+  {
+    id: "ftes",
+    width: 150,
+    textAlign: "right",
+    header_display: (
+      <TextMaker 
+        text_key={ 
+          doc === 'dp17' ? 
+          "tag_nav_fte_header_dp17" : 
+          'tag_nav_fte_header_drr16' 
+        } 
+      />
+    ),
+    get_val: node => _.get(node, "data.resources.ftes"),
+    val_display: val => <Format type="big_int_real" content={val} />,
+  },
+];
 
 class RootedResourceExplorer extends React.Component {
   render(){
@@ -40,7 +121,6 @@ class RootedResourceExplorer extends React.Component {
       //scheme props
       is_descending,
       sort_col,
-      sort_func,
       col_click,
       doc,
       set_doc,
@@ -48,25 +128,28 @@ class RootedResourceExplorer extends React.Component {
 
     const root = get_root(flat_nodes);
 
+    const explorer_config = {
+      column_defs: get_col_defs({doc}),
+      onClickExpand: id => toggle_node(id),
+      is_sortable: true,
+      zebra_stripe: true,
+      get_non_col_content,
+      col_click,
+      children_grouper,
+    };
+
     const inner_content = <div>
       <div 
         tabIndex={-1} 
         ref="focus_mount" 
         style={{position:'relative'}}
       >
-        <GeneralTree
-          {...{
-            root,
-            onToggleNode: toggle_node,
-            renderNodeContent: node_renderer,
-            sort_func,
-            scheme_props: { 
-              sort_func, 
-              sort_col, 
-              col_click, 
-              is_descending,
-              doc,
-            },
+        <Explorer
+          config={explorer_config}
+          root={root}
+          col_state={{
+            sort_col,
+            is_descending,
           }}
         />
       </div>
@@ -107,6 +190,17 @@ const map_state_to_props_from_memoized_funcs = memoized_funcs => {
     mapRootStateToRootProps(state),
     get_scheme_props(state)
   );
+}
+
+const children_grouper = (node, children) => {
+  //this one only has one depth, so the root must group its children
+  return _.chain(children)
+    .groupBy(child => child.data.header )
+    .map( (node_group,header) => ({
+      display: header,
+      node_group,
+    }))
+    .value();
 }
 
   
