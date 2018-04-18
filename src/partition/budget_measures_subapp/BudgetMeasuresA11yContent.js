@@ -77,17 +77,20 @@ export function BudgetMeasuresA11yContent(){
             <tbody>
               {
                 _.map(budget_measures_for_chapter, budget_measure => {
+                  const has_children = !_.isUndefined(budget_measure.children) && budget_measure.children.length > 0;
+                  const rows_to_span = has_children ? budget_measure.children.length : 1;
+
                   const main_row = <tr key={ "measure" + budget_measure.data.id }>
                     <th
                       scope="row"
-                      rowSpan={ budget_measure.children.length }
+                      rowSpan={ rows_to_span }
                     >
                       { name_and_value_cell_formatter(budget_measure) }
                     </th>
                     <td
                       key={ "measure_description" + budget_measure.data.id }
                       scope="row"
-                      rowSpan={ budget_measure.children.length }
+                      rowSpan={ rows_to_span}
                     >
                       { !_.isEmpty(budget_measure.data.description) && 
                         budget_measure.data.description 
@@ -96,7 +99,7 @@ export function BudgetMeasuresA11yContent(){
                     <td
                       key={ "measure_link" + budget_measure.data.id }
                       scope="row"
-                      rowSpan={ budget_measure.children.length }
+                      rowSpan={ rows_to_span }
                     >
                       { budget_measure.data.chapter_key !== "oth" && !_.isEmpty(budget_measure.data.ref_id) && 
                         <a
@@ -109,14 +112,17 @@ export function BudgetMeasuresA11yContent(){
                         text_maker("not_found_in_budget_text") 
                       }
                     </td>
-                    <td
-                      key={ "measure" + budget_measure.data.id + "-org" + budget_measure.children[0].data.id }
-                    >
-                      { name_and_value_cell_formatter(budget_measure.children[0]) }
-                    </td>
+                    { has_children &&
+                      <td 
+                        key={ "measure" + budget_measure.data.id + "-org" + budget_measure.children[0].data.id }
+                      >
+                        { name_and_value_cell_formatter(budget_measure.children[0]) }
+                      </td>
+                    }
+                    { !has_children && <td></td> }
                   </tr>;
   
-                  if ( budget_measure.children.length === 1 ){
+                  if ( !has_children || budget_measure.children.length === 1 ){
                     return main_row;
                   } else {
                     const sub_rows = _.chain(budget_measure.children)

@@ -15,6 +15,7 @@ orgs_funded_by_budget_measure:
   fr: Organisations financées par mesure budgétaire
 
 link_to_budget_section_for:
+  transform: [handlebars]
   en: Link to {{gt "budget_name"}} section for
   fr: Lien vers la section du budget 2018 pour
 
