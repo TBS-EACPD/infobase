@@ -1,6 +1,6 @@
 provides:
   en: provides
-  fr: TODO
+  fr: fournit un financement de 
 
 single_word_for:
   en: For
@@ -8,7 +8,7 @@ single_word_for:
 
 single_word_to:
   en: To
-  fr: TODO
+  fr: À
 
 single_word_in:
   en: In
@@ -16,20 +16,20 @@ single_word_in:
 
 see_it_in_the_budget:
   en: See it in the Budget
-  fr: TODO
+  fr: Allez le voir dans le budget
 
 in_funding:
   en: in funding
-  fr: TODO
+  fr: ""
 
 in_funding_for:
   en: in funding for
-  fr: TODO
+  fr: fournit pour
 
 budget_measures_root_sub_note:
   transform: [handlebars]
   en: ({{gt "budget_route_year"}} funding, presented on an Estimates basis as per Table A2.11 of {{gt "budget_name"}})
-  fr: TODO
+  fr: Financement pour {{gt "budget_route_year"}}, présenté en termes du budget principal selon le tableau A2.11 du budget 2018
 
 budget_measures_partition_root:
   transform: [handlebars]

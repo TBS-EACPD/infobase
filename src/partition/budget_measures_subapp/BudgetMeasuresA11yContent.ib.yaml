@@ -1,29 +1,29 @@
 budget_measures_partition_a11y_chapter_table_caption:
   transform: [handlebars]
   en: |
-    Budget measures from the {{chapter}} chapter provide {rawfmt_compact1 value}} in funding to federal organization in {{year}}. 
+    Budget measures from the {{chapter}} chapter provide {{rawfmt_compact1 value}} in funding to federal organizations in {{year}}. 
     The following table contains further details on these {{chapter}} budget measures.
   fr: |
-    TODO
+    Les mesures budgétaires du chapitre {{chapter}} fournissent {{rawfmt_compact1 value}} comme financement aux organisations fédérales en {{year}}. Le tableau qui suit fournit des détailles additionelles sur ces mesures budgétaires.
 
 budget_measure_descriptions:
-  en: Budget Measure Desciptions
-  fr: TODO
+  en: Budget Measure Descriptions
+  fr: Descriptions des mesures budgétaires
 
 orgs_funded_by_budget_measure:
   en: Organizations Funded by Budget Measure
-  fr: TODO
+  fr: Organisations financées par mesure budgétaire
 
 link_to_budget_section_for:
   en: Link to {{gt "budget_name"}} section for
-  fr: TODO
+  fr: Lien vers la section du budget 2018 pour
 
 budget_measure_link_header:
   transform: [handlebars]
   en: Link to section about this budget measure in {{gt "budget_name"}} 
-  fr: TODO
+  fr: Lien vers la section concernant cette mesure budgétaire dans {{gt "budget_name"}}
 
 not_found_in_budget_text:
   transform: [handlebars]
   en: Measure not found in {{gt "budget_name"}} text
-  fr: TODO
+  fr: Mesure budgétaire non disponible dans le texte du budget 2018
