@@ -2,7 +2,15 @@ import * as Subject from '../../models/subject';
 import { text_maker } from "../../models/text";
 
 
-const absolute_value_sort = (a,b) => - ( Math.abs(a.value) - Math.abs(b.value) );
+const absolute_value_sort_net_adjust_biased = (a,b) => {
+  if (a.data.type === "net_adjust" || a.data.id === "net_adjust"){
+    return Infinity;
+  } else if (b.data.type === "net_adjust" || b.data.id === "net_adjust"){
+    return - Infinity;
+  } else {
+    return - ( Math.abs(a.value) - Math.abs(b.value) );
+  }
+};
 
 const get_total_budget_measure_funds = (filtered_chapter_keys) => {
   return _.chain( Subject.BudgetMeasure.get_all() )
@@ -45,6 +53,7 @@ const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
                     budgetMeasure.description,
                 notes: has_own_description ? text_maker("budget_measure_description_values_clarification") : false,
                 chapter_key: budgetMeasure.chapter_key,
+                hide_item_by_default: budgetMeasure.id === "net_adjust",
                 value: _.reduce(budgetMeasure.funds, (sum, fund_row) => sum + (fund_row.fund), 0),
               }
             )
@@ -83,7 +92,7 @@ const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
         return orgNodes;
       }
     })
-    .sort(absolute_value_sort);
+    .sort(absolute_value_sort_net_adjust_biased);
 }
 
 
@@ -126,6 +135,7 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
               { 
                 type: "net_adjust",
                 id: 9998,
+                hide_item_by_default: true,
                 value: _.reduce(fund_rows, (sum, fund_row) => sum + fund_row.fund, 0),
               }
             );
@@ -176,7 +186,7 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
         node.value = _.reduce(node.children, (sum, child_node) => sum + child_node.value, 0);
       }
     })
-    .sort(absolute_value_sort);
+    .sort(absolute_value_sort_net_adjust_biased);
 }
 
 
