@@ -324,7 +324,7 @@ const HomeLayout = props => (
               title_key="budget_home_title"
               text_key="budget_home_text"
               link_key="check_home_link"
-              link_href="#budget-measures/dept"
+              link_href="#budget-measures/budget-measure"
             />
           </MediaQuery>
           <MediaQuery maxWidth={991}>
@@ -333,7 +333,7 @@ const HomeLayout = props => (
               title_key="budget_home_title"
               text_key="budget_home_text"
               link_key="check_home_link"
-              link_href="#budget-measures/dept"
+              link_href="#budget-measures/budget-measure"
             />
           </MediaQuery>
         </div>
