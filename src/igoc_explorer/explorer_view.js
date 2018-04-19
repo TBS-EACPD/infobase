@@ -1,19 +1,15 @@
 require('../gen_expl/explorer-styles.scss');
+const { createSelector } = require('reselect');
 const classNames = require('classnames');
-const ReactTransitionGroup  = require('react-addons-transition-group');
 const { infograph_href_template } = require('../link_utils.js');
-const FlipMove = require('react-flip-move');
 const { get_root } = require('../gen_expl/hierarchy_tools.js');
 const { text_maker } = require('../models/text.js');
 const {
   SpinnerWrapper,
   TM,
-  AccordionEnterExit,
-  FirstChild,
 } = require('../util_components.js');
-const { abbrev } = require('../core/utils.js'); 
-const { GeneralTree } = require('../gen_expl/GeneralTree.js');
 const { InstForm } = require('../models/subject.js');
+const { Explorer } = require('../components/ExplorerComponents.js')
 
 const DlItem = ({ term, def }) => [
   <dt key="dt"> {term} </dt>,
@@ -97,154 +93,86 @@ const inst_form_sort_order = [
   "other",
 ];
 
-
-const tree_renderer = props => {
-  const {
-    node,
-    node: {
-      root: isRoot,
+const react_html_string  = str => <span dangerouslySetInnerHTML={{ __html: str }} />;
+const get_col_defs = ({show_counts}) => [{
+  id: "name",
+  width: 250,
+  textAlign: "left",
+  get_val: (node) => {
+    const {
       data: {
-        name,
+        name, 
+        subject, 
         type,
+      },
+    } = node;
+
+    if(type !== "org" && show_counts){
+      return react_html_string(`${name} (${get_org_count(node)})`);
+    } else if(subject.end_yr){
+      return react_html_string(`${name} (${subject.end_yr})`);
+    } else {
+      return react_html_string(name);
+    }
+  },
+}];
+
+const get_children_grouper = createSelector(
+  _.property("grouping"),
+  grouping  => (node, children) => {
+    const trivial_grouping = [{node_group: children}];
+    if(node.root){
+      return trivial_grouping;
+    }
+
+    if(grouping==="portfolio" && node.data.type === "ministry"){
+      return _.chain(children)
+        .groupBy('data.subject.inst_form.id')
+        .toPairs()
+        .sortBy( ([form_id]) => _.indexOf(inst_form_sort_order, form_id) )
+        .map( ([form_id, node_group])=> ({
+          display: InstForm.lookup(form_id).name,
+          node_group,
+        }))
+        .value()
+    } else {
+      return trivial_grouping;
+    }
+  }
+)
+
+const get_non_col_content_func = createSelector(
+  _.property('grouping'),
+  grouping => ({node}) => {
+    const {
+      data: {
         subject,
       },
-      isExpanded,
-      is_search_match,
-    },
-    onToggleNode,
-    children,
-    index,
-    is_filtering,
-    scheme_props: {
-      grouping,
-    },
-  } = props;
+    } = node;
 
-  const children_list = (
-    type ==='ministry' ? 
-    _.chain(children)
-      .groupBy('node.data.subject.inst_form.id')
-      .map( (children, form_id) => [form_id,children] )
-      .sortBy( ([form_id]) => _.indexOf(inst_form_sort_order, form_id) )
-      .map( ([form_id, children])=> 
-        <li key={form_id}>
-          <header className="agnostic-header">
-            {InstForm.lookup(form_id).name}
-          </header>
-          <ul className="list-unstyled">
-            {_.map(children, ({node, element}) =>
-              <li key={node.id}>
-                {element}
-              </li>
-            )}
-          </ul>
-        </li>
-      )
-      .value() :
-    _.map(children, ({ node, element }) =>
-      <li key={node.id}>
-        { element }
-      </li>
-    )
-  );
-
-  const children_display = !_.isEmpty(children) && (isExpanded || isRoot) && (
-    <AccordionEnterExit
-      component="div"
-      expandDuration={250}
-      collapseDuration={250}
-      className={classNames(!isRoot && "xplorer-collapsible-children-container mrgn-bttm-lg")}
-    > 
-      <FlipMove
-        disableAllAnimations={isRoot}
-        staggerDurationBy="0"
-        duration={500}
-        typeName="ul"
-        className="list-unstyled mrgn-tp-sm mrgn-bttm-sm"
-      > 
-        {children_list}
-      </FlipMove>
-    </AccordionEnterExit>
-  );
-
-  if(isRoot){
-    return <div>
-      {children_display}
-    </div>;
-  }
-
-  return (
-    <div className="xplorer-node-container">
-      <div 
-        className={classNames(
-          "xplorer-node xplorer-node--mandate-letter", 
-          !is_search_match && index%2 && 'odd',
-          !is_search_match && !(index%2) && 'even',
-          is_search_match && "is-search-match" 
-        )}
-      >
-        <div className="xplorer-expander-container" onClick={onToggleNode}>
-          <button 
-            className='button-unstyled xplorer-expander' 
-            aria-label={isExpanded ? "Collapse this node" : "Expand this node"}
-          > 
-            { isExpanded ? "▼" : "►" }
-          </button>
-        </div>
-        <div className="xplorer-node-content-container">
-          <div className="xplorer-node-intro" onClick={onToggleNode}>
-            <span
-              dangerouslySetInnerHTML={{
-                __html: isExpanded ? name : abbrev(name, 120), 
-              }} 
-            />
-            { !is_filtering && type !== "org" && <span> ({String(get_org_count(node))})</span> }
-            { subject && _.nonEmpty(subject.end_yr) && <span> ({subject.end_yr})</span> }
+    return (
+      <div>
+        { subject && 
+          <div>
+            <SubjectFields {...{grouping, subject}} />
           </div>
-          <ReactTransitionGroup component={FirstChild}>
-            { isExpanded && 
-            <AccordionEnterExit
-              component="div"
-              expandDuration={500}
-              collapseDuration={300}
-            >
-              { subject && 
-              <div className="xplorer-node-inner-collapsible-content">
-                <SubjectFields
-                  {...{grouping, subject }}
-                />
-                <div 
-                  style={{
-                    textAlign: 'right',
-                    marginTop:'5px',
-                    borderTop:"1px solid #ccc",
-                    padding:"8px",
-                  }}
-                >
-                  <a 
-                    className="btn btn-xs btn-ib-light" 
-                    href={infograph_href_template(subject)}
-                  > 
-                    <TM k="see_infographic" />    
-                  </a>
-                </div>
-              </div>
-              }
-            </AccordionEnterExit>
-            }
-          </ReactTransitionGroup>
-        </div>
+        }
+        {subject && 
+          <div className="ExplorerNode__BRLinkContainer">
+            <a 
+              className="btn btn-xs btn-ib-light" 
+              href={infograph_href_template(subject)}
+            > 
+              <TM k="see_infographic" />    
+            </a>
+          </div>
+        }
       </div>
-      <ReactTransitionGroup component={FirstChild}>
-        { children_display }
-      </ReactTransitionGroup>  
-    </div>
-  );
+    );
+  }
+)
 
-};
-
-
-class Explorer extends React.Component {
+class IgocExplorer extends React.Component {
   constructor(){
     super()
     this.state = { _query : "" };
@@ -281,7 +209,6 @@ class Explorer extends React.Component {
       grouping,
       should_show_orgs_without_data,
 
-      sort_func,
       on_toggle_orgs_without_data,
 
     } = this.props;
@@ -290,7 +217,16 @@ class Explorer extends React.Component {
 
     const root = get_root(flat_nodes);
     
-    const org_count = _.countBy(flat_nodes, node => !node.children).true;
+    const org_count = _.countBy(flat_nodes, node => _.isEmpty(node.children)).true;
+
+    const explorer_config = {
+      children_grouper: get_children_grouper({grouping}),
+      column_defs: get_col_defs({show_counts: !is_filtering}),
+      shouldHideHeader: true,
+      zebra_stripe: true,
+      onClickExpand: id => toggle_node(id),
+      get_non_col_content: get_non_col_content_func({grouping}),
+    }
 
     return <div>
       <div>
@@ -367,18 +303,9 @@ class Explorer extends React.Component {
             <TM k="search_no_results" />
           </div>
         }
-        <GeneralTree
-          {...{
-            root,
-            onToggleNode: toggle_node,
-            renderNodeContent: tree_renderer,
-            sort_func,
-            is_filtering,
-            scheme_props: {
-              grouping,
-              should_show_orgs_without_data,
-            },
-          }}
+        <Explorer
+          config={explorer_config}
+          root={root}
         />
       </div>
     </div>;
@@ -386,4 +313,4 @@ class Explorer extends React.Component {
 
   }
 }
-module.exports = exports = { Explorer };
+module.exports = exports = { Explorer : IgocExplorer  };

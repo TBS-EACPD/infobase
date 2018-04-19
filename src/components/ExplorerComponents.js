@@ -423,6 +423,7 @@ export class Explorer extends React.Component {
       config,
       config: {
         column_defs,
+        shouldHideHeader,
       },
       col_state,
       root,
@@ -435,10 +436,12 @@ export class Explorer extends React.Component {
     return (
       <div style={{overflowX: "auto"}}>
         <div ref={el => this.width_setter_el = el}> 
-          <ExplorerHeader
-            {...explorer_context}
-            {...col_state}
-          />
+          {!shouldHideHeader &&
+            <ExplorerHeader
+              {...explorer_context}
+              {...col_state}
+            />
+          }
           <ExplorerRoot
             explorer_context={explorer_context}
             root={root}
