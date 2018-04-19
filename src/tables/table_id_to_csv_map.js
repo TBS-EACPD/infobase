@@ -50,10 +50,4 @@ exports = module.exports = {
   "table304" :{
     url: "employee_avg_age.csv",
   },
-  "cr_spending": {
-    url: "cr_spending.csv",
-  },
-  "cr_ftes":{
-    url: "cr_ftes.csv",
-  },
 };
