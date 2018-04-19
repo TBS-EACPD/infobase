@@ -1,5 +1,5 @@
 #ib-site-header {
-  background-color: #f0f0f0;
+  background-color: #f8f8f8;
   padding: 1.15rem;
   line-height: 0;
 }
@@ -10,7 +10,7 @@
   }
 }
 .canada-logo {
-  height: 1.8rem;
+  height: 2rem;
   max-width: 50vw;
 }
 @media (max-width: 767px) {
@@ -44,7 +44,7 @@
 }
 
 #wb-bc {
-  background-color: #f0f0f0 !important;
+  background-color: #f8f8f8 !important;
   border-bottom: 4px solid #335175;
 }
 
