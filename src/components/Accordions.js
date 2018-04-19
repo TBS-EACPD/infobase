@@ -53,44 +53,6 @@ class AccordionEnterExit extends React.Component {
   }
 }
 
-/*
-  title: react element to display when collapsed 
-  isExpanded: true/false 
-*/
-const StatelessAccordion = ({ title, isExpanded, children, onToggle }) => (
-  <div className="xplorer-node-container">
-    <div className="xplorer-node default-blue">
-      <div className="xplorer-expander-container" onClick={onToggle}>
-        <button 
-          className='button-unstyled xplorer-expander' 
-          aria-label={isExpanded ? "Collapse this node" : "Expand this node"}
-        > 
-          <span className={`glyphicon glyphicon-${isExpanded ? 'minus' : 'plus'}-sign`} />
-        </button>
-      </div>
-      <div className="xplorer-node-content-container">
-        <div className="xplorer-node-intro" onClick={onToggle}>
-          <header className={classNames(isExpanded && "mrgn-bttm-lg")}>
-            {title}
-          </header>
-        </div>
-        <ReactTransitionGroup component={FirstChild}>
-          { isExpanded && 
-          <AccordionEnterExit
-            component="div"
-            expandDuration={600}
-            collapseDuration={600}
-          >
-            <div className="xplorer-node-inner-collapsible-content">
-              {children}
-            </div>
-          </AccordionEnterExit>
-          }
-        </ReactTransitionGroup>
-      </div>
-    </div>
-  </div>
-);
 
 const StatelessPullDownAccordion = ({ title, isExpanded, children, onToggle }) => (
   <div className="pull-down-accordion">
@@ -137,9 +99,8 @@ class AutoAccordion extends React.Component {
   }
   render(){
     const { isExpanded } = this.state;
-    const { usePullDown } = this.props;
     return React.createElement(
-      usePullDown ? StatelessPullDownAccordion : StatelessAccordion, 
+      StatelessPullDownAccordion,
       Object.assign({}, this.props, {
         isExpanded,
         onToggle:()=> this.setState({ isExpanded : !isExpanded }),
@@ -152,6 +113,5 @@ module.exports = exports = {
   FirstChild,
   AccordionEnterExit,
   StatelessPullDownAccordion,
-  StatelessAccordion,
   AutoAccordion,
 }

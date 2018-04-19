@@ -178,6 +178,8 @@ const scheme_defaults = {
   shouldUpdateFlatNodes: (oldSchemeState, newSchemeState) => oldSchemeState !== newSchemeState,
 }
 
+const negative_search_relevance_func = ({ is_search_match }) => is_search_match ? 0 : 1;
+
 function get_memoized_funcs(schemes){
 
   schemes = _.mapValues(schemes, scheme => _.defaults(_.clone(scheme), scheme_defaults));
@@ -251,7 +253,10 @@ function get_memoized_funcs(schemes){
   const get_sorted_filtered_hierarchy = createSelector(
     [ get_fully_filtered_hierarchy, get_scheme_sort_func ],
     (filtered_hierarchy, sort_func) => {
-      return sort_hierarchy(filtered_hierarchy, sort_func);
+      return _.chain(filtered_hierarchy)
+        .pipe(h7y => sort_hierarchy(h7y, sort_func))
+        .sortBy(negative_search_relevance_func) //search results always take precedence
+        .value();
     }
   )
 

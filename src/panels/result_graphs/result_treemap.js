@@ -1,5 +1,7 @@
-
+const { createSelector } = require('reselect');
 const classNames = require('classnames');
+
+const { Explorer } = require('../../components/ExplorerComponents');
 
 const {
   PanelGraph,
@@ -9,7 +11,10 @@ const {
     TextMaker,
     TM,
     SpinnerWrapper,
+    Format,
+    Abbrev,
   },
+  infograph_href_template,
 } = require("../shared");
 const { Details } = require('../../components/Details.js');
 
@@ -17,10 +22,12 @@ require("./result_treemap.ib.yaml");
 
 const { 
   Indicator,
+  
 } = require('./results_common.js');
 
 const {
   StatusIconTable, 
+  InlineStatusIconList,
 } = require('./components.js')
 
 
@@ -39,10 +46,11 @@ const {
 
 const {
   get_type_header,
+  ResultNodeContent,
+  spending_header,
+  fte_header,
+  ResultCounts,
 } = require('../../gen_expl/result_displays.js');
-
-
-const { GeneralTree } = require('../../gen_expl/GeneralTree.js');
 
 
 const {
@@ -55,15 +63,131 @@ const {
 
 
 
+const get_non_col_content_func = createSelector(
+  _.property('doc'),
+  doc => {
+    return ({node}) => {
+      const {
+        data: {
+          resources,
+          subject,
+          result,
+          type,
+        },
+      } = node;
 
+      if(result){
+        return (
+          <ResultNodeContent 
+            node={node}
+            doc={doc}
+          />
+        );
+      }
 
-const negative_search_relevance_func = ({ is_search_match }) => is_search_match ? 0 : 1;
-const main_sort_func = list => _.chain(list) //sort by search relevance, than the initial sort func
-  .sortBy(node => node.data.name)
-  .sortBy(negative_search_relevance_func)
-  .sortBy(node => node.data.type === 'result' ? node.data.result.is_efficiency : null)
-  .value();
+      return <div>
+        {resources && 
+          <dl 
+            className="dl-horizontal dl-long-terms"
+            style={{fontSize: "0.8em"}}
+          >
+            <dt> {spending_header(doc) } </dt>
+            <dd> <Format type="compact1" content={resources.spending} /> </dd>
+            <dt> {fte_header(doc) } </dt>
+            <dd> <Format type="big_int_real" content={resources.ftes} /> </dd>
+          </dl>
+        }
+        {_.includes(['program','dept','cr'],type) && 
+          <div className="ExplorerNode__BRLinkContainer">
+            <a href={infograph_href_template(subject)}> 
+              <TM k="see_infographic" />    
+            </a>
+          </div>
+        }
+      </div>
+    }
+  }
+)
 
+const get_children_grouper = createSelector(
+  _.identity,
+  ()=> {
+
+    return (node,children) => {
+      if(node.data.result){ //results render their children manually through the non-col content
+        return {node_group: []};
+      }
+
+      return _.chain(children)
+        .groupBy(get_type_header)
+        .toPairs()
+        .sortBy( ([ type, group ]) => !_.includes(['dr', 'result'], type) ) //make results show up first 
+        .map( ([display, node_group ]) => ({display, node_group}))
+        .value()
+    }
+  }
+);
+
+const get_col_defs = createSelector(
+  _.property('doc'),
+  _.property('is_status_filter_enabled'),
+  _.property('status_icon_key_whitelist'),
+  (doc, is_status_filter_enabled, status_icon_key_whitelist) => {
+    return [
+      {
+        id: "name",
+        get_val: ({data, isExpanded}) => (
+          isExpanded ? 
+          data.name : 
+          <Abbrev text={data.name} len={115} />
+        ),
+        width: 250,
+        textAlign: "left",
+      },
+      {
+        id: "targets",
+        get_val: node => {
+          const { 
+            data: {
+              subject,
+              result,
+            },
+          } = node;
+
+          if(doc !== 'drr16'){
+            return null;
+          }
+
+          return (
+            <div
+              aria-hidden={true}
+              style={{ opacity: 0.8 }}
+            >
+              <InlineStatusIconList 
+                indicators={
+                  _.filter(
+                    (
+                      result ?
+                      result.indicators :
+                      Indicator.get_flat_indicators(subject)
+                    ),
+                    (
+                      is_status_filter_enabled ? 
+                      ind => _.includes(status_icon_key_whitelist, ind.icon_key) :
+                      _.constant(true)
+                    )
+                  )
+                } 
+              />
+            </div>
+          )
+        },
+        width: 150,
+        textAlign: "right",
+      },
+    ];
+  }
+)
 
 class SingleSubjExplorer extends React.Component {
   constructor(){
@@ -115,9 +239,16 @@ class SingleSubjExplorer extends React.Component {
     const { loading } = this.state;
 
 
-    const sort_func = main_sort_func; //TODO: implement custom sorting based on scheme state
-
     const root = get_root(flat_nodes);
+
+    const explorer_config = {
+      children_grouper: get_children_grouper({doc}),
+      column_defs: get_col_defs({doc, is_status_filter_enabled, status_icon_key_whitelist}),
+      shouldHideHeader: true,
+      zebra_stripe: true,
+      onClickExpand: id => toggle_node(id),
+      get_non_col_content: get_non_col_content_func({doc}),
+    };
 
     const inner_content = <div>
 
@@ -203,20 +334,10 @@ class SingleSubjExplorer extends React.Component {
             <TextMaker text_key="search_no_results" />
           </div>
         }
-        { 
-          React.createElement(GeneralTree, {
-            root,
-            onToggleNode: toggle_node,
-            renderNodeContent: single_subj_results_scheme.tree_renderer,
-            sort_func,
-            is_searching : is_filtering,
-            scheme_props: { 
-              doc,
-              is_status_filter_enabled,
-              status_icon_key_whitelist,
-            },
-          })
-        }
+        <Explorer
+          config={explorer_config}
+          root={root}
+        />
       </div>
     </div>;
 
@@ -262,113 +383,7 @@ class SingleSubjExplorer extends React.Component {
   }
 }
 
-const ResultCounts = ({ base_hierarchy, doc, subject }) => {
 
-  const indicators = _.filter(Indicator.get_flat_indicators(subject), {doc} )
-
-  const indicator_count_obj = { 
-    count: indicators.length, 
-    type_key: 'indicator',
-    type_name: text_maker('indicators'),
-  };
-
-  const count_items  = _.chain(base_hierarchy)
-    .reject('root')
-    .groupBy(node => get_type_header(node) )
-    .map( (group, type_name) => ({
-      type_name,
-      type_key: group[0].data.type,
-      count: group.length,
-    }))
-    .concat([ indicator_count_obj ])
-    //.sortBy( ({type_key}) => _.indexOf(sorted_count_header_keys, type_key))
-    .map( ({type_key, count}) => [type_key, count] )
-    .fromPairs()
-    .value();
-
-  let text_key = "";
-  if(subject.level === 'dept'){
-    if(doc === 'drr16'){
-      if(count_items.sub_program > 0){
-        if(count_items.sub_sub_program > 0){
-          text_key = "result_counts_drr_dept_sub_sub";
-        } else {
-          text_key = "result_counts_drr_dept_sub";
-        }
-      } else {
-        text_key = "result_counts_drr_dept_no_subs";
-      }
-
-    } else {
-
-      if(subject.is_DRF){
-        text_key = "result_counts_dp_dept_drf"
-
-      } else {
-        if(count_items.sub_program > 0){
-          if(count_items.sub_sub_program > 0){
-            text_key = "result_counts_dp_dept_paa_sub_sub"
-          } else {
-            text_key = "result_counts_dp_dept_paa_sub"
-          }
-        } else {
-          text_key = "result_counts_dp_dept_paa_no_subs"
-        }
-      }
-    //dp dept
-    }
-  //dept
-  } else if(subject.level === 'program'){
-    if(doc==='drr16'){
-      if(count_items.sub_program > 0){
-        if(count_items.sub_sub_program > 0){
-          text_key = "result_counts_drr_prog_paa_sub_sub";
-        } else {
-          text_key = "result_counts_drr_prog_paa_sub";
-        }
-      } else {
-        text_key = "result_counts_drr_prog_paa_no_subs";
-      }
-    } else {
-      if(count_items.sub_program > 0){
-        if(count_items.sub_sub_program > 0){
-          text_key = "result_counts_dp_prog_paa_sub_sub";
-        } else {
-          text_key = "result_counts_dp_prog_paa_sub";
-        }
-      } else {
-        text_key = "result_counts_dp_prog_paa_no_subs";
-      }
-    } 
-
-  } else if(subject.level === 'crso'){
-    //we only care about CRs, which are only DP
-    text_key = "result_counts_dp_crso_drf";
-
-  }
-
-  return (
-    <div className="medium_panel_text">
-      <TextMaker 
-        text_key={text_key}
-        args={{
-          subject,
-
-          num_programs:count_items.program,
-          num_results:count_items.result,
-          num_indicators:count_items.indicator,
-
-          num_subs:count_items.sub_program,
-          num_sub_subs:count_items.sub_sub_program,
-
-          num_drs:count_items.dr,
-          num_crs:count_items.cr,
-        }}
-
-      />
-    </div>
-  );
-}
 
 const map_state_to_props_from_memoized_funcs = memoized_funcs => {
 

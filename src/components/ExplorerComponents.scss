@@ -1,25 +1,5 @@
 @import "../common_css/common-variables";
 
-
-/*
-
-  Goal: 
-    * make explorer markup and classNames BEM-compliant
-
-
-    * make zebra-striping CLASS based, and make sure JS is responsible for zebra-striping 
-
-
-
-*/
-
-
-.ExplorerNode__Container {
-  // empty rule to remember to use this class for selector purposes
-}
-
-
-
 .ExplorerNode.ExplorerNode--secondary-color {
   border-color: #a1adba;
   background-color: #FFF;
@@ -62,9 +42,6 @@
 
 
 /* this is the clickable portion, what is seen when collapsed */
-/*
-  TODO: this replace xplorer-node-intro AND xplorer-resource-row 
-*/
 .ExplorerNode__RowContainer {
   cursor: pointer;
 }
@@ -108,9 +85,8 @@
 }
 
 
-//this was used uniquely for infographic links ?? 
-// .xplorer-node-expanded-content {
 //bottom-right link container
+//good for quick infographic links
 .ExplorerNode__BRLinkContainer { 
   text-align: right;
   padding: 1px 10px 2px 0px;
@@ -155,22 +131,9 @@
   padding-bottom: 5px;
   border-radius: 10px;
 
-
-  &.ExplorerHeader--grey {
-    background-color: $primaryColor;
-    color: $backgroundColor;
-  }
-
   &.ExplorerHeader--blue {
     background-color: $primaryColor;
     color: $backgroundColor;
   }
 
-  &>.ExplorerColumnHeader {
-    text-align: center; 
-  }
-
-  &>.ExplorerColumnHeader--sortable {
-    cursor: pointer;
-  }
 }
