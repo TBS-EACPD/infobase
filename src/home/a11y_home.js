@@ -43,20 +43,20 @@ export const Home = () => {
         
         <section>
           <h3>
-            <a href="#budget-measures/">
-              <TM k="budget_home_title" />
-            </a>
-          </h3>
-          <TM k="budget_home_text" />
-        </section>
-
-        <section>
-          <h3>
             <a href="#igoc/">
               <TM k="igoc_home_title" />
             </a>
           </h3>
           <TM k="igoc_home_desc" />
+        </section>
+
+        <section>
+          <h3>
+            <a href="#budget-measures/">
+              <TM k="budget_home_title" />
+            </a>
+          </h3>
+          <TM k="budget_home_text" />
         </section>
 
         <section>
