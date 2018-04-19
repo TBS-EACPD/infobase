@@ -112,11 +112,13 @@ const spend_type_data_wrapper_node_rules = node => {
   if ( node.data.is("gov") ||  node.data.is("type_of_spending") ){
     node.how_many_to_show = Infinity;
   } else if (node.data.is("so")){
+    const root_value = _.last(node.ancestors()).value;
+
     node.how_many_to_show = function(_node){
       if (_node.children.length <= 2){ return [_node.children, []] }
       const show = [_.head(_node.children)];
       const hide = _.tail(_node.children);
-      const unhide = _.filter(hide, __node => __node.value > _.last(_node.ancestors()).value/100);
+      const unhide = _.filter(hide, __node => Math.abs(__node.value) > root_value/100);
       return [show.concat(unhide), _.difference(hide,unhide)];
     };
   }

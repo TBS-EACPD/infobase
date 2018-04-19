@@ -49,7 +49,6 @@ const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
                     budgetMeasure.description,
                 notes: !has_no_description ? text_maker("budget_measure_description_values_clarification") : false,
                 chapter_key: budgetMeasure.chapter_key,
-                hide_item_by_default: budgetMeasure.id === "net_adjust",
                 value: _.reduce(budgetMeasure.funds, (sum, fund_row) => sum + (fund_row.fund), 0),
               }
             )
@@ -131,7 +130,6 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
               { 
                 type: "net_adjust",
                 id: 9998,
-                hide_item_by_default: true,
                 value: _.reduce(fund_rows, (sum, fund_row) => sum + fund_row.fund, 0),
               }
             );

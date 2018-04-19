@@ -79,10 +79,19 @@ const popup_template = node => {
   return text_maker("budget_measure_popup_template", popup_options);
 }
 
-
-function center_diagram(){
-  if (this.refs.outer_container){
-    this.refs.outer_container.style.marginLeft = ( -d3.select("main.container").node().offsetLeft + 4 ) + "px";
+const data_wrapper_node_rules = (node) => {
+  const root_value = _.last(node.ancestors()).value;
+  node.__value__ = node.value;
+  node.open = true;
+  node.how_many_to_show = function(_node){
+    if (_node.children.length <= 2){ return [_node.children, []] }
+    const show = [_.head(_node.children)];
+    const hide = _.tail(_node.children);
+    const unhide = _.filter(hide, 
+      __node => __node.data.type !== "net_adjust" ? 
+          Math.abs(__node.value) > root_value/100 :
+          false);
+    return [show.concat(unhide), _.difference(hide, unhide)];
   }
 }
 
@@ -98,6 +107,7 @@ const update_diagram = (diagram, props) => {
     level_headers: get_level_headers(props.first_column),
     root_text_func: _.curry(root_text_func)(displayed_measure_count),
     popup_template: popup_template,
+    data_wrapper_node_rules: data_wrapper_node_rules,
     colors: [
       "#f6ca7c",
       "#f6987c",
@@ -109,6 +119,12 @@ const update_diagram = (diagram, props) => {
     ],
     background_color: "#9c9c9c",
   });
+}
+
+function center_diagram(){
+  if (this.refs.outer_container){
+    this.refs.outer_container.style.marginLeft = ( -d3.select("main.container").node().offsetLeft + 4 ) + "px";
+  }
 }
 
 export class BudgetMeasuresPartition extends React.Component {

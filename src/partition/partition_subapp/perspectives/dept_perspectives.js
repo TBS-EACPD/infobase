@@ -46,11 +46,13 @@ const dept_data_wrapper_node_rules = (node) => {
   if (node.data.is("gov")){
     node.how_many_to_show = 8;
   } else if (node.data.is("ministry") || node.data.is("dept") || node.data.is("crso")){
+    const root_value = _.last(node.ancestors()).value;
+
     node.how_many_to_show = function(_node){
       if (_node.children.length === 2){ return [_node.children, []];}
       const show = [_.head(_node.children)];
       const hide = _.tail(_node.children);
-      const unhide = _.filter(hide, __node => __node.value > _.last(_node.ancestors()).value/50);
+      const unhide = _.filter(hide, __node => Math.abs(__node.value) > root_value/50);
       return [show.concat(unhide), _.difference(hide, unhide)];
     }
   }
