@@ -1,3 +1,8 @@
+table303_title:
+  transform: [handlebars]
+  en: Population by First Official Language
+  fr: Population selon la première langue officielle
+
 table303_short:
   transform: [handlebars,embeded-markdown,markdown]
   en: |

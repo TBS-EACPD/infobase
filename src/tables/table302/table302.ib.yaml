@@ -1,3 +1,8 @@
+table302_title:
+  transform: [handlebars]
+  en: Population by Gender
+  fr: Population selon le sexe
+
 table302_short:
   transform: [handlebars,embeded-markdown,markdown]
   en: |

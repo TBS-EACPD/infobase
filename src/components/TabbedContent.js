@@ -46,9 +46,7 @@ export class TabbedContent extends React.Component {
                 }}
                 onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && this.setState({openTabKey: key})}
               >
-                <b>
-                  {tabLabels[key]}
-                </b>
+                {tabLabels[key]}
               </p>
             </li>)
           )}

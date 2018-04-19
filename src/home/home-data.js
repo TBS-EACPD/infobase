@@ -3,6 +3,51 @@ import { rpb_link } from '../rpb/rpb_link.js';
 export default function(a11y_mode){
   const featured_content_items = [
     {
+      text_key: "table112_title",
+      href: (
+        rpb_link({ 
+          table: 'table112', 
+          columns: ["{{ppl_last_year}}"],
+          dimension: "ex_level_condensed",
+          filter: ({
+            "en": "Executive",
+            "fr": "Cadres supérieurs",
+          })[window.lang],
+        })
+      ),
+      is_new: true,
+    },
+    {
+      text_key: "table302_title",
+      href: (
+        rpb_link({ 
+          table: 'table302', 
+          columns: ["{{ppl_last_year}}"], 
+        })
+      ),
+      is_new: true,
+    },
+    {
+      text_key: "table303_title",
+      href: (
+        rpb_link({ 
+          table: 'table303', 
+          columns: ["{{ppl_last_year}}"], 
+        })
+      ),
+      is_new: true,
+    },
+    {
+      text_key: "table304_title",
+      href: (
+        rpb_link({ 
+          table: 'table304', 
+          columns: ["{{ppl_last_year}}"], 
+        })
+      ),
+      is_new: true,
+    },
+    {
       text_key: "main_estimates",
       href: (
         window.is_a11y_mode ? 
@@ -41,33 +86,11 @@ export default function(a11y_mode){
       }),
     },
     {
-      text_key:"table4_home_link",
-      href: rpb_link({ 
-        table: 'table4', 
-        columns: ['{{pa_last_year}}auth','{{pa_last_year}}exp'], 
-        mode: 'details',
-      }),
-    },
-    {
       text_key: "DP_1718",
       href: rpb_link({ 
         table: 'table6', 
         columns: ['{{planning_year_1}}'], 
         dimension: "gov_goco",
-      }),
-    },
-    { 
-      text_key: 'prog_by_vote_stat',
-      href : rpb_link({ 
-        table: 'table300', 
-        mode: 'details',
-      }),
-    },
-    { 
-      text_key: 'prog_by_so',
-      href : rpb_link({ 
-        table: 'table305', 
-        mode: 'details',
       }),
     },
   ];

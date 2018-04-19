@@ -41,13 +41,8 @@ const prov_split_render = function(panel,data,options){
       } else if (has_on) {
         year.on = 0;
       }
-      if (year["onncr"] || year['qcncr']) {
-        year.ncr = (year["onncr"] || 0 )+ (year['qcncr'] || 0);
-      }
       delete year['qclessncr'];
       delete year['onlessncr'];
-      delete year['onncr'];
-      delete year['qcncr'];
     })
     .value()
 
@@ -127,8 +122,6 @@ const prov_split_render = function(panel,data,options){
       }
       if (prov === 'Canada'){
         return text_maker("five_year_history") + " " + prov;
-      } else if (prov === 'ncr'){
-        return text_maker("five_year_history") + " " + (window.lang === 'en' ? "NCR" : "RCN");
       } else {
         return text_maker("five_year_history") + " " + provinces[prov].text;
       }
@@ -229,8 +222,6 @@ const prov_split_render = function(panel,data,options){
       .reject( ({key}) => _.includes([
         'qclessncr',
         'onlessncr',
-        "onncr",
-        'qcncr',
       ], key ) 
       )
       .value();

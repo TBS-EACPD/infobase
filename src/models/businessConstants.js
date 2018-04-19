@@ -63,8 +63,7 @@ const emp_age_map =  {
   '50-54': compact_age_groups[3], 
   '55-59': compact_age_groups[3],
   '60-64': compact_age_groups[4],
-  '65-69': compact_age_groups[4], 
-  '70 +': compact_age_groups[4],
+  '65+': compact_age_groups[4], 
   'N.A.': compact_age_groups[5],
   'N.D.': compact_age_groups[5],
 };

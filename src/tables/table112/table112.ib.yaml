@@ -1,3 +1,8 @@
+table112_title:
+  transform: [handlebars]
+  en: Population by Executive Level
+  fr: Population selon les niveaux des cadres supérieurs
+
 table112_short:
   transform: [handlebars,embeded-markdown, markdown]
   en: |
