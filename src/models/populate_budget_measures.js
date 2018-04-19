@@ -1,7 +1,7 @@
 import { BudgetMeasure } from './subject';
 import { fetch_and_inflate } from '../core/utils.js';
 
-const parse_csv_string = csv_string => _.tail( d3.csvParseRows( $.trim(csv_string) ) );
+const parse_csv_string = csv_string => _.tail( d3.csvParseRows( _.trim(csv_string) ) );
 
 const load_csv = csv_name => (
   window.binary_download && !window.isIE() ? 
@@ -27,12 +27,17 @@ const populate_budget_measures = (budget_measures, budget_measure_funds) => {
   const desc_col_index = window.lang === "en" ? 6 : 7;
 
   _.each(budget_measures, row => {
+    const description_text = marked(
+      _.trim(row[desc_col_index]),
+      { sanitize: false, gfm: true }
+    );
+
     BudgetMeasure.create_and_register({
       id: row[0],
       name: row[name_col_index],
       chapter_key: row[3],
       ref_id: row[ref_id_col_index],
-      description: row[desc_col_index],
+      description: description_text,
       funds: budget_funds_by_measure[row[0]],
     });
   }); 
