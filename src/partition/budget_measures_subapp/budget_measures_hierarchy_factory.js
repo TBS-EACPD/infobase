@@ -39,7 +39,7 @@ const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
             
             const has_chapter_other_and_not_net_adjust = budgetMeasure.chapter_key === "oth" && budgetMeasure.id !== "net_adjust";
             const has_no_description = _.isEmpty(budgetMeasure.description);
-            const has_own_description = has_chapter_other_and_not_net_adjust && !has_no_description
+            const has_own_description = !has_chapter_other_and_not_net_adjust && !has_no_description
 
             return _.assign(
               {},
