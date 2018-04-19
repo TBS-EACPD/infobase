@@ -86,33 +86,11 @@ export default function(a11y_mode){
       }),
     },
     {
-      text_key:"table4_home_link",
-      href: rpb_link({ 
-        table: 'table4', 
-        columns: ['{{pa_last_year}}auth','{{pa_last_year}}exp'], 
-        mode: 'details',
-      }),
-    },
-    {
       text_key: "DP_1718",
       href: rpb_link({ 
         table: 'table6', 
         columns: ['{{planning_year_1}}'], 
         dimension: "gov_goco",
-      }),
-    },
-    { 
-      text_key: 'prog_by_vote_stat',
-      href : rpb_link({ 
-        table: 'table300', 
-        mode: 'details',
-      }),
-    },
-    { 
-      text_key: 'prog_by_so',
-      href : rpb_link({ 
-        table: 'table305', 
-        mode: 'details',
       }),
     },
   ];
