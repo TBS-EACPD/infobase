@@ -27,10 +27,17 @@ const populate_budget_measures = (budget_measures, budget_measure_funds) => {
   const desc_col_index = window.lang === "en" ? 6 : 7;
 
   _.each(budget_measures, row => {
-    const description_text = marked(
-      _.trim(row[desc_col_index]),
-      { sanitize: false, gfm: true }
-    );
+    const description_text = _.chain(row[desc_col_index])
+      .trim()
+      .thru( description => description
+        .replace(/•/g, "\n\n* ")
+        .replace(/((\r\n){1}|\r{1}|\n{1})/gm, "\n\n")
+      )
+      .thru( description => marked(
+        _.trim(description),
+        { sanitize: false, gfm: true }
+      ) )
+      .value()
 
     BudgetMeasure.create_and_register({
       id: row[0],
