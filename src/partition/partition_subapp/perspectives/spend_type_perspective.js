@@ -8,7 +8,6 @@ import { PartitionPerspective } from './PartitionPerspective.js';
 import {
   absolute_value_sort,
   get_glossary_entry,
-  get_id_ancestry,
   post_traversal_search_string_set,
 } from './data_hierarchy_utils.js'
 
@@ -29,8 +28,6 @@ const mock_model = function(id, name, description, type, extra_attrs={}){
 }
 
 const create_spend_type_hierarchy = function(){
-  const distinct_root_identifier = (new Date).getTime();
-
   return d3.hierarchy(Subject.gov,
     node => {
       let _mock_model;
@@ -40,8 +37,7 @@ const create_spend_type_hierarchy = function(){
             id,
             name,
             '',
-            type,
-            {plural: () => text_maker("type_of_spending")}
+            type
           );
         };
         return [
@@ -53,7 +49,6 @@ const create_spend_type_hierarchy = function(){
         ];
       } else if (node.is("type_of_spending")){
         _mock_model = function(so){
-          const plural = function(){ return text_maker("sos") };
           const so_num = so.so_num;
           const glossary_key = so_num < 21 ? 
             "SOBJ"+so_num :
@@ -65,7 +60,7 @@ const create_spend_type_hierarchy = function(){
             so.text,
             get_glossary_entry(glossary_key),
             "so",
-            {plural,so_num}
+            {so_num}
           );
         };
         const children = {
@@ -88,7 +83,6 @@ const create_spend_type_hierarchy = function(){
             "program_fragment",
             { 
               dept: program.dept,
-              plural: () => text_maker("program_slice"),
               program_id: unique_id,
               tags: program.tags,
               value: data.value,
@@ -101,7 +95,6 @@ const create_spend_type_hierarchy = function(){
       }
     })
     .eachAfter(node => {
-      node.id_ancestry = get_id_ancestry(distinct_root_identifier, node);
       if ( node.data.is("program_fragment") ){
         node.exp = node.value = node.data.value;
       } else {
@@ -165,6 +158,11 @@ const make_spend_type_perspective = () => new PartitionPerspective({
   hierarchy_factory: () => create_spend_type_hierarchy(),
   data_wrapper_node_rules: spend_type_data_wrapper_node_rules,
   popup_template: spend_type_perspective_popup_template,
+  level_headers: {
+    "1": text_maker("type_of_spending"),
+    "2": text_maker("sos"),
+    "3": text_maker("program_slice"),
+  },
   root_text_func: root_value => text_maker("partition_spending_was", {x: root_value}),
   diagram_note_content: <TextMaker text_key={"program_SOBJ_warning"} />,
   disable_search_bar: true,

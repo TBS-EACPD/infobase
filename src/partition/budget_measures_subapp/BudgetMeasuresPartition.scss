@@ -1,0 +1,69 @@
+@import '../../common_css/common-variables';
+
+// Partition diagram Style overwrites
+.budget-measure-partiton-area > .__partition__ > .partition-diagram {
+  border-radius: 10px;
+
+  & > .header {
+    color: #333;
+    font-size: 22px;
+    font-weight: $mediumFontWeight;
+  }
+
+  & > .partition-content {
+    color: #333;
+    & > .partition-content-title,
+    & > .partition-right-ie-fix > .partition-content-title {
+      font-weight: $heavyFontWeight;
+    }
+    & > .partition-content-title.negative-value,
+    & > .partition-negative-title-backing > .negative-value {
+      color: #6f0000;
+    }
+    &.root > .partition-content-title {
+      font-weight: $heavyFontWeight;
+      & > .root-sub-note {
+        margin-top: 22px;
+        font-size: 20px;
+      }
+      & > a {
+        color: #333!important;
+      }
+    }
+
+    & > .partition-popup {
+      color: #fdfdfd;
+      background-color: #00104a;
+      & > .popup-pointer {
+      	border-right: 40px solid #00104a;
+      }
+      & > .popup-decription-text {
+        color: #fdfdfd;
+      }
+      & > .btn {
+        color: #333!important;
+      }
+    }
+  }
+}
+
+.budget-measure-popup-name-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 5px 0px 5px 0px;
+
+  & > .name-row-left {
+    flex-basis: 50px;
+    flex-shrink: 0;
+    border: 1px solid white;
+    border-width: 1px 1px 0px 0px;
+  }
+
+  & > .name-row-right {
+    flex-grow: 1;
+    max-width: 305px;
+    text-align: center;
+    border-top: 1px solid white;
+  }
+}

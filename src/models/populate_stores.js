@@ -60,7 +60,6 @@ function process_lookups(data){
   populate_program_tag_linkages(data["tags_to_programs.csv"]);
 
   populate_global_footnotes(data.global_footnotes);
-
 };
 
 const url_id = num => `_${num}`; //make sure the regular keys from the pipeline aren't interpreted as array indices
@@ -319,4 +318,3 @@ function populate_program_tag_linkages(programs_m2m_tags){
     tag.programs.push(program)
   }); 
 };
-

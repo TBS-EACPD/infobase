@@ -176,8 +176,11 @@ export class PartitionSubApp {
       data_wrapper_node_rules: data_wrapper_node_rules,
       dont_fade: this.dont_fade,
       formatter: this.current_perspective.formater,
+      level_headers: this.current_perspective.level_headers,
       root_text_func: this.current_perspective.root_text_func,
       popup_template: this.current_perspective.popup_template,
+      colors: window.darkCategory10Colors,
+      background_color: "#041225",
     });
   }
   enable_search_bar(){

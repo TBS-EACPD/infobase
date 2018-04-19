@@ -1,0 +1,72 @@
+@import '../common_css/common-variables';
+
+.labeled-box {
+  margin-bottom: 10px;
+  margin-right: -3px;
+  margin-left: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+.labeled-box-label {
+  display: flex;
+  padding: 10px;
+  padding-left: 25px;
+  font-size: 1.2em;
+  color: white;
+  background-color: $primaryColor;
+  min-height: 80px;
+}
+.labeled-box-label-text {
+  align-self: center;
+}
+.labeled-box-content {
+  display: flex;
+  border: 1px solid $primaryColor;
+  border-radius: 0 10px 10px 0;
+  background-color: white;
+  padding: 10px 10px 10px 10px;
+}
+/* hacky flexbox bug, even in chrome! */
+.labeled-box-content > div {
+  width: 100%;
+}
+@media (min-width: 901px){
+  .labeled-box-label {
+    width:18%;
+    border-radius: 10px 0px 0px 10px;
+    /* make the blue rounded part go over the content labeled-box-content */
+    margin-right: -8px;
+    z-index: 1;
+  }
+  .labeled-box-content {
+    border-left: none;
+    display: flex;
+    width: 82%;
+  }
+  .labeled-box-content details{
+    width: 100%;
+    align-self: center;
+  }
+  .labeled-box-content details summary{
+    border: 0px;
+  }
+}
+@media (max-width: 900px){
+  .labeled-box-label {
+    width: 100%;
+  }
+  .labeled-box-content {
+    border-top: none;
+    border-radius: 0px;
+    width: 100%;
+  }
+}
+
+.labeled-box-content > .IBDetails {
+  padding-top: 15px;
+  padding-left: 20px;
+  & > .IBDetails__Summary {
+    padding-left: 0px;
+  }
+}

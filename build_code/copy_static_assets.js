@@ -103,6 +103,7 @@ const common_png = [
 
   //caricature images for main 5 pages
   'src/home/partition.png',
+  'src/home/partition-budget.png',
   'src/home/bubbles.png',
   'src/home/Builder.png',
   'src/home/structure_panel.png',
@@ -145,11 +146,19 @@ var csv_from_table_names = function(table_ids){
   });
 };
 
+const other_csvs = _.map(
+  [
+    'budget_measure_funds.csv',
+    'budget_measure_lookups.csv',
+  ],
+  public_dir_prefixer
+);
+
 var IB = {
   name: 'InfoBase',
   lookups_en  : common_lookups.concat(common_lookups_en),
   lookups_fr  : common_lookups.concat(common_lookups_fr),
-  csv: csv_from_table_names(IB_tables),
+  csv: csv_from_table_names(IB_tables).concat(other_csvs),
   png: common_png,
   js: external_deps_names,
   other: [ 'src/robots/robots.txt','src/common_css/container-page.css'],
@@ -177,7 +186,7 @@ function get_index_pages(){
     },
     {
       file_prefix: "index-basic",
-      en: a11y_template_func(_.assign({}, en_lang_lookups, { script_url: en_lang_lookups.a11y_script_url, other_lang_href: en_lang_lookups.a11y_other_lang_href, is_a11y_mode: true  })),
+      en: a11y_template_func(_.assign({}, en_lang_lookups, { script_url: en_lang_lookups.a11y_script_url, other_lang_href: en_lang_lookups.a11y_other_lang_href, is_a11y_mode: true })),
       fr: a11y_template_func(_.assign({}, fr_lang_lookups, { script_url: fr_lang_lookups.a11y_script_url, other_lang_href: fr_lang_lookups.a11y_other_lang_href, is_a11y_mode: true })),
     },
   ];

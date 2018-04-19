@@ -6,15 +6,6 @@ const alphabetic_name_sort = (a,b) => a.data.name.toLowerCase().localeCompare( b
 
 const get_glossary_entry = (glossary_key) => GlossaryEntry.lookup(glossary_key) ? GlossaryEntry.lookup(glossary_key).definition : false;
 
-// a node can be uniquely identified by its full ancestry, which is saved as a property of each node for easy look-up
-const get_id_ancestry = (distinct_root_identifier, node) => {
-  if (node.parent && !_.isUndefined(node.parent.data.id)) {
-    return node.data.id + '-' + get_id_ancestry(distinct_root_identifier, node.parent);
-  } else {
-    return distinct_root_identifier ? "root:"+distinct_root_identifier : "root";
-  }
-}
-
 const value_functions = {
   "exp" : function(node){
     const table6 = Table.lookup('table6');
@@ -32,8 +23,7 @@ const value_functions = {
   },
 }
 
-const post_traversal_value_set = function(node, data_type, distinct_root_identifier){
-  node.id_ancestry = get_id_ancestry(distinct_root_identifier, node);
+const post_traversal_value_set = function(node, data_type){
   if (node.data.is("program")){
     node.exp = value_functions["exp"](node.data);
     node.fte = value_functions["fte"](node.data);
@@ -62,7 +52,6 @@ export {
   absolute_value_sort,
   alphabetic_name_sort,
   get_glossary_entry,
-  get_id_ancestry,
   post_traversal_value_set,
   post_traversal_search_string_set,
   value_functions,

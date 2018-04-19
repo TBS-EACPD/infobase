@@ -22,6 +22,7 @@ const {
   TextMaker,
   Format,
   SortIndicators,
+  LabeledBox,
 } = require('../util_components.js');
 const { Details } = require('../components/Details.js');
 const {
@@ -74,15 +75,10 @@ class SimpleView extends React.Component {
 
     return (
       <div> 
-        <div className="rpb-option">
-          <div className='rpb-option-label '>
-            <div className='rpb-option-label-text '>
-              <TextMaker text_key="blue_text_table_controls" />
-            </div>
-          </div>
-          <div className="rpb-option-content">
+        <LabeledBox
+          label={ <TextMaker text_key="blue_text_table_controls" /> }
+          content={
             <div className="rpb-config rpb-simple">
-          
               <div className="col-md-6">
                 <div className="rpb-config-item col-selection simple">
                   <label className="rpb-config-header" > <TextMaker text_key="select_columns" /> </label>
@@ -94,24 +90,22 @@ class SimpleView extends React.Component {
                   />
                 </div>
               </div>
-
-
               <div className="col-md-6">
                 { subject === Gov && 
-            <div className="rpb-config-item">
-              <label 
-                className="rpb-config-header" 
-              > 
-                <TextMaker text_key="show_dept_breakout" />
-                <input 
-                  type="checkbox"
-                  disabled={subject!==Gov}
-                  checked={deptBreakoutMode}
-                  onChange={on_toggle_deptBreakout}
-                  style={{ marginLeft: '15px' }}
-                />
-              </label>
-            </div>
+                  <div className="rpb-config-item">
+                    <label 
+                      className="rpb-config-header" 
+                    > 
+                      <TextMaker text_key="show_dept_breakout" />
+                      <input 
+                        type="checkbox"
+                        disabled={subject!==Gov}
+                        checked={deptBreakoutMode}
+                        onChange={on_toggle_deptBreakout}
+                        style={{ marginLeft: '15px' }}
+                      />
+                    </label>
+                  </div>
                 }
                 {!window.is_a11y_mode &&
                   <div className="rpb-config-item">
@@ -133,7 +127,11 @@ class SimpleView extends React.Component {
                 <div className="rpb-config-item">
                   <div className="row">
                     <div className="col-md-2" style={{paddingLeft:"0px"}}>
-                      <label className="rpb-config-header" htmlFor="dim-select"> <span className="nowrap"><TextMaker text_key="group_by" /></span> </label>
+                      <label className="rpb-config-header" htmlFor="dim-select"> 
+                        <span className="nowrap">
+                          <TextMaker text_key="group_by" />
+                        </span>
+                      </label>
                     </div>
                     <div className="col-md-10">
                       <Select
@@ -148,39 +146,35 @@ class SimpleView extends React.Component {
                   </div>
                 </div>
                 { deptBreakoutMode &&
-              <div className="rpb-config-item">
-                <div className="row">
-                  <div className="col-md-2" style={{paddingLeft:"0px"}}>
-                    <label className="rpb-config-header" htmlFor="filt-select"> <TextMaker text_key="filter" /> </label>
+                  <div className="rpb-config-item">
+                    <div className="row">
+                      <div className="col-md-2" style={{paddingLeft:"0px"}}>
+                        <label className="rpb-config-header" htmlFor="filt-select"> <TextMaker text_key="filter" /> </label>
+                      </div>
+                      <div className="col-md-10">
+                        <Select
+                          id="filt_select"
+                          className="form-control rpb-simple-select"
+                          options={filters.map(filter => ({ id: filter, display: filter }) ) }
+                          selected={filter}
+                          onSelect={id => on_set_filter({
+                            dimension: dimension, 
+                            filter: id,
+                          })}
+                        />
+                      </div>
+                      <div className="clearfix" />
+                    </div>
                   </div>
-                  <div className="col-md-10">
-                    <Select
-                      id="filt_select"
-                      className="form-control rpb-simple-select"
-                      options={filters.map(filter => ({ id: filter, display: filter }) ) }
-                      selected={filter}
-                      onSelect={id => on_set_filter({
-                        dimension: dimension, 
-                        filter: id,
-                      })}
-                    />
-                  </div>
-                  <div className="clearfix" />
-                </div>
-              </div>
                 }
               </div>
               <div className="clearfix" />
             </div>
-          </div>
-        </div>
-        <div className="rpb-option">
-          <div className='rpb-option-label '>
-            <div className='rpb-option-label-text '>
-              <TextMaker text_key="blue_text_report_details" args={{table_name:table.name}} />
-            </div>
-          </div>
-          <div className="rpb-option-content">
+          }
+        />
+        <LabeledBox
+          label={ <TextMaker text_key="blue_text_report_details" args={{table_name:table.name}} /> }
+          content={
             <Details
               summary_content={
                 <div>
@@ -191,18 +185,12 @@ class SimpleView extends React.Component {
                 <ReportDetails {...this.props} />
               }
             />
-          </div>
-        </div>
-        <div className="rpb-option">
-          <div className='rpb-option-label '>
-            <div className='rpb-option-label-text '>
-              <TextMaker text_key="blue_text_report_data_sources"/>
-            </div>
-          </div>
-          <div className="rpb-option-content">
-            <ReportDatasets {...this.props} />
-          </div>
-        </div>
+          }
+        />
+        <LabeledBox
+          label={ <TextMaker text_key="blue_text_report_data_sources" args={{table_name:table.name}} /> }
+          content={ <ReportDatasets {...this.props} /> }
+        />
         <div id="rpb-main-content" >
           <AlertMessage table={table} />
           { 

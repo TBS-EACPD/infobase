@@ -1,5 +1,6 @@
 export class PartitionDataWrapper {
   constructor(hierarchy, alternate_data_wrapper_node_rules){
+    const distinct_root_identifier = (new Date).getTime();
 
     const default_data_wrapper_node_rules = (node) => {
       node.__value__ = node.value;
@@ -8,15 +9,27 @@ export class PartitionDataWrapper {
         if (_node.children.length <= 2){ return [_node.children, []] }
         const show = [_.head(_node.children)];
         const hide = _.tail(_node.children);
-        const unhide = _.filter(hide, __node => __node.value > hierarchy.value/100);
-        return [show.concat(unhide), _.difference(hide,unhide)];
+        const unhide = _.filter(hide, 
+          __node => !_.isUndefined(__node.data.hide_item_by_default) && __node.data.hide_item_by_default ? 
+              false :
+              Math.abs(__node.value) > hierarchy.value/100 );
+        return [show.concat(unhide), _.difference(hide, unhide)];
       }
     }
 
     const data_wrapper_node_rules = alternate_data_wrapper_node_rules ? alternate_data_wrapper_node_rules : default_data_wrapper_node_rules;
 
+    const get_id_ancestry = (node) => {
+      if ( node.parent && !_.isUndefined(node.parent.data.id) ) {
+        return node.data.id + '-' + get_id_ancestry(node.parent);
+      } else {
+        return "root:" + distinct_root_identifier;
+      }
+    }
+
     hierarchy
       .each( node => data_wrapper_node_rules(node) )
+      .each( node => node.id_ancestry = get_id_ancestry(node) )
       .each( node => node.children = this.process_node_children_for_compression(node) );
 
     this.root = hierarchy;
@@ -24,18 +37,18 @@ export class PartitionDataWrapper {
   to_open_levels(){
     const levels = {};
     this.root.each(node => {
-      return (levels[node.depth] = levels[node.depth] || []).push(node)
+      return (levels[node.depth] = levels[node.depth] || []).push(node);
     });
     return levels; 
   }
   links(){
     return _.chain(this.branches())
-      .map(source => source.children.map(target => ({source, target})))
+      .map(source => source.children.map( target => ({source, target}) ) )
       .flatten(true)
       .value();
   }
   branches(){
-    return _.filter([this.root].concat(this.root.descendants()), node => node.children);
+    return _.filter([this.root].concat( this.root.descendants() ), node => node.children);
   }
   process_node_children_for_compression(node){
     if (!node.children){
@@ -62,11 +75,11 @@ export class PartitionDataWrapper {
         {  
           height: node.height-1,
           depth: node.depth+1,
-          id_ancestry: _.reduce(to_be_compressed, (memo,x) => memo+"-"+x.data.id, "compressed>")+"-<compressed-"+node.id_ancestry,
+          id_ancestry: _.reduce(to_be_compressed, (memo, x) => memo+"-"+x.data.id, "compressed>")+"-<compressed-"+node.id_ancestry,
           open: true,
           parent: node,
-          value: d3.sum(to_be_compressed,x => x.value),
-          __value__: d3.sum(to_be_compressed,x => x.value),
+          value: d3.sum(to_be_compressed, x => x.value),
+          __value__: d3.sum(to_be_compressed, x => x.value),
           data: {
             id: _.map(to_be_compressed, x => x.data.id)+"compressed",
             name: "+",
@@ -87,14 +100,14 @@ export class PartitionDataWrapper {
   show_partial_children(node){
     let children;
     // get rid of the minimize placeholder node
-    node.children = node.children.filter(d => _.isUndefined(d.data.unhidden_children));
+    node.children = !_.isUndefined(node.children) && _.isArrayLike(node.children) && node.children.filter( d => _.isUndefined(d.data.unhidden_children) );
     if (node.children) {
       node.children = children = this.process_node_children_for_compression(node);
     }
     return children;
   }
   show_all_children(node){
-    if (!this.magnified(node)) {
+    if ( !this.magnified(node) ) {
       node.value = node.__value__;
     }
     if (node.children){
@@ -119,7 +132,7 @@ export class PartitionDataWrapper {
 
       _.chain(children)
         .difference(node.children)
-        .filter(node => node.value!==0)
+        .filter(node => node.value !== "collapsed")
         .each(child => {
           child.eachAfter(d => {
             if (d.children){
@@ -132,7 +145,7 @@ export class PartitionDataWrapper {
       node.children = children;
 
       node.eachAfter(c => {
-        if (!this.collapsed(c)) {
+        if ( !this.collapsed(c) ) {
           c.open = true;
         }
       });
@@ -186,11 +199,11 @@ export class PartitionDataWrapper {
     node.magnified = factor;
     const siblings = parent.children.filter(d => (
       d !== node && 
-      !this.magnified(d)  &&
-      d.value !== 0
+      !this.magnified(d) &&
+      d.value !== "collapsed"
     )); 
     _.each(siblings, d => {
-      d.value = 0
+      d.value = "collapsed";
       this.hide_all_children(d);
     })
   }
@@ -212,7 +225,7 @@ export class PartitionDataWrapper {
     return node.data.hidden_children || node.data.unhidden_children;
   }
   collapsed(node){
-    return _.some(node.ancestors(), d => d.value === 0);
+    return _.some(node.ancestors(), d => d.value === "collapsed");
   }
   magnified(node){
     return _.some(node.ancestors(), d => d.magnified);

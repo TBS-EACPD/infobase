@@ -26,6 +26,7 @@ const {
   SpinnerWrapper,
   TextMaker,
   RadioButtons,
+  LabeledBox,
 } = require('../util_components.js');
 const AriaModal = require('react-aria-modal');
 
@@ -183,108 +184,98 @@ class RPB extends React.Component {
         subject_name={subject !== Gov && subject && subject.name}
         table_name={table && table.name}
       />
-      <div className='rpb-option'>
-        <div className='rpb-option-label '>
-          <div className='rpb-option-label-text '>
-            <TextMaker text_key="blue_text_pick_data" />
-          </div>
-        </div>
-        <div className='rpb-option-content'>
-          <div className="centerer">
-            <p 
-              id="picker-label"
-              className="md-half-width md-gutter-right"
-              style={{margin: 0}}
-            >
-              { table ? 
-                <TextMaker text_key="table_picker_select_different_summary" args={{name: table.name}} /> :
-                <TextMaker text_key="table_picker_none_selected_summary" /> 
-              } 
-            </p>
-            <div className="md-half-width md-gutter-left">
-              { 
-                window.is_a11y_mode ?
-                <AccessibleTablePicker
-                  onSelect={id => this.pickTable(id)}
-                  tables={_.reject(Table.get_all(), 'reference_table')}
-                  selected={_.get(table, 'id')}
-                /> :
-                <button 
-                  className="btn btn-ib-primary"
-                  style={{width: '100%'}}
-                  onClick={()=>{ this.setState({table_picking: true})}}
-                >
-                  <TextMaker text_key={table ? 'select_another_table_button' : 'select_table_button'} /> 
-                </button>
-              }
-            </div>
-          </div>
-          { 
-            !window.is_a11y_mode &&
-
-            <AriaModal
-              mounted={this.state.table_picking}
-              onExit={()=>{ 
-                if( this.state.table_picking ){
-                  this.setState({ table_picking: false }); 
-                  setTimeout(()=>{
-                    slowScrollDown();
-                    document.querySelector('#'+sub_app_name).focus();
-                  },200)
-                }
-              }}
-              titleId="tbp-title"
-              getApplicationNode={()=>document.getElementById('app')}
-              verticallyCenter={true}
-              underlayStyle={{
-                paddingTop:"50px",
-                paddingBottom:"50px",
-              }}
-              focusDialog={true}
-            >
-              <div 
-                tabIndex={-1}
-                id="modal-child"
-                className="container app-font"
-                style={{
-                  backgroundColor: 'white',
-                  overflow: 'auto',
-                  lineHeight : 1.5,
-                  padding: "0px 20px 0px 20px",
-                  borderRadius: "5px",
-                  fontWeight: 400,
-                }}
+      <LabeledBox
+        label={ <TextMaker text_key="blue_text_pick_data" /> }
+        content={
+          <div>
+            <div className="centerer">
+              <p 
+                id="picker-label"
+                className="md-half-width md-gutter-right"
+                style={{margin: 0}}
               >
-                <TablePicker onSelect={id=> this.pickTable(id)} />
+                { table ? 
+                  <TextMaker text_key="table_picker_select_different_summary" args={{name: table.name}} /> :
+                  <TextMaker text_key="table_picker_none_selected_summary" /> 
+                } 
+              </p>
+              <div className="md-half-width md-gutter-left">
+                { 
+                  window.is_a11y_mode ?
+                  <AccessibleTablePicker
+                    onSelect={id => this.pickTable(id)}
+                    tables={_.reject(Table.get_all(), 'reference_table')}
+                    selected={_.get(table, 'id')}
+                  /> :
+                  <button 
+                    className="btn btn-ib-primary"
+                    style={{width: '100%'}}
+                    onClick={()=>{ this.setState({table_picking: true})}}
+                  >
+                    <TextMaker text_key={table ? 'select_another_table_button' : 'select_table_button'} /> 
+                  </button>
+                }
               </div>
-            </AriaModal>
-          }
-        </div>
-      </div>
+            </div>
+            {!window.is_a11y_mode &&
+              <AriaModal
+                mounted={this.state.table_picking}
+                onExit={()=>{ 
+                  if( this.state.table_picking ){
+                    this.setState({ table_picking: false }); 
+                    setTimeout(()=>{
+                      slowScrollDown();
+                      document.querySelector('#'+sub_app_name).focus();
+                    },200)
+                  }
+                }}
+                titleId="tbp-title"
+                getApplicationNode={()=>document.getElementById('app')}
+                verticallyCenter={true}
+                underlayStyle={{
+                  paddingTop:"50px",
+                  paddingBottom:"50px",
+                }}
+                focusDialog={true}
+              >
+                <div 
+                  tabIndex={-1}
+                  id="modal-child"
+                  className="container app-font"
+                  style={{
+                    backgroundColor: 'white',
+                    overflow: 'auto',
+                    lineHeight : 1.5,
+                    padding: "0px 20px 0px 20px",
+                    borderRadius: "5px",
+                    fontWeight: 400,
+                  }}
+                >
+                  <TablePicker onSelect={id=> this.pickTable(id)} />
+                </div>
+              </AriaModal>
+            }
+          </div>
+        }
+      />
       {
           this.state.loading ? 
           <SpinnerWrapper scale={4} /> :
           [
-            <div key="pick-subject" className='rpb-option'>
-              <div className='rpb-option-label '>
-                <div className='rpb-option-label-text '>
-                  <TextMaker text_key="blue_text_pick_org" />
-                </div>
-              </div>
-              <div className='rpb-option-content'>
+            <LabeledBox
+              key="pick-subject"
+              label={ <TextMaker text_key="blue_text_pick_org" /> }
+              content={
                 <SubjectFilterPicker 
                   subject={subject}  
                   onSelect={ subj=> on_set_subject(subj) }
-                /> 
-              </div>
-            </div>,
-            <div key="pick-mode" className='rpb-option'>
-              <div className='rpb-option-label '>
-                <div className='rpb-option-label-text '>
-                  <TextMaker text_key="blue_text_select_mode" />
-                </div>
-              </div>
-              <div className='rpb-option-content'>
+                />
+              }
+            />,
+            <LabeledBox
+              key="pick-mode"
+              label={ <TextMaker text_key="blue_text_select_mode" /> }
+              content={
                 <div className="centerer">
                   <RadioButtons
                     options = {[
@@ -296,8 +287,8 @@ class RPB extends React.Component {
                     }
                   />
                 </div>
-              </div>
-            </div>,
+              }
+            />,
             (
               table ? 
               (

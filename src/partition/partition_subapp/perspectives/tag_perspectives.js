@@ -18,8 +18,6 @@ import {
 
 
 const create_tag_hierarchy = function(tag_scheme, data_type) {
-  const distinct_root_identifier = (new Date).getTime();
-
   const hierarchy = d3.hierarchy(Subject.Tag.tag_roots[tag_scheme],
     node => {
       if (node.is("tag")){
@@ -27,7 +25,7 @@ const create_tag_hierarchy = function(tag_scheme, data_type) {
       }
     })
     .eachAfter(node => {
-      post_traversal_value_set(node, data_type, distinct_root_identifier);
+      post_traversal_value_set(node, data_type);
       post_traversal_search_string_set(node);
     })
     .sort( absolute_value_sort );
@@ -109,6 +107,11 @@ const goca_perspective_factory = (data_type) => new PartitionPerspective({
   hierarchy_factory: () => create_tag_hierarchy("GOCO", data_type),
   data_wrapper_node_rules: tag_data_wrapper_node_rules,
   popup_template: goca_perspective_popup_template,
+  level_headers: {
+    "1": text_maker("spend_area"),
+    "2": text_maker("goco"),
+    "3": text_maker("program"),
+  },
   root_text_func: root_value => {
     const text_key = data_type === "exp" ? "partition_spending_was" : "partition_fte_was";
     return text_maker(text_key, {x: root_value});
@@ -127,6 +130,10 @@ const hwh_perspective_factory = (data_type) => new PartitionPerspective({
   hierarchy_factory: () => create_tag_hierarchy("HWH", data_type),
   data_wrapper_node_rules: tag_data_wrapper_node_rules, 
   popup_template: hwh_perspective_popup_template,
+  level_headers: {
+    "1": text_maker("tag"),
+    "2": text_maker("program"),
+  },
   root_text_func: root_value => text_maker("partiton_default_was_root", {x: root_value}),
   diagram_note_content: <TextMaker text_key={"MtoM_tag_warning"} />,
 })

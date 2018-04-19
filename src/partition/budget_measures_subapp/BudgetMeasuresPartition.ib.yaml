@@ -1,0 +1,177 @@
+provides:
+  en: provides
+  fr: fournit un financement de 
+
+single_word_for:
+  en: For
+  fr: Pour
+
+single_word_to:
+  en: To
+  fr: À
+
+single_word_in:
+  en: In
+  fr: En
+
+see_it_in_the_budget:
+  en: See it in the Budget
+  fr: Allez le voir dans le budget
+
+in_funding:
+  en: in funding
+  fr: ""
+
+in_funding_for:
+  en: in funding for
+  fr: fournit pour
+
+budget_measures_root_sub_note:
+  transform: [handlebars]
+  en: ({{gt "budget_route_year"}} funding, presented on an Estimates basis as per Table A2.11 of {{gt "budget_name"}})
+  fr: Financement pour {{gt "budget_route_year"}}, présenté en termes du budget principal selon le tableau A2.11 du budget 2018
+
+budget_measures_partition_root:
+  transform: [handlebars]
+  text: |
+    {{gt "budget_name_header"}}:
+    <p class='amount'>
+      {{rawfmt_compact1 root_value}}
+    </p>
+    {{gt "in_funding_for"}}
+    <span class='text-nowrap'>
+      {{displayed_measure_count}}
+    </span>
+    {{gt "budget_measures"}}
+    <p class='root-sub-note'>
+      {{gt "budget_measures_root_sub_note"}}
+    </p>
+
+budget_measure_popup_top_line:
+  handlebars_partial: true
+  text: |
+    <span class='stat1 popup-font-m'>
+      <text style='color:#fdfdfd'>
+        {{gt "budget_name"}}
+        </br>
+        {{gt "provides"}}
+      </text>
+      <span class='popup-font-ml'>
+      {{#if value_is_zero}}
+        {{lang_formated_zero}}
+      {{else}}
+        {{#if value_is_negative}}
+          <text style='color:red;'>
+            {{fmt_compact1 value}}
+          </text>
+        {{else}}
+          {{fmt_compact1 value}}
+        {{/if}}
+      {{/if}}
+      </span>
+      <text style='color:#fdfdfd'>
+        {{gt "in_funding"}} ...
+      </text>
+    </span>
+
+budget_measure_popup_dept_line:
+  handlebars_partial: true
+  text: |
+    <div class="budget-measure-popup-name-row popup-font-m">
+      <span class='name-row-left' style='color:#fdfdfd'>
+        {{gt "single_word_to"}}
+      </span>
+      <span class='name-row-right'>
+        {{dept_name}}
+      </span>
+    </div>
+
+budget_measure_popup_measure_line:
+  handlebars_partial: true
+  text: |
+    <div class="budget-measure-popup-name-row popup-font-m">
+      <span class='name-row-left' style='color:#fdfdfd'>
+        {{gt "single_word_for"}}
+      </span>
+      <span class='name-row-right'>
+        {{measure_name}}
+      </span>
+    </div>
+
+budget_measure_popup_year_line:
+  handlebars_partial: true
+  text: |
+    <div class="budget-measure-popup-name-row popup-font-m">
+      <span class='name-row-left' style='color:#fdfdfd'>
+        {{gt "single_word_in"}}
+      </span>
+      <span class='name-row-right'>
+        {{year}}
+      </span>
+    </div>
+
+budget_measure_popup_bottom_rows:
+  handlebars_partial: true
+  text: |
+    {{#if is_budget_measure}}
+      <div class='mrgn-bttm-sm popup-row-top-border popup-font-m'>
+        <text style='color:#fdfdfd'> {{gt "budget_chapter"}}: </text> {{chapter}}
+      </div>
+    {{/if}}
+    {{#if description}}
+      <div class='popup-font-ml popup-row-top-border'>
+        {{gt "description"}}:
+      </div>
+      <div class='mrgn-bttm-sm popup-row-bottom-border popup-decription-text' style='min-height:20px;'>
+        {{{description}}}
+      </div>
+    {{/if}}
+    {{#if notes}}
+      <div class='popup-font-ml'>
+        {{gt "notes"}}:
+      </div>
+      <div class='mrgn-bttm-sm popup-row-bottom-border popup-decription-text' style='min-height:40px;'>
+        {{{notes}}}
+      </div>
+    {{/if}}
+    {{#if budget_link}}
+      <a href='{{budget_link}}' 
+        class='btn btn-xs btn-block mrgn-bttm-sm infographic' 
+        style='background-color:{{color}};'>
+        {{gt "see_it_in_the_budget"}}
+      </a>
+    {{/if}}
+    {{#if is_dept}}
+      <a href='#orgs/{{level}}/{{id}}/infograph' 
+        class='btn btn-xs btn-block mrgn-bttm-sm infographic' 
+        style='background-color:{{color}};'>
+        {{gt "see_the_infographic"}}
+      </a>
+    {{/if}}
+    {{#if is_first_column}} 
+      <a href='#' 
+        class='btn btn-xs btn-block mrgn-bttm-sm magnify'  
+        style='background-color:{{color}};'>
+        {{focus_text}}
+      </a> 
+    {{/if}}
+
+budget_measure_popup_template:
+  transform: [handlebars]
+  text: |
+    <div class='mrgn-bttm-md popup-row-top popup-font-m'>
+      {{> budget_measure_popup_top_line}}
+      {{#if dept_is_first_column}}
+        {{#if is_budget_measure}}
+          {{> budget_measure_popup_measure_line}}
+        {{/if}}
+        {{> budget_measure_popup_dept_line}}
+      {{else}}
+        {{#if is_dept}}
+          {{> budget_measure_popup_dept_line}}
+        {{/if}}
+        {{> budget_measure_popup_measure_line}}
+      {{/if}}
+      {{> budget_measure_popup_year_line}}
+    </div>
+    {{> budget_measure_popup_bottom_rows}}

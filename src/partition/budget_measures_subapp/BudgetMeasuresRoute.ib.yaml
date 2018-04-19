@@ -1,0 +1,49 @@
+## text common to standard and a11y versions of route
+
+budget_name_header:
+  en: Budget 2018
+  fr: Le budget de 2018
+
+budget_name:
+  en: Budget 2018
+  fr: le budget de 2018
+
+budget_route_year:
+  text: 2018-19
+
+budget_measure:
+  en: Budget Measure
+  fr: Mesure budgétaire
+budget_measures:
+  en: Budget Measures
+  fr: Mesures budgétaires
+budget_measures_short:
+  en: Measures
+  fr: Mesures
+budget_chapters:
+  en: Budget Chapters
+  fr: Chapitres budgétaires
+budget_chapter:
+  en: Budget Chapter
+  fr: Chapitre du budget
+budget_allocation_tbd:
+  en: Allocation to be determined
+  fr: Affectation à determiner
+
+budget_route_top_text:
+  transform: [markdown]
+  en: |
+    Presented below are the new spending measures listed in <a href="https://www.budget.gc.ca/2018/docs/plan/anx-02-en.html#41-Policy-Actions-and-Budget-Investments-by-Department-(Cash-Basis)">Table A2.11 of the 2018 Budget Plan</a>.
+    These measures, totalling **$7.04 billion** in **2018-19**, are also listed in the 2018-19 Main Estimates Annex 1, thereby establishing a clear link between the Budget Plan and the Main Estimates.  
+  fr: |
+    Présenté ci-dessous sont les nouvelles mesures de dépenses figurant au <a href="https://www.budget.gc.ca/2018/docs/plan/anx-02-fr.html#41-Mesures-strategiques-et-investissements-du-budget-par-ministere-et-organisme-(selon-la-comptabilite-de-caisse)">tableau A2.11 du plan budgétaire de 2018</a>.
+    Ces mesures, totalisant **7,04 milliards** de dollars en **2018-19**, se retrouvent également dans l'annexe 1 du Budget principal des dépenses de 2018-2019, établissant ainsi un lien clair entre le Plan budgétaire et le Budget principal des dépenses.  
+
+other_budget_measure_chapter_description:
+  en: Other Budget 2018 Measures, not included in budget chapters.
+  fr: Autres mesures prévues dans le budget de 2018, non incluses dans les chapitres budgétaires.
+
+budget_measure_description_values_clarification:
+  transform: [handlebars]
+  en: Spending amounts presented in the description are in accrual terms and therefore may not match cash amounts presented in Table A2.11 of {{gt "budget_name"}}.
+  fr: Les dépenses présentées dans la description sont présentées en termes de comptabilité d'exercise et donc elles pourraient ne pas correspondre aux montants présenté dans le tableau A2.11 du budget de 2018.

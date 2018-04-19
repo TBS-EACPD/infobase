@@ -14,11 +14,9 @@ import {
   formats_by_data_type,
 } from './perspective_utils.js';
 
-// Would like to change the use of dept in this perspective to "ministry", but the use of dept is grandfathere in to the route and I dion't want to break past links... fuck
+// Would like to change the use of dept in this perspective to "ministry", but the use of dept is grandfathered in to the route itself...
 
 const create_ministry_hierarchy = function(data_type, skip_crsos = true){
-  const distinct_root_identifier = (new Date).getTime();
-
   return d3.hierarchy(Subject.gov,
     node => {
       if (node.is("gov")){
@@ -36,7 +34,7 @@ const create_ministry_hierarchy = function(data_type, skip_crsos = true){
       } 
     })
     .eachAfter(node => {
-      post_traversal_value_set(node, data_type, distinct_root_identifier);
+      post_traversal_value_set(node, data_type);
       post_traversal_search_string_set(node);
     })
     .sort(absolute_value_sort);
@@ -88,6 +86,11 @@ const dept_perspective_factory = (data_type) => new PartitionPerspective({
   formater: node_data => wrap_in_brackets(formats_by_data_type[data_type](node_data[data_type])),
   hierarchy_factory: () => create_ministry_hierarchy(data_type),
   data_wrapper_node_rules: dept_data_wrapper_node_rules,
+  level_headers: {
+    "1": text_maker("ministry"),
+    "2": text_maker("org"),
+    "3": text_maker("program"),
+  },
   popup_template: dept_perspective_popup_template,
   root_text_func: root_value => {
     const text_key = data_type === "exp" ? "partition_spending_was" : "partition_fte_was";

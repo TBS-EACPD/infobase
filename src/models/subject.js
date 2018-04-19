@@ -20,7 +20,7 @@ Subject.gov = Subject.Gov = {
   is(comparator){
     if (_.isString( comparator)){
       return this.level === comparator;
-    } 
+    }
     return this.constructor === comparator;
   },
   level: 'gov',
@@ -351,7 +351,7 @@ class Tag extends common(){
 
 class CRSO extends common(){
   static get singular(){ return text_maker("");}
-  static get  plural(){ return text_maker(""); }
+  static get plural(){ return text_maker(""); }
   static get type_name() { return 'crso'; }
   static create_and_register(def){
     const inst = new CRSO(def);
@@ -400,14 +400,14 @@ class CRSO extends common(){
 };
 
 class Program extends common(){
-  static get type_name() { return 'program'; }
+  static get type_name(){ return 'program'; }
   static get singular(){ return text_maker("program") }
   static get plural(){ return text_maker("programs") }
   static unique_id(dept, activity_code) { //dept can be an object, an acronym or a dept unique_id.
     const dept_acr = _.isObject(dept) ? dept.acronym : Dept.lookup(dept).acronym;
     return `${dept_acr}-${activity_code}`;
   }
-  static get_from_activity_code( dept_code , activity_code  ){
+  static get_from_activity_code(dept_code , activity_code){
     return this.lookup(this.unique_id(dept_code,activity_code));
   }
   static create_and_register(def){
@@ -510,6 +510,28 @@ class InstForm extends common(){
   }
 }
 
+class BudgetMeasure extends common(){
+  static get type_name(){ return 'budget_measure'; }
+  static get singular(){ return text_maker("budget_measure"); }
+  static get plural(){ return text_maker("budget_measures"); }
+
+  static create_and_register(args){
+    const inst = new BudgetMeasure(args);
+    this.register(args.id, inst);
+    return inst;
+  }
+  constructor({id, name, chapter_key, ref_id, description, funds}){
+    super();
+    this.id = id;
+    this.name = name;
+    this.chapter_key = chapter_key;
+    this.ref_id = ref_id;
+    this.description = description;
+    this.orgs = _.map(funds, fund_row => fund_row.org_id);
+    this.funds = funds;
+  }
+};
+
 function get_by_guid(guid){
   if(!_.isString(guid)){ return null; }
   let [model_type, model_id] = guid.split('_');
@@ -527,3 +549,4 @@ Subject.Tag = Subject.tag = Tag;
 Subject.Program =  Subject.program = Program;
 Subject.InstForm = Subject.instform = InstForm;
 Subject.Minister = Subject.minister = Minister;
+Subject.BudgetMeasure = BudgetMeasure;

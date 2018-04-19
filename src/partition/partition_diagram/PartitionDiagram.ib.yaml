@@ -7,3 +7,10 @@ partition_unfocus_all_popup:
         {{gt "partition_unfocus_button"}} {{gt "all"}}
       </a> 
     </div>
+
+partition_focus_button:
+  en: Focus
+  fr: Converger
+partition_unfocus_button:
+  en: Unfocus
+  fr: Diverger

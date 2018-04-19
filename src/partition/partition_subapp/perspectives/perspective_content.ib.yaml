@@ -116,7 +116,7 @@ partition_popup_infograph_link:
     <a href='#orgs/{{level}}/{{id}}/infograph' 
       class='btn btn-xs btn-block mrgn-bttm-sm infographic' 
       style='background-color:{{color}};'>
-      {{gt "partition_infograph_link"}}
+      {{gt "see_the_infographic"}}
     </a>
 partition_popup_rpb_link:
   handlebars_partial: true
@@ -427,15 +427,6 @@ partition_spending_will_be_by_est_doc:
     {{> "partition_spending_will_be_value_and_rpb_link_partial"}} en dépenses budgétaires prévues présenté dans le {{name}} de <span class='text-nowrap'>{{rt year}}</span>
 
 ## Misc. lang
-partition_focus_button:
-  en: Focus
-  fr: Converger
-partition_unfocus_button:
-  en: Unfocus
-  fr: Diverger
-partition_infograph_link:
-  en: See the Infographic
-  fr: Voir l’infographie
 partition_revenue_explained:
   en: Negative figures indicate that revenues exceed expenditures
   fr: Les chiffres négatifs indiquent que les recettes dépassent les dépense

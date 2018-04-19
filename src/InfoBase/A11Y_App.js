@@ -14,6 +14,7 @@ import { MetaData } from '../metadata/metadata.js';
 import { IgocExplorer } from "../igoc_explorer/igoc_explorer.js";
 import { ResourceExplorer } from "../resource_explorer/resource-explorer.js";
 import { InfoGraph } from '../infographic/infographic.js';
+import { BudgetMeasuresRoute } from '../partition/budget_measures_subapp/BudgetMeasuresRoute.js';
 import { Glossary } from '../glossary/glossary.js';
 import { ReportBuilder } from '../rpb/index.js';
 import { TooltipActivator } from '../glossary/Tooltips';
@@ -41,6 +42,7 @@ export class App extends React.Component {
           <Route path="/igoc/:grouping?" component={IgocExplorer} />
           <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={ResourceExplorer} />
           <Route path="/orgs/:level/:subject_id/infograph/:bubble?/" component={InfoGraph} />
+          <Route path="/budget-measures/:first_column?" component={BudgetMeasuresRoute} />
           <Route path="/glossary/:active_key?" component={Glossary} />
           <Route path="/rpb/:config?" component={ReportBuilder} />
           <Route path="/about" component={About} />

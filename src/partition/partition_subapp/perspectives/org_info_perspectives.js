@@ -7,7 +7,6 @@ import {
   absolute_value_sort,
   alphabetic_name_sort,
   get_glossary_entry,
-  get_id_ancestry,
   post_traversal_search_string_set,
 } from './data_hierarchy_utils';
 
@@ -27,7 +26,6 @@ const glossary_entry_from_inst_form_type_id = (type_id) => {
     "inter_org": "IO",
     "joint_enterprise": "JE",
     "min_dept": "DEPT",
-    "parl_ent": "todo",
     "serv_agency": "SA",
     "shared_gov_corp": "SGC",
     "spec_op_agency": "SOA",
@@ -50,7 +48,6 @@ const orgs_to_inst_form_nodes = (orgs) => {
           description: glossary_entry_from_inst_form_type_id(type_id),
           name: InstForm.lookup(type_id).name,
           is: __type__ => __type__ === "inst_form",
-          plural: () => text_maker("type"),
           orgs: orgs,
         }) )
         .value()
@@ -59,8 +56,7 @@ const orgs_to_inst_form_nodes = (orgs) => {
     .value();
 }
 
-const org_info_post_traversal_rule_set = (node, data_type, distinct_root_identifier) => {
-  node.id_ancestry = get_id_ancestry(distinct_root_identifier, node);
+const org_info_post_traversal_rule_set = (node, data_type) => {
   if ( node.data.is("dept") ){
     node[data_type] = node.value = node.data.value = 1;
   } else {
@@ -70,8 +66,6 @@ const org_info_post_traversal_rule_set = (node, data_type, distinct_root_identif
 }
 
 const create_org_info_ministry_hierarchy = function(data_type) {
-  const distinct_root_identifier = (new Date).getTime();
-
   return d3.hierarchy(Subject.gov,
     node => {
       if (node.is("gov")) {
@@ -83,7 +77,7 @@ const create_org_info_ministry_hierarchy = function(data_type) {
       }
     })
     .eachAfter(node => {
-      org_info_post_traversal_rule_set(node, data_type, distinct_root_identifier);
+      org_info_post_traversal_rule_set(node, data_type);
       post_traversal_search_string_set(node);
     })
     .sort( (a, b) => {
@@ -96,8 +90,6 @@ const create_org_info_ministry_hierarchy = function(data_type) {
 }
 
 const create_org_info_inst_form_hierarchy = function(data_type, grandparent_inst_form_group) {
-  const distinct_root_identifier = (new Date).getTime();
-
   return d3.hierarchy(Subject.gov,
     node => {
       if ( node.is("gov") ) {
@@ -112,7 +104,7 @@ const create_org_info_inst_form_hierarchy = function(data_type, grandparent_inst
       }
     })
     .eachAfter(node => {
-      org_info_post_traversal_rule_set(node, data_type, distinct_root_identifier);
+      org_info_post_traversal_rule_set(node, data_type);
       post_traversal_search_string_set(node);
     })
     .sort( (a, b) => {
@@ -191,6 +183,11 @@ const make_org_info_ministry_perspective = () => new PartitionPerspective({
   hierarchy_factory: () => create_org_info_ministry_hierarchy("org_info"),
   data_wrapper_node_rules: org_info_data_wrapper_node_rules,
   popup_template: org_info_perspective_popup_template,
+  level_headers: { 
+    "1": text_maker("ministry"),
+    "2": text_maker("type"),
+    "3": text_maker("org"),
+  },
   root_text_func: root_value => text_maker("partition_org_info_was", {x: root_value}),
 });
 
@@ -202,6 +199,10 @@ const make_org_info_federal_perspective = () => new PartitionPerspective({
   hierarchy_factory: () => create_org_info_inst_form_hierarchy("org_info", "fed_int_gp"),
   data_wrapper_node_rules: org_info_data_wrapper_node_rules,
   popup_template: org_info_perspective_popup_template,
+  level_headers: {
+    "1": text_maker("type"),
+    "2": text_maker("org"),
+  },
   root_text_func: root_value => text_maker("partition_org_info_federal_orgs_by_inst_form_was", {x: root_value}),
 });
 
@@ -213,6 +214,10 @@ const make_org_info_interests_perspective = () => new PartitionPerspective({
   hierarchy_factory: () => create_org_info_inst_form_hierarchy("org_info", "corp_int_gp"),
   data_wrapper_node_rules: org_info_data_wrapper_node_rules,
   popup_template: org_info_perspective_popup_template,
+  level_headers: {
+    "1": text_maker("type"),
+    "2": text_maker("org"),
+  },
   root_text_func: root_value => text_maker("partition_org_info_interests_by_inst_form_was", {x: root_value}),
 });
 

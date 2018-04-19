@@ -111,7 +111,7 @@ exports.HBarComposition = class HBarComposition {
       .attrs({
         "x1" : graph_start + x(-x_min),
         "x2" : graph_start + x(-x_min),
-        "y1" : margin.top - 20,
+        "y1" : margin.top + 2,
         "y2" : margin.top + height,
         "stroke" : "#000",
         "stroke-width" : 2,
@@ -121,7 +121,7 @@ exports.HBarComposition = class HBarComposition {
       .attrs({
         "x1" : label_pct * width+1,
         "x2" : label_pct * width+1,
-        "y1" : margin.top - 20,
+        "y1" : margin.top + 2,
         "y2" : margin.top + height,
         "stroke" : "#000",
         "stroke-width" : 2,

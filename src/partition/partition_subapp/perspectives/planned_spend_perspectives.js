@@ -8,7 +8,6 @@ import { PartitionPerspective } from './PartitionPerspective.js';
 import {
   absolute_value_sort,
   get_glossary_entry,
-  get_id_ancestry,
   post_traversal_search_string_set,
 } from './data_hierarchy_utils.js';
 
@@ -25,7 +24,7 @@ const set_year_by_presentation_scheme = (presentation_scheme) => {
   year = get_year(presentation_scheme) + "_estimates";
 }
 
-const estimates_common_node_mapping = ({data_for_node_mapping, is, plural, glossary_entry_by_id_func}) => {
+const estimates_common_node_mapping = ({data_for_node_mapping, is, glossary_entry_by_id_func}) => {
   return _.chain(data_for_node_mapping)
     .groupBy("id")
     .map( grouped_rows => {
@@ -42,7 +41,6 @@ const estimates_common_node_mapping = ({data_for_node_mapping, is, plural, gloss
         description: glossary_entry_by_id_func(first_row.id),
         value: value_sum,
         is,
-        plural,
         data_for_children,
       }
     })
@@ -67,7 +65,6 @@ const get_glossary_entry_by_vs_type = (vs_type) => {
 
 const vs_type_node_mapping_common_options = {
   is: __type__ => __type__ === "vs_type",
-  plural: () => text_maker("partition_vote_stat_perspective"),
   glossary_entry_by_id_func: get_glossary_entry_by_vs_type,
 };
 
@@ -122,7 +119,6 @@ const get_glossary_entry_by_est_doc_code = (est_doc_code) => {
 
 const est_type_node_mapping_common_options = {
   is: __type__ => __type__ === "est_type",
-  plural: () => text_maker("partition_est_type_perspective"),
   glossary_entry_by_id_func: get_glossary_entry_by_est_doc_code,
 };
 
@@ -166,7 +162,6 @@ const est_type_or_vs_type_node_to_stat_item_nodes = (node) => {
     estimates_common_node_mapping({
       data_for_node_mapping,
       is: __type__ => __type__ === "stat_item",
-      plural: () => text_maker("stat"),
       glossary_entry_by_id_func: () => false,
     });
 }
@@ -257,7 +252,7 @@ const get_rpb_subject_code_from_context = (node, presentation_scheme) => {
   }
 }
 
-const planned_spending_post_traversal_rule_set = (node,data_type,distinct_root_identifier,presentation_scheme) => {
+const planned_spending_post_traversal_rule_set = (node,data_type, presentation_scheme) => {
   const table8 = Table.lookup('table8');
   
   const default_rpb_link_options = { 
@@ -270,8 +265,6 @@ const planned_spending_post_traversal_rule_set = (node,data_type,distinct_root_i
     preferDeptBreakout: true,
     descending: false,
   }
-
-  node.id_ancestry = get_id_ancestry(distinct_root_identifier,node);
 
   if ( node.data.is("vs_type") || node.data.is("est_type") || node.data.is("stat_item") ){
     node[data_type] = node.value = node.data.value;
@@ -297,7 +290,6 @@ const planned_spending_post_traversal_rule_set = (node,data_type,distinct_root_i
 }
 
 const create_planned_spending_hierarchy = function(data_type, presentation_scheme){
-  const distinct_root_identifier = (new Date).getTime();
   set_year_by_presentation_scheme(presentation_scheme);
 
   return d3.hierarchy(Subject.gov,
@@ -314,7 +306,7 @@ const create_planned_spending_hierarchy = function(data_type, presentation_schem
       }
     })
     .eachAfter(node =>{
-      planned_spending_post_traversal_rule_set(node, data_type, distinct_root_identifier, presentation_scheme);
+      planned_spending_post_traversal_rule_set(node, data_type, presentation_scheme);
       post_traversal_search_string_set(node);
     })
     .sort(absolute_value_sort);
@@ -413,6 +405,29 @@ const get_rpb_filter = (presentation_scheme) => {
   return !_.isEmpty(rpb_filter_name) ? `~filter~'${rpb_filter_name}` : rpb_filter_name;
 }
 
+const get_level_headers = (presentation_scheme) => {
+  switch (presentation_scheme){
+    case "org_planned_spend" : return {
+      "1": text_maker("org"),
+      "2": text_maker("partition_est_type_perspective"),
+      "3": text_maker("partition_vote_stat_perspective"),
+    };
+    case "est_type" : return {
+      "1": text_maker("partition_est_type_perspective"),
+      "2": text_maker("partition_vote_stat_perspective"),
+      "3": _.startCase(text_maker("stat")),
+    };
+    case "vs_type" : return {
+      "1": text_maker("partition_vote_stat_perspective"),
+      "2": _.startCase(text_maker("stat")),
+    };
+    default : return {
+      "1": text_maker("org"),
+      "2": text_maker("partition_vote_stat_perspective"),
+    };
+  }
+}
+
 const get_root_text_key = (presentation_scheme) => {
   switch (presentation_scheme){
     case "est_doc_mains" : return "partition_spending_will_be_by_est_doc";
@@ -442,6 +457,7 @@ const planned_exp_perspective_factory = (presentation_scheme) => new PartitionPe
       rpb_filter: get_rpb_filter(presentation_scheme),
     }
   ),
+  level_headers: get_level_headers(presentation_scheme),
   diagram_note_content: presentation_scheme === "est_doc_im" ? <TextMaker text_key={"partition_interim_estimates_def"} /> : false,
 })
 

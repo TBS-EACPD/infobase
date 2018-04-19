@@ -11,20 +11,19 @@
 }
 
 .radio-buttons__option {
-flex: 1;
-padding: 5px 15px;
-color: $buttonPrimaryColor;
-border-radius: 0px;
-background-color: transparent;
-margin-top: -1px;
-margin-bottom: -1px;
-position: relative;
--webkit-box-shadow: none;
-box-shadow: none;
+  flex: 1;
+  padding: 5px 15px;
+  color: $buttonPrimaryColor;
+  border-radius: 0px;
+  background-color: transparent;
+  margin-top: -1px;
+  margin-bottom: -1px;
+  position: relative;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 .radio-buttons__option.radio-buttons__option--active {
-  background-color: inherit;
   color: $backgroundColor;
   background-color: $buttonPrimaryColor;
   border-radius: 7px;
