@@ -7,7 +7,12 @@ export default function(a11y_mode){
       href: (
         rpb_link({ 
           table: 'table112', 
-          columns: ["{{ppl_last_year}}"], 
+          columns: ["{{ppl_last_year}}"],
+          dimension: "ex_level_condensed",
+          filter: ({
+            "en": "Executive",
+            "fr": "Cadres supérieurs",
+          })[window.lang],
         })
       ),
       is_new: true,
