@@ -70,7 +70,8 @@ const popup_template = node => {
     description: !_.isUndefined(node.data.description) && !_.isEmpty(node.data.description) && node.data.description,
     notes: !_.isUndefined(node.data.notes) && !_.isEmpty(node.data.notes) && node.data.notes,
     chapter: !_.isUndefined(node.data.chapter_key) && budget_chapters[node.data.chapter_key].text,
-    budget_link: !_.isUndefined(node.data.chapter_key) && node.data.chapter_key !== "oth" && !_.isEmpty(node.data.ref_id) && make_budget_link(node.data.chapter_key, node.data.ref_id),
+    budget_link: !_.isUndefined(node.data.chapter_key) && ( (node.data.chapter_key === "oth" && node.data.type !== "net_adjust") || !_.isEmpty(node.data.ref_id) ) && 
+      make_budget_link(node.data.chapter_key, node.data.ref_id),
     level: node.data.type,
     id: node.data.id,
     focus_text: node.magnified ? text_maker("partition_unfocus_button") : text_maker("partition_focus_button"),

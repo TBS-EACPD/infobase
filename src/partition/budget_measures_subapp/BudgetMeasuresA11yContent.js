@@ -99,14 +99,14 @@ export function BudgetMeasuresA11yContent(){
                       key={ "measure_link" + budget_measure.data.id }
                       rowSpan={ rows_to_span }
                     >
-                      { budget_measure.data.chapter_key !== "oth" && !_.isEmpty(budget_measure.data.ref_id) && 
+                      { ( (budget_measure.data.chapter_key === "oth" && budget_measure.data.type !== "net_adjust") || !_.isEmpty(budget_measure.data.ref_id) ) && 
                         <a
                           href = {make_budget_link(budget_measure.data.chapter_key, budget_measure.data.ref_id)}
                         >
                           { text_maker("link_to_budget_section_for") + ": " + budget_measure.data.name }
                         </a>
                       }
-                      { budget_measure.data.chapter_key === "oth" || _.isEmpty(budget_measure.data.ref_id) && 
+                      { budget_measure.data.chapter_key !== "oth" && _.isEmpty(budget_measure.data.ref_id) && 
                         text_maker("not_found_in_budget_text") 
                       }
                     </td>

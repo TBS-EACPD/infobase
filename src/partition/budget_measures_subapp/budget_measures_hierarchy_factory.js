@@ -3,9 +3,9 @@ import { text_maker } from "../../models/text";
 
 
 const absolute_value_sort_net_adjust_biased = (a,b) => {
-  if (a.data.type === "net_adjust" || a.data.id === "net_adjust"){
+  if (a.data.type === "net_adjust"){
     return Infinity;
-  } else if (b.data.type === "net_adjust" || b.data.id === "net_adjust"){
+  } else if (b.data.type === "net_adjust"){
     return - Infinity;
   } else {
     return - ( Math.abs(a.value) - Math.abs(b.value) );
@@ -37,21 +37,17 @@ const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
           )
           .map( budgetMeasure => {
             
-            const has_chapter_other_and_not_net_adjust = budgetMeasure.chapter_key === "oth" && budgetMeasure.id !== "net_adjust";
             const has_no_description = _.isEmpty(budgetMeasure.description);
-            const has_own_description = !has_chapter_other_and_not_net_adjust && !has_no_description
 
             return _.assign(
               {},
               budgetMeasure, 
               { 
-                type: "budget_measure",
-                description: has_chapter_other_and_not_net_adjust ?
-                  text_maker("other_budget_measure_chapter_description") :
-                  has_no_description ?
+                type: budgetMeasure.id === "net_adjust" ? "net_adjust" : "budget_measure",
+                description: has_no_description ?
                     text_maker("not_available") :
                     budgetMeasure.description,
-                notes: has_own_description ? text_maker("budget_measure_description_values_clarification") : false,
+                notes: !has_no_description ? text_maker("budget_measure_description_values_clarification") : false,
                 chapter_key: budgetMeasure.chapter_key,
                 hide_item_by_default: budgetMeasure.id === "net_adjust",
                 value: _.reduce(budgetMeasure.funds, (sum, fund_row) => sum + (fund_row.fund), 0),
@@ -158,9 +154,7 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
         const budgetMeasureNodes = _.map(node.fund_rows, fund_row => {
           const budgetMeasure = Subject.BudgetMeasure.lookup(fund_row.measure_id);
 
-          const has_chapter_other = budgetMeasure.chapter_key === "oth";
           const has_no_description = _.isEmpty(budgetMeasure.description);
-          const has_own_description = !has_chapter_other && !has_no_description
 
           return _.assign(
             {},
@@ -168,12 +162,10 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
             { 
               type: "budget_measure",
               chapter_key: budgetMeasure.chapter_key,
-              description: has_chapter_other ?
-                text_maker("other_budget_measure_chapter_description") :
-                has_no_description ?
+              description: has_no_description ?
                   text_maker("not_available") :
                   budgetMeasure.description,
-              notes: has_own_description ? text_maker("budget_measure_description_values_clarification") : false,
+              notes: !has_no_description ? text_maker("budget_measure_description_values_clarification") : false,
               value: fund_row.fund,
             }
           );
