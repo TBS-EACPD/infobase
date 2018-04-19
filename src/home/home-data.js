@@ -3,6 +3,46 @@ import { rpb_link } from '../rpb/rpb_link.js';
 export default function(a11y_mode){
   const featured_content_items = [
     {
+      text_key: "table112_title",
+      href: (
+        rpb_link({ 
+          table: 'table112', 
+          columns: ["{{ppl_last_year}}"], 
+        })
+      ),
+      is_new: true,
+    },
+    {
+      text_key: "table302_title",
+      href: (
+        rpb_link({ 
+          table: 'table302', 
+          columns: ["{{ppl_last_year}}"], 
+        })
+      ),
+      is_new: true,
+    },
+    {
+      text_key: "table303_title",
+      href: (
+        rpb_link({ 
+          table: 'table303', 
+          columns: ["{{ppl_last_year}}"], 
+        })
+      ),
+      is_new: true,
+    },
+    {
+      text_key: "table304_title",
+      href: (
+        rpb_link({ 
+          table: 'table304', 
+          columns: ["{{ppl_last_year}}"], 
+        })
+      ),
+      is_new: true,
+    },
+    {
       text_key: "main_estimates",
       href: (
         window.is_a11y_mode ? 

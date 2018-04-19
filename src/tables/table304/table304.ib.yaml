@@ -1,3 +1,7 @@
+table304_title:
+  en: Employee Average Age
+  fr: Âge moyen des employés
+
 table304_short:
   transform: [handlebars,embeded-markdown,markdown]
   en: |
