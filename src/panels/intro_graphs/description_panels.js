@@ -47,7 +47,7 @@ _.each(['tag','crso','program'], level => {
       }
       
       const view = <div className="medium_panel_text">
-        <p> {subject.description} </p>
+        <div dangerouslySetInnerHTML={{__html: subject.description }} />
         { link_content }
       </div>;
 
