@@ -65,7 +65,7 @@ const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
                 {
                   name: text_maker("budget_allocation_tbd"),
                   description: "", //TODO: get explanation of this case, and use it for item description?
-                  type: "non_allocated",
+                  type: "dept",
                   id: 9999,
                   value: fund_row.fund,
                 }
@@ -115,8 +115,8 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
               {},
               { 
                 name: text_maker("budget_allocation_tbd"),
-                description: "", //TODO: get explanation of this case, and use it for item description?
-                type: "non_allocated",
+                description: "",
+                type: "dept",
                 id: 9999,
                 fund_rows,
               }
@@ -148,7 +148,7 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
           }
         });
         return deptNodes;
-      } else if (node.type === "dept" || node.type === "non_allocated" || node.type !== "net_adjust"){
+      } else if (node.type === "dept"){
         const budgetMeasureNodes = _.map(node.fund_rows, fund_row => {
           const budgetMeasure = Subject.BudgetMeasure.lookup(fund_row.measure_id);
 
