@@ -125,8 +125,8 @@ module.exports = {
         var func  = function(row){
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           //FIXME: this is because I found a program without a goco, 
-          const goco = _.first(prog.tags_by_scheme.GOCO)
-          return goco.name || text_maker('unknown');
+          const goco = _.get(prog, "tags_by_scheme.GOCO[0].name");
+          return goco || text_maker('unknown');
         };
         return func;
       },
@@ -139,9 +139,8 @@ module.exports = {
         var func  = function(row){
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           //FIXME: this is because I found a program without a goco, 
-          const goco = _.first(prog.tags_by_scheme.GOCO)
-          const sa = goco && goco.parent_tag;
-          return (sa && sa.name) || text_maker('unknown');
+          const sa = _.get(prog, "tags_by_scheme.GOCO[0].parent_tag.name");
+          return sa || text_maker('unknown');
         };
         return func;
       },
