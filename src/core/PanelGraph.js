@@ -191,7 +191,7 @@ class PanelGraph {
         off : this.panel_off | [],
         panel_layout: layout,
         colmd : options.colmd || 12,
-        title_el : "h3",
+        title_el : "div",
         text_class: 'medium_panel_text',
       },
       options.panel_args,

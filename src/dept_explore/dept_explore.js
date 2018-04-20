@@ -424,7 +424,7 @@ function A11yContent(){
 
   return (
     <div className="sr-only">
-      <h2> {"Explore the government's organizations..."} </h2>
+      <div className="h2"> {"Explore the government's organizations..."} </div>
       <ul> 
         <li> <a href={table4_link}> By their total spending  </a> </li>
         <li> <a href={table12_link}> By their employment numbers   </a> </li>

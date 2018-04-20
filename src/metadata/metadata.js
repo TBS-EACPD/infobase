@@ -45,9 +45,9 @@ export class MetaData extends React.Component {
             <Panel key={source.key}>
               <header className="panel-heading" id={source.key}>
                 <div style={{marginBottom:'3px'}}>
-                  <h3 className="panel-title"> 
+                  <div className="panel-title"> 
                     {source.title()}
-                  </h3>
+                  </div>
                 </div>
                 <div style={{fontWeight: "400", opacity: 0.8}}>
                   <TM k="refreshed"/> {source.frequency.text}
@@ -58,7 +58,7 @@ export class MetaData extends React.Component {
                 <div>
                   { source.description() }
                 </div>
-                <h4> <TM k='datasets' /> </h4>
+                <div className="h4"> <TM k='datasets' /> </div>
                 <FancyUL>
                   {_.map(source.items(), ({id, text, inline_link, external_link }) => (
                     <span key={id} className="fancy-ul-span-flex">

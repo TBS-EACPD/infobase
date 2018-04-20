@@ -75,7 +75,7 @@ const ReportDetails = ({
         <p dangerouslySetInnerHTML={{__html: table_description}} />
       </div>
       <section className="mrgn-tp-lg">
-        <h5> <TextMaker text_key="col_defs" /> </h5> 
+        <div className="h5"> <TextMaker text_key="col_defs" /> </div> 
         <table className='table'>
           <thead>
             <tr> 
@@ -100,7 +100,7 @@ const ReportDetails = ({
       <div 
         className="mrgn-tp-lg"
       >
-        <h5> <TextMaker text_key="footnotes" /> </h5>
+        <div className="h5"> <TextMaker text_key="footnotes" /> </div>
         <ul>
           {_.map( footnotes, (note, index) => 
             <li key={index}> <div dangerouslySetInnerHTML={{__html: note}} /> </li> 

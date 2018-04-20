@@ -256,6 +256,10 @@ ul.footnote-list {
   opacity: 0.8;
 }
 
+.panel-title {
+  margin: -0.25em 0 !important;
+}
+
 /* 
   Fixes Safari-specific bug, does nothing on other browsers. 
   Only needed on larger screens. 
@@ -474,7 +478,7 @@ b, strong {
   font-weight: $heavyFontWeight;
 }
 
-header, h1, h2, h3, h4, h5, h6 {
+header, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-weight: $lightFontWeight;
   font-family: $fontFamily;
 }

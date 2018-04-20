@@ -123,7 +123,7 @@ class TablePicker extends React.Component {
       .value()
 
     return <div ref="main">
-      <h3 id="tbp-title"> <TextMaker text_key="table_picker_title" /> </h3>
+      <h2 id="tbp-title"> <TextMaker text_key="table_picker_title" /> </h2>
       <p className="medium_panel_text"><TextMaker text_key="table_picker_top_instructions" /></p>
       <div>
         <TaggedItemCloud 
@@ -188,7 +188,7 @@ class TaggedItemCloud extends React.Component {
             <div>
               <div className="item-card-footer">
                 <div className="item-tag-container">
-                  <span role="heading" className="sr-only"><u> <TextMaker text_key='covered_concepts' /> </u></span>
+                  <span className="sr-only"><u> <TextMaker text_key='covered_concepts' /> </u></span>
                   <div className="item-tags">
                     {_.chain(item_tag_linkage)
                       .filter({item_id: id})

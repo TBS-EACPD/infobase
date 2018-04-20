@@ -46,7 +46,7 @@ class ResultsIntroPanel extends React.Component {
         </div>
         <section className="new-policy-section">
           <header>
-            <h4> <TM k="gov_drf_title" /> </h4>
+            <div className="h4"> <TM k="gov_drf_title" /> </div>
           </header>
           <div className="row">
             <div className="col-md-6">
@@ -85,7 +85,7 @@ class ResultsIntroPanel extends React.Component {
         />
         <section className="old-policy-section">
           <header>
-            <h4> <TM k="gov_paa_title" /> </h4>
+            <div className="h4"> <TM k="gov_paa_title" /> </div>
           </header>
           <div className="row">
             <div className="col-md-6">

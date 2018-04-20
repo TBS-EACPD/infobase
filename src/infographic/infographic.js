@@ -181,7 +181,7 @@ class InfoGraph_ extends React.Component {
       }
       <div>
         <Panel>
-          <PanelHeading headerType="h3">
+          <PanelHeading headerType="div">
             <TextMaker text_key="bb_menu_title" /> 
           </PanelHeading>
           <PanelBody>
