@@ -19,21 +19,23 @@ const ResultsIntroPanel = ({counts}) => (
     <div className="fcol-md-7 medium_panel_text">
       <TM k="gov_dp_text" args={counts} />
     </div>
-    <div className="fcol-md-5">
-      <div
-        style={{
-          padding: "20px",
-        }}
-      >
-        <img
-          src={`./png/result-taxonomy-${window.lang}.png`} 
+    {!window.is_a11y_mode &&
+      <div className="fcol-md-5">
+        <div
           style={{
-            width: "100%",
-            maxHeight: "500px",
+            padding: "20px",
           }}
-        />
+        >
+          <img
+            src={`./png/result-taxonomy-${window.lang}.png`} 
+            style={{
+              width: "100%",
+              maxHeight: "500px",
+            }}
+          />
+        </div>
       </div>
-    </div>
+    }
   </div>
 );
   
