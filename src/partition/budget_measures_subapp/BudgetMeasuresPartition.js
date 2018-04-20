@@ -41,7 +41,10 @@ const root_text_func = (displayed_measure_count, root_value) => text_maker("budg
 
 const popup_template = node => {
   const dept_is_first_column = (node.depth === 1 && node.data.type === "dept") || (node.depth === 2 && node.parent.data.type === "dept");
+
   const is_dept = node.data.type === "dept";
+  const has_infographic = is_dept && node.data.id !== 9999;
+
   const is_budget_measure = node.data.type === "budget_measure";
 
   const is_first_column = node.depth === 1;
@@ -58,6 +61,7 @@ const popup_template = node => {
     year,
     dept_is_first_column,
     is_dept,
+    has_infographic,
     is_budget_measure,
     dept_name,
     measure_name,

@@ -141,7 +141,7 @@ budget_measure_popup_bottom_rows:
         {{gt "see_it_in_the_budget"}}
       </a>
     {{/if}}
-    {{#if is_dept}}
+    {{#if has_infographic}}
       <a href='#orgs/{{level}}/{{id}}/infograph' 
         class='btn btn-xs btn-block mrgn-bttm-sm infographic' 
         style='background-color:{{color}};'>
