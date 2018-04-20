@@ -92,7 +92,7 @@ export function BudgetMeasuresA11yContent(){
                       rowSpan={ rows_to_span }
                     >
                       { !_.isEmpty(budget_measure.data.description) && 
-                        budget_measure.data.description 
+                        <div dangerouslySetInnerHTML={{__html: budget_measure.data.description}} />
                       }
                     </td>
                     <td
