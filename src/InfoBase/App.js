@@ -24,6 +24,7 @@ import { PotentialSurveyBox } from '../core/survey_link';
 import { EasyAccess } from '../core/EasyAccess';
 import { About } from '../about/about.js';
 import { GraphInventory } from '../graph_route/graph_route.js';
+import { DevStuff } from '../components/ExplorerComponents.js';
 
 // Now you can dispatch navigation actions from anywhere!
 // store.dispatch(push('/foo'))
@@ -52,6 +53,7 @@ export class App extends React.Component {
           <Route path="/rpb/:config?" component={ReportBuilder} />
           <Route path="/about" component={About} />
           <Route path="/graph/:level?/:graph?/:id?" component={GraphInventory} />
+          <Route path="/dev" component={DevStuff} />
           <Route path="/" component={Home} />
         </Switch>
       </div>

@@ -13,7 +13,6 @@ const {
   FirstChild,
   AccordionEnterExit,
   StatelessPullDownAccordion,
-  StatelessAccordion,
   AutoAccordion,
 } = require('./components/Accordions.js');
 
@@ -35,6 +34,8 @@ const {
 } = require('./components/TextMaker.js');
 
 const { TwoLevelSelect } = require('./components/TwoLevelSelect.js');
+
+const { abbrev } = require('./core/utils.js'); 
 
 // Misc. utility components that don't justify having their own file in ./components, for various reasons
 
@@ -71,38 +72,6 @@ const EverythingSearch = withRouter(
   }
 );
 
-//will update its own text while only calling a callback in a debounced fashion. 
-/* provide a onQuery callback to be debounced, and a debounceTime */
-class DebouncedUncontrolledInput extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      str: "",
-    };
-    this.debounced_callback = _.debounce(this.debounced_callback, props.debounceTime || 500 );
-  }
-  debounced_callback(query){
-    this.props.onQuery(query);
-  }
-  render(){
-    const { 
-      onChange,
-    } = this.props;
-
-    const filteredProps = _.omit(this.props, ['debounceTime', 'onQuery','value', 'onChange'])
-
-    return <input
-      onChange={ evt => {
-        const new_str = evt.target.value;
-        this.setState({str: new_str});
-        onChange(new_str);
-        this.debounced_callback(new_str);
-      }}
-      value={this.state.str}
-      {...filteredProps}
-    />  
-  }
-}
 
 class SpinnerWrapper extends React.Component {
   render(){ return <div ref="main" /> }
@@ -134,11 +103,12 @@ const FootnoteList = ({ footnotes }) => <div style={{padding:"10px"}}>
 
 const Year = ({y}) => run_template(`{{${y}}}`);
 
+const Abbrev = ({text,len}) => <span dangerouslySetInnerHTML={{__html: abbrev(text,len)}} />
+
 module.exports = {
   FirstChild,
   AccordionEnterExit,
   StatelessPullDownAccordion,
-  StatelessAccordion,
   AutoAccordion,
   HeightClipper,
   TabbedContent,
@@ -153,9 +123,9 @@ module.exports = {
   SpinnerWrapper,
   Select,
   TwoLevelSelect,
-  DebouncedUncontrolledInput,
   SortIndicators,
   RadioButtons,
   FootnoteList,
   Year,
+  Abbrev,
 }

@@ -63,10 +63,7 @@ const curried_render = ({q_a_keys, omit_name_item}) => function(panel,calcs){
   }
 
   const view = <div className="mrgn-bttm-md">
-    <AutoAccordion 
-      title={text_maker("some_things_to_keep_in_mind")}
-      usePullDown
-    >
+    <AutoAccordion title={text_maker("some_things_to_keep_in_mind")}>
       <div style={{paddingLeft: '10px', paddingRight:'10px'}}>
         <KeyConceptList question_answer_keys={ rendered_q_a_keys } args={{subject}}/>
       </div>

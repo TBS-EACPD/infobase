@@ -1,24 +1,11 @@
 const { createSelector } = require('reselect');
-const classNames = require('classnames');
 const { infograph_href_template } = require('../link_utils.js');
 const { text_maker } = require('../models/text.js');
-
+const { provide_sort_func_selector } = require('./resource-explorer-common.js');
 const { shallowEqualObjectsOverKeys } = require('../core/utils.js');
-const { abbrev } = require('../core/utils.js');
-
-const ReactTransitionGroup  = require('react-addons-transition-group');
-const FlipMove = require('react-flip-move');
 
 
 const { get_resources_for_subject } = require('./resource_utils.js');
-
-const {
-  TextMaker,
-  Format,
-  FirstChild,
-  AccordionEnterExit,
-  SortIndicators,
-} = require('../util_components.js');
 
 const Subject = require('../models/subject.js');
 const { 
@@ -248,205 +235,6 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
 }
 
 
-const node_renderer = props => {
-  const {
-    node: {
-      root,
-      data: {
-        subject,
-        name,
-        resources,
-        defs,
-      },
-      isExpanded,
-      is_search_match,
-    },
-    onToggleNode,
-    children,
-    index,
-    scheme_props: {
-      sort_col, 
-      col_click, 
-      is_descending,
-      doc,
-    },
-  } = props;
-
-  if(root){
-    return <div>
-      <div className="resource-explorer-header xplorer-resource-row">
-        <div className="xplorer-name-col" onClick={()=> col_click('name')}>
-          <TextMaker text_key="name" />
-          <SortIndicators 
-            asc={!is_descending && sort_col === 'name' }
-            desc={is_descending && sort_col === 'name' }
-          />
-        </div>
-        <div className="xplorer-spend-col" onClick={()=> col_click('spending')}>
-          <TextMaker text_key={ doc === 'dp17' ? "tag_nav_exp_header_dp17" : 'tag_nav_exp_header_drr16' } />
-          <SortIndicators 
-            asc={!is_descending && sort_col === 'spending' }
-            desc={is_descending && sort_col === 'spending' }
-          />
-        </div>
-        <div className="xplorer-fte-col" onClick={()=> col_click('ftes')}> 
-          <TextMaker text_key={ doc === 'dp17' ? "tag_nav_fte_header_dp17" : 'tag_nav_fte_header_drr16' } />
-          <SortIndicators 
-            asc={!is_descending && sort_col === 'ftes' }
-            desc={is_descending && sort_col === 'ftes' }
-          />
-        </div>
-      </div>
-      <FlipMove
-        staggerDurationBy="0"
-        duration={500}
-        typeName="ul"
-        className="list-unstyled mrgn-tp-sm mrgn-bttm-sm"
-      > 
-        { _.map(children, ({ node, element }) =>
-          <li key={node.id}>
-            { element }
-          </li>
-        )}
-      </FlipMove>
-    </div>;
-
-  }
-
-  const children_display = !_.isEmpty(children) && isExpanded && (
-    <AccordionEnterExit
-      component="div"
-      expandDuration={500}
-      collapseDuration={300}
-      className="xplorer-collapsible-children-container mrgn-bttm-lg"
-    > 
-      {
-        _.chain(children)
-          .groupBy(child => child.node.data.subject.plural() )
-          .map( (group, plural) => <div key={plural}>
-            <header className="agnostic-header"> { plural } </header>
-            <FlipMove
-              staggerDurationBy="0"
-              duration={500}
-              typeName="ul"
-              className="list-unstyled mrgn-tp-sm mrgn-bttm-sm"
-            > 
-              { _.map(group, ({ node, element }) =>
-                <li key={node.id}>
-                  { element }
-                </li>
-              )}
-            </FlipMove>
-          </div>
-          )
-          .value()
-      }
-    </AccordionEnterExit>
-  );
-
-  return (
-    <div className="xplorer-node-container">
-      <div 
-        className={classNames(
-          "xplorer-node", 
-          !is_search_match && index%2 && 'odd',
-          !is_search_match && !(index%2) && 'even',
-          is_search_match && "is-search-match" 
-        )}
-      >
-        <div className="xplorer-expander-container" onClick={onToggleNode}>
-          <button 
-            className='button-unstyled xplorer-expander' 
-            aria-label={isExpanded ? "Collapse this node" : "Expand this node"}
-          > 
-            { isExpanded ? "▼" : "►" }
-          </button>
-        </div>
-        <div className="xplorer-node-content-container">
-          <div className="xplorer-node-intro" onClick={onToggleNode}>
-            <div className="xplorer-resource-row" style={{display:'flex'}}>
-              <div
-                className="xplorer-name-col" 
-                dangerouslySetInnerHTML={{
-                  __html: isExpanded ? name : abbrev(name, 120), 
-                }} 
-              />
-              <div className="xplorer-spend-col"> 
-                { resources.spending && 
-                  <div> 
-                    <span className="sr-only">
-                      <TextMaker 
-                        text_key={
-                          doc === 'dp17' ?
-                          "tag_nav_exp_header_dp17" :
-                          'tag_nav_exp_header_drr16' 
-                        }
-                      />
-                    </span>
-                    <Format type="compact1" content={resources.spending} />
-                  </div>
-                }
-              </div>
-              <div className="xplorer-fte-col">
-                { resources.ftes && 
-                  <div>
-                    <span className="sr-only">
-                      <TextMaker 
-                        text_key={
-                          doc === 'dp17' ?
-                          "tag_nav_fte_header_dp17" :
-                          'tag_nav_fte_header_drr16' 
-                        }
-                      />
-                    </span>
-                    <Format type="big_int_real" content={resources.ftes} />
-                  </div>
-                }
-              </div>
-            </div>
-          </div>
-          <ReactTransitionGroup component={FirstChild}>
-            { isExpanded && 
-          <AccordionEnterExit
-            component="div"
-            expandDuration={500}
-            collapseDuration={300}
-          >
-            {isExpanded &&
-              <div className="xplorer-node-inner-collapsible-content">
-                { !_.isEmpty(defs) && 
-                  <dl className="dl-horizontal">
-                    {_.map(defs, ({ term, def },ix) => [ 
-                      /* eslint-disable react/jsx-key */
-                      <dt key={"dt-"+ix}> { term } </dt>,
-                      /* eslint-disable react/jsx-key */
-                      <dd key={"dd-"+ix}> { def } </dd>,
-                    ])}
-                  </dl>
-                }
-                { ( _.includes(['program','dept'], subject.level) || subject.is_cr || subject.is_lowest_level_tag ) && 
-                   <div className='xplorer-node-expanded-content'>
-                     <a href={infograph_href_template(subject)}> 
-                       <TextMaker text_key="see_infographic" />
-                     </a>
-                   </div>
-                }
-              </div>
-            }
-          </AccordionEnterExit>
-            }
-          </ReactTransitionGroup>
-        </div>
-      </div>
-      <ReactTransitionGroup component={FirstChild}>
-        { children_display }
-      </ReactTransitionGroup>  
-    </div>
-  );
-
-  
-
-};
 
 const get_initial_resource_state = ({hierarchy_scheme, doc}) => ({
   hierarchy_scheme : hierarchy_scheme || "min",
@@ -458,42 +246,17 @@ const get_initial_resource_state = ({hierarchy_scheme, doc}) => ({
 
 const resource_scheme = {
   key: 'resources',
+  get_sort_func_selector: () =>  provide_sort_func_selector('resources'),
   get_props_selector: () => {
-
-    const attr_getters = {
-      ftes: node => _.get(node,'data.resources.ftes') || 0,
-      spending:node => _.get(node,"data.resources.spending") || 0,
-      name:  node => node.data.name,
-    };
-
-    const reverse_array = arr => _.clone(arr).reverse();
-
-    const sort_func_selector = createSelector(
-      [
-        aug_state => aug_state.resources.is_descending, 
-        aug_state => aug_state.resources.sort_col, 
-      ],
-      (is_descending, sort_col) => {
-
-        const attr_getter = attr_getters[sort_col];
-
-        return list => _.chain(list) //sort by search relevance, than the initial sort func
-          .sortBy(attr_getter)
-          .pipe( is_descending ? reverse_array : _.identity )
-          .value();
-      }
-    );
 
     return augmented_state => _.immutate( 
       augmented_state.resources, 
       { 
-        sort_func : sort_func_selector(augmented_state),
         is_m2m : _.includes(['HWH'], augmented_state.resources.hierarchy_scheme ),
       }
     );
   
   },
-  tree_renderer: node_renderer,
   dispatch_to_props: dispatch => ({ 
     col_click : col_key => dispatch({type: 'column_header_click', payload: col_key }),
   }),

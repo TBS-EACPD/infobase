@@ -4,6 +4,7 @@ const {
   filter_hierarchy,
   toggleExpandedFlat,
   ensureVisibility,
+  sort_hierarchy,
 } = require('./hierarchy_tools.js');
 
 const { substr_search_generator } = require('./search_tools.js');
@@ -172,10 +173,12 @@ const map_dispatch_to_root_props = dispatch  => {
 
 const scheme_defaults = {
   get_filter_func_selector: () => _.constant(_.identity),
+  get_sort_func_selector: ()=> _.constant(_.identity),
   get_props_selector: () => _.constant({}),
   shouldUpdateFlatNodes: (oldSchemeState, newSchemeState) => oldSchemeState !== newSchemeState,
-
 }
+
+const negative_search_relevance_func = ({ is_search_match }) => is_search_match ? 0 : 1;
 
 function get_memoized_funcs(schemes){
 
@@ -210,12 +213,21 @@ function get_memoized_funcs(schemes){
   const get_scheme_filter_func = state => scheme_filter_func_selectors[state.root.scheme_key](state);
 
 
+  const scheme_sort_func_selectors = _.chain(schemes)
+    .map(scheme => [ scheme.key, scheme.get_sort_func_selector() ] )
+    .fromPairs()
+    .value();
+
+  const get_scheme_sort_func = state => scheme_sort_func_selectors[state.root.scheme_key](state);
+  
+
   const is_filtering = state => state.root.query.length > 3;
 
   const get_query_filter_func = createSelector(
     [ get_base_hierarchy ],
     base_hierarchy => substr_search_generator( base_hierarchy )
   );
+
 
   const get_query_filtered_hierarchy = createSelector(
     [ get_base_hierarchy, get_query_filter_func, state => state.root.query ],
@@ -238,10 +250,21 @@ function get_memoized_funcs(schemes){
   );
 
 
+  const get_sorted_filtered_hierarchy = createSelector(
+    [ get_fully_filtered_hierarchy, get_scheme_sort_func ],
+    (filtered_hierarchy, sort_func) => {
+      return _.chain(filtered_hierarchy)
+        .pipe(h7y => sort_hierarchy(h7y, sort_func))
+        .sortBy(negative_search_relevance_func) //search results always take precedence
+        .value();
+    }
+  )
+
+
 
 
   //hacky function that saves expensive hierarchy computations and toggling
-  let oldState, oldFlatNodes;
+  let oldState, oldFlatNodes, oldSortFunc;
   function shouldCompletelyRecomputeFlatNodes(oldState,newState){
 
     //every scheme can update its own state, 
@@ -255,6 +278,7 @@ function get_memoized_funcs(schemes){
     return (
       !oldState || //if oldState isn't defined yet, we of course have to recompute
       !oldFlatNodes ||  //ditto for oldFlatNodes
+      !oldSortFunc ||
       oldState.root.query !== newState.root.query ||
       oldState.root.scheme_key !== newState.root.scheme_key ||
       scheme_should_compute_func(oldState[scheme_key], newState[scheme_key])
@@ -263,9 +287,10 @@ function get_memoized_funcs(schemes){
 
   function get_flat_nodes(state){
     let flat_nodes;
+    const sort_func = get_scheme_sort_func(state);
+    
     if(shouldCompletelyRecomputeFlatNodes(oldState,state)){
-
-      flat_nodes = get_fully_filtered_hierarchy(state);
+      flat_nodes = get_sorted_filtered_hierarchy(state);
 
     } else if(
       oldState.root.userCollapsed !== state.root.userCollapsed || 
@@ -293,12 +318,16 @@ function get_memoized_funcs(schemes){
       );
 
 
+    } else if(sort_func !== oldSortFunc){
+      flat_nodes = sort_hierarchy(oldFlatNodes, sort_func);
+
     } else { //nothing changes
       flat_nodes = oldFlatNodes;
     }
     
     oldState = state; 
     oldFlatNodes = flat_nodes;
+    oldSortFunc = sort_func;
 
     return flat_nodes;
 

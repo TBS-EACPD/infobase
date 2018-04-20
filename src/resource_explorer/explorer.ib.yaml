@@ -65,13 +65,6 @@ tag_nav_intro_text:
     4.  Vous pouvez naviguez les données selon ce qui a été dépensé (Ressources utilisées en {{pa_last_year}}) ou ce que est prévu être dépensé (Ressources prévues en {{planning_year_1}}).
 
 
-select_to_expand_a11y:
-  en: Expand this node
-  fr: Ouvrir ce noeud
-
-select_to_collapse_a11y:
-  en: Collapse this node
-  fr: Fermer ce noeud
 
 explorer_search_a11y:
   en: Type at least 5 characters before submitting

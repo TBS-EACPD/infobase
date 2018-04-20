@@ -232,29 +232,13 @@ storiesOf("Tabbed Content",module)
   )
 
 storiesOf("Accordions",module)
-  .add("AutoAccordion (usePullDown=true)", ()=>
+  .add("AutoAccordion", ()=>
     <div style={separator_style}>
       <pre> 
         Up/down arrow glyphicon not displaying correctly here
       </pre>
       <AutoAccordion 
         title={"Accordion Title"}
-        usePullDown={true}
-      >
-        <div style={{paddingLeft: '10px', paddingRight:'10px'}}>
-          Accordion content
-        </div>
-      </AutoAccordion>
-    </div>
-  )
-  .add("AutoAccordion (usePullDown=false)", ()=>
-    <div style={separator_style}>
-      <pre> 
-        Up/down arrow glyphicon not displaying correctly here
-      </pre>
-      <AutoAccordion 
-        title={"Accordion Title"}
-        usePullDown={false}
       >
         <div style={{paddingLeft: '10px', paddingRight:'10px'}}>
           Accordion content

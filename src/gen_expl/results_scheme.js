@@ -4,8 +4,6 @@ import { createSelector } from 'reselect';
 
 import { filter_hierarchy } from './hierarchy_tools.js';
 
-import { result_tree_content_renderer } from './result_displays.js';
-
 import { create_full_results_hierarchy } from './result_hierarchies.js';
 
 import { Indicator } from '../models/results.js';
@@ -23,9 +21,9 @@ export const get_initial_single_subj_results_state = ({subj_guid, doc, mode, has
 
 export const single_subj_results_scheme = {
   key: 'single_subj_results',
-  tree_renderer: result_tree_content_renderer,
   title: 'Single Subject Results',
   initial_state: get_initial_single_subj_results_state({}),
+  get_sort_func_selector: ()=> _.constant(list => _.sortBy(list, "data.name")),
   get_base_hierarchy_selector: ()=> createSelector(
     [ 
       state => state.single_subj_results.doc, 

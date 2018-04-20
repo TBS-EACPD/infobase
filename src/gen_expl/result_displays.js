@@ -1,26 +1,126 @@
 import { createSelector } from 'reselect';
 
 const { text_maker } = require('../models/text.js');
-const { abbrev } = require('../core/utils.js');
-const classNames = require('classnames');
 const { infograph_href_template } = require('../link_utils.js');
 const { Indicator } = require('../models/results.js');
 const { 
   IndicatorDisplay,
-  InlineStatusIconList,
 } = require('../panels/result_graphs/components.js');
-const ReactTransitionGroup  = require('react-addons-transition-group');
-const FlipMove = require('react-flip-move');
 const {
   TextMaker,
-  TM,
-  FirstChild,
-  AccordionEnterExit,
-  Format,
 } = require('../util_components.js');
 
 
-const spending_header = createSelector(
+export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
+
+  const indicators = _.filter(Indicator.get_flat_indicators(subject), {doc} )
+
+  const indicator_count_obj = { 
+    count: indicators.length, 
+    type_key: 'indicator',
+    type_name: text_maker('indicators'),
+  };
+
+  const count_items  = _.chain(base_hierarchy)
+    .reject('root')
+    .groupBy(node => get_type_header(node) )
+    .map( (group, type_name) => ({
+      type_name,
+      type_key: group[0].data.type,
+      count: group.length,
+    }))
+    .concat([ indicator_count_obj ])
+    //.sortBy( ({type_key}) => _.indexOf(sorted_count_header_keys, type_key))
+    .map( ({type_key, count}) => [type_key, count] )
+    .fromPairs()
+    .value();
+
+  let text_key = "";
+  if(subject.level === 'dept'){
+    if(doc === 'drr16'){
+      if(count_items.sub_program > 0){
+        if(count_items.sub_sub_program > 0){
+          text_key = "result_counts_drr_dept_sub_sub";
+        } else {
+          text_key = "result_counts_drr_dept_sub";
+        }
+      } else {
+        text_key = "result_counts_drr_dept_no_subs";
+      }
+
+    } else {
+
+      if(subject.is_DRF){
+        text_key = "result_counts_dp_dept_drf"
+
+      } else {
+        if(count_items.sub_program > 0){
+          if(count_items.sub_sub_program > 0){
+            text_key = "result_counts_dp_dept_paa_sub_sub"
+          } else {
+            text_key = "result_counts_dp_dept_paa_sub"
+          }
+        } else {
+          text_key = "result_counts_dp_dept_paa_no_subs"
+        }
+      }
+    //dp dept
+    }
+  //dept
+  } else if(subject.level === 'program'){
+    if(doc==='drr16'){
+      if(count_items.sub_program > 0){
+        if(count_items.sub_sub_program > 0){
+          text_key = "result_counts_drr_prog_paa_sub_sub";
+        } else {
+          text_key = "result_counts_drr_prog_paa_sub";
+        }
+      } else {
+        text_key = "result_counts_drr_prog_paa_no_subs";
+      }
+    } else {
+      if(count_items.sub_program > 0){
+        if(count_items.sub_sub_program > 0){
+          text_key = "result_counts_dp_prog_paa_sub_sub";
+        } else {
+          text_key = "result_counts_dp_prog_paa_sub";
+        }
+      } else {
+        text_key = "result_counts_dp_prog_paa_no_subs";
+      }
+    } 
+
+  } else if(subject.level === 'crso'){
+    //we only care about CRs, which are only DP
+    text_key = "result_counts_dp_crso_drf";
+
+  }
+
+  return (
+    <div className="medium_panel_text">
+      <TextMaker 
+        text_key={text_key}
+        args={{
+          subject,
+
+          num_programs:count_items.program,
+          num_results:count_items.result,
+          num_indicators:count_items.indicator,
+
+          num_subs:count_items.sub_program,
+          num_sub_subs:count_items.sub_sub_program,
+
+          num_drs:count_items.dr,
+          num_crs:count_items.cr,
+        }}
+
+      />
+    </div>
+  );
+}
+
+
+export const spending_header = createSelector(
   doc => doc, 
   doc => (
     <TextMaker 
@@ -33,7 +133,7 @@ const spending_header = createSelector(
   )
 );
 
-const fte_header = createSelector(
+export const fte_header = createSelector(
   doc => doc,
   doc => (
     <TextMaker 
@@ -45,8 +145,6 @@ const fte_header = createSelector(
     />
   )
 );
-
-
 
 export const get_type_header = node => {
   switch(node.data.type){
@@ -79,215 +177,7 @@ export const get_type_header = node => {
   }
 };
 
-export const result_tree_content_renderer = props => {
-  const {
-    node,
-    node: {
-      id,
-      data: {
-        subject,
-        result,
-        type,
-        name,
-        resources,
-      },
-      isExpanded,
-      is_search_match,
-    },
-    onToggleNode,
-    children,
-    index,
-
-    scheme_props:{
-      doc,
-      is_status_filter_enabled,
-      status_icon_key_whitelist,
-    },
-  } = props;
-  
-  if(id==='root'){
-    return root_renderer({node,children});
-  }
-
-  //this is hacky, but results will render their children in a custom way. 
-  const children_display = !result && !_.isEmpty(children) && isExpanded && (
-    <AccordionEnterExit
-      component="div"
-      expandDuration={500}
-      collapseDuration={300}
-      className="xplorer-collapsible-children-container mrgn-bttm-lg"
-    >
-      {
-        _.chain(children)
-          .groupBy(child => child.node.data.type )
-          .toPairs()
-          .sortBy( ([ type, group ]) => !_.includes(['dr', 'result'], type) )//make results show up first 
-          .map( ([type, group ]) => <div key={type}>
-            <header className="agnostic-header"> { get_type_header(group[0].node) } </header>
-            <FlipMove
-              typeName="ul" 
-              className='list-unstyled mrgn-tp-sm mrgn-bttm-sm'
-              staggerDurationBy="0"
-              duration={500}
-            >
-              { _.map(group, ({ node, element }) =>
-                <li key={node.id}>
-                  { element }
-                </li>
-              )}
-            </FlipMove>
-          </div>
-          )
-          .value()
-      }
-    </AccordionEnterExit>
-  );
-
-  return (
-    <div className="xplorer-node-container">
-      <div 
-        className={classNames(
-          "xplorer-node", 
-          !is_search_match && index%2 && 'odd',
-          !is_search_match && !(index%2) && 'even',
-          is_search_match && "is-search-match" 
-        )}
-      >
-        <div className="xplorer-expander-container" onClick={onToggleNode}>
-          <button 
-            className='button-unstyled xplorer-expander' 
-            aria-label={isExpanded ? "Collapse this node" : "Expand this node"}
-          > 
-            { isExpanded ? "▼" : "►" }
-          </button>
-        </div>
-        <div className="xplorer-node-content-container">
-          <div className="xplorer-node-intro" onClick={onToggleNode}>
-            <div style={{display: 'flex', justifyContent: 'flex-start', flexWrap: 'nowrap' }}>
-              <div style={{marginRight: 'auto', flex: "1 1 0%", width: "100%"}}>
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: isExpanded ? name : abbrev(name, 120), 
-                  }} 
-                />
-              </div>
-              { (result || subject)  && 
-                <div 
-                  style={{
-                    width: "100%",
-                    padding: "0 10px 0 5px",
-                    textAlign: "right",
-                    flex: "0 0.5 150px",
-                    opacity: 0.8,
-                  }}
-                  aria-hidden={true}
-                >
-                  {doc === 'drr16' && 
-                    <InlineStatusIconList 
-                      indicators={
-                        _.filter(
-                          (
-                            result ?
-                            result.indicators :
-                            Indicator.get_flat_indicators(subject)
-                          ),
-                          (
-                            is_status_filter_enabled ? 
-                            ind => _.includes(status_icon_key_whitelist, ind.icon_key) :
-                            _.constant(true)
-                          )
-                        )
-                      } 
-                    />
-                  }
-                </div>
-              }
-            </div>
-          </div>
-          <ReactTransitionGroup component={FirstChild}>
-            { isExpanded && 
-          <AccordionEnterExit
-            component="div"
-            expandDuration={500}
-            collapseDuration={300}
-          >
-            {isExpanded &&
-              <div className="xplorer-node-inner-collapsible-content">
-                { resources &&
-                  <dl 
-                    className="dl-horizontal dl-long-terms"
-                    style={{fontSize: "0.8em"}}
-                  >
-                    <dt> {spending_header(doc) } </dt>
-                    <dd> <Format type="compact1" content={resources.spending} /> </dd>
-                    <dt> {fte_header(doc) } </dt>
-                    <dd> <Format type="big_int_real" content={resources.ftes} /> </dd>
-                  </dl>
-                }
-                { _.includes(['program','dept', 'cr', 'so'], type) && 
-                   <div className='xplorer-node-expanded-content'>
-                     <a href={infograph_href_template(subject)}> 
-                       <TM k="see_infographic" />    
-                     </a>
-                   </div>
-                }
-              </div>
-            }
-            { isExpanded && result && <ResultNodeContent {...props} /> }
-          </AccordionEnterExit>
-            }
-          </ReactTransitionGroup>
-        </div>
-      </div>
-      <ReactTransitionGroup component={FirstChild}>
-        { children_display }
-      </ReactTransitionGroup>  
-    </div>
-  );
-
-}
-
-
-const root_renderer = ({node, children}) => {
-
-  return (
-    <div>
-      <FlipMove
-        staggerDurationBy="0"
-        duration={500}
-        typeName="div"
-        className="div"
-      > 
-        {
-          _.chain(children)
-            .groupBy(child => child.node.data.type )
-            .toPairs()
-            .sortBy( ([ type, group ]) => !_.includes(['dr', 'result'], type) )//make results show up first 
-            .map( ([type, group ]) => <div key={type}>
-              <header className="agnostic-header"> { get_type_header(group[0].node) } </header>
-              <FlipMove
-                staggerDurationBy="0"
-                duration={500}
-                typeName="ul"
-                className="list-unstyled mrgn-tp-sm mrgn-bttm-sm"
-              > 
-                { _.map(group, ({ node, element }) =>
-                  <li key={node.id}>
-                    { element }
-                  </li>
-                )}
-              </FlipMove>
-            </div>
-            )
-            .value()
-        }
-      </FlipMove>
-    </div>
-  );
-
-};
-
-const ResultNodeContent = ({ 
+export const ResultNodeContent = ({ 
   node: {
     data: {
       result, 
@@ -297,9 +187,7 @@ const ResultNodeContent = ({
     },
     children : indicator_nodes,
   },
-  scheme_props: {
-    doc,
-  },
+  doc,
 }) => (
   <div className="indicator-container-container">
     <div className="indicator-container">
