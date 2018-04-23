@@ -9,15 +9,11 @@ import {
 const late_depts = [
   86,
   99,
-  129,
-  348,
   237,
   238,
-  250,
   135,
   136,
   305,
-  282,
 ];
 
 export const DpComingSoonHomeComponent = () => {
@@ -47,7 +43,7 @@ export const DpComingSoonHomeComponent = () => {
           _.chain(late_depts)
             .map(dept_code =>  Dept.lookup(dept_code).sexy_name )
             .sortBy() //alphebetical
-            .chunk(5)
+            .chunk(4)
             .map( (group,ix) => 
               <div 
                 key={ix}
