@@ -1,5 +1,6 @@
 @import '../../common_css/common-variables';
 
+
 .budget-measures-partition-controls {
     background-color: #9c9c9c;
     border-radius: 10px;
@@ -27,6 +28,7 @@
   
     & > .labeled-box-content {
       border-color: darken(#9c9c9c, 25%);
+      padding-left: 18px;
   
       & > .centerer > .radio-buttons {
         border-color: darken(#9c9c9c, 25%);
@@ -59,6 +61,7 @@
   justify-content: space-around;
   align-items: stretch;
   flex-wrap: nowrap;
+  padding: 5px 0px 5px 0px;
 }
 
 .chapter-key-table__item {
