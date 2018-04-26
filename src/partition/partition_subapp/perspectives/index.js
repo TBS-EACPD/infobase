@@ -7,8 +7,8 @@ import {
 import {
   make_goca_exp_perspective,
   make_goca_fte_perspective,
-  make_hwh_exp_perspective,
-  make_hwh_fte_perspective,
+  //make_hwh_exp_perspective,
+  //make_hwh_fte_perspective,
 } from './tag_perspectives.js';
 import { 
   make_spend_type_perspective,
@@ -47,8 +47,8 @@ const get_all_perspectives = () => {
     make_dept_fte_perspective(),
     make_goca_exp_perspective(),
     make_goca_fte_perspective(),
-    make_hwh_exp_perspective(),
-    make_hwh_fte_perspective(),
+    //make_hwh_exp_perspective(),
+    //make_hwh_fte_perspective(),
     make_spend_type_perspective(),
     make_org_info_ministry_perspective(),
     make_org_info_federal_perspective(),
