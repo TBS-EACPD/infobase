@@ -166,7 +166,7 @@
 
     display: flex;
     width: 100%;
-    max-width:100%;
+    max-width: 100%;
 
     flex-direction: column;
     justify-content: flex-start;
@@ -312,7 +312,7 @@
 
   .h-img-card__left { 
     flex: 0 0 30%;
-    border-right: 1px solid hsla(191, 32%, 40%, 1);
+    border-right: 1px solid #333;
     padding: 5px;
 
     display: flex;
@@ -327,7 +327,7 @@
   }
 
   .h-img-card__img-link {
-    width:1 00%;
+    width: 100%;
     max-width: 100%;
     min-height: 1px; /* IE11 image bug */
 
@@ -506,7 +506,7 @@
 /* end of v-img-card */
 
 .finance-box {
-  border-top:10px solid hsla(275, 63%, 80%, 1);
+  border-top: 10px solid hsla(275, 63%, 80%, 1);
 
   border-bottom-left-radius: 10px;
 
@@ -538,10 +538,8 @@
 }
 
 .people-box, .finance-box, .results-box {
-
   color: #fff;
   font-weight: $lightFontWeight;
-
 
   &:active, &:hover, &:focus {
     color: #333;
