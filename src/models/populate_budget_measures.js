@@ -15,10 +15,10 @@ const populate_budget_measures = (budget_measures, budget_measure_funds) => {
     return {
       measure_id: row[0], 
       org_id: row[1],
-      fund: +row[2] * 1000,
-      allocated: +row[3] * 1000,
-      withheld: +row[4] * 1000,
-      remaining: +row[5] * 1000,
+      fund: +row[2],
+      allocated: +row[3],
+      withheld: +row[4],
+      remaining: +row[5],
     };
   });
   const budget_funds_by_measure = _.groupBy(budget_measure_funds_in_millions, "measure_id");
