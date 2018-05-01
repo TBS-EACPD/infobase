@@ -525,10 +525,7 @@ export class PartitionDiagram {
       .style("visibility", "visible");
     
     const absolute_pop_up_left = d.DOM.offsetLeft + pop_up.node().offsetLeft;
-    scrollTo({
-      left: absolute_pop_up_left,
-      behavior: "smooth",
-    });
+    window.scroll(absolute_pop_up_left, window.pageYOffset);
 
     const to_be__highlighted = _.uniqBy(d.ancestors().concat(d.descendants()));
     this.unfade_popup_parents(to_be__highlighted);
