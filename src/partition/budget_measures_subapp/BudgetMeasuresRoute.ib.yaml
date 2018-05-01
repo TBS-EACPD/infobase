@@ -45,5 +45,7 @@ other_budget_measure_chapter_description:
 
 budget_measure_description_values_clarification:
   transform: [handlebars]
-  en: Spending amounts presented in the description are in accrual terms and therefore may not match cash amounts presented in Table A2.11 of {{gt "budget_name"}}.
-  fr: Les dépenses présentées dans la description sont présentées en termes de comptabilité d'exercise et donc elles pourraient ne pas correspondre aux montants présenté dans le tableau A2.11 du budget de 2018.
+  en: |
+    Spending amounts presented in the description are in accrual terms and therefore may not match cash amounts presented on an Estimates basis as per the Main Estimates 2018-19: Sources and Uses of the Budget Implementation vote by Department.
+  fr: |
+    Les dépenses présentées dans la description sont présentées en termes de comptabilité d’exercise et donc elles pourraient ne pas correspondre aux montants présenté en termes du budget des depenses selon le Budget principal des dépenses de 2018-2019 : Provenance et utilisation du crédit d’exécution du budget par ministère.
