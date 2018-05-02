@@ -40,6 +40,7 @@
   flex-direction: row;
   align-content: center;
   justify-content: center;
+  border-bottom: 1px solid #333333;
 }
 
 .v-img-card__top {
@@ -87,7 +88,6 @@
   font-size: 1.6em;
   width: 100%;
   min-width: 100%;
-  border-top: 1px solid #333333;
   padding: 10px;
 }
 
