@@ -67,6 +67,16 @@
   }
 }
 
+.v-img-card__img-link {
+  width: 100%;
+  max-width: 100%;
+  min-height: 1px; /* IE11 image bug */
+  /* for glyphicons */
+  text-align: center; 
+  color: inherit;
+  line-height: 0;
+}
+
 .v-img-card__bottom-container {
   flex: auto;
   display: flex;
