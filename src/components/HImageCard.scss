@@ -1,0 +1,111 @@
+@import '../common_css/common-variables';
+
+/* h-img-card 
+
+  this component attempts to use BEM naming convention  
+
+  ------------------------
+  | ///// | Title        |
+  | ///// | -------------|
+  |  IMG  | text content |
+  | ///// |              |
+  | ///// |         Link |
+  ------------------------
+
+  structure: 
+    .h-img-card
+      .h-img-card__left
+        .h-img-card__img-link
+          .h-img-card__img
+      .h-img-card__right-container {
+        .h-img-card__right
+          .h-img-card__title
+          .h-img-card__text
+          .h-img-card__bottom-right
+
+*/
+.h-img-card {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  flex-direction: row;
+  align-items: stretch;
+  min-height: 1px; /* IE11 image bug */
+}
+
+.h-img-card__left { 
+  flex: 0 0 30%;
+  border-right: 1px solid #333;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  min-height: 1px; /* IE11 image bug */
+  font-size: 3.5em; /* for glyphicons */
+}
+
+.h-img-card__img-link {
+  width: 100%;
+  max-width: 100%;
+  min-height: 1px; /* IE11 image bug */
+  /* for glyphicons */
+  text-align: center; 
+  color: inherit;
+  line-height: 0;
+}
+
+.h-img-card__img {
+  width: 100%;
+  max-width: 100%;
+  min-height: 1px; /* IE11 image bug */
+}
+
+.h-img-card__right-container {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+}
+
+.h-img-card__right {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex: 1 0 auto;
+}
+
+.h-img-card__title {
+  font-size: 1.6em;
+  font-weight: $mediumFontWeight;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  padding: 8px;
+}
+
+.h-img-card__text {
+  font-size: 1.2em;
+  font-weight: $mediumFontWeight;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 100%;
+  text-align: left;
+  padding: 0 20px;
+}
+
+.h-img-card__bottom-right {
+  text-align: right;
+  width: 100%;
+  max-width: 100%;
+  margin-top: auto;
+  padding-top: 10px;
+  font-size: 1.2em;
+  padding: 15px 20px;
+}

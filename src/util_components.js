@@ -35,6 +35,9 @@ const {
 
 const { TwoLevelSelect } = require('./components/TwoLevelSelect.js');
 
+const { VImageCard } = require('./components/VImageCard.js');
+const { HImageCard } = require('./components/HImageCard.js');
+
 const { abbrev } = require('./core/utils.js'); 
 
 // Misc. utility components that don't justify having their own file in ./components, for various reasons
@@ -127,5 +130,7 @@ module.exports = {
   RadioButtons,
   FootnoteList,
   Year,
+  VImageCard,
+  HImageCard,
   Abbrev,
 }
