@@ -28,12 +28,12 @@ the most complicated parts, so being less data-driven is
 actually simpler now.
 
 PROJ -> {
-  (mkdir if doesn't exist) build/, build/PROJ.name/, js/ , csv/ , png/
+  (mkdir if doesn't exist) build/, build/PROJ.name/, js/ , csv/ , svg/
   copy PROJ.js to build/PROJ.name/js/ (this will include external dependencies)
   copy WET stuff -r to build/PROJ.name/
   copy other to build/PROJ.name (this is where index-en/fr get copied)
   forEach file in PROJ.spreadsheets, copy it to to build/PROJ.name/csv/
-  forEach file  in PROJ.png, copy to build/PROJ.name/png/
+  forEach file  in PROJ.svg, copy to build/PROJ.name/svg/
 }
 
 
@@ -91,30 +91,30 @@ const common_lookups_fr = _.map(
 );
 
 const common_png = [
-  //top left corner brand
-  'src/InfoBase/sig-en.svg',
-  'src/InfoBase/sig-fr.svg',
-
   //small scma icons below home page search bar
   'src/home/results.png',
   'src/home/expend.png',
   'src/home/people.png',
+];
 
+const common_svg = [
+  //top left corner brand
+  'src/InfoBase/sig-en.svg',
+  'src/InfoBase/sig-fr.svg',
 
   //caricature images for main 5 pages
-  'src/home/partition.png',
-  'src/home/partition-budget.png',
-  'src/home/bubbles.png',
-  'src/home/Builder.png',
-  'src/home/structure_panel.png',
-  'src/home/explorer.png',
+  'src/home/partition.svg',
+  'src/home/partition-budget.svg',
+  'src/home/bubbles.svg',
+  'src/home/Builder.svg',
+  'src/home/structure_panel.svg',
+  'src/home/explorer.svg',
 
   //simplographic images
   'src/panels/intro_graphs/Check.svg',
   'src/panels/intro_graphs/Graph.svg',
   'src/panels/intro_graphs/Money.svg',
   'src/panels/intro_graphs/People.svg',
-
 ];
 
 const IB_tables = [
@@ -160,6 +160,7 @@ var IB = {
   lookups_fr  : common_lookups.concat(common_lookups_fr),
   csv: csv_from_table_names(IB_tables).concat(other_csvs),
   png: common_png,
+  svg: common_svg,
   js: external_deps_names,
   other: [ 'src/robots/robots.txt','src/common_css/container-page.css'],
 };
@@ -273,8 +274,7 @@ function build_proj(PROJ){
         .concat([['global_footnotes', global_footnotes]]) //these should be loaded immediately, so they're included in the base lookups file.
         .fromPairs()
         .value()
-    )
-      .toString("utf8");
+    ).toString("utf8");
 
     fs.writeFileSync(`${dir}/lookups_${lang}.html`,lookup_json_str);
     cp.execSync(`gzip -c ${dir}/lookups_${lang}.html > ${dir}/lookups_${lang}_min.html`);
@@ -287,7 +287,7 @@ function build_proj(PROJ){
   fse.copySync('external-dependencies/cioscripts', dir+'/cioscripts', {clobber: true});
   fse.copySync('external-dependencies/ajax', dir+'/ajax', {clobber: true});
   //clobber overwrites old directory when copying
-  ['png','js','csv'].forEach(function(type){
+  ['png', 'svg','js','csv'].forEach(function(type){
     var this_dir = dir+'/'+type;
     make_dir_if_exists(this_dir);
     PROJ[type].forEach(function(f_name){
