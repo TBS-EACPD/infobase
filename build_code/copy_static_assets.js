@@ -106,7 +106,7 @@ const common_svg = [
   'src/home/partition.svg',
   'src/home/partition-budget.svg',
   'src/home/bubbles.svg',
-  'src/home/Builder.svg',
+  'src/home/builder.svg',
   'src/home/structure.svg',
   'src/home/explorer.svg',
 

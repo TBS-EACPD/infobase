@@ -325,7 +325,7 @@ const HomeLayout = props => (
       <div className="equal-height-col is-1-third">
         <section className="col-content explore-col-content">
           <VImageCard
-            img_src="svg/Builder.svg"
+            img_src="svg/builder.svg"
             title_key="home_build_a_report"
             text_key="report_builder_home_desc"
             link_key="start_build_link"
