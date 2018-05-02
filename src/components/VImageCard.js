@@ -3,30 +3,21 @@ import './VImageCard.scss';
 import { TM } from './TextMaker.js';
 
 const VImageCard = ({
-  svg_src,
-  png_src,
+  img_src,
   title_key,
   text_key,
   link_key,
   link_href,
 }) => (
   <div className="v-img-card col-content-child">
-    { ( svg_src || (!svg_src && png_src) ) &&
+    { img_src &&
       <div className="v-img-card__top-container">
         <div aria-hidden={true} className="v-img-card__top">
           <a className="v-img-card__img-link" href={link_href}>
-            { svg_src && 
-              <svg
-                src={`${CDN_URL}/svg/${svg_src}`}
-                className="v-img-card__img" 
-              />
-            }
-            { !svg_src && png_src &&
-              <img
-                src={`${CDN_URL}/png/${png_src}`}
-                className="v-img-card__img" 
-              />
-            }
+            <img
+              src={`${CDN_URL}/${img_src}`}
+              className="v-img-card__img" 
+            />
           </a>
         </div>
       </div>

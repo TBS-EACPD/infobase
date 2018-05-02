@@ -3,8 +3,7 @@ import './HImageCard.scss';
 import { TM } from './TextMaker.js';
 
 const HImageCard = ({
-  svg_src,
-  png_src,
+  img_src,
   title_key,
   text_key,
   link_key,
@@ -12,21 +11,13 @@ const HImageCard = ({
   text_args,
 }) => (
   <div className="h-img-card col-content-child">
-    { ( svg_src || (!svg_src && png_src) ) &&
+    { img_src &&
       <div className="h-img-card__left">
         <a className="h-img-card__img-link" href={link_href}>
-          { svg_src && 
-            <svg
-              src={`${CDN_URL}/svg/${svg_src}`}
-              className="h-img-card__img" 
-            />
-          }
-          { !svg_src && png_src && 
-            <img
-              src={`${CDN_URL}/png/${png_src}`}
-              className="h-img-card__img" 
-            />
-          }
+          <img
+            src={`${CDN_URL}/${img_src}`}
+            className="h-img-card__img" 
+          />
         </a>
       </div>
     }
