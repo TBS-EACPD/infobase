@@ -142,7 +142,7 @@ new PanelGraph({
             <img 
               role="presentation"
               aria-hidden={true}
-              src={`${CDN_URL}/png/${props.img_src}`} 
+              src={`${CDN_URL}/svg/${props.img_src}`} 
               width="150" height="150" 
               style={{
                 alignSelf: "center",
