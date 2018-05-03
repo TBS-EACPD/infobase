@@ -20,8 +20,8 @@ const index_lang_lookups = {
     fr: "fr",
   },
   meta_description: {
-    en: "The GC InfoBase is a government’s interactive data-visualization tool, which transforms complex financial, people, and results data into simple stories. Find how much the federal government spent, how many people we employ and what results we achieved.",
-    fr: " L’InfoBase du GC est un outil interactif de visualisation des données qui traduit en termes simples l’information gouvernementale sur les finances, les résultats et la gestion des personnes. Trouver combien le gouvernement fédéral a dépensé, combien de personne il emploi et quels sont les résultats qu’il a accomplis.",
+    en: "The GC InfoBase is the government’s interactive data-visualization tool, which transforms complex financial, people, and results data into simple, visual stories. Discover how much the federal government spent, how many people we employed, and what results we achieved.",
+    fr: "L’InfoBase du GC est un outil interactif de visualisation des données qui traduit visuellement en termes simples l’information gouvernementale sur les finances, les résultats et la gestion des personnes. Trouver combien le gouvernement fédéral a dépensé, combien de personne il emploi et quels sont les résultats qu’il a accomplis.",
   },
   other_lang_name: {
     en: "Français",
