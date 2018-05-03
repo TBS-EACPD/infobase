@@ -1,3 +1,4 @@
+import '../panels/welcome_mat/old_welcome_mat.js';
 import '../panels/welcome_mat/welcome_mat.js';
 
 

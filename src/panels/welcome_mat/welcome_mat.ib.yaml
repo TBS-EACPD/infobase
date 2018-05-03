@@ -99,6 +99,73 @@ spending_was:
   fr: |
     <div class="mat-grid__inner-panel mat-grid__inner-panel--small">les dépenses étaient de</div>
     <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_compact1 was}}</div>
+
+spending_was__new: 
+  en: spending was
+  fr: les dépenses étaient de
+
+spending_change_was__new:
+  transform: [handlebars]
+  en:  |
+    spending {{changed_to hist_change ""}}
+  fr:  |
+    les dépenses {{fr_changed_to hist_change "f" "p" ""}}
+
+spending_change_will__new:
+  transform: [handlebars]
+  en: spending is {{will_change_to plan_change ""}}</div>
+  fr: on prévoit que les dépenses {{fr_will_change_to plan_change "f" "p" ""}}
+
+
+ftes_were_employed:
+  transform: [handlebars]
+  en: FTEs were employed
+  fr: ETP étaient employés
+
+fte_change_was__new:
+  transform: [handlebars]
+  en: number of FTEs {{changed_to hist_change ""}}
+  fr: le nombre d'ETP {{fr_changed_to hist_change "m" "s" ""}}
+
+fte_change_will__new:
+  transform: [handlebars]
+  en: number of FTEs is {{will_change_to plan_change ""}}
+  fr: le nombre d'ETP prévus {{fr_will_change_to plan_change "m" "s" ""}}
+
+
+spending_authorities_are:
+  transform: [handlebars]
+  en: spending authorities are
+  fr: les autorisations de dépenses sont
+
+no_spend_auth_this_year__new:
+  transform: [handlebars]
+  en: Spending information not available
+  fr: Information sur les dépenses non-disponibles
+
+
+no_historical_spending__new:
+  en: No historical spending information is available
+  fr: Aucune information historique sur les dépenses n'est disponible
+
+no_historical_fte__new:
+  en: No historical FTE information is available
+  fr: Aucune information historique sur les ETP n'est disponible
+
+no_trend_info:
+  en: No trend information is available
+  fr: Auncune tendance n'est disponible
+
+
+spending_will_be_1__new:
+  transform: [handlebars]
+  en: spending will be
+  fr: les dépenses seront de
+fte_will_be_1__new:
+  transform: [handlebars]
+  en: FTEs will be employed
+  fr: ETP seront employés<
+
 fte_was:
   transform: [handlebars]
   en: |
