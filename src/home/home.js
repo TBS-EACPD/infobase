@@ -295,7 +295,7 @@ const HomeLayout = props => (
       </div>
       <div className="equal-height-col is-1-third">
         <section style={{padding:"10px"}} className="col-content featured-col-content">
-          <header className="h3" style={{textAlign:'center', marginTop: "15px"}}>
+          <header className="h3" style={{textAlign:'center', marginTop: "15px", fontWeight: 500}}>
             <TM k="featured_data_title" />
           </header>
           <div style={{margin: 'auto 0'}}> {/* center in between title and bottom */}
