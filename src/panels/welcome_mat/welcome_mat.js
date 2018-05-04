@@ -288,7 +288,7 @@ const WelcomeMat = (props) => {
 
           <Pane key="c" size={40}>
             <Chart 
-              data={spend_data}
+              data={_.takeRight(spend_data, 3)}
               is_light
             />
           </Pane>,
@@ -317,7 +317,7 @@ const WelcomeMat = (props) => {
 
           <Pane key="c" size={40}>
             <Chart  
-              data={fte_data}
+              data={_.takeRight(fte_data,3)}
               is_fte
               is_light
             />
@@ -495,6 +495,16 @@ const WelcomeMat = (props) => {
       fte_data,
     } = calcs;
 
+    const { level } = subject;
+    let spend_summary_key;
+    if(level === "gov"){
+      spend_summary_key = "gov_welcome_mat_spending_summary"
+    } else if(level === "dept"){
+      spend_summary_key = "dept1_welcome_mat_spending_summary"
+    } else {
+      //TODO... is it possible for programs or CRs to have hist_planned ?
+    }
+
     
 
     return (
@@ -588,7 +598,7 @@ const WelcomeMat = (props) => {
           <Pane key="a" size={50}>
             <PaneItem textSize="small">
               <TM
-                k="dept1_welcome_mat_spending_summary"
+                k={spend_summary_key}
                 args={{
                   exp_hist_change: hist_spend_diff,
                   exp_plan_change: planned_spend_diff,
@@ -694,7 +704,7 @@ function get_calcs(subject, q6, q12){
   const fte_plan_3= _.last(planned_fte_data);
 
   const hist_fte_diff = fte_last_year_5 && ( (fte_last_year-fte_last_year_5)/fte_last_year_5);
-  const planned_fte_diff = fte_plan_3 && ( (fte_last_year-fte_last_year)/fte_last_year);
+  const planned_fte_diff = fte_plan_3 && ( (fte_plan_3-fte_last_year)/fte_last_year);
 
   return {
     spend_last_year_5,
@@ -722,7 +732,7 @@ function get_calcs(subject, q6, q12){
 
 new PanelGraph({
   level: "dept",
-  key: 'welcome_mat_new',
+  key: 'welcome_mat',
   footnotes : ["MACHINERY"],
   depends_on : ['table6','table12', 'table8'],
   layout: { full: {graph:12} },
@@ -782,7 +792,7 @@ new PanelGraph({
 
 new PanelGraph({
   level: "program",
-  key: 'welcome_mat_new',
+  key: 'welcome_mat',
   footnotes : ["MACHINERY"],
   depends_on : ['table6','table12'],
   layout: { full: {graph:12} },
@@ -823,7 +833,7 @@ new PanelGraph({
 
 new PanelGraph({
   level: "crso",
-  key: 'welcome_mat_new',
+  key: 'welcome_mat',
   footnotes : ["MACHINERY"],
   depends_on : ['table6','table12'],
   layout: { full: {graph:12} },
@@ -843,6 +853,32 @@ new PanelGraph({
     }
     return {
       type: "planned",
+      calcs,
+    };
+
+  },
+  render,
+});
+
+new PanelGraph({
+  level: "gov",
+  key: 'welcome_mat',
+  footnotes : ["MACHINERY"],
+  depends_on : ['table6','table12'],
+  layout: { full: {graph:12} },
+  title : "welcome_mat_title",
+  missing_info: "ok",
+  calculate (subject,info,options){
+    const { table6, table12 } = this.tables; 
+    const q6 = table6.q(subject);
+    const q12 = table12.q(subject);
+
+    const has_planned = has_planning_data(subject,q6);
+    const has_hist = has_hist_data(subject, q6);
+    const calcs = get_calcs(subject,q6,q12);
+
+    return {
+      type: "hist_planned",
       calcs,
     };
 

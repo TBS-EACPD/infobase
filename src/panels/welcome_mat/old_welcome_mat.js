@@ -396,7 +396,7 @@ const render = function( panel, calculations, options ) {
 
 new PanelGraph({
   level: "gov",
-  key: 'welcome_mat',
+  key: 'old_welcome_mat',
   depends_on : ['table4','table6','table12'],
   info_deps: [ 'table4_gov_info', 'table6_gov_info','table12_gov_info'],
   layout: {
@@ -435,7 +435,7 @@ new PanelGraph({
 
 new PanelGraph({
   level: "dept",
-  key: 'welcome_mat',
+  key: 'old_welcome_mat',
   footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
 
   depends_on : [ 'table6','table12', 'table4', 'table8'],
@@ -481,7 +481,7 @@ new PanelGraph({
       
 new PanelGraph({
   level: "program",
-  key: 'welcome_mat',
+  key: 'old_welcome_mat',
   footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
   depends_on : [ 'table6','table12'],
   info_deps: [ 'table6_program_info','table12_program_info'],
@@ -551,7 +551,7 @@ new PanelGraph({
 
 new PanelGraph({
   level: "tag",
-  key: 'welcome_mat',
+  key: 'old_welcome_mat',
   footnotes : ["MACHINERY"],
   depends_on : [ 'table6','table12'],
   info_deps: [ 'table6_tag_info','table12_tag_info'],
@@ -593,7 +593,7 @@ new PanelGraph({
 
 new PanelGraph({
   level: "crso",
-  key: 'welcome_mat',
+  key: 'old_welcome_mat',
   footnotes : ["MACHINERY"],
   depends_on : [ 'table6','table12'],
   info_deps: [ 'table6_crso_info','table12_crso_info'],
