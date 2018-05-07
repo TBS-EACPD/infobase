@@ -281,7 +281,7 @@ function populate_socr_tags(rows){
       id: row[id],
       name:  row[title],
       description: row[desc],
-      dead_so: !(+row[is_active]),
+      is_active: !!(+row[is_active]),
       is_drf: !!(+row[is_drf]),
       is_internal_service: !!(+row[is_internal_service]),
     })
@@ -303,7 +303,7 @@ function populate_programs(rows){
       data : {},
       description : $.trim(row[desc].replace(/^<p>/i,"").replace(/<\/p>$/i,"")),
       name :  row[name],
-      dead_program: !(+row[is_active]),
+      is_active: !!(+row[is_active]),
       is_internal_service: row[is_internal_service] === "1",
       web_links: _.compact([ 
         row[link1], 

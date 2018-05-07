@@ -396,6 +396,9 @@ class CRSO extends common(){
   get is_first_wave(){
     return this.dept.is_first_wave;
   }
+  get dead_so(){
+    return !this.is_active;
+  }
 };
 
 class Program extends common(){
@@ -439,6 +442,9 @@ class Program extends common(){
   }
   get is_first_wave(){
     return this.crso.is_cr;
+  }
+  get dead_program(){
+    return !this.is_active;
   }
 };
 
