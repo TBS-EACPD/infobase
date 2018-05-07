@@ -17,21 +17,11 @@ var both = !!choose('BOTH');
 var NO_WATCH = !!choose("NO-WATCH")
 
 var a11y_client = choose('a11y_client');
-var new_client = choose('new_client');
-var old_client = choose('old_client');
+var main_client = choose('main_client');
 
-const app = a11y_client || new_client || old_client;
-
+const app = a11y_client || main_client;
 
 const options_by_app = {
-  //new client is getting killed off, I'll leave the a11y part here in case we forget how apollo works.
-  new_client: {
-    entry: './src/new_client/a11y/index.js',
-    get_output: language => ({
-      path: path.resolve(__dirname, '../build/new_client/'),
-      filename: `app-a11y-${language}.min.js`,
-    }),
-  },
   a11y_client: {
     entry: './src/InfoBase/a11y_root.js',
     get_output: language =>({
@@ -39,7 +29,7 @@ const options_by_app = {
       filename: `app-a11y-${language}.min.js`,
     }),
   },
-  old_client: {
+  main_client: {
     entry: './src/InfoBase/root.js',
     get_output: language => ({
       path: path.resolve(__dirname, '../build/InfoBase/'),
