@@ -23,7 +23,7 @@ jobs:
           key: ib-client-dependencies-{{ checksum "package-lock.json" }}
       - run: npm run IB_base
       - run: npm run IB_prod_no_watch
-      - run: npm run new_IB_a11y_prod_no_watch
+      - run: npm run a11y_prod_no_watch
       - run: chmod +x ./.circleci/authenticate-gcloud.sh
       - run: ./.circleci/authenticate-gcloud.sh
       - run: gsutil -m rsync -d -r build/InfoBase gs://ib-static-bucket/InfoBase
