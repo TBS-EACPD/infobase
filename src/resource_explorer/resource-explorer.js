@@ -97,11 +97,12 @@ function render_non_col_content({node}){
     <div>
       { !_.isEmpty(defs) && 
         <dl className="dl-horizontal">
-          {_.map(defs, ({ term, def },ix) => 
+          {_.map(defs, ({ term, def },ix) => !_.isEmpty(def) &&
             <Fragment key={ix}> 
               <dt> { term } </dt>
               <dd> { def } </dd>
-            </Fragment>)}
+            </Fragment>
+          )}
         </dl>
       }
       { ( _.includes(['program','dept'], subject.level) || subject.is_cr || subject.is_lowest_level_tag ) && 

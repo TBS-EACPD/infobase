@@ -48,14 +48,12 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
               name: tag.name,
               resources: get_resources(tag),
               subject: tag,
-              defs: ( tag.is_lowest_level_tag && [
-                {
+              defs: tag.is_lowest_level_tag && _.compact([
+                !_.isEmpty(tag.description) && {
                   term: text_maker('description'),
                   def: <div dangerouslySetInnerHTML={{__html: tag.description }} />,
                 },
-              ].concat( 
-                (tag.is_m2m && !_.isEmpty(tag.related_tags()) ) ?
-                [{
+                tag.is_m2m && !_.isEmpty(tag.related_tags()) && {
                   term: text_maker('related_tags'),
                   def: (
                     <ul className="list-unstyled">
@@ -64,9 +62,8 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
                       )}
                     </ul>
                   ),
-                }] : 
-                []
-              )),
+                }
+              ]),
                 
             },
           }));
