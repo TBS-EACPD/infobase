@@ -131,8 +131,9 @@ const glossary_lite = {
 
 const gocos = {
   query_matcher: () => {
+    const goco_root =Tag.tag_roots.GOCO; 
     const to_search = _.chain(Tag.get_all())
-      .filter({root: Tag.tag_roots.GOCO})
+      .filter( ({root}) => root === goco_root )
       .filter('is_lowest_level_tag')
       .value();
     return query => _.filter(
