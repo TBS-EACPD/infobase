@@ -255,6 +255,12 @@
 "INAC-SO0645","INAC","The Government – Good governance and co-operative relationships for First Nations, Métis, Non-Status Indians, Inuit and Northerners","",0,0,0
 "INAC-SO0646","INAC","Office of the Federal Interlocutor – Socio-economic well-being of Métis, non-status Indians and urban Aboriginal people","",0,0,0
 "INAC-SO1999","INAC","Internal Services","",0,0,1
+"INDSC-BWS00","INDSC","BWS01","",1,1,0
+"INDSC-BWT00","INDSC","BWT01","",1,1,0
+"INDSC-BWU00","INDSC","BWU01","",1,1,0
+"INDSC-ISS00","INDSC","Internal Services","",1,1,1
+"INVIC-BCZ00","INVIC","Foreign Direct Investment Attraction","",1,1,0
+"INVIC-ISS00","INVIC","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "IPC-BRF00","IPC","Government Transparency","",1,1,0
 "IPC-BRG00","IPC","Protection of privacy rights","",1,1,0
 "IPC-ISS00","IPC","Internal Services","",1,1,1
@@ -378,14 +384,12 @@
 "ODPP-SO1999","ODPP","Internal Services","",0,0,1
 "OEC-SO0921","OEC","The public can feel confident that public office holders and members of Parliament are meeting the requirements of the conflict of interest compliance measures","",0,0,0
 "OEC-SO1999","OEC","Internal Services","",0,0,1
-"OICC-BTK00","OICC","Community and Regional Development","",1,1,0
+"OICC-BTK00","OICC","Public Infrastructure","",1,1,0
 "OICC-ISS00","OICC","Internal Services","",1,1,1
 "OICC-SO0881","OICC","Public Infrastructure for a More Prosperous Canada","",0,0,0
 "OICC-SO0882","OICC","Funding for quality, cost-effective public infrastructure that meets the needs of Canadians in a competitive economy, a cleaner environment and liveable communities is provided","",0,0,0
 "OICC-SO0883","OICC","Construction-ready infrastructure projects are provided with federal funding support","",0,0,0
 "OICC-SO1999","OICC","Internal Services","",0,0,1
-"OPSIC-BTS00","OPSIC","Public sector disclosures of wrongdoing and complaints of reprisal","",1,1,0
-"OPSIC-ISS00","OPSIC","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "OPSIC-SO0961","OPSIC","Wrongdoing in the federal public sector is addressed and public servants are protected in case of reprisal","",0,0,0
 "OPSIC-SO1999","OPSIC","Internal Services","",0,0,1
 "ORL-BVA00","ORL","Ensure transparency and accountability in the lobbying of public office holders in order to contribute to confidence in the integrity of government decision making","",1,1,0

@@ -255,6 +255,12 @@
 "INAC-SO0645","INAC","Le gouvernement - Bonne gouvernance et relations de coopération pour les Premières Nations, les Métis, les Indiens non inscrits, les Inuit et les résidents du Nord","",0,0,0
 "INAC-SO0646","INAC","Le Bureau de l'interlocuteur fédéral - Bien-être socioéconomique des Métis, des Indiens non inscrits et des Autochtones vivant en milieu urbain","",0,0,0
 "INAC-SO1999","INAC","Services internes","",0,0,1
+"INDSC-BWS00","INDSC","BWS01","",1,1,0
+"INDSC-BWT00","INDSC","BWT01","",1,1,0
+"INDSC-BWU00","INDSC","BWU01","",1,1,0
+"INDSC-ISS00","INDSC","Services internes","",1,1,1
+"INVIC-BCZ00","INVIC","Attirer de l'investissement direct étranger","",1,1,0
+"INVIC-ISS00","INVIC","Services internes","Les Services internes comprennent les groupes d'activités et de ressources connexes que le gouvernement fédéral considère comme étant des services à l'appui de programmes ou nécessaires pour permettre à une organisation de s'acquitter de ses obligations générales. Les Services internes désignent les activités et ressources des dix services distincts qui soutiennent l'exécution des programmes au sein de l'organisation, peu importe le modèle de prestation des Services internes utilisé comme indiqué à la Section 6.2 du Guide sur la comptabilisation des dépenses des Services internes et l'établissement des rapports connexes.",1,1,1
 "IPC-BRF00","IPC","Transparence gouvernementale","",1,1,0
 "IPC-BRG00","IPC","Protection du droit à la vie privée","",1,1,0
 "IPC-ISS00","IPC","Services internes","",1,1,1
@@ -378,14 +384,12 @@
 "ODPP-SO1999","ODPP","Services internes","",0,0,1
 "OEC-SO0921","OEC","Le public peut avoir confiance que les titulaires de charge publique ainsi que les députés rencontrent les exigences des mesures d'observation régissant leur conduite en ce qui concerne les conflits d'intérêts","",0,0,0
 "OEC-SO1999","OEC","Services internes","",0,0,1
-"OICC-BTK00","OICC","Développement communautaire et régional","",1,1,0
+"OICC-BTK00","OICC","Infrastructure publique","",1,1,0
 "OICC-ISS00","OICC","Services internes","",1,1,1
 "OICC-SO0881","OICC","Des infrastructures publiques pour un Canada plus prospère","",0,0,0
 "OICC-SO0882","OICC","Du financement est versé pour une infrastructure publique rentable et de qualité qui répond aux besoins des Canadiens dans une économie concurrentielle, un environnement propre et des collectivités habitables","",0,0,0
 "OICC-SO0883","OICC","Les projets d'infrastructure prêts à être construits reçoivent un financement fédéral","",0,0,0
 "OICC-SO1999","OICC","Services internes","",0,0,1
-"OPSIC-BTS00","OPSIC","Les divulgations d'actes répréhensibles et les plaintes de représailles du secteur public","",1,1,0
-"OPSIC-ISS00","OPSIC","Services internes","Les Services internes comprennent les groupes d'activités et de ressources connexes que le gouvernement fédéral considère comme étant des services à l'appui de programmes ou nécessaires pour permettre à une organisation de s'acquitter de ses obligations générales. Les Services internes désignent les activités et ressources des dix services distincts qui soutiennent l'exécution des programmes au sein de l'organisation, peu importe le modèle de prestation des Services internes utilisé comme indiqué à la Section 6.2 du Guide sur la comptabilisation des dépenses des Services internes et l'établissement des rapports connexes.",1,1,1
 "OPSIC-SO0961","OPSIC","Des mesures sont prises à l'égard des actes répréhensibles au sein du secteur public fédéral et les fonctionnaires sont protégés en cas de représailles","",0,0,0
 "OPSIC-SO1999","OPSIC","Services internes","",0,0,1
 "ORL-BVA00","ORL","Assurer la transparence et l'obligation de rendre compte des activités de lobbying effectuées auprès de titulaires d'une charge publique pour contribuer à la confiance à l'égard de l'intégrité des décisions prises par le gouvernement","",1,1,0
