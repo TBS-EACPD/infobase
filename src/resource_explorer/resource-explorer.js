@@ -48,6 +48,8 @@ const { ensure_loaded } = require('../core/lazy_loader.js');
 
 const { Explorer } = require('../components/ExplorerComponents.js');
 
+const INCLUDE_OTHER_TAGS = true;
+
 const HierarchySelectionItem = ({title, text, active, url }) => (
   <a 
     role="radio"
@@ -172,15 +174,28 @@ class ExplorerPage extends React.Component {
 
     const root = get_root(flat_nodes);
 
-    const [goco_props, hwh_props ] = [ 
+    
+    const [
+      goco_props, 
+      hwh_props,
+      wwh_props,
+      ccofog_props,
+      mlt_props,
+    ] = _.chain([ 
       Tag.lookup("GOCO"),
       Tag.lookup("HWH"),
-    ].map( ({ description, name, id }) => ({
-      title: name,
-      text: description,  
-      active: hierarchy_scheme === id,
-      id,
-    }));
+      Tag.lookup("WWH"),
+      Tag.lookup("CCOFOG"),
+      Tag.lookup("MLT"),
+    ])
+      .compact()
+      .map( ({ description, name, id }) => ({
+        title: name,
+        text: description,  
+        active: hierarchy_scheme === id,
+        id,
+      }))
+      .value()
 
     const min_props = {
       title: text_maker("how_were_accountable"),
@@ -281,7 +296,7 @@ class ExplorerPage extends React.Component {
               <TextMaker text_key="choose_explore_point" />
             </header>
             <div role="radiogroup" className="hierarchy-selection-items">
-              {_.map([ min_props, dept_props, goco_props, hwh_props ],props =>
+              {_.map([ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp18" && INCLUDE_OTHER_TAGS ? [wwh_props, ccofog_props, mlt_props] : [])  ],props =>
                 <HierarchySelectionItem 
                   key={props.id} 
                   url={`#resource-explorer/${props.id}/${doc}`}
@@ -411,7 +426,7 @@ export class ResourceExplorer extends React.Component {
     } = match;
 
     hierarchy_scheme = (
-      _.includes(['min','dept','GOCO','HWH'], hierarchy_scheme) ? 
+      _.includes(['min','dept','GOCO','HWH', "WWH", "CCOFOG", "MLT"], hierarchy_scheme) ? 
       hierarchy_scheme :
       'min'
     );

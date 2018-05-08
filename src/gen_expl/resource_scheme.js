@@ -39,6 +39,9 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
 
         case 'GOCO':
         case 'HWH':
+        case 'WWH':
+        case 'CCOFOG':
+        case 'MLT':
           return _.map(Tag.lookup(hierarchy_scheme).children_tags, tag => ({
             id: tag.guid,
             data: {
@@ -241,7 +244,10 @@ const resource_scheme = {
   get_sort_func_selector: () =>  provide_sort_func_selector('resources'),
   get_props_selector: () => {
 
-    return augmented_state => ({...augmented_state.resources, is_m2m : _.includes(['HWH'], augmented_state.resources.hierarchy_scheme )});
+    return augmented_state => ({ 
+      ...augmented_state.resources,
+      is_m2m : _.includes(['HWH', 'WWH', 'MLT'], augmented_state.resources.hierarchy_scheme ),
+    });
   },
   dispatch_to_props: dispatch => ({ 
     col_click : col_key => dispatch({type: 'column_header_click', payload: col_key }),

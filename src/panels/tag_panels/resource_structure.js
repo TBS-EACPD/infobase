@@ -81,6 +81,7 @@ class RootedResourceExplorer extends React.Component {
       col_click,
       doc,
       set_doc,
+      subject,
     } = this.props;
 
     const root = get_root(flat_nodes);
@@ -111,6 +112,10 @@ class RootedResourceExplorer extends React.Component {
         />
       </div>
     </div>;
+
+    if(_.includes(["MLT", "CCOFOG", "WWH"], subject.root.id)){
+      return inner_content;
+    }
  
     const tab_on_click = (doc)=> set_doc!==doc && set_doc(doc);
 
@@ -167,7 +172,8 @@ class RootedResourceExplorerContainer extends React.Component {
   render(){
     const { 
       rooted_resource_scheme : scheme,
-      initial_rooted_resource_state, 
+      initial_rooted_resource_state,
+      subject,
     } = this.props;
     
     const scheme_key = scheme.key;
@@ -195,6 +201,7 @@ class RootedResourceExplorerContainer extends React.Component {
       <Provider store={createStore(reducer,initialState)}>
         <Container
           scheme={scheme}
+          subject={subject}
         />
       </Provider>
     );
