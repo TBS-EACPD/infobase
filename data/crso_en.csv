@@ -8,9 +8,9 @@
 "AECB-SO0331","AECB","Safe and secure nuclear installations and processes used solely for peaceful purposes and an informed public on the effectiveness of Canada's nuclear regulatory regime","",0,0,0
 "AECB-SO1999","AECB","Internal Services","",0,0,1
 "AECL-SO0031","AECL","Be the top worldwide nuclear products and services company. Protect the health and safety of the public, our employees and the environment. Minimize nuclear legacy obligations for future generations","",0,0,0
-"AGR-BWN00","AGR","BWN01","",1,1,0
-"AGR-BWO00","AGR","BWO01","",1,1,0
-"AGR-BWP00","AGR","BWP01","",1,1,0
+"AGR-BWN00","AGR","Domestic and International Markets","",1,1,0
+"AGR-BWO00","AGR","Science and Innovation","",1,1,0
+"AGR-BWP00","AGR","Sector Risk","",1,1,0
 "AGR-ISS00","AGR","Internal Services","",1,1,1
 "AGR-SO0011","AGR","A competitive and market-oriented agriculture, agri-food and agri-based products sector that proactively manages risk","",0,0,0
 "AGR-SO0012","AGR","An innovative and sustainable agriculture, agri-food and agri-based products sector","",0,0,0
@@ -20,6 +20,8 @@
 "AHRAC-SO1999","AHRAC","Internal Services","",0,0,1
 "APPRT-SO0141","APPRT","The rights of artists and producers under Part II of the Status of the Artist Act are protected and respected","",0,0,0
 "APPRT-SO1999","APPRT","Internal Services","",0,0,1
+"ATSSC-BEE00","ATSSC","Support services and facilities to federal administrative tribunals and its members","",1,1,0
+"ATSSC-ISS00","ATSSC","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "ATSSC-SO0001","ATSSC","Efficient and effective services which support tribunal chairs and members in exercising their statutory responsibilities and ensure that their independence is protected in a manner which promotes Canadians' confidence in the federal tribunal system","",0,0,0
 "ATSSC-SO1999","ATSSC","Internal Services","",0,0,1
 "CAS-BEG00","CAS","Administration Services for the Federal Courts","",1,1,0
@@ -34,20 +36,25 @@
 "CB-SO0451","CB","Fair decision-making to provide proper incentives for the creation and use of copyrighted works","",0,0,0
 "CB-SO1999","CB","Internal Services","",0,0,1
 "CBC-SO0151","CBC","A national public broadcasting service exists that is primarily Canadian in content and connects citizens to the Canadian experience","",0,0,0
+"CBSA-BUF00","CBSA","Border Management","",1,1,0
+"CBSA-BUG00","CBSA","Border Enforcement","",1,1,0
+"CBSA-ISS00","CBSA","Internal Services","",1,1,1
 "CBSA-SO0061","CBSA","International trade and travel is facilitated across Canada's border and Canada's population is protected from border-related risks","",0,0,0
 "CBSA-SO1999","CBSA","Internal Services","",0,0,1
 "CC-SO0071","CC","A vibrant and dynamic arts sector in Canada","",0,0,0
 "CCC-SO0171","CCC","Enhanced market access for Canadian exporters to complex international public sector markets","",0,0,0
+"CCMD-BTR00","CCMD","Common Public Service Learning","",1,1,0
+"CCMD-ISS00","CCMD","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "CCMD-SO0121","CCMD","Federal public service employees have the common knowledge, skills and competencies to fulfill their responsibilities in serving Canadians","",0,0,0
 "CCMD-SO1999","CCMD","Internal Services","",0,0,1
 "CCOHS-BFZ00","CCOHS","National Occupational Health and Safety Resource","",1,1,0
 "CCOHS-ISS00","CCOHS","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "CCOHS-SO0161","CCOHS","Improved workplace conditions and practices that enhance the health, safety, and well being of working Canadians","",0,0,0
 "CCOHS-SO1999","CCOHS","Internal Services","",0,0,1
-"CCRA-BRA00","CCRA","Tax","",0,1,0
-"CCRA-BRB00","CCRA","Benefits","",0,1,0
-"CCRA-BRC00","CCRA","Taxpayers' Ombudsman","",0,1,0
-"CCRA-ISS00","CCRA","Internal Services","",0,1,1
+"CCRA-BRA00","CCRA","Tax","",1,1,0
+"CCRA-BRB00","CCRA","Benefits","",1,1,0
+"CCRA-BRC00","CCRA","Taxpayers' Ombudsman","",1,1,0
+"CCRA-ISS00","CCRA","Internal Services","",1,1,1
 "CCRA-SO0111","CCRA","Eligible families and individuals receive timely and accurate benefit payments","",0,0,0
 "CCRA-SO0112","CCRA","Taxpayers and benefit recipients receive an independent and impartial review of their service related complaints","",0,0,0
 "CCRA-SO0113","CCRA","Taxpayers meet their obligations and Canada's revenue base is protected","",0,0,0
@@ -57,10 +64,14 @@
 "CEAA-ISS00","CEAA","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "CEAA-SO0191","CEAA","High quality and timely environmental assessments of major projects to protect the environment and support economic growth","",0,0,0
 "CEAA-SO1999","CEAA","Internal Services","",0,0,1
+"CEO-BGG00","CEO","Electoral Administration and Oversight","",1,1,0
+"CEO-ISS00","CEO","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "CEO-SO0411","CEO","An Accessible Electoral Framework that Canadians Trust and Use","",0,0,0
 "CEO-SO1999","CEO","Internal Services","",0,0,1
 "CFDC-SO1261","CFDC","Quality audiovisual content developed by Canadians and promoted to audiences in Canada and internationally","",0,0,0
 "CFDC-SO1999","CFDC","Internal Services","",0,0,1
+"CFGB-BUZ00","CFGB","Independent review of military grievances","",1,1,0
+"CFGB-ISS00","CFGB","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "CFGB-SO0731","CFGB","The Chief of the Defence Staff and members of the Canadian Armed Forces have access to a fair, independent and timely review of military grievances","",0,0,0
 "CFGB-SO1999","CFGB","Internal Services","",0,0,1
 "CFIA-SO0201","CFIA","A safe and accessible food supply and plant and animal resource base","",0,0,0
@@ -69,14 +80,20 @@
 "CGC-ISS00","CGC","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "CGC-SO0211","CGC","Canada's grain is safe, reliable and marketable and Canadian grain producers are properly compensated for grain deliveries to licensed grain companies","",0,0,0
 "CGC-SO1999","CGC","Internal Services","",0,0,1
+"CH-BSD00","CH","Creativity, Arts and Culture","",1,1,0
+"CH-BSE00","CH","Heritage and Celebration","",1,1,0
+"CH-BSF00","CH","Sport","",1,1,0
+"CH-BSG00","CH","Diversity and Inclusion","",1,1,0
+"CH-BSH00","CH","Official Languages","",1,1,0
+"CH-ISS00","CH","Internal Services","",1,1,1
 "CH-SO0221","CH","Canadian artistic expressions and cultural content are created and accessible at home and abroad","",0,0,0
 "CH-SO0222","CH","Canadians participate and excel in sport","",0,0,0
 "CH-SO0223","CH","Canadians share, express and appreciate their Canadian identity","",0,0,0
 "CH-SO1999","CH","Internal Services","",0,0,1
-"CHRC-BSA00","CHRC","Engagement and Advocacy","",0,1,0
-"CHRC-BSB00","CHRC","Human Rights Complaints","",0,1,0
-"CHRC-BSC00","CHRC","Employment Equity Audits","",0,1,0
-"CHRC-ISS00","CHRC","Internal Services","",0,1,1
+"CHRC-BSA00","CHRC","Engagement and Advocacy","",1,1,0
+"CHRC-BSB00","CHRC","Human Rights Complaints","",1,1,0
+"CHRC-BSC00","CHRC","Employment Equity Audits","",1,1,0
+"CHRC-ISS00","CHRC","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "CHRC-SO0231","CHRC","Equality of opportunity and respect for human rights","",0,0,0
 "CHRC-SO1999","CHRC","Internal Services","",0,0,1
 "CHRT-SO0241","CHRT","Individuals have access, as determined by the Canadian Human Rights Act and the Employment Equity Act, to fair and equitable adjudication of human rights and employment equity cases that are brought before the Canadian Human Rights Tribunal","",0,0,0
@@ -87,6 +104,8 @@
 "CI-SO0424","CI","Newcomers and citizens participate in fostering an integrated society","",0,0,0
 "CI-SO0581","CI","International Commercial and Consular Services for Canadians - Canadians are satisfied with commercial and consular services","",0,0,0
 "CI-SO1999","CI","Internal Services","",0,0,1
+"CICS-BWV00","CICS","Intergovernmental Conference Services","",1,1,0
+"CICS-ISS00","CICS","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "CICS-SO0261","CICS","Senior-level intergovernmental conference services are professionally and successfully delivered","",0,0,0
 "CICS-SO1999","CICS","Internal Services","",0,0,1
 "CIDA-SO0582","CIDA","Reduction in poverty for those living in countries where Canada engages in international development","",0,0,0
@@ -113,11 +132,13 @@
 "CNEDA-SO1999","CNEDA","Internal Services","",0,0,1
 "CNMI-SO0721","CNMI","A safe, reliable, efficient, affordable and environmentally responsible ferry service between the Island of Newfoundland and the Province of Nova Scotia","",0,0,0
 "CPC-SO0101","CPC","Compensation for the provision of Parliamentary mail and Materials for the use of the blind services, which are sent free of postage under the Canada Post Corporation Act","",0,0,0
-"CPCC-BWX00","CPCC","BWX01","",1,1,0
+"CPCC-BWX00","CPCC","Polar Science and Knowledge","",1,1,0
 "CPCC-ISS00","CPCC","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "CPCC-SO0341","CPCC","Increased Canadian polar knowledge","",0,0,0
 "CPCC-SO0342","CPCC","Canada has world-class Arctic science and technology to support the development and stewardship of Canada's North and is recognized as a leader on circumpolar research issues","",0,0,0
 "CPCC-SO1999","CPCC","Internal Services","",0,0,1
+"CRTC-BRT00","CRTC","Regulate and Supervise the Communications System","",1,1,0
+"CRTC-ISS00","CRTC","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "CRTC-SO0351","CRTC","Canadians have access to a world-class communication system","",0,0,0
 "CRTC-SO0352","CRTC","Canadians have access to a wide variety of high quality Canadian produced programming and to reliable, affordable and high quality telecommunication services","",0,0,0
 "CRTC-SO1999","CRTC","Internal Services","",0,0,1
@@ -125,6 +146,10 @@
 "CSA-ISS00","CSA","Internal Services","",1,1,1
 "CSA-SO0371","CSA","Canada's exploration of space, provision of space services and development of its space capacity meet the nation's needs for scientific knowledge, innovation and information","",0,0,0
 "CSA-SO1999","CSA","Internal Services","",0,0,1
+"CSC-BUJ00","CSC","Care and Custody","",1,1,0
+"CSC-BUK00","CSC","Correctional Interventions","",1,1,0
+"CSC-BUL00","CSC","Community Supervision","",1,1,0
+"CSC-ISS00","CSC","Internal Services","",1,1,1
 "CSC-SO0461","CSC","The custody, correctional interventions, and supervision of offenders in communities and in institutions, contribute to public safety","",0,0,0
 "CSC-SO1999","CSC","Internal Services","",0,0,1
 "CSEC-SO0441","CSEC","Foreign signals intelligence and technical security capabilities advance and protect Canada's vital interests","",0,0,0
@@ -137,6 +162,12 @@
 "CTAIB-ISS00","CTAIB","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "CTAIB-SO0391","CTAIB","Independent investigations into transportation occurrences contribute to making the transportation system safer","",0,0,0
 "CTAIB-SO1999","CTAIB","Internal Services","",0,0,1
+"EA-BVB00","EA","International Advocacy and Diplomacy","",1,1,0
+"EA-BVC00","EA","Trade and Investment","",1,1,0
+"EA-BVD00","EA","Development, Peace and Security Programming","",1,1,0
+"EA-BVE00","EA","Help for Canadians Abroad","",1,1,0
+"EA-BVF00","EA","Support for Canada's Presence Abroad","",1,1,0
+"EA-ISS00","EA","Internal Services","",1,1,1
 "EA-SO0581","EA","International Commercial and Consular Services for Canadians - Canadians are satisfied with commercial and consular services","",0,0,0
 "EA-SO0582","EA","Reduction in poverty for those living in countries where Canada engages in international development","",0,0,0
 "EA-SO0583","EA","Canada's Network Abroad - The Department maintains a mission network of infrastructure and services to enable the Government of Canada to achieve its international priorities","",0,0,0
@@ -179,6 +210,8 @@
 "FO-SO0572","FO","Safe and Secure Waters","",0,0,0
 "FO-SO0573","FO","Sustainable Aquatic Ecosystems","",0,0,0
 "FO-SO1999","FO","Internal Services","",0,0,1
+"FORDQ-BLL00","FORDQ","Economic Development in Quebec","",1,1,0
+"FORDQ-ISS00","FORDQ","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "FORDQ-SO0481","FORDQ","Quebec's regions have a growing economy","",0,0,0
 "FORDQ-SO1999","FORDQ","Internal Services","",0,0,1
 "FTRAC-BUW00","FTRAC","Compliance with Anti-Money Laundering and Anti-Terrorism Financing Legislation and Regulations","",1,1,0
@@ -190,7 +223,7 @@
 "GG-SO1999","GG","Internal Services","",0,0,1
 "GSC-SO1121","GSC","High quality, central programs and services that ensure sound stewardship on behalf of Canadians and meet the program needs of federal institutions","",0,0,0
 "GSC-SO1999","GSC","Internal Services","",0,0,1
-"H-BVG00","H","BVG16","",1,1,0
+"H-BVG00","H","Health Care Systems","",1,1,0
 "H-BVH00","H","Health Protection and Promotion","",1,1,0
 "H-ISS00","H","Internal Services","",1,1,1
 "H-SO0611","H","A health system responsive to the needs of Canadians","",0,0,0
@@ -201,6 +234,12 @@
 "HC-SO0621","HC","Effective administrative and professional support for Members, both individually and collectively, in their roles as legislators and representatives of 338 constituencies, in the Chamber, in committee and in caucus","",0,0,0
 "HMIRC-SO0601","HMIRC","Chemical trade secrets are protected and required health and safety information in Canadian workplaces is compliant","",0,0,0
 "HMIRC-SO1999","HMIRC","Internal Services","",0,0,1
+"HRSD-BGM00","HRSD","Social Development","",1,1,0
+"HRSD-BGN00","HRSD","Pensions and Benefits","",1,1,0
+"HRSD-BGO00","HRSD","Learning, Skills Development and Employment","",1,1,0
+"HRSD-BGP00","HRSD","Working Conditions and Workplace Relations","",1,1,0
+"HRSD-BGQ00","HRSD","Information Delivery and Services for Other Departments","",1,1,0
+"HRSD-ISS00","HRSD","Internal Services","",1,1,1
 "HRSD-SO0491","HRSD","A skilled, adaptable and inclusive labour force and an efficient labour market","",0,0,0
 "HRSD-SO0492","HRSD","Income security, access to opportunities and well-being for individuals, families and communities","",0,0,0
 "HRSD-SO0493","HRSD","Safe, fair and productive workplaces and cooperative workplace relations","",0,0,0
@@ -218,7 +257,7 @@
 "INAC-SO1999","INAC","Internal Services","",0,0,1
 "IPC-BRF00","IPC","Government Transparency","",1,1,0
 "IPC-BRG00","IPC","Protection of privacy rights","",1,1,0
-"IPC-ISS00","IPC","ISS10","",1,1,1
+"IPC-ISS00","IPC","Internal Services","",1,1,1
 "IPC-SO0981","IPC","Rights under the Access to Information Act are safeguarded","",0,0,0
 "IPC-SO0982","IPC","The privacy rights of individuals are protected","",0,0,0
 "IPC-SO1999","IPC","Internal Services","",0,0,1
@@ -226,6 +265,10 @@
 "IRB-ISS00","IRB","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "IRB-SO0631","IRB","Resolve immigration and refugee cases before the Immigration and Refugee Board of Canada efficiently, fairly and in accordance with the law","",0,0,0
 "IRB-SO1999","IRB","Internal Services","",0,0,1
+"ISC-BNN00","ISC","People, Skills and Communities","",1,1,0
+"ISC-BNO00","ISC","Science, Technology, Research and Commercialization","",1,1,0
+"ISC-BNP00","ISC","Companies, Investment and Growth","",1,1,0
+"ISC-ISS00","ISC","Internal Services","",1,1,1
 "ISC-SO0661","ISC","Advancements in science and technology, knowledge, and innovation strengthen the Canadian economy","",0,0,0
 "ISC-SO0662","ISC","Canadian businesses and communities are competitive","",0,0,0
 "ISC-SO0663","ISC","The Canadian marketplace is efficient and competitive","",0,0,0
@@ -237,6 +280,9 @@
 "JUS-SO0691","JUS","A Federal Government that is Supported by High-Quality Legal Services","",0,0,0
 "JUS-SO0692","JUS","A fair, relevant and accessible Canadian justice system","",0,0,0
 "JUS-SO1999","JUS","Internal Services","",0,0,1
+"LAC-BSI00","LAC","Acquiring and preserving documentary heritage","",1,1,0
+"LAC-BSJ00","LAC","Providing access to documentary heritage","",1,1,0
+"LAC-ISS00","LAC","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "LAC-SO0701","LAC","Canada's documentary heritage is preserved and accessible to current and future generations","",0,0,0
 "LAC-SO0702","LAC","Current government information is managed to support government accountability","",0,0,0
 "LAC-SO1999","LAC","Internal Services","",0,0,1
@@ -245,9 +291,19 @@
 "MPCC-SO0741","MPCC","The Military Police Complaints Commission (MPCC) ensures that the Canadian Forces Military Police has the highest standard of conduct according to law and police best practices, and is free from interference in its investigations","",0,0,0
 "MPCC-SO1999","MPCC","Internal Services","",0,0,1
 "NAC-SO0751","NAC","Strong and dynamic performing arts in the National Capital Region and across Canada","",0,0,0
+"NBC-BFO00","NBC","Conservation","",1,1,0
+"NBC-BFY00","NBC","Promotion of Heritage","",1,1,0
+"NBC-ISS00","NBC","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "NBC-SO0761","NBC","The Battlefields Park of Quebec is a prestigious, natural, accessible, safe and educational historic and urban site","",0,0,0
 "NBC-SO1999","NBC","Internal Services","",0,0,1
 "NCC-SO0771","NCC","Canada's Capital Region is of national significance and is a source of pride for Canadians","",0,0,0
+"ND-BUN00","ND","Operations","",1,1,0
+"ND-BUO00","ND","Ready Forces","",1,1,0
+"ND-BUP00","ND","Defence Team","",1,1,0
+"ND-BUQ00","ND","Future Force Design","",1,1,0
+"ND-BUR00","ND","Procurement of Capabilities","",1,1,0
+"ND-BUS00","ND","Sustainable Bases, Information Technology Systems and Infrastructure","",1,1,0
+"ND-ISS00","ND","Internal Services","",1,1,1
 "ND-SO0781","ND","Defence Operations and Services Improve Stability and Security, and Promote Canadian Interests and Values","",0,0,0
 "ND-SO0782","ND","Defence Remains Continually Prepared to Deliver National Defence and Defence Services in Alignment with Canadian Interests and Values","",0,0,0
 "ND-SO0783","ND","National Defence is ready to meet Government Defence Expectations","",0,0,0
@@ -262,18 +318,24 @@
 "NEB-ISS00","NEB","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "NEB-SO0791","NEB","The regulation of pipelines, power lines, energy development and energy trade contributes to the safety of Canadians, the protection of the environment and efficient energy infrastructure and markets, while respecting the rights and interests of those affected by National Energy Board decisions and recommendations","",0,0,0
 "NEB-SO1999","NEB","Internal Services","",0,0,1
+"NFB-BSM00","NFB","Audiovisual programming and production","",1,1,0
+"NFB-BSP00","NFB","Content accessibility and audience engagement","",1,1,0
+"NFB-ISS00","NFB","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "NFB-SO0801","NFB","Canadian stories and perspectives are reflected in audiovisual media and accessible to Canadians and the world","",0,0,0
 "NFB-SO1999","NFB","Internal Services","",0,0,1
 "NGC-SO0811","NGC","Interest in, knowledge of and appreciation and respect for visual art through collections of historic and contemporary works of art, programs and research that reflect a special but not exclusive perspective on Canada","",0,0,0
 "NMST-SO0821","NMST","Interest in, knowledge of and appreciation and respect for science and technology through collections of scientific and technological objects, programs and research reflecting a Canadian perspective","",0,0,0
 "NPA-SO0871","NPA","The planning and construction of the Canadian portion of the Alaska Highway Gas Pipeline project is efficient and expeditious while ensuring environmental protection and social and economic benefits for Canadians","",0,0,0
-"NPA-SO1999","NPA","Internal Services","",0,0,1
 "NPB-BUA00","NPB","Conditional Release Decisions","",1,1,0
 "NPB-BUB00","NPB","Conditional Release Openness and Accountability","",1,1,0
 "NPB-BUC00","NPB","Record Suspension Decisions/Clemency Recommendations","",1,1,0
 "NPB-ISS00","NPB","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "NPB-SO1021","NPB","Conditional release and record suspension decisions and decision processes that safeguard Canadian communities","",0,0,0
 "NPB-SO1999","NPB","Internal Services","",0,0,1
+"NR-BTL00","NR","Natural Resource Science and Risk Mitigation","",1,1,0
+"NR-BTM00","NR","Innovative and Sustainable Natural Resources Development","",1,1,0
+"NR-BTO00","NR","Globally Competitive Natural Resource Sectors","",1,1,0
+"NR-ISS00","NR","Internal Services","",1,1,1
 "NR-SO0851","NR","Canada's natural resource sectors are globally competitive","",0,0,0
 "NR-SO0852","NR","Canadians have information to manage their lands and natural resources, and are protected from related risks","",0,0,0
 "NR-SO0853","NR","Natural Resource Sectors and Consumers are Environmentally Responsible","",0,0,0
@@ -294,11 +356,16 @@
 "NSERC-SO0863","NSERC","Innovation: Knowledge and skills in the natural sciences and engineering are transferred to and used productively by the user sector in Canada","",0,0,0
 "NSERC-SO0864","NSERC","People: Highly skilled science and engineering professionals in Canada","",0,0,0
 "NSERC-SO1999","NSERC","Internal Services","",0,0,1
+"NSICP-BUE00","NSICP","Assist the National Security and Intelligence Committee of Parliamentarians in fulfilling its mandate","",1,1,0
+"NSICP-ISS00","NSICP","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "OAG-SO0041","OAG","Through legislative auditing, we contribute to a well-managed and accountable government for Canadians","",0,0,0
 "OCI-BVL00","OCI","Independent Oversight of Federal Corrections","",1,1,0
 "OCI-ISS00","OCI","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "OCI-SO0941","OCI","The problems of offenders in the federal correctional system are identified and addressed in a timely fashion","",0,0,0
 "OCI-SO1999","OCI","Internal Services","",0,0,1
+"OCOL-BGH00","OCOL","Protection of rights related to Official Languages","",1,1,0
+"OCOL-BGI00","OCOL","Advancement of French and English in Canadian society","",1,1,0
+"OCOL-ISS00","OCOL","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "OCOL-SO0901","OCOL","Rights guaranteed by the Official Languages Act are protected and linguistic duality is promoted as a fundamental value of Canadian society","",0,0,0
 "OCOL-SO1999","OCOL","Internal Services","",0,0,1
 "OCSEC-SO0911","OCSEC","The Communications Security Establishment performs its duties and functions in accordance with the laws of Canada and with due regard for the privacy of Canadians","",0,0,0
@@ -311,14 +378,18 @@
 "ODPP-SO1999","ODPP","Internal Services","",0,0,1
 "OEC-SO0921","OEC","The public can feel confident that public office holders and members of Parliament are meeting the requirements of the conflict of interest compliance measures","",0,0,0
 "OEC-SO1999","OEC","Internal Services","",0,0,1
+"OICC-BTK00","OICC","Community and Regional Development","",1,1,0
+"OICC-ISS00","OICC","Internal Services","",1,1,1
 "OICC-SO0881","OICC","Public Infrastructure for a More Prosperous Canada","",0,0,0
 "OICC-SO0882","OICC","Funding for quality, cost-effective public infrastructure that meets the needs of Canadians in a competitive economy, a cleaner environment and liveable communities is provided","",0,0,0
 "OICC-SO0883","OICC","Construction-ready infrastructure projects are provided with federal funding support","",0,0,0
 "OICC-SO1999","OICC","Internal Services","",0,0,1
+"OPSIC-BTS00","OPSIC","Public sector disclosures of wrongdoing and complaints of reprisal","",1,1,0
+"OPSIC-ISS00","OPSIC","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "OPSIC-SO0961","OPSIC","Wrongdoing in the federal public sector is addressed and public servants are protected in case of reprisal","",0,0,0
 "OPSIC-SO1999","OPSIC","Internal Services","",0,0,1
-"ORL-BVA00","ORL","Ensure transparency and accountability in the lobbying of public office holders in order to contribute to confidence in the integrity of government decision making","",0,1,0
-"ORL-ISS00","ORL","Internal Services","",0,1,1
+"ORL-BVA00","ORL","Ensure transparency and accountability in the lobbying of public office holders in order to contribute to confidence in the integrity of government decision making","",1,1,0
+"ORL-ISS00","ORL","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "ORL-SO0891","ORL","Ensure transparency and accountability in the lobbying of public office holders in order to contribute to confidence in the integrity of government decision making","",0,0,0
 "ORL-SO1999","ORL","Internal Services","",0,0,1
 "OSEO-SO1191","OSEO","Senators meet their obligations under the Conflict of Interest Code in a manner that contributes to the integrity of the Senate as an institution","",0,0,0
@@ -330,12 +401,21 @@
 "OSFI-SO1999","OSFI","Internal Services","",0,0,1
 "PACS-SO1061","PACS","To ensure fair and competency-based processes are in place for the recruitment and selection of qualified individuals for Governor-in-Council appointments across agencies, boards, commissions and Crown Corporations","",0,0,0
 "PACS-SO1999","PACS","Internal Services","",0,0,1
+"PCA-BGW00","PCA","Protecting and Presenting Canada's Natural and Cultural Heritage","",1,1,0
+"PCA-ISS00","PCA","Internal Services","",1,1,1
 "PCA-SO1001","PCA","Canadians have a strong sense of connection to their national parks, national historic sites, heritage canals, and national marine conservation areas and these protected places are experienced in ways that leave them unimpaired for the enjoyment of present and future generations","",0,0,0
 "PCA-SO1999","PCA","Internal Services","",0,0,1
-"PCC-SO1171","PCC","Public Confidence in the Royal Canadian Mounted Police","",0,0,0
+"PCC-AYX00","PCC","Civilian review of Royal Canadian Mounted Police members' conduct in the performance of their duties","The Civilian Review and Complaints Commission for the RCMP (CRCC) is an independent agency created by Parliament to provide fair and independent civilian review of RCMP members’ conduct in the performance of their duties. The CRCC accomplishes this by receiving complaints from the public about the conduct of RCMP members and monitoring the RCMP’s investigations of such complaints. Where a complainant is not satisfied with the outcome of the RCMP’s response to a complaint, a request can be made to the CRCC for an independent review of the members’ conduct and the RCMP’s handling of the matter. In reviewing complaints, the CRCC may find that it is satisfied with the RCMP’s handling of the complaint or it may make findings and recommendations to the RCMP Commissioner and the Minister of Public Safety with respect to matters addressed in the complaint. The CRCC also conducts reviews of specified RCMP activities, reports to provinces which contract RCMP services, conducts research, program outreach and public education, and provides independent observers to investigations of serious incidents involving RCMP members.",1,1,0
+"PCC-ISS00","PCC","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "PCC-SO1999","PCC","Internal Services","",0,0,1
+"PCO-BWW00","PCO","Serve the Prime Minister and Cabinet","",1,1,0
+"PCO-ISS00","PCO","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "PCO-SO1051","PCO","The Government's agenda and decision making are supported and implemented and the institutions of government are supported and maintained","",0,0,0
 "PCO-SO1999","PCO","Internal Services","",0,0,1
+"PHAC-BVP00","PHAC","Health Promotion and Chronic Disease Prevention","",1,1,0
+"PHAC-BVQ00","PHAC","Infectious Disease Prevention and Control","",1,1,0
+"PHAC-BVR00","PHAC","Health Security","",1,1,0
+"PHAC-ISS00","PHAC","Internal Services","",1,1,1
 "PHAC-SO1071","PHAC","Protecting Canadians and empowering them to improve their health","",0,0,0
 "PHAC-SO1072","PHAC","Canada is able to promote health, reduce health inequalities, and prevent and mitigate disease and injury","",0,0,0
 "PHAC-SO1999","PHAC","Internal Services","",0,0,1
@@ -345,6 +425,8 @@
 "PMPRB-SO1999","PMPRB","Internal Services","",0,0,1
 "PPP-SO1041","PPP","Transform Canada into a leader for public-private partnerships (P3)","",0,0,0
 "PPS-SO1011","PPS","Physical security of Parliamentarians, employees, visitors, the premises or parts of premises that form part of the parliamentary Precinct and any assets located within or events that take place therein, and of Parliament Hill","",0,0,0
+"PSC-BWB00","PSC","Public Service Hiring and Non-partisanship","",1,1,0
+"PSC-ISS00","PSC","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "PSC-SO1091","PSC","A highly competent, non-partisan and representative public service, able to provide service in both official languages, in which appointments are based on merit and the values of fairness, access, representativeness and transparency","",0,0,0
 "PSC-SO1999","PSC","Internal Services","",0,0,1
 "PSEP-SO1081","PSEP","A safe and resilient Canada","",0,0,0
@@ -353,11 +435,11 @@
 "PSSRB-SO1999","PSSRB","Internal Services","",0,0,1
 "PSST-SO1111","PSST","Fair and impartial resolution of disputes related to internal appointments and lay offs in the federal public service","",0,0,0
 "PSST-SO1999","PSST","Internal Services","",0,0,1
-"RCMP-AYO00","RCMP","Criminal activity affecting Canadians is reduced","Under the authority of the RCMP Act, this Program provides Canadians with policing services at the federal, provincial and municipal levels and within Aboriginal communities. As described in the RCMP Act, these services include all duties that are assigned to peace officers in relation to: the preservation of the peace, the prevention of crime and of offences against the laws of Canada and the laws in force in any province in which they may be employed, and the apprehension of criminals and offenders and others who may be lawfully taken into custody; the execution of all warrants, and performing all duties and services in relation thereto, that may, under the RCMP Act or the laws of Canada or the laws in force in any province, be lawfully executed and performed by peace officers; and, performing other duties and functions as are prescribed by the Governor in Council or the Commissioner. This Program contributes to a safe and secure Canada by providing general law enforcement activities, as well as education and awareness activities delivered by employees of the RCMP to the public, businesses and other agencies/organizations within Canada. The RCMP’s education and awareness activities, such as information sessions on crime prevention, national security, financial crime, and drugs and organized crime, are aimed at reducing victimization of Canadians. This Program also ensures the protection of designated persons and security at major events, which in turn mitigates any potential threats to Canada’s population. Finally, the Program delivers a high level of technical and operational support to the Canadian law enforcement community. Taken together, these activities ensure the RCMP reaches its overarching goal of reducing criminal activity affecting Canadians.",1,1,0
-"RCMP-AYR00","RCMP","Criminal activity affecting Canadians is reduced","This Program provides the Canadian law enforcement community with the necessary scientific, technical, investigative and educational support to deliver proactive, intelligence-based policing and law enforcement services to their respective communities and partners. Additionally, this Program provides educational opportunities to members of the Canadian law enforcement community to enable them to develop their skills, thus increasing their effectiveness in contributing to a safer Canada.",1,1,0
-"RCMP-HGD00","RCMP","Canada's police provide international collaboration and assistance while maintaining a rich police heritage nationally","Under authority of the RCMP Act, this Program furthers Canada’s global peace and security agenda by cooperating with and supporting the international law enforcement community, thereby ensuring that both Canadians and the global community are safer. This Program addresses the transnational scope of crime by building relationships with international policing partners and by participating in the INTERPOL global information sharing network. Additionally, the RCMP actively participates in multiple missions abroad in a peacekeeping role and provides support to nations at risk to build their law enforcement capacity.",1,1,0
-"RCMP-HGE00","RCMP","Canada's police provide international collaboration and assistance while maintaining a rich police heritage nationally","In order to protect the RCMP’s internationally recognized image, reputation and rich heritage, this Program works to promote the positive image of the RCMP while building relationships with domestic and international law enforcement, government and community partners. The Program provides advice and analysis to internal and external clients, including federal, provincial and municipal partners, academic institutions, Royal Household representatives, and non-government organizations, regarding appropriate ceremonial features of special events and occurrences (e.g., Olympics, expos, summits, police officer funerals).Through the activities of this Program, the RCMP contributes to Canada’s vibrant culture and heritage.",1,1,0
-"RCMP-HGF00","RCMP","Incomes are secure for RCMP members and their survivors affected by disability or death","This Program ensures that RCMP employees and their families are provided income security at their pension or in the event of disability or death, and that an appropriate level of support is afforded to those who are affected by circumstances beyond their control and as a result of their employment with the RCMP. The activities within this Program are regulated by either the terms and conditions of the grant or are statutory payments, for example, the RCMP Pension Continuation Act payments.",1,1,0
+"RCMP-AYO00","RCMP","Police Operations","Under the authority of the RCMP Act, this Program provides Canadians with policing services at the federal, provincial and municipal levels and within Aboriginal communities. As described in the RCMP Act, these services include all duties that are assigned to peace officers in relation to: the preservation of the peace, the prevention of crime and of offences against the laws of Canada and the laws in force in any province in which they may be employed, and the apprehension of criminals and offenders and others who may be lawfully taken into custody; the execution of all warrants, and performing all duties and services in relation thereto, that may, under the RCMP Act or the laws of Canada or the laws in force in any province, be lawfully executed and performed by peace officers; and, performing other duties and functions as are prescribed by the Governor in Council or the Commissioner. This Program contributes to a safe and secure Canada by providing general law enforcement activities, as well as education and awareness activities delivered by employees of the RCMP to the public, businesses and other agencies/organizations within Canada. The RCMP’s education and awareness activities, such as information sessions on crime prevention, national security, financial crime, and drugs and organized crime, are aimed at reducing victimization of Canadians. This Program also ensures the protection of designated persons and security at major events, which in turn mitigates any potential threats to Canada’s population. Finally, the Program delivers a high level of technical and operational support to the Canadian law enforcement community. Taken together, these activities ensure the RCMP reaches its overarching goal of reducing criminal activity affecting Canadians.",1,1,0
+"RCMP-AYR00","RCMP","Canadian Law Enforcement Services","This Program provides the Canadian law enforcement community with the necessary scientific, technical, investigative and educational support to deliver proactive, intelligence-based policing and law enforcement services to their respective communities and partners. Additionally, this Program provides educational opportunities to members of the Canadian law enforcement community to enable them to develop their skills, thus increasing their effectiveness in contributing to a safer Canada.",1,1,0
+"RCMP-HGD00","RCMP","International Policing Operations","Under authority of the RCMP Act, this Program furthers Canada’s global peace and security agenda by cooperating with and supporting the international law enforcement community, thereby ensuring that both Canadians and the global community are safer. This Program addresses the transnational scope of crime by building relationships with international policing partners and by participating in the INTERPOL global information sharing network. Additionally, the RCMP actively participates in multiple missions abroad in a peacekeeping role and provides support to nations at risk to build their law enforcement capacity.",1,1,0
+"RCMP-HGE00","RCMP","Canadian Police Culture and Heritage","In order to protect the RCMP’s internationally recognized image, reputation and rich heritage, this Program works to promote the positive image of the RCMP while building relationships with domestic and international law enforcement, government and community partners. The Program provides advice and analysis to internal and external clients, including federal, provincial and municipal partners, academic institutions, Royal Household representatives, and non-government organizations, regarding appropriate ceremonial features of special events and occurrences (e.g., Olympics, expos, summits, police officer funerals).Through the activities of this Program, the RCMP contributes to Canada’s vibrant culture and heritage.",1,1,0
+"RCMP-HGF00","RCMP","Transfer Payments","This Program ensures that RCMP employees and their families are provided income security at their pension or in the event of disability or death, and that an appropriate level of support is afforded to those who are affected by circumstances beyond their control and as a result of their employment with the RCMP. The activities within this Program are regulated by either the terms and conditions of the grant or are statutory payments, for example, the RCMP Pension Continuation Act payments.",1,1,0
 "RCMP-ISS00","RCMP","Internal Services","",1,1,1
 "RCMP-SO1999","RCMP","Internal Services","",0,0,1
 "RPSDP-SO1112","RPSDP","Fair and impartial resolution of disputes related to internal appointments and lay offs in the federal public service","",0,0,0
@@ -376,6 +458,8 @@
 "SEN-SO1281","SEN","To provide the best possible environment for Senators to effectively contribute to federal legislation and public policy issues in the best interest of all Canadians","",0,0,0
 "SHARE-SO1201","SHARE","Modern, reliable, secure and cost-effective information technology (IT) infrastructure services to support government priorities and program delivery","",0,0,0
 "SHARE-SO1999","SHARE","Internal Services","",0,0,1
+"SIRC-BWY00","SIRC","Investigations of Canadian Security Intelligence Services' operational activities","",1,1,0
+"SIRC-ISS00","SIRC","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "SIRC-SO1181","SIRC","Canadian Security Intelligence Service performs its duties and functions in accordance with the law, policy and ministerial direction","",0,0,0
 "SIRC-SO1999","SIRC","Internal Services","",0,0,1
 "SSHRC-BNT00","SSHRC","Funding Social Sciences and Humanities Research and Training","",1,1,0
@@ -389,14 +473,18 @@
 "SWC-SO0931","SWC","Equality between women and men is promoted and advanced in Canada","",0,0,0
 "SWC-SO0932","SWC","Equality for women and their full participation in the economic, social and democratic life of Canada","",0,0,0
 "SWC-SO1999","SWC","Internal Services","",0,0,1
-"TBC-BXA00","TBC","Spending Oversight","",0,1,0
-"TBC-BXB00","TBC","Administrative Leadership","",0,1,0
-"TBC-BXC00","TBC","Employer","",0,1,0
-"TBC-BXD00","TBC","Regulatory Oversight","",0,1,0
-"TBC-ISS00","TBC","Internal Services","",0,1,1
+"TBC-BXA00","TBC","Spending Oversight","",1,1,0
+"TBC-BXB00","TBC","Administrative Leadership","",1,1,0
+"TBC-BXC00","TBC","Employer","",1,1,0
+"TBC-BXD00","TBC","Regulatory Oversight","",1,1,0
+"TBC-ISS00","TBC","Internal Services","",1,1,1
 "TBC-SO1311","TBC","Government is well managed and accountable, and resources are allocated to achieve results","",0,0,0
 "TBC-SO1312","TBC","Good governance and sound stewardship to enable efficient and effective service to Canadians","",0,0,0
 "TBC-SO1999","TBC","Internal Services","",0,0,1
+"TC-BTW00","TC","Safe and Secure Transportation System","",1,1,0
+"TC-BTX00","TC","Green and Innovative Transportation System","",1,1,0
+"TC-BTY00","TC","Efficient Transportation System","",1,1,0
+"TC-ISS00","TC","Internal Services","",1,1,1
 "TC-SO1291","TC","A Clean Transportation System","",0,0,0
 "TC-SO1292","TC","A Safe and Secure Transportation System","",0,0,0
 "TC-SO1293","TC","An Efficient Transportation System","",0,0,0
@@ -404,19 +492,21 @@
 "TOUR-SO0381","TOUR","Canadian economy benefits from strong tourism demand from Canadian Tourism Commission's markets","",0,0,0
 "TRC-SO0651","TRC","Disclosure and recognition of the truth regarding Indian Residential Schools furthers healing and reconciliation for the individuals and communities affected","",0,0,0
 "TRC-SO1999","TRC","Internal Services","",0,0,1
-"VAC-BWI00","VAC","BWI01","",1,1,0
-"VAC-BWJ00","VAC","BWJ01","",1,1,0
-"VAC-BWK00","VAC","BWK01","",1,1,0
+"VAC-BWI00","VAC","Benefits, Services and Support","",1,1,0
+"VAC-BWJ00","VAC","Commemoration","",1,1,0
+"VAC-BWK00","VAC","Veterans Ombudsman","",1,1,0
 "VAC-ISS00","VAC","Internal Services","",1,1,1
 "VAC-SO1321","VAC","Canadians remember and demonstrate their recognition of all those who served in Canada's efforts during war, military conflict and peace","",0,0,0
 "VAC-SO1322","VAC","Financial, physical and mental well being of eligible Veterans","",0,0,0
 "VAC-SO1323","VAC","Veterans' rights to services and benefits that address their needs are considered by the Veterans Affairs Portfolio","",0,0,0
 "VAC-SO1999","VAC","Internal Services","",0,0,1
 "VIA-SO1341","VIA","A national passenger rail transportation service that is safe, secure, efficient, reliable, and environmentally sustainable and that meets the needs of travellers in Canada","",0,0,0
-"VRAB-BWL00","VRAB","BWL01","",1,1,0
+"VRAB-BWL00","VRAB","Appeals","",1,1,0
 "VRAB-ISS00","VRAB","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "VRAB-SO1331","VRAB","An independent and fair appeal process for disability pension, award and allowance decisions made by Veterans Affairs Canada","",0,0,0
 "WDBA-SO1361","WDBA","A safe, secure, and efficient international crossing for commercial and passenger traffic across the Windsor-Detroit Bridge","",0,0,0
+"WDO-BNW00","WDO","Economic development in western Canada","",1,1,0
+"WDO-ISS00","WDO","Internal Services","Internal Services are those groups of related activities and resources that the Federal Government considers to be services in support of programs and/or required to meet corporate obligations of an organization. Internal Services refer to the activities and resources of the ten distinct services that support program delivery in the organization, regardless of the Internal Services delivery model in a department as per Section 6.2 of the Guide on Recording and Reporting of Internal Services Expenditures.",1,1,1
 "WDO-SO1351","WDO","A growing and diversified western Canadian economy","",0,0,0
 "WDO-SO1352","WDO","The western Canadian economy is developed and diversified","",0,0,0
 "WDO-SO1999","WDO","Internal Services","",0,0,1
