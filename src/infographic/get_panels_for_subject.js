@@ -130,7 +130,7 @@ const get_dept_panels = subject => {
     ],
     related: [
       "portfolio_structure_related",
-      "related_tags",
+      "tags_of_interest",
     ],
     all_data: _.nonEmpty(subject.tables) && [
       "links_to_rpb",
@@ -145,7 +145,6 @@ const get_program_panels = subject => {
       "dead_program_warning",
       'description',
       'program_fed_structure',
-      'program_tags',
     ],
     financial: [
       'dead_program_warning',
@@ -170,7 +169,7 @@ const get_program_panels = subject => {
     ],
     related: [
       "related_program_structure",
-      'program_tags',
+      'tags_of_interest',
     ],
   };
 
@@ -183,7 +182,6 @@ const get_crso_panels = subject => {
       "dead_crso_warning",
       'description',
       'crso_in_gov',
-      'crso_tags',
     ],
     financial: [
       'dead_crso_warning',
@@ -202,7 +200,7 @@ const get_crso_panels = subject => {
     ],
     related: [
       'crso_links_to_other_crso',
-      'crso_tags',
+      'tags_of_interest',
     ],
   };
 

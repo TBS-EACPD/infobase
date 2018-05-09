@@ -174,12 +174,12 @@ crso_links_to_prg_title:
   en: Programs under this {{cr_or_so subject}}
   fr: Programmes sous {{ce_crso subject}}
 
-crso_tags_intro:
+tags_of_interest_sentence:
   transform: [handlebars,markdown]
   en: |
-    **{{name}}** supports the following areas of interest (tags)
+    **{{subj_name subject}}** supports the following areas of interest (tags)
   fr: |
-    **{{name}}** est lié aux domaines d'intérêt (étiquettes) suivants
+    **{{subj_name subject}}** est lié aux domaines d'intérêt (étiquettes) suivants
 
 crso_tags_title:
   transform: [handlebars]
