@@ -62,7 +62,7 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
                       )}
                     </ul>
                   ),
-                }
+                },
               ]),
                 
             },
