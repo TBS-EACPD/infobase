@@ -46,7 +46,7 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
             id: tag.guid,
             data: {
               name: tag.name,
-              resources: get_resources(tag),
+              resources: _.includes(['WWH', 'MLT'], hierarchy_scheme) ? null : get_resources(tag),
               subject: tag,
               defs: tag.is_lowest_level_tag && _.compact([
                 !_.isEmpty(tag.description) && {
@@ -123,7 +123,7 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
             .map( prog => ({
               id: `${parent_id}-${prog.guid}`,
               data: {
-                name: `${prog.name} (${prog.dept.fancy_acronym})`,
+                name: `${prog.name} (${prog.dept.fancy_acronym || prog.dept.name})`,
                 subject: prog,
                 resources: get_resources(prog),
                 defs: [
