@@ -56,7 +56,7 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
                 tag.is_m2m && !_.isEmpty(tag.related_tags()) && {
                   term: text_maker('related_tags'),
                   def: (
-                    <ul className="list-unstyled">
+                    <ul className="ExplorerNode__SmallTextList">
                       {_.map(tag.related_tags(), related_tag => 
                         <li key={related_tag.id}> <a href={infograph_href_template(related_tag)} > {related_tag.name} </a> </li> 
                       )}
