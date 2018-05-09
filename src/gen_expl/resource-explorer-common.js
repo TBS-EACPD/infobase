@@ -29,7 +29,7 @@ export const get_col_defs = ({doc}) => [
       />
     ),
     get_val: node => _.get(node, "data.resources.spending"),
-    val_display: val => <Format type="compact1" content={val} />,
+    val_display: val => _.isNumber(val) ? <Format type="compact1" content={val} /> : null,
   },
   {
     id: "ftes",
@@ -45,7 +45,7 @@ export const get_col_defs = ({doc}) => [
       />
     ),
     get_val: node => _.get(node, "data.resources.ftes"),
-    val_display: val => <Format type="big_int_real" content={val} />,
+    val_display: val => _.isNumber(val) ? <Format type="big_int_real" content={val} /> : null,
   },
 ];
 
