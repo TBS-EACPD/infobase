@@ -69,6 +69,9 @@ const HierarchySelectionItem = ({title, text, active, url }) => (
 );
 
 
+const dp_only_schemes = ["WWH","MLT","CCOFOG"];
+
+
 const children_grouper = (node, children) => {
   if(node.root){
     return [{node_group: children}];
@@ -281,7 +284,7 @@ class ExplorerPage extends React.Component {
       <div className="tabbed_content">
         <ul className="tabbed_content_label_bar">
           <li className={classNames("tab_label", doc==="drr16" && "active_tab")} onClick={()=> this.refs.drr166_link.click()}>
-            <a href={`#resource-explorer/${hierarchy_scheme}/drr166`} role="button" aria-pressed={doc === "drr16"} className="tab_label_text" ref="drr166_link">
+            <a href={`#resource-explorer/${_.includes(dp_only_schemes, hierarchy_scheme) ? "min" : hierarchy_scheme }/drr166`} role="button" aria-pressed={doc === "drr16"} className="tab_label_text" ref="drr166_link">
               <TextMaker text_key="DRR_resources_option_title" />
             </a>
           </li>
