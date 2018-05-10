@@ -42,7 +42,7 @@
 
 
 /* this is the clickable portion, what is seen when collapsed */
-.ExplorerNode__RowContainer {
+.ExplorerNode__RowContainer:not(.ExplorerNode__RowContainer--no-click) {
   cursor: pointer;
 }
 

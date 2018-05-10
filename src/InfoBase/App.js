@@ -14,7 +14,8 @@ import { Home } from '../home/home.js';
 import { TooltipActivator } from '../glossary/Tooltips';
 import { PotentialSurveyBox } from '../core/survey_link';
 import { EasyAccess } from '../core/EasyAccess';
-import { DevStuff } from '../components/ExplorerComponents.js';
+
+import { DevStuff } from '../DiffView/DiffView.js';
 
 const LazyGraphRoute = ComponentLoader(async () => {
   const { GraphInventory } = await import('../graph_route/graph_route.js');

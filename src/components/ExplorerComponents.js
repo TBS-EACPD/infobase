@@ -237,6 +237,9 @@ export const ExplorerNode = ({
     id,
     isExpanded,
     data,
+    data: {
+      noExpand,
+    },
   },
   depth,
 }) => (
@@ -246,18 +249,20 @@ export const ExplorerNode = ({
   >
     <div className={classNames("ExplorerNode", mod_class)}>
       <div className="ExplorerNode__ExpanderContainer">
-        <button
-          className={classNames("ExplorerNode__Expander", window.is_a11y_mode && "ExplorerNode__Expander--a11y-compliant")}
-          onClick={()=>onClickExpand(node)}
-          aria-label={trivial_text_maker(isExpanded ? "select_to_collapse_a11y" : "select_to_expand_a11y") }
-        >
-          { isExpanded ? "▼" : "►" }
-        </button>
+        {!noExpand && 
+          <button
+            className={classNames("ExplorerNode__Expander", window.is_a11y_mode && "ExplorerNode__Expander--a11y-compliant")}
+            onClick={()=>onClickExpand(node)}
+            aria-label={trivial_text_maker(isExpanded ? "select_to_collapse_a11y" : "select_to_expand_a11y") }
+          >
+            { isExpanded ? "▼" : "►" }
+          </button>
+        }
       </div>
       <div className="ExplorerNode__ContentContainer">
         <div
-          className="ExplorerNode__RowContainer"
-          onClick={()=>onClickExpand(node)}
+          className={classNames("ExplorerNode__RowContainer", noExpand && "ExplorerNode__RowContainer--no-click")}
+          onClick={noExpand ? null : ()=>onClickExpand(node)}
         >
           <div className="ExplorerRow">
             {_.map(column_defs, ({id, width, get_val, val_display },ix) =>
