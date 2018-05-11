@@ -90,13 +90,6 @@ const common_lookups_fr = _.map(
   public_dir_prefixer
 );
 
-const common_png = [
-  //small scma icons below home page search bar
-  'src/home/results.png',
-  'src/home/expend.png',
-  'src/home/people.png',
-];
-
 const common_svg = [
   //top left corner brand
   'src/InfoBase/sig-en.svg',
@@ -115,6 +108,11 @@ const common_svg = [
   'src/panels/intro_graphs/Graph.svg',
   'src/panels/intro_graphs/Money.svg',
   'src/panels/intro_graphs/People.svg',
+
+  //small scma icons below home page search bar
+  'src/home/results.svg',
+  'src/home/expend.svg',
+  'src/home/people.svg',
 ];
 
 const IB_tables = [
@@ -159,7 +157,6 @@ var IB = {
   lookups_en  : common_lookups.concat(common_lookups_en),
   lookups_fr  : common_lookups.concat(common_lookups_fr),
   csv: csv_from_table_names(IB_tables).concat(other_csvs),
-  png: common_png,
   svg: common_svg,
   js: external_deps_names,
   other: [ 'src/robots/robots.txt','src/common_css/container-page.css'],

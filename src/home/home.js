@@ -1,6 +1,6 @@
 import "./home.ib.yaml";
 import './home.scss';
-import './home-pngs.css';
+import './home-svg.css';
 import get_home_content from './home-data.js';
 import { log_standard_event } from '../core/analytics.js';
 import { DpComingSoonHomeComponent } from '../components/dp-coming-soon.js'
