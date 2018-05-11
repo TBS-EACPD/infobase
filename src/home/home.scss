@@ -334,13 +334,12 @@
   &:before {
     content: "";
     position: absolute;
-    top: -37px;
-    left: 51%;
+    top: -34px;
+    left: 50%;
     transform: translate(-50%,-52px);
-    width: 90px;
-    height: 90px;
+    width: 70px;
+    height: 70px;
     z-index: 1;
-    background-size: 80px;
     background-repeat: no-repeat;
   }
 }
