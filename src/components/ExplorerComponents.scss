@@ -52,7 +52,10 @@
   display: flex;
   justify-content: center;
   align-items: flex-start; 
-  cursor:pointer;
+
+  &:not(.ExplorerNode__ExpanderContainer--no-expand){
+    cursor:pointer;
+  }
 }
 
 /* to be combined with .button-unstyled */

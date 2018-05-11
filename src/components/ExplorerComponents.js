@@ -248,7 +248,7 @@ export const ExplorerNode = ({
     className="ExplorerNodeContainer"
   >
     <div className={classNames("ExplorerNode", mod_class)}>
-      <div className="ExplorerNode__ExpanderContainer">
+      <div className={classNames("ExplorerNode__ExpanderContainer", noExpand && "ExplorerNode__ExpanderContainer--no-expand")}>
         {!noExpand && 
           <button
             className={classNames("ExplorerNode__Expander", window.is_a11y_mode && "ExplorerNode__Expander--a11y-compliant")}
@@ -368,7 +368,7 @@ const compute_col_styles = createSelector(_.identity, col_defs => {
     .map( ({id, width, textAlign}, ix) => {
       let marginRight = null;
       let marginLeft = null;
-      let padding = "0 5px";
+      let padding = "0 5px 0 0";
       let flex = `0 0 ${width}px`;
       if(ix===0){
         flex = `1 1 ${width}px`;  
