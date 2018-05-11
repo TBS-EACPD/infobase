@@ -284,7 +284,7 @@ function build_proj(PROJ){
   fse.copySync('external-dependencies/cioscripts', dir+'/cioscripts', {clobber: true});
   fse.copySync('external-dependencies/ajax', dir+'/ajax', {clobber: true});
   //clobber overwrites old directory when copying
-  ['png', 'svg','js','csv'].forEach(function(type){
+  ['svg','js','csv'].forEach(function(type){
     var this_dir = dir+'/'+type;
     make_dir_if_exists(this_dir);
     PROJ[type].forEach(function(f_name){
