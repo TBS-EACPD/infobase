@@ -333,13 +333,12 @@
 .finance-box, .people-box, .results-box {
   &:before {
     content: "";
-    display: block;
     position: absolute;
     top: -37px;
     left: 51%;
     transform: translate(-50%,-52px);
     width: 90px;
-    height: 75px;
+    height: 90px;
     z-index: 1;
     background-size: 80px;
     background-repeat: no-repeat;
