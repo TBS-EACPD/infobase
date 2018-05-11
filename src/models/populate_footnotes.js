@@ -1,7 +1,6 @@
-import { get_static_url } from '../core/static_url';
+import { get_static_url, make_request } from '../core/request_utils.js';
 import { Subject } from './subject.js';
 import FootNote from './footnotes.js';
-import { fetch_and_inflate } from '../core/utils.js';
 import { run_template } from './text.js';
 
 let _loaded_dept_or_tag_codes = {};
@@ -66,7 +65,7 @@ function load_footnotes_bundle(subject){
   if(subject){
     switch(subject.level){
       case 'gov':
-        return $.Deferred().resolve();
+        return Promise.resolve()
       case 'dept':
         subject_code = subject.acronym;
         break;
@@ -94,20 +93,14 @@ function load_footnotes_bundle(subject){
   }
 
   if(_loaded_dept_or_tag_codes[subject_code] || _loaded_dept_or_tag_codes['all']){
-    return $.Deferred().resolve();
+    return Promise.resolve()
   }
 
-  return (
-    window.binary_download && !window.isIE() ? 
-    fetch_and_inflate(get_static_url(`footnotes/fn_${lang}_${subject_code}_min.html`)) :
-    $.ajax({url : 
-      get_static_url(`footnotes/fn_${lang}_${subject_code}.html`),
-    })
-  ).then( csv_str => {
-
-    populate_footnotes_info(csv_str);
-    _loaded_dept_or_tag_codes[subject_code] = true;
-  });
+  return make_request(get_static_url(`footnotes/fn_${lang}_${subject_code}.html`))
+    .then( csv_str => {
+      populate_footnotes_info(csv_str);
+      _loaded_dept_or_tag_codes[subject_code] = true;
+    });
 
 }
 

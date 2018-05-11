@@ -142,8 +142,8 @@ function create_config({
   const new_output = _.clone(output);
   if(CDN_URL !== "."){
     new_output.crossOriginLoading = "anonymous";
-    new_output.publicPath = `${CDN_URL}/`;
   }
+  new_output.publicPath = `${CDN_URL}/app/`;
 
   return {
     name: language,

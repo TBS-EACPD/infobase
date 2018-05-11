@@ -152,25 +152,6 @@ class Select {
 
 export { Select };
 
-export const fetch_and_inflate = function fetchArrayBuffer(url){
-  var ret = $.Deferred(); 
-  const oReq = new XMLHttpRequest();
-  oReq.open("GET", url, true);
-  oReq.responseType = "arraybuffer"; //this is the reason we're not using $.ajax
-  oReq.onload = function (oEvent) {
-    const arrayBuffer = oReq.response; // Note: not oReq.responseText
-    if (arrayBuffer && !window.isIE()) {
-      const inflated =  new TextDecoderLite("utf-8").decode(pako.inflate(arrayBuffer))
-      ret.resolve(inflated);
-    } else {
-      ret.reject("something went wrong");
-    }
-  };
-  oReq.send(null);
-
-  return ret;
-};
-
 export const escapeRegExp = function(str) {
   /* eslint-disable no-useless-escape */
   return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
@@ -184,4 +165,4 @@ export const shallowEqualObjectsOverKeys = (obj1, obj2, keys_to_compare) => _.re
 
 
 
-window._UTILS = { abbrev, make_unique_func, find_parent, make_unique, Select, fetch_and_inflate, escapeRegExp, escapeSingleQuotes, shallowEqualObjectsOverKeys };
+window._UTILS = { abbrev, make_unique_func, find_parent, make_unique, Select, escapeRegExp, escapeSingleQuotes, shallowEqualObjectsOverKeys };

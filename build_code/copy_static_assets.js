@@ -5,7 +5,6 @@
 const glob = require('glob');
 const fse = require('fs-extra');
 const fs = require("fs");
-const cp = require("child_process");
 const _ = require("lodash");
 const Handlebars = require('handlebars');
 const d3_dsv = require('d3-dsv');
@@ -171,7 +170,8 @@ var IB = {
   svg: common_svg,
   png: common_png,
   js: external_deps_names,
-  other: [ 'src/robots/robots.txt','src/common_css/container-page.css'],
+  app_files: ['src/common_css/container-page.css'],
+  other: [ 'src/robots/robots.txt'],
 };
 
 function get_index_pages(){
@@ -218,12 +218,13 @@ function get_lookup_name(file_name){
 
 function build_proj(PROJ){
   
-  const dir = 'build/'+PROJ.name
+  const dir = 'build/InfoBase';
+  const app_dir = `${dir}/app`
   const results_dir = `${dir}/results`;
   const footnotes_dir = `${dir}/footnotes`
 
   _.each(
-    ['build', dir, results_dir, footnotes_dir], 
+    ['build', dir, app_dir, results_dir, footnotes_dir], 
     name => {
       make_dir_if_exists(name)
     }
@@ -264,22 +265,20 @@ function build_proj(PROJ){
     } = get_footnote_file_defs(parsed_bilingual_models, lang);
 
     _.each( _.merge(dept_footnotes, tag_footnotes), (file_str,subj_id)=>{
-      const uncompressed_file_name =`${footnotes_dir}/fn_${lang}_${subj_id}.html`;
-      const compressed_file_name = `${footnotes_dir}/fn_${lang}_${subj_id}_min.html`;
-      fs.writeFileSync(uncompressed_file_name, file_str);
-      cp.execSync(`gzip -c ${uncompressed_file_name} > ${compressed_file_name}`);
+      fs.writeFileSync(
+        `${footnotes_dir}/fn_${lang}_${subj_id}.html`,
+        file_str
+      );
 
     })
 
-    const all_fn_uncompressed_url = `${footnotes_dir}/fn_${lang}_all.html`;
-    const all_fn_compressed_url = `${footnotes_dir}/fn_${lang}_all_min.html`;
-    fs.writeFileSync(all_fn_uncompressed_url,all_footnotes);
-    cp.execSync(`gzip -c ${all_fn_uncompressed_url} > ${all_fn_compressed_url}`);
+    fs.writeFileSync(
+      `${footnotes_dir}/fn_${lang}_all.html`,
+      all_footnotes
+    );
 
-    const est_fn_uncompressed_url = `${footnotes_dir}/fn_${lang}_estimates.html`;
-    const est_fn_compressed_url = `${footnotes_dir}/fn_${lang}_estimates_min.html`;
-    fs.writeFileSync(est_fn_uncompressed_url,estimate_footnotes);
-    cp.execSync(`gzip -c ${est_fn_uncompressed_url} > ${est_fn_compressed_url}`);
+    const est_fn_url = `${footnotes_dir}/fn_${lang}_estimates.html`;
+    fs.writeFileSync(est_fn_url,estimate_footnotes);
 
     // combine all the lookups into one big JSON blob
     // also, create a compressed version for modern browsers
@@ -292,7 +291,6 @@ function build_proj(PROJ){
     ).toString("utf8");
 
     fs.writeFileSync(`${dir}/lookups_${lang}.html`,lookup_json_str);
-    cp.execSync(`gzip -c ${dir}/lookups_${lang}.html > ${dir}/lookups_${lang}_min.html`);
 
   });
 
@@ -310,11 +308,13 @@ function build_proj(PROJ){
 
       console.log('copying:' + small_name);
       fse.copySync(f_name, this_dir+'/'+small_name, {clobber: true});
-      if (type === "csv"){
-        cp.execSync(`gzip -c ${dir}/csv/${small_name}> ${dir}/csv/${small_name}_min.html`);
-      }
     });
-  }); 
+  });
+  PROJ.app_files.forEach(function(f_name){
+    var small_name = f_name.split('/').pop();
+    console.log('copying:' + small_name);
+    fse.copySync(f_name, app_dir+'/'+small_name, {clobber:true});
+  });
   PROJ.other.forEach(function(f_name){
     var small_name = f_name.split('/').pop();
     console.log('copying:' + small_name);

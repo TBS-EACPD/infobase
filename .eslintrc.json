@@ -64,8 +64,6 @@
     "Spinner":true,
     "accounting":true,
     "lang":true,
-    "TextDecoderLite": true,
-    "pako":true,
     "ga":true,
     "APPLICATION_LANGUAGE":true,
     "SHA":true,

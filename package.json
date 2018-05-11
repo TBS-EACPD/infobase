@@ -78,7 +78,8 @@
     "style-loader": "^0.12.3",
     "testcafe": "^0.20.0",
     "webfontloader": "^1.6.28",
-    "webpack": "^4.8.3"
+    "webpack": "^4.8.3",
+    "whatwg-fetch": "^2.0.4"
   },
   "devDependencies": {},
   "scripts": {

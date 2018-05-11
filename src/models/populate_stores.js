@@ -1,22 +1,16 @@
-import { get_static_url } from '../core/static_url.js';
+import { get_static_url, make_request } from "../core/request_utils.js";
 import { GlossaryEntry } from './glossary.js';
-import { fetch_and_inflate } from '../core/utils.js';
 import { populate_global_footnotes } from './populate_footnotes.js';
 import { Subject } from './subject.js';
 import { trivial_text_maker } from './text';
 
 const { Ministry, Program, Dept, Tag, CRSO, Minister, InstForm } = Subject;
 
-export const populate_stores = async function(){
-  const text = await (
-    window.binary_download && !window.isIE() ? 
-    fetch_and_inflate(get_static_url(`lookups_${window.lang}_min.html`)) :
-    $.ajax({
-      url : get_static_url(`lookups_${window.lang}.html`),
-    })
-  )
-  
-  return process_lookups(JSON.parse(text));
+export const populate_stores = function(){
+  return make_request(get_static_url(`lookups_${window.lang}.html`))
+    .then( text => {
+      process_lookups(JSON.parse(text));
+    });
 };
 
 function process_lookups(data){

@@ -14,11 +14,13 @@ if(typeof CDN_URL !== "undefined"){
 
 
 
+import 'whatwg-fetch';
 import '../common_css/site.scss';
 import '../common_css/boostrap-fixes-extensions.scss';
 import '../common_css/grid-system.scss';
 import '../common_css/flexbox-grid.css';
 import '../common_css/tables.scss';
+
 
 //3rd party libraries injected into global scope
 //note that these next few lines must be run before anything using lodash, handlebars, etc.

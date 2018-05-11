@@ -10,8 +10,7 @@ const { BudgetMeasure } = Subject;
 
 // given an array of tables, returns a promise when they are all loaded.
 function load(table_objs){
-  return $.when.apply( 
-    null,
+  return Promise.all(
     _.chain( table_objs ) 
       .reject( _.property('loaded') ) //ignore tables that are already loaded 
       .map( table => table.load() )
@@ -93,34 +92,34 @@ function ensure_loaded({
   const results_prom = (
     should_load_results ?
       load_results_bundle(subject) :
-      $.Deferred().resolve()
+      Promise.resolve()
   ) 
 
   const result_counts_prom = (
     should_load_result_counts ?
       load_results_counts() :
-      $.Deferred().resolve()
+      Promise.resolve()
   );
 
   const footnotes_prom = (
     footnotes_subject ?
       load_footnotes_bundle(footnotes_subject) :
-      $.Deferred().resolve()
+      Promise.resolve()
   );
 
   const budget_measures_prom = (
     should_load_budget_measures ?
       load_budget_measures() :
-      $.Deferred().resolve()
+      Promise.resolve()
   );
   
-  return $.when(
+  return Promise.all([
     load(table_set),
     results_prom,
     result_counts_prom,
     footnotes_prom,
-    budget_measures_prom
-  );
+    budget_measures_prom,
+  ]);
 
 }
 

@@ -1,16 +1,12 @@
-import { get_static_url } from '../core/static_url.js';
-import { fetch_and_inflate } from '../core/utils.js';
-import { Subject } from './subject';
+import { get_static_url, make_request } from '../core/request_utils';
+import { Subject } from './subject.js';
 
 const { BudgetMeasure } = Subject;
 
 const parse_csv_string = csv_string => _.tail( d3.csvParseRows( _.trim(csv_string) ) );
 
-const load_csv = csv_name => (
-  window.binary_download && !window.isIE() ? 
-    fetch_and_inflate(get_static_url(`csv/${csv_name}.csv_min.html`)) :
-    $.ajax({ url: get_static_url(`csv/${csv_name}.csv`) })   
-).then( csv_string => parse_csv_string(csv_string) );
+const load_csv = csv_name => make_request(get_static_url(`csv/${csv_name}.csv`))
+  .then( csv_string => parse_csv_string(csv_string) );
 
 const populate_budget_measures = (budget_measures, budget_measure_funds) => {
   const name_col_index = window.lang === "en" ? 1 : 2;
@@ -56,10 +52,10 @@ const populate_budget_measures = (budget_measures, budget_measure_funds) => {
 export function load_budget_measures(){
   const measure_prom = load_csv("budget_measure_lookups");
   const funds_prom = load_csv("budget_measure_funds");
-  return $.when(
+  return Promise.all([
     measure_prom,
-    funds_prom
-  ).then( (budget_measure_lookups, budget_measure_funds) => {
+    funds_prom,
+  ]).then( ([budget_measure_lookups, budget_measure_funds]) => {
     populate_budget_measures(budget_measure_lookups, budget_measure_funds);
   });
 }

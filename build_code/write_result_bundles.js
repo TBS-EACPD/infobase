@@ -349,13 +349,10 @@ function write_result_bundles_from_data(obj, dir){
 
     _.each(["en","fr"], lang => {
 
-
-
-      const file_name = `${dir}/results_bundle_${lang}_${key}.html`;
-      const compressed_file_name = `${dir}/results_bundle_${lang}_${key}_min.html`;
-  
-      fs.writeFileSync(file_name, data_to_str(data,lang) ) 
-      cp.execSync(`gzip -c ${file_name} > ${compressed_file_name}`);
+      fs.writeFileSync(
+        `${dir}/results_bundle_${lang}_${key}.html`, 
+        data_to_str(data,lang)
+      )
     })
     
 

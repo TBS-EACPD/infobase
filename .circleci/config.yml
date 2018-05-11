@@ -18,7 +18,7 @@ jobs:
   #    2.3) cache the current node modules by the package-lock.json
   #  3) Build sub-steps:
   #    3.1) check cached builds by branch and revision number, restore if it exists
-  #    3.2) for each of base and the two prod builds, run only if the files they create are missing
+  #    3.2) for the build, run only if a certain file (app-a11y bundle) is missing
   #    3.3) cache the build by branch and revision number
   #  4) Persist everything (project, node_modules, and build) to the workspace, to be available in other jobs in the work flow run
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
@@ -34,6 +34,7 @@ jobs:
       - run: 
           command: |
             [ -e "node_modules" ] || npm ci
+      - run: chmod +x ./.circleci/chmod_scripts.sh
       - save_cache:
           paths:
             - node_modules
@@ -41,15 +42,10 @@ jobs:
       - restore_cache:
           keys:
             - ib-prod-build-{{ .Branch }}-{{ .Revision }}
-      - run: 
+      - run:
           command: |
-            [ -e "build/InfoBase" ] || npm run IB_base
-      - run: 
-          command: |
-            [ -f "build/InfoBase/app-en.min.js" ] || npm run IB_prod_no_watch
-      - run: 
-          command: |
-            [ -f "build/InfoBase/app-a11y-en.min.js" ] || npm run a11y_prod_no_watch
+            [ -f "build/InfoBase/app/app-a11y-en.min.js" ] || ./deploy_build_scripts/build_all.sh
+
       - save_cache:
           paths:
             - build
@@ -96,9 +92,12 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
-      - run: chmod +x ./.circleci/authenticate-gcloud.sh
+      - run: chmod +x ./.circleci/chmod_scripts.sh
+      - run: ./.circleci/chmod_scripts.sh
       - run: ./.circleci/authenticate-gcloud.sh
-      - run: gsutil -m rsync -d -r build/InfoBase gs://ib-static-bucket/InfoBase
+      - run: ./deploy_build_scripts/split_gzip_build.sh
+      - run: ./deploy_build_scripts/push_to_gcloud_bucket.sh
+      
 
 
 # One workflow that runs all three jobs (build -> test -> deploy), each requiring the previous to have passed
@@ -122,3 +121,4 @@ workflows:
             branches:
               only:
                 - master
+                - cdn-gzip

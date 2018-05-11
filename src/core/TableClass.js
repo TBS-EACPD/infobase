@@ -1,4 +1,4 @@
-import { get_static_url } from './static_url.js';
+import { get_static_url, make_request } from './request_utils';
 import { query_adapter } from './tables/queries.js';
 import { 
   attach_dimensions, 
@@ -18,8 +18,8 @@ import { sources as all_sources } from '../metadata/data_sources.js';
 import { 
   make_unique_func, 
   make_unique, 
-  fetch_and_inflate,
 } from './utils.js';
+
 
 const csv_names_by_table_id = _.mapValues( _csv_names_by_table_id, ({url}) => "csv/"+url);
 const { Dept } = Subject;
@@ -356,19 +356,11 @@ export class Table extends mix().with(staticStoreMixin){
     };
   }
   load(){
-    return (
-      window.binary_download && !window.isIE() ? 
-      fetch_and_inflate(get_static_url(`${csv_names_by_table_id[this.id]}_min.html`))
-        .then( csv_string => {
-          this.populate_with_data(csv_string);
-          this.loaded = true;
-        }) :
-      $.ajax(get_static_url(csv_names_by_table_id[this.id]))
-        .then( data => { 
-          this.populate_with_data(data) 
-          this.loaded = true;
-        })
-    );
+    return make_request(get_static_url(csv_names_by_table_id[this.id]))
+      .then( data => { 
+        this.populate_with_data(data) 
+        this.loaded = true;
+      })
   }
   fill_dimension_columns(){
     //wrap it in an instance method 
