@@ -3,7 +3,7 @@ jobs:
   build:
     branches:
       only:
-        - master
+        - testcafe
     docker:
       - image: gcr.io/ib-api-first/ib-client-ci
         auth:
@@ -24,6 +24,8 @@ jobs:
       - run: npm run IB_base
       - run: npm run IB_prod_no_watch
       - run: npm run a11y_prod_no_watch
+      - run: npm run ci_serve
+      - run: npm run ci_test
       - run: chmod +x ./.circleci/authenticate-gcloud.sh
       - run: ./.circleci/authenticate-gcloud.sh
       - run: gsutil -m rsync -d -r build/InfoBase gs://ib-static-bucket/InfoBase

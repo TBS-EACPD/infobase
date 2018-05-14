@@ -44,6 +44,7 @@
     "graphql-tag": "^2.6.0",
     "handlebars": "4.0.11",
     "history": "^4.7.2",
+    "http-server": "^0.8.0",
     "js-yaml": "3.6.1",
     "json-loader": "^0.5.2",
     "jsurl": "^0.1.5",
@@ -72,12 +73,11 @@
     "sass-loader": "^6.0.6",
     "script-loader": "^0.7.0",
     "style-loader": "^0.12.3",
+    "testcafe": "^0.19.2",
     "webfontloader": "^1.6.28",
     "webpack": "^4.8.3"
   },
-  "devDependencies": {
-    "http-server": "^0.8.0"
-  },
+  "devDependencies": {},
   "scripts": {
     "debug_IB_base": "node --inspect-brk build_code/copy_static_assets.js IB",
     "IB_base": "node build_code/copy_static_assets.js IB",
@@ -91,7 +91,10 @@
     "a11y_q_both": "node build_code/webpack_starter.js NO-BABEL BOTH a11y_client",
     "a11y_dev": "node build_code/webpack_starter.js a11y_client BOTH",
     "a11y_prod": "node build_code/webpack_starter.js a11y_client BOTH PROD",
-    "a11y_prod_no_watch": "node build_code/webpack_starter.js a11y_client BOTH PROD NO-WATCH"
+    "a11y_prod_no_watch": "node build_code/webpack_starter.js a11y_client BOTH PROD NO-WATCH",
+    "browser_test": "testcafe chrome tests/",
+    "ci_test": "testcafe 'chrome:/usr/bin/google-chrome:headless —-no-sandbox' tests/",
+    "ci_serve": "http-server -s -a 127.0.0.1 &"
   },
   "authors": [
     "Andrew Gibson",
