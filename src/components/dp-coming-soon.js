@@ -7,7 +7,6 @@ import {
 
 
 const late_depts = [
-  86,
   238,
   136,
   305,
