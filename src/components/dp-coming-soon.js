@@ -39,7 +39,7 @@ export const DpComingSoonHomeComponent = () => {
           _.chain(late_depts)
             .map(dept_code =>  Dept.lookup(dept_code).sexy_name )
             .sortBy() //alphebetical
-            .chunk(2)
+            .chunk(1)
             .map( (group,ix) => 
               <div 
                 key={ix}
