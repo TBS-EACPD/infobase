@@ -89,7 +89,7 @@ class Root extends React.Component {
     Object.assign(this, { store, Container });
 
   }
-  componentWillUpdate(nextProps){
+  UNSAFE_componentWillUpdate(nextProps){
     this.store.dispatch({
       type: "navigate_to_new_state",
       payload: nextProps.state,
@@ -399,7 +399,7 @@ export class ReportBuilder extends React.Component {
       });
     });
   }
-  componentWillMount(){
+  UNSAFE_componentWillMount(){
     const config_str = this.props.match.params.config;
     const state = url_state_selector(config_str);
     if(state.table){
@@ -414,7 +414,7 @@ export class ReportBuilder extends React.Component {
     const new_config_str = nextProps.match.params.config;
     return old_config_str !== new_config_str;
   }
-  componentWillUpdate(nextProps){
+  UNSAFE_componentWillUpdate(nextProps){
     const old_config_str = this.props.match.params.config;
     const old_state = url_state_selector(old_config_str);
     const new_config_str = nextProps.match.params.config;

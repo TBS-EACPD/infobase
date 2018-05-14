@@ -51,7 +51,7 @@ export class App extends React.Component {
       </div>
     );
   }
-  componentWillMount(){
+  UNSAFE_componentWillMount(){
     initialize_analytics();
   }
 }

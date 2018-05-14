@@ -119,15 +119,15 @@ function reset_scroll(){
 }
 
 class InfoGraph_ extends React.Component {
-  componentWillMount(){
+  UNSAFE_componentWillMount(){
     this.loadGraphDeps(this.props);
   }
-  componentWillUpdate(nextProps, nextState){
+  UNSAFE_componentWillUpdate(nextProps, nextState){
     if(nextProps.subject !== this.props.subject){
       reset_scroll();
     }
   }
-  componentWillReceiveProps(nextProps){
+  UNSAFE_componentWillReceiveProps(nextProps){
     if(!shallowEqualObjectsOverKeys(this.props, nextProps, ['subject','bubble','level'])){
       this.loadGraphDeps(nextProps);
     }

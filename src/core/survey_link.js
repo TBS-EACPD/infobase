@@ -64,7 +64,7 @@ function remove_survey_banner(){
 }
 
 export class PotentialSurveyBox extends React.Component {
-  componentWillMount(){
+  UNSAFE_componentWillMount(){
     if(should_add_survey_banner()){
       add_survey_banner();
     }

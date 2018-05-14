@@ -217,10 +217,10 @@ export class GraphInventory extends React.Component {
       this.setState({loading: false})
     })
   }
-  componentWillMount(){
+  UNSAFE_componentWillMount(){
     this.loadDeps(get_derived_props(this.props));
   }
-  componentWillReceiveProps(nextProps){
+  UNSAFE_componentWillReceiveProps(nextProps){
     const old_derived_props = get_derived_props(this.props);
     const new_derived_props = get_derived_props(nextProps);
     if(_.isEqual(old_derived_props, new_derived_props)){

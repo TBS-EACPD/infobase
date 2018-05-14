@@ -43,7 +43,7 @@ export class BudgetMeasuresRoute extends React.Component {
       filtered_chapter_keys: [],
     };
   }
-  componentWillMount(){
+  UNSAFE_componentWillMount(){
     validate_first_column_route_param(this.props.match.params.first_column, this.props.history);
   }
   shouldComponentUpdate(nextProps){

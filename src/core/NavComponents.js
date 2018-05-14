@@ -14,7 +14,7 @@ const {
 let is_initial_markup_cleared = false;
 
 class BreadCrumbs extends React.Component {
-  componentWillMount(){
+  UNSAFE_componentWillMount(){
     //this is hacky, but we really need to make sure this stuff is only removed once. 
     if(!is_initial_markup_cleared){
       document.getElementById("breadcrumb-trail").innerHTML = "";
@@ -56,7 +56,7 @@ class BreadCrumbs extends React.Component {
 class DocumentTitle extends React.Component {
   render(){ return null; }
   componentDidUpdate(){ this._update(); }
-  componentWillMount(){ this._update(); }
+  UNSAFE_componentWillMount(){ this._update(); }
   _update(){
     const { title_str } = this.props;
 
@@ -194,7 +194,7 @@ export const LangSynchronizer = withRouter(
 export const ReactUnmounter = withRouter(
   class ReactUnmounter_ extends React.Component {
     render(){ return null; }
-    componentWillUpdate(nextProps){
+    UNSAFE_componentWillUpdate(nextProps){
       if(this.props.location.pathname !== nextProps.location.pathname){
         reactAdapter.unmountAll();
       }

@@ -390,7 +390,7 @@ class ExportButton extends React.Component {
       success : null,
     }; 
   }
-  componentWillReceiveProps(){
+  UNSAFE_componentWillReceiveProps(){
     this.setState({ 
       success : null,
     });
