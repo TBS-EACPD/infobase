@@ -2,6 +2,7 @@ import { StandardRouteContainer, LangSynchronizer } from '../core/NavComponents'
 import { createSelector } from 'reselect';
 import withRouter from 'react-router/withRouter';
 import { log_standard_event } from '../core/analytics.js';
+import { Fragment } from 'react';
 const { text_maker } = require('../models/text');
 require("./rpb.ib.yaml");
 require('./rpb.scss');
@@ -261,9 +262,8 @@ class RPB extends React.Component {
       {
           this.state.loading ? 
           <SpinnerWrapper scale={4} /> :
-          [
+          <Fragment>
             <LabeledBox
-              key="pick-subject"
               label={ <TextMaker text_key="blue_text_pick_org" /> }
               content={
                 <SubjectFilterPicker 
@@ -271,9 +271,8 @@ class RPB extends React.Component {
                   onSelect={ subj=> on_set_subject(subj) }
                 />
               }
-            />,
+            />
             <LabeledBox
-              key="pick-mode"
               label={ <TextMaker text_key="blue_text_select_mode" /> }
               content={
                 <div className="centerer">
@@ -288,17 +287,17 @@ class RPB extends React.Component {
                   />
                 </div>
               }
-            />,
-            (
+            />
+            {
               table ? 
               (
                 mode === 'simple' ?
-                <SimpleView key="view" {...this.props} /> :
-                <GranularView key="view" {...this.props} /> 
+            <SimpleView key="view" {...this.props} /> :
+            <GranularView key="view" {...this.props} /> 
               ) :
               null
-            ),
-          ]
+            },
+          </Fragment>
       }
     </div>
 

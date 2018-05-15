@@ -1,5 +1,5 @@
 import "./goco.ib.yaml";
-
+import { Fragment } from 'react';
 import {
   PanelGraph,
   Subject,
@@ -164,10 +164,11 @@ class Goco {
       const table_data = _.map(this.data, ({tick, spending, ftes}) => ({
         label: tick,
         /* eslint-disable react/jsx-key */
-        data: [
-          <Format type="compact1" content={spending} />,
-          <Format type="big_int_real" content={ftes} />,
-        ],
+        data: 
+          <Fragment>
+            <Format type="compact1" content={spending} />
+            <Format type="big_int_real" content={ftes} />
+          </Fragment>,
       }));
 
       charts_index.create_a11y_table({

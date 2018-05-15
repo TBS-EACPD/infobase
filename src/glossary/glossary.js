@@ -1,5 +1,6 @@
 import './glossary.scss';
 import "./glossary.ib.yaml";
+import { Fragment } from 'react';
 import { 
   StandardRouteContainer,
   ScrollToTargetContainer,
@@ -96,34 +97,34 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
       </div>
       <div className="glossary-items">
         <dl>
-          {_.map(items_by_letter, ({ letter, items}) => _.map(items, (item,ix) => [
-            <dt
-              className="glossary-dt"
-              key={`${item.id}_dt`}
-              id={
+          {_.map(items_by_letter, ({ letter, items}) => _.map(items, (item,ix) => 
+            <Fragment key={ix}>
+              <dt
+                className="glossary-dt"
+                id={
                 ix === 0 ?
                 `__${letter}` :
                 null 
-              }
-              tabIndex={
+                }
+                tabIndex={
                 ix === 0 ?
                 0 :
                 null
-              }
-            >
-              <span
-                id={item.id}
-                tabIndex={-1}
+                }
               >
-                {item.title}
-              </span>
-            </dt>,
-            <dd key={`${item.id}_dd`} >
-              <div 
-                dangerouslySetInnerHTML={{__html:item.definition}}
-              />
-            </dd>,
-          ]))}
+                <span
+                  id={item.id}
+                  tabIndex={-1}
+                >
+                  {item.title}
+                </span>
+              </dt>
+              <dd>
+                <div 
+                  dangerouslySetInnerHTML={{__html:item.definition}}
+                />
+              </dd>
+            </Fragment>))}
         </dl>
       </div>
     </div>

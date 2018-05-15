@@ -1,5 +1,6 @@
 import './vote-stat-text.ib.yaml';
 import classNames from 'classnames';
+import { Fragment } from 'react';
 const {
   Subject,
   formats,
@@ -215,25 +216,26 @@ const TopTenTable = ({ rows, total_amt, complement_amt, isVoted }) => (
   </table>
 )
 
-const row_cells = ({ name, rpb_link, voted_stat, amount }) => [
-  rpb_link ? (
-    <td key="link" className="left-text_plain"> 
+const row_cells = ({ name, rpb_link, voted_stat, amount }) => 
+  <Fragment>
+    {rpb_link ? (
+    <td className="left-text_plain"> 
       <a href={rpb_link}>
         {name}
       </a>
     </td>
   ) : (
-    <td key="name" className="left-text_plain">
+    <td className="left-text_plain">
       {name}
     </td>
-  ),
-  <td key="voted_stat" className="left-text_plain">
-    {voted_stat}
-  </td>,
-  <td key="amount" className="right_number">
-    <Format 
-      type="compact1"
-      content={amount} 
-    />
-  </td>,
-]
+  )}
+    <td className="left-text_plain">
+      {voted_stat}
+    </td>
+    <td className="right_number">
+      <Format 
+        type="compact1"
+        content={amount} 
+      />
+    </td>
+  </Fragment>

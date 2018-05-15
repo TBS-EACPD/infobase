@@ -1,4 +1,5 @@
 import { TM } from '../util_components.js';
+import { Fragment } from 'react';
 export class EasyAccess extends React.Component {
   render(){ return null; }
   componentDidMount(){
@@ -9,22 +10,21 @@ export class EasyAccess extends React.Component {
   }
 }
 
-const EasyAccess_ = () => [
-  <a key="a" href='#glossary'>
-    <TM k="glossary" />
-  </a>,
-  <a
-    key="b"
-    href="#metadata"
-    className="mrgn-lft-md"
-  >
-    <TM k="metadata" />
-  </a>,
-  <a
-    key="c"
-    href="#about"
-    className="mrgn-lft-md"
-  >
-    <TM k="about_title" />
-  </a>,
-];
+const EasyAccess_ = () =>
+  <Fragment>
+    <a href='#glossary'>
+      <TM k="glossary" />
+    </a>
+    <a
+      href="#metadata"
+      className="mrgn-lft-md"
+    >
+      <TM k="metadata" />
+    </a>
+    <a
+      href="#about"
+      className="mrgn-lft-md"
+    >
+      <TM k="about_title" />
+    </a>
+  </Fragment>;

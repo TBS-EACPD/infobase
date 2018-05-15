@@ -1,3 +1,4 @@
+const { Fragment } = require('react');
 const classNames = require('classnames');
 const {
   text_maker,
@@ -96,14 +97,16 @@ const SingleIndicatorDisplay = ({indicator}) => {
         {indicator.target_date}
       </dd>
 
-      { is_drr && [
-        <dt key="status-dt">
-          <TM k="status" />
-        </dt>,
-        <dd key="status-dd">
-          <StatusDisplay indicator={indicator} /> 
-        </dd>,
-      ]}
+      { is_drr && 
+        <Fragment>
+          <dt>
+            <TM k="status" />
+          </dt>
+          <dd>
+            <StatusDisplay indicator={indicator} /> 
+          </dd>
+        </Fragment>
+      }
 
       <dt key="tgt-dt">
         <TM k="target" />
@@ -119,27 +122,29 @@ const SingleIndicatorDisplay = ({indicator}) => {
 
 
 
-      { is_drr && [
-        <dt key="actual-result-dt">
-          <TM k="target_result" />
-        </dt>,
-        <dd key="actual-result-dd">
-          <IndicatorResultDisplay
-            data_type={indicator.actual_datatype}
-            min={ indicator.actual_result }
-            narrative={indicator.actual_result}
-          />
-        </dd>,
-      ]}
+      { is_drr && 
+        <Fragment>
+          <dt>
+            <TM k="target_result" />
+          </dt>
+          <dd>
+            <IndicatorResultDisplay
+              data_type={indicator.actual_datatype}
+              min={ indicator.actual_result }
+              narrative={indicator.actual_result}
+            />
+          </dd>
+        </Fragment>}
 
-      { !_.isEmpty(indicator.explanation) && [
-        <dt key="notes-dt">
-          <TM k="notes" />
-        </dt>,
-        <dd key="notes-dd">
-          {indicator.explanation}  
-        </dd>,
-      ]}
+      { !_.isEmpty(indicator.explanation) && 
+        <Fragment>
+          <dt>
+            <TM k="notes" />
+          </dt>
+          <dd>
+            {indicator.explanation}  
+          </dd>
+        </Fragment>}
     </dl>
   </div>
 }

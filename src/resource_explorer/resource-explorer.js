@@ -1,7 +1,7 @@
 require('../panels/intro_graphs/intro_lang.ib.yaml');
 require('../panels/result_graphs/result_lang.ib.yaml');
 
-
+const { Fragment } = require('react');
 const { infograph_href_template } = require('../link_utils.js');
 const { StandardRouteContainer } = require('../core/NavComponents');
 
@@ -95,12 +95,13 @@ function render_non_col_content({node}){
     <div>
       { !_.isEmpty(defs) && 
         <dl className="dl-horizontal">
-          {_.map(defs, ({ term, def },ix) => [ 
-            /* eslint-disable react/jsx-key */
-            <dt key={"dt-"+ix}> { term } </dt>,
-            /* eslint-disable react/jsx-key */
-            <dd key={"dd-"+ix}> { def } </dd>,
-          ])}
+          {_.map(defs, ({ term, def },ix) => 
+            <Fragment key={ix}> 
+              (eslint-disable react/jsx-key)
+              <dt> { term } </dt>
+              (eslint-disable react/jsx-key)
+              <dd> { def } </dd>
+            </Fragment>)}
         </dl>
       }
       { ( _.includes(['program','dept'], subject.level) || subject.is_cr || subject.is_lowest_level_tag ) && 

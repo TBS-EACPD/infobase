@@ -2,7 +2,7 @@ import { Format } from '../../util_components.js';
 import '../../pses/pses-components.scss';
 import gql from 'graphql-tag';
 import { Panel } from '../panel-components.js';
-
+import { Fragment } from 'react';
 
 
 const get_num_from_str = /\d+/;
@@ -69,26 +69,23 @@ const GradientBar = ({ series, startsPositive, height, width, labels }) => {
           >
             { rightLabel }
           </div>
-          {series.map( ({val,name, isLabelBelow },ix) => [
-            (name && 
-              <div
-                key={`${ix}-name`}
-                style={{
-                  position:"absolute",
-                  top: isLabelBelow ? "120%" : "-30%",
-                  left: `${ (val*100) - 5}%`,
-                  fontweight: "bold",
-                  fontSize: "1rem",
-                  textAlign: "center",
-                  transform: `translate(50%, -30%)`,
-                }}
+          {series.map( ({val,name, isLabelBelow },ix) => 
+            <Fragment key={ix}>
+              {name && 
+              <div style={{
+                position:"absolute",
+                top: isLabelBelow ? "120%" : "-30%",
+                left: `${ (val*100) - 5}%`,
+                fontweight: "bold",
+                fontSize: "1rem",
+                textAlign: "center",
+                transform: `translate(50%, -30%)`,
+              }}
               >
                 {name}
               </div>
-            ),
-            <div
-              key={`${ix}-bar`}
-              style={{
+              }
+              <div style={{
                 position:"absolute",
                 width: "2px",
                 backgroundColor: "#333",
@@ -96,8 +93,8 @@ const GradientBar = ({ series, startsPositive, height, width, labels }) => {
                 height: "120%",
                 top: "-10%",
               }}
-            />,
-          ])}
+              />
+            </Fragment>)}
         </div>
       </div>
     </div>

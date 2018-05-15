@@ -1,3 +1,4 @@
+const { Fragment } = require('react');
 const {
   Gov, 
 } = require("../models/subject");
@@ -118,13 +119,13 @@ const ReportDatasets = ({
 }) => {
 
   const dataset_spans = table.link[window.lang] &&
-    [
-      <span key={"datasets_header"} className="fancy-ul-span-flex">
+    <Fragment>
+      <span className="fancy-ul-span-flex">
         <span className="fancy-ul-title-row">
           {text_maker("metadata")}
         </span>
-      </span>,
-      <span key={table.id} className="fancy-ul-span-flex">
+      </span>
+      <span className="fancy-ul-span-flex">
         <span>
           {table.name}
         </span>
@@ -134,20 +135,20 @@ const ReportDatasets = ({
           href={table.link[window.lang]}>
           <TextMaker text_key="open_data_link"/>
         </a>
-      </span>,
-    ];
+      </span>
+    </Fragment>;
   
   const data_source_spans = table.source.length > 0 &&
-    [
-      <span key={"datasets_header"} className="fancy-ul-span-flex">
+    <Fragment>
+      <span className="fancy-ul-span-flex">
         <span className="fancy-ul-title-row">
           {text_maker("data_sources")}
         </span>
-      </span>,
-      ..._.chain(table.source)
+      </span>
+      {_.chain(table.source)
         .map( source => {
           return all_sources[source].open_data ?
-            <span key={table.id} className="fancy-ul-span-flex">
+            <span className="fancy-ul-span-flex">
               <a href={"#metadata/"+source}>
                 {all_sources[source].title()}
               </a>
@@ -161,8 +162,8 @@ const ReportDatasets = ({
             false;
         })
         .filter( span => span)
-        .value(),
-    ];
+        .value()}
+    </Fragment>;
 
   return (
     <div className="rpb-option-fancy-ul-container">

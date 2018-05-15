@@ -4,7 +4,7 @@ import { Provider, connect } from 'react-redux';
 import { infograph_href_template } from '../../link_utils.js';
 import { get_root } from '../../gen_expl/hierarchy_tools.js';
 import { get_col_defs } from '../../gen_expl/resource-explorer-common.js';
-
+import { Fragment } from 'react';
 import { Explorer } from '../../components/ExplorerComponents.js';
 
 import {
@@ -47,12 +47,13 @@ const get_non_col_content = ({node}) => {
       {
         !_.isEmpty(defs) && 
         <dl className="dl-horizontal">
-          {_.map(defs, ({ term, def }, ix) => [ 
-            /* eslint-disable react/jsx-key */
-            <dt key={`dt-${ix}`}> { term } </dt>,
-            /* eslint-disable react/jsx-key */
-            <dd key={`dd-${ix}`}> { def } </dd>,
-          ])}
+          {_.map(defs, ({ term, def }, ix) => 
+            <Fragment>
+              (eslint-disable react/jsx-key)
+              <dt> { term } </dt>
+              (eslint-disable react/jsx-key)
+              <dd> { def } </dd>
+            </Fragment>)}
         </dl>
       }
       { (

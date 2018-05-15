@@ -1,4 +1,5 @@
 require('../gen_expl/explorer-styles.scss');
+const { Fragment } = require('react');
 const { createSelector } = require('reselect');
 const classNames = require('classnames');
 const { infograph_href_template } = require('../link_utils.js');
@@ -11,10 +12,12 @@ const {
 const { InstForm } = require('../models/subject.js');
 const { Explorer } = require('../components/ExplorerComponents.js')
 
-const DlItem = ({ term, def }) => [
-  <dt key="dt"> {term} </dt>,
-  <dd key="dd"> {def} </dd>,
-];
+const DlItem = ({ term, def }) =>
+  <Fragment>
+    <dt> {term} </dt>
+    <dd> {def} </dd>
+  </Fragment>
+;
 
 
 function get_org_count(node){
@@ -40,18 +43,17 @@ const SubjectFields = ({ subject, grouping }) => <div style={{marginTop: "2em"}}
         def={subject.applied_title}
       />
     }
-    { subject.is_dead && [
-      <DlItem
-        key="status"
-        term={<TM k="status" />}
-        def={subject.status}
-      />,
-      <DlItem
-        key="end_yr"
-        term={<TM k="end_yr" />}
-        def={subject.end_yr}
-      />,
-    ]}
+    { subject.is_dead && 
+      <Fragment>
+        <DlItem
+          term={<TM k="status" />}
+          def={subject.status}
+        />
+        <DlItem
+          term={<TM k="end_yr" />}
+          def={subject.end_yr}
+        />
+      </Fragment>}
     {
       _.nonEmpty(subject.ministers) && 
       <DlItem
