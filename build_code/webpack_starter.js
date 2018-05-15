@@ -46,12 +46,10 @@ console.log(`
 `);
 
 
-
 gitsha(function(err,commit_sha){
   if(err){ throw err; }
 
   const app_options = options_by_app[app];
-
 
   const langs = both ? [ 'en', 'fr' ] : ['en'];
   const config = langs.map(lang => create_config({
@@ -75,9 +73,6 @@ gitsha(function(err,commit_sha){
         //poll:true
       },function(err,stats){
         console.log(stats.toString({cached:true,modules:true}));
-
       });
-  
   }
-  
 });

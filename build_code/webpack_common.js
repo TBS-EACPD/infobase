@@ -1,5 +1,6 @@
 const _ = require('lodash');
-var webpack = require('webpack');
+const webpack = require('webpack');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const CDN_URL = process.env.CDN_URL || ".";
 
@@ -85,9 +86,6 @@ const prod_plugins = [
       'NODE_ENV': JSON.stringify('production'),
     },
   }),
-  new webpack.optimize.UglifyJsPlugin({
-    sourceMap: false,
-  }),
   new webpack.optimize.ModuleConcatenationPlugin(),
 ]
 
@@ -107,9 +105,19 @@ function get_plugins({ is_prod, language, commit_sha, envs }){
   }
 
   return plugins;
-
-
 };
+
+function get_optimizations(is_prod){
+  if(is_prod){
+    return {
+      minimizer: [
+        new UglifyJSPlugin({ sourceMap: false }),
+      ],
+    };
+  } else {
+    return {};
+  }
+}
 
 function create_config({
   entry,
@@ -128,6 +136,7 @@ function create_config({
 
   return {
     name: language,
+    mode: is_prod ? 'production' : 'development',
     entry,
     output: new_output,
     module: {
@@ -139,6 +148,7 @@ function create_config({
       language,
       commit_sha,
     }),
+    optimization: get_optimizations(is_prod),
     devtool: (
       is_prod? 
       false : 
