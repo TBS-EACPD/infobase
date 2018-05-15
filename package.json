@@ -94,7 +94,7 @@
     "a11y_prod_no_watch": "node build_code/webpack_starter.js a11y_client BOTH PROD NO-WATCH",
     "browser_test": "testcafe chrome tests/",
     "ci_test": "testcafe 'chrome:/usr/bin/google-chrome:headless —-no-sandbox' tests/",
-    "ci_serve": "http-server -s -a 127.0.0.1 &"
+    "ci_serve": "http-server -s -a 127.0.0.1"
   },
   "authors": [
     "Andrew Gibson",
