@@ -26,9 +26,9 @@ jobs:
       - run: npm run a11y_prod_no_watch
       - run: 
           name: start_server
-          command: npm run ci_serve
+          command: node_modules/.bin/http-server -s -a 127.0.0.1
           background: true
-      - run: npm run ci_test
+      - run: node_modules/.bin/testcafe 'chrome:/usr/bin/google-chrome:headless —-no-sandbox' tests/
       - run: chmod +x ./.circleci/authenticate-gcloud.sh
       - run: ./.circleci/authenticate-gcloud.sh
       - run: gsutil -m rsync -d -r build/InfoBase gs://ib-static-bucket/InfoBase
