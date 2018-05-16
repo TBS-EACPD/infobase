@@ -201,32 +201,36 @@ export class GraphInventory extends React.Component {
     super();
     this.state = {
       loading: true,
+      derived_props: {},
     };
   }
   loadDeps({subject,panel}){
-
-    this.setState({
-      loading: true,
-    });
     ensure_loaded({
-      graph_keys : [ panel.key ],
+      graph_keys: [ panel.key ],
       subject_level: subject.level,
       subject,
       footnotes_for: subject,
     }).then(()=>{
-      this.setState({loading: false})
+      this.setState({loading: false});
     })
   }
-  UNSAFE_componentWillMount(){
-    this.loadDeps(get_derived_props(this.props));
-  }
-  UNSAFE_componentWillReceiveProps(nextProps){
-    const old_derived_props = get_derived_props(this.props);
+  static getDerivedStateFromProps(nextProps, prevState){
+    const old_derived_props = prevState.derived_props;
     const new_derived_props = get_derived_props(nextProps);
-    if(_.isEqual(old_derived_props, new_derived_props)){
-      return;
+    if(!_.isEqual(old_derived_props, new_derived_props)){
+      return {
+        loading: true,
+        derived_props: new_derived_props,
+      };
     }
-    this.loadDeps(new_derived_props);
+  }
+  componentDidMount(){
+    this.loadDeps(this.state.derived_props);
+  }
+  componentDidUpdate(){
+    if(this.state.loading){
+      this.loadDeps(this.state.derived_props);
+    }
   }
 
   render(){
