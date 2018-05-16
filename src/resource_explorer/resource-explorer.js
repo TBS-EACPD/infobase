@@ -97,9 +97,7 @@ function render_non_col_content({node}){
         <dl className="dl-horizontal">
           {_.map(defs, ({ term, def },ix) => 
             <Fragment key={ix}> 
-              (eslint-disable react/jsx-key)
               <dt> { term } </dt>
-              (eslint-disable react/jsx-key)
               <dd> { def } </dd>
             </Fragment>)}
         </dl>
