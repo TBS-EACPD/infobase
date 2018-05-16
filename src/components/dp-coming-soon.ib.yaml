@@ -1,8 +1,0 @@
-dp_coming_soon_title:
-  en: Departmental Plans 2018-19 coming soon!
-  fr: Les plans ministériel 2018-2019 arrivent bientôt!
-
-dp_coming_soon__depts:
-  transform: [handlebars, markdown]
-  en: Planned resources and results for fiscal year 2018-19 will be available once the following departments submit their data
-  fr: Les resources et résultats planifiés pour l'année fiscale 2018-2019 seront disponible dans l'InfoBase une fois que les organisations suivantes soumettent leurs données
