@@ -105,8 +105,8 @@ function get_data(include_stat){
 
 }
 
-const Green = ({children}) => <span style={{color:"hsla(120, 100%, 25%, 1)"}}> {children} </span>
-const Red = ({children}) => <span style={{color:"hsla(0, 100%, 40%, 1)"}}> {children} </span>
+const Green = ({children}) => <span style={{color:"hsla(120, 100%, 25%, 1)"}}>{children}</span>
+const Red = ({children}) => <span style={{color:"hsla(0, 100%, 40%, 1)"}}>{children}</span>
 
 export const col_defs = [
   {
@@ -131,13 +131,13 @@ export const col_defs = [
     header_display: "Change from last year",
     get_val: node => _.get(node, "data.inc"),
     val_display: val => {
-      const content = <Format type="compact1" content={val} />;
+      const content = <Format type="compact1" content={Math.abs(val)} />;
       if(val>0){
-        return <Green>{content}</Green>;
+        return <Green>+{content}</Green>;
       } else if(val === 0){
         return content;
       } else {
-        return <Red>{content}</Red>;
+        return <Red>-{content}</Red>;
       }
 
     },
@@ -151,18 +151,19 @@ export const col_defs = [
     val_display: val => {
       let content;
       if( Math.abs( -1-val ) < 0.001){
-        content = <strong>Old</strong>
+        return <Red><strong>Old</strong></Red>;
       } else if(val === Infinity){
-        content = <strong>New</strong>;
+        return <Green><strong>New</strong></Green>;
       } else {
-        content= <Format type="percentage1" content={val} />;
+        content= <Format type="percentage1" content={Math.abs(val)} />;
       }
+
       if(val>0){
-        return <Green>{content}</Green>
+        return <Green>+{content}</Green>
       } else if(val===0){
         return content;
       } else {
-        return <Red>{content}</Red>
+        return <Red>-{content}</Red>
       }
     },
   },
