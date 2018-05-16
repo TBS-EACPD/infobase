@@ -36,16 +36,15 @@ const validate_first_column_route_param = (first_column, history) => {
 }
 
 export class BudgetMeasuresRoute extends React.Component {
-  constructor(){
+  constructor(props){
     super();
     this.state = {
       loading: true,
       filtered_chapter_keys: [],
       filter_string: false,
     };
-  }
-  UNSAFE_componentWillMount(){
-    validate_first_column_route_param(this.props.match.params.first_column, this.props.history);
+
+    validate_first_column_route_param(props.match.params.first_column, props.history);
   }
   shouldComponentUpdate(nextProps){
     return validate_first_column_route_param(nextProps.match.params.first_column, this.props.history);
