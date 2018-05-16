@@ -83,17 +83,17 @@ const SingleIndicatorDisplay = ({indicator}) => {
   return <div className="indicator-item">
     <dl className="dl-horizontal indicator-item__dl">
 
-      <dt key="name-dt">
+      <dt>
         <TM k="indicator" />
       </dt>
-      <dd key="name-dd">
+      <dd>
         {indicator.name}
       </dd>
 
-      <dt key="date-dt">
+      <dt>
         <TM k="date_to_achieve" />
       </dt>
-      <dd key="date-dd">
+      <dd>
         {indicator.target_date}
       </dd>
 
@@ -108,10 +108,10 @@ const SingleIndicatorDisplay = ({indicator}) => {
         </Fragment>
       }
 
-      <dt key="tgt-dt">
+      <dt>
         <TM k="target" />
       </dt>
-      <dd key="tgt-dd">
+      <dd>
         <IndicatorResultDisplay
           data_type={indicator.target_type}
           min={indicator.target_min}
