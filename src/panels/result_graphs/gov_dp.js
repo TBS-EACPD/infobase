@@ -216,7 +216,17 @@ new PanelGraph({
   layout: {
     full: {text: [], graph: 12},
   },
-  title: "dp_coming_soon_title",
   calculate:_.constant(true),
-  render(panel){},
+  render(panel){
+    const sel = panel.el;
+    sel.attr('class', "");
+    sel.html(`
+      <div 
+        class="alert alert-info alert--is-bordered large_panel_text"
+        style="text-align:center; border-color:#16599a;"
+      >
+        ${text_maker("dp_coming_soon_title")}
+      </div>
+    `);
+  },
 })
