@@ -48,10 +48,8 @@ const get_non_col_content = ({node}) => {
         !_.isEmpty(defs) && 
         <dl className="dl-horizontal">
           {_.map(defs, ({ term, def }, ix) => 
-            <Fragment>
-              (eslint-disable react/jsx-key)
+            <Fragment key={ix}>
               <dt> { term } </dt>
-              (eslint-disable react/jsx-key)
               <dd> { def } </dd>
             </Fragment>)}
         </dl>
