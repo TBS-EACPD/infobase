@@ -292,8 +292,8 @@ class RPB extends React.Component {
               table ? 
               (
                 mode === 'simple' ?
-            <SimpleView key="view" {...this.props} /> :
-            <GranularView key="view" {...this.props} /> 
+                <SimpleView {...this.props} /> :
+                <GranularView {...this.props} /> 
               ) :
               null
             },
