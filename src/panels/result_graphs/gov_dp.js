@@ -209,24 +209,3 @@ new PanelGraph({
     );
   },
 });
-
-new PanelGraph({
-  level: "gov",
-  key: "dp_coming_soon",
-  layout: {
-    full: {text: [], graph: 12},
-  },
-  calculate:_.constant(true),
-  render(panel){
-    const sel = panel.el;
-    sel.attr('class', "");
-    sel.html(`
-      <div 
-        class="alert alert-info alert--is-bordered large_panel_text"
-        style="text-align:center; border-color:#16599a;"
-      >
-        ${text_maker("dp_coming_soon_title")}
-      </div>
-    `);
-  },
-})
