@@ -5,7 +5,7 @@ fixture `Main app tests`// declare the fixture
 
 
 
-const financial_link_sel = "#app-focus-root > div > div > div > div > div.intro-box > div.equal-height-row.equal-height-row--home-row > div:nth-child(1) > div > a > div"
+const financial_link_sel = "#app-focus-root > div > div > div > div > div.intro-box > div.equal-height-row.equal-height-row--home-row > div:nth-child(1) > div > a > div > div > div.h-img-card__text"
 
 //then create a test and place your code there
 test('App boots and loads home page data', async t => {
