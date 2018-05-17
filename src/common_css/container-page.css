@@ -1,5 +1,5 @@
 #ib-site-header {
-  background-color: #335075;
+  background-color: #f8f8f8;
   padding: 1.15rem;
   line-height: 0;
 }
@@ -36,13 +36,16 @@
 }
 #wb-lng > a.lang-switcher {
   display: inline-block;
-  color: #FFFFFF;
-  display: inline-block;
   font-size: 1.25rem;
   font-weight: 400;
   margin-top: 0.75rem;
   text-align: center;
   padding-bottom: 1rem;
+}
+
+#wb-bc {
+  background-color: #f8f8f8 !important;
+  border-bottom: 4px solid #335175;
 }
 
 @media (min-width: 992px) {
@@ -73,7 +76,7 @@
   overflow: inherit;
   position: static;
   width: inherit;
-  color: #fff;
+
   text-decoration: none;
 }
 

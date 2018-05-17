@@ -92,8 +92,8 @@ const common_lookups_fr = _.map(
 
 const common_svg = [
   //top left corner brand
-  'src/InfoBase/sig-en.svg',
-  'src/InfoBase/sig-fr.svg',
+  'src/InfoBase/sig-blk-en.svg',
+  'src/InfoBase/sig-blk-fr.svg',
 
   //caricature images for main 5 pages
   'src/home/partition.svg',
