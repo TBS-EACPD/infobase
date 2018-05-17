@@ -119,18 +119,39 @@ function reset_scroll(){
 }
 
 class InfoGraph_ extends React.Component {
-  UNSAFE_componentWillMount(){
+  constructor(){
+    super();
+    this.state = {
+      loading: true,
+      subject: null,
+      bubble: null,
+      level: null,
+    };
+    this.unmounted = false;
+  }
+  static getDerivedStateFromProps(nextProps, prevState){
+    if(!shallowEqualObjectsOverKeys(nextProps, prevState, ['subject','bubble','level'])){
+      return {
+        loading: true,
+        subject: nextProps.subject,
+        bubble: nextProps.bubble,
+        level: nextProps.level,
+      }
+    }
+  }
+  componentDidMount(){
     this.loadGraphDeps(this.props);
   }
-  UNSAFE_componentWillUpdate(nextProps, nextState){
-    if(nextProps.subject !== this.props.subject){
+  componentDidUpdate(prevProps){
+    if(this.state.loading){
+      this.loadGraphDeps(this.props);
+    }
+    if(this.props.subject !== prevProps.subject){
       reset_scroll();
     }
   }
-  UNSAFE_componentWillReceiveProps(nextProps){
-    if(!shallowEqualObjectsOverKeys(this.props, nextProps, ['subject','bubble','level'])){
-      this.loadGraphDeps(nextProps);
-    }
+  componentWillUnmount(){
+    this.unmounted = true;
   }
   render(){
     const { subject, bubble } = this.props;
@@ -286,10 +307,6 @@ class InfoGraph_ extends React.Component {
   loadGraphDeps({bubble, subject, level}){
     const panel_keys = panels_for_subj_bubble({subject, bubble});
 
-    this.setState({
-      loading: true,
-    });
-
     ensure_loaded({
       graph_keys: panel_keys,
       subject_level : level,
@@ -298,14 +315,14 @@ class InfoGraph_ extends React.Component {
     }).then(()=> {
       //we set a minimum of 400 wait
       setTimeout(()=> {
-        this.setState({
-          loading: false,
-        });
+        if(!this.unmounted){
+          this.setState({
+            loading: false,
+          });
+        }
       },400); 
     });
-
   }
-  
 }
 
 export const InfoGraph = ({ 
