@@ -133,7 +133,7 @@ const WelcomeMat = (props) => {
   const hist_trend = <TM k="5_year_trend" />;
   const planned_trend = <TM k="3_year_trend" />;
   const no_hist_spending = <TM k="no_historical_spending__new" />;
-  const no_hist_ftes = <TM k="no_historical_fte__new" />;
+  // const no_hist_ftes = <TM k="no_historical_fte__new" />;
   const spending_auths_are = <TM k="spending_authorities_are" />
   
 
@@ -873,8 +873,6 @@ new PanelGraph({
     const q6 = table6.q(subject);
     const q12 = table12.q(subject);
 
-    const has_planned = has_planning_data(subject,q6);
-    const has_hist = has_hist_data(subject, q6);
     const calcs = get_calcs(subject,q6,q12);
 
     return {

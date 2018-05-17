@@ -64,7 +64,6 @@ _.each(["dept","crso","program"], level => {
     },
     render(panel, calculations){
       const {
-        subject,
         graph_args: data,
       } = calculations;
 
