@@ -963,3 +963,8 @@ explorer_focus_mount:
 explorer_search_is_optional:
   en: Optionally filter the below data using search
   fr: Vous pouvez choisir de filtrer les données ci-dessous en utilisant une barre de recherche
+
+
+learn_more:
+  en: Learn more
+  fr: En apprendre davantage
