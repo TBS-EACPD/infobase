@@ -297,6 +297,12 @@ class Tag extends common(){
       } else {
         return text_maker("gocos");
       }
+    } else if(this.root.id === "MLT"){
+      if(!this.is_lowest_level_tag){
+        return text_maker("priorities");
+      } else {
+        return text_maker("commitments");
+      }
     } else {
       if (_.nonEmpty(this.programs) && _.isEmpty(this.children_tags)){
         return text_maker("tag")+"(s)";

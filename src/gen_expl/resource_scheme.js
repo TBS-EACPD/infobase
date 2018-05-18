@@ -146,8 +146,8 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
               data: {
                 name: tag.name,
                 subject: tag,
-                resources: get_resources(tag),
-                defs: [
+                resources: _.includes(["MLT"],hierarchy_scheme) ? null : get_resources(tag),
+                defs: tag.description && [
                   {
                     term: text_maker('description'),
                     def: <div dangerouslySetInnerHTML={{__html: tag.description }} />,

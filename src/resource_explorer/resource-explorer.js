@@ -69,7 +69,7 @@ const HierarchySelectionItem = ({title, text, active, url }) => (
 );
 
 
-const dp_only_schemes = ["WWH","MLT","CCOFOG"];
+const dp_only_schemes = ["MLT"];
 
 
 const children_grouper = (node, children) => {
@@ -182,14 +182,10 @@ class ExplorerPage extends React.Component {
     const [
       goco_props, 
       hwh_props,
-      wwh_props,
-      ccofog_props,
       mlt_props,
     ] = _.chain([ 
       Tag.lookup("GOCO"),
       Tag.lookup("HWH"),
-      Tag.lookup("WWH"),
-      Tag.lookup("CCOFOG"),
       Tag.lookup("MLT"),
     ])
       .compact()
@@ -300,7 +296,7 @@ class ExplorerPage extends React.Component {
               <TextMaker text_key="choose_explore_point" />
             </header>
             <div role="radiogroup" className="hierarchy-selection-items">
-              {_.map([ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp18" && INCLUDE_OTHER_TAGS ? [wwh_props, ccofog_props, mlt_props] : [])  ],props =>
+              {_.map([ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp18" && INCLUDE_OTHER_TAGS ? [mlt_props] : [])  ],props =>
                 <HierarchySelectionItem 
                   key={props.id} 
                   url={`#resource-explorer/${props.id}/${doc}`}
