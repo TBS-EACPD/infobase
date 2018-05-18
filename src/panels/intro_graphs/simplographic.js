@@ -159,10 +159,10 @@ new PanelGraph({
     };
     reactAdapter.render(
       <div className="medium_panel_text">
-        <Row top_border img_src="Money.svg" title_key="simplographic_spending_title" text_key="simplographic_spending_text"/> 
-        <Row img_src="People.svg" title_key="simplographic_people_title" text_key="simplographic_people_text"/> 
-        <Row img_src="Graph.svg" title_key="simplographic_struct_title" text_key="simplographic_struct_text"/> 
-        <Row img_src="Check.svg" title_key="simplographic_results_title" text_key="simplographic_results_text"/> 
+        <Row top_border img_src="money.svg" title_key="simplographic_spending_title" text_key="simplographic_spending_text"/> 
+        <Row img_src="employees.svg" title_key="simplographic_people_title" text_key="simplographic_people_text"/> 
+        <Row img_src="graph.svg" title_key="simplographic_struct_title" text_key="simplographic_struct_text"/> 
+        <Row img_src="check.svg" title_key="simplographic_results_title" text_key="simplographic_results_text"/> 
       </div>, 
       panel.areas().graph.node() 
     );

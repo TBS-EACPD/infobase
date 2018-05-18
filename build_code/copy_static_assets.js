@@ -104,10 +104,10 @@ const common_svg = [
   'src/home/explorer.svg',
 
   //simplographic images
-  'src/panels/intro_graphs/Check.svg',
-  'src/panels/intro_graphs/Graph.svg',
-  'src/panels/intro_graphs/Money.svg',
-  'src/panels/intro_graphs/People.svg',
+  'src/panels/intro_graphs/check.svg',
+  'src/panels/intro_graphs/graph.svg',
+  'src/panels/intro_graphs/money.svg',
+  'src/panels/intro_graphs/employees.svg',
 
   //small scma icons below home page search bar
   'src/home/results.svg',
