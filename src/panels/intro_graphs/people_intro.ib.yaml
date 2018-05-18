@@ -5,9 +5,9 @@ who_is_fps_q:
 who_is_fps_a:
   transform: [handlebars, markdown]
   en: |
-    **Federal Public Service employees** are people working in departments and agencies named in Schedules I and IV of the _Financial Administration Act (FAA)_, for which the Treasury Board Secretariat is the employer, and in separate agencies named under Schedule V of the FAA. 
+    Federal Public Service employees are people working in departments and agencies named in Schedules I and IV of the _Financial Administration Act (FAA)_, for which the Treasury Board Secretariat is the employer, and in separate agencies named under Schedule V of the FAA. 
   fr: |
-    La **fonction publique fédérale** comprend les organisations incluses dans l'administration publique centrale (ministères et organismes mentionnés aux annexes I et IV de la _Loi sur la gestion des finances publiques (LGFP)_, pour lesquels le Conseil du Trésor est l'employeur) et les organismes distincts (les organisations citées à l'annexe V de la LGFP).
+    La fonction publique fédérale comprend les organisations incluses dans l'administration publique centrale (ministères et organismes mentionnés aux annexes I et IV de la _Loi sur la gestion des finances publiques (LGFP)_, pour lesquels le Conseil du Trésor est l'employeur) et les organismes distincts (les organisations citées à l'annexe V de la LGFP).
 
 
 what_are_headcounts_q:
@@ -18,11 +18,11 @@ what_are_headcounts_q:
 what_are_headcounts_a:
   transform: [markdown]
   en: |
-    **Employee Headcount** corresponds to the count of employees of all tenures (Indeterminate, Term, Casual and Student) as well as Governor-in-Council appointees, deputy ministers, and federal judges **as of March 31 of each year**. Employees on leave without pay are not included. The counts include employees working in organizations in Schedules I, IV, and V of the _Financial Administration Act_. No adjustments are made to account for hours of work.
+    Employee Headcount corresponds to the count of employees of all tenures (Indeterminate, Term, Casual and Student) as well as Governor-in-Council appointees, deputy ministers, and federal judges as of March 31 of each year. Employees on leave without pay are not included. The counts include employees working in organizations in Schedules I, IV, and V of the _Financial Administration Act_. No adjustments are made to account for hours of work.
     
     Unless otherwise indicated, the people management data presented below is a snapshot of the Employee Headcount as of March 31.
   fr: |
-    Par **relevé des effectifs**, on entend le dénombrement des employés, quelle que soit leur période d’emploi (employés nommés pour une période indéterminée ou déterminée, occasionnels et étudiants), des  personnes nommées par décret, des sous-ministres et des juges nommés par le gouvernement fédéral **au 31 mars de chaque année**. Les employés en congé sans solde ne sont pas inclus. Le relevé comprend les employés des organisations figurant aux annexes I, IV, et V de la _Loi sur la gestion des finances publiques_. Aucun rajustement n’a été apporté pour les heures de travail.
+    Par relevé des effectifs, on entend le dénombrement des employés, quelle que soit leur période d’emploi (employés nommés pour une période indéterminée ou déterminée, occasionnels et étudiants), des  personnes nommées par décret, des sous-ministres et des juges nommés par le gouvernement fédéral au 31 mars de chaque année. Les employés en congé sans solde ne sont pas inclus. Le relevé comprend les employés des organisations figurant aux annexes I, IV, et V de la _Loi sur la gestion des finances publiques_. Aucun rajustement n’a été apporté pour les heures de travail.
     
     Sauf indication contraire, les données ci-dessous sur la gestion des personnes sont un aperçu de l’effectif en date du 31 mars.
 
@@ -35,20 +35,20 @@ what_are_emp_tenures_q:
 what_are_emp_tenures_a:
   transform: [handlebars, markdown]
   en: |
-    **Employment tenure** relates to the duration of an employment contract
-      * **Indeterminate or Permanent** employees are persons appointed to the Public Service whose contract is of an unspecified duration.
-      * **Term** employees are persons appointed for a specified period of time in accordance with Section 58 of the _Public Service Employment Act (PSEA)_.
-      * **Casual** employees are hired for specified periods that may not exceed 90 working days in one calendar year, in a department or in an agency to which the Public Service Commission has exclusive authority to make appointments. The period of casual employment may be for one or more than one term, but is not to exceed 90 working days in a department or agency in a calendar year. Casual employees can either work on a part-time or full-time basis and are not covered by collective agreements.
-      * **Student** employees are hired under one of the government’s student employment programs. They must be: 
+    Employment tenure relates to the duration of an employment contract
+      * Indeterminate or Permanent employees are persons appointed to the Public Service whose contract is of an unspecified duration.
+      * Term employees are persons appointed for a specified period of time in accordance with Section 58 of the _Public Service Employment Act (PSEA)_.
+      * Casual employees are hired for specified periods that may not exceed 90 working days in one calendar year, in a department or in an agency to which the Public Service Commission has exclusive authority to make appointments. The period of casual employment may be for one or more than one term, but is not to exceed 90 working days in a department or agency in a calendar year. Casual employees can either work on a part-time or full-time basis and are not covered by collective agreements.
+      * Student employees are hired under one of the government’s student employment programs. They must be: 
         * registered as a full-time secondary or post-secondary student in an accredited institution; 
         * currently recognized as having full-time status by the academic institution; and, 
         * returning to full-time studies in the next academic term.   
   fr: |
-    Par **type d'employé**, on entend la nature de la nomination à la fonction publique. Il y a quatre types d'employé :
-      * Par **employé permanent ou nommé pour une période indéterminée**, on entend toute personne nommée à un poste de la fonction publique pour une période indéfinie.
-      * Par **employé nommé pour une période déterminée**, on entend une personne nommée pour une période définie aux termes de l'article 58 de la _Loi sur l'emploi dans la fonction publique (LEFP)_.
-      * Les **employés occasionnels** sont des travailleurs embauchés pour une période déterminée ne dépassant pas 90 jours ouvrables par année civile dans un ministère ou organisme pour lequel la Commission de la fonction publique (CFP) a le pouvoir exclusif de faire des nominations. La période d'emploi temporaire peut être pour une ou plusieurs périodes déterminées, mais elle ne doit pas dépasser 90 jours ouvrables dans un ministère ou organisme par année civile. Les employés occasionnels peuvent travailler à temps plein ou à temps partiel et ne sont pas couverts par les conventions collectives.
-      * Par **étudiant**, on entend une personne admissible à un emploi dans la fonction publique fédérale dans le cadre de l'un des programmes d'emploi pour les étudiants. La personne doit :
+    Par type d'employé, on entend la nature de la nomination à la fonction publique. Il y a quatre types d'employé :
+      * Par employé permanent ou nommé pour une période indéterminée, on entend toute personne nommée à un poste de la fonction publique pour une période indéfinie.
+      * Par employé nommé pour une période déterminée, on entend une personne nommée pour une période définie aux termes de l'article 58 de la _Loi sur l'emploi dans la fonction publique (LEFP)_.
+      * Les employés occasionnels sont des travailleurs embauchés pour une période déterminée ne dépassant pas 90 jours ouvrables par année civile dans un ministère ou organisme pour lequel la Commission de la fonction publique (CFP) a le pouvoir exclusif de faire des nominations. La période d'emploi temporaire peut être pour une ou plusieurs périodes déterminées, mais elle ne doit pas dépasser 90 jours ouvrables dans un ministère ou organisme par année civile. Les employés occasionnels peuvent travailler à temps plein ou à temps partiel et ne sont pas couverts par les conventions collectives.
+      * Par étudiant, on entend une personne admissible à un emploi dans la fonction publique fédérale dans le cadre de l'un des programmes d'emploi pour les étudiants. La personne doit :
         * être inscrite à temps plein dans une institution reconnue d'enseignement secondaire ou postsecondaire; 
         * être présentement considérée comme étudiant à temps plein par l'établissement d'enseignement; et,
         * reprendre ses études à temps plein au semestre suivant.
@@ -106,6 +106,6 @@ march_snapshot_warning:
 ppl_open_data_info:
   transform: [handlebars, markdown]
   en: |
-    Each people management dataset in the InfoBase has a corresponding dataset available through the Open Data portal. These corresponding Open Data datasets contain **quarterly** snapshots from **March 2008** onward. Open Data links are available from the InfoBase {{metadata_source_link "Datasets" "RPS"}} page.
+    Each people management dataset in the InfoBase has a corresponding dataset available through the Open Data portal. These corresponding Open Data datasets contain quarterly snapshots from March 2008 onward. Open Data links are available from the InfoBase {{metadata_source_link "Datasets" "RPS"}} page.
   fr: |
-    Chaque ensemble de données sur la gestion des personnes dans l'InfoBase correspond à un ensemble de données disponibles sur le Portail des données ouvertes. Ces ensembles de données ouvertes inclus également des **aperçus trimestriels** débutant en **mars 2008*. Vous trouverez des liens vers les sites de données ouvertes dans la page « {{metadata_source_link "Données" "RPS"}} » de l’InfoBase.
+    Chaque ensemble de données sur la gestion des personnes dans l'InfoBase correspond à un ensemble de données disponibles sur le Portail des données ouvertes. Ces ensembles de données ouvertes inclus également des aperçus trimestriels débutant en mars 2008*. Vous trouverez des liens vers les sites de données ouvertes dans la page « {{metadata_source_link "Données" "RPS"}} » de l’InfoBase.
