@@ -139,23 +139,40 @@ _.each(['gov', 'dept', 'program', 'crso'], lvl => {
       ],
     }),
   })
+});
+
+
+
+const laggards = [
+  238,
+  136,
+  305,
+  86,
+];
+_.each(['dept', 'program', 'crso'], lvl => {
 
   new PanelGraph({
     level: lvl,
-    key: "dp_coming_soon",
+    key: "late_dept",
     layout: {
       full: {text: [], graph: 12},
     },
-    calculate:_.constant(true),
+    calculate(subject){
+      const org = subject.level === "dept" ? subject : subject.dept;
+      if(_.includes(laggards, org.id)){
+        return true;
+      } 
+      return false;
+    },
     render(panel){
       const sel = panel.el;
       sel.attr('class', "");
       sel.html(`
         <div 
-          class="alert alert-info alert--is-bordered large_panel_text"
-          style="text-align:center; border-color:#16599a;"
+          class="alert alert-danger alert--is-bordered large_panel_text"
+          style="text-align:center; border-color:#d9534f;"
         >
-          ${text_maker("dp_coming_soon_title")}
+          ${text_maker("late_dept_warning")}
         </div>
       `);
     },
