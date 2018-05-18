@@ -733,7 +733,7 @@ function get_calcs(subject, q6, q12){
 new PanelGraph({
   level: "dept",
   key: 'welcome_mat',
-  footnotes : ["MACHINERY"],
+  footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
   depends_on : ['table6','table12', 'table8'],
   layout: { full: {graph:12} },
   title : "welcome_mat_title",
@@ -793,7 +793,7 @@ new PanelGraph({
 new PanelGraph({
   level: "program",
   key: 'welcome_mat',
-  footnotes : ["MACHINERY"],
+  footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
   depends_on : ['table6','table12'],
   layout: { full: {graph:12} },
   title : "welcome_mat_title",
@@ -834,7 +834,7 @@ new PanelGraph({
 new PanelGraph({
   level: "crso",
   key: 'welcome_mat',
-  footnotes : ["MACHINERY"],
+  footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
   depends_on : ['table6','table12'],
   layout: { full: {graph:12} },
   title : "welcome_mat_title",
@@ -863,7 +863,7 @@ new PanelGraph({
 new PanelGraph({
   level: "gov",
   key: 'welcome_mat',
-  footnotes : ["MACHINERY"],
+  footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
   depends_on : ['table6','table12'],
   layout: { full: {graph:12} },
   title : "welcome_mat_title",
