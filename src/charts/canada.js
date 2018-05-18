@@ -86,10 +86,9 @@ export class canada {
 
       if (!_.isUndefined(last_year_data[d[0]])){
         prev_prov = d[0];
-  
         svg.select("#CA-" + d[0])
           .styles({
-            "stroke-width" : "15px",
+            "stroke-width" : ((d[0]==="abroad"||d[0]==="na")? "8px" : "15px"),
             "stroke" : "#1f77b4",
           })
   

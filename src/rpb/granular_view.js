@@ -50,7 +50,7 @@ class GranularView extends React.Component {
         <LabeledBox
           label={ <TextMaker text_key="blue_text_table_controls" /> }
           content={
-            <div className="row">
+            <div>
               <div className='col-md-6'>
                 <div className="rpb-config-item col-selection granular">
                   <label className="rpb-config-header" > <TextMaker text_key="select_columns" /> </label>
