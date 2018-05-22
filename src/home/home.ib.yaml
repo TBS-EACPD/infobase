@@ -191,16 +191,12 @@ infographs_for_crso:
   en: Core Responsibility/Strategic Outcome Infographics on spending and results
   fr: Infographies sur les dépenses et les résultats pour les responsabilités essentielles et les résultats stratégiques
 
-survey_link:
-  en: https://questionnaire.simplesurvey.com/f/l/ifs-sri?idlang=EN 
-  fr: https://questionnaire.simplesurvey.com/f/l/ifs-sri?idlang=FR
-  
 survey_link_text:
   transform: [ handlebars ]
   en: |
-    Did InfoBase help you find what you were looking for? Help us make improvements by <a class="survey-link" href='{{gt "survey_link"}}' target="_blank"> telling us about your experience! </a>
+    Did InfoBase help you find what you were looking for? Help us make improvements by <a class="survey-link" href='{{{survey_link}}}' target="_blank"> telling us about your experience! </a>
   fr: |
-    L’InfoBase vous a-t-elle été utile pour trouver ce que vous cherchiez? Aidez-nous à l’améliorer en <a class="survey-link" href='{{gt "survey_link"}}' target="_blank">nous relatant votre expérience!</a>
+    L’InfoBase vous a-t-elle été utile pour trouver ce que vous cherchiez? Aidez-nous à l’améliorer en <a class="survey-link" href='{{{survey_link}}} target="_blank">nous relatant votre expérience!</a>
 
 home_featured_row_title:
   en: Featured content
