@@ -36,8 +36,7 @@ jobs:
             [ -f /base/app-a11y-en.min.js ] || npm run a11y_prod_no_watch
       - save_cache:
           paths:
-            - /build
-            - /build/*
+            - build
           key: ib-prod-build-{{ .Branch }}-{{ .Revision }}
       - persist_to_workspace:
           root: ./
