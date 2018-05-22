@@ -26,7 +26,7 @@ jobs:
       - run: npm run IB_prod_no_watch
       - run: npm run a11y_prod_no_watch
       - persist_to_workspace:
-          root: root/project/build/InfoBase
+          root: build/InfoBase
           paths:
             - echo-output
   
@@ -34,7 +34,7 @@ jobs:
     <<: *docker_defaults
     steps:
       - attach_workspace:
-          at: root/project/build/InfoBase
+          at: build/InfoBase
       - run: 
           name: start_server
           command: npm run ci_serve
@@ -45,7 +45,7 @@ jobs:
     <<: *docker_defaults
     steps:
       - attach_workspace:
-          at: root/project/build/InfoBase
+          at: build/InfoBase
       - run: chmod +x ./.circleci/authenticate-gcloud.sh
       - run: ./.circleci/authenticate-gcloud.sh
       - run: gsutil -m rsync -d -r build/InfoBase gs://ib-static-bucket/InfoBase
