@@ -1,3 +1,6 @@
+const common_lang = require('../common_text/common_lang.yaml');
+const igoc_lang = require('../common_text/igoc-lang.yaml');
+
 /* 
   TODO: some parts of this still feel hacky 
     * table_common requiring this to check for pre_public_accounts
@@ -22,6 +25,13 @@
 */
 
 const template_globals_file = require('../common_text/template_globals.csv');
+
+
+const global_bundles = [
+  common_lang,
+  igoc_lang,
+];
+
 
 //this will look like { key, en, fr }
 const template_globals_parsed = d3.csvParse(template_globals_file);
@@ -153,8 +163,8 @@ const add_text_bundle = (text_bundle) => {
   text_bundles_by_filename[__file_name__] = to_add;
 }
 
-const create_text_maker = bundles => {
-  const combined_bundle = _.chain(bundles)
+const combine_bundles = bundles => {
+  return _.chain(bundles)
     .map(bundle =>  {
       const { __file_name__ } = bundle;
       if(!_.has(text_bundles_by_filename, __file_name__)){
@@ -166,10 +176,16 @@ const create_text_maker = bundles => {
     .fromPairs()
     .value();
 
-  
-  const func = _create_text_maker(combined_bundle)
-  combined_bundle.__text_maker_func__ = func;
+};
 
+const combined_global_bundle = combine_bundles(global_bundles);
+
+const create_text_maker = bundles => {
+
+  const combined = combine_bundles(bundles);
+  _.extend(combined, combined_global_bundle);
+  const func = _create_text_maker(combined)
+  combined.__text_maker_func__ = func;
   
   return func;
 }
