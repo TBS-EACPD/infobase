@@ -310,9 +310,11 @@ const StatusDisplay = ({
   <span className="nowrap">
     <span style={{paddingRight: "5px"}}> { status_icons[icon_key] } </span>
     <TextMaker
-      template_str={
-        `{{gl_tt "${result_statuses[status_key].text}" "${icon_key_to_glossary_key[icon_key]}"}}`
-      }
+      text_key="result_status_with_gl"
+      args={{
+        text: result_statuses[status_key].text,
+        glossary_key: icon_key_to_glossary_key[icon_key],
+      }}
     />
   </span>
 </div>
