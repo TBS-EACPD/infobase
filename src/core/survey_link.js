@@ -24,7 +24,7 @@ function add_survey_banner(){
         </div>
         <div class="survey-link-close-container">
           <button 
-            class="button-unstyled survey-close"
+            class="survey-close"
             aria-label="close"
           >
             <span aria-hidden="true" class="glyphicon glyphicon-remove">

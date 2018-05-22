@@ -314,6 +314,9 @@ div.height-clipped-bar-area {
   }
 }
 
+.survey-close {
+  @include unstyled-button;
+}
 .survey-link-box {
   font-size: 1.4em;
   background-color: #d7faff;
@@ -325,7 +328,6 @@ div.height-clipped-bar-area {
   color: #214a5f;
   display: flex;
 }
-
 .survey-link-close-container {
   /* top right corner */
   margin-bottom: auto;

@@ -58,6 +58,7 @@
 }
 
 .hierarchy-selection-item {
+  @include unstyled-link;
   background-color: #fcfcfc;
   color: #222;
   padding: 10px;

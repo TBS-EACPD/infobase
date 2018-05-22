@@ -201,7 +201,7 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
       .map( ({icon_key, count }) =>
         <button
           onClick={()=>onIconClick(icon_key)}
-          className={classNames("button-unstyled status-icon-table__item", _.includes(active_list, icon_key) && "status-icon-table__item--active" )}
+          className={classNames("status-icon-table__item", _.includes(active_list, icon_key) && "status-icon-table__item--active" )}
           key={icon_key}
         >
           <div 

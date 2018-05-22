@@ -11,6 +11,7 @@
 }
 
 .radio-buttons__option {
+  @include unstyled-button;
   flex: 1;
   padding: 5px 15px;
   color: $buttonPrimaryColor;
@@ -21,6 +22,7 @@
   position: relative;
   -webkit-box-shadow: none;
   box-shadow: none;
+  text-align: center;
 }
 
 .radio-buttons__option.radio-buttons__option--active {

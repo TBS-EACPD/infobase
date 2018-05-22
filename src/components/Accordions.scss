@@ -33,6 +33,7 @@
 }
 
 .pull-down-accordion-expander {
+  @include unstyled-button;
   color: $backgroundColor;
   background-color: transparent;
 }

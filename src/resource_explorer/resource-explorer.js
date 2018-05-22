@@ -52,7 +52,7 @@ const HierarchySelectionItem = ({title, text, active, url }) => (
   <a 
     role="radio"
     title={title}
-    className={classNames("link-unstyled hierarchy-selection-item", active && "active")}
+    className={classNames("hierarchy-selection-item", active && "active")}
     tabIndex={0}
     aria-checked={active}
     href={url}

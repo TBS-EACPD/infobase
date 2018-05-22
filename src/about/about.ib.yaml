@@ -31,7 +31,7 @@ about_principles_table:
         {{{gt "principles_title"}}}
       </header>
       <div class="hierarchy-selection-items">
-        <div class="button-unstyled hierarchy-selection-item">
+        <div class="hierarchy-selection-item">
           <div class="hierarchy-selection-item__header">
             {{{gt "principle_1_name"}}}
           </div>
@@ -47,7 +47,7 @@ about_principles_table:
             {{{gt "principle_2_desc"}}}
           </div>
         </div>
-        <div class="button-unstyled hierarchy-selection-item">
+        <div class="hierarchy-selection-item">
           <div class="hierarchy-selection-item__header">
             {{{gt "principle_3_name"}}}
           </div>
@@ -55,7 +55,7 @@ about_principles_table:
             {{{gt "principle_3_desc"}}}
           </div>
         </div>
-        <div class="button-unstyled hierarchy-selection-item">
+        <div class="hierarchy-selection-item">
           <div class="hierarchy-selection-item__header">
             {{{gt "principle_4_name"}}}
           </div>

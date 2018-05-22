@@ -74,7 +74,7 @@ const StatelessPullDownAccordion = ({ title, isExpanded, children, onToggle }) =
     </ReactTransitionGroup>
     <div className="pull-down-accordion-footer" onClick={onToggle}>
       <button 
-        className="button-unstyled pull-down-accordion-expander"
+        className="pull-down-accordion-expander"
         aria-label={isExpanded ? "collapse above" : "expand above"}
       >
         <span 

@@ -136,6 +136,7 @@ dl.indicator-item__dl dt+dd {
         .status-icon-table__count
 */
 .status-icon-table {
+  @include unstyled-button;
   display: flex;
   justify-content: space-around;
   align-items: stretch;

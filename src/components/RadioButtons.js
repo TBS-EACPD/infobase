@@ -7,7 +7,7 @@ module.exports.RadioButtons = ({ options, onChange }) => <div className="radio-b
     <button 
       key={id}
       aria-pressed={active}
-      className={classNames("btn button-unstyled","radio-buttons__option", active && "radio-buttons__option--active")}
+      className={classNames("btn","radio-buttons__option", active && "radio-buttons__option--active")}
       onClick={()=>{ onChange(id)}}
     >
       {display}

@@ -2,7 +2,7 @@ const { text_maker } = require('../models/text.js');
 
 const SortIndicator = ({ sortDirection, active }) => (
   <button
-    className="button-unstyled rpb-sort-indicator"
+    className="rpb-sort-indicator"
     style={{ 
       color: "white",
       fontSize: '1.2em',

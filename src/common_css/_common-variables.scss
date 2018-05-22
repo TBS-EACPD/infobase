@@ -23,3 +23,8 @@ $heavyFontWeight: 700;
   padding: 0;
   border-radius: 0;
 }
+
+@mixin unstyled-link {
+  color: inherit;
+  text-decoration: inherit;
+}

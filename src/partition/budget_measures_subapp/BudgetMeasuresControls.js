@@ -90,7 +90,7 @@ export class BudgetMeasuresControls extends React.Component {
                       <button
                         aria-pressed={ _.includes(active_list, chapter_key) }
                         onClick={ () => update_filtered_chapter_keys(filtered_chapter_keys, chapter_key) }
-                        className={ classNames("button-unstyled chapter-key-table__item", _.includes(active_list, chapter_key) && "chapter-key-table__item--active" ) }
+                        className={ classNames("chapter-key-table__item", _.includes(active_list, chapter_key) && "chapter-key-table__item--active" ) }
                         key={chapter_key}
                       >
                         <div 
