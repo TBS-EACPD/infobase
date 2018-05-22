@@ -26,7 +26,11 @@
   border-radius: 0 10px 10px 0;
   background-color: white;
   padding: 10px 10px 10px 10px;
+  & > .row{
+    margin: 0px;
+  }
 }
+
 /* hacky flexbox bug, even in chrome! */
 .labeled-box-content > div {
   width: 100%;

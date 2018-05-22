@@ -78,7 +78,7 @@ class SimpleView extends React.Component {
         <LabeledBox
           label={ <TextMaker text_key="blue_text_table_controls" /> }
           content={
-            <div className="rpb-config rpb-simple">
+            <div className="rpb-config rpb-simple row">
               <div className="col-md-6">
                 <div className="rpb-config-item col-selection simple">
                   <label className="rpb-config-header" > <TextMaker text_key="select_columns" /> </label>
