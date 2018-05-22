@@ -1,4 +1,3 @@
-require('./igoc_explorer.ib.yaml');
 require('./igoc_explorer.scss');
 
 const { StandardRouteContainer } = require('../core/NavComponents.js');
@@ -16,12 +15,10 @@ const { Explorer } = require('./explorer_view.js');
 const { filter_hierarchy } = require('../gen_expl/hierarchy_tools.js');
 
 
-const { text_maker } =  require('../models/text.js');
-const {
+const { 
+  igoc_tmf: text_maker, 
   TM,
-} = require('../util_components.js');
-
-
+} =  require('./igoc_explorer_text.js');
 
 const {
   get_memoized_funcs,

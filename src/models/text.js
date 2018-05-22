@@ -1,6 +1,7 @@
 const common_lang = require('../common_text/common_lang.yaml');
 const igoc_lang = require('../common_text/igoc-lang.yaml');
 const nav_lang = require('../common_text/nav_lang.yaml');
+const result_lang = require('../common_text/result_lang.yaml');
 
 /* 
   TODO: some parts of this still feel hacky 
@@ -32,6 +33,7 @@ const global_bundles = [
   common_lang,
   igoc_lang,
   nav_lang,
+  result_lang,
 ];
 
 

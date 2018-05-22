@@ -1,5 +1,4 @@
-require('../panels/intro_graphs/intro_lang.ib.yaml');
-require('../panels/result_graphs/result_lang.ib.yaml');
+const explorer_text = require("./explorer.yaml");
 
 const { Fragment } = require('react');
 const { infograph_href_template } = require('../link_utils.js');
@@ -7,21 +6,21 @@ const { StandardRouteContainer } = require('../core/NavComponents');
 
 const { get_col_defs } = require('../gen_expl/resource-explorer-common.js');
 
-const { text_maker } =  require('../models/text.js');
-require("./explorer.ib.yaml");
+const { create_text_maker } =  require('../models/text.js');
+
+const text_maker = create_text_maker(explorer_text);
+
 
 const Subject = require('../models/subject.js');
 
 const { Tag } = Subject;
 
 const {
-  TextMaker,
-  TM,
+  TM: StandardTM,
   SpinnerWrapper,
 } = require('../util_components.js');
 const { Details } = require('../components/Details.js');
 const classNames = require('classnames');
-
 
 //treemap stuff
 const { combineReducers, createStore } = require('redux');
@@ -47,6 +46,8 @@ const {
 const { ensure_loaded } = require('../core/lazy_loader.js');
 
 const { Explorer } = require('../components/ExplorerComponents.js');
+
+const TM = props => <StandardTM tmf={text_maker} {...props} />;
 
 const HierarchySelectionItem = ({title, text, active, url }) => (
   <a 
@@ -105,7 +106,7 @@ function render_non_col_content({node}){
       { ( _.includes(['program','dept'], subject.level) || subject.is_cr || subject.is_lowest_level_tag ) && 
         <div className='ExplorerNode__BRLinkContainer'>
           <a href={infograph_href_template(subject)}> 
-            <TextMaker text_key="see_infographic" />
+            <TM k="see_infographic" />
           </a>
         </div>
       }
@@ -240,7 +241,7 @@ class ExplorerPage extends React.Component {
         }
         {is_filtering && _.isEmpty(root.children) &&
           <div style={{fontWeight: '500', fontSize: '1.5em', textAlign:'center'}}>  
-            <TextMaker text_key="search_no_results" />
+            <TM k="search_no_results" />
           </div>
         }
         <Explorer 
@@ -256,7 +257,7 @@ class ExplorerPage extends React.Component {
     
     return <div>
       <div style={{marginBottom:'35px'}}>
-        <TextMaker text_key="tag_nav_intro_text" el="div" />
+        <TM k="tag_nav_intro_text" el="div" />
         <Details
           summary_content={<TM k="where_can_find_subs_question" />}
           content={<TM k="where_can_find_subs_answer" />}
@@ -265,7 +266,7 @@ class ExplorerPage extends React.Component {
 
       <div className="hierarchy-selection">
         <header className="hierarchy-selection-header">
-          <TextMaker text_key="choose_explore_point" />
+          <TM k="choose_explore_point" />
         </header>
         <div role="radiogroup" className="hierarchy-selection-items">
           {_.map([ min_props, dept_props, goco_props, hwh_props ],props =>
@@ -286,12 +287,12 @@ class ExplorerPage extends React.Component {
         <ul className="tabbed_content_label_bar">
           <li className={classNames("tab_label", doc==="drr16" && "active_tab")} onClick={()=> this.refs.drr166_link.click()}>
             <a href={`#resource-explorer/${hierarchy_scheme}/drr166`} role="button" aria-pressed={doc === "drr16"} className="tab_label_text" ref="drr166_link">
-              <TextMaker text_key="DRR_resources_option_title" />
+              <TM k="DRR_resources_option_title" />
             </a>
           </li>
           <li className={classNames("tab_label", doc==="dp17" && "active_tab")} aria-pressed={doc === "dp17"} onClick={()=> this.refs.dp17_link.click()}>
             <a href={`#resource-explorer/${hierarchy_scheme}/dp17`} role="button" className="tab_label_text" ref="dp17_link">
-              <TextMaker text_key="DP_resources_option_title" />
+              <TM k="DP_resources_option_title" />
             </a>
           </li>
         </ul>

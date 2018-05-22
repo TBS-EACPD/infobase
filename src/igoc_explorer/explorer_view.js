@@ -4,10 +4,12 @@ const { createSelector } = require('reselect');
 const classNames = require('classnames');
 const { infograph_href_template } = require('../link_utils.js');
 const { get_root } = require('../gen_expl/hierarchy_tools.js');
-const { text_maker } = require('../models/text.js');
+const { 
+  igoc_tmf: text_maker, 
+  TM,
+} =  require('./igoc_explorer_text.js');
 const {
   SpinnerWrapper,
-  TM,
 } = require('../util_components.js');
 const { InstForm } = require('../models/subject.js');
 const { Explorer } = require('../components/ExplorerComponents.js')
