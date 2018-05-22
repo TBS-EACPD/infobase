@@ -1,9 +1,9 @@
 docker_defaults: &docker_defaults
   docker:
-     - image: gcr.io/ib-api-first/ib-client-ci:latest
-        auth:
-          username: _json_key
-          password: $GCLOUD_JSON_AUTH
+    - image: gcr.io/ib-api-first/ib-client-ci:latest
+      auth:
+        username: _json_key
+        password: $GCLOUD_JSON_AUTH
 
 
 version: 2
@@ -19,33 +19,33 @@ jobs:
             - ib-client-dependencies-{{ checksum "package-lock.json" }}
       - run: npm install
       - save_cache:
-          paths:
-            - node_modules
-          key: ib-client-dependencies-{{ checksum "package-lock.json" }}
+        paths:
+          - node_modules
+        key: ib-client-dependencies-{{ checksum "package-lock.json" }}
       - run: npm run IB_base
       - run: npm run IB_prod_no_watch
       - run: npm run a11y_prod_no_watch
       - persist_to_workspace:
-          root: root/project/build/InfoBase
-          paths:
-            - echo-output
+        root: root/project/build/InfoBase
+        paths:
+          - echo-output
   
   test:
     <<: *docker_defaults
     steps:
       - attach_workspace:
-          at: root/project/build/InfoBase
+        at: root/project/build/InfoBase
       - run: 
-          name: start_server
-          command: npm run ci_serve
-          background: true
+        name: start_server
+        command: npm run ci_serve
+        background: true
       - run: npm run ci_test
   
   deploy:
     <<: *docker_defaults
     steps:
       - attach_workspace:
-          at: root/project/build/InfoBase
+        at: root/project/build/InfoBase
       - run: chmod +x ./.circleci/authenticate-gcloud.sh
       - run: ./.circleci/authenticate-gcloud.sh
       - run: gsutil -m rsync -d -r build/InfoBase gs://ib-static-bucket/InfoBase
@@ -53,15 +53,15 @@ jobs:
 workflows:
   version: 2
   build_test_deploy:
-      jobs:
+    jobs:
       - build
       - test:
-          requires:
-            - build
+        requires:
+          - build
       - deploy:
-          requires:
-            - test
-          filters:
-            branches:
-              only:
-                - master
+        requires:
+          - test
+        filters:
+          branches:
+            only:
+              - master
