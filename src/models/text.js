@@ -122,9 +122,11 @@ const template_store = {};
   this function will get rid of all en/fr and replace it with text 
 
 */
+const text_bundles_by_filename = {};
 const add_text_bundle = (text_bundle) => {
+  const { __file_name__ } = text_bundle;
   const to_add = {};
-  _.each(text_bundle,(text_obj,key) => {
+  _.each( _.omit(text_bundle, "__file_name__") ,(text_obj,key) => {
     if (text_obj.handlebars_partial) {
       Handlebars.registerPartial(key, text_obj.text);
       return;
@@ -146,11 +148,34 @@ const add_text_bundle = (text_bundle) => {
 
   });
   _.extend(template_store, to_add); 
+
+
+  text_bundles_by_filename[__file_name__] = to_add;
+}
+
+const create_text_maker = bundles => {
+  const combined_bundle = _.chain(bundles)
+    .map(bundle =>  {
+      const { __file_name__ } = bundle;
+      if(!_.has(text_bundles_by_filename, __file_name__)){
+        add_text_bundle(bundle)
+      }
+      return _.toPairs(text_bundles_by_filename[__file_name__]);
+    })
+    .flatten()
+    .fromPairs()
+    .value();
+
+  
+  const func = _create_text_maker(combined_bundle)
+  combined_bundle.__text_maker_func__ = func;
+
+  
+  return func;
 }
 
 
-
-const text_maker = (key,context={}) => {
+const _create_text_maker = (deps=template_store) => (key,context={}) => {
 
   // 1. lookup the key to get the text object
   // 2. note that by the time this function gets called, we've already stripped out language
@@ -158,9 +183,12 @@ const text_maker = (key,context={}) => {
   //    and apply the requested transform i.e. handlebars
   //    and markdown
   if(!_.isObject(context)){ context={}; }
+  if(deps.__text_maker_func__){
+    context.__text_maker_func__ = deps.__text_maker_func__;
+  }
 
 
-  const text_obj =  template_store[key];
+  const text_obj =  deps[key];
   if(_.isString(text_obj)) return text_obj;
 
   let rtn = text_obj.text;
@@ -190,6 +218,7 @@ const text_maker = (key,context={}) => {
 }
 
 
+const text_maker = _create_text_maker(template_store);
 
 module.exports = exports = {
   template_globals, //this is currently only exposed to table_common because it wants the pre_public_accounts variable.
@@ -197,9 +226,11 @@ module.exports = exports = {
   run_template,
   text_maker,
   template_store, 
+  create_text_maker,
 };
 window._text_maker = text_maker;
 window._run_template = run_template;
 window._template_store = template_store;
 window._template_globlals = template_globals;
 window.add_text_bundle = add_text_bundle;
+window._create_text_maker = create_text_maker;

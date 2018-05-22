@@ -303,6 +303,10 @@ Handlebars.registerHelper("gt",function(context){
   return text_maker(context);
 });
 
+Handlebars.registerHelper("new_gt",function(context){
+  return this.__text_maker_func__(context);
+});
+
 // {{rt "key"}} -> runs template 
 Handlebars.registerHelper("rt",function(context){
   return run_template(context);
