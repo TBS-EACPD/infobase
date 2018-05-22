@@ -1,6 +1,6 @@
-import "./home.ib.yaml";
 import './home.scss';
 import './home-svg.css';
+import home_text_bundle from "./home.yaml";
 import get_home_content from './home-data.js';
 import { log_standard_event } from '../core/analytics.js';
 import MediaQuery from 'react-responsive';
@@ -9,14 +9,14 @@ import classNames from 'classnames';
 
 import { 
   EverythingSearch,
-  TM,
+  TM as StandardTM,
   SpinnerWrapper,
   VImageCard,
   HImageCard,
 } from '../util_components.js';
 
 import { general_href_for_item } from '../link_utils.js';
-import { text_maker } from '../models/text.js';
+import { create_text_maker } from '../models/text.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
 import { ResultCounts } from '../models/results.js';
 import { Table } from '../core/TableClass.js';
@@ -24,6 +24,9 @@ import { Table } from '../core/TableClass.js';
 import { StandardRouteContainer } from '../core/NavComponents.js';
 
 
+const home_tm = create_text_maker(home_text_bundle);
+
+const TM = props => <StandardTM tmf={home_tm} {...props} />;
 
 export class Home extends React.Component {
   constructor(){
@@ -97,7 +100,7 @@ const HomeLayout = props => (
       <div className="search-box"><div className="search-container">
         <EverythingSearch 
           include_gov={false} 
-          search_text={text_maker('everything_search_placeholder')}
+          search_text={home_tm('everything_search_placeholder')}
           large={true}
           include_tags={true}
           include_programs={true}
@@ -206,6 +209,7 @@ const HomeLayout = props => (
         <div className="equal-height-col is-1-third">
           <div className="col-content misc-col-content">
             <HImageCard
+              tmf={home_tm}
               link_href="#orgs/gov/gov/infograph/financial"
               title_key="home_finance_title"
               text_key="home_finance_intro"
@@ -217,6 +221,7 @@ const HomeLayout = props => (
         <div className="equal-height-col is-1-third">
           <div className="col-content misc-col-content">
             <HImageCard
+              tmf={home_tm}
               link_href="#orgs/gov/gov/infograph/people"
               title_key="home_ppl_title"
               text_key="home_ppl_intro"
@@ -228,6 +233,7 @@ const HomeLayout = props => (
         <div className="equal-height-col is-1-third">
           <div className="col-content misc-col-content">
             <HImageCard
+              tmf={home_tm}
               link_href="#orgs/gov/gov/infograph/results"
               title_key="home_results_title"
               text_key="home_results_intro"
@@ -247,6 +253,7 @@ const HomeLayout = props => (
         <div className="col-content featured-col-content partition-budget-home-content">
           <MediaQuery minWidth={992}>
             <HImageCard
+              tmf={home_tm}
               img_src="svg/partition-budget.svg"
               title_key="budget_home_title"
               text_key="budget_home_text"
@@ -256,6 +263,7 @@ const HomeLayout = props => (
           </MediaQuery>
           <MediaQuery maxWidth={991}>
             <VImageCard
+              tmf={home_tm}
               img_src="svg/partition-budget.svg"
               title_key="budget_home_title"
               text_key="budget_home_text"
@@ -270,6 +278,7 @@ const HomeLayout = props => (
       <div aria-hidden={true} className="equal-height-col is-1-third">
         <div className="col-content featured-col-content">
           <VImageCard
+            tmf={home_tm}
             img_src="svg/partition.svg"
             title_key="partition_home_title"
             text_key="partition_home_text"
@@ -281,6 +290,7 @@ const HomeLayout = props => (
       <div aria-hidden={true} className="equal-height-col is-1-third">
         <div className="col-content featured-col-content">
           <VImageCard
+            tmf={home_tm}
             img_src="svg/bubbles.svg"
             title_key="planet_home_title"
             text_key="planet_home_text"
@@ -310,6 +320,7 @@ const HomeLayout = props => (
       <div className="equal-height-col is-1-third">
         <section className="col-content explore-col-content">
           <VImageCard
+            tmf={home_tm}
             img_src="svg/explorer.svg"
             title_key="explorer_home_title"
             text_key="explorer_home_text"
@@ -321,6 +332,7 @@ const HomeLayout = props => (
       <div className="equal-height-col is-1-third">
         <section className="col-content explore-col-content">
           <VImageCard
+            tmf={home_tm}
             img_src="svg/builder.svg"
             title_key="home_build_a_report"
             text_key="report_builder_home_desc"
@@ -332,6 +344,7 @@ const HomeLayout = props => (
       <div className="equal-height-col is-1-third">
         <section className="col-content explore-col-content">
           <VImageCard
+            tmf={home_tm}
             img_src="svg/structure.svg"
             title_key="igoc_home_title"
             text_key="igoc_home_desc"
@@ -373,6 +386,7 @@ const HomeLayout = props => (
       <div className="equal-height-col is-1-third">
         <section className="col-content misc-col-content">
           <HImageCard
+            tmf={home_tm}
             link_href="#metadata"
             title_key="metadata_home_title"
             text_key="metadata_home_desc"
@@ -384,6 +398,7 @@ const HomeLayout = props => (
       <div className="equal-height-col is-1-third">
         <section className="col-content misc-col-content">
           <HImageCard
+            tmf={home_tm}
             link_href={"#about"}
             title_key="about_home_title"
             text_key="about_home_desc"

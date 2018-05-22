@@ -1,11 +1,11 @@
-require("./metadata.ib.yaml");
+const metadata_text = require("./metadata.yaml");
 const { 
   StandardRouteContainer,
   ScrollToTargetContainer,
 } = require('../core/NavComponents.js');
-const {text_maker} = require('../models/text');
+const {create_text_maker} = require('../models/text');
 const { 
-  TM,
+  TM: StandardTM,
   FancyUL,
 }  = require('../util_components.js');
 const { sources } = require('./data_sources.js');
@@ -16,6 +16,9 @@ const {
 const { months } = require('../models/businessConstants');
 
 const FormattedDate = ({ day, month, year}) => <span>{months[month].text} {year}</span>;
+
+const tmf = create_text_maker(metadata_text);
+const TM = props => <StandardTM tmf={tmf} {...props} />
 
 export class MetaData extends React.Component {
   render(){
@@ -31,9 +34,9 @@ export class MetaData extends React.Component {
 
     return (
       <StandardRouteContainer
-        title={text_maker("metadata")}
-        breadcrumbs={[text_maker("metadata")]}
-        description={text_maker("metadata_document_description")}
+        title={tmf("metadata")}
+        breadcrumbs={[tmf("metadata")]}
+        description={tmf("metadata_document_description")}
         route_key="_metadata"
       >
         <div>
@@ -50,7 +53,7 @@ export class MetaData extends React.Component {
                   </div>
                 </div>
                 <div style={{fontWeight: "400", opacity: 0.8}}>
-                  <TM k="refreshed"/> {source.frequency.text}
+                  <TM k="refresh_freq"/> {source.frequency.text}
                 </div>
               </header>
     
@@ -65,7 +68,7 @@ export class MetaData extends React.Component {
                       { 
                         inline_link ? 
                         <a 
-                          title={text_maker('rpb_link_text')}
+                          title={tmf('rpb_link_text')}
                           href={inline_link}
                           style={{alignSelf: "center"}}
                         >

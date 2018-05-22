@@ -1,5 +1,6 @@
 const common_lang = require('../common_text/common_lang.yaml');
 const igoc_lang = require('../common_text/igoc-lang.yaml');
+const nav_lang = require('../common_text/nav_lang.yaml');
 
 /* 
   TODO: some parts of this still feel hacky 
@@ -30,6 +31,7 @@ const template_globals_file = require('../common_text/template_globals.csv');
 const global_bundles = [
   common_lang,
   igoc_lang,
+  nav_lang,
 ];
 
 
@@ -180,7 +182,14 @@ const combine_bundles = bundles => {
 
 const combined_global_bundle = combine_bundles(global_bundles);
 
+
 const create_text_maker = bundles => {
+  if(_.isEmpty(bundles)){ //called without args -> only global text  
+    return trivial_text_maker;
+  }
+  if(!_.isArray(bundles)){ //single el
+    bundles = [ bundles ] 
+  }
 
   const combined = combine_bundles(bundles);
   _.extend(combined, combined_global_bundle);
@@ -236,6 +245,9 @@ const _create_text_maker = (deps=template_store) => (key,context={}) => {
 
 const text_maker = _create_text_maker(template_store);
 
+const trivial_text_maker = _create_text_maker(combined_global_bundle);
+
+
 module.exports = exports = {
   template_globals, //this is currently only exposed to table_common because it wants the pre_public_accounts variable.
   tx_load : add_text_bundle, //shorthand because used very often
@@ -243,6 +255,7 @@ module.exports = exports = {
   text_maker,
   template_store, 
   create_text_maker,
+  trivial_text_maker,
 };
 window._text_maker = text_maker;
 window._run_template = run_template;

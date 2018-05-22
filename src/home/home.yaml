@@ -1,3 +1,7 @@
+welcome:
+  en: GC InfoBase
+  fr: InfoBase du GC
+
 home_finance_title:
   en: Finances
   fr: Finances
@@ -129,7 +133,7 @@ metadata_home_desc:
 metadata_home_link_text:
   transform: [handlebars]
   text: |
-    {{gt "see_data"}}
+    {{new_gt "see_data"}}
 
 whats_new:
   en: What's new?
@@ -147,7 +151,7 @@ table4_home_link:
   transform: [handlebars]
   en: | 
     {{pa_last_year}} Public Accounts
-		
+  
   fr: Comptes publics {{pa_last_year}}
 
 tabled_estimates_home:
@@ -249,3 +253,25 @@ about_home_desc:
 about_home_link:
   en: Learn about us
   fr: En savoir plus sur nous
+
+home_pop_by_exec:
+  en: Population by Executive Level
+  fr: Population selon les niveaux des cadres supérieurs
+
+
+home_pop_by_gender:
+  en: Population by Gender
+  fr: Population selon le sexe
+
+home_pop_by_fol:
+  en: Population by First Official Language
+  fr: Population selon la première langue officielle
+
+home_pop_avg_age:
+  en: Employee Average Age
+  fr: Âge moyen des employés
+
+
+
+
+

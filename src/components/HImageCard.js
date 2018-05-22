@@ -9,6 +9,7 @@ const HImageCard = ({
   link_key,
   link_href,
   text_args,
+  tmf,
 }) => (
   <div className="h-img-card col-content-child">
     { img_src &&
@@ -24,14 +25,14 @@ const HImageCard = ({
     <div className="h-img-card__right-container">
       <div className="h-img-card__right">
         <header className="h-img-card__title">
-          <TM k={title_key}/>
+          <TM tmf={tmf} k={title_key}/>
         </header>
         <div className="h-img-card__text">
-          <TM k={text_key} args={text_args} />
+          <TM tmf={tmf} k={text_key} args={text_args} />
         </div>
         <div className="h-img-card__bottom-right">
           <a href={link_href}>
-            <TM k={link_key} />
+            <TM tmf={tmf} k={link_key} />
           </a>
         </div>
       </div>

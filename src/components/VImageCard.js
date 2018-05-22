@@ -8,6 +8,7 @@ const VImageCard = ({
   text_key,
   link_key,
   link_href,
+  tmf,
 }) => (
   <div className="v-img-card col-content-child">
     { img_src &&
@@ -25,10 +26,10 @@ const VImageCard = ({
     <div className="v-img-card__bottom-container">
       <div className="v-img-card__bottom">
         <header className="v-img-card__title">
-          <TM k={title_key} />
+          <TM tmf={tmf} k={title_key} />
         </header>
         <div className="v-img-card__text">
-          <TM k={text_key} />
+          <TM tmf={tmf}  k={text_key} />
         </div>
 
         <div className="v-img-card__bottom-right">

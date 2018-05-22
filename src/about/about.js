@@ -7,7 +7,7 @@ import { create_text_maker } from '../models/text';
 
 import { TextMaker } from '../util_components.js';
 
-const custom_tm = create_text_maker([about_text_bundle]);
+const custom_tm = create_text_maker(about_text_bundle);
 
 export class About extends React.Component {
   render(){
