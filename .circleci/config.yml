@@ -22,9 +22,17 @@ jobs:
           paths:
             - node_modules
           key: ib-client-dependencies-{{ checksum "package-lock.json" }}
-      - run: npm run IB_base
-      - run: npm run IB_prod_no_watch
-      - run: npm run a11y_prod_no_watch
+      - restore_cache:
+          keys:
+            - ib-prod-build-{{ .Branch }}-{{ .Revision }}
+      - run: [ ! -e /base ] && npm run IB_base
+      - run: [ ! -f /base/app-en.min.js ] && npm run IB_prod_no_watch
+      - run: [ ! -f /base/app-a11y-en.min.js ] && npm run a11y_prod_no_watch
+      - save_cache:
+          paths:
+            - /build
+            - /build/*
+          key: ib-prod-build-{{ .Branch }}-{{ .Revision }}
       - persist_to_workspace:
           root: ./
           paths:
