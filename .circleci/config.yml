@@ -60,8 +60,7 @@ jobs:
   
   deploy:
     docker:
-      - image: gcr.io/ib-api-first/ib-client-ci:latest
-        <<: *gcloud_auth
+      - image: google/cloud-sdk:slim
     steps:
       - attach_workspace:
           at: ./
