@@ -38,7 +38,7 @@ class BubbleMenu extends React.Component {
       
 
     sel
-      .attr("class", d => classNames("link-unstyled centerer bubble-button", d.className,  d.active && "active"))
+      .attr("class", d => classNames("centerer bubble-button", d.className,  d.active && "active"))
       .attr("href",_.property('href'))
       .html(d => get_html(d) ) 
       .transition()

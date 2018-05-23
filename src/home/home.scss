@@ -310,6 +310,7 @@
 }
 
 .people-box, .finance-box, .results-box {
+  @include unstyled-link;
   color: #fff;
   font-weight: $lightFontWeight;
 

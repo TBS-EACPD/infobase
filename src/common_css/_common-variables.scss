@@ -25,6 +25,10 @@ $heavyFontWeight: 700;
 }
 
 @mixin unstyled-link {
-  color: inherit;
-  text-decoration: inherit;
+    &, &:link, &:visited, &:hover {
+      color: inherit;
+      text-decoration: inherit;
+  }
 }
+
+

@@ -126,7 +126,7 @@ const HomeLayout = props => (
             <div className="col-content">
               <a
                 href="#orgs/gov/gov/infograph/financial"
-                className="h-img-card finance-box col-content-child link-unstyled"
+                className="h-img-card finance-box col-content-child"
               >
                 <div className="h-img-card__right-container">
                   <div className="h-img-card__right">
@@ -151,7 +151,7 @@ const HomeLayout = props => (
             <div className="col-content">
               <a
                 href="#orgs/gov/gov/infograph/people"
-                className="h-img-card people-box col-content-child link-unstyled"
+                className="h-img-card people-box col-content-child"
               >
                 <div className="h-img-card__right-container">
                   <div className="h-img-card__right">
@@ -176,7 +176,7 @@ const HomeLayout = props => (
             <div className="col-content">
               <a
                 href="#orgs/gov/gov/infograph/results"
-                className="h-img-card results-box col-content-child link-unstyled"
+                className="h-img-card results-box col-content-child"
               >
                 <div className="h-img-card__right-container">
                   <div className="h-img-card__right">

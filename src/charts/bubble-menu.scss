@@ -1,6 +1,7 @@
 @import '../common_css/common-variables';
 
 .bubble-button {
+  @include unstyled-link;
   border-style: solid;
   border-width: 2px;
   text-align: center;
