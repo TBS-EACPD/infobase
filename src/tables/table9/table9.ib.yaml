@@ -106,7 +106,3 @@ table9:
     {{{gt "table9_short"}}}
 
     {{> ochro_includes_excludes_fr}}
-
-employee_type:
-  en: Employee Type
-  fr: Type d'employé

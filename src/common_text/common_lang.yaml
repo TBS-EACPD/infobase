@@ -336,9 +336,7 @@ no_data_available_for_open_year:
 hidden_panels:
   en: Hidden Panels
   fr: Graphiques cachées
-employee_count:
-  en: Employee Count
-  fr: Nombre d’employés
+
 data_for_year:
   transform: [handlebars]
   en: |
@@ -357,87 +355,13 @@ pie_filtered_groups_note:
     <b>Values less than 0.1% excluded</b> 
   fr: |
     <b>Valeurs de moins de 0.1% exclus</b> 
-percentage_of_EX_employees:
-  en: Percentage of EX employees
-  fr: Pourcentage de catégorie EX
-ex_level:
-  en: Executive Level
-  fr: Niveaux cadres supérieurs
-ex_level_condensed:
-  en: Condensed levels
-  fr: Niveaux condensés
-avgage:
-  en: Average Age
-  fr: Âge moyen
-FOL:
-  en: First Official Language
-  fr: Première langue officielle
-employee_gender:
-  en: Employee Gender
-  fr: Employés par sexe
+
 see_the_infographic:
   en: See the Infographic
   fr: Voir l’infographie
 not_available:
     en: Not Available
     fr: Non disponible
-
-#######################################
-#  data type titles
-#######################################
-#current_year_fisc: #current unused
-#  transform: [handlebars]
-#  en: |
-#   Financial Information for Open Fiscal Years
-#   ({{open_year}} & {{in_year}})
-#  fr: |
-#   Renseignements financiers pour les exercices ouverts
-#   ({{open_year}} & {{in_year}})
-#previous_year_fisc:
-#  transform: [handlebars]
-#  en: |
-#   Historical Financial Information for the Last Five Fiscal Years ({{pa_last_year_5}} to {{pa_last_year}})
-#  fr: |
-#   Données financières historiques des cinq derniers exercices
-#   ({{pa_last_year_5}} à {{pa_last_year}})
-#current_year_people_snapshot:
-#  transform: [handlebars]
-#  en: |
-#   Historical People Management Information, March 31st Snapshots ({{ppl_last_year_5}} to {{ppl_last_year}})
-#  fr: |
-#   Information historique sur la gestion des personnes, instantané au 31 mars (de {{ppl_last_year_5}} à {{ppl_last_year}})
-#current_year_people_snapshot_various:
-#  transform: [handlebars]
-#  en: |
-#   Historical People Management Information, March 31st Snapshots and Other
-#  fr: |
-#   Information historique sur la gestion des personnes, instantané au 31 mars et autre
-#previous_year_people_snapshot:
-#  transform: [handlebars]
-#  en: |
-#   Historical People Management Information, March 31st Snapshots ({{ppl_last_year_5}} to {{ppl_last_year}})
-#  fr: |
-#   Information historique sur la gestion des personnes, instantané au 31 mars (de {{ppl_last_year_5}} à {{ppl_last_year}})
-#current_year_people_fy:
-#  transform: [handlebars]
-#  en: |
-#   Historical People Management Information, Fiscal Year ({{ppl_last_year_5}} to {{ppl_last_year}})
-#  fr: |
-#   Renseignements sur la gestion des personnes, Exercice Financier ({{ppl_last_year_5}} à {{ppl_last_year}})
-#previous_year_fisc_targeted:
-#  transform: [handlebars]
-#  en: |
-#   Financial Information on Selected Topics ({{pa_last_year_5}} to {{pa_last_year}})
-#  fr: |
-#   Données financières sur certains sujets ({{pa_last_year_5}} à {{pa_last_year}})
-#planned_results_data:
-#  transform: [handlebars]
-#  en: |
-#   Planned Spending  Information for Upcoming Fiscal Years ({{planning_year_1}} to
-#   {{planning_year_3}})
-#  fr: |
-#   Renseignements pour la planification des prochains exercices
-#   ({{planning_year_1}} au {{planning_year_3}})
 financial_data:
   en: Financial Data
   fr: Données financières
@@ -447,18 +371,6 @@ people_data:
 results_data:
   en: Planning Data
   fr: Données relatives à la planification
-five_year_percent_header:
-  en: Average share (%)
-  fr: Part moyenne (en pourcentage)
-five_year_percent_short:
-  en: Average share
-  fr: Part moyenne
-five_year_percent_description:
-  transform: [handlebars]
-  en: |
-   Corresponds to an average of the category's share of the total population, presented as a percent value. The average is calculated based on March 31 data snapshots from {{ppl_last_year_5}} to {{ppl_last_year}}.
-  fr: |
-   Correspond à la proportion moyenne de cette catégorie dans l’ensemble de la population, en termes de pourcentage. Le calcul de la moyenne est fondé sur les données des aperçus du 31 mars, entre {{ppl_last_year_5}} et {{ppl_last_year}}.
 
 #######################################
 # Data types
@@ -528,18 +440,7 @@ ftes:
 fte_written:
   en: Full-Time Equivalents (FTEs)
   fr: Équivalents temps plein (ETP)
-age_group_condensed:
-  en: Condensed Age Groups
-  fr: Groupes d’âge condensées
-age_group:
-  en: Age Group
-  fr: Groupe d’âge
-geo_region:
-  en: Geographic Region
-  fr: Région géographique
-num_employees:
-  en: Number of Employees
-  fr: Nombre d'employés
+
 horizontal_footnotes:
   en: Footnotes (denoted by * in front of organization name)
   fr: Notes de bas de page (indiquées par un * devant le nom de l’organisation)
@@ -697,7 +598,7 @@ or:
 faq:
   en: FAQ
   fr: FAQ
-cpa:
+cspa:
   en: Core Public Administration
   fr: Administration publique centrale
 fps:

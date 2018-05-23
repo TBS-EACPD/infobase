@@ -1,0 +1,57 @@
+employee_type:
+  en: Employee Type
+  fr: Type d'employé
+
+
+employee_count:
+  en: Employee Count
+  fr: Nombre d’employés
+
+
+percentage_of_EX_employees:
+  en: Percentage of EX employees
+  fr: Pourcentage de catégorie EX
+ex_level:
+  en: Executive Level
+  fr: Niveaux cadres supérieurs
+ex_level_condensed:
+  en: Condensed levels
+  fr: Niveaux condensés
+avgage:
+  en: Average Age
+  fr: Âge moyen
+FOL:
+  en: First Official Language
+  fr: Première langue officielle
+employee_gender:
+  en: Employee Gender
+  fr: Employés par sexe
+
+
+
+
+five_year_percent_header:
+  en: Average share (%)
+  fr: Part moyenne (en pourcentage)
+five_year_percent_short:
+  en: Average share
+  fr: Part moyenne
+five_year_percent_description:
+  transform: [handlebars]
+  en: |
+   Corresponds to an average of the category's share of the total population, presented as a percent value. The average is calculated based on March 31 data snapshots from {{ppl_last_year_5}} to {{ppl_last_year}}.
+  fr: |
+   Correspond à la proportion moyenne de cette catégorie dans l’ensemble de la population, en termes de pourcentage. Le calcul de la moyenne est fondé sur les données des aperçus du 31 mars, entre {{ppl_last_year_5}} et {{ppl_last_year}}.
+
+age_group_condensed:
+  en: Condensed Age Groups
+  fr: Groupes d’âge condensées
+age_group:
+  en: Age Group
+  fr: Groupe d’âge
+geo_region:
+  en: Geographic Region
+  fr: Région géographique
+num_employees:
+  en: Number of Employees
+  fr: Nombre d'employés
