@@ -119,7 +119,7 @@ class ExplorerContainer extends React.Component {
     );
 
     const initialState = {
-      root: _.immutate(initial_root_state, {scheme_key}),
+      root: { ...initial_root_state, scheme_key },
       [scheme_key]: { 
         grouping,
         should_show_orgs_without_data: true,

@@ -14,16 +14,16 @@ const { text_maker } = require("./text");
 const { populate_global_footnotes } = require('./populate_footnotes.js');
 
 
-module.exports.populate_stores = function(){
-  return (
+module.exports.populate_stores = async function(){
+  const text = await (
     window.binary_download && !window.isIE() ? 
     fetch_and_inflate(get_static_url(`lookups_${window.lang}_min.html`)) :
     $.ajax({
       url : get_static_url(`lookups_${window.lang}.html`),
     })
-  ).then( text => {
-    process_lookups(JSON.parse(text));
-  });
+  )
+  
+  return process_lookups(JSON.parse(text));
 };
 
 function process_lookups(data){

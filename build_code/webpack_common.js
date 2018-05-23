@@ -7,6 +7,7 @@ const CDN_URL = process.env.CDN_URL || ".";
 const get_rules = ({ 
   should_use_babel,
   language,
+  is_prod,
 }) => [
   {
     test: /^((?!\.exec).)*\.js$/, 
@@ -16,7 +17,16 @@ const get_rules = ({
         loader: 'babel-loader',
         options: {
           cacheDirectory: true,
-          presets: should_use_babel ? ['react','es2015'] : ['react'],
+          plugins: [ "transform-object-rest-spread" ],
+          presets: [
+            ["env", {
+              targets: {
+                browsers: should_use_babel ?  ["Safari >= 7", "Explorer 11"] : ["Chrome >= 66"],
+                uglify: is_prod,
+              },
+            }],
+            "react",
+          ],
         },
       },
       {
@@ -140,7 +150,7 @@ function create_config({
     entry,
     output: new_output,
     module: {
-      rules: get_rules({ should_use_babel, language}),
+      rules: get_rules({ should_use_babel, language, is_prod}),
       noParse: /\.csv$/,
     },
     plugins: get_plugins({
