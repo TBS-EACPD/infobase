@@ -160,7 +160,7 @@ class ResultTreeMapContainer extends React.Component {
 
     return (
       <div>
-        <button onClick={()=>refetch(_.immutate(variables, { doc: "dp17"}))}> refetch </button>
+        <button onClick={()=>refetch({...variables, doc: "dp17"})}> refetch </button>
         <header> Content </header>
         <div>
           { JSON.stringify(data) }

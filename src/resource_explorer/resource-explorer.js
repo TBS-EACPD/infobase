@@ -310,10 +310,10 @@ const map_state_to_props_from_memoized_funcs = memoized_funcs => {
   const  { get_scheme_props } = memoized_funcs;
   const mapRootStateToRootProps = map_state_to_root_props_from_memoized_funcs(memoized_funcs);
 
-  return state => _.immutate(
-    mapRootStateToRootProps(state),
-    get_scheme_props(state)
-  );
+  return state => ({
+    ...mapRootStateToRootProps(state),
+    ...get_scheme_props(state),
+  });
 }
 
 
@@ -330,13 +330,13 @@ class OldExplorerContainer extends React.Component {
 
     const mapStateToProps = map_state_to_props_from_memoized_funcs(get_memoized_funcs([scheme]));
 
-    const mapDispatchToProps = dispatch => _.immutate(
-      map_dispatch_to_root_props(dispatch),
-      scheme.dispatch_to_props(dispatch)
-    );
+    const mapDispatchToProps = dispatch => ({
+      ...map_dispatch_to_root_props(dispatch),
+      ...scheme.dispatch_to_props(dispatch),
+    });
 
     const initialState = {
-      root: _.immutate(initial_root_state, {scheme_key}),
+      root: ({...initial_root_state, scheme_key}),
       [scheme_key]: get_initial_resource_state({ hierarchy_scheme, doc }),
     };
 

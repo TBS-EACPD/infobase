@@ -63,7 +63,7 @@ const prg_crso_split_render = function(panel, calculations, options){
   const legend_display = (!has_neg && 
       <TabularPercentLegend
         items={
-          _.map(data, obj => _.immutate(obj, {
+          _.map(data, obj => ({...obj,
             color: color_scale(obj.label),
             id: obj.label,
           }))

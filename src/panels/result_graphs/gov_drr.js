@@ -42,7 +42,7 @@ new PanelGraph({
         subject: Dept.lookup(row.id),
         counts: row,
       }))
-      .map( obj => _.immutate(obj, { total: d3.sum(_.values(obj.counts)) } ) )
+      .map( obj => ({...obj, total: d3.sum(_.values(obj.counts)) } ) )
       .value();
 
 

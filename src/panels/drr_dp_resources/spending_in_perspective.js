@@ -63,7 +63,7 @@ class SpendInTagPerspective extends React.Component {
     const legend_display = (!has_neg && 
       <TabularPercentLegend
         items={
-          _.map(data, obj => _.immutate(obj,{
+          _.map(data, obj => ({...obj,
             color: color_scale(obj.label),
             id: obj.label,
           }))

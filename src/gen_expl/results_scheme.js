@@ -95,20 +95,20 @@ export const single_subj_results_scheme = {
     const { type, payload } = action;
     switch(type){
       case 'set_doc':
-        return _.immutate(state, { 
+        return {...state,
           doc: payload,
           status_icon_key_whitelist: [], //reset filtering when doc changes
-        });
+        };
       case 'set_subject':
-        return _.immutate(state, {subject_guid: payload});
+        return {...state, subject_guid: payload};
       case 'status_click':
-        return _.immutate(state, { 
+        return {...state, 
           status_icon_key_whitelist: _.toggle_list(state.status_icon_key_whitelist, payload),
-        });
+        };
       case 'clear_status_filter':
-        return _.immutate(state, { 
+        return {...state, 
           status_icon_key_whitelist: [],
-        });
+        };
       default: 
         return state;
     }

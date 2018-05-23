@@ -249,13 +249,7 @@ const resource_scheme = {
   get_sort_func_selector: () =>  provide_sort_func_selector('resources'),
   get_props_selector: () => {
 
-    return augmented_state => _.immutate( 
-      augmented_state.resources, 
-      { 
-        is_m2m : _.includes(['HWH'], augmented_state.resources.hierarchy_scheme ),
-      }
-    );
-  
+    return augmented_state => ({...augmented_state.resources, is_m2m : _.includes(['HWH'], augmented_state.resources.hierarchy_scheme )});
   },
   dispatch_to_props: dispatch => ({ 
     col_click : col_key => dispatch({type: 'column_header_click', payload: col_key }),
@@ -271,18 +265,18 @@ const resource_scheme = {
     const { type, payload } = action;
     if(type === 'set_hierarchy_and_doc'){
       const { hierarchy_scheme, doc } = payload;
-      return _.immutate(state, { hierarchy_scheme, doc })
+      return ({...state, hierarchy_scheme, doc })
     } else if(type === 'set_hierarchy_scheme'){
-      return _.immutate(state, {hierarchy_scheme: payload });
+      return ({...state, hierarchy_scheme: payload });
     } else if(type === 'column_header_click'){
       const { is_descending, sort_col } = state;
       const clicked_col = payload;
 
       const mods = clicked_col === sort_col ? { is_descending : !is_descending } : { is_descending: true, sort_col : clicked_col };
 
-      return _.immutate(state, mods);
+      return ({...state, mods});
     } else if(type==="set_doc"){
-      return _.immutate(state, { doc: payload });
+      return ({...state, doc: payload });
     } else {
       return state;
     }

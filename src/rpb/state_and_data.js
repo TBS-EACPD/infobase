@@ -106,13 +106,13 @@ const reducer = (state=initial_state, action) => {
     case 'header_click': {
       const col_nick = payload;
       if(state.sort_col  === col_nick){
-        return _.immutate(state, { descending: !state.descending });
+        return {state, descending: !state.descending };
       } else {
-        return _.immutate(state, { 
+        return {state,
           sort_col: col_nick,
           descending: true, 
           page_num: 0,
-        });
+        };
       }
 
     }
@@ -122,72 +122,72 @@ const reducer = (state=initial_state, action) => {
       if(state.columns.length < 2 && _.includes(state.columns, col_nick ) ){ 
         return state; 
       }
-      return _.immutate(state, {
+      return {state,
         columns: _.toggle_list(state.columns, col_nick),
         page_num: 0,
-      });
+      };
 
     }
 
     case 'switch_table': {
       const table_id = payload;
-      return _.immutate(state, get_default_state_for_new_table(table_id));
+      return {...state, ...get_default_state_for_new_table(table_id)};
     }
 
     case 'set_filter': {
       const { dimension, filter} = payload;
-      return _.immutate(state, {
+      return {...state,
         dimension,
         filter,
         page_num: 0,
-      });
+      };
     }
 
     case 'set_dimension': {
-      return _.immutate(state, {
+      return {...state,
         dimension: payload,
         filter: text_maker('all'),
         page_num: 0,
-      });
+      };
 
     }
 
     case 'set_subject': {
       const { guid } = payload;
-      return _.immutate(state, {
+      return {...state,
         subject: guid,
         filter: text_maker('all'),
         page_num: 0,
-      });
+      };
     }
 
     case 'toggle_deptBreakout': {
-      return _.immutate(state, {
+      return {...state,
         preferDeptBreakout: !state.preferDeptBreakout,
         filter: text_maker('all'),
         page_num: 0,
-      });
+      };
     }
 
     case 'toggle_preferTable': {
-      return _.immutate(state, {
+      return {...state,
         preferTable: !state.preferTable,
         page_num: 0,
-      });
+      };
     }
 
     case 'switch_mode': {
-      return _.immutate(state, {
+      return {...state,
         mode: payload,
         page_num: 0,
-      });
+      };
 
     }
 
     case 'set_page': {
-      return _.immutate(state, {
+      return {...state,
         page_num: payload,
-      });
+      };
 
     }
 
@@ -514,7 +514,7 @@ function create_mapStateToProps(){
   );
   
   return state => {
-    return _.immutate(state,{
+    return {...state,
       table: state.table && get_table(state),
       subject: state.subject && get_subject(state),
       columns: !_.isEmpty(state.columns) && get_sorted_columns(state),
@@ -537,7 +537,7 @@ function create_mapStateToProps(){
       filters_by_dimension: state.table && state.mode === 'details' && get_filters_by_dimension(state),
       sorted_key_columns: !_.isEmpty(state.columns) && get_sorted_key_columns(state),
 
-    });
+    };
 
 
 

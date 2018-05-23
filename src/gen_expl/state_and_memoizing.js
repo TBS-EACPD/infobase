@@ -29,10 +29,10 @@ function root_reducer(state=initial_root_state, action){
     case 'switch_mode': {
       const { scheme_key } = payload;
 
-      return _.immutate( state, {
+      return {...state,
         scheme_key,
         loading: false,
-      });
+      };
 
     }
 
@@ -50,26 +50,26 @@ function root_reducer(state=initial_root_state, action){
       } = state;
 
       if(_.includes(oldExpanded, id)){
-        return _.immutate(state, {
+        return {...state,
           userExpanded: _.without(oldExpanded, id),
-        });
+        };
 
       } else if(_.includes(oldCollapsed, id)) {
-        return _.immutate(state, {
+        return {...state,
           userCollapsed: _.without(oldCollapsed, id),
-        });
+        };
 
       } else {
 
         if(shouldExpand){
-          return _.immutate(state, {
+          return {...state,
             userExpanded: oldExpanded.concat(id),
-          });
+          };
 
         } else {
-          return _.immutate(state, {
+          return{...state,
             userCollapsed: oldCollapsed.concat(id),
-          });
+          };
 
         }
 
@@ -78,19 +78,19 @@ function root_reducer(state=initial_root_state, action){
     }
 
     case 'clear_query': {
-      return _.immutate(state, {
+      return {...state,
         loading:false,
         query: "",
-      });
+      };
 
     }
     
     case 'set_query': {
       const { query } = payload;
-      return _.immutate(state, {
+      return {...state,
         query,
         loading: query.length > 3,
-      });
+      };
 
     }
 
@@ -99,7 +99,7 @@ function root_reducer(state=initial_root_state, action){
         return state;
       }
       else {
-        return _.immutate(state, { loading: true });
+        return {...state, loading: true };
       }
 
     }
@@ -108,7 +108,7 @@ function root_reducer(state=initial_root_state, action){
       if(!state.loading){
         return state;
       } else {
-        return _.immutate(state, { loading: false });
+        return {...state, loading: false };
       }
     }
 
@@ -120,7 +120,7 @@ function root_reducer(state=initial_root_state, action){
 }
 
 //receives the whole state, but only returns the 'root' slice
-const map_state_to_root_props_from_memoized_funcs = ({ is_filtering, get_flat_nodes, get_base_hierarchy }) => entire_state => _.immutate(entire_state.root, {
+const map_state_to_root_props_from_memoized_funcs = ({ is_filtering, get_flat_nodes, get_base_hierarchy }) => entire_state => ({...entire_state.root,
   is_filtering: is_filtering(entire_state), 
   flat_nodes: get_flat_nodes(entire_state),
   base_hierarchy: get_base_hierarchy(entire_state),
@@ -201,7 +201,7 @@ function get_memoized_funcs(schemes){
     const query_filtered_hierarchy = get_query_filtered_hierarchy(state);
     const base_hierarchy = get_base_hierarchy(state);
 
-    return scheme_props_generators[state.root.scheme_key](_.immutate(state, { query_filtered_hierarchy, base_hierarchy  }));
+    return scheme_props_generators[state.root.scheme_key]({...state, query_filtered_hierarchy, base_hierarchy });
   } 
 
   const scheme_filter_func_selectors = _.chain(schemes)

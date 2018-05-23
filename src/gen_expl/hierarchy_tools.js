@@ -241,7 +241,7 @@ function simplify_hierarchy(flat_nodes, is_simple_parent, bottom_layer_filter){
   
   const new_leaves = _.chain(flat_nodes)
     .filter(bottom_layer_filter)
-    .map(node =>  _.immutate(node, { parent_id : get_simple_parent(node).id }) )
+    .map(node => ({...node, parent_id: get_simple_parent(node).id }) )
     .value()
 
   const simple_parents = _.chain( new_leaves )

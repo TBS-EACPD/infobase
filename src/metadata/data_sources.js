@@ -198,7 +198,7 @@ const sources = _.mapValues({
       }];
     },
   },
-}, (obj, key) => _.immutate(obj, {key}));
+}, (obj, key) => ({...obj, key}));
 
 module.exports = exports = { 
   sources,

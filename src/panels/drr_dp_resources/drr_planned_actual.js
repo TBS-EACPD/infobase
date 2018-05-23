@@ -99,9 +99,9 @@ _.each(['dept','program'], level => {
             "dept_drr_planned_actual_text" :
             "program_drr_planned_actual_text"
           }
-          args={_.immutate(graph_args,{
+          args={{...graph_args,
             subject,
-          })}
+          }}
         />
 
         <PlannedActualTable 

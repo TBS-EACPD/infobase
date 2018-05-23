@@ -162,9 +162,9 @@ const partial_scheme = {
 
       const mods = clicked_col === sort_col ? { is_descending : !is_descending } : { is_descending: true, sort_col : clicked_col };
 
-      return _.immutate(state, mods);
+      return {...state, mods};
     } else if(type==="set_doc"){
-      return _.immutate(state, { doc: payload });
+      return {...state, doc: payload };
     } else {
       return state;
     }
@@ -182,7 +182,7 @@ const partial_scheme = {
 //given a subject, created a rooted scheme using the above scheme. Hierarchy scheme should be evident from the level of the subject 
 function create_rooted_resource_scheme({subject}){
 
-  return _.immutate(partial_scheme, {
+  return {...partial_scheme,
     get_base_hierarchy_selector: () => createSelector(
       state => state.rooted_resources.doc,
       doc =>  create_rooted_resource_hierarchy({ 
@@ -190,7 +190,7 @@ function create_rooted_resource_scheme({subject}){
         root_subject: subject,
       })
     ),
-  })
+  }
 
 
 };

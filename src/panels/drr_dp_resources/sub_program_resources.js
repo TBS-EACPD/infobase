@@ -178,9 +178,9 @@ const sub_program_resource_scheme = {
 
       const mods = clicked_col === sort_col ? { is_descending : !is_descending } : { is_descending: true, sort_col : clicked_col };
 
-      return _.immutate(state, mods);
+      return {...state, ...mods};
     } else if(type==="set_doc"){
-      return _.immutate(state, { doc: payload });
+      return {...state, doc: payload };
     } else {
       return state;
     }
@@ -284,10 +284,10 @@ const map_state_to_props_from_memoized_funcs = memoized_funcs => {
   const  { get_scheme_props } = memoized_funcs;
   const mapRootStateToRootProps = map_state_to_root_props_from_memoized_funcs(memoized_funcs);
 
-  return state => _.immutate(
-    mapRootStateToRootProps(state),
-    get_scheme_props(state)
-  );
+  return state => ({
+    ...mapRootStateToRootProps(state),
+    ...get_scheme_props(state),
+  });
 }
 
 const SubProgramResourceTreeContainer = ({
@@ -313,14 +313,14 @@ const SubProgramResourceTreeContainer = ({
 
   const mapStateToProps = map_state_to_props_from_memoized_funcs(get_memoized_funcs([scheme]));
 
-  const mapDispatchToProps = dispatch => _.immutate(
-    map_dispatch_to_root_props(dispatch),
-    scheme.dispatch_to_props(dispatch)
-  );
+  const mapDispatchToProps = dispatch => ({
+    ...map_dispatch_to_root_props(dispatch),
+    ...scheme.dispatch_to_props(dispatch),
+  });
 
   const initialState = {
-    root: _.immutate(initial_root_state, {scheme_key}),
-    [scheme_key] : _.immutate(initial_sub_program_state, initial_scheme_state_slice),
+    root: ({...initial_root_state, scheme_key}),
+    [scheme_key] : ({...initial_sub_program_state, ...initial_scheme_state_slice}),
   };
 
   const Container = connect(mapStateToProps, mapDispatchToProps)(SubProgramResourceTree)

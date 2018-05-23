@@ -4,7 +4,7 @@ const rpb_link = (naive_state, useRouterFormat) => _.chain(naive_state)
   .pipe(obj => {
     const { table, subject, columns } = obj;
 
-    return _.immutate(obj, { 
+    return {...obj, 
       table: ( 
         table && table.is_table ?
         table.id  :
@@ -20,7 +20,7 @@ const rpb_link = (naive_state, useRouterFormat) => _.chain(naive_state)
         _.map(columns, 'nick') :
         columns
       ),
-    });
+    };
   })
   .pick([
     'columns',
