@@ -1,9 +1,7 @@
-docker_defaults: &docker_defaults
-  docker:
-    - image: gcr.io/ib-api-first/ib-client-ci:latest
-      auth:
-        username: _json_key
-        password: $GCLOUD_JSON_AUTH
+gcloud_auth: &gcloud_auth
+  auth:
+    username: _json_key
+    password: $GCLOUD_JSON_AUTH
 
 
 version: 2
@@ -12,9 +10,7 @@ jobs:
   build:
     docker:
       - image: gcr.io/ib-api-first/ib-client-ci-build:latest
-        auth:
-          username: _json_key
-          password: $GCLOUD_JSON_AUTH
+        <<: *gcloud_auth
     steps:
       - checkout
       # Download and cache dependencies
@@ -50,7 +46,9 @@ jobs:
             - ./*
   
   test:
-    <<: *docker_defaults
+    docker:
+      - image: gcr.io/ib-api-first/ib-client-ci-test:latest
+        <<: *gcloud_auth
     steps:
       - attach_workspace:
           at: ./
@@ -61,7 +59,9 @@ jobs:
       - run: npm run ci_test
   
   deploy:
-    <<: *docker_defaults
+    docker:
+      - image: gcr.io/ib-api-first/ib-client-ci:latest
+        <<: *gcloud_auth
     steps:
       - attach_workspace:
           at: ./
