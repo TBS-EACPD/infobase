@@ -10,7 +10,8 @@ version: 2
 jobs:
 
   build:
-    <<: *docker_defaults
+    docker:
+      - image: mhart/alpine-node:latest
     steps:
       - checkout
       # Download and cache dependencies
@@ -19,7 +20,7 @@ jobs:
             - ib-client-dependencies-{{ checksum "package-lock.json" }}
       - run: 
           command: |
-            [ -e "node_modules" ] || npm install
+            [ -e "node_modules" ] || npm ci
       - save_cache:
           paths:
             - node_modules
