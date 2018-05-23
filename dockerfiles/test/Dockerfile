@@ -3,4 +3,5 @@ RUN apk update && apk upgrade && \
     apk add --no-cache \
     udev \
     xvfb \
-    chromium
+    chromium \
+    ca-certificates
