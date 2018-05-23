@@ -221,7 +221,7 @@ const GraphLegend = ({
   onClick,  //id => { }
   active,
 }) => ( 
-  <ul className={classNames("list-unstyled legend-list-inline", isHorizontal && "horizontal")}>
+  <ul className={classNames("legend-list-inline", isHorizontal && "horizontal")}>
     {_.map(items, ({ color, label, id, active }) => 
       <li
         key={id}

@@ -83,14 +83,15 @@ table.drr-summary-table td.success.disabled-success {
 
 
 
-ul.list-unstyled.indicator-list > li {
+ul.indicator-list > li {
+  @include unstyled-list;
   padding: 10px;
   margin-left: -15px;
   margin-right: 20px;
   background-color: inherit;
 }
 
-ul.list-unstyled.indicator-list > li:not(:first-child) {
+ul.indicator-list > li:not(:first-child) {
   border-top: 1px solid #bbb;
 }
 

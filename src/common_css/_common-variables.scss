@@ -31,4 +31,9 @@ $heavyFontWeight: 700;
   }
 }
 
+@mixin unstyled-list {
+  padding-left: 0;
+  list-style: none;
+}
+
 

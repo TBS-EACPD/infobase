@@ -69,7 +69,7 @@ const IndicatorResultDisplay = ({
 
 
 const IndicatorList = ({ indicators }) => (
-  <ul className="list-unstyled indicator-list">
+  <ul className="indicator-list">
     {_.map(indicators, ind => 
       <li key={ind.id}>
         <SingleIndicatorDisplay indicator={ind} />

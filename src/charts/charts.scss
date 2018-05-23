@@ -163,6 +163,7 @@ div.d3-list, {
 }
 
 .legend-list-inline {
+  @include unstyled-list;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
