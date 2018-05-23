@@ -1,3 +1,3 @@
 FROM mhart/alpine-node:latest
 RUN apk update && apk upgrade && \
-    apk add --no-cache bash git
+    apk add --no-cache bash git openssh
