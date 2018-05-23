@@ -12,9 +12,9 @@ jobs:
   build:
     docker:
       - image: gcr.io/ib-api-first/ib-client-ci-build:latest
-      auth:
-        username: _json_key
-        password: $GCLOUD_JSON_AUTH
+        auth:
+          username: _json_key
+          password: $GCLOUD_JSON_AUTH
     steps:
       - checkout
       # Download and cache dependencies
