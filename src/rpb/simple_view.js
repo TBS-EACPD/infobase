@@ -33,8 +33,8 @@ const {
 
 const { rpb_link } = require('./rpb_link.js');
 //note: don't use these outside the context of simple view, and always pass all props in currentProps
-const granular_rpb_link_for_org = (currentProps, subject)=> rpb_link( { ...currentProps, ...{subject, mode:'details' }} );
-const granular_rpb_link_for_filter = (currentProps, filter) => rpb_link({ ...currentProps, ...{filter, mode:'details' }} );
+const granular_rpb_link_for_org = (currentProps, subject)=> rpb_link( { ...currentProps, subject, mode:'details' } );
+const granular_rpb_link_for_filter = (currentProps, filter) => rpb_link({ ...currentProps, filter, mode:'details' } );
 
 
 

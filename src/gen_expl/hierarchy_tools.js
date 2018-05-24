@@ -30,7 +30,7 @@ function filter_hierarchy(flat_nodes, filter_func, { leaves_only=false,  markSea
   if(_.isEmpty(positive_search_results)){
     return [ 
       { ...get_root(flat_nodes), 
-        ...{ children : [] }, 
+        children : [], 
       }, 
     ];
   }
@@ -130,13 +130,13 @@ function toggleExpandedFlat(flat_nodes, node, { toggleNode, expandAllChildren, c
   if(expandAllChildren){
 
     nodes_to_be_replaced.push(...node.children);
-    replacement_node.children = _.map(node.children, obj => ({ ...obj, ...{isExpanded: true} }));
+    replacement_node.children = _.map(node.children, obj => ({ ...obj, isExpanded: true }));
     new_nodes.push(...replacement_node.children)
 
   } else if(collapseAllChildren){
 
     nodes_to_be_replaced.push(...node.children);
-    replacement_node.children = _.map(replacement_node.children, obj => ({ ...obj, ...{ isExpanded: true} }));
+    replacement_node.children = _.map(replacement_node.children, obj => ({ ...obj, isExpanded: true }));
     new_nodes.push(...replacement_node.children)
 
   } else { // default behavior: toggle the node.
@@ -154,7 +154,7 @@ function toggleExpandedFlat(flat_nodes, node, { toggleNode, expandAllChildren, c
 
     const new_parent = {
       ...parent_node,
-      ...{ children: new_children },
+      children: new_children,
     };
 
     nodes_to_be_replaced.push(parent_node);
@@ -295,7 +295,7 @@ function _sort_hierarchy(node, children_transform){
 
   return {
     ...node,
-    ...{ children: new_children },
+    children: new_children,
   };
 }
 

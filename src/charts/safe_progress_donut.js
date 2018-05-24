@@ -47,12 +47,12 @@ exports.SafeProgressDonut = class SafeProgressDonut {
 
     } else if (min < 0 && this.options.fallback !== 'none'){
       this.__container__.innerHTML = "";
-      const options = ({
+      const options = {
         ...this.options,
         ...bar_options,
         ...{series: { "" : _.map(data, 'value')},
           ticks : _.map(data, 'label')}, 
-      });
+      };
 
       new BAR(
         this.__container__,

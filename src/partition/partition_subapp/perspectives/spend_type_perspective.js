@@ -75,7 +75,7 @@ const create_spend_type_hierarchy = function(){
         _mock_model = function(row){
           const unique_id = Subject.Program.unique_id(row.dept, row.activity_code); 
           const program = Subject.Program.lookup(unique_id);
-          const data = {...{value: row["{{pa_last_year}}"]}};
+          const data = {value: row["{{pa_last_year}}"]};
           return mock_model(
             unique_id + row.so_num, 
             program.name + " - " + text_maker("program_slice_of", {so_name: row.so}),

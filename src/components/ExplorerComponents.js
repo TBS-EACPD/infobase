@@ -142,7 +142,7 @@ export const ExplorerHeader = ({column_defs, is_sortable, sort_col, is_descendin
             className="ExplorerRow__Cell"
             style={
               ix === 0 ? 
-              {...computed_col_styles[id], ...{ textAlign: "center" }} :
+              {...computed_col_styles[id], textAlign: "center"}:
               computed_col_styles[id]
             }
             onClick={()=>col_click(id)}
@@ -267,7 +267,7 @@ export const ExplorerNode = ({
                 className="ExplorerRow__Cell"
                 style={
                   ix===0 ? 
-                  { ...computed_col_styles[id], ...{flex : `1 0 ${width-depth*INDENT_SIZE}px`}} :
+                  { ...computed_col_styles[id], flex : `1 0 ${width-depth*INDENT_SIZE}px`} :
                   computed_col_styles[id]
                 }
               >
