@@ -9,10 +9,8 @@ export const app_reducer = (state={ lang: window.lang }, { type, payload }) => {
   return state;
 };
 
+import { ComponentLoader } from '../core/ComponentLoader.js';
 import { Home } from '../home/home.js';
-import { MetaData } from '../metadata/metadata.js';
-import { IgocExplorer } from "../igoc_explorer/igoc_explorer.js";
-import { ResourceExplorer } from "../resource_explorer/resource-explorer.js";
 import { InfoGraph } from '../infographic/infographic.js';
 import { PartitionRoute } from '../partition/partition_subapp/PartitionRoute.js';
 import { BudgetMeasuresRoute } from '../partition/budget_measures_subapp/BudgetMeasuresRoute.js';
@@ -22,15 +20,32 @@ import { ReportBuilder } from '../rpb/index.js';
 import { TooltipActivator } from '../glossary/Tooltips';
 import { PotentialSurveyBox } from '../core/survey_link';
 import { EasyAccess } from '../core/EasyAccess';
-import { About } from '../about/about.js';
 import { GraphInventory } from '../graph_route/graph_route.js';
 import { DevStuff } from '../components/ExplorerComponents.js';
 
+async function getAboutComponent(){
+  const {About} = await import('../about/about.js');
+  return About;
+}
+
+async function getMetadataComponent(){
+  const { MetaData } = await import('../metadata/metadata.js');
+  return MetaData;
+}
+
+async function getIgocComponent(){
+  const {IgocExplorer} = await import('../igoc_explorer/igoc_explorer.js');
+  return IgocExplorer;
+}
+
+async function getResourceExplorerComponent(){
+  const {ResourceExplorer} = await import('../resource_explorer/resource-explorer.js');
+  return ResourceExplorer;
+}
+
+
 // Now you can dispatch navigation actions from anywhere!
 // store.dispatch(push('/foo'))
-
-
-
 
 
 export class App extends React.Component {
@@ -46,16 +61,16 @@ export class App extends React.Component {
         <PotentialSurveyBox />
         <EasyAccess />
         <Switch>
-          <Route path="/metadata/:data_source?" component={MetaData}/>
-          <Route path="/igoc/:grouping?" component={IgocExplorer} />
-          <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={ResourceExplorer} />
+          <Route path="/metadata/:data_source?" component={ComponentLoader(getMetadataComponent)}/>
+          <Route path="/igoc/:grouping?" component={ComponentLoader(getIgocComponent)} />
+          <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={ComponentLoader(getResourceExplorerComponent)} />
           <Route path="/orgs/:level/:subject_id/infograph/:bubble?/" component={InfoGraph} />
           <Route path="/glossary/:active_key?" component={Glossary} />
           <Route path="/partition/:perspective?/:data_type?" component={PartitionRoute} />
           <Route path="/budget-measures/:first_column?" component={BudgetMeasuresRoute} />
           <Route path="/explore-:perspective?" component={BubbleExplore} />
           <Route path="/rpb/:config?" component={ReportBuilder} />
-          <Route path="/about" component={About} />
+          <Route path="/about" component={ComponentLoader(getAboutComponent)} />
           <Route path="/graph/:level?/:graph?/:id?" component={GraphInventory} />
           <Route path="/dev" component={DevStuff} />
           <Route path="/" component={Home} />

@@ -17,9 +17,10 @@ const get_rules = ({
         loader: 'babel-loader',
         options: {
           cacheDirectory: true,
-          plugins: [ "transform-object-rest-spread" ],
+          plugins: ["transform-object-rest-spread", "syntax-dynamic-import"],
           presets: [
             ["env", {
+              modules: false,
               targets: {
                 browsers: should_use_babel ?  ["Safari >= 7", "Explorer 11"] : ["Chrome >= 66"],
                 uglify: is_prod,
