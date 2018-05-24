@@ -41,6 +41,7 @@ export class BudgetMeasuresRoute extends React.Component {
     this.state = {
       loading: true,
       filtered_chapter_keys: [],
+      filter_string: "",
     };
   }
   UNSAFE_componentWillMount(){
@@ -59,10 +60,18 @@ export class BudgetMeasuresRoute extends React.Component {
   setFilteredChapterKeys(new_filtered_chapter_keys){
     this.setState({filtered_chapter_keys: new_filtered_chapter_keys});
   }
+  setFilterString(new_filter_string){
+    this.setState({filter_string: new_filter_string});
+  }
   render(){
-    const loading = this.state.loading;
+    const {
+      loading,
+      filtered_chapter_keys,
+      filter_string,
+    } = this.state;
+
+    const history = this.props.history;
     const first_column = this.props.match.params.first_column;
-    const filtered_chapter_keys = this.state.filtered_chapter_keys;
 
     return (
       <StandardRouteContainer
@@ -90,17 +99,20 @@ export class BudgetMeasuresRoute extends React.Component {
             </div>
             { !window.is_a11y_mode &&
               <BudgetMeasuresControls
-                first_column = { first_column } 
-                history = { this.props.history } 
+                first_column = { first_column }
+                history = { history }
                 group_by_items = { first_column_options }
                 filtered_chapter_keys = { filtered_chapter_keys }
                 setFilteredChapterKeysCallback = { this.setFilteredChapterKeys.bind(this) }
+                filter_string = { filter_string }
+                setFilterString = { this.setFilterString.bind(this) }
               />
             }
             { !window.is_a11y_mode &&
               <BudgetMeasuresPartition
                 first_column = { first_column }
                 filtered_chapter_keys = { filtered_chapter_keys }
+                filter_string = { filter_string }
               />
             }
             { window.is_a11y_mode && <BudgetMeasuresA11yContent/> }
