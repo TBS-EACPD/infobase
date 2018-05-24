@@ -85,6 +85,10 @@ export class PartitionDiagram {
     this.render();
   }
   render(){
+    if (this.pop_up){
+      this.pop_up = false;
+    }
+
     this.links = this.data.links();
     const levels = this.data.to_open_levels();
     const height = this.options.height;
@@ -538,7 +542,7 @@ export class PartitionDiagram {
     this.unfade();
     this.svg.selectAll("polygon.partition-svg-link")
       .classed("highlighted", false);
-    delete this.pop_up;
+    this.pop_up = false;
   }
   keydown_dispatch(){
     if (d3.event.keyCode === 13) {
@@ -646,6 +650,6 @@ export class PartitionDiagram {
   }
   remove_unmagnify_all_button(){
     this.unmagnify_all_popup.remove();
-    delete this.unmagnify_all_popup;
+    this.unmagnify_all_popup = undefined;
   }
 };
