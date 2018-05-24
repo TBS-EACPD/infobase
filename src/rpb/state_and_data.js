@@ -122,7 +122,7 @@ const reducer = (state=initial_state, action) => {
       if(state.columns.length < 2 && _.includes(state.columns, col_nick ) ){ 
         return state; 
       }
-      return {state,
+      return {...state,
         columns: _.toggle_list(state.columns, col_nick),
         page_num: 0,
       };
