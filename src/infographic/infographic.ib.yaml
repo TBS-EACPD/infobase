@@ -103,13 +103,6 @@ infograph_explorer_link:
   en: Advanced search
   fr: Recherche avancée
 
-# to be used in <a>'s titles.
-see_an_infograph_for:
-  transform: [handlebars]
-  en: See an infograph for {{subj_name subject}}
-  fr: Voir une infographie pour {{subj_name subject}}
-
-
 
 # TODO: better text and different description for different levels (e.g. program infograph description should refer to parent org)
 infographic_description:

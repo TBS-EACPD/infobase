@@ -6,11 +6,15 @@ const {
   STATS, 
   vote_stat_dimension, 
   major_vote_stat, 
-  text_maker, 
   m, 
   Statistics,
   years : {std_years},
 } = require("../table_common");
+
+const {trivial_text_maker} = require("../../models/text");
+
+const voted_label = trivial_text_maker("voted")
+const stat_label = trivial_text_maker("stat")
 
 module.exports = {
   "id": "table4",
@@ -114,11 +118,11 @@ module.exports = {
     },
     "voted_items" : function(cut_off){
       this.vote_stat_query =  vote_stat_query;
-      return this.vote_stat_query(text_maker("voted"),cut_off);
+      return this.vote_stat_query(voted_label,cut_off);
     },
     "stat_items" : function(cut_off){
       this.vote_stat_query =  vote_stat_query;
-      return this.vote_stat_query(text_maker("stat"),cut_off);
+      return this.vote_stat_query(stat_label,cut_off);
     },
   },
 
@@ -204,23 +208,20 @@ Statistics.create_and_register({
     const table = tables.table4;
     const q = table.q(subject);
 
-    const voted = text_maker("voted");
-    const stat = text_maker("stat");
-
     c.dept = subject;
 
     STATS.year_over_year_single_stats(add, 
       "voted_five_year_auth", 
       _.map(std_years,m),
       _.chain(std_years)
-        .map(function(year){ return table.voted_stat(year+'auth',subject)[voted];})
+        .map(function(year){ return table.voted_stat(year+'auth',subject)[voted_label];})
         .value()
     );
     STATS.year_over_year_single_stats(add, 
       "stat_five_year_auth", 
       _.map(std_years,m),
       _.chain(std_years)
-        .map(function(year){ return table.voted_stat(year+'auth',subject)[stat];})
+        .map(function(year){ return table.voted_stat(year+'auth',subject)[stat_label];})
         .value()
     );
     STATS.year_over_year_single_stats(add, 
@@ -269,11 +270,11 @@ Statistics.create_and_register({
     });
 
     STATS.add_all_years(add,"voted",std_years,function(year,i){
-      return  table.voted_stat(year+'auth',subject)[voted];
+      return  table.voted_stat(year+'auth',subject)[voted_label];
     });
 
     STATS.add_all_years(add,"stat",std_years,function(year,i){
-      return  table.voted_stat(year+'auth',subject)[stat];
+      return  table.voted_stat(year+'auth',subject)[stat_label];
     });
 
     add({
@@ -297,8 +298,6 @@ Statistics.create_and_register({
   compute: (subject, tables, infos, add, c) => {
     const table = tables.table4;
     const q = table.q(subject);
-    var voted = text_maker("voted");
-    var stat = text_maker("stat");
 
     STATS.year_over_year_single_stats(
       add, 
@@ -337,10 +336,10 @@ Statistics.create_and_register({
     add("hist_avg_tot_pct", c.gov_hist_diff_average / c.gov_auth_average);
 
     STATS.add_all_years(add,"voted",std_years,function(year,i){
-      return table.voted_stat(year+'auth',false)[voted];
+      return table.voted_stat(year+'auth',false)[voted_label];
     });
     STATS.add_all_years(add,"stat",std_years,function(year,i){
-      return  table.voted_stat(year+'auth',false)[stat];
+      return  table.voted_stat(year+'auth',false)[stat_label];
     });
 
 

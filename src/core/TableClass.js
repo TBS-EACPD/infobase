@@ -5,7 +5,7 @@ const {
   attach_dimensions,
   fill_dimension_columns,
 } = require('./tables/dimensions.js');
-const {text_maker,run_template} = require('../models/text.js');
+const {text_maker,trivial_text_maker,run_template} = require('../models/text.js');
 const {mix} = require('../generalUtils.js');
 const {Dept} = require('../models/subject.js');
 const {staticStoreMixin} = require('../models/staticStoreMixin.js');
@@ -140,7 +140,7 @@ exports.Table = class Table extends mix().with(staticStoreMixin){
     });
   }
   get short_description(){
-    return text_maker(this.id+"_short");
+    return trivial_text_maker(this.id+"_short");
   }
   get title(){
     return run_template(this.title_def[window.lang]);

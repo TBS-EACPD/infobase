@@ -1,4 +1,5 @@
 const { 
+  trivial_text_maker,
   text_maker, 
   run_template,
 } = require("../models/text");
@@ -167,6 +168,7 @@ module.exports = exports = {
   people_five_year_percentage_formula,
   STATS : require("../core/tables/stats.js"),
   text_maker, 
+  trivial_text_maker,
   business_constants : require('../models/businessConstants.js'),
   run_template,
   m: run_template,

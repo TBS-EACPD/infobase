@@ -3,7 +3,7 @@ require("./table300.ib.yaml");
 // of the table spec
 const {
   Subject : {Program},
-  text_maker,
+  trivial_text_maker,
   Statistics, 
   years : { std_years},
 } = require("../table_common");
@@ -81,7 +81,7 @@ module.exports = {
   "mapper": function (row) {
     const program = Program.get_from_activity_code(row[0], row[1]);
     row.splice(2,0,program.name);
-    row[3] = row[3] === "V" ? text_maker("voted") : text_maker("stat");
+    row[3] = row[3] === "V" ? trivial_text_maker("voted") : trivial_text_maker("stat");
     return row;
   },
   process_mapped_row(mapped_row){
@@ -105,7 +105,7 @@ module.exports = {
         var func  = function(row){
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           const goco = prog.tags_by_scheme.GOCO && prog.tags_by_scheme.GOCO[0];
-          return (goco && goco.name) || text_maker('unknown');
+          return (goco && goco.name) || trivial_text_maker('unknown');
         };
         return func;
       },
@@ -120,7 +120,7 @@ module.exports = {
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
 
           const goco = prog.tags_by_scheme.GOCO && prog.tags_by_scheme.GOCO[0];
-          return (goco && goco.parent_tag.name) || text_maker('unknown');
+          return (goco && goco.parent_tag.name) || trivial_text_maker('unknown');
         };
         return func;
       },
@@ -139,8 +139,8 @@ Statistics.create_and_register({
     const last_year_col = _.last(std_years);
     const rows = table300.programs.get(subject);
     const { 
-      [text_maker("voted")] : voted_rows,
-      [text_maker("stat")] : stat_rows,
+      [trivial_text_maker("voted")] : voted_rows,
+      [trivial_text_maker("stat")] : stat_rows,
     } = _.groupBy(rows, type_col);
    
     const voted_amount = _.first(voted_rows) && _.first(voted_rows)[ last_year_col ] || 0;
@@ -171,8 +171,8 @@ Statistics.create_and_register({
     const rows = table300.q(subject).data;
 
     const { 
-      [text_maker("voted")] : voted_rows,
-      [text_maker("stat")] : stat_rows,
+      [trivial_text_maker("voted")] : voted_rows,
+      [trivial_text_maker("stat")] : stat_rows,
     } = _.groupBy(rows, type_col);
    
     const voted_amount = last_year_col_obj.formula(voted_rows);

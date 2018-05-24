@@ -9,7 +9,7 @@ require("./table6.ib.yaml");
 
 const {STATS, 
   Subject : {Program, Gov, Dept},
-  text_maker, 
+  trivial_text_maker, 
   Statistics, 
   years : { std_years, planning_years},
 } = require("../table_common");
@@ -137,7 +137,7 @@ module.exports = {
         var func  = function(row){
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           const goco = _.first(prog.tags_by_scheme.GOCO)
-          return goco.name || text_maker('unknown');
+          return goco.name || trivial_text_maker('unknown');
         };
         return func;
       },
@@ -152,7 +152,7 @@ module.exports = {
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           const goco = _.first(prog.tags_by_scheme.GOCO)
           const sa = goco && goco.parent_tag;
-          return (sa && sa.name) || text_maker('unknown');
+          return (sa && sa.name) || trivial_text_maker('unknown');
         };
         return func;
       },

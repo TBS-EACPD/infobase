@@ -886,3 +886,9 @@ DRR_resources:
   en: |
     {{pa_last_year}} Actual Resources 
   fr: Resources utilisées en {{pa_last_year}}
+
+
+see_an_infograph_for:
+  transform: [handlebars]
+  en: See an infograph for {{subj_name subject}}
+  fr: Voir une infographie pour {{subj_name subject}}

@@ -6,7 +6,7 @@ require("./table7.ib.yaml");
 
 const {
   STATS, 
-  text_maker, 
+  trivial_text_maker, 
   Statistics, 
   years : {std_years},
   business_constants: {
@@ -113,9 +113,9 @@ module.exports = {
         return function(row){
           var type = row.type;
           if (row.tp.substring(0,3) === '(S)' || row.tp.substring(0,3) === "(L)"){
-            return type + ' - ' + text_maker("stat");
+            return type + ' - ' + trivial_text_maker("stat");
           } else {
-            return type + ' - ' + text_maker("voted");
+            return type + ' - ' + trivial_text_maker("voted");
           }
         };
       },

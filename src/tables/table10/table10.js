@@ -2,7 +2,7 @@ import "./table10.ib.yaml";
 
 import {
   STATS, 
-  text_maker, 
+  trivial_text_maker, 
   m, 
   Statistics, 
   formats, 
@@ -81,10 +81,10 @@ export default {
     this.add_col({
       "type": "percentage1",
       "nick": "five_year_percent",
-      "header": text_maker("five_year_percent_header"),
+      "header": trivial_text_maker("five_year_percent_header"),
       "description": {
-        "en": text_maker("five_year_percent_description"),
-        "fr": text_maker("five_year_percent_description"),
+        "en": trivial_text_maker("five_year_percent_description"),
+        "fr": trivial_text_maker("five_year_percent_description"),
       },
       "formula": people_five_year_percentage_formula("region",people_years),
     });
