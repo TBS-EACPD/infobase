@@ -226,9 +226,10 @@ class RPB extends React.Component {
                     this.setState({ table_picking: false }); 
                     setTimeout(()=>{
                       slowScrollDown();
-                      if(document.querySelector('#'+sub_app_name) !== null){
-                        document.querySelector('#'+sub_app_name).focus();
-                      }        
+                      const sub_app_node = document.querySelector('#'+sub_app_name);
+                      if(sub_app_node !== null){
+                        sub_app_node.focus();
+                      }
                     },200)
                   }
                 }}
