@@ -31,6 +31,8 @@ export class BudgetMeasuresControls extends React.Component {
       group_by_items,
       filtered_chapter_keys,
       setFilteredChapterKeysCallback,
+      filter_string,
+      setFilterString,
     } = this.props;
     
     const update_filtered_chapter_keys = (filtered_chapter_keys, chapter_key) => {
@@ -77,9 +79,7 @@ export class BudgetMeasuresControls extends React.Component {
               <div className="centerer" style={{fontSize: "26px"}}>
                 <TextMaker text_key="budget_chapters" />
               </div>
-              <div 
-                className="chapter-key-table"
-              >
+              <div className="chapter-key-table">
                 {
                   _.chain(this.state.chapter_keys)
                     .map( chapter_key => ({
@@ -122,6 +122,17 @@ export class BudgetMeasuresControls extends React.Component {
                     )
                     .value()
                 }
+              </div>
+              <div className="centerer" style={{fontSize: "26px"}}>
+                <TextMaker text_key="budget_measure_filter_by_name_and_desc_label" />
+              </div>
+              <div className="budget-measures-search-box">
+                <input  
+                  type = "text" 
+                  className = "form-control search" 
+                  placeholder = {text_maker("budget_measure_filter_by_name_and_desc_placeholder")}
+                >
+                </input>
               </div>
             </div>
           }

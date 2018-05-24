@@ -5,3 +5,11 @@ budget_measure_group_by_label:
 budget_measure_filter_by_chapter_key_label:
   en: Filter items by
   fr: Filtrer
+
+budget_measure_filter_by_name_and_desc_label:
+  en: Name and Description
+  fr: todo
+
+budget_measure_filter_by_name_and_desc_placeholder:
+  en: Search for a budget measure, an organization, or a keyword
+  fr: TODO

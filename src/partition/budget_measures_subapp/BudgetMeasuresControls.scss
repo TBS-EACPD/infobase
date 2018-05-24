@@ -61,7 +61,7 @@
   justify-content: space-around;
   align-items: stretch;
   flex-wrap: nowrap;
-  padding: 5px 0px 5px 0px;
+  padding: 10px 0px 10px 0px;
 }
 
 .chapter-key-table__item {
@@ -162,4 +162,22 @@
 
 .chapter-key-table__count {
   font-size: 19px; 
+}
+
+
+.budget-measures-search-box {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0px 10px 0px;
+
+  & > .form-control.search {
+    max-width: 835px;
+    width: 100%;
+    @media(min-width:1200px){
+      border: 2px solid darken(#9c9c9c, 25%);
+    }
+    @media(max-width:1200px){
+      border: 1px solid #9c9c9c, 25%;
+    }
+  }
 }
