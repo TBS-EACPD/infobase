@@ -1,6 +1,6 @@
 exports = module.exports;
 
-require("./table6.ib.yaml");
+const text = require("./table6.yaml");
 
 
 // see [here](../table_definition.html) for description
@@ -18,6 +18,7 @@ const {STATS,
 const exp_cols = _.map(std_years, yr=>yr+"exp");
 
 module.exports = {
+  text,
   "id": "table6",
   source: [ "PA" , "DP", "DRR" ],
   "tags" : [

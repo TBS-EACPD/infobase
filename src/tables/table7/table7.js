@@ -1,7 +1,7 @@
 exports = module.exports;
 // see [here](../table_definition.html) for description
 // of the table spec
-require("./table7.ib.yaml");
+const text = require("./table7.yaml");
 
 
 const {
@@ -15,6 +15,7 @@ const {
 } = require("../table_common");
 
 module.exports = {
+  text,
   "id": "table7",
 
   "tags" : [

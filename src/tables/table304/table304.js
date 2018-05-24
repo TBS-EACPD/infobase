@@ -1,4 +1,4 @@
-import "./table304.ib.yaml";
+import text from "./table304.yaml";
 
 import {
   trivial_text_maker, 
@@ -13,6 +13,7 @@ const {
 } = years;
 
 export default {
+  text,
   "id": "table304",
   source: ["RPS"],
   "tags" : [

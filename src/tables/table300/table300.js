@@ -1,4 +1,4 @@
-require("./table300.ib.yaml");
+const text = require("./table300.yaml");
 // see [here](../table_definition.html) for description
 // of the table spec
 const {
@@ -9,6 +9,7 @@ const {
 } = require("../table_common");
 
 module.exports = {
+  text,
   id: "table300",
   tags : [
     "PROG",

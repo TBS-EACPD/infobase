@@ -1,5 +1,5 @@
 exports = module.exports;
-require("./table12.ib.yaml");
+const text = require("./table12.yaml");
 // see [here](../table_definition.html) for description
 // of the table spec
 //
@@ -15,6 +15,7 @@ const {
 } = require("../table_common");
 
 module.exports = {
+  text,
   "id": "table12",
   source: [ "DP", "DRR" ],
   //"tags" : ["results", "expenditures", "FTE", "planning","report","RPP"],

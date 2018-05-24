@@ -2,7 +2,7 @@
 //require("../../panels/spend_by_so_hist"); //we arent showing this stuff.
 
 exports = module.exports;
-require("./table305.ib.yaml");
+const text = require("./table305.yaml");
 // see [here](../table_definition.html) for description
 // of the table spec
 const {
@@ -18,6 +18,7 @@ const { Program } = require("../../models/subject");
 
 
 module.exports = {
+  text,
   "id": "table305",
   source: [ "CFMRS" ],
   "tags" : [ 

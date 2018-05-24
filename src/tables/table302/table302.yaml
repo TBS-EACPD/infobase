@@ -16,11 +16,11 @@ table302_short:
 table302:
   transform: [handlebars,embeded-markdown,markdown]
   en: |
-    {{{gt "table302_short"}}}
+    {{{new_gt "table302_short"}}}
 
     {{> ochro_includes_excludes_en}}
 
   fr: |
-    {{{gt "table302_short"}}}
+    {{{new_gt "table302_short"}}}
     
     {{> ochro_includes_excludes_fr}}

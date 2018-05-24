@@ -8,7 +8,7 @@ table105_short:
 table105:
   transform: [handlebars,markdown]
   en: |
-   {{{gt "table105_short"}}}
+   {{{new_gt "table105_short"}}}
    
     
    **Notes:** 
@@ -24,7 +24,7 @@ table105:
    [ACL]: mailto:Alexandre.Cousineau-Leduc@tbs-sct.gc.ca?cc=ea-ad@tbs-sct.gc.ca&Subject=Question%20about%20LED
 
   fr: | 
-   {{{gt "table105_short"}}}
+   {{{new_gt "table105_short"}}}
    
    
    **Remarques:**

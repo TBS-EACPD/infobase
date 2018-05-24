@@ -17,11 +17,11 @@ table304_short:
 table304:
   transform: [handlebars,embeded-markdown,markdown]
   en: |
-    {{{gt "table304_short"}}}
+    {{{new_gt "table304_short"}}}
 
     {{> ochro_includes_excludes_en}}
 
   fr: |
-    {{{gt "table304_short"}}}
+    {{{new_gt "table304_short"}}}
 
     {{> ochro_includes_excludes_en}}

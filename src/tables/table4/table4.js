@@ -1,6 +1,6 @@
 // see [here](../table_definition.html) for description
 // of the table spec
-require("./table4.ib.yaml");
+const text = require("./table4.yaml");
 
 const {
   STATS, 
@@ -17,6 +17,7 @@ const voted_label = trivial_text_maker("voted")
 const stat_label = trivial_text_maker("stat")
 
 module.exports = {
+  text,
   "id": "table4",
 
   "tags" : [

@@ -11,12 +11,12 @@ table11_short:
 table11:
   transform: [handlebars,embeded-markdown,markdown]
   en: |
-    {{{gt "table11_short"}}}
+    {{{new_gt "table11_short"}}}
 
     {{> ochro_includes_excludes_en}}
 
   fr: |
-    {{{gt "table11_short"}}}
+    {{{new_gt "table11_short"}}}
 
     {{> ochro_includes_excludes_fr}}
 

@@ -2,7 +2,7 @@
 exports = module.exports;
 
 
-require("./table2.ib.yaml");
+const text = require("./table2.yaml");
 
 const { Statistics } = require('../../core/Statistics.js');
 const {sos} = require('../../models/businessConstants.js');
@@ -13,6 +13,7 @@ var STATS = require("../../core/tables/stats.js");
 const {trivial_text_maker} = require("../../models/text");
 
 module.exports = {
+  text,
   id: "table2",
   source: [ "QFR" ],
   "tags" : [

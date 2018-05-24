@@ -1,8 +1,7 @@
 // see [here](../table_definition.html) for description
 // of the table spec
 exports = module.exports;
-require('../../common_text/estimates_lang.ib.yaml');
-require("./table8.ib.yaml");
+const text = require("./table8.yaml");
 var FORMAT = require('../../core/format');
 
 const {
@@ -123,6 +122,7 @@ const map_helper = {
 };
 
 module.exports = {
+  text,
   "id": "table8",
 
   "tags" : [

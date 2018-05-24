@@ -97,12 +97,12 @@ table9_short:
 table9:
   transform: [handlebars,embeded-markdown,markdown ]
   en: |
-    {{{gt "table9_short"}}}
+    {{{new_gt "table9_short"}}}
 
     {{> ochro_includes_excludes_en}}
     
        
   fr: |
-    {{{gt "table9_short"}}}
+    {{{new_gt "table9_short"}}}
 
     {{> ochro_includes_excludes_fr}}

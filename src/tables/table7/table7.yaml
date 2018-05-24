@@ -12,7 +12,7 @@ table7_short:
 table7:
   transform: [handlebars,markdown]
   en: |
-   {{{gt "table7_short"}}}
+   {{{new_gt "table7_short"}}}
    
    
    For analytical purposes, the InfoBase presents year-to-year
@@ -28,7 +28,7 @@ table7:
    have occurred, the data has not been adjusted.
 
   fr: |
-   {{{gt "table7_short"}}}
+   {{{new_gt "table7_short"}}}
 
    Aux fins d’analyse, l’InfoBase présente la comparaison des paiements de transfert d’une année à l’autre. Dans certains cas, il se peut que ces comparaisons ne soient pas pertinentes en raison des changements apportés 
    à la nature du paiement de transfert au fil des ans. Les utilisateurs doivent donc faire preuve de prudence avant de tirer des conclusions sur l’importance des changements d’une année 

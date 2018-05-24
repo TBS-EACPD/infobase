@@ -8,16 +8,16 @@ table4_short:
 table4:
   transform: [handlebars,markdown]
   en: |
-   {{{gt "table4_short"}}}
+   {{{new_gt "table4_short"}}}
 
 
    All figures presented reflect information previously published in the 
    Public Accounts of Canada, although totals may not match or agree with those presented in these documents due to rounding.
    In cases where machinery of government changes (such as merging or eliminating organizations) 
-   have occurred, the data has not been adjusted.
+   have occurred, the data has not been adjusted.s
 
   fr: |
-   {{{gt "table4_short"}}}
+   {{{new_gt "table4_short"}}}
 
    Toutes les données présentées correspondent à l’information qui a été publiée dans les Comptes publics du Canada, 
    quoique les totaux pourraient ne pas correspondre ou coïncider à ceux présentées dans ces documents, du fait que les chiffres ont été arrondis. Dans le cas où des changements dans l’appareil 

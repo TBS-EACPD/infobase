@@ -11,7 +11,7 @@ table6_short:
 table6:
   transform: [handlebars,markdown]
   en: |
-   {{{gt "table6_short"}}}
+   {{{new_gt "table6_short"}}}
 
 
    **Notes:**
@@ -27,7 +27,7 @@ table6:
    Public Accounts of Canada and in the {{planning_year_1}} Departmental Plans,  may not match or agree with those presented in these documents due to rounding. In cases where machinery of government changes (such as merging or eliminating organizations) have occurred, the data has not been adjusted. 
 
   fr: |
-   {{{gt "table6_short"}}}
+   {{{new_gt "table6_short"}}}
    
 
    **Remarques:**

@@ -1,4 +1,4 @@
-import "./table11.ib.yaml";
+import text from "./table11.yaml";
 
 import {
   STATS, 
@@ -22,6 +22,7 @@ const {
 } = years;
 
 export default {
+  text,
   "id": "table11",
   source: ["RPS"],
   "tags": [
