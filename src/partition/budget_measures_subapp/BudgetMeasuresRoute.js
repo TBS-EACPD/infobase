@@ -41,7 +41,7 @@ export class BudgetMeasuresRoute extends React.Component {
     this.state = {
       loading: true,
       filtered_chapter_keys: [],
-      filter_string: "",
+      filter_string: false,
     };
   }
   UNSAFE_componentWillMount(){

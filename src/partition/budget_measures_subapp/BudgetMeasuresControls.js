@@ -8,6 +8,7 @@ import {
   LabeledBox,
   TextMaker,
   RadioButtons,
+  DebouncedTextInput,
 } from '../../util_components.js';
 
 import * as Subject from '../../models/subject';
@@ -51,6 +52,10 @@ export class BudgetMeasuresControls extends React.Component {
       }
     }
 
+    const update_filter_string = (filter_string) => {
+      setFilterString(filter_string);
+    }
+
     const active_list = _.xor(_.keys(budget_chapters), filtered_chapter_keys);
 
     return (
@@ -84,7 +89,7 @@ export class BudgetMeasuresControls extends React.Component {
                   _.chain(this.state.chapter_keys)
                     .map( chapter_key => ({
                       chapter_key, 
-                      count: this.state.measure_counts_by_chapter_key[chapter_key] || 0 ,
+                      count: this.state.measure_counts_by_chapter_key[chapter_key] || 0,
                     }) )
                     .map( ({chapter_key, count }) =>
                       <button
@@ -127,12 +132,11 @@ export class BudgetMeasuresControls extends React.Component {
                 <TextMaker text_key="budget_measure_filter_by_name_and_desc_label" />
               </div>
               <div className="budget-measures-search-box">
-                <input  
-                  type = "text" 
-                  className = "form-control search" 
-                  placeholder = {text_maker("budget_measure_filter_by_name_and_desc_placeholder")}
-                >
-                </input>
+                <DebouncedTextInput  
+                  placeHolder = { text_maker("budget_measure_filter_by_name_and_desc_placeholder") }
+                  defaultValue = { filter_string }
+                  updateCallback = { update_filter_string.bind(this) }
+                />
               </div>
             </div>
           }
