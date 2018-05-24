@@ -184,7 +184,7 @@ class RootedResourceExplorerContainer extends React.Component {
     const mapStateToProps = map_state_to_props_from_memoized_funcs(get_memoized_funcs([ scheme ]));
 
     const initialState = {
-      root: ({initial_root_state, scheme_key}),
+      root: ({...initial_root_state, scheme_key}),
       [scheme_key]: initial_rooted_resource_state,
     };
 
