@@ -1,12 +1,13 @@
 import './BudgetMeasuresControls.scss';
-import './BudgetMeasuresControls.ib.yaml';
 
 import classNames from 'classnames';
 
-import { text_maker } from "../../models/text";
+import { 
+  text_maker,
+  TextMaker,
+} from './budget_measure_text_provider.js';
 import { 
   LabeledBox,
-  TextMaker,
   RadioButtons,
   DebouncedTextInput,
 } from '../../util_components.js';

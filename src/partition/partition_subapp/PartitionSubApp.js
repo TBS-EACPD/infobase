@@ -1,4 +1,3 @@
-import "./PartitionSubApp.ib.yaml";
 import "./PartitionSubApp.scss";
 import { text_maker } from "../../models/text";
 import { PartitionDiagram } from "../partition_diagram/PartitionDiagram.js";

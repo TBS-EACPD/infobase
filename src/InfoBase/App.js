@@ -11,14 +11,21 @@ export const app_reducer = (state={ lang: window.lang }, { type, payload }) => {
 
 import { ComponentLoader } from '../core/ComponentLoader.js';
 import { Home } from '../home/home.js';
-import { InfoGraph } from '../infographic/infographic.js';
-import { PartitionRoute } from '../partition/partition_subapp/PartitionRoute.js';
-import { BudgetMeasuresRoute } from '../partition/budget_measures_subapp/BudgetMeasuresRoute.js';
 import { TooltipActivator } from '../glossary/Tooltips';
 import { PotentialSurveyBox } from '../core/survey_link';
 import { EasyAccess } from '../core/EasyAccess';
 import { GraphInventory } from '../graph_route/graph_route.js';
 import { DevStuff } from '../components/ExplorerComponents.js';
+
+const LazyPartitionRoute = ComponentLoader(async () => {
+  const { PartitionRoute } = await import('../partition/partition_subapp/PartitionRoute.js');
+  return PartitionRoute;
+})
+
+const LazyBudgetMeasuresRoute =  ComponentLoader(async () => {
+  const {BudgetMeasuresRoute} = await import('../partition/budget_measures_subapp/BudgetMeasuresRoute.js')
+  return BudgetMeasuresRoute;
+});
 
 const LazyBubbleExplore = ComponentLoader(async ()=>{
   const { BubbleExplore } = await import("../dept_explore/dept_explore.js");
@@ -56,6 +63,11 @@ const LazyRPB = ComponentLoader(async () => {
   return ReportBuilder;
 })
 
+const LazyInfoGraph = ComponentLoader(async () => {
+  const { InfoGraph } = await import ("../infographic/infographic.js");
+  return InfoGraph;
+})
+
 
 
 // Now you can dispatch navigation actions from anywhere!
@@ -78,10 +90,10 @@ export class App extends React.Component {
           <Route path="/metadata/:data_source?" component={LazyMetadata}/>
           <Route path="/igoc/:grouping?" component={LazyIgoc} />
           <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={LazyResourceExplorer} />
-          <Route path="/orgs/:level/:subject_id/infograph/:bubble?/" component={InfoGraph} />
+          <Route path="/orgs/:level/:subject_id/infograph/:bubble?/" component={LazyInfoGraph} />
           <Route path="/glossary/:active_key?" component={LazyGlossary} />
-          <Route path="/partition/:perspective?/:data_type?" component={PartitionRoute} />
-          <Route path="/budget-measures/:first_column?" component={BudgetMeasuresRoute} />
+          <Route path="/partition/:perspective?/:data_type?" component={LazyPartitionRoute} />
+          <Route path="/budget-measures/:first_column?" component={LazyBudgetMeasuresRoute} />
           <Route path="/explore-:perspective?" component={LazyBubbleExplore} />
           <Route path="/rpb/:config?" component={LazyRPB} />
           <Route path="/about" component={LazyAbout} />

@@ -1,13 +1,15 @@
 import './BudgetMeasuresRoute.ib.yaml';
-
 import * as Subject from '../../models/subject';
 import { ensure_loaded } from '../../core/lazy_loader.js';
 import { StandardRouteContainer } from '../../core/NavComponents.js';
 import { 
   SpinnerWrapper,
-  TextMaker,
 } from '../../util_components';
-import { text_maker } from "../../models/text";
+
+import {
+  text_maker,
+  TextMaker,
+} from './budget_measure_text_provider.js';
 
 import { BudgetMeasuresControls } from './BudgetMeasuresControls.js';
 import { BudgetMeasuresPartition } from './BudgetMeasuresPartition.js';

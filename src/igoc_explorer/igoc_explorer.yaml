@@ -34,9 +34,6 @@ by_historical:
   en: Historical organizations
   fr: Organisations historiques
 
-by_all:
-  en: All organizations
-  fr: Toutes les organisations
 
 show_orgs_without_data:
   en: Show organizations without data

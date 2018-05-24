@@ -239,7 +239,7 @@ class IgocExplorer extends React.Component {
           <li className={classNames(grouping==='inst_form' && 'active')}><a href="#igoc/inst_form" > <TM k="by_inst_form" /> </a></li>
           <li className={classNames(grouping==='historical' && 'active')}><a href="#igoc/historical" > <TM k="by_historical" /></a></li>
           <li className={classNames(grouping==='pop_group' && 'active')}><a href="#igoc/pop_group" > <TM k="by_pop_group" /></a></li>
-          <li className={classNames(grouping==='all' && 'active')}><a href="#igoc/all" > <TM k="by_all" /></a></li>
+          <li className={classNames(grouping==='all' && 'active')}><a href="#igoc/all" > <TM k="all_orgs" /></a></li>
         </ul>
       </div>
       <div

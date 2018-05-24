@@ -1,4 +1,3 @@
-import './BudgetMeasuresPartition.ib.yaml';
 import './BudgetMeasuresPartition.scss';
 
 

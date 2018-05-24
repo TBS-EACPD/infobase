@@ -1,13 +1,14 @@
-import './BudgetMeasuresA11yContent.ib.yaml';
-
 import { formats } from '../../core/format.js';
 
 import { 
-  text_maker,
   run_template,
 } from "../../models/text";
 
-import { TextMaker } from '../../util_components.js';
+
+import {
+  text_maker,
+  TextMaker,
+} from './budget_measure_text_provider.js'
 
 import { budget_measures_hierarchy_factory } from './budget_measures_hierarchy_factory.js';
 

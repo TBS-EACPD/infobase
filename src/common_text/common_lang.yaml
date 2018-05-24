@@ -832,3 +832,14 @@ explorer_focus_mount:
 explorer_search_is_optional:
   en: Optionally filter the below data using search
   fr: Vous pouvez choisir de filtrer les données ci-dessous en utilisant une barre de recherche
+
+
+
+some_things_to_keep_in_mind:
+  en: Some things to keep in mind as you explore the data...
+  fr: Certaines choses à garder l'esprit lorsque vous explorez les données
+
+
+all_orgs:
+  en: All organizations
+  fr: Toutes les organisations

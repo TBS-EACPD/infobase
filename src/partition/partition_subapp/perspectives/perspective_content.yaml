@@ -433,7 +433,7 @@ partition_revenue_explained:
 partition_org_info_by_min:
   transform: [handlebars]
   text: |
-    {{gt "by_all"}} {{gt "by"}} {{gt "by_portfolio"}}
+    {{gt "all_orgs"}} {{gt "by"}} {{gt "by_portfolio"}}
 partition_org_info_federal_orgs_by_inst_form:
   transform: [handlebars]
   text: |
