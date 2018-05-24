@@ -14,7 +14,6 @@ import { Home } from '../home/home.js';
 import { InfoGraph } from '../infographic/infographic.js';
 import { PartitionRoute } from '../partition/partition_subapp/PartitionRoute.js';
 import { BudgetMeasuresRoute } from '../partition/budget_measures_subapp/BudgetMeasuresRoute.js';
-import { Glossary } from '../glossary/glossary.js';
 import { BubbleExplore } from '../dept_explore/dept_explore.js';
 import { ReportBuilder } from '../rpb/index.js';
 import { TooltipActivator } from '../glossary/Tooltips';
@@ -43,6 +42,11 @@ async function getResourceExplorerComponent(){
   return ResourceExplorer;
 }
 
+async function getGlossaryComponent(){
+  const {Glossary} = await import('../glossary/glossary.js');
+  return Glossary;
+}
+
 
 // Now you can dispatch navigation actions from anywhere!
 // store.dispatch(push('/foo'))
@@ -65,7 +69,7 @@ export class App extends React.Component {
           <Route path="/igoc/:grouping?" component={ComponentLoader(getIgocComponent)} />
           <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={ComponentLoader(getResourceExplorerComponent)} />
           <Route path="/orgs/:level/:subject_id/infograph/:bubble?/" component={InfoGraph} />
-          <Route path="/glossary/:active_key?" component={Glossary} />
+          <Route path="/glossary/:active_key?" component={ComponentLoader(getGlossaryComponent)} />
           <Route path="/partition/:perspective?/:data_type?" component={PartitionRoute} />
           <Route path="/budget-measures/:first_column?" component={BudgetMeasuresRoute} />
           <Route path="/explore-:perspective?" component={BubbleExplore} />
