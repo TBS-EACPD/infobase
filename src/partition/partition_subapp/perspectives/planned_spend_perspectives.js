@@ -314,16 +314,15 @@ const create_planned_spending_hierarchy = function(data_type, presentation_schem
 
 
 const planned_exp_popup_template = function(presentation_scheme, d){
-  const common_popup_options = _.assign(
-    {}, 
-    get_common_popup_options(d),
-    {
+  const common_popup_options = {
+    ...get_common_popup_options(d),
+    ...{
       year: run_template( get_year(presentation_scheme) ),
       planned_exp: d.value,
       planned_exp_is_negative: d.value < 0,
       rpb_link: d.data.rpb_link,
-    }
-  );
+    },
+  };
   if (d.data.is("stat_item")) {
     return text_maker("partition_planned_vs_type_or_est_type", 
       _.extend(common_popup_options, {

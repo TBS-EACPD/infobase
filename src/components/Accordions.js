@@ -101,10 +101,10 @@ class AutoAccordion extends React.Component {
     const { isExpanded } = this.state;
     return React.createElement(
       StatelessPullDownAccordion,
-      Object.assign({}, this.props, {
-        isExpanded,
-        onToggle:()=> this.setState({ isExpanded : !isExpanded }),
-      })
+      { ...this.props, 
+        ...{isExpanded,
+          onToggle:()=> this.setState({ isExpanded : !isExpanded }),
+        }}
     );
   }
 }

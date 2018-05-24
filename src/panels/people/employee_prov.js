@@ -28,7 +28,7 @@ const prov_split_render = function(panel,data,options){
   // reformat the data for display
   //note: here we deep clone stuff because the graph_args should be immutable, because table dimensions are memoized
   const years_by_province = _.chain(graph_args.years_by_province)
-    .map( obj => Object.assign({},obj) )  //deep clone each row  
+    .map( obj => ({...obj}) )  //deep clone each row  
     .each( year  => {
       if (year['qclessncr']) {
         year.qc = year['qclessncr'];

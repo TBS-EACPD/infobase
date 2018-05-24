@@ -33,8 +33,8 @@ const {
 
 const { rpb_link } = require('./rpb_link.js');
 //note: don't use these outside the context of simple view, and always pass all props in currentProps
-const granular_rpb_link_for_org = (currentProps, subject)=> rpb_link( Object.assign({},currentProps,{subject, mode:'details' }) );
-const granular_rpb_link_for_filter = (currentProps, filter) => rpb_link( Object.assign({},currentProps,{filter, mode:'details' }) );
+const granular_rpb_link_for_org = (currentProps, subject)=> rpb_link( { ...currentProps, ...{subject, mode:'details' }} );
+const granular_rpb_link_for_filter = (currentProps, filter) => rpb_link({ ...currentProps, ...{filter, mode:'details' }} );
 
 
 
@@ -335,16 +335,14 @@ class SimpleView extends React.Component {
     const total = column.formula(flat_data);
     const num_format_type = column.type;
 
-    const data_with_links = _.map(data, record => Object.assign(
-      {
-        href: (
-          deptBreakoutMode ? 
-          granular_rpb_link_for_org(this.props, record.subject ) :
-          granular_rpb_link_for_filter(this.props, record.label )
-        ), 
-      }, 
-      record
-    ));
+    const data_with_links = _.map(data, record => ({
+      href: (
+        deptBreakoutMode ? 
+        granular_rpb_link_for_org(this.props, record.subject ) :
+        granular_rpb_link_for_filter(this.props, record.label )
+      ), 
+      ...record,
+    }));
 
     return (
       <div className="fcontainer">

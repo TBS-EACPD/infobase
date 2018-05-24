@@ -48,10 +48,9 @@ const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
             
             const has_no_description = _.isEmpty(budgetMeasure.description);
 
-            return _.assign(
-              {},
-              budgetMeasure, 
-              { 
+            return {
+              ...budgetMeasure, 
+              ...{ 
                 type: budgetMeasure.id === "net_adjust" ? "net_adjust" : "budget_measure",
                 description: has_no_description ?
                     text_maker("not_available") :
@@ -59,8 +58,8 @@ const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
                 notes: !has_no_description ? text_maker("budget_measure_description_values_clarification") : false,
                 chapter_key: budgetMeasure.chapter_key,
                 value: _.reduce(budgetMeasure.funds, (sum, fund_row) => sum + (fund_row.fund), 0),
-              }
-            )
+              },
+            }
           })
           .value();
         return budgetMeasureNodes;
@@ -69,27 +68,25 @@ const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
           .filter(fund_row => fund_row.org_id !== "net_adjust")
           .map(fund_row => {
             if (fund_row.org_id === "non_allocated"){
-              return _.assign(
-                {},
-                {
+              return {
+                ...{
                   name: text_maker("budget_allocation_tbd"),
                   description: "", //TODO: get explanation of this case, and use it for item description?
                   type: "dept",
                   id: 9999,
                   value: fund_row.fund,
-                }
-              );
+                },
+              };
             } else {
               const dept = Subject.Dept.lookup(fund_row.org_id);
-              return _.assign(
-                {},
-                dept,
-                {
+              return  {
+                ...dept,
+                ...{
                   type: "dept",
                   description: dept.mandate,
                   value: fund_row.fund,
-                }
-              );
+                },
+              };
             }
           })
           .value();
@@ -121,40 +118,37 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
       if (node.id === "root"){
         const deptNodes = _.map(filtered_budget_measure_funds_by_org_id, (fund_rows, org_id) => {
           if (org_id === "non_allocated"){
-            return _.assign(
-              {},
-              { 
+            return {
+              ...{ 
                 name: text_maker("budget_allocation_tbd"),
                 description: "",
                 type: "dept",
                 id: 9999,
                 fund_rows,
-              }
-            );
+              },
+            };
           } else if (org_id === "net_adjust"){
             const net_adjust_measure = Subject.BudgetMeasure.lookup("net_adjust");
 
-            return _.assign(
-              {},
-              net_adjust_measure,
-              { 
+            return {
+              ...net_adjust_measure,
+              ...{ 
                 type: "net_adjust",
                 id: 9998,
                 value: _.reduce(fund_rows, (sum, fund_row) => sum + fund_row.fund, 0),
-              }
-            );
+              },
+            };
           } else {
             const dept = Subject.Dept.lookup(org_id);
 
-            return _.assign(
-              {},
-              dept,
-              { 
+            return {
+              ...dept,
+              ...{ 
                 type: "dept",
                 description: dept.mandate,
                 fund_rows,
-              }
-            );
+              },
+            };
           }
         });
         return deptNodes;
@@ -164,10 +158,9 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
 
           const has_no_description = _.isEmpty(budgetMeasure.description);
 
-          return _.assign(
-            {},
-            budgetMeasure,
-            { 
+          return {
+            ...budgetMeasure,
+            ...{ 
               type: "budget_measure",
               chapter_key: budgetMeasure.chapter_key,
               description: has_no_description ?
@@ -175,8 +168,8 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
                   budgetMeasure.description,
               notes: !has_no_description ? text_maker("budget_measure_description_values_clarification") : false,
               value: fund_row.fund,
-            }
-          );
+            },
+          };
         });
         return budgetMeasureNodes;
       }

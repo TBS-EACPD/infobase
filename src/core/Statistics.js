@@ -18,11 +18,11 @@ const some_constants = {
 function get_info(subject, infokeys){
   const computed_separate = _.map( infokeys, key => get_single_info(key, subject));
   const computed = Object.assign.apply(null,[{}].concat(computed_separate));
-  return Object.assign(
-    {subject, dept: subject.constructor.type_name === 'dept' ? subject : undefined },
-    computed,
-    some_constants
-  );
+  return {
+    subject, dept: subject.constructor.type_name === 'dept' ? subject : undefined,
+    ...computed,
+    ...some_constants,
+  };
 }
 
 // TODO   readd memoize once debugged 

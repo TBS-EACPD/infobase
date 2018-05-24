@@ -75,7 +75,7 @@ new PanelGraph({
     //tags #20 will have two depts to show and tag 32 will only have one circle.
     const graph_area=  panel.areas().graph;
     const text_area=  panel.areas().text;
-    text_area.html(text_maker("tag_top_3_depts_text",Object.assign({top_3_depts},info)));
+    text_area.html(text_maker("tag_top_3_depts_text",{top_3_depts, ...info}));
 
     const row = d3.select(graph_area.node())
       .append('div')

@@ -239,7 +239,7 @@ export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts 
       <div className="fcol-md-5 fcol-xs-12 medium_panel_text" >
         <TM 
           k="drr_summary_text"
-          args={Object.assign({ subject, num_depts, is_gov }, verbose_counts)} 
+          args={{ subject, num_depts, is_gov, ...verbose_counts}} 
         />
       </div>
       <div className="fcol-md-6 col-xs-12">

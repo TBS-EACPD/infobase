@@ -29,11 +29,9 @@ function filter_hierarchy(flat_nodes, filter_func, { leaves_only=false,  markSea
 
   if(_.isEmpty(positive_search_results)){
     return [ 
-      Object.assign(
-        {}, 
-        get_root(flat_nodes), 
-        { children : [] } 
-      ), 
+      { ...get_root(flat_nodes), 
+        ...{ children : [] }, 
+      }, 
     ];
   }
   
@@ -62,10 +60,9 @@ function filter_hierarchy(flat_nodes, filter_func, { leaves_only=false,  markSea
   const all_flat_nodes = _.uniqBy(new_flat_nodes);
 
   //up to this point, the parent links are still accurate.
-  const new_nodes = _.map(all_flat_nodes, node => Object.assign(
-    {}, 
-    node, 
-    markSearchResults ? { is_search_match : !!positive_search_ids[node.id] } : {}
+  const new_nodes = _.map(all_flat_nodes, node => ({
+    ...node, 
+    ...markSearchResults ? { is_search_match : !!positive_search_ids[node.id] } : {}}
   ));
 
   create_children_links(new_nodes);
@@ -133,13 +130,13 @@ function toggleExpandedFlat(flat_nodes, node, { toggleNode, expandAllChildren, c
   if(expandAllChildren){
 
     nodes_to_be_replaced.push(...node.children);
-    replacement_node.children = _.map(node.children, obj => Object.assign({}, obj, { isExpanded: true} ));
+    replacement_node.children = _.map(node.children, obj => ({ ...obj, ...{isExpanded: true} }));
     new_nodes.push(...replacement_node.children)
 
   } else if(collapseAllChildren){
 
     nodes_to_be_replaced.push(...node.children);
-    replacement_node.children = _.map(replacement_node.children, obj => Object.assign({}, obj, { isExpanded: true} ));
+    replacement_node.children = _.map(replacement_node.children, obj => ({ ...obj, ...{ isExpanded: true} }));
     new_nodes.push(...replacement_node.children)
 
   } else { // default behavior: toggle the node.
@@ -155,11 +152,10 @@ function toggleExpandedFlat(flat_nodes, node, { toggleNode, expandAllChildren, c
 
     new_children[new_children.indexOf(current_node)] = current_replacement;
 
-    const new_parent = Object.assign(
-      {},
-      parent_node,
-      { children: new_children }
-    );
+    const new_parent = {
+      ...parent_node,
+      ...{ children: new_children },
+    };
 
     nodes_to_be_replaced.push(parent_node);
     new_nodes.push(new_parent);
@@ -297,11 +293,10 @@ function _sort_hierarchy(node, children_transform){
     .map(child => _sort_hierarchy(child, children_transform) )
     .value();
 
-  return Object.assign(
-    {},
-    node,
-    { children: new_children }
-  );
+  return {
+    ...node,
+    ...{ children: new_children },
+  };
 }
 
 module.exports = exports = {

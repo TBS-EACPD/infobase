@@ -325,11 +325,10 @@ class DetailedProgramSplit extends React.Component {
           href: infograph_href_template(prog),
           data: _.chain(group)
             //the mapping take so_num and produces new so_labels, 
-            .map( obj => Object.assign(
-              {},
-              obj,
-              {so_label : mapping(obj.so_num)}
-            ))
+            .map( obj => ({
+              ...obj,
+              ...{so_label : mapping(obj.so_num)},
+            }))
             .filter('so_label') //the mapping assigns falsey values in order to throw things out.
             .groupBy('so_label')
             .map((group, label) => ({
