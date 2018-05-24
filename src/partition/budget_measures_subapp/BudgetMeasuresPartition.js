@@ -83,7 +83,7 @@ const popup_template = node => {
   return text_maker("budget_measure_popup_template", popup_options);
 }
 
-const data_wrapper_node_rules = (node) => {
+const standard_data_wrapper_node_rules = (node) => {
   const root_value = _.last(node.ancestors()).value;
   node.__value__ = node.value;
   node.open = true;
@@ -100,18 +100,79 @@ const data_wrapper_node_rules = (node) => {
 }
 
 const update_diagram = (diagram, props) => {
+  if (props.filter_string){
+    update_with_search(diagram, props);
+  } else {
+    standard_update(diagram, props);
+  }
+}
+
+const standard_update = (diagram, props) => {
   const data = budget_measures_hierarchy_factory(props.first_column, props.filtered_chapter_keys);
+  const dont_fade = [];
+  render_diagram(diagram, props, data, standard_data_wrapper_node_rules, dont_fade);
+}
+
+const update_with_search = (diagram, props) => {
+  const dont_fade = [];
+  const search_matching = [];
+    
+  const search_tree =  budget_measures_hierarchy_factory(props.first_column, props.filtered_chapter_keys);
+  const deburred_query = _.deburr(props.filter_string).toLowerCase();
+
+  search_tree.each(node => {
+    if (
+      (node.data.type === "dept" && node.data.id !== 9999) && 
+         (
+           _.deburr(node.data.acronym.toLowerCase()) === deburred_query ||
+           _.deburr(node.data.fancy_acronym.toLowerCase()) === deburred_query ||
+           _.findIndex(node.data.name.toLowerCase().split(" "), word => _.deburr(word) === deburred_query) !== -1 ||
+           _.findIndex(node.data.applied_title.toLowerCase().split(" "), word => _.deburr(word) === deburred_query) !== -1
+         )
+    ) {
+      search_matching.push(node);
+      _.each(node.children, children => {
+        search_matching.push(children);
+        dont_fade.push(node);
+      });
+    } else if (node.data.search_string.indexOf(deburred_query) !== -1){
+      search_matching.push(node);
+      dont_fade.push(node);
+    }
+  });
+
+  const to_open = _.chain(search_matching)
+    .map(n => n.ancestors())
+    .flatten(true)
+    .uniq()
+    .value();
+  const how_many_to_be_shown = node => {
+    const partition = _.partition(node.children, child => _.includes(to_open, child));
+    return partition;
+  };
+    
+  const search_data_wrapper_node_rules = (node) => {
+    node.__value__ = node.value;
+    node.open = true;
+    node.how_many_to_show = how_many_to_be_shown;
+  }
+
+  render_diagram(diagram, props, search_tree, search_data_wrapper_node_rules, dont_fade);
+}
+
+const render_diagram = (diagram, props, data, data_wrapper_node_rules, dont_fade) => {
   const displayed_measure_count = _.filter(Subject.BudgetMeasure.get_all(), (budgetMeasure) => {
     return _.indexOf(props.filtered_chapter_keys, budgetMeasure.chapter_key) === -1;
   }).length;
-  
+
   diagram.configure_then_render({
-    data: data,
-    formatter: formatter,
+    data,
+    formatter,
     level_headers: get_level_headers(props.first_column),
     root_text_func: _.curry(root_text_func)(displayed_measure_count),
-    popup_template: popup_template,
-    data_wrapper_node_rules: data_wrapper_node_rules,
+    popup_template,
+    data_wrapper_node_rules,
+    dont_fade,
     colors: [
       "#f6ca7c",
       "#f6987c",

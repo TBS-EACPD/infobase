@@ -20,6 +20,15 @@ const get_total_budget_measure_funds = (filtered_chapter_keys) => {
     .value();
 }
 
+const post_traversal_search_string_set = function(node){
+  node.data.search_string = "";
+  if (node.data.name){
+    node.data.search_string += _.deburr(node.data.name.toLowerCase());
+  }
+  if (node.data.description){
+    node.data.search_string += _.deburr(node.data.description.replace(/<(?:.|\n)*?>/gm, '').toLowerCase());
+  }
+}
 
 const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
   return d3.hierarchy(
@@ -87,6 +96,7 @@ const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
         return orgNodes;
       }
     })
+    .eachAfter(node => post_traversal_search_string_set(node) )
     .sort(absolute_value_sort_net_adjust_biased);
 }
 
@@ -175,6 +185,7 @@ const dept_first_hierarchy_factory = (filtered_chapter_keys) => {
       if ( _.isNaN(node.value) && node.children && node.children.length > 0 ){
         node.value = _.reduce(node.children, (sum, child_node) => sum + child_node.value, 0);
       }
+      post_traversal_search_string_set(node);
     })
     .sort(absolute_value_sort_net_adjust_biased);
 }
