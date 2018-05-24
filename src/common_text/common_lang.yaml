@@ -662,24 +662,8 @@ help:
 
 
 
-#######################################
-# Explore section
-#######################################
-dept_explore_title:
-  en: Explore federal organizations by size
-  fr: Explorer les organisations fédérales selon leur taille
-change_layout:
-  en: Change the layout
-  fr: Changer la mise en page
-by_dept:
-  en: By Total Spending
-  fr: par dépenses totales
-by_dept-type:
-  en: By Types of Organizations
-  fr: par type d'organisation
-by_people-total:
-  en: By Total Number of Employees
-  fr: par le nombre total d'employés
+
+
 
 dummy_text:
   en: fancy text here 

@@ -1,3 +1,7 @@
+dept_explore_title:
+  en: Explore federal organizations by size
+  fr: Explorer les organisations fédérales selon leur taille
+
 explore_common_text:
   transform: [handlebars, markdown]
   en: |
@@ -112,3 +116,18 @@ a11y_see_infograph_for:
 a11y_drill_down_label:
   en: Drill down
   fr: Approfondir
+
+
+
+change_layout:
+  en: Change the layout
+  fr: Changer la mise en page
+by_dept:
+  en: By Total Spending
+  fr: par dépenses totales
+by_dept-type:
+  en: By Types of Organizations
+  fr: par type d'organisation
+by_people-total:
+  en: By Total Number of Employees
+  fr: par le nombre total d'employés

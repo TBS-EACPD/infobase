@@ -3,8 +3,7 @@ import { createSelector } from 'reselect';
 import withRouter from 'react-router/withRouter';
 import { log_standard_event } from '../core/analytics.js';
 import { Fragment } from 'react';
-const { text_maker } = require('../models/text');
-require("./rpb.ib.yaml");
+const { TextMaker, text_maker } = require('./rpb_text_provider.js');
 require('./rpb.scss');
 
 //data and state stuff
@@ -25,7 +24,6 @@ const { ensure_loaded } = require('../core/lazy_loader.js');
 //re-usable view stuff
 const {
   SpinnerWrapper,
-  TextMaker,
   RadioButtons,
   LabeledBox,
 } = require('../util_components.js');

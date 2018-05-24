@@ -14,38 +14,48 @@ import { Home } from '../home/home.js';
 import { InfoGraph } from '../infographic/infographic.js';
 import { PartitionRoute } from '../partition/partition_subapp/PartitionRoute.js';
 import { BudgetMeasuresRoute } from '../partition/budget_measures_subapp/BudgetMeasuresRoute.js';
-import { BubbleExplore } from '../dept_explore/dept_explore.js';
-import { ReportBuilder } from '../rpb/index.js';
 import { TooltipActivator } from '../glossary/Tooltips';
 import { PotentialSurveyBox } from '../core/survey_link';
 import { EasyAccess } from '../core/EasyAccess';
 import { GraphInventory } from '../graph_route/graph_route.js';
 import { DevStuff } from '../components/ExplorerComponents.js';
 
-async function getAboutComponent(){
+const LazyBubbleExplore = ComponentLoader(async ()=>{
+  const { BubbleExplore } = await import("../dept_explore/dept_explore.js");
+  return BubbleExplore;
+})
+
+const LazyAbout = ComponentLoader(async () => {
   const {About} = await import('../about/about.js');
   return About;
-}
+});
 
-async function getMetadataComponent(){
+const LazyMetadata = ComponentLoader(async () =>{
   const { MetaData } = await import('../metadata/metadata.js');
   return MetaData;
-}
+})
 
-async function getIgocComponent(){
+const LazyIgoc = ComponentLoader(async () => {
   const {IgocExplorer} = await import('../igoc_explorer/igoc_explorer.js');
   return IgocExplorer;
-}
+});
 
-async function getResourceExplorerComponent(){
+const LazyResourceExplorer = ComponentLoader(async () => {
   const {ResourceExplorer} = await import('../resource_explorer/resource-explorer.js');
   return ResourceExplorer;
-}
+});
 
-async function getGlossaryComponent(){
+const LazyGlossary = ComponentLoader(async () => {
   const {Glossary} = await import('../glossary/glossary.js');
   return Glossary;
-}
+});
+
+
+const LazyRPB = ComponentLoader(async () => {
+  const { ReportBuilder } = await import("../rpb/index.js");
+  return ReportBuilder;
+})
+
 
 
 // Now you can dispatch navigation actions from anywhere!
@@ -65,16 +75,16 @@ export class App extends React.Component {
         <PotentialSurveyBox />
         <EasyAccess />
         <Switch>
-          <Route path="/metadata/:data_source?" component={ComponentLoader(getMetadataComponent)}/>
-          <Route path="/igoc/:grouping?" component={ComponentLoader(getIgocComponent)} />
-          <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={ComponentLoader(getResourceExplorerComponent)} />
+          <Route path="/metadata/:data_source?" component={LazyMetadata}/>
+          <Route path="/igoc/:grouping?" component={LazyIgoc} />
+          <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={LazyResourceExplorer} />
           <Route path="/orgs/:level/:subject_id/infograph/:bubble?/" component={InfoGraph} />
-          <Route path="/glossary/:active_key?" component={ComponentLoader(getGlossaryComponent)} />
+          <Route path="/glossary/:active_key?" component={LazyGlossary} />
           <Route path="/partition/:perspective?/:data_type?" component={PartitionRoute} />
           <Route path="/budget-measures/:first_column?" component={BudgetMeasuresRoute} />
-          <Route path="/explore-:perspective?" component={BubbleExplore} />
-          <Route path="/rpb/:config?" component={ReportBuilder} />
-          <Route path="/about" component={ComponentLoader(getAboutComponent)} />
+          <Route path="/explore-:perspective?" component={LazyBubbleExplore} />
+          <Route path="/rpb/:config?" component={LazyRPB} />
+          <Route path="/about" component={LazyAbout} />
           <Route path="/graph/:level?/:graph?/:id?" component={GraphInventory} />
           <Route path="/dev" component={DevStuff} />
           <Route path="/" component={Home} />

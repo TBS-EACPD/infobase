@@ -1,4 +1,4 @@
-const {  text_maker } = require('../models/text');
+const { TextMaker, text_maker } = require('./rpb_text_provider.js');
 
 const { 
   SelectList,
@@ -11,7 +11,6 @@ const {
 const { Dept } = require('../models/subject.js');
 
 const {
-  TextMaker,
   Format,
   TwoLevelSelect,
   SortIndicators,

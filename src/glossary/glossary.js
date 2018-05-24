@@ -25,7 +25,7 @@ const GlossarySearch = withRouter(
       const { history } = this.props;
       autoComplete({
         container: this.el,
-        placeholder: ("glossary_search"),
+        placeholder: text_maker("glossary_search"),
         search_configs: [ glossary_search_config ],
         onSelect: item => {
           history.push(item_url(item.id));

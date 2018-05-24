@@ -195,7 +195,11 @@ exports.Table = class Table extends mix().with(staticStoreMixin){
     return { headers_for_cell, col_structure };
 
 
-  } 
+  }
+
+  column_description(col_nick){
+    return run_template(this.col_from_nick(col_nick).description[window.lang]);
+  }  
 
   old_presentation_ready_headers(){
     var flat_headers = this.flat_headers;
