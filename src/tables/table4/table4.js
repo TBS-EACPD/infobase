@@ -51,6 +51,7 @@ module.exports = {
         {
           "type":"int",
           "key" : true,
+          "hidden":true,
           "nick" : "votenum",
           "header":{
             "en":"Number",

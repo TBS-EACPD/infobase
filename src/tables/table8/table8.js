@@ -159,6 +159,7 @@ module.exports = {
     this.add_col({
       "type":"int",
       "key":true,
+      "hidden":true,
       'nick' : "votenum",
       "header":{
         "en":"Vote / Statutory Number",
