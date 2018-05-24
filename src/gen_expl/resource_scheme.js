@@ -274,7 +274,7 @@ const resource_scheme = {
 
       const mods = clicked_col === sort_col ? { is_descending : !is_descending } : { is_descending: true, sort_col : clicked_col };
 
-      return ({...state, mods});
+      return ({...state, ...mods});
     } else if(type==="set_doc"){
       return ({...state, doc: payload });
     } else {
