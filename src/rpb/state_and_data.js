@@ -106,9 +106,9 @@ const reducer = (state=initial_state, action) => {
     case 'header_click': {
       const col_nick = payload;
       if(state.sort_col  === col_nick){
-        return {state, descending: !state.descending };
+        return {...state, descending: !state.descending };
       } else {
-        return {state,
+        return {...state,
           sort_col: col_nick,
           descending: true, 
           page_num: 0,
