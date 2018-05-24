@@ -53,7 +53,11 @@ export class BudgetMeasuresControls extends React.Component {
     }
 
     const update_filter_string = (filter_string) => {
-      setFilterString(filter_string);
+      if (filter_string === ""){
+        setFilterString(false);
+      } else {
+        setFilterString(filter_string);
+      }
     }
 
     const active_list = _.xor(_.keys(budget_chapters), filtered_chapter_keys);
