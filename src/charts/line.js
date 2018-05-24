@@ -104,13 +104,13 @@ exports.ordinal_line = class ordinal_line {
       .map( ([key, vals]) => _.map( vals, (val,ix) => {return {key: key, value: val, index:this.ticks[ix]}}))
       .flatten()
       .groupBy("index")
-      .map(group => Object.assign(
-        { year: _.first(group).index},
-        _.chain(group)
+      .map(group => ({
+        year: _.first(group).index,
+        ..._.chain(group)
           .map( ({key, value}) =>  [ key, value ])
           .fromPairs()
-          .value()
-      ))
+          .value(),
+      }))
       .sortBy("index")
       .value()
 

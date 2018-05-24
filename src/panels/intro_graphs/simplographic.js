@@ -106,27 +106,25 @@ new PanelGraph({
     const pct_ontrack_or_met = num_ontrack_or_met/num_indicators;
 
 
-    return Object.assign(
-      {
-        largest_items,
-        gov_exp_pa_last_year,
-        empl_count_total: total_employees,
-        empl_count_ncr_ratio,
-        num_federal_inst: federal_institutions.length,
-        num_ministries: ministries.length,
+    return {
+      largest_items,
+      gov_exp_pa_last_year,
+      empl_count_total: total_employees,
+      empl_count_ncr_ratio,
+      num_federal_inst: federal_institutions.length,
+      num_ministries: ministries.length,
 
-        num_results,
-        num_indicators,
-        num_ontrack_or_met,
-        pct_ontrack_or_met,
+      num_results,
+      num_indicators,
+      num_ontrack_or_met,
+      pct_ontrack_or_met,
 
-        t4_link,
-        t9_link,
-        t10_link,
-        results_link,
-      },
-      info
-    );
+      t4_link,
+      t9_link,
+      t10_link,
+      results_link,
+      ...info,
+    };
   },
 
   render(panel,calculations){

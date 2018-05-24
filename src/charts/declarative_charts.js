@@ -297,10 +297,10 @@ class A11YTable extends React.PureComponent {
   _render(){
     const { main } = this.refs;
     main.innerHTML = "";
-    create_a11y_table(Object.assign(
-      { container: main },
-      this.props
-    ));
+    create_a11y_table({
+      container: main,
+      ...this.props,
+    });
   }
 
 }

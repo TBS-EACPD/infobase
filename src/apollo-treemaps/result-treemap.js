@@ -176,7 +176,7 @@ class ResultTreeMapContainer extends React.Component {
 const Component = ({ gql_props : {variables } }) => {
   const Comp = LoadingHoc({
     query,
-    variables: _.assign({ doc: "drr16"}, variables),
+    variables: ({doc: "drr16", ...variables}),
     data_to_props,
     Component: ResultTreeMapContainer,
   });

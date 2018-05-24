@@ -176,12 +176,11 @@ function panel_def_to_connecter(panel_def, subject_context){
     name: key,
     options: ({subject_context}) => ({
       skip: !query,
-      variables: Object.assign(
-        {},
-        global_graphql_vars,
-        subject_context,
-        vars
-      ),
+      variables: {
+        ...global_graphql_vars,
+        ...subject_context,
+        ...vars,
+      },
     }),
   });
 };

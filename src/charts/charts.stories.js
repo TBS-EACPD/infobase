@@ -96,7 +96,7 @@ storiesOf("IconArray")
   .add("basic usage", () => {
   
     return (
-      <div style={_.assign({ height: "400px" }, separator_style)}>
+      <div style={{ height: "400px", ...separator_style}}>
         <IconArray 
           data={data}
           render_item={ ({ data: { className, color } }, max_dim) => {
@@ -129,7 +129,7 @@ storiesOf("IconArray")
   .add("filling dimensions", () => {
 
     return (
-      <div style={_.assign({ height: "400px" }, separator_style)}>
+      <div style={{ height: "400px", ...separator_style}}>
         <IconArray 
           data={data}
           render_item={ ({ data: { color } }, max_dim) => {

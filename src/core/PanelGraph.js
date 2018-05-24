@@ -185,18 +185,16 @@ class PanelGraph {
     const render_func = this._inner_render;
     const layout_def = this.layout;
     const layout = layout_def[ (options.layout || 'full') ] ;
-    const panel_args = Object.assign(
-      {
-        target : container,
-        off : this.panel_off | [],
-        panel_layout: layout,
-        colmd : options.colmd || 12,
-        title_el : "div",
-        text_class: 'medium_panel_text',
-      },
-      options.panel_args,
-      this.panel_args
-    );
+    const panel_args = ({
+      target : container,
+      off : this.panel_off | [],
+      panel_layout: layout,
+      colmd : options.colmd || 12,
+      title_el : "div",
+      text_class: 'medium_panel_text',
+      ...options.panel_args,
+      ...this.panel_args,
+    });
     const panel = PANEL.panel(panel_args);
     //allow default titles and text in case multiple levels want the same title
     //TODO: dummy text fallback is for quick development ONLY

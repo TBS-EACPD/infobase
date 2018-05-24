@@ -433,7 +433,7 @@ export class Explorer extends React.Component {
 
     const computed_col_styles = compute_col_styles(column_defs);
     
-    const explorer_context = Object.assign({computed_col_styles}, config);
+    const explorer_context = {computed_col_styles, ...config};
 
     return (
       <div style={{overflowX: "auto"}}>

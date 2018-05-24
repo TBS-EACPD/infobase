@@ -66,22 +66,20 @@ function log_standard_event(dims){
     throw "analytics is uninitialized";
   }
 
-  const send_obj = Object.assign(
-    {
-      hitType: 'event',
+  const send_obj = 
+    { hitType: 'event',
       eventCategory: 'content-browse',
       eventAction: 'content-browse',
       eventLabel: 'content-browse',
-    },
-    dummy_event_obj,  
-    _.chain(dims)
-      .map( (val, key) => [
-        dimensions[key],
-        val,
-      ])
-      .fromPairs()
-      .value()
-  );
+      ...dummy_event_obj,  
+      ..._.chain(dims)
+        .map( (val, key) => [
+          dimensions[key],
+          val,
+        ])
+        .fromPairs()
+        .value(),
+    };
 
 
   ga('send',send_obj);

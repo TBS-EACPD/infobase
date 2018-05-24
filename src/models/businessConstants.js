@@ -106,4 +106,4 @@ const ex_level_rev_map = _.chain(compact_ex_level_map)
 
 const ex_level_stuff = { ex_level_target, compact_ex_level_map, ex_level_rev_map };  
 
-window._businessConstants = module.exports = exports = Object.assign({}, yaml, emp_age_stuff, ex_level_stuff)
+window._businessConstants = module.exports = exports = { ...yaml, ...emp_age_stuff, ...ex_level_stuff}
