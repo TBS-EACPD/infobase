@@ -4,7 +4,7 @@ const { text_maker } = require('../models/text.js');
 /* disable-eslint react/jsx-no-danger-children */
 const TextMaker = ({text_maker_func, text_key, el, args, template_str}) => {
   const tm_func = _.isFunction(text_maker_func) ? text_maker_func : text_maker;
-  const html = tm_func(text_key,args);
+  const html = tm_func(text_key,_.clone(args)); //must clone args because props are immutable, text-maker will mutate obj
   return React.createElement(
     el || 'span',
     { dangerouslySetInnerHTML:{__html: html} }
