@@ -102,7 +102,7 @@
 
 @media(min-width:1200px){
   .chapter-key-table {
-    max-width: 750px;
+    width: 100%;
     margin: 0 auto;
   }
   .chapter-key-table__item {
@@ -144,7 +144,6 @@
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
   }
-
 }
 
 .chapter-key-table__word {
@@ -171,7 +170,6 @@
   padding: 10px 0px 10px 0px;
 
   & > .form-control.search {
-    max-width: 835px;
     width: 100%;
     @media(min-width:1200px){
       border: 2px solid darken(#9c9c9c, 25%);
