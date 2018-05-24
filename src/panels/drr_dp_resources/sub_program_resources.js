@@ -1,3 +1,4 @@
+import '../../gen_expl/explorer-styles.scss';
 import "./sub_program_resources.ib.yaml";
 
 import { createSelector } from 'reselect';

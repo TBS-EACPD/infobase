@@ -1,3 +1,4 @@
+import '../../gen_expl/explorer-styles.scss';
 import classNames from 'classnames';
 import { combineReducers, createStore }  from 'redux';
 import { Provider, connect } from 'react-redux';
@@ -118,12 +119,12 @@ class RootedResourceExplorer extends React.Component {
         <ul className="tabbed_content_label_bar">
           <li className={classNames("tab_label", doc==="drr16" && "active_tab")} onClick={()=> tab_on_click('drr16')}>
             <span tabIndex={0} role="button" aria-pressed={doc === "drr16"} className="tab_label_text" onClick={()=> tab_on_click('drr16')} onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('drr16')}>
-              <TM k="DRR_resources_option_title" />
+              <TM k="DRR_resources" />
             </span>
           </li>
           <li className={classNames("tab_label", doc==="dp17" && "active_tab")} onClick={()=> tab_on_click('dp17')}>
             <span tabIndex={0} role="button" aria-pressed={doc === "dp17"} className="tab_label_text" onClick={()=> tab_on_click('dp17')} onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('dp17')}>
-              <TM k="DP_resources_option_title" />
+              <TM k="DP_resources" />
             </span>
           </li>
         </ul>

@@ -1,5 +1,6 @@
 import about_text_bundle from "./about.yaml";
 import './about.scss';
+import '../gen_expl/explorer-styles.scss';
 
 import { StandardRouteContainer } from '../core/NavComponents.js';
 

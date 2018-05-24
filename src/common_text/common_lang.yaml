@@ -843,3 +843,46 @@ some_things_to_keep_in_mind:
 all_orgs:
   en: All organizations
   fr: Toutes les organisations
+
+
+
+
+dp_spending:
+  transform: [handlebars]
+  en: |
+    {{planning_year_1}} Planned Spending
+  fr: |
+    Dépenses planifiées pour {{planning_year_1}}
+
+dp_ftes:
+  transform: [handlebars]
+  en: |
+    {{planning_year_1}} Number of Planned FTEs
+  fr: |
+    Nombre d'ETP prévus pour {{planning_year_1}} 
+
+drr_spending:
+  transform: [handlebars]
+  en: |
+    {{pa_last_year}} Spending
+  fr: |
+    Dépenses pour {{pa_last_year}}
+
+drr_ftes:
+  transform: [handlebars]
+  en: |
+    {{pa_last_year}} Number of FTEs
+  fr: |
+    Nombre d'ETP pour {{pa_last_year}} 
+
+DP_resources:
+  transform: [handlebars]
+  en: |
+    {{planning_year_1}} Planned Resources
+  fr: Resources prévues en {{planning_year_1}}
+
+DRR_resources:
+  transform: [handlebars]
+  en: |
+    {{pa_last_year}} Actual Resources 
+  fr: Resources utilisées en {{pa_last_year}}

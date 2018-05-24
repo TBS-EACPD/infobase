@@ -172,7 +172,7 @@ class Goco {
 
       charts_index.create_a11y_table({
         label_col_header: [ text_maker("spend_area")],
-        data_col_headers: [text_maker("tag_nav_exp_header_dp17"), text_maker("tag_nav_fte_header_dp17")],
+        data_col_headers: [text_maker("dp_spending"), text_maker("dp_ftes")],
         data: table_data,
         container: container.select(".a11y_area"),
       });

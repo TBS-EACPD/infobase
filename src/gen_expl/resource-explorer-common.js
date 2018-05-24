@@ -23,8 +23,8 @@ export const get_col_defs = ({doc}) => [
       <TextMaker 
         text_key={ 
           doc === 'dp17' ? 
-          "tag_nav_exp_header_dp17" : 
-          'tag_nav_exp_header_drr16' 
+          "dp_spending" : 
+          'drr_spending' 
         } 
       />
     ),
@@ -39,8 +39,8 @@ export const get_col_defs = ({doc}) => [
       <TextMaker 
         text_key={ 
           doc === 'dp17' ? 
-          "tag_nav_fte_header_dp17" : 
-          'tag_nav_fte_header_drr16' 
+          "dp_ftes" : 
+          'drr_ftes' 
         } 
       />
     ),

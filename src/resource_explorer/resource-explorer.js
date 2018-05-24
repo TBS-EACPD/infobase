@@ -1,3 +1,4 @@
+require('../gen_expl/explorer-styles.scss');
 const explorer_text = require("./explorer.yaml");
 
 const { Fragment } = require('react');
@@ -287,12 +288,12 @@ class ExplorerPage extends React.Component {
         <ul className="tabbed_content_label_bar">
           <li className={classNames("tab_label", doc==="drr16" && "active_tab")} onClick={()=> this.refs.drr166_link.click()}>
             <a href={`#resource-explorer/${hierarchy_scheme}/drr166`} role="button" aria-pressed={doc === "drr16"} className="tab_label_text" ref="drr166_link">
-              <TM k="DRR_resources_option_title" />
+              <TM k="DRR_resources" />
             </a>
           </li>
           <li className={classNames("tab_label", doc==="dp17" && "active_tab")} aria-pressed={doc === "dp17"} onClick={()=> this.refs.dp17_link.click()}>
             <a href={`#resource-explorer/${hierarchy_scheme}/dp17`} role="button" className="tab_label_text" ref="dp17_link">
-              <TM k="DP_resources_option_title" />
+              <TM k="DP_resources" />
             </a>
           </li>
         </ul>

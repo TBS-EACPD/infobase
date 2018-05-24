@@ -9,34 +9,6 @@ choose_explore_point:
   en: Select your exploration point
   fr: Choisir un point d'exploration
 
-tag_nav_exp_header_dp17:
-  transform: [handlebars]
-  en: |
-    {{planning_year_1}} Planned Spending
-  fr: |
-    Dépenses planifiées pour {{planning_year_1}}
-
-tag_nav_fte_header_dp17:
-  transform: [handlebars]
-  en: |
-    {{planning_year_1}} Number of Planned FTEs
-  fr: |
-    Nombre d'ETP prévus pour {{planning_year_1}} 
-
-tag_nav_exp_header_drr16:
-  transform: [handlebars]
-  en: |
-    {{pa_last_year}} Spending
-  fr: |
-    Dépenses pour {{pa_last_year}}
-
-tag_nav_fte_header_drr16:
-  transform: [handlebars]
-  en: |
-    {{pa_last_year}} Number of FTEs
-  fr: |
-    Nombre d'ETP pour {{pa_last_year}} 
-
 
 tag_nav_intro_text:
   transform: [handlebars, markdown]
@@ -70,15 +42,3 @@ explorer_search_a11y:
   en: Type at least 5 characters before submitting
   fr: Soumettre la recherche seulement après avoir tapé au moins 5 caractères
 
-
-DP_resources_option_title:
-  transform: [handlebars]
-  en: |
-    {{planning_year_1}} Planned Resources
-  fr: Resources prévues en {{planning_year_1}}
-
-DRR_resources_option_title:
-  transform: [handlebars]
-  en: |
-    {{pa_last_year}} Actual Resources 
-  fr: Resources utilisées en {{pa_last_year}}
