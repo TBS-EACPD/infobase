@@ -8,8 +8,8 @@ budget_measure_filter_by_chapter_key_label:
 
 budget_measure_filter_by_name_and_desc_label:
   en: Name and Description
-  fr: todo
+  fr: Nom et description
 
 budget_measure_filter_by_name_and_desc_placeholder:
   en: Search for a budget measure, an organization, or a keyword
-  fr: TODO
+  fr: Recherche d'une mesure budgétaire, d'une organisation ou d'un mot-clé
