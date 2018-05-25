@@ -28,7 +28,7 @@ export class MetaData extends React.Component {
     } = this.props;
 
     const sorted_sources = _.sortBy(sources, source => source.title()); 
-  
+
     return (
       <StandardRouteContainer
         title={text_maker("metadata")}
@@ -60,8 +60,8 @@ export class MetaData extends React.Component {
                 </div>
                 <div className="h4"> <TM k='datasets' /> </div>
                 <FancyUL>
-                  {_.map(source.items(), ({id, text, inline_link, external_link }) => (
-                    <span key={id} className="fancy-ul-span-flex">
+                  {_.map(source.items(), ({key, id, text, inline_link, external_link }) => (
+                    <span key={key || id} className="fancy-ul-span-flex">
                       { 
                         inline_link ? 
                         <a 
