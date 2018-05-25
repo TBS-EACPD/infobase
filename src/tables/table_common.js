@@ -1,9 +1,8 @@
 const { 
   trivial_text_maker,
-  text_maker, 
   run_template,
 } = require("../models/text");
-const vote_stat_dimension = options => d => text_maker(parseInt(d.votenum) ? 'voted' : 'stat' );
+const vote_stat_dimension = options => d => trivial_text_maker(parseInt(d.votenum) ? 'voted' : 'stat' );
 const sobj_dimension = options => row => row.sobj_name;
 const lapse_item_dimension = options => row => row.lapse_item;
 
@@ -25,7 +24,7 @@ function major_vote_stat(options){
   var sort_map = _.chain(by_type_and_desc)
     .toPairs()
     .map(function(key_grp){
-      return [text_maker("vstype"+key_grp[0]),+key_grp[0]];
+      return [trivial_text_maker("vstype"+key_grp[0]),+key_grp[0]];
     })
     .fromPairs()
     .value();
@@ -40,7 +39,7 @@ function major_vote_stat(options){
       }
     }
     if (row.votestattype){
-      return text_maker("vstype"+row.votestattype);
+      return trivial_text_maker("vstype"+row.votestattype);
     }
   };
 }
@@ -50,7 +49,7 @@ function major_vote_stat(options){
 function hist_major_vote_stat(options){
   return function(row){
     if (row.votestattype){
-      return row.fyear + " - " +text_maker("vstype"+row.votestattype);
+      return row.fyear + " - " +trivial_text_maker("vstype"+row.votestattype);
     }
   };
 }
@@ -131,34 +130,6 @@ function people_five_year_percentage_formula(col_name,col_names_to_be_averaged){
 }
 
 
-
-//exports.standard_object_dimension =  function(options) {
-//    var lang = window.lang;
-//    var gt = text_maker
-//
-//    return function(d){
-//      if (d.dept === 'FIN' && d.so === sos[10].text) {
-//        return TABLES.spending_types[0];
-//      }
-//      if (d.dept === 'HRSD' && d.so === sos[10].text) {
-//        return TABLES.spending_types[1];
-//      }
-//      if (d.dept === 'FIN' && d.so === sos[11].text) {
-//        return TABLES.spending_types[2];
-//      }
-//      if (d.dept === 'ND'){
-//        return TABLES.spending_types[3];
-//      }
-//      if (d.so === sos[10].text){
-//        return TABLES.spending_types[4];
-//      }
-//      if (LOOKUPS.depts[d.dept].type.en === "Crown Corporation"){
-//        return TABLES.spending_types[5];
-//      }
-//      return TABLES.spending_types[6];
-//    };
-//};
-
 module.exports = exports = { 
   vote_stat_dimension, 
   sobj_dimension, 
@@ -167,8 +138,8 @@ module.exports = exports = {
   hist_major_vote_stat, 
   people_five_year_percentage_formula,
   STATS : require("../core/tables/stats.js"),
-  text_maker, 
-  trivial_text_maker,
+  trivial_text_maker, 
+  text_maker: trivial_text_maker,
   business_constants : require('../models/businessConstants.js'),
   run_template,
   m: run_template,

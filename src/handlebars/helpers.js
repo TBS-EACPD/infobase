@@ -304,7 +304,11 @@ Handlebars.registerHelper("gt",function(context){
   return text_maker(context);
 });
 
-Handlebars.registerHelper("new_gt",function(context){
+Handlebars.registerHelper("new_gt",function(context, other_arg){
+  //handlebars will change the "this" if a helper is called within an #each block
+  if(!_.isFunction(this.__text_maker_func__)){
+    return other_arg.data.root.__text_maker_func__(context);
+  }
   return this.__text_maker_func__(context);
 });
 

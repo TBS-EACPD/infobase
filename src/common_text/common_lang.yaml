@@ -910,3 +910,11 @@ budget_measures_short:
 build_a_report:
   en: Build your data report
   fr: Créer votre propre rapport de données
+
+
+m2m_warning_text:
+  transform: [handlebars,markdown]
+  text: |
+    <div class='bs-callout bs-callout-danger'>
+      {{{new_gt "MtoM_tag_warning"}}}
+    </div>

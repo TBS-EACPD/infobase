@@ -1,6 +1,5 @@
 import { 
-  TM,
-  TextMaker,
+  TrivialTM as TM,
   Format,
 } from '../util_components.js';
 import { createSelector } from 'reselect';
@@ -20,8 +19,8 @@ export const get_col_defs = ({doc}) => [
     width: 150,
     textAlign: "right",
     header_display: (
-      <TextMaker 
-        text_key={ 
+      <TM 
+        k={ 
           doc === 'dp17' ? 
           "dp_spending" : 
           'drr_spending' 
@@ -36,8 +35,8 @@ export const get_col_defs = ({doc}) => [
     width: 150,
     textAlign: "right",
     header_display: (
-      <TextMaker 
-        text_key={ 
+      <TM 
+        k={ 
           doc === 'dp17' ? 
           "dp_ftes" : 
           'drr_ftes' 

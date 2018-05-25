@@ -160,9 +160,9 @@ table_picker_title:
 table_picker_top_instructions:
   transform: [handlebars,markdown]
   en: | 
-   Start by selecting one or many subjects that you would like to explore from the topics list below. This will limit the number of tables displayed to only those pertaining to your selections. To view a table, select the table titles and click **"{{gt "select_table"}}"**.
+   Start by selecting one or many subjects that you would like to explore from the topics list below. This will limit the number of tables displayed to only those pertaining to your selections. To view a table, select the table titles and click **"{{new_gt "select_table"}}"**.
   fr: |
-    Commencez votre recherche en sélectionnant le ou les sujets que vous aimeriez explorer dans la liste des sujets ci-dessous. Ceci limitera le nombre de tableaux présentés pour afficher seulement ceux qui portent sur votre choix. Pour voir un tableau, sélectionnez le titre du tableau et cliquez sur **«{{gt "select_table"}}»**. 
+    Commencez votre recherche en sélectionnant le ou les sujets que vous aimeriez explorer dans la liste des sujets ci-dessous. Ceci limitera le nombre de tableaux présentés pour afficher seulement ceux qui portent sur votre choix. Pour voir un tableau, sélectionnez le titre du tableau et cliquez sur **«{{new_gt "select_table"}}»**. 
 
 covered_concepts:
   en: Topic(s) covered 
@@ -202,8 +202,8 @@ rpb_no_data:
 
 please_use_table_option_a11y:
   transform: [handlebars]
-  en: You are viewing a graph, to see a plain table, select '{{gt "select_table"}}' in the previous options
-  fr: Ci-dessour est un graphique, pour voir une table équivalente, cocher la case '{{gt "select_table"}}' dans les options précédentes
+  en: You are viewing a graph, to see a plain table, select '{{new_gt "select_table"}}' in the previous options
+  fr: Ci-dessour est un graphique, pour voir une table équivalente, cocher la case '{{new_gt "select_table"}}' dans les options précédentes
 
 total_all_pages:
   en: Total (all pages)

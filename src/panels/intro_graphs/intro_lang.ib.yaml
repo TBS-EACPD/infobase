@@ -125,13 +125,6 @@ m2m_warning_title:
   fr: |
     Comment utiliser les étiquettes?
 
-m2m_warning_text:
-  transform: [handlebars,markdown]
-  text: |
-    <div class='bs-callout bs-callout-danger'>
-      {{{gt "MtoM_tag_warning"}}}
-    </div>
-
 
 # / Tag text 
 

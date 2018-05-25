@@ -154,13 +154,6 @@ li.select-list-item {
   }
 }
 
-.rpb-sort-indicator {
-  @include unstyled-button;
-  background-color: rgba(0, 0, 0, 0) /* stupid IE issue doesn't inherit background color properly */
-}
-.rpb-sort-indicator:focus {
-  border: 1px dotted white;   
-}
 
 .pagination-container {
   display: flex;

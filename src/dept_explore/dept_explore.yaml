@@ -64,18 +64,18 @@ explore_common_t:
   text: |
    <div class='row'>
    <div class="col-sm-12 col-md-12">
-    <div class='explore_description'>{{{gt "explore_common_text"}}}</div>
+    <div class='explore_description'>{{{new_gt "explore_common_text"}}}</div>
     <div class="buttons mrgn-bttm-md"> 
      <ul class='nav nav-pills nav-justified '>
           {{#each buttons}}
              {{#if this.active}}
              <li class='active'>
-             <a title="{{gt 'change_layout'}}"  disabled="disabled">
+             <a title="{{new_gt 'change_layout'}}"  disabled="disabled">
                 {{this.button_text}}
               </a>
              {{else}}
              <li >
-             <a title="{{gt 'change_layout'}}" href="{{this.href}}">
+             <a title="{{new_gt 'change_layout'}}" href="{{this.href}}">
                 {{this.button_text}}
               </a>
              {{/if}}

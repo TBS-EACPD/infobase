@@ -6,6 +6,7 @@ const nav_lang = require('../common_text/nav_lang.yaml');
 const result_lang = require('../common_text/result_lang.yaml');
 const people_lang = require('../common_text/people_lang.yaml');
 const estimates_lang = require('../common_text/estimates_lang.yaml');
+const a11y_lang = require('../common_text/a11y_lang.yaml');
 
 /* 
   TODO: some parts of this still feel hacky 
@@ -39,6 +40,7 @@ const global_bundles = [
   result_lang,
   people_lang,
   estimates_lang,
+  a11y_lang,
 ];
 
 
@@ -217,6 +219,8 @@ const _create_text_maker = (deps=template_store) => (key,context={}) => {
   if(!_.isObject(context)){ context={}; }
   if(deps.__text_maker_func__){
     context.__text_maker_func__ = deps.__text_maker_func__;
+  } else {
+    context.__text_maker_func__ = trivial_text_maker;
   }
 
 
@@ -248,6 +252,7 @@ const _create_text_maker = (deps=template_store) => (key,context={}) => {
   }
   return rtn;
 }
+const trivial_text_maker = _create_text_maker(combined_global_bundle);
 
 
 const _text_maker = _create_text_maker(template_store);
@@ -256,7 +261,7 @@ function text_maker(){
   return _text_maker(...arguments);
 }
 
-const trivial_text_maker = _create_text_maker(combined_global_bundle);
+
 
 
 module.exports = exports = {
