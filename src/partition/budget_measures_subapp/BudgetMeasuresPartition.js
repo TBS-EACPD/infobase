@@ -121,23 +121,26 @@ const update_with_search = (diagram, props) => {
   const deburred_query = _.deburr(props.filter_string).toLowerCase();
 
   search_tree.each(node => {
-    if (
-      (node.data.type === "dept" && node.data.id !== 9999) && 
-         (
-           _.deburr(node.data.acronym.toLowerCase()) === deburred_query ||
-           _.deburr(node.data.fancy_acronym.toLowerCase()) === deburred_query ||
-           _.findIndex(node.data.name.toLowerCase().split(" "), word => _.deburr(word) === deburred_query) !== -1 ||
-           _.findIndex(node.data.applied_title.toLowerCase().split(" "), word => _.deburr(word) === deburred_query) !== -1
-         )
-    ) {
-      search_matching.push(node);
-      _.each(node.children, children => {
-        search_matching.push(children);
+    if (!_.isNull(node.parent)){
+      if (
+        _.deburr(node.data.name.toLowerCase()) === deburred_query ||
+        (node.data.type === "dept" && node.data.id !== 9999) && 
+           (
+             _.deburr(node.data.acronym.toLowerCase()) === deburred_query ||
+             _.deburr(node.data.fancy_acronym.toLowerCase()) === deburred_query ||
+             _.deburr(node.data.applied_title.toLowerCase()) === deburred_query
+           )
+      ) {
+        search_matching.push(node);
         dont_fade.push(node);
-      });
-    } else if (node.data.search_string.indexOf(deburred_query) !== -1){
-      search_matching.push(node);
-      dont_fade.push(node);
+        _.each(node.children, children => {
+          search_matching.push(children);
+          dont_fade.push(children);
+        });
+      } else if (node.data.search_string.indexOf(deburred_query) !== -1){
+        search_matching.push(node);
+        dont_fade.push(node);
+      }
     }
   });
 

@@ -232,23 +232,27 @@ export class PartitionSubApp {
     const deburred_query = _.deburr(query).toLowerCase();
 
     search_tree.each(node => {
-      if (
-        node.data.is("dept") && 
-           (
-             _.deburr(node.data.acronym.toLowerCase()) === deburred_query ||
-             _.deburr(node.data.fancy_acronym.toLowerCase()) === deburred_query ||
-             _.findIndex(node.data.name.toLowerCase().split(" "), word => _.deburr(word) === deburred_query) !== -1 ||
-             _.findIndex(node.data.applied_title.toLowerCase().split(" "), word => _.deburr(word) === deburred_query) !== -1
-           )
-      ) {
-        this.search_matching.push(node);
-        _.each(node.children, children => {
-          this.search_matching.push(children);
+      if (!_.isNull(node.parent)){
+        if (
+          _.deburr(node.data.name.toLowerCase()) === deburred_query ||
+          (node.data.is("dept") && 
+            (
+              _.deburr(node.data.acronym.toLowerCase()) === deburred_query ||
+              _.deburr(node.data.fancy_acronym.toLowerCase()) === deburred_query ||
+              _.deburr(node.data.applied_title.toLowerCase()) === deburred_query
+            )
+          )
+        ) {
+          this.search_matching.push(node);
           this.dont_fade.push(node);
-        });
-      } else if (node.data.search_string.indexOf(deburred_query) !== -1){
-        this.search_matching.push(node);
-        this.dont_fade.push(node);
+          _.each(node.children, children => {
+            this.search_matching.push(children);
+            this.dont_fade.push(children);
+          });
+        } else if (node.data.search_string.indexOf(deburred_query) !== -1){
+          this.search_matching.push(node);
+          this.dont_fade.push(node);
+        }
       }
     });
 
