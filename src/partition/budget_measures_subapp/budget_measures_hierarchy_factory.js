@@ -67,13 +67,11 @@ const budget_measure_first_hierarchy_factory = (filtered_chapter_keys) => {
           .map(fund_row => {
             if (fund_row.org_id === "non_allocated"){
               return {
-                ...{
-                  name: text_maker("budget_allocation_tbd"),
-                  description: "", //TODO: get explanation of this case, and use it for item description?
-                  type: "dept",
-                  id: 9999,
-                  value: fund_row.fund,
-                },
+                name: text_maker("budget_allocation_tbd"),
+                description: "", //TODO: get explanation of this case, and use it for item description?
+                type: "dept",
+                id: 9999,
+                value: fund_row.fund,
               };
             } else {
               const dept = Subject.Dept.lookup(fund_row.org_id);

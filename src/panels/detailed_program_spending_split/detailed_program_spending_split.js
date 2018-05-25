@@ -327,7 +327,7 @@ class DetailedProgramSplit extends React.Component {
             //the mapping take so_num and produces new so_labels, 
             .map( obj => ({
               ...obj,
-              ...{so_label : mapping(obj.so_num)},
+              so_label : mapping(obj.so_num),
             }))
             .filter('so_label') //the mapping assigns falsey values in order to throw things out.
             .groupBy('so_label')

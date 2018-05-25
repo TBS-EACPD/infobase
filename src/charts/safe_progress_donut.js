@@ -50,8 +50,8 @@ exports.SafeProgressDonut = class SafeProgressDonut {
       const options = {
         ...this.options,
         ...bar_options,
-        ...{series: { "" : _.map(data, 'value')},
-          ticks : _.map(data, 'label')}, 
+        series: { "" : _.map(data, 'value')},
+        ticks : _.map(data, 'label'), 
       };
 
       new BAR(
