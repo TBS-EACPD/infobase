@@ -892,3 +892,21 @@ see_an_infograph_for:
   transform: [handlebars]
   en: See an infograph for {{subj_name subject}}
   fr: Voir une infographie pour {{subj_name subject}}
+
+
+
+budget_measure:
+  en: Budget Measure
+  fr: Mesure budgétaire
+budget_measures:
+  en: Budget Measures
+  fr: Mesures budgétaires
+budget_measures_short:
+  en: Measures
+  fr: Mesures
+
+
+
+build_a_report:
+  en: Build your data report
+  fr: Créer votre propre rapport de données

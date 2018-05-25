@@ -1,6 +1,6 @@
 import * as Subject from '../../../models/subject.js';
-import { text_maker } from '../../../models/text';
-import { TextMaker } from '../../../util_components';
+import { text_maker } from '../partition_text_provider.js';
+import { TextMaker as StandardTextMaker } from '../../../util_components';
 import { Table } from '../../../core/TableClass.js';
 import { PartitionPerspective } from './PartitionPerspective.js';
 
@@ -15,6 +15,7 @@ import {
   wrap_in_brackets, 
   formats_by_data_type,
 } from './perspective_utils.js';
+const TextMaker = props => <StandardTextMaker text_maker_func={text_maker} {...props} />;
 
 
 const create_tag_hierarchy = function(tag_scheme, data_type) {

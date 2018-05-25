@@ -5,7 +5,7 @@ import './BudgetMeasuresPartition.scss';
 
 import { PartitionDiagram } from '../partition_diagram/PartitionDiagram.js';
 import { formats } from '../../core/format.js';
-import { text_maker } from "../../models/text";
+import { text_maker } from "./budget_measure_text_provider.js";
 
 import { budget_measures_hierarchy_factory } from './budget_measures_hierarchy_factory.js';
 

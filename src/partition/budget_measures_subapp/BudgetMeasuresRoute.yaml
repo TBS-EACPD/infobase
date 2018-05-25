@@ -23,15 +23,7 @@ budget_route_year:
   en: 2018-19
   fr: 2018-2019
 
-budget_measure:
-  en: Budget Measure
-  fr: Mesure budgétaire
-budget_measures:
-  en: Budget Measures
-  fr: Mesures budgétaires
-budget_measures_short:
-  en: Measures
-  fr: Mesures
+
 budget_chapters:
   en: Budget Chapters
   fr: Chapitres budgétaires

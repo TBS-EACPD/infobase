@@ -33,7 +33,7 @@ const VImageCard = ({
         </div>
 
         <div className="v-img-card__bottom-right">
-          <a href={link_href}><TM k={link_key} /></a>
+          <a href={link_href}><TM tmf={tmf} k={link_key} /></a>
         </div>
       </div>
     </div>

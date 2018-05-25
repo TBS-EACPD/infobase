@@ -16,15 +16,15 @@ orgs_funded_by_budget_measure:
 
 link_to_budget_section_for:
   transform: [handlebars]
-  en: Link to {{gt "budget_name"}} section for
+  en: Link to {{new_gt "budget_name"}} section for
   fr: Lien vers la section du budget 2018 pour
 
 budget_measure_link_header:
   transform: [handlebars]
-  en: Link to section about this budget measure in {{gt "budget_name"}} 
-  fr: Lien vers la section concernant cette mesure budgétaire dans {{gt "budget_name"}}
+  en: Link to section about this budget measure in {{new_gt "budget_name"}} 
+  fr: Lien vers la section concernant cette mesure budgétaire dans {{new_gt "budget_name"}}
 
 not_found_in_budget_text:
   transform: [handlebars]
-  en: Measure not found in {{gt "budget_name"}} text
+  en: Measure not found in {{new_gt "budget_name"}} text
   fr: Mesure budgétaire non disponible dans le texte du budget 2018

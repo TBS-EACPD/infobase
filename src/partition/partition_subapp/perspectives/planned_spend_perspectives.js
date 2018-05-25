@@ -1,7 +1,8 @@
 import * as Subject from '../../../models/subject';
 import { Table } from '../../../core/TableClass.js';
-import { text_maker, run_template } from '../../../models/text';
-import { TextMaker } from '../../../util_components';
+import { run_template } from '../../../models/text';
+import { text_maker } from '../partition_text_provider.js';
+import { TextMaker as StandardTextMaker } from '../../../util_components';
 import { rpb_link } from '../../../link_utils.js';
 import { PartitionPerspective } from './PartitionPerspective.js';
 
@@ -17,6 +18,7 @@ import {
   formats_by_data_type,
 } from './perspective_utils.js';
 
+const TextMaker = props => <StandardTextMaker text_maker_func={text_maker} {...props} />;
 
 let year;
 

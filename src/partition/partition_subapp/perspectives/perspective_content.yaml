@@ -42,7 +42,7 @@ partition_popup_planned_spending_value:
   handlebars_partial: true
   text: |
     <span class='stat1 popup-font-m'>
-      {{gt "planned_spending_of"}}
+      {{new_gt "planned_spending_of"}}
       </br>
       {{#if planned_exp_is_negative}}
         <text style='color:red;'>
@@ -56,9 +56,9 @@ partition_popup_spending_value_common:
   handlebars_partial: true
   text: |
     {{#if up_to}}
-      {{gt "spent_up_to"}}
+      {{new_gt "spent_up_to"}}
     {{else}}
-      {{gt "spent"}}
+      {{new_gt "spent"}}
     {{/if}}
       </br>
       {{#if exp_is_negative}}
@@ -67,7 +67,7 @@ partition_popup_spending_value_common:
         </text>
         </br>
         <div class='popup-revenue-text popup-font-s'>
-          {{gt "partition_revenue_explained"}} 
+          {{new_gt "partition_revenue_explained"}} 
         </div>
       {{else}}
         {{fmt_compact1 exp}}
@@ -78,12 +78,12 @@ partition_popup_fte_value_split:
   text: |
     <span class='stat2 right_number popup-font-m'>
       {{#if up_to}}
-        {{gt "employed_up_to"}}
+        {{new_gt "employed_up_to"}}
       {{else}}
-        {{gt "employed"}}
+        {{new_gt "employed"}}
       {{/if}}
       </br> 
-      {{fmt_big_int_real fte}} {{gt "ftes"}}
+      {{fmt_big_int_real fte}} {{new_gt "ftes"}}
     </span>
 partition_popup_name:
   handlebars_partial: true
@@ -104,7 +104,7 @@ partition_popup_description:
   text: |
     {{#if description}}
       <div class='popup-font-ml'>
-        {{gt "description"}}:
+        {{new_gt "description"}}:
       </div>
       <div class='mrgn-bttm-md popup-row-bottom-border popup-decription-text'>
         {{{description}}}
@@ -116,7 +116,7 @@ partition_popup_infograph_link:
     <a href='#orgs/{{level}}/{{id}}/infograph' 
       class='btn btn-xs btn-block mrgn-bttm-sm infographic' 
       style='background-color:{{color}};'>
-      {{gt "see_the_infographic"}}
+      {{new_gt "see_the_infographic"}}
     </a>
 partition_popup_rpb_link:
   handlebars_partial: true
@@ -124,7 +124,7 @@ partition_popup_rpb_link:
     <a href='{{rpb_link}}' 
       class='btn btn-xs btn-block mrgn-bttm-sm infographic' 
       style='background-color:{{color}};'>
-      {{gt "see_data"}}
+      {{new_gt "see_data"}}
     </a>
 partition_popup_focus_button:
   handlebars_partial: true
@@ -140,12 +140,12 @@ partition_popup_org_info_child_org_count:
   handlebars_partial: true
   text: |
     <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
-        {{gt "contains"}}
+        {{new_gt "contains"}}
         {{fmt_big_int_real org_info}}
         {{#if plural_child_orgs}}
-          {{gt "orgs"}}
+          {{new_gt "orgs"}}
         {{else}}
-          {{gt "org"}}
+          {{new_gt "org"}}
         {{/if}}
     </div>
 partition_popup_ministry_name:
@@ -153,7 +153,7 @@ partition_popup_ministry_name:
   text: |
     {{#if ministry_name}}
       <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
-        <strong>{{gt "ministry"}}:</strong> {{ministry_name}}
+        <strong>{{new_gt "ministry"}}:</strong> {{ministry_name}}
       </div>
     {{/if}}
 partition_popup_inst_form_name:
@@ -161,7 +161,7 @@ partition_popup_inst_form_name:
   text: |
     {{#if inst_form_name}}
       <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
-        <strong>{{gt "type"}}:</strong> {{inst_form_name}}
+        <strong>{{new_gt "type"}}:</strong> {{inst_form_name}}
       </div>
     {{/if}}
 
@@ -174,7 +174,7 @@ partition_program_popup:
     {{> "partition_popup_parent_dept_name"}}
     {{> "partition_popup_description"}}
     <span class='bold' style='color:#333'>
-      {{gt 'tag'}}(s)
+      {{new_gt 'tag'}}(s)
     </span>
     <ul class='list-unstyled'>
       {{#each tags}}
@@ -403,18 +403,18 @@ partition_spending_will_be_variable_year:
   transform: [handlebars]
   en: |
     {{#if past_tense}}
-      {{gt "partiton_planned_spending_was"}}
+      {{new_gt "partiton_planned_spending_was"}}
     {{else}}
-      {{gt "partiton_planned_spending_will_be"}}
+      {{new_gt "partiton_planned_spending_will_be"}}
     {{/if}}
     {{> "partition_spending_will_be_value_and_rpb_link_partial"}}
     in
     <span class='text-nowrap'>{{rt year}}</span>
   fr: |
     {{#if past_tense}}
-      {{gt "partiton_planned_spending_was"}}
+      {{new_gt "partiton_planned_spending_was"}}
     {{else}}
-      {{gt "partiton_planned_spending_will_be"}}
+      {{new_gt "partiton_planned_spending_will_be"}}
     {{/if}}
     {{> "partition_spending_will_be_value_and_rpb_link_partial"}}
     en
@@ -433,36 +433,36 @@ partition_revenue_explained:
 partition_org_info_by_min:
   transform: [handlebars]
   text: |
-    {{gt "all_orgs"}} {{gt "by"}} {{gt "by_portfolio"}}
+    {{new_gt "all_orgs"}} {{new_gt "by"}} {{new_gt "by_portfolio"}}
 partition_org_info_federal_orgs_by_inst_form:
   transform: [handlebars]
   text: |
-    {{gt "inst_form_filter"}} {{gt "by"}} {{gt "type"}}
+    {{new_gt "inst_form_filter"}} {{new_gt "by"}} {{new_gt "type"}}
 partition_org_info_interests_by_inst_form:
   transform: [handlebars]
   text: |
-    {{gt "corp_int_filter"}} {{gt "by"}} {{gt "type"}}
+    {{new_gt "corp_int_filter"}} {{new_gt "by"}} {{new_gt "type"}}
 partition_spending_data:
   transform: [handlebars]
   text: |
-    {{gt "spending"}} ($)
+    {{new_gt "spending"}} ($)
 partition_planned_spending_data:
   transform: [handlebars]
   text: |
-    {{gt "planned_spending"}} ($)
+    {{new_gt "planned_spending"}} ($)
 partition_vote_stat_perspective:
   transform: [handlebars]
   en: |
-    {{gt "votestat"}} Type
+    {{new_gt "votestat"}} Type
   fr: |
-    Type de {{gt "votestat"}}
+    Type de {{new_gt "votestat"}}
 partition_est_type_perspective:
   en: Estimates Type
   fr: Instrument de budget des dépenses
 by_organization:
   transform: [handlebars]
   text: |
-    {{gt "by"}} {{gt "org"}}
+    {{new_gt "by"}} {{new_gt "org"}}
 up_to:
   en: up to
   fr: jusqu'à

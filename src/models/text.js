@@ -1,8 +1,11 @@
+const template_globals_file = require('../common_text/template_globals.csv');
+
 const common_lang = require('../common_text/common_lang.yaml');
 const igoc_lang = require('../common_text/igoc-lang.yaml');
 const nav_lang = require('../common_text/nav_lang.yaml');
 const result_lang = require('../common_text/result_lang.yaml');
 const people_lang = require('../common_text/people_lang.yaml');
+const estimates_lang = require('../common_text/estimates_lang.yaml');
 
 /* 
   TODO: some parts of this still feel hacky 
@@ -27,7 +30,6 @@ const people_lang = require('../common_text/people_lang.yaml');
 
 */
 
-const template_globals_file = require('../common_text/template_globals.csv');
 
 
 const global_bundles = [
@@ -36,6 +38,7 @@ const global_bundles = [
   nav_lang,
   result_lang,
   people_lang,
+  estimates_lang,
 ];
 
 
@@ -247,7 +250,11 @@ const _create_text_maker = (deps=template_store) => (key,context={}) => {
 }
 
 
-const text_maker = _create_text_maker(template_store);
+const _text_maker = _create_text_maker(template_store);
+function text_maker(){
+  debugger;
+  return _text_maker(...arguments);
+}
 
 const trivial_text_maker = _create_text_maker(combined_global_bundle);
 
