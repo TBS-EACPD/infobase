@@ -127,7 +127,6 @@ class InfoGraph_ extends React.Component {
       bubble: null,
       level: null,
     };
-    this.unmounted = false;
   }
   static getDerivedStateFromProps(nextProps, prevState){
     if(!shallowEqualObjectsOverKeys(nextProps, prevState, ['subject','bubble','level'])){
@@ -149,9 +148,6 @@ class InfoGraph_ extends React.Component {
     if(this.props.subject !== prevProps.subject){
       reset_scroll();
     }
-  }
-  componentWillUnmount(){
-    this.unmounted = true;
   }
   render(){
     const { subject, bubble } = this.props;
@@ -315,12 +311,10 @@ class InfoGraph_ extends React.Component {
     }).then(()=> {
       //we set a minimum of 400 wait
       setTimeout(()=> {
-        if(!this.unmounted){
-          this.setState({
-            loading: false,
-          });
-        }
-      },400); 
+        this.setState({
+          loading: false,
+        });
+      }, 400); 
     });
   }
 }
