@@ -1,0 +1,10 @@
+internal_service_panel_title:
+  en: Internal Services
+  fr: Service Internes
+
+internal_service_panel_text:
+  transform: [handlebars, markdown]
+  en: |
+    Last year ({{pa_last_year}}), internal service spending made up **{{fmt_percentage1 isc_spend_pct}}** of spending and **{{fmt_percentage1 isc_fte_pct}}** of employment for {{subj_name subject}}. In comparison, government as a whole uses **{{fmt_percentage1 gov_isc_fte_pct}}** of its workforce for internal services.
+  fr: |
+    L'an dernier ({{pa_last_year}}), les services internes representaient **{{fmt_percentage1 isc_spend_pct}}** des dépenses et **{{fmt_percentage1 isc_fte_pct}}** des employés pour {{subj_name subject}}.

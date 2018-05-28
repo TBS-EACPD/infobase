@@ -18,6 +18,9 @@ const default_args = {
   depends_on: [],
   info_deps: [],
   machinery_footnotes: true,
+  layout: {
+    full: {graph:12, text: 12},
+  },
 };
 
 class PanelGraph {

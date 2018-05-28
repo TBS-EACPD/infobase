@@ -36,6 +36,10 @@ import "../panels/sobj/top_spending_areas.js";
 import "../panels/sobj/personel_spend.js";
 import "../panels/sobj/spend_rev_split.js";
 
+//FIXME: currently turned off in infographic, it's here for access in graph-inventory
+import '../panels/internal_services/isc.js';
+
+
 import "../panels/detailed_program_spending_split/detailed_program_spending_split.js";
 
 
