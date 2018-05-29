@@ -318,8 +318,9 @@ const map_state_to_props_from_memoized_funcs = memoized_funcs => {
 
 
 class OldExplorerContainer extends React.Component {
-  UNSAFE_componentWillMount(){
-    const { hierarchy_scheme, doc } = this.props;
+  constructor(props){
+    super();
+    const { hierarchy_scheme, doc } = props;
     const scheme = resource_scheme;
     const scheme_key = scheme.key;
 
@@ -344,18 +345,22 @@ class OldExplorerContainer extends React.Component {
     const Container = connecter(ExplorerPage);
     const store = createStore(reducer,initialState);
 
-    this.Container = Container;
-    this.store = store;
+    this.state = {
+      store,
+      Container,
+    };
 
   }
-  UNSAFE_componentWillUpdate(nextProps){
-    const { hierarchy_scheme, doc } = nextProps;
-    const { store } = this;
+  static getDerivedStateFromProps(props, state){
+    const { hierarchy_scheme, doc } = props;
+    const { store } = state;
 
-    resource_scheme.set_hierarchy_and_doc(store,hierarchy_scheme,doc);
+    resource_scheme.set_hierarchy_and_doc(store, hierarchy_scheme, doc);
+    
+    return null;
   }
   render(){
-    const { store, Container } = this;
+    const { store, Container } = this.state;
     return (
       <Provider store={store}>
         <Container />
@@ -372,8 +377,8 @@ export class ResourceExplorer extends React.Component {
     super();
     this.state = { loading: true };
   }
-  UNSAFE_componentWillMount(){
-    ensure_loaded({ 
+  componentDidMount(){
+    ensure_loaded({
       table_keys: ['table6', 'table12'],
     }).then(()=> {
       this.setState({loading: false});
