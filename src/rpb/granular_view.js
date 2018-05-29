@@ -390,10 +390,10 @@ class ExportButton extends React.Component {
       success : null,
     }; 
   }
-  UNSAFE_componentWillReceiveProps(){
-    this.setState({ 
+  static getDerivedStateFromProps(props, state){
+    return { 
       success : null,
-    });
+    };
   }
   render(){
     const {
@@ -466,7 +466,7 @@ class ExportButton extends React.Component {
     }
 
     setTimeout(()=>{
-      this.setState({success:null});
+      this.setState({success: null});
     },3000)
 
   }
