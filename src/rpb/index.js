@@ -85,27 +85,29 @@ class Root extends React.Component {
     const mapStateToProps = create_mapStateToProps();
     const Container = connect(mapStateToProps, mapDispatchToProps)(RPB)
 
-    const store = createStore(reducer,state);
+    const store = createStore(reducer, state);
 
-    Object.assign(this, { store, Container });
-
+    this.state = {
+      store,
+      Container,
+    };
   }
-  UNSAFE_componentWillUpdate(nextProps){
-    this.store.dispatch({
+  static getDerivedStateFromProps(nextProps, prevState){
+    prevState.store.dispatch({
       type: "navigate_to_new_state",
       payload: nextProps.state,
     });
-
+    return null;
   }
   shouldComponentUpdate(newProps){
-    return rpb_link(this.store.getState()) !== rpb_link(newProps.state)
+    return rpb_link(this.state.store.getState()) !== rpb_link(newProps.state)
   }
   render(){
 
     const { 
       Container,
       store,
-    } = this;
+    } = this.state;
 
     return (
       <Provider store={store}>
@@ -203,18 +205,18 @@ class RPB extends React.Component {
               <div className="md-half-width md-gutter-left">
                 { 
                   window.is_a11y_mode ?
-                  <AccessibleTablePicker
-                    onSelect={id => this.pickTable(id)}
-                    tables={_.reject(Table.get_all(), 'reference_table')}
-                    selected={_.get(table, 'id')}
-                  /> :
-                  <button 
-                    className="btn btn-ib-primary"
-                    style={{width: '100%'}}
-                    onClick={()=>{ this.setState({table_picking: true})}}
-                  >
-                    <TextMaker text_key={table ? 'select_another_table_button' : 'select_table_button'} /> 
-                  </button>
+                    <AccessibleTablePicker
+                      onSelect={id => this.pickTable(id)}
+                      tables={_.reject(Table.get_all(), 'reference_table')}
+                      selected={_.get(table, 'id')}
+                    /> :
+                    <button 
+                      className="btn btn-ib-primary"
+                      style={{width: '100%'}}
+                      onClick={()=>{ this.setState({table_picking: true})}}
+                    >
+                      <TextMaker text_key={table ? 'select_another_table_button' : 'select_table_button'} /> 
+                    </button>
                 }
               </div>
             </div>
@@ -383,15 +385,14 @@ export class ReportBuilder extends React.Component {
   constructor(props){
     super(props);
     const config_str = this.props.match.params.config;
+    const url_state = url_state_selector(config_str);
     this.state = {
-      loading: !!(url_state_selector(config_str).table),
+      loading: !!(url_state.table),
+      config_str,
+      url_state,
     }
   }
-  loadDeps({table, subject}){
-    this.setState({
-      loading: true,
-    });
-
+  loadDeps({table}){
     ensure_loaded({
       table_keys: [table],
       footnotes_for: 'all',
@@ -401,51 +402,46 @@ export class ReportBuilder extends React.Component {
       });
     });
   }
-  UNSAFE_componentWillMount(){
-    const config_str = this.props.match.params.config;
-    const state = url_state_selector(config_str);
-    if(state.table){
-      this.loadDeps(state);
+  componentDidMount(){
+    const { url_state } = this.state;
+    if(url_state.table){
+      this.loadDeps(url_state);
     }
   }
-  shouldComponentUpdate(nextProps,nextState){
-    if(this.state.loading !== nextState.loading){
-      return true;
-    }
-    const old_config_str = this.props.match.params.config;
-    const new_config_str = nextProps.match.params.config;
-    return old_config_str !== new_config_str;
+  shouldComponentUpdate(nextProps, nextState){
+    return (this.state.loading !== nextState.loading) || (this.state.config_str !== nextState.config_str);
   }
-  UNSAFE_componentWillUpdate(nextProps){
-    const old_config_str = this.props.match.params.config;
-    const old_state = url_state_selector(old_config_str);
-    const new_config_str = nextProps.match.params.config;
-    const new_state =url_state_selector(new_config_str);
+  static getDerivedStateFromProps(nextProps, prevState){
+    const config_str = nextProps.match.params.config;
+    const url_state = url_state_selector(config_str);
 
-    if(new_state.table && old_state !== new_state.table){  
-      this.loadDeps(new_state);
+    return {
+      loading: (url_state.table && prevState.url_state.table !== url_state.table),
+      config_str,
+      url_state,
+    };
+  }
+  componentDidUpdate(){
+    if (this.state.loading){
+      this.loadDeps(this.state.url_state);
     }
-    
   }
   render(){
-    const config_str = this.props.match.params.config
-    const title = text_maker("report_builder_title");
-
-    const state = url_state_selector(config_str);
+    const { url_state } = this.state;
 
     return (
       <StandardRouteContainer 
-        title={title}
+        title={text_maker("report_builder_title")}
         breadcrumbs={[text_maker("self_serve")]}
         description={text_maker("report_builder_meta_desc")}
         route_name="_rpb"
         shouldSyncLang={false}
       >
-        <AnalyticsSynchronizer {...state} />
+        <AnalyticsSynchronizer {...url_state} />
         { 
           this.state.loading ? 
-          <SpinnerWrapper scale={3} /> :
-          <Root state={state} />
+            <SpinnerWrapper scale={3} /> :
+            <Root state={url_state} />
         }
       </StandardRouteContainer>
     )
