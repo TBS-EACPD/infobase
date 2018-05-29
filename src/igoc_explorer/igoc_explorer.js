@@ -101,8 +101,10 @@ const scheme = {
 //Trying to use a functional component here results in re-creating the redux store, connecter functions and Container component. 
 //Instead, this component will own those long-term objects and keep the store updated with URL changes. 
 class ExplorerContainer extends React.Component {
-  UNSAFE_componentWillMount(){
-    const { grouping } = this.props;
+  constructor(props){
+    super();
+
+    const { grouping } = props;
 
     const scheme_key = scheme.key;
 
@@ -126,23 +128,25 @@ class ExplorerContainer extends React.Component {
       },
     };
 
-
     const connecter = connect(mapStateToProps, mapDispatchToProps);
     const Container = connecter(Explorer);
     const store = createStore(reducer,initialState);
 
-    this.store = store;
-    this.Container = Container;
+    this.state = {
+      store,
+      Container,
+    }
   }
-  UNSAFE_componentWillUpdate(nextProps){
-    const { grouping } = nextProps;
-    this.store.dispatch({
+  static getDerivedStateFromProps(props, state){
+    const { grouping } = props;
+    state.store.dispatch({
       type: 'set_grouping',
       payload: grouping,
     });
+    return null;
   }
   render(){
-    const { store, Container } = this;
+    const { store, Container } = this.state;
 
     return (
       <Provider store={store}>
