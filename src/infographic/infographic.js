@@ -119,13 +119,13 @@ function reset_scroll(){
 }
 
 class InfoGraph_ extends React.Component {
-  constructor(){
+  constructor(props){
     super();
     this.state = {
       loading: true,
-      subject: null,
-      bubble: null,
-      level: null,
+      subject: props.subject,
+      bubble: props.bubble,
+      level: props.level,
     };
   }
   static getDerivedStateFromProps(nextProps, prevState){
