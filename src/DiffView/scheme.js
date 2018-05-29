@@ -1,3 +1,4 @@
+import './DiffView.ib.yaml';
 import { createSelector } from 'reselect';
 import {
   TM,
@@ -151,9 +152,9 @@ export const col_defs = [
     val_display: val => {
       let content;
       if( Math.abs( -1-val ) < 0.001){
-        return <Red><strong>Old</strong></Red>;
-      } else if(val === Infinity){
-        return <Green><strong>New</strong></Green>;
+        return <Red><strong><TM k="old"/></strong></Red>;
+      } else if(val > 10){ //let's consider +1000% to be a new item
+        return <Green><strong><TM k="new"/></strong></Green>;
       } else {
         content= <Format type="percentage1" content={Math.abs(val)} />;
       }
