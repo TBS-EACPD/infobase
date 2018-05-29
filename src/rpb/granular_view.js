@@ -390,7 +390,7 @@ class ExportButton extends React.Component {
       success : null,
     }; 
   }
-  static getDerivedStateFromProps(props, state){
+  static getDerivedStateFromProps(nextProps, prevState){
     return { 
       success : null,
     };

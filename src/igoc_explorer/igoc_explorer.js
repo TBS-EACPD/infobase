@@ -137,9 +137,9 @@ class ExplorerContainer extends React.Component {
       Container,
     }
   }
-  static getDerivedStateFromProps(props, state){
-    const { grouping } = props;
-    state.store.dispatch({
+  static getDerivedStateFromProps(nextProps, prevState){
+    const { grouping } = nextProps;
+    prevState.store.dispatch({
       type: 'set_grouping',
       payload: grouping,
     });

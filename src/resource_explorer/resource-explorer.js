@@ -351,9 +351,9 @@ class OldExplorerContainer extends React.Component {
     };
 
   }
-  static getDerivedStateFromProps(props, state){
-    const { hierarchy_scheme, doc } = props;
-    const { store } = state;
+  static getDerivedStateFromProps(nextProps, prevState){
+    const { hierarchy_scheme, doc } = nextProps;
+    const { store } = prevState;
 
     resource_scheme.set_hierarchy_and_doc(store, hierarchy_scheme, doc);
     
