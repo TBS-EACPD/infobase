@@ -136,6 +136,8 @@ class InfoGraph_ extends React.Component {
         bubble: nextProps.bubble,
         level: nextProps.level,
       }
+    } else {
+      return null;
     }
   }
   componentDidMount(){

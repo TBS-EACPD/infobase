@@ -222,6 +222,8 @@ export class GraphInventory extends React.Component {
         loading: true,
         derived_props: new_derived_props,
       };
+    } else {
+      return null;
     }
   }
   componentDidMount(){
