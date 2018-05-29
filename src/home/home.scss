@@ -1,42 +1,29 @@
 @import '../common_css/common-variables';
 
-@media(max-width: 1000px){
-  .home-root {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  .row { /* default is -15px */
-    margin-left: -10px;
-    margin-right: -10px; 
-  }
-  .row > [class*='col-'] {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
+
+.home-root {
+  /* this block makes home break out of the .container */
+  width: 100vw;
+  transform: translate(-50%, 0);
+  position: relative;
+  left: 50%;
 }
+
+
+
 
 .intro-box {
-  text-align: center;
   padding: 30px 0 0;
 
-  background-color: hsla(204, 46%, 42%, 1);
+  // background-color:#215185;
+  background-color:#335175;
   color: white;
   position: relative;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  border-radius: 10px;
-}
-@media(max-width:992px){
-  .intro-box {
-    padding-bottom: 1rem;
-  }
-  .search-box {
-    margin-bottom: 40px;
-  }
+  margin-bottom: 12.5rem;
 }
 
 
-.intro-box > h1 {
+.intro-box > .container > h1 {
   border: none;
   font-size: 55px;
   font-weight: $lightFontWeight;
@@ -44,74 +31,10 @@
   margin-bottom: 0;
 }
 
-.intro-box > h2 {
+.intro-box > .container > h2 {
   font-weight: $lightFontWeight;
   font-size: 20px;
-  max-width: 700px;
-  margin: 5px auto 35px;
 }
-
-@media(max-width:992px){
-  .intro-box > h1 {
-    font-size: 3.5em;
-  }
-}
-
-.intro-box > .search-box {
-  margin: 30px auto 100px;
-  padding: 0 1rem;
-}
-
-.search-box > .search-container {
-  max-width: 700px;
-  text-align: left;
-  margin: 0 auto; 
-
-}
-
-
-.intro-box input[type="text"] {
-  text-align: center;  
-}
-.intro-box [class*='tt-dataset-'] > header {
-  color: #333;
-}
-
-
-
-/* structure is 
-  .top-panel-row
-    .top-panel-container x 3
-      .top-panel
-        .top-panel-big-title 
-        .top-panel-big-number
-        .top-panel-question
-        .top-panel-footer 
-*/
-
-/*
-.caricature-colors,
-.caricature-colors:visited,
-.caricature-colors:link {
-  background-color: rgba(170, 198, 212, 0.8);
-  border: 1px solid #92b5c8;
-}
-*/
-
-
-
-.caricature-container {
-  padding: 15px;
-  border-radius: 10px;
-}
-
-.caricature-img {
-  width: 100%;
-  max-width: 100%;
-  border-radius: 10px;
-  margin-bottom: 8px;
-}
-
 
 .external-row-descriptor {
   font-size: 2em;
@@ -361,4 +284,32 @@
   & > .v-img-card > .v-img-card__top-container > .v-img-card__top > a > img {
     width: 360px;
   }
+}
+
+.home-trinity-container {
+  //math that probably doesn't work in all cases: 0.5 * ( 2* 3rem padding + 10rem image + 3 rem line height ) = 9.5rem
+  // margin-bottom: -9.5rem;
+
+  transform: translate(0, 50%);
+}
+.TrinityItem {
+  background-color: #619EE8;
+  border-radius: 10px;
+  padding: 3rem;
+  transform: scale(1);
+
+  transition: transform .2s ease-in-out;
+  &:hover {
+    transform: scale(1.25);
+  }
+}
+
+.TrinityItem__Title {
+  font-size: 2rem;
+  line-height: 3rem;
+  text-align: center;
+}
+
+.TrinityItem__Img {
+  width: 10rem;
 }
