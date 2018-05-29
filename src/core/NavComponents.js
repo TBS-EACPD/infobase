@@ -195,8 +195,8 @@ export const LangSynchronizer = withRouter(
 export const ReactUnmounter = withRouter(
   class ReactUnmounter_ extends React.Component {
     render(){ return null; }
-    componentDidUpdate(nextProps){
-      if(this.props.location.pathname !== nextProps.location.pathname){
+    componentDidUpdate(prevProps){
+      if(prevProps.location.pathname !== this.props.location.pathname){
         reactAdapter.unmountAll();
       }
     }
