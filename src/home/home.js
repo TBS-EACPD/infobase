@@ -83,21 +83,21 @@ export class Home extends React.Component {
 
 }
 
-const FeaturedContentItem = ({ text_key, href, is_new }) => <li className="list-group-item">
+const FeaturedContentItem = ({ text_key, href, is_new }) => <li className="list-group-item list-group-item--home">
   { is_new && <span className="badge badge--is-new"> new </span> }
   <a href={href}> <TM k={text_key} /> </a>
 </li>;
 
-const TrinityItem = ({img_url, title}) => <div className="centerer">
-  <div className="TrinityItem">
+const TrinityItem = ({img_url, title, href}) => <div className="centerer">
+  <a href={href} className="TrinityItem">
     <div className="TrinityItem__Img">
       <img src={img_url} />
     </div>
     <div className="TrinityItem__Title">
       {title}
     </div>
-  </div>
-</div>
+  </a>
+</div>;
 
 const HomeLayout = props => (
   <div className="home-root">
@@ -111,18 +111,21 @@ const HomeLayout = props => (
           <div className="frow">
             <div className="col-md-4">
               <TrinityItem 
+                href="orgs/gov/gov/infograph/financial"
                 img_url='svg/expend.svg'
                 title={<TM k="home_finance_title" />}
               />
             </div>
             <div className="col-md-4">
               <TrinityItem 
+                href="orgs/gov/gov/infograph/people"
                 img_url='svg/people.svg' 
                 title={<TM k="home_ppl_title" />}
               />
             </div>
             <div className="col-md-4">
               <TrinityItem
+                href="orgs/gov/gov/infograph/results"
                 img_url='svg/results.svg' 
                 title={<TM k="home_results_title" />}
               />
@@ -134,17 +137,28 @@ const HomeLayout = props => (
     </div>
 
     <div className="container">
-      <div className="frow">
-        <div className="fcol-md-7">
+      <div className="frow home-cols">
+        <div className="fcol-md-7 home-col">
           <div
             style={{
               height: "200px",
               backgroundColor: "#335075",
             }}
           />
+
+          <div
+            style={{
+              margin: "15px 0",
+              height: "200px",
+              backgroundColor: "#335075",
+            }}
+          />
           
         </div>
-        <div className="fcol-md-5">
+        <div className="fcol-md-5  home-col">
+          <header className="h3">
+            Jump to an infographic
+          </header> 
           <div className="search-box">
             <div className="search-container">
               <EverythingSearch 

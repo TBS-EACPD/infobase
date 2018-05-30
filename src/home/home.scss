@@ -7,6 +7,12 @@
   transform: translate(-50%, 0);
   position: relative;
   left: 50%;
+
+  input.typeahead.form-control.input-lg.tt-input {
+    //search bar isn't wide enough to contain all placeholder text
+    font-size: 1em;
+  }
+  
 }
 
 
@@ -165,9 +171,9 @@
   border-radius: 10px;
 }
 
-.list-group-item--is-darkened {
+.list-group-item--home {
   background-color: #fafafa;
-  border-color: #467b87;
+  border-color: #ccc !important;
 }
 
 .grey-blue-rect {
@@ -287,12 +293,11 @@
 }
 
 .home-trinity-container {
-  //math that probably doesn't work in all cases: 0.5 * ( 2* 3rem padding + 10rem image + 3 rem line height ) = 9.5rem
-  // margin-bottom: -9.5rem;
-
   transform: translate(0, 50%);
+  margin-top: -4rem;
 }
 .TrinityItem {
+  @include unstyled-link;
   background-color: #619EE8;
   border-radius: 10px;
   padding: 3rem;
@@ -312,4 +317,17 @@
 
 .TrinityItem__Img {
   width: 10rem;
+}
+
+
+$col_gutter_width: 2rem;
+//fatten the padding for fcols
+.frow.home-cols {
+  margin-left: -$col_gutter_width;
+  margin-right: -$col_gutter_width;
+
+  &>.home-col {
+    padding-right: $col_gutter_width;
+    padding-left: $col_gutter_width;
+  }
 }
