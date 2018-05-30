@@ -53,6 +53,8 @@ import '../panels/drr_dp_resources/planned_prgm_crso_split.js';
 import '../panels/drr_dp_resources/crso_program_resources.js';
 import '../panels/drr_dp_resources/spending_in_perspective.js';
 
+import '../panels/budget_measures/budget_measures_panel.js';
+
 import { PanelGraph } from '../core/PanelGraph.js';
 
 const get_people_panels = subject => {
@@ -79,6 +81,7 @@ const get_gov_panels = subject => ({
   financial: [
     "financial_intro", 
     "welcome_mat",
+    "budget_measures_panel",
     'gocographic',
     "historical_auth_exp",
     // "in_year_estimates_split",//turned off until supps A
@@ -109,6 +112,7 @@ const get_dept_panels = subject => {
     financial : _.includes(subject.tables,'table6') && [
       "financial_intro", 
       "welcome_mat",
+      "budget_measures_panel",
       "estimates_in_perspective",
       "historical_auth_exp",
       // "in_year_estimates_split",//turned off until supps A
