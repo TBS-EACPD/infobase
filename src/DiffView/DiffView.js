@@ -59,6 +59,7 @@ export class DevStuff extends React.Component {
         description={"dev"}
         route_key="_dev"
       >
+        <h1><TM k="diff_view_title"/></h1>
         { this.state.loading ? 
           <SpinnerWrapper /> :
           <ExplorerContainer />
@@ -217,6 +218,9 @@ class EstimatesExplorer extends React.Component {
 
     return (
       <div>
+        <div className="medium_panel_text mrgn-tp-lg">
+          <TM k="diff_view_top_text" />
+        </div>
         <div style={{marginTop: '15px'}}>
           <div>
             <label>
