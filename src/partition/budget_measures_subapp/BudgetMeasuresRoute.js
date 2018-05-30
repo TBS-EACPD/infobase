@@ -1,5 +1,6 @@
 import './BudgetMeasuresRoute.ib.yaml';
 
+import * as Subject from '../../models/subject';
 import { ensure_loaded } from '../../core/lazy_loader.js';
 import { StandardRouteContainer } from '../../core/NavComponents.js';
 import { 
@@ -51,7 +52,7 @@ export class BudgetMeasuresRoute extends React.Component {
   }
   componentDidMount(){
     ensure_loaded({
-      subject_name: 'BudgetMeasure',
+      subject: Subject.BudgetMeasure,
     }).then( () => {
       this.setState({loading: false});
     });

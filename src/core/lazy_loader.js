@@ -36,8 +36,7 @@ function ensure_loaded({
   table_keys, 
   subject_level, 
   results, 
-  subject, 
-  subject_name,
+  subject,
   require_result_counts, 
   footnotes_for: footnotes_subject,
 }){
@@ -90,7 +89,7 @@ function ensure_loaded({
   );
 
   const should_load_budget_measures = (
-    subject_name === "BudgetMeasure" &&
+    subject && subject.type_name === "budget_measure" &&
     _.isEmpty(BudgetMeasure.get_all())
   );
 
