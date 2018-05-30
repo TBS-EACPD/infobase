@@ -14,32 +14,32 @@ import {
 const {
   TextMaker,
   Select,
-  Format,
 } = util_components;
 
 const {
-  Bar,
   GraphLegend,
   StackedHbarChart,
   A11YTable,
 } = declarative_charts;
 
 const text_keys = {
-  // TODO
+  gov: "gov_budget_measures_panel_text",
+  dpet: "dept_budget_measures_panel_text",
 };
 
 ['gov', 'dept'].forEach( level_name => new PanelGraph(
   {
     level: level_name,
-    key: "detailed_program_spending_split",
-    depends_on: false,
+    key: "budget_measures_panel",
     layout: {
       full: {text: 12, graph: 12},
       half: {text: 12, graph: 12},
     },
+    requires_budget_measures: true,
+    depends_on: false,
     footnotes: false,
     // TODO add a source link to budget diagram?
-    title: "detailed_program_spending_split_title",
+    title: "budget_measures_panel_title",
     text: text_keys[level_name],
   
     calculate(subject, info, options){

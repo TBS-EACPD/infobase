@@ -91,7 +91,11 @@ function ensure_loaded({
   const should_load_budget_measures = (
     (
       subject && subject.type_name === "budget_measure" ||
-      _.includes(graph_keys, "budget_measures_panel")
+      _.chain(graph_keys)
+        .map(key => PanelGraph.lookup(key, subject_level))
+        .map('requires_budget_measures')
+        .some()
+        .value()
     ) &&
       _.isEmpty(BudgetMeasure.get_all())
       
