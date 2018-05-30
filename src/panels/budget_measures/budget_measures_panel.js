@@ -96,7 +96,10 @@ const budget_measure_render = function(panel, calculations, options){
     footnotes: false,
     title: "budget_measures_panel_title",
     text: text_keys[level_name],
-    // TODO add a source link to budget diagram?
+    source: (subject) => [{
+      html: text_maker("budget_measure"),
+      href: "#budget-measures/" + (subject.level === "gov" ? "budget-measure" : "org"),
+    }],
     calculate: calculate_functions[level_name],
     render: budget_measure_render,
   }
