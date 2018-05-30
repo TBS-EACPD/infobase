@@ -89,32 +89,36 @@ function ensure_loaded({
   );
 
   const should_load_budget_measures = (
-    subject && subject.type_name === "budget_measure" &&
-    _.isEmpty(BudgetMeasure.get_all())
+    (
+      subject && subject.type_name === "budget_measure" ||
+      _.includes(graph_keys, "budget_measures_panel")
+    ) &&
+      _.isEmpty(BudgetMeasure.get_all())
+      
   );
 
   const results_prom = (
     should_load_results ?
-    load_results_bundle(subject) :
-    $.Deferred().resolve()
+      load_results_bundle(subject) :
+      $.Deferred().resolve()
   ) 
 
   const result_counts_prom = (
     should_load_result_counts ?
-    load_results_counts() :
-    $.Deferred().resolve()
+      load_results_counts() :
+      $.Deferred().resolve()
   );
 
   const footnotes_prom = (
     footnotes_subject ?
-    load_footnotes_bundle(footnotes_subject) :
-    $.Deferred().resolve()
+      load_footnotes_bundle(footnotes_subject) :
+      $.Deferred().resolve()
   );
 
   const budget_measures_prom = (
     should_load_budget_measures ?
-    load_budget_measures() :
-    $.Deferred().resolve()
+      load_budget_measures() :
+      $.Deferred().resolve()
   );
   
   return $.when(
