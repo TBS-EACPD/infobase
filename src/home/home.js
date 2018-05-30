@@ -139,21 +139,26 @@ const HomeLayout = props => (
     <div className="container">
       <div className="frow home-cols">
         <div className="fcol-md-7 home-col">
-          <div
-            style={{
-              height: "200px",
-              backgroundColor: "#335075",
-            }}
-          />
-
-          <div
-            style={{
-              margin: "15px 0",
-              height: "200px",
-              backgroundColor: "#335075",
-            }}
-          />
-          
+          <div className="col-content featured-col-content partition-budget-home-content">
+            <MediaQuery minWidth={992}>
+              <HImageCard
+                img_src="svg/partition-budget.svg"
+                title_key="budget_home_title"
+                text_key="budget_home_text"
+                link_key="check_home_link"
+                link_href="#budget-measures/budget-measure"
+              />
+            </MediaQuery>
+            <MediaQuery maxWidth={991}>
+              <VImageCard
+                img_src="svg/partition-budget.svg"
+                title_key="budget_home_title"
+                text_key="budget_home_text"
+                link_key="check_home_link"
+                link_href="#budget-measures/budget-measure"
+              />
+            </MediaQuery>
+          </div>     
         </div>
         <div className="fcol-md-5  home-col">
           <header className="h3">
@@ -203,26 +208,6 @@ const HomeLayout = props => (
       </div>
       <div className="equal-height-row equal-height-row--home-row">
         <div aria-hidden={true} className="equal-height-col is-1-third">
-          <div className="col-content featured-col-content partition-budget-home-content">
-            <MediaQuery minWidth={992}>
-              <HImageCard
-                img_src="svg/partition-budget.svg"
-                title_key="budget_home_title"
-                text_key="budget_home_text"
-                link_key="check_home_link"
-                link_href="#budget-measures/budget-measure"
-              />
-            </MediaQuery>
-            <MediaQuery maxWidth={991}>
-              <VImageCard
-                img_src="svg/partition-budget.svg"
-                title_key="budget_home_title"
-                text_key="budget_home_text"
-                link_key="check_home_link"
-                link_href="#budget-measures/budget-measure"
-              />
-            </MediaQuery>
-          </div>
         </div>
       </div>
       <div className="equal-height-row equal-height-row--home-row">

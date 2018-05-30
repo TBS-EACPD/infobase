@@ -35,16 +35,16 @@
 
 .h-img-card__left { 
   flex: 0 0 30%;
-  border-right: 1px solid #333;
   padding: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 200%;
   max-width: 100%;
   min-height: 1px; /* IE11 image bug */
   font-size: 3.5em; /* for glyphicons */
+  margin: 40px 160px 40px 10px;
 }
 
 .h-img-card__img-link {
@@ -59,14 +59,19 @@
 
 .h-img-card__img {
   width: 100%;
-  max-width: 100%;
+  max-width: 500%;
   min-height: 1px; /* IE11 image bug */
+  margin-left: 17px;
+
 }
 
 .h-img-card__right-container {
   display: flex;
-  width: 100%;
-  max-width: 100%;
+  width: 40%;
+  max-width: 40%;
+  padding: 20px 10px 40px 10px;
+  background-color: #7889BE;
+  border-radius: 0 10px 10px 0;
 }
 
 .h-img-card__right {
@@ -96,12 +101,12 @@
   margin-top: 10px;
   width: 100%;
   max-width: 100%;
-  text-align: left;
+  text-align: center;
   padding: 0 20px;
 }
 
 .h-img-card__bottom-right {
-  text-align: right;
+  text-align: center;
   width: 100%;
   max-width: 100%;
   margin-top: auto;

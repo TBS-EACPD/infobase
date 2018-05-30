@@ -22,10 +22,10 @@
   padding: 30px 0 0;
 
   // background-color:#215185;
-  background-color:#335175;
+  background-color:#284162;
   color: white;
   position: relative;
-  margin-bottom: 12.5rem;
+  margin-bottom: 18rem;
 }
 
 
@@ -155,7 +155,7 @@
 
 .col-content.featured-col-content {
   color: #333 !important;
-  background-color: hsla(210, 45%, 82%, 1);
+  background-color: #284162;
   border-radius: 10px;
 }
 
@@ -298,10 +298,15 @@
 }
 .TrinityItem {
   @include unstyled-link;
-  background-color: #619EE8;
+  background-color: #215186;
   border-radius: 10px;
+  width: 90%;
   padding: 3rem;
   transform: scale(1);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   transition: transform .2s ease-in-out;
   &:hover {
@@ -330,4 +335,4 @@ $col_gutter_width: 2rem;
     padding-right: $col_gutter_width;
     padding-left: $col_gutter_width;
   }
-}
+} 

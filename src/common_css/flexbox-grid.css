@@ -602,6 +602,7 @@
     -ms-flex-preferred-size: 58.33333333%;
     flex-basis: 58.33333333%;
     max-width: 58.33333333%;
+    padding-right: 5%;
   }
 
   .fcol-md-8 {
