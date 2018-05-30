@@ -125,6 +125,7 @@ class ExplorerContainer extends React.Component {
 const get_non_col_content = ({node}) => {
   const subject = _.get(node, "data.subject");
   const footnotes = _.get(node, "data.footnotes");
+  const last_year = _.get(node, "data.last_year") - _.get(node, "data.last_year_mains");
   const last_year_mains = _.get(node, "data.last_year_mains");
   if(!subject && _.isEmpty(footnotes)){
     return null;
@@ -132,7 +133,9 @@ const get_non_col_content = ({node}) => {
   return (
     <div>
       <div>
-        Amounts appropriated in mains 2017-18 : <Format type="compact1" content={last_year_mains} />
+        Last year main estimates : <Format type="compact1" content={last_year_mains} />
+        <br/>
+        Last year authorities excluding main estimates: <Format type="compact1" content={last_year} />
       </div>
       {!_.isEmpty(footnotes) && 
         <HeightClipper

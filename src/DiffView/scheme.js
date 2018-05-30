@@ -47,8 +47,8 @@ function get_data(include_stat){
       const this_year = _.sumBy(rows, "this_year") || 0;
       const last_year  = _.sumBy(rows, "last_year") || 0;
       const last_year_mains = _.sumBy(rows, "last_year_mains") || 0;
-      const inc = this_year-last_year;
-      const inc_pct = inc/last_year;
+      const inc = this_year-last_year_mains;
+      const inc_pct = inc/last_year_mains;
 
       return {
         id : org_id,
@@ -72,9 +72,9 @@ function get_data(include_stat){
         },
         children: _.map(rows, row => {
           const this_year = row["this_year"] || 0;
-          const last_year  = row["last_year"] || 0;
-          const inc = this_year-last_year;
-          const inc_pct = inc/last_year;
+          const last_year_mains  = row["last_year_mains"] || 0;
+          const inc = this_year-last_year_mains;
+          const inc_pct = inc/last_year_mains;
 
           return {
             id: `${org_id}-${row.desc}`,
@@ -82,8 +82,8 @@ function get_data(include_stat){
               noExpand: true, //prevents the ► character from being displayed
               name: row.desc,
               this_year,
-              last_year,
-              last_year_mains: row.last_year_mains,
+              last_year: row.last_year || 0,
+              last_year_mains,
               inc,
               inc_pct,
             },
@@ -129,7 +129,7 @@ export const col_defs = [
     id: "inc",
     width: 150,
     textAlign: "right",
-    header_display: "Change from last year",
+    header_display: "Change from last year's main estimates",
     get_val: node => _.get(node, "data.inc"),
     val_display: val => {
       const content = <Format type="compact1" content={Math.abs(val)} />;
@@ -147,7 +147,7 @@ export const col_defs = [
     id: "inc_pct",
     width: 150,
     textAlign: "right",
-    header_display: "Change from last year (%)",
+    header_display: "Change from last year's main estimates (%)",
     get_val: node => _.get(node, "data.inc_pct"),
     val_display: val => {
       let content;
