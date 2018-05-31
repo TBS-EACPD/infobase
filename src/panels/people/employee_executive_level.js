@@ -42,6 +42,7 @@ const exec_level_render = function(panel,data){
 };
 
 new PanelGraph({
+  is_old_api: true,
   level: "dept",
   depends_on: ['table112'],
   key: "employee_executive_level",
@@ -78,6 +79,7 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: "gov",
   depends_on: ['table112'],
   key: "employee_executive_level",

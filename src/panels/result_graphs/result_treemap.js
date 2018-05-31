@@ -447,17 +447,21 @@ const title_key = "result_treemap_title";
 _.each(['program','dept','crso'], lvl => {
 
   new PanelGraph({
+    is_old_api: true,
     source: false,
     level: lvl,
     footnotes: false,
     depends_on: ["table6", "table12"],
     requires_results: true,
     key: "explore_results",
+
     layout: {
       full: { graph: 12},
       half: { graph: 12},
     },
+
     title: title_key,
+
     calculate(subject){
 
       const indicators = Indicator.get_flat_indicators(subject);
@@ -475,6 +479,7 @@ _.each(['program','dept','crso'], lvl => {
       };
 
     },
+
     render(panel, calculations){
       const { 
         subject, 

@@ -27,14 +27,17 @@ const common_layout = {
 };
 
 new PanelGraph({
+  is_old_api: true,
   level: 'dept',
   key : "portfolio_structure_intro",
   title: 'portfolio_structure_intro_title',
   layout : common_layout,
   footnotes: false,
+
   calculate(subject){
     return _.nonEmpty(subject.ministry)
   },
+
   render(panel,calculations){
     const { subject } = calculations;
     
@@ -56,11 +59,13 @@ new PanelGraph({
 
 
 new PanelGraph({
+  is_old_api: true,
   level: 'dept',
   key : "portfolio_structure_related",
   title : "portfolio_structure_related_title",
   layout : common_layout,
   footnotes: false,
+
   calculate(subject){
     return !_.isEmpty(subject.programs)
   },
@@ -89,6 +94,7 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: 'program',
   key : "program_fed_structure",
   layout : common_layout,
@@ -123,6 +129,7 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: 'program',
   key : "related_program_structure",
   layout : common_layout,
@@ -157,6 +164,7 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: 'tag',
   key : "tag_fed_structure",
   layout : common_layout,
@@ -188,6 +196,7 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: 'tag',
   key : "sibling_tags",
   layout : common_layout,
@@ -219,12 +228,14 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: 'crso',
   key : "crso_in_gov",
   title: "crso_in_gov_title",
   layout : common_layout,
   footnotes: false,
   calculate: _.constant(true),
+
   render(panel,calculations){
     const { subject } = calculations;
 
@@ -248,12 +259,14 @@ new PanelGraph({
 
 
 new PanelGraph({
+  is_old_api: true,
   level: 'crso',
   key : "crso_links_to_other_crso",
   title: "crso_links_to_other_crso_title",
   layout : common_layout,
   footnotes: false,
   calculate: _.constant(true),
+
   render(panel,calculations){
   
     const {subject} = calculations;

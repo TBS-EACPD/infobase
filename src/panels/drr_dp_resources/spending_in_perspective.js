@@ -145,9 +145,9 @@ class SpendInTagPerspective extends React.Component {
 
 //spending in tag perspective also included
 new PanelGraph({
+  is_old_api: true,
   level: "program",
   key : "spending_in_tag_perspective",
-
   depends_on: ['table6'],
 
   layout : {
@@ -182,6 +182,7 @@ new PanelGraph({
     }));
     return { tag_exps };
   },
+
   render(panel,calculations, options){
     const { graph_args, subject, info } = calculations;
     const node = panel.areas().graph.node();
@@ -199,6 +200,7 @@ new PanelGraph({
     );
     
   },
+
   old_render(panel,calculations, options){
     const { graph_args, subject, info } = calculations;
     const { tag_exps } = graph_args;

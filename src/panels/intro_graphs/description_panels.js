@@ -12,15 +12,19 @@ const title_keys = {
 
 _.each(['tag','crso','program'], level => {
   new PanelGraph({
+    is_old_api: true,
     level,
     key : "description",
+
     layout : {
       full : { graph : [12]},
       half : { graph : [12]},
     },
+
     footnotes: false,
     title: title_keys[level],
     calculate: subject => _.nonEmpty(subject.description),
+
     render(panel,calculations){
       
       const {subject} = calculations;

@@ -14,12 +14,15 @@ const { std_years } = years;
 const { Format } = util_components;
 
 new PanelGraph({
+  is_old_api: true,
   level: "gov",
   depends_on : ['table5'],
   key : "personnel_spend",
+
   info_deps: [
     'table5_gov_info',
   ],
+
   layout : {
     full : {text : 5, graph: 7},
     half: {text : 12, graph: 12},

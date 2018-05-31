@@ -3,6 +3,7 @@ const {
 } = require("../shared"); 
 
 new PanelGraph({
+  is_old_api: true,
   level: 'tag',
   key : "m2m_warning",
 

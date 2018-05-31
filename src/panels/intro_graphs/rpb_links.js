@@ -31,21 +31,26 @@ const get_table_type = table => (
 );
 
 new PanelGraph({
+  is_old_api: true,
   level: 'dept',
   key : "links_to_rpb",
   title: "links_to_rpb_title",
   text: "links_to_rpb_text",
+
   layout : {
     full :{  graph : [12]},
     half : { graph : [12]},
   },
+
   footnotes: false,
+
   calculate(subject){
     return !_.chain(subject.tables)
       .compact()
       .isEmpty()
       .value();
   },
+
   render(panel,calculations){
     const { subject } = calculations;
 
@@ -84,16 +89,20 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: 'gov',
   key : "links_to_rpb",
   footnotes: false,
+
   layout : {
     full :{  graph : [12]},
     half : { graph : [12]},
   },
+
   title: "links_to_rpb_title",
   text: "links_to_rpb_text",
   calculate: _.constant(true),
+
   render(panel,calculations){
     const { subject } = calculations;
 

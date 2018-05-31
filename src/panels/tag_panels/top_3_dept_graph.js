@@ -9,6 +9,7 @@ import {
 const { Dept } = Subject;
 
 new PanelGraph({
+  is_old_api: true,
   level: "tag",
   key : "tag_top_3_depts",
   depends_on: ['table6'],

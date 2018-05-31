@@ -13,6 +13,7 @@ const {
 
 
 new PanelGraph({
+  is_old_api: true,
   level: 'dept',
   title: "org_profile",
   key : "igoc_fields",
@@ -48,6 +49,7 @@ new PanelGraph({
 
 
 new PanelGraph({
+  is_old_api: true,
   level: 'dept',
   key : "igoc_links",
   title: "org_links",

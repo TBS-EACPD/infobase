@@ -75,16 +75,21 @@ const planned_vote_or_stat_calculate = vs => function(subject, info){
 
 ["voted","stat"].forEach( vs => {
   new PanelGraph({
+    is_old_api: true,
     level: "gov",
+
     key: (
       vs === "voted" ?
       "in_year_voted_breakdown" :
       "in_year_stat_breakdown"
     ),
+
     depends_on: ['table8'],
+
     info_deps: [
       'table8_gov_info',
     ],
+
     layout : {
       "full" : {text : 12, graph: [5,7]},
       "half" : {text : 12, graph: [12,12]},

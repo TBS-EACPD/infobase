@@ -15,17 +15,24 @@ const { TM } = util_components;
 
 _.each(['dept','program'], level => {
   new PanelGraph({
+    is_old_api: true,
     depends_on: ['table6', 'table12'],
     key:'drr_planned_actual',
-    requires_result_counts: true, //used as as a fail mechanism. If result counts aren't present, bail
+
+    //used as as a fail mechanism. If result counts aren't present, bail
+    requires_result_counts: true,
+
     level,
     title: "drr_planned_actual_title",
+
     layout: {
       full: { graph: 12},
       half: { graph: 12},
     },
+
     source: false,
     footnotes: false,
+
     calculate(subject,info){
       if(subject.level === 'dept'){
         if(!subject.is_rpp_org){
@@ -78,6 +85,7 @@ _.each(['dept','program'], level => {
       };
 
     },
+
     render(panel, calc){
       const { graph_args, subject } = calc;
       

@@ -59,9 +59,9 @@ const employee_fol_render = function(panel, data){
 };
 
 new PanelGraph({
+  is_old_api: true,
   level: "dept",
   depends_on: ['table303'],
-
   key: "employee_fol",
 
   info_deps: [
@@ -94,6 +94,7 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: "gov",
   depends_on: ['table303'],
   key: "employee_fol",

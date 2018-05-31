@@ -30,14 +30,17 @@ const tag_root_display = tag_root => <div>
 </div>;
 
 new PanelGraph({
+  is_old_api: true,
   level: 'dept',
   key : "related_tags",
   title: 'dept_related_tags_title',
   footnotes: false,
+
   layout : {
     full :{  graph : [12]},
     half : { graph : [12]},
   },
+
   calculate(subject){
     if(subject.dp_status === false){
       return false;
@@ -68,6 +71,7 @@ new PanelGraph({
     }
 
   },
+
   render(panel,calculations){
     const { 
       graph_args: {
@@ -111,14 +115,18 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: 'crso',
   key : "crso_tags",
+
   layout : {
     full :{  graph : [12]},
     half : { graph : [12]},
   },
+
   footnotes: false,
   title: "crso_tags_title",
+
   calculate(subject){
 
     if(subject.dept.dp_status === false){
@@ -151,6 +159,7 @@ new PanelGraph({
     }
 
   },
+
   render(panel,calculations){
     const { 
       graph_args: {
@@ -196,6 +205,7 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: 'program',
   key : "program_tags",
 
@@ -266,6 +276,7 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: 'tag',
   key : "tag_progs_by_dept",
 
@@ -323,6 +334,7 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: 'tag',
   key : "related_tags",
 

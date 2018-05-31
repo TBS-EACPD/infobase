@@ -124,12 +124,14 @@ const render = function( panel, calculations, options ) {
 };
 
 new PanelGraph({
+  is_old_api: true,
   level: "gov",
   key : "historical_auth_exp",
   info_deps : ["table4_gov_info"],
   depends_on: ["table4"],
   title: "historical_auth_exp_title",
   text: "gov_historical_auth_exp_text",
+
   layout : {
     full : {text : 6, graph: 6},
     half: {text : 12, graph: 12},
@@ -140,12 +142,14 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: "dept",
   key : "historical_auth_exp",
   depends_on: ["table4"],
   info_deps : ["table4_dept_info"],
   title: "historical_auth_exp_title",
   text: "dept_historical_auth_exp_text",
+
   layout : {
     full : {text : 6, graph: 6},
     half: {text : 12, graph: 12},
@@ -156,6 +160,7 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: "program",
   key : "historical_auth_exp",
   depends_on: ["table6"],
@@ -173,6 +178,7 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: "tag",
   key : "historical_auth_exp",
   depends_on: ["table6"],

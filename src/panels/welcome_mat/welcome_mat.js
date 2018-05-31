@@ -395,15 +395,19 @@ const render = function( panel, calculations, options ) {
 
 
 new PanelGraph({
+  is_old_api: true,
   level: "gov",
   key: 'welcome_mat',
   depends_on : ['table4','table6','table12'],
   info_deps: [ 'table4_gov_info', 'table6_gov_info','table12_gov_info'],
+
   layout: {
     full: {text: 12, graph:0},
     half : {text: 12, graph:0},
   },
+
   title : "welcome_mat_title",
+
   calculate(subject,info,options) {
     const c = cols(subject); 
     const {
@@ -430,22 +434,26 @@ new PanelGraph({
       },
     },subject,info,options);
   },
+
   render,
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: "dept",
   key: 'welcome_mat',
   footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-
   depends_on : [ 'table6','table12', 'table4', 'table8'],
   info_deps: ['table4_dept_info', 'table6_dept_info','table12_dept_info',  'table8_dept_info'],
-  missing_info :'ok' ,
+  missing_info :'ok',
+
   layout: {
     full: {text: 12, graph:0},
     half : {text: 12, graph:0},
   },
+
   title : "welcome_mat_title",
+
   calculate(subject,info,options) {
     const c = cols(subject); 
     const pd =  subject.has_planned_spending;
@@ -480,17 +488,21 @@ new PanelGraph({
 
       
 new PanelGraph({
+  is_old_api: true,
   level: "program",
   key: 'welcome_mat',
   footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
   depends_on : [ 'table6','table12'],
   info_deps: [ 'table6_program_info','table12_program_info'],
-  missing_info :'ok' ,
+  missing_info :'ok',
+
   layout: {
     full: {text: 12, graph:0},
     half : {text: 12, graph:0},
   },
+
   title : "welcome_mat_title",
+
   calculate (subject,info,options) {
     const {
       table6,
@@ -546,21 +558,26 @@ new PanelGraph({
       },
     },  subject,info,options);
   },
+
   render,
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: "tag",
   key: 'welcome_mat',
   footnotes : ["MACHINERY"],
   depends_on : [ 'table6','table12'],
   info_deps: [ 'table6_tag_info','table12_tag_info'],
-  missing_info :'ok' ,
+  missing_info :'ok',
+
   layout: {
     full: {text: 12, graph:0},
     half : {text: 12, graph:0},
   },
+
   title : "welcome_mat_title",
+
   calculate(subject,info,options) {
     const c = cols(subject); 
     const pd =  subject.has_planned_spending;
@@ -588,21 +605,26 @@ new PanelGraph({
       },
     },  subject,info,options);
   },
+
   render,
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: "crso",
   key: 'welcome_mat',
   footnotes : ["MACHINERY"],
   depends_on : [ 'table6','table12'],
   info_deps: [ 'table6_crso_info','table12_crso_info'],
-  missing_info :'ok' ,
+  missing_info :'ok',
+
   layout: {
     full: {text: 12, graph:0},
     half : {text: 12, graph:0},
   },
+
   title : "welcome_mat_title",
+
   calculate (subject,info,options) {
     const c = cols(subject); 
 
@@ -667,6 +689,7 @@ new PanelGraph({
       },
     },  subject,info,options);
   },
+
   render,
 });
 

@@ -59,6 +59,7 @@ const employee_type_render = function(panel, data){
 };
 
 new PanelGraph({
+  is_old_api: true,
   level: "dept",
   depends_on: ['table9'],
   key: "employee_type",
@@ -94,6 +95,7 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: "gov",
   depends_on: ['table9'],
   key: "employee_type",
@@ -106,7 +108,7 @@ new PanelGraph({
     full: {text: 12, graph: 12},
     half: {text: 12, graph: 12},
   },
-  
+
   text: "gov_employee_type_text",
   title: "employee_type_title",
 

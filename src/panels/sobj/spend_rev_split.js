@@ -72,6 +72,7 @@ const layout =  {
 };
 
 new PanelGraph({
+  is_old_api: true,
   key,
   depends_on : ["table4","table5"],
   layout,
@@ -80,6 +81,7 @@ new PanelGraph({
   info_deps : ["table5_dept_info","table4_dept_info"],
   title,
   text :  "dept_spend_rev_split_text",
+
   calculate(subject,info,options){
     if ( info.dept_pa_last_year_rev === 0 ){
       return false;
@@ -89,6 +91,7 @@ new PanelGraph({
       net_exp : info.dept_exp_pa_last_year,
     };
   },
+
   render,
 });
 
@@ -161,13 +164,15 @@ Statistics.create_and_register({
 });
 
 new PanelGraph({
+  is_old_api: true,
   key,
   depends_on : ["table305"],
-  info_deps : ["program_revenue"] ,
+  info_deps : ["program_revenue"],
   layout,
   level : "program",
   title,
   text :   "program_spend_rev_split_text",
+
   calculate(subject,info,options){ 
     const {table305} = this.tables;
     const prog_rows = table305.programs.get(subject);
@@ -177,17 +182,20 @@ new PanelGraph({
     }
     return rev_split;
   },
+
   render,
 });
 
 new PanelGraph({
+  is_old_api: true,
   key,
   depends_on : ["table305"],
   layout,
   level : "tag",
-  info_deps : ["tag_revenue"] ,
+  info_deps : ["tag_revenue"],
   title,
   text :   "tag_spend_rev_split_text",
+
   calculate(subject,info,options){
     const {table305} = this.tables;
     const prog_rows =  table305.q(subject).data;
@@ -197,6 +205,7 @@ new PanelGraph({
     }
     return rev_split;
   },
+
   render,
 });
 

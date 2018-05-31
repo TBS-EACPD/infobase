@@ -56,8 +56,7 @@ const get_non_col_content = ({node}) => {
         </dl>
       }
       { (
-        _.includes(['program','dept', 'crso'], subject.level) || 
-        subject.level === 'tag' && !_.isEmpty(subject.programs) //only tags with programs (i.e. not tags that are just group of tags) have infographics
+        (_.includes(['program','dept', 'crso'], subject.level) || subject.level === 'tag' && !_.isEmpty(subject.programs)) //only tags with programs (i.e. not tags that are just group of tags) have infographics
       ) && 
         <div className='ExplorerNode__BRLinkContainer'>
           <a href={infograph_href_template(subject)}> 
@@ -205,15 +204,19 @@ class RootedResourceExplorerContainer extends React.Component {
 
 
 new PanelGraph({
+  is_old_api: true,
   level: 'tag',
   footnotes: false,
   depends_on : ['table6','table12'],
   key: "resource_structure",
+
   layout: {
     full: { graph: 12},
     half: { graph: 12},
   },
+
   title: "resource_structure_title",
+
   calculate(subject){
     const { table6 } = this.tables;
 
@@ -244,6 +247,7 @@ new PanelGraph({
     };
 
   },
+
   render(panel, calculations){
     const { 
       subject, 

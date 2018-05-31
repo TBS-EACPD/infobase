@@ -53,15 +53,19 @@ const fade_out = function(d){
 
 
 new PanelGraph({
+  is_old_api: true,
   key: 'gocographic',
-  level: 'gov', 
+  level: 'gov',
   depends_on: ['table6', 'table12'],
   footnotes: ["GOCA"],
+
   layout: {
     full : {text : 12, graph: [12]}, 
   },
+
   title: 'gocographic_title',
   calculate: _.constant(true),
+
   render(panel,calculations, { history }){
     const graph_area = d3.select(panel.areas().graph.node());
 

@@ -20,15 +20,19 @@ const {
 const { DrrSummary } = require('./drr_summary.js');
 
 new PanelGraph({
+  is_old_api: true,
   level: 'gov',
   requires_result_counts: true,
   key: "gov_drr",
+
   layout: {
     full: {text: [], graph: 12},
     half : {text: [], graph: 12},
   },
+
   title : "drr_summary_title",
   footnotes: ["RESULTS_COUNTS"],
+
   calculate(){
     const verbose_gov_counts = ResultCounts.get_gov_counts();
     const gov_counts = row_to_drr_status_counts(verbose_gov_counts);
@@ -54,6 +58,7 @@ new PanelGraph({
     };
     
   },
+
   render(panel, calculations){
     const {
       graph_args,

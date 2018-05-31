@@ -92,42 +92,52 @@ Statistics.create_and_register({
 
 
 new PanelGraph({
+  is_old_api: true,
   key: 'top_spending_areas',
   depends_on : ['table305'],
   info_deps : ["program_std_obj"],
+
   layout: {
     full: {text: 5, graph: 7},
     half : {text: 12, graph: 12},
   },
+
   level : "program",
   title : "top_spending_areas_title",
   text :  "program_top_spending_areas_text",
+
   calculate(subject,info,options){ 
     if(_.isEmpty(this.tables.table305.programs.get(subject))){
       return false;
     }
     return  common_cal([subject], this.tables.table305);
   },
+
   footnotes : ["SOBJ"],
   render: window.is_a11y_mode ? a11y_render :  common_react_donut,
 });
 
 new PanelGraph({
+  is_old_api: true,
   key: 'top_spending_areas',
   info_deps : ["tag_std_obj"],
   depends_on : ['table305'],
+
   layout: {
     full: {text: 5, graph: 7},
     half : {text: 12, graph: 12},
   },
+
   level : "tag",
   footnotes : ["SOBJ"],
   title : "top_spending_areas_title",
   text :  "tag_top_spending_areas_text",
+
   calculate(subject,info,options){ 
 
     return  common_cal(subject.programs, this.tables.table305);
   },
+
   render: window.is_a11y_mode ? a11y_render : common_react_donut,
 });
 

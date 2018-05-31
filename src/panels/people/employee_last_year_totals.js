@@ -23,12 +23,15 @@ const total_employment_render = function(panel, data){
 };
 
 new PanelGraph({
+  is_old_api: true,
   level: "dept",
   depends_on: ['table9'],
+
   info_deps: [
     'table9_dept_info',
     'table9_gov_info',
   ],
+
   key: "employee_last_year_totals",
 
   layout: {

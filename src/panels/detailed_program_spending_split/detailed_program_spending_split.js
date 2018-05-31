@@ -42,17 +42,21 @@ const info_deps_by_level = {
 ['dept', 'tag'].forEach( level_name => {
 
   new PanelGraph({
+    is_old_api: true,
     level: level_name,
     key: "detailed_program_spending_split",
     info_deps: info_deps_by_level[level_name],
     depends_on : ['table305', "table6"],
+
     layout: {
       full: {text: 12, graph: 12},
       half : {text: 12, graph: 12},
     },
+
     footnotes: [ 'PROG', 'SOBJ' ],
     title : "detailed_program_spending_split_title",
     text :  text_keys[level_name],
+
     calculate(subject,info,options){
 
       const is_tag = subject.level === "tag";

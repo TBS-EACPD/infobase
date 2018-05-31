@@ -252,15 +252,19 @@ export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts 
 }
 
 new PanelGraph({
+  is_old_api: true,
   level: 'dept',
   requires_result_counts: true,
   key: "drr_summary",
+
   layout: {
     full: {text: [], graph: 12},
     half : {text: [], graph: 12},
   },
+
   title : "drr_summary_title",
   footnotes: ["RESULTS_COUNTS","RESULTS"],
+
   calculate(subject){
     const verbose_counts = ResultCounts.get_dept_counts(subject.acronym);
     const counts = row_to_drr_status_counts(verbose_counts);
@@ -275,6 +279,7 @@ new PanelGraph({
     };
     
   },
+
   render(panel, calculations){
     const {
       graph_args,
@@ -294,15 +299,19 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: 'program',
   requires_results: true,
   key: "drr_summary",
+
   layout: {
     full: {text: [], graph: 12},
     half : {text: [], graph: 12},
   },
+
   title : "drr_summary_title",
   footnotes: ["RESULTS_COUNTS","RESULTS"],
+
   calculate(subject){
     const all_results = Result.get_flat_results(subject);
     const all_indicators = Indicator.get_flat_indicators(subject);
@@ -320,6 +329,7 @@ new PanelGraph({
     };
     
   },
+
   render(panel, calculations){
     const {
       graph_args,

@@ -81,18 +81,22 @@ const shouldAddOrgNameItem = subject => subject.is('dept') && subject.applied_ti
 
 _.each(['gov', 'dept', 'program', 'tag', 'crso'], lvl => {
   new PanelGraph({
+    is_old_api: true,
     level: lvl,
     static: true,
     footnotes: false,
     key :  'financial_intro',
+
     layout: {
       half: { text: null, graph:12 },
       full: { text: null, graph: 12},
     },
+
     info_deps: [],
     source: false,
     title: 'some_things_to_keep_in_mind',
     calculate: _.constant(true),
+
     render: curried_render({ 
       q_a_keys : [ 
         'where_does_authority_come_from',
@@ -113,18 +117,22 @@ _.each(['gov', 'dept', 'program', 'tag', 'crso'], lvl => {
 
 _.each(['gov', 'dept', 'program', 'crso'], lvl => {
   new PanelGraph({
+    is_old_api: true,
     level: lvl,
     static: true,
     footnotes: false,
     key :  'results_intro',
+
     layout: {
       half: { text: null, graph:12 },
       full: { text: null, graph: 12},
     },
+
     info_deps: [],
     source: false,
     title: 'some_things_to_keep_in_mind',
     calculate: _.constant(true),
+
     render: curried_render({
       q_a_keys: [
         'what_is_policy_on_results',
@@ -141,12 +149,16 @@ _.each(['gov', 'dept', 'program', 'crso'], lvl => {
   })
 
   new PanelGraph({
+    is_old_api: true,
     level: lvl,
     key: "dp_coming_soon",
+
     layout: {
       full: {text: [], graph: 12},
     },
+
     calculate:_.constant(true),
+
     render(panel){
       const sel = panel.el;
       sel.attr('class', "");
@@ -164,18 +176,22 @@ _.each(['gov', 'dept', 'program', 'crso'], lvl => {
 
 _.each(['gov', 'dept'], lvl => {
   new PanelGraph({
+    is_old_api: true,
     level: lvl,
     static: true,
     footnotes: false,
     key :  'people_intro',
+
     layout: {
       half: { text: null, graph:12 },
       full: { text: null, graph: 12},
     },
+
     info_deps: [],
     source: false,
     title: 'some_things_to_keep_in_mind',
     calculate: _.constant(true),
+
     render: curried_render({ 
       q_a_keys : [
         'who_is_fps',
@@ -192,18 +208,22 @@ _.each(['gov', 'dept'], lvl => {
 
 
 new PanelGraph({
+  is_old_api: true,
   level: 'tag',
   static: true,
   footnotes: false,
   key :  'tagging_key_concepts',
+
   layout: {
     half: { text: null, graph:12 },
     full: { text: null, graph: 12},
   },
+
   info_deps: [],
   source: false,
   title: 'some_things_to_keep_in_mind',
   calculate: _.constant(true),
+
   render: curried_render({ 
     q_a_keys : [
       'what_is_tagging',
@@ -219,6 +239,7 @@ new PanelGraph({
 
 _.each(['gov', 'dept'], lvl => {
   new PanelGraph({
+    is_old_api: true,
     level: lvl,
     static: true,
     footnotes: false,
@@ -227,14 +248,14 @@ _.each(['gov', 'dept'], lvl => {
     key : "march_snapshot_warning",
     title: "march_snapshot_warning",
     text: "march_snapshot_warning",
-  
+
     layout : {
       full :{ text: [12] },
       half : { text : [12] },
     },
 
     calculate: _.constant(true),
-  
+
     render(panel){
       const sel = panel.el;
       sel.attr('class', "");
@@ -250,6 +271,7 @@ _.each(['gov', 'dept'], lvl => {
   });
   
   new PanelGraph({
+    is_old_api: true,
     level: lvl,
     static: true,
     footnotes: false,
@@ -258,14 +280,14 @@ _.each(['gov', 'dept'], lvl => {
     key : "ppl_open_data_info",
     title: "ppl_open_data_info",
     text: "ppl_open_data_info",
-  
+
     layout : {
       full :{ text: [12] },
       half : { text : [12] },
     },
 
     calculate: _.constant(true),
-  
+
     render(panel){
       const sel = panel.el;
       sel.attr('class', "");

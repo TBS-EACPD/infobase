@@ -11,22 +11,28 @@ const { CirclePieChart } = declarative_charts;
 
 
 new PanelGraph({
+  is_old_api: true,
   level: "dept",
   depends_on :  ["table8"],
   machinery_footnotes : false,
+
   info_deps: [
     'table8_dept_info',
     'table8_gov_info',
   ],
+
   key: 'estimates_in_perspective',
+
   layout:{
     full : {text : 5, graph: 7},
     half : {text : 12, graph: [12,12]},
   },
+
   title :  "estimates_perspective_title",
   text :  "estimates_perspective_text",
   include_in_bubble_menu : true,
   bubble_text_label : "estimates",
+
   calculate(subject, info, options){
     const { gov_tabled_est_in_year, dept_tabled_est_in_year_estimates } = info;
     if(dept_tabled_est_in_year_estimates){
@@ -38,6 +44,7 @@ new PanelGraph({
       return false;
     }
   },
+
   render(panel,calculations){
     const { subject, graph_args } = calculations;
     reactAdapter.render(

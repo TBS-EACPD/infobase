@@ -111,16 +111,20 @@ class ResultsIntroPanel extends React.Component {
 }
 
 new PanelGraph({
+  is_old_api: true,
   level: 'gov',
   requires_result_counts: true,
   key: "gov_dp",
+
   layout: {
     full: {text: [], graph: 12},
     half : {text: [], graph: 12},
   },
+
   title : "gov_dp_summary_title",
   calculate: _.constant(true),
   footnotes: false,
+
   render(panel, calculations){
     const { subject } = calculations;
     const node = panel.areas().graph.node();

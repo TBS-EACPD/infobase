@@ -108,10 +108,11 @@ const emp_age_render = function(panel,data,options){
 };
 
 new PanelGraph({
+  is_old_api: true,
   level: "dept",
   depends_on : ['table11', 'table304'],
   key : "employee_age",
-  
+
   info_deps: [
     'table11_dept_info',
     'table11_gov_info',
@@ -176,12 +177,15 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: "gov",
   depends_on : ['table11', 'table304'],
+
   info_deps: [
     'table11_gov_info',
     'table304_gov_info',
   ],
+
   key : "employee_age",
 
   layout : {

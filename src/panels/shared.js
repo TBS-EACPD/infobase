@@ -31,6 +31,7 @@ exports.create_text_maker = create_text_maker;
 exports.run_template = run_template;
 exports.PanelGraph = PanelGraph;
 exports.StdPanel = StdPanel;
+exports.Panel = Panel;
 exports.layout_types = layout_types;
 exports.years = require("../models/years.js").years;
 exports.business_constants = require('../models/businessConstants.js'),

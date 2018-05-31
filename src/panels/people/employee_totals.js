@@ -48,12 +48,15 @@ const total_hist_employment_render = function(panel,data){
 };
 
 new PanelGraph({
+  is_old_api: true,
   level: "dept",
   depends_on: ['table9'],
+
   info_deps: [
     'table9_gov_info',
     'table9_dept_info',
   ],
+
   key: "employee_totals",
 
   layout: {
@@ -68,12 +71,15 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: "gov",
   depends_on: ['table9'],
   key: "employee_totals",
+
   info_deps: [
     'table9_gov_info',
   ],
+
   layout: {
     full: {text: 4, graph: 8},
     half: {text: 12, graph: 12},

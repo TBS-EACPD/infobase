@@ -142,11 +142,14 @@ const draw_graph = function(area, data){
 
 
 new PanelGraph({
+  is_old_api: true,
   level: "gov",
   key : "historical_g_and_c",
+
   info_deps: [
     'table7_gov_info',
   ],
+
   depends_on : ['table7'],
   height : 375,
 
@@ -167,12 +170,15 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: "dept",
   depends_on : ['table7'],
+
   info_deps: [
     'table7_gov_info',
     'table7_dept_info',
   ],
+
   key : "historical_g_and_c",
   footnotes: ['SOBJ10'],
   height : 375,

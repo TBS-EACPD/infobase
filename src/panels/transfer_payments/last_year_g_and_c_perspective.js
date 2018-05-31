@@ -7,9 +7,9 @@ import {
 } from "../shared";
 
 new PanelGraph({
+  is_old_api: true,
   level: "dept",
   key : "last_year_g_and_c_perspective",
-
   depends_on: ['table7'],
   footnotes: ['SOBJ10'],
   height: 300,

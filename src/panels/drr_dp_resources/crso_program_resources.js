@@ -212,15 +212,18 @@ class PlannedProgramResources extends React.Component {
 
 _.each([true,false], is_fte => {
   new PanelGraph({
+    is_old_api: true,
     level: "crso",
     footnotes : ["PLANNED_EXP"],
     key : `crso_by_prog_${is_fte ? "fte" : "exp"}`,
     depends_on: ['table6', 'table12'],
     info_deps: ['table6_crso_info','table12_crso_info'],
+
     layout : {
       full: { graph: [12] },
       half: { graph: [12] },
     },
+
     title :`crso_by_prog_${is_fte ? "fte" : "exp" }_title`,
     calculate,
     render: render_resource_type(is_fte),

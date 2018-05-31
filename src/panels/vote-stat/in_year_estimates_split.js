@@ -80,6 +80,7 @@ const estimates_split_render = function(panel,calculations,options){
 
 
 new PanelGraph({
+  is_old_api: true,
   level: "dept",
   machinery_footnotes : false,
   depends_on :  ["table8"],
@@ -103,6 +104,7 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: "gov",
   machinery_footnotes : false,
   depends_on :  ["table8"],

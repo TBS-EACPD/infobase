@@ -127,17 +127,21 @@ const prg_crso_split_render = function(panel, calculations, options){
 };
 
 new PanelGraph({
+  is_old_api: true,
   level: "crso",
   key: 'planned_prg_crso_split',
   depends_on :  ['table6'],
   info_deps: ['table6_crso_info'],
+
   layout: {
     full:  {text : 7, graph: 5},       
     half : {text : 12, graph: 12},      
   },
+
   machinery_footnotes : false,
   title :"planned_prg_crso_split_title",
   text : "planned_prg_crso_split_text",
+
   calculate(subject,info){
 
     if(window.is_a11y_mode){
@@ -156,6 +160,7 @@ new PanelGraph({
     return { table6_data };
 
   },
+
   render: prg_crso_split_render,
 });
 

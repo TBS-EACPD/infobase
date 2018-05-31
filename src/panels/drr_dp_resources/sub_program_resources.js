@@ -343,6 +343,7 @@ const SubProgramResourceTreeContainer = ({
 
 
 new PanelGraph({
+  is_old_api: true,
   key: "sub_program_resources",
   level: 'program',
   requires_results: true,
@@ -350,10 +351,12 @@ new PanelGraph({
   footnotes:false,
   depends_on : ['table12'],
   source: false,
+
   layout: {
     full: { graph: 12},
     half: { graph: 12},
   },
+
   calculate(subject){
     
     const t12_q = this.tables.table12.q(subject);
@@ -390,6 +393,7 @@ new PanelGraph({
       has_drr_data,
     };
   },
+
   render(panel, calculations){
     const { 
       subject, 

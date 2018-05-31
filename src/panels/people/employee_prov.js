@@ -260,12 +260,15 @@ const prov_split_render = function(panel,data,options){
 };
 
 new PanelGraph({
+  is_old_api: true,
   level: "dept",
   key: "employee_prov",
+
   info_deps: [
     'table10_dept_info',
     'table10_gov_info',
   ],
+
   depends_on: ['table10'],
 
   layout: {
@@ -287,6 +290,7 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: "gov",
   key: "employee_prov",
   depends_on: ['table10'],
@@ -294,6 +298,7 @@ new PanelGraph({
   info_deps: [
     'table10_gov_info',
   ],
+
   layout: {
     full: {text: 12, graph: 12},
     half: {text: 12, graph: 12},

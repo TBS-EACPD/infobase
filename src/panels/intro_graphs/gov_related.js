@@ -4,6 +4,7 @@ const {  PanelGraph } = require("../shared");
 
 
 new PanelGraph({
+  is_old_api: true,
   level: 'gov',
   footnotes: false,
   key : "gov_related_info",

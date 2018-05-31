@@ -46,6 +46,7 @@ function spend_by_so_hist_render (panel,calculations){
 
 _.each(['gov', 'dept'], lvl => {
   new PanelGraph({
+    is_old_api: true,
     level: lvl,
     key : "spend_by_so_hist",
     depends_on: ['table5'],

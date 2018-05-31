@@ -4,10 +4,9 @@ const {
 } = require("../shared"); 
 
 new PanelGraph({
+  is_old_api: true,
   level: 'program',
-
   key : "dead_program_warning",
-
   title: "dead_program_warning_title",
   text: "dead_program_warning_text",
 
@@ -37,11 +36,11 @@ new PanelGraph({
 });
 
 new PanelGraph({
+  is_old_api: true,
   level: 'crso',
-
   key : "dead_crso_warning",
-
   title: "dead_crso_warning_title",
+
   // text: "dead_crso_warning_text",
 
   layout : {

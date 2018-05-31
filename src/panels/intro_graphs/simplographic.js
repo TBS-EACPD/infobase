@@ -27,11 +27,13 @@ const TM = props => <StandardTM tmf={tmf} {...props} />;
 
 
 new PanelGraph({
+  is_old_api: true,
   level: 'gov',
   key : "simplographic",
   footnotes: false,
   panel_args : {off : ["title","source","text"]},
   requires_result_counts: true,
+
   depends_on : [ 
     'table4', 
     'table10', 
