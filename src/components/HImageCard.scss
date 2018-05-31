@@ -28,7 +28,7 @@
   display: flex;
   width: 100%;
   max-width: 100%;
-  flex-direction: row;
+  flex-direction: column;
   align-items: stretch;
   min-height: 1px; /* IE11 image bug */
 }
@@ -38,13 +38,12 @@
   padding: 5px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 200%;
+  justify-content: left;
+  text-align: left;
   max-width: 100%;
   min-height: 1px; /* IE11 image bug */
-  font-size: 3.5em; /* for glyphicons */
-  margin: 40px 200px 40px 10px;
+  font-size: 2.5em; /* for glyphicons */
+  color: white;
 }
 
 .h-img-card__img-link {
@@ -58,20 +57,12 @@
 }
 
 .h-img-card__img {
-  width: 100%;
-  max-width: 500%;
+  width: 50%;
+  max-width: 50%;
   min-height: 1px; /* IE11 image bug */
-  margin-left: 40px;
+  padding: 15px;
+  margin: auto;
 
-}
-
-.h-img-card__right-container {
-  display: flex;
-  width: 40%;
-  max-width: 40%;
-  padding: 20px 10px 40px 10px;
-  background-color: #7889BE;
-  border-radius: 0 10px 10px 0;
 }
 
 .h-img-card__right {
@@ -80,37 +71,41 @@
   max-width: 100%;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: stretch;
-  flex: 1 0 auto;
+  align-items: center;
+  flex: 1;
 }
 
 .h-img-card__title {
-  font-size: 1.6em;
+  font-size: 0.6em;
   font-weight: $mediumFontWeight;
-  text-align: center;
+  text-align: left;
   width: 100%;
   max-width: 100%;
-  padding: 8px;
+  padding: 20px 8px 10px 25px;
 }
 
 .h-img-card__text {
-  font-size: 1.2em;
+  font-size: 0.4em;
   font-weight: $mediumFontWeight;
-  width: 100%;
-  max-width: 100%;
   margin-top: 10px;
   width: 100%;
   max-width: 100%;
-  text-align: center;
-  padding: 0 20px;
+  text-align: left;
+  padding: 0px 0px 8px 25px;
 }
 
 .h-img-card__bottom-right {
   text-align: center;
-  width: 100%;
-  max-width: 100%;
-  margin-top: auto;
-  padding-top: 10px;
-  font-size: 1.2em;
-  padding: 15px 10px 10px 10px;
+  font-size: 1em;
+  padding: 20px 0 20px 0;
+  background-color: black;
+  border-radius: 10px;
+  
+  display: flex;
+  width: 30%;
+  max-width: 30%;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex: 1;
+  
 }

@@ -25,7 +25,9 @@
   background-color:#284162;
   color: white;
   position: relative;
-  margin-bottom: 18rem;
+  margin-bottom: 24rem;
+  border-bottom: 10px solid #FF5E59;
+  height: 280px;
 }
 
 
@@ -155,9 +157,11 @@
 
 .col-content.featured-col-content {
   color: #333 !important;
-  background-color: #284162;
+  background-color: #8BB3E8;
   border-radius: 10px;
   margin-bottom: 30px;
+  margin-top: 60px;
+  height: 80%;
 }
 
 .col-content.explore-col-content {
@@ -276,7 +280,7 @@
 }
 
 .partition-budget-home-content {
-  & > .h-img-card > .h-img-card__left {
+  & > .h-img-card {
     flex: 0 0 32.5%;
 
     & > a > img {
@@ -294,12 +298,12 @@
 }
 
 .home-trinity-container {
-  transform: translate(0, 50%);
+  transform: translate(0, 90%);
   margin-top: -4rem;
 }
 .TrinityItem {
   @include unstyled-link;
-  background-color: #215186;
+  background-color: #767F89;
   border-radius: 10px;
   width: 90%;
   padding: 3rem;

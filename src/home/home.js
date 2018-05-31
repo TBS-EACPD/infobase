@@ -90,11 +90,11 @@ const FeaturedContentItem = ({ text_key, href, is_new }) => <li className="list-
 
 const TrinityItem = ({img_url, title, href}) => <div className="centerer">
   <a href={href} className="TrinityItem">
-    <div className="TrinityItem__Img">
-      <img src={img_url} />
-    </div>
     <div className="TrinityItem__Title">
       {title}
+    </div>
+    <div className="TrinityItem__Img">
+      <img src={img_url} />
     </div>
   </a>
 </div>;
@@ -150,17 +150,6 @@ const HomeLayout = props => (
               />
             </MediaQuery>
           </div>     
-          <div className="col-content featured-col-content partition-budget-home-content">
-            <MediaQuery minWidth={992}>
-              <VImageCard
-                img_src="svg/partition.svg"
-                title_key="partition_home_title"
-                text_key="partition_home_text"
-                link_key="check_home_link"
-                link_href="#partition/dept/exp"
-              />
-            </MediaQuery>
-          </div>
         </div>
         <div className="fcol-md-5  home-col">
           <header className="h3">
@@ -200,9 +189,13 @@ const HomeLayout = props => (
                 { _.map( props.featured_content_items, item => <FeaturedContentItem key={item.text_key} {...item} /> ) }
               </ul>
             </div>
-          </section>
-
-          
+          </section>  
+        </div>
+      </div>
+      <div className="intro-box" style={{position:"relative"}}>
+        <div className="container">
+          <h1> <TM k="welcome" /> </h1>
+          <h2> <TM k="home_sub_title" /> </h2>
         </div>
       </div>
       <div className="external-row-descriptor">

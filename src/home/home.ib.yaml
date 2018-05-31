@@ -1,6 +1,6 @@
 home_finance_title:
-  en: Finances
-  fr: Finances
+  en: FINANCES
+  fr: FINANCES
 
 home_finance_intro:
   transform: [handlebars,markdown]
@@ -13,8 +13,8 @@ home_finance_link:
   fr: Voir comment cela a été dépensé
 
 home_ppl_title:
-  en: People
-  fr: Gestion du personnel
+  en: PEOPLE
+  fr: GESTION DE PERSONNEL
 
 home_ppl_intro:
   transform: [handlebars,markdown]
@@ -26,8 +26,8 @@ home_ppl_link:
   fr: Voir qui nous sommes
 
 home_results_title:
-  en: Results
-  fr: Résultats
+  en: RESULTS
+  fr: RÉSULTATS
 
 home_results_intro:
   transform: [handlebars,markdown]
