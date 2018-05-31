@@ -382,14 +382,12 @@ const url_state_selector = createSelector(_.identity, str => {
 });
 
 export class ReportBuilder extends React.Component { 
-  constructor(props){
-    super(props);
-    const config_str = this.props.match.params.config;
-    const url_state = url_state_selector(config_str);
+  constructor(){
+    super();
     this.state = {
-      loading: !!(url_state.table),
-      config_str,
-      url_state,
+      loading: true,
+      config_str: null,
+      url_state: null,
     }
   }
   loadDeps({table}){
@@ -402,6 +400,18 @@ export class ReportBuilder extends React.Component {
       });
     });
   }
+  static getDerivedStateFromProps(nextProps, prevState){
+    const config_str = nextProps.match.params.config;
+    const url_state = url_state_selector(config_str);
+
+    return {
+      loading: _.isNull(prevState.config_str) ||
+        _.isNull(prevState.url_state) ||
+        (url_state.table && prevState.url_state.table !== url_state.table),
+      config_str,
+      url_state,
+    };
+  }
   componentDidMount(){
     const { url_state } = this.state;
     if(url_state.table){
@@ -410,16 +420,6 @@ export class ReportBuilder extends React.Component {
   }
   shouldComponentUpdate(nextProps, nextState){
     return (this.state.loading !== nextState.loading) || (this.state.config_str !== nextState.config_str);
-  }
-  static getDerivedStateFromProps(nextProps, prevState){
-    const config_str = nextProps.match.params.config;
-    const url_state = url_state_selector(config_str);
-
-    return {
-      loading: (url_state.table && prevState.url_state.table !== url_state.table),
-      config_str,
-      url_state,
-    };
   }
   componentDidUpdate(){
     if (this.state.loading){
