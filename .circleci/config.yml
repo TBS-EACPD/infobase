@@ -1,4 +1,7 @@
-gcloud_auth: &gcloud_auth
+# Comments used for documentation, ALWAYS KEEP THEM UP TO DATE (that or remove them)
+
+# yaml fragment for auth using env var securely stored in CircleCI, needed to pull our GCloud hosted images
+gcloud_auth: &gcloud_auth 
   auth:
     username: _json_key
     password: $GCLOUD_JSON_AUTH
@@ -7,13 +10,24 @@ gcloud_auth: &gcloud_auth
 version: 2
 jobs:
 
+  # Build job steps:
+  #  1) Checkout project from repo
+  #  2) Node module sub-steps:
+  #    2.1) restore cached node modules if a cache matches the current package-lock.json
+  #    2.2) if no cache restored then node_modules dir not present, in which case we run an npm ci
+  #    2.3) cache the current node modules by the package-lock.json
+  #  3) Build sub-steps:
+  #    3.1) check cached builds by branch and revision number, restore if it exists
+  #    3.2) for each of base and the two prod builds, run only if the files they create are missing
+  #    3.3) cache the build by branch and revision number
+  #  4) Persist everything (project, node_modules, and build) to the workspace, to be available in other jobs in the work flow run
+  # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   build:
     docker:
       - image: gcr.io/ib-api-first/ib-client-ci-build:latest
         <<: *gcloud_auth
     steps:
       - checkout
-      # Download and cache dependencies
       - restore_cache:
           keys:
             - ib-client-dependencies-{{ checksum "package-lock.json" }}
@@ -45,6 +59,11 @@ jobs:
           paths:
             - ./*
   
+  # Test job steps:
+  #  1) mount workspace (meaning this job must be run in a workflow where it is proceeded by a build job)
+  #  2) run the ci_serve command from package.json (start a localhost server on the container)
+  #  3) run the ci_test command from package.json (use testcafe and headless chromium to visit the build on the container, verify that the homepages all load)
+  # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   test:
     docker:
       - image: gcr.io/ib-api-first/ib-client-ci-test:latest
@@ -58,6 +77,12 @@ jobs:
           background: true
       - run: npm run ci_test
   
+  # Deploy job steps:
+  #  1) mount workspace (meaning this job must be run in a workflow where it is proceeded by a build job)
+  #  2) make ./.circleci/authenticate-gcloud.sh executable
+  #  3) execute ./.circleci/authenticate-gcloud.sh (authenticate with google cloud using env variable securely stored with CircleCI)
+  #  4) rsync the built IB to the InfoBase static bucket
+  # Note: the image used for this job is provided by google
   deploy:
     docker:
       - image: google/cloud-sdk:slim
@@ -68,6 +93,9 @@ jobs:
       - run: ./.circleci/authenticate-gcloud.sh
       - run: gsutil -m rsync -d -r build/InfoBase gs://ib-static-bucket/InfoBase
 
+
+# One workflow that runs all three jobs (build -> test -> deploy), each requiring the previous to have passed
+# Note that deploy is filtered by branch to only run on master
 workflows:
   version: 2
   build_test_deploy:
