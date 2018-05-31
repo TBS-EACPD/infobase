@@ -257,7 +257,7 @@ const trivial_text_maker = _create_text_maker(combined_global_bundle);
 
 const _text_maker = _create_text_maker(template_store);
 function text_maker(){
-  debugger;
+  // debugger;
   return _text_maker(...arguments);
 }
 

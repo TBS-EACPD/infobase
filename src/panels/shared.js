@@ -1,7 +1,8 @@
 exports = module.exports
-const {text_maker, run_template } = require( "../models/text");
+const {create_text_maker, text_maker, run_template } = require( "../models/text");
 const {formats} = require('../core/format.js');
 const {PanelGraph, layout_types} = require("../core/PanelGraph.js");
+const { Panel, StdPanel } = require('./panel-components.js');
 const { reactAdapter } = require('../core/reactAdapter');
 const { 
   HeightClipper,
@@ -26,8 +27,10 @@ exports.rpb_link = require('../rpb/rpb_link.js').rpb_link;
 exports.Subject = require("../models/subject");
 exports.formats = formats;
 exports.text_maker = text_maker; 
+exports.create_text_maker = create_text_maker;
 exports.run_template = run_template;
 exports.PanelGraph = PanelGraph;
+exports.StdPanel = StdPanel;
 exports.layout_types = layout_types;
 exports.years = require("../models/years.js").years;
 exports.business_constants = require('../models/businessConstants.js'),

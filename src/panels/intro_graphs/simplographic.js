@@ -1,12 +1,15 @@
+const simplographic_text = require("./simplographic.yaml");
+
 const {
   Subject: {
     Gov,
     Dept,
   },
+  create_text_maker,
   PanelGraph,
   reactAdapter,
   util_components: {
-    TextMaker,
+    TM: StandardTM,
   },
 } = require("../shared");
 
@@ -19,8 +22,9 @@ const {
   ResultCounts,
 } = require('../../models/results.js');
 
+const tmf = create_text_maker(simplographic_text);
+const TM = props => <StandardTM tmf={tmf} {...props} />;
 
-require("./simplographic.ib.yaml");
 
 new PanelGraph({
   level: 'gov',
@@ -150,8 +154,8 @@ new PanelGraph({
           </div>
         </div>
         <section className='lg-grid-panel70' style={{flexDirection: 'column'}}>
-          <header className="h2 mrgn-tp-sm" style={{textAlign: window.is_mobile ? 'center' : 'inherit'}}> <TextMaker text_key={props.title_key}/> </header>
-          <TextMaker el="p" text_key={props.text_key}  args={big_info} />
+          <header className="h2 mrgn-tp-sm" style={{textAlign: window.is_mobile ? 'center' : 'inherit'}}> <TM k={props.title_key}/> </header>
+          <TM el="p" k={props.text_key}  args={big_info} />
         </section>
       </div>;
     };

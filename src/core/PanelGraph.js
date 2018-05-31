@@ -179,6 +179,33 @@ class PanelGraph {
   
 
   }
+
+  get_panel_title(info){
+    let title_text;
+    let { title } = this;
+    if(_.isFunction(title)){
+      return title(info);
+    } else {
+      if(!title){
+        console.warn(`unset title for panel: ${this.key}`);
+        title = "dummy_text";
+      }
+      return text_maker(title,info);
+    }
+  }
+
+  get_panel_text(info){
+    const { text } = this;
+    if(_.isFunction(text)){
+
+    } else {
+      
+    }
+    const text_to_use = this.text || [];
+    [].concat(text_to_use)
+
+
+  }
   
   render(container, calculations, options={}) {
     const {subject, info}  = calculations;
@@ -198,12 +225,10 @@ class PanelGraph {
     const panel = PANEL.panel(panel_args);
     //allow default titles and text in case multiple levels want the same title
     //TODO: dummy text fallback is for quick development ONLY
-    const title = this.title || "dummy_text";
-    const text_to_use = this.text || [];
+    const title = this.get_panel_title(info);
+    panel.areas().title.html(text_maker(title,info));
 
-    if (title) {
-      panel.areas().title.html(text_maker(title,info));
-    }
+    const text_to_use = this.text || [];
     [].concat(text_to_use).forEach(text => panel.add_text(text_maker(text,info)));
 
 
