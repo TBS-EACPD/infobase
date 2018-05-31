@@ -149,16 +149,18 @@ const HomeLayout = props => (
                 link_href="#budget-measures/budget-measure"
               />
             </MediaQuery>
-            <MediaQuery maxWidth={991}>
+          </div>     
+          <div className="col-content featured-col-content partition-budget-home-content">
+            <MediaQuery minWidth={992}>
               <VImageCard
-                img_src="svg/partition-budget.svg"
-                title_key="budget_home_title"
-                text_key="budget_home_text"
+                img_src="svg/partition.svg"
+                title_key="partition_home_title"
+                text_key="partition_home_text"
                 link_key="check_home_link"
-                link_href="#budget-measures/budget-measure"
+                link_href="#partition/dept/exp"
               />
             </MediaQuery>
-          </div>     
+          </div>
         </div>
         <div className="fcol-md-5  home-col">
           <header className="h3">
