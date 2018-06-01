@@ -1,19 +1,27 @@
 budget_measures_panel_title:
-  en: TODO
-  fr: TODO
-
-gov_budget_measures_panel_text:
-  en: TODO
-  fr: TODO
-
-dept_budget_measures_panel_text:
-  en: TODO
-  fr: TODO
-
-budget_fund_col_header:
   en: Budget 2018 Funding
   fr: Fonds du budget de 2018
 
+gov_budget_measures_panel_text:
+  transform: [handlebars, markdown]
+  en: |
+    Budget 2018 provided **{{fmt_compact_written total_funding}}** in funding for **2018-19**.
+    This funding comes from **{{measure_count}}** budget measures across **{{chapter_count}}** thematic chapters.  
+      
+    *Maybe some more informative text here? An explanation of the budget/budget measures, or of the budget-estimates alignment process? 
+    Something suggesting users go to the budget measures diagram to learn more? Just a couple sentences.*
+  fr: TODO
+
+dept_budget_measures_panel_text:
+  transform: [handlebars, markdown]
+  en: |
+    Budget 2018 provided **{{fmt_compact_written total_funding}}** in funding to **{{subj_name subject}}** for **2018-19**. 
+    This funding comes from **{{measure_count}}** budget measures across **{{chapter_count}}** thematic chapters.  
+      
+    *Maybe some more informative text here? An explanation of the budget/budget measures, or of the budget-estimates alignment process? 
+    Something suggesting users go to the budget measures diagram to learn more? Just a couple sentences.*
+  fr: TODO
+
 budget_panel_filter_by_chapter:
   en: Filter by Budget Chapter
-  fr: TODO
+  fr: Filtrer par chapitre du budget

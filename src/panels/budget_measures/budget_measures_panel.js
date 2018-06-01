@@ -25,11 +25,26 @@ const {
   A11YTable,
 } = declarative_charts;
 
+const calculate_stats_common = (data) => {
+  const total_funding = _.reduce(data,
+    (total, budget_measure) => total + budget_measure.funds.fund, 
+    0
+  );
 
-const text_keys = {
-  gov: "gov_budget_measures_panel_text",
-  dept: "dept_budget_measures_panel_text",
-};
+  const measure_count = data.length;
+
+  const chapter_count = _.chain(data)
+    .map( budget_measure => budget_measure.chapter_key )
+    .uniq()
+    .value()
+    .length;
+
+  return {
+    total_funding,
+    measure_count,
+    chapter_count,
+  }
+}
 
 const calculate_functions = {
   gov: function(subject, info, options){
@@ -50,7 +65,11 @@ const calculate_functions = {
       .value();
 
     if (!_.isEmpty(all_measures_with_funds_rolled_up)){
-      return {data: all_measures_with_funds_rolled_up};
+      return {
+        data: all_measures_with_funds_rolled_up,
+        subject,
+        info: calculate_stats_common(all_measures_with_funds_rolled_up),
+      };
     } else {
       return false;
     }
@@ -68,7 +87,11 @@ const calculate_functions = {
       .value();
     
     if (!_.isEmpty(org_measures_with_funds_filtered)){
-      return {data: org_measures_with_funds_filtered};
+      return {
+        data: org_measures_with_funds_filtered,
+        subject,
+        info: calculate_stats_common(org_measures_with_funds_filtered),
+      };
     } else {
       return false;
     }
@@ -77,12 +100,12 @@ const calculate_functions = {
 
 const budget_measure_render = function(panel, calculations, options){
 
-  const { graph_args: { data } } = calculations;
+  const { graph_args } = calculations;
 
   const node = panel.areas().graph.node();
 
   reactAdapter.render(
-    <BudgetMeasureHBars data = { data } />,
+    <BudgetMeasureHBars graph_args = { graph_args } />,
     node
   );
 };
@@ -99,7 +122,6 @@ const budget_measure_render = function(panel, calculations, options){
     requires_budget_measures: true,
     footnotes: false,
     title: "budget_measures_panel_title",
-    text: text_keys[level_name],
     source: (subject) => [{
       html: text_maker("budget_measures"),
       href: "#budget-measures/" + (subject.level === "gov" ? "budget-measure" : "dept"),
@@ -109,6 +131,7 @@ const budget_measure_render = function(panel, calculations, options){
   }
 ));
 
+
 class BudgetMeasureHBars extends React.Component {
   constructor(){
     super();
@@ -117,10 +140,26 @@ class BudgetMeasureHBars extends React.Component {
     };
   }
   render(){
-    const { data } = this.props;
+    const { 
+      graph_args: {
+        data,
+        subject,
+        info,
+      },
+    } = this.props;
+    
+    const text_area = <div className = "frow" >
+      <div className = "fcol-md-12 fcol-xs-12 medium_panel_text text">
+        <TextMaker 
+          text_key={ (subject.level === "gov" ? "gov" : "dept") + "_budget_measures_panel_text" } 
+          args={{subject, ...info}} 
+        />
+      </div>
+    </div>;
 
     if(window.is_a11y_mode){
       return <div>
+        { text_area }
         <A11YTable
           table_name = { text_maker("budget_name_header") }
           data = {_.map(data, 
@@ -141,7 +180,7 @@ class BudgetMeasureHBars extends React.Component {
           label_col_header = {text_maker("budget_measure")}
           data_col_headers = {[
             text_maker("budget_chapter"),
-            text_maker("budget_fund_col_header"),
+            text_maker("budget_measures_panel_title"),
           ]}
         />
       </div>;
@@ -199,6 +238,7 @@ class BudgetMeasureHBars extends React.Component {
       .value();
 
     return <div>
+      { text_area }
       <div className = "frow">
         <div className = "fcol-md-12" style = {{ width: "100%" }}>
           <div className = 'centerer'>
