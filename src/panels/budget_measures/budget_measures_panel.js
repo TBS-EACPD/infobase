@@ -94,7 +94,7 @@ const budget_measure_render = function(panel, calculations, options){
     title: "budget_measures_panel_title",
     text: text_keys[level_name],
     source: (subject) => [{
-      html: text_maker("budget_measure"),
+      html: text_maker("budget_measures"),
       href: "#budget-measures/" + (subject.level === "gov" ? "budget-measure" : "dept"),
     }],
     calculate: calculate_functions[level_name],
@@ -186,55 +186,27 @@ class BudgetMeasureHBars extends React.Component {
       })
       .value()
 
-    const legend_items = selected_filter !== 'all' ?
-      graph_ready_data.map( 
-        ({label, key}) => ({
-          active: true,
-          label: label,
-          id: key,
-          color: colors(label),
-        })
-      ) :
-      _.chain(graph_ready_data)
-        .flatMap( group => group.data)
-        .map(
-          ({label, key}) => ({
-            active: true,
-            label: label,
-            id: key,
-            color: colors(label),
-          })
-        )
-        .value();
-
     return <div>
       <div className="frow">
-        <div className="fcol-md-4" style={{ width: "100%" }}>
-          <label>
-            <TextMaker text_key="budget_panel_filter_by_chapter" />
-            <Select 
-              selected={selected_filter}
-              options={_.map(filter_options, ({name, id}) => ({ 
-                id,
-                display: name,
-              }))}
-              onSelect={id => this.setState({selected_filter: id}) }
-              style={{
-                display: 'block',
-                margin: '10px auto',
-              }}
-              className="form-control"
-            />
-          </label>
-          { !_.isEmpty(legend_items) &&
-            <div className="well legend-container">
-              <GraphLegend
-                items={legend_items}  
+        <div className="fcol-md-12" style={{ width: "100%" }}>
+          <div className='centerer'>
+            <label>
+              <TextMaker text_key="budget_panel_filter_by_chapter" />
+              <Select 
+                selected={selected_filter}
+                options={_.map(filter_options, ({name, id}) => ({ 
+                  id,
+                  display: name,
+                }))}
+                onSelect={id => this.setState({selected_filter: id}) }
+                style={{
+                  display: 'block',
+                  margin: '10px auto',
+                }}
+                className="form-control"
               />
-            </div>
-          }
-        </div> 
-        <div className="fcol-md-8" style={{ width: "100%" }}>
+            </label>
+          </div>
           <div 
             style={{
               maxHeight: '500px',
