@@ -9,7 +9,8 @@ budget_name:
   fr: le budget de 2018
 
 budget_route_year:
-  text: 2018-19
+  en: 2018-19
+  fr: 2018-2019
 
 budget_measure:
   en: Budget Measure
@@ -37,7 +38,7 @@ budget_route_top_text:
     These measures, totalling **$7.04 billion** in **2018-19**, are also listed in [Main Estimates 2018-19: Sources and Uses of the Budget Implementation vote by Department](https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates/2018-19-estimates/2018-19-sources-uses-budget-implementation-vote-department.html), thereby establishing a clear link between the Budget Plan and the Main Estimates.  
   fr: |
     Présenté ci-dessous sont les nouvelles mesures de dépenses figurant au <a href="https://www.budget.gc.ca/2018/docs/plan/anx-02-fr.html#41-Mesures-strategiques-et-investissements-du-budget-par-ministere-et-organisme-(selon-la-comptabilite-de-caisse)">tableau A2.11 du plan budgétaire de 2018</a>.
-    Ces mesures, totalisant **7,04 milliards** de dollars en **2018-19**, se retrouvent également dans [Budget principal des dépenses de 2018-2019 : Provenance et utilisation du crédit d’exécution du budget par ministère](https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal/2018-19-budget-depenses/2018-2019-provenance-utilisation-credit-execution-budget-ministere.html), établissant ainsi un lien clair entre le Plan budgétaire et le Budget principal des dépenses.  
+    Ces mesures, totalisant **7,04 milliards** de dollars en **2018-2019**, se retrouvent également dans [Budget principal des dépenses de 2018-2019 : Provenance et utilisation du crédit d’exécution du budget par ministère](https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal/2018-19-budget-depenses/2018-2019-provenance-utilisation-credit-execution-budget-ministere.html), établissant ainsi un lien clair entre le Plan budgétaire et le Budget principal des dépenses.  
 
 other_budget_measure_chapter_description:
   en: Other Budget 2018 Measures, not included in budget chapters.
