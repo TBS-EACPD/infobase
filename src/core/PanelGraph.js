@@ -69,7 +69,20 @@ class PanelGraph {
     graphs[full_key] = instance;
   }
 
+  new_api_warnings(){
+    if(this.is_old_api || !DEV){
+      return;
+    }
+    _.each(["layout_def", "text", "title"], property => {
+      if(this[property]){
+        console.warning(`PanelGraph redundant property: ${property}`);
+      }
+    })
+  }
+
   constructor(def){
+    this.new_api_warnings();
+    
     //note that everything attached to this is read-only
     //Additionally, every graph only has one object like this, so this object contains nothing about 
 
@@ -194,15 +207,31 @@ class PanelGraph {
   }
   render(){
     if(this.is_old_api){
-      return this.old_api_render(...arguments);
+      return this._old_api_render(...arguments);
     } else {
-      return this.new_render(...arguments);
+      return this._new_render(...arguments);
     }
   }
-  new_render(){
+  _new_render(container, calculations, options={}){
+    const { subject } = calculations;
+    const render_func = this._inner_render;
+    const footnotes = this.get_footnotes(subject);
+    const sources = this.get_source(subject);
 
+    const react_el = render_func({
+      calculations,
+      footnotes,
+      sources,        
+    });
+    
+    reactAdapter.render(
+      react_el,
+      container.node(),
+    );
+
+    
   }
-  old_api_render(container, calculations, options={}) {
+  _old_api_render(container, calculations, options={}) {
     const {subject, info}  = calculations;
     const render_func = this._inner_render;
     const layout_def = this.layout;
