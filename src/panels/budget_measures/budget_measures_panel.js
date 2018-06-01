@@ -49,7 +49,11 @@ const calculate_functions = {
       .sortBy(budget_measure => -budget_measure.funds.fund)
       .value();
 
-    return {data: all_measures_with_funds_rolled_up};
+    if (!_.isEmpty(all_measures_with_funds_rolled_up)){
+      return {data: all_measures_with_funds_rolled_up};
+    } else {
+      return false;
+    }
   },
   dept: function(subject, info, options){
     const org_id_string = subject.id.toString();
@@ -62,8 +66,12 @@ const calculate_functions = {
       }))
       .sortBy(measure => -measure.funds.fund)
       .value();
-
-    return {data: org_measures_with_funds_filtered};
+    
+    if (!_.isEmpty(org_measures_with_funds_filtered)){
+      return {data: org_measures_with_funds_filtered};
+    } else {
+      return false;
+    }
   },
 };
 
