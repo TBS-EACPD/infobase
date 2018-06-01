@@ -31,6 +31,7 @@
   flex-direction: column;
   align-items: stretch;
   min-height: 1px; /* IE11 image bug */
+  padding: 15px;
 }
 
 .h-img-card__left { 
@@ -66,16 +67,15 @@
 }
 
 .h-img-card__img__ellen {
-  width: 100vw;
+  width: 80vw;
   max-width: none;
   transform: translate(-50%,0);
   position: relative;
   min-height: 1px;
-  padding: 15px;
-  margin: auto;
   left: 50%;
   opacity: 0.5;
-  margin: -19% 0;
+  margin-top: -10%;
+  margin-bottom: -5%;
 }
 
 .h-img-card__right {
@@ -94,7 +94,8 @@
   text-align: left;
   width: 100%;
   max-width: 100%;
-  padding: 20px 8px 10px 25px;
+  padding: 10px 8px 10px 15px;
+  text-transform: uppercase;
 }
 
 .h-img-card__text {
@@ -104,7 +105,7 @@
   width: 100%;
   max-width: 100%;
   text-align: left;
-  padding: 0px 0px 8px 25px;
+  padding: 0px 0px 8px 15px;
 }
 
 .h-img-card__bottom-right {
