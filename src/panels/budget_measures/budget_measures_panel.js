@@ -108,29 +108,33 @@ class BudgetMeasureHBars extends React.Component {
       selected_filter: 'all',
     };
   }
-  
   render(){
     const { data } = this.props;
 
     if(window.is_a11y_mode){
       return <div>
         <A11YTable
-          table_name={ text_maker("budget_name_header") }
-          data={_.map(data, (budget_measure_item) => ({
-            label: budget_measure_item.name,
-            data: [
-              <div key={ budget_measure_item.id + "col2" } >
-                { budget_chapters[budget_measure_item.chapter_key].text }
-              </div>,
-              <Format 
-                key={ budget_measure_item.id + "col3" } 
-                type="compact1" 
-                content={ budget_measure_item.funds.fund } 
-              />,
-            ],
-          }))}
-          label_col_header={text_maker("budget_measure")}
-          data_col_headers={[text_maker("budget_chapter"), text_maker("budget_fund_col_header")]}
+          table_name = { text_maker("budget_name_header") }
+          data = {_.map(data, 
+            (budget_measure_item) => ({
+              label: budget_measure_item.name,
+              data: [
+                <div key = { budget_measure_item.id + "col2" } >
+                  { budget_chapters[budget_measure_item.chapter_key].text }
+                </div>,
+                <Format 
+                  key = { budget_measure_item.id + "col3" } 
+                  type = "compact1" 
+                  content = { budget_measure_item.funds.fund } 
+                />,
+              ],
+            })
+          )}
+          label_col_header = {text_maker("budget_measure")}
+          data_col_headers = {[
+            text_maker("budget_chapter"),
+            text_maker("budget_fund_col_header"),
+          ]}
         />
       </div>;
     }
@@ -184,26 +188,28 @@ class BudgetMeasureHBars extends React.Component {
             .value();
         }
       })
-      .value()
+      .value();
 
     return <div>
-      <div className="frow">
-        <div className="fcol-md-12" style={{ width: "100%" }}>
-          <div className='centerer'>
+      <div className = "frow">
+        <div className = "fcol-md-12" style = {{ width: "100%" }}>
+          <div className = 'centerer'>
             <label>
               <TextMaker text_key="budget_panel_filter_by_chapter" />
               <Select 
-                selected={selected_filter}
-                options={_.map(filter_options, ({name, id}) => ({ 
-                  id,
-                  display: name,
-                }))}
-                onSelect={id => this.setState({selected_filter: id}) }
-                style={{
+                selected = {selected_filter}
+                options = {_.map(filter_options, 
+                  ({name, id}) => ({ 
+                    id,
+                    display: name,
+                  })
+                )}
+                onSelect = { id => this.setState({selected_filter: id}) }
+                style = {{
                   display: 'block',
                   margin: '10px auto',
                 }}
-                className="form-control"
+                className = "form-control"
               />
             </label>
           </div>
@@ -217,10 +223,13 @@ class BudgetMeasureHBars extends React.Component {
             <StackedHbarChart
               font_size="12px"
               bar_height={60} 
-              data={graph_ready_data}
-              formater={formats.compact1}
-              colors={colors}
-              bar_label_formater={ ({ label, chapter_key, ref_id }) => `<a href="${BudgetMeasure.make_budget_link(chapter_key, ref_id)}"> ${label} </a>` }
+              data = {graph_ready_data}
+              formater = {formats.compact1}
+              colors = {colors}
+              bar_label_formater = { 
+                ({ label, chapter_key, ref_id }) => 
+                  `<a href="${BudgetMeasure.make_budget_link(chapter_key, ref_id)}">${label}</a>`
+              }
             />
           </div>
         </div>
