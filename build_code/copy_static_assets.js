@@ -91,6 +91,9 @@ const common_lookups_fr = _.map(
 );
 
 const common_svg = [
+  //home banner
+  'src/home/backbanner.svg',
+
   //top left corner brand
   'src/InfoBase/sig-blk-en.svg',
   'src/InfoBase/sig-blk-fr.svg',

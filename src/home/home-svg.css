@@ -9,3 +9,10 @@
 .results-box:before {
   background-image: url('svg/results.svg');
 }
+.intro-box {
+  background-image:url('svg/backbanner.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  /*parallaxing
+  background-attachment: fixed;*/
+}
