@@ -241,6 +241,7 @@ class BudgetMeasureHBars extends React.Component {
       { text_area }
       <div className = "frow">
         <div className = "fcol-md-12" style = {{ width: "100%" }}>
+          
           <div className = 'centerer'>
             <label>
               <TextMaker text_key="budget_panel_filter_by_chapter" />
@@ -260,6 +261,22 @@ class BudgetMeasureHBars extends React.Component {
                 className = "form-control"
               />
             </label>
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              fontWeight: "700",
+              fontSize: "12px",
+              marginLeft: "20px",
+            }}
+          >
+            <TextMaker 
+              text_key = {
+                selected_filter === 'all' ? 
+                  "budget_chapters" : 
+                  "budget_measures"
+              } 
+            />
           </div>
           <div 
             style={{
