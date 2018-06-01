@@ -161,14 +161,14 @@ class BudgetMeasureHBars extends React.Component {
         label: budget_measure_item.name,
         data: [budget_measure_item.funds.fund],
         chapter_key: budget_measure_item.chapter_key,
+        ref_id: budget_measure_item.ref_id,
       }))
       .thru( mapped_data => {
         if (selected_filter !== 'all'){
           return _.chain(mapped_data)
             .filter(item => item.chapter_key === selected_filter )
             .map( item => ({
-              key: item.key,
-              label: item.label,
+              ...item,
               data: [item],
             }))
             .value();
@@ -179,6 +179,7 @@ class BudgetMeasureHBars extends React.Component {
               key,
               label: budget_chapters[key].text,
               data: group,
+              chapter_key: key,
             }))
             .value();
         }
@@ -219,7 +220,7 @@ class BudgetMeasureHBars extends React.Component {
               data={graph_ready_data}
               formater={formats.compact1}
               colors={colors}
-              bar_label_formater={ ({ label }) => `${label}` }
+              bar_label_formater={ ({ label, chapter_key, ref_id }) => `<a href="${BudgetMeasure.make_budget_link(chapter_key, ref_id)}"> ${label} </a>` }
             />
           </div>
         </div>
