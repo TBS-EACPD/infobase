@@ -21,7 +21,6 @@ const {
 } = util_components;
 
 const {
-  GraphLegend,
   StackedHbarChart,
   A11YTable,
 } = declarative_charts;
