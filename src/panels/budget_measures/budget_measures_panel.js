@@ -19,6 +19,7 @@ const { budget_chapters } = business_constants;
 const {
   TextMaker,
   Select,
+  Format,
 } = util_components;
 
 const {
@@ -48,7 +49,7 @@ const calculate_functions = {
           .fromPairs()
           .value(),
       }))
-      .sortBy(budget_measure => -budget_measure.fund)
+      .sortBy(budget_measure => -budget_measure.funds.fund)
       .value();
 
     return {data: all_measures_with_funds_rolled_up};
@@ -70,17 +71,15 @@ const calculate_functions = {
 };
 
 const budget_measure_render = function(panel, calculations, options){
-  // TODO anything left to do with the data, basically the common part of the level-specific calculates prob
 
-  const { data } = calculations;
+  const { graph_args: { data } } = calculations;
 
   const node = panel.areas().graph.node();
 
   reactAdapter.render(
-    <BudgetMeasureHBars
-    />,
+    <BudgetMeasureHBars data = { data } />,
     node
-  ); 
+  );
 };
 
 
@@ -114,10 +113,35 @@ class BudgetMeasureHBars extends React.Component {
   }
   
   render(){
-    //const filter_options = [] //TODO, filter by chapter or all, in all group by chapter otherwise give each item its own bar? May not be worth enabling for gov level
-    //
-    //const { selected_filter } = this.state;
-    //
+    const { data } = this.props;
+
+    if(!window.is_a11y_mode){
+      return <div>
+        <A11YTable
+          table_name={ text_maker("budget_name_header") }
+          data={_.map(data, (budget_measure_item) => ({
+            label: budget_measure_item.name,
+            data: [
+              <div key={ budget_measure_item.id + "col2" } >
+                { budget_chapters[budget_measure_item.chapter_key].text }
+              </div>,
+              <Format 
+                key={ budget_measure_item.id + "col3" } 
+                type="compact1" 
+                content={ budget_measure_item.funds.fund } 
+              />,
+            ],
+          }))}
+          label_col_header={text_maker("budget_measure")}
+          data_col_headers={[text_maker("budget_chapter"), text_maker("budget_fund_col_header")]}
+        />
+      </div>;
+    }
+
+    const { selected_filter } = this.state;
+    
+    const filter_options = [] //TODO, filter by chapter or all, in all group by chapter otherwise give each item its own bar? May not be worth enabling for gov level
+
     //const { mapping } = _.find(arrangements, {id: selected} );
     //
     //const colors = infobase_colors();
@@ -134,10 +158,6 @@ class BudgetMeasureHBars extends React.Component {
     //  id: label,
     //  color: colors(label),
     //}));
-    //
-    //if(window.is_a11y_mode){
-    //  return; // Build a table out of the data
-    //}
     //
     //return <div>
     //  <div style={{paddingBottom:'10px'}} className='center-text font-xlarge'>
@@ -189,6 +209,5 @@ class BudgetMeasureHBars extends React.Component {
     //    </div>
     //  </div> 
     //</div>;
-    return <div/>;
   }
 }

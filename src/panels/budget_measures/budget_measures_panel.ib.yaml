@@ -7,5 +7,9 @@ gov_budget_measures_panel_text:
   fr: TODO
 
 dept_budget_measures_panel_text:
- en: TODO
- fr: TODO
+  en: TODO
+  fr: TODO
+
+budget_fund_col_header:
+  en: Budget 2018 Funding
+  fr: Fonds du budget de 2018
