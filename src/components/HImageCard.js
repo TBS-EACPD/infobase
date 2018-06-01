@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import './HImageCard.scss';
 
 import { TM } from './TextMaker.js';
@@ -9,6 +10,7 @@ const HImageCard = ({
   link_key,
   link_href,
   text_args,
+  is_ellen_image,
 }) => (
   <div className="h-img-card col-content-child">
     <div className="h-img-card__left-container">
@@ -27,14 +29,16 @@ const HImageCard = ({
         <a className="h-img-card__img-link" href={link_href}>
           <img
             src={`${CDN_URL}/${img_src}`}
-            className="h-img-card__img" 
+            className={classNames("h-img-card__img", is_ellen_image && "h-img-card__img__ellen")}
           />
         </a>
       </div>
       <div className="h-img-card__bottom-right">
-        <a href={link_href}>
-          <TM k={link_key}/>
-        </a>
+        <div className="h-img-card__link">
+          <a href={link_href}>
+            <TM k={link_key}/>
+          </a>
+        </div>
       </div>
     </div>
     }

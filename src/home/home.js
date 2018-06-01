@@ -192,62 +192,31 @@ const HomeLayout = props => (
           </section>  
         </div>
       </div>
-      <div className="intro-box" style={{position:"relative"}}>
-        <div className="container">
-          <h1> <TM k="welcome" /> </h1>
-          <h2> <TM k="home_sub_title" /> </h2>
-        </div>
-      </div>
-      <div className="external-row-descriptor">
-        <TM k="home_featured_row_title" />
-      </div>
-      <div className="equal-height-row equal-height-row--home-row">
-        <div aria-hidden={true} className="equal-height-col is-1-third">
-        </div>
-      </div>
-      <div className="equal-height-row equal-height-row--home-row">
-        <div aria-hidden={true} className="equal-height-col is-1-third">
-          <div className="col-content featured-col-content">
-            <VImageCard
-              img_src="svg/partition.svg"
-              title_key="partition_home_title"
-              text_key="partition_home_text"
-              link_key="check_home_link"
-              link_href="#partition/dept/exp"
-            />
-          </div>
-        </div>
-        <div aria-hidden={true} className="equal-height-col is-1-third">
-          <div className="col-content featured-col-content">
-            <VImageCard
-              img_src="svg/bubbles.svg"
-              title_key="planet_home_title"
-              text_key="planet_home_text"
-              link_key="check_home_link"
-              link_href="#explore-dept"
-            />
-          </div>
-        </div>
-        <div className="equal-height-col is-1-third">
-          <section style={{padding:"10px"}} className="col-content featured-col-content">
-            <header className="h3" style={{textAlign:'center', marginTop: "15px", fontWeight: 500}}>
-              <TM k="featured_data_title" />
-            </header>
-            <div style={{margin: 'auto 0'}}> {/* center in between title and bottom */}
-              <ul className="list-group list-group--quick-links">
-                { _.map( props.featured_content_items, item => <FeaturedContentItem key={item.text_key} {...item} /> ) }
-              </ul>
-            </div>
-          </section>
-        </div>
-      </div>
+    </div>
 
-      <div className="external-row-descriptor">
-        <TM k="home_explore_row_title" />
+            
+    <div className="home-bg" style={{position:"relative"}}>
+      <div className="container">
+        <HImageCard
+          img_src="svg/partition.svg"
+          title_key="partition_home_title"
+          text_key="partition_home_text"
+          link_key="check_home_link"
+          link_href="#partition/dept/exp"
+          is_ellen_image
+        />
       </div>
+    </div>
+
+      {/*part 3*/}
+
+      {/*<div className="external-row-descriptor">
+        <TM k="home_explore_row_title" />
+              </div>*/}
+    <div className="container">
       <div className='equal-height-row equal-height-row--home-row'>
         <div className="equal-height-col is-1-third">
-          <section className="col-content explore-col-content">
+          <section className="explore-col-content">
             <VImageCard
               img_src="svg/explorer.svg"
               title_key="explorer_home_title"
@@ -258,7 +227,7 @@ const HomeLayout = props => (
           </section>
         </div>
         <div className="equal-height-col is-1-third">
-          <section className="col-content explore-col-content">
+          <section className="explore-col-content">
             <VImageCard
               img_src="svg/builder.svg"
               title_key="home_build_a_report"
@@ -269,7 +238,40 @@ const HomeLayout = props => (
           </section>
         </div>
         <div className="equal-height-col is-1-third">
-          <section className="col-content explore-col-content">
+          <section className="explore-col-content">
+            <VImageCard
+              img_src="svg/structure.svg"
+              title_key="igoc_home_title"
+              text_key="igoc_home_desc"
+              link_key="start_search_link"
+              link_href="#igoc"
+            />
+          </section>
+        </div>
+        <div className="equal-height-col is-1-third">
+          <section className="explore-col-content">
+            <VImageCard
+              img_src="svg/structure.svg"
+              title_key="igoc_home_title"
+              text_key="igoc_home_desc"
+              link_key="start_search_link"
+              link_href="#igoc"
+            />
+          </section>
+        </div>
+        <div className="equal-height-col is-1-third">
+          <section className="explore-col-content">
+            <VImageCard
+              img_src="svg/structure.svg"
+              title_key="igoc_home_title"
+              text_key="igoc_home_desc"
+              link_key="start_search_link"
+              link_href="#igoc"
+            />
+          </section>
+        </div>
+        <div className="equal-height-col is-1-third">
+          <section className="explore-col-content">
             <VImageCard
               img_src="svg/structure.svg"
               title_key="igoc_home_title"

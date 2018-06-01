@@ -65,6 +65,19 @@
 
 }
 
+.h-img-card__img__ellen {
+  width: 100vw;
+  max-width: none;
+  transform: translate(-50%,0);
+  position: relative;
+  min-height: 1px;
+  padding: 15px;
+  margin: auto;
+  left: 50%;
+  opacity: 0.5;
+  margin: -19% 0;
+}
+
 .h-img-card__right {
   display: flex;
   width: 100%;
@@ -95,17 +108,24 @@
 }
 
 .h-img-card__bottom-right {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  justify-content: flex-end;
+}
+
+.h-img-card__link {
+  color: white;
   text-align: center;
   font-size: 1em;
   padding: 20px 0 20px 0;
-  background-color: black;
+  background-color: #FF5e59;
   border-radius: 10px;
-  
-  display: flex;
   width: 30%;
   max-width: 30%;
-  flex-direction: column;
-  justify-content: flex-end;
-  flex: 1;
-  
+  margin-right: 25px;
+
+  &> a {
+    color:white;
+  }
 }

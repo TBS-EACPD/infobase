@@ -1,6 +1,8 @@
 @import '../common_css/common-variables';
 
 
+$home-bg-color: #284162;
+
 .home-root {
   /* this block makes home break out of the .container */
   width: 100vw;
@@ -15,19 +17,16 @@
   
 }
 
-
-
-
 .intro-box {
   padding: 30px 0 0;
 
   // background-color:#215185;
-  background-color:#284162;
+  background-color:$home-bg-color;
   color: white;
   position: relative;
   margin-bottom: 24rem;
   border-bottom: 10px solid #FF5E59;
-  height: 280px;
+  height: 260px;
 }
 
 
@@ -60,9 +59,8 @@
 @media (min-width:992px){
   .equal-height-row {
     display: flex;
-    flex-direction: row;
-    align-items: stretch;    
-    justify-content: space-between;
+    flex-direction: row;    
+    flex-wrap: wrap;
   }
   .equal-height-row--home-row {
     margin-top: 15px;
@@ -73,7 +71,7 @@
   }
 
   .equal-height-col.is-1-third {
-    flex: 1 1 33%;
+    flex: 1 1 30%;
   }
 
   .equal-height-col.is-2-thirds {
@@ -81,7 +79,7 @@
   }
 
   .equal-height-col:not(:last-child):not(.no-gutter){
-    margin-right: 15px; 
+    margin-right: 10px; 
   }
 
   .equal-height-col {
@@ -323,6 +321,7 @@
   font-size: 2rem;
   line-height: 3rem;
   text-align: center;
+  text-transform: uppercase;
 }
 
 .TrinityItem__Img {
@@ -340,4 +339,23 @@ $col_gutter_width: 2rem;
     padding-right: $col_gutter_width;
     padding-left: $col_gutter_width;
   }
-} 
+}
+
+.long-box{
+  width: 100vw;
+  transform: translate(-50%, 0);
+  left: 50%;
+
+  padding: 30px 0 0 40px;
+
+  // background-color:#215185;
+  background-color:$home-bg-color;
+  position: relative;
+  margin-bottom: 6rem;
+
+}
+
+.home-bg {
+  background-color: $home-bg-color;
+}
+

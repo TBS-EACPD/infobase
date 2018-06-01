@@ -31,6 +31,8 @@
   justify-content: stretch;
   width: 100%;
   max-width: 100%;
+  background-color: #D9D9D9;
+  border-radius: 10px;
 }
 
 .v-img-card__top-container {
@@ -50,7 +52,6 @@
   flex: auto;
   width: 100%;
   max-width: 100%;
-  border-bottom: 1px solid #333;
 }
 
 .v-img-card__img {
