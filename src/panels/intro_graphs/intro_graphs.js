@@ -1,19 +1,11 @@
 const {
-  text_maker,
   PanelGraph,
   util_components: {
-    TextMaker,
     AutoAccordion,
   },
 } = require("../shared"); 
 
-
-require("./intro_lang.ib.yaml");
-
-require("./financial_intro.ib.yaml");
-require("./people_intro.ib.yaml");
-require("./results_intro.ib.yaml");
-require("./tagging_intro.ib.yaml");
+const { text_maker, TM } = require('./intro_graph_text_provider.js');
 
 require('./simplographic.js');
 require('./gov_related.js');
@@ -30,8 +22,8 @@ const KeyConceptList = ({ question_answer_keys, args }) => (
     <div className="lg-grid">
       { _.map(question_answer_keys, key =>
         <div key={key} className="grid-row">
-          <div className="lg-grid-panel30 key_concept_term"> <TextMaker text_key={key+"_q"} args={args}/> </div>
-          <div className="lg-grid-panel70 key_concept_def"> <TextMaker text_key={key+"_a"} args={args}/> </div>
+          <div className="lg-grid-panel30 key_concept_term"> <TM k={key+"_q"} args={args}/> </div>
+          <div className="lg-grid-panel70 key_concept_def"> <TM k={key+"_a"} args={args}/> </div>
         </div>
       )}
     </div>
@@ -133,7 +125,7 @@ _.each(['gov', 'dept', 'program', 'crso'], lvl => {
           borderColor: "#16599a",
         }}
       >
-        <TextMaker text_key="dp_coming_soon_title" />
+        <TM k="dp_coming_soon_title" />
       </div>
     ),
   })
@@ -216,7 +208,7 @@ _.each(['gov', 'dept'], lvl => {
           className="alert alert-warning alert--is-bordered large_panel_text"
           style={{ textAlign: "center" }}
         >
-          <TextMaker text_key="march_snapshot_warning" />
+          <TM k="march_snapshot_warning" />
         </div>
       );
     },
@@ -235,7 +227,7 @@ _.each(['gov', 'dept'], lvl => {
         className="alert alert-info alert-no-symbol alert--is-bordered large_panel_text"
         style={{ textAlign: "center" }}
       >
-        <TextMaker text_key="ppl_open_data_info" />
+        <TM k="ppl_open_data_info" />
       </div>
     ),
   });

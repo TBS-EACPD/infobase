@@ -2,7 +2,7 @@ exports = module.exports
 const {create_text_maker, text_maker, run_template } = require( "../models/text");
 const {formats} = require('../core/format.js');
 const {PanelGraph, layout_types} = require("../core/PanelGraph.js");
-const { Panel, StdPanel } = require('./panel-components.js');
+const { Panel, StdPanel, TextPanel } = require('./panel-components.js');
 const { reactAdapter } = require('../core/reactAdapter');
 const { 
   HeightClipper,
@@ -31,6 +31,7 @@ exports.create_text_maker = create_text_maker;
 exports.run_template = run_template;
 exports.PanelGraph = PanelGraph;
 exports.StdPanel = StdPanel;
+exports.TextPanel = TextPanel;
 exports.Panel = Panel;
 exports.layout_types = layout_types;
 exports.years = require("../models/years.js").years;
@@ -45,6 +46,7 @@ exports.infograph_href_template = require('../infographic/routes.js').infograph_
 exports.glossary_href = require('../link_utils.js').glossary_href;
 exports.Results = require('../models/results.js');
 exports.Statistics = require('../core/Statistics.js').Statistics;
+exports.TM = TM;
 
 const {
   Format,

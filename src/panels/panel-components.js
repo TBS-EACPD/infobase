@@ -6,11 +6,12 @@ import { Details } from '../components/Details.js';
 
 export const Panel = ({ title, sources, footnotes, children }) => (
   <section className='panel panel-info mrgn-bttm-md'>
-    <header className='panel-heading'>
+    {title && <header className='panel-heading'>
       <div className='panel-title'>
         <header className="panel-title"> {title} </header>
       </div>
     </header>
+    }
     <div className='panel-body'>
       { children }
       <div className="mrgn-tp-md" />
@@ -111,3 +112,24 @@ StdPanel.propTypes = {
 }
 
 export { Col, StdPanel};
+
+
+
+/*
+  shorthand for 
+    <Panel>
+      <div className="medium_panel_text">
+        {children}
+      </div>
+    </Panel>
+*/
+export const TextPanel = props => {
+  const { children } = props;
+  const filtered_props = _.omit(props, "children");
+  const new_children = <div className="medium_panel_text"> {children} </div>;
+  return (
+    <Panel {...filtered_props}>
+      {new_children}
+    </Panel>
+  );
+}

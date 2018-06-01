@@ -165,35 +165,7 @@ what_is_fy_a:
   fr: |
     L’exercice du Gouvernement du Canada s'étend du 1er avril au 31 mars. Ainsi, pour l’exercice commençant le 1er avril 2017 et se terminant le 31 mars 2018, l’InfoBase va présenter l’année comme 2017-2018.
 
-what_are_ftes_q:
-  en: What are Full-time Equivalents (FTEs)?
-  fr: Qu’est-ce qu’un équivalent temps plein (ETP)?
-  
-what_are_ftes_a:
-  transform: [handlebars, markdown]
-  en: |
-    Full-time equivalent (FTE) measures the extent to which an employee represents a full person-year charge against a departmental budget. FTEs are calculated as a ratio of assigned hours of work to scheduled hours of work, as set out in collective agreements. For term and seasonal employees, the FTE calculation is also adjusted for the proportion of paid weeks in a year.
-  fr: |
-    Les équivalents temps plein (ETP) sont la mesure utilisée pour représenter une année-personne complète d'un employé dans le budget ministériel. Les ETP sont calculés en fonction du coefficient des heures de travail assignées et des heures de travail prescrites, tel que stipulé dans les conventions collectives. Dans le cas des employés nommés pour une période déterminée et des employés saisonniers, le calcul des ETP est rajusté en fonction de la proportion des semaines payées dans une année.
 
-
-different_org_names_static_q:
-  en: |
-    Why does the InfoBase sometimes use different names for the same organization? 
-  fr: |
-    Pourquoi une seule organisation a parfois deux noms dans l’InfoBase ?
-
-
-different_org_names_static_a:
-  transform: [handlebars, markdown]
-  en: |
-    In some cases, the InfoBase will display two names for an organization—a legal title and an applied title. An organization’s legal title is the name that appears in its enabling legislation (act), proclamation, order in council, or other instrument used to create a branch of government. The applied name is used in communications and is therefore the title that most people associate with the organization.
-  fr: |
-    Dans certain cas l’InfoBase utilise deux noms pour une seule organisation—l’appellation légale et le titre d’usage. L’appellation légale est le nom figurant dans la loi d’habilitation, la proclamation, le décret ou tout autre instrument utilisé pour créer un organisme gouvernemental. Le titre d’usage est utilisé pour toutes les communications et il est donc plus souvent associé à l’organisation.
-  
-what_are_SOut_q:
-  en: What are Strategic Outcomes?
-  fr: Qu’est-ce qu’un Résultat Stratégique ?
   
 why_cant_i_see_prov_spend_q:
   en: |
@@ -208,24 +180,3 @@ why_cant_i_see_prov_spend_a:
   fr: |
     L'InfoBase contient des renseignements sur toutes les organisations qui reçoivent des crédits du Parlement du Canada. Donc, il ne contient pas les dépenses d'autres ordres du gouvernement. À des fins de convivialité, le terme "gouvernement" et "dépenses du gouvernement" dans l'InfoBase englobe les dépenses des trois pouvoirs indépendant du système gouvernemental du gouvernement du Canada, soit les pouvoirs exécutives, législatives et judiciaires, sauf indication contraire.
 
-what_are_SOut_a:
-  transform: [handlebars, markdown]
-  en: |
-    A Strategic Outcome is a long-term and enduring benefit to Canadians that stems from a department's mandate and vision. 
-    It represents the difference a department intends to make for Canadians and should be measurable and within the department's sphere of influence.
-  fr: |
-    Un Résultat Stratégique est un avantage durable à long terme pour les Canadiens qui découle du mandat et de la vision d'un ministère. Il représente un résultat qu’un ministère entend obtenir au profit de la population canadienne, qui devrait être mesurable et devrait s’inscrire dans la sphère d’influence du ministère en question.
-what_are_CR_q:
-  en: What are Core Responsibilities?
-  fr: Qu’est-ce qu’une responsabilité essentielle ?
-  
-what_are_CR_a:
-  transform: [handlebars, markdown]
-  en: |
-    An enduring function or role performed by a department. 
-    The intentions of the department with respect to a Core Responsibility are reflected in one or more related 
-    Departmental Results that the department seeks to contribute to or influence.
-  fr: |
-    Fonction ou rôle permanent exercé par un ministère. Les intentions du ministère concernant une 
-    responsabilité essentielle se traduisent par un ou plusieurs Résultats Ministériels auxquels le ministère cherche à 
-    contribuer ou sur lesquels il veut avoir une influence.

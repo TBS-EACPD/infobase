@@ -93,6 +93,9 @@ show_content:
 show_text_content:
   en: Read more...
   fr: En savoir plus...
+in_common:
+  en: in common
+  fr: en commun
 hide_content: 
   en: Collapse
   fr: Cacher le contenu 

@@ -1,69 +1,38 @@
-const {
-  text_maker,
+import { TM } from './intro_graph_text_provider.js';
+import {
   PanelGraph,
-} = require("../shared"); 
+} from "../shared";
 
 new PanelGraph({
-  is_old_api: true,
   level: 'program',
   key : "dead_program_warning",
-  title: "dead_program_warning_title",
-  text: "dead_program_warning_text",
-
-  layout : {
-    full :{ text: [12] },
-    half : { text : [12] },
-  },
-
   footnotes: false,
-
-  calculate(subject){
-    return subject.dead_program;
-  },
-
-  render(panel){
-    const sel = panel.el;
-    sel.attr('class', "");
-    sel.html(`
+  calculate: _.property("dead_program"),
+  render(){
+    return (
       <div 
-        class="alert alert-danger alert--is-bordered large_panel_text"
-        style="text-align:center"
+        className="alert alert-danger alert--is-bordered large_panel_text"
+        style={{textAlign:"center"}}
       >
-        ${text_maker("dead_program_warning")}
+        <TM k="dead_program_warning" />
       </div>
-    `);
+    );
   },
 });
 
 new PanelGraph({
-  is_old_api: true,
   level: 'crso',
-  key : "dead_crso_warning",
-  title: "dead_crso_warning_title",
-
-  // text: "dead_crso_warning_text",
-
-  layout : {
-    full :{ text: [12] },
-    half : { text : [12] },
-  },
-
   footnotes: false,
-
-  calculate(subject){
-    return subject.dead_so;
-  },
-
-  render(panel, info){
-    const sel = panel.el;
-    sel.attr('class', "");
-    sel.html(`
+  calculate: _.property("dead_so"),
+  render(){
+    
+    return (
       <div 
-        class="alert alert-danger alert--is-bordered large_panel_text"
-        style="text-align:center"
+        className="alert alert-danger alert--is-bordered large_panel_text"
+        style={{textAlign:"center"}}
       >
-        ${text_maker("dead_crso_warning")}
+        <TM k="dead_crso_warning" />
       </div>
-    `);
+    );
   },
 });

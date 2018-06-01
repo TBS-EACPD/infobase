@@ -1,12 +1,10 @@
+const { text_maker } = require('./intro_graph_text_provider.js');
 const {
   PanelGraph,
-  reactAdapter,
   util_components: {
     HeightClipper,
   },
-  panel_components: {
-    PanelText,
-  },
+  TextPanel,
 } = require("../shared"); 
 
 const {
@@ -21,56 +19,39 @@ const {
 
 const { infograph_href_template } = require('../../link_utils.js');
 
-const common_layout = {
-  full: { graph: [12] },
-  half: { graph: [12] },
-};
 
 new PanelGraph({
-  is_old_api: true,
   level: 'dept',
   key : "portfolio_structure_intro",
-  title: 'portfolio_structure_intro_title',
-  layout : common_layout,
   footnotes: false,
 
   calculate(subject){
     return _.nonEmpty(subject.ministry)
   },
 
-  render(panel,calculations){
+  render({calculations}){
     const { subject } = calculations;
-    
-    const view = <PanelText>
-      <div className="medium_panel_text">
-        <HeightClipper allowReclip={true} clipHeight={250}>
-          <HierarchyPeek root={org_external_hierarchy({subject, href_generator: infograph_href_template})}/>
-        </HeightClipper>
-      </div>
-    </PanelText>;
 
+    return <TextPanel title={text_maker("portfolio_structure_intro_title")}>
+      <HeightClipper allowReclip={true} clipHeight={250}>
+        <HierarchyPeek root={org_external_hierarchy({subject, href_generator: infograph_href_template})}/>
+      </HeightClipper>
+    </TextPanel>;
 
-    reactAdapter.render(
-      view, 
-      panel.areas().graph.node() 
-    );
   },
 });
 
 
 new PanelGraph({
-  is_old_api: true,
   level: 'dept',
   key : "portfolio_structure_related",
-  title : "portfolio_structure_related_title",
-  layout : common_layout,
   footnotes: false,
 
   calculate(subject){
     return !_.isEmpty(subject.programs)
   },
 
-  render(panel,calculations){
+  render({calculations}){
     const {subject } = calculations;
 
     const hierarchy_view = org_internal_hierarchy({
@@ -79,30 +60,21 @@ new PanelGraph({
       show_dead_sos: true,
     });
 
-    const view = <PanelText>
-      <div className="medium_panel_text">
+    return (
+      <TextPanel title={text_maker("portfolio_structure_related_title")}>
         <HierarchyPeek root={hierarchy_view} />
-      </div>
-    </PanelText>;
-
-
-    reactAdapter.render(
-      view, 
-      panel.areas().graph.node() 
+      </TextPanel>
     );
+
   },
 });
 
 new PanelGraph({
-  is_old_api: true,
   level: 'program',
   key : "program_fed_structure",
-  layout : common_layout,
   footnotes: false,
-  title: 'program_fed_structure_title',
   calculate: _.constant(true),
-
-  render(panel,calculations){
+  render({calculations}){
     const { subject } = calculations;
 
     const hierarchy = program_hierarchy({
@@ -114,30 +86,23 @@ new PanelGraph({
       show_uncles: false,
       show_dead_sos: false, 
     });
-      
-    const view = <div className="medium_panel_text">
+    
+    return <TextPanel title={text_maker("program_fed_structure_title")}>
       <HeightClipper clipHeight={250} allowReclip={true}>
         <HierarchyPeek root={hierarchy}/>
       </HeightClipper>
-    </div>
+    </TextPanel>
 
-    reactAdapter.render(
-      view, 
-      panel.areas().graph.node() 
-    );
   },
 });
 
 new PanelGraph({
-  is_old_api: true,
   level: 'program',
   key : "related_program_structure",
-  layout : common_layout,
-  title: "related_program_structure_title",
   footnotes: false,
   calculate: _.constant(true),
 
-  render(panel,calculations){
+  render({calculations}){
     const { subject } = calculations;
 
     const hierarchy = program_hierarchy({
@@ -150,29 +115,22 @@ new PanelGraph({
       show_dead_sos: true, 
     });
       
-    const view = <div className="medium_panel_text">
+    return <TextPanel title={text_maker("related_program_structure_title")}>
       <HeightClipper clipHeight={250} allowReclip={true}>
         <HierarchyPeek root={hierarchy}/>
       </HeightClipper>
-    </div>
+    </TextPanel>;
 
-    reactAdapter.render(
-      view, 
-      panel.areas().graph.node() 
-    );
   },
 });
 
 new PanelGraph({
-  is_old_api: true,
   level: 'tag',
   key : "tag_fed_structure",
-  layout : common_layout,
   footnotes: false,
-  title: 'tag_fed_structure_title',
   calculate: _.constant(true),
 
-  render(panel,calculations){
+  render({calculations}){
     const { subject } = calculations;
 
     const hierarchy_structure = tag_hierarchy({
@@ -182,29 +140,21 @@ new PanelGraph({
       href_generator: infograph_href_template,
     });
 
-    const view = <div className="medium_panel_text">
+    return <TextPanel title={text_maker("tag_fed_structure_title")}>
       <HeightClipper clipHeight={250} allowReclip={true}>
         <HierarchyPeek root={ hierarchy_structure }/>
       </HeightClipper>
-    </div>;
-
-    reactAdapter.render(
-      view, 
-      panel.areas().graph.node() 
-    );
+    </TextPanel>;
   },
 });
 
 new PanelGraph({
-  is_old_api: true,
   level: 'tag',
   key : "sibling_tags",
-  layout : common_layout,
   footnotes: false,
-  title: 'sibling_tags_title',
   calculate: _.constant(true),
 
-  render(panel,calculations){
+  render({calculations}){
     const { subject } = calculations;
 
     const hierarchy_structure = tag_hierarchy({
@@ -214,29 +164,22 @@ new PanelGraph({
       href_generator: infograph_href_template,
     });
 
-    const view = <div className="medium_panel_text">
+    return <TextPanel title={text_maker("sibling_tags_title")}>
       <HeightClipper clipHeight={350} allowReclip={true}>
         <HierarchyPeek root={ hierarchy_structure }/>
       </HeightClipper>
-    </div>;
+    </TextPanel>;
 
-    reactAdapter.render(
-      view, 
-      panel.areas().graph.node() 
-    );
   },
 });
 
 new PanelGraph({
-  is_old_api: true,
   level: 'crso',
   key : "crso_in_gov",
-  title: "crso_in_gov_title",
-  layout : common_layout,
   footnotes: false,
   calculate: _.constant(true),
 
-  render(panel,calculations){
+  render({calculations}){
     const { subject } = calculations;
 
     const hierarchy = crso_pi_hierarchy({
@@ -245,29 +188,21 @@ new PanelGraph({
       href_generator: infograph_href_template,
     });
     
-    const view = 
-    <div className="medium_panel_text">
+    return <TextPanel title={text_maker("crso_in_gov_title")}>
       <HierarchyPeek root={hierarchy}/>
-    </div>
+    </TextPanel>
 
-    reactAdapter.render(
-      view, 
-      panel.areas().graph.node() 
-    );
   },
 });
 
 
 new PanelGraph({
-  is_old_api: true,
   level: 'crso',
   key : "crso_links_to_other_crso",
-  title: "crso_links_to_other_crso_title",
-  layout : common_layout,
   footnotes: false,
   calculate: _.constant(true),
 
-  render(panel,calculations){
+  render({calculations}){
   
     const {subject} = calculations;
 
@@ -277,15 +212,11 @@ new PanelGraph({
       href_generator: infograph_href_template,
     });
     
-    const view = <div className="medium_panel_text">
+    return <TextPanel title={text_maker("crso_links_to_other_crso_title")}>
       <HeightClipper clipHeight={250} allowReclip={true}>
         <HierarchyPeek root={hierarchy}/>
       </HeightClipper>
-    </div>
+    </TextPanel>
 
-    reactAdapter.render(
-      view, 
-      panel.areas().graph.node() 
-    );
   },
 });

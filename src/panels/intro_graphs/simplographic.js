@@ -1,5 +1,4 @@
 const simplographic_text = require("./simplographic.yaml");
-
 const {
   Subject: {
     Gov,
@@ -7,10 +6,10 @@ const {
   },
   create_text_maker,
   PanelGraph,
-  reactAdapter,
   util_components: {
     TM: StandardTM,
   },
+  Panel,
 } = require("../shared");
 
 const { 
@@ -27,11 +26,9 @@ const TM = props => <StandardTM tmf={tmf} {...props} />;
 
 
 new PanelGraph({
-  is_old_api: true,
   level: 'gov',
   key : "simplographic",
   footnotes: false,
-  panel_args : {off : ["title","source","text"]},
   requires_result_counts: true,
 
   depends_on : [ 
@@ -43,12 +40,6 @@ new PanelGraph({
     'table10_gov_info',
   ],
 
-  title: 'simplographic_title',
-
-  layout : {
-    full :{  graph : [12]},
-    half : { graph : [12]},
-  },
 
   calculate(dept,info){
     const {table4, table10} = this.tables;
@@ -133,7 +124,7 @@ new PanelGraph({
     };
   },
 
-  render(panel,calculations){
+  render({calculations}){
     const { graph_args: big_info } = calculations;
     const Row = props => {
       const this_row_props =  {className : "grid-row canada-intro-grid", style:{borderTop : 0,padding: "15px 0px",marginLeft:"-50px",marginRight:"-15px"}}
@@ -161,14 +152,16 @@ new PanelGraph({
         </section>
       </div>;
     };
-    reactAdapter.render(
-      <div className="medium_panel_text">
-        <Row top_border img_src="money.svg" title_key="simplographic_spending_title" text_key="simplographic_spending_text"/> 
-        <Row img_src="employees.svg" title_key="simplographic_people_title" text_key="simplographic_people_text"/> 
-        <Row img_src="graph.svg" title_key="simplographic_struct_title" text_key="simplographic_struct_text"/> 
-        <Row img_src="check.svg" title_key="simplographic_results_title" text_key="simplographic_results_text"/> 
-      </div>, 
-      panel.areas().graph.node() 
+
+    return (
+      <Panel>
+        <div className="medium_panel_text">
+          <Row top_border img_src="money.svg" title_key="simplographic_spending_title" text_key="simplographic_spending_text"/> 
+          <Row img_src="employees.svg" title_key="simplographic_people_title" text_key="simplographic_people_text"/> 
+          <Row img_src="graph.svg" title_key="simplographic_struct_title" text_key="simplographic_struct_text"/> 
+          <Row img_src="check.svg" title_key="simplographic_results_title" text_key="simplographic_results_text"/> 
+        </div>
+      </Panel>
     );
   },
 });
