@@ -1,7 +1,6 @@
 const {
   text_maker,
   PanelGraph,
-  reactAdapter,
   util_components: {
     TextMaker,
     AutoAccordion,
@@ -40,11 +39,7 @@ const KeyConceptList = ({ question_answer_keys, args }) => (
 );
 
 
-const curried_render = ({q_a_keys, omit_name_item}) => function(panel,calcs){
-  const { 
-    subject,
-  } = calcs;
-
+const curried_render = ({q_a_keys, omit_name_item}) => function({ calculations: { subject } }){
   let rendered_q_a_keys = _.clone(q_a_keys);
   if(!omit_name_item){
     if(shouldAddOrgNameItem(subject)){
@@ -62,7 +57,7 @@ const curried_render = ({q_a_keys, omit_name_item}) => function(panel,calcs){
     }
   }
 
-  const view = <div className="mrgn-bttm-md">
+  return <div className="mrgn-bttm-md">
     <AutoAccordion title={text_maker("some_things_to_keep_in_mind")}>
       <div style={{paddingLeft: '10px', paddingRight:'10px'}}>
         <KeyConceptList question_answer_keys={ rendered_q_a_keys } args={{subject}}/>
@@ -70,31 +65,18 @@ const curried_render = ({q_a_keys, omit_name_item}) => function(panel,calcs){
     </AutoAccordion>
   </div>;
 
-
-  const node = panel.el.node().parentNode;
-
-  reactAdapter.render( view, node );
-
 };
 
 const shouldAddOrgNameItem = subject => subject.is('dept') && subject.applied_title && subject.name !== subject.applied_title;
 
 _.each(['gov', 'dept', 'program', 'tag', 'crso'], lvl => {
   new PanelGraph({
-    is_old_api: true,
     level: lvl,
     static: true,
     footnotes: false,
     key :  'financial_intro',
-
-    layout: {
-      half: { text: null, graph:12 },
-      full: { text: null, graph: 12},
-    },
-
     info_deps: [],
     source: false,
-    title: 'some_things_to_keep_in_mind',
     calculate: _.constant(true),
 
     render: curried_render({ 
@@ -117,22 +99,13 @@ _.each(['gov', 'dept', 'program', 'tag', 'crso'], lvl => {
 
 _.each(['gov', 'dept', 'program', 'crso'], lvl => {
   new PanelGraph({
-    is_old_api: true,
     level: lvl,
     static: true,
     footnotes: false,
     key :  'results_intro',
-
-    layout: {
-      half: { text: null, graph:12 },
-      full: { text: null, graph: 12},
-    },
-
     info_deps: [],
     source: false,
-    title: 'some_things_to_keep_in_mind',
     calculate: _.constant(true),
-
     render: curried_render({
       q_a_keys: [
         'what_is_policy_on_results',
@@ -149,34 +122,25 @@ _.each(['gov', 'dept', 'program', 'crso'], lvl => {
   })
 
   new PanelGraph({
-    is_old_api: true,
     level: lvl,
     key: "dp_coming_soon",
-
-    layout: {
-      full: {text: [], graph: 12},
-    },
-
     calculate:_.constant(true),
-
-    render(panel){
-      const sel = panel.el;
-      sel.attr('class', "");
-      sel.html(`
-        <div 
-          class="alert alert-info alert--is-bordered large_panel_text"
-          style="text-align:center; border-color:#16599a;"
-        >
-          ${text_maker("dp_coming_soon_title")}
-        </div>
-      `);
-    },
+    render: () => (
+      <div
+        className="alert alert-info alert--is-bordered large_panel_text"
+        style={{ 
+          textAlign: "center",
+          borderColor: "#16599a",
+        }}
+      >
+        <TextMaker text_key="dp_coming_soon_title" />
+      </div>
+    ),
   })
 });
 
 _.each(['gov', 'dept'], lvl => {
   new PanelGraph({
-    is_old_api: true,
     level: lvl,
     static: true,
     footnotes: false,
@@ -208,7 +172,6 @@ _.each(['gov', 'dept'], lvl => {
 
 
 new PanelGraph({
-  is_old_api: true,
   level: 'tag',
   static: true,
   footnotes: false,
@@ -239,66 +202,41 @@ new PanelGraph({
 
 _.each(['gov', 'dept'], lvl => {
   new PanelGraph({
-    is_old_api: true,
     level: lvl,
     static: true,
     footnotes: false,
     source: false,
     info_deps: [],
     key : "march_snapshot_warning",
-    title: "march_snapshot_warning",
-    text: "march_snapshot_warning",
-
-    layout : {
-      full :{ text: [12] },
-      half : { text : [12] },
-    },
-
     calculate: _.constant(true),
 
-    render(panel){
-      const sel = panel.el;
-      sel.attr('class', "");
-      sel.html(`
-        <div 
-          class="alert alert-warning alert--is-bordered large_panel_text"
-          style="text-align:center"
+    render(){
+      return (
+        <div
+          className="alert alert-warning alert--is-bordered large_panel_text"
+          style={{ textAlign: "center" }}
         >
-          ${text_maker("march_snapshot_warning")}
+          <TextMaker text_key="march_snapshot_warning" />
         </div>
-      `);
+      );
     },
   });
   
   new PanelGraph({
-    is_old_api: true,
     level: lvl,
     static: true,
     footnotes: false,
     source: false,
     info_deps: [],
     key : "ppl_open_data_info",
-    title: "ppl_open_data_info",
-    text: "ppl_open_data_info",
-
-    layout : {
-      full :{ text: [12] },
-      half : { text : [12] },
-    },
-
     calculate: _.constant(true),
-
-    render(panel){
-      const sel = panel.el;
-      sel.attr('class', "");
-      sel.html(`
-        <div 
-          class="alert alert-info alert-no-symbol alert--is-bordered large_panel_text"
-          style="text-align:center"
-        >
-          ${text_maker("ppl_open_data_info")}
-        </div>
-      `);
-    },
+    render: () => (
+      <div
+        className="alert alert-info alert-no-symbol alert--is-bordered large_panel_text"
+        style={{ textAlign: "center" }}
+      >
+        <TextMaker text_key="ppl_open_data_info" />
+      </div>
+    ),
   });
 });
