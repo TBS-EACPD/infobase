@@ -3,7 +3,6 @@ import "../../partition/budget_measures_subapp/BudgetMeasuresRoute.ib.yaml";
 import {
   formats,
   text_maker,
-  run_template,
   PanelGraph,
   reactAdapter,
   Subject,
@@ -11,7 +10,6 @@ import {
   util_components,
   declarative_charts,
 } from "../shared";
-
 
 const { BudgetMeasure } = Subject;
 const { budget_chapters } = business_constants;
@@ -97,7 +95,7 @@ const budget_measure_render = function(panel, calculations, options){
     text: text_keys[level_name],
     source: (subject) => [{
       html: text_maker("budget_measure"),
-      href: "#budget-measures/" + (subject.level === "gov" ? "budget-measure" : "org"),
+      href: "#budget-measures/" + (subject.level === "gov" ? "budget-measure" : "dept"),
     }],
     calculate: calculate_functions[level_name],
     render: budget_measure_render,
@@ -108,14 +106,14 @@ class BudgetMeasureHBars extends React.Component {
   constructor(){
     super();
     this.state = {
-      selected_filter: text_maker('all'),
+      selected_filter: 'all',
     };
   }
   
   render(){
     const { data } = this.props;
 
-    if(!window.is_a11y_mode){
+    if(window.is_a11y_mode){
       return <div>
         <A11YTable
           table_name={ text_maker("budget_name_header") }
@@ -139,75 +137,122 @@ class BudgetMeasureHBars extends React.Component {
     }
 
     const { selected_filter } = this.state;
-    
-    const filter_options = [] //TODO, filter by chapter or all, in all group by chapter otherwise give each item its own bar? May not be worth enabling for gov level
+    const colors = infobase_colors();
 
-    //const { mapping } = _.find(arrangements, {id: selected} );
-    //
-    //const colors = infobase_colors();
-    //
-    //let legend_items;
-    //
-    //legend_items = [ //the order of this array will determine the colors for each sobj.
-    //  ... _.map(top_3_so_nums, num => sos[num].text),
-    //  text_maker('other_sos'),
-    //  text_maker('revenues'),
-    //].map( label => ({
-    //  active: true,
-    //  label,
-    //  id: label,
-    //  color: colors(label),
-    //}));
-    //
-    //return <div>
-    //  <div style={{paddingBottom:'10px'}} className='center-text font-xlarge'>
-    //    <strong><TextMaker text_key="so_spend_by_prog" /></strong>
-    //  </div>
-    //  <div className="frow">
-    //    <div className="fcol-md-4" style={{ width: "100%" }}>
-    //      <label>
-    //        <TextMaker text_key="filter_by_so" />
-    //        <Select 
-    //          selected={selected_filter}
-    //          options={_.map(filter_options, ({id, label}) => ({ 
-    //            id,
-    //            display: label,
-    //          }))}
-    //          onSelect={id=> this.setState({selected_filter: id}) }
-    //          style={{
-    //            display: 'block',
-    //            margin: '10px auto',
-    //          }}
-    //          className="form-control"
-    //        />
-    //      </label>
-    //      { !_.isEmpty(legend_items) &&
-    //        <div className="well legend-container">
-    //          <GraphLegend
-    //            items={legend_items}  
-    //          />
-    //        </div>
-    //      }
-    //    </div> 
-    //    <div className="fcol-md-8" style={{ width: "100%" }}>
-    //      <div 
-    //        style={{
-    //          maxHeight: '500px',
-    //          overflowY: 'auto',
-    //          overflowX: 'hidden',
-    //        }}
-    //      >
-    //        <StackedHbarChart
-    //          font_size="12px"
-    //          bar_height={60} 
-    //          data={graph_ready_data}
-    //          formater={formats.compact1}
-    //          colors={colors}
-    //          bar_label_formater={ ({label,href}) => `<a href="${href}"> ${label} </a>` }
-    //        />
-    //      </div>
-    //    </div>
-    //  </div> 
-    //</div>;
+    const filter_options = _.chain(data)
+      .map(budget_measure_item => budget_measure_item.chapter_key)
+      .uniq()
+      .map( chapter_key => ({
+        name: budget_chapters[chapter_key].text,
+        id: chapter_key,
+      }))
+      .thru( present_chapter_keys => _.concat(
+        present_chapter_keys, 
+        [{
+          name: text_maker('all'),
+          id: 'all',
+        }],
+      ))
+      .sortBy( _.identity )
+      .value();
+
+    const graph_ready_data = _.chain(data)
+      .map( budget_measure_item => ({
+        key: budget_measure_item.id,
+        label: budget_measure_item.name,
+        data: [budget_measure_item.funds.fund],
+        chapter_key: budget_measure_item.chapter_key,
+      }))
+      .thru( mapped_data => {
+        if (selected_filter !== 'all'){
+          return _.chain(mapped_data)
+            .filter(item => item.chapter_key === selected_filter )
+            .map( item => ({
+              key: item.key,
+              label: item.label,
+              data: [item],
+            }))
+            .value();
+        } else {
+          return _.chain(mapped_data)
+            .groupBy("chapter_key")
+            .map( (group, key) => ({
+              key,
+              label: budget_chapters[key].text,
+              data: group,
+            }))
+            .value();
+        }
+      })
+      .value()
+
+    const legend_items = selected_filter !== 'all' ?
+      graph_ready_data.map( 
+        ({label, key}) => ({
+          active: true,
+          label: label,
+          id: key,
+          color: colors(label),
+        })
+      ) :
+      _.chain(graph_ready_data)
+        .flatMap( group => group.data)
+        .map(
+          ({label, key}) => ({
+            active: true,
+            label: label,
+            id: key,
+            color: colors(label),
+          })
+        )
+        .value();
+
+    return <div>
+      <div className="frow">
+        <div className="fcol-md-4" style={{ width: "100%" }}>
+          <label>
+            <TextMaker text_key="budget_panel_filter_by_chapter" />
+            <Select 
+              selected={selected_filter}
+              options={_.map(filter_options, ({name, id}) => ({ 
+                id,
+                display: name,
+              }))}
+              onSelect={id => this.setState({selected_filter: id}) }
+              style={{
+                display: 'block',
+                margin: '10px auto',
+              }}
+              className="form-control"
+            />
+          </label>
+          { !_.isEmpty(legend_items) &&
+            <div className="well legend-container">
+              <GraphLegend
+                items={legend_items}  
+              />
+            </div>
+          }
+        </div> 
+        <div className="fcol-md-8" style={{ width: "100%" }}>
+          <div 
+            style={{
+              maxHeight: '500px',
+              overflowY: 'auto',
+              overflowX: 'hidden',
+            }}
+          >
+            <StackedHbarChart
+              font_size="12px"
+              bar_height={60} 
+              data={graph_ready_data}
+              formater={formats.compact1}
+              colors={colors}
+              bar_label_formater={ ({ label }) => `${label}` }
+            />
+          </div>
+        </div>
+      </div> 
+    </div>;
   }
 }

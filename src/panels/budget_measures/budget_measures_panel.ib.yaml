@@ -13,3 +13,7 @@ dept_budget_measures_panel_text:
 budget_fund_col_header:
   en: Budget 2018 Funding
   fr: Fonds du budget de 2018
+
+budget_panel_filter_by_chapter:
+  en: Filter by Budget Chapter
+  fr: TODO
