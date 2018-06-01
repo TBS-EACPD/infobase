@@ -157,14 +157,14 @@ class BudgetMeasureHBars extends React.Component {
         name: budget_chapters[chapter_key].text,
         id: chapter_key,
       }))
+      .sortBy( filter_option => filter_option.name )
       .thru( present_chapter_keys => _.concat(
-        present_chapter_keys, 
         [{
           name: text_maker('all'),
           id: 'all',
         }],
+        present_chapter_keys,
       ))
-      .sortBy( _.identity )
       .value();
 
     const graph_ready_data = _.chain(data)
