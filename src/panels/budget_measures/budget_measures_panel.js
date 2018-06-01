@@ -223,7 +223,7 @@ class BudgetMeasureHBars extends React.Component {
           </div>
           <div 
             style={{
-              maxHeight: '500px',
+              maxHeight: '700px',
               overflowY: 'auto',
               overflowX: 'hidden',
             }}
