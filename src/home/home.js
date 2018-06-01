@@ -214,8 +214,8 @@ const HomeLayout = props => (
         <TM k="home_explore_row_title" />
               </div>*/}
     <div className="container">
-      <div className='equal-height-row equal-height-row--home-row'>
-        <div className="equal-height-col is-1-third">
+      <div className='frow'>
+        <div className="fcol-md-4">
           <section className="explore-col-content">
             <VImageCard
               img_src="svg/explorer.svg"
@@ -226,7 +226,7 @@ const HomeLayout = props => (
             />
           </section>
         </div>
-        <div className="equal-height-col is-1-third">
+        <div className="fcol-md-4">
           <section className="explore-col-content">
             <VImageCard
               img_src="svg/builder.svg"
@@ -237,7 +237,7 @@ const HomeLayout = props => (
             />
           </section>
         </div>
-        <div className="equal-height-col is-1-third">
+        <div className="fcol-md-4">
           <section className="explore-col-content">
             <VImageCard
               img_src="svg/structure.svg"
@@ -248,7 +248,7 @@ const HomeLayout = props => (
             />
           </section>
         </div>
-        <div className="equal-height-col is-1-third">
+        <div className="fcol-md-4">
           <section className="explore-col-content">
             <VImageCard
               img_src="svg/structure.svg"
@@ -259,7 +259,7 @@ const HomeLayout = props => (
             />
           </section>
         </div>
-        <div className="equal-height-col is-1-third">
+        <div className="fcol-md-4">
           <section className="explore-col-content">
             <VImageCard
               img_src="svg/structure.svg"
@@ -270,7 +270,7 @@ const HomeLayout = props => (
             />
           </section>
         </div>
-        <div className="equal-height-col is-1-third">
+        <div className="fcol-md-4">
           <section className="explore-col-content">
             <VImageCard
               img_src="svg/structure.svg"

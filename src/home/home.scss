@@ -162,10 +162,8 @@ $home-bg-color: #284162;
   height: 80%;
 }
 
-.col-content.explore-col-content {
-  color: #333 !important;
-  background-color: hsla(210, 45%, 82%, 1);
-  border-radius: 10px;
+.explore-col-content {
+  padding: 10px;
 }
 
 .col-content.misc-col-content {
