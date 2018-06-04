@@ -1,8 +1,10 @@
-import { get_panels_for_subject } from '../infographic/get_panels_for_subject.js';
 import  {createSelector } from 'reselect';
 import { StandardRouteContainer } from '../core/NavComponents';
 import { ReactPanelGraph } from '../core/PanelCollectionView.js';
 import { Link } from 'react-router-dom';
+
+/* eslint-disable no-unused-vars */
+import { get_panels_for_subject } from '../infographic/get_panels_for_subject.js';
 
 const Subject = require('../models/subject.js');
 const {
