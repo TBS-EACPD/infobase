@@ -25,3 +25,7 @@ dept_budget_measures_panel_text:
 budget_panel_filter_by_chapter:
   en: Filter by Budget Chapter
   fr: Filtrer par chapitre du budget
+
+budget_panel_a11y_link_header:
+  en: Link to Budget 2018 section
+  fr: Lien vers la section du budget 2018

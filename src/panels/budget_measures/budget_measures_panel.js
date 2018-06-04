@@ -169,18 +169,25 @@ class BudgetMeasureHBars extends React.Component {
                 <div key = { budget_measure_item.id + "col2" } >
                   { budget_chapters[budget_measure_item.chapter_key].text }
                 </div>,
-                <Format 
+                <Format
                   key = { budget_measure_item.id + "col3" } 
                   type = "compact1" 
                   content = { budget_measure_item.funds.fund } 
                 />,
+                <a 
+                  key = { budget_measure_item.id + "col4" }
+                  href={BudgetMeasure.make_budget_link(budget_measure_item.chapter_key, budget_measure_item.ref_id)}
+                >
+                  { text_maker("link") }
+                </a>,
               ],
             })
           )}
-          label_col_header = {text_maker("budget_measure")}
+          label_col_header = { text_maker("budget_measure") }
           data_col_headers = {[
             text_maker("budget_chapter"),
             text_maker("budget_measures_panel_title"),
+            text_maker("budget_panel_a11y_link_header"),
           ]}
         />
       </div>;
