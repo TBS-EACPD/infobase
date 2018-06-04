@@ -1,12 +1,15 @@
-import './crso_resource_text.ib.yaml';
+import text from './planned_prgm_crso_split.yaml';
 import {Program} from '../../models/subject.js';
 
 import {
-  reactAdapter,
   formats,
   PanelGraph,
   util_components,
   declarative_charts,
+  create_text_maker,
+  TM as StdTM,
+  Col,
+  StdPanel,
 } from "../shared";
 
 const {
@@ -15,15 +18,14 @@ const {
   TabularPercentLegend,
 } = declarative_charts;
 
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
+
 const { Format } = util_components;
 
-const prg_crso_split_render = function(panel, calculations, options){
-  const { subject, info } = calculations;
-
-  const node = panel.areas().graph.node();
-  
-  const {table6} = this.tables;
-  const table6_data = table6.q(subject).data;
+const prg_crso_split_render = function({calculations, footnotes, sources}){
+  const { info, graph_args } = calculations;
+  const { table6_data } = graph_args;
 
   // data must be in the form:
   // data = [
@@ -81,11 +83,11 @@ const prg_crso_split_render = function(panel, calculations, options){
       />
   );
 
-
+  let panel_content;
   if (data.length > 3) {
 
 
-    reactAdapter.render(
+    panel_content = (
       <div>
         <SafePie 
           label_attr={false}
@@ -99,16 +101,14 @@ const prg_crso_split_render = function(panel, calculations, options){
           radius={150}
         />
         {legend_display}
-      </div>,
-      node
+      </div>
     );
   } else {
     
     const new_data = _.zipObject(_.map(data, "label"), _.zip(_.map(data, "value")))
     const series_labels = _.map(data, "label");
-    
 
-    reactAdapter.render(
+    panel_content =(
       <div>
         <Bar 
           series={new_data}
@@ -118,29 +118,33 @@ const prg_crso_split_render = function(panel, calculations, options){
           formater={formats.compact_raw}
         />
         { legend_display }
-      </div>,
-      node
+      </div>
     );
 
   }
 
+  return (
+    <StdPanel
+      title={text_maker("planned_prgm_crso_split_title")}
+      {...{footnotes, sources}}
+    >
+      <Col size={5} isText>
+        <TM k="planned_prgm_crso_split_text"  args={info} />
+      </Col>
+      <Col size={7} isGraph>
+        {panel_content}
+      </Col>
+    </StdPanel>
+  );
+
 };
 
 new PanelGraph({
-  is_old_api: true,
   level: "crso",
   key: 'planned_prg_crso_split',
   depends_on :  ['table6'],
   info_deps: ['table6_crso_info'],
-
-  layout: {
-    full:  {text : 7, graph: 5},       
-    half : {text : 12, graph: 12},      
-  },
-
   machinery_footnotes : false,
-  title :"planned_prg_crso_split_title",
-  text : "planned_prg_crso_split_text",
 
   calculate(subject,info){
 

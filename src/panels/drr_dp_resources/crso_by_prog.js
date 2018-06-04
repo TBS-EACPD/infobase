@@ -1,17 +1,17 @@
-import './crso_resource_text.ib.yaml';
+import text from './crso_by_prog.yaml';
 import {
   formats,
-  text_maker,
   PanelGraph,
   years,
+  TM as StdTM,
   declarative_charts,
   util_components,
   run_template,
-  reactAdapter,
+  Panel,
+  create_text_maker,
 } from "../shared";
 
 const { 
-  TextMaker,
   Format,
 } = util_components;
 
@@ -22,6 +22,9 @@ const {
 } = declarative_charts;
 
 const { planning_years } = years;
+
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 function calculate(subject,info){
   if(subject.dead_so){
@@ -57,7 +60,7 @@ function calculate(subject,info){
   
 
 
-const render_resource_type = (is_fte) => (panel,calculations) => {
+const render_resource_type = (is_fte) => ({calculations, footnotes, sources}) => {
   const { graph_args, subject, info } = calculations;
   
   //const colors;
@@ -76,8 +79,8 @@ const render_resource_type = (is_fte) => (panel,calculations) => {
 
 
   const text = (
-    <TextMaker 
-      text_key="crso_by_prog_exp_or_ftes"
+    <TM 
+      k="crso_by_prog_exp_or_ftes"
       args={{
         subject,
         crso_prg_num : _.max([info.crso_fte_prg_num, info.crso_exp_prg_num]),
@@ -90,22 +93,29 @@ const render_resource_type = (is_fte) => (panel,calculations) => {
     />
   );
 
-  const node = panel.areas().graph.node();
-
-  reactAdapter.render(
-    <PlannedProgramResources
-      programs={
-        _.sortBy(
-          is_fte ? fte_data : exp_data,
-          ({data}) => -d3.sum(data) 
-        )
-      }
-      colors={colors}
-      text={text}
-      is_fte={is_fte}
-    />,
-    node
+  return (
+    <Panel
+      title={text_maker(
+        is_fte ? 
+        "crso_by_prog_fte_title" : 
+        "crso_by_prog_exp_title"
+      )}
+      {...{sources, footnotes}}
+    >
+      <PlannedProgramResources
+        programs={
+          _.sortBy(
+            is_fte ? fte_data : exp_data,
+            ({data}) => -d3.sum(data) 
+          )
+        }
+        colors={colors}
+        text={text}
+        is_fte={is_fte}
+      />
+    </Panel>
   );
+
 }
 
 class PlannedProgramResources extends React.Component {
@@ -202,6 +212,7 @@ class PlannedProgramResources extends React.Component {
       </div>
     </div>;
 
+    
   }
 }
 
@@ -212,19 +223,15 @@ class PlannedProgramResources extends React.Component {
 
 _.each([true,false], is_fte => {
   new PanelGraph({
-    is_old_api: true,
     level: "crso",
     footnotes : ["PLANNED_EXP"],
-    key : `crso_by_prog_${is_fte ? "fte" : "exp"}`,
+    key : (
+      is_fte ?
+      "crso_by_prog_fte" : 
+      "crso_by_prog_exp"
+    ),
     depends_on: ['table6', 'table12'],
     info_deps: ['table6_crso_info','table12_crso_info'],
-
-    layout : {
-      full: { graph: [12] },
-      half: { graph: [12] },
-    },
-
-    title :`crso_by_prog_${is_fte ? "fte" : "exp" }_title`,
     calculate,
     render: render_resource_type(is_fte),
   });

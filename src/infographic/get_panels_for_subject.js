@@ -50,7 +50,7 @@ import '../panels/tag_panels/top_3_dept_graph.js';
 import '../panels/drr_dp_resources/drr_planned_actual.js';
 import '../panels/drr_dp_resources/sub_program_resources.js';
 import '../panels/drr_dp_resources/planned_prgm_crso_split.js';
-import '../panels/drr_dp_resources/crso_program_resources.js';
+import '../panels/drr_dp_resources/crso_by_prog.js';
 import '../panels/drr_dp_resources/spending_in_perspective.js';
 
 import '../panels/budget_measures/budget_measures_panel.js';
