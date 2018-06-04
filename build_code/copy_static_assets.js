@@ -105,6 +105,9 @@ const common_svg = [
   'src/home/builder.svg',
   'src/home/structure.svg',
   'src/home/explorer.svg',
+  'src/home/aboutus.svg',
+  'src/home/glossary.svg',
+  'src/home/metadata.svg',
 
   //simplographic images
   'src/panels/intro_graphs/check.svg',

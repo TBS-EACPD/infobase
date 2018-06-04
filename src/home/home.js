@@ -208,129 +208,77 @@ const HomeLayout = props => (
       </div>
     </div>
 
-      {/*part 3*/}
+    {/*part 3*/}
 
-      {/*<div className="external-row-descriptor">
+    {/*<div className="external-row-descriptor">
         <TM k="home_explore_row_title" />
               </div>*/}
     <div className="container">
-      <div className='frow'>
-        <div className="fcol-md-4">
-          <section className="explore-col-content">
-            <VImageCard
-              img_src="svg/explorer.svg"
-              title_key="explorer_home_title"
-              text_key="explorer_home_text"
-              link_key="start_exp_link"
-              link_href="#resource-explorer"
-            />
-          </section>
-        </div>
-        <div className="fcol-md-4">
-          <section className="explore-col-content">
-            <VImageCard
-              img_src="svg/builder.svg"
-              title_key="home_build_a_report"
-              text_key="report_builder_home_desc"
-              link_key="start_build_link"
-              link_href="#rpb"
-            />
-          </section>
-        </div>
-        <div className="fcol-md-4">
-          <section className="explore-col-content">
-            <VImageCard
-              img_src="svg/structure.svg"
-              title_key="igoc_home_title"
-              text_key="igoc_home_desc"
-              link_key="start_search_link"
-              link_href="#igoc"
-            />
-          </section>
-        </div>
-        <div className="fcol-md-4">
-          <section className="explore-col-content">
-            <VImageCard
-              img_src="svg/structure.svg"
-              title_key="igoc_home_title"
-              text_key="igoc_home_desc"
-              link_key="start_search_link"
-              link_href="#igoc"
-            />
-          </section>
-        </div>
-        <div className="fcol-md-4">
-          <section className="explore-col-content">
-            <VImageCard
-              img_src="svg/structure.svg"
-              title_key="igoc_home_title"
-              text_key="igoc_home_desc"
-              link_key="start_search_link"
-              link_href="#igoc"
-            />
-          </section>
-        </div>
-        <div className="fcol-md-4">
-          <section className="explore-col-content">
-            <VImageCard
-              img_src="svg/structure.svg"
-              title_key="igoc_home_title"
-              text_key="igoc_home_desc"
-              link_key="start_search_link"
-              link_href="#igoc"
-            />
-          </section>
-        </div>
-      </div>
-
-      <div className="external-row-descriptor">
-        <TM k="home_misc_row_title" />
-      </div>
-      <div className='equal-height-row equal-height-row--home-row equal-height-row--has-descriptor'>
-
-        <div className="equal-height-col is-1-third">
-          <section className="col-content misc-col-content">
-            <div className="h-img-card col-content-child">
-
-              <div className="h-img-card__right-container">
-                <div className="h-img-card__right">
-                  <header className="h-img-card__title">
-                    <TM k="glossary_home_title" /> 
-                  </header>
-
-                  <div className="h-img-card__text">
-                    <TM k="glossary_home_desc" /> 
-                  </div>
-
-                  <div className="h-img-card__bottom-right">
-                    <a href="#glossary"> <TM k="glossary_home_link_text" /> </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-
-        <div className="equal-height-col is-1-third">
-          <section className="col-content misc-col-content">
-            <HImageCard
-              link_href="#metadata"
-              title_key="metadata_home_title"
-              text_key="metadata_home_desc"
-              link_key="metadata_home_link_text"
-            />
-          </section>
-        </div>
-
-        <div className="equal-height-col is-1-third">
-          <section className="col-content misc-col-content">
-            <HImageCard
-              link_href={"#about"}
-              title_key="about_home_title"
-              text_key="about_home_desc"
-              link_key="about_home_link"
-            />
-          </section>
+      <div className="xtralinks">
+        <div className='frow'>
+          <div className="fcol-md-4">
+            <section className="explore-col-content">
+              <VImageCard
+                img_src="svg/bubbles.svg"
+                title_key="planet_home_title"
+                text_key="planet_home_text"
+              />
+            </section>
+          </div>
+          <div className="fcol-md-4">
+            <section className="explore-col-content">
+              <VImageCard
+                img_src="svg/explorer.svg"
+                title_key="explorer_home_title"
+                text_key="explorer_home_text"
+              />
+            </section>
+          </div>
+          <div className="fcol-md-4">
+            <section className="explore-col-content">
+              <VImageCard
+                img_src="svg/builder.svg"
+                title_key="home_build_a_report"
+                text_key="report_builder_home_desc"
+              />
+            </section>
+          </div>
+          <div className="fcol-md-4">
+            <section className="explore-col-content">
+              <VImageCard
+                img_src="svg/structure.svg"
+                title_key="igoc_home_title"
+                text_key="igoc_home_desc"
+              />
+            </section>
+          </div>
+          <div className="fcol-md-4">
+            <section className="explore-col-content">
+              <VImageCard
+                img_src="svg/glossary.svg"
+                title_key="glossary_home_title"
+                text_key="glossary_home_desc"
+              />
+            </section>
+          </div>
+          <div className="fcol-md-4">
+            <section className="explore-col-content">
+              <VImageCard
+                img_src="svg/metadata.svg"
+                title_key="metadata_home_title"
+                text_key="metadata_home_desc"
+              />
+            </section>
+          </div>
+          <div className="fcol-md-4">
+            <section className="explore-col-content">
+              <VImageCard
+                img_src="svg/aboutus.svg"
+                title_key="about_home_title"
+                text_key="about_home_desc"
+              />
+            </section>
+          </div>
         </div>
       </div>
     </div> 

@@ -13,6 +13,7 @@
   background-image:url('svg/backbanner.svg');
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
   /*parallaxing
   background-attachment: fixed;*/
 }
