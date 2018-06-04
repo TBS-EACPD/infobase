@@ -16,19 +16,6 @@ dept_fin_spend_by_so_hist_text:
    De {{pa_last_year_5}} à {{pa_last_year}}, **{{le_dept dept}}** a comptabilisé la proportion la plus élevée de ses dépenses dans l'article courant 
    **{{fmt_compact_written dept_so_five_year_top}}** - un montant moyen de **{{fmt_compact_written dept_so_five_year_top_avg}}** sur des dépenses annuelles moyennes totales de **{{fmt_compact_written dept_five_year_exp_average}}**.
 
-gov_fin_spend_by_so_hist_title:
-  transform: [handlebars]
-  en: Expenditures by Standard Objects ({{pa_last_year}})
-  fr: Dépenses par article courant ({{pa_last_year}})
-gov_fin_spend_by_so_hist_text:
-  transform: [handlebars, markdown]
-  en: |
-    In {{pa_last_year}}, the government’s largest expenditures by {{gl_tt "Standard Object" "SOBJ"}} were **{{fmt_compact_written gov_so_five_year_top}}** and **Personnel**.       
-  fr: |
-    En {{pa_last_year}}, les plus importants {{gl_tt "articles courants" "SOBJ"}} de dépenses du gouvernement ont été les **{{fmt_compact_written gov_so_five_year_top}}** et les **dépenses de personnel**. 
-
-
-
 personnel_spend_title:
   transform: [handlebars]
   en:  Personnel Expenditures ({{pa_last_year_5}} to {{pa_last_year}})
