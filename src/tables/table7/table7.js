@@ -55,6 +55,12 @@ module.exports = {
         },
         {
           "type":"int",
+          "hidden":true,
+          "key" : true,
+          "nick" : "type_id",
+        },
+        {
+          "type":"int",
           "key" : true,
           "nick" : "type",
           "header":{
@@ -131,6 +137,16 @@ module.exports = {
         };               
       },
     },
+    {
+      title_key :"payment_type_ids",
+      include_in_report_builder : true,
+
+      filter_func : function(options){
+        return function(row){
+          return row.type_id;
+        };               
+      },
+    },
   ],
 
   "queries": {
@@ -144,11 +160,12 @@ module.exports = {
   },
 
   "mapper": function (row) {
-    row[1] = transfer_payments[row[1]].text;
+    const type_name = transfer_payments[row[1]].text;
+    row.splice(2, 0, type_name);
     if (this.lang === 'en') {
-      row.splice(3, 1);
+      row.splice(4, 1);
     } else {
-      row.splice(2, 1);
+      row.splice(3, 1);
     }
     // remove acronym and vote type
     return row;
