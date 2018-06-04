@@ -219,7 +219,6 @@ const GraphLegend = ({
   isHorizontal,  //defaults to false
   items, // [ { active, id, label, color }] 
   onClick,  //id => { }
-  active,
 }) => ( 
   <ul className={classNames("legend-list-inline", isHorizontal && "horizontal")}>
     {_.map(items, ({ color, label, id, active }) => 
