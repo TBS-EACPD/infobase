@@ -111,7 +111,7 @@ const get_col_defs = ({show_counts}) => [{
 
     if(type !== "org" && show_counts){
       return react_html_string(`${name} (${get_org_count(node)})`);
-    } else if(subject.end_yr){
+    } else if(subject && subject.end_yr){
       return react_html_string(`${name} (${subject.end_yr})`);
     } else {
       return react_html_string(name);
