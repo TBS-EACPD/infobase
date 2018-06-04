@@ -1,11 +1,11 @@
-import "./drr_summary_text.ib.yaml";
+import text from "./drr_summary_text.ib.yaml";
 import classNames from 'classnames';
 import {
   PanelGraph,
-  reactAdapter,
-  util_components,
-  text_maker,
+  create_text_maker,
   declarative_charts,
+  Panel,
+  TM as StdTM,
 } from "../shared";
 import { IconArray } from '../../charts/IconArray.js';
 
@@ -20,9 +20,10 @@ import {
 
 
 
-
-const { TM } = util_components;
 const { A11YTable } = declarative_charts
+
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 const grid_colors = {
   fail: "results-icon-array-fail",
@@ -251,18 +252,24 @@ export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts 
 
 }
 
+const render = ({calculations,footnotes}) => {
+  const {
+    graph_args,
+    subject,
+  } = calculations;
+
+  return <Panel title={text_maker("drr_summary_title")} footnotes={footnotes}>
+    <DrrSummary
+      subject={subject}
+      {...graph_args}
+    />
+  </Panel>;
+};
+
 new PanelGraph({
-  is_old_api: true,
   level: 'dept',
   requires_result_counts: true,
   key: "drr_summary",
-
-  layout: {
-    full: {text: [], graph: 12},
-    half : {text: [], graph: 12},
-  },
-
-  title : "drr_summary_title",
   footnotes: ["RESULTS_COUNTS","RESULTS"],
 
   calculate(subject){
@@ -279,37 +286,13 @@ new PanelGraph({
     };
     
   },
-
-  render(panel, calculations){
-    const {
-      graph_args,
-      subject,
-    } = calculations;
-
-    const node = panel.areas().graph.node();
-
-    reactAdapter.render(
-      <DrrSummary
-        subject={subject}
-        {...graph_args}
-      />,
-      node
-    ); 
-  },
+  render,
 });
 
 new PanelGraph({
-  is_old_api: true,
   level: 'program',
   requires_results: true,
   key: "drr_summary",
-
-  layout: {
-    full: {text: [], graph: 12},
-    half : {text: [], graph: 12},
-  },
-
-  title : "drr_summary_title",
   footnotes: ["RESULTS_COUNTS","RESULTS"],
 
   calculate(subject){
@@ -329,21 +312,5 @@ new PanelGraph({
     };
     
   },
-
-  render(panel, calculations){
-    const {
-      graph_args,
-      subject,
-    } = calculations;
-
-    const node = panel.areas().graph.node();
-
-    reactAdapter.render(
-      <DrrSummary
-        subject={subject}
-        {...graph_args}
-      />,
-      node
-    ); 
-  },
+  render,
 });
