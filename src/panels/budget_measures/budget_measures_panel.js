@@ -187,8 +187,7 @@ class BudgetMeasureHBars extends React.Component {
     }
 
     const { selected_filter } = this.state;
-    const colors = infobase_colors();
-
+    
     const filter_options = _.chain(data)
       .map(budget_measure_item => budget_measure_item.chapter_key)
       .uniq()
@@ -205,7 +204,7 @@ class BudgetMeasureHBars extends React.Component {
         present_chapter_keys,
       ))
       .value();
-
+      
     const graph_ready_data = _.chain(data)
       .map( budget_measure_item => ({
         key: budget_measure_item.id,
@@ -229,13 +228,35 @@ class BudgetMeasureHBars extends React.Component {
             .map( (group, key) => ({
               key,
               label: budget_chapters[key].text,
-              data: group,
+              data: _.chain(group)
+                .groupBy( measure => measure.data[0] < 0 ? "__negative_valued" : "__positive_valued")
+                .map( (group, key) => ({
+                  key: group[0].chapter_key + key,
+                  label: key,
+                  data: _.reduce(group, (total, item) => total + item.data[0], 0),
+                }))
+                .value(),
               chapter_key: key,
             }))
             .value();
         }
       })
       .value();
+    
+    const names_of_measures_with_negative_funding = selected_filter !== 'all' ? 
+      _.chain(data)
+        .filter( measure => measure.funds.fund < 0 )
+        .map( measure_with_negative_funding => measure_with_negative_funding.name )
+        .value() :
+      ["__negative_valued"];
+    
+    const bar_colors = (item_label) => {
+      if ( _.indexOf(names_of_measures_with_negative_funding, item_label) !== -1 ){
+        return "#ff7e0f";
+      } else {
+        return "#1f77b4";
+      }
+    }
 
     return <div>
       { text_area }
@@ -273,8 +294,8 @@ class BudgetMeasureHBars extends React.Component {
             <TextMaker 
               text_key = {
                 selected_filter === 'all' ? 
-                  "budget_chapters" : 
-                  "budget_measures"
+                  "budget_chapter" : 
+                  "budget_measure"
               } 
             />
           </div>
@@ -290,7 +311,7 @@ class BudgetMeasureHBars extends React.Component {
               bar_height={60} 
               data = {graph_ready_data}
               formater = {formats.compact1}
-              colors = {colors}
+              colors = {bar_colors}
               bar_label_formater = { 
                 ({ label, chapter_key, ref_id }) => 
                   `<a href="${BudgetMeasure.make_budget_link(chapter_key, ref_id)}">${label}</a>`
