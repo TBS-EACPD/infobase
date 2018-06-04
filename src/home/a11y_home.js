@@ -52,7 +52,7 @@ export const Home = () => {
 
         <section>
           <h3>
-            <a href="#budget-measures/">
+            <a href="#budget-measures/budget-measure">
               <TM k="budget_home_title" />
             </a>
           </h3>
