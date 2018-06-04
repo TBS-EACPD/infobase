@@ -1,3 +1,8 @@
+historical_auth_exp_title:
+  transform: [handlebars]
+  en: Authorities and Expenditures ({{pa_last_year_5}} to {{pa_last_year}})
+  fr: Utilisation des autorisations parlementaires ({{pa_last_year_5}} à {{pa_last_year}})
+  
 program_historical_auth_exp_text:
   transform: [handlebars,markdown]
   en: |
@@ -33,10 +38,7 @@ tag_historical_auth_exp_text:
 
 
 
-historical_auth_exp_title:
-  transform: [handlebars]
-  en: Authorities and Expenditures ({{pa_last_year_5}} to {{pa_last_year}})
-  fr: Utilisation des autorisations parlementaires ({{pa_last_year_5}} à {{pa_last_year}})
+
 
 gov_historical_auth_exp_text:
   transform: [handlebars,markdown]

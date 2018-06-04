@@ -1,21 +1,39 @@
-import './historical_auth_exp.ib.yaml';
+import text from  './historical_auth_exp.yaml';
 
 import {
   formats,
-  text_maker,
+  create_text_maker,
   run_template,
   PanelGraph,
   years,
-  charts_index,
   util_components,
+  TM as StdTM,
+  declarative_charts,
+  StdPanel,
+  Col,
 } from "../shared";
+
+const { 
+  Bar, 
+  GraphLegend,
+  A11YTable,
+} = declarative_charts;
 
 const { std_years } = years;
 const { Format } = util_components;
 
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 const auth_cols = _.map(std_years, yr=>yr+"auth");
 const exp_cols = _.map(std_years, yr=>yr+"exp");
+
+const text_keys_by_level = {
+  dept: "dept_historical_auth_exp_text",
+  program: "program_historical_auth_exp_text",
+  tag: "tag_historical_auth_exp_text",
+  gov: "gov_historical_auth_exp_text",
+};
 
 
 const calculate = function( subject,info,options ) {
@@ -61,12 +79,11 @@ const calculate = function( subject,info,options ) {
   return {exp,auth,stacked};
 };
 
-const render = function( panel, calculations, options ) {
-
+const render = function({calculations, footnotes, sources}) {
+  const { info, graph_args, subject } = calculations;
   const ticks = _.map(std_years, run_template);
+  const {exp,auth,stacked} = graph_args;
   
-  const graph_area = panel.areas().graph;
-  const {exp,auth,stacked} = calculations.graph_args;
   
   const series_labels = (
     stacked ? 
@@ -74,6 +91,7 @@ const render = function( panel, calculations, options ) {
     [text_maker("authorities"),text_maker("expenditures")]
   );
 
+  let graph_content;
   if(window.is_a11y_mode){
     const data = _.zip(
       ticks,
@@ -88,109 +106,103 @@ const render = function( panel, calculations, options ) {
       data: data.map( amt => <Format type="compact1" content={amt} /> ),
     }));
 
-    charts_index.create_a11y_table({
-      container: graph_area,
-      data_col_headers: series_labels,
-      data,
-    });
+    graph_content = (
+      <A11YTable
+        data_col_headers={series_labels}
+        data={data}
+      />
+    );
 
   } else {
     const colors = infobase_colors();
-    const legend_area = graph_area.append("div");
-    const new_graph_area = graph_area.append("div").style("position","relative");
-
-    charts_index.create_list(legend_area.node(), series_labels, {
-      colors ,
-      orientation : "horizontal",
-      legend : true,
-      ul_classes : "legend",
-    });
-
-    (new charts_index.BAR.bar( new_graph_area.node(),
+    const legend_items = [
       {
-        colors ,
-        series_labels,
-        ticks,
-        stacked, 
-        formater : formats.compact_raw,
-        height : 400,
-        series : {
-          [series_labels[0]] :  stacked ? exp : auth,
-          [series_labels[1]] :  stacked ? auth : exp,
-        },
-      })).render();
+        id: "x",
+        label: series_labels[0],
+        color: colors(series_labels[0]),
+      },
+      {
+        id: "y",
+        label: series_labels[1],
+        color: colors(series_labels[1]),
+      },
+    ];
+
+    graph_content = <div>
+      <div className="legend-container">
+        <GraphLegend
+          items={legend_items}
+          isHorizontal
+        />
+      </div>
+      <div>
+        <Bar
+          {...{
+            colors,
+            series_labels,
+            ticks,
+            stacked, 
+            formater : formats.compact_raw,
+            height : 400,
+            series : {
+              [series_labels[0]] :  stacked ? exp : auth,
+              [series_labels[1]] :  stacked ? auth : exp,
+            },
+          }}
+        />
+      </div>
+    </div>;
+
   }
+
+  return (
+    <StdPanel
+      title={text_maker("historical_auth_exp_title")}
+      {...{footnotes,sources}}
+    >
+      <Col size={6} isText>
+        <TM k={text_keys_by_level[subject.level]} args={info} />
+      </Col>
+      <Col size={6} isGraph>
+        {graph_content}
+      </Col>
+    </StdPanel>
+  );
   
 };
 
 new PanelGraph({
-  is_old_api: true,
   level: "gov",
   key : "historical_auth_exp",
   info_deps : ["table4_gov_info"],
   depends_on: ["table4"],
-  title: "historical_auth_exp_title",
-  text: "gov_historical_auth_exp_text",
-
-  layout : {
-    full : {text : 6, graph: 6},
-    half: {text : 12, graph: 12},
-  },
-
   calculate,
   render,
 });
 
 new PanelGraph({
-  is_old_api: true,
   level: "dept",
   key : "historical_auth_exp",
   depends_on: ["table4"],
   info_deps : ["table4_dept_info"],
-  title: "historical_auth_exp_title",
-  text: "dept_historical_auth_exp_text",
-
-  layout : {
-    full : {text : 6, graph: 6},
-    half: {text : 12, graph: 12},
-  },
-
   calculate,
   render,
 });
 
 new PanelGraph({
-  is_old_api: true,
   level: "program",
   key : "historical_auth_exp",
   depends_on: ["table6"],
   info_deps : ["table6_program_info"],
-  title: "historical_auth_exp_title",
-  text: "program_historical_auth_exp_text",
-
-  layout : {
-    full : {text : 6, graph: 6},
-    half: {text : 12, graph: 12},
-  },
-
   calculate,
   render,
 });
 
 new PanelGraph({
-  is_old_api: true,
   level: "tag",
   key : "historical_auth_exp",
   depends_on: ["table6"],
   info_deps : ["table6_tag_info"],
-  title: "historical_auth_exp_title",
-  text: "tag_historical_auth_exp_text",
-
-  layout : {
-    full : {text : 6, graph: 6},
-    half: {text : 12, graph: 12},
-  },
-
   calculate,
   render,
 });
