@@ -130,7 +130,7 @@ class SobjLine extends React.Component {
     return (
       <div className="frow">
         <div className="fcol-md-4">
-          <div className="well legend-container">
+          <div className="legend-container">
             <GraphLegend
               items={legend_items}
               onClick={id => 

@@ -166,7 +166,7 @@ class HistTPTypes extends React.Component {
         </div>
       </div>
       <div className={`fcol-md-${12-text_split}`}>
-        <div className="well well-sm legend-container">
+        <div className="legend-container">
           <GraphLegend
             items={legend_items}
             isHorizontal
@@ -276,7 +276,7 @@ class DetailedHistTPItems extends React.Component {
       <div className="frow">
         <div className="fcol-md-4">
           <div 
-            className="well legend-container"
+            className="legend-container"
             style={{
               maxHeight: 400,
             }}

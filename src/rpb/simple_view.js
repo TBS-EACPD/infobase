@@ -370,7 +370,7 @@ class SimpleView extends React.Component {
           <div className="fcol-md-6 fcol-xs-12">
             { shouldShowLegend && 
             <div id="rpb_graph_legend">
-              <div className="well legend-container">
+              <div className="legend-container">
                 <div className="mrgn-bttm-0 mrgn-tp-0 nav-header">
                   <TextMaker text_key='legend' />
                 </div>

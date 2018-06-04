@@ -246,7 +246,7 @@ class HistoricalProgramBars extends React.Component {
       <div className="frow">
         <div className="fcol-md-4" style={{ width: "100%" }}>
           <div
-            className="well legend-container"
+            className="legend-container"
             style={{ maxHeight: "400px" }}
           >
             <GraphLegend
@@ -408,7 +408,7 @@ class DetailedProgramSplit extends React.Component {
             />
           </label>
           { !_.isEmpty(legend_items) &&
-            <div className="well legend-container">
+            <div className="legend-container">
               <GraphLegend
                 items={legend_items}  
               />
