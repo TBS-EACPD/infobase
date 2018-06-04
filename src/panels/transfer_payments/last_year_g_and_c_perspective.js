@@ -1,27 +1,32 @@
-import './gnc-text.ib.yaml';
+import { Fragment } from 'react';
+import {
+  text_maker,
+  TM,
+} from './gnc_text_provider.js';
 import {
   Subject,
   formats,
   PanelGraph,
-  charts_index,
+  StdPanel,
+  Col,
+  declarative_charts,
 } from "../shared";
 
+const { CirclePieChart } = declarative_charts;
+
 new PanelGraph({
-  is_old_api: true,
   level: "dept",
   key : "last_year_g_and_c_perspective",
   depends_on: ['table7'],
   footnotes: ['SOBJ10'],
-  height: 300,
-
-  layout : {
-    full : {text : 6, graph: [3,3]},
-    half: {text : 12, graph: [6,6]},
-  },
+  // layout : {
+  //   full : {text : 6, graph: [3,3]},
+  //   half: {text : 12, graph: [6,6]},
+  // },
 
   info_deps: ['table7_gov_info', 'table7_dept_info', 'table4_dept_info'],
-  title : "last_year_g_and_c_perspective_title",
-  text :  "dept_last_year_g_and_c_perspective_text",
+  // title : "last_year_g_and_c_perspective_title",
+  // text :  "dept_last_year_g_and_c_perspective_text",
 
   calculate(subject, info,options){
     return {
@@ -35,45 +40,49 @@ new PanelGraph({
       ],
     }
   },
-
-  render(panel, calculations, options){
-    
-    // this graph will compare both the total
-    // g&c spend of this department with the govenrment
-    // and with the rest of the it's budget using
-
-    if(window.is_a11y_mode){
-      //all information is contained in text
-      return;
-    }
-
-    const { subject, graph_args } = calculations; 
+  render({calculations, footnotes, sources}){
+    const { subject, graph_args, info } = calculations; 
     const colors = infobase_colors();
-    new charts_index.CIRCLE.circle_pie_chart( 
-      panel.areas().graph.select(".x1").node(),
-      {
-        height : this.height,
-        colors,
-        formater : formats.compact1,
-        font_size : "16",
-        title : Subject.Gov.name,
-        data : graph_args.data1,
-      }
-    )
-      .render();
 
-    new charts_index.CIRCLE.circle_pie_chart( 
-      panel.areas().graph.select(".x2").node(),
-      {
-        height : this.height,
-        colors,
-        formater : formats.compact1,
-        font_size : "16",
-        title : subject.sexy_name,
-        data : graph_args.data2,
-      }
-    )
-      .render();
+    return (
+      <StdPanel
+        title={text_maker("last_year_g_and_c_perspective_title")}
+        footnotes={footnotes}
+        sources={sources}
+      >
+        <Col size={6} isText>
+          <TM k="dept_last_year_g_and_c_perspective_text" args={info} />
+        </Col>
+        { !window.is_a11y_mode && 
+          <Fragment>
+            <Col size={3} isGraph>
+              <CirclePieChart 
+                {...{
+                  height: 300,
+                  colors,
+                  formater : formats.compact1,
+                  font_size : "16",
+                  title : Subject.Gov.name,
+                  data : graph_args.data1,
+                }} 
+              />
+            </Col>
+            <Col size={3} isGraph>
+              <CirclePieChart
+                {...{
+                  height : 300,
+                  colors,
+                  formater : formats.compact1,
+                  font_size : "16",
+                  title : subject.sexy_name,
+                  data : graph_args.data2,
+                }}
+              />
+            </Col>
+          </Fragment>
+        }
+      </StdPanel>
+    );
   },
 });
 
