@@ -1,5 +1,5 @@
 spend_rev_split_title:
-  transform: [handlebars, markdown]
+  transform: [handlebars]
   en: Expenditures and Revenues ({{pa_last_year}}) 
   fr: Dépenses et recettes ({{pa_last_year}}) 
 
