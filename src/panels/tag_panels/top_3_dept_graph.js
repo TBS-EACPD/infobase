@@ -1,32 +1,24 @@
-import './tag_panel_text.ib.yaml';
+import text from './top_3_depts.yaml';
 import {
-  charts_index, 
-  text_maker,
   PanelGraph, 
   Subject,
+  create_text_maker,
+  TM as StdTM,
+  StdPanel,
+  Col,
+  declarative_charts,
 } from "../shared";
 
 const { Dept } = Subject;
+const { ProgressDonut } = declarative_charts;
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 new PanelGraph({
-  is_old_api: true,
   level: "tag",
   key : "tag_top_3_depts",
   depends_on: ['table6'],
-
-  notes: `
-    data: last year program expenditures as per public accounts.
-    what you're looking at:  Given a tag, collapse all its programs' expenditures by parent department,
-    look at the top three departments, compare the resulting number against the departments total expenditures last years
-  `,
-
-  layout : {
-    full : {text : 5, graph: 7},
-    half: {text : 12, graph: [12,12]},
-  },
-
   info_deps: ["table6_tag_info"],
-  title :"tag_top_3_depts_title",
 
   calculate(subject,info,options){
     const {table6} = this.tables;
@@ -68,66 +60,72 @@ new PanelGraph({
     return { top_3_depts };
   },
 
-  render(panel,calculations, options){
+  render({calculations, footnotes, sources}){
     const { graph_args, subject, info } = calculations;
     const { top_3_depts } = graph_args;
-    //split container into three equal columns... unless there are less than 3 to show.
-    //tip for testing this graph: Tag #1 will have all three, tag #3 will have zero Depts to show,
-    //tags #20 will have two depts to show and tag 32 will only have one circle.
-    const graph_area=  panel.areas().graph;
-    const text_area=  panel.areas().text;
-    text_area.html(text_maker("tag_top_3_depts_text",{top_3_depts, ...info}));
 
-    const row = d3.select(graph_area.node())
-      .append('div')
-      .append('ul')
-      .styles({"padding":"0"})
-      .selectAll('li')
-      .data(top_3_depts)
-      .enter()
-      .append('li')
-      .styles({
-        "position": 'relative',
-        "border-radius": "5px",
-        "display": "block",
-      })
-      .append('div')
-      .style("display", "flex");
-
-    row
-      .append('div')
-      .classed('col-xs-8',true)
-      .classed('col-md-10',true)
-      .styles({
-        "align-self" : "center",
-        "border-right" : "1px solid #ccc",
-      })
-      .html(d => (
-        text_maker('dept_tag_spent_text',{
-          dept: d.dept,
-          tag_spent : d.tag_spent,
-          tag_spent_pct : d.tag_spent/d.total_spent, 
-        })
-      ));
-    
-    row
-      .append('div')
-      .classed('col-md-2',true)
-      .classed('col-xs-4',true)
-      .style('padding-left', 0)
-      .each(function(d,i){
-        new charts_index.SAFE_PROGRESS_DONUT.SafeProgressDonut(
-          d3.select(this).node(),
-          { 
-            data: [
-              { label: subject.sexy_name, value: d.tag_spent},
-              { label: d.dept.sexy_name, value: d.total_spent },
-            ],
-            height: 80,
-          }
-        ).render();
-      });
-    
-    row.append('div').attr('class','clearfix');
+    return (
+      <StdPanel
+        title={text_maker("tag_top_3_depts_title")}
+        {...{sources,footnotes}}
+      >
+        <Col isText size={5}>
+          <TM 
+            k="tag_top_3_depts_text"
+            args={{
+              top_3_depts, 
+              ...info,
+            }}
+          />
+        </Col>
+        <Col isGraph size={7}>
+          <div>
+            <ul style={{padding:0}}>
+              {_.map(top_3_depts, ({dept, tag_spent, total_spent}) => 
+                <li
+                  key={dept.id}
+                  style={{
+                    position: "relative",
+                    borderRadius: "5px",
+                    display: "block",
+                  }}
+                >
+                  <div className="frow">
+                    <div
+                      className="fcol-xs-8 fcol-md-10"
+                      style={{
+                        alignSelf: "center",
+                        borderRight: "1px solid #ccc",
+                      }}
+                    >
+                      <TM
+                        k="dept_tag_spent_text"
+                        args={{
+                          dept,
+                          tag_spent,
+                          tag_spent_pct: tag_spent/total_spent, 
+                        }}
+                      />
+                    </div>
+                    <div
+                      className="fcol-md-2 fcol-xs-4"
+                      style={{paddingLeft: 0}}
+                    >
+                      <ProgressDonut
+                        height={80}
+                        data={[
+                          { label: subject.sexy_name, value: tag_spent },
+                          { label: dept.sexy_name, value: total_spent },
+                        ]}
+                      />
+                    </div>
+                  </div>
+                </li>
+              )}
+            </ul>
+          </div>
+        </Col>
+      </StdPanel>
+    )
   },
 });

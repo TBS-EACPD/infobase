@@ -1,16 +1,9 @@
-resource_structure_title:
-  transform: [handlebars]
-  en: Resource Structure
-  fr: Structure des ressources  
-
-
 dept_tag_spent_text:
   transform: [handlebars, markdown]
   en: |
     **{{infograph_link dept}}** spent up to **{{fmt_compact_written tag_spent}}** on Programs tagged under this tag, which represents {{fmt_percentage tag_spent_pct}} of the organization's total expenditures.
   fr: |
     **{{infograph_link dept}}** a dépensé jusqu'à **{{fmt_compact_written tag_spent}}** sur les programmes étiquetés sous  cette étiquette, qui représente {{fmt_percentage tag_spent_pct}} des dépenses totales de l'organisation.
-
 
 
 tag_top_3_depts_title:

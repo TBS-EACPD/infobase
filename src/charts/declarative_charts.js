@@ -90,7 +90,7 @@ class ProgressDonut extends React.Component {
   }
   componentDidMount(){
     this.graph_instance = new SafeProgressDonut(
-      d3.select(this.refs.graph_area),
+      this.refs.graph_area,
       _.clone(this.props)
     );
     this._render()
