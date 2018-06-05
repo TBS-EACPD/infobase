@@ -13,6 +13,7 @@ import {
   SpinnerWrapper,
   VImageCard,
   HImageCard,
+  TImageCard,
 } from '../util_components.js';
 
 import { general_href_for_item } from '../link_utils.js';
@@ -197,7 +198,7 @@ const HomeLayout = props => (
             
     <div className="home-bg" style={{position:"relative"}}>
       <div className="container">
-        <HImageCard
+        <TImageCard
           img_src="svg/partition.svg"
           title_key="partition_home_title"
           text_key="partition_home_text"

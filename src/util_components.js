@@ -37,6 +37,7 @@ const { TwoLevelSelect } = require('./components/TwoLevelSelect.js');
 
 const { VImageCard } = require('./components/VImageCard.js');
 const { HImageCard } = require('./components/HImageCard.js');
+const { TImageCard } = require('./components/TImageCard.js');
 
 const { DebouncedTextInput } = require('./components/DebouncedTextInput.js');
 
@@ -136,6 +137,7 @@ module.exports = {
   Year,
   VImageCard,
   HImageCard,
+  TImageCard,
   DebouncedTextInput,
   Abbrev,
 }

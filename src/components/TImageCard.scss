@@ -1,6 +1,6 @@
 @import '../common_css/common-variables';
 
-/* h-img-card 
+/* t-img-card 
 
   this component attempts to use BEM naming convention  
 
@@ -13,18 +13,18 @@
   ------------------------
 
   structure: 
-    .h-img-card
-      .h-img-card__left
-        .h-img-card__img-link
-          .h-img-card__img
-      .h-img-card__right-container {
-        .h-img-card__right
-          .h-img-card__title
-          .h-img-card__text
-          .h-img-card__bottom-right
+    .t-img-card
+      .t-img-card__left
+        .t-img-card__img-link
+          .t-img-card__img
+      .t-img-card__right-container {
+        .t-img-card__right
+          .t-img-card__title
+          .t-img-card__text
+          .t-img-card__bottom-right
 
 */
-.h-img-card {
+.t-img-card {
   display: flex;
   width: 100%;
   max-width: 100%;
@@ -34,9 +34,9 @@
   padding: 15px;
 }
 
-.h-img-card__left { 
+.t-img-card__left { 
+  margin-top: -20%;
   flex: 0 0 30%;
-  padding: 5px;
   display: flex;
   flex-direction: column;
   justify-content: left;
@@ -45,9 +45,10 @@
   min-height: 1px; /* IE11 image bug */
   font-size: 2.5em; /* for glyphicons */
   color: white;
+  padding: 1%;
 }
 
-.h-img-card__img-link {
+.t-img-card__img-link {
   width: 100%;
   max-width: 100%;
   min-height: 1px; /* IE11 image bug */
@@ -57,50 +58,56 @@
   line-height: 0;
 }
 
-.h-img-card__img {
-  width: 50%;
-  max-width: 50%;
-  min-height: 1px; /* IE11 image bug */
+.t-img-card__img {
+  width: 80vw;
+  max-width: none;
+  position: relative;
+  min-height: 1px;
+  opacity: 0.5;
+  margin-bottom: -10%;
   padding: 15px;
-  margin: auto;
-
+  transform: translate(-50%, 0);
+  left: 50%;
 }
 
-.h-img-card__right {
+.t-img-card__right {
   display: flex;
   width: 100%;
   max-width: 100%;
-  margin-top: -4%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 1;
 }
 
-.h-img-card__title {
-  font-size: 0.6em;
+.t-img-card__title {
+  font-size: 0.8em;
   font-weight: $mediumFontWeight;
   text-align: left;
   width: 100%;
   max-width: 100%;
-  padding: 10px 8px 10px 15px;
   text-transform: uppercase;
 }
 
-.h-img-card__text {
-  font-size: 0.4em;
+.t-img-card__text {
+  font-size: 0.5em;
   font-weight: $mediumFontWeight;
   margin-top: 10px;
   width: 100%;
   max-width: 100%;
   text-align: left;
-  padding: 0px 0px 8px 15px;
 }
 
-.h-img-card__bottom-right {
+.t-img-card__bottom-right {
   display: flex;
   width: 100%;
   max-width: 100%;
   justify-content: flex-end;
+  z-index: 1;
+  padding-bottom: 20px;
 }
 
-.h-img-card__link {
+.t-img-card__link {
   color: white;
   text-align: center;
   font-size: 1em;
@@ -109,7 +116,6 @@
   border-radius: 10px;
   width: 30%;
   max-width: 30%;
-  margin-right: 25px;
 
   &> a {
     color:white;

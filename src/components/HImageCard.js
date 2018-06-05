@@ -29,7 +29,7 @@ const HImageCard = ({
         <a className="h-img-card__img-link" href={link_href}>
           <img
             src={`${CDN_URL}/${img_src}`}
-            className={classNames("h-img-card__img", is_ellen_image && "h-img-card__img__ellen")}
+            className={classNames("h-img-card__img")}
           />
         </a>
       </div>
