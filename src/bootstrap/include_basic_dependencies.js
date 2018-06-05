@@ -18,6 +18,7 @@ require('../common_css/site.scss');
 require('../common_css/boostrap-fixes-extensions.scss');
 require('../common_css/grid-system.scss');
 require('../common_css/flexbox-grid.css');
+require('../common_css/tables.scss');
 
 //3rd party libraries injected into global scope
 //note that these next few lines must be run before anything using lodash, handlebars, etc. 

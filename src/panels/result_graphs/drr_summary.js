@@ -1,11 +1,8 @@
-import text from "./drr_summary_text.ib.yaml";
 import classNames from 'classnames';
 import {
   PanelGraph,
-  create_text_maker,
   declarative_charts,
   Panel,
-  TM as StdTM,
 } from "../shared";
 import { IconArray } from '../../charts/IconArray.js';
 
@@ -17,13 +14,11 @@ import {
   Indicator,
   ResultCounts,
 } from './results_common.js';
-
+import { TM, text_maker } from './drr_summary_text.js';
 
 
 const { A11YTable } = declarative_charts
 
-const text_maker = create_text_maker(text);
-const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 const grid_colors = {
   fail: "results-icon-array-fail",
