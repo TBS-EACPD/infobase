@@ -8,6 +8,7 @@ import {
 import { Table } from '../core/TableClass.js';
 import { Dept } from '../models/subject.js';
 import FootNote from '../models/footnotes.js';
+import {GlossaryEntry} from '../models/glossary.js';
 
 import { convert_d3_hierarchy_to_explorer_hierarchy } from '../gen_expl/hierarchy_tools.js';
 
@@ -27,12 +28,24 @@ const reduce_by_supps_dim = (rows) => _.chain(rows)
     return {
       dept: first.dept,
       desc: first.desc,
+      votenum: first.votenum,
       this_year: _.sumBy(group, this_year_col) || 0,
       last_year: _.sumBy(group, last_year_col) || 0,
       last_year_mains: _.chain(group).filter({est_doc_code: "MAINS"}).sumBy(last_year_col).value(),
+      _rows: group,
     };
   })
   .value();
+
+const get_doc_code_breakdowns = rows => _.chain(rows)
+  .filter(row => row.est_doc_code === "MAINS" || row[last_year_col]) //always include mains, even if it's zero
+  .groupBy('est_doc_code')
+  .toPairs()
+  .map( ([doc_code,group]) => ({
+    doc_code,
+    amount: _.sumBy(group, last_year_col),
+  }))
+  .value()
 
 
 function get_data(include_stat){
@@ -50,6 +63,8 @@ function get_data(include_stat){
       const last_year_mains = _.sumBy(rows, "last_year_mains") || 0;
       const inc = this_year-last_year_mains;
       const inc_pct = inc/last_year_mains;
+
+      const last_year_amounts_by_doc = get_doc_code_breakdowns( _.flatMap(rows, "_rows") );
 
       return {
         id : org_id,
@@ -70,6 +85,7 @@ function get_data(include_stat){
               "STAT",
             ]
           ),
+          last_year_amounts_by_doc,
         },
         children: _.map(rows, row => {
           const this_year = row["this_year"] || 0;
@@ -77,19 +93,21 @@ function get_data(include_stat){
           const inc = this_year-last_year_mains;
           const inc_pct = inc/last_year_mains;
 
-          const is_biv = org_id === "326" && row.desc && row.desc.indexOf("40") > -1;
-
           return {
             id: `${org_id}-${row.desc}`,
             data: {
-              noExpand: !is_biv, //prevents the ► character from being displayed
               name: row.desc,
               this_year,
               last_year: row.last_year || 0,
               last_year_mains,
               inc,
               inc_pct,
-              footnotes: is_biv && [{text: biv_footnote}],
+              footnotes: get_footnotes_for_votestat_item({
+                desc: row.desc, 
+                org_id, 
+                votenum: row.votenum,
+              }),
+              last_year_amounts_by_doc: get_doc_code_breakdowns(row._rows),
             },
           };
         }),
@@ -125,7 +143,7 @@ export const col_defs = [
     id: "this_year",
     width: 150,
     textAlign: "right",
-    header_display: "2018-19 Authorities",
+    header_display: "Main estimates 2018-19",
     get_val: node => _.get(node, "data.this_year"),
     val_display: val => <Format type="compact1" content={val} />,
   },
@@ -173,6 +191,35 @@ export const col_defs = [
     },
   },
 ];
+
+function footnote_from_glossary_item(key){
+  return () => GlossaryEntry.lookup(key).definition;
+}
+const central_vote_footnotes = [
+  [5 , footnote_from_glossary_item("TB5")],
+  [10, footnote_from_glossary_item("TB10")],
+  [15, footnote_from_glossary_item("TB15")],
+  [25, footnote_from_glossary_item("TB25")],
+  [30, footnote_from_glossary_item("TB30")],
+  [33, footnote_from_glossary_item("TB33")],
+  [40, _.constant(biv_footnote)],
+];
+
+function get_footnotes_for_votestat_item({desc, org_id, votenum}){
+  if(org_id === "326"){
+    const central_vote_footnote = _.find(
+      central_vote_footnotes, 
+      ([num]) => votenum === num
+    );
+    if(central_vote_footnote){
+      return [{
+        text: central_vote_footnote[1](),
+      }];
+    }
+    
+  }
+  return ;
+}
 
 
 const scheme_key = "estimates_diff";

@@ -1,3 +1,4 @@
+import './DiffView.scss';
 import { combineReducers, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import { StandardRouteContainer } from '../core/NavComponents';
@@ -123,21 +124,58 @@ class ExplorerContainer extends React.Component {
 
 }
 
+const LastYearAmouts = ({last_year_amounts_by_doc}) => {
+
+  const sorted_items = _.sortBy(last_year_amounts_by_doc, ({doc_code}) => window.estimates_docs[doc_code].order );
+
+  return (
+    <section className="LastYearEstimatesSection"><div>
+      <header className="agnostic-header">
+        <TM k="last_year_details" />
+      </header>
+      <table className="table table-condensed">
+        <thead>
+          <tr>
+            <th scope="column">
+              <TM k="estimates_doc" />
+            </th>
+            <th scope="column">
+              <TM k="last_year_authorities" />
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {_.map(sorted_items, ({ doc_code, amount }) => 
+            <tr key={doc_code}>
+              <td> {window.estimates_docs[doc_code][lang]} </td>
+              <td> 
+                {
+                  amount && 
+                  <Format type="compact1" content={amount} />
+                } 
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div></section>
+  );
+
+};
+
 const get_non_col_content = ({node}) => {
   const subject = _.get(node, "data.subject");
   const footnotes = _.get(node, "data.footnotes");
-  const last_year = _.get(node, "data.last_year") - _.get(node, "data.last_year_mains");
-  const last_year_mains = _.get(node, "data.last_year_mains");
-  if(!subject && _.isEmpty(footnotes)){
-    return null;
-  }
+  const last_year_amounts_by_doc = _.get(node,"data.last_year_amounts_by_doc");
+
   return (
     <div>
-      <div>
-        Last year main estimates : <Format type="compact1" content={last_year_mains} />
-        <br/>
-        Last year authorities excluding main estimates: <Format type="compact1" content={last_year} />
-      </div>
+      { _.isEmpty(last_year_amounts_by_doc) ?
+        <TM k="no_historical_info" /> : 
+        <div>
+          <LastYearAmouts last_year_amounts_by_doc={last_year_amounts_by_doc} />
+        </div>
+      }
       {!_.isEmpty(footnotes) && 
         <HeightClipper
           allowReclip={true} 

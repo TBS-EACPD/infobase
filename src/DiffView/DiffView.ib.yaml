@@ -27,3 +27,20 @@ biv_footnote:
     [Link to budget tracker](#budget-measures/budget-measure)
   fr: |
     FIXME: translate Special BIV footnote
+
+
+no_historical_info:
+  en: No historical information available
+  fr: Aucune information historique n'est disponible
+
+
+last_year_authorities:
+  transform: [handlebars]
+  en: |
+    {{est_last_year}} Authorities
+  fr: Autorités {{est_last_year}}
+
+
+last_year_details:
+  en: Details from last year
+  fr: Des détails de l'année passée
