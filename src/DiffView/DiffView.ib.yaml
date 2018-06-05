@@ -17,3 +17,13 @@ new:
 old:
   en: Old Item
   fr: Objet ancien
+
+
+biv_footnote:
+  transform: [handlebars, markdown]
+  en: |
+    Special BIV footnote
+
+    [Link to budget tracker](#budget-measures/budget-measure)
+  fr: |
+    FIXME: translate Special BIV footnote

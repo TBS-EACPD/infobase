@@ -1,5 +1,6 @@
 import './DiffView.ib.yaml';
 import { createSelector } from 'reselect';
+import { text_maker } from '../models/text.js';
 import {
   TM,
   Format,
@@ -11,7 +12,7 @@ import FootNote from '../models/footnotes.js';
 import { convert_d3_hierarchy_to_explorer_hierarchy } from '../gen_expl/hierarchy_tools.js';
 
 
-
+const biv_footnote = text_maker("biv_footnote");
 
 const this_year_col = "{{est_in_year}}_estimates";
 const last_year_col = "{{est_last_year}}_estimates";
@@ -76,16 +77,19 @@ function get_data(include_stat){
           const inc = this_year-last_year_mains;
           const inc_pct = inc/last_year_mains;
 
+          const is_biv = org_id === "326" && row.desc && row.desc.indexOf("40") > -1;
+
           return {
             id: `${org_id}-${row.desc}`,
             data: {
-              noExpand: true, //prevents the ► character from being displayed
+              noExpand: !is_biv, //prevents the ► character from being displayed
               name: row.desc,
               this_year,
               last_year: row.last_year || 0,
               last_year_mains,
               inc,
               inc_pct,
+              footnotes: is_biv && [{text: biv_footnote}],
             },
           };
         }),
