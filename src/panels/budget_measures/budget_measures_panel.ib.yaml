@@ -24,11 +24,15 @@ dept_budget_measures_panel_text:
   en: |
     Budget 2018 provides an additional **{{fmt_compact_written total_funding}}** in funding to **{{subj_name subject}}** for **2018-19**.  
       
-    {{> "budget_measure_stats_partial_en"}}
+    {{> "budget_measure_stats_partial_en"}}  
+      
+    For additional government-wide information on budget measures, please see our [budget tracker](#budget-measures/budget-measure) page.
   fr: |
     TODO  
       
-    {{> "budget_measure_stats_partial_fr"}}
+    {{> "budget_measure_stats_partial_fr"}}  
+      
+    TODO
 
 budget_panel_filter_by_chapter:
   en: Filter by Budget Chapter
