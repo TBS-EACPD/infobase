@@ -222,6 +222,7 @@ const HomeLayout = props => (
                 img_src="svg/bubbles.svg"
                 title_key="planet_home_title"
                 text_key="planet_home_text"
+                link_href="#explore-dept"
               />
             </section>
           </div>
@@ -231,6 +232,7 @@ const HomeLayout = props => (
                 img_src="svg/explorer.svg"
                 title_key="explorer_home_title"
                 text_key="explorer_home_text"
+                link_href="#resource-explorer"
               />
             </section>
           </div>
@@ -240,6 +242,7 @@ const HomeLayout = props => (
                 img_src="svg/builder.svg"
                 title_key="home_build_a_report"
                 text_key="report_builder_home_desc"
+                link_href="#rpb"
               />
             </section>
           </div>
@@ -249,6 +252,7 @@ const HomeLayout = props => (
                 img_src="svg/structure.svg"
                 title_key="igoc_home_title"
                 text_key="igoc_home_desc"
+                link_href="#igoc"
               />
             </section>
           </div>
@@ -258,6 +262,7 @@ const HomeLayout = props => (
                 img_src="svg/glossary.svg"
                 title_key="glossary_home_title"
                 text_key="glossary_home_desc"
+                a href="#glossary"
               />
             </section>
           </div>
@@ -267,6 +272,7 @@ const HomeLayout = props => (
                 img_src="svg/metadata.svg"
                 title_key="metadata_home_title"
                 text_key="metadata_home_desc"
+                link_href="#metadata"
               />
             </section>
           </div>
@@ -276,6 +282,7 @@ const HomeLayout = props => (
                 img_src="svg/aboutus.svg"
                 title_key="about_home_title"
                 text_key="about_home_desc"
+                link_href="#about"
               />
             </section>
           </div>
