@@ -11,6 +11,8 @@ import {
   declarative_charts,
 } from "../shared";
 
+import { Fragment } from 'react';
+
 const { BudgetMeasure } = Subject;
 const { budget_chapters } = business_constants;
 
@@ -150,10 +152,21 @@ class BudgetMeasureHBars extends React.Component {
     
     const text_area = <div className = "frow" >
       <div className = "fcol-md-12 fcol-xs-12 medium_panel_text text">
-        <TextMaker 
-          text_key={ (subject.level === "gov" ? "gov" : "dept") + "_budget_measures_panel_text" } 
-          args={{subject, ...info}} 
-        />
+        {  subject.level === "gov" &&
+          <Fragment>
+            <TextMaker text_key={"budget_route_top_text"} />
+            <TextMaker 
+              text_key={"gov_budget_measures_panel_text"} 
+              args={{subject, ...info}} 
+            />
+          </Fragment>
+        }
+        {  subject.level === "dept" &&
+          <TextMaker 
+            text_key={"dept_budget_measures_panel_text"} 
+            args={{subject, ...info}} 
+          />
+        }
       </div>
     </div>;
 
