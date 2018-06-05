@@ -222,7 +222,7 @@ class PanelGraph {
       calculations,
       footnotes,
       sources,        
-    });
+    },options);
     
     reactAdapter.render(
       react_el,
