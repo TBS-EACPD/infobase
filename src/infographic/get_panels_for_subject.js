@@ -68,8 +68,8 @@ const get_people_panels = subject => {
     "employee_type",
     //"employee_age",
     //"employee_executive_level",
-    //"employee_fol",
-    //"employee_gender",
+    "employee_fol",
+    "employee_gender",
     is_gov && "ppl_open_data_info",
   ];
 };

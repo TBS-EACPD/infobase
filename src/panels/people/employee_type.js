@@ -5,6 +5,7 @@ import {
   PanelGraph,
   PplSharePie,
   HeightClippedGraphWithLegend,
+  business_constants,
   years,
   create_text_maker,
   TM as StdTM,
@@ -13,16 +14,16 @@ import {
   Col,
 } from "../shared"; 
 
-import { tenure } from '../../models/businessConstants';
-
 const text_maker = create_text_maker(text);
 const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 const { people_years } = years;
+const { tenure } = business_constants;
 
 const {
   A11YTable,
 } = declarative_charts;
+
 
 const info_deps_by_level = {
   gov: ['table9_gov_info'],
@@ -113,7 +114,7 @@ const calculate_funcs_by_level = {
           <Col size={12} isGraph>
             { window.is_a11y_mode &&
               <A11YTable
-                label_col_header = {text_maker("age_group")}
+                label_col_header = {text_maker("employee_type")}
                 data_col_headers = {[...ticks, text_maker("five_year_percent_header")]}
                 data = {_.map(graph_args, 
                   dimension => { 
