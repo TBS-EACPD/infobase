@@ -205,7 +205,7 @@ _.each(['gov', 'dept'], lvl => {
     render(){
       return (
         <div
-          className="alert alert-warning alert--is-bordered large_panel_text"
+          className="alert alert-no-symbol alert-warning alert--is-bordered large_panel_text"
           style={{ textAlign: "center" }}
         >
           <TM k="march_snapshot_warning" />
