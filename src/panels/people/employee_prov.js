@@ -1,7 +1,7 @@
-import "./employee_prov.ib.yaml";
+import text from "./employee_prov.yaml";
 import {
   formats,
-  text_maker,
+  create_text_maker,
   run_template,
   PanelGraph,
   years,
@@ -9,8 +9,11 @@ import {
   charts_index,
 } from "../shared"; 
 
-const { provinces } = business_constants;
+const text_maker = create_text_maker(text);
+
 const {people_years} = years;
+const {provinces} = business_constants;
+
 
 const prov_split_render = function(panel,data,options){
 
@@ -259,61 +262,43 @@ const prov_split_render = function(panel,data,options){
 
 };
 
-new PanelGraph({
-  is_old_api: true,
-  level: "dept",
-  key: "employee_prov",
 
-  info_deps: [
+const info_deps_by_level = {
+  gov: ['table10_gov_info'],
+  dept: [
+    'table10_gov_info',
     'table10_dept_info',
-    'table10_gov_info',
   ],
+};
 
-  depends_on: ['table10'],
-
-  layout: {
-    full: {text: 12, graph: [3,9]},
-    half: {text: 12, graph: [12,12]},
-  },
-
-  text: "dept_employee_prov_text",
-  title: "employee_prov_title",
-  include_in_bubble_menu: true,
-  bubble_text_label: "geo_region",
-
-  calculate(subject){
+const calculate_funcs_by_level = {
+  gov: function(){
     const {table10} = this.tables;
-    return { years_by_province : people_years.map( year => table10.prov_code(year,subject.unique_id)) };
+    return {years_by_province: people_years.map( year => table10.prov_code(year,false) )};
   },
-
-  render: prov_split_render,
-});
-
-new PanelGraph({
-  is_old_api: true,
-  level: "gov",
-  key: "employee_prov",
-  depends_on: ['table10'],
-
-  info_deps: [
-    'table10_gov_info',
-  ],
-
-  layout: {
-    full: {text: 12, graph: 12},
-    half: {text: 12, graph: 12},
-  },
-
-  text: "gov_employee_prov_text",
-  title: "employee_prov_title",
-  include_in_bubble_menu: true,
-  bubble_text_label: "geo_region",
-
-  calculate(){
+  dept: function(subject){
     const {table10} = this.tables;
-    return { years_by_province : people_years.map( year => table10.prov_code(year,false)) };
+    return {years_by_province: people_years.map( year => table10.prov_code(year, subject.unique_id) )};
   },
+};
 
-  render: prov_split_render,
-});
+["gov", "dept"].map(
+  level => new PanelGraph({
+    key: "employee_prov",
+    level: level,
+    depends_on: ['table10'],
+    info_deps: info_deps_by_level[level],
+    calculate: calculate_funcs_by_level[level],
+    
+    is_old_api: true,
+    layout: {
+      full: {text: 12, graph: [3,9]},
+      half: {text: 12, graph: [12,12]},
+    },
+    text: level+"_employee_prov_text",
+    title: "employee_prov_title",
+    
+    render: prov_split_render,
+  })
+);
 

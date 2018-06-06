@@ -64,7 +64,7 @@ const get_people_panels = subject => {
     "march_snapshot_warning",
     !is_gov && "employee_last_year_totals",
     "employee_totals",
-    //"employee_prov",
+    "employee_prov",
     "employee_type",
     "employee_age",
     "employee_executive_level",
