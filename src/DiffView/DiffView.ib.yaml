@@ -14,8 +14,8 @@ new:
   en: New Item
   fr: Nouvel objet
 
-old:
-  en: Old Item
+item_no_longer_active:
+  en: No longer active
   fr: Objet ancien
 
 
@@ -44,3 +44,30 @@ last_year_authorities:
 last_year_details:
   en: Details from last year
   fr: Des détails de l'année passée
+
+
+mains_this_year:
+  transform: [handlebars]
+  en: Main Estimates <span class="nowrap">{{est_in_year}}</span>
+  fr: Budget Principal des dépenses <span class="nowrap">{{est_in_year}}</span>
+
+change_from_last_year_mains:
+  transform: [handlebars]
+  en: Change from <span class="nowrap">{{est_last_year}}</span> main estimates
+  fr: Différence avec le budget principal <span class="nowrap">{{est_last_year}}</span>
+
+
+change_from_last_year_mains_pct:
+  transform: [handlebars]
+  en: Change from <span class="nowrap">{{est_last_year}}</span> main estimates (%)
+  fr: Différence avec le budget principal <span class="nowrap">{{est_last_year}}</span> (%)
+
+
+show_only_votes:
+  en: Only show voted items
+  fr: Seulement afficher les objets votés
+
+
+showing_only_votes:
+  en: Only showing voted items
+  fr: Seulement les objet votés sont affichés

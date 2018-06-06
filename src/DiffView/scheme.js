@@ -143,7 +143,7 @@ export const col_defs = [
     id: "this_year",
     width: 150,
     textAlign: "right",
-    header_display: "Main estimates 2018-19",
+    header_display: <TM k="mains_this_year" />,
     get_val: node => _.get(node, "data.this_year"),
     val_display: val => <Format type="compact1" content={val} />,
   },
@@ -151,7 +151,7 @@ export const col_defs = [
     id: "inc",
     width: 150,
     textAlign: "right",
-    header_display: "Change from last year's main estimates",
+    header_display: <TM k="change_from_last_year_mains" />,
     get_val: node => _.get(node, "data.inc"),
     val_display: val => {
       const content = <Format type="compact1" content={Math.abs(val)} />;
@@ -169,12 +169,12 @@ export const col_defs = [
     id: "inc_pct",
     width: 150,
     textAlign: "right",
-    header_display: "Change from last year's main estimates (%)",
+    header_display: <TM k="change_from_last_year_mains_pct" />,
     get_val: node => _.get(node, "data.inc_pct"),
     val_display: val => {
       let content;
       if( Math.abs( -1-val ) < 0.001){
-        return <Red><strong><TM k="old"/></strong></Red>;
+        return <Red><strong><TM k="item_no_longer_active"/></strong></Red>;
       } else if(val > 10){ //let's consider +1000% to be a new item
         return <Green><strong><TM k="new"/></strong></Green>;
       } else {
@@ -201,7 +201,7 @@ const central_vote_footnotes = [
   [15, footnote_from_glossary_item("TB15")],
   [25, footnote_from_glossary_item("TB25")],
   [30, footnote_from_glossary_item("TB30")],
-  [33, footnote_from_glossary_item("TB33")],
+  [35, footnote_from_glossary_item("TB33")], //33 has become 35
   [40, _.constant(biv_footnote)],
 ];
 

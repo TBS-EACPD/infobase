@@ -1,10 +1,6 @@
 ############################################
 # text for infographics
 ############################################
-infographic_for:
-  transform: [handlebars]
-  en: Infographic for {{name}}
-  fr: Infographie pour {{name}}
 
 
 bb_menu_title:

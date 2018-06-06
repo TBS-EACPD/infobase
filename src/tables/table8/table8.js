@@ -44,7 +44,7 @@ window.estimates_docs = {
   "VA":{
     // tabled should only be set once MYA is available for the current 
     // year around the end of the summer
-    "order" : 1.1,
+    "order" : 11,
     "tabled" : true,
     "en":"Voted Adjustments",
     "fr": "Réajustement votés",
@@ -52,7 +52,7 @@ window.estimates_docs = {
   "SA":{
     // tabled should only be set once MYA is available for the current 
     // year around the end of the summer
-    "order" : 1.2,
+    "order" : 12,
     "tabled" : true,
     "en":"Statutory Adjustments",
     "fr": "Réajustements législatifs",

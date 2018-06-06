@@ -190,7 +190,7 @@ const get_non_col_content = ({node}) => {
       { subject && 
         <div className='ExplorerNode__BRLinkContainer'>
           <a href={infograph_href_template(subject)}> 
-            <TM k="see_infographic" />
+            <TM k="infographic_for" args={{name: subject.name}} />
           </a>
         </div>
       }
@@ -268,7 +268,7 @@ class EstimatesExplorer extends React.Component {
                 onChange={toggle_stat_filter}
                 style={{ marginRight: '1rem' }}
               />
-              Only show voted items
+              <TM k="show_only_votes" />
             </label>
           </div>
           <form
@@ -314,6 +314,11 @@ class EstimatesExplorer extends React.Component {
           {is_filtering && _.isEmpty(root.children) &&
             <div style={{fontWeight: '500', fontSize: '1.5em', textAlign:'center'}}>  
               <TM k="search_no_results" />
+            </div>
+          }
+          {!show_stat &&
+            <div className="DiffFilterViewAlert">
+              <TM k="showing_only_votes" />
             </div>
           }
           <Explorer 
