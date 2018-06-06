@@ -1,4 +1,5 @@
-import './DiffView.scss';
+import './EstimatesComparison.scss';
+import { text_maker, TM } from './text-provider';
 import { combineReducers, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import { StandardRouteContainer } from '../core/NavComponents';
@@ -6,13 +7,10 @@ import { infograph_href_template } from '../link_utils.js';
 
 import {
   SpinnerWrapper,
-  TM,
   FootnoteList,
   HeightClipper,
   Format,
 } from '../util_components.js';
-
-import { text_maker } from '../models/text.js';
 
 import { 
   get_root,
@@ -38,7 +36,7 @@ import {
 } from './scheme.js';
 
 
-export class DevStuff extends React.Component {
+export class EstimatesComparison extends React.Component {
   constructor(){
     super();
     this.state = {loading: true};

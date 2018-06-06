@@ -14,8 +14,7 @@ import { Home } from '../home/home.js';
 import { TooltipActivator } from '../glossary/Tooltips';
 import { PotentialSurveyBox } from '../core/survey_link';
 import { EasyAccess } from '../core/EasyAccess';
-
-import { DevStuff } from '../DiffView/DiffView.js';
+import { EstimatesComparison } from '../EstimatesComparison/EstimatesComparison.js';
 
 const LazyGraphRoute = ComponentLoader(async () => {
   const { GraphInventory } = await import('../graph_route/graph_route.js');
@@ -103,7 +102,7 @@ export class App extends React.Component {
           <Route path="/rpb/:config?" component={LazyRPB} />
           <Route path="/about" component={LazyAbout} />
           <Route path="/graph/:level?/:graph?/:id?" component={LazyGraphRoute} />
-          <Route path="/dev" component={DevStuff} />
+          <Route path="/compare_estimates" component={EstimatesComparison} />
           <Route path="/" component={Home} />
         </Switch>
       </div>

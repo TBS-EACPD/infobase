@@ -1,8 +1,6 @@
-import './DiffView.ib.yaml';
+import { text_maker, TM } from './text-provider';
 import { createSelector } from 'reselect';
-import { text_maker } from '../models/text.js';
 import {
-  TM,
   Format,
 } from '../util_components.js';
 import { Table } from '../core/TableClass.js';
