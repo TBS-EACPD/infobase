@@ -43,7 +43,7 @@
   text-align: left;
   max-width: 100%;
   min-height: 1px; /* IE11 image bug */
-  font-size: 2.5em; /* for glyphicons */
+  font-size: 2.6em; /* for glyphicons */
   color: white;
 }
 
@@ -74,7 +74,7 @@
 }
 
 .h-img-card__title {
-  font-size: 0.6em;
+  font-size: 0.7em;
   font-weight: $mediumFontWeight;
   text-align: left;
   width: 100%;
@@ -84,13 +84,13 @@
 }
 
 .h-img-card__text {
-  font-size: 0.4em;
+  font-size: 0.45em;
   font-weight: $mediumFontWeight;
   margin-top: 10px;
   width: 100%;
   max-width: 100%;
   text-align: left;
-  padding: 0px 0px 8px 15px;
+  padding: 0px 10px 8px 15px;
 }
 
 .h-img-card__bottom-right {

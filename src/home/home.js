@@ -107,7 +107,9 @@ const HomeLayout = props => (
       <div className="container">
         <h1> <TM k="welcome" /> </h1>
         <h2> <TM k="home_sub_title" /> </h2>
-        
+        <div className="flag">
+          <img src={'svg/flagline.svg'}/>
+        </div>
         <div className="home-trinity-container">
           <div className="frow">
             <div className="col-md-4">

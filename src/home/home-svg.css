@@ -11,9 +11,8 @@
 }
 .intro-box {
   background-image:url('svg/backbanner.svg');
+  background-attachment: fixed;
+  background-position: left;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
-  /*parallaxing
-  background-attachment: fixed;*/
 }

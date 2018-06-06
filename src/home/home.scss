@@ -22,8 +22,7 @@ $home-bg-color: #284162;
 
   // background-color:#215185;
   color: white;
-  position: relative;
-  margin-bottom: 24rem;
+  margin-bottom: 23rem;
   border-bottom: 10px solid #FF5E59;
   height: 260px;
 }
@@ -34,7 +33,6 @@ $home-bg-color: #284162;
   font-size: 55px;
   font-weight: $lightFontWeight;
   margin-top: 25px;
-  margin-bottom: 0;
 }
 
 .intro-box > .container > h2 {
@@ -292,9 +290,13 @@ $home-bg-color: #284162;
   }
 }
 
+.flag{
+  transform: translate(0, -20%);
+  margin: 0;
+}
+
 .home-trinity-container {
-  transform: translate(0, 90%);
-  margin-top: -4rem;
+  margin-top: 3rem;
 }
 .TrinityItem {
   @include unstyled-link;

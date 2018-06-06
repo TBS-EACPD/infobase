@@ -93,6 +93,7 @@ const common_lookups_fr = _.map(
 const common_svg = [
   //home banner
   'src/home/backbanner.svg',
+  'src/home/flagline.svg',
 
   //top left corner brand
   'src/InfoBase/sig-blk-en.svg',

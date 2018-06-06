@@ -1,0 +1,341 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1028 81">
+  <defs>
+    <clipPath id="a">
+      <rect x="-270" y="-933.13" width="1709" height="539.79" fill="none"/>
+    </clipPath>
+    <linearGradient id="b" x1="79.44" y1="-324.48" x2="82.68" y2="-327.72" gradientTransform="matrix(17, 0, 0, -30, -1129.53, -9702.11)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#595656"/>
+      <stop offset="1" stop-color="#595656"/>
+    </linearGradient>
+    <linearGradient id="c" x1="83.24" y1="-317.9" x2="86.49" y2="-321.16" gradientTransform="matrix(33, 0, 0, -42, -2792.53, -13394.7)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#545152"/>
+      <stop offset="1" stop-color="#575454"/>
+    </linearGradient>
+    <linearGradient id="d" x1="101.2" y1="-323.02" x2="104.48" y2="-326.29" gradientTransform="matrix(30, 0, 0, -34, -2247.53, -10917.03)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5b5758"/>
+      <stop offset="1" stop-color="#605c5d"/>
+    </linearGradient>
+    <linearGradient id="e" x1="101.67" y1="-329.98" x2="104.91" y2="-333.22" gradientTransform="matrix(30, 0, 0, -23, -2247.53, -7562.05)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#656161"/>
+      <stop offset="1" stop-color="#615d5e"/>
+    </linearGradient>
+    <linearGradient id="f" x1="89.28" y1="-318.97" x2="92.66" y2="-322.36" gradientTransform="matrix(46, 0, 0, -39, -4046.55, -12474.64)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#565353"/>
+      <stop offset="1" stop-color="#5e5a5b"/>
+    </linearGradient>
+    <linearGradient id="g" x1="61.34" y1="-322.45" x2="64.58" y2="-325.69" gradientTransform="matrix(9, 0, 0, -32, -338.53, -10334.56)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5d5959"/>
+      <stop offset="1" stop-color="#615d5e"/>
+    </linearGradient>
+    <linearGradient id="h" x1="77.93" y1="-314.91" x2="81.1" y2="-318.08" gradientTransform="matrix(22, 0, 0, -51, -1684.53, -16155.34)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5d5959"/>
+      <stop offset="1" stop-color="#5d5959"/>
+    </linearGradient>
+    <linearGradient id="i" x1="89.06" y1="-315.65" x2="92.37" y2="-318.95" gradientTransform="matrix(45, 0, 0, -51, -3947.55, -16155.34)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#575454"/>
+      <stop offset="1" stop-color="#615d5e"/>
+    </linearGradient>
+    <linearGradient id="j" x1="87.69" y1="-312.32" x2="90.88" y2="-315.51" gradientTransform="matrix(29, 0, 0, -63, -2318.53, -19854.05)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#686464"/>
+      <stop offset="1" stop-color="#696565"/>
+    </linearGradient>
+    <linearGradient id="k" x1="93.88" y1="-325.14" x2="97.08" y2="-328.35" gradientTransform="matrix(68, 0, 0, -30, -6170.57, -9702.11)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5d5959"/>
+      <stop offset="1" stop-color="#575454"/>
+    </linearGradient>
+    <linearGradient id="l" x1="94.33" y1="-315.54" x2="97.57" y2="-318.79" gradientTransform="matrix(30, 0, 0, -56, -2340.53, -17645.9)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5e5a5b"/>
+      <stop offset="1" stop-color="#565353"/>
+    </linearGradient>
+    <linearGradient id="m" x1="83.75" y1="-318.88" x2="86.99" y2="-322.13" gradientTransform="matrix(38, 0, 0, -37, -3306.53, -11888.17)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5d5959"/>
+      <stop offset="1" stop-color="#595656"/>
+    </linearGradient>
+    <linearGradient id="n" x1="83.55" y1="-331.33" x2="86.8" y2="-334.58" gradientTransform="matrix(36, 0, 0, -20, -3106.53, -6668.88)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#565353"/>
+      <stop offset="1" stop-color="#575454"/>
+    </linearGradient>
+    <linearGradient id="o" x1="94.23" y1="-313.11" x2="97.45" y2="-316.33" gradientTransform="matrix(71, 0, 0, -63, -6467.57, -19854.05)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#656161"/>
+      <stop offset="1" stop-color="#6d6969"/>
+    </linearGradient>
+    <linearGradient id="p" x1="95" y1="-314.94" x2="98.26" y2="-318.19" gradientTransform="matrix(71, 0, 0, -53, -6467.57, -16758.6)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#615d5e"/>
+      <stop offset="1" stop-color="#635f60"/>
+    </linearGradient>
+    <linearGradient id="q" x1="93.04" y1="-315.83" x2="96.28" y2="-319.07" gradientTransform="matrix(27, 0, 0, -53, -2043.53, -16758.6)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5e5a5b"/>
+      <stop offset="1" stop-color="#686464"/>
+    </linearGradient>
+    <linearGradient id="r" x1="101.87" y1="-322.2" x2="105.4" y2="-325.72" gradientTransform="matrix(23, 0, 0, -31, -1554.53, -10030.84)" xlink:href="#j"/>
+    <linearGradient id="s" x1="96.57" y1="-322.62" x2="99.7" y2="-325.74" gradientTransform="matrix(52, 0, 0, -30, -4515.58, -9727.11)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6b6768"/>
+      <stop offset="1" stop-color="#686464"/>
+    </linearGradient>
+    <linearGradient id="t" x1="99.27" y1="-321.92" x2="102.44" y2="-325.08" gradientTransform="matrix(61, 0, 0, -31, -5354.6, -10030.84)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#686464"/>
+      <stop offset="1" stop-color="#6b6768"/>
+    </linearGradient>
+    <linearGradient id="u" x1="89.97" y1="-319.12" x2="93.14" y2="-322.29" gradientTransform="matrix(46, 0, 0, -42, -4046.55, -13359.7)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#504d4d"/>
+      <stop offset="1" stop-color="#504d4d"/>
+    </linearGradient>
+    <linearGradient id="v" x1="87.79" y1="-320.05" x2="90.99" y2="-323.26" gradientTransform="matrix(34, 0, 0, -42, -2829.54, -13359.7)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#565353"/>
+      <stop offset="1" stop-color="#504d4d"/>
+    </linearGradient>
+    <linearGradient id="w" x1="82.96" y1="-318.65" x2="86.22" y2="-321.91" gradientTransform="matrix(33, 0, 0, -44, -2792.53, -13986.23)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#504d4d"/>
+      <stop offset="1" stop-color="#4d4b4b"/>
+    </linearGradient>
+    <linearGradient id="x" x1="103.25" y1="-325.59" x2="106.45" y2="-328.79" gradientTransform="matrix(26, 0, 0, -27, -1828.53, -8807.97)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#686464"/>
+      <stop offset="1" stop-color="#686464"/>
+    </linearGradient>
+    <linearGradient id="y" x1="102.78" y1="-324.47" x2="105.94" y2="-327.63" gradientTransform="matrix(39, 0, 0, -27, -3115.54, -8807.97)" xlink:href="#s"/>
+    <linearGradient id="z" x1="103.99" y1="-330.22" x2="107.08" y2="-333.3" gradientTransform="matrix(26, 0, 0, -23, -1828.53, -7562.05)" xlink:href="#e"/>
+    <linearGradient id="aa" x1="103.57" y1="-329.87" x2="106.68" y2="-332.99" gradientTransform="matrix(31, 0, 0, -24, -2316.53, -7863.78)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#605c5d"/>
+      <stop offset="1" stop-color="#605c5d"/>
+    </linearGradient>
+    <linearGradient id="ab" x1="110.69" y1="-329.71" x2="113.89" y2="-332.91" gradientTransform="matrix(16, 0, 0, -24, -812.53, -7863.78)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5d5959"/>
+      <stop offset="1" stop-color="#605c5d"/>
+    </linearGradient>
+    <linearGradient id="ac" x1="103.79" y1="-328.2" x2="106.94" y2="-331.35" gradientTransform="matrix(36, 0, 0, -24, -2792.53, -7887.78)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#666262"/>
+      <stop offset="1" stop-color="#686464"/>
+    </linearGradient>
+    <linearGradient id="ad" x1="104.66" y1="-330.29" x2="107.79" y2="-333.41" gradientTransform="matrix(36, 0, 0, -23, -2792.53, -7558.05)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#635f60"/>
+      <stop offset="1" stop-color="#605c5d"/>
+    </linearGradient>
+    <linearGradient id="ae" x1="108.85" y1="-326.37" x2="112.05" y2="-329.57" gradientTransform="matrix(23, 0, 0, -25, -1492.53, -8194.5)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#696565"/>
+      <stop offset="1" stop-color="#686464"/>
+    </linearGradient>
+    <linearGradient id="af" x1="110.29" y1="-327.54" x2="113.63" y2="-330.88" gradientTransform="matrix(20, 0, 0, -26, -1192.53, -8475.22)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5d5959"/>
+      <stop offset="1" stop-color="#5e5a5b"/>
+    </linearGradient>
+    <linearGradient id="ag" x1="95.73" y1="-316.38" x2="98.96" y2="-319.62" gradientTransform="matrix(30, 0, 0, -56, -2313.53, -17645.9)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5e5a5b"/>
+      <stop offset="1" stop-color="#535050"/>
+    </linearGradient>
+    <linearGradient id="ah" x1="96.52" y1="-313.42" x2="99.77" y2="-316.67" gradientTransform="matrix(30, 0, 0, -64, -2313.53, -20116.73)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#635f60"/>
+      <stop offset="1" stop-color="#615d5e"/>
+    </linearGradient>
+    <linearGradient id="ai" x1="98.26" y1="-314.16" x2="101.53" y2="-317.43" gradientTransform="matrix(38, 0, 0, -64, -3077.53, -20116.73)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#686464"/>
+      <stop offset="1" stop-color="#5e5a5b"/>
+    </linearGradient>
+    <linearGradient id="aj" x1="98.72" y1="-322.05" x2="101.81" y2="-325.13" gradientTransform="matrix(40, 0, 0, -36, -3273.54, -11528.46)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#605c5d"/>
+      <stop offset="1" stop-color="#575454"/>
+    </linearGradient>
+    <clipPath id="ak">
+      <rect x="-323.5" y="-1095.5" width="1678" height="507" fill="none"/>
+    </clipPath>
+    <clipPath id="al">
+      <rect x="-170" y="-1104.13" width="1526" height="539.79" fill="none"/>
+    </clipPath>
+    <linearGradient id="am" x1="101.03" y1="-312.75" x2="104.04" y2="-315.77" gradientTransform="matrix(60, 0, 0, -66, -5180.6, -20680.18)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#535050"/>
+      <stop offset="1" stop-color="#4a4848"/>
+    </linearGradient>
+    <linearGradient id="an" x1="104.41" y1="-312.98" x2="107.42" y2="-316" gradientTransform="matrix(36, 0, 0, -59, -2780.53, -18540.04)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#575454"/>
+      <stop offset="1" stop-color="#504d4d"/>
+    </linearGradient>
+    <linearGradient id="ao" x1="108.34" y1="-313.29" x2="111.34" y2="-316.3" gradientTransform="matrix(25, 0, 0, -57, -1670.53, -17926.65)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#545152"/>
+      <stop offset="1" stop-color="#4d4b4b"/>
+    </linearGradient>
+    <linearGradient id="ap" x1="99.91" y1="-325.14" x2="102.93" y2="-328.15" gradientTransform="matrix(31, 0, 0, -26, -2366.53, -8420.22)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4f4c4c"/>
+      <stop offset="1" stop-color="#4d4b4b"/>
+    </linearGradient>
+    <linearGradient id="aq" x1="99.52" y1="-321.77" x2="102.53" y2="-324.78" gradientTransform="matrix(57, 0, 0, -32, -4940.58, -10251.56)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4d4b4b"/>
+      <stop offset="1" stop-color="#4a4848"/>
+    </linearGradient>
+    <linearGradient id="ar" x1="101.73" y1="-334.35" x2="104.75" y2="-337.37" gradientTransform="matrix(21, 0, 0, -17, -1352.53, -5685.7)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#565353"/>
+      <stop offset="1" stop-color="#535050"/>
+    </linearGradient>
+    <linearGradient id="as" x1="101.73" y1="-320.73" x2="104.75" y2="-323.75" gradientTransform="matrix(26, 0, 0, -29, -1847.53, -9373.39)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#575454"/>
+      <stop offset="1" stop-color="#575454"/>
+    </linearGradient>
+    <linearGradient id="at" x1="103.07" y1="-355.66" x2="106.09" y2="-358.67" gradientTransform="matrix(18, 0, 0, -10, -1052.53, -3535.62)" xlink:href="#u"/>
+    <linearGradient id="au" x1="102.24" y1="-317.42" x2="105.24" y2="-320.43" gradientTransform="matrix(26, 0, 0, -42, -1840.53, -13318.7)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4d4b4b"/>
+      <stop offset="1" stop-color="#4d4b4b"/>
+    </linearGradient>
+    <linearGradient id="av" x1="101.84" y1="-321.12" x2="104.86" y2="-324.14" gradientTransform="matrix(36, 0, 0, -29, -2816.53, -9373.39)" xlink:href="#k"/>
+    <linearGradient id="aw" x1="102.32" y1="-312.24" x2="105.31" y2="-315.22" gradientTransform="matrix(36, 0, 0, -66, -2816.53, -20680.18)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4d4b4b"/>
+      <stop offset="1" stop-color="#545152"/>
+    </linearGradient>
+    <linearGradient id="ax" x1="95.06" y1="-315.24" x2="98.07" y2="-318.26" gradientTransform="matrix(59, 0, 0, -46, -5270.6, -14565.67)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#535050"/>
+      <stop offset="1" stop-color="#504d4d"/>
+    </linearGradient>
+    <linearGradient id="ay" x1="94.96" y1="-312.61" x2="97.98" y2="-315.63" xlink:href="#l"/>
+    <linearGradient id="az" x1="92.3" y1="-316.06" x2="95.31" y2="-319.07" gradientTransform="matrix(47, 0, 0, -46, -4104.55, -14563.67)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#504d4d"/>
+      <stop offset="1" stop-color="#4a4848"/>
+    </linearGradient>
+    <linearGradient id="ba" x1="94.65" y1="-338.62" x2="97.62" y2="-341.59" gradientTransform="matrix(42, 0, 0, -16, -3562.55, -5353.97)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4a4848"/>
+      <stop offset="1" stop-color="#4c4949"/>
+    </linearGradient>
+    <linearGradient id="bb" x1="94.08" y1="-315.72" x2="97.09" y2="-318.73" gradientTransform="matrix(42, 0, 0, -46, -3562.55, -14565.67)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4d4b4b"/>
+      <stop offset="1" stop-color="#504d4d"/>
+    </linearGradient>
+    <linearGradient id="bc" x1="93.35" y1="-338.21" x2="96.47" y2="-341.33" gradientTransform="matrix(27, 0, 0, -16, -2062.53, -5353.97)" xlink:href="#ba"/>
+    <linearGradient id="bd" x1="94.18" y1="-317.46" x2="97.19" y2="-320.48" gradientTransform="matrix(30, 0, 0, -40, -2340.53, -12731.37)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#565353"/>
+      <stop offset="1" stop-color="#4f4c4c"/>
+    </linearGradient>
+    <linearGradient id="be" x1="84.73" y1="-354.01" x2="87.74" y2="-357.02" gradientTransform="matrix(9, 0, 0, -11, -260.53, -3825.35)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4c4949"/>
+      <stop offset="1" stop-color="#4d4b4b"/>
+    </linearGradient>
+    <linearGradient id="bf" x1="93.8" y1="-342.73" x2="96.81" y2="-345.74" gradientTransform="matrix(22, 0, 0, -14, -1540.53, -4749.53)" xlink:href="#au"/>
+    <linearGradient id="bg" x1="97.03" y1="-327.56" x2="100.04" y2="-330.57" gradientTransform="matrix(63, 0, 0, -24, -5597.6, -7806.78)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4d4b4b"/>
+      <stop offset="1" stop-color="#4c4949"/>
+    </linearGradient>
+    <linearGradient id="bh" x1="91.23" y1="-315.21" x2="94.25" y2="-318.23" xlink:href="#u"/>
+    <linearGradient id="bi" x1="81.77" y1="-327.98" x2="84.79" y2="-331" gradientTransform="matrix(20, 0, 0, -23, -1451.53, -7509.05)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#474546"/>
+      <stop offset="1" stop-color="#4a4848"/>
+    </linearGradient>
+    <linearGradient id="bj" x1="89.84" y1="-315.38" x2="92.85" y2="-318.4" gradientTransform="matrix(34, 0, 0, -46, -2829.54, -14563.67)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4a4848"/>
+      <stop offset="1" stop-color="#4d4b4b"/>
+    </linearGradient>
+    <linearGradient id="bk" x1="89.23" y1="-316.03" x2="92.25" y2="-319.05" xlink:href="#v"/>
+    <linearGradient id="bl" x1="89.91" y1="-317.82" x2="92.92" y2="-320.84" gradientTransform="matrix(51, 0, 0, -41, -4571.58, -13025.09)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#424040"/>
+      <stop offset="1" stop-color="#474546"/>
+    </linearGradient>
+    <linearGradient id="bm" x1="91.46" y1="-318.18" x2="94.47" y2="-321.2" gradientTransform="matrix(59, 0, 0, -35, -5363.6, -11212.75)" xlink:href="#bg"/>
+    <linearGradient id="bn" x1="91.91" y1="-319.38" x2="94.93" y2="-322.4" gradientTransform="matrix(59, 0, 0, -34, -5363.6, -10885.03)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#494747"/>
+      <stop offset="1" stop-color="#4a4848"/>
+    </linearGradient>
+    <linearGradient id="bo" x1="88.58" y1="-313.35" x2="91.6" y2="-316.37" gradientTransform="matrix(52, 0, 0, -62, -4717.58, -19451.3)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3a3939"/>
+      <stop offset="1" stop-color="#424040"/>
+    </linearGradient>
+    <linearGradient id="bp" x1="84.08" y1="-315.08" x2="87.09" y2="-318.09" gradientTransform="matrix(32, 0, 0, -47, -2717.53, -14865.42)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#494747"/>
+      <stop offset="1" stop-color="#444243"/>
+    </linearGradient>
+    <linearGradient id="bq" x1="95.97" y1="-313.43" x2="98.99" y2="-316.45" xlink:href="#ag"/>
+    <linearGradient id="br" x1="97.5" y1="-317.39" x2="100.51" y2="-320.4" gradientTransform="matrix(43, 0, 0, -41, -3597.55, -13021.09)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4f4c4c"/>
+      <stop offset="1" stop-color="#504d4d"/>
+    </linearGradient>
+    <linearGradient id="bs" x1="98.72" y1="-317.44" x2="101.73" y2="-320.45" gradientTransform="matrix(43, 0, 0, -41, -3570.55, -13021.09)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4d4b4b"/>
+      <stop offset="1" stop-color="#524f4f"/>
+    </linearGradient>
+    <linearGradient id="bt" x1="99.22" y1="-333.41" x2="102.24" y2="-336.42" gradientTransform="matrix(43, 0, 0, -17, -3570.55, -5685.7)" xlink:href="#ar"/>
+  </defs>
+  <title>flagline</title>
+  <g>
+    <g>
+      <path d="M529.84,52.51l1.06,3-10.67-1.76c-1.31-.3-2.23-.3-2.26.66l.44,11.16h-3.22l.44-11.12c0-1.1-.92-1.07-3.07-.67l-9.87,1.73,1.28-3c.44-1.13.55-1.9-.44-2.67l-11.69-8.69L494,40c.62-.43.65-.9.33-1.86l-2.2-6.5,5.63,1.1c1.57.33,2,0,2.41-.8L501.74,29l5.55,5.73c1,1.06,2.38.37,1.94-1.17l-2.66-12,4.12,2.16c.66.37,1.36.47,1.76-.23l-.07.17,4.42-8.2,4.38,7.9c.55.83,1,.76,1.86.36l3.77-1.7-2.45,11c-.51,2.16.84,2.8,2.3,1.33L532,29.16l1.43,3c.47.9,1.2.77,2.15.6l5.56-1.06-1.87,6.39,0,.14c-.22.83-.66,1.53.36,1.93l2,.9-11.44,8.82C529,50.94,529.4,51.28,529.84,52.51Z" fill="#fff"/>
+      <line x1="23.23" y1="39.43" x2="477.13" y2="39.43" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2.42"/>
+      <line x1="550.87" y1="39.43" x2="1004.77" y2="39.43" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2.42"/>
+    </g>
+    <g opacity="0.4">
+      <g clip-path="url(#a)">
+        <g opacity="0.4">
+          <polygon points="219.64 70.44 277.24 127.57 246.75 37.36 219.64 70.44" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#b)"/>
+          <polygon points="-48.05 25.33 63.77 91.48 16.33 -34.81 -48.05 25.33" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#c)"/>
+          <polygon points="805.85 163.65 893.95 106.52 792.29 61.41 805.85 163.65" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#d)"/>
+          <polygon points="792.29 61.41 893.95 106.52 870.23 37.36 792.29 61.41" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#e)"/>
+          <polygon points="216.25 -25.79 63.77 91.48 219.64 70.44 216.25 -25.79" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#f)"/>
+          <polygon points="219.64 70.44 246.75 37.36 216.25 -25.79 219.64 70.44" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#g)"/>
+          <polygon points="16.33 -34.81 63.77 91.48 90.87 -61.88 16.33 -34.81" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#h)"/>
+          <polygon points="90.87 -61.88 63.77 91.48 216.25 -25.79 90.87 -61.88" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#i)"/>
+          <polygon points="216.25 -25.79 246.75 37.36 314.52 -152.08 216.25 -25.79" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#j)"/>
+          <polygon points="277.24 127.57 477.16 121.55 246.75 37.36 277.24 127.57" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#k)"/>
+          <polygon points="477.16 121.55 578.82 220.78 568.65 52.39 477.16 121.55" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#l)"/>
+          <polygon points="-112.44 -100.96 -105.66 10.3 16.33 -34.81 -112.44 -100.96" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#m)"/>
+          <polygon points="-105.66 10.3 -48.05 25.33 16.33 -34.81 -105.66 10.3" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#n)"/>
+          <polygon points="246.75 37.36 487.33 -37.81 314.52 -152.08 246.75 37.36" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#o)"/>
+          <polygon points="246.75 37.36 477.16 121.55 487.33 -37.81 246.75 37.36" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#p)"/>
+          <polygon points="477.16 121.55 568.65 52.39 487.33 -37.81 477.16 121.55" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#q)"/>
+          <polygon points="870.23 -31.8 792.29 61.41 870.23 37.36 870.23 -31.8" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#r)"/>
+          <polygon points="568.65 52.39 663.53 -22.78 487.33 -37.81 568.65 52.39" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#s)"/>
+          <polygon points="663.53 -22.78 792.29 61.41 870.23 -31.8 663.53 -22.78" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#t)"/>
+          <polygon points="63.77 91.48 162.04 196.72 219.64 70.44 63.77 91.48" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#u)"/>
+          <polygon points="162.04 196.72 277.24 127.57 219.64 70.44 162.04 196.72" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#v)"/>
+          <polygon points="-48.05 25.33 -37.89 157.63 63.77 91.48 -48.05 25.33" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#w)"/>
+          <polygon points="870.23 37.36 958.33 49.39 870.23 -31.8 870.23 37.36" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#x)"/>
+          <polygon points="870.23 -31.8 958.33 49.39 1002.38 -22.78 870.23 -31.8" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#y)"/>
+          <polygon points="893.95 106.52 958.33 49.39 870.23 37.36 893.95 106.52" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#z)"/>
+          <polygon points="893.95 106.52 998.99 121.55 958.33 49.39 893.95 106.52" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#aa)"/>
+          <polygon points="958.33 49.39 998.99 121.55 1012.55 118.55 958.33 49.39" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#ab)"/>
+          <polygon points="958.33 49.39 1080.31 49.39 1002.38 -22.78 958.33 49.39" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#ac)"/>
+          <polygon points="1012.55 118.55 1080.31 49.39 958.33 49.39 1012.55 118.55" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#ad)"/>
+          <polygon points="1002.38 -22.78 1080.31 49.39 1039.66 -25.79 1002.38 -22.78" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#ae)"/>
+          <polygon points="1012.55 118.55 1070.15 127.57 1080.31 49.39 1012.55 118.55" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#af)"/>
+          <polygon points="578.82 220.78 670.31 169.66 568.65 52.39 578.82 220.78" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#ag)"/>
+          <polygon points="568.65 52.39 670.31 169.66 663.53 -22.78 568.65 52.39" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#ah)"/>
+          <polygon points="663.53 -22.78 670.31 169.66 792.29 61.41 663.53 -22.78" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#ai)"/>
+          <polygon points="792.29 61.41 670.31 169.66 805.85 163.65 792.29 61.41" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#aj)"/>
+        </g>
+      </g>
+    </g>
+  </g>
+  <g clip-path="url(#ak)">
+    <g opacity="0.4">
+      <g clip-path="url(#al)">
+        <g opacity="0.4">
+          <polygon points="910.27 94.94 1051.76 94.94 963.11 -49.45 910.27 94.94" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#am)"/>
+          <polygon points="963.11 -49.45 1051.76 94.94 1063.29 94.94 1026.65 -43.43 963.11 -49.45" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#an)"/>
+          <polygon points="1026.65 -43.43 1063.29 94.94 1078.42 94.94 1102.29 -28.4 1026.65 -43.43" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#ao)"/>
+          <polygon points="799.72 43.77 746.25 94.94 754.65 94.94 811.83 52.79 799.72 43.77" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#ap)"/>
+          <polygon points="754.65 94.94 846.29 94.94 811.83 52.79 754.65 94.94" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#aq)"/>
+          <polygon points="799.72 43.77 854.18 22.72 790.64 -7.35 799.72 43.77" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#ar)"/>
+          <polygon points="790.64 -7.35 854.18 22.72 869.31 -64.48 790.64 -7.35" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#as)"/>
+          <polygon points="811.83 52.79 854.18 22.72 799.72 43.77 811.83 52.79" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#at)"/>
+          <polygon points="811.83 52.79 846.29 94.94 874.95 94.94 854.18 22.72 811.83 52.79" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#au)"/>
+          <polygon points="854.18 22.72 963.11 -49.45 869.31 -64.48 854.18 22.72" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#av)"/>
+          <polygon points="854.18 22.72 874.95 94.94 910.27 94.94 963.11 -49.45 854.18 22.72" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#aw)"/>
+          <polygon points="318.64 -43.43 394.28 88.87 497.16 -49.45 318.64 -43.43" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#ax)"/>
+          <polygon points="497.16 -49.45 587.93 49.78 578.85 -118.61 497.16 -49.45" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#ay)"/>
+          <polygon points="252.08 94.88 394.28 88.87 318.64 -43.43 252.08 94.88" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#az)"/>
+          <polygon points="394.28 88.87 403.45 94.94 480.42 94.94 521.36 70.83 394.28 88.87" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#ba)"/>
+          <polygon points="394.28 88.87 521.36 70.83 497.16 -49.45 394.28 88.87" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#bb)"/>
+          <polygon points="480.42 94.94 505.93 94.94 521.36 70.83 480.42 94.94" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#bc)"/>
+          <polygon points="521.36 70.83 587.93 49.78 497.16 -49.45 521.36 70.83" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#bd)"/>
+          <polygon points="521.36 70.83 505.93 94.94 520.48 94.94 527.42 91.88 521.36 70.83" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#be)"/>
+          <polygon points="527.42 91.88 587.93 49.78 521.36 70.83 527.42 91.88" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#bf)"/>
+          <polygon points="527.42 91.88 546.84 94.94 669.35 94.94 587.93 49.78 527.42 91.88" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#bg)"/>
+          <polygon points="128.03 -79.52 215.77 25.72 267.21 -100.56 128.03 -79.52" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#bh)"/>
+          <polygon points="191.57 88.87 252.08 94.88 215.77 25.72 191.57 88.87" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#bi)"/>
+          <polygon points="215.77 25.72 252.08 94.88 318.64 -43.43 215.77 25.72" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#bj)"/>
+          <polygon points="215.77 25.72 318.64 -43.43 267.21 -100.56 215.77 25.72" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#bk)"/>
+          <polygon points="37.26 -13.37 50.55 94.94 151.42 94.94 191.57 88.87 37.26 -13.37" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#bl)"/>
+          <polygon points="128.03 -79.52 37.26 -13.37 215.77 25.72 128.03 -79.52" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#bm)"/>
+          <polygon points="37.26 -13.37 191.57 88.87 215.77 25.72 37.26 -13.37" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#bn)"/>
+          <polygon points="-85.44 94.94 42.12 94.94 -44.43 -31.41 -85.44 94.94" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#bo)"/>
+          <polygon points="-44.43 -31.41 42.12 94.94 50.55 94.94 37.26 -13.37 -44.43 -31.41" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#bp)"/>
+          <polygon points="587.93 49.78 669.62 -1.34 578.85 -118.61 587.93 49.78" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#bq)"/>
+          <polygon points="587.93 49.78 669.35 94.94 707.43 94.94 669.62 -1.34 587.93 49.78" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#br)"/>
+          <polygon points="669.62 -1.34 707.43 94.94 746.25 94.94 799.72 43.77 669.62 -1.34" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#bs)"/>
+          <polygon points="669.62 -1.34 799.72 43.77 790.64 -7.35 669.62 -1.34" stroke="#fff" stroke-miterlimit="10" stroke-width="0.75" fill="url(#bt)"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
