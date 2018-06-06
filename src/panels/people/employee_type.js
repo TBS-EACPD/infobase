@@ -1,118 +1,40 @@
-import "./employee_type.ib.yaml"
+import text from "./employee_type.yaml"
 import {
   formats,
-  text_maker,
   run_template,
   PanelGraph,
-  create_ppl_share_pie,
-  create_height_clipped_graph_with_legend,
+  PplSharePie,
+  HeightClippedGraphWithLegend,
   charts_index,
   years,
+  create_text_maker,
+  TM as StdTM,
+  declarative_charts,
+  StdPanel,
+  Col,
 } from "../shared"; 
 
 import { tenure } from '../../models/businessConstants';
 
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
+
 const { people_years } = years;
 
-const employee_type_render = function(panel, data){
-  const { graph_args } = data;
-  
-  const ticks = _.map(people_years, y => `${run_template(y)}`);
+const {
+  A11YTable,
+} = declarative_charts;
 
-  if (!window.is_a11y_mode){
-    if (this.level === "dept"){
-      const create_graph_with_legend_options = {
-        legend_col_full_size: 4,
-        graph_col_full_size: 8,
-        graph_col_class: "height-clipped-bar-area",
-        legend_class: 'fcol-sm-11 fcol-md-11',
-        y_axis: text_maker("employees"),
-        ticks: ticks,
-        height: this.height,
-        bar: true,
-        yaxis_formatter: formats["big_int_real_raw"],
-        legend_title: "employee_type",
-        get_data: _.property("data"),
-        data: graph_args,
-      };
-  
-      // Inserts new row under the text/pie chart row containing bar graph, collapsed by a HeightCliper.
-      create_height_clipped_graph_with_legend(panel,create_graph_with_legend_options);
-    }
-  
-    // Create and render % share pie chart, either to the right of or below panel text
-    create_ppl_share_pie({
-      pie_area: panel.areas().graph,
-      graph_args, 
-      label_col_header: text_maker("employee_type"),
-    });
-  } else {
-    charts_index.create_a11y_table({
-      container: panel.areas().text.node(), 
-      label_col_header: text_maker("age_group"), 
-      data_col_headers: [...ticks, text_maker("five_year_percent_header")], 
-      data: _.map(graph_args, dimension => { 
-        return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]} 
-      }),
-    });
-  }
-};
-
-new PanelGraph({
-  is_old_api: true,
-  level: "dept",
-  depends_on: ['table9'],
-  key: "employee_type",
-
-  info_deps: [
+const info_deps_by_level = {
+  gov: ['table9_gov_info'],
+  dept: [
     'table9_gov_info',
     'table9_dept_info',
   ],
+};
 
-  layout: {
-    full: {text: 12, graph: 12},
-    half: {text: 12, graph: 12},
-  },
-
-  text: "dept_employee_type_text",
-  title: "employee_type_title",
-
-  calculate(dept,info){
-    const {table9} = this.tables;
-    return table9.q(dept).data
-      .map(row =>
-        ({
-          label: row.employee_type,
-          data: people_years.map(year => row[year]),
-          five_year_percent: row.five_year_percent,
-          active: true,
-        })
-      )
-      .filter(d => d3.sum(d.data) !== 0 );
-  },
-
-  render: employee_type_render,
-});
-
-new PanelGraph({
-  is_old_api: true,
-  level: "gov",
-  depends_on: ['table9'],
-  key: "employee_type",
-
-  info_deps: [
-    'table9_gov_info',
-  ],
-
-  layout: {
-    full: {text: 12, graph: 12},
-    half: {text: 12, graph: 12},
-  },
-
-  text: "gov_employee_type_text",
-  title: "employee_type_title",
-
-  calculate(gov,info){
+const calculate_funcs_by_level = {
+  gov: function(gov,info){
     const {table9} = this.tables;				  
     return _.values(tenure)
       .map(tenure_type => {
@@ -126,7 +48,84 @@ new PanelGraph({
         };
       });
   },
+  dept: function(dept,info){
+    const {table9} = this.tables;
+    return table9.q(dept).data
+      .map(row =>
+        ({
+          label: row.employee_type,
+          data: people_years.map(year => row[year]),
+          five_year_percent: row.five_year_percent,
+          active: true,
+        })
+      )
+      .filter(d => d3.sum(d.data) !== 0 );
+  },
+};
 
-  render: employee_type_render,
-});
-
+["gov", "dept"].map(
+  level => new PanelGraph({
+    key: "employee_type",
+    level: level,
+    depends_on: ['table9'],
+    info_deps: info_deps_by_level[level],
+    calculate: calculate_funcs_by_level[level],
+  
+    render({calculations, footnotes, sources}){
+      const { info, graph_args } = calculations;
+      
+      const ticks = _.map(people_years, y => `${run_template(y)}`);
+      
+      return (
+        <StdPanel
+          title={text_maker("employee_type_title")}
+          {...{footnotes, sources}}
+        >
+          <Col size={5} isText>
+            <TM k={level+"_employee_type_text"} args={info} />
+          </Col>
+          <Col size={7} isGraph>
+            { !window.is_a11y_mode &&
+              <PplSharePie
+                graph_args = {graph_args}
+                label_col_header = {text_maker("employee_type")}
+              />
+            }
+          </Col>
+          <Col size={12} isGraph>
+            { !window.is_a11y_mode && level === "dept" &&
+              <HeightClippedGraphWithLegend
+                create_graph_with_legend_options = {{
+                  legend_col_full_size: 4,
+                  graph_col_full_size: 8,
+                  graph_col_class: "height-clipped-bar-area",
+                  legend_class: 'fcol-sm-11 fcol-md-11',
+                  y_axis: text_maker("employees"),
+                  ticks: ticks,
+                  bar: true,
+                  yaxis_formatter: formats["big_int_real_raw"],
+                  legend_title: text_maker("employee_type"),
+                  get_data: _.property("data"),
+                  data: graph_args,
+                }}
+              />
+            }
+          </Col>
+          <Col size={12} isGraph>
+            { window.is_a11y_mode &&
+              <A11YTable
+                label_col_header = {text_maker("age_group")}
+                data_col_headers = {[...ticks, text_maker("five_year_percent_header")]}
+                data = {_.map(graph_args, 
+                  dimension => { 
+                    return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]} 
+                  }
+                )}
+              />
+            }
+          </Col>
+        </StdPanel>
+      );
+    },
+  })
+);

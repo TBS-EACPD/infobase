@@ -59,30 +59,32 @@ const info_deps_by_level = {
           title={text_maker(level+"_employee_totals_title")}
           {...{footnotes, sources}}
         >
-          <Col size={5} isText>
+          <Col size={4} isText>
             <TM k={level+"_employee_totals_text"} args={info} />
           </Col>
-          <Col size={7} isGraph>
-            { window.is_a11y_mode &&
-                <A11YTable
-                  label_col_header = {text_maker("org")} 
-                  data_col_headers = {ticks}
-                  data = {[{
-                    label: subject.sexy_name, 
-                    data: series[""],
-                  }]}
-                />
-            }
+          <Col size={8} isGraph>
             { !window.is_a11y_mode &&
-                <Line
-                  series = {series}
-                  ticks = {ticks}
-                  colors = {infobase_colors()}
-                  add_yaxis = {true}
-                  add_xaxis = {true}
-                  y_axis = {text_maker("employees")}
-                  formater = {formats["big_int_real_raw"]}
-                />
+              <Line
+                series = {series}
+                ticks = {ticks}
+                colors = {infobase_colors()}
+                add_yaxis = {true}
+                add_xaxis = {true}
+                y_axis = {text_maker("employees")}
+                formater = {formats["big_int_real_raw"]}
+              />
+            }
+          </Col>
+          <Col size={12} isGraph>
+            { window.is_a11y_mode &&
+              <A11YTable
+                label_col_header = {text_maker("org")} 
+                data_col_headers = {ticks}
+                data = {[{
+                  label: subject.sexy_name, 
+                  data: series[""],
+                }]}
+              />
             }
           </Col>
         </StdPanel>

@@ -60,12 +60,7 @@ const {
   Format,
 } = util_components;
 
-exports.create_ppl_share_pie = function({
-  pie_area,
-  graph_args, 
-  label_col_header,
-  sort_func,
-}) {
+exports.PplSharePie = ({graph_args, label_col_header, sort_func}) => {
   sort_func = sort_func || ((a,b) => b.value-a.value);
 
   const data = graph_args
@@ -87,62 +82,53 @@ exports.create_ppl_share_pie = function({
     id: label,
   }));
 
-  reactAdapter.render(
-    <div aria-hidden={true}
-      className="ppl-share-pie-area"
-    >
-      <div className="ppl-share-pie-graph">
-        <SafePie 
-          label_attr={false}
-          showLabels={false}
-          color={color_scale}
-          pct_formatter={formats.percentage1}
-          data={data}
-          inner_radius={true}
-          inner_text={true}
-          inner_text_fmt={formats.compact1_raw}
-          inner_text_content={label_col_header}
-        />
-      </div>
-      <div className="ppl-share-pie-legend">
-        <div className="centerer">
-          <div className="centerer-IE-fix">
-            <span className="ppl-share-percent-header">
-              {text_maker("five_year_percent_header")}
-            </span>
-            <TabularPercentLegend
-              items={legend_items}
-              get_right_content={item => 
-                <span>
-                  <Format type="percentage1" content={item.value} />
-                </span>
-              }
-            />
-          </div>
+  return <div aria-hidden={true}
+    className="ppl-share-pie-area"
+  >
+    <div className="ppl-share-pie-graph">
+      <SafePie 
+        label_attr={false}
+        showLabels={false}
+        color={color_scale}
+        pct_formatter={formats.percentage1}
+        data={data}
+        inner_radius={true}
+        inner_text={true}
+        inner_text_fmt={formats.compact1_raw}
+        inner_text_content={label_col_header}
+      />
+    </div>
+    <div className="ppl-share-pie-legend">
+      <div className="centerer">
+        <div className="centerer-IE-fix">
+          <span className="ppl-share-percent-header">
+            {text_maker("five_year_percent_header")}
+          </span>
+          <TabularPercentLegend
+            items={legend_items}
+            get_right_content={item => 
+              <span>
+                <Format type="percentage1" content={item.value} />
+              </span>
+            }
+          />
         </div>
       </div>
-    </div>,
-    pie_area.node()
-  );
+    </div>
+  </div>;
 };
 
-// Adds a new row to the bottom of a panel containing a height clipped create_graph_with_legend graph. Adds a11y tables outside of HeightClipper.
-exports.create_height_clipped_graph_with_legend = function(panel,create_graph_with_legend_options) {
-  const panel_body = d3.select(find_parent(panel.areas().graph.node(), n => d3.select(n).classed("panel-body")));
-  const new_row = panel_body
-    .insert("div",".panel-body > div.frow:not(.middle-xs)")
-    .classed("frow middle-xs",true)
-    .style("margin-top", "-20px");
-
-  reactAdapter.render(
-    <div className="fcol-xs-12 fcol-sm- graphic fcol-md-12 mrgn-bttm-sm">
-      <HeightClipper clipHeight={185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient gradient-strong"}>
-        <div className="height-clipped-graph-area" aria-hidden={true}>
-          <D3GraphWithLegend panel={panel} options={create_graph_with_legend_options}/>
-        </div>
-      </HeightClipper>
-    </div>, 
-    new_row.node()
+exports.HeightClippedGraphWithLegend = ({create_graph_with_legend_options}) => {
+  return (
+    <div className="frow middle-xs" style={{marginTop: "-20px"}}>
+      <div className="fcol-xs-12 fcol-sm- graphic fcol-md-12 mrgn-bttm-sm">
+        <HeightClipper clipHeight={185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient gradient-strong"}>
+          <div className="height-clipped-graph-area" aria-hidden={true}>
+            <D3GraphWithLegend options={create_graph_with_legend_options}/>
+          </div>
+        </HeightClipper>
+      </div>
+    </div>
   );
 };
 

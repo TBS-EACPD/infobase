@@ -92,11 +92,9 @@ charts_index.create_graph_with_legend = function(options){
     
   let yaxis = options.y_axis;
   const yaxis_formatter = options.yaxis_formatter || formats.compact_raw;
-  const legend_title = (
-    options.legend_title?
-    text_maker(options.legend_title) :
-    undefined
-  );
+  const legend_title = options.legend_title ?
+    options.legend_title :
+    undefined;
   let graph;
   let stacked;
   let normalized = options.normalized || false;
