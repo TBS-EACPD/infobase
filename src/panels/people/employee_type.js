@@ -5,7 +5,6 @@ import {
   PanelGraph,
   PplSharePie,
   HeightClippedGraphWithLegend,
-  charts_index,
   years,
   create_text_maker,
   TM as StdTM,

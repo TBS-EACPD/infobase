@@ -14,7 +14,6 @@ const {
   TabbedContent,
   TM,
 } = require('../util_components.js');
-const { find_parent } = require('../core/utils.js');
 
 const declarative_charts = require('../charts/declarative_charts.js');
 
@@ -120,15 +119,11 @@ exports.PplSharePie = ({graph_args, label_col_header, sort_func}) => {
 
 exports.HeightClippedGraphWithLegend = ({create_graph_with_legend_options}) => {
   return (
-    <div className="frow middle-xs" style={{marginTop: "-20px"}}>
-      <div className="fcol-xs-12 fcol-sm- graphic fcol-md-12 mrgn-bttm-sm">
-        <HeightClipper clipHeight={185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient gradient-strong"}>
-          <div className="height-clipped-graph-area" aria-hidden={true}>
-            <D3GraphWithLegend options={create_graph_with_legend_options}/>
-          </div>
-        </HeightClipper>
+    <HeightClipper clipHeight={185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient gradient-strong"}>
+      <div className="height-clipped-graph-area" aria-hidden={true}>
+        <D3GraphWithLegend options={create_graph_with_legend_options}/>
       </div>
-    </div>
+    </HeightClipper>
   );
 };
 

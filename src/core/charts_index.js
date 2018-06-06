@@ -171,6 +171,7 @@ charts_index.create_graph_with_legend = function(options){
       list.legend
         .append("span","ul")
         .classed("centerer",true)
+        .style("padding-bottom", "15px")
         .append("button")
         .classed("btn-ib-primary",true)
         .on("click",() => {
