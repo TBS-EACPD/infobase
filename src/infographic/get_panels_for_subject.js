@@ -66,7 +66,7 @@ const get_people_panels = subject => {
     "employee_totals",
     //"employee_prov",
     "employee_type",
-    //"employee_age",
+    "employee_age",
     "employee_executive_level",
     "employee_fol",
     "employee_gender",

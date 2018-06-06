@@ -78,11 +78,17 @@ Col.propTypes = {
 const StdPanel = ({ title, sources, footnotes, children }) => {
   const mapped_children = Children.map(children, ({ props }, ix) => {
 
-    const { size, isText, isGraph } = props;
+    const { size, isText, isGraph, extraClasses } = props;
    
     return (
       <div 
-        className={classNames(`col-xs-12 col-md-${size}`, isText && "medium_panel_text" )}
+        className={
+          classNames(
+            `col-xs-12 col-md-${size}`, 
+            isText && "medium_panel_text", 
+            !_.isUndefined(extraClasses) && extraClasses
+          )
+        }
         style={ isGraph ? {position:"relative"} : null }
         key={ix}
       >
