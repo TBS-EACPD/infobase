@@ -72,6 +72,20 @@ planet_home_text:
   en: Compare how much organizations spend and how many people they employ
   fr: Comparer les dépenses des organisations et le nombre d'employés à leur service
 
+
+estimates_comp_home_title:
+  en: Estimates Comparison
+  fr: Comparaison des budgets principal de dépenses
+
+estimates_comp_home_text:
+  en: See how the government's most recent spending plan has changed since last year 
+  fr: Voir comment le plan de dépenses du gouvernement le plus récent a changé depuis l'année passée 
+
+
+bubbles_quick_link:
+  en: Interactive bubble diagram
+  fr: Diagramme des bulles interactives
+
 featured_data_title:
   en: Quick links
   fr: Liens directs

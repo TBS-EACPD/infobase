@@ -291,11 +291,11 @@ const HomeLayout = props => (
         <div className="col-content featured-col-content">
           <VImageCard
             tmf={home_tm}
-            img_src="svg/bubbles.svg"
-            title_key="planet_home_title"
-            text_key="planet_home_text"
+            img_src="svg/compare_estimates.svg"
+            title_key="estimates_comp_home_title"
+            text_key="estimates_comp_home_text"
             link_key="check_home_link"
-            link_href="#explore-dept"
+            link_href="#compare_estimates"
           />
         </div>
       </div>

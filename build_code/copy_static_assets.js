@@ -113,6 +113,7 @@ const common_svg = [
   'src/home/results.svg',
   'src/home/expend.svg',
   'src/home/people.svg',
+  'src/home/compare_estimates.svg',
 ];
 
 const IB_tables = [
