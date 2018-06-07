@@ -125,7 +125,7 @@ const budget_measure_render = function(panel, calculations, options){
     footnotes: false,
     title: "budget_measures_panel_title",
     source: (subject) => [{
-      html: text_maker("budget_measures"),
+      html: text_maker("budget_route_title"),
       href: "#budget-measures/" + (subject.level === "gov" ? "budget-measure" : "dept"),
     }],
     calculate: calculate_functions[level_name],
