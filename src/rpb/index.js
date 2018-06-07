@@ -354,7 +354,8 @@ const URLSynchronizer = withRouter(
     //alternatively, we *can* overwrite the URL in componentDidMount() using replaceState().
     render(){ return null; }
     shouldComponentUpdate(new_props){
-      return rpb_link(this.props.state) !== rpb_link(new_props.state);
+      // return rpb_link(this.props.state) !== rpb_link(new_props.state);
+      return rpb_link(new_props.state) !== window.location.hash;
     }
     componentDidUpdate(){
       this.updateURLImperatively();
@@ -404,10 +405,17 @@ export class ReportBuilder extends React.Component {
     const config_str = nextProps.match.params.config;
     const url_state = url_state_selector(config_str);
 
+    let loading = _.isNull(prevState.config_str) ||
+      _.isNull(prevState.url_state) ||
+      (url_state.table && prevState.url_state.table !== url_state.table)
+
+
+    if(_.isEmpty(url_state.table)){
+      loading = false;
+    }
+
     return {
-      loading: _.isNull(prevState.config_str) ||
-        _.isNull(prevState.url_state) ||
-        (url_state.table && prevState.url_state.table !== url_state.table),
+      loading,
       config_str,
       url_state,
     };
