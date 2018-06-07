@@ -78,7 +78,7 @@ estimates_comp_home_title:
   fr: Comparaison des budgets principal de dépenses
 
 estimates_comp_home_text:
-  en: See how the government's most recent spending plan has changed since last year 
+  en: See how the government's most recent spending plan differs from last year 
   fr: Voir comment le plan de dépenses du gouvernement le plus récent a changé depuis l'année passée 
 
 
@@ -165,7 +165,6 @@ table4_home_link:
   transform: [handlebars]
   en: | 
     {{pa_last_year}} Public Accounts
-  
   fr: Comptes publics {{pa_last_year}}
 
 tabled_estimates_home:
