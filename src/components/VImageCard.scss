@@ -68,12 +68,7 @@
 }
 
 .v-img-card__img {
-  @media(min-width:992px){
-    width: 50%;
-  }
-  @media(max-width: 992px){
-    max-width: 80vw;
-  }
+  width:50%;
 }
 
 
