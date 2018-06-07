@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FootnoteList, TM } from '../util_components.js';
 import { Details } from '../components/Details.js';
+import { HeightClippedGraphWithLegend } from './shared.js';
 
 export const Panel = ({ title, sources, footnotes, children }) => (
   <section className='panel panel-info mrgn-bttm-md'>
@@ -76,27 +77,37 @@ Col.propTypes = {
 //Dummy component that will be remapped to flexboxgrid columns 
 
 const StdPanel = ({ title, sources, footnotes, children }) => {
-  const mapped_children = Children.map(children, ({ props }, ix) => {
-
-    const { size, isText, isGraph, extraClasses, passedRef } = props;
-   
-    return (
-      <div 
-        className={
-          classNames(
-            `col-xs-12 col-md-${size}`, 
-            isText && "medium_panel_text", 
-            !_.isUndefined(extraClasses) && extraClasses
-          )
-        }
-        style={ isGraph ? {position:"relative"} : null }
-        key={ix}
-        ref={passedRef}
-      >
-        {props.children}
-      </div>
-    );
-  });
+  const mapped_children = _.chain(children)
+    .flatMap( child => {
+      if ( child.type && child.type.toString() === "Symbol(react.fragment)" ){
+        return child.props.children;
+      } else {
+        return child;
+      }
+    })
+    .filter( child => child && child.type )
+    .map( ({ props }, ix) => {
+  
+      const { size, isText, isGraph, extraClasses, passedRef } = props;
+     
+      return (
+        <div 
+          className={
+            classNames(
+              `col-xs-12 col-md-${size}`, 
+              isText && "medium_panel_text", 
+              !_.isUndefined(extraClasses) && extraClasses
+            )
+          }
+          style={ isGraph ? {position:"relative"} : null }
+          key={ix}
+          ref={passedRef}
+        >
+          {props.children}
+        </div>
+      );
+    })
+    .value();
 
   return (
     <Panel {...{title, sources, footnotes}}>
@@ -111,9 +122,24 @@ const StdPanel = ({ title, sources, footnotes, children }) => {
 StdPanel.propTypes = {
   children: function (props) {
     const { children } = props;
+    
+    const are_children_valid = (children) => {
+      const filtered_and_flattened_children = _.chain(children)
+        .flatMap( child => {
+          if ( child.type && child.type.toString() === "Symbol(react.fragment)" ){
+            return child.props.children;
+          } else {
+            return child;
+          }
+        })
+        .filter(_.identity)
+        .value();
 
-    if(!_.every(children, {type: Col})){
-      return new Error(`StdPanel expects all children to be of the type 'Col'`);
+      return _.every(filtered_and_flattened_children, {type: Col});
+    }
+
+    if( !are_children_valid(children) ){
+      return new Error(`StdPanel expects all children to be either of the type 'Col', a fragment containing children of type 'Col', or false (in the case of a conditional child component)`);
     }
   },
 }
