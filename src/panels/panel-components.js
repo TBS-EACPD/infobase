@@ -78,7 +78,7 @@ Col.propTypes = {
 const StdPanel = ({ title, sources, footnotes, children }) => {
   const mapped_children = Children.map(children, ({ props }, ix) => {
 
-    const { size, isText, isGraph, extraClasses } = props;
+    const { size, isText, isGraph, extraClasses, passedRef } = props;
    
     return (
       <div 
@@ -91,6 +91,7 @@ const StdPanel = ({ title, sources, footnotes, children }) => {
         }
         style={ isGraph ? {position:"relative"} : null }
         key={ix}
+        ref={passedRef}
       >
         {props.children}
       </div>
