@@ -132,8 +132,15 @@ result_counts_dp_crso_drf:
     
 
 
- 
+DP_results_option_title:
+  transform: [handlebars]
+  en: Planned Results for {{planning_year_1}}
+  fr: Résultats planifiés pour {{planning_year_1}}
 
+DRR_results_option_title:
+  transform: [handlebars]
+  en: Actual Results for {{pa_last_year}}
+  fr: Résultats actuels pour {{pa_last_year}}
 
   
 
