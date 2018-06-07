@@ -9,6 +9,7 @@ import FootNote from '../models/footnotes.js';
 import {GlossaryEntry} from '../models/glossary.js';
 
 import { convert_d3_hierarchy_to_explorer_hierarchy } from '../gen_expl/hierarchy_tools.js';
+import { shallowEqualObjectsOverKeys } from '../core/utils';
 
 
 const biv_footnote = text_maker("biv_footnote");
@@ -17,9 +18,11 @@ const this_year_col = "{{est_in_year}}_estimates";
 const last_year_col = "{{est_last_year}}_estimates";
 
 
+const row_identifier_func = row => `${row.dept}-${row.votenum}-${row.desc}`; 
+
 //in this cpn, we don't care about supps
 const reduce_by_supps_dim = (rows) => _.chain(rows)
-  .groupBy( row => `${row.dept}-${row.votenum}-${row.desc}`)
+  .groupBy(row_identifier_func)
   .toPairs()
   .map( ([_x, group]) => {
     const [ first ] = group;
@@ -28,7 +31,6 @@ const reduce_by_supps_dim = (rows) => _.chain(rows)
       desc: first.desc,
       votenum: first.votenum,
       this_year: _.sumBy(group, this_year_col) || 0,
-      last_year: _.sumBy(group, last_year_col) || 0,
       last_year_mains: _.chain(group).filter({est_doc_code: "MAINS"}).sumBy(last_year_col).value(),
       _rows: group,
     };
@@ -46,7 +48,7 @@ const get_doc_code_breakdowns = rows => _.chain(rows)
   .value()
 
 
-function get_data(include_stat){
+function get_data_by_org(include_stat){
   const data = _.chain(Table.lookup('table8').data)
     .pipe(include_stat ? _.identity : rows => _.reject(rows, {votestattype: 999}))
     .filter(obj => obj[this_year_col] || obj[last_year_col] )
@@ -57,7 +59,6 @@ function get_data(include_stat){
 
       const org = Dept.lookup(org_id);
       const this_year = _.sumBy(rows, "this_year") || 0;
-      const last_year  = _.sumBy(rows, "last_year") || 0;
       const last_year_mains = _.sumBy(rows, "last_year_mains") || 0;
       const inc = this_year-last_year_mains;
       const inc_pct = inc/last_year_mains;
@@ -70,7 +71,6 @@ function get_data(include_stat){
           name: org.name,
           subject: org,
           this_year,
-          last_year,
           last_year_mains,
           inc,
           inc_pct,
@@ -96,7 +96,6 @@ function get_data(include_stat){
             data: {
               name: row.desc,
               this_year,
-              last_year: row.last_year || 0,
               last_year_mains,
               inc,
               inc_pct,
@@ -120,6 +119,122 @@ function get_data(include_stat){
     data: {},
     children: data,
   };
+
+  const d3_h7y = d3.hierarchy(root, _.property('children'));
+  return convert_d3_hierarchy_to_explorer_hierarchy(d3_h7y);
+
+}
+
+const strip_stat_marker = str => str.indexOf("(S) ") > -1 ? str.split("(S) ")[1] : str;
+
+const get_category_children = (rows) => _.chain(rows)
+  .pipe(reduce_by_supps_dim)
+  .map(new_row => {
+    const { votenum, desc, dept } = new_row;
+    const this_year = new_row.this_year || 0;
+    const last_year_mains = new_row.last_year_mains || 0;
+    const inc = this_year - last_year_mains;
+    const inc_pct = inc/last_year_mains;
+
+    return {
+      id: `${dept}-${votenum}-${desc}`,
+      data: {
+        name: `${Dept.lookup(dept).name} - ${strip_stat_marker(desc)}`,
+        last_year_mains,
+        this_year,
+        inc,
+        inc_pct,
+        last_year_amounts_by_doc: get_doc_code_breakdowns(new_row._rows),
+        footnotes: get_footnotes_for_votestat_item({
+          desc: new_row.desc,
+          org_id: dept,
+          votenum,
+        }),
+      },
+    };
+    
+  })
+  .value();
+
+function get_data_by_item_types(){
+  const nested_data = _.chain( Table.lookup('table8').major_voted_big_stat([this_year_col,last_year_col], false, false) )
+    .toPairs()
+    .map( ([ category, rows ])  => {
+
+      const this_year = _.sumBy(rows, this_year_col);
+      const last_year_mains = _.sumBy(rows, last_year_col);
+      const inc = this_year - last_year_mains;
+      const inc_pct = inc/last_year_mains;
+
+
+      const is_voted = _.isNumber(_.first(rows).votenum);
+    
+
+      const is_single_item = _.chain(rows).map(row_identifier_func).uniq().value().length === 1;
+
+      const name = (
+        is_single_item ?
+        `${strip_stat_marker(category)} - ${Dept.lookup(rows[0].dept).name}` :
+        strip_stat_marker(category)
+      );
+
+      return {
+        id: category,
+        data: {
+          name,
+          this_year,
+          last_year_mains,
+          inc,
+          inc_pct,
+          last_year_amounts_by_doc: get_doc_code_breakdowns(rows),
+          is_voted,
+        },
+        children: (
+          is_single_item ? 
+          null :
+          get_category_children(rows)
+        ),
+      };
+    })
+    .value();
+
+
+  const vote_stat = _.chain(nested_data)
+    .partition("data.is_voted")
+    .map( (categories, ix) => {
+      const is_voted = ix === 0;
+      const this_year = _.sumBy(categories,"data.this_year");
+      const last_year_mains = _.sumBy(categories,"data.last_year_mains")
+      const inc = this_year - last_year_mains;
+      const inc_pct = inc/last_year_mains;
+
+      return {
+        id: is_voted ? "voted" : "stat",
+        children: categories,
+        data: {
+          name: text_maker(is_voted ? "voted_items" : "stat_items"),
+          this_year,
+          last_year_mains,
+          inc,
+          inc_pct,
+        },
+        isExpanded: true,
+      };
+
+    })
+    .value();
+
+  const root = {
+    id: 'root',
+    data: {},
+    children: vote_stat,
+  };
+
+  // const root = {
+  //   id:"root",
+  //   data:{},
+  //   children: _.filter(nested_data, "data.is_voted"),
+  // }
 
   const d3_h7y = d3.hierarchy(root, _.property('children'));
   return convert_d3_hierarchy_to_explorer_hierarchy(d3_h7y);
@@ -225,6 +340,7 @@ export const initial_state = {
   sort_col: "inc",
   is_descending: true,
   show_stat: true,
+  h7y_layout: "item_type",
 };
 export const estimates_diff_scheme = {
   key: scheme_key,
@@ -249,13 +365,26 @@ export const estimates_diff_scheme = {
   dispatch_to_props: dispatch => ({ 
     col_click : col_key => dispatch({type: 'column_header_click', payload: col_key }),
     toggle_stat_filter: ()=> dispatch({type: "toggle_stat_filter"}),
+    set_h7y_layout: layout_key=> dispatch({type: "set_h7y_layout", payload: layout_key}),
   }),
   reducer: (state=initial_state, action) => {
     const { type, payload } = action;
+
+    if(type === "set_h7y_layout"){ //this should always reset the show_stat filter 
+      if(payload === state.h7y_layout){  //if no change, state don't change
+        return state;
+      }
+      return {
+        ...state,
+        show_stat: true,
+        h7y_layout: payload,
+      };
+    }
     if(type === "toggle_stat_filter"){
-      return _.immutate(state, {
+      return {
+        ...state,
         show_stat: !state.show_stat,
-      });
+      };
     }
     if(type === 'column_header_click'){
       const { is_descending, sort_col } = state;
@@ -265,7 +394,7 @@ export const estimates_diff_scheme = {
         { is_descending : !is_descending } :
         { is_descending: true, sort_col : clicked_col }
       );
-      return _.immutate(state, mods);
+      return {...state,...mods}
     } else {
       return state;
     }
@@ -273,10 +402,19 @@ export const estimates_diff_scheme = {
   },
   get_base_hierarchy_selector: () => createSelector(
     _.property("estimates_diff.show_stat"),
-    should_show_stat => get_data(should_show_stat)
+    _.property("estimates_diff.h7y_layout"),
+    (should_show_stat, h7y_layout) => {
+      if(h7y_layout === "org"){
+        return get_data_by_org(should_show_stat);
+      } else {
+        return get_data_by_item_types();
+      }
+    }
   ),
-  shouldUpdateFlatNodes(oldSchemeState, newSchemeState){
-    return oldSchemeState.show_stat !== newSchemeState.show_stat;
-  },
+  shouldUpdateFlatNodes: (oldSchemeState, newSchemeState) => !shallowEqualObjectsOverKeys(
+    oldSchemeState,
+    newSchemeState,
+    ["show_stat", "h7y_layout"]
+  ),
 };
 

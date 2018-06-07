@@ -15,8 +15,8 @@ new:
   fr: Nouvel objet
 
 item_no_longer_active:
-  en: No longer active
-  fr: Objet ancien
+  en: Inactive
+  fr: Inactif
 
 
 biv_footnote:
@@ -71,3 +71,25 @@ show_only_votes:
 showing_only_votes:
   en: Only showing voted items
   fr: Seulement les objet votés sont affichés
+
+
+voted_items:
+  en: Voted items
+  fr: Objets votés
+
+stat_items:
+  en: Statutory items
+  fr: Objet Statutaires
+
+by_org:
+  en: By Organization
+  fr: Par organisation
+
+by_item_type:
+  en: By Item Type 
+  fr: Par type d'objet
+
+
+choose_grouping_scheme:
+  en: Item grouping scheme
+  fr: Regroupement des objets

@@ -5,11 +5,14 @@ import { Provider, connect } from 'react-redux';
 import { StandardRouteContainer } from '../core/NavComponents';
 import { infograph_href_template } from '../link_utils.js';
 
+
 import {
   SpinnerWrapper,
   FootnoteList,
   HeightClipper,
   Format,
+  RadioButtons,
+  LabeledBox,
 } from '../util_components.js';
 
 import { 
@@ -168,8 +171,7 @@ const get_non_col_content = ({node}) => {
 
   return (
     <div>
-      { _.isEmpty(last_year_amounts_by_doc) ?
-        <TM k="no_historical_info" /> : 
+      { !_.isEmpty(last_year_amounts_by_doc) &&
         <div>
           <LastYearAmouts last_year_amounts_by_doc={last_year_amounts_by_doc} />
         </div>
@@ -236,6 +238,8 @@ class EstimatesExplorer extends React.Component {
       //scheme props
       show_stat,
       toggle_stat_filter,
+      h7y_layout,
+      set_h7y_layout,
     } = this.props;
     const { loading } = this.state;
 
@@ -257,18 +261,35 @@ class EstimatesExplorer extends React.Component {
         <div className="medium_panel_text mrgn-tp-lg">
           <TM k="diff_view_top_text" />
         </div>
-        <div style={{marginTop: '15px'}}>
-          <div>
-            <label>
-              <input
-                type="checkbox"
-                checked={!show_stat}
-                onChange={toggle_stat_filter}
-                style={{ marginRight: '1rem' }}
-              />
-              <TM k="show_only_votes" />
-            </label>
-          </div>
+        <div 
+          style={{
+            marginBottom: "15px",
+          }}
+        >
+          <LabeledBox
+            label={ <TM k="choose_grouping_scheme"/> }
+            content={
+              <div className="centerer">
+                <RadioButtons
+                  options={[
+                    {
+                      id: "org",
+                      active: h7y_layout === "org",
+                      display: <TM k="by_org" />,
+                    },
+                    {
+                      id: "item_type",
+                      active: h7y_layout === "item_type",
+                      display: <TM k="by_item_type" />,
+                    },
+                  ]}
+                  onChange={ id => set_h7y_layout(id) }
+                />
+              </div>
+            }
+          />
+        </div>
+        <div>
           <form
             style={{marginBottom: "15px"}}
             onSubmit={evt => {
@@ -293,6 +314,17 @@ class EstimatesExplorer extends React.Component {
                 name="search"
                 value={text_maker("explorer_search")}
               />
+            }
+            { h7y_layout === "org" &&
+              <label>
+                <input
+                  type="checkbox"
+                  checked={!show_stat}
+                  onChange={toggle_stat_filter}
+                  style={{ marginRight: '1rem' }}
+                />
+                <TM k="show_only_votes" />
+              </label>
             }
           </form>
         </div>
