@@ -94,7 +94,7 @@ const StdPanel = ({ title, sources, footnotes, children }) => {
         <div 
           className={
             classNames(
-              `col-xs-12 col-md-${size}`, 
+              `fcol-xs-12 fcol-md-${size}`,
               isText && "medium_panel_text", 
               !_.isUndefined(extraClasses) && extraClasses
             )

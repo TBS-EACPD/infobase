@@ -92,8 +92,8 @@ const calculate_funcs_by_level = {
           <Col size={12} isText>
             <TM k={level+"_employee_executive_level_text"} args={info} />
           </Col>
-          <Col size={12} isGraph>
-            { !window.is_a11y_mode &&
+          { !window.is_a11y_mode &&
+            <Col size={12} isGraph>
               <D3GraphWithLegend
                 options = {{
                   legend_col_full_size: 4,
@@ -109,10 +109,10 @@ const calculate_funcs_by_level = {
                   "sort_data": false,
                 }}
               />
-            }
-          </Col>
-          <Col size={12} isGraph>
-            { window.is_a11y_mode &&
+            </Col>
+          }
+          { window.is_a11y_mode &&
+            <Col size={12} isGraph>
               <A11YTable
                 label_col_header = {text_maker("ex_level")}
                 data_col_headers = {[...ticks, text_maker("five_year_percent_header")]}
@@ -122,8 +122,8 @@ const calculate_funcs_by_level = {
                   }
                 )}
               />
-            }
-          </Col>
+            </Col>
+          }
         </StdPanel>
       );
     },

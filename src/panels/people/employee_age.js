@@ -178,8 +178,8 @@ const calculate_funcs_by_level = {
           <Col size={12} isText>
             <TM k={level+"_employee_age_text"} args={info} />
           </Col>
-          <Col size={12} isGraph extraClasses="zero-padding">
-            { !window.is_a11y_mode &&
+          { !window.is_a11y_mode &&
+            <Col size={12} isGraph extraClasses="zero-padding"> 
               <TabbedContent
                 tabKeys={["age_group", "avgage"]}
                 tabLabels={{
@@ -207,10 +207,10 @@ const calculate_funcs_by_level = {
                   ),
                 }}
               />
-            }
-          </Col>
-          <Col size={12} isGraph>
-            { window.is_a11y_mode &&
+            </Col>
+          }
+          { window.is_a11y_mode &&
+            <Col size={12} isGraph>
               <A11YTable
                 label_col_header = {text_maker("age_group")}
                 data_col_headers = {[...ticks, text_maker("five_year_percent_header")]}
@@ -218,17 +218,17 @@ const calculate_funcs_by_level = {
                   return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]} 
                 })}
               />
-            }
-          </Col>
-          <Col size={12} isGraph>
-            { window.is_a11y_mode &&
+            </Col>
+          }
+          { window.is_a11y_mode &&
+            <Col size={12} isGraph>
               <A11YTable
                 label_col_header = {text_maker("avgage")}
                 data_col_headers = {ticks}
                 data = {graph_args.avg_age}
               />
-            }
-          </Col>
+            </Col>
+          }
         </StdPanel>
       );
     },

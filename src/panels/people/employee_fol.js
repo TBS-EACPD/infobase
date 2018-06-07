@@ -87,16 +87,16 @@ const calculate_funcs_by_level = {
           <Col size={5} isText>
             <TM k={level+"_employee_fol_text"} args={info} />
           </Col>
-          <Col size={7} isGraph>
-            { !window.is_a11y_mode &&
+          { !window.is_a11y_mode &&
+            <Col size={7} isGraph>
               <PplSharePie
                 graph_args = {graph_args}
                 label_col_header = {text_maker("FOL")}
               />
-            }
-          </Col>
-          <Col size={12} isGraph>
-            { !window.is_a11y_mode && level === "dept" &&
+            </Col>
+          }
+          { !window.is_a11y_mode && level === "dept" &&
+            <Col size={12} isGraph>
               <HeightClippedGraphWithLegend
                 create_graph_with_legend_options = {{
                   legend_col_full_size: 4,
@@ -112,10 +112,10 @@ const calculate_funcs_by_level = {
                   data: graph_args,
                 }}
               />
-            }
-          </Col>
-          <Col size={12} isGraph>
-            { window.is_a11y_mode &&
+            </Col>
+          }
+          { window.is_a11y_mode &&
+            <Col size={12} isGraph>
               <A11YTable
                 label_col_header = {text_maker("FOL")}
                 data_col_headers = {[...ticks, text_maker("five_year_percent_header")]}
@@ -123,8 +123,8 @@ const calculate_funcs_by_level = {
                   return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]};
                 })}
               />
-            }
-          </Col>
+            </Col>
+          }
         </StdPanel>
       );
     },

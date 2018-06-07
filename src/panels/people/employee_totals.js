@@ -62,21 +62,21 @@ const info_deps_by_level = {
           <Col size={4} isText>
             <TM k={level+"_employee_totals_text"} args={info} />
           </Col>
-          <Col size={8} isGraph>
-            { !window.is_a11y_mode &&
-              <Line
-                series = {series}
-                ticks = {ticks}
-                colors = {infobase_colors()}
-                add_yaxis = {true}
-                add_xaxis = {true}
-                y_axis = {text_maker("employees")}
-                formater = {formats["big_int_real_raw"]}
-              />
-            }
-          </Col>
-          <Col size={12} isGraph>
-            { window.is_a11y_mode &&
+          { !window.is_a11y_mode &&
+             <Col size={8} isGraph>
+               <Line
+                 series = {series}
+                 ticks = {ticks}
+                 colors = {infobase_colors()}
+                 add_yaxis = {true}
+                 add_xaxis = {true}
+                 y_axis = {text_maker("employees")}
+                 formater = {formats["big_int_real_raw"]}
+               />
+             </Col>
+          }
+          { window.is_a11y_mode &&
+            <Col size={12} isGraph>
               <A11YTable
                 label_col_header = {text_maker("org")} 
                 data_col_headers = {ticks}
@@ -85,8 +85,8 @@ const info_deps_by_level = {
                   data: series[""],
                 }]}
               />
-            }
-          </Col>
+            </Col>
+          }
         </StdPanel>
       );
     },
