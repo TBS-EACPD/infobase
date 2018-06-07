@@ -110,32 +110,33 @@ const HomeLayout = props => (
         <div className="flag">
           <img src={'svg/flagline.svg'}/>
         </div>
-        <div className="home-trinity-container">
-          <div className="frow">
-            <div className="col-md-4">
-              <TrinityItem 
-                href="#orgs/gov/gov/infograph/financial"
-                img_url='svg/expend.svg'
-                title={<TM k="home_finance_title" />}
-              />
-            </div>
-            <div className="col-md-4">
-              <TrinityItem 
-                href="#orgs/gov/gov/infograph/people"
-                img_url='svg/people.svg' 
-                title={<TM k="home_ppl_title" />}
-              />
-            </div>
-            <div className="col-md-4">
-              <TrinityItem
-                href="#orgs/gov/gov/infograph/results"
-                img_url='svg/results.svg' 
-                title={<TM k="home_results_title" />}
-              />
-            </div>
+      </div>
+    </div>
+    <div className="container">
+      <div className="home-trinity-container">
+        <div className="frow">
+          <div className="col-md-4">
+            <TrinityItem 
+              href="#orgs/gov/gov/infograph/financial"
+              img_url='svg/expend.svg'
+              title={<TM k="home_finance_title" />}
+            />
+          </div>
+          <div className="col-md-4">
+            <TrinityItem 
+              href="#orgs/gov/gov/infograph/people"
+              img_url='svg/people.svg' 
+              title={<TM k="home_ppl_title" />}
+            />
+          </div>
+          <div className="col-md-4">
+            <TrinityItem
+              href="#orgs/gov/gov/infograph/results"
+              img_url='svg/results.svg' 
+              title={<TM k="home_results_title" />}
+            />
           </div>
         </div>
-        
       </div>
     </div>
 
@@ -214,7 +215,7 @@ const HomeLayout = props => (
     <div className="container">
       <div className="xtralinks">
         <div className='frow'>
-          <div className="fcol-md-4">
+          <div className="fcol-md-4 linkcard">
             <section className="explore-col-content">
               <VImageCard
                 img_src="svg/bubbles.svg"
@@ -224,7 +225,7 @@ const HomeLayout = props => (
               />
             </section>
           </div>
-          <div className="fcol-md-4">
+          <div className="fcol-md-4 linkcard">
             <section className="explore-col-content">
               <VImageCard
                 img_src="svg/explorer.svg"
@@ -234,7 +235,7 @@ const HomeLayout = props => (
               />
             </section>
           </div>
-          <div className="fcol-md-4">
+          <div className="fcol-md-4 linkcard">
             <section className="explore-col-content">
               <VImageCard
                 img_src="svg/builder.svg"
@@ -244,7 +245,7 @@ const HomeLayout = props => (
               />
             </section>
           </div>
-          <div className="fcol-md-4">
+          <div className="fcol-md-4 linkcard">
             <section className="explore-col-content">
               <VImageCard
                 img_src="svg/structure.svg"
@@ -254,7 +255,7 @@ const HomeLayout = props => (
               />
             </section>
           </div>
-          <div className="fcol-md-4">
+          <div className="fcol-md-4 linkcard">
             <section className="explore-col-content">
               <VImageCard
                 img_src="svg/glossary.svg"
@@ -264,7 +265,7 @@ const HomeLayout = props => (
               />
             </section>
           </div>
-          <div className="fcol-md-4">
+          <div className="fcol-md-4 linkcard">
             <section className="explore-col-content">
               <VImageCard
                 img_src="svg/metadata.svg"
@@ -274,7 +275,7 @@ const HomeLayout = props => (
               />
             </section>
           </div>
-          <div className="fcol-md-4">
+          <div className="fcol-md-4 linkcard">
             <section className="explore-col-content">
               <VImageCard
                 img_src="svg/aboutus.svg"
