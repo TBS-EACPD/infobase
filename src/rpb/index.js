@@ -301,7 +301,7 @@ class RPB extends React.Component {
                 <GranularView {...this.props} /> 
               ) :
               null
-            },
+            }
           </Fragment>
       }
     </div>
