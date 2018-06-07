@@ -8,6 +8,7 @@ const {
   vote_stat_dimension, 
   major_vote_stat, 
   trivial_text_maker, 
+  major_vote_big_stat,
   Statistics, 
   years : {
     estimates_years,
@@ -320,6 +321,11 @@ module.exports = {
       title_key : "major_voted_stat",
       include_in_report_builder : true,
       filter_func :  major_vote_stat,
+    },
+    {
+      title_key : "major_voted_big_stat",
+      include_in_report_builder : false,
+      filter_func :  major_vote_big_stat("{{est_in_year}}_estimates"),
     },
     {
       title_key :"voted_stat",

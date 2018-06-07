@@ -2,6 +2,8 @@ const {
   trivial_text_maker,
   run_template,
 } = require("../models/text");
+const { years } = require('../models/years.js');
+
 const vote_stat_dimension = options => d => trivial_text_maker(parseInt(d.votenum) ? 'voted' : 'stat' );
 const sobj_dimension = options => row => row.sobj_name;
 const lapse_item_dimension = options => row => row.lapse_item;
@@ -44,6 +46,50 @@ function major_vote_stat(options){
   };
 }
 
+
+const major_vote_big_stat = col_to_sum => (options) =>{
+
+  var by_type_and_desc = d3.nest()
+    .key(function(d){return d.votestattype;})
+    .key(function(d){return d.desc;})
+    .object(options.table.data);
+
+
+  var interesting_stats= _.chain(by_type_and_desc['999'])
+    .toPairs()
+    .filter( ([key,group]) => { 
+      const group_size = group.length; 
+      const group_total = _.sumBy(group,col_to_sum); 
+      return (
+        (group_size > 30 && group_total > 30000000) //must be a group of at least and have at least 30 million
+        || group_total > 5000000000  //interesting stat items to have minimum 5 billion
+      );
+    })
+    .map(function(key_grp){return key_grp[0];})
+    .value();
+
+  var sort_map = _.chain(by_type_and_desc)
+    .toPairs()
+    .map(function(key_grp){
+      return [trivial_text_maker("vstype"+key_grp[0]),+key_grp[0]];
+    })
+    .fromPairs()
+    .value();
+
+  options.table.horizontal_group_sort = function(group){
+    return +sort_map[group] || 998;
+  };
+  return function(row){
+    if (row.votestattype === 999){
+      if (_.includes(interesting_stats, row.desc)) {
+        return "(S) "+row.desc;
+      }
+    }
+    if (row.votestattype){
+      return trivial_text_maker("vstype"+row.votestattype);
+    }
+  };
+}
 
 
 function hist_major_vote_stat(options){
@@ -135,6 +181,7 @@ module.exports = exports = {
   sobj_dimension, 
   lapse_item_dimension, 
   major_vote_stat, 
+  major_vote_big_stat,
   hist_major_vote_stat, 
   people_five_year_percentage_formula,
   STATS : require("../core/tables/stats.js"),
@@ -146,5 +193,5 @@ module.exports = exports = {
   Subject : require("../models/subject"),
   Statistics  : require('../core/Statistics.js').Statistics,
   formats : require('../core/format').formats,
-  years :  require('../models/years.js').years,
+  years,
 };
