@@ -34,6 +34,17 @@
   border-radius: 10px;
   text-align: center !important;
   padding: 10px;
+  transition: transform 1s ease-in-out;
+  
+  &> a {
+    text-decoration: none;
+    color: black;
+  }
+  &:hover {
+    .v-img-card__img {
+      transform: scale(1.2);
+    }
+  }
 }
 
 .v-img-card__top-container {

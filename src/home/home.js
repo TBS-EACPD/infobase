@@ -211,11 +211,6 @@ const HomeLayout = props => (
       </div>
     </div>
 
-    {/*part 3*/}
-
-    {/*<div className="external-row-descriptor">
-        <TM k="home_explore_row_title" />
-              </div>*/}
     <div className="container">
       <div className="xtralinks">
         <div className='frow'>
@@ -265,7 +260,7 @@ const HomeLayout = props => (
                 img_src="svg/glossary.svg"
                 title_key="glossary_home_title"
                 text_key="glossary_home_desc"
-                a href="#glossary"
+                link_href="#glossary"
               />
             </section>
           </div>
