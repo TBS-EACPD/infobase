@@ -5,7 +5,17 @@ budget_measures_panel_title:
 budget_measure_stats_partial_en:
   handlebars_partial: true
   text: |
-    This funding comes from **{{measure_count}}** budget measures across **{{chapter_count}}** thematic chapters.
+    This funding comes from **{{measure_count}}**
+    {{#if multiple_measures}}
+    budget measures
+    {{else}}
+    budget measure
+    {{/if}}
+    {{#if multiple_chapters}}
+    across **{{chapter_count}}** budget chapters.
+    {{else}}
+    in **1** budget chapter.
+    {{/if}}
 
 budget_measure_stats_partial_fr:
   handlebars_partial: true
@@ -22,9 +32,9 @@ gov_budget_measures_panel_text:
 dept_budget_measures_panel_text:
   transform: [handlebars, markdown]
   en: |
-    Budget 2018 provides an additional **{{fmt_compact_written total_funding}}** in funding to **{{subj_name subject}}** for **2018-19**. 
+    Budget 2018 provides **{{subj_name subject}}** with up to **{{fmt_compact_written total_funding}}** in additional funding for **2018-19**.
     {{> "budget_measure_stats_partial_en"}}
-    For additional government-wide information on budget measures, please see our [Budget Tracker](#budget-measures/budget-measure) page.
+    For additional government-wide information on budget measures, see our [Budget Tracker](#budget-measures/budget-measure) page.
   fr: |
     TODO.
     {{> "budget_measure_stats_partial_fr"}}

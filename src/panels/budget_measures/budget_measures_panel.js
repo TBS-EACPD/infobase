@@ -45,6 +45,8 @@ const calculate_stats_common = (data) => {
     total_funding,
     measure_count,
     chapter_count,
+    multiple_measures: measure_count > 1,
+    multiple_chapters: chapter_count > 1,
   }
 }
 
@@ -149,7 +151,7 @@ class BudgetMeasureHBars extends React.Component {
         info,
       },
     } = this.props;
-    
+
     const text_area = <div className = "frow" >
       <div className = "fcol-md-12 fcol-xs-12 medium_panel_text text">
         {  subject.level === "gov" &&
