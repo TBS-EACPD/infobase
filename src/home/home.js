@@ -141,10 +141,10 @@ const HomeLayout = props => (
     </div>
 
     <div className="container">
-      <div className="frow home-cols">
-        <div className="fcol-md-7 home-col">
-          <div className="col-content featured-col-content partition-budget-home-content">
-            <MediaQuery minWidth={992}>
+      <div className="home-body">
+        <div className="frow home-cols">
+          <div className="fcol-md-7 home-col">
+            <div className="col-content featured-col-content partition-budget-home-content">
               <HImageCard
                 img_src="svg/partition-budget.svg"
                 title_key="budget_home_title"
@@ -152,48 +152,48 @@ const HomeLayout = props => (
                 link_key="check_home_link"
                 link_href="#budget-measures/budget-measure"
               />
-            </MediaQuery>
-          </div>     
-        </div>
-        <div className="fcol-md-5  home-col">
-          <header className="h3">
-            Jump to an infographic
-          </header> 
-          <div className="search-box">
-            <div className="search-container">
-              <EverythingSearch 
-                include_gov={false} 
-                search_text={text_maker('everything_search_placeholder')}
-                large={true}
-                include_tags={true}
-                include_programs={true}
-                include_crsos={true}
-                include_tables={true} 
-                include_glossary={true}
-                org_scope="orgs_with_data_with_gov"
-                href_template={ general_href_for_item }
-                onNewQuery={ query => { 
-                  log_standard_event({
-                    SUBAPP: "home",
-                    SUBJECT_GUID: null, 
-                    MISC1: "home_search",
-                    MISC2: query,
-                  });
-                }}
-              />
-            </div>
+            </div>     
           </div>
-
-          <section>
+          <div className="fcol-md-5  home-col">
             <header className="h3">
-              <TM k="featured_data_title" />
-            </header>
-            <div>
-              <ul className="list-group list-group--quick-links">
-                { _.map( props.featured_content_items, item => <FeaturedContentItem key={item.text_key} {...item} /> ) }
-              </ul>
+            Jump to an infographic
+            </header> 
+            <div className="search-box">
+              <div className="search-container">
+                <EverythingSearch 
+                  include_gov={false} 
+                  search_text={text_maker('everything_search_placeholder')}
+                  large={true}
+                  include_tags={true}
+                  include_programs={true}
+                  include_crsos={true}
+                  include_tables={true} 
+                  include_glossary={true}
+                  org_scope="orgs_with_data_with_gov"
+                  href_template={ general_href_for_item }
+                  onNewQuery={ query => { 
+                    log_standard_event({
+                      SUBAPP: "home",
+                      SUBJECT_GUID: null, 
+                      MISC1: "home_search",
+                      MISC2: query,
+                    });
+                  }}
+                />
+              </div>
             </div>
-          </section>  
+
+            <section>
+              <header className="h3">
+                <TM k="featured_data_title" />
+              </header>
+              <div>
+                <ul className="list-group list-group--quick-links">
+                  { _.map( props.featured_content_items, item => <FeaturedContentItem key={item.text_key} {...item} /> ) }
+                </ul>
+              </div>
+            </section>  
+          </div>
         </div>
       </div>
     </div>

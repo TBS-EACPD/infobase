@@ -298,9 +298,20 @@ $home-bg-color: #284162;
   margin-top: 3rem;
   &>.frow {
       margin: 0 0.5rem 0rem 0.5rem;
+      @media(max-width:610px){
+        flex-direction: column;
+        &>.col-md-4{
+          padding: 2%;
+        }
+        .TrinityItem {
+          &:hover {
+            transform: scale(1.05);
+        }
+      }
+    }  
   }
 }
-  
+
 
 .TrinityItem {
   @include unstyled-link;
@@ -308,7 +319,6 @@ $home-bg-color: #284162;
   border-radius: 10px;
   width: 90%;
   padding: 3rem;
-  transform: scale(1);
 
   display: flex;
   flex-direction: column;
@@ -343,6 +353,7 @@ $col_gutter_width: 2rem;
   &>.home-col {
     padding-right: $col_gutter_width;
     padding-left: $col_gutter_width;
+    width:100%;
   }
 }
 
@@ -362,6 +373,10 @@ $col_gutter_width: 2rem;
   &:hover{
     background-color: rgb(236, 236, 236) !important;
   }
-
 }
 
+.home-body{
+  &>.frow{
+    justify-content: center;
+  }
+}

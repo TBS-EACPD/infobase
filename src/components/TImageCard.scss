@@ -68,6 +68,9 @@
   padding: 15px;
   transform: translate(-50%, 0);
   left: 50%;
+  @media(max-width:1360px){
+    width: 100vw;
+  }
 }
 
 .t-img-card__right {
@@ -120,4 +123,7 @@
   &> a {
     color:white;
   }
+  @media(max-width:610px){
+    padding: 10px 0 10px 0;
+  }  
 }
