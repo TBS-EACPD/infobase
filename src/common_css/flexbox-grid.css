@@ -41,7 +41,8 @@
   flex-direction: row;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  margin: 0 0.5rem 5rem 0.5rem;
+  margin-right: -0.5rem;
+  margin-left: -0.5rem;
 }
 
 .frow.no-container {
@@ -601,7 +602,6 @@
     -ms-flex-preferred-size: 58.33333333%;
     flex-basis: 58.33333333%;
     max-width: 58.33333333%;
-    padding-right: 5%;
   }
 
   .fcol-md-8 {
