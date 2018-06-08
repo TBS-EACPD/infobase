@@ -9,6 +9,7 @@ $home-bg-color: #284162;
   transform: translate(-50%, 0);
   position: relative;
   left: 50%;
+  overflow-x: hidden;
 
   input.typeahead.form-control.input-lg.tt-input {
     //search bar isn't wide enough to contain all placeholder text
@@ -349,6 +350,7 @@ $col_gutter_width: 2rem;
 .frow.home-cols {
   margin-left: -$col_gutter_width;
   margin-right: -$col_gutter_width;
+  margin-bottom: 5%;
 
   &>.home-col {
     padding-right: $col_gutter_width;
