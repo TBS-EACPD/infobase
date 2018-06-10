@@ -1,21 +1,25 @@
-import "./goco.ib.yaml";
+import text from "./goco.ib.yaml";
 
 import {
+  create_text_maker,
+  TM as StdTM,
   PanelGraph,
   Subject,
-  text_maker,
   reactAdapter,  
-  Table,
   formats,
   declarative_charts,
   util_components,
   charts_index,
+  Panel,
+  Table,
 } from '../shared.js';
 
 const { GraphLegend } = declarative_charts;
 const { Format } = util_components;
 const { Tag } = Subject;
 
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 const state = {active_spend_area : null};
 const title_font_size = "1.5em";
@@ -53,20 +57,13 @@ const fade_out = function(d){
 
 
 new PanelGraph({
-  is_old_api: true,
   key: 'gocographic',
   level: 'gov',
   depends_on: ['table6', 'table12'],
   footnotes: ["GOCA"],
-
-  layout: {
-    full : {text : 12, graph: [12]}, 
-  },
-
-  title: 'gocographic_title',
   calculate: _.constant(true),
-
-  render(panel,calculations, { history }){
+  render,
+  old_render(panel,calculations, { history }){
     const graph_area = d3.select(panel.areas().graph.node());
 
     const text_area = d3.select(panel.areas().text.node());
@@ -279,3 +276,76 @@ class Goco {
     this.history.push(href);
   }
 }
+
+function render({calculations, footnotes, sources }, { history }){
+
+  const table6 = Table.lookup("table6");
+  const table12 = Table.lookup("table12");
+
+  const spend_yr = "{{pa_last_year}}exp";
+  const fte_yr = "{{pa_last_year}}";
+
+  const fte_spend_data = _.chain(Tag.gocos_by_spendarea)
+    .map(sa=> {
+      const children = _.map(sa.children_tags, goco => {
+        const spending = d3.sum(goco.programs, p => {
+          return table6.programs.get(p) ? _.first(table6.programs.get(p))[spend_yr] : 0;
+        });
+        const ftes = d3.sum(goco.programs, p => {
+          return table12.programs.get(p) ? _.first(table12.programs.get(p))[fte_yr] : 0;
+        });             
+        return {
+          spending,
+          ftes,
+        };
+      });
+      const spending = d3.sum(children, c=>c.spending);
+      const ftes = d3.sum(children, c=>c.ftes);
+      return {
+        sa_name: sa.name,
+        spending,
+        ftes,
+      };
+    })
+    .sortBy(d=>-d.spending)
+    .value();
+
+  const total_fte_spend = {
+    max_sa: _.first(_.map(fte_spend_data,"sa_name")),
+    max_sa_share: (_.first(_.map(fte_spend_data,"spending")) / d3.sum(_.map(fte_spend_data, "spending"))),
+    spending: d3.sum(_.map(fte_spend_data, "spending")),
+    ftes: d3.sum(_.map(fte_spend_data, "ftes")),
+  }
+  return (
+    <Panel
+      title={text_maker("gocographic_title")}
+      {...{sources,footnotes}}
+    >
+      <TM k="goco_intro_text" args={total_fte_spend}/>
+      <GocoDiagram 
+        history={history}
+      />
+    </Panel>
+  );
+}
+
+class GocoDiagram extends React.Component {
+  componentDidMount(){
+    const { el } = this;
+    const { history } = this.props;
+    d3.select(el)
+      .append("div")
+      .attr("id", "goco_mount")
+      .html(text_maker("goco_t"));
+
+    new Goco(
+      d3.select(el.querySelector("#goco_mount")), 
+      history
+    );
+  }
+
+  render(){
+    return <div ref={el=> this.el = el} />;
+  }
+}
+
