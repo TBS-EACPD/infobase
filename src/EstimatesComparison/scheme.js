@@ -291,7 +291,7 @@ export const col_defs = [
       } else if(val > 10){ //let's consider +1000% to be a new item
         return <Green><strong><TM k="new"/></strong></Green>;
       } else {
-        content= <Format type="percentage1" content={Math.abs(val)} />;
+        content= <Format type="percentage2" content={Math.abs(val)} />;
       }
 
       if(val>0){
