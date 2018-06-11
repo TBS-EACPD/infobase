@@ -28,23 +28,23 @@
   display: flex;
   width: 100%;
   max-width: 100%;
-  flex-direction: column;
+  flex-direction: row;
   align-items: stretch;
   min-height: 1px; /* IE11 image bug */
-  padding: 15px;
 }
 
 .h-img-card__left { 
   flex: 0 0 30%;
+  border-right: 1px solid #333;
   padding: 5px;
   display: flex;
   flex-direction: column;
-  justify-content: left;
-  text-align: left;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   max-width: 100%;
   min-height: 1px; /* IE11 image bug */
-  font-size: 2.6em; /* for glyphicons */
-  color: white;
+  font-size: 3.5em; /* for glyphicons */
 }
 
 .h-img-card__img-link {
@@ -58,63 +58,54 @@
 }
 
 .h-img-card__img {
-  width: 50%;
-  max-width: 50%;
+  width: 100%;
+  max-width: 100%;
   min-height: 1px; /* IE11 image bug */
-  padding: 15px;
-  margin: auto;
+}
 
+.h-img-card__right-container {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
 }
 
 .h-img-card__right {
   display: flex;
   width: 100%;
   max-width: 100%;
-  margin-top: -4%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex: 1 0 auto;
 }
 
 .h-img-card__title {
-  font-size: 0.7em;
+  font-size: 1.6em;
   font-weight: $mediumFontWeight;
-  text-align: left;
+  text-align: center;
   width: 100%;
   max-width: 100%;
-  padding: 10px 8px 10px 15px;
-  text-transform: uppercase;
+  padding: 8px;
 }
 
 .h-img-card__text {
-  font-size: 0.45em;
+  font-size: 1.2em;
   font-weight: $mediumFontWeight;
+  width: 100%;
+  max-width: 100%;
   margin-top: 10px;
   width: 100%;
   max-width: 100%;
   text-align: left;
-  padding: 0px 10px 8px 15px;
+  padding: 0 20px;
 }
 
 .h-img-card__bottom-right {
-  display: flex;
+  text-align: right;
   width: 100%;
   max-width: 100%;
-  justify-content: flex-end;
-}
-
-.h-img-card__link {
-  color: white;
-  text-align: center;
-  font-size: 1em;
-  padding: 20px 0 20px 0;
-  background-color: #FF5e59;
-  border-radius: 10px;
-  width: 30%;
-  max-width: 30%;
-  margin-right: 25px;
-
-  &> a {
-    color:white;
-  }
-  @media(max-width:610px){
-    padding: 15px 0 15px 0;
-  }  
+  margin-top: auto;
+  padding-top: 10px;
+  font-size: 1.2em;
+  padding: 15px 10px 10px 10px;
 }

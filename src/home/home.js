@@ -4,15 +4,13 @@ import './home-svg.css';
 import get_home_content from './home-data.js';
 import { log_standard_event } from '../core/analytics.js';
 import MediaQuery from 'react-responsive';
-import classNames from 'classnames';
-
 
 import { 
   EverythingSearch,
   TM,
   SpinnerWrapper,
   VImageCard,
-  HImageCard,
+  CImageCard,
   TImageCard,
 } from '../util_components.js';
 
@@ -145,7 +143,7 @@ const HomeLayout = props => (
         <div className="frow home-cols">
           <div className="fcol-md-7 home-col">
             <div className="col-content featured-col-content partition-budget-home-content">
-              <HImageCard
+              <CImageCard
                 img_src="svg/partition-budget.svg"
                 title_key="budget_home_title"
                 text_key="budget_home_text"
