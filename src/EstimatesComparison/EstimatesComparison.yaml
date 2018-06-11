@@ -2,6 +2,10 @@ diff_view_title:
   en: Estimates Comparison
   fr: Comparaison des budgets de dépenses
 
+diff_view_meta_desc:
+  en: See what's new in the government's spending plan
+  fr: Voir quels sont les changements dans le plan de dépenses du gouvernement    
+
 diff_view_top_text:
   transform: [handlebars, markdown]
   en: |

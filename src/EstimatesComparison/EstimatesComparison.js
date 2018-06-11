@@ -53,12 +53,12 @@ export class EstimatesComparison extends React.Component {
     })
   }
   render(){
-    
+    const title = text_maker("diff_view_title");
     return (
       <StandardRouteContainer
-        title={"dev"}
-        breadcrumbs={["dev"]}
-        description={"dev"}
+        title={title}
+        breadcrumbs={[title]}
+        description={text_maker("diff_view_meta_desc")}
         route_key="_dev"
       >
         <h1><TM k="diff_view_title"/></h1>
