@@ -324,7 +324,7 @@ module.exports = {
     },
     {
       title_key : "major_voted_big_stat",
-      include_in_report_builder : false,
+      exclude_from_rpb: true,
       filter_func :  major_vote_big_stat("{{est_in_year}}_estimates"),
     },
     {
