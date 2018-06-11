@@ -1,17 +1,15 @@
-import './vote-stat-text.ib.yaml';
+import { TM, text_maker } from './vote-stat-text-prodiver.js';
 import {
   formats,
   PanelGraph,
-  reactAdapter,
   declarative_charts,
+  StdPanel,
+  Col,
 } from "../shared";
 
 const { CirclePieChart } = declarative_charts;
 
-
-
 new PanelGraph({
-  is_old_api: true,
   level: "dept",
   depends_on :  ["table8"],
   machinery_footnotes : false,
@@ -22,17 +20,6 @@ new PanelGraph({
   ],
 
   key: 'estimates_in_perspective',
-
-  layout:{
-    full : {text : 5, graph: 7},
-    half : {text : 12, graph: [12,12]},
-  },
-
-  title :  "estimates_perspective_title",
-  text :  "estimates_perspective_text",
-  include_in_bubble_menu : true,
-  bubble_text_label : "estimates",
-
   calculate(subject, info, options){
     const { gov_tabled_est_in_year, dept_tabled_est_in_year_estimates } = info;
     if(dept_tabled_est_in_year_estimates){
@@ -45,15 +32,24 @@ new PanelGraph({
     }
   },
 
-  render(panel,calculations){
-    const { subject, graph_args } = calculations;
-    reactAdapter.render(
-      <DeptEstimatesPerspective
-        subject={subject} 
-        {...graph_args} 
-      />,
-      panel.areas().graph.node()
-    )
+  render({calculations, footnotes, sources}){
+    const { subject, graph_args, info } = calculations;
+    return (
+      <StdPanel
+        title={text_maker("estimates_perspective_title")}
+        {...{footnotes, sources}}
+      >
+        <Col isText size={5}>
+          <TM k="estimates_perspective_text" args={info} />
+        </Col>
+        <Col isGraph size={7}>
+          <DeptEstimatesPerspective
+            subject={subject} 
+            {...graph_args} 
+          />
+        </Col>
+      </StdPanel>
+    );
   },
 });
 
