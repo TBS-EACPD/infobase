@@ -47,7 +47,7 @@ tag_vote_stat_split_text:
    Le Parlement accorde des autorisations de dépenser aux ministères au moyen de d’autorisations {{gl_tt "législatives" "STAT"}} et {{gl_tt "votées" "VOTED"}}. Sur le montant maximal de **{{fmt_compact_written tag_total_exp}}** dépensé pour tous les programmes étiquetés sous l'étiquette «**{{subj_name subject}}**» en {{pa_last_year}}, **{{fmt_percentage1 tag_stat_pct}}** (**{{fmt_compact_written tag_stat_exp}}**) proviennent d’autorisations législatives et **{{fmt_percentage1 tag_voted_pct}}** (**{{fmt_compact_written tag_voted_exp}}**) d’autorisations votées.
 
 vote_stat_split_title:
-  transform: [handlebars,markdown]
+  transform: [handlebars]
   en: Voted and Statutory Split ({{pa_last_year}})
   fr: Division des autorisations votées et législatives ({{pa_last_year}})
 

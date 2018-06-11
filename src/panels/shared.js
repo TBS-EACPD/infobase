@@ -160,6 +160,8 @@ exports.sum_a_tag_col = function sum_tag_col(tag, table, col){
     .value();
 };
 
+
+
 exports.common_react_donut = function render(panel, calculations, options){
   const { graph_args } = calculations;
   
@@ -225,6 +227,71 @@ exports.common_react_donut = function render(panel, calculations, options){
       }
     </div>,
     node
+  );
+
+}
+
+exports.CommonDonut = function({data}){
+
+  const color_scale = infobase_colors();
+
+  const total = d3.sum(data, _.property('value'));
+
+  const has_neg = _.chain(data)
+    .map('value')
+    .min()
+    .value() < 0;
+
+  const legend_items = !has_neg && _.chain(data)
+    .sortBy('value')
+    .reverse()
+    .map( ({value, label }) => ({
+      value,
+      label,
+      color: color_scale(label),
+      id: label,
+    }))
+    .value();
+
+  return (
+    <div aria-hidden={true}>
+      <SafePie 
+        label_attr={false}
+        showLabels={false}
+        color={color_scale}
+        pct_formatter={formats.percentage1}
+        data={data}
+        inner_radius={true}
+        inner_text={true}
+        inner_text_fmt={formats.compact1_raw}
+        height={this.height || null}
+      />
+      { !has_neg && 
+        <div className="centerer" style={{marginTop: "-40px"}}>
+          <div 
+            style={{
+              width: "100%", /* IE 11 */ 
+              maxWidth: '400px', 
+              flexGrow: 1,
+            }}
+          >
+            <TabularPercentLegend
+              items={legend_items}
+              get_right_content={item => 
+                <div style={{width: "120px", display: "flex"}}>
+                  <div style={{width: "60px"}}>
+                    <Format type="compact1" content={item.value} />  
+                  </div>
+                  <div style={{width: "60px"}}>
+                    (<Format type="percentage1" content={(item.value)*Math.pow(total,-1)} />)
+                  </div>
+                </div>
+              }
+            />
+          </div>
+        </div>
+      }
+    </div>
   );
 
 }
