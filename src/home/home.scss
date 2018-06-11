@@ -204,92 +204,6 @@ $home-bg-color: #284162;
   color: #fcfcfc;
 }
 
-.finance-box {
-  border-top: 10px solid hsla(275, 63%, 80%, 1);
-
-  border-bottom-left-radius: 10px;
-
-  background-color: #823BB1;
-
-  &:active, &:hover, &:focus {
-    background-color: hsla(276, 65%, 85%, 1);
-  }
-}
-
-.people-box {
-  border-top: 10px solid hsla(208, 70%, 69%, 1);
-  background-color: #2070B9;
-
-  &:active, &:hover, &:focus {
-    background-color: hsla(208, 70%, 88%, 1);
-  }
-
-}
-.results-box {
-  border-top: 10px solid hsla(170, 50%, 74%, 1);
-  border-bottom-right-radius: 10px;
-  background-color:hsla(170, 40%, 35%, 1);
-
-  &:active, &:hover, &:focus {
-    background-color: hsla(170, 65%, 85%, 1);
-  }
-  
-}
-
-.people-box, .finance-box, .results-box {
-  @include unstyled-link;
-  color: #fff;
-  font-weight: $lightFontWeight;
-
-  &:active, &:hover, &:focus {
-    color: #333;
-  }
-}
-
-.results-box, .people-box, .finance-box {
-  .horizontal-img-card__title, .horizontal-img-card__text {
-    font-weight: $lightFontWeight;
-  }
-}
-
-.results-box, .people-box, .finance-box {
-  transition: background-color 500ms ease, color 500ms ease;
-  cursor: pointer;
-  position: relative;
-}
-
-.finance-box, .people-box, .results-box {
-  &:before {
-    content: "";
-    position: absolute;
-    top: -34px;
-    left: 50%;
-    transform: translate(-50%,-52px);
-    width: 70px;
-    height: 70px;
-    z-index: 1;
-    background-repeat: no-repeat;
-  }
-}
-
-.partition-budget-home-content {
-  & > .horizontal-img-card {
-    flex: 0 0 32.5%;
-
-    & > a > img {
-      @media(min-width:1200px){
-        width: 316px;
-      }
-      @media(max-width:1199px){
-        width: 91%;
-      }
-    }
-  }
-  & > .v-img-card > .v-img-card__top-container > .v-img-card__top > a > img {
-    width: 360px;
-  }
-}
-
 .flag{
   transform: translate(0, -20%);
   margin: 0;
@@ -297,25 +211,25 @@ $home-bg-color: #284162;
 
 .home-trinity-container {
   margin-top: 3rem;
-  &>.frow {
-    .col-md-4{
+  & > .frow {
+    & > .col-md-4{
       margin: auto;
     }
+
     @media(max-width:610px){
       flex-direction: column;
-      &>.col-md-4{
+
+      & > .col-md-4{
         padding: 2%;
         margin: 0;
       }
-      .TrinityItem {
-        &:hover {
-          transform: scale(1.05);
-        }
+      
+      & > .TrinityItem:hover {
+        transform: scale(1.05);
       }
     }  
   }
 }
-
 
 .TrinityItem {
   @include unstyled-link;
@@ -323,7 +237,6 @@ $home-bg-color: #284162;
   border-radius: 10px;
   width: 90%;
   padding: 3rem;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -331,7 +244,6 @@ $home-bg-color: #284162;
   transition: transform .2s ease-in-out;
   &:hover {
     transform: scale(1.2);
-    
   }
 }
 
@@ -355,7 +267,7 @@ $col_gutter_width: 2rem;
   margin-right: -$col_gutter_width;
   margin-bottom: 5%;
 
-  &>.home-col {
+  & > .home-col {
     padding-right: $col_gutter_width;
     padding-left: $col_gutter_width;
     width:100%;
@@ -381,7 +293,7 @@ $col_gutter_width: 2rem;
 }
 
 .home-body{
-  &>.frow{
+  & > .frow{
     justify-content: center;
   }
 }
