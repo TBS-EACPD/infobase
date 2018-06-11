@@ -146,7 +146,7 @@ const get_category_children = (rows) => _.chain(rows)
         inc_pct,
         last_year_amounts_by_doc: get_doc_code_breakdowns(new_row._rows),
         footnotes: get_footnotes_for_votestat_item({
-          desc: new_row.desc,
+          desc,
           org_id: dept,
           votenum,
         }),
@@ -319,7 +319,7 @@ const central_vote_footnotes = [
 ];
 
 function get_footnotes_for_votestat_item({desc, org_id, votenum}){
-  if(org_id === "326"){
+  if(+org_id === 326){
     const central_vote_footnote = _.find(
       central_vote_footnotes, 
       ([num]) => votenum === num
