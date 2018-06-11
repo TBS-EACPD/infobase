@@ -298,15 +298,18 @@ $home-bg-color: #284162;
 .home-trinity-container {
   margin-top: 3rem;
   &>.frow {
-      margin: 0 0.5rem 0rem 0.5rem;
-      @media(max-width:610px){
-        flex-direction: column;
-        &>.col-md-4{
-          padding: 2%;
-        }
-        .TrinityItem {
-          &:hover {
-            transform: scale(1.05);
+    .col-md-4{
+      margin: auto;
+    }
+    @media(max-width:610px){
+      flex-direction: column;
+      &>.col-md-4{
+        padding: 2%;
+        margin: 0;
+      }
+      .TrinityItem {
+        &:hover {
+          transform: scale(1.05);
         }
       }
     }  
