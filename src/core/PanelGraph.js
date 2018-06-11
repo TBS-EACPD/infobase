@@ -185,10 +185,15 @@ class PanelGraph {
 
     const footnote_concepts = this.footnote_concept_keys;
 
-    return FootNote.get_for_subject(
-      subject,
-      footnote_concepts
-    );
+    return _.chain(
+      FootNote.get_for_subject(
+        subject,
+        footnote_concepts
+      )
+    )
+      .map('text')
+      .compact()
+      .value();
   
 
   }
