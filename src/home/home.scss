@@ -247,7 +247,7 @@ $home-bg-color: #284162;
 }
 
 .results-box, .people-box, .finance-box {
-  .h-img-card__title, .h-img-card__text {
+  .horizontal-img-card__title, .horizontal-img-card__text {
     font-weight: $lightFontWeight;
   }
 }
@@ -273,7 +273,7 @@ $home-bg-color: #284162;
 }
 
 .partition-budget-home-content {
-  & > .h-img-card {
+  & > .horizontal-img-card {
     flex: 0 0 32.5%;
 
     & > a > img {

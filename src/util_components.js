@@ -35,10 +35,10 @@ const {
 
 const { TwoLevelSelect } = require('./components/TwoLevelSelect.js');
 
-const { VImageCard } = require('./components/VImageCard.js');
-const { HImageCard } = require('./components/HImageCard.js');
-const { CImageCard } = require('./components/CImageCard.js');
-const { TImageCard } = require('./components/TImageCard.js');
+const { CardTopImage } = require('./components/CardTopImage.js');
+const { CardLeftImage } = require('./components/CardLeftImage.js');
+const { CardCenteredImage } = require('./components/CardCenteredImage.js');
+const { CardBackgroundImage } = require('./components/CardBackgroundImage.js');
 
 const { DebouncedTextInput } = require('./components/DebouncedTextInput.js');
 
@@ -136,10 +136,10 @@ module.exports = {
   RadioButtons,
   FootnoteList,
   Year,
-  VImageCard,
-  HImageCard,
-  CImageCard,
-  TImageCard,
+  CardTopImage,
+  CardLeftImage,
+  CardCenteredImage,
+  CardBackgroundImage,
   DebouncedTextInput,
   Abbrev,
 }

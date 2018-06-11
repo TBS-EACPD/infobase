@@ -1,6 +1,6 @@
 @import '../common_css/common-variables';
 
-/* v-img-card 
+/* top-img-card 
 
  __________
  | /////// |
@@ -12,20 +12,20 @@
 
   structure: 
 
-  .v-img-card
-    .v-img-card__top-container
-      .v-img-card__top
-        .v-img-card__img-link
-          .v-img-card__img
-    .v-img-card__bottom-container
-      .v-img-card__bottom
-        .v-img-card__title
-        .v-img-card__text
-        .v-img-card__bottom-right
+  .top-img-card
+    .top-img-card__top-container
+      .top-img-card__top
+        .top-img-card__img-link
+          .top-img-card__img
+    .top-img-card__bottom-container
+      .top-img-card__bottom
+        .top-img-card__title
+        .top-img-card__text
+        .top-img-card__bottom-right
   
 */
 
-.v-img-card {
+.top-img-card {
   display: flex;
   flex-direction: column;
   justify-content: stretch;
@@ -41,13 +41,13 @@
     color: black;
   }
   /*&:hover {
-    .v-img-card__img {
+    .top-img-card__img {
       transform: scale(1.2);
     }
   }*/
 }
 
-.v-img-card__top-container {
+.top-img-card__top-container {
   width: 100%;
   max-width: 100%;
   display: flex;
@@ -57,7 +57,7 @@
   padding: 20px;
 }
 
-.v-img-card__top {
+.top-img-card__top {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -67,13 +67,13 @@
   max-width: 100%;
 }
 
-.v-img-card__img {
+.top-img-card__img {
   width:50%;
 }
 
 
 
-.v-img-card__img-link {
+.top-img-card__img-link {
   width: 100%;
   max-width: 100%;
   min-height: 1px; /* IE11 image bug */
@@ -83,13 +83,13 @@
   line-height: 0;
 }
 
-.v-img-card__bottom-container {
+.top-img-card__bottom-container {
   flex: auto;
   display: flex;
   width: 100%;
   max-width: 100%;
 }
-.v-img-card__bottom {
+.top-img-card__bottom {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -99,7 +99,7 @@
   max-width: 100%;
 }
 
-.v-img-card__title {
+.top-img-card__title {
   font-weight: $mediumFontWeight;
   font-size: 1.6em;
   width: 100%;
@@ -107,7 +107,7 @@
   padding: 10px;
 }
 
-.v-img-card__text {
+.top-img-card__text {
   font-size: 1.2em;
   width: 100%;
   max-width: 100%;
@@ -115,7 +115,7 @@
   color: #525257;
 }
 
-.v-img-card__bottom-right {
+.top-img-card__bottom-right {
   width: 100%;
   max-width: 100%;
 

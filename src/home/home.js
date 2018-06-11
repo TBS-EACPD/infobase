@@ -9,9 +9,9 @@ import {
   EverythingSearch,
   TM,
   SpinnerWrapper,
-  VImageCard,
-  CImageCard,
-  TImageCard,
+  CardTopImage,
+  CardCenteredImage,
+  CardBackgroundImage,
 } from '../util_components.js';
 
 import { general_href_for_item } from '../link_utils.js';
@@ -143,7 +143,7 @@ const HomeLayout = props => (
         <div className="frow home-cols">
           <div className="fcol-md-7 home-col">
             <div className="col-content featured-col-content partition-budget-home-content">
-              <CImageCard
+              <CardCenteredImage
                 img_src="svg/partition-budget.svg"
                 title_key="budget_home_title"
                 text_key="budget_home_text"
@@ -199,7 +199,7 @@ const HomeLayout = props => (
             
     <div className="home-bg" style={{position:"relative"}}>
       <div className="container">
-        <TImageCard
+        <CardBackgroundImage
           img_src="svg/partition.svg"
           title_key="partition_home_title"
           text_key="partition_home_text"
@@ -215,7 +215,7 @@ const HomeLayout = props => (
         <div className='frow'>
           <div className="fcol-md-4 linkcard">
             <section className="explore-col-content">
-              <VImageCard
+              <CardTopImage
                 img_src="svg/bubbles.svg"
                 title_key="planet_home_title"
                 text_key="planet_home_text"
@@ -225,7 +225,7 @@ const HomeLayout = props => (
           </div>
           <div className="fcol-md-4 linkcard">
             <section className="explore-col-content">
-              <VImageCard
+              <CardTopImage
                 img_src="svg/explorer.svg"
                 title_key="explorer_home_title"
                 text_key="explorer_home_text"
@@ -235,7 +235,7 @@ const HomeLayout = props => (
           </div>
           <div className="fcol-md-4 linkcard">
             <section className="explore-col-content">
-              <VImageCard
+              <CardTopImage
                 img_src="svg/builder.svg"
                 title_key="home_build_a_report"
                 text_key="report_builder_home_desc"
@@ -245,7 +245,7 @@ const HomeLayout = props => (
           </div>
           <div className="fcol-md-4 linkcard">
             <section className="explore-col-content">
-              <VImageCard
+              <CardTopImage
                 img_src="svg/structure.svg"
                 title_key="igoc_home_title"
                 text_key="igoc_home_desc"
@@ -255,7 +255,7 @@ const HomeLayout = props => (
           </div>
           <div className="fcol-md-4 linkcard">
             <section className="explore-col-content">
-              <VImageCard
+              <CardTopImage
                 img_src="svg/glossary.svg"
                 title_key="glossary_home_title"
                 text_key="glossary_home_desc"
@@ -265,7 +265,7 @@ const HomeLayout = props => (
           </div>
           <div className="fcol-md-4 linkcard">
             <section className="explore-col-content">
-              <VImageCard
+              <CardTopImage
                 img_src="svg/metadata.svg"
                 title_key="metadata_home_title"
                 text_key="metadata_home_desc"
@@ -275,7 +275,7 @@ const HomeLayout = props => (
           </div>
           <div className="fcol-md-4 linkcard">
             <section className="explore-col-content">
-              <VImageCard
+              <CardTopImage
                 img_src="svg/aboutus.svg"
                 title_key="about_home_title"
                 text_key="about_home_desc"

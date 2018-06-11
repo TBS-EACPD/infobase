@@ -1,30 +1,33 @@
 @import '../common_css/common-variables';
 
-/* t-img-card 
+/* centered-img-card 
 
   this component attempts to use BEM naming convention  
 
   ------------------------
-  | ///// | Title        |
-  | ///// | -------------|
-  |  IMG  | text content |
-  | ///// |              |
-  | ///// |         Link |
+  | Title                |
+  | text content         |
+  |    ///////////////   |
+  |    ///////////////   |
+  |    ////  IMG  ////   |
+  |    ///////////////   |
+  |    ///////////////   |
+  |                 Link |
   ------------------------
 
   structure: 
-    .t-img-card
-      .t-img-card__left
-        .t-img-card__img-link
-          .t-img-card__img
-      .t-img-card__right-container {
-        .t-img-card__right
-          .t-img-card__title
-          .t-img-card__text
-          .t-img-card__bottom-right
+    .centered-img-card
+      .centered-img-card__left
+        .centered-img-card__img-link
+          .centered-img-card__img
+      .centered-img-card__right-container {
+        .centered-img-card__right
+          .centered-img-card__title
+          .centered-img-card__text
+          .centered-img-card__bottom-right
 
 */
-.t-img-card {
+.centered-img-card {
   display: flex;
   width: 100%;
   max-width: 100%;
@@ -34,21 +37,20 @@
   padding: 15px;
 }
 
-.t-img-card__left { 
-  margin-top: -20%;
+.centered-img-card__left { 
   flex: 0 0 30%;
+  padding: 5px;
   display: flex;
   flex-direction: column;
   justify-content: left;
   text-align: left;
   max-width: 100%;
   min-height: 1px; /* IE11 image bug */
-  font-size: 2.5em; /* for glyphicons */
+  font-size: 2.6em; /* for glyphicons */
   color: white;
-  padding: 1%;
 }
 
-.t-img-card__img-link {
+.centered-img-card__img-link {
   width: 100%;
   max-width: 100%;
   min-height: 1px; /* IE11 image bug */
@@ -58,59 +60,49 @@
   line-height: 0;
 }
 
-.t-img-card__img {
-  width: 80vw;
-  max-width: none;
-  position: relative;
-  min-height: 1px;
-  opacity: 0.5;
-  margin-bottom: -10%;
+.centered-img-card__img {
+  width: 50%;
+  max-width: 50%;
+  min-height: 1px; /* IE11 image bug */
   padding: 15px;
-  transform: translate(-50%, 0);
-  left: 50%;
-  @media(max-width:1360px){
-    width: 100vw;
-  }
+  margin: auto;
 }
 
-.t-img-card__right {
+.centered-img-card__right {
   display: flex;
   width: 100%;
   max-width: 100%;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  flex: 1;
+  margin-top: -4%;
 }
 
-.t-img-card__title {
-  font-size: 0.8em;
+.centered-img-card__title {
+  font-size: 0.7em;
   font-weight: $mediumFontWeight;
   text-align: left;
   width: 100%;
   max-width: 100%;
+  padding: 10px 8px 10px 15px;
   text-transform: uppercase;
 }
 
-.t-img-card__text {
-  font-size: 0.5em;
+.centered-img-card__text {
+  font-size: 0.45em;
   font-weight: $mediumFontWeight;
   margin-top: 10px;
   width: 100%;
   max-width: 100%;
   text-align: left;
+  padding: 0px 10px 8px 15px;
 }
 
-.t-img-card__bottom-right {
+.centered-img-card__bottom-right {
   display: flex;
   width: 100%;
   max-width: 100%;
   justify-content: flex-end;
-  z-index: 1;
-  padding-bottom: 20px;
 }
 
-.t-img-card__link {
+.centered-img-card__link {
   color: white;
   text-align: center;
   font-size: 1em;
@@ -119,11 +111,12 @@
   border-radius: 10px;
   width: 30%;
   max-width: 30%;
+  margin-right: 25px;
 
-  &> a {
+  & > a {
     color:white;
   }
   @media(max-width:610px){
-    padding: 10px 0 10px 0;
-  }
+    padding: 15px 0 15px 0;
+  }  
 }
