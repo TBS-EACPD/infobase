@@ -260,6 +260,12 @@ ul.footnote-list {
   margin: -0.25em 0 !important;
 }
 
+.panel-sub-title {
+  margin-top: 3px;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
 /* 
   Fixes Safari-specific bug, does nothing on other browsers. 
   Only needed on larger screens. 

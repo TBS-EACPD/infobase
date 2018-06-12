@@ -1,16 +1,17 @@
-import { Children } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FootnoteList, TM } from '../util_components.js';
 import { Details } from '../components/Details.js';
-import { HeightClippedGraphWithLegend } from './shared.js';
 
-export const Panel = ({ title, sources, footnotes, children }) => (
+export const Panel = ({ title, sources, footnotes, children, subtitle }) => (
   <section className='panel panel-info mrgn-bttm-md'>
     {title && <header className='panel-heading'>
-      <div className='panel-title'>
-        <header className="panel-title"> {title} </header>
-      </div>
+      <header className="panel-title"> {title} </header>
+      {subtitle &&
+        <div className="panel-sub-title">
+          {subtitle}
+        </div>
+      }
     </header>
     }
     <div className='panel-body'>

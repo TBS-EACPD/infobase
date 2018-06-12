@@ -20,7 +20,7 @@ import {
   EverythingSearch,
 } from '../util_components';
 
-import { Panel } from '../panels/panel-components.js';
+import { Panel } from '../components/panel-components.js';
 
 import { infograph_href_template } from './routes.js';
 
