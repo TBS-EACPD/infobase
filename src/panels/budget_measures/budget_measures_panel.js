@@ -1,14 +1,15 @@
-import "./budget_measures_panel.ib.yaml";
-import "../../partition/budget_measures_subapp/BudgetMeasuresRoute.ib.yaml";
+import text1 from "./budget_measures_panel.yaml";
+import text2 from "../../partition/budget_measures_subapp/BudgetMeasuresRoute.yaml";
 import {
   formats,
-  text_maker,
+  create_text_maker,
   PanelGraph,
-  reactAdapter,
   Subject,
   business_constants,
   util_components,
   declarative_charts,
+  TM as StdTM,
+  Panel,
 } from "../shared";
 
 import { Fragment } from 'react';
@@ -17,7 +18,6 @@ const { BudgetMeasure } = Subject;
 const { budget_chapters } = business_constants;
 
 const {
-  TextMaker,
   Select,
   Format,
 } = util_components;
@@ -26,6 +26,9 @@ const {
   StackedHbarChart,
   A11YTable,
 } = declarative_charts;
+
+const text_maker = create_text_maker([text1,text2]);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 const calculate_stats_common = (data) => {
   const total_funding = _.reduce(data,
@@ -102,15 +105,17 @@ const calculate_functions = {
   },
 };
 
-const budget_measure_render = function(panel, calculations, options){
+const budget_measure_render = function({calculations, footnotes, sources}){
 
   const { graph_args } = calculations;
 
-  const node = panel.areas().graph.node();
-
-  reactAdapter.render(
-    <BudgetMeasureHBars graph_args = { graph_args } />,
-    node
+  return (
+    <Panel
+      title={text_maker("budget_measures_panel_title")}
+      {...{sources,footnotes}}
+    >
+      <BudgetMeasureHBars graph_args = { graph_args } />
+    </Panel>
   );
 };
 
@@ -119,13 +124,8 @@ const budget_measure_render = function(panel, calculations, options){
   {
     level: level_name,
     key: "budget_measures_panel",
-    layout: {
-      full: {text: 12, graph: 12},
-      half: {text: 12, graph: 12},
-    },
     requires_budget_measures: true,
     footnotes: false,
-    title: "budget_measures_panel_title",
     source: (subject) => [{
       html: text_maker("budget_route_title"),
       href: "#budget-measures/" + (subject.level === "gov" ? "budget-measure" : "dept"),
@@ -156,16 +156,16 @@ class BudgetMeasureHBars extends React.Component {
       <div className = "fcol-md-12 fcol-xs-12 medium_panel_text text">
         {  subject.level === "gov" &&
           <Fragment>
-            <TextMaker text_key={"budget_route_top_text"} />
-            <TextMaker 
-              text_key={"gov_budget_measures_panel_text"} 
+            <TM k={"budget_route_top_text"} />
+            <TM 
+              k={"gov_budget_measures_panel_text"} 
               args={{subject, ...info}} 
             />
           </Fragment>
         }
         {  subject.level === "dept" &&
-          <TextMaker 
-            text_key={"dept_budget_measures_panel_text"} 
+          <TM
+            k={"dept_budget_measures_panel_text"} 
             args={{subject, ...info}} 
           />
         }
@@ -287,7 +287,7 @@ class BudgetMeasureHBars extends React.Component {
           
           <div className = 'centerer'>
             <label>
-              <TextMaker text_key="budget_panel_filter_by_chapter" />
+              <TM k="budget_panel_filter_by_chapter" />
               <Select 
                 selected = {selected_filter}
                 options = {_.map(filter_options, 
@@ -313,11 +313,11 @@ class BudgetMeasureHBars extends React.Component {
               marginLeft: "20px",
             }}
           >
-            <TextMaker 
-              text_key = {
+            <TM 
+              k={
                 selected_filter === 'all' ? 
-                  "budget_chapter" : 
-                  "budget_measure"
+                "budget_chapter" : 
+                "budget_measure"
               } 
             />
           </div>

@@ -1,4 +1,4 @@
-import './BudgetMeasuresRoute.ib.yaml';
+import './BudgetMeasuresRoute.yaml';
 import * as Subject from '../../models/subject';
 import { ensure_loaded } from '../../core/lazy_loader.js';
 import { StandardRouteContainer } from '../../core/NavComponents.js';
