@@ -3,52 +3,52 @@ igoc_data_t:
   text: |
    <dl class="dl-horizontal igoc-data-list">
 
-     <dt id='legal_name__' > {{gt "legal_name"}} </dt>
+     <dt id='legal_name__' > {{new_gt "legal_name"}} </dt>
      <dd> {{org.legal_name }}  </dd>
 
      {{#if org.status}}
-       <dt> {{{gt "status"}}} </dt>
+       <dt> {{{new_gt "status"}}} </dt>
        <dd >{{org.status}}</dd>
      {{/if}}
 
 
      {{#if org.end_yr}}
-       <dt> {{{gt "end_yr"}}} </dt>
+       <dt> {{{new_gt "end_yr"}}} </dt>
        <dd>{{org.end_yr}}</dd>
      {{/if}}
 
      {{#if org.notes}}
-       <dt> {{{gt "notes"}}} </dt>
+       <dt> {{{new_gt "notes"}}} </dt>
        <dd>{{org.notes}}</dd>
      {{/if}}
 
      {{#if show_all_fields}}
 
      {{#if org.applied_title}}
-       <dt id='applied_title' > {{gt "applied_title"}} </dt>
+       <dt id='applied_title' > {{new_gt "applied_title"}} </dt>
        <dd> {{org.applied_title }}  </dd>
      {{/if}}
      
 
      {{#if org.incorp_yr}}
-       <dt id='incorp_yr__' > {{gt "incorp_yr"}} </dt>
+       <dt id='incorp_yr__' > {{new_gt "incorp_yr"}} </dt>
        <dd> {{org.incorp_yr}}  </dd>
      {{/if}}
 
      {{#if org.type}}
-       <dt id='dept_type__' > {{gt "type"}} </dt>
+       <dt id='dept_type__' > {{new_gt "type"}} </dt>
        <dd> {{org.type }}  </dd>
      {{/if}}
 
      {{#org.website_url}}{{#if .}}
-       <dt id='website__' > {{gt "website"}} </dt>
+       <dt id='website__' > {{new_gt "website"}} </dt>
        <dd>
          <div ><a href="http://{{.}}" target='_blank'>{{.}}</a></div>
        </dd>
      {{/if}}{{/org.website_url}}
 
      {{#if org.minister}}
-       <dt id='minister__' > {{gt "minister" }} </dt>
+       <dt id='minister__' > {{new_gt "minister" }} </dt>
        <dd> 
          {{#each org.minister}}
           {{.}}
@@ -58,14 +58,14 @@ igoc_data_t:
      {{/if}}
 
      {{#org.mandate}}{{#if .}}
-       <dt> {{gt "mandate"}} </dt>
+       <dt> {{new_gt "mandate"}} </dt>
        <dd>
          <div>{{{.}}}</div>
        </dd>
      {{/if}}{{/org.mandate}}
 
      {{#org.legislation}}{{#if .}}
-       <dt> {{{gt "legislation"}}} </dt>
+       <dt> {{{new_gt "legislation"}}} </dt>
        <dd >
          <div >
            <a href='http://google.com/search?q={{encodeURI .}}' target="_blank">{{{.}}}</a>
@@ -74,12 +74,12 @@ igoc_data_t:
      {{/if}}{{/org.legislation}}
 
      {{#if org.fiscal_end_yr}}
-       <dt> {{{gt "fiscal_end_yr"}}} </dt>
+       <dt> {{{new_gt "fiscal_end_yr"}}} </dt>
        <dd>{{org.fiscal_end_yr}}</dd>
      {{/if}}
 
      {{#if org.auditor}}
-       <dt> {{gt "auditor" }} </dt>
+       <dt> {{new_gt "auditor" }} </dt>
        <dd> 
          {{#each org.auditor}}
           {{.}}
@@ -89,27 +89,27 @@ igoc_data_t:
      {{/if}}
 
      {{#if org.fed_ownership}}
-       <dt> {{{gt "fed_ownership"}}} </dt>
+       <dt> {{{new_gt "fed_ownership"}}} </dt>
        <dd>{{org.fed_ownership}}</dd>
      {{/if}}
 
      {{#if org.board_comp}}
-       <dt> {{{gt "board_comp"}}} </dt>
+       <dt> {{{new_gt "board_comp"}}} </dt>
        <dd>{{org.board_comp}}</dd>
      {{/if}}
 
      {{#if org.schedule}}
-       <dt> {{{gt "inst_faa"}}} </dt>
+       <dt> {{{new_gt "inst_faa"}}} </dt>
        <dd>{{org.schedule}}</dd>
      {{/if}}
 
      {{#if org.faa_hr}}
-       <dt> {{{gt "hr_faa"}}} </dt>
+       <dt> {{{new_gt "hr_faa"}}} </dt>
        <dd>{{org.faa_hr}}</dd>
      {{/if}}
 
      {{#if org.pas_code}}
-       <dt> {{{gt "pas_code"}}} </dt>
+       <dt> {{{new_gt "pas_code"}}} </dt>
        <dd>{{org.pas_code}}</dd>
      {{/if}}
 
@@ -130,28 +130,28 @@ igoc_links_t:
            {{#if org.dp_url}}
            <tr >
              <td id='rpp_links__'>
-               <div>{{ext_link (gt "rpp_links") org.dp_url }}</div>
+               <div>{{ext_link (new_gt "rpp_links") org.dp_url }}</div>
              </td>
            </tr>
            {{/if}}
            {{#if org.dp_url}}
            <tr >
              <td id='eval_links__'>
-               <div>{{ext_link (gt "drr_links") (gt "drr_global_link")}}</div>
+               <div>{{ext_link (new_gt "drr_links") (new_gt "drr_global_link")}}</div>
              </td>
            </tr>
            {{/if}}
            {{#if org.eval_url}}
            <tr >
              <td id='eval_links__'>
-               <div>{{ext_link (gt "eval_links") org.eval_url }}</div>
+               <div>{{ext_link (new_gt "eval_links") org.eval_url }}</div>
              </td>
            </tr>
            {{/if}}
            {{#if org.qfr_url}}
            <tr >
              <td id='qfr_links__'>
-               <div>{{ext_link (gt "qfr_links") org.qfr_url }}</div>
+               <div>{{ext_link (new_gt "qfr_links") org.qfr_url }}</div>
              </td>
            </tr>
            {{/if}}

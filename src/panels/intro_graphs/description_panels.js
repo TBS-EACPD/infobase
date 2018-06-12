@@ -17,7 +17,7 @@ _.each(['tag','crso','program'], level => {
     footnotes: false,
     calculate: subject => _.nonEmpty(subject.description),
 
-    render(panel,calculations){
+    render({calculations}){
       
       const {subject} = calculations;
       

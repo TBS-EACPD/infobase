@@ -1,5 +1,4 @@
-const text = require("./result_treemap.yaml");
-
+const { TM, text_maker } = require('./result_text_provider.js');
 const { createSelector } = require('reselect');
 const classNames = require('classnames');
 
@@ -8,14 +7,12 @@ const { Explorer } = require('../../components/ExplorerComponents');
 const {
   PanelGraph,
   util_components: {
-    TM: StdTM,
     SpinnerWrapper,
     Format,
     Abbrev,
   },
   infograph_href_template,
   Panel,
-  create_text_maker,
 } = require("../shared");
 const { Details } = require('../../components/Details.js');
 
@@ -60,10 +57,6 @@ const {
   map_state_to_root_props_from_memoized_funcs,
   map_dispatch_to_root_props,
 } = require('../../gen_expl/state_and_memoizing');
-
-
-const text_maker = create_text_maker(text);
-const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 
 const get_non_col_content_func = createSelector(

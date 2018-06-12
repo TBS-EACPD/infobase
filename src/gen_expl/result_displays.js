@@ -1,14 +1,11 @@
 import { createSelector } from 'reselect';
 
-const { text_maker } = require('../models/text.js');
+const { TM, text_maker } = require("../panels/result_graphs/result_text_provider.js");
 const { infograph_href_template } = require('../link_utils.js');
 const { Indicator } = require('../models/results.js');
 const { 
   IndicatorDisplay,
 } = require('../panels/result_graphs/components.js');
-const {
-  TextMaker,
-} = require('../util_components.js');
 
 
 export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
@@ -18,7 +15,7 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
   const indicator_count_obj = { 
     count: indicators.length, 
     type_key: 'indicator',
-    type_name: text_maker('indicators'),
+    type_name:  ('indicators'),
   };
 
   const count_items  = _.chain(base_hierarchy)
@@ -98,8 +95,8 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
 
   return (
     <div className="medium_panel_text">
-      <TextMaker 
-        text_key={text_key}
+      <TM 
+        k={text_key}
         args={{
           subject,
 
@@ -122,28 +119,12 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
 
 export const spending_header = createSelector(
   doc => doc, 
-  doc => (
-    <TextMaker 
-      text_key={
-        doc === 'dp17' ?
-        "dp_spending" :
-        'drr_spending' 
-      }
-    />
-  )
+  doc => <TM k={doc === 'dp17' ? "dp_spending" : "drr_spending"} />
 );
 
 export const fte_header = createSelector(
   doc => doc,
-  doc => (
-    <TextMaker 
-      text_key={
-        doc === 'dp17' ?
-        "dp_ftes" :
-        'drr_ftes' 
-      }
-    />
-  )
+  doc => <TM k={doc === "dp17" ? "dp_ftes" : "drr_ftes"} />
 );
 
 export const get_type_header = node => {
@@ -195,7 +176,7 @@ export const ResultNodeContent = ({
     </div>
     { !_.isEmpty(contributing_programs) && 
       <div>
-        <header className="agnostic-header"> <TextMaker text_key="programs_tagged_as_dr_contributors" /> </header>
+        <header className="agnostic-header"> <TM k="programs_tagged_as_dr_contributors" /> </header>
         <ul>                
           {_.map(contributing_programs, prog => 
             <li key={prog.id}>

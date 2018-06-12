@@ -1,5 +1,5 @@
 import text from './bubble_definitions.yaml';
-import { text_maker } from '../models/text.js';
+import { trivial_text_maker as text_maker } from '../models/text.js';
 
 export const bubble_defs = {
   intro: {
@@ -10,8 +10,6 @@ export const bubble_defs = {
     title(subject){
       switch(subject.level){
         case 'program':
-          return text.about_program_title[lang];
-        case 'dept':
           return text.about_dept_title[lang];
         case 'gov':
           return text.about_gov_title[lang];

@@ -9,7 +9,7 @@ exports = module.exports = require("../charts/common_charts_utils");
 
 require('../charts/charts.scss');
 
-const {text_maker} = require('../models/text.js');
+const {trivial_text_maker} = require('../models/text.js');
 const FORMAT = require('./format');
 const UTILS = require("./utils");
 const charts_index = exports;
@@ -41,7 +41,7 @@ var formats = FORMAT.formats;
 const { reactAdapter } = require('./reactAdapter.js');
 const { TextMaker } = require('../util_components.js');
 
-charts_index.templates = text_maker;
+charts_index.templates = trivial_text_maker;
 
 charts_index.create_graph_with_legend = function(options){
   //
@@ -184,7 +184,7 @@ charts_index.create_graph_with_legend = function(options){
           });
         })
         .append("span")
-        .html(text_maker("toggle_graph"));
+        .html(trivial_text_maker("toggle_graph"));
     }
     data_to_series_format =  (all_active ?  _.chain(data)
       .map(function(obj){ return [obj.label,obj.data];})

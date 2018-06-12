@@ -255,27 +255,15 @@ const _create_text_maker = (deps=template_store) => (key,context={}) => {
 const trivial_text_maker = _create_text_maker(combined_global_bundle);
 
 
-const _text_maker = _create_text_maker(template_store);
-function text_maker(){
-  // debugger;
-  return _text_maker(...arguments);
-}
-
-
-
-
 module.exports = exports = {
   template_globals, //this is currently only exposed to table_common because it wants the pre_public_accounts variable.
-  tx_load : add_text_bundle, //shorthand because used very often
   run_template,
-  text_maker,
   template_store, 
   create_text_maker,
   trivial_text_maker,
 };
-window._text_maker = text_maker;
+window._trivial_text_maker = trivial_text_maker;
 window._run_template = run_template;
 window._template_store = template_store;
 window._template_globlals = template_globals;
-window.add_text_bundle = add_text_bundle;
 window._create_text_maker = create_text_maker;

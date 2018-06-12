@@ -245,7 +245,7 @@ where_can_find_subs_question:
 
 where_can_find_subs_answer:
   transform: [handlebars]
-  en: More resources information on {{gl_tt "sub and sub-sub programs" "SSP"}} (i.e. spending and {{gl_tt "full-time equivalents" "FTE"}}) can be found through the parent program infographic. Simply click "{{gt "see_infographic"}}" to be redirected to the program specific infographic and select the Finance bubble.
+  en: More resources information on {{gl_tt "sub and sub-sub programs" "SSP"}} (i.e. spending and {{gl_tt "full-time equivalents" "FTE"}}) can be found through the parent program infographic. Simply click "{{new_gt "see_infographic"}}" to be redirected to the program specific infographic and select the Finance bubble.
   fr: Vous trouverez de plus amples renseignements sur les ressources des sous programmes et des sous-sous programmes (c'est-à-dire les dépenses et les {{gl_tt "équivalents temps pleins" "FTE"}}) dans l'infographie du programme parent. Pour être redirigé vers l'infographie de ce programme particulier, cliquez sur "Voir l'infographie" et sélectionner la bulle "Finance".
 
 

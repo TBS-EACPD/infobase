@@ -814,7 +814,7 @@ see_data:
 related_tags_title:
   transform: [handlebars]
   text: |
-    {{gt "related_tags"}}
+    {{new_gt "related_tags"}}
 
 related_tags:
   en: Programs under this tag also appear under the following tags
