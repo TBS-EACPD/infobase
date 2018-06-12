@@ -156,12 +156,12 @@ const HomeLayout = props => (
               />
             </div>     
           </div>
-          <div className="fcol-md-5  home-col">
+          <div className="fcol-md-5 home-col">
             <header className="h3">
-            Jump to an infographic
+              <TM k="home_search_bar_title" />
             </header> 
             <div className="search-box">
-              <div className="search-container">
+              <div className="search-container home-search-container">
                 <EverythingSearch 
                   include_gov={false} 
                   search_text={text_maker('everything_search_placeholder')}
