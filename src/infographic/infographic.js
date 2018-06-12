@@ -1,41 +1,35 @@
 import './infographic.css';
-import "./infographic.ib.yaml";
+import text from "./infographic.yaml";
 
 import { StandardRouteContainer } from '../core/NavComponents';
 import { createSelector } from 'reselect';
 import { log_standard_event } from '../core/analytics.js';
 import AccessibleBubbleMenu from './a11y_bubble_menu.js';
+import { shallowEqualObjectsOverKeys } from '../core/utils.js';
+import Subject from "../models/subject.js";
+import { create_text_maker } from '../models/text.js';
+import { ensure_loaded } from '../core/lazy_loader.js'; 
+import { get_panels_for_subject } from './get_panels_for_subject.js';
+import { bubble_defs } from './bubble_definitions.js'; 
+import { ReactPanelGraph } from '../core/PanelCollectionView.js';
+import { BUBBLE_MENU } from '../core/charts_index';
 
-
-const { shallowEqualObjectsOverKeys } = require('../core/utils.js');
-const Subject = require("../models/subject");
-const {text_maker} = require('../models/text');
-const { ensure_loaded } = require('../core/lazy_loader.js'); 
-const { get_panels_for_subject } = require('./get_panels_for_subject.js');
-const { bubble_defs }  = require('./bubble_definitions.js'); 
-const { ReactPanelGraph } = require('../core/PanelCollectionView.js');
-const { BUBBLE_MENU : { BubbleMenu } } = require('../core/charts_index');
-
-
-
-const {
-  TextMaker,
-  TM,
+import {
+  TM as StdTM,
   SpinnerWrapper,
   EverythingSearch,
-} = require('../util_components');
+} from '../util_components';
 
-const {
-  Panel,
-  PanelBody,
-  PanelHeading,
-} = require('../panel_components');
+import { Panel } from '../panels/panel-components.js';
 
-const { infograph_href_template } = require('./routes.js');
+import { infograph_href_template } from './routes.js';
 
-
+const { BubbleMenu } = BUBBLE_MENU;
 
 const sub_app_name = "infographic_org";
+
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 const name_for_title = subject => {
   if(subject.level === 'program' && !_.isEmpty(subject.dept.fancy_acronym)){
@@ -193,42 +187,39 @@ class InfoGraph_ extends React.Component {
               href="#resource-explorer" 
               className="btn-lg btn btn-ib-primary btn-block"
             > 
-              <TextMaker text_key="infograph_explorer_link" />
+              <TM k="infograph_explorer_link" />
             </a>
           </div>
         </div>
       }
       <div>
-        <Panel>
-          <PanelHeading headerType="div">
-            <TextMaker text_key="bb_menu_title" /> 
-          </PanelHeading>
-          <PanelBody>
-            <TextMaker text_key={this.props.subject.level+"_above_bubbles_text"} />
-            <div style={{position:'relative'}}>
-              { loading && 
-                <div
-                  className='no-cursor opaque-overlay'
-                  style={{
-                    position: 'absolute',
-                    left: '0px',
-                    top: '0px',
-                    width: "100%",
-                    height: "100%",
-                    backgroundColor: 'rgba(204,204,204,.5)',
-                    borderRadius : '5px',
-                  }}
-                >
-                  <SpinnerWrapper scale={4} /> 
-                </div>
-              }
-              {
-                window.is_a11y_mode ? 
-                <AccessibleBubbleMenu items={sorted_bubbles} /> : 
-                <BubbleMenu items={sorted_bubbles} />
-              }
-            </div>
-          </PanelBody>
+        <Panel
+          title={text_maker("bb_menu_title")}
+        >
+          <TM k={this.props.subject.level+"_above_bubbles_text"} />
+          <div style={{position:'relative'}}>
+            { loading && 
+              <div
+                className='no-cursor opaque-overlay'
+                style={{
+                  position: 'absolute',
+                  left: '0px',
+                  top: '0px',
+                  width: "100%",
+                  height: "100%",
+                  backgroundColor: 'rgba(204,204,204,.5)',
+                  borderRadius : '5px',
+                }}
+              >
+                <SpinnerWrapper scale={4} /> 
+              </div>
+            }
+            {
+              window.is_a11y_mode ? 
+              <AccessibleBubbleMenu items={sorted_bubbles} /> : 
+              <BubbleMenu items={sorted_bubbles} />
+            }
+          </div>
         </Panel>
       </div>
       <div>
