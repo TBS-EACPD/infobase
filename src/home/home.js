@@ -1,6 +1,5 @@
 import "./home.ib.yaml";
 import './home.scss';
-import './home-svg.css';
 import get_home_content from './home-data.js';
 import { log_standard_event } from '../core/analytics.js';
 import MediaQuery from 'react-responsive';
@@ -100,8 +99,13 @@ const TrinityItem = ({img_url, title, href}) => <div className="centerer">
 
 const HomeLayout = props => (
   <div className="home-root">
-    
-    <div className="intro-box" style={{position:"relative"}}>
+    <div 
+      className="intro-box" 
+      style={{
+        position:"relative", 
+        backgroundImage:`URL(${CDN_URL}/svg/backbanner.svg)`,
+      }}
+    >
       <div className="container">
         <h1> <TM k="welcome" /> </h1>
         <h2> <TM k="home_sub_title" /> </h2>

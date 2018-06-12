@@ -20,11 +20,14 @@ $home-bg-color: #284162;
 
 .intro-box {
   padding: 30px 0 0;
-
-  // background-color:#215185;
   color: white;
   border-bottom: 10px solid #FF5E59;
   height: 260px;
+  // background image set in home.js, has non-static path
+  background-attachment: fixed;
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 
