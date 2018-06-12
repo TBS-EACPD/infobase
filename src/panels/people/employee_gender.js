@@ -84,11 +84,11 @@ const calculate_funcs_by_level = {
           title={text_maker("employee_gender_title")}
           {...{footnotes, sources}}
         >
-          <Col size={5} isText>
+          <Col size={12} isText>
             <TM k={level+"_employee_gender_text"} args={info} />
           </Col>
           { !window.is_a11y_mode &&
-            <Col size={7} isGraph>
+            <Col size={12} isGraph>
               <PplSharePie
                 graph_args = {graph_args}
                 label_col_header = {text_maker("employee_gender")}
