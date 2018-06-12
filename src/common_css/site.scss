@@ -326,6 +326,7 @@ div.height-clipped-bar-area {
   color: #214a5f;
   display: flex;
   margin: -10px 0px 10px 0px;
+  width: 100% /* FireFox */
 }
 .survey-link-close-container {
   /* top right corner */
