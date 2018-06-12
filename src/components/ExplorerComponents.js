@@ -207,6 +207,7 @@ const get_children_content = ({
         className="ExplorerNodeContainer__ChildrenList"  
         staggerDurationBy="0"
         duration={500}
+        disableAllAnimations={node_group.length > 150} /* for perf reasons */
       >
         {_.map(node_group, (child_node, ix) => 
           <li key={child_node.id}>
