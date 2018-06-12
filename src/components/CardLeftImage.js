@@ -10,7 +10,7 @@ const CardLeftImage = ({
   link_href,
   text_args,
 }) => (
-  <div className="left-img-card col-content-child">
+  <div className="left-img-card">
     { img_src &&
       <div className="left-img-card__left">
         <a className="left-img-card__img-link" href={link_href}>

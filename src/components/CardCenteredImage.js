@@ -11,7 +11,7 @@ const CardCenteredImage = ({
   link_href,
   text_args,
 }) => (
-  <div className="centered-img-card col-content-child">
+  <div className="centered-img-card">
     <div className="centered-img-card__left-container">
       <div className="centered-img-card__left">
         <header className="centered-img-card__title">

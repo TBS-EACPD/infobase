@@ -9,7 +9,7 @@ const CardTopImage = ({
   link_key,
   link_href,
 }) => (
-  <div className="top-img-card col-content-child">
+  <div className="top-img-card">
     { img_src &&
       <div className="top-img-card__top-container">
         <div aria-hidden={true} className="top-img-card__top">

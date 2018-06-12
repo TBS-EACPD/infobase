@@ -265,7 +265,7 @@ ul.footnote-list {
   Only needed on larger screens. 
 */
 @media (min-width:1000px){
-  .panel-body .row.equal-height-cols::before {
+  .panel-body {
     content: none!important;
   }
 }

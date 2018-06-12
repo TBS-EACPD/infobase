@@ -11,7 +11,7 @@ const CardBackgroundImage = ({
   link_href,
   text_args,
 }) => (
-  <div className="background-img-card col-content-child">
+  <div className="background-img-card">
     { img_src &&
     <div>
       <div className="background-img-card__right">

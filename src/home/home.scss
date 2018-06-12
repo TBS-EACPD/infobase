@@ -43,116 +43,6 @@ $home-bg-color: #284162;
   font-size: 20px;
 }
 
-.external-row-descriptor {
-  font-size: 2em;
-  margin-top: 25px;
-  font-weight: $lightFontWeight;
-  border-bottom: 1px solid #333;
-}
-
-@media (max-width:992px){
-  .external-row-descriptor {
-    margin-bottom: 10px;
-  }
-}
-
-@media (min-width:992px){
-  .equal-height-row {
-    display: flex;
-    flex-direction: row;    
-    flex-wrap: wrap;
-  }
-  .equal-height-row--home-row {
-    margin-top: 15px;
-  }
-
-  .equal-height-col.is-1-half {
-    flex: 1 1 50%;
-  }
-
-  .equal-height-col.is-1-third {
-    flex: 1 1 30%;
-  }
-
-  .equal-height-col.is-2-thirds {
-    flex: 1 1 33%;
-  }
-
-  .equal-height-col:not(:last-child):not(.no-gutter){
-    margin-right: 10px; 
-  }
-
-  .equal-height-col {
-    /*padding: 5px 15px;*/
-    padding: 0;
-    display: flex;
-  }
-
-  .equal-height-col > .col-content {
-    
-    /* ensure that content is equal-height */
-    flex:auto;
-
-    display: flex;
-    width: 100%;
-    max-width: 100%;
-
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-
-  /* this class breaks component separation, it should be added to another component.*/
-  /* it will ensure .col-content-child takes up the full height of .col-content */
-  .col-content-child {
-    flex: auto;
-  }
-
-
-  .equal-height-row--has-descriptor {
-    position: relative;
-  }
-
-  .row-descriptor {
-    position: absolute;
-    flex: 1;
-    min-height: 100%;
-    align-self: stretch;
-    padding: 1px 25px;
-    width: 300px;
-    left: -300px;
-    display: flex;
-    justify-content: stretch;
-    align-items: stretch;
-  }
-  .row-descriptor__container {
-    flex: 1 1 auto;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    border-top: 1px solid black;
-    padding-top: 10px;
-  }
-
-  .row-descriptor__content {
-    font-size: 1.6em;
-    font-family: Georgia,serif;
-    font-weight: $lightFontWeight;
-  }
-
-}
-
-
-@media(max-width: 1700px){
-  .row-descriptor {
-    display: none;
-  }
-}
-@media(max-width: 992px){
-  .equal-height-col {
-    margin-bottom: 15px;
-  }
-}
-
 .col-content.featured-col-content {
   color: #333 !important;
   background-color: #5787CD;
@@ -177,37 +67,12 @@ $home-bg-color: #284162;
   border-color: #ccc !important;
 }
 
-.grey-blue-rect {
-  background-color: rgba(170, 198, 212, 0.8);
-  border-color: #92b5c8;
-}
-
-.lighter-blue-rect {
-  background-color:rgba(202, 217, 222, 0.8);
-  border-color: 1px solid #71aec1;
-}
-
-.lightest-blue-rect {
-  background-color: rgba(219, 235, 240, 0.7);
-  border-color: 1px solid #acd1dc;
-}
-
-.dark-blue-rect {
-  margin-top: 15px;
-  background-color: #005172;
-  color: #f9f9f9;
-}
-
-.light-link {
-  color: #f9f9f9 !important;
-}
-
 .badge.badge--is-new {
   background-color: #FF5E59; 
   color: #fcfcfc;
 }
 
-.flag{
+.flag {
   transform: translate(0, -20%);
   margin: 0;
 }
@@ -215,14 +80,14 @@ $home-bg-color: #284162;
 .home-trinity-container {
   margin-top: 3rem;
   & > .frow {
-    & > .col-md-4{
+    & > .col-md-4 {
       margin: auto;
     }
 
-    @media(max-width:610px){
+    @media(max-width:610px) {
       flex-direction: column;
 
-      & > .col-md-4{
+      & > .col-md-4 {
         padding: 2%;
         margin: 0;
       }
@@ -273,7 +138,7 @@ $col_gutter_width: 2rem;
   & > .home-col {
     padding-right: $col_gutter_width;
     padding-left: $col_gutter_width;
-    width:100%;
+    width: 100%;
   }
 }
 
@@ -286,17 +151,17 @@ $col_gutter_width: 2rem;
   padding-top: 50px;
 }
 
-.linkcard{
+.linkcard {
   border-radius: 3%;
   flex-basis: 100%;
   min-height: 401.33px;
-  &:hover{
+  &:hover {
     background-color: rgb(236, 236, 236) !important;
   }
 }
 
-.home-body{
-  & > .frow{
+.home-body {
+  & > .frow {
     justify-content: center;
   }
 }
