@@ -29,10 +29,6 @@ import { DevStuff } from '../components/ExplorerComponents.js';
 // Now you can dispatch navigation actions from anywhere!
 // store.dispatch(push('/foo'))
 
-
-
-
-
 export class App extends React.Component {
   render(){
     return (

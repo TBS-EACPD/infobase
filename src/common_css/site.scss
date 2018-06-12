@@ -314,9 +314,6 @@ div.height-clipped-bar-area {
   }
 }
 
-#survey_link_container {
-  background-color: #3a4f69;
-}
 .survey-close {
   @include unstyled-button;
 }
@@ -324,12 +321,11 @@ div.height-clipped-bar-area {
   font-size: 1.4em;
   background-color: #d7faff;
   border-color: #269abc;
-  box-shadow: 1px 1px 1px #ccc;
   padding: 10px;
-  margin-bottom: 5px;
   border-radius: 5px;
   color: #214a5f;
   display: flex;
+  margin: -10px 0px 10px 0px;
 }
 .survey-link-close-container {
   /* top right corner */
