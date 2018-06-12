@@ -921,3 +921,8 @@ m2m_warning_text:
     <div class='bs-callout bs-callout-danger'>
       {{{gt "MtoM_tag_warning"}}}
     </div>
+
+
+you_are_here:
+  en: You are here
+  fr: Vous êtes içi

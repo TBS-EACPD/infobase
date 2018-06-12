@@ -1,7 +1,6 @@
 /* eslint-disable no-console, no-debugger */
 const Subject = require("../models/subject");
 const {
-  text_maker,
   trivial_text_maker,
   run_template,
 } = require('../models/text');
