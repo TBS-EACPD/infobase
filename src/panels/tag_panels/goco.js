@@ -1,4 +1,4 @@
-import text from "./goco.ib.yaml";
+import text from "./goco.yaml";
 
 import {
   create_text_maker,
@@ -63,58 +63,6 @@ new PanelGraph({
   footnotes: ["GOCA"],
   calculate: _.constant(true),
   render,
-  old_render(panel,calculations, { history }){
-    const graph_area = d3.select(panel.areas().graph.node());
-
-    const text_area = d3.select(panel.areas().text.node());
-
-    const table6 = Table.lookup("table6");
-    const table12 = Table.lookup("table12");
-
-    const spend_yr = "{{pa_last_year}}exp";
-    const fte_yr = "{{pa_last_year}}";
-
-    const fte_spend_data = _.chain(Tag.gocos_by_spendarea)
-      .map(sa=> {
-        const children = _.map(sa.children_tags, goco => {
-          const spending = d3.sum(goco.programs, p => {
-            return table6.programs.get(p) ? _.first(table6.programs.get(p))[spend_yr] : 0;
-          });
-          const ftes = d3.sum(goco.programs, p => {
-            return table12.programs.get(p) ? _.first(table12.programs.get(p))[fte_yr] : 0;
-          });             
-          return {
-            spending,
-            ftes,
-          };
-        });
-        const spending = d3.sum(children, c=>c.spending);
-        const ftes = d3.sum(children, c=>c.ftes);
-        return {
-          sa_name: sa.name,
-          spending,
-          ftes,
-        };
-      })
-      .sortBy(d=>-d.spending)
-      .value();
-
-    const total_fte_spend = {
-      max_sa: _.first(_.map(fte_spend_data,"sa_name")),
-      max_sa_share: (_.first(_.map(fte_spend_data,"spending")) / d3.sum(_.map(fte_spend_data, "spending"))),
-      spending: d3.sum(_.map(fte_spend_data, "spending")),
-      ftes: d3.sum(_.map(fte_spend_data, "ftes")),
-    }
- 
-    text_area
-      .html(text_maker("goco_intro_text", total_fte_spend));
-
-    graph_area.append('div')
-      .attr('id', 'goco_mount')
-      .html(text_maker("goco_t"));
-
-    new Goco(graph_area.select('#goco_mount'), history);
-  },
 });
 
 class Goco {
@@ -321,7 +269,9 @@ function render({calculations, footnotes, sources }, { history }){
       title={text_maker("gocographic_title")}
       {...{sources,footnotes}}
     >
-      <TM k="goco_intro_text" args={total_fte_spend}/>
+      <div className="medium_panel_text">
+        <TM k="goco_intro_text" args={total_fte_spend}/>
+      </div>
       <GocoDiagram 
         history={history}
       />

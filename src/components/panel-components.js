@@ -1,7 +1,46 @@
+import text from './panel_base_text.yaml'
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { FootnoteList, TM } from '../util_components.js';
+import { 
+  FootnoteList, 
+  TM as StdTM,
+} from '../util_components.js';
 import { Details } from '../components/Details.js';
+import {create_text_maker} from '../models/text.js';
+
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
+
+
+const PanelSource = ({links}) => {
+  if(_.isEmpty(links)){
+    return null;
+  }
+  const last_ix = links.length -1;
+  return (
+    <span>
+      <span aria-hidden> 
+        <TM k="source_link_text" />
+      </span>
+      <span className="sr-only"> <TM k="a11y_source_expl"/> </span>
+      <ul
+        className="list-unstyled list-inline"
+        style={{display:"inline"}}
+      >
+        {_.map(links, ({href, html},ix) =>
+          <li key={ix}>
+            <a
+              className="source-link"
+              href={href}
+            >
+              <span dangerouslySetInnerHTML={{__html:html}} />
+            </a>{ix === last_ix && ", "}
+          </li>
+        )}
+      </ul>
+    </span>
+  );
+}
 
 export const Panel = ({ title, sources, footnotes, children, subtitle }) => (
   <section className='panel panel-info mrgn-bttm-md'>
@@ -19,10 +58,7 @@ export const Panel = ({ title, sources, footnotes, children, subtitle }) => (
       <div className="mrgn-tp-md" />
       {_.nonEmpty(sources) && 
         <div>
-          <TM
-            k="panel_source_t"
-            args={{links: sources}}
-          />
+          <PanelSource links={sources} />
         </div>
       }
       {_.nonEmpty(footnotes) && 

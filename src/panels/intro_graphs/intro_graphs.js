@@ -137,15 +137,8 @@ _.each(['gov', 'dept'], lvl => {
     static: true,
     footnotes: false,
     key :  'people_intro',
-
-    layout: {
-      half: { text: null, graph:12 },
-      full: { text: null, graph: 12},
-    },
-
     info_deps: [],
     source: false,
-    title: 'some_things_to_keep_in_mind',
     calculate: _.constant(true),
 
     render: curried_render({ 
@@ -168,15 +161,8 @@ new PanelGraph({
   static: true,
   footnotes: false,
   key :  'tagging_key_concepts',
-
-  layout: {
-    half: { text: null, graph:12 },
-    full: { text: null, graph: 12},
-  },
-
   info_deps: [],
   source: false,
-  title: 'some_things_to_keep_in_mind',
   calculate: _.constant(true),
 
   render: curried_render({ 

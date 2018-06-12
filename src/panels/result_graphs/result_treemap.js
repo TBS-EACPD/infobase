@@ -1,4 +1,4 @@
-const text = require("./result_treemap.ib.yaml");
+const text = require("./result_treemap.yaml");
 
 const { createSelector } = require('reselect');
 const classNames = require('classnames');

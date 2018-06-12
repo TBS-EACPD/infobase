@@ -1,14 +1,10 @@
-const PANEL =  require("./panel");
 const {Table} = require('./TableClass.js');
-const {text_maker} =   require("../models/text.js");
-const {get_info} = require('./Statistics.js');
+const { get_info } = require('./Statistics.js');
 const Subject = require('../models/subject.js');
 const subjects = _.keys(Subject);
 const FootNote = require('../models/footnotes.js');
-const {  tables_for_statistics } = require('./Statistics.js');
-const {rpb_link } = require('../rpb/rpb_link.js');
-const { Details } = require('../components/Details.js');
-const { FootnoteList } = require('../util_components.js');
+const { tables_for_statistics } = require('./Statistics.js');
+const { rpb_link } = require('../rpb/rpb_link.js');
 const { reactAdapter } = require('./reactAdapter.js')
 
 const graphs = {}
@@ -198,26 +194,7 @@ class PanelGraph {
 
   }
 
-  get_panel_title(info){
-    let { title } = this;
-    if(_.isFunction(title)){
-      return title(info);
-    } else {
-      if(!title){
-        console.warn(`unset title for panel: ${this.key}`);
-        title = "dummy_text";
-      }
-      return text_maker(title,info);
-    }
-  }
-  render(){
-    if(this.is_old_api){
-      return this._old_api_render(...arguments);
-    } else {
-      return this._new_render(...arguments);
-    }
-  }
-  _new_render(container, calculations, options={}){
+  render(container, calculations, options={}){
     const { subject } = calculations;
     const render_func = this._inner_render;
     const footnotes = this.get_footnotes(subject);
@@ -233,68 +210,9 @@ class PanelGraph {
       react_el,
       container.node(),
     );
-
     
   }
-  _old_api_render(container, calculations, options={}) {
-    const {subject, info}  = calculations;
-    const render_func = this._inner_render;
-    const layout_def = this.layout;
-    const layout = layout_def[ (options.layout || 'full') ] ;
-    const panel_args = ({
-      target : container,
-      off : this.panel_off | [],
-      panel_layout: layout,
-      colmd : options.colmd || 12,
-      title_el : "div",
-      text_class: 'medium_panel_text',
-      ...options.panel_args,
-      ...this.panel_args,
-    });
-    const panel = PANEL.panel(panel_args);
-    //allow default titles and text in case multiple levels want the same title
-    //TODO: dummy text fallback is for quick development ONLY
-    const title_text = this.get_panel_title(info);
-    panel.areas().title.html(title_text);
-
-    const text_to_use = this.text || [];
-    [].concat(text_to_use).forEach(text => panel.add_text(text_maker(text,info)));
-
-
-    const footnotes = this.get_footnotes(subject);
-    if( !_.isEmpty(footnotes) ){
-      reactAdapter.render(
-        <Details
-          summary_content={text_maker("footnotes")}
-          content={
-            <FootnoteList
-              footnotes={_.map(footnotes, 'text')}
-            />
-          }
-        />,
-        panel.areas().footnotes.node()
-      );
-    }
-
-    
-    const sources = this.get_source(subject);
-
-    if(_.isEmpty(sources)){
-      panel.areas().source.remove();
-    } else {
-      panel.add_source(sources)
-    }
-
-    //TODO: maybe this override should be its own function, like the custom footnotes
-    const ret =  render_func.call(this,panel,calculations,options);
-    if(ret && ret.override){
-      if(ret.override.text){
-        ret.override.text.forEach(text => panel.add_text(text));
-      }
-    }
-    //PANEL.center_text(panel.el); 
-  }
-};
+}
 
 
 function graphs_with_key(key, level){
