@@ -34,7 +34,7 @@ const PanelSource = ({links}) => {
               href={href}
             >
               <span dangerouslySetInnerHTML={{__html:html}} />
-            </a>{ix === last_ix && ", "}
+            </a>{ix !== last_ix && ", "}
           </li>
         )}
       </ul>
