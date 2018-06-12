@@ -12,12 +12,12 @@ table10_short:
 table10:
   transform: [handlebars,embeded-markdown,markdown]
   en: |
-    {{{new_gt "table10_short"}}}
+    {{{gt "table10_short"}}}
 
     {{> ochro_includes_excludes_en}}
 
   fr: |
-    {{{new_gt "table10_short"}}}
+    {{{gt "table10_short"}}}
 
     {{> ochro_includes_excludes_fr}}
 

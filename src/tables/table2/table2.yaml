@@ -14,7 +14,7 @@ table2_short:
 table2:
   transform: [handlebars,markdown]
   en: |
-   {{{new_gt "table2_short"}}}
+   {{{gt "table2_short"}}}
    
 
    **Notes**:
@@ -31,7 +31,7 @@ table2:
    as the merging or elimination of organizations) have occurred, the data has 
    not been adjusted.
   fr: |
-   {{{new_gt "table2_short"}}}
+   {{{gt "table2_short"}}}
 
 
    ** Remarques:**

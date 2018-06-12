@@ -48,7 +48,7 @@ in_this_year:
 tag_maximum:
   transform: [handlebars]
   text: |
-    <div class="mat-grid__inner-panel mat-grid__inner-panel--small">({{new_gt "maximum"}})</div>
+    <div class="mat-grid__inner-panel mat-grid__inner-panel--small">({{gt "maximum"}})</div>
 
 no_historical_spending:
   en: <div class="mat-grid__inner-panel mat-grid__inner-panel--small">No historical spending information is available</div>

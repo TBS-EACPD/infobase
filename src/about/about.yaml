@@ -26,39 +26,39 @@ about_principles_table:
   text: |
     <div class="hierarchy-selection">
       <header class="hierarchy-selection-header">
-        {{{new_gt "principles_title"}}}
+        {{{gt "principles_title"}}}
       </header>
       <div class="hierarchy-selection-items">
         <div class="hierarchy-selection-item">
           <div class="hierarchy-selection-item__header">
-            {{{new_gt "principle_1_name"}}}
+            {{{gt "principle_1_name"}}}
           </div>
           <div class="hierarchy-selection-item__description">
-            {{{new_gt "principle_1_desc"}}}
+            {{{gt "principle_1_desc"}}}
           </div>
         </div>
         <div class="hierarchy-selection-item">
           <div class="hierarchy-selection-item__header">
-            {{{new_gt "principle_2_name"}}}
+            {{{gt "principle_2_name"}}}
           </div>
           <div class="hierarchy-selection-item__description">
-            {{{new_gt "principle_2_desc"}}}
+            {{{gt "principle_2_desc"}}}
           </div>
         </div>
         <div class="hierarchy-selection-item">
           <div class="hierarchy-selection-item__header">
-            {{{new_gt "principle_3_name"}}}
+            {{{gt "principle_3_name"}}}
           </div>
           <div class="hierarchy-selection-item__description">
-            {{{new_gt "principle_3_desc"}}}
+            {{{gt "principle_3_desc"}}}
           </div>
         </div>
         <div class="hierarchy-selection-item">
           <div class="hierarchy-selection-item__header">
-            {{{new_gt "principle_4_name"}}}
+            {{{gt "principle_4_name"}}}
           </div>
           <div class="hierarchy-selection-item__description">
-            {{{new_gt "principle_4_desc"}}}
+            {{{gt "principle_4_desc"}}}
           </div>
         </div>
       </div>
@@ -113,7 +113,7 @@ about_body_text:
     Since its creation in 2013, the GC InfoBase has been recognized as the authoritative source of Government expenditure information by the [Parliamentary Budget Officer (PBO)](http://www.pbo-dpb.gc.ca/web/default/files/Documents/Reports/2016/Mains 2016-17/Main Estimates 2016-17_EN.pdf) and was identified as a public sector innovation by the Organisation for Economic Co-operation and Development (OECD) [Observatory of Public Sector Innovation (OPSI)](https://www.oecd.org/governance/observatory-public-sector-innovation/innovations/). The tool contains years’ worth of federal government data, bringing together information previously scattered across over 500 government reports.
 
     <div>
-    {{{new_gt "about_principles_table"}}}
+    {{{gt "about_principles_table"}}}
     </div>
 
 
@@ -172,7 +172,7 @@ about_body_text:
     ### What technologies are used in the GC InfoBase?
 
 
-    {{{new_gt "dev_icon_block"}}}
+    {{{gt "dev_icon_block"}}}
 
     The GC InfoBase is a single-page web application, built in-house and from scratch. It was developed using open-source libraries and standards (such as Bootstrap, webpack, YAML, handlebars.js, D3.js and React). The team keeps the iteration time between prototypes and production short. Having built it from the ground-up gives us the flexibility to experiment with new ways of displaying information and allows the GC InfoBase to be constantly evolving, meeting user’s growing needs and expectations.
 
@@ -183,7 +183,7 @@ about_body_text:
     We draw inspiration from work done across the globe, in both the public and private sectors. Our [Government at a Glance diagram](#partition/dept/exp) was inspired by the excellent work of the [USAFacts.org](https://usafacts.org/the-big-picture/spending) team. Our minimal page header and footer were inspired by our colleagues at the [Canadian Digital Service](https://digital.canada.ca). We are regularly inspired to push our data visualizations even further by the D3 community at large, and through resources like the [D3 gallery](https://github.com/d3/d3/wiki/Gallery).
 
 
-    {{{new_gt "feedback_h2"}}}
+    {{{gt "feedback_h2"}}}
 
 
     We are always looking for ideas and suggestions to help us improve the current version of the InfoBase. If you would like to share some ideas or comments regarding your experience with the tool, please take a few minutes to complete our <a href="{{{survey_link}}}" target="_blank">online survey</a>.
@@ -199,7 +199,7 @@ about_body_text:
     
 
     <div>
-    {{{new_gt "about_principles_table"}}}
+    {{{gt "about_principles_table"}}}
     </div>
 
 
@@ -257,7 +257,7 @@ about_body_text:
     ### Quelles sont les technologies utilisées dans l’InfoBase du GC?
 
 
-    {{{new_gt "dev_icon_block"}}}
+    {{{gt "dev_icon_block"}}}
 
     L’InfoBase du GC est une application Web-maison d’une seule page montée de toutes pièces. Elle a été développée à l’aide de normes et de bibliothèques logicielles en libre accès (comme Bootstrap, Webpack, YAML, handlebars.js, D3.js et React). L’équipe maintient un court délai d’itération entre les prototypes et la production. Comme la page est montée de toutes pièces, nous sommes en mesure de mettre à l’essai de nouvelles présentations de l’information et de constamment faire évoluer l’InfoBase du GC pour répondre aux attentes et besoins croissants des utilisateurs.
 
@@ -268,7 +268,7 @@ about_body_text:
     Notre source d’inspiration est le travail effectué à l’échelle mondiale, tant dans le secteur public que privé. Pour le [diagramme Coup d’œil sur le gouvernement](#partition/dept/exp), nous sommes inspirés par l’excellent travail accompli par l’équipe [USAFacts.org](https://usafacts.org/the-big-picture/spending). L’inspiration pour la taille minimale de l’en-tête et du bas de page nous vient de nos collègues à [Service numérique canadien]( https://numerique.canada.ca/). Enfin, nous sommes régulièrement inspirés par la grande collectivité D3 qui nous incite à peaufiner encore davantage les visualisations de données, au moyen de ressources comme la [galerie D3](https://github.com/d3/d3/wiki/Gallery).
 
 
-    {{{new_gt "feedback_h2"}}}
+    {{{gt "feedback_h2"}}}
 
 
     Nous sommes constamment à la recherche d’idées et de suggestions pour améliorer la version actuelle de l’InfoBase. Le cas échéant, veuillez prendre quelques minutes pour remplir notre <a href="{{{survey_link}}}" target="_blank">sondage en ligne</a>.
@@ -277,7 +277,7 @@ about_body_text:
 feedback_h2:
   transform: [handlebars]
   text: | 
-    <h2> {{new_gt "feedback_header_text"}} <i class="far fa-comment"></i> </h2>
+    <h2> {{gt "feedback_header_text"}} <i class="far fa-comment"></i> </h2>
 
 feedback_header_text: 
   en: We want to hear from you!

@@ -18,7 +18,7 @@ table1_short:
 table1:
   transform: [handlebars,markdown]
   en: |
-   {{{new_gt "table1_short"}}}
+   {{{gt "table1_short"}}}
 
 
    **Note** that QFRs may revise estimates of statutory expenditures related to plans previously published in the Estimates 
@@ -31,7 +31,7 @@ table1:
    as the merging or elimination of organizations) have occurred, the data has 
    not been adjusted. 
   fr: |
-   {{{new_gt "table1_short"}}}
+   {{{gt "table1_short"}}}
 
 
    **À remarquer** que les RFT peuvent servir à réviser les prévisions de dépenses législatives annoncées dans des documents budgétaires antérieurs.

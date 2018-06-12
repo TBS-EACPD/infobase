@@ -7,23 +7,23 @@ result_treemap_title:
   en: |
     {{#if has_drr_data}}
       {{#if has_dp_data}}
-        {{new_gt "result_treemap_title_part"}} ({{pa_last_year}} and {{planning_year_1}})
+        {{gt "result_treemap_title_part"}} ({{pa_last_year}} and {{planning_year_1}})
       {{else}}
-        {{new_gt "result_treemap_title_part"}} ({{pa_last_year}})
+        {{gt "result_treemap_title_part"}} ({{pa_last_year}})
       {{/if}}
     {{else}}
-      {{new_gt "result_treemap_title_part"}} ({{planning_year_1}})
+      {{gt "result_treemap_title_part"}} ({{planning_year_1}})
     {{/if}}
 
   fr: |
     {{#if has_drr_data}}
       {{#if has_dp_data}}
-        {{new_gt "result_treemap_title_part"}} ({{pa_last_year}} et {{planning_year_1}})
+        {{gt "result_treemap_title_part"}} ({{pa_last_year}} et {{planning_year_1}})
       {{else}}
-        {{new_gt "result_treemap_title_part"}} ({{pa_last_year}})
+        {{gt "result_treemap_title_part"}} ({{pa_last_year}})
       {{/if}}
     {{else}}
-      {{new_gt "result_treemap_title_part"}} ({{planning_year_1}})
+      {{gt "result_treemap_title_part"}} ({{planning_year_1}})
     {{/if}}
 
 

@@ -27,23 +27,23 @@ sub_program_resources_dp_text:
 sub_program_resources_title__drr:
   transform: [handlebars]
   en: |
-   {{new_gt "sub_program_resources_title__part"}} ({{pa_last_year}})
+   {{gt "sub_program_resources_title__part"}} ({{pa_last_year}})
   fr: |
-   {{new_gt "sub_program_resources_title__part"}} ({{pa_last_year}})
+   {{gt "sub_program_resources_title__part"}} ({{pa_last_year}})
 
 sub_program_resources_title__dp:
   transform: [handlebars]
   en: |
-   {{new_gt "sub_program_resources_title__part"}} ({{planning_year_1}})  
+   {{gt "sub_program_resources_title__part"}} ({{planning_year_1}})  
   fr: |
-   {{new_gt "sub_program_resources_title__part"}} ({{planning_year_1}})
+   {{gt "sub_program_resources_title__part"}} ({{planning_year_1}})
 
 sub_program_resources_title__both:
   transform: [handlebars]
   en: |
-   {{new_gt "sub_program_resources_title__part"}} ({{pa_last_year}} and {{planning_year_1}})  
+   {{gt "sub_program_resources_title__part"}} ({{pa_last_year}} and {{planning_year_1}})  
   fr: |
-   {{new_gt "sub_program_resources_title__part"}} ({{pa_last_year}} et {{planning_year_1}})
+   {{gt "sub_program_resources_title__part"}} ({{pa_last_year}} et {{planning_year_1}})
 
 sub_program_resources_title__part:
   en: |

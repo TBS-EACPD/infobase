@@ -4,7 +4,7 @@ partition_unfocus_all_popup:
     <div class="partition-popup fixed-popup unfocus-all-button-container">
       <a href='#' 
         class='btn btn-xs btn-block unmagnify-all'>
-        {{new_gt "partition_unfocus_button"}} {{new_gt "all"}}
+        {{gt "partition_unfocus_button"}} {{gt "all"}}
       </a> 
     </div>
 

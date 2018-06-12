@@ -13,7 +13,7 @@ table12_short:
 table12:
   transform: [handlebars,markdown]
   en: |
-   {{{new_gt "table12_short"}}}
+   {{{gt "table12_short"}}}
 
 
    **Notes :**
@@ -34,7 +34,7 @@ table12:
    Public Accounts of Canada and in the {{planning_year_1}} Departmental Plans and {{pa_last_year_5}} to {{pa_last_year}} Departmental Results Reports, although totals may not match or agree with those presented in these documents due to rounding. In cases where machinery of government changes (such as merging or eliminating organizations) have occurred, the data has not been adjusted. 
 
   fr: |
-   {{{new_gt "table12_short"}}}
+   {{{gt "table12_short"}}}
 
 
    **Remarques:**

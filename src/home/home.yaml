@@ -133,7 +133,7 @@ metadata_home_desc:
 metadata_home_link_text:
   transform: [handlebars]
   text: |
-    {{new_gt "see_data"}}
+    {{gt "see_data"}}
 
 whats_new:
   en: What's new?

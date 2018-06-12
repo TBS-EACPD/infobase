@@ -40,20 +40,20 @@ gov_results_intro_text:
 gov_paa_title:
   transform: [handlebars,markdown]
   text: |
-    {{gl_title "MRRS"}} ({{gl_tt (new_gt "PAA") "PAA"}})
+    {{gl_title "MRRS"}} ({{gl_tt (gt "PAA") "PAA"}})
 
 gov_paa_text:
   transform: [handlebars,markdown]
   en: |
-    To find a specific organization that report under the old [{{new_gt "MRRS"}}](http://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=18218) and learn more about its planned results, search a complete list of organizations in the [Explorer](#resource-explorer).
+    To find a specific organization that report under the old [{{gt "MRRS"}}](http://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=18218) and learn more about its planned results, search a complete list of organizations in the [Explorer](#resource-explorer).
   fr: |
-    Pour trouver une organisation précise qui rend compte aux termes de l'ancienne [{{new_gt "MRRS"}}](http://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=18218) et en savoir plus sur ses résultats escomptés, chercher une liste complète des organisations dans [l'explorateur](#resource-explorer).
+    Pour trouver une organisation précise qui rend compte aux termes de l'ancienne [{{gt "MRRS"}}](http://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=18218) et en savoir plus sur ses résultats escomptés, chercher une liste complète des organisations dans [l'explorateur](#resource-explorer).
 
 
 gov_drf_title:
   transform: [handlebars,markdown]
   text: |
-    {{gl_title "POL_RES"}} ({{gl_tt (new_gt "DRF") "DRF"}})
+    {{gl_title "POL_RES"}} ({{gl_tt (gt "DRF") "DRF"}})
 
 
 gov_drf_text:

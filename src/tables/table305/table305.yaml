@@ -8,7 +8,7 @@ table305_short:
 table305: 
   transform: [handlebars,markdown]
   en: |
-   {{{new_gt "table305_short"}}}
+   {{{gt "table305_short"}}}
 
 
    **Notes:**
@@ -20,7 +20,7 @@ table305:
    In cases where machinery of government changes (such as merging or eliminating organizations) have occurred, the data has not been adjusted.
   
   fr: |
-   {{{new_gt "table305_short"}}}
+   {{{gt "table305_short"}}}
    
     
 

@@ -9,7 +9,7 @@ table300_short:
 table300: 
   transform: [handlebars,markdown]
   en: |
-   {{{new_gt "table300_short"}}}
+   {{{gt "table300_short"}}}
 
    * Data for Program expenditures by authority type is not available for the Canadian Security Intelligence Service and the Communications Security Establishment. As such, totals for all Program expenditures found in this table will not match total government spending.
 
@@ -18,7 +18,7 @@ table300:
    * To ensure comparability over time, Program names and structures used in the InfoBase are sourced from the Public Accounts of Canada which may differ from an organization’s Departmental Plan.
  
   fr: |
-   {{{new_gt "table300_short"}}}
+   {{{gt "table300_short"}}}
 
    * Les données sur les dépenses de programme par type d’autorisation ne sont pas disponibles pour le Service Canadien du renseignement de sécurité et le Centre de la sécurité des télécommunications. Par conséquent, dans le présent tableau, les totaux de toutes les dépenses de programme ne correspondront pas aux dépenses gouvernementales totales. 
 

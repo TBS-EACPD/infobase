@@ -10,7 +10,7 @@ table8_short:
 table8:
   transform: [handlebars,embeded-markdown, markdown]
   en: |
-   {{{new_gt "table8_short"}}}
+   {{{gt "table8_short"}}}
 
 
    Expenditures made by the government require the authority of Parliament. This authority is provided in two ways:
@@ -34,7 +34,7 @@ table8:
 
 
   fr: |
-   {{{new_gt "table8_short"}}}
+   {{{gt "table8_short"}}}
 
 
    Les dépenses effectuées par le gouvernement doivent être autorisées par le Parlement. Cette {{gl_tt "approbation" "AUTH"}} est donnée de deux façons :

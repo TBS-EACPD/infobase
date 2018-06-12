@@ -8,7 +8,7 @@ table4_short:
 table4:
   transform: [handlebars,markdown]
   en: |
-   {{{new_gt "table4_short"}}}
+   {{{gt "table4_short"}}}
 
 
    All figures presented reflect information previously published in the 
@@ -17,7 +17,7 @@ table4:
    have occurred, the data has not been adjusted.s
 
   fr: |
-   {{{new_gt "table4_short"}}}
+   {{{gt "table4_short"}}}
 
    Toutes les données présentées correspondent à l’information qui a été publiée dans les Comptes publics du Canada, 
    quoique les totaux pourraient ne pas correspondre ou coïncider à ceux présentées dans ces documents, du fait que les chiffres ont été arrondis. Dans le cas où des changements dans l’appareil 

@@ -10,7 +10,7 @@ table107_short:
 table107:
   transform: [handlebars,markdown]
   en: |
-   {{{new_gt "table107_short"}}}
+   {{{gt "table107_short"}}}
 
    Budgetary Expenditures by Standard Object by voted and aggregated statutory items details are **not published in the public InfoBase**.
    
@@ -25,7 +25,7 @@ table107:
    [ACL]: mailto:Alexandre.Cousineau-Leduc@tbs-sct.gc.ca?cc=ea-ad@tbs-sct.gc.ca&Subject=Question%20about%20LED
 
   fr: | 
-   {{{new_gt "table107_short"}}}
+   {{{gt "table107_short"}}}
    
    Les détails des dépenses budgétaires par article courant par crédit voté et postes législatifs **ne sont pas publiés dans la version publique de l’infoBase**. 
    

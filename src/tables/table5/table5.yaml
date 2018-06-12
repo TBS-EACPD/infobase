@@ -8,7 +8,7 @@ table5_short:
 table5:
   transform: [handlebars,markdown]
   en: |
-   {{{new_gt "table5_short"}}}
+   {{{gt "table5_short"}}}
 
    **Note** that {{gl_tt "internal" "INT_REV"}} and {{gl_tt "external" "EXT_REV"}} revenues, 
    reflected as negative expenditures, are provided for information.
@@ -20,7 +20,7 @@ table5:
    have occurred, the data has not been adjusted. 
    
   fr: |
-   {{{new_gt "table5_short"}}}
+   {{{gt "table5_short"}}}
 
 
    Veuillez noter que les données sur les {{gl_tt "recettes internes" "INT_REV"}} et {{gl_tt "externes" "EXT_REV"}}, qui sont présentées comme des dépenses négatives, 

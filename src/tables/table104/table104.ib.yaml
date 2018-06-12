@@ -8,7 +8,7 @@ table104_short:
 table104:
   transform: [handlebars,markdown]
   en: |
-   {{{new_gt "table104_short"}}}
+   {{{gt "table104_short"}}}
 
    
    * The **{{gl_tt "Gross Lapse" "G_LAPSE"}}** is calculated by subtracting the expenditures from the authorities.
@@ -32,7 +32,7 @@ table104:
    [ACL]: mailto:Alexandre.Cousineau-Leduc@tbs-sct.gc.ca?cc=ea-ad@tbs-sct.gc.ca&Subject=Question%20about%20LED
 
   fr: | 
-   {{{new_gt "table104_short"}}}
+   {{{gt "table104_short"}}}
 
 
    * Les {{gl_tt "fonds inutilisés bruts" "G_LAPSE"}} sont calculées en soustrayant les dépenses des autorisations nettes.

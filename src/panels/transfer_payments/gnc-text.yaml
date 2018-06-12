@@ -80,7 +80,7 @@ historical_g_and_c_custom_new_row:
     <div class='results-separator'></div>
     <div aria-hidden='true'>
       <div style='padding-bottom:10px'  class='center-text font-xlarge'>
-       <strong>{{new_gt "historical_g_and_c_detailed_title"}}</strong>
+       <strong>{{gt "historical_g_and_c_detailed_title"}}</strong>
       </div>
       <div>
          <select class='form-control' style='display:block;margin:10px auto;width:400px'>
