@@ -158,10 +158,10 @@ export default {
     {
       title_key: "prov",
       filter_func: _.constant(_.property('region') ),
+      include_in_report_builder: true,
     },
     {
       title_key: "prov_code",
-      exclude_from_rpb: true,
       filter_func: _.constant( _.property('region_code') ),
     },
   ],
