@@ -125,14 +125,14 @@ class ExplorerContainer extends React.Component {
 
 }
 
-const LastYearAmouts = ({last_year_amounts_by_doc}) => {
+const DetailedAmountsByDoc = ({amounts_by_doc}) => {
 
-  const sorted_items = _.sortBy(last_year_amounts_by_doc, ({doc_code}) => window.estimates_docs[doc_code].order );
+  const sorted_items = _.sortBy(amounts_by_doc, ({doc_code}) => window.estimates_docs[doc_code].order );
 
   return (
     <section className="LastYearEstimatesSection"><div>
       <header className="agnostic-header">
-        <TM k="last_year_details" />
+        <TM k="doc_breakout_details" />
       </header>
       <table className="table table-condensed">
         <thead>
@@ -143,16 +143,25 @@ const LastYearAmouts = ({last_year_amounts_by_doc}) => {
             <th scope="column">
               <TM k="last_year_authorities" />
             </th>
+            <th scope="column">
+              <TM k="this_year_authorities" />
+            </th>
           </tr>
         </thead>
         <tbody>
-          {_.map(sorted_items, ({ doc_code, amount }) => 
+          {_.map(sorted_items, ({ doc_code, amount_last_year, amount_this_year }) => 
             <tr key={doc_code}>
               <td> {window.estimates_docs[doc_code][lang]} </td>
               <td> 
                 {
-                  amount && 
-                  <Format type="compact1" content={amount} />
+                  amount_last_year && 
+                  <Format type="compact1" content={amount_last_year} />
+                } 
+              </td>
+              <td> 
+                {
+                  amount_this_year && 
+                  <Format type="compact1" content={amount_this_year} />
                 } 
               </td>
             </tr>
@@ -167,13 +176,13 @@ const LastYearAmouts = ({last_year_amounts_by_doc}) => {
 const get_non_col_content = ({node}) => {
   const subject = _.get(node, "data.subject");
   const footnotes = _.get(node, "data.footnotes");
-  const last_year_amounts_by_doc = _.get(node,"data.last_year_amounts_by_doc");
+  const amounts_by_doc = _.get(node,"data.amounts_by_doc");
 
   return (
     <div>
-      { !_.isEmpty(last_year_amounts_by_doc) &&
+      { !_.isEmpty(amounts_by_doc) &&
         <div>
-          <LastYearAmouts last_year_amounts_by_doc={last_year_amounts_by_doc} />
+          <DetailedAmountsByDoc amounts_by_doc={amounts_by_doc} />
         </div>
       }
       {!_.isEmpty(footnotes) && 

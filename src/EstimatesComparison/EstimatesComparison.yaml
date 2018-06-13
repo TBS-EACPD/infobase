@@ -42,11 +42,16 @@ last_year_authorities:
     {{est_last_year}} Authorities
   fr: Autorités {{est_last_year}}
 
+this_year_authorities:
+  transform: [handlebars]
+  en: |
+    {{est_in_year}} Authorities
+  fr: Autorités {{est_in_year}}
 
-last_year_details:
-  en: Details from last year
-  fr: Des détails de l'année passée
 
+doc_breakout_details:
+  en: Detailed Breakout by Estimate Mechanism
+  fr: Répartition détaillée par mécanisme budgétaire
 
 mains_this_year:
   transform: [handlebars]

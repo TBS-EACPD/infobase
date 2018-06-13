@@ -43,7 +43,8 @@ const get_doc_code_breakdowns = rows => _.chain(rows)
   .toPairs()
   .map( ([doc_code,group]) => ({
     doc_code,
-    amount: _.sumBy(group, last_year_col),
+    amount_last_year: _.some(group, last_year_col) && _.sumBy(group, last_year_col),
+    amount_this_year: _.some(group, this_year_col) && _.sumBy(group, this_year_col),
   }))
   .value()
 
@@ -63,7 +64,7 @@ function get_data_by_org(include_stat){
       const inc = this_year-last_year_mains;
       const inc_pct = inc/last_year_mains;
 
-      const last_year_amounts_by_doc = get_doc_code_breakdowns( _.flatMap(rows, "_rows") );
+      const amounts_by_doc = get_doc_code_breakdowns( _.flatMap(rows, "_rows") );
 
       return {
         id : org_id,
@@ -83,7 +84,7 @@ function get_data_by_org(include_stat){
               "STAT",
             ]
           ),
-          last_year_amounts_by_doc,
+          amounts_by_doc,
         },
         children: _.map(rows, row => {
           const this_year = row["this_year"] || 0;
@@ -104,7 +105,7 @@ function get_data_by_org(include_stat){
                 org_id, 
                 votenum: row.votenum,
               }),
-              last_year_amounts_by_doc: get_doc_code_breakdowns(row._rows),
+              amounts_by_doc: get_doc_code_breakdowns(row._rows),
             },
           };
         }),
@@ -144,7 +145,7 @@ const get_category_children = (rows) => _.chain(rows)
         this_year,
         inc,
         inc_pct,
-        last_year_amounts_by_doc: get_doc_code_breakdowns(new_row._rows),
+        amounts_by_doc: get_doc_code_breakdowns(new_row._rows),
         footnotes: get_footnotes_for_votestat_item({
           desc,
           org_id: dept,
@@ -186,7 +187,7 @@ function get_data_by_item_types(){
           last_year_mains,
           inc,
           inc_pct,
-          last_year_amounts_by_doc: get_doc_code_breakdowns(rows),
+          amounts_by_doc: get_doc_code_breakdowns(rows),
           is_voted,
         },
         children: (
