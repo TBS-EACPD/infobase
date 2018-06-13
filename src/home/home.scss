@@ -77,7 +77,13 @@ $home-bg-color: #284162;
 .home-trinity-container {
   margin-top: 3rem;
   & > .frow {
-    justify-content: space-evenly;
+    justify-content: space-around;
+    
+    @media(max-width:1024px) and (min-width:610px) {
+      & > .fcol-md-4 {
+        flex: 1;
+      }
+    }
 
     @media(max-width:610px) {
       flex-direction: column;
