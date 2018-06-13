@@ -18,70 +18,30 @@
   structure: 
     .centered-img-card
       .centered-img-card__left
+        .centered-img-card__title
+        .centered-img-card__text
+      .centered-img-card__right
         .centered-img-card__img-link
-          .centered-img-card__img
-      .centered-img-card__right-container {
-        .centered-img-card__right
-          .centered-img-card__title
-          .centered-img-card__text
-          .centered-img-card__bottom-right
-
+        .centered-img-card__img
+      .centered-img-card__bottom-right
+        .centered-img-card__link
 */
+
 .centered-img-card {
-  display: flex;
-  flex: auto;
-  width: 100%;
-  max-width: 100%;
-  flex-direction: column;
-  align-items: stretch;
   min-height: 1px; /* IE11 image bug */
   padding: 15px;
 }
 
 .centered-img-card__left { 
-  flex: 0 0 30%;
   padding: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  text-align: left;
-  max-width: 100%;
   min-height: 1px; /* IE11 image bug */
   font-size: 2.6em; /* for glyphicons */
   color: white;
 }
 
-.centered-img-card__img-link {
-  width: 100%;
-  max-width: 100%;
-  min-height: 1px; /* IE11 image bug */
-  /* for glyphicons */
-  text-align: center; 
-  color: inherit;
-  line-height: 0;
-}
-
-.centered-img-card__img {
-  width: 50%;
-  max-width: 50%;
-  min-height: 1px; /* IE11 image bug */
-  padding: 15px;
-  margin: auto;
-}
-
-.centered-img-card__right {
-  display: flex;
-  width: 100%;
-  max-width: 100%;
-  margin-top: -4%;
-}
-
 .centered-img-card__title {
   font-size: 0.7em;
   font-weight: $mediumFontWeight;
-  text-align: left;
-  width: 100%;
-  max-width: 100%;
   padding: 10px 8px 10px 15px;
   text-transform: uppercase;
 }
@@ -90,16 +50,32 @@
   font-size: 0.45em;
   font-weight: $mediumFontWeight;
   margin-top: 10px;
-  width: 100%;
-  max-width: 100%;
   text-align: left;
   padding: 0px 10px 8px 15px;
 }
 
-.centered-img-card__bottom-right {
+.centered-img-card__right {
   display: flex;
   width: 100%;
-  max-width: 100%;
+  margin-top: -15px;
+}
+
+.centered-img-card__img-link {
+  width: 100%;
+  min-height: 1px; /* IE11 image bug */
+  text-align: center; 
+}
+
+.centered-img-card__img {
+  width: 50%;
+  min-height: 1px; /* IE11 image bug */
+  padding-bottom: 15px;
+  margin: auto;
+}
+
+
+.centered-img-card__bottom-right {
+  display: flex;
   justify-content: flex-end;
 }
 
@@ -111,7 +87,6 @@
   background-color: #FF5e59;
   border-radius: 10px;
   width: 30%;
-  max-width: 30%;
   margin-right: 25px;
 
   & > a {

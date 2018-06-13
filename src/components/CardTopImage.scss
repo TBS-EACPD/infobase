@@ -7,121 +7,55 @@
  |   IMG   |
  | /////// |
  |_________|
- | bottom  |
+ |  Title  |
+ |  Text   |
  |_________| 
 
   structure: 
 
   .top-img-card
-    .top-img-card__top-container
-      .top-img-card__top
-        .top-img-card__img-link
-          .top-img-card__img
-    .top-img-card__bottom-container
-      .top-img-card__bottom
-        .top-img-card__title
-        .top-img-card__text
-        .top-img-card__bottom-right
-  
+    .top-img-card__top
+      .top-img-card__img-link
+        .top-img-card__img
+    .top-img-card__bottom
+      .top-img-card__title
+      .top-img-card__text
 */
 
 .top-img-card {
-  display: flex;
-  flex: auto;
-  flex-direction: column;
-  justify-content: stretch;
-  width: 100%;
-  max-width: 100%;
-  border-radius: 10px;
   text-align: center !important;
   padding: 10px;
-  transition: transform 1s ease-in-out;
   
-  &> a {
+  & > a {
     text-decoration: none;
     color: black;
   }
-  /*&:hover {
-    .top-img-card__img {
-      transform: scale(1.2);
-    }
-  }*/
-}
-
-.top-img-card__top-container {
-  width: 100%;
-  max-width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: center;
-  padding: 20px;
 }
 
 .top-img-card__top {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex: auto;
-  width: 100%;
-  max-width: 100%;
+  padding: 20px;
 }
 
 .top-img-card__img {
-  width:50%;
+  width: 50%;
 }
-
-
 
 .top-img-card__img-link {
-  width: 100%;
-  max-width: 100%;
   min-height: 1px; /* IE11 image bug */
-  /* for glyphicons */
-  text-align: center; 
-  color: inherit;
-  line-height: 0;
 }
 
-.top-img-card__bottom-container {
-  flex: auto;
-  display: flex;
-  width: 100%;
-  max-width: 100%;
-}
 .top-img-card__bottom {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-  flex: auto;
-  width: 100%;
-  max-width: 100%;
+  flex-direction: column;;
 }
 
 .top-img-card__title {
   font-weight: $mediumFontWeight;
   font-size: 1.6em;
-  width: 100%;
-  min-width: 100%;
   padding: 10px;
 }
 
 .top-img-card__text {
   font-size: 1.2em;
-  width: 100%;
-  max-width: 100%;
   padding: 10px;
   color: #525257;
-}
-
-.top-img-card__bottom-right {
-  width: 100%;
-  max-width: 100%;
-
-  margin-top: auto; /* flex hack to emulate justify-self: flex-end */
-  padding: 15px 10px 10px 10px;
-  text-align: right;
-  font-size: 1.2em;
 }

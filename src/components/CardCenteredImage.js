@@ -12,14 +12,12 @@ const CardCenteredImage = ({
   text_args,
 }) => (
   <div className="centered-img-card">
-    <div className="centered-img-card__left-container">
-      <div className="centered-img-card__left">
-        <header className="centered-img-card__title">
-          <TM k={title_key}/>
-        </header>
-        <div className="centered-img-card__text">
-          <TM k={text_key} args={text_args} />
-        </div>
+    <div className="centered-img-card__left">
+      <header className="centered-img-card__title">
+        <TM k={title_key}/>
+      </header>
+      <div className="centered-img-card__text">
+        <TM k={text_key} args={text_args} />
       </div>
     </div>
     { img_src &&
