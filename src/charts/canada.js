@@ -16,9 +16,11 @@ import {
 //
 
 import common_charts_utils from "./common_charts_utils";
-import "./canada.ib.yaml";
+import { canada_svg } from "./canada.yaml";
 
-var ordering = {
+const canada_svg_text = canada_svg.text;
+
+const ordering = {
   yt: 1,
   nt: 2,
   nu: 3,
@@ -41,7 +43,7 @@ export class canada {
   
   constructor(container,options){
 
-    options.alternative_svg = common_charts_utils.templates("canada");
+    options.alternative_svg = canada_svg_text;
   
     common_charts_utils.setup_graph_instance(this,d3.select(container),options);
   };

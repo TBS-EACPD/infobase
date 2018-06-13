@@ -1,7 +1,4 @@
-const {
-  text_maker, 
-  run_template,
-} = require('../models/text');
+const { TextMaker, text_maker } = require('./rpb_text_provider.js');
 const {formats} = require('../core/format.js');
 
 const { 
@@ -19,7 +16,6 @@ const {
 
 const {
   Select,
-  TextMaker,
   Format,
   SortIndicators,
   LabeledBox,
@@ -318,6 +314,7 @@ class SimpleView extends React.Component {
       columns,
       flat_data,
       graph_data : data,
+      table,
     } = this.props;
 
 
@@ -356,7 +353,7 @@ class SimpleView extends React.Component {
                   </div>
                 </dt> 
                 <dd>
-                  <strong> {column.fully_qualified_name} </strong> ({run_template(column.description[window.lang])})
+                  <strong> {column.fully_qualified_name} </strong> (<span dangerouslySetInnerHTML={{__html: table.column_description(column.nick)}} />)
                 </dd>
 
                 <dt style={{borderBottom: '1px solid #ccc'}}> 
@@ -373,7 +370,7 @@ class SimpleView extends React.Component {
           <div className="fcol-md-6 fcol-xs-12">
             { shouldShowLegend && 
             <div id="rpb_graph_legend">
-              <div className="well legend-container">
+              <div className="legend-container">
                 <div className="mrgn-bttm-0 mrgn-tp-0 nav-header">
                   <TextMaker text_key='legend' />
                 </div>

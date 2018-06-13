@@ -1,14 +1,10 @@
-const PANEL =  require("./panel");
 const {Table} = require('./TableClass.js');
-const {text_maker} =   require("../models/text.js");
-const {get_info} = require('./Statistics.js');
+const { get_info } = require('./Statistics.js');
 const Subject = require('../models/subject.js');
 const subjects = _.keys(Subject);
 const FootNote = require('../models/footnotes.js');
-const {  tables_for_statistics } = require('./Statistics.js');
-const {rpb_link } = require('../rpb/rpb_link.js');
-const { Details } = require('../components/Details.js');
-const { FootnoteList } = require('../util_components.js');
+const { tables_for_statistics } = require('./Statistics.js');
+const { rpb_link } = require('../rpb/rpb_link.js');
 const { reactAdapter } = require('./reactAdapter.js')
 
 const graphs = {}
@@ -69,7 +65,20 @@ class PanelGraph {
     graphs[full_key] = instance;
   }
 
+  new_api_warnings(){
+    if(this.is_old_api || !DEV){
+      return;
+    }
+    _.each(["layout_def", "text", "title"], property => {
+      if(this[property]){
+        console.warning(`PanelGraph redundant property: ${property}`);
+      }
+    })
+  }
+
   constructor(def){
+    this.new_api_warnings();
+    
     //note that everything attached to this is read-only
     //Additionally, every graph only has one object like this, so this object contains nothing about 
 
@@ -172,75 +181,38 @@ class PanelGraph {
 
     const footnote_concepts = this.footnote_concept_keys;
 
-    return FootNote.get_for_subject(
-      subject,
-      footnote_concepts
-    );
+    return _.chain(
+      FootNote.get_for_subject(
+        subject,
+        footnote_concepts
+      )
+    )
+      .map('text')
+      .compact()
+      .value();
   
 
   }
-  
-  render(container, calculations, options={}) {
-    const {subject, info}  = calculations;
+
+  render(container, calculations, options={}){
+    const { subject } = calculations;
     const render_func = this._inner_render;
-    const layout_def = this.layout;
-    const layout = layout_def[ (options.layout || 'full') ] ;
-    const panel_args = ({
-      target : container,
-      off : this.panel_off | [],
-      panel_layout: layout,
-      colmd : options.colmd || 12,
-      title_el : "div",
-      text_class: 'medium_panel_text',
-      ...options.panel_args,
-      ...this.panel_args,
-    });
-    const panel = PANEL.panel(panel_args);
-    //allow default titles and text in case multiple levels want the same title
-    //TODO: dummy text fallback is for quick development ONLY
-    const title = this.title || "dummy_text";
-    const text_to_use = this.text || [];
-
-    if (title) {
-      panel.areas().title.html(text_maker(title,info));
-    }
-    [].concat(text_to_use).forEach(text => panel.add_text(text_maker(text,info)));
-
-
     const footnotes = this.get_footnotes(subject);
-    if( !_.isEmpty(footnotes) ){
-      reactAdapter.render(
-        <Details
-          summary_content={text_maker("footnotes")}
-          content={
-            <FootnoteList
-              footnotes={_.map(footnotes, 'text')}
-            />
-          }
-        />,
-        panel.areas().footnotes.node()
-      );
-    }
-
-    
     const sources = this.get_source(subject);
 
-    if(_.isEmpty(sources)){
-      panel.areas().source.remove();
-    } else {
-      panel.add_source(sources)
-    }
-
-    //TODO: maybe this override should be its own function, like the custom footnotes
-    const ret =  render_func.call(this,panel,calculations,options);
-    if(ret && ret.override){
-      if(ret.override.text){
-        ret.override.text.forEach(text => panel.add_text(text));
-      }
-    }
-    //PANEL.center_text(panel.el); 
+    const react_el = render_func({
+      calculations,
+      footnotes,
+      sources,        
+    },options);
+    
+    reactAdapter.render(
+      react_el,
+      container.node(),
+    );
+    
   }
-};
+}
 
 
 function graphs_with_key(key, level){

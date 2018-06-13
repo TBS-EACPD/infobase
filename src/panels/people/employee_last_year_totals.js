@@ -1,44 +1,28 @@
-import "./employee_last_year_totals.ib.yaml";
+import text from "./employee_last_year_totals.yaml";
 import {
-  formats,
-  text_maker,
   PanelGraph,
-  charts_index,
+  formats,
+  create_text_maker,
+  TM as StdTM,
+  declarative_charts,
+  StdPanel,
+  Col,
 } from "../shared"; 
 
-const total_employment_render = function(panel, data){
-  if(window.is_a11y_mode){
-    return;
-  }
-  const args={
-    height: this.height,
-    font_size: "16",
-    font_weight: "bold",
-    colors: infobase_colors(),
-    formater:  d => (formats["big_int_real_raw"](d) + "\n" + text_maker("employees")),
-    data: data.graph_args.vals,
-    center: data.graph_args.center,
-  };
-  new charts_index.CIRCLE.circle_pie_chart(panel.areas().graph.node(),args).render();
-};
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
+
+const { CirclePieChart } = declarative_charts;
 
 new PanelGraph({
+  key: "employee_last_year_totals",
   level: "dept",
   depends_on: ['table9'],
+
   info_deps: [
     'table9_dept_info',
     'table9_gov_info',
   ],
-  key: "employee_last_year_totals",
-
-  layout: {
-    full: {text: 8, graph: 4},
-    half: {text: 12, graph: 12},
-  },
-
-  height: 300,
-  title: "dept_employee_last_year_totals_title",
-  text:  "dept_employee_last_year_totals_text",
 
   calculate(subject,info){
     return { 
@@ -50,5 +34,33 @@ new PanelGraph({
     };
   },
 
-  render: total_employment_render,
+  render({calculations, footnotes, sources}){
+    if(window.is_a11y_mode){
+      return;
+    } else {
+      const {info, graph_args} = calculations;
+
+      return (
+        <StdPanel
+          title={text_maker("dept_employee_last_year_totals_title")}
+          {...{footnotes, sources}}
+        >
+          <Col size={5} isText>
+            <TM k="dept_employee_last_year_totals_text" args={info} />
+          </Col>
+          <Col size={7} isGraph>
+            <CirclePieChart
+              height = {300}
+              font_size = "16"
+              font_weight = "bold"
+              colors = {infobase_colors()}
+              formater =  {(d) => (formats["big_int_real_raw"](d) + "\n" + text_maker("employees"))}
+              data = {graph_args.vals}
+              center = {graph_args.center}
+            />
+          </Col>
+        </StdPanel>
+      );
+    }
+  },
 });

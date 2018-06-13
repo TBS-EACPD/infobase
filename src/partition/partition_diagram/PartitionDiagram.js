@@ -1,8 +1,9 @@
-import './PartitionDiagram.ib.yaml';
+import diagram_text  from './PartitionDiagram.yaml';
 import './PartitionDiagram.scss';
 import { PartitionDataWrapper } from './PartitionDataWrapper.js';
 import * as utils from "../../core/utils";
-import { text_maker } from "../../models/text";
+import { create_text_maker } from "../../models/text";
+const text_maker = create_text_maker(diagram_text);
 
 const assign_colors_recursively = function(node, color){
   node.color = color;

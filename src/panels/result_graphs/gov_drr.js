@@ -1,34 +1,27 @@
-const {
-  Subject: {
-    Dept,
-    Gov,
-  },
+import { TM, text_maker } from './drr_summary_text.js';
+
+import {
+  Subject,
   PanelGraph,
-  reactAdapter,
-  util_components: {
-    TM,
-  },
-} = require("../shared"); 
+  Panel,
+} from "../shared.js";
 
-
-const {
+import {
   link_to_results_infograph,
   row_to_drr_status_counts,
   ResultCounts,
-} = require('./results_common.js');
+} from './results_common.js';
 
-const { DrrSummary } = require('./drr_summary.js');
+import { DrrSummary } from './drr_summary.js';
+
+const { Gov, Dept } = Subject;
 
 new PanelGraph({
   level: 'gov',
   requires_result_counts: true,
   key: "gov_drr",
-  layout: {
-    full: {text: [], graph: 12},
-    half : {text: [], graph: 12},
-  },
-  title : "drr_summary_title",
   footnotes: ["RESULTS_COUNTS"],
+
   calculate(){
     const verbose_gov_counts = ResultCounts.get_gov_counts();
     const gov_counts = row_to_drr_status_counts(verbose_gov_counts);
@@ -54,19 +47,20 @@ new PanelGraph({
     };
     
   },
-  render(panel, calculations){
+
+  render({calculations,footnotes}){
     const {
       graph_args,
     } = calculations;
 
-    const node = panel.areas().graph.node();
-
-    reactAdapter.render(
-      <GovDRR
-        {...graph_args}
-      />,
-      node
-    ); 
+    return (
+      <Panel
+        title={text_maker("drr_summary_title")}
+        {...{footnotes}}
+      >
+        <GovDRR {...graph_args} />
+      </Panel>
+    );
   },
 });
 

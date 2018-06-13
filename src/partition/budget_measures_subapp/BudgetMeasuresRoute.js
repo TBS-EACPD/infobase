@@ -1,12 +1,15 @@
-import './BudgetMeasuresRoute.ib.yaml';
-
+import './BudgetMeasuresRoute.yaml';
+import * as Subject from '../../models/subject';
 import { ensure_loaded } from '../../core/lazy_loader.js';
 import { StandardRouteContainer } from '../../core/NavComponents.js';
 import { 
   SpinnerWrapper,
-  TextMaker,
 } from '../../util_components';
-import { text_maker } from "../../models/text";
+
+import {
+  text_maker,
+  TextMaker,
+} from './budget_measure_text_provider.js';
 
 import { BudgetMeasuresControls } from './BudgetMeasuresControls.js';
 import { BudgetMeasuresPartition } from './BudgetMeasuresPartition.js';
@@ -36,23 +39,22 @@ const validate_first_column_route_param = (first_column, history) => {
 }
 
 export class BudgetMeasuresRoute extends React.Component {
-  constructor(){
+  constructor(props){
     super();
     this.state = {
       loading: true,
       filtered_chapter_keys: [],
       filter_string: false,
     };
-  }
-  UNSAFE_componentWillMount(){
-    validate_first_column_route_param(this.props.match.params.first_column, this.props.history);
+
+    validate_first_column_route_param(props.match.params.first_column, props.history);
   }
   shouldComponentUpdate(nextProps){
     return validate_first_column_route_param(nextProps.match.params.first_column, this.props.history);
   }
   componentDidMount(){
     ensure_loaded({
-      subject_name: 'BudgetMeasure',
+      subject: Subject.BudgetMeasure,
     }).then( () => {
       this.setState({loading: false});
     });
@@ -76,13 +78,13 @@ export class BudgetMeasuresRoute extends React.Component {
     return (
       <StandardRouteContainer
         ref = "container"
-        title = { text_maker("budget_measures") }
-        description = { text_maker("budget_home_text") }
-        breadcrumbs = { [text_maker("budget_measures")] }
+        title = { text_maker("budget_route_title") }
+        description = { text_maker("budget_route_text") }
+        breadcrumbs = { [text_maker("budget_route_title")] }
         route_key = "budget-measures"
       >
         <h1>
-          {text_maker("budget_measures")}
+          {text_maker("budget_route_title")}
         </h1>
         { loading && <SpinnerWrapper ref="spinner" scale = { 4 } /> }
         { !loading &&

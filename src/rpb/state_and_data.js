@@ -1,5 +1,4 @@
-const { text_maker, run_template } = require('../models/text.js');
-
+const { text_maker } = require('./rpb_text_provider.js');
 const { createSelector } = require('reselect');
 
 //data
@@ -220,11 +219,11 @@ function create_mapStateToProps(){
     get_key_columns_for_table
   );
 
-  const get_def_ready_cols = createSelector(get_sorted_columns, sorted_data_columns => (
+  const get_def_ready_cols = createSelector(get_table, get_sorted_columns, (table, sorted_data_columns) => (
     _.chain(sorted_data_columns)
       .map(col => ({
         name: col.fully_qualified_name,
-        def: run_template(col.description[window.lang]),
+        def: table.column_description(col.nick),
       }))
       .value()
   ));
@@ -251,7 +250,7 @@ function create_mapStateToProps(){
 
   const get_dimensions = createSelector(get_table, table=> (
     _.chain(table.dimensions)
-      .reject('exclude_from_rpb')
+      .filter('include_in_report_builder')
       .map(({title_key}) => ({
         id: title_key, 
         display: text_maker(title_key), 

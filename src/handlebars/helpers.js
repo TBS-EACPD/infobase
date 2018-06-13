@@ -1,7 +1,7 @@
 /* eslint-disable no-console, no-debugger */
 const Subject = require("../models/subject");
 const {
-  text_maker,
+  trivial_text_maker,
   run_template,
 } = require('../models/text');
 const { GlossaryEntry } = require('../models/glossary.js')
@@ -299,8 +299,12 @@ Handlebars.registerHelper("plus_or_minus_val",function(val,formater,context){
 
 // {{gt "key"}} -> looks up the key and returns 
 // the correct language 
-Handlebars.registerHelper("gt",function(context){
-  return text_maker(context);
+Handlebars.registerHelper("gt",function(context, other_arg){
+  //handlebars will change the "this" if a helper is called within an #each block
+  if(!_.isFunction(this.__text_maker_func__)){
+    return other_arg.data.root.__text_maker_func__(context);
+  }
+  return this.__text_maker_func__(context);
 });
 
 // {{rt "key"}} -> runs template 
@@ -398,42 +402,42 @@ Handlebars.registerHelper('cr_or_so', subject => {
 
 Handlebars.registerHelper('ce_crso', crso => {
   if(crso.is_cr){
-    return `cette ${text_maker('core_resp')}`;
+    return `cette ${trivial_text_maker('core_resp')}`;
   } else {
-    return `ce ${text_maker('strategic_outcome')}`;
+    return `ce ${trivial_text_maker('strategic_outcome')}`;
   }
 });
 
 Handlebars.registerHelper('le_crso', crso => {
   if(crso.is_cr){
-    return `la ${text_maker('core_resp')}`;
+    return `la ${trivial_text_maker('core_resp')}`;
   } else {
-    return `le ${text_maker('strategic_outcome')}`;
+    return `le ${trivial_text_maker('strategic_outcome')}`;
   }
 });
 
 Handlebars.registerHelper('du_crso', crso => {
   if(crso.is_cr){
-    return `de la ${text_maker('core_resp')}`;
+    return `de la ${trivial_text_maker('core_resp')}`;
   } else {
-    return `du ${text_maker('strategic_outcome')}`;
+    return `du ${trivial_text_maker('strategic_outcome')}`;
   }
 });
 
 Handlebars.registerHelper('dept_cr_or_so', dept => {
   if(dept.is_DRF){
-    return text_maker('core_resp');
+    return trivial_text_maker('core_resp');
   } else {
-    return text_maker('strategic_outcome')
+    return trivial_text_maker('strategic_outcome')
   }
 })
 
 //plural version of the above
 Handlebars.registerHelper('dept_crs_or_sos', dept => {
   if(dept.is_DRF){
-    return text_maker('core_resps');
+    return trivial_text_maker('core_resps');
   } else {
-    return text_maker('strategic_outcomes')
+    return trivial_text_maker('strategic_outcomes')
   }
 })
 
@@ -542,7 +546,7 @@ Handlebars.registerHelper("stripes", function(index) {
 // `[link text](#glossary-key "en/fr explanation that this links to a glossary")`
 Handlebars.registerHelper("gl", function glossary_link(key){
   const href = glossary_href(GlossaryEntry.lookup(key));
-  var str = `(${href} "${text_maker('glossary_link_title')}")`;
+  var str = `(${href} "${trivial_text_maker('glossary_link_title')}")`;
   // SafeString is used to avoid having to use the [Handlebars triple bracket syntax](http://handlebarsjs.com/#html_escaping)
   return new Handlebars.SafeString(str);
 });
@@ -558,7 +562,7 @@ function glossary_tooltip(display, key){
 function tooltip_a11y_fallback(display, key){
   const href = glossary_href(GlossaryEntry.lookup(key));
   return new Handlebars.SafeString(
-    `<a href=${href} title="${text_maker("glossary_link_title")}">${display}</a>`
+    `<a href=${href} title="${trivial_text_maker("glossary_link_title")}">${display}</a>`
   );
 }
 
@@ -588,7 +592,7 @@ Handlebars.registerHelper("gl_title",function(key){
 
 Handlebars.registerHelper("infograph_link",function(subject){
   const href = infograph_href_template(subject); 
-  const str = `<a href="${href}" title="${text_maker('see_an_infograph_for', { subject })}">${subject.sexy_name}</a>`;
+  const str = `<a href="${href}" title="${trivial_text_maker('see_an_infograph_for', { subject })}">${subject.sexy_name}</a>`;
   return new Handlebars.SafeString(str);
 });
 
@@ -602,7 +606,6 @@ Handlebars.registerHelper("infograph_res_link",function(subject, text){
   const href = infograph_href_template(subject, 'results'); 
   
   const str = `<a href="${href}">${text}</a>`;
-  // const str = `<a href="${href}" title="${text_maker('see_an_infograph_for', { subject })}">${subject.sexy_name}</a>`;
   return new Handlebars.SafeString(str);
 });
 

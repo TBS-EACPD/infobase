@@ -1,5 +1,5 @@
 exports = module.exports;
-require("./table107.ib.yaml");
+require("./table107.yaml");
 
 const {sos} = require('../../models/businessConstants.js');
 

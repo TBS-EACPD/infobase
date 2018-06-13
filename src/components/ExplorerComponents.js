@@ -1,4 +1,3 @@
-import './ExplorerComponents.ib.yaml';
 import './ExplorerComponents.scss';
 import classNames from 'classnames';
 import ReactTransitionGroup from 'react-addons-transition-group';
@@ -8,7 +7,7 @@ import {
   AccordionEnterExit,
   SortIndicators,
 } from '../util_components.js';
-import { text_maker } from '../models/text.js';
+import { trivial_text_maker } from '../models/text.js';
 import { createSelector } from 'reselect';
 
 const INDENT_SIZE = 24;
@@ -250,7 +249,7 @@ export const ExplorerNode = ({
         <button
           className={classNames("ExplorerNode__Expander", window.is_a11y_mode && "ExplorerNode__Expander--a11y-compliant")}
           onClick={()=>onClickExpand(node)}
-          aria-label={text_maker(isExpanded ? "select_to_collapse_a11y" : "select_to_expand_a11y") }
+          aria-label={trivial_text_maker(isExpanded ? "select_to_collapse_a11y" : "select_to_expand_a11y") }
         >
           { isExpanded ? "▼" : "►" }
         </button>

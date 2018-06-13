@@ -1,12 +1,7 @@
-exports = module.exports;
-const { StandardRouteContainer } = require("../core/NavComponents.js");
-// module responsible for providing concentric circle navigation
-// of departments. Based on the route, the departments will be
-// organized differently.  For example, by ministry, or by their
-// vote/stat components.
 require('./dept_explore.scss');
-const { text_maker } = require('../models/text.js')
-require("./dept_explore.ib.yaml");
+const dept_explore_text = require('./dept_explore.yaml');
+const { StandardRouteContainer } = require("../core/NavComponents.js");
+const { create_text_maker } = require('../models/text.js')
 const { Dept, Gov } = require('../models/subject.js');
 const { infograph_href_template } = require('../link_utils.js');
 const { PACK } = require('../core/charts_index');
@@ -18,6 +13,9 @@ const {get_info} = require('../core/Statistics.js');
 const { ensure_loaded } = require('../core/lazy_loader.js');
 const { rpb_link } = require('../rpb/rpb_link.js');
 const { TM } = require('../util_components.js');  
+
+const text_maker = create_text_maker(dept_explore_text);
+
 let BubbleOrgList;
 
 
@@ -452,7 +450,7 @@ class BubbleExplore extends React.Component {
         breadcrumbs={[text_maker("dept_explore_title")]}
         route_key="_explore"
       >
-        <h1> <TM k="dept_explore_title" /> </h1>
+        <h1> <TM tmf={text_maker} k="dept_explore_title" /> </h1>
         <A11yContent />
         <BubbleExplore_ perspective={perspective} />
       </StandardRouteContainer>

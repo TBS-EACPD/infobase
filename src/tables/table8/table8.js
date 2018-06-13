@@ -1,14 +1,13 @@
 // see [here](../table_definition.html) for description
 // of the table spec
 exports = module.exports;
-require('../../common_text/estimates_lang.ib.yaml');
-require("./table8.ib.yaml");
+const text = require("./table8.yaml");
 var FORMAT = require('../../core/format');
 
 const {
   vote_stat_dimension, 
   major_vote_stat, 
-  text_maker, 
+  trivial_text_maker, 
   Statistics, 
   years : {
     estimates_years,
@@ -123,6 +122,7 @@ const map_helper = {
 };
 
 module.exports = {
+  text,
   "id": "table8",
 
   "tags" : [
@@ -346,8 +346,8 @@ Statistics.create_and_register({
     c.dept = subject;
     const table = tables.table8;
     const q = table.q(subject);
-    const voted = text_maker("voted");
-    const stat = text_maker("stat");
+    const voted = trivial_text_maker("voted");
+    const stat = trivial_text_maker("stat");
     //var tabled_mains_next_year = this.by_estimates_doc("next_year_estimates",c.dept,true)[mains];
     add("voted_est_in_year",table.voted_stat(in_year_col,c.dept,true)[voted] || 0);
     add("stat_est_in_year",table.voted_stat(in_year_col,c.dept,true)[stat] || 0);
@@ -391,8 +391,8 @@ Statistics.create_and_register({
   compute: (subject, tables, infos, add, c) => {
     const table = tables.table8;
     const q = table.q(subject);
-    const voted = text_maker("voted");
-    const stat = text_maker("stat");
+    const voted = trivial_text_maker("voted");
+    const stat = trivial_text_maker("stat");
     const dept_number = _.chain(table.depts)
       .keys()
       .filter(function(key){

@@ -1,14 +1,19 @@
-import './sobj-panel-text.ib.yaml';
+import { text_maker, TM } from './sobj_text_provider.js';
 import {
   formats,
   PanelGraph,
   years,
   business_constants,
-  text_maker,
   charts_index,
   util_components,
+  declarative_charts,
+  StdPanel,
+  Col,
 } from "../shared";
-
+const { 
+  Line,
+  A11YTable,
+} = declarative_charts;
 const { sos } = business_constants;
 const { std_years } = years;
 const { Format } = util_components;
@@ -17,16 +22,11 @@ new PanelGraph({
   level: "gov",
   depends_on : ['table5'],
   key : "personnel_spend",
+
   info_deps: [
     'table5_gov_info',
   ],
-  layout : {
-    full : {text : 5, graph: 7},
-    half: {text : 12, graph: 12},
-  },
 
-  title : "personnel_spend_title",
-  text : "personnel_spend_text",
 
   calculate(subject,info,data){
     return  {
@@ -36,40 +36,57 @@ new PanelGraph({
     };
   },
 
-  render(panel,calculations){
+  render({calculations, footnotes, sources}){
     const {info, graph_args} = calculations;
 
-    if(window.is_a11y_mode){
-      charts_index.create_a11y_table({
-        container: panel.areas().graph,
-        data_col_headers: [ text_maker("spending") ],
-        data: _.chain(info.last_years)
-          .zip(graph_args.series["0"])
-          .map( ([label, amt]) => ({
-            label,
-            data: <Format type="compact1" content={amt} />,
-          }))
-          .value(),
-      })
 
+    let graph_content;
+    if(window.is_a11y_mode){
+      graph_content = (
+        <A11YTable
+          data_col_headers={[ text_maker("spending") ]}
+          data={
+            _.chain(info.last_years)
+              .zip(graph_args.series["0"])
+              .map( ([label, amt]) => ({
+                label,
+                data: <Format type="compact1" content={amt} />,
+              }))
+              .value()
+          }
+        />
+      );
 
     } else {
+      graph_content = <div>
+        <Line
+          {...{
+            series : graph_args.series,
+            ticks : info.last_years,
+            colors : charts_index.tbs_color(),
+            add_yaxis : true,
+            add_xaxis : true,
+            y_axis: "($)",
+            formater : formats.compact1_raw,
+          }}
 
-
-      new charts_index.LINE.ordinal_line(
-        panel.areas().graph.node(),
-        {
-          series : graph_args.series,
-          ticks : info.last_years,
-          colors : charts_index.tbs_color(),
-          add_yaxis : true,
-          add_xaxis : true,
-          y_axis: "($)",
-          formater : formats.compact1_raw,
-        }
-      ).render();
-
+        />
+      </div>;
     }
+
+    return (
+      <StdPanel
+        title={text_maker("personnel_spend_title")}
+        {...{footnotes,sources}}
+      >
+        <Col size={5} isText>
+          <TM k="personnel_spend_text" args={info} />
+        </Col>
+        <Col size={7} isGraph>
+          {graph_content}
+        </Col>
+      </StdPanel>
+    );
   },
 });
 

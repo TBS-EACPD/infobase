@@ -1,6 +1,6 @@
 const {mix} = require('../generalUtils.js');
 const { staticStoreMixin, PluralSingular, SubjectMixin } = require('./staticStoreMixin.js');
-const {text_maker} = require("./text");
+const { trivial_text_maker } = require("./text");
 
 const common = () => mix().with(staticStoreMixin, PluralSingular, SubjectMixin);
 const Subject = window._Subject =  module.exports = exports;
@@ -38,14 +38,14 @@ Subject.gov = Subject.Gov = {
 //TODO: MandateItem class
 //class MandateItem extends common() {
 //  static get type_name() { return 'mandate_item'; }
-//  static get singular(){ return text_maker("mandate_commitment");}
-//  static get plural(){ return text_maker("mandate_commitments");}
+//  static get singular(){ return trivial_text_maker("mandate_commitment");}
+//  static get plural(){ return trivial_text_maker("mandate_commitments");}
 //};
 
 class Ministry extends common(){
   static get type_name() { return 'ministry'; }
-  static get singular(){ return text_maker("ministry") }
-  static get plural(){ return text_maker("ministries")}
+  static get singular(){ return trivial_text_maker("ministry") }
+  static get plural(){ return trivial_text_maker("ministries")}
 
   static create_and_register(id,name){
     const inst = new Ministry(id,name);
@@ -70,8 +70,8 @@ class Dept extends common(){
     );
   }
   static get type_name() { return 'dept'; }
-  static get singular(){ return text_maker("org") }
-  static get plural(){ return text_maker("orgs")}
+  static get singular(){ return trivial_text_maker("org") }
+  static get plural(){ return trivial_text_maker("orgs")}
   static depts_with_data(){ 
     //lazy initialized
     if(!this._depts_with_data){ 
@@ -188,7 +188,7 @@ class Dept extends common(){
     );
   }
   get is_dead(){
-    return _.nonEmpty(this.end_yr) || this.status !== text_maker("active");
+    return _.nonEmpty(this.end_yr) || this.status !== trivial_text_maker("active");
   }
 
 
@@ -243,8 +243,8 @@ class Tag extends common(){
       .value();
   }
   static get type_name() { return 'tag'; }
-  static get singular(){ return text_maker("tag") }
-  static get plural(){ return text_maker("tag")+"s"}
+  static get singular(){ return trivial_text_maker("tag") }
+  static get plural(){ return trivial_text_maker("tag")+"s"}
   static create_and_register(def){
     const inst = new Tag(def);
     this.register(inst.id, inst);
@@ -275,15 +275,15 @@ class Tag extends common(){
 
     if(this.root.id === "GOCO"){
       if (this.parent_tag && _.includes(tag_roots,this.parent_tag)){
-        return text_maker("spend_area");
+        return trivial_text_maker("spend_area");
       } else {
-        return text_maker("goco");
+        return trivial_text_maker("goco");
       }
     } else {
       if (_.nonEmpty(this.programs) && _.isEmpty(this.children_tags)){
-        return text_maker("tag");
+        return trivial_text_maker("tag");
       } else {
-        return text_maker("tag_category");
+        return trivial_text_maker("tag_category");
       }
     }
 
@@ -295,15 +295,15 @@ class Tag extends common(){
 
     if(this.root.id === "GOCO"){
       if (this.parent_tag && _.includes(tag_roots,this.parent_tag)){
-        return text_maker("spend_areas");
+        return trivial_text_maker("spend_areas");
       } else {
-        return text_maker("gocos");
+        return trivial_text_maker("gocos");
       }
     } else {
       if (_.nonEmpty(this.programs) && _.isEmpty(this.children_tags)){
-        return text_maker("tag")+"(s)";
+        return trivial_text_maker("tag")+"(s)";
       } else {
-        return text_maker("tag_categories");
+        return trivial_text_maker("tag_categories");
       }
     }
 
@@ -350,8 +350,8 @@ class Tag extends common(){
 };
 
 class CRSO extends common(){
-  static get singular(){ return text_maker("");}
-  static get plural(){ return text_maker(""); }
+  static get singular(){ return trivial_text_maker("");}
+  static get plural(){ return trivial_text_maker(""); }
   static get type_name() { return 'crso'; }
   static create_and_register(def){
     const inst = new CRSO(def);
@@ -370,16 +370,16 @@ class CRSO extends common(){
   }
   singular(){ 
     if(this.is_cr){
-      return text_maker("core_resp");
+      return trivial_text_maker("core_resp");
     } else {
-      return text_maker("strategic_outcome");
+      return trivial_text_maker("strategic_outcome");
     }
   }
   plural(){ 
     if(this.is_cr){
-      return text_maker("core_resps");
+      return trivial_text_maker("core_resps");
     } else {
-      return text_maker("strategic_outcomes");
+      return trivial_text_maker("strategic_outcomes");
     }
   }
   get sexy_name(){
@@ -401,8 +401,8 @@ class CRSO extends common(){
 
 class Program extends common(){
   static get type_name(){ return 'program'; }
-  static get singular(){ return text_maker("program") }
-  static get plural(){ return text_maker("programs") }
+  static get singular(){ return trivial_text_maker("program") }
+  static get plural(){ return trivial_text_maker("programs") }
   static unique_id(dept, activity_code) { //dept can be an object, an acronym or a dept unique_id.
     const dept_acr = _.isObject(dept) ? dept.acronym : Dept.lookup(dept).acronym;
     return `${dept_acr}-${activity_code}`;
@@ -447,8 +447,8 @@ class Program extends common(){
 //Currently doesnt do anything, not even link to other departments
 class Minister extends common(){
   static get type_name() { return 'minister'; }
-  static get singular(){ return text_maker("minister") }
-  static get plural(){ return text_maker("minister")}
+  static get singular(){ return trivial_text_maker("minister") }
+  static get plural(){ return trivial_text_maker("minister")}
 
   static create_and_register(id,name){
     const inst = new Minister(id,name);
@@ -512,8 +512,38 @@ class InstForm extends common(){
 
 class BudgetMeasure extends common(){
   static get type_name(){ return 'budget_measure'; }
-  static get singular(){ return text_maker("budget_measure"); }
-  static get plural(){ return text_maker("budget_measures"); }
+  static get singular(){ return trivial_text_maker("budget_measure"); }
+  static get plural(){ return trivial_text_maker("budget_measures"); }
+  
+  static make_budget_link(chapter_key, ref_id){
+    const valid_chapter_keys_to_page_number = {
+      grw: "01",
+      prg: "02",
+      rec: "03",
+      adv: "04",
+      oth: "",
+    };
+  
+    const is_chapter_key_valid = _.has(valid_chapter_keys_to_page_number, chapter_key);
+    const is_ref_id_valid = !_.isUndefined(ref_id) && !_.isEmpty(ref_id);
+  
+    if (!is_chapter_key_valid){
+      return `https://www.budget.gc.ca/2018/home-accueil-${window.lang}.html`;
+    } else if (chapter_key === "oth"){
+      return {
+        en: "https://www.budget.gc.ca/2018/docs/plan/anx-02-en.html#23-Other-Budget-2018-Measures-(Not-Included-in-Previous-Chapters)",
+        fr: "https://www.budget.gc.ca/2018/docs/plan/anx-02-fr.html#23-Autres-mesures-prevues-dans-le-budget-de-2018-(non-incluses-dans-les-chapitres-anterieurs)",
+      }[window.lang];
+    } else {
+      const base_chapter_link = `https://www.budget.gc.ca/2018/docs/plan/chap-${valid_chapter_keys_to_page_number[chapter_key]}-${window.lang}.html`;
+  
+      if (is_ref_id_valid){
+        return base_chapter_link + "#" + ref_id;
+      } else {
+        return base_chapter_link;
+      }
+    }
+  }
 
   static create_and_register(args){
     const inst = new BudgetMeasure(args);

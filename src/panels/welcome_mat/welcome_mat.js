@@ -1,22 +1,26 @@
-require("./welcome_mat.ib.yaml");
-require("./welcome-mat.scss");
+import "./welcome-mat.scss";
+import text from "./welcome_mat.yaml"
 
-const classNames = require('classnames');
-const {
+import classNames from 'classnames';
+import {
+  Panel,
   formats,
-  text_maker,
   run_template,
   PanelGraph,
-  reactAdapter,
-  util_components: { TextMaker },
-  years : {std_years, planning_years},
-} = require("../shared"); 
+  TM as StdTM,
+  years,
+  declarative_charts,
+  create_text_maker,
+} from "../shared.js" 
 
 const {
   Bar,
   Line,
-} = require('../../charts/declarative_charts.js');
+} = declarative_charts;
 
+const {std_years, planning_years} = years;
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 const pane_templates = {
   exp : {
@@ -200,7 +204,7 @@ const WelcomeMatFooter = props => {
   return <div className={'mat-grid__sm-panel mat-grid__lg-panel'+width}>
     <div className='mat-grid__inner-grid welcome-mat-rect'>
       <div className='mat-grid__inner-panel mat-grid__inner-panel--small' >
-        <TextMaker text_key={footer} args={calcs}/>
+        <TM k={footer} args={calcs}/>
       </div>
     </div>
   </div>;
@@ -226,7 +230,7 @@ const WelcomeMatCRFooter = props => {
   return  <div className={'mat-grid__sm-panel mat-grid__lg-panel'+width}>
     <div className='mat-grid__inner-grid welcome-mat-rect'>
       <div  className='mat-grid__inner-panel mat-grid__inner-panel--small' >
-        <TextMaker text_key={footer} args={{exp_calcs, fte_calcs, no_change}}/>
+        <TM k={footer} args={{exp_calcs, fte_calcs, no_change}}/>
       </div>
     </div>
   </div>
@@ -377,18 +381,20 @@ const calculate = function( calcs, subject,info,options ) {
 
 };
 
-const render = function( panel, calculations, options ) {
-  const {graph_args , subject } = calculations;
-  panel.areas().text.remove();
-  const text_area = panel.areas().graph;
+const render = function({ calculations, footnotes, sources }, options ) {
+  const { graph_args, subject } = calculations;
 
-  reactAdapter.render(
-    <WelcomeMat 
-      calcs={graph_args} 
-      subject={subject} 
-      half_layout={options.layout === "half"}
-    />, 
-    text_area.node()
+  return (
+    <Panel
+      title={text_maker("welcome_mat_title")}
+      {...{footnotes, sources}}
+    >
+      <WelcomeMat 
+        calcs={graph_args} 
+        subject={subject} 
+        half_layout={options.layout === "half"}
+      />
+    </Panel>
   );
 
 };
@@ -399,11 +405,6 @@ new PanelGraph({
   key: 'welcome_mat',
   depends_on : ['table4','table6','table12'],
   info_deps: [ 'table4_gov_info', 'table6_gov_info','table12_gov_info'],
-  layout: {
-    full: {text: 12, graph:0},
-    half : {text: 12, graph:0},
-  },
-  title : "welcome_mat_title",
   calculate(subject,info,options) {
     const c = cols(subject); 
     const {
@@ -437,15 +438,9 @@ new PanelGraph({
   level: "dept",
   key: 'welcome_mat',
   footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-
   depends_on : [ 'table6','table12', 'table4', 'table8'],
   info_deps: ['table4_dept_info', 'table6_dept_info','table12_dept_info',  'table8_dept_info'],
-  missing_info :'ok' ,
-  layout: {
-    full: {text: 12, graph:0},
-    half : {text: 12, graph:0},
-  },
-  title : "welcome_mat_title",
+  missing_info :'ok',
   calculate(subject,info,options) {
     const c = cols(subject); 
     const pd =  subject.has_planned_spending;
@@ -485,12 +480,7 @@ new PanelGraph({
   footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
   depends_on : [ 'table6','table12'],
   info_deps: [ 'table6_program_info','table12_program_info'],
-  missing_info :'ok' ,
-  layout: {
-    full: {text: 12, graph:0},
-    half : {text: 12, graph:0},
-  },
-  title : "welcome_mat_title",
+  missing_info :'ok',
   calculate (subject,info,options) {
     const {
       table6,
@@ -546,6 +536,7 @@ new PanelGraph({
       },
     },  subject,info,options);
   },
+
   render,
 });
 
@@ -555,12 +546,7 @@ new PanelGraph({
   footnotes : ["MACHINERY"],
   depends_on : [ 'table6','table12'],
   info_deps: [ 'table6_tag_info','table12_tag_info'],
-  missing_info :'ok' ,
-  layout: {
-    full: {text: 12, graph:0},
-    half : {text: 12, graph:0},
-  },
-  title : "welcome_mat_title",
+  missing_info :'ok',
   calculate(subject,info,options) {
     const c = cols(subject); 
     const pd =  subject.has_planned_spending;
@@ -588,6 +574,7 @@ new PanelGraph({
       },
     },  subject,info,options);
   },
+
   render,
 });
 
@@ -597,12 +584,7 @@ new PanelGraph({
   footnotes : ["MACHINERY"],
   depends_on : [ 'table6','table12'],
   info_deps: [ 'table6_crso_info','table12_crso_info'],
-  missing_info :'ok' ,
-  layout: {
-    full: {text: 12, graph:0},
-    half : {text: 12, graph:0},
-  },
-  title : "welcome_mat_title",
+  missing_info :'ok',
   calculate (subject,info,options) {
     const c = cols(subject); 
 
@@ -667,6 +649,7 @@ new PanelGraph({
       },
     },  subject,info,options);
   },
+
   render,
 });
 

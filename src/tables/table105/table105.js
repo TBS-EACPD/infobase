@@ -2,7 +2,7 @@
 exports = module.exports;
 
 
-require("./table105.ib.yaml");
+require("./table105.yaml");
 
 // see [here](../table_definition.html) for description
 // of the table spec

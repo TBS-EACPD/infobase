@@ -6,7 +6,10 @@ const {
   everythingSearch,
 } = require('./search/search.js');
 
-const { run_template } = require('./models/text.js');
+const { 
+  run_template,
+  trivial_text_maker,
+} = require('./models/text.js');
 
 // Import utility components from the ./components directory, to be re-exported here for easy requiring in the InfoBase
 const {
@@ -114,6 +117,9 @@ const Year = ({y}) => run_template(`{{${y}}}`);
 
 const Abbrev = ({text,len}) => <span dangerouslySetInnerHTML={{__html: abbrev(text,len)}} />
 
+const TrivialTM = props => <TM tmf={trivial_text_maker} {...props} />;
+const TrivialTextMaker = props => <TextMaker text_maker_func={trivial_text_maker} {...props} />;
+
 module.exports = {
   FirstChild,
   AccordionEnterExit,
@@ -128,6 +134,8 @@ module.exports = {
   EverythingSearch,
   TextMaker,
   TM,
+  TrivialTextMaker,
+  TrivialTM,
   lang,
   SpinnerWrapper,
   Select,

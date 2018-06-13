@@ -1,21 +1,22 @@
-import './BudgetMeasuresA11yContent.ib.yaml';
-
 import { formats } from '../../core/format.js';
 
 import { 
-  text_maker,
   run_template,
 } from "../../models/text";
 
-import { TextMaker } from '../../util_components.js';
+
+import {
+  text_maker,
+  TextMaker,
+} from './budget_measure_text_provider.js'
 
 import { budget_measures_hierarchy_factory } from './budget_measures_hierarchy_factory.js';
 
-import { make_budget_link } from './budget_utils.js';
-
 import * as businessConstants from '../../models/businessConstants.yaml';
-
 const { budget_chapters } = businessConstants;
+
+import * as Subject from '../../models/subject';
+const { BudgetMeasure } = Subject;
 
 const year = run_template("{{planning_year_2}}");
 
@@ -101,7 +102,7 @@ export function BudgetMeasuresA11yContent(){
                     >
                       { ( (budget_measure.data.chapter_key === "oth" && budget_measure.data.type !== "net_adjust") || !_.isEmpty(budget_measure.data.ref_id) ) && 
                         <a
-                          href = {make_budget_link(budget_measure.data.chapter_key, budget_measure.data.ref_id)}
+                          href = {BudgetMeasure.make_budget_link(budget_measure.data.chapter_key, budget_measure.data.ref_id)}
                         >
                           { text_maker("link_to_budget_section_for") + ": " + budget_measure.data.name }
                         </a>

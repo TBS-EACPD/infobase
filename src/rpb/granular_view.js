@@ -1,4 +1,4 @@
-const {  text_maker } = require('../models/text');
+const { TextMaker, text_maker } = require('./rpb_text_provider.js');
 
 const { 
   SelectList,
@@ -11,7 +11,6 @@ const {
 const { Dept } = require('../models/subject.js');
 
 const {
-  TextMaker,
   Format,
   TwoLevelSelect,
   SortIndicators,
@@ -390,10 +389,10 @@ class ExportButton extends React.Component {
       success : null,
     }; 
   }
-  UNSAFE_componentWillReceiveProps(){
-    this.setState({ 
+  static getDerivedStateFromProps(nextProps, prevState){
+    return { 
       success : null,
-    });
+    };
   }
   render(){
     const {
@@ -466,7 +465,7 @@ class ExportButton extends React.Component {
     }
 
     setTimeout(()=>{
-      this.setState({success:null});
+      this.setState({success: null});
     },3000)
 
   }

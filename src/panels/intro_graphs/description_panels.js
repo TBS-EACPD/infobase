@@ -1,8 +1,8 @@
-const {
+import { text_maker } from './intro_graph_text_provider.js';
+import {
   PanelGraph,
-  reactAdapter,
-} = require("../shared"); 
-
+  TextPanel,
+} from "../shared";
 
 const title_keys = {
   tag: 'tag_desc_title',
@@ -14,25 +14,17 @@ _.each(['tag','crso','program'], level => {
   new PanelGraph({
     level,
     key : "description",
-    layout : {
-      full : { graph : [12]},
-      half : { graph : [12]},
-    },
     footnotes: false,
-    title: title_keys[level],
     calculate: subject => _.nonEmpty(subject.description),
-    render(panel,calculations){
+
+    render({calculations}){
       
       const {subject} = calculations;
       
-      const view = <div className="medium_panel_text">
+      return <TextPanel title={text_maker(title_keys[level])}>
         <p> {subject.description} </p>
-      </div>;
+      </TextPanel>
 
-      reactAdapter.render(
-        view, 
-        panel.areas().graph.node() 
-      );
     },
   });
 });

@@ -1,4 +1,5 @@
-import { text_maker, run_template } from "../../../models/text";
+import { run_template } from "../../../models/text";
+import { text_maker } from '../partition_text_provider.js';
 import { formats } from '../../../core/format.js';
 
 const get_common_popup_options = d => {

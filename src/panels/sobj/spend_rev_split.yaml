@@ -1,0 +1,42 @@
+spend_rev_split_title:
+  transform: [handlebars]
+  en: Expenditures and Revenues ({{pa_last_year}}) 
+  fr: Dépenses et recettes ({{pa_last_year}}) 
+
+dept_spend_rev_split_text:
+  transform: [handlebars, markdown]
+  en: |
+    In {{pa_last_year}}, **{{subj_name subject}}** had recorded revenues of **{{fmt_compact_written dept_pa_last_year_rev_minus}}**.  Netting these revenues 
+    off **{{subj_name subject}}’s** *gross* expenditures of **{{fmt_compact_written dept_pa_last_year_gross_exp}}** leaves **{{fmt_compact_written dept_exp_pa_last_year}}** in *net* expenditures.
+
+  fr: |
+    En {{pa_last_year}}, **{{le_dept dept}}** a enregistré des recettes de **{{fmt_compact_written dept_pa_last_year_rev_minus}}**. 
+    Après compensation de ces recettes par rapport aux dépenses *brutes* de **{{fmt_compact_written dept_pa_last_year_gross_exp}} {{de_dept dept}}**, 
+    les dépenses *nettes* s’élèvent à **{{fmt_compact_written dept_exp_pa_last_year}}**. 
+
+
+tag_spend_rev_split_text:
+  transform: [handlebars, markdown]
+  en: |
+   In {{pa_last_year}}, Programs falling under the "**{{subj_name subject}}**"
+   tag recorded revenues of **{{fmt_compact_written tag_exp_rev_neg_minus}}**.
+   Netting these revenues from the maximum *gross* expenditures of **{{fmt_compact_written tag_exp_rev_gross}}** of tagged programs results in 
+   **{{fmt_compact_written tag_exp_rev_net}}** in *net* expenditures.
+  fr: |
+    En {{pa_last_year}}, des recettes de **{{fmt_compact_written tag_exp_rev_neg_minus}}** 
+    ont été enregistrées pour les programmes liés à l’étiquette «**{{subj_name subject}}**».
+    Après compensation de ces recettes maximales par rapport aux dépenses *brutes* maximales de **{{fmt_compact_written tag_exp_rev_gross}}** pour l’étiquette, 
+    les dépenses maximal *nettes* s’élèvent à **{{fmt_compact_written tag_exp_rev_net}}**.
+
+program_spend_rev_split_text:
+  transform: [handlebars, markdown]
+  en: |
+    In {{pa_last_year}}, revenues of **{{fmt_compact_written program_exp_rev_neg_minus}}** were recorded for the program "**{{subj_name subject}}**".
+    Netting these revenues from the total *gross* expenditures of **{{fmt_compact_written program_exp_rev_gross}}** dedicated to this program leaves **{{fmt_compact_written program_exp_rev_net}}** in *net* expenditures.
+   
+  fr: |
+    En {{pa_last_year}}, des recettes de **{{fmt_compact_written program_exp_rev_neg_minus}}** ont été enregistré pour le programme «**{{subj_name subject}}**».
+    Après compensation de ces recettes par rapport aux dépenses *brutes* de **{{fmt_compact_written program_exp_rev_gross}}** consacrées au programme, les dépenses *nettes* s'élèvent à **{{fmt_compact_written program_exp_rev_net}}**.
+
+
+

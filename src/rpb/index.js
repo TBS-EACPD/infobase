@@ -3,8 +3,7 @@ import { createSelector } from 'reselect';
 import withRouter from 'react-router/withRouter';
 import { log_standard_event } from '../core/analytics.js';
 import { Fragment } from 'react';
-const { text_maker } = require('../models/text');
-require("./rpb.ib.yaml");
+const { TextMaker, text_maker } = require('./rpb_text_provider.js');
 require('./rpb.scss');
 
 //data and state stuff
@@ -25,7 +24,6 @@ const { ensure_loaded } = require('../core/lazy_loader.js');
 //re-usable view stuff
 const {
   SpinnerWrapper,
-  TextMaker,
   RadioButtons,
   LabeledBox,
 } = require('../util_components.js');
@@ -85,27 +83,29 @@ class Root extends React.Component {
     const mapStateToProps = create_mapStateToProps();
     const Container = connect(mapStateToProps, mapDispatchToProps)(RPB)
 
-    const store = createStore(reducer,state);
+    const store = createStore(reducer, state);
 
-    Object.assign(this, { store, Container });
-
+    this.state = {
+      store,
+      Container,
+    };
   }
-  UNSAFE_componentWillUpdate(nextProps){
-    this.store.dispatch({
+  static getDerivedStateFromProps(nextProps, prevState){
+    prevState.store.dispatch({
       type: "navigate_to_new_state",
       payload: nextProps.state,
     });
-
+    return null;
   }
   shouldComponentUpdate(newProps){
-    return rpb_link(this.store.getState()) !== rpb_link(newProps.state)
+    return rpb_link(this.state.store.getState()) !== rpb_link(newProps.state)
   }
   render(){
 
     const { 
       Container,
       store,
-    } = this;
+    } = this.state;
 
     return (
       <Provider store={store}>
@@ -203,18 +203,18 @@ class RPB extends React.Component {
               <div className="md-half-width md-gutter-left">
                 { 
                   window.is_a11y_mode ?
-                  <AccessibleTablePicker
-                    onSelect={id => this.pickTable(id)}
-                    tables={_.reject(Table.get_all(), 'reference_table')}
-                    selected={_.get(table, 'id')}
-                  /> :
-                  <button 
-                    className="btn btn-ib-primary"
-                    style={{width: '100%'}}
-                    onClick={()=>{ this.setState({table_picking: true})}}
-                  >
-                    <TextMaker text_key={table ? 'select_another_table_button' : 'select_table_button'} /> 
-                  </button>
+                    <AccessibleTablePicker
+                      onSelect={id => this.pickTable(id)}
+                      tables={_.reject(Table.get_all(), 'reference_table')}
+                      selected={_.get(table, 'id')}
+                    /> :
+                    <button 
+                      className="btn btn-ib-primary"
+                      style={{width: '100%'}}
+                      onClick={()=>{ this.setState({table_picking: true})}}
+                    >
+                      <TextMaker text_key={table ? 'select_another_table_button' : 'select_table_button'} /> 
+                    </button>
                 }
               </div>
             </div>
@@ -299,7 +299,7 @@ class RPB extends React.Component {
                 <GranularView {...this.props} /> 
               ) :
               null
-            },
+            }
           </Fragment>
       }
     </div>
@@ -352,7 +352,8 @@ const URLSynchronizer = withRouter(
     //alternatively, we *can* overwrite the URL in componentDidMount() using replaceState().
     render(){ return null; }
     shouldComponentUpdate(new_props){
-      return rpb_link(this.props.state) !== rpb_link(new_props.state);
+      // return rpb_link(this.props.state) !== rpb_link(new_props.state);
+      return rpb_link(new_props.state) !== window.location.hash;
     }
     componentDidUpdate(){
       this.updateURLImperatively();
@@ -380,18 +381,15 @@ const url_state_selector = createSelector(_.identity, str => {
 });
 
 export class ReportBuilder extends React.Component { 
-  constructor(props){
-    super(props);
-    const config_str = this.props.match.params.config;
+  constructor(){
+    super();
     this.state = {
-      loading: !!(url_state_selector(config_str).table),
+      loading: true,
+      config_str: null,
+      url_state: null,
     }
   }
-  loadDeps({table, subject}){
-    this.setState({
-      loading: true,
-    });
-
+  loadDeps({table}){
     ensure_loaded({
       table_keys: [table],
       footnotes_for: 'all',
@@ -401,51 +399,55 @@ export class ReportBuilder extends React.Component {
       });
     });
   }
-  UNSAFE_componentWillMount(){
-    const config_str = this.props.match.params.config;
-    const state = url_state_selector(config_str);
-    if(state.table){
-      this.loadDeps(state);
-    }
-  }
-  shouldComponentUpdate(nextProps,nextState){
-    if(this.state.loading !== nextState.loading){
-      return true;
-    }
-    const old_config_str = this.props.match.params.config;
-    const new_config_str = nextProps.match.params.config;
-    return old_config_str !== new_config_str;
-  }
-  UNSAFE_componentWillUpdate(nextProps){
-    const old_config_str = this.props.match.params.config;
-    const old_state = url_state_selector(old_config_str);
-    const new_config_str = nextProps.match.params.config;
-    const new_state =url_state_selector(new_config_str);
+  static getDerivedStateFromProps(nextProps, prevState){
+    const config_str = nextProps.match.params.config;
+    const url_state = url_state_selector(config_str);
 
-    if(new_state.table && old_state !== new_state.table){  
-      this.loadDeps(new_state);
+    let loading = _.isNull(prevState.config_str) ||
+      _.isNull(prevState.url_state) ||
+      (url_state.table && prevState.url_state.table !== url_state.table)
+
+
+    if(_.isEmpty(url_state.table)){
+      loading = false;
     }
-    
+
+    return {
+      loading,
+      config_str,
+      url_state,
+    };
+  }
+  componentDidMount(){
+    const { url_state } = this.state;
+    if(url_state.table){
+      this.loadDeps(url_state);
+    }
+  }
+  shouldComponentUpdate(nextProps, nextState){
+    return (this.state.loading !== nextState.loading) || (this.state.config_str !== nextState.config_str);
+  }
+  componentDidUpdate(){
+    if (this.state.loading){
+      this.loadDeps(this.state.url_state);
+    }
   }
   render(){
-    const config_str = this.props.match.params.config
-    const title = text_maker("report_builder_title");
-
-    const state = url_state_selector(config_str);
+    const { url_state } = this.state;
 
     return (
       <StandardRouteContainer 
-        title={title}
+        title={text_maker("report_builder_title")}
         breadcrumbs={[text_maker("self_serve")]}
         description={text_maker("report_builder_meta_desc")}
         route_name="_rpb"
         shouldSyncLang={false}
       >
-        <AnalyticsSynchronizer {...state} />
+        <AnalyticsSynchronizer {...url_state} />
         { 
           this.state.loading ? 
-          <SpinnerWrapper scale={3} /> :
-          <Root state={state} />
+            <SpinnerWrapper scale={3} /> :
+            <Root state={url_state} />
         }
       </StandardRouteContainer>
     )
@@ -456,13 +458,13 @@ export class ReportBuilder extends React.Component {
 
 const AccessibleTablePicker = ({ tables, onSelect, selected }) => (
   <select 
-    aria-labeledby="#picker-label"
+    aria-labelledby="picker-label"
     className="form-control rpb-simple-select"
     value={selected}
     onChange={evt => onSelect(evt.target.value)}
   >
     {_.map(tables, ({id, name}) =>
-      <option value={id}>
+      <option key={id} value={id}>
         {name}
       </option>
     )}

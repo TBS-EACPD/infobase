@@ -1,3 +1,13 @@
+const template_globals_file = require('../common_text/template_globals.csv');
+
+const common_lang = require('../common_text/common_lang.yaml');
+const igoc_lang = require('../common_text/igoc-lang.yaml');
+const nav_lang = require('../common_text/nav_lang.yaml');
+const result_lang = require('../common_text/result_lang.yaml');
+const people_lang = require('../common_text/people_lang.yaml');
+const estimates_lang = require('../common_text/estimates_lang.yaml');
+const a11y_lang = require('../common_text/a11y_lang.yaml');
+
 /* 
   TODO: some parts of this still feel hacky 
     * table_common requiring this to check for pre_public_accounts
@@ -21,7 +31,18 @@
 
 */
 
-const template_globals_file = require('../common_text/template_globals.csv');
+
+
+const global_bundles = [
+  common_lang,
+  igoc_lang,
+  nav_lang,
+  result_lang,
+  people_lang,
+  estimates_lang,
+  a11y_lang,
+];
+
 
 //this will look like { key, en, fr }
 const template_globals_parsed = d3.csvParse(template_globals_file);
@@ -122,9 +143,11 @@ const template_store = {};
   this function will get rid of all en/fr and replace it with text 
 
 */
+const text_bundles_by_filename = {};
 const add_text_bundle = (text_bundle) => {
+  const { __file_name__ } = text_bundle;
   const to_add = {};
-  _.each(text_bundle,(text_obj,key) => {
+  _.each( _.omit(text_bundle, "__file_name__") ,(text_obj,key) => {
     if (text_obj.handlebars_partial) {
       Handlebars.registerPartial(key, text_obj.text);
       return;
@@ -146,11 +169,47 @@ const add_text_bundle = (text_bundle) => {
 
   });
   _.extend(template_store, to_add); 
+
+
+  text_bundles_by_filename[__file_name__] = to_add;
+}
+
+const combine_bundles = bundles => {
+  return _.chain(bundles)
+    .map(bundle =>  {
+      const { __file_name__ } = bundle;
+      if(!_.has(text_bundles_by_filename, __file_name__)){
+        add_text_bundle(bundle)
+      }
+      return _.toPairs(text_bundles_by_filename[__file_name__]);
+    })
+    .flatten()
+    .fromPairs()
+    .value();
+
+};
+
+const combined_global_bundle = combine_bundles(global_bundles);
+
+
+const create_text_maker = bundles => {
+  if(_.isEmpty(bundles)){ //called without args -> only global text  
+    return trivial_text_maker;
+  }
+  if(!_.isArray(bundles)){ //single el
+    bundles = [ bundles ] 
+  }
+
+  const combined = combine_bundles(bundles);
+  _.extend(combined, combined_global_bundle);
+  const func = _create_text_maker(combined)
+  combined.__text_maker_func__ = func;
+  
+  return func;
 }
 
 
-
-const text_maker = (key,context={}) => {
+const _create_text_maker = (deps=template_store) => (key,context={}) => {
 
   // 1. lookup the key to get the text object
   // 2. note that by the time this function gets called, we've already stripped out language
@@ -158,9 +217,14 @@ const text_maker = (key,context={}) => {
   //    and apply the requested transform i.e. handlebars
   //    and markdown
   if(!_.isObject(context)){ context={}; }
+  if(deps.__text_maker_func__){
+    context.__text_maker_func__ = deps.__text_maker_func__;
+  } else {
+    context.__text_maker_func__ = trivial_text_maker;
+  }
 
 
-  const text_obj =  template_store[key];
+  const text_obj =  deps[key];
   if(_.isString(text_obj)) return text_obj;
 
   let rtn = text_obj.text;
@@ -188,18 +252,18 @@ const text_maker = (key,context={}) => {
   }
   return rtn;
 }
-
+const trivial_text_maker = _create_text_maker(combined_global_bundle);
 
 
 module.exports = exports = {
   template_globals, //this is currently only exposed to table_common because it wants the pre_public_accounts variable.
-  tx_load : add_text_bundle, //shorthand because used very often
   run_template,
-  text_maker,
   template_store, 
+  create_text_maker,
+  trivial_text_maker,
 };
-window._text_maker = text_maker;
+window._trivial_text_maker = trivial_text_maker;
 window._run_template = run_template;
 window._template_store = template_store;
 window._template_globlals = template_globals;
-window.add_text_bundle = add_text_bundle;
+window._create_text_maker = create_text_maker;

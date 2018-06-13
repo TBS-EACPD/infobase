@@ -9,27 +9,74 @@ export const app_reducer = (state={ lang: window.lang }, { type, payload }) => {
   return state;
 };
 
+import { ComponentLoader } from '../core/ComponentLoader.js';
 import { Home } from '../home/home.js';
-import { MetaData } from '../metadata/metadata.js';
-import { IgocExplorer } from "../igoc_explorer/igoc_explorer.js";
-import { ResourceExplorer } from "../resource_explorer/resource-explorer.js";
-import { InfoGraph } from '../infographic/infographic.js';
-import { PartitionRoute } from '../partition/partition_subapp/PartitionRoute.js';
-import { BudgetMeasuresRoute } from '../partition/budget_measures_subapp/BudgetMeasuresRoute.js';
-import { Glossary } from '../glossary/glossary.js';
-import { BubbleExplore } from '../dept_explore/dept_explore.js';
-import { ReportBuilder } from '../rpb/index.js';
 import { TooltipActivator } from '../glossary/Tooltips';
 import { PotentialSurveyBox } from '../core/survey_link';
 import { EasyAccess } from '../core/EasyAccess';
-import { About } from '../about/about.js';
-import { GraphInventory } from '../graph_route/graph_route.js';
 import { DevStuff } from '../components/ExplorerComponents.js';
 
-// Now you can dispatch navigation actions from anywhere!
-// store.dispatch(push('/foo'))
+const LazyGraphRoute = ComponentLoader(async () => {
+  const { GraphInventory } = await import('../graph_route/graph_route.js');
+  return GraphInventory;
+})
+
+const LazyPartitionRoute = ComponentLoader(async () => {
+  const { PartitionRoute } = await import('../partition/partition_subapp/PartitionRoute.js');
+  return PartitionRoute;
+})
+
+const LazyBudgetMeasuresRoute =  ComponentLoader(async () => {
+  const {BudgetMeasuresRoute} = await import('../partition/budget_measures_subapp/BudgetMeasuresRoute.js')
+  return BudgetMeasuresRoute;
+});
+
+const LazyBubbleExplore = ComponentLoader(async ()=>{
+  const { BubbleExplore } = await import("../dept_explore/dept_explore.js");
+  return BubbleExplore;
+})
+
+const LazyAbout = ComponentLoader(async () => {
+  const {About} = await import('../about/about.js');
+  return About;
+});
+
+const LazyMetadata = ComponentLoader(async () =>{
+  const { MetaData } = await import('../metadata/metadata.js');
+  return MetaData;
+})
+
+const LazyIgoc = ComponentLoader(async () => {
+  const {IgocExplorer} = await import('../igoc_explorer/igoc_explorer.js');
+  return IgocExplorer;
+});
+
+const LazyResourceExplorer = ComponentLoader(async () => {
+  const {ResourceExplorer} = await import('../resource_explorer/resource-explorer.js');
+  return ResourceExplorer;
+});
+
+const LazyGlossary = ComponentLoader(async () => {
+  const {Glossary} = await import('../glossary/glossary.js');
+  return Glossary;
+});
+
+const LazyRPB = ComponentLoader(async () => {
+  const { ReportBuilder } = await import("../rpb/index.js");
+  return ReportBuilder;
+})
+
+const LazyInfoGraph = ComponentLoader(async () => {
+  const { InfoGraph } = await import ("../infographic/infographic.js");
+  return InfoGraph;
+})
+
 
 export class App extends React.Component {
+  constructor(){
+    super();
+    initialize_analytics();
+  }
   render(){
     return (
       <div tabIndex={-1} id="app-focus-root">
@@ -38,25 +85,22 @@ export class App extends React.Component {
         <PotentialSurveyBox />
         <EasyAccess />
         <Switch>
-          <Route path="/metadata/:data_source?" component={MetaData}/>
-          <Route path="/igoc/:grouping?" component={IgocExplorer} />
-          <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={ResourceExplorer} />
-          <Route path="/orgs/:level/:subject_id/infograph/:bubble?/" component={InfoGraph} />
-          <Route path="/glossary/:active_key?" component={Glossary} />
-          <Route path="/partition/:perspective?/:data_type?" component={PartitionRoute} />
-          <Route path="/budget-measures/:first_column?" component={BudgetMeasuresRoute} />
-          <Route path="/explore-:perspective?" component={BubbleExplore} />
-          <Route path="/rpb/:config?" component={ReportBuilder} />
-          <Route path="/about" component={About} />
-          <Route path="/graph/:level?/:graph?/:id?" component={GraphInventory} />
+          <Route path="/metadata/:data_source?" component={LazyMetadata}/>
+          <Route path="/igoc/:grouping?" component={LazyIgoc} />
+          <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={LazyResourceExplorer} />
+          <Route path="/orgs/:level/:subject_id/infograph/:bubble?/" component={LazyInfoGraph} />
+          <Route path="/glossary/:active_key?" component={LazyGlossary} />
+          <Route path="/partition/:perspective?/:data_type?" component={LazyPartitionRoute} />
+          <Route path="/budget-measures/:first_column?" component={LazyBudgetMeasuresRoute} />
+          <Route path="/explore-:perspective?" component={LazyBubbleExplore} />
+          <Route path="/rpb/:config?" component={LazyRPB} />
+          <Route path="/about" component={LazyAbout} />
+          <Route path="/graph/:level?/:graph?/:id?" component={LazyGraphRoute} />
           <Route path="/dev" component={DevStuff} />
           <Route path="/" component={Home} />
         </Switch>
       </div>
     );
-  }
-  UNSAFE_componentWillMount(){
-    initialize_analytics();
   }
 }
 

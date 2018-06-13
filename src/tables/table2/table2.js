@@ -2,7 +2,7 @@
 exports = module.exports;
 
 
-require("./table2.ib.yaml");
+const text = require("./table2.yaml");
 
 const { Statistics } = require('../../core/Statistics.js');
 const {sos} = require('../../models/businessConstants.js');
@@ -10,9 +10,10 @@ const {sos} = require('../../models/businessConstants.js');
 // see [here](../table_definition.html) for description
 // of the table spec
 var STATS = require("../../core/tables/stats.js");
-const {text_maker} = require("../../models/text");
+const {trivial_text_maker} = require("../../models/text");
 
 module.exports = {
+  text,
   id: "table2",
   source: [ "QFR" ],
   "tags" : [
@@ -167,11 +168,11 @@ module.exports = {
       filter_func: function(options){
         return function(row){
           if (row.so_num > 0 && row.so_num <= 7){
-            return text_maker("op_spending");
+            return trivial_text_maker("op_spending");
           } else if (row.so_num > 7 && row.so_num <= 9) {
-            return text_maker("capital_spending");
+            return trivial_text_maker("capital_spending");
           } else if (row.so_num === 21  || row.so_num  === 22) {
-            return text_maker("revenues");
+            return trivial_text_maker("revenues");
           }
           return row.so;
         };

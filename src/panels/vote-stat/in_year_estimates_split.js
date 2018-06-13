@@ -1,14 +1,20 @@
-import './vote-stat-text.ib.yaml';
+import { text_maker, TM } from './vote-stat-text-prodiver.js';
 import {
   formats,
   PanelGraph,
-  charts_index,
-  text_maker,
   util_components,
   run_template,
+  declarative_charts,
+  StdPanel,
+  Col,
 } from "../shared";
 
 const { Format } = util_components;
+
+const { 
+  A11yTable,
+  Bar,
+} = declarative_charts;
 
 const estimates_split_calculate = function(subject, info,options){
   const in_year_estimates_split = info[subject.level+"_in_year_estimates_split"];
@@ -30,12 +36,15 @@ const estimates_split_calculate = function(subject, info,options){
 
 //NOTE: Once supps A comes out, we'll need to switch all the est_last_year to est_in_year, here, in the titles and in the text.
 
-const estimates_split_render = function(panel,calculations,options){
+const estimates_split_render_w_text_key = text_key => ({calculations, footnotes, sources}) => {
   const {
+    info,
     graph_args : {
       in_year: in_year_bar_args,
     },
   } = calculations;
+
+  let content;
 
   if(window.is_a11y_mode){
     const { series, ticks } = in_year_bar_args;
@@ -48,13 +57,17 @@ const estimates_split_render = function(panel,calculations,options){
       .value();
 
 
-    charts_index.create_a11y_table({
-      // container: panel.areas().text, 
-      container: panel.areas().graph, 
-      label_col_header : text_maker("estimates_doc"), 
-      data_col_headers: [ run_template("{{est_in_year}}") ],
-      data : data,
-    });
+    content = (
+      <A11yTable
+        {...{
+          label_col_header : text_maker("estimates_doc"), 
+          data_col_headers: [ run_template("{{est_in_year}}") ],
+          data : data,
+        }}
+      />
+    );
+
+
   } else {
 
     const static_bar_args = {
@@ -67,14 +80,27 @@ const estimates_split_render = function(panel,calculations,options){
       formater : formats.compact1,
     };
 
-    panel.areas().graph.attr('aria-hidden',"true")
-
-    let bar_mountpoint = panel.areas().graph;
-
-    const bar_instance = new charts_index.BAR.bar(bar_mountpoint.node(), static_bar_args);
-    bar_instance.render(in_year_bar_args);
-
+    content = (
+      <Bar 
+        {...static_bar_args}
+        {...in_year_bar_args}
+      />
+    );
   }
+
+  return (
+    <StdPanel
+      title={text_maker("in_year_estimates_split_title")}
+      {...{sources, footnotes}}
+    >
+      <Col isText size={6}>
+        <TM k={text_key} args={info} />
+      </Col>
+      <Col isGraph={window.is_a11y_mode} size={6}>
+        {content}
+      </Col>
+    </StdPanel>
+  )
 
 };
 
@@ -90,16 +116,8 @@ new PanelGraph({
   ],
 
   key : "in_year_estimates_split",
-
-  layout : {
-    "full" : {text : 6, graph: 6},
-    "half" : {text : 12, graph: 12},
-  },
-
-  title :  "in_year_estimates_split_title",
-  text :  "dept_in_year_estimates_split_text",
   calculate: estimates_split_calculate,
-  render:   estimates_split_render,
+  render:   estimates_split_render_w_text_key("dept_in_year_estimates_split_text"),
 });
 
 new PanelGraph({
@@ -108,15 +126,7 @@ new PanelGraph({
   depends_on :  ["table8"],
   info_deps: ["table8_gov_info"],
   key : "in_year_estimates_split",
-
-  layout : {
-    "full" : {text : 6, graph: 6},
-    "half" : {text : 12, graph: 12},
-  },
-
-  title :  "in_year_estimates_split_title",
-  text :  "gov_in_year_estimates_split_text",
   calculate: estimates_split_calculate,
-  render:   estimates_split_render,
+  render:   estimates_split_render_w_text_key("gov_in_year_estimates_split_text"),
 });
 
