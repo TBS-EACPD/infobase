@@ -61,28 +61,28 @@ budget_home_text:
   fr: Découvrir une visualisation des nouvelles mesures du Budget 2018 qui seront financées par le Budget des dépenses.
 
 planet_home_title:
-  en: Magnitude Explorer
+  en: Bubble Explorer
   fr: TODO
 
 planet_home_text:
   en: Compare organizations by how much they spend and how many people they employ
-  fr: TODO (en has changed)... Comparer les dépenses des organisations et le nombre d'employés à leur service
+  fr: Comparer les dépenses des organisations et le nombre d'employés à leur service
 
 home_search_bar_title:
   en: Jump to an infographic
-  fr: TODO
+  fr: Infographie rapide
 
 featured_data_title:
   en: Quick links
   fr: Liens directs
 
 explorer_home_title: 
-  en: Topic Explorer
-  fr: TODO
+  en: Tag Explorer
+  fr: Explorer les étiquettes
 
 explorer_home_text: 
   en: Explore data from your area of interest by organization, program, or keyword "tag"
-  fr: TODO (en has changed)... Recherche par organisation, programme ou mot clé pour étudier les données dans le domaine qui vous intéresse
+  fr: Recherche par organisation, programme ou mot clé pour étudier les données dans le domaine qui vous intéresse
 
 
 other_ways_of_exploring_title:
@@ -96,7 +96,7 @@ dashboard_home:
 
 home_build_a_report: 
   en: Report Builder
-  fr: TODO
+  fr: Outil de création de rapport
 
 report_builder_home_desc:
   en: Create a customized and exportable report of the data you want to analyze
@@ -108,7 +108,7 @@ igoc_home_title:
 
 igoc_home_desc:
   en: Consult a comprehensive listing of federal organizations and interests
-  fr: TODO (en has changed)... Une liste exhaustive des organisations et intérêts fédéraux
+  fr: Une liste exhaustive des organisations et intérêts fédéraux
 
 glossary_home_title:
   en: Glossary
@@ -116,7 +116,7 @@ glossary_home_title:
 
 glossary_home_desc:
   en: Search a list of definitions for terms used in the InfoBase
-  fr: TODO (en has changed)... Liste interrogeable des définitions pour les termes employés dans l'InfoBase
+  fr: Liste interrogeable des définitions pour les termes employés dans l'InfoBase
 
 glossary_home_link_text:
   en: Search the glossary
@@ -128,7 +128,7 @@ metadata_home_title:
 
 metadata_home_desc: 
   en: Find information on, and external links to, the InfoBase's data sources
-  fr: TODO (en has changed)... Voir le complément d'information sur les données et sur les liens vers des sites de données ouvertes
+  fr: Voir le complément d'information sur les données et sur les liens vers des sites de données ouvertes
 
 metadata_home_link_text:
   transform: [handlebars]
