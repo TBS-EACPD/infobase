@@ -6,7 +6,11 @@ const {
   fill_dimension_columns,
   trivial_dimension,
 } = require('./tables/dimensions.js');
-const {text_maker,run_template} = require('../models/text.js');
+const {
+  trivial_text_maker,
+  run_template,
+  create_text_maker,
+} = require('../models/text.js');
 const {mix} = require('../generalUtils.js');
 const {Dept} = require('../models/subject.js');
 const {staticStoreMixin} = require('../models/staticStoreMixin.js');
@@ -141,7 +145,8 @@ exports.Table = class Table extends mix().with(staticStoreMixin){
     );
   }
   get description(){
-    return text_maker(this.id, {
+    const tmf = create_text_maker(this.text);
+    return tmf(this.id, {
       table : this,
       table_level : true,
       details : true,
@@ -149,7 +154,8 @@ exports.Table = class Table extends mix().with(staticStoreMixin){
     });
   }
   get short_description(){
-    return text_maker(this.id+"_short");
+    const tmf = create_text_maker(this.text);
+    return tmf(this.id+"_short");
   }
   get title(){
     return run_template(this.title_def[window.lang]);
@@ -204,7 +210,11 @@ exports.Table = class Table extends mix().with(staticStoreMixin){
     return { headers_for_cell, col_structure };
 
 
-  } 
+  }
+
+  column_description(col_nick){
+    return run_template(this.col_from_nick(col_nick).description[window.lang]);
+  }  
 
   old_presentation_ready_headers(){
     var flat_headers = this.flat_headers;
@@ -243,7 +253,7 @@ exports.Table = class Table extends mix().with(staticStoreMixin){
   add_col(x){
     // this === a table obj or null
     if(x && x.nick === 'dept'){
-      x.header = { [window.lang] : text_maker('department') };
+      x.header = { [window.lang] : trivial_text_maker('department') };
     }
     if (_.isString(x)){
       x =  {header : {en: x, fr: x}};

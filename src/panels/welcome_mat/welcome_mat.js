@@ -1,21 +1,29 @@
-const { Fragment } = require('react');
-require("./welcome_mat.ib.yaml");
-require("./welcome-mat.scss");
-const classNames = require('classnames');
-const {
+import "./welcome-mat.scss";
+import text from './welcome_mat.yaml';
+import { Fragment } from 'react';
+import classNames from 'classnames';
+import {
+  Panel,
   formats,
   PanelGraph,
-  reactAdapter,
-  util_components: { TM, Format },
-  years : {std_years, planning_years},
-} = require("../shared"); 
+  TM as StdTM,
+  years,
+  declarative_charts,
+  create_text_maker,
+  util_components,
+} from "../shared.js" 
+
+const { Format } = util_components;
 
 const {
   Bar,
   Line,
-} = require('../../charts/declarative_charts.js');
+} = declarative_charts;
 
+const {std_years, planning_years} = years;
 const exp_cols = _.map(std_years, yr => `${yr}exp`);
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 
 const SpendFormat = ({amt}) => <Format type="compact1" content={amt} />
@@ -635,13 +643,15 @@ const MobileOrA11YContent = ({ children }) => [
   </PaneItem>,
 ];
 
-function render(panel, calculations){
+function render({calculations, footnotes, sources}){
   const { graph_args, subject } = calculations;
-  panel.areas().text.remove();
-  const node = panel.areas().graph.node();
-  reactAdapter.render(
-    <WelcomeMat subject={subject} {...graph_args} />,
-    node
+  return (
+    <Panel
+      title={text_maker("welcome_mat_title")}
+      {...{sources,footnotes}}
+    >
+      <WelcomeMat subject={subject} {...graph_args} />
+    </Panel>
   );
 }
 
@@ -735,8 +745,6 @@ new PanelGraph({
   key: 'welcome_mat',
   footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
   depends_on : ['table6','table12', 'table8'],
-  layout: { full: {graph:12} },
-  title : "welcome_mat_title",
   missing_info: "ok",
   calculate (subject,info,options){
     const { table6, table12, table8 } = this.tables; 
@@ -795,8 +803,6 @@ new PanelGraph({
   key: 'welcome_mat',
   footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
   depends_on : ['table6','table12'],
-  layout: { full: {graph:12} },
-  title : "welcome_mat_title",
   missing_info: "ok",
   calculate (subject,info,options){
     const { table6, table12 } = this.tables; 
@@ -828,6 +834,7 @@ new PanelGraph({
     return {type, calcs};
 
   },
+
   render,
 });
 
@@ -836,8 +843,6 @@ new PanelGraph({
   key: 'welcome_mat',
   footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
   depends_on : ['table6','table12'],
-  layout: { full: {graph:12} },
-  title : "welcome_mat_title",
   missing_info: "ok",
   calculate (subject,info,options){
     const { table6, table12 } = this.tables; 
@@ -857,6 +862,7 @@ new PanelGraph({
     };
 
   },
+
   render,
 });
 
@@ -865,8 +871,6 @@ new PanelGraph({
   key: 'welcome_mat',
   footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
   depends_on : ['table6','table12'],
-  layout: { full: {graph:12} },
-  title : "welcome_mat_title",
   missing_info: "ok",
   calculate (subject,info,options){
     const { table6, table12 } = this.tables; 
@@ -881,5 +885,6 @@ new PanelGraph({
     };
 
   },
+
   render,
 });

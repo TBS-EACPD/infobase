@@ -4,10 +4,12 @@ const { createSelector } = require('reselect');
 const classNames = require('classnames');
 const { infograph_href_template } = require('../link_utils.js');
 const { get_root } = require('../gen_expl/hierarchy_tools.js');
-const { text_maker } = require('../models/text.js');
+const { 
+  igoc_tmf: text_maker, 
+  TM,
+} =  require('./igoc_explorer_text.js');
 const {
   SpinnerWrapper,
-  TM,
 } = require('../util_components.js');
 const { InstForm } = require('../models/subject.js');
 const { Explorer } = require('../components/ExplorerComponents.js')
@@ -237,7 +239,7 @@ class IgocExplorer extends React.Component {
           <li className={classNames(grouping==='inst_form' && 'active')}><a href="#igoc/inst_form" > <TM k="by_inst_form" /> </a></li>
           <li className={classNames(grouping==='historical' && 'active')}><a href="#igoc/historical" > <TM k="by_historical" /></a></li>
           <li className={classNames(grouping==='pop_group' && 'active')}><a href="#igoc/pop_group" > <TM k="by_pop_group" /></a></li>
-          <li className={classNames(grouping==='all' && 'active')}><a href="#igoc/all" > <TM k="by_all" /></a></li>
+          <li className={classNames(grouping==='all' && 'active')}><a href="#igoc/all" > <TM k="all_orgs" /></a></li>
         </ul>
       </div>
       <div

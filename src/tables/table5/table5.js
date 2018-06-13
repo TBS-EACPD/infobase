@@ -1,5 +1,5 @@
 exports = module.exports;
-require("./table5.ib.yaml");
+const text = require("./table5.yaml");
 
 
 // see [here](../table_definition.html) for description
@@ -7,7 +7,7 @@ require("./table5.ib.yaml");
 
 const {
   STATS,
-  text_maker, 
+  trivial_text_maker, 
   m, 
   Statistics,
   business_constants : {sos},
@@ -15,6 +15,7 @@ const {
 } = require("../table_common");
 
 module.exports = {
+  text,
   "id": "table5",
 
   "tags" : [
@@ -108,11 +109,11 @@ module.exports = {
       filter_func: function(options){
         return function(row){
           if (row.so_num > 0 && row.so_num <= 7){
-            return text_maker("op_spending");
+            return trivial_text_maker("op_spending");
           } else if (row.so_num > 7 && row.so_num <= 9) {
-            return text_maker("capital_spending");
+            return trivial_text_maker("capital_spending");
           } else if (row.so_num === 21  || row.so_num  === 22) {
-            return text_maker("revenues");
+            return trivial_text_maker("revenues");
           }
           return row.so;
         };

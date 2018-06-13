@@ -12,7 +12,7 @@ export default function(a11y_mode){
       is_new: true,
     },
     {
-      text_key: "table112_title",
+      text_key: "home_pop_by_exec",
       href: (
         rpb_link({ 
           table: 'table112', 
@@ -27,7 +27,7 @@ export default function(a11y_mode){
       is_new: true,
     },
     {
-      text_key: "table302_title",
+      text_key: "home_pop_by_gender",
       href: (
         rpb_link({ 
           table: 'table302', 
@@ -37,7 +37,7 @@ export default function(a11y_mode){
       is_new: true,
     },
     {
-      text_key: "table303_title",
+      text_key: "home_pop_by_fol",
       href: (
         rpb_link({ 
           table: 'table303', 
@@ -47,7 +47,7 @@ export default function(a11y_mode){
       is_new: true,
     },
     {
-      text_key: "table304_title",
+      text_key: "home_pop_avg_age",
       href: (
         rpb_link({ 
           table: 'table304', 

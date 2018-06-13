@@ -1,3 +1,4 @@
+const { TM, text_maker } = require('./result_text_provider.js');
 const { createSelector } = require('reselect');
 const classNames = require('classnames');
 
@@ -5,20 +6,16 @@ const { Explorer } = require('../../components/ExplorerComponents');
 
 const {
   PanelGraph,
-  reactAdapter,
-  text_maker,
   util_components: {
-    TextMaker,
-    TM,
     SpinnerWrapper,
     Format,
     Abbrev,
   },
   infograph_href_template,
+  Panel,
 } = require("../shared");
 const { Details } = require('../../components/Details.js');
 
-require("./result_treemap.ib.yaml");
 
 const { 
   Indicator,
@@ -60,7 +57,6 @@ const {
   map_state_to_root_props_from_memoized_funcs,
   map_dispatch_to_root_props,
 } = require('../../gen_expl/state_and_memoizing');
-
 
 
 const get_non_col_content_func = createSelector(
@@ -331,7 +327,7 @@ class SingleSubjExplorer extends React.Component {
         }
         {is_filtering && _.isEmpty(root.children) &&
           <div style={{fontWeight: '500', fontSize: '1.5em', textAlign:'center'}}>  
-            <TextMaker text_key="search_no_results" />
+            <TM k="search_no_results" />
           </div>
         }
         <Explorer
@@ -357,7 +353,7 @@ class SingleSubjExplorer extends React.Component {
               onClick={()=> tab_on_click('drr16')}
               onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('drr16')}
             >
-              <TextMaker text_key="DRR_results_option_title" />
+              <TM k="DRR_results_option_title" />
             </span>
           </li>
           <li className={classNames("tab_label", doc==="dp18" && "active_tab")} onClick={()=> tab_on_click('dp18')}>
@@ -369,7 +365,7 @@ class SingleSubjExplorer extends React.Component {
               onClick={()=> tab_on_click('dp18')}
               onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32)&& tab_on_click('dp18')}
             >
-              <TextMaker text_key="DP_results_option_title" />
+              <TM k="DP_results_option_title" />
             </span>
           </li>
         </ul>
@@ -443,7 +439,6 @@ class SingleSubjResultsContainer extends React.Component {
 }
 
 
-const title_key = "result_treemap_title";
 _.each(['program','dept','crso'], lvl => {
 
   new PanelGraph({
@@ -453,11 +448,6 @@ _.each(['program','dept','crso'], lvl => {
     depends_on: ["table6", "table12"],
     requires_results: true,
     key: "explore_results",
-    layout: {
-      full: { graph: 12},
-      half: { graph: 12},
-    },
-    title: title_key,
     calculate(subject){
 
       const indicators = Indicator.get_flat_indicators(subject);
@@ -475,7 +465,8 @@ _.each(['program','dept','crso'], lvl => {
       };
 
     },
-    render(panel, calculations){
+
+    render({calculations}){
       const { 
         subject, 
         graph_args: {
@@ -484,16 +475,16 @@ _.each(['program','dept','crso'], lvl => {
         },
       } = calculations;
 
-      panel.areas().title.html(text_maker(title_key,{ has_dp_data, has_drr_data }));
-      
-      const node = panel.areas().graph.node();
-      reactAdapter.render(
-        <SingleSubjResultsContainer 
-          subject={subject} 
-          has_dp_data={has_dp_data}
-          has_drr_data={has_drr_data}
-        />, 
-        node
+      return (
+        <Panel title={text_maker("result_treemap_title", { has_dp_data, has_drr_data})}>
+          <SingleSubjResultsContainer
+            {...{
+              subject,
+              has_dp_data,
+              has_drr_data,
+            }}
+          />
+        </Panel>
       );
 
     },

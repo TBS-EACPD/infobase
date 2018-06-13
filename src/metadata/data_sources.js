@@ -1,13 +1,13 @@
-require('./data_sources.ib.yaml');
-require('./frequencies.ib.yaml');
+const data_source_text = require('./data_sources.yaml');
+const freq_text = require('./frequencies.yaml');
 
 //circular dependency hack..
 const TableClassModule = require('../core/TableClass.js');
-const { text_maker } = require('../models/text.js');
+const { create_text_maker } = require('../models/text.js');
 const {rpb_link } = require('../rpb/rpb_link.js');
 const { GlossaryEntry } = require('../models/glossary.js');
 
-const tm = text_maker;
+const tm = create_text_maker([data_source_text, freq_text]);
 
 const frequencies = {
   m : {

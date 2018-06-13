@@ -1,5 +1,8 @@
+import text from './survey_link.yaml';
 /* eslint-disable no-unreachable */
-import {text_maker} from '../models/text.js';
+import { create_text_maker } from '../models/text.js';
+
+const text_maker = create_text_maker(text);
 
 function should_add_survey_banner(){
   //if we add more surveys, we can use 'opened/ignored_survey1'

@@ -1,8 +1,8 @@
-import "./table302.ib.yaml";
+import text from "./table302.yaml";
 
 import {
   STATS, 
-  text_maker, 
+  trivial_text_maker, 
   m, 
   Statistics, 
   people_five_year_percentage_formula,
@@ -17,6 +17,7 @@ const {
 } = years;
 
 export default {
+  text,
   "id": "table302",
   source: ["RPS"],
   "tags": [ 
@@ -52,7 +53,7 @@ export default {
       "key": true,
       "type": "int",
       "nick": 'gender',
-      "header": text_maker("employee_gender"),
+      "header": trivial_text_maker("employee_gender"),
     });
     _.each(people_years,(header,ix)=>{
       this.add_col({
@@ -69,10 +70,10 @@ export default {
     this.add_col({
       "type": "percentage1",
       "nick": "five_year_percent",
-      "header": text_maker("five_year_percent_header"),
+      "header": trivial_text_maker("five_year_percent_header"),
       "description": {
-        "en": text_maker("five_year_percent_description"),
-        "fr": text_maker("five_year_percent_description"),
+        "en": trivial_text_maker("five_year_percent_description"),
+        "fr": trivial_text_maker("five_year_percent_description"),
       },
       "formula": people_five_year_percentage_formula("gender",people_years),
     });

@@ -1,18 +1,23 @@
-import './dp_rev_split.ib.yaml';
+import text from './dp_rev_split.yaml';
 
 import {
-  reactAdapter,
   PanelGraph,
   util_components,
   years,
   run_template,
+  create_text_maker,
+  Panel,
+  TM as StdTM,
 } from "../shared";
+
+
+const text_maker = create_text_maker(text);
+const TM = p => <StdTM tmf={text_maker} {...p}/>;
 
 const { planning_years } = years;
 
 const { 
   Format,
-  TM,
 } = util_components;
 
 const special_cols = _.flatMap(planning_years, year => [ `${year}_gross`, `${year}_rev`, `${year}_spa`]);
@@ -24,13 +29,8 @@ _.each(["dept","crso","program"], level => {
     level,
     key: 'dp_rev_split',
     depends_on :  ['table6'],
-    layout: {
-      full: {graph: 12},       
-    },
     machinery_footnotes : false,
     footnotes : ["PLANNED_GROSS"],
-    title :"dp_rev_split_title",
-    text : "dp_rev_split_text",
     calculate(subject,info){
       const { table6 } = this.tables;
       const q = table6.q(subject);
@@ -62,42 +62,48 @@ _.each(["dept","crso","program"], level => {
       });
 
     },
-    render(panel, calculations){
+    render({calculations, sources, footnotes}){
       const {
         graph_args: data,
+        info,
       } = calculations;
 
-      const node = panel.areas().graph.node();
-
-      reactAdapter.render(
-        <div>
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col"> <TM k="year" /> </th>
-                <th scope="col"> <TM k="dp_gross" /> </th>
-                <th scope="col"> <TM k="dp_revenue" /> </th>
-                <th scope="col"> <TM k="dp_spa" /> </th>
-                <th scope="col"> <TM k="dp_net" /> </th>
-              </tr>
-            </thead>     
-            <tbody>
-              {_.map(data, ({year, gross, rev, spa, net }) => 
-                <tr key={year}>
-                  <th scope="row">
-                    {run_template(year)}
-                  </th>
-                  <td> <Format type="compact1" content={gross} /> </td>
-                  <td> <Format type="compact1" content={rev} /> </td>
-                  <td> <Format type="compact1" content={spa} /> </td>
-                  <td> <Format type="compact1" content={net} /> </td>
+      return (
+        <Panel
+          title={text_maker("dp_rev_split_title")}
+          {...{sources,footnotes}}
+        >
+          <div>
+            <TM k="dp_rev_split_text" args={info} />
+          </div>
+          <div>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col"> <TM k="year" /> </th>
+                  <th scope="col"> <TM k="dp_gross" /> </th>
+                  <th scope="col"> <TM k="dp_revenue" /> </th>
+                  <th scope="col"> <TM k="dp_spa" /> </th>
+                  <th scope="col"> <TM k="dp_net" /> </th>
                 </tr>
-              )}
-            </tbody>
+              </thead>     
+              <tbody>
+                {_.map(data, ({year, gross, rev, spa, net }) => 
+                  <tr key={year}>
+                    <th scope="row">
+                      {run_template(year)}
+                    </th>
+                    <td> <Format type="compact1" content={gross} /> </td>
+                    <td> <Format type="compact1" content={rev} /> </td>
+                    <td> <Format type="compact1" content={spa} /> </td>
+                    <td> <Format type="compact1" content={net} /> </td>
+                  </tr>
+                )}
+              </tbody>
 
-          </table>
-        </div>,
-        node
+            </table>
+          </div>
+        </Panel>
       );
       
 

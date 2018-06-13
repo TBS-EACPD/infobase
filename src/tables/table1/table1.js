@@ -1,6 +1,6 @@
 exports = module.exports;
 
-require("./table1.ib.yaml");
+const text = require("./table1.yaml");
 
 // see [here](../table_definition.html) for description
 // of the table spec
@@ -11,6 +11,7 @@ const FORMAT = require('../../core/format');
 
 
 module.exports = {
+  text,
   "id": 'table1',
   source: [ "QFR" ],
   "tags" : [

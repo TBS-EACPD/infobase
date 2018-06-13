@@ -1,14 +1,9 @@
-const classNames = require('classnames');
-const {
-  Subject : {
-    Gov,
-  },
-  text_maker, 
-} = require('../shared.js');
+import { text_maker, TM } from './intro_graph_text_provider.js';
+import classNames from 'classnames';
+import { Subject } from '../shared.js';
 
-const {
-  TextMaker,
-} = require('../../util_components.js');
+const { Gov } = Subject;
+
 
 /* 
   This component helps put a subject in context.
@@ -64,13 +59,13 @@ const has_dead_elements = root => {
 
 }
 
-const HierarchyPeek = ({root}) => (
+export const HierarchyPeek = ({root}) => (
   <div> 
     <_HierarchyPeek root={root} />
     { 
       has_dead_elements(root) &&
-      <TextMaker text_key="hierarchy_contains_dead_elements" />
-    }
+      <TM k="hierarchy_contains_dead_elements" />
+    } 
 
   </div>
 );
@@ -126,7 +121,7 @@ const _HierarchyPeek = ({root}) => (
       Inst forms
         Orgs
 */
-const org_external_hierarchy = ({ subject, href_generator }) => {
+export const org_external_hierarchy = ({ subject, href_generator }) => {
 
   const is_subject = subj => subj === subject;
 
@@ -176,7 +171,7 @@ const org_external_hierarchy = ({ subject, href_generator }) => {
         programs
 */
 
-const org_internal_hierarchy = ({subject, href_generator, show_dead_sos, label_crsos}) => ({
+export const org_internal_hierarchy = ({subject, href_generator, show_dead_sos, label_crsos}) => ({
   name: subject.name,
   active: true,
   children: _.chain(subject.crsos)
@@ -200,7 +195,7 @@ const org_internal_hierarchy = ({subject, href_generator, show_dead_sos, label_c
 })
 
 
-const program_hierarchy = ({subject, href_generator, show_siblings, show_uncles, show_cousins, show_dead_sos, label_crsos }) => {
+export const program_hierarchy = ({subject, href_generator, show_siblings, show_uncles, show_cousins, show_dead_sos, label_crsos }) => {
   const is_subject = subj => subj === subject;
   const is_parent = subj => subj === subject.crso;
 
@@ -256,7 +251,7 @@ const program_hierarchy = ({subject, href_generator, show_siblings, show_uncles,
 
 
 */
-const tag_hierarchy = ({subject, showSiblings, showChildren, href_generator }) => {
+export const tag_hierarchy = ({subject, showSiblings, showChildren, href_generator }) => {
   const is_subject = subj => subj === subject;
 
 
@@ -307,7 +302,7 @@ const tag_hierarchy = ({subject, showSiblings, showChildren, href_generator }) =
 }
 
 
-const crso_hierarchy = ({subject, href_generator, show_siblings, show_uncles, show_cousins, show_dead_sos, label_crsos }) => {
+export const crso_hierarchy = ({subject, href_generator, show_siblings, show_uncles, show_cousins, show_dead_sos, label_crsos }) => {
 //From Gov to programs under CRSO
   const is_subject = subj => subj === subject;
 
@@ -344,7 +339,7 @@ const crso_hierarchy = ({subject, href_generator, show_siblings, show_uncles, sh
   };
 }
 
-const crso_pi_hierarchy = ({subject, href_generator, show_siblings, show_uncles, show_cousins, show_dead_sos, label_crsos }) => {
+export const crso_pi_hierarchy = ({subject, href_generator, show_siblings, show_uncles, show_cousins, show_dead_sos, label_crsos }) => {
 
 
   return {
@@ -376,7 +371,7 @@ const crso_pi_hierarchy = ({subject, href_generator, show_siblings, show_uncles,
   }
 }
 
-const crso_gov_hierarchy = ({subject, href_generator, show_siblings, show_uncles, show_cousins, show_dead_sos, label_crsos }) => {
+export const crso_gov_hierarchy = ({subject, href_generator, show_siblings, show_uncles, show_cousins, show_dead_sos, label_crsos }) => {
 
   const is_subject = subj => subj === subject;
 
@@ -401,15 +396,3 @@ const crso_gov_hierarchy = ({subject, href_generator, show_siblings, show_uncles
     }],
   };
 }
-
-
-module.exports = exports = {
-  HierarchyPeek,
-  program_hierarchy,
-  org_external_hierarchy,
-  org_internal_hierarchy,
-  tag_hierarchy,
-  crso_hierarchy,
-  crso_pi_hierarchy,
-  crso_gov_hierarchy,
-};

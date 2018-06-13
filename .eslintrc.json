@@ -2,13 +2,15 @@
   "plugins": [
     "react"
   ],
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 2017,
     "ecmaFeatures": {
       "jsx": true,
       "experimentalObjectRestSpread": true
     },
-    "sourceType": "module"
+    "sourceType": "module",
+    "allowImportExportEverywhere": true
   },
   "env": {
       "browser": true,

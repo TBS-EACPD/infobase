@@ -1,0 +1,116 @@
+drr_global_link:
+  en: https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html 
+  fr: https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement.html
+
+igoc_search_text: 
+  en: Search for an organization
+  fr: Recherche une organisation
+
+
+org_profile:
+  en: Organizational Profile
+  fr: Profil organisationnel
+org_links:
+  en: Organizational Links
+  fr: Liens organisationnel
+legal_name:
+  en: Legal Title
+  fr: Appellation légale
+
+
+legislation:
+  en: |
+    Enabling <span class='text-nowrap'>Instrument(s)</span>
+  fr: |
+    <span class='text-nowrap'> Instrument(s) </span> <span class='text-nowrap'> habilitant(s)</span>
+minister:
+  en: Appropriate Minister(s)
+  fr: Ministre(s) de tutelle
+type:
+  en: Institutional Form
+  fr: Structure institutionnelle
+website:
+  en: Website
+  fr: Site web
+fiscal_end_yr:
+  en: Fiscal Year-End
+  fr: Fin de l’exercice financier
+end_yr:
+  en: End Date
+  fr: Date de fin
+auditor:
+  en: Auditor
+  fr: Vérificateur
+fed_ownership:
+  en: Federal Ownership or Board Representation
+  fr: Participation fédérale ou représentants au conseil d'administration
+board_comp:
+  en: Federal Board Representation
+  fr: Représentants fédéraux au conseil d’administration
+inst_faa:
+  en: FAA Institution Schedule
+  fr: Annexe des institutions de la LRC
+hr_faa:
+  en: FAA HR Schedule
+  fr: Annexe des RH de la LRC
+pas_code:
+  en: Population Code
+  fr: Code de la population
+incorp_yr:
+  en: Year of Incorporation
+  fr: Année de constitution en société
+status:
+  en: Status
+  fr: État
+notes:
+  en: Notes
+  fr: Notes
+qfr_links:
+  en: Quarterly Financial Reports (QFR)
+  fr: Rapports financiers trimestriels (RFT)
+rpp_links:
+  en: Departmental Plans (DP)
+  fr: Plan ministériels (PM)
+eval_links:
+  en: Evaluation Reports
+  fr: Rapports d’évaluation
+filter_schedule:
+  en: Show
+  fr: Afficher
+inst_form_corp_int_filter:
+  en: Federal Organizations and Interests
+  fr: Organisations et intérêts fédéraux
+inst_form_filter:
+  en: Federal Organizations
+  fr: Organisations fédérales
+crown_corps_filter:
+  en: Crown Corporations
+  fr: Sociétés d'État
+corp_int_filter:
+  en: Interests
+  fr: Intérêts
+fps_filter:
+  en: Federal Public Service
+  fr: Fonction publique fédérale
+other_filter:
+  en: Other Organizations
+  fr: Autres organismes
+hist_filter:
+  en: Historical
+  fr: Historiques
+appropriated_filter:
+  en: Appropriated Organizations
+  fr: Organismes qui reçoivent des crédits parlementaires
+
+by_end_year:
+  en: End Date
+  fr: Date de fin
+
+
+inst_form:
+  en: Institutional Form
+  fr: Structure institutionnelle
+
+pop_group:
+  en: Population Group
+  fr: Groupe de population

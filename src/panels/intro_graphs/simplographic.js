@@ -1,13 +1,15 @@
+const simplographic_text = require("./simplographic.yaml");
 const {
   Subject: {
     Gov,
     Dept,
   },
+  create_text_maker,
   PanelGraph,
-  reactAdapter,
   util_components: {
-    TextMaker,
+    TM: StandardTM,
   },
+  Panel,
 } = require("../shared");
 
 const { 
@@ -19,15 +21,16 @@ const {
   ResultCounts,
 } = require('../../models/results.js');
 
+const tmf = create_text_maker(simplographic_text);
+const TM = props => <StandardTM tmf={tmf} {...props} />;
 
-require("./simplographic.ib.yaml");
 
 new PanelGraph({
   level: 'gov',
   key : "simplographic",
   footnotes: false,
-  panel_args : {off : ["title","source","text"]},
   requires_result_counts: true,
+
   depends_on : [ 
     'table4', 
     'table10', 
@@ -37,12 +40,6 @@ new PanelGraph({
     'table10_gov_info',
   ],
 
-  title: 'simplographic_title',
-
-  layout : {
-    full :{  graph : [12]},
-    half : { graph : [12]},
-  },
 
   calculate(dept,info){
     const {table4, table10} = this.tables;
@@ -127,7 +124,7 @@ new PanelGraph({
     };
   },
 
-  render(panel,calculations){
+  render({calculations}){
     const { graph_args: big_info } = calculations;
     const Row = props => {
       const this_row_props =  {className : "grid-row canada-intro-grid", style:{borderTop : 0,padding: "15px 0px",marginLeft:"-50px",marginRight:"-15px"}}
@@ -150,19 +147,21 @@ new PanelGraph({
           </div>
         </div>
         <section className='lg-grid-panel70' style={{flexDirection: 'column'}}>
-          <header className="h2 mrgn-tp-sm" style={{textAlign: window.is_mobile ? 'center' : 'inherit'}}> <TextMaker text_key={props.title_key}/> </header>
-          <TextMaker el="p" text_key={props.text_key}  args={big_info} />
+          <header className="h2 mrgn-tp-sm" style={{textAlign: window.is_mobile ? 'center' : 'inherit'}}> <TM k={props.title_key}/> </header>
+          <TM el="p" k={props.text_key}  args={big_info} />
         </section>
       </div>;
     };
-    reactAdapter.render(
-      <div className="medium_panel_text">
-        <Row top_border img_src="money.svg" title_key="simplographic_spending_title" text_key="simplographic_spending_text"/> 
-        <Row img_src="employees.svg" title_key="simplographic_people_title" text_key="simplographic_people_text"/> 
-        <Row img_src="graph.svg" title_key="simplographic_struct_title" text_key="simplographic_struct_text"/> 
-        <Row img_src="check.svg" title_key="simplographic_results_title" text_key="simplographic_results_text"/> 
-      </div>, 
-      panel.areas().graph.node() 
+
+    return (
+      <Panel>
+        <div className="medium_panel_text">
+          <Row top_border img_src="money.svg" title_key="simplographic_spending_title" text_key="simplographic_spending_text"/> 
+          <Row img_src="employees.svg" title_key="simplographic_people_title" text_key="simplographic_people_text"/> 
+          <Row img_src="graph.svg" title_key="simplographic_struct_title" text_key="simplographic_struct_text"/> 
+          <Row img_src="check.svg" title_key="simplographic_results_title" text_key="simplographic_results_text"/> 
+        </div>
+      </Panel>
     );
   },
 });

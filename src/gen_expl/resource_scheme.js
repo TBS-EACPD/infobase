@@ -1,6 +1,6 @@
 const { createSelector } = require('reselect');
 const { infograph_href_template } = require('../link_utils.js');
-const { text_maker } = require('../models/text.js');
+const { trivial_text_maker: text_maker } = require('../models/text.js');
 const { provide_sort_func_selector } = require('./resource-explorer-common.js');
 const { shallowEqualObjectsOverKeys } = require('../core/utils.js');
 

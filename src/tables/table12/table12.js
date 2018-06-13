@@ -1,5 +1,5 @@
 exports = module.exports;
-require("./table12.ib.yaml");
+const text = require("./table12.yaml");
 // see [here](../table_definition.html) for description
 // of the table spec
 //
@@ -8,13 +8,14 @@ require("./table12.ib.yaml");
 const {
   STATS, 
   Subject : {Program, Gov},
-  text_maker, 
+  trivial_text_maker, 
   m, 
   Statistics, 
   years : { std_years, planning_years},
 } = require("../table_common");
 
 module.exports = {
+  text,
   "id": "table12",
   subject_type:"program",
   source: [ "DP", "DRR" ],
@@ -126,7 +127,7 @@ module.exports = {
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           //FIXME: this is because I found a program without a goco, 
           const goco = _.get(prog, "tags_by_scheme.GOCO[0].name");
-          return goco || text_maker('unknown');
+          return goco || trivial_text_maker('unknown');
         };
         return func;
       },
@@ -140,7 +141,7 @@ module.exports = {
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           //FIXME: this is because I found a program without a goco, 
           const sa = _.get(prog, "tags_by_scheme.GOCO[0].parent_tag.name");
-          return sa || text_maker('unknown');
+          return sa || trivial_text_maker('unknown');
         };
         return func;
       },

@@ -1,4 +1,4 @@
-const { TextMaker } = require('./TextMaker.js');
+const { TM } = require('./TextMaker.js');
 
 /*props: 
   maxChildrenHeight as an INT of pixels,
@@ -100,7 +100,7 @@ export class HeightClipper extends React.Component {
               });
             }}
           > 
-            <TextMaker text_key={ buttonTextKey || "show_text_content" } />
+            <TM k={ buttonTextKey || "show_text_content" } />
           </button>  
         </div>
         }
@@ -133,7 +133,7 @@ export class HeightClipper extends React.Component {
               this.setState({shouldClip: true});
             }}
           > 
-            <TextMaker text_key="hide_content" />
+            <TM k="hide_content" />
           </button>  
         </div>
         }

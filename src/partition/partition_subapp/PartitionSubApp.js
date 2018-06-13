@@ -1,6 +1,5 @@
-import "./PartitionSubApp.ib.yaml";
 import "./PartitionSubApp.scss";
-import { text_maker } from "../../models/text";
+import { text_maker } from './partition_text_provider.js';
 import { PartitionDiagram } from "../partition_diagram/PartitionDiagram.js";
 import { PartitionNotes } from "./PartitionNotes.js";
 import { reactAdapter } from '../../core/reactAdapter';

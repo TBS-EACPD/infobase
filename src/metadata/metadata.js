@@ -1,21 +1,23 @@
-require("./metadata.ib.yaml");
+const metadata_text = require("./metadata.yaml");
 const { 
   StandardRouteContainer,
   ScrollToTargetContainer,
 } = require('../core/NavComponents.js');
-const {text_maker} = require('../models/text');
+const {create_text_maker} = require('../models/text');
 const { 
-  TM,
+  TM: StandardTM,
   FancyUL,
 }  = require('../util_components.js');
 const { sources } = require('./data_sources.js');
 const {
   Panel,
-  PanelBody,
-} = require('../panel_components.js');
+} = require('../components/panel-components.js');
 const { months } = require('../models/businessConstants');
 
 const FormattedDate = ({ day, month, year}) => <span>{months[month].text} {year}</span>;
+
+const tmf = create_text_maker(metadata_text);
+const TM = props => <StandardTM tmf={tmf} {...props} />
 
 export class MetaData extends React.Component {
   render(){
@@ -31,9 +33,9 @@ export class MetaData extends React.Component {
 
     return (
       <StandardRouteContainer
-        title={text_maker("metadata")}
-        breadcrumbs={[text_maker("metadata")]}
-        description={text_maker("metadata_document_description")}
+        title={tmf("metadata")}
+        breadcrumbs={[tmf("metadata")]}
+        description={tmf("metadata_document_description")}
         route_key="_metadata"
       >
         <div>
@@ -42,19 +44,13 @@ export class MetaData extends React.Component {
         <p> <TM k='metadata_t'/> </p>
         <ScrollToTargetContainer target_id={data_source}>
           {_.map(sorted_sources, (source) => (
-            <Panel key={source.key}>
-              <header className="panel-heading" id={source.key}>
-                <div style={{marginBottom:'3px'}}>
-                  <div className="panel-title"> 
-                    {source.title()}
-                  </div>
-                </div>
-                <div style={{fontWeight: "400", opacity: 0.8}}>
-                  <TM k="refreshed"/> {source.frequency.text}
-                </div>
-              </header>
-    
-              <PanelBody>
+            <div key={source.key} id={source.key}>
+              <Panel
+                title={source.title()}
+                subtitle={
+                  <span><TM k="refresh_freq"/> {source.frequency.text}</span>
+                }
+              >
                 <div>
                   { source.description() }
                 </div>
@@ -65,7 +61,7 @@ export class MetaData extends React.Component {
                       { 
                         inline_link ? 
                         <a 
-                          title={text_maker('rpb_link_text')}
+                          title={tmf('rpb_link_text')}
                           href={inline_link}
                           style={{alignSelf: "center"}}
                         >
@@ -105,8 +101,8 @@ export class MetaData extends React.Component {
                     </a>
                   }
                 </div>
-              </PanelBody>
-            </Panel>
+              </Panel>
+            </div>
           ))}
         </ScrollToTargetContainer>
       </StandardRouteContainer>

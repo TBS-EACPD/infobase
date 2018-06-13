@@ -10,7 +10,7 @@ const {
 } = require("./subject");
 const { GlossaryEntry } = require('./glossary.js');
 const { fetch_and_inflate } =require('../core/utils.js');
-const { text_maker } = require("./text");
+const { trivial_text_maker } = require("./text");
 const { populate_global_footnotes } = require('./populate_footnotes.js');
 
 
@@ -113,9 +113,9 @@ function populate_igoc_models({
 
 
   const statuses = {
-    a:text_maker('active'),
-    t: text_maker('transferred'),
-    d: text_maker('dissolved'),
+    a: trivial_text_maker('active'),
+    t: trivial_text_maker('transferred'),
+    d: trivial_text_maker('dissolved'),
   };
 
   _.each(igoc_rows, row => {

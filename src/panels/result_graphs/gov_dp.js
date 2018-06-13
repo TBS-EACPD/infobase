@@ -1,18 +1,18 @@
-import './gov_dp_text.ib.yaml';
+import text from './gov_dp_text.yaml';
 
-const {
+import {
+  create_text_maker,
   PanelGraph,
-  reactAdapter,
-  util_components: {
-    TM,
-  },
-} = require("../shared");
+  Panel,
+  TM as StdTM,
+} from "../shared";
 
 
-const {
-  ResultCounts,
-} = require('./results_common.js');
+import { ResultCounts } from './results_common.js';
 
+
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 const ResultsIntroPanel = ({counts}) => (
   <div className="frow middle-xs">
@@ -44,21 +44,18 @@ new PanelGraph({
   level: 'gov',
   requires_result_counts: true,
   key: "gov_dp",
-  layout: {
-    full: {text: [], graph: 12},
-    half : {text: [], graph: 12},
-  },
-  title : "gov_dp_summary_title",
   calculate: _.constant(true),
   footnotes: false,
   render(panel, calculations){
-    const node = panel.areas().graph.node();
     const counts = ResultCounts.get_gov_counts();
-    reactAdapter.render(
-      <ResultsIntroPanel 
-        counts={counts}
-      />, 
-      node
-    );
+    return (
+      <Panel
+        title={text_maker("gov_dp_summary_title")}
+      >
+        <ResultsIntroPanel 
+          counts={counts}
+        />
+      </Panel>
+    ); 
   },
 });

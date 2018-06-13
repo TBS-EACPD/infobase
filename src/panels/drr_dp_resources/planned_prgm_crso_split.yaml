@@ -1,0 +1,25 @@
+planned_prgm_crso_split_title:
+  transform: [handlebars]
+  en: |
+   {{planning_year_1}} Planned Spending by Program
+  
+  fr: |
+   {{planning_year_1}} Dépenses par programme
+
+planned_prgm_crso_split_text:
+  transform: [handlebars,markdown]
+  en: |
+   In {{planning_year_1}}, **{{crso_parent}}** will spend a total of **{{fmt_compact_written crso_exp_planning_year_1}}**
+   on {{pluralize crso_exp_prg_num "Program"}} falling under the {{cr_or_so subject}} **{{subj_name subject}}**.
+  # {{#each crso_program_list}}
+  #* <a href={{this.link}}>{{this.label}}</a>:  **{{fmt_compact_written this.value}}**
+  # {{/each}}
+  
+  fr: |   
+   En {{planning_year_1}}, **{{crso_parent}}** prévoit dépenser **{{fmt_compact_written crso_exp_planning_year_1}}**
+   sur {{pluralize crso_exp_prg_num "programme"}} sous  **{{subj_name subject}}**.
+  # {{#each crso_program_list}}
+  #* <a href={{this.link}}>{{this.label}}</a>:  **{{fmt_compact_written this.value}}**
+  # {{/each}}
+
+

@@ -1,6 +1,6 @@
 import * as Subject from '../../../models/subject';
 import { InstForm } from '../../../models/subject.js';
-import { text_maker } from '../../../models/text';
+import { text_maker } from '../partition_text_provider.js';
 import { PartitionPerspective } from './PartitionPerspective.js';
 
 import {

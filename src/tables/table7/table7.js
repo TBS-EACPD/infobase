@@ -1,12 +1,12 @@
 exports = module.exports;
 // see [here](../table_definition.html) for description
 // of the table spec
-require("./table7.ib.yaml");
+const text = require("./table7.yaml");
 
 
 const {
   STATS, 
-  text_maker, 
+  trivial_text_maker, 
   Statistics, 
   years : {std_years},
   business_constants: {
@@ -15,6 +15,7 @@ const {
 } = require("../table_common");
 
 module.exports = {
+  text,
   "id": "table7",
 
   "tags" : [
@@ -51,6 +52,12 @@ module.exports = {
           "hidden" : true,
           "nick" : "dept",
           "header":'',
+        },
+        {
+          "type":"int",
+          "hidden":true,
+          "key" : true,
+          "nick" : "type_id",
         },
         {
           "type":"int",
@@ -113,9 +120,9 @@ module.exports = {
         return function(row){
           var type = row.type;
           if (row.tp.substring(0,3) === '(S)' || row.tp.substring(0,3) === "(L)"){
-            return type + ' - ' + text_maker("stat");
+            return type + ' - ' + trivial_text_maker("stat");
           } else {
-            return type + ' - ' + text_maker("voted");
+            return type + ' - ' + trivial_text_maker("voted");
           }
         };
       },
@@ -127,6 +134,16 @@ module.exports = {
       filter_func : function(options){
         return function(row){
           return row.type;
+        };               
+      },
+    },
+    {
+      title_key :"payment_type_ids",
+      include_in_report_builder : true,
+
+      filter_func : function(options){
+        return function(row){
+          return row.type_id;
         };               
       },
     },
@@ -143,11 +160,12 @@ module.exports = {
   },
 
   "mapper": function (row) {
-    row[1] = transfer_payments[row[1]].text;
+    const type_name = transfer_payments[row[1]].text;
+    row.splice(2, 0, type_name);
     if (this.lang === 'en') {
-      row.splice(3, 1);
+      row.splice(4, 1);
     } else {
-      row.splice(2, 1);
+      row.splice(3, 1);
     }
     // remove acronym and vote type
     return row;

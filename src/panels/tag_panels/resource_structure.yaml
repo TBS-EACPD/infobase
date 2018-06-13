@@ -1,0 +1,4 @@
+resource_structure_title:
+  transform: [handlebars]
+  en: Resource Structure
+  fr: Structure des ressources  

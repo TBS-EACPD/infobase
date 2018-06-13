@@ -8,7 +8,7 @@ const {
 const { Table } = require('../core/TableClass.js');
 
 const { GlossaryEntry } = require('../models/glossary.js');
-const {text_maker} = require('../models/text.js');
+const {trivial_text_maker} = require('../models/text.js');
 
 const {
   escapeRegExp,
@@ -110,7 +110,7 @@ const glossary = {
          ${glossaryItem.definition}
        </div>`
     ),
-    header: ()=> text_maker('glossary'),
+    header: ()=> trivial_text_maker('glossary'),
   },
 };
 
@@ -124,7 +124,7 @@ const glossary_lite = {
   },
   templates: {
     suggestion: _.property('title'),
-    header: ()=> text_maker('glossary'),
+    header: ()=> trivial_text_maker('glossary'),
   },
 };
 
@@ -186,7 +186,7 @@ const datasets = {
 
   },
   templates: {
-    header: ()=> text_maker('home_build_a_report'),
+    header: ()=> trivial_text_maker('build_a_report'),
     suggestion: table => table.title,
   },
 };
@@ -201,7 +201,7 @@ const programs = {
   },
   templates: {
     suggestion: program => `${program.name} (${program.dept.sexy_name})`,
-    header: ()=> text_maker('programs'),
+    header: ()=> trivial_text_maker('programs'),
   },
 }
 
@@ -216,7 +216,7 @@ const crsos = {
   },
   templates: {
     suggestion: crso => `${crso.name} (${crso.dept.sexy_name})`,
-    header: ()=> text_maker('core_resps'),
+    header: ()=> trivial_text_maker('core_resps'),
   },
 }
 

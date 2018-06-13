@@ -1,0 +1,34 @@
+crso_by_prog_exp_title:
+  transform: [handlebars]
+  en: Spending by Program ({{planning_year_1}} to {{planning_year_3}})
+  fr: Dépenses par Programme ({{planning_year_1}} à {{planning_year_3}})
+
+
+crso_by_prog_fte_title:
+  transform: [handlebars]
+  en: Employment by Program ({{planning_year_1}} to {{planning_year_3}})
+  fr: Dépenses par Programme ({{planning_year_1}} à {{planning_year_3}})
+
+crso_by_prog_exp_or_ftes:
+  transform: [handlebars,markdown]
+  en: |
+   In {{planning_year_1}}, {{gl_tt (pluralize crso_prg_num "program")  "PROG"}} fell under this {{gt "core_resp"}}
+   {{#if is_fte}}
+   with **{{crso_prg_top1}}** ({{fmt_big_int_real crso_prg_top1_amnt}} FTEs) being the largest in terms of of employment,
+   {{#if crso_prg_top2_amnt}} followed by **{{crso_prg_top2}}** ({{fmt_big_int_real crso_prg_top2_amnt}} FTEs). {{else}}. {{/if}}
+   {{else}}
+   with **{{fmt_compact_written crso_prg_top1}}** ({{fmt_compact_written crso_prg_top1_amnt}}) being the largest in terms of spending,
+   {{#if crso_prg_top2_amnt}} followed by **{{crso_prg_top2}}** ({{fmt_compact_written crso_prg_top2_amnt}}). {{else}}. {{/if}}
+   {{/if}}
+  
+  fr: |
+   En {{planning_year_1}}, cette responsabilité essentielle comptait {{gl_tt (pluralize crso_prg_num "programme") "PROG"}}.
+   {{#if is_fte}}
+   Le plus important en termes d'employés étant **{{crso_prg_top1}}** ({{fmt_big_int_real crso_prg_top1_amnt}} ETP)
+   {{#if crso_prg_top2_amnt}} suivi par **{{crso_prg_top2}}** ({{fmt_big_int_real crso_prg_top2_amnt}} ETP). {{else}}. {{/if}}
+   {{else}}
+   Le plus important en terme de dépenses étant **{{crso_prg_top1}}** ({{fmt_compact_written crso_prg_top1_amnt}})
+   {{#if crso_prg_top2_amnt}} suivi par **{{crso_prg_top2}}** ({{fmt_compact_written crso_prg_top2_amnt}}). {{else}}. {{/if}}
+   {{/if}}
+
+

@@ -1,13 +1,13 @@
-import './perspective_text.ib.yaml';
+import text from './perspective_text.yaml';
 import {
-  charts_index, 
-  text_maker,
   PanelGraph, 
   formats,
   sum_a_tag_col,
-  reactAdapter,
   util_components,
   declarative_charts,
+  Panel,
+  create_text_maker,
+  TM as StdTM,
 } from "../shared";
 
 const {
@@ -18,11 +18,12 @@ const {
 const { 
   Select,
   Format,
-  TextMaker,
 } = util_components;
 
-const col = "{{planning_year_1}}";
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
 
+const col = "{{planning_year_1}}";
 
 
 class SpendInTagPerspective extends React.Component {
@@ -88,8 +89,8 @@ class SpendInTagPerspective extends React.Component {
           style={{ padding:"10px", marginBottom: 'auto', marginTop: 'auto'}}
         >
           <div className="medium_panel_text">
-            <TextMaker 
-              text_key="program_spending_in_tag_perspective_text"
+            <TM
+              k="program_spending_in_tag_perspective_text"
               args={{
                 subject,
                 tag  : active_tag,
@@ -147,18 +148,8 @@ class SpendInTagPerspective extends React.Component {
 new PanelGraph({
   level: "program",
   key : "spending_in_tag_perspective",
-
   depends_on: ['table6'],
-
-  layout : {
-    full : { graph: 12},
-    half: { graph: 12},
-  },
-
   info_deps: ["table6_program_info"],
-  title :"program_spending_in_tag_perspective_title",
-  text :"",
-
   calculate(subject,info,options){
     if(window.is_a11y_mode){
       //turn off this panel in a11y mode
@@ -182,76 +173,25 @@ new PanelGraph({
     }));
     return { tag_exps };
   },
-  render(panel,calculations, options){
+
+  render({calculations, footnotes, sources}){
     const { graph_args, subject, info } = calculations;
-    const node = panel.areas().graph.node();
 
     const { tag_exps } = graph_args;
     const  prog_exp = info.program_exp_planning_year_1;
 
-    reactAdapter.render(
-      <SpendInTagPerspective
-        tag_exps={tag_exps}
-        subject={subject}
-        prog_exp={prog_exp} 
-      />,
-      node
+    return (
+      <Panel
+        title={text_maker("program_spending_in_tag_perspective_title")}
+        {...{footnotes, sources}}
+      >
+        <SpendInTagPerspective
+          tag_exps={tag_exps}
+          subject={subject}
+          prog_exp={prog_exp} 
+        />
+      </Panel>
     );
     
-  },
-  old_render(panel,calculations, options){
-    const { graph_args, subject, info } = calculations;
-    const { tag_exps } = graph_args;
-    const  prog_exp = info.program_exp_planning_year_1;
-    //split container into three equal columns... unless there are less than 3 to show.
-    //tip for testing this graph: Tag #1 will have all three, tag #3 will have zero Depts to show,
-    //tags #20 will have two depts to show and tag 32 will only have one circle.
-    const graph_area=  panel.areas().graph;
-    const text_area =  panel.areas().text;
-    const select_area = graph_area.append('div').node();
-    const chart_area = graph_area.append('div').style("position","relative");
-
-    const update = tag_exp => {
-
-      text_area.html(text_maker("program_spending_in_tag_perspective_text",{
-        subject,
-        tag  : tag_exp.tag,
-        tag_spend :  tag_exp.amount,
-        tag_exp_pct :  prog_exp / tag_exp.amount,
-      }));
-       
-      chart_area.html("");
-
-      new charts_index.PIE_OR_BAR.PieOrBar(
-        chart_area,
-        {
-          color :  infobase_colors(),
-          font_size : 14,
-          list_legend_area: panel.areas().graph,
-          showLabels: false,
-          pct_formatter : formats.percentage1,
-          inner_radius: true,
-          inner_text: true,
-          inner_text_fmt: formats.compact1_raw,
-          data: [
-            {label: subject.sexy_name, value: prog_exp },
-            {label: 'Other', value: tag_exp.amount - prog_exp, hide_label : true },
-          ],
-        } 
-      ).render();
-    };
-
-    new Select({
-      container: select_area,
-      data: tag_exps,
-      onSelect : tag => update(tag),
-      display_func: d => d.tag.name,
-    });
-    
-    update(_.first(tag_exps))
-
-    if (tag_exps.length === 1){
-      select_area.parentNode.removeChild(select_area);
-    }
   },
 });

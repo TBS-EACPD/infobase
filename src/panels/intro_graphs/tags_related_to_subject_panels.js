@@ -1,3 +1,4 @@
+const { text_maker, TM } = require('./intro_graph_text_provider.js');
 const classNames = require('classnames');
 const {
   Subject : {
@@ -6,12 +7,8 @@ const {
     Program,
   },
   PanelGraph,
-  reactAdapter,
-  panel_components:{
-    PanelText,
-  },
+  TextPanel,
   util_components: {
-    TextMaker,
     HeightClipper,
   },
 } = require("../shared"); 
@@ -43,8 +40,6 @@ const tag_display = tag => ({
 });
 
 function get_related_tag_list_args(subject){
-
-
 
   let tags_by_root_id; 
   switch(subject.level){
@@ -88,12 +83,7 @@ _.each(['dept','crso','program'], level => {
   new PanelGraph({
     level,
     key : "tags_of_interest",
-    title: title_by_level[level],
     footnotes: false,
-    layout : {
-      full :{  graph : [12]},
-      half : { graph : [12]},
-    },
     calculate(subject){
       const tags_by_root = get_related_tag_list_args(subject);
       if(subject.dp_status === false || _.isEmpty(tags_by_root)){
@@ -103,44 +93,33 @@ _.each(['dept','crso','program'], level => {
       return tags_by_root;
   
     },
-    render(panel,calculations){
+    render({calculations}){
       const { 
         graph_args: tags_by_root, 
         subject, 
       } = calculations;
 
-      const view = <PanelText>
-        <div className="medium_panel_text">
-          <TextMaker text_key="tags_of_interest_sentence" args={{subject}} /> 
+      return (
+        <TextPanel
+          title={text_maker(title_by_level[level])}
+        >
+          <TM k="tags_of_interest_sentence" args={{subject}} /> 
           <WellList elements={tags_by_root} />
-        </div>
-      </PanelText>;
-  
-  
-      reactAdapter.render(
-        view, 
-        panel.areas().graph.node() 
+        </TextPanel>
       );
+  
     },
   });
 })
-
-
 
 new PanelGraph({
   level: 'tag',
   key : "tag_progs_by_dept",
 
-  layout : {
-    full :{  graph : [12]},
-    half : { graph : [12]},
-  },
-
-  title: 'tag_progs_by_dept_title',
   footnotes: false,
   calculate: _.constant(true),
 
-  render(panel,calculations){
+  render({calculations}){
     const {subject } = calculations;
 
     const list_args = _.chain(subject.programs)
@@ -165,35 +144,28 @@ new PanelGraph({
       }))
       .value();
 
-    const view = <div className="medium_panel_text">
-      <div className="col-md-10 col-md-offset-1">
-        <HeightClipper clipHeight={250} allowReclip={true}>
-          <WellList elements={list_args} />
-          { _.some(subject.programs, 'dead_program') && 
-            <TextMaker text_key="hierarchy_contains_dead_elements" />
-          }
-        </HeightClipper>
-      </div>
-      <div className="clearfix"/>
-    </div>;
+    return (
+      <TextPanel
+        title={text_maker("tag_progs_by_dept_title")}
+      >
+        <div className="col-md-10 col-md-offset-1">
+          <HeightClipper clipHeight={250} allowReclip={true}>
+            <WellList elements={list_args} />
+            { _.some(subject.programs, 'dead_program') && 
+              <TM k="hierarchy_contains_dead_elements" />
+            }
+          </HeightClipper>
+        </div>
+        <div className="clearfix"/>
+      </TextPanel>
+    )
 
-    reactAdapter.render(
-      view, 
-      panel.areas().graph.node() 
-    );
   },
 });
 
 new PanelGraph({
   level: 'tag',
   key : "related_tags",
-
-  layout : {
-    full :{ graph : [12]},
-    half : { graph : [12]},
-  },
-
-  title: 'related_tags_title',
   footnotes: false,
 
   calculate(subject){
@@ -231,7 +203,7 @@ new PanelGraph({
 
   },
 
-  render(panel,calculations){
+  render({calculations}){
     const {
       graph_args: {
         related_tags_by_type_with_counts,
@@ -242,24 +214,23 @@ new PanelGraph({
       display: tag_root_display(Tag.lookup(type)),
       children: _.map( tag_and_counts, ({ tag, count }) => ({
         href: infograph_href_template(tag),
-        display: <span>{tag.name} - {count} {Program.plural} <TextMaker text_key="in_common" /></span>,
+        display: <span>{tag.name} - {count} {Program.plural} <TM k="in_common" /></span>,
       })),
     }))
 
-    const view = <div className="medium_panel_text">
-      <div className="col-md-10 col-md-offset-1">
-        <HeightClipper clipHeight={350} allowReclip={true}>
-          <WellList elements={list_args} />
-        </HeightClipper>
-      </div>
-      <div className="clearfix"/>
-    </div>;
+    return (
+      <TextPanel
+        title={text_maker("related_tags_title")}
+      >
+        <div className="col-md-10 col-md-offset-1">
+          <HeightClipper clipHeight={350} allowReclip={true}>
+            <WellList elements={list_args} />
+          </HeightClipper>
+        </div>
+        <div className="clearfix"/>
+      </TextPanel>
+    )
 
-
-    reactAdapter.render(
-      view, 
-      panel.areas().graph.node() 
-    );
   },
 });
 

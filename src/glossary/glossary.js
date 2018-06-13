@@ -1,17 +1,20 @@
 import './glossary.scss';
-import "./glossary.ib.yaml";
+import glossary_text from "./glossary.yaml";
 import { Fragment } from 'react';
 import { 
   StandardRouteContainer,
   ScrollToTargetContainer,
 } from '../core/NavComponents.js';
 import {autoComplete} from '../search/search.js';
-import  {text_maker} from '../models/text';
+import  {create_text_maker} from '../models/text';
 import {GlossaryEntry} from '../models/glossary.js';
 import { glossary as glossary_search_config } from '../search/search_configs.js';
 import withRouter from 'react-router/withRouter';
-import { TM } from '../util_components.js';
+import { TM as StandardTM } from '../util_components.js';
 
+const text_maker = create_text_maker(glossary_text);
+
+const TM = props => <StandardTM tmf={text_maker} {...props} />;
 
 const item_url = item_key => `/glossary/${item_key}`
 

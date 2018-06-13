@@ -1,19 +1,27 @@
-import './top_spending_areas.ib.yaml';
+import text from './top_spending_areas.yaml';
 
 import {
   util_components,
-  text_maker, 
+  create_text_maker,
   PanelGraph, 
   collapse_by_so,
-  common_react_donut,
-  charts_index,
   run_template,
   years,
   Statistics,
+  CommonDonut,
+  StdPanel,
+  Col,
+  declarative_charts,
+  TM as StdTM,
 } from "../shared";
 
 const { std_years } =  years;
 const { Format } = util_components;
+const { A11YTable } = declarative_charts;
+
+
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 const is_non_revenue = d => +(d.so_num) < 19;
 
@@ -90,62 +98,75 @@ Statistics.create_and_register({
   },
 })
 
+const render_w_options = ({text_key}) => ({calculations, footnotes, sources}) => {
+  const { graph_args, info } = calculations;
+  const { top_3_sos_and_remainder } = graph_args;
+  
+  return (
+    <StdPanel
+      title={text_maker("top_spending_areas_title")}
+      {...{footnotes,sources}}
+    >
+      <Col isText size={5}>
+        <TM k={text_key} args={info} />
+      </Col>
+      <Col 
+        isGraph={!window.is_a11y_mode}
+        size={7}
+      >
+        { window.is_a11y_mode ?
+          <A11YTable
+            {...{
+              data: _.map(top_3_sos_and_remainder, ({label, value}) => ({
+                label,
+                data: <Format type="compact1" content={value} />,
+              })),
+              label_col_header: text_maker("so"),
+              data_col_headers: [ `${run_template(_.last(std_years))} ${text_maker("spending")}` ],
+            }}
+          /> : 
+          <CommonDonut 
+            data={graph_args} 
+            height={300}
+          />
+        }
+      </Col>
+    </StdPanel>
+  )
+
+
+}
+
 
 new PanelGraph({
   key: 'top_spending_areas',
   depends_on : ['table305'],
   info_deps : ["program_std_obj"],
-  layout: {
-    full: {text: 5, graph: 7},
-    half : {text: 12, graph: 12},
-  },
   level : "program",
-  title : "top_spending_areas_title",
-  text :  "program_top_spending_areas_text",
+
   calculate(subject,info,options){ 
     if(_.isEmpty(this.tables.table305.programs.get(subject))){
       return false;
     }
     return  common_cal([subject], this.tables.table305);
   },
+
   footnotes : ["SOBJ"],
-  render: window.is_a11y_mode ? a11y_render :  common_react_donut,
+  render: render_w_options({text_key: "program_top_spending_areas_text"}),
 });
 
 new PanelGraph({
   key: 'top_spending_areas',
   info_deps : ["tag_std_obj"],
   depends_on : ['table305'],
-  layout: {
-    full: {text: 5, graph: 7},
-    half : {text: 12, graph: 12},
-  },
   level : "tag",
   footnotes : ["SOBJ"],
-  title : "top_spending_areas_title",
   text :  "tag_top_spending_areas_text",
+
   calculate(subject,info,options){ 
 
     return  common_cal(subject.programs, this.tables.table305);
   },
-  render: window.is_a11y_mode ? a11y_render : common_react_donut,
+
+  render: render_w_options({text_key: "tag_top_spending_areas_text"}),
 });
-
-
-function a11y_render(
-  panel,
-  { graph_args: top_3_sos_and_remainder }
-){
-  charts_index.create_a11y_table({
-    container: panel.areas().graph,
-    data: _.map(top_3_sos_and_remainder, ({label, value}) => ({
-      label,
-      data: <Format type="compact1" content={value} />,
-    })),
-    label_col_header: text_maker("so"),
-    data_col_headers: [ `${run_template(_.last(std_years))} ${text_maker("spending")}` ],
-  })
-
-
-
-}

@@ -1,86 +1,94 @@
-import "./employee_totals.ib.yaml"
+import text from "./employee_totals.yaml"
 import {
   formats,
-  text_maker,
   run_template,
   PanelGraph, 
-  charts_index,
   years,
+  create_text_maker,
+  TM as StdTM,
+  declarative_charts,
+  StdPanel,
+  Col,
 } from "../shared"; 
 
 import { months } from '../../models/businessConstants';
+
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 const {
   people_years, 
   people_years_short_second,
 } = years;
 
-const total_hist_employment_calc = function(subject,info){
-  const {table9} = this.tables;
-  const q = table9.q(subject);
-  return { 
-    series: { '': people_years.map(y => q.sum(y)) },
-    ticks: _.map(people_years_short_second, y => `${months[3].text}<br>${run_template(y)}`),
-  };
-};
-const total_hist_employment_render = function(panel,data){
-  const { subject, graph_args } = data;
-  const { series, ticks } = graph_args;
+const {
+  A11YTable,
+  Line,
+} = declarative_charts;
 
-  if(window.is_a11y_mode){
-    charts_index.create_a11y_table({
-      container: panel.areas().graph, 
-      label_col_header: text_maker("org"), 
-      data_col_headers: ticks, 
-      data: [{label: subject.sexy_name, data: series[""]}],
-    });
-  } else {
-    new charts_index.LINE.ordinal_line(panel.areas().graph.node(), {
-      series: series,
-      ticks: ticks,
-      colors: infobase_colors(),
-      add_yaxis: true,
-      add_xaxis: true,
-      y_axis: text_maker("employees"),
-      formater: formats["big_int_real_raw"],
-    }).render();
-  }
-};
-
-new PanelGraph({
-  level: "dept",
-  depends_on: ['table9'],
-  info_deps: [
+const info_deps_by_level = {
+  gov: ['table9_gov_info'],
+  dept: [
     'table9_gov_info',
     'table9_dept_info',
   ],
-  key: "employee_totals",
+};
 
-  layout: {
-    full: {text: 4, graph: 8},
-    half: {text: 12, graph: 12},
-  },
+["gov", "dept"].map(
+  level => new PanelGraph({
+    key: "employee_totals",
+    level: level,
+    depends_on: ['table9'],
+    info_deps: info_deps_by_level[level],
 
-  text: "dept_employee_totals_text",
-  title: "dept_employee_totals_title",
-  calculate: total_hist_employment_calc,
-  render: total_hist_employment_render,
-});
+    calculate(subject, info){
+      const {table9} = this.tables;
+      const q = table9.q(subject);
+      return { 
+        series: { '': people_years.map(y => q.sum(y)) },
+        ticks: _.map(people_years_short_second, y => `${months[3].text}<br>${run_template(y)}`),
+      };
+    },
 
-new PanelGraph({
-  level: "gov",
-  depends_on: ['table9'],
-  key: "employee_totals",
-  info_deps: [
-    'table9_gov_info',
-  ],
-  layout: {
-    full: {text: 4, graph: 8},
-    half: {text: 12, graph: 12},
-  },
-
-  text: "gov_employee_totals_text",
-  title: "gov_employee_totals_title",
-  calculate: total_hist_employment_calc,
-  render: total_hist_employment_render,
-});
+    render({calculations, footnotes, sources}){
+      const { subject, info, graph_args } = calculations;
+      const { series, ticks } = graph_args;
+      
+      return (
+        <StdPanel
+          title={text_maker(level+"_employee_totals_title")}
+          {...{footnotes, sources}}
+        >
+          <Col size={4} isText>
+            <TM k={level+"_employee_totals_text"} args={info} />
+          </Col>
+          { !window.is_a11y_mode &&
+             <Col size={8} isGraph>
+               <Line
+                 series = {series}
+                 ticks = {ticks}
+                 colors = {infobase_colors()}
+                 add_yaxis = {true}
+                 add_xaxis = {true}
+                 y_axis = {text_maker("employees")}
+                 formater = {formats["big_int_real_raw"]}
+               />
+             </Col>
+          }
+          { window.is_a11y_mode &&
+            <Col size={12} isGraph>
+              <A11YTable
+                label_col_header = {text_maker("org")} 
+                data_col_headers = {ticks}
+                data = {[{
+                  label: subject.sexy_name, 
+                  data: series[""],
+                }]}
+              />
+            </Col>
+          }
+        </StdPanel>
+      );
+    },
+  })
+);

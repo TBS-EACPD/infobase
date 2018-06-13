@@ -2,11 +2,11 @@
 //require("../../panels/spend_by_so_hist"); //we arent showing this stuff.
 
 exports = module.exports;
-require("./table305.ib.yaml");
+const text = require("./table305.yaml");
 // see [here](../table_definition.html) for description
 // of the table spec
 const {
-  text_maker, 
+  trivial_text_maker, 
   years: {std_years},
   business_constants: {
     sos,
@@ -18,6 +18,7 @@ const { Program } = require("../../models/subject");
 
 
 module.exports = {
+  text,
   "id": "table305",
   subject_type:"program",
   source: [ "CFMRS" ],
@@ -121,11 +122,11 @@ module.exports = {
       filter_func: function(options){
         return function(row){
           if (row.so_num > 0 && row.so_num <= 7){
-            return text_maker("op_spending");
+            return trivial_text_maker("op_spending");
           } else if (row.so_num > 7 && row.so_num <= 9) {
-            return text_maker("capital_spending");
+            return trivial_text_maker("capital_spending");
           } else if (row.so_num === 21  || row.so_num  === 22) {
-            return text_maker("revenues");
+            return trivial_text_maker("revenues");
           }
           return row.so;
         };
@@ -139,7 +140,7 @@ module.exports = {
         var func  = function(row){
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           const goco = prog.tags_by_scheme.GOCO && prog.tags_by_scheme.GOCO[0];
-          return (goco && goco.name) || text_maker('unknown');
+          return (goco && goco.name) || trivial_text_maker('unknown');
         };
         return func;
       },
@@ -153,7 +154,7 @@ module.exports = {
           //FIXME: this is because I found a program without a goco, 
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           const goco = prog.tags_by_scheme.GOCO && prog.tags_by_scheme.GOCO[0];
-          return (goco && goco.parent_tag.name) || text_maker('unknown');
+          return (goco && goco.parent_tag.name) || trivial_text_maker('unknown');
         };
         return func;
       },

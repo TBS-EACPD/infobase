@@ -1,4 +1,5 @@
-import './tag_panel_text.ib.yaml';
+import '../../gen_expl/explorer-styles.scss';
+import text from './resource_structure.yaml';
 import classNames from 'classnames';
 import { combineReducers, createStore }  from 'redux';
 import { Provider, connect } from 'react-redux';
@@ -10,8 +11,9 @@ import { Explorer } from '../../components/ExplorerComponents.js';
 
 import {
   PanelGraph,
-  reactAdapter,
-  util_components,
+  TM as StdTM,
+  Panel,
+  create_text_maker,
 } from "../shared";
 
 
@@ -30,11 +32,9 @@ import {
   map_dispatch_to_root_props,
 } from '../../gen_expl/state_and_memoizing';
 
-const { 
-  TM, 
-  TextMaker,
-} = util_components;
 
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 const get_non_col_content = ({node}) => { 
   const {
@@ -56,12 +56,11 @@ const get_non_col_content = ({node}) => {
         </dl>
       }
       { (
-        _.includes(['program','dept', 'crso'], subject.level) || 
-        subject.level === 'tag' && !_.isEmpty(subject.programs) //only tags with programs (i.e. not tags that are just group of tags) have infographics
+        (_.includes(['program','dept', 'crso'], subject.level) || subject.level === 'tag' && !_.isEmpty(subject.programs)) //only tags with programs (i.e. not tags that are just group of tags) have infographics
       ) && 
         <div className='ExplorerNode__BRLinkContainer'>
           <a href={infograph_href_template(subject)}> 
-            <TextMaker text_key="see_infographic" />
+            <TM k="see_infographic" />
           </a>
         </div>
       }
@@ -124,12 +123,12 @@ class RootedResourceExplorer extends React.Component {
         <ul className="tabbed_content_label_bar">
           <li className={classNames("tab_label", doc==="drr16" && "active_tab")} onClick={()=> tab_on_click('drr16')}>
             <span tabIndex={0} role="button" aria-pressed={doc === "drr16"} className="tab_label_text" onClick={()=> tab_on_click('drr16')} onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('drr16')}>
-              <TM k="DRR_resources_option_title" />
+              <TM k="DRR_resources" />
             </span>
           </li>
           <li className={classNames("tab_label", doc==="dp18" && "active_tab")} onClick={()=> tab_on_click('dp18')}>
             <span tabIndex={0} role="button" aria-pressed={doc === "dp18"} className="tab_label_text" onClick={()=> tab_on_click('dp18')} onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('dp18')}>
-              <TM k="DP_resources_option_title" />
+              <TM k="DP_resources" />
             </span>
           </li>
         </ul>
@@ -216,11 +215,7 @@ new PanelGraph({
   footnotes: false,
   depends_on : ['table6','table12'],
   key: "resource_structure",
-  layout: {
-    full: { graph: 12},
-    half: { graph: 12},
-  },
-  title: "resource_structure_title",
+
   calculate(subject){
     const { table6 } = this.tables;
 
@@ -251,7 +246,8 @@ new PanelGraph({
     };
 
   },
-  render(panel, calculations){
+
+  render({calculations}){
     const { 
       subject, 
       graph_args: {
@@ -262,16 +258,18 @@ new PanelGraph({
 
     const scheme = create_rooted_resource_scheme({subject});
     
-    const node = panel.areas().graph.node();
-    reactAdapter.render(
-      <RootedResourceExplorerContainer 
-        subject={subject} 
-        has_dp_data={has_dp_data}
-        has_drr_data={has_drr_data}
-        rooted_resource_scheme={scheme}
-        initial_resource_state={get_initial_resource_state({subject, has_dp_data, has_drr_data})}
-      />, 
-      node
+    return (
+      <Panel 
+        title={text_maker("resource_structure_title")}
+      >
+        <RootedResourceExplorerContainer 
+          subject={subject} 
+          has_dp_data={has_dp_data}
+          has_drr_data={has_drr_data}
+          rooted_resource_scheme={scheme}
+          initial_resource_state={get_initial_resource_state({subject, has_dp_data, has_drr_data})}
+        />
+      </Panel>
     );
 
   },

@@ -1,31 +1,29 @@
-import "./drr_planned_actual.ib.yaml";
+import text from "./drr_planned_actual.yaml";
 
 import {
-  reactAdapter,
   PanelGraph,
   FootNote,
   PlannedActualTable,
-  util_components,
+  create_text_maker,
+  TM as StdTM,
+  TextPanel,
 } from '../shared.js';
 
 import { ResultCounts } from '../result_graphs/results_common.js';
 
-const { TM } = util_components;
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
+
 
 
 _.each(['dept','program'], level => {
   new PanelGraph({
     depends_on: ['table6', 'table12'],
     key:'drr_planned_actual',
-    requires_result_counts: true, //used as as a fail mechanism. If result counts aren't present, bail
+    //used as as a fail mechanism. If result counts aren't present, bail
+    requires_result_counts: true,
     level,
     title: "drr_planned_actual_title",
-    layout: {
-      full: { graph: 12},
-      half: { graph: 12},
-    },
-    source: false,
-    footnotes: false,
     calculate(subject,info){
       if(subject.level === 'dept'){
         if(!subject.is_rpp_org){
@@ -78,8 +76,9 @@ _.each(['dept','program'], level => {
       };
 
     },
-    render(panel, calc){
-      const { graph_args, subject } = calc;
+
+    render({calculations}){
+      const { graph_args, subject } = calculations;
       
       const { 
         actual_spend,
@@ -91,40 +90,39 @@ _.each(['dept','program'], level => {
         footnotes,
       } = graph_args;
 
-      const node = panel.areas().graph.node();
-      reactAdapter.render(<div className="medium_panel_text">
-        <TM 
-          k={ 
-            subject.level === 'dept' ? 
-            "dept_drr_planned_actual_text" :
-            "program_drr_planned_actual_text"
-          }
-          args={{...graph_args,
-            subject,
-          }}
-        />
 
-        <PlannedActualTable 
-          {...{
-            actual_spend,
-            actual_ftes,
-            planned_spend,
-            planned_ftes,
-            diff_ftes,
-            diff_spend,
-          }}
-        />
-        {!_.isEmpty(footnotes) && 
-          <ul>
-            {_.map(footnotes, ({text},i) => 
-              <li key={i}>
-                <div dangerouslySetInnerHTML={{__html: text}} />
-              </li>
-            )}
-          </ul>
-        }
-      </div>,
-      node
+      return (
+        <TextPanel title={text_maker("drr_planned_actual_title")}>
+          <TM 
+            k={ 
+              subject.level === 'dept' ? 
+              "dept_drr_planned_actual_text" :
+              "program_drr_planned_actual_text"
+            }
+            args={{...graph_args,
+              subject,
+            }}
+          />
+          <PlannedActualTable 
+            {...{
+              actual_spend,
+              actual_ftes,
+              planned_spend,
+              planned_ftes,
+              diff_ftes,
+              diff_spend,
+            }}
+          />
+          {!_.isEmpty(footnotes) && 
+            <ul>
+              {_.map(footnotes, ({text},i) => 
+                <li key={i}>
+                  <div dangerouslySetInnerHTML={{__html: text}} />
+                </li>
+              )}
+            </ul>
+          }
+        </TextPanel>
       );
 
     },

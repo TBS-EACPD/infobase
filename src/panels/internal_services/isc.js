@@ -1,4 +1,4 @@
-import './isc.ib.yaml';
+import text from './isc.yaml';
 
 /*
   snippet to get orgs sorted by isc fte % 
@@ -15,26 +15,25 @@ import './isc.ib.yaml';
 */
 
 const {
+  Panel,
   Subject: {
     Gov,
     Tag,
   },
   formats,
-  text_maker,
+  create_text_maker,
   run_template,
   PanelGraph,
-  reactAdapter,
-  util_components: {
-    TextMaker,
-    Format,
-  },
+  TM: StdTM,
   years : {std_years},
   declarative_charts: {
     Bar,
-    A11YTable,
     GraphLegend,
   },
 } = require("../shared");
+
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props}/>;
 
 new PanelGraph({
   level: "dept",
@@ -42,7 +41,7 @@ new PanelGraph({
   depends_on : ['table12', "table6"],
   title : "internal_service_panel_title",
   calculate(subject,info){
-    const { table6, table12 } = this.tables;
+    const { table12 } = this.tables;
 
     const isc_crsos = _.filter(subject.crsos, "is_internal_service");
     if(_.isEmpty(isc_crsos)){
@@ -77,7 +76,7 @@ new PanelGraph({
       series,
     };
   },
-  render(panel, calculations, options){
+  render({calculations,sources,footnotes}){
     const {
       subject,
       graph_args: {
@@ -102,8 +101,8 @@ new PanelGraph({
 
     const to_render = <div>
       <div className="medium_panel_text" style={{marginBottom: "15px"}}>
-        <TextMaker
-          text_key="internal_service_panel_text"
+        <TM
+          k="internal_service_panel_text"
           args={{
             subject,
             isc_fte_pct: isc_fte/total_fte,
@@ -146,12 +145,14 @@ new PanelGraph({
       </div>
     </div>
 
-
-    reactAdapter.render(
-      to_render,
-      panel.areas().graph.node()
-    )
-
+    return (
+      <Panel
+        title={text_maker("internal_service_panel_title")}
+        {...{sources,footnotes}}
+      >
+        {to_render}
+      </Panel>
+    );
 
   },
 });

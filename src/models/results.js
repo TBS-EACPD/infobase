@@ -2,7 +2,7 @@ const {
   Program, 
   CRSO,
 } = require('./subject.js');
-const { text_maker } = require('./text.js');
+const { trivial_text_maker } = require('./text.js');
 const { months } = require('./businessConstants.js');
 
 
@@ -71,8 +71,8 @@ class SubProgramEntity {
 
     return _.map(records, ({ year, ftes, spending }) => ({
       year, 
-      ftes: _.isNumber(ftes) ? ftes : text_maker('unknown'), 
-      spending: _.isNumber(spending) ? spending : text_maker('unknown'),
+      ftes: _.isNumber(ftes) ? ftes : trivial_text_maker('unknown'), 
+      spending: _.isNumber(spending) ? spending : trivial_text_maker('unknown'),
     }));
   }
   resource_notes(doc){
@@ -117,10 +117,10 @@ class SubProgramEntity {
     );
   }
   singular(){
-    return text_maker(this.level)
+    return trivial_text_maker(this.level)
   }
   plural(){
-    return text_maker(this.level+"s")
+    return trivial_text_maker(this.level+"s")
   }
   get guid(){
     return `${this.level}_${this.id}`;
@@ -220,10 +220,10 @@ class Result {
     return parseInt(this.id.split('-')[1]) > 9000;
   }
   singular(){
-    return text_maker('result');
+    return trivial_text_maker('result');
   }  
   plural(){
-    return text_maker('results');
+    return trivial_text_maker('results');
   }
   get level(){
     return "result";
@@ -336,10 +336,10 @@ class Indicator {
     return "indicator";
   }
   singular(){
-    return text_maker('indicator');
+    return trivial_text_maker('indicator');
   }
   plural(){
-    return text_maker('indicators');
+    return trivial_text_maker('indicators');
   }
   get guid(){
     return `indicator_${this.id}`;
@@ -354,9 +354,9 @@ class Indicator {
     } else if(_.isNumber(target_year)){
       return target_year;
     } else if(_.nonEmpty(target_year)){ //target_year === "other" | "ongoing"
-      return text_maker(target_year);
+      return trivial_text_maker(target_year);
     } else {
-      return text_maker("unspecified_date_to_achieve");
+      return trivial_text_maker("unspecified_date_to_achieve");
     }
   }
   get icon_key(){

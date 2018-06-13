@@ -1,9 +1,10 @@
 import * as Subject from '../../../models/subject.js';
 import { sos } from '../../../models/businessConstants.js';
-import { text_maker } from '../../../models/text.js';
-import { TextMaker } from '../../../util_components';
+import { text_maker } from '../partition_text_provider.js';
+import { TextMaker as StandardTextMaker } from '../../../util_components';
 import { Table } from '../../../core/TableClass.js';
 import { PartitionPerspective } from './PartitionPerspective.js';
+
 
 import {
   absolute_value_sort,
@@ -17,6 +18,7 @@ import {
   formats_by_data_type,
 } from './perspective_utils.js';
 
+const TextMaker = props => <StandardTextMaker text_maker_func={text_maker} {...props} />;
 
 const mock_model = function(id, name, description, type, extra_attrs={}){
   return {

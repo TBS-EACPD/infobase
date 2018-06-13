@@ -1,21 +1,38 @@
-import './vote-stat-text.ib.yaml';
+import { text_maker, TM } from './vote-stat-text-prodiver.js';
 import {
   PanelGraph,
-  common_react_donut,
+  CommonDonut,
+  StdPanel,
+  Col,
 } from "../shared";
+
+const render_w_options = ({text_key,graph_col,text_col})  => ({calculations, sources, footnotes}) => {
+  const { info, graph_args } = calculations;
+
+  return (
+    <StdPanel
+      title={text_maker("vote_stat_split_title")}
+      {...{footnotes,sources}}
+    >
+      <Col isText size={text_col}>
+        <TM k={text_key} args={info} />
+      </Col>
+      { !window.is_a11y_mode &&
+        <Col isGraph size={graph_col}>
+          <CommonDonut data={graph_args} />
+        </Col>
+      }
+    </StdPanel>
+  )
+}
 
 new PanelGraph({
   key: 'vote_stat_split',
   depends_on : ['table300'],
   info_deps: ["table300_program_info"],
-  layout: {
-    full: {text: 5, graph: 7},
-    half : {text: 12, graph: 12},
-  },
   level : "program",
   footnotes : ["VOTED", "STAT"],
-  title : "vote_stat_split_title",
-  text :  "program_vote_stat_split_text",
+
   calculate(subject,info,options){ 
     const {table300} = this.tables;
     const vote_stat =  _.map(
@@ -32,7 +49,12 @@ new PanelGraph({
 
     return vote_stat;
   },
-  render: window.is_a11y_mode ? _.noop : common_react_donut,
+
+  render: render_w_options({
+    text_key: "program_vote_stat_split_text",
+    graph_col: 7,
+    text_col : 5,
+  }),
 });
 
 
@@ -41,13 +63,7 @@ new PanelGraph({
   depends_on : ['table300'],
   info_deps: ["table300_tag_info"],
   footnotes : ["VOTED", "STAT"],
-  layout: {
-    full: {text: 7, graph: 5},
-    half : {text: 12, graph: 12},
-  },
   level : "tag",
-  title : "vote_stat_split_title",
-  text :  "tag_vote_stat_split_text",
   calculate(subject,info,options){ 
     const {table300} = this.tables;
 
@@ -61,7 +77,12 @@ new PanelGraph({
       })
       .value();
   },
-  render: window.is_a11y_mode ? _.noop : common_react_donut,
+
+  render: render_w_options({
+    text_key: "tag_vote_stat_split_text",
+    graph_col: 5,
+    text_col: 7,
+  }),
 });
 
 

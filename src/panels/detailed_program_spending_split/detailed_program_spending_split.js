@@ -1,32 +1,39 @@
-import './detailed_program_spending_split.ib.yaml';
-
-const {
-  Subject: {
-    Program,
-    Dept,
-  },
+import text from './detailed_program_spending_split.yaml';
+import {
+  Subject,
+  create_text_maker,
   formats,
-  text_maker,
   run_template,
   PanelGraph,
-  reactAdapter,
-  util_components: {
-    TextMaker,
-    Select,
-    Format,
-  },
+  util_components,
   infograph_href_template,
-  years : {std_years},
-  declarative_charts: {
-    Bar,
-    GraphLegend,
-    StackedHbarChart,
-    A11YTable,
-  },
+  years,
+  declarative_charts,
   business_constants,
-} = require("../shared"); 
+  Panel,
+} from "../shared";
+
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
+
+const { std_years } = years; 
+
+const { 
+  TM: StdTM,
+  Select,
+  Format,
+} = util_components
+
+const {
+  Bar,
+  GraphLegend,
+  StackedHbarChart,
+  A11YTable,
+} = declarative_charts;
 
 const { sos } = business_constants;
+
+
 
 const text_keys = {
   dept: "dept_historical_program_spending_text", //note that we're recycling another's graph text, we'll clean this up later once we confirm we're good with this.
@@ -46,13 +53,8 @@ const info_deps_by_level = {
     key: "detailed_program_spending_split",
     info_deps: info_deps_by_level[level_name],
     depends_on : ['table305', "table6"],
-    layout: {
-      full: {text: 12, graph: 12},
-      half : {text: 12, graph: 12},
-    },
+
     footnotes: [ 'PROG', 'SOBJ' ],
-    title : "detailed_program_spending_split_title",
-    text :  text_keys[level_name],
     calculate(subject,info,options){
 
       const is_tag = subject.level === "tag";
@@ -66,7 +68,7 @@ const info_deps_by_level = {
       }
 
       const flat_data = _.map(table_data, row => ({
-        program: Program.get_from_activity_code(row.dept, row.activity_code),
+        program: Subject.Program.get_from_activity_code(row.dept, row.activity_code),
         so_num: row.so_num,
         so_label: row.so,
         value: row["{{pa_last_year}}"],
@@ -107,7 +109,7 @@ const info_deps_by_level = {
         })
         .map(row => 
           ({
-            label : is_tag ? `${row.prgm} (${Dept.lookup(row.dept).acronym})` : row.prgm,
+            label : is_tag ? `${row.prgm} (${Subject.Dept.lookup(row.dept).acronym})` : row.prgm,
             data : exp_cols.map(col => row[col]),
             active : false,
           })
@@ -124,7 +126,7 @@ const info_deps_by_level = {
 
     },
 
-    render(panel, calculations, options){
+    render({calculations, footnotes, sources}){
       const {
         graph_args: {
           flat_data,
@@ -132,6 +134,7 @@ const info_deps_by_level = {
           top_3_so_nums,
           table6_data,
         },
+        info,
       } = calculations;
 
       const filter_to_specific_so = so_num => test_so_num => (
@@ -159,29 +162,34 @@ const info_deps_by_level = {
       );
 
 
-      const node = panel.areas().graph.node();
-
-      reactAdapter.render(
-        <div>
-          <div>
-            <DetailedProgramSplit
-              flat_data={flat_data}
-              arrangements={arrangements}
-              top_3_so_nums={top_3_so_nums}
-            />
+      return (
+        <Panel
+          title={text_maker("detailed_program_spending_split_title")}
+          {...{sources, footnotes}}
+        >
+          <div className="medium_panel_text">
+            <TM k={text_keys[level_name]} args={info} />
           </div>
           <div>
-            <HistoricalProgramBars
-              data={_.map(table6_data, ({label,data},ix) => ({
-                label,
-                data,
-                id: `${ix}-${label}`,  //need unique id, program names don't always work!
-              }))}
-            />
+            <div>
+              <DetailedProgramSplit
+                flat_data={flat_data}
+                arrangements={arrangements}
+                top_3_so_nums={top_3_so_nums}
+              />
+            </div>
+            <div>
+              <HistoricalProgramBars
+                data={_.map(table6_data, ({label,data},ix) => ({
+                  label,
+                  data,
+                  id: `${ix}-${label}`,  //need unique id, program names don't always work!
+                }))}
+              />
+            </div>
           </div>
-        </div>,
-        node
-      ); 
+        </Panel>
+      );
 
     },
   });
@@ -233,12 +241,12 @@ class HistoricalProgramBars extends React.Component {
     return <div>
       <div className="results-separator" />
       <div style={{paddingBottom:'10px'}} className='center-text font-xlarge'>
-        <strong><TextMaker text_key="historical_prog_title" /></strong>
+        <strong><TM k="historical_prog_title" /></strong>
       </div>
       <div className="frow">
         <div className="fcol-md-4" style={{ width: "100%" }}>
           <div
-            className="well legend-container"
+            className="legend-container"
             style={{ maxHeight: "400px" }}
           >
             <GraphLegend
@@ -347,17 +355,17 @@ class DetailedProgramSplit extends React.Component {
         <div className="row">
           <div className="results-separator" >
             <table className="table table-striped table-bordered">
-              <caption><TextMaker text_key="so_spend_by_prog" /></caption>
+              <caption><TM k="so_spend_by_prog" /></caption>
               <thead>
                 <tr>
                   <th scope="col">
-                    <TextMaker text_key="program"/>
+                    <TM k="program"/>
                   </th>
                   <th scope="col">
-                    <TextMaker text_key="so"/>
+                    <TM k="so"/>
                   </th>
                   <th scope="col">
-                    {run_template("{{pa_last_year}}")} <TextMaker text_key="expenditures" /> 
+                    {run_template("{{pa_last_year}}")} <TM k="expenditures" /> 
                   </th>
                 </tr>
               </thead>
@@ -379,12 +387,12 @@ class DetailedProgramSplit extends React.Component {
     return <div>
       <div className="results-separator" />
       <div style={{paddingBottom:'10px'}} className='center-text font-xlarge'>
-        <strong><TextMaker text_key="so_spend_by_prog" /></strong>
+        <strong><TM k="so_spend_by_prog" /></strong>
       </div>
       <div className="frow">
         <div className="fcol-md-4" style={{ width: "100%" }}>
           <label>
-            <TextMaker text_key="filter_by_so" />
+            <TM k="filter_by_so" />
             <Select 
               selected={selected_arrangement}
               options={_.map(arrangements, ({id, label}) => ({ 
@@ -400,7 +408,7 @@ class DetailedProgramSplit extends React.Component {
             />
           </label>
           { !_.isEmpty(legend_items) &&
-            <div className="well legend-container">
+            <div className="legend-container">
               <GraphLegend
                 items={legend_items}  
               />

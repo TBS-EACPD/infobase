@@ -91,7 +91,7 @@ class ProgressDonut extends React.Component {
   }
   componentDidMount(){
     this.graph_instance = new SafeProgressDonut(
-      d3.select(this.refs.graph_area),
+      this.refs.graph_area,
       _.clone(this.props)
     );
     this._render()
@@ -220,7 +220,6 @@ const GraphLegend = ({
   isHorizontal,  //defaults to false
   items, // [ { active, id, label, color }] 
   onClick,  //id => { }
-  active,
 }) => ( 
   <ul className={classNames("legend-list-inline", isHorizontal && "horizontal")}>
     {_.map(items, ({ color, label, id, active }) => 

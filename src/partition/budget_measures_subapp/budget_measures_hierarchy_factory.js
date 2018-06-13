@@ -1,5 +1,5 @@
 import * as Subject from '../../models/subject';
-import { text_maker } from "../../models/text";
+import { text_maker } from "./budget_measure_text_provider.js";
 
 
 const absolute_value_sort_net_adjust_biased = (a,b) => {
