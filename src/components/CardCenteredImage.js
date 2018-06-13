@@ -10,14 +10,15 @@ const CardCenteredImage = ({
   link_key,
   link_href,
   text_args,
+  tmf,
 }) => (
   <div className="centered-img-card">
     <div className="centered-img-card__left">
       <header className="centered-img-card__title">
-        <TM k={title_key}/>
+        <TM k={title_key} tmf={tmf} args={text_args} />
       </header>
       <div className="centered-img-card__text">
-        <TM k={text_key} args={text_args} />
+        <TM k={text_key} tmf={tmf} args={text_args} />
       </div>
     </div>
     { img_src &&
@@ -33,7 +34,7 @@ const CardCenteredImage = ({
         <div className="centered-img-card__bottom-right">
           <div className="centered-img-card__link">
             <a href={link_href}>
-              <TM k={link_key}/>
+              <TM k={link_key} tmf={tmf} args={text_args} />
             </a>
           </div>
         </div>

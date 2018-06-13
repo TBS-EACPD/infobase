@@ -8,6 +8,8 @@ const CardTopImage = ({
   text_key,
   link_key,
   link_href,
+  text_args,
+  tmf,
 }) => (
   <div className="top-img-card">
     { img_src &&
@@ -23,10 +25,10 @@ const CardTopImage = ({
     <a href={link_href}>
       <div className="top-img-card__bottom">
         <header className="top-img-card__title">
-          <TM k={title_key} />
+          <TM k={title_key} tmf={tmf} args={text_args} />
         </header>
         <div className="top-img-card__text">
-          <TM k={text_key} />
+          <TM k={text_key} tmf={tmf} args={text_args} />
         </div>
       </div>
     </a>
