@@ -14,75 +14,29 @@
   ------------------------
 
   structure: 
-    .background-img-card
-      .background-img-card__left
-        .background-img-card__img-link
-          .background-img-card__img
-      .background-img-card__right-container {
-        .background-img-card__right
-          .background-img-card__title
-          .background-img-card__text
-          .background-img-card__bottom-right
+    .background-img-card {with background image}
+      .background-img-card__top-left
+        .background-img-card__title
+        .background-img-card__text
+      .background-img-card__bottom-right
+        .background-img-card__link
 
 */
+
 .background-img-card {
-  display: flex;
-  flex: auto;
-  width: 100%;
-  max-width: 100%;
-  flex-direction: column;
-  align-items: stretch;
   min-height: 1px; /* IE11 image bug */
-  padding: 15px;
+  margin: 10px;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 100px;
 }
 
-.background-img-card__left { 
-  margin-top: -20%;
-  flex: 0 0 30%;
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  text-align: left;
-  max-width: 100%;
+.background-img-card__top-left { 
   min-height: 1px; /* IE11 image bug */
-  font-size: 2.5em; /* for glyphicons */
+  font-size: 2.5em;
   color: white;
   padding: 1%;
-}
-
-.background-img-card__img-link {
-  width: 100%;
-  max-width: 100%;
-  min-height: 1px; /* IE11 image bug */
-  /* for glyphicons */
-  text-align: center; 
-  color: inherit;
-  line-height: 0;
-}
-
-.background-img-card__img {
-  width: 80vw;
-  max-width: none;
-  position: relative;
-  min-height: 1px;
-  opacity: 0.5;
-  margin-bottom: -10%;
-  padding: 15px;
-  transform: translate(-50%, 0);
-  left: 50%;
-  @media(max-width:1360px){
-    width: 100vw;
-  }
-}
-
-.background-img-card__right {
-  display: flex;
-  width: 100%;
-  max-width: 100%;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  flex: 1;
 }
 
 .background-img-card__title {
@@ -90,7 +44,6 @@
   font-weight: $mediumFontWeight;
   text-align: left;
   width: 100%;
-  max-width: 100%;
   text-transform: uppercase;
 }
 
@@ -99,17 +52,13 @@
   font-weight: $mediumFontWeight;
   margin-top: 10px;
   width: 100%;
-  max-width: 100%;
   text-align: left;
 }
 
 .background-img-card__bottom-right {
   display: flex;
   width: 100%;
-  max-width: 100%;
   justify-content: flex-end;
-  z-index: 1;
-  padding-bottom: 20px;
 }
 
 .background-img-card__link {
@@ -120,7 +69,6 @@
   background-color: #FF5e59;
   border-radius: 10px;
   width: 30%;
-  max-width: 30%;
 
   &> a {
     color:white;

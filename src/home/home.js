@@ -198,7 +198,7 @@ const HomeLayout = props => (
     </div>
 
             
-    <div className="home-bg" style={{position:"relative"}}>
+    <div className="home-bg">
       <div className="container">
         <CardBackgroundImage
           img_src="svg/partition.svg"
