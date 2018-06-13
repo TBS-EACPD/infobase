@@ -1,7 +1,7 @@
 @import '../common_css/common-variables';
 
 .table-dark-blue > thead > tr {
-  background-color: rgb(37, 114, 180);
+  background-color: $secondaryColor;
 }
 .table-dark-blue > thead > tr > th {
   color: white;
@@ -21,11 +21,11 @@
 }
 
 .table-dark-blue > tbody > tr:nth-child(odd) {
-  background-color: rgba(37,114,180,0.2);
+  background-color: $buttonSecondaryColor;
 }
 
 .table-dark-blue:not(.no-total-row) > tbody > tr:last-child {
-  background-color: rgb(37, 114, 180);
+  background-color: $secondaryColor;
 }
 
 .table-dark-blue:not(.no-total-row) > tbody > tr:last-child > td {

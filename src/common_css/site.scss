@@ -462,9 +462,9 @@ ol.breadcrumb > li:last-child > :last-child {
 // Misc. styles from flat redesign
 .well-sm {
   border-radius: 10px;
-  background-color: hsla(211, 15%, 55%, 1);
+  background-color: $tertiaryColor;
   text-align: center;
-  border-color: hsla(211, 15%, 55%, 1);
+  border-color: $tertiaryColor;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
   padding: 10px;

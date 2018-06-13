@@ -1,5 +1,8 @@
 @import "common-variables";
 
+h1:not(.intro-box){
+  border-bottom: 3px solid $highlightColor !important;
+}
 
 hr {
   //default is #eee, a little too bright
@@ -10,7 +13,7 @@ hr {
 .glossary-tooltip-link,
 .glossary-tooltip-link:visited  {
   text-decoration: none !important;
-  border-bottom: 1px dashed #113e78 !important;
+  border-bottom: 2px dashed $highlightColor !important;
   color: #113e78 !important;
 }
 
@@ -126,6 +129,7 @@ h2 {
   font-size: 90%;
 }
 
+
 .uppercase {
   text-transform: uppercase;
 }
@@ -223,6 +227,10 @@ details > * {
 .medium_panel_text {
   font-size: 1.2em;
   line-height: 1.8em;
+}
+
+.nav-pills > li.active > a {
+  background-color: #284162 !important;
 }
 
 .small_panel_text {
@@ -338,14 +346,14 @@ table.table-blue > thead > tr {
   background-color : #d9edf7;
 }
 table.table-blue > thead > tr > th{
-  background-color: rgb(37, 114, 180);
+  background-color: $secondaryColor;
   color: $backgroundColor;
   font-weight : $mediumFontWeight;
   border: none;
   font-size: 13px;
 }
 tr.background-blue > td {
-  background-color: rgb(37, 114, 180);
+  background-color: $secondaryColor;
   color: $backgroundColor;
 }
 tr.background-blue > td > a{
@@ -357,7 +365,7 @@ tr.background-blue > td > a{
 }
 
 .table-striped>tbody>tr:nth-child(even) {
-  background-color: #d9edf7;
+  background-color: $buttonSecondaryColor;
 }
 
 /* 

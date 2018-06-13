@@ -20,7 +20,7 @@ li.tab_label {
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
   border: 1px solid change-color($color: $backgroundColor, $alpha: 0.5);
-  background-color: $primaryColor;
+  background-color: $tertiaryColor;
   transition: background-color 125ms ease, border-radius 250ms ease;
   color: $backgroundColor;
   height: 28px;

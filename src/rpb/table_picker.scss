@@ -42,7 +42,7 @@
 .tag-cloud-main > li > button:active,
 .tag-cloud-main > li > button:focus,
  {
-  background-color: #49739C;
+  background-color: $primaryColor;
 }
 
 .tag-cloud > li.active > button {
@@ -151,11 +151,11 @@
   padding: 6px 7px;
   margin: 12px 12px 0 0;
   color: black;
-  background-color: #d9edf7;
+  background-color: $buttonSecondaryColor;
   border-radius: 0px 5px 5px 0px;
   border-style: solid;
   border-width: 0 0 0 4px;
-  border-color: #269abc;
+  border-color: $secondaryColor;
 }
 
 .item-tags > .item-tag.active {
