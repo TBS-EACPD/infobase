@@ -77,16 +77,13 @@ $home-bg-color: #284162;
 .home-trinity-container {
   margin-top: 3rem;
   & > .frow {
-    & > .col-md-4 {
-      margin: auto;
-    }
+    justify-content: space-evenly;
 
     @media(max-width:610px) {
       flex-direction: column;
 
-      & > .col-md-4 {
-        padding: 2%;
-        margin: 0;
+      & > .fcol-md-4 {
+        padding: 3% 2% 3% 2%;
       }
       
       & > .TrinityItem:hover {
@@ -147,6 +144,10 @@ $col_gutter_width: 2rem;
 
 .xtralinks {
   padding-top: 50px;
+
+  & > .frow {
+    justify-content: space-around;
+  }
 }
 
 .linkcard {

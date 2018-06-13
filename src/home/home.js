@@ -114,21 +114,21 @@ const HomeLayout = props => (
     <div className="container">
       <div className="home-trinity-container">
         <div className="frow">
-          <div className="col-md-4">
+          <div className="fcol-md-4">
             <TrinityItem 
               href="#orgs/gov/gov/infograph/financial"
               img_url='svg/expend.svg'
               title={<TM k="home_finance_title" />}
             />
           </div>
-          <div className="col-md-4">
+          <div className="fcol-md-4">
             <TrinityItem 
               href="#orgs/gov/gov/infograph/people"
               img_url='svg/people.svg' 
               title={<TM k="home_ppl_title" />}
             />
           </div>
-          <div className="col-md-4">
+          <div className="fcol-md-4">
             <TrinityItem
               href="#orgs/gov/gov/infograph/results"
               img_url='svg/results.svg' 
