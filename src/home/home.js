@@ -90,16 +90,18 @@ const FeaturedContentItem = ({ text_key, href, is_new }) => <li className="list-
   <a href={href}> <TM k={text_key} /> </a>
 </li>;
 
-const TrinityItem = ({img_url, title, href}) => <div className="centerer">
-  <a href={href} className="TrinityItem">
-    <div className="TrinityItem__Title">
-      {title}
-    </div>
-    <div className="TrinityItem__Img">
-      <img src={img_url} />
-    </div>
-  </a>
-</div>;
+const TrinityItem = ({img_url, title, href}) => (
+  <div className="fcol-md-4">
+    <a href={href} className="TrinityItem">
+      <div className="TrinityItem__Title">
+        {title}
+      </div>
+      <div className="TrinityItem__Img">
+        <img src={img_url} />
+      </div>
+    </a>
+  </div>
+);
 
 const HomeLayout = props => (
   <div className="home-root">
@@ -118,27 +120,21 @@ const HomeLayout = props => (
     <div className="container">
       <div className="home-trinity-container">
         <div className="frow">
-          <div className="fcol-md-4">
-            <TrinityItem 
-              href="#orgs/gov/gov/infograph/financial"
-              img_url='svg/expend.svg'
-              title={<TM k="home_finance_title" />}
-            />
-          </div>
-          <div className="fcol-md-4">
-            <TrinityItem 
-              href="#orgs/gov/gov/infograph/people"
-              img_url='svg/people.svg' 
-              title={<TM k="home_ppl_title" />}
-            />
-          </div>
-          <div className="fcol-md-4">
-            <TrinityItem
-              href="#orgs/gov/gov/infograph/results"
-              img_url='svg/results.svg' 
-              title={<TM k="home_results_title" />}
-            />
-          </div>
+          <TrinityItem
+            href="#orgs/gov/gov/infograph/financial"
+            img_url='svg/expend.svg'
+            title={<TM k="home_finance_title" />}
+          />
+          <TrinityItem
+            href="#orgs/gov/gov/infograph/people"
+            img_url='svg/people.svg' 
+            title={<TM k="home_ppl_title" />}
+          />
+          <TrinityItem
+            href="#orgs/gov/gov/infograph/results"
+            img_url='svg/results.svg' 
+            title={<TM k="home_results_title" />}
+          />
         </div>
       </div>
     </div>
@@ -146,8 +142,8 @@ const HomeLayout = props => (
     <div className="container">
       <div className="home-body">
         <div className="frow home-cols">
-          <div className="fcol-md-7 home-col">
-            <div className="col-content featured-col-content partition-budget-home-content">
+          <div className="fcol-md-7">
+            <div className="col-content featured-col-content">
               <CardCenteredImage
                 tmf={home_tm}
                 img_src="svg/partition-budget.svg"
@@ -158,7 +154,7 @@ const HomeLayout = props => (
               />
             </div>     
           </div>
-          <div className="fcol-md-5 home-col">
+          <div className="fcol-md-5">
             <header className="h3">
               <TM k="home_search_bar_title" />
             </header> 

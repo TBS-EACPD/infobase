@@ -13,7 +13,7 @@ $home-bg-color: #284162;
   input.typeahead.form-control.input-lg.tt-input {
     //search bar isn't wide enough to contain all placeholder text
     font-size: 1em;
-  } 
+  }
 }
 
 .intro-box {
@@ -47,6 +47,10 @@ $home-bg-color: #284162;
   margin-top: 50px;
   height: auto;
   width: 100%;
+
+  @media(min-width:1024px) {
+    width: 95%;
+  }
 }
 
 .col-content.misc-col-content {
@@ -72,26 +76,33 @@ $home-bg-color: #284162;
 
 .home-trinity-container {
   margin-top: 3rem;
-  & > .frow {
-    justify-content: space-around;
-    
-    @media(max-width:1023px) and (min-width:611px) {
-      & > .fcol-md-4 {
-        flex: 1;
-      }
-    }
 
+  & > .frow {
+    justify-content: space-between;
+    
     @media(max-width:610px) {
       flex-direction: column;
+    }
 
-      & > .fcol-md-4 {
+    & > .fcol-md-4 {
+
+      @media(max-width:610px) {
         padding: 3% 2% 3% 2%;
       }
-      
-      & > .TrinityItem:hover {
-        transform: scale(1.05);
+
+      @media(min-width:611px) {
+        flex-basis: 30%;
+        max-width: 30%;
+
+        @media(max-width:767px) {
+          flex: 1;
+        }
+
+        @media(max-width:1023px) {
+          flex: 1;
+        }
       }
-    }  
+    }
   }
 }
 
@@ -99,15 +110,18 @@ $home-bg-color: #284162;
   @include unstyled-link;
   background-color: #767F89;
   border-radius: 10px;
-  width: 90%;
   padding: 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 
   transition: transform .2s ease-in-out;
+
   &:hover {
     transform: scale(1.2);
+    @media(max-width:767px) {
+      transform: scale(1.05);
+    }
   }
 }
 
@@ -123,21 +137,10 @@ $home-bg-color: #284162;
   width: 10rem;
 }
 
-
-$col_gutter_width: 2rem;
-//fatten the padding for fcols
-.frow.home-cols {
-  margin-left: -$col_gutter_width;
-  margin-right: -$col_gutter_width;
+.home-body > .frow.home-cols {
+  justify-content: space-between;
   margin-bottom: 5%;
-
-  & > .home-col {
-    padding-right: $col_gutter_width;
-    padding-left: $col_gutter_width;
-    width: 100%;
-  }
 }
-
 
 .home-bg {
   background-color: $home-bg-color;
@@ -157,11 +160,5 @@ $col_gutter_width: 2rem;
   padding: 0px;
   &:hover {
     background-color: rgb(236, 236, 236) !important;
-  }
-}
-
-.home-body {
-  & > .frow {
-    justify-content: center;
   }
 }
