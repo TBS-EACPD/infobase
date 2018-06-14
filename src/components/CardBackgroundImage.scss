@@ -27,11 +27,11 @@
 .background-img-card {
   min-height: 1px; /* IE11 image bug */
   margin: 10px;
+  padding: 10%;
 
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  padding: 100px;
 }
 
 .background-img-card__top-left { 
