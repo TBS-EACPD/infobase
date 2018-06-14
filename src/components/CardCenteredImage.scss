@@ -35,19 +35,18 @@
 .centered-img-card__left { 
   padding: 5px;
   min-height: 1px; /* IE11 image bug */
-  font-size: 2.6em; /* for glyphicons */
   color: white;
 }
 
 .centered-img-card__title {
-  font-size: 0.7em;
+  font-size: 1.75em;
   font-weight: $mediumFontWeight;
   padding: 10px 8px 10px 15px;
   text-transform: uppercase;
 }
 
 .centered-img-card__text {
-  font-size: 0.45em;
+  font-size: 1.25em;
   font-weight: $mediumFontWeight;
   margin-top: 10px;
   text-align: left;
