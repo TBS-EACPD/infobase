@@ -473,7 +473,7 @@ ol.breadcrumb > li:last-child > :last-child {
 .form-control.input-lg {
   border: 2px solid #ccc;
   border-radius: 10px;
-  box-shadow: none;
+  box-shadow: none !important;
   opacity: 1;
   background: none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255);
 }

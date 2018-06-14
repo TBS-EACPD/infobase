@@ -459,7 +459,7 @@ export class ReportBuilder extends React.Component {
 const AccessibleTablePicker = ({ tables, onSelect, selected }) => (
   <select 
     aria-labelledby="picker-label"
-    className="form-control rpb-simple-select"
+    className="form-control form-control-ib rpb-simple-select"
     value={selected}
     onChange={evt => onSelect(evt.target.value)}
   >

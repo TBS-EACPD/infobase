@@ -330,6 +330,11 @@ list-group-item.active a {
     vertical-align: middle !important;
 }
 
+.form-control.form-control-ib { 
+  border: 1.4px solid #3281EA;
+  box-shadow: none !important;
+}
+
 .twitter-typeahead, .twitter-typeahead input {
 	width: 100% !important;
 }
@@ -475,7 +480,11 @@ ol, ul {
   margin-bottom: 12px;
 }
 
-li.checkbox > label {
+li.checkbox > input {
+  border:3px solid red !important;
+}
+
+li.checkbox > label{
   font-weight: $mediumFontWeight;
 }
 
