@@ -190,7 +190,7 @@ class PanelGraph {
         footnote_concepts
       )
     )
-      .map('text')
+      .uniqBy('text') //some footnotes are duplicated to support different topics, years, orgs, etc. 
       .compact()
       .value();
   

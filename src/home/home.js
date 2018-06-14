@@ -93,6 +93,12 @@ const FeaturedContentItem = ({ text_key, href, is_new }) => <li className="list-
 
 const HomeLayout = props => (
   <div className="home-root">
+    <div 
+      className="alert alert-danger alert-no-symbol alert--is-bordered medium_panel_text mrgn-tp-lg"
+      style={{paddingLeft: "50px"}}
+    >
+      <TM k="missing_dp_info_text" />
+    </div>
     <div className="intro-box">
       <h1> <TM k="welcome" /> </h1>
       <h2> <TM k="home_sub_title" /> </h2>

@@ -1,0 +1,72 @@
+gov_ftes_missing_footnote:
+  transform: [handlebars,markdown]
+  en: |
+    Because **Public Services and Procurement Canada (PSPC)** have not yet submitted their planned *Full-time Equivalent* data, 
+    the government wide employment numbers for fiscal years {{planning_year_1}} through {{planning_year_3}} are incomplete. In fiscal year 2016-17, PSPC employed **12,306** FTEs.
+  fr: |
+    Puisque **Services publics et Approvisionnement Canada (SPAC)** n'a pas encore soumis leurs *équivalent temps plein* prévus, 
+    les figures pour l'emploi du gouvernement entier pour les années fiscales {{planning_year_1}}, {{planning_year_2}} et {{planning_year_3}} sont incomplètes. Dans l'année fiscale 2016-2017, SPAC a employé **12 306** ETPs.
+
+
+gov_money_missing_footnote:
+  transform: [handlebars,markdown]
+  en: |
+    Because **Public Services and Procurement Canada (PSPC)** have not yet submitted their planned internal services spending data, 
+    the government wide planned spending numbers for fiscal years {{planning_year_1}} through {{planning_year_3}} are incomplete. In fiscal year 2016-17, PSPC spent **{{fmt_compact_written 262556577}}** on internal services.
+  fr: |
+    Puisque **Services publics et Approvisionnement Canada (SPAC)** n'a pas encore soumis leurs dépenses prévus pour leurs services internes, 
+    les figures des dépenses prévues du gouvernement entier pour les années fiscales {{planning_year_1}}, {{planning_year_2}} et {{planning_year_3}} sont incomplètes. Dans l'année fiscale 2016-2017, SPAC a dépensé **{{fmt_compact_written 262556577}}** pour leurs services internes.
+
+
+gov_missing_dp_results:
+  transform: [handlebars,markdown]
+  en: |
+    Note that the following organizations have not yet submitted their planned results and indicators:
+    
+    {{#each late_orgs}}
+      * {{this}}
+    {{/each}}
+
+  fr: |
+    Notez que les organisations suivantes n'ont pas encore soumis leurs résultats et indicateurs planifiés:
+
+    {{#each late_orgs}}
+      * {{this}}
+    {{/each}}
+
+
+org_missing_dp_results:
+  transform: [handlebars, markdown]
+  en: |
+    This organisation has not yet submitted their departmental plan results and indicators  
+
+  fr: | 
+    Cette organisation n'a pas encore soumis leurs résultats et indicateurs pour leur plan ministériel 
+
+
+pspc_missing_resources:
+  transform: [handlebars, markdown]
+  en: |
+    Because **Public Services and Procurement Canada** have not yet submitted their planned Departmental Plans data, 
+    planned FTEs as well as internal services planned spending are unavailable.
+  fr: |
+    Puisque **Services publics et Approvisionnement Canada** n'a pas encore soumis leurs données pour leur plan ministériel, 
+    les ETPs prévus et les dépenses prévues pour les services internes ne sont pas disponibles. 
+
+
+
+missing_dp_info_text:
+  transform: [handlebars,markdown]
+  en: |
+    2018-19 Departmental Plans data is now available. Note that the following elements will be made available once that organization submits their data:
+
+    * Public Services and Procurement Canada - Planned results, full-time equivalents and internal service spending
+    * Canadian Northern Economic Development Agency - Planned results
+    * Shared Services Canada - Planned results
+
+  fr: |
+    L'information des plan ministériels 2018-2019 est maintenant disponible. Notez que les éléments suivants seront disponibles une fois que l'organisation aura soumis leurs données:
+    
+    * Services publics et Approvisionnement Canada - Résultats planifiés, équivalents à temps pleins prévues et dépenses prévues pour les services internes
+    * Services partagés Canada - Résultats planifiés
+    * Agence canadienne de développement économique du Nord - Résultats planifiés

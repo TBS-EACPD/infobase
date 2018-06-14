@@ -645,10 +645,34 @@ const MobileOrA11YContent = ({ children }) => [
 
 function render({calculations, footnotes, sources}){
   const { graph_args, subject } = calculations;
+
+  //remove DRR_FTE and DRR_EXP footnotes (pipeline will handle this later)
+  //in the case of PSPC or gov, add special late DP footnotes
+  let new_footnotes = _.filter(
+    footnotes,
+    ({glossary_keys}) => _.chain(glossary_keys)
+      .intersection(["DRR_FTE", "DRR_EXP"])
+      .isEmpty()
+      .value()
+  );
+  if(subject.level==="gov"){
+    new_footnotes = _.map(
+      [
+        "gov_ftes_missing_footnote",
+        "gov_money_missing_footnote",
+      ], 
+      key => ({ text: text_maker(key) })
+    ).concat(new_footnotes)
+  } if( _.includes( [subject.guid, _.get(subject, "dept.guid")], "dept_136") ){
+    //PSPC 
+    new_footnotes = [{ text: text_maker("pspc_missing_resources") }].concat(new_footnotes);
+  }
+
   return (
     <Panel
       title={text_maker("welcome_mat_title")}
-      {...{sources,footnotes}}
+      sources={sources}
+      footnotes={new_footnotes}
     >
       <WelcomeMat subject={subject} {...graph_args} />
     </Panel>

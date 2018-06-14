@@ -42,40 +42,6 @@ what_is_diff_with_mrrs_a:
     Ceci signifie que les programmes assujettis à la nouvelle politique devront avoir un niveau de détail équivalent aux sous-programmes des ministères, ou à leurs sous-sous-programmes, s’il y a lieu. La nouvelle politique précise toutefois plus clairement l'utilité de ces programmes dans l’atteinte des objectifs du ministère.
 
 
-
-which_orgs_policy_on_results_q:
-  en: Which organizations report under the Policy on Results?
-  fr: Quelles organisations rapportent sous la politique sur les résultats?
-
-which_orgs_policy_on_results_a:
-  transform: [handlebars, markdown]
-  en: |
-    Seven organization will report under the new format in the 2017-18 fiscal year:
-
-      * Canadian Human Rights Commission
-      * Canadian Transportation Accident Investigation and Safety Board
-      * Canada Revenue Agency
-      * National Energy Board
-      * Office of the Commissioner of Lobbying
-      * Parole Board of Canada
-      * Treasury Board of Canada Secretariat
-
-    By the 2018-19 fiscal year this new format will be adopted by all organizations, replacing the Program Alignment Architecture instituted by the rescinded TBS Policy on MRRS.
-  fr: |
-    Au cours de l’exercice 2017-2018, une nouvelle forme de présentation de rapports a été adoptée par sept organisations, conformément à la Politique sur les résultats :
-
-    * Agence du revenu du Canada 
-    * Bureau canadien d'enquête sur les accidents de transport et de la sécurité des transports
-    * Bureau du commissaire au lobbying 
-    * Commission canadienne des droits de la personne 
-    * Commission des libérations conditionnelles du Canada 
-    * Office national de l'énergie 
-    * Secrétariat du Conseil du Trésor du Canada 
-
-    D’ici l’exercice 2018-2019, toutes les organisations auront adopté cette formule, qui remplace l’architecture d’alignement des programmes sous la politique sur la SGRR.
-
-
-
 what_is_a_drf_q:
   en: What is a Departmental Results Framework?
   fr: Qu’est-ce qu’un cadre ministériel des résultats?
@@ -151,7 +117,3 @@ what_are_DPs_and_DRRs_a:
 
     Veillez noter que les société d'État, les entités parlementaires, le Bureau du gouverneur général et certains ministères et organismes ne sont pas tenus de présenter des plans ministériels et des rapports sur les résultats ministériels. Par conséquant, aucun renseignment sur les résultats n'est disponible pour ces organisastions.   
     
-
-late_dept_warning:
-  en: Planned results and resources will be available after this organization submits their data
-  fr: Les résultats et les ressources planifiés seront disponibles après que l'organisation aura soumis ses données
