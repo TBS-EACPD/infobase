@@ -5,7 +5,6 @@
   border-style: solid;
   border-width: 2px;
   text-align: center;
-  padding: 10px;
 }
 
 .bubble-menu > .bubble-button .title,
@@ -28,7 +27,6 @@
     margin: 5px;
     padding: 15px;
     display: flex;
-    border-radius: 100%;
   }
 
   .bubble-button.active {
@@ -62,7 +60,6 @@
   .bubble-button  {
     margin: 2px;
     padding: 10px;
-    border-radius: 10px;
     width: 100% !important;
     height: auto !important;
 
@@ -72,9 +69,6 @@
 
 
 
-.bubble-button {
-  transition: background-color 150ms ease, color  350ms ease;
-}
 .bubble-button:not(.active):not(:hover):not(:active):not(:focus) {
   background-color: transparent;
 }
@@ -90,14 +84,15 @@
 
 @mixin bubble-type($color){
 
-  border-color: $color;
+  border: 3px solid $color;
     
   &:not(.active):not(:hover):not(:focus):not(:active) {
     color: $color;
   }
   
   &.active, &:focus, &:active, &:hover {
-    background-color: $color;
+    border: 3px solid $wetLinkColor;
+    color: $wetLinkColor;
   }
 
 }
@@ -113,31 +108,31 @@
 
 
 .bubble-button.finance-data-type {
-  @include bubble-type(#823BB1);
+  @include bubble-type(#767F89);
 }
 
 .bubble-button.ppl-data-type {
-  @include bubble-type(#2070B9);
+  @include bubble-type(#767F89);
 }
 
 .bubble-button.results-data-type {
-  @include bubble-type(#48998c);
+  @include bubble-type(#767F89);
 }
 
 .bubble-button.intro-data-type {
-  @include bubble-type(#587291);
+  @include bubble-type(#767F89);
 }
 
 
 .bubble-button.related-data-type {
-  @include bubble-type(#114B5F);
+  @include bubble-type(#767F89);
 }
 
 
 .bubble-button.structure-data-type {
-  @include bubble-type(#3E931F);
+  @include bubble-type(#767F89);
 }
 
 .bubble-button.all_data-data-type {
-  @include bubble-type(#009652);
+  @include bubble-type(#767F89);
 }

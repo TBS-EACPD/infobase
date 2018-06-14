@@ -33,7 +33,7 @@ class BubbleMenu extends React.Component {
 
     sel.enter()
       .append('a')
-      .style('height', d => d.active ? '300px' : '150px' )
+      .style('height', d => d.active ? '200px' : '150px' )
       .style('width', d => d.active ? '300px' : '150px' )
       
 
@@ -44,7 +44,7 @@ class BubbleMenu extends React.Component {
       .transition()
       .duration(300)
       .ease(d3.easeLinear)
-      .style('height', d=> d.active ? '300px' : '150px' )
+      .style('height', d=> d.active ? '200px' : '150px' )
       .style('width', d=> d.active ? '300px' : '150px' );
   }
 }
