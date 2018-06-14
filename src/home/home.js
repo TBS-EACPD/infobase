@@ -229,13 +229,13 @@ const HomeLayout = props => (
             />
           </div>
           <div className="fcol-md-4 linkcard">
-             <CardTopImage
-               tmf={home_tm}
-               img_src="svg/explorer.svg"
-               title_key="explorer_home_title"
-               text_key="explorer_home_text"
-               link_href="#resource-explorer"
-             />
+            <CardTopImage
+              tmf={home_tm}
+              img_src="svg/explorer.svg"
+              title_key="explorer_home_title"
+              text_key="explorer_home_text"
+              link_href="#resource-explorer"
+            />
           </div>
           <div className="fcol-md-4 linkcard">
             <CardTopImage
