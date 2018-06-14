@@ -75,7 +75,7 @@ $home-bg-color: #284162;
   & > .frow {
     justify-content: space-around;
     
-    @media(max-width:1024px) and (min-width:610px) {
+    @media(max-width:1023px) and (min-width:611px) {
       & > .fcol-md-4 {
         flex: 1;
       }
