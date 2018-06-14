@@ -11,18 +11,16 @@ const CardTopImage = ({
   text_args,
   tmf,
 }) => (
-  <div className="top-img-card">
-    { img_src &&
-      <div className="top-img-card__top">
-        <a className="top-img-card__img-link"  href={link_href}>
+  <a className="link-unstyled" href={link_href}>
+    <div className="top-img-card">
+      { img_src &&
+        <div className="top-img-card__top">
           <img
             src={`${CDN_URL}/${img_src}`}
             className="top-img-card__img" 
           />
-        </a>
-      </div>
-    }
-    <a href={link_href}>
+        </div>
+      }
       <div className="top-img-card__bottom">
         <header className="top-img-card__title">
           <TM k={title_key} tmf={tmf} args={text_args} />
@@ -31,8 +29,8 @@ const CardTopImage = ({
           <TM k={text_key} tmf={tmf} args={text_args} />
         </div>
       </div>
-    </a>
-  </div>
+    </div>
+  </a>
 )
 
 export { CardTopImage }

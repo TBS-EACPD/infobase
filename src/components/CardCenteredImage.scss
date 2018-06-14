@@ -15,16 +15,16 @@
   |                 Link |
   ------------------------
 
-  structure: 
+  structure:
     .centered-img-card
-      .centered-img-card__left
-        .centered-img-card__title
-        .centered-img-card__text
-      .centered-img-card__right
-        .centered-img-card__img-link
-        .centered-img-card__img
-      .centered-img-card__bottom-right
-        .centered-img-card__link
+      a
+        .centered-img-card__left
+          .centered-img-card__title
+          .centered-img-card__text
+        .centered-img-card__right
+          .centered-img-card__img
+        .centered-img-card__bottom-right
+          .centered-img-card__badge
 */
 
 .centered-img-card {
@@ -55,13 +55,7 @@
 }
 
 .centered-img-card__right {
-  display: flex;
-  width: 100%;
-  margin-top: -15px;
-}
-
-.centered-img-card__img-link {
-  width: 100%;
+  margin-top: -10px;
   min-height: 1px; /* IE11 image bug */
   text-align: center; 
 }
@@ -79,7 +73,7 @@
   justify-content: flex-end;
 }
 
-.centered-img-card__link {
+.centered-img-card__badge {
   color: white;
   text-align: center;
   font-size: 1em;
@@ -87,6 +81,8 @@
   background-color: #FF5e59;
   border-radius: 10px;
   width: 30%;
+  min-width: 85px;
+  max-width: 190px;
   margin-right: 25px;
 
   & > a {

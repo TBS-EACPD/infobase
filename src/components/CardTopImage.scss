@@ -14,15 +14,16 @@
   structure: 
 
   .top-img-card
-    .top-img-card__top
-      .top-img-card__img-link
+    a
+      .top-img-card__top
         .top-img-card__img
-    .top-img-card__bottom
-      .top-img-card__title
-      .top-img-card__text
+      .top-img-card__bottom
+        .top-img-card__title
+        .top-img-card__text
 */
 
 .top-img-card {
+  min-height: 400px;
   text-align: center !important;
   padding: 10px;
   
@@ -40,12 +41,8 @@
   width: 50%;
 }
 
-.top-img-card__img-link {
-  min-height: 1px; /* IE11 image bug */
-}
-
 .top-img-card__bottom {
-  flex-direction: column;;
+  flex-direction: column;
 }
 
 .top-img-card__title {

@@ -14,12 +14,13 @@
   ------------------------
 
   structure: 
-    .background-img-card {with background image}
-      .background-img-card__top-left
-        .background-img-card__title
-        .background-img-card__text
-      .background-img-card__bottom-right
-        .background-img-card__link
+    a
+      .background-img-card {with background image}
+        .background-img-card__top-left
+          .background-img-card__title
+          .background-img-card__text
+        .background-img-card__bottom-right
+          .background-img-card__link
 
 */
 
@@ -62,7 +63,7 @@
   justify-content: flex-end;
 }
 
-.background-img-card__link {
+.background-img-card__badge {
   color: white;
   text-align: center;
   font-size: 1em;
@@ -71,6 +72,7 @@
   border-radius: 10px;
   width: 30%;
   min-width: 85px;
+  max-width: 190px;
 
   &> a {
     color:white;

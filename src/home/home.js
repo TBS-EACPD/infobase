@@ -187,16 +187,15 @@ const HomeLayout = props => (
               </div>
             </div>
 
-            <section>
-              <header className="h3">
-                <TM k="featured_data_title" />
-              </header>
-              <div>
-                <ul className="list-group list-group--quick-links">
-                  { _.map( props.featured_content_items, item => <FeaturedContentItem key={item.text_key} {...item} /> ) }
-                </ul>
-              </div>
-            </section>  
+            <header className="h3">
+              <TM k="featured_data_title" />
+            </header>
+            <div>
+              <ul className="list-group list-group--quick-links">
+                { _.map( props.featured_content_items, item => <FeaturedContentItem key={item.text_key} {...item} /> ) }
+              </ul>
+            </div>
+  
           </div>
         </div>
       </div>
@@ -221,81 +220,67 @@ const HomeLayout = props => (
       <div className="xtralinks">
         <div className='frow'>
           <div className="fcol-md-4 linkcard">
-            <section className="explore-col-content">
-              <CardTopImage
-                tmf={home_tm}
-                img_src="svg/bubbles.svg"
-                title_key="planet_home_title"
-                text_key="planet_home_text"
-                link_href="#explore-dept"
-              />
-            </section>
+            <CardTopImage
+              tmf={home_tm}
+              img_src="svg/bubbles.svg"
+              title_key="planet_home_title"
+              text_key="planet_home_text"
+              link_href="#explore-dept"
+            />
           </div>
           <div className="fcol-md-4 linkcard">
-            <section className="explore-col-content">
-              <CardTopImage
-                tmf={home_tm}
-                img_src="svg/explorer.svg"
-                title_key="explorer_home_title"
-                text_key="explorer_home_text"
-                link_href="#resource-explorer"
-              />
-            </section>
+             <CardTopImage
+               tmf={home_tm}
+               img_src="svg/explorer.svg"
+               title_key="explorer_home_title"
+               text_key="explorer_home_text"
+               link_href="#resource-explorer"
+             />
           </div>
           <div className="fcol-md-4 linkcard">
-            <section className="explore-col-content">
-              <CardTopImage
-                tmf={home_tm}
-                img_src="svg/builder.svg"
-                title_key="home_build_a_report"
-                text_key="report_builder_home_desc"
-                link_href="#rpb"
-              />
-            </section>
+            <CardTopImage
+              tmf={home_tm}
+              img_src="svg/builder.svg"
+              title_key="home_build_a_report"
+              text_key="report_builder_home_desc"
+              link_href="#rpb"
+            />
           </div>
           <div className="fcol-md-4 linkcard">
-            <section className="explore-col-content">
-              <CardTopImage
-                tmf={home_tm}
-                img_src="svg/structure.svg"
-                title_key="igoc_home_title"
-                text_key="igoc_home_desc"
-                link_href="#igoc"
-              />
-            </section>
+            <CardTopImage
+              tmf={home_tm}
+              img_src="svg/structure.svg"
+              title_key="igoc_home_title"
+              text_key="igoc_home_desc"
+              link_href="#igoc"
+            />
           </div>
           <div className="fcol-md-4 linkcard">
-            <section className="explore-col-content">
-              <CardTopImage
-                tmf={home_tm}
-                img_src="svg/glossary.svg"
-                title_key="glossary_home_title"
-                text_key="glossary_home_desc"
-                link_href="#glossary"
-              />
-            </section>
+            <CardTopImage
+              tmf={home_tm}
+              img_src="svg/glossary.svg"
+              title_key="glossary_home_title"
+              text_key="glossary_home_desc"
+              link_href="#glossary"
+            />
           </div>
           <div className="fcol-md-4 linkcard">
-            <section className="explore-col-content">
-              <CardTopImage
-                tmf={home_tm}
-                img_src="svg/metadata.svg"
-                title_key="metadata_home_title"
-                text_key="metadata_home_desc"
-                link_href="#metadata"
-              />
-            </section>
+            <CardTopImage
+              tmf={home_tm}
+              img_src="svg/metadata.svg"
+              title_key="metadata_home_title"
+              text_key="metadata_home_desc"
+              link_href="#metadata"
+            />
           </div>
           <div className="fcol-md-4 linkcard">
-            <section className="explore-col-content">
-              <CardTopImage
-                tmf={home_tm}
-                img_src="svg/aboutus.svg"
-                title_key="about_home_title"
-                text_key="about_home_desc"
-                link_href="#about"
-              />
-            </section>
+            <CardTopImage
+              tmf={home_tm}
+              img_src="svg/aboutus.svg"
+              title_key="about_home_title"
+              text_key="about_home_desc"
+              link_href="#about"
+            />
           </div>
         </div>
       </div>

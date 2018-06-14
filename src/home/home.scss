@@ -49,10 +49,6 @@ $home-bg-color: #284162;
   width: 100%;
 }
 
-.explore-col-content {
-  padding: 10px;
-}
-
 .col-content.misc-col-content {
   color: #333 !important;
   background-color: hsla(210, 45%, 82%, 1);
@@ -157,9 +153,8 @@ $col_gutter_width: 2rem;
 }
 
 .linkcard {
-  border-radius: 3%;
   flex-basis: 100%;
-  min-height: 401.33px;
+  padding: 0px;
   &:hover {
     background-color: rgb(236, 236, 236) !important;
   }
