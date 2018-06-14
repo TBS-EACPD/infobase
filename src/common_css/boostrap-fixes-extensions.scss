@@ -1,7 +1,7 @@
 @import "common-variables";
 
-h1:not(.intro-box){
-  border-bottom: 3px solid $highlightColor !important;
+h1{
+  border-bottom: 3px solid $highlightColor;
 }
 
 hr {
@@ -478,10 +478,6 @@ span.inline-status-icon .glyphicon.v-centered {
 
 ol, ul {
   margin-bottom: 12px;
-}
-
-li.checkbox > input {
-  border:3px solid red !important;
 }
 
 li.checkbox > label{
