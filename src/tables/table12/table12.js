@@ -1,5 +1,5 @@
 exports = module.exports;
-require("./table12.ib.yaml");
+const text = require("./table12.yaml");
 // see [here](../table_definition.html) for description
 // of the table spec
 //
@@ -8,13 +8,14 @@ require("./table12.ib.yaml");
 const {
   STATS, 
   Subject : {Program, Gov},
-  text_maker, 
+  trivial_text_maker, 
   m, 
   Statistics, 
   years : { std_years, planning_years},
 } = require("../table_common");
 
 module.exports = {
+  text,
   "id": "table12",
   source: [ "DP", "DRR" ],
   //"tags" : ["results", "expenditures", "FTE", "planning","report","RPP"],
@@ -118,7 +119,7 @@ module.exports = {
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           //FIXME: this is because I found a program without a goco, 
           const goco = _.first(prog.tags_by_scheme.GOCO)
-          return goco.name || text_maker('unknown');
+          return goco.name || trivial_text_maker('unknown');
         };
         return func;
       },
@@ -133,7 +134,7 @@ module.exports = {
           //FIXME: this is because I found a program without a goco, 
           const goco = _.first(prog.tags_by_scheme.GOCO)
           const sa = goco && goco.parent_tag;
-          return (sa && sa.name) || text_maker('unknown');
+          return (sa && sa.name) || trivial_text_maker('unknown');
         };
         return func;
       },
@@ -148,7 +149,6 @@ module.exports = {
         };
         return func;
       },
-      exclude_from_rpb :true,
     },
   ],
 

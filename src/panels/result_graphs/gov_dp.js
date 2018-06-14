@@ -1,28 +1,24 @@
-import './gov_dp_text.ib.yaml';
+import text from './gov_dp_text.yaml';
 
-const {
-  Subject: {
-    Dept,
-    Program, 
-  },
-  text_maker,
+import {
+  Subject,
+  create_text_maker,
   PanelGraph,
-  reactAdapter,
-  util_components: {
-    TM,
-  },
-} = require("../shared");
+  Panel,
+  TM as StdTM,
+} from "../shared";
 
-
-const {
+import {
   link_to_results_infograph,
   ResultCounts,
-} = require('./results_common.js');
+} from './results_common.js';
 
-const { 
-  QuadrantDefList,
-} = require('./components.js');
+import { QuadrantDefList } from './components.js';
 
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
+
+const { Dept, Program } = Subject;
 
 class ResultsIntroPanel extends React.Component {
   render(){
@@ -114,16 +110,10 @@ new PanelGraph({
   level: 'gov',
   requires_result_counts: true,
   key: "gov_dp",
-  layout: {
-    full: {text: [], graph: 12},
-    half : {text: [], graph: 12},
-  },
-  title : "gov_dp_summary_title",
   calculate: _.constant(true),
-  footnotes: false,
-  render(panel, calculations){
+
+  render({calculations}){
     const { subject } = calculations;
-    const node = panel.areas().graph.node();
 
     const { fw: DRF_depts, sw: PAA_depts }  = _.groupBy(Dept.get_all(), 'dp_status'); 
 
@@ -201,11 +191,10 @@ new PanelGraph({
       second_wave_examples : _.map([128,133,127,295 ], id => Dept.lookup(id) ),
     };
 
-    reactAdapter.render( 
+    return <Panel title={text_maker("gov_dp_summary_title")}>
       <div>
-        { React.createElement(ResultsIntroPanel, props) }
-      </div>, 
-      node
-    );
+        <ResultsIntroPanel  {...props} />
+      </div>
+    </Panel>;
   },
 });

@@ -1,13 +1,14 @@
-const { text_maker } = require('../models/text.js');
+import './SortIndicators.scss';
+import { trivial_text_maker } from '../models/text.js';
 
-const SortIndicator = ({ sortDirection, active }) => (
+export const SortIndicator = ({ sortDirection, active }) => (
   <button
-    className="rpb-sort-indicator"
+    className="SortIndicator"
     style={{ 
       color: "white",
       fontSize: '1.2em',
     }}
-    aria-label={text_maker(
+    aria-label={trivial_text_maker(
       sortDirection === "ASC" ? 
       "a11y_sort_asc" :
       "a11y_sort_desc"  
@@ -27,11 +28,7 @@ const SortIndicator = ({ sortDirection, active }) => (
   </button>
 );
 
-const SortIndicators = ({ asc, desc }) => <div className="text-nowrap">
+export const SortIndicators = ({ asc, desc }) => <div className="text-nowrap">
   <SortIndicator sortDirection="ASC" active={asc} />
   <SortIndicator sortDirection="DESC" active={desc} />
 </div>;
-
-module.exports = exports = {
-  SortIndicators,
-}

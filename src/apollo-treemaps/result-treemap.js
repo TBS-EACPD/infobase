@@ -1,3 +1,4 @@
+import '../gen_expl/explorer-styles.scss';
 import gql from 'graphql-tag';
 import { text_maker } from '../models/text.js';
 

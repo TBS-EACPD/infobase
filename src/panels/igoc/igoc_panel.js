@@ -1,47 +1,36 @@
-require('./igoc_panel.ib.yaml');
+const text = require('./igoc_panel.yaml');
 
 const {
+  create_text_maker,
   PanelGraph,
-  reactAdapter,
   util_components: {
-    TextMaker,
+    TM: StdTM,
   },
-  panel_components: {
-    PanelText,
-  },
+  TextPanel,
 } = require("../shared"); 
+
+const tmf = create_text_maker(text);
+const TM = props => <StdTM tmf={tmf} {...props} />;
 
 
 new PanelGraph({
   level: 'dept',
   title: "org_profile",
   key : "igoc_fields",
-
-  layout : {
-    full :{  graph : [12]},
-    half : { graph : [12]},
-  },
-
   calculate: _.constant(true),
-
-  render(panel,calculations){
+  render({calculations}){
     const { subject } = calculations;
 
-    const view = <PanelText>
-      <div className="medium_panel_text" >
-        <TextMaker 
-          text_key="igoc_data_t" 
+    return (
+      <TextPanel title={tmf("org_profile")}>
+        <TM 
+          k="igoc_data_t"
           args={{ 
             org: subject,
             show_all_fields: subject.status === 'Active',
           }} 
         />
-      </div>
-    </PanelText>
-
-    reactAdapter.render(
-      view, 
-      panel.areas().graph.node() 
+      </TextPanel>
     );
   },
 });
@@ -50,13 +39,6 @@ new PanelGraph({
 new PanelGraph({
   level: 'dept',
   key : "igoc_links",
-  title: "org_links",
-
-  layout : {
-    full :{  graph : [12]},
-    half : { graph : [12]},
-  },
-
   calculate(subject){
     if(subject.status !== 'Active'){
       return false;
@@ -72,18 +54,15 @@ new PanelGraph({
       .value();
   },
 
-  render(panel,calculations){
+  render({calculations}){
     const { subject } = calculations;
 
-    const view = <PanelText>
-      <div className="medium_panel_text" >
-        <TextMaker text_key="igoc_links_t" args={{ org: subject }} />
-      </div>
-    </PanelText>
-
-    reactAdapter.render(
-      view, 
-      panel.areas().graph.node() 
-    );
+    return (
+      <TextPanel
+        title={tmf("org_links")}
+      >
+        <TM k="igoc_links_t" args={{ org: subject }} />
+      </TextPanel>
+    )
   },
 });

@@ -15,7 +15,7 @@ const {
   crsos: crso_search_config,
 } = require('./search_configs.js');
 
-const {text_maker} = require('../models/text.js');
+const {trivial_text_maker} = require('../models/text.js');
 const { reactAdapter } = require('../core/reactAdapter.js');
 const classNames = require('classnames');
 
@@ -136,7 +136,7 @@ class A11YSearch extends React.Component {
 function autoComplete({container, search_configs, onSelect, placeholder, minLength, large, onNewQuery }){
   const debouncedOnQueryCallback = _.isFunction(onNewQuery) ? _.debounce(onNewQuery, 750) : _.noop;
   minLength = minLength || 3;
-  placeholder = placeholder || text_maker("org_search");
+  placeholder = placeholder || trivial_text_maker("org_search");
 
   const nested_search = search_configs.length > 1;
   
@@ -298,7 +298,7 @@ function everythingSearch(container, options={}){
     search_configs,
     onSelect,
     large: !!options.large,
-    placeholder: options.placeholder || text_maker('everything_search_placeholder'),
+    placeholder: options.placeholder || trivial_text_maker('everything_search_placeholder'),
     onNewQuery,
   });
 }

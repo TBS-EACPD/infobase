@@ -30,6 +30,10 @@ import { About } from '../about/about.js';
 
 
 export class App extends React.Component {
+  constructor(){
+    super();
+    initialize_analytics();
+  }
   render(){
     return (
       <div tabIndex={-1} id="app-focus-root">
@@ -50,9 +54,6 @@ export class App extends React.Component {
         </Switch>
       </div>
     );
-  }
-  UNSAFE_componentWillMount(){
-    initialize_analytics();
   }
 }
 

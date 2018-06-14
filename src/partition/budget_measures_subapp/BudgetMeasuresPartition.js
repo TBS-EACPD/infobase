@@ -1,19 +1,19 @@
-import './BudgetMeasuresPartition.ib.yaml';
 import './BudgetMeasuresPartition.scss';
 
-import * as Subject from '../../models/subject';
+
+
 
 import { PartitionDiagram } from '../partition_diagram/PartitionDiagram.js';
 import { formats } from '../../core/format.js';
-import { text_maker } from "../../models/text";
+import { text_maker } from "./budget_measure_text_provider.js";
 
 import { budget_measures_hierarchy_factory } from './budget_measures_hierarchy_factory.js';
 
+import * as Subject from '../../models/subject';
 import * as businessConstants from '../../models/businessConstants.yaml';
 
 const { budget_chapters } = businessConstants;
-
-import { make_budget_link } from './budget_utils.js';
+const { BudgetMeasure } = Subject;
 
 const year = text_maker("budget_route_year");
 
@@ -75,7 +75,7 @@ const popup_template = node => {
     notes: !_.isUndefined(node.data.notes) && !_.isEmpty(node.data.notes) && node.data.notes,
     chapter: !_.isUndefined(node.data.chapter_key) && budget_chapters[node.data.chapter_key].text,
     budget_link: !_.isUndefined(node.data.chapter_key) && ( (node.data.chapter_key === "oth" && node.data.type !== "net_adjust") || !_.isEmpty(node.data.ref_id) ) && 
-      make_budget_link(node.data.chapter_key, node.data.ref_id),
+      BudgetMeasure.make_budget_link(node.data.chapter_key, node.data.ref_id),
     level: node.data.type,
     id: node.data.id,
     focus_text: node.magnified ? text_maker("partition_unfocus_button") : text_maker("partition_focus_button"),
@@ -164,7 +164,7 @@ const update_with_search = (diagram, props) => {
 }
 
 const render_diagram = (diagram, props, data, data_wrapper_node_rules, dont_fade) => {
-  const displayed_measure_count = _.filter(Subject.BudgetMeasure.get_all(), (budgetMeasure) => {
+  const displayed_measure_count = _.filter(BudgetMeasure.get_all(), (budgetMeasure) => {
     return _.indexOf(props.filtered_chapter_keys, budgetMeasure.chapter_key) === -1;
   }).length;
 

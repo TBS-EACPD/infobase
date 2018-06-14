@@ -9,28 +9,28 @@ const CardBackgroundImage = ({
   link_key,
   link_href,
   text_args,
+  tmf,
 }) => (
-  <div 
-    className="background-img-card" 
-    style={{ backgroundImage: img_src && `URL(${CDN_URL}/${img_src})`}}
-    href={link_href}
-  >
-    <div className="background-img-card__top-left">
-      <header className="background-img-card__title">
-        <TM k={title_key}/>
-      </header>
-      <div className="background-img-card__text">
-        <TM k={text_key} args={text_args} />
+  <a className="link-unstyled" href={link_href}>
+    <div 
+      className="background-img-card" 
+      style={{ backgroundImage: img_src && `URL(${CDN_URL}/${img_src})`}}
+    >
+      <div className="background-img-card__top-left">
+        <header className="background-img-card__title">
+          <TM k={title_key} tmf={tmf} args={text_args} />
+        </header>
+        <div className="background-img-card__text">
+          <TM k={text_key} tmf={tmf} args={text_args} />
+        </div>
+      </div>
+      <div className="background-img-card__bottom-right">
+        <div className="background-img-card__badge">
+          <TM k={link_key} tmf={tmf} args={text_args} />
+        </div>
       </div>
     </div>
-    <div className="background-img-card__bottom-right">
-      <div className="background-img-card__link">
-        <a href={link_href}>
-          <TM k={link_key}/>
-        </a>
-      </div>
-    </div>
-  </div>
+  </a>
 )
 
 export { CardBackgroundImage }

@@ -9,6 +9,10 @@
   
 */
 
+[class*='fcol-md'] {
+  width:100%;  
+}
+
 .fcontainer-fluid, .fcontainer {
   margin-right: auto;
   margin-left: auto;

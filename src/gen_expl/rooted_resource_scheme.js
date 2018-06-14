@@ -1,5 +1,5 @@
 const { createSelector } = require('reselect');
-const { text_maker } = require('../models/text.js');
+const { trivial_text_maker } = require('../models/text.js');
 
 const { shallowEqualObjectsOverKeys } = require('../core/utils.js');
 
@@ -43,7 +43,7 @@ function create_rooted_resource_hierarchy({doc,root_subject}){
       },
     } = node;
 
-    const description_term = text_maker('description');
+    const description_term = trivial_text_maker('description');
     
     switch(subject.level){
 

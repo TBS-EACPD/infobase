@@ -1,10 +1,7 @@
+const { text_maker, TM } = require('./intro_graph_text_provider');
 const {
   PanelGraph,
-  reactAdapter,
-  panel_components: {
-    PanelText,
-  },
-  text_maker,
+  TextPanel,
 } = require("../shared"); 
 
 const { rpb_link } = require('../../link_utils.js');
@@ -33,20 +30,16 @@ const get_table_type = table => (
 new PanelGraph({
   level: 'dept',
   key : "links_to_rpb",
-  title: "links_to_rpb_title",
-  text: "links_to_rpb_text",
-  layout : {
-    full :{  graph : [12]},
-    half : { graph : [12]},
-  },
   footnotes: false,
+
   calculate(subject){
     return !_.chain(subject.tables)
       .compact()
       .isEmpty()
       .value();
   },
-  render(panel,calculations){
+
+  render({calculations}){
     const { subject } = calculations;
 
     const list_args = _.chain(subject.tables)
@@ -68,18 +61,11 @@ new PanelGraph({
           .value(),
       }))
       .value()
-    
-    const view = <PanelText>
-      <div className="medium_panel_text">
-        <WellList elements={list_args} />
-      </div>
-    </PanelText>;
 
-
-    reactAdapter.render(
-      view, 
-      panel.areas().graph.node() 
-    );
+    return <TextPanel title={text_maker("links_to_rpb_title")}>
+      <TM k="links_to_rpb_text"/>
+      <WellList elements={list_args} />
+    </TextPanel>;
   },
 });
 
@@ -87,14 +73,9 @@ new PanelGraph({
   level: 'gov',
   key : "links_to_rpb",
   footnotes: false,
-  layout : {
-    full :{  graph : [12]},
-    half : { graph : [12]},
-  },
-  title: "links_to_rpb_title",
-  text: "links_to_rpb_text",
   calculate: _.constant(true),
-  render(panel,calculations){
+
+  render({calculations}){
     const { subject } = calculations;
 
     const list_args = _.chain(Table.get_all())
@@ -112,16 +93,10 @@ new PanelGraph({
       }))
       .value()
     
-    const view = <PanelText>
-      <div className="medium_panel_text">
-        <WellList elements={list_args} />
-      </div>
-    </PanelText>;
+    return <TextPanel title={text_maker("links_to_rpb_title")}>
+      <TM k="links_to_rpb_text"/>
+      <WellList elements={list_args} />
+    </TextPanel>;
 
-
-    reactAdapter.render(
-      view, 
-      panel.areas().graph.node() 
-    );
   },
 });

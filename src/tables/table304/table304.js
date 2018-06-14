@@ -1,7 +1,7 @@
-import "./table304.ib.yaml";
+import text from "./table304.yaml";
 
 import {
-  text_maker, 
+  trivial_text_maker, 
   m, 
   Statistics, 
   years,
@@ -13,6 +13,7 @@ const {
 } = years;
 
 export default {
+  text,
   "id": "table304",
   source: ["RPS"],
   "tags" : [
@@ -48,7 +49,7 @@ export default {
       "key": true,
       "hidden": true,
       "nick": "avgage",
-      "header": text_maker("avgage"),
+      "header": trivial_text_maker("avgage"),
     });
     _.each(people_years, (header,ix)=>{
       this.add_col({
@@ -79,7 +80,7 @@ export default {
   },
 
   "mapper": function (row) { 
-    row.splice(1,1,text_maker("avgage"));
+    row.splice(1,1,trivial_text_maker("avgage"));
     return row;
   },
 
@@ -116,7 +117,7 @@ export default {
 
       filter_func :function(options){
         return function(row){
-          return text_maker("fps");
+          return trivial_text_maker("fps");
         };
       },
     },

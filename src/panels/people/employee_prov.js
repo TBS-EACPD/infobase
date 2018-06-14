@@ -1,20 +1,25 @@
-import "./employee_prov.ib.yaml";
+import text from "./employee_prov.yaml";
 import {
   formats,
-  text_maker,
   run_template,
   PanelGraph,
   years,
   business_constants,
   charts_index,
+  create_text_maker,
+  TM as StdTM,
+  StdPanel,
+  Col,
 } from "../shared"; 
 
-const { provinces } = business_constants;
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
+
 const {people_years} = years;
+const {provinces} = business_constants;
 
-const prov_split_render = function(panel,data,options){
 
-  const { graph_args } = data;
+const prov_split_render = function(graph_node, graph_args){
   
   const has_qc = _.chain(graph_args.years_by_province)
     .map(d => _.has(d, "qclessncr"))
@@ -53,7 +58,7 @@ const prov_split_render = function(panel,data,options){
   
     let historical_graph_container;
   
-    const row = panel.areas().graph.append("div").classed("frow no-container",true);
+    const row = graph_node.append("div").classed("frow no-container",true);
     const legend_area = row.append("div").classed("fcol-md-3 fcol-xs-12",true);
     const graph_area = row.append("div")
       .classed("fcol-md-9 fcol-xs-12",true)
@@ -232,7 +237,7 @@ const prov_split_render = function(panel,data,options){
       .value();
 
     charts_index.create_a11y_table({
-      container: panel.areas().graph, 
+      container: graph_node, 
       label_col_header: text_maker("prov"), 
       data_col_headers: [..._.map(people_years, y => `${run_template(y)}`), text_maker("five_year_percent_header")], 
       data: _.chain(ordered_provs)
@@ -259,56 +264,70 @@ const prov_split_render = function(panel,data,options){
 
 };
 
-new PanelGraph({
-  level: "dept",
-  key: "employee_prov",
-  info_deps: [
+class ProvPanel extends React.Component {
+  constructor(){
+    super();
+    this.graph_col = React.createRef();
+  }
+  componentDidMount(){
+    const { graph_args } = this.props.render_args.calculations;
+    const graph_node = d3.select(ReactDOM.findDOMNode(this.graph_col.current));
+    prov_split_render(graph_node, graph_args);
+  }
+  render(){
+    const {
+      calculations,
+      footnotes,
+      sources,
+      level,
+    } = this.props.render_args;
+
+    const { info } = calculations;
+
+    return (
+      <StdPanel
+        title={text_maker("employee_prov_title")}
+        {...{footnotes, sources}}
+      >
+        <Col size={12} isText>
+          <TM k={level+"_employee_prov_text"} args={info} />
+        </Col>
+        <Col size={12} isGraph passedRef={this.graph_col}/>
+      </StdPanel>
+    );
+  }
+}
+
+const info_deps_by_level = {
+  gov: ['table10_gov_info'],
+  dept: [
+    'table10_gov_info',
     'table10_dept_info',
-    'table10_gov_info',
   ],
-  depends_on: ['table10'],
+};
 
-  layout: {
-    full: {text: 12, graph: [3,9]},
-    half: {text: 12, graph: [12,12]},
-  },
-
-  text: "dept_employee_prov_text",
-  title: "employee_prov_title",
-  include_in_bubble_menu: true,
-  bubble_text_label: "geo_region",
-
-  calculate(subject){
+const calculate_funcs_by_level = {
+  gov: function(){
     const {table10} = this.tables;
-    return { years_by_province : people_years.map( year => table10.prov_code(year,subject.unique_id)) };
+    return {years_by_province: people_years.map( year => table10.prov_code(year,false) )};
   },
-
-  render: prov_split_render,
-});
-
-new PanelGraph({
-  level: "gov",
-  key: "employee_prov",
-  depends_on: ['table10'],
-
-  info_deps: [
-    'table10_gov_info',
-  ],
-  layout: {
-    full: {text: 12, graph: 12},
-    half: {text: 12, graph: 12},
-  },
-
-  text: "gov_employee_prov_text",
-  title: "employee_prov_title",
-  include_in_bubble_menu: true,
-  bubble_text_label: "geo_region",
-
-  calculate(){
+  dept: function(subject){
     const {table10} = this.tables;
-    return { years_by_province : people_years.map( year => table10.prov_code(year,false)) };
+    return {years_by_province: people_years.map( year => table10.prov_code(year, subject.unique_id) )};
   },
+};
 
-  render: prov_split_render,
-});
+["gov", "dept"].map(
+  level => new PanelGraph({
+    key: "employee_prov",
+    level: level,
+    depends_on: ['table10'],
+    info_deps: info_deps_by_level[level],
+    calculate: calculate_funcs_by_level[level],
+    
+    render(render_args){
+      return <ProvPanel render_args={{...render_args, level}}/>;
+    },
+  })
+);
 

@@ -1,14 +1,14 @@
-import "./home.ib.yaml";
-import "./home-a11y.ib.yaml";
+import text1 from "./home.yaml";
+import text2 from "./home-a11y.yaml";
 
 import get_home_content from './home-data.js';
 
-import { ensure_loaded } from '../core/lazy_loader.js';
-import { ResultCounts } from '../models/results.js';
-import { Table } from '../core/TableClass.js';
-
 import { StandardRouteContainer } from '../core/NavComponents.js';
-import { TM } from '../util_components.js';
+import {create_text_maker} from '../models/text.js';
+import { TM as StdTM } from '../util_components.js';
+
+const text_maker = create_text_maker([text1, text2]);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 export const Home = () => {
 
@@ -52,7 +52,7 @@ export const Home = () => {
 
         <section>
           <h3>
-            <a href="#budget-measures/">
+            <a href="#budget-measures/budget-measure">
               <TM k="budget_home_title" />
             </a>
           </h3>

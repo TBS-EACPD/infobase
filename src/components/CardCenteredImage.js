@@ -10,38 +10,35 @@ const CardCenteredImage = ({
   link_key,
   link_href,
   text_args,
+  tmf,
 }) => (
-  <div className="centered-img-card">
-    <div className="centered-img-card__left-container">
+  <a className="link-unstyled" href={link_href}>
+    <div className="centered-img-card">
       <div className="centered-img-card__left">
         <header className="centered-img-card__title">
-          <TM k={title_key}/>
+          <TM k={title_key} tmf={tmf} args={text_args} />
         </header>
         <div className="centered-img-card__text">
-          <TM k={text_key} args={text_args} />
+          <TM k={text_key} tmf={tmf} args={text_args} />
         </div>
       </div>
-    </div>
-    { img_src &&
-      <div>
-        <div className="centered-img-card__right">
-          <a className="centered-img-card__img-link" href={link_href}>
+      { img_src &&
+        <div>
+          <div className="centered-img-card__right">
             <img
               src={`${CDN_URL}/${img_src}`}
               className={classNames("centered-img-card__img")}
             />
-          </a>
-        </div>
-        <div className="centered-img-card__bottom-right">
-          <div className="centered-img-card__link">
-            <a href={link_href}>
-              <TM k={link_key}/>
-            </a>
+          </div>
+          <div className="centered-img-card__bottom-right">
+            <div className="centered-img-card__badge">
+              <TM k={link_key} tmf={tmf} args={text_args} />
+            </div>
           </div>
         </div>
-      </div>
-    }
-  </div>
+      }
+    </div>
+  </a>
 )
 
 export { CardCenteredImage }

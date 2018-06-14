@@ -1,4 +1,5 @@
-import "./sub_program_resources.ib.yaml";
+import '../../gen_expl/explorer-styles.scss';
+import text from "./sub_program_resources.yaml";
 
 import { createSelector } from 'reselect';
 import classNames from 'classnames';
@@ -12,13 +13,13 @@ import {
 
 import {
   PanelGraph,
-  reactAdapter,
   Subject,
   PlannedActualTable,
-  util_components,
-  text_maker,
   Results,
   utils,
+  create_text_maker,
+  Panel,
+  TM as StdTM,
 } from "../shared";
 
 
@@ -40,14 +41,13 @@ import {
 
 const { get_by_guid } = Subject;
 
+const text_maker = create_text_maker(text);
+const TM = props => <StdTM tmf={text_maker} {...props} />;
+
 const {
   SubProgramEntity,
   ResultCounts,
 } = Results;
-
-const {
-  TextMaker,
-} = util_components;
 
 const { 
   shallowEqualObjectsOverKeys,
@@ -136,7 +136,7 @@ const get_non_col_renderer = ({doc}) => ({node}) => {
       }
       { !_.isEmpty(notes) &&
         <div style={{padding: "10px 20px 10px 0", borderTop: "1px solid #ccc"}}>
-          <header className="agnostic-header"> <TextMaker text_key="notes" /> </header>
+          <header className="agnostic-header"> <TM k="notes" /> </header>
           <ul>
             {_.map(notes, note => 
               <li key={note}>
@@ -261,12 +261,12 @@ class SubProgramResourceTree extends React.Component {
         <ul className="tabbed_content_label_bar">
           <li className={classNames("tab_label", doc==="drr16" && "active_tab")} onClick={()=> tab_on_click('drr16')}>
             <span tabIndex={0} role="button" aria-pressed={doc === "drr16"} className="tab_label_text" onClick={()=> tab_on_click('drr16')} onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('drr16')}>
-              <TextMaker text_key="sub_program_DRR_title" />
+              <TM k="sub_program_DRR_title" />
             </span>
           </li>
           <li className={classNames("tab_label", doc==="dp17" && "active_tab")} onClick={()=> tab_on_click('dp17')}>
             <span tabIndex={0} role="button" aria-pressed={doc === "dp17"} className="tab_label_text" onClick={()=> tab_on_click('dp17')} onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('dp17')}>
-              <TextMaker text_key="sub_program_DP_title" />
+              <TM k="sub_program_DP_title" />
             </span>
           </li>
         </ul>
@@ -349,10 +349,6 @@ new PanelGraph({
   footnotes:false,
   depends_on : ['table12'],
   source: false,
-  layout: {
-    full: { graph: 12},
-    half: { graph: 12},
-  },
   calculate(subject){
     
     const t12_q = this.tables.table12.q(subject);
@@ -389,7 +385,8 @@ new PanelGraph({
       has_drr_data,
     };
   },
-  render(panel, calculations){
+
+  render({calculations, footnotes, sources}){
     const { 
       subject, 
       graph_args: {
@@ -412,40 +409,44 @@ new PanelGraph({
     } else if(!has_drr_data){
       title_key = "sub_program_resources_title__dp";
     }
-    panel.areas().title.html(text_maker(title_key));
  
-    
-    const node = panel.areas().graph.node();
-    reactAdapter.render(
-      <SubProgramResourceTreeContainer 
-        subject={subject} 
-        has_dp_data={has_dp_data}
-        has_drr_data={has_drr_data}
-        get_text={doc => 
-          <TextMaker 
-            text_key={ doc === 'drr16' ? "sub_program_resources_drr_text" : "sub_program_resources_dp_text" }
-            args={
-              doc === 'drr16' ?
-              {
-                subject,
-                num_subs: drr_subs.length,
-                has_sub_subs : _.nonEmpty(drr_sub_subs),
-                num_sub_subs: drr_sub_subs.length,
-                ftes: drr_ftes,
-              } :
-              {
-                subject,
-                num_subs: dp_subs.length,
-                has_sub_subs : _.nonEmpty(dp_sub_subs),
-                num_sub_subs: dp_sub_subs.length,
-                ftes: dp_ftes,
+    return (
+      <Panel
+        title={text_maker(title_key)}
+        {...{footnotes,sources}}
+      >
+        <SubProgramResourceTreeContainer 
+          subject={subject} 
+          has_dp_data={has_dp_data}
+          has_drr_data={has_drr_data}
+          get_text={doc => 
+            <TM
+              k={
+                doc === 'drr16' ? 
+                "sub_program_resources_drr_text" : 
+                "sub_program_resources_dp_text" 
               }
-            }
-          />
-        }
-      />, 
-      node
+              args={
+                doc === 'drr16' ?
+                {
+                  subject,
+                  num_subs: drr_subs.length,
+                  has_sub_subs : _.nonEmpty(drr_sub_subs),
+                  num_sub_subs: drr_sub_subs.length,
+                  ftes: drr_ftes,
+                } :
+                {
+                  subject,
+                  num_subs: dp_subs.length,
+                  has_sub_subs : _.nonEmpty(dp_sub_subs),
+                  num_sub_subs: dp_sub_subs.length,
+                  ftes: dp_ftes,
+                }
+              }
+            />
+          }
+        />
+      </Panel>
     );
-
   },
 });

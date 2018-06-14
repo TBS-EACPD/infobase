@@ -17,9 +17,6 @@ window._Subject = require("../models/subject");
 
 require("../tables/table_common");
 
-require("../common_templates/templates.ib.yaml");
-require("../common_text/common_lang.ib.yaml");
-require("../common_text/igoc-lang.ib.yaml");
 require("../handlebars/helpers");
 
 //this is mostly d3.category10 with re-ordered colours, and replacing the base blue with the canada.ca header color

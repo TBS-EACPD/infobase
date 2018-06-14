@@ -1,4 +1,3 @@
-require('./igoc_explorer.ib.yaml');
 require('./igoc_explorer.scss');
 
 const { StandardRouteContainer } = require('../core/NavComponents.js');
@@ -16,12 +15,10 @@ const { Explorer } = require('./explorer_view.js');
 const { filter_hierarchy } = require('../gen_expl/hierarchy_tools.js');
 
 
-const { text_maker } =  require('../models/text.js');
-const {
+const { 
+  igoc_tmf: text_maker, 
   TM,
-} = require('../util_components.js');
-
-
+} =  require('./igoc_explorer_text.js');
 
 const {
   get_memoized_funcs,
@@ -101,8 +98,10 @@ const scheme = {
 //Trying to use a functional component here results in re-creating the redux store, connecter functions and Container component. 
 //Instead, this component will own those long-term objects and keep the store updated with URL changes. 
 class ExplorerContainer extends React.Component {
-  UNSAFE_componentWillMount(){
-    const { grouping } = this.props;
+  constructor(props){
+    super();
+
+    const { grouping } = props;
 
     const scheme_key = scheme.key;
 
@@ -126,23 +125,25 @@ class ExplorerContainer extends React.Component {
       },
     };
 
-
     const connecter = connect(mapStateToProps, mapDispatchToProps);
     const Container = connecter(Explorer);
     const store = createStore(reducer,initialState);
 
-    this.store = store;
-    this.Container = Container;
+    this.state = {
+      store,
+      Container,
+    }
   }
-  UNSAFE_componentWillUpdate(nextProps){
+  static getDerivedStateFromProps(nextProps, prevState){
     const { grouping } = nextProps;
-    this.store.dispatch({
+    prevState.store.dispatch({
       type: 'set_grouping',
       payload: grouping,
     });
+    return null;
   }
   render(){
-    const { store, Container } = this;
+    const { store, Container } = this.state;
 
     return (
       <Provider store={store}>

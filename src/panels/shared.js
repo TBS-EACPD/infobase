@@ -1,14 +1,19 @@
 exports = module.exports
-const {text_maker, run_template } = require( "../models/text");
+const {create_text_maker, trivial_text_maker, text_maker, run_template } = require( "../models/text");
 const {formats} = require('../core/format.js');
 const {PanelGraph, layout_types} = require("../core/PanelGraph.js");
+const { 
+  Panel,
+  StdPanel,
+  TextPanel,
+  Col,
+} = require('../components/panel-components.js');
 const { reactAdapter } = require('../core/reactAdapter');
 const { 
   HeightClipper,
   TabbedContent,
   TM,
 } = require('../util_components.js');
-const { find_parent } = require('../core/utils.js');
 
 const declarative_charts = require('../charts/declarative_charts.js');
 
@@ -26,8 +31,16 @@ exports.rpb_link = require('../rpb/rpb_link.js').rpb_link;
 exports.Subject = require("../models/subject");
 exports.formats = formats;
 exports.text_maker = text_maker; 
+exports.trivial_text_maker = trivial_text_maker; 
+exports.create_text_maker = create_text_maker;
 exports.run_template = run_template;
 exports.PanelGraph = PanelGraph;
+
+exports.StdPanel = StdPanel;
+exports.TextPanel = TextPanel;
+exports.Panel = Panel;
+exports.Col = Col;
+
 exports.layout_types = layout_types;
 exports.years = require("../models/years.js").years;
 exports.business_constants = require('../models/businessConstants.js'),
@@ -36,22 +49,17 @@ exports.FootNote = require("../models/footnotes");
 exports.reactAdapter = require('../core/reactAdapter').reactAdapter;
 exports.TabbedContent = TabbedContent;
 exports.util_components = require('../util_components');
-exports.panel_components = require('../panel_components');
 exports.infograph_href_template = require('../infographic/routes.js').infograph_href_template;
 exports.glossary_href = require('../link_utils.js').glossary_href;
 exports.Results = require('../models/results.js');
 exports.Statistics = require('../core/Statistics.js').Statistics;
+exports.TM = TM;
 
 const {
   Format,
 } = util_components;
 
-exports.create_ppl_share_pie = function({
-  pie_area,
-  graph_args, 
-  label_col_header,
-  sort_func,
-}) {
+exports.PplSharePie = ({graph_args, label_col_header, sort_func}) => {
   sort_func = sort_func || ((a,b) => b.value-a.value);
 
   const data = graph_args
@@ -73,62 +81,49 @@ exports.create_ppl_share_pie = function({
     id: label,
   }));
 
-  reactAdapter.render(
-    <div aria-hidden={true}
-      className="ppl-share-pie-area"
-    >
-      <div className="ppl-share-pie-graph">
-        <SafePie 
-          label_attr={false}
-          showLabels={false}
-          color={color_scale}
-          pct_formatter={formats.percentage1}
-          data={data}
-          inner_radius={true}
-          inner_text={true}
-          inner_text_fmt={formats.compact1_raw}
-          inner_text_content={label_col_header}
-        />
-      </div>
-      <div className="ppl-share-pie-legend">
-        <div className="centerer">
-          <div className="centerer-IE-fix">
-            <span className="ppl-share-percent-header">
-              {text_maker("five_year_percent_header")}
-            </span>
-            <TabularPercentLegend
-              items={legend_items}
-              get_right_content={item => 
-                <span>
-                  <Format type="percentage1" content={item.value} />
-                </span>
-              }
-            />
-          </div>
+  return <div aria-hidden={true}
+    className="ppl-share-pie-area"
+  >
+    <div className="ppl-share-pie-graph">
+      <SafePie 
+        label_attr={false}
+        showLabels={false}
+        color={color_scale}
+        pct_formatter={formats.percentage1}
+        data={data}
+        inner_radius={true}
+        inner_text={true}
+        inner_text_fmt={formats.compact1_raw}
+        inner_text_content={label_col_header}
+      />
+    </div>
+    <div className="ppl-share-pie-legend">
+      <div className="centerer">
+        <div className="centerer-IE-fix">
+          <span className="ppl-share-percent-header">
+            {trivial_text_maker("five_year_percent_header")}
+          </span>
+          <TabularPercentLegend
+            items={legend_items}
+            get_right_content={item => 
+              <span>
+                <Format type="percentage1" content={item.value} />
+              </span>
+            }
+          />
         </div>
       </div>
-    </div>,
-    pie_area.node()
-  );
+    </div>
+  </div>;
 };
 
-// Adds a new row to the bottom of a panel containing a height clipped create_graph_with_legend graph. Adds a11y tables outside of HeightClipper.
-exports.create_height_clipped_graph_with_legend = function(panel,create_graph_with_legend_options) {
-  const panel_body = d3.select(find_parent(panel.areas().graph.node(), n => d3.select(n).classed("panel-body")));
-  const new_row = panel_body
-    .insert("div",".panel-body > div.frow:not(.middle-xs)")
-    .classed("frow middle-xs",true)
-    .style("margin-top", "-20px");
-
-  reactAdapter.render(
-    <div className="fcol-xs-12 fcol-sm- graphic fcol-md-12 mrgn-bttm-sm">
-      <HeightClipper clipHeight={185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient gradient-strong"}>
-        <div className="height-clipped-graph-area" aria-hidden={true}>
-          <D3GraphWithLegend panel={panel} options={create_graph_with_legend_options}/>
-        </div>
-      </HeightClipper>
-    </div>, 
-    new_row.node()
+exports.HeightClippedGraphWithLegend = ({create_graph_with_legend_options}) => {
+  return (
+    <HeightClipper clipHeight={185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient gradient-strong"}>
+      <div className="height-clipped-graph-area" aria-hidden={true}>
+        <D3GraphWithLegend options={create_graph_with_legend_options}/>
+      </div>
+    </HeightClipper>
   );
 };
 
@@ -164,6 +159,8 @@ exports.sum_a_tag_col = function sum_tag_col(tag, table, col){
     .reduce( ( (acc,amt) => acc + amt) , 0 )
     .value();
 };
+
+
 
 exports.common_react_donut = function render(panel, calculations, options){
   const { graph_args } = calculations;
@@ -230,6 +227,71 @@ exports.common_react_donut = function render(panel, calculations, options){
       }
     </div>,
     node
+  );
+
+}
+
+exports.CommonDonut = function({data}){
+
+  const color_scale = infobase_colors();
+
+  const total = d3.sum(data, _.property('value'));
+
+  const has_neg = _.chain(data)
+    .map('value')
+    .min()
+    .value() < 0;
+
+  const legend_items = !has_neg && _.chain(data)
+    .sortBy('value')
+    .reverse()
+    .map( ({value, label }) => ({
+      value,
+      label,
+      color: color_scale(label),
+      id: label,
+    }))
+    .value();
+
+  return (
+    <div aria-hidden={true}>
+      <SafePie 
+        label_attr={false}
+        showLabels={false}
+        color={color_scale}
+        pct_formatter={formats.percentage1}
+        data={data}
+        inner_radius={true}
+        inner_text={true}
+        inner_text_fmt={formats.compact1_raw}
+        height={this.height || null}
+      />
+      { !has_neg && 
+        <div className="centerer" style={{marginTop: "-40px"}}>
+          <div 
+            style={{
+              width: "100%", /* IE 11 */ 
+              maxWidth: '400px', 
+              flexGrow: 1,
+            }}
+          >
+            <TabularPercentLegend
+              items={legend_items}
+              get_right_content={item => 
+                <div style={{width: "120px", display: "flex"}}>
+                  <div style={{width: "60px"}}>
+                    <Format type="compact1" content={item.value} />  
+                  </div>
+                  <div style={{width: "60px"}}>
+                    (<Format type="percentage1" content={(item.value)*Math.pow(total,-1)} />)
+                  </div>
+                </div>
+              }
+            />
+          </div>
+        </div>
+      }
+    </div>
   );
 
 }

@@ -1,12 +1,11 @@
+const { TextMaker, text_maker } = require('./rpb_text_provider.js');
 const {
   Gov, 
 } = require("../models/subject");
 const { 
   sources: all_sources, 
 } = require('../metadata/data_sources.js');
-const { text_maker } = require('../models/text');
 const {
-  TextMaker,
   DeptSearch,
   FancyUL,
 } = require('../util_components.js');

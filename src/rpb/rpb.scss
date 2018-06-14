@@ -100,41 +100,7 @@ li.select-list-item {
 }
 
 
-.table-dark-blue > thead > tr {
-  background-color: rgb(37, 114, 180);
-}
-.table-dark-blue > thead > tr > th {
-  color: white;
-}
-.table-dark-blue > thead > tr > td,
-.table-dark-blue > thead > tr > th {
-  font-weight: $mediumFontWeight;
-}
 
-
-.table-dark-blue > tbody > tr {
-  transition: background-color 500ms ease-in;
-}
-
-.table-dark-blue > tbody > tr:nth-child(even) {
-  background-color: #f4f4f4;
-}
-
-.table-dark-blue > tbody > tr:nth-child(odd) {
-  background-color: rgba(37,114,180,0.2);
-}
-
-.table-dark-blue:not(.no-total-row) > tbody > tr:last-child {
-  background-color: rgb(37, 114, 180);
-}
-
-.table-dark-blue:not(.no-total-row) > tbody > tr:last-child > td {
-  color: white;
-}
-
-.table-dark-blue:not(.no-total-row) > tbody > tr:last-child > td:not(:last-child) {
-  border-right: 1px solid #bbb !important;
-}
 
 .rpb-data-cell {
   text-align: right;
@@ -154,13 +120,6 @@ li.select-list-item {
   }
 }
 
-.rpb-sort-indicator {
-  @include unstyled-button;
-  background-color: rgba(0, 0, 0, 0) /* stupid IE issue doesn't inherit background color properly */
-}
-.rpb-sort-indicator:focus {
-  border: 1px dotted white;   
-}
 
 .pagination-container {
   display: flex;
