@@ -1,13 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 347 324.59">
-  <title>lol</title>
-  <g>
-    <rect x="53.83" y="145.44" width="71.12" height="103.06" rx="12.75" ry="12.75" fill="#fff"/>
-    <ellipse cx="89.39" cy="99.55" rx="19" ry="19.6" fill="#fff"/>
-    <ellipse cx="89.39" cy="155.38" rx="35.56" ry="24.35" fill="#fff"/>
-    <rect x="193.79" y="47.71" width="32.67" height="97.14" rx="6.24" ry="6.24" transform="translate(306.41 -113.84) rotate(90)" fill="#ff5e59" stroke="#fff" stroke-miterlimit="10"/>
-    <rect x="183.41" y="148.69" width="32.67" height="76.38" rx="6.26" ry="6.26" transform="translate(386.62 -12.86) rotate(90)" fill="#ff5e59" stroke="#fff" stroke-miterlimit="10"/>
-    <rect x="205" y="172.39" width="32.67" height="119.56" rx="6.26" ry="6.26" transform="translate(453.5 10.84) rotate(90)" fill="#ff5e59" stroke="#fff" stroke-miterlimit="10"/>
-    <rect x="211.03" y="75.77" width="32.67" height="131.62" rx="6.23" ry="6.23" transform="translate(368.94 -85.78) rotate(90)" fill="#ff5e59" stroke="#fff" stroke-miterlimit="10"/>
-    <rect x="136.74" y="67.08" width="13.02" height="190.42" rx="3.96" ry="3.96" fill="#fff"/>
-  </g>
-</svg>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="257" height="240.4" viewBox="0 0 257 240.4"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#ff5e59;stroke:#fff;stroke-miterlimit:10;}.cls-3{fill:none;}</style></defs><title>people</title><ellipse class="cls-1" cx="44.2175" cy="46.0748" rx="22.4409" ry="23.1496"/><path class="cls-1" d="M44.2175,83.2559c-23.196,0-42,12.8762-42,28.76v94.9252A15.0591,15.0591,0,0,0,17.2766,222H71.1584a15.0591,15.0591,0,0,0,15.0591-15.0591V112.0157C86.2175,96.1321,67.4134,83.2559,44.2175,83.2559Z"/><rect class="cls-2" x="117.6449" y="34.7294" width="101.2198" height="34.0421" rx="6.5021" ry="6.5021"/><rect class="cls-2" x="117.6345" y="129.1345" width="79.5879" height="34.0421" rx="6.5229" ry="6.5229"/><rect class="cls-2" x="117.6345" y="176.3267" width="124.5815" height="34.0421" rx="6.5229" ry="6.5229"/><rect class="cls-2" x="117.6345" y="81.932" width="137.148" height="34.0421" rx="6.4917" ry="6.4917"/><rect class="cls-1" x="95.1531" y="21.3188" width="13.5668" height="198.4176" rx="4.1263" ry="4.1263"/><rect class="cls-3" width="257" height="240.4"/></svg>
