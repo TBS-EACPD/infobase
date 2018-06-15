@@ -11,46 +11,6 @@ bb_menu_title:
   en: Pick a topic to explore
   fr: Veuillez choisir un sujet à explorer
 
-
-gov_above_bubbles_text:
-  transform: [handlebars, markdown]
-  en: |
-    To get started, select the topic you want to explore. Looking for information on a specific federal organization or program? Simply use the search bar to view an infographic for that organization or program.
-
-  fr: |
-    Pour commencer, choisissez le sujet que vous souhaitez explorer. Cherchez-vous des renseignements sur une organisation fédérale ou un programme en particulier? Utilisez simplement la barre de recherche pour voir son infographie et ses données.
-
-
-dept_above_bubbles_text:
-  transform: [handlebars, markdown]
-  en: |
-    To get started, simply select the topic you want to explore.
-  fr: |
-    Pour commencer, choississez le sujet que vous souhaitez explorer. 
-
-
-tag_above_bubbles_text:
-  transform: [handlebars, markdown]
-  en: |
-    To get started, simply select the topic you want to explore.
-  fr: |
-    Pour commencer, choississez le sujet que vous souhaitez explorer. 
-
-program_above_bubbles_text:
-  transform: [handlebars, markdown]
-  en: |
-    To get started, simply select the topic you want to explore.
-  fr: |
-    Pour commencer, choississez le sujet que vous souhaitez explorer. 
-
-
-crso_above_bubbles_text:
-  transform: [handlebars, markdown]
-  en: |
-    To get started, simply select the topic you want to explore.
-  fr: |
-    Pour commencer, choississez le sujet que vous souhaitez explorer. 
-
 people_data_intro_text:
   transform: [handlebars, embeded-markdown, markdown]
   en: |

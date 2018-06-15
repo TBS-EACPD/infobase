@@ -196,7 +196,6 @@ class InfoGraph_ extends React.Component {
         <Panel
           title={text_maker("bb_menu_title")}
         >
-          <TM k={this.props.subject.level+"_above_bubbles_text"} />
           <div style={{position:'relative'}}>
             { loading && 
               <div
