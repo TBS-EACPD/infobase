@@ -119,7 +119,7 @@ _.each(['gov', 'dept', 'program', 'crso'], lvl => {
     calculate:_.constant(true),
     render: () => (
       <div
-        className="alert alert-info alert--is-bordered large_panel_text"
+        className="alert alert-info alert-no-symbol alert--is-bordered large_panel_text"
         style={{ 
           textAlign: "center",
           borderColor: "#16599a",
