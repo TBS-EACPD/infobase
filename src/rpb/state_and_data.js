@@ -238,23 +238,9 @@ function create_mapStateToProps(){
     const gov_footnotes = Footnote.get_for_subject( Subject.Gov, topics);
     const subject_footnotes = Footnote.get_for_subject( subject, topics);
 
-
-    let static_footnotes = [];
-    if(_.includes(["dept_136", "gov_gov"], subject.guid)){
-      if(table.id === "table6"){
-        static_footnotes = ["gov_money_missing_footnote"]
-      } else if(table.id === "table12"){
-        static_footnotes = ["gov_ftes_missing_footnote"]
-      }
-
-      static_footnotes = _.map(static_footnotes, key => text_maker(key))
-      
-    } 
-
     return _.chain(gov_footnotes)
       .concat(subject_footnotes)
       .map('text')
-      .concat(static_footnotes)
       .uniqBy()
       .compact()
       .concat([ text_maker('different_org_names_rpb_footnote') ])
