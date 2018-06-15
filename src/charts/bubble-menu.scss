@@ -89,10 +89,17 @@
   &:not(.active):not(:hover):not(:focus):not(:active) {
     color: $color;
   }
+
+  &:hover{
+    color: #284162;
+    transform: scale(1.03);
+    background-color: rgba(208, 221, 241, 0.74);
+  }
   
-  &.active, &:focus, &:active, &:hover {
-    border: 3px solid $wetLinkColor;
-    color: $wetLinkColor;
+  &.active, &:focus, &:active{
+    color: #284162;
+    transform: scale(1.03);
+    border: 3px solid #284162;
   }
 
 }
@@ -108,31 +115,29 @@
 
 
 .bubble-button.finance-data-type {
-  @include bubble-type(#767F89);
+  @include bubble-type(#284162);
 }
 
 .bubble-button.ppl-data-type {
-  @include bubble-type(#767F89);
+  @include bubble-type(#284162);
 }
 
 .bubble-button.results-data-type {
-  @include bubble-type(#767F89);
+  @include bubble-type(#284162);
 }
 
 .bubble-button.intro-data-type {
-  @include bubble-type(#767F89);
+  @include bubble-type(#284162);
 }
-
 
 .bubble-button.related-data-type {
-  @include bubble-type(#767F89);
+  @include bubble-type(#284162);
 }
 
-
 .bubble-button.structure-data-type {
-  @include bubble-type(#767F89);
+  @include bubble-type(#284162);
 }
 
 .bubble-button.all_data-data-type {
-  @include bubble-type(#767F89);
+  @include bubble-type(#284162);
 }
