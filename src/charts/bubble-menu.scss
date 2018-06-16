@@ -84,10 +84,10 @@
 
 @mixin bubble-type($color){
 
-  border: 3px solid $color;
-    
+  
   &:not(.active):not(:hover):not(:focus):not(:active) {
-    color: $color;
+    color: white;
+    background-color: $color;
   }
 
   &:hover{

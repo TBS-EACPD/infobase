@@ -1,1 +1,15 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="257" height="240.4" viewBox="0 0 257 240.4"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#ff5e59;stroke:#fff;stroke-miterlimit:10;}.cls-3{fill:none;}</style></defs><title>people</title><ellipse class="cls-1" cx="44.2175" cy="46.0748" rx="22.4409" ry="23.1496"/><path class="cls-1" d="M44.2175,83.2559c-23.196,0-42,12.8762-42,28.76v94.9252A15.0591,15.0591,0,0,0,17.2766,222H71.1584a15.0591,15.0591,0,0,0,15.0591-15.0591V112.0157C86.2175,96.1321,67.4134,83.2559,44.2175,83.2559Z"/><rect class="cls-2" x="117.6449" y="34.7294" width="101.2198" height="34.0421" rx="6.5021" ry="6.5021"/><rect class="cls-2" x="117.6345" y="129.1345" width="79.5879" height="34.0421" rx="6.5229" ry="6.5229"/><rect class="cls-2" x="117.6345" y="176.3267" width="124.5815" height="34.0421" rx="6.5229" ry="6.5229"/><rect class="cls-2" x="117.6345" y="81.932" width="137.148" height="34.0421" rx="6.4917" ry="6.4917"/><rect class="cls-1" x="95.1531" y="21.3188" width="13.5668" height="198.4176" rx="4.1263" ry="4.1263"/><rect class="cls-3" width="257" height="240.4"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="161.48" height="150" viewBox="0 0 161.48 150">
+  <title>home_menu_icons</title>
+  <g>
+    <g>
+      <rect x="4.35" y="61.14" width="58.94" height="81.66" rx="10.33" ry="10.33" fill="#fff"/>
+      <ellipse cx="33.82" cy="24.78" rx="15.75" ry="15.53" fill="#fff"/>
+      <ellipse cx="33.82" cy="69.01" rx="29.47" ry="19.29" fill="#fff"/>
+    </g>
+    <rect x="103.98" y="0.63" width="23.35" height="48.3" rx="3.19" ry="3.19" transform="translate(140.43 -90.87) rotate(90)" fill="#ff5e59" stroke="#fff" stroke-miterlimit="10"/>
+    <rect x="113.71" y="24.89" width="23.35" height="67.77" rx="3.78" ry="3.78" transform="translate(184.16 -66.62) rotate(90)" fill="#ff5e59" stroke="#fff" stroke-miterlimit="10"/>
+    <rect x="98.89" y="73.71" width="23.35" height="38.12" rx="2.83" ry="2.83" transform="translate(203.33 -17.8) rotate(90)" fill="#ff5e59" stroke="#fff" stroke-miterlimit="10"/>
+    <rect x="108.59" y="98" width="23.35" height="57.53" rx="3.48" ry="3.48" transform="translate(247.03 6.49) rotate(90)" fill="#ff5e59" stroke="#fff" stroke-miterlimit="10"/>
+    <rect x="72.45" y="2.05" width="9.9" height="147.95" rx="3.04" ry="3.04" fill="#fff"/>
+  </g>
+</svg>
