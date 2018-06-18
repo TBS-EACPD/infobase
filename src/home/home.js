@@ -215,7 +215,7 @@ const HomeLayout = props => (
     <div className="container">
       <div className="xtralinks">
         <div className='frow'>
-          <div className="fcol-md-4 linkcard">
+          <div className="fcol-md-4 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               img_src="svg/bubbles.svg"
@@ -224,7 +224,7 @@ const HomeLayout = props => (
               link_href="#explore-dept"
             />
           </div>
-          <div className="fcol-md-4 linkcard">
+          <div className="fcol-md-4 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               img_src="svg/explorer.svg"
@@ -233,7 +233,7 @@ const HomeLayout = props => (
               link_href="#resource-explorer"
             />
           </div>
-          <div className="fcol-md-4 linkcard">
+          <div className="fcol-md-4 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               img_src="svg/builder.svg"
@@ -242,7 +242,7 @@ const HomeLayout = props => (
               link_href="#rpb"
             />
           </div>
-          <div className="fcol-md-4 linkcard">
+          <div className="fcol-md-4 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               img_src="svg/structure.svg"
@@ -251,7 +251,7 @@ const HomeLayout = props => (
               link_href="#igoc"
             />
           </div>
-          <div className="fcol-md-4 linkcard">
+          <div className="fcol-md-4 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               img_src="svg/glossary.svg"
@@ -260,7 +260,7 @@ const HomeLayout = props => (
               link_href="#glossary"
             />
           </div>
-          <div className="fcol-md-4 linkcard">
+          <div className="fcol-md-4 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               img_src="svg/metadata.svg"
@@ -269,7 +269,7 @@ const HomeLayout = props => (
               link_href="#metadata"
             />
           </div>
-          <div className="fcol-md-4 linkcard">
+          <div className="fcol-md-4 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               img_src="svg/aboutus.svg"
