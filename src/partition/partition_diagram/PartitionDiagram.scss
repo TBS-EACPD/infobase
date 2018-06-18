@@ -90,7 +90,7 @@
   font-size: 48px;
   margin: 0px;
   & > a {
-    color: #fff!important;
+    color: #fff !important;
   }
 }
 
@@ -168,7 +168,7 @@
   font-weight: $mediumFontWeight;
 }
 .partition-popup > .btn {
-  color: #fefefe!important;
+  color: #fefefe;
 }
 .partition-popup > .popup-pointer {
   position: absolute;
@@ -188,13 +188,10 @@
     right: 0px;
     width: 145px;
     padding: 15px;
-    border-left: 3px solid #45a1e3;
-    border-top: 3px solid #45a1e3;
+    border-left: 3px solid $buttonPrimaryColor;
+    border-top: 3px solid $buttonPrimaryColor;
     border-radius: 0px;
     border-top-left-radius: 10px;
-  & > a.btn {
-    background-color: rgb(69, 161, 227);
-  }
 }
 
 .partition-content:focus a.minimize.hovering,
