@@ -1,5 +1,11 @@
 @import '../common_css/common-variables';
 
+html,
+body {
+overflow-x: hidden;
+-ms-overflow-x: hidden;
+}
+
 
 $home-bg-color: #284162;
 
