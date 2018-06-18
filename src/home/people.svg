@@ -2,14 +2,16 @@
   <title>home_menu_icons</title>
   <g>
     <g>
-      <rect x="4.35" y="61.14" width="58.94" height="81.66" rx="10.33" ry="10.33" fill="#fff"/>
-      <ellipse cx="33.82" cy="24.78" rx="15.75" ry="15.53" fill="#fff"/>
-      <ellipse cx="33.82" cy="69.01" rx="29.47" ry="19.29" fill="#fff"/>
+      <rect x="0.66" y="62" width="49.21" height="78.25" rx="9.24" ry="9.24" fill="#fff"/>
+      <ellipse cx="25.26" cy="27.16" rx="13.15" ry="14.88" fill="#fff"/>
+      <ellipse cx="25.26" cy="69.54" rx="24.6" ry="18.49" fill="#fff"/>
     </g>
-    <rect x="103.98" y="0.63" width="23.35" height="48.3" rx="3.19" ry="3.19" transform="translate(140.43 -90.87) rotate(90)" fill="#df2c26" stroke="#fff" stroke-miterlimit="10"/>
-    <rect x="113.71" y="24.89" width="23.35" height="67.77" rx="3.78" ry="3.78" transform="translate(184.16 -66.62) rotate(90)" fill="#df2c26" stroke="#fff" stroke-miterlimit="10"/>
-    <rect x="98.89" y="73.71" width="23.35" height="38.12" rx="2.83" ry="2.83" transform="translate(203.33 -17.8) rotate(90)" fill="#df2c26" stroke="#fff" stroke-miterlimit="10"/>
-    <rect x="108.59" y="98" width="23.35" height="57.53" rx="3.48" ry="3.48" transform="translate(247.03 6.49) rotate(90)" fill="#df2c26" stroke="#fff" stroke-miterlimit="10"/>
-    <rect x="72.45" y="2.05" width="9.9" height="147.95" rx="3.04" ry="3.04" fill="#fff"/>
+    <g>
+      <rect x="98.23" y="-5.74" width="23.03" height="56.55" rx="3.43" ry="3.43" transform="translate(132.28 -87.22) rotate(90)" fill="#de4c4a" stroke="#fff" stroke-miterlimit="10"/>
+      <rect x="109.63" y="17.84" width="23.03" height="79.34" rx="4.06" ry="4.06" transform="translate(178.66 -63.64) rotate(90)" fill="#de4c4a" stroke="#fff" stroke-miterlimit="10"/>
+      <rect x="92.27" y="70.18" width="23.03" height="44.63" rx="3.05" ry="3.05" transform="translate(196.28 -11.3) rotate(90)" fill="#de4c4a" stroke="#fff" stroke-miterlimit="10"/>
+      <rect x="103.64" y="93.79" width="23.03" height="67.36" rx="3.74" ry="3.74" transform="translate(242.62 12.32) rotate(90)" fill="#de4c4a" stroke="#fff" stroke-miterlimit="10"/>
+    </g>
+    <rect x="60.79" y="2.05" width="9.77" height="145.9" rx="3" ry="3" fill="#fff"/>
   </g>
 </svg>
