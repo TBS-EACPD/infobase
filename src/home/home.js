@@ -12,6 +12,7 @@ import {
   CardTopImage,
   CardCenteredImage,
   CardBackgroundImage,
+  ContainerEscapeHatch,
 } from '../util_components.js';
 
 import { general_href_for_item } from '../link_utils.js';
@@ -65,7 +66,7 @@ export class Home extends React.Component {
         <StandardRouteContainer route_key="start">
           <MediaQuery minWidth={992}>
             {is_large =>
-              <div> 
+              <ContainerEscapeHatch>
                 <HomeLayout
                   past_targets_met={drr16_indicators_past_success}
                   past_targets_total={drr16_past_total}
@@ -74,7 +75,7 @@ export class Home extends React.Component {
                   is_large={is_large}
                   featured_content_items={featured_content_items}
                 />
-              </div>
+              </ContainerEscapeHatch>
             }
           </MediaQuery>
         </StandardRouteContainer>

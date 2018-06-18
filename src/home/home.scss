@@ -10,12 +10,6 @@ overflow-x: hidden;
 $home-bg-color: #284162;
 
 .home-root {
-  /* this block makes home break out of the .container */
-  width: 100vw;
-  transform: translate(-50%, 0);
-  position: relative;
-  left: 50%;
-
   input.typeahead.form-control.input-lg.tt-input {
     //search bar isn't wide enough to contain all placeholder text
     font-size: 1em;
@@ -32,10 +26,9 @@ $home-bg-color: #284162;
   }
 
   // background image set in home.js, has non-static path
-  background-position: 50% -8px;
+  background-position: -5px -8px;
   background-repeat: no-repeat;
-  background-size: 101%;
-  margin-left: -5px;
+  background-size: 102%;
 }
 
 .intro-box > .container > h1 {

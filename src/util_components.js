@@ -45,6 +45,8 @@ const { CardBackgroundImage } = require('./components/CardBackgroundImage.js');
 
 const { DebouncedTextInput } = require('./components/DebouncedTextInput.js');
 
+const { ContainerEscapeHatch } = require('./components/ContainerEscapeHatch.js');
+
 const { abbrev } = require('./core/utils.js'); 
 
 
@@ -149,5 +151,6 @@ module.exports = {
   CardCenteredImage,
   CardBackgroundImage,
   DebouncedTextInput,
+  ContainerEscapeHatch,
   Abbrev,
 }
