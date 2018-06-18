@@ -83,23 +83,24 @@
 }
 
 @mixin bubble-type($color){
-
+  border: 3px solid #284162;
   
   &:not(.active):not(:hover):not(:focus):not(:active) {
-    color: white;
-    background-color: $color;
+    color: #284162;
+    background-color: #fdfdfd;
   }
 
   &:hover{
-    color: #284162;
     transform: scale(1.03);
-    background-color: rgba(208, 221, 241, 0.74);
+    background-color: rgba(202, 217, 240, 0.74);
+    color: #284162;
   }
   
   &.active, &:focus, &:active{
-    color: #284162;
     transform: scale(1.03);
-    border: 3px solid #284162;
+
+    color: white;
+    background-color: $color;
   }
 
 }
