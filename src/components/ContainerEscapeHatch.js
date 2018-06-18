@@ -6,7 +6,7 @@ class ContainerEscapeHatch extends React.Component {
     this.outer_container_escape_hatch = React.createRef();
     this.inner_container_escape_hatch = React.createRef();
     
-    const adjust_to_full_page_width = ( 
+    this.adjust_to_full_page_width = ( 
       () => {
         const outer_container_escape_hatch = this.outer_container_escape_hatch.current;
         const inner_container_escape_hatch = this.inner_container_escape_hatch.current;
@@ -20,10 +20,10 @@ class ContainerEscapeHatch extends React.Component {
       } 
     ).bind(this);
 
-    this.debounced_adjust_to_full_page_width = _.debounce(adjust_to_full_page_width, 100);
+    this.debounced_adjust_to_full_page_width = _.debounce(this.adjust_to_full_page_width, 100);
   }
   componentDidMount(){
-    this.debounced_adjust_to_full_page_width();
+    this.adjust_to_full_page_width();
     window.addEventListener("resize", this.debounced_adjust_to_full_page_width);
   }
   componentWillUnmount(){
