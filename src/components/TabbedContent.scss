@@ -1,5 +1,13 @@
 @import "../common_css/common-variables";
 
+@mixin active-tab-mixin {
+  border: 1px solid $primaryColor;
+  background-color: $backgroundColor;
+  transition: background-color 200ms ease, border-radius 400ms ease;
+  color: #333;
+}
+
+
 div.tabbed_content {
   margin: 0px -15px;
 }
@@ -20,13 +28,14 @@ li.tab_label {
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
   border: 1px solid change-color($color: $backgroundColor, $alpha: 0.5);
-  background-color: $tertiaryColor;
+  background-color: $primaryColor;
   transition: background-color 125ms ease, border-radius 250ms ease;
   color: $backgroundColor;
   height: 28px;
   padding-bottom: 200%;
   margin-bottom: -200%;
   cursor: pointer;
+
   & > .tab_label_text {
     text-decoration: none !important;
     color: inherit !important;
@@ -34,16 +43,18 @@ li.tab_label {
     font-size: 15.6px;
     font-weight: $mediumFontWeight;
   }
+
+  &:hover, &:focus {
+    @include active-tab-mixin;
+  }
 }
 
 li.tab_label.active_tab {
+  @include active-tab-mixin;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-  border: 1px solid $primaryColor;
-  background-color: $backgroundColor;
-  transition: background-color 200ms ease, border-radius 400ms ease;
-  color: #333;
   cursor: default;
+
   & > .tab_label_text {
     cursor: default;
     font-weight: $heavyFontWeight;
