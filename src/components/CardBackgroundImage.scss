@@ -27,7 +27,7 @@
 .background-img-card {
   min-height: 1px; /* IE11 image bug */
   margin: 10px;
-  padding: 5% 15% 15% 5%;
+  padding: 0% 5%;
 
   background-repeat: no-repeat;
   background-position: center;
@@ -37,7 +37,7 @@
 .background-img-card__top-left { 
   min-height: 1px; /* IE11 image bug */
   color: white;
-  padding: 1%;
+  padding: 5% 1% 10% 1%;
 }
 
 .background-img-card__title {
@@ -59,6 +59,7 @@
 .background-img-card__bottom-right {
   display: flex;
   width: 100%;
+  padding: 5% 0% 3% 0%;
   justify-content: flex-end;
 }
 
@@ -67,15 +68,12 @@
   text-align: center;
   font-size: 1em;
   padding: 20px 0 20px 0;
-  background-color: #FF5e59;
+  background-color: $highlightColor;
   border-radius: 10px;
   width: 30%;
   min-width: 85px;
   max-width: 190px;
 
-  &> a {
-    color:white;
-  }
   @media(max-width:610px){
     padding: 10px 0 10px 0;
   }
