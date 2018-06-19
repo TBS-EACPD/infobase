@@ -48,6 +48,10 @@ export class PartitionSubApp {
       .insert("div", ":first-child")
       .classed("partition-notes container", true);
 
+    this.container
+      .insert("div", ":first-child")
+      .classed("partition-bg-fill", true);
+    
     this.container.select("input.search").on("keydown", () => {
       // Prevent enter key from submitting input form 
       // (listening on the submit event seems less consistent than this approach)
