@@ -48,7 +48,7 @@ const { ensure_loaded } = require('../core/lazy_loader.js');
 
 const { Explorer } = require('../components/ExplorerComponents.js');
 
-const INCLUDE_OTHER_TAGS = true;
+const INCLUDE_OTHER_TAGS = false;
 const TM = props => <StandardTM tmf={text_maker} {...props} />;
 
 const HierarchySelectionItem = ({title, text, active, url }) => (
