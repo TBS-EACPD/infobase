@@ -1,13 +1,5 @@
 @import '../common_css/common-variables';
 
-html,
-body {
-overflow-x: hidden;
--ms-overflow-x: hidden;
-}
-
-
-$home-bg-color: #284162;
 
 .home-root {
   input.typeahead.form-control.input-lg.tt-input {
@@ -151,7 +143,7 @@ $home-bg-color: #284162;
 }
 
 .home-bg {
-  background-color: $home-bg-color;
+  background-color: #284162;
   position: relative;
 }
 

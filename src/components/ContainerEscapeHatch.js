@@ -11,7 +11,7 @@ class ContainerEscapeHatch extends React.Component {
         const outer_container_escape_hatch = this.outer_container_escape_hatch.current;
         const inner_container_escape_hatch = this.inner_container_escape_hatch.current;
 
-        const screen_width = window.outerWidth
+        const screen_width = document.body.clientWidth;
         const container_width = outer_container_escape_hatch.offsetWidth; // This assumes outer_container_escape_hatch will have the full container width
         const new_escape_hatch_negative_margin_left = -0.5 * Math.abs(screen_width - container_width);
 
