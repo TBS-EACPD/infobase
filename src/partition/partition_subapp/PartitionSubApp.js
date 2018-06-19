@@ -9,6 +9,7 @@ export class PartitionSubApp {
     this.search_required_chars = 1;
     this.search_debounce_time = 500;
 
+    this.container = container;
     this.all_perspectives = all_perspectives;
     this.all_data_types = all_data_types;
     this.url_update_callback = url_update_callback;
@@ -16,29 +17,6 @@ export class PartitionSubApp {
     this.current_perspective_id = initial_perspective_id;
     this.current_data_type = initial_data_type_id;
  
-    // A negative margin-left value is explicitly set, and kept updated, on .partition-container so that the 
-    // extra wide partition area can effectively escape the narrow main.container area, which we're forced in 
-    // to by the Canada.ca banner/WET. Styling this would be so much easier without that...
-    this.container = container.append("div")
-      .classed("partition-container", true)
-      .style("margin-left", -d3.select("main.container").node().offsetLeft+"px");
-    
-    const clear_partition_events_on_leaving_partition_route = function(e){
-      const not_on_partition_route = !window.location.href.includes('#partition');
-      if (not_on_partition_route){
-        window.removeEventListener("hashchange", clear_partition_events_on_leaving_partition_route);
-        window.removeEventListener("resize", adjust_partition_diagram_margin_on_resize);
-      }
-    };
-    const adjust_partition_diagram_margin_on_resize = function(){
-      const partition_container = d3.select(".partition-container");
-      if ( partition_container.node() ){
-        partition_container.style("margin-left", -d3.select("main.container").node().offsetLeft+"px");
-      } 
-    };
-    window.addEventListener("hashchange", clear_partition_events_on_leaving_partition_route);
-    window.addEventListener("resize", adjust_partition_diagram_margin_on_resize);
-
     // Be aware, constructor of PartitionDiagram has side-effects on this.container, DOM stuff being what it is
     this.diagram = new PartitionDiagram(this.container, {height: 700});
 
