@@ -21,6 +21,10 @@
   background-position: -5px -8px;
   background-repeat: no-repeat;
   background-size: 102%;
+
+  @supports not (-ms-high-contrast: none) {
+    background-attachment: fixed;
+  }
 }
 
 .intro-box > .container > h1 {
