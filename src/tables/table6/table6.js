@@ -191,7 +191,6 @@ module.exports = {
         };
         return func;
       },
-      exclude_from_rpb :true,
     },
   ],
 

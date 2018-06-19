@@ -121,7 +121,6 @@ module.exports = {
     },
     { 
       title_key: "so_num",
-      exclude_from_rpb: true,
       filter_func: ()=> _.property('so_num'),
     }, 
   ],

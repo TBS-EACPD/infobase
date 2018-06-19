@@ -250,7 +250,7 @@ function create_mapStateToProps(){
 
   const get_dimensions = createSelector(get_table, table=> (
     _.chain(table.dimensions)
-      .reject('exclude_from_rpb')
+      .filter('include_in_report_builder')
       .map(({title_key}) => ({
         id: title_key, 
         display: text_maker(title_key), 

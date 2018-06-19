@@ -139,8 +139,6 @@ module.exports = {
     },
     {
       title_key :"payment_type_ids",
-      include_in_report_builder : true,
-
       filter_func : function(options){
         return function(row){
           return row.type_id;
