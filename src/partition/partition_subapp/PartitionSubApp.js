@@ -44,9 +44,9 @@ export class PartitionSubApp {
         })
       );
     
-    this.container.select(".__partition__")
+    this.container
       .insert("div", ":first-child")
-      .classed("partition-notes", true);
+      .classed("partition-notes container", true);
 
     this.container.select("input.search").on("keydown", () => {
       // Prevent enter key from submitting input form 
