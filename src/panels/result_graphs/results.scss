@@ -261,10 +261,15 @@ dl.indicator-item__dl dt+dd {
   padding-left: 6px; 
   font-size:1.2em;
   white-space: nowrap;
+  position:relative;
 }
 .inline-status-icon__count {
   padding-left: 1px;
   color:#000;
+  position: absolute;
+  right: -4px;
+  bottom: 2px;
+  font-size: 60%;
 }
 
 
