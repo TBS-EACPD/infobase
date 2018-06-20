@@ -129,6 +129,7 @@ const WelcomeMat = (props) => {
     type,
     subject,
     calcs,
+    is_m2m,
   } = props;
 
   //vars used multiple times accross multiple cases
@@ -533,6 +534,9 @@ const WelcomeMat = (props) => {
             <PaneItem textSize="large">
               <SpendFormat amt={spend_last_year_5} />
             </PaneItem>
+            {is_m2m && 
+              <PaneItem textSize="small"> (Maximum) </PaneItem>
+            }
           </Pane>,
 
           <Pane key="b" size={20}>
@@ -543,6 +547,9 @@ const WelcomeMat = (props) => {
             <PaneItem textSize="large">
               <SpendFormat amt={spend_last_year} />
             </PaneItem>
+            {is_m2m && 
+              <PaneItem textSize="small"> (Maximum) </PaneItem>
+            }
           </Pane>,
 
           <Pane key="c" size={20}>
@@ -553,6 +560,9 @@ const WelcomeMat = (props) => {
             <PaneItem textSize="large">
               <SpendFormat amt={spend_plan_3} />
             </PaneItem>
+            {is_m2m && 
+              <PaneItem textSize="small"> (Maximum) </PaneItem>
+            }
           </Pane>,
 
           <Pane key="d" size={40}>
@@ -572,6 +582,9 @@ const WelcomeMat = (props) => {
             <PaneItem textSize="small">
               <TM k="ftes_were_employed" />
             </PaneItem>
+            {is_m2m && 
+              <PaneItem textSize="small"> (Maximum) </PaneItem>
+            }
           </Pane>,
 
           <Pane key="b" size={20}>
@@ -582,6 +595,9 @@ const WelcomeMat = (props) => {
             <PaneItem textSize="large">
               <FteFormat amt={fte_last_year} />
             </PaneItem>
+            {is_m2m && 
+              <PaneItem textSize="small"> (Maximum) </PaneItem>
+            }
           </Pane>,
 
           <Pane key="c" size={20}>
@@ -592,6 +608,9 @@ const WelcomeMat = (props) => {
             <PaneItem textSize="large">
               <FteFormat amt={fte_plan_3} />
             </PaneItem>
+            {is_m2m && 
+              <PaneItem textSize="small"> (Maximum) </PaneItem>
+            }
           </Pane>,
 
           <Pane key="d" size={40}>
@@ -602,7 +621,7 @@ const WelcomeMat = (props) => {
             />
           </Pane>,
         ]}
-        text_row={[
+        text_row={ !is_m2m && [
           <Pane key="a" size={50}>
             <PaneItem textSize="small">
               <TM
@@ -893,6 +912,30 @@ new PanelGraph({
     return {
       type: "hist_planned",
       calcs,
+    };
+
+  },
+
+  render,
+});
+
+new PanelGraph({
+  level: "tag",
+  key: 'welcome_mat',
+  footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+  depends_on : ['table6','table12'],
+  missing_info: "ok",
+  calculate (subject,info,options){
+    const { table6, table12 } = this.tables; 
+    const q6 = table6.q(subject);
+    const q12 = table12.q(subject);
+
+    const calcs = get_calcs(subject,q6,q12);
+
+    return {
+      type: "hist_planned",
+      calcs,
+      is_m2m: subject.root.cardinality === "MtoM",
     };
 
   },
