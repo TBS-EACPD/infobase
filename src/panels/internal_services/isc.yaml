@@ -5,6 +5,14 @@ internal_service_panel_title:
 internal_service_panel_text:
   transform: [handlebars, markdown]
   en: |
-    Last year ({{pa_last_year}}), internal service spending made up **{{fmt_percentage1 isc_spend_pct}}** of spending and **{{fmt_percentage1 isc_fte_pct}}** of employment for {{subj_name subject}}. In comparison, government as a whole uses **{{fmt_percentage1 gov_isc_fte_pct}}** of its workforce for internal services.
+    Last year ({{pa_last_year}}), **{{fmt_percentage1 isc_fte_pct}}** of {{gl_tt "employees" "FTE"}} in {{subj_name subject}} worked for internal service programs. In comparison, government as a whole uses **{{fmt_percentage1 gov_isc_fte_pct}}** of its workforce for internal services.
   fr: |
-    L'an dernier ({{pa_last_year}}), les services internes representaient **{{fmt_percentage1 isc_spend_pct}}** des dépenses et **{{fmt_percentage1 isc_fte_pct}}** des employés pour {{subj_name subject}}.
+    L'an dernier ({{pa_last_year}}), **{{fmt_percentage1 isc_fte_pct}}** des {{gl_tt "FTE" "employés"}} dans l'organisation {{subj_name subject}} travaillaient pour des programmes de services internes.
+
+other_programs:
+  en: Other programs
+  fr: Autres programmes
+
+what_is_internal_services:
+  en: What are internal services?
+  fr: Les services internes, c'est quoi?

@@ -1,5 +1,5 @@
 import text from './isc.yaml';
-
+import { GlossaryEntry } from '../../models/glossary.js';
 /*
   snippet to get orgs sorted by isc fte % 
 
@@ -64,7 +64,10 @@ new PanelGraph({
     });
 
     const total_fte = table12.q(subject).sum(last_year_fte_col);
-    const isc_fte = _.last(series).fte;
+    if(total_fte === 0){
+      return false;
+    }
+    const isc_fte = _.last(series).isc;
 
     return {
       gov_fte_total,
@@ -90,9 +93,12 @@ new PanelGraph({
       },
     } = calculations;
 
+    const more_footnotes = [{
+      text: GlossaryEntry.lookup("INT_SERVICES").definition,
+    }].concat(footnotes);
 
     const isc_label=text_maker("internal_services");
-    const other_label = text_maker("other");
+    const other_label = text_maker("other_programs");
     const bar_series = _.fromPairs([
       [ isc_label, _.map(series, 'isc') ],
       [ other_label, _.map(series, "non_isc") ],
@@ -148,9 +154,11 @@ new PanelGraph({
     return (
       <Panel
         title={text_maker("internal_service_panel_title")}
-        {...{sources,footnotes}}
+        {...{sources,footnotes: more_footnotes}}
       >
+                  
         {to_render}
+        
       </Panel>
     );
 
