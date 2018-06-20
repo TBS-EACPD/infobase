@@ -8,7 +8,7 @@ const financial_link_sel = "#app-focus-root > div > div > div.outer-container-es
   "> div.inner-container-escape-hatch > div.home-root > div.intro-box > div.container > h2 > span";
 
 //then create a test and place your code there
-test('App boots and loads home page data', async t => {
+test('App boots and loads home page', async t => {
   const target_selector = Selector(financial_link_sel);
   await t
     // First assure target exists, just testing innerText seems faulty in container when element doesn't exist
