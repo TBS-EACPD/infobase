@@ -27,7 +27,7 @@ class BubbleMenu extends React.Component {
   _update(){
     const sel =  d3.select(this.refs.main)
       .selectAll('a')
-      .data(this.props.items)
+      .data(this.props.items);
 
     sel.exit().remove();
 
@@ -38,21 +38,15 @@ class BubbleMenu extends React.Component {
       
 
     sel
-      .attr("class", d => classNames("centerer bubble-button", d.className,  d.active && "active"))
-      .attr("href",_.property('href'))
-      .html(d => get_html(d) ) 
+      .attr("class", d => classNames("centerer bubble-button", d.className,  d.active && "active") )
+      .attr("href", _.property('href') )
+      .html(d => "<strong class='title bolder'>"+d.title+"</strong>" ) 
       .transition()
       .duration(300)
       .ease(d3.easeLinear)
-      .style('height', d=> d.active ? '200px' : '150px' )
-      .style('width', d=> d.active ? '300px' : '150px' );
+      .style('height', d => d.active ? '200px' : '150px' )
+      .style('width', d => d.active ? '300px' : '150px' );
   }
 }
-
-const get_html = ({description,title,active}) => ( 
-  description && active ?    
-  "<span class='sub-title'>"+description+"</span>" :
-  "<strong class='title bolder'>"+title+"</strong>"  
-);
 
 module.exports = exports = {BubbleMenu}
