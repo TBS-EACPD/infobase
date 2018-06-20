@@ -135,7 +135,7 @@ class SubProgramEntity {
         'fte_planning_year_2',
         'fte_planning_year_3',
       ])
-      .some( _.isNumber )
+      .some(num =>  _.isNumber(num) && !_.isNaN(num) )
       .value();
   }
   get has_drr_resources(){
@@ -147,7 +147,7 @@ class SubProgramEntity {
         "fte_pa_last_year",
         "planned_fte_pa_last_year",
       ])
-      .some( _.isNumber )
+      .some(num =>  _.isNumber(num) && !_.isNaN(num) )
       .value();
   }
 }
