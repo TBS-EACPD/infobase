@@ -3,7 +3,7 @@ fin_title:
   fr: Finances
 
 fin_desc:
-  en: What we plan on spending, what we can spend, what we actually spent
+  en: What we plan on spending, what we can spend, what we have spent
   fr: Ce que nous comptons dépenser, ce que nous pouvons dépenser et ce que nous avons réellement dépensé
 
 people_title:
@@ -11,11 +11,11 @@ people_title:
   fr: Gestion des personnes
 
 people_desc:
-  en: How many people are working, how old they are, where they work, and who they are
+  en: How many people do we employ, and who are they
   fr: Combiens de gens travaillent, quel âge ont-ils, où travaillent-ils et qui sont-ils
 
 all_data_description:
-  en: For further analysis, links to all data that support the infographics
+  en: Links to supporting data for these infographics, for further analysis
   fr: Des liens vers les données qui supportent les infographies pour continuer votre analyse
 
 all_data_dept_title:
@@ -50,16 +50,16 @@ planning_title:
   fr: Résultats
 
 planning_desc:
-  en : What we achieved, what we want to achieve and how we measure our progress
+  en : What we have achieved, what we want to achieve, and how we measure achievement
   fr : Ce que nous avons accompli, ce que nous voulons accomplir et comment nous mesurons nos progrès
 
 where_can_i_go_title:
-    en: Where can I go from here?
-    fr: Où puis-je aller à partir d'ici?
+  en: Where can I go from here?
+  fr: Où puis-je aller à partir d'ici?
 
 where_can_i_go_desc:
-    en: Related links for continued exploration
-    fr: Des liens connexes pour continuer à explorer
+  en: Related links for continued exploration
+  fr: Des liens connexes pour continuer à explorer
 
 historical:
   en: Historical
