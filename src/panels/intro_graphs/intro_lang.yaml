@@ -62,9 +62,9 @@ dead_program_warning_title:
   en: This Program is no longer active
   fr: Ce Programme n'est plus actif
 
-dead_crso_warning_title:
-  en: This {{cr_or_so subject}} is no longer active
-  fr: Cette {{cr_or_so subject}} n'est plus active
+dead_crso_warning:
+  en: This Core Responsibility is no longer active
+  fr: Cette responsabilité essentielle n'est plus active
 
 dead_program_warning_text:
   transform: [handlebars, markdown]
@@ -78,12 +78,7 @@ dead_program_warning:
   en: This Program is no longer active; only limited information is available
   fr: Ce Programme n'est plus actif; les renseignements disponibles sont limités
     
-dead_crso_warning:
-  transform: [handlebars, markdown]
-  en: |
-   This Strategic Outcome is no longer active; only limited information is available
-  fr: |
-   Ce Résultat Stratégique n'est plus actif; les renseignements disponibles sont limités
+
 
 #/ Program panel text
 
@@ -142,19 +137,19 @@ hierarchy_contains_dead_elements:
 crso_desc_title:
   transform: [handlebars]
   en: |
-    {{cr_or_so subject}} Description
+    Core Responsibility Description
   fr: |
-    {{cr_or_so subject}} Description
+    Description de la responsabilité essentielle
 
 crso_links_to_other_crso_title:
   transform: [handlebars]
-  en: List of {{cr_or_so subject}} and Programs under the same organization
-  fr: Liste de {{cr_or_so subject}} et de Programmes sous la même organizations
+  en: List of Core Responsibilities and Programs under the same organization
+  fr: Liste de responsabilités essentielles et de programmes sous la même organizations
 
 crso_links_to_prg_title:
   transform: [handlebars]
-  en: Programs under this {{cr_or_so subject}}
-  fr: Programmes sous {{ce_crso subject}}
+  en: Programs under this Core Responsibility
+  fr: Programmes sous cette responsabilité essentielle
 
 tags_of_interest_sentence:
   transform: [handlebars,markdown]
@@ -165,13 +160,13 @@ tags_of_interest_sentence:
 
 crso_tags_title:
   transform: [handlebars]
-  en: Under which areas of interest (tags) does this {{cr_or_so subject}} fall? 
-  fr: Sous quels domaines d'intérêt (étiquettes) {{ce_crso subject}} se retrouve-t-elle?
+  en: Under which areas of interest (tags) does this Core Responsibility fall? 
+  fr: Sous quels domaines d'intérêt (étiquettes) cette responsabilité essentielle se retrouve-t-elle?
 
 crso_in_gov_title:
   transform: [handlebars]
-  en: Where does this {{cr_or_so subject}} fit in the government reporting structure ?
-  fr: Où s'inscrit {{ce_crso subject}} dans la structure de rapport du gouvernement ?
+  en: Where does this Core Responsibility fit in the government reporting structure ?
+  fr: Où s'inscrit cette responsabilité essentielle dans la structure de rapport du gouvernement ?
 
 
 additional_links:

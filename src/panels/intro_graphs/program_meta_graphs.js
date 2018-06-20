@@ -22,6 +22,7 @@ new PanelGraph({
 
 new PanelGraph({
   level: 'crso',
+  key: "dead_crso_warning",
   footnotes: false,
   calculate: _.property("dead_so"),
   render(){
@@ -31,7 +32,7 @@ new PanelGraph({
         className="alert alert-no-symbol alert-danger alert--is-bordered large_panel_text"
         style={{textAlign:"center"}}
       >
-        <TM k="dead_crso_warning" />
+        <TM k="dead_crso_warning"  />
       </div>
     );
   },
