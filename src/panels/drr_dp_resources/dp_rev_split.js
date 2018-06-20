@@ -77,13 +77,13 @@ _.each(["dept","crso","program"], level => {
             <TM k="dp_rev_split_text" args={info} />
           </div>
           <div>
-            <table className="table">
+            <table className="table infobase-table table-bordered">
               <thead>
                 <tr>
                   <th scope="col"> <TM k="year" /> </th>
                   <th scope="col"> <TM k="dp_gross" /> </th>
                   <th scope="col"> <TM k="dp_revenue" /> </th>
-                  <th scope="col"> <TM k="dp_spa" /> </th>
+                  <th style={{maxWidth: "150px"}}  scope="col"> <TM k="dp_spa" /> </th>
                   <th scope="col"> <TM k="dp_net" /> </th>
                 </tr>
               </thead>     
@@ -93,10 +93,10 @@ _.each(["dept","crso","program"], level => {
                     <th scope="row">
                       {run_template(year)}
                     </th>
-                    <td> <Format type="compact1" content={gross} /> </td>
-                    <td> <Format type="compact1" content={rev} /> </td>
-                    <td> <Format type="compact1" content={spa} /> </td>
-                    <td> <Format type="compact1" content={net} /> </td>
+                    <td  className="data-col-cell"> <Format type="compact1" content={gross} /> </td>
+                    <td className="data-col-cell"> <Format type="compact1" content={rev} /> </td>
+                    <td className="data-col-cell"> <Format type="compact1" content={spa} /> </td>
+                    <td className="data-col-cell"> <Format type="compact1" content={net} /> </td>
                   </tr>
                 )}
               </tbody>
