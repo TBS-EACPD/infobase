@@ -42,7 +42,7 @@ const {
 } = require('../../gen_expl/results_scheme.js');
 
 const {
-  get_type_header,
+  get_type_name,
   ResultNodeContent,
   spending_header,
   fte_header,
@@ -115,10 +115,13 @@ const get_children_grouper = createSelector(
       }
 
       return _.chain(children)
-        .groupBy(get_type_header)
+        .groupBy("data.type")
         .toPairs()
-        .sortBy( ([ type, group ]) => !_.includes(['dr', 'result'], type) ) //make results show up first 
-        .map( ([display, node_group ]) => ({display, node_group}))
+        .sortBy( ([ type_key, group ]) => !_.includes(['dr', 'result'], type_key) ) //make results show up first 
+        .map( ([type_key, node_group ]) => ({
+          display: get_type_name(type_key), 
+          node_group,
+        }))
         .value()
     }
   }
