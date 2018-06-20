@@ -16,7 +16,7 @@ gov_missing_dp_results:
 org_missing_dp_results:
   transform: [handlebars, markdown]
   en: |
-    This organisation has not yet submitted their departmental plan results and indicators  
+    This organisation has not yet submitted their 2018-19 departmental plan results and indicators data
 
   fr: | 
-    Cette organisation n'a pas encore soumis leurs résultats et indicateurs pour leur plan ministériel 
+    Cette organisation n'a pas encore soumis leurs données sur les résultats et indicateurs pour leur plan ministériel de 2018-2019
