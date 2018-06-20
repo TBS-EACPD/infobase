@@ -1,3 +1,4 @@
+import {Fragment} from 'react';
 import text from './gov_dp_text.yaml';
 
 import {
@@ -5,16 +6,34 @@ import {
   PanelGraph,
   Panel,
   TM as StdTM,
+  rpb_link,
+  infograph_href_template,
 } from "../shared";
+
+import { DeptSearch } from '../../util_components.js';
 
 
 import { ResultCounts } from './results_common.js';
+
+const get_dp_rpb_links = () => ({
+  spend: rpb_link({
+    table:"table6",
+    columns: ['{{planning_year_1}}','{{planning_year_2}}','{{planning_year_3}}'], 
+    mode: "details",
+    
+  }),
+  ftes: rpb_link({
+    table:"table12",
+    columns: ['{{planning_year_1}}','{{planning_year_2}}','{{planning_year_3}}'], 
+    mode: "details",
+  }),
+});
 
 
 const text_maker = create_text_maker(text);
 const TM = props => <StdTM tmf={text_maker} {...props} />;
 
-const ResultsIntroPanel = ({counts}) => (
+const ResultsIntroPanel = ({counts}) => <Fragment>
   <div className="frow middle-xs">
     <div className="fcol-md-7 medium_panel_text">
       <TM k="gov_dp_text" args={counts} />
@@ -37,7 +56,26 @@ const ResultsIntroPanel = ({counts}) => (
       </div>
     }
   </div>
-);
+  {!window.is_a11y_mode && 
+    <div
+      style={{
+        padding: "0 100px",
+        margin: "40px auto",
+      }}
+    >
+      <div className="medium_panel_text">
+        <TM k="gov_dp_above_search_bar_text" />
+      </div>
+      <div>
+        <DeptSearch
+          only_include_dp
+          href_template={ subj => infograph_href_template(subj, "results", true) }
+          placeholder={text_maker("gov_dp_search_bar_placeholder")}
+        />
+      </div>
+    </div>
+  }
+</Fragment>;
   
 
 new PanelGraph({
@@ -48,12 +86,16 @@ new PanelGraph({
   footnotes: false,
   render(panel, calculations){
     const counts = ResultCounts.get_gov_counts();
+    const { spend, ftes } = get_dp_rpb_links();
     return (
       <Panel
         title={text_maker("gov_dp_summary_title")}
+        allowOverflow
       >
         <ResultsIntroPanel 
           counts={counts}
+          spend_link={spend}
+          fte_link={ftes}
         />
       </Panel>
     ); 

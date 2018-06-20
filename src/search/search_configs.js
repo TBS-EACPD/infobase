@@ -88,6 +88,17 @@ const all_orgs_with_gov = {
   templates: org_templates,
 };
 
+const all_dp_orgs = {
+  query_matcher: () => {
+    const orgs = _.filter(Dept.get_all(), 'dp_status');
+    return query => _.filter(
+      orgs,
+      create_re_matcher(query, org_attributes_to_match)
+    )
+  },
+  templates: org_templates,
+};
+
 const glossary_attributes_to_match = [
   'definition', 
   'title',
@@ -231,4 +242,5 @@ module.exports = exports = {
   datasets,
   programs,
   crsos,
+  all_dp_orgs,
 };

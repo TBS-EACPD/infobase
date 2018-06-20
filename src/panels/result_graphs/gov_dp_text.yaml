@@ -55,3 +55,16 @@ gov_dp_text:
 
     Cet année ({{planning_year_1}}), les organisations planifient atteindre **{{dp18_results}}** résultats, mesurés par **{{dp18_indicators}}** indicateurs. L'Évaluation du rendement de ces indicateurs sera signalé en automne 2019.
 
+
+
+
+gov_dp_above_search_bar_text:
+  transform: [handlebars,markdown]
+  en: |
+    Planned results and indicators for a particular organization can be found in its infographic
+  fr: |
+    Les résultats et indicateurs planifiés d'une organisation peuvent être trouvés dans son infographie
+
+gov_dp_search_bar_placeholder:
+  en: Search for an organization to see its results
+  fr: Recherchez une organisation pour voir ses résultats

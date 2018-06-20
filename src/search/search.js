@@ -4,6 +4,7 @@ const {
   escapeSingleQuotes,
 } = require('../core/utils.js');
 const {
+  all_dp_orgs,
   all_orgs_without_gov,
   orgs_with_data_with_gov,
   all_orgs_with_gov,
@@ -225,9 +226,11 @@ function autoComplete({container, search_configs, onSelect, placeholder, minLeng
 function deptSearch(container, options={}){
   const {
     include_orgs_without_data,
+    only_include_dp,
     href_template,
     history,
     onNewQuery,
+    placeholder,
   } = options;
 
   let { onSelect } = options;
@@ -242,12 +245,16 @@ function deptSearch(container, options={}){
   if(include_orgs_without_data){
     search_config = all_orgs_without_gov;
   }
+  if(only_include_dp){
+    search_config = all_dp_orgs;
+  }
     
   return autoComplete({
     container, 
     search_configs: [ search_config ],
     onSelect,
     onNewQuery,
+    placeholder,
   });
 }
 
