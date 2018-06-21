@@ -13,11 +13,7 @@ class BubbleMenu extends React.Component {
         >
           {
             _.map(this.props.items, item => <a
-              className={classNames(
-                "centerer bubble-button",
-                item.className,
-                item.active && "active"
-              )}
+              className={classNames( "centerer bubble-button", item.active && "active" )}
               style={{height: "200px", width: "300px"}}
               href={item.href}
             >

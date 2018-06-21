@@ -6,7 +6,6 @@ export const bubble_defs = {
     ix: 0,
     id: 'intro',
     tables: [],
-    className: "intro-data-type",
     title(subject){
       switch(subject.level){
         case 'program':
@@ -46,7 +45,6 @@ export const bubble_defs = {
       }
     },
     description: _.constant(""),
-    className: "structure-data-type",
     tables: [],
   },
   financial : {
@@ -56,7 +54,6 @@ export const bubble_defs = {
     // slightly modify the description for Financial data for ib plus
     description: _.constant(text.fin_desc[lang]),
     tables: [],
-    className: "finance-data-type",
   },
   people:  {
     ix: 10,
@@ -64,7 +61,6 @@ export const bubble_defs = {
     title: _.constant(text.people_title[lang]),
     description: _.constant(text.people_desc[lang]),
     tables: [],
-    className: "ppl-data-type",
   },
   results: {
     ix: 15,
@@ -72,7 +68,7 @@ export const bubble_defs = {
     title: _.constant(text.planning_title[lang]),
     description: _.constant(text.planning_desc[lang]),
     tables: [],
-    className: "results-data-type",
+
   },
   related: {
     ix: 20,
@@ -81,14 +77,12 @@ export const bubble_defs = {
     description: _.constant(text.where_can_i_go_desc[lang]),
     tables: [],
     color: "#114B5F",
-    className: "related-data-type",
   },
   all_data: {
     ix: 25,
     id: 'all_data',
     tables: [],
     color: "#009652",
-    className: "all_data-data-type",
     title: ({level}) => text[`all_data_${level}_title`][lang],
     description : _.constant(text.all_data_description[lang]),
   },

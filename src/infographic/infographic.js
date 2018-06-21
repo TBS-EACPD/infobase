@@ -94,7 +94,6 @@ const sorted_bubbles_for_subj = createSelector(
           <p>${obj.description(subject)}</p>
         `,
         a11y_description: `<p>${obj.description(subject)}</p>`,
-        className: obj.className,
         active: obj.id === active_bubble,
       };
     })

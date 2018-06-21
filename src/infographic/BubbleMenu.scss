@@ -5,6 +5,26 @@
   border-style: solid;
   border-width: 2px;
   text-align: center;
+
+  border: 3px solid #284162;
+  
+  &:not(.active):not(:hover):not(:focus):not(:active) {
+    color: #284162;
+    background-color: #fdfdfd;
+  }
+
+  &:hover{
+    transform: scale(1.03);
+    background-color: rgba(202, 217, 240, 0.74);
+    color: #284162;
+  }
+  
+  &.active, &:focus, &:active{
+    transform: scale(1.03);
+
+    color: white;
+    background-color: $color;
+  }
 }
 
 .bubble-menu > .bubble-button .title,
@@ -68,7 +88,6 @@
 }
 
 
-
 .bubble-button:not(.active):not(:hover):not(:active):not(:focus) {
   background-color: transparent;
 }
@@ -80,65 +99,4 @@
   color: #fff;
   //turn off WET (or is it chrome's ?) annoying outline 
   outline: none; 
-}
-
-@mixin bubble-type($color){
-  border: 3px solid #284162;
-  
-  &:not(.active):not(:hover):not(:focus):not(:active) {
-    color: #284162;
-    background-color: #fdfdfd;
-  }
-
-  &:hover{
-    transform: scale(1.03);
-    background-color: rgba(202, 217, 240, 0.74);
-    color: #284162;
-  }
-  
-  &.active, &:focus, &:active{
-    transform: scale(1.03);
-
-    color: white;
-    background-color: $color;
-  }
-
-}
-
-/* data-type colors 
- .bubble-button.<type>-bubble refers to a bubble button 
- .bubble-button.<type>-bubble.active refers to a bubble button that is currently picked
-
-  the bubbles have many inline styles set by d3 for animation purposes. Only colours should be used here.
-
-*/
-
-
-
-.bubble-button.finance-data-type {
-  @include bubble-type(#284162);
-}
-
-.bubble-button.ppl-data-type {
-  @include bubble-type(#284162);
-}
-
-.bubble-button.results-data-type {
-  @include bubble-type(#284162);
-}
-
-.bubble-button.intro-data-type {
-  @include bubble-type(#284162);
-}
-
-.bubble-button.related-data-type {
-  @include bubble-type(#284162);
-}
-
-.bubble-button.structure-data-type {
-  @include bubble-type(#284162);
-}
-
-.bubble-button.all_data-data-type {
-  @include bubble-type(#284162);
 }
