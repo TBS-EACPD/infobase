@@ -4,8 +4,7 @@ fixture `Main app tests`// declare the fixture
   .page `http://localhost:8080/build/InfoBase/index-eng.html#start`;  // specify the start page
 
 
-const financial_link_sel = "#app-focus-root > div > div > div.outer-container-escape-hatch" +
-  "> div.inner-container-escape-hatch > div.home-root > div.intro-box > div.container > h2 > span";
+const financial_link_sel = "#app-focus-root > div > div > div > div > div.intro-box > div.equal-height-row.equal-height-row--home-row > div:nth-child(1) > div > a > div > div > div.h-img-card__text";
 
 //then create a test and place your code there
 test('App boots and loads home page', async t => {

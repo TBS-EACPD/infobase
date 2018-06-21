@@ -13,5 +13,5 @@ test('(French) app boots and loads home page', async t => {
     // First assure target exists, just testing innerText seems faulty in container when element doesn't exist
     .expect(Selector(financial_link_sel).exists).ok()
     // Use the assertion to check if the actual target text is equal to the expected one
-    .expect(Selector(financial_link_sel).innerText).contains("afasfdasf");
+    .expect(Selector(financial_link_sel).innerText).contains("Traduit");
 });
