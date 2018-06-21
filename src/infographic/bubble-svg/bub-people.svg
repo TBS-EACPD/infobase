@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+  <title>bub-peopl</title>
+  <g>
+    <rect x="87.2282" y="16.9284" width="9.0923" height="156.1432" rx="1.706" ry="1.706" fill="#284162"/>
+    <ellipse cx="46.4135" cy="36.8104" rx="17.1624" ry="17.0928" fill="#284162"/>
+    <path d="M46.4134,62.0089c-18.8305,0-34.0955,8.3663-34.0955,18.6867v82.8086c0,4.9643,5.96,9.026,13.2441,9.026H67.2651c7.284,0,13.244-4.0617,13.244-9.026V80.6956C80.5091,70.3752,65.2442,62.0089,46.4134,62.0089Z" fill="#284162"/>
+    <rect x="108.4362" y="17.8936" width="25.8335" height="33.9971" rx="2.8633" ry="2.8633" transform="translate(156.2451 -86.4608) rotate(90)" fill="none" stroke="#284162" stroke-miterlimit="10" stroke-width="4"/>
+    <rect x="122.4352" y="44.6465" width="25.8335" height="61.995" rx="3.8666" ry="3.8666" transform="translate(210.996 -59.7079) rotate(90)" fill="none" stroke="#284162" stroke-miterlimit="10" stroke-width="4"/>
+    <rect x="117.7688" y="90.0647" width="25.8335" height="52.6624" rx="3.5637" ry="3.5637" transform="translate(247.0815 -14.2897) rotate(90)" fill="none" stroke="#284162" stroke-miterlimit="10" stroke-width="4"/>
+    <rect x="127.1015" y="121.4839" width="25.8335" height="71.3277" rx="4.1474" ry="4.1474" transform="translate(297.166 17.1295) rotate(90)" fill="none" stroke="#284162" stroke-miterlimit="10" stroke-width="4"/>
+  </g>
+</svg>

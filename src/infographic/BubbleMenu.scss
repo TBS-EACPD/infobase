@@ -96,7 +96,21 @@
 .bubble-button:focus,
 .bubble-button:active,
 .bubble-button:hover {
-  color: #fff;
   //turn off WET (or is it chrome's ?) annoying outline 
   outline: none; 
+}
+
+.bub-img{
+  width: 80%; 
+  height: 70%;
+  background-size: 100%;
+}
+
+.bub-items{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; //IE fix
+  height: 100%;
+  justify-content: space-between;
 }
