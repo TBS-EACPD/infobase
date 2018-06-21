@@ -12,7 +12,7 @@ test('App boots and loads home page', async t => {
   const target_selector = Selector(financial_link_sel);
   await t
     // First assure target exists, just testing innerText seems faulty in container when element doesn't exist. Give it a long timeout for when CI runs slow
-    .expect(target_selector.exists).ok({timeout: 10000})
+    .expect(target_selector.exists).ok({timeout: 100000})
     // Use the assertion to check if the actual target text is equal to the expected one
     .expect(target_selector.innerText).contains("Transforming");
 });
