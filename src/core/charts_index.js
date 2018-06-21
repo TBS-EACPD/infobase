@@ -22,8 +22,6 @@ charts_index.PIE_OR_BAR = require("../charts/pie_or_bar");
 charts_index.SAFE_PROGRESS_DONUT = require("../charts/safe_progress_donut.js");
 charts_index.LINE = require("../charts/line");
 charts_index.CANADA = require("../charts/canada");
-//being phased out
-//charts_index.BUBBLE_MENU = require("../charts/bubble-menu");
 charts_index.ARROW  = require("../charts/arrow");
 charts_index.PACK  = require("../charts/pack");
 charts_index.HEATMAP  = require("../charts/heatmap");
@@ -31,7 +29,6 @@ charts_index.CONCEPTEXPLORE  = require("../charts/concept-explorer");
 charts_index.HBAR_Composition = require("../charts/hbar_composition");
 charts_index.PROGRESS_DONUT = require("../charts/progress_donut");
 charts_index.TWO_SERIES_BAR = require("../charts/two_series_bar");
-charts_index.BUBBLE_MENU = require("../charts/bubble-menu");
 //this is currently not used, treemap should not necessarily be deleted though.
 //charts_index.TREEMAP  = require("../charts/treemap");
 window.charts_index = charts_index;
