@@ -9,9 +9,10 @@ const financial_link_sel = "#app-focus-root > div > div > section:nth-child(2) >
 
 //then create a test and place your code there
 test('A11Y app boots up', async t => {
+  const target_selector = await Selector(financial_link_sel);
   await t
     // First assure target exists, just testing innerText seems faulty in container when element doesn't exist
-    .expect(Selector(financial_link_sel).exists).ok()
+    .expect(target_selector.exists).ok()
     // Use the assertion to check if the actual target text is equal to the expected one
-    .expect(Selector(financial_link_sel).innerText).contains("Learn about government finances");
+    .expect(target_selector.innerText).contains("Learn about government finances");
 });
