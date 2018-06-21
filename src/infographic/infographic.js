@@ -20,8 +20,6 @@ import {
   EverythingSearch,
 } from '../util_components';
 
-import { Panel } from '../components/panel-components.js';
-
 import { infograph_href_template } from './routes.js';
 
 const sub_app_name = "infographic_org";
@@ -190,33 +188,29 @@ class InfoGraph_ extends React.Component {
         </div>
       }
       <div>
-        <Panel
-          title={text_maker("bb_menu_title")}
-        >
-          <div style={{position:'relative'}}>
-            { loading && 
-              <div
-                className='no-cursor opaque-overlay'
-                style={{
-                  position: 'absolute',
-                  left: '0px',
-                  top: '0px',
-                  width: "100%",
-                  height: "100%",
-                  backgroundColor: 'rgba(204,204,204,.5)',
-                  borderRadius : '5px',
-                }}
-              >
-                <SpinnerWrapper scale={4} /> 
-              </div>
-            }
-            {
-              window.is_a11y_mode ? 
+        <div style={{position:'relative'}}>
+          { loading && 
+            <div
+              className='no-cursor opaque-overlay'
+              style={{
+                position: 'absolute',
+                left: '0px',
+                top: '0px',
+                width: "100%",
+                height: "100%",
+                backgroundColor: 'rgba(204,204,204,.5)',
+                borderRadius : '5px',
+              }}
+            >
+              <SpinnerWrapper scale={4} /> 
+            </div>
+          }
+          {
+            window.is_a11y_mode ? 
               <AccessibleBubbleMenu items={sorted_bubbles} /> : 
               <BubbleMenu items={sorted_bubbles} />
-            }
-          </div>
-        </Panel>
+          }
+        </div>
       </div>
       <div>
         { window.is_a11y_mode &&

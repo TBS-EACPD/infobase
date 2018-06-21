@@ -1,5 +1,5 @@
 import './BubbleMenu.scss';
-import { classNames } from 'classnames';
+import classNames from 'classnames';
 
 class BubbleMenu extends React.Component {
   render(){
@@ -12,16 +12,18 @@ class BubbleMenu extends React.Component {
           className="bubble-menu"
         >
           {
-            _.map(this.props.items, item => <a
-              className={classNames( "centerer bubble-button", item.active && "active" )}
-              style={{height: "200px", width: "300px"}}
-              href={item.href}
-            >
-              <strong className='title bolder'> 
-                {item.title}
-              </strong>
-            </a>
-            )
+            _.map(this.props.items, item => (
+              <a
+                className={classNames( "centerer bubble-button", item.active && "active" )}
+                style={{height: "200px", width: "300px"}}
+                href={item.href}
+                key={item.id}
+              >
+                <strong className='title bolder'> 
+                  {item.title}
+                </strong>
+              </a>
+            ))
           }
         </nav>
       </div>
