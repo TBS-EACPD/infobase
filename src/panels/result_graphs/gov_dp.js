@@ -1,3 +1,4 @@
+import { get_static_url } from '../../core/static_url.js';
 import {Fragment} from 'react';
 import text from './gov_dp_text.yaml';
 
@@ -46,7 +47,7 @@ const ResultsIntroPanel = ({counts}) => <Fragment>
           }}
         >
           <img
-            src={`./png/result-taxonomy-${window.lang}.png`} 
+            src={get_static_url(`png/result-taxonomy-${window.lang}.png`)} 
             style={{
               width: "100%",
               maxHeight: "500px",
