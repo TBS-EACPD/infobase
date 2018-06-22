@@ -3,7 +3,9 @@ gov_missing_dp_results:
   en: |
     2018-19 Departmental Plans data is now available. Note that the following organizations have not yet submitted their planned results and indicators:
     
-    <div class="mrgn-lft-lg">{{#each late_orgs}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}</div>
+    {{#each late_orgs}}
+      * {{this}}
+    {{/each}}
 
   fr: |
     L'information des plan ministériels 2018-2019 est maintenant disponible.  Notez que les organisations suivantes n'ont pas encore soumis leurs résultats et indicateurs planifiés:
