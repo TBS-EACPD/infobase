@@ -219,6 +219,15 @@ const HomeLayout = props => (
           <div className="fcol-md-4 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
+              img_src="svg/compare_estimates.svg"
+              title_key="estimates_comp_home_title"
+              text_key="estimates_comp_home_text"
+              link_href="#compare_estimates"
+            />
+          </div>
+          <div className="fcol-md-4 fcol-sm-6 linkcard">
+            <CardTopImage
+              tmf={home_tm}
               img_src="svg/bubbles.svg"
               title_key="planet_home_title"
               text_key="planet_home_text"
@@ -284,3 +293,5 @@ const HomeLayout = props => (
     </div> 
   </div>
 );
+
+
