@@ -192,7 +192,7 @@ const get_non_col_content = ({node}) => {
         >
           <header className="agnostic-header"><TM k="notes" /></header>
           <FootnoteList
-            footnotes={_.map(footnotes, 'text')}
+            footnotes={footnotes}
           />
         </HeightClipper>
       }
