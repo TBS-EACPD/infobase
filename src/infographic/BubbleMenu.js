@@ -19,7 +19,7 @@ class BubbleMenu extends React.Component {
                 href={item.href}
                 key={item.id}
               >
-                <div className="bub-items">
+                <div className="bub-item">
                   <strong className="title" style={{width: "100%"}}> 
                     {item.title}
                   </strong>
