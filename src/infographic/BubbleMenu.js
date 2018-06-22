@@ -20,7 +20,7 @@ class BubbleMenu extends React.Component {
                 key={item.id}
               >
                 <div className="bub-items">
-                  <strong className="title bolder" style={{width: "100%"}}> 
+                  <strong className="title" style={{width: "100%"}}> 
                     {item.title}
                   </strong>
                   <div className="bub-svg" dangerouslySetInnerHTML={{ __html: item.svg_content }}/>

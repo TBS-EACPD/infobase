@@ -13,15 +13,14 @@
     background-color: #fdfdfd;
   }
 
-  &:hover{
+  &:hover, &:focus {
     transform: scale(1.03);
     background-color: rgba(202, 217, 240, 0.74);
     color: #284162;
   }
   
-  &.active, &:focus, &:active{
+  &.active, &:focus, &:active {
     transform: scale(1.03);
-
     color: white;
     background-color: #284162;
   }
@@ -49,10 +48,6 @@
     display: flex;
   }
 
-  .bubble-button.active {
-    line-height: 1.8em;
-  }
-
   .bubble-menu > .bubble-button .title {
     display: block;
   }
@@ -78,14 +73,6 @@
   background-color: transparent;
 }
 
-.bubble-button.active,
-.bubble-button:focus,
-.bubble-button:active,
-.bubble-button:hover {
-  //turn off WET (or is it chrome's ?) annoying outline 
-  outline: none; 
-}
-
 .bub-items {
   display: flex;
   flex-direction: column;
@@ -99,4 +86,25 @@
   width: 80%; 
   height: 70%;
   background-size: 100%;
+
+  & > svg {
+    fill: #284162;
+    stroke: #284162;
+  }
+}
+
+.bubble-button.active,
+.bubble-button:active {
+  & > .bub-items > .bub-svg > svg {
+    fill: #fdfdfd;
+    stroke: #fdfdfd;
+  }
+}
+
+.bubble-button.active,
+.bubble-button:focus,
+.bubble-button:active,
+.bubble-button:hover {
+  //turn off WET (or is it chrome's ?) annoying outline 
+  outline: none;
 }
