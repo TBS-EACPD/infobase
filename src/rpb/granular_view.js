@@ -70,7 +70,7 @@ class GranularView extends React.Component {
               <div className="col-md-6">
                 <label className='rpb-config-header' htmlFor='filt_select'> Filter </label>
                 <TwoLevelSelect
-                  className="form-control"
+                  className="form-control form-control-ib"
                   id="filt_select"
                   onSelect={ id=> {
                     const [ dim_key, filt_key ] = id.split('__');

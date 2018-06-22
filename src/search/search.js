@@ -24,7 +24,7 @@ const search_template = ({search_text, large})=> (
   `
   <span class='${classNames("form-inline", large && "full-width-search")}'>
     <input 
-      style='vertical-align: top;'
+      style='vertical-align: top; text-overflow: ellipsis; padding-right: 32px;'
       class='${classNames("typeahead", "form-control",  "input-lg")}'
       type='text' 
       autocomplete="off"  

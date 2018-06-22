@@ -1,4 +1,5 @@
 import text from './bubble_definitions.yaml';
+import svgs from './bubble_svgs.yaml';
 import { trivial_text_maker as text_maker } from '../models/text.js';
 
 export const bubble_defs = {
@@ -6,7 +7,7 @@ export const bubble_defs = {
     ix: 0,
     id: 'intro',
     tables: [],
-    className: "intro-data-type",
+    svg_content: svgs.intro.text,
     title(subject){
       switch(subject.level){
         case 'program':
@@ -34,8 +35,8 @@ export const bubble_defs = {
       }
     },
     description: _.constant(""),
-    className: "structure-data-type",
     tables: [],
+    svg_content: svgs.structure.text,
   },
   financial : {
     ix: 5,
@@ -44,7 +45,7 @@ export const bubble_defs = {
     // slightly modify the description for Financial data for ib plus
     description: _.constant(text.fin_desc[lang]),
     tables: [],
-    className: "finance-data-type",
+    svg_content: svgs.financial.text,
   },
   people:  {
     ix: 10,
@@ -52,7 +53,7 @@ export const bubble_defs = {
     title: _.constant(text.people_title[lang]),
     description: _.constant(text.people_desc[lang]),
     tables: [],
-    className: "ppl-data-type",
+    svg_content: svgs.people.text,
   },
   results: {
     ix: 15,
@@ -60,7 +61,7 @@ export const bubble_defs = {
     title: _.constant(text.planning_title[lang]),
     description: _.constant(text.planning_desc[lang]),
     tables: [],
-    className: "results-data-type",
+    svg_content: svgs.results.text,
   },
   related: {
     ix: 20,
@@ -69,16 +70,16 @@ export const bubble_defs = {
     description: _.constant(text.where_can_i_go_desc[lang]),
     tables: [],
     color: "#114B5F",
-    className: "related-data-type",
+    svg_content: svgs.related.text,
   },
   all_data: {
     ix: 25,
     id: 'all_data',
     tables: [],
     color: "#009652",
-    className: "all_data-data-type",
     title: ({level}) => text[`all_data_${level}_title`][lang],
     description : _.constant(text.all_data_description[lang]),
+    svg_content: svgs.all_data.text,
   },
 
 };

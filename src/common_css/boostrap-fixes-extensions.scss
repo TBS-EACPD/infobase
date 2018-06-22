@@ -1,5 +1,8 @@
 @import "common-variables";
 
+h1{
+  border-bottom: 3px solid $highlightColor;
+}
 
 hr {
   //default is #eee, a little too bright
@@ -10,8 +13,8 @@ hr {
 .glossary-tooltip-link,
 .glossary-tooltip-link:visited  {
   text-decoration: none !important;
-  border-bottom: 1px dashed #113e78 !important;
-  color: #113e78 !important;
+  border-bottom: 2px dashed #135bbb !important;
+  color: #135bbb !important;
 }
 
 .tooltip-arrow {
@@ -126,6 +129,7 @@ h2 {
   font-size: 90%;
 }
 
+
 .uppercase {
   text-transform: uppercase;
 }
@@ -225,6 +229,10 @@ details > * {
   line-height: 1.8em;
 }
 
+.nav-pills > li.active > a {
+  background-color: #284162 !important;
+}
+
 .small_panel_text {
   font-size: 0.8em;
   line-height: normal;
@@ -322,6 +330,11 @@ list-group-item.active a {
     vertical-align: middle !important;
 }
 
+.form-control.form-control-ib { 
+  border: 1.4px solid #3281EA;
+  box-shadow: none !important;
+}
+
 .twitter-typeahead, .twitter-typeahead input {
 	width: 100% !important;
 }
@@ -338,14 +351,14 @@ table.table-blue > thead > tr {
   background-color : #d9edf7;
 }
 table.table-blue > thead > tr > th{
-  background-color: rgb(37, 114, 180);
+  background-color: $secondaryColor;
   color: $backgroundColor;
   font-weight : $mediumFontWeight;
   border: none;
   font-size: 13px;
 }
 tr.background-blue > td {
-  background-color: rgb(37, 114, 180);
+  background-color: $secondaryColor;
   color: $backgroundColor;
 }
 tr.background-blue > td > a{
@@ -357,7 +370,7 @@ tr.background-blue > td > a{
 }
 
 .table-striped>tbody>tr:nth-child(even) {
-  background-color: #d9edf7;
+  background-color: $buttonSecondaryColor;
 }
 
 /* 
@@ -467,7 +480,7 @@ ol, ul {
   margin-bottom: 12px;
 }
 
-li.checkbox > label {
+li.checkbox > label{
   font-weight: $mediumFontWeight;
 }
 

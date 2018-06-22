@@ -1,5 +1,9 @@
-#ib-site-header {
+#ib-site-header-area {
+  border-bottom: 4px solid #335175;
   background-color: #f8f8f8;
+}
+
+#ib-site-header {
   padding: 1.15rem;
   line-height: 0;
 }
@@ -45,7 +49,6 @@
 
 #wb-bc {
   background-color: #f8f8f8 !important;
-  border-bottom: 4px solid #335175;
 }
 
 @media (min-width: 992px) {

@@ -65,13 +65,16 @@ budget_home_text:
   fr: Découvrir une visualisation des nouvelles mesures du Budget 2018 qui seront financées par le Budget des dépenses.
 
 planet_home_title:
-  en: Explore the magnitude of the federal government
-  fr: Découvrir l'ampleur du secteur publique fédéral
+  en: Bubble Explorer
+  fr: Diagrammes circulaires
 
 planet_home_text:
-  en: Compare how much organizations spend and how many people they employ
+  en: Compare organizations by how much they spend and how many people they employ
   fr: Comparer les dépenses des organisations et le nombre d'employés à leur service
 
+home_search_bar_title:
+  en: Jump to an infographic
+  fr: Infographie rapide
 
 estimates_comp_home_title:
   en: Estimates Comparison
@@ -81,21 +84,16 @@ estimates_comp_home_text:
   en: See how the government's most recent spending plan differs from last year 
   fr: Voir comment le plan de dépenses du gouvernement le plus récent a changé depuis l'année passée 
 
-
-bubbles_quick_link:
-  en: Interactive bubble diagram
-  fr: Diagramme des bulles interactives
-
 featured_data_title:
   en: Quick links
   fr: Liens directs
 
 explorer_home_title: 
-  en: Pick a topic to explore
-  fr: Choisir le sujet à explorer
+  en: Tag Explorer
+  fr: Explorer les étiquettes
 
 explorer_home_text: 
-  en: Search by organization, program, or keyword "tag" to explore data on your area of interest
+  en: Explore data from your area of interest by organization, program, or keyword "tag"
   fr: Recherche par organisation, programme ou mot clé pour étudier les données dans le domaine qui vous intéresse
 
 
@@ -109,11 +107,11 @@ dashboard_home:
   fr: Recherche par sujet pour bâtir un tableau de bord personnalisé
 
 home_build_a_report: 
-  en: Build your data report
-  fr: Créer votre propre rapport de données
+  en: Report Builder
+  fr: Outil de création de rapport
 
 report_builder_home_desc:
-  en: Create a customized and exportable report on the data you want to analyze
+  en: Create a customized and exportable report of the data you want to analyze
   fr: Créer un rapport adapté et exportable sur les données que vous voulez analyser
 
 igoc_home_title:
@@ -121,7 +119,7 @@ igoc_home_title:
   fr: Liste des organisations (A à Z)
 
 igoc_home_desc:
-  en: A comprehensive listing of federal organizations and interests
+  en: Consult a comprehensive listing of federal organizations and interests
   fr: Une liste exhaustive des organisations et intérêts fédéraux
 
 glossary_home_title:
@@ -129,7 +127,7 @@ glossary_home_title:
   fr: Glossaire
 
 glossary_home_desc:
-  en: A searchable list of definitions for terms used in the InfoBase
+  en: Search a list of definitions for terms used in the InfoBase
   fr: Liste interrogeable des définitions pour les termes employés dans l'InfoBase
 
 glossary_home_link_text:
@@ -141,7 +139,7 @@ metadata_home_title:
   fr: Données
 
 metadata_home_desc: 
-  en: See more details on the data and links to Open Data
+  en: Find information on, and external links to, the InfoBase's data sources
   fr: Voir le complément d'information sur les données et sur les liens vers des sites de données ouvertes
 
 metadata_home_link_text:
@@ -254,8 +252,8 @@ about_home_title:
   fr: À propos de nous
 
 about_home_desc:
-  en: Learn more about our team, principles, data, technology and help us improve the InfoBase
-  fr: En apprendre d'avantage sur notre équipe, nos principes, nos données et technologies, et aidez-nous à améliorer l'InfoBase
+  en: Learn more about our team, principles, data, and technology. Help us improve the InfoBase!
+  fr: En apprendre d'avantage sur notre équipe, nos principes, nos données et technologies. Aidez-nous à améliorer l'InfoBase!
 
 about_home_link:
   en: Learn about us
@@ -264,7 +262,6 @@ about_home_link:
 home_pop_by_exec:
   en: Population by Executive Level
   fr: Population selon les niveaux des cadres supérieurs
-
 
 home_pop_by_gender:
   en: Population by Gender
@@ -277,8 +274,3 @@ home_pop_by_fol:
 home_pop_avg_age:
   en: Employee Average Age
   fr: Âge moyen des employés
-
-
-
-
-

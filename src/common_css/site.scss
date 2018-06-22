@@ -280,7 +280,7 @@ ul.footnote-list {
   Only needed on larger screens. 
 */
 @media (min-width:1000px){
-  .panel-body .row.equal-height-cols::before {
+  .panel-body {
     content: none!important;
   }
 }
@@ -336,12 +336,12 @@ div.height-clipped-bar-area {
   font-size: 1.4em;
   background-color: #d7faff;
   border-color: #269abc;
-  box-shadow: 1px 3px 5px #ccc;
   padding: 10px;
-  margin-top: 10px;
   border-radius: 5px;
   color: #214a5f;
   display: flex;
+  margin: -10px 0px 10px 0px;
+  width: 100% /* FireFox */
 }
 .survey-link-close-container {
   /* top right corner */
@@ -471,9 +471,9 @@ ol.breadcrumb > li:last-child > :last-child {
 // Misc. styles from flat redesign
 .well-sm {
   border-radius: 10px;
-  background-color: hsla(211, 15%, 55%, 1);
+  background-color: $tertiaryColor;
   text-align: center;
-  border-color: hsla(211, 15%, 55%, 1);
+  border-color: $tertiaryColor;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
   padding: 10px;
@@ -482,7 +482,7 @@ ol.breadcrumb > li:last-child > :last-child {
 .form-control.input-lg {
   border: 2px solid #ccc;
   border-radius: 10px;
-  box-shadow: none;
+  box-shadow: none !important;
   opacity: 1;
   background: none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255);
 }

@@ -131,7 +131,7 @@ _.each(['dept', 'program', 'crso'], lvl => {
     },
     render: () => (
       <div
-        className="alert alert-no-symbol alert-danger alert--is-bordered large_panel_text"
+        className="alert alert-info alert-no-symbol alert--is-bordered large_panel_text"
         style={{ 
           textAlign: "center",
           borderColor: "#d9534f",

@@ -93,6 +93,10 @@ const common_lookups_fr = _.map(
 const common_png = _.map(['en', 'fr'], lang => `src/panels/result_graphs/result-taxonomy-${lang}.png`);
 
 const common_svg = [
+  //home banner
+  'src/home/backbanner.svg',
+  'src/home/flagline.svg',
+
   //top left corner brand
   'src/InfoBase/sig-blk-en.svg',
   'src/InfoBase/sig-blk-fr.svg',
@@ -104,6 +108,10 @@ const common_svg = [
   'src/home/builder.svg',
   'src/home/structure.svg',
   'src/home/explorer.svg',
+  'src/home/aboutus.svg',
+  'src/home/glossary.svg',
+  'src/home/metadata.svg',
+  'src/home/compare_estimates.svg',
 
   //simplographic images
   'src/panels/intro_graphs/check.svg',
@@ -115,7 +123,6 @@ const common_svg = [
   'src/home/results.svg',
   'src/home/expend.svg',
   'src/home/people.svg',
-  'src/home/compare_estimates.svg',
 ];
 
 const IB_tables = [

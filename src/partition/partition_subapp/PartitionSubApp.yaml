@@ -28,7 +28,7 @@ partition_controls:
        {{#if search}}
        <div
          class="partition-control-element"
-         style="flex-grow:1;max-width:800px;">
+         style="flex-grow:1;">
          <text>
            {{gt "partition_search_filter"}}
          </text>

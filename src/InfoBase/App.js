@@ -60,7 +60,6 @@ const LazyGlossary = ComponentLoader(async () => {
   return Glossary;
 });
 
-
 const LazyRPB = ComponentLoader(async () => {
   const { ReportBuilder } = await import("../rpb/index.js");
   return ReportBuilder;
@@ -75,11 +74,6 @@ const LazyEstimatesComparison = ComponentLoader(async () =>{
   const {EstimatesComparison} = await import ("../EstimatesComparison/EstimatesComparison.js");
   return EstimatesComparison
 })
-
-
-
-// Now you can dispatch navigation actions from anywhere!
-// store.dispatch(push('/foo'))
 
 
 export class App extends React.Component {

@@ -132,7 +132,7 @@ class SimpleView extends React.Component {
                     <div className="col-md-10">
                       <Select
                         id="dim_select"
-                        className="form-control rpb-simple-select"
+                        className="form-control form-control-ib rpb-simple-select"
                         options={dimensions}
                         selected={dimension}
                         onSelect={id => on_set_dimension(id)}
@@ -150,7 +150,7 @@ class SimpleView extends React.Component {
                       <div className="col-md-10">
                         <Select
                           id="filt_select"
-                          className="form-control rpb-simple-select"
+                          className="form-control form-control-ib rpb-simple-select"
                           options={filters.map(filter => ({ id: filter, display: filter }) ) }
                           selected={filter}
                           onSelect={id => on_set_filter({

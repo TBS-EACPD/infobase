@@ -1,13 +1,12 @@
 import './BudgetMeasuresPartition.scss';
 
-
-
-
 import { PartitionDiagram } from '../partition_diagram/PartitionDiagram.js';
 import { formats } from '../../core/format.js';
 import { text_maker } from "./budget_measure_text_provider.js";
 
 import { budget_measures_hierarchy_factory } from './budget_measures_hierarchy_factory.js';
+
+import { ContainerEscapeHatch } from '../../util_components';
 
 import * as Subject from '../../models/subject';
 import * as businessConstants from '../../models/businessConstants.yaml';
@@ -189,20 +188,9 @@ const render_diagram = (diagram, props, data, data_wrapper_node_rules, dont_fade
   });
 }
 
-function center_diagram(){
-  if (this.refs.outer_container){
-    this.refs.outer_container.style.marginLeft = ( -d3.select("main.container").node().offsetLeft + 4 ) + "px";
-  }
-}
 
 export class BudgetMeasuresPartition extends React.Component {
-  constructor(){
-    super();
-    this.center_diagram = center_diagram.bind(this);
-  }
   componentDidMount(){
-    window.addEventListener("resize", this.center_diagram);
-
     this.container = d3.select(ReactDOM.findDOMNode(this.refs.container));
     this.diagram = new PartitionDiagram(this.container, {height: 700});
     update_diagram(this.diagram, this.props);
@@ -211,24 +199,14 @@ export class BudgetMeasuresPartition extends React.Component {
     update_diagram(this.diagram, nextProps);
     return false;
   }
-  componentWillUnmount(){
-    window.removeEventListener("resize", this.center_diagram);
-  } 
   render(){
     return (
-      <div
-        ref="outer_container"
-        style={{
-          marginLeft: ( -d3.select("main.container").node().offsetLeft + 4 ) + "px",
-          width: "98vw",
-          marginTop: "10px",
-        }}
-      >
+      <ContainerEscapeHatch>
         <div 
           className="budget-measure-partiton-area" 
           ref="container"
         />
-      </div>
+      </ContainerEscapeHatch>
     );
   }
 }
