@@ -437,7 +437,7 @@ export class ResourceExplorer extends React.Component {
       doc :
       'dp18'
     );
-debugger
+
     return (
       <StandardRouteContainer {...route_container_args}>
         {header}

@@ -183,7 +183,6 @@ heatmap.prototype.render = function(options){
       'top': function(d){ return  y_scale(d.y)+'px'},
       "border" : "1px solid #ccc",
       "background": function(d){
-        // debugger;
         if (d.z === undefined){
           return "#FFF";
         } else if (d.z >0) {
