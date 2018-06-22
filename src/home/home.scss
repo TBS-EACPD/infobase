@@ -111,13 +111,8 @@
   align-items: center;
   justify-content: space-between;
 
-  transition: transform .2s ease-in-out;
-
   &:hover {
     background-color: #565D64;
-    @media(max-width:767px) {
-      transform: scale(1.05);
-    }
   }
 }
 
