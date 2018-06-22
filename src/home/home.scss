@@ -74,8 +74,11 @@
 
 .flag {
   transform: translate(0, -10%);
-  width: 100%;
   margin: 0;
+
+  & > img {
+    width: 100%;
+  }
 }
 
 .home-trinity-container {
