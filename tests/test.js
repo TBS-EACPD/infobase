@@ -5,7 +5,7 @@ fixture `Main app tests`// declare the fixture
 
 
 
-const financial_link_sel = = "#app-focus-root > div > div > div.outer-container-escape-hatch > " +
+const financial_link_sel = "#app-focus-root > div > div > div.outer-container-escape-hatch > " +
   "div.inner-container-escape-hatch > div.home-root > div.intro-box > div.container > h2 > span";
 
 
