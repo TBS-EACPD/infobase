@@ -61,7 +61,7 @@
   }
 }
 
-@media (min-width: 1000px){
+@media (min-width: 992px){
   .bubble-menu {
     display: flex;
     flex-direction:row;
@@ -73,7 +73,7 @@
   .bubble-button {
     text-decoration: none;
     margin: 5px;
-    padding: 15px;
+    padding: 5px;
     display: flex;
   }
 
@@ -83,10 +83,11 @@
 }
 
 
-@media (max-width: 999px){
+@media (max-width: 991px){
   .bubble-menu {
     display: flex;
     flex-direction: column;
+    padding: 0px 10px;
   }
   .bubble-button {
     margin: 2px;
@@ -98,11 +99,5 @@
     visibility: hidden;
     width: 0px; 
     height: 0px;
-  }
-}
-
-@media (max-width: 999px){
-  .bubble-menu {
-    padding: 0px 10px;
   }
 }
