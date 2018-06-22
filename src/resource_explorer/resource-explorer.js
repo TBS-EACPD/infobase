@@ -280,8 +280,8 @@ class ExplorerPage extends React.Component {
       </div>
       <div className="tabbed_content">
         <ul className="tabbed_content_label_bar">
-          <li className={classNames("tab_label", doc==="drr16" && "active_tab")} onClick={()=> this.refs.drr166_link.click()}>
-            <a href={`#resource-explorer/${_.includes(dp_only_schemes, hierarchy_scheme) ? "min" : hierarchy_scheme }/drr166`} role="button" aria-pressed={doc === "drr16"} className="tab_label_text" ref="drr166_link">
+          <li className={classNames("tab_label", doc==="drr16" && "active_tab")} onClick={()=> this.refs.drr16_link.click()}>
+            <a href={`#resource-explorer/${_.includes(dp_only_schemes, hierarchy_scheme) ? "min" : hierarchy_scheme }/drr16`} role="button" aria-pressed={doc === "drr16"} className="tab_label_text" ref="drr16_link">
               <TM k="DRR_resources" />
             </a>
           </li>
@@ -437,7 +437,7 @@ export class ResourceExplorer extends React.Component {
       doc :
       'dp18'
     );
-
+debugger
     return (
       <StandardRouteContainer {...route_container_args}>
         {header}
