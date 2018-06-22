@@ -1,5 +1,5 @@
 import text from './dp_rev_split.yaml';
-
+import { GlossaryEntry } from '../../models/glossary.js';
 import {
   PanelGraph,
   util_components,
@@ -68,10 +68,15 @@ _.each(["dept","crso","program"], level => {
         info,
       } = calculations;
 
+      const new_footnotes = footnotes.concat([
+        { text: GlossaryEntry.lookup("SPA").definition },
+      ]);
+
       return (
         <Panel
           title={text_maker("dp_rev_split_title")}
-          {...{sources,footnotes}}
+          sources={sources}
+          footnotes={new_footnotes}
         >
           <div>
             <TM k="dp_rev_split_text" args={info} />
