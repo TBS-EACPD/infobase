@@ -206,13 +206,16 @@ const enhanced_tables_by_id = {};
 function fill_dimension_columns(table){
   if(!enhanced_tables_by_id[table.id]){ 
 
-    _.each(table.dimensions , dim_obj => {
-      const dim_key = dim_obj.title_key;
-      const bound_filter_func = dim_obj.filter_func({ table });
-      _.each( table.data, row => {
-        row[dim_key] = bound_filter_func(row);
-      });
-    });
+    _.chain(table.dimensions)
+      .reject("exclude_from_rpb")
+      .each(dim_obj => {
+        const dim_key = dim_obj.title_key;
+        const bound_filter_func = dim_obj.filter_func({ table });
+        _.each( table.data, row => {
+          row[dim_key] = bound_filter_func(row);
+        });
+      })
+      .value();
 
     enhanced_tables_by_id[table.id] = true;
   }

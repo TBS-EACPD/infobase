@@ -1,0 +1,102 @@
+diff_view_title:
+  en: Estimates Comparison
+  fr: Comparaison des budgets de dépenses
+
+diff_view_meta_desc:
+  en: See what's new in the government's spending plan
+  fr: Voir quels sont les changements dans le plan de dépenses du gouvernement    
+
+diff_view_top_text:
+  transform: [handlebars, markdown]
+  en: |
+    This section compares the recently tabled Mains estimates {{est_in_year}} against last year's mains estimates.
+    
+  fr: |
+    Cette section compare le budget de dépenses principale récemment déposé contre celui de l'année passée.  
+
+new:
+  en: New Item
+  fr: Nouvel objet
+
+item_no_longer_active:
+  en: Inactive
+  fr: Inactif
+
+
+biv_footnote:
+  transform: [handlebars, markdown]
+  en: |
+    This **new** central vote will facilitate teimly availability of supply for Budget 2018 measures carried out in 2018-19. For a breakout of this funding by measure and organization, see the InfoBase's [budget mesures section](#budget-measures/budget-measure).
+  fr: |
+    Ce nouveau crédit central aidera à rendre disponibles en temps oppurtun les fonds requis pour les mesures du budgets qui seront mises en œuvre en 2018-2019. Pour voir une répartition des fonds par mesure et par organisation, voir la [section des mesures budgétaires de l'InfoBase](#budget-measures/budget-measure).  
+
+
+no_historical_info:
+  en: No historical information available
+  fr: Aucune information historique n'est disponible
+
+
+last_year_authorities:
+  transform: [handlebars]
+  en: |
+    {{est_last_year}} Authorities
+  fr: Autorités {{est_last_year}}
+
+this_year_authorities:
+  transform: [handlebars]
+  en: |
+    {{est_in_year}} Authorities
+  fr: Autorités {{est_in_year}}
+
+
+doc_breakout_details:
+  en: Detailed Breakout by Estimate Mechanism
+  fr: Répartition détaillée par mécanisme budgétaire
+
+mains_this_year:
+  transform: [handlebars]
+  en: Main Estimates <span class="nowrap">{{est_in_year}}</span>
+  fr: Budget Principal des dépenses <span class="nowrap">{{est_in_year}}</span>
+
+change_from_last_year_mains:
+  transform: [handlebars]
+  en: Change from <span class="nowrap">{{est_last_year}}</span> main estimates
+  fr: Différence avec le budget principal <span class="nowrap">{{est_last_year}}</span>
+
+
+change_from_last_year_mains_pct:
+  transform: [handlebars]
+  en: Change from <span class="nowrap">{{est_last_year}}</span> main estimates (%)
+  fr: Différence avec le budget principal <span class="nowrap">{{est_last_year}}</span> (%)
+
+
+show_only_votes:
+  en: Only show voted items
+  fr: Seulement afficher les objets votés
+
+
+showing_only_votes:
+  en: Only showing voted items
+  fr: Seulement les objet votés sont affichés
+
+
+voted_items:
+  en: Voted items
+  fr: Objets votés
+
+stat_items:
+  en: Statutory items
+  fr: Objet Statutaires
+
+by_org:
+  en: By Organization
+  fr: Par organisation
+
+by_item_type:
+  en: By Item Type 
+  fr: Par type d'objet
+
+
+choose_grouping_scheme:
+  en: Item grouping scheme
+  fr: Regroupement des objets

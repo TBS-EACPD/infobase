@@ -10,9 +10,15 @@ let
 
   global_footnotes,
   footnotes_by_deptcode,
-  footnotes_by_tag_id;
+  footnotes_by_tag_id,
+  estimate_footnotes;
 
-
+const estimate_topics = [
+  "AUTH",
+  "EST_PROC",
+  "VOTED",
+  "STAT",
+];
 
 
 function populate_stores(parsed_models){
@@ -24,6 +30,7 @@ function populate_stores(parsed_models){
   program_tag_ids = {};
 
   global_footnotes = [];
+  estimate_footnotes = [];
 
   const {
     depts,
@@ -72,6 +79,13 @@ function populate_stores(parsed_models){
     all_footnotes.push(obj);
 
     const { subject_class, subject_id } = obj;
+
+
+    //ESTIMATES footnotes bundle
+    const topics = obj.topic_keys.split(",").map(key=> key.replace(" ",""));
+    if(!_.chain(topics).intersection(estimate_topics).isEmpty().value()){
+      estimate_footnotes.push(obj);
+    }
 
     if(subject_class==="gov" || subject_id === "*"){
       global_footnotes.push(obj);
@@ -146,6 +160,7 @@ function get_footnote_file_defs(file_obj, lang){
       .value(),
     global: footnotes_to_csv_string(global_footnotes, lang),
     all: footnotes_to_csv_string(all_footnotes, lang),
+    estimates: footnotes_to_csv_string(estimate_footnotes, lang),
   };
 
 

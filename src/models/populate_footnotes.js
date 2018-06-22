@@ -85,7 +85,13 @@ function load_footnotes_bundle(subject){
         break;
     }
   } else {
-    subject_code = 'all';
+
+    if(subject==="estimates"){
+      subject_code = "estimates";
+    }
+    else {
+      subject_code = 'all';
+    }
   }
 
   if(_loaded_dept_or_tag_codes[subject_code] || _loaded_dept_or_tag_codes['all']){

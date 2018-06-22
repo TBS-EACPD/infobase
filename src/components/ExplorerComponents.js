@@ -207,6 +207,7 @@ const get_children_content = ({
         className="ExplorerNodeContainer__ChildrenList"  
         staggerDurationBy="0"
         duration={500}
+        disableAllAnimations={node_group.length > 150} /* for perf reasons */
       >
         {_.map(node_group, (child_node, ix) => 
           <li key={child_node.id}>
@@ -237,6 +238,9 @@ export const ExplorerNode = ({
     id,
     isExpanded,
     data,
+    data: {
+      noExpand,
+    },
   },
   depth,
 }) => (
@@ -245,19 +249,21 @@ export const ExplorerNode = ({
     className="ExplorerNodeContainer"
   >
     <div className={classNames("ExplorerNode", mod_class)}>
-      <div className="ExplorerNode__ExpanderContainer">
-        <button
-          className={classNames("ExplorerNode__Expander", window.is_a11y_mode && "ExplorerNode__Expander--a11y-compliant")}
-          onClick={()=>onClickExpand(node)}
-          aria-label={trivial_text_maker(isExpanded ? "select_to_collapse_a11y" : "select_to_expand_a11y") }
-        >
-          { isExpanded ? "▼" : "►" }
-        </button>
+      <div className={classNames("ExplorerNode__ExpanderContainer", noExpand && "ExplorerNode__ExpanderContainer--no-expand")}>
+        {!noExpand && 
+          <button
+            className={classNames("ExplorerNode__Expander", window.is_a11y_mode && "ExplorerNode__Expander--a11y-compliant")}
+            onClick={()=>onClickExpand(node)}
+            aria-label={trivial_text_maker(isExpanded ? "select_to_collapse_a11y" : "select_to_expand_a11y") }
+          >
+            { isExpanded ? "▼" : "►" }
+          </button>
+        }
       </div>
       <div className="ExplorerNode__ContentContainer">
         <div
-          className="ExplorerNode__RowContainer"
-          onClick={()=>onClickExpand(node)}
+          className={classNames("ExplorerNode__RowContainer", noExpand && "ExplorerNode__RowContainer--no-click")}
+          onClick={noExpand ? null : ()=>onClickExpand(node)}
         >
           <div className="ExplorerRow">
             {_.map(column_defs, ({id, width, get_val, val_display },ix) =>
@@ -363,7 +369,7 @@ const compute_col_styles = createSelector(_.identity, col_defs => {
     .map( ({id, width, textAlign}, ix) => {
       let marginRight = null;
       let marginLeft = null;
-      let padding = "0 5px";
+      let padding = "0 5px 0 0";
       let flex = `0 0 ${width}px`;
       if(ix===0){
         flex = `1 1 ${width}px`;  

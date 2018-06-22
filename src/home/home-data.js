@@ -85,19 +85,19 @@ export default function(a11y_mode){
         dimension: "gov_goco",
       }),
     },
-    {
-      text_key: "DP_1718",
-      href: rpb_link({ 
-        table: 'table6', 
-        columns: ['{{planning_year_1}}'], 
-        dimension: "gov_goco",
-      }),
-    },
+    (
+      window.is_a11y_mode ?
+      null :
+      {
+        text_key: "bubbles_quick_link",
+        href: "explore-dept",
+      }
+    ),
   ];
 
 
   return {
-    featured_content_items,
+    featured_content_items: _.compact(featured_content_items),
   };
 
 };

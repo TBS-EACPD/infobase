@@ -8,6 +8,7 @@ const {
   vote_stat_dimension, 
   major_vote_stat, 
   trivial_text_maker, 
+  major_vote_big_stat,
   Statistics, 
   years : {
     estimates_years,
@@ -44,7 +45,7 @@ window.estimates_docs = {
   "VA":{
     // tabled should only be set once MYA is available for the current 
     // year around the end of the summer
-    "order" : 1.1,
+    "order" : 11,
     "tabled" : true,
     "en":"Voted Adjustments",
     "fr": "Réajustement votés",
@@ -52,7 +53,7 @@ window.estimates_docs = {
   "SA":{
     // tabled should only be set once MYA is available for the current 
     // year around the end of the summer
-    "order" : 1.2,
+    "order" : 12,
     "tabled" : true,
     "en":"Statutory Adjustments",
     "fr": "Réajustements législatifs",
@@ -320,6 +321,11 @@ module.exports = {
       title_key : "major_voted_stat",
       include_in_report_builder : true,
       filter_func :  major_vote_stat,
+    },
+    {
+      title_key : "major_voted_big_stat",
+      exclude_from_rpb: true,
+      filter_func :  major_vote_big_stat("{{est_in_year}}_estimates"),
     },
     {
       title_key :"voted_stat",

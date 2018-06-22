@@ -61,7 +61,7 @@ budget_home_title:
   fr: Suivi budgétaire de 2018
 
 budget_home_text:
-  en: Explore a breakout of new Budget 2018 measures which are being funded through Estimates.
+  en: Explore a breakout of the new Budget 2018 measures which are being funded through Estimates.
   fr: Découvrir une visualisation des nouvelles mesures du Budget 2018 qui seront financées par le Budget des dépenses.
 
 planet_home_title:
@@ -75,6 +75,14 @@ planet_home_text:
 home_search_bar_title:
   en: Jump to an infographic
   fr: Infographie rapide
+
+estimates_comp_home_title:
+  en: Estimates Comparison
+  fr: Comparaison des budgets principal de dépenses
+
+estimates_comp_home_text:
+  en: See how the government's most recent spending plan differs from last year 
+  fr: Voir comment le plan de dépenses du gouvernement le plus récent a changé depuis l'année passée 
 
 featured_data_title:
   en: Quick links
@@ -155,7 +163,6 @@ table4_home_link:
   transform: [handlebars]
   en: | 
     {{pa_last_year}} Public Accounts
-  
   fr: Comptes publics {{pa_last_year}}
 
 tabled_estimates_home:

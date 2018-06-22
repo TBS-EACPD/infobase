@@ -24,13 +24,12 @@ table8:
    * The tabling of an estimate does not guarantee its approval by Parliament. Only after an appropriation act is introduced to Parliament, approved and granted royal assent, does it become law.
 
 
-   In cases where machinery 
-   of government changes (such as merging or eliminating organizations) 
-   have occurred, the data has not been adjusted.
+   Note that for comparison purposes, voted and statutory items' labels in this table were modified to align with the most recently published estimates document. 
 
-   {{#if dept}}
-   ###{{est_next_year}} Main Estimates Highlights
-   {{/if}}
+
+
+
+
 
 
   fr: |
@@ -50,9 +49,8 @@ table8:
    et dûment adoptée par le Parlement, et reçue la sanction royale. 
 
 
-   Lorsque des changements dans l’appareil gouvernemental (comme la fusion ou l'élimination' d’organisations) se sont produits, les données n’ont pas été rajustées.
+   Notez que, pour faciliter la comparaison des données entres des années différentes, les descriptions et les numéros des items votés et statutaires ont été modifiés afin qu'ils correspondent au document budgétaire le plus récemment publié. 
 
-   {{#if dept}}
-   ###Faits saillants du Budget principal des dépenses {{est_next_year}}
-   {{/if}}
+
+
 

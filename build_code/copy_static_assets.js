@@ -109,6 +109,7 @@ const common_svg = [
   'src/home/aboutus.svg',
   'src/home/glossary.svg',
   'src/home/metadata.svg',
+  'src/home/compare_estimates.svg',
 
   //simplographic images
   'src/panels/intro_graphs/check.svg',
@@ -264,6 +265,7 @@ function build_proj(PROJ){
       tags: tag_footnotes,
       global: global_footnotes,
       all: all_footnotes,
+      estimates:estimate_footnotes,
     } = get_footnote_file_defs(parsed_bilingual_models, lang);
 
     _.each( _.merge(dept_footnotes, tag_footnotes), (file_str,subj_id)=>{
@@ -278,6 +280,11 @@ function build_proj(PROJ){
     const all_fn_compressed_url = `${footnotes_dir}/fn_${lang}_all_min.html`;
     fs.writeFileSync(all_fn_uncompressed_url,all_footnotes);
     cp.execSync(`gzip -c ${all_fn_uncompressed_url} > ${all_fn_compressed_url}`);
+
+    const est_fn_uncompressed_url = `${footnotes_dir}/fn_${lang}_estimates.html`;
+    const est_fn_compressed_url = `${footnotes_dir}/fn_${lang}_estimates_min.html`;
+    fs.writeFileSync(est_fn_uncompressed_url,estimate_footnotes);
+    cp.execSync(`gzip -c ${est_fn_uncompressed_url} > ${est_fn_compressed_url}`);
 
     // combine all the lookups into one big JSON blob
     // also, create a compressed version for modern browsers
