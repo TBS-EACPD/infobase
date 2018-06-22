@@ -110,4 +110,4 @@ workflows:
           filters:
             branches:
               only:
-                - dp18-branch
+                - master
