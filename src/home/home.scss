@@ -54,6 +54,9 @@
 
 .frow.home-cols > .fcol-md-5 {
   margin-top: 30px;
+  @media(max-width:1200px) {
+    margin-top: 5px;
+  }
 }  
 
 .col-content.misc-col-content {
