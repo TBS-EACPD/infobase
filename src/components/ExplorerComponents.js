@@ -202,24 +202,26 @@ const get_children_content = ({
           {display}
         </header>
       }
-      <FlipMove
-        typeName="ul"
-        className="ExplorerNodeContainer__ChildrenList"  
-        staggerDurationBy="0"
-        duration={500}
-        disableAllAnimations={node_group.length > 150} /* for perf reasons */
-      >
-        {_.map(node_group, (child_node, ix) => 
-          <li key={child_node.id}>
-            <ExplorerNode
-              depth={depth}
-              explorer_context={explorer_context}
-              node={child_node}
-              mod_class={get_mod_class(child_node,ix,explorer_context)}
-            />
-          </li>
-        )}
-      </FlipMove>
+      { node_group &&
+        <FlipMove
+          typeName="ul"
+          className="ExplorerNodeContainer__ChildrenList"  
+          staggerDurationBy="0"
+          duration={500}
+          disableAllAnimations={node_group.length > 150} /* for perf reasons */
+        >
+          {_.map(node_group, (child_node, ix) => 
+            <li key={child_node.id}>
+              <ExplorerNode
+                depth={depth}
+                explorer_context={explorer_context}
+                node={child_node}
+                mod_class={get_mod_class(child_node,ix,explorer_context)}
+              />
+            </li>
+          )}
+        </FlipMove>
+      }
     </div>
   ));
 
