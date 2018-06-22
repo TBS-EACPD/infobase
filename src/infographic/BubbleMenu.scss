@@ -31,44 +31,6 @@
   min-width: 100%;
 }
 
-@media (min-width: 1000px){
-
-  .bubble-menu {
-    display: flex;
-    flex-direction:row;
-    align-items: center;
-    justify-content: center;
-    height: 250px;
-  }
-
-  .bubble-button {
-    text-decoration: none;
-    margin: 5px;
-    padding: 15px;
-    display: flex;
-  }
-
-  .bubble-menu > .bubble-button .title {
-    display: block;
-  }
-
-}
-
-
-@media (max-width: 999px){
-  .bubble-menu {
-    display: flex;
-    flex-direction: column;
-  }
-  .bubble-button  {
-    margin: 2px;
-    padding: 10px;
-    width: 100% !important;
-    height: auto !important;
-  }
-}
-
-
 .bubble-button:not(.active):not(:hover):not(:active):not(:focus) {
   background-color: transparent;
 }
@@ -99,7 +61,7 @@
     fill: #fdfdfd;
     stroke: #fdfdfd;
   }
-}
+} 
 
 .bubble-button.active,
 .bubble-button:focus,
@@ -107,4 +69,51 @@
 .bubble-button:hover {
   //turn off WET (or is it chrome's ?) annoying outline 
   outline: none;
+}
+
+@media (min-width: 1000px){
+
+  .bubble-menu {
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+    height: 250px;
+  }
+
+  .bubble-button {
+    text-decoration: none;
+    margin: 5px;
+    padding: 15px;
+    display: flex;
+  }
+
+  .bubble-menu > .bubble-button .title {
+    display: block;
+  }
+}
+
+
+@media (max-width: 999px){
+  .bubble-menu {
+    display: flex;
+    flex-direction: column;
+  }
+  .bubble-button {
+    margin: 2px;
+    padding: 10px;
+    width: 100% !important;
+    height: auto !important;
+  }
+  .bub-svg {
+    visibility: hidden;
+    width: 0px; 
+    height: 0px;
+  }
+}
+
+@media (max-width: 999px){
+  .bubble-menu {
+    padding: 0px 10px;
+  }
 }
