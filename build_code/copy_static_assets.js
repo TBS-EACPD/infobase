@@ -121,15 +121,6 @@ const common_svg = [
   'src/home/results.svg',
   'src/home/expend.svg',
   'src/home/people.svg',
-
-  //bubble menu images
-  'src/infographic/bubble-svg/bub_all_data.svg',
-  'src/infographic/bubble-svg/bub_financial.svg',
-  'src/infographic/bubble-svg/bub_intro.svg',
-  'src/infographic/bubble-svg/bub_people.svg',
-  'src/infographic/bubble-svg/bub_related.svg',
-  'src/infographic/bubble-svg/bub_results.svg',
-  'src/infographic/bubble-svg/bub_structure.svg',
 ];
 
 const IB_tables = [

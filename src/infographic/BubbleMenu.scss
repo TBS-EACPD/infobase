@@ -53,18 +53,6 @@
     line-height: 1.8em;
   }
 
-
-  .bubble-button .sub-title{
-    overflow: hidden;
-    display: block;
-
-  }
-
-  .bubble-button .sub-title > header{
-    margin-bottom: 5px;
-    font-size: 1.2em;
-  }
-
   .bubble-menu > .bubble-button .title {
     display: block;
   }
@@ -82,9 +70,7 @@
     padding: 10px;
     width: 100% !important;
     height: auto !important;
-
   }
-  
 }
 
 
@@ -100,17 +86,17 @@
   outline: none; 
 }
 
-.bub-img{
-  width: 80%; 
-  height: 70%;
-  background-size: 100%;
-}
-
-.bub-items{
+.bub-items {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%; //IE fix
   height: 100%;
   justify-content: space-between;
+}
+
+.bub-svg {
+  width: 80%; 
+  height: 70%;
+  background-size: 100%;
 }

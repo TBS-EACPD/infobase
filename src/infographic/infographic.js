@@ -93,7 +93,7 @@ const sorted_bubbles_for_subj = createSelector(
         `,
         a11y_description: `<p>${obj.description(subject)}</p>`,
         active: obj.id === active_bubble,
-        svg_url: obj.svg_url,
+        svg_content: obj.svg_content,
       };
     })
     .value()

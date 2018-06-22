@@ -1,4 +1,5 @@
 import text from './bubble_definitions.yaml';
+import svgs from './bubble_svgs.yaml';
 import { trivial_text_maker as text_maker } from '../models/text.js';
 
 export const bubble_defs = {
@@ -6,7 +7,7 @@ export const bubble_defs = {
     ix: 0,
     id: 'intro',
     tables: [],
-    svg_url: `${CDN_URL}/svg/bub_intro.svg`,
+    svg_content: svgs.intro.text,
     title(subject){
       switch(subject.level){
         case 'program':
@@ -47,7 +48,7 @@ export const bubble_defs = {
     },
     description: _.constant(""),
     tables: [],
-    svg_url: `${CDN_URL}/svg/bub_structure.svg`,
+    svg_content: svgs.structure.text,
   },
   financial : {
     ix: 5,
@@ -56,7 +57,7 @@ export const bubble_defs = {
     // slightly modify the description for Financial data for ib plus
     description: _.constant(text.fin_desc[lang]),
     tables: [],
-    svg_url: `${CDN_URL}/svg/bub_financial.svg`,
+    svg_content: svgs.financial.text,
   },
   people:  {
     ix: 10,
@@ -64,7 +65,7 @@ export const bubble_defs = {
     title: _.constant(text.people_title[lang]),
     description: _.constant(text.people_desc[lang]),
     tables: [],
-    svg_url: `${CDN_URL}/svg/bub_people.svg`,
+    svg_content: svgs.people.text,
   },
   results: {
     ix: 15,
@@ -72,7 +73,7 @@ export const bubble_defs = {
     title: _.constant(text.planning_title[lang]),
     description: _.constant(text.planning_desc[lang]),
     tables: [],
-    svg_url: `${CDN_URL}/svg/bub_results.svg`,
+    svg_content: svgs.results.text,
   },
   related: {
     ix: 20,
@@ -81,7 +82,7 @@ export const bubble_defs = {
     description: _.constant(text.where_can_i_go_desc[lang]),
     tables: [],
     color: "#114B5F",
-    svg_url: `${CDN_URL}/svg/bub_related.svg`,
+    svg_content: svgs.related.text,
   },
   all_data: {
     ix: 25,
@@ -90,7 +91,7 @@ export const bubble_defs = {
     color: "#009652",
     title: ({level}) => text[`all_data_${level}_title`][lang],
     description : _.constant(text.all_data_description[lang]),
-    svg_url: `${CDN_URL}/svg/bub_all_data.svg`,
+    svg_content: svgs.all_data.text,
   },
 
 };

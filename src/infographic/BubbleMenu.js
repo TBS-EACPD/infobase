@@ -23,7 +23,7 @@ class BubbleMenu extends React.Component {
                   <strong className="title bolder" style={{width: "100%"}}> 
                     {item.title}
                   </strong>
-                  <div className="bub-img" style={{backgroundImage: `URL(${item.svg_url})`}}/>
+                  <div className="bub-svg" dangerouslySetInnerHTML={{ __html: item.svg_content }}/>
                 </div>
               </a>
             ))
