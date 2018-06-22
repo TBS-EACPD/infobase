@@ -48,6 +48,7 @@ const { ensure_loaded } = require('../core/lazy_loader.js');
 
 const { Explorer } = require('../components/ExplorerComponents.js');
 
+const INCLUDE_OTHER_TAGS = false;
 const TM = props => <StandardTM tmf={text_maker} {...props} />;
 
 const HierarchySelectionItem = ({title, text, active, url }) => (
@@ -67,6 +68,9 @@ const HierarchySelectionItem = ({title, text, active, url }) => (
     </div>
   </a>
 );
+
+
+const dp_only_schemes = ["MLT"];
 
 
 const children_grouper = (node, children) => {
@@ -97,17 +101,18 @@ function render_non_col_content({node}){
     <div>
       { !_.isEmpty(defs) && 
         <dl className="dl-horizontal">
-          {_.map(defs, ({ term, def },ix) => 
+          {_.map(defs, ({ term, def },ix) => !_.isEmpty(def) &&
             <Fragment key={ix}> 
               <dt> { term } </dt>
               <dd> { def } </dd>
-            </Fragment>)}
+            </Fragment>
+          )}
         </dl>
       }
       { ( _.includes(['program','dept'], subject.level) || subject.is_cr || subject.is_lowest_level_tag ) && 
         <div className='ExplorerNode__BRLinkContainer'>
           <a href={infograph_href_template(subject)}> 
-            <TM k="see_infographic" />
+            <TM k="learn_more" />
           </a>
         </div>
       }
@@ -174,15 +179,24 @@ class ExplorerPage extends React.Component {
 
     const root = get_root(flat_nodes);
 
-    const [goco_props, hwh_props ] = [ 
+    
+    const [
+      goco_props, 
+      hwh_props,
+      mlt_props,
+    ] = _.chain([ 
       Tag.lookup("GOCO"),
       Tag.lookup("HWH"),
-    ].map( ({ description, name, id }) => ({
-      title: name,
-      text: description,  
-      active: hierarchy_scheme === id,
-      id,
-    }));
+      Tag.lookup("MLT"),
+    ])
+      .compact()
+      .map( ({ description, name, id }) => ({
+        title: name,
+        text: description,  
+        active: hierarchy_scheme === id,
+        id,
+      }))
+      .value()
 
     const min_props = {
       title: text_maker("how_were_accountable"),
@@ -264,41 +278,42 @@ class ExplorerPage extends React.Component {
           content={<TM k="where_can_find_subs_answer" />}
         />
       </div>
-
-      <div className="hierarchy-selection">
-        <header className="hierarchy-selection-header">
-          <TM k="choose_explore_point" />
-        </header>
-        <div role="radiogroup" className="hierarchy-selection-items">
-          {_.map([ min_props, dept_props, goco_props, hwh_props ],props =>
-            <HierarchySelectionItem 
-              key={props.id} 
-              url={`#resource-explorer/${props.id}/${doc}`}
-              {...props} 
-            />
-          )}
-        </div>
-        
-      </div>
-   
-      { is_m2m && 
-        <div dangerouslySetInnerHTML={{__html: text_maker('m2m_warning_text')}} />
-      }
       <div className="tabbed_content">
         <ul className="tabbed_content_label_bar">
           <li className={classNames("tab_label", doc==="drr16" && "active_tab")} onClick={()=> this.refs.drr166_link.click()}>
-            <a href={`#resource-explorer/${hierarchy_scheme}/drr166`} role="button" aria-pressed={doc === "drr16"} className="tab_label_text" ref="drr166_link">
+            <a href={`#resource-explorer/${_.includes(dp_only_schemes, hierarchy_scheme) ? "min" : hierarchy_scheme }/drr166`} role="button" aria-pressed={doc === "drr16"} className="tab_label_text" ref="drr166_link">
               <TM k="DRR_resources" />
             </a>
           </li>
-          <li className={classNames("tab_label", doc==="dp17" && "active_tab")} aria-pressed={doc === "dp17"} onClick={()=> this.refs.dp17_link.click()}>
-            <a href={`#resource-explorer/${hierarchy_scheme}/dp17`} role="button" className="tab_label_text" ref="dp17_link">
+          <li className={classNames("tab_label", doc==="dp18" && "active_tab")} aria-pressed={doc === "dp18"} onClick={()=> this.refs.dp18_link.click()}>
+            <a href={`#resource-explorer/${hierarchy_scheme}/dp18`} role="button" className="tab_label_text" ref="dp18_link">
               <TM k="DP_resources" />
             </a>
           </li>
         </ul>
         <div className="tabbed_content_pane">
-          {inner_content}
+          <div className="hierarchy-selection" style={{marginTop:"20px"}}>
+            <header className="hierarchy-selection-header">
+              <TM k="choose_explore_point" />
+            </header>
+            <div role="radiogroup" className="hierarchy-selection-items">
+              {_.map([ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp18" && INCLUDE_OTHER_TAGS ? [mlt_props] : [])  ],props =>
+                <HierarchySelectionItem 
+                  key={props.id} 
+                  url={`#resource-explorer/${props.id}/${doc}`}
+                  {...props} 
+                />
+              )}
+            </div>
+            
+          </div>
+      
+          { is_m2m && 
+            <div dangerouslySetInnerHTML={{__html: text_maker('m2m_warning_text')}} />
+          }
+          <div>
+            {inner_content}
+          </div>
         </div>
       </div>
     </div>;
@@ -379,8 +394,9 @@ export class ResourceExplorer extends React.Component {
     super();
     this.state = { loading: true };
   }
-  componentDidMount(){
-    ensure_loaded({
+
+  UNSAFE_componentWillMount(){
+    ensure_loaded({ 
       table_keys: ['table6', 'table12'],
     }).then(()=> {
       this.setState({loading: false});
@@ -411,15 +427,15 @@ export class ResourceExplorer extends React.Component {
     } = match;
 
     hierarchy_scheme = (
-      _.includes(['min','dept','GOCO','HWH'], hierarchy_scheme) ? 
+      _.includes(['min','dept','GOCO','HWH', "WWH", "CCOFOG", "MLT"], hierarchy_scheme) ? 
       hierarchy_scheme :
       'min'
     );
     
     doc = (
-      _.includes(['drr16','dp17'], doc) ? 
+      _.includes(['drr16','dp18'], doc) ? 
       doc :
-      'drr16'
+      'dp18'
     );
 
     return (

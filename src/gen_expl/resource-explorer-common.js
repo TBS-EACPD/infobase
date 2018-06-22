@@ -21,14 +21,14 @@ export const get_col_defs = ({doc}) => [
     header_display: (
       <TM 
         k={ 
-          doc === 'dp17' ? 
+          doc === 'dp18' ? 
           "dp_spending" : 
           'drr_spending' 
         } 
       />
     ),
     get_val: node => _.get(node, "data.resources.spending"),
-    val_display: val => <Format type="compact1" content={val} />,
+    val_display: val => _.isNumber(val) ? <Format type="compact1" content={val} /> : null,
   },
   {
     id: "ftes",
@@ -37,14 +37,14 @@ export const get_col_defs = ({doc}) => [
     header_display: (
       <TM 
         k={ 
-          doc === 'dp17' ? 
+          doc === 'dp18' ? 
           "dp_ftes" : 
           'drr_ftes' 
         } 
       />
     ),
     get_val: node => _.get(node, "data.resources.ftes"),
-    val_display: val => <Format type="big_int_real" content={val} />,
+    val_display: val => _.isNumber(val) ? <Format type="big_int_real" content={val} /> : null,
   },
 ];
 

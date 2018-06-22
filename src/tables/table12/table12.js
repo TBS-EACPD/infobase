@@ -17,6 +17,7 @@ const {
 module.exports = {
   text,
   "id": "table12",
+  subject_type:"program",
   source: [ "DP", "DRR" ],
   //"tags" : ["results", "expenditures", "FTE", "planning","report","RPP"],
   "tags" : [
@@ -54,6 +55,13 @@ module.exports = {
       'nick' : 'activity_code',
       "header": "",
     })
+    this.add_col({
+      "key" : true,
+      "hidden" : true,
+      "type":"str",
+      'nick' : 'program_id',
+      "header": "",
+    });
     this.add_col({
       "key" : true,
       "type":"wide-str",
@@ -118,8 +126,8 @@ module.exports = {
         var func  = function(row){
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           //FIXME: this is because I found a program without a goco, 
-          const goco = _.first(prog.tags_by_scheme.GOCO)
-          return goco.name || trivial_text_maker('unknown');
+          const goco = _.get(prog, "tags_by_scheme.GOCO[0].name");
+          return goco || trivial_text_maker('unknown');
         };
         return func;
       },
@@ -132,9 +140,8 @@ module.exports = {
         var func  = function(row){
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           //FIXME: this is because I found a program without a goco, 
-          const goco = _.first(prog.tags_by_scheme.GOCO)
-          const sa = goco && goco.parent_tag;
-          return (sa && sa.name) || trivial_text_maker('unknown');
+          const sa = _.get(prog, "tags_by_scheme.GOCO[0].parent_tag.name");
+          return sa || trivial_text_maker('unknown');
         };
         return func;
       },
@@ -160,7 +167,16 @@ module.exports = {
 
   "mapper": function (row) {
     const program = Program.get_from_activity_code(row[0], row[1]);
-    row.splice(2,0,program.name);
+    //TODO: get rid of this, only for dev 
+    if(!program){
+      /* eslint-disable */
+      console.log( `${window._Subject.Dept.lookup(row[0]).acronym}-${row[1]}` )
+      row.splice(2,0,"?");
+      row.splice(3,0,"?");
+      return row;
+    }
+    row.splice(2,0,program.id);
+    row.splice(3,0,program.name);
     return row;
   },
 

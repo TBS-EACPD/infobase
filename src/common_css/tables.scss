@@ -35,3 +35,12 @@
 .table-dark-blue:not(.no-total-row) > tbody > tr:last-child > td:not(:last-child) {
   border-right: 1px solid #bbb !important;
 }
+
+/* helper classes for alignment */
+td.data-col-cell {
+  text-align: right;
+}
+
+td.key-col-cell {
+  text-align: left;
+}

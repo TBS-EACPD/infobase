@@ -12,7 +12,7 @@ crso_by_prog_fte_title:
 crso_by_prog_exp_or_ftes:
   transform: [handlebars,markdown]
   en: |
-   In {{planning_year_1}}, {{pluralize crso_prg_num '[Program]'}}{{gl "PROG"}} fell under this {{gt "core_resp"}}
+   In {{planning_year_1}}, {{gl_tt (pluralize crso_prg_num "program")  "PROG"}} fall under this {{gt "core_resp"}}
    {{#if is_fte}}
    with **{{crso_prg_top1}}** ({{fmt_big_int_real crso_prg_top1_amnt}} FTEs) being the largest in terms of of employment,
    {{#if crso_prg_top2_amnt}} followed by **{{crso_prg_top2}}** ({{fmt_big_int_real crso_prg_top2_amnt}} FTEs). {{else}}. {{/if}}
@@ -22,7 +22,7 @@ crso_by_prog_exp_or_ftes:
    {{/if}}
   
   fr: |
-   En {{planning_year_1}}, cette responsabilité essentielle comptait {{pluralize crso_prg_num '[programme]'}}{{gl "PROG"}}.
+   En {{planning_year_1}}, cette responsabilité essentielle compte {{gl_tt (pluralize crso_prg_num "programme") "PROG"}}.
    {{#if is_fte}}
    Le plus important en termes d'employés étant **{{crso_prg_top1}}** ({{fmt_big_int_real crso_prg_top1_amnt}} ETP)
    {{#if crso_prg_top2_amnt}} suivi par **{{crso_prg_top2}}** ({{fmt_big_int_real crso_prg_top2_amnt}} ETP). {{else}}. {{/if}}

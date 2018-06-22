@@ -112,9 +112,12 @@ function populate_stores(parsed_models){
           break;
         }
 
-        case 'crso': {
+        case 'crso': //TODO: standardize on lower/upper case accross all levels
+        case 'CRSO': {
           const dept_code = crso_deptcodes[subject_id];
-          footnotes_by_deptcode[dept_code].push(obj);
+          if(dept_code){ //TODO stop this from hapenning on the pipeline side
+            footnotes_by_deptcode[dept_code].push(obj);
+          }
 
           break;
         }

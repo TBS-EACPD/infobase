@@ -1,3 +1,4 @@
+import { get_static_url } from '../core/static_url.js';
 import { BudgetMeasure } from './subject';
 import { fetch_and_inflate } from '../core/utils.js';
 
@@ -5,8 +6,8 @@ const parse_csv_string = csv_string => _.tail( d3.csvParseRows( _.trim(csv_strin
 
 const load_csv = csv_name => (
   window.binary_download && !window.isIE() ? 
-    fetch_and_inflate(`csv/${csv_name}.csv_min.html`) :
-    $.ajax({ url: `csv/${csv_name}.csv` })   
+    fetch_and_inflate(get_static_url(`csv/${csv_name}.csv_min.html`)) :
+    $.ajax({ url: get_static_url(`csv/${csv_name}.csv`) })   
 ).then( csv_string => parse_csv_string(csv_string) );
 
 const populate_budget_measures = (budget_measures, budget_measure_funds) => {

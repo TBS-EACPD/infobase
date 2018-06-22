@@ -19,8 +19,8 @@ function compute_counts_from_set({results,indicators}){
 
 
   return { 
-    dp17_results: _.filter(results, { doc: 'dp17' }).length,
-    dp17_indicators:  _.filter(indicators, { doc: 'dp17' }).length,
+    dp18_results: _.filter(results, { doc: 'dp18' }).length,
+    dp18_indicators:  _.filter(indicators, { doc: 'dp18' }).length,
     drr16_results: _.filter(results, { doc: 'drr16' }).length,
 
     drr16_indicators_future_success,

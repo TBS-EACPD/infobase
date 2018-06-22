@@ -1,5 +1,5 @@
-import text from './resource_structure.yaml';
 import '../../gen_expl/explorer-styles.scss';
+import text from './resource_structure.yaml';
 import classNames from 'classnames';
 import { combineReducers, createStore }  from 'redux';
 import { Provider, connect } from 'react-redux';
@@ -80,6 +80,7 @@ class RootedResourceExplorer extends React.Component {
       col_click,
       doc,
       set_doc,
+      subject,
     } = this.props;
 
     const root = get_root(flat_nodes);
@@ -110,6 +111,10 @@ class RootedResourceExplorer extends React.Component {
         />
       </div>
     </div>;
+
+    if(_.includes(["MLT", "CCOFOG", "WWH"], subject.root.id)){
+      return inner_content;
+    }
  
     const tab_on_click = (doc)=> set_doc!==doc && set_doc(doc);
 
@@ -121,8 +126,8 @@ class RootedResourceExplorer extends React.Component {
               <TM k="DRR_resources" />
             </span>
           </li>
-          <li className={classNames("tab_label", doc==="dp17" && "active_tab")} onClick={()=> tab_on_click('dp17')}>
-            <span tabIndex={0} role="button" aria-pressed={doc === "dp17"} className="tab_label_text" onClick={()=> tab_on_click('dp17')} onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('dp17')}>
+          <li className={classNames("tab_label", doc==="dp18" && "active_tab")} onClick={()=> tab_on_click('dp18')}>
+            <span tabIndex={0} role="button" aria-pressed={doc === "dp18"} className="tab_label_text" onClick={()=> tab_on_click('dp18')} onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('dp18')}>
               <TM k="DP_resources" />
             </span>
           </li>
@@ -166,7 +171,8 @@ class RootedResourceExplorerContainer extends React.Component {
   render(){
     const { 
       rooted_resource_scheme : scheme,
-      initial_rooted_resource_state, 
+      initial_rooted_resource_state,
+      subject,
     } = this.props;
     
     const scheme_key = scheme.key;
@@ -194,6 +200,7 @@ class RootedResourceExplorerContainer extends React.Component {
       <Provider store={createStore(reducer,initialState)}>
         <Container
           scheme={scheme}
+          subject={subject}
         />
       </Provider>
     );

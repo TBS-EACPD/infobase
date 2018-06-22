@@ -20,10 +20,11 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
 
   const count_items  = _.chain(base_hierarchy)
     .reject('root')
-    .groupBy(node => get_type_header(node) )
-    .map( (group, type_name) => ({
-      type_name,
-      type_key: group[0].data.type,
+    .groupBy("data.type")
+    .toPairs()
+    .map( ([type_key,group]) => ({
+      type_name: get_type_name(type_key),
+      type_key,
       count: group.length,
     }))
     .concat([ indicator_count_obj ])
@@ -119,44 +120,30 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
 
 export const spending_header = createSelector(
   doc => doc, 
-  doc => <TM k={doc === 'dp17' ? "dp_spending" : "drr_spending"} />
+  doc => <TM k={doc === 'dp18' ? "dp_spending" : "drr_spending"} />
 );
 
 export const fte_header = createSelector(
   doc => doc,
-  doc => <TM k={doc === "dp17" ? "dp_ftes" : "drr_ftes"} />
+  doc => <TM k={doc === "dp18" ? "dp_ftes" : "drr_ftes"} />
 );
 
-export const get_type_header = node => {
-  switch(node.data.type){
-    case 'dept': 
-      return text_maker('orgs');
 
-    case 'cr': 
-      return text_maker("core_responsibilities");
-
-    case 'so': 
-      return text_maker("strategic_outcomes");
-
-    case 'program': 
-      return text_maker('programs');
-
-    case 'sub_program':
-      return text_maker('sub_programs');
-
-    case 'sub_sub_program': 
-      return text_maker('sub_sub_programs');
-
-    case 'dr':
-      return text_maker("dept_results");
-
-    case 'result':
-      return text_maker("results");
-
-    default:
-      return null;
-  }
+const type_text_keys = {
+  dept: "orgs",
+  cr: "core_responsibilities",
+  so: "strategic_outcomes",
+  program: "programs",
+  sub_program: "sub_programs",
+  sub_sub_program: "sub_sub_programs",
+  dr:"dept_results",
+  result: "results",
 };
+
+export const get_type_name = type_key => {
+  const text_key = type_text_keys[type_key];
+  return text_key ? text_maker(text_key) : null;
+}
 
 export const ResultNodeContent = ({ 
   node: {

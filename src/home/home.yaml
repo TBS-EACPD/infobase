@@ -175,9 +175,9 @@ DRR_1617:
   en: 2016-17 Departmental Results Reports
   fr: Rapport sur les résultats ministériels de 2016-2017
 
-DP_1718:
-  en: 2017-18 Departmental Plans
-  fr: Plan ministériels de 2017-2018
+DP_1819:
+  en: 2018-19 Departmental Plans
+  fr: Plan ministériels de 2018-2019
 
 lapse_home_title:
   transform: [handlebars]

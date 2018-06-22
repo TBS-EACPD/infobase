@@ -93,6 +93,7 @@ ul.indicator-list > li {
 
 ul.indicator-list > li:not(:first-child) {
   border-top: 1px solid #bbb;
+  margin-top: 6rem;
 }
 
 .indicator-item__header {
@@ -260,10 +261,15 @@ dl.indicator-item__dl dt+dd {
   padding-left: 6px; 
   font-size:1.2em;
   white-space: nowrap;
+  position:relative;
 }
 .inline-status-icon__count {
   padding-left: 1px;
   color:#000;
+  position: absolute;
+  right: -4px;
+  bottom: 2px;
+  font-size: 60%;
 }
 
 

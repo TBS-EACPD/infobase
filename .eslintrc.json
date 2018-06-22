@@ -45,7 +45,8 @@
       "react/prop-types" : [ "off" ],
       "react/no-string-refs" : [ "off" ],
       "react/display-name" : [ "off" ],
-      "react/no-find-dom-node" : [ "off" ]
+      "react/no-find-dom-node" : [ "off" ],
+      "react/no-children-prop": ["off"]
   },
   "globals": {
     "window": true,

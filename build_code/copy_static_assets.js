@@ -90,6 +90,8 @@ const common_lookups_fr = _.map(
   public_dir_prefixer
 );
 
+const common_png = _.map(['en', 'fr'], lang => `src/panels/result_graphs/result-taxonomy-${lang}.png`);
+
 const common_svg = [
   //top left corner brand
   'src/InfoBase/sig-blk-en.svg',
@@ -159,6 +161,7 @@ var IB = {
   lookups_fr  : common_lookups.concat(common_lookups_fr),
   csv: csv_from_table_names(IB_tables).concat(other_csvs),
   svg: common_svg,
+  png: common_png,
   js: external_deps_names,
   other: [ 'src/robots/robots.txt','src/common_css/container-page.css'],
 };
@@ -291,7 +294,7 @@ function build_proj(PROJ){
   fse.copySync('external-dependencies/cioscripts', dir+'/cioscripts', {clobber: true});
   fse.copySync('external-dependencies/ajax', dir+'/ajax', {clobber: true});
   //clobber overwrites old directory when copying
-  ['svg','js','csv'].forEach(function(type){
+  ['png', 'svg','js','csv'].forEach(function(type){
     var this_dir = dir+'/'+type;
     make_dir_if_exists(this_dir);
     PROJ[type].forEach(function(f_name){

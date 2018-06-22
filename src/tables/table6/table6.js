@@ -20,6 +20,7 @@ const exp_cols = _.map(std_years, yr=>yr+"exp");
 module.exports = {
   text,
   "id": "table6",
+  subject_type:"program",
   source: [ "PA" , "DP", "DRR" ],
   "tags" : [
     "GOV_FRAM",
@@ -55,7 +56,15 @@ module.exports = {
           "type":"str",
           'nick' : 'activity_code',
           "header": "",
-        }, {
+        },
+        {
+          "key" : true,
+          "hidden" : true,
+          "type":"str",
+          'nick' : 'program_id',
+          "header": "",
+        },
+        {
           "key" : true,
           "type":"wide-str",
           'nick' : 'prgm',
@@ -124,6 +133,21 @@ module.exports = {
               "fr": `Correspondent au total des dépenses prévues pour l'exercice ${header}, y compris les fonds approuvés par le Conseil du Trésor.`,
             },
           },
+          {
+            "type":"big_int",
+            "nick": `${header}_rev`,
+            hidden: true,
+          },
+          {
+            "type":"big_int",
+            "nick": `${header}_spa`,
+            hidden: true,
+          },
+          {
+            "type":"big_int",
+            "nick": `${header}_gross`,
+            hidden: true,
+          },
         ]);
     });
 
@@ -137,8 +161,8 @@ module.exports = {
       filter_func :  function(options){
         var func  = function(row){
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
-          const goco = _.first(prog.tags_by_scheme.GOCO)
-          return goco.name || trivial_text_maker('unknown');
+          const goco = _.get(prog, "tags_by_scheme.GOCO[0].name");
+          return goco || trivial_text_maker('unknown');
         };
         return func;
       },
@@ -151,9 +175,8 @@ module.exports = {
         var func  = function(row){
           //FIXME: this is because I found a program without a goco, 
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
-          const goco = _.first(prog.tags_by_scheme.GOCO)
-          const sa = goco && goco.parent_tag;
-          return (sa && sa.name) || trivial_text_maker('unknown');
+          const sa = _.get(prog, "tags_by_scheme.GOCO[0].parent_tag.name");
+          return sa || trivial_text_maker('unknown');
         };
         return func;
       },
@@ -177,7 +200,8 @@ module.exports = {
 
   mapper: function (row) {
     const program = Program.get_from_activity_code(row[0], row[1]);
-    row.splice(2,0,program.name);
+    row.splice(2,0,program.id);
+    row.splice(3,0,program.name);
     return row;
   },
 

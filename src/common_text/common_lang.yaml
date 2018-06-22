@@ -837,6 +837,20 @@ explorer_search_is_optional:
   fr: Vous pouvez choisir de filtrer les données ci-dessous en utilisant une barre de recherche
 
 
+
+learn_more:
+  en: Learn more
+  fr: En apprendre davantage
+
+
+priorities:
+  en: Priorities
+  fr: Priorités
+
+commitments:
+  en: Commitments
+  fr: Engagements
+
 some_things_to_keep_in_mind:
   en: Some things to keep in mind as you explore the data...
   fr: Certaines choses à garder l'esprit lorsque vous explorez les données
@@ -926,7 +940,9 @@ you_are_here:
   en: You are here
   fr: Vous êtes içi
 
+
 infographic_for:
   transform: [handlebars]
   en: Infographic for {{name}}
   fr: Infographie pour {{name}}
+

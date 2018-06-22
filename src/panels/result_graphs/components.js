@@ -118,9 +118,14 @@ const SingleIndicatorDisplay = ({indicator}) => {
           max={indicator.target_max}
           narrative={indicator.target_narrative}
         />
+        {
+          indicator.target_type !== "text" &&  //don't show unit of measurement for narrative targets
+          !_.isEmpty(indicator.measure) &&
+          <span>
+            ( {indicator.measure} ) 
+          </span>
+        }
       </dd>
-
-
 
       { is_drr && 
         <Fragment>
@@ -134,7 +139,8 @@ const SingleIndicatorDisplay = ({indicator}) => {
               narrative={indicator.actual_result}
             />
           </dd>
-        </Fragment>}
+        </Fragment>
+      }
 
       { !_.isEmpty(indicator.explanation) && 
         <Fragment>
@@ -144,7 +150,20 @@ const SingleIndicatorDisplay = ({indicator}) => {
           <dd>
             {indicator.explanation}  
           </dd>
-        </Fragment>}
+        </Fragment>
+      }
+
+
+      { !_.isEmpty(indicator.methodology) && 
+        <Fragment>
+          <dt>
+            <TM k="methodology" />
+          </dt>
+          <dd>
+            {indicator.methodology}  
+          </dd>
+        </Fragment>
+      }
     </dl>
   </div>
 }

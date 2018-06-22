@@ -35,6 +35,10 @@ import "../panels/sobj/top_spending_areas.js";
 import "../panels/sobj/personel_spend.js";
 import "../panels/sobj/spend_rev_split.js";
 
+//FIXME: currently turned off in infographic, it's here for access in graph-inventory
+import '../panels/internal_services/isc.js';
+
+
 import "../panels/detailed_program_spending_split/detailed_program_spending_split.js";
 
 
@@ -44,7 +48,7 @@ import '../panels/historical_auth_exp/historical_auth_exp.js';
 //tag-only panels
 import '../panels/tag_panels/resource_structure.js'
 import '../panels/tag_panels/goco.js';
-import '../panels/tag_panels/top_3_dept_graph.js';
+// import '../panels/tag_panels/top_3_dept_graph.js';
 
 //dp/drr stuff but not results
 import '../panels/drr_dp_resources/drr_planned_actual.js';
@@ -52,6 +56,7 @@ import '../panels/drr_dp_resources/sub_program_resources.js';
 import '../panels/drr_dp_resources/planned_prgm_crso_split.js';
 import '../panels/drr_dp_resources/crso_by_prog.js';
 import '../panels/drr_dp_resources/spending_in_perspective.js';
+import '../panels/drr_dp_resources/dp_rev_split.js';
 
 import '../panels/budget_measures/budget_measures_panel.js';
 
@@ -93,10 +98,10 @@ const get_gov_panels = subject => ({
   ],
   people: get_people_panels(subject),
   results: [
+    "gov_results_shame",
     "results_intro",
-    "dp_coming_soon",
-    "gov_drr",
     "gov_dp",
+    "gov_drr",
   ],
   related: [ "gov_related_info" ],
   all_data: ["links_to_rpb" ],
@@ -110,6 +115,7 @@ const get_dept_panels = subject => {
       'igoc_links',
     ],
     financial : _.includes(subject.tables,'table6') && [
+      "late_dept",
       "financial_intro", 
       "welcome_mat",
       "budget_measures_panel",
@@ -123,17 +129,18 @@ const get_dept_panels = subject => {
       "spend_rev_split",
       'detailed_program_spending_split',
       'drr_planned_actual',
+      "dp_rev_split",
     ],
     people: _.includes(subject.tables, 'table9') && get_people_panels(subject),
     results: subject.dp_status && [
       "results_intro",
-      "dp_coming_soon",
+      "late_dept",
       "drr_summary",
       "explore_results",
     ],
     related: [
       "portfolio_structure_related",
-      "related_tags",
+      "tags_of_interest",
     ],
     all_data: _.nonEmpty(subject.tables) && [
       "links_to_rpb",
@@ -148,7 +155,6 @@ const get_program_panels = subject => {
       "dead_program_warning",
       'description',
       'program_fed_structure',
-      'program_tags',
     ],
     financial: [
       'dead_program_warning',
@@ -163,16 +169,17 @@ const get_program_panels = subject => {
     
       'drr_planned_actual',
       'sub_program_resources',
+      "dp_rev_split",
     ],
     results: subject.dept.dp_status && !subject.is_internal_service && [
       "results_intro",
-      "dp_coming_soon",
+      "late_dept",
       "drr_summary",
       "explore_results",
     ],
     related: [
       "related_program_structure",
-      'program_tags',
+      'tags_of_interest',
     ],
   };
 
@@ -185,7 +192,6 @@ const get_crso_panels = subject => {
       "dead_crso_warning",
       'description',
       'crso_in_gov',
-      'crso_tags',
     ],
     financial: [
       'dead_crso_warning',
@@ -195,15 +201,16 @@ const get_crso_panels = subject => {
       'crso_by_prog_exp',
       'crso_by_prog_fte',
       'planned_prg_crso_split',
+      "dp_rev_split",
     ],
     results: subject.dept.dp_status && !subject.is_internal_service && [
       "results_intro",
-      "dp_coming_soon",
+      "late_dept",
       "explore_results",
     ],
     related: [
       'crso_links_to_other_crso',
-      'crso_tags',
+      'tags_of_interest',
     ],
   };
 
@@ -218,17 +225,18 @@ const get_tag_panels = subject => {
       'tag_progs_by_dept',
     ],
     structure: [ 'resource_structure' ],
-    financial: [
-      'm2m_warning',
-      "financial_intro", 
-      "welcome_mat",
-      'tag_top_3_depts',
-      "historical_auth_exp",
-      "vote_stat_split",
-      'spend_rev_split',
-      'top_spending_areas',
-      'detailed_program_spending_split',
-    ],
+    //Financial turned off indefinitely
+    // financial: [
+    //   'm2m_warning',
+    //   "financial_intro", 
+    //   "welcome_mat",
+    //   'tag_top_3_depts',
+    //   "historical_auth_exp",
+    //   "vote_stat_split",
+    //   'spend_rev_split',
+    //   'top_spending_areas',
+    //   'detailed_program_spending_split',
+    // ],
     related: [
       'related_tags',
       'sibling_tags',

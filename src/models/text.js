@@ -7,6 +7,7 @@ const result_lang = require('../common_text/result_lang.yaml');
 const people_lang = require('../common_text/people_lang.yaml');
 const estimates_lang = require('../common_text/estimates_lang.yaml');
 const a11y_lang = require('../common_text/a11y_lang.yaml');
+const dp_lag_text = require('../common_text/dp_lag_text.yaml');
 
 /* 
   TODO: some parts of this still feel hacky 
@@ -41,6 +42,7 @@ const global_bundles = [
   people_lang,
   estimates_lang,
   a11y_lang,
+  dp_lag_text,
 ];
 
 

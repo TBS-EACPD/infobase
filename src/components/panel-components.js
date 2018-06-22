@@ -42,8 +42,8 @@ const PanelSource = ({links}) => {
   );
 }
 
-export const Panel = ({ title, sources, footnotes, children, subtitle }) => (
-  <section className='panel panel-info mrgn-bttm-md'>
+export const Panel = ({ title, sources, footnotes, children, subtitle, allowOverflow }) => (
+  <section className={classNames('panel panel-info mrgn-bttm-md', allowOverflow && "panel-overflow")}>
     {title && <header className='panel-heading'>
       <header className="panel-title"> {title} </header>
       {subtitle &&

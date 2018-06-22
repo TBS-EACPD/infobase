@@ -3,6 +3,15 @@ import { rpb_link } from '../rpb/rpb_link.js';
 export default function(a11y_mode){
   const featured_content_items = [
     {
+      text_key: "DP_1819",
+      href: rpb_link({ 
+        table: 'table6', 
+        columns: ['{{planning_year_1}}'], 
+        dimension: "gov_goco",
+      }),
+      is_new: true,
+    },
+    {
       text_key: "home_pop_by_exec",
       href: (
         rpb_link({ 
@@ -75,7 +84,6 @@ export default function(a11y_mode){
           }) :
           "#partition/est_doc_sec/planned_exp"
       ),
-      is_new: true,
     },
     {
       text_key: "DRR_1617",
@@ -85,14 +93,6 @@ export default function(a11y_mode){
         dimension: "gov_goco",
       }),
     },
-    (
-      window.is_a11y_mode ?
-      null :
-      {
-        text_key: "bubbles_quick_link",
-        href: "explore-dept",
-      }
-    ),
   ];
 
 

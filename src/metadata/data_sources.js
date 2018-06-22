@@ -140,7 +140,7 @@ const sources = _.mapValues({
     description(){ return desc_from_gloss_keys("DP") },
     title(){ return tm("dp_title")},
     frequency: frequencies.y,
-    last_updated : { month: 3, year: 2017 },
+    last_updated : {month : 4, year:2018},
     report_link:{
       en: "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities.html",
       fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites.html",

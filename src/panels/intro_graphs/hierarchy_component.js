@@ -175,17 +175,17 @@ export const org_internal_hierarchy = ({subject, href_generator, show_dead_sos, 
   name: subject.name,
   active: true,
   children: _.chain(subject.crsos)
-    .reject( show_dead_sos ? _.constant(false) : 'dead_so' )
+    .filter( show_dead_sos ? _.constant(true) : 'is_active' )
     .map(crso => ({
       name: (label_crsos ? crso.singular()+" : " : "") + crso.name,
       cr_or_so: subject.dp_status,
       href: crso.is_cr && href_generator(crso),
-      dead: crso.dead_so,
+      dead: !crso.is_active,
       children: _.chain(crso.programs)
         .map( prog=> ({
           name: prog.name,
           href: href_generator(prog),
-          dead: prog.dead_program,
+          dead: !prog.is_active,
         }))
         .sortBy('dead')
         .value(),
@@ -212,15 +212,14 @@ export const program_hierarchy = ({subject, href_generator, show_siblings, show_
           children: ( 
             _.chain(subject.dept.crsos) //CRSO (parent + uncles)
               .filter( show_uncles ? _.constant(true) : is_parent )
-              .reject( show_dead_sos ? _.constant(false) : 'dead_so' )
-              .sortBy('dead_so')
-              .reverse()
+              .filter( show_dead_sos ? _.constant(true) : 'is_active' )
+              .sortBy('is_active')
               .sortBy( is_parent )
               .reverse()
               .map( crso => ({
                 name: (label_crsos ? crso.singular()+" : " : "") + crso.name,
                 href: crso.is_cr && href_generator(crso),
-                dead: crso.dead_so,
+                dead: !crso.is_active,
                 children: ( 
                   show_cousins || is_parent(crso) ? 
                   _.chain(crso.programs)
@@ -229,7 +228,7 @@ export const program_hierarchy = ({subject, href_generator, show_siblings, show_
                       name: prog.name,
                       active : is_subject(prog),
                       href: href_generator(prog),
-                      dead: prog.dead_program,
+                      dead: !prog.is_active,
                     }))
                     .sortBy('dead')
                     .reverse()
@@ -269,7 +268,7 @@ export const tag_hierarchy = ({subject, showSiblings, showChildren, href_generat
           .map(prog => ({
             name: prog.name,
             href: href_generator(prog),
-            dead: prog.dead_program,
+            dead: !prog.is_active,
           }))
           .sortBy('dead')
           .value()
@@ -324,7 +323,7 @@ export const crso_hierarchy = ({subject, href_generator, show_siblings, show_unc
             cr_or_so: crso.dept.dp_status,
             href: crso.is_cr && href_generator(crso),
             active : is_subject(crso),
-            dead: crso.dead_so,
+            dead: !crso.is_active,
             children: //program
               _.chain(_.map(_.chain(crso.programs).value(), prg => ({            
                 level: prg.level,
@@ -364,7 +363,7 @@ export const crso_pi_hierarchy = ({subject, href_generator, show_siblings, show_
                 level: prg.level,
                 name: prg.name,
                 href: href_generator(prg),
-                dead: prg.dead_program,
+                dead: !prg.is_active,
               }))).sortBy('dead').value(),
         }],
       }],
@@ -387,7 +386,7 @@ export const crso_gov_hierarchy = ({subject, href_generator, show_siblings, show
         href: href_generator(subject.dept),
         level: subject.dept.level,
         children: //crso
-          _.map(_.chain(subject.dept.crsos).reject('dead_so').value(), crso => ({            
+          _.map(_.chain(subject.dept.crsos).filter('is_active').value(), crso => ({            
             level: crso.level,
             name: crso.name,
             href: crso.is_cr && href_generator(crso),

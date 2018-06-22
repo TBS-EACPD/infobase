@@ -20,230 +20,97 @@ const {
 } = require('../../link_utils.js');
 
 
-//this is re-used often enough by users of WellList
+
+const scheme_order = [
+  "GOCO",
+  "WWH",
+  "MLT",
+  "CCOFOG",
+  "HWH",
+];
+
 const tag_root_display = tag_root => <div>
   <div> {tag_root.name} </div>
   <div className="small_panel_text"> {tag_root.description} </div>
 </div>;
 
-new PanelGraph({
-  level: 'dept',
-  key : "related_tags",
-  title: 'dept_related_tags_title',
-  footnotes: false,
+const tag_display = tag => ({
+  href: infograph_href_template(tag),
+  display: tag.name,
+});
 
-  calculate(subject){
-    if(subject.dp_status === false){
-      return false;
-    }
+function get_related_tag_list_args(subject){
 
-    const progs = subject.programs;
-
-    const gocos = _.chain(progs)
-      .map( prog => _.first(prog.tags_by_scheme.GOCO))
-      .uniqBy()
-      .compact()
-      .value()
-
-    const how_we_help_tags = _.chain(progs)
-      .map( prog => prog.tags_by_scheme.HWH )
-      .flatten()
-      .uniqBy()
-      .compact()
-      .value();
-
-    if( _.isEmpty( [...gocos, ...how_we_help_tags] ) ){ 
-      return false; 
-    }
+  let tags_by_root_id; 
+  switch(subject.level){
+    case 'program':
+      tags_by_root_id = _.groupBy(subject.tags, "root.id");
+      
+      break;
     
-    return {
-      gocos,
-      how_we_help_tags,
-    }
+    case 'dept':
+    case 'crso':
+      tags_by_root_id = _.chain(subject.programs)
+        .map("tags")
+        .flatten()
+        .uniq('id')
+        .groupBy("root.id")
+        .value(); 
+      
+      break;
 
-  },
+  } 
 
-  render({calculations}){
-    const { 
-      graph_args: {
-        gocos,
-        how_we_help_tags,
-      }, 
-      subject, 
-    } = calculations;
+  return _.chain(tags_by_root_id)
+    .toPairs()
+    .reject( ([_x, group]) => _.isEmpty(group) )
+    .sortBy( ([id, _group]) => _.indexOf(scheme_order, id) )
+    .map( ([id, tags]) => ({
+      display: tag_root_display(Tag.lookup(id)),
+      children: _.map(tags, tag_display),
+    }))
+    .value();
+}
 
-    const tag_display = tag => ({
-      href: infograph_href_template(tag),
-      display: tag.name,
-    });
 
-    const { GOCO, HWH } = Tag.tag_roots;
+const title_by_level = {
+  dept: "dept_related_tags_title",
+  program: "program_tags_title", 
+  crso: "crso_tags_title",
+};
 
-    const list_args = [
-      { 
-        display: tag_root_display(GOCO),
-        children: _.map(gocos, tag_display),
-      },
-      {
-        display: tag_root_display(HWH),
-        children: _.map(how_we_help_tags, tag_display ),
-      },
-    ];
-
-    return (
-      <TextPanel 
-        title={text_maker("dept_related_tags_title")}
-      >
-        <TM k="org_is_tagged_with_following" args={{subject}} />
-        <WellList elements={list_args} />
-      </TextPanel>
-    )
-  },
-});
-
-new PanelGraph({
-  level: 'crso',
-  key : "crso_tags",
-
-  footnotes: false,
-
-  calculate(subject){
-
-    if(subject.dept.dp_status === false){
-      return false;
-    }
-
-    const progs = subject.programs;
-
-    const gocos = _.chain(progs)
-      .map( prog => prog.tags_by_scheme.GOCO )
-      .flatten()
-      .uniqBy()
-      .compact()
-      .value()
-
-    const how_we_help_tags = _.chain(progs)
-      .map( prog => prog.tags_by_scheme.HWH )
-      .flatten()
-      .uniqBy()
-      .compact()
-      .value();
-
-    if( _.isEmpty( [...gocos, ...how_we_help_tags] ) ){ 
-      return false; 
-    }
+_.each(['dept','crso','program'], level => {
+  new PanelGraph({
+    level,
+    key : "tags_of_interest",
+    footnotes: false,
+    calculate(subject){
+      const tags_by_root = get_related_tag_list_args(subject);
+      if(subject.dp_status === false || _.isEmpty(tags_by_root)){
+        return false;
+      }
+      
+      return tags_by_root;
   
-    return {
-      gocos,
-      how_we_help_tags,
-    }
+    },
+    render({calculations}){
+      const { 
+        graph_args: tags_by_root, 
+        subject, 
+      } = calculations;
 
-  },
-
-  render({calculations}){
-    const { 
-      graph_args: {
-        gocos,
-        how_we_help_tags,
-      }, 
-      subject, 
-    } = calculations;
-
-    const tag_display = tag => ({
-      href: infograph_href_template(tag),
-      display: tag.name,
-    });
-
-    const { GOCO, HWH } = Tag.tag_roots;
-
-    const list_args = [
-      { 
-        display: tag_root_display(GOCO),
-        children: _.map(gocos, tag_display),
-      },
-      {
-        display: tag_root_display(HWH),
-        children: _.map(how_we_help_tags, tag_display ),
-      },
-    ];
-
-    return (
-      <TextPanel
-        title={text_maker("crso_tags_title")}
-      >
-        <TM k="crso_tags_intro" args={{name: subject.name}} />
-        <HeightClipper allowReclip={true} clipHeight={350}>
-          <WellList elements={list_args} />
-        </HeightClipper>
-      </TextPanel>
-    );
-
-
-  },
-});
-
-new PanelGraph({
-  level: 'program',
-  key : "program_tags",
-
-  footnotes: false,
-
-  calculate(subject){ 
-    return _.nonEmpty(subject.tags);
-  },
-
-  render({calculations}){
-    const { subject } = calculations;
-
-    const {
-      GOCO: goco_root,
-      HWH: hwh_root,
-    } = Tag.tag_roots;
-
-    let {
-      GOCO : gocos,
-      HWH : how_we_help_tags,
-    } = subject.tags_by_scheme;
-
-    gocos = gocos || []; 
-    how_we_help_tags = how_we_help_tags || []; 
-
-
-    const tag_display = tag => ({
-      href: infograph_href_template(tag),
-      display: tag.name,
-    });
-
-    const list_args = [
-      { 
-        display: tag_root_display(goco_root),
-        children: _.map(gocos, tag_display),
-      },
-      {
-        display: tag_root_display(hwh_root),
-        children:  _.map(how_we_help_tags, tag_display),
-      },
-    ].filter(e => !_.isEmpty(e.children))
-
-
-    return (
-      <TextPanel
-        title={text_maker("program_tags_title")}
-      >
-        <p>
-          <TM 
-            k="program_is_tagged_with_following" 
-            args={{name:subject.name}} 
-          />
-        </p>
-        <HeightClipper allowReclip={true} clipHeight={350}>
-          <WellList elements={list_args} /> 
-        </HeightClipper>
-      </TextPanel>
-    );
-
-  },
-});
+      return (
+        <TextPanel
+          title={text_maker(title_by_level[level])}
+        >
+          <TM k="tags_of_interest_sentence" args={{subject}} /> 
+          <WellList elements={tags_by_root} />
+        </TextPanel>
+      );
+  
+    },
+  });
+})
 
 new PanelGraph({
   level: 'tag',
@@ -303,13 +170,6 @@ new PanelGraph({
 
   calculate(subject){
 
-    const tag_roots =  Tag.tag_roots;
-
-    const indices = {
-      [tag_roots.GOCO.id]: 5,
-      [tag_roots.HWH.id]: 10,
-    };
-
     const related_tags_by_type_with_counts = (
       _.chain(subject.programs)
         .map( prog => prog.tags )
@@ -321,15 +181,17 @@ new PanelGraph({
           count: group.length,
           type: _.first(group).root.id,
         }))
+        .filter('count')
         .groupBy('type')
         .map( (group_of_tags, type) => ({
           tag_and_counts: _.chain(group_of_tags)
             .sortBy(obj => obj.tag.name )
             .sortBy(obj => -obj.count )
+            .take(10)
             .value(),
           type,
         }))
-        .sortBy( ({type}) => indices[type] )
+        .sortBy( ({type}) => _.indexOf(scheme_order, type) )
         .value()
     );
     if(_.isEmpty(related_tags_by_type_with_counts)){

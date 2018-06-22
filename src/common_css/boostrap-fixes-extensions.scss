@@ -494,6 +494,12 @@ dl.dl-horizontal.dl-long-terms {
   }
 }
 
+dl.dl-no-bold-dts {
+  > dt {
+    font-weight: inherit;
+  }
+}
+
 .zero-padding {
   padding: 0px !important;
 }

@@ -72,6 +72,7 @@ class Dept extends common(){
   static get type_name() { return 'dept'; }
   static get singular(){ return trivial_text_maker("org") }
   static get plural(){ return trivial_text_maker("orgs")}
+  static get dept_code(){ return this.acronym } //TODO: replace all .acronym with dept_code
   static depts_with_data(){ 
     //lazy initialized
     if(!this._depts_with_data){ 
@@ -104,9 +105,10 @@ class Dept extends common(){
       def
     );
   }
-  get is_DRF(){
+  get is_first_wave(){
     return this.dp_status === 'fw'
   }
+
   get programs(){
     return _.chain(this.crsos)
       .map('programs')
@@ -132,9 +134,6 @@ class Dept extends common(){
         "Entités Parlementaires",
       ],this.type)
     );
-  }
-  get is_first_wave(){
-    return this.dp_status === "fw";
   }
   get is_rpp_org(){
     return this.dp_status !== false;
@@ -299,6 +298,12 @@ class Tag extends common(){
       } else {
         return trivial_text_maker("gocos");
       }
+    } else if(this.root.id === "MLT"){
+      if(!this.is_lowest_level_tag){
+        return trivial_text_maker("priorities");
+      } else {
+        return trivial_text_maker("commitments");
+      }
     } else {
       if (_.nonEmpty(this.programs) && _.isEmpty(this.children_tags)){
         return trivial_text_maker("tag")+"(s)";
@@ -388,14 +393,18 @@ class CRSO extends common(){
   get has_planned_spending(){ 
     return _.some(this.programs, program => program.has_planned_spending);
   }
-  get is_internal_service(){
-    return _.some(this.programs, 'is_internal_service');
-  }
+  //TODO: confirm old SO's are tagged internal service correctly
+  // get is_internal_service(){
+  //   return _.some(this.programs, 'is_internal_service');
+  // }
   get is_cr(){
-    return !this.dead_so && this.dept.dp_status === "fw";
+    return this.is_drf;
   }
   get is_first_wave(){
-    return this.is_cr;
+    return this.dept.is_first_wave;
+  }
+  get dead_so(){
+    return !this.is_active;
   }
 };
 
@@ -440,6 +449,9 @@ class Program extends common(){
   }
   get is_first_wave(){
     return this.crso.is_cr;
+  }
+  get dead_program(){
+    return !this.is_active;
   }
 };
 

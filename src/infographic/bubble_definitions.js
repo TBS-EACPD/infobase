@@ -10,25 +10,13 @@ export const bubble_defs = {
     title(subject){
       switch(subject.level){
         case 'program':
-          return text.about_dept_title[lang];
+          return text.about_program_title[lang];
         case 'gov':
           return text.about_gov_title[lang];
         case 'tag': 
           return text.about_tag_title[lang];
         case 'crso': 
-          if(subject.dept.dp_status === "fw"){
-            return (
-              window.lang === 'en' ? 
-              "About this "+ subject.singular() :
-              "À propos de cette "+ subject.singular() 
-            );
-          } else {
-            return (
-              window.lang === 'en' ? 
-              "About this "+ subject.singular() :
-              "À propos de ce "+ subject.singular() 
-            );
-          }
+          return text.about_cr_title[lang];
         default:
           return "Introduction";
       }

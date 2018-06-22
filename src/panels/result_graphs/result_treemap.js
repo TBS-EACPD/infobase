@@ -1,3 +1,4 @@
+const { result_laggards } = require('../../shameful.js');
 const { TM, text_maker } = require('./result_text_provider.js');
 const { createSelector } = require('reselect');
 const classNames = require('classnames');
@@ -42,7 +43,7 @@ const {
 } = require('../../gen_expl/results_scheme.js');
 
 const {
-  get_type_header,
+  get_type_name,
   ResultNodeContent,
   spending_header,
   fte_header,
@@ -84,7 +85,7 @@ const get_non_col_content_func = createSelector(
       return <div>
         {resources && 
           <dl 
-            className="dl-horizontal dl-long-terms"
+            className="dl-horizontal dl-long-terms dl-no-bold-dts"
             style={{fontSize: "0.8em"}}
           >
             <dt> {spending_header(doc) } </dt>
@@ -115,10 +116,13 @@ const get_children_grouper = createSelector(
       }
 
       return _.chain(children)
-        .groupBy(get_type_header)
+        .groupBy("data.type")
         .toPairs()
-        .sortBy( ([ type, group ]) => !_.includes(['dr', 'result'], type) ) //make results show up first 
-        .map( ([display, node_group ]) => ({display, node_group}))
+        .sortBy( ([ type_key, group ]) => !_.includes(['dr', 'result'], type_key) ) //make results show up first 
+        .map( ([type_key, node_group ]) => ({
+          display: get_type_name(type_key), 
+          node_group,
+        }))
         .value()
     }
   }
@@ -356,14 +360,14 @@ class SingleSubjExplorer extends React.Component {
               <TM k="DRR_results_option_title" />
             </span>
           </li>
-          <li className={classNames("tab_label", doc==="dp17" && "active_tab")} onClick={()=> tab_on_click('dp17')}>
+          <li className={classNames("tab_label", doc==="dp18" && "active_tab")} onClick={()=> tab_on_click('dp18')}>
             <span 
               tabIndex={0}
               role="button"
-              aria-pressed={doc === "dp17"}
+              aria-pressed={doc === "dp18"}
               className="tab_label_text"
-              onClick={()=> tab_on_click('dp17')}
-              onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32)&& tab_on_click('dp17')}
+              onClick={()=> tab_on_click('dp18')}
+              onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32)&& tab_on_click('dp18')}
             >
               <TM k="DP_results_option_title" />
             </span>
@@ -451,8 +455,13 @@ _.each(['program','dept','crso'], lvl => {
     calculate(subject){
 
       const indicators = Indicator.get_flat_indicators(subject);
+      const org_id = (
+        subject.level === "dept" ?
+        subject.id :
+        subject.dept.id
+      );
 
-      const has_dp_data = _.find(indicators, {doc: 'dp17'});
+      const has_dp_data = _.find(indicators, {doc: 'dp18'}) && !_.includes(result_laggards, org_id)
       const has_drr_data = _.find(indicators, {doc: 'drr16'});
 
       if(!has_dp_data && !has_drr_data){

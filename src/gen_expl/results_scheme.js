@@ -14,7 +14,7 @@ const {
 
 
 export const get_initial_single_subj_results_state = ({subj_guid, doc, mode, has_drr_data, has_dp_data}) => ({
-  doc: has_drr_data ? 'drr16' : 'dp17',
+  doc: has_dp_data ? 'dp18': "drr16",
   subject_guid: subj_guid || 'dept_1',
   status_icon_key_whitelist: [],
 });

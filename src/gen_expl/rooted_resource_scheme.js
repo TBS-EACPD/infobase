@@ -3,8 +3,6 @@ const { trivial_text_maker } = require('../models/text.js');
 
 const { shallowEqualObjectsOverKeys } = require('../core/utils.js');
 
-const { Table } = require('../core/TableClass.js');
-
 const {
   filter_hierarchy,
   convert_d3_hierarchy_to_explorer_hierarchy,
@@ -17,14 +15,7 @@ const { provide_sort_func_selector } = require('./resource-explorer-common.js');
 
 function create_rooted_resource_hierarchy({doc,root_subject}){
 
-  const table6 = Table.lookup('table6');
-  const table12 = Table.lookup('table12');
-  const year = (
-    doc === 'dp17' ? 
-    '{{planning_year_1}}' : 
-    '{{pa_last_year}}'
-  );
-  const get_resources = subject => get_resources_for_subject(subject, table6,table12,year);
+  const get_resources = subject => get_resources_for_subject(subject, doc);
 
   const root = {
     root: true,
@@ -141,7 +132,7 @@ function create_rooted_resource_hierarchy({doc,root_subject}){
 const get_initial_resource_state = ({subject, has_drr_data, has_dp_data }) => ({
   sort_col: 'spending',
   is_descending: true,
-  doc: has_drr_data ? 'drr16' : 'dp17',
+  doc: 'dp18',
 });
 
 const partial_scheme = {

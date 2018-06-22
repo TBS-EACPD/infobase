@@ -5,7 +5,6 @@ const subjects = _.keys(Subject);
 const FootNote = require('../models/footnotes.js');
 const { tables_for_statistics } = require('./Statistics.js');
 const { rpb_link } = require('../rpb/rpb_link.js');
-const { reactAdapter } = require('./reactAdapter.js')
 
 const graphs = {}
 const create_graph_key = (key,level) => `${key}:${level}`;
@@ -14,6 +13,9 @@ const default_args = {
   depends_on: [],
   info_deps: [],
   machinery_footnotes: true,
+  layout: {
+    full: {graph:12, text: 12},
+  },
 };
 
 class PanelGraph {
@@ -187,14 +189,14 @@ class PanelGraph {
         footnote_concepts
       )
     )
-      .map('text')
+      .uniqBy('text') //some footnotes are duplicated to support different topics, years, orgs, etc. 
       .compact()
       .value();
   
 
   }
 
-  render(container, calculations, options={}){
+  render(calculations, options={}){
     const { subject } = calculations;
     const render_func = this._inner_render;
     const footnotes = this.get_footnotes(subject);
@@ -206,10 +208,7 @@ class PanelGraph {
       sources,        
     },options);
     
-    reactAdapter.render(
-      react_el,
-      container.node(),
-    );
+    return react_el;
     
   }
 }

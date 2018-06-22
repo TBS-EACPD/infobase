@@ -252,6 +252,15 @@ ul.footnote-list {
 .panel {
   box-shadow: 0 0 transparent;
 }
+.panel.panel-overflow {
+  overflow: visible;
+
+  &>.panel-body {
+    /* .panel has a border radius of 10px, if the overflow is visible we need to correct the the white rectangle that starts popping out */ 
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+}
 .panel-body > .row > .source {
   opacity: 0.8;
 }

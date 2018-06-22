@@ -24,6 +24,14 @@ $heavyFontWeight: 700;
   border-radius: 0;
 }
 
+@mixin unstyled-list {
+  padding-left: 0;
+  list-style: none;
+  &> li {
+    padding-left: 0;
+    list-style: none;
+  }
+}
 @mixin unstyled-link {
     &, &:link, &:visited, &:hover {
       color: inherit;

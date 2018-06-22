@@ -95,6 +95,12 @@
   padding: 1px 10px 2px 0px;
 }
 
+.ExplorerNode__SmallTextList { 
+  @include unstyled-list;
+  font-size: 0.8em;
+  line-height: 1.6;
+}
+
 
 // .explorer-collapsible-children-container {
 .ExplorerNodeContainer__ChildrenContainer {

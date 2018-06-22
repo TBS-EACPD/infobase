@@ -264,8 +264,8 @@ class SubProgramResourceTree extends React.Component {
               <TM k="sub_program_DRR_title" />
             </span>
           </li>
-          <li className={classNames("tab_label", doc==="dp17" && "active_tab")} onClick={()=> tab_on_click('dp17')}>
-            <span tabIndex={0} role="button" aria-pressed={doc === "dp17"} className="tab_label_text" onClick={()=> tab_on_click('dp17')} onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('dp17')}>
+          <li className={classNames("tab_label", doc==="dp18" && "active_tab")} onClick={()=> tab_on_click('dp18')}>
+            <span tabIndex={0} role="button" aria-pressed={doc === "dp18"} className="tab_label_text" onClick={()=> tab_on_click('dp18')} onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('dp18')}>
               <TM k="sub_program_DP_title" />
             </span>
           </li>
@@ -298,7 +298,7 @@ const SubProgramResourceTreeContainer = ({
 }) => {
 
   const initial_scheme_state_slice = {
-    doc: has_drr_data ? 'drr16' : 'dp17',
+    doc: has_drr_data ? 'drr16' : 'dp18',
     subj_guid: subject.guid, 
   };
 

@@ -1,11 +1,11 @@
 import './home.scss';
 import './home-svg.css';
+import { get_missing_result_footnote } from '../shameful.js';
 import home_text_bundle from "./home.yaml";
 import get_home_content from './home-data.js';
 import { log_standard_event } from '../core/analytics.js';
 import MediaQuery from 'react-responsive';
 import classNames from 'classnames';
-
 
 import { 
   EverythingSearch,
@@ -94,6 +94,13 @@ const FeaturedContentItem = ({ text_key, href, is_new }) => <li className="list-
 
 const HomeLayout = props => (
   <div className="home-root">
+    <div
+      className="alert alert-danger alert-no-symbol alert--is-bordered medium_panel_text mrgn-tp-lg"
+    >
+      <div style={{paddingLeft:"3rem"}}>
+        <div dangerouslySetInnerHTML={{__html:get_missing_result_footnote()}} />
+      </div>
+    </div>
     <div className="intro-box">
       <h1> <TM k="welcome" /> </h1>
       <h2> <TM k="home_sub_title" /> </h2>

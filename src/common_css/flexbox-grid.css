@@ -9,8 +9,15 @@
   
 */
 
+/* this allows us to use fcol-md-* without redundantly specifying fcol-xs-12 all the time */ 
 [class*='fcol-md'] {
   width:100%;  
+  box-sizing: border-box;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
 }
 
 .fcontainer-fluid, .fcontainer {

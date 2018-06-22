@@ -13,7 +13,6 @@ const {
   Dept, 
   Ministry, 
 } = Subject;
-const { Table } = require('../core/TableClass.js');
 
 const {
   filter_hierarchy,
@@ -22,14 +21,7 @@ const {
 
 function create_resource_hierarchy({hierarchy_scheme,doc}){
 
-  const table6 = Table.lookup('table6');
-  const table12 = Table.lookup('table12');
-  const year = (
-    doc === 'dp17' ? 
-    '{{planning_year_1}}' : 
-    '{{pa_last_year}}'
-  );
-  const get_resources = subject => get_resources_for_subject(subject, table6,table12,year);
+  const get_resources = subject => get_resources_for_subject(subject,doc);
 
   const root = {
     root: true,
@@ -47,31 +39,31 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
 
         case 'GOCO':
         case 'HWH':
+        case 'WWH':
+        case 'CCOFOG':
+        case 'MLT':
           return _.map(Tag.lookup(hierarchy_scheme).children_tags, tag => ({
             id: tag.guid,
             data: {
               name: tag.name,
-              resources: get_resources(tag),
+              resources: _.includes(['WWH', 'MLT'], hierarchy_scheme) ? null : get_resources(tag),
               subject: tag,
-              defs: ( tag.is_lowest_level_tag && [
-                {
+              defs: tag.is_lowest_level_tag && _.compact([
+                !_.isEmpty(tag.description) && {
                   term: text_maker('description'),
                   def: <div dangerouslySetInnerHTML={{__html: tag.description }} />,
                 },
-              ].concat( 
-                (tag.is_m2m && !_.isEmpty(tag.related_tags()) ) ?
-                [{
+                tag.is_m2m && !_.isEmpty(tag.related_tags()) && {
                   term: text_maker('related_tags'),
                   def: (
-                    <ul className="list-unstyled">
+                    <ul className="ExplorerNode__SmallTextList">
                       {_.map(tag.related_tags(), related_tag => 
                         <li key={related_tag.id}> <a href={infograph_href_template(related_tag)} > {related_tag.name} </a> </li> 
                       )}
                     </ul>
                   ),
-                }] : 
-                []
-              )),
+                },
+              ]),
                 
             },
           }));
@@ -131,7 +123,7 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
             .map( prog => ({
               id: `${parent_id}-${prog.guid}`,
               data: {
-                name: `${prog.name} (${prog.dept.fancy_acronym})`,
+                name: `${prog.name} (${prog.dept.fancy_acronym || prog.dept.name})`,
                 subject: prog,
                 resources: get_resources(prog),
                 defs: [
@@ -154,8 +146,8 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
               data: {
                 name: tag.name,
                 subject: tag,
-                resources: get_resources(tag),
-                defs: [
+                resources: _.includes(["MLT"],hierarchy_scheme) ? null : get_resources(tag),
+                defs: tag.description && [
                   {
                     term: text_maker('description'),
                     def: <div dangerouslySetInnerHTML={{__html: tag.description }} />,
@@ -238,7 +230,7 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
 
 const get_initial_resource_state = ({hierarchy_scheme, doc}) => ({
   hierarchy_scheme : hierarchy_scheme || "min",
-  doc: doc || 'drr16',
+  doc: doc || 'dp18',
   
   sort_col: 'spending',
   is_descending: true,
@@ -249,7 +241,10 @@ const resource_scheme = {
   get_sort_func_selector: () =>  provide_sort_func_selector('resources'),
   get_props_selector: () => {
 
-    return augmented_state => ({...augmented_state.resources, is_m2m : _.includes(['HWH'], augmented_state.resources.hierarchy_scheme )});
+    return augmented_state => ({ 
+      ...augmented_state.resources,
+      is_m2m : _.includes(['HWH', 'WWH', 'MLT'], augmented_state.resources.hierarchy_scheme ),
+    });
   },
   dispatch_to_props: dispatch => ({ 
     col_click : col_key => dispatch({type: 'column_header_click', payload: col_key }),

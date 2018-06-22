@@ -1,3 +1,4 @@
+const {get_missing_result_footnote, result_laggards} = require('../../shameful.js');
 const {
   PanelGraph,
   util_components: {
@@ -102,7 +103,6 @@ _.each(['gov', 'dept', 'program', 'crso'], lvl => {
       q_a_keys: [
         'what_is_policy_on_results',
         'what_is_diff_with_mrrs',
-        'which_orgs_policy_on_results',
         'what_is_a_drf',
         'what_is_a_cr',
         'what_is_prog', //notice this one is re-used from the financial defs
@@ -112,20 +112,32 @@ _.each(['gov', 'dept', 'program', 'crso'], lvl => {
       ],
     }),
   })
+});
+
+
+
+
+_.each(['dept', 'program', 'crso'], lvl => {
 
   new PanelGraph({
     level: lvl,
-    key: "dp_coming_soon",
-    calculate:_.constant(true),
+    key: "late_dept",
+    calculate(subject){
+      const org = subject.level === "dept" ? subject : subject.dept;
+      if(_.includes(result_laggards, org.id)){
+        return true;
+      } 
+      return false;
+    },
     render: () => (
       <div
-        className="alert alert-info alert--is-bordered large_panel_text"
+        className="alert alert-no-symbol alert-danger alert--is-bordered large_panel_text"
         style={{ 
           textAlign: "center",
-          borderColor: "#16599a",
+          borderColor: "#d9534f",
         }}
       >
-        <TM k="dp_coming_soon_title" />
+        <TM k="org_missing_dp_results" />
       </div>
     ),
   })
@@ -217,4 +229,26 @@ _.each(['gov', 'dept'], lvl => {
       </div>
     ),
   });
+  
+});
+
+
+
+new PanelGraph({
+  level: "gov",
+  static: true,
+  footnotes: false,
+  source: false,
+  info_deps: [],
+  key : "gov_results_shame",
+  calculate: _.constant(true),
+  render: () => (
+    <div
+      className="alert alert-danger alert-no-symbol alert--is-bordered large_panel_text"
+    >
+      <div style={{paddingLeft:"3rem"}}>
+        <div dangerouslySetInnerHTML={{__html:get_missing_result_footnote()}} />
+      </div>
+    </div>
+  ),
 });

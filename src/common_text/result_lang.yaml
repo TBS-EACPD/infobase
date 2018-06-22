@@ -262,9 +262,11 @@ unspecified_date_to_achieve:
   en: Unspecified
   fr: Non spécifié
 
+methodology:
+  en: Methodology
+  fr: Méthodologie
 
 result_status_with_gl:
   transform: [handlebars]
   text: |
     {{gl_tt text glossary_key}}
-

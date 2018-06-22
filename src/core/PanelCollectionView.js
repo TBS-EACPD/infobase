@@ -5,15 +5,12 @@ const { PanelGraph } = require('../core/PanelGraph.js');
 
 export const ReactPanelGraph = withRouter(
   class ReactPanelGraph_ extends React.Component {
-    _render(){
+    render(){
       let {
         subject,
         graph_key,
         history,
       } = this.props;  
-
-      const { main } = this.refs;
-      main.innerHTML = "";
 
       const graph_obj = PanelGraph.lookup(graph_key, subject.level)
 
@@ -23,32 +20,16 @@ export const ReactPanelGraph = withRouter(
       const calculations = graph_obj.calculate(subject, graph_options);
 
       if(!calculations){
-        main.innerHTML = "";
-        return;
+        return null;
       }
-      
-      graph_obj.render( d3.select(main), calculations, graph_options);
+      return <div id={graph_key}>
+        {graph_obj.render(calculations, graph_options)}
+      </div>
 
       
     }
     shouldComponentUpdate(nextProps){
       return !shallowEqualObjectsOverKeys(nextProps, this.props, ['subject','graph_key']);
-    }
-    componentDidMount(){
-      this._render();
-    }
-    componentDidUpdate(){
-      this._render();
-    }
-    render(){
-      const { graph_key } = this.props;
-      return (
-        <div 
-          ref="main"
-          id={graph_key}
-          className="infograph-panel-container"
-        />
-      );
     }
     
   }
