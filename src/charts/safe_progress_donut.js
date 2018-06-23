@@ -1,8 +1,6 @@
-exports = module.exports;
-
-const common_charts_utils = require('./common_charts_utils');
-const BAR = require("./bar").bar;
-const { ProgressDonut} = require('./progress_donut.js');
+import common_charts_utils from './common_charts_utils';
+import { Bar } from './bar';
+import { ProgressDonut } from './progress_donut.js';
 
 const bar_options = {
   add_xaxis : true,                                   
@@ -11,9 +9,9 @@ const bar_options = {
   add_labels : true,                                  
   margin : {top: 0, right:0, left: 0, bottom: 0} ,
   formater : common_charts_utils.formats.compact1,
-};                         
+};
 
-exports.SafeProgressDonut = class SafeProgressDonut {
+export class SafeProgressDonut {
 
   constructor(container,options){
     // expect data to be in following format:
@@ -54,11 +52,11 @@ exports.SafeProgressDonut = class SafeProgressDonut {
         ticks : _.map(data, 'label'), 
       };
 
-      new BAR(
+      new Bar(
         this.__container__,
         options
       ).render();
 
     }
   }
-}
+};

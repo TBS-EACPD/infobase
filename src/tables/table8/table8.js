@@ -1,23 +1,18 @@
 // see [here](../table_definition.html) for description
 // of the table spec
-exports = module.exports;
-const text = require("./table8.yaml");
-var FORMAT = require('../../core/format');
 
-const {
+import text from './table8.yaml';
+import * as FORMAT from '../../core/format';
+import { 
   vote_stat_dimension, 
   major_vote_stat, 
   trivial_text_maker, 
-  major_vote_big_stat,
+  major_vote_big_stat, 
   Statistics, 
-  years : {
-    estimates_years,
-  },
-} = require("../table_common");
-
-const years = estimates_years;
-const est_cols = _.map(years, yr=> yr+"_estimates");
-
+  years, 
+} from '../table_common';
+const { estimates_years } = years;
+const est_cols = _.map(estimates_years, yr=> yr+"_estimates");
 const in_year_col = est_cols[4];
 const last_year_col = est_cols[3];
 
@@ -122,7 +117,7 @@ const map_helper = {
   "CBCF": "V33",
 };
 
-module.exports = {
+export default {
   text,
   "id": "table8",
 
@@ -202,9 +197,9 @@ module.exports = {
         "fr":"Instrument des dépenses",
       },
     });
-    _.each(years, yr=> { 
+    _.each(estimates_years, yr=> { 
       this.add_col({
-        "simple_default": yr === _.last(years),
+        "simple_default": yr === _.last(estimates_years),
         type: "big_int",
         nick: yr+"_estimates",
         description: {
@@ -444,7 +439,7 @@ Statistics.create_and_register({
     add('in_year_estimates_split', q.estimates_split({filter_zeros : true, as_tuple : true, col: in_year_col}) )
     add('last_year_estimates_split', q.estimates_split({filter_zeros : true, as_tuple : true, col: last_year_col}) )
 
-    _.each(years, yr=> { add("tabled_"+yr, q.sum(yr+"_estimates")) } );
+    _.each(estimates_years, yr=> { add("tabled_"+yr, q.sum(yr+"_estimates")) } );
 
     // does nothing:
     // add("tabled_next_year",q.sum("next_year_estimates"));

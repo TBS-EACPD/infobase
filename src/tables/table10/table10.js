@@ -1,17 +1,18 @@
 import text from "./table10.yaml";
 
 import {
-  STATS, 
+  stats, 
   trivial_text_maker, 
   m, 
   Statistics, 
-  formats, 
+  format, 
   people_five_year_percentage_formula,
-  business_constants,
+  businessConstants,
   years,
 } from "../table_common";
 
-const {provinces} = business_constants;
+const { formats } = format;
+const { provinces } = businessConstants;
 const { 
   people_years, 
   people_years_short_second,
@@ -177,7 +178,7 @@ Statistics.create_and_register({
     c.dept = subject;
 
     var all_years = q.get_top_x(["region"].concat(people_years),Infinity,{zip:true});
-    STATS.year_over_year_multi_stats_active_years(add,"head_count_region",all_years,false,people_years);
+    stats.year_over_year_multi_stats_active_years(add,"head_count_region",all_years,false,people_years);
   },
 });
 
@@ -190,7 +191,7 @@ Statistics.create_and_register({
     const q = table.q(subject);
     
     var all_years = q.gov_grouping();
-    STATS.year_over_year_multi_stats_active_years(add,"head_count_region",all_years,false,people_years);
+    stats.year_over_year_multi_stats_active_years(add,"head_count_region",all_years,false,people_years);
   },
 });
 

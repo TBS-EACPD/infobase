@@ -1,10 +1,10 @@
-import * as Subject from '../../../models/subject';
+import { Subject } from '../../../models/subject';
 import { Table } from '../../../core/TableClass.js';
-import { run_template } from '../../../models/text';
 import { text_maker } from '../partition_text_provider.js';
 import { TextMaker as StandardTextMaker } from '../../../util_components';
 import { rpb_link } from '../../../link_utils.js';
 import { PartitionPerspective } from './PartitionPerspective.js';
+import { run_template } from '../../../models/text.js';
 
 import {
   absolute_value_sort,

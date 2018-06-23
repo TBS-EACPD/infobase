@@ -1,14 +1,10 @@
 /* eslint-disable no-console, no-debugger */
-const Subject = require("../models/subject");
-const {
-  trivial_text_maker,
-  run_template,
-} = require('../models/text');
-const { GlossaryEntry } = require('../models/glossary.js')
-const { 
-  infograph_href_template,
-  glossary_href,
-} = require('../link_utils.js');
+import { Subject } from '../models/subject';
+
+import { GlossaryEntry } from '../models/glossary.js';
+import { infograph_href_template, glossary_href } from '../link_utils.js';
+import { trivial_text_maker, run_template } from '../models/text.js';
+
 const change_map = {
   past : {
     to : {
@@ -244,7 +240,7 @@ const two_value_calc_direction = function(val1,val2,formater){
                "increase" : 
                "decrease"
            );
-};         
+};
 const en_master_two_value_change = function(val1,val2,formater,preposition,tense){
   let return_value = "INVALID FORMATER"; // Will only be returned if passed formater invalid
   if(formater.length>0){

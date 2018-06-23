@@ -12,7 +12,7 @@ class MixinBuilder {
 // class MyClass extends mix(MyBaseClass).with(Mixin1, Mixin2) { ... }
 const mix = (superclass) => new MixinBuilder(superclass);
 
-module.exports = exports = {
+export {
   BaseClass,
   mix,
-}
+};

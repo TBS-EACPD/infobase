@@ -1,63 +1,39 @@
-const { result_laggards } = require('../../shameful.js');
-const { TM, text_maker } = require('./result_text_provider.js');
-const { createSelector } = require('reselect');
-const classNames = require('classnames');
-
-const { Explorer } = require('../../components/ExplorerComponents');
-
-const {
-  PanelGraph,
-  util_components: {
-    SpinnerWrapper,
-    Format,
-    Abbrev,
-  },
-  infograph_href_template,
+import { result_laggards } from '../../shameful.js';
+import { TM, text_maker } from './result_text_provider.js';
+import { createSelector } from 'reselect';
+import classNames from 'classnames';
+import { Explorer } from '../../components/ExplorerComponents';
+import { 
+  PanelGraph, 
+  util_components, 
+  infograph_href_template, 
   Panel,
-} = require("../shared");
-const { Details } = require('../../components/Details.js');
+} from '../shared';
+import { Details } from '../../components/Details.js';
+import { Indicator } from './results_common.js';
+import { StatusIconTable, InlineStatusIconList } from './components.js';
 
-
-const { 
-  Indicator,
-  
-} = require('./results_common.js');
-
-const {
-  StatusIconTable, 
-  InlineStatusIconList,
-} = require('./components.js')
-
+const { SpinnerWrapper, Format, Abbrev } = util_components;
 
 //treemap stuff
-const { combineReducers, createStore } = require('redux');
-const { Provider, connect } = require('react-redux');
-
-const {
-  get_root,
-} = require('../../gen_expl/hierarchy_tools.js');
-
-const { 
-  single_subj_results_scheme,
-  get_initial_single_subj_results_state,
-} = require('../../gen_expl/results_scheme.js');
-
-const {
-  get_type_name,
-  ResultNodeContent,
-  spending_header,
-  fte_header,
+import { combineReducers, createStore } from 'redux';
+import { Provider, connect } from 'react-redux';
+import { get_root } from '../../gen_expl/hierarchy_tools.js';
+import { single_subj_results_scheme, get_initial_single_subj_results_state } from '../../gen_expl/results_scheme.js';
+import { 
+  get_type_name, 
+  ResultNodeContent, 
+  spending_header, 
+  fte_header, 
   ResultCounts,
-} = require('../../gen_expl/result_displays.js');
-
-
-const {
-  get_memoized_funcs,
-  initial_root_state,
-  root_reducer,
-  map_state_to_root_props_from_memoized_funcs,
-  map_dispatch_to_root_props,
-} = require('../../gen_expl/state_and_memoizing');
+} from '../../gen_expl/result_displays.js';
+import { 
+  get_memoized_funcs, 
+  initial_root_state, 
+  root_reducer, 
+  map_state_to_root_props_from_memoized_funcs, 
+  map_dispatch_to_root_props, 
+} from '../../gen_expl/state_and_memoizing';
 
 
 const get_non_col_content_func = createSelector(

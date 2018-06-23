@@ -1,10 +1,11 @@
-const {mix} = require('../generalUtils.js');
-const {staticStoreMixin}= require('../models/staticStoreMixin.js');
-const { Gov } = require('../models/subject.js');
-const {Table} = require('./TableClass.js');
+import { mix } from '../generalUtils.js';
+import { staticStoreMixin } from '../models/staticStoreMixin.js';
+import { Table } from './TableClass.js';
+import { years } from '../models/years.js';
+import { Subject } from '../models/subject.js';
+import { run_template } from '../models/text.js';  //just needed for a few constants, consider moving this elsewhere...
 
-const {run_template} = require('../models/text.js'); //just needed for a few constants, consider moving this elsewhere...
-const {years} = require('../models/years.js');
+const { Gov } = Subject;
 
 const some_constants = {
   lang : window.lang,
@@ -145,9 +146,10 @@ function tables_for_statistics( stat_key ){
     .value();
 }
 
-module.exports = exports = { 
+window._Statistics = Statistics;
+
+export { 
   Statistics, 
   get_info,
   tables_for_statistics,
 };
-window._Statistics = Statistics;

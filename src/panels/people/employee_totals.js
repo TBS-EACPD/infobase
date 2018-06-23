@@ -11,7 +11,10 @@ import {
   Col,
 } from "../shared"; 
 
-import { months } from '../../models/businessConstants';
+import { businessConstants } from '../../models/businessConstants';
+
+const { months } = businessConstants;
+
 
 const text_maker = create_text_maker(text);
 const TM = props => <StdTM tmf={text_maker} {...props} />;

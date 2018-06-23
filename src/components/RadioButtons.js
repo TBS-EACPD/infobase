@@ -1,8 +1,7 @@
-require('./RadioButtons.scss')
+import './RadioButtons.scss';
+import classNames from 'classnames';
 
-const classNames = require('classnames');
-
-module.exports.RadioButtons = ({ options, onChange }) => <div className="radio-buttons">
+export const RadioButtons = ({ options, onChange }) => <div className="radio-buttons">
   {options.map( ({ display, id, active })=> 
     <button 
       key={id}
@@ -13,4 +12,4 @@ module.exports.RadioButtons = ({ options, onChange }) => <div className="radio-b
       {display}
     </button>
   )}
-</div>
+</div>;

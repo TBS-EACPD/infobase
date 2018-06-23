@@ -1,15 +1,16 @@
-const { text_maker } = require('./rpb_text_provider.js');
-const { createSelector } = require('reselect');
+import { text_maker } from './rpb_text_provider.js';
+import { createSelector } from 'reselect';
 
 //data
-const Subject = require('../models/subject.js');
+import { Subject } from '../models/subject.js';
+
 const {
   Gov,
   Program,
   Dept,
 } = Subject;
-const { Table } = require('../core/TableClass.js');
-const Footnote = require('../models/footnotes.js');
+import { Table } from '../core/TableClass.js';
+import Footnote from '../models/footnotes.js';
 
 
 
@@ -556,7 +557,7 @@ function mapDispatchToProps(dispatch){
   };
 }
 
-module.exports = exports = {
+export {
   reducer,
   mapDispatchToProps,
   create_mapStateToProps,

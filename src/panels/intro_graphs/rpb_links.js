@@ -1,14 +1,8 @@
-const { text_maker, TM } = require('./intro_graph_text_provider');
-const {
-  PanelGraph,
-  TextPanel,
-} = require("../shared"); 
-
-const { rpb_link } = require('../../link_utils.js');
-
-const { Table } = require('../../core/TableClass.js');
-
-const { WellList } = require('./WellList.js');
+import { text_maker, TM } from './intro_graph_text_provider';
+import { PanelGraph, TextPanel } from '../shared';
+import { rpb_link } from '../../link_utils.js';
+import { Table } from '../../core/TableClass.js';
+import { WellList } from './WellList.js';
 
 
 const people_table_ids = [

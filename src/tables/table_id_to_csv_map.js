@@ -1,4 +1,5 @@
-exports = module.exports = {  
+// Used by copy_static_asset, node only supports commonjs syntax
+module.exports = {  
   "table1":{ 
     url: "qfr_vs.csv",
   },

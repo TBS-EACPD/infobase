@@ -1,8 +1,7 @@
-exports = module.exports;
+import common_charts_utils from './common_charts_utils.js';
+import { Pie } from './pie.js';
+import { Bar } from './bar.js';
 
-const common_charts_utils = require('./common_charts_utils');
-const PIE = require("./pie").pie;
-const BAR = require("./bar").bar;
 const bar_options = {
   add_xaxis : true,                                   
   x_axis_line : true,                                
@@ -10,9 +9,9 @@ const bar_options = {
   add_labels : true,                                  
   margin : {top: 20, right:20, left: 60, bottom: 80} ,
   formater : common_charts_utils.formats.compact1,
-};                         
+};
 
-exports.PieOrBar = class PieOrBar {
+export class PieOrBar {
 
   constructor(container,options){
     // expect data to be in following format:
@@ -30,8 +29,8 @@ exports.PieOrBar = class PieOrBar {
     //
     this.__container__ = container;
     this.options = options;
-    this.graph_type = PIE;
-    this.graph = new PIE(this.__container__, this.options);
+    this.graph_type = Pie;
+    this.graph = new Pie(this.__container__, this.options);
   }
 
   render(options){
@@ -40,20 +39,20 @@ exports.PieOrBar = class PieOrBar {
     const label_attr = this.options.label_attr || "label";
     const data = this.options.data;
     const min = _.min(data, data_attr)[data_attr];
-    if (min >= 0 && this.graph_type === BAR){
+    if (min >= 0 && this.graph_type === Bar){
       this.reset();
-      this.graph_type = PIE;
-      this.graph = new PIE(this.__container__, this.options);
-    } else if (min < 0 && this.graph_type === PIE) {
+      this.graph_type = Pie;
+      this.graph = new Pie(this.__container__, this.options);
+    } else if (min < 0 && this.graph_type === Pie) {
       this.reset();
       const colors = this.options.color;
       this.options = _.clone( bar_options );
-      this.graph_type = BAR;
+      this.graph_type = Bar;
       this.options.colors = colors;
       this.options.series = {"" : _.map(data, data_attr)};
       this.options.ticks = _.map(data, label_attr);
-      this.graph = new BAR(this.__container__,this.options );
-    } else if (min < 0 && this.graph_type === BAR){
+      this.graph = new Bar(this.__container__,this.options );
+    } else if (min < 0 && this.graph_type === Bar){
       this.options.data = {"" : _.map(data, data_attr)};
       this.options.ticks = _.map(data, label_attr);
     }

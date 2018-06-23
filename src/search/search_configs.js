@@ -1,18 +1,10 @@
-const {
-  Dept,
-  Gov,
-  Program,
-  Tag,
-  CRSO,
-} = require('../models/subject.js');
-const { Table } = require('../core/TableClass.js');
+import { Table } from '../core/TableClass.js';
+import { GlossaryEntry } from '../models/glossary.js';
+import { escapeRegExp } from '../core/utils.js';
+import { Subject } from '../models/subject.js';
+import { trivial_text_maker } from '../models/text.js';
 
-const { GlossaryEntry } = require('../models/glossary.js');
-const {trivial_text_maker} = require('../models/text.js');
-
-const {
-  escapeRegExp,
-} = require('../core/utils.js');
+const { Dept, Gov, Program, Tag, CRSO } = Subject;
 
 function create_re_matcher(query, accessors){
 
@@ -231,7 +223,7 @@ const crsos = {
   },
 }
 
-module.exports = exports = {
+export {
   all_orgs_without_gov,
   orgs_with_data_with_gov,
   all_orgs_with_gov,

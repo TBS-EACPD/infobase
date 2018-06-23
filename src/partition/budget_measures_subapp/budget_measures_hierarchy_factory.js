@@ -1,6 +1,5 @@
-import * as Subject from '../../models/subject';
 import { text_maker } from "./budget_measure_text_provider.js";
-
+import { Subject } from '../../models/subject.js';
 
 const absolute_value_sort_net_adjust_biased = (a,b) => {
   if (a.data.type === "net_adjust"){

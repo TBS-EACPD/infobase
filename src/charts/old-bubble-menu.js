@@ -1,8 +1,5 @@
-"use strict";
-exports = module.exports;
+import common_charts_utils from './common_charts_utils';
 
-var common_charts_utils = require('./common_charts_utils');
-  
 var rorate_point = function(r,i){
   var angle_increment = 35*Math.PI/180;
   var start_angle = -75*Math.PI/180;
@@ -10,7 +7,7 @@ var rorate_point = function(r,i){
   return [r*Math.cos(actual_angle),r*Math.sin(actual_angle)];
 };
 
-exports.bubble_menu = function(container,options){
+export const bubble_menu = function(container,options){
 // data in the format of
 // ```javascript
 // data = { "series 1" : [y1,y2,y3],

@@ -1,23 +1,17 @@
-const { createSelector } = require('reselect');
-const { infograph_href_template } = require('../link_utils.js');
-const { trivial_text_maker: text_maker } = require('../models/text.js');
-const { provide_sort_func_selector } = require('./resource-explorer-common.js');
-const { shallowEqualObjectsOverKeys } = require('../core/utils.js');
+import { createSelector } from 'reselect';
+import { infograph_href_template } from '../link_utils.js';
+import { provide_sort_func_selector } from './resource-explorer-common.js';
+import { shallowEqualObjectsOverKeys } from '../core/utils.js';
+import { get_resources_for_subject } from './resource_utils.js';
+import { Subject } from '../models/subject.js';
+import { trivial_text_maker as text_maker } from '../models/text.js';
+import { filter_hierarchy, convert_d3_hierarchy_to_explorer_hierarchy } from './hierarchy_tools.js';
 
-
-const { get_resources_for_subject } = require('./resource_utils.js');
-
-const Subject = require('../models/subject.js');
 const { 
   Tag,
   Dept, 
   Ministry, 
 } = Subject;
-
-const {
-  filter_hierarchy,
-  convert_d3_hierarchy_to_explorer_hierarchy,
-} = require('./hierarchy_tools.js');
 
 function create_resource_hierarchy({hierarchy_scheme,doc}){
 
@@ -295,7 +289,7 @@ const resource_scheme = {
 }
 
 
-module.exports = {
+export {
   resource_scheme, 
   get_initial_resource_state,
 };

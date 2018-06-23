@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 /* eslint-disable no-unused-vars */
 import { get_panels_for_subject } from '../infographic/get_panels_for_subject.js';
 
-const Subject = require('../models/subject.js');
+import { Subject } from '../models/subject.js';
 const {
   Dept, 
   Program, 
@@ -15,13 +15,9 @@ const {
   Gov,
   CRSO,
 } = Subject;
-const { ensure_loaded } = require('../core/lazy_loader.js');
-const { 
-  EverythingSearch,
-  SpinnerWrapper,
-}  = require('../util_components.js');
-
-const {PanelGraph} = require('../core/PanelGraph');
+import { ensure_loaded } from '../core/lazy_loader.js';
+import { EverythingSearch, SpinnerWrapper } from '../util_components.js';
+import { PanelGraph } from '../core/PanelGraph';
 
 function url_template(subject, graph){
   return `/graph/${subject.level}/${graph.key}/${subject.id}`
@@ -83,7 +79,7 @@ function graphs_of_interest(graph){
     .value()
 
   return { same_key, similar_dependencies, rest };
-}  
+}
 
 
 const get_subj = createSelector(

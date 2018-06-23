@@ -7,12 +7,12 @@ import { log_standard_event } from '../core/analytics.js';
 import { BubbleMenu } from './BubbleMenu.js';
 import AccessibleBubbleMenu from './a11y_bubble_menu.js';
 import { shallowEqualObjectsOverKeys } from '../core/utils.js';
-import Subject from "../models/subject.js";
-import { create_text_maker } from '../models/text.js';
+import { Subject } from "../models/subject.js";
 import { ensure_loaded } from '../core/lazy_loader.js'; 
 import { get_panels_for_subject } from './get_panels_for_subject.js';
 import { bubble_defs } from './bubble_definitions.js'; 
 import { ReactPanelGraph } from '../core/PanelCollectionView.js';
+import { create_text_maker } from '../models/text.js';
 
 import {
   TM as StdTM,

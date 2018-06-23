@@ -1,5 +1,7 @@
-import { Dept } from './models/subject.js';
+import { Subject } from './models/subject.js';
 import { trivial_text_maker } from './models/text.js';
+
+const { Dept } = Subject;
 
 export const result_laggards = [
   136,

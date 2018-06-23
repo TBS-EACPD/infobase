@@ -1,18 +1,16 @@
-const { Table } = require('../../core/TableClass.js');
-
-const {
-  Result,
-  Indicator,
-  SubProgramEntity,
+import { Table } from '../../core/TableClass.js';
+import { 
+  Result, 
+  Indicator, 
+  SubProgramEntity, 
   ResultCounts,
-} = require('../../models/results.js');
-
-const { compute_counts_from_set } = require('../../models/result_counts.js');
-
-const { infograph_href_template } = require('../../link_utils.js');
+} from '../../models/results.js';
+import { compute_counts_from_set } from '../../models/result_counts.js';
+import { infograph_href_template } from '../../link_utils.js';
 const link_to_results_infograph = subj => infograph_href_template(subj, 'results');
+import { businessConstants } from '../../models/businessConstants';
 
-const {result_statuses} = require('../../models/businessConstants.js');
+const { result_statuses } = businessConstants;
 
 function pick_table(subject,type,doc){
   return Table.lookup(
@@ -121,7 +119,7 @@ const row_to_drr_status_counts = ({
 });
 
 
-module.exports = exports = {
+export {
   Result,
   Indicator,
   SubProgramEntity,
@@ -135,4 +133,4 @@ module.exports = exports = {
   row_to_drr_status_counts,
   result_statuses,
   
-}
+};

@@ -54,9 +54,9 @@ const WellList = ({ elements }) => <div>
       .value()
     }
   </ul>
-</div> 
+</div>
 
 
-module.exports = exports = {
+export {
   WellList,
-}
+};

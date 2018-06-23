@@ -1,30 +1,23 @@
-const { TextMaker, text_maker } = require('./rpb_text_provider.js');
-
-const { 
-  SelectList,
-  ReportDetails,
-  ReportDatasets,
-  NoDataMessage,
+import { TextMaker, text_maker } from './rpb_text_provider.js';
+import { 
+  SelectList, 
+  ReportDetails, 
+  ReportDatasets, 
+  NoDataMessage, 
   AlertMessage,
-} = require('./shared.js');
-
-const { Dept } = require('../models/subject.js');
-
-const {
-  Format,
-  TwoLevelSelect,
-  SortIndicators,
+} from './shared.js';
+import { 
+  Format, 
+  TwoLevelSelect, 
+  SortIndicators, 
   LabeledBox,
-} = require('../util_components.js');
+} from '../util_components.js';
+import { Details } from '../components/Details.js';
+import classNames from 'classnames';
+import { Subject } from '../models/subject.js';
 
-const { Details } = require('../components/Details.js');
-
-
-const classNames = require('classnames');
-
+const { Dept } = Subject;
 const PAGE_SIZE = 600;
-
-
 
 class GranularView extends React.Component {
 
@@ -472,6 +465,6 @@ class ExportButton extends React.Component {
 }
 
 
-module.exports = exports  = {
+export {
   GranularView,
-}
+};

@@ -1,6 +1,7 @@
-import { trivial_text_maker } from '../models/text.js';
 import { TM as StandardTM } from '../util_components.js';
 import { Fragment } from 'react';
+import { trivial_text_maker } from '../models/text.js';
+
 export class EasyAccess extends React.Component {
   render(){ return null; }
   componentDidMount(){

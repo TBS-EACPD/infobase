@@ -1,22 +1,19 @@
-require("./welcome_mat.ib.yaml");
-require("./welcome-mat.scss");
+import './welcome_mat.ib.yaml';
+import './welcome-mat.scss';
+import classNames from 'classnames';
+import { 
+  formats, 
+  text_maker, 
+  run_template, 
+  PanelGraph, 
+  reactAdapter, 
+  util_components, 
+  years,
+} from '../shared';
+import { Bar, Line } from '../../charts/declarative_charts.js';
 
-const classNames = require('classnames');
-const {
-  formats,
-  text_maker,
-  run_template,
-  PanelGraph,
-  reactAdapter,
-  util_components: { TextMaker },
-  years : {std_years, planning_years},
-} = require("../shared"); 
-
-const {
-  Bar,
-  Line,
-} = require('../../charts/declarative_charts.js');
-
+const { TextMaker } = util_components;
+const { std_years, planning_years } = years;
 
 const pane_templates = {
   exp : {
@@ -478,7 +475,7 @@ new PanelGraph({
   render,
 });
 
-      
+
 new PanelGraph({
   level: "program",
   key: 'old_welcome_mat',

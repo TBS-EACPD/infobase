@@ -8,13 +8,13 @@ import {
   run_template,
   PanelGraph,
   years,
-  business_constants,
+  businessConstants,
   declarative_charts,
   Panel,
   util_components,
-} from "../shared";
+} from "../shared.js";
 
-const { transfer_payments } = business_constants;
+const { transfer_payments } = businessConstants;
 const { std_years } = years;
 const { Format } = util_components;
 

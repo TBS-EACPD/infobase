@@ -1,16 +1,11 @@
-const { TextMaker, text_maker } = require('./rpb_text_provider.js');
-const {
-  Gov, 
-} = require("../models/subject");
-const { 
-  sources: all_sources, 
-} = require('../metadata/data_sources.js');
-const {
-  DeptSearch,
-  FancyUL,
-} = require('../util_components.js');
-const alerts = require('../models/alerts.js');
-const classNames= require('classnames');
+import { TextMaker, text_maker } from './rpb_text_provider.js';
+import { sources as all_sources } from '../metadata/data_sources.js';
+import { DeptSearch, FancyUL } from '../util_components.js';
+import alerts from '../models/alerts.js';
+import classNames from 'classnames';
+import { Subject } from '../models/subject';
+
+const { Gov } = Subject;
 
 const SelectList = ({
   legend_text,
@@ -239,7 +234,7 @@ const AlertMessage = ({table}) => {
   }
 }
 
-module.exports = exports = { 
+export { 
   SelectList,
   ReportDetails,
   ReportDatasets,

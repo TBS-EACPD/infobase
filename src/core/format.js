@@ -1,4 +1,3 @@
-"use strict";
 // module makes use of 6. [accountingJS(http://openexchangerates.github.io/accounting.js/)
 //
 // for properly formating numbers in multiple formats in both English and French
@@ -298,11 +297,12 @@ _.each(_.toPairs(types_to_format), function(key_formater){
   Handlebars.registerHelper("rawfmt_"+key, amount => new Handlebars.SafeString(formats[key+"_raw"](amount)));
 });
 
-exports = module.exports =  {
-  list_formater,
-  formater,
-  formats,
+export { 
+  list_formater, 
+  formater, 
+  formats, 
 };
+
 window._formats = formats;
 
 

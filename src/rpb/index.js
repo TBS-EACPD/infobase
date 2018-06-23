@@ -3,49 +3,44 @@ import { createSelector } from 'reselect';
 import withRouter from 'react-router/withRouter';
 import { log_standard_event } from '../core/analytics.js';
 import { Fragment } from 'react';
-const { TextMaker, text_maker } = require('./rpb_text_provider.js');
-require('./rpb.scss');
+import { TextMaker, text_maker } from './rpb_text_provider.js';
+import './rpb.scss';
 
 //data and state stuff
-const {
-  reducer,
-  mapDispatchToProps,
-  create_mapStateToProps,
-  naive_to_real_state,
-} = require('./state_and_data.js');
+import { 
+  reducer, 
+  mapDispatchToProps, 
+  create_mapStateToProps, 
+  naive_to_real_state, 
+} from './state_and_data.js';
+import { createStore } from 'redux';
+import { Provider, connect } from 'react-redux';
+import { ensure_loaded } from '../core/lazy_loader.js';
+import { Subject } from '../models/subject.js';
 
-const { createStore } = require('redux');
-const { Provider, connect } = require('react-redux');
-
-const { Gov } = require('../models/subject.js');
-const { ensure_loaded } = require('../core/lazy_loader.js');
-
+const { Gov } = Subject;
 
 //re-usable view stuff
-const {
+import { 
   SpinnerWrapper,
-  RadioButtons,
+  RadioButtons, 
   LabeledBox,
-} = require('../util_components.js');
-const AriaModal = require('react-aria-modal');
-
+} from '../util_components.js';
+import AriaModal from 'react-aria-modal';
 
 //specific view stuff
-const { TablePicker } = require('./TablePicker.js');
-const { SimpleView } = require('./simple_view.js');
-const { GranularView } = require('./granular_view.js');
-const { SubjectFilterPicker } = require('./shared.js');
-
-const { Table } = require('../core/TableClass.js');
+import { TablePicker } from './TablePicker.js';
+import { SimpleView } from './simple_view.js';
+import { GranularView } from './granular_view.js';
+import { SubjectFilterPicker } from './shared.js';
+import { Table } from '../core/TableClass.js';
 
 //misc app stuff
-const { rpb_link } = require('./rpb_link.js');
-const JSURL = require('jsurl');
+import { rpb_link } from './rpb_link.js';
+import JSURL from 'jsurl';
 window.JSURL = JSURL;
 
 const sub_app_name = "_rpb";
-
-
 
 const RPBTitle = ({ table_name, subject_name }) => {
   const title_prefix = text_maker("report_builder_title"); 
@@ -56,8 +51,6 @@ const RPBTitle = ({ table_name, subject_name }) => {
   }
   return <h1> {title_prefix} - {table_name} - {subject_name} </h1>;
 }
-
-
 
 function slowScrollDown(){
   const el = document.getElementById('rpb-main-content')

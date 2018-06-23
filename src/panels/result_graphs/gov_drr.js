@@ -1,17 +1,14 @@
 import { TM, text_maker } from './drr_summary_text.js';
-
 import {
   Subject,
   PanelGraph,
   Panel,
 } from "../shared.js";
-
 import {
   link_to_results_infograph,
   row_to_drr_status_counts,
   ResultCounts,
 } from './results_common.js';
-
 import { DrrSummary } from './drr_summary.js';
 
 const { Gov, Dept } = Subject;

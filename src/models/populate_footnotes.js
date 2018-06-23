@@ -1,9 +1,8 @@
-const { get_static_url } = require('../core/static_url');
-const { run_template } = require('./text.js');
-const Subject = require('./subject.js');
-
-const FootNote = require('./footnotes.js');
-const { fetch_and_inflate } =require('../core/utils.js');
+import { get_static_url } from '../core/static_url';
+import { Subject } from './subject.js';
+import FootNote from './footnotes.js';
+import { fetch_and_inflate } from '../core/utils.js';
+import { run_template } from './text.js';
 
 let _loaded_dept_or_tag_codes = {};
 
@@ -117,7 +116,7 @@ function populate_global_footnotes(csv_str){
   populate_footnotes_info(csv_str); 
 }
 
-module.exports = {
+export {
   load_footnotes_bundle,
   populate_global_footnotes,
 };

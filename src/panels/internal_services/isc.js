@@ -1,5 +1,6 @@
 import text from './isc.yaml';
 import { GlossaryEntry } from '../../models/glossary.js';
+
 /*
   snippet to get orgs sorted by isc fte % 
 
@@ -13,25 +14,21 @@ import { GlossaryEntry } from '../../models/glossary.js';
     .value()
 
 */
+import { 
+  Panel, 
+  Subject, 
+  formats, 
+  create_text_maker, 
+  run_template, 
+  PanelGraph, 
+  TM as StdTM, 
+  years, 
+  declarative_charts,
+} from '../shared';
 
-const {
-  Panel,
-  Subject: {
-    Gov,
-    Tag,
-  },
-  formats,
-  create_text_maker,
-  run_template,
-  PanelGraph,
-  TM: StdTM,
-  years : {std_years},
-  declarative_charts: {
-    Bar,
-    GraphLegend,
-  },
-} = require("../shared");
-
+const { Gov, Tag } = Subject;
+const { std_years } = years;
+const { Bar, GraphLegend } = declarative_charts;
 const text_maker = create_text_maker(text);
 const TM = props => <StdTM tmf={text_maker} {...props}/>;
 

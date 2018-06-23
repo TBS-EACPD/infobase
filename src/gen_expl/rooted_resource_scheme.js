@@ -1,17 +1,9 @@
-const { createSelector } = require('reselect');
-const { trivial_text_maker } = require('../models/text.js');
-
-const { shallowEqualObjectsOverKeys } = require('../core/utils.js');
-
-const {
-  filter_hierarchy,
-  convert_d3_hierarchy_to_explorer_hierarchy,
-} = require('./hierarchy_tools.js');
-
-
-const { get_resources_for_subject } = require('./resource_utils.js');
-const { provide_sort_func_selector } = require('./resource-explorer-common.js');
-
+import { createSelector } from 'reselect';
+import { shallowEqualObjectsOverKeys } from '../core/utils.js';
+import { filter_hierarchy, convert_d3_hierarchy_to_explorer_hierarchy } from './hierarchy_tools.js';
+import { get_resources_for_subject } from './resource_utils.js';
+import { provide_sort_func_selector } from './resource-explorer-common.js';
+import { trivial_text_maker } from '../models/text.js';
 
 function create_rooted_resource_hierarchy({doc,root_subject}){
 
@@ -187,7 +179,7 @@ function create_rooted_resource_scheme({subject}){
 };
 
 
-module.exports = {
+export {
   create_rooted_resource_scheme,
   get_initial_resource_state,
 };

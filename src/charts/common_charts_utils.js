@@ -1,9 +1,6 @@
-"use strict";
-exports = module.exports;
+import { formats } from '../core/format.js';
 
-exports.formats = require("../core/format").formats;
-
-exports.tbs_color = function(){
+const tbs_color = function(){
 //
 //
 // return a d3 scale which will map an ordinal input domain
@@ -27,16 +24,15 @@ exports.tbs_color = function(){
     ]);
 };
 
-
 // function which can probably be removed
-exports.get_offset = function(elem){
-  return $(exports.get_html_parent(elem)).offset();
+const get_offset = function(elem){
+  return $(get_html_parent(elem)).offset();
 };
 
 // small helper function which walks back up the DOM tree
 // to find the immediate parent of the svg element, meant
 // to be called on an element contained within an svg tag
-exports.get_html_parent = function(elem){
+const get_html_parent = function(elem){
   var node = $(elem.node());
   if (node.prop("tagName").toLowerCase() === 'svg'){
     return node.parent()[0];
@@ -45,8 +41,7 @@ exports.get_html_parent = function(elem){
   }
 };
 
-
-exports.add_grid_lines = function(direction, grid_line_area, axis, tick_size){
+const add_grid_lines = function(direction, grid_line_area, axis, tick_size){
   const axis_clone = _.cloneDeep(axis);
   const tick_size_orientation = direction === "vertical" ? 1 : -1;
 
@@ -77,7 +72,7 @@ exports.add_grid_lines = function(direction, grid_line_area, axis, tick_size){
     .remove();
 };
 
-exports.create_list = function(container, data,options){
+const create_list = function(container, data,options){
   //
   //  `container` is html element
   //  `data` is an array of data objects with no standard
@@ -227,7 +222,7 @@ exports.create_list = function(container, data,options){
   };
 };
 
-exports.on_legend_click = function(graph, _colors){
+const on_legend_click = function(graph, _colors){
   return function(d,i,el,list){
     //
     //  works with list which were bound using the 
@@ -274,7 +269,7 @@ exports.on_legend_click = function(graph, _colors){
   };
 };
 
-exports.graph_registry = {
+const graph_registry = {
   registry : [],
   
   add : function(instance) {
@@ -310,15 +305,15 @@ exports.graph_registry = {
 };
 
 $(window).on("hashchange", _.debounce(function(){ 
-  exports.graph_registry.update_registry();
+  graph_registry.update_registry();
 },500))
 $(window).on("resize", _.debounce(function(){ 
-  exports.graph_registry.update_registry();
-  exports.graph_registry.update_graphs();
+  graph_registry.update_registry();
+  graph_registry.update_graphs();
 },500))
 
 
-exports.setup_graph_instance = function(instance,container,options = {}) {
+const setup_graph_instance = function(instance,container,options = {}) {
   var base_dispatch_events = [
     "renderBegin",
     "renderEnd",
@@ -354,10 +349,20 @@ exports.setup_graph_instance = function(instance,container,options = {}) {
     base_dispatch_events.concat(options.events || [])
   );
 
-  exports.graph_registry.add(instance);
+  graph_registry.add(instance);
 
 };
 
-window._graph_registry = exports.graph_registry;
+window._graph_registry = graph_registry;
 
-
+export default {
+  formats,
+  tbs_color,
+  get_offset,
+  get_html_parent,
+  add_grid_lines,
+  create_list,
+  on_legend_click,
+  graph_registry,
+  setup_graph_instance,
+}

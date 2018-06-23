@@ -1,33 +1,30 @@
-module.exports = exports = {};
-const  { get_static_url } = require("./static_url.js");
-const {query_adapter} = require('./tables/queries.js');
-const {
-  attach_dimensions,
-  fill_dimension_columns,
+import { get_static_url } from './static_url.js';
+import { query_adapter } from './tables/queries.js';
+import { 
+  attach_dimensions, 
+  fill_dimension_columns, 
   trivial_dimension,
-} = require('./tables/dimensions.js');
-const {
-  trivial_text_maker,
-  run_template,
+} from './tables/dimensions.js';
+import { mix } from '../generalUtils.js';
+import { staticStoreMixin } from '../models/staticStoreMixin.js';
+import _csv_names_by_table_id from '../tables/table_id_to_csv_map.js';
+import { Subject } from '../models/subject.js';
+import { 
+  trivial_text_maker, 
+  run_template, 
   create_text_maker,
-} = require('../models/text.js');
-const {mix} = require('../generalUtils.js');
-const {Dept} = require('../models/subject.js');
-const {staticStoreMixin} = require('../models/staticStoreMixin.js');
-const _csv_names_by_table_id = require('../tables/table_id_to_csv_map.js');
-const csv_names_by_table_id = _.mapValues( _csv_names_by_table_id, ({url}) => "csv/"+url);
-
-const {
-  sources : all_sources,
-} = require('../metadata/data_sources.js');
-
-const {
+} from '../models/text.js';
+import { sources as all_sources } from '../metadata/data_sources.js';
+import { 
   make_unique_func, 
-  make_unique,
+  make_unique, 
   fetch_and_inflate,
-} = require('./utils.js');
+} from './utils.js';
 
-exports.Table = class Table extends mix().with(staticStoreMixin){
+const csv_names_by_table_id = _.mapValues( _csv_names_by_table_id, ({url}) => "csv/"+url);
+const { Dept } = Subject;
+
+export class Table extends mix().with(staticStoreMixin){
 
   static create_and_register(def){
     const inst = new Table(def)
@@ -448,4 +445,5 @@ class Mapper {
 
 }
 
-window._Table = exports.Table;
+window._Table = Table;
+

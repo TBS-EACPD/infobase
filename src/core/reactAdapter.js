@@ -1,4 +1,4 @@
-const ReactDOM = require('react-dom');
+import ReactDOM from 'react-dom';
 window.ReactDOM = ReactDOM;
 class ReactContentRenderer {
   constructor(){
@@ -16,4 +16,4 @@ class ReactContentRenderer {
 
 const reactAdapter = new ReactContentRenderer();
 
-module.exports = exports = { reactAdapter, ReactContentRenderer }
+export { reactAdapter, ReactContentRenderer };

@@ -1,8 +1,13 @@
-const { 
-  trivial_text_maker,
-  run_template,
-} = require("../models/text");
-const { years } = require('../models/years.js');
+import { stats } from '../core/tables/stats.js';
+import { years } from '../models/years.js';
+import { Subject } from '../models/subject';
+import { Statistics } from '../core/Statistics.js';
+import * as format from '../core/format';
+import { businessConstants } from '../models/businessConstants.js';
+import { trivial_text_maker, run_template } from '../models/text.js';
+
+const m = run_template;
+const text_maker = trivial_text_maker;
 
 const vote_stat_dimension = options => d => trivial_text_maker(parseInt(d.votenum) ? 'voted' : 'stat' );
 const sobj_dimension = options => row => row.sobj_name;
@@ -175,8 +180,7 @@ function people_five_year_percentage_formula(col_name,col_names_to_be_averaged){
   };
 }
 
-
-module.exports = exports = { 
+export { 
   vote_stat_dimension, 
   sobj_dimension, 
   lapse_item_dimension, 
@@ -184,14 +188,14 @@ module.exports = exports = {
   major_vote_big_stat,
   hist_major_vote_stat, 
   people_five_year_percentage_formula,
-  STATS : require("../core/tables/stats.js"),
+  stats,
   trivial_text_maker, 
-  text_maker: trivial_text_maker,
-  business_constants : require('../models/businessConstants.js'),
+  text_maker,
+  businessConstants,
   run_template,
-  m: run_template,
-  Subject : require("../models/subject"),
-  Statistics  : require('../core/Statistics.js').Statistics,
-  formats : require('../core/format').formats,
+  m,
+  Subject,
+  Statistics,
+  format,
   years,
 };

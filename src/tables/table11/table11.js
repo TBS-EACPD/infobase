@@ -1,21 +1,22 @@
 import text from "./table11.yaml";
 
 import {
-  STATS, 
+  stats, 
   trivial_text_maker, 
   m, 
   Statistics, 
-  formats, 
+  format, 
   people_five_year_percentage_formula,
-  business_constants,
+  businessConstants,
   years,
 } from "../table_common";
 
+const { formats } = format;
 const {
   age_groups,
   compact_age_groups, 
   emp_age_map,
-} = business_constants;
+} = businessConstants;
 const { 
   people_years,
   people_years_short_second,
@@ -196,7 +197,7 @@ Statistics.create_and_register({
       }
       return d;
     });
-    STATS.year_over_year_multi_stats_active_years(add,"head_count_age",all_years,false,people_years);
+    stats.year_over_year_multi_stats_active_years(add,"head_count_age",all_years,false,people_years);
   },
 });
 
@@ -215,6 +216,6 @@ Statistics.create_and_register({
       return d;
     });
 
-    STATS.year_over_year_multi_stats_active_years(add,"head_count_age",all_years,false,people_years);
+    stats.year_over_year_multi_stats_active_years(add,"head_count_age",all_years,false,people_years);
   },
 });

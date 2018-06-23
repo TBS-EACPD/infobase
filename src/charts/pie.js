@@ -1,8 +1,6 @@
-exports = module.exports;
+import common_charts_utils from './common_charts_utils';
 
-var common_charts_utils = require('./common_charts_utils');
-
-exports.pie = class PIE {
+export class Pie {
   
   constructor(container,options){
     // expect data to be in following format:

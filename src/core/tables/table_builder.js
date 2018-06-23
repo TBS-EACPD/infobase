@@ -1,5 +1,4 @@
-"use strict";
-var UTILS = require("../utils");
+import UTILS from '../utils';
 
 
 //  Generates all the tables displayed on the page
@@ -15,7 +14,7 @@ var UTILS = require("../utils");
 //    headers - it is advised using the prep data function since
 //    it adds the required wcag compliance
 //
-  
+
 
 // # Title
 // prepares data for being presented in a table along with
@@ -266,6 +265,9 @@ function prepare_and_build_table(options){
 
   return options.node;
 }
-  
 
-module.exports = exports = { prepare_and_build_table, prepare_data, d3_build_table };
+export { 
+  prepare_and_build_table, 
+  prepare_data, 
+  d3_build_table,
+};

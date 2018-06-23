@@ -1,9 +1,6 @@
-"use strict";
-exports = module.exports;
+import common_charts_utils from './common_charts_utils';
 
-var common_charts_utils = require('./common_charts_utils');
-
-exports.circle_pie_chart = class circle_pie_chart {
+export class CirclePieChart {
   
   constructor(container,options){
     // data in the format of
@@ -134,4 +131,4 @@ exports.circle_pie_chart = class circle_pie_chart {
 
     return this;
   };
-}
+};

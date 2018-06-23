@@ -1,13 +1,10 @@
-require('./table_picker.scss');
-const {Table} = require('../core/TableClass.js');
-const {GlossaryEntry } = require('../models/glossary.js');
-const ReactCSSTransitionGroup  = require('react-addons-css-transition-group');
-const classNames = require('classnames');
-const concepts_to_display_filter = require('./table_picker_concept_filter.js');
-
-
-const { TextMaker } = require('./rpb_text_provider');
-
+import './table_picker.scss';
+import { Table } from '../core/TableClass.js';
+import { GlossaryEntry } from '../models/glossary.js';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import classNames from 'classnames';
+import concepts_to_display_filter from './table_picker_concept_filter.js';
+import { TextMaker } from './rpb_text_provider';
 
 function toggleArrayElement(arr,el){
   return _.includes(arr,el) ?
@@ -279,6 +276,6 @@ class TaggedItemCloud extends React.Component {
   }
 }
 
-module.exports = exports = { 
+export { 
   TablePicker,
-}
+};

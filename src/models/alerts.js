@@ -1,4 +1,4 @@
-const {text_maker} = require('./text.js');
+import * as text_maker from '../models/text.js';
 
 const alerts = {
   dnd: {
@@ -21,4 +21,5 @@ const alerts = {
   },*/ 
 }
 
-module.exports = exports = key => alerts[key];
+const alert_key = key => alerts[key];
+export default alert_key;

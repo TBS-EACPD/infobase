@@ -1,17 +1,14 @@
-const text = require('./igoc_panel.yaml');
-
-const {
-  create_text_maker,
-  PanelGraph,
-  util_components: {
-    TM: StdTM,
-  },
+import text from './igoc_panel.yaml';
+import { 
+  create_text_maker, 
+  PanelGraph, 
+  util_components, 
   TextPanel,
-} = require("../shared"); 
+} from '../shared';
 
+const { TM: StdTM } = util_components;
 const tmf = create_text_maker(text);
 const TM = props => <StdTM tmf={tmf} {...props} />;
-
 
 new PanelGraph({
   level: 'dept',

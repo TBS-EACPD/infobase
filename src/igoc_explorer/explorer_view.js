@@ -1,18 +1,15 @@
-require('../gen_expl/explorer-styles.scss');
-const { Fragment } = require('react');
-const { createSelector } = require('reselect');
-const classNames = require('classnames');
-const { infograph_href_template } = require('../link_utils.js');
-const { get_root } = require('../gen_expl/hierarchy_tools.js');
-const { 
-  igoc_tmf: text_maker, 
-  TM,
-} =  require('./igoc_explorer_text.js');
-const {
-  SpinnerWrapper,
-} = require('../util_components.js');
-const { InstForm } = require('../models/subject.js');
-const { Explorer } = require('../components/ExplorerComponents.js')
+import '../gen_expl/explorer-styles.scss';
+import { Fragment } from 'react';
+import { createSelector } from 'reselect';
+import classNames from 'classnames';
+import { infograph_href_template } from '../link_utils.js';
+import { get_root } from '../gen_expl/hierarchy_tools.js';
+import { igoc_tmf as text_maker, TM } from './igoc_explorer_text.js';
+import { SpinnerWrapper } from '../util_components.js';
+import { Explorer } from '../components/ExplorerComponents.js';
+import { Subject } from '../models/subject.js';
+
+const { InstForm } = Subject;
 
 const DlItem = ({ term, def }) =>
   <Fragment>
@@ -176,7 +173,7 @@ const get_non_col_content_func = createSelector(
   }
 )
 
-class IgocExplorer extends React.Component {
+class ExplorerForIgoc extends React.Component {
   constructor(){
     super()
     this.state = { _query : "" };
@@ -317,4 +314,5 @@ class IgocExplorer extends React.Component {
 
   }
 }
-module.exports = exports = { Explorer : IgocExplorer  };
+
+export { ExplorerForIgoc };

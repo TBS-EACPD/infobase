@@ -1,9 +1,8 @@
-const { run_template } = require('../../models/text.js');
-
+import { run_template } from '../../models/text.js';
 
 // module for calculating basic stats and injecting the values
 // into the provided context object
-module.exports = exports = {
+const stats = {
 
   
   add_all_years(add,context_prefix, years, amounts){
@@ -264,3 +263,5 @@ module.exports = exports = {
     }
   },
 };
+
+export { stats };

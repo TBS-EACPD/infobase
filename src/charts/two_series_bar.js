@@ -1,7 +1,6 @@
-exports = module.exports;
-const common_charts_utils = require('./common_charts_utils');
+import common_charts_utils from './common_charts_utils';
 
-exports.TWO_SERIES_BAR = class TWO_SERIES_BAR  {
+export class TwoSeriesBar {
   
   
   constructor(container,options){

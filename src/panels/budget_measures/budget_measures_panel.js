@@ -5,7 +5,7 @@ import {
   create_text_maker,
   PanelGraph,
   Subject,
-  business_constants,
+  businessConstants,
   util_components,
   declarative_charts,
   TM as StdTM,
@@ -15,7 +15,7 @@ import {
 import { Fragment } from 'react';
 
 const { BudgetMeasure } = Subject;
-const { budget_chapters } = business_constants;
+const { budget_chapters } = businessConstants;
 
 const {
   Select,

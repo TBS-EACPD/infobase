@@ -1,5 +1,5 @@
-require('./result_treemap.js');
-require('./drr_summary.js');
-require('./gov_drr.js');
-require('./gov_dp.js');
-require('./results.scss');
+import './result_treemap.js';
+import './drr_summary.js';
+import './gov_drr.js';
+import './gov_dp.js';
+import './results.scss';

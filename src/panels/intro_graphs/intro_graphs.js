@@ -1,22 +1,16 @@
-const {get_missing_result_footnote, result_laggards} = require('../../shameful.js');
-const {
-  PanelGraph,
-  util_components: {
-    AutoAccordion,
-  },
-} = require("../shared"); 
+import { get_missing_result_footnote, result_laggards } from '../../shameful.js';
+import { PanelGraph, util_components } from '../shared';
+import { text_maker, TM } from './intro_graph_text_provider.js';
+import './simplographic.js';
+import './gov_related.js';
+import './rpb_links.js';
+import './tag_intro_graphs.js';
+import './program_meta_graphs.js';
+import './hierarchy_panels.js';
+import './tags_related_to_subject_panels.js';
+import './description_panels.js';
 
-const { text_maker, TM } = require('./intro_graph_text_provider.js');
-
-require('./simplographic.js');
-require('./gov_related.js');
-require('./rpb_links.js');
-require('./tag_intro_graphs.js');
-require('./program_meta_graphs.js');
-require('./hierarchy_panels.js');
-require('./tags_related_to_subject_panels.js');
-require('./description_panels.js');
-
+const { AutoAccordion } = util_components;
 
 const KeyConceptList = ({ question_answer_keys, args }) => (
   <div>

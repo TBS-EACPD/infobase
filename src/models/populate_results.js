@@ -1,14 +1,12 @@
 import { get_static_url } from '../core/static_url';
-
-const {
+import { 
   Indicator, 
   Result, 
-  SubProgramEntity,
-  PI_DR_Links,
+  SubProgramEntity, 
+  PI_DR_Links, 
   ResultCounts,
-} = require('./results.js');
-
-const { fetch_and_inflate } =require('../core/utils.js');
+} from './results.js';
+import { fetch_and_inflate } from '../core/utils.js';
 
 
 let _loaded_dept_or_tag_codes = {};

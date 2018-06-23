@@ -1,13 +1,12 @@
-const template_globals_file = require('../common_text/template_globals.csv');
-
-const common_lang = require('../common_text/common_lang.yaml');
-const igoc_lang = require('../common_text/igoc-lang.yaml');
-const nav_lang = require('../common_text/nav_lang.yaml');
-const result_lang = require('../common_text/result_lang.yaml');
-const people_lang = require('../common_text/people_lang.yaml');
-const estimates_lang = require('../common_text/estimates_lang.yaml');
-const a11y_lang = require('../common_text/a11y_lang.yaml');
-const dp_lag_text = require('../common_text/dp_lag_text.yaml');
+import template_globals_file from '../common_text/template_globals.csv';
+import common_lang from '../common_text/common_lang.yaml';
+import igoc_lang from '../common_text/igoc-lang.yaml';
+import nav_lang from '../common_text/nav_lang.yaml';
+import result_lang from '../common_text/result_lang.yaml';
+import people_lang from '../common_text/people_lang.yaml';
+import estimates_lang from '../common_text/estimates_lang.yaml';
+import a11y_lang from '../common_text/a11y_lang.yaml';
+import dp_lag_text from '../common_text/dp_lag_text.yaml';
 
 /* 
   TODO: some parts of this still feel hacky 
@@ -123,7 +122,7 @@ const run_template = function(s,extra_args={}){
 
 //above this point is the first part: default template arguments
 //below is the second part: templates
-    
+
 
 
 
@@ -256,16 +255,16 @@ const _create_text_maker = (deps=template_store) => (key,context={}) => {
 }
 const trivial_text_maker = _create_text_maker(combined_global_bundle);
 
-
-module.exports = exports = {
-  template_globals, //this is currently only exposed to table_common because it wants the pre_public_accounts variable.
-  run_template,
-  template_store, 
-  create_text_maker,
-  trivial_text_maker,
-};
 window._trivial_text_maker = trivial_text_maker;
 window._run_template = run_template;
 window._template_store = template_store;
 window._template_globlals = template_globals;
 window._create_text_maker = create_text_maker;
+
+export {
+  template_globals, //this is currently only exposed to table_common because it wants the pre_public_accounts variable.
+  run_template,
+  template_store, 
+  create_text_maker,
+  trivial_text_maker, 
+};

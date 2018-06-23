@@ -1,5 +1,7 @@
 import text from './planned_prgm_crso_split.yaml';
-import {Program} from '../../models/subject.js';
+import { Subject } from '../../models/subject.js';
+
+const { Program } = Subject;
 
 import {
   formats,

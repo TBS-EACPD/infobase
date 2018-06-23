@@ -1,18 +1,15 @@
-"use strict";
-exports = module.exports;
+import text from './table2.yaml';
+import { Statistics } from '../../core/Statistics.js';
+import { businessConstants } from '../../models/businessConstants';
 
-
-const text = require("./table2.yaml");
-
-const { Statistics } = require('../../core/Statistics.js');
-const {sos} = require('../../models/businessConstants.js');
+const { sos } = businessConstants;
 
 // see [here](../table_definition.html) for description
 // of the table spec
-var STATS = require("../../core/tables/stats.js");
-const {trivial_text_maker} = require("../../models/text");
+import { stats } from '../../core/tables/stats.js';
+import { trivial_text_maker } from '../../models/text.js';
 
-module.exports = {
+export default {
   text,
   id: "table2",
   source: [ "QFR" ],
@@ -206,7 +203,7 @@ Statistics.create_and_register({
         reverse : true,
       }
     );
-    STATS.one_year_top2_bottom1(add, "qfr_so",all_ordered_so);
+    stats.one_year_top2_bottom1(add, "qfr_so",all_ordered_so);
 
   },
 });
@@ -227,7 +224,7 @@ Statistics.create_and_register({
         reverse : true,
       }
     );
-    STATS.one_year_top2_bottom1(add, "qfr_so",all_ordered_so);
+    stats.one_year_top2_bottom1(add, "qfr_so",all_ordered_so);
   },
 });
 

@@ -1,46 +1,44 @@
-"use strict";
-exports = module.exports = require("../charts/common_charts_utils");
-
 // The charts_index graphs were created with an intent of using them even
 // outside of this application, therefore, there are no linkages
 // between the graphs and the InfoBase. Accordingly, this adapter
 // file is needed to provide extra information from the application
 // to the graphs in a neutral format 
 
-require('../charts/charts.scss');
+import '../charts/charts.scss';
 
-const {trivial_text_maker} = require('../models/text.js');
-const FORMAT = require('./format');
-const UTILS = require("./utils");
-const charts_index = exports;
-charts_index.make_unique = UTILS.make_unique;
-charts_index.BAR = require("../charts/bar");
-charts_index.HBAR = require("../charts/hbar");
-charts_index.CIRCLE = require("../charts/circle_chart");
-charts_index.PIE = require("../charts/pie");
-charts_index.PIE_OR_BAR = require("../charts/pie_or_bar");
-charts_index.SAFE_PROGRESS_DONUT = require("../charts/safe_progress_donut.js");
-charts_index.LINE = require("../charts/line");
-charts_index.CANADA = require("../charts/canada");
-charts_index.ARROW  = require("../charts/arrow");
-charts_index.PACK  = require("../charts/pack");
-charts_index.HEATMAP  = require("../charts/heatmap");
-charts_index.CONCEPTEXPLORE  = require("../charts/concept-explorer");
-charts_index.HBAR_Composition = require("../charts/hbar_composition");
-charts_index.PROGRESS_DONUT = require("../charts/progress_donut");
-charts_index.TWO_SERIES_BAR = require("../charts/two_series_bar");
-//this is currently not used, treemap should not necessarily be deleted though.
-//charts_index.TREEMAP  = require("../charts/treemap");
-window.charts_index = charts_index;
+import * as FORMAT from './format.js';
+import * as UTILS from './utils.js';
+import common_charts_utils from '../charts/common_charts_utils.js';
+import { trivial_text_maker } from '../models/text.js';
+
+const make_unique = UTILS.make_unique;
+
+import { Bar } from '../charts/bar.js';
+import { HBar } from '../charts/hbar.js';
+import { CirclePieChart as CirclePieChart } from '../charts/circle_chart.js';
+import { Pie } from '../charts/pie.js';
+import { PieOrBar as PieOrBar } from '../charts/pie_or_bar.js';
+import { SafeProgressDonut as SafeProgressDonut } from '../charts/safe_progress_donut.js';
+import { Line } from '../charts/line.js';
+import { Canada } from '../charts/canada.js';
+import { Arrow } from '../charts/arrow.js';
+import { heatmap } from '../charts/heatmap.js';
+import { ConceptExplorer } from '../charts/concept-explorer.js';
+import { HBarComposition } from '../charts/hbar_composition.js';
+import { ProgressDonut } from '../charts/progress_donut.js';
+import { TwoSeriesBar } from '../charts/two_series_bar.js';
+import * as Pack from '../charts/pack.js';
+
+
 var formats = FORMAT.formats;
 
 
-const { reactAdapter } = require('./reactAdapter.js');
-const { TextMaker } = require('../util_components.js');
+import { reactAdapter } from './reactAdapter.js';
+import { TextMaker } from '../util_components.js';
 
-charts_index.templates = trivial_text_maker;
+const templates = trivial_text_maker;
 
-charts_index.create_graph_with_legend = function(options){
+const create_graph_with_legend = function(options){
   //
   // the potential values for options are:
   // * `get_series_label` :  will extract the label from each data item 
@@ -146,7 +144,7 @@ charts_index.create_graph_with_legend = function(options){
 
     // create the list as a dynamic graph legend
 
-    list = charts_index.create_list(graph_area.select(".x1").node(), data, {
+    list = common_charts_utils.create_list(graph_area.select(".x1").node(), data, {
       html : _.property("label"),
       align : options.align,
       legend_class : options.legend_class,
@@ -191,7 +189,7 @@ charts_index.create_graph_with_legend = function(options){
     
     // create the graph
     if (options.bar){
-      graph = new charts_index.BAR.bar(graph_area.select(".x2").node(),{
+      graph = new Bar(graph_area.select(".x2").node(),{
         y_axis : yaxis,
         colors : colors,
         ticks : options.ticks,
@@ -203,7 +201,7 @@ charts_index.create_graph_with_legend = function(options){
         series :  data_to_series_format,
       });
     } else {
-      graph = new charts_index.LINE.ordinal_line(graph_area.select(".x2").node(),{
+      graph = new Line(graph_area.select(".x2").node(),{
         y_axis : yaxis,
         colors : colors,
         ticks : options.ticks,
@@ -227,7 +225,7 @@ charts_index.create_graph_with_legend = function(options){
     }
 
     // hook the list dispatcher up to the graph
-    list.dispatch.on("click", charts_index.on_legend_click(graph,colors));
+    list.dispatch.on("click", common_charts_utils.on_legend_click(graph,colors));
 
     if (!all_active && data[0].active) {
     // simulate the first item on the list being selected twice, so that, if it was already active but not all other items are active, it stays active 
@@ -253,7 +251,7 @@ charts_index.create_graph_with_legend = function(options){
   if (window.is_a11y_mode) {
     const a11y_table_title = options.a11y_table_title || "";
     
-    charts_index.create_a11y_table({
+    create_a11y_table({
       container: graph_area, 
       label_col_header: legend_title, 
       data_col_headers: options.ticks, 
@@ -267,7 +265,7 @@ charts_index.create_graph_with_legend = function(options){
   return graph;
 };
 
-charts_index.create_a11y_table = function({
+const create_a11y_table = function({
   container,  //
   data, 
   label_col_header,  //optional
@@ -355,4 +353,28 @@ charts_index.create_a11y_table = function({
 
 
   reactAdapter.render(table_content, a11y_area.node());
+};
+
+export {
+  create_graph_with_legend,
+  create_a11y_table,
+  make_unique,
+  Bar,
+  templates,
+  formats,
+  HBar, 
+  CirclePieChart, 
+  Pie, 
+  PieOrBar, 
+  SafeProgressDonut, 
+  Line, 
+  Canada, 
+  Arrow, 
+  Pack, 
+  heatmap, 
+  ConceptExplorer, 
+  HBarComposition, 
+  ProgressDonut, 
+  TwoSeriesBar,
+  common_charts_utils, 
 };

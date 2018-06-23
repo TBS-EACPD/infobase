@@ -1,6 +1,7 @@
-import { Gov } from "../../models/subject.js"
+import { Subject } from '../../models/subject.js';
+import * as text_maker from '../../models/text.js';
 
-import { text_maker } from '../../models/text.js';
+const { Gov } = Subject;
 
 // This module exists to  provides a common interface for querying
 // the data associated with each table

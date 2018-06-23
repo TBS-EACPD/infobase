@@ -1,4 +1,4 @@
-import Subject from '../models/subject.js';
+import { Subject } from '../models/subject.js';
 
 import { createSelector } from 'reselect';
 

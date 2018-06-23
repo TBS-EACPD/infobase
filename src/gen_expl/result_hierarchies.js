@@ -1,23 +1,13 @@
 import { get_resources_for_subject } from './resource_utils.js';
+import { Subject } from '../models/subject.js';
+import { 
+  Result, 
+  SubProgramEntity, 
+  PI_DR_Links, 
+} from '../models/results.js';
+import { filter_hierarchy, convert_d3_hierarchy_to_explorer_hierarchy } from './hierarchy_tools.js';
 
-const Subject = require('../models/subject.js');
-const { 
-  Dept, 
-  Program,
-} = Subject;
-
-const {
-  Result,
-  SubProgramEntity,
-  PI_DR_Links,
-} = require('../models/results.js');
-
-
-const {
-  filter_hierarchy,
-  convert_d3_hierarchy_to_explorer_hierarchy,
-} = require('./hierarchy_tools.js');
-
+const { Dept, Program } = Subject;
 
 const indicator_date_sorter = _.identity(); //FIXE: sort indicators by their date!
 function result_to_node(result, parent_id, doc){

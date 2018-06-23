@@ -39,6 +39,5 @@ function compute_counts_from_set({results,indicators}){
   };
 }
 
-module.exports = exports = {
-  compute_counts_from_set,
-};
+// Used by copy_static_asset, node only supports commonjs syntax
+module.exports = { compute_counts_from_set }

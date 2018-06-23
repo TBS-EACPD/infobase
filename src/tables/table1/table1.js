@@ -1,16 +1,15 @@
-exports = module.exports;
-
-const text = require("./table1.yaml");
+import text from './table1.yaml';
 
 // see [here](../table_definition.html) for description
 // of the table spec
 
-const {  vote_stat_dimension, major_vote_stat } = require('../table_common.js');
-const { Statistics } = require('../../core/Statistics.js');
-const FORMAT = require('../../core/format');
+import { vote_stat_dimension, major_vote_stat } from '../table_common.js';
+
+import { Statistics } from '../../core/Statistics.js';
+import * as FORMAT from '../../core/format';
 
 
-module.exports = {
+export default {
   text,
   "id": 'table1',
   source: [ "QFR" ],

@@ -1,9 +1,11 @@
-import * as Subject from '../../../models/subject.js';
-import { sos } from '../../../models/businessConstants.js';
+import { Subject } from '../../../models/subject.js';
 import { text_maker } from '../partition_text_provider.js';
 import { TextMaker as StandardTextMaker } from '../../../util_components';
 import { Table } from '../../../core/TableClass.js';
 import { PartitionPerspective } from './PartitionPerspective.js';
+import { businessConstants } from '../../../models/businessConstants';
+
+const { sos } = businessConstants;
 
 
 import {

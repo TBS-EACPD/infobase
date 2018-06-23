@@ -3,7 +3,7 @@ import {
   formats,
   PanelGraph,
   years,
-  business_constants,
+  businessConstants,
   charts_index,
   util_components,
   declarative_charts,
@@ -14,7 +14,7 @@ const {
   Line,
   A11YTable,
 } = declarative_charts;
-const { sos } = business_constants;
+const { sos } = businessConstants;
 const { std_years } = years;
 const { Format } = util_components;
 
@@ -63,7 +63,7 @@ new PanelGraph({
           {...{
             series : graph_args.series,
             ticks : info.last_years,
-            colors : charts_index.tbs_color(),
+            colors : charts_index.common_charts_utils.tbs_color(),
             add_yaxis : true,
             add_xaxis : true,
             y_axis: "($)",

@@ -1,37 +1,28 @@
-const { TextMaker, text_maker } = require('./rpb_text_provider.js');
-const {formats} = require('../core/format.js');
-
-const { 
+import { TextMaker, text_maker } from './rpb_text_provider.js';
+import { 
   SelectList,
-  ReportDetails,
-  ReportDatasets,
-  NoDataMessage,
+  ReportDetails, 
+  ReportDatasets, 
+  NoDataMessage, 
   AlertMessage,
-} = require('./shared.js');
+} from './shared.js';
+import { 
+  Select, 
+  Format, 
+  SortIndicators, 
+  LabeledBox, 
+} from '../util_components.js';
+import { Details } from '../components/Details.js';
+import { StackedHbarChart, GraphLegend } from '../charts/declarative_charts.js';
+import { rpb_link } from './rpb_link.js';
+import { Subject } from '../models/subject.js';
+import { formats } from '../core/format.js';
 
-const { 
-  Gov, 
-  Dept, 
-} = require('../models/subject.js');
+const { Gov, Dept } = Subject;
 
-const {
-  Select,
-  Format,
-  SortIndicators,
-  LabeledBox,
-} = require('../util_components.js');
-const { Details } = require('../components/Details.js');
-const {
-  StackedHbarChart,
-  GraphLegend, 
-} = require('../charts/declarative_charts.js')
-
-
-const { rpb_link } = require('./rpb_link.js');
 //note: don't use these outside the context of simple view, and always pass all props in currentProps
 const granular_rpb_link_for_org = (currentProps, subject)=> rpb_link( { ...currentProps, subject, mode:'details' } );
 const granular_rpb_link_for_filter = (currentProps, filter) => rpb_link({ ...currentProps, filter, mode:'details' } );
-
 
 
 class SimpleView extends React.Component {
@@ -414,6 +405,6 @@ class SimpleView extends React.Component {
 }
 
 
-module.exports = exports  = {
+export {
   SimpleView,
-} 
+}; 

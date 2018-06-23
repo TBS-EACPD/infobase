@@ -1,20 +1,21 @@
-exports = module.exports;
-const text = require("./table5.yaml");
-
+import text from './table5.yaml';
 
 // see [here](../table_definition.html) for description
 // of the table spec
 
-const {
-  STATS,
+import { 
+  stats, 
   trivial_text_maker, 
   m, 
-  Statistics,
-  business_constants : {sos},
-  years : { std_years},
-} = require("../table_common");
+  Statistics, 
+  businessConstants, 
+  years,
+} from '../table_common';
 
-module.exports = {
+const { sos } = businessConstants;
+const { std_years } = years;
+
+export default {
   text,
   "id": "table5",
 
@@ -143,11 +144,11 @@ Statistics.create_and_register({
     add("pa_last_year_gross_exp", d3.sum(_.map(_.range(1,13), i => last_year_spend[i] || 0)));
     const last_year = q.get_top_x(["so","{{pa_last_year}}"],Infinity,{zip:true,sort_col:"{{pa_last_year}}"});
     const all_years = q.get_top_x(["so"].concat(std_years),Infinity,{zip:true});
-    STATS.one_year_top3(add, "so",last_year);
-    STATS.year_over_year_multi_stats(add,"so_five_year",all_years);
+    stats.one_year_top3(add, "so",last_year);
+    stats.year_over_year_multi_stats(add,"so_five_year",all_years);
 
 
-    STATS.year_over_year_single_stats(
+    stats.year_over_year_single_stats(
       add, 
       "five_year_exp", 
       _.map(std_years,m),
@@ -165,12 +166,12 @@ Statistics.create_and_register({
     const table = tables.table5;
     const q = table.q(subject);
 
-    STATS.year_over_year_single_stats(add,  "personnel", _.map(std_years,m),_.map(std_years,(year,i)=>{
+    stats.year_over_year_single_stats(add,  "personnel", _.map(std_years,m),_.map(std_years,(year,i)=>{
       return table.horizontal(year,false)[sos[1].text];
     }));
     var last_year = q.get_top_x(["so","{{pa_last_year}}"],Infinity,{zip:true,sort_col:"{{pa_last_year}}"});
     var all_years = q.get_top_x(["so"].concat(std_years),Infinity,{zip:true});
-    STATS.one_year_top3(add, "so",last_year);
-    STATS.year_over_year_multi_stats(add,"so_five_year",all_years);
+    stats.one_year_top3(add, "so",last_year);
+    stats.year_over_year_multi_stats(add,"so_five_year",all_years);
   },
 })

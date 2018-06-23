@@ -22,6 +22,6 @@ const TwoLevelSelect = ({  style, id, selected, className, grouped_options, onSe
   </select>
 )
 
-module.exports = exports = {
+export {
   TwoLevelSelect,
-}
+};

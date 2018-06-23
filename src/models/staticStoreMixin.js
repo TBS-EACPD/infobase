@@ -1,7 +1,6 @@
-module.exports = exports;
-const {BaseClass} = require('../generalUtils.js');
+import { BaseClass } from '../generalUtils.js';
 
-exports.staticStoreMixin = superclass => {
+export const staticStoreMixin = superclass => {
   const _storeMap = new Map();
   const baseclass = superclass || BaseClass;
   return class extends baseclass {
@@ -18,7 +17,7 @@ exports.staticStoreMixin = superclass => {
   };
 };
 
-exports.PluralSingular = superclass => {
+export const PluralSingular = superclass => {
   const baseclass = superclass || BaseClass;
   return (
     class extends baseclass {
@@ -32,7 +31,7 @@ exports.PluralSingular = superclass => {
   );
 };
 
-exports.SubjectMixin = superclass => {
+export const SubjectMixin = superclass => {
   const baseclass = superclass || BaseClass;
   return class SubjectMixin extends baseclass{
     constructor(){ super(); }

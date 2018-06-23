@@ -1,11 +1,10 @@
-const { 
-  Dept,
-  InstForm,
-} = require('../models/subject.js');
+import { businessConstants } from '../models/businessConstants.js';
+import { convert_d3_hierarchy_to_explorer_hierarchy } from '../gen_expl/hierarchy_tools.js';
+import { Subject } from '../models/subject.js';
 
-const { population_groups } = require('../models/businessConstants.js');
+const { Dept, InstForm } = Subject;
 
-const { convert_d3_hierarchy_to_explorer_hierarchy } = require('../gen_expl/hierarchy_tools.js');
+const { population_groups } = businessConstants;
 
 const org_to_node = (subject, parent_id="a") => ({
   id: `${parent_id}-${subject.id}`,
@@ -195,6 +194,6 @@ const create_igoc_hierarchy = grouping => {
   
 }
 
-module.exports = exports = {
+export {
   create_igoc_hierarchy,
-}
+};

@@ -12,7 +12,7 @@ import {
   DebouncedTextInput,
 } from '../../util_components.js';
 
-import * as Subject from '../../models/subject';
+import { Subject } from '../../models/subject';
 import * as businessConstants from '../../models/businessConstants.yaml';
 
 const { BudgetMeasure } = Subject;

@@ -16,6 +16,6 @@ const Select = ({  id, selected, className, options, onSelect, disabled, style }
   </select>
 )
 
-module.exports = exports = {
+export {
   Select,
-}
+};

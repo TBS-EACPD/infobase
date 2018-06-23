@@ -1,7 +1,4 @@
-"use strict";
-exports = module.exports;
-  
-var common_charts_utils =  require("./common_charts_utils");
+import common_charts_utils from './common_charts_utils';
 
 
 function add_arrow(sel){
@@ -13,13 +10,13 @@ function add_arrow(sel){
       "fill-opacity":0.5,
     })   
     .attrs({
-      "d" :  "M 29.653912,-0.10968436 0.36255227,38.029976 l 12.51457473,0 0,61.44578 33.074233,0 0,-61.41987 12.929135,0 -29.226583,-38.16557036 z",
+      "d" : "M 29.653912,-0.10968436 0.36255227,38.029976 l 12.51457473,0 0,61.44578 33.074233,0 0,-61.41987 12.929135,0 -29.226583,-38.16557036 z",
       "class" : "arrow",
     });
 }
 
 
-exports.arrows = class arrows {
+export class Arrow {
   
   constructor(container,options){
 
@@ -178,4 +175,4 @@ exports.arrows = class arrows {
         "left"  : function(d){ return x_offset+d.x+"px";},
       });
   };
-}
+};

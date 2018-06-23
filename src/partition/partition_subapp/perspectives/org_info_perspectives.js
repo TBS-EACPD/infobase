@@ -1,7 +1,8 @@
-import * as Subject from '../../../models/subject';
-import { InstForm } from '../../../models/subject.js';
 import { text_maker } from '../partition_text_provider.js';
 import { PartitionPerspective } from './PartitionPerspective.js';
+import { Subject } from '../../../models/subject.js';
+
+const { InstForm } = Subject;
 
 import {
   absolute_value_sort,

@@ -1,32 +1,21 @@
-require('./igoc_explorer.scss');
-
-const { StandardRouteContainer } = require('../core/NavComponents.js');
-
-const {createSelector} = require('reselect');
-
+import './igoc_explorer.scss';
+import { StandardRouteContainer } from '../core/NavComponents.js';
+import { createSelector } from 'reselect';
 
 //treemap stuff
-const { combineReducers, createStore } = require('redux');
-const { Provider, connect } = require('react-redux');
-
-const { create_igoc_hierarchy } = require('./hierarchies.js')
-const { Explorer } = require('./explorer_view.js');
-
-const { filter_hierarchy } = require('../gen_expl/hierarchy_tools.js');
-
-
-const { 
-  igoc_tmf: text_maker, 
-  TM,
-} =  require('./igoc_explorer_text.js');
-
-const {
-  get_memoized_funcs,
-  initial_root_state,
-  root_reducer,
-  map_state_to_root_props_from_memoized_funcs,
-  map_dispatch_to_root_props,
-} = require('../gen_expl/state_and_memoizing');
+import { combineReducers, createStore } from 'redux';
+import { Provider, connect } from 'react-redux';
+import { create_igoc_hierarchy } from './hierarchies.js';
+import { ExplorerForIgoc } from './explorer_view.js';
+import { filter_hierarchy } from '../gen_expl/hierarchy_tools.js';
+import { igoc_tmf as text_maker, TM } from './igoc_explorer_text.js';
+import { 
+  get_memoized_funcs, 
+  initial_root_state, 
+  root_reducer, 
+  map_state_to_root_props_from_memoized_funcs, 
+  map_dispatch_to_root_props, 
+} from '../gen_expl/state_and_memoizing';
 
 
 const map_state_to_props_from_memoized_funcs = memoized_funcs => {
@@ -126,7 +115,7 @@ class ExplorerContainer extends React.Component {
     };
 
     const connecter = connect(mapStateToProps, mapDispatchToProps);
-    const Container = connecter(Explorer);
+    const Container = connecter(ExplorerForIgoc);
     const store = createStore(reducer,initialState);
 
     this.state = {

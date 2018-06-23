@@ -1,25 +1,16 @@
-const { text_maker, TM } = require('./intro_graph_text_provider.js');
-const classNames = require('classnames');
-const {
-  Subject : {
-    Dept,
-    Tag,
-    Program,
-  },
-  PanelGraph,
-  TextPanel,
-  util_components: {
-    HeightClipper,
-  },
-} = require("../shared"); 
+import { text_maker, TM } from './intro_graph_text_provider.js';
+import classNames from 'classnames';
+import { 
+  Subject, 
+  PanelGraph, 
+  TextPanel, 
+  util_components, 
+} from '../shared';
+import { WellList } from './WellList.js';
+import { infograph_href_template } from '../../link_utils.js';
 
-const { WellList } = require("./WellList.js")
-
-const { 
-  infograph_href_template,
-} = require('../../link_utils.js');
-
-
+const { Dept, Tag, Program } = Subject;
+const { HeightClipper } = util_components;
 
 const scheme_order = [
   "GOCO",

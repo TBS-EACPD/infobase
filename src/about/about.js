@@ -1,12 +1,9 @@
 import about_text_bundle from "./about.yaml";
 import './about.scss';
 import '../gen_expl/explorer-styles.scss';
-
 import { StandardRouteContainer } from '../core/NavComponents.js';
-
-import { create_text_maker } from '../models/text';
-
 import { TextMaker } from '../util_components.js';
+import { create_text_maker } from '../models/text.js';
 
 const custom_tm = create_text_maker(about_text_bundle);
 

@@ -163,7 +163,7 @@ class Goco {
       legend_area.node()
     )
 
-    const graph = new charts_index.TWO_SERIES_BAR.TWO_SERIES_BAR(
+    const graph = new charts_index.TwoSeriesBar(
       this.container.select('.sa-diagram').node(),
       {
         title_font_size,
@@ -195,7 +195,7 @@ class Goco {
     this.goco_data = _.find(this.data, d=>d.tick === sa_name).children;
     this.container.select('.goco-diagram').html("");
 
-    const graph = new charts_index.TWO_SERIES_BAR.TWO_SERIES_BAR(
+    const graph = new charts_index.TwoSeriesBar(
       this.container.select('.goco-diagram').node(),
       {
         title : sa_name,

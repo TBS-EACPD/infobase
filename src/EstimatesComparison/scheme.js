@@ -1,23 +1,17 @@
 import { text_maker, TM } from './text-provider';
 import { createSelector } from 'reselect';
-import {
-  Format,
-} from '../util_components.js';
+import { Format } from '../util_components.js';
 import { Table } from '../core/TableClass.js';
-import { Dept } from '../models/subject.js';
 import FootNote from '../models/footnotes.js';
 import {GlossaryEntry} from '../models/glossary.js';
-
+import { Subject } from '../models/subject.js';
 import { convert_d3_hierarchy_to_explorer_hierarchy } from '../gen_expl/hierarchy_tools.js';
 import { shallowEqualObjectsOverKeys } from '../core/utils';
 
-
+const { Dept } = Subject;
 const biv_footnote = text_maker("biv_footnote");
-
 const this_year_col = "{{est_in_year}}_estimates";
 const last_year_col = "{{est_last_year}}_estimates";
-
-
 const row_identifier_func = row => `${row.dept}-${row.votenum}-${row.desc}`; 
 
 //in this cpn, we don't care about supps
@@ -47,7 +41,6 @@ const get_doc_code_breakdowns = rows => _.chain(rows)
     amount_this_year: _.some(group, this_year_col) && _.sumBy(group, this_year_col),
   }))
   .value()
-
 
 function get_data_by_org(include_stat){
   const data = _.chain(Table.lookup('table8').data)
@@ -199,7 +192,6 @@ function get_data_by_item_types(){
     })
     .value();
 
-
   const vote_stat = _.chain(nested_data)
     .partition("data.is_voted")
     .map( (categories, ix) => {
@@ -335,7 +327,6 @@ function get_footnotes_for_votestat_item({desc, org_id, votenum}){
   return ;
 }
 
-
 const scheme_key = "estimates_diff";
 export const initial_state = {
   sort_col: "inc",
@@ -418,4 +409,3 @@ export const estimates_diff_scheme = {
     ["show_stat", "h7y_layout"]
   ),
 };
-

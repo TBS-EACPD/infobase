@@ -1,23 +1,16 @@
-exports = module.exports;
-
-const text = require("./table6.yaml");
-
+import text from './table6.yaml';
 
 // see [here](../table_definition.html) for description
 // of the table spec
 //const {spending_areas} = require('../../models/goco.js');
 
-const {STATS, 
-  Subject : {Program, Gov, Dept},
-  trivial_text_maker, 
-  Statistics, 
-  years : { std_years, planning_years},
-} = require("../table_common");
+import { stats, Subject, trivial_text_maker, Statistics, years } from '../table_common';
 
-  
+const { Program, Gov, Dept } = Subject;
+const { std_years, planning_years} = years;
 const exp_cols = _.map(std_years, yr=>yr+"exp");
 
-module.exports = {
+export default {
   text,
   "id": "table6",
   subject_type:"program",
@@ -241,13 +234,13 @@ Statistics.create_and_register({
         .map(function(vals, key){ return [key].concat(vals);})
         .value()
     );
-    STATS.one_year_top3(add, "prg", last_year);
-    STATS.year_over_year_multi_stats(add,"prg_five_year",all_years);
-    STATS.year_over_year_multi_stats(add,"prgm_exp_spend_areas",all_years_spend_areas);
+    stats.one_year_top3(add, "prg", last_year);
+    stats.year_over_year_multi_stats(add,"prg_five_year",all_years);
+    stats.year_over_year_multi_stats(add,"prgm_exp_spend_areas",all_years_spend_areas);
    
     add("prg_num",last_year_prg_num);
 
-    STATS.add_all_years(add,"exp",planning_years, (year,i) => q.sum(year) );
+    stats.add_all_years(add,"exp",planning_years, (year,i) => q.sum(year) );
     const planned_exp_avg = c.dept_exp_average;
     add("planned_exp_average", planned_exp_avg);
 
@@ -291,9 +284,9 @@ Statistics.create_and_register({
     //var all_years_spend_areas = _.map( table.gov_goco(exp_cols,false),function(vals, key){ 
     //  return [key].concat(vals);
     //});
-    //STATS.year_over_year_multi_stats(add,"prgm_exp_outcomes",all_years_outcomes);
-    //STATS.year_over_year_multi_stats(add,"prgm_exp_spend_areas",all_years_spend_areas);
-    STATS.add_all_years(add,"exp",planning_years, (year,i) => q.sum(year) );
+    //stats.year_over_year_multi_stats(add,"prgm_exp_outcomes",all_years_outcomes);
+    //stats.year_over_year_multi_stats(add,"prgm_exp_spend_areas",all_years_spend_areas);
+    stats.add_all_years(add,"exp",planning_years, (year,i) => q.sum(year) );
     const planned_exp_avg = c.gov_exp_average;
     add("planned_exp_average", planned_exp_avg);
   },
@@ -312,22 +305,22 @@ Statistics.create_and_register({
     // Since average is ambiguous, we specified that the 
     // first average was for historical values
     // The second average was for planned values
-    STATS.add_all_years(add,"exp",std_years, (year,i) => row[year+"exp"] );
+    stats.add_all_years(add,"exp",std_years, (year,i) => row[year+"exp"] );
     add("dept_exp_pa_last_year",infos.table4_dept_info.dept_exp_pa_last_year);
     add("pct_of_dept_exp_pa_last_year",c.program_exp_pa_last_year/infos.table4_dept_info.dept_exp_pa_last_year);
 
 
     const five_yr_exp_avg = c.program_exp_average;
     add("hist_exp_average", five_yr_exp_avg);
-    STATS.add_all_years(add,"exp",planning_years, (year,i) => row[year] );
+    stats.add_all_years(add,"exp",planning_years, (year,i) => row[year] );
     add("pct_of_dept_exp_planning_year_1", c.program_exp_planning_year_1 / infos.table6_dept_info.dept_exp_planning_year_1);
     add("dept_exp_planning_year_1", infos.table6_dept_info.dept_exp_planning_year_1);
 
     // Authorities Calculations
-    STATS.add_all_years(add,"auth",std_years, (year,i) => row[year+"auth"] );
+    stats.add_all_years(add,"auth",std_years, (year,i) => row[year+"auth"] );
     const five_yr_auth_avg = c.program_auth_average;
     add("hist_auth_average", five_yr_auth_avg);
-    STATS.add_all_years(add,"auth",planning_years, (year,i) => row[year] );
+    stats.add_all_years(add,"auth",planning_years, (year,i) => row[year] );
 
     add("hist_no_real_diff_between_exp_auth", five_yr_exp_avg/five_yr_auth_avg > 0.97);
 
@@ -363,21 +356,21 @@ Statistics.create_and_register({
       q.get_top_x(["dept","activity_code","{{pa_last_year}}exp"],Infinity,{zip:true,sort_col:"{{pa_last_year}}exp"}),
       ([ org_id, ac, val]) => [ `${Dept.lookup(org_id).sexy_name} - ${Program.get_from_activity_code(org_id, ac).name}`, val]
     )
-    STATS.one_year_top3(add, "prg", last_year);
+    stats.one_year_top3(add, "prg", last_year);
     
-    STATS.add_all_years(add,"exp", std_years, (year,i) => q.sum(year+"exp"));
+    stats.add_all_years(add,"exp", std_years, (year,i) => q.sum(year+"exp"));
     const five_yr_exp_avg = c.tag_exp_average;
     add("hist_exp_average", five_yr_exp_avg);
 
-    STATS.add_all_years(add,"auth",std_years, (year,i) => q.sum(year+"auth") );
+    stats.add_all_years(add,"auth",std_years, (year,i) => q.sum(year+"auth") );
     const five_yr_auth_avg = c.tag_auth_average;
     add("hist_auth_average", five_yr_auth_avg);
 
 
-    STATS.add_all_years(add,"exp",planning_years, (year,i) => q.sum(year) );
+    stats.add_all_years(add,"exp",planning_years, (year,i) => q.sum(year) );
     add("prg_num",last_year_prg_num);
 
-    STATS.year_over_year_multi_stats(add,"prg_five_year",all_years);
+    stats.year_over_year_multi_stats(add,"prg_five_year",all_years);
 
   },
 });
@@ -403,18 +396,18 @@ Statistics.create_and_register({
 
     const sorted_first_yr = q.get_top_x(["prgm",min_planning_yr],Infinity,{zip:true,sort_col:min_planning_yr});
 
-    STATS.one_year_top3(add, "exp_prg", sorted_first_yr);
+    stats.one_year_top3(add, "exp_prg", sorted_first_yr);
 
-    STATS.add_all_years(add,"exp", std_years, (year,i) => q.sum(year+"exp"));
+    stats.add_all_years(add,"exp", std_years, (year,i) => q.sum(year+"exp"));
 
     const five_yr_exp_avg = c.crso_exp_average;
     add("hist_exp_average", five_yr_exp_avg);
 
-    STATS.add_all_years(add,"exp", planning_years, (year,i) => q.sum(year)); 
+    stats.add_all_years(add,"exp", planning_years, (year,i) => q.sum(year)); 
     add("planned_exp_average", c.crso_exp_average);
     add("planned_exp_total", c.crso_exp_total);
 
-    STATS.add_all_years(add,"auth",std_years, (year,i) => q.sum(year+"auth") );
+    stats.add_all_years(add,"auth",std_years, (year,i) => q.sum(year+"auth") );
     const five_yr_auth_avg = c.crso_auth_average;
     add("hist_auth_average", five_yr_auth_avg);
 

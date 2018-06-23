@@ -17,4 +17,5 @@ const minus_concept_whitelist = [
   "FTE",
 ];
 
-module.exports = exports = concept_key => _.includes(minus_concept_whitelist, concept_key);
+const concept_filter = concept_key => _.includes(minus_concept_whitelist, concept_key);
+export default concept_filter;

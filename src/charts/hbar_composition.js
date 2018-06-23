@@ -1,8 +1,6 @@
-exports = module.exports;
+import common_charts_utils from './common_charts_utils';
 
-const common_charts_utils = require('./common_charts_utils');
-
-exports.HBarComposition = class HBarComposition {
+export class HBarComposition {
   constructor(container, options){
     // expect data to be in following format:
     // ```javascript

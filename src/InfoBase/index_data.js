@@ -89,8 +89,6 @@ const index_lang_lookups = {
   },
 
 };
-  
 
-module.exports = exports = {
-  index_lang_lookups,
-};
+// Used by copy_static_asset, node only supports commonjs syntax
+module.exports = { index_lang_lookups };

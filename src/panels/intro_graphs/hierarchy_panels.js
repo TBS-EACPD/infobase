@@ -1,24 +1,21 @@
-const { text_maker } = require('./intro_graph_text_provider.js');
-const {
-  PanelGraph,
-  util_components: {
-    HeightClipper,
-  },
-  TextPanel,
-} = require("../shared"); 
+import { text_maker } from './intro_graph_text_provider.js';
+import { 
+  PanelGraph, 
+  util_components, 
+  TextPanel, 
+} from '../shared';
+import { 
+  HierarchyPeek, 
+  org_external_hierarchy, 
+  org_internal_hierarchy, 
+  program_hierarchy, 
+  tag_hierarchy, 
+  crso_hierarchy, 
+  crso_pi_hierarchy,
+} from './hierarchy_component.js';
+import { infograph_href_template } from '../../link_utils.js';
 
-const {
-  HierarchyPeek,
-  org_external_hierarchy,
-  org_internal_hierarchy,
-  program_hierarchy,
-  tag_hierarchy,
-  crso_hierarchy,
-  crso_pi_hierarchy,  
-} = require('./hierarchy_component.js');
-
-const { infograph_href_template } = require('../../link_utils.js');
-
+const { HeightClipper } = util_components;
 
 new PanelGraph({
   level: 'dept',

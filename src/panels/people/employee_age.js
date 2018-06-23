@@ -4,7 +4,7 @@ import {
   run_template,
   Subject,
   PanelGraph,
-  business_constants,
+  businessConstants,
   years,
   TabbedContent,
   create_text_maker,
@@ -18,7 +18,7 @@ const text_maker = create_text_maker(text);
 const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 const { people_years } = years;
-const { compact_age_groups } = business_constants;
+const { compact_age_groups } = businessConstants;
 
 const { 
   D3GraphWithLegend,

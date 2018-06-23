@@ -14,21 +14,25 @@ if(typeof CDN_URL !== "undefined"){
 
 
 
-require('../common_css/site.scss');
-require('../common_css/boostrap-fixes-extensions.scss');
-require('../common_css/grid-system.scss');
-require('../common_css/flexbox-grid.css');
-require('../common_css/tables.scss');
+import '../common_css/site.scss';
+import '../common_css/boostrap-fixes-extensions.scss';
+import '../common_css/grid-system.scss';
+import '../common_css/flexbox-grid.css';
+import '../common_css/tables.scss';
 
 //3rd party libraries injected into global scope
-//note that these next few lines must be run before anything using lodash, handlebars, etc. 
-window.accounting = require('accounting');
-window.marked = require('marked');
-window.Handlebars = require('handlebars/dist/cjs/handlebars.js').default;
-window.React = require('react');
+//note that these next few lines must be run before anything using lodash, handlebars, etc.
+import accounting from 'accounting';
+import marked from 'marked';
+import Handlebars from 'handlebars/dist/cjs/handlebars.js';
+import React from 'react';
 
+window.accounting = accounting;
+window.marked = marked;
+window.Handlebars = Handlebars;
+window.React = React;
 
-require('./d3-bundle.js');
-const _ = require('lodash');
+import './d3-bundle.js';
+import _ from 'lodash';
 window._ = _;
-require('./lodash-extensions');
+import './lodash-extensions';

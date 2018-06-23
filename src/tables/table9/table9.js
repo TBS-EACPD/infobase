@@ -1,16 +1,16 @@
 import text from "./table9.yaml";
 
 import {
-  STATS, 
+  stats, 
   trivial_text_maker, 
   m, 
   Statistics,
   people_five_year_percentage_formula,
-  business_constants,
+  businessConstants,
   years,
 } from "../table_common";
 
-const { tenure } = business_constants;
+const { tenure } = businessConstants;
 const {
   people_years,
   people_years_short_second,
@@ -127,7 +127,7 @@ Statistics.create_and_register({
     add("head_count_ppl_last_year", dept_last_year);
     add("head_count_dept_share_last_year", dept_last_year/_.reduce(table.data, (memo,d) => {return memo + d[col];}, 0));
 
-    STATS.one_year_top3(
+    stats.one_year_top3(
       add,
       "emp_types",
       q.get_top_x(
@@ -139,7 +139,7 @@ Statistics.create_and_register({
       )
     );
     const all_years = q.get_top_x(["employee_type"].concat(people_years),Infinity,{zip:true});
-    STATS.year_over_year_multi_stats_active_years(add,"head_count_type",all_years,false,people_years);
+    stats.year_over_year_multi_stats_active_years(add,"head_count_type",all_years,false,people_years);
 	
     const total_head_count_by_year = _.chain(people_years)
       .map( y => d3.sum( _.map(q.data, _.property(y) ) ) )
@@ -187,7 +187,7 @@ Statistics.create_and_register({
     add( "head_count_avg", five_year_total_head_count/people_years.length);
 
     const all_years = q.gov_grouping();
-    STATS.year_over_year_multi_stats_active_years(add,"head_count_type",all_years, false, people_years);
+    stats.year_over_year_multi_stats_active_years(add,"head_count_type",all_years, false, people_years);
     
     const students = _.find(all_years, d => (d[0] === "Student") || (d[0] === "Étudiant"));
     

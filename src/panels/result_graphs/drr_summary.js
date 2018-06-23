@@ -5,8 +5,6 @@ import {
   Panel,
 } from "../shared";
 import { IconArray } from '../../charts/IconArray.js';
-
-
 import { 
   row_to_drr_status_counts,
   compute_counts_from_set,

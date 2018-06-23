@@ -1,8 +1,4 @@
-import {
-  provinces,
-  provinces_short,
-} from '../models/businessConstants.js';
-
+import { businessConstants } from '../models/businessConstants.js';
 /* 1,043 × 1010 style="opacity:0.65822784;fill:#000000;fill-opacity:1;stroke:none" width="94.350761" height="81.185539" */ // base map obtained from [here](http://commons.wikimedia.org/wiki/File:Canada_blank_map.svg) 
 //
 // data in the following format:
@@ -18,6 +14,7 @@ import {
 import common_charts_utils from "./common_charts_utils";
 import { canada_svg } from "./canada.yaml";
 
+const { provinces, provinces_short } = businessConstants;
 const canada_svg_text = canada_svg.text;
 
 const ordering = {
@@ -39,7 +36,7 @@ const ordering = {
   na: 15,
 };
 
-export class canada {
+export class Canada {
   
   constructor(container,options){
 

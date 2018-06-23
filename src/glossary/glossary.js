@@ -6,11 +6,11 @@ import {
   ScrollToTargetContainer,
 } from '../core/NavComponents.js';
 import {autoComplete} from '../search/search.js';
-import  {create_text_maker} from '../models/text';
 import {GlossaryEntry} from '../models/glossary.js';
 import { glossary as glossary_search_config } from '../search/search_configs.js';
 import withRouter from 'react-router/withRouter';
 import { TM as StandardTM } from '../util_components.js';
+import { create_text_maker } from '../models/text.js';
 
 const text_maker = create_text_maker(glossary_text);
 

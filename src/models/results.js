@@ -1,10 +1,9 @@
-const { 
-  Program, 
-  CRSO,
-} = require('./subject.js');
-const { trivial_text_maker } = require('./text.js');
-const { months } = require('./businessConstants.js');
+import { businessConstants } from './businessConstants.js';
+import { Subject } from '../models/subject.js';
+import { trivial_text_maker } from './text.js';
 
+const { Program, CRSO } = Subject;
+const { months } = businessConstants;
 
 const parent_indexed_sub_program_entities = {};
 const sub_program_entities_by_id = {};
@@ -464,13 +463,13 @@ const ResultCounts = {
 }
 
 
-module.exports = exports = {
+export {
   Result,
   Indicator,
   SubProgramEntity,
   PI_DR_Links,
   ResultCounts,
-}
+};
 
 Object.assign(window, {
   _Result : Result,

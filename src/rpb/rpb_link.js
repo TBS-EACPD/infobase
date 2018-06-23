@@ -1,5 +1,7 @@
-const Subject = require('../models/subject.js')
-const JSURL = require('jsurl');
+
+import { Subject } from '../models/subject.js';
+import JSURL from 'jsurl';
+
 const base_url = "#rpb/";
 const rpb_link = (naive_state, useRouterFormat) => _.chain(naive_state)
   .pipe(obj => {
@@ -42,7 +44,6 @@ const rpb_link = (naive_state, useRouterFormat) => _.chain(naive_state)
   .pipe(str => useRouterFormat ? str.replace("#","/") : str )
   .value();
 
-
 const get_appropriate_rpb_subject = subject => {
   let appropriate_subject = subject;
   if(_.includes(["program","crso"], subject.level)){ //rpb is useless at the crso/program level
@@ -53,7 +54,7 @@ const get_appropriate_rpb_subject = subject => {
   return appropriate_subject;
 }
 
-exports = module.exports = { 
-  rpb_link,
+export {
+  rpb_link, 
   get_appropriate_rpb_subject,
 };

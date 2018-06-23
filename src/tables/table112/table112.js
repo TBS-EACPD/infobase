@@ -1,19 +1,19 @@
 import text from "./table112.yaml";
 
 import {
-  STATS, 
+  stats, 
   trivial_text_maker, 
   m, 
   Statistics,  
   people_five_year_percentage_formula,
-  business_constants,
+  businessConstants,
   years,
 } from "../table_common";
 
 const {
   compact_ex_level_map,
   ex_levels,
-} = business_constants;
+} = businessConstants;
 const {
   people_years,
   people_years_short_second,
@@ -140,7 +140,7 @@ Statistics.create_and_register({
     c.dept = subject;
 
     const all_years = q.get_top_x(["ex_lvl", ...people_years], Infinity,{zip:true});
-    STATS.year_over_year_multi_stats_active_years(add,"head_count_ex_level_years",all_years,false,people_years);
+    stats.year_over_year_multi_stats_active_years(add,"head_count_ex_level_years",all_years,false,people_years);
 
     const num_active_years = _.chain( all_years )
       .map( group => _.tail(group) )
@@ -153,7 +153,7 @@ Statistics.create_and_register({
     const all_years_only_ex = _.filter(all_years, a => (a[0] !== "Non-EX"));
     if ( !_.isEmpty(all_years_only_ex) ){
 
-      STATS.year_over_year_multi_stats_active_years(add,"head_count_ex_level",all_years_only_ex,num_active_years);
+      stats.year_over_year_multi_stats_active_years(add,"head_count_ex_level",all_years_only_ex,num_active_years);
       
       const ex_string = window.lang === 'en' ? 'Executive' : 'Cadres supérieurs';
       
@@ -198,7 +198,7 @@ Statistics.create_and_register({
     
     const all_years_unfiltered = q.gov_grouping();
     const all_years = _.filter(all_years_unfiltered, a => a[0] !== "Non-EX");
-    STATS.year_over_year_multi_stats(add,"head_count_ex_level",all_years);
+    stats.year_over_year_multi_stats(add,"head_count_ex_level",all_years);
     const year_group_vals = _.map(all_years, group => _.tail(group) );
     const year_totals = _.map(year_group_vals, d => d3.sum(d) );
     add("head_count_ex_level_avg_ex", d3.sum(year_totals)/5);

@@ -1,7 +1,3 @@
-"use strict";
-exports = module.exports;
-
-
 if (typeof window !== "undefined"){
   // feature detection
   // 
@@ -17,7 +13,7 @@ if (typeof window !== "undefined"){
       window.is_mobile = false;
     }
   };
-  
+
   window.isIE = function() {
     var myNav = navigator.userAgent.toLowerCase();
     return (
@@ -40,7 +36,7 @@ if (typeof window !== "undefined"){
   })()
 
   window.windows_os = navigator.appVersion.indexOf("Win") !== -1;
-  
+
   window.details = 'open' in document.createElement('details');
   window.download_attr = ('download' in document.createElement('a'));
   window.clipboard_access = ('clipboardData' in window);
@@ -53,138 +49,139 @@ if (typeof window !== "undefined"){
       $(this).parents("details").find(".togglee").toggleClass("hidden");
     });
   }
-  
+
   set_mobile();
-  
-  // <div id='abbrev'></div>
-  // for abbreviating long strings of text on the screen
-  // but also keeping a hidden version of the full string
-  // for accessibility purposes 
-  exports.abbrev = function(name,length, add_abbrev){
-    //         the get_text function
-    // * `name` : the text which needs to be abbreviated
-    //  * `length` : the cut-off point in the string
-    add_abbrev =  add_abbrev  || false;
-    length = length || 60;
-    var outerspan = $("<span>");
-    if (name.length > length){
+}  
+
+// <div id='abbrev'></div>
+// for abbreviating long strings of text on the screen
+// but also keeping a hidden version of the full string
+// for accessibility purposes 
+export const abbrev = function(name,length, add_abbrev){
+  //         the get_text function
+  // * `name` : the text which needs to be abbreviated
+  //  * `length` : the cut-off point in the string
+  add_abbrev =  add_abbrev  || false;
+  length = length || 60;
+  var outerspan = $("<span>");
+  if (name.length > length){
+    $("<span>")
+      .addClass("wb-inv original")
+      .html(name)
+      .appendTo(outerspan);
+    if (add_abbrev) {
       $("<span>")
-        .addClass("wb-inv original")
-        .html(name)
+        .addClass("wb-inv abbrev")
+        .html(window.lang === "en" ?  " abbreviated here as:" :  " abrégé ici:")
         .appendTo(outerspan);
-      if (add_abbrev) {
-        $("<span>")
-          .addClass("wb-inv abbrev")
-          .html(window.lang === "en" ?  " abbreviated here as:" :  " abrégé ici:")
-          .appendTo(outerspan);
-      }
-      $("<span>")
-        .addClass("shortened")
-        .html(name.substring(0,length-5)+"...")
-        .appendTo(outerspan);
-      return outerspan.html();
+    }
+    $("<span>")
+      .addClass("shortened")
+      .html(name.substring(0,length-5)+"...")
+      .appendTo(outerspan);
+    return outerspan.html();
+  } else {
+    return name;
+  }
+};
+
+export const make_unique_func = function(){
+  var val = 0;
+  return function(){
+    return ++val;
+  }
+};
+
+export const find_parent = (node,condition)=>{
+  if (condition(node)){
+    return node;
+  }
+  if (node.parentNode === document) { 
+    return false; 
+  }
+  return find_parent(node.parentNode, condition);
+};
+
+// <div id='make_unique'></div>
+// consider replacing with _.uniqueId
+export const make_unique = make_unique_func();
+
+//simple, re-usable select tag component
+//should probably be moved elsewhere
+//if container is a select tag, uses that, if not, appends a child <select>
+//data can be of many form 
+//array/hash of strings (kinda kills the point of having this component)
+//array/hash of objects with a text or display property
+//note that onSelect will be called with the data associated to the key, not the key itself
+class Select {
+  constructor(options){
+    const { 
+      container, 
+      data, 
+      onSelect, 
+      display_func,  //required, unless the items have a display or text field
+      selected, //optional
+      selected_key, //optional
+      disabled_key, //optional
+    } = options;
+
+    container.innerHTML = "";
+    let node = container;
+    if(container.nodeName !== 'SELECT'){
+      node = document.createElement('select');
+      node.classList.add('form-control');
+      container.appendChild(node);
+    }
+    node.innerHTML = (
+      _.map(
+        data, 
+        (val,key)=> `
+          <option 
+            ${ disabled_key === key ? 'disabled' : ''}
+            ${ (selected_key === key || selected === val) ? 'selected' : ''}
+            value='${key}'
+          >
+            ${ display_func ?  display_func(val)  : (val.text || val.display || val) }
+          </option>`
+      )
+        .join("")
+    );
+    node.onchange = ()=>{ onSelect(data[node.value]);};
+  }
+}
+
+export { Select };
+
+export const fetch_and_inflate = function fetchArrayBuffer(url){
+  var ret = $.Deferred(); 
+  const oReq = new XMLHttpRequest();
+  oReq.open("GET", url, true);
+  oReq.responseType = "arraybuffer"; //this is the reason we're not using $.ajax
+  oReq.onload = function (oEvent) {
+    const arrayBuffer = oReq.response; // Note: not oReq.responseText
+    if (arrayBuffer && !window.isIE()) {
+      const inflated =  new TextDecoderLite("utf-8").decode(pako.inflate(arrayBuffer))
+      ret.resolve(inflated);
     } else {
-      return name;
+      ret.reject("something went wrong");
     }
   };
+  oReq.send(null);
 
-  exports.make_unique_func = function(){
-    var val = 0;
-    return function(){
-      return ++val;
-    }
-  }
+  return ret;
+};
 
-  exports.find_parent = (node,condition)=>{
-    if (condition(node)){
-      return node;
-    }
-    if (node.parentNode === document) { 
-      return false; 
-    }
-    return exports.find_parent(node.parentNode,condition);
-  }
+export const escapeRegExp = function(str) {
+  /* eslint-disable no-useless-escape */
+  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+};
 
-  // <div id='make_unique'></div>
-  // consider replacing with _.uniqueId
-  exports.make_unique = exports.make_unique_func();
+export const escapeSingleQuotes = function(str){
+  return str.replace(/'/g, "&#39;")
+};
 
-  //simple, re-usable select tag component
-  //should probably be moved elsewhere
-  //if container is a select tag, uses that, if not, appends a child <select>
-  //data can be of many form 
-  //array/hash of strings (kinda kills the point of having this component)
-  //array/hash of objects with a text or display property
-  //note that onSelect will be called with the data associated to the key, not the key itself
-  class Select {
-    constructor(options){
-      const { 
-        container, 
-        data, 
-        onSelect, 
-        display_func,  //required, unless the items have a display or text field
-        selected, //optional
-        selected_key, //optional
-        disabled_key, //optional
-      } = options;
+export const shallowEqualObjectsOverKeys = (obj1, obj2, keys_to_compare) => _.reduce(keys_to_compare, (memo, key) => (memo && (obj1[key] === obj2[key]) ), true);
 
-      container.innerHTML = "";
-      let node = container;
-      if(container.nodeName !== 'SELECT'){
-        node = document.createElement('select');
-        node.classList.add('form-control');
-        container.appendChild(node);
-      }
-      node.innerHTML = (
-        _.map(
-          data, 
-          (val,key)=> `
-            <option 
-              ${ disabled_key === key ? 'disabled' : ''}
-              ${ (selected_key === key || selected === val) ? 'selected' : ''}
-              value='${key}'
-            >
-              ${ display_func ?  display_func(val)  : (val.text || val.display || val) }
-            </option>`
-        )
-          .join("")
-      );
-      node.onchange = ()=>{ onSelect(data[node.value]);};
-      
-    }
-      
-  }
-  exports.Select = Select;
 
-  exports.fetch_and_inflate = function fetchArrayBuffer(url){
-    var ret = $.Deferred(); 
-    const oReq = new XMLHttpRequest();
-    oReq.open("GET", url, true);
-    oReq.responseType = "arraybuffer"; //this is the reason we're not using $.ajax
-    oReq.onload = function (oEvent) {
-      const arrayBuffer = oReq.response; // Note: not oReq.responseText
-      if (arrayBuffer && !window.isIE()) {
-        const inflated =  new TextDecoderLite("utf-8").decode(pako.inflate(arrayBuffer))
-        ret.resolve(inflated);
-      } else {
-        ret.reject("something went wrong");
-      }
-    };
-    oReq.send(null);
 
-    return ret;
-  }
-  
-  exports.escapeRegExp = function(str) {
-    /* eslint-disable no-useless-escape */
-    return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-  }
-  
-  exports.escapeSingleQuotes = function(str){
-    return str.replace(/'/g, "&#39;")
-  }
-
-  exports.shallowEqualObjectsOverKeys = (obj1, obj2, keys_to_compare) => _.reduce(keys_to_compare, (memo, key) => (memo && (obj1[key] === obj2[key]) ), true) 
-
-}  
-window._UTILS = exports;
+window._UTILS = { abbrev, make_unique_func, find_parent, make_unique, Select, fetch_and_inflate, escapeRegExp, escapeSingleQuotes, shallowEqualObjectsOverKeys };

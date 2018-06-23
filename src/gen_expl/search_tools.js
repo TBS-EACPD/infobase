@@ -1,9 +1,5 @@
-const {
-  GlossaryEntry,
-} = require('../models/glossary.js');
-const {
-  escapeRegExp,
-} = require('../core/utils.js');
+import { GlossaryEntry } from '../models/glossary.js';
+import { escapeRegExp } from '../core/utils.js';
 
 function node_to_match_tokens(node){
   const {
@@ -100,6 +96,7 @@ function substr_search_generator(flat_nodes){
   };
 
 }
-module.exports = exports = {
+
+export {
   substr_search_generator,
-}
+};

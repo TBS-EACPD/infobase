@@ -1,23 +1,22 @@
 import { text_maker, TM } from './vote-stat-text-prodiver.js';
 import { Fragment } from 'react';
-const {
-  Subject,
-  formats,
-  PanelGraph,
-  utils : { abbrev },
-  charts_index: {
-    tbs_color,
-  },
-  util_components:{
-    Format,
-  },
-  declarative_charts: {
-    CirclePack,
-  },
-  infograph_href_template,
-  StdPanel,
+import { 
+  Subject, 
+  formats, 
+  PanelGraph, 
+  utils, 
+  charts_index, 
+  util_components, 
+  declarative_charts, 
+  infograph_href_template, 
+  StdPanel, 
   Col,
-} = require("../shared"); 
+} from '../shared';
+const { abbrev } = utils;
+const { tbs_color } = charts_index.common_charts_utils;
+const { Format } = util_components;
+const { CirclePack } = declarative_charts;
+
 
 const main_col = "{{est_in_year}}_estimates";
 

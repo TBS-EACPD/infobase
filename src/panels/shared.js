@@ -1,21 +1,22 @@
-exports = module.exports
-const {create_text_maker, trivial_text_maker, text_maker, run_template } = require( "../models/text");
-const {formats} = require('../core/format.js');
-const {PanelGraph, layout_types} = require("../core/PanelGraph.js");
-const { 
-  Panel,
-  StdPanel,
-  TextPanel,
-  Col,
-} = require('../components/panel-components.js');
-const { reactAdapter } = require('../core/reactAdapter');
-const { 
-  HeightClipper,
-  TabbedContent,
-  TM,
-} = require('../util_components.js');
-
-const declarative_charts = require('../charts/declarative_charts.js');
+import * as utils from '../core/utils.js';
+import * as util_components from '../util_components.js';
+import * as declarative_charts from '../charts/declarative_charts.js';
+import * as charts_index from '../core/charts_index';
+import * as Results from '../models/results.js';
+import { create_text_maker, trivial_text_maker, run_template } from '../models/text.js';
+import { formats } from '../core/format.js';
+import { PanelGraph, layout_types } from '../core/PanelGraph.js';
+import { Panel, StdPanel, TextPanel, Col } from '../components/panel-components.js';
+import { reactAdapter } from '../core/reactAdapter';
+import { Table } from '../core/TableClass.js';
+import { rpb_link, get_appropriate_rpb_subject } from '../rpb/rpb_link.js';
+import { Subject } from '../models/subject';
+import { years } from '../models/years.js';
+import { businessConstants } from '../models/businessConstants.js';
+import FootNote from '../models/footnotes'; 
+import { infograph_href_template as infograph_href_template } from '../infographic/routes.js';
+import { glossary_href } from '../link_utils.js';
+import { Statistics } from '../core/Statistics.js';
 
 const {
   SafePie,
@@ -23,52 +24,9 @@ const {
   D3GraphWithLegend,
 } = declarative_charts;
 
-const {
-  rpb_link,
-  get_appropriate_rpb_subject,
-} = require('../rpb/rpb_link');
+const { Format, HeightClipper, TabbedContent, TM } = util_components;
 
-
-const { Table } = require('../core/TableClass.js');
-
-const util_components = require('../util_components');
-exports.charts_index = require("../core/charts_index");
-exports.declarative_charts = declarative_charts;
-exports.Table = Table;
-exports.rpb_link = rpb_link;
-exports.get_appropriate_rpb_subject = get_appropriate_rpb_subject;
-exports.Subject = require("../models/subject");
-exports.formats = formats;
-exports.text_maker = text_maker; 
-exports.trivial_text_maker = trivial_text_maker; 
-exports.create_text_maker = create_text_maker;
-exports.run_template = run_template;
-exports.PanelGraph = PanelGraph;
-
-exports.StdPanel = StdPanel;
-exports.TextPanel = TextPanel;
-exports.Panel = Panel;
-exports.Col = Col;
-
-exports.layout_types = layout_types;
-exports.years = require("../models/years.js").years;
-exports.business_constants = require('../models/businessConstants.js'),
-exports.utils = require('../core/utils.js'); 
-exports.FootNote = require("../models/footnotes");
-exports.reactAdapter = require('../core/reactAdapter').reactAdapter;
-exports.TabbedContent = TabbedContent;
-exports.util_components = require('../util_components');
-exports.infograph_href_template = require('../infographic/routes.js').infograph_href_template;
-exports.glossary_href = require('../link_utils.js').glossary_href;
-exports.Results = require('../models/results.js');
-exports.Statistics = require('../core/Statistics.js').Statistics;
-exports.TM = TM;
-
-const {
-  Format,
-} = util_components;
-
-exports.PplSharePie = ({graph_args, label_col_header, sort_func}) => {
+export const PplSharePie = ({graph_args, label_col_header, sort_func}) => {
   sort_func = sort_func || ((a,b) => b.value-a.value);
 
   const data = graph_args
@@ -126,7 +84,7 @@ exports.PplSharePie = ({graph_args, label_col_header, sort_func}) => {
   </div>;
 };
 
-exports.HeightClippedGraphWithLegend = ({create_graph_with_legend_options}) => {
+export const HeightClippedGraphWithLegend = ({create_graph_with_legend_options}) => {
   return (
     <HeightClipper clipHeight={185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient gradient-strong"}>
       <div className="height-clipped-graph-area" aria-hidden={true}>
@@ -136,7 +94,7 @@ exports.HeightClippedGraphWithLegend = ({create_graph_with_legend_options}) => {
   );
 };
 
-exports.collapse_by_so = function(programs,table,filter){
+export const collapse_by_so = function(programs,table,filter){
   // common calculation for organizing program/so row data by so
   // and summing up all the programs for the last year of spending 
   // then sorting by largest to smallest
@@ -158,7 +116,7 @@ exports.collapse_by_so = function(programs,table,filter){
     .value();
 };
 
-exports.sum_a_tag_col = function sum_tag_col(tag, table, col){
+export const sum_a_tag_col = function sum_tag_col(tag, table, col){
   return _.chain(tag.programs)
     .map(p => table.programs.get(p))
     .flatten()
@@ -169,9 +127,7 @@ exports.sum_a_tag_col = function sum_tag_col(tag, table, col){
     .value();
 };
 
-
-
-exports.common_react_donut = function render(panel, calculations, options){
+export const common_react_donut = function render(panel, calculations, options){
   const { graph_args } = calculations;
   
   const node = panel.areas().graph.node();
@@ -238,9 +194,9 @@ exports.common_react_donut = function render(panel, calculations, options){
     node
   );
 
-}
+};
 
-exports.CommonDonut = function({data}){
+export const CommonDonut = function({data, height}){
 
   const color_scale = infobase_colors();
 
@@ -273,7 +229,7 @@ exports.CommonDonut = function({data}){
         inner_radius={true}
         inner_text={true}
         inner_text_fmt={formats.compact1_raw}
-        height={this.height || null}
+        height={height || null}
       />
       { !has_neg && 
         <div className="centerer" style={{marginTop: "-40px"}}>
@@ -303,9 +259,9 @@ exports.CommonDonut = function({data}){
     </div>
   );
 
-}
+};
 
-exports.PlannedActualTable = ({
+export const PlannedActualTable = ({
   planned_ftes,
   actual_ftes,
   diff_ftes,
@@ -338,12 +294,7 @@ exports.PlannedActualTable = ({
   </table>      
 );
 
-
-
-
-
-
-exports.get_planned_spending_source_link = subject => {
+export const get_planned_spending_source_link = subject => {
   const appropriate_subject = get_appropriate_rpb_subject(subject);
   const table = Table.lookup('table6');
   return {
@@ -357,7 +308,7 @@ exports.get_planned_spending_source_link = subject => {
   }
 };
 
-exports.get_planned_fte_source_link = subject => {
+export const get_planned_fte_source_link = subject => {
   const appropriate_subject = get_appropriate_rpb_subject(subject);
   const table = Table.lookup('table12');
   return {
@@ -369,4 +320,35 @@ exports.get_planned_fte_source_link = subject => {
       columns: ['{{planning_year_1}}'], 
     }),
   }
+};
+
+export {
+  charts_index, 
+  Table, 
+  rpb_link,
+  get_appropriate_rpb_subject,
+  Subject, 
+  years, 
+  businessConstants, 
+  utils, 
+  FootNote, 
+  reactAdapter, 
+  util_components, 
+  infograph_href_template,
+  glossary_href,
+  Results,
+  Statistics,
+  declarative_charts, 
+  formats, 
+  trivial_text_maker, 
+  create_text_maker, 
+  run_template, 
+  PanelGraph, 
+  StdPanel, 
+  TextPanel, 
+  Panel, 
+  Col, 
+  layout_types, 
+  TabbedContent, 
+  TM,
 };

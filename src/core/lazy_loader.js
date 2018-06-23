@@ -1,23 +1,12 @@
-const { Table } = require('./TableClass.js');
-const { 
-  PanelGraph,
-  tables_for_graph,
-} = require('./PanelGraph.js');
+import { Table } from './TableClass.js';
+import { PanelGraph, tables_for_graph } from './PanelGraph.js';
+import { Statistics, tables_for_statistics } from './Statistics.js';
+import { load_results_bundle, load_results_counts } from '../models/populate_results.js';
+import { load_footnotes_bundle } from '../models/populate_footnotes.js';
+import { load_budget_measures } from '../models/populate_budget_measures.js';
+import { Subject } from '../models/subject.js';
 
-const { 
-  Statistics,
-  tables_for_statistics,
-} = require('./Statistics.js');
-
-const {
-  load_results_bundle,
-  load_results_counts,
-} = require('../models/populate_results.js');
-
-const { load_footnotes_bundle } = require('../models/populate_footnotes.js');
-
-const { BudgetMeasure } = require('../models/subject.js'); 
-const { load_budget_measures } = require('../models/populate_budget_measures.js');
+const { BudgetMeasure } = Subject;
 
 // given an array of tables, returns a promise when they are all loaded.
 function load(table_objs){
@@ -135,7 +124,8 @@ function ensure_loaded({
 
 }
 
-module.exports = exports = { 
+export { 
   ensure_loaded,
 };
+
 window._ensure_loaded = ensure_loaded;

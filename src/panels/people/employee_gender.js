@@ -5,7 +5,7 @@ import {
   PanelGraph,
   PplSharePie,
   HeightClippedGraphWithLegend,
-  business_constants,
+  businessConstants,
   years,
   create_text_maker,
   TM as StdTM,
@@ -18,7 +18,7 @@ const text_maker = create_text_maker(text);
 const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 const { people_years } = years;
-const { gender } = business_constants;
+const { gender } = businessConstants;
 
 const {
   A11YTable,

@@ -1,4 +1,4 @@
-require('./TabbedContent.scss');
+import './TabbedContent.scss';
 
 /*props: 
   tabKeys: array of keys associated with tabs,

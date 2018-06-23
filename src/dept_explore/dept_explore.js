@@ -1,24 +1,22 @@
-require('./dept_explore.scss');
-const dept_explore_text = require('./dept_explore.yaml');
-const { StandardRouteContainer } = require("../core/NavComponents.js");
-const { create_text_maker } = require('../models/text.js')
-const { Dept, Gov } = require('../models/subject.js');
-const { infograph_href_template } = require('../link_utils.js');
-const { PACK } = require('../core/charts_index');
-const { abbrev } = require("../core/utils.js");
-const { Table } = require('../core/TableClass.js');
-const { deptSearch } = require('../search/search.js');
-const {formats} = require('../core/format');
-const {get_info} = require('../core/Statistics.js');
-const { ensure_loaded } = require('../core/lazy_loader.js');
-const { rpb_link } = require('../rpb/rpb_link.js');
-const { TM } = require('../util_components.js');  
+import './dept_explore.scss';
+import dept_explore_text from './dept_explore.yaml';
+import { StandardRouteContainer } from '../core/NavComponents.js';
+import { infograph_href_template } from '../link_utils.js';
+import { Pack } from '../core/charts_index.js';
+import { abbrev } from '../core/utils.js';
+import { Table } from '../core/TableClass.js';
+import { deptSearch } from '../search/search.js';
+import { formats } from '../core/format.js';
+import { get_info } from '../core/Statistics.js';
+import { ensure_loaded } from '../core/lazy_loader.js';
+import { rpb_link } from '../rpb/rpb_link.js';
+import { TM } from '../util_components.js';
+import { Subject } from '../models/subject.js';
+import { create_text_maker } from '../models/text.js';
 
+const { Dept, Gov } = Subject;
 const text_maker = create_text_maker(dept_explore_text);
-
 let BubbleOrgList;
-
-
 
 BubbleOrgList = function(container,method){
 
@@ -108,7 +106,7 @@ p.by_min_dept = function(){
     .filter(d => d.value !== 0)
     .groupBy(_.property('min'))
     .map((depts, min_name) => {
-      PACK.soften_spread(depts);
+      Pack.soften_spread(depts);
       return {
         name : min_name,
         children : depts,
@@ -145,7 +143,7 @@ p.by_dept_type = function(){
     })
     .filter(d => d.value !== 0)
     .groupBy(_.property('type'))
-    .tap( dept_groups => _.each(dept_groups, depts => PACK.soften_spread(depts) ) )
+    .tap( dept_groups => _.each(dept_groups, depts => Pack.soften_spread(depts) ) )
     .map( (depts, type) => ({
       name : type,
       children : depts,
@@ -186,7 +184,7 @@ p.nest_data_for_exploring = function(to_be_nested, top_name, rangeRound){
   // pack the data using a specialised scale to create a two level packing
   rangeRound = rangeRound || [1,2,4,5];
 
-  var data = PACK.pack_data(to_be_nested,text_maker("smaller_orgs"),{
+  var data = Pack.pack_data(to_be_nested,text_maker("smaller_orgs"),{
     soften : true,
     scale : d3.scaleSqrt()
       .domain(d3.extent(to_be_nested, _.property('value')))
@@ -213,7 +211,7 @@ p.build_graphic = function(data,depts,formater){
     search_text :  text_maker("org_search"),
     onSelect: subject => {
       dept_search_node.scrollIntoView();
-      PACK.navigate_packing(
+      Pack.navigate_packing(
         chart.dispatch,
         chart.root,
         d => d.data.name === subject.sexy_name,
@@ -225,7 +223,7 @@ p.build_graphic = function(data,depts,formater){
   
   const colors = d3.scaleOrdinal(d3.schemeCategory10);
 
-  chart = new PACK.pack(
+  chart = new Pack.Pack(
     container.select('.svg-container'),
     { height: 680 ,
       fill_func : d => {
@@ -459,4 +457,4 @@ class BubbleExplore extends React.Component {
   }
 }
 
-module.exports = exports = { BubbleExplore };
+export { BubbleExplore };

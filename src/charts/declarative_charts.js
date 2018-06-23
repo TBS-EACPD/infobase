@@ -1,15 +1,15 @@
-const { HBarComposition } = require('./hbar_composition.js');
-const { bar } = require('./bar.js'); 
-const { PieOrBar } = require('./pie_or_bar.js');
-const { ordinal_line } = require('./line.js');
-const { create_graph_with_legend, create_a11y_table } = require('../core/charts_index.js');
-const { SafeProgressDonut } = require('./safe_progress_donut.js');
-const { pack } = require("./pack");
-const { circle_pie_chart } = require('./circle_chart.js');
-const { TWO_SERIES_BAR } = require('./two_series_bar.js');
+import classNames from 'classnames';
+import * as charts_index from '../core/charts_index.js';
+import { Bar as D3Bar } from './bar.js';
+import { Line as D3Line } from './line.js';
+import { HBarComposition } from './hbar_composition.js';
+import { PieOrBar } from './pie_or_bar.js';
+import { SafeProgressDonut } from './safe_progress_donut.js';
+import { Pack } from './pack.js';
+import { CirclePieChart as D3CirclePieChart } from './circle_chart.js';
+import { TwoSeriesBar } from './two_series_bar.js';
 
-const classNames = require('classnames');
-
+const { create_graph_with_legend, create_a11y_table } = charts_index;
 
 /* 
   data : [{ 
@@ -164,7 +164,7 @@ class Bar extends React.Component {
     this.graph_instance.render(_.clone(this.props));
   }
   componentDidMount(){
-    this.graph_instance = new bar(
+    this.graph_instance = new D3Bar(
       d3.select(this.refs.graph_area).node(),
       _.clone(this.props)
     );
@@ -204,7 +204,7 @@ class Line extends React.Component {
     this.graph_instance.render(_.clone(this.props));
   }
   componentDidMount(){
-    this.graph_instance = new ordinal_line(
+    this.graph_instance = new D3Line(
       d3.select(this.refs.graph_area).node(),
       _.clone(this.props)
     );
@@ -313,7 +313,7 @@ class CirclePack extends React.Component {
     this.graph_instance.render(_.clone(this.props));
   }
   componentDidMount(){
-    this.graph_instance = new pack(
+    this.graph_instance = new Pack(
       d3.select(this.refs.graph_area),
       _.clone(this.props)
     );
@@ -333,7 +333,7 @@ class CirclePieChart extends React.Component {
     this.graph_instance.render(_.clone(this.props));
   }
   componentDidMount(){
-    this.graph_instance = new circle_pie_chart(
+    this.graph_instance = new D3CirclePieChart(
       this.refs.graph_area,
       _.clone(this.props)
     );
@@ -354,7 +354,7 @@ class DualAxisBarChart extends React.Component {
   }
   componentDidMount(){
 
-    this.graph_instance = new TWO_SERIES_BAR(
+    this.graph_instance = new TwoSeriesBar(
       this.refs.graph_area,
       _.clone(this.props)
     )
@@ -366,7 +366,7 @@ class DualAxisBarChart extends React.Component {
   }
 }
 
-module.exports = exports = {
+export {
   StackedHbarChart,
   GraphLegend,
   D3GraphWithLegend,

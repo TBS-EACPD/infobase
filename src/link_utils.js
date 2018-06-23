@@ -1,8 +1,7 @@
-const { infograph_href_template } = require('./infographic/routes.js')
-
-const { rpb_link } = require('./rpb/rpb_link.js');
-const { Table } = require('./core/TableClass.js');
-const { GlossaryEntry } = require('./models/glossary.js');
+import { infograph_href_template } from './infographic/routes.js';
+import { rpb_link } from './rpb/rpb_link.js';
+import { Table } from './core/TableClass.js';
+import { GlossaryEntry } from './models/glossary.js';
 
 const glossary_href = glossary_item => "#glossary/"+glossary_item.id;
 
@@ -23,7 +22,7 @@ const general_href_for_item = item => {
 }
 
 
-module.exports = {
+export {
   infograph_href_template,
   rpb_link,
   glossary_href,

@@ -1,20 +1,13 @@
-exports = module.exports;
 // see [here](../table_definition.html) for description
 // of the table spec
-const text = require("./table7.yaml");
+import text from './table7.yaml';
 
+import { stats, trivial_text_maker, Statistics, years, businessConstants } from '../table_common';
 
-const {
-  STATS, 
-  trivial_text_maker, 
-  Statistics, 
-  years : {std_years},
-  business_constants: {
-    transfer_payments,
-  },
-} = require("../table_common");
+const { std_years } = years;
+const { transfer_payments } = businessConstants;
 
-module.exports = {
+export default {
   text,
   "id": "table7",
 
@@ -179,7 +172,7 @@ Statistics.create_and_register({
     const q = table.q(subject);
     var cols =  _.map(std_years, function(year){  return year+"exp"; });
     var all_years = q.get_cols(["tp"].concat(cols),{zip:true});
-    STATS.year_over_year_multi_stats(add, "tp_exp",all_years);
+    stats.year_over_year_multi_stats(add, "tp_exp",all_years);
     var all_years_type = _.chain(q.types()) 
       .map(function(type){
         return _.chain(std_years)
@@ -196,8 +189,8 @@ Statistics.create_and_register({
       })
       .value();
 
-    STATS.year_over_year_multi_stats(add, "tp_type_exp",all_years_type);
-    STATS.add_all_years(
+    stats.year_over_year_multi_stats(add, "tp_type_exp",all_years_type);
+    stats.add_all_years(
       add,
       "tp_exp",
       std_years,
@@ -221,7 +214,7 @@ Statistics.create_and_register({
     const cols =  _.map(std_years, year => year+"exp");
 
     var all_years = q.get_cols(["tp"].concat(cols),{zip:true});
-    STATS.year_over_year_multi_stats(add, "tp_exp",all_years);
+    stats.year_over_year_multi_stats(add, "tp_exp",all_years);
 
     var all_years_type = _.chain(q.types()) 
       .map(function(type){
@@ -239,9 +232,9 @@ Statistics.create_and_register({
       })
       .value();
 
-    STATS.year_over_year_multi_stats(add, "tp_type_exp",all_years_type);
+    stats.year_over_year_multi_stats(add, "tp_type_exp",all_years_type);
 
-    STATS.add_all_years(
+    stats.add_all_years(
       add,
       "tp_exp",
       std_years,

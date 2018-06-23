@@ -1,4 +1,4 @@
-const { TM } = require('./TextMaker.js');
+import { TM } from './TextMaker.js';
 
 /*props: 
   maxChildrenHeight as an INT of pixels,

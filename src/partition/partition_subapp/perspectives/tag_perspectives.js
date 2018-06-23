@@ -1,4 +1,4 @@
-import * as Subject from '../../../models/subject.js';
+import { Subject } from '../../../models/subject.js';
 import { text_maker } from '../partition_text_provider.js';
 import { TextMaker as StandardTextMaker } from '../../../util_components';
 import { Table } from '../../../core/TableClass.js';

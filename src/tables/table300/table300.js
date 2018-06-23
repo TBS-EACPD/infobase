@@ -1,14 +1,13 @@
-const text = require("./table300.yaml");
+import text from './table300.yaml';
+
 // see [here](../table_definition.html) for description
 // of the table spec
-const {
-  Subject : {Program},
-  trivial_text_maker,
-  Statistics, 
-  years : { std_years},
-} = require("../table_common");
+import { Subject, trivial_text_maker, Statistics, years } from '../table_common';
 
-module.exports = {
+const { Program } = Subject;
+const { std_years } = years;
+
+export default {
   text,
   id: "table300",
   subject_type: "program",

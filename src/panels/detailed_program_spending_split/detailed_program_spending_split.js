@@ -9,7 +9,7 @@ import {
   infograph_href_template,
   years,
   declarative_charts,
-  business_constants,
+  businessConstants,
   Panel,
 } from "../shared";
 
@@ -31,7 +31,7 @@ const {
   A11YTable,
 } = declarative_charts;
 
-const { sos } = business_constants;
+const { sos } = businessConstants;
 
 
 

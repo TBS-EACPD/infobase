@@ -190,7 +190,7 @@ const d3_to_node = node => ({
   isExpanded: node.data.isExpanded,
   root: node.data.root,
 });
-  
+
 function convert_d3_hierarchy_to_explorer_hierarchy(root){
 
   const flat_d3_nodes = root.descendants(); //recall that descendants includes the root
@@ -299,7 +299,7 @@ function _sort_hierarchy(node, children_transform){
   };
 }
 
-module.exports = exports = {
+export {
   filter_hierarchy,
   get_leaves,
   get_root,

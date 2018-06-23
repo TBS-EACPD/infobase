@@ -1,5 +1,3 @@
-exports = module.exports;
-
 /*NOTES: 
 1. this breaks the 'graphs do not depend on external modules' thing
 Though one could argue formats shouldn't rely on the infobase either
@@ -7,13 +5,12 @@ Though one could argue formats shouldn't rely on the infobase either
 3. It does not use html for its text so it might have issues with utf-8 and line wrapping 
 4. This graph has very limited customization options, you can't really supply anything else than colors
 5. A good addition of this graph could be to accommodate fractions
-*/ 
+*/
 
-const {formats} = require('../core/format.js');
+import { formats } from '../core/format.js';
+import common_charts_utils from './common_charts_utils';
 
-var common_charts_utils = require('./common_charts_utils');
-
-exports.ProgressDonut = class ProgressDonut {
+export class ProgressDonut {
   
   constructor(container,options){
   

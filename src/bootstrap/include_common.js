@@ -1,23 +1,20 @@
 //this file's responsibility is to pull in most globals
 
-module.exports = exports = {};
-
-require('./include_basic_dependencies.js');
-require('../../external-dependencies/textencoder-lite.min.exec.js');
-require('../../external-dependencies/pako_inflate.min.exec.js');
-require('../../external-dependencies/typeahead.min.exec.js');
-require('../../external-dependencies/tooltip.exec.js');
-require('../../external-dependencies/jquery-ui-focusable-tabbable.exec.js');
-
+import './include_basic_dependencies.js';
+import '../../external-dependencies/textencoder-lite.min.exec.js';
+import '../../external-dependencies/pako_inflate.min.exec.js';
+import '../../external-dependencies/typeahead.min.exec.js';
+import '../../external-dependencies/tooltip.exec.js';
+import '../../external-dependencies/jquery-ui-focusable-tabbable.exec.js';
 
 //dev helper globals 
-window._classnames = require('classnames');
-window._Subject = require("../models/subject");
+import classnames from 'classnames';
+import { Subject } from "../models/subject.js";
+window._classnames = classnames;
+window._Subject = Subject;
 
-
-require("../tables/table_common");
-
-require("../handlebars/helpers");
+import '../tables/table_common';
+import '../handlebars/helpers';
 
 //this is mostly d3.category10 with re-ordered colours, and replacing the base blue with the canada.ca header color
 const colors = [

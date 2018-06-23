@@ -4,7 +4,7 @@ import {
   run_template,
   PanelGraph,
   years,
-  business_constants,
+  businessConstants,
   charts_index,
   create_text_maker,
   TM as StdTM,
@@ -16,7 +16,7 @@ const text_maker = create_text_maker(text);
 const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 const {people_years} = years;
-const {provinces} = business_constants;
+const {provinces} = businessConstants;
 
 
 const prov_split_render = function(graph_node, graph_args){
@@ -74,7 +74,7 @@ const prov_split_render = function(graph_node, graph_args){
       .range([0.2,1]);
 
     // add legend
-    var list = charts_index.create_list(
+    var list = charts_index.common_charts_utils.create_list(
       legend_area.node(),
       _.map(color_scale.ticks(5).reverse(), tick => 
         ({
@@ -95,7 +95,7 @@ const prov_split_render = function(graph_node, graph_args){
 
     const ticks = _.map(people_years, y => `${run_template(y)}`);
     
-    const canada_graph = new charts_index.CANADA.canada(graph_area.node(), {
+    const canada_graph = new charts_index.Canada(graph_area.node(), {
       color: "rgb(31, 119, 180)",
       data: years_by_province,
       ticks: ticks,
@@ -171,7 +171,7 @@ const prov_split_render = function(graph_node, graph_args){
         });
 
       if(window.is_mobile ){ // create a bar graph
-        (new charts_index.BAR.bar(
+        (new charts_index.Bar(
           container.select("div").node(),
           {
             colors: ()=>"#1f77b4",
@@ -189,7 +189,7 @@ const prov_split_render = function(graph_node, graph_args){
           .styles({ 'font-size': "10px" });
       } else { //use hbar
 
-        (new charts_index.HBAR.hbar(
+        (new charts_index.HBar(
           container.select("div").node(),
           {
             x_scale: d3.scaleLinear(),

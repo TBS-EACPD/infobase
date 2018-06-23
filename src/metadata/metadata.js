@@ -1,18 +1,12 @@
-const metadata_text = require("./metadata.yaml");
-const { 
-  StandardRouteContainer,
-  ScrollToTargetContainer,
-} = require('../core/NavComponents.js');
-const {create_text_maker} = require('../models/text');
-const { 
-  TM: StandardTM,
-  FancyUL,
-}  = require('../util_components.js');
-const { sources } = require('./data_sources.js');
-const {
-  Panel,
-} = require('../components/panel-components.js');
-const { months } = require('../models/businessConstants');
+import metadata_text from './metadata.yaml';
+import { StandardRouteContainer, ScrollToTargetContainer } from '../core/NavComponents.js';
+import { TM as StandardTM, FancyUL } from '../util_components.js';
+import { sources } from './data_sources.js';
+import { Panel } from '../components/panel-components.js';
+import { businessConstants } from '../models/businessConstants';
+import { create_text_maker } from '../models/text.js';
+
+const { months } = businessConstants;
 
 const FormattedDate = ({ day, month, year}) => <span>{months[month].text} {year}</span>;
 

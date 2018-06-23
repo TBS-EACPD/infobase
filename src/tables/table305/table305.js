@@ -1,23 +1,22 @@
 
 //require("../../panels/spend_by_so_hist"); //we arent showing this stuff.
 
-exports = module.exports;
-const text = require("./table305.yaml");
+import text from './table305.yaml';
+
 // see [here](../table_definition.html) for description
 // of the table spec
-const {
+import { 
   trivial_text_maker, 
-  years: {std_years},
-  business_constants: {
-    sos,
-  },
-} = require("../table_common");
+  years, 
+  businessConstants,
+} from '../table_common';
+import { Subject } from '../../models/subject.js';
 
-const { Program } = require("../../models/subject");
+const { Program } = Subject;
+const { std_years } = years;
+const { sos } = businessConstants;
 
-
-
-module.exports = {
+export default {
   text,
   "id": "table305",
   subject_type:"program",

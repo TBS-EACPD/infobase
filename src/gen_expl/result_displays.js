@@ -1,11 +1,9 @@
 import { createSelector } from 'reselect';
 
-const { TM, text_maker } = require("../panels/result_graphs/result_text_provider.js");
-const { infograph_href_template } = require('../link_utils.js');
-const { Indicator } = require('../models/results.js');
-const { 
-  IndicatorDisplay,
-} = require('../panels/result_graphs/components.js');
+import { TM, text_maker } from '../panels/result_graphs/result_text_provider.js';
+import { infograph_href_template } from '../link_utils.js';
+import { Indicator } from '../models/results.js';
+import { IndicatorDisplay } from '../panels/result_graphs/components.js';
 
 
 export const ResultCounts = ({ base_hierarchy, doc, subject }) => {

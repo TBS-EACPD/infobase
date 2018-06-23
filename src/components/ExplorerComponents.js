@@ -7,8 +7,8 @@ import {
   AccordionEnterExit,
   SortIndicators,
 } from '../util_components.js';
-import { trivial_text_maker } from '../models/text.js';
 import { createSelector } from 'reselect';
+import { trivial_text_maker } from '../models/text.js';
 
 const INDENT_SIZE = 24;
 

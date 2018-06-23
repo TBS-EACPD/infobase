@@ -1,11 +1,11 @@
-const data_source_text = require('./data_sources.yaml');
-const freq_text = require('./frequencies.yaml');
+import data_source_text from './data_sources.yaml';
+import freq_text from './frequencies.yaml';
 
 //circular dependency hack..
-const TableClassModule = require('../core/TableClass.js');
-const { create_text_maker } = require('../models/text.js');
-const {rpb_link } = require('../rpb/rpb_link.js');
-const { GlossaryEntry } = require('../models/glossary.js');
+import { Table } from '../core/TableClass.js';
+import { rpb_link } from '../rpb/rpb_link.js';
+import { GlossaryEntry } from '../models/glossary.js';
+import { create_text_maker } from '../models/text.js';
 
 const tm = create_text_maker([data_source_text, freq_text]);
 
@@ -28,7 +28,7 @@ function desc_from_gloss_keys(...glossary_keys){
 }
 
 function tables_from_source_key(source_key){
-  return _.filter(TableClassModule.Table.get_all(), table => _.includes(table.source, source_key) );
+  return _.filter(Table.get_all(), table => _.includes(table.source, source_key) );
 }
 
 function table_to_row_item(table){
@@ -44,7 +44,7 @@ function table_to_row_item(table){
     ),
     external_link: table.link[window.lang],
   }
-} 
+}
 
 const sources = _.mapValues({
   PA: {
@@ -200,6 +200,6 @@ const sources = _.mapValues({
   },
 }, (obj, key) => ({...obj, key}));
 
-module.exports = exports = { 
+export { 
   sources,
 };

@@ -1,4 +1,4 @@
-export const years = {
+const years = {
   std_years :[
     "{{pa_last_year_5}}",
     "{{pa_last_year_4}}",
@@ -47,3 +47,5 @@ export const years = {
     "{{lapse_last_year}}", 
   ],
 };
+
+export { years }

@@ -1,52 +1,33 @@
-require('../gen_expl/explorer-styles.scss');
-const explorer_text = require("./explorer.yaml");
-
-const { Fragment } = require('react');
-const { infograph_href_template } = require('../link_utils.js');
-const { StandardRouteContainer } = require('../core/NavComponents');
-
-const { get_col_defs } = require('../gen_expl/resource-explorer-common.js');
-
-const { create_text_maker } =  require('../models/text.js');
+import '../gen_expl/explorer-styles.scss';
+import explorer_text from './explorer.yaml';
+import { Fragment } from 'react';
+import { infograph_href_template } from '../link_utils.js';
+import { StandardRouteContainer } from '../core/NavComponents';
+import { get_col_defs } from '../gen_expl/resource-explorer-common.js';
+import { create_text_maker } from '../models/text.js';
+import { Subject } from '../models/subject.js';
+import { TM as StandardTM, SpinnerWrapper } from '../util_components.js';
+import { Details } from '../components/Details.js';
+import classNames from 'classnames';
 
 const text_maker = create_text_maker(explorer_text);
-
-
-const Subject = require('../models/subject.js');
-
 const { Tag } = Subject;
 
-const {
-  TM: StandardTM,
-  SpinnerWrapper,
-} = require('../util_components.js');
-const { Details } = require('../components/Details.js');
-const classNames = require('classnames');
-
 //treemap stuff
-const { combineReducers, createStore } = require('redux');
-const { Provider, connect } = require('react-redux');
+import { combineReducers, createStore } from 'redux';
 
-const {
-  get_root,
-} = require('../gen_expl/hierarchy_tools.js');
-
-const { 
-  resource_scheme,
-  get_initial_resource_state,
-} = require('../gen_expl/resource_scheme.js');
-
-const {
-  get_memoized_funcs,
-  initial_root_state,
-  root_reducer,
-  map_state_to_root_props_from_memoized_funcs,
+import { Provider, connect } from 'react-redux';
+import { get_root } from '../gen_expl/hierarchy_tools.js';
+import { resource_scheme, get_initial_resource_state } from '../gen_expl/resource_scheme.js';
+import { 
+  get_memoized_funcs, 
+  initial_root_state, 
+  root_reducer, 
+  map_state_to_root_props_from_memoized_funcs, 
   map_dispatch_to_root_props,
-} = require('../gen_expl/state_and_memoizing');
-
-const { ensure_loaded } = require('../core/lazy_loader.js');
-
-const { Explorer } = require('../components/ExplorerComponents.js');
+} from '../gen_expl/state_and_memoizing';
+import { ensure_loaded } from '../core/lazy_loader.js';
+import { Explorer } from '../components/ExplorerComponents.js';
 
 const INCLUDE_OTHER_TAGS = false;
 const TM = props => <StandardTM tmf={text_maker} {...props} />;

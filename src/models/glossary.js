@@ -1,6 +1,6 @@
-const {mix} = require('../generalUtils.js');
-const {staticStoreMixin} = require('./staticStoreMixin.js');
-const { trivial_text_maker } = require('./text.js');
+import { mix } from '../generalUtils.js';
+import { staticStoreMixin } from './staticStoreMixin.js';
+import { trivial_text_maker } from './text.js';
 
 class GlossaryEntry extends mix().with(staticStoreMixin) {
   constructor(id,title,def_text){
@@ -42,7 +42,8 @@ const get_glossary_item_tooltip_html = key => glossary_display(GlossaryEntry.loo
 
 
 window._GlossaryEntry = GlossaryEntry;
-module.exports = exports = { 
+
+export { 
   GlossaryEntry,
   get_glossary_item_tooltip_html,
 }; 

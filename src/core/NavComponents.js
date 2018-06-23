@@ -2,13 +2,9 @@ import withRouter from 'react-router/withRouter';
 import { reactAdapter } from './reactAdapter.js';
 import { log_page_view } from './analytics.js';
 
-const {
-  index_lang_lookups: {
-    page_title: default_title,
-    meta_description: default_description,
-  },
-} = require("../InfoBase/index_data.js");
+import { index_lang_lookups } from '../InfoBase/index_data.js';
 
+const { page_title: default_title, meta_description: default_description } = index_lang_lookups;
 
 //note: This must be manually kept consistent with index.hbs.html
 let is_initial_markup_cleared = false;

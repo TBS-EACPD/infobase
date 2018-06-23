@@ -1,6 +1,6 @@
-require('./Accordions.scss');
-const ReactTransitionGroup  = require('react-addons-transition-group');
-const classNames = require('classnames');
+import './Accordions.scss';
+import ReactTransitionGroup from 'react-addons-transition-group';
+import classNames from 'classnames';
 
 function FirstChild(props) {
   const childrenArray = React.Children.toArray(props.children);
@@ -109,9 +109,9 @@ class AutoAccordion extends React.Component {
   }
 }
 
-module.exports = exports = {
+export {
   FirstChild,
   AccordionEnterExit,
   StatelessPullDownAccordion,
   AutoAccordion,
-}
+};

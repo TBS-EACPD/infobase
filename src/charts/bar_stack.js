@@ -1,7 +1,7 @@
 //
 // a custom stacking layout which allows for negative values 
 // to be stacked
-module.exports = exports = function barStack(data) {
+export default function barStack(data) {
   var l = data[0].data.length;
   var posBase; 
   var negBase;
@@ -33,5 +33,5 @@ module.exports = exports = function barStack(data) {
     )
   )
   return data;
-}
+};
 

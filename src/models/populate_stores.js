@@ -1,20 +1,13 @@
-const  { get_static_url } = require("../core/static_url.js");
-const {
-  Ministry, 
-  Program, 
-  Dept, 
-  Tag, 
-  CRSO,
-  Minister,
-  InstForm,
-} = require("./subject");
-const { GlossaryEntry } = require('./glossary.js');
-const { fetch_and_inflate } =require('../core/utils.js');
-const { trivial_text_maker } = require("./text");
-const { populate_global_footnotes } = require('./populate_footnotes.js');
+import { get_static_url } from '../core/static_url.js';
+import { GlossaryEntry } from './glossary.js';
+import { fetch_and_inflate } from '../core/utils.js';
+import { populate_global_footnotes } from './populate_footnotes.js';
+import { Subject } from './subject.js';
+import { trivial_text_maker } from './text';
 
+const { Ministry, Program, Dept, Tag, CRSO, Minister, InstForm } = Subject;
 
-module.exports.populate_stores = async function(){
+export const populate_stores = async function(){
   const text = await (
     window.binary_download && !window.isIE() ? 
     fetch_and_inflate(get_static_url(`lookups_${window.lang}_min.html`)) :

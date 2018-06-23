@@ -1,24 +1,19 @@
-require('./search.css')
-
-const {
-  escapeSingleQuotes,
-} = require('../core/utils.js');
-const {
-  all_dp_orgs,
+import './search.css';
+import { escapeSingleQuotes } from '../core/utils.js';
+import { all_dp_orgs, 
   all_orgs_without_gov,
-  orgs_with_data_with_gov,
-  all_orgs_with_gov,
-  how_we_help : hwh_search_config,
-  glossary_lite: glossary_lite_search_config,
-  gocos: goco_search_config,
-  datasets: table_search_config,
-  programs: program_search_config,
-  crsos: crso_search_config,
-} = require('./search_configs.js');
-
-const {trivial_text_maker} = require('../models/text.js');
-const { reactAdapter } = require('../core/reactAdapter.js');
-const classNames = require('classnames');
+  orgs_with_data_with_gov, 
+  all_orgs_with_gov, 
+  how_we_help as hwh_search_config, 
+  glossary_lite as glossary_lite_search_config, 
+  gocos as goco_search_config, 
+  datasets as table_search_config, 
+  programs as program_search_config, 
+  crsos as crso_search_config,
+} from './search_configs.js';
+import { reactAdapter } from '../core/reactAdapter.js';
+import classNames from 'classnames';
+import { trivial_text_maker } from '../models/text.js';
 
 const search_template = ({search_text, large})=> (
   `
@@ -310,7 +305,7 @@ function everythingSearch(container, options={}){
   });
 }
 
-module.exports = exports = { 
+export { 
   autoComplete, 
   deptSearch,
   everythingSearch,

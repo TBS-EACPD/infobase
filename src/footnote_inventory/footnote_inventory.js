@@ -1,14 +1,13 @@
-const ROUTER = require('../core/router.js');
-const { reactAdapter } = require('../core/reactAdapter.js');
-const FootnoteModel = require('../models/footnotes.js');
-const { PanelGraph } = require('../core/PanelGraph.js');
-
-const {
-  Select,
-  TwoLevelSelect,
+import ROUTER from '../core/router.js';
+import { reactAdapter } from '../core/reactAdapter.js';
+import FootnoteModel from '../models/footnotes.js';
+import { PanelGraph } from '../core/PanelGraph.js';
+import { 
+  Select, 
+  TwoLevelSelect, 
   FancyUL,
-} = require('../util_components.js');
-const classNames = require('classnames');
+} from '../util_components.js';
+import classNames from 'classnames';
 
 const link_to_graph_inventory = ( graph_key, level ) => `#graph/${level}/${graph_key}`;
 

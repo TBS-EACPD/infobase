@@ -6,8 +6,6 @@ import { Provider, connect } from 'react-redux';
 import { StandardRouteContainer } from '../core/NavComponents';
 import { infograph_href_template } from '../link_utils.js';
 import { sources } from '../metadata/data_sources.js';
-
-
 import {
   SpinnerWrapper,
   FootnoteList,
@@ -16,12 +14,9 @@ import {
   RadioButtons,
   LabeledBox,
 } from '../util_components.js';
-
 import { 
   get_root,
 } from '../gen_expl/hierarchy_tools.js';
-
-
 import {
   get_memoized_funcs,
   initial_root_state,
@@ -29,17 +24,13 @@ import {
   map_state_to_root_props_from_memoized_funcs,
   map_dispatch_to_root_props,
 } from '../gen_expl/state_and_memoizing';
-
 import { ensure_loaded } from '../core/lazy_loader.js';
 import { Explorer } from '../components/ExplorerComponents.js';
-
-
 import {
   estimates_diff_scheme,
   col_defs,
   initial_state as initial_scheme_state,
 } from './scheme.js';
-
 
 export class EstimatesComparison extends React.Component {
   constructor(){

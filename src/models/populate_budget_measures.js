@@ -1,6 +1,8 @@
 import { get_static_url } from '../core/static_url.js';
-import { BudgetMeasure } from './subject';
 import { fetch_and_inflate } from '../core/utils.js';
+import { Subject } from './subject';
+
+const { BudgetMeasure } = Subject;
 
 const parse_csv_string = csv_string => _.tail( d3.csvParseRows( _.trim(csv_string) ) );
 

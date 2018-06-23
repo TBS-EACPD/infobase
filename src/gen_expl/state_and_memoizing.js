@@ -1,13 +1,11 @@
-const { createSelector } = require('reselect');
-
-const {
-  filter_hierarchy,
-  toggleExpandedFlat,
-  ensureVisibility,
+import { createSelector } from 'reselect';
+import { 
+  filter_hierarchy, 
+  toggleExpandedFlat, 
+  ensureVisibility, 
   sort_hierarchy,
-} = require('./hierarchy_tools.js');
-
-const { substr_search_generator } = require('./search_tools.js');
+} from './hierarchy_tools.js';
+import { substr_search_generator } from './search_tools.js';
 
 const initial_root_state = {
   scheme_key : 'results',
@@ -16,7 +14,6 @@ const initial_root_state = {
   userExpanded: [],
   userCollapsed: [],
 };
-   
 
 function root_reducer(state=initial_root_state, action){
   const {
@@ -345,10 +342,11 @@ function get_memoized_funcs(schemes){
   
 
 }
-module.exports = exports = {
+
+export  {
   initial_root_state,
   root_reducer,
   map_dispatch_to_root_props,
   map_state_to_root_props_from_memoized_funcs,
   get_memoized_funcs,
-}
+};

@@ -1,17 +1,22 @@
-const {mix} = require('../generalUtils.js');
-const { staticStoreMixin, PluralSingular, SubjectMixin } = require('./staticStoreMixin.js');
-const { trivial_text_maker } = require("./text");
+import { mix } from '../generalUtils.js';
+import { 
+  staticStoreMixin, 
+  PluralSingular, 
+  SubjectMixin,
+} from './staticStoreMixin.js';
+import { trivial_text_maker } from '../models/text.js';
 
 const common = () => mix().with(staticStoreMixin, PluralSingular, SubjectMixin);
-const Subject = window._Subject =  module.exports = exports;
 
 const gov_name = ( 
   window.lang === 'en' ? 
   "Government" : 
   "Gouvernement" 
-); 
+);
 
-Subject.gov = Subject.Gov = {
+const Subject = {};
+
+Subject.Gov = {
   constructor : {
     type_name : 'gov',
   },
@@ -42,7 +47,7 @@ Subject.gov = Subject.Gov = {
 //  static get plural(){ return trivial_text_maker("mandate_commitments");}
 //};
 
-class Ministry extends common(){
+Subject.Ministry = class Ministry extends common(){
   static get type_name() { return 'ministry'; }
   static get singular(){ return trivial_text_maker("ministry") }
   static get plural(){ return trivial_text_maker("ministries")}
@@ -61,7 +66,7 @@ class Ministry extends common(){
   }
 };
 
-class Dept extends common(){
+Subject.Dept = class Dept extends common(){
   static lookup(org_id){
     return super.lookup(
       _.isNaN(+org_id) ?
@@ -234,7 +239,7 @@ class Dept extends common(){
 }
 
 const tag_roots = [];
-class Tag extends common(){
+Subject.Tag = class Tag extends common(){
   static get tag_roots(){ 
     return _.chain(tag_roots)
       .map(tag_root => [ tag_root.id, tag_root ] )
@@ -354,7 +359,7 @@ class Tag extends common(){
   }
 };
 
-class CRSO extends common(){
+Subject.CRSO = class CRSO extends common(){
   static get singular(){ return trivial_text_maker("");}
   static get plural(){ return trivial_text_maker(""); }
   static get type_name() { return 'crso'; }
@@ -408,12 +413,12 @@ class CRSO extends common(){
   }
 };
 
-class Program extends common(){
+Subject.Program = class Program extends common(){
   static get type_name(){ return 'program'; }
   static get singular(){ return trivial_text_maker("program") }
   static get plural(){ return trivial_text_maker("programs") }
   static unique_id(dept, activity_code) { //dept can be an object, an acronym or a dept unique_id.
-    const dept_acr = _.isObject(dept) ? dept.acronym : Dept.lookup(dept).acronym;
+    const dept_acr = _.isObject(dept) ? dept.acronym : Subject.Dept.lookup(dept).acronym;
     return `${dept_acr}-${activity_code}`;
   }
   static get_from_activity_code(dept_code , activity_code){
@@ -457,7 +462,7 @@ class Program extends common(){
 
 
 //Currently doesnt do anything, not even link to other departments
-class Minister extends common(){
+Subject.Minister = class Minister extends common(){
   static get type_name() { return 'minister'; }
   static get singular(){ return trivial_text_maker("minister") }
   static get plural(){ return trivial_text_maker("minister")}
@@ -476,7 +481,7 @@ class Minister extends common(){
 };
 
 
-class InstForm extends common(){
+Subject.InstForm = class InstForm extends common(){
   static grandparent_forms(){
     return _.filter(
       this.get_all(), 
@@ -522,7 +527,7 @@ class InstForm extends common(){
   }
 }
 
-class BudgetMeasure extends common(){
+Subject.BudgetMeasure = class BudgetMeasure extends common(){
   static get type_name(){ return 'budget_measure'; }
   static get singular(){ return trivial_text_maker("budget_measure"); }
   static get plural(){ return trivial_text_maker("budget_measures"); }
@@ -574,21 +579,22 @@ class BudgetMeasure extends common(){
   }
 };
 
-function get_by_guid(guid){
+Subject.get_by_guid = function get_by_guid(guid){
   if(!_.isString(guid)){ return null; }
   let [model_type, model_id] = guid.split('_');
   return Subject[model_type] && Subject[model_type].lookup(model_id);
 }
 
+// Duplicate keys in all lower case, for legacy reasons
+_.each(Subject, (subject_item, key) => {
+  const lower_case_key = _.toLower(key);
+  if ( _.chain(Subject).keys().indexOf(lower_case_key).value() === -1 ){
+    Subject[lower_case_key] = subject_item;
+  }
+});
 
 
+window._Subject = Subject;
 
-Subject.get_by_guid = get_by_guid;
-Subject.CRSO = Subject.crso = CRSO;
-Subject.Dept = Subject.dept = Dept;
-Subject.Ministry = Subject.ministry = Ministry;
-Subject.Tag = Subject.tag = Tag;
-Subject.Program =  Subject.program = Program;
-Subject.InstForm = Subject.instform = InstForm;
-Subject.Minister = Subject.minister = Minister;
-Subject.BudgetMeasure = BudgetMeasure;
+export { Subject };
+

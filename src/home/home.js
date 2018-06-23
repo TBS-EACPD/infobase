@@ -15,16 +15,13 @@ import {
 } from '../util_components.js';
 
 import { general_href_for_item } from '../link_utils.js';
-import { create_text_maker } from '../models/text.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
 import { ResultCounts } from '../models/results.js';
 import { Table } from '../core/TableClass.js';
-
+import { create_text_maker } from '../models/text.js';
 import { StandardRouteContainer } from '../core/NavComponents.js';
 
-
 const home_tm = create_text_maker(home_text_bundle);
-
 const TM = props => <StandardTM tmf={home_tm} {...props} />;
 
 export class Home extends React.Component {

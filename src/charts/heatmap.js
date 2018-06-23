@@ -1,5 +1,4 @@
-"use strict";
-var common_charts_utils = require('./common_charts_utils');
+import common_charts_utils from './common_charts_utils';
 
 var heatmap = function(container,options){
 
@@ -223,5 +222,5 @@ heatmap.prototype.render = function(options){
 };
 
 
-exports = module.exports;
-module.exports.heatmap= heatmap;
+
+export { heatmap };

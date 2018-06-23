@@ -1,15 +1,10 @@
-const { Fragment } = require('react');
-const classNames = require('classnames');
-const {
-  trivial_text_maker,
-  util_components: {
-    TextMaker,
-    TM,
-    Format,
-    HeightClipper,
-  },
-} = require('../shared.js');
-const { result_statuses, result_simple_statuses } = require('../../models/businessConstants.js');
+import { Fragment } from 'react';
+import classNames from 'classnames';
+import { trivial_text_maker, util_components } from '../shared.js';
+import { businessConstants } from '../../models/businessConstants.js';
+
+const { result_statuses, result_simple_statuses } = businessConstants;
+const { TextMaker, TM, Format, HeightClipper } = util_components;
 
 /* to be used with planned targets and actual result */
 const IndicatorResultDisplay = ({
@@ -363,12 +358,13 @@ function indicators_period_span_str(indicators){
     .value()
 }
 
+const IndicatorDisplay = IndicatorList;
 
-module.exports = exports = {
-  IndicatorDisplay: IndicatorList,
+export {
+  IndicatorDisplay,
   QuadrantDefList,
   status_icons,
   indicators_period_span_str,
   StatusIconTable,
   InlineStatusIconList,
-} 
+}; 

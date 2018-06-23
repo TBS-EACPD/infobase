@@ -1,53 +1,26 @@
-const {default: withRouter} =  require('react-router/withRouter');
-const {formats} = require('./core/format.js');
-const classNames = require('classnames');
-const { 
-  deptSearch, 
-  everythingSearch,
-} = require('./search/search.js');
-
-const { 
-  run_template,
-  trivial_text_maker,
-} = require('./models/text.js');
+import { default as withRouter } from 'react-router/withRouter';
+import classNames from 'classnames';
+import { deptSearch, everythingSearch } from './search/search.js';
+import { run_template, trivial_text_maker } from './models/text.js';
+import { formats } from './core/format.js';
 
 // Import utility components from the ./components directory, to be re-exported here for easy requiring in the InfoBase
-const {
-  FirstChild,
-  AccordionEnterExit,
-  StatelessPullDownAccordion,
-  AutoAccordion,
-} = require('./components/Accordions.js');
-
-const { HeightClipper } = require('./components/HeightClipper.js');
-
-const { RadioButtons } = require('./components/RadioButtons.js');
-
-const { Select } = require('./components/Select.js');
-
-const { SortIndicators } = require('./components/SortIndicators.js');
-
-const { TabbedContent } = require('./components/TabbedContent.js');
-
-const { LabeledBox } = require('./components/LabeledBox.js');
-
-const { 
-  TextMaker,
-  TM,
-} = require('./components/TextMaker.js');
-
-const { TwoLevelSelect } = require('./components/TwoLevelSelect.js');
-
-const { CardTopImage } = require('./components/CardTopImage.js');
-const { CardLeftImage } = require('./components/CardLeftImage.js');
-const { CardCenteredImage } = require('./components/CardCenteredImage.js');
-const { CardBackgroundImage } = require('./components/CardBackgroundImage.js');
-
-const { DebouncedTextInput } = require('./components/DebouncedTextInput.js');
-
-const { ContainerEscapeHatch } = require('./components/ContainerEscapeHatch.js');
-
-const { abbrev } = require('./core/utils.js'); 
+import { FirstChild, AccordionEnterExit, StatelessPullDownAccordion, AutoAccordion } from './components/Accordions.js';
+import { HeightClipper } from './components/HeightClipper.js';
+import { RadioButtons } from './components/RadioButtons.js';
+import { Select } from './components/Select.js';
+import { SortIndicators } from './components/SortIndicators.js';
+import { TabbedContent } from './components/TabbedContent.js';
+import { LabeledBox } from './components/LabeledBox.js';
+import { TextMaker, TM } from './components/TextMaker.js';
+import { TwoLevelSelect } from './components/TwoLevelSelect.js';
+import { CardTopImage } from './components/CardTopImage.js';
+import { CardLeftImage } from './components/CardLeftImage.js';
+import { CardCenteredImage } from './components/CardCenteredImage.js';
+import { CardBackgroundImage } from './components/CardBackgroundImage.js';
+import { DebouncedTextInput } from './components/DebouncedTextInput.js';
+import { ContainerEscapeHatch } from './components/ContainerEscapeHatch.js';
+import { abbrev } from './core/utils.js';
 
 
 
@@ -122,7 +95,7 @@ const Abbrev = ({text,len}) => <span dangerouslySetInnerHTML={{__html: abbrev(te
 const TrivialTM = props => <TM tmf={trivial_text_maker} {...props} />;
 const TrivialTextMaker = props => <TextMaker text_maker_func={trivial_text_maker} {...props} />;
 
-module.exports = {
+export {
   FirstChild,
   AccordionEnterExit,
   StatelessPullDownAccordion,
@@ -153,4 +126,4 @@ module.exports = {
   DebouncedTextInput,
   ContainerEscapeHatch,
   Abbrev,
-}
+};

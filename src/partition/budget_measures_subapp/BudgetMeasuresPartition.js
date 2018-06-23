@@ -1,19 +1,14 @@
 import './BudgetMeasuresPartition.scss';
-
 import { PartitionDiagram } from '../partition_diagram/PartitionDiagram.js';
-import { formats } from '../../core/format.js';
 import { text_maker } from "./budget_measure_text_provider.js";
-
 import { budget_measures_hierarchy_factory } from './budget_measures_hierarchy_factory.js';
-
 import { ContainerEscapeHatch } from '../../util_components';
-
-import * as Subject from '../../models/subject';
+import { Subject } from '../../models/subject';
 import * as businessConstants from '../../models/businessConstants.yaml';
+import { formats } from '../../core/format.js';
 
 const { budget_chapters } = businessConstants;
 const { BudgetMeasure } = Subject;
-
 const year = text_maker("budget_route_year");
 
 const formatter = node => {

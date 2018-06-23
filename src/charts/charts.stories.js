@@ -68,7 +68,7 @@ const fail_now = { color: 'red', className: "fas fa-times"  },
       pass_now = { color: "green", className: "fas fa-check" },
       fail_future = { color: "orange", className: "fas fa-clock"  },
       pass_future = { color: "green", className: "fas fa-clock" },
-      question_now = { color: "#aaa", className="far fa-question-circle" };
+      question_now = { color: "#aaa", className: "far fa-question-circle" };
 
 const order = [ pass_now, fail_now, pass_future, fail_future ];
 

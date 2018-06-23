@@ -1,6 +1,7 @@
-const common_charts_utils = require("./common_charts_utils");
+import common_charts_utils from './common_charts_utils.js';
+import { make_unique } from '../core/charts_index.js';
 
-export const navigate_class = "navigate_packing";
+const navigate_class = "navigate_packing";
 
 var _setup_events = function(container){
   d3.select(container).on("click."+navigate_class, function(d){
@@ -142,7 +143,7 @@ export function soften_spread(data,attr = "value",p = 0.005){
   return data;
 };
 
-export class pack { 
+export class Pack { 
   constructor(container,options){
     _setup_events(container.node());
     // ```
@@ -340,7 +341,7 @@ export class pack {
       this.nodes = this.pack(root).descendants();
 
       // assign a unique id to each node
-      _.each(this.nodes, n => n.rid = common_charts_utils.make_unique() );
+      _.each(this.nodes, n => n.rid = make_unique() );
     }
 
     this.translate = [(this.outside_width - this.radius)/2,10];

@@ -1,8 +1,9 @@
-const {mix} = require('../generalUtils');
-const {staticStoreMixin} = require('./staticStoreMixin');
+import { mix } from '../generalUtils';
+import { staticStoreMixin } from './staticStoreMixin';
 
 const footnotes_by_id = {};
-module.exports = exports = class FootNote extends mix().with(staticStoreMixin){  
+
+export default class FootNote extends mix().with(staticStoreMixin){  
   static create_and_register(def){
     const {id} = def;
     if(footnotes_by_id[id]){
@@ -54,4 +55,5 @@ module.exports = exports = class FootNote extends mix().with(staticStoreMixin){
     Object.assign(this,def);
   }
 };
-window._footnotes = exports;
+
+window._footnotes = FootNote;

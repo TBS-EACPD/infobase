@@ -6,11 +6,10 @@ import {
   TM as StdTM,
 } from '../util_components.js';
 import { Details } from '../components/Details.js';
-import {create_text_maker} from '../models/text.js';
+import { create_text_maker } from '../models/text.js';
 
 const text_maker = create_text_maker(text);
 const TM = props => <StdTM tmf={text_maker} {...props} />;
-
 
 const PanelSource = ({links}) => {
   if(_.isEmpty(links)){

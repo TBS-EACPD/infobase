@@ -1,20 +1,16 @@
-exports = module.exports;
-const text = require("./table12.yaml");
+import text from './table12.yaml';
+
 // see [here](../table_definition.html) for description
 // of the table spec
 //
 
 
-const {
-  STATS, 
-  Subject : {Program, Gov},
-  trivial_text_maker, 
-  m, 
-  Statistics, 
-  years : { std_years, planning_years},
-} = require("../table_common");
+import { stats, Subject, trivial_text_maker, m, Statistics, years } from '../table_common';
 
-module.exports = {
+const { std_years, planning_years } = years;
+const { Program, Gov } = Subject;
+
+export default {
   text,
   "id": "table12",
   subject_type:"program",
@@ -197,7 +193,7 @@ module.exports = {
         .value();
     },
   },
-}
+};
 
 Statistics.create_and_register({
   id: 'table12_program_info', 
@@ -206,8 +202,8 @@ Statistics.create_and_register({
   compute: (subject, tables, infos, add, c) => {
     const table = tables.table12;
     const row = _.first(table.programs.get(subject))
-    STATS.add_all_years(add,"fte",std_years, (year,i) => row[year] );
-    STATS.add_all_years(add,"fte",planning_years, (year,i) => row[year] );
+    stats.add_all_years(add,"fte",std_years, (year,i) => row[year] );
+    stats.add_all_years(add,"fte",planning_years, (year,i) => row[year] );
   },
 });
 
@@ -219,11 +215,11 @@ Statistics.create_and_register({
     const table = tables.table12;
     const q = table.q(subject);
     c.dept = subject;
-    STATS.add_all_years(add,"fte",planning_years, (year,i) => q.sum(year) );
+    stats.add_all_years(add,"fte",planning_years, (year,i) => q.sum(year) );
     const planned_fte_avg = c.dept_fte_average;
     add("planned_fte_average", planned_fte_avg);
 
-    STATS.add_all_years(add,"fte",std_years, (year,i) => q.sum(year) );
+    stats.add_all_years(add,"fte",std_years, (year,i) => q.sum(year) );
     const hist_fte_avg = c.dept_fte_average;
     add("hist_fte_average", hist_fte_avg);
 
@@ -235,10 +231,10 @@ Statistics.create_and_register({
     //                            .map(function(vals, key){ return [key].concat(vals);})
     //                            .value();
     //var all_programs = q.sorted_programs(years_exp);
-    //STATS.year_over_year_multi_stats(add, "planed_exp_prgm", all_programs);
-    //STATS.year_over_year_multi_stats(add,"planned_exp_outcomes",all_years_outcomes);
-    //STATS.year_over_year_multi_stats(add,"planned_exp_spend_areas",all_years_spend_areas);
-    //STATS.add_all_years(add,"planned_exp",years_exp,function(year,i){ return  q.sum(year); });
+    //stats.year_over_year_multi_stats(add, "planed_exp_prgm", all_programs);
+    //stats.year_over_year_multi_stats(add,"planned_exp_outcomes",all_years_outcomes);
+    //stats.year_over_year_multi_stats(add,"planned_exp_spend_areas",all_years_spend_areas);
+    //stats.add_all_years(add,"planned_exp",years_exp,function(year,i){ return  q.sum(year); });
     //
     //// FTE
     //var _add = add;
@@ -257,9 +253,9 @@ Statistics.create_and_register({
     //                            .value();
     //all_programs = q.sorted_programs(years_fte);
     //add("planned_fte_avg", d3.sum(q.sum(years_fte, {as_object: false}))/years_fte.length );
-    //STATS.year_over_year_multi_stats(add, "planed_fte_prgm", all_programs);
-    //STATS.year_over_year_multi_stats(add,"planned_fte_outcomes",all_years_outcomes_ftes);
-    //STATS.year_over_year_multi_stats(add,"planned_fte_spend_areas",all_years_spend_areas_ftes);
+    //stats.year_over_year_multi_stats(add, "planed_fte_prgm", all_programs);
+    //stats.year_over_year_multi_stats(add,"planned_fte_outcomes",all_years_outcomes_ftes);
+    //stats.year_over_year_multi_stats(add,"planned_fte_spend_areas",all_years_spend_areas_ftes);
   },
 });
 
@@ -271,11 +267,11 @@ Statistics.create_and_register({
   compute: (subject, tables, infos, add, c) => {
     const table = tables.table12;
     const q = table.q(subject);
-    STATS.add_all_years(add,"fte",std_years, (year,i) => q.sum(year));
+    stats.add_all_years(add,"fte",std_years, (year,i) => q.sum(year));
     const hist_fte_avg = c.tag_fte_average;
     add("hist_fte_average", hist_fte_avg);
 
-    STATS.add_all_years(add,"fte",planning_years, (year,i) => q.sum(year) );
+    stats.add_all_years(add,"fte",planning_years, (year,i) => q.sum(year) );
     const planned_fte_avg = c.tag_fte_average;
     add("planned_fte_average", planned_fte_avg);
   },
@@ -290,11 +286,11 @@ Statistics.create_and_register({
     const table = tables.table12;
     const q = table.q(Gov);
     
-    STATS.add_all_years(add,"fte",planning_years, (year,i) => q.sum(year) );
+    stats.add_all_years(add,"fte",planning_years, (year,i) => q.sum(year) );
     const planned_fte_average = c.gov_fte_average;
     add("planned_fte_average", planned_fte_average);
 
-    STATS.add_all_years(add,"fte",std_years, (year,i) => q.sum(year) );
+    stats.add_all_years(add,"fte",std_years, (year,i) => q.sum(year) );
     const hist_fte_avg = c.gov_fte_average;
     add("hist_fte_average", hist_fte_avg);
 
@@ -340,11 +336,11 @@ Statistics.create_and_register({
     //);
       
     
-    //STATS.add_all_years(add,"",years_exp,function(year,i){ 
+    //stats.add_all_years(add,"",years_exp,function(year,i){ 
     //  return  q.sum(year) + planned_spending_stub_total[i]; 
     //});
-    //STATS.year_over_year_multi_stats(add,"planned_exp_outcomes",all_years_outcomes);
-    //STATS.year_over_year_multi_stats(add,"planned_exp_spend_areas",all_years_spend_areas);
+    //stats.year_over_year_multi_stats(add,"planned_exp_outcomes",all_years_outcomes);
+    //stats.year_over_year_multi_stats(add,"planned_exp_spend_areas",all_years_spend_areas);
     //const all_years_spend_areas_obj = (
     //  _.chain(all_years_spend_areas)
     //    .map(row => [_.head(row),_.tail(row)] )
@@ -376,12 +372,12 @@ Statistics.create_and_register({
     //const all_years_spend_areas_ftes = _.chain( table.gov_goco(years_fte,false) )
     //                            .map(function(vals, key){ return [key].concat(vals);})
     //                            .value();
-    //STATS.add_all_years(add,"planned_fte",years_fte,function(year,i){
+    //stats.add_all_years(add,"planned_fte",years_fte,function(year,i){
     //add("planned_fte_avg", d3.sum(q.sum(years_fte, {as_object: false}))/years_fte.length );
     //  return  q.sum(year);
     //});
-    //STATS.year_over_year_multi_stats(add,"planned_fte_outcomes",all_years_outcomes_ftes);
-    //STATS.year_over_year_multi_stats(add,"planned_fte_spend_areas",all_years_spend_areas_ftes);
+    //stats.year_over_year_multi_stats(add,"planned_fte_outcomes",all_years_outcomes_ftes);
+    //stats.year_over_year_multi_stats(add,"planned_fte_spend_areas",all_years_spend_areas_ftes);
   },
 });
 
@@ -409,11 +405,11 @@ Statistics.create_and_register({
       {zip: true, sort_col: min_planning_yr}
     );
 
-    STATS.one_year_top3(add, "fte_prg", sorted_first_yr);
+    stats.one_year_top3(add, "fte_prg", sorted_first_yr);
 
-    STATS.add_all_years(add,"fte", std_years, (year,i) => q.sum(year));
+    stats.add_all_years(add,"fte", std_years, (year,i) => q.sum(year));
 
-    STATS.add_all_years(add,"fte", planning_years, (year,i) => q.sum(year)); 
+    stats.add_all_years(add,"fte", planning_years, (year,i) => q.sum(year)); 
     add("planned_fte_average", c.crso_fte_average);
 
   },

@@ -96,9 +96,9 @@ function log_page_view(page){
   ga('send', 'pageview');
 }
 
-module.exports = {
+export {
   log_standard_event,
   log_page_view,
   initialize_analytics,
   dimensions,
-}
+};

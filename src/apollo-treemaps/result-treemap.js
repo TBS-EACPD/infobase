@@ -1,9 +1,7 @@
 import '../gen_expl/explorer-styles.scss';
 import gql from 'graphql-tag';
-import { text_maker } from '../models/text.js';
-
+import * as text_maker from '../models/text.js';
 import { LoadingHoc } from '../graphql_utils.js';
-
 import {
   filter_hierarchy,
   convert_d3_hierarchy_to_explorer_hierarchy,

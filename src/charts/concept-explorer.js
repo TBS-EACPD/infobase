@@ -1,7 +1,4 @@
-"use strict";
-exports = module.exports;
-
-var common_charts_utils = require('./common_charts_utils');
+import common_charts_utils from './common_charts_utils';
 
 var base_colour =  'rgba(49,91,126,0.5)' ;
 var hover_colour = 'rgba(49,91,126,1)';
@@ -10,7 +7,7 @@ var soft_selected_color = "rgba(48,149,180,0.3)";
 var selected_colour = "rgb(48,149,180)";
 var found_colour = '#fcf8e3';
 
-exports.concept_explorer = class concept_explorer {
+export class ConceptExplorer {
   
   constructor(container,options){
    
@@ -641,4 +638,4 @@ exports.concept_explorer = class concept_explorer {
           });
       });
   };
-}
+};

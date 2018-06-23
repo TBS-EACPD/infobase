@@ -1,4 +1,4 @@
-const { trivial_text_maker } = require('../models/text.js');
+import { trivial_text_maker } from '../models/text.js';
 
 // I think eslint is wrong here
 /* disable-eslint react/jsx-no-danger-children */
@@ -14,7 +14,7 @@ const TextMaker = ({text_maker_func, text_key, el, args, template_str}) => {
 //shorthand for the above
 const TM = ({k, el, args, tmf}) => <TextMaker text_key={k} el={el} args={args}  text_maker_func={tmf}/>;
 
-module.exports = exports = {
+export {
   TextMaker,
   TM,
-}
+};

@@ -1,6 +1,5 @@
-"use strict";
-const FORMAT = require('../format');
-const Subject = require("../../models/subject");
+import * as FORMAT from '../format';
+import { Subject } from '../../models/subject';
 
 // #Queries
 // This module exists to  provides a common interface for querying
@@ -9,7 +8,7 @@ const Subject = require("../../models/subject");
 //      access layer to do things like sum a certain column,
 //      find a row from key values, etc..
 //
-  
+
 
 //<div id='queries'></div>
 // `queries` object is used
@@ -291,6 +290,6 @@ function query_adapter(subject){
   // subject is not defined, therefore, a query object
   // is created for all the data attached to this table
   return new Queries(this,this.data);
-};
+}
 
-exports = module.exports = { query_adapter };
+export { query_adapter };

@@ -1,6 +1,6 @@
 import {
   PanelGraph,
-  business_constants,
+  businessConstants,
   years,
   formats,
   util_components,
@@ -15,7 +15,7 @@ const {
   GraphLegend,
   A11YTable,
 } = declarative_charts;
-const { sos } = business_constants;
+const { sos } = businessConstants;
 const { std_years } = years;
 const { Format } = util_components;
 

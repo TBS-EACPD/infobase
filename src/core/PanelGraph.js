@@ -1,10 +1,10 @@
-const {Table} = require('./TableClass.js');
-const { get_info } = require('./Statistics.js');
-const Subject = require('../models/subject.js');
+import { Table } from './TableClass.js';
+import { get_info, tables_for_statistics } from './Statistics.js';
+import { Subject } from '../models/subject.js';
+import FootNote from '../models/footnotes.js';
+import { rpb_link, get_appropriate_rpb_subject } from '../rpb/rpb_link.js';
+
 const subjects = _.keys(Subject);
-const FootNote = require('../models/footnotes.js');
-const { tables_for_statistics } = require('./Statistics.js');
-const { rpb_link, get_appropriate_rpb_subject } = require('../rpb/rpb_link.js');
 
 const graphs = {}
 const create_graph_key = (key,level) => `${key}:${level}`;
@@ -233,16 +233,14 @@ function tables_for_graph( graph_key, subject_level  ){
     .uniqBy()
     .value();
 }
-  
 
+const layout_types = { full: 'full', half: 'half' };
 
-exports = module.exports = {
-  layout_types : {
-    full : "full",
-    half : "half",
-  },
+export {
+  layout_types,
   PanelGraph,
   graphs_with_key,
   tables_for_graph,  
-}
+};
+
 window._PanelGraph = PanelGraph;

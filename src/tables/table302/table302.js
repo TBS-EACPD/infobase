@@ -1,16 +1,16 @@
 import text from "./table302.yaml";
 
 import {
-  STATS, 
+  stats, 
   trivial_text_maker, 
   m, 
   Statistics, 
   people_five_year_percentage_formula,
-  business_constants,
+  businessConstants,
   years,
 } from "../table_common";
 
-const { gender } = business_constants;
+const { gender } = businessConstants;
 const {
   people_years,
   people_years_short_second,
@@ -128,7 +128,7 @@ Statistics.create_and_register({
     const all_years_filtered = _.filter(all_years, d => ( (d[0] !== gender.na.text) && (d[0] !== gender.sup.text) ));
     
     if (all_years_filtered.length >= 1) {
-      STATS.year_over_year_multi_stats_active_years(add,"head_count_gender",all_years_filtered,false,people_years);
+      stats.year_over_year_multi_stats_active_years(add,"head_count_gender",all_years_filtered,false,people_years);
                          
       const avg_percent_shares = _.map(all_years_filtered, d => d3.sum(_.tail(d))/five_year_total);
       
@@ -138,7 +138,7 @@ Statistics.create_and_register({
       add("head_count_gender_bottom_avg_percent_NA_included", _.min(avg_percent_shares));
     } else {
       // To avoid missing_info errors when all data is na or sup, add info using non-filtered data instead
-      STATS.year_over_year_multi_stats_active_years(add,"head_count_gender",all_years,false,people_years);                     
+      stats.year_over_year_multi_stats_active_years(add,"head_count_gender",all_years,false,people_years);                     
       const avg_percent_shares = _.map(all_years, d => d3.sum(_.tail(d))/five_year_total);
       add("head_count_gender_single_type_flag", (avg_percent_shares.length <= 1)); // Flag to switch text between only showing the tip, or showing both the top and bottom percent shares
       add("head_count_gender_top_avg_percent_NA_included", _.max(avg_percent_shares));
@@ -159,7 +159,7 @@ Statistics.create_and_register({
     // Also filter out suppressed (only for gov level stats)
     const all_years = _.filter(q.gov_grouping(), d => ( (d[0] !== gender.na.text) && (d[0] !== gender.sup.text) )); 
 
-    STATS.year_over_year_multi_stats_active_years(add,"head_count_gender",all_years,false,people_years);
+    stats.year_over_year_multi_stats_active_years(add,"head_count_gender",all_years,false,people_years);
     
     const five_year_total = d3.sum(q.sum(people_years, {as_object: false}));
    

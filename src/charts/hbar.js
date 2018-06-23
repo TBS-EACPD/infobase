@@ -1,10 +1,6 @@
-"use strict";
-exports = module.exports;
+import common_charts_utils from './common_charts_utils';
 
-var common_charts_utils = require('./common_charts_utils');
-
-
-exports.hbar = class hbar {
+export class HBar {
   
   constructor(container,options){
 
@@ -245,4 +241,4 @@ exports.hbar = class hbar {
         .attr("width", d3.max(x_scale.range()));
     });
   };
-}
+};

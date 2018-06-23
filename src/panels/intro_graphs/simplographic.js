@@ -1,25 +1,16 @@
-const simplographic_text = require("./simplographic.yaml");
-const {
-  Subject: {
-    Gov,
-    Dept,
-  },
-  create_text_maker,
-  PanelGraph,
-  util_components: {
-    TM: StandardTM,
-  },
+import simplographic_text from './simplographic.yaml';
+import { 
+  Subject, 
+  create_text_maker, 
+  PanelGraph, 
+  util_components, 
   Panel,
-} = require("../shared");
+} from '../shared';
+import { infograph_href_template, rpb_link } from '../../link_utils.js';
+import { ResultCounts } from '../../models/results.js';
 
-const { 
-  infograph_href_template,
-  rpb_link,
-} = require('../../link_utils.js');
-
-const {
-  ResultCounts,
-} = require('../../models/results.js');
+const { Gov, Dept } = Subject;
+const { TM: StandardTM } = util_components;
 
 const tmf = create_text_maker(simplographic_text);
 const TM = props => <StandardTM tmf={tmf} {...props} />;
