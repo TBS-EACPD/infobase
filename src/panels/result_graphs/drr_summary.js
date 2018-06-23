@@ -51,7 +51,7 @@ const MiniLegend = ({ items }) => (
       display: "flex",
       justifyContent: "flex-start",
       flexWrap: "wrap",
-      fontSize: "0.8em",
+      fontSize: "0.87em",
       marginBottom: "5px",
     }}
   >
@@ -193,12 +193,12 @@ const StatusGrid = props => {
 
   return (
     <div>
-      <div className="h4">
+      <div className="h3">
         <TM k="results_icon_array_title" />
       </div>
       {_.map( to_visualize, ({ viz_data, legend_data, title },ix) => 
         <div key={ix}>
-          <div className="h5">
+          <div className="h4">
             {title}
           </div>
           <MiniLegend items={legend_data}  />
