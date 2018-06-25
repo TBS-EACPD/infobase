@@ -291,13 +291,13 @@ program_welcome_mat_spending_summary:
 tag_welcome_mat_spending_summary:
   transform: [handlebars, markdown]
   en: |
-   In the last five years, the maximum total spending on the tag "**{{subj_name subject}}**"
+   In the last five years, the {{#if subject.is_m2m}}maximum{{/if}} total spending on the tag "**{{subj_name subject}}**"
    {{changed_by  exp_hist_change "fmt_percentage1"  }} 
    and is
    {{will_change_by  exp_plan_change "fmt_percentage1"  }}
    by {{planning_year_3}}.
   fr: |
-   Au cours des cinq derniers exercices, le montant maximal des dépenses relatives à l'étiquette **«{{subj_name subject}}»**
+   Au cours des cinq derniers exercices, le montant {{#if subject.is_m2m}}maximal{{/if}} des dépenses relatives à l'étiquette **«{{subj_name subject}}»**
    {{fr_changed_by  exp_hist_change "m" "p" "fmt_percentage1"  }}. 
    D'ici {{planning_year_3}}, les dépenses prévues
    {{fr_will_change_by  exp_plan_change "f" "p" "fmt_percentage1"  }} 
@@ -305,13 +305,13 @@ tag_welcome_mat_spending_summary:
 tag_welcome_mat_fte_summary:
   transform: [handlebars, markdown]
   en: |
-   Over the same period, the maximum number of {{gl_tt "Full-Time Equivalents (FTEs)" "FTE"}} employed
+   Over the same period, the {{#if subject.is_m2m}}maximum{{/if}} number of {{gl_tt "Full-Time Equivalents (FTEs)" "FTE"}} employed
    {{changed_by  fte_hist_change "fmt_percentage1" }} 
    and is {{will_change_by fte_plan_change "fmt_percentage1"}} by {{planning_year_3}}.
   fr: |
-   Au cours de la même période, le nombre maximum {{gl_tt "d’équivalents temps plein (ETP)" "FTE"}}
+   Au cours de la même période, le nombre {{#if subject.is_m2m}}maximum{{/if}} {{gl_tt "d’équivalents temps plein (ETP)" "FTE"}}
    {{fr_changed_by  fte_hist_change "m" "s" "fmt_percentage1" }}.
-   D'ici {{planning_year_3}}, le nombre maximum d'ETP prévues
+   D'ici {{planning_year_3}}, le nombre {{#if subject.is_m2m}}maximum{{/if}} d'ETP prévues
    {{fr_will_change_by fte_plan_change "m" "s" "fmt_percentage1" }}.
 
 CR_exp_ftes_fte_summary:

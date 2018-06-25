@@ -93,12 +93,13 @@ const Chart = ({
 })
 
 
-const Pane = ({ size, children, is_header }) => (
+const Pane = ({ size, children, is_header, noPadding }) => (
   <div className={`mat-grid__lg-panel${size} mat-grid__sm-panel`}>
     <div 
       className={classNames(
         "welcome-mat-rect",
-        is_header ? "mat-grid__title": "mat-grid__inner-grid"
+        is_header ? "mat-grid__title": "mat-grid__inner-grid",
+        noPadding && "mat-grid__inner-grid--no-padding"
       )}
     >
       { children }
@@ -113,7 +114,7 @@ const PaneItem = ({ hide_a11y, children, textSize, hide_lg }) => (
     className={classNames(
       "mat-grid__inner-panel",
       `mat-grid__inner-panel--${textSize}`,
-      hide_lg && "mat-grid__inner-panel--large-hide"
+      hide_lg && "mat-grid__inner-panel--large-hide",
     )}
   >
     { children }
@@ -245,7 +246,7 @@ const WelcomeMat = (props) => {
             </PaneItem>
           </Pane>,
 
-          <Pane key="d" size={40}>
+          <Pane noPadding key="d" size={40}>
             <Chart 
               use_line
               data={_.take(spend_data,5)}
@@ -273,7 +274,7 @@ const WelcomeMat = (props) => {
             </PaneItem>
           </Pane>,
 
-          <Pane key="d" size={40}>
+          <Pane noPadding key="d" size={40}>
             <Chart 
               use_line
               is_fte
@@ -340,7 +341,7 @@ const WelcomeMat = (props) => {
             </PaneItem>
           </Pane>,
 
-          <Pane key="c" size={40}>
+          <Pane noPadding key="c" size={40}>
             <Chart 
               data={_.takeRight(spend_data, 3)}
               is_light
@@ -369,7 +370,7 @@ const WelcomeMat = (props) => {
             </PaneItem>
           </Pane>,
 
-          <Pane key="c" size={40}>
+          <Pane noPadding key="c" size={40}>
             <Chart  
               data={_.takeRight(fte_data,3)}
               is_fte
@@ -497,7 +498,7 @@ const WelcomeMat = (props) => {
             }
           </Pane>,
 
-          <Pane key="d" size={40}>
+          <Pane noPadding key="d" size={40}>
             <Chart 
               use_line
               data={_.take(spend_data,5)}
@@ -552,12 +553,19 @@ const WelcomeMat = (props) => {
     const { level } = subject;
     let spend_summary_key;
     if(level === "gov"){
-      spend_summary_key = "gov_welcome_mat_spending_summary"
+      spend_summary_key = "gov_welcome_mat_spending_summary";
     } else if(level === "dept"){
-      spend_summary_key = "dept1_welcome_mat_spending_summary"
-    } else {
+      spend_summary_key = "dept1_welcome_mat_spending_summary";
+    } else if(level === "tag"){
+      spend_summary_key = "tag_welcome_mat_spending_summary";
       //TODO... is it possible for programs or CRs to have hist_planned ?
     }
+
+    const fte_summary_key = (
+      level === "tag" ? 
+      "tag_welcome_mat_fte_summary" : 
+      "welcome_mat_fte_summary"
+    );
 
     
 
@@ -610,7 +618,7 @@ const WelcomeMat = (props) => {
             }
           </Pane>,
 
-          <Pane key="d" size={40}>
+          <Pane noPadding key="d" size={40}>
             <Chart 
               use_line 
               data={spend_data}
@@ -658,7 +666,7 @@ const WelcomeMat = (props) => {
             }
           </Pane>,
 
-          <Pane key="d" size={40}>
+          <Pane noPadding key="d" size={40}>
             <Chart 
               use_line 
               data={fte_data}
@@ -666,7 +674,7 @@ const WelcomeMat = (props) => {
             />
           </Pane>,
         ]}
-        text_row={ !is_m2m && [
+        text_row={[
           <Pane key="a" size={50}>
             <PaneItem textSize="small">
               <TM
@@ -682,7 +690,7 @@ const WelcomeMat = (props) => {
           <Pane key="b" size={50}>
             <PaneItem textSize="small">
               <TM
-                k="welcome_mat_fte_summary"
+                k={fte_summary_key}
                 args={{
                   fte_hist_change: hist_fte_diff,
                   fte_plan_change: planned_fte_diff,
