@@ -9,7 +9,7 @@ const financial_link_sel = "#app-focus-root > div > div > section:nth-child(2) >
 
 //then create a test and place your code there
 test('A11Y app boots up', async t => {
-  await t.expect(true).ok(); //TEMPORARILY PASSING ALL TESTS
+  await t
     // Use the assertion to check if the actual header text is equal to the expected one
-    //.expect(Selector(financial_link_sel).innerText).contains("Learn about government finances");
+    .expect(Selector(financial_link_sel).innerText).contains("Learn about government finances");
 });

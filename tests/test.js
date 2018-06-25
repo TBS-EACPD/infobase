@@ -11,7 +11,7 @@ const financial_link_sel = "#app-focus-root > div > div > div.outer-container-es
 
 //then create a test and place your code there
 test('App boots and loads home page data', async t => {
-  await t.expect(true).ok(); //TEMPORARILY PASSING ALL TESTS
+  await t
     // Use the assertion to check if the actual header text is equal to the expected one
-    //.expect(Selector(financial_link_sel).innerText).contains("Transforming");
+    .expect(Selector(financial_link_sel).innerText).contains("Transforming");
 });
