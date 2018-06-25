@@ -56,7 +56,7 @@ jobs:
           key: ib-prod-build-{{ .Branch }}-{{ .Revision }}
       - run: mkdir ${CIRCLE_WORKFLOW_ID}
       - persist_to_workspace:
-          root: ${CIRCLE_WORKFLOW_ID}
+          root: {{ .Environment.CIRCLE_WORKFLOW_ID}}
           paths:
             - ./node_modules
             - ./build
