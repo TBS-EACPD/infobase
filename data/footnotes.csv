@@ -1631,19 +1631,21 @@ Les ministères et organismes doivent indiquer en quoi les activités de program
 
 Remarque: En navigant l'InfoBase, vous remarquerez les références aux termes ""Domaines de travail"" et ""Activités"" pour désigner les secteurs des dépenses et les secteurs d'activités du gouvernement. Ceci est fait à titre indicatif seulement."
 243,"gov","gov","2016-17","","RESULTS_COUNTS","The count of indicators presented in this page includes all programs (excluding internal services) indicators, and where applicable, all sub-programs, sub-sub programs and efficiency indicators.","Le décompte d'indicateurs présenté sur cette page inclus tous les indicateurs de tous les programmes (à l'exception des services internes) et, s'il y a lieu, les indicateurs des sous-programmes, des sous-sous programmes et les indicateurs d'efficience."
-244,"gov","gov","2018-19","2018-19","PLANNED_EXP","Significant changes in planned spending starting in 2018-19 compared to the previous year include: 
-*The new Budget Implementation vote to provide new funding for Budget 2018 initiatives; 
-*The ramping up of spending for Budget 2017 priorities such as innovation, a national housing strategy, early learning and child care; 
-*Funding related to spending announced after Budget 2017, such as the 2018 G7 Summit and support of Canada?s new Defence Policy: Strong, Secure, Engaged; 
-*Increases in major transfer payments, most notably elderly benefits, fiscal equalization and the Canada Health Transfer; 
-*An increase in interest on unmatured debt; and, 
-*An increase in funding for home care and mental health services, as set out in Budget 2017.","Les changements importants apportés aux dépenses prévues à partir de 2017-2018 comparativement à l’année passée comprennent :
-*le crédit d’exécution du budget afin de fournir un nouveau financement pour les initiatives du budget fédéral de 2018;
-*l’augmentation des dépenses pour les priorités du budget fédéral de 2017, comme l’innovation, une stratégie nationale sur le logement, et l’apprentissage et la garde des jeunes enfants;
-*un financement lié aux dépenses annoncées après le dépôt du budget fédéral de 2017, comme celles pour le Sommet du G7 de 2018 et l’appui à la nouvelle politique de défense du Canada : Protection, Sécurité, Engagement; 
-*des augmentations des principaux paiements de transfert, notamment les prestations aux aînés et le Transfert canadien en matière de santé;
-*une augmentation de l’intérêt sur la dette non échue; et,
-*une augmentation du financement pour les soins à domicile et les soins en santé mentale, comme prévu dans le budget fédéral de 2017."
+244,"gov","gov","2018-19","2018-19","PLANNED_EXP","Significant changes in planned spending starting in 2018-19 compared to the previous year include:
+ 
+  * The new Budget Implementation vote to provide new funding for Budget 2018 initiatives
+  * The ramping up of spending for Budget 2017 priorities such as innovation, a national housing strategy, early learning and child care 
+  * Funding related to spending announced after Budget 2017, such as the 2018 G7 Summit and support of Canada's new Defence Policy: Strong, Secure, Engaged
+  * Increases in major transfer payments, most notably elderly benefits, fiscal equalization and the Canada Health Transfer 
+  * An increase in interest on unmatured debt 
+  * An increase in funding for home care and mental health services, as set out in Budget 2017","Les changements importants apportés aux dépenses prévues à partir de 2017-2018 comparativement à l’année passée comprennent :
+
+  * le crédit d’exécution du budget afin de fournir un nouveau financement pour les initiatives du budget fédéral de 2018
+  * l’augmentation des dépenses pour les priorités du budget fédéral de 2017, comme l’innovation, une stratégie nationale sur le logement, et l’apprentissage et la garde des jeunes enfants
+  * un financement lié aux dépenses annoncées après le dépôt du budget fédéral de 2017, comme celles pour le Sommet du G7 de 2018 et l’appui à la nouvelle politique de défense du Canada : Protection, Sécurité, Engagement
+  * des augmentations des principaux paiements de transfert, notamment les prestations aux aînés et le Transfert canadien en matière de santé
+  * une augmentation de l’intérêt sur la dette non échue
+  * une augmentation du financement pour les soins à domicile et les soins en santé mentale, comme prévu dans le budget fédéral de 2017"
 245,"gov","gov","2018-19","2020-21","PLANNED_EXP","Planned expenditures for most organizations are sourced from Departmental Plans. Where [Planned Spending]{{gl ""PLANNED_EXP""}} information is not available (notably for [Parliamentary Entities]{{gl ""PARL_ORG""}}, the Office of the Governor General's Secretary, the Canadian Security Intelligence Service, the Communication Security Establishment, the International Joint Commission (Canadian Section) and most [Crown Corporations]{{gl ""CROWN_SA""}}, **for illustrative purposes only**, the InfoBase presents these organizations 2018-19 Main Estimates figures as being constant across the three planning years.","Pour la plupart des organisations, les données sur les [dépenses prévues]{{gl ""PLANNED_EXP""}} proviennent des plans ministériels. Dans les cas où ces renseignements ne sont pas disponibles (notamment pour les [entités parlementaires]{{gl ""PARL_ORG""}}, le Bureau du Secrétariat du gouverneur général, le Service canadian du renseignement de sécurité, le Centre de la sécurité des télécommunications et la Commission mixte internationale (section canadienne),  ainsi que la plupart des [sociétés d'État]{{gl ""CROWN_SA""}}, l'InfoBase suppose que les dépenses prévues de ces organisations dans leur Budget principal des dépenses de 2018-2019 demeureront constantes pour les trois années de planification prévues. **Ceci est fait à titre indicatif seulement.**"
 246,"program","*","","","PLANNED_EXP, PLANNED_FTE, FTE","To ensure comparability over time, Program name and structure used in the GC InfoBase is sourced from the Public Accounts of Canada which may differ from an organization's Departmental Plan and Departmental Results Report.","Pour assurer la comparabilité au fil du temps, la composition et le nom du programme présenté dans l'InfoBase du GC correspond à celui utilisé dans les Comptes Publics du Canada, pouvant ainsi différer du plan ministériel et du rapport sur les résultats ministériels d'une organisation."
 247,"program","*","2016-17","","RESULTS_COUNTS","The count of indicators presented in this page includes all program indicators, and where applicable, all sub-programs, sub-sub programs and efficiency indicators.","Le décompte d'indicateurs présenté sur cette page inclus tous les indicateurs du programme et, s'il y a lieu, les indicateurs des sous-programmes et des sous-sous programmes compris ainsi que les indicateurs d'efficience."
