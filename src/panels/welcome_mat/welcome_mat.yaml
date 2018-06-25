@@ -164,7 +164,7 @@ spending_will_be_1__new:
 fte_will_be_1__new:
   transform: [handlebars]
   en: FTEs will be employed
-  fr: ETP seront employés<
+  fr: ETP seront employés
 
 fte_was:
   transform: [handlebars]
