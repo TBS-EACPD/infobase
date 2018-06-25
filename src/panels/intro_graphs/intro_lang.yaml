@@ -60,7 +60,7 @@ related_program_structure_title:
 
 dead_program_warning_title:
   en: This Program is no longer active
-  fr: Ce Programme n'est plus actif
+  fr: Ce programme n'est plus actif
 
 dead_crso_warning:
   en: This Core Responsibility is no longer active
@@ -76,7 +76,7 @@ dead_program_warning_text:
 dead_program_warning:
   transform: [handlebars, markdown]
   en: This Program is no longer active; only limited information is available
-  fr: Ce Programme n'est plus actif; les renseignements disponibles sont limités
+  fr: Ce programme n'est plus actif; les renseignements disponibles sont limités
     
 
 
