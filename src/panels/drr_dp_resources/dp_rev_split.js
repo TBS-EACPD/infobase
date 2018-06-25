@@ -62,7 +62,7 @@ _.each(["dept","crso","program"], level => {
       });
 
     },
-    render({calculations, sources, footnotes}){
+    render({calculations, footnotes}){
       const {
         graph_args: data,
         info,
@@ -75,7 +75,6 @@ _.each(["dept","crso","program"], level => {
       return (
         <Panel
           title={text_maker("dp_rev_split_title")}
-          sources={sources}
           footnotes={new_footnotes}
         >
           <div>

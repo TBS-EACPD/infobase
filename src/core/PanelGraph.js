@@ -4,7 +4,7 @@ const Subject = require('../models/subject.js');
 const subjects = _.keys(Subject);
 const FootNote = require('../models/footnotes.js');
 const { tables_for_statistics } = require('./Statistics.js');
-const { rpb_link } = require('../rpb/rpb_link.js');
+const { rpb_link, get_appropriate_rpb_subject } = require('../rpb/rpb_link.js');
 
 const graphs = {}
 const create_graph_key = (key,level) => `${key}:${level}`;
@@ -137,12 +137,7 @@ class PanelGraph {
         .map( table => Table.lookup(table))
         .map( table => {
 
-          let appropriate_subject = subject;
-          if(_.includes(["program","crso"], subject.level)){ //rpb is useless at the crso/program level
-            appropriate_subject = subject.dept;
-          } else if( subject.is('tag') && !table.programs) {
-            appropriate_subject = Subject.Gov
-          }
+          let appropriate_subject = get_appropriate_rpb_subject(subject);
 
           return {
             html: table.name,

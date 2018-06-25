@@ -23,11 +23,20 @@ const {
   D3GraphWithLegend,
 } = declarative_charts;
 
+const {
+  rpb_link,
+  get_appropriate_rpb_subject,
+} = require('../rpb/rpb_link');
+
+
+const { Table } = require('../core/TableClass.js');
+
 const util_components = require('../util_components');
 exports.charts_index = require("../core/charts_index");
 exports.declarative_charts = declarative_charts;
-exports.Table = require('../core/TableClass.js').Table;
-exports.rpb_link = require('../rpb/rpb_link.js').rpb_link;
+exports.Table = Table;
+exports.rpb_link = rpb_link;
+exports.get_appropriate_rpb_subject = get_appropriate_rpb_subject;
 exports.Subject = require("../models/subject");
 exports.formats = formats;
 exports.text_maker = text_maker; 
@@ -331,3 +340,33 @@ exports.PlannedActualTable = ({
 
 
 
+
+
+
+exports.get_planned_spending_source_link = subject => {
+  const appropriate_subject = get_appropriate_rpb_subject(subject);
+  const table = Table.lookup('table6');
+  return {
+    html: table.name,
+    href: rpb_link({
+      subject: appropriate_subject.guid,
+      table: table.id,
+      mode: 'details',
+      columns: ['{{planning_year_1}}'], 
+    }),
+  }
+};
+
+exports.get_planned_fte_source_link = subject => {
+  const appropriate_subject = get_appropriate_rpb_subject(subject);
+  const table = Table.lookup('table12');
+  return {
+    html: table.name,
+    href: rpb_link({
+      subject: appropriate_subject.guid,
+      table: table.id,
+      mode: 'details',
+      columns: ['{{planning_year_1}}'], 
+    }),
+  }
+};

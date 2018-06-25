@@ -3,6 +3,7 @@ import text from './welcome_mat.yaml';
 import { Fragment } from 'react';
 import classNames from 'classnames';
 import {
+  Table,
   Panel,
   formats,
   PanelGraph,
@@ -11,6 +12,10 @@ import {
   declarative_charts,
   create_text_maker,
   util_components,
+  get_planned_fte_source_link,
+  get_planned_spending_source_link,
+  rpb_link,
+  get_appropriate_rpb_subject,
 } from "../shared.js" 
 
 const { Format } = util_components;
@@ -29,6 +34,46 @@ const TM = props => <StdTM tmf={text_maker} {...props} />;
 const SpendFormat = ({amt}) => <Format type="compact1" content={amt} />
 const FteFormat = ({amt}) => <Format type="big_int_real" content={amt} />
 
+const get_estimates_source_link = subject => {
+  const table = Table.lookup('table8');
+  return {
+    html: table.name,
+    href: rpb_link({
+      subject: subject.guid,
+      table: table.id,
+      mode: 'details',
+      columns: ['{{est_in_year}}_estimates'], 
+    }),
+  }
+};
+
+const get_historical_spending_source_link = subject => {
+  const table = Table.lookup('table6');
+  const appropriate_subject = get_appropriate_rpb_subject(subject);
+  return {
+    html: table.name,
+    href: rpb_link({
+      subject: appropriate_subject.guid,
+      table: table.id,
+      mode: 'details',
+      columns: std_years.map(yr => `${yr}_exp`), 
+    }),
+  }
+};
+
+const get_historical_fte_source_link = subject => {
+  const table = Table.lookup('table12');
+  const appropriate_subject = get_appropriate_rpb_subject(subject);
+  return {
+    html: table.name,
+    href: rpb_link({
+      subject: appropriate_subject.guid,
+      table: table.id,
+      mode: 'details',
+      columns: std_years, 
+    }),
+  }
+};
 
 
 const Chart = ({
@@ -674,10 +719,36 @@ function render({calculations, footnotes, sources}){
       .value()
   );
 
+  let sources_override = sources;
+  const { type, calcs } = graph_args;
+  if(type==="planned"){
+    sources_override = [ 
+      get_planned_spending_source_link(subject), 
+      get_planned_fte_source_link(subject),
+    ];
+  } else if(type==="estimates"){
+    sources_override = [ get_estimates_source_link(subject) ];
+  } else if(type==="hist_estimates"){
+    sources_override = [
+      get_estimates_source_link(subject),
+      get_historical_spending_source_link(subject),
+    ];
+  } else if(type==="hist"){
+    sources_override = [ get_historical_spending_source_link(subject) ];
+    if(calcs.fte_data){
+      sources_override.push( get_historical_fte_source_link(subject) );
+    }
+  } else if(type==="hist_planned"){
+    sources_override = [
+      get_planned_fte_source_link(subject),
+      get_planned_spending_source_link(subject),
+    ]
+  }
+
   return (
     <Panel
       title={text_maker("welcome_mat_title")}
-      sources={sources}
+      sources={sources_override}
       footnotes={new_footnotes}
     >
       <WelcomeMat subject={subject} {...graph_args} />

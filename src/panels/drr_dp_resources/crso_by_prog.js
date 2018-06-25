@@ -9,6 +9,8 @@ import {
   run_template,
   Panel,
   create_text_maker,
+  get_planned_fte_source_link,
+  get_planned_spending_source_link,
 } from "../shared";
 
 const { 
@@ -60,9 +62,12 @@ function calculate(subject,info){
   
 
 
-const render_resource_type = (is_fte) => ({calculations, footnotes, sources}) => {
+const render_resource_type = (is_fte) => ({calculations, footnotes}) => {
   const { graph_args, subject, info } = calculations;
   
+
+
+  const sources = [ is_fte ? get_planned_fte_source_link(subject) : get_planned_spending_source_link(subject) ];
   //const colors;
   //let data;
 

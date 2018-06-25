@@ -10,6 +10,7 @@ import {
   TM as StdTM,
   Col,
   StdPanel,
+  get_planned_spending_source_link,
 } from "../shared";
 
 const {
@@ -23,10 +24,11 @@ const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 const { Format } = util_components;
 
-const prg_crso_split_render = function({calculations, footnotes, sources}){
-  const { info, graph_args } = calculations;
+const prg_crso_split_render = function({calculations, footnotes}){
+  const { info, graph_args, subject } = calculations;
   const { table6_data } = graph_args;
 
+  const sources = [ get_planned_spending_source_link(subject) ];
   // data must be in the form:
   // data = [
   //      { active : true/false,
