@@ -84,10 +84,7 @@ const get_non_col_content_func = createSelector(
 
       return <div>
         {resources && 
-          <dl 
-            className="dl-horizontal dl-long-terms dl-no-bold-dts"
-            style={{fontSize: "0.8em"}}
-          >
+          <dl className="dl-horizontal dl-long-terms dl-no-bold-dts">
             <dt> {spending_header(doc) } </dt>
             <dd> <Format type="compact1" content={resources.spending} /> </dd>
             <dt> {fte_header(doc) } </dt>
