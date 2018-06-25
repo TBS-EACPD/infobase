@@ -54,9 +54,9 @@ jobs:
           paths:
             - build
           key: ib-prod-build-{{ .Branch }}-{{ .Revision }}
-      - run: mkdir $CIRCLE_WORKFLOW_ID
+      - run: mkdir ${CIRCLE_WORKFLOW_ID}
       - persist_to_workspace:
-          root: $CIRCLE_WORKFLOW_ID
+          root: ${CIRCLE_WORKFLOW_ID}
           paths:
             - ./node_modules
             - ./build
@@ -75,8 +75,8 @@ jobs:
         <<: *gcloud_auth
     steps:
       - attach_workspace:
-          at: $CIRCLE_WORKFLOW_ID
-      - run: cd $CIRCLE_WORKFLOW_ID
+          at: ${CIRCLE_WORKFLOW_ID}
+      - run: cd ${CIRCLE_WORKFLOW_ID}
       - run: 
           name: start_server
           command: npm run ci_serve
@@ -94,8 +94,8 @@ jobs:
       - image: google/cloud-sdk:slim
     steps:
       - attach_workspace:
-          at: $CIRCLE_WORKFLOW_ID
-      - run: cd $CIRCLE_WORKFLOW_ID
+          at: ${CIRCLE_WORKFLOW_ID}
+      - run: cd ${CIRCLE_WORKFLOW_ID}
       - run: chmod +x ./.circleci/authenticate-gcloud.sh
       - run: ./.circleci/authenticate-gcloud.sh
       - run: gsutil -m rsync -d -r build/InfoBase gs://ib-static-bucket/InfoBase
