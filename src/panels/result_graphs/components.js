@@ -6,6 +6,7 @@ const {
     TextMaker,
     TM,
     Format,
+    HeightClipper,
   },
 } = require('../shared.js');
 const { result_statuses, result_simple_statuses } = require('../../models/businessConstants.js');
@@ -160,7 +161,12 @@ const SingleIndicatorDisplay = ({indicator}) => {
             <TM k="methodology" />
           </dt>
           <dd>
-            {indicator.methodology}  
+            { window.is_a11y_mode ? 
+              indicator.methodology : 
+              <HeightClipper clipHeight={100}>
+                {indicator.methodology}  
+              </HeightClipper>
+            }
           </dd>
         </Fragment>
       }
