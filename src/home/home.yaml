@@ -18,7 +18,7 @@ home_finance_link:
 
 home_ppl_title:
   en: People
-  fr: Gestion du personnel
+  fr: Personnel
 
 home_ppl_intro:
   transform: [handlebars,markdown]
