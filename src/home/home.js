@@ -155,7 +155,7 @@ const HomeLayout = props => (
             </div>     
           </div>
           <div className="fcol-md-5">
-            <header className="h3">
+            <header className="h3 home-search-header">
               <TM k="home_search_bar_title" />
             </header> 
             <div className="search-box">
@@ -183,7 +183,7 @@ const HomeLayout = props => (
               </div>
             </div>
 
-            <header className="h3">
+            <header className="h3 home-featured-data-header">
               <TM k="featured_data_title" />
             </header>
             <div>

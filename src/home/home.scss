@@ -43,7 +43,7 @@
   color: #333 !important;
   background-color: #3075d2;
   border-radius: 10px;
-  margin-top: 50px;
+  margin-top: 40px;
   height: auto;
   width: 100%;
 
@@ -53,9 +53,30 @@
 }
 
 .frow.home-cols > .fcol-md-5 {
-  margin-top: 30px;
+  margin-top: 40px;
   @media(max-width:1200px) {
     margin-top: 5px;
+  }
+
+  & > .h3.home-search-header {
+    @media(min-width:1201px) {
+      margin-top: 0px;
+    }
+    @media(max-width:1200px) {
+      margin-top: 35px;
+    }
+    @media(max-width:1023px) {
+      margin-top: 10px;
+    }
+  }
+
+  & > .h3.home-featured-data-header {
+    @media(min-width:1201px) {
+      margin-top: 40px;
+    }
+    @media(max-width:1200px) {
+      margin-top: 10px;
+    }
   }
 }  
 
@@ -85,7 +106,7 @@
 }
 
 .home-trinity-container {
-  margin-top: 3rem;
+  margin-top: 40px;
 
   & > .frow {
     justify-content: space-between;
@@ -149,7 +170,7 @@
 
 .home-body > .frow.home-cols {
   justify-content: space-between;
-  margin-bottom: 5%;
+  margin-bottom: 40px;
 }
 
 .home-bg {
@@ -157,12 +178,8 @@
   position: relative;
 }
 
-.xtralinks {
-  padding-top: 50px;
-
-  & > .frow {
-    justify-content: space-around;
-  }
+.xtralinks > .frow {
+  justify-content: space-around;
 }
 
 .linkcard {
