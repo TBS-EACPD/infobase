@@ -1,7 +1,7 @@
 import { SpinnerWrapper } from '../util_components.js';
 
 
-const DefaultErrorComponent = (
+const DefaultErrorComponent = _.constant(
   window.lang === "en" ? 
   "An error occured" :
   "Une erreur est survenue"
