@@ -21,6 +21,9 @@ import { TooltipActivator } from '../glossary/Tooltips';
 import { PotentialSurveyBox } from '../core/survey_link';
 import { EasyAccess } from '../core/EasyAccess';
 import { About } from '../about/about.js';
+import { GraphInventory } from '../graph_route/graph_route.js';
+import {EstimatesComparison} from "../EstimatesComparison/EstimatesComparison.js";
+
 
 // Now you can dispatch navigation actions from anywhere!
 // store.dispatch(push('/foo'))
@@ -50,6 +53,8 @@ export class App extends React.Component {
           <Route path="/glossary/:active_key?" component={Glossary} />
           <Route path="/rpb/:config?" component={ReportBuilder} />
           <Route path="/about" component={About} />
+          <Route path="/graph/:level?/:graph?/:id?" component={GraphInventory} />
+          <Route path="/compare_estimates" component={EstimatesComparison} />
           <Route path="/" component={Home} />
         </Switch>
       </div>

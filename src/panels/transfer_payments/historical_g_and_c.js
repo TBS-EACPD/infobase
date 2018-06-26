@@ -1,3 +1,4 @@
+import {Fragment } from 'react';
 import {
   text_maker,
   TM,
@@ -10,10 +11,12 @@ import {
   business_constants,
   declarative_charts,
   Panel,
+  util_components,
 } from "../shared";
 
 const { transfer_payments } = business_constants;
 const { std_years } = years;
+const { Format } = util_components;
 
 const { 
   Line,
@@ -142,6 +145,8 @@ class HistTPTypes extends React.Component {
       .fromPairs()
       .value();
 
+
+
     const colors = infobase_colors();
 
     const legend_items = _.chain(series)
@@ -159,13 +164,25 @@ class HistTPTypes extends React.Component {
       })
       .value();
 
-    return <div className="frow middle-xs">
-      <div className={`fcol-md-${text_split}`}>
-        <div className="medium_panel_text">
-          {text}
-        </div>
-      </div>
-      <div className={`fcol-md-${12-text_split}`}>
+
+    let content; 
+    if(window.is_a11y_mode){
+      const a11y_data = _.chain(filtered_series)
+        .toPairs()
+        .map( ([label, data]) => ({ 
+          label, 
+          data: _.map(data, num => <Format type="compact_written" content={num} /> ),
+        }) )
+        .value()
+
+
+      content = <A11YTable
+        data_col_headers={_.map(std_years, run_template)}
+        data={a11y_data}
+        label_col_header={text_maker("transfer_payment_type")}
+      />;
+    } else {
+      content = <Fragment>
         <div className="legend-container">
           <GraphLegend
             items={legend_items}
@@ -185,6 +202,18 @@ class HistTPTypes extends React.Component {
           ticks={_.map(std_years,run_template)}
           
         />
+      </Fragment>
+    }
+
+
+    return <div className="frow middle-xs">
+      <div className={`fcol-md-${text_split}`}>
+        <div className="medium_panel_text">
+          {text}
+        </div>
+      </div>
+      <div className={`fcol-md-${12-text_split}`}>
+        {content}
       </div>
     
     </div>;
@@ -234,9 +263,26 @@ class DetailedHistTPItems extends React.Component {
     </header>;
 
     if(window.is_a11y_mode){
+      let a11y_data = _.map(prepped_rows, record => {
+        const { tp } = record;
+        return {
+          label: tp,
+          data: _.map(std_years, yr => 
+            <Format
+              type="compact1"
+              content={record[`${yr}exp`] || 0}
+            />
+          ),
+        }
+      });
+
       return <div>
         {title_el}
-        <A11YTable /> {/* TODO */ }
+        <A11YTable 
+          data={a11y_data}
+          label_col_header={text_maker("transfer_payment")}
+          data_col_headers={_.map(std_years, run_template)}
+        />
       </div>
     }
 
