@@ -1,5 +1,4 @@
 import './home.scss';
-import {get_missing_result_footnote} from '../shameful.js';
 import home_text_bundle from "./home.yaml";
 import get_home_content from './home-data.js';
 import { log_standard_event } from '../core/analytics.js';
