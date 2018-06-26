@@ -119,13 +119,6 @@ const HomeLayout = props => (
       </div>
     </div>
     <div className="container">
-      <div
-        className="alert alert-danger alert-no-symbol alert--is-bordered medium_panel_text mrgn-tp-lg"
-      >
-        <div style={{paddingLeft:"3rem"}}>
-          <div dangerouslySetInnerHTML={{__html:get_missing_result_footnote()}} />
-        </div>
-      </div>
       <div className="home-trinity-container">
         <div className="frow">
           <TrinityItem
