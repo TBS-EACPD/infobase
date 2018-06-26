@@ -57,7 +57,10 @@ jobs:
       - persist_to_workspace:
           root: ./
           paths:
-            - ./*
+            - ./build
+            - ./node_modules
+            - ./tests
+            - ./.circleci
 
   
   # Test job steps:
