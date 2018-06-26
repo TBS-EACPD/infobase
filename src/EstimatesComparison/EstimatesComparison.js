@@ -1,9 +1,11 @@
 import './EstimatesComparison.scss';
+import classNames from 'classnames';
 import { text_maker, TM } from './text-provider';
 import { combineReducers, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import { StandardRouteContainer } from '../core/NavComponents';
 import { infograph_href_template } from '../link_utils.js';
+import { sources } from '../metadata/data_sources.js';
 
 
 import {
@@ -186,20 +188,22 @@ const get_non_col_content = ({node}) => {
         </div>
       }
       {!_.isEmpty(footnotes) && 
-        <HeightClipper
-          allowReclip={true} 
-          clipHeight={150}
-        >
-          <header className="agnostic-header"><TM k="notes" /></header>
-          <FootnoteList
-            footnotes={footnotes}
-          />
-        </HeightClipper>
+        <div className={classNames(subject && "mrgn-bttm-lg")}>
+          <HeightClipper
+            allowReclip={true} 
+            clipHeight={150}
+          >
+            <header className="agnostic-header"><TM k="notes" /></header>
+            <FootnoteList
+              footnotes={footnotes}
+            />
+          </HeightClipper>
+        </div>
       }
       { subject && 
         <div className='ExplorerNode__BRLinkContainer'>
           <a href={infograph_href_template(subject)}> 
-            <TM k="infographic_for" args={{name: subject.name}} />
+            <TM k="see_an_infograph_for" args={{subject}} />
           </a>
         </div>
       }
@@ -367,6 +371,15 @@ class EstimatesExplorer extends React.Component {
               sort_col,
               is_descending,
             }}
+          />
+        </div>
+        <div
+          className="h3"
+          style={{textAlign:"center"}}
+        >
+          <TM 
+            k="estimates_source_link"
+            args={{href: sources.ESTIMATES.open_data[window.lang] }}
           />
         </div>
       </div>
