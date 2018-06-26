@@ -61,6 +61,7 @@ jobs:
             - ./node_modules
             - ./tests
             - ./.circleci
+            - ./package.json
 
   
   # Test job steps:
