@@ -54,7 +54,6 @@ jobs:
           paths:
             - build
           key: ib-prod-build-{{ .Branch }}-{{ .Revision }}
-      - run: mv ./build ./${CIRCLE_WORKFLOW_ID}
       - persist_to_workspace:
           root: ./
           paths:
@@ -73,7 +72,8 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
-      - run: mv ./${CIRCLE_WORKFLOW_ID} ./build
+      - run: sed -i "s#${CDN_URL}#.#g" ./*.js
+      - run: sed -i "s#${CDN_URL}#.#g" ./*.html
       - run: 
           name: start_server
           command: npm run ci_serve
@@ -92,7 +92,6 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
-      - run: mv ./${CIRCLE_WORKFLOW_ID} ./build
       - run: chmod +x ./.circleci/authenticate-gcloud.sh
       - run: ./.circleci/authenticate-gcloud.sh
       - run: gsutil -m rsync -d -r build/InfoBase gs://ib-static-bucket/InfoBase
