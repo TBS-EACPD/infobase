@@ -85,9 +85,9 @@ const get_non_col_content_func = createSelector(
       return <div>
         {resources && 
           <dl className="dl-horizontal dl-long-terms dl-no-bold-dts">
-            <dt> {spending_header(doc) } </dt>
+            <dt> <span className="nowrap">{spending_header(doc) }</span> </dt>
             <dd> <Format type="compact1" content={resources.spending} /> </dd>
-            <dt> {fte_header(doc) } </dt>
+            <dt> <span className="nowrap">{fte_header(doc) }</span> </dt>
             <dd> <Format type="big_int_real" content={resources.ftes} /> </dd>
           </dl>
         }
