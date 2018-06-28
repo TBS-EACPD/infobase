@@ -14,7 +14,8 @@
   }
 }
 .canada-logo {
-  height: 2rem;
+  height: auto;
+  max-height: 30px;
   max-width: 50vw;
 }
 @media (max-width: 767px) {
