@@ -178,8 +178,12 @@
   position: relative;
 }
 
-.xtralinks > .frow {
-  justify-content: space-around;
+.xtralinks {
+  padding-top: 40px;
+  
+  & > frow {
+    justify-content: space-around;
+  }
 }
 
 .linkcard {
