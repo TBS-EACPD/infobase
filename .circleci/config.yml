@@ -57,6 +57,7 @@ jobs:
             - ./node_modules
             - ./tests
             - ./.circleci
+            - ./deploy_build_scripts
             - ./package.json
 
   
