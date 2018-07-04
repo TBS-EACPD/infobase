@@ -75,6 +75,14 @@
     margin: 5px;
     padding: 5px;
     display: flex;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 
   .bubble-menu > .bubble-button > .bub-item > .title {
