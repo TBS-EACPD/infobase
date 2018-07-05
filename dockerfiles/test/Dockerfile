@@ -5,3 +5,4 @@ RUN apk update && apk upgrade && \
     xvfb \
     chromium \
     ca-certificates
+RUN apk add --no-cache bash
