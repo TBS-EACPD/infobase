@@ -28,6 +28,8 @@ jobs:
         <<: *gcloud_auth
     steps:
       - checkout
+      - run: chmod +x ./.circleci/chmod_scripts.sh
+      - run: ./.circleci/chmod_scripts.sh
       - run: ./.circleci/create_envs.sh
       - restore_cache:
           keys:
@@ -74,8 +76,6 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
-      - run: chmod +x ./.circleci/chmod_scripts.sh
-      - run: ./.circleci/chmod_scripts.sh
       - run: ./.circleci/create_envs.sh
       - run: sed -i "s#${CDN_URL}#.#g" ./build/InfoBase/app/*.js # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
       - run: sed -i "s#${CDN_URL}#.#g" ./build/InfoBase/*.html # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
