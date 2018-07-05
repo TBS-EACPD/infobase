@@ -31,6 +31,7 @@ jobs:
       - run: chmod +x ./.circleci/chmod_scripts.sh
       - run: ./.circleci/chmod_scripts.sh
       - run: ./.circleci/create_envs.sh
+      - run: source $BASH_ENV
       - restore_cache:
           keys:
             - ib-client-dependencies-{{ checksum "package-lock.json" }}
@@ -77,6 +78,7 @@ jobs:
       - attach_workspace:
           at: ./
       - run: sh ./.circleci/create_envs.sh
+      - run: source $BASH_ENV
       - run: echo $CDN_URL
       - run: sed -i "s#${CDN_URL}#.#g" ./build/InfoBase/app/*.js # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
       - run: sed -i "s#${CDN_URL}#.#g" ./build/InfoBase/*.html # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
@@ -99,6 +101,7 @@ jobs:
       - attach_workspace:
           at: ./
       - run: ./.circleci/create_envs.sh
+      - run: source $BASH_ENV
       - run: ./.circleci/authenticate-gcloud.sh
       - run: ./deploy_build_scripts/split_gzip_build.sh
       - run: ./deploy_build_scripts/push_to_gcloud_bucket.sh
