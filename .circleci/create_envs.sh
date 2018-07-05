@@ -1,3 +1,4 @@
 echo 'export CDN_URL="$CDN_BASE_URL/$CIRCLE_BRANCH"' >> $BASH_ENV
 echo 'export GCLOUD_BUCKET_URL="$GCLOUD_BUCKET_ROOT/$CIRCLE_BRANCH"' >> $BASH_ENV
+echo 'done'
 source $BASH_ENV
