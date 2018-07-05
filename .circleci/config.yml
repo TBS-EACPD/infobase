@@ -28,16 +28,17 @@ jobs:
         <<: *gcloud_auth
     steps:
       - checkout
+      - run: chmod +x ./.circleci/chmod_scripts.sh
+      - run: ./.circleci/create_envs.sh
+      - run: echo $CDN_URL
+      - run: echo $GCLOUD_BUCKET_URL
       - restore_cache:
           keys:
             - ib-client-dependencies-{{ checksum "package-lock.json" }}
       - run: 
           command: |
             [ -e "node_modules" ] || npm ci
-      - run: chmod +x ./.circleci/chmod_scripts.sh
-      - run: ./.circleci/create_envs.sh
-      - run: echo $CDN_URL
-      - run: echo $GCLOUD_BUCKET_URL
+      
       - save_cache:
           paths:
             - node_modules
