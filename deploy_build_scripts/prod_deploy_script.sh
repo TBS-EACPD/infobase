@@ -4,15 +4,8 @@ gcloud auth activate-service-account --key-file=${HOME}/infobase-prod-cdn-servic
 gcloud config set project infobase-prod
 gcloud config set compute/zone northamerica-northeast1-a
 
-# push to branch-specific folder
-# CI is a circle-ci thing that is set to true
-suffix="InfoBase"
-if $CI; then
-  suffix=$CIRCLE_BRANCH;
-fi;
-
-export CDN_URL="http://35.227.240.145/$suffix"
-export GCLOUD_BUCKET_URL="gs://infobase-prod-bucket/$suffix"
+export CDN_URL="http://35.227.240.145/InfoBase"
+export GCLOUD_BUCKET_URL="gs://infobase-prod-bucket/InfoBase"
 
 #build everything
 ./deploy_build_scripts/build_all.sh
