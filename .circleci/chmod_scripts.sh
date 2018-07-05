@@ -1,4 +1,7 @@
 #!/bin/bash
+# prep scripts
+chmod +x ./.circleci/create_envs.sh
+
 # build scripts
 chmod +x ./deploy_build_scripts/build_all.sh
 
