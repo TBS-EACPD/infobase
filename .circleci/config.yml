@@ -28,8 +28,6 @@ jobs:
         <<: *gcloud_auth
     steps:
       - checkout
-      - run: chmod +x ./.circleci/chmod_scripts.sh
-      - run: ./.circleci/chmod_scripts.sh
       - run: ./.circleci/create_envs.sh
       - restore_cache:
           keys:
@@ -99,8 +97,6 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
-      - run: chmod +x ./.circleci/chmod_scripts.sh
-      - run: ./.circleci/chmod_scripts.sh
       - run: ./.circleci/create_envs.sh
       - run: ./.circleci/authenticate-gcloud.sh
       - run: ./deploy_build_scripts/split_gzip_build.sh
