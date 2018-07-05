@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # to be called after build has run 
 
 set -e # will exit if any command has non-zero exit value
