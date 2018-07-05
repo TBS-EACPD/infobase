@@ -26,6 +26,9 @@ jobs:
     docker:
       - image: gcr.io/ib-static-content/ib-client-ci-build:latest
         <<: *gcloud_auth
+    environment:
+      GCLOUD_BUCKET_URL: "$GCLOUD_BUCKET_ROOT/$CIRCLE_BRANCH"
+      CDN_URL: "$CDN_BASE_URL/$CIRCLE_BRANCH"
     steps:
       - checkout
       - restore_cache:
@@ -70,6 +73,9 @@ jobs:
     docker:
       - image: gcr.io/ib-static-content/ib-client-ci-test:latest
         <<: *gcloud_auth
+    environment:
+      GCLOUD_BUCKET_URL: "$GCLOUD_BUCKET_ROOT/$CIRCLE_BRANCH"
+      CDN_URL: "$CDN_BASE_URL/$CIRCLE_BRANCH"
     steps:
       - attach_workspace:
           at: ./
@@ -90,6 +96,9 @@ jobs:
   deploy:
     docker:
       - image: google/cloud-sdk:slim
+    environment:
+      GCLOUD_BUCKET_URL: "$GCLOUD_BUCKET_ROOT/$CIRCLE_BRANCH"
+      CDN_URL: "$CDN_BASE_URL/$CIRCLE_BRANCH"
     steps:
       - attach_workspace:
           at: ./
