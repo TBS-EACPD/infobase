@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # prep scripts
 chmod +x ./.circleci/create_envs.sh
 
