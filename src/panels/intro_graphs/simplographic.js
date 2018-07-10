@@ -8,6 +8,7 @@ import {
 } from '../shared';
 import { infograph_href_template, rpb_link } from '../../link_utils.js';
 import { ResultCounts } from '../../models/results.js';
+import { get_static_url } from '../../core/static_url.js';
 
 const { Gov, Dept } = Subject;
 const { TM: StandardTM } = util_components;
@@ -128,7 +129,7 @@ new PanelGraph({
             <img 
               role="presentation"
               aria-hidden={true}
-              src={`${CDN_URL}/svg/${props.img_src}`} 
+              src={get_static_url(`svg/${props.img_src}`)} 
               width="150" height="150" 
               style={{
                 alignSelf: "center",

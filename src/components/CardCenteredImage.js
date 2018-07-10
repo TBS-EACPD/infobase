@@ -26,7 +26,7 @@ const CardCenteredImage = ({
         <div>
           <div className="centered-img-card__right">
             <img
-              src={`${CDN_URL}/${img_src}`}
+              src={img_src}
               className={classNames("centered-img-card__img")}
             />
           </div>

@@ -14,7 +14,7 @@ const CardBackgroundImage = ({
   <a className="link-unstyled" href={link_href}>
     <div 
       className="background-img-card" 
-      style={{ backgroundImage: img_src && `URL(${CDN_URL}/${img_src})`}}
+      style={{ backgroundImage: img_src && `URL(${img_src})`}}
     >
       <div className="background-img-card__top-left">
         <header className="background-img-card__title">

@@ -16,6 +16,7 @@ import {
 import { general_href_for_item } from '../link_utils.js';
 import { create_text_maker } from '../models/text.js';
 import { StandardRouteContainer } from '../core/NavComponents.js';
+import { get_static_url } from '../core/static_url.js';
 
 const home_tm = create_text_maker(home_text_bundle);
 const TM = props => <StandardTM tmf={home_tm} {...props} />;
@@ -55,7 +56,7 @@ const TrinityItem = ({img_url, title, href}) => (
         {title}
       </div>
       <div className="TrinityItem__Img">
-        <img src={`${CDN_URL}/${img_url}`} />
+        <img src={img_url} />
       </div>
     </a>
   </div>
@@ -65,13 +66,13 @@ const HomeLayout = props => (
   <div className="home-root">
     <div 
       className="intro-box" 
-      style={{ backgroundImage:`URL(${CDN_URL}/svg/backbanner.svg)` }}
+      style={{ backgroundImage:`URL(${get_static_url("svg/backbanner.svg")}` }}
     >
       <div className="container">
         <h1> <TM k="welcome" /> </h1>
         <h2> <TM k="home_sub_title" /> </h2>
         <div className="flag">
-          <img src={`${CDN_URL}/svg/flagline.svg`}/>
+          <img src={get_static_url("svg/flagline.svg")}/>
         </div>
       </div>
     </div>
@@ -80,17 +81,17 @@ const HomeLayout = props => (
         <div className="frow">
           <TrinityItem
             href="#orgs/gov/gov/infograph/financial"
-            img_url='svg/expend.svg'
+            img_url={get_static_url('svg/expend.svg')}
             title={<TM k="home_finance_title" />}
           />
           <TrinityItem
             href="#orgs/gov/gov/infograph/people"
-            img_url='svg/people.svg' 
+            img_url={get_static_url('svg/people.svg')}
             title={<TM k="home_ppl_title" />}
           />
           <TrinityItem
             href="#orgs/gov/gov/infograph/results"
-            img_url='svg/results.svg' 
+            img_url={get_static_url('svg/results.svg')}
             title={<TM k="home_results_title" />}
           />
         </div>
@@ -104,7 +105,7 @@ const HomeLayout = props => (
             <div className="col-content featured-col-content">
               <CardCenteredImage
                 tmf={home_tm}
-                img_src="svg/partition-budget.svg"
+                img_src={get_static_url("svg/partition-budget.svg")}
                 title_key="budget_home_title"
                 text_key="budget_home_text"
                 link_key="check_home_link"
@@ -160,7 +161,7 @@ const HomeLayout = props => (
       <div className="container">
         <CardBackgroundImage
           tmf={home_tm}
-          img_src="svg/partition.svg"
+          img_src={get_static_url("svg/partition.svg")}
           title_key="partition_home_title"
           text_key="partition_home_text"
           link_key="check_home_link"
@@ -176,7 +177,7 @@ const HomeLayout = props => (
           <div className="fcol-md-4 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
-              img_src="svg/compare_estimates.svg"
+              img_src={get_static_url("svg/compare_estimates.svg")}
               title_key="estimates_comp_home_title"
               text_key="estimates_comp_home_text"
               link_href="#compare_estimates"
@@ -185,7 +186,7 @@ const HomeLayout = props => (
           <div className="fcol-md-4 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
-              img_src="svg/bubbles.svg"
+              img_src={get_static_url("svg/bubbles.svg")}
               title_key="planet_home_title"
               text_key="planet_home_text"
               link_href="#explore-dept"
@@ -194,7 +195,7 @@ const HomeLayout = props => (
           <div className="fcol-md-4 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
-              img_src="svg/explorer.svg"
+              img_src={get_static_url("svg/explorer.svg")}
               title_key="explorer_home_title"
               text_key="explorer_home_text"
               link_href="#resource-explorer"
@@ -203,7 +204,7 @@ const HomeLayout = props => (
           <div className="fcol-md-4 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
-              img_src="svg/builder.svg"
+              img_src={get_static_url("svg/builder.svg")}
               title_key="home_build_a_report"
               text_key="report_builder_home_desc"
               link_href="#rpb"
@@ -212,7 +213,7 @@ const HomeLayout = props => (
           <div className="fcol-md-4 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
-              img_src="svg/structure.svg"
+              img_src={get_static_url("svg/structure.svg")}
               title_key="igoc_home_title"
               text_key="igoc_home_desc"
               link_href="#igoc"
@@ -221,7 +222,7 @@ const HomeLayout = props => (
           <div className="fcol-md-4 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
-              img_src="svg/glossary.svg"
+              img_src={get_static_url("svg/glossary.svg")}
               title_key="glossary_home_title"
               text_key="glossary_home_desc"
               link_href="#glossary"
@@ -230,7 +231,7 @@ const HomeLayout = props => (
           <div className="fcol-md-4 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
-              img_src="svg/metadata.svg"
+              img_src={get_static_url("svg/metadata.svg")}
               title_key="metadata_home_title"
               text_key="metadata_home_desc"
               link_href="#metadata"
@@ -239,7 +240,7 @@ const HomeLayout = props => (
           <div className="fcol-md-4 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
-              img_src="svg/aboutus.svg"
+              img_src={get_static_url("svg/aboutus.svg")}
               title_key="about_home_title"
               text_key="about_home_desc"
               link_href="#about"

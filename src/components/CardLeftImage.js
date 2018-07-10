@@ -16,7 +16,7 @@ const CardLeftImage = ({
       <div className="left-img-card__left">
         <a className="left-img-card__img-link" href={link_href}>
           <img
-            src={`${CDN_URL}/${img_src}`}
+            src={img_src}
             className="left-img-card__img" 
           />
         </a>

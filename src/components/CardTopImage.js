@@ -16,7 +16,7 @@ const CardTopImage = ({
       { img_src &&
         <div className="top-img-card__top">
           <img
-            src={`${CDN_URL}/${img_src}`}
+            src={img_src}
             className="top-img-card__img" 
           />
         </div>
