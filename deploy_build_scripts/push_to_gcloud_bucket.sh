@@ -16,4 +16,7 @@ set -e # will exit if any command has non-zero exit value
 gsutil -m -h Content-Encoding:gzip rsync -d -a public-read -c -r gzip/InfoBase $GCLOUD_BUCKET_URL
 # node that -d will get rid of all other files. This means non-gzipped assets get copied even though they haven't changed
 gsutil -m rsync -a public-read -c -r non-gzip/InfoBase $GCLOUD_BUCKET_URL
-#This will make sure any new files immediately get public read access 
+#This will make sure any new files immediately get public read access
+
+gsutil setmeta -h "Cache-Control:no-cache" $GCLOUD_BUCKET_URL/InfoBase/app/a*-[ef][nr].min.js
+# set no-cache on main .js files, always needs to be fresh to guarantee the rest of the cache-busting will work as intended
