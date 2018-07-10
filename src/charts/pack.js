@@ -81,15 +81,11 @@ export const pack_data = function(data, level_name,options = {}){
     data = _.filter(data, x => x[attr] !== 0 );
   }
   let soften =  _.isUndefined(options.soften) ? true : options.soften;
-  let levels = options.levels || 2;
   let accessor = _.property(attr);
-  let extent = d3.extent(_.map(data,accessor));
-  let scale = options.scale || d3.scaleLog()
-    .domain(extent)
-    .rangeRound([0,levels]);
-
+  const { level_assigner } = options;
+  
   let groups = d3.nest()
-    .key(d =>scale(accessor(d)))
+    .key(d =>level_assigner(accessor(d)))
     .entries(data);
 
   let sorted = _.sortBy(groups,g => parseInt(g.key,10));
@@ -230,7 +226,7 @@ export class Pack {
         .datum(node)
         .attr("href","#")
         .attr("class","zoom-out-link btn btn-sm btn-ib-primary")
-        .html("Zoom Out")
+        .html(window.lang === 'en' ? "Zoom Out" : "Dézoomer")
         .on("click",function(d){
           d3.event.preventDefault();
           var matching_circle = that.svg.select("circle[rid='"+d.parent.rid+"']").node();

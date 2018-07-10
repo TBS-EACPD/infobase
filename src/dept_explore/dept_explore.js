@@ -23,9 +23,9 @@ BubbleOrgList = function(container,method){
   // match the different organization schemes to their respective
   // functions
   this.organization_schemes = {
-    "dept" : {func: this.by_min_dept, href:"#explore-dept"},
-    "people-total": {func:this.by_this_year_emp, href:"#explore-people-total"},
-    "dept-type" : {func: this.by_dept_type, href:"#explore-dept-type"},
+    "dept" : {func: by_min_dept, href:"#explore-dept"},
+    "people-total": {func: by_this_year_emp, href:"#explore-people-total"},
+    "dept-type" : {func: by_dept_type, href:"#explore-dept-type"},
   };
 
   this.container = container;
@@ -60,7 +60,9 @@ BubbleOrgList = function(container,method){
     summary : text_maker("details"),
     __details : text_maker(button_explain_text, infos),
   }));
-  this.organization_schemes[method].func.call(this);
+
+  const { data, keys, format } = this.organization_schemes[method].func();
+  this.build_graphic(data,keys,format);
 };
 
 
@@ -68,7 +70,7 @@ var p = BubbleOrgList.prototype;
 // responsible for determining which circle packing
 // method should be used
 
-p.by_min_dept = function(){
+function by_min_dept(){
   // this function regroups departments into their respective ministries
   // 1 - all departments in table8 are obtained
   // 2 - the depratments are mapped into an object with three keys
@@ -116,18 +118,34 @@ p.by_min_dept = function(){
     })
     .value();
 
-  // nest the data for exploring
-  var data = this.nest_data_for_exploring(min_objs,text_maker("goc_total"),[1,2,4,5] );
+  const rangeRound = [1,2,3,5];
+  const vals = _.map(min_objs, 'value');
+  const [min,max] = d3.extent(vals);
+  const scale = d3.scaleLog()
+    .domain([min, d3.quantile(vals,0.2), d3.quantile(vals,0.9), max])
+    .rangeRound(rangeRound);
+  const level_assigner = val => {
+    const scale_val = scale(val);
+    //the last range val is much bigger on purpose, round all big vals to the largest
+    if(rangeRound.length > 2 && scale_val > rangeRound[rangeRound.length - 2]){
+      return _.last(rangeRound);
+    }
+    return scale_val;
+  }
+  var data = nest_data_for_exploring(min_objs,text_maker("goc_total"),level_assigner);
   _.each(min_objs, d => { delete d.value; });
-  this.build_graphic(data,_.keys(table.depts));
+  return {
+    data,
+    keys: _.keys(table.depts),
+  };
 };
 
-p.by_dept_type = function(){
+function by_dept_type(){
   var table = Table.lookup('table4');
   // group the departments by
   // minisries and then do a reduce sum to extract the fin size
   // of each ministry
-  var min_objs =  _.chain(table.depts)
+  var type_objs =  _.chain(table.depts)
     .keys()
     .map(function(key){
       const dept = Dept.lookup(key);
@@ -152,12 +170,43 @@ p.by_dept_type = function(){
     }))
     .value();
 
-  // nest the data for exploring
-  var data = this.nest_data_for_exploring(min_objs,text_maker("goc_total"), [1,2,6] );
-  this.build_graphic(data,_.keys(table.depts));
+
+  
+
+
+  const trivial_level_assigner = _.constant(1);
+  var data = nest_data_for_exploring(type_objs,text_maker("goc_total"), trivial_level_assigner );
+
+  _.each(data.children, node => {
+    const { children } = node;
+    const rangeRound = [1,2,3];
+    const vals = _.map(children, 'value');
+    let level_assigner = _.constant(1);
+    if(children.length > 10){
+      const min = d3.extent(vals)[0];
+      const scale = d3.scaleLog()
+        .domain([min, d3.quantile(vals, 0.8)])
+        .rangeRound(rangeRound);
+      
+      level_assigner = val => {
+        const scale_val = scale(val);
+        //the last range val is much bigger on purpose, round all big vals to the largest
+        if(rangeRound.length > 2 && scale_val > rangeRound[rangeRound.length - 2]){
+          return _.last(rangeRound);
+        }
+        return scale_val;
+      }
+    }
+
+    node.children = nest_data_for_exploring(children, "", level_assigner).children;
+  })
+  return {
+    data,
+    keys: _.keys(table.depts),
+  };
 };
 
-p.by_this_year_emp   = function(){
+function by_this_year_emp(){
   var table = Table.lookup("table12");
   var by_people =  _.chain(table.depts)
     .keys()
@@ -175,20 +224,34 @@ p.by_this_year_emp   = function(){
     .filter(d => d.value !== 0)
     .value();
 
-  // nest the data for exploring
-  var data = this.nest_data_for_exploring(by_people, text_maker("goc_total"), [1,2.5] );
-  this.build_graphic(data, _.keys(table.depts), formats["big_int_real"]); 
+  const rangeRound = [1,2,3,4,8];
+  const vals = _.map(by_people, 'value');
+  const [min,max] = d3.extent(vals);
+  const scale = d3.scaleSqrt()
+    .domain([min, d3.quantile(vals, 0.15), d3.quantile(vals,0.4), d3.quantile(vals,0.95), max])
+    .rangeRound(rangeRound);
+  const level_assigner = val => {
+    const scale_val = scale(val);
+    //the last range val is much bigger on purpose, round all big vals to the largest
+    if(rangeRound.length > 2 && scale_val > rangeRound[rangeRound.length - 2]){
+      return _.last(rangeRound);
+    }
+    return scale_val;
+  }
+
+
+  var data = nest_data_for_exploring(by_people, text_maker("goc_total"), level_assigner );
+  return {
+    data, 
+    keys: _.keys(table.depts), 
+    format: formats["big_int_real"],
+  }; 
 };
 
-p.nest_data_for_exploring = function(to_be_nested, top_name, rangeRound){
-  // pack the data using a specialised scale to create a two level packing
-  rangeRound = rangeRound || [1,2,4,5];
-
+function nest_data_for_exploring(to_be_nested, top_name, level_assigner){
   var data = Pack.pack_data(to_be_nested,text_maker("smaller_orgs"),{
-    soften : true,
-    scale : d3.scaleSqrt()
-      .domain(d3.extent(to_be_nested, _.property('value')))
-      .rangeRound(rangeRound),
+    soften : false,
+    level_assigner,
     per_group : grp => {
       grp._value = d3.sum(grp.children,_.property('__value__'));
     },
