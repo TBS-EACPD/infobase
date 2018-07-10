@@ -27,6 +27,7 @@ const options_by_app = {
     get_output: language =>({
       path: path.resolve(__dirname, '../build/InfoBase/app/'),
       filename: `app-a11y-${language}.min.js`,
+      chunkFilename: `[id].app-ally-${language}${prod ? ".[chunkhash]" : ""}.min.js`,
     }),
   },
   main_client: {
@@ -34,6 +35,7 @@ const options_by_app = {
     get_output: language => ({
       path: path.resolve(__dirname, '../build/InfoBase/app/'),
       filename: `app-${language}.min.js`,
+      chunkFilename: `[id].app-${language}${prod ? ".[chunkhash]" : ""}.min.js`,
     }),
   },
 };
