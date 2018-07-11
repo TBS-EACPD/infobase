@@ -66,6 +66,7 @@ gitsha(function(err,commit_sha){
   if(NO_WATCH){
     webpack(config, function(err,stats){
       console.log(stats.toString({cached:true,modules:true}));
+      if( err || stats.hasErrors() ){ process.exitCode = 1; } 
     });
   } else {
     webpack(config)
