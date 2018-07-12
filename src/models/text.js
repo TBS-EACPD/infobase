@@ -6,7 +6,6 @@ import result_lang from '../common_text/result_lang.yaml';
 import people_lang from '../common_text/people_lang.yaml';
 import estimates_lang from '../common_text/estimates_lang.yaml';
 import a11y_lang from '../common_text/a11y_lang.yaml';
-import dp_lag_text from '../common_text/dp_lag_text.yaml';
 
 /* 
   TODO: some parts of this still feel hacky 
@@ -41,7 +40,6 @@ const global_bundles = [
   people_lang,
   estimates_lang,
   a11y_lang,
-  dp_lag_text,
 ];
 
 

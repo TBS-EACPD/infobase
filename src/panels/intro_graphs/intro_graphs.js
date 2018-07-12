@@ -1,4 +1,3 @@
-import { get_missing_result_footnote, result_laggards } from '../../shameful.js';
 import { PanelGraph, util_components } from '../shared';
 import { text_maker, TM } from './intro_graph_text_provider.js';
 import './simplographic.js';
@@ -108,35 +107,6 @@ _.each(['gov', 'dept', 'program', 'crso'], lvl => {
   })
 });
 
-
-
-
-_.each(['dept', 'program', 'crso'], lvl => {
-
-  new PanelGraph({
-    level: lvl,
-    key: "late_dept",
-    calculate(subject){
-      const org = subject.level === "dept" ? subject : subject.dept;
-      if(_.includes(result_laggards, org.id)){
-        return true;
-      } 
-      return false;
-    },
-    render: () => (
-      <div
-        className="alert alert-info alert-no-symbol alert--is-bordered large_panel_text"
-        style={{ 
-          textAlign: "center",
-          borderColor: "#d9534f",
-        }}
-      >
-        <TM k="org_missing_dp_results" />
-      </div>
-    ),
-  })
-});
-
 _.each(['gov', 'dept'], lvl => {
   new PanelGraph({
     level: lvl,
@@ -227,22 +197,3 @@ _.each(['gov', 'dept'], lvl => {
 });
 
 
-
-new PanelGraph({
-  level: "gov",
-  static: true,
-  footnotes: false,
-  source: false,
-  info_deps: [],
-  key : "gov_results_shame",
-  calculate: _.constant(true),
-  render: () => (
-    <div
-      className="alert alert-danger alert-no-symbol alert--is-bordered large_panel_text"
-    >
-      <div style={{paddingLeft:"3rem"}}>
-        <div dangerouslySetInnerHTML={{__html:get_missing_result_footnote()}} />
-      </div>
-    </div>
-  ),
-});

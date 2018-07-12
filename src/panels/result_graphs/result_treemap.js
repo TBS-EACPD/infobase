@@ -1,4 +1,3 @@
-import { result_laggards } from '../../shameful.js';
 import { TM, text_maker } from './result_text_provider.js';
 import { createSelector } from 'reselect';
 import classNames from 'classnames';
@@ -428,13 +427,8 @@ _.each(['program','dept','crso'], lvl => {
     calculate(subject){
 
       const indicators = Indicator.get_flat_indicators(subject);
-      const org_id = (
-        subject.level === "dept" ?
-        subject.id :
-        subject.dept.id
-      );
 
-      const has_dp_data = _.find(indicators, {doc: 'dp18'}) && !_.includes(result_laggards, org_id)
+      const has_dp_data = _.find(indicators, {doc: 'dp18'});
       const has_drr_data = _.find(indicators, {doc: 'drr16'});
 
       if(!has_dp_data && !has_drr_data){
