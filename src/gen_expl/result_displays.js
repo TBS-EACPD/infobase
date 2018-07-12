@@ -46,21 +46,8 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
 
     } else {
 
-      if(subject.is_DRF){
-        text_key = "result_counts_dp_dept_drf"
+      text_key = "result_counts_dp_dept"
 
-      } else {
-        if(count_items.sub_program > 0){
-          if(count_items.sub_sub_program > 0){
-            text_key = "result_counts_dp_dept_paa_sub_sub"
-          } else {
-            text_key = "result_counts_dp_dept_paa_sub"
-          }
-        } else {
-          text_key = "result_counts_dp_dept_paa_no_subs"
-        }
-      }
-    //dp dept
     }
   //dept
   } else if(subject.level === 'program'){
@@ -75,20 +62,12 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
         text_key = "result_counts_drr_prog_paa_no_subs";
       }
     } else {
-      if(count_items.sub_program > 0){
-        if(count_items.sub_sub_program > 0){
-          text_key = "result_counts_dp_prog_paa_sub_sub";
-        } else {
-          text_key = "result_counts_dp_prog_paa_sub";
-        }
-      } else {
-        text_key = "result_counts_dp_prog_paa_no_subs";
-      }
+      text_key = "result_counts_dp_prog";
     } 
 
   } else if(subject.level === 'crso'){
     //we only care about CRs, which are only DP
-    text_key = "result_counts_dp_crso_drf";
+    text_key = "result_counts_dp_cr";
 
   }
 
@@ -100,7 +79,8 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
           subject,
 
           num_programs:count_items.program,
-          num_results:count_items.result,
+          num_prog_results:count_items.result,
+          num_results: (count_items.result || 0) + (count_items.dr || 0),
           num_indicators:count_items.indicator,
 
           num_subs:count_items.sub_program,
