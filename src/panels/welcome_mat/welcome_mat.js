@@ -773,13 +773,29 @@ function has_hist_data(subject,q6){
 }
 
 function has_planning_data(subject, q6){
-  return _.chain(planning_years)
+  let has_dp;
+  switch(subject.level){
+    case "dept":
+      has_dp = subject.dp_status;
+      break;
+    case "program":
+    case "crso":
+      has_dp = subject.dept.dp_status;
+      break;
+    case "gov":
+    case "tag":
+      has_dp = true;
+  }
+
+  return has_dp && _.chain(planning_years)
     .map(yr => q6.sum(yr) || 0)
     .some()
     .value();
 }
 
 function get_calcs(subject, q6, q12){
+  const has_planned = has_planning_data(subject,q6);
+  const has_hist = has_hist_data(subject,q6);
 
   const hist_spend_data =  _.map(exp_cols, col => q6.sum(col) || 0);
   const planned_spend_data = _.map(planning_years, col => q6.sum(col) || 0);
@@ -826,6 +842,8 @@ function get_calcs(subject, q6, q12){
   const planned_fte_diff = fte_plan_3 && ( (fte_plan_3-fte_last_year)/fte_last_year);
 
   return {
+    has_hist,
+    has_planned,
     spend_last_year_5,
     spend_last_year,
     spend_plan_1,
