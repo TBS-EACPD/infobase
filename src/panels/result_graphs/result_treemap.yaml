@@ -54,7 +54,7 @@ result_counts_dp_dept:
   en: |
     In {{planning_year_1}}, **{{subj_name subject}}** seeks to achieve **{{num_results}}** results through **{{num_crs}}** {{gl_tt (plural_branch num_crs "Core Responsibility" "Core Responsibilities") "CR"}} and **{{num_programs}}** {{gl_tt (plural_branch num_programs "Program" "Programs") "PROG"}}. Progress towards meeting these results will be {{gl_tt "measured" "RESULTS_STATUS"}} using **{{num_indicators}}** {{gl_tt "indicators" "IND_RESULT"}}.
   fr: |
-    En {{planning_year_1}}, **{{subj_name subject}}** cherche à rencontrer **{{num_results}}** résultats à l’aide de **{{num_crs}}** {{gl_tt (plural_branch num_crs "responsabilité essentielle" "responsabilités essentielles") "CR"}} et **{{num_programs}}** {{gl_tt (plural_branch num_programs "programme" "programmes") "PROG"}}. Les progrès accomplis dans l’atteinte de ces résultats seront {{gl_tt "mesurés" "RESULTS_STATUS"}} au moyen de **{{num_indicators}}** {{gl_tt "indicators" "IND_RESULT"}}.
+    En {{planning_year_1}}, **{{subj_name subject}}** cherche à rencontrer **{{num_results}}** résultats à l’aide de **{{num_crs}}** {{gl_tt (plural_branch num_crs "responsabilité essentielle" "responsabilités essentielles") "CR"}} et **{{num_programs}}** {{gl_tt (plural_branch num_programs "programme" "programmes") "PROG"}}. Les progrès accomplis dans l’atteinte de ces résultats seront {{gl_tt "mesurés" "RESULTS_STATUS"}} au moyen de **{{num_indicators}}** {{gl_tt "indicateurs" "IND_RESULT"}}.
 
 
 result_counts_drr_prog_paa_sub_sub:
