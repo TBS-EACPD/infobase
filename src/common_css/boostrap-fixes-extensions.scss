@@ -507,6 +507,19 @@ dl.dl-horizontal.dl-long-terms {
   }
 }
 
+dl.dl-horizontal.dl-really-long-terms {
+  @media(min-width:768px){
+    > dt {
+      // default set by bootstrap is 160px
+      width: 300px;
+    }
+    > dd {
+      // must match dt's width
+      margin-left: 300px;
+    }
+  }
+}
+
 dl.dl-no-bold-dts {
   > dt {
     font-weight: inherit;
