@@ -117,9 +117,7 @@ const SingleIndicatorDisplay = ({indicator}) => {
         {
           indicator.target_type !== "text" &&  //don't show unit of measurement for narrative targets
           !_.isEmpty(indicator.measure) &&
-          <span>
-            ( {indicator.measure} ) 
-          </span>
+          <span> ( {indicator.measure} )</span>
         }
       </dd>
 
