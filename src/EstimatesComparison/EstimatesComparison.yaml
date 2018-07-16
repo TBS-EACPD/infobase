@@ -8,7 +8,7 @@ diff_view_meta_desc:
 
 diff_view_top_text:
   transform: [handlebars, markdown]
-  en: Comparison of the the recently tabled Main Estimates {{est_in_year}} against last year's Main Estimates
+  en: Comparison of the recently tabled Main Estimates {{est_in_year}} against last year's Main Estimates
   fr: Comparaison entre le budget principal des dépenses {{est_in_year}} récemment déposé et celui de {{est_last_year}}
 
 new:
