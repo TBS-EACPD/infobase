@@ -99,7 +99,6 @@ jobs:
           at: ./
       - run: ./.circleci/create_envs.sh
       - run: ./.circleci/authenticate-gcloud.sh
-      - run: ./deploy_build_scripts/split_gzip_build.sh
       - run: ./deploy_build_scripts/push_to_gcloud_bucket.sh
       
 

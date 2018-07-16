@@ -9,7 +9,6 @@ export GCLOUD_BUCKET_URL="gs://infobase-prod-bucket/InfoBase"
 
 #build everything
 ./deploy_build_scripts/build_all.sh
-./deploy_build_scripts/split_gzip_build.sh
 ./deploy_build_scripts/push_to_gcloud_bucket.sh
 
 # cleanup
