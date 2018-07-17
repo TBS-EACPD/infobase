@@ -13,9 +13,8 @@ set -e # will exit if any command has non-zero exit value
 #   -c use checksums to compare files instead of mtime 
 #   -r recursively sync directories
 
-gsutil -m rsync -d -a public-read -c -r ./build/InfoBase $GCLOUD_BUCKET_URL
-# node that -d will get rid of all other files. This means non-gzipped assets get copied even though they haven't changed
+gsutil -m rsync -j -d -a public-read -c -r ./build/InfoBase $GCLOUD_BUCKET_URL
 
+# set no-cache on html and js entry files, always needs to be fresh to guarantee the rest of the cache-busting will work as intended
 gsutil setmeta -h "Cache-Control:no-cache" $GCLOUD_BUCKET_URL/index-*.html
 gsutil setmeta -h "Cache-Control:no-cache" $GCLOUD_BUCKET_URL/app/a*-[ef][nr].min.js
-# set no-cache on html and js entry files, always needs to be fresh to guarantee the rest of the cache-busting will work as intended

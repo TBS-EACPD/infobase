@@ -12,7 +12,5 @@ export GCLOUD_BUCKET_URL="gs://infobase-prod-bucket/InfoBase"
 ./deploy_build_scripts/push_to_gcloud_bucket.sh
 
 # cleanup
-rm -r gzip/
-rm -r non-gzip/
 unset CDN_URL
 unset GCLOUD_BUCKET_URL
