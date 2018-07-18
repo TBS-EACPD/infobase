@@ -4,8 +4,8 @@ gcloud auth activate-service-account --key-file=${HOME}/infobase-prod-cdn-servic
 gcloud config set project infobase-prod
 gcloud config set compute/zone northamerica-northeast1-a
 
-export CDN_URL="http://35.227.240.145/InfoBase"
-export GCLOUD_BUCKET_URL="gs://infobase-prod-bucket/InfoBase"
+export CDN_URL="https://cdn-rdc.ea-ad.ca/InfoBase"
+export GCLOUD_BUCKET_URL="gs://cdn-rdc.ea-ad.ca/InfoBase"
 
 #build everything
 ./deploy_build_scripts/build_all.sh
