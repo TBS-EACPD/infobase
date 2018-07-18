@@ -125,4 +125,3 @@ workflows:
               only:
                 - master
                 - cdn-gzip
-                - cache-busting
