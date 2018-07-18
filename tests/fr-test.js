@@ -12,5 +12,5 @@ const financial_link_sel = "#app-focus-root > div > div > div.outer-container-es
 test('(French) app boots and loads home page data', async t => {
   await t
     // Use the assertion to check if the actual header text is equal to the expected one
-    .expect(Selector(financial_link_sel).innerText).contains("Traduit");
+    .expect(Selector(financial_link_sel).innerText).contains("Trouver");
 });
