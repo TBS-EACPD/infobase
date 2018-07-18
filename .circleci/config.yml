@@ -102,7 +102,6 @@ jobs:
       - run: ./deploy_build_scripts/push_to_gcloud_bucket.sh
       
 
-
 # One workflow that runs all three jobs (build -> test -> deploy), each requiring the previous to have passed
 # Note that deploy is filtered by branch to only run on master
 workflows:
