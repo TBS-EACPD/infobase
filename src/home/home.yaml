@@ -11,11 +11,6 @@ home_finance_intro:
   en: We spent {{fmt_compact_written spent_last_year}} in {{pa_last_year}}
   fr: Nous avons dépensé {{fmt_compact_written spent_last_year}} en {{pa_last_year}}
 
-
-home_finance_link:
-  en: See how it was spent
-  fr: Voir comment cela a été dépensé
-
 home_ppl_title:
   en: People
   fr: Personnel
@@ -24,10 +19,6 @@ home_ppl_intro:
   transform: [handlebars,markdown]
   en: The Federal Public Service counted {{fmt_big_int_real headcount_last_year}} employees at the end of {{ppl_last_year}}
   fr: La Fonction publique fédérale comptait {{fmt_big_int_real headcount_last_year}} employés à la fin de {{ppl_last_year}}
-
-home_ppl_link:
-  en: See who they are 
-  fr: Voir qui nous sommes
 
 home_results_title:
   en: Results
@@ -39,10 +30,6 @@ home_results_intro:
     We met {{past_targets_met}} targets in {{pa_last_year}}
   fr: |
     Nous avons atteint {{past_targets_met}} cibles en {{pa_last_year}}
-
-home_results_link:
-  en: See the results
-  fr: Voir les résultats
 
 home_sub_title:
   en: Find the latest information on all government finances, people and results
@@ -130,10 +117,6 @@ glossary_home_desc:
   en: Search a list of definitions for terms used in the InfoBase
   fr: Liste interrogeable des définitions pour les termes employés dans l'InfoBase
 
-glossary_home_link_text:
-  en: Search the glossary
-  fr: Faire une recherche du glossaire
-
 metadata_home_title:
   en: Datasets
   fr: Données
@@ -141,11 +124,6 @@ metadata_home_title:
 metadata_home_desc: 
   en: Find information on, and external links to, the InfoBase's data sources
   fr: Voir le complément d'information sur les données et sur les liens vers des sites de données ouvertes
-
-metadata_home_link_text:
-  transform: [handlebars]
-  text: |
-    {{gt "see_data"}}
 
 whats_new:
   en: What's new?
@@ -158,12 +136,6 @@ planned_spending_by_program_home:
 planned_ftes_by_program_home:
   en: Number of employees (FTEs) we plan to employ by Program
   fr: Nombre d'employés (ETP) que nous prévoyons employer par Programme
-
-table4_home_link:
-  transform: [handlebars]
-  en: | 
-    {{pa_last_year}} Public Accounts
-  fr: Comptes publics {{pa_last_year}}
 
 tabled_estimates_home:
   en: Tabled Estimates
@@ -219,18 +191,6 @@ home_misc_row_title:
   en: Helpful resources 
   fr: Ressources utiles
 
-start_exp_link:
-  en: Start exploring
-  fr: Commencer l'exploration
-
-start_build_link:
-  en: Start building
-  fr: Commencer à créer
-
-start_search_link:
-  en: Start searching
-  fr: Commencer la recherche
-
 feed_home_title:
   en: Feedback
   fr: Rétroaction
@@ -239,14 +199,6 @@ feed_home_text:
   en: Help improve the current InfoBase and prioritize new features
   fr: Aidez-nous à améliorer l'InfoBase et à établir l'ordre de priorité pour les nouvelles fonctionnalités
 
-feed_home_link:
-  en: Take the survey
-  fr: Participer au sondage
-
-check_home_link:
-  en: Check it out!
-  fr: Consultez-le !
-
 about_home_title:
   en: About Us
   fr: À propos de nous
@@ -254,10 +206,6 @@ about_home_title:
 about_home_desc:
   en: Learn more about our team, principles, data, and technology. Help us improve the InfoBase!
   fr: En apprendre d'avantage sur notre équipe, nos principes, nos données et technologies. Aidez-nous à améliorer l'InfoBase!
-
-about_home_link:
-  en: Learn about us
-  fr: En savoir plus sur nous
 
 survey_home_title:
   en: We want to hear from you!
