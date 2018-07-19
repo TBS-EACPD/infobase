@@ -1,5 +1,6 @@
 import './home.scss';
 import home_text_bundle from "./home.yaml";
+import survey_text_bundle from "../core/survey_link.yaml"
 import get_home_content from './home-data.js';
 import { log_standard_event } from '../core/analytics.js';
 import MediaQuery from 'react-responsive';
@@ -14,13 +15,10 @@ import {
 } from '../util_components.js';
 
 import { general_href_for_item } from '../link_utils.js';
-import {
-  create_text_maker,
-  run_template,
-} from '../models/text.js';
+import { create_text_maker } from '../models/text.js';
 import { StandardRouteContainer } from '../core/NavComponents.js';
 
-const home_tm = create_text_maker(home_text_bundle);
+const home_tm = create_text_maker([home_text_bundle, survey_text_bundle]);
 const TM = props => <StandardTM tmf={home_tm} {...props} />;
 
 export class Home extends React.Component {
@@ -252,9 +250,9 @@ const HomeLayout = props => (
             <CardTopImage
               tmf={home_tm}
               img_src="svg/aboutus.svg"
-              title_key="survey_home_title"
+              title_key="survey_link_text"
               text_key="survey_home_desc"
-              link_href={run_template("survey_link")}
+              link_href="survey_link_href"
             />
           </div>
         </div>

@@ -1,0 +1,7 @@
+survey_link_text:
+  en: Feedback
+  fr: Rétroaction
+
+survey_link_href:
+  transform: [handlebars]
+  text: {{{survey_link}}}

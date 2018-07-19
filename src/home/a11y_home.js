@@ -1,16 +1,14 @@
-import text1 from "./home.yaml";
-import text2 from "./home-a11y.yaml";
+import home_text1 from "./home.yaml";
+import home_text2 from "./home-a11y.yaml";
+import survey_text_bundle from "../core/survey_link.yaml"
 
 import get_home_content from './home-data.js';
 
 import { StandardRouteContainer } from '../core/NavComponents.js';
 import { TM as StdTM } from '../util_components.js';
-import {
-  create_text_maker,
-  run_template,
-} from '../models/text.js';
+import { create_text_maker } from '../models/text.js';
 
-const text_maker = create_text_maker([text1, text2]);
+const text_maker = create_text_maker([home_text1, home_text2, survey_text_bundle]);
 const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 export const Home = () => {
@@ -82,8 +80,8 @@ export const Home = () => {
 
         <section>
           <h3>
-            <a href={run_template("survey_link")}>
-              <TM k="survey_home_title" />
+            <a href={text_maker("survey_link_href")}>
+              <TM k="survey_link_text" />
             </a>
           </h3>
           <TM k="survey_home_desc" />
