@@ -329,33 +329,6 @@ div.height-clipped-bar-area {
   }
 }
 
-.survey-close {
-  @include unstyled-button;
-}
-.survey-link-box {
-  font-size: 1.4em;
-  background-color: #d7faff;
-  border-color: #269abc;
-  padding: 10px;
-  border-radius: 5px;
-  color: #214a5f;
-  display: flex;
-  margin: -10px 0px 10px 0px;
-  width: 100% /* FireFox */
-}
-.survey-link-close-container {
-  /* top right corner */
-  margin-bottom: auto;
-  align-self: flex-start;
-}
-.survey-link-close-container > button  {
-  background-color: #d7faff;
-}
-.survey-link-content-container {
-  width: 100%; /* IE11 */
-  margin: auto;
-  padding: 20px 20px 15px 35px
-}
 
 .gradient.gradient-strong {
     background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1)) !important;

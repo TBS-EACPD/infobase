@@ -12,7 +12,6 @@ export const app_reducer = (state={ lang: window.lang }, { type, payload }) => {
 import { ComponentLoader } from '../core/ComponentLoader.js';
 import { Home } from '../home/home.js';
 import { TooltipActivator } from '../glossary/Tooltips';
-import { PotentialSurveyBox } from '../core/survey_link';
 import { EasyAccess } from '../core/EasyAccess';
 
 const LazyGraphRoute = ComponentLoader(async () => {
@@ -86,7 +85,6 @@ export class App extends React.Component {
       <div tabIndex={-1} id="app-focus-root">
         <TooltipActivator />
         <ReactUnmounter />
-        <PotentialSurveyBox />
         <EasyAccess />
         <Switch>
           <Route path="/metadata/:data_source?" component={LazyMetadata}/>

@@ -18,7 +18,6 @@ import { BudgetMeasuresRoute } from '../partition/budget_measures_subapp/BudgetM
 import { Glossary } from '../glossary/glossary.js';
 import { ReportBuilder } from '../rpb/index.js';
 import { TooltipActivator } from '../glossary/Tooltips';
-import { PotentialSurveyBox } from '../core/survey_link';
 import { EasyAccess } from '../core/EasyAccess';
 import { About } from '../about/about.js';
 import { GraphInventory } from '../graph_route/graph_route.js';
@@ -42,7 +41,6 @@ export class App extends React.Component {
       <div tabIndex={-1} id="app-focus-root">
         <TooltipActivator />
         <ReactUnmounter />
-        <PotentialSurveyBox />
         <EasyAccess />
         <Switch>
           <Route path="/metadata/:data_source?" component={MetaData}/>

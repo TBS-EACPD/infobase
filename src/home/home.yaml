@@ -259,6 +259,14 @@ about_home_link:
   en: Learn about us
   fr: En savoir plus sur nous
 
+survey_home_title:
+  en: We want to hear from you!
+  fr: La parole est à vous!
+
+survey_home_desc:
+  en: Did the InfoBase help you find what you were looking for? Help us make improvements by telling us about your experience!
+  fr: L’InfoBase vous a-t-elle été utile pour trouver ce que vous cherchiez? Aidez-nous à l’améliorer en nous relatant votre expérience!
+
 home_pop_by_exec:
   en: Population by Executive Level
   fr: Population selon les niveaux des cadres supérieurs

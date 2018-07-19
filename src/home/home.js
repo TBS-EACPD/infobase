@@ -14,7 +14,10 @@ import {
 } from '../util_components.js';
 
 import { general_href_for_item } from '../link_utils.js';
-import { create_text_maker } from '../models/text.js';
+import {
+  create_text_maker,
+  run_template,
+} from '../models/text.js';
 import { StandardRouteContainer } from '../core/NavComponents.js';
 
 const home_tm = create_text_maker(home_text_bundle);
@@ -243,6 +246,15 @@ const HomeLayout = props => (
               title_key="about_home_title"
               text_key="about_home_desc"
               link_href="#about"
+            />
+          </div>
+          <div className="fcol-md-4 fcol-sm-6 linkcard">
+            <CardTopImage
+              tmf={home_tm}
+              img_src="svg/aboutus.svg"
+              title_key="survey_home_title"
+              text_key="survey_home_desc"
+              link_href={run_template("survey_link")}
             />
           </div>
         </div>
