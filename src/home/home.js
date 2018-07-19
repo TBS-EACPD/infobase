@@ -248,7 +248,7 @@ const HomeLayout = props => (
           <div className="fcol-md-4 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
-              img_src="svg/aboutus.svg"
+              img_src="svg/feedback.svg"
               title_key="survey_link_text"
               text_key="survey_home_desc"
               link_href={home_tm("survey_link_href")}

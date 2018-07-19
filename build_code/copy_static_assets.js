@@ -112,6 +112,7 @@ const common_svg = [
   'src/home/glossary.svg',
   'src/home/metadata.svg',
   'src/home/compare_estimates.svg',
+  'src/home/feedback.svg',
 
   //simplographic images
   'src/panels/intro_graphs/check.svg',
