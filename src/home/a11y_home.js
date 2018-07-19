@@ -1,6 +1,5 @@
 import home_text1 from "./home.yaml";
 import home_text2 from "./home-a11y.yaml";
-import survey_text_bundle from "../core/survey_link.yaml"
 
 import get_home_content from './home-data.js';
 
@@ -8,7 +7,7 @@ import { StandardRouteContainer } from '../core/NavComponents.js';
 import { TM as StdTM } from '../util_components.js';
 import { create_text_maker } from '../models/text.js';
 
-const text_maker = create_text_maker([home_text1, home_text2, survey_text_bundle]);
+const text_maker = create_text_maker([home_text1, home_text2]);
 const TM = props => <StdTM tmf={text_maker} {...props} />;
 
 export const Home = () => {

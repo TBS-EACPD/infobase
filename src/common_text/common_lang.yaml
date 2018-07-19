@@ -946,3 +946,18 @@ infographic_for:
   en: Infographic for {{name}}
   fr: Infographie pour {{name}}
 
+
+
+##################################
+# footer text and links
+##################################
+survey_link_text:
+  en: Feedback
+  fr: Rétroaction
+
+survey_link_href:
+  transform: [handlebars]
+  en: |
+    {{{survey_link}}}
+  fr: |
+    {{{survey_link}}}
