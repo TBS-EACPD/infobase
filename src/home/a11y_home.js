@@ -5,7 +5,10 @@ import get_home_content from './home-data.js';
 
 import { StandardRouteContainer } from '../core/NavComponents.js';
 import { TM as StdTM } from '../util_components.js';
-import { create_text_maker } from '../models/text.js';
+import {
+  create_text_maker,
+  run_template,
+} from '../models/text.js';
 
 const text_maker = create_text_maker([text1, text2]);
 const TM = props => <StdTM tmf={text_maker} {...props} />;
@@ -75,6 +78,15 @@ export const Home = () => {
             </a>
           </h3>
           <TM k="report_builder_home_desc" />
+        </section>
+
+        <section>
+          <h3>
+            <a href={run_template("survey_link")}>
+              <TM k="survey_home_title" />
+            </a>
+          </h3>
+          <TM k="survey_home_desc" />
         </section>
 
       </section>
