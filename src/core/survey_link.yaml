@@ -4,4 +4,7 @@ survey_link_text:
 
 survey_link_href:
   transform: [handlebars]
-  text: {{{survey_link}}}
+  en: |
+    {{{survey_link}}}
+  fr: |
+    {{{survey_link}}}

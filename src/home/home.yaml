@@ -218,3 +218,7 @@ home_pop_by_fol:
 home_pop_avg_age:
   en: Employee Average Age
   fr: Âge moyen des employés
+
+check_home_link:
+  en: Check it out!
+  fr: Consultez-le!

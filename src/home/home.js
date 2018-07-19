@@ -252,7 +252,7 @@ const HomeLayout = props => (
               img_src="svg/aboutus.svg"
               title_key="survey_link_text"
               text_key="survey_home_desc"
-              link_href="survey_link_href"
+              link_href={home_tm("survey_link_href")}
             />
           </div>
         </div>

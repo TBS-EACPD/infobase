@@ -13,6 +13,7 @@ import { ComponentLoader } from '../core/ComponentLoader.js';
 import { Home } from '../home/home.js';
 import { TooltipActivator } from '../glossary/Tooltips';
 import { EasyAccess } from '../core/EasyAccess';
+import { FooterSurveyLinkSetter } from '../core/survey_link.js';
 
 const LazyGraphRoute = ComponentLoader(async () => {
   const { GraphInventory } = await import('../graph_route/graph_route.js');
@@ -85,6 +86,7 @@ export class App extends React.Component {
       <div tabIndex={-1} id="app-focus-root">
         <TooltipActivator />
         <ReactUnmounter />
+        <FooterSurveyLinkSetter />
         <EasyAccess />
         <Switch>
           <Route path="/metadata/:data_source?" component={LazyMetadata}/>
