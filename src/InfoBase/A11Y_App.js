@@ -22,14 +22,7 @@ import { EasyAccess } from '../core/EasyAccess';
 import { About } from '../about/about.js';
 import { GraphInventory } from '../graph_route/graph_route.js';
 import { EstimatesComparison } from "../EstimatesComparison/EstimatesComparison.js";
-import { FooterSurveyLinkSetter } from '../core/survey_link.js';
-
-
-// Now you can dispatch navigation actions from anywhere!
-// store.dispatch(push('/foo'))
-
-
-
+import { CreateRuntimeFooterLinks } from '../core/CreateRuntimeFooterLinks.js';
 
 
 export class App extends React.Component {
@@ -42,7 +35,7 @@ export class App extends React.Component {
       <div tabIndex={-1} id="app-focus-root">
         <TooltipActivator />
         <ReactUnmounter />
-        <FooterSurveyLinkSetter />
+        <CreateRuntimeFooterLinks />
         <EasyAccess />
         <Switch>
           <Route path="/metadata/:data_source?" component={MetaData}/>

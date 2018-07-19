@@ -56,12 +56,10 @@ const index_lang_lookups = {
     en: `
       <li><a href="https://www.canada.ca/en/contact.html">Contact us</a></li>
       <li><a href="https://www.canada.ca/en.html">Visit Canada.ca</a></li>
-      <li><a id="footer_survey_link"></a></li>
     `,
     fr: `
       <li><a href="https://www.canada.ca/fr/contact.html">Contactez-nous</a></li>
       <li><a href="https://www.canada.ca/fr.html">Visiter Canada.ca</a></li>
-      <li><a id="footer_survey_link"></a></li>
     `,
   },
   script_url: {
