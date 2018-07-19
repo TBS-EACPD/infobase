@@ -22,7 +22,7 @@ import { EasyAccess } from '../core/EasyAccess';
 import { About } from '../about/about.js';
 import { GraphInventory } from '../graph_route/graph_route.js';
 import { EstimatesComparison } from "../EstimatesComparison/EstimatesComparison.js";
-import { CreateRuntimeFooterLinks } from '../core/CreateRuntimeFooterLinks.js';
+import { InsertRuntimeFooterLinks } from '../core/InsertRuntimeFooterLinks.js';
 
 
 export class App extends React.Component {
@@ -35,7 +35,7 @@ export class App extends React.Component {
       <div tabIndex={-1} id="app-focus-root">
         <TooltipActivator />
         <ReactUnmounter />
-        <CreateRuntimeFooterLinks />
+        <InsertRuntimeFooterLinks />
         <EasyAccess />
         <Switch>
           <Route path="/metadata/:data_source?" component={MetaData}/>
