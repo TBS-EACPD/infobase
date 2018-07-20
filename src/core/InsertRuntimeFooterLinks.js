@@ -1,9 +1,11 @@
+import '../common_css/fontawesome-svg-styles.scss'; // css needed for survey_link_icon
+
 import { trivial_text_maker } from '../models/text.js';
 
 const footer_link_items = [
   {
     href: trivial_text_maker("survey_link_href"),
-    text: trivial_text_maker("survey_link_text"),
+    text: trivial_text_maker("survey_link_text") + " " + trivial_text_maker("survey_link_icon"),
   },
 ];
 
