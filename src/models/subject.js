@@ -6,6 +6,9 @@ import {
 } from './staticStoreMixin.js';
 import { trivial_text_maker } from '../models/text.js';
 
+
+
+
 const common = () => mix().with(staticStoreMixin, PluralSingular, SubjectMixin);
 
 const gov_name = ( 
