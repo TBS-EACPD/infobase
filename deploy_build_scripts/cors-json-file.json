@@ -1,6 +1,13 @@
 [
   {
-    "origin": ["*"],
+    "origin": [
+      "http://www.tbs-sct.gc.ca",
+      "https://www.tbs-sct.gc.ca",
+      "http://authoring.publiservice.tbs-sct.gc.ca",
+      "http://dev_internal.tbs-sct.gc.ca",
+      "http://localhost:8080",
+      "http://127.0.0.1:8080"
+    ],
     "responseHeader": ["Content-Type"],
     "method": ["GET"],
     "maxAgeSeconds": 3600
