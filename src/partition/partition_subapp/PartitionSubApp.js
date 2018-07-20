@@ -307,7 +307,8 @@ export class PartitionSubApp {
         .attr("id", "tab-catch-after")
         .attr("tabindex", 0);
 
-      const intro_popup_fader = this.container.select(".visual")
+
+      const intro_popup_fader = this.container.select(".__partition__")
         .insert("div", ".partition-controls")
         .classed("partition-diagram-fader", true);
 
