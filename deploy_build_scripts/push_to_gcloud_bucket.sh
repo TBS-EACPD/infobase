@@ -8,6 +8,7 @@ set -e # will exit if any command has non-zero exit value
 #   -m enables multi-core 
 #   -h Content-Encoding:gzip
 # rsync
+#   -j gzip files for transfer
 #   -d will delete files in destination that aren't in source
 #   -a public read 
 #   -c use checksums to compare files instead of mtime 
