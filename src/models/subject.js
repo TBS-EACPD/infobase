@@ -602,12 +602,13 @@ Subject.BudgetMeasure = class BudgetMeasure extends common(){
     this.ref_id = ref_id;
     this.description = description;
     this.orgs = _.map(data, measure_data => measure_data.org_id);
+    this.funds = data.funding,
     this.data = this.process_budget_measure_data(data);
   }
 
   static create_and_register(args){
     if ( !_.isUndefined(args.parent_id) ){
-      this.register_submeasure_by_parent(args);
+      this.register_submeasure_to_parent(args);
     } else {
       const inst = new BudgetMeasure(args);
       this.register(args.id, inst);
