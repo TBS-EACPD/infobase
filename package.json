@@ -97,6 +97,7 @@
     "a11y_prod": "node build_code/webpack_starter.js a11y_client BOTH PROD",
     "a11y_prod_no_watch": "node build_code/webpack_starter.js a11y_client BOTH PROD NO-WATCH",
     "browser_test": "testcafe chrome tests/",
+    "headless_test": "testcafe chrome:headless tests/",
     "ci_test": "testcafe 'chromium:headless --no-sandbox' tests/",
     "ci_serve": "http-server -s -a 127.0.0.1"
   },
