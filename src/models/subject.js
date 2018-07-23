@@ -531,10 +531,6 @@ Subject.InstForm = class InstForm extends common(){
 }
 
 const submeasures_by_parent_id = {};
-const process_budget_measure_data = (data) => {
-  // todo
-  return data;
-}
 Subject.BudgetMeasure = class BudgetMeasure extends common(){
   static get type_name(){ return 'budget_measure'; }
   static get singular(){ return trivial_text_maker("budget_measure"); }
@@ -575,7 +571,7 @@ Subject.BudgetMeasure = class BudgetMeasure extends common(){
       id,
       parent_id,
       name,
-      data: process_budget_measure_data(data),
+      data,
     };
     const submeasures_of_parent = submeasures_by_parent_id[parent_id];
 
@@ -601,7 +597,7 @@ Subject.BudgetMeasure = class BudgetMeasure extends common(){
     this.ref_id = ref_id;
     this.description = description;
     this.orgs = _.map(data, measure_data => measure_data.org_id);
-    this.data = process_budget_measure_data(data);
+    this.data = data;
     this.funds = data; // TODO legacy key, everying should be using data at the end of this
   }
 
