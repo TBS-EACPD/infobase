@@ -157,8 +157,9 @@ var csv_from_table_names = function(table_ids){
 
 const other_csvs = _.map(
   [
-    'budget_measure_funds.csv',
-    'budget_measure_lookups.csv',
+    'budget_measure_data.csv',
+    'budget_measure_lookups_en.csv',
+    'budget_measure_lookups_fr.csv',
   ],
   public_dir_prefixer
 );
