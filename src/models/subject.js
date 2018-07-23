@@ -530,6 +530,7 @@ Subject.InstForm = class InstForm extends common(){
   }
 }
 
+const submeasures_by_parent_id = {};
 Subject.BudgetMeasure = class BudgetMeasure extends common(){
   static get type_name(){ return 'budget_measure'; }
   static get singular(){ return trivial_text_maker("budget_measure"); }
@@ -564,21 +565,53 @@ Subject.BudgetMeasure = class BudgetMeasure extends common(){
       }
     }
   }
-
-  static create_and_register(args){
-    const inst = new BudgetMeasure(args);
-    this.register(args.id, inst);
-    return inst;
+  
+  static process_budget_measure_data(data){
+    // todo
+    return data;
   }
-  constructor({id, name, chapter_key, ref_id, description, funds}){
+
+  static register_submeasure_to_parent({id, parent_id, name, data}){
+    const submeasure = {
+      id,
+      parent_id,
+      name,
+      data: this.process_budget_measure_data(data),
+    };
+    const submeasures_of_parent = submeasures_by_parent_id[parent_id];
+
+    if (submeasures_of_parent.length > 0){
+      submeasures_by_parent_id[parent_id] = [
+        ...submeasures_of_parent,
+        submeasure,
+      ];
+    } else {
+      submeasures_by_parent_id[parent_id] = [submeasure];
+    }
+  }
+  get submeasures(){
+    const submeasures = submeasures_by_parent_id[this.id];
+    return _.isUndefined(submeasures) ? [] : submeasures;
+  }
+
+  constructor({id, name, chapter_key, ref_id, description, data}){
     super();
     this.id = id;
     this.name = name;
     this.chapter_key = chapter_key;
     this.ref_id = ref_id;
     this.description = description;
-    this.orgs = _.map(funds, fund_row => fund_row.org_id);
-    this.funds = funds;
+    this.orgs = _.map(data, measure_data => measure_data.org_id);
+    this.data = this.process_budget_measure_data(data);
+  }
+
+  static create_and_register(args){
+    if ( !_.isUndefined(args.parent_id) ){
+      this.register_submeasure_by_parent(args);
+    } else {
+      const inst = new BudgetMeasure(args);
+      this.register(args.id, inst);
+    }
   }
 };
 

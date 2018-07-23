@@ -14,9 +14,9 @@ const populate_budget_measures = (budget_measure_lookups, budget_measure_data) =
       const standard_fields = {
         measure_id: row[0], 
         org_id: row[1],
-        fund: +row[2],
+        funding: +row[2],
         allocated: +row[3],
-        withheld: +row[4],
+        witheld: +row[4],
         remaining: +row[5],
       };
 
@@ -27,7 +27,7 @@ const populate_budget_measures = (budget_measure_lookups, budget_measure_data) =
         .fromPairs()
         .value();
 
-      return _.assign(standard_fields, {program_allocations: program_fields});
+      return _.assign({}, standard_fields, {program_allocations: program_fields});
     })
     .groupBy("measure_id")
     .value();
