@@ -24,7 +24,7 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   build:
     docker:
-      - image: gcr.io/ib-api-first/ib-client-ci-build:latest
+      - image: gcr.io/ib-static-content/ib-client-ci-build:latest
         <<: *gcloud_auth
     steps:
       - checkout
@@ -71,7 +71,7 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   test:
     docker:
-      - image: gcr.io/ib-api-first/ib-client-ci-test:latest
+      - image: gcr.io/ib-static-content/ib-client-ci-test:latest
         <<: *gcloud_auth
     steps:
       - attach_workspace:
@@ -107,11 +107,7 @@ workflows:
   version: 2
   build_test_deploy:
     jobs:
-      - build:
-          filters:
-            branches:
-              only:
-                - not_master_hehe
+      - build
       - test:
           requires:
             - build
