@@ -374,3 +374,17 @@ budget_chapters:
   oth:
     en: Other
     fr: Autre
+
+budget_values:
+  funding:
+    en: Funding
+    fr: todo
+  allocated:
+    en: Allocated
+    fr: todo
+  withheld:
+    en: Withheld
+    fr: todo
+  remaining:
+    en: Remaining
+    fr: todo

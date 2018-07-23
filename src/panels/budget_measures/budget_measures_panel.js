@@ -14,7 +14,10 @@ import {
 import { Fragment } from 'react';
 
 const { BudgetMeasure } = Subject;
-const { budget_chapters } = businessConstants;
+const { 
+  budget_chapters,
+  budget_values,
+} = businessConstants;
 
 const {
   Select,
@@ -139,6 +142,7 @@ class BudgetMeasureHBars extends React.Component {
     super();
     this.state = {
       selected_filter: 'all',
+      selected_value: 'funding',
     };
   }
   render(){
@@ -149,6 +153,16 @@ class BudgetMeasureHBars extends React.Component {
         info,
       },
     } = this.props;
+
+    const { 
+      selected_filter,
+      selected_value,
+    } = this.state;
+
+    const sorted_data = _.chain(data)
+      .sortBy(budget_measure => -budget_measure.name)
+      .sortBy(budget_measure => -budget_measure.data[selected_value])
+      .value();
 
     const text_area = <div className = "frow" >
       <div className = "fcol-md-12 fcol-xs-12 medium_panel_text text">
@@ -171,11 +185,12 @@ class BudgetMeasureHBars extends React.Component {
     </div>;
 
     if(window.is_a11y_mode){
+      // TODO add other values to a11y table
       return <div>
         { text_area }
         <A11YTable
           table_name = { text_maker("budget_name_header") }
-          data = {_.map(data, 
+          data = {_.map(sorted_data, 
             (budget_measure_item) => ({
               label: budget_measure_item.name,
               data: [
@@ -206,9 +221,7 @@ class BudgetMeasureHBars extends React.Component {
       </div>;
     }
 
-    const { selected_filter } = this.state;
-    
-    const filter_options = _.chain(data)
+    const filter_options = _.chain(sorted_data)
       .map(budget_measure_item => budget_measure_item.chapter_key)
       .uniq()
       .map( chapter_key => ({
@@ -224,12 +237,36 @@ class BudgetMeasureHBars extends React.Component {
         present_chapter_keys,
       ))
       .value();
-      
-    const graph_ready_data = _.chain(data)
+
+    const value_options = _.chain(sorted_data)
+      .flatMap(data => data.data)
+      .reduce( (memo, data) => {
+        return {
+          funding: memo.funding + data.funding,
+          allocated: memo.allocated + data.allocated,
+          withheld: memo.withheld + data.withheld,
+          remaining: memo.remaining + data.remaining,
+        };
+      },
+      {
+        funding: 0,
+        allocated: 0,
+        withheld: 0,
+        remaining: 0,
+      })
+      .pickBy(value => value > 0)
+      .keys()
+      .map(key => ({
+        id: key,
+        name: budget_values[key].text,
+      }))
+      .value();
+    
+    const graph_ready_data = _.chain(sorted_data)
       .map( budget_measure_item => ({
         key: budget_measure_item.id,
         label: budget_measure_item.name,
-        data: [budget_measure_item.data.funding],
+        data: [budget_measure_item.data[selected_value]],
         chapter_key: budget_measure_item.chapter_key,
         ref_id: budget_measure_item.ref_id,
       }))
@@ -263,15 +300,15 @@ class BudgetMeasureHBars extends React.Component {
       })
       .value();
     
-    const names_of_measures_with_negative_funding = selected_filter !== 'all' ? 
-      _.chain(data)
-        .filter( measure => measure.data.funding < 0 )
-        .map( measure_with_negative_funding => measure_with_negative_funding.name )
+    const names_of_measures_with_negative_values = selected_filter !== 'all' ? 
+      _.chain(sorted_data)
+        .filter( measure => measure.data.values < 0 )
+        .map( measure_with_negative_values => measure_with_negative_values.name )
         .value() :
       ["__negative_valued"];
     
     const bar_colors = (item_label) => {
-      if ( _.indexOf(names_of_measures_with_negative_funding, item_label) !== -1 ){
+      if ( _.indexOf(names_of_measures_with_negative_values, item_label) !== -1 ){
         return "#ff7e0f";
       } else {
         return "#1f77b4";
@@ -282,9 +319,26 @@ class BudgetMeasureHBars extends React.Component {
       { text_area }
       <div className = "frow">
         <div className = "fcol-md-12" style = {{ width: "100%" }}>
-          
           <div className = 'centerer'>
-            <label>
+            <label style = {{Padding: "0px 5px 0px 5px"}}>
+              <TM k="budget_panel_select_value" />
+              <Select 
+                selected = {selected_value}
+                options = {_.map(value_options, 
+                  ({name, id}) => ({ 
+                    id,
+                    display: name,
+                  })
+                )}
+                onSelect = { id => this.setState({selected_value: id}) }
+                style = {{
+                  display: 'block',
+                  margin: '10px auto',
+                }}
+                className = "form-control"
+              />
+            </label>
+            <label style = {{Padding: "0px 5px 0px 5px"}}>
               <TM k="budget_panel_filter_by_chapter" />
               <Select 
                 selected = {selected_filter}
