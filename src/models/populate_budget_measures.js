@@ -50,7 +50,7 @@ const populate_budget_measures = (budget_measures, budget_measure_funds) => {
 }
 
 export function load_budget_measures(){
-  const measure_prom = load_csv("budget_measure_lookups");
+  const measure_prom = load_csv("budget_measure_lookups_"+window.lang);
   const funds_prom = load_csv("budget_measure_funds");
   return Promise.all([
     measure_prom,
