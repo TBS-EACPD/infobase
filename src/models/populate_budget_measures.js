@@ -16,7 +16,7 @@ const populate_budget_measures = (budget_measure_lookups, budget_measure_data) =
         org_id: row[1],
         funding: +row[2],
         allocated: +row[3],
-        witheld: +row[4],
+        withheld: +row[4],
         remaining: +row[5],
       };
 

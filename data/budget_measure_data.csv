@@ -1,4 +1,4 @@
-measure_id,org_id,budget_2018_funding,budget_2018_allocated,budget_2018_witheld,budget_2018_remaining,ActivityCode1,ProgramAmount1,ActivityCode2,ProgramAmount2,ActivityCode3,ProgramAmount3,ActivityCode4,ProgramAmount4,ActivityCode5,ProgramAmount5,ActivityCode6,ProgramAmount6,ActivityCode7,ProgramAmount7,ActivityCode8,ProgramAmount8,ActivityCode9,ProgramAmount9,ActivityCode10,ProgramAmount10,ActivityCode11,ProgramAmount11,ActivityCode12,ProgramAmount12
+measure_id,org_id,budget_2018_funding,budget_2018_allocated,budget_2018_withheld,budget_2018_remaining,ActivityCode1,ProgramAmount1,ActivityCode2,ProgramAmount2,ActivityCode3,ProgramAmount3,ActivityCode4,ProgramAmount4,ActivityCode5,ProgramAmount5,ActivityCode6,ProgramAmount6,ActivityCode7,ProgramAmount7,ActivityCode8,ProgramAmount8,ActivityCode9,ProgramAmount9,ActivityCode10,ProgramAmount10,ActivityCode11,ProgramAmount11,ActivityCode12,ProgramAmount12
 1,128,0,0,0,0,,,,,,,,,,,,,,,,,,,,,,,,
 1,305,4532488,0,0,4532488,,,,,,,,,,,,,,,,,,,,,,,,
 1,313,47508409,0,0,47508409,,,,,,,,,,,,,,,,,,,,,,,,
