@@ -9,7 +9,7 @@ const about_gov_sel = "#app-focus-root > div > div > div > div > #simplographic 
   "div.panel-body > div.medium_panel_text > div.grid-row.canada-intro-grid > section.lg-grid-panel70 > p > p";
   
 //then create a test and place your code there
-test('App boots and loads about gov page data', async t => {
+test('App boots and loads about gov page', async t => {
   await t
     // Use the assertion to check if the actual header text is equal to the expected one
     .expect(Selector(about_gov_sel).innerText).contains("government");

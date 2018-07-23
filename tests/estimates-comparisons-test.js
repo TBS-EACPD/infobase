@@ -10,7 +10,7 @@ const estimates_desc_sel = "#app-focus-root > div > div > div >" +
 
 
 //then create a test and place your code there
-test('App boots and loads estimates comparisons page data', async t => {
+test('App boots and loads estimates comparisons page', async t => {
   await t
     // Use the assertion to check if the actual header text is equal to the expected one
     .expect(Selector(estimates_desc_sel).innerText).contains("Comparison");

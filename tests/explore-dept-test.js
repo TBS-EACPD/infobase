@@ -10,7 +10,7 @@ const explore_desc_sel = "#app-focus-root > div > div > div >" +
 
 
 //then create a test and place your code there
-test('App boots and loads explore dept page data', async t => {
+test('App boots and loads explore dept page', async t => {
   await t
     // Use the assertion to check if the actual header text is equal to the expected one
     .expect(Selector(explore_desc_sel).innerText).contains("perspectives");

@@ -8,7 +8,7 @@ const financial_funding_sel = "#app-focus-root > div > div > div > div > #budget
   "div.panel-body > div > div.frow > div.fcol-md-12.fcol-xs-12.medium_panel_text.text > span > p";
 
 //then create a test and place your code there
-test('(French) app boots and loads financial page data', async t => {
+test('(French) app boots and loads financial page', async t => {
   await t
     // Use the assertion to check if the actual header text is equal to the expected one
     .expect(Selector(financial_funding_sel).innerText).contains("mesures");
