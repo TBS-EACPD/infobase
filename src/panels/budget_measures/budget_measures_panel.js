@@ -30,7 +30,7 @@ const { text_maker, TM } = create_text_maker_component([text1,text2]);
 
 const calculate_stats_common = (data) => {
   const total_funding = _.reduce(data,
-    (total, budget_measure) => total + budget_measure.funds.fund, 
+    (total, budget_measure) => total + budget_measure.funds.funding, 
     0
   );
 
@@ -66,7 +66,7 @@ const calculate_functions = {
           .fromPairs()
           .value(),
       }))
-      .sortBy(budget_measure => -budget_measure.funds.fund)
+      .sortBy(budget_measure => -budget_measure.funds.funding)
       .value();
 
     if (!_.isEmpty(all_measures_with_funds_rolled_up)){
@@ -88,7 +88,7 @@ const calculate_functions = {
         ...measure,
         funds: _.filter( measure.funds, funds => funds.org_id === org_id_string )[0],
       }))
-      .sortBy(measure => -measure.funds.fund)
+      .sortBy(measure => -measure.funds.funding)
       .value();
     
     if (!_.isEmpty(org_measures_with_funds_filtered)){
@@ -185,7 +185,7 @@ class BudgetMeasureHBars extends React.Component {
                 <Format
                   key = { budget_measure_item.id + "col3" } 
                   type = "compact1" 
-                  content = { budget_measure_item.funds.fund } 
+                  content = { budget_measure_item.funds.funding } 
                 />,
                 <a 
                   key = { budget_measure_item.id + "col4" }
@@ -229,7 +229,7 @@ class BudgetMeasureHBars extends React.Component {
       .map( budget_measure_item => ({
         key: budget_measure_item.id,
         label: budget_measure_item.name,
-        data: [budget_measure_item.funds.fund],
+        data: [budget_measure_item.funds.funding],
         chapter_key: budget_measure_item.chapter_key,
         ref_id: budget_measure_item.ref_id,
       }))
@@ -265,7 +265,7 @@ class BudgetMeasureHBars extends React.Component {
     
     const names_of_measures_with_negative_funding = selected_filter !== 'all' ? 
       _.chain(data)
-        .filter( measure => measure.funds.fund < 0 )
+        .filter( measure => measure.funds.funding < 0 )
         .map( measure_with_negative_funding => measure_with_negative_funding.name )
         .value() :
       ["__negative_valued"];
