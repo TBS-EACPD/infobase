@@ -30,7 +30,7 @@ const { text_maker, TM } = create_text_maker_component([text1,text2]);
 
 const calculate_stats_common = (data) => {
   const total_funding = _.reduce(data,
-    (total, budget_measure) => total + budget_measure.funds.funding, 
+    (total, budget_measure) => total + budget_measure.data.funding, 
     0
   );
 
@@ -53,27 +53,27 @@ const calculate_stats_common = (data) => {
 
 const calculate_functions = {
   gov: function(subject, info, options){
-    const all_measures_with_funds_rolled_up = _.chain( BudgetMeasure.get_all() )
+    const all_measures_with_data_rolled_up = _.chain( BudgetMeasure.get_all() )
       .map( measure => ({
         ...measure,
-        funds: _.chain(measure.funds[0])
+        data: _.chain(measure.data[0])
           .keys()
           .difference(["measure_id", "org_id"])
           .map( key => [
             key,
-            _.reduce(measure.funds, (total, fund_row) => total + fund_row[key], 0),
+            _.reduce(measure.data, (total, data_row) => total + data_row[key], 0),
           ])
           .fromPairs()
           .value(),
       }))
-      .sortBy(budget_measure => -budget_measure.funds.funding)
+      .sortBy(budget_measure => -budget_measure.data.funding)
       .value();
 
-    if (!_.isEmpty(all_measures_with_funds_rolled_up)){
+    if (!_.isEmpty(all_measures_with_data_rolled_up)){
       return {
-        data: all_measures_with_funds_rolled_up,
+        data: all_measures_with_data_rolled_up,
         subject,
-        info: calculate_stats_common(all_measures_with_funds_rolled_up),
+        info: calculate_stats_common(all_measures_with_data_rolled_up),
       };
     } else {
       return false;
@@ -82,20 +82,20 @@ const calculate_functions = {
   dept: function(subject, info, options){
     const org_id_string = subject.id.toString();
 
-    const org_measures_with_funds_filtered = _.chain( BudgetMeasure.get_all() )
+    const org_measures_with_data_filtered = _.chain( BudgetMeasure.get_all() )
       .filter(measure => _.indexOf( measure.orgs, org_id_string ) !== -1)
       .map( measure => ({
         ...measure,
-        funds: _.filter( measure.funds, funds => funds.org_id === org_id_string )[0],
+        data: _.filter( measure.data, data => data.org_id === org_id_string )[0],
       }))
-      .sortBy(measure => -measure.funds.funding)
+      .sortBy(measure => -measure.data.funding)
       .value();
     
-    if (!_.isEmpty(org_measures_with_funds_filtered)){
+    if (!_.isEmpty(org_measures_with_data_filtered)){
       return {
-        data: org_measures_with_funds_filtered,
+        data: org_measures_with_data_filtered,
         subject,
-        info: calculate_stats_common(org_measures_with_funds_filtered),
+        info: calculate_stats_common(org_measures_with_data_filtered),
       };
     } else {
       return false;
@@ -185,7 +185,7 @@ class BudgetMeasureHBars extends React.Component {
                 <Format
                   key = { budget_measure_item.id + "col3" } 
                   type = "compact1" 
-                  content = { budget_measure_item.funds.funding } 
+                  content = { budget_measure_item.data.funding } 
                 />,
                 <a 
                   key = { budget_measure_item.id + "col4" }
@@ -229,7 +229,7 @@ class BudgetMeasureHBars extends React.Component {
       .map( budget_measure_item => ({
         key: budget_measure_item.id,
         label: budget_measure_item.name,
-        data: [budget_measure_item.funds.funding],
+        data: [budget_measure_item.data.funding],
         chapter_key: budget_measure_item.chapter_key,
         ref_id: budget_measure_item.ref_id,
       }))
@@ -265,7 +265,7 @@ class BudgetMeasureHBars extends React.Component {
     
     const names_of_measures_with_negative_funding = selected_filter !== 'all' ? 
       _.chain(data)
-        .filter( measure => measure.funds.funding < 0 )
+        .filter( measure => measure.data.funding < 0 )
         .map( measure_with_negative_funding => measure_with_negative_funding.name )
         .value() :
       ["__negative_valued"];

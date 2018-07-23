@@ -598,7 +598,6 @@ Subject.BudgetMeasure = class BudgetMeasure extends common(){
     this.description = description;
     this.orgs = _.map(data, measure_data => measure_data.org_id);
     this.data = data;
-    this.funds = data; // TODO legacy key, everying should be using data at the end of this
   }
 
   static create_and_register(args){
