@@ -44,7 +44,7 @@ export class App extends React.Component {
           <Route path="/igoc/:grouping?" component={IgocExplorer} />
           <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={ResourceExplorer} />
           <Route path="/orgs/:level/:subject_id/infograph/:bubble?/" component={InfoGraph} />
-          <Route path="/budget-measures/:first_column?" component={BudgetMeasuresRoute} />
+          <Route path="/budget-measures/:first_column?/:value?" component={BudgetMeasuresRoute} />
           <Route path="/glossary/:active_key?" component={Glossary} />
           <Route path="/rpb/:config?" component={ReportBuilder} />
           <Route path="/about" component={About} />

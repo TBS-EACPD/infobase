@@ -1,5 +1,6 @@
 import './BudgetMeasuresRoute.yaml';
 import { Subject } from '../../models/subject';
+import { businessConstants } from '../../models/businessConstants.js';
 import { ensure_loaded } from '../../core/lazy_loader.js';
 import { StandardRouteContainer } from '../../core/NavComponents.js';
 import { 
@@ -16,6 +17,8 @@ import { BudgetMeasuresPartition } from './BudgetMeasuresPartition.js';
 
 import { BudgetMeasuresA11yContent } from './BudgetMeasuresA11yContent.js';
 
+const { budget_values } = businessConstants;
+
 const first_column_options = [
   {
     id: "budget-measure",
@@ -29,12 +32,19 @@ const first_column_options = [
 
 const first_column_ids = _.map(first_column_options, option => option.id );
 
-const validate_first_column_route_param = (first_column, history) => {
-  if ( _.indexOf(first_column_ids, first_column) === -1 ){
-    history.push(`/budget-measures/${first_column_options[0].id}`);
-    return false;
-  } else {
+const validate_route = (first_column, value, history) => {
+  const first_column_is_valid = _.indexOf(first_column_ids, first_column) !== -1;
+  const value_is_valid = _.indexOf(_.keys(budget_values), value) !== -1;
+
+  if (first_column_is_valid && value_is_valid){
     return true;
+  } else {
+    const valid_first_column = first_column_is_valid ? first_column : first_column_options[0].id;
+    const valid_value = value_is_valid ? value : "allocated";
+    const corrected_route = `/budget-measures/${valid_first_column}/${valid_value}`;
+    history.push(corrected_route);
+
+    return false;
   }
 }
 
@@ -47,10 +57,10 @@ export class BudgetMeasuresRoute extends React.Component {
       filter_string: false,
     };
 
-    validate_first_column_route_param(props.match.params.first_column, props.history);
+    validate_route(props.match.params.first_column, props.match.params.value, props.history);
   }
   shouldComponentUpdate(nextProps){
-    return validate_first_column_route_param(nextProps.match.params.first_column, this.props.history);
+    return validate_route(nextProps.match.params.first_column, nextProps.match.params.value, this.props.history);
   }
   componentDidMount(){
     ensure_loaded({

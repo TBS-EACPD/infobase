@@ -13,7 +13,7 @@ import {
 } from '../../util_components.js';
 
 import { Subject } from '../../models/subject';
-import * as businessConstants from '../../models/businessConstants.yaml';
+import { businessConstants } from '../../models/businessConstants.js';
 
 const { BudgetMeasure } = Subject;
 const { budget_chapters } = businessConstants;

@@ -4,7 +4,7 @@ import { text_maker } from "./budget_measure_text_provider.js";
 import { budget_measures_hierarchy_factory } from './budget_measures_hierarchy_factory.js';
 import { ContainerEscapeHatch } from '../../util_components';
 import { Subject } from '../../models/subject';
-import * as businessConstants from '../../models/businessConstants.yaml';
+import { businessConstants } from '../../models/businessConstants.js';
 import { formats } from '../../core/format.js';
 
 const { budget_chapters } = businessConstants;

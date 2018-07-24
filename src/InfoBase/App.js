@@ -99,7 +99,7 @@ export class App extends React.Component {
           <Route path="/orgs/:level/:subject_id/infograph/:bubble?/" component={LazyInfoGraph} />
           <Route path="/glossary/:active_key?" component={LazyGlossary} />
           <Route path="/partition/:perspective?/:data_type?" component={LazyPartitionRoute} />
-          <Route path="/budget-measures/:first_column?" component={LazyBudgetMeasuresRoute} />
+          <Route path="/budget-measures/:first_column?/:value?" component={LazyBudgetMeasuresRoute} />
           <Route path="/explore-:perspective?" component={LazyBubbleExplore} />
           <Route path="/rpb/:config?" component={LazyRPB} />
           <Route path="/about" component={LazyAbout} />

@@ -5,7 +5,7 @@ import {
   TextMaker,
 } from './budget_measure_text_provider.js'
 import { budget_measures_hierarchy_factory } from './budget_measures_hierarchy_factory.js';
-import * as businessConstants from '../../models/businessConstants.yaml';
+import { businessConstants } from '../../models/businessConstants.js';
 import {Subject} from '../../models/subject';
 
 const { budget_chapters } = businessConstants;
