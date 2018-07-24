@@ -566,7 +566,7 @@ Subject.BudgetMeasure = class BudgetMeasure extends common(){
     }
   }
   
-  static register_submeasure_to_parent({id, parent_id, name, data}){
+  static register_submeasure_by_parent({id, parent_id, name, data}){
     const submeasure = {
       id,
       parent_id,
@@ -596,13 +596,82 @@ Subject.BudgetMeasure = class BudgetMeasure extends common(){
     this.chapter_key = chapter_key;
     this.ref_id = ref_id;
     this.description = description;
-    this.orgs = _.map(data, measure_data => measure_data.org_id);
-    this.data = data;
+    this.orgs = _.map(data, row => row.org_id);
+    this.data = _.map(data, row => {
+      // Need to roll up allocated, withheld, and program_allocations out of submeasures, do it at 
+      // call time with memoized getters since submeasures may not all be registered until then
+
+      const row_allocated = row.allocated;
+      const row_withheld = row.withheld;
+      const row_program_allocations = row.program_allocations;
+
+      const submeasure_data_for_this_row = _.memoize(
+        () => {
+          return _.chain(submeasures_by_parent_id[id])
+            .flatMap(submeasure => submeasure.data)
+            .filter(submeasure_data => submeasure_data.org_id === row.org_id)
+            .value() || [];
+        }
+      );
+
+      const modified_row = _.chain(row)
+        .cloneDeep()
+        .omit(["allocated", "withheld", "program_allocations"])
+        .value();
+
+      Object.defineProperty(
+        modified_row, 
+        'allocated', 
+        {
+          get: _.memoize(function() { 
+            return submeasure_data_for_this_row().length === 0 ?
+              row_allocated :
+              _.reduce(
+                submeasure_data_for_this_row(),
+                (memo, submeasure_data) => memo + submeasure_data.allocated,
+                row_allocated
+              ); 
+          }),
+        }
+      );
+      Object.defineProperty(
+        modified_row, 
+        'withheld', 
+        {
+          get: _.memoize(function() {
+            return submeasure_data_for_this_row().length === 0 ?
+              row_withheld :
+              _.reduce(
+                submeasure_data_for_this_row(),
+                (memo, submeasure_data) => memo + submeasure_data.withheld,
+                row_withheld
+              );
+          }),
+        }
+      );
+      Object.defineProperty(
+        modified_row, 
+        'program_allocations', 
+        {
+          get: _.memoize(function() {
+            return submeasure_data_for_this_row().length === 0 ?
+              row_program_allocations :
+              _.assign(
+                {},
+                ...row_program_allocations,
+                ..._.map(submeasure_data_for_this_row(), submeasure_data => submeasure_data.program_allocations)
+              );
+          }),
+        }
+      );
+
+      return modified_row;
+    });
   }
 
   static create_and_register(args){
     if ( args.parent_id !== "" ){
-      this.register_submeasure_to_parent(args);
+      this.register_submeasure_by_parent(args);
     } else {
       const inst = new BudgetMeasure(args);
       this.register(args.id, inst);
