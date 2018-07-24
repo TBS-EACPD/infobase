@@ -314,13 +314,15 @@ class BudgetMeasureHBars extends React.Component {
         return "#1f77b4";
       }
     }
+    
+    const dropdown_padding = "0px 15px";
 
     return <div>
       { text_area }
       <div className = "frow">
         <div className = "fcol-md-12" style = {{ width: "100%" }}>
           <div className = 'centerer'>
-            <label style = {{Padding: "0px 5px 0px 5px"}}>
+            <label style = {{padding: dropdown_padding}}>
               <TM k="budget_panel_select_value" />
               <Select 
                 selected = {selected_value}
@@ -338,7 +340,7 @@ class BudgetMeasureHBars extends React.Component {
                 className = "form-control"
               />
             </label>
-            <label style = {{Padding: "0px 5px 0px 5px"}}>
+            <label style = {{padding: dropdown_padding}}>
               <TM k="budget_panel_filter_by_chapter" />
               <Select 
                 selected = {selected_filter}
