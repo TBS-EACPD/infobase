@@ -242,8 +242,6 @@ class BudgetMeasureHBars extends React.Component {
     </div>;
 
     if(window.is_a11y_mode){
-      // TODO add other values to a11y table
-      // TODO separate program level a11y table?
       return <div>
         { text_area }
         <A11YTable
@@ -251,30 +249,48 @@ class BudgetMeasureHBars extends React.Component {
           data = {_.map(sorted_data, 
             (budget_measure_item) => ({
               label: budget_measure_item.name,
-              data: [
+              data: _.filter([
                 <div key = { budget_measure_item.id + "col2" } >
                   { budget_chapters[budget_measure_item.chapter_key].text }
                 </div>,
-                <Format
+                !this.treatAsProgram(subject) && <Format
                   key = { budget_measure_item.id + "col3" } 
                   type = "compact1" 
                   content = { budget_measure_item.data.funding } 
                 />,
+                <Format
+                  key = { budget_measure_item.id + (this.treatAsProgram(subject) ? "col3" : "col4") } 
+                  type = "compact1" 
+                  content = { budget_measure_item.data.allocated } 
+                />,
+                !this.treatAsProgram(subject) && <Format
+                  key = { budget_measure_item.id + "col5" } 
+                  type = "compact1" 
+                  content = { budget_measure_item.data.withheld } 
+                />,
+                !this.treatAsProgram(subject) && <Format
+                  key = { budget_measure_item.id + "col6" } 
+                  type = "compact1" 
+                  content = { budget_measure_item.data.remaining } 
+                />,
                 <a 
-                  key = { budget_measure_item.id + "col4" }
+                  key = { budget_measure_item.id + (this.treatAsProgram(subject) ? "col4" : "col7") }
                   href={BudgetMeasure.make_budget_link(budget_measure_item.chapter_key, budget_measure_item.ref_id)}
                 >
                   { text_maker("link") }
                 </a>,
-              ],
+              ]),
             })
           )}
           label_col_header = { text_maker("budget_measure") }
-          data_col_headers = {[
+          data_col_headers = {_.filter([
             text_maker("budget_chapter"),
-            text_maker("budget_measures_panel_title"),
+            !this.treatAsProgram(subject) && budget_values.funding.text,
+            budget_values.allocated.text,
+            !this.treatAsProgram(subject) && budget_values.withheld.text,
+            !this.treatAsProgram(subject) && budget_values.remaining.text,
             text_maker("budget_panel_a11y_link_header"),
-          ]}
+          ])}
         />
       </div>;
     }
