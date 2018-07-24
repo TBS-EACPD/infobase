@@ -59,9 +59,8 @@ const calculate_functions = {
     const all_measures_with_data_rolled_up = _.chain( BudgetMeasure.get_all() )
       .map( measure => ({
         ...measure,
-        data: _.chain(measure.data[0])
+        data: _.chain(budget_values)
           .keys()
-          .difference(["measure_id", "org_id"])
           .map( key => [
             key,
             _.reduce(measure.data, (total, data_row) => total + data_row[key], 0),
