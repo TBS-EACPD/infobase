@@ -25,6 +25,7 @@ const populate_budget_measures = (budget_measure_lookups, budget_measure_data) =
         .filter(cell => cell !== "")
         .chunk(2)
         .fromPairs()
+        .mapValues( values => +values )
         .value();
 
       return _.assign({}, standard_fields, {program_allocations: program_fields});

@@ -31,7 +31,7 @@ const {
 
 const { text_maker, TM } = create_text_maker_component([text1,text2]);
 
-const calculate_stats_common = (data) => {
+const gov_dept_calculate_stats_common = (data) => {
   const total_funding = _.reduce(data,
     (total, budget_measure) => total + budget_measure.data.funding, 
     0
@@ -51,6 +51,45 @@ const calculate_stats_common = (data) => {
     chapter_count,
     multiple_measures: measure_count > 1,
     multiple_chapters: chapter_count > 1,
+  }
+}
+
+const crso_program_calculate = (subject, info, options) => {
+  const org_id_string = subject.dept.id.toString();
+  const activity_code = _.split(subject.id, '-')[1]; // Get activity code from id, since crso subject doesn't surface it directly
+
+  const program_measures_with_data_filtered = _.chain( BudgetMeasure.get_all() )
+    .filter(measure => _.indexOf( measure.orgs, org_id_string ) !== -1)
+    .map( measure => ({
+      ...measure,
+      data: _.chain(measure.data)
+        .filter( data => data.org_id === org_id_string )
+        .thru( nested_data => {
+          const program_allocations = nested_data[0].program_allocations;
+
+          return {
+            ...nested_data[0],
+            allocated: !_.isEmpty(program_allocations) ? 
+             _.chain(nested_data[0].program_allocations)
+               .filter( (value, key) => key === activity_code )
+               .reduce( (memo, value) => memo + value, 0)
+               .value() :
+              0,
+          };
+        })
+        .value(),
+    }))
+    .filter(measure => measure.data.allocated !== 0)
+    .value();
+  
+  if (!_.isEmpty(program_measures_with_data_filtered)){
+    return {
+      data: program_measures_with_data_filtered,
+      subject,
+      info: {}, // TODO, will have different info calc then gov and dept, haven't written text yet though
+    };
+  } else {
+    return false;
   }
 }
 
@@ -75,7 +114,7 @@ const calculate_functions = {
       return {
         data: all_measures_with_data_rolled_up,
         subject,
-        info: calculate_stats_common(all_measures_with_data_rolled_up),
+        info: gov_dept_calculate_stats_common(all_measures_with_data_rolled_up),
       };
     } else {
       return false;
@@ -96,50 +135,14 @@ const calculate_functions = {
       return {
         data: org_measures_with_data_filtered,
         subject,
-        info: calculate_stats_common(org_measures_with_data_filtered),
+        info: gov_dept_calculate_stats_common(org_measures_with_data_filtered),
       };
     } else {
       return false;
     }
   },
-  program: function(subject, info, options){
-    const org_id_string = subject.dept.id.toString();
-    const activity_code = subject.activity_code;
-
-    const program_measures_with_data_filtered = _.chain( BudgetMeasure.get_all() )
-      .filter(measure => _.indexOf( measure.orgs, org_id_string ) !== -1)
-      .map( measure => ({
-        ...measure,
-        data: _.chain(measure.data)
-          .filter( data => data.org_id === org_id_string )
-          .thru( nested_data => {
-            const program_allocations = nested_data[0].program_allocations;
-
-            return {
-              ...nested_data[0],
-              allocated: !_.isEmpty(program_allocations) ? 
-                _.chain(nested_data[0].program_allocations)
-                  .filter( (value, key) => key === activity_code )
-                  .reduce( (memo, value) => memo + value, 0)
-                  .value() :
-                0,
-            };
-          })
-          .value(),
-      }))
-      .filter(measure => measure.data.allocated !== 0)
-      .value();
-    
-    if (!_.isEmpty(program_measures_with_data_filtered)){
-      return {
-        data: program_measures_with_data_filtered,
-        subject,
-        info: {}, // TODO, will have different info calc then gov and dept, haven't written text yet though
-      };
-    } else {
-      return false;
-    }
-  },
+  program: crso_program_calculate,
+  crso: crso_program_calculate,
 };
 
 const budget_measure_render = function({calculations, footnotes, sources}){
@@ -157,7 +160,7 @@ const budget_measure_render = function({calculations, footnotes, sources}){
 };
 
 
-['gov', 'dept', 'program'].forEach( level_name => new PanelGraph(
+['gov', 'dept', 'program', 'crso'].forEach( level_name => new PanelGraph(
   {
     level: level_name,
     key: "budget_measures_panel",
@@ -185,7 +188,7 @@ class BudgetMeasureHBars extends React.Component {
 
     this.state = {
       selected_filter: 'all',
-      selected_value: subject.level === "program" ? 
+      selected_value: _.indexOf(["program", "crso"], subject.level) !== -1  ? 
         "allocated" : 
         'funding',
     };
@@ -226,9 +229,9 @@ class BudgetMeasureHBars extends React.Component {
             args={{subject, ...info}} 
           />
         }
-        { subject.level === "program" &&
+        { _.indexOf(["program", "crso"], subject.level) !== -1 &&
           <TM
-            k={"program_budget_measures_panel_text"} 
+            k={"program_crso_budget_measures_panel_text"} 
             args={{subject, ...info}} 
           />
         }
@@ -374,7 +377,7 @@ class BudgetMeasureHBars extends React.Component {
       <div className = "frow">
         <div className = "fcol-md-12" style = {{ width: "100%" }}>
           <div className = 'centerer'>
-            { subject.level !== "program" &&
+            { _.indexOf(["program", "crso"], subject.level) === -1 &&
               <label style = {{padding: dropdown_padding}}>
                 <TM k="budget_panel_select_value" />
                 <Select 
