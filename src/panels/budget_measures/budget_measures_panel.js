@@ -91,7 +91,27 @@ const calculate_functions = {
         ...measure,
         data: _.filter( measure.data, data => data.org_id === org_id_string )[0],
       }))
-      .sortBy(measure => -measure.data.funding)
+      .value();
+    
+    if (!_.isEmpty(org_measures_with_data_filtered)){
+      return {
+        data: org_measures_with_data_filtered,
+        subject,
+        info: calculate_stats_common(org_measures_with_data_filtered),
+      };
+    } else {
+      return false;
+    }
+  },
+  program: function(subject, info, options){
+    const org_id_string = subject.id.toString();
+
+    const org_measures_with_data_filtered = _.chain( BudgetMeasure.get_all() )
+      .filter(measure => _.indexOf( measure.orgs, org_id_string ) !== -1)
+      .map( measure => ({
+        ...measure,
+        data: _.filter( measure.data, data => data.org_id === org_id_string )[0],
+      }))
       .value();
     
     if (!_.isEmpty(org_measures_with_data_filtered)){
@@ -121,7 +141,7 @@ const budget_measure_render = function({calculations, footnotes, sources}){
 };
 
 
-['gov', 'dept'].forEach( level_name => new PanelGraph(
+['gov', 'dept', 'program'].forEach( level_name => new PanelGraph(
   {
     level: level_name,
     key: "budget_measures_panel",
@@ -129,7 +149,7 @@ const budget_measure_render = function({calculations, footnotes, sources}){
     footnotes: false,
     source: (subject) => [{
       html: text_maker("budget_route_title"),
-      href: "#budget-measures/" + (subject.level === "gov" ? "budget-measure" : "dept"),
+      href: "#budget-measures/" + (subject.level === "gov" ? "budget-measure" : "dept"), // todo: update when new arg added to budget route
     }],
     calculate: calculate_functions[level_name],
     render: budget_measure_render,
@@ -166,7 +186,7 @@ class BudgetMeasureHBars extends React.Component {
 
     const text_area = <div className = "frow" >
       <div className = "fcol-md-12 fcol-xs-12 medium_panel_text text">
-        {  subject.level === "gov" &&
+        { subject.level === "gov" &&
           <Fragment>
             <TM k={"budget_route_top_text"} />
             <TM 
@@ -175,9 +195,15 @@ class BudgetMeasureHBars extends React.Component {
             />
           </Fragment>
         }
-        {  subject.level === "dept" &&
+        { subject.level === "dept" &&
           <TM
             k={"dept_budget_measures_panel_text"} 
+            args={{subject, ...info}} 
+          />
+        }
+        { subject.level === "program" &&
+          <TM
+            k={"program_budget_measures_panel_text"} 
             args={{subject, ...info}} 
           />
         }

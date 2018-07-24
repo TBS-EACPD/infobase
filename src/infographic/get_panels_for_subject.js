@@ -157,6 +157,7 @@ const get_program_panels = subject => {
       'dead_program_warning',
       "financial_intro", 
       "welcome_mat",
+      "budget_measures_panel",
       'historical_auth_exp',
 
       'vote_stat_split',
