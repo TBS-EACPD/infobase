@@ -177,6 +177,9 @@ const budget_measure_render = function({calculations, footnotes, sources}){
 
 
 class BudgetMeasureHBars extends React.Component {
+  treatAsProgram(subject){
+    return _.indexOf(["program", "crso"], subject.level) !== -1;
+  }
   constructor(props){
     super(props);
 
@@ -188,7 +191,7 @@ class BudgetMeasureHBars extends React.Component {
 
     this.state = {
       selected_filter: 'all',
-      selected_value: _.indexOf(["program", "crso"], subject.level) !== -1  ? 
+      selected_value: this.treatAsProgram(subject) ? 
         "allocated" : 
         'funding',
     };
@@ -229,7 +232,7 @@ class BudgetMeasureHBars extends React.Component {
             args={{subject, ...info}} 
           />
         }
-        { _.indexOf(["program", "crso"], subject.level) !== -1 &&
+        { this.treatAsProgram(subject) &&
           <TM
             k={"program_crso_budget_measures_panel_text"} 
             args={{subject, ...info}} 
@@ -377,7 +380,7 @@ class BudgetMeasureHBars extends React.Component {
       <div className = "frow">
         <div className = "fcol-md-12" style = {{ width: "100%" }}>
           <div className = 'centerer'>
-            { _.indexOf(["program", "crso"], subject.level) === -1 &&
+            { !this.treatAsProgram(subject) &&
               <label style = {{padding: dropdown_padding}}>
                 <TM k="budget_panel_select_value" />
                 <Select 
