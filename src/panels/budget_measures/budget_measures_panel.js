@@ -103,21 +103,38 @@ const calculate_functions = {
     }
   },
   program: function(subject, info, options){
-    const org_id_string = subject.id.toString();
+    const org_id_string = subject.dept.id.toString();
+    const activity_code = subject.activity_code;
 
-    const org_measures_with_data_filtered = _.chain( BudgetMeasure.get_all() )
+    const program_measures_with_data_filtered = _.chain( BudgetMeasure.get_all() )
       .filter(measure => _.indexOf( measure.orgs, org_id_string ) !== -1)
       .map( measure => ({
         ...measure,
-        data: _.filter( measure.data, data => data.org_id === org_id_string )[0],
+        data: _.chain(measure.data)
+          .filter( data => data.org_id === org_id_string )
+          .thru( nested_data => {
+            const program_allocations = nested_data[0].program_allocations;
+
+            return {
+              ...nested_data[0],
+              allocated: !_.isEmpty(program_allocations) ? 
+                _.chain(nested_data[0].program_allocations)
+                  .filter( (value, key) => key === activity_code )
+                  .reduce( (memo, value) => memo + value, 0)
+                  .value() :
+                0,
+            };
+          })
+          .value(),
       }))
+      .filter(measure => measure.data.allocated !== 0)
       .value();
     
-    if (!_.isEmpty(org_measures_with_data_filtered)){
+    if (!_.isEmpty(program_measures_with_data_filtered)){
       return {
-        data: org_measures_with_data_filtered,
+        data: program_measures_with_data_filtered,
         subject,
-        info: calculate_stats_common(org_measures_with_data_filtered),
+        info: {}, // TODO, will have different info calc then gov and dept, haven't written text yet though
       };
     } else {
       return false;
@@ -157,11 +174,20 @@ const budget_measure_render = function({calculations, footnotes, sources}){
 
 
 class BudgetMeasureHBars extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
+
+    const { 
+      graph_args: {
+        subject,
+      },
+    } = props;
+
     this.state = {
       selected_filter: 'all',
-      selected_value: 'funding',
+      selected_value: subject.level === "program" ? 
+        "allocated" : 
+        'funding',
     };
   }
   render(){
@@ -211,6 +237,7 @@ class BudgetMeasureHBars extends React.Component {
 
     if(window.is_a11y_mode){
       // TODO add other values to a11y table
+      // TODO separate program level a11y table?
       return <div>
         { text_area }
         <A11YTable
@@ -347,24 +374,26 @@ class BudgetMeasureHBars extends React.Component {
       <div className = "frow">
         <div className = "fcol-md-12" style = {{ width: "100%" }}>
           <div className = 'centerer'>
-            <label style = {{padding: dropdown_padding}}>
-              <TM k="budget_panel_select_value" />
-              <Select 
-                selected = {selected_value}
-                options = {_.map(value_options, 
-                  ({name, id}) => ({ 
-                    id,
-                    display: name,
-                  })
-                )}
-                onSelect = { id => this.setState({selected_value: id}) }
-                style = {{
-                  display: 'block',
-                  margin: '10px auto',
-                }}
-                className = "form-control"
-              />
-            </label>
+            { subject.level !== "program" &&
+              <label style = {{padding: dropdown_padding}}>
+                <TM k="budget_panel_select_value" />
+                <Select 
+                  selected = {selected_value}
+                  options = {_.map(value_options, 
+                    ({name, id}) => ({ 
+                      id,
+                      display: name,
+                    })
+                  )}
+                  onSelect = { id => this.setState({selected_value: id}) }
+                  style = {{
+                    display: 'block',
+                    margin: '10px auto',
+                  }}
+                  className = "form-control"
+                />
+              </label>
+            }
             <label style = {{padding: dropdown_padding}}>
               <TM k="budget_panel_filter_by_chapter" />
               <Select 

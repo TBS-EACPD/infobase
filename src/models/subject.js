@@ -658,7 +658,7 @@ Subject.BudgetMeasure = class BudgetMeasure extends common(){
               row_program_allocations :
               _.assign(
                 {},
-                ...row_program_allocations,
+                row_program_allocations,
                 ..._.map(submeasure_data_for_this_row(), submeasure_data => submeasure_data.program_allocations)
               );
           }),
