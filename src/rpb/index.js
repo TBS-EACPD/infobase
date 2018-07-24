@@ -340,18 +340,17 @@ class AnalyticsSynchronizer extends React.Component {
 
 const URLSynchronizer = withRouter(
   class URLSynchronizer_ extends React.Component {
-    //note that we do not update the URL when componentDidMount(). 
-    //this is so that the URL isn't printed too often
-    //alternatively, we *can* overwrite the URL in componentDidMount() using replaceState().
     render(){ return null; }
     shouldComponentUpdate(new_props){
       // return rpb_link(this.props.state) !== rpb_link(new_props.state);
       return rpb_link(new_props.state) !== window.location.hash;
     }
-    componentDidUpdate(){
-      this.updateURLImperatively();
+    componentDidMount(){ //on the first render, it's possible the url is naive
+      const { history } = this.props;
+      const new_url = rpb_link(this.props.state, true);
+      history.replace(new_url);
     }
-    updateURLImperatively(){
+    componentDidUpdate(){
       const { history } = this.props;
       const new_url = rpb_link(this.props.state, true);
       history.push(new_url);
