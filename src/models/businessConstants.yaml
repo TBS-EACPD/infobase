@@ -380,11 +380,11 @@ budget_values:
     en: Total Funding
     fr: todo
   allocated:
-    en: Allocated Fudning
+    en: Allocated Funds
     fr: todo
   withheld:
-    en: Withheld Funding
+    en: Withheld Funds
     fr: todo
   remaining:
-    en: Remaining Funding
+    en: Remaining Funds
     fr: todo
