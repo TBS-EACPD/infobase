@@ -168,7 +168,7 @@ const budget_measure_render = function({calculations, footnotes, sources}){
     footnotes: false,
     source: (subject) => [{
       html: text_maker("budget_route_title"),
-      href: "#budget-measures/" + (subject.level === "gov" ? "budget-measure" : "dept"), // todo: update when new arg added to budget route
+      href: "#budget-measures/" + (subject.level === "gov" ? "budget-measure" : "dept") + "/funding",
     }],
     calculate: calculate_functions[level_name],
     render: budget_measure_render,

@@ -66,7 +66,7 @@ export const Home = (props) => {
 
         <section>
           <h3>
-            <a href="#budget-measures/budget-measure">
+            <a href="#budget-measures/budget-measure/funding">
               <TM k="budget_home_title" />
             </a>
           </h3>
