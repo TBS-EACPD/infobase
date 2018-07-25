@@ -89,9 +89,12 @@ const standard_data_wrapper_node_rules = (node) => {
     const show = [_.head(_node.children)];
     const hide = _.tail(_node.children);
     const unhide = _.filter(hide, 
-      __node => __node.data.type !== "net_adjust" ? 
+      __node => ( 
+        __node.data.type !== "net_adjust" ? 
           Math.abs(__node.value) > root_value/100 :
-          false);
+          false 
+      )
+    );
     return [show.concat(unhide), _.difference(hide, unhide)];
   }
 }
@@ -147,7 +150,7 @@ const update_with_search = (diagram, props) => {
     .uniq()
     .value();
   const how_many_to_be_shown = node => {
-    const partition = _.partition(node.children, child => _.includes(to_open, child));
+    const partition = _.partition( node.children, child => _.includes(to_open, child) );
     return partition;
   };
     

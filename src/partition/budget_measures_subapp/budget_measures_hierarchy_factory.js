@@ -19,8 +19,53 @@ const get_total_budget_measure_funds = (selected_value, filtered_chapter_keys) =
     .value();
 }
 
-const post_traversal_children_filter = (node, selected_value) => {
-  if (selected_value === "funding"){
+const post_traversal_modifications = (node, selected_value) => {
+  node.value_type = selected_value;
+
+  if ( _.isNaN(node.value) && node.children && node.children.length > 0 ){
+    node.value = roll_up_children_values(node);
+  }
+  
+  if ( _.isUndefined(node.children) ){
+    node.submeasures = get_node_submeasures_for_hierarchy_leaf(node, selected_value);
+  }
+
+  post_traversal_children_filter(node);
+  post_traversal_search_string_set(node);
+}
+
+const roll_up_children_values = (node) => {
+  return _.reduce(node.children, (sum, child_node) => sum + child_node.value, 0);
+}
+
+const get_node_submeasures_for_hierarchy_leaf = (node, selected_value) => {
+  let org_id, measure_id, activity_code;
+
+  if (node.data.type === "program"){
+    // TODO, will be very different than other cases 
+  }
+
+  if (node.data.type === "budget_measure"){
+    org_id = node.parent.data.id;
+    measure_id = node.data.id;
+  } else if (node.data.type === "dept"){
+    org_id = node.data.id;
+    measure_id = node.parent.data.id;
+  } else {
+    return [];
+  }
+
+  return _.chain( Subject.BudgetMeasure.lookup(measure_id).submeasures() )
+    .filter(submeasure => submeasure.data.org_id === org_id)
+    .map( submeasure => ({
+      ...submeasure, 
+      value: submeasure.data[selected_value],
+    }))
+    .value();
+}
+
+const post_traversal_children_filter = (node) => {
+  if (node.value_type === "funding"){
     return; // Don't filter anything when total funding selected, want to show 0$ items in this case only
   } else if ( _.isUndefined(node.children) ){
     return; // Nothing to do on leaves of hierarchy
@@ -43,6 +88,7 @@ const post_traversal_search_string_set = (node) => {
     node.data.search_string += _.deburr(node.data.description.replace(/<(?:.|\n)*?>/gm, '').toLowerCase());
   }
 }
+
 
 const budget_measure_first_hierarchy_factory = (selected_value, filtered_chapter_keys) => {
   return d3.hierarchy(
@@ -101,10 +147,7 @@ const budget_measure_first_hierarchy_factory = (selected_value, filtered_chapter
         return orgNodes;
       }
     })
-    .eachAfter(node => {
-      post_traversal_children_filter(node, selected_value);
-      post_traversal_search_string_set(node);
-    })
+    .eachAfter(node => post_traversal_modifications(node, selected_value) )
     .sort(absolute_value_sort_net_adjust_biased);
 }
 
@@ -177,13 +220,7 @@ const dept_first_hierarchy_factory = (selected_value, filtered_chapter_keys) => 
         return budgetMeasureNodes;
       }
     })
-    .eachAfter( node => {
-      if ( _.isNaN(node.value) && node.children && node.children.length > 0 ){
-        node.value = _.reduce(node.children, (sum, child_node) => sum + child_node.value, 0);
-      }
-      post_traversal_children_filter(node, selected_value);
-      post_traversal_search_string_set(node);
-    })
+    .eachAfter(node => post_traversal_modifications(node, selected_value) )
     .sort(absolute_value_sort_net_adjust_biased);
 }
 
