@@ -5,6 +5,7 @@ const {
   BudgetMeasure,
   Dept,
   Program,
+  CRSO,
 } = Subject;
 
 const absolute_value_sort_net_adjust_biased = (a,b) => {
@@ -95,13 +96,38 @@ const post_traversal_search_string_set = (node) => {
   }
 }
 
-const make_program_nodes = (measure_id, org_id) => {
+const make_program_allocation_nodes = (measure_id, org_id) => {
+  const org = Dept.lookup(org_id);
+  if ( _.isUndefined(org) ){
+    return null;
+  }
+
+  const org_acronym = org.acronym;
+
   const program_allocations = _.chain( BudgetMeasure.lookup(measure_id).data )
     .filter( data_row => +data_row.org_id === org_id && !_.isEmpty(data_row.program_allocations) )
     .flatMap(data_row => data_row.program_allocations)
-    .value();
+    .value()[0];
   
-  // TODO make and return nodes from activity codes, need to remember some are programs and some are CRSOs...
+  if ( _.isEmpty(program_allocations) ){
+    return null;
+  } else {
+    const program_allocation_nodes = _.map(program_allocations, (allocation_value, activity_code) => {
+      const id = `${org_acronym}-${activity_code}`;
+      const program = Program.lookup(id);
+      const crso = CRSO.lookup(id);
+  
+      const program_or_crso = program || crso;
+  
+      return  {
+        ...program_or_crso,
+        type: "program_allocation",
+        value: allocation_value,
+      };
+    });
+  
+    return program_allocation_nodes;
+  }
 }
 
 
@@ -165,7 +191,7 @@ const budget_measure_first_hierarchy_factory = (selected_value, filtered_chapter
       } else if (selected_value === "allocated" && node.type === "dept"){
         const measure_id = node.parent_measure_id;
         const org_id = node.id;
-        return make_program_nodes(measure_id, org_id);
+        return make_program_allocation_nodes(measure_id, org_id);
       }
     })
     .eachAfter(node => post_traversal_modifications(node, selected_value) )
@@ -243,7 +269,7 @@ const dept_first_hierarchy_factory = (selected_value, filtered_chapter_keys) => 
       } else if (selected_value === "allocated" && node.type === "budget_measure"){
         const measure_id = node.id;
         const org_id = node.parent_org_id;
-        return make_program_nodes(measure_id, org_id);
+        return make_program_allocation_nodes(measure_id, org_id);
       }
     })
     .eachAfter(node => post_traversal_modifications(node, selected_value) )
