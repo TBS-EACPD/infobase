@@ -20,18 +20,28 @@ const formatter = node => {
   return " (" + format(node.__value__) + ")";
 }
 
-const get_level_headers = (first_column) => {
+const get_level_headers = (first_column, selected_value) => {
+  let first_two_headers;
   if (first_column === "dept"){
-    return {
+    first_two_headers = {
       "1": text_maker("org"),
       "2": text_maker("budget_measure"),
     };
   } else {
-    return {
+    first_two_headers = {
       "1": text_maker("budget_measure"),
       "2": text_maker("org"),
     };
   }
+
+  const additional_headers = selected_value === "allocated" ?
+    { "3": text_maker("program") } :
+    {};
+  
+  return {
+    ...first_two_headers,
+    ...additional_headers,
+  };
 }
 
 const root_text_func = (displayed_measure_count, root_value) => text_maker("budget_measures_partition_root", {root_value, displayed_measure_count});
@@ -175,7 +185,7 @@ const render_diagram = (diagram, props, data, data_wrapper_node_rules, dont_fade
   diagram.configure_then_render({
     data,
     formatter,
-    level_headers: get_level_headers(props.first_column),
+    level_headers: get_level_headers(props.first_column, props.selected_value),
     root_text_func: _.curry(root_text_func)(displayed_measure_count),
     popup_template,
     data_wrapper_node_rules,
