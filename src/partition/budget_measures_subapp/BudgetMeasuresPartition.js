@@ -37,7 +37,9 @@ const get_level_headers = (first_column) => {
 const root_text_func = (displayed_measure_count, root_value) => text_maker("budget_measures_partition_root", {root_value, displayed_measure_count});
 
 const popup_template = node => {
-  const dept_is_first_column = (node.depth === 1 && node.data.type === "dept") || (node.depth === 2 && node.parent.data.type === "dept");
+  const dept_is_first_column = (node.depth === 1 && node.data.type === "dept") || 
+    (node.depth === 2 && node.parent.data.type === "dept") || 
+    (node.depth === 3 && node.parent.data.type === "budget_measure");
 
   const is_dept = node.data.type === "dept";
   const has_infographic = is_dept && node.data.id !== 9999;
