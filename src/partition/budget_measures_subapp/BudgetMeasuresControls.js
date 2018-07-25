@@ -16,7 +16,15 @@ import { Subject } from '../../models/subject';
 import { businessConstants } from '../../models/businessConstants.js';
 
 const { BudgetMeasure } = Subject;
-const { budget_chapters } = businessConstants;
+const {
+  budget_chapters,
+  budget_values,
+} = businessConstants;
+
+const budget_value_options = _.map(
+  budget_values, 
+  (value, key) => ({ id: key, display: value.text })
+);
 
 export class BudgetMeasuresControls extends React.Component {
   constructor(){
@@ -67,13 +75,30 @@ export class BudgetMeasuresControls extends React.Component {
     return (
       <div className="budget-measures-partition-controls">
         <LabeledBox 
+          label = { <TextMaker text_key="budget_measure_display_value_label" /> }
+          content = {
+            <div className="centerer">
+              <RadioButtons
+                options = { _.map( budget_value_options, ({id, display }) => ({ id, display, active: id === selected_value }) ) }
+                onChange = { id => {
+                  const new_path = `/budget-measures/${first_column}/${id}`;
+                  if ( history.location.pathname !== new_path ){
+                    // the first_column prop, and thus this button's active id, is updated through this route push
+                    history.push(new_path);
+                  }
+                }}
+              />
+            </div>
+          }
+        />
+        <LabeledBox 
           label = { <TextMaker text_key="budget_measure_group_by_label" /> }
           content = {
             <div className="centerer">
               <RadioButtons
                 options = { _.map( group_by_items, ({id, display }) => ({ id, display, active: id === first_column }) ) }
                 onChange = { id => {
-                  const new_path = `/budget-measures/${id}`;
+                  const new_path = `/budget-measures/${id}/${selected_value}`;
                   if ( history.location.pathname !== new_path ){
                     // the first_column prop, and thus this button's active id, is updated through this route push
                     history.push(new_path);
