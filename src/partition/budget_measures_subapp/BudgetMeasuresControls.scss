@@ -6,10 +6,7 @@ $controlsColorDarker: darken($controlsColor, 25%);
 .budget-measures-partition-controls {
     background-color: $controlsColor;
     border-radius: 10px;
-    padding-top: 6px;
-    padding-left: 6px;
-    padding-right: 6px;
-    padding-bottom: 10px;
+    padding: 8px 8px 13px 8px;
     margin-bottom: -20px;
   
     @media (max-width: 900px){
@@ -21,6 +18,7 @@ $controlsColorDarker: darken($controlsColor, 25%);
     }
 
   & > .labeled-box {
+    margin-bottom: 8px;
 
     & > .labeled-box-label {
       background-color: $controlsColorDarker;
