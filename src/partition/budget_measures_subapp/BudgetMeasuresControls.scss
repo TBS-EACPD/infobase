@@ -1,8 +1,10 @@
 @import '../../common_css/common-variables';
 
+$controlsColor: #9c9c9c;
+$controlsColorDarker: darken($controlsColor, 25%);
 
 .budget-measures-partition-controls {
-    background-color: #9c9c9c;
+    background-color: $controlsColor;
     border-radius: 10px;
     padding-top: 6px;
     padding-left: 6px;
@@ -21,34 +23,36 @@
   & > .labeled-box {
 
     & > .labeled-box-label {
-      background-color: darken(#9c9c9c, 25%);
+      background-color: $controlsColorDarker;
       color: #FFFFFF;
       font-size: 22px;
     }
   
     & > .labeled-box-content {
-      border-color: darken(#9c9c9c, 25%);
+      border-color: $controlsColorDarker;
       padding-left: 18px;
   
       & > .centerer > .radio-buttons {
-        border-color: darken(#9c9c9c, 25%);
+        border-color: $controlsColorDarker;
         & > .radio-buttons__option {
-          color: darken(#9c9c9c, 25%);
+          color: $controlsColorDarker;
         }
         
         & > .radio-buttons__option.radio-buttons__option--active {
           color: #FFFFFF;
-          background-color: darken(#9c9c9c, 25%);
+          background-color: $controlsColorDarker;
         }
         
-        & > .radio-buttons__option:not(:last-child):after {
-          border-color: darken(#9c9c9c, 25%);
+        
+        & > .radio-buttons__option:not(:last-child):after,
+        & > .radio-buttons__option:not(:first-child):before {
+          border-color: $controlsColorDarker;
         }
         
         & > .radio-buttons__option:not(.radio-buttons__option--active):hover,
         & > .radio-buttons__option:not(.radio-buttons__option--active):active,
         & > .radio-buttons__option:not(.radio-buttons__option--active):focus { 
-          background-color: change-color($color: darken(#9c9c9c, 25%), $alpha: 0.75);
+          background-color: change-color($color: $controlsColorDarker, $alpha: 0.75);
           color: #FFFFFF !important;
         }
       }
@@ -94,10 +98,10 @@
 }
 
 .chapter-key-table__eye > .glyphicon-eye-open {
-  color: darken(#9c9c9c, 25%);
+  color: $controlsColorDarker;
 }
 .chapter-key-table__eye > .glyphicon-eye-close {
-  color: #9c9c9c;
+  color: $controlsColor;
 }
 
 @media(min-width:1200px){
@@ -108,8 +112,8 @@
   .chapter-key-table__item {
     border-style: solid;
     border-width: 2px 2px 2px 0;
-    border-color: darken(#9c9c9c, 25%);
-    color: darken(#9c9c9c, 25%);
+    border-color: $controlsColorDarker;
+    color: $controlsColorDarker;
   }
   .chapter-key-table__item:first-child {
     border-top-left-radius: 10px;
@@ -130,7 +134,7 @@
   .chapter-key-table__item {
     border-style: solid;
     border-width: 0 1px 1px 1px;
-    border-color: #b0b0b0;
+    border-color: $controlsColorDarker;
     flex-basis: auto;
   }
 
@@ -172,10 +176,10 @@
   & > .form-control.search {
     width: 100%;
     @media(min-width:1200px){
-      border: 2px solid darken(#9c9c9c, 25%);
+      border: 2px solid $controlsColorDarker;
     }
     @media(max-width:1200px){
-      border: 1px solid #9c9c9c, 25%;
+      border: 1px solid $controlsColor, 25%;
     }
   }
 }

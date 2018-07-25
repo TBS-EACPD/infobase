@@ -32,22 +32,29 @@
   border-radius: 7px;
   cursor: default;
   font-weight: $mediumFontWeight;
+
+  &:after, &:before {
+    display: none;
+  }
 }
 
-.radio-buttons__option:not(:last-child):after {
+%pseduo-separator-common {
   content: "";
-  margin-left: 10px;
   height: 76%;
   top: 13%;
   border: solid $buttonPrimaryColor;
-  border-width: 0 0 0 2px;
+  border-width: 0 0 0 1px;
   position: absolute;
-  right: -3px;
+}
+.radio-buttons__option:not(:last-child):after {
+  @extend %pseduo-separator-common;
+  right: 0px
+}
+.radio-buttons__option:not(:first-child):before {
+  @extend %pseduo-separator-common;
+  left: -1px;
 }
 
-.radio-buttons__option.radio-buttons__option--active:after {
-  display: none;
-}
 
 .radio-buttons__option:not(.radio-buttons__option--active):hover,
 .radio-buttons__option:not(.radio-buttons__option--active):active,
