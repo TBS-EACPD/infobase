@@ -40,7 +40,7 @@ const validate_route = (first_column, selected_value, history) => {
     return true;
   } else {
     const valid_first_column = first_column_is_valid ? first_column : first_column_options[0].id;
-    const valid_value = selected_value_is_valid ? selected_value : "allocated";
+    const valid_value = selected_value_is_valid ? selected_value : _.keys(budget_values)[0];
     const corrected_route = `/budget-measures/${valid_first_column}/${valid_value}`;
     history.push(corrected_route);
 
