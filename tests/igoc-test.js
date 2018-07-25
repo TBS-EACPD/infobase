@@ -5,11 +5,11 @@ fixture `Main app tests`// declare the fixture
 
 
 const igoc_sel = "#app-focus-root > div > div > div.medium_panel_text > " +
-  "div > span > p ";
+  "div > span > ul > li > a ";
 
 //then create a test and place your code there
 test('App boots and loads igoc page', async t => {
   await t
     // Use the assertion to check if the actual header text is equal to the expected one
-    .expect(Selector(igoc_sel).innerText).contains("provides");
+    .expect(Selector(igoc_sel).innerText).contains("detailed overview");
 });
