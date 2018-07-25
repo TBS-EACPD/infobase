@@ -19,7 +19,22 @@ const get_total_budget_measure_funds = (selected_value, filtered_chapter_keys) =
     .value();
 }
 
-const post_traversal_search_string_set = function(node){
+const post_traversal_children_filter = (node, selected_value) => {
+  if (selected_value === "funding"){
+    return; // Don't filter anything when total funding selected, want to show 0$ items in this case only
+  } else if ( _.isUndefined(node.children) ){
+    return; // Nothing to do on leaves of hierarchy
+  } else {
+    // Being extra careful here, to avoid cases where a node's children may be non-zero but still sum to zero
+    node.children = _.filter(node.children, child_node => {
+      return _.isUndefined(child_node.children) ? 
+        child_node.value !== 0 :
+        _.some(child_node.children, child_node_child => child_node_child.value !== 0);
+    });
+  }
+}
+
+const post_traversal_search_string_set = (node) => {
   node.data.search_string = "";
   if (node.data.name){
     node.data.search_string += _.deburr(node.data.name.toLowerCase());
@@ -86,7 +101,10 @@ const budget_measure_first_hierarchy_factory = (selected_value, filtered_chapter
         return orgNodes;
       }
     })
-    .eachAfter(node => post_traversal_search_string_set(node) )
+    .eachAfter(node => {
+      post_traversal_children_filter(node, selected_value);
+      post_traversal_search_string_set(node);
+    })
     .sort(absolute_value_sort_net_adjust_biased);
 }
 
@@ -163,6 +181,7 @@ const dept_first_hierarchy_factory = (selected_value, filtered_chapter_keys) => 
       if ( _.isNaN(node.value) && node.children && node.children.length > 0 ){
         node.value = _.reduce(node.children, (sum, child_node) => sum + child_node.value, 0);
       }
+      post_traversal_children_filter(node, selected_value);
       post_traversal_search_string_set(node);
     })
     .sort(absolute_value_sort_net_adjust_biased);
