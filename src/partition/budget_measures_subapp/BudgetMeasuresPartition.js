@@ -7,7 +7,10 @@ import { Subject } from '../../models/subject';
 import { businessConstants } from '../../models/businessConstants.js';
 import { formats } from '../../core/format.js';
 
-const { budget_chapters } = businessConstants;
+const { 
+  budget_chapters,
+  budget_values,
+} = businessConstants;
 const { BudgetMeasure } = Subject;
 const year = text_maker("budget_route_year");
 
@@ -102,7 +105,7 @@ const update_diagram = (diagram, props) => {
 }
 
 const standard_update = (diagram, props) => {
-  const data = budget_measures_hierarchy_factory(props.first_column, props.filtered_chapter_keys);
+  const data = budget_measures_hierarchy_factory(props.selected_value, props.first_column, props.filtered_chapter_keys);
   const dont_fade = [];
   render_diagram(diagram, props, data, standard_data_wrapper_node_rules, dont_fade);
 }
@@ -111,7 +114,7 @@ const update_with_search = (diagram, props) => {
   const dont_fade = [];
   const search_matching = [];
     
-  const search_tree =  budget_measures_hierarchy_factory(props.first_column, props.filtered_chapter_keys);
+  const search_tree =  budget_measures_hierarchy_factory(props.selected_value, props.first_column, props.filtered_chapter_keys);
   const deburred_query = _.deburr(props.filter_string).toLowerCase();
 
   search_tree.each(node => {

@@ -32,15 +32,15 @@ const first_column_options = [
 
 const first_column_ids = _.map(first_column_options, option => option.id );
 
-const validate_route = (first_column, value, history) => {
+const validate_route = (first_column, selected_value, history) => {
   const first_column_is_valid = _.indexOf(first_column_ids, first_column) !== -1;
-  const value_is_valid = _.indexOf(_.keys(budget_values), value) !== -1;
+  const selected_value_is_valid = _.indexOf(_.keys(budget_values), selected_value) !== -1;
 
-  if (first_column_is_valid && value_is_valid){
+  if (first_column_is_valid && selected_value_is_valid){
     return true;
   } else {
     const valid_first_column = first_column_is_valid ? first_column : first_column_options[0].id;
-    const valid_value = value_is_valid ? value : "allocated";
+    const valid_value = selected_value_is_valid ? selected_value : "allocated";
     const corrected_route = `/budget-measures/${valid_first_column}/${valid_value}`;
     history.push(corrected_route);
 
@@ -57,10 +57,10 @@ export class BudgetMeasuresRoute extends React.Component {
       filter_string: false,
     };
 
-    validate_route(props.match.params.first_column, props.match.params.value, props.history);
+    validate_route(props.match.params.first_column, props.match.params.selected_value, props.history);
   }
   shouldComponentUpdate(nextProps){
-    return validate_route(nextProps.match.params.first_column, nextProps.match.params.value, this.props.history);
+    return validate_route(nextProps.match.params.first_column, nextProps.match.params.selected_value, this.props.history);
   }
   componentDidMount(){
     ensure_loaded({
@@ -84,6 +84,7 @@ export class BudgetMeasuresRoute extends React.Component {
 
     const history = this.props.history;
     const first_column = this.props.match.params.first_column;
+    const selected_value = this.props.match.params.selected_value;
 
     return (
       <StandardRouteContainer
@@ -111,6 +112,7 @@ export class BudgetMeasuresRoute extends React.Component {
             </div>
             { !window.is_a11y_mode &&
               <BudgetMeasuresControls
+                selected_value = { selected_value }
                 first_column = { first_column }
                 history = { history }
                 group_by_items = { first_column_options }
@@ -122,6 +124,7 @@ export class BudgetMeasuresRoute extends React.Component {
             }
             { !window.is_a11y_mode &&
               <BudgetMeasuresPartition
+                selected_value = { selected_value }
                 first_column = { first_column }
                 filtered_chapter_keys = { filtered_chapter_keys }
                 filter_string = { filter_string }

@@ -27,7 +27,8 @@ export class BudgetMeasuresControls extends React.Component {
     };
   }
   render(){
-    const { 
+    const {
+      selected_value,
       first_column,
       history,
       group_by_items,
