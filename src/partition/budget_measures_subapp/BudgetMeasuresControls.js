@@ -29,10 +29,6 @@ const budget_value_options = _.map(
 export class BudgetMeasuresControls extends React.Component {
   constructor(){
     super();
-    this.state = {
-      chapter_keys: _.keys(budget_chapters),
-      measure_counts_by_chapter_key: _.countBy(BudgetMeasure.get_all(), "chapter_key"),
-    };
   }
   render(){
     const {
@@ -46,8 +42,16 @@ export class BudgetMeasuresControls extends React.Component {
       setFilterString,
     } = this.props;
     
+    const all_chapter_keys = _.keys(budget_chapters);
+    const active_list = _.xor(all_chapter_keys, filtered_chapter_keys);
+
+    // For selected_values other than funding, only show counts for measures with data for that selected_value
+    const measure_counts_by_chapter_key = _.chain( BudgetMeasure.get_all() )
+      .filter( measure => selected_value === "funding" || _.some(measure.data, (row) => row[selected_value] !== 0) )
+      .countBy("chapter_key")
+      .value();
+
     const update_filtered_chapter_keys = (filtered_chapter_keys, chapter_key) => {
-      const all_chapter_keys = _.keys(budget_chapters);
 
       const new_filtered_chapter_keys = filtered_chapter_keys.length === 0 ?
         _.xor(all_chapter_keys, [chapter_key]) :
@@ -69,8 +73,6 @@ export class BudgetMeasuresControls extends React.Component {
         setFilterString(filter_string);
       }
     }
-
-    const active_list = _.xor(_.keys(budget_chapters), filtered_chapter_keys);
 
     return (
       <div className="budget-measures-partition-controls">
@@ -117,10 +119,10 @@ export class BudgetMeasuresControls extends React.Component {
               </div>
               <div className="chapter-key-table">
                 {
-                  _.chain(this.state.chapter_keys)
+                  _.chain(all_chapter_keys)
                     .map( chapter_key => ({
                       chapter_key, 
-                      count: this.state.measure_counts_by_chapter_key[chapter_key] || 0,
+                      count: measure_counts_by_chapter_key[chapter_key] || 0,
                     }) )
                     .map( ({chapter_key, count }) =>
                       <button
