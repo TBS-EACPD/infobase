@@ -161,8 +161,10 @@ const update_with_search = (diagram, props) => {
 }
 
 const render_diagram = (diagram, props, data, data_wrapper_node_rules, dont_fade) => {
-  const displayed_measure_count = _.filter(BudgetMeasure.get_all(), (budgetMeasure) => {
-    return _.indexOf(props.filtered_chapter_keys, budgetMeasure.chapter_key) === -1;
+  const displayed_measure_count = _.filter(BudgetMeasure.get_all(), measure => {
+    const measure_is_filtered_out_for_chapter = _.indexOf(props.filtered_chapter_keys, measure.chapter_key) !== -1;
+    const measure_is_filtered_out_for_value = props.selected_value !== "funding" && !_.some(measure.data, (row) => row[props.selected_value] !== 0);
+    return !measure_is_filtered_out_for_chapter && !measure_is_filtered_out_for_value;
   }).length;
 
   diagram.configure_then_render({
