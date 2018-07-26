@@ -120,7 +120,7 @@ about_body_text:
     The GC InfoBase is an interactive data-visualization tool, transforming complex federal data into simple visual stories for Canadians.
 
 
-    Since its creation in 2013, the GC InfoBase has been recognized as the authoritative source of Government expenditure information by the [Parliamentary Budget Officer (PBO)](http://www.pbo-dpb.gc.ca/web/default/files/Documents/Reports/2016/Mains 2016-17/Main Estimates 2016-17_EN.pdf) and was identified as a public sector innovation by the Organisation for Economic Co-operation and Development (OECD) [Observatory of Public Sector Innovation (OPSI)](https://www.oecd.org/governance/observatory-public-sector-innovation/innovations/). The tool contains years’ worth of federal government data, bringing together information previously scattered across over 500 government reports.
+    Since its creation in 2013, the GC InfoBase has been recognized as the authoritative source of Government expenditure information by the {{ext_link "Parliamentary Budget Officer (PBO)" "http://www.pbo-dpb.gc.ca/web/default/files/Documents/Reports/2016/Mains 2016-17/Main Estimates 2016-17_EN.pdf"}} and was identified as a public sector innovation by the Organisation for Economic Co-operation and Development (OECD) {{ext_link "Observatory of Public Sector Innovation (OPSI)" "https://www.oecd.org/governance/observatory-public-sector-innovation/innovations/"}}. The tool contains years’ worth of federal government data, bringing together information previously scattered across over 500 government reports.
 
     <div>
     {{{gt "about_principles_table"}}}
@@ -134,7 +134,7 @@ about_body_text:
     ### How did the GC InfoBase begin?
 
 
-    The GC InfoBase was developed in response to a [Parliamentary request](http://www.ourcommons.ca/DocumentViewer/en/41-1/OGGO/report-7/page-144) for better access to information on government finances. Its ongoing development seeks to meet a public demand for simpler government reporting.
+    The GC InfoBase was developed in response to a {{ext_link "Parliamentary request" "http://www.ourcommons.ca/DocumentViewer/en/41-1/OGGO/report-7/page-144"}} for better access to information on government finances. Its ongoing development seeks to meet a public demand for simpler government reporting.
 
 
     The GC InfoBase was launched in April 2013 under the name Expenditure Database. As it grew to incorporate new data (such as people management and results data), the name was changed to reflect the broader content coverage.
@@ -170,7 +170,7 @@ about_body_text:
     ### How can I download the raw data?
 
 
-    The GC InfoBase presents its data in many different ways, but we know that some people prefer to access the data directly for the sake of their own more focused analysis. For these brave souls, we ensure that all InfoBase data is also available in raw form on the [Government of Canada Open Data Portal](https://open.canada.ca/data/en/dataset?portal_type=dataset).
+    The GC InfoBase presents its data in many different ways, but we know that some people prefer to access the data directly for the sake of their own more focused analysis. For these brave souls, we ensure that all InfoBase data is also available in raw form on the {{ext_link "Government of Canada Open Data Portal" "https://open.canada.ca/data/en/dataset?portal_type=dataset"}}.
 
 
     Individual links to the corresponding Open Data datasets for each dataset in the GC InfoBase can be found on our [Datasets page](#metadata).
@@ -190,7 +190,7 @@ about_body_text:
     ### Who inspires us?
 
 
-    We draw inspiration from work done across the globe, in both the public and private sectors. Our [Government at a Glance diagram](#partition/dept/exp) was inspired by the excellent work of the [USAFacts.org](https://usafacts.org/the-big-picture/spending) team. Our minimal page header and footer were inspired by our colleagues at the [Canadian Digital Service](https://digital.canada.ca). We are regularly inspired to push our data visualizations even further by the D3 community at large, and through resources like the [D3 gallery](https://github.com/d3/d3/wiki/Gallery).
+    We draw inspiration from work done across the globe, in both the public and private sectors. Our [Government at a Glance diagram](#partition/dept/exp) was inspired by the excellent work of the {{ext_link "USAFacts.org" "https://usafacts.org/the-big-picture/spending"}} team. Our minimal page header and footer were inspired by our colleagues at the {{ext_link "Canadian Digital Service" "https://digital.canada.ca"}}. We are regularly inspired to push our data visualizations even further by the D3 community at large, and through resources like the {{ext_link "D3 gallery" "https://github.com/d3/d3/wiki/Gallery"}}.
 
 
     {{{gt "feedback_h2"}}}
@@ -205,7 +205,7 @@ about_body_text:
     L’InfoBase du GC est un outil interactif de visualisation de données, qui traduit en termes simples l’information complexe du gouvernement fédéral au profit des Canadiens.
 
 
-    Depuis sa création en 2013, l’InfoBase du GC a été reconnue par le [directeur parlementaire du budget (DPB)](http://www.pbo-dpb.gc.ca/web/default/files/Documents/Reports/2016/Mains 2016-17/Main Estimates 2016-17_FR.pdf) comme étant la source d’information faisant autorité en matière de dépenses gouvernementales et est considérée comme une innovation dans le secteur public par [l’Observatoire sur l’innovation dans le secteur public (OISP)](https://www.oecd.org/governance/observatory-public-sector-innovation/innovations/) de l’Organisation de coopération et de développement économiques (OCDE). L’outil contient plusieurs années de renseignements gouvernementaux, auparavant éparpillés dans plus de 500 rapports à l’échelle de la fonction publique fédérale.
+    Depuis sa création en 2013, l’InfoBase du GC a été reconnue par le {{ext_link "directeur parlementaire du budget (DPB)" "http://www.pbo-dpb.gc.ca/web/default/files/Documents/Reports/2016/Mains 2016-17/Main Estimates 2016-17_FR.pdf"}} comme étant la source d’information faisant autorité en matière de dépenses gouvernementales et est considérée comme une innovation dans le secteur public par {{ext_link "l’Observatoire sur l’innovation dans le secteur public (OISP)" "https://www.oecd.org/governance/observatory-public-sector-innovation/innovations/ "}} de l’Organisation de coopération et de développement économiques (OCDE). L’outil contient plusieurs années de renseignements gouvernementaux, auparavant éparpillés dans plus de 500 rapports à l’échelle de la fonction publique fédérale.
     
 
     <div>
@@ -219,7 +219,7 @@ about_body_text:
     ### Comment l’InfoBase du GC a vu le jour?
 
 
-    L’InfoBase du GC a été élaborée à la [demande du Parlement]( http://www.noscommunes.ca/DocumentViewer/fr/41-1/OGGO/rapport-7/page-144) d’améliorer l’accès à l’information sur les finances publiques. On cherche aussi à répondre aux souhaits du grand public de simplifier la reddition de compte gouvernementale.
+    L’InfoBase du GC a été élaborée à la {{ext_link "demande du Parlement" "http://www.noscommunes.ca/DocumentViewer/fr/41-1/OGGO/rapport-7/page-144"}} d’améliorer l’accès à l’information sur les finances publiques. On cherche aussi à répondre aux souhaits du grand public de simplifier la reddition de compte gouvernementale.
 
 
     L’InfoBase du GC a été inaugurée en avril 2013 sous le nom de « Base de données des dépenses ». Le nom a changé au cours de sa croissance pour refléter l’intégration de nouvelles données (p. ex. les données sur les résultats et la gestion des personnes) et l’élargissement du contenu.
@@ -237,7 +237,7 @@ about_body_text:
     ### Quelles sont nos sources? 
 
 
-    Nous comptons sur plusieurs publications gouvernementales (p. ex. les Comptes publics, les budgets des dépenses, les plans ministériels et les rapports financiers trimestriels). Vous trouverez la liste complète dans la [page sur les données](#métadonnées).
+    Nous comptons sur plusieurs publications gouvernementales (p. ex. les Comptes publics, les budgets des dépenses, les plans ministériels et les rapports financiers trimestriels). Vous trouverez la liste complète dans la [page sur les données](#metadata).
 
 
     ### Quelle est la valeur ajoutée?
@@ -255,10 +255,10 @@ about_body_text:
     ### Comment puis-je télécharger les données brutes?
 
 
-    L’InfoBase présente les données de diverses façons, mais nous savons que certains préfèrent avoir un accès direct aux données pour mener leur propre analyse. C’est pourquoi on veille à ce que toutes les données contenues dans l’outil figurent aussi sous forme brute dans le [Portail de données ouvertes du gouvernement du Canada](https://ouvert.canada.ca/data/fr/dataset?portal_type=dataset).
+    L’InfoBase présente les données de diverses façons, mais nous savons que certains préfèrent avoir un accès direct aux données pour mener leur propre analyse. C’est pourquoi on veille à ce que toutes les données contenues dans l’outil figurent aussi sous forme brute dans le {{ext_link "Portail de données ouvertes du gouvernement du Canada" "https://ouvert.canada.ca/data/fr/dataset?portal_type=dataset"}}.
 
 
-    Les liens vers les ensembles de données ouvertes correspondant à chaque tableau de l’InfoBase se trouvent dans la page sur les [données](#métadonnées).
+    Les liens vers les ensembles de données ouvertes correspondant à chaque tableau de l’InfoBase se trouvent dans la [page sur les données](#metadata).
 
 
     ## Derrière la scène
@@ -275,7 +275,7 @@ about_body_text:
     ### Quelle est notre source d’inspiration?
 
 
-    Notre source d’inspiration est le travail effectué à l’échelle mondiale, tant dans le secteur public que privé. Pour le [diagramme Coup d’œil sur le gouvernement](#partition/dept/exp), nous sommes inspirés par l’excellent travail accompli par l’équipe [USAFacts.org](https://usafacts.org/the-big-picture/spending). L’inspiration pour la taille minimale de l’en-tête et du bas de page nous vient de nos collègues à [Service numérique canadien]( https://numerique.canada.ca/). Enfin, nous sommes régulièrement inspirés par la grande collectivité D3 qui nous incite à peaufiner encore davantage les visualisations de données, au moyen de ressources comme la [galerie D3](https://github.com/d3/d3/wiki/Gallery).
+    Notre source d’inspiration est le travail effectué à l’échelle mondiale, tant dans le secteur public que privé. Pour le [diagramme Coup d’œil sur le gouvernement](#partition/dept/exp), nous sommes inspirés par l’excellent travail accompli par l’équipe {{ext_link "USAFacts.org" "https://usafacts.org/the-big-picture/spending"}}. L’inspiration pour la taille minimale de l’en-tête et du bas de page nous vient de nos collègues à {{ext_link "Service numérique canadien" "https://numerique.canada.ca/"}}. Enfin, nous sommes régulièrement inspirés par la grande collectivité D3 qui nous incite à peaufiner encore davantage les visualisations de données, au moyen de ressources comme la {{ext_link "galerie D3" "https://github.com/d3/d3/wiki/Gallery"}}.
 
 
     {{{gt "feedback_h2"}}}

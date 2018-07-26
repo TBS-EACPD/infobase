@@ -19,8 +19,8 @@ about_inventory:
     * [Explorer les organisations selon le total de leurs dépenses pour {{pa_last_year}}](#partition/dept/exp)
     
     **Liste des sociétés de portefeuille:**
-    *	<a href="http://www.tbs-sct.gc.ca/hgw-cgf/finances/rgs-erdg/cc-se/crown-etat/holdings-portefeuille-fra.asp" target="_blank">Portefeuille des sociétés d'État</a>
-    * <a href="http://www.tbs-sct.gc.ca/hgw-cgf/finances/rgs-erdg/cc-se/institution/holdings-detenus-fra.asp" target="_blank">Avoirs détenus en vertu de la Loi sur la faillite et l’insolvabilité</a>
+    *	{{ ext_link "Portefeuille des sociétés d'État" "http://www.tbs-sct.gc.ca/hgw-cgf/finances/rgs-erdg/cc-se/crown-etat/holdings-portefeuille-fra.asp"}}
+    * {{ ext_link "Avoirs détenus en vertu de la Loi sur la faillite et l’insolvabilité" "http://www.tbs-sct.gc.ca/hgw-cgf/finances/rgs-erdg/cc-se/institution/holdings-detenus-fra.asp"}}
 
 by_ministry:
   en: By portfolio

@@ -98,10 +98,10 @@ ochro_includes_excludes_en:
         Canadian Security Intelligence Service, the National Capital Commission, Canada Investment and Savings, and the Canadian Forces Non-Public Funds. 
 
     To assist in your analysis of Federal Public Service human resources data,
-    a [glossary of key terms](http://www.tbs-sct.gc.ca/res/stats/gloss-eng.asp) 
+    a {{ext_link "glossary of key terms" "http://www.tbs-sct.gc.ca/res/stats/gloss-eng.asp"}} 
     used in many of the Office of the Chief Human Resources Officer's 
     (OCHRO) demographic products and reports is available on the 
-    [OCHRO Human Resources Statistics webpage](http://www.tbs-sct.gc.ca/res/stats/hrs-srh-eng.asp). 
+    {{ext_link "OCHRO Human Resources Statistics webpage" "http://www.tbs-sct.gc.ca/res/stats/hrs-srh-eng.asp"}}. 
     {{/if}}
 
 
@@ -141,6 +141,6 @@ ochro_includes_excludes_fr:
 
 
     Afin de faciliter votre analyse des données sur les ressources humaines de la fonction publique fédérale, le Bureau du dirigeant principal des ressources humaines 
-    (BDPRH) a publié, sur sa page Web [Statistiques sur les ressources humaines](http://www.tbs-sct.gc.ca/res/stats/hrs-srh-fra.asp), un [glossaire des termes clés](http://www.tbs-sct.gc.ca/res/stats/gloss-fra.asp) 
+    (BDPRH) a publié, sur sa page Web {{ext_link "Statistiques sur les ressources humaines" "http://www.tbs-sct.gc.ca/res/stats/hrs-srh-fra.asp"}}, un {{ext_link "glossaire des termes clés" "http://www.tbs-sct.gc.ca/res/stats/gloss-fra.asp"}} 
     utilisés dans bon nombre de ses produits et rapports démographiques.
     {{/if}}

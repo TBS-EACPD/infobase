@@ -37,7 +37,7 @@ what_tags_are_available_a:
       1. Linkage tags that identify the connection between Programs and Departmental and Government of Canada Spending and Outcome Area. 
       2. Descriptive tags that identify standardized characteristics of Programs (i.e. Method of intervention  - How we help)
 
-    A full list of tags can be found in the [Standard on Tagging](http://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31306) under the [Policy on Results](http://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300). 
+    A full list of tags can be found in the {{ext_link "Standard on Tagging" "http://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31306"}} under the  {{ext_link "Policy on Results" "http://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300"}}. 
 
   fr: |
     Dans le contexte de l’étiquetage de Programmes, il existe deux types d’étiquettes :
@@ -45,7 +45,7 @@ what_tags_are_available_a:
       1. Les étiquettes établissant des liens, qui indiquent le lien entre les Programmes et le secteur des dépenses et des résultats ministériels et du gouvernement du Canada. 
       2. Les étiquettes descriptives, qui indiquent les caractéristiques uniformisées des Programmes (par exemple, méthode d’intervention – Comment  nous aidons).
 
-    Une liste complète des étiquettes est accessible dans la [Norme sur l’étiquetage](http://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=31306) de la [Politique sur les résultats](http://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=31300).  
+    Une liste complète des étiquettes est accessible dans la {{ext_link "Norme sur l’étiquetage" "http://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=31306"}} de la {{ext_link "Politique sur les résultats" "http://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=31300"}}.  
 
 what_are_how_we_help_q:
   en: What are 'Method of intervention' ( or 'How we help') tags?

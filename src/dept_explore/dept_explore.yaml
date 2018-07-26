@@ -37,14 +37,14 @@ explore_dept_text:
 explore_dept-type_text:
   transform: [handlebars, markdown]
   en: |
-   These organizations are grouped by [types of Organizations](http://www.tbs-sct.gc.ca/reports-rapports/cc-se/institution/forms-formulaires-eng.asp) 
+   These organizations are grouped by {{ext_link "types of Organizations" "http://www.tbs-sct.gc.ca/reports-rapports/cc-se/institution/forms-formulaires-eng.asp"}} 
    and by their size based respectively on the 
-   [Inventory of Federal Organizations and Interests](http://www.tbs-sct.gc.ca/reports-rapports/cc-se/index-eng.asp) and their expenditures for {{pa_last_year}}. 
+   {{ext_link "Inventory of Federal Organizations and Interests" "http://www.tbs-sct.gc.ca/reports-rapports/cc-se/index-eng.asp"}} and their expenditures for {{pa_last_year}}. 
    Click on each grouping to see the organizations within.
 
   fr: |
-   Ces organisations sont regroupées selon leur [type d’organisation](http://www.tbs-sct.gc.ca/reports-rapports/cc-se/institution/forms-formulaires-fra.asp), 
-   tel qu’il figure au [Répertoire des organisations et intérêts fédéraux](http://www.tbs-sct.gc.ca/reports-rapports/cc-se/index-fra.asp) et 
+   Ces organisations sont regroupées selon leur {{ext_link "type d’organisation" "http://www.tbs-sct.gc.ca/reports-rapports/cc-se/institution/forms-formulaires-fra.asp"}}, 
+   tel qu’il figure au {{ext_link "Répertoire des organisations et intérêts fédéraux" "http://www.tbs-sct.gc.ca/reports-rapports/cc-se/index-fra.asp"}} et 
    selon leurs dépenses pour {{pa_last_year}}. Cliquez sur chaque groupe pour voir les organisations qu’il contient.
 
 explore_people-total_text:

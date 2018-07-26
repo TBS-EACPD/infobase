@@ -5,9 +5,9 @@ what_is_policy_on_results_q:
 what_is_policy_on_results_a:
   transform: [handlebars, markdown]
   en: |
-    The [Policy on Results](https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300) sets out the fundamental requirements for federal departmental accountability for performance information and evaluation, while highlighting the importance of results in management and spending decision making, as well as public reporting. It seeks to improve the achievement of results across governmentand enhancing understanding of the results the government seeks to achieve, does achieve, and the resources used to so. 
+    The {{ext_link "Policy on Results" "https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300"}} sets out the fundamental requirements for federal departmental accountability for performance information and evaluation, while highlighting the importance of results in management and spending decision making, as well as public reporting. It seeks to improve the achievement of results across governmentand enhancing understanding of the results the government seeks to achieve, does achieve, and the resources used to so. 
   fr: |
-    La [politique sur les résultats](https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300) établit les exigences fondamentales de la responsabilité ministérielle fédérale canadienne concernant l’information sur le rendement et l’évaluation, tout en soulignant l’importance des résultats dans la prise de décisions liées à la gestion, aux dépenses et aux rapports publics. La politique cherche à obtenir de meilleurs résultats à l'échelle gouvernementale et mieux comprendre les résultats que le gouvernement cherche à atteindre et réussit à atteindre, ainsi que les ressources utilisées pour ce faire.
+    La {{ext_link "politique sur les résultats" "https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300"}} établit les exigences fondamentales de la responsabilité ministérielle fédérale canadienne concernant l’information sur le rendement et l’évaluation, tout en soulignant l’importance des résultats dans la prise de décisions liées à la gestion, aux dépenses et aux rapports publics. La politique cherche à obtenir de meilleurs résultats à l'échelle gouvernementale et mieux comprendre les résultats que le gouvernement cherche à atteindre et réussit à atteindre, ainsi que les ressources utilisées pour ce faire.
 
 what_is_diff_with_mrrs_q:
   en: How does it differ from the Policy on Management, Resources and Results Structure (MRRS)? 
@@ -17,7 +17,7 @@ what_is_diff_with_mrrs_q:
 what_is_diff_with_mrrs_a:
   transform: [handlebars, markdown]
   en: |
-    The Policy on Results represents a transition from old reporting structures [(Policy on MRRS)](https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=18218) to emphasize results. Previously, organizations were required to report against a small number of {{gl_tt "Strategic Outcomes" "SO"}}. 
+    The Policy on Results represents a transition from old reporting structures {{ext_link "(Policy on MRRS)" "https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=18218"}} to emphasize results. Previously, organizations were required to report against a small number of {{gl_tt "Strategic Outcomes" "SO"}}. 
     
     
     Departments now report against {{gl_tt "Core Responsibilities" "CR"}} under a Departmental Results Frameworks designed to provide a clearer picture of what the departments is trying to achieve.  
@@ -30,7 +30,7 @@ what_is_diff_with_mrrs_a:
     
     This means that programs under the new policy are to be roughly equivalent, in the level of granularity, to the organization’s previous sub-programs or, where they have them, sub-sub programs, but the new Policy provides a clearer indication of how these programs help the departments achieve its objectives. 
   fr: |
-    La politique sur les résultats marque un virage par rapport aux anciennes structures redditionnelles ([Politique sur la SGRR](https://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=18218 )) de manière à mettre l’accent sur les résultats. Auparavant, les organisations devaient rendre compte d’un nombre restreint de {{gl_tt "résultats stratégiques" "SO"}}.
+    La politique sur les résultats marque un virage par rapport aux anciennes structures redditionnelles ({{ext_link "Politique sur la SGRR" "https://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=18218"}}) de manière à mettre l’accent sur les résultats. Auparavant, les organisations devaient rendre compte d’un nombre restreint de {{gl_tt "résultats stratégiques" "SO"}}.
     
     
     Dorénavant, les ministères doivent rendre compte des {{gl_tt "responsabilités essentielles" "CR"}} figurant à leur Cadre ministériel des résultats, qui brosse un tableau plus clair de ce que le ministère cherche à accomplir.
