@@ -43,7 +43,7 @@ remaining_for:
   fr: TODO
 
 as_of:
-  en: as of
+  en: As of
   fr: TODO
 
 budget_sourced_date_note:
@@ -67,31 +67,88 @@ budget_measures_partition_root:
     {{gt "budget_route_year"}}
     {{additional_root_note}}
 
-budget_measure_popup_top_line:
+budget_measure_popup_top_line_value:
+  handlebars_partial: true
+  text: |
+    <span class='popup-font-ml'>
+    {{#if value_is_zero}}
+      {{lang_formated_zero}}
+    {{else}}
+      {{#if value_is_negative}}
+        <text style='color:red;'>
+          {{fmt_compact1 value}}
+        </text>
+      {{else}}
+        {{fmt_compact1 value}}
+      {{/if}}
+    {{/if}}
+    </span>
+
+budget_measure_popup_funding_top_line:
+  handlebars_partial: true
+  text: |
+    <text style='color:#fdfdfd'>
+      {{gt "budget_name"}}
+      </br>
+      {{gt "provides"}}
+    </text>
+    {{> budget_measure_popup_top_line_value}}
+    <text style='color:#fdfdfd'>
+      {{gt "in_funding"}} ...
+    </text>
+
+budget_measure_popup_allocated_top_line:
+  handlebars_partial: true
+  text: |
+    <text style='color:#fdfdfd'>
+      {{gt "budget_name"}}:
+      </br>
+    </text>
+    {{> budget_measure_popup_top_line_value}}
+    <text style='color:#fdfdfd'>
+      {{gt "allocated_to"}} ...
+    </text>
+
+budget_measure_popup_withheld_top_line:
+  handlebars_partial: true
+  text: |
+    <text style='color:#fdfdfd'>
+      {{gt "budget_name"}}:
+      </br>
+    </text>
+    {{> budget_measure_popup_top_line_value}}
+    <text style='color:#fdfdfd'>
+      {{gt "withheld_for"}} ...
+    </text>
+
+budget_measure_popup_remaining_top_line:
+  handlebars_partial: true
+  text: |
+    <text style='color:#fdfdfd'>
+      {{gt "budget_name"}}:
+      </br>
+    </text>
+    {{> budget_measure_popup_top_line_value}}
+    <text style='color:#fdfdfd'>
+      {{gt "remaining_for"}} ...
+    </text>
+
+budget_measure_popup_top_line_cases:
   handlebars_partial: true
   text: |
     <span class='stat1 popup-font-m'>
-      <text style='color:#fdfdfd'>
-        {{gt "budget_name"}}
-        </br>
-        {{gt "provides"}}
-      </text>
-      <span class='popup-font-ml'>
-      {{#if value_is_zero}}
-        {{lang_formated_zero}}
-      {{else}}
-        {{#if value_is_negative}}
-          <text style='color:red;'>
-            {{fmt_compact1 value}}
-          </text>
-        {{else}}
-          {{fmt_compact1 value}}
-        {{/if}}
+      {{#if selected_value_is_funding}}
+        {{> budget_measure_popup_funding_top_line}}
       {{/if}}
-      </span>
-      <text style='color:#fdfdfd'>
-        {{gt "in_funding"}} ...
-      </text>
+      {{#if selected_value_is_allocated}}
+        {{> budget_measure_popup_allocated_top_line}}
+      {{/if}}
+      {{#if selected_value_is_withheld}}
+        {{> budget_measure_popup_withheld_top_line}}
+      {{/if}}
+      {{#if selected_value_is_remaining}}
+        {{> budget_measure_popup_remaining_top_line}}
+      {{/if}}
     </span>
 
 budget_measure_popup_dept_line:
@@ -127,6 +184,18 @@ budget_measure_popup_year_line:
       </span>
       <span class='name-row-right'>
         {{year}}
+      </span>
+    </div>
+
+budget_measure_popup_sourced_date_line:
+  handlebars_partial: true
+  text: |
+    <div class="budget-measure-popup-name-row popup-font-m">
+      <span class='name-row-left' style='color:#fdfdfd'>
+        {{gt "as_of"}}
+      </span>
+      <span class='name-row-right'>
+        {{gt "budget_data_sourced_date"}}
       </span>
     </div>
 
@@ -180,7 +249,7 @@ budget_measure_popup_template:
   transform: [handlebars]
   text: |
     <div class='mrgn-bttm-md popup-row-top popup-font-m'>
-      {{> budget_measure_popup_top_line}}
+      {{> budget_measure_popup_top_line_cases}}
       {{#if dept_is_first_column}}
         {{#if is_budget_measure}}
           {{> budget_measure_popup_measure_line}}
@@ -193,5 +262,8 @@ budget_measure_popup_template:
         {{> budget_measure_popup_measure_line}}
       {{/if}}
       {{> budget_measure_popup_year_line}}
+      {{#if show_sourced_date}}
+        {{> budget_measure_popup_sourced_date_line}}
+      {{/if}}
     </div>
     {{> budget_measure_popup_bottom_rows}}
