@@ -44,9 +44,30 @@ const get_level_headers = (first_column, selected_value) => {
   };
 }
 
+
+const selected_value_specifier_by_selected_value = {
+  "funding": text_maker("in_funding_for"),
+  "allocated": text_maker("allocated_to"),
+  "withheld": text_maker("withheld_for"),
+  "remaining": text_maker("remaining_for"),
+};
+const budget_sourced_date_note = text_maker("budget_sourced_date_note");
+const additional_root_note_by_selected_value = {
+  "funding": "",
+  "allocated": budget_sourced_date_note,
+  "withheld": budget_sourced_date_note,
+  "remaining": budget_sourced_date_note,
+};
 const root_text_func = (displayed_measure_count, selected_value, root_value) => {
-  const root_text_key = `budget_measures_partition_${selected_value}_root`;
-  return text_maker(root_text_key, {root_value, displayed_measure_count});
+  return text_maker(
+    "budget_measures_partition_root", 
+    {
+      root_value, 
+      displayed_measure_count,
+      selected_value_specifier: selected_value_specifier_by_selected_value[selected_value],
+      additional_root_note: additional_root_note_by_selected_value[selected_value],
+    }
+  );
 }
 
 const popup_template = node => {
