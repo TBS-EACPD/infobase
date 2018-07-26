@@ -3,9 +3,7 @@ import { Subject } from '../../models/subject';
 import { businessConstants } from '../../models/businessConstants.js';
 import { ensure_loaded } from '../../core/lazy_loader.js';
 import { StandardRouteContainer } from '../../core/NavComponents.js';
-import { 
-  SpinnerWrapper,
-} from '../../util_components';
+import { SpinnerWrapper } from '../../util_components';
 
 import {
   text_maker,
@@ -82,9 +80,15 @@ export class BudgetMeasuresRoute extends React.Component {
       filter_string,
     } = this.state;
 
-    const history = this.props.history;
-    const first_column = this.props.match.params.first_column;
-    const selected_value = this.props.match.params.selected_value;
+    const {
+      history,
+      match: {
+        params: {
+          first_column,
+          selected_value,
+        },
+      },
+    } = this.props;
 
     return (
       <StandardRouteContainer

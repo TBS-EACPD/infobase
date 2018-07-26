@@ -7,7 +7,7 @@ import { Subject } from '../../models/subject';
 import { businessConstants } from '../../models/businessConstants.js';
 import { formats } from '../../core/format.js';
 
-const { 
+const {
   budget_chapters,
   budget_values,
 } = businessConstants;
@@ -93,18 +93,18 @@ const popup_template = node => {
 }
 
 const standard_data_wrapper_node_rules = (node) => {
-  const root_value = _.last(node.ancestors()).value;
+  const root_value = _.last( node.ancestors() ).value;
   node.__value__ = node.value;
   node.open = true;
   node.how_many_to_show = function(_node){
-    if (_node.children.length <= 2){ return [_node.children, []] }
+    if (_node.children.length <= 2){ return [_node.children, []]; }
     const show = [_.head(_node.children)];
     const hide = _.tail(_node.children);
     const unhide = _.filter(hide, 
       __node => ( 
         __node.data.type !== "net_adjust" ? 
           Math.abs(__node.value) > root_value/100 :
-          false 
+          false
       )
     );
     return [show.concat(unhide), _.difference(hide, unhide)];
@@ -129,18 +129,18 @@ const update_with_search = (diagram, props) => {
   const dont_fade = [];
   const search_matching = [];
     
-  const search_tree =  budget_measures_hierarchy_factory(props.selected_value, props.first_column, props.filtered_chapter_keys);
+  const search_tree = budget_measures_hierarchy_factory(props.selected_value, props.first_column, props.filtered_chapter_keys);
   const deburred_query = _.deburr(props.filter_string).toLowerCase();
 
   search_tree.each(node => {
-    if (!_.isNull(node.parent)){
+    if ( !_.isNull(node.parent) ){
       if (
-        _.deburr(node.data.name.toLowerCase()) === deburred_query ||
+        _.deburr( node.data.name.toLowerCase() ) === deburred_query ||
         (node.data.type === "dept" && node.data.id !== 9999) && 
            (
-             _.deburr(node.data.acronym.toLowerCase()) === deburred_query ||
-             _.deburr(node.data.fancy_acronym.toLowerCase()) === deburred_query ||
-             _.deburr(node.data.applied_title.toLowerCase()) === deburred_query
+             _.deburr( node.data.acronym.toLowerCase() ) === deburred_query ||
+             _.deburr( node.data.fancy_acronym.toLowerCase() ) === deburred_query ||
+             _.deburr( node.data.applied_title.toLowerCase() ) === deburred_query
            )
       ) {
         search_matching.push(node);
@@ -157,7 +157,7 @@ const update_with_search = (diagram, props) => {
   });
 
   const to_open = _.chain(search_matching)
-    .map(n => n.ancestors())
+    .map( n => n.ancestors() )
     .flatten(true)
     .uniq()
     .value();
@@ -206,7 +206,7 @@ const render_diagram = (diagram, props, data, data_wrapper_node_rules, dont_fade
 
 export class BudgetMeasuresPartition extends React.Component {
   componentDidMount(){
-    this.container = d3.select(ReactDOM.findDOMNode(this.refs.container));
+    this.container = d3.select( ReactDOM.findDOMNode(this.refs.container) );
     this.diagram = new PartitionDiagram(this.container, {height: 700});
     update_diagram(this.diagram, this.props);
   }

@@ -119,7 +119,7 @@ const make_program_allocation_nodes = (measure_id, org_id) => {
   
       const program_or_crso = program || crso;
   
-      return  {
+      return {
         ...program_or_crso,
         type: "program_allocation",
         value: allocation_value,
@@ -177,7 +177,7 @@ const budget_measure_first_hierarchy_factory = (selected_value, filtered_chapter
               };
             } else {
               const dept = Dept.lookup(data_row.org_id);
-              return  {
+              return {
                 ...dept,
                 type: "dept",
                 description: dept.mandate,
@@ -194,7 +194,7 @@ const budget_measure_first_hierarchy_factory = (selected_value, filtered_chapter
         return make_program_allocation_nodes(measure_id, org_id);
       }
     })
-    .eachAfter(node => post_traversal_modifications(node, selected_value) )
+    .eachAfter( node => post_traversal_modifications(node, selected_value) )
     .sort(absolute_value_sort_net_adjust_biased);
 }
 

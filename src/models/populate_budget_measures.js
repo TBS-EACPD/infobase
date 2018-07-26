@@ -5,7 +5,7 @@ const { BudgetMeasure } = Subject;
 
 const parse_csv_string = csv_string => _.tail( d3.csvParseRows( _.trim(csv_string) ) );
 
-const load_csv = csv_name => make_request(get_static_url(`csv/${csv_name}.csv`))
+const load_csv = csv_name => make_request( get_static_url(`csv/${csv_name}.csv`) )
   .then( csv_string => parse_csv_string(csv_string) );
 
 const populate_budget_measures = (budget_measure_lookups, budget_measure_data) => {

@@ -165,7 +165,7 @@ export class BudgetMeasuresControls extends React.Component {
                 <TextMaker text_key="budget_measure_filter_by_name_and_desc_label" />
               </div>
               <div className="budget-measures-search-box">
-                <DebouncedTextInput  
+                <DebouncedTextInput
                   placeHolder = { text_maker("budget_measure_filter_by_name_and_desc_placeholder") }
                   defaultValue = { filter_string }
                   updateCallback = { update_filter_string.bind(this) }
