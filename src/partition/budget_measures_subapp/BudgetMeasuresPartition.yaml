@@ -1,50 +1,68 @@
+# Text fragments used in popup top-rows
 provides:
   en: provides
   fr: fournit un financement de 
-
-single_word_for:
-  en: For
-  fr: Pour
-
-single_word_to:
-  en: To
-  fr: À
-
-single_word_in:
-  en: In
-  fr: En
-
-single_word_in_lowercase:
-  en: in
-  fr: en
-
-see_it_in_the_budget:
-  en: See it in the Budget
-  fr: Allez le voir dans le budget
-
 in_funding:
   en: in funding
   fr: ""
 
+has_allocated:
+  en: has allocated
+  fr: TODO
+in_funds:
+  en: in funds
+  fr: ""
+  
+has_withheld:
+  en: has withheld
+  fr: TODO
+of_the_funding:
+  en: of the funding
+  fr: TODO
+
+single_word_has:
+  en: has
+  fr: TODO
+remaining_in_funding:
+  en: remaining in funding
+  fr: TODO
+
+# Single words used in popup tables and other places
+single_word_for:
+  en: For
+  fr: Pour
+single_word_to:
+  en: To
+  fr: À
+single_word_in:
+  en: In
+  fr: En
+single_word_in_lowercase:
+  en: in
+  fr: en
+
+# Text fragments used in root text and popups 
 in_funding_for:
   en: in funding for
   fr: fournit pour
-
 allocated_to:
   en: allocated to
   fr: TODO
-
 withheld_for:
   en: withheld for
   fr: TODO
-
 remaining_for:
   en: remaining for
   fr: TODO
-
 as_of:
   en: As of
   fr: TODO
+
+
+
+see_it_in_the_budget:
+  en: See it in the Budget
+  fr: Allez le voir dans le budget
 
 budget_sourced_date_note:
   transform: [handlebars]
@@ -101,36 +119,39 @@ budget_measure_popup_allocated_top_line:
   handlebars_partial: true
   text: |
     <text style='color:#fdfdfd'>
-      {{gt "budget_name"}}:
+      {{gt "budget_name"}}
       </br>
+      {{gt "has_allocated"}}
     </text>
     {{> budget_measure_popup_top_line_value}}
     <text style='color:#fdfdfd'>
-      {{gt "allocated_to"}} ...
+      {{gt "in_funds"}} ...
     </text>
 
 budget_measure_popup_withheld_top_line:
   handlebars_partial: true
   text: |
     <text style='color:#fdfdfd'>
-      {{gt "budget_name"}}:
+      {{gt "budget_name"}}
       </br>
+      {{gt "has_withheld"}}
     </text>
     {{> budget_measure_popup_top_line_value}}
     <text style='color:#fdfdfd'>
-      {{gt "withheld_for"}} ...
+      {{gt "of_the_funding"}} ...
     </text>
 
 budget_measure_popup_remaining_top_line:
   handlebars_partial: true
   text: |
     <text style='color:#fdfdfd'>
-      {{gt "budget_name"}}:
+      {{gt "budget_name"}}
       </br>
+      {{gt "single_word_has"}}
     </text>
     {{> budget_measure_popup_top_line_value}}
     <text style='color:#fdfdfd'>
-      {{gt "remaining_for"}} ...
+      {{gt "remaining_in_funding"}} ...
     </text>
 
 budget_measure_popup_top_line_cases:
