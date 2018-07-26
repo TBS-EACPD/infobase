@@ -14,6 +14,10 @@ single_word_in:
   en: In
   fr: En
 
+single_word_in_lowercase:
+  en: in
+  fr: en
+
 see_it_in_the_budget:
   en: See it in the Budget
   fr: Allez le voir dans le budget
@@ -26,15 +30,23 @@ in_funding_for:
   en: in funding for
   fr: fournit pour
 
-budget_measures_root_sub_note:
-  transform: [handlebars]
-  en: |
-    ({{gt "budget_route_year"}} funding, presented on an Estimates basis as per Main Estimates 2018-19: Sources and Uses of the Budget Implementation vote by Department)
-  fr: |
-    (Financement pour {{gt "budget_route_year"}}, présenté en termes du budget des depenses selon le Budget principal des dépenses de 2018-2019 : 
-    Provenance et utilisation du crédit d’exécution du budget par ministère)
+allocated_to:
+  en: allocated to
+  fr: TODO
 
-budget_measures_partition_root:
+withheld_for:
+  en: withheld for
+  fr: TODO
+
+remaining_for:
+  en: remaining for
+  fr: TODO
+
+as_of:
+  en: as of
+  fr: TODO
+
+budget_measures_partition_funding_root:
   transform: [handlebars]
   text: |
     {{gt "budget_name_header"}}:
@@ -46,9 +58,56 @@ budget_measures_partition_root:
       {{displayed_measure_count}}
     </span>
     {{gt "budget_measures"}}
-    <p class='root-sub-note'>
-      {{gt "budget_measures_root_sub_note"}}
+    {{gt "single_word_in_lowercase"}} 
+    {{gt "budget_route_year"}}
+
+budget_measures_partition_allocated_root:
+  transform: [handlebars]
+  text: |
+    {{gt "budget_name_header"}}:
+    <p class='amount'>
+      {{rawfmt_compact1 root_value}}
     </p>
+    {{gt "allocated_to"}}
+    <span class='text-nowrap'>
+      {{displayed_measure_count}}
+    </span>
+    {{gt "budget_measures"}}
+    {{gt "single_word_in_lowercase"}} 
+    {{gt "budget_route_year"}}
+    ({{gt "as_of"}} {{gt "budget_data_sourced_date"}})
+
+budget_measures_partition_withheld_root:
+  transform: [handlebars]
+  text: |
+    {{gt "budget_name_header"}}:
+    <p class='amount'>
+      {{rawfmt_compact1 root_value}}
+    </p>
+    {{gt "withheld_for"}}
+    <span class='text-nowrap'>
+      {{displayed_measure_count}}
+    </span>
+    {{gt "budget_measures"}}
+    {{gt "single_word_in_lowercase"}} 
+    {{gt "budget_route_year"}}
+    ({{gt "as_of"}} {{gt "budget_data_sourced_date"}})
+
+budget_measures_partition_remaining_root:
+  transform: [handlebars]
+  text: |
+    {{gt "budget_name_header"}}:
+    <p class='amount'>
+      {{rawfmt_compact1 root_value}}
+    </p>
+    {{gt "remaining_for"}}
+    <span class='text-nowrap'>
+      {{displayed_measure_count}}
+    </span>
+    {{gt "budget_measures"}}
+    {{gt "single_word_in_lowercase"}} 
+    {{gt "budget_route_year"}}
+    ({{gt "as_of"}} {{gt "budget_data_sourced_date"}})
 
 budget_measure_popup_top_line:
   handlebars_partial: true

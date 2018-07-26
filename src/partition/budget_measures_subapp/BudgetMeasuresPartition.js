@@ -44,7 +44,10 @@ const get_level_headers = (first_column, selected_value) => {
   };
 }
 
-const root_text_func = (displayed_measure_count, root_value) => text_maker("budget_measures_partition_root", {root_value, displayed_measure_count});
+const root_text_func = (displayed_measure_count, selected_value, root_value) => {
+  const root_text_key = `budget_measures_partition_${selected_value}_root`;
+  return text_maker(root_text_key, {root_value, displayed_measure_count});
+}
 
 const popup_template = node => {
   const dept_is_first_column = (node.depth === 1 && node.data.type === "dept") || 
@@ -186,7 +189,7 @@ const render_diagram = (diagram, props, data, data_wrapper_node_rules, dont_fade
     data,
     formatter,
     level_headers: get_level_headers(props.first_column, props.selected_value),
-    root_text_func: _.curry(root_text_func)(displayed_measure_count),
+    root_text_func: _.curry(root_text_func)(displayed_measure_count, props.selected_value),
     popup_template,
     data_wrapper_node_rules,
     dont_fade,
