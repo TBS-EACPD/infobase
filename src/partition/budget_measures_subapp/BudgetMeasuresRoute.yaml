@@ -40,8 +40,8 @@ budget_route_top_text:
     These measures, totalling **$7.04 billion** in **{{gt "budget_route_year"}}**, are also listed in {{ext_link "Main Estimates 2018-19: Sources and Uses of the Budget Implementation vote by Department" "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates/2018-19-estimates/2018-19-sources-uses-budget-implementation-vote-department.html"}},
     thereby establishing a clear link between the Budget Plan and the Main Estimates.  
 
-    Values presented here are for **{{gt "budget_route_year"}}** funding and are on an Estimates basis as per Main Estimates 2018-19. 
-    Values for allocated, withheld, and remaining funds are present as of **{{gt "budget_data_sourced_date"}}** and will be refreshed periodically.
+    Values displayed here are for **{{gt "budget_route_year"}}** funding and are on an Estimates basis as per Main Estimates 2018-19. 
+    Values for allocated, withheld, and remaining funds are current as of **{{gt "budget_data_sourced_date"}}** and will be refreshed periodically.
   fr: |
     Présenté ci-dessous sont les nouvelles mesures de dépenses figurant au {{ext_link "tableau A2.11 du plan budgétaire de 2018" "https://www.budget.gc.ca/2018/docs/plan/anx-02-fr.html#41-Mesures-strategiques-et-investissements-du-budget-par-ministere-et-organisme-(selon-la-comptabilite-de-caisse)"}}.
     Ces mesures, totalisant **7,04 milliards** de dollars en **{{gt "budget_route_year"}}**, se retrouvent également dans {{ext_link "Budget principal des dépenses de 2018-2019 : Provenance et utilisation du crédit d’exécution du budget par ministère" "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal/2018-19-budget-depenses/2018-2019-provenance-utilisation-credit-execution-budget-ministere.html"}},
