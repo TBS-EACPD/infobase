@@ -17,7 +17,7 @@
 }
 
 .quadrant-dl > div:nth-child(4) {
-  float:right;
+  float:right;  
 }
 
 .quadrant-dl{
@@ -62,25 +62,6 @@
   margin: 20px 60px 20px 60px;
   border-top: 1px solid #ccc;
 }
-
-
-/* this extends a normal bootstrap table.dark-bordered-table.table */
-table.drr-summary-table th {
-  background-color: #d7e5f0 !important;
-  color: #333;
-  font-weight: $heavyFontWeight;
-  vertical-align: top !important;
-}
-/* total row */
-table.drr-summary-table > tbody > tr:last-child {
-  background-color: #d7e5f0 !important;
-  color: #333;
-}
-
-table.drr-summary-table td.success.disabled-success {
-  background-image: repeating-linear-gradient(-45deg, transparent, transparent, hsla(102, 23%, 78%, 0.7), hsla(102, 23%, 93%, 0.7) 5px)
-}
-
 
 
 ul.indicator-list > li {

@@ -45,13 +45,6 @@
     display: flex;
     width: 82%;
   }
-  .labeled-box-content details{
-    width: 100%;
-    align-self: center;
-  }
-  .labeled-box-content details summary{
-    border: 0px;
-  }
 }
 @media (max-width: 900px){
   .labeled-box-label {
