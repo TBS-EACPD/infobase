@@ -8,6 +8,10 @@
   font-size: 1.2em;
   font-weight: $mediumFontWeight;
   background-color: inherit;
+
+  @media(max-width:611px){
+    flex-direction: column;
+  }
 }
 
 .radio-buttons__option {
@@ -39,16 +43,18 @@
 }
 
 %pseduo-separator-common {
-  content: "";
-  height: 76%;
-  top: 13%;
-  border: solid $buttonPrimaryColor;
-  border-width: 0 0 0 1px;
-  position: absolute;
+  @media(min-width:612px){
+    content: "";
+    border: solid $buttonPrimaryColor;
+    position: absolute;
+    height: 76%;
+    top: 13%;
+    border-width: 0 0 0 1px;
+  }
 }
 .radio-buttons__option:not(:last-child):after {
   @extend %pseduo-separator-common;
-  right: 0px
+  right: 0px;
 }
 .radio-buttons__option:not(:first-child):before {
   @extend %pseduo-separator-common;
