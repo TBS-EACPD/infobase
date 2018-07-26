@@ -40,6 +40,9 @@ single_word_in:
 single_word_in_lowercase:
   en: in
   fr: en
+single_word_under:
+  en: Under
+  fr: TODO
 
 # Text fragments used in root text and popups 
 in_funding_for:
@@ -177,7 +180,11 @@ budget_measure_popup_dept_line:
   text: |
     <div class="budget-measure-popup-name-row popup-font-m">
       <span class='name-row-left' style='color:#fdfdfd'>
-        {{gt "single_word_to"}}
+      {{#if is_program}}
+          {{gt "single_word_under"}}
+        {{else}}
+          {{gt "single_word_to"}}
+        {{/if}}
       </span>
       <span class='name-row-right'>
         {{dept_name}}
@@ -195,6 +202,20 @@ budget_measure_popup_measure_line:
         {{measure_name}}
       </span>
     </div>
+
+budget_measure_popup_program_lines:
+  handlebars_partial: true
+  text: |
+    <div class="budget-measure-popup-name-row popup-font-m">
+      <span class='name-row-left' style='color:#fdfdfd'>
+        {{gt "single_word_to"}}
+      </span>
+      <span class='name-row-right'>
+        {{program_name}}
+      </span>
+    </div>
+    {{> budget_measure_popup_dept_line}}
+    {{> budget_measure_popup_measure_line}}
 
 budget_measure_popup_year_line:
   handlebars_partial: true
@@ -271,16 +292,20 @@ budget_measure_popup_template:
   text: |
     <div class='mrgn-bttm-md popup-row-top popup-font-m'>
       {{> budget_measure_popup_top_line_cases}}
-      {{#if dept_is_first_column}}
-        {{#if is_budget_measure}}
+      {{#if is_program}}
+        {{> budget_measure_popup_program_lines}}
+      {{else}}
+        {{#if dept_is_first_column}}
+          {{#if is_budget_measure}}
+            {{> budget_measure_popup_measure_line}}
+          {{/if}}
+          {{> budget_measure_popup_dept_line}}
+        {{else}}
+          {{#if is_dept}}
+            {{> budget_measure_popup_dept_line}}
+          {{/if}}
           {{> budget_measure_popup_measure_line}}
         {{/if}}
-        {{> budget_measure_popup_dept_line}}
-      {{else}}
-        {{#if is_dept}}
-          {{> budget_measure_popup_dept_line}}
-        {{/if}}
-        {{> budget_measure_popup_measure_line}}
       {{/if}}
       {{> budget_measure_popup_year_line}}
       {{#if show_sourced_date}}

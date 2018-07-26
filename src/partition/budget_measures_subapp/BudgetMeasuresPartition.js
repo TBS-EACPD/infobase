@@ -11,7 +11,10 @@ const {
   budget_chapters,
   budget_values,
 } = businessConstants;
-const { BudgetMeasure } = Subject;
+const { 
+  BudgetMeasure,
+  CRSO,
+} = Subject;
 const year = text_maker("budget_route_year");
 
 const formatter = node => {
@@ -75,29 +78,52 @@ const popup_template = node => {
     (node.depth === 2 && node.parent.data.type === "dept") || 
     (node.depth === 3 && node.parent.data.type === "budget_measure");
 
-  const is_dept = node.data.type === "dept";
-  const has_infographic = is_dept && node.data.id !== 9999;
-
   const is_budget_measure = node.data.type === "budget_measure";
+
+  const is_dept = node.data.type === "dept";
+  
+  const is_program = node.data.type === "program_allocation";
+
+  const but_actually_a_crso = is_program && !_.isUndefined(CRSO.lookup(node.data.id));
+
+  const level = !is_program ? 
+    node.data.type :
+    but_actually_a_crso ? "crso" : "program";
+
+  const has_infographic = is_dept && node.data.id !== 9999 || is_program;
 
   const is_first_column = node.depth === 1;
 
-  const dept_name = dept_is_first_column ? 
-    is_first_column ? node.data.name : node.parent.data.name :
-    !is_first_column ? node.data.name : node.parent.data.name;
+  const dept_name = !is_program ? 
+    (dept_is_first_column ? 
+      is_first_column ? node.data.name : node.parent.data.name :
+      !is_first_column ? node.data.name : node.parent.data.name) :
+    (dept_is_first_column ? 
+      node.parent.parent.data.name :
+      node.parent.data.name);
+  
+  const measure_name = !is_program ? 
+    (!dept_is_first_column ? 
+      is_first_column ? node.data.name : node.parent.data.name :
+      !is_first_column ? node.data.name : node.parent.data.name) :
+    (!dept_is_first_column ? 
+      node.parent.parent.data.name :
+      node.parent.data.name);
 
-  const measure_name = !dept_is_first_column ? 
-    is_first_column ? node.data.name : node.parent.data.name :
-    !is_first_column ? node.data.name : node.parent.data.name;
+  const program_name = is_program ? node.data.name : "";
 
   const popup_options = {
     year,
     dept_is_first_column,
-    is_dept,
-    has_infographic,
     is_budget_measure,
-    dept_name,
+    is_dept,
+    is_program,
+    but_actually_a_crso,
+    level,
+    has_infographic,
     measure_name,
+    dept_name,
+    program_name,
     is_first_column,
     selected_value_is_funding: node.value_type === "funding",
     selected_value_is_allocated: node.value_type === "allocated",
@@ -114,7 +140,6 @@ const popup_template = node => {
     chapter: !_.isUndefined(node.data.chapter_key) && budget_chapters[node.data.chapter_key].text,
     budget_link: !_.isUndefined(node.data.chapter_key) && ( (node.data.chapter_key === "oth" && node.data.type !== "net_adjust") || !_.isEmpty(node.data.ref_id) ) && 
       BudgetMeasure.make_budget_link(node.data.chapter_key, node.data.ref_id),
-    level: node.data.type,
     id: node.data.id,
     focus_text: node.magnified ? text_maker("partition_unfocus_button") : text_maker("partition_focus_button"),
   };
