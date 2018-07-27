@@ -196,6 +196,74 @@ class BudgetMeasureHBars extends React.Component {
         'funding',
     };
   }
+  static getDerivedStateFromProps(props, state){
+    const data = props.graph_args.data;
+
+    const { 
+      selected_filter,
+      selected_value,
+    } = state;
+    
+    const filter_options = _.chain(data)
+      .map(budget_measure_item => budget_measure_item.chapter_key)
+      .uniq()
+      .map( chapter_key => ({
+        name: budget_chapters[chapter_key].text,
+        id: chapter_key,
+      }))
+      .sortBy( filter_option => filter_option.name )
+      .thru( present_chapter_keys => _.concat(
+        [{
+          name: text_maker('all'),
+          id: 'all',
+        }],
+        present_chapter_keys,
+      ))
+      .value();
+  
+    const valid_selected_filter = _.filter(filter_options, filter_option => filter_option.id === selected_filter).length === 1 ?
+      selected_filter :
+      filter_options[0].id;
+
+    const value_options = _.chain(data)
+      .flatMap(data => data.data)
+      .filter( data => {
+        return valid_selected_filter === "all" || 
+          BudgetMeasure.lookup(data.measure_id).chapter_key === valid_selected_filter;
+      })
+      .reduce( (memo, data) => {
+        return {
+          funding: memo.funding + data.funding,
+          allocated: memo.allocated + data.allocated,
+          withheld: memo.withheld + data.withheld,
+          remaining: memo.remaining + data.remaining,
+        };
+      },
+      {
+        funding: 0,
+        allocated: 0,
+        withheld: 0,
+        remaining: 0,
+      })
+      .pickBy(value => value > 0)
+      .keys()
+      .map(key => ({
+        id: key,
+        name: budget_values[key].text,
+      }))
+      .value();
+
+    const valid_selected_value = _.filter(value_options, value_option => value_option.id === selected_value).length === 1 ?
+      selected_value :
+      value_options[0].id;
+
+    return {
+      selected_filter: valid_selected_filter,
+      selected_value: valid_selected_value,
+      filter_options,
+      value_options,
+    }
+  }
   render(){
     const { 
       graph_args: {
@@ -208,6 +276,8 @@ class BudgetMeasureHBars extends React.Component {
     const { 
       selected_filter,
       selected_value,
+      filter_options,
+      value_options,
     } = this.state;
 
     const sorted_data = _.chain(data)
@@ -295,47 +365,6 @@ class BudgetMeasureHBars extends React.Component {
       </div>;
     }
 
-    const filter_options = _.chain(sorted_data)
-      .map(budget_measure_item => budget_measure_item.chapter_key)
-      .uniq()
-      .map( chapter_key => ({
-        name: budget_chapters[chapter_key].text,
-        id: chapter_key,
-      }))
-      .sortBy( filter_option => filter_option.name )
-      .thru( present_chapter_keys => _.concat(
-        [{
-          name: text_maker('all'),
-          id: 'all',
-        }],
-        present_chapter_keys,
-      ))
-      .value();
-
-    const value_options = _.chain(sorted_data)
-      .flatMap(data => data.data)
-      .reduce( (memo, data) => {
-        return {
-          funding: memo.funding + data.funding,
-          allocated: memo.allocated + data.allocated,
-          withheld: memo.withheld + data.withheld,
-          remaining: memo.remaining + data.remaining,
-        };
-      },
-      {
-        funding: 0,
-        allocated: 0,
-        withheld: 0,
-        remaining: 0,
-      })
-      .pickBy(value => value > 0)
-      .keys()
-      .map(key => ({
-        id: key,
-        name: budget_values[key].text,
-      }))
-      .value();
-    
     const graph_ready_data = _.chain(sorted_data)
       .map( budget_measure_item => ({
         key: budget_measure_item.id,
@@ -396,6 +425,24 @@ class BudgetMeasureHBars extends React.Component {
       <div className = "frow">
         <div className = "fcol-md-12" style = {{ width: "100%" }}>
           <div className = 'centerer'>
+            <label style = {{padding: dropdown_padding}}>
+              <TM k="budget_panel_filter_by_chapter" />
+              <Select 
+                selected = {selected_filter}
+                options = {_.map(filter_options, 
+                  ({name, id}) => ({ 
+                    id,
+                    display: name,
+                  })
+                )}
+                onSelect = { id => this.setState({selected_filter: id}) }
+                style = {{
+                  display: 'block',
+                  margin: '10px auto',
+                }}
+                className = "form-control"
+              />
+            </label>
             { !this.treatAsProgram(subject) &&
               <label style = {{padding: dropdown_padding}}>
                 <TM k="budget_panel_select_value" />
@@ -416,24 +463,6 @@ class BudgetMeasureHBars extends React.Component {
                 />
               </label>
             }
-            <label style = {{padding: dropdown_padding}}>
-              <TM k="budget_panel_filter_by_chapter" />
-              <Select 
-                selected = {selected_filter}
-                options = {_.map(filter_options, 
-                  ({name, id}) => ({ 
-                    id,
-                    display: name,
-                  })
-                )}
-                onSelect = { id => this.setState({selected_filter: id}) }
-                style = {{
-                  display: 'block',
-                  margin: '10px auto',
-                }}
-                className = "form-control"
-              />
-            </label>
           </div>
           <div
             style={{
