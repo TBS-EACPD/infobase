@@ -44,11 +44,15 @@ dept_budget_measures_panel_text:
   en: |
     Budget 2018 provides **{{subj_name subject}}** with up to **{{fmt_compact_written total_funding}}** in additional funding for **2018-19**.
     {{> "budget_measure_stats_partial_en"}}
-    For additional government-wide information on budget measures, see our [Budget Tracker](#budget-measures/budget-measure) page.
+    For additional government-wide information on budget measures, see our [Budget Tracker](#budget-measures/budget-measure) page.  
+
+    {{{gt "budget_route_top_text_notes"}}}
   fr: |
     Le budget de 2018 prévoit accorder jusqu’à **{{fmt_compact_written total_funding}}** de fonds supplémentaires à **{{subj_name subject}}** pour 2018-2019.
     {{> "budget_measure_stats_partial_fr"}}
-    Pour obtenir de plus amples renseignements sur les mesures budgétaires du gouvernement, consultez la page « [Suivi budgétaire](#budget-measures/budget-measure/funding) ».
+    Pour obtenir de plus amples renseignements sur les mesures budgétaires du gouvernement, consultez la page « [Suivi budgétaire](#budget-measures/budget-measure/funding) ».  
+
+    {{{gt "budget_route_top_text_notes"}}}
 
 program_crso_budget_measures_panel_text:
   transform: [handlebars, markdown]
