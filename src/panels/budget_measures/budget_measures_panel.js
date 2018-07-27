@@ -56,7 +56,6 @@ const gov_dept_calculate_stats_common = (data) => {
 
 const crso_program_calculate = (subject, info, options) => {
   const org_id_string = subject.dept.id.toString();
-  const activity_code = _.split(subject.id, '-')[1]; // Get activity code from id, since crso subject doesn't surface it directly
 
   const program_measures_with_data_filtered = _.chain( BudgetMeasure.get_all() )
     .filter(measure => _.indexOf( measure.orgs, org_id_string ) !== -1)
@@ -71,7 +70,7 @@ const crso_program_calculate = (subject, info, options) => {
             ...nested_data[0],
             allocated: !_.isEmpty(program_allocations) ? 
              _.chain(nested_data[0].program_allocations)
-               .filter( (value, key) => key === activity_code )
+               .filter( (value, key) => key === subject.id )
                .reduce( (memo, value) => memo + value, 0)
                .value() :
               0,

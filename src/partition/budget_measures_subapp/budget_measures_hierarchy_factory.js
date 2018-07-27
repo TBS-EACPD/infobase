@@ -46,7 +46,7 @@ const roll_up_children_values = (node) => {
 }
 
 const get_node_submeasures_for_hierarchy_leaf = (node, selected_value) => {
-  let org_id, measure_id, activity_code;
+  let org_id, measure_id;
 
   if (node.data.type === "program"){
     // TODO, will be very different than other cases 
@@ -97,13 +97,6 @@ const post_traversal_search_string_set = (node) => {
 }
 
 const make_program_allocation_nodes = (measure_id, org_id) => {
-  const org = Dept.lookup(org_id);
-  if ( _.isUndefined(org) ){
-    return null;
-  }
-
-  const org_acronym = org.acronym;
-
   const program_allocations = _.chain( BudgetMeasure.lookup(measure_id).data )
     .filter( data_row => +data_row.org_id === org_id && !_.isEmpty(data_row.program_allocations) )
     .flatMap(data_row => data_row.program_allocations)
@@ -112,10 +105,9 @@ const make_program_allocation_nodes = (measure_id, org_id) => {
   if ( _.isEmpty(program_allocations) ){
     return null;
   } else {
-    const program_allocation_nodes = _.map(program_allocations, (allocation_value, activity_code) => {
-      const id = `${org_acronym}-${activity_code}`;
-      const program = Program.lookup(id);
-      const crso = CRSO.lookup(id);
+    const program_allocation_nodes = _.map(program_allocations, (allocation_value, subject_id) => {
+      const program = Program.lookup(subject_id);
+      const crso = CRSO.lookup(subject_id);
   
       const program_or_crso = program || crso;
   
