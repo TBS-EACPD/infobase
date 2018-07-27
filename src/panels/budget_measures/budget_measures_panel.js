@@ -105,6 +105,13 @@ const calculate_functions = {
             _.reduce(measure.data, (total, data_row) => total + data_row[key], 0),
           ])
           .fromPairs()
+          .assign({
+            measure_id: measure.id,
+            program_allocations: _.reduce(measure.data,
+              (memo, data) => _.assign(memo,data.program_allocations),
+              {}
+            ),
+          })
           .value(),
       }))
       .sortBy(budget_measure => -budget_measure.data.funding)
