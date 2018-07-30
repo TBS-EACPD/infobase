@@ -683,11 +683,27 @@ Subject.BudgetMeasure = class BudgetMeasure extends common(){
 
             const program_allocations_and_submeasures_by_activity_code = submeasure_data_for_this_row().length === 0 ?
               program_allocations_by_subject_id :
-              _.assign(
-                {},
-                program_allocations_by_subject_id,
-                ..._.map(submeasure_data_for_this_row(), submeasure_data => submeasure_data.program_allocations)
-              );
+              _.chain( submeasure_data_for_this_row() )
+                .map( submeasures => submeasures.program_allocations )
+                .concat(program_allocations_by_subject_id)
+                .thru( all_program_allocations => {
+                  const keys = _.chain(all_program_allocations)
+                    .flatMap(_.keys)
+                    .uniq()
+                    .value();
+                  const merged_program_allocations = _.chain(keys)
+                    .map( key => _.chain(all_program_allocations)
+                      .map(program_allocations => program_allocations[key])
+                      .filter()
+                      .reduce( (memo, value) => memo + value, 0)
+                      .thru(value => [key, value])
+                      .value()
+                    )
+                    .fromPairs()
+                    .value();
+                  return merged_program_allocations;
+                })
+                .value();
             
             return program_allocations_and_submeasures_by_activity_code;
           }),
