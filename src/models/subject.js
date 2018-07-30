@@ -674,7 +674,12 @@ Subject.BudgetMeasure = class BudgetMeasure extends common(){
         'program_allocations', 
         {
           get: _.memoize(function() {
-            const dept_acronym = Subject.Dept.lookup(row.org_id).acronym;
+            const dept = Subject.Dept.lookup(row.org_id);
+            if ( _.isUndefined(dept) ){
+              return [];
+            }
+
+            const dept_acronym = dept.acronym;
 
             const program_allocations_by_subject_id = _.mapKeys(
               row_program_allocations,
