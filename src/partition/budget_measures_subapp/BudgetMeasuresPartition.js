@@ -111,7 +111,7 @@ const popup_template = node => {
   
   const notes = _.chain(!_.isUndefined(node.data.notes) && !_.isEmpty(node.data.notes) && node.data.notes)
     .concat([
-      node.submeasures && text_maker("budget_measure_submeasure_note"),
+      !_.isEmpty(node.submeasures) && text_maker("budget_measure_submeasure_note"),
     ])
     .filter()
     .value();
