@@ -567,14 +567,34 @@ Subject.BudgetMeasure = class BudgetMeasure extends common(){
   }
   
   static register_submeasure_by_parent({id, parent_id, name, data}){
+    const modified_data = _.cloneDeep(data[0]);
+    Object.defineProperty(
+      modified_data, 
+      'program_allocations', 
+      {
+        get: _.memoize(function() {
+          const dept_acronym = Subject.Dept.lookup(data[0].org_id).acronym;
+
+          const program_allocations_by_subject_id = _.mapKeys(
+            data[0].program_allocations,
+            (value, key) => `${dept_acronym}-${key}`,
+          );
+
+          return program_allocations_by_subject_id;
+        }),
+      }
+    );
+
     const submeasure = {
       id,
       parent_id,
       name,
-      data,
+      data: modified_data,
     };
-    const submeasures_of_parent = submeasures_by_parent_id[parent_id];
+    
 
+    const submeasures_of_parent = submeasures_by_parent_id[parent_id];
+    
     if ( !_.isUndefined(submeasures_of_parent) && submeasures_of_parent.length > 0){
       submeasures_by_parent_id[parent_id] = [
         ...submeasures_of_parent,
@@ -654,22 +674,22 @@ Subject.BudgetMeasure = class BudgetMeasure extends common(){
         'program_allocations', 
         {
           get: _.memoize(function() {
-            const program_allocations_by_activity_code = submeasure_data_for_this_row().length === 0 ?
-              row_program_allocations :
-              _.assign(
-                {},
-                row_program_allocations,
-                ..._.map(submeasure_data_for_this_row(), submeasure_data => submeasure_data.program_allocations)
-              );
-            
             const dept_acronym = Subject.Dept.lookup(row.org_id).acronym;
 
             const program_allocations_by_subject_id = _.mapKeys(
-              program_allocations_by_activity_code,
+              row_program_allocations,
               (value, key) => `${dept_acronym}-${key}`,
             );
 
-            return program_allocations_by_subject_id;
+            const program_allocations_and_submeasures_by_activity_code = submeasure_data_for_this_row().length === 0 ?
+              program_allocations_by_subject_id :
+              _.assign(
+                {},
+                program_allocations_by_subject_id,
+                ..._.map(submeasure_data_for_this_row(), submeasure_data => submeasure_data.program_allocations)
+              );
+            
+            return program_allocations_and_submeasures_by_activity_code;
           }),
         }
       );

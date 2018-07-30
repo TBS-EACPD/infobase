@@ -46,29 +46,40 @@ const roll_up_children_values = (node) => {
 }
 
 const get_node_submeasures_for_hierarchy_leaf = (node, selected_value) => {
-  let org_id, measure_id;
+  let org_id, measure_id, program_or_crso_id;
 
-  if (node.data.type === "program"){
-    // TODO, will be very different than other cases 
-  }
-
-  if (node.data.type === "budget_measure"){
-    org_id = node.parent.data.id;
-    measure_id = node.data.id;
-  } else if (node.data.type === "dept"){
-    org_id = node.data.id;
-    measure_id = node.parent.data.id;
+  if (node.data.type === "program_allocation"){
+    program_or_crso_id = node.data.id;
+    org_id = node.parent.data.type === "dept" ? 
+    node.parent.data.id :
+    node.parent.parent.data.id;
+    measure_id = node.parent.data.type === "budget_measure" ? 
+      node.parent.data.id :
+      node.parent.parent.data.id;
   } else {
-    return [];
+    if (node.data.type === "budget_measure"){
+      org_id = node.parent.data.id;
+      measure_id = node.data.id;
+    } else if (node.data.type === "dept"){
+      org_id = node.data.id;
+      measure_id = node.parent.data.id;
+    } else {
+      return [];
+    }
   }
-
-  return _.chain( BudgetMeasure.lookup(measure_id).submeasures )
-    .filter(submeasure => submeasure.data.org_id === org_id)
+  
+  const node_submeasures = _.chain( BudgetMeasure.lookup(measure_id).submeasures )
+    .filter(submeasure => submeasure.data.org_id !== org_id)
     .map( submeasure => ({
       ...submeasure, 
-      value: submeasure.data[selected_value],
+      value: program_or_crso_id ? 
+        submeasure.data.program_allocations[program_or_crso_id]: 
+        submeasure.data[selected_value],
     }))
+    .filter( submeasure => !_.isUndefined(submeasure.value) && submeasure.value !== 0)
     .value();
+
+  return node_submeasures;
 }
 
 const post_traversal_children_filter = (node) => {

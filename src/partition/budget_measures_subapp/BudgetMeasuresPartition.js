@@ -7,10 +7,7 @@ import { Subject } from '../../models/subject';
 import { businessConstants } from '../../models/businessConstants.js';
 import { formats } from '../../core/format.js';
 
-const {
-  budget_chapters,
-  budget_values,
-} = businessConstants;
+const { budget_chapters } = businessConstants;
 const { 
   BudgetMeasure,
   CRSO,
