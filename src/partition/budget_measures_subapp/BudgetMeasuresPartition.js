@@ -138,6 +138,7 @@ const popup_template = node => {
     budget_link: !_.isUndefined(node.data.chapter_key) && ( (node.data.chapter_key === "oth" && node.data.type !== "net_adjust") || !_.isEmpty(node.data.ref_id) ) && 
       BudgetMeasure.make_budget_link(node.data.chapter_key, node.data.ref_id),
     id: node.data.id,
+    submeasures: node.submeasures,
     focus_text: node.magnified ? text_maker("partition_unfocus_button") : text_maker("partition_focus_button"),
   };
   return text_maker("budget_measure_popup_template", popup_options);

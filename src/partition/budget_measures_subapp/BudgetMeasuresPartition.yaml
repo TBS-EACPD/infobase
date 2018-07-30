@@ -267,6 +267,18 @@ budget_measure_popup_bottom_rows:
         {{{notes}}}
       </div>
     {{/if}}
+    {{#if submeasures}}
+      <div class='popup-font-ml'>
+        TODO Submeasure text
+      </div>
+      <div class='mrgn-bttm-sm popup-row-bottom-border popup-decription-text' style='min-height:40px;'>
+        <ul>
+        {{#each submeasures}}
+          <li>{{this.name}}: {{this.value}}</li>
+        {{/each}}
+        </ul>
+      </div>
+    {{/if}}
     {{#if budget_link}}
       <a href='{{budget_link}}' 
         class='btn btn-xs btn-block mrgn-bttm-sm infographic' 
