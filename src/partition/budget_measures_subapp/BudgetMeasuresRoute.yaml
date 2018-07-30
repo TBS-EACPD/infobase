@@ -37,7 +37,7 @@ budget_route_top_text_notes:
   transform: [handlebars, markdown]
   en: |
     All values displayed here are for **{{gt "budget_route_year"}}** funding and are on an Estimates basis as per [Main Estimates 2018-19](https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates/2018-19-estimates/2018-19-sources-uses-budget-implementation-vote-department.html). 
-    Values for {{gl_tt "allocated" "BIV_ALLO"}}, {{gl_tt "withheld" "BIV_WITH"}}, and {{gl_tt "remaining funds" "BIV_REMA"}} are current as of **{{gt "budget_data_sourced_date"}}** and will be refreshed periodically. {{gl_tt "Total funding" "BIV_FUND"}} values are final.
+    Values for {{gl_tt "allocated" "BIV_ALLO"}}, {{gl_tt "centrally withheld" "BIV_WITH"}}, and {{gl_tt "remaining funds" "BIV_REMA"}} are current as of **{{gt "budget_data_sourced_date"}}** and will be refreshed periodically. {{gl_tt "Total funding" "BIV_FUND"}} values are final.
   fr: |
     TODO
 

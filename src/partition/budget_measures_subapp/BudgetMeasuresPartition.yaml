@@ -14,7 +14,7 @@ in_funds:
   fr: ""
   
 has_withheld:
-  en: has withheld
+  en: has centrally withheld
   fr: TODO
 of_the_funding:
   en: of the funding
@@ -52,7 +52,7 @@ allocated_to:
   en: allocated to
   fr: TODO
 withheld_for:
-  en: withheld for
+  en: centrally withheld for
   fr: TODO
 remaining_for:
   en: remaining for
@@ -86,6 +86,8 @@ budget_measures_partition_root:
     {{gt "budget_measures"}}
     {{gt "single_word_in_lowercase"}} 
     {{gt "budget_route_year"}}
+    </br>
+    </br>
     {{additional_root_note}}
 
 budget_measure_popup_top_line_value:
