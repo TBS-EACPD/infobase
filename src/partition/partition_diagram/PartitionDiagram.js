@@ -620,6 +620,10 @@ export class PartitionDiagram {
     d3.event.preventDefault();
   }
   unmagnify_all(){
+    if (this.pop_up){
+      this.remove_pop_up();
+    } 
+    
     _.each(this.data.root.children, node => { if ( this.data.magnified(node) ){ this.data.unmagnify(node) } });
     if ( this.should_remove_unmagnify_all_button() ){
       this.remove_unmagnify_all_button();
