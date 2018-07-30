@@ -1,3 +1,5 @@
+import '../common_css/non-a11y-site.scss';
+
 import { ReactUnmounter } from '../core/NavComponents';
 
 import { Route, Switch } from 'react-router';

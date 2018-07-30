@@ -1,0 +1,7 @@
+@import "common-variables";
+
+/* For styles that aren't necessarily a11y best practices */
+
+#app-focus-root:focus {
+  outline: none;
+}
