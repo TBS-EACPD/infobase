@@ -108,6 +108,13 @@ const popup_template = node => {
       node.parent.data.name);
 
   const program_name = is_program ? node.data.name : "";
+  
+  const notes = _.chain(!_.isUndefined(node.data.notes) && !_.isEmpty(node.data.notes) && node.data.notes)
+    .concat([
+      node.submeasures && text_maker("budget_measure_submeasure_note"),
+    ])
+    .filter()
+    .value();
 
   const popup_options = {
     year,
@@ -121,6 +128,7 @@ const popup_template = node => {
     measure_name,
     dept_name,
     program_name,
+    notes,
     is_first_column,
     selected_value_is_funding: node.value_type === "funding",
     selected_value_is_allocated: node.value_type === "allocated",
@@ -133,7 +141,6 @@ const popup_template = node => {
     value_is_zero: node.__value__ === 0,
     lang_formated_zero: window.lang === "en" ? "$0" : "0$",
     description: !_.isUndefined(node.data.description) && !_.isEmpty(node.data.description) && node.data.description,
-    notes: !_.isUndefined(node.data.notes) && !_.isEmpty(node.data.notes) && node.data.notes,
     chapter: !_.isUndefined(node.data.chapter_key) && budget_chapters[node.data.chapter_key].text,
     budget_link: !_.isUndefined(node.data.chapter_key) && ( (node.data.chapter_key === "oth" && node.data.type !== "net_adjust") || !_.isEmpty(node.data.ref_id) ) && 
       BudgetMeasure.make_budget_link(node.data.chapter_key, node.data.ref_id),

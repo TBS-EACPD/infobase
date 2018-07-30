@@ -33,8 +33,8 @@ const post_traversal_modifications = (node, selected_value) => {
     node.value = roll_up_children_values(node);
   }
   
-  if ( _.isUndefined(node.children) ){
-    node.submeasures = get_node_submeasures_for_hierarchy_leaf(node, selected_value);
+  if (node.depth > 1){
+    node.submeasures = get_node_submeasures(node, selected_value);
   }
 
   post_traversal_children_filter(node);
@@ -45,7 +45,7 @@ const roll_up_children_values = (node) => {
   return _.reduce(node.children, (sum, child_node) => sum + child_node.value, 0);
 }
 
-const get_node_submeasures_for_hierarchy_leaf = (node, selected_value) => {
+const get_node_submeasures = (node, selected_value) => {
   let org_id, measure_id, program_or_crso_id;
 
   if (node.data.type === "program_allocation"){

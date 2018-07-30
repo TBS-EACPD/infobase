@@ -67,6 +67,14 @@ see_it_in_the_budget:
   en: See it in the Budget
   fr: Allez le voir dans le budget
 
+submeasures_table_title:
+  en: Funding from Submeasures
+  fr: TODO
+
+budget_measure_submeasure_note:
+  en: TODO explain submeasures, how they are specific to a measure and organization and only have allocated and withheld values
+  fr: TODO
+
 budget_sourced_date_note:
   transform: [handlebars]
   text: |
@@ -259,25 +267,27 @@ budget_measure_popup_bottom_rows:
         {{{description}}}
       </div>
     {{/if}}
+    {{#if submeasures}}
+      <div class='popup-font-ml'>
+        {{gt "submeasures_table_title"}}:
+      </div>
+      <div class='popup-decription-text popup-row-bottom-border' style='max-height:200px;'>
+        <ul>
+        {{#each submeasures}}
+          <li>{{this.name}}: {{fmt_compact1 this.value}}</li>
+        {{/each}}
+        </ul>
+      </div>
+    {{/if}}
     {{#if notes}}
       <div class='popup-font-ml'>
         {{gt "notes"}}:
       </div>
-      <div class='mrgn-bttm-sm popup-row-bottom-border popup-decription-text' style='min-height:40px;'>
-        {{{notes}}}
-      </div>
-    {{/if}}
-    {{#if submeasures}}
-      <div class='popup-font-ml'>
-        TODO Submeasure text
-      </div>
-      <div class='mrgn-bttm-sm popup-row-bottom-border popup-decription-text' style='min-height:40px;'>
-        <ul>
-        {{#each submeasures}}
-          <li>{{this.name}}: {{this.value}}</li>
+      <ul class='mrgn-bttm-sm popup-row-bottom-border popup-decription-text' style='min-height:40px;'>
+        {{#each notes}}
+          <li>{{{this}}}</li>
         {{/each}}
-        </ul>
-      </div>
+      </ul>
     {{/if}}
     {{#if budget_link}}
       <a href='{{budget_link}}' 
