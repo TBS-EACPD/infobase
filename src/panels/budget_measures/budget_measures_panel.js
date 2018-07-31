@@ -27,6 +27,7 @@ const {
 const {
   StackedHbarChart,
   A11YTable,
+  GraphLegend
 } = declarative_charts;
 
 const { text_maker, TM } = create_text_maker_component([text1,text2]);
@@ -391,7 +392,11 @@ class BudgetMeasureHBars extends React.Component {
     }
 
     const group_by_sign_of_value = selected_filter === 'all' && selected_value !== 'all_biv_values';
-    const biv_values = ["allocated", "withheld", "remaining"];
+    const biv_values = _.chain(budget_values)
+      .keys()
+      .filter(key => key !== "funding")
+      .sortBy()
+      .value();
 
     const graph_ready_data = _.chain(sorted_data)
       .map( budget_measure_item => ({
@@ -435,6 +440,7 @@ class BudgetMeasureHBars extends React.Component {
                     label: key,
                     data: [value],
                   }))
+                  .sortBy("label")
                   .value();
                 const modified_item = {
                   ...item,
@@ -479,7 +485,7 @@ class BudgetMeasureHBars extends React.Component {
       <div className = "frow">
         <div className = "fcol-md-12" style = {{ width: "100%" }}>
           <div className = 'centerer'>
-            <label style = {{padding: dropdown_padding, textAlign: "center"}}>
+            <label style = {{padding: dropdown_padding, textAlign: "center", }}>
               <TM k="budget_panel_filter_by_chapter" />
               <Select 
                 selected = {selected_filter}
@@ -520,7 +526,17 @@ class BudgetMeasureHBars extends React.Component {
           </div>
           <div className = 'centerer'>
             { selected_value === 'all_biv_values' &&
-              "TODO, legend for biv value colour coding"
+              <GraphLegend
+                isHorizontal = {true}
+                items = {
+                  _.map(biv_values, biv_value => ({
+                    id: biv_value,
+                    label: budget_values[biv_value].text,
+                    color: biv_value_colors(biv_value),
+                    active: true,
+                  }))
+                }
+              />
             }
           </div>
           <div
