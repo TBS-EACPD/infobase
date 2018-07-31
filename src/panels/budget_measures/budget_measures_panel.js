@@ -239,12 +239,11 @@ class BudgetMeasureHBars extends React.Component {
           BudgetMeasure.lookup(data.measure_id).chapter_key === valid_selected_filter;
       })
       .reduce( 
-        (memo, data) => ({
-          funding: memo.funding + data.funding,
-          allocated: memo.allocated + data.allocated,
-          withheld: memo.withheld + data.withheld,
-          remaining: memo.remaining + data.remaining,
-        }),
+        (memo, data) => _.chain(budget_values)
+          .keys()
+          .map(key => [ key, memo[key] + data[key] ])
+          .fromPairs()
+          .value(),
         _.chain(budget_values)
           .keys()
           .map(key => [key, 0])
@@ -426,7 +425,7 @@ class BudgetMeasureHBars extends React.Component {
             }))
             .value();
         } else if (selected_value === 'all_biv_values'){
-          let prepared_data = _.filter(mapped_data, item => item.chapter_key === selected_filter );
+          let prepared_data;
 
           if (selected_filter === 'all'){
             prepared_data = _.chain(mapped_data)
@@ -436,11 +435,10 @@ class BudgetMeasureHBars extends React.Component {
                 label: budget_chapters[key].text,
                 data: [_.reduce(
                   group, 
-                  (memo, item) => ({
-                    allocated: memo.allocated + item.data[0].allocated,
-                    withheld: memo.withheld + item.data[0].withheld,
-                    remaining: memo.remaining + item.data[0].remaining,
-                  }),
+                  (memo, item) => _.chain(biv_values)
+                    .map(key => [ key, memo[key] + item.data[0][key] ])
+                    .fromPairs()
+                    .value(),
                   _.chain(biv_values)
                     .map(key => [key, 0])
                     .fromPairs()
@@ -448,7 +446,9 @@ class BudgetMeasureHBars extends React.Component {
                 )],
                 chapter_key: key,
               }))
-              .value()
+              .value();
+          } else {
+            prepared_data = _.filter(mapped_data, item => item.chapter_key === selected_filter );
           }
 
           return _.map(prepared_data, item => {
