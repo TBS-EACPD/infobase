@@ -391,12 +391,15 @@ class BudgetMeasureHBars extends React.Component {
     }
 
     const group_by_sign_of_value = selected_filter === 'all' && selected_value !== 'all_biv_values';
+    const biv_values = ["allocated", "withheld", "remaining"];
 
     const graph_ready_data = _.chain(sorted_data)
       .map( budget_measure_item => ({
         key: budget_measure_item.id,
         label: budget_measure_item.name,
-        data: [budget_measure_item.data[selected_value]],
+        data: selected_value !== 'all_biv_values' ? 
+          [budget_measure_item.data[selected_value]] :
+          [budget_measure_item.data],
         chapter_key: budget_measure_item.chapter_key,
         ref_id: budget_measure_item.ref_id,
       }))
@@ -419,7 +422,28 @@ class BudgetMeasureHBars extends React.Component {
             }))
             .value();
         } else if (selected_value === 'all_biv_values'){
-          return []; // TODO, return grouped data
+          if (selected_filter === 'all'){
+            return []; // TODO, return grouped data
+          } else {
+            return _.chain(mapped_data)
+              .filter( item => item.chapter_key === selected_filter )
+              .map( item => {
+                const modified_data = _.chain(item.data[0])
+                  .pickBy( (value, key) => _.indexOf(biv_values, key) !== -1 && value !== 0 )
+                  .map( (value, key) => ({
+                    ...item,
+                    label: key,
+                    data: [value],
+                  }))
+                  .value();
+                const modified_item = {
+                  ...item,
+                  data: modified_data,
+                };
+                return modified_item;
+              })
+              .value();
+          }
         } else {
           return _.chain(mapped_data)
             .filter( item => item.chapter_key === selected_filter )
@@ -432,6 +456,8 @@ class BudgetMeasureHBars extends React.Component {
       })
       .value();
     
+    const biv_value_colors = infobase_colors(biv_values);
+
     const bar_colors = (item_label) => {
       if (group_by_sign_of_value){
         if (item_label === "__negative_valued"){
@@ -440,7 +466,7 @@ class BudgetMeasureHBars extends React.Component {
           return "#1f77b4";
         }
       } else if (selected_value === 'all_biv_values'){
-        return "#1f77b4"; // TODO, colour groups by value
+        return biv_value_colors(item_label);
       } else {
         return "#1f77b4";
       }
@@ -492,11 +518,11 @@ class BudgetMeasureHBars extends React.Component {
               </label>
             }
           </div>
-          { selected_value === 'all_biv_values' &&
-            <div className = 'centerer'>
-              {{/* TODO need a legend for all_biv_values case */}}
-            </div>
-          }
+          <div className = 'centerer'>
+            { selected_value === 'all_biv_values' &&
+              "TODO, legend for biv value colour coding"
+            }
+          </div>
           <div
             style={{
               position: "absolute",
