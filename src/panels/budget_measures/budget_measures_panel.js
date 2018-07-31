@@ -452,8 +452,10 @@ class BudgetMeasureHBars extends React.Component {
           }
 
           return _.map(prepared_data, item => {
-            const modified_data = _.chain(item.data[0])
-              .pickBy( (value, key) => _.indexOf(biv_values, key) !== -1 && value !== 0 )
+            const modified_data = _.chain(biv_values)
+              .map( key => [ key, item.data[0][key] ] )
+              .fromPairs()
+              .pickBy( (value, key) => value !== 0 )
               .map( (value, key) => ({
                 ...item,
                 label: key,
