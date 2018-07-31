@@ -68,7 +68,7 @@ see_it_in_the_budget:
   fr: Allez le voir dans le budget
 
 submeasures_table_title:
-  en: Funding from Submeasures
+  en: Portions of Funding from Submeasures
   fr: TODO
 
 budget_measure_submeasure_note:
@@ -271,12 +271,17 @@ budget_measure_popup_bottom_rows:
       <div class='popup-font-ml'>
         {{gt "submeasures_table_title"}}:
       </div>
-      <div class='popup-decription-text popup-row-bottom-border' style='max-height:200px;'>
-        <ul>
+      <div class='popup-decription-text popup-row-bottom-border' style='max-height:200px; padding-bottom:6px;'>
         {{#each submeasures}}
-          <li>{{this.name}}: {{fmt_compact1 this.value}}</li>
+          <div class='budget-measure-popup-name-row'>
+            <span class='name-row-left' style='color:#fdfdfd'>
+              {{fmt_compact1 this.value}}
+            </span>
+            <span class='name-row-right'>
+              {{this.name}}
+            </span>
+          </div>
         {{/each}}
-        </ul>
       </div>
     {{/if}}
     {{#if notes}}
