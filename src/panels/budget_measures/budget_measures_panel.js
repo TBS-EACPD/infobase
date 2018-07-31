@@ -85,7 +85,7 @@ const crso_program_calculate = (subject, info, options) => {
     return {
       data: program_measures_with_data_filtered,
       subject,
-      info: {}, // TODO, will have different info calc then gov and dept, haven't written text yet though
+      info: {}, // TODO, will have different info calc than gov and dept, haven't written text yet though
     };
   } else {
     return false;
@@ -257,6 +257,25 @@ class BudgetMeasureHBars extends React.Component {
         id: key,
         name: budget_values[key].text,
       }))
+      .thru(value_options => {
+        const should_have_all_biv_option = _.chain(value_options)
+          .map(value_option => value_option.id)
+          .filter(option_id => option_id !== "funding")
+          .value()
+          .length > 1;
+
+        if (should_have_all_biv_option){
+          return [
+            ...value_options,
+            {
+              id: "all_biv_values",
+              name: text_maker("budget_panel_all_biv_values_option"),
+            },
+          ];
+        } else {
+          return value_options;
+        }
+      })
       .value();
 
     const valid_selected_value = _.filter(value_options, value_option => value_option.id === selected_value).length === 1 ?
@@ -371,6 +390,8 @@ class BudgetMeasureHBars extends React.Component {
       </div>;
     }
 
+    const group_by_sign_of_value = selected_filter === 'all' && selected_value !== 'all_biv_values';
+
     const graph_ready_data = _.chain(sorted_data)
       .map( budget_measure_item => ({
         key: budget_measure_item.id,
@@ -380,15 +401,7 @@ class BudgetMeasureHBars extends React.Component {
         ref_id: budget_measure_item.ref_id,
       }))
       .thru( mapped_data => {
-        if (selected_filter !== 'all'){
-          return _.chain(mapped_data)
-            .filter(item => item.chapter_key === selected_filter )
-            .map( item => ({
-              ...item,
-              data: [item],
-            }))
-            .value();
-        } else {
+        if (group_by_sign_of_value){
           return _.chain(mapped_data)
             .groupBy("chapter_key")
             .map( (group, key) => ({
@@ -405,20 +418,29 @@ class BudgetMeasureHBars extends React.Component {
               chapter_key: key,
             }))
             .value();
+        } else if (selected_value === 'all_biv_values'){
+          return []; // TODO, return grouped data
+        } else {
+          return _.chain(mapped_data)
+            .filter( item => item.chapter_key === selected_filter )
+            .map( item => ({
+              ...item,
+              data: [item],
+            }))
+            .value();
         }
       })
       .value();
     
-    const names_of_measures_with_negative_values = selected_filter !== 'all' ? 
-      _.chain(sorted_data)
-        .filter( measure => measure.data.values < 0 )
-        .map( measure_with_negative_values => measure_with_negative_values.name )
-        .value() :
-      ["__negative_valued"];
-    
     const bar_colors = (item_label) => {
-      if ( _.indexOf(names_of_measures_with_negative_values, item_label) !== -1 ){
-        return "#ff7e0f";
+      if (group_by_sign_of_value){
+        if (item_label === "__negative_valued"){
+          return "#ff7e0f";
+        } else {
+          return "#1f77b4";
+        }
+      } else if (selected_value === 'all_biv_values'){
+        return "#1f77b4"; // TODO, colour groups by value
       } else {
         return "#1f77b4";
       }
@@ -431,7 +453,7 @@ class BudgetMeasureHBars extends React.Component {
       <div className = "frow">
         <div className = "fcol-md-12" style = {{ width: "100%" }}>
           <div className = 'centerer'>
-            <label style = {{padding: dropdown_padding}}>
+            <label style = {{padding: dropdown_padding, textAlign: "center"}}>
               <TM k="budget_panel_filter_by_chapter" />
               <Select 
                 selected = {selected_filter}
@@ -450,7 +472,7 @@ class BudgetMeasureHBars extends React.Component {
               />
             </label>
             { !this.treatAsProgram(subject) &&
-              <label style = {{padding: dropdown_padding}}>
+              <label style = {{padding: dropdown_padding, textAlign: "center"}}>
                 <TM k="budget_panel_select_value" />
                 <Select 
                   selected = {selected_value}
@@ -470,6 +492,11 @@ class BudgetMeasureHBars extends React.Component {
               </label>
             }
           </div>
+          { selected_value === 'all_biv_values' &&
+            <div className = 'centerer'>
+              {{/* TODO need a legend for all_biv_values case */}}
+            </div>
+          }
           <div
             style={{
               position: "absolute",

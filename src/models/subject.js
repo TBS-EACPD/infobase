@@ -592,10 +592,9 @@ Subject.BudgetMeasure = class BudgetMeasure extends common(){
       data: modified_data,
     };
     
-
     const submeasures_of_parent = submeasures_by_parent_id[parent_id];
     
-    if ( !_.isUndefined(submeasures_of_parent) && submeasures_of_parent.length > 0){
+    if ( !_.isUndefined(submeasures_of_parent) && submeasures_of_parent.length > 0 ){
       submeasures_by_parent_id[parent_id] = [
         ...submeasures_of_parent,
         submeasure,
@@ -689,18 +688,18 @@ Subject.BudgetMeasure = class BudgetMeasure extends common(){
             const program_allocations_and_submeasures_by_activity_code = submeasure_data_for_this_row().length === 0 ?
               program_allocations_by_subject_id :
               _.chain( submeasure_data_for_this_row() )
-                .map( submeasures => submeasures.program_allocations )
+                .map(submeasures => submeasures.program_allocations)
                 .concat(program_allocations_by_subject_id)
-                .thru( all_program_allocations => {
+                .thru(all_program_allocations => {
                   const keys = _.chain(all_program_allocations)
                     .flatMap(_.keys)
                     .uniq()
                     .value();
                   const merged_program_allocations = _.chain(keys)
-                    .map( key => _.chain(all_program_allocations)
+                    .map(key => _.chain(all_program_allocations)
                       .map(program_allocations => program_allocations[key])
                       .filter()
-                      .reduce( (memo, value) => memo + value, 0)
+                      .reduce( (memo, value) => memo + value, 0 )
                       .thru(value => [key, value])
                       .value()
                     )

@@ -377,13 +377,13 @@ budget_chapters:
 
 budget_values:
   funding:
-    en: Total Funding
+    en: Budget 2018 Funding
     fr: todo
   allocated:
     en: Allocated Funds
     fr: todo
   withheld:
-    en: Withheld Funds
+    en: Centrally Withheld Funds
     fr: todo
   remaining:
     en: Remaining Funds

@@ -84,7 +84,7 @@ const get_node_submeasures = (node, selected_value) => {
 
 const post_traversal_children_filter = (node) => {
   if (node.value_type === "funding"){
-    return; // Don't filter anything when total funding selected, want to show 0$ items in this case only
+    return; // Don't filter anything when Budget 2018 Funding selected, want to show 0$ items in this case only
   } else if ( _.isUndefined(node.children) ){
     return; // Nothing to do on leaves of hierarchy
   } else {
