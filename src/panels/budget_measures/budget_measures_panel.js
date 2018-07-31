@@ -27,7 +27,7 @@ const {
 const {
   StackedHbarChart,
   A11YTable,
-  GraphLegend
+  GraphLegend,
 } = declarative_charts;
 
 const { text_maker, TM } = create_text_maker_component([text1,text2]);
@@ -250,7 +250,7 @@ class BudgetMeasureHBars extends React.Component {
           .fromPairs()
           .value()
       )
-      .pickBy(value => value > 0)
+      .pickBy(value => value !== 0)
       .keys()
       .map(key => ({
         id: key,
@@ -425,10 +425,10 @@ class BudgetMeasureHBars extends React.Component {
             }))
             .value();
         } else if (selected_value === 'all_biv_values'){
-          let prepared_data;
+          let data_prepared_by_case;
 
           if (selected_filter === 'all'){
-            prepared_data = _.chain(mapped_data)
+            data_prepared_by_case = _.chain(mapped_data)
               .groupBy("chapter_key")
               .map( (group, key) => ({
                 key,
@@ -448,10 +448,10 @@ class BudgetMeasureHBars extends React.Component {
               }))
               .value();
           } else {
-            prepared_data = _.filter(mapped_data, item => item.chapter_key === selected_filter );
+            data_prepared_by_case = _.filter(mapped_data, item => item.chapter_key === selected_filter );
           }
 
-          return _.map(prepared_data, item => {
+          return _.map(data_prepared_by_case, item => {
             const modified_data = _.chain(biv_values)
               .map( key => [ key, item.data[0][key] ] )
               .fromPairs()
@@ -504,7 +504,7 @@ class BudgetMeasureHBars extends React.Component {
       <div className = "frow">
         <div className = "fcol-md-12" style = {{ width: "100%" }}>
           <div className = 'centerer'>
-            <label style = {{padding: dropdown_padding, textAlign: "center", }}>
+            <label style = {{padding: dropdown_padding, textAlign: "center"}}>
               <TM k="budget_panel_filter_by_chapter" />
               <Select 
                 selected = {selected_filter}
