@@ -238,20 +238,19 @@ class BudgetMeasureHBars extends React.Component {
         return valid_selected_filter === "all" || 
           BudgetMeasure.lookup(data.measure_id).chapter_key === valid_selected_filter;
       })
-      .reduce( (memo, data) => {
-        return {
+      .reduce( 
+        (memo, data) => ({
           funding: memo.funding + data.funding,
           allocated: memo.allocated + data.allocated,
           withheld: memo.withheld + data.withheld,
           remaining: memo.remaining + data.remaining,
-        };
-      },
-      {
-        funding: 0,
-        allocated: 0,
-        withheld: 0,
-        remaining: 0,
-      })
+        }),
+        _.chain(budget_values)
+          .keys()
+          .map(key => [key, 0])
+          .fromPairs()
+          .value()
+      )
       .pickBy(value => value > 0)
       .keys()
       .map(key => ({
@@ -427,29 +426,47 @@ class BudgetMeasureHBars extends React.Component {
             }))
             .value();
         } else if (selected_value === 'all_biv_values'){
+          let prepared_data = _.filter(mapped_data, item => item.chapter_key === selected_filter );
+
           if (selected_filter === 'all'){
-            return []; // TODO, return grouped data
-          } else {
-            return _.chain(mapped_data)
-              .filter( item => item.chapter_key === selected_filter )
-              .map( item => {
-                const modified_data = _.chain(item.data[0])
-                  .pickBy( (value, key) => _.indexOf(biv_values, key) !== -1 && value !== 0 )
-                  .map( (value, key) => ({
-                    ...item,
-                    label: key,
-                    data: [value],
-                  }))
-                  .sortBy("label")
-                  .value();
-                const modified_item = {
-                  ...item,
-                  data: modified_data,
-                };
-                return modified_item;
-              })
-              .value();
+            prepared_data = _.chain(mapped_data)
+              .groupBy("chapter_key")
+              .map( (group, key) => ({
+                key,
+                label: budget_chapters[key].text,
+                data: [_.reduce(
+                  group, 
+                  (memo, item) => ({
+                    allocated: memo.allocated + item.data[0].allocated,
+                    withheld: memo.withheld + item.data[0].withheld,
+                    remaining: memo.remaining + item.data[0].remaining,
+                  }),
+                  _.chain(biv_values)
+                    .map(key => [key, 0])
+                    .fromPairs()
+                    .value()
+                )],
+                chapter_key: key,
+              }))
+              .value()
           }
+
+          return _.map(prepared_data, item => {
+            const modified_data = _.chain(item.data[0])
+              .pickBy( (value, key) => _.indexOf(biv_values, key) !== -1 && value !== 0 )
+              .map( (value, key) => ({
+                ...item,
+                label: key,
+                data: [value],
+              }))
+              .sortBy("label")
+              .value();
+            const modified_item = {
+              ...item,
+              data: modified_data,
+            };
+            return modified_item;
+          });
         } else {
           return _.chain(mapped_data)
             .filter( item => item.chapter_key === selected_filter )

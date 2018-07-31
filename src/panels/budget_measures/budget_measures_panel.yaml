@@ -71,7 +71,7 @@ budget_panel_select_value:
   fr: TODO
 
 budget_panel_all_biv_values_option:
-  en: All BIV Values
+  en: All BIV Values (needs better name?)
   fr: TODO
 
 budget_panel_a11y_link_header:
