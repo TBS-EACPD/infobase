@@ -222,3 +222,16 @@ polygon.partition-svg-link.medium.highlighted{
 polygon.partition-svg-link.tiny.highlighted{
    opacity: 1;
 }
+
+.btn.partition-link-out {
+  &:hover, &:focus, &:active {
+    text-decoration: underline;
+  }
+}
+
+.btn.magnify:not(:hover):not(:focus):not(:active) {
+  background-color: rgba(0,0,0,0) !important;
+  color: inherit !important;
+  border: 1px solid;
+  border-color: inherit; 
+}

@@ -95,7 +95,7 @@ partition_popup_parent_dept_name:
   handlebars_partial: true
   text: |
     <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
-      <a href='#orgs/dept/{{dept_id}}/infograph' class='infographic' style='color:inherit;'> 
+      <a href='#orgs/dept/{{dept_id}}/infograph' class='partition-link-out' style='color:inherit;'> 
         {{dept_name}}
       </a>
     </div>
@@ -114,7 +114,7 @@ partition_popup_infograph_link:
   handlebars_partial: true
   text: |
     <a href='#orgs/{{level}}/{{id}}/infograph' 
-      class='btn btn-xs btn-block mrgn-bttm-sm infographic' 
+      class='btn btn-xs btn-block mrgn-bttm-sm partition-link-out' 
       style='background-color:{{color}};'>
       {{gt "see_the_infographic"}}
     </a>
@@ -122,7 +122,7 @@ partition_popup_rpb_link:
   handlebars_partial: true
   text: |
     <a href='{{rpb_link}}' 
-      class='btn btn-xs btn-block mrgn-bttm-sm infographic' 
+      class='btn btn-xs btn-block mrgn-bttm-sm partition-link-out' 
       style='background-color:{{color}};'>
       {{gt "see_data"}}
     </a>
@@ -179,7 +179,7 @@ partition_program_popup:
     <ul class='list-unstyled'>
       {{#each tags}}
       <li>
-        <a href='#orgs/tag/{{id}}/infograph' class='infographic'>
+        <a href='#orgs/tag/{{id}}/infograph' class='partition-link-out'>
           {{name}}
         </a>
       </li>
@@ -314,54 +314,54 @@ partition_org_info_was:
   transform: [handlebars]
   en: |
     We have
-    <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    <p class='amount'><a class='partition-link-out' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
     Federal Organizations and Interests
   fr: |
     Nous avons
-    <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    <p class='amount'><a class='partition-link-out' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
     organisations et intérêts fédéraux
 partition_org_info_federal_orgs_by_inst_form_was:
   transform: [handlebars]
   en: |
     We have
-    <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    <p class='amount'><a class='partition-link-out' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
     Federal Organizations
   fr: |
     Nous avons
-    <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    <p class='amount'><a class='partition-link-out' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
     organisations fédérales
 partition_org_info_interests_by_inst_form_was:
   transform: [handlebars]
   en: |
     We have
-    <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    <p class='amount'><a class='partition-link-out' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
     Interests
   fr: |
     Nous avons
-    <p class='amount'><a class='infographic' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    <p class='amount'><a class='partition-link-out' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
     intérêts
 partition_spending_was:
   transform: [handlebars]
   en: |
     We spent   
-    <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_compact1 x}}</a></p>
+    <p class='amount'><a class='partition-link-out' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_compact1 x}}</a></p>
     in
     <span class='text-nowrap'>{{pa_last_year}}</span>
   fr: |
     Nous avons dépensé   
-    <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_compact1 x}}</a></p>
+    <p class='amount'><a class='partition-link-out' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_compact1 x}}</a></p>
     en
     <span class='text-nowrap'>{{pa_last_year}}</span>
 partition_fte_was:
   transform: [handlebars]
   en: |
     We employed  
-    <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int_real x}}</a></p>
+    <p class='amount'><a class='partition-link-out' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int_real x}}</a></p>
     FTEs in
     <span class='text-nowrap'>{{pa_last_year}}</span> 
   fr: |
     Nous avons employé  
-    <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int_real x}}</a></p>
+    <p class='amount'><a class='partition-link-out' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int_real x}}</a></p>
     ETP en
     <span class='text-nowrap'>{{pa_last_year}}</span>
 partiton_default_was_root:
@@ -371,12 +371,12 @@ partition_fte_will_be:
   transform: [handlebars]
   en: |
     We will be employing   
-    <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int_real x}}</a></p>
+    <p class='amount'><a class='partition-link-out' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int_real x}}</a></p>
     in
     <span class='text-nowrap'>{{planning_year_1}}</span> 
   fr: |
     Nous emploieront   
-    <p class='amount'><a class='infographic' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int_real x}}</a></p>
+    <p class='amount'><a class='partition-link-out' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int_real x}}</a></p>
     ETP en
     <span class='text-nowrap'>{{planning_year_1}}</span>
 
@@ -384,7 +384,7 @@ partition_spending_will_be_value_and_rpb_link_partial:
   handlebars_partial: true
   text: |
     <p class='amount'>
-      <a class="infographic" href="#rpb/~(columns~(~'*7b*7b{{clean_year}}*7d*7d_estimates)~subject~'gov_gov~mode~'details~dimension~'by_estimates_doc~filter~'All~table~'table8~preferDeptBreakout~true~descending~false{{rpb_filter}})">
+      <a class="partition-link-out" href="#rpb/~(columns~(~'*7b*7b{{clean_year}}*7d*7d_estimates)~subject~'gov_gov~mode~'details~dimension~'by_estimates_doc~filter~'All~table~'table8~preferDeptBreakout~true~descending~false{{rpb_filter}})">
         {{rawfmt_compact1 x}}
       </a>
     </p>

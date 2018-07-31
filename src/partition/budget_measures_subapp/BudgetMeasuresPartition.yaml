@@ -296,14 +296,14 @@ budget_measure_popup_bottom_rows:
     {{/if}}
     {{#if budget_link}}
       <a href='{{budget_link}}' 
-        class='btn btn-xs btn-block mrgn-bttm-sm infographic' 
+        class='btn btn-xs btn-block mrgn-bttm-sm partition-link-out' 
         style='background-color:{{color}};'>
         {{gt "see_it_in_the_budget"}}
       </a>
     {{/if}}
     {{#if has_infographic}}
       <a href='#orgs/{{level}}/{{id}}/infograph' 
-        class='btn btn-xs btn-block mrgn-bttm-sm infographic' 
+        class='btn btn-xs btn-block mrgn-bttm-sm partition-link-out' 
         style='background-color:{{color}};'>
         {{gt "see_the_infographic"}}
       </a>

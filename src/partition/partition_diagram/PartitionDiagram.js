@@ -598,7 +598,7 @@ export class PartitionDiagram {
       return;
     }
 
-    if ( target.classed("infographic") ) {
+    if ( target.classed("partition-link-out") ) {
       //do nothing and let route be processed
       return;
     } else if ( target.classed("magnify") ) {
