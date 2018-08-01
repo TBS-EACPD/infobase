@@ -67,7 +67,7 @@ jobs:
   # Test job steps:
   #  1) mount workspace (meaning this job must be run in a workflow where it is proceeded by a build job)
   #  2) run the ci_serve command from package.json (start a localhost server on the container)
-  #  3) run the ci_test command from package.json (use testcafe and headless chromium to visit the build on the container, verify that the homepages all load)
+  #  3) run the ci_test command from package.json (use testcafe and headless chromium to visit the build on the container)
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   test:
     docker:
@@ -108,15 +108,7 @@ workflows:
   version: 2
   build_test_deploy:
     jobs:
-<<<<<<< HEAD
-      - build:
-          filters:
-            branches:
-              only:
-                - afdsfasf
-=======
       - build
->>>>>>> Ah, forgot we had a filter turning off all circleci builds, now testing
       - test:
           requires:
             - build
