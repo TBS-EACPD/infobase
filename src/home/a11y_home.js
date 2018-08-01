@@ -79,7 +79,7 @@ export const Home = () => {
 
         <section>
           <h3>
-            <a href={text_maker("survey_link_href")}>
+            <a href={text_maker("survey_link_href")} target="_blank">
               <TM k="survey_link_text" />
             </a>
           </h3>
