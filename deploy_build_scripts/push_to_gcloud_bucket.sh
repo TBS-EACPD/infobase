@@ -14,7 +14,9 @@ set -e # will exit if any command has non-zero exit value
 #   -c use checksums to compare files instead of mtime 
 #   -r recursively sync directories
 
-gsutil -m rsync -j -d -a public-read -c -r ./build/InfoBase $GCLOUD_BUCKET_URL
+# Prefering parallel processes over parallel threads, as per docs on usage of -j (bottle-necks on some un-thredable Python)
+gsutil -o "GSUtil:parallel_process_count=8" -o "GSUtil:parallel_thread_count=1" -m \
+  rsync -j html,css,js,json,xml,svg,txt,csv -d -a public-read -c -r ./build/InfoBase $GCLOUD_BUCKET_URL 
 
 # set no-cache on html and js entry files, always needs to be fresh to guarantee the rest of the cache-busting will work as intended
 gsutil setmeta -h "Cache-Control:no-cache" $GCLOUD_BUCKET_URL/index-*.html
