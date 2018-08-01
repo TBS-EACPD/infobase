@@ -396,6 +396,11 @@ class BudgetMeasureHBars extends React.Component {
       .sortBy()
       .value();
 
+    const label_value_indicator = (value) => value < 0 ? "__negative_valued" : "__positive_valued";
+    const strip_value_indicator_from_label = (label) => label
+      .replace("__negative_valued", "")
+      .replace("__positive_valued", "");
+
     const graph_ready_data = _.chain(sorted_data)
       .map( budget_measure_item => ({
         key: budget_measure_item.id,
@@ -414,7 +419,7 @@ class BudgetMeasureHBars extends React.Component {
               key,
               label: budget_chapters[key].text,
               data: _.chain(group)
-                .groupBy( measure => measure.data[0] < 0 ? "__negative_valued" : "__positive_valued")
+                .groupBy( measure => label_value_indicator(measure.data[0]) )
                 .map( (group, key) => ({
                   key: group[0].chapter_key + key,
                   label: key,
@@ -430,22 +435,46 @@ class BudgetMeasureHBars extends React.Component {
           if (selected_filter === 'all'){
             data_prepared_by_case = _.chain(mapped_data)
               .groupBy("chapter_key")
-              .map( (group, key) => ({
-                key,
-                label: budget_chapters[key].text,
-                data: [_.reduce(
-                  group, 
-                  (memo, item) => _.chain(biv_values)
-                    .map(key => [ key, memo[key] + item.data[0][key] ])
-                    .fromPairs()
-                    .value(),
-                  _.chain(biv_values)
-                    .map(key => [key, 0])
-                    .fromPairs()
-                    .value()
-                )],
-                chapter_key: key,
-              }))
+              .map( (group, key) => {
+                const reduce_group_by_sign = (sign) => {
+                  return _.chain(group)
+                    .reduce(
+                      (memo, item) => _.chain(biv_values)
+                        .map(key => {
+                          const item_value = item.data[0][key];
+                          const reduced_value = Math.sign(item_value) === sign ?
+                            memo[key] + item_value :
+                            memo[key];
+                          return [ 
+                            key, 
+                            reduced_value,
+                          ]
+                        })
+                        .fromPairs()
+                        .value(),
+                      _.chain(biv_values)
+                        .map(key => [key, 0])
+                        .fromPairs()
+                        .value()
+                    )
+                    .pickBy( value => value !== 0)
+                    .value();
+                }
+
+                const positive_data = reduce_group_by_sign(1);
+                const negative_data = reduce_group_by_sign(-1);
+
+                const new_item = {
+                  key,
+                  label: budget_chapters[key].text,
+                  chapter_key: key,
+                  data: [
+                    positive_data,
+                    negative_data,
+                  ],
+                }
+                return new_item;
+              })
               .value();
           } else {
             data_prepared_by_case = _.filter(mapped_data, item => item.chapter_key === selected_filter );
@@ -453,12 +482,23 @@ class BudgetMeasureHBars extends React.Component {
 
           return _.map(data_prepared_by_case, item => {
             const modified_data = _.chain(biv_values)
-              .map( key => [ key, item.data[0][key] ] )
+              .flatMap( key => 
+                _.chain(item.data)
+                  .map(data => {
+                    const value = data[key];
+                    return [
+                      key + label_value_indicator(value), 
+                      value,
+                    ]
+                  })
+                  .filter( pair => !_.isUndefined(pair[1]) )
+                  .value()
+              )
               .fromPairs()
               .pickBy( (value, key) => value !== 0 )
               .map( (value, key) => ({
                 ...item,
-                label: key,
+                label: strip_value_indicator_from_label(key),
                 data: [value],
               }))
               .sortBy("label")
