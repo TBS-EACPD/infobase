@@ -175,7 +175,7 @@ const budget_measure_render = function({calculations, footnotes, sources}){
     footnotes: false,
     source: (subject) => [{
       html: text_maker("budget_route_title"),
-      href: "#budget-measures/" + (subject.level === "gov" ? "budget-measure" : "dept") + "/funding",
+      href: "#budget-measures/" + (subject.level === "gov" ? "budget-measure" : "dept") + "/overview",
     }],
     calculate: calculate_functions[level_name],
     render: budget_measure_render,
@@ -200,7 +200,7 @@ class BudgetMeasureHBars extends React.Component {
       selected_filter: 'all',
       selected_value: this.treatAsProgram(subject) ? 
         "allocated" : 
-        'funding',
+        'year_funding_overview',
     };
   }
   static getDerivedStateFromProps(props, state){
@@ -256,25 +256,13 @@ class BudgetMeasureHBars extends React.Component {
         id: key,
         name: budget_values[key].text,
       }))
-      .thru(value_options => {
-        const should_have_all_biv_option = _.chain(value_options)
-          .map(value_option => value_option.id)
-          .filter(option_id => option_id !== "funding")
-          .value()
-          .length > 1;
-
-        if (should_have_all_biv_option){
-          return [
-            ...value_options,
-            {
-              id: "all_biv_values",
-              name: text_maker("budget_panel_all_biv_values_option"),
-            },
-          ];
-        } else {
-          return value_options;
-        }
-      })
+      .thru(value_options => [
+        {
+          id: "year_funding_overview",
+          name: text_maker("year_funding_overview"),
+        },
+        ...value_options,
+      ])
       .value();
 
     const valid_selected_value = _.filter(value_options, value_option => value_option.id === selected_value).length === 1 ?
@@ -389,7 +377,7 @@ class BudgetMeasureHBars extends React.Component {
       </div>;
     }
 
-    const group_by_sign_of_value = selected_filter === 'all' && selected_value !== 'all_biv_values';
+    const group_by_sign_of_value = selected_filter === 'all' && selected_value !== 'year_funding_overview';
     const biv_values = _.chain(budget_values)
       .keys()
       .filter(key => key !== "funding")
@@ -405,7 +393,7 @@ class BudgetMeasureHBars extends React.Component {
       .map( budget_measure_item => ({
         key: budget_measure_item.id,
         label: budget_measure_item.name,
-        data: selected_value !== 'all_biv_values' ? 
+        data: selected_value !== 'year_funding_overview' ? 
           [budget_measure_item.data[selected_value]] :
           [budget_measure_item.data],
         chapter_key: budget_measure_item.chapter_key,
@@ -429,7 +417,7 @@ class BudgetMeasureHBars extends React.Component {
               chapter_key: key,
             }))
             .value();
-        } else if (selected_value === 'all_biv_values'){
+        } else if (selected_value === 'year_funding_overview'){
           let data_prepared_by_case;
 
           if (selected_filter === 'all'){
@@ -530,7 +518,7 @@ class BudgetMeasureHBars extends React.Component {
         } else {
           return "#1f77b4";
         }
-      } else if (selected_value === 'all_biv_values'){
+      } else if (selected_value === 'year_funding_overview'){
         return biv_value_colors(item_label);
       } else {
         return "#1f77b4";
@@ -584,7 +572,7 @@ class BudgetMeasureHBars extends React.Component {
             }
           </div>
           <div className = 'centerer'>
-            { selected_value === 'all_biv_values' &&
+            { selected_value === 'year_funding_overview' &&
               <GraphLegend
                 isHorizontal = {true}
                 items = {

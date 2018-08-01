@@ -50,7 +50,7 @@ dept_budget_measures_panel_text:
   fr: |
     Le budget de 2018 prévoit accorder jusqu’à **{{fmt_compact_written total_funding}}** de fonds supplémentaires à **{{subj_name subject}}** pour 2018-2019.
     {{> "budget_measure_stats_partial_fr"}}
-    Pour obtenir de plus amples renseignements sur les mesures budgétaires du gouvernement, consultez la page « [Suivi budgétaire](#budget-measures/budget-measure/funding) ».  
+    Pour obtenir de plus amples renseignements sur les mesures budgétaires du gouvernement, consultez la page « [Suivi budgétaire](#budget-measures/budget-measure/overview) ».  
 
     {{{gt "budget_route_top_text_notes"}}}
 
@@ -58,7 +58,7 @@ program_crso_budget_measures_panel_text:
   transform: [handlebars, markdown]
   en: |
     TODO
-    For additional government-wide information on budget measures, see our [Budget Tracker](#budget-measures/budget-measure/funding) page.
+    For additional government-wide information on budget measures, see our [Budget Tracker](#budget-measures/budget-measure/overview) page.
   fr: |
     TODO
 
@@ -68,10 +68,6 @@ budget_panel_filter_by_chapter:
 
 budget_panel_select_value:
   en: Select values to display
-  fr: TODO
-
-budget_panel_all_biv_values_option:
-  en: All BIV Values (needs better name?)
   fr: TODO
 
 budget_panel_a11y_link_header:

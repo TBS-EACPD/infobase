@@ -21,10 +21,16 @@ const {
   budget_values,
 } = businessConstants;
 
-const budget_value_options = _.map(
-  budget_values, 
-  (value, key) => ({ id: key, display: value.text })
-);
+const budget_value_options = [
+  {
+    id: "overview",
+    display: text_maker("year_funding_overview"),
+  },
+  _.map(
+    budget_values, 
+    (value, key) => ({ id: key, display: value.text })
+  ),
+];
 
 export class BudgetMeasuresControls extends React.Component {
   constructor(){

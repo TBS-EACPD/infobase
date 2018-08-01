@@ -32,13 +32,13 @@ const first_column_ids = _.map(first_column_options, option => option.id );
 
 const validate_route = (first_column, selected_value, history) => {
   const first_column_is_valid = _.indexOf(first_column_ids, first_column) !== -1;
-  const selected_value_is_valid = _.indexOf(_.keys(budget_values), selected_value) !== -1;
+  const selected_value_is_valid = _.indexOf([..._.keys(budget_values), "overview"], selected_value) !== -1;
 
   if (first_column_is_valid && selected_value_is_valid){
     return true;
   } else {
     const valid_first_column = first_column_is_valid ? first_column : first_column_options[0].id;
-    const valid_value = selected_value_is_valid ? selected_value : _.keys(budget_values)[0];
+    const valid_value = selected_value_is_valid ? selected_value : "overview";
     const corrected_route = `/budget-measures/${valid_first_column}/${valid_value}`;
     history.push(corrected_route);
 
