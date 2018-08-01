@@ -302,7 +302,7 @@ budget_measure_popup_bottom_rows:
       </a>
     {{/if}}
     {{#if has_infographic}}
-      <a href='#orgs/{{level}}/{{id}}/infograph' 
+      <a href='#orgs/{{level}}/{{id}}/infograph/financial' 
         class='btn btn-xs btn-block mrgn-bttm-sm partition-link-out' 
         style='background-color:{{color}};'>
         {{gt "see_the_infographic"}}
