@@ -48,7 +48,7 @@ const get_level_headers = (first_column, selected_value) => {
 const selected_value_specifier_by_selected_value = {
   "funding": text_maker("in_funding_for"),
   "allocated": text_maker("allocated_to"),
-  "withheld": text_maker("withheld_for"),
+  "withheld": text_maker("withheld_from"),
   "remaining": text_maker("remaining_for"),
 };
 const budget_sourced_date_note = text_maker("budget_sourced_date_note");

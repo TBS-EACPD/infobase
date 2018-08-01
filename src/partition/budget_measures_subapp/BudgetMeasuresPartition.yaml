@@ -51,8 +51,8 @@ in_funding_for:
 allocated_to:
   en: allocated to
   fr: TODO
-withheld_for:
-  en: centrally withheld for
+withheld_from:
+  en: centrally withheld from
   fr: TODO
 remaining_for:
   en: remaining for
