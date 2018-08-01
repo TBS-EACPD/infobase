@@ -13,11 +13,11 @@ in_funds:
   en: in funds
   fr: ""
   
-has_withheld:
-  en: has centrally withheld
+has_had_withheld:
+  en: has had
   fr: TODO
-of_the_funding:
-  en: of the funding
+withheld_of_the_funding:
+  en: centrally withheld of the funding
   fr: TODO
 
 single_word_has:
@@ -147,11 +147,11 @@ budget_measure_popup_withheld_top_line:
     <text style='color:#fdfdfd'>
       {{gt "budget_name"}}
       </br>
-      {{gt "has_withheld"}}
+      {{gt "has_had_withheld"}}
     </text>
     {{> budget_measure_popup_top_line_value}}
     <text style='color:#fdfdfd'>
-      {{gt "of_the_funding"}} ...
+      {{gt "withheld_of_the_funding"}} ...
     </text>
 
 budget_measure_popup_remaining_top_line:
