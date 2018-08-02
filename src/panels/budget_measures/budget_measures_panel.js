@@ -182,37 +182,36 @@ const budget_measure_render = function({calculations, footnotes, sources}){
   }
 ));
 
+const treatAsProgram = (subject) => {
+  return _.indexOf(["program", "crso"], subject.level) !== -1;
+}
+const get_grouping_options = (subject) =>{
+  const common_measures_option = {
+    name: text_maker('budget_measures'),
+    id: 'measures',
+  };
 
+  if (subject.level === "gov"){
+    return [
+      common_measures_option,
+      {
+        name: text_maker('orgs'),
+        id: 'orgs',
+      },
+    ];
+  } else if (subject.level === "dept"){
+    return [
+      common_measures_option,
+      {
+        name: text_maker('programs'),
+        id: 'programs',
+      },
+    ];
+  } else {
+    return [common_measures_option];
+  }
+}
 class BudgetMeasureHBars extends React.Component {
-  treatAsProgram(subject){
-    return _.indexOf(["program", "crso"], subject.level) !== -1;
-  }
-  get_grouping_options(subject){
-    const common_measures_option = {
-      name: text_maker('budget_measures'),
-      id: 'measures',
-    };
-
-    if (subject.level === "gov"){
-      return [
-        common_measures_option,
-        {
-          name: text_maker('orgs'),
-          id: 'orgs',
-        },
-      ];
-    } else if (subject.level === "dept"){
-      return [
-        common_measures_option,
-        {
-          name: text_maker('programs'),
-          id: 'programs',
-        },
-      ];
-    } else {
-      return [common_measures_option];
-    }
-  }
   constructor(props){
     super(props);
 
@@ -222,26 +221,28 @@ class BudgetMeasureHBars extends React.Component {
       },
     } = props;
 
-    const grouping_options = this.get_grouping_options(subject);
+    const grouping_options = get_grouping_options(subject);
 
     this.state = {
       grouping_options, 
       selected_grouping: grouping_options[0].id,
       value_options: {},
-      selected_value: this.treatAsProgram(subject) ? 
+      selected_value: treatAsProgram(subject) ? 
         "allocated" : 
         'funding_overview',
     };
   }
   static getDerivedStateFromProps(props, state){
-    const data = props.graph_args.data;
+    const { 
+      graph_args: {
+        subject,
+        data,
+      },
+    } = props;
 
-    const {
-      selected_grouping,
-      selected_value,
-    } = state;
+    const { selected_value } = state;
 
-    const value_options = selected_grouping === "program" ? 
+    const value_options = treatAsProgram(subject) ? 
       [{
         id: "allocated",
         name: budget_values.allocated.text,
@@ -322,7 +323,7 @@ class BudgetMeasureHBars extends React.Component {
             args={{subject, ...info}} 
           />
         }
-        { this.treatAsProgram(subject) &&
+        { treatAsProgram(subject) &&
           <TM
             k={"program_crso_budget_measures_panel_text"} 
             args={{subject, ...info}} 
@@ -343,28 +344,28 @@ class BudgetMeasureHBars extends React.Component {
                 <div key = { budget_measure_item.id + "col2" } >
                   { budget_chapters[budget_measure_item.chapter_key].text }
                 </div>,
-                !this.treatAsProgram(subject) && <Format
+                !treatAsProgram(subject) && <Format
                   key = { budget_measure_item.id + "col3" } 
                   type = "compact1" 
                   content = { budget_measure_item.data.funding } 
                 />,
                 <Format
-                  key = { budget_measure_item.id + (this.treatAsProgram(subject) ? "col3" : "col4") } 
+                  key = { budget_measure_item.id + (treatAsProgram(subject) ? "col3" : "col4") } 
                   type = "compact1" 
                   content = { budget_measure_item.data.allocated } 
                 />,
-                !this.treatAsProgram(subject) && <Format
+                !treatAsProgram(subject) && <Format
                   key = { budget_measure_item.id + "col5" } 
                   type = "compact1" 
                   content = { budget_measure_item.data.withheld } 
                 />,
-                !this.treatAsProgram(subject) && <Format
+                !treatAsProgram(subject) && <Format
                   key = { budget_measure_item.id + "col6" } 
                   type = "compact1" 
                   content = { budget_measure_item.data.remaining } 
                 />,
                 <a 
-                  key = { budget_measure_item.id + (this.treatAsProgram(subject) ? "col4" : "col7") }
+                  key = { budget_measure_item.id + (treatAsProgram(subject) ? "col4" : "col7") }
                   href={BudgetMeasure.make_budget_link(budget_measure_item.chapter_key, budget_measure_item.ref_id)}
                 >
                   { text_maker("link") }
@@ -375,10 +376,10 @@ class BudgetMeasureHBars extends React.Component {
           label_col_header = { text_maker("budget_measure") }
           data_col_headers = {_.filter([
             text_maker("budget_chapter"),
-            !this.treatAsProgram(subject) && budget_values.funding.text,
+            !treatAsProgram(subject) && budget_values.funding.text,
             budget_values.allocated.text,
-            !this.treatAsProgram(subject) && budget_values.withheld.text,
-            !this.treatAsProgram(subject) && budget_values.remaining.text,
+            !treatAsProgram(subject) && budget_values.withheld.text,
+            !treatAsProgram(subject) && budget_values.remaining.text,
             text_maker("budget_panel_a11y_link_header"),
           ])}
         />
@@ -396,116 +397,74 @@ class BudgetMeasureHBars extends React.Component {
       .replace("__negative_valued", "")
       .replace("__positive_valued", "");
 
-    const graph_ready_data = _.chain(sorted_data)
-      .map( budget_measure_item => ({
-        key: budget_measure_item.id,
-        label: budget_measure_item.name,
-        data: selected_value !== 'funding_overview' ? 
-          [budget_measure_item.data[selected_value]] :
-          [budget_measure_item.data],
-        chapter_key: budget_measure_item.chapter_key,
-        ref_id: budget_measure_item.ref_id,
-      }))
-      .thru( mapped_data => {
-        if (selected_value === 'funding_overview'){
-          let data_prepared_by_case;
-
-          if (selected_grouping === 'all'){
-            data_prepared_by_case = _.chain(mapped_data)
-              .groupBy("chapter_key")
-              .map( (group, key) => {
-                const reduce_group_by_sign = (sign) => {
-                  return _.chain(group)
-                    .reduce(
-                      (memo, item) => _.chain(biv_values)
-                        .map(key => {
-                          const item_value = item.data[0][key];
-                          const reduced_value = Math.sign(item_value) === sign ?
-                            memo[key] + item_value :
-                            memo[key];
-                          return [ 
-                            key, 
-                            reduced_value,
-                          ]
-                        })
-                        .fromPairs()
-                        .value(),
-                      _.chain(biv_values)
-                        .map(key => [key, 0])
-                        .fromPairs()
-                        .value()
-                    )
-                    .pickBy( value => value !== 0)
-                    .value();
-                }
-
-                const positive_data = reduce_group_by_sign(1);
-                const negative_data = reduce_group_by_sign(-1);
-
-                const new_item = {
-                  key,
-                  label: budget_chapters[key].text,
-                  chapter_key: key,
-                  data: [
-                    positive_data,
-                    negative_data,
-                  ],
-                }
-                return new_item;
+    let data_by_selected_group;
+    if (selected_grouping === 'measures'){
+      data_by_selected_group = _.map(sorted_data, 
+        budget_measure_item => ({
+          key: budget_measure_item.id,
+          label: budget_measure_item.name,
+          data: budget_measure_item.data,
+          chapter_key: budget_measure_item.chapter_key,
+          ref_id: budget_measure_item.ref_id,
+        })
+      );
+    } else if (selected_grouping === 'orgs'){
+      //TODO
+    } else if (selected_grouping === 'programs'){
+      //TODO
+    }
+    
+    let graph_ready_data;
+    if (selected_value === 'funding_overview'){
+      graph_ready_data = _.map(data_by_selected_group, item => {
+        const modified_data = _.chain(biv_values)
+          .flatMap( key => 
+            _.chain([item.data])
+              .map(data => {
+                const value = data[key];
+                return [
+                  key + label_value_indicator(value), 
+                  value,
+                ]
               })
-              .value();
-          } else {
-            data_prepared_by_case = _.filter(mapped_data, item => item.chapter_key === selected_grouping );
-          }
-
-          return _.map(data_prepared_by_case, item => {
-            const modified_data = _.chain(biv_values)
-              .flatMap( key => 
-                _.chain(item.data)
-                  .map(data => {
-                    const value = data[key];
-                    return [
-                      key + label_value_indicator(value), 
-                      value,
-                    ]
-                  })
-                  .filter( pair => !_.isUndefined(pair[1]) )
-                  .value()
-              )
-              .fromPairs()
-              .pickBy( (value, key) => value !== 0 )
-              .map( (value, key) => ({
-                ...item,
-                label: strip_value_indicator_from_label(key),
-                data: [value],
-              }))
-              .sortBy("label")
-              .value();
-            const modified_item = {
-              ...item,
-              data: modified_data,
-            };
-            return modified_item;
-          });
-        } else {
-          return _.chain(mapped_data)
-            .map( item => ({
-              ...item,
-              label: label_value_indicator(item.label),
-              data: [item],
-            }))
-            .value();
-        }
-      })
-      .value();
+              .filter( pair => !_.isUndefined(pair[1]) )
+              .value()
+          )
+          .fromPairs()
+          .pickBy(value => value !== 0)
+          .map( (value, key) => ({
+            ...item,
+            label: strip_value_indicator_from_label(key),
+            data: [value],
+          }))
+          .sortBy("label")
+          .value();
+        const modified_item = {
+          ...item,
+          data: modified_data,
+        };
+        return modified_item;
+      });
+    } else {
+      graph_ready_data = _.chain(data_by_selected_group)
+        .map( item => ({
+          ...item,
+          data: [{
+            ...item,
+            label: item.label + label_value_indicator(item.data[selected_value]),
+            data: [ item.data[selected_value] ],
+          }],
+        }))
+        .value();
+    }
     
     const biv_value_colors = infobase_colors(biv_values);
 
-    const bar_colors = (item_label) => {
+    const bar_colors = (data_label) => {
       if (selected_value === 'funding_overview'){
-        return biv_value_colors(item_label);
+        return biv_value_colors(data_label);
       } else {
-        if ( item_label.includes("__negative_valued") ){
+        if ( data_label.includes("__negative_valued") ){
           return "#ff7e0f";
         } else {
           return "#1f77b4";
@@ -608,7 +567,7 @@ class BudgetMeasureHBars extends React.Component {
               colors = {bar_colors}
               bar_label_formater = { 
                 ({ label, chapter_key, ref_id }) => {
-                  if (selected_grouping === "measure"){
+                  if (selected_grouping === "measures"){
                     return `<a href="${BudgetMeasure.make_budget_link(chapter_key, ref_id)}">${label}</a>`
                   } else if (selected_grouping === "orgs"){
                     return label; // TODO link to org infographic
