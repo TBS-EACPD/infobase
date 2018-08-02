@@ -263,7 +263,7 @@ budget_measure_popup_bottom_rows:
       <div class='popup-font-ml popup-row-top-border'>
         {{gt "description"}}:
       </div>
-      <div class='mrgn-bttm-sm popup-row-bottom-border popup-decription-text' style='min-height:20px;'>
+      <div class='popup-row-bottom-border popup-decription-text' style='min-height:20px;'>
         {{{description}}}
       </div>
     {{/if}}
@@ -271,13 +271,13 @@ budget_measure_popup_bottom_rows:
       <div class='popup-font-ml'>
         {{gt "submeasures_table_title"}}:
       </div>
-      <div class='popup-decription-text popup-row-bottom-border' style='max-height:200px; padding-bottom:6px;'>
+      <div class='popup-decription-text popup-row-bottom-border' style='max-height:200px; padding-bottom:3px;'>
         {{#each submeasures}}
           <div class='budget-measure-popup-name-row'>
-            <span class='name-row-left' style='color:#fdfdfd'>
+            <span class='name-row-left' style='color:#fdfdfd; padding:6px 0px 6px 0px;'>
               {{fmt_compact1 this.value}}
             </span>
-            <span class='name-row-right'>
+            <span class='name-row-right' style='padding:6px 0px 6px 0px;'>
               {{this.name}}
             </span>
           </div>
