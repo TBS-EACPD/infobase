@@ -26,7 +26,7 @@ const budget_value_options = [
     id: "overview",
     display: text_maker("funding_overview"),
   },
-  _.map(
+  ..._.map(
     budget_values, 
     (value, key) => ({ id: key, display: value.text })
   ),
