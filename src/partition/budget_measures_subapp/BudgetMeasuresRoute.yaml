@@ -43,7 +43,7 @@ funding_overview:
 budget_route_top_text_notes:
   transform: [handlebars, markdown]
   en: |
-    All values displayed here are for **{{gt "budget_route_year"}}** funding and are on an Estimates basis as per [Main Estimates 2018-19](https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates/2018-19-estimates/2018-19-sources-uses-budget-implementation-vote-department.html).
+    All values displayed here are for **{{gt "budget_route_year"}}** funding and are on an Estimates basis as per {{ext_link "Main Estimates 2018-19" "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates/2018-19-estimates/2018-19-sources-uses-budget-implementation-vote-department.html"}}.
     {{gl_tt "Budget 2018 Funding" "BIV_FUND"}} values were set in the budget plan presented to the House of Commons on **February 27, 2018**.
     Values for {{gl_tt "allocated" "BIV_ALLO"}}, {{gl_tt "centrally withheld" "BIV_WITH"}}, and {{gl_tt "remaining funds" "BIV_REMA"}} are current as of **{{gt "budget_data_sourced_date"}}** and will be refreshed periodically.
   fr: |
@@ -52,7 +52,7 @@ budget_route_top_text_notes:
 budget_route_top_text:
   transform: [handlebars, markdown]
   en: |
-    Presented below are the new spending measures listed in {ext_link "Table A2.11 of the 2018 Budget Plan" "https://www.budget.gc.ca/2018/docs/plan/anx-02-en.html#41-Policy-Actions-and-Budget-Investments-by-Department-(Cash-Basis)"}}.
+    Presented below are the new spending measures listed in {{ext_link "Table A2.11 of the 2018 Budget Plan" "https://www.budget.gc.ca/2018/docs/plan/anx-02-en.html#41-Policy-Actions-and-Budget-Investments-by-Department-(Cash-Basis)"}}.
     These measures, totalling **$7.04 billion** in **{{gt "budget_route_year"}}**, are also listed in {{ext_link "Main Estimates 2018-19: Sources and Uses of the Budget Implementation vote by Department" "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates/2018-19-estimates/2018-19-sources-uses-budget-implementation-vote-department.html"}},
     thereby establishing a clear link between the Budget Plan and the Main Estimates.  
 
