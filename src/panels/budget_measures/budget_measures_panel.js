@@ -187,6 +187,32 @@ class BudgetMeasureHBars extends React.Component {
   treatAsProgram(subject){
     return _.indexOf(["program", "crso"], subject.level) !== -1;
   }
+  get_grouping_options(subject){
+    const common_measures_option = {
+      name: text_maker('budget_measures'),
+      id: 'measures',
+    };
+
+    if (subject.level === "gov"){
+      return [
+        common_measures_option,
+        {
+          name: text_maker('orgs'),
+          id: 'orgs',
+        },
+      ];
+    } else if (subject.level === "dept"){
+      return [
+        common_measures_option,
+        {
+          name: text_maker('programs'),
+          id: 'programs',
+        },
+      ];
+    } else {
+      return [common_measures_option];
+    }
+  }
   constructor(props){
     super(props);
 
@@ -196,8 +222,12 @@ class BudgetMeasureHBars extends React.Component {
       },
     } = props;
 
+    const grouping_options = this.get_grouping_options(subject);
+
     this.state = {
-      selected_filter: 'all',
+      grouping_options, 
+      selected_grouping: grouping_options[0].id,
+      value_options: {},
       selected_value: this.treatAsProgram(subject) ? 
         "allocated" : 
         'funding_overview',
@@ -206,73 +236,51 @@ class BudgetMeasureHBars extends React.Component {
   static getDerivedStateFromProps(props, state){
     const data = props.graph_args.data;
 
-    const { 
-      selected_filter,
+    const {
+      selected_grouping,
       selected_value,
     } = state;
-    
-    const filter_options = _.chain(data)
-      .map(budget_measure_item => budget_measure_item.chapter_key)
-      .uniq()
-      .map( chapter_key => ({
-        name: budget_chapters[chapter_key].text,
-        id: chapter_key,
-      }))
-      .sortBy( filter_option => filter_option.name )
-      .thru( present_chapter_keys => _.concat(
-        [{
-          name: text_maker('all'),
-          id: 'all',
-        }],
-        present_chapter_keys,
-      ))
-      .value();
-  
-    const valid_selected_filter = _.filter(filter_options, filter_option => filter_option.id === selected_filter).length === 1 ?
-      selected_filter :
-      filter_options[0].id;
 
-    const value_options = _.chain(data)
-      .flatMap(data => data.data)
-      .filter( data => {
-        return valid_selected_filter === "all" || 
-          BudgetMeasure.lookup(data.measure_id).chapter_key === valid_selected_filter;
-      })
-      .reduce( 
-        (memo, data) => _.chain(budget_values)
-          .keys()
-          .map(key => [ key, memo[key] + data[key] ])
-          .fromPairs()
-          .value(),
-        _.chain(budget_values)
-          .keys()
-          .map(key => [key, 0])
-          .fromPairs()
-          .value()
-      )
-      .pickBy(value => value !== 0)
-      .keys()
-      .map(key => ({
-        id: key,
-        name: budget_values[key].text,
-      }))
-      .thru(value_options => [
-        {
-          id: "funding_overview",
-          name: text_maker("funding_overview"),
-        },
-        ...value_options,
-      ])
-      .value();
+    const value_options = selected_grouping === "program" ? 
+      [{
+        id: "allocated",
+        name: budget_values.allocated.text,
+      }] :
+      _.chain(data)
+        .flatMap(data => data.data)
+        .reduce( 
+          (memo, data) => _.chain(budget_values)
+            .keys()
+            .map(key => [ key, memo[key] + data[key] ])
+            .fromPairs()
+            .value(),
+          _.chain(budget_values)
+            .keys()
+            .map(key => [key, 0])
+            .fromPairs()
+            .value()
+        )
+        .pickBy(value => value !== 0)
+        .keys()
+        .map(key => ({
+          id: key,
+          name: budget_values[key].text,
+        }))
+        .thru(value_options => [
+          {
+            id: "funding_overview",
+            name: text_maker("funding_overview"),
+          },
+          ...value_options,
+        ])
+        .value();
 
     const valid_selected_value = _.filter(value_options, value_option => value_option.id === selected_value).length === 1 ?
       selected_value :
       value_options[0].id;
 
     return {
-      selected_filter: valid_selected_filter,
       selected_value: valid_selected_value,
-      filter_options,
       value_options,
     }
   }
@@ -286,9 +294,9 @@ class BudgetMeasureHBars extends React.Component {
     } = this.props;
 
     const { 
-      selected_filter,
+      selected_grouping,
       selected_value,
-      filter_options,
+      grouping_options,
       value_options,
     } = this.state;
 
@@ -377,7 +385,6 @@ class BudgetMeasureHBars extends React.Component {
       </div>;
     }
 
-    const group_by_sign_of_value = selected_filter === 'all' && selected_value !== 'funding_overview';
     const biv_values = _.chain(budget_values)
       .keys()
       .filter(key => key !== "funding")
@@ -400,27 +407,10 @@ class BudgetMeasureHBars extends React.Component {
         ref_id: budget_measure_item.ref_id,
       }))
       .thru( mapped_data => {
-        if (group_by_sign_of_value){
-          return _.chain(mapped_data)
-            .groupBy("chapter_key")
-            .map( (group, key) => ({
-              key,
-              label: budget_chapters[key].text,
-              data: _.chain(group)
-                .groupBy( measure => label_value_indicator(measure.data[0]) )
-                .map( (group, key) => ({
-                  key: group[0].chapter_key + key,
-                  label: key,
-                  data: _.reduce(group, (total, item) => total + item.data[0], 0),
-                }))
-                .value(),
-              chapter_key: key,
-            }))
-            .value();
-        } else if (selected_value === 'funding_overview'){
+        if (selected_value === 'funding_overview'){
           let data_prepared_by_case;
 
-          if (selected_filter === 'all'){
+          if (selected_grouping === 'all'){
             data_prepared_by_case = _.chain(mapped_data)
               .groupBy("chapter_key")
               .map( (group, key) => {
@@ -465,7 +455,7 @@ class BudgetMeasureHBars extends React.Component {
               })
               .value();
           } else {
-            data_prepared_by_case = _.filter(mapped_data, item => item.chapter_key === selected_filter );
+            data_prepared_by_case = _.filter(mapped_data, item => item.chapter_key === selected_grouping );
           }
 
           return _.map(data_prepared_by_case, item => {
@@ -499,9 +489,9 @@ class BudgetMeasureHBars extends React.Component {
           });
         } else {
           return _.chain(mapped_data)
-            .filter( item => item.chapter_key === selected_filter )
             .map( item => ({
               ...item,
+              label: label_value_indicator(item.label),
               data: [item],
             }))
             .value();
@@ -512,16 +502,14 @@ class BudgetMeasureHBars extends React.Component {
     const biv_value_colors = infobase_colors(biv_values);
 
     const bar_colors = (item_label) => {
-      if (group_by_sign_of_value){
-        if (item_label === "__negative_valued"){
+      if (selected_value === 'funding_overview'){
+        return biv_value_colors(item_label);
+      } else {
+        if ( item_label.includes("__negative_valued") ){
           return "#ff7e0f";
         } else {
           return "#1f77b4";
         }
-      } else if (selected_value === 'funding_overview'){
-        return biv_value_colors(item_label);
-      } else {
-        return "#1f77b4";
       }
     }
     
@@ -532,25 +520,27 @@ class BudgetMeasureHBars extends React.Component {
       <div className = "frow">
         <div className = "fcol-md-12" style = {{ width: "100%" }}>
           <div className = 'centerer'>
-            <label style = {{padding: dropdown_padding, textAlign: "center"}}>
-              <TM k="budget_panel_filter_by_chapter" />
-              <Select 
-                selected = {selected_filter}
-                options = {_.map(filter_options, 
-                  ({name, id}) => ({ 
-                    id,
-                    display: name,
-                  })
-                )}
-                onSelect = { id => this.setState({selected_filter: id}) }
-                style = {{
-                  display: 'block',
-                  margin: '10px auto',
-                }}
-                className = "form-control"
-              />
-            </label>
-            { !this.treatAsProgram(subject) &&
+            { grouping_options.length > 1 &&
+              <label style = {{padding: dropdown_padding, textAlign: "center"}}>
+                <TM k="budget_panel_group_by" />
+                <Select 
+                  selected = {selected_grouping}
+                  options = {_.map(grouping_options, 
+                    ({name, id}) => ({
+                      id,
+                      display: name,
+                    })
+                  )}
+                  onSelect = { id => this.setState({selected_grouping: id}) }
+                  style = {{
+                    display: 'block',
+                    margin: '10px auto',
+                  }}
+                  className = "form-control"
+                />
+              </label>
+            }
+            { value_options.length > 1 &&
               <label style = {{padding: dropdown_padding, textAlign: "center"}}>
                 <TM k="budget_panel_select_value" />
                 <Select 
@@ -594,13 +584,14 @@ class BudgetMeasureHBars extends React.Component {
               marginLeft: "20px",
             }}
           >
-            <TM 
-              k={
-                selected_filter === 'all' ? 
-                "budget_chapter" : 
-                "budget_measure"
-              } 
-            />
+            <span>
+              { 
+                _.chain(grouping_options)
+                  .filter(option => option.id === selected_grouping)
+                  .get("name")
+                  .value()
+              }
+            </span>
           </div>
           <div 
             style={{
@@ -616,8 +607,15 @@ class BudgetMeasureHBars extends React.Component {
               formater = {formats.compact1}
               colors = {bar_colors}
               bar_label_formater = { 
-                ({ label, chapter_key, ref_id }) => 
-                  `<a href="${BudgetMeasure.make_budget_link(chapter_key, ref_id)}">${label}</a>`
+                ({ label, chapter_key, ref_id }) => {
+                  if (selected_grouping === "measure"){
+                    return `<a href="${BudgetMeasure.make_budget_link(chapter_key, ref_id)}">${label}</a>`
+                  } else if (selected_grouping === "orgs"){
+                    return label; // TODO link to org infographic
+                  } else if (selected_grouping === "programs"){
+                    return label; // TODO link to program infographic
+                  }
+                }
               }
             />
           </div>
