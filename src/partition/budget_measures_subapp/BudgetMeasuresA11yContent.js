@@ -19,7 +19,7 @@ const name_and_value_cell_formatter = node => {
 }
 
 export function BudgetMeasuresA11yContent(){
-  const hierarchical_budget_measures_data = budget_measures_hierarchy_factory("budget-measure", []);
+  const hierarchical_budget_measures_data = budget_measures_hierarchy_factory("funding","budget-measure", []);
 
   const budget_measures_data_by_chapter = _.groupBy(
     hierarchical_budget_measures_data.children, 
