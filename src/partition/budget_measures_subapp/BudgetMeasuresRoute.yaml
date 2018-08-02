@@ -33,10 +33,10 @@ budget_allocation_tbd:
   en: Allocation to be determined
   fr: Affectation à determiner
 
-year_funding_overview:
+funding_overview:
   transform: [handlebars]
   en: |
-    {{gt budget_route_year}} Funding Overview
+    Funding Overview
   fr: |
     TODO
 

@@ -24,7 +24,7 @@ const {
 const budget_value_options = [
   {
     id: "overview",
-    display: text_maker("year_funding_overview"),
+    display: text_maker("funding_overview"),
   },
   _.map(
     budget_values, 
