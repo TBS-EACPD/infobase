@@ -395,7 +395,11 @@ class BudgetMeasureHBars extends React.Component {
         .value();
     } else if (selected_grouping === 'programs'){
       data_by_selected_group =_.chain(data)
-        .flatMap( measure => _.map(measure.data, "program_allocations") )
+        .flatMap( measure => _.chain(measure.data)
+          .filter(measure_row => +measure_row.org_id === subject.id)
+          .map("program_allocations")
+          .value()
+        )
         .reduce(
           (memo, program_allocations) => {
             _.each(
