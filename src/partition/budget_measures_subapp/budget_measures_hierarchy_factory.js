@@ -289,7 +289,7 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
     },
     node => {
       if (node.id === "root"){
-        const budgetMeasureNodes = _.chain( BudgetMeasure.get_all() )
+        const measure_approved_nodes = _.chain( BudgetMeasure.get_all() )
           .filter( budgetMeasure => _.isUndefined(filtered_chapter_keys) ||
             filtered_chapter_keys.length === 0 ||
             _.indexOf(filtered_chapter_keys, budgetMeasure.chapter_key) === -1 
@@ -301,17 +301,45 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
             return {
               ...budgetMeasure, 
               type: budgetMeasure.id === "net_adjust" ? "net_adjust" : "budget_measure",
+              value_type: "approved",
+              description: has_no_description ?
+                    text_maker("not_available") :
+                    budgetMeasure.description,
+              notes: !has_no_description ? text_maker("budget_measure_description_values_clarification") : false,
+              value: null, //TODO
+              chapter_key: budgetMeasure.chapter_key,
+            }
+          })
+          .value();
+
+        const measure_remaining_node = _.chain( BudgetMeasure.get_all() )
+          .filter( budgetMeasure => _.isUndefined(filtered_chapter_keys) ||
+            filtered_chapter_keys.length === 0 ||
+            _.indexOf(filtered_chapter_keys, budgetMeasure.chapter_key) === -1 
+          )
+          .map( budgetMeasure => {
+            
+            const has_no_description = _.isEmpty(budgetMeasure.description);
+  
+            return {
+              ...budgetMeasure, 
+              type: budgetMeasure.id === "net_adjust" ? "net_adjust" : "budget_measure",
+              value_type: "remaining",
               description: has_no_description ?
                     text_maker("not_available") :
                     budgetMeasure.description,
               notes: !has_no_description ? text_maker("budget_measure_description_values_clarification") : false,
               chapter_key: budgetMeasure.chapter_key,
-              value: _.reduce(budgetMeasure.data, (sum, data_row) => sum + (data_row.funding), 0),
+              value: _.reduce(budgetMeasure.data, (sum, data_row) => sum + (data_row.remaining), 0),
             }
           })
           .value();
-        return budgetMeasureNodes;
-      } else if (node.type === "budget_measure"){
+        
+        return [ //TODO: gonna need a pretty complex merging here. Sort approved nodes by value, leaf in paired remaining nodes, then sort and append unpaired remaining nodes
+          ...measure_approved_nodes,
+          ...measure_remaining_node,
+        ];
+      } else if (node.type === "budget_measure" && node.value_type === "approved"){
         const allocated_org_nodes = _.chain(node.data)
           .filter(data_row => data_row.org_id !== "net_adjust")
           .map(data_row => {
@@ -320,6 +348,7 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
                 name: text_maker("budget_allocation_tbd"),
                 description: "", //TODO: get explanation of this case, and use it for item description?
                 type: "dept",
+                value_type: "allocated",
                 id: 9999,
                 value: data_row.allocated,
                 parent_measure_id: node.id,
@@ -329,6 +358,7 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
               return {
                 ...dept,
                 type: "dept",
+                value_type: "allocated",
                 description: dept.mandate,
                 value: data_row.allocated,
                 parent_measure_id: node.id,
@@ -338,15 +368,13 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
           .value();
         
         const measure_withheld_node = {}; // TODO
-
-        const measure_remaining_node = {}; // TODO
         
         // TODO: internal services total node?
 
         return [
           ...allocated_org_nodes,
+          // internal services total node?
           //measure_withheld_node,
-          //measure_remaining_node,
         ];
       } else if (node.type === "dept"){
         const measure_id = node.parent_measure_id;
@@ -355,14 +383,24 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
       }
     })
     .eachAfter(node => {
-      if ( _.isNaN(node.value) && node.children && node.children.length > 0 ){
-        node.value = roll_up_children_values(node);
+      if (node.type === "program"){
+        node.value_type = "allocated";
       }
       post_traversal_children_filter(node);
       post_traversal_search_string_set(node);
     })
-    .sort(node => {
-      // TODO, this is going to need a pretty specific sorting function to get the desired order for the nodes
+    .sort( (a,b) => {
+      // Nodes of depth 1 pre-sorted due to their sorting complexity (can't be done through a-b comparision)
+      if (a.depth !== 1){
+        // Sort by magnitude of value, but biased against nodes with no children
+        if (a.children && a.children.length === 0){
+          return Infinity;
+        } else if (b.children && b.children.length === 0){
+          return - Infinity;
+        } else {
+          return - ( Math.abs(a.value) - Math.abs(b.value) );
+        }
+      }
     });
 }
 
