@@ -99,23 +99,25 @@ export class BudgetMeasuresControls extends React.Component {
             </div>
           }
         />
-        <LabeledBox 
-          label = { <TextMaker text_key="budget_measure_group_by_label" /> }
-          content = {
-            <div className="centerer">
-              <RadioButtons
-                options = { _.map( group_by_items, ({id, display }) => ({ id, display, active: id === first_column }) ) }
-                onChange = { id => {
-                  const new_path = `/budget-measures/${id}/${selected_value}`;
-                  if ( history.location.pathname !== new_path ){
-                    // the first_column prop, and thus this button's active id, is updated through this route push
-                    history.push(new_path);
-                  }
-                }}
-              />
-            </div>
-          }
-        />
+        { selected_value !== "overview" &&
+          <LabeledBox 
+            label = { <TextMaker text_key="budget_measure_group_by_label" /> }
+            content = {
+              <div className="centerer">
+                <RadioButtons
+                  options = { _.map( group_by_items, ({id, display }) => ({ id, display, active: id === first_column }) ) }
+                  onChange = { id => {
+                    const new_path = `/budget-measures/${id}/${selected_value}`;
+                    if ( history.location.pathname !== new_path ){
+                      // the first_column prop, and thus this button's active id, is updated through this route push
+                      history.push(new_path);
+                    }
+                  }}
+                />
+              </div>
+            }
+          />
+        }
         <LabeledBox 
           label = { <TextMaker text_key="budget_measure_filter_by_chapter_key_label" /> }
           content = {
