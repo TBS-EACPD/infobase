@@ -18,6 +18,8 @@ import { infograph_href_template } from '../../link_utils.js';
 const { 
   BudgetMeasure,
   Dept,
+  Program,
+  CRSO,
 } = Subject;
 const { 
   budget_chapters,
@@ -248,9 +250,12 @@ class BudgetMeasureHBars extends React.Component {
       },
     } = props;
 
-    const { selected_value } = state;
+    const {
+      selected_grouping,
+      selected_value,
+    } = state;
 
-    const value_options = treatAsProgram(subject) ? 
+    const value_options = treatAsProgram(subject) || selected_grouping === "programs" ? 
       [{
         id: "allocated",
         name: budget_values.allocated.text,
@@ -389,8 +394,33 @@ class BudgetMeasureHBars extends React.Component {
         .filter()
         .value();
     } else if (selected_grouping === 'programs'){
-      //TODO
-      debugger
+      data_by_selected_group =_.chain(data)
+        .flatMap( measure => _.map(measure.data, "program_allocations") )
+        .reduce(
+          (memo, program_allocations) => {
+            _.each(
+              program_allocations, 
+              (program_allocation, program_id) => {
+                const memo_value = memo[program_id] || 0;
+                memo[program_id] = memo_value + program_allocation;
+              }
+            )
+            return memo;
+          },
+          {},
+        )
+        .map(
+          (program_allocation, program_id) => {
+            const program = Program.lookup(program_id) || CRSO.lookup(program_id);
+            return {
+              key: program_id,
+              label: program.name,
+              link: infograph_href_template(program, "financial"),
+              data: {"allocated": program_allocation},
+            };
+          }
+        )
+        .value();
     }
     
     let graph_ready_data;
