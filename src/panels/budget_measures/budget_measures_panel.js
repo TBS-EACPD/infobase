@@ -329,8 +329,28 @@ class BudgetMeasureHBars extends React.Component {
         })
       );
     } else if (selected_grouping === 'chapters'){
-      //TODO
-      debugger
+      data_by_selected_group = _.chain(data)
+        .groupBy("chapter_key")
+        .map(
+          (chapter_group, chapter_key) => ({
+            key: chapter_key,
+            label: budget_chapters[chapter_key].text,
+            chapter_key: chapter_key,
+            data: _.reduce(
+              chapter_group,
+              (memo, measure) => _.mapValues(
+                memo,
+                (value, key) => value + measure.measure_data[key]
+              ),
+              _.chain(budget_values)
+                .keys()
+                .map(value_key => [value_key, 0])
+                .fromPairs()
+                .value()
+	          ),  
+          })
+        )
+        .value()
     } else if (selected_grouping === 'orgs'){
       //TODO
       debugger
