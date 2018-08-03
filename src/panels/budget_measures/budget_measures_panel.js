@@ -13,7 +13,10 @@ import {
 
 import { Fragment } from 'react';
 
-const { BudgetMeasure } = Subject;
+const { 
+  BudgetMeasure,
+  Dept,
+} = Subject;
 const { 
   budget_chapters,
   budget_values,
@@ -110,7 +113,6 @@ const calculate_functions = {
             measure_id: measure.id,
           })
           .value(),
-        org_data: {},
       })
     );
 
@@ -132,7 +134,6 @@ const calculate_functions = {
       .map( measure => ({
         ...measure,
         measure_data: _.filter( measure.data, data => data.org_id === org_id_string )[0],
-        program_data: {},
       }))
       .value();
     
@@ -350,10 +351,38 @@ class BudgetMeasureHBars extends React.Component {
 	          ),  
           })
         )
-        .value()
+        .value();
     } else if (selected_grouping === 'orgs'){
-      //TODO
-      debugger
+      data_by_selected_group = _.chain(data)
+        .flatMap( measure => measure.data)
+        .groupBy("org_id")
+        .map(
+          (org_group, org_id) => {
+            const dept = Dept.lookup(org_id);
+            if ( _.isUndefined(dept) ){
+              return false; // fake dept code case, "to be allocated" funds etc.
+            } else {
+              return {
+                key: org_id,
+                label: Dept.lookup(org_id).name,
+                data: _.reduce(
+                  org_group,
+                  (memo, measure_row) => _.mapValues(
+                    memo,
+                    (value, key) => value + measure_row[key]
+                  ),
+                  _.chain(budget_values)
+                    .keys()
+                    .map(value_key => [value_key, 0])
+                    .fromPairs()
+                    .value()
+	              ),  
+              };
+            }
+          }
+        )
+        .filter()
+        .value();
     } else if (selected_grouping === 'programs'){
       //TODO
       debugger
