@@ -13,6 +13,8 @@ import {
 
 import { Fragment } from 'react';
 
+import { infograph_href_template } from '../../link_utils.js';
+
 const { 
   BudgetMeasure,
   Dept,
@@ -324,9 +326,9 @@ class BudgetMeasureHBars extends React.Component {
         budget_measure_item => ({
           key: budget_measure_item.id,
           label: budget_measure_item.name,
+          link: BudgetMeasure.make_budget_link(budget_measure_item.chapter_key, budget_measure_item.ref_id),
+          is_link_out: true,
           data: budget_measure_item.measure_data,
-          chapter_key: budget_measure_item.chapter_key,
-          ref_id: budget_measure_item.ref_id,
         })
       );
     } else if (selected_grouping === 'chapters'){
@@ -337,6 +339,8 @@ class BudgetMeasureHBars extends React.Component {
             key: chapter_key,
             label: budget_chapters[chapter_key].text,
             chapter_key: chapter_key,
+            link: BudgetMeasure.make_budget_link(chapter_key, false),
+            is_link_out: true,
             data: _.reduce(
               chapter_group,
               (memo, measure) => _.mapValues(
@@ -364,7 +368,8 @@ class BudgetMeasureHBars extends React.Component {
             } else {
               return {
                 key: org_id,
-                label: Dept.lookup(org_id).name,
+                label: dept.name,
+                link: infograph_href_template(dept, "financial"),
                 data: _.reduce(
                   org_group,
                   (memo, measure_row) => _.mapValues(
@@ -613,14 +618,8 @@ class BudgetMeasureHBars extends React.Component {
                 formater = {formats.compact1}
                 colors = {bar_colors}
                 bar_label_formater = { 
-                  ({ label, chapter_key, ref_id }) => {
-                    if (selected_grouping === "measures" || selected_grouping === "chapters"){
-                      return `<a href="${BudgetMeasure.make_budget_link(chapter_key, ref_id)}">${label}</a>`
-                    } else if (selected_grouping === "orgs"){
-                      return label; // TODO link to org infographic
-                    } else if (selected_grouping === "programs"){
-                      return label; // TODO link to program infographic
-                    }
+                  ({ label, link, is_link_out}) => {
+                    return `<a href="${link}" target="${is_link_out ? "_blank" : "_self"}">${label}</a>`;
                   }
                 }
               />
