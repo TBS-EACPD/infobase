@@ -34,7 +34,7 @@ const { text_maker, TM } = create_text_maker_component([text1,text2]);
 
 const gov_dept_calculate_stats_common = (data) => {
   const total_funding = _.reduce(data,
-    (total, budget_measure) => total + budget_measure.data.funding, 
+    (total, budget_measure) => total + budget_measure.measure_data.funding, 
     0
   );
 
@@ -62,7 +62,7 @@ const crso_program_calculate = (subject, info, options) => {
     .filter(measure => _.indexOf( measure.orgs, org_id_string ) !== -1)
     .map( measure => ({
       ...measure,
-      data: _.chain(measure.data)
+      measure_data: _.chain(measure.data)
         .filter( data => data.org_id === org_id_string )
         .thru( nested_data => {
           const program_allocations = nested_data[0].program_allocations;
@@ -95,10 +95,11 @@ const crso_program_calculate = (subject, info, options) => {
 
 const calculate_functions = {
   gov: function(subject, info, options){
-    const all_measures_with_data_rolled_up = _.chain( BudgetMeasure.get_all() )
-      .map( measure => ({
+    const all_measures_with_data_rolled_up = _.map(
+      BudgetMeasure.get_all(), 
+      measure => ({
         ...measure,
-        data: _.chain(budget_values)
+        measure_data: _.chain(budget_values)
           .keys()
           .map( key => [
             key,
@@ -107,15 +108,11 @@ const calculate_functions = {
           .fromPairs()
           .assign({
             measure_id: measure.id,
-            program_allocations: _.reduce(measure.data,
-              (memo, data) => _.assign(memo,data.program_allocations),
-              {}
-            ),
           })
           .value(),
-      }))
-      .sortBy(budget_measure => -budget_measure.data.funding)
-      .value();
+        org_data: {},
+      })
+    );
 
     if (!_.isEmpty(all_measures_with_data_rolled_up)){
       return {
@@ -134,7 +131,8 @@ const calculate_functions = {
       .filter(measure => _.indexOf( measure.orgs, org_id_string ) !== -1)
       .map( measure => ({
         ...measure,
-        data: _.filter( measure.data, data => data.org_id === org_id_string )[0],
+        measure_data: _.filter( measure.data, data => data.org_id === org_id_string )[0],
+        program_data: {},
       }))
       .value();
     
@@ -182,18 +180,25 @@ const budget_measure_render = function({calculations, footnotes, sources}){
   }
 ));
 
+
 const treatAsProgram = (subject) => {
   return _.indexOf(["program", "crso"], subject.level) !== -1;
 }
 const get_grouping_options = (subject) =>{
-  const common_measures_option = {
-    name: text_maker('budget_measures'),
-    id: 'measures',
-  };
+  const common_options = [
+    {
+      name: text_maker('budget_measures'),
+      id: 'measures',
+    },
+    {
+      name: text_maker('budget_chapters'),
+      id: 'chapters',
+    },
+  ];
 
   if (subject.level === "gov"){
     return [
-      common_measures_option,
+      ...common_options,
       {
         name: text_maker('orgs'),
         id: 'orgs',
@@ -201,14 +206,14 @@ const get_grouping_options = (subject) =>{
     ];
   } else if (subject.level === "dept"){
     return [
-      common_measures_option,
+      ...common_options,
       {
         name: text_maker('programs'),
         id: 'programs',
       },
     ];
   } else {
-    return [common_measures_option];
+    return common_options;
   }
 }
 class BudgetMeasureHBars extends React.Component {
@@ -248,11 +253,11 @@ class BudgetMeasureHBars extends React.Component {
         name: budget_values.allocated.text,
       }] :
       _.chain(data)
-        .flatMap(data => data.data)
+        .flatMap(data => data.measure_data)
         .reduce( 
-          (memo, data) => _.chain(budget_values)
+          (memo, measure_data) => _.chain(budget_values)
             .keys()
-            .map(key => [ key, memo[key] + data[key] ])
+            .map(key => [ key, memo[key] + measure_data[key] ])
             .fromPairs()
             .value(),
           _.chain(budget_values)
@@ -301,91 +306,6 @@ class BudgetMeasureHBars extends React.Component {
       value_options,
     } = this.state;
 
-    const sorted_data = _.chain(data)
-      .sortBy(budget_measure => -budget_measure.name)
-      .sortBy(budget_measure => -budget_measure.data[selected_value])
-      .value();
-
-    const text_area = <div className = "frow" >
-      <div className = "fcol-md-12 fcol-xs-12 medium_panel_text text">
-        { subject.level === "gov" &&
-          <Fragment>
-            <TM k={"budget_route_top_text"} />
-            <TM 
-              k={"gov_budget_measures_panel_text"} 
-              args={{subject, ...info}} 
-            />
-          </Fragment>
-        }
-        { subject.level === "dept" &&
-          <TM
-            k={"dept_budget_measures_panel_text"} 
-            args={{subject, ...info}} 
-          />
-        }
-        { treatAsProgram(subject) &&
-          <TM
-            k={"program_crso_budget_measures_panel_text"} 
-            args={{subject, ...info}} 
-          />
-        }
-      </div>
-    </div>;
-
-    if(window.is_a11y_mode){
-      return <div>
-        { text_area }
-        <A11YTable
-          table_name = { text_maker("budget_name_header") }
-          data = {_.map(sorted_data, 
-            (budget_measure_item) => ({
-              label: budget_measure_item.name,
-              data: _.filter([
-                <div key = { budget_measure_item.id + "col2" } >
-                  { budget_chapters[budget_measure_item.chapter_key].text }
-                </div>,
-                !treatAsProgram(subject) && <Format
-                  key = { budget_measure_item.id + "col3" } 
-                  type = "compact1" 
-                  content = { budget_measure_item.data.funding } 
-                />,
-                <Format
-                  key = { budget_measure_item.id + (treatAsProgram(subject) ? "col3" : "col4") } 
-                  type = "compact1" 
-                  content = { budget_measure_item.data.allocated } 
-                />,
-                !treatAsProgram(subject) && <Format
-                  key = { budget_measure_item.id + "col5" } 
-                  type = "compact1" 
-                  content = { budget_measure_item.data.withheld } 
-                />,
-                !treatAsProgram(subject) && <Format
-                  key = { budget_measure_item.id + "col6" } 
-                  type = "compact1" 
-                  content = { budget_measure_item.data.remaining } 
-                />,
-                <a 
-                  key = { budget_measure_item.id + (treatAsProgram(subject) ? "col4" : "col7") }
-                  href={BudgetMeasure.make_budget_link(budget_measure_item.chapter_key, budget_measure_item.ref_id)}
-                >
-                  { text_maker("link") }
-                </a>,
-              ]),
-            })
-          )}
-          label_col_header = { text_maker("budget_measure") }
-          data_col_headers = {_.filter([
-            text_maker("budget_chapter"),
-            !treatAsProgram(subject) && budget_values.funding.text,
-            budget_values.allocated.text,
-            !treatAsProgram(subject) && budget_values.withheld.text,
-            !treatAsProgram(subject) && budget_values.remaining.text,
-            text_maker("budget_panel_a11y_link_header"),
-          ])}
-        />
-      </div>;
-    }
-
     const biv_values = _.chain(budget_values)
       .keys()
       .filter(key => key !== "funding")
@@ -399,19 +319,24 @@ class BudgetMeasureHBars extends React.Component {
 
     let data_by_selected_group;
     if (selected_grouping === 'measures'){
-      data_by_selected_group = _.map(sorted_data, 
+      data_by_selected_group = _.map(data, 
         budget_measure_item => ({
           key: budget_measure_item.id,
           label: budget_measure_item.name,
-          data: budget_measure_item.data,
+          data: budget_measure_item.measure_data,
           chapter_key: budget_measure_item.chapter_key,
           ref_id: budget_measure_item.ref_id,
         })
       );
+    } else if (selected_grouping === 'chapters'){
+      //TODO
+      debugger
     } else if (selected_grouping === 'orgs'){
       //TODO
+      debugger
     } else if (selected_grouping === 'programs'){
       //TODO
+      debugger
     }
     
     let graph_ready_data;
@@ -458,28 +383,104 @@ class BudgetMeasureHBars extends React.Component {
         .value();
     }
     
-    const biv_value_colors = infobase_colors(biv_values);
-
-    const bar_colors = (data_label) => {
-      if (selected_value === 'funding_overview'){
-        return biv_value_colors(data_label);
-      } else {
-        if ( data_label.includes("__negative_valued") ){
-          return "#ff7e0f";
+    const text_area = <div className = "frow" >
+      <div className = "fcol-md-12 fcol-xs-12 medium_panel_text text">
+        { subject.level === "gov" &&
+          <Fragment>
+            <TM k={"budget_route_top_text"} />
+            <TM 
+              k={"gov_budget_measures_panel_text"} 
+              args={{subject, ...info}} 
+            />
+          </Fragment>
+        }
+        { subject.level === "dept" &&
+          <TM
+            k={"dept_budget_measures_panel_text"} 
+            args={{subject, ...info}} 
+          />
+        }
+        { treatAsProgram(subject) &&
+          <TM
+            k={"program_crso_budget_measures_panel_text"} 
+            args={{subject, ...info}} 
+          />
+        }
+      </div>
+    </div>;
+  
+    if(window.is_a11y_mode){
+      return <div>
+        { text_area }
+        <A11YTable
+          table_name = { text_maker("budget_name_header") }
+          data = {_.map(data, 
+            (budget_measure_item) => ({
+              label: budget_measure_item.name,
+              data: _.filter([
+                <div key = { budget_measure_item.id + "col2" } >
+                  { budget_chapters[budget_measure_item.chapter_key].text }
+                </div>,
+                !treatAsProgram(subject) && <Format
+                  key = { budget_measure_item.id + "col3" } 
+                  type = "compact1" 
+                  content = { budget_measure_item.measure_data.funding } 
+                />,
+                <Format
+                  key = { budget_measure_item.id + (treatAsProgram(subject) ? "col3" : "col4") } 
+                  type = "compact1" 
+                  content = { budget_measure_item.measure_data.allocated } 
+                />,
+                !treatAsProgram(subject) && <Format
+                  key = { budget_measure_item.id + "col5" } 
+                  type = "compact1" 
+                  content = { budget_measure_item.measure_data.withheld } 
+                />,
+                !treatAsProgram(subject) && <Format
+                  key = { budget_measure_item.id + "col6" } 
+                  type = "compact1" 
+                  content = { budget_measure_item.measure_data.remaining } 
+                />,
+                <a 
+                  key = { budget_measure_item.id + (treatAsProgram(subject) ? "col4" : "col7") }
+                  href={BudgetMeasure.make_budget_link(budget_measure_item.chapter_key, budget_measure_item.ref_id)}
+                >
+                  { text_maker("link") }
+                </a>,
+              ]),
+            })
+          )}
+          label_col_header = { text_maker("budget_measure") }
+          data_col_headers = {_.filter([
+            text_maker("budget_chapter"),
+            !treatAsProgram(subject) && budget_values.funding.text,
+            budget_values.allocated.text,
+            !treatAsProgram(subject) && budget_values.withheld.text,
+            !treatAsProgram(subject) && budget_values.remaining.text,
+            text_maker("budget_panel_a11y_link_header"),
+          ])}
+        />
+      </div>;
+    } else {
+      const biv_value_colors = infobase_colors(biv_values);
+      const bar_colors = (data_label) => {
+        if (selected_value === 'funding_overview'){
+          return biv_value_colors(data_label);
         } else {
-          return "#1f77b4";
+          if ( data_label.includes("__negative_valued") ){
+            return "#ff7e0f";
+          } else {
+            return "#1f77b4";
+          }
         }
       }
-    }
-    
-    const dropdown_padding = "0px 15px";
-
-    return <div>
-      { text_area }
-      <div className = "frow">
-        <div className = "fcol-md-12" style = {{ width: "100%" }}>
-          <div className = 'centerer'>
-            { grouping_options.length > 1 &&
+      const dropdown_padding = "0px 15px";
+  
+      return <div>
+        { text_area }
+        <div className = "frow">
+          <div className = "fcol-md-12" style = {{ width: "100%" }}>
+            <div className = 'centerer'>
               <label style = {{padding: dropdown_padding, textAlign: "center"}}>
                 <TM k="budget_panel_group_by" />
                 <Select 
@@ -498,8 +499,6 @@ class BudgetMeasureHBars extends React.Component {
                   className = "form-control"
                 />
               </label>
-            }
-            { value_options.length > 1 &&
               <label style = {{padding: dropdown_padding, textAlign: "center"}}>
                 <TM k="budget_panel_select_value" />
                 <Select 
@@ -518,68 +517,68 @@ class BudgetMeasureHBars extends React.Component {
                   className = "form-control"
                 />
               </label>
-            }
-          </div>
-          <div className = 'centerer'>
-            { selected_value === 'funding_overview' &&
-              <GraphLegend
-                isHorizontal = {true}
-                items = {
-                  _.map(biv_values, biv_value => ({
-                    id: biv_value,
-                    label: budget_values[biv_value].text,
-                    color: biv_value_colors(biv_value),
-                    active: true,
-                  }))
-                }
-              />
-            }
-          </div>
-          <div
-            style={{
-              position: "absolute",
-              fontWeight: "700",
-              fontSize: "12px",
-              marginLeft: "20px",
-            }}
-          >
-            <span>
-              { 
-                _.chain(grouping_options)
-                  .filter(option => option.id === selected_grouping)
-                  .get("name")
-                  .value()
+            </div>
+            <div className = 'centerer'>
+              { selected_value === 'funding_overview' &&
+                <GraphLegend
+                  isHorizontal = {true}
+                  items = {
+                    _.map(biv_values, biv_value => ({
+                      id: biv_value,
+                      label: budget_values[biv_value].text,
+                      color: biv_value_colors(biv_value),
+                      active: true,
+                    }))
+                  }
+                />
               }
-            </span>
-          </div>
-          <div 
-            style={{
-              maxHeight: '700px',
-              overflowY: 'auto',
-              overflowX: 'hidden',
-            }}
-          >
-            <StackedHbarChart
-              font_size="12px"
-              bar_height={60} 
-              data = {graph_ready_data}
-              formater = {formats.compact1}
-              colors = {bar_colors}
-              bar_label_formater = { 
-                ({ label, chapter_key, ref_id }) => {
-                  if (selected_grouping === "measures"){
-                    return `<a href="${BudgetMeasure.make_budget_link(chapter_key, ref_id)}">${label}</a>`
-                  } else if (selected_grouping === "orgs"){
-                    return label; // TODO link to org infographic
-                  } else if (selected_grouping === "programs"){
-                    return label; // TODO link to program infographic
+            </div>
+            <div
+              style={{
+                position: "absolute",
+                fontWeight: "700",
+                fontSize: "12px",
+                marginLeft: "20px",
+              }}
+            >
+              <span>
+                { 
+                  _.chain(grouping_options)
+                    .filter(option => option.id === selected_grouping)
+                    .thru(nested_option => nested_option[0].name)
+                    .value()
+                }
+              </span>
+            </div>
+            <div 
+              style={{
+                maxHeight: '700px',
+                overflowY: 'auto',
+                overflowX: 'hidden',
+              }}
+            >
+              <StackedHbarChart
+                font_size="12px"
+                bar_height={60} 
+                data = {graph_ready_data}
+                formater = {formats.compact1}
+                colors = {bar_colors}
+                bar_label_formater = { 
+                  ({ label, chapter_key, ref_id }) => {
+                    if (selected_grouping === "measures" || selected_grouping === "chapters"){
+                      return `<a href="${BudgetMeasure.make_budget_link(chapter_key, ref_id)}">${label}</a>`
+                    } else if (selected_grouping === "orgs"){
+                      return label; // TODO link to org infographic
+                    } else if (selected_grouping === "programs"){
+                      return label; // TODO link to program infographic
+                    }
                   }
                 }
-              }
-            />
+              />
+            </div>
           </div>
-        </div>
-      </div> 
-    </div>;
+        </div> 
+      </div>;
+    }
   }
 }
