@@ -357,7 +357,7 @@ class BudgetMeasureHBars extends React.Component {
                 .map(value_key => [value_key, 0])
                 .fromPairs()
                 .value()
-	          ),  
+            ),  
           })
         )
         .value();
@@ -386,7 +386,7 @@ class BudgetMeasureHBars extends React.Component {
                     .map(value_key => [value_key, 0])
                     .fromPairs()
                     .value()
-	              ),  
+                ),  
               };
             }
           }
