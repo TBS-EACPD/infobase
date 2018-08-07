@@ -310,10 +310,10 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
               chapter_key: budgetMeasure.chapter_key,
             }
           })
-          .sortBy( measure => measure.type === "net_adjust" ? Infinity : -Math.abs(measure.value) )
+          .sortBy( node => -Math.abs(node.value) )
           .value();
 
-        const measure_remaining_node = _.chain( BudgetMeasure.get_all() )
+        const measure_remaining_nodes = _.chain( BudgetMeasure.get_all() )
           .filter( budgetMeasure => _.isUndefined(filtered_chapter_keys) ||
             filtered_chapter_keys.length === 0 ||
             _.indexOf(filtered_chapter_keys, budgetMeasure.chapter_key) === -1 
@@ -334,12 +334,32 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
               value: _.reduce(budgetMeasure.data, (sum, data_row) => sum + (data_row.remaining), 0),
             }
           })
+          .filter( node => node.value !== 0 )
+          .sortBy( node => -Math.abs(node.value) )
           .value();
         
-        return [ //TODO: gonna need a pretty complex merging here. Sort approved nodes by value, leaf in paired remaining nodes, then sort and append unpaired remaining nodes
-          ...measure_approved_nodes,
-          //...measure_remaining_node,
-        ];
+        const interleaved_nodes = _.chain(measure_approved_nodes)
+          .flatMap( measure_node => {
+            const corresponding_remaining_node = _.filter(
+              measure_remaining_nodes,
+              remaining_node => remaining_node.id === measure_node.id,
+            );
+            if ( !_.isEmpty(corresponding_remaining_node) ){
+              _.pull(measure_remaining_nodes, remaining_node => remaining_node.id === measure_node.id);
+              return [
+                measure_node,
+                ...corresponding_remaining_node,
+              ];
+            } else {
+              return [measure_node];
+            }
+          })
+          .concat(measure_remaining_nodes)
+          .filter()
+          .sortBy( node => node.type == "net_adjust" ? Infinity : 0 )
+          .value();
+
+        return interleaved_nodes;
       } else if (node.type === "budget_measure" && node.value_type === "approved"){
         const allocated_org_nodes = _.chain(node.data)
           .filter(data_row => data_row.org_id !== "net_adjust")
