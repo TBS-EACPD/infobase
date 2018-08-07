@@ -306,10 +306,11 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
                     text_maker("not_available") :
                     budgetMeasure.description,
               notes: !has_no_description ? text_maker("budget_measure_description_values_clarification") : false,
-              value: null, //TODO
+              value: _.reduce(budgetMeasure.data, (sum, data_row) => sum + data_row.allocated + data_row.withheld, 0),
               chapter_key: budgetMeasure.chapter_key,
             }
           })
+          .sortBy( measure => measure.type === "net_adjust" ? Infinity : -Math.abs(measure.value) )
           .value();
 
         const measure_remaining_node = _.chain( BudgetMeasure.get_all() )
@@ -337,7 +338,7 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
         
         return [ //TODO: gonna need a pretty complex merging here. Sort approved nodes by value, leaf in paired remaining nodes, then sort and append unpaired remaining nodes
           ...measure_approved_nodes,
-          ...measure_remaining_node,
+          //...measure_remaining_node,
         ];
       } else if (node.type === "budget_measure" && node.value_type === "approved"){
         const allocated_org_nodes = _.chain(node.data)
@@ -388,18 +389,20 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
       }
       post_traversal_children_filter(node);
       post_traversal_search_string_set(node);
-    })
-    .sort( (a,b) => {
-      // Nodes of depth 1 pre-sorted due to their sorting complexity (can't be done through a-b comparision)
-      if (a.depth !== 1){
-        // Sort by magnitude of value, but biased against nodes with no children
-        if (a.children && a.children.length === 0){
-          return Infinity;
-        } else if (b.children && b.children.length === 0){
-          return - Infinity;
-        } else {
-          return - ( Math.abs(a.value) - Math.abs(b.value) );
-        }
+
+      if (node.depth === 1){
+        // eachAfter ensures a node at depth 1 is only visited after all its children have been
+        // Want to sort everything below depth 1 the same way, want to leave depth 1 ordering alone
+        node.sort( (a,b) => {
+          // Sort by magnitude of value, but biased against nodes with no children
+          if (a.children && a.children.length === 0){
+            return Infinity;
+          } else if (b.children && b.children.length === 0){
+            return - Infinity;
+          } else {
+            return - ( Math.abs(a.value) - Math.abs(b.value) );
+          }
+        });
       }
     });
 }
