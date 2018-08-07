@@ -289,10 +289,22 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
     },
     node => {
       if (node.id === "root"){
+        const net_adjust_measure = BudgetMeasure.lookup("net_adjust");
+        const net_adjust_node = {
+          ...net_adjust_measure,
+          type: "net_adjust",
+          value_type: "approved",
+          description: text_maker("not_available"),
+          notes: false,
+          value: _.reduce(net_adjust_measure.data, (sum, data_row) => sum + data_row.allocated + data_row.withheld, 0),
+          chapter_key: net_adjust_measure.chapter_key,
+        };
+
         const measure_approved_nodes = _.chain( BudgetMeasure.get_all() )
-          .filter( budgetMeasure => _.isUndefined(filtered_chapter_keys) ||
+          .filter( budgetMeasure => (_.isUndefined(filtered_chapter_keys) ||
             filtered_chapter_keys.length === 0 ||
-            _.indexOf(filtered_chapter_keys, budgetMeasure.chapter_key) === -1 
+            _.indexOf(filtered_chapter_keys, budgetMeasure.chapter_key) === -1) &&
+            budgetMeasure.id !== "net_adjust"
           )
           .map( budgetMeasure => {
             
@@ -301,7 +313,7 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
             return {
               ...budgetMeasure,
               name: `${text_maker("tb_approved_funds")}: ${budgetMeasure.name}`,
-              type: budgetMeasure.id === "net_adjust" ? "net_adjust" : "budget_measure",
+              type: "budget_measure",
               value_type: "approved",
               description: has_no_description ?
                     text_maker("not_available") :
@@ -309,15 +321,17 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
               notes: !has_no_description ? text_maker("budget_measure_description_values_clarification") : false,
               value: _.reduce(budgetMeasure.data, (sum, data_row) => sum + data_row.allocated + data_row.withheld, 0),
               chapter_key: budgetMeasure.chapter_key,
-            }
+            };
           })
+          .filter( node => node.value !== 0 )
           .sortBy( node => -Math.abs(node.value) )
           .value();
 
         let measure_remaining_nodes = _.chain( BudgetMeasure.get_all() )
-          .filter( budgetMeasure => _.isUndefined(filtered_chapter_keys) ||
+          .filter( budgetMeasure => (_.isUndefined(filtered_chapter_keys) ||
             filtered_chapter_keys.length === 0 ||
-            _.indexOf(filtered_chapter_keys, budgetMeasure.chapter_key) === -1 
+            _.indexOf(filtered_chapter_keys, budgetMeasure.chapter_key) === -1) &&
+            budgetMeasure.id !== "net_adjust"
           )
           .map( budgetMeasure => {
             
@@ -327,7 +341,7 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
               ...budgetMeasure,
               id: budgetMeasure.id + "_remaining",
               name: `${text_maker("remaining_funds")}: ${budgetMeasure.name}`,
-              type: budgetMeasure.id === "net_adjust" ? "net_adjust" : "budget_measure",
+              type: "budget_measure",
               value_type: "remaining",
               description: has_no_description ?
                     text_maker("not_available") :
@@ -335,20 +349,18 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
               notes: !has_no_description ? text_maker("budget_measure_description_values_clarification") : false,
               chapter_key: budgetMeasure.chapter_key,
               value: _.reduce(budgetMeasure.data, (sum, data_row) => sum + (data_row.remaining), 0),
-            }
+            };
           })
           .filter( node => node.value !== 0 )
-          .sortBy( node => -Math.abs(node.value) )
           .value();
         
         const interleaved_nodes = _.chain(measure_approved_nodes)
           .flatMap( measure_node => {
             const corresponding_remaining_node = _.filter(
               measure_remaining_nodes,
-              remaining_node => remaining_node.id.replace("_remaining","") === measure_node.id,
+              remaining_node => remaining_node.id === measure_node.id+"_remaining",
             );
             if ( !_.isEmpty(corresponding_remaining_node) ){
-              measure_remaining_nodes = _.filter(measure_remaining_nodes, remaining_node => remaining_node.id.replace("_remaining","") === measure_node.id);
               return [
                 measure_node,
                 ...corresponding_remaining_node,
@@ -357,9 +369,23 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
               return [measure_node];
             }
           })
-          .concat(measure_remaining_nodes)
-          .filter()
-          .sortBy( node => node.type == "net_adjust" ? Infinity : 0 )
+          .thru( approved_and_corresponding_remaining_nodes => {
+            const paired_remaining_node_ids = _.chain(approved_and_corresponding_remaining_nodes)
+              .map( node => node.id)
+              .filter( id => id.includes("_remaining") )
+              .value();
+            
+            const unpaired_remaining_nodes = _.chain(measure_remaining_nodes) 
+              .filter( node => _.indexOf(paired_remaining_node_ids, node.id) === -1 )
+              .sortBy( node => -Math.abs(node.value) )
+              .value();
+
+            return [
+              ...approved_and_corresponding_remaining_nodes,
+              ...unpaired_remaining_nodes,
+              net_adjust_node,
+            ];
+          })
           .value();
 
         return interleaved_nodes;
