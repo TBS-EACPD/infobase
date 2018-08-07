@@ -313,7 +313,7 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
           .sortBy( node => -Math.abs(node.value) )
           .value();
 
-        const measure_remaining_nodes = _.chain( BudgetMeasure.get_all() )
+        let measure_remaining_nodes = _.chain( BudgetMeasure.get_all() )
           .filter( budgetMeasure => _.isUndefined(filtered_chapter_keys) ||
             filtered_chapter_keys.length === 0 ||
             _.indexOf(filtered_chapter_keys, budgetMeasure.chapter_key) === -1 
@@ -323,7 +323,8 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
             const has_no_description = _.isEmpty(budgetMeasure.description);
   
             return {
-              ...budgetMeasure, 
+              ...budgetMeasure,
+              id: budgetMeasure.id + "_remaining",
               type: budgetMeasure.id === "net_adjust" ? "net_adjust" : "budget_measure",
               value_type: "remaining",
               description: has_no_description ?
@@ -342,10 +343,10 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
           .flatMap( measure_node => {
             const corresponding_remaining_node = _.filter(
               measure_remaining_nodes,
-              remaining_node => remaining_node.id === measure_node.id,
+              remaining_node => remaining_node.id.replace("_remaining","") === measure_node.id,
             );
             if ( !_.isEmpty(corresponding_remaining_node) ){
-              _.pull(measure_remaining_nodes, remaining_node => remaining_node.id === measure_node.id);
+              measure_remaining_nodes = _.filter(measure_remaining_nodes, remaining_node => remaining_node.id.replace("_remaining","") === measure_node.id);
               return [
                 measure_node,
                 ...corresponding_remaining_node,
