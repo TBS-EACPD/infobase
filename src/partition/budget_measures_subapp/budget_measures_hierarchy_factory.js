@@ -389,21 +389,34 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
               };
             }
           })
+          .sort( node => -Math.abs(node.value))
           .value();
         
-        const measure_withheld_node = {}; // TODO
-        
-        // TODO: internal services total node?
+        const measure_withheld_node = {
+          id: node.data + "_withheld",
+          type: "measure_withheld_slice",
+          value_type: "withheld",
+          name: "TODO: Withhled portion",
+          description: "TODO",
+          value: _.reduce(
+            BudgetMeasure.lookup(node.id).data,
+            (memo, data_row) => memo + data_row.withheld,
+            0
+          ),
+          parent_measure_id: node.id,
+        };
 
         return [
           ...allocated_org_nodes,
-          // internal services total node?
-          //measure_withheld_node,
+          measure_withheld_node,
         ];
       } else if (node.type === "dept"){
         const measure_id = node.parent_measure_id;
         const org_id = node.id;
-        return make_program_allocation_nodes(measure_id, org_id);
+        return _.sortBy(
+          make_program_allocation_nodes(measure_id, org_id),
+          node => -Math.abs(node.value),
+        );
       }
     })
     .eachAfter(node => {
@@ -412,21 +425,6 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
       }
       post_traversal_children_filter(node);
       post_traversal_search_string_set(node);
-
-      if (node.depth === 1){
-        // eachAfter ensures a node at depth 1 is only visited after all its children have been
-        // Want to sort everything below depth 1 the same way, want to leave depth 1 ordering alone
-        node.sort( (a,b) => {
-          // Sort by magnitude of value, but biased against nodes with no children
-          if (a.children && a.children.length === 0){
-            return Infinity;
-          } else if (b.children && b.children.length === 0){
-            return - Infinity;
-          } else {
-            return - ( Math.abs(a.value) - Math.abs(b.value) );
-          }
-        });
-      }
     });
 }
 
