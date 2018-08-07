@@ -62,6 +62,10 @@ as_of:
   fr: TODO
 
 
+lang_formated_zero:
+  en: $0
+  fr: 0$
+
 
 see_it_in_the_budget:
   en: See it in the Budget
@@ -103,7 +107,7 @@ budget_measure_popup_top_line_value:
   text: |
     <span class='popup-font-ml'>
     {{#if value_is_zero}}
-      {{lang_formated_zero}}
+      {{gt "lang_formated_zero"}}
     {{else}}
       {{#if value_is_negative}}
         <text style='color:red;'>

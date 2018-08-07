@@ -275,7 +275,7 @@ const dept_first_hierarchy_factory = (selected_value, filtered_chapter_keys) => 
         return make_program_allocation_nodes(measure_id, org_id);
       }
     })
-    .eachAfter(node => post_traversal_modifications(node, node.selected_value,) )
+    .eachAfter(node => post_traversal_modifications(node, selected_value) )
     .sort(absolute_value_sort_net_adjust_biased);
 }
 
