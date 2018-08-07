@@ -299,7 +299,8 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
             const has_no_description = _.isEmpty(budgetMeasure.description);
 
             return {
-              ...budgetMeasure, 
+              ...budgetMeasure,
+              name: `${text_maker("tb_approved_funds")}: ${budgetMeasure.name}`,
               type: budgetMeasure.id === "net_adjust" ? "net_adjust" : "budget_measure",
               value_type: "approved",
               description: has_no_description ?
@@ -325,6 +326,7 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
             return {
               ...budgetMeasure,
               id: budgetMeasure.id + "_remaining",
+              name: `${text_maker("remaining_funds")}: ${budgetMeasure.name}`,
               type: budgetMeasure.id === "net_adjust" ? "net_adjust" : "budget_measure",
               value_type: "remaining",
               description: has_no_description ?

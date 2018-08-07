@@ -61,11 +61,16 @@ as_of:
   en: As of
   fr: TODO
 
-
+# Misc
 lang_formated_zero:
   en: $0
   fr: 0$
-
+tb_approved_funds:
+  en: TB approved funds
+  fr: TODO
+remaining_funds:
+  en: Remaining funds
+  fr: TODO
 
 see_it_in_the_budget:
   en: See it in the Budget
