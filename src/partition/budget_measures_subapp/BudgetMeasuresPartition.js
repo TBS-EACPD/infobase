@@ -169,6 +169,15 @@ const standard_data_wrapper_node_rules = (node) => {
   }
 }
 
+const funding_overview_data_wrapper_node_rules = (node) => {
+  const root_value = _.last( node.ancestors() ).value;
+  node.__value__ = node.value;
+  node.open = true;
+  node.how_many_to_show = function(_node){
+    return [_node.children, []];
+  }
+}
+
 const update_diagram = (diagram, props) => {
   if (props.filter_string){
     update_with_search(diagram, props);
@@ -180,7 +189,10 @@ const update_diagram = (diagram, props) => {
 const standard_update = (diagram, props) => {
   const data = budget_measures_hierarchy_factory(props.selected_value, props.first_column, props.filtered_chapter_keys);
   const dont_fade = [];
-  render_diagram(diagram, props, data, standard_data_wrapper_node_rules, dont_fade);
+  const data_wrapper_node_rules = props.selected_value === "overview" ? 
+    funding_overview_data_wrapper_node_rules: 
+    standard_data_wrapper_node_rules;
+  render_diagram(diagram, props, data, data_wrapper_node_rules, dont_fade);
 }
 
 const update_with_search = (diagram, props) => {
