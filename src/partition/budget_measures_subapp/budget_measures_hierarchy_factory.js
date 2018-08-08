@@ -1,5 +1,6 @@
 import { text_maker } from "./budget_measure_text_provider.js";
 import { Subject } from '../../models/subject.js';
+import { GlossaryEntry } from '../../models/glossary.js';
 
 const {
   BudgetMeasure,
@@ -348,7 +349,7 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
           type: "measure_withheld_slice",
           value_type: "withheld",
           name: "TODO: Centrally withhled portion",
-          description: "TODO",
+          description: GlossaryEntry.lookup("BIV_WITH").definition,
           value: _.reduce(
             BudgetMeasure.lookup(node.id).data,
             (memo, data_row) => memo + data_row.withheld,
@@ -362,7 +363,7 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
           type: "measure_remaining_slice",
           value_type: "remaining",
           name: "TODO: Remaining portion",
-          description: "TODO",
+          description: GlossaryEntry.lookup("BIV_REMA").definition,
           value: _.reduce(
             BudgetMeasure.lookup(node.id).data,
             (memo, data_row) => memo + data_row.remaining,
