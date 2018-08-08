@@ -390,8 +390,11 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
       }
     })
     .eachAfter(node => {
-      if (node.type === "program"){
+      if (node.type === "program_allocation"){
         node.value_type = "allocated";
+      }
+      if (node.data.type === "dept" || node.data.type === "program_allocation"){
+        node.submeasures = get_node_submeasures(node, "allocated");
       }
       post_traversal_children_filter(node);
       post_traversal_search_string_set(node);
