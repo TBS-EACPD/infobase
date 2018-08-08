@@ -46,14 +46,10 @@ class StackedHbarChart extends React.Component {
   static getDerivedStateFromProps(props, state){
     const derived_number_of_pages = Math.ceil(props.data.length/props.items_per_page);
     
-    if (derived_number_of_pages === state.number_of_pages){
-      return null;
-    } else {
-      return {
-        pagination_index: 0, // Reset pagination index if number of pages has changed, probably desired and avoids getting an out of bounds pagination
-        number_of_pages: derived_number_of_pages,
-      };
-    }
+    return {
+      pagination_index: (state.pagination_index < derived_number_of_pages) ? state.pagination_index : derived_number_of_pages - 1,
+      number_of_pages: derived_number_of_pages,
+    };
   }
   render(){
     const { pagination_index } = this.state;
