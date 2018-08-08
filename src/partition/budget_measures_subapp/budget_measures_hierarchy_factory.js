@@ -375,14 +375,18 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
           parent_measure_id: node.id,
         };
 
-        return _.filter(
-          [
-            ...allocated_org_nodes,
-            measure_withheld_node,
-            measure_remaining_node,
-          ],
-          node => node.value !== 0,
-        );
+        if (measure_remaining_node.value !== node.value){
+          return _.filter(
+            [
+              ...allocated_org_nodes,
+              measure_withheld_node,
+              measure_remaining_node,
+            ],
+            node => node.value !== 0,
+          );
+        } else {
+          return []; // Don't return any nodes if 100% remaining
+        }
       } else if (node.type === "dept"){
         const measure_id = node.parent_measure_id;
         const org_id = node.id;

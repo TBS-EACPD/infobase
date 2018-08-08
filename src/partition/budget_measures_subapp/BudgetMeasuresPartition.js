@@ -24,7 +24,7 @@ const get_level_headers = (first_column, selected_value) => {
   if (selected_value === "overview"){
     return {
       "1": text_maker("budget_measure"),
-      "2": text_maker("funding_overview"),
+      "2": text_maker("funding_decisions_header"),
       "3": text_maker("program_allocations"),
     };
   }
