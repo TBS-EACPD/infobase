@@ -43,13 +43,49 @@ class StackedHbarChart extends React.Component {
   }
   render(){
     const { pagination_index } = this.state;
+    
+    const {
+      data,
+      items_per_page,
+    } = this.props;
+
+    const current_page = pagination_index+1;
+    const number_of_pages = Math.ceil(data.length/items_per_page);
+    
+    const on_first_page = pagination_index === 0;
+    const on_last_page = pagination_index === number_of_pages - 1;
+
+    const button_style = {
+      width: "10px", 
+      margin: "0px 15px",
+      textIndent: "-4px",
+    };
 
     return <Fragment>
       <div ref="graph_area" style={{position:'relative'}} />
       { this.props.paginate &&
         <div className="centerer">
-          <span style={{padding: "0px 15px"}} onClick={()=>this.setState({pagination_index: pagination_index + 1 })}> + </span>
-          <span style={{padding: "0px 15px"}} onClick={()=>this.setState({pagination_index: pagination_index - 1 })}> - </span>
+          <button
+            className="btn btn-ib-primary btn-block"
+            style={button_style}
+            disabled={on_first_page}
+            onClick={ () => this.setState({pagination_index: pagination_index - 1 }) }
+            aria-label={ "TODO" }
+          >
+            ▲
+          </button>
+          <span> 
+            {`${current_page} / ${number_of_pages}`}
+          </span>
+          <button
+            className="btn btn-ib-primary btn-block"
+            style={button_style}
+            disabled={on_last_page}
+            onClick={ () => this.setState({pagination_index: pagination_index + 1 }) }
+            aria-label={ "TODO" }
+          >
+            ▼
+          </button>
         </div>
       }
     </Fragment>;
