@@ -430,35 +430,38 @@ class BudgetMeasureHBars extends React.Component {
     
     let graph_ready_data;
     if (selected_value === 'funding_overview'){
-      graph_ready_data = _.map(data_by_selected_group, item => {
-        const modified_data = _.chain(biv_values)
-          .flatMap( key => 
-            _.chain([item.data])
-              .map(data => {
-                const value = data[key];
-                return [
-                  key + label_value_indicator(value), 
-                  value,
-                ]
-              })
-              .filter( pair => !_.isUndefined(pair[1]) )
-              .value()
-          )
-          .fromPairs()
-          .pickBy(value => value !== 0)
-          .map( (value, key) => ({
+      graph_ready_data = _.chain(data_by_selected_group)
+        .map(item => {
+          const modified_data = _.chain(biv_values)
+            .flatMap( key => 
+              _.chain([item.data])
+                .map(data => {
+                  const value = data[key];
+                  return [
+                    key + label_value_indicator(value), 
+                    value,
+                  ]
+                })
+                .filter( pair => !_.isUndefined(pair[1]) )
+                .value()
+            )
+            .fromPairs()
+            .pickBy(value => value !== 0)
+            .map( (value, key) => ({
+              ...item,
+              label: strip_value_indicator_from_label(key),
+              data: [value],
+            }))
+            .sortBy("label")
+            .value();
+          const modified_item = {
             ...item,
-            label: strip_value_indicator_from_label(key),
-            data: [value],
-          }))
-          .sortBy("label")
-          .value();
-        const modified_item = {
-          ...item,
-          data: modified_data,
-        };
-        return modified_item;
-      });
+            data: modified_data,
+          };
+          return modified_item;
+        })
+        .filter( item => item.data.length !== 0 )
+        .value();
     } else {
       graph_ready_data = _.chain(data_by_selected_group)
         .map( item => ({
@@ -469,6 +472,7 @@ class BudgetMeasureHBars extends React.Component {
             data: [ item.data[selected_value] ],
           }],
         }))
+        .filter( item => item.data.length !== 0 )
         .value();
     }
     
@@ -630,11 +634,13 @@ class BudgetMeasureHBars extends React.Component {
                 data = {graph_ready_data}
                 formater = {formats.compact1}
                 colors = {bar_colors}
-                bar_label_formater = { 
+                bar_label_formater = {
                   ({ label, link, is_link_out}) => {
                     return `<a href="${link}" target="${is_link_out ? "_blank" : "_self"}">${label}</a>`;
                   }
                 }
+                paginate = {true}
+                items_per_page = {10}
               />
             </div>
           </div>

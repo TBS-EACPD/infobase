@@ -9,6 +9,8 @@ import { Pack } from './pack.js';
 import { CirclePieChart as D3CirclePieChart } from './circle_chart.js';
 import { TwoSeriesBar } from './two_series_bar.js';
 
+import { Fragment } from 'react';
+
 const { create_graph_with_legend, create_a11y_table } = charts_index;
 
 /* 
@@ -33,8 +35,24 @@ const { create_graph_with_legend, create_a11y_table } = charts_index;
 /* TODO: should we just pass all props to the d3 instance ? */
 
 class StackedHbarChart extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      pagination_index: 0,
+    };
+  }
   render(){
-    return <div ref="graph_area" style={{position:'relative'}} />
+    const { pagination_index } = this.state;
+
+    return <Fragment>
+      <div ref="graph_area" style={{position:'relative'}} />
+      { this.props.paginate &&
+        <div className="centerer">
+          <span style={{padding: "0px 15px"}} onClick={()=>this.setState({pagination_index: pagination_index + 1 })}> + </span>
+          <span style={{padding: "0px 15px"}} onClick={()=>this.setState({pagination_index: pagination_index - 1 })}> - </span>
+        </div>
+      }
+    </Fragment>;
   }
   _render(){
     const {
@@ -42,10 +60,29 @@ class StackedHbarChart extends React.Component {
       formater,
       colors,
       percentage_mode,
+      paginate,
+      items_per_page,
     } = this.props;
-  
+    
+    let prepared_data;
+
+    if (paginate){
+      const { pagination_index } = this.state;
+      const start_index = pagination_index*items_per_page;
+      const end_index = (pagination_index+1)*items_per_page < data.length ?
+        (pagination_index+1)*items_per_page :
+        data.length;
+      
+      prepared_data = _.chain(data)
+        .sortBy( data => - _.reduce(data.data, (memo, data) => memo + data.data[0], 0) )
+        .slice(start_index, end_index)
+        .value();
+    } else {
+      prepared_data = data;
+    }
+
     this.graph_instance.render({
-      data,
+      data: prepared_data,
       formater,
       colors,
       percentage_mode,
@@ -75,7 +112,6 @@ class StackedHbarChart extends React.Component {
     );
       
     this._render()
-
   }
   componentDidUpdate(){
     this._render();
