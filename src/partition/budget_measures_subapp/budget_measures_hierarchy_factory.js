@@ -375,11 +375,14 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
           parent_measure_id: node.id,
         };
 
-        return [
-          ...allocated_org_nodes,
-          measure_withheld_node,
-          measure_remaining_node,
-        ];
+        return _.filter(
+          [
+            ...allocated_org_nodes,
+            measure_withheld_node,
+            measure_remaining_node,
+          ],
+          node => node.value !== 0,
+        );
       } else if (node.type === "dept"){
         const measure_id = node.parent_measure_id;
         const org_id = node.id;
@@ -390,8 +393,10 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
       }
     })
     .eachAfter(node => {
-      if (node.type === "program_allocation"){
+      if (node.data.type === "program_allocation"){
         node.value_type = "allocated";
+      } else {
+        node.value_type = node.data.value_type;
       }
       if (node.data.type === "dept" || node.data.type === "program_allocation"){
         node.submeasures = get_node_submeasures(node, "allocated");
