@@ -1,3 +1,4 @@
+import "./budget_measures_panel.scss";
 import text1 from "./budget_measures_panel.yaml";
 import text2 from "../../partition/budget_measures_subapp/BudgetMeasuresRoute.yaml";
 import {
@@ -178,7 +179,7 @@ const budget_measure_render = function({calculations, footnotes, sources}){
     footnotes: false,
     source: (subject) => [{
       html: text_maker("budget_route_title"),
-      href: "#budget-measures/" + (subject.level === "gov" ? "budget-measure" : "dept") + "/overview",
+      href: "#budget-measures/budget-measure/overview",
     }],
     calculate: calculate_functions[level_name],
     render: budget_measure_render,
@@ -562,14 +563,13 @@ class BudgetMeasureHBars extends React.Component {
           }
         }
       }
-      const dropdown_padding = "0px 15px";
-  
+
       return <div>
         { text_area }
         <div className = "frow">
-          <div className = "fcol-md-12" style = {{ width: "100%" }}>
+          <div className = "fcol-md-12 budget-panel-graph-area">
             <div className = 'centerer'>
-              <label style = {{padding: dropdown_padding, textAlign: "center"}}>
+              <label>
                 <TM k="budget_panel_group_by" />
                 <Select 
                   selected = {selected_grouping}
@@ -580,14 +580,10 @@ class BudgetMeasureHBars extends React.Component {
                     })
                   )}
                   onSelect = { id => this.setState({selected_grouping: id}) }
-                  style = {{
-                    display: 'block',
-                    margin: '10px auto',
-                  }}
                   className = "form-control"
                 />
               </label>
-              <label style = {{padding: dropdown_padding, textAlign: "center"}}>
+              <label>
                 <TM k="budget_panel_select_value" />
                 <Select 
                   selected = {selected_value}
@@ -598,10 +594,6 @@ class BudgetMeasureHBars extends React.Component {
                     })
                   )}
                   onSelect = { id => this.setState({selected_value: id}) }
-                  style = {{
-                    display: 'block',
-                    margin: '10px auto',
-                  }}
                   className = "form-control"
                 />
               </label>

@@ -1,0 +1,19 @@
+.budget-panel-graph-area {
+  width: 100%;
+
+  & > .centerer {
+    @media(max-width: 599px){
+      flex-direction: column;
+    }
+
+    label {
+      padding: 0px 15px;
+      text-align: center;
+
+      & > select {
+        display: block;
+        margin: 10px auto;
+      }
+    }
+  }
+}
