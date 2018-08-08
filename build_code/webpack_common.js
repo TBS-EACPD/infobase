@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const CDN_URL = process.env.CDN_URL || ".";
+const IS_DEV_LINK = process.env.IS_DEV_LINK || false;
 
 const get_rules = ({ 
   should_use_babel,
@@ -108,6 +109,7 @@ function get_plugins({ is_prod, language, commit_sha, envs }){
       DEV: !is_prod,
       APPLICATION_LANGUAGE: JSON.stringify(language),
       CDN_URL: JSON.stringify(CDN_URL),
+      IS_DEV_LINK,
     }),
   ];
 

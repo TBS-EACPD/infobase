@@ -71,6 +71,7 @@
     "is_a11y_mode": true,
     "CDN_URL": true,
     "process":true,
-    "__dirname": true
+    "__dirname": true,
+    "IS_DEV_LINK": true
   }
 }

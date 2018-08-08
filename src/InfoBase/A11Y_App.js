@@ -23,6 +23,7 @@ import { About } from '../about/about.js';
 import { GraphInventory } from '../graph_route/graph_route.js';
 import { EstimatesComparison } from "../EstimatesComparison/EstimatesComparison.js";
 import { InsertRuntimeFooterLinks } from '../core/InsertRuntimeFooterLinks.js';
+import { DevFip } from '../core/DevFip.js';
 
 
 export class App extends React.Component {
@@ -36,6 +37,7 @@ export class App extends React.Component {
         <TooltipActivator />
         <ReactUnmounter />
         <InsertRuntimeFooterLinks />
+        <DevFip />
         <EasyAccess />
         <Switch>
           <Route path="/metadata/:data_source?" component={MetaData}/>

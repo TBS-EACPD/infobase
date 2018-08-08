@@ -16,6 +16,7 @@ import { Home } from '../home/home.js';
 import { TooltipActivator } from '../glossary/Tooltips';
 import { EasyAccess } from '../core/EasyAccess';
 import { InsertRuntimeFooterLinks } from '../core/InsertRuntimeFooterLinks.js';
+import { DevFip } from '../core/DevFip.js';
 
 const LazyGraphRoute = ComponentLoader(async () => {
   const { GraphInventory } = await import('../graph_route/graph_route.js');
@@ -86,6 +87,7 @@ export class App extends React.Component {
   render(){
     return (
       <div tabIndex={-1} id="app-focus-root">
+        <DevFip />
         <TooltipActivator />
         <ReactUnmounter />
         <InsertRuntimeFooterLinks />

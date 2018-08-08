@@ -99,6 +99,7 @@ const common_svg = [
   //top left corner brand
   'src/InfoBase/sig-blk-en.svg',
   'src/InfoBase/sig-blk-fr.svg',
+  'src/InfoBase/infobase-dev-fip.svg',
 
   //caricature images for main 5 pages
   'src/home/partition.svg',
