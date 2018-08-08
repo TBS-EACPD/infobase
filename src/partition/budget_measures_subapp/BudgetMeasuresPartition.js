@@ -150,7 +150,7 @@ const popup_template = node => {
   return text_maker("budget_measure_popup_template", popup_options);
 }
 
-const standard_data_wrapper_node_rules = (node) => {
+const data_wrapper_node_rules_to_be_curried = (is_funding_overview, node) => {
   const root_value = _.last( node.ancestors() ).value;
   node.__value__ = node.value;
   node.open = true;
@@ -159,22 +159,17 @@ const standard_data_wrapper_node_rules = (node) => {
     const show = [_.head(_node.children)];
     const hide = _.tail(_node.children);
     const unhide = _.filter(hide, 
-      __node => ( 
-        __node.data.type !== "net_adjust" ? 
-          Math.abs(__node.value) > root_value/100 :
-          false
-      )
+      __node => {
+        if ( !is_funding_overview || (is_funding_overview && __node.depth !== 2) ){
+          return __node.data.type !== "net_adjust" ? 
+            Math.abs(__node.value) > root_value/100 :
+            false;
+        } else {
+          return true;
+        }
+      }
     );
     return [show.concat(unhide), _.difference(hide, unhide)];
-  }
-}
-
-const funding_overview_data_wrapper_node_rules = (node) => {
-  const root_value = _.last( node.ancestors() ).value;
-  node.__value__ = node.value;
-  node.open = true;
-  node.how_many_to_show = function(_node){
-    return [_node.children, []];
   }
 }
 
@@ -189,9 +184,7 @@ const update_diagram = (diagram, props) => {
 const standard_update = (diagram, props) => {
   const data = budget_measures_hierarchy_factory(props.selected_value, props.first_column, props.filtered_chapter_keys);
   const dont_fade = [];
-  const data_wrapper_node_rules = props.selected_value === "overview" ? 
-    funding_overview_data_wrapper_node_rules: 
-    standard_data_wrapper_node_rules;
+  const data_wrapper_node_rules = _.curry(data_wrapper_node_rules_to_be_curried)(props.selected_value === "overview");
   render_diagram(diagram, props, data, data_wrapper_node_rules, dont_fade);
 }
 
