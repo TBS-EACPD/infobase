@@ -51,6 +51,9 @@ in_funding_for:
 allocated_to:
   en: allocated to
   fr: TODO
+caps_allocated_to:
+  en: Allocated to
+  fr: TODO
 withheld_from:
   en: centrally withheld from
   fr: TODO
@@ -68,8 +71,8 @@ lang_formated_zero:
 tb_approved_funds:
   en: TB approved funds
   fr: TODO
-remaining_funds:
-  en: Remaining funds
+program_allocations:
+  en: Program Allocations
   fr: TODO
 
 see_it_in_the_budget:

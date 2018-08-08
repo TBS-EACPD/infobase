@@ -21,6 +21,14 @@ const formatter = node => {
 }
 
 const get_level_headers = (first_column, selected_value) => {
+  if (selected_value === "overview"){
+    return {
+      "1": text_maker("budget_measure"),
+      "2": text_maker("funding_overview"),
+      "3": text_maker("program_allocations"),
+    };
+  }
+
   let first_two_headers;
   if (first_column === "dept"){
     first_two_headers = {
@@ -46,6 +54,7 @@ const get_level_headers = (first_column, selected_value) => {
 
 
 const selected_value_specifier_by_selected_value = {
+  "overview": text_maker("in_funding_for"),
   "funding": text_maker("in_funding_for"),
   "allocated": text_maker("allocated_to"),
   "withheld": text_maker("withheld_from"),
@@ -53,6 +62,7 @@ const selected_value_specifier_by_selected_value = {
 };
 const budget_sourced_date_note = text_maker("budget_sourced_date_note");
 const additional_root_note_by_selected_value = {
+  "overview": "",
   "funding": "",
   "allocated": budget_sourced_date_note,
   "withheld": budget_sourced_date_note,

@@ -34,11 +34,8 @@ budget_allocation_tbd:
   fr: Affectation à determiner
 
 funding_overview:
-  transform: [handlebars]
-  en: |
-    Funding Overview
-  fr: |
-    TODO
+  en: Funding Overview
+  fr: TODO
 
 budget_route_top_text_notes:
   transform: [handlebars, markdown]
