@@ -5,6 +5,7 @@ export class DevFip extends React.Component {
       //   <div class="canada-logo"> DEV </div>
       // `;
       document.querySelector(".canada-logo").setAttribute("data","./svg/infobase-dev-fip.svg");
+      document.querySelector('#ib-site-header').style.backgroundColor = "red";
       
     }
     
