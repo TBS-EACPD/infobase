@@ -1,4 +1,4 @@
-.budget-panel-graph-area {
+.budget-panel-controls-and-graph {
   width: 100%;
 
   & > .centerer {
@@ -15,5 +15,18 @@
         margin: 10px auto;
       }
     }
+  }
+
+  & > .budget-panel-graph-label {
+    position: absolute;
+    font-weight: 700;
+    font-size: 12px;
+    margin-left: 20px;
+  }
+
+  & > .budget-panel-graph {
+    max-height: 700px;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }

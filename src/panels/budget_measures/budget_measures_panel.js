@@ -567,7 +567,7 @@ class BudgetMeasureHBars extends React.Component {
       return <div>
         { text_area }
         <div className = "frow">
-          <div className = "fcol-md-12 budget-panel-graph-area">
+          <div className = "fcol-md-12 budget-panel-controls-and-graph">
             <div className = 'centerer'>
               <label>
                 <TM k="budget_panel_group_by" />
@@ -613,14 +613,7 @@ class BudgetMeasureHBars extends React.Component {
                 />
               }
             </div>
-            <div
-              style={{
-                position: "absolute",
-                fontWeight: "700",
-                fontSize: "12px",
-                marginLeft: "20px",
-              }}
-            >
+            <div className = 'budget-panel-graph-label'>
               <span>
                 { 
                   _.chain(grouping_options)
@@ -630,13 +623,7 @@ class BudgetMeasureHBars extends React.Component {
                 }
               </span>
             </div>
-            <div 
-              style={{
-                maxHeight: '700px',
-                overflowY: 'auto',
-                overflowX: 'hidden',
-              }}
-            >
+            <div className = 'budget-panel-graph'>
               <StackedHbarChart
                 font_size="12px"
                 bar_height={60} 
