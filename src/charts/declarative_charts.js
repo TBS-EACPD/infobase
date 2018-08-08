@@ -73,7 +73,7 @@ class StackedHbarChart extends React.Component {
 
     return <Fragment>
       <div ref="graph_area" style={{position:'relative'}} />
-      { this.props.paginate &&
+      { (this.props.paginate && number_of_pages > 1) &&
         <div className="centerer">
           <button
             className="btn btn-ib-primary btn-block"
