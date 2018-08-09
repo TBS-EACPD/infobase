@@ -460,7 +460,7 @@ class BudgetMeasureHBars extends React.Component {
           };
           return modified_item;
         })
-        .filter( item => item.data.length !== 0 )
+        .filter( item => _.reduce(item.data, (memo, data_item) => memo + data_item.data[0], 0) !== 0 )
         .value();
     } else {
       graph_ready_data = _.chain(data_by_selected_group)
@@ -472,7 +472,7 @@ class BudgetMeasureHBars extends React.Component {
             data: [ item.data[selected_value] ],
           }],
         }))
-        .filter( item => item.data.length !== 0 )
+        .filter( item => _.reduce(item.data, (memo, data_item) => memo + data_item.data[0], 0) !== 0 )
         .value();
     }
     
