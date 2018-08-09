@@ -325,6 +325,73 @@ class BudgetMeasureHBars extends React.Component {
     const strip_value_indicator_from_label = (label) => label
       .replace("__negative_valued", "")
       .replace("__positive_valued", "");
+    
+    const get_org_budget_data_from_all_measure_data = (data) => {
+      return _.chain(data)
+        .flatMap( measure => measure.data)
+        .groupBy("org_id")
+        .map(
+          (org_group, org_id) => {
+            const dept = Dept.lookup(org_id);
+            if ( _.isUndefined(dept) ){
+              return false; // fake dept code case, "to be allocated" funds etc.
+            } else {
+              return {
+                key: org_id,
+                label: dept.name,
+                link: infograph_href_template(dept, "financial"),
+                data: _.reduce(
+                  org_group,
+                  (memo, measure_row) => _.mapValues(
+                    memo,
+                    (value, key) => value + measure_row[key]
+                  ),
+                  _.chain(budget_values)
+                    .keys()
+                    .map(value_key => [value_key, 0])
+                    .fromPairs()
+                    .value()
+                ),  
+              };
+            }
+          }
+        )
+        .filter()
+        .value();
+    };
+    const get_program_allocation_data_from_dept_data = (data) => {
+      return _.chain(data)
+        .flatMap( measure => _.chain(measure.data)
+          .filter(measure_row => +measure_row.org_id === subject.id)
+          .map("program_allocations")
+          .value()
+        )
+        .reduce(
+          (memo, program_allocations) => {
+            _.each(
+              program_allocations, 
+              (program_allocation, program_id) => {
+                const memo_value = memo[program_id] || 0;
+                memo[program_id] = memo_value + program_allocation;
+              }
+            )
+            return memo;
+          },
+          {},
+        )
+        .map(
+          (program_allocation, program_id) => {
+            const program = Program.lookup(program_id) || CRSO.lookup(program_id);
+            return {
+              key: program_id,
+              label: program.name,
+              link: infograph_href_template(program, "financial"),
+              data: {"allocated": program_allocation},
+            };
+          }
+        )
+        .value();
+    };
 
     let data_by_selected_group;
     if (selected_grouping === 'measures'){
@@ -363,69 +430,9 @@ class BudgetMeasureHBars extends React.Component {
         )
         .value();
     } else if (selected_grouping === 'orgs'){
-      data_by_selected_group = _.chain(data)
-        .flatMap( measure => measure.data)
-        .groupBy("org_id")
-        .map(
-          (org_group, org_id) => {
-            const dept = Dept.lookup(org_id);
-            if ( _.isUndefined(dept) ){
-              return false; // fake dept code case, "to be allocated" funds etc.
-            } else {
-              return {
-                key: org_id,
-                label: dept.name,
-                link: infograph_href_template(dept, "financial"),
-                data: _.reduce(
-                  org_group,
-                  (memo, measure_row) => _.mapValues(
-                    memo,
-                    (value, key) => value + measure_row[key]
-                  ),
-                  _.chain(budget_values)
-                    .keys()
-                    .map(value_key => [value_key, 0])
-                    .fromPairs()
-                    .value()
-                ),  
-              };
-            }
-          }
-        )
-        .filter()
-        .value();
+      data_by_selected_group = get_org_budget_data_from_all_measure_data(data);
     } else if (selected_grouping === 'programs'){
-      data_by_selected_group =_.chain(data)
-        .flatMap( measure => _.chain(measure.data)
-          .filter(measure_row => +measure_row.org_id === subject.id)
-          .map("program_allocations")
-          .value()
-        )
-        .reduce(
-          (memo, program_allocations) => {
-            _.each(
-              program_allocations, 
-              (program_allocation, program_id) => {
-                const memo_value = memo[program_id] || 0;
-                memo[program_id] = memo_value + program_allocation;
-              }
-            )
-            return memo;
-          },
-          {},
-        )
-        .map(
-          (program_allocation, program_id) => {
-            const program = Program.lookup(program_id) || CRSO.lookup(program_id);
-            return {
-              key: program_id,
-              label: program.name,
-              link: infograph_href_template(program, "financial"),
-              data: {"allocated": program_allocation},
-            };
-          }
-        )
-        .value();
+      data_by_selected_group = get_program_allocation_data_from_dept_data(data);
     }
     
     let graph_ready_data;
@@ -503,10 +510,15 @@ class BudgetMeasureHBars extends React.Component {
     </div>;
   
     if(window.is_a11y_mode){
+
+      const program_allocation_data = subject.level === "dept" ?
+        get_program_allocation_data_from_dept_data(data) :
+        [];
+
       return <div>
         { text_area }
         <A11YTable
-          table_name = { text_maker("budget_name_header") }
+          table_name = { text_maker("budget_measure_a11y_table_title") }
           data = {_.map(data, 
             (budget_measure_item) => ({
               label: budget_measure_item.name,
@@ -521,17 +533,17 @@ class BudgetMeasureHBars extends React.Component {
                 />,
                 <Format
                   key = { budget_measure_item.id + (treatAsProgram(subject) ? "col3" : "col4") } 
-                  type = "compact1" 
+                  type = "compact1"
                   content = { budget_measure_item.measure_data.allocated } 
                 />,
                 !treatAsProgram(subject) && <Format
                   key = { budget_measure_item.id + "col5" } 
-                  type = "compact1" 
+                  type = "compact1"
                   content = { budget_measure_item.measure_data.withheld } 
                 />,
                 !treatAsProgram(subject) && <Format
                   key = { budget_measure_item.id + "col6" } 
-                  type = "compact1" 
+                  type = "compact1"
                   content = { budget_measure_item.measure_data.remaining } 
                 />,
                 <a 
@@ -553,6 +565,66 @@ class BudgetMeasureHBars extends React.Component {
             text_maker("budget_panel_a11y_link_header"),
           ])}
         />
+        { subject.level === "gov" &&
+          <A11YTable
+            table_name = { text_maker("budget_org_a11y_table_title") }
+            data = {_.map( get_org_budget_data_from_all_measure_data(data),
+              (org_item) => ({
+                label: org_item.label,
+                data: _.filter([
+                  <Format
+                    key = { org_item.key + "col3" } 
+                    type = "compact1" 
+                    content = { org_item.data.funding } 
+                  />,
+                  <Format
+                    key = { org_item.key + "col4" } 
+                    type = "compact1"
+                    content = { org_item.data.allocated } 
+                  />,
+                  <Format
+                    key = { org_item.key + "col5" } 
+                    type = "compact1"
+                    content = { org_item.data.withheld } 
+                  />,
+                  <Format
+                    key = { org_item.key + "col6" } 
+                    type = "compact1"
+                    content = { org_item.data.remaining } 
+                  />,
+                ]),
+              })
+            )}
+            label_col_header = { text_maker("org") }
+            data_col_headers = {_.filter([
+              budget_values.funding.text,
+              budget_values.allocated.text,
+              budget_values.withheld.text,
+              budget_values.remaining.text,
+            ])}
+          />
+        }
+        { subject.level === "dept" && !_.isEmpty(program_allocation_data) &&
+          <A11YTable
+            table_name = { text_maker("budget_program_a11y_table_title") }
+            data = {_.map( program_allocation_data, 
+              (program_item) => ({
+                label: program_item.label,
+                data: _.filter([
+                  <Format
+                    key = { program_item.key + "col3" } 
+                    type = "compact1" 
+                    content = { program_item.data.allocated } 
+                  />,
+                ]),
+              })
+            )}
+            label_col_header = { text_maker("program") }
+            data_col_headers = {_.filter([
+              budget_values.allocated.text,
+            ])}
+          />
+        }
       </div>;
     } else {
       const biv_value_colors = infobase_colors(biv_values);
