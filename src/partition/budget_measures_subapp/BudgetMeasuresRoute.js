@@ -91,6 +91,8 @@ export class BudgetMeasuresRoute extends React.Component {
       },
     } = this.props;
 
+    const stats = {}; // todo
+
     return (
       <StandardRouteContainer
         ref = "container"
@@ -117,7 +119,7 @@ export class BudgetMeasuresRoute extends React.Component {
               <TextMaker text_key="budget_route_top_text" />
               <Details
                 summary_content={ <TextMaker text_key="budget_stats_title" /> }
-                content={ <div>TODO</div> }
+                content={ <TextMaker text_key="budget_summary_stats" args={stats} /> }
               />
             </div>
             { !window.is_a11y_mode &&

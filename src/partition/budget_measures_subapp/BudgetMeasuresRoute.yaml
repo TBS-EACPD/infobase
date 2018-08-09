@@ -41,6 +41,16 @@ budget_stats_title:
   en: Summary statistics
   fr: TODO
 
+budget_summary_stats:
+  transform: [handlebars, markdown]
+  en: |
+    * Budget 2018 provides funding totalling **X** across **X** budget measures for **{{gt "budget_route_year"}}**
+    * As of **{{gt "budget_data_sourced_date"}}**, **X** funding has been allocated, **X** has been centrally withheld, and **X** remains
+    * **X** of the allocated funding has gone to **X** programs, the other **X** has gone to {{gl_tt "internal services" "INT_SERVICES"}}
+    * **X** budget measures have had the full ammount of their funding approved, with $0 in remaining funds for **{{gt "budget_route_year"}}**
+  fr: |
+    * TODO
+
 budget_route_top_text_notes:
   transform: [handlebars, markdown]
   en: |
