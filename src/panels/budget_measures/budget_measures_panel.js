@@ -40,9 +40,14 @@ const {
 
 const { text_maker, TM } = create_text_maker_component([text1,text2]);
 
-const gov_dept_calculate_stats_common = (data) => {
+const calculate_stats_common = (data) => {
   const total_funding = _.reduce(data,
     (total, budget_measure) => total + budget_measure.measure_data.funding, 
+    0
+  );
+
+  const total_allocated = _.reduce(data,
+    (total, budget_measure) => total + budget_measure.measure_data.allocated, 
     0
   );
 
@@ -56,6 +61,7 @@ const gov_dept_calculate_stats_common = (data) => {
 
   return {
     total_funding,
+    total_allocated,
     measure_count,
     chapter_count,
     multiple_measures: measure_count > 1,
@@ -87,14 +93,14 @@ const crso_program_calculate = (subject, info, options) => {
         })
         .value(),
     }))
-    .filter(measure => measure.data.allocated !== 0)
+    .filter(measure => measure.measure_data.allocated !== 0)
     .value();
-  
+
   if (!_.isEmpty(program_measures_with_data_filtered)){
     return {
       data: program_measures_with_data_filtered,
       subject,
-      info: {}, // TODO, will have different info calc than gov and dept, haven't written text yet though
+      info: calculate_stats_common(program_measures_with_data_filtered),
     };
   } else {
     return false;
@@ -125,7 +131,7 @@ const calculate_functions = {
       return {
         data: all_measures_with_data_rolled_up,
         subject,
-        info: gov_dept_calculate_stats_common(all_measures_with_data_rolled_up),
+        info: calculate_stats_common(all_measures_with_data_rolled_up),
       };
     } else {
       return false;
@@ -146,7 +152,7 @@ const calculate_functions = {
       return {
         data: org_measures_with_data_filtered,
         subject,
-        info: gov_dept_calculate_stats_common(org_measures_with_data_filtered),
+        info: calculate_stats_common(org_measures_with_data_filtered),
       };
     } else {
       return false;
