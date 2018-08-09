@@ -68,7 +68,6 @@ class StackedHbarChart extends React.Component {
     const button_style = {
       width: "10px", 
       margin: "0px 15px",
-      textIndent: "-4px",
     };
 
     return <Fragment>
@@ -77,7 +76,10 @@ class StackedHbarChart extends React.Component {
         <div className="centerer">
           <button
             className="btn btn-ib-primary btn-block"
-            style={button_style}
+            style={{
+              ...button_style,
+              textIndent: "-4.5px",
+            }}
             disabled={on_first_page}
             onClick={ () => this.setState({pagination_index: pagination_index - 1 }) }
             aria-label={ "TODO" }
@@ -89,7 +91,10 @@ class StackedHbarChart extends React.Component {
           </span>
           <button
             className="btn btn-ib-primary btn-block"
-            style={button_style}
+            style={{
+              ...button_style,
+              textIndent: "-3.5px",
+            }}
             disabled={on_last_page}
             onClick={ () => this.setState({pagination_index: pagination_index + 1 }) }
             aria-label={ "TODO" }
