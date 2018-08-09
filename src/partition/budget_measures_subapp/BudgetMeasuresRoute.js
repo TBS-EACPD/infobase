@@ -4,6 +4,7 @@ import { businessConstants } from '../../models/businessConstants.js';
 import { ensure_loaded } from '../../core/lazy_loader.js';
 import { StandardRouteContainer } from '../../core/NavComponents.js';
 import { SpinnerWrapper } from '../../util_components';
+import { Details } from '../../components/Details.js';
 
 import {
   text_maker,
@@ -107,12 +108,17 @@ export class BudgetMeasuresRoute extends React.Component {
             <div
               style={{
                 display: "flex",
+                flexDirection: "column",
                 justifyContent: "center",
                 padding: "0px 20px 5px 20px",
                 fontSize: "19px",
               }}
             >
               <TextMaker text_key="budget_route_top_text" />
+              <Details
+                summary_content={ <TextMaker text_key="budget_stats_title" /> }
+                content={ <div>TODO</div> }
+              />
             </div>
             { !window.is_a11y_mode &&
               <BudgetMeasuresControls

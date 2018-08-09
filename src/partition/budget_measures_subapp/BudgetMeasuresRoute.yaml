@@ -37,6 +37,10 @@ funding_overview:
   en: Funding Overview
   fr: TODO
 
+budget_stats_title:
+  en: Summary statistics
+  fr: TODO
+
 budget_route_top_text_notes:
   transform: [handlebars, markdown]
   en: |
