@@ -16,6 +16,8 @@ import { BudgetMeasuresPartition } from './BudgetMeasuresPartition.js';
 
 import { BudgetMeasuresA11yContent } from './BudgetMeasuresA11yContent.js';
 
+const { BudgetMeasure } = Subject;
+
 const { budget_values } = businessConstants;
 
 const first_column_options = [
@@ -47,6 +49,79 @@ const validate_route = (first_column, selected_value, history) => {
   }
 }
 
+const calculate_summary_stats = () => {
+  const all_budget_measures = BudgetMeasure.get_all();
+  const reduce_by_budget_value = (data) => _.chain(budget_values)
+    .keys()
+    .map( key => [
+      key,
+      _.reduce(data, (memo, data_row) => memo + data_row[key], 0),
+    ])
+    .fromPairs()
+    .value()
+  const rolled_up_data_rows = _.map(all_budget_measures, budget_measure => reduce_by_budget_value(budget_measure.data) );
+
+  const total_allocations_by_programs_and_internal_services = _.chain(all_budget_measures)
+    .flatMap( budget_measure => _.map(
+      budget_measure.data, 
+      data_row => _.map(
+        data_row.program_allocations,
+        (program_allocation, program_id) => [program_id, program_allocation] 
+      )
+    ))
+    .filter( program_allocation_pairs => !_.isEmpty(program_allocation_pairs) )
+    .flatten()
+    .groupBy( program_allocation_pairs => program_allocation_pairs[0].includes("ISS00") ?
+      "internal_services" :
+      "programs"
+    )
+    .mapValues( grouped_program_allocation_pairs => _.chain(grouped_program_allocation_pairs)
+      .groupBy( program_allocation_pair => program_allocation_pair[0] )
+      .mapValues( program_allocation_pairs => _.reduce(
+        program_allocation_pairs, 
+        (sum, program_allocation_pair) => sum + program_allocation_pair[1], 
+        0
+      ))
+      .value()
+    )
+    .value();
+
+  const funding_data_totals = reduce_by_budget_value(rolled_up_data_rows);
+
+  const measure_count = all_budget_measures.length;
+
+  const total_program_allocated = _.reduce(
+    total_allocations_by_programs_and_internal_services.programs,
+    (sum, program_total_allocation) => sum + program_total_allocation,
+    0
+  );
+  
+  const allocated_to_program_count = _.size(total_allocations_by_programs_and_internal_services.programs);
+
+  const total_internal_service_allocated = _.reduce(
+    total_allocations_by_programs_and_internal_services.internal_services,
+    (sum, internal_service_total_allocation) => sum + internal_service_total_allocation,
+    0
+  );
+  
+  const no_remaining_funds_count = _.filter(
+    rolled_up_data_rows,
+    data_row => data_row.remaining === 0
+  ).length;
+
+  return {
+    measure_count,
+    total_funding: funding_data_totals.funding,
+    total_allocated: funding_data_totals.allocated,
+    total_withheld: funding_data_totals.withheld,
+    total_remaining: funding_data_totals.remaining,
+    total_program_allocated,
+    allocated_to_program_count,
+    total_internal_service_allocated,
+    no_remaining_funds_count,
+  };
+}
+
 export class BudgetMeasuresRoute extends React.Component {
   constructor(props){
     super();
@@ -63,7 +138,7 @@ export class BudgetMeasuresRoute extends React.Component {
   }
   componentDidMount(){
     ensure_loaded({
-      subject: Subject.BudgetMeasure,
+      subject: BudgetMeasure,
     }).then( () => {
       this.setState({loading: false});
     });
@@ -91,7 +166,9 @@ export class BudgetMeasuresRoute extends React.Component {
       },
     } = this.props;
 
-    const stats = {}; // todo
+    if ( !loading && _.isUndefined(this.summary_stats) ){
+      this.summary_stats = calculate_summary_stats();
+    }
 
     return (
       <StandardRouteContainer
@@ -119,7 +196,7 @@ export class BudgetMeasuresRoute extends React.Component {
               <TextMaker text_key="budget_route_top_text" />
               <Details
                 summary_content={ <TextMaker text_key="budget_stats_title" /> }
-                content={ <TextMaker text_key="budget_summary_stats" args={stats} /> }
+                content={ <TextMaker text_key="budget_summary_stats" args={this.summary_stats} /> }
               />
             </div>
             { !window.is_a11y_mode &&
