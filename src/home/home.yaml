@@ -8,8 +8,8 @@ home_finance_title:
 
 home_finance_intro:
   transform: [handlebars,markdown]
-  en: We spent {{fmt_compact_written spent_last_year}} in {{pa_last_year}}
-  fr: Nous avons dépensé {{fmt_compact_written spent_last_year}} en {{pa_last_year}}
+  en: We spent {{fmt_compact1_written spent_last_year}} in {{pa_last_year}}
+  fr: Nous avons dépensé {{fmt_compact1_written spent_last_year}} en {{pa_last_year}}
 
 home_ppl_title:
   en: People

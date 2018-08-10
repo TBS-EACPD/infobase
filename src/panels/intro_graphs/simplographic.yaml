@@ -5,13 +5,13 @@ simplographic_spending_title:
 simplographic_spending_text:
   transform: [handlebars,markdown]
   en: |
-    In **{{pa_last_year}}**, the government spent **<a href="{{t4_link}}">{{fmt_compact_written gov_exp_pa_last_year}}</a>**. The three largest items in terms of spending were:
+    In **{{pa_last_year}}**, the government spent **<a href="{{t4_link}}">{{fmt_compact1_written gov_exp_pa_last_year}}</a>**. The three largest items in terms of spending were:
 
     {{#each largest_items}} 
       * {{this.desc}} - {{infograph_link this.subject}}
     {{/each}}
   fr : |
-      En **{{pa_last_year}}**, le gouvernement a dépensé **<a href="{{t4_link}}">{{fmt_compact_written gov_exp_pa_last_year}}</a>**. Les trois items suivant représentaient la plus grande partie des dépenses :
+      En **{{pa_last_year}}**, le gouvernement a dépensé **<a href="{{t4_link}}">{{fmt_compact1_written gov_exp_pa_last_year}}</a>**. Les trois items suivant représentaient la plus grande partie des dépenses :
 
       {{#each largest_items}} 
         * {{this.desc}} - {{infograph_link this.subject}}

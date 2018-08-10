@@ -1,7 +1,7 @@
 // module makes use of 6. [accountingJS(http://openexchangerates.github.io/accounting.js/)
 //
 // for properly formating numbers in multiple formats in both English and French
-// * [compact written](#compact_written) -> 2000000000 -> 2.0 billion
+// * [compact written](#compact1_written) -> 2000000000 -> 2.0 billion
 // * [compact1 ](#compact1) : 2100000000 -> 2.1 B
 // * [compact0](#compact0) : 2100000000 -> 2.0 B
 // * [percentage](#percentage) : 0.234231 -> 23.4%
@@ -69,30 +69,38 @@ const trailing_zeroes_regex = (
 );
 const remove_trailing_zeroes_from_string = str => _.isString(str) && str.replace(trailing_zeroes_regex,"");
 
-var types_to_format = {
-  //<div id='compact_written'></div>
-  "compact_written" : function(val,lang,options){
-    var format;
-    if (options.raw){
-      format = {
-        en: "$%v %s", 
-        fr: "%v %s de dollars", 
-      };
-    }else {
-      format = {
-        en: "<span class='text-nowrap'>$%v</span> %s", 
-        fr: "<span class='text-nowrap'>%v %s</span> de dollars", 
-      };
-    }
-    return compact(val,lang, {
+const compact_written = (precision,val,lang,options) => {
+  var format;
+  if (options.raw){
+    format = {
+      en: "$%v %s", 
+      fr: "%v %s de dollars", 
+    };
+  } else {
+    format = {
+      en: "<span class='text-nowrap'>$%v</span> %s", 
+      fr: "<span class='text-nowrap'>%v %s</span> de dollars", 
+    };
+  }
+  return compact(
+    val,
+    lang,
+    {
       format : format,
       1000000000 :  {en : 'billion', 
         fr: 'milliards' },
       1000000 : {en : 'million', fr: 'millions'},
       1000 : {en : 'thousand', fr: 'milliers'},
       999 : {en : '', fr: ''},
-    },1);
-  },
+    },
+    precision
+  );
+};
+
+var types_to_format = {
+  //<div id='compact1_written'></div>
+  "compact1_written" : _.curry(compact_written)(1),
+  "compact2_written" : _.curry(compact_written)(2),
   //<div id='compact1'></div>
   "compact" : function(val, lang,options){
     var format;
@@ -119,6 +127,10 @@ var types_to_format = {
   //<div id='compact0'></div>
   "compact1" : function(val, lang,options){
     options.precision = 1;
+    return this.compact(val, lang,options);
+  },
+  "compact2" : function(val, lang,options){
+    options.precision = 2;
     return this.compact(val, lang,options);
   },
   //<div id='percentage'></div>

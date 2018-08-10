@@ -17,8 +17,8 @@ crso_by_prog_exp_or_ftes:
    with **{{crso_prg_top1}}** ({{fmt_big_int_real crso_prg_top1_amnt}} FTEs) being the largest in terms of of employment,
    {{#if crso_prg_top2_amnt}} followed by **{{crso_prg_top2}}** ({{fmt_big_int_real crso_prg_top2_amnt}} FTEs). {{else}}. {{/if}}
    {{else}}
-   with **{{fmt_compact_written crso_prg_top1}}** ({{fmt_compact_written crso_prg_top1_amnt}}) being the largest in terms of spending,
-   {{#if crso_prg_top2_amnt}} followed by **{{crso_prg_top2}}** ({{fmt_compact_written crso_prg_top2_amnt}}). {{else}}. {{/if}}
+   with **{{fmt_compact1_written crso_prg_top1}}** ({{fmt_compact1_written crso_prg_top1_amnt}}) being the largest in terms of spending,
+   {{#if crso_prg_top2_amnt}} followed by **{{crso_prg_top2}}** ({{fmt_compact1_written crso_prg_top2_amnt}}). {{else}}. {{/if}}
    {{/if}}
   
   fr: |
@@ -27,8 +27,8 @@ crso_by_prog_exp_or_ftes:
    Le plus important en termes d'employés étant **{{crso_prg_top1}}** ({{fmt_big_int_real crso_prg_top1_amnt}} ETP)
    {{#if crso_prg_top2_amnt}} suivi par **{{crso_prg_top2}}** ({{fmt_big_int_real crso_prg_top2_amnt}} ETP). {{else}}. {{/if}}
    {{else}}
-   Le plus important en terme de dépenses étant **{{crso_prg_top1}}** ({{fmt_compact_written crso_prg_top1_amnt}})
-   {{#if crso_prg_top2_amnt}} suivi par **{{crso_prg_top2}}** ({{fmt_compact_written crso_prg_top2_amnt}}). {{else}}. {{/if}}
+   Le plus important en terme de dépenses étant **{{crso_prg_top1}}** ({{fmt_compact1_written crso_prg_top1_amnt}})
+   {{#if crso_prg_top2_amnt}} suivi par **{{crso_prg_top2}}** ({{fmt_compact1_written crso_prg_top2_amnt}}). {{else}}. {{/if}}
    {{/if}}
 
 

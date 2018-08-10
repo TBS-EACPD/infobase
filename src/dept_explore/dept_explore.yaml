@@ -26,12 +26,12 @@ explore_dept_text:
   transform: [handlebars, markdown]
   en: |
    Organizations are grouped by their ministerial portfolio size based on their total 
-   expenditures in **{{pa_last_year}}** (totaling **{{fmt_compact_written gov_exp_pa_last_year}}** for the government).  Click on any 
+   expenditures in **{{pa_last_year}}** (totaling **{{fmt_compact1_written gov_exp_pa_last_year}}** for the government).  Click on any 
    of the groupings to see the organizations or ministries within.
 
   fr: |
    Les organisations sont regroupées selon la taille de leur portefeuille ministériel, laquelle est 
-   déterminée par le total de leurs dépenses pour **{{pa_last_year}}** (un total de **{{fmt_compact_written gov_exp_pa_last_year}}** pour le gouvernement). 
+   déterminée par le total de leurs dépenses pour **{{pa_last_year}}** (un total de **{{fmt_compact1_written gov_exp_pa_last_year}}** pour le gouvernement). 
    Cliquez sur l’un des groupes pour voir les organisations ou ministères qu’il contient.
 
 explore_dept-type_text:
@@ -54,7 +54,7 @@ explore_people-total_text:
    Click on any of the groupings to see the number of FTEs per organizations.
 
   fr: |
-    Les organisations sont regroupées en fonction du nombre {{gl_tt "d'équivalents temps-plein (ETP)" "FTE"}} employés en **{{pa_last_year}}** (totalisant **{{fmt_compact_written gov_fte_pa_last_year}}** pour le gouvernement). 
+    Les organisations sont regroupées en fonction du nombre {{gl_tt "d'équivalents temps-plein (ETP)" "FTE"}} employés en **{{pa_last_year}}** (totalisant **{{fmt_compact1_written gov_fte_pa_last_year}}** pour le gouvernement). 
     Cliquez sur n'importe quel groupe pour connaître le nombre d'ETP par organisation.
 
 

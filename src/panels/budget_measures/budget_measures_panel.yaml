@@ -54,13 +54,13 @@ gov_budget_measures_panel_text:
 dept_budget_measures_panel_text:
   transform: [handlebars, markdown]
   en: |
-    Budget 2018 provides **{{subj_name subject}}** with up to **{{fmt_compact_written total_funding}}** in additional funding for **{{gt "budget_route_year"}}**.
+    Budget 2018 provides **{{subj_name subject}}** with up to **{{fmt_compact1_written total_funding}}** in additional funding for **{{gt "budget_route_year"}}**.
     {{> "budget_measure_stats_partial_en"}}
     For additional government-wide information on budget measures, see our [Budget Tracker](#budget-measures/budget-measure) page.  
 
     {{{gt "budget_route_top_text_notes"}}}
   fr: |
-    Le budget de 2018 prévoit accorder jusqu’à **{{fmt_compact_written total_funding}}** de fonds supplémentaires à **{{subj_name subject}}** pour {{gt "budget_route_year"}}.
+    Le budget de 2018 prévoit accorder jusqu’à **{{fmt_compact1_written total_funding}}** de fonds supplémentaires à **{{subj_name subject}}** pour {{gt "budget_route_year"}}.
     {{> "budget_measure_stats_partial_fr"}}
     Pour obtenir de plus amples renseignements sur les mesures budgétaires du gouvernement, consultez la page « [Suivi budgétaire](#budget-measures/budget-measure/overview) ».  
 
@@ -69,7 +69,7 @@ dept_budget_measures_panel_text:
 program_crso_budget_measures_panel_text:
   transform: [handlebars, markdown]
   en: |
-    **{{subj_name subject}}** has been {{gl_tt "allocated" "BIV_ALLO"}} **{{fmt_compact_written total_allocated}}** through **{{measure_count}}** {{gt "budget_name"}} 
+    **{{subj_name subject}}** has been {{gl_tt "allocated" "BIV_ALLO"}} **{{fmt_compact1_written total_allocated}}** through **{{measure_count}}** {{gt "budget_name"}} 
     {{#if multiple_measures}}measures{{else}}measure{{/if}} for **{{gt "budget_route_year"}}**, as of **{{gt "budget_data_sourced_date"}}**.
     All values displayed here are for **{{gt "budget_route_year"}}** funding and are on an Estimates basis as per {{ext_link "Main Estimates 2018-19" "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates/2018-19-estimates/2018-19-sources-uses-budget-implementation-vote-department.html"}}.
     For additional government-wide information on budget measures, see our [Budget Tracker](#budget-measures/budget-measure/overview) page.

@@ -194,10 +194,12 @@ export class BudgetMeasuresRoute extends React.Component {
               }}
             >
               <TextMaker text_key="budget_route_top_text" />
-              <Details
-                summary_content={ <TextMaker text_key="budget_stats_title" /> }
-                content={ <TextMaker text_key="budget_summary_stats" args={this.summary_stats} /> }
-              />
+              <div style={{fontSize: "16px"}}>
+                <Details
+                  summary_content={ <TextMaker text_key="budget_stats_title" /> }
+                  content={ <TextMaker text_key="budget_summary_stats" args={this.summary_stats} /> }
+                />
+              </div>
             </div>
             { !window.is_a11y_mode &&
               <BudgetMeasuresControls

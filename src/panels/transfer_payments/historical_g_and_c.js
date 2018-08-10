@@ -171,7 +171,7 @@ class HistTPTypes extends React.Component {
         .toPairs()
         .map( ([label, data]) => ({ 
           label, 
-          data: _.map(data, num => <Format type="compact_written" content={num} /> ),
+          data: _.map(data, num => <Format type="compact1_written" content={num} /> ),
         }) )
         .value()
 
