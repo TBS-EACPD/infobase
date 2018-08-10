@@ -109,6 +109,13 @@ const calculate_summary_stats = () => {
     data_row => data_row.remaining === 0
   ).length;
 
+  const less_one_percent_remaining_funds_count = _.chain(rolled_up_data_rows)
+    .filter( data_row => data_row.remaining !== 0 )
+    .map( data_row => Math.abs(data_row.remaining/data_row.funding) )
+    .filter( percent_remaining => percent_remaining < 0.01 )
+    .value()
+    .length;
+
   return {
     measure_count,
     total_funding: funding_data_totals.funding,
@@ -119,6 +126,7 @@ const calculate_summary_stats = () => {
     allocated_to_program_count,
     total_internal_service_allocated,
     no_remaining_funds_count,
+    less_one_percent_remaining_funds_count,
   };
 }
 

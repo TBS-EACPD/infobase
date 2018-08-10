@@ -47,7 +47,8 @@ budget_summary_stats:
     * Budget 2018 provides funding totalling **{{fmt_compact2_written total_funding}}** across **{{measure_count}}** budget measures for **{{gt "budget_route_year"}}**
     * **{{fmt_compact2_written total_allocated}}** in funding has been allocated, **{{fmt_compact2_written total_withheld}}** has been centrally withheld, and **{{fmt_compact2_written total_remaining}}** remains, as of **{{gt "budget_data_sourced_date"}}**
     * **{{fmt_compact2_written total_program_allocated}}** of the allocated funding has gone to **{{allocated_to_program_count}}** programs, the other **{{fmt_compact2_written total_internal_service_allocated}}** has gone to {{gl_tt "internal services" "INT_SERVICES"}} for the receiving organizaitons
-    * **{{no_remaining_funds_count}}** budget measures have $0 in remaining funds for {{gt "budget_route_year"}}, with no further allocations to be made for the fiscal year
+    * **{{no_remaining_funds_count}}** budget measures have **$0** in remaining funds for **{{gt "budget_route_year"}}**, with no additional allocations to be made for the fiscal year
+      * **{{less_one_percent_remaining_funds_count}}** further measures have **non-zero** remaining balances which are **less than 1%** of their total funding for the fiscal year
   fr: |
     * TODO
 
