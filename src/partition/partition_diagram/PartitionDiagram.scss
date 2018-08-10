@@ -162,11 +162,11 @@
 .partition-popup > .popup-decription-text {
   max-height: 200px;
   overflow-y: auto;
-  line-height: 1;
-  text-align: justify;
   color: #333;
   padding-right: 4px;
   font-weight: $mediumFontWeight;
+  font-size: 14px;
+  line-height: 1.4;
 }
 .partition-popup > .btn {
   color: #fefefe;
