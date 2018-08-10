@@ -109,6 +109,16 @@ const calculate_summary_stats = () => {
     data_row => data_row.remaining === 0
   ).length;
 
+  const no_funding_in_year_count = _.filter(
+    rolled_up_data_rows,
+    data_row => data_row.funding === 0
+  ).length;
+
+  const fully_withheld_funds_count = _.filter(
+    rolled_up_data_rows,
+    data_row => data_row.funding !== 0 && (data_row.funding === data_row.withheld)
+  ).length;
+
   const less_one_percent_remaining_funds_count = _.chain(rolled_up_data_rows)
     .filter( data_row => data_row.remaining !== 0 )
     .map( data_row => Math.abs(data_row.remaining/data_row.funding) )
@@ -126,6 +136,8 @@ const calculate_summary_stats = () => {
     allocated_to_program_count,
     total_internal_service_allocated,
     no_remaining_funds_count,
+    no_funding_in_year_count,
+    fully_withheld_funds_count,
     less_one_percent_remaining_funds_count,
   };
 }
