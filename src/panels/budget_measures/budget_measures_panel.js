@@ -12,8 +12,6 @@ import {
   Panel,
 } from "../shared";
 
-import { Fragment } from 'react';
-
 import { infograph_href_template } from '../../link_utils.js';
 
 const { 
@@ -492,13 +490,10 @@ class BudgetMeasureHBars extends React.Component {
     const text_area = <div className = "frow" >
       <div className = "fcol-md-12 fcol-xs-12 medium_panel_text text">
         { subject.level === "gov" &&
-          <Fragment>
-            <TM k={"budget_route_top_text"} />
-            <TM 
-              k={"gov_budget_measures_panel_text"} 
-              args={{subject, ...info}} 
-            />
-          </Fragment>
+          <TM 
+            k={"gov_budget_measures_panel_text"} 
+            args={{subject, ...info}} 
+          />
         }
         { subject.level === "dept" &&
           <TM

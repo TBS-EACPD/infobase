@@ -56,9 +56,17 @@ budget_measure_panel_tracker_link_fr:
 gov_budget_measures_panel_text:
   transform: [handlebars, markdown]
   en: |
+    Budget 2018 provides **{{fmt_compact1_written total_funding}}** in additional funding for **{{gt "budget_route_year"}}**.
     {{> "budget_measure_stats_partial_en"}}
+    {{> "budget_measure_panel_tracker_link_en"}}  
+
+    {{{gt "budget_route_top_text_notes"}}}
   fr: |
+    Le budget de 2018 prévoit accorder à **{{fmt_compact1_written total_funding}}** de fonds pour {{gt "budget_route_year"}}.
     {{> "budget_measure_stats_partial_fr"}}
+    {{> "budget_measure_panel_tracker_link_fr"}}  
+
+    {{{gt "budget_route_top_text_notes"}}}
 
 dept_budget_measures_panel_text:
   transform: [handlebars, markdown]
