@@ -131,7 +131,7 @@ export function BudgetMeasuresA11yContent(){
                 { !has_grandchildren && <td>{ text_maker("notapplicable") }</td> }
               </tr>;
   
-              if ( !has_children || budget_measure.children.length === 1 ){
+              if ( !has_children){
                 return main_row;
               } else {
                 const sub_rows = _.chain(budget_measure.children)
