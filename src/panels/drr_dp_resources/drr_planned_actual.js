@@ -4,13 +4,13 @@ import {
   PanelGraph,
   FootNote,
   PlannedActualTable,
-  create_tm_cmpnt,
+  CreateTmCmpnt,
   TextPanel,
 } from '../shared.js';
 
 import { ResultCounts } from '../result_graphs/results_common.js';
 
-const [ text_maker, TM ] = create_tm_cmpnt(text);
+const [ text_maker, TM ] = CreateTmCmpnt(text);
 
 _.each(['dept','program'], level => {
   new PanelGraph({

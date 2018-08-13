@@ -9,7 +9,7 @@ import {
   declarative_charts,
   StdPanel,
   Col,
-  create_tm_cmpnt,
+  CreateTmCmpnt,
 } from "../shared";
 
 const { 
@@ -21,7 +21,7 @@ const {
 const { std_years } = years;
 const { Format } = util_components;
 
-const [ text_maker, TM ] = create_tm_cmpnt(text);
+const [ text_maker, TM ] = CreateTmCmpnt(text);
 
 const auth_cols = _.map(std_years, yr=>yr+"auth");
 const exp_cols = _.map(std_years, yr=>yr+"exp");

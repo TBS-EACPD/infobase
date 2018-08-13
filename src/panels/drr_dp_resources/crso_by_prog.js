@@ -9,7 +9,7 @@ import {
   Panel,
   get_planned_fte_source_link,
   get_planned_spending_source_link,
-  create_tm_cmpnt,
+  CreateTmCmpnt,
 } from "../shared";
 
 const { 
@@ -25,7 +25,7 @@ const {
 
 const { planning_years } = years;
 
-const [ text_maker, TM ] = create_tm_cmpnt(text);
+const [ text_maker, TM ] = CreateTmCmpnt(text);
 
 function calculate(subject,info){
   if(subject.dead_so){

@@ -3,7 +3,7 @@ import {Fragment} from 'react';
 import text from './gov_dp_text.yaml';
 
 import {
-  create_tm_cmpnt,
+  CreateTmCmpnt,
   PanelGraph,
   Panel,
   rpb_link,
@@ -29,7 +29,7 @@ const get_dp_rpb_links = () => ({
   }),
 });
 
-const [ text_maker, TM ] = create_tm_cmpnt(text);
+const [ text_maker, TM ] = CreateTmCmpnt(text);
 
 const ResultsIntroPanel = ({counts}) => <Fragment>
   <div className="frow middle-xs">

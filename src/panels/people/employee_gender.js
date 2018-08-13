@@ -7,13 +7,13 @@ import {
   HeightClippedGraphWithLegend,
   businessConstants,
   years,
-  create_tm_cmpnt,
+  CreateTmCmpnt,
   declarative_charts,
   StdPanel,
   Col,
 } from "../shared"; 
 
-const [ text_maker, TM ] = create_tm_cmpnt(text);
+const [ text_maker, TM ] = CreateTmCmpnt(text);
 
 const { people_years } = years;
 const { gender } = businessConstants;

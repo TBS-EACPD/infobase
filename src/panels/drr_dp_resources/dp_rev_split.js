@@ -6,10 +6,10 @@ import {
   years,
   run_template,
   Panel,
-  create_tm_cmpnt,
+  CreateTmCmpnt,
 } from "../shared";
 
-const [ text_maker, TM ] = create_tm_cmpnt(text);
+const [ text_maker, TM ] = CreateTmCmpnt(text);
 
 const { planning_years } = years;
 

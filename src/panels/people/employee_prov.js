@@ -6,12 +6,12 @@ import {
   years,
   businessConstants,
   charts_index,
-  create_tm_cmpnt,
+  CreateTmCmpnt,
   StdPanel,
   Col,
 } from "../shared"; 
 
-const [ text_maker, TM ] = create_tm_cmpnt(text);
+const [ text_maker, TM ] = CreateTmCmpnt(text);
 
 const {people_years} = years;
 const {provinces} = businessConstants;

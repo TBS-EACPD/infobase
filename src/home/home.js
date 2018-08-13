@@ -6,7 +6,7 @@ import MediaQuery from 'react-responsive';
 
 import { 
   EverythingSearch,
-  create_tm_cmpnt,
+  CreateTmCmpnt,
   CardTopImage,
   CardCenteredImage,
   CardBackgroundImage,
@@ -17,7 +17,7 @@ import { general_href_for_item } from '../link_utils.js';
 import { StandardRouteContainer } from '../core/NavComponents.js';
 import { get_static_url } from '../core/request_utils.js';
 
-const [ home_tm, TM ] = create_tm_cmpnt(home_text_bundle);
+const [ home_tm, TM ] = CreateTmCmpnt(home_text_bundle);
 
 export class Home extends React.Component {
   render(){
