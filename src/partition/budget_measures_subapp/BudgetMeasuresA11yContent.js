@@ -101,10 +101,14 @@ export function BudgetMeasuresA11yContent(){
                     { name_and_value_cell_formatter(budget_measure.children[0]) }
                   </td>
                 }
-                { !has_children && 
+                { !has_children &&
                   <td>
-                    { `${value_formatter(budget_measure.value)} ${budget_values.remaining.text}` }
-                  </td> 
+                    {
+                      `${value_formatter(budget_measure.value)} ${budget_measure.data.type !== "net_adjust" ?
+                        budget_values.remaining.text :
+                        budget_values.withheld.text}`
+                    }
+                  </td>
                 }
               </tr>;
   
