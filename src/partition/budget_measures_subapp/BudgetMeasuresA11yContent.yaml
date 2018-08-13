@@ -14,11 +14,6 @@ orgs_funded_by_budget_measure:
   en: Organizations Funded by Budget Measure
   fr: Organisations financées par mesure budgétaire
 
-link_to_budget_section_for:
-  transform: [handlebars]
-  en: Link to {{gt "budget_name"}} section for
-  fr: Lien vers la section du budget 2018 pour
-
 budget_measure_link_header:
   transform: [handlebars]
   en: Link to section about this budget measure in {{gt "budget_name"}} 

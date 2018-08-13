@@ -3,10 +3,10 @@ import { run_template } from '../../models/text.js';
 import {
   text_maker,
   TextMaker,
-} from './budget_measure_text_provider.js'
+} from './budget_measure_text_provider.js';
 import { budget_measures_hierarchy_factory } from './budget_measures_hierarchy_factory.js';
 import { businessConstants } from '../../models/businessConstants.js';
-import {Subject} from '../../models/subject';
+import { Subject } from '../../models/subject';
 
 const { budget_chapters } = businessConstants;
 const { BudgetMeasure } = Subject;
@@ -94,9 +94,9 @@ export function BudgetMeasuresA11yContent(){
                     >
                       { ( (budget_measure.data.chapter_key === "oth" && budget_measure.data.type !== "net_adjust") || !_.isEmpty(budget_measure.data.ref_id) ) && 
                         <a
-                          href = {BudgetMeasure.make_budget_link(budget_measure.data.chapter_key, budget_measure.data.ref_id)}
+                          href = { BudgetMeasure.make_budget_link(budget_measure.data.chapter_key, budget_measure.data.ref_id) }
                         >
-                          { text_maker("link_to_budget_section_for") + ": " + budget_measure.data.name }
+                          { text_maker("link") }
                         </a>
                       }
                       { budget_measure.data.chapter_key !== "oth" && _.isEmpty(budget_measure.data.ref_id) && 
