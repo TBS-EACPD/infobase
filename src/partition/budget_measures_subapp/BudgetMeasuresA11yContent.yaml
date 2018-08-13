@@ -1,10 +1,9 @@
 budget_measures_partition_a11y_chapter_table_caption:
   transform: [handlebars]
   en: |
-    Budget measures from the {{chapter}} chapter provide {{rawfmt_compact1 value}} in funding to federal organizations in {{year}}. 
-    The following table contains further details on these {{chapter}} budget measures.
+    TODO
   fr: |
-    Les mesures budgétaires du chapitre {{chapter}} fournissent {{rawfmt_compact1 value}} comme financement aux organisations fédérales en {{year}}. Le tableau qui suit fournit des détailles additionelles sur ces mesures budgétaires.
+    TODO
 
 budget_measure_descriptions:
   en: Budget Measure Descriptions
