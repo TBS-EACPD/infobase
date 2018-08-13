@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { formats } from '../../core/format.js';
 import {
   text_maker,
@@ -23,7 +24,7 @@ const name_and_value_cell_formatter = node => {
   } else if (node.data.type === "dept"){
     return `${value_formatter(node.value)} ${text_maker("allocated_to")} ${node.data.name}`;
   } else if (node.data.type === "program_allocation"){
-    return "TODO";
+    return `${value_formatter(node.value)} ${text_maker("allocated_to")} ${node.data.name} ${text_maker("single_word_under")} ${node.parent.data.name}`;
   }
 };
 
@@ -35,7 +36,7 @@ export function BudgetMeasuresA11yContent(){
     "budget_measure_descriptions",
     "budget_measure_link_header",
     "funding_decisions_header",
-    //"program_allocations",
+    "program_allocations",
   ];
 
   return (
@@ -62,9 +63,17 @@ export function BudgetMeasuresA11yContent(){
           {
             _.map(hierarchical_budget_measures_overview.children, budget_measure => {
               const has_children = !_.isUndefined(budget_measure.children) && budget_measure.children.length > 0;
-              const rows_to_span = has_children ? budget_measure.children.length : 1;
+              const has_grandchildren = has_children && budget_measure.children[0].data.value_type === "allocated";
 
-              const main_row = <tr key={ "measure" + budget_measure.data.id }>
+              const rows_to_span = !has_children ? 1 : !has_grandchildren ? 
+                  budget_measure.children.length:
+                  _.reduce(
+                    budget_measure.children, 
+                    (memo, dept_node) => memo + (!_.isUndefined(dept_node.children) ? dept_node.children.length : 1), 
+                    0
+                  );
+
+              const main_row = <tr key={ `measure${budget_measure.data.id}` }>
                 <th
                   scope="row"
                   rowSpan={ rows_to_span }
@@ -72,7 +81,7 @@ export function BudgetMeasuresA11yContent(){
                   { name_and_value_cell_formatter(budget_measure) }
                 </th>
                 <td
-                  key={ "measure_description" + budget_measure.data.id }
+                  key={ `measure_description${budget_measure.data.id}` }
                   rowSpan={ rows_to_span }
                 >
                   { !_.isEmpty(budget_measure.data.description) && 
@@ -80,7 +89,7 @@ export function BudgetMeasuresA11yContent(){
                   }
                 </td>
                 <td
-                  key={ "measure_link" + budget_measure.data.id }
+                  key={ `measure_link${budget_measure.data.id}` }
                   rowSpan={ rows_to_span }
                 >
                   { ( (budget_measure.data.chapter_key === "oth" && budget_measure.data.type !== "net_adjust") || !_.isEmpty(budget_measure.data.ref_id) ) && 
@@ -96,7 +105,8 @@ export function BudgetMeasuresA11yContent(){
                 </td>
                 { has_children &&
                   <td 
-                    key={ "measure" + budget_measure.data.id + "-org" + budget_measure.children[0].data.id }
+                    rowSpan={ !has_grandchildren ? 1 : budget_measure.children[0].children.length }
+                    key={ `measure${budget_measure.data.id }-org${budget_measure.children[0].data.id}` }
                   >
                     { name_and_value_cell_formatter(budget_measure.children[0]) }
                   </td>
@@ -110,20 +120,57 @@ export function BudgetMeasuresA11yContent(){
                     }
                   </td>
                 }
+                { has_grandchildren &&
+                  <td 
+                    key={ `measure${budget_measure.data.id}-org${budget_measure.children[0].data.id}-prog${budget_measure.children[0].children[0].data.id}` }
+                  >
+                    { name_and_value_cell_formatter(budget_measure.children[0].children[0]) }
+                  </td>
+
+                }
+                { !has_grandchildren && <td>{ text_maker("notapplicable") }</td> }
               </tr>;
   
               if ( !has_children || budget_measure.children.length === 1 ){
                 return main_row;
               } else {
                 const sub_rows = _.chain(budget_measure.children)
-                  .tail()
-                  .map( org => 
-                    <tr key={ "measure" + budget_measure.data.id + "-org" + org.data.id }>
-                      <td>
-                        { name_and_value_cell_formatter(org) }
-                      </td>
-                    </tr>
-                  )
+                  .map( (org, ix) => {
+                    const has_program_allocations = !_.isUndefined(org.children) && org.children.length > 0;
+
+                    return (
+                      <Fragment key={ix}>
+                        { ix !== 0 &&
+                          <tr 
+                            key={ `measure${budget_measure.data.id }-org${org.data.id}` }
+                            rowSpan={ has_program_allocations ? org.children.length : 1 }
+                          >
+                            <td>
+                              { name_and_value_cell_formatter(org) }
+                            </td>
+                            { has_program_allocations &&
+                              <td>
+                                { name_and_value_cell_formatter(org.children[0]) }
+                              </td>
+                            }
+                            { !has_program_allocations && <td>{ text_maker("notapplicable") }</td> }
+                          </tr>
+                        }
+                        { has_program_allocations &&
+                          _.chain(org.children)
+                            .tail()
+                            .map( program_allocation => (
+                              <tr key={ `measure${budget_measure.data.id }-org${org.data.id}-prog${program_allocation.data.id}` } >
+                                <td>
+                                  { name_and_value_cell_formatter(program_allocation) }
+                                </td>
+                              </tr>
+                            ))
+                            .value()
+                        }
+                      </Fragment>
+                    );
+                  })
                   .value();
   
                 return [

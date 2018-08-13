@@ -348,7 +348,7 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
           .value();
         
         const measure_withheld_node = {
-          id: node.data + "_withheld",
+          id: node.id + "_withheld",
           type: "measure_withheld_slice",
           value_type: "withheld",
           name: budget_values.withheld.text,
@@ -362,7 +362,7 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
         };
 
         const measure_remaining_node = {
-          id: node.data + "_remaining",
+          id: node.id + "_remaining",
           type: "measure_remaining_slice",
           value_type: "remaining",
           name: budget_values.remaining.text,
