@@ -1,28 +1,19 @@
 # Text fragments used in popup top-rows
-provides:
-  en: provides
-  fr: fournit un financement de 
-in_funding:
+in_funding_fr:
+  en: ""
+  fr: Financement de 
+in_funding_en:
   en: in funding
   fr: ""
 
-has_allocated:
-  en: has allocated
+allocated:
+  en: allocated
   fr: TODO
-in_funds:
-  en: in funds
-  fr: ""
-  
-has_had_withheld:
-  en: has had
-  fr: TODO
+
 withheld_of_the_funding:
   en: centrally withheld of the funding
   fr: TODO
 
-single_word_has:
-  en: has
-  fr: TODO
 remaining_in_funding:
   en: remaining in funding
   fr: TODO
@@ -51,9 +42,6 @@ in_funding_for:
 allocated_to:
   en: allocated to
   fr: TODO
-caps_allocated_to:
-  en: Allocated to
-  fr: TODO
 withheld_from:
   en: centrally withheld from
   fr: TODO
@@ -68,9 +56,6 @@ as_of:
 lang_formated_zero:
   en: $0
   fr: 0$
-tb_approved_funds:
-  en: TB approved funds
-  fr: TODO
 program_allocations:
   en: Program Allocations
   fr: TODO
@@ -134,36 +119,24 @@ budget_measure_popup_funding_top_line:
   handlebars_partial: true
   text: |
     <text style='color:#fdfdfd'>
-      {{gt "budget_name"}}
-      </br>
-      {{gt "provides"}}
+      {{gt "in_funding_fr"}}
     </text>
     {{> budget_measure_popup_top_line_value}}
     <text style='color:#fdfdfd'>
-      {{gt "in_funding"}} ...
+      {{gt "in_funding_en"}} ...
     </text>
 
 budget_measure_popup_allocated_top_line:
   handlebars_partial: true
   text: |
-    <text style='color:#fdfdfd'>
-      {{gt "budget_name"}}
-      </br>
-      {{gt "has_allocated"}}
-    </text>
     {{> budget_measure_popup_top_line_value}}
     <text style='color:#fdfdfd'>
-      {{gt "in_funds"}} ...
+      {{gt "allocated"}} ...
     </text>
 
 budget_measure_popup_withheld_top_line:
   handlebars_partial: true
   text: |
-    <text style='color:#fdfdfd'>
-      {{gt "budget_name"}}
-      </br>
-      {{gt "has_had_withheld"}}
-    </text>
     {{> budget_measure_popup_top_line_value}}
     <text style='color:#fdfdfd'>
       {{gt "withheld_of_the_funding"}} ...
@@ -172,11 +145,6 @@ budget_measure_popup_withheld_top_line:
 budget_measure_popup_remaining_top_line:
   handlebars_partial: true
   text: |
-    <text style='color:#fdfdfd'>
-      {{gt "budget_name"}}
-      </br>
-      {{gt "single_word_has"}}
-    </text>
     {{> budget_measure_popup_top_line_value}}
     <text style='color:#fdfdfd'>
       {{gt "remaining_in_funding"}} ...
@@ -185,20 +153,18 @@ budget_measure_popup_remaining_top_line:
 budget_measure_popup_top_line_cases:
   handlebars_partial: true
   text: |
-    <span class='stat1 popup-font-m'>
-      {{#if selected_value_is_funding}}
-        {{> budget_measure_popup_funding_top_line}}
-      {{/if}}
-      {{#if selected_value_is_allocated}}
-        {{> budget_measure_popup_allocated_top_line}}
-      {{/if}}
-      {{#if selected_value_is_withheld}}
-        {{> budget_measure_popup_withheld_top_line}}
-      {{/if}}
-      {{#if selected_value_is_remaining}}
-        {{> budget_measure_popup_remaining_top_line}}
-      {{/if}}
-    </span>
+    {{#if selected_value_is_funding}}
+      {{> budget_measure_popup_funding_top_line}}
+    {{/if}}
+    {{#if selected_value_is_allocated}}
+      {{> budget_measure_popup_allocated_top_line}}
+    {{/if}}
+    {{#if selected_value_is_withheld}}
+      {{> budget_measure_popup_withheld_top_line}}
+    {{/if}}
+    {{#if selected_value_is_remaining}}
+      {{> budget_measure_popup_remaining_top_line}}
+    {{/if}}
 
 budget_measure_popup_dept_line:
   handlebars_partial: true
@@ -335,7 +301,13 @@ budget_measure_popup_template:
   transform: [handlebars]
   text: |
     <div class='mrgn-bttm-md popup-row-top popup-font-m'>
-      {{> budget_measure_popup_top_line_cases}}
+      <span class='stat1 popup-font-m'>
+        <text class='popup-font-l' style='color:#fdfdfd;'>
+          {{gt "budget_name"}}:
+        </text>
+        </br>
+        {{> budget_measure_popup_top_line_cases}}
+      </span>
       {{#if is_program}}
         {{> budget_measure_popup_program_lines}}
       {{else}}
