@@ -15,7 +15,17 @@ const value_formatter = value => {
   const format = in_billions ? formats.compact1 : formats.compact;
   return format(value, {raw: true});
 }
-const name_and_value_cell_formatter = node => `${node.data.name} (${value_formatter(node.value)})`;
+const name_and_value_cell_formatter = node => {
+  if (node.data.type === "budget_measure" || node.data.type === "net_adjust"){
+    return `${node.data.name} (${value_formatter(node.value)} ${budget_values.funding.text})`;
+  } else if (node.data.type === "measure_withheld_slice" || node.data.type === "measure_remaining_slice"){
+    return `${value_formatter(node.value)} ${node.data.name}`;
+  } else if (node.data.type === "dept"){
+    return `${value_formatter(node.value)} ${text_maker("allocated_to")} ${node.data.name}`;
+  } else if (node.data.type === "program_allocation"){
+    return "TODO";
+  }
+};
 
 export function BudgetMeasuresA11yContent(){
   const hierarchical_budget_measures_overview = budget_measures_hierarchy_factory("overview","budget-measure", []);
@@ -93,7 +103,7 @@ export function BudgetMeasuresA11yContent(){
                 }
                 { !has_children && 
                   <td>
-                    { `${budget_values.remaining.text} (${value_formatter(budget_measure.value)})` }
+                    { `${value_formatter(budget_measure.value)} ${budget_values.remaining.text}` }
                   </td> 
                 }
               </tr>;
