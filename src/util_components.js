@@ -94,7 +94,7 @@ const Abbrev = ({text,len}) => <span dangerouslySetInnerHTML={{__html: abbrev(te
 
 const TrivialTM = props => <TM tmf={trivial_text_maker} {...props} />;
 const TrivialTextMaker = props => <TextMaker text_maker_func={trivial_text_maker} {...props} />;
-const CTMTM = (text, props) => [create_text_maker(text), <TM tmf={create_text_maker(text)} {...props} key="1" />];
+const CTMTM = (text) => [create_text_maker(text), (props) => <TM tmf={create_text_maker(text)} {...props} key={1}/>];
 
 export {
   FirstChild,
