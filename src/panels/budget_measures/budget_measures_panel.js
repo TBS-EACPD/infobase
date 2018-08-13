@@ -2,13 +2,12 @@ import text1 from "./budget_measures_panel.yaml";
 import text2 from "../../partition/budget_measures_subapp/BudgetMeasuresRoute.yaml";
 import {
   formats,
-  create_text_maker,
   PanelGraph,
   Subject,
   businessConstants,
   util_components,
   declarative_charts,
-  TM as StdTM,
+  CTMTM,
   Panel,
 } from "../shared";
 
@@ -27,8 +26,7 @@ const {
   A11YTable,
 } = declarative_charts;
 
-const text_maker = create_text_maker([text1,text2]);
-const TM = props => <StdTM tmf={text_maker} {...props} />;
+const [ text_maker, TM ] = CTMTM([text1,text2]);
 
 const calculate_stats_common = (data) => {
   const total_funding = _.reduce(data,

@@ -1,14 +1,13 @@
 import text from './igoc_panel.yaml';
 import { 
-  create_text_maker, 
   PanelGraph, 
   util_components, 
   TextPanel,
 } from '../shared';
 
-const { TM: StdTM } = util_components;
-const tmf = create_text_maker(text);
-const TM = props => <StdTM tmf={tmf} {...props} />;
+const { CTMTM } = util_components;
+
+const [ tmf, TM ] = CTMTM(text);
 
 new PanelGraph({
   level: 'dept',

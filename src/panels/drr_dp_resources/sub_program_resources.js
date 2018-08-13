@@ -17,9 +17,8 @@ import {
   PlannedActualTable,
   Results,
   utils,
-  create_text_maker,
   Panel,
-  TM as StdTM,
+  CTMTM,
 } from "../shared";
 
 
@@ -41,8 +40,7 @@ import {
 
 const { get_by_guid } = Subject;
 
-const text_maker = create_text_maker(text);
-const TM = props => <StdTM tmf={text_maker} {...props} />;
+const [ text_maker, TM ] = CTMTM(text);
 
 const {
   SubProgramEntity,

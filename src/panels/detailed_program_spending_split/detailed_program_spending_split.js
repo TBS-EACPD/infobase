@@ -1,7 +1,6 @@
 import text from './detailed_program_spending_split.yaml';
 import {
   Subject,
-  create_text_maker,
   formats,
   run_template,
   PanelGraph,
@@ -13,13 +12,10 @@ import {
   Panel,
 } from "../shared";
 
-const text_maker = create_text_maker(text);
-const TM = props => <StdTM tmf={text_maker} {...props} />;
-
 const { std_years } = years; 
 
 const { 
-  TM: StdTM,
+  CTMTM,
   Select,
   Format,
 } = util_components
@@ -33,6 +29,7 @@ const {
 
 const { sos } = businessConstants;
 
+const [text_maker, TM ] = CTMTM(text);
 
 
 const text_keys = {

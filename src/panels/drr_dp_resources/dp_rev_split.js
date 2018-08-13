@@ -5,14 +5,11 @@ import {
   util_components,
   years,
   run_template,
-  create_text_maker,
   Panel,
-  TM as StdTM,
+  CTMTM,
 } from "../shared";
 
-
-const text_maker = create_text_maker(text);
-const TM = p => <StdTM tmf={text_maker} {...p}/>;
+const [ text_maker, TM ] = CTMTM(text);
 
 const { planning_years } = years;
 

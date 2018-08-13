@@ -2,7 +2,6 @@ import text from './top_spending_areas.yaml';
 
 import {
   util_components,
-  create_text_maker,
   PanelGraph, 
   collapse_by_so,
   run_template,
@@ -12,16 +11,14 @@ import {
   StdPanel,
   Col,
   declarative_charts,
-  TM as StdTM,
+  CTMTM,
 } from "../shared";
 
 const { std_years } =  years;
 const { Format } = util_components;
 const { A11YTable } = declarative_charts;
 
-
-const text_maker = create_text_maker(text);
-const TM = props => <StdTM tmf={text_maker} {...props} />;
+const [ text_maker, TM ] = CTMTM(text);3
 
 const is_non_revenue = d => +(d.so_num) < 19;
 

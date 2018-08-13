@@ -3,13 +3,11 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { 
   FootnoteList, 
-  TM as StdTM,
+  CTMTM,
 } from '../util_components.js';
 import { Details } from '../components/Details.js';
-import { create_text_maker } from '../models/text.js';
 
-const text_maker = create_text_maker(text);
-const TM = props => <StdTM tmf={text_maker} {...props} />;
+const [ text_maker, TM ] = CTMTM(text)
 
 const PanelSource = ({links}) => {
   if(_.isEmpty(links)){

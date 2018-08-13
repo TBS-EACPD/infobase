@@ -4,17 +4,13 @@ import {
   PanelGraph,
   FootNote,
   PlannedActualTable,
-  create_text_maker,
-  TM as StdTM,
+  CTMTM,
   TextPanel,
 } from '../shared.js';
 
 import { ResultCounts } from '../result_graphs/results_common.js';
 
-const text_maker = create_text_maker(text);
-const TM = props => <StdTM tmf={text_maker} {...props} />;
-
-
+const [ text_maker, TM ] = CTMTM(text);
 
 _.each(['dept','program'], level => {
   new PanelGraph({

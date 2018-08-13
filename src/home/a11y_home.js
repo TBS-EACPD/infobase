@@ -4,11 +4,9 @@ import home_text2 from "./home-a11y.yaml";
 import get_home_content from './home-data.js';
 
 import { StandardRouteContainer } from '../core/NavComponents.js';
-import { TM as StdTM } from '../util_components.js';
-import { create_text_maker } from '../models/text.js';
+import { CTMTM } from '../util_components.js';
 
-const text_maker = create_text_maker([home_text1, home_text2]);
-const TM = props => <StdTM tmf={text_maker} {...props} />;
+const [ text_maker, TM ] = CTMTM([home_text1, home_text2]);
 
 export const Home = () => {
 

@@ -18,10 +18,9 @@ import {
   Panel, 
   Subject, 
   formats, 
-  create_text_maker, 
   run_template, 
   PanelGraph, 
-  TM as StdTM, 
+  CTMTM,
   years, 
   declarative_charts,
 } from '../shared';
@@ -29,8 +28,8 @@ import {
 const { Gov, Tag } = Subject;
 const { std_years } = years;
 const { Bar, GraphLegend } = declarative_charts;
-const text_maker = create_text_maker(text);
-const TM = props => <StdTM tmf={text_maker} {...props}/>;
+
+const [ text_maker, TM ] = CTMTM(text);
 
 new PanelGraph({
   level: "dept",

@@ -1,8 +1,7 @@
 import text from "./goco.yaml";
 
 import {
-  create_text_maker,
-  TM as StdTM,
+  CTMTM,
   PanelGraph,
   Subject,
   reactAdapter,  
@@ -18,8 +17,7 @@ const { GraphLegend } = declarative_charts;
 const { Format } = util_components;
 const { Tag } = Subject;
 
-const text_maker = create_text_maker(text);
-const TM = props => <StdTM tmf={text_maker} {...props} />;
+const [ text_maker, TM ] = CTMTM(text);
 
 const state = {active_spend_area : null};
 const title_font_size = "1.5em";

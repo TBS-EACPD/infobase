@@ -6,7 +6,7 @@ import MediaQuery from 'react-responsive';
 
 import { 
   EverythingSearch,
-  TM as StandardTM,
+  CTMTM,
   CardTopImage,
   CardCenteredImage,
   CardBackgroundImage,
@@ -14,12 +14,10 @@ import {
 } from '../util_components.js';
 
 import { general_href_for_item } from '../link_utils.js';
-import { create_text_maker } from '../models/text.js';
 import { StandardRouteContainer } from '../core/NavComponents.js';
 import { get_static_url } from '../core/request_utils.js';
 
-const home_tm = create_text_maker(home_text_bundle);
-const TM = props => <StandardTM tmf={home_tm} {...props} />;
+const [ home_tm, TM ] = CTMTM(home_text_bundle);
 
 export class Home extends React.Component {
   render(){

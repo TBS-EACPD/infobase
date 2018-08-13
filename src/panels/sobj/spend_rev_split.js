@@ -1,17 +1,15 @@
 import text from './spend_rev_split.yaml';
 import {
-  create_text_maker,
   Statistics,
   formats,
-  TM as StdTM,
+  CTMTM,
   PanelGraph,
   declarative_charts,
   StdPanel,
   Col,
 } from "../shared";
 
-const text_maker = create_text_maker(text);
-const TM = props => <StdTM tmf={text_maker} {...props} />;
+const [ text_maker, TM ] = CTMTM(text);
 
 const { Bar } = declarative_charts;
 

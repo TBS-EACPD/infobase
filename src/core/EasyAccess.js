@@ -1,18 +1,17 @@
-import { TM as StandardTM } from '../util_components.js';
+import { TrivialTM } from '../util_components.js';
 import { Fragment } from 'react';
-import { trivial_text_maker } from '../models/text.js';
 
 export class EasyAccess extends React.Component {
   render(){ return null; }
   componentDidMount(){
     ReactDOM.render(
+
       <EasyAccess_ />,
       document.getElementById("easy-access")
     )
   }
 }
-
-const TM = props => <StandardTM tmf={trivial_text_maker} {...props} />;
+const TM = TrivialTM;
 
 const EasyAccess_ = () =>
   <Fragment>

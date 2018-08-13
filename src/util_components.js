@@ -1,7 +1,7 @@
 import { default as withRouter } from 'react-router/withRouter';
 import classNames from 'classnames';
 import { deptSearch, everythingSearch } from './search/search.js';
-import { run_template, trivial_text_maker } from './models/text.js';
+import { run_template, trivial_text_maker, create_text_maker } from './models/text.js';
 import { formats } from './core/format.js';
 
 // Import utility components from the ./components directory, to be re-exported here for easy requiring in the InfoBase
@@ -94,6 +94,7 @@ const Abbrev = ({text,len}) => <span dangerouslySetInnerHTML={{__html: abbrev(te
 
 const TrivialTM = props => <TM tmf={trivial_text_maker} {...props} />;
 const TrivialTextMaker = props => <TextMaker text_maker_func={trivial_text_maker} {...props} />;
+const CTMTM = (text, props) => [create_text_maker(text), <TM tmf={create_text_maker(text)} {...props} key="1" />];
 
 export {
   FirstChild,
@@ -126,4 +127,5 @@ export {
   DebouncedTextInput,
   ContainerEscapeHatch,
   Abbrev,
+  CTMTM,
 };

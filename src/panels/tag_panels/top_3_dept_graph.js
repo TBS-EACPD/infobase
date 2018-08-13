@@ -2,8 +2,7 @@ import text from './top_3_depts.yaml';
 import {
   PanelGraph, 
   Subject,
-  create_text_maker,
-  TM as StdTM,
+  CTMTM,
   StdPanel,
   Col,
   declarative_charts,
@@ -11,8 +10,7 @@ import {
 
 const { Dept } = Subject;
 const { ProgressDonut } = declarative_charts;
-const text_maker = create_text_maker(text);
-const TM = props => <StdTM tmf={text_maker} {...props} />;
+const [ text_maker, TM ] = CTMTM(text);
 
 new PanelGraph({
   level: "tag",

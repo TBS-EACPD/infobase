@@ -3,10 +3,9 @@ import {Fragment} from 'react';
 import text from './gov_dp_text.yaml';
 
 import {
-  create_text_maker,
+  CTMTM,
   PanelGraph,
   Panel,
-  TM as StdTM,
   rpb_link,
   infograph_href_template,
 } from "../shared";
@@ -30,9 +29,7 @@ const get_dp_rpb_links = () => ({
   }),
 });
 
-
-const text_maker = create_text_maker(text);
-const TM = props => <StdTM tmf={text_maker} {...props} />;
+const [ text_maker, TM ] = CTMTM(text);
 
 const ResultsIntroPanel = ({counts}) => <Fragment>
   <div className="frow middle-xs">

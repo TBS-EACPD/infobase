@@ -24,7 +24,7 @@ const {
   D3GraphWithLegend,
 } = declarative_charts;
 
-const { Format, HeightClipper, TabbedContent, TM } = util_components;
+const { Format, HeightClipper, TabbedContent, TM, CTMTM } = util_components;
 
 export const PplSharePie = ({graph_args, label_col_header, sort_func}) => {
   sort_func = sort_func || ((a,b) => b.value-a.value);
@@ -351,4 +351,5 @@ export {
   layout_types, 
   TabbedContent, 
   TM,
+  CTMTM,
 };

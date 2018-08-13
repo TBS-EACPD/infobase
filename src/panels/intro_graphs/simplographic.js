@@ -1,7 +1,6 @@
 import simplographic_text from './simplographic.yaml';
 import { 
   Subject, 
-  create_text_maker, 
   PanelGraph, 
   util_components, 
   Panel,
@@ -11,11 +10,9 @@ import { ResultCounts } from '../../models/results.js';
 import { get_static_url } from '../../core/request_utils.js';
 
 const { Gov, Dept } = Subject;
-const { TM: StandardTM } = util_components;
+const { CTMTM} = util_components;
 
-const tmf = create_text_maker(simplographic_text);
-const TM = props => <StandardTM tmf={tmf} {...props} />;
-
+const [ tmf, TM ] = CTMTM(simplographic_text);
 
 new PanelGraph({
   level: 'gov',

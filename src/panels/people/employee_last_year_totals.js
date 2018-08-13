@@ -2,15 +2,13 @@ import text from "./employee_last_year_totals.yaml";
 import {
   PanelGraph,
   formats,
-  create_text_maker,
-  TM as StdTM,
+  CTMTM,
   declarative_charts,
   StdPanel,
   Col,
 } from "../shared"; 
 
-const text_maker = create_text_maker(text);
-const TM = props => <StdTM tmf={text_maker} {...props} />;
+const [ text_maker, TM ] = CTMTM(text);
 
 const { CirclePieChart } = declarative_charts;
 

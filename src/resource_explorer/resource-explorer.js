@@ -4,13 +4,11 @@ import { Fragment } from 'react';
 import { infograph_href_template } from '../link_utils.js';
 import { StandardRouteContainer } from '../core/NavComponents';
 import { get_col_defs } from '../gen_expl/resource-explorer-common.js';
-import { create_text_maker } from '../models/text.js';
 import { Subject } from '../models/subject.js';
-import { TM as StandardTM, SpinnerWrapper } from '../util_components.js';
+import { CTMTM, SpinnerWrapper } from '../util_components.js';
 import { Details } from '../components/Details.js';
 import classNames from 'classnames';
 
-const text_maker = create_text_maker(explorer_text);
 const { Tag } = Subject;
 
 //treemap stuff
@@ -30,7 +28,7 @@ import { ensure_loaded } from '../core/lazy_loader.js';
 import { Explorer } from '../components/ExplorerComponents.js';
 
 const INCLUDE_OTHER_TAGS = false;
-const TM = props => <StandardTM tmf={text_maker} {...props} />;
+const [ text_maker, TM ] = CTMTM(explorer_text);
 
 const HierarchySelectionItem = ({title, text, active, url }) => (
   <a 

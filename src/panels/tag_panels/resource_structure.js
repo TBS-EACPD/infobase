@@ -11,9 +11,8 @@ import { Explorer } from '../../components/ExplorerComponents.js';
 
 import {
   PanelGraph,
-  TM as StdTM,
   Panel,
-  create_text_maker,
+  CTMTM,
 } from "../shared";
 
 
@@ -32,9 +31,7 @@ import {
   map_dispatch_to_root_props,
 } from '../../gen_expl/state_and_memoizing';
 
-
-const text_maker = create_text_maker(text);
-const TM = props => <StdTM tmf={text_maker} {...props} />;
+const [ text_maker, TM ] = CTMTM(text);
 
 const get_non_col_content = ({node}) => { 
   const {

@@ -2,15 +2,14 @@ import text from  './historical_auth_exp.yaml';
 
 import {
   formats,
-  create_text_maker,
   run_template,
   PanelGraph,
   years,
   util_components,
-  TM as StdTM,
   declarative_charts,
   StdPanel,
   Col,
+  CTMTM,
 } from "../shared";
 
 const { 
@@ -22,8 +21,7 @@ const {
 const { std_years } = years;
 const { Format } = util_components;
 
-const text_maker = create_text_maker(text);
-const TM = props => <StdTM tmf={text_maker} {...props} />;
+const [ text_maker, TM ] = CTMTM(text);
 
 const auth_cols = _.map(std_years, yr=>yr+"auth");
 const exp_cols = _.map(std_years, yr=>yr+"exp");

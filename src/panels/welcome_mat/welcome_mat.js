@@ -7,10 +7,9 @@ import {
   Panel,
   formats,
   PanelGraph,
-  TM as StdTM,
   years,
   declarative_charts,
-  create_text_maker,
+  CTMTM,
   util_components,
   get_planned_fte_source_link,
   get_planned_spending_source_link,
@@ -27,8 +26,7 @@ const {
 
 const {std_years, planning_years} = years;
 const exp_cols = _.map(std_years, yr => `${yr}exp`);
-const text_maker = create_text_maker(text);
-const TM = props => <StdTM tmf={text_maker} {...props} />;
+const [ text_maker, TM ] = CTMTM(text);
 
 
 const SpendFormat = ({amt}) => <Format type="compact1" content={amt} />

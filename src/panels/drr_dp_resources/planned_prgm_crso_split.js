@@ -8,11 +8,10 @@ import {
   PanelGraph,
   util_components,
   declarative_charts,
-  create_text_maker,
-  TM as StdTM,
   Col,
   StdPanel,
   get_planned_spending_source_link,
+  CTMTM,
 } from "../shared";
 
 const {
@@ -21,8 +20,7 @@ const {
   TabularPercentLegend,
 } = declarative_charts;
 
-const text_maker = create_text_maker(text);
-const TM = props => <StdTM tmf={text_maker} {...props} />;
+const [text_maker, TM] = CTMTM(text);
 
 const { Format } = util_components;
 

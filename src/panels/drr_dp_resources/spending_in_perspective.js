@@ -6,8 +6,7 @@ import {
   util_components,
   declarative_charts,
   Panel,
-  create_text_maker,
-  TM as StdTM,
+  CTMTM,
 } from "../shared";
 
 const {
@@ -20,8 +19,7 @@ const {
   Format,
 } = util_components;
 
-const text_maker = create_text_maker(text);
-const TM = props => <StdTM tmf={text_maker} {...props} />;
+const [ text_maker, TM ] = CTMTM(text);
 
 const col = "{{planning_year_1}}";
 

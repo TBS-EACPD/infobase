@@ -1,17 +1,15 @@
 import metadata_text from './metadata.yaml';
 import { StandardRouteContainer, ScrollToTargetContainer } from '../core/NavComponents.js';
-import { TM as StandardTM, FancyUL } from '../util_components.js';
+import { CTMTM, FancyUL } from '../util_components.js';
 import { sources } from './data_sources.js';
 import { Panel } from '../components/panel-components.js';
 import { businessConstants } from '../models/businessConstants';
-import { create_text_maker } from '../models/text.js';
 
 const { months } = businessConstants;
 
 const FormattedDate = ({ day, month, year}) => <span>{months[month].text} {year}</span>;
 
-const tmf = create_text_maker(metadata_text);
-const TM = props => <StandardTM tmf={tmf} {...props} />
+const [ tmf, TM ] = CTMTM(metadata_text);
 
 export class MetaData extends React.Component {
   render(){

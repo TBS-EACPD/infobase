@@ -6,14 +6,12 @@ import {
   years,
   businessConstants,
   charts_index,
-  create_text_maker,
-  TM as StdTM,
+  CTMTM,
   StdPanel,
   Col,
 } from "../shared"; 
 
-const text_maker = create_text_maker(text);
-const TM = props => <StdTM tmf={text_maker} {...props} />;
+const [ text_maker, TM ] = CTMTM(text);
 
 const {people_years} = years;
 const {provinces} = businessConstants;

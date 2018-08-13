@@ -3,18 +3,18 @@ import {
   formats,
   PanelGraph,
   years,
-  TM as StdTM,
   declarative_charts,
   util_components,
   run_template,
   Panel,
-  create_text_maker,
   get_planned_fte_source_link,
   get_planned_spending_source_link,
+  CTMTM,
 } from "../shared";
 
 const { 
   Format,
+
 } = util_components;
 
 const {
@@ -25,8 +25,7 @@ const {
 
 const { planning_years } = years;
 
-const text_maker = create_text_maker(text);
-const TM = props => <StdTM tmf={text_maker} {...props} />;
+const [ text_maker, TM ] = CTMTM(text);
 
 function calculate(subject,info){
   if(subject.dead_so){
