@@ -145,7 +145,9 @@ export function BudgetMeasuresA11yContent(){
                             key={ `measure${budget_measure.data.id }-org${org.data.id}` }
                             rowSpan={ has_program_allocations ? org.children.length : 1 }
                           >
-                            <td>
+                            <td
+                              rowSpan={ has_program_allocations ? org.children.length : 1 }
+                            >
                               { name_and_value_cell_formatter(org) }
                             </td>
                             { has_program_allocations &&
