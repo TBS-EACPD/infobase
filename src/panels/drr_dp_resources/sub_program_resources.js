@@ -18,7 +18,7 @@ import {
   Results,
   utils,
   Panel,
-  CTMTM,
+  create_tm_cmpnt,
 } from "../shared";
 
 
@@ -40,7 +40,7 @@ import {
 
 const { get_by_guid } = Subject;
 
-const [ text_maker, TM ] = CTMTM(text);
+const [ text_maker, TM ] = create_tm_cmpnt(text);
 
 const {
   SubProgramEntity,

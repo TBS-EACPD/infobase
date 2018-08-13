@@ -1,6 +1,6 @@
 import text from './gnc-text.yaml';
 import { 
-  CTMTM,
+  create_tm_cmpnt,
 } from '../shared.js';
 
-export const [ text_maker, TM ] = CTMTM(text);
+export const [ text_maker, TM ] = create_tm_cmpnt(text);

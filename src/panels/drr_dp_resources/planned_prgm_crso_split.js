@@ -11,7 +11,7 @@ import {
   Col,
   StdPanel,
   get_planned_spending_source_link,
-  CTMTM,
+  create_tm_cmpnt,
 } from "../shared";
 
 const {
@@ -20,7 +20,7 @@ const {
   TabularPercentLegend,
 } = declarative_charts;
 
-const [text_maker, TM] = CTMTM(text);
+const [text_maker, TM] = create_tm_cmpnt(text);
 
 const { Format } = util_components;
 

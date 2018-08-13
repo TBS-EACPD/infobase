@@ -5,13 +5,13 @@ import {
   PanelGraph,
   businessConstants,
   years,
-  CTMTM,
+  create_tm_cmpnt,
   declarative_charts,
   StdPanel,
   Col,
 } from "../shared"; 
 
-const [ text_maker, TM ] = CTMTM(text);
+const [ text_maker, TM ] = create_tm_cmpnt(text);
 
 const { people_years } = years;
 const { ex_levels } = businessConstants;

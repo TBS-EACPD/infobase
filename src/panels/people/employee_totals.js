@@ -4,7 +4,7 @@ import {
   run_template,
   PanelGraph, 
   years,
-  CTMTM,
+  create_tm_cmpnt,
   declarative_charts,
   StdPanel,
   Col,
@@ -14,7 +14,7 @@ import { businessConstants } from '../../models/businessConstants';
 
 const { months } = businessConstants;
 
-const [ text_maker, TM ] = CTMTM(text);
+const [ text_maker, TM ] = create_tm_cmpnt(text);
 
 const {
   people_years, 

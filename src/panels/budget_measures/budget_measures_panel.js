@@ -7,7 +7,7 @@ import {
   businessConstants,
   util_components,
   declarative_charts,
-  CTMTM,
+  create_tm_cmpnt,
   Panel,
 } from "../shared";
 
@@ -26,7 +26,7 @@ const {
   A11YTable,
 } = declarative_charts;
 
-const [ text_maker, TM ] = CTMTM([text1,text2]);
+const [ text_maker, TM ] = create_tm_cmpnt([text1,text2]);
 
 const calculate_stats_common = (data) => {
   const total_funding = _.reduce(data,

@@ -1,4 +1,4 @@
 import text from './EstimatesComparison.yaml';
-import { CTMTM } from '../util_components.js';
+import { create_tm_cmpnt } from '../util_components.js';
 
-export const [ text_maker, TM ] = CTMTM(text)
+export const [ text_maker, TM ] = create_tm_cmpnt(text)

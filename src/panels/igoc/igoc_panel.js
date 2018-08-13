@@ -5,9 +5,9 @@ import {
   TextPanel,
 } from '../shared';
 
-const { CTMTM } = util_components;
+const { create_tm_cmpnt } = util_components;
 
-const [ tmf, TM ] = CTMTM(text);
+const [ tmf, TM ] = create_tm_cmpnt(text);
 
 new PanelGraph({
   level: 'dept',

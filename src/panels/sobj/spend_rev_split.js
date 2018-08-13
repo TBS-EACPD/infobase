@@ -2,14 +2,14 @@ import text from './spend_rev_split.yaml';
 import {
   Statistics,
   formats,
-  CTMTM,
+  create_tm_cmpnt,
   PanelGraph,
   declarative_charts,
   StdPanel,
   Col,
 } from "../shared";
 
-const [ text_maker, TM ] = CTMTM(text);
+const [ text_maker, TM ] = create_tm_cmpnt(text);
 
 const { Bar } = declarative_charts;
 

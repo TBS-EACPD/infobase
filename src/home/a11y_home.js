@@ -4,9 +4,9 @@ import home_text2 from "./home-a11y.yaml";
 import get_home_content from './home-data.js';
 
 import { StandardRouteContainer } from '../core/NavComponents.js';
-import { CTMTM } from '../util_components.js';
+import { create_tm_cmpnt } from '../util_components.js';
 
-const [ text_maker, TM ] = CTMTM([home_text1, home_text2]);
+const [ text_maker, TM ] = create_tm_cmpnt([home_text1, home_text2]);
 
 export const Home = () => {
 
