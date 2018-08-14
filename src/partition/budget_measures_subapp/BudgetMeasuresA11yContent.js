@@ -45,7 +45,11 @@ export function BudgetMeasuresA11yContent(){
         <caption>
           <TextMaker text_key="budget_measures_partition_a11y_chapter_table_caption" />
           <br/>
-          <TextMaker text_key="notes"/>: <TextMaker text_key="budget_measure_description_values_clarification"/>
+          <TextMaker text_key="notes"/>: 
+          <ul>
+            <li> <TextMaker text_key="budget_measure_description_values_clarification"/> </li>
+            <li> <TextMaker text_key="budget_measure_a11y_table_open_data_link"/> </li>
+          </ul>
         </caption>
         <thead>
           <tr>
