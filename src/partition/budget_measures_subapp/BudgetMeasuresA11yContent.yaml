@@ -1,9 +1,6 @@
 budget_measures_partition_a11y_chapter_table_caption:
-  transform: [handlebars]
-  en: |
-    TODO
-  fr: |
-    TODO
+  en: Budget 2018 Funding Overview
+  fr: TODO
 
 budget_measure_descriptions:
   en: Budget Measure Descriptions
