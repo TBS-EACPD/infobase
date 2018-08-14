@@ -5,11 +5,11 @@ fixture `A11y test`// declare the fixture
 
 
 const igoc_desc_sel = "#app-focus-root > div > div > " +
-"div.budget-measures > div > table.table.table-striped.table-bordered > caption > span" ;
+"div.budget-measures > div > table.table.table-striped.table-bordered > thead > tr:first-child > th:first-child" ;
 
 //then create a test and place your code there
 test('A11Y app budget measure page boots up', async t => {
   await t
     // Use the assertion to check if the actual header text is equal to the expected one
-    .expect(Selector(igoc_desc_sel).innerText).contains("Budget measures");
+    .expect(Selector(igoc_desc_sel).innerText).contains("Budget Measures");
 });
