@@ -293,12 +293,9 @@ class InfoGraph_ extends React.Component {
       subject: subject,
       footnotes_for: subject,
     }).then(()=> {
-      //we set a minimum of 400 wait
-      setTimeout(()=> {
-        this.setState({
-          loading: false,
-        });
-      }, 400); 
+      this.setState({
+        loading: false,
+      });
     });
   }
 }
