@@ -114,6 +114,8 @@ const calculate_summary_stats = () => {
     data_row => data_row.funding === 0
   ).length;
 
+  const totally_funded_count = no_remaining_funds_count - no_funding_in_year_count;
+
   const fully_withheld_funds_count = _.filter(
     rolled_up_data_rows,
     data_row => data_row.funding !== 0 && (data_row.funding === data_row.withheld)
@@ -135,7 +137,7 @@ const calculate_summary_stats = () => {
     total_program_allocated,
     allocated_to_program_count,
     total_internal_service_allocated,
-    no_remaining_funds_count,
+    totally_funded_count,
     no_funding_in_year_count,
     fully_withheld_funds_count,
     less_one_percent_remaining_funds_count,
