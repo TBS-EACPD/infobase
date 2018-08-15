@@ -1,7 +1,7 @@
 import { Selector } from 'testcafe'; // first import testcafe selectors
 
 fixture `Main app tests`// declare the fixture
-  .page `https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-eng.html#igoc`;  // specify the start page
+  .page `http://localhost:8080/build/InfoBase/index-eng.html#igoc`;  // specify the start page
 
 
 const igoc_sel = "#app-focus-root > div > div > div.medium_panel_text > " +
