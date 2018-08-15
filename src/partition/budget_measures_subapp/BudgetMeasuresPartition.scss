@@ -12,6 +12,9 @@
 
   & > .partition-content {
     color: #333;
+    & > .fat{
+      color: #f0f8ff !important;
+    }
     & > .partition-content-title,
     & > .partition-right-ie-fix > .partition-content-title {
       font-weight: $heavyFontWeight;
