@@ -39,30 +39,26 @@ circle.hidden {
   display : none;
 }
 div.tick,
-.axis text {
+.axis > text {
   color: #333;
   font-size: 85%;
   font-weight: $mediumFontWeight;
 }
 
-.axis path,
-.axis line {
+.axis > path,
+.axis > line {
   fill: none;
   stroke: #000;
   shape-rendering: auto;
 }
 
-.axis.black line,
-.axis.black path {
+.axis.black > line,
+.axis.black > path {
   stroke: #000;
 }
-.axis.black div.tick,
-.axis.black text {
+.axis.black > div.tick,
+.axis.black > text {
   fill: #000;
-}
-
-.y.axis text {
-  font-size : 85%;
 }
 .legend > li{
   margin-top: 5px;

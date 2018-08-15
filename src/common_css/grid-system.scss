@@ -8,15 +8,12 @@
   justify-content: center;
   align-items: stretch;
 }
-.inner-grid p{
-  margin: 0px;
-}
 .grid-title {
   padding: 10px;
   text-align:center;
   font-weight: $heavyFontWeight;
 }
-.inner-grid {
+.inner-grid { 
   display:flex;
   flex-direction:column;
   justify-content:center;

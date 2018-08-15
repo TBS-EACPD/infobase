@@ -116,11 +116,15 @@ class ExplorerPage extends React.Component {
   } 
   debounced_set_query(new_query){
     this.props.set_query(new_query);
-    setTimeout(()=>{
+    this.timedOutStateChange = setTimeout(()=>{
       this.setState({
         loading: false,
       });
     }, 500)
+  }
+  componentWillUnmount(){
+    !_.isUndefined(this.debounced_set_query) && this.debounced_set_query.cancel();
+    !_.isUndefined(this.timedOutStateChange) && clearTimeout(this.timedOutStateChange);
   }
   clearQuery(){
     this.setState({_query : ""});

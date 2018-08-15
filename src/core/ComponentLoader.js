@@ -15,9 +15,9 @@ export const ComponentLoader = (get_component, LoadingElement, errorElement)  =>
     get_component().then( Component => {
       
       this.Component = Component;
-      setTimeout(()=>{ //less janky if we force a >500ms timeout
+      this.timedOutStateChange = setTimeout(()=>{ //less janky if we force a timeout
         this.setState({loading: false});
-      }, 500);
+      }, 250);
 
     }).catch(()=>{
 
@@ -30,6 +30,9 @@ export const ComponentLoader = (get_component, LoadingElement, errorElement)  =>
     })
     
 
+  }
+  componentWillUnmount(){
+    clearTimeout(this.timedOutStateChange);
   }
   render(){
     if(this.state.loading){

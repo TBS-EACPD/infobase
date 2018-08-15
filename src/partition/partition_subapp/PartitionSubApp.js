@@ -352,4 +352,8 @@ export class PartitionSubApp {
       reactAdapter.render(<PartitionNotes note_content={note_content}/>, diagram_note_div.node());
     }
   }
+  componentWillUnmount(){
+    !_.isUndefined(this.debounced_search) && this.debounced_search.cancel();
+    !_.isUndefined(this.debounced_refresh) && this.debounced_refresh.cancel();
+  }
 }
