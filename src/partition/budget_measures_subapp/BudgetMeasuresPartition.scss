@@ -5,15 +5,15 @@
   border-radius: 10px;
 
   & > .header {
-    color: #333;
+    color: #f0f8ff;
     font-size: 22px;
     font-weight: $mediumFontWeight;
   }
 
   & > .partition-content {
     color: #333;
-    & > .fat{
-      color: #f0f8ff !important;
+    & > .fat {
+      color: #f0f8ff;
     }
     & > .partition-content-title,
     & > .partition-right-ie-fix > .partition-content-title {
@@ -21,16 +21,20 @@
     }
     & > .partition-content-title.negative-value,
     & > .partition-negative-title-backing > .negative-value {
-      color: #6f0000;
+      color: #FF8A8A;
     }
-    &.root > .partition-content-title {
-      font-weight: $heavyFontWeight;
-      & > .root-sub-note {
-        margin-top: 22px;
-        font-size: 20px;
-      }
-      & > a {
-        color: #333;
+    &.root { 
+      background-color: rgba(0, 101, 179, 0.6);
+      & > .partition-content-title {
+        font-weight: $heavyFontWeight;
+        color: #f0f8ff;
+        & > .root-sub-note {
+          margin-top: 22px;
+          font-size: 20px;
+        }
+        & > a {
+          color: #333;
+        }
       }
     }
 
