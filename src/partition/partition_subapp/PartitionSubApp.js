@@ -293,7 +293,7 @@ export class PartitionSubApp {
   add_intro_popup(){
     const partition_control_info = this.container.select("#partition-control-info-button");
 
-    if (!partition_control_info.select(".partition-intro").node()){
+    if ( !partition_control_info.select(".partition-intro").node() ){
       const intro_popup = partition_control_info.append("div")
         .classed("partition-popup", true)
         .classed("partition-intro", true)
@@ -323,7 +323,7 @@ export class PartitionSubApp {
       tab_catch_after.on("focusout", intro_popup_cleanup);
     } else {
       partition_control_info.select("div.partition-popup.partition-intro").remove();
-      partition_control_info.select("div.partition-diagram-fader").remove();
+      this.container.select("div.partition-diagram-fader").remove();
       partition_control_info.select("a.tab-catch-after").remove();
     }
   }
