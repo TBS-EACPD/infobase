@@ -264,12 +264,12 @@ const render_diagram = (diagram, props, data, data_wrapper_node_rules, dont_fade
     data_wrapper_node_rules,
     dont_fade,
     colors: [
-      "#1499FF",
-      "#2ea4ff",
-      "#47afff",
-      "#61baff",
-      "#7ac6ff",
-      "#94d1ff",
+      "#77C9D4",
+      "#4fc984",
+      "#B1D3EF",
+      "#61BAFF",
+      "#3caa9d",
+      // "#f8bb82", this is orange
     ],
     background_color: "#00233d",
   });

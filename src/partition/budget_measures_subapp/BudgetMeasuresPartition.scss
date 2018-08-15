@@ -8,12 +8,14 @@
     color: #f0f8ff;
     font-size: 22px;
     font-weight: $mediumFontWeight;
+    margin-top: 10px;
   }
 
   & > .partition-content {
     color: #333;
     & > .fat {
       color: #f0f8ff;
+      font-weight: $mediumFontWeight !important ;
     }
     & > .partition-content-title,
     & > .partition-right-ie-fix > .partition-content-title {
@@ -24,7 +26,7 @@
       color: #FF8A8A;
     }
     &.root { 
-      background-color: rgba(0, 101, 179, 0.6);
+      background-color: rgba(0, 0, 0, 0.3);
       & > .partition-content-title {
         font-weight: $heavyFontWeight;
         color: #f0f8ff;
