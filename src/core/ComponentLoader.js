@@ -17,7 +17,7 @@ export const ComponentLoader = (get_component, LoadingElement, errorElement)  =>
       this.Component = Component;
       setTimeout(()=>{ //less janky if we force a >500ms timeout
         this.setState({loading: false});
-      }, 500);
+      }, 250);
 
     }).catch(()=>{
 
