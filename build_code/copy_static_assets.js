@@ -297,7 +297,6 @@ function build_proj(PROJ){
 
   fse.copySync('external-dependencies/GCWeb', dir+'/GCWeb', {clobber: true});
   fse.copySync('external-dependencies/wet-boew', dir+'/wet-boew', {clobber: true});
-  fse.copySync('external-dependencies/cioscripts', dir+'/cioscripts', {clobber: true});
   //clobber overwrites old directory when copying
   ['png', 'svg','js','csv'].forEach(function(type){
     var this_dir = dir+'/'+type;
