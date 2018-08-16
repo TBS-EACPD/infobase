@@ -296,7 +296,6 @@ function build_proj(PROJ){
   });
 
   fse.copySync('external-dependencies/GCWeb', dir+'/GCWeb', {clobber: true});
-  fse.copySync('external-dependencies/img', dir+'/img', {clobber: true});
   fse.copySync('external-dependencies/wet-boew', dir+'/wet-boew', {clobber: true});
   fse.copySync('external-dependencies/cioscripts', dir+'/cioscripts', {clobber: true});
   fse.copySync('external-dependencies/ajax', dir+'/ajax', {clobber: true});
