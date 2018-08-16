@@ -1,7 +1,7 @@
 @import '../../common_css/common-variables';
 
 $controlsColor: #00233d;
-$controlsColorLighter: lighten($controlsColor, 10%);
+$controlsColorLighter: lighten($controlsColor, 15%);
 
 .budget-measures-partition-controls {
   background-color: $controlsColor;
@@ -21,6 +21,7 @@ $controlsColorLighter: lighten($controlsColor, 10%);
     & > .labeled-box-content {
       border-color: $controlsColorLighter;
       padding-left: 10px;
+      color: $controlsColorLighter;
   
       & > .centerer > .radio-buttons {
         border-color: $controlsColorLighter;
