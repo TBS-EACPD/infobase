@@ -57,10 +57,10 @@ lang_formated_zero:
   en: $0
   fr: 0$
 program_allocations:
-  en: Program Allocations
+  en: Programs
   fr: TODO
 funding_decisions_header:
-  en: Funding Decisions
+  en: Treasury Board Allocations
   fr: TODO
 
 see_it_in_the_budget:
