@@ -470,7 +470,26 @@ export class PartitionDiagram {
       .filter(source =>_.isArray(source.children))
       .map(source => _.map(source.children, target => ({source, target}) ) )
       .flatten(true)
-      .filter( link => lowest_node_id_ancestry.includes(link.target.id_ancestry) )
+      .filter( link => {
+        const split_and_reverse_id_ancestry = (id_ancestry) =>_.reverse( _.split(id_ancestry, '-') );
+
+        const lowest_node_id_ancestry_chunks = split_and_reverse_id_ancestry(lowest_node_id_ancestry);
+        const link_target_id_ancestry_chunks = split_and_reverse_id_ancestry(link.target.id_ancestry);
+
+        const longer_of_the_id_chunks = lowest_node_id_ancestry_chunks.length >= link_target_id_ancestry_chunks.length ?
+          lowest_node_id_ancestry_chunks :
+          link_target_id_ancestry_chunks;
+        const shorter_of_the_id_chunks = lowest_node_id_ancestry_chunks.length >= link_target_id_ancestry_chunks.length ?
+          link_target_id_ancestry_chunks :
+          lowest_node_id_ancestry_chunks;
+
+        const target_link_is_in_branch_of_lowest_node = _.chain(shorter_of_the_id_chunks)
+          .map( (id_chunk, ix) => id_chunk === longer_of_the_id_chunks[ix] )
+          .reduce( (memo, bool) => memo && bool, true )
+          .value();
+        
+        return target_link_is_in_branch_of_lowest_node;
+      })
       .value();
     
     const unfade_parent_polygons = (polygon_selector) => {
@@ -533,8 +552,8 @@ export class PartitionDiagram {
     const absolute_pop_up_left = d.DOM.offsetLeft + pop_up.node().offsetLeft;
     window.scroll(absolute_pop_up_left, window.pageYOffset);
 
-    const to_be__highlighted = _.uniqBy(d.ancestors().concat(d.descendants()));
-    this.unfade_popup_parents(to_be__highlighted);
+    const to_be_highlighted = _.uniqBy(d.ancestors().concat(d.descendants()));
+    this.unfade_popup_parents(to_be_highlighted);
     this.pop_up = d;
   }
   remove_pop_up(){
