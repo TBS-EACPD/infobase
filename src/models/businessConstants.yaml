@@ -378,13 +378,13 @@ budget_chapters:
 budget_values:
   funding:
     en: Budget 2018 Funding
-    fr: todo
+    fr: Fonds du budget fédéral de 2018
   allocated:
     en: Allocated Funds
-    fr: todo
+    fr: Fonds affectés
   withheld:
     en: Centrally Withheld Funds
-    fr: todo
+    fr: Fonds retenus centralement
   remaining:
     en: Remaining Funds
-    fr: todo
+    fr: Fonds restants
