@@ -54,14 +54,6 @@ budget_summary_stats:
   fr: |
     * TODO
 
-budget_measure_a11y_table_open_data_link:
-  transform: [handlebars, markdown]
-  en: |
-    This table presents an overview of Budget 2018 funding decisions, including descriptions of budget measures and links to corresponding sections of the Budget 2018 Plan.
-    For a full accounting of the available data, down to the lowest level, see the <a href="TODO" target="_blank">Budget 2018 Open Data Page</a>.
-  fr: |
-    TODO <a href="TODO" target="_blank"> TODO </a>
-
 budget_route_top_text_notes:
   transform: [handlebars, markdown]
   en: |
