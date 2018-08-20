@@ -34,9 +34,6 @@ single_word_in:
 single_word_in_lowercase:
   en: in
   fr: en
-single_word_under:
-  en: Under
-  fr: ...
 
 # Text fragments used in root text and popups 
 in_funding_for:
@@ -178,18 +175,17 @@ budget_measure_popup_top_line_cases:
 budget_measure_popup_dept_line:
   handlebars_partial: true
   text: |
+    {{#if is_program}}
+    {{else}}
     <div class="budget-measure-popup-name-row popup-font-m">
       <span class='name-row-left' style='color:#fdfdfd'>
-      {{#if is_program}}
-          {{gt "single_word_under"}}
-        {{else}}
-          {{gt "single_word_to"}}
-        {{/if}}
+        {{gt "single_word_to"}}
       </span>
       <span class='name-row-right'>
         {{dept_name}}
       </span>
     </div>
+    {{/if}}
 
 budget_measure_popup_measure_line:
   handlebars_partial: true
