@@ -62,7 +62,7 @@ export class PartitionRoute extends React.Component {
     return (
       <StandardRouteContainer
         title={text_maker("partition_title")}
-        description={text_maker("partition_route_description")}
+        description={text_maker("partition_desc_meta_attr")}
         breadcrumbs={[text_maker("partition_title")]}
         route_key="partition"
         non_a11y_route={true}

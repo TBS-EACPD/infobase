@@ -54,3 +54,8 @@ padded_minister_span:
     <span style="word-spacing: 2px"> 
       {{gt "minister"}}
     </span>
+
+
+igoc_desc_meta_attr:
+  en: A list of all government departments, organizations and interests. Use filters like core public administration, crown corporations and historical organizations to find what you’re looking for. 
+  fr: Liste des ministères, organisations et intérêts du gouvernement. Utilisez des filtres comme ceux de l'administration publique centrale, des sociétés d'État et des organisations à vocation historique pour trouver ce que vous cherchez. 

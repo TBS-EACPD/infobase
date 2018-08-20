@@ -210,3 +210,7 @@ partition_select_data:
 partition_select_context:
   en: Select a Perspective
   fr: Sélectionner la perspective
+
+partition_desc_meta_attr:
+  en: Government at a Glance. This flow chart shows resources flow across the Government of Canada. Explore at a high level or drill down by using the infographics which provide detailed information on things like salaries, capital or transfer payments.
+  fr: Coup d'œil sur le gouvernement. Ce diagramme montre le mouvement des ressources dans la fonction publique fédérale. Explorez de façon générale ou faites un zoom avant au moyen des infographies qui vous donnent des renseignements détaillés, par exemple sur les salaires, les immobilisations ou les paiements de transfert.

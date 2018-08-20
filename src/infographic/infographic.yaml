@@ -60,11 +60,8 @@ infograph_explorer_link:
   fr: Recherche avancée
 
 
-# TODO: better text and different description for different levels (e.g. program infograph description should refer to parent org)
-infographic_description:
-  transform: [handlebars]
-  en: An interactive infographic providing details on {{subj_name subject}}
-  fr: Une infograhie interative contenant des détails sur {{subj_name subject}}
+
+
 
 
 a11y_infograph_description:
@@ -74,3 +71,16 @@ a11y_infograph_description:
 a11y_search_other_infographs:
   en: Search for other infographics
   fr: Recherchez d'autres infographies
+
+
+results_infograph_desc_meta_attr:
+  en: The government’s go to tool for all program level resources and results data from Departmental Plans and Departmental Results Reports for the Government of Canada. 
+  fr: Fonction « Aller à l'outil » du gouvernement du Canada pour toutes les données du niveau des programmes sur les résultats et les ressources, ainsi que les données sur les résultats figurant dans les plans ministériels et les rapports ministériels sur les résultats. 
+
+ppl_infograph_desc_meta_attr:
+  en: Federal public service demographics data, such as population by gender, first official language, province, executive level and student population.
+  fr: Données démographiques de la fonction publique fédérale, comme la population selon le sexe, la première langue officielle, la province et le niveau du poste, et la population étudiante. 
+
+finance_infograph_desc_meta_attr:
+  en: Search historical and planned government spending by different lenses like social and economic spending or by departmental program. Sourced from Public Accounts, and Estimates, you will find financial details from government to department to program.  
+  fr: Effectuer des recherches sur les dépenses antérieures et prévues du gouvernement par programme ministériel ou selon diverses optiques, comme les dépenses sociales et économiques. Provenant des Comptes publics et des budgets des dépenses, vous trouverez des renseignements financiers allant du gouvernement au ministère, jusqu’au programme.

@@ -25,7 +25,10 @@ export class Home extends React.Component {
     const { featured_content_items } = get_home_content();
 
     return (
-      <StandardRouteContainer route_key="start">
+      <StandardRouteContainer 
+        route_key="start"
+        description={home_tm("home_desc_meta_attr")}
+      >
         <MediaQuery minWidth={992}>
           {is_large =>
             <ContainerEscapeHatch>

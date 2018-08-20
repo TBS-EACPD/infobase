@@ -1,6 +1,6 @@
-metadata_document_description:
-  en: Index of datasets featured in the InfoBase, and their download links
-  fr: Index des ensembles de données de l'InfoBase, et des liens vers leurs données brutes
+metadata_desc_meta_attr:
+  en: Open and accessible datasets. The hard numbers, organized by their source report to make your research easy. If it’s in the Public Accounts, Main Estimates or Departmental Plans, it’s here.
+  fr: Ensembles de données ouvertes et accessibles. Les chiffres réels sont organisés par « rapport source » pour faciliter vos recherches. Si cela figure dans les Comptes publics, le budget principal des dépenses ou les plans ministériels, c'est ici.
 
 metadata_t:
   transform: [handlebars,markdown]

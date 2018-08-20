@@ -79,7 +79,7 @@ export class BudgetMeasuresRoute extends React.Component {
       <StandardRouteContainer
         ref = "container"
         title = { text_maker("budget_route_title") }
-        description = { text_maker("budget_measures_page_desc") }
+        description = { text_maker("budget_measures_desc_meta_attr") }
         breadcrumbs = { [text_maker("budget_route_title")] }
         route_key = "budget-measures"
       >

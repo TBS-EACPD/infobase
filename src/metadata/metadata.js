@@ -27,7 +27,7 @@ export class MetaData extends React.Component {
       <StandardRouteContainer
         title={text_maker("metadata")}
         breadcrumbs={[text_maker("metadata")]}
-        description={text_maker("metadata_document_description")}
+        description={text_maker("metadata_desc_meta_attr")}
         route_key="_metadata"
       >
         <div>

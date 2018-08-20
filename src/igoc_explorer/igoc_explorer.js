@@ -154,6 +154,7 @@ export const IgocExplorer = ({match}) => {
       breadcrumbs={[text_maker("igoc")]}
       title={text_maker("igoc")}
       route_key="_igoc_explorer"
+      description={text_maker("igoc_desc_meta_attr")}
     >
       <div>
         <h1> <TM k="igoc" /> </h1>
