@@ -24,7 +24,7 @@ const name_and_value_cell_formatter = node => {
   } else if (node.data.type === "dept"){
     return `${value_formatter(node.value)} ${text_maker("allocated_to")} ${node.data.name}`;
   } else if (node.data.type === "program_allocation"){
-    return `${value_formatter(node.value)} ${text_maker("allocated_to")} ${node.data.name} ${text_maker("single_word_under")} ${node.parent.data.name}`;
+    return `${value_formatter(node.value)} ${text_maker("allocated_to")} ${node.data.name} - ${node.parent.data.name}`;
   }
 };
 
