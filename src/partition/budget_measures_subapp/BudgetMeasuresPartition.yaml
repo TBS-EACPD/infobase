@@ -10,13 +10,16 @@ allocated:
   en: allocated
   fr: affectés
 
-withheld_of_the_funding:
-  en: centrally withheld of the funding
-  fr: TODO
+of_the_funding:
+  en: of the funding
+  fr: des fonds
+was_centrally_withheld:
+  en: was centrally withheld
+  fr: sont retenus centralement
 
 remaining_in_funding:
   en: remaining in funding
-  fr: TODO
+  fr: en fonds restants
 
 # Single words used in popup tables and other places
 single_word_for:
@@ -33,7 +36,7 @@ single_word_in_lowercase:
   fr: en
 single_word_under:
   en: Under
-  fr: TODO
+  fr: ...
 
 # Text fragments used in root text and popups 
 in_funding_for:
@@ -41,17 +44,16 @@ in_funding_for:
   fr: fournit pour
 allocated_to:
   en: allocated to
-  fr: TODO
+  fr: affectés á
 withheld_from:
   en: centrally withheld from
-  fr: TODO
+  fr: retenus centralement de
 remaining_for:
   en: remaining for
-  fr: TODO
+  fr: restant pour
 as_of:
   en: As of
-  fr: TODO
-
+  fr: Á partir du
 # Misc
 lang_formated_zero:
   en: $0
@@ -64,7 +66,7 @@ program_allocations:
     {{gt "programs"}}
 funding_decisions_header:
   en: Treasury Board Allocations
-  fr: TODO
+  fr: Allocation du Conseil du Trésor
 
 see_it_in_the_budget:
   en: See it in the Budget
@@ -72,7 +74,7 @@ see_it_in_the_budget:
 
 submeasures_table_title:
   en: Breakdown by Submeasure
-  fr: TODO
+  fr: Répartition par sous-mesure
 
 budget_measure_submeasure_note:
   en: |
@@ -146,7 +148,7 @@ budget_measure_popup_withheld_top_line:
   text: |
     {{> budget_measure_popup_top_line_value}}
     <text style='color:#fdfdfd'>
-      {{gt "withheld_of_the_funding"}} ...
+      {{gt "of_the_funding"}} ...
     </text>
 
 budget_measure_popup_remaining_top_line:
@@ -333,6 +335,13 @@ budget_measure_popup_template:
       {{> budget_measure_popup_year_line}}
       {{#if show_sourced_date}}
         {{> budget_measure_popup_sourced_date_line}}
+      {{/if}}
+      {{#if selected_value_is_withheld}}
+        <span class='stat1 popup-font-m'>
+          <text class='popup-font-m' style='color:#fdfdfd;'>
+            ... {{gt "was_centrally_withheld"}}
+          </text>
+        </span>
       {{/if}}
     </div>
     {{> budget_measure_popup_bottom_rows}}
