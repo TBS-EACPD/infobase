@@ -177,11 +177,11 @@ budget_measure_popup_dept_line:
   text: |
     {{#if is_program}}
     {{else}}
-    <div class="budget-measure-popup-name-row popup-font-m">
-      <span class='name-row-left' style='color:#fdfdfd'>
+    <div class="budget-measure-popup-text-cells popup-font-m">
+      <span class='popup-text-cells-left popup-text-cells-small' style='color:#fdfdfd'>
         {{gt "single_word_to"}}
       </span>
-      <span class='name-row-right'>
+      <span class='popup-text-cells-right popup-text-cells-large'>
         {{dept_name}}
       </span>
     </div>
@@ -190,11 +190,11 @@ budget_measure_popup_dept_line:
 budget_measure_popup_measure_line:
   handlebars_partial: true
   text: |
-    <div class="budget-measure-popup-name-row popup-font-m">
-      <span class='name-row-left' style='color:#fdfdfd'>
+    <div class="budget-measure-popup-text-cells popup-font-m">
+      <span class='popup-text-cells-left popup-text-cells-small' style='color:#fdfdfd'>
         {{gt "single_word_for"}}
       </span>
-      <span class='name-row-right'>
+      <span class='popup-text-cells-right popup-text-cells-large'>
         {{measure_name}}
       </span>
     </div>
@@ -202,11 +202,11 @@ budget_measure_popup_measure_line:
 budget_measure_popup_program_lines:
   handlebars_partial: true
   text: |
-    <div class="budget-measure-popup-name-row popup-font-m">
-      <span class='name-row-left' style='color:#fdfdfd'>
+    <div class="budget-measure-popup-text-cells popup-font-m">
+      <span class='popup-text-cells-left popup-text-cells-small' style='color:#fdfdfd'>
         {{gt "single_word_to"}}
       </span>
-      <span class='name-row-right'>
+      <span class='popup-text-cells-right popup-text-cells-large'>
         {{program_name}}
       </span>
     </div>
@@ -216,11 +216,11 @@ budget_measure_popup_program_lines:
 budget_measure_popup_year_line:
   handlebars_partial: true
   text: |
-    <div class="budget-measure-popup-name-row popup-font-m">
-      <span class='name-row-left' style='color:#fdfdfd'>
+    <div class="budget-measure-popup-text-cells popup-font-m">
+      <span class='popup-text-cells-left popup-text-cells-small' style='color:#fdfdfd'>
         {{gt "single_word_in"}}
       </span>
-      <span class='name-row-right'>
+      <span class='popup-text-cells-right popup-text-cells-large'>
         {{year}}
       </span>
     </div>
@@ -228,11 +228,11 @@ budget_measure_popup_year_line:
 budget_measure_popup_sourced_date_line:
   handlebars_partial: true
   text: |
-    <div class="budget-measure-popup-name-row popup-font-m">
-      <span class='name-row-left' style='color:#fdfdfd'>
+    <div class="budget-measure-popup-text-cells popup-font-m">
+      <span class='popup-text-cells-left popup-text-cells-small' style='color:#fdfdfd'>
         {{gt "as_of"}}
       </span>
-      <span class='name-row-right'>
+      <span class='popup-text-cells-right popup-text-cells-large'>
         {{gt "budget_data_sourced_date"}}
       </span>
     </div>
@@ -259,12 +259,12 @@ budget_measure_popup_bottom_rows:
       </div>
       <div class='popup-decription-text popup-row-bottom-border' style='max-height:200px; padding-bottom:3px;'>
         {{#each submeasures}}
-          <div class='budget-measure-popup-name-row'>
-            <span class='name-row-left' style='color:#fdfdfd; padding:6px 0px 6px 0px;'>
-              {{fmt_compact1 this.value}}
-            </span>
-            <span class='name-row-right' style='padding:6px 0px 6px 0px;'>
+          <div class='budget-measure-popup-text-cells'>
+            <span class='popup-text-cells-left popup-text-cells-large' style='color:#fdfdfd; padding:6px 0px 6px 0px;'>
               {{this.name}}
+            </span>
+            <span class='popup-text-cells-right popup-text-cells-small' style='text-align:right; padding:6px 0px 6px 0px;'>
+              {{fmt_compact1 this.value}}
             </span>
           </div>
         {{/each}}

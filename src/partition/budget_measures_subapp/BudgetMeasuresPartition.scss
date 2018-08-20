@@ -56,24 +56,28 @@
   }
 }
 
-.budget-measure-popup-name-row {
+.budget-measure-popup-text-cells {
   display: flex;
   flex-direction: row;
   justify-content: center;
   padding: 5px 0px 5px 0px;
   font-size: 12px;
 
-  & > .name-row-left {
-    flex-basis: 50px;
-    flex-shrink: 0;
+  & > .popup-text-cells-left {
     border: 1px solid white;
     border-width: 1px 1px 0px 0px;
   }
-
-  & > .name-row-right {
-    flex-grow: 1;
-    max-width: 305px;
+  & > .popup-text-cells-right  {
     text-align: center;
     border-top: 1px solid white;
+  }
+
+  & > .popup-text-cells-small {
+    flex-basis: 50px;
+    flex-shrink: 0;
+  }
+  & > .popup-text-cells-large {
+    flex-grow: 1;
+    max-width: 305px;
   }
 }
