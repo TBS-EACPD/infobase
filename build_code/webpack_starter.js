@@ -21,9 +21,11 @@ var main_client = choose('main_client');
 
 const app = a11y_client || main_client;
 
+const common_entry = ['babel-polyfill'];
+
 const options_by_app = {
   a11y_client: {
-    entry: './src/InfoBase/a11y_root.js',
+    entry: common_entry.concat(['./src/InfoBase/a11y_root.js']),
     get_output: language =>({
       path: path.resolve(__dirname, '../build/InfoBase/app/'),
       filename: `app-a11y-${language}.min.js`,
@@ -31,7 +33,7 @@ const options_by_app = {
     }),
   },
   main_client: {
-    entry: './src/InfoBase/root.js',
+    entry: common_entry.concat(['./src/InfoBase/root.js']),
     get_output: language => ({
       path: path.resolve(__dirname, '../build/InfoBase/app/'),
       filename: `app-${language}.min.js`,
