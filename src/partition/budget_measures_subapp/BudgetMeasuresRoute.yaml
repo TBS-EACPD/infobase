@@ -49,10 +49,10 @@ budget_summary_stats:
     
     
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**As of June 5, 2018:**
-    * **{{fmt_compact2_written total_allocated}}** has been **allocated** by the Treasury Board (**{%}** of the total funding)
-      * Allocations have been made to **{number}** programs to support the implementation of **{count}** budget 2018 measures; of those programs, **{number}** {{gl_tt "internal services" "INT_SERVICES"}} programs have been allocated **{value}**
-    * **{{fmt_compact2_written total_withheld}}** has been **centrally withheld** (**{%}** of the total funding)
-    * **{{fmt_compact2_written total_remaining}}** **remains** (**{%}** of the total funding)
+    * **{{fmt_compact2_written total_allocated}}** has been **allocated** by the Treasury Board (**{{fmt_percentage1 total_allocated_share}}** of the total funding)
+      * These allocations are going to **{{allocated_to_all_program_count}}** programs to support the implementation of **{{allocated_to_measure_count}}** budget 2018 measures; of those programs, **{{allocated_to_internal_services_count}}** {{gl_tt "internal services" "INT_SERVICES"}} programs have been allocated **{{fmt_compact2_written total_internal_service_allocated}}**
+    * **{{fmt_compact2_written total_withheld}}** has been **centrally withheld** (**{{fmt_percentage1 total_withheld_share}}** of the total funding)
+    * **{{fmt_compact2_written total_remaining}}** **remains** (**{{fmt_percentage1 total_remaining_share}}** of the total funding)
     * **{{fully_withheld_funds_count}}** budget measures have had their {{gt "budget_route_year"}} funding amount centrally withheld in full
     * **{{totally_funded_count}}** budget measures have received all of their funding for {{gt "budget_route_year"}}
     * **{{less_one_percent_remaining_funds_count}}** budget measures have a **non-zero** remaining balance which is **less than 1%** of their total funding for the fiscal year; these measures have effectively received all of their funding for {{gt "budget_route_year"}}

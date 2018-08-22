@@ -89,14 +89,14 @@ const calculate_summary_stats = () => {
   const funding_data_totals = reduce_by_budget_value(rolled_up_data_rows);
 
   const measure_count = all_budget_measures.length;
-
-  const total_program_allocated = _.reduce(
-    total_allocations_by_programs_and_internal_services.programs,
-    (sum, program_total_allocation) => sum + program_total_allocation,
-    0
-  );
   
+  const allocated_to_measure_count = _.filter(rolled_up_data_rows, data_row => data_row.allocated ).length;
+
   const allocated_to_program_count = _.size(total_allocations_by_programs_and_internal_services.programs);
+
+  const allocated_to_internal_services_count = _.size(total_allocations_by_programs_and_internal_services.internal_services);
+
+  const allocated_to_all_program_count = allocated_to_program_count + allocated_to_internal_services_count;
 
   const total_internal_service_allocated = _.reduce(
     total_allocations_by_programs_and_internal_services.internal_services,
@@ -132,10 +132,14 @@ const calculate_summary_stats = () => {
     measure_count,
     total_funding: funding_data_totals.funding,
     total_allocated: funding_data_totals.allocated,
+    total_allocated_share: funding_data_totals.allocated/funding_data_totals.funding,
     total_withheld: funding_data_totals.withheld,
+    total_withheld_share: funding_data_totals.withheld/funding_data_totals.funding,
     total_remaining: funding_data_totals.remaining,
-    total_program_allocated,
-    allocated_to_program_count,
+    total_remaining_share: funding_data_totals.remaining/funding_data_totals.funding,
+    allocated_to_measure_count,
+    allocated_to_all_program_count,
+    allocated_to_internal_services_count,
     total_internal_service_allocated,
     totally_funded_count,
     no_funding_in_year_count,
