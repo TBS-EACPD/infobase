@@ -44,13 +44,18 @@ budget_stats_title:
 budget_summary_stats:
   transform: [handlebars, markdown]
   en: |
-    * **{{gt "budget_name_header"}}** provides funding totalling **{{fmt_compact2_written total_funding}}** across **{{measure_count}}** budget measures for **{{gt "budget_route_year"}}**
-      * **{{no_funding_in_year_count}}** of these **{{measure_count}}** measures have **$0** in funding for **{{gt "budget_route_year"}}**
-    * **{{fmt_compact2_written total_allocated}}** in funding has been allocated, **{{fmt_compact2_written total_withheld}}** has been centrally withheld, and **{{fmt_compact2_written total_remaining}}** remains, as of **{{gt "budget_data_sourced_date"}}**
-    * **{{fmt_compact2_written total_program_allocated}}** of the allocated funding has gone to **{{allocated_to_program_count}}** different programs, the other **{{fmt_compact2_written total_internal_service_allocated}}** has gone to {{gl_tt "internal services" "INT_SERVICES"}} for the receiving organizations
-    * **{{totally_funded_count}}** of the measures receiving funding in **{{gt "budget_route_year"}}** have **$0** in remaining funds as of **{{gt "budget_data_sourced_date"}}**; these measures are totally funded for the fiscal year
-      * **{{fully_withheld_funds_count}}** of these have had their funding amount centrally withheld in full
-    * **{{less_one_percent_remaining_funds_count}}** further measures have **non-zero** remaining balances which are **less than 1%** of their total funding for the fiscal year; these measures are effectively totally funded for the fiscal year
+    * **{{gt "budget_name_header"}}** provides funding totalling up to **{{fmt_compact2_written total_funding}}** to support the implementation of **{{measure_count}}** budget measures in **{{gt "budget_route_year"}}**
+      * **{{no_funding_in_year_count}}** of the **{{measure_count}}** Budget 2018 measures are not funded in {{gt "budget_route_year"}}, but have been provided planned funding for future years
+    
+    
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**As of June 5, 2018:**
+    * **{{fmt_compact2_written total_allocated}}** has been **allocated** by the Treasury Board (**{%}** of the total funding)
+      * Allocations have been made to **{number}** programs to support the implementation of **{count}** budget 2018 measures; of those programs, **{number}** {{gl_tt "internal services" "INT_SERVICES"}} programs have been allocated **{value}**
+    * **{{fmt_compact2_written total_withheld}}** has been **centrally withheld** (**{%}** of the total funding)
+    * **{{fmt_compact2_written total_remaining}}** **remains** (**{%}** of the total funding)
+    * **{{fully_withheld_funds_count}}** budget measures have had their {{gt "budget_route_year"}} funding amount centrally withheld in full
+    * **{{totally_funded_count}}** budget measures have received all of their funding for {{gt "budget_route_year"}}
+    * **{{less_one_percent_remaining_funds_count}}** budget measures have a **non-zero** remaining balance which is **less than 1%** of their total funding for the fiscal year; these measures have effectively received all of their funding for {{gt "budget_route_year"}}
   fr: |
     * TODO
 
