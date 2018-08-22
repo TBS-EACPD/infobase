@@ -5,7 +5,7 @@ import { infograph_href_template } from '../link_utils.js';
 import { StandardRouteContainer } from '../core/NavComponents';
 import { get_col_defs } from '../gen_expl/resource-explorer-common.js';
 import { Subject } from '../models/subject.js';
-import { CreateTmCmpnt, SpinnerWrapper } from '../util_components.js';
+import { CreateTMComponent, SpinnerWrapper } from '../util_components.js';
 import { Details } from '../components/Details.js';
 import classNames from 'classnames';
 
@@ -28,7 +28,7 @@ import { ensure_loaded } from '../core/lazy_loader.js';
 import { Explorer } from '../components/ExplorerComponents.js';
 
 const INCLUDE_OTHER_TAGS = false;
-const [ text_maker, TM ] = CreateTmCmpnt(explorer_text);
+const { text_maker, TM } = CreateTMComponent(explorer_text);
 
 const HierarchySelectionItem = ({title, text, active, url }) => (
   <a 

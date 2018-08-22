@@ -11,14 +11,14 @@ import {
   StdPanel,
   Col,
   declarative_charts,
-  CreateTmCmpnt,
+  CreateTMComponent,
 } from "../shared";
 
 const { std_years } =  years;
 const { Format } = util_components;
 const { A11YTable } = declarative_charts;
 
-const [ text_maker, TM ] = CreateTmCmpnt(text);3
+const { text_maker, TM } = CreateTMComponent(text);3
 
 const is_non_revenue = d => +(d.so_num) < 19;
 

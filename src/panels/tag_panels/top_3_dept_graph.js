@@ -2,7 +2,7 @@ import text from './top_3_depts.yaml';
 import {
   PanelGraph, 
   Subject,
-  CreateTmCmpnt,
+  CreateTMComponent,
   StdPanel,
   Col,
   declarative_charts,
@@ -10,7 +10,7 @@ import {
 
 const { Dept } = Subject;
 const { ProgressDonut } = declarative_charts;
-const [ text_maker, TM ] = CreateTmCmpnt(text);
+const { text_maker, TM } = CreateTMComponent(text);
 
 new PanelGraph({
   level: "tag",

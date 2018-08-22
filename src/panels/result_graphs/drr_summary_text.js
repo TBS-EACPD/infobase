@@ -1,4 +1,4 @@
 import text from "./drr_summary_text.yaml";
-import { CreateTmCmpnt } from '../shared.js';
+import { CreateTMComponent } from '../shared.js';
 
-export const [ text_maker, TM ] = CreateTmCmpnt(text);
+export const { text_maker, TM } = CreateTMComponent(text);

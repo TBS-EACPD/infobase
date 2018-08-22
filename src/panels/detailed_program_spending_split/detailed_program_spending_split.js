@@ -15,7 +15,7 @@ import {
 const { std_years } = years; 
 
 const { 
-  CreateTmCmpnt,
+  CreateTMComponent,
   Select,
   Format,
 } = util_components
@@ -29,7 +29,7 @@ const {
 
 const { sos } = businessConstants;
 
-const [text_maker, TM ] = CreateTmCmpnt(text);
+const { text_maker, TM } = CreateTMComponent(text);
 
 
 const text_keys = {

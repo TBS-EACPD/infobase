@@ -6,7 +6,7 @@ import {
   util_components,
   declarative_charts,
   Panel,
-  CreateTmCmpnt,
+  CreateTMComponent,
 } from "../shared";
 
 const {
@@ -19,7 +19,7 @@ const {
   Format,
 } = util_components;
 
-const [ text_maker, TM ] = CreateTmCmpnt(text);
+const { text_maker, TM } = CreateTMComponent(text);
 
 const col = "{{planning_year_1}}";
 

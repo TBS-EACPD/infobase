@@ -94,9 +94,9 @@ const Abbrev = ({text,len}) => <span dangerouslySetInnerHTML={{__html: abbrev(te
 
 const TrivialTM = props => <TM tmf={trivial_text_maker} {...props} />;
 const TrivialTextMaker = props => <TextMaker text_maker_func={trivial_text_maker} {...props} />;
-const CreateTmCmpnt =  (text) => {
-  const create_text = create_text_maker(text)
-  return [create_text, (props) => <TM tmf={create_text} {...props}/>]
+const CreateTMComponent =  (text) => {
+  const text_maker = create_text_maker(text);
+  return {text_maker, TM: (props) => <TM tmf={text_maker} {...props}/>};
 };
 
 export {
@@ -130,5 +130,5 @@ export {
   DebouncedTextInput,
   ContainerEscapeHatch,
   Abbrev,
-  CreateTmCmpnt,
+  CreateTMComponent,
 };

@@ -9,9 +9,9 @@ import {autoComplete} from '../search/search.js';
 import {GlossaryEntry} from '../models/glossary.js';
 import { glossary as glossary_search_config } from '../search/search_configs.js';
 import withRouter from 'react-router/withRouter';
-import { CreateTmCmpnt } from '../util_components.js';
+import { CreateTMComponent } from '../util_components.js';
 
-const [ text_maker, TM ] = CreateTmCmpnt(glossary_text);
+const { text_maker, TM } = CreateTMComponent(glossary_text);
 
 const item_url = item_key => `/glossary/${item_key}`
 

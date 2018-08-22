@@ -4,7 +4,7 @@ import {
   run_template,
   PanelGraph, 
   years,
-  CreateTmCmpnt,
+  CreateTMComponent,
   declarative_charts,
   StdPanel,
   Col,
@@ -14,7 +14,7 @@ import { businessConstants } from '../../models/businessConstants';
 
 const { months } = businessConstants;
 
-const [ text_maker, TM ] = CreateTmCmpnt(text);
+const { text_maker, TM } = CreateTMComponent(text);
 
 const {
   people_years, 

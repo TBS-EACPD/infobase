@@ -7,13 +7,13 @@ import {
   businessConstants,
   years,
   TabbedContent,
-  CreateTmCmpnt,
+  CreateTMComponent,
   declarative_charts,
   StdPanel,
   Col,
 } from "../shared"; 
 
-const [ text_maker, TM ] = CreateTmCmpnt(text);
+const { text_maker, TM } = CreateTMComponent(text);
 
 const { people_years } = years;
 const { compact_age_groups } = businessConstants;

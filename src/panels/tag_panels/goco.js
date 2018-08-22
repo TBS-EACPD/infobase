@@ -1,7 +1,7 @@
 import text from "./goco.yaml";
 
 import {
-  CreateTmCmpnt,
+  CreateTMComponent,
   PanelGraph,
   Subject,
   reactAdapter,  
@@ -17,7 +17,7 @@ const { GraphLegend } = declarative_charts;
 const { Format } = util_components;
 const { Tag } = Subject;
 
-const [ text_maker, TM ] = CreateTmCmpnt(text);
+const { text_maker, TM } = CreateTMComponent(text);
 
 const state = {active_spend_area : null};
 const title_font_size = "1.5em";
