@@ -86,9 +86,9 @@ dept_budget_measures_panel_text:
 program_crso_budget_measures_panel_text:
   transform: [handlebars, markdown]
   en: |
-    **{{subj_name subject}}** has been {{gl_tt "allocated" "BIV_ALLO"}} **{{fmt_compact1_written total_allocated}}** through **{{measure_count}}** {{gt "budget_name"}} 
-    {{#if multiple_measures}}measures{{else}}measure{{/if}} for **{{gt "budget_route_year"}}**, as of **{{gt "budget_data_sourced_date"}}**.
-    These values are on an Estimates basis as per {{ext_link "Main Estimates 2018-19" "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates/2018-19-estimates/2018-19-sources-uses-budget-implementation-vote-department.html"}}.
+    As of {{gt "budget_data_sourced_date"}}, **{{subj_name subject}}** has been {{gl_tt "allocated" "BIV_ALLO"}} **{{fmt_compact1_written total_allocated}}** to support the 
+    implementation of **{{measure_count}}** {{gt "budget_name"}} {{#if multiple_measures}}measures{{else}}measure{{/if}} in **{{gt "budget_route_year"}}**.
+    These values are on a cash basis as per {{ext_link "Main Estimates 2018-19" "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates/2018-19-estimates/2018-19-sources-uses-budget-implementation-vote-department.html"}}.
     {{> "budget_measure_panel_tracker_link_en"}}
   fr: |
     TODO

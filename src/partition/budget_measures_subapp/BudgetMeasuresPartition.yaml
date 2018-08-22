@@ -75,8 +75,8 @@ submeasures_table_title:
 
 budget_measure_submeasure_note:
   en: |
-    Submeasures are part of the allocation process and do not appear in {{gt "budget_name"}}. Unlike Budget Measures, submeasures are not shared across organizations. 
-    Submeasures serve only to provide further labeling to the breakout of allocated and withheld values for specific measures under specific organizations; 
+    Sub-measures are part of the allocation process and do not appear {{gt "budget_name"}}. Unlike Budget Measures, sub-measures are not shared across organizations.
+    Sub-measures serve only to provide a further breakout of allocated and withheld amounts for specific measures under specific organizations;
     they do not have values for budget funding or remaining funds.
   fr: |
     TODO
