@@ -187,14 +187,14 @@ const QuadrantDefList = ({defs} ) => <div>
   <div className="clearfix" />
 </div>
 
-const Glyph = ({color,type}) => <span style={{color}} className={`glyphicon glyphicon-${type} v-centered`} />
+// const Glyph = ({color,type}) => <span style={{color}} className={`glyphicon glyphicon-${type} v-centered`} />
 const status_icons = {
   //icons for specific colours that group the other status_keys
-  success: <Glyph type="ok-circle" color="#006400"/>,
-  ontrack: <Glyph type="time" color="#006400" />,
-  failure: <Glyph type="exclamation-sign" color="#880707" />,
-  not_avail: <Glyph type="question-sign" color="#6b6b6b"/>,
-  not_appl: <Glyph type="minus-sign" color="#12307d" />,
+  success: <img src="svg/met.svg" style={{width:'40px'}}/>,
+  ontrack: <img src="svg/on_track.svg" style={{width:'40px'}}/>,
+  failure: <img src="svg/attention_req.svg" style={{width:'40px'}}/>,
+  not_avail: <img src="svg/not_available.svg" style={{width:'40px'}}/>,
+  not_appl: <img src="svg/no_applicable.svg" style={{width:'40px'}}/>,
 };
 
 
@@ -241,10 +241,10 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
             <span className="status-icon-table__count">
               {count}
             </span>
-            <span className="status-icon-table__icon">
-              {status_icons[icon_key]}
-            </span>
           </div>
+          <span className="status-icon-table__icon">
+            {status_icons[icon_key]}
+          </span>
           <div className="status-icon-table__word">
             <span
               className="link-unstyled"

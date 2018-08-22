@@ -1,7 +1,7 @@
 import withRouter from 'react-router/withRouter';
 import { reactAdapter } from './reactAdapter.js';
 import { log_page_view } from './analytics.js';
-
+import { Fragment } from 'react'
 import { index_lang_lookups } from '../InfoBase/index_data.js';
 
 const { page_title: default_title, meta_description: default_description } = index_lang_lookups;
@@ -32,16 +32,21 @@ class BreadCrumbs extends React.Component {
           </a>
         </li>
         {_.map(crumbs, (display,ix) => 
-          <li 
-            key={ix}
-            className="infobase-home-breadcrumb-link"
-          >
-            {
+          <Fragment>
+            <li>
+              <img src="svg/arrow.svg" style={{width:"20px", 'margin':"0 2px 0 3px"}}></img>
+            </li>
+            <li 
+              key={ix}
+              className="infobase-home-breadcrumb-link"
+            >
+              {
               _.isString(display) ? //allow strings or react elements to be used here (note that some strings may have the weird french apostrophe that needs to non-escaped)
                 <span dangerouslySetInnerHTML={{__html:display}} /> :
                 display
-            }
-          </li>
+              }
+            </li>
+          </Fragment>
         )}
       </ol>
     );

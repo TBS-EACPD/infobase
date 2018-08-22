@@ -34,8 +34,9 @@ const add_search_glyphicon = (container) => {
       <div class="search-glyphicon-container">
         <span 
           aria-hidden="true"
-          class="glyphicon glyphicon-search glyphicon--desktop"
-        ></span>
+        >
+        <img src="svg/search.svg" style="width:30px">
+        </span>
       </div>`);
 }
 

@@ -525,3 +525,7 @@ dl.dl-no-bold-dts {
 .zero-padding {
   padding: 0px !important;
 }
+
+#wb-bc li:before{
+  content: none !important;
+}
