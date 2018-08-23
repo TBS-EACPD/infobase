@@ -14,7 +14,7 @@ import { bubble_defs } from './bubble_definitions.js';
 import { ReactPanelGraph } from '../core/PanelCollectionView.js';
 
 import {
-  CreateTMComponent,
+  create_text_maker_component,
   SpinnerWrapper,
   EverythingSearch,
 } from '../util_components';
@@ -23,7 +23,7 @@ import { infograph_href_template } from './routes.js';
 
 const sub_app_name = "infographic_org";
 
-const { text_maker, TM } = CreateTMComponent(text);
+const { text_maker, TM } = create_text_maker_component(text);
 
 const name_for_title = subject => {
   if(subject.level === 'program' && !_.isEmpty(subject.dept.fancy_acronym)){

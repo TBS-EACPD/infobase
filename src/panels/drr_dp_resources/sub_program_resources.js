@@ -18,7 +18,7 @@ import {
   Results,
   utils,
   Panel,
-  CreateTMComponent,
+  create_text_maker_component,
 } from "../shared";
 
 
@@ -40,7 +40,7 @@ import {
 
 const { get_by_guid } = Subject;
 
-const { text_maker, TM } = CreateTMComponent(text);
+const { text_maker, TM } = create_text_maker_component(text);
 
 const {
   SubProgramEntity,

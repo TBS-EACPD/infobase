@@ -1,4 +1,4 @@
 import text from './EstimatesComparison.yaml';
-import { CreateTMComponent } from '../util_components.js';
+import { create_text_maker_component } from '../util_components.js';
 
-export const { text_maker, TM } = CreateTMComponent(text)
+export const { text_maker, TM } = create_text_maker_component(text)

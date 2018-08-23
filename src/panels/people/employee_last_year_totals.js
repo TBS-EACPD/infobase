@@ -2,13 +2,13 @@ import text from "./employee_last_year_totals.yaml";
 import {
   PanelGraph,
   formats,
-  CreateTMComponent,
+  create_text_maker_component,
   declarative_charts,
   StdPanel,
   Col,
 } from "../shared"; 
 
-const { text_maker, TM } = CreateTMComponent(text);
+const { text_maker, TM } = create_text_maker_component(text);
 
 const { CirclePieChart } = declarative_charts;
 

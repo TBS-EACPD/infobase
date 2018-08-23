@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { 
   FootnoteList, 
-  CreateTMComponent,
+  create_text_maker_component,
 } from '../util_components.js';
 import { Details } from '../components/Details.js';
 
-const { TM } = CreateTMComponent(text);
+const { TM } = create_text_maker_component(text);
 
 const PanelSource = ({links}) => {
   if(_.isEmpty(links)){

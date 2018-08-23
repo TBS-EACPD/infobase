@@ -7,7 +7,7 @@ import {
   businessConstants,
   util_components,
   declarative_charts,
-  CreateTMComponent,
+  create_text_maker_component,
   Panel,
 } from "../shared";
 
@@ -26,7 +26,7 @@ const {
   A11YTable,
 } = declarative_charts;
 
-const { text_maker, TM } = CreateTMComponent([text1,text2]);
+const { text_maker, TM } = create_text_maker_component([text1,text2]);
 
 const calculate_stats_common = (data) => {
   const total_funding = _.reduce(data,

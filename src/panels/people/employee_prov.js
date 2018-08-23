@@ -6,12 +6,12 @@ import {
   years,
   businessConstants,
   charts_index,
-  CreateTMComponent,
+  create_text_maker_component,
   StdPanel,
   Col,
 } from "../shared"; 
 
-const { text_maker, TM } = CreateTMComponent(text);
+const { text_maker, TM } = create_text_maker_component(text);
 
 const {people_years} = years;
 const {provinces} = businessConstants;

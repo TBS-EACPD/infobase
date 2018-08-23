@@ -4,9 +4,9 @@ import home_text2 from "./home-a11y.yaml";
 import get_home_content from './home-data.js';
 
 import { StandardRouteContainer } from '../core/NavComponents.js';
-import { CreateTMComponent } from '../util_components.js';
+import { create_text_maker_component } from '../util_components.js';
 
-const { text_maker, TM } = CreateTMComponent([home_text1, home_text2]);
+const { text_maker, TM } = create_text_maker_component([home_text1, home_text2]);
 
 export const Home = () => {
 

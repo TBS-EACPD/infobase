@@ -2,14 +2,14 @@ import text from './spend_rev_split.yaml';
 import {
   Statistics,
   formats,
-  CreateTMComponent,
+  create_text_maker_component,
   PanelGraph,
   declarative_charts,
   StdPanel,
   Col,
 } from "../shared";
 
-const { text_maker, TM } = CreateTMComponent(text);
+const { text_maker, TM } = create_text_maker_component(text);
 
 const { Bar } = declarative_charts;
 

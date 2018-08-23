@@ -7,7 +7,7 @@ import {
   util_components,
 } from '../shared.js';
 
-const { CreateTMComponent, TrivialTextMaker} = util_components;
+const { create_text_maker_component, TrivialTextMaker} = util_components;
 
-export const { text_maker, TM } = CreateTMComponent([intro_lang, fin_lang, ppl_lang, results_lang, tag_lang]);
+export const { text_maker, TM } = create_text_maker_component([intro_lang, fin_lang, ppl_lang, results_lang, tag_lang]);
 export const TextMaker = TrivialTextMaker;

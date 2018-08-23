@@ -1,5 +1,5 @@
 import igoc_explorer_bundle from './igoc_explorer.yaml';
-import { CreateTMComponent } from '../util_components.js';
+import { create_text_maker_component } from '../util_components.js';
 
-export const { text_maker: igoc_tmf, TM } = CreateTMComponent(igoc_explorer_bundle);
+export const { text_maker: igoc_tmf, TM } = create_text_maker_component(igoc_explorer_bundle);
 

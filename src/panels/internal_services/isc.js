@@ -20,7 +20,7 @@ import {
   formats, 
   run_template, 
   PanelGraph, 
-  CreateTMComponent,
+  create_text_maker_component,
   years, 
   declarative_charts,
 } from '../shared';
@@ -29,7 +29,7 @@ const { Gov, Tag } = Subject;
 const { std_years } = years;
 const { Bar, GraphLegend } = declarative_charts;
 
-const { text_maker, TM } = CreateTMComponent(text);
+const { text_maker, TM } = create_text_maker_component(text);
 
 new PanelGraph({
   level: "dept",

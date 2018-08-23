@@ -9,7 +9,7 @@ import {
   Panel,
   get_planned_fte_source_link,
   get_planned_spending_source_link,
-  CreateTMComponent,
+  create_text_maker_component,
 } from "../shared";
 
 const { 
@@ -25,7 +25,7 @@ const {
 
 const { planning_years } = years;
 
-const { text_maker, TM } = CreateTMComponent(text);
+const { text_maker, TM } = create_text_maker_component(text);
 
 function calculate(subject,info){
   if(subject.dead_so){

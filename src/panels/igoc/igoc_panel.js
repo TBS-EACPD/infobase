@@ -5,9 +5,9 @@ import {
   TextPanel,
 } from '../shared';
 
-const { CreateTMComponent } = util_components;
+const { create_text_maker_component } = util_components;
 
-const { tmf, TM } = CreateTMComponent(text);
+const { text_maker, TM } = create_text_maker_component(text);
 
 new PanelGraph({
   level: 'dept',
@@ -18,7 +18,7 @@ new PanelGraph({
     const { subject } = calculations;
 
     return (
-      <TextPanel title={tmf("org_profile")}>
+      <TextPanel title={text_maker("org_profile")}>
         <TM 
           k="igoc_data_t"
           args={{ 
@@ -55,7 +55,7 @@ new PanelGraph({
 
     return (
       <TextPanel
-        title={tmf("org_links")}
+        title={text_maker("org_links")}
       >
         <TM k="igoc_links_t" args={{ org: subject }} />
       </TextPanel>

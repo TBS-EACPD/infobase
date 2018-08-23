@@ -12,7 +12,7 @@ import { Explorer } from '../../components/ExplorerComponents.js';
 import {
   PanelGraph,
   Panel,
-  CreateTMComponent,
+  create_text_maker_component,
 } from "../shared";
 
 
@@ -31,7 +31,7 @@ import {
   map_dispatch_to_root_props,
 } from '../../gen_expl/state_and_memoizing';
 
-const { text_maker, TM } = CreateTMComponent(text);
+const { text_maker, TM } = create_text_maker_component(text);
 
 const get_non_col_content = ({node}) => { 
   const {

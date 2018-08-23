@@ -1,6 +1,6 @@
 import metadata_text from './metadata.yaml';
 import { StandardRouteContainer, ScrollToTargetContainer } from '../core/NavComponents.js';
-import { CreateTMComponent, FancyUL } from '../util_components.js';
+import { create_text_maker_component, FancyUL } from '../util_components.js';
 import { sources } from './data_sources.js';
 import { Panel } from '../components/panel-components.js';
 import { businessConstants } from '../models/businessConstants';
@@ -9,7 +9,7 @@ const { months } = businessConstants;
 
 const FormattedDate = ({ day, month, year}) => <span>{months[month].text} {year}</span>;
 
-const { text_maker: tmf, TM } = CreateTMComponent(metadata_text);
+const { text_maker, TM } = create_text_maker_component(metadata_text);
 
 export class MetaData extends React.Component {
   render(){
@@ -25,9 +25,9 @@ export class MetaData extends React.Component {
 
     return (
       <StandardRouteContainer
-        title={tmf("metadata")}
-        breadcrumbs={[tmf("metadata")]}
-        description={tmf("metadata_document_description")}
+        title={text_maker("metadata")}
+        breadcrumbs={[text_maker("metadata")]}
+        description={text_maker("metadata_document_description")}
         route_key="_metadata"
       >
         <div>
@@ -53,7 +53,7 @@ export class MetaData extends React.Component {
                       { 
                         inline_link ? 
                         <a 
-                          title={tmf('rpb_link_text')}
+                          title={text_maker('rpb_link_text')}
                           href={inline_link}
                           style={{alignSelf: "center"}}
                         >

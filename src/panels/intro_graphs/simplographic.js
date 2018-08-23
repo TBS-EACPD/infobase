@@ -10,9 +10,9 @@ import { ResultCounts } from '../../models/results.js';
 import { get_static_url } from '../../core/request_utils.js';
 
 const { Gov, Dept } = Subject;
-const { CreateTMComponent} = util_components;
+const { create_text_maker_component} = util_components;
 
-const { TM } = CreateTMComponent(simplographic_text);
+const { TM } = create_text_maker_component(simplographic_text);
 
 new PanelGraph({
   level: 'gov',
