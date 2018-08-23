@@ -84,17 +84,22 @@ export const Home = () => {
           <TM k="survey_home_desc" />
         </section>
 
-      </section>
+        <section>
+          <h3>
+            <TM k="featured_data_title" />
+          </h3>
+          <ul>
+            {_.map(featured_content_items, ({ text_key, href }) =>
+              <li key={text_key}>
+                <a href={href}>
+                  <TM k={text_key} />
+                </a>
+              </li>
+            )}
+          </ul>
+        </section>
 
-      <ul>
-        {_.map(featured_content_items, ({ text_key, href }) =>
-          <li key={text_key}>
-            <a href={href}>
-              <TM k={text_key} />
-            </a>
-          </li>
-        )}
-      </ul>
+      </section>
 
     </StandardRouteContainer>
   )
