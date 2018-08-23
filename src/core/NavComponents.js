@@ -101,7 +101,7 @@ export class StandardRouteContainer extends React.Component {
       route_key,
       children,
       shouldSyncLang,
-      shouldSyncA11yLink,
+      non_a11y_route,
     } = this.props;
 
     return (
@@ -113,8 +113,8 @@ export class StandardRouteContainer extends React.Component {
         { shouldSyncLang !== false &&
           <LangSynchronizer /> 
         }
-        { !is_a11y_mode && shouldSyncA11yLink !== false && 
-          <A11yLinkSynchronizer/>
+        { !is_a11y_mode && 
+          <A11yLinkSynchronizer non_a11y_route={non_a11y_route}/>
         }
         <div>
           {children}
@@ -183,7 +183,12 @@ export const A11yLinkSynchronizer = withRouter(
     componentDidUpdate(){ this._update(); }
     componentDidMount(){ this._update(); }
     _update(){
-      const { a11y_link_modifier } = this.props;
+      let { non_a11y_route, a11y_link_modifier } = this.props;
+
+      if (non_a11y_route){
+        a11y_link_modifier = () => "#start";
+      }
+
       synchronize_link('#ib-site-header a.a11y-version-link', a11y_link_modifier);
     }
   }
@@ -198,7 +203,7 @@ const synchronize_link = (target_el_selector, link_modifier_func) => {
   newHash = newHash.split("#")[1] || "";
 
   if ( _.get(el_to_update, "href") ){
-    const link = _.first(el_to_update.href.split("#"));
+    const link = _.first( el_to_update.href.split("#") );
     if (link){
       el_to_update.href = `${link}#${newHash}`;
     }

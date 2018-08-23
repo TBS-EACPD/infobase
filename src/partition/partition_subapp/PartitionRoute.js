@@ -65,6 +65,7 @@ export class PartitionRoute extends React.Component {
         description={text_maker("partition_route_description")}
         breadcrumbs={[text_maker("partition_title")]}
         route_key="partition"
+        non_a11y_route={true}
       >
         <ContainerEscapeHatch>
           { this.state.loading && <SpinnerWrapper ref="spinner" scale={4} /> }

@@ -319,6 +319,7 @@ class BubbleExplore extends React.Component {
         title={text_maker("dept_explore_title")}
         breadcrumbs={[text_maker("dept_explore_title")]}
         route_key="_explore"
+        non_a11y_route={true}
       >
         <h1> <TM tmf={text_maker} k="dept_explore_title" /> </h1>
         <A11yContent />
