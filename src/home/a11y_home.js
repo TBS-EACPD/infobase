@@ -23,12 +23,15 @@ export const Home = (props) => {
 
   return (
     <StandardRouteContainer route_key="start">
-      { no_basic_equiv === "no_basic_equiv" &&
-        <div>
-          oops, no a11y equivalent
-        </div>
-      }
       <h1> <TM k="title" /> </h1>
+      { no_basic_equiv === "no_basic_equiv" && false
+        // TODO: write home_a11y_non_a11y_redirect_warning text
+        //<div
+        //  className={"alert alert-no-symbol alert-warning alert--is-bordered large_panel_text"}
+        //>
+        //  <TM k="home_a11y_non_a11y_redirect_warning" />
+        //</div>
+      }
       <section>
         <h2> <TM k="home_a11y_gov_infograph" /> </h2>
         <ul>
