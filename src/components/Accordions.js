@@ -77,13 +77,10 @@ const StatelessPullDownAccordion = ({ title, isExpanded, children, onToggle }) =
         className="pull-down-accordion-expander"
         aria-label={isExpanded ? "collapse above" : "expand above"}
       >
-        <span 
-          className={classNames(
-            "glyphicon",
-            isExpanded && "glyphicon-chevron-up",
-            !isExpanded && "glyphicon-chevron-down" 
-          )}
-        />
+        <span>
+          <img src="svg/chevron.svg" style={{ width:"20px", transform: isExpanded ? 'rotate(180deg)' : 'none' }}></img>
+        </span>
+
       </button>
     </div> 
   </div>

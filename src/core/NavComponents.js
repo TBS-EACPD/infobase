@@ -32,12 +32,11 @@ class BreadCrumbs extends React.Component {
           </a>
         </li>
         {_.map(crumbs, (display,ix) => 
-          <Fragment>
+          <Fragment key={ix} >
             <li>
               <img src="svg/arrow.svg" style={{width:"20px", 'margin':"0 2px 0 3px"}}></img>
             </li>
             <li 
-              key={ix}
               className="infobase-home-breadcrumb-link"
             >
               {

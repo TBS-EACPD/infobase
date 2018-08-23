@@ -135,8 +135,15 @@ const common_svg = [
   'src/panels/result_graphs/not_available.svg',
   'src/panels/result_graphs/on_track.svg',
 
+  //eye icons
+  'src/partition/budget_measures_subapp/eye-close.svg',
+  'src/partition/budget_measures_subapp/eye-open.svg',
+
   //breadcrumb arrow
   'src/core/arrow.svg',
+
+  //accordian chevron
+  'src/components/chevron.svg',
 
 ];
 

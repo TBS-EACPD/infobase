@@ -145,14 +145,9 @@ export class BudgetMeasuresControls extends React.Component {
                             visibility: filtered_chapter_keys.length !== 0 ? "visible" : "hidden",
                           }}
                         >
-                          <span
-                            className={
-                              "glyphicon glyphicon-eye-" + 
-                                (_.includes(active_list, chapter_key) ?
-                                  "open" : 
-                                  "close")
-                            }
-                          ></span>
+                          <span>
+                            <img src={`svg/eye-${ (_.includes(active_list, chapter_key)) ? 'open' : 'close' }.svg`} className="status-icon-table__eye" ></img>
+                          </span>
                         </div>
                         <div className="chapter-key-table__word">
                           <span className="link-unstyled">

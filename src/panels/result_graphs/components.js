@@ -228,14 +228,9 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
               visibility: active_list.length !==0 ? "visible" : "hidden",
             }}
           >
-            <span
-              className={
-                "glyphicon glyphicon-eye-" + 
-                  (_.includes(active_list, icon_key) ? 
-                    "open" : 
-                    "close")
-              }
-            ></span>
+            <span>
+              <img src={`svg/eye-${ (_.includes(active_list, icon_key)) ? 'open' : 'close' }.svg`}></img>
+            </span>
           </div>
           <div className="status-icon-table__icon-count">
             <span className="status-icon-table__count">

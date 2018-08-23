@@ -144,17 +144,15 @@ dl.indicator-item__dl dt+dd {
 
 
 .status-icon-table__eye {
-  width: 0px;
-  height: 0px;
-  align-self: center;
-}
-.status-icon-table__eye > .glyphicon {
   top: -13px;
   left: -67px;
-  font-size: 20px;
+  align-self: center;
+}
+.status-icon-table__eye > span > img {
+  width: 40px;
 }
 @media(max-width:992px) and (min-width:768px){
-  .status-icon-table__eye > .glyphicon {
+  .status-icon-table__eye > span > img {
     left: -57px;
   }
 }
