@@ -6,22 +6,12 @@ budget_measure_a11y_table_open_data_link:
   transform: [handlebars, markdown]
   en: |
     This table presents an overview of Budget 2018 funding decisions, including descriptions of budget measures and links to corresponding sections of the Budget Plan. 
-    For access to all available data, down to the lowest level, see the <a href="TODO" target="_blank">Budget 2018 Open Data Page</a>.
+    For access to all available data, down to the lowest level, see the Budget 2018 Open Data Page, which will be available by mid-September.
   fr: |
     Ce tableau donne un aperçu des décisions relatives au financement du budget de 2018 et comprend une description des mesures budgétaires ainsi que des liens vers les 
-    sections correspondantes du plan budgétaire. Pour avoir accès à toutes les données disponibles, jusqu'au niveau le plus bas, consultez 
-    <a href="TODO" target="_blank">la page de données ouvertes du budget de 2018</a>.
+    sections correspondantes du plan budgétaire. Pour avoir accès à toutes les données disponibles, jusqu'au niveau le plus bas, 
+    consultez la page de données ouvertes du budget de 2018, qui sera disponible à la mi-septembre.
 
-budget_measure_a11y_table_no_open_data_link:
-  transform: [handlebars, markdown]
-  en: |
-    This table presents an overview of Budget 2018 funding decisions, including descriptions of budget measures and links to corresponding sections of the Budget Plan. 
-    For access to all available data, down to the lowest level, refer to these two datasets: 
-    TODO download links for datasets
-  fr: |
-    Ce tableau donne un aperçu des décisions relatives au financement du budget de 2018 et comprend une description des mesures budgétaires ainsi que des liens vers les 
-    sections correspondantes du plan budgétaire. Pour accéder à toutes les données disponibles, jusqu'au niveau le plus bas, consultez ces deux ensembles de données :
-    TODO download links for datasets
 
 budget_measure_descriptions:
   en: Budget Measure Descriptions
