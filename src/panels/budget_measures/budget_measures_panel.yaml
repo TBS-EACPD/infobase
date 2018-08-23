@@ -4,15 +4,15 @@ budget_measures_panel_title:
 
 budget_measure_a11y_table_title:
   en: Overview by Budget Measure
-  fr: TODO
+  fr: Aperçu par mesure budgétaire
 
 budget_org_a11y_table_title:
   en: Overview by Organization
-  fr: TODO
+  fr: Aperçu par organisation
 
 budget_program_a11y_table_title:
   en: Overview by Program
-  fr: TODO
+  fr: Aperçu par programme
 
 budget_measure_stats_partial_en:
   handlebars_partial: true
@@ -91,7 +91,10 @@ program_crso_budget_measures_panel_text:
     These values are on a cash basis as per {{ext_link "Main Estimates 2018-19" "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates/2018-19-estimates/2018-19-sources-uses-budget-implementation-vote-department.html"}}.
     {{> "budget_measure_panel_tracker_link_en"}}
   fr: |
-    TODO
+    En date du {{gt "budget_data_sourced_date"}}, **{{fmt_compact1_written total_allocated}}** ont été {{gl_tt "affectés" "BIV_ALLO"}} au **{{subj_name subject}}** pour la mise en œuvre 
+    {{#if multiple_measures}}de **{{measure_count}}**{{else}}d'**une**{{/if}} mesure budgétaire de **{{gt "budget_route_year"}}**. 
+    Ces valeurs sont calculées selon la comptabilité de caisse, conformément au {{ext_link "Budget principal des dépenses 2018-2019" "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal/2018-19-budget-depenses/2018-2019-provenance-utilisation-credit-execution-budget-ministere.html"}}..
+    {{> "budget_measure_panel_tracker_link_fr"}}
 
 budget_panel_group_by:
   en: Group by
@@ -99,7 +102,7 @@ budget_panel_group_by:
 
 budget_panel_select_value:
   en: Select values to display
-  fr: TODO
+  fr: Sélectionner les valeurs à afficher
 
 budget_panel_a11y_link_header:
   en: Link to Budget 2018 section
