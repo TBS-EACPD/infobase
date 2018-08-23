@@ -48,7 +48,7 @@ budget_summary_stats:
       * **{{no_funding_in_year_count}}** of the **{{measure_count}}** Budget 2018 measures are not funded in {{gt "budget_route_year"}}, but have been provided planned funding for future years
     
     
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**As of June 5, 2018:**
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**As of {{gt "budget_data_sourced_date"}}:**
     * **{{fmt_compact2_written total_allocated}}** has been **allocated** by the Treasury Board (**{{fmt_percentage1 total_allocated_share}}** of the total funding)
       * These allocations are going to **{{allocated_to_all_program_count}}** programs to support the implementation of **{{allocated_to_measure_count}}** budget 2018 measures; of those programs, **{{allocated_to_internal_services_count}}** {{gl_tt "internal services" "INT_SERVICES"}} programs have been allocated **{{fmt_compact2_written total_internal_service_allocated}}**
     * **{{fmt_compact2_written total_withheld}}** has been **centrally withheld** (**{{fmt_percentage1 total_withheld_share}}** of the total funding)
@@ -57,7 +57,18 @@ budget_summary_stats:
     * **{{totally_funded_count}}** budget measures have received all of their funding for {{gt "budget_route_year"}}
     * **{{less_one_percent_remaining_funds_count}}** budget measures have a **non-zero** remaining balance which is **less than 1%** of their total funding for the fiscal year; these measures have effectively received all of their funding for {{gt "budget_route_year"}}
   fr: |
-    * TODO
+    * **{{gt "budget_name_header"}}** prévoit un financement pouvant atteindre **{{fmt_compact2_written total_funding}}** à l'appui de la mise en œuvre des **{{measure_count}}** mesures budgétaires en **{{gt "budget_route_year"}}** 
+      * **{{no_funding_in_year_count}}** des **{{measure_count}}** mesures du budget 2018 ne sont pas financées en {{gt "budget_route_year"}}, mais ont reçu les fonds prévus pour les années futures
+
+    
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**En date du {{gt "budget_data_sourced_date"}}:**
+    *	**{{fmt_compact2_written total_allocated}}** ont été **affectés** par le Conseil du Trésor (**{{fmt_percentage1 total_allocated_share}}** du financement total)
+      * Ces fonds ont été affectés à **{{allocated_to_all_program_count}}** programmes pour la mise en œuvre de **{{allocated_to_measure_count}}** mesures budgétaires de 2018; parmi ces programmes, **{{fmt_compact2_written total_internal_service_allocated}}** ont été affectés à **{{allocated_to_internal_services_count}}** programmes de {{gl_tt "services internes" "INT_SERVICES"}}
+    *	**{{fmt_compact2_written total_withheld}}** ont été **retenus centralement** (**{{fmt_percentage1 total_withheld_share}}** du financement total) 
+    *	**{{fmt_compact2_written total_remaining}}** **restant** (**{{fmt_percentage1 total_remaining_share}}** du financement total)
+    * L’administration centrale a retenu la totalité du financement prévu de **{{fully_withheld_funds_count}}** mesures budgétaires pour {{gt "budget_route_year"}}
+    * **{{totally_funded_count}}** mesures budgétaires ont reçu la totalité des fonds prévus pour {{gt "budget_route_year"}} 
+    * **{{less_one_percent_remaining_funds_count}}** mesures budgétaires ont un solde restant **non nul** et **moins de 1 %** du financement prévu pour l'exercice en cours; ces mesures ont effectivement reçu la totalité de leur financement pour {{gt "budget_route_year"}}
 
 budget_route_top_text_notes:
   transform: [handlebars, markdown]
@@ -68,7 +79,7 @@ budget_route_top_text_notes:
   fr: |
     Toutes les valeurs affichées dans le présent tableau correspondent au financement de **{{gt "budget_route_year"}}** figurant dans le {{ext_link "Budget principal des dépenses de 2018‑2019" "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal/2018-19-budget-depenses/2018-2019-provenance-utilisation-credit-execution-budget-ministere.html"}}.
     Les valeurs de {{gl_tt "fonds du budget de 2018" "BIV_FUND"}} ont été établies dans le Plan budgétaire de 2018, déposé à la Chambre des communes le **27 février 2018**.
-    Les valeurs des {{gl_tt "fonds affectés" "BIV_ALLO"}}, des {{gl_tt "fonds retenus centralement" "BIV_WITH"}} et des {{gl_tt "fonds résiduels" "BIV_REMA"}} sont à jour en date du **{{gt "budget_data_sourced_date"}}** et seront mises à jour périodiquement.
+    Les valeurs des {{gl_tt "fonds affectés" "BIV_ALLO"}}, des {{gl_tt "fonds retenus centralement" "BIV_WITH"}} et des {{gl_tt "fonds restants" "BIV_REMA"}} sont à jour en date du **{{gt "budget_data_sourced_date"}}** et seront mises à jour périodiquement.
 
 budget_route_top_text:
   transform: [handlebars, markdown]

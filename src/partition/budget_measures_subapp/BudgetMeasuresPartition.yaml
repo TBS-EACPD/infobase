@@ -81,7 +81,7 @@ budget_measure_submeasure_note:
   fr: |
     Les sous-mesures font partie du processus d'affectation et ne figurent pas dans le {{gt "budget_name"}}. Contrairement aux mesures budgétaires, les sous-mesures ne sont pas communes à toutes les organisations.
     Elles ne servent qu'à ventiler davantage les montants affectés et retenus de certaines organisations pour des mesures précises;
-    les sous-mesures n'ont pas de valeur en ce qui a trait au financement budgétaire ou aux fonds résiduels.
+    les sous-mesures n'ont pas de valeur en ce qui a trait au fonds du budget de 2018 ou aux fonds restants.
 
 budget_sourced_date_note:
   transform: [handlebars]
