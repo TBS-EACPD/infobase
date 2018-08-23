@@ -101,6 +101,7 @@ export class StandardRouteContainer extends React.Component {
       route_key,
       children,
       shouldSyncLang,
+      shouldSyncA11yLink,
     } = this.props;
 
     return (
@@ -110,7 +111,10 @@ export class StandardRouteContainer extends React.Component {
         <BreadCrumbs crumbs={breadcrumbs} />
         <AnalyticsSynchronizer route_key={route_key} />
         { shouldSyncLang !== false &&
-           <LangSynchronizer /> 
+          <LangSynchronizer /> 
+        }
+        { !is_a11y_mode && shouldSyncA11yLink !== false && 
+          <A11yLinkSynchronizer/>
         }
         <div>
           {children}
@@ -168,25 +172,38 @@ export const LangSynchronizer = withRouter(
     componentDidMount(){ this._update(); }
     _update(){
       const { lang_modifier } = this.props;
-      
-      //TODO: probabbly being too defensive here
-      const el_to_update = document.querySelector('#wb-lng a');
-      let newHash = (
-        _.isFunction(lang_modifier) ? 
-        lang_modifier(document.location.hash) : 
-        document.location.hash
-      )
-      newHash = newHash.split("#")[1] || "";
-
-      if (_.get(el_to_update, "href")){
-        const link = _.first(el_to_update.href.split("#"));
-        if(link){
-          el_to_update.href = `${link}#${newHash}`;
-        }
-      }
+      synchronize_link('#wb-lng a', lang_modifier);
     }
   }
 );
+
+export const A11yLinkSynchronizer = withRouter(
+  class LangSynchronizer extends React.Component {
+    render(){ return null; }
+    componentDidUpdate(){ this._update(); }
+    componentDidMount(){ this._update(); }
+    _update(){
+      const { a11y_link_modifier } = this.props;
+      synchronize_link('#ib-site-header a.a11y-version-link', a11y_link_modifier);
+    }
+  }
+);
+
+const synchronize_link = (target_el_selector, link_modifier_func) => {
+  //TODO: probabbly being too defensive here
+  const el_to_update = document.querySelector(target_el_selector);
+  let newHash = _.isFunction(link_modifier_func) ? 
+    link_modifier_func(document.location.hash) : 
+    document.location.hash;
+  newHash = newHash.split("#")[1] || "";
+
+  if ( _.get(el_to_update, "href") ){
+    const link = _.first(el_to_update.href.split("#"));
+    if (link){
+      el_to_update.href = `${link}#${newHash}`;
+    }
+  }
+};
 
 export const ReactUnmounter = withRouter(
   class ReactUnmounter_ extends React.Component {
