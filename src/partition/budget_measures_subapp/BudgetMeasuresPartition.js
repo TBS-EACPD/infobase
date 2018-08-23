@@ -266,7 +266,7 @@ const render_diagram = (diagram, props, data, data_wrapper_node_rules, dont_fade
     colors: [
       "#81eeff",
       "#53e492",
-      "#BD7DD9",
+      "#c388dd",
       "#febb5d",
       "#61c8ff",
       "#FD53AE",
