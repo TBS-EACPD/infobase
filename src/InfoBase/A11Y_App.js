@@ -50,7 +50,9 @@ export class App extends React.Component {
           <Route path="/about" component={About} />
           <Route path="/graph/:level?/:graph?/:id?" component={GraphInventory} />
           <Route path="/compare_estimates" component={EstimatesComparison} />
+          <Route path="/start/:no_basic_equiv?" component={Home} />
           <Route path="/" component={Home} />
+          
         </Switch>
       </div>
     );

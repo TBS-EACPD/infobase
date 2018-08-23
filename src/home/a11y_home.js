@@ -8,13 +8,26 @@ import { create_text_maker_component } from '../util_components.js';
 
 const { text_maker, TM } = create_text_maker_component([home_text1, home_text2]);
 
-export const Home = () => {
+export const Home = (props) => {
+
+  const {
+    match: {
+      params: {
+        no_basic_equiv,
+      },
+    },
+  } = props;
 
   const { featured_content_items } = get_home_content();
 
 
   return (
     <StandardRouteContainer route_key="start">
+      { no_basic_equiv === "no_basic_equiv" &&
+        <div>
+          oops, no a11y equivalent
+        </div>
+      }
       <h1> <TM k="title" /> </h1>
       <section>
         <h2> <TM k="home_a11y_gov_infograph" /> </h2>

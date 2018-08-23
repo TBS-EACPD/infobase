@@ -186,7 +186,7 @@ export const A11yLinkSynchronizer = withRouter(
       let { non_a11y_route, a11y_link_modifier } = this.props;
 
       if (non_a11y_route){
-        a11y_link_modifier = () => "#start";
+        a11y_link_modifier = () => "#start/no_basic_equiv";
       }
 
       synchronize_link('#ib-site-header a.a11y-version-link', a11y_link_modifier);
