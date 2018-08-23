@@ -35,11 +35,11 @@ budget_allocation_tbd:
 
 funding_overview:
   en: Funding Overview
-  fr: TODO
+  fr: Aperçu du financement
 
 budget_stats_title:
   en: Summary statistics
-  fr: TODO
+  fr: Statistiques sommaires
 
 budget_summary_stats:
   transform: [handlebars, markdown]
@@ -66,7 +66,9 @@ budget_route_top_text_notes:
     {{gl_tt "Budget 2018 funding" "BIV_FUND"}} values were set in the 2018 budget plan, tabled in the House of Commons on **February 27, 2018**.
     Values for {{gl_tt "allocated" "BIV_ALLO"}}, {{gl_tt "centrally withheld" "BIV_WITH"}}, and {{gl_tt "remaining funds" "BIV_REMA"}} are current as of **{{gt "budget_data_sourced_date"}}** and will be refreshed periodically.
   fr: |
-    TODO
+    Toutes les valeurs affichées dans le présent tableau correspondent au financement de **{{gt "budget_route_year"}}** figurant dans le {{ext_link "Budget principal des dépenses de 2018‑2019" "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal/2018-19-budget-depenses/2018-2019-provenance-utilisation-credit-execution-budget-ministere.html"}}.. 
+    Les valeurs de {{gl_tt "financement du budget de 2018" "BIV_FUND"}} ont été établies dans le Plan budgétaire de 2018, déposé à la Chambre des communes le **27 février 2018**. 
+    Les valeurs des {{gl_tt "fonds affectés" "BIV_ALLO"}}, des {{gl_tt "fonds retenus centralement" "BIV_WITH"}} et des {{gl_tt "fonds résiduels" "BIV_REMA"}} sont à jour en date du **{{gt "budget_data_sourced_date"}}** et seront mises à jour périodiquement.
 
 budget_route_top_text:
   transform: [handlebars, markdown]
