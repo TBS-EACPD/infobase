@@ -194,7 +194,7 @@ const budget_measure_render = function({calculations, footnotes, sources}){
 const treatAsProgram = (subject) => {
   return _.indexOf(["program", "crso"], subject.level) !== -1;
 }
-const get_grouping_options = (subject) =>{
+const get_grouping_options = (subject, data) =>{
   const common_options = [
     {
       name: text_maker('budget_measures'),
@@ -215,13 +215,23 @@ const get_grouping_options = (subject) =>{
       },
     ];
   } else if (subject.level === "dept"){
-    return [
-      ...common_options,
-      {
-        name: text_maker('programs'),
-        id: 'programs',
-      },
-    ];
+    const has_allocation_data = _.chain(data)
+      .flatMap(budget_measure => budget_measure.measure_data)
+      .filter(data => +data.org_id === subject.id)
+      .some(data => data.allocated !== 0)
+      .value();
+
+    if (has_allocation_data){
+      return [
+        ...common_options,
+        {
+          name: text_maker('programs'),
+          id: 'programs',
+        },
+      ];
+    } else {
+      return common_options;
+    }
   } else {
     return common_options;
   }
@@ -236,11 +246,9 @@ class BudgetMeasureHBars extends React.Component {
       },
     } = props;
 
-    const grouping_options = get_grouping_options(subject);
-
     this.state = {
-      grouping_options, 
-      selected_grouping: grouping_options[0].id,
+      grouping_options: {}, 
+      selected_grouping: false,
       value_options: {},
       selected_value: treatAsProgram(subject) ? 
         "allocated" : 
@@ -255,10 +263,11 @@ class BudgetMeasureHBars extends React.Component {
       },
     } = props;
 
-    const {
-      selected_grouping,
-      selected_value,
-    } = state;
+    const { selected_value } = state; 
+
+    const grouping_options = get_grouping_options(subject, data);
+
+    const selected_grouping = grouping_options[0].id;
 
     const value_options = treatAsProgram(subject) || selected_grouping === "programs" ? 
       [{
@@ -299,6 +308,8 @@ class BudgetMeasureHBars extends React.Component {
       value_options[0].id;
 
     return {
+      grouping_options,
+      selected_grouping,
       selected_value: valid_selected_value,
       value_options,
     }
