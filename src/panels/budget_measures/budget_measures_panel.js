@@ -317,7 +317,7 @@ class BudgetMeasureHBars extends React.Component {
       selected_grouping: valid_selected_grouping,
       selected_value: valid_selected_value,
       value_options,
-    }
+    };
   }
   render(){
     const { 
@@ -690,7 +690,7 @@ class BudgetMeasureHBars extends React.Component {
                       display: name,
                     })
                   )}
-                  onSelect = { id => this.setState({effective_selected_value: id}) }
+                  onSelect = { id => this.setState({selected_value: id}) }
                   className = "form-control"
                 />
               </label>
