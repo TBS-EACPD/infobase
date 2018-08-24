@@ -269,7 +269,7 @@ const render_diagram = (diagram, props, data, data_wrapper_node_rules, dont_fade
       "#c388dd",
       "#febb5d",
       "#61c8ff",
-      "#FD53AE",
+      "#fd62b5",
     ],
     background_color: "#00233d",
   });
