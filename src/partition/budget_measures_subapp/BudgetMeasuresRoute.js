@@ -1,4 +1,5 @@
 import './BudgetMeasuresRoute.yaml';
+import './BudgetMeasuresRoute.scss';
 import { Subject } from '../../models/subject';
 import { businessConstants } from '../../models/businessConstants.js';
 import { ensure_loaded } from '../../core/lazy_loader.js';
@@ -209,23 +210,13 @@ export class BudgetMeasuresRoute extends React.Component {
         </h1>
         { loading && <SpinnerWrapper ref="spinner" scale = { 4 } /> }
         { !loading &&
-          <div className = "budget-measures">
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                padding: "0px 20px 5px 20px",
-                fontSize: "19px",
-              }}
-            >
+          <div className="budget-measures">
+            <div className="budget-measures-top-text">
               <TextMaker text_key="budget_route_top_text" />
-              <div style={{fontSize: "16px"}}>
-                <Details
-                  summary_content={ <TextMaker text_key="budget_stats_title" /> }
-                  content={ <TextMaker text_key="budget_summary_stats" args={this.summary_stats} /> }
-                />
-              </div>
+              <Details
+                summary_content={ <TextMaker text_key="budget_stats_title" /> }
+                content={ <TextMaker text_key="budget_summary_stats" args={this.summary_stats} /> }
+              />
             </div>
             { !window.is_a11y_mode &&
               <BudgetMeasuresControls
