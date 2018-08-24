@@ -40,7 +40,7 @@ export function load_results_bundle(subject){
 
   const { lang } = window;
 
-  return make_request(get_static_url(`results/results_bundle_${lang}_${subject_code}.html`))
+  return make_request(get_static_url(`results/results_bundle_${lang}_${subject_code}.csv`))
     .then(response => {
       populate_results_info(JSON.parse(response));
     }).then( ()=> {
@@ -56,7 +56,7 @@ export function load_results_counts(){
     return Promise.resolve()
 
   } else {
-    return make_request(get_static_url(`results/results_summary.html`))
+    return make_request(get_static_url(`results/results_summary.csv`))
       .then(response => {
         const rows = d3.csvParse(response);
         _.each(rows, row => {

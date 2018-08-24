@@ -350,7 +350,7 @@ function write_result_bundles_from_data(obj, dir){
     _.each(["en","fr"], lang => {
 
       fs.writeFileSync(
-        `${dir}/results_bundle_${lang}_${key}.html`, 
+        `${dir}/results_bundle_${lang}_${key}.csv`, 
         data_to_str(data,lang)
       )
     })
@@ -370,7 +370,7 @@ function write_summary_bundle(data_by_dept, data_by_tag, all_data, dir){
 
   const csv = d3_dsv.csvFormat([...counts_for_dept, ...counts_for_tag, total_counts ]);
 
-  const file_name = `${dir}/results_summary.html`; 
+  const file_name = `${dir}/results_summary.csv`; 
   fs.writeFileSync(file_name, csv);
   
 }

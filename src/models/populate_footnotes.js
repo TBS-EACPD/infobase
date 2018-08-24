@@ -96,7 +96,7 @@ function load_footnotes_bundle(subject){
     return Promise.resolve()
   }
 
-  return make_request(get_static_url(`footnotes/fn_${lang}_${subject_code}.html`))
+  return make_request(get_static_url(`footnotes/fn_${lang}_${subject_code}.csv`))
     .then( csv_str => {
       populate_footnotes_info(csv_str);
       _loaded_dept_or_tag_codes[subject_code] = true;
