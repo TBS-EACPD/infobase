@@ -191,9 +191,7 @@ const budget_measure_render = function({calculations, footnotes, sources}){
 ));
 
 
-const treatAsProgram = (subject) => {
-  return _.indexOf(["program", "crso"], subject.level) !== -1;
-}
+const treatAsProgram = (subject) => _.indexOf(["program", "crso"], subject.level) !== -1;
 const get_grouping_options = (subject, data) =>{
   const common_options = [
     {
