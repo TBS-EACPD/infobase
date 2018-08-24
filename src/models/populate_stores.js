@@ -7,7 +7,7 @@ import { trivial_text_maker } from './text';
 const { Ministry, Program, Dept, Tag, CRSO, Minister, InstForm } = Subject;
 
 export const populate_stores = function(){
-  return make_request(get_static_url(`lookups_${window.lang}.csv`))
+  return make_request(get_static_url(`lookups_${window.lang}.json.js`))
     .then( text => {
       process_lookups(JSON.parse(text));
     });
