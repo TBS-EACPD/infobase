@@ -319,12 +319,12 @@ export const InfoGraph = ({
     financial: "finance_infograph_desc_meta_attr",
     people: "ppl_infograph_desc_meta_attr",
     results: "results_infograph_desc_meta_attr",
-  }[bubble_id]; 
+  }[bubble_id];
   return (
     <StandardRouteContainer 
       title={title}
       breadcrumbs={[title]}
-      description={text_maker(desc_key)}
+      description={ desc_key && text_maker(desc_key)}
       route_key={sub_app_name}
     >
       <h1 dangerouslySetInnerHTML={{__html:title }} />
