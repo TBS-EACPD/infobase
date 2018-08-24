@@ -263,13 +263,16 @@ class BudgetMeasureHBars extends React.Component {
       },
     } = props;
 
-    const { selected_value } = state; 
+    const {
+      selected_grouping,
+      selected_value,
+    } = state; 
 
     const grouping_options = get_grouping_options(subject, data);
 
-    const selected_grouping = grouping_options[0].id;
+    const valid_selected_grouping = selected_grouping || grouping_options[0].id;
 
-    const value_options = treatAsProgram(subject) || selected_grouping === "programs" ? 
+    const value_options = treatAsProgram(subject) || valid_selected_grouping === "programs" ? 
       [{
         id: "allocated",
         name: budget_values.allocated.text,
@@ -303,7 +306,7 @@ class BudgetMeasureHBars extends React.Component {
         ])
         .value();
 
-    const valid_selected_value = selected_grouping === "programs" ?
+    const valid_selected_value = valid_selected_grouping === "programs" ?
       selected_value : // don't update value state when switching to programs grouping, so that value isn't forced to allocated when users switch back to other groupings
       _.filter(value_options, value_option => value_option.id === selected_value).length === 1 ?
         selected_value :
@@ -311,7 +314,7 @@ class BudgetMeasureHBars extends React.Component {
 
     return {
       grouping_options,
-      selected_grouping,
+      selected_grouping: valid_selected_grouping,
       selected_value: valid_selected_value,
       value_options,
     }
