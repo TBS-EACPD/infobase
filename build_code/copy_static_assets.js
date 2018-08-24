@@ -267,18 +267,18 @@ function build_proj(PROJ){
 
     _.each( _.merge(dept_footnotes, tag_footnotes), (file_str,subj_id)=>{
       fs.writeFileSync(
-        `${footnotes_dir}/fn_${lang}_${subj_id}.html`,
+        `${footnotes_dir}/fn_${lang}_${subj_id}.csv`,
         file_str
       );
 
     })
 
     fs.writeFileSync(
-      `${footnotes_dir}/fn_${lang}_all.html`,
+      `${footnotes_dir}/fn_${lang}_all.csv`,
       all_footnotes
     );
 
-    const est_fn_url = `${footnotes_dir}/fn_${lang}_estimates.html`;
+    const est_fn_url = `${footnotes_dir}/fn_${lang}_estimates.csv`;
     fs.writeFileSync(est_fn_url,estimate_footnotes);
 
     // combine all the lookups into one big JSON blob
@@ -291,7 +291,7 @@ function build_proj(PROJ){
         .value()
     ).toString("utf8");
 
-    fs.writeFileSync(`${dir}/lookups_${lang}.html`,lookup_json_str);
+    fs.writeFileSync(`${dir}/lookups_${lang}.csv`,lookup_json_str);
 
   });
 
