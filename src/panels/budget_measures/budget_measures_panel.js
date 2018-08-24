@@ -303,9 +303,11 @@ class BudgetMeasureHBars extends React.Component {
         ])
         .value();
 
-    const valid_selected_value = _.filter(value_options, value_option => value_option.id === selected_value).length === 1 ?
-      selected_value :
-      value_options[0].id;
+    const valid_selected_value = selected_grouping === "programs" ?
+      selected_value : // don't update value state when switching to programs grouping, so that value isn't forced to allocated when users switch back to other groupings
+      _.filter(value_options, value_option => value_option.id === selected_value).length === 1 ?
+        selected_value :
+        value_options[0].id;
 
     return {
       grouping_options,
@@ -329,6 +331,10 @@ class BudgetMeasureHBars extends React.Component {
       grouping_options,
       value_options,
     } = this.state;
+
+    const effective_selected_value = selected_grouping === "programs" ?
+      'allocated' :
+      selected_value;
 
     const biv_values = _.chain(budget_values)
       .keys()
@@ -451,7 +457,7 @@ class BudgetMeasureHBars extends React.Component {
     }
     
     let graph_ready_data;
-    if (selected_value === 'funding_overview'){
+    if (effective_selected_value === 'funding_overview'){
       graph_ready_data = _.chain(data_by_selected_group)
         .map(item => {
           const modified_data = _.chain(biv_values)
@@ -490,8 +496,8 @@ class BudgetMeasureHBars extends React.Component {
           ...item,
           data: [{
             ...item,
-            label: item.label + label_value_indicator(item.data[selected_value]),
-            data: [ item.data[selected_value] ],
+            label: item.label + label_value_indicator(item.data[effective_selected_value]),
+            data: [ item.data[effective_selected_value] ],
           }],
         }))
         .filter( item => _.reduce(item.data, (memo, data_item) => memo + data_item.data[0], 0) !== 0 )
@@ -641,7 +647,7 @@ class BudgetMeasureHBars extends React.Component {
     } else {
       const biv_value_colors = infobase_colors(biv_values);
       const bar_colors = (data_label) => {
-        if (selected_value === 'funding_overview'){
+        if (effective_selected_value === 'funding_overview'){
           return biv_value_colors(data_label);
         } else {
           if ( data_label.includes("__negative_valued") ){
@@ -674,20 +680,20 @@ class BudgetMeasureHBars extends React.Component {
               <label>
                 <TM k="budget_panel_select_value" />
                 <Select 
-                  selected = {selected_value}
+                  selected = {effective_selected_value}
                   options = {_.map(value_options, 
                     ({name, id}) => ({ 
                       id,
                       display: name,
                     })
                   )}
-                  onSelect = { id => this.setState({selected_value: id}) }
+                  onSelect = { id => this.setState({effective_selected_value: id}) }
                   className = "form-control"
                 />
               </label>
             </div>
             <div className = 'centerer'>
-              { selected_value === 'funding_overview' &&
+              { effective_selected_value === 'funding_overview' &&
                 <GraphLegend
                   isHorizontal = {true}
                   items = {
