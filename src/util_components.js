@@ -20,6 +20,7 @@ import { CardCenteredImage } from './components/CardCenteredImage.js';
 import { CardBackgroundImage } from './components/CardBackgroundImage.js';
 import { DebouncedTextInput } from './components/DebouncedTextInput.js';
 import { ContainerEscapeHatch } from './components/ContainerEscapeHatch.js';
+import { FilterTable } from './components/FilterTable.js';
 import { abbrev } from './core/utils.js';
 
 
@@ -128,6 +129,7 @@ export {
   CardCenteredImage,
   CardBackgroundImage,
   DebouncedTextInput,
+  FilterTable,
   ContainerEscapeHatch,
   Abbrev,
   create_text_maker_component,

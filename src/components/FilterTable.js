@@ -1,9 +1,10 @@
-import 'FilterTable.scss';
+import './FilterTable.scss';
+import classNames from 'classnames';
 
 const eye_open = (
-  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-    viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve"
-    class="eye-open"
+  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+    viewBox="0 0 500 500"
+    className="eye-open"
   >
     <path 
       d="M250,125.4 M247.3,125.4c-95.5,1.9-169.7,101.1-172.9,105.4l-6.2,8.4l5.5,8.9c3.2,5.2,79.5,126.4,177,126.4
@@ -17,40 +18,30 @@ const eye_open = (
 );
 
 const eye_closed = (
-  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-     viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve"
-     class="eye-closed"
+  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+    viewBox="0 0 500 500"
+    className="eye-closed"
   >
     <path 
       d="M381.9,227.9c4.1,4.3,8,8.7,11.8,13.2c-11.7,17-24.9,33-39.3,47.8c-15,15.2-35,32.2-57.6,43.2l0,0l0,0
-    	l-18.5,39.5c83.7-19.3,145-118.7,147.8-123.3l5.4-8.9l-6-8.3c-16-20.7-34.4-39.6-54.8-56L357,204.2"
+      l-18.5,39.5c83.7-19.3,145-118.7,147.8-123.3l5.4-8.9l-6-8.3c-16-20.7-34.4-39.6-54.8-56L357,204.2"
     />
     <path 
       d="M362.7,71.1l-35.3,75.2c-18.1-9.5-38-16.7-59.2-19.4c-12-2.5-24.4-2.5-36.4,0
-    	C143.9,138.2,77.4,227.1,74.5,231.1l-6.2,8.4l5.5,8.9c2.9,4.6,64.6,103.1,147.9,123l-25.4,54.1l23.9,9.7L386.5,80.9h0.1v-0.1
-    	L362.7,71.1z M182.1,232.9L182.1,232.9L182.1,232.9l70,49.8c-2.6,3.6-7.1,5.4-12.9,5.4c-9.6,0.1-22.4-4.4-34.5-13
-    	C185.5,261.5,175.3,242.5,182.1,232.9z M235.2,342.6c-35.1-6.1-67-31.5-88.8-53.2c-14.8-14.9-28.3-31-40.3-48.2
-    	c11.7-13.9,24.6-26.8,38.5-38.5c7-5.9,13.8-11.1,20.5-15.6c-14.9,46.9,11,97,57.9,111.9c8.7,2.8,17.8,4.2,26.9,4.2
-    	c1.3,0,2.5,0,3.8-0.1L235.2,342.6z"
+      C143.9,138.2,77.4,227.1,74.5,231.1l-6.2,8.4l5.5,8.9c2.9,4.6,64.6,103.1,147.9,123l-25.4,54.1l23.9,9.7L386.5,80.9h0.1v-0.1
+      L362.7,71.1z M182.1,232.9L182.1,232.9L182.1,232.9l70,49.8c-2.6,3.6-7.1,5.4-12.9,5.4c-9.6,0.1-22.4-4.4-34.5-13
+      C185.5,261.5,175.3,242.5,182.1,232.9z M235.2,342.6c-35.1-6.1-67-31.5-88.8-53.2c-14.8-14.9-28.3-31-40.3-48.2
+      c11.7-13.9,24.6-26.8,38.5-38.5c7-5.9,13.8-11.1,20.5-15.6c-14.9,46.9,11,97,57.9,111.9c8.7,2.8,17.8,4.2,26.9,4.2
+      c1.3,0,2.5,0,3.8-0.1L235.2,342.6z"
     />
   </svg>
 );
 
 export class FilterTable extends React.Component {
-  constructor(props){
-    super();
-
-    const item_component_order = !_.isUndefiend(props) && props.item_componenet_order ?
-      props.item_componenet_order :
-      ["count","icon","word"];
-
-    this.state = { item_component_order };
-  }
   render(){
-    const { item_component_order } = this.state;
-
-    const { 
+    const {
       items,
+      item_component_order,
       click_callback,
     } = this.props;
 
@@ -59,62 +50,54 @@ export class FilterTable extends React.Component {
     return (
       <div className="filter-table">
         {
-          _.chain(all_chapter_keys)
-            .map( chapter_key => ({
-              chapter_key, 
-              count: measure_counts_by_chapter_key[chapter_key] || 0,
-            }) )
-            .map(items, (item) => {
-
-              const item_components = {
-                count: _.isUndefined(item.count) &&
-                  <div 
-                    className="filter-table__count_area"
-                    key="count"
-                  >
-                    <span className="filter-table__count">
-                      { item.count }
-                    </span>
-                  </div>,
-                icon: _.isUndefined(item.icon) &&
-                  <span 
-                    className="status-icon-table__icon"
-                    key="icon"
-                  >
-                    { item.icon }
-                  </span>,
-                word: _.isUndefined(item.text) &&
-                  <div 
-                    className="filter-table__word"
-                    key="word"
-                  >
-                    { item.word }
-                  </div>,
-              };
-
-              return (
-                <button
-                  aria-pressed={ !item.is_filtered }
-                  onClick={ () => click_callback(item.key) }
-                  className={ classNames("filter-table__item", !item.is_filtered && "filter-table__item--active" ) }
-                  key={ item.key }
+          _.map(items, (item) => {
+            const item_components = {
+              count: !_.isUndefined(item.count) &&
+                <div 
+                  className="filter-table__count_area"
+                  key="count"
                 >
-                  <div 
-                    className="filter-table__eye"
-                    style={{
-                      visibility: nothing_is_filtered ? "hidden" : "visible",
-                    }}
-                  >
-                    { !item.is_filtered ? eye_open : eye_closed }
-                  </div>
-                  {
-                    _.map( item_component_order, item_components => item_components[item_components] )
-                  }
-                </button>
-              );
-              }
-            )
-            .value()
+                  <span className="filter-table__count">
+                    { item.count }
+                  </span>
+                </div>,
+              icon: !_.isUndefined(item.icon) &&
+                <span 
+                  className="status-icon-table__icon"
+                  key="icon"
+                >
+                  { item.icon }
+                </span>,
+              text: !_.isUndefined(item.text) &&
+                <div 
+                  className="filter-table__text"
+                  key="text"
+                >
+                  { item.text }
+                </div>,
+            };
+
+            return (
+              <button
+                aria-pressed={ !item.is_filtered }
+                onClick={ () => click_callback(item.key) }
+                className={ classNames("filter-table__item", !item.is_filtered && "filter-table__item--active" ) }
+                key={ item.key }
+              >
+                <div 
+                  className="filter-table__eye"
+                  style={{
+                    visibility: nothing_is_filtered ? "hidden" : "visible",
+                  }}
+                >
+                  { !item.is_filtered ? eye_open : eye_closed }
+                </div>
+                {
+                  _.map( item_component_order, component => item_components[component] )
+                }
+              </button>
+            );
+          })
         }
       </div>
     );

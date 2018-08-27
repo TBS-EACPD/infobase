@@ -1,11 +1,16 @@
 import { Fragment } from 'react';
-import classNames from 'classnames';
 import { trivial_text_maker, util_components } from '../shared.js';
 import { businessConstants } from '../../models/businessConstants.js';
 import { get_static_url } from '../../core/request_utils.js';
 
 const { result_statuses, result_simple_statuses } = businessConstants;
-const { TextMaker, TM, Format, HeightClipper } = util_components;
+const { 
+  TextMaker,
+  TM,
+  Format,
+  HeightClipper,
+  FilterTable,
+} = util_components;
 
 const get_svg_url = (svg_name) => get_static_url(`svg/${svg_name}.svg`);
 
@@ -219,33 +224,13 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
     aria-hidden={true}
     className="status-icon-table"
   >
-    {_.chain(ordered_icon_keys)
-      .map( icon_key => ({icon_key, count: icon_counts[icon_key] || 0 }) )
-      .map( ({icon_key, count }) =>
-        <button
-          onClick={()=>onIconClick(icon_key)}
-          className={classNames("status-icon-table__item", _.includes(active_list, icon_key) && "status-icon-table__item--active" )}
-          key={icon_key}
-        >
-          <div 
-            className="status-icon-table__eye"
-            style={{
-              visibility: active_list.length !==0 ? "visible" : "hidden",
-            }}
-          >
-            <span>
-              <img src={ _.includes(active_list, icon_key) ? get_svg_url('eye-open') : get_svg_url('eye-close') }/>
-            </span>
-          </div>
-          <div className="status-icon-table__icon-count">
-            <span className="status-icon-table__count">
-              {count}
-            </span>
-          </div>
-          <span className="status-icon-table__icon">
-            {status_icons[icon_key]}
-          </span>
-          <div className="status-icon-table__word">
+    <FilterTable
+      items={
+        _.map(ordered_icon_keys, icon_key => ({
+          key: icon_key,
+          is_filtered: _.indexOf(active_list, icon_key) !== -1,
+          count: icon_counts[icon_key] || 0,
+          text: (
             <span
               className="link-unstyled"
               tabIndex={0}
@@ -259,10 +244,13 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
             >
               {result_simple_statuses[icon_key].text}
             </span>
-          </div>
-
-        </button>
-      ).value()}
+          ),
+          icon: status_icons[icon_key],
+        }) )
+      }
+      item_component_order={["count", "icon", "text"]}
+      click_callback={onIconClick}
+    />
   </div>
   <table className="sr-only">
     <thead>
