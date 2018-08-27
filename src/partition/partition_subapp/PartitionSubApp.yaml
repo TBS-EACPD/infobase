@@ -44,7 +44,7 @@ partition_controls:
     </form>
 
 partition_intro_popup:
-  transform: [handlebars,markdown]
+  transform: [handlebars, markdown, embeded-markdown]
   en: |
     <div class="mrgn-bttm-md popup-row-bottom-border intro-popup-color">
       <span class="stat1 popup-font-l"> 
@@ -54,7 +54,7 @@ partition_intro_popup:
     <div class="intro-popup-color popup-font-ml">
       Description:
     </div>
-    <div class="mrgn-bttm-md popup-intro-text popup-row-bottom-border popup-font-sm">
+    <div class="mrgn-bttm-md popup-intro-text popup-row-bottom-border popup-font-sm embeded-markdown">
       {{gt "partition_route_description"}}
       </br>
       </br>
@@ -63,7 +63,7 @@ partition_intro_popup:
     <div class="intro-popup-color popup-font-ml">
       How to Navigate the Diagram:
     </div>
-    <div class="mrgn-bttm-md popup-intro-text popup-row-bottom-border popup-font-sm">
+    <div class="mrgn-bttm-md popup-intro-text popup-row-bottom-border popup-font-sm embeded-markdown">
       **"Select the Data"** you want to see by picking one of the following types of data from the drop down menu:
       <ul>
         <li>
@@ -115,7 +115,7 @@ partition_intro_popup:
         </li>
       </ul>
     </div>
-    <div class="mrgn-bttm-md popup-intro-text popup-font-sm">
+    <div class="mrgn-bttm-md popup-intro-text popup-font-sm embeded-markdown">
       To access the underlying data in a tabular form, try our [Explorer](#resource-explorer).
     </div>
     <div class="popup-pointer-up"></div>
@@ -128,7 +128,7 @@ partition_intro_popup:
     <div class="intro-popup-color popup-font-ml">
       Description:
     </div>
-    <div class="mrgn-bttm-md popup-intro-text popup-row-bottom-border popup-font-sm">
+    <div class="mrgn-bttm-md popup-intro-text popup-row-bottom-border popup-font-sm embeded-markdown">
       {{gt "partition_route_description"}}
       </br>
       </br>
@@ -137,7 +137,7 @@ partition_intro_popup:
     <div class="intro-popup-color popup-font-ml">
       Comment utiliser ce graphique:
     </div>
-    <div class="mrgn-bttm-md popup-intro-text popup-row-bottom-border popup-font-sm">
+    <div class="mrgn-bttm-md popup-intro-text popup-row-bottom-border popup-font-sm embeded-markdown">
       « **Sélectionner les données** » que vous voulez voir en choisissant l’un des types suivants de données :
       <ul>
         <li>
@@ -189,7 +189,7 @@ partition_intro_popup:
         </li>
       </ul>
     </div>
-    <div class="mrgn-bttm-md popup-intro-text popup-font-sm">
+    <div class="mrgn-bttm-md popup-intro-text popup-font-sm embeded-markdown">
       Pour accéder aux données sous-jacentes sous forme de tableau, essayez notre application [_Explorer_](#resource-explorer).
     </div>
     <div class="popup-pointer-up"></div>
