@@ -57,7 +57,7 @@ export class BudgetMeasuresControls extends React.Component {
       .countBy("chapter_key")
       .value();
 
-    const update_filtered_chapter_keys = (filtered_chapter_keys, chapter_key) => {
+    const update_filtered_chapter_keys = (chapter_key) => {
 
       const new_filtered_chapter_keys = filtered_chapter_keys.length === 0 ?
         _.xor(all_chapter_keys, [chapter_key]) :
@@ -137,7 +137,7 @@ export class BudgetMeasuresControls extends React.Component {
                         key: chapter_key,
                         active: _.includes(active_list, chapter_key),
                         count: (
-                          <Fragment> 
+                          <Fragment>
                             {count}
                             <br/>
                             { text_maker("budget_measures_short") }
@@ -148,7 +148,7 @@ export class BudgetMeasuresControls extends React.Component {
                       .value()
                   }
                   item_component_order={ ["text", "count"] }
-                  click_callback={ (chapter_key) => update_filtered_chapter_keys(active_list, chapter_key) }
+                  click_callback={ update_filtered_chapter_keys }
                 />
               </div>
               <div className="centerer" style={{fontSize: "26px"}}>
