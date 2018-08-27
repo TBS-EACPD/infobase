@@ -1,6 +1,6 @@
 import './Accordions.scss';
 import ReactTransitionGroup from 'react-addons-transition-group';
-import classNames from 'classnames';
+import { get_static_url } from '../core/request_utils.js';
 
 function FirstChild(props) {
   const childrenArray = React.Children.toArray(props.children);
@@ -78,7 +78,13 @@ const StatelessPullDownAccordion = ({ title, isExpanded, children, onToggle }) =
         aria-label={isExpanded ? "collapse above" : "expand above"}
       >
         <span>
-          <img src="svg/chevron.svg" style={{ width:"20px", transform: isExpanded ? 'rotate(180deg)' : 'none' }}></img>
+          <img 
+            src={get_static_url("svg/chevron.svg")} 
+            style={{ 
+              width:"20px", 
+              transform: isExpanded ? 'rotate(180deg)' : 'none' ,
+            }} 
+          />
         </span>
 
       </button>

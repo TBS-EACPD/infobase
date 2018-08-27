@@ -2,9 +2,12 @@ import { Fragment } from 'react';
 import classNames from 'classnames';
 import { trivial_text_maker, util_components } from '../shared.js';
 import { businessConstants } from '../../models/businessConstants.js';
+import { get_static_url } from '../../core/request_utils.js';
 
 const { result_statuses, result_simple_statuses } = businessConstants;
 const { TextMaker, TM, Format, HeightClipper } = util_components;
+
+const get_svg_url = (svg_name) => get_static_url(`svg/${svg_name}.svg`);
 
 /* to be used with planned targets and actual result */
 const IndicatorResultDisplay = ({
@@ -187,16 +190,18 @@ const QuadrantDefList = ({defs} ) => <div>
   <div className="clearfix" />
 </div>
 
-// const Glyph = ({color,type}) => <span style={{color}} className={`glyphicon glyphicon-${type} v-centered`} />
+
+const status_icon_style = {
+  width: '40px',
+};
 const status_icons = {
   //icons for specific colours that group the other status_keys
-  success: <img src="svg/met.svg" style={{width:'40px'}}/>,
-  ontrack: <img src="svg/on_track.svg" style={{width:'40px'}}/>,
-  failure: <img src="svg/attention_req.svg" style={{width:'40px'}}/>,
-  not_avail: <img src="svg/not_available.svg" style={{width:'40px'}}/>,
-  not_appl: <img src="svg/no_applicable.svg" style={{width:'40px'}}/>,
+  success: <img src={get_svg_url("met")} style={status_icon_style} />,
+  ontrack: <img src={get_svg_url("on_track")} style={status_icon_style} />,
+  failure: <img src={get_svg_url("attention_req")} style={status_icon_style} />,
+  not_avail: <img src={get_svg_url("not_available")} style={status_icon_style} />,
+  not_appl: <img src={get_svg_url("no_applicable")} style={status_icon_style} />,
 };
-
 
 
 const icon_key_to_glossary_key = {
@@ -229,7 +234,7 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
             }}
           >
             <span>
-              <img src={`svg/eye-${ (_.includes(active_list, icon_key)) ? 'open' : 'close' }.svg`}></img>
+              <img src={ _.includes(active_list, icon_key) ? get_svg_url('eye-open') : get_svg_url('eye-close') }/>
             </span>
           </div>
           <div className="status-icon-table__icon-count">

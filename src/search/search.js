@@ -12,8 +12,10 @@ import { all_dp_orgs,
   crsos as crso_search_config,
 } from './search_configs.js';
 import { reactAdapter } from '../core/reactAdapter.js';
+import { get_static_url } from '../core/request_utils.js';
 import classNames from 'classnames';
 import { trivial_text_maker } from '../models/text.js';
+
 
 const search_template = ({search_text, large})=> (
   `
@@ -35,7 +37,7 @@ const add_search_glyphicon = (container) => {
         <span 
           aria-hidden="true"
         >
-        <img src="svg/search.svg" style="width:30px">
+        <img src="${get_static_url("svg/search.svg")}" style="width:30px" />
         </span>
       </div>`);
 }

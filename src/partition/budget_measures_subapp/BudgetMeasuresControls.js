@@ -15,6 +15,8 @@ import {
 import { Subject } from '../../models/subject';
 import { businessConstants } from '../../models/businessConstants.js';
 
+import { get_static_url } from '../../core/request_utils.js';
+
 const { BudgetMeasure } = Subject;
 const {
   budget_chapters,
@@ -146,7 +148,10 @@ export class BudgetMeasuresControls extends React.Component {
                           }}
                         >
                           <span>
-                            <img src={`svg/eye-${ (_.includes(active_list, chapter_key)) ? 'open' : 'close' }.svg`} className="status-icon-table__eye" ></img>
+                            <img 
+                              src={ _.includes(active_list, chapter_key) ? get_static_url('svg/eye-open.svg') : get_static_url('svg/eye-close.svg') } 
+                              className="status-icon-table__eye" 
+                            />
                           </span>
                         </div>
                         <div className="chapter-key-table__word">
