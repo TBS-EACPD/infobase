@@ -250,6 +250,7 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
       }
       item_component_order={["count", "icon", "text"]}
       click_callback={onIconClick}
+      show_eyes_override={active_list.length === ordered_icon_keys.length}
     />
   </div>
   <table className="sr-only">

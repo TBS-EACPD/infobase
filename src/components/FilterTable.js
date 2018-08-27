@@ -46,6 +46,7 @@ export class FilterTable extends React.Component {
       items,
       item_component_order,
       click_callback,
+      show_eyes_override,
     } = this.props;
 
     const nothing_is_filtered = _.reduce(items, (memo, item) => memo && item.active, true);
@@ -90,7 +91,7 @@ export class FilterTable extends React.Component {
                 <div 
                   className="filter-table__eye"
                   style={{
-                    visibility: nothing_is_filtered ? "hidden" : "visible",
+                    visibility: !nothing_is_filtered || show_eyes_override  ? "visible" : "hidden",
                   }}
                 >
                   { item.active ? eye_open : eye_closed }
