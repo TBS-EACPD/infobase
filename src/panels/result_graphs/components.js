@@ -228,7 +228,7 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
       items={
         _.map(ordered_icon_keys, icon_key => ({
           key: icon_key,
-          is_filtered: active_list.length !== 0 && _.indexOf(active_list, icon_key) === -1,
+          active: active_list.length === 0 || _.indexOf(active_list, icon_key) !== -1,
           count: icon_counts[icon_key] || 0,
           text: (
             <span
@@ -239,8 +239,8 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
               data-toggle="tooltip"
               data-html="true"
               data-container="body"
-              onClick={()=>onIconClick(icon_key)}
-              onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && onIconClick(icon_key)}
+              onClick={()=>onIconClick.apply(icon_key)}
+              onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && onIconClick.apply(icon_key)}
             >
               {result_simple_statuses[icon_key].text}
             </span>

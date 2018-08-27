@@ -48,7 +48,7 @@ export class FilterTable extends React.Component {
       click_callback,
     } = this.props;
 
-    const nothing_is_filtered = !_.some(items, item => item.is_filtered);
+    const nothing_is_filtered = _.reduce(items, (memo, item) => memo && item.active, true);
 
     return (
       <div className="filter-table">
@@ -84,7 +84,7 @@ export class FilterTable extends React.Component {
               <button
                 aria-pressed={ !item.is_filtered }
                 onClick={ () => click_callback(item.key) }
-                className={ classNames("filter-table__item", !item.is_filtered && "filter-table__item--active" ) }
+                className={ classNames("filter-table__item", item.active && "filter-table__item--active" ) }
                 key={ item.key }
               >
                 <div 
@@ -93,7 +93,7 @@ export class FilterTable extends React.Component {
                     visibility: nothing_is_filtered ? "hidden" : "visible",
                   }}
                 >
-                  { !item.is_filtered ? eye_open : eye_closed }
+                  { item.active ? eye_open : eye_closed }
                 </div>
                 {
                   _.map( item_component_order, component => item_components[component] )
