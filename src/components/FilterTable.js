@@ -37,10 +37,25 @@ const eye_closed = (
 );
 
 export class FilterTable extends React.Component {
-  constructor(){
+  constructor(props){
     super();
+
+    const item_component_order = !_.isUndefiend(props) && props.item_componenet_order ?
+      props.item_componenet_order :
+      ["count","icon","word"];
+
+    this.state = { item_component_order };
   }
   render(){
+    const { item_component_order } = this.state;
+
+    const { 
+      items,
+      click_callback,
+    } = this.props;
+
+    const nothing_is_filtered = !_.some(items, item => item.is_filtered);
+
     return (
       <div className="filter-table">
         {
@@ -49,32 +64,55 @@ export class FilterTable extends React.Component {
               chapter_key, 
               count: measure_counts_by_chapter_key[chapter_key] || 0,
             }) )
-            .map( ({chapter_key, count }) =>
-              <button
-                aria-pressed={ _.includes(active_list, chapter_key) }
-                onClick={ () => update_filtered_chapter_keys(filtered_chapter_keys, chapter_key) }
-                className={ classNames("filter-table__item", _.includes(active_list, chapter_key) && "filter-table__item--active" ) }
-                key={chapter_key}
-              >
-                <div 
-                  className="filter-table__eye"
-                  style={{
-                    visibility: filtered_chapter_keys.length !== 0 ? "visible" : "hidden",
-                  }}
+            .map(items, (item) => {
+
+              const item_components = {
+                count: _.isUndefined(item.count) &&
+                  <div 
+                    className="filter-table__count_area"
+                    key="count"
+                  >
+                    <span className="filter-table__count">
+                      { item.count }
+                    </span>
+                  </div>,
+                icon: _.isUndefined(item.icon) &&
+                  <span 
+                    className="status-icon-table__icon"
+                    key="icon"
+                  >
+                    { item.icon }
+                  </span>,
+                word: _.isUndefined(item.text) &&
+                  <div 
+                    className="filter-table__word"
+                    key="word"
+                  >
+                    { item.word }
+                  </div>,
+              };
+
+              return (
+                <button
+                  aria-pressed={ !item.is_filtered }
+                  onClick={ () => click_callback(item.key) }
+                  className={ classNames("filter-table__item", !item.is_filtered && "filter-table__item--active" ) }
+                  key={ item.key }
                 >
-                  { _.includes(active_list, chapter_key) ? eye_open : eye_closed }
-                </div>
-                <div className="filter-table__word">
-                  <span className="link-unstyled">
-                    {budget_chapters[chapter_key].text}
-                  </span>
-                </div>
-                <div className="filter-table__icon-count">
-                  <span className="filter-table__count">
-                    {count} <br/> { text_maker("budget_measures_short") }
-                  </span>
-                </div>
-              </button>
+                  <div 
+                    className="filter-table__eye"
+                    style={{
+                      visibility: nothing_is_filtered ? "hidden" : "visible",
+                    }}
+                  >
+                    { !item.is_filtered ? eye_open : eye_closed }
+                  </div>
+                  {
+                    _.map( item_component_order, item_components => item_components[item_components] )
+                  }
+                </button>
+              );
+              }
             )
             .value()
         }

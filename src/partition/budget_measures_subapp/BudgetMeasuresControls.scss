@@ -154,6 +154,33 @@ $controlsColorLighter: lighten($controlsColor, 20%);
   font-size: 19px; 
 }
 
+// Overwrite some default styles from the FilterTable component
+.chapter-key-table {
+  & > .filter-table {
+    padding: 10px 0px 10px 0px;
+
+    & > .filter-table__item {
+      padding: 15px 32px 5px 32px;
+      border-color: $controlsColorLighter;
+      color: $controlsColorLighter;
+
+      & > .filter-table__eye > .eye-open {
+        color: $controlsColorLighter;
+      }
+      & > .filter-table > .eye-close {
+        color: $controlsColor;
+      }
+
+      & > .filter-table__word {
+        font-size: 20px;
+      }
+      & > .filter-table__count {
+        font-size: 19px; 
+      }
+    }
+  }
+}
+
 
 .budget-measures-search-box {
   display: flex;
