@@ -146,7 +146,7 @@ const common_svg = [
   'src/core/arrow.svg',
 
   //accordian chevron
-  'src/components/chevron.svg',
+  'src/components/Accordions_chevron.svg',
 
 ];
 
