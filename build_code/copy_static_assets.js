@@ -131,7 +131,7 @@ const common_svg = [
   //result icons
   'src/panels/result_graphs/attention_req.svg',
   'src/panels/result_graphs/met.svg',
-  'src/panels/result_graphs/no_applicable.svg',
+  'src/panels/result_graphs/not_applicable.svg',
   'src/panels/result_graphs/not_available.svg',
   'src/panels/result_graphs/on_track.svg',
 

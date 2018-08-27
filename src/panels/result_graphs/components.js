@@ -200,7 +200,7 @@ const status_icons = {
   ontrack: <img src={get_svg_url("on_track")} style={status_icon_style} />,
   failure: <img src={get_svg_url("attention_req")} style={status_icon_style} />,
   not_avail: <img src={get_svg_url("not_available")} style={status_icon_style} />,
-  not_appl: <img src={get_svg_url("no_applicable")} style={status_icon_style} />,
+  not_appl: <img src={get_svg_url("not_applicable")} style={status_icon_style} />,
 };
 
 
