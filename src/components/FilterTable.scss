@@ -1,6 +1,6 @@
 @import '../common_css/common-variables';
 
-$controlsColor: #2b4465;
+$controlsColor: $primaryColor;
 $controlsColorLighter: lighten($controlsColor, 20%);
 
 .filter-table {
@@ -56,8 +56,8 @@ $controlsColorLighter: lighten($controlsColor, 20%);
   .filter-table__item {
     border-style: solid;
     border-width: 2px 2px 2px 0;
-    border-color: $controlsColorLighter;
-    color: $controlsColorLighter;
+    border-color: $controlsColor;
+    color: $controlsColor;
   }
   .filter-table__item:first-child {
     border-top-left-radius: 10px;
@@ -78,7 +78,7 @@ $controlsColorLighter: lighten($controlsColor, 20%);
   .filter-table__item {
     border-style: solid;
     border-width: 0 1px 1px 1px;
-    border-color: $controlsColorLighter;
+    border-color: $controlsColor;
     flex-basis: auto;
   }
 
