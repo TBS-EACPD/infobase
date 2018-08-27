@@ -1,6 +1,5 @@
 import './BudgetMeasuresControls.scss';
-
-import classNames from 'classnames';
+import { Fragment } from 'react';
 
 import { 
   text_maker,
@@ -10,12 +9,11 @@ import {
   LabeledBox,
   RadioButtons,
   DebouncedTextInput,
+  FilterTable,
 } from '../../util_components.js';
 
 import { Subject } from '../../models/subject';
 import { businessConstants } from '../../models/businessConstants.js';
-
-import { get_static_url } from '../../core/request_utils.js';
 
 const { BudgetMeasure } = Subject;
 const {
@@ -128,46 +126,30 @@ export class BudgetMeasuresControls extends React.Component {
                 <TextMaker text_key="budget_chapters" />
               </div>
               <div className="chapter-key-table">
-                {
-                  _.chain(all_chapter_keys)
-                    .map( chapter_key => ({
-                      chapter_key, 
-                      count: measure_counts_by_chapter_key[chapter_key] || 0,
-                    }) )
-                    .map( ({chapter_key, count }) =>
-                      <button
-                        aria-pressed={ _.includes(active_list, chapter_key) }
-                        onClick={ () => update_filtered_chapter_keys(filtered_chapter_keys, chapter_key) }
-                        className={ classNames("chapter-key-table__item", _.includes(active_list, chapter_key) && "chapter-key-table__item--active" ) }
-                        key={chapter_key}
-                      >
-                        <div 
-                          className="chapter-key-table__eye"
-                          style={{
-                            visibility: filtered_chapter_keys.length !== 0 ? "visible" : "hidden",
-                          }}
-                        >
-                          <span>
-                            <img 
-                              src={ _.includes(active_list, chapter_key) ? get_static_url('svg/eye-open.svg') : get_static_url('svg/eye-close.svg') } 
-                              className="status-icon-table__eye" 
-                            />
-                          </span>
-                        </div>
-                        <div className="chapter-key-table__word">
-                          <span className="link-unstyled">
-                            {budget_chapters[chapter_key].text}
-                          </span>
-                        </div>
-                        <div className="chapter-key-table__icon-count">
-                          <span className="chapter-key-table__count">
-                            {count} <br/> { text_maker("budget_measures_short") }
-                          </span>
-                        </div>
-                      </button>
-                    )
-                    .value()
-                }
+                <FilterTable
+                  items={
+                    _.chain(all_chapter_keys)
+                      .map( chapter_key => ({
+                        chapter_key, 
+                        count: measure_counts_by_chapter_key[chapter_key] || 0,
+                      }) )
+                      .map( ({chapter_key, count }) => ({
+                        key: chapter_key,
+                        active: _.includes(active_list, chapter_key),
+                        count: (
+                          <Fragment> 
+                            {count}
+                            <br/>
+                            { text_maker("budget_measures_short") }
+                          </Fragment>
+                        ),
+                        text: budget_chapters[chapter_key].text,
+                      }) )
+                      .value()
+                  }
+                  item_component_order={ ["text", "count"] }
+                  click_callback={ (chapter_key) => update_filtered_chapter_keys(active_list, chapter_key) }
+                />
               </div>
               <div className="centerer" style={{fontSize: "26px"}}>
                 <TextMaker text_key="budget_measure_filter_by_name_and_desc_label" />

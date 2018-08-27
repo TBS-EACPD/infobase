@@ -174,7 +174,7 @@ $controlsColorLighter: lighten($controlsColor, 20%);
       & > .filter-table__text {
         font-size: 20px;
       }
-      & > .filter-table__count {
+      & > .filter-table__count_area > .filter-table__count {
         font-size: 19px; 
       }
     }
