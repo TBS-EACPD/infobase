@@ -1,0 +1,113 @@
+@import '../common_css/common-variables';
+
+$controlsColor: #2b4465;
+$controlsColorLighter: lighten($controlsColor, 20%);
+
+.filter-table {
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  padding: 10px 0px 10px 0px;
+}
+
+.filter-table__item {
+  @include unstyled-button;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 32px 5px 32px;
+  flex: 1;
+  cursor: pointer;
+  background-color: $backgroundColor;
+}
+
+.filter-table__item:hover,
+.filter-table__item:focus,
+.filter-table__item:active {
+  background-color: #e8e8e8;
+}
+
+
+.filter-table__eye {
+  top: -13px;
+  left: -67px;
+  align-self: center;
+}
+.filter-table__eye > span > img {
+  width: 40px;
+}
+@media(max-width:992px) and (min-width:768px){
+  .filter-table__eye > span > img {
+    left: -57px;
+  }
+}
+.filter-table__eye > .eye-open {
+  fill: $primaryColor;
+}
+.filter-table__eye > .eye-close {
+  fill: $secondaryColor;
+}
+
+@media(min-width:1200px){
+  .filter-table {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .filter-table__item {
+    border-style: solid;
+    border-width: 2px 2px 2px 0;
+    border-color: $controlsColorLighter;
+    color: $controlsColorLighter;
+  }
+  .filter-table__item:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-left-width: 2px;
+  }
+  .filter-table__item:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+}
+
+@media(max-width:1200px){
+  .filter-table {
+    flex-direction: column;
+  }
+
+  .filter-table__item {
+    border-style: solid;
+    border-width: 0 1px 1px 1px;
+    border-color: $controlsColorLighter;
+    flex-basis: auto;
+  }
+
+  .filter-table__item:first-child {
+    border-top-width: 1px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+  }
+
+  .filter-table__item:last-child {
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+}
+
+.filter-table__word {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 0.5em;
+  margin-bottom: 0.7em;
+  font-weight: $heavyFontWeight;
+  padding: 7px 0px;
+}
+
+.filter-table__icon-count {
+  text-align: center;
+}
+
+.filter-table__count {
+  font-size: 19px; 
+}
