@@ -139,6 +139,9 @@ const common_svg = [
   'src/partition/budget_measures_subapp/eye-close.svg',
   'src/partition/budget_measures_subapp/eye-open.svg',
 
+  //GaaG info icon
+  'src/partition/partition_subapp/info.svg',
+
   //breadcrumb arrow
   'src/core/arrow.svg',
 

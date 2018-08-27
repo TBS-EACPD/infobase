@@ -1,8 +1,9 @@
 import "./PartitionSubApp.scss";
 import { text_maker } from './partition_text_provider.js';
-import { PartitionDiagram } from "../partition_diagram/PartitionDiagram.js";
 import { PartitionNotes } from "./PartitionNotes.js";
+import { PartitionDiagram } from "../partition_diagram/PartitionDiagram.js";
 import { reactAdapter } from '../../core/reactAdapter';
+import { get_static_url } from '../../core/request_utils.js';
 
 export class PartitionSubApp {
   constructor(container, all_perspectives, all_data_types, initial_perspective_id, initial_data_type_id, url_update_callback){
@@ -40,6 +41,7 @@ export class PartitionSubApp {
         text_maker("partition_controls",{
           perspective_options: current_perspective_options, 
           data_type_options: sorted_data_types_options, 
+          info_icon_src: get_static_url("svg/info.svg"),
           search: true, 
         })
       );
@@ -64,8 +66,8 @@ export class PartitionSubApp {
 
     this.container.select(".select_data_type").on("change", this.change_data_type.bind(this));
     this.container.select(".select_perspective").on("change", this.change_perspective.bind(this));
-    this.container.select(".partition-control-element > .glyphicon").on("click", this.add_intro_popup.bind(this));
-    this.container.select(".partition-control-element > .glyphicon").on("keydown", () => {
+    this.container.select(".partition-control-element > .info-icon").on("click", this.add_intro_popup.bind(this));
+    this.container.select(".partition-control-element > .info-icon").on("keydown", () => {
       if(d3.event.which == 13){
         this.add_intro_popup.call(this);
       }
@@ -303,7 +305,7 @@ export class PartitionSubApp {
         .attr("id", "tab-catch-before")
         .attr("tabindex", 0);
 
-      const tab_catch_after = partition_control_info.insert("a", ".glyphicon")
+      const tab_catch_after = partition_control_info.insert("a", ".info-icon")
         .attr("id", "tab-catch-after")
         .attr("tabindex", 0);
 

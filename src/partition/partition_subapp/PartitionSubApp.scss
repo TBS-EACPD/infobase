@@ -73,15 +73,6 @@ $partitionPopupColour: rgb(69, 161, 227);
   font-weight: $lightFontWeight;
 }
 
-.partition-control-element > .glyphicon {
-  font-size: 54px;
-  position: absolute;
-  color: $partitionPopupColour;
-  margin-top: 17px;
-  z-index: 101;
-  cursor: pointer;
-}
-
 .partition-control-element > input.form-control.search {
   &:disabled {
     cursor: default;
