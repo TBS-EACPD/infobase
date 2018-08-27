@@ -62,16 +62,11 @@ input::-ms-clear {
   height: 0;
 }
 
-.twitter-typeahead > .search-glyphicon-container {
+.twitter-typeahead > .search-icon-container {
   position: absolute; 
   height: 100%; 
   right: 8px; 
   top: 0px; 
   display: flex; 
   align-items: center;
-}
-
-.twitter-typeahead > .search-glyphicon-container > .glyphicon-search {
-  font-size: 25px;
-  color: #777;
 }

@@ -235,7 +235,7 @@ storiesOf("Accordions",module)
   .add("AutoAccordion", ()=>
     <div style={separator_style}>
       <pre> 
-        Up/down arrow glyphicon not displaying correctly here
+        Up/down arrow svg not displaying correctly here
       </pre>
       <AutoAccordion 
         title={"Accordion Title"}

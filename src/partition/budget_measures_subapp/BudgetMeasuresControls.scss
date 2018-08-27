@@ -83,16 +83,11 @@ $controlsColorLighter: lighten($controlsColor, 20%);
   height: 0px;
   align-self: flex-start;
 }
-.chapter-key-table__eye > .glyphicon {
-  top: -13px;
-  left: -25px;
-  font-size: 20px;
-}
 
-.chapter-key-table__eye > .glyphicon-eye-open {
+.chapter-key-table__eye > .eye-open {
   color: $controlsColorLighter;
 }
-.chapter-key-table__eye > .glyphicon-eye-close {
+.chapter-key-table__eye > .eye-close {
   color: $controlsColor;
 }
 

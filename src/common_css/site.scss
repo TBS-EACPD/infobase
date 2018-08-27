@@ -215,16 +215,6 @@ ul.footnote-list {
   opacity: 0.75;
 }
 
-.dead-element>:first-child:before {
-  color:#EFC98F;
-  content: "\e107";
-  display: inline-block;
-  margin-right: 5px;
-  font-family: "Glyphicons Halflings";
-  margin-left: 2px;
-  zoom:0.8;
-}
-
 .text-overflow {
   font-weight: bold;
   overflow: hidden;
@@ -237,16 +227,6 @@ ul.footnote-list {
 .text-overflow > span {
   font-weight: normal;
   color: black;
-}
-
-.p_glyphicon {
-    font-family: inherit;
-    font-weight: bold;
-    display: inline-block
-}
-.glyphicon:after {
-    font-weight: bold;
-    font-family:'Glyphicons Halflings';
 }
 
 .panel {
@@ -322,13 +302,6 @@ div.height-clipped-bar-area {
   margin-bottom: 10px;
   left: -20px; /* graph needs to be shifted left to avoid x-overflow with height clipper */
 }
-
-@media(max-width: 992px){
-  .glyphicon--desktop{
-    display: none;
-  }
-}
-
 
 .gradient.gradient-strong {
     background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1)) !important;

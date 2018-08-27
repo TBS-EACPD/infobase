@@ -234,11 +234,6 @@ details > * {
   line-height: normal;
 }
 
-.glyphicon.v-centered {
-  position: inherit;
-  vertical-align: middle;
-}
-
 .btn-success {
     color: #fff;
     background-color: #5cb85c;
@@ -461,15 +456,6 @@ section.panel  > .panel-heading {
 
 section.panel > .panel-body {
   background-color: $backgroundColor;
-}
-
-span.status-icon-table__icon .glyphicon.v-centered {
-  vertical-align: text-top !important;
-  position: relative;
-}
-span.inline-status-icon .glyphicon.v-centered {
-  vertical-align: top !important;
-  position: relative;
 }
 
 ol, ul {

@@ -31,9 +31,9 @@ const search_template = ({search_text, large})=> (
   </span>
 `);
 
-const add_search_glyphicon = (container) => {
+const add_search_icon = (container) => {
   container.querySelector('.twitter-typeahead').insertAdjacentHTML('beforeend', `
-      <div class="search-glyphicon-container">
+      <div class="search-icon-container">
         <span 
           aria-hidden="true"
         >
@@ -188,7 +188,7 @@ function autoComplete({container, search_configs, onSelect, placeholder, minLeng
     e.stopPropagation();
   });
   
-  add_search_glyphicon(container);
+  add_search_icon(container);
 
   reactAdapter.render(
     <A11YSearch 
