@@ -40,7 +40,7 @@ class BreadCrumbs extends React.Component {
                 src={get_static_url("svg/arrow.svg")} 
                 style={{
                   width: "20px", 
-                  margin: "0 2px 0 3px",
+                  margin: "-3px 2px 0px 3px",
                 }}
               />
             </li>

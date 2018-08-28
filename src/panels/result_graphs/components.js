@@ -196,9 +196,7 @@ const QuadrantDefList = ({defs} ) => <div>
 </div>
 
 
-const status_icon_style = {
-  width: '40px',
-};
+const status_icon_style = { width: '41px' };
 const status_icons = {
   //icons for specific colours that group the other status_keys
   success: <img src={get_svg_url("met")} style={status_icon_style} />,
