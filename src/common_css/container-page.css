@@ -156,6 +156,43 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
     #wb-info nav li {
       margin-bottom: 0.75em; }
 
+/*
+  WET-BOEW
+  @title: Breadcrumb CSS
+ */
+ #wb-bc {
+  background-color: #f5f5f5; }
+  #wb-bc ol {
+    border-radius: 0;
+    margin-bottom: 0; }
+  #wb-bc li {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
+/*
+ WET-BOEW
+ @title: Breadcrumb print CSS overrides
+*/
+ #wb-bc .breadcrumb {
+   margin-bottom: 0; }
+ #wb-bc a[href]:after {
+   content: ""; }
+.breadcrumb {
+ padding: 8px 15px;
+ margin-bottom: 23px;
+ list-style: none;
+ background-color: transparent;
+ border-radius: 4px; }
+ .breadcrumb > li {
+   display: inline-block; }
+   .breadcrumb > li + li:before {
+     content: "/ ";
+     padding: 0 5px;
+     color: #ccc; }
+ .breadcrumb > .active {
+   color: #767676; }
+
 .wb-invisible, .wb-inv, .wb-show-onfocus, .wb-sl, #wb-lng h2, #wb-glb-mn h2, #wb-srch h2, #wb-srch label, #wb-sm h2, #wb-bc h2, #wb-sec h2, #wb-info h2, #mb-pnl h3, .wb-calevt-cal .cal-days td ul, .wb-fnote dt, #mb-pnl .srch-pnl label {
   clip: rect(1px, 1px, 1px, 1px);
   height: 1px;
@@ -163,3 +200,64 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
   overflow: hidden;
   position: absolute;
   width: 1px; }
+
+
+  .mrgn-lft-0 {
+    margin-left: 0; }
+  
+  .mrgn-lft-sm {
+    margin-left: 5px; }
+  
+  .mrgn-lft-md {
+    margin-left: 15px; }
+  
+  .mrgn-lft-lg {
+    margin-left: 30px; }
+  
+  .mrgn-lft-xl {
+    margin-left: 50px; }
+  
+  .mrgn-bttm-0 {
+    margin-bottom: 0; }
+  
+  .mrgn-bttm-sm {
+    margin-bottom: 5px; }
+  
+  .mrgn-bttm-md {
+    margin-bottom: 15px; }
+  
+  .mrgn-bttm-lg {
+    margin-bottom: 30px; }
+  
+  .mrgn-bttm-xl {
+    margin-bottom: 50px; }
+  
+  .mrgn-tp-0 {
+    margin-top: 0; }
+  
+  .mrgn-tp-sm {
+    margin-top: 5px; }
+  
+  .mrgn-tp-md {
+    margin-top: 15px; }
+  
+  .mrgn-tp-lg {
+    margin-top: 30px; }
+  
+  .mrgn-tp-xl {
+    margin-top: 50px; }
+  
+  .mrgn-rght-0 {
+    margin-right: 0; }
+  
+  .mrgn-rght-sm {
+    margin-right: 5px; }
+  
+  .mrgn-rght-md {
+    margin-right: 15px; }
+  
+  .mrgn-rght-lg {
+    margin-right: 30px; }
+  
+  .mrgn-rght-xl {
+    margin-right: 50px; }
