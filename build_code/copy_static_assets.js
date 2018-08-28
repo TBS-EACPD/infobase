@@ -101,6 +101,9 @@ const common_svg = [
   'src/InfoBase/sig-blk-fr.svg',
   'src/InfoBase/infobase-dev-fip.svg',
 
+  //footer wordmark
+  'src/InfoBase/wmms-blk.svg',
+
   //caricature images for main 5 pages
   'src/home/partition.svg',
   'src/home/partition-budget.svg',
@@ -197,7 +200,10 @@ var IB = {
   png: common_png,
   js: external_deps_names,
   app_files: ['src/common_css/container-page.css'],
-  other: [ 'src/robots/robots.txt'],
+  other: [
+    'src/robots/robots.txt',
+    'src/InfoBase/favicon.ico',
+  ],
 };
 
 function get_index_pages(){
@@ -281,22 +287,20 @@ function build_proj(PROJ){
 
   _.each(["en","fr"], lang => {
 
-
     const {
       depts: dept_footnotes,
       tags: tag_footnotes,
       global: global_footnotes,
       all: all_footnotes,
-      estimates:estimate_footnotes,
+      estimates: estimate_footnotes,
     } = get_footnote_file_defs(parsed_bilingual_models, lang);
 
-    _.each( _.merge(dept_footnotes, tag_footnotes), (file_str,subj_id)=>{
+    _.each( _.merge(dept_footnotes, tag_footnotes), (file_str,subj_id) => {
       fs.writeFileSync(
         `${footnotes_dir}/fn_${lang}_${subj_id}.json.js`,
         file_str
       );
-
-    })
+    });
 
     fs.writeFileSync(
       `${footnotes_dir}/fn_${lang}_all.json.js`,
@@ -304,7 +308,7 @@ function build_proj(PROJ){
     );
 
     const est_fn_url = `${footnotes_dir}/fn_${lang}_estimates.json.js`;
-    fs.writeFileSync(est_fn_url,estimate_footnotes);
+    fs.writeFileSync(est_fn_url, estimate_footnotes);
 
     // combine all the lookups into one big JSON blob
     // also, create a compressed version for modern browsers
@@ -322,27 +326,21 @@ function build_proj(PROJ){
 
   fse.copySync('external-dependencies/GCWeb', dir+'/GCWeb', {clobber: true});
   fse.copySync('external-dependencies/wet-boew', dir+'/wet-boew', {clobber: true});
+
+  const copy_file_to_target_dir = (file_name, target_dir) => {
+    const small_name = file_name.split('/').pop(); // dir/file.js -> file.js
+    console.log('copying:' + small_name);
+    fse.copySync(file_name, target_dir+'/'+small_name, {clobber: true});
+  };
+
   //clobber overwrites old directory when copying
   ['png', 'svg','js','csv'].forEach(function(type){
     var this_dir = dir+'/'+type;
     make_dir_if_exists(this_dir);
-    PROJ[type].forEach(function(f_name){
-      const small_name = f_name.split('/').pop(); // dir/file.js -> file.js
-
-      console.log('copying:' + small_name);
-      fse.copySync(f_name, this_dir+'/'+small_name, {clobber: true});
-    });
+    PROJ[type].forEach( f_name => copy_file_to_target_dir(f_name, this_dir) );
   });
-  PROJ.app_files.forEach(function(f_name){
-    var small_name = f_name.split('/').pop();
-    console.log('copying:' + small_name);
-    fse.copySync(f_name, app_dir+'/'+small_name, {clobber:true});
-  });
-  PROJ.other.forEach(function(f_name){
-    var small_name = f_name.split('/').pop();
-    console.log('copying:' + small_name);
-    fse.copySync(f_name, dir+'/'+small_name, {clobber:true});
-  });
+  PROJ.app_files.forEach( f_name => copy_file_to_target_dir(f_name, app_dir) );
+  PROJ.other.forEach( f_name => copy_file_to_target_dir(f_name, dir) );
   _.each(get_index_pages(), ({file_prefix, en, fr }) => {
     fs.writeFileSync(
       `${dir}/${file_prefix}-eng.html`,
