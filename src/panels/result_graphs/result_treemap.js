@@ -133,7 +133,7 @@ const get_col_defs = createSelector(
           return (
             <div
               aria-hidden={true}
-              style={{ opacity: 0.8 }}
+              className="status-icon-array"
             >
               <InlineStatusIconList 
                 indicators={

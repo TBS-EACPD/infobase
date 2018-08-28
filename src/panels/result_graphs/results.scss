@@ -109,6 +109,13 @@ dl.indicator-item__dl dt+dd {
   }
 }
 
+.status-icon-array {
+  opacity: 0.8;
+  @media(max-width: 570px){
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
 .inline-status-icon {
   padding-left: 6px; 
   font-size:1.2em;
@@ -116,14 +123,13 @@ dl.indicator-item__dl dt+dd {
   position:relative;
 }
 .inline-status-icon__count {
-  padding-left: 1px;
   color:#000;
   position: absolute;
-  right: -4px;
+  left: 100%;
+  margin-left: -3px;
   bottom: 2px;
   font-size: 60%;
 }
-
 
 /* color classes for icon-array viz */
 .results-icon-array-pass {

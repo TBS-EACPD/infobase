@@ -372,7 +372,7 @@ const compute_col_styles = createSelector(_.identity, col_defs => {
       let marginRight = null;
       let marginLeft = null;
       let padding = "0 5px 0 0";
-      let flex = `0 0 ${width}px`;
+      let flex = `0 1 ${width}px`;
       if(ix===0){
         flex = `1 1 ${width}px`;  
         if(col_defs.length > 5){
