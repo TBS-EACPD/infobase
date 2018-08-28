@@ -361,8 +361,6 @@ const ExplorerRoot = ({root, explorer_context}) => <div>
     }
   ]
 
-
-
 */ 
 
 const compute_col_styles = createSelector(_.identity, col_defs => {

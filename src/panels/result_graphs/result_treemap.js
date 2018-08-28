@@ -154,7 +154,7 @@ const get_col_defs = createSelector(
             </div>
           )
         },
-        width: 150,
+        width: 200,
         textAlign: "right",
       },
     ];
