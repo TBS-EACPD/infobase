@@ -37,7 +37,7 @@ const add_search_icon = (container) => {
         <span 
           aria-hidden="true"
         >
-        <img src="${get_static_url("svg/search.svg")}" style="width:30px" />
+        <img src="${get_static_url("svg/search.svg")}" style="width:30px;height:30px;" />
         </span>
       </div>`);
 }
