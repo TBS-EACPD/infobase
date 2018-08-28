@@ -16,11 +16,7 @@ const { get_footnote_file_defs } = require('./write_footnote_bundles.js');
 const { index_lang_lookups } = require("../src/InfoBase/index_data.js");
 
 /*
-What this is
-
-this script can be called with either IB or LED as argument
-
-it copies stuff into the build directory
+This copies stuff into the build directory
 
 webpack makes it easier to handle yaml and css, 
 the most complicated parts, so being less data-driven is 
@@ -36,7 +32,7 @@ PROJ -> {
 }
 
 
-idea for improvement: move a project's table to a json file in src/LED and src/InfoBase,
+idea for improvement: move project's table list to a json file in src/InfoBase,
 then have that be the ONLY source (dynamic requires are possible with webpack) of which tables are in which project
 
 */
@@ -193,8 +189,8 @@ const other_csvs = _.map(
 
 var IB = {
   name: 'InfoBase',
-  lookups_en  : common_lookups.concat(common_lookups_en),
-  lookups_fr  : common_lookups.concat(common_lookups_fr),
+  lookups_en: common_lookups.concat(common_lookups_en),
+  lookups_fr: common_lookups.concat(common_lookups_fr),
   csv: csv_from_table_names(IB_tables).concat(other_csvs),
   svg: common_svg,
   png: common_png,
@@ -216,9 +212,15 @@ function get_index_pages(){
   const fr_lang_lookups = _.mapValues(index_lang_lookups, 'fr');
   _.each([en_lang_lookups, fr_lang_lookups], lookups => lookups.CDN_URL = CDN_URL );
 
-
   const a11y_template = file_to_str("./src/InfoBase/index.hbs.html");
   const a11y_template_func = Handlebars.compile(a11y_template);
+  
+  const get_extended_a11y_args = (lang_lookups) => ({
+    ...lang_lookups,
+    script_url: lang_lookups.a11y_script_url, 
+    other_lang_href: lang_lookups.a11y_other_lang_href,
+    is_a11y_mode: true 
+  });
 
   return [
     {
@@ -228,8 +230,8 @@ function get_index_pages(){
     },
     {
       file_prefix: "index-basic",
-      en: a11y_template_func(_.assign({}, en_lang_lookups, { script_url: en_lang_lookups.a11y_script_url, other_lang_href: en_lang_lookups.a11y_other_lang_href, is_a11y_mode: true })),
-      fr: a11y_template_func(_.assign({}, fr_lang_lookups, { script_url: fr_lang_lookups.a11y_script_url, other_lang_href: fr_lang_lookups.a11y_other_lang_href, is_a11y_mode: true })),
+      en: a11y_template_func( get_extended_a11y_args(en_lang_lookups) ),
+      fr: a11y_template_func( get_extended_a11y_args(fr_lang_lookups) ),
     },
   ];
 }
@@ -257,9 +259,7 @@ function build_proj(PROJ){
 
   _.each(
     ['build', dir, app_dir, results_dir, footnotes_dir], 
-    name => {
-      make_dir_if_exists(name)
-    }
+    name => make_dir_if_exists(name)
   )
 
   const bilingual_model_files = {
@@ -330,10 +330,9 @@ function build_proj(PROJ){
   const copy_file_to_target_dir = (file_name, target_dir) => {
     const small_name = file_name.split('/').pop(); // dir/file.js -> file.js
     console.log('copying:' + small_name);
-    fse.copySync(file_name, target_dir+'/'+small_name, {clobber: true});
+    fse.copySync(file_name, target_dir+'/'+small_name, {clobber: true});//clobber overwrites old directory when copying
   };
 
-  //clobber overwrites old directory when copying
   ['png', 'svg','js','csv'].forEach(function(type){
     var this_dir = dir+'/'+type;
     make_dir_if_exists(this_dir);
@@ -341,6 +340,7 @@ function build_proj(PROJ){
   });
   PROJ.app_files.forEach( f_name => copy_file_to_target_dir(f_name, app_dir) );
   PROJ.other.forEach( f_name => copy_file_to_target_dir(f_name, dir) );
+
   _.each(get_index_pages(), ({file_prefix, en, fr }) => {
     fs.writeFileSync(
       `${dir}/${file_prefix}-eng.html`,
