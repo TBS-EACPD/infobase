@@ -196,15 +196,20 @@ const QuadrantDefList = ({defs} ) => <div>
 </div>
 
 
-const status_icon_style = { width: '41px' };
-const status_icons = {
-  //icons for specific colours that group the other status_keys
-  success: <img src={get_svg_url("met")} style={status_icon_style} />,
-  ontrack: <img src={get_svg_url("on_track")} style={status_icon_style} />,
-  failure: <img src={get_svg_url("attention_req")} style={status_icon_style} />,
-  not_avail: <img src={get_svg_url("not_available")} style={status_icon_style} />,
-  not_appl: <img src={get_svg_url("not_applicable")} style={status_icon_style} />,
+const make_status_icons = (width) => {
+  const status_icon_style = {width: width, height: width};
+  return {
+    //icons for specific colours that group the other status_keys
+    success: <img src={get_svg_url("met")} style={status_icon_style} />,
+    ontrack: <img src={get_svg_url("on_track")} style={status_icon_style} />,
+    failure: <img src={get_svg_url("attention_req")} style={status_icon_style} />,
+    not_avail: <img src={get_svg_url("not_available")} style={status_icon_style} />,
+    not_appl: <img src={get_svg_url("not_applicable")} style={status_icon_style} />,
+  };
 };
+
+const large_status_icons = make_status_icons('41px');
+const status_icons = make_status_icons('25px');
 
 
 const icon_key_to_glossary_key = {
@@ -243,7 +248,7 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
               {result_simple_statuses[icon_key].text}
             </span>
           ),
-          icon: status_icons[icon_key],
+          icon: large_status_icons[icon_key],
         }) )
       }
       item_component_order={["count", "icon", "text"]}
