@@ -3,7 +3,7 @@ partition_controls:
   text: |
     <form class="form-horizontal">
        <div id="partition-control-info-button" class="partition-control-element" style="width:65px;">
-         <img class="info-icon" src="{{info_icon_src}}" style="width:70px; margin-left:-10px;" tabindex="0"/>     
+         <img class="info-icon" src="{{info_icon_src}}" tabindex="0"/>     
        </div>
        <div class="partition-control-element">
          <text>
