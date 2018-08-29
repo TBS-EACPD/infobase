@@ -37,6 +37,10 @@ hr {
   @media (max-width:899px){ max-width: 90vw !important }
 }
 
+.pop.in, .fade.in {
+  opacity: 1;
+  visibility: visible; }
+
 /* reseting WET styles*/
 .link-unstyled,
 .link-unstyled:link,
@@ -559,6 +563,7 @@ ol.breadcrumb > li:last-child > :last-child {
 
 .panel-title {
   margin: -0.25em 0 !important;
+  font-size: 18px;
 }
 
 .panel-sub-title {
