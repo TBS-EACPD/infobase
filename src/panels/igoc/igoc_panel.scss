@@ -1,0 +1,22 @@
+table.igoc-table {
+  background-color: transparent;
+}
+table.igoc-table > tbody > tr > td {
+  border: none;
+  border-bottom: 1px rgba(35, 64, 111,0.2) solid;
+  padding: 5px 0;
+}
+table.igoc-table > tbody > tr:last-child > td {
+  border: none !important;
+}
+table.igoc-table > tbody > tr > td > p {
+  margin: 0px;
+}
+
+dl.igoc-data-list {
+  margin-bottom: 0px;
+  & > dt:first-of-type,
+  & > dd:first-of-type {
+    border-top: none;
+  }
+}

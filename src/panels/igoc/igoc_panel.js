@@ -1,3 +1,4 @@
+import 'igoc_panel.scss';
 import text from './igoc_panel.yaml';
 import { 
   PanelGraph, 
