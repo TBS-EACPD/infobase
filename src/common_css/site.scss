@@ -1,25 +1,5 @@
 @import "common-variables";
 
-/* deatils, widget view and infrograph view header */
-table.igoc-table  {
-  background-color: transparent;
-}
-table.igoc-table > tbody > tr > td {
- border: none;
- border-bottom: 1px rgba(35, 64, 111,0.2) solid;
-}
-table.igoc-table > tbody > tr > td > p {
-  margin: 0px;
-}
-
-dl.igoc-data-list {
-  margin-bottom: 0px;
-  & > dt:first-of-type,
-  & > dd:first-of-type {
-    border-top: none;
-  }
-}
-
 div.int{width: 95px;text-align:center;}
 div.big_int{width: 100px;text-align:right;}
 div.big_int_real,
@@ -55,7 +35,6 @@ div.ordinal{
   width: 150px;
   text-align:center;
 }
-table.infobase-table > thead > tr > th div.big_int{text-align: center;}
 
 .nav-header {
   display: block;
@@ -104,8 +83,6 @@ tr.odd {
 
 
 /* utility class. Apply class to a container if you want its content (no matter what kind) centered */
-
-
 .centerer {
   display: flex;
   align-items: center;
@@ -114,25 +91,15 @@ tr.odd {
 }
 
 
-/* our app-wide a:visited: black is overriding all the bootstrap white on dark blue styles...  */
-.nav-pills > li.active > a {
-  color: white !important;
-}
-.btn-success, .btn-info, .btn-ib-info, .btn-danger, .btn-warning {
-  color: white !important;
-}
-
 .btn-responsive-fixed-width {
   margin-left: auto;
   min-width: 150px;
   align-self: center;
-}
-
-@media (max-width:700px) {
-  .btn-responsive-fixed-width {
+  @media (max-width:700px) {
     max-width: 150px;
   }
 }
+
 
 /* similar to bootstrap list-group but without the stupid hover/active colors.*/
 ul.fancy-ul {
@@ -196,12 +163,11 @@ ul.fancy-ul > li:last-child {
   margin-top: 0;
 }
 
+
 .crso-extra-margin {
   margin-top: 30px;
   margin-bottom: 20px;
 }
-
-
 
 table.metadata-table > tbody > tr > td:last-child {
   text-align: right;
@@ -229,64 +195,72 @@ ul.footnote-list {
   color: black;
 }
 
-.panel {
-  box-shadow: 0 0 transparent;
-}
-.panel.panel-overflow {
-  overflow: visible;
-
-  &>.panel-body {
-    /* .panel has a border radius of 10px, if the overflow is visible we need to correct the the white rectangle that starts popping out */ 
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-  }
-}
-.panel-body > .row > .source {
-  opacity: 0.8;
-}
-
-.panel-title {
-  margin: -0.25em 0 !important;
-}
-
-.panel-sub-title {
-  margin-top: 3px;
-  font-weight: 400;
-  opacity: 0.8;
-}
-
-/* 
-  Fixes Safari-specific bug, does nothing on other browsers. 
-  Only needed on larger screens. 
-*/
-@media (min-width:1000px){
-  .panel-body {
-    content: none!important;
-  }
-}
-
 a.source-link {
   font-weight: bold;
 }
 
-@media (min-width:1000px){
-  .panel-heading {
-    padding: 15px 15px; /* bootstrap default is 10 15 */
+
+/* deatils, widget view and infrograph view header */
+table.igoc-table  {
+  background-color: transparent;
+}
+table.igoc-table > tbody > tr > td {
+ border: none;
+ border-bottom: 1px rgba(35, 64, 111,0.2) solid;
+}
+table.igoc-table > tbody > tr > td > p {
+  margin: 0px;
+}
+
+dl.igoc-data-list {
+  margin-bottom: 0px;
+  & > dt:first-of-type,
+  & > dd:first-of-type {
+    border-top: none;
   }
 }
 
-@media (max-width:1000px){
-  /* on mobile, we need way less padding */
-  .panel-heading {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 1rem;
-    padding-left: 1rem;
-  }
-  .panel-body {
-    padding: 1rem;
-  }
+/* misc table styles */
+table.infobase-table > thead > tr > th div.big_int{text-align: center;}
+table.infobase-table > thead > tr > th, 
+table.infobase-table > tbody > tr > td {
+padding: 8px;
+vertical-align: top;
+} 
+table.infobase-table > thead > tr > th {
+  text-align: center;
+}
 
+.table-dark-bordered, 
+.table-dark-bordered>tbody>tr>td, 
+.table-dark-bordered>tbody>tr>th,
+.table-dark-bordered>tfoot>tr>td,
+.table-dark-bordered>tfoot>tr>th,
+.table-dark-bordered>thead>tr>td,
+.table-dark-bordered>thead>tr>th {
+  border: 0px solid rgba(0,0,0,0);
+  border-collapse: separate;
+  min-width: 102px;
+  border-spacing: 5px;
+  font-weight: $heavyFontWeight;
+}
+
+table.table-blue > thead > tr {
+  background-color : #d9edf7;
+}
+table.table-blue > thead > tr > th {
+  background-color: $secondaryColor;
+  color: $backgroundColor;
+  font-weight : $mediumFontWeight;
+  border: none;
+  font-size: 13px;
+}
+tr.background-blue > td {
+  background-color: $secondaryColor;
+  color: $backgroundColor;
+}
+tr.background-blue > td > a {
+  color : #31708f;
 }
 
 /* Styles for height clipped bar graphs */
@@ -307,59 +281,12 @@ div.height-clipped-bar-area {
     background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1)) !important;
 }
 
-/* Modifiers for GCWeb alert boxes */
-.alert-no-symbol > :first-child {
-    margin-left: 0px !important;
-}
-
-.alert-no-symbol > :first-child::before {
-    content: "" !important;
-}
-
-.alert--is-bordered { 
-  border-width: 2px 2px 2px 8px;
-  border-bottom-right-radius: 10px;
-  border-top-right-radius: 10px;
-}
-.alert { 
-  background-color: $backgroundColor;
-}
-
-/* extending bootstrap nav style */
-ul.nav.nav-underline-active > li { 
-  border-bottom: 3px solid rgba(0,0,0,0); /* invisible to remain same height as the active */
-}
-ul.nav.nav-underline-active > li.active {
-  border-bottom: 3px solid #00BCD4;
-}
-
-/* extending bootstrap well which does not look good in regular GoC background */
-.well.dark-well {
-  background-color: #ebebeb;
-  border: 1px solid #bfbfbf;
-
-}
-
-.table-dark-bordered, 
-.table-dark-bordered>tbody>tr>td, 
-.table-dark-bordered>tbody>tr>th,
-.table-dark-bordered>tfoot>tr>td,
-.table-dark-bordered>tfoot>tr>th,
-.table-dark-bordered>thead>tr>td,
-.table-dark-bordered>thead>tr>th {
-  border: 0px solid rgba(0,0,0,0);
-  border-collapse: separate;
-  min-width: 102px;
-  border-spacing: 5px;
-  font-weight: $heavyFontWeight;
-}
-
 /* Styles for ppl share pie graphs */
-.ppl-share-pie-area > .ppl-share-pie-legend > .centerer > .centerer-IE-fix{
+.ppl-share-pie-area > .ppl-share-pie-legend > .centerer > .centerer-IE-fix {
   width: 100%;
   flex-grow: 1;
 }
-.ppl-share-pie-area > .ppl-share-pie-legend .ppl-share-percent-header{
+.ppl-share-pie-area > .ppl-share-pie-legend .ppl-share-percent-header {
   display: inline-block;
   width: 100%;
   text-align: right;
@@ -387,52 +314,7 @@ ul.nav.nav-underline-active > li.active {
   }
 }
 
-// Link styles from flat redesign
-a, a:visited {
-  text-decoration: none;
-  color: $ibLinkColor;
-}
-
-#wb-lng > .row > div > ul > li > a,
-#wb-info > .wb-navcurr > ul > li > a,
-#wb-info > .brand > .container > .row > nav > ul > li > a {
-  color: $wetLinkColor;
-  &:visited {
-    color: $wetLinkVisitedColor;
-  }
-}
-
-.link-styled {
-  cursor: pointer;
-  text-decoration: none;
-  color: $ibLinkColor;
-  background-color: transparent;
-}
-
-ol.breadcrumb > li:last-child > :last-child {
-  text-decoration: none;
-  color: #333;
-}
-
 // Misc. styles from flat redesign
-.well-sm {
-  border-radius: 10px;
-  background-color: $tertiaryColor;
-  text-align: center;
-  border-color: $tertiaryColor;
-  border-bottom-left-radius: 0px;
-  border-bottom-right-radius: 0px;
-  padding: 10px;
-}
-
-.form-control.input-lg {
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  box-shadow: none !important;
-  opacity: 1;
-  background: none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255);
-}
-
 body {
   background-color: $backgroundColor;
 }
@@ -446,18 +328,15 @@ header, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: $fontFamily;
 }
 
-#app, #wb-bc, .app-font, .easy-access, wb-lng {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-}
-
 .easy-access > a {
   white-space: nowrap;
 }
 
-#app, #wb-bc, .app-font {
-  font-family: 'Roboto', sans-serif;
-  font-weight: $mediumFontWeight;
+.link-styled {
+  cursor: pointer;
+  text-decoration: none;
+  color: $ibLinkColor;
+  background-color: transparent;
 }
 
 @media (max-width: 1100px){

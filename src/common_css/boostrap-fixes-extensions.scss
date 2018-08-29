@@ -1,6 +1,6 @@
 @import "common-variables";
 
-h1{
+h1 {
   border-bottom: 3px solid $highlightColor;
 }
 
@@ -137,14 +137,6 @@ h2 {
   font-weight: bolder;
 }
 
-table.infobase-table > thead > tr > th, 
-table.infobase-table > tbody > tr > td {
-padding: 8px;
-vertical-align: top;
-} 
-table.infobase-table > thead > tr > th{
-  text-align: center;
-}
 .gradient {
   background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.75));
 }
@@ -168,12 +160,12 @@ div.label {
   line-height: 1.5;
   color: black;
 }
-.details-header{
+.details-header {
  border-top: 1px #bce9f1 solid;
  border-bottom: 1px #bce9f1 solid;
  margin-bottom: 20px;
 }
-.details-header h2{
+.details-header h2 {
   margin: 0px;
 }
 details.details summary,
@@ -184,16 +176,16 @@ details .toggler {
   border: 1px solid #e3e3e3;
   border-radius: 4px;
 }
-details.details summary:hover{
+details.details summary:hover {
  border: 1px solid #ccc;
 }
-.border-bottom{
+.border-bottom {
  border-bottom: 1px solid #ccc;
 }
-.paddng-bttm-md{
+.paddng-bttm-md {
   padding-bottom: 10px;
 }
-.line{
+.line {
   width : 100%
 }
 
@@ -225,8 +217,10 @@ details > * {
   line-height: 1.8em;
 }
 
+/* our app-wide a:visited: black is overriding all the bootstrap white on dark blue styles...  */
 .nav-pills > li.active > a {
   background-color: #284162 !important;
+  color: white !important;
 }
 
 .small_panel_text {
@@ -240,6 +234,9 @@ details > * {
     border-color: #4cae4c;
 }
 
+.btn-success, .btn-info, .btn-ib-info, .btn-danger, .btn-warning {
+  color: white !important;
+}
 
 /* to be used with light-background */
 a.btn-ib-light {
@@ -336,26 +333,7 @@ list-group-item.active a {
   overflow-x: auto;
 }
 
-
-/* for top header */
-table.table-blue > thead > tr {
-  background-color : #d9edf7;
-}
-table.table-blue > thead > tr > th{
-  background-color: $secondaryColor;
-  color: $backgroundColor;
-  font-weight : $mediumFontWeight;
-  border: none;
-  font-size: 13px;
-}
-tr.background-blue > td {
-  background-color: $secondaryColor;
-  color: $backgroundColor;
-}
-tr.background-blue > td > a{
-  color : #31708f;
-}
-
+/* for table striped header */
 .table-striped>tbody>tr:nth-child(odd) {
   background-color: #f5f5f5;
 }
@@ -429,6 +407,59 @@ tr.background-blue > td > a{
     color: #5bc0de;
 }
 
+.panel {
+  box-shadow: 0 0 transparent;
+}
+.panel.panel-overflow {
+  overflow: visible;
+
+  & > .panel-body {
+    /* .panel has a border radius of 10px, if the overflow is visible we need to correct the the white rectangle that starts popping out */ 
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+}
+.panel-body > .row > .source {
+  opacity: 0.8;
+}
+
+.panel-title {
+  margin: -0.25em 0 !important;
+}
+
+.panel-sub-title {
+  margin-top: 3px;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+/* 
+  Fixes Safari-specific bug, does nothing on other browsers. 
+  Only needed on larger screens. 
+*/
+.panel-body {
+  @media (min-width:1000px){
+    content: none!important;
+  }
+
+  @media (max-width:1000px){
+    padding: 1rem; /* on mobile, we need way less padding */
+  }
+}
+
+.panel-heading {
+  @media (min-width:1000px){
+    padding: 15px 15px; /* bootstrap default is 10 15 */
+  }
+  @media (max-width:1000px){
+    /* on mobile, we need way less padding */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}
+
 .panel.panel-info.panel-flat {
   margin-bottom: 23px;
   background-color: $backgroundColor;
@@ -464,12 +495,6 @@ ol, ul {
 
 li.checkbox > label{
   font-weight: $mediumFontWeight;
-}
-
-.well {
- -webkit-box-shadow: none;
- box-shadow: none;
- border: none; 
 }
 
 ol.breadcrumb {
@@ -514,4 +539,92 @@ dl.dl-no-bold-dts {
 
 #wb-bc li:before{
   content: none !important;
+}
+
+/* Modifiers for GCWeb alert boxes */
+.alert-no-symbol > :first-child {
+  margin-left: 0px !important;
+}
+
+.alert-no-symbol > :first-child::before {
+  content: "" !important;
+}
+
+.alert--is-bordered { 
+border-width: 2px 2px 2px 8px;
+border-bottom-right-radius: 10px;
+border-top-right-radius: 10px;
+}
+.alert { 
+background-color: $backgroundColor;
+}
+
+/* extending bootstrap nav style */
+ul.nav.nav-underline-active > li { 
+border-bottom: 3px solid rgba(0,0,0,0); /* invisible to remain same height as the active */
+}
+ul.nav.nav-underline-active > li.active {
+border-bottom: 3px solid #00BCD4;
+}
+
+/* extending bootstrap well which does not look good in regular GoC background */
+.well.dark-well {
+background-color: #ebebeb;
+border: 1px solid #bfbfbf;
+}
+
+.well {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: none; 
+ }
+
+
+// Link styles from flat redesign
+a, a:visited {
+  text-decoration: none;
+  color: $ibLinkColor;
+}
+
+#wb-lng > .row > div > ul > li > a,
+#wb-info > .wb-navcurr > ul > li > a,
+#wb-info > .brand > .container > .row > nav > ul > li > a {
+  color: $wetLinkColor;
+  &:visited {
+    color: $wetLinkVisitedColor;
+  }
+}
+
+ol.breadcrumb > li:last-child > :last-child {
+  text-decoration: none;
+  color: #333;
+}
+
+// Misc. styles from flat redesign
+.well-sm {
+  border-radius: 10px;
+  background-color: $tertiaryColor;
+  text-align: center;
+  border-color: $tertiaryColor;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  padding: 10px;
+}
+
+.form-control.input-lg {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  box-shadow: none !important;
+  opacity: 1;
+  background: none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255);
+}
+
+#app, #wb-bc, .app-font, .easy-access, wb-lng {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+#app, #wb-bc, .app-font {
+  font-family: 'Roboto', sans-serif;
+  font-weight: $mediumFontWeight;
 }
