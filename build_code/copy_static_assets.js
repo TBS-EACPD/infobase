@@ -196,6 +196,7 @@ var IB = {
   png: common_png,
   js: external_deps_names,
   app_files: ['src/common_css/container-page.css'],
+  well_known: ['src/InfoBase/security.txt'],
   other: [
     'src/robots/robots.txt',
     'src/InfoBase/favicon.ico',
@@ -253,9 +254,10 @@ function get_lookup_name(file_name){
 function build_proj(PROJ){
   
   const dir = 'build/InfoBase';
-  const app_dir = `${dir}/app`
+  const app_dir = `${dir}/app`;
   const results_dir = `${dir}/results`;
-  const footnotes_dir = `${dir}/footnotes`
+  const footnotes_dir = `${dir}/footnotes`;
+  const well_known_dir = `${dir}/.well-known`;
 
   _.each(
     ['build', dir, app_dir, results_dir, footnotes_dir], 
@@ -339,6 +341,7 @@ function build_proj(PROJ){
     PROJ[type].forEach( f_name => copy_file_to_target_dir(f_name, this_dir) );
   });
   PROJ.app_files.forEach( f_name => copy_file_to_target_dir(f_name, app_dir) );
+  PROJ.well_known.forEach( f_name => copy_file_to_target_dir(f_name, well_known_dir) );
   PROJ.other.forEach( f_name => copy_file_to_target_dir(f_name, dir) );
 
   _.each(get_index_pages(), ({file_prefix, en, fr }) => {
