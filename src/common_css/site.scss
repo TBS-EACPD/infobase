@@ -9,29 +9,29 @@ div.decimal1 {
   width: 100px;
   text-align:right;
 }
-div.str{
+div.str {
   width: 150px;
   color: #31708f; /* overide the WET standard for .str */
 }
-div.str1{
+div.str1 {
   width: 90px;
   color: #31708f; /* overide the WET standard for .str */
 }
-div.wide-str{
+div.wide-str {
   width: 300px;
 }
-div.percentage{
+div.percentage {
   width: 90px;
   text-align:center;
 }
-div.percentage1{
+div.percentage1 {
   width: 100px;
   text-align:right;
 }
-div.date{
+div.date {
   width: 90px;
 }
-div.ordinal{
+div.ordinal {
   width: 150px;
   text-align:center;
 }
@@ -46,34 +46,11 @@ div.ordinal{
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   text-transform: uppercase;
 }
- /* mini tables */
-.right_number {
-  white-space: nowrap;
-  text-align: right;
-}
-.left-text {
-  font-weight: bold;
-  text-align: left;
-}
-.left-text_plain{
-  text-align: left;
-}
-.right-text {
-  font-weight: bold;
-  text-align: right;
-}
-.center-text {
-  text-align: center;
-}
-tr.total-row {
-  font-weight : bold;
-}
-tr.odd {
-  background-color: rgba(35, 68, 126,0.1);
-}
+
 .success {
   background-color: #dff0d8;
 }
+
 /* added for IE9, this adds a transparents 1x1 png file
  * so that mouseneter events can be registered on 
  * empty divs */
@@ -163,10 +140,6 @@ ul.fancy-ul > li:last-child {
   margin-top: 0;
 }
 
-ul.footnote-list {
-  padding-left: 5px;
-}
-
 .dead-element {
   opacity: 0.75;
 }
@@ -179,7 +152,6 @@ ul.footnote-list {
   white-space: nowrap;
   margin-bottom: 0px
 }
-
 .text-overflow > span {
   font-weight: normal;
   color: black;
@@ -187,57 +159,6 @@ ul.footnote-list {
 
 a.source-link {
   font-weight: bold;
-}
-
-/* Styles for height clipped bar graphs */
-div.height-clipped-graph-area {
-  min-height: 400px;
-  margin-top: 20px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-div.height-clipped-bar-area {
-  position: relative;
-  margin-bottom: 10px;
-  left: -20px; /* graph needs to be shifted left to avoid x-overflow with height clipper */
-}
-
-.gradient.gradient-strong {
-    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1)) !important;
-}
-
-/* Styles for ppl share pie graphs */
-.ppl-share-pie-area > .ppl-share-pie-legend > .centerer > .centerer-IE-fix {
-  width: 100%;
-  flex-grow: 1;
-}
-.ppl-share-pie-area > .ppl-share-pie-legend .ppl-share-percent-header {
-  display: inline-block;
-  width: 100%;
-  text-align: right;
-  font-weight: bold;
-}
-@media (min-width:992px){
-  div.ppl-share-pie-area{
-    display: flex;
-    justify-content: space-around;
-
-    & > .ppl-share-pie-graph{
-      flex: 0 1 50%;
-    }
-    & > .ppl-share-pie-graph > div{
-      width: 100%;
-    }
-    & > .ppl-share-pie-legend {
-      flex: 0 1 50%;
-      align-items: center;
-      margin-right: 100px;
-    }
-    & > .ppl-share-pie-legend > .centerer {
-      height: 100%;
-    }
-  }
 }
 
 // Misc. styles from flat redesign
@@ -263,10 +184,4 @@ header, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   text-decoration: none;
   color: $ibLinkColor;
   background-color: transparent;
-}
-
-@media (max-width: 1100px){
-  .canada-intro-grid {
-    margin: 0px !important;
-  }
 }

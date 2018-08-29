@@ -11,7 +11,7 @@ hr {
 
 /* tooltips */
 .glossary-tooltip-link,
-.glossary-tooltip-link:visited  {
+.glossary-tooltip-link:visited {
   text-decoration: none !important;
   border-bottom: 2px dashed #135bbb !important;
   color: #135bbb !important;
@@ -36,10 +36,8 @@ hr {
   @media (min-width:900px) and (max-width: 1199px) { max-width: 60vw !important }
   @media (max-width:899px){ max-width: 90vw !important }
 }
-/* /tooltips */
 
 /* reseting WET styles*/
-
 .link-unstyled,
 .link-unstyled:link,
 .link-unstyled:hover,
@@ -81,7 +79,7 @@ hr {
   background-color: #F0F0F0;
 }
 
-@media(max-width:1000px){
+@media(max-width:1000px) {
   main.container {
     padding-right: 1rem;
     padding-left: 1rem;
@@ -93,7 +91,7 @@ hr {
   min-height: 400px;
 }
 
-div#app:focus{
+div#app:focus {
   outline: none!important;
 }
 
@@ -192,7 +190,7 @@ details.details summary:hover {
 details.details summary h1,
 details.details summary h2,
 details.details summary h3,
-details.details summary h4{
+details.details summary h4 {
   display: inline;
 }
 details[open] {
@@ -303,7 +301,7 @@ li.list-group-item {
   color: #555;
   background-color: #f5f5f5;
 }
-list-group-item.active a {
+.list-group-item.active a {
   color: white;
 }
 
@@ -325,12 +323,6 @@ list-group-item.active a {
 
 .twitter-typeahead, .twitter-typeahead input {
 	width: 100% !important;
-}
-
-
-/* for wide tables */
-.sidescroll { 
-  overflow-x: auto;
 }
 
 /* for table striped header */
@@ -405,88 +397,6 @@ list-group-item.active a {
 }
 .bs-callout-info h4 {
     color: #5bc0de;
-}
-
-.panel {
-  box-shadow: 0 0 transparent;
-}
-.panel.panel-overflow {
-  overflow: visible;
-
-  & > .panel-body {
-    /* .panel has a border radius of 10px, if the overflow is visible we need to correct the the white rectangle that starts popping out */ 
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-  }
-}
-.panel-body > .row > .source {
-  opacity: 0.8;
-}
-
-.panel-title {
-  margin: -0.25em 0 !important;
-}
-
-.panel-sub-title {
-  margin-top: 3px;
-  font-weight: 400;
-  opacity: 0.8;
-}
-
-/* 
-  Fixes Safari-specific bug, does nothing on other browsers. 
-  Only needed on larger screens. 
-*/
-.panel-body {
-  @media (min-width:1000px){
-    content: none!important;
-  }
-
-  @media (max-width:1000px){
-    padding: 1rem; /* on mobile, we need way less padding */
-  }
-}
-
-.panel-heading {
-  @media (min-width:1000px){
-    padding: 15px 15px; /* bootstrap default is 10 15 */
-  }
-  @media (max-width:1000px){
-    /* on mobile, we need way less padding */
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 1rem;
-    padding-left: 1rem;
-  }
-}
-
-.panel.panel-info.panel-flat {
-  margin-bottom: 23px;
-  background-color: $backgroundColor;
-  border-radius: 10px;
-  border: 2px solid $primaryColor;
-}
-
-.panel.panel-info.panel-flat > .panel-heading {
-  color: $backgroundColor;
-  background-color: $primaryColor;
-}
-
-section.panel {
-  background-color: $primaryColor;
-  border-radius: 10px;
-  border: 2px solid $primaryColor;
-  overflow:hidden
-}
-
-section.panel  > .panel-heading {
-  color: $backgroundColor;
-  background-color: inherit;
-  border: none;
-}
-
-section.panel > .panel-body {
-  background-color: $backgroundColor;
 }
 
 ol, ul {
@@ -627,4 +537,88 @@ ol.breadcrumb > li:last-child > :last-child {
 #app, #wb-bc, .app-font {
   font-family: 'Roboto', sans-serif;
   font-weight: $mediumFontWeight;
+}
+
+
+/* Panel extensions */
+.panel {
+  box-shadow: 0 0 transparent;
+}
+.panel.panel-overflow {
+  overflow: visible;
+
+  & > .panel-body {
+    /* .panel has a border radius of 10px, if the overflow is visible we need to correct the the white rectangle that starts popping out */ 
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+}
+.panel-body > .row > .source {
+  opacity: 0.8;
+}
+
+.panel-title {
+  margin: -0.25em 0 !important;
+}
+
+.panel-sub-title {
+  margin-top: 3px;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+/* 
+  Fixes Safari-specific bug, does nothing on other browsers. 
+  Only needed on larger screens. 
+*/
+.panel-body {
+  @media (min-width:1000px){
+    content: none!important;
+  }
+
+  @media (max-width:1000px){
+    padding: 1rem; /* on mobile, we need way less padding */
+  }
+}
+
+.panel-heading {
+  @media (min-width:1000px){
+    padding: 15px 15px; /* bootstrap default is 10 15 */
+  }
+  @media (max-width:1000px){
+    /* on mobile, we need way less padding */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}
+
+.panel.panel-info.panel-flat {
+  margin-bottom: 23px;
+  background-color: $backgroundColor;
+  border-radius: 10px;
+  border: 2px solid $primaryColor;
+}
+
+.panel.panel-info.panel-flat > .panel-heading {
+  color: $backgroundColor;
+  background-color: $primaryColor;
+}
+
+section.panel {
+  background-color: $primaryColor;
+  border-radius: 10px;
+  border: 2px solid $primaryColor;
+  overflow:hidden
+}
+
+section.panel  > .panel-heading {
+  color: $backgroundColor;
+  background-color: inherit;
+  border: none;
+}
+
+section.panel > .panel-body {
+  background-color: $backgroundColor;
 }

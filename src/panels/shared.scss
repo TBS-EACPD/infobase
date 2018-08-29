@@ -1,0 +1,57 @@
+/* Styles for height clipped bar graphs */
+div.height-clipped-graph-area {
+  min-height: 400px;
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+div.height-clipped-bar-area {
+  position: relative;
+  margin-bottom: 10px;
+  left: -20px; /* graph needs to be shifted left to avoid x-overflow with height clipper */
+}
+
+.gradient.gradient-strong {
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1)) !important;
+}
+
+/* Styles for ppl share pie graphs */
+.ppl-share-pie-area > .ppl-share-pie-legend > .centerer > .centerer-IE-fix {
+  width: 100%;
+  flex-grow: 1;
+}
+.ppl-share-pie-area > .ppl-share-pie-legend .ppl-share-percent-header {
+  display: inline-block;
+  width: 100%;
+  text-align: right;
+  font-weight: bold;
+}
+@media (min-width:992px){
+  div.ppl-share-pie-area{
+    display: flex;
+    justify-content: space-around;
+
+    & > .ppl-share-pie-graph{
+      flex: 0 1 50%;
+    }
+    & > .ppl-share-pie-graph > div{
+      width: 100%;
+    }
+    & > .ppl-share-pie-legend {
+      flex: 0 1 50%;
+      align-items: center;
+      margin-right: 100px;
+    }
+    & > .ppl-share-pie-legend > .centerer {
+      height: 100%;
+    }
+  }
+}
+
+/* styles from simplographic */
+@media (max-width: 1100px){
+  .canada-intro-grid {
+    margin: 0px !important;
+  }
+}

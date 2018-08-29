@@ -1,3 +1,4 @@
+import 'shared.scss';
 import * as utils from '../core/utils.js';
 import * as util_components from '../util_components.js';
 import * as declarative_charts from '../charts/declarative_charts.js';

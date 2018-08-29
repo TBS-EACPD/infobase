@@ -77,6 +77,13 @@ table.infobase-table > thead > tr > th {
   text-align: center;
 }
 
+tr.total-row {
+  font-weight : bold;
+}
+tr.odd {
+  background-color: rgba(35, 68, 126,0.1);
+}
+
 /* helper classes for alignment */
 td.data-col-cell {
   text-align: right;
@@ -84,4 +91,29 @@ td.data-col-cell {
 
 td.key-col-cell {
   text-align: left;
+}
+
+/* mini tables */
+.right_number {
+  white-space: nowrap;
+  text-align: right;
+}
+.left-text {
+  font-weight: bold;
+  text-align: left;
+}
+.left-text_plain{
+  text-align: left;
+}
+.right-text {
+  font-weight: bold;
+  text-align: right;
+}
+.center-text {
+  text-align: center;
+}
+
+/* for wide tables */
+.sidescroll { 
+  overflow-x: auto;
 }
