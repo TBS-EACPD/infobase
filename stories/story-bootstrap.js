@@ -1,5 +1,7 @@
 require('../external-dependencies/GCWeb/css/theme.min.css')
 require('../src/common_css/site.scss');
+require('../src/common_css/wet-bootstrap3-holdovers.scss');
+require('../src/common_css/bootstrap-fixes-extensions.scss');
 require('../src/common_css/grid-system.scss');
 require('../src/gen_expl/explorer-styles.scss');
 

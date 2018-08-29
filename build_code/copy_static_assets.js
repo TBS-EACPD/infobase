@@ -327,7 +327,6 @@ function build_proj(PROJ){
   });
 
   fse.copySync('external-dependencies/GCWeb', dir+'/GCWeb', {clobber: true});
-  fse.copySync('external-dependencies/wet-boew', dir+'/wet-boew', {clobber: true});
 
   const copy_file_to_target_dir = (file_name, target_dir) => {
     const small_name = file_name.split('/').pop(); // dir/file.js -> file.js

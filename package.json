@@ -21,6 +21,7 @@
     "babel-polyfill": "^6.9.1",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.11.1",
+    "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
     "css-loader": "^0.28.7",
     "d3-array": "^1.2.0",
