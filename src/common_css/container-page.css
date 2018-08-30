@@ -184,14 +184,14 @@ body {
  .breadcrumb > li {
    display: inline-block; }
    .breadcrumb > li + li:before {
-     content: "/ ";
+     content: none;
      padding: 0 5px;
      color: #ccc; }
  .breadcrumb > .active {
    color: #767676; }
 
 
-.wb-invisible, .wb-inv, .wb-show-onfocus, .wb-sl, #wb-lng h2, #wb-info h2 {
+.wb-invisible, .wb-inv, .wb-show-onfocus, .wb-sl, #wb-lng h2, #wb-info h2, #wb-bc h2 {
   clip: rect(1px, 1px, 1px, 1px);
   height: 1px;
   margin: 0;

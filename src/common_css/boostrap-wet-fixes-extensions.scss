@@ -79,9 +79,6 @@ hr {
   z-index: 0 !important; 
 }
 
-#wb-bc {
-  background-color: #F0F0F0;
-}
 
 @media(max-width:1000px) {
   main.container {
@@ -162,25 +159,6 @@ div.label {
   line-height: 1.5;
   color: black;
 }
-.details-header {
- border-top: 1px #bce9f1 solid;
- border-bottom: 1px #bce9f1 solid;
- margin-bottom: 20px;
-}
-.details-header h2 {
-  margin: 0px;
-}
-details.details summary,
-details .toggler {
-  color: #23406F;
-  font-weight: $heavyFontWeight;
-  padding: 5px;
-  border: 1px solid #e3e3e3;
-  border-radius: 4px;
-}
-details.details summary:hover {
- border: 1px solid #ccc;
-}
 .border-bottom {
  border-bottom: 1px solid #ccc;
 }
@@ -191,18 +169,6 @@ details.details summary:hover {
   width : 100%
 }
 
-details.details summary h1,
-details.details summary h2,
-details.details summary h3,
-details.details summary h4 {
-  display: inline;
-}
-details[open] {
-    padding-bottom: 0px;
-}
-details > * {
-    margin-left: 0px;
-}
 
 .huge_panel_text {
   font-size: 1.8em;
@@ -309,11 +275,6 @@ li.list-group-item {
   color: white;
 }
 
-/* fix alignment when window is ex-small */
-.table-controls .control-label {
-  /* (height of .form-control) - (margin of .control-label) */
-  height: 32px;
-}
 
 /* fix odd twitter typeahead style*/
 .form-inline .form-control {
@@ -449,10 +410,6 @@ dl.dl-no-bold-dts {
 
 .zero-padding {
   padding: 0px !important;
-}
-
-#wb-bc li:before{
-  content: none !important;
 }
 
 /* Modifiers for GCWeb alert boxes */
