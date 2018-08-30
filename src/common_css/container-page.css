@@ -1,21 +1,17 @@
 html {
   font-family: sans-serif;
+  font-size: 10px;
+  -webkit-tap-highlight-color: transparent;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%; }
-
-body {
-  margin: 0; }
-
-html {
-  font-size: 10px;
-  -webkit-tap-highlight-color: transparent; }
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.4375;
   color: #333333;
-  background-color: #f9f9f9; }
+  background-color: #fdfdfd;
+  margin: 0; }
 
 #ib-site-header-area {
   border-bottom: 4px solid #335175;
@@ -175,20 +171,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap; }
-.breadcrumb {
- padding: 8px 15px;
- margin-bottom: 23px;
- list-style: none;
- background-color: transparent;
- border-radius: 4px; }
- .breadcrumb > li {
-   display: inline-block; }
-   .breadcrumb > li + li:before {
-     content: none;
-     padding: 0 5px;
-     color: #ccc; }
- .breadcrumb > .active {
-   color: #767676; }
+
 
 
 .wb-invisible, .wb-inv, .wb-show-onfocus, .wb-sl, #wb-lng h2, #wb-info h2, #wb-bc h2 {

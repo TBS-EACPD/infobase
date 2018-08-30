@@ -41,13 +41,13 @@
     }
 
     & > .partition-popup {
-      color: #fdfdfd;
+      color: $backgroundColor;
       background-color: #01223b;
       & > .popup-pointer {
       	border-right: 40px solid #01223b;
       }
       & > .popup-decription-text {
-        color: #fdfdfd;
+        color: $backgroundColor;
       }
       & > .btn {
         color: #333;

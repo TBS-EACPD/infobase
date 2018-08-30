@@ -1,5 +1,13 @@
 @import "common-variables";
 
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.4375;
+  color: #333333;
+  background-color: $backgroundColor;
+  margin: 0; }
+
 h1 {
   border-bottom: 3px solid $highlightColor;
 }
@@ -374,6 +382,10 @@ li.checkbox > label{
 
 ol.breadcrumb {
   padding: 8px 0;
+}
+
+.breadcrumb > li + li:before {
+  content: none;
 }
 
 dl.dl-horizontal.dl-long-terms {

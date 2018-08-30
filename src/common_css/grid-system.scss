@@ -183,11 +183,11 @@
   border-bottom: 1px solid rgb(123, 139, 157);
   padding: 10px;
   padding-top: 20px;
-  background-color: #fdfdfd;
+  background-color: $backgroundColor;
 }
 
 .key_concept_header {
-  color: #fdfdfd;
+  color: $backgroundColor;
   background-color: rgba(37,114,180,0.7);
   border: 1px solid rgba(37,114,180,0.9);
   text-align: center;

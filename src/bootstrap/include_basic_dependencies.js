@@ -13,9 +13,8 @@ if(typeof CDN_URL !== "undefined"){
 }
 
 
-
 import 'whatwg-fetch';
-import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../common_css/site.scss';
 import '../common_css/wet-bootstrap3-holdovers.scss';
 import '../common_css/boostrap-wet-fixes-extensions.scss';
