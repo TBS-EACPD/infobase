@@ -627,3 +627,16 @@ section.panel  > .panel-heading {
 section.panel > .panel-body {
   background-color: $backgroundColor;
 }
+
+
+.form-control {
+  max-width: 100%;
+  width: auto;
+  height: 37px;
+  font-size: 16px;
+
+  &.input-lg {
+    height: 46px;
+    font-size: 18px;
+  }
+}

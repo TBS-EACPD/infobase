@@ -15,7 +15,7 @@ class DebouncedTextInput extends React.Component {
 
     return <input  
       type = "text"
-      className = "form-control search"
+      className = "form-control search input-lg"
       placeholder = { placeHolder || "" }
       defaultValue = { defaultValue || undefined }
       onChange = { handle_change }
