@@ -1,11 +1,18 @@
-@import "common-variables";
+@import "../common_css/common-variables";
+
+html {
+  font-family: sans-serif;
+  font-size: 10px;
+  -webkit-tap-highlight-color: transparent;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%; }
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.4375;
   color: #333333;
-  background-color: $backgroundColor;
+  background-color: #fdfdfd;
   margin: 0; }
 
 h1 {
@@ -608,4 +615,30 @@ section.panel > .panel-body {
     height: 46px;
     font-size: 18px;
   }
+}
+
+
+#wb-lng {
+  display: block;
+  text-align: right;
+  width: 100%;
+}
+#wb-lng > a.lang-switcher {
+  display: inline-block;
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-top: 0.75rem;
+  text-align: center;
+  padding-bottom: 1rem;
+}
+@media (min-width: 768px) {
+  #wb-lng > a.lang-switcher {
+    font-weight: 200;
+    font-size: 1.5rem;
+  }
+}
+
+
+#wb-bc {
+  background-color: #f8f8f8 !important;
 }

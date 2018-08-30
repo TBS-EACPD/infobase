@@ -339,8 +339,11 @@ function build_proj(PROJ){
     make_dir_if_exists(this_dir);
     PROJ[type].forEach( f_name => copy_file_to_target_dir(f_name, this_dir) );
   });
+<<<<<<< HEAD
   PROJ.app_files.forEach( f_name => copy_file_to_target_dir(f_name, app_dir) );
   PROJ.well_known.forEach( f_name => copy_file_to_target_dir(f_name, well_known_dir) );
+=======
+>>>>>>> Alright... new build script 'bundle_css', spits out a container-page.scss containing everything from src/bootstrapped_css + bootstrap. Giving things better names, streamlining it in to build process, having a nicer dev version, etc. are all TODOs, but it works
   PROJ.other.forEach( f_name => copy_file_to_target_dir(f_name, dir) );
 
   _.each(get_index_pages(), ({file_prefix, en, fr }) => {
