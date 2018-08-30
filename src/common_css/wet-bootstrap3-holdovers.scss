@@ -87,3 +87,26 @@ input[placeholder],
 
 .nowrap {
   white-space: nowrap; }
+
+
+/*
+ *	Use button border style 'outset' to give buttons depth, except when disabled
+ */
+.btn {
+  border-style: outset;
+  /*
+	 * These two property overrides should be recommended upstream to
+	 * Bootstrap as a fix for button wrapping (see wet-boew/wet-boew#4454)
+	 */
+  height: auto;
+  min-height: 36px;
+  min-width: 36px;
+  white-space: normal; 
+  font-size: 16px; }
+/*
+ * btn-xs should be equal to btn-sm in >v4.0.*
+*/
+.btn-group-xs .btn,
+.btn.btn-xs,
+.btn-group-xs > .btn {
+  min-height: 0; }
