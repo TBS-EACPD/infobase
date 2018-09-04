@@ -1,4 +1,4 @@
-require('../src/bootstrapped_css/bootstrapped_css.js');
+require('../src/extended_bootstrap_css/extended-bootstrap-index.js');
 require('../src/common_css/site.scss');
 require('../src/common_css/grid-system.scss');
 require('../src/gen_expl/explorer-styles.scss');
