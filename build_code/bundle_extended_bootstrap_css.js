@@ -6,8 +6,6 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const FilterChunkWebpackPlugin = require('filter-chunk-webpack-plugin');
 
-const fse = require('fs-extra');
-
 const build_dir = path.resolve(__dirname, "../build/InfoBase/app/");
 
 const config = {
@@ -52,7 +50,4 @@ const config = {
 webpack(config, function(err,stats){
   console.log(stats.toString({cached:true,modules:true}));
   if( err || stats.hasErrors() ){ process.exitCode = 1; }
-
-  // Temporary, just for as long as the index html files aren't updated and still look for the old file
-  fse.copySync(`${build_dir}/extended-bootstrap.css`, `${build_dir}/container-page.css`, {clobber: true});
 });
