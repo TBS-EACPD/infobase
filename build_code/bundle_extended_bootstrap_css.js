@@ -19,7 +19,7 @@ const config = {
     minimizer: [ 
       new OptimizeCSSAssetsPlugin({
         cssProcessorPluginOptions: {
-          preset: ['default', { discardComments: { removeAll: true } }],
+          preset: ['default'],
         },
       }), 
     ],
