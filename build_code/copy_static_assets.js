@@ -195,7 +195,6 @@ var IB = {
   svg: common_svg,
   png: common_png,
   js: external_deps_names,
-  app_files: ['src/common_css/container-page.css', 'src/common_css/extended-bootstrap.css'],
   well_known: ['src/InfoBase/security.txt'],
   other: [
     'src/robots/robots.txt',
@@ -220,7 +219,7 @@ function get_index_pages(){
     ...lang_lookups,
     script_url: lang_lookups.a11y_script_url, 
     other_lang_href: lang_lookups.a11y_other_lang_href,
-    is_a11y_mode: true 
+    is_a11y_mode: true,
   });
 
   return [
@@ -339,11 +338,7 @@ function build_proj(PROJ){
     make_dir_if_exists(this_dir);
     PROJ[type].forEach( f_name => copy_file_to_target_dir(f_name, this_dir) );
   });
-<<<<<<< HEAD
-  PROJ.app_files.forEach( f_name => copy_file_to_target_dir(f_name, app_dir) );
   PROJ.well_known.forEach( f_name => copy_file_to_target_dir(f_name, well_known_dir) );
-=======
->>>>>>> Alright... new build script 'bundle_css', spits out a container-page.scss containing everything from src/bootstrapped_css + bootstrap. Giving things better names, streamlining it in to build process, having a nicer dev version, etc. are all TODOs, but it works
   PROJ.other.forEach( f_name => copy_file_to_target_dir(f_name, dir) );
 
   _.each(get_index_pages(), ({file_prefix, en, fr }) => {
