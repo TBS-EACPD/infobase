@@ -195,7 +195,7 @@ var IB = {
   svg: common_svg,
   png: common_png,
   js: external_deps_names,
-  app_files: ['src/common_css/container-page.css'],
+  app_files: ['src/common_css/container-page.css', 'src/common_css/extended-bootstrap.css'],
   well_known: ['src/InfoBase/security.txt'],
   other: [
     'src/robots/robots.txt',
