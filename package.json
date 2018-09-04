@@ -89,7 +89,8 @@
   "devDependencies": {},
   "scripts": {
     "debug_IB_base": "node --inspect-brk build_code/copy_static_assets.js IB",
-    "IB_base": "node build_code/copy_static_assets.js IB",
+    "IB_base": "node build_code/copy_static_assets.js IB && echo ' bundling extended bootstrap css... \n' && node build_code/bundle_extended_bootstrap_css.js",
+    "bundle_bootstrap": "node build_code/bundle_extended_bootstrap_css.js",
     "IB_dev": "node build_code/webpack_starter.js main_client BOTH",
     "IB_dev_en": "node build_code/webpack_starter.js main_client",
     "IB_q": "node build_code/webpack_starter.js NO-BABEL main_client",
@@ -101,7 +102,6 @@
     "a11y_dev": "node build_code/webpack_starter.js a11y_client BOTH",
     "a11y_prod": "node build_code/webpack_starter.js a11y_client BOTH PROD",
     "a11y_prod_no_watch": "node build_code/webpack_starter.js a11y_client BOTH PROD NO-WATCH",
-    "bundle_css": "node build_code/bundle_container_page_css.js",
     "browser_test": "testcafe chrome tests/active/",
     "headless_test": "testcafe chrome:headless tests/active/",
     "ci_test": "testcafe 'chromium:headless --no-sandbox' tests/active/",

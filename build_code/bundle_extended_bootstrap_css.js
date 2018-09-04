@@ -6,13 +6,16 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const FilterChunkWebpackPlugin = require('filter-chunk-webpack-plugin');
 
+const fse = require('fs-extra');
+
+const build_dir = path.resolve(__dirname, "../build/InfoBase/app/");
 
 const config = {
   name: 'container page css bundle',
   mode: 'production',
-  entry: ['./src/bootstrapped_css/bootstrapped_css.js'],
+  entry: ['./src/extended_bootstrap_css/extended-bootstrap-index.js'],
   output: {
-    path: path.resolve(__dirname, '../build/InfoBase/app/'),
+    path: build_dir,
   },
   optimization: {
     minimizer: [ 
@@ -40,7 +43,7 @@ const config = {
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin({ filename: 'container-page.css' }),
+    new MiniCssExtractPlugin({ filename: 'extended-bootstrap.css' }),
     new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
     new FilterChunkWebpackPlugin({ patterns: ['*.js'] }),
   ],
@@ -48,5 +51,8 @@ const config = {
 
 webpack(config, function(err,stats){
   console.log(stats.toString({cached:true,modules:true}));
-  if( err || stats.hasErrors() ){ process.exitCode = 1; } 
+  if( err || stats.hasErrors() ){ process.exitCode = 1; }
+
+  // Temporary, just for as long as the index html files aren't updated and still look for the old file
+  fse.copySync(`${build_dir}/extended-bootstrap.css`, `${build_dir}/container-page.css`, {clobber: true});
 });

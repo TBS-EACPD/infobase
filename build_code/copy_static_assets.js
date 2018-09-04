@@ -357,7 +357,7 @@ function build_proj(PROJ){
     );
   });
 
-  console.log("\n done \n");
+  console.log("\n done copying static assets \n");
 };
 
 
