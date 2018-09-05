@@ -1,7 +1,6 @@
 # If CLOUDFLARE_KEY isn't set, try and get it from the (root owned) file in home
 if [ -z "$CLOUDFLARE_KEY" ]
   then
-    echo test
     CLOUDFLARE_KEY=$(sudo cat "${HOME}/cloudflare_key.txt")
 fi
 
