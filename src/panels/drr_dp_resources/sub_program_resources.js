@@ -235,7 +235,7 @@ class SubProgramResourceTree extends React.Component {
 
     const inner_content = <div>
 
-      <div style={{marginBottom: '20px'}}>
+      <div className="medium_panel_text" style={{marginBottom: '20px'}}>
         {get_text(doc)}
       </div>
       <div>
