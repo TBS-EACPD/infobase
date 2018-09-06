@@ -120,4 +120,3 @@ workflows:
             branches:
               only:
                 - master
-                - no-more-wet
