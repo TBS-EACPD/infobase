@@ -27,7 +27,7 @@ import {
 import { ensure_loaded } from '../core/lazy_loader.js';
 import { Explorer } from '../components/ExplorerComponents.js';
 
-const INCLUDE_OTHER_TAGS = false;
+const INCLUDE_OTHER_TAGS = true;
 const { text_maker, TM } = create_text_maker_component(explorer_text);
 
 const HierarchySelectionItem = ({title, text, active, url }) => (
@@ -167,10 +167,12 @@ class ExplorerPage extends React.Component {
       goco_props, 
       hwh_props,
       mlt_props,
+      wwh_props,
     ] = _.chain([ 
       Tag.lookup("GOCO"),
       Tag.lookup("HWH"),
       Tag.lookup("MLT"),
+      Tag.lookup("WWH"),
     ])
       .compact()
       .map( ({ description, name, id }) => ({
@@ -280,7 +282,7 @@ class ExplorerPage extends React.Component {
               <TM k="choose_explore_point" />
             </header>
             <div role="radiogroup" className="hierarchy-selection-items">
-              {_.map([ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp18" && INCLUDE_OTHER_TAGS ? [mlt_props] : [])  ],props =>
+              {_.map([ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp18" && INCLUDE_OTHER_TAGS ? [wwh_props, /* mlt_props */ ] : [])  ],props =>
                 <HierarchySelectionItem 
                   key={props.id} 
                   url={`#resource-explorer/${props.id}/${doc}`}
@@ -414,6 +416,11 @@ export class ResourceExplorer extends React.Component {
       hierarchy_scheme :
       'min'
     );
+
+    //additional validation
+    if(doc == "drr16" &&  !_.includes(['min','dept','GOCO','HWH'], hierarchy_scheme) ){
+      hierarchy_scheme = "min";
+    }
     
     doc = (
       _.includes(['drr16','dp18'], doc) ? 

@@ -308,7 +308,8 @@ function populate_program_tag_linkages(programs_m2m_tags){
     const program = Program.lookup(program_id);
     const tag = Tag.lookup(tagID);
     const tag_root_id = tag.root.id;
-    if(tag_root_id === "CCOFOG" || tag_root_id === "MLT" || tag_root_id === "WWH"){
+    // if(tag_root_id === "CCOFOG" || tag_root_id === "MLT" || tag_root_id === "WWH"){
+    if(tag_root_id === "CCOFOG" || tag_root_id === "MLT"  ){
       return;
     }
     program.tags.push(tag)
