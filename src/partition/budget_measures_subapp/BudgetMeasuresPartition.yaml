@@ -283,7 +283,8 @@ budget_measure_popup_bottom_rows:
       </ul>
     {{/if}}
     {{#if budget_link}}
-      <a href='{{budget_link}}' 
+      <a target='_blank'
+        href='{{budget_link}}' 
         class='btn btn-xs btn-block mrgn-bttm-sm partition-link-out' 
         style='background-color:{{color}};'>
         {{gt "see_it_in_the_budget"}}
