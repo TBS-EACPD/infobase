@@ -18,7 +18,7 @@ export GCLOUD_BUCKET_URL="gs://cdn-rdc.ea-ad.ca/InfoBase"
 ./deploy_build_scripts/push_to_gcloud_bucket.sh
 
 #clear certain cloudflare caches
-./selectively_clear_cloudflare_cache.sh
+./deploy_build_scripts/selectively_clear_cloudflare_cache.sh
 
 # cleanup
 unset CDN_URL
