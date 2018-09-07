@@ -395,6 +395,10 @@ ol.breadcrumb {
   content: none;
 }
 
+.breadcrumb {
+  background-color: #f8f8f8;
+}
+
 dl.dl-horizontal.dl-long-terms {
   @media(min-width:768px){
     > dt {
