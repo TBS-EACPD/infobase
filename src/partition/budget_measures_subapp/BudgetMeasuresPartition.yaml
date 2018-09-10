@@ -74,6 +74,7 @@ submeasures_table_title:
   fr: Répartition par sous-mesure
 
 budget_measure_submeasure_note:
+  transform: [handlebars]
   en: |
     Sub-measures are part of the allocation process and do not appear {{gt "budget_name"}}. Unlike Budget Measures, sub-measures are not shared across organizations.
     Sub-measures serve only to provide a further breakout of allocated and withheld amounts for specific measures under specific organizations;
