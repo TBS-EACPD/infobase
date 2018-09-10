@@ -10,8 +10,8 @@ import { shallowEqualObjectsOverKeys } from '../core/utils';
 
 const { Dept } = Subject;
 const biv_footnote = text_maker("biv_footnote");
-const this_year_col = "{{est_in_year}}_estimates";
-const last_year_col = "{{est_last_year}}_estimates";
+const this_year_col = "{{est_last_year}}_estimates";
+const last_year_col = "{{est_last_year_2}}_estimates";
 const row_identifier_func = row => `${row.dept}-${row.votenum}-${row.desc}`; 
 
 //in this cpn, we don't care about supps
@@ -24,15 +24,15 @@ const reduce_by_supps_dim = (rows) => _.chain(rows)
       dept: first.dept,
       desc: first.desc,
       votenum: first.votenum,
-      this_year: _.sumBy(group, this_year_col) || 0,
-      last_year_mains: _.chain(group).filter({est_doc_code: "MAINS"}).sumBy(last_year_col).value(),
+      sups: _.chain(group).filter({est_doc_code: "SEA"}).sumBy(this_year_col).value(),
+      mains: _.chain(group).filter({est_doc_code: "MAINS"}).sumBy(this_year_col).value(),
       _rows: group,
     };
   })
   .value();
 
 const get_doc_code_breakdowns = rows => _.chain(rows)
-  .filter(row => row.est_doc_code === "MAINS" || row[last_year_col]) //always include mains, even if it's zero
+  .filter(row => row.est_doc_code === "MAINS" || row[last_year_col] || row[this_year_col]) //always include mains, even if it's zero
   .groupBy('est_doc_code')
   .toPairs()
   .map( ([doc_code,group]) => ({
@@ -42,20 +42,27 @@ const get_doc_code_breakdowns = rows => _.chain(rows)
   }))
   .value()
 
+const key_for_table_row = row => `${row.dept}-${row.votenum}-${row.desc}`;
 function get_data_by_org(include_stat){
+
+  const keys_in_supps = get_keys_in_supps(include_stat);
+
   const data = _.chain(Table.lookup('table8').data)
     .pipe(include_stat ? _.identity : rows => _.reject(rows, {votestattype: 999}))
-    .filter(obj => obj[this_year_col] || obj[last_year_col] )
     .pipe( reduce_by_supps_dim )
     .groupBy('dept')
     .toPairs()
     .map( ([org_id, rows]) => {
 
+      const sups_rows = _.filter(rows,row => keys_in_supps[key_for_table_row(row)]);
+      if(_.isEmpty(sups_rows)){
+        return null;
+      }
+
       const org = Dept.lookup(org_id);
-      const this_year = _.sumBy(rows, "this_year") || 0;
-      const last_year_mains = _.sumBy(rows, "last_year_mains") || 0;
-      const inc = this_year-last_year_mains;
-      const inc_pct = inc/last_year_mains;
+      const sups = _.sumBy(sups_rows, "sups") || 0;
+      const mains = _.sumBy(rows, "mains") || 0;
+      const inc_pct = sups/mains;
 
       const amounts_by_doc = get_doc_code_breakdowns( _.flatMap(rows, "_rows") );
 
@@ -64,9 +71,8 @@ function get_data_by_org(include_stat){
         data: {
           name: org.name,
           subject: org,
-          this_year,
-          last_year_mains,
-          inc,
+          sups,
+          mains,
           inc_pct,
           footnotes: FootNote.get_for_subject(
             org,
@@ -80,18 +86,16 @@ function get_data_by_org(include_stat){
           amounts_by_doc,
         },
         children: _.map(rows, row => {
-          const this_year = row["this_year"] || 0;
-          const last_year_mains  = row["last_year_mains"] || 0;
-          const inc = this_year-last_year_mains;
-          const inc_pct = inc/last_year_mains;
+          const sups = row["sups"] || 0;
+          const mains  = row["mains"] || 0;
+          const inc_pct = sups/mains;
 
           return {
             id: `${org_id}-${row.desc}`,
             data: {
               name: row.desc,
-              this_year,
-              last_year_mains,
-              inc,
+              sups,
+              mains,
               inc_pct,
               footnotes: get_footnotes_for_votestat_item({
                 desc: row.desc, 
@@ -106,6 +110,7 @@ function get_data_by_org(include_stat){
 
 
     })
+    .compact()
     .value();
 
   const root = {
@@ -125,18 +130,20 @@ const get_category_children = (rows) => _.chain(rows)
   .pipe(reduce_by_supps_dim)
   .map(new_row => {
     const { votenum, desc, dept } = new_row;
-    const this_year = new_row.this_year || 0;
-    const last_year_mains = new_row.last_year_mains || 0;
-    const inc = this_year - last_year_mains;
-    const inc_pct = inc/last_year_mains;
+    const mains = new_row.mains || 0;
+    const sups = new_row.sups || 0;
+    const inc_pct = sups/mains;
+
+    if(!sups){
+      return null;
+    }
 
     return {
       id: `${dept}-${votenum}-${desc}`,
       data: {
         name: `${Dept.lookup(dept).name} - ${strip_stat_marker(desc)}`,
-        last_year_mains,
-        this_year,
-        inc,
+        mains,
+        sups,
         inc_pct,
         amounts_by_doc: get_doc_code_breakdowns(new_row._rows),
         footnotes: get_footnotes_for_votestat_item({
@@ -148,37 +155,43 @@ const get_category_children = (rows) => _.chain(rows)
     };
     
   })
+  .compact()
   .value();
 
 function get_data_by_item_types(){
+  const keys_in_supps = get_keys_in_supps(true);
+  
   const nested_data = _.chain( Table.lookup('table8').major_voted_big_stat([this_year_col,last_year_col], false, false) )
     .toPairs()
-    .map( ([ category, rows ])  => {
+    .map( ([ category, rows ])  => {  
 
-      const this_year = _.sumBy(rows, this_year_col);
-      const last_year_mains = _.chain(rows).filter({est_doc_code: "MAINS"}).sumBy(last_year_col).value();
-      const inc = this_year - last_year_mains;
-      const inc_pct = inc/last_year_mains;
+      const sup_rows = _.filter(rows, row => keys_in_supps[key_for_table_row(row)]);
+      if( _.isEmpty(sup_rows)){
+        return null;
+      }
+      const children = get_category_children(rows, keys_in_supps);
 
+      const sups = _.sumBy(children, "data.sups") || 0;
+      const mains = _.chain(rows).filter({est_doc_code: "MAINS"}).sumBy(this_year_col).value();
+      const inc_pct = sups/mains;
 
       const is_voted = _.isNumber(_.first(rows).votenum);
     
 
       const is_single_item = _.chain(rows).map(row_identifier_func).uniq().value().length === 1;
-
       const name = (
         is_single_item ?
         `${strip_stat_marker(category)} - ${Dept.lookup(rows[0].dept).name}` :
         strip_stat_marker(category)
       );
 
+
       return {
         id: category,
         data: {
           name,
-          this_year,
-          last_year_mains,
-          inc,
+          mains,
+          sups,
           inc_pct,
           amounts_by_doc: get_doc_code_breakdowns(rows),
           is_voted,
@@ -186,29 +199,28 @@ function get_data_by_item_types(){
         children: (
           is_single_item ? 
           null :
-          get_category_children(rows)
+          children
         ),
       };
     })
+    .compact()
     .value();
 
   const vote_stat = _.chain(nested_data)
     .partition("data.is_voted")
     .map( (categories, ix) => {
       const is_voted = ix === 0;
-      const this_year = _.sumBy(categories,"data.this_year");
-      const last_year_mains = _.sumBy(categories,"data.last_year_mains")
-      const inc = this_year - last_year_mains;
-      const inc_pct = inc/last_year_mains;
+      const sups = _.sumBy(categories,"data.sups");
+      const mains = _.sumBy(categories,"data.mains")
+      const inc_pct = sups/mains;
 
       return {
         id: is_voted ? "voted" : "stat",
         children: categories,
         data: {
           name: text_maker(is_voted ? "voted_items" : "stat_items"),
-          this_year,
-          last_year_mains,
-          inc,
+          sups,
+          mains,
           inc_pct,
         },
         isExpanded: true,
@@ -223,16 +235,21 @@ function get_data_by_item_types(){
     children: vote_stat,
   };
 
-  // const root = {
-  //   id:"root",
-  //   data:{},
-  //   children: _.filter(nested_data, "data.is_voted"),
-  // }
-
   const d3_h7y = d3.hierarchy(root, _.property('children'));
   return convert_d3_hierarchy_to_explorer_hierarchy(d3_h7y);
 
 }
+
+
+function get_keys_in_supps(include_stat){
+  return _.chain(Table.lookup('table8').data)
+    .pipe(include_stat ? _.identity : rows => _.reject(rows, {votestattype: 999}))
+    .filter(row => row[this_year_col] && row.est_doc_code === "SEA")
+    .map(row => [key_for_table_row(row),1] )
+    .fromPairs()
+    .value();
+}
+
 
 const Green = ({children}) => <span style={{color:"hsla(120, 100%, 25%, 1)"}}>{children}</span>
 const Red = ({children}) => <span style={{color:"hsla(0, 100%, 40%, 1)"}}>{children}</span>
@@ -246,36 +263,18 @@ export const col_defs = [
     get_val: ({data}) => data.name,
   },
   {
-    id: "this_year",
+    id: "sups",
     width: 150,
     textAlign: "right",
-    header_display: <TM k="mains_this_year" />,
-    get_val: node => _.get(node, "data.this_year"),
+    header_display: <TM k="supps_a_this_year" />,
+    get_val: node => _.get(node, "data.sups"),
     val_display: val => <Format type="compact1" content={val} />,
   },
   {
-    id: "inc",
+    id: "mains_pct",
     width: 150,
     textAlign: "right",
-    header_display: <TM k="change_from_last_year_mains" />,
-    get_val: node => _.get(node, "data.inc"),
-    val_display: val => {
-      const content = <Format type="compact1" content={Math.abs(val)} />;
-      if(val>0){
-        return <Green>+{content}</Green>;
-      } else if(val === 0){
-        return content;
-      } else {
-        return <Red>-{content}</Red>;
-      }
-
-    },
-  },
-  {
-    id: "inc_pct",
-    width: 150,
-    textAlign: "right",
-    header_display: <TM k="change_from_last_year_mains_pct" />,
+    header_display: <TM k="change_from_mains" />,
     get_val: node => _.get(node, "data.inc_pct"),
     val_display: val => {
       let content;
@@ -329,7 +328,7 @@ function get_footnotes_for_votestat_item({desc, org_id, votenum}){
 
 const scheme_key = "estimates_diff";
 export const initial_state = {
-  sort_col: "inc",
+  sort_col: "sups",
   is_descending: true,
   show_stat: true,
   h7y_layout: "item_type",

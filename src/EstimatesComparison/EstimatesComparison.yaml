@@ -5,8 +5,8 @@ diff_view_title:
 
 diff_view_top_text:
   transform: [handlebars, markdown]
-  en: Comparison of the recently tabled Main Estimates {{est_in_year}} against last year's Main Estimates
-  fr: Comparaison entre le budget principal des dépenses {{est_in_year}} récemment déposé et celui de {{est_last_year}}
+  en: A presentation of the recently tabled Supplementary Estimates A {{est_in_year}} with context from previously tabled estimate documents
+  fr: Une présentation du budget supplémentaire des dépenses A {{est_in_year}} récemment déposé avec de l'information contextuelle des budget de dépenses précédents
 
 new:
   en: New Item
@@ -47,21 +47,15 @@ doc_breakout_details:
   en: Detailed Breakout by Estimate Mechanism
   fr: Répartition détaillée par instrument des dépenses
 
-mains_this_year:
+supps_a_this_year:
   transform: [handlebars]
-  en: Main Estimates <span class="nowrap">{{est_in_year}}</span>
-  fr: Budget principal des dépenses <span class="nowrap">{{est_in_year}}</span>
+  en: Supplementary Estimates A <span class="nowrap">{{est_in_year}}</span>
+  fr: Budget supplémentaire A des dépenses <span class="nowrap">{{est_in_year}}</span>
 
-change_from_last_year_mains:
+change_from_mains:
   transform: [handlebars]
-  en: Change from <span class="nowrap">{{est_last_year}}</span> Main Estimates ($)
-  fr: Différence par rapport au budget principal des dépenses <span class="nowrap">{{est_last_year}}</span> ($)
-
-
-change_from_last_year_mains_pct:
-  transform: [handlebars]
-  en: Change from <span class="nowrap">{{est_last_year}}</span> Main Estimates (%)
-  fr: Différence par rapport au budget principal des dépenses <span class="nowrap">{{est_last_year}}</span> (%)
+  en: Amount added to <span class="nowrap">{{est_in_year}}</span> Main Estimates (%)
+  fr: Différence ajouté au budget principale <span class="nowrap">{{est_in_year}}</span> (%)
 
 
 show_only_votes:
@@ -103,5 +97,5 @@ estimates_source_link:
 
 
 estimates_comparison_desc_meta_attr:
-  en: Find out more about changes in year-over-year funding by comparing the most recent Main Estimates against last year's appropriations bill. Planned expenditures is presented by organization and by mandatory/discretionary items.
-  fr: Renseignez-vous davantage sur les changements du financement d'une année à l'autre en comparant le plus récent budget principal des dépenses au projet de loi de crédits de l'an dernier. Les dépenses prévues sont présentées par organisation et par poste obligatoire ou discrétionnaire.
+  en: Find out more about in-year changes in funding by viewing Supplementary Estimates A amounts alongside useful contextual information
+  fr: Renseignez-vous davantage sur les changements du financement de l'année en examiner le budget supplémentaire des dépenses A avec d'autres informations contextuelles
