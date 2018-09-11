@@ -13,5 +13,5 @@ const estimates_desc_sel = "#app-focus-root > div > div > div >" +
 test('App boots and loads estimates comparisons page', async t => {
   await t
     // Use the assertion to check if the actual header text is equal to the expected one
-    .expect(Selector(estimates_desc_sel).innerText).contains("Comparison");
+    .expect(Selector(estimates_desc_sel).innerText).contains("Supplementary Estimates A");
 });
