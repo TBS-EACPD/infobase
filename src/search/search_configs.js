@@ -40,11 +40,17 @@ const org_attributes_to_match = [
 
 const org_templates = {
   header: ()=> Dept.plural,
-  suggestion:  org => (
-    org.applied_title ? 
-    `${org.name} (${org.applied_title})` :
-    org.name
-  ),
+  suggestion:  org => {
+    if(_.isEmpty(org.tables)){
+      return `<span class="search-grayed-out-hint"> ${org.name} ${trivial_text_maker("limited_data")} </span>`
+    }
+    return (
+      org.applied_title ? 
+      `${org.name} (${org.applied_title})` :
+      org.name
+    );
+    
+  },
 };
 
 const orgs_with_data_with_gov = {
@@ -71,7 +77,8 @@ const all_orgs_without_gov = {
 
 const all_orgs_with_gov = {
   query_matcher: () => {
-    const to_search = [Gov].concat(Dept.get_all());
+    const orgs = _.reject(Dept.get_all(), "is_dead");
+    const to_search = [Gov, ...orgs];
     return query => _.filter(
       to_search,
       create_re_matcher(query, org_attributes_to_match)

@@ -171,7 +171,7 @@ class InfoGraph_ extends React.Component {
               include_glossary={false}
               include_crsos={true}
               include_tables={false}
-              org_scope="orgs_with_data_with_gov"
+              org_scope="all_orgs_with_gov"
             />
           </div>
           <div 

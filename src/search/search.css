@@ -52,6 +52,10 @@
 
 }
 
+.search-grayed-out-hint {
+  opacity: 0.8;
+}
+
 input.tt-query.form-control.tt-input {
   background-color: white;
 }

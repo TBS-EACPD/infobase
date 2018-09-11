@@ -967,3 +967,8 @@ survey_link_href:
     {{{survey_link}}}
   fr: |
     {{{survey_link}}}
+
+
+limited_data:
+  en: (Limited Data)
+  fr: (très peu de données)
