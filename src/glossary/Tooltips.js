@@ -21,7 +21,7 @@ export class TooltipActivator extends React.Component {
 
     this.debounced_mutation_callback = _.debounce(
       (mutationList, observer) => {
-        this.setState({ current_tooltip_nodes: document.querySelectorAll('[data-toggle=tooltip]') });
+        this.setState({ current_tooltip_nodes: document.querySelectorAll('[data-toggle=tooltip]') || [] });
       },
       250
     );
@@ -37,12 +37,16 @@ export class TooltipActivator extends React.Component {
       }
     );
     
+    this.state = {
+      current_tooltip_nodes: [],
+    };
+
     this.tooltip_instances = [];
   }
   componentDidUpdate(){
 
     const { current_tooltip_nodes } = this.state;
-
+    
     if ( _.isEmpty(this.tooltip_instances) ){
       this.tooltip_instances = _.map(
         current_tooltip_nodes, 
