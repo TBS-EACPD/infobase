@@ -1,9 +1,9 @@
 //this file's responsibility is to pull in most globals
-
 import './include_basic_dependencies.js';
 import '../../external-dependencies/typeahead.min.exec.js';
-import '../../external-dependencies/tooltip.exec.js';
 import '../../external-dependencies/jquery-ui-focusable-tabbable.exec.js';
+
+import 'bootstrap/js/tooltip.js';
 
 //dev helper globals 
 import classnames from 'classnames';
