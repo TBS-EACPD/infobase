@@ -54,7 +54,6 @@ export class TooltipActivator extends React.Component {
     
     this.state = {
       current_tooltip_nodes: [],
-      previous_tooltip_nodes: [],
     };
 
     this.tooltip_instances = [];
