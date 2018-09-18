@@ -13,8 +13,6 @@ const get_tooltip_title = (tooltip_node) => {
   }
 };
 
-const compare_dom_nodes = (node1, node2) => node1.isSameNode(node2);
-
 export class TooltipActivator extends React.Component {
   constructor(){
     super();
@@ -29,7 +27,7 @@ export class TooltipActivator extends React.Component {
           previous_tooltip_nodes.length !== current_tooltip_nodes.length ||
           !_.chain(previous_tooltip_nodes)
             .zip(current_tooltip_nodes)
-            .find(nodes_to_compare => !compare_dom_nodes(nodes_to_compare[0], nodes_to_compare[1]) )
+            .find(nodes_to_compare => nodes_to_compare[0] !== nodes_to_compare[1] )
             .isUndefined()
             .value()
         );
@@ -89,7 +87,7 @@ export class TooltipActivator extends React.Component {
 
       this.tooltip_instances.forEach( tooltip_instance => {
         const is_remaining_tooltip = _.chain(current_tooltip_nodes)
-          .map( node => compare_dom_nodes(node, tooltip_instance.node) )
+          .map( node => node !== tooltip_instance.node )
           .some()
           .value();
 
@@ -105,7 +103,7 @@ export class TooltipActivator extends React.Component {
       const incoming_nodes = _.groupBy(
         current_tooltip_nodes,
         (node) => _.chain(remaining_tooltips)
-          .map( remaining_tooltip => compare_dom_nodes(node, remaining_tooltip.node) )
+          .map( remaining_tooltip => node !== remaining_tooltip.node )
           .some()
           .value()
       )[false];
