@@ -2,7 +2,7 @@ import Tooltip from 'tooltip.js';
 
 import {get_glossary_item_tooltip_html} from '../models/glossary.js';
 
-const body = document.querySelector('body');
+const body = document.body;
 const app = document.querySelector('#app');
 
 const get_tooltip_title = (tooltip_node) => {
@@ -21,7 +21,25 @@ export class TooltipActivator extends React.Component {
 
     this.debounced_mutation_callback = _.debounce(
       (mutationList, observer) => {
-        this.setState({ current_tooltip_nodes: document.querySelectorAll('[data-toggle=tooltip]') || [] });
+        const previous_tooltip_nodes = this.state.current_tooltip_nodes;
+        const current_tooltip_nodes = document.querySelectorAll('[data-toggle=tooltip]') || [];
+
+        const tooltip_nodes_have_changed = (
+          !(_.isEmpty(previous_tooltip_nodes) && _.isEmpty(current_tooltip_nodes)) &&
+          previous_tooltip_nodes.length !== current_tooltip_nodes.length ||
+          !_.chain(previous_tooltip_nodes)
+            .zip(current_tooltip_nodes)
+            .find(nodes_to_compare => !compare_dom_nodes(nodes_to_compare[0], nodes_to_compare[1]) )
+            .isUndefined()
+            .value()
+        );
+
+        if (tooltip_nodes_have_changed){
+          this.setState({
+            previous_tooltip_nodes,
+            current_tooltip_nodes,
+          });
+        }
       },
       250
     );
@@ -39,6 +57,7 @@ export class TooltipActivator extends React.Component {
     
     this.state = {
       current_tooltip_nodes: [],
+      previous_tooltip_nodes: [],
     };
 
     this.tooltip_instances = [];
