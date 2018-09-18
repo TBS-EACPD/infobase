@@ -19,24 +19,23 @@ export class TooltipActivator extends React.Component {
 
     this.debounced_mutation_callback = _.debounce(
       (mutationList, observer) => {
-        const previous_tooltip_nodes = this.state.current_tooltip_nodes;
+        const previous_tooltip_nodes = _.map(this.tooltip_instances, tooltip_instance => tooltip_instance.node );
         const current_tooltip_nodes = document.querySelectorAll('[data-toggle=tooltip]') || [];
 
         const tooltip_nodes_have_changed = (
-          !(_.isEmpty(previous_tooltip_nodes) && _.isEmpty(current_tooltip_nodes)) &&
-          previous_tooltip_nodes.length !== current_tooltip_nodes.length ||
-          !_.chain(previous_tooltip_nodes)
-            .zip(current_tooltip_nodes)
-            .find(nodes_to_compare => nodes_to_compare[0] !== nodes_to_compare[1] )
-            .isUndefined()
-            .value()
+          !(_.isEmpty(previous_tooltip_nodes) && _.isEmpty(current_tooltip_nodes)) && 
+          (
+            previous_tooltip_nodes.length !== current_tooltip_nodes.length ||
+            !_.chain(previous_tooltip_nodes)
+              .zip(current_tooltip_nodes)
+              .find(nodes_to_compare => nodes_to_compare[0] !== nodes_to_compare[1] )
+              .isUndefined()
+              .value()
+          )
         );
 
         if (tooltip_nodes_have_changed){
-          this.setState({
-            previous_tooltip_nodes,
-            current_tooltip_nodes,
-          });
+          this.setState({ current_tooltip_nodes });
         }
       },
       250
@@ -100,29 +99,23 @@ export class TooltipActivator extends React.Component {
 
       outgoing_tooltips.forEach( outgoing_instance => outgoing_instance.tooltip.dispose() );
 
-      const incoming_nodes = _.groupBy(
-        current_tooltip_nodes,
-        (node) => _.chain(remaining_tooltips)
-          .map( remaining_tooltip => node !== remaining_tooltip.node )
-          .some()
-          .value()
-      )[false];
-
-      const incoming_tooltips = _.map(
-        incoming_nodes, 
-        (node) => ({
-          node,
-          tooltip: new Tooltip(
+      const incoming_tooltips = _.chain(current_tooltip_nodes)
+        .without( ..._.map(remaining_tooltips, tooltip => tooltip.node) )
+        .map( 
+          node => ({
             node,
-            {
-              container: body,
-              html: true,
-              placement: 'bottom',
-              title: get_tooltip_title(node),
-            }
-          ),
-        }),
-      );
+            tooltip: new Tooltip(
+              node,
+              {
+                container: body,
+                html: true,
+                placement: 'bottom',
+                title: get_tooltip_title(node),
+              }
+            ),
+          }) 
+        )
+        .value()
 
       this.tooltip_instances = [
         ...remaining_tooltips,
