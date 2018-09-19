@@ -13,7 +13,7 @@ export const app_reducer = (state={ lang: window.lang }, { type, payload }) => {
 
 import { ComponentLoader } from '../core/ComponentLoader.js';
 import { Home } from '../home/home.js';
-import { TooltipActivator } from '../glossary/Tooltips';
+import { TooltipActivator } from '../glossary/TooltipActivator';
 import { EasyAccess } from '../core/EasyAccess';
 import { InsertRuntimeFooterLinks } from '../core/InsertRuntimeFooterLinks.js';
 import { DevFip } from '../core/DevFip.js';

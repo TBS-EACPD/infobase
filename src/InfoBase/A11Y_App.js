@@ -17,7 +17,6 @@ import { InfoGraph } from '../infographic/infographic.js';
 import { BudgetMeasuresRoute } from '../partition/budget_measures_subapp/BudgetMeasuresRoute.js';
 import { Glossary } from '../glossary/glossary.js';
 import { ReportBuilder } from '../rpb/index.js';
-import { TooltipActivator } from '../glossary/Tooltips';
 import { EasyAccess } from '../core/EasyAccess';
 import { About } from '../about/about.js';
 import { GraphInventory } from '../graph_route/graph_route.js';
@@ -34,7 +33,6 @@ export class App extends React.Component {
   render(){
     return (
       <div tabIndex={-1} id="app-focus-root">
-        <TooltipActivator />
         <ReactUnmounter />
         <InsertRuntimeFooterLinks />
         <DevFip />

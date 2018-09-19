@@ -1,8 +1,9 @@
+import {get_glossary_item_tooltip_html} from '../models/glossary.js';
+
 import Tooltip from 'tooltip.js';
 
-
 // Patch over Tooltip's _scheduleShow to not use setTimeout with a 0 second delay
-// The 0 second delay could still result in the _show call pending for >1.5 seconds (was consistent on mobile Chrome)
+// The 0 second delay could still result in the _show call being stuck pending for extended periods (was consistently > 1 second on mobile Chrome)
 Tooltip.prototype._scheduleShow = function(reference, delay, options /*, evt */){
   this._isOpening = true;
   const computedDelay = delay && delay.show || delay || 0;
@@ -13,35 +14,39 @@ Tooltip.prototype._scheduleShow = function(reference, delay, options /*, evt */)
   }
 }
 
-import {get_glossary_item_tooltip_html} from '../models/glossary.js';
-
 const body = document.body;
 const app = document.querySelector('#app');
 
 const get_tooltip_title = (tooltip_node) => {
-  if(tooltip_node.getAttribute('data-glossary-key')){ //this is hacky, but tooltips with inline html as titles were being messed with by markdown =
-    return get_glossary_item_tooltip_html(tooltip_node.getAttribute('data-glossary-key'));
+  if( tooltip_node.getAttribute('data-glossary-key') ){
+    return get_glossary_item_tooltip_html( tooltip_node.getAttribute('data-glossary-key') );
   } else {
     return tooltip_node.getAttribute('title');
   }
 };
 
+
 export class TooltipActivator extends React.Component {
   constructor(){
     super();
 
+    this.state = {
+      current_tooltip_nodes: [],
+    };
+    this.tooltip_instances = [];
+
     this.debounced_mutation_callback = _.debounce(
       (mutationList, observer) => {
-        const previous_tooltip_nodes = _.map(this.tooltip_instances, tooltip_instance => tooltip_instance.node );
+        const previous_tooltip_nodes = _.map( this.tooltip_instances, tooltip_instance => tooltip_instance.node );
         const current_tooltip_nodes = document.querySelectorAll('[data-toggle=tooltip]') || [];
 
         const tooltip_nodes_have_changed = (
-          !(_.isEmpty(previous_tooltip_nodes) && _.isEmpty(current_tooltip_nodes)) && 
+          !( _.isEmpty(previous_tooltip_nodes) && _.isEmpty(current_tooltip_nodes) ) && 
           (
             previous_tooltip_nodes.length !== current_tooltip_nodes.length ||
             !_.chain(previous_tooltip_nodes)
               .zip(current_tooltip_nodes)
-              .find(nodes_to_compare => nodes_to_compare[0] !== nodes_to_compare[1] )
+              .find( nodes_to_compare => nodes_to_compare[0] !== nodes_to_compare[1] )
               .isUndefined()
               .value()
           )
@@ -64,12 +69,6 @@ export class TooltipActivator extends React.Component {
         subtree: true,
       }
     );
-    
-    this.state = {
-      current_tooltip_nodes: [],
-    };
-
-    this.tooltip_instances = [];
   }
   componentDidUpdate(){
 
@@ -127,7 +126,7 @@ export class TooltipActivator extends React.Component {
             ),
           }) 
         )
-        .value()
+        .value();
 
       this.tooltip_instances = [
         ...remaining_tooltips,
