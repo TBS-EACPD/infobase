@@ -1,5 +1,18 @@
 import Tooltip from 'tooltip.js';
 
+
+// Patch over Tooltip's _scheduleShow to not use setTimeout with a 0 second delay
+// The 0 second delay could still result in the _show call pending for >1.5 seconds (was consistent on mobile Chrome)
+Tooltip.prototype._scheduleShow = function(reference, delay, options /*, evt */){
+  this._isOpening = true;
+  const computedDelay = delay && delay.show || delay || 0;
+  if (computedDelay === 0) {
+    this._show(reference, options);
+  } else {
+    this._showTimeout = window.setTimeout(() => this._show(reference, options), computedDelay);
+  }
+}
+
 import {get_glossary_item_tooltip_html} from '../models/glossary.js';
 
 const body = document.body;
