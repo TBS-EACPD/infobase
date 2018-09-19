@@ -19,7 +19,7 @@ function process_lookups(data){
   _.chain(data)
     .omit('global_footnotes') //global footnotes already has its header dropped
     .each( (csv_str,key) => {
-      data[key] = d3.csvParseRows($.trim(csv_str));
+      data[key] = d3.csvParseRows(_.trim(csv_str));
       data[key].shift(); // drop the header
     })
     .value()
@@ -288,7 +288,7 @@ function populate_programs(rows){
       activity_code: row[activity_code],
       dept: Dept.lookup(row[dept_code]),
       data : {},
-      description : $.trim(row[desc].replace(/^<p>/i,"").replace(/<\/p>$/i,"")),
+      description : _.trim(row[desc].replace(/^<p>/i,"").replace(/<\/p>$/i,"")),
       name :  row[name],
       is_active: !!(+row[is_active]),
       is_internal_service: row[is_internal_service] === "1",

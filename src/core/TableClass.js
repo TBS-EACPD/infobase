@@ -296,7 +296,7 @@ export class Table extends mix().with(staticStoreMixin){
       });
   }
   populate_with_data(data){
-    data= $.trim(data);
+    data= _.trim(data);
     const row_transf = this.get_row_func()
     const parsed_data = d3.csvParseRows(data);
 
@@ -338,7 +338,7 @@ export class Table extends mix().with(staticStoreMixin){
         const type =  this.col_from_nick(key).type ;
         // in case we have numbers represented as string, we'll convert them to integers
         if ( type === 'big_int' || type === "big_int_real" || type === 'percentage' || type==='decimal' || type==='decimal1' || type==='percentage1' || type==='percentage2'){
-          row_obj[key]=accounting.unformat($.trim(val));
+          row_obj[key]=accounting.unformat(_.trim(val));
         } else if (type === 'int' && !_.isNaN(parseInt(val,10))){
           row_obj[key]=parseInt(val,10);
         }

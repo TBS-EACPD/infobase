@@ -79,7 +79,7 @@ function prepare_data(options){
   _.each(rows, function(row,i){
     _.each(row, function(val,j){
       var __table_opts__= {
-        headers : $.trim(header_links[j]),
+        headers : _.trim(header_links[j]),
         css : row_css[j],
         "class" : row_class[j],
       };
