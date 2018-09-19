@@ -19,19 +19,43 @@ export class HeightClipper extends React.Component {
   componentDidUpdate(){
     this.measureHeightAndUpdateState();
     
-    // Logic for ensuring none of HeightClipper's children elements can take focus (when they can, tab nav can break things)
-    // Going to present the steps in reverse, because they make more sense that way:
-    //   Step 2) All focusable elements contained in the div classed .unfocusable_children (only classed this when clipped) are given a tabindex of -999.
-    //   Step 1) All elements with tabindex -999 have their tab index removed.
-    // NOTE: -999 is used so that this process won't end up unsetting the tabindex of something that was intended to stay untabable (i.e., as is standard, tabindex -1)
-    // svg's dealt with separetly, becuase :focusable won't select them when they ARE focusable, and setting a negative tabindex does nothing to them.
-    const thisNode = $(ReactDOM.findDOMNode(this));
-    
-    thisNode.find("[tabindex=-999]").removeAttr("tabindex");
-    thisNode.find("svg").removeAttr("focusable");
-    
-    thisNode.find(".unfocusable_children").find("*:focusable").attr("tabindex","-999");
-    thisNode.find(".unfocusable_children").find("svg").attr("focusable","false");
+    const height_clipper_node = ReactDOM.findDOMNode(this);
+    const untabbable_children_node = height_clipper_node.querySelector(".untabbable_children");
+
+    // if the height clipper is collapsed it will have a div classed .untabbable_children,
+    // do not want any of those children to be tab-selectable
+    // if no .untabbable_children div, then need to reset the tabindex/focusable attributes of the height clipper children
+    if (untabbable_children_node){
+      untabbable_children_node
+        .querySelectorAll("*")
+        .forEach( node => {
+          const node_tabindex = node.getAttribute('tabindex');
+          if( !_.isNull(node_tabindex) ){
+            node.setAttribute("prev-tabindex", node_tabindex);
+          }
+          node.setAttribute("tabindex","-999");
+        });
+
+      untabbable_children_node
+        .querySelectorAll("svg")
+        .forEach( node => node.setAttribute("focusable","false") );
+    } else {
+      height_clipper_node
+        .querySelectorAll('[tabindex="-999"]')
+        .forEach( node => node.removeAttribute("tabindex") );
+
+      height_clipper_node
+        .querySelectorAll("[prev-tabindex]")
+        .forEach( node => {
+          const previous_tabindex = node.getAttribute('prev-tabindex');
+          node.setAttribute("tabindex", previous_tabindex);
+          node.removeAttribute('prev-tabindex');
+        });
+
+      height_clipper_node
+        .querySelectorAll("svg")
+        .forEach( node => node.removeAttribute("focusable") );
+    }
   }
   measureHeightAndUpdateState(){
     const {main} = this.refs;
@@ -109,7 +133,7 @@ export class HeightClipper extends React.Component {
           tabIndex={-1}
           ref="content"
         >
-          <div className={ isClipped ? "unfocusable_children" : "" }>
+          <div className={ isClipped ? "untabbable_children" : "" }>
             {children}
           </div>
         </div>
