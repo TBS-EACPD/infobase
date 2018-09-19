@@ -259,7 +259,7 @@ export class Pack {
           matching_link.focus();
           that.hover_in(node);
         } else {
-          $(".zoom-out-link")[0].click();
+          that.setup_for_zoom(node.parent);
         }
       }
     };
