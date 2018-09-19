@@ -2,15 +2,51 @@ import {get_glossary_item_tooltip_html} from '../models/glossary.js';
 
 import Tooltip from 'tooltip.js';
 
-// Patch over Tooltip's _scheduleShow to not use setTimeout with a 0 second delay
+// Patch over Tooltip's _scheduleShow and _scheduleHide to not use setTimeout with a 0 second delay
 // The 0 second delay could still result in the _show call being stuck pending for extended periods (was consistently > 1 second on mobile Chrome)
-Tooltip.prototype._scheduleShow = function(reference, delay, options /*, evt */){
+Tooltip._scheduleShow = function(reference, delay, options /*, evt */){
   this._isOpening = true;
   const computedDelay = delay && delay.show || delay || 0;
   if (computedDelay === 0) {
     this._show(reference, options);
   } else {
     this._showTimeout = window.setTimeout(() => this._show(reference, options), computedDelay);
+  }
+}
+Tooltip._scheduleHide = function(reference, delay, options, evt){
+  this._isOpening = false;
+  
+  const cleanup_and_hide = () => {
+    window.clearTimeout(this._showTimeout);
+    if (this._isOpen === false) {
+      return;
+    }
+    if (!document.body.contains(this._tooltipNode)) {
+      return;
+    }
+  
+    // if we are hiding because of a mouseleave, we must check that the new
+    // reference isn't the tooltip, because in this case we don't want to hide it
+    if (evt.type === 'mouseleave') {
+      const isSet = this._setTooltipNodeEvent(evt, reference, delay, options);
+  
+      // if we set the new event, don't hide the tooltip yet
+      // the new event will take care to hide it if necessary
+      if (isSet) {
+        return;
+      }
+    }
+  
+    this._hide(reference, options);
+  }
+
+  // defaults to 0
+  const computedDelay = delay && delay.hide || delay || 0;
+
+  if (computedDelay === 0) {
+    cleanup_and_hide();
+  } else {
+    window.setTimeout(cleanup_and_hide, computedDelay);
   }
 }
 
