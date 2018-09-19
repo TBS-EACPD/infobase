@@ -9,7 +9,6 @@ require('../src/models/text.js');
 
 require('../external-dependencies/jquery.min.exec.js');
 require('../external-dependencies/typeahead.min.exec.js');
-require('../external-dependencies/tooltip.exec.js');
 
 require("../src/common_templates/templates.ib.yaml");
 require("../src/common_text/common_lang.ib.yaml");
