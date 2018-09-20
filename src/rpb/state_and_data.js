@@ -13,7 +13,6 @@ import { Table } from '../core/TableClass.js';
 import Footnote from '../models/footnotes.js';
 
 
-
 const initial_state = {
   table_picking: true,
   preferDeptBreakout: true,
@@ -191,13 +190,8 @@ const reducer = (state=initial_state, action) => {
 
     default: 
       return state;
-
   }
-
 }
-
-
-
 
 function create_mapStateToProps(){
 
@@ -229,10 +223,6 @@ function create_mapStateToProps(){
       .value()
   ));
 
-
-
- 
-
   //array of html footnotes
   const get_footnotes = createSelector([get_table, get_subject], (table, subject)=> {
     const topics = table.tags.concat(["MACHINERY"]);
@@ -246,7 +236,6 @@ function create_mapStateToProps(){
       .compact()
       .concat([ text_maker('different_org_names_rpb_footnote') ])
       .value();
-
   });
 
   const get_dimensions = createSelector(get_table, table=> (
@@ -259,7 +248,7 @@ function create_mapStateToProps(){
       .value()
   ));
 
-  const get_all_filters =  createSelector(
+  const get_all_filters = createSelector(
     [get_table, _.property('dimension')],
     (table, dim_key) => get_filters_for_dim(table, dim_key)
   );
@@ -271,7 +260,7 @@ function create_mapStateToProps(){
         display,
         id: dim_key,
         children: _.map(
-          get_filters_for_dim(table,dim_key),
+          get_filters_for_dim(table, dim_key),
           filt => ({
             id: dim_key+'__'+filt,
             display: filt,
@@ -293,12 +282,12 @@ function create_mapStateToProps(){
 
       let subj_filter = _.constant(true);
       if(subject.level === 'dept'){
-        subj_filter = { dept : subject.id }
+        subj_filter = { dept: subject.id }
 
       } else if(subject.level === 'program' && table.programs){
         subj_filter = { 
           dept: subject.dept.id , 
-          activity_code : subject.activity_code, 
+          activity_code: subject.activity_code, 
         };
 
       } else if( subject.level  === 'tag' && table.programs){
@@ -314,8 +303,8 @@ function create_mapStateToProps(){
     [_.property('dimension'), _.property('filter') ],
     (dim_key, filter_val) => (
       filter_val === text_maker('all') ? 
-      _.constant(true) : 
-      { [ dim_key ] : filter_val }
+        _.constant(true) : 
+        { [ dim_key ] : filter_val }
     )
   );
 
@@ -365,14 +354,14 @@ function create_mapStateToProps(){
         .filter(cat_filter_func)
         .reject(zero_filter_func)
         .sortBy( 
-        sort_col === 'dept' ? 
-        row => Dept.lookup(row.dept).name : 
-        sort_col
+          sort_col === 'dept' ? 
+            row => Dept.lookup(row.dept).name : 
+            sort_col
         )
         .pipe(
-        descending ? 
-        reverse_array :  
-        _.identity 
+          descending ? 
+            reverse_array :  
+            _.identity 
         )
         .value()
 
@@ -407,9 +396,9 @@ function create_mapStateToProps(){
 
           artificial_filter = filt_val => (
             _.includes(top_5_filters, filt_val) ?
-            filt_val :
-            text_maker('other')
-          )
+              filt_val :
+              text_maker('other')
+          );
 
         } else { 
           artificial_filter = _.identity;
@@ -425,12 +414,12 @@ function create_mapStateToProps(){
             key: dept_id,
             label: Dept.lookup(dept_id).name,
             subject: Dept.lookup(dept_id),
-            data : (
+            data: (
               _.chain(dept_rows)
                 .groupBy(row => artificial_filter(row[dimension]) )
                 .map( (filt_rows, filt_val)=> ({
                   label: filt_val,
-                  data : col.formula(filt_rows),
+                  data: col.formula(filt_rows),
                 }))
                 .sortBy('data')
                 .reverse()
@@ -446,13 +435,11 @@ function create_mapStateToProps(){
           .map( (rows, filt_val)=> ({
             label: filt_val,
             key: filt_val,
-            data:  [{ data: col.formula(rows), label: filt_val}],
+            data: [{ data: col.formula(rows), label: filt_val}],
           }))
           .sortBy( ({data})=> _.first(data) || 0 )
           .value();
-
       }
-
     }
   );
 
@@ -473,8 +460,8 @@ function create_mapStateToProps(){
             ]))
             .sortBy(
               sort_col === 'dept' ? 
-              row => Dept.lookup(row.dept).name : 
-              sort_col
+                row => Dept.lookup(row.dept).name : 
+                sort_col
             )
             .pipe( descending ? reverse_array : _.identity )
             .value()  
@@ -494,15 +481,12 @@ function create_mapStateToProps(){
         )
       );
 
-      
       const total_row = _.chain(columns)
         .map( col => [ col.nick, col.formula(flat_data) ] )
         //.concat([ deptBreakoutMode ? 'dept' : dimension, text_maker('all') ])
         .fromPairs()
         .value();
 
-      
-    
       return {
         rows,
         total_row,
@@ -521,7 +505,7 @@ function create_mapStateToProps(){
       footnotes: state.table && get_footnotes(state),
       def_ready_columns: !_.isEmpty(state.columns) && get_def_ready_cols(state),
       all_data_columns: !_.isEmpty(state.columns) && get_all_data_columns(state),
-      flat_data : state.table && get_flat_data(state),
+      flat_data: state.table && get_flat_data(state),
 
       //simple view props,
       deptBreakoutMode: get_deptBreakoutMode(state),
@@ -530,15 +514,10 @@ function create_mapStateToProps(){
       graph_data: state.table && state.mode === 'simple' && get_graph_split_data(state),
       simple_table_rows: state.table && state.mode === 'simple' && get_simple_table_rows(state),
 
-
       //granular props
       filters_by_dimension: state.table && state.mode === 'details' && get_filters_by_dimension(state),
       sorted_key_columns: !_.isEmpty(state.columns) && get_sorted_key_columns(state),
-
     };
-
-
-
   }
 }
 

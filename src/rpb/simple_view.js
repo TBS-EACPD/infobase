@@ -43,16 +43,6 @@ class SimpleView extends React.Component {
       dimensions, 
       filters,
       
-      
-
-      //old
-      //setSubject,
-      //setDimension,
-      //setFilter,
-      //setPreferTable,
-      //setDeptBreakout,
-      //headerClick
-
       on_set_dimension,
       on_set_filter,
       on_toggle_col_nick,
