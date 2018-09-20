@@ -26,7 +26,7 @@ const tbs_color = function(){
 
 // function which can probably be removed
 const get_offset = function(elem){
-  return $(get_html_parent(elem)).offset();
+  return $( get_html_parent(elem) ).offset();
 };
 
 // small helper function which walks back up the DOM tree
@@ -55,7 +55,7 @@ const add_grid_lines = function(direction, grid_line_area, axis, tick_size){
       .tickFormat("")
     )
     .selectAll("g.tick")
-    .attr("class","grid"+direction)
+    .attr("class", "grid"+direction)
     .selectAll("line")
     .attrs({
       "fill": "none",
@@ -94,10 +94,10 @@ const create_list = function(container, data,options){
   //     the legend
   //
   //
-  options.key = options.key || function(d,i){return i;};
-  options.colors = options.colors || function(d,i){ return "transparent";};
+  options.key = options.key || ( (d,i) => i )
+  options.colors = options.colors || ( () => "transparent" )
   options.legend = options.legend || false;
-  options.html = options.html || function(d){return d;};
+  options.html = options.html || _.identity
   options.legend_class = options.legend_class || "";
   options.li_classes = options.li_classes || "";
   options.a_class = options.a_class || "";
@@ -139,17 +139,17 @@ const create_list = function(container, data,options){
 
   const list = container
     .append("ul")
-    .attr("class", "list-unstyled "+ options.ul_classes)
+    .attr("class", "list-unstyled " + options.ul_classes)
     .style("margin-left", "5px")
     .selectAll("li.d3-list")
-    .data(data,options.key);
+    .data(data, options.key);
 
   list.exit().remove();
 
   const new_lis = list
     .enter()
     .append("li")
-    .attr("class","d3-list "+ options.li_classes);
+    .attr("class","d3-list " + options.li_classes);
 
   // if the legend tag is true, then coloured squares  will be 
   // added
@@ -165,19 +165,20 @@ const create_list = function(container, data,options){
         "margin-left": "5px",
         "margin-right": "5px",
       })
-      .styles({"border": function(d,i){return "1px solid " + options.colors(options.html(d));}})
-      .filter(function(d){return d.active || non_interactive_legend;})
-      .styles({"background-color": function(d,i){return options.colors(options.html(d));}});
+      .styles({ 
+        "border": (d,i) => "1px solid " + options.colors( options.html(d) ),
+      })
+      .filter( (d) => d.active || non_interactive_legend )
+      .styles({ 
+        "background-color": (d,i) => options.colors( options.html(d) ),
+      });
   }
 
   new_lis
     .append("div")
     .styles({
       "float": "left",
-      "width": function(){
-        if (horizontal){ return undefined; }
-        return  "75%";
-      },
+      "width": () => horizontal ? undefined : "75%",
     })
 
   list.merge(new_lis);
@@ -190,7 +191,7 @@ const create_list = function(container, data,options){
     new_lis
       .selectAll(".color-tag")
       .style("cursor", "pointer")
-      .on( "click", (d,i) => dispatch.call("click","", d, i, d3.select(this), new_lis) );
+      .on( "click", (d,i) => dispatch.call("click", "", d, i, d3.select(this), new_lis) );
 
     new_lis
       .selectAll('div')
@@ -201,7 +202,7 @@ const create_list = function(container, data,options){
       .on( "click", (d,i) => dispatch.call("click", "", d, i, d3.select(this), new_lis) )
       .on( "keydown", (d,i) => {
         if(d3.event.which === 13 || d3.event.which === 32){
-          dispatch.call("click", "", d, i, d3.select(this), new_lis)
+          dispatch.call("click", "", d, i, d3.select(this), new_lis);
         }
       })
       .html(options.html);
@@ -217,13 +218,13 @@ const create_list = function(container, data,options){
   return {
     dispatch,
     new_lis,
-    first: d3.select(new_lis.node()),
+    first: d3.select( new_lis.node() ),
     legend: container,
   };
 };
 
 const on_legend_click = function(graph, _colors){
-  return function(d,i,el,list){
+  return function(d, i, el, list){
     //
     //  works with list which were bound using the 
     //  `charts_index.create_legend` function
@@ -245,47 +246,44 @@ const on_legend_click = function(graph, _colors){
     var colors = _colors || infobase_colors();
     var tags = list.selectAll(".color-tag");
 
-    tags.style("background-color","transparent");
-    // now check and see if nothing else is selected
-    // in which case,force this item back to selected 
-    if (!list.filter(function(d){ return d.active;}).node()){
-      d.active = true;
+    tags.style("background-color", "transparent");
+    
+    const no_items_active = !list.filter( d => d.active ).node();
+    if (no_items_active){
+      d.active = true; // don't let the last active item in the list be deactivated
     }
 
-    list.filter(function(d){ return d.active;})
+    list.filter( d => d.active )
       .select(".color-tag")
-      .each(function(d){
-        data[d.label]  = d.data;
-      })
+      .each( d => data[d.label] = d.data )
       .styles({
-        "background-color": function(d){ return colors(d.label);},
+        "background-color": d => colors(d.label),
       });
 
     // all graphs have a render function
     graph.render({
-      colors : colors,
-      series : data,
+      colors: colors,
+      series: data,
     });
   };
 };
 
 const graph_registry = {
-  registry : [],
+  registry: [],
   
-  add : function(instance) {
+  add(instance){ 
     this.registry.push(instance);
   },
-  update_registry: function(){
-    var new_registry = this.registry.filter(function(graph_obj){
-      return document.body.contains(graph_obj.html.node()); 
-    });
-    this.registry = new_registry;
 
+  update_registry(){
+    var new_registry = this.registry.filter(
+      (graph_obj) => document.body.contains( graph_obj.html.node() ) 
+    );
+    this.registry = new_registry;
   },
   
-  update_graphs() {
-
-    this.registry.forEach(function(graph_obj){
+  update_graphs(){
+    this.registry.forEach( (graph_obj) => {
       graph_obj.outside_width = graph_obj.html.node().offsetWidth;
       graph_obj.outside_height = graph_obj.options.height || 400;
                   
@@ -298,19 +296,23 @@ const graph_registry = {
         .remove();
                   
       graph_obj.render(graph_obj.options);
-
     });
-
   },
 };
 
-$(window).on("hashchange", _.debounce(function(){ 
-  graph_registry.update_registry();
-},500))
-$(window).on("resize", _.debounce(function(){ 
-  graph_registry.update_registry();
-  graph_registry.update_graphs();
-},500))
+$(window).on(
+  "hashchange", 
+  _.debounce(function(){ 
+    graph_registry.update_registry();
+  }, 500)
+);
+$(window).on(
+  "resize", 
+  _.debounce(function(){ 
+    graph_registry.update_registry();
+    graph_registry.update_graphs();
+  }, 500)
+);
 
 
 const setup_graph_instance = function(instance,container,options = {}) {
@@ -329,9 +331,9 @@ const setup_graph_instance = function(instance,container,options = {}) {
   instance.options = options;
 
   container
-    .attr("aria-hidden","true")
+    .attr("aria-hidden", "true")
     .append("div")
-    .classed("__svg__",true);
+    .classed("__svg__", true);
 
   if (options.alternative_svg){
     container.select(".__svg__").html(options.alternative_svg);
@@ -345,12 +347,12 @@ const setup_graph_instance = function(instance,container,options = {}) {
 
   instance.html = container; 
 
-  instance.dispatch = options.dispatch = d3.dispatch.apply(this,
+  instance.dispatch = options.dispatch = d3.dispatch.apply(
+    this,
     base_dispatch_events.concat(options.events || [])
   );
 
   graph_registry.add(instance);
-
 };
 
 window._graph_registry = graph_registry;
