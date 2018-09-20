@@ -435,10 +435,11 @@ class ExportButton extends React.Component {
   triggerDownload(){
     const csv_str =  this.props.get_csv_string();
     const uri = "data:text/csv;charset=UTF-8," + encodeURIComponent(csv_str);
-    $('<a/>')
-      .attr("download", 'table.csv')
-      .attr("href", uri)[0]
-      .dispatchEvent(new MouseEvent('click'));
+    
+    const temporary_anchor = document.createElement('a');
+    temporary_anchor.setAttribute("download", 'table.csv');
+    temporary_anchor.setAttribute("href", uri);
+    temporary_anchor.dispatchEvent( new MouseEvent('click') );
   }
    
 
