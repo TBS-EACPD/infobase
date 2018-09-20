@@ -156,7 +156,7 @@ function get_data_by_item_types(){
     .map( ([ category, rows ])  => {
 
       const this_year = _.sumBy(rows, this_year_col);
-      const last_year_mains = _.sumBy(rows, last_year_col);
+      const last_year_mains = _.chain(rows).filter({est_doc_code: "MAINS"}).sumBy(last_year_col).value();
       const inc = this_year - last_year_mains;
       const inc_pct = inc/last_year_mains;
 
