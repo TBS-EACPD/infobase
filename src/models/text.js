@@ -78,7 +78,7 @@ const full_template_global_records = [
 ];
 
 const app_constants = {
-  pre_public_accounts : window.pre_public_accounts,
+  pre_public_accounts: window.pre_public_accounts,
   lang: window.lang,
   is_mobile: window.is_mobile,
 }
@@ -93,22 +93,22 @@ const template_globals = _.chain(full_template_global_records)
 
 //calls handlebars templates with standard args,
 // plus any others passed
-const run_template = function(s,extra_args={}){
+const run_template = function(s, extra_args={}){
   // 1. `s` is the (or array of) raw handlebars template
   // 2. `extra_args` are additional arguments for hbs context 
 
-  if(!_.isObject(extra_args)){ extra_args={}; } 
-  if (_.isArray(s)){
-    return _.map(s,function(__){ return run_template(__,extra_args);});
+  if( !_.isObject(extra_args) ){ extra_args={}; } 
+  if ( _.isArray(s) ){
+    return _.map(s,function(__){ return run_template(__, extra_args);});
   }
   // build common arguments object which will be passed
   // to all templates
-  const args = _.extend({},extra_args, template_globals); //FIXME: extra_args should take precedence over template globals. Don't have time to test this right now.
+  const args = _.extend({}, extra_args, template_globals); //FIXME: extra_args should take precedence over template globals. Don't have time to test this right now.
   // combine the `extra_args` with the common arguments
   if (s){
     let _template;
-    if (_.isString(s)){
-      _template = Handlebars.compile(_.trim(s));
+    if ( _.isString(s) ){
+      _template = Handlebars.compile( _.trim(s) );
     } else { //it's a function -> already compiled
       _template = s;
     }
@@ -146,7 +146,7 @@ const text_bundles_by_filename = {};
 const add_text_bundle = (text_bundle) => {
   const { __file_name__ } = text_bundle;
   const to_add = {};
-  _.each( _.omit(text_bundle, "__file_name__") ,(text_obj,key) => {
+  _.each( _.omit(text_bundle, "__file_name__"), (text_obj, key) => {
     if (text_obj.handlebars_partial) {
       Handlebars.registerPartial(key, text_obj.text);
       return;
@@ -156,7 +156,7 @@ const add_text_bundle = (text_bundle) => {
     to_add[key] = text_obj;
 
     //get rid of language specific props
-    text_obj.text = text_obj[window.lang]  || text_obj.text;
+    text_obj.text = text_obj[window.lang] || text_obj.text;
     delete text_obj.en;
     delete text_obj.fr;
 
@@ -185,7 +185,6 @@ const combine_bundles = bundles => {
     .flatten()
     .fromPairs()
     .value();
-
 };
 
 const combined_global_bundle = combine_bundles(global_bundles);
@@ -196,7 +195,7 @@ const create_text_maker = bundles => {
     return trivial_text_maker;
   }
   if(!_.isArray(bundles)){ //single el
-    bundles = [ bundles ] 
+    bundles = [bundles];
   }
 
   const combined = combine_bundles(bundles);
@@ -208,7 +207,7 @@ const create_text_maker = bundles => {
 }
 
 
-const _create_text_maker = (deps=template_store) => (key,context={}) => {
+const _create_text_maker = (deps=template_store) => (key, context={}) => {
 
   // 1. lookup the key to get the text object
   // 2. note that by the time this function gets called, we've already stripped out language
@@ -224,33 +223,44 @@ const _create_text_maker = (deps=template_store) => (key,context={}) => {
 
 
   const text_obj =  deps[key];
-  if(_.isString(text_obj)) return text_obj;
+  if( _.isString(text_obj) ) { 
+    return text_obj;
+  }
 
   let rtn = text_obj.text;
   _.each(text_obj.transform, transform => {
     if (transform === 'handlebars'){
       if (!text_obj.handlebars_compiled){
         text_obj.text = Handlebars.compile(rtn);
-        text_obj.handlebars_compiled  = true;
+        text_obj.handlebars_compiled = true;
       }
-      rtn = run_template(rtn,context);
+      rtn = run_template(rtn, context);
     } else if (transform === 'markdown'){
-      rtn = marked(rtn,{sanitize:false,gfm:true});
+      rtn = marked(rtn, {sanitize:false, gfm:true});
     } else if (transform === 'embeded-markdown'){
-      const temp_dom_node =  $("<div>").html(rtn);
-      temp_dom_node.find(".embeded-markdown").each(function(){
-        $(this).html(marked($(this).html(), {sanitize:false,gfm:true}));
-      });
-      rtn = temp_dom_node.html();
+      const temp_dom_node = document.createElement("div");
+
+      temp_dom_node.innerHTML = rtn;
+
+      temp_dom_node.querySelectorAll(".embeded-markdown")
+        .forEach(
+          (node) => node.innerHTML = marked(
+            node.innerHTML,
+            {sanitize:false, gfm:true}
+          ) 
+        );
+
+      rtn = temp_dom_node.innerHTML;
     }
   });
   if (_.has(text_obj, "outside_html")){
     rtn = Handlebars.compile(text_obj.outside_html)({
-      content : rtn,
+      content: rtn,
     });
   }
   return rtn;
 }
+
 const trivial_text_maker = _create_text_maker(combined_global_bundle);
 
 window._trivial_text_maker = trivial_text_maker;

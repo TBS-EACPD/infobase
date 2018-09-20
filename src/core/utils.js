@@ -6,8 +6,10 @@ if (typeof window !== "undefined"){
   // device or not.  It was taken from a stackoverflow post
   // the global variable `window.is_mobile` is set
   var set_mobile = function(){
-    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-        window.matchMedia("(max-width: 970px)").matches ) {
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+      window.matchMedia("(max-width: 970px)").matches
+    ){
       window.is_mobile = true;
     } else {
       window.is_mobile = false;
@@ -18,8 +20,8 @@ if (typeof window !== "undefined"){
     var myNav = navigator.userAgent.toLowerCase();
     return (
       (myNav.indexOf('msie') !== -1) ? 
-      parseInt(myNav.split('msie')[1]) : 
-      myNav.indexOf('trident') !== -1
+        parseInt(myNav.split('msie')[1]) : 
+        myNav.indexOf('trident') !== -1
     );
   };
 
@@ -38,17 +40,10 @@ if (typeof window !== "undefined"){
   window.windows_os = navigator.appVersion.indexOf("Win") !== -1;
 
   window.details = 'open' in document.createElement('details');
-  window.download_attr = ('download' in document.createElement('a'));
-  window.clipboard_access = ('clipboardData' in window);
+  window.download_attr = 'download' in document.createElement('a');
+  window.clipboard_access = 'clipboardData' in window;
+  window.binary_download = typeof ArrayBuffer !== 'undefined';
   // end of feature detection
-  window.binary_download = typeof ArrayBuffer !== 'undefined'
-
-  if (!window.details) {
-    // stub code for details/summary functionality
-    $(document).on("click","details .toggler",function(){
-      $(this).parents("details").find(".togglee").toggleClass("hidden");
-    });
-  }
 
   set_mobile();
 }  
@@ -57,29 +52,32 @@ if (typeof window !== "undefined"){
 // for abbreviating long strings of text on the screen
 // but also keeping a hidden version of the full string
 // for accessibility purposes 
-export const abbrev = function(name,length, add_abbrev){
-  //         the get_text function
+export const abbrev = function(name, length, add_abbrev){
   // * `name` : the text which needs to be abbreviated
-  //  * `length` : the cut-off point in the string
-  add_abbrev =  add_abbrev  || false;
+  // * `length` : the cut-off point in the string
+  add_abbrev = add_abbrev || false;
   length = length || 60;
-  var outerspan = $("<span>");
+  var temp_span = document.createElement("span");
   if (name.length > length){
-    $("<span>")
-      .addClass("wb-inv original")
-      .html(name)
-      .appendTo(outerspan);
+
+    const a11y_element = document.createElement("span");
+    a11y_element.className = "wb-inv original";
+    a11y_element.innerHTML = name;
+    temp_span.appendChild(a11y_element);
+    
     if (add_abbrev) {
-      $("<span>")
-        .addClass("wb-inv abbrev")
-        .html(window.lang === "en" ?  " abbreviated here as:" :  " abrégé ici:")
-        .appendTo(outerspan);
+      const abbrev_element = document.createEelment("span");
+      abbrev_element.className = "wb-inv abbrev";
+      abbrev_element.innerHTML = window.lang === "en" ? " abbreviated here as:" : " abrégé ici:";
+      temp_span.appendChild(abbrev_element);
     }
-    $("<span>")
-      .addClass("shortened")
-      .html(name.substring(0,length-5)+"...")
-      .appendTo(outerspan);
-    return outerspan.html();
+
+    const shortened_element = document.createElement("span");
+    shortened_element.className = "shortened";
+    shortened_element.innerHTML = name.substring(0, length-5) + "...";
+    temp_span.appendChild(shortened_element);
+    
+    return temp_span.innerHTML;
   } else {
     return name;
   }
@@ -92,11 +90,11 @@ export const make_unique_func = function(){
   }
 };
 
-export const find_parent = (node,condition)=>{
-  if (condition(node)){
+export const find_parent = (node, condition)=>{
+  if ( condition(node) ){
     return node;
   }
-  if (node.parentNode === document) { 
+  if (node.parentNode === document){ 
     return false; 
   }
   return find_parent(node.parentNode, condition);
@@ -113,7 +111,7 @@ export const make_unique = make_unique_func();
 //array/hash of strings (kinda kills the point of having this component)
 //array/hash of objects with a text or display property
 //note that onSelect will be called with the data associated to the key, not the key itself
-class Select {
+export class Select {
   constructor(options){
     const { 
       container, 
@@ -141,16 +139,13 @@ class Select {
             ${ (selected_key === key || selected === val) ? 'selected' : ''}
             value='${key}'
           >
-            ${ display_func ?  display_func(val)  : (val.text || val.display || val) }
+            ${ display_func ? display_func(val) : (val.text || val.display || val) }
           </option>`
-      )
-        .join("")
+      ).join("")
     );
-    node.onchange = ()=>{ onSelect(data[node.value]);};
+    node.onchange = () => { onSelect(data[node.value]) };
   }
 }
-
-export { Select };
 
 export const escapeRegExp = function(str) {
   /* eslint-disable no-useless-escape */
@@ -161,8 +156,17 @@ export const escapeSingleQuotes = function(str){
   return str.replace(/'/g, "&#39;")
 };
 
-export const shallowEqualObjectsOverKeys = (obj1, obj2, keys_to_compare) => _.reduce(keys_to_compare, (memo, key) => (memo && (obj1[key] === obj2[key]) ), true);
+export const shallowEqualObjectsOverKeys = (obj1, obj2, keys_to_compare) => _.reduce(keys_to_compare, (memo, key) => ( memo && (obj1[key] === obj2[key]) ), true);
 
 
 
-window._UTILS = { abbrev, make_unique_func, find_parent, make_unique, Select, escapeRegExp, escapeSingleQuotes, shallowEqualObjectsOverKeys };
+window._UTILS = { 
+  abbrev,
+  make_unique_func,
+  find_parent,
+  make_unique,
+  Select,
+  escapeRegExp,
+  escapeSingleQuotes,
+  shallowEqualObjectsOverKeys,
+};
