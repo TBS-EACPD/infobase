@@ -23,17 +23,16 @@ export class HeightClipper extends React.Component {
     const untabbable_children_node = height_clipper_node.querySelector(".untabbable_children");
 
     // if the height clipper is collapsed it will have a div classed .untabbable_children,
-    // do not want any of those children to be tab-selectable
+    // do not want any of that node's children to be tab-selectable
     // if no .untabbable_children div, then need to reset the tabindex/focusable attributes of the height clipper children
     if (untabbable_children_node){
       untabbable_children_node
         .querySelectorAll("*")
         .forEach( node => {
-          const node_tabindex = node.getAttribute('tabindex');
-          if( !_.isNull(node_tabindex) ){
-            node.setAttribute("prev-tabindex", node_tabindex);
+          if ( !_.isUndefined(node.tabIndex) && !_.isNull(node.tabIndex) && node.tabIndex >= 0 ){
+            node.setAttribute("prev-tabindex", node.tabIndex);
+            node.setAttribute("tabindex", "-999");
           }
-          node.setAttribute("tabindex","-999");
         });
 
       untabbable_children_node
