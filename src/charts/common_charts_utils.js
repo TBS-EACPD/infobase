@@ -77,15 +77,15 @@ const create_list = function(container, data,options){
   //     the legend
   //
   //
-  options.key = options.key || ( (d,i) => i )
-  options.colors = options.colors || ( () => "transparent" )
+  options.key = options.key || ( (d,i) => i );
+  options.colors = options.colors || ( () => "transparent" );
   options.legend = options.legend || false;
-  options.html = options.html || _.identity
+  options.html = options.html || _.identity;
   options.legend_class = options.legend_class || "";
   options.li_classes = options.li_classes || "";
   options.a_class = options.a_class || "";
   options.align = options.align || "center";
-  const horizontal = options.orientation === 'horizontal'
+  const horizontal = options.orientation === 'horizontal';
   const non_interactive_legend = !options.interactive && options.legend;
 
   //added extra class to style legends with targetted specificity
@@ -101,7 +101,7 @@ const create_list = function(container, data,options){
     .select(container)
     .append("div")
     .attr("aria-hidden", options.legend)
-    .classed("d3-list " + options.legend_class, true) ;
+    .classed("d3-list " + options.legend_class, true);
 
   if (horizontal) {
     options.ul_classes = "horizontal " + options.ul_classes;
