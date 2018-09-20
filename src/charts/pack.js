@@ -3,6 +3,18 @@ import { make_unique } from '../core/charts_index.js';
 
 const navigate_class = "navigate_packing";
 
+// small helper function which walks back up the DOM tree
+// to find the immediate parent of the svg element, meant
+// to be called on an element contained within an svg tag
+const get_html_parent = function(elem){
+  var node = elem.node();
+  if (node.tagName.toLowerCase() === 'svg'){
+    return node.parentElement;
+  } else {
+    return node.parents("svg").parent()[0];
+  }
+};
+
 var _setup_events = function(container){
   d3.select(container).on("click."+navigate_class, function(d){
     var target = d3.select(d3.event.target);
@@ -162,8 +174,12 @@ export class Pack {
     this.rand = Math.round(Math.random()*1000000); 
   }
 
-  absolute_zoom_position(x,y){                         
-    var offset = common_charts_utils.get_offset(this.svg);    
+  absolute_zoom_position(x,y){
+    const parent_element = get_html_parent(this.svg);             
+    var offset = {
+      top: parent_element.offsetTop,
+      left: parent_element.offsetLeft,
+    };
     var pos = this.zoom_position(x,y);
     return {x:pos.x+offset.left,y:pos.y+offset.top};
   }

@@ -24,23 +24,6 @@ const tbs_color = function(){
     ]);
 };
 
-// function which can probably be removed
-const get_offset = function(elem){
-  return $( get_html_parent(elem) ).offset();
-};
-
-// small helper function which walks back up the DOM tree
-// to find the immediate parent of the svg element, meant
-// to be called on an element contained within an svg tag
-const get_html_parent = function(elem){
-  var node = $(elem.node());
-  if (node.prop("tagName").toLowerCase() === 'svg'){
-    return node.parent()[0];
-  } else {
-    return node.parents("svg").parent()[0];
-  }
-};
-
 const add_grid_lines = function(direction, grid_line_area, axis, tick_size){
   const axis_clone = _.cloneDeep(axis);
   const tick_size_orientation = direction === "vertical" ? 1 : -1;
@@ -287,26 +270,30 @@ const graph_registry = {
       graph_obj.outside_width = graph_obj.html.node().offsetWidth;
       graph_obj.outside_height = graph_obj.options.height || 400;
                   
-      // Remove all labels associated with the graph. They will be re-rendered.
-      // Graphs with "preserve_labels_on_update" must be re-rendered with all labels intact.
-      $(graph_obj.svg.node())
-        .parent(".__svg__:not([preserve_labels_on_update])")
-        .siblings()
-        .not(":has(svg)")
-        .remove();
-                  
+      // Remove all labels associated with the graph (that is, all siblings of the svg's container).
+      // Graphs with "preserve_labels_on_update" must be re-rendered with all labels intact, so nothing is removed here.
+      const svg_container = graph_obj.svg.node().parentElement;
+      const preserve_labels = !_.isNull( svg_container.getAttribute("preserve_labels_on_update") );
+      if (!preserve_labels){
+        const svg_container_parent = svg_container.parentElement;
+
+        svg_container_parent.innerHTML = "";
+
+        svg_container_parent.appendChild(svg_container);
+      }
+
       graph_obj.render(graph_obj.options);
     });
   },
 };
 
-$(window).on(
+window.addEventListener(
   "hashchange", 
   _.debounce(function(){ 
     graph_registry.update_registry();
   }, 500)
 );
-$(window).on(
+window.addEventListener(
   "resize", 
   _.debounce(function(){ 
     graph_registry.update_registry();
@@ -360,8 +347,6 @@ window._graph_registry = graph_registry;
 export default {
   formats,
   tbs_color,
-  get_offset,
-  get_html_parent,
   add_grid_lines,
   create_list,
   on_legend_click,
