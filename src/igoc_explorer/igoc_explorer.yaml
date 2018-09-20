@@ -26,6 +26,10 @@ by_ministry:
   en: By portfolio
   fr: Par portefeuille
 
+undef_ministry:
+  en: Other organizations
+  fr: D'autres organisations
+
 by_inst_form:
   en: By organization type
   fr: Par type d'organisation
