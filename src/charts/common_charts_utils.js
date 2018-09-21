@@ -272,14 +272,20 @@ const graph_registry = {
                   
       // Remove all labels associated with the graph (that is, all siblings of the svg's container).
       // Graphs with "preserve_labels_on_update" must be re-rendered with all labels intact, so nothing is removed here.
-      const svg_container = graph_obj.svg.node().parentElement;
+      const svg_container = graph_obj.svg.node().parentNode;
       const preserve_labels = !_.isNull( svg_container.getAttribute("preserve_labels_on_update") );
       if (!preserve_labels){
-        const svg_container_parent = svg_container.parentElement;
+        const svg_container_parent = svg_container.parentNode;
 
-        svg_container_parent.innerHTML = "";
-
-        svg_container_parent.appendChild(svg_container);
+        // forEach directly on this nodeList is spoty, mapping it through to an array first works consistently though
+        _.map(svg_container_parent.childNodes, _.identity) 
+          .forEach(
+            child => {
+              if ( !_.isUndefined(child) && child !== svg_container ){
+                svg_container_parent.removeChild(child);
+              }
+            }
+          );
       }
 
       graph_obj.render(graph_obj.options);
@@ -291,14 +297,14 @@ window.addEventListener(
   "hashchange", 
   _.debounce(function(){ 
     graph_registry.update_registry();
-  }, 500)
+  }, 250)
 );
 window.addEventListener(
   "resize", 
   _.debounce(function(){ 
     graph_registry.update_registry();
     graph_registry.update_graphs();
-  }, 500)
+  }, 250)
 );
 
 
