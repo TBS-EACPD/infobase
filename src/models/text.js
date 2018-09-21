@@ -242,13 +242,17 @@ const _create_text_maker = (deps=template_store) => (key, context={}) => {
 
       temp_dom_node.innerHTML = rtn;
 
-      temp_dom_node.querySelectorAll(".embeded-markdown")
-        .forEach(
-          (node) => node.innerHTML = marked(
-            node.innerHTML,
-            {sanitize:false, gfm:true}
-          ) 
-        );
+      const embedded_markdown_nodes = temp_dom_node.querySelectorAll(".embeded-markdown");
+
+      if (embedded_markdown_nodes.length){
+        _.map(embedded_markdown_nodes, _.idenity)
+          .forEach(
+            (node) => node.innerHTML = marked(
+              node.innerHTML,
+              {sanitize:false, gfm:true}
+            ) 
+          );
+      }
 
       rtn = temp_dom_node.innerHTML;
     }

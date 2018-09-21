@@ -26,8 +26,7 @@ export class HeightClipper extends React.Component {
     // do not want any of that node's children to be tab-selectable
     // if no .untabbable_children div, then need to reset the tabindex/focusable attributes of the height clipper children
     if (untabbable_children_node){
-      untabbable_children_node
-        .querySelectorAll("*")
+      _.map(untabbable_children_node.querySelectorAll("*"), _.identity)
         .forEach( node => {
           if ( !_.isUndefined(node.tabIndex) && !_.isNull(node.tabIndex) && node.tabIndex >= 0 ){
             node.setAttribute("prev-tabindex", node.tabIndex);
@@ -35,24 +34,20 @@ export class HeightClipper extends React.Component {
           }
         });
 
-      untabbable_children_node
-        .querySelectorAll("svg")
-        .forEach( node => node.setAttribute("focusable","false") );
+      _.map(untabbable_children_node.querySelectorAll("svg"), _.identity)
+        .forEach( node => node.setAttribute("focusable", "false") );
     } else {
-      height_clipper_node
-        .querySelectorAll('[tabindex="-999"]')
+      _.map(height_clipper_node.querySelectorAll('[tabindex="-999"]'), _.identity)
         .forEach( node => node.removeAttribute("tabindex") );
 
-      height_clipper_node
-        .querySelectorAll("[prev-tabindex]")
+      _.map(height_clipper_node.querySelectorAll("[prev-tabindex]"), _.identity)
         .forEach( node => {
-          const previous_tabindex = node.getAttribute('prev-tabindex');
+          const previous_tabindex = node.getAttribute("prev-tabindex");
           node.setAttribute("tabindex", previous_tabindex);
           node.removeAttribute('prev-tabindex');
         });
 
-      height_clipper_node
-        .querySelectorAll("svg")
+      _.map(height_clipper_node.querySelectorAll("svg"), _.identity)
         .forEach( node => node.removeAttribute("focusable") );
     }
   }
