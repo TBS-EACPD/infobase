@@ -262,7 +262,7 @@ budget_measure_popup_bottom_rows:
       </div>
       <div class='popup-decription-text popup-row-bottom-border' style='max-height:200px; padding-bottom:3px;'>
         {{#each submeasures}}
-          <div class='budget-measure-popup-text-cells'>
+          <div class='budget-measure-popup-text-cells popup-font-s'>
             <span class='popup-text-cells-left popup-text-cells-large' style='color:#fdfdfd; padding:6px 0px 6px 0px;'>
               {{this.name}}
             </span>
