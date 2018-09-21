@@ -29,7 +29,12 @@ export class HeightClipper extends React.Component {
       _.map(untabbable_children_node.querySelectorAll("*"), _.identity)
         .forEach( node => {
           if ( !_.isUndefined(node.tabIndex) && !_.isNull(node.tabIndex) && node.tabIndex >= 0 ){
-            node.setAttribute("prev-tabindex", node.tabIndex);
+
+            const tabindex_attr = node.getAttribute("tabindex")
+            if (tabindex_attr){
+              node.setAttribute("prev-tabindex", tabindex_attr);
+            }
+
             node.setAttribute("tabindex", "-999");
           }
         });
