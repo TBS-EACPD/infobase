@@ -171,7 +171,7 @@ export class TooltipActivator extends React.Component {
     }
   }
   componentWillUnmount(){
-    this.observer.disconect();
+    this.observer.disconnect();
     this.debounced_mutation_callback.cancel();
     this.tooltip_instances.forEach( tooltip_instance => tooltip_instance.tooltip.dispose() );
   }
