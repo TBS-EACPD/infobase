@@ -8,15 +8,14 @@ const navigate_class = "navigate_packing";
 // to be called on an element contained within an svg tag,
 // otherwise winds up returning undefined after crawling up to the body tag
 const get_html_parent = function(elem){
-  var node = elem.node();
-  var tag_name = node.tagName.toLowerCase();
+  var tag_name = elem.tagName.toLowerCase();
   if (tag_name === 'svg'){
-    return node.parentNode;
+    return elem.parentNode;
   } else {
     if (tag_name === 'body'){
       return undefined;
     } else {
-      return get_html_parent(node.parentNode);
+      return get_html_parent(elem.parentNode);
     }
   }
 };
@@ -181,7 +180,7 @@ export class Pack {
   }
 
   absolute_zoom_position(x,y){
-    const parent_element = get_html_parent(this.svg);             
+    const parent_element = get_html_parent( this.svg.node() );             
     var offset = {
       top: parent_element.offsetTop,
       left: parent_element.offsetLeft,
