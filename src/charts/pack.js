@@ -5,13 +5,19 @@ const navigate_class = "navigate_packing";
 
 // small helper function which walks back up the DOM tree
 // to find the immediate parent of the svg element, meant
-// to be called on an element contained within an svg tag
+// to be called on an element contained within an svg tag,
+// otherwise winds up returning undefined after crawling up to the body tag
 const get_html_parent = function(elem){
   var node = elem.node();
-  if (node.tagName.toLowerCase() === 'svg'){
-    return node.parentElement;
+  var tag_name = node.tagName.toLowerCase();
+  if (tag_name === 'svg'){
+    return node.parentNode;
   } else {
-    return node.parents("svg").parent()[0];
+    if (tag_name === 'body'){
+      return undefined;
+    } else {
+      return get_html_parent(node.parentNode);
+    }
   }
 };
 
