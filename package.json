@@ -69,6 +69,7 @@
     "react-addons-transition-group": "^15.4.2",
     "react-apollo": "^2.0.4",
     "react-aria-modal": "^2.11.1",
+    "react-bootstrap-typeahead": "^3.2.3",
     "react-dom": "^16.4.0",
     "react-flip-move": "^2.9.14",
     "react-redux": "^5.0.5",
