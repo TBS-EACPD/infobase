@@ -41,7 +41,7 @@ const org_attributes_to_match = [
 const org_templates = {
   header: ()=> Dept.plural,
   suggestion:  org => {
-    if(_.isEmpty(org.tables)){
+    if(org.level !== "gov" && _.isEmpty(org.tables)){
       return `<span class="search-grayed-out-hint"> ${org.name} ${trivial_text_maker("limited_data")} </span>`
     }
     return (
