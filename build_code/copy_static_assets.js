@@ -25,17 +25,12 @@ actually simpler now.
 PROJ -> {
   (mkdir if doesn't exist) build/, build/PROJ.name/, js/ , csv/ , svg/
   copy PROJ.js to build/PROJ.name/js/ (this will include external dependencies)
-  copy WET stuff -r to build/PROJ.name/
   copy other to build/PROJ.name (this is where index-en/fr get copied)
   forEach file in PROJ.spreadsheets, copy it to to build/PROJ.name/csv/
-  forEach file  in PROJ.svg, copy to build/PROJ.name/svg/
+  copy entire svg directory, src/svg, to build/PROJ.name/svg
 }
-
-
-idea for improvement: move project's table list to a json file in src/InfoBase,
-then have that be the ONLY source (dynamic requires are possible with webpack) of which tables are in which project
-
 */
+
 const csv_names_by_table_id = require('../src/tables/table_id_to_csv_map.js');
 
 const external_deps_names = glob.sync('external-dependencies/*.js')
