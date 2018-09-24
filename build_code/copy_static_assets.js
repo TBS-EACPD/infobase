@@ -87,67 +87,7 @@ const common_lookups_fr = _.map(
 
 const common_png = _.map(['en', 'fr'], lang => `src/panels/result_graphs/result-taxonomy-${lang}.png`);
 
-const common_svg = [
-  //home banner
-  'src/home/backbanner.svg',
-  'src/home/flagline.svg',
-
-  //top left corner brand
-  'src/InfoBase/sig-blk-en.svg',
-  'src/InfoBase/sig-blk-fr.svg',
-  'src/InfoBase/infobase-dev-fip.svg',
-
-  //footer wordmark
-  'src/InfoBase/wmms-blk.svg',
-
-  //caricature images for main 5 pages
-  'src/home/partition.svg',
-  'src/home/partition-budget.svg',
-  'src/home/bubbles.svg',
-  'src/home/builder.svg',
-  'src/home/structure.svg',
-  'src/home/explorer.svg',
-  'src/home/aboutus.svg',
-  'src/home/glossary.svg',
-  'src/home/metadata.svg',
-  'src/home/compare_estimates.svg',
-  'src/home/feedback.svg',
-
-  //simplographic images
-  'src/panels/intro_graphs/check.svg',
-  'src/panels/intro_graphs/graph.svg',
-  'src/panels/intro_graphs/money.svg',
-  'src/panels/intro_graphs/employees.svg',
-
-  //small scma icons below home page search bar
-  'src/home/results.svg',
-  'src/home/expend.svg',
-  'src/home/people.svg',
-
-  //search glyph
-  'src/search/search.svg',
-
-  //result icons
-  'src/panels/result_graphs/attention_req.svg',
-  'src/panels/result_graphs/met.svg',
-  'src/panels/result_graphs/not_applicable.svg',
-  'src/panels/result_graphs/not_available.svg',
-  'src/panels/result_graphs/on_track.svg',
-
-  //eye icons
-  'src/partition/budget_measures_subapp/eye-close.svg',
-  'src/partition/budget_measures_subapp/eye-open.svg',
-
-  //GaaG info icon
-  'src/partition/partition_subapp/info.svg',
-
-  //breadcrumb arrow
-  'src/core/arrow.svg',
-
-  //accordian chevron
-  'src/components/Accordions_chevron.svg',
-
-];
+const svg_path = 'src/svg';
 
 const IB_tables = [
   'table1',
@@ -191,10 +131,10 @@ var IB = {
   name: 'InfoBase',
   lookups_en: common_lookups.concat(common_lookups_en),
   lookups_fr: common_lookups.concat(common_lookups_fr),
-  csv: csv_from_table_names(IB_tables).concat(other_csvs),
-  svg: common_svg,
+  svg: svg_path,
   png: common_png,
   js: external_deps_names,
+  csv: csv_from_table_names(IB_tables).concat(other_csvs),
   well_known: ['src/InfoBase/security.txt'],
   other: [
     'src/robots/robots.txt',
@@ -331,7 +271,9 @@ function build_proj(PROJ){
     fse.copySync(file_name, target_dir+'/'+small_name, {clobber: true});//clobber overwrites old directory when copying
   };
 
-  ['png', 'svg','js','csv'].forEach(function(type){
+  copy_file_to_target_dir(svg_path, dir);
+
+  ['png', 'js','csv'].forEach(function(type){
     var this_dir = dir+'/'+type;
     make_dir_if_exists(this_dir);
     PROJ[type].forEach( f_name => copy_file_to_target_dir(f_name, this_dir) );
