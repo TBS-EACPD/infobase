@@ -201,10 +201,10 @@ const make_status_icons = (width) => {
   return {
     //icons for specific colours that group the other status_keys
     success: <img src={get_svg_url("met")} style={status_icon_style} />,
-    ontrack: <img src={get_svg_url("on_track")} style={status_icon_style} />,
-    failure: <img src={get_svg_url("attention_req")} style={status_icon_style} />,
-    not_avail: <img src={get_svg_url("not_available")} style={status_icon_style} />,
-    not_appl: <img src={get_svg_url("not_applicable")} style={status_icon_style} />,
+    ontrack: <img src={get_svg_url("on-track")} style={status_icon_style} />,
+    failure: <img src={get_svg_url("attention-req")} style={status_icon_style} />,
+    not_avail: <img src={get_svg_url("not-available")} style={status_icon_style} />,
+    not_appl: <img src={get_svg_url("not-applicable")} style={status_icon_style} />,
   };
 };
 

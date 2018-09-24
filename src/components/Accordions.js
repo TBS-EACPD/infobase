@@ -79,7 +79,7 @@ const StatelessPullDownAccordion = ({ title, isExpanded, children, onToggle }) =
       >
         <span>
           <img 
-            src={get_static_url("svg/Accordions_chevron.svg")} 
+            src={get_static_url("svg/chevron.svg")} 
             style={{ 
               width: "20px", 
               height: "20px",
