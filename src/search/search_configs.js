@@ -49,7 +49,6 @@ const org_templates = {
       `${org.name} (${org.applied_title})` :
       org.name
     );
-    
   },
 };
 
@@ -62,6 +61,11 @@ const orgs_with_data_with_gov = {
     )
   },
   templates: org_templates,
+  data: [Gov].concat( Dept.depts_with_data() ),
+  filter: (query, data) => _.filter(
+    data,
+    create_re_matcher(query, org_attributes_to_match)
+  ),
 };
 
 const all_orgs_without_gov = {
@@ -73,6 +77,11 @@ const all_orgs_without_gov = {
     )
   },
   templates: org_templates,
+  data: Dept.get_all(),
+  filter: (query, data) => _.filter(
+    data,
+    create_re_matcher(query, org_attributes_to_match)
+  ),
 };
 
 const all_orgs_with_gov = {
@@ -85,6 +94,11 @@ const all_orgs_with_gov = {
     )
   },
   templates: org_templates,
+  data: [Gov, _.reject(Dept.get_all(), "is_dead")],
+  filter: (query, data) => _.filter(
+    data,
+    create_re_matcher(query, org_attributes_to_match)
+  ),
 };
 
 const all_dp_orgs = {
@@ -96,6 +110,11 @@ const all_dp_orgs = {
     )
   },
   templates: org_templates,
+  data: _.filter(Dept.get_all(), 'dp_status'),
+  filter: (query, data) => _.filter(
+    data,
+    create_re_matcher(query, org_attributes_to_match)
+  ),
 };
 
 const glossary_attributes_to_match = [
@@ -122,6 +141,11 @@ const glossary = {
     ),
     header: ()=> trivial_text_maker('glossary'),
   },
+  data: GlossaryEntry.fully_defined_entries,
+  filter: (query, data) => _.filter(
+    data,
+    create_re_matcher(query, glossary_attributes_to_match)
+  ),
 };
 
 const glossary_lite = {
@@ -136,6 +160,11 @@ const glossary_lite = {
     suggestion: _.property('title'),
     header: ()=> trivial_text_maker('glossary'),
   },
+  data: GlossaryEntry.fully_defined_entries,
+  filter: (query, data) => query.length > 10 && _.filter(
+    data,
+    create_re_matcher(query, glossary_attributes_to_match)
+  ),
 };
 
 
@@ -155,6 +184,14 @@ const gocos = {
     header: ()=> `${Tag.plural} - ${Tag.tag_roots.GOCO.name}`,
     suggestion: _.property('name'),
   },
+  data: _.chain(Tag.get_all())
+    .filter( ({root}) => root === Tag.tag_roots.GOCO )
+    .filter('is_lowest_level_tag')
+    .value(),
+  filter: (query, data) => _.filter(
+    data,
+    create_re_matcher(query, ['name', 'description'])
+  ),
 };
 
 const how_we_help = {
@@ -169,6 +206,11 @@ const how_we_help = {
     header: ()=> `${Tag.plural} - ${Tag.tag_roots.HWH.name}`,
     suggestion: _.property('name'),
   },
+  data: _.filter(Tag.get_all(), {root: Tag.tag_roots.HWH}),
+  filter: (query, data) => _.filter(
+    data,
+    create_re_matcher(query, ['name', 'description'])
+  ),
 };
 
 const datasets = {
@@ -199,6 +241,25 @@ const datasets = {
     header: ()=> trivial_text_maker('build_a_report'),
     suggestion: table => table.title,
   },
+  data: _.chain(Table.get_all())
+    .reject('reference_table')
+    .map( t => ({
+      name: t.name,
+      title: t.title,
+      flat_tag_titles: _.chain(t.tags)
+        .map(key => GlossaryEntry.lookup(key))
+        .compact()
+        .map('title')
+        .compact()
+        .pipe( titles => titles.join(" ") )
+        .value(),
+      table: t,
+    }))
+    .value(),
+  filter: (query, data) => _.filter(
+    data,
+    create_re_matcher(query, ['name', 'flat_tag_titles']) 
+  ),
 };
 
 const programs = {
@@ -213,6 +274,11 @@ const programs = {
     suggestion: program => `${program.name} (${program.dept.sexy_name})`,
     header: ()=> trivial_text_maker('programs'),
   },
+  data: _.reject(Program.get_all(), 'dead_program'),
+  filter: (query, data) => _.filter(
+    data,
+    create_re_matcher(query, ['name', 'description'])
+  ),
 }
 
 //only include CRs because SO's have really really long names
@@ -228,6 +294,11 @@ const crsos = {
     suggestion: crso => `${crso.name} (${crso.dept.sexy_name})`,
     header: ()=> trivial_text_maker('core_resps'),
   },
+  data: _.filter(CRSO.get_all(), 'is_cr'),
+  filter: (query, data) => _.filter(
+    data,
+    create_re_matcher(query, ['name'])
+  ),
 }
 
 export {
