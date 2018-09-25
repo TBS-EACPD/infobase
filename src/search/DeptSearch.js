@@ -39,7 +39,7 @@ const DeptSearch = withRouter(
         onNewQuery = { onNewQuery }
         placeholder = { placeholder }
         search_configs = {[ search_config ]}
-        onSelect
+        onSelect = { onSelect }
       />;
     }
   }
