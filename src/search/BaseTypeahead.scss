@@ -1,1 +1,9 @@
 // expecting to have some style overwrites/extensions to put in here
+
+.rbt-input-hint-container > .form-control {
+  width: 100%;
+}
+
+.rbt-input-hint {
+  visibility: hidden;
+}

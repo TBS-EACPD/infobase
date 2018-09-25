@@ -54,7 +54,7 @@ export class BaseTypeahead extends React.Component {
 
     return (
       <Typeahead
-        ref={(ref) => this._typeahead = ref}
+        ref={(ref) => this.typeahead = ref}
         labelKey = "name"
         maxResults = { Infinity }
         emptyLabel = { "TODO: need text key for no matches found" }
@@ -66,8 +66,12 @@ export class BaseTypeahead extends React.Component {
         // but BaseTypeahead will only ever use single selection, so just picking the first (and, we'd expect, only) item and passing it to onSelect is fine
         onChange = { 
           (selected) => {
-            this._typeahead.getInstance().clear();
-            _.isFunction(onSelect) && selected.length === 1 && onSelect(selected[0].data);
+            if (selected.length){
+              this.typeahead.getInstance().clear();
+            }
+            if ( _.isFunction(onSelect) && selected.length === 1 ){
+              onSelect(selected[0].data);
+            }
           }
         } 
         
@@ -84,22 +88,32 @@ export class BaseTypeahead extends React.Component {
               {
                 _.chain(results)
                   .groupBy("config_group_index")
-                  .map(
-                    (group_results, group_index) => ([
-                      <header key={-1}>
-                        {config_groups[group_index].group_header}
-                      </header>,
-                      ..._.map(
-                        group_results, 
-                        (result, ix) => (
-                          <MenuItem key={ix} option={result} position={ix}>
-                            <Highlighter search={menuProps.text}>
-                              {result.name}
-                            </Highlighter>
-                          </MenuItem>
+                  .thru(
+                    (grouped_results) => {
+                      const group_count = grouped_results.length;
+                      return _.map(
+                        grouped_results,
+                        (results, group_index) => _.filter(
+                          [
+                            group_count > 1 && (
+                              <header key={-1}>
+                                {config_groups[group_index].group_header}
+                              </header>
+                            ),
+                            ..._.map(
+                              results, 
+                              (result, ix) => (
+                                <MenuItem key={ix} option={result} position={ix}>
+                                  <Highlighter search={menuProps.text}>
+                                    {result.name}
+                                  </Highlighter>
+                                </MenuItem>
+                              )
+                            ),
+                          ]
                         )
-                      ),
-                    ])
+                      );
+                    }
                   )
                   .value()
               }
