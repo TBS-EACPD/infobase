@@ -94,7 +94,7 @@ const all_orgs_with_gov = {
     )
   },
   templates: org_templates,
-  data: [Gov, _.reject(Dept.get_all(), "is_dead")],
+  data: [Gov, ..._.reject(Dept.get_all(), "is_dead")],
   filter: (query, data) => _.filter(
     data,
     create_re_matcher(query, org_attributes_to_match)

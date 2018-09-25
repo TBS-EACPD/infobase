@@ -12,7 +12,7 @@ import {
   MenuItem,
 } from 'react-bootstrap-typeahead';
 
-export class BaseTypeahead extends React.component {
+export class BaseTypeahead extends React.Component {
   render(){
     const {
       placeholder,
@@ -65,7 +65,7 @@ export class BaseTypeahead extends React.component {
 
         // API's a bit vague here, this onChange is "on change" set of options selected from the typeahead dropdown. Selected is an array of selected items,
         // but BaseTypeahead will only ever use single selection, so just picking the first (and, we'd expect, only) item and passing it to onSelect is fine
-        onChange = { (selected) => selected.length && onSelect(selected[0]) } 
+        onChange = { (selected) => selected.length && onSelect(selected[0].data) } 
         
         // This is "on change" to the input in the text box
         onInputChange = { (text) => debouncedOnQueryCallback(text) } 
