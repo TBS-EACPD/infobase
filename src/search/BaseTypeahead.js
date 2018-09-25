@@ -26,31 +26,54 @@ export class BaseTypeahead extends React.component {
     const bootstrapSize = large ? "large" : "small";
     const debouncedOnQueryCallback = _.isFunction(onNewQuery) ? _.debounce(onNewQuery, 750) : _.noop;
 
-    // do stuff to get data, groupings, and filter options by grouping out of search_configs here
-    const groups = []; // one grouping per search_config entry, identify by index? 
+    const config_groups = _.map(
+      search_configs,
+      (search_config, ix) => ({
+        group_header: search_config.templates.header(),
+        group_filter: search_config.filter,
+      })
+    );
 
-    const filterBy = []; // need to build filter a filter function here that is smart about the different groupings in search_config
+    const all_options = _.flatMap( 
+      search_configs,
+      (search_config, ix) => _.map(
+        search_config.data,
+        data => ({
+          data,
+          name: search_config.templates.suggestion(data),
+          config_group_index: ix,
+        })
+      )
+    );
 
-    const all_data = []; // all data from search_configs, paired with group header so filterBy can tell how to filter it
+    const filterBy = (option, props) => {
+      const query = props.text;
+      const group_filter = config_groups[option.config_group_index].group_filter;
+
+      // This is a bit weird because Typeahead wants to apply a filter function to individual items with get a boolean return, but the old search config
+      // filter functions expect to be filtering all their data against a query, returning an array of matching items. Will update the functions in search_configs
+      // later
+      return !_.isEmpty( group_filter(query, option) );
+    };
 
     return (
       <Typeahead
         emptyLabel = { "TODO: need text key for no matches found" }
-        placeholder
-        minLength
+        placeholder = { placeholder }
+        minLength = { minLength }
         bsSize = { bootstrapSize }
 
-        // API's a bit vague here, this onChange is "on change" in selection of options from the typeahead dropdown. Selected is an array of selected items,
-        // but BaseTypeahead will only ever use single selection, so just picking the first item and passing it to onSelect is fine
+        // API's a bit vague here, this onChange is "on change" set of options selected from the typeahead dropdown. Selected is an array of selected items,
+        // but BaseTypeahead will only ever use single selection, so just picking the first (and, we'd expect, only) item and passing it to onSelect is fine
         onChange = { (selected) => selected.length && onSelect(selected[0]) } 
-
-        onInputChange = { (text) => debouncedOnQueryCallback(text) } // this is on change to the input in the text box
-
-        filterBy
+        
+        // This is "on change" to the input in the text box
+        onInputChange = { (text) => debouncedOnQueryCallback(text) } 
 
         // API's a bit vague here, options is the data to search over, not a config object
-        options = { all_data } 
+        options = { all_options } 
 
+        filterBy = { filterBy }
         renderMenu = {
           (results, menuProps) => (
             <Menu {...menuProps}>
@@ -71,7 +94,7 @@ export class BaseTypeahead extends React.component {
                             </Highlighter>
                           </MenuItem>
                         )
-                      )
+                      ),
                     ])
                   )
               }
