@@ -54,6 +54,7 @@ export class BaseTypeahead extends React.Component {
 
     return (
       <Typeahead
+        ref={(ref) => this._typeahead = ref}
         labelKey = "name"
         maxResults = { Infinity }
         emptyLabel = { "TODO: need text key for no matches found" }
@@ -63,7 +64,12 @@ export class BaseTypeahead extends React.Component {
 
         // API's a bit vague here, this onChange is "on change" set of options selected from the typeahead dropdown. Selected is an array of selected items,
         // but BaseTypeahead will only ever use single selection, so just picking the first (and, we'd expect, only) item and passing it to onSelect is fine
-        onChange = { (selected) => _.isFunction(onSelect) && selected.length === 1 && onSelect(selected[0].data) } 
+        onChange = { 
+          (selected) => {
+            this._typeahead.getInstance().clear();
+            _.isFunction(onSelect) && selected.length === 1 && onSelect(selected[0].data);
+          }
+        } 
         
         // This is "on change" to the input in the text box
         onInputChange = { (text) => debouncedOnQueryCallback(text) } 
