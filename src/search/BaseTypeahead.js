@@ -55,6 +55,7 @@ export class BaseTypeahead extends React.Component {
     return (
       <Typeahead
         labelKey = "name"
+        maxResults = {Infinity}
         emptyLabel = { "TODO: need text key for no matches found" }
         placeholder = { placeholder }
         minLength = { minLength }
