@@ -61,7 +61,7 @@ const orgs_with_data_with_gov = {
     )
   },
   templates: org_templates,
-  data: [Gov].concat( Dept.depts_with_data() ),
+  get_data: () => [Gov].concat( Dept.depts_with_data() ),
   filter: (query, data) => _.filter(
     data,
     create_re_matcher(query, org_attributes_to_match)
@@ -77,7 +77,7 @@ const all_orgs_without_gov = {
     )
   },
   templates: org_templates,
-  data: Dept.get_all(),
+  get_data: () => Dept.get_all(),
   filter: (query, data) => _.filter(
     data,
     create_re_matcher(query, org_attributes_to_match)
@@ -94,12 +94,13 @@ const all_orgs_with_gov = {
     )
   },
   templates: org_templates,
-  data: [Gov, ..._.reject(Dept.get_all(), "is_dead")],
+  get_data: () => [ Gov ].concat( _.reject(Dept.get_all(), "is_dead") ),
   filter: (query, data) => _.filter(
     data,
     create_re_matcher(query, org_attributes_to_match)
   ),
 };
+
 
 const all_dp_orgs = {
   query_matcher: () => {
@@ -110,7 +111,7 @@ const all_dp_orgs = {
     )
   },
   templates: org_templates,
-  data: _.filter(Dept.get_all(), 'dp_status'),
+  get_data: () => _.filter(Dept.get_all(), 'dp_status'),
   filter: (query, data) => _.filter(
     data,
     create_re_matcher(query, org_attributes_to_match)
@@ -141,7 +142,7 @@ const glossary = {
     ),
     header: ()=> trivial_text_maker('glossary'),
   },
-  data: GlossaryEntry.fully_defined_entries,
+  get_data: () => GlossaryEntry.fully_defined_entries,
   filter: (query, data) => _.filter(
     data,
     create_re_matcher(query, glossary_attributes_to_match)
@@ -158,9 +159,9 @@ const glossary_lite = {
   },
   templates: {
     suggestion: _.property('title'),
-    header: ()=> trivial_text_maker('glossary'),
+    header: () => trivial_text_maker('glossary'),
   },
-  data: GlossaryEntry.fully_defined_entries,
+  get_data: () => GlossaryEntry.fully_defined_entries,
   filter: (query, data) => query.length > 10 && _.filter(
     data,
     create_re_matcher(query, glossary_attributes_to_match)
@@ -170,7 +171,7 @@ const glossary_lite = {
 
 const gocos = {
   query_matcher: () => {
-    const goco_root =Tag.tag_roots.GOCO; 
+    const goco_root = Tag.tag_roots.GOCO; 
     const to_search = _.chain(Tag.get_all())
       .filter( ({root}) => root === goco_root )
       .filter('is_lowest_level_tag')
@@ -181,10 +182,10 @@ const gocos = {
     );
   },
   templates: {
-    header: ()=> `${Tag.plural} - ${Tag.tag_roots.GOCO.name}`,
+    header: () => `${Tag.plural} - ${Tag.tag_roots.GOCO.name}`,
     suggestion: _.property('name'),
   },
-  data: _.chain(Tag.get_all())
+  get_data: () => _.chain(Tag.get_all())
     .filter( ({root}) => root === Tag.tag_roots.GOCO )
     .filter('is_lowest_level_tag')
     .value(),
@@ -206,7 +207,7 @@ const how_we_help = {
     header: ()=> `${Tag.plural} - ${Tag.tag_roots.HWH.name}`,
     suggestion: _.property('name'),
   },
-  data: _.filter(Tag.get_all(), {root: Tag.tag_roots.HWH}),
+  get_data: () => _.filter(Tag.get_all(), {root: Tag.tag_roots.HWH}),
   filter: (query, data) => _.filter(
     data,
     create_re_matcher(query, ['name', 'description'])
@@ -241,7 +242,7 @@ const datasets = {
     header: ()=> trivial_text_maker('build_a_report'),
     suggestion: table => table.title,
   },
-  data: _.chain(Table.get_all())
+  get_data: () => _.chain(Table.get_all())
     .reject('reference_table')
     .map( t => ({
       name: t.name,
@@ -274,7 +275,7 @@ const programs = {
     suggestion: program => `${program.name} (${program.dept.sexy_name})`,
     header: ()=> trivial_text_maker('programs'),
   },
-  data: _.reject(Program.get_all(), 'dead_program'),
+  get_data: () => _.reject(Program.get_all(), 'dead_program'),
   filter: (query, data) => _.filter(
     data,
     create_re_matcher(query, ['name', 'description'])
@@ -294,7 +295,7 @@ const crsos = {
     suggestion: crso => `${crso.name} (${crso.dept.sexy_name})`,
     header: ()=> trivial_text_maker('core_resps'),
   },
-  data: _.filter(CRSO.get_all(), 'is_cr'),
+  get_data: () => _.filter(CRSO.get_all(), 'is_cr'),
   filter: (query, data) => _.filter(
     data,
     create_re_matcher(query, ['name'])

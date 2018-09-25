@@ -37,7 +37,7 @@ export class BaseTypeahead extends React.Component {
     const all_options = _.flatMap( 
       search_configs,
       (search_config, ix) => _.map(
-        search_config.data,
+        search_config.get_data(),
         data => ({
           data,
           name: search_config.templates.suggestion(data),
