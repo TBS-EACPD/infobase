@@ -49,15 +49,12 @@ export class BaseTypeahead extends React.Component {
     const filterBy = (option, props) => {
       const query = props.text;
       const group_filter = config_groups[option.config_group_index].group_filter;
-
-      // This is a bit weird because Typeahead wants to apply a filter function to individual items with get a boolean return, but the old search config
-      // filter functions expect to be filtering all their data against a query, returning an array of matching items. Will update the functions in search_configs
-      // later
-      return !_.isEmpty( group_filter(query, option) );
+      return group_filter(query, option.data);
     };
 
     return (
       <Typeahead
+        labelKey = "name"
         emptyLabel = { "TODO: need text key for no matches found" }
         placeholder = { placeholder }
         minLength = { minLength }
@@ -65,7 +62,7 @@ export class BaseTypeahead extends React.Component {
 
         // API's a bit vague here, this onChange is "on change" set of options selected from the typeahead dropdown. Selected is an array of selected items,
         // but BaseTypeahead will only ever use single selection, so just picking the first (and, we'd expect, only) item and passing it to onSelect is fine
-        onChange = { (selected) => selected.length && onSelect(selected[0].data) } 
+        onChange = { (selected) => _.isFunction(onSelect) && selected.length === 1 && onSelect(selected[0].data) } 
         
         // This is "on change" to the input in the text box
         onInputChange = { (text) => debouncedOnQueryCallback(text) } 
@@ -79,24 +76,25 @@ export class BaseTypeahead extends React.Component {
             <Menu {...menuProps}>
               {
                 _.chain(results)
-                  .groupBy("heading")
+                  .groupBy("config_group_index")
                   .map(
-                    (items) => ([
+                    (group_results, group_index) => ([
                       <header key={-1}>
-                        {items[0].heading}
+                        {config_groups[group_index].group_header}
                       </header>,
                       ..._.map(
-                        items, 
-                        (item, ix) => (
-                          <MenuItem key={ix} option={item} position={ix}>
+                        group_results, 
+                        (result, ix) => (
+                          <MenuItem key={ix} option={result} position={ix}>
                             <Highlighter search={menuProps.text}>
-                              {item.name}
+                              {result.name}
                             </Highlighter>
                           </MenuItem>
                         )
                       ),
                     ])
                   )
+                  .value()
               }
             </Menu>
           )

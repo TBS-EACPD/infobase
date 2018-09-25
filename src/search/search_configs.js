@@ -27,7 +27,6 @@ function create_re_matcher(query, accessors){
       }
     })
     .value();
-
 }
 
 const org_attributes_to_match = [ 
@@ -62,10 +61,7 @@ const orgs_with_data_with_gov = {
   },
   templates: org_templates,
   get_data: () => [Gov].concat( Dept.depts_with_data() ),
-  filter: (query, data) => _.filter(
-    data,
-    create_re_matcher(query, org_attributes_to_match)
-  ),
+  filter: (query, datum) => create_re_matcher(query, org_attributes_to_match)(datum),
 };
 
 const all_orgs_without_gov = {
@@ -78,10 +74,7 @@ const all_orgs_without_gov = {
   },
   templates: org_templates,
   get_data: () => Dept.get_all(),
-  filter: (query, data) => _.filter(
-    data,
-    create_re_matcher(query, org_attributes_to_match)
-  ),
+  filter: (query, datum) => create_re_matcher(query, org_attributes_to_match)(datum),
 };
 
 const all_orgs_with_gov = {
@@ -95,10 +88,7 @@ const all_orgs_with_gov = {
   },
   templates: org_templates,
   get_data: () => [ Gov ].concat( _.reject(Dept.get_all(), "is_dead") ),
-  filter: (query, data) => _.filter(
-    data,
-    create_re_matcher(query, org_attributes_to_match)
-  ),
+  filter: (query, datum) => create_re_matcher(query, org_attributes_to_match)(datum),
 };
 
 
@@ -112,10 +102,7 @@ const all_dp_orgs = {
   },
   templates: org_templates,
   get_data: () => _.filter(Dept.get_all(), 'dp_status'),
-  filter: (query, data) => _.filter(
-    data,
-    create_re_matcher(query, org_attributes_to_match)
-  ),
+  filter: (query, datum) => create_re_matcher(query, org_attributes_to_match)(datum),
 };
 
 const glossary_attributes_to_match = [
@@ -143,10 +130,7 @@ const glossary = {
     header: ()=> trivial_text_maker('glossary'),
   },
   get_data: () => GlossaryEntry.fully_defined_entries,
-  filter: (query, data) => _.filter(
-    data,
-    create_re_matcher(query, glossary_attributes_to_match)
-  ),
+  filter: (query, datum) => create_re_matcher(query, glossary_attributes_to_match)(datum),
 };
 
 const glossary_lite = {
@@ -162,10 +146,7 @@ const glossary_lite = {
     header: () => trivial_text_maker('glossary'),
   },
   get_data: () => GlossaryEntry.fully_defined_entries,
-  filter: (query, data) => query.length > 10 && _.filter(
-    data,
-    create_re_matcher(query, glossary_attributes_to_match)
-  ),
+  filter: (query, datum) => create_re_matcher(query, glossary_attributes_to_match)(datum),
 };
 
 
@@ -189,10 +170,7 @@ const gocos = {
     .filter( ({root}) => root === Tag.tag_roots.GOCO )
     .filter('is_lowest_level_tag')
     .value(),
-  filter: (query, data) => _.filter(
-    data,
-    create_re_matcher(query, ['name', 'description'])
-  ),
+  filter: (query, datum) => create_re_matcher(query, ['name', 'description'])(datum),
 };
 
 const how_we_help = {
@@ -208,10 +186,7 @@ const how_we_help = {
     suggestion: _.property('name'),
   },
   get_data: () => _.filter(Tag.get_all(), {root: Tag.tag_roots.HWH}),
-  filter: (query, data) => _.filter(
-    data,
-    create_re_matcher(query, ['name', 'description'])
-  ),
+  filter: (query, datum) => create_re_matcher(query, ['name', 'description'])(datum),
 };
 
 const datasets = {
@@ -257,10 +232,7 @@ const datasets = {
       table: t,
     }))
     .value(),
-  filter: (query, data) => _.filter(
-    data,
-    create_re_matcher(query, ['name', 'flat_tag_titles']) 
-  ),
+  filter: (query, datum) => create_re_matcher(query, ['name', 'flat_tag_titles'])(datum),
 };
 
 const programs = {
@@ -276,10 +248,7 @@ const programs = {
     header: ()=> trivial_text_maker('programs'),
   },
   get_data: () => _.reject(Program.get_all(), 'dead_program'),
-  filter: (query, data) => _.filter(
-    data,
-    create_re_matcher(query, ['name', 'description'])
-  ),
+  filter: (query, datum) => create_re_matcher(query, ['name', 'description'])(datum),
 }
 
 //only include CRs because SO's have really really long names
@@ -296,10 +265,7 @@ const crsos = {
     header: ()=> trivial_text_maker('core_resps'),
   },
   get_data: () => _.filter(CRSO.get_all(), 'is_cr'),
-  filter: (query, data) => _.filter(
-    data,
-    create_re_matcher(query, ['name'])
-  ),
+  filter: (query, datum) => create_re_matcher(query, ['name'])(datum),
 }
 
 export {
