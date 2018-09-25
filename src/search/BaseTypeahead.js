@@ -1,7 +1,7 @@
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 // Uncomment followingl ine once we've moved to bootstrap4
 // import 'react-bootstrap-typeahead/css/Typeahead-bs4.css';
-import './GeneralizedSearch.scss';
+import './BaseTypeahead.scss';
 
 import { trivial_text_maker } from '../models/text.js';
 
@@ -12,7 +12,7 @@ import {
   MenuItem,
 } from 'react-bootstrap-typeahead';
 
-export class GeneralizedSearch extends React.component {
+export class BaseTypeahead extends React.component {
   render(){
     const {
       placeholder,
@@ -33,8 +33,6 @@ export class GeneralizedSearch extends React.component {
 
     const all_data = []; // all data from search_configs, paired with group header so filterBy can tell how to filter it
 
-   
-
     return (
       <Typeahead
         emptyLabel = { "TODO: need text key for no matches found" }
@@ -43,7 +41,7 @@ export class GeneralizedSearch extends React.component {
         bsSize = { bootstrapSize }
 
         // API's a bit vague here, this onChange is "on change" in selection of options from the typeahead dropdown. Selected is an array of selected items,
-        // but GeneralizedSearch will only ever use single selection, so just picking the first item and passing it to onSelect is fine
+        // but BaseTypeahead will only ever use single selection, so just picking the first item and passing it to onSelect is fine
         onChange = { (selected) => selected.length && onSelect(selected[0]) } 
 
         onInputChange = { (text) => debouncedOnQueryCallback(text) } // this is on change to the input in the text box
@@ -54,19 +52,38 @@ export class GeneralizedSearch extends React.component {
         options = { all_data } 
 
         renderMenu = {
-          (results, menuProps) => {
-            // map results (options matching query) to array of react components, including group headers and MenuItem components
-            const result_items = [];
-
-            return <Menu {...menuProps}>{result_items}</Menu>;
-          }
+          (results, menuProps) => (
+            <Menu {...menuProps}>
+              {
+                _.chain(results)
+                  .groupBy("heading")
+                  .map(
+                    (items) => ([
+                      <header key={-1}>
+                        {items[0].heading}
+                      </header>,
+                      ..._.map(
+                        items, 
+                        (item, ix) => (
+                          <MenuItem key={ix} option={item} position={ix}>
+                            <Highlighter search={menuProps.text}>
+                              {item.name}
+                            </Highlighter>
+                          </MenuItem>
+                        )
+                      )
+                    ])
+                  )
+              }
+            </Menu>
+          )
         }
       />
     );
   }
 }
 
-GeneralizedSearch.defaultProps = {
+BaseTypeahead.defaultProps = {
   minLength: 3,
   placeholder: trivial_text_maker("org_search"),
 }
