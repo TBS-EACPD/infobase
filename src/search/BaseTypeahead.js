@@ -3,8 +3,6 @@ import 'react-bootstrap-typeahead/css/Typeahead.css';
 // import 'react-bootstrap-typeahead/css/Typeahead-bs4.css';
 import './BaseTypeahead.scss';
 
-import { trivial_text_maker } from '../models/text.js';
-
 import { 
   Typeahead,
   Highlighter,
@@ -12,7 +10,24 @@ import {
   MenuItem,
 } from 'react-bootstrap-typeahead';
 
+import { get_static_url } from '../core/request_utils.js';
+import { trivial_text_maker } from '../models/text.js';
+
 export class BaseTypeahead extends React.Component {
+  componentDidMount(){
+    this.typeahead.componentNode
+      .querySelector(".rbt-input-hint-container")
+      .insertAdjacentHTML(
+        'beforeend', 
+        `<div class="search-icon-container">
+          <span 
+            aria-hidden="true"
+          >
+          <img src="${get_static_url("svg/search.svg")}" style="width:30px;height:30px;" />
+          </span>
+        </div>`
+      );
+  }
   render(){
     const {
       placeholder,
