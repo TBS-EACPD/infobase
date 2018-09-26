@@ -183,6 +183,7 @@ const SubjectFilterPicker = ({ subject, onSelect })=> <div style={{paddingTop: '
       className={classNames("btn btn-ib-primary", {"btn-ib-primary--selected": subject.guid==="gov_gov"})}
       style={{ 
         width: '100%',
+        verticalAlign: 'baseline',
       }}
     > 
       <TextMaker text_key="see_all_data" args={{selected:subject.guid==='gov_gov'}} />

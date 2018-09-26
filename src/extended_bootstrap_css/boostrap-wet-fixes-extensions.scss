@@ -312,21 +312,6 @@ li.list-group-item {
   color: white;
 }
 
-
-/* fix odd twitter typeahead style*/
-.form-inline .form-control {
-    vertical-align: middle !important;
-}
-
-.form-control.form-control-ib { 
-  border: 1.4px solid #3281EA;
-  box-shadow: none !important;
-}
-
-.twitter-typeahead, .twitter-typeahead input {
-	width: 100% !important;
-}
-
 /* for table striped header */
 .table-striped>tbody>tr:nth-child(odd) {
   background-color: #f5f5f5;

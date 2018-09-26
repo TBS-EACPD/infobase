@@ -126,6 +126,7 @@ export class BaseTypeahead extends React.Component {
 }
 
 BaseTypeahead.defaultProps = {
-  minLength: 3,
   placeholder: trivial_text_maker("org_search"),
+  minLength: 3,
+  large: true,
 }

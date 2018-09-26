@@ -1,4 +1,4 @@
-// expecting to have some style overwrites/extensions to put in here
+@import "../common_css/common-variables";
 
 .rbt-input-hint-container > .form-control {
   width: 100%;
@@ -6,4 +6,41 @@
 
 .rbt-input-hint {
   visibility: hidden;
+}
+
+.rbt-menu {
+  width: 100%;
+  margin-top: 12px;
+  padding: 8px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+  max-height: 400px;
+  overflow-y: auto;
+  max-width: 100vw;
+
+  & > li {
+    padding: 3px 20px;
+    font-size: 1.4em;
+    line-height: 1.8em;
+    cursor: pointer;
+
+    &:not(:first-child){
+      border-top: 1px solid #eee;
+    }
+
+    & > a {
+      white-space: normal;
+      color: $ibLinkColor;
+    }
+  }
+}
+
+.rbt-menu.dropdown-menu > .active > a,
+.rbt-menu.dropdown-menu > .active > a:focus,
+.rbt-menu.dropdown-menu > .active > a:hover {
+  background-color: #aec8d8;
+  color: $ibLinkColor;
 }
