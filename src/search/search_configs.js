@@ -29,6 +29,12 @@ function create_re_matcher(query, accessors){
     .value();
 }
 
+
+const memoized_re_matchers = _.memoize(
+  create_re_matcher,
+  (query, accessors, config_name) => query + config_name
+);
+
 const org_attributes_to_match = [ 
   'legal_name', 
   'applied_title',
@@ -54,26 +60,26 @@ const org_templates = {
 const orgs_with_data_with_gov = {
   ...org_templates,
   get_data: () => [Gov].concat( Dept.depts_with_data() ),
-  filter: (query, datum) => create_re_matcher(query, org_attributes_to_match)(datum),
+  filter: (query, datum) => memoized_re_matchers(query, org_attributes_to_match, "orgs_with_data_with_gov")(datum),
 };
 
 const all_orgs_without_gov = {
   ...org_templates,
   get_data: () => Dept.get_all(),
-  filter: (query, datum) => create_re_matcher(query, org_attributes_to_match)(datum),
+  filter: (query, datum) => memoized_re_matchers(query, org_attributes_to_match, "all_orgs_without_gov")(datum),
 };
 
 const all_orgs_with_gov = {
   ...org_templates,
   get_data: () => [ Gov ].concat( _.reject(Dept.get_all(), "is_dead") ),
-  filter: (query, datum) => create_re_matcher(query, org_attributes_to_match)(datum),
+  filter: (query, datum) => memoized_re_matchers(query, org_attributes_to_match, "all_orgs_with_gov")(datum),
 };
 
 
 const all_dp_orgs = {
   ...org_templates,
   get_data: () => _.filter(Dept.get_all(), 'dp_status'),
-  filter: (query, datum) => create_re_matcher(query, org_attributes_to_match)(datum),
+  filter: (query, datum) => memoized_re_matchers(query, org_attributes_to_match, "all_dp_orgs")(datum),
 };
 
 const glossary_attributes_to_match = [
@@ -92,14 +98,14 @@ const glossary = {
     </div>
   `,
   get_data: () => GlossaryEntry.fully_defined_entries,
-  filter: (query, datum) => create_re_matcher(query, glossary_attributes_to_match)(datum),
+  filter: (query, datum) => memoized_re_matchers(query, glossary_attributes_to_match, "glossary")(datum),
 };
 
 const glossary_lite = {
   header_function: () => trivial_text_maker('glossary'),
   name_function: _.property('title'),
   get_data: () => GlossaryEntry.fully_defined_entries,
-  filter: (query, datum) => create_re_matcher(query, glossary_attributes_to_match)(datum),
+  filter: (query, datum) => memoized_re_matchers(query, glossary_attributes_to_match, "glossary_lite")(datum),
 };
 
 
@@ -110,14 +116,14 @@ const gocos = {
     .filter( ({root}) => root === Tag.tag_roots.GOCO )
     .filter('is_lowest_level_tag')
     .value(),
-  filter: (query, datum) => create_re_matcher(query, ['name', 'description'])(datum),
+  filter: (query, datum) => memoized_re_matchers(query, ['name', 'description'], "gocos")(datum),
 };
 
 const how_we_help = {
   header_function: () => `${Tag.plural} - ${Tag.tag_roots.HWH.name}`,
   name_function: _.property('name'),
   get_data: () => _.filter(Tag.get_all(), {root: Tag.tag_roots.HWH}),
-  filter: (query, datum) => create_re_matcher(query, ['name', 'description'])(datum),
+  filter: (query, datum) => memoized_re_matchers(query, ['name', 'description'], "how_we_help")(datum),
 };
 
 const datasets = {
@@ -138,23 +144,23 @@ const datasets = {
       table: t,
     }))
     .value(),
-  filter: (query, datum) => create_re_matcher(query, ['name', 'flat_tag_titles'])(datum),
+  filter: (query, datum) => memoized_re_matchers(query, ['name', 'flat_tag_titles'], "datasets")(datum),
 };
 
 const programs = {
   header_function: () => trivial_text_maker('programs'),
   name_function: program => `${program.name} (${program.dept.sexy_name})`,
   get_data: () => _.reject(Program.get_all(), 'dead_program'),
-  filter: (query, datum) => create_re_matcher(query, ['name', 'description'])(datum),
-}
+  filter: (query, datum) => memoized_re_matchers(query, ['name', 'description'], "programs")(datum),
+};
 
 //only include CRs because SO's have really really long names
 const crsos = {
   header_function: () => trivial_text_maker('core_resps'),
   name_function: crso => `${crso.name} (${crso.dept.sexy_name})`,
   get_data: () => _.filter(CRSO.get_all(), 'is_cr'),
-  filter: (query, datum) => create_re_matcher(query, ['name'])(datum),
-}
+  filter: (query, datum) => memoized_re_matchers(query, ['name'], "crsos")(datum),
+};
 
 export {
   all_orgs_without_gov,
