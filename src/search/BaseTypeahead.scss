@@ -24,9 +24,12 @@
   & > header {
     margin-top: 0px;
     padding: 0px 20px 3px 10px;
-    border-bottom: 1px solid #eee;
     font-size: 1.8em;
     line-height: 1.8em;
+    border-bottom: 1px solid #eee;
+    &:not(:first-child) {
+      border-top: 1px solid #eee;
+    }
   }
 
   & > li {
@@ -35,7 +38,7 @@
     line-height: 1.8em;
     cursor: pointer;
 
-    &:not(:first-child){
+    &:not(:first-child) {
       border-top: 1px solid #eee;
     }
 
@@ -48,7 +51,7 @@
 
 .rbt-menu.dropdown-menu > .active > a,
 .rbt-menu.dropdown-menu > .active > a:focus,
-.rbt-menu.dropdown-menu > .active > a:hover {
+.rbt-menu.dropdown-menu > li > a:hover, {
   background-color: #aec8d8;
   color: $ibLinkColor;
 }
