@@ -22,7 +22,7 @@ import { FilterTable } from './components/FilterTable.js';
 
 import { abbrev } from './core/utils.js';
 
-import { DeptSearch } from './search/DeptSearch.js';
+import { DeptSearch, DeptSearchWithoutRouter } from './search/DeptSearch.js';
 import { EverythingSearch } from './search/EverythingSearch.js';
 import { GlossarySearch } from './search/GlossarySearch.js';
 
@@ -93,6 +93,7 @@ export {
   Format,
   FancyUL,
   DeptSearch,
+  DeptSearchWithoutRouter,
   EverythingSearch,
   GlossarySearch,
   TextMaker,

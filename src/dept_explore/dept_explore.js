@@ -3,7 +3,6 @@ import { StandardRouteContainer } from '../core/NavComponents.js';
 import { infograph_href_template } from '../link_utils.js';
 import { Pack } from '../core/charts_index.js';
 import { abbrev } from '../core/utils.js';
-import { deptSearch } from '../search/search.js';
 import { formats } from '../core/format.js';
 import { get_info } from '../core/Statistics.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
@@ -12,6 +11,9 @@ import { Subject } from '../models/subject.js';
 import { text_maker, TM } from './text_provider.js';
 
 import { by_dept_type, by_min_dept, by_this_year_emp } from './data_schemes.js';
+
+import { reactAdapter } from '../core/reactAdapter.js';
+import { DeptSearchWithoutRouter } from '../util_components.js';
 
 const { Gov } = Subject;
 
@@ -78,20 +80,24 @@ p.build_graphic = function(data,depts,formater){
   let chart;
 
   const dept_search_node = container.node().querySelector("#__dept_search");
-  deptSearch( dept_search_node, {
-    include_gov : true,
-    search_text :  text_maker("org_search"),
-    onSelect: subject => {
-      dept_search_node.scrollIntoView();
-      Pack.navigate_packing(
-        chart.dispatch,
-        chart.root,
-        d => d.data.name === subject.sexy_name,
-        750
-      );
-    },
-  });
-  d3.select(dept_search_node).attr('aria-hidden', true);
+  reactAdapter.render(
+    <DeptSearchWithoutRouter
+      include_gov = { true }
+      search_text = { text_maker("org_search") }
+      onSelect = {
+        subject => {
+          dept_search_node.scrollIntoView();
+          Pack.navigate_packing(
+            chart.dispatch,
+            chart.root,
+            d => d.data.name === subject.sexy_name,
+            750
+          );
+        }
+      }
+    />,
+    dept_search_node
+  );
   
   const colors = d3.scaleOrdinal(d3.schemeCategory10);
 
@@ -246,9 +252,9 @@ class BubbleExplore_ extends React.Component {
 
     el.innerHTML = "";
     
-    const sub_app_container = d3.select(el).append('div').attr('aria-hidden',true);
+    const sub_app_container = d3.select(el).append('div').attr('aria-hidden', true);
 
-    const spin_el =  new Spinner({scale:4}).spin().el;
+    const spin_el = new Spinner({scale:4}).spin().el;
     el.appendChild(spin_el)
     ensure_loaded({
       stat_keys : [ 
