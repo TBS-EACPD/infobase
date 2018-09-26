@@ -24,6 +24,7 @@ import { abbrev } from './core/utils.js';
 
 import { DeptSearch } from './search/DeptSearch.js';
 import { EverythingSearch } from './search/EverythingSearch.js';
+import { GlossarySearch } from './search/GlossarySearch.js';
 
 // Misc. utility components that don't justify having their own file in ./components, for various reasons
 
@@ -93,6 +94,7 @@ export {
   FancyUL,
   DeptSearch,
   EverythingSearch,
+  GlossarySearch,
   TextMaker,
   TM,
   TrivialTextMaker,

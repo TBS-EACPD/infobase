@@ -5,33 +5,13 @@ import {
   StandardRouteContainer,
   ScrollToTargetContainer,
 } from '../core/NavComponents.js';
-import {autoComplete} from '../search/search.js';
-import {GlossaryEntry} from '../models/glossary.js';
-import { glossary as glossary_search_config } from '../search/search_configs.js';
-import withRouter from 'react-router/withRouter';
-import { create_text_maker_component } from '../util_components.js';
+import { GlossaryEntry } from '../models/glossary.js';
+import { 
+  create_text_maker_component,
+  GlossarySearch,
+} from '../util_components.js';
 
 const { text_maker, TM } = create_text_maker_component(glossary_text);
-
-const item_url = item_key => `/glossary/${item_key}`
-
-const GlossarySearch = withRouter(
-  class GlossarySearch_ extends React.Component {
-    render(){ return <div ref={el=> this.el = el} /> }
-    componentDidMount(){
-      const { history } = this.props;
-      autoComplete({
-        container: this.el,
-        placeholder: text_maker("glossary_search"),
-        search_configs: [ glossary_search_config ],
-        onSelect: item => {
-          history.push(item_url(item.id));
-        },
-        minLength: 4,
-      });
-    }
-  }
-);
 
 function get_glossary_items_by_letter(){
   const glossary_items = GlossaryEntry.fully_defined_entries;
