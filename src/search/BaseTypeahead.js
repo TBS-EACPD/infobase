@@ -111,9 +111,9 @@ export class BaseTypeahead extends React.Component {
                         grouped_results,
                         (results, group_index) => [
                           group_count > 1 && (
-                            <header key={index_key_counter++}>
+                            <Menu.Header key={`header-${group_index}`}>
                               {config_groups[group_index].group_header}
-                            </header>
+                            </Menu.Header>
                           ),
                           ..._.map(
                             results, 
