@@ -69,6 +69,10 @@
   }
 }
 
+.search-grayed-out-hint {
+  opacity: 0.8;
+}
+
 input::-ms-clear {
   display: none;
   width: 0;

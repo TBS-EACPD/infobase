@@ -121,9 +121,7 @@ export class BaseTypeahead extends React.Component {
                               const index = index_key_counter++;
                               return (
                                 <MenuItem key={index} position={index} option={result}>
-                                  <Highlighter search={menuProps.text}>
-                                    {result.name}
-                                  </Highlighter>
+                                  <span dangerouslySetInnerHTML={{__html: result.name}}/>
                                 </MenuItem>
                               );
                             }

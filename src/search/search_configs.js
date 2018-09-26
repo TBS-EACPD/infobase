@@ -119,14 +119,14 @@ const glossary = {
     );
   },
   templates: {
-    suggestion: glossaryItem => (
-      `<div style="font-size:14px"> 
-         <a class="typeahead scroll" href="#">${glossaryItem.title}</a> 
-       </div>
-       <div  style='padding: 0px 20px 20px 20px;font-size:12px;line-height:1;border-bottom:1px solid #CCC'> 
-         ${glossaryItem.definition}
-       </div>`
-    ),
+    suggestion: glossaryItem => `
+      <div style="font-size:14px; line-height:1.8em; padding:5px 0px;"> 
+        ${glossaryItem.title}
+      </div>
+      <div style='color:#333; padding:0px 20px 20px 20px; font-size:12px; line-height:1; border-bottom:1px solid #CCC;'> 
+        ${glossaryItem.definition}
+      </div>
+    `,
     header: ()=> trivial_text_maker('glossary'),
   },
   get_data: () => GlossaryEntry.fully_defined_entries,
