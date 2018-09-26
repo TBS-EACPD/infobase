@@ -1,6 +1,4 @@
-import { default as withRouter } from 'react-router/withRouter';
 import classNames from 'classnames';
-import { everythingSearch } from './search/search.js';
 import { run_template, trivial_text_maker, create_text_maker } from './models/text.js';
 import { formats } from './core/format.js';
 
@@ -25,6 +23,7 @@ import { FilterTable } from './components/FilterTable.js';
 import { abbrev } from './core/utils.js';
 
 import { DeptSearch } from './search/DeptSearch.js';
+import { EverythingSearch } from './search/EverythingSearch.js';
 
 // Misc. utility components that don't justify having their own file in ./components, for various reasons
 
@@ -42,16 +41,6 @@ class Format extends React.PureComponent {
     />;
   }
 }
-
-const EverythingSearch = withRouter(
-  class EverythingSearch extends React.Component {
-    render(){ return <div ref="main" /> }
-    componentDidMount(){
-      everythingSearch(this.refs.main, this.props);
-    }
-  }
-);
-
 
 class SpinnerWrapper extends React.Component {
   render(){ return <div ref="main" /> }

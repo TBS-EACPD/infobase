@@ -105,28 +105,30 @@ export class BaseTypeahead extends React.Component {
                   .groupBy("config_group_index")
                   .thru(
                     (grouped_results) => {
-                      const group_count = grouped_results.length;
-                      return _.map(
+                      let index_key_counter = 0;
+                      const group_count = _.keys(grouped_results).length;
+                      return _.flatMap(
                         grouped_results,
-                        (results, group_index) => _.filter(
-                          [
-                            group_count > 1 && (
-                              <header key={-1}>
-                                {config_groups[group_index].group_header}
-                              </header>
-                            ),
-                            ..._.map(
-                              results, 
-                              (result, ix) => (
-                                <MenuItem key={ix} option={result} position={ix}>
+                        (results, group_index) => [
+                          group_count > 1 && (
+                            <header key={index_key_counter++}>
+                              {config_groups[group_index].group_header}
+                            </header>
+                          ),
+                          ..._.map(
+                            results, 
+                            (result) => {
+                              const index = index_key_counter++;
+                              return (
+                                <MenuItem key={index} position={index} option={result}>
                                   <Highlighter search={menuProps.text}>
                                     {result.name}
                                   </Highlighter>
                                 </MenuItem>
-                              )
-                            ),
-                          ]
-                        )
+                              );
+                            }
+                          ),
+                        ]
                       );
                     }
                   )
