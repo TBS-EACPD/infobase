@@ -60,7 +60,7 @@ export class BaseTypeahead extends React.Component {
         })
       )
     );
-
+    
     const filterBy = (option, props) => {
       const query = props.text;
       const group_filter = config_groups[option.config_group_index].group_filter;

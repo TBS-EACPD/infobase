@@ -6,30 +6,36 @@ import { trivial_text_maker } from '../models/text.js';
 
 const { Dept, Gov, Program, Tag, CRSO } = Subject;
 
-function create_re_matcher(query, accessors){
+function create_re_matcher(query, accessors, config_name){
 
   const raw_tokens = query.split(" ");
 
   const reg_exps = _.map(raw_tokens, token => new RegExp( escapeRegExp(_.deburr(token) ), 'gi') );
 
-  return obj => _.chain(accessors)
+  const re_matcher = obj => _.chain(accessors)
     .map(accessor => (
       _.isString(accessor) ? 
         obj[accessor] :
         accessor(obj)
     ))
     .some(str => {
-      if(!_.isString(str)){
+      if( !_.isString(str) ){
         return false;
       } else { 
         str = _.deburr(str)
-        return _.every(reg_exps, re => str.match(re))
+        return _.every( reg_exps, re => str.match(re) )
       }
     })
     .value();
+  
+  const nonce = _.random(0.1, 1.1);
+  let nonce_use_count = 0;
+
+  return _.memoize(
+    re_matcher,
+    obj => !_.isUndefined(obj.id) ? obj.id : nonce + (nonce_use_count++),
+  );
 }
-
-
 const memoized_re_matchers = _.memoize(
   create_re_matcher,
   (query, accessors, config_name) => query + config_name
