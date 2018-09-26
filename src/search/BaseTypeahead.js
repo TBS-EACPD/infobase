@@ -44,7 +44,7 @@ export class BaseTypeahead extends React.Component {
     const config_groups = _.map(
       search_configs,
       (search_config, ix) => ({
-        group_header: search_config.templates.header(),
+        group_header: search_config.header_function(),
         group_filter: search_config.filter,
       })
     );
@@ -55,7 +55,7 @@ export class BaseTypeahead extends React.Component {
         search_config.get_data(),
         data => ({
           data,
-          name: search_config.templates.suggestion(data),
+          name: search_config.name_function(data),
           config_group_index: ix,
         })
       )

@@ -10,13 +10,13 @@ function create_re_matcher(query, accessors){
 
   const raw_tokens = query.split(" ");
 
-  const reg_exps = _.map(raw_tokens, token => new RegExp(escapeRegExp(_.deburr(token)), 'gi') );
+  const reg_exps = _.map(raw_tokens, token => new RegExp( escapeRegExp(_.deburr(token) ), 'gi') );
 
   return obj => _.chain(accessors)
     .map(accessor => (
       _.isString(accessor) ? 
-      obj[accessor] :
-      accessor(obj)
+        obj[accessor] :
+        accessor(obj)
     ))
     .some(str => {
       if(!_.isString(str)){
@@ -38,69 +38,40 @@ const org_attributes_to_match = [
 ];
 
 const org_templates = {
-  header: ()=> Dept.plural,
-  suggestion:  org => {
+  header_function: ()=> Dept.plural,
+  name_function:  org => {
     if(org.level !== "gov" && _.isEmpty(org.tables)){
       return `<span class="search-grayed-out-hint"> ${org.name} ${trivial_text_maker("limited_data")} </span>`
     }
     return (
       org.applied_title ? 
-      `${org.name} (${org.applied_title})` :
-      org.name
+        `${org.name} (${org.applied_title})` :
+        org.name
     );
   },
 };
 
 const orgs_with_data_with_gov = {
-  query_matcher: () => {
-    const to_search = [ Gov ].concat(Dept.depts_with_data() )
-    return query => _.filter(
-      to_search,
-      create_re_matcher(query, org_attributes_to_match)
-    )
-  },
-  templates: org_templates,
+  ...org_templates,
   get_data: () => [Gov].concat( Dept.depts_with_data() ),
   filter: (query, datum) => create_re_matcher(query, org_attributes_to_match)(datum),
 };
 
 const all_orgs_without_gov = {
-  query_matcher: () => {
-    const to_search = Dept.get_all()
-    return query => _.filter(
-      to_search,
-      create_re_matcher(query, org_attributes_to_match)
-    )
-  },
-  templates: org_templates,
+  ...org_templates,
   get_data: () => Dept.get_all(),
   filter: (query, datum) => create_re_matcher(query, org_attributes_to_match)(datum),
 };
 
 const all_orgs_with_gov = {
-  query_matcher: () => {
-    const orgs = _.reject(Dept.get_all(), "is_dead");
-    const to_search = [Gov, ...orgs];
-    return query => _.filter(
-      to_search,
-      create_re_matcher(query, org_attributes_to_match)
-    )
-  },
-  templates: org_templates,
+  ...org_templates,
   get_data: () => [ Gov ].concat( _.reject(Dept.get_all(), "is_dead") ),
   filter: (query, datum) => create_re_matcher(query, org_attributes_to_match)(datum),
 };
 
 
 const all_dp_orgs = {
-  query_matcher: () => {
-    const orgs = _.filter(Dept.get_all(), 'dp_status');
-    return query => _.filter(
-      orgs,
-      create_re_matcher(query, org_attributes_to_match)
-    )
-  },
-  templates: org_templates,
+  ...org_templates,
   get_data: () => _.filter(Dept.get_all(), 'dp_status'),
   filter: (query, datum) => create_re_matcher(query, org_attributes_to_match)(datum),
 };
@@ -111,61 +82,30 @@ const glossary_attributes_to_match = [
 ];
 
 const glossary = {
-  query_matcher: () => {
-    const to_search = GlossaryEntry.fully_defined_entries;
-    return query => _.filter(
-      to_search,
-      create_re_matcher(query, glossary_attributes_to_match)
-    );
-  },
-  templates: {
-    suggestion: glossaryItem => `
-      <div style="font-size:14px; line-height:1.8em; padding:5px 0px;"> 
-        ${glossaryItem.title}
-      </div>
-      <div style='color:#333; padding:0px 20px 20px 20px; font-size:12px; line-height:1; border-bottom:1px solid #CCC;'> 
-        ${glossaryItem.definition}
-      </div>
-    `,
-    header: ()=> trivial_text_maker('glossary'),
-  },
+  header_function: ()=> trivial_text_maker('glossary'),
+  name_function: glossaryItem => `
+    <div style="font-size:14px; line-height:1.8em; padding:5px 0px;"> 
+      ${glossaryItem.title}
+    </div>
+    <div style='color:#333; padding:0px 20px 20px 20px; font-size:12px; line-height:1; border-bottom:1px solid #CCC;'> 
+      ${glossaryItem.definition}
+    </div>
+  `,
   get_data: () => GlossaryEntry.fully_defined_entries,
   filter: (query, datum) => create_re_matcher(query, glossary_attributes_to_match)(datum),
 };
 
 const glossary_lite = {
-  query_matcher: () => {
-    const to_search = GlossaryEntry.fully_defined_entries;
-    return query => query.length > 10 && _.filter(
-      to_search,
-      create_re_matcher(query, glossary_attributes_to_match)
-    );
-  },
-  templates: {
-    suggestion: _.property('title'),
-    header: () => trivial_text_maker('glossary'),
-  },
+  header_function: () => trivial_text_maker('glossary'),
+  name_function: _.property('title'),
   get_data: () => GlossaryEntry.fully_defined_entries,
   filter: (query, datum) => create_re_matcher(query, glossary_attributes_to_match)(datum),
 };
 
 
 const gocos = {
-  query_matcher: () => {
-    const goco_root = Tag.tag_roots.GOCO; 
-    const to_search = _.chain(Tag.get_all())
-      .filter( ({root}) => root === goco_root )
-      .filter('is_lowest_level_tag')
-      .value();
-    return query => _.filter(
-      to_search,
-      create_re_matcher(query, ['name', 'description'])
-    );
-  },
-  templates: {
-    header: () => `${Tag.plural} - ${Tag.tag_roots.GOCO.name}`,
-    suggestion: _.property('name'),
-  },
+  header_function: () => `${Tag.plural} - ${Tag.tag_roots.GOCO.name}`,
+  name_function: _.property('name'),
   get_data: () => _.chain(Tag.get_all())
     .filter( ({root}) => root === Tag.tag_roots.GOCO )
     .filter('is_lowest_level_tag')
@@ -174,49 +114,15 @@ const gocos = {
 };
 
 const how_we_help = {
-  query_matcher: () => {
-    const to_search = _.filter(Tag.get_all(), {root: Tag.tag_roots.HWH});
-    return query => _.filter(
-      to_search,
-      create_re_matcher(query, ['name', 'description'])
-    );
-  },
-  templates: {
-    header: ()=> `${Tag.plural} - ${Tag.tag_roots.HWH.name}`,
-    suggestion: _.property('name'),
-  },
+  header_function: () => `${Tag.plural} - ${Tag.tag_roots.HWH.name}`,
+  name_function: _.property('name'),
   get_data: () => _.filter(Tag.get_all(), {root: Tag.tag_roots.HWH}),
   filter: (query, datum) => create_re_matcher(query, ['name', 'description'])(datum),
 };
 
 const datasets = {
-  query_matcher: ()=> {
-    const to_search = _.chain(Table.get_all())
-      .reject('reference_table')
-      .map( t => ({
-        name: t.name,
-        title: t.title,
-        flat_tag_titles: _.chain(t.tags)
-          .map(key => GlossaryEntry.lookup(key))
-          .compact()
-          .map('title')
-          .compact()
-          .pipe( titles => titles.join(" ") )
-          .value(),
-        table: t,
-      }))
-      .value();
-    
-    return query => _.filter(
-      to_search,
-      create_re_matcher(query, ['name', 'flat_tag_titles']) 
-    );
-
-  },
-  templates: {
-    header: ()=> trivial_text_maker('build_a_report'),
-    suggestion: table => table.title,
-  },
+  header_function: () => trivial_text_maker('build_a_report'),
+  name_function: table => table.title,
   get_data: () => _.chain(Table.get_all())
     .reject('reference_table')
     .map( t => ({
@@ -236,34 +142,16 @@ const datasets = {
 };
 
 const programs = {
-  query_matcher: () => {
-    const to_search = _.reject(Program.get_all(), 'dead_program');
-    return query => _.filter(
-      to_search,
-      create_re_matcher(query, ['name', 'description'])
-    );
-  },
-  templates: {
-    suggestion: program => `${program.name} (${program.dept.sexy_name})`,
-    header: ()=> trivial_text_maker('programs'),
-  },
+  header_function: () => trivial_text_maker('programs'),
+  name_function: program => `${program.name} (${program.dept.sexy_name})`,
   get_data: () => _.reject(Program.get_all(), 'dead_program'),
   filter: (query, datum) => create_re_matcher(query, ['name', 'description'])(datum),
 }
 
 //only include CRs because SO's have really really long names
 const crsos = {
-  query_matcher: () => {
-    const to_search = _.filter(CRSO.get_all(), 'is_cr');
-    return query => _.filter(
-      to_search,
-      create_re_matcher(query, ['name'])
-    );
-  },
-  templates: {
-    suggestion: crso => `${crso.name} (${crso.dept.sexy_name})`,
-    header: ()=> trivial_text_maker('core_resps'),
-  },
+  header_function: () => trivial_text_maker('core_resps'),
+  name_function: crso => `${crso.name} (${crso.dept.sexy_name})`,
   get_data: () => _.filter(CRSO.get_all(), 'is_cr'),
   filter: (query, datum) => create_re_matcher(query, ['name'])(datum),
 }
