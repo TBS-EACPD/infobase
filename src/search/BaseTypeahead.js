@@ -58,26 +58,39 @@ export class BaseTypeahead extends React.Component {
       })
     );
 
-    const all_options = _.flatMap( 
-      search_configs,
-      (search_config, ix) => _.map(
-        search_config.get_data(),
-        data => ({
-          data,
-          name: search_config.name_function(data),
-          menu_content: (search) => (
-            _.isFunction(search_config.menu_content_function) ?
-              search_config.menu_content_function(data, search) :
-              (
-                <Highlighter search={search}>
-                  {search_config.name_function(data)}
-                </Highlighter>
-              )
-          ),
-          config_group_index: ix,
-        })
-      )
-    );
+    // Options includes placeholders for pagination items, because the number of results passed to renderMenu
+    // (ie. that get through filterBy) needs to actually match the number of MenuItems ultimately rendered, can't 
+    // just insert the pagination items when renderMenu is called
+    const all_options = [
+      {
+        pagination_placeholder: true,
+        paginate_direction: "previous",
+      },
+      ..._.flatMap(
+        search_configs,
+        (search_config, ix) => _.map(
+          search_config.get_data(),
+          data => ({
+            data,
+            name: search_config.name_function(data),
+            menu_content: (search) => (
+              _.isFunction(search_config.menu_content_function) ?
+                search_config.menu_content_function(data, search) :
+                (
+                  <Highlighter search={search}>
+                    {search_config.name_function(data)}
+                  </Highlighter>
+                )
+            ),
+            config_group_index: ix,
+          })
+        )
+      ),
+      {
+        pagination_placeholder: true,
+        paginate_direction: "next",
+      },
+    ];
     
     // Didn't like the default pagination, but due to API rigidness I had to implement my own at the filtering level
     const paginate_results = () => {
@@ -91,6 +104,11 @@ export class BaseTypeahead extends React.Component {
     }
     
     const filterBy = (option, props) => {
+      if (option.pagination_placeholder){
+        return (option.paginate_direction === "previous" && this.pagination_index > 0) ||
+          (option.paginate_direction === "next"); // can't yet tell if next button's needed, so always pass it's placeholder through
+      }
+
       const query = props.text;
       const group_filter = config_groups[option.config_group_index].group_filter;
       const query_matches = group_filter(query, option.data);
@@ -162,23 +180,23 @@ export class BaseTypeahead extends React.Component {
         filterBy = { filterBy }
         renderMenu = {
           (results, menuProps) => {
-            const total_query_matches = this.filtered_counter + results.length;
-
             // renderMenu is always called right after filtering is finished,
             // a bit hacky, but need to reset the filtered_counter here
             this.filtered_counter = 0;
 
+            const filtered_results = _.filter(results, _.property("config_group_index"))
+
             return (
               <Menu {...menuProps}>
                 {
-                  _.chain(results)
+                  _.chain(filtered_results)
                     .groupBy("config_group_index")
                     .thru(
                       (grouped_results) => {
                         const needs_pagination_up_control = this.pagination_index > 0;
-                        const needs_pagination_down_control = (this.pagination_index * pagination_size) < total_query_matches;
+                        const needs_pagination_down_control = (this.pagination_index * pagination_size) < filtered_results.length;
 
-                        const pagination_down_index = needs_pagination_up_control ? results.length + 1 : results.length; 
+                        const pagination_down_index = needs_pagination_up_control ? filtered_results.length + 1 : filtered_results.length; 
 
                         let index_key_counter = needs_pagination_up_control ? 1 : 0;
                         return [
