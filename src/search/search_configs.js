@@ -50,16 +50,14 @@ const org_attributes_to_match = [
 ];
 
 const org_templates = {
-  header_function: ()=> Dept.plural,
-  name_function:  org => {
-    if(org.level !== "gov" && _.isEmpty(org.tables)){
+  header_function: () => Dept.plural,
+  name_function: org => org.applied_title ? `${org.name} (${org.applied_title})` : org.name,
+  menu_content_function: function(org){
+    if ( org.level !== "gov" && _.isEmpty(org.tables) ){
       return `<span class="search-grayed-out-hint"> ${org.name} ${trivial_text_maker("limited_data")} </span>`
+    } else {
+      return this.name_function(org);
     }
-    return (
-      org.applied_title ? 
-        `${org.name} (${org.applied_title})` :
-        org.name
-    );
   },
 };
 
@@ -95,7 +93,8 @@ const glossary_attributes_to_match = [
 
 const glossary = {
   header_function: ()=> trivial_text_maker('glossary'),
-  name_function: glossaryItem => `
+  name_function: _.property('title'),
+  menu_content_function: glossaryItem => `
     <div style="font-size:14px; line-height:1.8em; padding:5px 0px;"> 
       ${glossaryItem.title}
     </div>

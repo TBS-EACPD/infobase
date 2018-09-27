@@ -56,6 +56,9 @@ export class BaseTypeahead extends React.Component {
         data => ({
           data,
           name: search_config.name_function(data),
+          menu_content: _.isFunction(search_config.menu_content_function) ?
+            search_config.menu_content_function(data) :
+            search_config.name_function(data),
           config_group_index: ix,
         })
       )
@@ -73,6 +76,7 @@ export class BaseTypeahead extends React.Component {
         labelKey = "name"
         maxResults = { Infinity }
         emptyLabel = { "TODO: need text key for no matches found" }
+        
         placeholder = { placeholder }
         minLength = { minLength }
         bsSize = { bootstrapSize }
@@ -121,7 +125,7 @@ export class BaseTypeahead extends React.Component {
                               const index = index_key_counter++;
                               return (
                                 <MenuItem key={index} position={index} option={result}>
-                                  <span dangerouslySetInnerHTML={{__html: result.name}}/>
+                                  <span dangerouslySetInnerHTML={{__html: result.menu_content}}/>
                                 </MenuItem>
                               );
                             }
