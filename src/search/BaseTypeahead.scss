@@ -49,8 +49,11 @@
   }
 }
 
-.rbt-menu.dropdown-menu > .active > a,
-.rbt-menu.dropdown-menu > .active > a:focus,
+.rbt-menu.dropdown-menu > li.active,
+.rbt-menu.dropdown-menu > li.active > a,
+.rbt-menu.dropdown-menu > li:focus,
+.rbt-menu.dropdown-menu > li:hover,
+.rbt-menu.dropdown-menu > li > a:focus,
 .rbt-menu.dropdown-menu > li > a:hover, {
   background-color: #aec8d8;
   color: $ibLinkColor;
