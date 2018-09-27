@@ -1,11 +1,9 @@
 @import '../common_css/common-variables';
 
 
-.home-root {
-  input.typeahead.form-control.input-lg.tt-input {
-    //search bar isn't wide enough to contain all placeholder text
-    font-size: 1em;
-  }
+.home-search-container > div.rbt > div.rbt-input-hint-container > input {
+  //search bar isn't wide enough to contain all placeholder text
+  font-size: 1em;
 }
 
 .intro-box {
