@@ -56,9 +56,15 @@ export class BaseTypeahead extends React.Component {
         data => ({
           data,
           name: search_config.name_function(data),
-          menu_content: _.isFunction(search_config.menu_content_function) ?
-            search_config.menu_content_function(data) :
-            search_config.name_function(data),
+          menu_content: (search) => (
+            _.isFunction(search_config.menu_content_function) ?
+              search_config.menu_content_function(data, search) :
+              (
+                <Highlighter search={search}>
+                  {search_config.name_function(data)}
+                </Highlighter>
+              )
+          ),
           config_group_index: ix,
         })
       )
@@ -120,12 +126,12 @@ export class BaseTypeahead extends React.Component {
                             </Menu.Header>
                           ),
                           ..._.map(
-                            results, 
+                            results,
                             (result) => {
                               const index = index_key_counter++;
                               return (
                                 <MenuItem key={index} position={index} option={result}>
-                                  <span dangerouslySetInnerHTML={{__html: result.menu_content}}/>
+                                  { result.menu_content(menuProps.text) }
                                 </MenuItem>
                               );
                             }

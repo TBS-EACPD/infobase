@@ -1,3 +1,6 @@
+import { Fragment } from 'react';
+import { Highlighter } from 'react-bootstrap-typeahead';
+
 import { Table } from '../core/TableClass.js';
 import { GlossaryEntry } from '../models/glossary.js';
 import { escapeRegExp } from '../core/utils.js';
@@ -6,11 +9,33 @@ import { trivial_text_maker } from '../models/text.js';
 
 const { Dept, Gov, Program, Tag, CRSO } = Subject;
 
+const query_to_reg_exps = (query) => {
+  const raw_tokens = query.split(" ");
+  const reg_exps = _.map(
+    raw_tokens, 
+    token => new RegExp( escapeRegExp(_.deburr(token) ), 'gi')
+  );
+  return reg_exps;
+}
+
+// Used where Highlighter component can't be, e.g. where searched string already 
+// contains markup and will need to be rendered with dangerouslySetInnerHTML
+const highlight_search_match = (search, content) => {
+  const reg_exps = query_to_reg_exps(search);
+
+  let modified_string = _.clone(content);
+
+  _.each(
+    reg_exps,
+    (reg_exp) => modified_string = modified_string.replace(reg_exp, match => `<strong>${match}</strong>`)
+  );
+
+  return modified_string
+}
+
 function create_re_matcher(query, accessors, config_name){
 
-  const raw_tokens = query.split(" ");
-
-  const reg_exps = _.map(raw_tokens, token => new RegExp( escapeRegExp(_.deburr(token) ), 'gi') );
+  const reg_exps = query_to_reg_exps(query);
 
   const re_matcher = obj => _.chain(accessors)
     .map(accessor => (
@@ -52,11 +77,21 @@ const org_attributes_to_match = [
 const org_templates = {
   header_function: () => Dept.plural,
   name_function: org => org.applied_title ? `${org.name} (${org.applied_title})` : org.name,
-  menu_content_function: function(org){
+  menu_content_function: function(org, search){
     if ( org.level !== "gov" && _.isEmpty(org.tables) ){
-      return `<span class="search-grayed-out-hint"> ${org.name} ${trivial_text_maker("limited_data")} </span>`
+      return (
+        <span className="search-grayed-out-hint">
+          <Highlighter search={search}>
+            { `${org.name} ${trivial_text_maker("limited_data")}` }
+          </Highlighter>
+        </span>
+      );
     } else {
-      return this.name_function(org);
+      return (
+        <Highlighter search={search}>
+          { this.name_function(org) }
+        </Highlighter>
+      );
     }
   },
 };
@@ -94,14 +129,28 @@ const glossary_attributes_to_match = [
 const glossary = {
   header_function: ()=> trivial_text_maker('glossary'),
   name_function: _.property('title'),
-  menu_content_function: glossaryItem => `
-    <div style="font-size:14px; line-height:1.8em; padding:5px 0px;"> 
-      ${glossaryItem.title}
-    </div>
-    <div style='color:#333; padding:0px 20px 20px 20px; font-size:12px; line-height:1; border-bottom:1px solid #CCC;'> 
-      ${glossaryItem.definition}
-    </div>
-  `,
+  menu_content_function: (glossaryItem, search) => (
+    <Fragment>
+      <div 
+        style={{
+          fontSize: "14px",
+          lineHeight: "1.8em",
+          padding: "5px 0px",
+        }}
+        dangerouslySetInnerHTML={{ __html: highlight_search_match(search, glossaryItem.title) }}
+      /> 
+      <div 
+        style={{
+          fontSize: "12px",
+          lineHeight: "1",
+          padding: "0px 20px 20px 20px",
+          borderBottom: "1px solid #CCC",
+          color: "#333",
+        }}
+        dangerouslySetInnerHTML={{ __html: highlight_search_match(search, glossaryItem.definition) }}
+      />
+    </Fragment>
+  ),
   get_data: () => GlossaryEntry.fully_defined_entries,
   filter: (query, datum) => memoized_re_matchers(query, glossary_attributes_to_match, "glossary")(datum),
 };
