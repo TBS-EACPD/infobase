@@ -14,7 +14,10 @@ import { get_static_url } from '../core/request_utils.js';
 
 import text from "./BaseTypeahead.yaml";
 import { create_text_maker } from '../models/text.js';
+import { TM } from '../components/TextMaker.js';
+
 const text_maker = create_text_maker(text);
+const TextMaker = (props) => <TM tmf={text_maker} {...props}/>;
 
 export class BaseTypeahead extends React.Component {
   constructor(){
@@ -122,11 +125,7 @@ export class BaseTypeahead extends React.Component {
         if (option.paginate_direction === "previous"){
           return this.pagination_index > 0;
         } else if (option.paginate_direction === "next") {
-          // This should be the last item filtered, as long as none of the data being queried looks just like a paginate option
-          // A bit hacky, but need to reset the query_matched_counter here so we can be sure the next filter pass works right
-          this.query_matched_counter = 0;
-
-          return true;// can't yet tell if next button's needed at this point, so always pass it's placeholder through
+          return true; // can't yet tell if next button's needed at this point, so always pass it's placeholder through
         }
       }
 
@@ -184,10 +183,18 @@ export class BaseTypeahead extends React.Component {
           (e) => {
             let selected_item;
 
-            if (e.type === "click"){
-              selected_item = e.target.parentElement;
-            } else {
+            if (e.type !== "click"){
+              // for non-click events, the target item  has been classed "active" by onPaginate call
               selected_item = this.typeahead.componentNode.querySelector("li.active");
+            } else {
+              // for click events, need to find the targeted li, possibly an ancestor of the event target
+              const find_li_ancestor = (element) => {
+                return element.tagName.toLowerCase() === "li" ?
+                  element :
+                  find_li_ancestor(element.parentElement);
+              };
+
+              selected_item = find_li_ancestor(e.target);
             }
 
             if (selected_item){
@@ -203,6 +210,17 @@ export class BaseTypeahead extends React.Component {
 
         renderMenu = {
           (results, menuProps) => {
+            const page_range_start = this.pagination_index * pagination_size;
+            const page_range_end = (this.pagination_index+1) * pagination_size
+
+            const total_matching_results = this.query_matched_counter;
+
+            const remaining_results = total_matching_results - (this.pagination_index+1)*pagination_size;
+            const next_page_size = remaining_results < pagination_size ? remaining_results : pagination_size;
+
+            // A bit hacky, but need to reset the query_matched_counter here so we can be sure the next filter pass works right
+            this.query_matched_counter = 0;
+
             const filtered_results = _.filter(results, (option) => !_.isUndefined(option.config_group_index) );
 
             if ( _.isEmpty(filtered_results) ){
@@ -224,9 +242,9 @@ export class BaseTypeahead extends React.Component {
                       .thru(
                         (grouped_results) => {
                           const needs_pagination_up_control = this.pagination_index > 0;
-                          const needs_pagination_down_control = (this.pagination_index * pagination_size) < filtered_results.length;
+                          const needs_pagination_down_control = page_range_end < total_matching_results;
   
-                          const pagination_down_index = needs_pagination_up_control ? filtered_results.length + 1 : filtered_results.length; 
+                          const pagination_down_item_index = needs_pagination_up_control ? filtered_results.length + 1 : filtered_results.length; 
   
                           let index_key_counter = needs_pagination_up_control ? 1 : 0;
                           return [
@@ -237,11 +255,15 @@ export class BaseTypeahead extends React.Component {
                                 option={{
                                   paginationOption: true,
                                   paginate_direction: "previous",
-                                  name: text_maker("paginate_previous"),
+                                  name: "",
                                 }}
                                 className="rbt-menu-pagination-option rbt-menu-pagination-option--previous"
                               >
-                                { text_maker("paginate_previous") }
+                                <span className="aria-hidden">▲</span>
+                                <br/>
+                                <TextMaker k="paginate_status" args={{page_range_start, page_range_end, total_matching_results}}/>
+                                <br/>
+                                <TextMaker k="paginate_previous" args={{page_size: pagination_size}}/>
                               </MenuItem>
                             ),
                             ..._.flatMap(
@@ -265,16 +287,20 @@ export class BaseTypeahead extends React.Component {
                             ),
                             needs_pagination_down_control && (
                               <MenuItem
-                                key={pagination_down_index}
-                                position={pagination_down_index}
+                                key={pagination_down_item_index}
+                                position={pagination_down_item_index}
                                 option={{
                                   paginationOption: true,
                                   paginate_direction: "next",
-                                  name: text_maker("paginate_next"),
+                                  name: "",
                                 }}
                                 className="rbt-menu-pagination-option rbt-menu-pagination-option--next"
                               >
-                                { text_maker("paginate_next") }
+                                <TextMaker k="paginate_status" args={{page_range_start, page_range_end, total_matching_results}}/>
+                                <br/>
+                                <TextMaker k="paginate_next" args={{next_page_size: next_page_size}}/>
+                                <br/>
+                                <span className="aria-hidden">▼</span>
                               </MenuItem>
                             ),
                           ]

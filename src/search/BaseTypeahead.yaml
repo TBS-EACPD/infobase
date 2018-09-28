@@ -2,14 +2,23 @@ no_matches_found:
   en: No matches found
   fr: TODO
 
-paginate_previous:
+paginate_status:
+  transform: [handlebars]
   en: |
-    TODO: paginate previous
+    Showing results {{page_range_start}} to {{page_range_end}} of {{total_matching_results}}
+  fr: |
+    TODO
+
+paginate_previous:
+  transform: [handlebars]
+  en: |
+    Show previous {{page_size}} results
   fr: |
     TODO
 
 paginate_next:
+  transform: [handlebars]
   en: |
-    TODO: paginate next
+    Show next {{next_page_size}} results
   fr: |
     TODO
