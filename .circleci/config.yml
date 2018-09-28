@@ -100,7 +100,6 @@ jobs:
       - run: ./.circleci/create_envs.sh
       - run: ./.circleci/authenticate-gcloud.sh
       - run: ./deploy_build_scripts/push_to_gcloud_bucket.sh
-      - run: ./deploy_build_scripts/selectively_clear_cloudflare_cache.sh
       
 
 # One workflow that runs all three jobs (build -> test -> deploy), each requiring the previous to have passed
