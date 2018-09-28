@@ -210,8 +210,10 @@ export class BaseTypeahead extends React.Component {
 
         renderMenu = {
           (results, menuProps) => {
+            const filtered_results = _.filter(results, (option) => !_.isUndefined(option.config_group_index) );
+
             const page_range_start = this.pagination_index * pagination_size;
-            const page_range_end = (this.pagination_index+1) * pagination_size
+            const page_range_end = page_range_start + filtered_results.length;
 
             const total_matching_results = this.query_matched_counter;
 
@@ -220,8 +222,6 @@ export class BaseTypeahead extends React.Component {
 
             // A bit hacky, but need to reset the query_matched_counter here so we can be sure the next filter pass works right
             this.query_matched_counter = 0;
-
-            const filtered_results = _.filter(results, (option) => !_.isUndefined(option.config_group_index) );
 
             if ( _.isEmpty(filtered_results) ){
               return (
@@ -248,6 +248,9 @@ export class BaseTypeahead extends React.Component {
   
                           let index_key_counter = needs_pagination_up_control ? 1 : 0;
                           return [
+                            <Menu.Header key={`header-pagination-info`}>
+                              <TextMaker k="paginate_status" args={{page_range_start, page_range_end, total_matching_results}}/>
+                            </Menu.Header>,
                             needs_pagination_up_control && (
                               <MenuItem 
                                 key={0} 
@@ -260,8 +263,6 @@ export class BaseTypeahead extends React.Component {
                                 className="rbt-menu-pagination-option rbt-menu-pagination-option--previous"
                               >
                                 <span className="aria-hidden">▲</span>
-                                <br/>
-                                <TextMaker k="paginate_status" args={{page_range_start, page_range_end, total_matching_results}}/>
                                 <br/>
                                 <TextMaker k="paginate_previous" args={{page_size: pagination_size}}/>
                               </MenuItem>
@@ -296,8 +297,6 @@ export class BaseTypeahead extends React.Component {
                                 }}
                                 className="rbt-menu-pagination-option rbt-menu-pagination-option--next"
                               >
-                                <TextMaker k="paginate_status" args={{page_range_start, page_range_end, total_matching_results}}/>
-                                <br/>
                                 <TextMaker k="paginate_next" args={{next_page_size: next_page_size}}/>
                                 <br/>
                                 <span className="aria-hidden">▼</span>
