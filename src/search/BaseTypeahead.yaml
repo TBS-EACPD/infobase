@@ -1,24 +1,24 @@
 no_matches_found:
-  en: No matches found
-  fr: TODO
+  en: No results found
+  fr: Aucun résultat
 
 paginate_status:
   transform: [handlebars]
   en: |
     Showing results {{page_range_start}} to {{page_range_end}} of {{total_matching_results}}
   fr: |
-    TODO
+    Liste des résultats {{page_range_start}} à {{page_range_end}} des {{total_matching_results}} résultats
 
 paginate_previous:
   transform: [handlebars]
   en: |
-    Show previous {{page_size}} results
+    Show previous {{page_size}} items
   fr: |
-    TODO
+    Montrer les {{page_size}} items précédents
 
 paginate_next:
   transform: [handlebars]
   en: |
-    Show next {{next_page_size}} results
+    Show next {{next_page_size}} items
   fr: |
-    TODO
+    Montrer les {{next_page_size}} items suivants

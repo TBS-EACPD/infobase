@@ -1,5 +1,5 @@
 import 'react-bootstrap-typeahead/css/Typeahead.css';
-// Uncomment followingl ine once we've moved to bootstrap4
+// Uncomment following line once we've moved to bootstrap4
 // import 'react-bootstrap-typeahead/css/Typeahead-bs4.css';
 import './BaseTypeahead.scss';
 
