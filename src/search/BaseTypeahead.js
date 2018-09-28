@@ -18,9 +18,9 @@ export class BaseTypeahead extends React.Component {
     super();
 
     // Hacky, but had to implement pagination at the filtering level due to this typeahead having a really rigid API.
-    // filtered_counter is used to make sure only items "on the page" make it through the filter, it is reset to 0 every 
+    // query_matched_counter is used to make sure only items "on the page" make it through the filter, it is reset to 0 every 
     // time the menu renders (which should always happen right after the filtering is done)
-    this.filtered_counter = 0;
+    this.query_matched_counter = 0;
     this.pagination_index = 0;
   }
   componentDidMount(){
@@ -96,9 +96,9 @@ export class BaseTypeahead extends React.Component {
     const paginate_results = () => {
       const page_start = pagination_size * this.pagination_index;
       const page_end = page_start + pagination_size;
-      const is_on_displayed_page = !(this.filtered_counter < page_start || this.filtered_counter >= page_end);
+      const is_on_displayed_page = !(this.query_matched_counter < page_start || this.query_matched_counter >= page_end);
 
-      this.filtered_counter++;
+      this.query_matched_counter++;
 
       return is_on_displayed_page;
     }
@@ -155,22 +155,33 @@ export class BaseTypeahead extends React.Component {
           _.debounce(
             (text) => {
               this.pagination_index = 0; // Reset pagination index
-              this.filtered_counter = 0; // To be safe, reset the filtered counter here too
+              this.query_matched_counter = 0; // To be safe, reset the filtered counter here too
               onNewQuery(text);
             },
             500
           )
         }
 
+        // receives events selecting an option with the pagination_placeholder: true property
         onPaginate = {
           (e) => {
-            if ( e.target.parentElement.className.includes("previous") ){
-              this.pagination_index--;
-            } else if ( e.target.parentElement.className.includes("next") ){
-              this.pagination_index++;
+            let selected_item;
+            
+            if (e.type === "click"){
+              selected_item = e.target.parentElement;
+            } else {
+              selected_item = this.typeahead.componentNode.querySelector("li.active");
             }
-            this.typeahead.getInstance().blur();
-            this.typeahead.getInstance().focus();
+
+            if (selected_item){
+              if ( selected_item.className.includes("previous") ){
+                this.pagination_index--;
+              } else if ( selected_item.className.includes("next") ){
+                this.pagination_index++;
+              }
+              this.typeahead.getInstance().blur();
+              this.typeahead.getInstance().focus();
+            }
           }
         }
 
@@ -181,10 +192,10 @@ export class BaseTypeahead extends React.Component {
         renderMenu = {
           (results, menuProps) => {
             // renderMenu is always called right after filtering is finished,
-            // a bit hacky, but need to reset the filtered_counter here
-            this.filtered_counter = 0;
+            // a bit hacky, but need to reset the query_matched_counter here
+            this.query_matched_counter = 0;
 
-            const filtered_results = _.filter(results, _.property("config_group_index"))
+            const filtered_results = _.filter(results, (option) => !_.isUndefined(option.config_group_index) );
 
             return (
               <Menu {...menuProps}>
