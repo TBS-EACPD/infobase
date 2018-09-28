@@ -3,7 +3,7 @@ import 'react-bootstrap-typeahead/css/Typeahead.css';
 // import 'react-bootstrap-typeahead/css/Typeahead-bs4.css';
 import './BaseTypeahead.scss';
 
-import { 
+import {
   Typeahead,
   Highlighter,
   Menu,
@@ -11,7 +11,10 @@ import {
 } from 'react-bootstrap-typeahead';
 
 import { get_static_url } from '../core/request_utils.js';
-import { trivial_text_maker } from '../models/text.js';
+
+import text from "./BaseTypeahead.yaml";
+import { create_text_maker } from '../models/text.js';
+const text_maker = create_text_maker(text);
 
 export class BaseTypeahead extends React.Component {
   constructor(){
@@ -207,7 +210,7 @@ export class BaseTypeahead extends React.Component {
                 <Menu {...menuProps}>
                   <li className="disabled">
                     <a className="dropdown-item disabled">
-                      { 'TODO: need text key for "no matches found"' }
+                      { text_maker("no_matches_found") }
                     </a>
                   </li>
                 </Menu>
@@ -234,11 +237,11 @@ export class BaseTypeahead extends React.Component {
                                 option={{
                                   paginationOption: true,
                                   paginate_direction: "previous",
-                                  name: "TODO, same as display text",
+                                  name: text_maker("paginate_previous"),
                                 }}
                                 className="rbt-menu-pagination-option rbt-menu-pagination-option--previous"
                               >
-                                { "TODO: show previous" }
+                                { text_maker("paginate_previous") }
                               </MenuItem>
                             ),
                             ..._.flatMap(
@@ -267,11 +270,11 @@ export class BaseTypeahead extends React.Component {
                                 option={{
                                   paginationOption: true,
                                   paginate_direction: "next",
-                                  name: "TODO: same as display text",
+                                  name: text_maker("paginate_next"),
                                 }}
                                 className="rbt-menu-pagination-option rbt-menu-pagination-option--next"
                               >
-                                { "TODO: show next" }
+                                { text_maker("paginate_next") }
                               </MenuItem>
                             ),
                           ]
@@ -291,7 +294,7 @@ export class BaseTypeahead extends React.Component {
 
 BaseTypeahead.defaultProps = {
   pagination_size: 25,
-  placeholder: trivial_text_maker("org_search"),
+  placeholder: text_maker("org_search"),
   minLength: 3,
   large: true,
   onNewQuery: _.noop,
