@@ -55,8 +55,10 @@
 .rbt-menu.dropdown-menu > li:hover:not(.dropdown-header),
 .rbt-menu.dropdown-menu > li > a:focus,
 .rbt-menu.dropdown-menu > li > a:hover, {
-  background-color: #aec8d8;
-  color: $ibLinkColor;
+  &:not(.disabled){
+    background-color: #aec8d8;
+    color: $ibLinkColor;
+  }
 }
 
 .rbt-input-hint-container > .search-icon-container {

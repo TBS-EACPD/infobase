@@ -20,8 +20,17 @@ export class BaseTypeahead extends React.Component {
     // Hacky, but had to implement pagination at the filtering level due to this typeahead having a really rigid API.
     // query_matched_counter is used to make sure only items "on the page" make it through the filter, it is reset to 0 every 
     // time the menu renders (which should always happen right after the filtering is done)
+    this.reset_pagination();
+  }
+  reset_pagination(){
     this.query_matched_counter = 0;
     this.pagination_index = 0;
+  }
+  refresh_dropdown_menu(){
+    if (this.typeahead){
+      this.typeahead.getInstance().blur();
+      this.typeahead.getInstance().focus();
+    }
   }
   componentDidMount(){
     this.typeahead.componentNode
@@ -49,6 +58,8 @@ export class BaseTypeahead extends React.Component {
     } = this.props;
     
     const bootstrapSize = large ? "large" : "small";
+
+    const debounceOnNewQuery = _.debounce(onNewQuery, 500);
 
     const config_groups = _.map(
       search_configs,
@@ -105,8 +116,15 @@ export class BaseTypeahead extends React.Component {
     
     const filterBy = (option, props) => {
       if (option.pagination_placeholder){
-        return (option.paginate_direction === "previous" && this.pagination_index > 0) ||
-          (option.paginate_direction === "next"); // can't yet tell if next button's needed, so always pass it's placeholder through
+        if (option.paginate_direction === "previous"){
+          return this.pagination_index > 0;
+        } else if (option.paginate_direction === "next") {
+          // This should be the last item filtered, as long as none of the data being queried looks just like a paginate option
+          // A bit hacky, but need to reset the query_matched_counter here so we can be sure the next filter pass works right
+          this.query_matched_counter = 0;
+
+          return true;// can't yet tell if next button's needed at this point, so always pass it's placeholder through
+        }
       }
 
       const query = props.text;
@@ -116,20 +134,21 @@ export class BaseTypeahead extends React.Component {
       if (query_matches){
         return paginate_results();
       } else {
-        return false
+        return false;
       }
     };
 
     return (
       <Typeahead
-        ref={(ref) => this.typeahead = ref}
+        ref = { (ref) => this.typeahead = ref }
         labelKey = "name"
-        emptyLabel = { 'TODO: need text key for "no matches found"' }
-        paginate = { false }
+        paginate = { false } // Turn off built in pagination
 
         placeholder = { placeholder }
         minLength = { minLength }
-        bsSize = { bootstrapSize }
+        bsSize = { bootstrapSize }  
+        options = { all_options } // API's a bit vague here, options is the data to search over, not a config object
+        filterBy = { filterBy }
 
         // API's a bit vague here, this onChange is "on change" set of options selected from the typeahead dropdown. Selected is an array of selected items,
         // but BaseTypeahead will only ever use single selection, so just picking the first (and, we'd expect, only) item and passing it to onSelect is fine
@@ -137,13 +156,11 @@ export class BaseTypeahead extends React.Component {
           (selected) => {
             const anything_selected = !_.isEmpty(selected);
             if (anything_selected){
-              this.pagination_index = 0;
-              
-              if (anything_selected){
-                this.typeahead.getInstance().clear();
-              }
+              this.reset_pagination();
 
-              if ( anything_selected && _.isFunction(onSelect)){
+              this.typeahead.getInstance().clear();
+
+              if ( _.isFunction(onSelect) ){
                 onSelect(selected[0].data);
               }
             }
@@ -152,21 +169,18 @@ export class BaseTypeahead extends React.Component {
         
         // This is "on change" to the input in the text box
         onInputChange = {
-          _.debounce(
-            (text) => {
-              this.pagination_index = 0; // Reset pagination index
-              this.query_matched_counter = 0; // To be safe, reset the filtered counter here too
-              onNewQuery(text);
-            },
-            500
-          )
+          (text) => {
+            this.reset_pagination();
+            this.refresh_dropdown_menu();
+            debounceOnNewQuery(text)
+          }
         }
 
         // receives events selecting an option with the pagination_placeholder: true property
         onPaginate = {
           (e) => {
             let selected_item;
-            
+
             if (e.type === "click"){
               selected_item = e.target.parentElement;
             } else {
@@ -179,92 +193,95 @@ export class BaseTypeahead extends React.Component {
               } else if ( selected_item.className.includes("next") ){
                 this.pagination_index++;
               }
-              this.typeahead.getInstance().blur();
-              this.typeahead.getInstance().focus();
+              this.refresh_dropdown_menu();
             }
           }
         }
 
-        // API's a bit vague here, options is the data to search over, not a config object
-        options = { all_options } 
-
-        filterBy = { filterBy }
         renderMenu = {
           (results, menuProps) => {
-            // renderMenu is always called right after filtering is finished,
-            // a bit hacky, but need to reset the query_matched_counter here
-            this.query_matched_counter = 0;
-
             const filtered_results = _.filter(results, (option) => !_.isUndefined(option.config_group_index) );
 
-            return (
-              <Menu {...menuProps}>
-                {
-                  _.chain(filtered_results)
-                    .groupBy("config_group_index")
-                    .thru(
-                      (grouped_results) => {
-                        const needs_pagination_up_control = this.pagination_index > 0;
-                        const needs_pagination_down_control = (this.pagination_index * pagination_size) < filtered_results.length;
-
-                        const pagination_down_index = needs_pagination_up_control ? filtered_results.length + 1 : filtered_results.length; 
-
-                        let index_key_counter = needs_pagination_up_control ? 1 : 0;
-                        return [
-                          needs_pagination_up_control && (
-                            <MenuItem 
-                              key={0} 
-                              position={0} 
-                              option={{
-                                paginationOption: true,
-                                paginate_direction: "previous",
-                                name: "TODO, same as display text",
-                              }}
-                              className="rbt-menu-pagination-option rbt-menu-pagination-option--previous"
-                            >
-                              { "TODO: show previous" }
-                            </MenuItem>
-                          ),
-                          ..._.flatMap(
-                            grouped_results,
-                            (results, group_index) => [
-                              <Menu.Header key={`header-${group_index}`}>
-                                {config_groups[group_index].group_header}
-                              </Menu.Header>,
-                              ..._.map(
-                                results,
-                                (result) => {
-                                  const index = index_key_counter++;
-                                  return (
-                                    <MenuItem key={index} position={index} option={result}>
-                                      { result.menu_content(menuProps.text) }
-                                    </MenuItem>
-                                  );
-                                }
-                              ),
-                            ]
-                          ),
-                          needs_pagination_down_control && (
-                            <MenuItem
-                              key={pagination_down_index}
-                              position={pagination_down_index}
-                              option={{
-                                paginationOption: true,
-                                paginate_direction: "next",
-                                name: "TODO: same as display text",
-                              }}
-                              className="rbt-menu-pagination-option rbt-menu-pagination-option--next"
-                            >
-                              { "TODO: show next" }
-                            </MenuItem>
-                          ),
-                        ]
-                      }
-                    )
-                    .value()
-                }
-              </Menu>
-            );
+            if ( _.isEmpty(filtered_results) ){
+              return (
+                <Menu {...menuProps}>
+                  <li className="disabled">
+                    <a className="dropdown-item disabled">
+                      { 'TODO: need text key for "no matches found"' }
+                    </a>
+                  </li>
+                </Menu>
+              );
+            } else {
+              return (
+                <Menu {...menuProps}>
+                  {
+                    _.chain(filtered_results)
+                      .groupBy("config_group_index")
+                      .thru(
+                        (grouped_results) => {
+                          const needs_pagination_up_control = this.pagination_index > 0;
+                          const needs_pagination_down_control = (this.pagination_index * pagination_size) < filtered_results.length;
+  
+                          const pagination_down_index = needs_pagination_up_control ? filtered_results.length + 1 : filtered_results.length; 
+  
+                          let index_key_counter = needs_pagination_up_control ? 1 : 0;
+                          return [
+                            needs_pagination_up_control && (
+                              <MenuItem 
+                                key={0} 
+                                position={0} 
+                                option={{
+                                  paginationOption: true,
+                                  paginate_direction: "previous",
+                                  name: "TODO, same as display text",
+                                }}
+                                className="rbt-menu-pagination-option rbt-menu-pagination-option--previous"
+                              >
+                                { "TODO: show previous" }
+                              </MenuItem>
+                            ),
+                            ..._.flatMap(
+                              grouped_results,
+                              (results, group_index) => [
+                                <Menu.Header key={`header-${group_index}`}>
+                                  {config_groups[group_index].group_header}
+                                </Menu.Header>,
+                                ..._.map(
+                                  results,
+                                  (result) => {
+                                    const index = index_key_counter++;
+                                    return (
+                                      <MenuItem key={index} position={index} option={result}>
+                                        { result.menu_content(menuProps.text) }
+                                      </MenuItem>
+                                    );
+                                  }
+                                ),
+                              ]
+                            ),
+                            needs_pagination_down_control && (
+                              <MenuItem
+                                key={pagination_down_index}
+                                position={pagination_down_index}
+                                option={{
+                                  paginationOption: true,
+                                  paginate_direction: "next",
+                                  name: "TODO: same as display text",
+                                }}
+                                className="rbt-menu-pagination-option rbt-menu-pagination-option--next"
+                              >
+                                { "TODO: show next" }
+                              </MenuItem>
+                            ),
+                          ]
+                        }
+                      )
+                      .value()
+                  }
+                </Menu>
+              );
+            }
           }
         }
       />
