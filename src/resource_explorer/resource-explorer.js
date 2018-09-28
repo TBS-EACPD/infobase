@@ -162,16 +162,15 @@ class ExplorerPage extends React.Component {
 
     const root = get_root(flat_nodes);
 
-    
     const [
       goco_props, 
       hwh_props,
-      mlt_props,
+      //mlt_props,
       wwh_props,
     ] = _.chain([ 
       Tag.lookup("GOCO"),
       Tag.lookup("HWH"),
-      Tag.lookup("MLT"),
+      //Tag.lookup("MLT"),
       Tag.lookup("WWH"),
     ])
       .compact()
@@ -282,7 +281,7 @@ class ExplorerPage extends React.Component {
               <TM k="choose_explore_point" />
             </header>
             <div role="radiogroup" className="hierarchy-selection-items">
-              {_.map([ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp18" && INCLUDE_OTHER_TAGS ? [wwh_props, /* mlt_props */ ] : [])  ],props =>
+              {_.map([ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp18" && INCLUDE_OTHER_TAGS ? [wwh_props /*, mlt_props*/] : [])  ],props =>
                 <HierarchySelectionItem 
                   key={props.id} 
                   url={`#resource-explorer/${props.id}/${doc}`}
