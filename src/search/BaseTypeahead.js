@@ -318,7 +318,7 @@ export class BaseTypeahead extends React.Component {
 }
 
 BaseTypeahead.defaultProps = {
-  pagination_size: 50,
+  pagination_size: 30,
   placeholder: text_maker("org_search"),
   minLength: 3,
   large: true,
