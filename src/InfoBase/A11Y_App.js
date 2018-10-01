@@ -9,21 +9,65 @@ export const app_reducer = (state={ lang: window.lang }, { type, payload }) => {
   return state;
 };
 
-import { Home } from '../home/a11y_home.js';
-import { MetaData } from '../metadata/metadata.js';
-import { IgocExplorer } from "../igoc_explorer/igoc_explorer.js";
-import { ResourceExplorer } from "../resource_explorer/resource-explorer.js";
-import { InfoGraph } from '../infographic/infographic.js';
-import { BudgetMeasuresRoute } from '../partition/budget_measures_subapp/BudgetMeasuresRoute.js';
-import { Glossary } from '../glossary/glossary.js';
-import { ReportBuilder } from '../rpb/index.js';
+import { ComponentLoader } from '../core/ComponentLoader.js';
 import { EasyAccess } from '../core/EasyAccess';
-import { About } from '../about/about.js';
-import { GraphInventory } from '../graph_route/graph_route.js';
-import { EstimatesComparison } from "../EstimatesComparison/EstimatesComparison.js";
 import { InsertRuntimeFooterLinks } from '../core/InsertRuntimeFooterLinks.js';
 import { DevFip } from '../core/DevFip.js';
 
+const LazyHome = ComponentLoader(async () => {
+  const { Home } = await import('../home/a11y_home.js');
+  return Home;
+})
+
+const LazyMetaData = ComponentLoader(async () => {
+  const { MetaData } = await import('../metadata/metadata.js');
+  return MetaData;
+})
+
+const LazyIgocExplorer = ComponentLoader(async () => {
+  const { IgocExplorer } = await import('../igoc_explorer/igoc_explorer.js');
+  return IgocExplorer;
+})
+
+const LazyResourceExplorer = ComponentLoader(async () => {
+  const { ResourceExplorer } = await import('../resource_explorer/resource-explorer.js');
+  return ResourceExplorer;
+})
+
+const LazyInfoGraph = ComponentLoader(async () => {
+  const { InfoGraph } = await import('../infographic/infographic.js');
+  return InfoGraph;
+})
+
+const LazyBudgetMeasuresRoute = ComponentLoader(async () => {
+  const { BudgetMeasuresRoute } = await import('../partition/budget_measures_subapp/BudgetMeasuresRoute.js');
+  return BudgetMeasuresRoute;
+})
+
+const LazyGlossary = ComponentLoader(async () => {
+  const { Glossary } = await import('../glossary/glossary.js');
+  return Glossary;
+})
+
+const LazyReportBuilder = ComponentLoader(async () => {
+  const { ReportBuilder } = await import('../rpb/index.js');
+  return ReportBuilder;
+})
+
+const LazyAbout = ComponentLoader(async () => {
+  const { About } = await import('../about/about.js');
+  return About;
+})
+
+const LazyGraphInventory = ComponentLoader(async () => {
+  const { GraphInventory } = await import('../graph_route/graph_route.js');
+  return GraphInventory;
+})
+
+const LazyEstimatesComparison = ComponentLoader(async () => {
+  const { EstimatesComparison } = await import('../EstimatesComparison/EstimatesComparison.js');
+  return EstimatesComparison;
+})
 
 export class App extends React.Component {
   constructor(){
@@ -38,19 +82,18 @@ export class App extends React.Component {
         <DevFip />
         <EasyAccess />
         <Switch>
-          <Route path="/metadata/:data_source?" component={MetaData}/>
-          <Route path="/igoc/:grouping?" component={IgocExplorer} />
-          <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={ResourceExplorer} />
-          <Route path="/orgs/:level/:subject_id/infograph/:bubble?/" component={InfoGraph} />
-          <Route path="/budget-measures/:first_column?/:selected_value?" component={BudgetMeasuresRoute} />
-          <Route path="/glossary/:active_key?" component={Glossary} />
-          <Route path="/rpb/:config?" component={ReportBuilder} />
-          <Route path="/about" component={About} />
-          <Route path="/graph/:level?/:graph?/:id?" component={GraphInventory} />
-          <Route path="/compare_estimates" component={EstimatesComparison} />
-          <Route path="/start/:no_basic_equiv?" component={Home} />
-          <Route path="/" component={Home} />
-          
+          <Route path="/metadata/:data_source?" component={LazyMetaData}/>
+          <Route path="/igoc/:grouping?" component={LazyIgocExplorer} />
+          <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={LazyResourceExplorer} />
+          <Route path="/orgs/:level/:subject_id/infograph/:bubble?/" component={LazyInfoGraph} />
+          <Route path="/budget-measures/:first_column?/:selected_value?" component={LazyBudgetMeasuresRoute} />
+          <Route path="/glossary/:active_key?" component={LazyGlossary} />
+          <Route path="/rpb/:config?" component={LazyReportBuilder} />
+          <Route path="/about" component={LazyAbout} />
+          <Route path="/graph/:level?/:graph?/:id?" component={LazyGraphInventory} />
+          <Route path="/compare_estimates" component={LazyEstimatesComparison} />
+          <Route path="/start/:no_basic_equiv?" component={LazyHome} />
+          <Route path="/" component={LazyHome} />
         </Switch>
       </div>
     );

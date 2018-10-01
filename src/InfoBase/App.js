@@ -12,11 +12,15 @@ export const app_reducer = (state={ lang: window.lang }, { type, payload }) => {
 };
 
 import { ComponentLoader } from '../core/ComponentLoader.js';
-import { Home } from '../home/home.js';
 import { TooltipActivator } from '../glossary/TooltipActivator';
 import { EasyAccess } from '../core/EasyAccess';
 import { InsertRuntimeFooterLinks } from '../core/InsertRuntimeFooterLinks.js';
 import { DevFip } from '../core/DevFip.js';
+
+const LazyHome = ComponentLoader(async () => {
+  const { Home } = await import('../home/home.js');
+  return Home;
+})
 
 const LazyGraphRoute = ComponentLoader(async () => {
   const { GraphInventory } = await import('../graph_route/graph_route.js');
@@ -105,7 +109,7 @@ export class App extends React.Component {
           <Route path="/about" component={LazyAbout} />
           <Route path="/graph/:level?/:graph?/:id?" component={LazyGraphRoute} />
           <Route path="/compare_estimates" component={LazyEstimatesComparison} />
-          <Route path="/" component={Home} />
+          <Route path="/" component={LazyHome} />
         </Switch>
       </div>
     );
