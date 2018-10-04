@@ -3,40 +3,6 @@ historical_auth_exp_title:
   en: Authorities and Expenditures ({{pa_last_year_5}} to {{pa_last_year}})
   fr: Autorisations et dépenses ({{pa_last_year_5}} à {{pa_last_year}})
   
-program_historical_auth_exp_text:
-  transform: [handlebars,markdown]
-  en: |
-    From {{pa_last_year_5}} to {{pa_last_year}}, **{{subj_name subject.dept}}** earmarked 
-    an annual average of up to **{{fmt_compact1_written program_hist_auth_average}}** in approved funding
-    for "**{{subj_name subject}}**".
-
-    {{#if hist_no_real_diff_between_exp_auth}}
-    During the same period, the **{{subj_name subject.dept}}** spent an average of 
-    {{fmt_compact1_written program_hist_exp_average}} per year on "**{{subj_name subject}}**".
-    {{/if}}
-  fr: |
-    De {{pa_last_year_5}} à {{pa_last_year}}, un montant approuvé allant jusqu’à 
-    **{{fmt_compact1_written program_hist_auth_average}}** en moyenne
-    par exercice a été affecté au programme «**{{subj_name subject}}**».
-
-    {{#if hist_no_real_diff_between_exp_auth}}
-    Au cours de la même période, un montant de {{fmt_compact1_written program_hist_exp_average}}
-    a été dépensé en moyenne par exercice pour le programme «**{{subj_name subject}}**».
-    {{/if}}
-
-tag_historical_auth_exp_text:
-  transform: [handlebars,markdown]
-  en: |
-    From {{pa_last_year_5}} to {{pa_last_year}}, an annual average of up to **{{fmt_compact1_written tag_hist_auth_average}}** in {{gl_tt "approved funds" "AUTH"}} 
-    were earmarked for programs that fall under "**{{subj_name subject}}**".
-    During the same period, an average of **{{fmt_compact1_written tag_hist_exp_average}}** was {{gl_tt "spent" "EXP"}} per year on
-    programs falling under the "**{{subj_name subject}}**" tag.
-  fr: |
-    De {{pa_last_year_5}} à {{pa_last_year}}, une moyenne annuelle pouvant atteindre **{{fmt_compact1_written tag_hist_auth_average}}** de {{gl_tt "fonds approuvés" "AUTH"}}
-    ont été affectés à des programmes sous l’étiquette «**{{subj_name subject}}**». 
-    Au cours de la même période, **{{fmt_compact1_written tag_hist_exp_average}}** par année ont été {{gl_tt "dépensés" "EXP"}} en moyenne sous l’étiquette «**{{subj_name subject}}**».
-
-
 
 gov_historical_auth_exp_text:
   transform: [handlebars,markdown]

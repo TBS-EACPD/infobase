@@ -72,19 +72,7 @@ export default {
       this.add_col(header)
         .add_child([
           {
-            "type": "big_int",
-            "nick": `${header}auth`,
-            "header": {
-              "en": "Total Authorities available for use",
-              "fr": "Total des autorisations disponibles pour emploi",
-            },
-            "description": {
-              "en": `Corresponds to the authorities provided by Parliament, including transfers from other organizations or adjustments that are made during the year.`,
-              "fr": `Correspondent aux autorisations accordées par le Parlement, y compris les transferts provenant d’autres organisations ou les rajustements qui ont été effectués au cours de l’exercice.`,
-            },
-          },
-          {
-            "type": "big_int",
+            "type":"big_int",
             "simple_default": ix === 4,
             "nick": `${header}exp`,
             "header": {

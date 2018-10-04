@@ -158,7 +158,6 @@ const get_program_panels = subject => {
       "financial_intro", 
       "welcome_mat",
       "budget_measures_panel",
-      'historical_auth_exp',
 
       'vote_stat_split',
       'spend_rev_split',
@@ -228,7 +227,6 @@ const get_tag_panels = subject => {
     //   "financial_intro", 
     //   "welcome_mat",
     //   'tag_top_3_depts',
-    //   "historical_auth_exp",
     //   "vote_stat_split",
     //   'spend_rev_split',
     //   'top_spending_areas',

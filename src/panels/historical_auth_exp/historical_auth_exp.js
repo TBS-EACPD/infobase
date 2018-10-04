@@ -28,17 +28,12 @@ const exp_cols = _.map(std_years, yr=>yr+"exp");
 
 const text_keys_by_level = {
   dept: "dept_historical_auth_exp_text",
-  program: "program_historical_auth_exp_text",
-  tag: "tag_historical_auth_exp_text",
   gov: "gov_historical_auth_exp_text",
 };
 
 
 const calculate = function( subject,info,options ) {
-  const {
-    table6,
-    table4, 
-  } = this.tables;
+  const { table4 } = this.tables;
 
   let stacked = false;
   let auth,exp;
@@ -49,27 +44,13 @@ const calculate = function( subject,info,options ) {
     exp = q.sum(exp_cols,{as_object: false});
   } else if ( subject.is("dept")) {
     const q = table4.q(subject);
-    auth = q.sum(auth_cols,{as_object: false});
-    exp = q.sum(exp_cols,{as_object: false});
-  } else if ( subject.is("program") ) {
-    const row = _.first(table6.programs.get(subject));
-    auth = _.map(auth_cols, col => row[col] );
-    exp = _.map(exp_cols, col => row[col] );
-    if (d3.sum(auth) === 0 && d3.sum(exp)===0 ) {
-      return false;
-    }
-  } else if ( subject.level === 'tag') {
-    if(subject.is('tag') && subject.root.id !== 'GOCO'){ 
-      //turn off this graph for Many-to-many tags 
-      return false; 
-    }
-    const q = table6.q(subject);
-    auth = q.sum(auth_cols,{as_object: false});
-    exp = q.sum(exp_cols,{as_object: false});
+    auth = q.sum(auth_cols,{as_object:false});
+    exp = q.sum(exp_cols,{as_object:false});
   }
 
-  if (_.every(auth, (x,i)=> auth[i]-exp[i] >= 0 ) &&
-        _.every(auth.concat(exp), d=> d>=0)
+  if(
+    _.every(auth, (x,i)=> auth[i]-exp[i] >= 0   ) &&
+    _.every(auth.concat(exp), d=> d>=0)
   ){
     auth = _.map(auth, (x,i)=> auth[i] - exp[i]);
     stacked = true;
@@ -185,6 +166,7 @@ new PanelGraph({
   info_deps: ["table4_dept_info"],
   calculate,
   render,
+<<<<<<< HEAD
 });
 
 new PanelGraph({
@@ -207,3 +189,6 @@ new PanelGraph({
 
 
 
+=======
+});
+>>>>>>> get rid of authority cols in table6, and corresponding auth_exp graphs for tags/programs
