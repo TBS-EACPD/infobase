@@ -21,7 +21,7 @@ import { ContainerEscapeHatch } from './components/ContainerEscapeHatch.js';
 import { FilterTable } from './components/FilterTable.js';
 import { Details } from './components/Details.js';
 import { EmbeddedVideo } from './components/EmbeddedVideo.js';
-
+import { SpinnerWrapper } from './components/SpinnerWrapper.js';
 
 import { abbrev } from './core/utils.js';
 
@@ -43,14 +43,6 @@ class Format extends React.PureComponent {
     return <span 
       dangerouslySetInnerHTML={{__html: formats[type](content) }} 
     />;
-  }
-}
-
-class SpinnerWrapper extends React.Component {
-  render(){ return <div ref="main" /> }
-  componentDidMount(){ 
-    const {scale} = this.props || {scale: 2};
-    this.refs.main.appendChild( new Spinner({scale}).spin().el );
   }
 }
 
