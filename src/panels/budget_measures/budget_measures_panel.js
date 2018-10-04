@@ -404,12 +404,24 @@ class BudgetMeasureHBars extends React.Component {
         .map(
           (program_allocation, program_id) => {
             const program = Program.lookup(program_id) || CRSO.lookup(program_id);
-            return {
-              key: program_id,
-              label: program.name,
-              link: infograph_href_template(program, "financial"),
-              data: {"allocated": program_allocation},
-            };
+
+            if ( !_.isUndefined(program) ){
+              return {
+                key: program_id,
+                label: program.name,
+                link: infograph_href_template(program, "financial"),
+                data: {"allocated": program_allocation},
+              };
+            } else {
+              DEV && console.warn(`Budget panel: missing program ${program_id}`); // eslint-disable-line
+
+              return {
+                key: program_id,
+                label: program_id,
+                link: false,
+                data: {"allocated": program_allocation},
+              };
+            }
           }
         )
         .value();
@@ -727,7 +739,11 @@ class BudgetMeasureHBars extends React.Component {
                 colors = {bar_colors}
                 bar_label_formater = {
                   ({ label, link, is_link_out}) => {
-                    return `<a href="${link}" target="${is_link_out ? "_blank" : "_self"}">${label}</a>`;
+                    if (link){
+                      return `<a href="${link}" target="${is_link_out ? "_blank" : "_self"}">${label}</a>`;
+                    } else {
+                      return `<a>${label}</a>`;
+                    }
                   }
                 }
                 paginate = {true}
