@@ -28,7 +28,7 @@ const get_total_budget_measure_funds = (selected_value, filtered_chapter_keys) =
     .flatMap( budgetMeasure => budgetMeasure.data )
     .reduce( (sum, data_row) => sum + (data_row[selected_value]), 0 )
     .value();
-}
+};
 
 const post_traversal_modifications = (node, selected_value) => {
   node.value_type = selected_value;
@@ -43,11 +43,11 @@ const post_traversal_modifications = (node, selected_value) => {
 
   post_traversal_children_filter(node);
   post_traversal_search_string_set(node);
-}
+};
 
 const roll_up_children_values = (node) => {
   return _.reduce(node.children, (sum, child_node) => sum + child_node.value, 0);
-}
+};
 
 const get_node_submeasures = (node, selected_value) => {
   let org_id, measure_id, program_or_crso_id;
@@ -55,8 +55,8 @@ const get_node_submeasures = (node, selected_value) => {
   if (node.data.type === "program_allocation"){
     program_or_crso_id = node.data.id;
     org_id = node.parent.data.type === "dept" ? 
-    node.parent.data.id :
-    node.parent.parent.data.id;
+      node.parent.data.id :
+      node.parent.parent.data.id;
     measure_id = node.parent.data.type === "budget_measure" ? 
       node.parent.data.id :
       node.parent.parent.data.id;
@@ -84,7 +84,7 @@ const get_node_submeasures = (node, selected_value) => {
     .value();
 
   return node_submeasures;
-}
+};
 
 const post_traversal_children_filter = (node) => {
   if (node.value_type === "funding"){
@@ -125,12 +125,29 @@ const make_program_allocation_nodes = (measure_id, org_id) => {
       const crso = CRSO.lookup(subject_id);
   
       const program_or_crso = program || crso;
-  
-      return {
-        ...program_or_crso,
+
+      const type_and_value = {
         type: "program_allocation",
         value: allocation_value,
       };
+  
+      if ( !_.isUndefined(program_or_crso) ){
+        return {
+          ...program_or_crso,
+          ...type_and_value,
+        };
+      } else {
+        // Budget data can be a bit messy, and might also be introducing new programs not yet in the InfoBase,
+        // worth handling cases and just logging it in the console, for ease of catching them
+        DEV && console.warn(`Budget hierarchy: missing program ${subject_id}`); // eslint-disable-line
+
+        return {
+          name: subject_id,
+          id: subject_id,
+          no_link: true,
+          ...type_and_value,
+        };
+      }
     });
   
     return program_allocation_nodes;
@@ -165,7 +182,7 @@ const budget_measure_first_hierarchy_factory = (selected_value, filtered_chapter
               notes: !has_no_description ? text_maker("budget_measure_description_values_clarification") : false,
               chapter_key: budgetMeasure.chapter_key,
               value: _.reduce(budgetMeasure.data, (sum, data_row) => sum + (data_row[selected_value]), 0),
-            }
+            };
           })
           .value();
         return budgetMeasureNodes;

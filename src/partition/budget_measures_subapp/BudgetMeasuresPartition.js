@@ -97,7 +97,7 @@ const popup_template = node => {
     node.data.type :
     but_actually_a_crso ? "crso" : "program";
 
-  const has_infographic = is_dept && node.data.id !== 9999 || is_program;
+  const has_infographic = (is_dept && node.data.id !== 9999) || (is_program && !node.data.no_link);
 
   const is_first_column = node.depth === 1;
 
