@@ -22,6 +22,10 @@ export class EmbeddedVideo extends React.Component {
       container,
     } = this.props;
 
+    const transcript_content = transcript && React.isValidElement(transcript) ?
+      transcript :
+      <div dangerouslySetInnerHTML={{ __html: transcript }}/>;
+
     return (
       <div className = { container && "embedded-video-container" }>
         <div className = "embedded-video">
@@ -37,7 +41,7 @@ export class EmbeddedVideo extends React.Component {
         { transcript && 
           <Details
             summary_content = "Transcription"
-            content = { transcript }
+            content = { transcript_content }
           />
         }
       </div>
@@ -48,4 +52,4 @@ export class EmbeddedVideo extends React.Component {
 EmbeddedVideo.defaultProps = {
   container: true,
   transfript: false,
-}
+};
