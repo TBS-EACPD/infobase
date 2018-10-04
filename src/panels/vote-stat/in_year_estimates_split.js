@@ -12,7 +12,7 @@ import {
 const { Format } = util_components;
 
 const { 
-  A11yTable,
+  A11YTable,
   Bar,
 } = declarative_charts;
 
@@ -58,7 +58,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
 
 
     content = (
-      <A11yTable
+      <A11YTable
         {...{
           label_col_header : text_maker("estimates_doc"), 
           data_col_headers: [ run_template("{{est_in_year}}") ],
