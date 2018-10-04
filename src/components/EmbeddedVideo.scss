@@ -1,6 +1,12 @@
 .embedded-video-container {
-  width: 66.6%;
   margin: auto;
+
+  @media(min-width: 992px){
+    width: 75%;
+  }
+  @media(max-width: 991px){
+    width: 100%;
+  }
 }
 
 .embedded-video {
