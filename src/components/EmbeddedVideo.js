@@ -30,7 +30,7 @@ export class EmbeddedVideo extends React.Component {
             src = { video_source }
             frameBorder = "0" 
             allow = "encrypted-media" 
-            allowFullscreen
+            allowFullScreen
           />
         </div>
         { transcript && 
