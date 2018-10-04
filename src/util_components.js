@@ -19,6 +19,9 @@ import { CardBackgroundImage } from './components/CardBackgroundImage.js';
 import { DebouncedTextInput } from './components/DebouncedTextInput.js';
 import { ContainerEscapeHatch } from './components/ContainerEscapeHatch.js';
 import { FilterTable } from './components/FilterTable.js';
+import { Details } from './components/Details.js';
+import { EmbeddedVideo } from './components/EmbeddedVideo.js';
+
 
 import { abbrev } from './core/utils.js';
 
@@ -114,6 +117,8 @@ export {
   CardBackgroundImage,
   DebouncedTextInput,
   FilterTable,
+  Details,
+  EmbeddedVideo,
   ContainerEscapeHatch,
   Abbrev,
   create_text_maker_component,

@@ -4,8 +4,11 @@ import { Subject } from '../../models/subject';
 import { businessConstants } from '../../models/businessConstants.js';
 import { ensure_loaded } from '../../core/lazy_loader.js';
 import { StandardRouteContainer } from '../../core/NavComponents.js';
-import { SpinnerWrapper } from '../../util_components';
-import { Details } from '../../components/Details.js';
+import { 
+  SpinnerWrapper,
+  Details,
+  EmbeddedVideo,
+} from '../../util_components';
 
 import {
   text_maker,
@@ -212,6 +215,10 @@ export class BudgetMeasuresRoute extends React.Component {
         { !loading &&
           <div className="budget-measures">
             <div className="budget-measures-top-text">
+              <EmbeddedVideo
+                video_source="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0"
+                transcript="blah"
+              />
               <TextMaker text_key="budget_route_top_text" />
               <Details
                 summary_content={ <TextMaker text_key="budget_stats_title" /> }

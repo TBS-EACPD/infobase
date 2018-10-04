@@ -1,0 +1,19 @@
+.embedded-video-container {
+  width: 66.6%;
+  margin: auto;
+}
+
+.embedded-video {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+}
+
+.embedded-video > iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
