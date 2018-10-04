@@ -216,7 +216,7 @@ export class BudgetMeasuresRoute extends React.Component {
           <div className="budget-measures">
             <div className="budget-measures-top-text">
               <EmbeddedVideo
-                video_source="https://www.youtube.com/embed/2icdh1fbuho?rel=0"
+                video_source={ text_maker("budget_alignment_video_src") }
                 transcript={ text_maker("budget_alignment_video_transcript") }
               />
               <TextMaker text_key="budget_route_top_text" />
