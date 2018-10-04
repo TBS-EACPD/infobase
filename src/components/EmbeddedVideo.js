@@ -19,11 +19,12 @@ export class EmbeddedVideo extends React.Component {
     const {
       video_source,
       transcript,
+      container,
     } = this.props;
 
     return (
-      <div className="embedded-video-container">
-        <div className="embedded-video">
+      <div className = { container && "embedded-video-container" }>
+        <div className = "embedded-video">
           { loading && <SpinnerWrapper ref="spinner" scale = { 2 } /> }
           <iframe
             onLoad = { () => this.setState( { loading: false } ) }
@@ -35,11 +36,16 @@ export class EmbeddedVideo extends React.Component {
         </div>
         { transcript && 
           <Details
-            summary_content = "TODO: transcript text key"
+            summary_content = "Transcription"
             content = { transcript }
           />
         }
       </div>
     );
   }
-} 
+}
+
+EmbeddedVideo.defaultProps = {
+  container: true,
+  transfript: false,
+}
