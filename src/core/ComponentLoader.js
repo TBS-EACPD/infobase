@@ -47,6 +47,10 @@ export const ComponentLoader = (get_component, LoadingElement, errorElement)  =>
     super();
     this.state = { loading: true };
 
+    this.errorComponent = errorElement ?
+      () => errorElement :
+      DefaultErrorComponent;
+
     get_component()
       .then( Component => {
         
@@ -87,11 +91,7 @@ export const ComponentLoader = (get_component, LoadingElement, errorElement)  =>
       });
     }
 
-    this.Component = (
-      errorElement ?
-        () => errorElement :
-        DefaultErrorComponent
-    );
+    this.Component = this.errorComponent;
 
     this.setState({loading: false});
   }
