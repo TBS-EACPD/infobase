@@ -8,6 +8,7 @@ const fs = require("fs");
 const _ = require("lodash");
 const Handlebars = require('handlebars');
 const d3_dsv = require('d3-dsv');
+const gitsha = require('git-bundle-sha');
 
 global._ = _; //global is the 'window' on the node environment
 
@@ -185,6 +186,12 @@ function get_lookup_name(file_name){
   return _.last(str.split('/'));
 }
 
+function write_gitsha_file(dir){
+  gitsha(function(err, sha){
+    fs.writeFileSync(`${dir}/build_sha`, sha);
+  });
+}
+
 function build_proj(PROJ){
   
   const dir = 'build/InfoBase';
@@ -220,6 +227,7 @@ function build_proj(PROJ){
 
   write_result_bundles(parsed_bilingual_models, results_dir);
 
+  write_gitsha_file(dir);
 
   _.each(["en","fr"], lang => {
 
