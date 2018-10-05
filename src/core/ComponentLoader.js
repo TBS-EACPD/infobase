@@ -36,7 +36,7 @@ export const ComponentLoader = (get_component, LoadingElement, errorElement)  =>
   try_to_catch_stale_client_error(){
     const unique_query_param = Date.now() + Math.random().toString().replace('.','');
 
-    // Stale clients are our mostly likely production errors, always check for and attempt to handle them
+    // Stale clients are our most likely production errors, always check for and attempt to handle them
     // Reloads the page if the client/CDN sha's are mismatched, otherwise displays the error component
     make_request( get_static_url('build_sha', unique_query_param) )
       .then( build_sha => {
@@ -53,10 +53,12 @@ export const ComponentLoader = (get_component, LoadingElement, errorElement)  =>
       });
   }
   display_error_component(){
-    !DEV && log_standard_event({
-      SUBAPP: window.location.hash.replace('#',''),
-      MISC1: "ERROR_IN_PROD",
-    });
+    if (!DEV){
+      log_standard_event({
+        SUBAPP: window.location.hash.replace('#',''),
+        MISC1: "ERROR_IN_PROD",
+      });
+    }
 
     this.Component = (
       errorElement ?
