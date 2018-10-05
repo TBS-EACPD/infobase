@@ -27,7 +27,7 @@ export const ComponentLoader = (get_component, LoadingElement, errorElement)  =>
         }, 250);
   
       })
-      .catch( (error) => {
+      .catch( () => {
   
         this.Component = (
           errorElement ?
@@ -48,6 +48,9 @@ export const ComponentLoader = (get_component, LoadingElement, errorElement)  =>
             } else {
               window.location.reload(true); // Force reload without cache
             }
+          })
+          .catch( () => {
+            this.setState({loading: false});
           })
       });
   }
