@@ -80,7 +80,8 @@ const get_node_submeasures = (node, selected_value) => {
         submeasure.data.program_allocations[program_or_crso_id]: 
         submeasure.data[selected_value],
     }))
-    .filter( submeasure => !_.isUndefined(submeasure.value) && submeasure.value !== 0)
+    .filter( submeasure => !_.isUndefined(submeasure.value) && submeasure.value !== 0 )
+    .sortBy( submeasure => -submeasure.value )
     .value();
 
   return node_submeasures;
