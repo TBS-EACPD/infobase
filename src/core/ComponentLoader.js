@@ -50,11 +50,7 @@ export const ComponentLoader = (get_component, LoadingElement, errorElement)  =>
     get_component()
       .then( Component => {
         
-        this.Component = (
-          errorElement ?
-            () => errorElement :
-            DefaultErrorComponent
-        );
+        this.Component = Component;
         this.timedOutStateChange = setTimeout(()=>{ //less janky if we force a timeout
           this.setState({loading: false});
         }, 250);
