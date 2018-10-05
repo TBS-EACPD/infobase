@@ -107,7 +107,6 @@ budget_measure_description_values_clarification:
   fr: |
     Les dépenses présentées dans la description sont présentées en termes de comptabilité d’exercise et donc elles pourraient ne pas correspondre aux montants présenté en termes du budget des depenses selon le Budget principal des dépenses de 2018-2019 : Provenance et utilisation du crédit d’exécution du budget par ministère.
 
-
 budget_measures_desc_meta_attr:
   en: This map shows where public funds are going and how they will be spent. It is the link between the 2018 Budget Plan’s budget measures and the Main Estimates’ budget implementation vote.
   fr: Cette carte montre où vont les fonds publics et comment ils seront dépensés. Elle relie les mesures du Plan budgétaire 2018 au crédit d'exécution du budget dans le budget principal des dépenses.
@@ -115,7 +114,6 @@ budget_measures_desc_meta_attr:
 budget_alignment_video_src:
   en: https://www.youtube-nocookie.com/embed/iOsu60u4s-E?rel=0
   fr: https://www.youtube-nocookie.com/embed/7nKaanj6Gwk?rel=0
-
 
 budget_alignment_video_transcript:
   transform: [markdown]
