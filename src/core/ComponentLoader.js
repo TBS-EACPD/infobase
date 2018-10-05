@@ -1,4 +1,5 @@
 import { get_static_url, make_request } from './request_utils.js';
+import { log_standard_event } from './analytics.js';
 
 import { SpinnerWrapper } from '../util_components.js';
 
@@ -12,6 +13,7 @@ class DefaultErrorComponent extends React.Component {
     );
   }
 }
+
 
 export const ComponentLoader = (get_component, LoadingElement, errorElement)  => class ComponentLoader_ extends React.Component {
   constructor(){
@@ -28,31 +30,38 @@ export const ComponentLoader = (get_component, LoadingElement, errorElement)  =>
   
       })
       .catch( () => {
-  
-        this.Component = (
-          errorElement ?
-            () => errorElement :
-            DefaultErrorComponent
-        );
-
-        // Attempts to identify and handle most common production error case, where the client's out of sync with the CDN content
-        // Does this by compairing the client's sha to the CDN's build sha
-        // Reloads the page if the sha's are mismatched, otherwise display the error component
-        const unique_query_param = Date.now() + Math.random();
-        make_request( get_static_url('build_sha', unique_query_param) )
-          .then( build_sha => {
-            const local_sha_matches_remote_sha = build_sha.search(`^${window.sha}`) !== -1;
-
-            if (local_sha_matches_remote_sha){
-              this.setState({loading: false}); // Display error component
-            } else {
-              window.location.reload(true); // Force reload without cache
-            }
-          })
-          .catch( () => {
-            this.setState({loading: false});
-          })
+        this.try_to_catch_stale_client_error();
       });
+  }
+  try_to_catch_stale_client_error(){
+    const unique_query_param = Date.now() + Math.random().toString().replace('.','');
+
+    // Stale clients are our mostly likely production errors, always check for and attempt to handle them
+    // Reloads the page if the client/CDN sha's are mismatched, otherwise displays the error component
+    make_request( get_static_url('build_sha', unique_query_param) )
+      .then( build_sha => {
+        const local_sha_matches_remote_sha = build_sha.search(`^${window.sha}`) !== -1;
+    
+        if (local_sha_matches_remote_sha){
+          this.display_error_component();
+        } else {
+          window.location.reload(true); // Force reload without cache
+        }
+      })
+      .catch( () => {
+        this.display_error_component();
+      });
+  }
+  display_error_component(){
+    !DEV && log_standard_event({ MISC1: "ERROR_IN_PROD" });
+
+    this.Component = (
+      errorElement ?
+        () => errorElement :
+        DefaultErrorComponent
+    );
+
+    this.setState({loading: false});
   }
   componentWillUnmount(){
     clearTimeout(this.timedOutStateChange);
