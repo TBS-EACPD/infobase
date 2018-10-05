@@ -3,13 +3,40 @@ import { log_standard_event } from './analytics.js';
 
 import { SpinnerWrapper } from '../util_components.js';
 
-
 class DefaultErrorComponent extends React.Component {
   render(){
     return (
-      window.lang === "en" ? 
-        "An error occured" :
-        "Une erreur est survenue"
+      <div
+        style = {{
+          fontSize: "32px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <span>
+          { 
+            window.lang === "en" ? 
+              "An error has occured" :
+              "Une erreur est survenue"
+          }
+        </span>
+        <img 
+          className = "aria-hidden" 
+          src = { get_static_url("svg/not-available.svg") }
+          style = {{
+            maxWidth: "100%",
+            width: "400px",
+          }}
+        />
+        <span>
+          { 
+            window.lang === "en" ? 
+              "Please refresh the page" :
+              "Veuillez actualiser la page"
+          }
+        </span>
+      </div>
     );
   }
 }
@@ -23,7 +50,11 @@ export const ComponentLoader = (get_component, LoadingElement, errorElement)  =>
     get_component()
       .then( Component => {
         
-        this.Component = Component;
+        this.Component = (
+          errorElement ?
+            () => errorElement :
+            DefaultErrorComponent
+        );
         this.timedOutStateChange = setTimeout(()=>{ //less janky if we force a timeout
           this.setState({loading: false});
         }, 250);
