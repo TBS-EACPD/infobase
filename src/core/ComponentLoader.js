@@ -44,7 +44,7 @@ export const ComponentLoader = (get_component, LoadingElement, errorElement)  =>
     
         if (local_sha_matches_remote_sha){
           this.display_error_component();
-        } else {
+        } else if (!DEV) {
           window.location.reload(true); // Force reload without cache
         }
       })
@@ -53,7 +53,10 @@ export const ComponentLoader = (get_component, LoadingElement, errorElement)  =>
       });
   }
   display_error_component(){
-    !DEV && log_standard_event({ MISC1: "ERROR_IN_PROD" });
+    !DEV && log_standard_event({
+      SUBAPP: window.location.hash.replace('#',''),
+      MISC1: "ERROR_IN_PROD",
+    });
 
     this.Component = (
       errorElement ?
