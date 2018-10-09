@@ -2,23 +2,30 @@ InfoBase
 ========
 
 ## First time setup
-0. Assuming you have npm, node, and git installed
-1. Open terminal and go to a folder where you want to store the project e.g. `cd ~/Documents` 
-2. `git clone https://github.com/TBS-EACPD/InfoBase.git` then enter your github credentials.
+0. Have npm, node, and git installed
+1. Open a terminal and go to a folder where you want to store the project e.g. `cd ~/Documents` 
+2. `git clone https://github.com/TBS-EACPD/InfoBase.git` then enter your github credentials
 3. `cd /InfoBase`
 
-## compiling the InfoBase
+## Compiling the InfoBase
 0. `npm ci` (needs to be run least frequently, see following section for when)
 1. `npm run IB_base`
 2. `npm run IB_q` (compiles quickly, only works in chrome) or `npm run IB_dev` (compiles to ES5 so you can test in IE/safari/mobile)
-3. sh serve-loopback (starts the server, localhost only)
+3. `sh serve-loopback` (starts the server, localhost only)
 4. visit localhost:8080/build/InfoBase/index-eng.html
 
-### when do I need to restart/rerun these commands?
-* `npm ci` when package-lock.json is changed. Note: use `npm install` if you are adding a new package/updating a package version
-* `IB_base` must be re-run when the data, svgs, or css in src/extended-bootstrap changes. Changing branches is often a good reason to re-run IB_base.
-* `IB_q/IB_dev/IB_prod` can be left on watch while developing but must be re-run when you change branches. Sometimes you don't need to, but if the build-process changes it's necessary. 
+See package.json for a list of all build comands.
 
+### When do I need to restart/rerun these commands?
+* `npm ci` when package-lock.json is changed. Note: use `npm install` if you are adding a new package/updating a package version
+* `IB_base` must be re-run when the data, svgs, or css in src/extended-bootstrap changes. Changing branches is often a good reason to re-run IB_base
+* `IB_q/IB_dev/IB_prod` can be left on watch while developing but must be re-run when you change branches. Sometimes you don't need to, but if the build-process changes it's necessary
+
+## Running browser tests
+1. Do a full prod build (both languages, both versions)
+2. Have an active `sh serve-loopback` process
+3. `npm run headless_test`
+Note: these are slow, have fairly basic coverage, and are run by CI after each push to GitHub, so running them locally is generally unnecessary.
 
 Some TODO's not worth moving to issues right now
 ---------------------
