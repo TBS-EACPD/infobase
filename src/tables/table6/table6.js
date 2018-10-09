@@ -304,14 +304,6 @@ Statistics.create_and_register({
     add("pct_of_dept_exp_planning_year_1", c.program_exp_planning_year_1 / infos.table6_dept_info.dept_exp_planning_year_1);
     add("dept_exp_planning_year_1", infos.table6_dept_info.dept_exp_planning_year_1);
 
-    // Authorities Calculations
-    stats.add_all_years(add,"auth",std_years, (year,i) => row[year+"auth"] );
-    const five_yr_auth_avg = c.program_auth_average;
-    add("hist_auth_average", five_yr_auth_avg);
-    stats.add_all_years(add,"auth",planning_years, (year,i) => row[year] );
-
-    add("hist_no_real_diff_between_exp_auth", five_yr_exp_avg/five_yr_auth_avg > 0.97);
-
     //CRSO Calculations
     // add("crso_exp_planning_year_1", infos.table6_crso_info.crso_exp_planning_year_1);
     const crso = subject.crso
@@ -349,11 +341,6 @@ Statistics.create_and_register({
     stats.add_all_years(add,"exp", std_years, (year,i) => q.sum(year+"exp"));
     const five_yr_exp_avg = c.tag_exp_average;
     add("hist_exp_average", five_yr_exp_avg);
-
-    stats.add_all_years(add,"auth",std_years, (year,i) => q.sum(year+"auth") );
-    const five_yr_auth_avg = c.tag_auth_average;
-    add("hist_auth_average", five_yr_auth_avg);
-
 
     stats.add_all_years(add,"exp",planning_years, (year,i) => q.sum(year) );
     add("prg_num",last_year_prg_num);
@@ -394,10 +381,6 @@ Statistics.create_and_register({
     stats.add_all_years(add,"exp", planning_years, (year,i) => q.sum(year)); 
     add("planned_exp_average", c.crso_exp_average);
     add("planned_exp_total", c.crso_exp_total);
-
-    stats.add_all_years(add,"auth",std_years, (year,i) => q.sum(year+"auth") );
-    const five_yr_auth_avg = c.crso_auth_average;
-    add("hist_auth_average", five_yr_auth_avg);
 
     const table6_data = q.data
 
