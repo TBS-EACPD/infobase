@@ -6,9 +6,9 @@ InfoBase
 1. Open terminal and go to a folder where you want to store the project e.g. `cd ~/Documents` 
 2. `git clone https://github.com/TBS-EACPD/InfoBase.git` then enter your github credentials.
 3. `cd /InfoBase`
-4. `npm ci`
 
 ## compiling the InfoBase
+0. `npm ci` (needs to be run least frequently, see following section for when)
 1. `npm run IB_base`
 2. `npm run IB_q` (compiles quickly, only works in chrome) or `npm run IB_dev` (compiles to ES5 so you can test in IE/safari/mobile)
 3. sh serve-loopback (starts the server, localhost only)
