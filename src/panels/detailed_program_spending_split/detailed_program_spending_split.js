@@ -98,11 +98,10 @@ const info_deps_by_level = {
         
       }
 
-      const auth_cols = _.map(std_years, yr=>yr+"auth");
       const exp_cols = _.map(std_years, yr=>yr+"exp");
       const table6_data = _.chain( table6.q(subject).data)
         .filter(row => {
-          return d3.sum(auth_cols.concat(exp_cols), col=> row[col]) !== 0;
+          return d3.sum(exp_cols, col=> row[col]) !== 0;
         })
         .map(row => 
           ({

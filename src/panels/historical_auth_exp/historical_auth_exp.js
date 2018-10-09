@@ -38,14 +38,14 @@ const calculate = function( subject,info,options ) {
   let stacked = false;
   let auth,exp;
 
-  if (subject.is("gov")){
+  if ( subject.is("gov") ){
     const q = table4.q();
-    auth = q.sum(auth_cols,{as_object: false});
-    exp = q.sum(exp_cols,{as_object: false});
-  } else if ( subject.is("dept")) {
+    auth = q.sum(auth_cols, {as_object: false});
+    exp = q.sum(exp_cols, {as_object: false});
+  } else if ( subject.is("dept") ) {
     const q = table4.q(subject);
-    auth = q.sum(auth_cols,{as_object:false});
-    exp = q.sum(exp_cols,{as_object:false});
+    auth = q.sum(auth_cols, {as_object: false});
+    exp = q.sum(exp_cols, {as_object: false});
   }
 
   if(
