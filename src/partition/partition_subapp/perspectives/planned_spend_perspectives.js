@@ -363,6 +363,7 @@ const get_year = (presentation_scheme) => {
   switch (presentation_scheme){
     case "vs_type" : return "{{est_in_year}}";
     case "est_doc_mains" : return "{{est_in_year}}";
+    case "est_doc_sea" : return "{{est_in_year}}";
     default : return "{{est_last_year}}";
   }
 }
