@@ -196,7 +196,7 @@ const get_children_content = ({
         <header 
           className="ExplorerNodeContainer__ChildrenGroupHeader"
           style={{
-            marginLeft: depth && `${depth*INDENT_SIZE}px`,
+            marginLeft: depth && `${INDENT_SIZE}px`,
           }}
         >
           {display}
