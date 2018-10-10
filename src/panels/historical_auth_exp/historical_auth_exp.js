@@ -166,29 +166,4 @@ new PanelGraph({
   info_deps: ["table4_dept_info"],
   calculate,
   render,
-<<<<<<< HEAD
 });
-
-new PanelGraph({
-  level: "program",
-  key: "historical_auth_exp",
-  depends_on: ["table6"],
-  info_deps: ["table6_program_info"],
-  calculate,
-  render,
-});
-
-new PanelGraph({
-  level: "tag",
-  key: "historical_auth_exp",
-  depends_on: ["table6"],
-  info_deps: ["table6_tag_info"],
-  calculate,
-  render,
-});
-
-
-
-=======
-});
->>>>>>> get rid of authority cols in table6, and corresponding auth_exp graphs for tags/programs
