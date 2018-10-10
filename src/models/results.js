@@ -376,6 +376,8 @@ class Indicator {
   }
 
 }
+
+
 const status_key_to_icon_key = {
   past_met: 'met',
   past_not_met: 'not_met',
@@ -384,6 +386,24 @@ const status_key_to_icon_key = {
   future_not_reported: 'not_reported',
   future_to_be_achieved: 'to_be_achieved',
 };
+const icon_key_to_glossary_key = {
+  met: "RESULTS_MET",
+  not_met: "RESULTS_MET", // DRRTODO
+  not_reported: "RESULTS_MET", // DRRTODO
+  to_be_achieved: "RESULTS_MET", // DRRTODO
+};
+const icon_key_to_svg_name = {
+  met: "met",
+  not_met: "attention-req",
+  not_reported: "not-available",
+  to_be_achieved: "on-track",
+};
+const ordered_icon_keys = [
+  'met', 
+  'to_be_achieved', 
+  'not_met', 
+  'not_reported',
+];
 
 
 //does not use staticStoreMixin because it's a linkage table, there's no primary key
@@ -472,6 +492,9 @@ export {
   PI_DR_Links,
   ResultCounts,
   status_key_to_icon_key,
+  icon_key_to_glossary_key,
+  icon_key_to_svg_name,
+  ordered_icon_keys,
 };
 
 Object.assign(window._DEV_HELPERS, {

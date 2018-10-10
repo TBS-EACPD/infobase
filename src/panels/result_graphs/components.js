@@ -3,6 +3,11 @@ import { Fragment } from 'react';
 import { trivial_text_maker, util_components } from '../shared.js';
 import { businessConstants } from '../../models/businessConstants.js';
 import { get_static_url } from '../../core/request_utils.js';
+import {
+  icon_key_to_glossary_key,
+  icon_key_to_svg_name,
+  ordered_icon_keys,
+} from '../../models/results.js';
 
 const { result_statuses, result_simple_statuses } = businessConstants;
 const { 
@@ -13,7 +18,7 @@ const {
   FilterTable,
 } = util_components;
 
-const get_svg_url = (svg_name) => get_static_url(`svg/${svg_name}.svg`);
+const get_svg_url = (icon_key) => get_static_url(`svg/${icon_key_to_svg_name[icon_key]}.svg`);
 
 /* to be used with planned targets and actual result */
 const IndicatorResultDisplay = ({
@@ -199,30 +204,19 @@ const QuadrantDefList = ({defs} ) => <div>
 
 const make_status_icons = (width) => {
   const status_icon_style = {width: width, height: width};
-  return {
-    //icons for specific colours that group the other status_keys
-    success: <img src={get_svg_url("met")} style={status_icon_style} />,
-    ontrack: <img src={get_svg_url("on-track")} style={status_icon_style} />,
-    failure: <img src={get_svg_url("attention-req")} style={status_icon_style} />,
-    not_avail: <img src={get_svg_url("not-available")} style={status_icon_style} />,
-    not_appl: <img src={get_svg_url("not-applicable")} style={status_icon_style} />,
-  };
+  return _.chain(ordered_icon_keys)
+    .map(icon_key => [
+      icon_key,
+      <img key={icon_key} src={get_svg_url(icon_key)} style={status_icon_style} />,
+    ])
+    .fromPairs()
+    .value();
 };
 
 const large_status_icons = make_status_icons('41px');
 const status_icons = make_status_icons('25px');
 
 
-const icon_key_to_glossary_key = {
-  success: "RESULTS_MET",
-  ontrack: "RESULTS_OT",
-  failure: "RESULTS_AR",
-  not_avail: "RESULTS_NA",
-  not_appl: "RESULTS_NOTAPP",
-};
-
-
-const ordered_icon_keys = ['success', 'ontrack', 'failure', 'not_avail', 'not_appl'];
 const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }) => <div>
   <div 
     aria-hidden={true}
