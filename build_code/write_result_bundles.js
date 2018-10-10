@@ -5,6 +5,36 @@ const { compute_counts_from_set } = require('../src/models/result_counts.js');
 
 _.mixin({ pipe: (obj, func) => func(obj) });
 
+const mock_status_map = {
+  past: {
+    success: "met",
+    failure: "not_met",
+    not_appl: "not_reported",
+    not_avail: "not_reported",
+  },
+  future: {
+    success: "to_be_achieved",
+    failure: "to_be_achieved",
+    not_appl: "not_reported",
+    not_avail: "not_reported",
+  },
+}
+const convert_drr16_to_mock_drr17 = (obj) => {
+  if (obj.doc !== "drr16"){
+    return obj;
+  }
+  return {
+    ...obj,
+    ..._.omitBy(
+      {
+        doc: "drr17",
+        status_color: !_.isUndefined(obj.status_period) && mock_status_map[obj.status_period][obj.status_color],
+      },
+      _.isUndefined,
+    ),
+  };
+}
+
 let org_store, 
   crso_by_deptcode,
   programs_by_crso_id,
@@ -89,21 +119,22 @@ function populate_stores(parsed_models){
   });
 
   _.each(results, obj => {
-    const { subject_id } = obj;
+    const mocked_drr17_obj = convert_drr16_to_mock_drr17(obj);
+    const { subject_id } = mocked_drr17_obj;
     if(!resultBySubjId[subject_id]){
       resultBySubjId[subject_id] = [];
     }
-    resultBySubjId[subject_id].push(obj);
+    resultBySubjId[subject_id].push(mocked_drr17_obj);
   });
 
-  //TODO: once we have not-met/met etc. 
   _.each(indicators, obj => {
-    const { result_id } = obj;
+    const mocked_drr17_obj = convert_drr16_to_mock_drr17(obj);
+    const { result_id } = mocked_drr17_obj;
     if(!indicatorsByResultId[result_id]){
       indicatorsByResultId[result_id] = [];
     }
-    indicatorsByResultId[result_id].push(obj);
-    obj.status_key = obj.status_period && `${obj.status_period}_${obj.status_color}`;
+    indicatorsByResultId[result_id].push(mocked_drr17_obj);
+    mocked_drr17_obj.status_key = mocked_drr17_obj.status_period && `${mocked_drr17_obj.status_period}_${mocked_drr17_obj.status_color}`;
   })
 
   _.each(PI_DR_links, obj => {
