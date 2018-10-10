@@ -12,6 +12,7 @@ import {
   Indicator,
   ResultCounts,
   status_key_to_icon_key,
+  ordered_icon_keys,
 } from './results_common.js';
 import { TM, text_maker } from './drr_summary_text.js';
 
@@ -26,13 +27,10 @@ const grid_colors = {
   to_be_achieved: "results-icon-array-neutral",
 };
 
-const icon_order = {
-  met: 0,
-  not_met: 5,
-  not_reported: 10,
-  to_be_achieved: 15,
-};
-
+const icon_order = _.chain(ordered_icon_keys)
+  .map( (icon_key, ix) => [icon_key, ix*5] )
+  .fromPairs()
+  .value();
 
 const MiniLegend = ({ items }) => (
   <div

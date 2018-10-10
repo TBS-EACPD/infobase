@@ -7,7 +7,7 @@ import {
   icon_key_to_glossary_key,
   icon_key_to_svg_name,
   ordered_icon_keys,
-} from '../../models/results.js';
+} from './results_common.js';
 
 const { result_statuses, result_simple_statuses } = businessConstants;
 const { 

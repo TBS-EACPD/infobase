@@ -5,6 +5,9 @@ import {
   SubProgramEntity, 
   ResultCounts,
   status_key_to_icon_key,
+  icon_key_to_glossary_key,
+  icon_key_to_svg_name,
+  ordered_icon_keys,
 } from '../../models/results.js';
 import { compute_counts_from_set } from '../../models/result_counts.js';
 import { infograph_href_template } from '../../link_utils.js';
@@ -116,6 +119,9 @@ export {
   SubProgramEntity,
   ResultCounts,
   status_key_to_icon_key,
+  icon_key_to_glossary_key,
+  icon_key_to_svg_name,
+  ordered_icon_keys,
 
   compute_counts_from_set,
 
