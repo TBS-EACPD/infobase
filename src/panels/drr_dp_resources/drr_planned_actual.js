@@ -35,7 +35,7 @@ _.each(['dept','program'], level => {
       } else {
         counts = ResultCounts.get_dept_counts(subject.dept.acronym);
       }
-      if(!counts || counts.drr16_total < 1){
+      if(!counts || counts.drr17_total < 1){
         return false;
       }
 

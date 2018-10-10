@@ -175,7 +175,7 @@ class ResultTreeMapContainer extends React.Component {
 const Component = ({ gql_props: {variables } }) => {
   const Comp = LoadingHoc({
     query,
-    variables: ({doc: "drr16", ...variables}),
+    variables: ({doc: "drr17", ...variables}),
     data_to_props,
     Component: ResultTreeMapContainer,
   });
@@ -189,6 +189,6 @@ export const panel_def = {
   component: ResultTreeMapContainer,
   data_to_props, //we don't use the data at this layer, we just take advantage of the side-effect for cache to be pre-loaded
   vars: {
-    doc: "drr16",
+    doc: "drr17",
   },
 };

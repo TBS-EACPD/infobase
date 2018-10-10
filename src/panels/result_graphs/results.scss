@@ -141,9 +141,12 @@ dl.indicator-item__dl dt+dd {
 }
 
 .results-icon-array-na {
-  background-color:hsla(39, 100%, 50%,0.8);
+  background-color:hsla(39, 100%, 50%, 0.8);
 }
 
+.results-icon-array-neutral {
+  background-color:hsla(39, 5%, 50%, 0.8);
+}
 
 //used in results-explorer 
 .indicator-container-container {

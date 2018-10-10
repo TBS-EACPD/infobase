@@ -84,7 +84,7 @@ const IndicatorList = ({ indicators }) => (
 );
 
 const SingleIndicatorDisplay = ({indicator}) => {
-  const is_drr = indicator.doc === "drr16";
+  const is_drr = indicator.doc === "drr17";
   return <div className="indicator-item">
     <dl className="dl-horizontal indicator-item__dl">
 

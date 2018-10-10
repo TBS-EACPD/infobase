@@ -33,7 +33,7 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
 
   let text_key = "";
   if(subject.level === 'dept'){
-    if(doc === 'drr16'){
+    if(doc === 'drr17'){
       if(count_items.sub_program > 0){
         if(count_items.sub_sub_program > 0){
           text_key = "result_counts_drr_dept_sub_sub";
@@ -51,7 +51,7 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
     }
   //dept
   } else if(subject.level === 'program'){
-    if(doc==='drr16'){
+    if(doc==='drr17'){
       if(count_items.sub_program > 0){
         if(count_items.sub_sub_program > 0){
           text_key = "result_counts_drr_prog_paa_sub_sub";

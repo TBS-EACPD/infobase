@@ -27,12 +27,12 @@ function result_to_node(result, parent_id, doc){
 
 const get_sub_program_resources = (sub_program, doc) => ({
   spending: (
-    doc === "drr16" ?
+    doc === "drr17" ?
     sub_program.spend_pa_last_year :
     sub_program.spend_planning_year_1
   ),
   ftes: (
-    doc === "drr16" ? 
+    doc === "drr17" ? 
     sub_program.fte_pa_last_year :
     sub_program.fte_planning_year_1
   ),
@@ -163,7 +163,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
             }))
             .value()
 
-        } else if(doc==='drr16'){
+        } else if(doc==='drr17'){
           //for PAA structures, the SO adds an annoying layer of drilling down for no reason
 
           return subject.programs.map(prog => ({

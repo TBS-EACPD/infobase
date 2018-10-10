@@ -11,6 +11,7 @@ import {
   Result,
   Indicator,
   ResultCounts,
+  status_key_to_icon_key,
 } from './results_common.js';
 import { TM, text_maker } from './drr_summary_text.js';
 
@@ -19,27 +20,17 @@ const { A11YTable } = declarative_charts
 
 
 const grid_colors = {
-  fail: "results-icon-array-fail",
-  pass: "results-icon-array-pass",
-  na: "results-icon-array-na",
+  met: "results-icon-array-pass",
+  not_met: "results-icon-array-fail",
+  not_reported:  "results-icon-array-na",
+  to_be_achieved: "results-icon-array-neutral",
 };
 
 const icon_order = {
-  pass: 0,
-  fail: 5,
-  na: 10,
-};
-
-const status_keys_to_icon_keys = {
-  past_success: 'pass',
-  past_failure: 'fail',
-  past_not_appl: 'na',
-  past_not_avail: 'na',
-
-  future_success: 'pass',
-  future_failure: 'fail',
-  future_not_appl: 'na',
-  future_not_avail: 'na',
+  met: 0,
+  not_met: 5,
+  not_reported: 10,
+  to_be_achieved: 15,
 };
 
 
@@ -81,21 +72,17 @@ const MiniLegend = ({ items }) => (
 
 const StatusGrid = props => {
   const {
-    past_success, 
-    past_failure, 
-    past_not_appl, 
-    past_not_avail,
-
-    future_success, 
-    future_failure, 
-    future_not_appl,
-    future_not_avail,
-
+    past_met,
+    past_not_met,
+    past_not_reported,
+  
+    future_not_reported,
+    future_to_be_achieved,
   } = props;
   
   
-  const past_total = past_success + past_failure + past_not_avail + past_not_appl;
-  const future_total = future_success + future_failure + future_not_avail + future_not_appl;
+  const past_total = past_met + past_not_met + past_not_reported;
+  const future_total = future_not_reported + future_to_be_achieved;
 
   const include_future_col = future_total > 0;
   const include_past_col = past_total > 0;
@@ -111,11 +98,11 @@ const StatusGrid = props => {
     const data = _.chain(props)
       .pickBy( (val,key) => (
         _.startsWith(key, period) && 
-        status_keys_to_icon_keys[key] && 
+        status_key_to_icon_key[key] && 
         val > 0 
       ))
       .toPairs()
-      .groupBy( ([key,val]) => status_keys_to_icon_keys[key] )
+      .groupBy( ([key,val]) => status_key_to_icon_key[key] )
       .map( (amounts, icon_key) => {
         const key_total = _.sumBy(amounts,1);
 
@@ -138,8 +125,8 @@ const StatusGrid = props => {
 
     const period_title= (
       period === "past" ?
-      text_maker("targets_to_achieve_past") :
-      text_maker("targets_to_achieve_future_and_ongoing")
+        text_maker("targets_to_achieve_past") :
+        text_maker("targets_to_achieve_future_and_ongoing")
     );
 
     return {
@@ -269,7 +256,7 @@ new PanelGraph({
     const verbose_counts = ResultCounts.get_dept_counts(subject.acronym);
     const counts = row_to_drr_status_counts(verbose_counts);
 
-    if(verbose_counts.drr16_total < 1){
+    if(verbose_counts.drr17_total < 1){
       return false;
     }
 
@@ -292,7 +279,7 @@ new PanelGraph({
     const all_results = Result.get_flat_results(subject);
     const all_indicators = Indicator.get_flat_indicators(subject);
 
-    if(!_.find(all_indicators, {doc: 'drr16'})){
+    if(!_.find(all_indicators, {doc: 'drr17'})){
       return false;
     }
 

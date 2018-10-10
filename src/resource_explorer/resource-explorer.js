@@ -264,8 +264,8 @@ class ExplorerPage extends React.Component {
       </div>
       <div className="tabbed_content">
         <ul className="tabbed_content_label_bar">
-          <li className={classNames("tab_label", doc==="drr16" && "active_tab")} onClick={()=> this.refs.drr16_link.click()}>
-            <a href={`#resource-explorer/${_.includes(dp_only_schemes, hierarchy_scheme) ? "min" : hierarchy_scheme }/drr16`} role="button" aria-pressed={doc === "drr16"} className="tab_label_text" ref="drr16_link">
+          <li className={classNames("tab_label", doc==="drr17" && "active_tab")} onClick={()=> this.refs.drr17_link.click()}>
+            <a href={`#resource-explorer/${_.includes(dp_only_schemes, hierarchy_scheme) ? "min" : hierarchy_scheme }/drr17`} role="button" aria-pressed={doc === "drr17"} className="tab_label_text" ref="drr17_link">
               <TM k="DRR_resources" />
             </a>
           </li>
@@ -416,12 +416,12 @@ export default class ResourceExplorer extends React.Component {
     );
 
     //additional validation
-    if(doc == "drr16" && !_.includes(['min','dept','GOCO','HWH'], hierarchy_scheme) ){
+    if(doc == "drr17" && !_.includes(['min','dept','GOCO','HWH'], hierarchy_scheme) ){
       hierarchy_scheme = "min";
     }
     
     doc = (
-      _.includes(['drr16','dp18'], doc) ? 
+      _.includes(['drr17','dp18'], doc) ? 
       doc :
       'dp18'
     );

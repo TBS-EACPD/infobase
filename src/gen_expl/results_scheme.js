@@ -14,7 +14,7 @@ const {
 
 
 export const get_initial_single_subj_results_state = ({subj_guid, doc, mode, has_drr_data, has_dp_data}) => ({
-  doc: has_dp_data ? 'dp18': "drr16",
+  doc: has_dp_data ? 'dp18': "drr17",
   subject_guid: subj_guid || 'dept_1',
   status_icon_key_whitelist: [],
 });
@@ -58,7 +58,7 @@ export const single_subj_results_scheme = {
     const get_icon_counts = createSelector(
       get_subj,
       subj => _.chain(Indicator.get_flat_indicators(subj))
-        .filter({doc: 'drr16'})
+        .filter({doc: 'drr17'})
         .groupBy('icon_key')
         .mapValues( (group, icon_key ) => group.length )
         .value()

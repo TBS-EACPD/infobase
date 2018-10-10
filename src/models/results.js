@@ -37,7 +37,7 @@ class SubProgramEntity {
   }
   resources(doc){
     const records = (
-        doc === 'drr16' ?
+        doc === 'drr17' ?
           [ 
             {
               year: "pa_last_year_planned",
@@ -377,16 +377,12 @@ class Indicator {
 
 }
 const status_key_to_icon_key = {
-  past_success: 'success',
-  past_failure: 'failure',
-  past_not_appl: 'not_appl',
-  past_not_avail: 'not_avail',
+  past_met: 'met',
+  past_not_met: 'not_met',
+  past_not_reported: 'not_reported',
 
-  future_success: 'ontrack',
-  future_failure: 'failure',
-  future_not_avail: 'not_appl',
-  future_not_appl: 'not_appl',
-
+  future_not_reported: 'not_reported',
+  future_to_be_achieved: 'to_be_achieved',
 };
 
 
@@ -420,11 +416,12 @@ const PI_DR_Links = {
 };
 
 //assumes ensure_loaded: results_summary has been called
+const results_counts_not_loaded_error = "result counts have not yet been loaded!";
 const ResultCounts = {
   data: null,
   get_dept_counts(dept_code){
     if(_.isEmpty(this.data)){
-      throw "result counts have not yet been loaded!"
+      throw results_counts_not_loaded_error
     }
     return _.chain(this.data)
       .find({ id: dept_code })
@@ -432,7 +429,7 @@ const ResultCounts = {
   },
   get_gov_counts(){
     if(_.isEmpty(this.data)){
-      throw "result counts have not yet been loaded!"
+      throw results_counts_not_loaded_error
     }
     return _.chain(this.data)
       .find({ id: 'total' })
@@ -440,7 +437,7 @@ const ResultCounts = {
   },
   get_tag_counts(tag_id){
     if(_.isEmpty(this.data)){
-      throw "result counts have not yet been loaded!"
+      throw results_counts_not_loaded_error
     }
 
     return _.chain(this.data)
@@ -449,7 +446,7 @@ const ResultCounts = {
   },
   get_data(){
     if(_.isEmpty(this.data)){
-      throw "result counts have not yet been loaded!"
+      throw results_counts_not_loaded_error
     }
   },
   set_data(data){
@@ -474,6 +471,7 @@ export {
   SubProgramEntity,
   PI_DR_Links,
   ResultCounts,
+  status_key_to_icon_key,
 };
 
 Object.assign(window._DEV_HELPERS, {

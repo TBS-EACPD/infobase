@@ -58,13 +58,13 @@ const sub_to_node = (sub,doc) => ({
   data: {
     name: sub.name,
     resources: {
-      ftes: (doc === 'drr16' ? sub.fte_pa_last_year : sub.fte_planning_year_1) || 0,
-      spending: (doc === 'drr16' ? sub.spend_pa_last_year : sub.spend_planning_year_1) || 0,
+      ftes: (doc === 'drr17' ? sub.fte_pa_last_year : sub.fte_planning_year_1) || 0,
+      spending: (doc === 'drr17' ? sub.spend_pa_last_year : sub.spend_planning_year_1) || 0,
     },
     description: sub.description,
     notes: sub.resource_notes(doc),
     subject: sub,
-    resource_table_props: doc==="drr16" && {
+    resource_table_props: doc==="drr17" && {
       actual_spend: sub.spend_pa_last_year,
       planned_spend: sub.planned_spend_pa_last_year,
       diff_spend: sub.spend_pa_last_year - sub.planned_spend_pa_last_year,
@@ -127,7 +127,7 @@ const get_non_col_renderer = ({doc}) => ({node}) => {
       <div style={{padding: "10px 20px 10px 0", borderTop: "1px solid #ccc"}}>
         { description } 
       </div>
-      { doc==='drr16' && 
+      { doc==='drr17' && 
         <div style={{padding: "10px 20px 10px 0", borderTop: "1px solid #ccc"}}>
           <PlannedActualTable {...resource_table_props} />
         </div>
@@ -154,7 +154,7 @@ const get_non_col_renderer = ({doc}) => ({node}) => {
 const initial_sub_program_state = {
   sort_col: 'spending',
   is_descending: true,
-  doc: 'drr16',
+  doc: 'drr17',
 };
 
 const sub_program_resource_scheme = {
@@ -257,8 +257,8 @@ class SubProgramResourceTree extends React.Component {
     } else {
       return <div className="tabbed_content">
         <ul className="tabbed_content_label_bar">
-          <li className={classNames("tab_label", doc==="drr16" && "active_tab")} onClick={()=> tab_on_click('drr16')}>
-            <span tabIndex={0} role="button" aria-pressed={doc === "drr16"} className="tab_label_text" onClick={()=> tab_on_click('drr16')} onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('drr16')}>
+          <li className={classNames("tab_label", doc==="drr17" && "active_tab")} onClick={()=> tab_on_click('drr17')}>
+            <span tabIndex={0} role="button" aria-pressed={doc === "drr17"} className="tab_label_text" onClick={()=> tab_on_click('drr17')} onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('drr17')}>
               <TM k="sub_program_DRR_title" />
             </span>
           </li>
@@ -296,7 +296,7 @@ const SubProgramResourceTreeContainer = ({
 }) => {
 
   const initial_scheme_state_slice = {
-    doc: has_drr_data ? 'drr16' : 'dp18',
+    doc: has_drr_data ? 'drr17' : 'dp18',
     subj_guid: subject.guid, 
   };
 
@@ -368,7 +368,7 @@ new PanelGraph({
     }
 
     const counts = ResultCounts.get_dept_counts(subject.dept.acronym);
-    const has_drr_data = counts && counts.drr16_total > 0 && _.nonEmpty(drr_subs);
+    const has_drr_data = counts && counts.drr17_total > 0 && _.nonEmpty(drr_subs);
     const has_dp_data = _.nonEmpty(dp_subs) && !subject.dead_program;
 
     return {
@@ -420,12 +420,12 @@ new PanelGraph({
           get_text={doc => 
             <TM
               k={
-                doc === 'drr16' ? 
+                doc === 'drr17' ? 
                 "sub_program_resources_drr_text" : 
                 "sub_program_resources_dp_text" 
               }
               args={
-                doc === 'drr16' ?
+                doc === 'drr17' ?
                 {
                   subject,
                   num_subs: drr_subs.length,

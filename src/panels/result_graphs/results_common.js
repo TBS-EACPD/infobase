@@ -4,6 +4,7 @@ import {
   Indicator, 
   SubProgramEntity, 
   ResultCounts,
+  status_key_to_icon_key,
 } from '../../models/results.js';
 import { compute_counts_from_set } from '../../models/result_counts.js';
 import { infograph_href_template } from '../../link_utils.js';
@@ -63,7 +64,7 @@ const get_planning_data_for_subject_from_table = (subject, type, doc) => {
   const table = pick_table(subject,type,doc);
 
   let col;
-  if(doc === "drr16"){
+  if(doc === "drr17"){
     col = "{{pa_last_year}}";
     if(type==="spending"){
       col = "{{pa_last_year}}exp";
@@ -92,29 +93,20 @@ const isDeptWithoutResults = (subject) => _.chain(subject.programs)
   .every()
   .value();
 
-
 const row_to_drr_status_counts = ({
-  drr16_indicators_past_success: past_success,
-  drr16_indicators_past_failure: past_failure,
-  drr16_indicators_past_not_appl: past_not_appl,
-  drr16_indicators_past_not_avail: past_not_avail,
+  drr17_indicators_past_met: past_met,
+  drr17_indicators_past_not_met: past_not_met,
+  drr17_indicators_past_not_reported: past_not_reported,
 
-  drr16_indicators_future_success: future_success,
-  drr16_indicators_future_failure: future_failure,
-  drr16_indicators_future_not_appl: future_not_appl,
-  drr16_indicators_future_not_avail: future_not_avail,
-
+  drr17_indicators_future_not_reported: future_not_reported,
+  drr17_indicators_future_to_be_achieved: future_to_be_achieved,
 }) => ({
-  past_success,
-  past_failure,
-  past_not_avail,
-  past_not_appl,
+  past_met,
+  past_not_met,
+  past_not_reported,
 
-  future_success,
-  future_failure,
-  future_not_avail,
-  future_not_appl,
-
+  future_not_reported,
+  future_to_be_achieved,
 });
 
 
@@ -123,6 +115,7 @@ export {
   Indicator,
   SubProgramEntity,
   ResultCounts,
+  status_key_to_icon_key,
 
   compute_counts_from_set,
 
@@ -131,5 +124,4 @@ export {
   isDeptWithoutResults,
   row_to_drr_status_counts,
   result_statuses,
-  
 };

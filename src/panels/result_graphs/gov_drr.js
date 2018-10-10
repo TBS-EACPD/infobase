@@ -24,7 +24,7 @@ new PanelGraph({
     const gov_counts = row_to_drr_status_counts(verbose_gov_counts);
 
     
-    const dept_counts = _.filter(ResultCounts.get_all_dept_counts(), row => row.drr16_total > 0 );
+    const dept_counts = _.filter(ResultCounts.get_all_dept_counts(), row => row.drr17_total > 0 );
     const num_depts = dept_counts.length;
 
     const counts_by_dept = _.chain(dept_counts)
@@ -98,7 +98,7 @@ class HorizontalStatusTable extends React.Component {
   constructor(){
     super();
     this.state = {
-      sort_by: 'drr16_total',
+      sort_by: 'drr17_total',
       descending: true,
       show_all: false,
     };
@@ -122,8 +122,8 @@ class HorizontalStatusTable extends React.Component {
 
     const simpler_counts = (
       _.chain(counts_by_dept)
-        .reject( ({counts}) => counts.drr16_total === 0)
-        .sortBy(row => row.counts.drr16_total )
+        .reject( ({counts}) => counts.drr17_total === 0)
+        .sortBy(row => row.counts.drr17_total )
         .reverse()
         .pipe( show_all ? _.identity : list => _.take(list, 15) )
         .sortBy( 
@@ -163,7 +163,7 @@ class HorizontalStatusTable extends React.Component {
                 </a>
               </td> 
 
-              {_.map(['drr16_past_total', 'drr16_future_total'], status => 
+              {_.map(['drr17_past_total', 'drr17_future_total'], status => 
                 <td key={status} className="right_number">
                   {counts[status]}
                 </td>

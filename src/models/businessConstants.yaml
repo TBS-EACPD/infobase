@@ -232,51 +232,36 @@ gender:
     fr: Données supprimées
 
 result_statuses:
-  past_success:
-    en: Met
+  past_met:
+    en: Target Met
     fr: Cible atteinte
-  past_failure:
-    en: Attention required (past due)
-    fr: Attention requise (échu)
-  past_not_appl:
-    en: No longer applicable
-    fr: Ne s'applique plus
-  past_not_avail:
-    en: Not available
-    fr: Non disponible
+  past_not_met:
+    en: Target not met
+    fr: DRRTODO
+  past_not_reported:
+    en: Actual result not reported
+    fr: DRRTODO
 
-  future_success:
-    en: On track to meet target
-    fr: En voie d'atteindre la cible
-  future_failure:
-    en: Attention required
-    fr: Attention requise 
-  future_not_appl:
-    en: No longer applicable
-    fr: Ne s'applique plus
-  future_not_avail:
-    en: Not available
-    fr: Non disponible
-
+  future_not_reported:
+    en: Actual result not reported
+    fr: DRRTODO
+  future_to_be_achieved:
+    en: Target to be achieved in the future
+    fr: DRRTODO
 
 result_simple_statuses:
-  success:
+  met:
     en: Met
     fr: Cible atteinte
-  ontrack:
-    en: On track
-    fr: En voie
-  failure:
-    en: Attention required
-    fr: Attention requise
-  not_appl:
-    en: No longer applicable
-    fr: Ne s'applique plus
-  not_avail:
-    en: Not available
-    fr: Non disponible
-  
-
+  not_met:
+    en: Not Met
+    fr: DRRTODO
+  not_reported:
+    en: Not reported
+    fr: DRRTODO
+  to_be_achieved:
+    en: To be Achieved
+    fr: DRRTODO
 
 months:
   0:

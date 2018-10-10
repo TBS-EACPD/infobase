@@ -126,7 +126,7 @@ const get_col_defs = createSelector(
             },
           } = node;
 
-          if(doc !== 'drr16'){
+          if(doc !== 'drr17'){
             return null;
           }
 
@@ -231,7 +231,7 @@ class SingleSubjExplorer extends React.Component {
       <div style={{ marginTop: "10px" }}>
         <ResultCounts {...this.props} />
       </div>
-      {doc==='drr16' &&  
+      {doc==='drr17' &&  
         <div 
           style={{
             padding: '10px 10px',
@@ -324,14 +324,14 @@ class SingleSubjExplorer extends React.Component {
     } else {
       return <div className="tabbed_content">
         <ul className="tabbed_content_label_bar">
-          <li className={classNames("tab_label", doc==="drr16" && "active_tab")} onClick={()=> tab_on_click('drr16')}>
+          <li className={classNames("tab_label", doc==="drr17" && "active_tab")} onClick={()=> tab_on_click('drr17')}>
             <span 
               tabIndex={0}
               role="button"
-              aria-pressed={doc === "drr16"}
+              aria-pressed={doc === "drr17"}
               className="tab_label_text" 
-              onClick={()=> tab_on_click('drr16')}
-              onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('drr16')}
+              onClick={()=> tab_on_click('drr17')}
+              onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('drr17')}
             >
               <TM k="DRR_results_option_title" />
             </span>
@@ -433,7 +433,7 @@ _.each(['program','dept','crso'], lvl => {
       const indicators = Indicator.get_flat_indicators(subject);
 
       const has_dp_data = _.find(indicators, {doc: 'dp18'});
-      const has_drr_data = _.find(indicators, {doc: 'drr16'});
+      const has_drr_data = _.find(indicators, {doc: 'drr17'});
 
       if(!has_dp_data && !has_drr_data){
         return false;
