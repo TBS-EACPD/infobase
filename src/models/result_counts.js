@@ -6,10 +6,9 @@ function compute_counts_from_set({results, indicators}){
     drr17_indicators_past_not_reported = _.filter(drr17_indicators, {status_key: 'past_not_reported'}).length,
 
     drr17_indicators_future_to_be_achieved = _.filter(drr17_indicators, {status_key: 'future_to_be_achieved'}).length,
-    drr17_indicators_future_not_reported = _.filter(drr17_indicators, {status_key: 'future_not_reported'}).length,
 
     drr17_past_total = drr17_indicators_past_not_reported + drr17_indicators_past_met + drr17_indicators_past_not_met,
-    drr17_future_total = drr17_indicators_future_to_be_achieved + drr17_indicators_future_not_reported,
+    drr17_future_total = drr17_indicators_future_to_be_achieved,
 
     drr17_total = drr17_future_total + drr17_past_total;
 
@@ -22,7 +21,6 @@ function compute_counts_from_set({results, indicators}){
     drr17_indicators_past_not_met,
     drr17_indicators_past_not_reported,
 
-    drr17_indicators_future_not_reported,
     drr17_indicators_future_to_be_achieved,
 
     drr17_past_total,

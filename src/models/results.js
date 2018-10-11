@@ -383,7 +383,6 @@ const status_key_to_icon_key = {
   past_not_met: 'not_met',
   past_not_reported: 'not_reported',
 
-  future_not_reported: 'not_reported',
   future_to_be_achieved: 'to_be_achieved',
 };
 const icon_key_to_glossary_key = {

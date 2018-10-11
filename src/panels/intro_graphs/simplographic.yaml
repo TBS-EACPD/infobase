@@ -49,8 +49,8 @@ simplographic_results_text:
   transform: [handlebars,markdown]
   en: |
     In {{pa_last_year}}, the federal government sought to achieve **{{num_results}}** results. Progress towards meeting these results was measured using **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicators" "IND_RESULT"}}. 
-    Of those indicators, **{{fmt_big_int_real num_ontrack_or_met}}** (**{{fmt_percentage pct_ontrack_or_met}}**) {{gl_tt "met" "RESULTS_MET"}} or are {{gl_tt "on track" "RESULTS_OT"}} to meet their target.
+    Of those indicators, **{{fmt_big_int_real num_met}}** (**{{fmt_percentage pct_met}}**) {{gl_tt "met" "RESULTS_MET"}} or are {{gl_tt "on track" "RESULTS_OT"}} to meet their target.
   fr: |
     En {{pa_last_year}}, le gouvernement fédéral a cherché à rencontrer **{{num_results}}** résultats. Les progrès accomplis dans l'atteinte de ces résultats ont été mesurés à l’aide de **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicateurs" "IND_RESULT"}}. 
-    De ces indicateurs, **{{fmt_big_int_real num_ontrack_or_met}}** (**{{fmt_percentage pct_ontrack_or_met}}**) ont {{gl_tt "atteint" "RESULTS_MET"}} ou sont {{gl_tt "en voie" "RESULTS_OT"}} d'atteindre leur cible.
+    De ces indicateurs, **{{fmt_big_int_real num_met}}** (**{{fmt_percentage pct_met}}**) ont {{gl_tt "atteint" "RESULTS_MET"}} ou sont {{gl_tt "en voie" "RESULTS_OT"}} d'atteindre leur cible.
 

@@ -15,8 +15,8 @@ const mock_status_map = {
   future: {
     success: "to_be_achieved",
     failure: "to_be_achieved",
-    not_appl: "not_reported",
-    not_avail: "not_reported",
+    not_appl: "to_be_achieved",
+    not_avail: "to_be_achieved",
   },
 }
 const convert_drr16_to_mock_drr17 = (obj) => {

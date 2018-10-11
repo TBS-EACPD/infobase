@@ -82,15 +82,13 @@ new PanelGraph({
     const results_link = infograph_href_template(Gov, 'results');
 
     const { 
-      drr17_indicators_future_to_be_achieved, 
       drr17_indicators_past_met, 
       drr17_total: num_indicators,
       drr17_results: num_results,
     } = gov_counts;
 
-    const num_ontrack_or_met = drr17_indicators_future_to_be_achieved + drr17_indicators_past_met; // DRRTODO confirm to be achieved is equivalent to "on track"? Or is it more like a "status pending" option? May want to clairfy the name if so
-    const pct_ontrack_or_met = num_ontrack_or_met/num_indicators;
-
+    const num_met = drr17_indicators_past_met;
+    const pct_met = num_met/num_indicators;
 
     return {
       largest_items,
@@ -102,8 +100,8 @@ new PanelGraph({
 
       num_results,
       num_indicators,
-      num_ontrack_or_met,
-      pct_ontrack_or_met,
+      num_met,
+      pct_met,
 
       t4_link,
       t9_link,

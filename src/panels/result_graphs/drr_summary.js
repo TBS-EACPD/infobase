@@ -73,14 +73,13 @@ const StatusGrid = props => {
     past_met,
     past_not_met,
     past_not_reported,
-  
-    future_not_reported,
+
     future_to_be_achieved,
   } = props;
   
   
   const past_total = past_met + past_not_met + past_not_reported;
-  const future_total = future_not_reported + future_to_be_achieved;
+  const future_total = future_to_be_achieved;
 
   const include_future_col = future_total > 0;
   const include_past_col = past_total > 0;
