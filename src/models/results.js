@@ -399,9 +399,9 @@ const icon_key_to_svg_name = {
 };
 const ordered_icon_keys = [
   'met', 
-  'to_be_achieved', 
   'not_met', 
   'not_reported',
+  'to_be_achieved', 
 ];
 
 

@@ -241,10 +241,6 @@ result_statuses:
   past_not_reported:
     en: Actual result not reported
     fr: DRRTODO
-
-  future_not_reported:
-    en: Actual result not reported
-    fr: DRRTODO
   future_to_be_achieved:
     en: Target to be achieved in the future
     fr: DRRTODO
