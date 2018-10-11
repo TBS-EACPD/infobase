@@ -16,7 +16,7 @@ const {
 export const get_initial_single_subj_results_state = ({subj_guid, doc, mode, has_drr_data, has_dp_data}) => ({
   doc: has_dp_data ? 'dp18': "drr17",
   subject_guid: subj_guid || 'dept_1',
-  status_icon_key_whitelist: [],
+  status_status_key_whitelist: [],
 });
 
 export const single_subj_results_scheme = {
@@ -31,13 +31,13 @@ export const single_subj_results_scheme = {
     ],
     (doc, subject_guid) => create_full_results_hierarchy({ subject_guid, doc, allow_no_result_branches: false })
   ),
-  get_filter_func_selector: ()=> createSelector(_.property('single_subj_results.status_icon_key_whitelist'), status_icon_key_whitelist => {
-    if(_.isEmpty(status_icon_key_whitelist)){
+  get_filter_func_selector: ()=> createSelector(_.property('single_subj_results.status_status_key_whitelist'), status_status_key_whitelist => {
+    if(_.isEmpty(status_status_key_whitelist)){
       return _.identity;
     }
     return nodes => filter_hierarchy(
       nodes,
-      node => _.includes(status_icon_key_whitelist, _.get(node,'data.indicator.icon_key')),
+      node => _.includes(status_status_key_whitelist, _.get(node,'data.indicator.status_key')),
       { leaves_only: false, markSearchResults: false }
     );
   }),
@@ -49,7 +49,7 @@ export const single_subj_results_scheme = {
     );
 
     const is_status_filter_enabled_selector = createSelector(
-      _.property('single_subj_results.status_icon_key_whitelist'), 
+      _.property('single_subj_results.status_status_key_whitelist'), 
       whitelist => _.nonEmpty(whitelist)
     );
 
@@ -59,8 +59,8 @@ export const single_subj_results_scheme = {
       get_subj,
       subj => _.chain(Indicator.get_flat_indicators(subj))
         .filter({doc: 'drr17'})
-        .groupBy('icon_key')
-        .mapValues( (group, icon_key ) => group.length )
+        .groupBy('status_key')
+        .mapValues( (group, status_key ) => group.length )
         .value()
     );
     
@@ -70,14 +70,14 @@ export const single_subj_results_scheme = {
         single_subj_results: {
           mode,
           doc,
-          status_icon_key_whitelist,
+          status_status_key_whitelist,
         },
       } = augmented_state;
 
       return {
         mode,
         doc,
-        status_icon_key_whitelist,
+        status_status_key_whitelist,
         
         has_subs: has_sub_selector(augmented_state),
         subject: get_subj(augmented_state),
@@ -88,7 +88,7 @@ export const single_subj_results_scheme = {
   },
   dispatch_to_props: dispatch => ({ 
     set_doc: key => dispatch({type: 'set_doc', payload: key}), 
-    toggle_status_icon_key: key => dispatch({type: "status_click", payload: key}),
+    toggle_status_status_key: key => dispatch({type: "status_click", payload: key}),
     clear_status_filter: ()=> dispatch({type: 'clear_status_filter'}),
   }),
   reducer: (state=get_initial_single_subj_results_state({}), action) => {
@@ -97,17 +97,17 @@ export const single_subj_results_scheme = {
       case 'set_doc':
         return {...state,
           doc: payload,
-          status_icon_key_whitelist: [], //reset filtering when doc changes
+          status_status_key_whitelist: [], //reset filtering when doc changes
         };
       case 'set_subject':
         return {...state, subject_guid: payload};
       case 'status_click':
         return {...state, 
-          status_icon_key_whitelist: _.toggle_list(state.status_icon_key_whitelist, payload),
+          status_status_key_whitelist: _.toggle_list(state.status_status_key_whitelist, payload),
         };
       case 'clear_status_filter':
         return {...state, 
-          status_icon_key_whitelist: [],
+          status_status_key_whitelist: [],
         };
       default: 
         return state;

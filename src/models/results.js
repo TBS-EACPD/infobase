@@ -359,9 +359,6 @@ class Indicator {
       return trivial_text_maker("unspecified_date_to_achieve");
     }
   }
-  get icon_key(){
-    return status_key_to_icon_key[this.status_key];
-  }
   static get_flat_indicators(subject){
     return _.chain(Result.get_flat_results(subject))
       .map('indicators')
@@ -377,26 +374,6 @@ class Indicator {
 
 }
 
-
-const status_key_to_icon_key = {
-  met: 'met',
-  not_met: 'not_met',
-  not_reported: 'not_reported',
-  to_be_achieved: 'to_be_achieved',
-};
-const ordered_icon_keys = _.values(status_key_to_icon_key)
-const icon_key_to_glossary_key = {
-  met: "RESULTS_MET",
-  not_met: "RESULTS_MET", // DRRTODO
-  not_reported: "RESULTS_MET", // DRRTODO
-  to_be_achieved: "RESULTS_MET", // DRRTODO
-};
-const icon_key_to_svg_name = {
-  met: "met",
-  not_met: "attention-req",
-  not_reported: "not-available",
-  to_be_achieved: "on-track",
-};
 
 //does not use staticStoreMixin because it's a linkage table, there's no primary key
 const links = [];
@@ -477,16 +454,29 @@ const ResultCounts = {
 }
 
 
+const ordered_status_keys = ['met', 'not_met', 'not_reported', 'to_be_achieved'];
+const status_key_to_glossary_key = {
+  met: "RESULTS_MET",
+  not_met: "RESULTS_MET", // DRRTODO
+  not_reported: "RESULTS_MET", // DRRTODO
+  to_be_achieved: "RESULTS_MET", // DRRTODO
+};
+const status_key_to_svg_name = {
+  met: "met",
+  not_met: "attention-req",
+  not_reported: "not-available",
+  to_be_achieved: "on-track",
+};
+
 export {
   Result,
   Indicator,
   SubProgramEntity,
   PI_DR_Links,
   ResultCounts,
-  status_key_to_icon_key,
-  icon_key_to_glossary_key,
-  icon_key_to_svg_name,
-  ordered_icon_keys,
+  status_key_to_glossary_key,
+  status_key_to_svg_name,
+  ordered_status_keys,
 };
 
 Object.assign(window._DEV_HELPERS, {

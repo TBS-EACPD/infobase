@@ -103,8 +103,8 @@ const get_children_grouper = createSelector(
 const get_col_defs = createSelector(
   _.property('doc'),
   _.property('is_status_filter_enabled'),
-  _.property('status_icon_key_whitelist'),
-  (doc, is_status_filter_enabled, status_icon_key_whitelist) => {
+  _.property('status_status_key_whitelist'),
+  (doc, is_status_filter_enabled, status_status_key_whitelist) => {
     return [
       {
         id: "name",
@@ -145,7 +145,7 @@ const get_col_defs = createSelector(
                     ),
                     (
                       is_status_filter_enabled ? 
-                      ind => _.includes(status_icon_key_whitelist, ind.icon_key) :
+                      ind => _.includes(status_status_key_whitelist, ind.status_key) :
                       _.constant(true)
                     )
                   )
@@ -207,10 +207,10 @@ class SingleSubjExplorer extends React.Component {
       set_doc,
       has_subs,
       icon_counts,
-      toggle_status_icon_key,
+      toggle_status_status_key,
       clear_status_filter,
       is_status_filter_enabled,
-      status_icon_key_whitelist,              
+      status_status_key_whitelist,              
     } = this.props;
     const { loading } = this.state;
 
@@ -219,7 +219,7 @@ class SingleSubjExplorer extends React.Component {
 
     const explorer_config = {
       children_grouper: get_children_grouper({doc}),
-      column_defs: get_col_defs({doc, is_status_filter_enabled, status_icon_key_whitelist}),
+      column_defs: get_col_defs({doc, is_status_filter_enabled, status_status_key_whitelist}),
       shouldHideHeader: true,
       zebra_stripe: true,
       onClickExpand: id => toggle_node(id),
@@ -240,9 +240,9 @@ class SingleSubjExplorer extends React.Component {
           }}
         >
           <StatusIconTable 
-            active_list={status_icon_key_whitelist}
+            active_list={status_status_key_whitelist}
             icon_counts={icon_counts} 
-            onIconClick={toggle_status_icon_key}
+            onIconClick={toggle_status_status_key}
             onClearClick={clear_status_filter}
           />
         </div>

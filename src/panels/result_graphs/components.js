@@ -4,9 +4,9 @@ import { trivial_text_maker, util_components } from '../shared.js';
 import { businessConstants } from '../../models/businessConstants.js';
 import { get_static_url } from '../../core/request_utils.js';
 import {
-  icon_key_to_glossary_key,
-  icon_key_to_svg_name,
-  ordered_icon_keys,
+  status_key_to_glossary_key,
+  status_key_to_svg_name,
+  ordered_status_keys,
 } from './results_common.js';
 
 const { result_statuses, result_simple_statuses } = businessConstants;
@@ -18,7 +18,7 @@ const {
   FilterTable,
 } = util_components;
 
-const get_svg_url = (icon_key) => get_static_url(`svg/${icon_key_to_svg_name[icon_key]}.svg`);
+const get_svg_url = (status_key) => get_static_url(`svg/${status_key_to_svg_name[status_key]}.svg`);
 
 /* to be used with planned targets and actual result */
 const IndicatorResultDisplay = ({
@@ -204,10 +204,10 @@ const QuadrantDefList = ({defs} ) => <div>
 
 const make_status_icons = (width) => {
   const status_icon_style = {width: width, height: width};
-  return _.chain(ordered_icon_keys)
-    .map(icon_key => [
-      icon_key,
-      <img key={icon_key} src={get_svg_url(icon_key)} style={status_icon_style} />,
+  return _.chain(ordered_status_keys)
+    .map(status_key => [
+      status_key,
+      <img key={status_key} src={get_svg_url(status_key)} style={status_icon_style} />,
     ])
     .fromPairs()
     .value();
@@ -224,44 +224,44 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
   >
     <FilterTable
       items={
-        _.map(ordered_icon_keys, icon_key => ({
-          key: icon_key,
-          active: active_list.length === 0 || _.indexOf(active_list, icon_key) !== -1,
-          count: icon_counts[icon_key] || 0,
+        _.map(ordered_status_keys, status_key => ({
+          key: status_key,
+          active: active_list.length === 0 || _.indexOf(active_list, status_key) !== -1,
+          count: icon_counts[status_key] || 0,
           text: (
             <span
               className="link-unstyled"
               tabIndex={0}
               aria-hidden="true"
-              data-glossary-key={icon_key_to_glossary_key[icon_key]}
+              data-glossary-key={status_key_to_glossary_key[status_key]}
               data-toggle="tooltip"
               data-html="true"
               data-container="body"
-              onClick={() => onIconClick.apply([icon_key])}
-              onKeyDown={(e) => (e.keyCode===13 || e.keyCode===32) && onIconClick.apply([icon_key])}
+              onClick={() => onIconClick.apply([status_key])}
+              onKeyDown={(e) => (e.keyCode===13 || e.keyCode===32) && onIconClick.apply([status_key])}
             >
-              {result_simple_statuses[icon_key].text}
+              {result_simple_statuses[status_key].text}
             </span>
           ),
-          icon: large_status_icons[icon_key],
+          icon: large_status_icons[status_key],
         }) )
       }
       item_component_order={["count", "icon", "text"]}
       click_callback={onIconClick}
-      show_eyes_override={active_list.length === ordered_icon_keys.length}
+      show_eyes_override={active_list.length === ordered_status_keys.length}
     />
   </div>
   <table className="sr-only">
     <thead>
       <tr>
-        {_.map(icon_counts, (count, icon_key) => 
-          <th key={icon_key}>
+        {_.map(icon_counts, (count, status_key) => 
+          <th key={status_key}>
             <a 
-              href={`#glossary/${icon_key_to_glossary_key[icon_key]}`}
+              href={`#glossary/${status_key_to_glossary_key[status_key]}`}
               className="sr-only"
               title={trivial_text_maker('glossary_link_title')}
             >
-              {result_simple_statuses[icon_key].text}
+              {result_simple_statuses[status_key].text}
             </a>
           </th>
         )}
@@ -269,8 +269,8 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
     </thead>
     <tbody>
       <tr>
-        {_.map(icon_counts, (count, icon_key) => 
-          <td key={icon_key}>
+        {_.map(icon_counts, (count, status_key) => 
+          <td key={status_key}>
             {count}
           </td>
         )}
@@ -282,15 +282,15 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
 const InlineStatusIconList = ({indicators}) => {
   return _.chain(indicators)
     .filter(ind => _.nonEmpty(ind.status_key))
-    .groupBy('icon_key')
-    .map( (group, icon_key) => ({icon_key, count: group.length}) )
-    .sortBy( ({icon_key}) => _.indexOf(ordered_icon_keys, icon_key) )
-    .map( ({ icon_key, count }) =>
+    .groupBy('status_key')
+    .map( (group, status_key) => ({status_key, count: group.length}) )
+    .sortBy( ({status_key}) => _.indexOf(ordered_status_keys, status_key) )
+    .map( ({ status_key, count }) =>
       <span
-        key={icon_key} 
+        key={status_key} 
         className="inline-status-icon"
       >
-        {status_icons[icon_key]}
+        {status_icons[status_key]}
         {
           count > 1 && 
           <sub className="inline-status-icon__count">
@@ -308,16 +308,15 @@ const StatusDisplay = ({
   indicator: {
     status_key, 
     status_period, 
-    icon_key,
   },  
 }) => <div>
   <span className="nowrap">
-    <span style={{paddingRight: "5px"}}> { status_icons[icon_key] } </span>
+    <span style={{paddingRight: "5px"}}> { status_icons[status_key] } </span>
     <TextMaker
       text_key="result_status_with_gl"
       args={{
         text: result_statuses[status_key].text,
-        glossary_key: icon_key_to_glossary_key[icon_key],
+        glossary_key: status_key_to_glossary_key[status_key],
       }}
     />
   </span>

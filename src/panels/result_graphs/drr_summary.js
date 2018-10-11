@@ -12,8 +12,7 @@ import {
   Result,
   Indicator,
   ResultCounts,
-  status_key_to_icon_key,
-  ordered_icon_keys,
+  ordered_status_keys,
 } from './results_common.js';
 import { TM, text_maker } from './drr_summary_text.js';
 
@@ -27,8 +26,8 @@ const grid_colors = {
   to_be_achieved: "results-icon-array-neutral",
 };
 
-const icon_order = _.chain(ordered_icon_keys)
-  .map( (icon_key, ix) => [icon_key, ix*5] )
+const icon_order = _.chain(ordered_status_keys)
+  .map( (status_key, ix) => [status_key, ix*5] )
   .fromPairs()
   .value();
 
@@ -81,16 +80,13 @@ const StatusGrid = props => {
   const icon_array_size_class = classNames("IconArrayItem", total > 200 && "IconArrayItem__Small", total < 100 && "IconArrayItem__Large");
 
   const data = _.chain(props)
-    .pickBy( (val,key) => (
-      status_key_to_icon_key[key] && 
-      val > 0 
-    ))
+    .pickBy( (val, key) => key && val > 0 )
     .toPairs()
-    .groupBy( ([key, val]) => status_key_to_icon_key[key] )
-    .map( (amounts, icon_key) => {
+    .groupBy( ([key, val]) => key )
+    .map( (amounts, status_key) => {
       const key_total = _.sumBy(amounts, 1);
       return {
-        icon_key,
+        status_key,
         viz_count: (
           shouldFactorDown ? 
             Math.ceil( (key_total/total)*max_size ) : 
@@ -104,29 +100,29 @@ const StatusGrid = props => {
   const title = "DRRTODO: subtitle, maybe explain date to be achieved and 'future' items here?"
 
   const viz_data = _.chain(data)
-    .sortBy( ({icon_key}) => icon_order[icon_key] )
-    .flatMap( ({viz_count,icon_key}) => {
+    .sortBy( ({status_key}) => icon_order[status_key] )
+    .flatMap( ({viz_count, status_key}) => {
       return _.range(0, viz_count)
         .map( 
-          () => ({ icon_key }) 
+          () => ({ status_key }) 
         );
     })
     .value();
 
   const legend_data = _.chain(data)
-    .map( ({icon_key}) => ({
-      className: grid_colors[icon_key],
-      id: icon_key,
-      label: result_simple_statuses[icon_key].text,
-      order: icon_order[icon_key],
+    .map( ({status_key}) => ({
+      className: grid_colors[status_key],
+      id: status_key,
+      label: result_simple_statuses[status_key].text,
+      order: icon_order[status_key],
     }))
     .sortBy('order')
     .value();
 
   const a11y_data = is_a11y_mode && {
     label_col_header: text_maker('status'),
-    data: _.map(data, ({icon_key, real_count}) => ({
-      label: result_simple_statuses[icon_key].text,
+    data: _.map(data, ({status_key, real_count}) => ({
+      label: result_simple_statuses[status_key].text,
       data: [ real_count ],
     })),
     data_col_headers: [ title ],
@@ -154,16 +150,16 @@ const StatusGrid = props => {
         <div>
           { 
             _.chain(viz_data)
-              .groupBy("icon_key")
-              .map( (group, icon_key) => ([group,icon_key]) )
-              .sortBy( ([group,icon_key]) => icon_order[icon_key] )
-              .map( ([group, icon_key]) => 
+              .groupBy("status_key")
+              .map( (group, status_key) => ([group,status_key]) )
+              .sortBy( ([group,status_key]) => icon_order[status_key] )
+              .map( ([group, status_key]) => 
                 <IconArray
-                  key={icon_key}
+                  key={status_key}
                   items={group}
-                  render_item={ ({icon_key}) => 
+                  render_item={ ({status_key}) => 
                     <div 
-                      className={classNames(icon_array_size_class, grid_colors[icon_key])} 
+                      className={classNames(icon_array_size_class, grid_colors[status_key])} 
                     />
                   }
                 />
