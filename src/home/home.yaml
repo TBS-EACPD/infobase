@@ -27,9 +27,9 @@ home_results_title:
 home_results_intro:
   transform: [handlebars,markdown]
   en: |
-    We met {{past_targets_met}} targets in {{pa_last_year}}
+    We met {{targets_met}} targets in {{pa_last_year}}
   fr: |
-    Nous avons atteint {{past_targets_met}} cibles en {{pa_last_year}}
+    Nous avons atteint {{targets_met}} cibles en {{pa_last_year}}
 
 home_sub_title:
   en: Find the latest information on all government finances, people and results

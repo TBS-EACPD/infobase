@@ -379,12 +379,12 @@ class Indicator {
 
 
 const status_key_to_icon_key = {
-  past_met: 'met',
-  past_not_met: 'not_met',
-  past_not_reported: 'not_reported',
-
-  future_to_be_achieved: 'to_be_achieved',
+  met: 'met',
+  not_met: 'not_met',
+  not_reported: 'not_reported',
+  to_be_achieved: 'to_be_achieved',
 };
+const ordered_icon_keys = _.values(status_key_to_icon_key)
 const icon_key_to_glossary_key = {
   met: "RESULTS_MET",
   not_met: "RESULTS_MET", // DRRTODO
@@ -397,13 +397,6 @@ const icon_key_to_svg_name = {
   not_reported: "not-available",
   to_be_achieved: "on-track",
 };
-const ordered_icon_keys = [
-  'met', 
-  'not_met', 
-  'not_reported',
-  'to_be_achieved', 
-];
-
 
 //does not use staticStoreMixin because it's a linkage table, there's no primary key
 const links = [];

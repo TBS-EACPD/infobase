@@ -281,7 +281,7 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
 
 const InlineStatusIconList = ({indicators}) => {
   return _.chain(indicators)
-    .filter(ind => _.nonEmpty(ind.status_color))
+    .filter(ind => _.nonEmpty(ind.status_key))
     .groupBy('icon_key')
     .map( (group, icon_key) => ({icon_key, count: group.length}) )
     .sortBy( ({icon_key}) => _.indexOf(ordered_icon_keys, icon_key) )
@@ -308,8 +308,7 @@ const StatusDisplay = ({
   indicator: {
     status_key, 
     status_period, 
-    icon_key, 
-    status_color,
+    icon_key,
   },  
 }) => <div>
   <span className="nowrap">

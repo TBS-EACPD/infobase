@@ -52,28 +52,9 @@ show_all_orgs:
   en: Show all organizations
   fr: Montrer toutes les organisations
 
-
-
-past_met:
-  en: Target met
-  fr: Cible atteinte
-
-past_not_met:
-  en: Target not met
-  fr: DRRTODO
-  
-past_not_reported:
-  en: Actual result not reported
-  fr: DRRTODO
-
-future_to_be_achieved:
-  en: Target to be achieved in the future
-  fr: DRRTODO
-
-
 results_icon_array_title:
   transform: [handlebars]
   en: |
-    {{pa_last_year}} Performance Indicators
+    {{pa_last_year}} and Future Performance Indicators
   fr: |
-    Indicateurs de rendement de {{pa_last_year}}
+    DRRTODO

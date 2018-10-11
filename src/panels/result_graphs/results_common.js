@@ -77,7 +77,6 @@ const get_planning_data_for_subject_from_table = (subject, type, doc) => {
   }
 
   return table.col_from_nick(col).formula(rows);
-
 };
 
 const planned_resource_fragment = (subject, doc) => {
@@ -88,7 +87,6 @@ const planned_resource_fragment = (subject, doc) => {
     spending,
     ftes,
   }; 
-
 };
 
 const isDeptWithoutResults = (subject) => _.chain(subject.programs)
@@ -97,17 +95,15 @@ const isDeptWithoutResults = (subject) => _.chain(subject.programs)
   .value();
 
 const row_to_drr_status_counts = ({
-  drr17_indicators_past_met: past_met,
-  drr17_indicators_past_not_met: past_not_met,
-  drr17_indicators_past_not_reported: past_not_reported,
-
-  drr17_indicators_future_to_be_achieved: future_to_be_achieved,
+  drr17_indicators_past_met: met,
+  drr17_indicators_past_not_met: not_met,
+  drr17_indicators_past_not_reported: not_reported,
+  drr17_indicators_future_to_be_achieved: to_be_achieved,
 }) => ({
-  past_met,
-  past_not_met,
-  past_not_reported,
-
-  future_to_be_achieved,
+  met,
+  not_met,
+  not_reported,
+  to_be_achieved,
 });
 
 

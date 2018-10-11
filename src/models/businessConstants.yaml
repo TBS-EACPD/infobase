@@ -232,16 +232,16 @@ gender:
     fr: Données supprimées
 
 result_statuses:
-  past_met:
+  met:
     en: Target Met
     fr: Cible atteinte
-  past_not_met:
+  not_met:
     en: Target not met
     fr: DRRTODO
-  past_not_reported:
+  not_reported:
     en: Actual result not reported
     fr: DRRTODO
-  future_to_be_achieved:
+  to_be_achieved:
     en: Target to be achieved in the future
     fr: DRRTODO
 

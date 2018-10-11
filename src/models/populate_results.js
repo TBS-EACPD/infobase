@@ -114,11 +114,10 @@ function populate_results_info(data){
 
   _.each(indicators, obj => {
     
-    const { target_year, target_month, status_color, status_period } = obj;
+    const { target_year, target_month } = obj;
     
     obj.target_year = _.isNaN(parseInt(target_year)) ? null : parseInt(target_year);
     obj.target_month= _.isEmpty(target_month) ? null : +target_month;
-    obj.status_key = status_period && `${status_period}_${status_color}`;
 
     Indicator.create_and_register(obj);
   })

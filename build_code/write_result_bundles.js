@@ -28,7 +28,7 @@ const convert_drr16_to_mock_drr17 = (obj) => {
     ..._.omitBy(
       {
         doc: "drr17",
-        status_color: !_.isUndefined(obj.status_period) && mock_status_map[obj.status_period][obj.status_color],
+        status_key: !_.isUndefined(obj.status_period) && mock_status_map[obj.status_period][obj.status_color],
       },
       _.isUndefined,
     ),
@@ -134,7 +134,6 @@ function populate_stores(parsed_models){
       indicatorsByResultId[result_id] = [];
     }
     indicatorsByResultId[result_id].push(mocked_drr17_obj);
-    mocked_drr17_obj.status_key = mocked_drr17_obj.status_period && `${mocked_drr17_obj.status_period}_${mocked_drr17_obj.status_color}`;
   })
 
   _.each(PI_DR_links, obj => {
