@@ -23,28 +23,28 @@ function pick_table(subject,type,doc){
   );
 }
 
-const get_rows_for_subject_from_table = _.memoize((subject,type,doc) => {
-  const table = pick_table(subject,type,doc);
+const get_rows_for_subject_from_table = _.memoize( (subject, type,doc) => {
+  const table = pick_table(subject, type,doc);
   if( subject.level === 'program'){
     const rows_or_record = table.programs.get(subject);
     if(!rows_or_record){
       return null;
     }
     if(_.isArray(rows_or_record)){ 
-      return rows_or_record
+      return rows_or_record;
     } else {
       return [ rows_or_record ];
     }
-  } else if( doc==="dp18" && _.includes(["dept","crso"], subject.level)){
+  } else if( doc==="dp18" && _.includes(["dept", "crso"], subject.level)){
     return table.q(subject).data;
   } else if(!_.isEmpty(subject.programs)){
     return _.chain(subject.programs)
-      .map(prog => get_rows_for_subject_from_table(prog,type,doc) )
+      .map(prog => get_rows_for_subject_from_table(prog, type, doc) )
       .flatten()
-      .value()
+      .value();
   } else if(subject.level === 'ministry'){
     return _.chain(subject.orgs)
-      .map(org => get_rows_for_subject_from_table(org, type,doc) )
+      .map(org => get_rows_for_subject_from_table(org, type, doc) )
       .flatten(true)
       .compact()
       .value();

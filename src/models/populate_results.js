@@ -35,12 +35,12 @@ export function load_results_bundle(subject){
   }
 
   if(_loaded_dept_or_tag_codes[subject_code] || _loaded_dept_or_tag_codes['all']){
-    return Promise.resolve()
+    return Promise.resolve();
   }
 
   const { lang } = window;
 
-  return make_request(get_static_url(`results/results_bundle_${lang}_${subject_code}.json.js`))
+  return make_request( get_static_url(`results/results_bundle_${lang}_${subject_code}.json.js`) )
     .then(response => {
       populate_results_info(JSON.parse(response));
     }).then( ()=> {
@@ -53,10 +53,10 @@ export function load_results_bundle(subject){
 let is_results_count_loaded = false;
 export function load_results_counts(){
   if(is_results_count_loaded){
-    return Promise.resolve()
+    return Promise.resolve();
 
   } else {
-    return make_request(get_static_url(`results/results_summary.json.js`))
+    return make_request( get_static_url(`results/results_summary.json.js` ))
       .then(response => {
         const rows = d3.csvParse(response);
         _.each(rows, row => {
@@ -70,7 +70,6 @@ export function load_results_counts(){
         is_results_count_loaded = true;
       });
   }
-  
 }
 
 function populate_results_info(data){
@@ -122,6 +121,6 @@ function populate_results_info(data){
     Indicator.create_and_register(obj);
   })
 
-  _.each(pi_dr_links, ({program_id, result_id}) => PI_DR_Links.add(program_id, result_id) );
+  _.each( pi_dr_links, ({program_id, result_id}) => PI_DR_Links.add(program_id, result_id) );
 
 }

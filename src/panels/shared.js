@@ -270,10 +270,10 @@ export const collapse_by_so = function(programs,table,filter){
     .map(key_value => ({
       label: key_value[0], 
       so_num: key_value[1][0].so_num,
-      value: d3.sum(key_value[1],d=>d["{{pa_last_year}}"]),
+      value: d3.sum(key_value[1], d => d["{{pa_last_year}}"]),
     }))
-    .filter(filter || (()=>true))
-    .sortBy(d=>-d.value)
+    .filter(filter || (() => true))
+    .sortBy(d => -d.value)
     .value();
 };
 
@@ -284,7 +284,7 @@ export const sum_a_tag_col = function sum_tag_col(tag, table, col){
     .compact()
     .filter(col)
     .map(col)
-    .reduce( ( (acc,amt) => acc + amt) , 0 )
+    .reduce( ( (acc, amt) => acc + amt), 0 )
     .value();
 };
 
@@ -295,7 +295,7 @@ export const common_react_donut = function render(panel, calculations, options){
 
   const color_scale = infobase_colors();
 
-  const total = d3.sum(graph_args, _.property('value'));
+  const total = d3.sum( graph_args, _.property('value') );
 
   const has_neg = _.chain(graph_args)
     .map('value')
@@ -340,7 +340,7 @@ export const common_react_donut = function render(panel, calculations, options){
               get_right_content={item => 
                 <div style={{width: "120px", display: "flex"}}>
                   <div style={{width: "60px"}}>
-                    <Format type="compact1" content={item.value} />  
+                    <Format type="compact1" content={item.value} />
                   </div>
                   <div style={{width: "60px"}}>
                     (<Format type="percentage1" content={(item.value)*Math.pow(total,-1)} />)
@@ -361,7 +361,7 @@ export const CommonDonut = function({data, height}){
 
   const color_scale = infobase_colors();
 
-  const total = d3.sum(data, _.property('value'));
+  const total = d3.sum( data, _.property('value') );
 
   const has_neg = _.chain(data)
     .map('value')
@@ -406,7 +406,7 @@ export const CommonDonut = function({data, height}){
               get_right_content={item => 
                 <div style={{width: "120px", display: "flex"}}>
                   <div style={{width: "60px"}}>
-                    <Format type="compact1" content={item.value} />  
+                    <Format type="compact1" content={item.value} />
                   </div>
                   <div style={{width: "60px"}}>
                     (<Format type="percentage1" content={(item.value)*Math.pow(total,-1)} />)
@@ -452,7 +452,7 @@ export const PlannedActualTable = ({
         <td> <Format type="big_int_real" content={diff_ftes} /> </td>
       </tr>
     </tbody> 
-  </table>      
+  </table>
 );
 
 export const get_planned_spending_source_link = subject => {
@@ -466,7 +466,7 @@ export const get_planned_spending_source_link = subject => {
       mode: 'details',
       columns: ['{{planning_year_1}}'], 
     }),
-  }
+  };
 };
 
 export const get_planned_fte_source_link = subject => {
@@ -480,7 +480,7 @@ export const get_planned_fte_source_link = subject => {
       mode: 'details',
       columns: ['{{planning_year_1}}'], 
     }),
-  }
+  };
 };
 
 export {

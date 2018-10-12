@@ -16,7 +16,7 @@ import {
 } from './results_common.js';
 import { TM, text_maker } from './drr_summary_text.js';
 
-const { A11YTable } = declarative_charts
+const { A11YTable } = declarative_charts;
 const { result_simple_statuses } = businessConstants;
 
 const grid_colors = {
@@ -97,7 +97,7 @@ const StatusGrid = props => {
     })
     .value();
 
-  const title = "DRRTODO: subtitle, maybe explain date to be achieved and 'future' items here?"
+  const title = "DRRTODO: subtitle, maybe explain date to be achieved and 'future' items here?";
 
   const viz_data = _.chain(data)
     .sortBy( ({status_key}) => icon_order[status_key] )
@@ -134,7 +134,7 @@ const StatusGrid = props => {
       <A11YTable
         {...a11y_data}
       />
-    </div>
+    </div>;
   }
 
   return (
@@ -172,24 +172,19 @@ const StatusGrid = props => {
 }
 
 
-export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts }) => {
-
-  return (
-    <div className="frow middle-xs between-md" style={{marginBottom: "30px"}}>
-      <div className="fcol-md-5 fcol-xs-12 medium_panel_text" >
-        <TM 
-          k="drr_summary_text"
-          args={{ subject, num_depts, is_gov, ...verbose_counts }} 
-        />
-      </div>
-      <div className="fcol-md-6 col-xs-12">
-        <StatusGrid {...counts} />
-      </div>
+export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts }) => (
+  <div className="frow middle-xs between-md" style={{marginBottom: "30px"}}>
+    <div className="fcol-md-5 fcol-xs-12 medium_panel_text" >
+      <TM 
+        k="drr_summary_text"
+        args={{ subject, num_depts, is_gov, ...verbose_counts }} 
+      />
     </div>
-  );
-
-
-}
+    <div className="fcol-md-6 col-xs-12">
+      <StatusGrid {...counts} />
+    </div>
+  </div>
+);
 
 const render = ({calculations, footnotes}) => {
   const {

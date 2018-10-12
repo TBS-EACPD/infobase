@@ -180,7 +180,7 @@ class Result {
     } = def;
 
     //ignore anything too empty
-    if( _.isEmpty(id) || _.isEmpty(subject_id) || _.isEmpty(name)){ 
+    if( _.isEmpty(id) || _.isEmpty(subject_id) || _.isEmpty(name) ){ 
       return;
     }
 
@@ -285,7 +285,6 @@ function _get_flat_results(subject){
         .compact()
         .value();
       
-
     case 'dept':
       return _.chain(subject.crsos)
         .map(_get_flat_results)
@@ -349,11 +348,11 @@ class Indicator {
   }
   get target_date(){
     const { target_month, target_year } = this;
-    if(_.isNumber(target_month) && _.isNumber(target_year)){
+    if( _.isNumber(target_month) && _.isNumber(target_year) ){
       return `${months[target_month].text} ${target_year}`;
-    } else if(_.isNumber(target_year)){
+    } else if( _.isNumber(target_year) ){
       return target_year;
-    } else if(_.nonEmpty(target_year)){ //target_year === "other" | "ongoing"
+    } else if( _.nonEmpty(target_year) ){ //target_year === "other" | "ongoing"
       return trivial_text_maker(target_year);
     } else {
       return trivial_text_maker("unspecified_date_to_achieve");
@@ -380,12 +379,12 @@ const links = [];
 const id_indexed_links = {}; //IDs === <PI_ID>-<DR_ID>
 
 const PI_DR_Links = {
-  add(program_id, result_id){ 
-    const unique_id = `${program_id}-${result_id}`
+  add(program_id, result_id){
+    const unique_id = `${program_id}-${result_id}`;
     if(!id_indexed_links[unique_id]){
       const obj = {program_id, result_id};
       id_indexed_links[unique_id] = obj;
-      links.push(obj)
+      links.push(obj);
     }
   },
   get_tagged_results_for_program(program_id){
@@ -410,37 +409,37 @@ const ResultCounts = {
   data: null,
   get_dept_counts(dept_code){
     if(_.isEmpty(this.data)){
-      throw results_counts_not_loaded_error
+      throw results_counts_not_loaded_error;
     }
     return _.chain(this.data)
       .find({ id: dept_code })
-      .value()
+      .value();
   },
   get_gov_counts(){
     if(_.isEmpty(this.data)){
-      throw results_counts_not_loaded_error
+      throw results_counts_not_loaded_error;
     }
     return _.chain(this.data)
       .find({ id: 'total' })
-      .value()
+      .value();
   },
   get_tag_counts(tag_id){
     if(_.isEmpty(this.data)){
-      throw results_counts_not_loaded_error
+      throw results_counts_not_loaded_error;
     }
 
     return _.chain(this.data)
       .find({ id: tag_id })
-      .value()
+      .value();
   },
   get_data(){
     if(_.isEmpty(this.data)){
-      throw results_counts_not_loaded_error
+      throw results_counts_not_loaded_error;
     }
   },
   set_data(data){
     if(!_.isEmpty(this.data)){
-      throw "data has already been set"
+      throw "data has already been set";
     }
     this.data = data;
 

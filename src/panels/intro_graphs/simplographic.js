@@ -30,7 +30,7 @@ new PanelGraph({
   ],
 
 
-  calculate(dept,info){
+  calculate(dept, info){
     const {table4, table10} = this.tables;
     const gov_exp_pa_last_year = table4.q().sum('{{pa_last_year}}exp');
 
@@ -42,11 +42,10 @@ new PanelGraph({
       .reject({unique_id: "999"})
       .value()
 
-    const ministries = _.chain(federal_institutions)  
+    const ministries = _.chain(federal_institutions)
       .map(org => org.ministry)
       .uniqBy()
       .value()
-
 
 
     //People calcs
@@ -54,8 +53,6 @@ new PanelGraph({
     const total_employees = _.chain(employee_by_prov).values().sum().value();
     const ncr_employees = employee_by_prov.ncr;
     const empl_count_ncr_ratio = ncr_employees/total_employees;
-
-
 
 
     const gov_counts = ResultCounts.get_gov_counts();
@@ -114,7 +111,7 @@ new PanelGraph({
   render({calculations}){
     const { graph_args: big_info } = calculations;
     const Row = props => {
-      const this_row_props = {className: "grid-row canada-intro-grid", style: {borderTop: 0,padding: "15px 0px",marginLeft: "-50px",marginRight: "-15px"}}
+      const this_row_props = {className: "grid-row canada-intro-grid", style: {borderTop: 0, padding: "15px 0px", marginLeft: "-50px", marginRight: "-15px"}}
       if (props.top_border){
         this_row_props.style.borderTop="#";
       }
