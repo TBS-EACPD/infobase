@@ -211,6 +211,7 @@ const sources = _.mapValues({
       return [{
         id: 'budget',
         text: tm("budget_item_name"),
+        inline_link: "#budget-measures/budget-measure/overview",
       }];
     },
   },
