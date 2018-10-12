@@ -94,15 +94,15 @@ const isDeptWithoutResults = (subject) => _.chain(subject.programs)
   .value();
 
 const row_to_drr_status_counts = ({
-  drr17_indicators_past_met: met,
-  drr17_indicators_past_not_met: not_met,
-  drr17_indicators_past_not_reported: not_reported,
-  drr17_indicators_future_to_be_achieved: to_be_achieved,
+  drr17_indicators_met: met,
+  drr17_indicators_not_met: not_met,
+  drr17_indicators_not_reported: not_reported,
+  drr17_indicators_ongoing: ongoing,
 }) => ({
   met,
   not_met,
   not_reported,
-  to_be_achieved,
+  ongoing,
 });
 
 

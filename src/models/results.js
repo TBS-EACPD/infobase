@@ -452,18 +452,18 @@ const ResultCounts = {
 }
 
 
-const ordered_status_keys = ['met', 'not_met', 'not_reported', 'to_be_achieved'];
+const ordered_status_keys = ['met', 'not_met', 'not_reported', 'ongoing'];
 const status_key_to_glossary_key = {
   met: "RESULTS_MET",
   not_met: "RESULTS_MET", // DRRTODO
   not_reported: "RESULTS_MET", // DRRTODO
-  to_be_achieved: "RESULTS_MET", // DRRTODO
+  ongoing: "RESULTS_MET", // DRRTODO
 };
 const status_key_to_svg_name = {
   met: "met",
   not_met: "attention-req",
   not_reported: "not-applicable",
-  to_be_achieved: "on-track",
+  ongoing: "on-track",
 };
 
 export {

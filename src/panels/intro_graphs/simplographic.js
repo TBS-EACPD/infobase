@@ -79,12 +79,12 @@ new PanelGraph({
     const results_link = infograph_href_template(Gov, 'results');
 
     const { 
-      drr17_indicators_past_met, 
+      drr17_indicators_met, 
       drr17_total: num_indicators,
       drr17_results: num_results,
     } = gov_counts;
 
-    const num_met = drr17_indicators_past_met;
+    const num_met = drr17_indicators_met;
     const pct_met = num_met/num_indicators;
 
     return {

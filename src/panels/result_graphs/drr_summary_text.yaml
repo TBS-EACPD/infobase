@@ -21,8 +21,8 @@ drr_summary_text:
     {{#if drr17_past_total}} Of those indicators: {{/if}}
     {{#if drr17_future_total}}{{#unless  drr17_past_total}} Of those indicators: {{/unless}}{{/if}}
 
-    {{#if drr17_past_total}} * **{{drr17_indicators_past_success}}** out of the **{{drr17_past_total}}** (or **{{fmt_percentage1 (divide drr17_indicators_past_success drr17_past_total)}}**) that were seeking to achieve their target by March 31, 2017 **{{gl_tt "met" "RESULTS_MET"}} their target**. {{/if}}
-    {{#if drr17_future_total}} * **{{drr17_indicators_future_success}}** out of the **{{drr17_future_total}}** (or **{{fmt_percentage1 (divide drr17_indicators_future_success drr17_future_total)}}**) that are seeking to achieve their target after March 31, 2017 or on an ongoing basis are **{{gl_tt "on track" "RESULTS_OT"}} of meeting them**. {{/if}}
+    {{#if drr17_past_total}} * **{{drr17_indicators_met}}** out of the **{{drr17_past_total}}** (or **{{fmt_percentage1 (divide drr17_indicators_met drr17_past_total)}}**) that were seeking to achieve their target by March 31, 2017 **{{gl_tt "met" "RESULTS_MET"}} their target**. {{/if}}
+    {{#if drr17_future_total}} * **{{drr17_indicators_met}}** out of the **{{drr17_future_total}}** (or **{{fmt_percentage1 (divide drr17_indicators_met drr17_future_total)}}**) that are seeking to achieve their target after March 31, 2017 or on an ongoing basis are **{{gl_tt "on track" "RESULTS_OT"}} of meeting them**. {{/if}}
 
     
   fr: |
@@ -36,8 +36,8 @@ drr_summary_text:
     {{#if drr17_past_total}} De ces indicateurs: {{/if}}
     {{#if drr17_future_total}}{{#unless  drr17_past_total}} De ces indicateurs: {{/unless}}{{/if}}
 
-    {{#if drr17_past_total}} * **{{drr16_indicators_past_success}}** des **{{drr17_past_total}}** cibles(**{{fmt_percentage1 (divide drr16_indicators_past_success drr16_past_total)}}**) qui devaient être atteintes au plus tard le 31 mars 2017 ont été {{gl_tt "atteintes" "RESULTS_MET"}}. {{/if}}
-    {{#if drr17_future_total}} * **{{drr16_indicators_future_success}}** des **{{drr17_future_total}}** cibles récurrentes (**{{fmt_percentage1 (divide drr16_indicators_future_success drr16_future_total)}}**) ou dont la date-butoir est ultérieure au 31 mars 2017 sont {{gl_tt "en voie d'être atteintes" "RESULTS_OT"}}. {{/if}}
+    {{#if drr17_past_total}} * **{{drr17_indicators_met}}** des **{{drr17_past_total}}** cibles(**{{fmt_percentage1 (divide drr17_indicators_met drr17_past_total)}}**) qui devaient être atteintes au plus tard le 31 mars 2017 ont été {{gl_tt "atteintes" "RESULTS_MET"}}. {{/if}}
+    {{#if drr17_future_total}} * **{{drr17_indicators_met}}** des **{{drr17_future_total}}** cibles récurrentes (**{{fmt_percentage1 (divide drr17_indicators_met drr17_future_total)}}**) ou dont la date-butoir est ultérieure au 31 mars 2017 sont {{gl_tt "en voie d'être atteintes" "RESULTS_OT"}}. {{/if}}
 
 gov_drr_summary_org_table_text:
   transform: [handlebars,markdown]
