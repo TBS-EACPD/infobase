@@ -24,7 +24,6 @@ class SubProgramEntity {
 
     const inst = new SubProgramEntity(def)
 
-
     if(!parent_indexed_sub_program_entities[parent_id]){
       parent_indexed_sub_program_entities[parent_id] = [];
     }
@@ -37,19 +36,19 @@ class SubProgramEntity {
   }
   resources(doc){
     const records = (
-        doc === 'drr17' ?
-          [ 
-            {
-              year: "pa_last_year_planned",
-              ftes: this.planned_spend_pa_last_year,
-              spending: this.planned_fte_pa_last_year,
-            },
-            {
-              year: "pa_last_year",
-              ftes: this.fte_pa_last_year,
-              spending: this.spend_pa_last_year,
-            },
-          ] :
+      doc === 'drr17' ?
+        [ 
+          {
+            year: "pa_last_year_planned",
+            ftes: this.planned_spend_pa_last_year,
+            spending: this.planned_fte_pa_last_year,
+          },
+          {
+            year: "pa_last_year",
+            ftes: this.fte_pa_last_year,
+            spending: this.spend_pa_last_year,
+          },
+        ] :
         [
           { 
             year: 'planning_year_1',
@@ -78,17 +77,17 @@ class SubProgramEntity {
   resource_notes(doc){
     return _.chain(this)
       .pick(
-        doc==='dp18' ? 
-        [
-          'dp_no_spending_expl',
-          'dp_spend_trend_expl',
-          'dp_no_fte_expl',
-          'dp_fte_trend_expl',
-        ] : 
-        [ 
-          'drr_spend_expl',
-          'drr_fte_expl',
-        ]
+        doc === 'dp18' ? 
+          [
+            'dp_no_spending_expl',
+            'dp_spend_trend_expl',
+            'dp_no_fte_expl',
+            'dp_fte_trend_expl',
+          ] : 
+          [ 
+            'drr_spend_expl',
+            'drr_fte_expl',
+          ]
       )
       .values()
       .compact()
@@ -112,15 +111,15 @@ class SubProgramEntity {
     const { parent_id } = this;
     return (
       this.constructor.lookup(parent_id) ?
-      'sub_sub_program' :
-      'sub_program'
+        'sub_sub_program' :
+        'sub_program'
     );
   }
   singular(){
-    return trivial_text_maker(this.level)
+    return trivial_text_maker(this.level);
   }
   plural(){
-    return trivial_text_maker(this.level+"s")
+    return trivial_text_maker(this.level+"s");
   }
   get guid(){
     return `${this.level}_${this.id}`;
@@ -352,7 +351,7 @@ class Indicator {
       return `${months[target_month].text} ${target_year}`;
     } else if( _.isNumber(target_year) ){
       return target_year;
-    } else if( _.nonEmpty(target_year) ){ //target_year === "other" | "ongoing"
+    } else if( _.nonEmpty(target_year) ){
       return trivial_text_maker(target_year);
     } else {
       return trivial_text_maker("unspecified_date_to_achieve");

@@ -89,15 +89,13 @@ const StatusGrid = props => {
         status_key,
         viz_count: (
           shouldFactorDown ? 
-            Math.ceil( (key_total/total)*max_size ) : 
+            Math.ceil( (key_total/total)*max_size ) :
             key_total
         ),
         real_count: key_total,
       };
     })
     .value();
-
-  const title = "DRRTODO: subtitle, maybe explain date to be achieved and 'future' items here?";
 
   const viz_data = _.chain(data)
     .sortBy( ({status_key}) => icon_order[status_key] )
@@ -125,16 +123,18 @@ const StatusGrid = props => {
       label: result_simple_statuses[status_key].text,
       data: [ real_count ],
     })),
-    data_col_headers: [ title ],
+    data_col_headers: [ text_maker('results_icon_array_title') ],
   };
 
 
   if(is_a11y_mode){
-    return <div>
-      <A11YTable
-        {...a11y_data}
-      />
-    </div>;
+    return (
+      <div>
+        <A11YTable
+          {...a11y_data}
+        />
+      </div>
+    );
   }
 
   return (
@@ -143,9 +143,6 @@ const StatusGrid = props => {
         <TM k="results_icon_array_title" />
       </div>
       <div>
-        <div className="h4">
-          {title}
-        </div>
         <MiniLegend items={legend_data} />
         <div>
           { 

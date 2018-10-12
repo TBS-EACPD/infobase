@@ -55,6 +55,6 @@ show_all_orgs:
 results_icon_array_title:
   transform: [handlebars]
   en: |
-    {{pa_last_year}} and Ongoing Performance Indicators
+    {{pa_last_year}} Performance Indicators
   fr: |
-    DRRTODO
+    Indicateurs de performance {{pa_last_year}}
