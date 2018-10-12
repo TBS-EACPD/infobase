@@ -1,52 +1,37 @@
 @import '../../common_css/common-variables';
+@import './budget_measure_common';
 
-$controlsColor: #00233d;
-$controlsColorLighter: lighten($controlsColor, 20%);
 
 .budget-measures-partition-controls {
-  background-color: $controlsColor;
-  border-radius: 10px;
-  padding: 8px 6px 13px 8px;
+  @include budget-controls-footer-mixin();
   margin-bottom: -20px;
+  padding: 8px 6px 13px 8px;
 
   & > .labeled-box {
     margin-bottom: 8px;
 
-    & > .labeled-box-label {
-      background-color: $controlsColorLighter;
-      color: #FFFFFF;
-      font-size: 22px;
-    }
-  
-    & > .labeled-box-content {
+    & > .labeled-box-content > .centerer > .radio-buttons {
       border-color: $controlsColorLighter;
-      padding-left: 10px;
-      color: $controlsColorLighter;
-      border-width: 2px;
-  
-      & > .centerer > .radio-buttons {
+      & > .radio-buttons__option {
+        color: $controlsColorLighter;
+      }
+      
+      & > .radio-buttons__option.radio-buttons__option--active {
+        color: #FFFFFF;
+        background-color: $controlsColorLighter;
+      }
+      
+      
+      & > .radio-buttons__option:not(:last-child):after,
+      & > .radio-buttons__option:not(:first-child):before {
         border-color: $controlsColorLighter;
-        & > .radio-buttons__option {
-          color: $controlsColorLighter;
-        }
-        
-        & > .radio-buttons__option.radio-buttons__option--active {
-          color: #FFFFFF;
-          background-color: $controlsColorLighter;
-        }
-        
-        
-        & > .radio-buttons__option:not(:last-child):after,
-        & > .radio-buttons__option:not(:first-child):before {
-          border-color: $controlsColorLighter;
-        }
-        
-        & > .radio-buttons__option:not(.radio-buttons__option--active):hover,
-        & > .radio-buttons__option:not(.radio-buttons__option--active):active,
-        & > .radio-buttons__option:not(.radio-buttons__option--active):focus { 
-          background-color: change-color($color: $controlsColorLighter, $alpha: 0.75);
-          color: #FFFFFF !important;
-        }
+      }
+      
+      & > .radio-buttons__option:not(.radio-buttons__option--active):hover,
+      & > .radio-buttons__option:not(.radio-buttons__option--active):active,
+      & > .radio-buttons__option:not(.radio-buttons__option--active):focus { 
+        background-color: change-color($color: $controlsColorLighter, $alpha: 0.75);
+        color: #FFFFFF !important;
       }
     }
   }

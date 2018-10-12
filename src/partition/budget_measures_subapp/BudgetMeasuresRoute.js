@@ -20,6 +20,7 @@ import { calculate_budget_stats } from './calculate_budget_stats.js';
 
 import { BudgetMeasuresControls } from './BudgetMeasuresControls.js';
 import { BudgetMeasuresPartition } from './BudgetMeasuresPartition.js';
+import { BudgetMeasuresFooter } from './BudgetMeasuresFooter.js';
 import { BudgetMeasuresA11yContent } from './BudgetMeasuresA11yContent.js';
 
 const { BudgetMeasure } = Subject;
@@ -146,6 +147,7 @@ export class BudgetMeasuresRoute extends React.Component {
                   filtered_chapter_keys = { filtered_chapter_keys }
                   filter_string = { filter_string }
                 />
+                <BudgetMeasuresFooter/>
               </Fragment>
             }
             { window.is_a11y_mode && <BudgetMeasuresA11yContent/> }

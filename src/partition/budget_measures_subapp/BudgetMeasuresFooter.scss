@@ -1,0 +1,13 @@
+@import '../../common_css/common-variables';
+@import './budget_measure_common';
+
+.budget-measures-partition-footer {
+  @include budget-controls-footer-mixin();
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  padding: 0px 6px 8px 8px;
+
+  & > .labeled-box {
+    margin-bottom: 0px;
+  }
+}
