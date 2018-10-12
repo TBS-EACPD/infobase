@@ -43,7 +43,9 @@ export class MetaData extends React.Component {
                   <span><TM k="refresh_freq"/> {source.frequency.text}</span>
                 }
               >
-                <div dangerouslySetInnerHTML={{ __html: source.description() }} />
+                <div>
+                  { source.description() }
+                </div>
                 <div className="h4"> <TM k='datasets' /> </div>
                 <FancyUL>
                   {_.map(source.items(), ({key, id, text, inline_link, external_link }) => (

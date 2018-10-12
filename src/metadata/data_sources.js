@@ -200,7 +200,7 @@ const sources = _.mapValues({
   },
   BUDGET: {
     title(){ return tm("budget_source_title")},
-    description(){ return tm("budget_source_desc"); },
+    description(){ return <div dangerouslySetInnerHTML={{ __html: tm("budget_source_desc") }}/>; },
     frequency: frequencies.m,
     last_updated: { month: 6, year: 2018 },
     open_data: {
