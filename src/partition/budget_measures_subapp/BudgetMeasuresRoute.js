@@ -1,6 +1,6 @@
 import './BudgetMeasuresRoute.yaml';
 import './BudgetMeasuresRoute.scss';
-import { Fragment } from 'React';
+import { Fragment } from 'react';
 import { Subject } from '../../models/subject';
 import { businessConstants } from '../../models/businessConstants.js';
 import { ensure_loaded } from '../../core/lazy_loader.js';
