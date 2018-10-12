@@ -463,7 +463,7 @@ const status_key_to_glossary_key = {
 const status_key_to_svg_name = {
   met: "met",
   not_met: "attention-req",
-  not_reported: "not-available",
+  not_reported: "not-applicable",
   to_be_achieved: "on-track",
 };
 
