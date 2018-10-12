@@ -66,7 +66,11 @@ budget_source_desc:
     
     Cette information inclut des détails sur les mesures budgétaires et montre exactement comment le Conseil du Trésor affecte les fonds aux ministères pour des mesures budgétaires précises ainsi que les programmes financés pour exécuter chacune des mesures.  
 
-budget_item_name:
-  en: Sources and Uses of the Budget Implementation vote by Department and Program
-  fr: Provenance et utilisation du crédit d’exécution du budget par ministère et par programme
+budget_dept_item_name:
+  en: Sources and Uses of the Budget Implementation vote by Department
+  fr: Provenance et utilisation du crédit d’exécution du budget par ministère
+
+budget_program_item_name:
+  en: Budget Implementation vote allocations by Program
+  fr: Affectations du vote sur l’exécution du budget par programme
 

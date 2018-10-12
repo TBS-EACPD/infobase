@@ -208,11 +208,18 @@ const sources = _.mapValues({
       fr:"https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
     },
     items(){
-      return [{
-        id: 'budget',
-        text: tm("budget_item_name"),
-        inline_link: "#budget-measures/budget-measure/overview",
-      }];
+      return [
+        {
+          id: 'budget_dept',
+          text: tm("budget_dept_item_name"),
+          inline_link: "#budget-measures/budget-measure/overview",
+        },
+        {
+          id: 'budget_program',
+          text: tm("budget_program_item_name"),
+          inline_link: "#budget-measures/budget-measure/overview",
+        },
+      ];
     },
   },
 }, (obj, key) => ({...obj, key}));
