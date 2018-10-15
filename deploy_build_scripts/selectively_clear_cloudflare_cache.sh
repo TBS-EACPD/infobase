@@ -1,9 +1,4 @@
-# If CLOUDFLARE_KEY isn't set, try and get it from the (root owned) file in home
-if [ -z "$CLOUDFLARE_KEY" ]
-  then
-    CLOUDFLARE_KEY=$(sudo cat "${HOME}/cloudflare_key.txt")
-fi
-
+#!/bin/bash
 # use Cloudflare API to clear cache on files with no cache busting
 curl -X POST "https://api.cloudflare.com/client/v4/zones/6362b4d246b050759c43a494e0f8af3d/purge_cache" \
   -H "X-Auth-Email: eaadinbox@gmail.com" \
