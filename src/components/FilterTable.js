@@ -67,7 +67,7 @@ export class FilterTable extends React.Component {
                 </div>,
               icon: !_.isUndefined(item.icon) &&
                 <span 
-                  className="status-icon-table__icon"
+                  className="filter-table__icon"
                   key="icon"
                 >
                   { item.icon }
@@ -96,9 +96,11 @@ export class FilterTable extends React.Component {
                 >
                   { item.active ? eye_open : eye_closed }
                 </div>
-                {
-                  _.map( item_component_order, component => item_components[component] )
-                }
+                <div className="filter-table__components">
+                  {
+                    _.map( item_component_order, component => item_components[component] )
+                  }
+                </div>
               </button>
             );
           })
