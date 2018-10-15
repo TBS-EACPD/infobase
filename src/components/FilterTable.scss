@@ -125,8 +125,11 @@ $controlsColorLighter: lighten($controlsColor, 20%);
     flex-direction: row;
     justify-content: space-between;
     & > div {
-      width: 30%
+      width: 30%;
     }
+  }
+  .filter-table__count_area {
+    text-align: center;
   }
 }
 
