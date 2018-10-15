@@ -15,9 +15,9 @@ gov_dp_text:
 
     This year ({{planning_year_1}}), organizations have **{{dp18_results}}** results to achieve, measured by **{{dp18_indicators}}** indicators. Assessed performance against these indicators will be reported in fall 2019.
   fr: |
-    En Avril 2018, les organisations du gouvernement on adopté une {{gl_tt "nouvelle structure de reportage" "DRF"}} basé sur les résultats.
+    En Avril 2018, les organisations du gouvernement ont adopté une {{gl_tt "nouvelle structure de reportage" "DRF"}} basé sur les résultats.
 
-    Les organisations groupent leurs {{gl_tt "programmes" "PROG"}} et {{gl_tt "résultats ministériels" "DR"}} par leurs {{gl_tt "responsabilités essentielles" "CR"}}. De plus, les programmes on aussi leurs propres {{gl_tt "résultats" "PO"}}. Les progrès pour chaque résultat sont mesurés par des {{gl_tt "indicateurs" "IND_RESULT"}}.
+    Les organisations groupent leurs {{gl_tt "programmes" "PROG"}} et {{gl_tt "résultats ministériels" "DR"}} par leurs {{gl_tt "responsabilités essentielles" "CR"}}. De plus, les programmes ont aussi leurs propres {{gl_tt "résultats" "PO"}}. Les progrès pour chaque résultat sont mesurés par des {{gl_tt "indicateurs" "IND_RESULT"}}.
 
     Cet année ({{planning_year_1}}), les organisations planifient atteindre **{{dp18_results}}** résultats, mesurés par **{{dp18_indicators}}** indicateurs. L'Évaluation du rendement de ces indicateurs sera signalé en automne 2019.
 
