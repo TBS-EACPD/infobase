@@ -20,13 +20,12 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
     .reject('root')
     .groupBy("data.type")
     .toPairs()
-    .map( ([type_key,group]) => ({
+    .map( ([type_key, group]) => ({
       type_name: get_type_name(type_key),
       type_key,
       count: group.length,
     }))
     .concat([ indicator_count_obj ])
-    //.sortBy( ({type_key}) => _.indexOf(sorted_count_header_keys, type_key))
     .map( ({type_key, count}) => [type_key, count] )
     .fromPairs()
     .value();
@@ -34,7 +33,9 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
   let text_key = "";
   if(subject.level === 'dept'){
     if(doc === 'drr17'){
-      if(count_items.sub_program > 0){
+      if (count_items.cr > 0){
+        text_key = "result_counts_drr_dept_first_wave";
+      } else if(count_items.sub_program > 0){
         if(count_items.sub_sub_program > 0){
           text_key = "result_counts_drr_dept_sub_sub";
         } else {
@@ -43,13 +44,10 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
       } else {
         text_key = "result_counts_drr_dept_no_subs";
       }
-
     } else {
-
       text_key = "result_counts_dp_dept"
-
     }
-  //dept
+
   } else if(subject.level === 'program'){
     if(doc==='drr17'){
       if(count_items.sub_program > 0){
@@ -68,7 +66,6 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
   } else if(subject.level === 'crso'){
     //we only care about CRs, which are only DP
     text_key = "result_counts_dp_cr";
-
   }
 
   return (
@@ -89,7 +86,6 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
           num_drs: count_items.dr,
           num_crs: count_items.cr,
         }}
-
       />
     </div>
   );
@@ -141,8 +137,10 @@ export const ResultNodeContent = ({
     </div>
     { !_.isEmpty(contributing_programs) && 
       <div>
-        <header className="agnostic-header"> <TM k="programs_tagged_as_dr_contributors" /> </header>
-        <ul>                
+        <header className="agnostic-header">
+          <TM k="programs_tagged_as_dr_contributors" />
+        </header>
+        <ul>
           {_.map(contributing_programs, prog => 
             <li key={prog.id}>
               <a href={infograph_href_template(prog)}> { prog.name } </a>
