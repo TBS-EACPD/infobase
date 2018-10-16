@@ -11,6 +11,40 @@ const { page_title: default_title, meta_description: default_description } = ind
 //note: This must be manually kept consistent with index.hbs.html
 let is_initial_markup_cleared = false;
 
+
+class DocumentTitle extends React.Component {
+  render(){ return null; }
+  componentDidUpdate(){ this._update(); }
+  componentDidMount(){ this._update(); }
+  _update(){
+    const { title_str } = this.props;
+
+    const title =  (
+      _.isEmpty(title_str) ? 
+      default_title[window.lang] : 
+      `${default_title[window.lang]} - ${title_str}`
+    );
+
+    document.getElementById("document-title").innerHTML = title;
+  }
+}
+
+class DocumentDescription extends React.Component {
+  render(){ return null; }
+  componentDidUpdate(){ this._update(); }
+  componentDidMount(){ this._update(); }
+  _update(){
+
+    const { description_str } = this.props;
+    let desc = description_str;
+    if(_.isEmpty(description_str)){
+      desc = default_description[window.lang];
+    }
+    document.getElementById("document-description").content = desc;
+    
+  }
+}
+
 class BreadCrumbs extends React.Component {
   constructor(){
     super();
@@ -63,41 +97,24 @@ class BreadCrumbs extends React.Component {
   }
 };
 
-class DocumentTitle extends React.Component {
+class Banner extends React.Component {
   render(){ return null; }
   componentDidUpdate(){ this._update(); }
   componentDidMount(){ this._update(); }
   _update(){
-    const { title_str } = this.props;
+    const { banner_content } = this.props;
 
-    const title =  (
-      _.isEmpty(title_str) ? 
-      default_title[window.lang] : 
-      `${default_title[window.lang]} - ${title_str}`
-    );
+    let banner_element = document.getElementById("header-banner");
 
-    document.getElementById("document-title").innerHTML = title;
-  }
-}
-
-
-class DocumentDescription extends React.Component {
-  render(){ return null; }
-  componentDidUpdate(){ this._update(); }
-  componentDidMount(){ this._update(); }
-  _update(){
-
-    const { description_str } = this.props;
-    let desc = description_str;
-    if(_.isEmpty(description_str)){
-      desc = default_description[window.lang];
+    if ( _.isNull(banner_element) ){
+      banner_element = document.createElement("div");
+      banner_element.id = "header-banner";
+      document.querySelector("#wb-bc > .container").appendChild(banner_element);
     }
-    document.getElementById("document-description").content = desc;
-    
+
+    banner_element.innerHTML = banner_content || "";
   }
 }
-
-
 
 
 export class StandardRouteContainer extends React.Component {
@@ -115,6 +132,7 @@ export class StandardRouteContainer extends React.Component {
       children,
       shouldSyncLang,
       non_a11y_route,
+      banner_content,
     } = this.props;
 
     return (
@@ -122,6 +140,7 @@ export class StandardRouteContainer extends React.Component {
         <DocumentTitle title_str={title} />
         <DocumentDescription description_str={description} />
         <BreadCrumbs crumbs={breadcrumbs} />
+        <Banner banner_content={banner_content} />
         <AnalyticsSynchronizer route_key={route_key} />
         { shouldSyncLang !== false &&
           <LangSynchronizer /> 
