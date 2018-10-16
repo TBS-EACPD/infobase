@@ -242,8 +242,8 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
               data-toggle="tooltip"
               data-html="true"
               data-container="body"
-              onClick={()=>onIconClick.apply(icon_key)}
-              onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && onIconClick.apply(icon_key)}
+              onClick={() => onIconClick.apply([icon_key])}
+              onKeyDown={(e) => (e.keyCode===13 || e.keyCode===32) && onIconClick.apply([icon_key])}
             >
               {result_simple_statuses[icon_key].text}
             </span>
