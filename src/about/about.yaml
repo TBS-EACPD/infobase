@@ -275,7 +275,7 @@ about_body_text:
     ### Quelle est notre source d’inspiration?
 
 
-    Notre source d’inspiration est le travail effectué à l’échelle mondiale, tant dans le secteur public que privé. Pour le [diagramme Coup d’œil sur le gouvernement](#partition/dept/exp), nous sommes inspirés par l’excellent travail accompli par l’équipe {{ext_link "USAFacts.org" "https://usafacts.org/the-big-picture/spending"}}. L’inspiration pour la taille minimale de l’en-tête et du bas de page nous vient de nos collègues à {{ext_link "Service numérique canadien" "https://numerique.canada.ca/"}}. Enfin, nous sommes régulièrement inspirés par la grande collectivité D3 qui nous incite à peaufiner encore davantage les visualisations de données, au moyen de ressources comme la {{ext_link "galerie D3" "https://github.com/d3/d3/wiki/Gallery"}}.
+    Notre source d’inspiration est le travail effectué à l’échelle mondiale, tant dans le secteur public que privé. Pour le [diagramme Panorama de l'administration publique](#partition/dept/exp), nous sommes inspirés par l’excellent travail accompli par l’équipe {{ext_link "USAFacts.org" "https://usafacts.org/the-big-picture/spending"}}. L’inspiration pour la taille minimale de l’en-tête et du bas de page nous vient de nos collègues à {{ext_link "Service numérique canadien" "https://numerique.canada.ca/"}}. Enfin, nous sommes régulièrement inspirés par la grande collectivité D3 qui nous incite à peaufiner encore davantage les visualisations de données, au moyen de ressources comme la {{ext_link "galerie D3" "https://github.com/d3/d3/wiki/Gallery"}}.
 
 
     {{{gt "feedback_h2"}}}

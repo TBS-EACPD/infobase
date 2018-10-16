@@ -13,7 +13,7 @@ about_inventory:
 
   fr: |
     Le {{ext_link (gt "igoc") "http://www.tbs-sct.gc.ca/hgw-cgf/finances/rgs-erdg/cc-se/index-fra.asp"}} dresse la liste complète des organisations fédérales et des sociétés dans lesquelles le Canada détient des intérêts, que l'on peut regrouper en diverses catégories (p. ex. par portefeuille).
-    Pour voir comment elles sont distribuées selon différents mécanismes d’étiquetage, veuillez consulter notre diagramme [« Coup d’œil sur le gouvernement »](#partition/org_info_by_ministry/org_info).
+    Pour voir comment elles sont distribuées selon différents mécanismes d’étiquetage, veuillez consulter notre diagramme [« Panorama de l'administration publique »](#partition/org_info_by_ministry/org_info).
 
     * {{ext_link "Obtenir un aperçu des organisations et intérêts fédéraux" "http://www.tbs-sct.gc.ca/hgw-cgf/finances/rgs-erdg/cc-se/institution/forms-formulaires-fra.asp"}}
     * [Explorer les organisations selon le total de leurs dépenses pour {{pa_last_year}}](#partition/dept/exp)

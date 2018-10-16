@@ -122,7 +122,7 @@ partition_intro_popup:
   fr: |
     <div class="mrgn-bttm-md popup-row-bottom-border intro-popup-color">
       <span class="stat1 popup-font-l"> 
-        Coup d’œil sur le gouvernement
+        Panorama de l'administration publique
       </span>
     </div>
     <div class="intro-popup-color popup-font-ml">
@@ -197,10 +197,10 @@ partition_intro_popup:
 ## Misc. lang
 partition_title:
   en: The Government at a Glance
-  fr: Coup d'œil sur le gouvernement
+  fr: Panorama de l'administration publique
 partition_route_description:
   en: The Government at a Glance diagram provides an overview of federal government operations across various tagging schemes by means of a single interactive chart.
-  fr: Le diagramme « Coup d’œil sur le gouvernement » donne un aperçu des opérations du gouvernement fédéral selon différents mécanismes d’étiquetage au moyen d’un seul graphique interactif.
+  fr: Le diagramme « Panorama de l'administration publique » donne un aperçu des opérations du gouvernement fédéral selon différents mécanismes d’étiquetage au moyen d’un seul graphique interactif.
 partition_search_filter:
   en: Filter by Name and Description
   fr: Filtrer par le nom et la description
@@ -213,4 +213,4 @@ partition_select_context:
 
 partition_desc_meta_attr:
   en: Government at a Glance. This flow chart shows resources flow across the Government of Canada. Explore at a high level or drill down by using the infographics which provide detailed information on things like salaries, capital or transfer payments.
-  fr: Coup d'œil sur le gouvernement. Ce diagramme montre le mouvement des ressources dans la fonction publique fédérale. Explorez de façon générale ou faites un zoom avant au moyen des infographies qui vous donnent des renseignements détaillés, par exemple sur les salaires, les immobilisations ou les paiements de transfert.
+  fr: Panorama de l'administration publique. Ce diagramme montre le mouvement des ressources dans la fonction publique fédérale. Explorez de façon générale ou faites un zoom avant au moyen des infographies qui vous donnent des renseignements détaillés, par exemple sur les salaires, les immobilisations ou les paiements de transfert.
