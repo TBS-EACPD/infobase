@@ -3,9 +3,10 @@
 
 .budget-measures-partition-footer {
   @include budget-controls-footer-mixin();
+  margin-top: -1px;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
-  padding: 0px 6px 8px 8px;
+  padding: 1px 6px 8px 8px;
 
   & > .labeled-box {
     margin-bottom: 0px;
