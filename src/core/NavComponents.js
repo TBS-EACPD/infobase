@@ -97,26 +97,6 @@ class BreadCrumbs extends React.Component {
   }
 };
 
-class Banner extends React.Component {
-  render(){ return null; }
-  componentDidUpdate(){ this._update(); }
-  componentDidMount(){ this._update(); }
-  _update(){
-    const { banner_content } = this.props;
-
-    let banner_element = document.getElementById("header-banner");
-
-    if ( _.isNull(banner_element) ){
-      banner_element = document.createElement("div");
-      banner_element.id = "header-banner";
-      document.querySelector("#wb-bc > .container").appendChild(banner_element);
-    }
-
-    banner_element.innerHTML = banner_content || "";
-  }
-}
-
-
 export class StandardRouteContainer extends React.Component {
   componentDidMount(){
     //unless a route's component is sufficiently complicated, it should never unmount/remount a StandardRouteContainer
@@ -132,7 +112,6 @@ export class StandardRouteContainer extends React.Component {
       children,
       shouldSyncLang,
       non_a11y_route,
-      banner_content,
     } = this.props;
 
     return (
@@ -140,7 +119,6 @@ export class StandardRouteContainer extends React.Component {
         <DocumentTitle title_str={title} />
         <DocumentDescription description_str={description} />
         <BreadCrumbs crumbs={breadcrumbs} />
-        <Banner banner_content={banner_content} />
         <AnalyticsSynchronizer route_key={route_key} />
         { shouldSyncLang !== false &&
           <LangSynchronizer /> 

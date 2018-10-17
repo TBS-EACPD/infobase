@@ -17,6 +17,8 @@ import { EasyAccess } from '../core/EasyAccess';
 import { InsertRuntimeFooterLinks } from '../core/InsertRuntimeFooterLinks.js';
 import { DevFip } from '../core/DevFip.js';
 
+import { TestBanner } from '../banners/MakeBanner';
+
 const LazyHome = ComponentLoader(async () => {
   const { Home } = await import('../home/home.js');
   return Home;
@@ -96,6 +98,7 @@ export class App extends React.Component {
         <ReactUnmounter />
         <InsertRuntimeFooterLinks />
         <EasyAccess />
+        <TestBanner />
         <Switch>
           <Route path="/metadata/:data_source?" component={LazyMetadata}/>
           <Route path="/igoc/:grouping?" component={LazyIgoc} />
