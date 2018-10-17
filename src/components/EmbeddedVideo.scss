@@ -2,9 +2,12 @@
   margin: auto;
 
   @media(min-width: 992px){
-    width: 75%;
+    width: 60%;
   }
-  @media(max-width: 991px){
+  @media(min-width: 767px) and (max-width: 991px){
+    width: 80%;
+  }
+  @media(max-width: 766px){
     width: 100%;
   }
 }
