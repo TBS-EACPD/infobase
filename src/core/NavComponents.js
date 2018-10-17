@@ -97,9 +97,14 @@ class BreadCrumbs extends React.Component {
   }
 };
 
-const make_banner = ({banner_class, banner_content, location_filter}) => withRouter(
+const make_banner = ({banner_class, banner_content, route_filter}) => withRouter(
   class Banner extends React.Component {
     render(){
+      const {
+        match,
+        history,
+      } = this.props;
+
       const banner_container_id = "#banner-container";
 
       let banner_container = document.getElementById(banner_container_id);
@@ -110,7 +115,7 @@ const make_banner = ({banner_class, banner_content, location_filter}) => withRou
         document.querySelector("#wb-bc > .container").appendChild(banner_container);
       }
 
-      const should_show_banner = !_.isFunction(location_filter) || location_filter();
+      const should_show_banner = !_.isFunction(route_filter) || route_filter(match, history);
 
       return ReactDOM.createPortal(
         <div
@@ -127,7 +132,7 @@ const make_banner = ({banner_class, banner_content, location_filter}) => withRou
 
 const PABanner = make_banner({
   banner_content: "TODO",
-  location_filter: () => (/start|infograph\/financial/).test(window.location.hash),
+  route_filter: (match) => (/^\/$|infograph\/financial/).test(match.url),
 });
 
 
