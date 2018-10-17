@@ -202,7 +202,7 @@ const sources = _.mapValues({
     title(){ return tm("budget_source_title")},
     description(){ return <div dangerouslySetInnerHTML={{ __html: tm("budget_source_desc") }}/>; },
     frequency: frequencies.m,
-    last_updated: { month: 6, year: 2018 },
+    last_updated: { month: 10, year: 2018 },
     open_data: {
       en:"http://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
       fr:"https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
