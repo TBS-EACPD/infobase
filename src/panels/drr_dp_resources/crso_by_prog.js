@@ -27,48 +27,10 @@ const { planning_years } = years;
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-function calculate(subject,info){
-  if(subject.dead_so){
-    return false;
-  }
-
-  const all_exp = _.sum(planning_years, col => table6.q(subject).sum(col) )
-  const all_fte = _.sum(planning_years, col => table12.q(subject).sum(col) )
-
-  if(all_exp === 0 && all_fte === 0){
-    return false;
-  }
-
-  const {table6, table12} = this.tables;
-
-
-  const exp_data = _.map(table6.q(subject).data, row => ({
-    label : row.prgm,
-    data : planning_years.map(col => row[col]),
-  }));
-
-  const fte_data = _.map(table12.q(subject).data, row => ({
-    label : row.prgm,
-    data : planning_years.map(col => row[col]),
-  }));
-
-  return  {
-    exp_data,
-    fte_data,
-  }
-
-}
-  
-
-
 const render_resource_type = (is_fte) => ({calculations, footnotes}) => {
   const { graph_args, subject, info } = calculations;
   
-
-
   const sources = [ is_fte ? get_planned_fte_source_link(subject) : get_planned_spending_source_link(subject) ];
-  //const colors;
-  //let data;
 
   const { exp_data, fte_data } = graph_args;
 
@@ -80,7 +42,6 @@ const render_resource_type = (is_fte) => ({calculations, footnotes}) => {
     .value();
   const colors = infobase_colors();
   _.each(all_program_names, name => colors(name))
-
 
   const text = (
     <TM 
@@ -119,7 +80,6 @@ const render_resource_type = (is_fte) => ({calculations, footnotes}) => {
       />
     </Panel>
   );
-
 }
 
 class PlannedProgramResources extends React.Component {
@@ -143,7 +103,6 @@ class PlannedProgramResources extends React.Component {
     const ticks = _.map(planning_years, run_template);
 
     const { active_programs } = this.state;
-
 
     if(window.is_a11y_mode){
       return <div>
@@ -215,15 +174,46 @@ class PlannedProgramResources extends React.Component {
         </div>
       </div>
     </div>;
-
-    
   }
 }
 
 
+const get_calculate_func = (is_fte) => {
+  return function(subject,info){
+    if(subject.dead_so){
+      return false;
+    }
   
-
-
+    const {table6, table12} = this.tables;
+  
+    const all_exp = _.sumBy(planning_years, col => table6.q(subject).sum(col) )
+    const all_fte = _.sumBy(planning_years, col => table12.q(subject).sum(col) )
+  
+    const should_bail = is_fte ? all_fte === 0 : all_exp === 0;
+    if (should_bail){
+      return false;
+    }
+  
+    const exp_data = _.map(
+      table6.q(subject).data, row => ({
+        label : row.prgm,
+        data : planning_years.map(col => row[col]),
+      })
+    );
+  
+    const fte_data = _.map(
+      table12.q(subject).data, row => ({
+        label : row.prgm,
+        data : planning_years.map(col => row[col]),
+      })
+    );
+  
+    return  {
+      exp_data,
+      fte_data,
+    };
+  }
+}
 
 _.each([true,false], is_fte => {
   new PanelGraph({
@@ -236,7 +226,7 @@ _.each([true,false], is_fte => {
     ),
     depends_on: ['table6', 'table12'],
     info_deps: ['table6_crso_info','table12_crso_info'],
-    calculate,
+    calculate: get_calculate_func(is_fte),
     render: render_resource_type(is_fte),
   });
 });
