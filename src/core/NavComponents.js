@@ -105,11 +105,11 @@ const make_banner = ({banner_class, banner_content, route_filter}) => withRouter
         history,
       } = this.props;
 
-      const banner_container_id = "#banner-container";
+      const banner_container_id = "banner-container";
 
       let banner_container = document.getElementById(banner_container_id);
       if ( _.isNull(banner_container) ){
-        // This case should be temporary, will put #banner-container in index templates later
+        // This case is temporary, can be deleted once #banner-container is in live index files
         banner_container = document.createElement("div");
         banner_container.id = banner_container_id;
         document.querySelector("#wb-bc > .container").appendChild(banner_container);
@@ -120,12 +120,12 @@ const make_banner = ({banner_class, banner_content, route_filter}) => withRouter
       return ReactDOM.createPortal(
         <div
           className = { `alert alert-no-symbol alert--is-bordered large_panel_text ${banner_class || 'alert-info'}` }
-          style = { should_show_banner ? {} : { display: "none" } }
+          style = { should_show_banner ? { marginBottom: "15px" } : { display: "none" } }
         >
           { banner_content }
         </div>,
         banner_container
-      ); 
+      );
     }
   }
 );
