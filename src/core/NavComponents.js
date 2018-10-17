@@ -97,6 +97,40 @@ class BreadCrumbs extends React.Component {
   }
 };
 
+const make_banner = ({banner_class, banner_content, location_filter}) => withRouter(
+  class Banner extends React.Component {
+    render(){
+      const banner_container_id = "#banner-container";
+
+      let banner_container = document.getElementById(banner_container_id);
+      if ( _.isNull(banner_container) ){
+        // This case should be temporary, will put #banner-container in index templates later
+        banner_container = document.createElement("div");
+        banner_container.id = banner_container_id;
+        document.querySelector("#wb-bc > .container").appendChild(banner_container);
+      }
+
+      const should_show_banner = !_.isFunction(location_filter) || location_filter();
+
+      return ReactDOM.createPortal(
+        <div
+          className = { `alert alert-no-symbol alert--is-bordered large_panel_text ${banner_class || 'alert-info'}` }
+          style = { should_show_banner ? {} : { display: "none" } }
+        >
+          { banner_content }
+        </div>,
+        banner_container
+      ); 
+    }
+  }
+);
+
+const PABanner = make_banner({
+  banner_content: "TODO",
+  location_filter: () => (/start|infograph\/financial/).test(window.location.hash),
+});
+
+
 export class StandardRouteContainer extends React.Component {
   componentDidMount(){
     //unless a route's component is sufficiently complicated, it should never unmount/remount a StandardRouteContainer
@@ -120,6 +154,7 @@ export class StandardRouteContainer extends React.Component {
         <DocumentDescription description_str={description} />
         <BreadCrumbs crumbs={breadcrumbs} />
         <AnalyticsSynchronizer route_key={route_key} />
+        <PABanner />
         { shouldSyncLang !== false &&
           <LangSynchronizer /> 
         }
