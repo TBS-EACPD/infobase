@@ -626,7 +626,7 @@ Handlebars.registerHelper("divide",function(numerator, denominator){
 
 Handlebars.registerHelper("ext_link",function(display,url){
   return new Handlebars.SafeString(
-    `<a target="_blank" href="${url}">${display}</a>`
+    `<a target="_blank" rel="noopener noreferrer" href="${url}">${display}</a>`
   );
 })
 

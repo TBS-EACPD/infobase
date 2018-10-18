@@ -68,7 +68,8 @@ export class MetaData extends React.Component {
                       {
                         external_link &&
                         <a 
-                          target="_blank" 
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="btn btn-xs btn-ib-primary btn-responsive-fixed-width" 
                           href={external_link}
                         >
@@ -86,7 +87,8 @@ export class MetaData extends React.Component {
                     <a 
                       style={{marginLeft:'auto'}} //fix a flexbox bug
                       className="btn btn-ib-primary" 
-                      target="_blank" 
+                      target="_blank"
+                      rel="noopener noreferrer"
                       href={source.open_data[window.lang]}
                     > 
                       <TM k='open_data_link' /> 

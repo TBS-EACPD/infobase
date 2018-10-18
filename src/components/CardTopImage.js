@@ -12,7 +12,7 @@ const CardTopImage = ({
   text_args,
   tmf,
 }) => (
-  <a className="link-unstyled" href={link_href} target={link_open_in_new_tab ? "_blank" : "_self"}>
+  <a className="link-unstyled" href={link_href} target={link_open_in_new_tab ? "_blank" : "_self"} rel={link_open_in_new_tab ? "noopener noreferrer" : ""}>
     <div className="top-img-card">
       { img_src &&
         <div className="top-img-card__top">

@@ -285,6 +285,7 @@ budget_measure_popup_bottom_rows:
     {{/if}}
     {{#if budget_link}}
       <a target='_blank'
+        rel='noopener noreferrer'
         href='{{budget_link}}' 
         class='btn btn-xs btn-block mrgn-bttm-sm partition-link-out' 
         style='background-color:{{color}};'>

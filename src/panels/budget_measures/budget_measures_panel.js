@@ -740,7 +740,7 @@ class BudgetMeasureHBars extends React.Component {
                 bar_label_formater = {
                   ({ label, link, is_link_out}) => {
                     if (link){
-                      return `<a href="${link}" target="${is_link_out ? "_blank" : "_self"}">${label}</a>`;
+                      return `<a href="${link}" target="${is_link_out ? "_blank" : "_self"}" rel="${is_link_out ? "noopener noreferrer" : ""}">${label}</a>`;
                     } else {
                       return `<a>${label}</a>`;
                     }

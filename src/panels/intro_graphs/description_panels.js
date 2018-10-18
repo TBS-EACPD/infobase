@@ -29,7 +29,7 @@ _.each(['tag','crso','program'], level => {
             <ul>
               {_.map(subject.web_links, href => 
                 <li key={href}>
-                  <a target="_blank" href={href}>
+                  <a target="_blank" rel="noopener noreferrer" href={href}>
                     {_.truncate(href, {length:150})}
                   </a>
                 </li>

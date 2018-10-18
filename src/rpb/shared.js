@@ -123,7 +123,8 @@ const ReportDatasets = ({
           {table.name}
         </span>
         <a 
-          target="_blank" 
+          target="_blank"
+          rel="noopener noreferrer"
           className="btn btn-xs btn-ib-primary btn-responsive-fixed-width" 
           href={table.link[window.lang]}>
           <TextMaker text_key="open_data_link"/>
@@ -146,7 +147,8 @@ const ReportDatasets = ({
                 {all_sources[source].title()}
               </a>
               <a 
-                target="_blank" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn btn-xs btn-ib-primary btn-responsive-fixed-width" 
                 href={all_sources[source].open_data[window.lang]}>
                 <TextMaker text_key="open_data_link"/>

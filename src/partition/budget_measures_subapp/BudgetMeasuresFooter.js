@@ -18,6 +18,7 @@ const FancyULBudgetSourceRow = (source_item, open_data_link) => (
     </a>
     <a 
       target="_blank" 
+      rel="noopener noreferrer"
       className="btn btn-xs btn-ib-primary btn-responsive-fixed-width" 
       href={open_data_link}>
       <TextMaker text_key="open_data_link"/>
