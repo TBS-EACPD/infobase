@@ -44,7 +44,6 @@
     padding: 10px 0px 10px 0px;
 
     & > .filter-table__item {
-      padding: 15px 32px 5px 32px;
       border-color: $controlsColorLighter;
       color: $controlsColorLighter;
 
@@ -56,6 +55,10 @@
       }
 
       & > .filter-table__components {
+        @media(min-width:1201px){
+          margin-bottom: 20px;
+        }
+
         & > .filter-table__text {
           font-size: 20px;
         }
