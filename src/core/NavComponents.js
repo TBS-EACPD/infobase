@@ -97,10 +97,14 @@ class BreadCrumbs extends React.Component {
   }
 };
 
-const make_banner = ({banner_class, banner_content, route_filter}) => withRouter(
-  class Banner extends React.Component {
+const HeaderBanner = withRouter(
+  class HeaderBanner extends React.Component {
     render(){
       const {
+        banner_content,
+        banner_class,
+        route_filter,
+
         match,
         history,
       } = this.props;
@@ -130,11 +134,6 @@ const make_banner = ({banner_class, banner_content, route_filter}) => withRouter
   }
 );
 
-const PABanner = make_banner({
-  banner_content: "TODO",
-  route_filter: (match) => (/^\/$|infograph\/financial/).test(match.url),
-});
-
 
 export class StandardRouteContainer extends React.Component {
   componentDidMount(){
@@ -158,8 +157,11 @@ export class StandardRouteContainer extends React.Component {
         <DocumentTitle title_str={title} />
         <DocumentDescription description_str={description} />
         <BreadCrumbs crumbs={breadcrumbs} />
+        <HeaderBanner
+          banner_content="TODO"
+          route_filter={ (match) => (/^\/$|infograph\/financial/).test(match.url) }
+        />
         <AnalyticsSynchronizer route_key={route_key} />
-        <PABanner />
         { shouldSyncLang !== false &&
           <LangSynchronizer /> 
         }
