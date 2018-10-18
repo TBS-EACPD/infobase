@@ -42,9 +42,7 @@ budget_stats_title:
 budget_summary_stats:
   transform: [handlebars, markdown]
   en: |
-    * **{{gt "budget_name_header"}}** provides funding totalling up to **{{fmt_compact2_written total_funding}}** to support the implementation of **{{measure_count}}** budget measures in **{{gt "budget_route_year"}}**
-      * **{{no_funding_in_year_count}}** of the **{{measure_count}}** Budget 2018 measures are not funded in {{gt "budget_route_year"}}, but have been provided planned funding for future years
-    
+    &nbsp;&nbsp;**{{gt "budget_name_header"}}** provides funding totalling up to **{{fmt_compact2_written total_funding}}** to support the implementation of **{{measure_count}}** budget measures in **{{gt "budget_route_year"}}**.  
     
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**As of {{gt "budget_data_sourced_date"}}:**
     * **{{fmt_compact2_written total_allocated}}** has been **allocated** by the Treasury Board (**{{fmt_percentage1 total_allocated_share}}** of the total funding)
@@ -55,8 +53,7 @@ budget_summary_stats:
     * **{{totally_funded_count}}** budget measures have received all of their funding for {{gt "budget_route_year"}}
     * **{{less_one_percent_remaining_funds_count}}** budget measures have a **non-zero** remaining balance which is **less than 1%** of their total funding for the fiscal year; these measures have effectively received all of their funding for {{gt "budget_route_year"}}
   fr: |
-    * **{{gt "budget_name_header"}}** prévoit un financement pouvant atteindre **{{fmt_compact2_written total_funding}}** à l'appui de la mise en œuvre des **{{measure_count}}** mesures budgétaires en **{{gt "budget_route_year"}}** 
-      * **{{no_funding_in_year_count}}** des **{{measure_count}}** mesures du budget 2018 ne sont pas financées en {{gt "budget_route_year"}}, mais ont reçu les fonds prévus pour les années futures
+    &nbsp;&nbsp;**{{gt "budget_name_header"}}** prévoit un financement pouvant atteindre **{{fmt_compact2_written total_funding}}** à l'appui de la mise en œuvre des **{{measure_count}}** mesures budgétaires en **{{gt "budget_route_year"}}**.  
 
     
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**En date du {{gt "budget_data_sourced_date"}}:**
