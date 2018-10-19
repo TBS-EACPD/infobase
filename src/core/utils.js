@@ -55,18 +55,21 @@ export const abbrev = function(name, length, href){
   // * `name` : the text which needs to be abbreviated
   // * `length` : the cut-off point in the string
   // * `href` : href, if passed then returned html will be an anchor
-  length = length || 60;
+  const length_value = _.isFunction(length) ? length() : length || 60;
   const temp_span = document.createElement("span");
   const returned_element_tag = _.isUndefined(href) ? "span" : "a";
 
   const shortened_element = document.createElement(returned_element_tag);
   _.isUndefined(href) && (shortened_element.href = href);
 
-  if (name.length > length){
+  if (name.length > length_value){
     shortened_element.className = "shortened";
-    shortened_element.innerHTML = name.substring(0, length-4) + "...";
     shortened_element.alt = name;
     !is_a11y_mode && (shortened_element.title = name);
+
+    shortened_element.innerHTML = name.substring(0, length_value-4) + "...";
+  } else {
+    shortened_element.innerHTML = name;
   }
 
   temp_span.appendChild(shortened_element);
