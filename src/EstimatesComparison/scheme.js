@@ -10,8 +10,8 @@ import { shallowEqualObjectsOverKeys } from '../core/utils';
 
 const { Dept } = Subject;
 const biv_footnote = text_maker("biv_footnote");
-const this_year_col = "{{est_last_year}}_estimates";
-const last_year_col = "{{est_last_year_2}}_estimates";
+const this_year_col = "{{est_in_year}}_estimates";
+const last_year_col = "{{est_last_year}}_estimates";
 const row_identifier_func = row => `${row.dept}-${row.votenum}-${row.desc}`; 
 
 //in this cpn, we don't care about supps

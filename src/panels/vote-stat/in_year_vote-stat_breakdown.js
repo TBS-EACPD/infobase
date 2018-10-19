@@ -33,7 +33,7 @@ const planned_vote_or_stat_render = vs => function({calculations, footnotes, sou
   // });
 
 
-  const col = "{{est_in_year}}_estimates";
+  const col = "{{est_in_year}}_estimates";  
   const top_10_rows = _.take(data, 10);
   const complement_amt =  _.last(data)[col];
   const total_amt = d3.sum(data, _.property(col) );
@@ -136,6 +136,8 @@ const planned_vote_or_stat_calculate = vs => function(subject, info){
   };
   ret.data = _.take(all_rows,10);
   if (vs === 'voted'){
+    //vote descriptions are of the form "<vote desc> - <vote num>"
+    //lets strip out the hiphen and everything that follows
     ret.data.forEach(row => row.desc = row.desc.replace(/-.+$/,""));
   }
   ret.data.push({
@@ -143,13 +145,6 @@ const planned_vote_or_stat_calculate = vs => function(subject, info){
     others : true,
     [main_col] : d3.sum(_.tail(all_rows,10), d => d[main_col]),
   });
-  //options.links = [this.create_links({
-  // "dimension" : "voted_stat",
-  // "filter" : "voted",
-  // "table" : this.table,
-  // "pres_level" : "depts",
-  // "cols" : "thisyearauthorities"
-  //})];
 
   return ret;
 };
