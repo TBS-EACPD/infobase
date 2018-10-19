@@ -51,10 +51,10 @@ const sources = _.mapValues({
     ix: 1,
     description(){ return desc_from_gloss_keys("PA") },
     title(){ return tm("pa_title" )},
-    last_updated : {"month" : 10,"year":2017},
+    last_updated : {"month": 10, "year": 2018},
     open_data: {
-      en: "http://open.canada.ca/data/en/dataset/51c3b869-9182-4ee3-a7c2-36da0dc2889c",
-      fr: "http://ouvert.canada.ca/data/fr/dataset/51c3b869-9182-4ee3-a7c2-36da0dc2889c",
+      en:"http://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
+      fr:"https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
     },
     frequency: frequencies.y,
     report_link:{
