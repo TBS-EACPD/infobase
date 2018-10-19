@@ -4,14 +4,16 @@ import {
   create_text_maker_component,
   PanelGraph,
   Subject,
-  reactAdapter,  
+  reactAdapter,
   formats,
   declarative_charts,
   util_components,
   charts_index,
   Panel,
   Table,
+  utils,
 } from '../shared.js';
+
 
 const { GraphLegend } = declarative_charts;
 const { Format } = util_components;
@@ -19,37 +21,40 @@ const { Tag } = Subject;
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const state = {active_spend_area : null};
+const state = {active_spend_area: null};
 const title_font_size = "1.5em";
+
+const { abbrev } = utils;
+const ticks_formatter = (tick) => abbrev(tick, () => window.innerWidth > 720 ? 200 : 6);
 
 const fade_out = function(d){
 
   this.svg.selectAll("g.tick-group")
-    .filter(dd=> d !== dd)
+    .filter(dd => d !== dd)
     .selectAll("rect")
     .transition()
     .duration(1000)
-    .style("fill-opacity" , 0.2);
+    .style("fill-opacity", 0.2);
 
   this.svg.selectAll("g.tick-group")
-    .filter(dd=> d === dd)
+    .filter(dd => d === dd)
     .selectAll("rect")
     .transition()
     .duration(1000)
-    .style("fill-opacity" , 1);
+    .style("fill-opacity", 1);
 
   this.html.selectAll("div.tick")
-    .filter(dd=> d !== dd)
+    .filter(dd => d !== dd)
     .styles({
-      "opacity":0.4,
-      "font-weight":"300",
+      "opacity" :0.4,
+      "font-weight": "300",
     });
 
   this.html.selectAll("div.tick")
-    .filter(dd=> d === dd)
+    .filter(dd => d === dd)
     .styles({
-      "opacity":1,
-      "font-weight":"500",
+      "opacity": 1,
+      "font-weight": "500",
     });
 };
 
@@ -84,24 +89,24 @@ class Goco {
           });
           const ftes = d3.sum(goco.programs, p => {
             return table12.programs.get(p) ? _.first(table12.programs.get(p))[fte_col] : 0;
-          });               
+          });
           return {
-            href : `#orgs/tag/${goco.id}/infograph`,
-            tick : goco.name,
+            href: `#orgs/tag/${goco.id}/infograph`,
+            tick: goco.name,
             spending,
             ftes,
           };
         });
-        const spending = d3.sum(children, c=>c.spending);
-        const ftes = d3.sum(children, c=>c.ftes);
+        const spending = d3.sum(children, c => c.spending);
+        const ftes = d3.sum(children, c => c.ftes);
         return {
-          tick : sa.name,
+          tick: sa.name,
           spending,
           ftes,
-          children : _.sortBy(children,d=>-d.spending),
+          children: _.sortBy(children, d => -d.spending),
         };
       })
-      .sortBy(d=>-d.spending)
+      .sortBy(d => -d.spending)
       .value();
 
     
@@ -130,20 +135,15 @@ class Goco {
       container.select(".a11y_area").remove();
     }
 
-    
-
-
-
-
     const series1 = {
-      label :  text_maker("spending"), 
-      data : _.map(this.data,"spending"),
-      formater : formats.compact1,
+      label: text_maker("spending"), 
+      data: _.map(this.data,"spending"),
+      formater: formats.compact1,
     };
-    const series2 =  {
-      label : text_maker("ftes") , 
-      data : _.map(this.data,"ftes"),
-      formater : formats.big_int_real,
+    const series2 = {
+      label: text_maker("ftes") , 
+      data: _.map(this.data,"ftes"),
+      formater: formats.big_int_real,
     };
 
     reactAdapter.render(
@@ -165,24 +165,25 @@ class Goco {
       this.container.select('.sa-diagram').node(),
       {
         title_font_size,
-        title : text_maker("gov_goco"),
-        colors : this.colors,
+        title: text_maker("gov_goco"),
+        colors: this.colors,
         height: 380,
-        ticks : _.map(this.data,"tick"),
+        ticks: _.map(this.data, "tick"),
+        ticks_formatter,
         series1,
         series2,
       }
     )
 
-    graph.dispatch.on("dataClick.fade_out", fade_out.bind(graph));
-    graph.dispatch.on("dataClick.render",this.render_goco.bind(this) );
+    graph.dispatch.on( "dataClick.fade_out", fade_out.bind(graph) );
+    graph.dispatch.on( "dataClick.render", this.render_goco.bind(this) );
 
     graph.render();
     if (state.active_spend_area) {
-      graph.dispatch.on("renderEnd", ()=> {
+      graph.dispatch.on("renderEnd", () => {
         that.render_goco( state.active_spend_area);
         fade_out.call(graph,state.active_spend_area);
-        graph.dispatch.on("renderEnd",null);
+        graph.dispatch.on("renderEnd", null);
       });
     }
   }
@@ -190,35 +191,36 @@ class Goco {
   render_goco(sa_name){
     
     state.active_spend_area = sa_name;
-    this.goco_data = _.find(this.data, d=>d.tick === sa_name).children;
+    this.goco_data = _.find(this.data, d => d.tick === sa_name).children;
     this.container.select('.goco-diagram').html("");
 
     const graph = new charts_index.TwoSeriesBar(
       this.container.select('.goco-diagram').node(),
       {
-        title : sa_name,
-        colors : this.colors,
+        title: sa_name,
+        colors: this.colors,
         title_font_size,
         height: 380,
-        ticks : _.map(this.goco_data,"tick"),
-        series1 : {
-          label :  text_maker("spending"), 
-          data : _.map(this.goco_data,"spending"),
-          formater : formats.compact1,
+        ticks: _.map(this.goco_data, "tick"),
+        ticks_formatter,
+        series1: {
+          label: text_maker("spending"), 
+          data: _.map(this.goco_data, "spending"),
+          formater: formats.compact1,
         },
-        series2 : {
-          label : text_maker("ftes"), 
-          data : _.map(this.goco_data,"ftes"),
-          formater : formats.big_int_real,
+        series2: {
+          label: text_maker("ftes"), 
+          data: _.map(this.goco_data,"ftes"),
+          formater: formats.big_int_real,
         },
       }
     )
     graph.render();
-    graph.dispatch.on("dataClick",this.nav_to_dashboard.bind(this) );
+    graph.dispatch.on( "dataClick", this.nav_to_dashboard.bind(this) );
   }
   nav_to_dashboard(goco_name){
-    const goco =  _.find(this.goco_data, d=>d.tick ===goco_name);
-    const href = goco.href.replace("#","/");
+    const goco = _.find(this.goco_data, d => d.tick === goco_name);
+    const href = goco.href.replace("#", "/");
     this.history.push(href);
   }
 }
@@ -232,14 +234,14 @@ function render({calculations, footnotes, sources }, { history }){
   const fte_yr = "{{pa_last_year}}";
 
   const fte_spend_data = _.chain(Tag.gocos_by_spendarea)
-    .map(sa=> {
+    .map(sa => {
       const children = _.map(sa.children_tags, goco => {
         const spending = d3.sum(goco.programs, p => {
           return table6.programs.get(p) ? _.first(table6.programs.get(p))[spend_yr] : 0;
         });
         const ftes = d3.sum(goco.programs, p => {
           return table12.programs.get(p) ? _.first(table12.programs.get(p))[fte_yr] : 0;
-        });             
+        });
         return {
           spending,
           ftes,
@@ -287,7 +289,7 @@ class GocoDiagram extends React.Component {
       .html(text_maker("goco_t"));
 
     new Goco(
-      d3.select(el.querySelector("#goco_mount")), 
+      d3.select( el.querySelector("#goco_mount") ), 
       history
     );
   }

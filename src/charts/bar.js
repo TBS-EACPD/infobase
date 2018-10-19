@@ -13,14 +13,14 @@ export class Bar {
     // ```
     common_charts_utils.setup_graph_instance(this, d3.select(container),options);
   
-    var _graph_area = this.svg.append("g").attr("class","_graph_area");
-    this.grid_line_area = _graph_area.append("g").attr("class","grid_lines");
-    this.graph_area = _graph_area.append("g").attr("class","inner_graph_area");
+    var _graph_area = this.svg.append("g").attr("class", "_graph_area");
+    this.grid_line_area = _graph_area.append("g").attr("class", "grid_lines");
+    this.graph_area = _graph_area.append("g").attr("class", "inner_graph_area");
   }
   
   render(options){
     var that = this;
-    this.options = _.extend(this.options,options);
+    this.options = _.extend(this.options, options);
   
     this.margin = this.options.margin || {top: 25,
       right: 20,
@@ -59,6 +59,7 @@ export class Bar {
     const title = this.options.title;
     const y_axis = this.options.y_axis || '';
     const ticks = this.options.ticks;
+    const ticks_formatter = _.isFunction(this.options.ticks_formatter) ? this.options.ticks_formatter : _.identity;
     const values = d3.values(series);
     const extent = d3.extent(d3.merge(values));
     this.number_of_bars_to_render = d3.merge(values).length;
@@ -389,7 +390,7 @@ export class Bar {
           "width": x0.bandwidth() + "px",
           "left": (d) => x0(d) + that.margin.left + "px",
         })
-        .html(_.identity);
+        .html(ticks_formatter);
   
       !x_axis_line && x_axis_element.remove();
       

@@ -37,7 +37,7 @@ export class HBarComposition {
       right: 20,
       bottom: 30,
       left: 20};
-    const bar_label_formater = this.options.bar_label_formater;
+    const bar_label_formater = _.isFunction(this.options.bar_label_formater) ? this.options.bar_label_formater : _.identity;
     const get_series_label = d => d.label;
     let x_max = -Infinity;
     let x_min = Infinity;

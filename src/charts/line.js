@@ -56,7 +56,8 @@ export class Line {
     this.colors = this.options.colors;
     // restrict either the beginning or end of the ticks
     // if there are no associated values  
-    this.all_ticks =  this.options.ticks;
+    this.all_ticks = this.options.ticks;
+    this.ticks_formatter = _.isFunction(this.options.ticks_formatter) ? this.options.ticks_formatter : _.identity;
     this.ticks = ( 
       _.filter(
         this.all_ticks, 
@@ -326,7 +327,7 @@ export class Line {
           "width": this.tick_width+"px",
           "left": d => this.x(d)-this.tick_width/2+this.margin.left+"px",
         })
-        .html(function(d){ return d;});
+        .html(this.ticks_formatter);
       
       if (!this.x_axis_line){
         this.graph_area.select(".x.axis path").remove();

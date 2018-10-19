@@ -49,6 +49,7 @@ export class TwoSeriesBar {
     const label_font_size = 12; // this is in pt, not px
     const colors = this.options.colors || common_charts_utils.tbs_color()
     const ticks = this.options.ticks;
+    const ticks_formatter = _.isFunction(this.options.ticks_formatter) ? this.options.ticks_formatter : _.identity;
 
     // `x0` scale sets out the chunks of space for each
     // of the series
@@ -258,7 +259,7 @@ export class TwoSeriesBar {
           this.dispatch.call("dataClick", d);
         }
       })
-      .html(_.identity);
+      .html(ticks_formatter);
     
     this.html.selectAll("div.__labels")
       .data(data)
