@@ -132,7 +132,7 @@ const planned_vote_or_stat_calculate = vs => function(subject, info){
       text = `${Subject.Dept.lookup(d.data.dept).sexy_name} -  ${text}`;
     }
     const estimated_string_size = (d.zoom_r*1.2/5) * d.zoom_r/18; 
-    return abbrev(text,estimated_string_size,false);
+    return abbrev(text, estimated_string_size);
   };
   ret.data = _.take(all_rows,10);
   if (vs === 'voted'){

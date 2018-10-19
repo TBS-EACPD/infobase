@@ -68,7 +68,7 @@ const FootnoteList = ({ footnotes }) => <div style={{padding:"10px"}}>
 
 const Year = ({y}) => run_template(`{{${y}}}`);
 
-const Abbrev = ({text,len}) => <span dangerouslySetInnerHTML={{__html: abbrev(text,len)}} />
+const Abbrev = ({text, len, href}) => <span dangerouslySetInnerHTML={{ __html: abbrev(text, len, href) }} />;
 
 const TrivialTM = props => <TM tmf={trivial_text_maker} {...props} />;
 const TrivialTextMaker = props => <TextMaker text_maker_func={trivial_text_maker} {...props} />;

@@ -235,7 +235,7 @@ p.build_graphic = function(data,depts,formater){
       } else if (d.zoom_r > 40) {
         return _.take(d.data.name.split(" "),2).join(" ")+ " - "+ val;
       } else {
-        return abbrev(d.data.name + " - "+ val,5,false);
+        return abbrev(d.data.name + " - "+ val, 5);
       }
     },
   });

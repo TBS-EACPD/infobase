@@ -48,39 +48,29 @@ if (typeof window !== "undefined"){
   set_mobile();
 }  
 
-// <div id='abbrev'></div>
-// for abbreviating long strings of text on the screen
-// but also keeping a hidden version of the full string
-// for accessibility purposes 
-export const abbrev = function(name, length, add_abbrev){
+
+// helper for abbreviating long strings of text
+// returns either a span or anchor displaying the snipped text, with the long text as its title attr
+export const abbrev = function(name, length, href){
   // * `name` : the text which needs to be abbreviated
   // * `length` : the cut-off point in the string
-  add_abbrev = add_abbrev || false;
+  // * `href` : href, if passed then returned html will be an anchor
   length = length || 60;
-  var temp_span = document.createElement("span");
+  const temp_span = document.createElement("span");
+  const returned_element_tag = _.isUndefined(href) ? "span" : "a";
+
+  const shortened_element = document.createElement(returned_element_tag);
+  _.isUndefined(href) && (shortened_element.href = href);
+
   if (name.length > length){
-
-    const a11y_element = document.createElement("span");
-    a11y_element.className = "wb-inv original";
-    a11y_element.innerHTML = name;
-    temp_span.appendChild(a11y_element);
-    
-    if (add_abbrev) {
-      const abbrev_element = document.createEelment("span");
-      abbrev_element.className = "wb-inv abbrev";
-      abbrev_element.innerHTML = window.lang === "en" ? " abbreviated here as:" : " abrégé ici:";
-      temp_span.appendChild(abbrev_element);
-    }
-
-    const shortened_element = document.createElement("span");
     shortened_element.className = "shortened";
-    shortened_element.innerHTML = name.substring(0, length-5) + "...";
-    temp_span.appendChild(shortened_element);
-    
-    return temp_span.innerHTML;
-  } else {
-    return name;
+    shortened_element.innerHTML = name.substring(0, length-4) + "...";
+    shortened_element.alt = name;
+    !is_a11y_mode && (shortened_element.title = name);
   }
+
+  temp_span.appendChild(shortened_element);
+  return temp_span.innerHTML;
 };
 
 export const make_unique_func = function(){
