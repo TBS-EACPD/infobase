@@ -5,13 +5,15 @@ export class Bar {
   constructor(container, options){
     // data in the format of
     // ```javascript
-    // data = { "series 1" : [y1,y2,y3],
-    //         "series 2" : [y1,y2,y3]}
-    // ticks = ["tick1","tick2"."tick3"]
+    //  data = { 
+    //   "series 1": [y1, y2, y3],
+    //   "series 2": [y1, y2, y3]
+    //  }
+    //  ticks = ["tick1", "tick2", "tick3"]
     // ```
     common_charts_utils.setup_graph_instance(this, d3.select(container),options);
   
-    var _graph_area  = this.svg.append("g").attr("class","_graph_area");
+    var _graph_area = this.svg.append("g").attr("class","_graph_area");
     this.grid_line_area = _graph_area.append("g").attr("class","grid_lines");
     this.graph_area = _graph_area.append("g").attr("class","inner_graph_area");
   }
@@ -30,12 +32,12 @@ export class Bar {
     const width = this.outside_width - this.margin.left - this.margin.right;
     const add_xaxis = !_.isUndefined(this.options.add_xaxis) ? this.options.add_xaxis : true;
     const add_yaxis = !_.isUndefined(this.options.add_yaxis) ? this.options.add_yaxis : true;
-    const x_axis_line = this.options.x_axis_line  === undefined ? true : this.options.x_axis_line;
+    const x_axis_line = this.options.x_axis_line === undefined ? true : this.options.x_axis_line;
       
     this.svg
       .attrs({
-        width : this.outside_width,
-        height : this.outside_height,
+        width: this.outside_width,
+        height: this.outside_height,
       })
       .select("._graph_area")
       .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
@@ -107,12 +109,12 @@ export class Bar {
     this.html
       .append("div")
       .styles({
-        "position" : "absolute",
+        position: "absolute",
         "top": "-10px",
-        "width" : "100%",
-        "text-align" : "center",
-        "font-size" : "14px",
-        "font-weight" : "500",
+        "width": "100%",
+        "text-align": "center",
+        "font-size": "14px",
+        "font-weight": "500",
       })
       .html(title);
   
@@ -133,7 +135,7 @@ export class Bar {
       .attr("class", "tick-group");
   
     new_groups
-      .attr("transform", function(d) { return "translate(" + x0(d) + ",0)"; });
+      .attr("transform", (d) => "translate(" + x0(d) + ",0)");
   
     if ( stacked ){
   
@@ -144,26 +146,24 @@ export class Bar {
       data = _.map(series_labels, (series_name) => {
         const values = series[series_name];
         return {
-          name : series_name,
-          data :_.map(values,(value,i) => {
+          name: series_name,
+          data: _.map(values,(value,i) => {
             return {
-              key : series_name,
-              tick : ticks[i],
-              y:value,
-              x : x0(ticks[i]),
+              key: series_name,
+              tick: ticks[i],
+              y: value,
+              x: x0(ticks[i]),
               name: series_name,
             };
           })};
       });
   
       if (normalized){
-        _.each(ticks, function(tick,i){
-          var sum = d3.sum(_.map(data, function(serie){
-            return serie.data[i].y;
-          }));
-          _.each(data, function(serie){
-            serie.data[i].y /= sum;
-          });
+        _.each(ticks, (tick,i) => {
+          var sum = d3.sum(
+            _.map(data, (serie) => serie.data[i].y)
+          );
+          _.each(data, (serie) => serie.data[i].y /= sum);
         });
       }
   
@@ -175,12 +175,9 @@ export class Bar {
       // create the grouped bars
       bars = new_groups
         .selectAll("rect")
-        .data(function(d,i) {
-          return _.map(stacks, function(stack){
-            return stack.data[i];
-          });
-        },
-        function(d,i){return d.key;}
+        .data(
+          (d,i) => _.map(stacks, (stack) => stack.data[i]),
+          (d,i) => d.key
         );
   
       const new_bars = bars
@@ -190,7 +187,7 @@ export class Bar {
         .attr("height",1)
         .attr("y", y(0))
         .styles({
-          "fill-opacity" : 0.8,
+          "fill-opacity": 0.8,
         })
         .on("mouseover", this.dispatch.call("dataHover"))
         .on("mouseout", this.dispatch.call("dataHoverOut"));
@@ -199,12 +196,12 @@ export class Bar {
         .transition()
         .duration(750)
         .styles({
-          "fill": function(d) {return colors(d.name); },
+          "fill": (d) => colors(d.name),
         })
-        .attr("y", function(d) { return y(d.y0); })
+        .attr("y", (d) => y(d.y0) )
         .attr( "x", "0")
         .attr("width", bar_width)
-        .attr("height", function(d) { return y(0) - y(d.size); })
+        .attr("height", (d) => y(0) - y(d.size) )
         .on("end", _.bind(this.signal_render_end,this));
   
     } else {
@@ -217,19 +214,22 @@ export class Bar {
   
       bar_width = Math.min(x1.bandwidth(), this.max_width || 100);
   
-      data = _.map(ticks, (tick,i)=>({
+      data = _.map(ticks, (tick,i) => ({
         tick,
-        data:  _.map(series_labels, serie => ({
+        data: _.map(series_labels, serie => ({
           tick, 
-          name : serie, 
-          value : series[serie][i],
+          name: serie, 
+          value: series[serie][i],
         })),
       }));
   
       // create the grouped bars
       bars = new_groups
         .selectAll("rect")
-        .data(function(d,i) { return data[i].data; },function(d){return d.name+d.value;});
+        .data(
+          (d,i) => data[i].data, 
+          (d) => d.name + d.value
+        );
   
       const new_bars = bars
         .enter()
@@ -237,7 +237,7 @@ export class Bar {
         .attr( "width", 1)
         .attr("height",1)
         .attr("y", y(0))
-        .styles({ "fill-opacity" : 0.8 })
+        .styles({ "fill-opacity": 0.8 })
         .on("mouseover", this.dispatch.call("dataHover"))
         .on("mouseout", this.dispatch.call("dataHoverOut"));
   
@@ -246,25 +246,25 @@ export class Bar {
         .transition()
         .duration(750)
         .styles({
-          "fill": function(d) { return colors(d.name); },
+          "fill": (d) => colors(d.name),
         })
-        .attr("y", function(d) {
+        .attr("y", (d) => {
           if (d.value > 0){
             return y(d.value);
           } else {
             return y(0);
           }
         })
-        .attr( "x", function(d) { return x1(d.name) + (x1.bandwidth()-bar_width)/2 + "px"; })
+        .attr( "x", (d) => x1(d.name) + (x1.bandwidth() - bar_width)/2 + "px")
         .attr( "width", bar_width)
-        .attr("height", function(d) {
+        .attr("height", (d) => {
           if (d.value >= 0){
             return y(0) - y(d.value);
           } else {
             return y(d.value) - y(0);
           }
         })
-        .on("end", _.bind(this.signal_render_end,this));
+        .on("end", _.bind(this.signal_render_end, this));
   
       // labels can only be added for non-stacked data
       if (add_labels){
@@ -277,15 +277,15 @@ export class Bar {
           .append("div")
           .attr("class","labels")
           .styles({
-            "position" : "absolute",
-            "top" : "0px",
-            "height" : "10px",
+            "position": "absolute",
+            "top": "0px",
+            "height": "10px",
             "width": x0.bandwidth()+"px",
-            "left"  : function(d) {return x0(d.tick)+that.margin.left+"px" ; },
+            "left": (d) => x0(d.tick) + that.margin.left + "px",
           })
-          .attr( "x", function(d) { return x1(d.name) + (x1.bandwidth()-bar_width)/2 + "px"; })
+          .attr( "x", (d) => x1(d.name) + (x1.bandwidth() - bar_width)/2 + "px")
           .attr( "width", bar_width)
-          .attr("height", function(d) {
+          .attr("height", (d) => {
             if (d.value >= 0){
               return y(0) - y(d.value);
             } else {
@@ -303,35 +303,33 @@ export class Bar {
             .append("div")
             .attr("class","__labels")
             .styles({
-              "position" : "absolute",
-              "top" : "0px",
-              "height" : "10px",
+              "position": "absolute",
+              "top": "0px",
+              "height": "10px",
               "width": x0.bandwidth()+"px",
-              "left"  : function(d) {return x0(d.tick)+that.margin.left+"px" ; },
+              "left": (d) => x0(d.tick) + that.margin.left + "px",
             })
             .selectAll("div.__label")
-            .data(function(d){ return d.data;})
+            .data( (d) => d.data )
             .enter()
             .append("div")
             .attr("class","__label center-text")
-            .html(function(d){ 
+            .html( (d) =>{ 
               if (d.value !== 0) {
                 return that.formater(d.value);
               }
-            })
+            } )
             .styles({
-              "padding" : "0px",
-              "position" : "absolute",
-              "text-weight" : "bold",
-              "color": function(d) {
-                return d.value<0 ? "red" : "black" ;
-              },
-              "width" : bar_width+"px",
-              "font-size" : label_font_size + "px",
-              "height" : "10px",
-              "top"  : function(d){
+              "padding": "0px",
+              "position": "absolute",
+              "text-weight": "bold",
+              "color": (d) => d.value<0 ? "red" : "black",
+              "width": bar_width + "px",
+              "font-size": label_font_size + "px",
+              "height": "10px",
+              "top": (d) => {
                 if (d.value === 0){
-                  return  y(d.value)+"px";
+                  return y(d.value)+"px";
                 }
                 else if (d.value > 0){
                   return that.margin.top - 12 + y(d.value) - 5+"px";
@@ -339,7 +337,7 @@ export class Bar {
                   return y(d.value) +20+ "px";
                 }
               },
-              "left"  : function(d) { return x1(d.name)+(x1.bandwidth()-bar_width)/2 +"px" ; },
+              "left": (d) => x1(d.name) + (x1.bandwidth() - bar_width)/2 + "px",
             });
           html.selectAll("div.labels")
             .data(data)
@@ -384,40 +382,31 @@ export class Bar {
         .merge(div_ticks)
         .attr("class","tick center-text")
         .styles({
-          "transform": x_axis_rotate? undefined : "rotate("+x_axis_rotate+")",
-          "overflow-x" : "hidden",
-          "position" : "absolute",
-          "top" : height+this.margin.top+10+"px",
-          "width": x0.bandwidth()+"px",
-          "left"  : function(d) {return x0(d)+that.margin.left+"px" ; },
+          "transform": x_axis_rotate ? undefined : "rotate("+x_axis_rotate+")",
+          "overflow-x": "hidden",
+          "position": "absolute",
+          "top": height + this.margin.top + 10 + "px",
+          "width": x0.bandwidth() + "px",
+          "left": (d) => x0(d) + that.margin.left + "px",
         })
-        .html(function(d){ return d;});
+        .html(_.identity);
   
-      if (!x_axis_line){
-        x_axis_element.remove();
-      }
+      !x_axis_line && x_axis_element.remove();
       
-      if (xaxis_y_position !== height) {
-        x_axis_element.selectAll(".tick").remove();
-      }
-  
+      xaxis_y_position !== height && x_axis_element.selectAll(".tick").remove();
     }
   
-    if (add_yaxis){
-      this.graph_area.append("g")
-        .attr("class", "y axis")
-        .call(yAxis)
-        .append("text")
-        .attr("class","axis-label")
-        .attr("fill", "#000")
-        .attr("x", 0)
-        .attr("y", -5)
-        .text(y_axis);
-    }
+    add_yaxis && this.graph_area.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+      .append("text")
+      .attr("class","axis-label")
+      .attr("fill", "#000")
+      .attr("x", 0)
+      .attr("y", -5)
+      .text(y_axis);
         
-    if (!hide_gridlines){
-      common_charts_utils.add_grid_lines("horizontal",this.grid_line_area,yAxis,width);
-    }
+    !hide_gridlines && common_charts_utils.add_grid_lines("horizontal", this.grid_line_area, yAxis, width);
       
     return this;
   }
