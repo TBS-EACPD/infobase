@@ -162,7 +162,7 @@ export class StandardRouteContainer extends React.Component {
             {
               en: (
                 <p>
-                  The 2017-18 Public Accounts of Canada were tabled on <strong>DATE</strong>. 
+                  The 2017-18 Public Accounts of Canada were tabled on <strong>October 19, 2018</strong>. 
                   GC InfoBase will be updated when the Departmental Results Report are tabled. 
                   In the meantime, the latest data from the Public Accounts 2017-18 is available 
                   on <a href="https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f" target="_blank" rel="noopener noreferrer">Open Data</a>, where 
@@ -171,7 +171,7 @@ export class StandardRouteContainer extends React.Component {
               ),
               fr: (
                 <p>
-                  Les Comptes publics du Canada 2017-2018 ont été déposés au Parlement le <strong>DATE</strong>. 
+                  Les Comptes publics du Canada 2017-2018 ont été déposés au Parlement le <strong>19 octobre 2018</strong>. 
                   L’InfoBase du GC sera mise à jour lorsque les rapports sur les résultats ministériels seront déposés. 
                   Pendant ce temps, les données pour les plus récents Comptes publics de 2017-2018 sont disponibles 
                   sur <a href="https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f" target="_blank" rel="noopener noreferrer">« Données ouvertes ».</a> Tous 
