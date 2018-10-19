@@ -166,10 +166,7 @@ _.each(['gov', 'dept'], lvl => {
 
     render(){
       return (
-        <div
-          className="alert alert-no-symbol alert-warning alert--is-bordered large_panel_text"
-          style={{ textAlign: "center" }}
-        >
+        <div className="alert alert-info alert-no-symbol alert--is-bordered large_panel_text">
           <TM k="march_snapshot_warning" />
         </div>
       );
@@ -185,10 +182,7 @@ _.each(['gov', 'dept'], lvl => {
     key : "ppl_open_data_info",
     calculate: _.constant(true),
     render: () => (
-      <div
-        className="alert alert-info alert-no-symbol alert--is-bordered large_panel_text"
-        style={{ textAlign: "center" }}
-      >
+      <div className="alert alert-info alert-no-symbol alert--is-bordered large_panel_text">
         <TM k="ppl_open_data_info" />
       </div>
     ),
