@@ -361,7 +361,6 @@ const planned_exp_popup_template = function(presentation_scheme, d){
 
 const get_year = (presentation_scheme) => {
   switch (presentation_scheme){
-    case "vs_type" : return "{{est_in_year}}";
     case "est_doc_mains" : return "{{est_in_year}}";
     case "est_doc_sea" : return "{{est_in_year}}";
     default : return "{{est_last_year}}";
@@ -462,22 +461,22 @@ const planned_exp_perspective_factory = (presentation_scheme) => new PartitionPe
 })
 
 
-const make_planned_spend_est_type_perspective = () => planned_exp_perspective_factory("est_type");
-const make_planned_spend_vs_type_perspective = () => planned_exp_perspective_factory("vs_type");
-const make_planned_spend_org_planned_spend_perspective = () => planned_exp_perspective_factory("org_planned_spend");
 const make_planned_spend_est_doc_mains_perspective = () => planned_exp_perspective_factory("est_doc_mains");
 const make_planned_spend_est_doc_sea_perspective = () => planned_exp_perspective_factory("est_doc_sea");
 const make_planned_spend_est_doc_seb_perspective = () => planned_exp_perspective_factory("est_doc_seb");
 const make_planned_spend_est_doc_sec_perspective = () => planned_exp_perspective_factory("est_doc_sec");
 const make_planned_spend_est_doc_im_perspective = () => planned_exp_perspective_factory("est_doc_im");
+const make_planned_spend_est_type_perspective = () => planned_exp_perspective_factory("est_type");
+const make_planned_spend_vs_type_perspective = () => planned_exp_perspective_factory("vs_type");
+const make_planned_spend_org_planned_spend_perspective = () => planned_exp_perspective_factory("org_planned_spend");
 
 export {
-  make_planned_spend_est_type_perspective,
-  make_planned_spend_vs_type_perspective,
-  make_planned_spend_org_planned_spend_perspective,
   make_planned_spend_est_doc_mains_perspective,
   make_planned_spend_est_doc_sea_perspective,
   make_planned_spend_est_doc_seb_perspective,
   make_planned_spend_est_doc_sec_perspective,
   make_planned_spend_est_doc_im_perspective,
+  make_planned_spend_est_type_perspective,
+  make_planned_spend_vs_type_perspective,
+  make_planned_spend_org_planned_spend_perspective,
 };
