@@ -3,6 +3,22 @@ import { rpb_link } from '../rpb/rpb_link.js';
 export default function(a11y_mode){
   const featured_content_items = [
     {
+      text_key: "supps_a",
+      href: (
+        window.is_a11y_mode ? 
+          rpb_link({ 
+            table: 'table8', 
+            columns: [ "{{est_in_year}}_estimates"], 
+            dimension: 'by_estimates_doc', 
+            filter: ({ //TODO: D.R.Y this against table8
+              "en":"Supp. Estimates A",
+              "fr":"Budget supp. A",
+            })[window.lang],
+          }) :
+          "#compare_estimates"
+      ),
+    },
+    {
       text_key: "DP_1819",
       href: rpb_link({ 
         table: 'table6', 
@@ -68,22 +84,6 @@ export default function(a11y_mode){
           "#partition/est_doc_mains/planned_exp"
       ),
       is_new: true,
-    },
-    {
-      text_key: "supps_c",
-      href: (
-        window.is_a11y_mode ? 
-          rpb_link({ 
-            table: 'table8', 
-            columns: [ "{{est_in_year}}_estimates"], 
-            dimension: 'by_estimates_doc', 
-            filter: ({ //TODO: D.R.Y this against table8
-              "en":"Supp. Estimates C",
-              "fr":"Budget supp. C",
-            })[window.lang],
-          }) :
-          "#partition/est_doc_sec/planned_exp"
-      ),
     },
     {
       text_key: "DRR_1617",
