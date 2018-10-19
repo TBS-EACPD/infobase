@@ -124,7 +124,7 @@ const HeaderBanner = withRouter(
       return ReactDOM.createPortal(
         <div
           className = { `alert alert-no-symbol alert--is-bordered large_panel_text ${banner_class || 'alert-info'}` }
-          style = { should_show_banner ? { marginBottom: "15px" } : { display: "none" } }
+          style = { should_show_banner ? {} : { display: "none" } }
         >
           { banner_content }
         </div>,

@@ -62,3 +62,11 @@
 .easy-access > a {
   white-space: nowrap;
 }
+
+#banner-container {
+  font-size: 90%;
+  
+  & > .alert {
+    margin-bottom: 15px;
+  }
+}
