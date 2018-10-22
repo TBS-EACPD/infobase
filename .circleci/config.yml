@@ -119,3 +119,4 @@ workflows:
             branches:
               only:
                 - master
+                - abbrev-and-graph-ticks
