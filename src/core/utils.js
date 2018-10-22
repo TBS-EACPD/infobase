@@ -51,7 +51,7 @@ if (typeof window !== "undefined"){
 
 // helper for abbreviating long strings of text
 // returns either a span or anchor displaying the snipped text, with the long text as its title attr
-export const abbrev = function(name, length, href){
+export const abbrev = function(name, length, href, is_link_out){
   // * `name` : the text which needs to be abbreviated
   // * `length` : the cut-off point in the string
   // * `href` : href, if passed then returned html will be an anchor
@@ -60,7 +60,15 @@ export const abbrev = function(name, length, href){
   const returned_element_tag = _.isUndefined(href) ? "span" : "a";
 
   const shortened_element = document.createElement(returned_element_tag);
-  _.isUndefined(href) && (shortened_element.href = href);
+
+  if ( _.isUndefined(href) ){
+    shortened_element.href = href;
+
+    if (is_link_out){
+      href.target = "_blank";
+      href.rel = "noopener noreferrer";
+    }
+  }
 
   if (name.length > length_value){
     shortened_element.className = "shortened";
