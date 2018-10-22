@@ -17,6 +17,7 @@ export default function(a11y_mode){
           }) :
           "#compare_estimates"
       ),
+      is_new: true,
     },
     {
       text_key: "DP_1819",
@@ -25,7 +26,6 @@ export default function(a11y_mode){
         columns: ['{{planning_year_1}}'], 
         dimension: "gov_goco",
       }),
-      is_new: true,
     },
     {
       text_key: "home_pop_by_exec",
@@ -40,7 +40,6 @@ export default function(a11y_mode){
           })[window.lang],
         })
       ),
-      is_new: true,
     },
     {
       text_key: "home_pop_by_gender",
@@ -50,7 +49,6 @@ export default function(a11y_mode){
           columns: ["{{ppl_last_year}}"], 
         })
       ),
-      is_new: true,
     },
     {
       text_key: "home_pop_by_fol",
@@ -60,7 +58,6 @@ export default function(a11y_mode){
           columns: ["{{ppl_last_year}}"], 
         })
       ),
-      is_new: true,
     },
     {
       text_key: "home_pop_avg_age",
@@ -70,7 +67,6 @@ export default function(a11y_mode){
           columns: ["{{ppl_last_year}}"], 
         })
       ),
-      is_new: true,
     },
     {
       text_key: "main_estimates",
@@ -83,7 +79,6 @@ export default function(a11y_mode){
           }) :
           "#partition/est_doc_mains/planned_exp"
       ),
-      is_new: true,
     },
     {
       text_key: "DRR_1617",
