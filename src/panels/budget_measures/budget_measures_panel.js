@@ -10,12 +10,9 @@ import {
   declarative_charts,
   create_text_maker_component,
   Panel,
-  utils,
 } from "../shared";
 
 import { infograph_href_template } from '../../link_utils.js';
-
-const { abbrev } = utils;
 
 const { 
   BudgetMeasure,

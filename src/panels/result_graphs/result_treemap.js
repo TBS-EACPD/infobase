@@ -12,7 +12,7 @@ import { Details } from '../../components/Details.js';
 import { Indicator } from './results_common.js';
 import { StatusIconTable, InlineStatusIconList } from './components.js';
 
-const { SpinnerWrapper, Format, Abbrev } = util_components;
+const { SpinnerWrapper, Format, TextAbbrev } = util_components;
 
 //treemap stuff
 import { combineReducers, createStore } from 'redux';
@@ -111,7 +111,7 @@ const get_col_defs = createSelector(
         get_val: ({data, isExpanded}) => (
           isExpanded ? 
           data.name : 
-          <Abbrev text={data.name} len={115} />
+          <TextAbbrev text={data.name} len={115} />
         ),
         width: 250,
         textAlign: "left",

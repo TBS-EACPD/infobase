@@ -23,7 +23,7 @@ import { Details } from './components/Details.js';
 import { EmbeddedVideo } from './components/EmbeddedVideo.js';
 import { SpinnerWrapper } from './components/SpinnerWrapper.js';
 
-import { abbrev } from './core/utils.js';
+import { text_abbrev, fancy_abbrev } from './core/utils.js';
 
 import { DeptSearch, DeptSearchWithoutRouter } from './search/DeptSearch.js';
 import { EverythingSearch } from './search/EverythingSearch.js';
@@ -68,7 +68,8 @@ const FootnoteList = ({ footnotes }) => <div style={{padding:"10px"}}>
 
 const Year = ({y}) => run_template(`{{${y}}}`);
 
-const Abbrev = ({text, len, href}) => <span dangerouslySetInnerHTML={{ __html: abbrev(text, len, href) }} />;
+const TextAbbrev = ({text, len}) => <div> { text_abbrev(text, len) } </div>;
+const FancyAbbrev = ({text, len, href, is_link_out}) => <div dangerouslySetInnerHTML={{ __html: fancy_abbrev(text, len, href, is_link_out) }} />;
 
 const TrivialTM = props => <TM tmf={trivial_text_maker} {...props} />;
 const TrivialTextMaker = props => <TextMaker text_maker_func={trivial_text_maker} {...props} />;
@@ -112,6 +113,7 @@ export {
   Details,
   EmbeddedVideo,
   ContainerEscapeHatch,
-  Abbrev,
+  TextAbbrev,
+  FancyAbbrev,
   create_text_maker_component,
 };

@@ -49,40 +49,44 @@ if (typeof window !== "undefined"){
 }  
 
 
-// helper for abbreviating long strings of text
-// returns either a span or anchor displaying the snipped text, with the long text as its title attr
-export const abbrev = function(name, length, href, is_link_out){
-  // * `name` : the text which needs to be abbreviated
-  // * `length` : the cut-off point in the string
-  // * `href` : href, if passed then returned html will be an anchor
+export const text_abbrev = function(text, length){
+  const length_value = _.isFunction(length) ? length() : length || 60;
+
+  return text.length > length_value ? 
+    text.substring(0, length_value-4) + "..." :
+    text;
+};
+
+export const fancy_abbrev = function(text, length, href, is_link_out){
   const length_value = _.isFunction(length) ? length() : length || 60;
   const temp_span = document.createElement("span");
   const returned_element_tag = _.isUndefined(href) ? "span" : "a";
 
   const shortened_element = document.createElement(returned_element_tag);
 
-  if ( _.isUndefined(href) ){
+  if ( !_.isUndefined(href) ){
     shortened_element.href = href;
 
     if (is_link_out){
-      href.target = "_blank";
-      href.rel = "noopener noreferrer";
+      shortened_element.target = "_blank";
+      shortened_element.rel = "noopener noreferrer";
     }
   }
 
-  if (name.length > length_value){
+  if (text.length > length_value){
     shortened_element.className = "shortened";
-    shortened_element.alt = name;
-    !is_a11y_mode && (shortened_element.title = name);
+    shortened_element.alt = text;
+    !is_a11y_mode && (shortened_element.title = text);
 
-    shortened_element.innerHTML = name.substring(0, length_value-4) + "...";
+    shortened_element.innerHTML = text.substring(0, length_value-4) + "...";
   } else {
-    shortened_element.innerHTML = name;
+    shortened_element.innerHTML = text;
   }
 
   temp_span.appendChild(shortened_element);
   return temp_span.innerHTML;
 };
+
 
 export const make_unique_func = function(){
   var val = 0;
@@ -162,7 +166,7 @@ export const shallowEqualObjectsOverKeys = (obj1, obj2, keys_to_compare) => _.re
 
 
 window._UTILS = { 
-  abbrev,
+  text_abbrev,
   make_unique_func,
   find_parent,
   make_unique,

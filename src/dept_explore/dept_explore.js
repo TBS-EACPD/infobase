@@ -2,7 +2,7 @@ import './dept_explore.scss';
 import { StandardRouteContainer } from '../core/NavComponents.js';
 import { infograph_href_template } from '../link_utils.js';
 import { Pack } from '../core/charts_index.js';
-import { abbrev } from '../core/utils.js';
+import { text_abbrev } from '../core/utils.js';
 import { formats } from '../core/format.js';
 import { get_info } from '../core/Statistics.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
@@ -233,9 +233,9 @@ p.build_graphic = function(data,depts,formater){
       if (d.zoom_r > 60) {
         return d.data.name + " - "+ val;
       } else if (d.zoom_r > 40) {
-        return _.take(d.data.name.split(" "),2).join(" ")+ " - "+ val;
+        return _.take(d.data.name.split(" "), 2).join("... ") + val;
       } else {
-        return abbrev(d.data.name + " - "+ val, 5);
+        return text_abbrev(d.data.name, 3) + val;
       }
     },
   });

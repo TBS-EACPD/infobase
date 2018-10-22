@@ -12,7 +12,7 @@ import {
   StdPanel, 
   Col,
 } from '../shared';
-const { abbrev } = utils;
+const { text_abbrev } = utils;
 const { tbs_color } = charts_index.common_charts_utils;
 const { Format } = util_components;
 const { CirclePack } = declarative_charts;
@@ -132,7 +132,7 @@ const planned_vote_or_stat_calculate = vs => function(subject, info){
       text = `${Subject.Dept.lookup(d.data.dept).sexy_name} -  ${text}`;
     }
     const estimated_string_size = (d.zoom_r*1.2/5) * d.zoom_r/18; 
-    return abbrev(text, estimated_string_size);
+    return text_abbrev(text, estimated_string_size);
   };
   ret.data = _.take(all_rows,10);
   if (vs === 'voted'){

@@ -24,8 +24,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 const state = {active_spend_area: null};
 const title_font_size = "1.5em";
 
-const { abbrev } = utils;
-const ticks_formatter = (tick) => abbrev(tick, () => window.innerWidth > 720 ? 200 : 6);
+const ticks_formatter = (tick) => utils.fancy_abbrev(tick, () => window.innerWidth > 720 ? 200 : 6);
 
 const fade_out = function(d){
 

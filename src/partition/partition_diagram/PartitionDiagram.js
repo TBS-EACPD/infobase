@@ -75,7 +75,7 @@ export class PartitionDiagram {
       if (should_add_value && d !== this.data.root) {
         name = d.data.name + this.formatter(d);
       } else if ( !should_add_value && d !== this.data.root ) {
-        name = utils.abbrev(d.data.name, 80);
+        name = utils.text_abbrev(d.data.name, 80);
       } else if ( d === this.data.root ) {
         name = this.root_text_func(this.data.root.value);
       }

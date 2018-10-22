@@ -148,7 +148,7 @@ class StackedHbarChart extends React.Component {
       bar_label_formater,
     } = this.props;
 
-    const default_bar_label_formater = ({ label, href, is_link_out}) => utils.abbrev(
+    const default_bar_label_formater = ({ label, href, is_link_out}) => utils.fancy_abbrev(
       label,
       () => {
         if (window.innerWidth > 760){
