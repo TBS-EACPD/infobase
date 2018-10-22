@@ -251,6 +251,7 @@ const on_legend_click = function(graph, _colors){
   };
 };
 
+let window_width_last_updated_at = window.innerWidth;
 const graph_registry = {
   registry: [],
   
@@ -266,6 +267,8 @@ const graph_registry = {
   },
   
   update_graphs(){
+    window_width_last_updated_at = window.innerWidth
+
     this.registry.forEach( (graph_obj) => {
       graph_obj.outside_width = graph_obj.html.node().offsetWidth;
       graph_obj.outside_height = graph_obj.options.height || 400;
@@ -293,6 +296,8 @@ const graph_registry = {
   },
 };
 
+const should_graphs_update = () => window.innerWidth !== window_width_last_updated_at;
+
 window.addEventListener(
   "hashchange", 
   _.debounce(function(){ 
@@ -301,9 +306,11 @@ window.addEventListener(
 );
 window.addEventListener(
   "resize", 
-  _.debounce(function(){ 
-    graph_registry.update_registry();
-    graph_registry.update_graphs();
+  _.debounce(function(){
+    if ( should_graphs_update() ){
+      graph_registry.update_registry();
+      graph_registry.update_graphs();
+    }
   }, 250)
 );
 
