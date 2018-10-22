@@ -171,6 +171,7 @@ class Goco {
         ticks_formatter,
         series1,
         series2,
+        has_callback: true,
       }
     )
 
@@ -212,6 +213,7 @@ class Goco {
           data: _.map(this.goco_data,"ftes"),
           formater: formats.big_int_real,
         },
+        has_callback: true,
       }
     )
     graph.render();

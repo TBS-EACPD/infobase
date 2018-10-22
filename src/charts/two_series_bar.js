@@ -22,7 +22,7 @@ export class TwoSeriesBar {
       top: 25,
       right: 20,
       bottom: 30,
-      left: 80,
+      left: 20,
     };
     const height = this.outside_height - this.margin.top - this.margin.bottom;
     const width = this.outside_width - this.margin.left - this.margin.right;
@@ -192,7 +192,12 @@ export class TwoSeriesBar {
       .attr( "width", 1)
       .attr("height", 1)
       .attr("y", larger.y(0))
-      .styles({ "fill-opacity": 1})
+      .styles(
+        { 
+          "fill-opacity": 1,
+          "cursor": this.options.has_callback ? "pointer" : "default",
+        }
+      )
       .on("click", d => this.dispatch.call("dataClick", this, d.tick))
       .on("mouseover", this.dispatch.call("dataHover"))
       .on("mouseout", this.dispatch.call("dataHoverOut"));
@@ -251,7 +256,7 @@ export class TwoSeriesBar {
         "top": height + this.margin.top + 10 + "px",
         "width": x0.bandwidth() + "px",
         "left": d => x0(d) + this.margin.left + "px",
-        "cursor": "pointer",
+        "cursor": this.options.has_callback ? "pointer" : "default",
       })
       .append("a")
       .attr("tabindex",0)
