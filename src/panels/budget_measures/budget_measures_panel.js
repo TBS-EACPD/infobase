@@ -10,9 +10,12 @@ import {
   declarative_charts,
   create_text_maker_component,
   Panel,
+  utils,
 } from "../shared";
 
 import { infograph_href_template } from '../../link_utils.js';
+
+const { abbrev } = utils;
 
 const { 
   BudgetMeasure,
@@ -361,7 +364,7 @@ class BudgetMeasureHBars extends React.Component {
               return {
                 key: org_id,
                 label: dept.name,
-                link: infograph_href_template(dept, "financial"),
+                href: infograph_href_template(dept, "financial"),
                 data: _.reduce(
                   org_group,
                   (memo, measure_row) => _.mapValues(
@@ -409,7 +412,7 @@ class BudgetMeasureHBars extends React.Component {
               return {
                 key: program_id,
                 label: program.name,
-                link: infograph_href_template(program, "financial"),
+                href: infograph_href_template(program, "financial"),
                 data: {"allocated": program_allocation},
               };
             } else {
@@ -418,7 +421,7 @@ class BudgetMeasureHBars extends React.Component {
               return {
                 key: program_id,
                 label: program_id,
-                link: false,
+                href: false,
                 data: {"allocated": program_allocation},
               };
             }
@@ -433,7 +436,7 @@ class BudgetMeasureHBars extends React.Component {
         budget_measure_item => ({
           key: budget_measure_item.id,
           label: budget_measure_item.name,
-          link: BudgetMeasure.make_budget_link(budget_measure_item.chapter_key, budget_measure_item.ref_id),
+          href: BudgetMeasure.make_budget_link(budget_measure_item.chapter_key, budget_measure_item.ref_id),
           is_link_out: true,
           data: budget_measure_item.measure_data,
         })
@@ -446,7 +449,7 @@ class BudgetMeasureHBars extends React.Component {
             key: chapter_key,
             label: budget_chapters[chapter_key].text,
             chapter_key: chapter_key,
-            link: BudgetMeasure.make_budget_link(chapter_key, false),
+            href: BudgetMeasure.make_budget_link(chapter_key, false),
             is_link_out: true,
             data: _.reduce(
               chapter_group,
@@ -737,15 +740,6 @@ class BudgetMeasureHBars extends React.Component {
                 data = {graph_ready_data}
                 formater = {formats.compact1}
                 colors = {bar_colors}
-                bar_label_formater = {
-                  ({ label, link, is_link_out}) => {
-                    if (link){
-                      return `<a href="${link}" target="${is_link_out ? "_blank" : "_self"}" rel="${is_link_out ? "noopener noreferrer" : ""}">${label}</a>`;
-                    } else {
-                      return `<a>${label}</a>`;
-                    }
-                  }
-                }
                 paginate = {true}
                 items_per_page = {10}
               />

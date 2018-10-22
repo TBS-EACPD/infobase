@@ -385,7 +385,6 @@ class SimpleView extends React.Component {
             data={data_with_links}
             formater={formats[num_format_type]}
             colors={colors}
-            bar_label_formater={obj => `<a href="${obj.href}">${obj.label}</a>`}
           />
         </div>
       </div>

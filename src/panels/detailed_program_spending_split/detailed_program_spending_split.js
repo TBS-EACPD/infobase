@@ -426,7 +426,6 @@ class DetailedProgramSplit extends React.Component {
               data={graph_ready_data}
               formater={formats.compact1}
               colors={colors}
-              bar_label_formater={ ({label,href}) => `<a href="${href}"> ${label} </a>` }
             />
           </div>
         </div>

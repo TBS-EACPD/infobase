@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import * as utils from '../core/utils.js';
 import * as charts_index from '../core/charts_index.js';
 import { Bar as D3Bar } from './bar.js';
 import { Line as D3Line } from './line.js';
@@ -147,7 +148,22 @@ class StackedHbarChart extends React.Component {
       bar_label_formater,
     } = this.props;
 
-    bar_label_formater = bar_label_formater || _.property('label');
+    const default_bar_label_formater = ({ label, href, is_link_out}) => utils.abbrev(
+      label,
+      () => {
+        if (window.innerWidth > 760){
+          return 200;
+        } else if (window.innerWidth > 400){
+          return 20;
+        } else {
+          return 6;
+        }
+      },
+      href || "",
+      is_link_out
+    );
+
+    bar_label_formater = bar_label_formater || default_bar_label_formater;
     bar_height = bar_height || 50;
     font_size = font_size || "14px";
 
