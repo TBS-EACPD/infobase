@@ -250,16 +250,17 @@ export class TwoSeriesBar {
       .attr("class", "tick center-text")
       .styles({
         "transform": `rotate(${x_axis_rotate})`,
-        "overflow-x": "hidden",
         "position": "absolute",
         "opacity": 1,
         "top": height + this.margin.top + 10 + "px",
-        "width": x0.bandwidth() + "px",
         "left": d => x0(d) + this.margin.left + "px",
         "cursor": this.options.has_callback ? "pointer" : "default",
+        "width": x0.bandwidth() + "px",
+        "height": "50px",
+        "overflow": "scroll",
       })
       .append("a")
-      .attr("tabindex",0)
+      .attr("tabindex", 0)
       .on("click", d => {
         this.dispatch.call("dataClick", "render", d), 
         this.dispatch.call("dataClick", "fade_out", d)
@@ -294,7 +295,7 @@ export class TwoSeriesBar {
         "position": "absolute",
         "text-weight": "bold",
         "color": (d) => d.value < 0 ? "red" : "black",
-        "width": bar_width+"px",
+        "width": bar_width + "px",
         "font-size": label_font_size + "px",
         "height": "10px",
         "top": (d,ix) => {
@@ -313,7 +314,7 @@ export class TwoSeriesBar {
           }
         },
         "left": (d,ix) => {
-          let left_position = x1(d.label)+(x1.bandwidth()-bar_width)/2;
+          let left_position = x1(d.label) + (x1.bandwidth() - bar_width)/2;
           if (labels_should_be_rotated) {
             // labels are rotated for small bars, in which case the position of the left bar's label is adjusted to accomodate
             left_position += (ix === 0 ? -0.5 : 0)*(bar_width+d.labelSize.height);

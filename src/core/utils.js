@@ -48,7 +48,6 @@ if (typeof window !== "undefined"){
   set_mobile();
 }  
 
-
 export const text_abbrev = function(text, length){
   const length_value = _.isFunction(length) ? length() : length || 60;
 
@@ -56,36 +55,6 @@ export const text_abbrev = function(text, length){
     text.substring(0, length_value-4) + "..." :
     text;
 };
-
-export const fancy_abbrev = function(text, length, href, is_link_out){
-  const length_value = _.isFunction(length) ? length() : (length || 60);
-  const temp_span = document.createElement("span");
-
-  let shortened_element;
-  if ( !_.isUndefined(href) ){
-    shortened_element = document.createElement("a");
-    shortened_element.href = href;
-
-    if (is_link_out){
-      shortened_element.target = "_blank";
-      shortened_element.rel = "noopener noreferrer";
-    }
-  } else {
-    shortened_element = document.createElement("span");
-  }
-
-  if (text.length > length_value){
-    shortened_element.className = "shortened";
-    shortened_element.alt = text;
-    shortened_element.title = text;
-  }
-  
-  shortened_element.innerHTML = text_abbrev(text, length);
-  
-  temp_span.appendChild(shortened_element);
-  return temp_span.innerHTML;
-};
-
 
 export const make_unique_func = function(){
   var val = 0;

@@ -235,6 +235,8 @@ export class HBarComposition {
           .styles({
             "align-self": "center",
             "width": "100%",
+            "max-height": "100%",
+            "overflow-y": "scroll",
             "text-align": "right",
             "padding-right": "5px",
           })

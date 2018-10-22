@@ -11,9 +11,7 @@ import {
   charts_index,
   Panel,
   Table,
-  utils,
 } from '../shared.js';
-
 
 const { GraphLegend } = declarative_charts;
 const { Format } = util_components;
@@ -23,8 +21,6 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const state = {active_spend_area: null};
 const title_font_size = "1.5em";
-
-const ticks_formatter = (tick) => utils.fancy_abbrev(tick, () => window.innerWidth > 720 ? 200 : 6);
 
 const fade_out = function(d){
 
@@ -168,7 +164,6 @@ class Goco {
         colors: this.colors,
         height: 380,
         ticks: _.map(this.data, "tick"),
-        ticks_formatter,
         series1,
         series2,
         has_callback: true,
@@ -202,7 +197,6 @@ class Goco {
         title_font_size,
         height: 380,
         ticks: _.map(this.goco_data, "tick"),
-        ticks_formatter,
         series1: {
           label: text_maker("spending"), 
           data: _.map(this.goco_data, "spending"),
