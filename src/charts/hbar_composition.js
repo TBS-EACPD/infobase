@@ -250,7 +250,6 @@ export class HBarComposition {
               "align-self": "center",
               "font-size": font_size,
               "color": "black",
-              "margin-left": '10px',
               "left": d => graph_start + x(-x_min) + x(d.positive_sum) + 10 + "px",
             })
             .append("div")
