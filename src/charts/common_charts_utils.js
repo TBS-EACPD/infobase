@@ -275,14 +275,14 @@ const graph_registry = {
       const svg_container = graph_obj.svg.node().parentNode;
       const preserve_labels = !_.isNull( svg_container.getAttribute("preserve_labels_on_update") );
       if (!preserve_labels){
-        const svg_container_parent = svg_container.parentNode;
+        const html_container = graph_obj.html.node();
 
         // forEach directly on this nodeList is spoty, mapping it through to an array first works consistently though
-        _.map(svg_container_parent.childNodes, _.identity) 
+        _.map(html_container.childNodes, _.identity) 
           .forEach(
             child => {
-              if ( !_.isUndefined(child) && child !== svg_container ){
-                svg_container_parent.removeChild(child);
+              if ( !_.isUndefined(child) && !child.className.includes("__svg__") ){
+                html_container.removeChild(child);
               }
             }
           );
@@ -308,7 +308,7 @@ window.addEventListener(
 );
 
 
-const setup_graph_instance = function(instance,container,options = {}) {
+const setup_graph_instance = function(instance, container, options = {}) {
   var base_dispatch_events = [
     "renderBegin",
     "renderEnd",
