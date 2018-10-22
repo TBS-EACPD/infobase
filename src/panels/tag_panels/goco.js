@@ -181,7 +181,7 @@ class Goco {
     if (state.active_spend_area) {
       graph.dispatch.on("renderEnd", () => {
         that.render_goco( state.active_spend_area);
-        fade_out.call(graph,state.active_spend_area);
+        fade_out.call(graph, state.active_spend_area);
         graph.dispatch.on("renderEnd", null);
       });
     }
