@@ -27,6 +27,8 @@ import { DeptSearch, DeptSearchWithoutRouter } from './search/DeptSearch.js';
 import { EverythingSearch } from './search/EverythingSearch.js';
 import { GlossarySearch } from './search/GlossarySearch.js';
 
+import { text_abbrev } from './core/utils.js';
+
 // Misc. utility components that don't justify having their own file in ./components, for various reasons
 
 function lang(obj){ return obj[window.lang] || obj.text || "" }
@@ -111,6 +113,5 @@ export {
   EmbeddedVideo,
   ContainerEscapeHatch,
   TextAbbrev,
-  FancyAbbrev,
   create_text_maker_component,
 };

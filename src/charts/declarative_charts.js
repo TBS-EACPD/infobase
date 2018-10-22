@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import * as utils from '../core/utils.js';
 import * as charts_index from '../core/charts_index.js';
 import { Bar as D3Bar } from './bar.js';
 import { Line as D3Line } from './line.js';
