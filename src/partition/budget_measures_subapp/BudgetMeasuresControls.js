@@ -119,7 +119,7 @@ export class BudgetMeasuresControls extends React.Component {
           />
         }
         <LabeledBox 
-          label = { <TextMaker text_key="budget_measure_filter_by_chapter_key_label" /> }
+          label = { <TextMaker text_key="budget_measure_filter_by_label" /> }
           content = {
             <div>
               <div className="centerer" style={{fontSize: "26px"}}>
@@ -156,6 +156,7 @@ export class BudgetMeasuresControls extends React.Component {
               </div>
               <div className="budget-measures-search-box">
                 <DebouncedTextInput
+                  a11y_label = { text_maker("budget_measure_filter_by_name_and_desc_a11y_label") }
                   placeHolder = { text_maker("budget_measure_filter_by_name_and_desc_placeholder") }
                   defaultValue = { filter_string }
                   updateCallback = { update_filter_string.bind(this) }

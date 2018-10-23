@@ -1,6 +1,9 @@
+import { Fragment } from 'react';
+
 class DebouncedTextInput extends React.Component {
   render(){
     const {
+      a11y_label,
       placeHolder,
       defaultValue,
       debounceTime,
@@ -13,14 +16,28 @@ class DebouncedTextInput extends React.Component {
       this.debounced_callback(event);
     }
 
-    return <input  
-      type = "text"
-      className = "form-control search input-lg"
-      placeholder = { placeHolder || "" }
-      defaultValue = { defaultValue || undefined }
-      onChange = { handle_change }
-    >
-    </input>;
+    const unique_id = _.uniqueId("input-");
+
+    return (
+      <Fragment>
+        { a11y_label &&
+          <label 
+            className = "sr-only"
+            htmlFor = { unique_id }
+          >
+            { a11y_label }
+          </label>
+        }
+        <input  
+          id = { unique_id }
+          type = "text"
+          className = "form-control search input-lg"
+          placeholder = { placeHolder || "" }
+          defaultValue = { defaultValue || undefined }
+          onChange = { handle_change }
+        />
+      </Fragment>
+    );
   }
   componentWillUnmount(){
     !_.isUndefined(this.debounced_callback) && this.debounced_callback.cancel();

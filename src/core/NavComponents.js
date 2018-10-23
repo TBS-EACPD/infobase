@@ -69,7 +69,7 @@ class BreadCrumbs extends React.Component {
         </li>
         {_.map(crumbs, (display,ix) => 
           <Fragment key={ix} >
-            <li>
+            <li aria-hidden="true">
               <img 
                 src={get_static_url("svg/arrow.svg")} 
                 style={{
@@ -79,9 +79,7 @@ class BreadCrumbs extends React.Component {
                 }}
               />
             </li>
-            <li 
-              className="infobase-home-breadcrumb-link"
-            >
+            <li className="infobase-home-breadcrumb-link">
               {
               _.isString(display) ? //allow strings or react elements to be used here (note that some strings may have the weird french apostrophe that needs to non-escaped)
                 <span dangerouslySetInnerHTML={{__html:display}} /> :
