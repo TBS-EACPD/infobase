@@ -127,7 +127,7 @@ const sources = _.mapValues({
     description(){ return desc_from_gloss_keys("PEOPLE_DATA") },
     ix: 0,
     title(){ return tm("rps_title" )},
-    last_updated: { month: 2, year: 2018 },
+    last_updated: { month: 10, year: 2018 },
     frequency: frequencies.y,
     items(){ 
       return  _.map(
