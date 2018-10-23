@@ -120,6 +120,7 @@ export class BudgetMeasuresRoute extends React.Component {
           <div className="budget-measures">
             <div className="budget-measures-top-text">
               <EmbeddedVideo
+                title={ text_maker("budget_alignment_video_title") }
                 video_source={ text_maker("budget_alignment_video_src") }
                 transcript={ text_maker("budget_alignment_video_transcript") }
               />
