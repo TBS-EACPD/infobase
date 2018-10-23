@@ -237,8 +237,6 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
               data-toggle="tooltip"
               data-html="true"
               data-container="body"
-              onClick={() => onIconClick.apply([status_key])}
-              onKeyDown={(e) => (e.keyCode===13 || e.keyCode===32) && onIconClick.apply([status_key])}
             >
               {result_simple_statuses[status_key].text}
             </span>
@@ -247,7 +245,7 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
         }) )
       }
       item_component_order={["count", "icon", "text"]}
-      click_callback={onIconClick}
+      click_callback={(status_key) => onIconClick(status_key)}
       show_eyes_override={active_list.length === ordered_status_keys.length}
     />
   </div>
