@@ -490,9 +490,9 @@ a, a:visited {
 #wb-lng > .row > div > ul > li > a,
 #wb-info > .wb-navcurr > ul > li > a,
 #wb-info > .brand > .container > .row > nav > ul > li > a {
-  color: $wetLinkColor;
+  color: darken($wetLinkColor, 5%);
   &:visited {
-    color: $wetLinkVisitedColor;
+    color: darken($wetLinkVisitedColor, 5%);
   }
 }
 
