@@ -20,53 +20,22 @@ export default function(a11y_mode){
       is_new: true,
     },
     {
+      text_key: "home_people_data_quicklink",
+      href: "#orgs/gov/gov/infograph/people",
+      is_new: true,
+    },
+    {
+      text_key: "home_who_we_help_quicklink",
+      href: "#resource-explorer/WWH/dp18",
+      is_new: true,
+    },
+    {
       text_key: "DP_1819",
       href: rpb_link({ 
         table: 'table6', 
         columns: ['{{planning_year_1}}'], 
         dimension: "gov_goco",
       }),
-    },
-    {
-      text_key: "home_pop_by_exec",
-      href: (
-        rpb_link({ 
-          table: 'table112', 
-          columns: ["{{ppl_last_year}}"],
-          dimension: "ex_level_condensed",
-          filter: ({
-            "en": "Executive",
-            "fr": "Cadres supérieurs",
-          })[window.lang],
-        })
-      ),
-    },
-    {
-      text_key: "home_pop_by_gender",
-      href: (
-        rpb_link({ 
-          table: 'table302', 
-          columns: ["{{ppl_last_year}}"], 
-        })
-      ),
-    },
-    {
-      text_key: "home_pop_by_fol",
-      href: (
-        rpb_link({ 
-          table: 'table303', 
-          columns: ["{{ppl_last_year}}"], 
-        })
-      ),
-    },
-    {
-      text_key: "home_pop_avg_age",
-      href: (
-        rpb_link({ 
-          table: 'table304', 
-          columns: ["{{ppl_last_year}}"], 
-        })
-      ),
     },
     {
       text_key: "main_estimates",
@@ -87,6 +56,10 @@ export default function(a11y_mode){
         columns: ['{{pa_last_year}}'], 
         dimension: "gov_goco",
       }),
+    },
+    {
+      text_key: "igoc",
+      href: "#igoc",
     },
   ];
 

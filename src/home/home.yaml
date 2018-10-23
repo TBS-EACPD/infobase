@@ -203,21 +203,13 @@ survey_home_desc:
   en: Help us make improvements by telling us about your experience!
   fr: Aidez-nous à l’améliorer en nous relatant votre expérience!
 
-home_pop_by_exec:
-  en: Population by Executive Level
-  fr: Population selon les niveaux des cadres supérieurs
+home_people_data_quicklink:
+  en: People Management Data - March 31, 2018
+  fr: Données sur la gestion des personnes – 31 mars 2018
 
-home_pop_by_gender:
-  en: Population by Gender
-  fr: Population selon le sexe
-
-home_pop_by_fol:
-  en: Population by First Official Language
-  fr: Population selon la première langue officielle
-
-home_pop_avg_age:
-  en: Employee Average Age
-  fr: Âge moyen des employés
+home_who_we_help_quicklink:
+  en: Who We Help tag
+  fr: Étiquetage Qui aidons-nous
 
 check_home_link:
   en: Check it out!
