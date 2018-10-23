@@ -57,7 +57,7 @@ const TrinityItem = ({img_url, title, href}) => (
         {title}
       </div>
       <div className="TrinityItem__Img">
-        <img src={img_url} />
+        <img aria-hidden="true" src={img_url}/>
       </div>
     </a>
   </div>
@@ -73,7 +73,7 @@ const HomeLayout = props => (
         <h1> <TM k="welcome" /> </h1>
         <h2> <TM k="home_sub_title" /> </h2>
         <div className="flag">
-          <img src={get_static_url("svg/flagline.svg")}/>
+          <img aria-hidden="true" src={get_static_url("svg/flagline.svg")}/>
         </div>
       </div>
     </div>

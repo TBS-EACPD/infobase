@@ -16,6 +16,7 @@ const CardLeftImage = ({
       <div className="left-img-card__left">
         <a className="left-img-card__img-link" href={link_href}>
           <img
+            aria-hidden="true"
             src={img_src}
             className="left-img-card__img" 
           />

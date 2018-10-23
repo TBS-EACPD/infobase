@@ -17,6 +17,7 @@ const CardTopImage = ({
       { img_src &&
         <div className="top-img-card__top">
           <img
+            aria-hidden="true"
             src={img_src}
             className="top-img-card__img" 
           />

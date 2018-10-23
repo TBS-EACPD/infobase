@@ -26,6 +26,7 @@ const CardCenteredImage = ({
         <div>
           <div className="centered-img-card__right">
             <img
+              aria-hidden="true"
               src={img_src}
               className={classNames("centered-img-card__img")}
             />
