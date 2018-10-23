@@ -46,16 +46,18 @@ function table_to_row_item(table){
   }
 }
 
+const infobase_open_data_page = {
+  en: "http://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
+  fr: "https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
+};
+
 const sources = _.mapValues({
   PA: {
     ix: 1,
     description(){ return desc_from_gloss_keys("PA") },
     title(){ return tm("pa_title" )},
     last_updated : {"month": 10, "year": 2018},
-    open_data: {
-      en:"http://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
-      fr:"https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
-    },
+    open_data: infobase_open_data_page,
     frequency: frequencies.y,
     report_link:{
       en:"http://www.tpsgc-pwgsc.gc.ca/recgen/cpc-pac/index-eng.html",
@@ -90,10 +92,7 @@ const sources = _.mapValues({
     description(){ return desc_from_gloss_keys("MAINS", "SUPPS") },
     title(){ return tm("estimates_title" )},
     last_updated: { month: 4, year: 2018 },
-    open_data: {
-      en: "http://open.canada.ca/data/en/dataset/43e5952e-29d2-43d9-817d-92cf87d44ce5",
-      fr: "http://ouvert.canada.ca/data/fr/dataset/43e5952e-29d2-43d9-817d-92cf87d44ce5",
-    },
+    open_data: infobase_open_data_page,
     frequency: frequencies.q,
     report_link:{
       en:"https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates.html",
@@ -203,10 +202,7 @@ const sources = _.mapValues({
     description(){ return <div dangerouslySetInnerHTML={{ __html: tm("budget_source_desc") }}/>; },
     frequency: frequencies.m,
     last_updated: { month: 10, year: 2018 },
-    open_data: {
-      en:"http://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
-      fr:"https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
-    },
+    open_data: infobase_open_data_page,
     items(){
       return [
         {
