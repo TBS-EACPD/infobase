@@ -67,6 +67,9 @@ export class PartitionRoute extends React.Component {
         route_key="partition"
         non_a11y_route={true}
       >
+        <h1 className="sr-only">
+          {text_maker("partition_title")}
+        </h1>
         <ContainerEscapeHatch>
           { this.state.loading && <SpinnerWrapper ref="spinner" scale={4} /> }
           <div className="partition-container" ref="container"/>
