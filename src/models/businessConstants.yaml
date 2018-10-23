@@ -242,7 +242,7 @@ result_statuses:
     en: Actual result not reported
     fr: DRRTODO
   ongoing:
-    en: Ongoing or to be achieved after March 31, 2017
+    en: Ongoing or to be achieved after March 31, {{pa_last_year_short_second}}
     fr: DRRTODO
 
 result_simple_statuses:

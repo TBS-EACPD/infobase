@@ -83,13 +83,14 @@ no_results_for_this_subject:
 
 targets_to_achieve_past:
   transform: [handlebars]
-  en: To be achieved by March 31, 2017
-  fr: Indicateurs à atteindre au plus tard le 31 mars 2017
+  en: To be achieved by March 31, {{pa_last_year_short_second}}
+  fr: Indicateurs à atteindre au plus tard le 31 mars {{pa_last_year_short_second}}
 
 
 targets_to_achieve_future_and_ongoing:
-  en: Ongoing or to be achieved after March 31, 2017
-  fr: Indicateurs permanents ou à atteindre après le 31 mars 2017
+  transform: [handlebars]
+  en: Ongoing or to be achieved after March 31, {{pa_last_year_short_second}}
+  fr: Indicateurs permanents ou à atteindre après le 31 mars {{pa_last_year_short_second}}
 
 
 targets_to_achieve_other:
