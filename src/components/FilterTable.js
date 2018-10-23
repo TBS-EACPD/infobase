@@ -2,7 +2,7 @@ import './FilterTable.scss';
 import classNames from 'classnames';
 
 const eye_open = (
-  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
     viewBox="0 0 500 500"
     className="eye-open"
   >
@@ -19,7 +19,7 @@ const eye_open = (
 );
 
 const eye_closed = (
-  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
     viewBox="0 0 500 500"
     className="eye-close"
   >
