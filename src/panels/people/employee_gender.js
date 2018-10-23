@@ -77,10 +77,21 @@ const calculate_funcs_by_level = {
       
       const ticks = _.map(people_years, y => `${run_template(y)}`);
       
+      let required_footnotes;
+      const has_suppressed_data = _.some(graph_args, graph_arg => graph_arg.label === gender.sup.text);
+      if (has_suppressed_data){
+        required_footnotes = footnotes;
+      } else {
+        required_footnotes = _.filter(
+          footnotes,
+          footnote => !_.some(footnote.glossary_keys, key => key === "SUPPRESSED_DATA")
+        )
+      }
+
       return (
         <StdPanel
           title={text_maker("employee_gender_title")}
-          {...{footnotes, sources}}
+          {...{footnotes: required_footnotes, sources}}
         >
           <Col size={12} isText>
             <TM k={level+"_employee_gender_text"} args={info} />
