@@ -46,10 +46,10 @@ function populate_footnotes_info(csv_str){
       }); 
     } else {
 
-      const actual_subject_class = Subject[obj.level_name];
+      const actual_subject_class = Subject[subject_class];
       FootNote.create_and_register({
         id,
-        subject_class: actual_subject_class,
+        subject: actual_subject_class,
         year1,
         year2,
         glossary_keys,
