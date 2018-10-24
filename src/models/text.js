@@ -80,7 +80,7 @@ const full_template_global_records = [
 const app_constants = {
   pre_public_accounts: window.pre_public_accounts,
   lang: window.lang,
-  is_mobile: window.is_mobile,
+  is_mobile: window.is_mobile(),
 }
 
 //turn [{key,en,fr }, ... ] into a big object of { [key]: val of current lang, ... } 

@@ -169,7 +169,7 @@ export class PartitionDiagram {
       .each(function(d){
         let sel = d3.select(this);
         
-        if ( ( d.data.type === "compressed" && window.isIE() ) || d.value < 0 ){
+        if ( ( d.data.type === "compressed" && window.is_IE() ) || d.value < 0 ){
           // partition-right-ie-fix: IE css for flex box and align-item are inconsistent, need an extra div
           // between the .content div and the .partition-content-title div to (partially) fix vertical alignment
 
@@ -178,7 +178,7 @@ export class PartitionDiagram {
 
           sel = sel
             .append("div")
-            .classed("partition-right-ie-fix", d.data.type === "compressed" && window.isIE())
+            .classed("partition-right-ie-fix", d.data.type === "compressed" && window.is_IE())
             .classed("partition-negative-title-backing", d.value < 0);
         }
           

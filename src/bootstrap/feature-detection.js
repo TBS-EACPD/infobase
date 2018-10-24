@@ -1,6 +1,6 @@
 if (typeof window !== "undefined"){
   // feature detection
-  window.isIE = function() {
+  window.is_IE = function() {
     var myNav = navigator.userAgent.toLowerCase();
     return (
       (myNav.indexOf('msie') !== -1) ? 
@@ -9,10 +9,12 @@ if (typeof window !== "undefined"){
     );
   };
 
-  window.is_mobile = (
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-    window.matchMedia("(max-width: 970px)").matches
-  );
+  window.is_mobile = function(){
+    return (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+      window.matchMedia("(max-width: 970px)").matches
+    );
+  }
 
   window.has_local_storage = (function(){
     const blah = "blah";

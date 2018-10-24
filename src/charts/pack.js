@@ -493,7 +493,7 @@ export class Pack {
         "r" : d =>  d.zoom_r,
       });
 
-    if (!window.is_mobile){
+    if ( !window.is_mobile() ){
       new_circles
         .on("mouseenter", this.mouse_enter)
         .on("mouseleave", this.mouse_leave);
@@ -634,7 +634,7 @@ export class Pack {
       });
 
 
-    if (!window.is_mobile){
+    if ( !window.is_mobile() ){
       text_divs
         .on("mouseenter", this.mouse_enter)
         .on("mouseleave", this.mouse_leave);
