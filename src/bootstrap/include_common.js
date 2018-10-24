@@ -4,25 +4,14 @@ import './include_basic_dependencies.js';
 //dev helper globals 
 import classnames from 'classnames';
 import { Subject } from "../models/subject.js";
+import * as utils from '../core/utils.js';
 window._classnames = classnames;
 window._Subject = Subject;
+window._UTILS = utils;
 
 import '../tables/table_common';
 import '../handlebars/helpers';
 
-//this is mostly d3.category10 with re-ordered colours, and replacing the base blue with the canada.ca header color
-const colors = [
-  "#335075", //canada.ca header
-  "#2ca02c", 
-  "#ff7f0e", 
-  "#9467bd",
-  "#d62728", 
-  "#17becf",
-  "#8c564b", 
-  "#e377c2", 
-  "#7f7f7f", 
-  "#bcbd22", 
-];
 
 //all colors from https://material.io/guidelines/style/color.html#color-color-palette
 //you can use these colors as backgrounds for dark text (#222 or darker)
@@ -54,6 +43,18 @@ window.darkCategory10Colors = [
   "#949438", //ugly puke green
 ];
 
-
+//this is mostly d3.category10 with re-ordered colours, and replacing the base blue with the canada.ca header color
+const colors = [
+  "#335075", //canada.ca header
+  "#2ca02c", 
+  "#ff7f0e", 
+  "#9467bd",
+  "#d62728", 
+  "#17becf",
+  "#8c564b", 
+  "#e377c2", 
+  "#7f7f7f", 
+  "#bcbd22", 
+];
 window.infobase_colors = () => d3.scaleOrdinal().range(colors);
 
