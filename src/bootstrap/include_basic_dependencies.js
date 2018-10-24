@@ -11,6 +11,9 @@ if(typeof PRE_PUBLIC_ACCOUNTS !== "undefined"){
 if(typeof CDN_URL !== "undefined"){
   window.CDN_URL = CDN_URL;
 }
+
+import 'dom4';
+
 import './feature-detection.js';
 
 import 'whatwg-fetch';
