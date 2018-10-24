@@ -109,12 +109,8 @@ workflows:
   build_test_deploy:
     jobs:
       - build
-      - test:
-          requires:
-            - build
       - deploy:
-          requires:
-            - test
+            - build
           filters:
             branches:
               only:
