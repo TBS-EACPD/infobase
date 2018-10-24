@@ -573,9 +573,9 @@ export class PartitionDiagram {
   click_dispatch(){
     // hold a reference to the current target
     const target = d3.select(d3.event.target);
-    let content = utils.find_parent( d3.event.target, dom => d3.select(dom).classed("partition-content") )
     // get a reference to the content 
-    if (content === false) {
+    let content = d3.event.target.closest(".partition-content");
+    if ( _.isNull(content) ) {
       if ( target.classed("unmagnify-all") ) {
         this.unmagnify_all();
         this.render();
@@ -586,7 +586,7 @@ export class PartitionDiagram {
       d3.event.stopImmediatePropagation();
       d3.event.preventDefault();
       return;
-    } 
+    }
     content = d3.select(content);
     const d = content.datum();
     if (d.DOM.className.includes("faded")){

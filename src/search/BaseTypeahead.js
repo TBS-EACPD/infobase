@@ -188,13 +188,9 @@ export class BaseTypeahead extends React.Component {
               selected_item = this.typeahead.componentNode.querySelector("li.active");
             } else {
               // for click events, need to find the targeted li, possibly an ancestor of the event target
-              const find_li_ancestor = (element) => {
-                return element.tagName.toLowerCase() === "li" ?
-                  element :
-                  find_li_ancestor(element.parentElement);
-              };
-
-              selected_item = find_li_ancestor(e.target);
+              selected_item = e.target.tagName.toLowerCase() === "li" ?
+                e.target :
+                e.target.closest("li");
             }
 
             if (selected_item){

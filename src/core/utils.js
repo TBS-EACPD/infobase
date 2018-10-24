@@ -13,15 +13,6 @@ export const make_unique_func = function(){
   }
 };
 
-export const find_parent = (node, condition)=>{
-  if ( condition(node) ){
-    return node;
-  }
-  if (node.parentNode === document){ 
-    return false; 
-  }
-  return find_parent(node.parentNode, condition);
-};
 
 // <div id='make_unique'></div>
 // consider replacing with _.uniqueId
