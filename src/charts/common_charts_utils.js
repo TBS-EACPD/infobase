@@ -275,11 +275,9 @@ const graph_registry = {
                   
       // Remove all labels associated with the graph (that is, all siblings of the svg's container).
       // Graphs with "preserve_labels_on_update" must be re-rendered with all labels intact, so nothing is removed here.
-      const svg_container = graph_obj.svg.node().parentNode;
-      const preserve_labels = !_.isNull( svg_container.getAttribute("preserve_labels_on_update") );
+      const html_container = graph_obj.html.node();
+      const preserve_labels = !_.isNull( html_container.querySelector("[preserve_labels_on_update]") );
       if (!preserve_labels){
-        const html_container = graph_obj.html.node();
-
         // forEach directly on this nodeList is spoty, mapping it through to an array first works consistently though
         _.map(html_container.childNodes, _.identity) 
           .forEach(
