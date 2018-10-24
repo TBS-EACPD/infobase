@@ -37,15 +37,15 @@ if (typeof window !== "undefined"){
 
   // shim for classList.contains on IE11 svgs
   // (not a full classList shim, just the minimal ammount to fix a bug in a react-bootstrap-typeahead dependency, react-onclickoutside)
-  if (!('classList' in SVGElement.prototype)) {
-    Object.defineProperty(SVGElement.prototype, 'classList', {
-      get() {
-        return {
-          contains: className => {
-            return this.className.baseVal.split(' ').indexOf(className) !== -1
-          },
-        }
-      },
-    })
-  }
+  //if ( !('classList' in SVGElement.prototype) ){
+  //  Object.defineProperty(SVGElement.prototype, 'classList', {
+  //    get() {
+  //      return {
+  //        contains: className => {
+  //          return this.className.baseVal.split(' ').indexOf(className) !== -1
+  //        },
+  //      }
+  //    },
+  //  })
+  //}
 }  
