@@ -119,4 +119,3 @@ workflows:
             branches:
               only:
                 - master
-                - sups_a_prep
