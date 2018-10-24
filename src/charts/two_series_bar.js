@@ -256,8 +256,8 @@ export class TwoSeriesBar {
         "left": d => x0(d) + this.margin.left + "px",
         "cursor": this.options.has_callback ? "pointer" : "default",
         "width": x0.bandwidth() + "px",
-        "height": "50px",
-        "overflow": "scroll",
+        "height": "65px",
+        "overflow": window.innerWidth < 991 ? "scroll" : "hidden",
       })
       .append("a")
       .attr("tabindex", 0)

@@ -236,7 +236,7 @@ export class HBarComposition {
             "align-self": "center",
             "width": "100%",
             "max-height": "100%",
-            "overflow-y": "scroll",
+            "overflow-y": window.innerWidth < 991 ? "scroll" : "hidden",
             "text-align": "right",
             "padding-right": "5px",
           })
