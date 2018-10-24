@@ -45,6 +45,19 @@ if (typeof window !== "undefined"){
   window.binary_download = typeof ArrayBuffer !== 'undefined';
   // end of feature detection
 
+  // shim for classList on IE11 svgs
+  if (!('classList' in SVGElement.prototype)) {
+    Object.defineProperty(SVGElement.prototype, 'classList', {
+      get() {
+        return {
+          contains: className => {
+            return this.className.baseVal.split(' ').indexOf(className) !== -1
+          },
+        }
+      },
+    })
+  }
+
   set_mobile();
 }  
 
