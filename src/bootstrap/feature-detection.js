@@ -35,7 +35,8 @@ if (typeof window !== "undefined"){
   window.binary_download = typeof ArrayBuffer !== 'undefined';
   // end of feature detection
 
-  // shim for classList on IE11 svgs
+  // shim for classList.contains on IE11 svgs
+  // (not a full classList shim, just the minimal ammount to fix a bug in a react-bootstrap-typeahead dependency, react-onclickoutside)
   if (!('classList' in SVGElement.prototype)) {
     Object.defineProperty(SVGElement.prototype, 'classList', {
       get() {
