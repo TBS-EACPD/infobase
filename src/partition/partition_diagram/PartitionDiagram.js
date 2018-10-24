@@ -587,22 +587,26 @@ export class PartitionDiagram {
       d3.event.preventDefault();
       return;
     }
+    if ( this.pop_up && !this.html.node().querySelector(".partition-popup").contains(d3.event.target) ){
+      this.remove_pop_up();
+      d3.event.stopImmediatePropagation();
+      d3.event.preventDefault();
+      return;
+    }
     content = d3.select(content);
     const d = content.datum();
     if (d.DOM.className.includes("faded")){
       if (this.pop_up){
         this.remove_pop_up();
-      } 
+      }
       d3.event.stopImmediatePropagation();
       d3.event.preventDefault();
       return;
     }
     if ( d.data.hidden_children ||
-         d.data.unhidden_children ||
-         this.data.collapsed(d) ) {
-      if (this.pop_up){
-        this.remove_pop_up();
-      } 
+      d.data.unhidden_children ||
+      this.data.collapsed(d)
+    ){
       if (d.data.unhidden_children) {
         this.data.show_partial_children(d.parent);
       } else if (d.data.hidden_children) {
@@ -628,12 +632,8 @@ export class PartitionDiagram {
         this.magnify(d);
       }
       this.render();
-    } else {
-      if (this.pop_up){
-        this.remove_pop_up();
-      } else if (d !== this.data.root){
-        this.add_pop_up(d); 
-      }
+    } else if (d !== this.data.root && d !== this.pop_up){
+      this.add_pop_up(d); 
     }
     d3.event.stopImmediatePropagation();
     d3.event.preventDefault();
