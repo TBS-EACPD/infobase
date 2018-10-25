@@ -1,6 +1,5 @@
 import '../common_css/non-a11y-site.scss';
 
-
 import { Suspense } from 'react';
 import { Route, Switch } from 'react-router';
 import { initialize_analytics } from '../core/analytics.js';
