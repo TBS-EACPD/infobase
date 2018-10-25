@@ -8,7 +8,7 @@ import {
 } from '../../util_components';
 import { text_maker } from './partition_text_provider.js';
 
-export class PartitionRoute extends React.Component {
+export default class PartitionRoute extends React.Component {
   constructor(){
     super();
     this.state = {loading: true};

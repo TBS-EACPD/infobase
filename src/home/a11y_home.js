@@ -8,7 +8,7 @@ import { create_text_maker_component } from '../util_components.js';
 
 const { text_maker, TM } = create_text_maker_component([home_text1, home_text2]);
 
-export const Home = (props) => {
+const Home = (props) => {
 
   const {
     match: {
@@ -121,3 +121,4 @@ export const Home = (props) => {
   )
   
 }
+export { Home as default }
