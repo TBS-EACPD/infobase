@@ -19,7 +19,7 @@ import { get_static_url } from '../core/request_utils.js';
 
 const { text_maker: home_tm, TM } = create_text_maker_component(home_text_bundle);
 
-export class Home extends React.Component {
+export default class Home extends React.Component {
   render(){
 
     const { featured_content_items } = get_home_content();

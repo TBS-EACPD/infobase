@@ -1,9 +1,8 @@
 import '../common_css/non-a11y-site.scss';
 
-import { ReactUnmounter } from '../core/NavComponents';
 
+import { Suspense } from 'react';
 import { Route, Switch } from 'react-router';
-//import { Link, NavLink } from 'react-router-dom';
 import { initialize_analytics } from '../core/analytics.js';
 
 export const app_reducer = (state={ lang: window.lang }, { type, payload }) => {
@@ -11,77 +10,27 @@ export const app_reducer = (state={ lang: window.lang }, { type, payload }) => {
   return state;
 };
 
-import { ComponentLoader } from '../core/ComponentLoader.js';
-import { TooltipActivator } from '../glossary/TooltipActivator';
-import { EasyAccess } from '../core/EasyAccess';
-import { InsertRuntimeFooterLinks } from '../core/InsertRuntimeFooterLinks.js';
+import { ErrorBoundary } from '../core/ErrorBoundary.js';
 import { DevFip } from '../core/DevFip.js';
+import { TooltipActivator } from '../glossary/TooltipActivator';
+import { InsertRuntimeFooterLinks } from '../core/InsertRuntimeFooterLinks.js';
+import { ReactUnmounter } from '../core/NavComponents';
+import { EasyAccess } from '../core/EasyAccess';
+import { SpinnerWrapper } from '../components/SpinnerWrapper.js';
 
-const LazyHome = ComponentLoader(async () => {
-  const { Home } = await import('../home/home.js');
-  return Home;
-})
-
-const LazyGraphRoute = ComponentLoader(async () => {
-  const { GraphInventory } = await import('../graph_route/graph_route.js');
-  return GraphInventory;
-})
-
-const LazyPartitionRoute = ComponentLoader(async () => {
-  const { PartitionRoute } = await import('../partition/partition_subapp/PartitionRoute.js');
-  return PartitionRoute;
-})
-
-const LazyBudgetMeasuresRoute =  ComponentLoader(async () => {
-  const {BudgetMeasuresRoute} = await import('../partition/budget_measures_subapp/BudgetMeasuresRoute.js')
-  return BudgetMeasuresRoute;
-});
-
-const LazyBubbleExplore = ComponentLoader(async ()=>{
-  const { BubbleExplore } = await import("../dept_explore/dept_explore.js");
-  return BubbleExplore;
-})
-
-const LazyAbout = ComponentLoader(async () => {
-  const {About} = await import('../about/about.js');
-  return About;
-});
-
-const LazyMetadata = ComponentLoader(async () =>{
-  const { MetaData } = await import('../metadata/metadata.js');
-  return MetaData;
-})
-
-const LazyIgoc = ComponentLoader(async () => {
-  const {IgocExplorer} = await import('../igoc_explorer/igoc_explorer.js');
-  return IgocExplorer;
-});
-
-const LazyResourceExplorer = ComponentLoader(async () => {
-  const {ResourceExplorer} = await import('../resource_explorer/resource-explorer.js');
-  return ResourceExplorer;
-});
-
-const LazyGlossary = ComponentLoader(async () => {
-  const {Glossary} = await import('../glossary/glossary.js');
-  return Glossary;
-});
-
-const LazyRPB = ComponentLoader(async () => {
-  const { ReportBuilder } = await import("../rpb/index.js");
-  return ReportBuilder;
-})
-
-const LazyInfoGraph = ComponentLoader(async () => {
-  const { InfoGraph } = await import ("../infographic/infographic.js");
-  return InfoGraph;
-})
-
-const LazyEstimatesComparison = ComponentLoader(async () =>{
-  const {EstimatesComparison} = await import ("../EstimatesComparison/EstimatesComparison.js");
-  return EstimatesComparison;
-})
-
+const Home = React.lazy( () => import('../home/home.js') );
+const { GraphInventory } = React.lazy( () => import('../graph_route/graph_route.js') );
+const { PartitionRoute } = React.lazy( () => import('../partition/partition_subapp/PartitionRoute.js') );
+const { BudgetMeasuresRoute } = React.lazy( () => import('../partition/budget_measures_subapp/BudgetMeasuresRoute.js') );
+const { BubbleExplore } = React.lazy( () => import("../dept_explore/dept_explore.js") );
+const { About } = React.lazy( () => import('../about/about.js') );
+const { MetaData } = React.lazy( () => import('../metadata/metadata.js') );
+const { IgocExplorer } = React.lazy( () => import('../igoc_explorer/igoc_explorer.js') );
+const { ResourceExplorer } = React.lazy( () => import('../resource_explorer/resource-explorer.js') );
+const { Glossary } = React.lazy( () => import('../glossary/glossary.js') );
+const { ReportBuilder } = React.lazy( () => import("../rpb/index.js") );
+const { InfoGraph } = React.lazy( () => import ("../infographic/infographic.js") );
+const { EstimatesComparison } = React.lazy( () => import ("../EstimatesComparison/EstimatesComparison.js") );
 
 export class App extends React.Component {
   constructor(){
@@ -91,26 +40,32 @@ export class App extends React.Component {
   render(){
     return (
       <div tabIndex={-1} id="app-focus-root">
-        <DevFip />
-        <TooltipActivator />
-        <ReactUnmounter />
-        <InsertRuntimeFooterLinks />
-        <EasyAccess />
-        <Switch>
-          <Route path="/metadata/:data_source?" component={LazyMetadata}/>
-          <Route path="/igoc/:grouping?" component={LazyIgoc} />
-          <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={LazyResourceExplorer} />
-          <Route path="/orgs/:level/:subject_id/infograph/:bubble?/" component={LazyInfoGraph} />
-          <Route path="/glossary/:active_key?" component={LazyGlossary} />
-          <Route path="/partition/:perspective?/:data_type?" component={LazyPartitionRoute} />
-          <Route path="/budget-measures/:first_column?/:selected_value?" component={LazyBudgetMeasuresRoute} />
-          <Route path="/explore-:perspective?" component={LazyBubbleExplore} />
-          <Route path="/rpb/:config?" component={LazyRPB} />
-          <Route path="/about" component={LazyAbout} />
-          <Route path="/graph/:level?/:graph?/:id?" component={LazyGraphRoute} />
-          <Route path="/compare_estimates" component={LazyEstimatesComparison} />
-          <Route path="/" component={LazyHome} />
-        </Switch>
+        <ErrorBoundary>
+          <DevFip />
+          <TooltipActivator />
+          <ReactUnmounter />
+          <InsertRuntimeFooterLinks />
+          <EasyAccess />
+          <Suspense fallback={<SpinnerWrapper scale={3} />}>
+            <Switch>
+              {
+              //<Route path="/metadata/:data_source?" component={MetaData}/>
+              //<Route path="/igoc/:grouping?" component={IgocExplorer} />
+              //<Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={ResourceExplorer} />
+              //<Route path="/orgs/:level/:subject_id/infograph/:bubble?/" component={InfoGraph} />
+              //<Route path="/glossary/:active_key?" component={Glossary} />
+              //<Route path="/partition/:perspective?/:data_type?" component={PartitionRoute} />
+              //<Route path="/budget-measures/:first_column?/:selected_value?" component={BudgetMeasuresRoute} />
+              //<Route path="/explore-:perspective?" component={BubbleExplore} />
+              //<Route path="/rpb/:config?" component={ReportBuilder} />
+              //<Route path="/about" component={About} />
+              //<Route path="/graph/:level?/:graph?/:id?" component={GraphInventory} />
+              //<Route path="/compare_estimates" component={EstimatesComparison} />
+              }
+              <Route path="/" component={Home} />
+            </Switch>
+          </Suspense>
+        </ErrorBoundary>
       </div>
     );
   }
