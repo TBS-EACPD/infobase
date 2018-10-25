@@ -8,7 +8,7 @@ import { create_text_maker } from '../models/text.js';
 
 const custom_tm = create_text_maker(about_text_bundle);
 
-export class About extends React.Component {
+export default class About extends React.Component {
   render(){
     return (
       <StandardRouteContainer

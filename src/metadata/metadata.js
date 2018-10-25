@@ -11,7 +11,7 @@ const FormattedDate = ({ day, month, year}) => <span>{months[month].text} {year}
 
 const { text_maker, TM } = create_text_maker_component(metadata_text);
 
-export class MetaData extends React.Component {
+export default class MetaData extends React.Component {
   render(){
     const { 
       match: {

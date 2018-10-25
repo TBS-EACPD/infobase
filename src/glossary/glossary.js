@@ -111,7 +111,7 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
   </div>
 );
 
-export class Glossary extends React.Component {
+export default class Glossary extends React.Component {
   render(){
     const { 
       match: {

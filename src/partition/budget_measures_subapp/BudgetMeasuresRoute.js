@@ -56,7 +56,7 @@ const validate_route = (first_column, selected_value, history) => {
   }
 }
 
-export class BudgetMeasuresRoute extends React.Component {
+export default class BudgetMeasuresRoute extends React.Component {
   constructor(props){
     super();
     this.state = {

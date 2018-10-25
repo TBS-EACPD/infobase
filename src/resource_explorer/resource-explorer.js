@@ -373,7 +373,7 @@ class OldExplorerContainer extends React.Component {
 }
 
 
-export class ResourceExplorer extends React.Component {
+export default class ResourceExplorer extends React.Component {
   constructor(){
     super();
     this.state = { loading: true };

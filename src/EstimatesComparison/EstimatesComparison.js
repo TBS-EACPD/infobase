@@ -32,7 +32,7 @@ import {
   initial_state as initial_scheme_state,
 } from './scheme.js';
 
-export class EstimatesComparison extends React.Component {
+export default class EstimatesComparison extends React.Component {
   constructor(){
     super();
     this.state = {loading: true};

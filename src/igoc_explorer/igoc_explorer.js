@@ -143,7 +143,7 @@ class ExplorerContainer extends React.Component {
 }
 
 
-export const IgocExplorer = ({match}) => {
+const IgocExplorer = ({match}) => {
   let grouping = _.get(match, "params.grouping");
   if(_.isEmpty(grouping)){
     grouping = "portfolio";
@@ -168,3 +168,4 @@ export const IgocExplorer = ({match}) => {
     </StandardRouteContainer>
   );
 };
+export { IgocExplorer as default }

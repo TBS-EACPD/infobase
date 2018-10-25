@@ -298,7 +298,7 @@ class InfoGraph_ extends React.Component {
   }
 }
 
-export const InfoGraph = ({ 
+const InfoGraph = ({ 
   match: {
     params : {
       level, 
@@ -335,7 +335,5 @@ export const InfoGraph = ({
       />
     </StandardRouteContainer>
   );
-
-
-
 };
+export { InfoGraph as default }

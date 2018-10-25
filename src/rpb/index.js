@@ -372,7 +372,7 @@ const url_state_selector = createSelector(_.identity, str => {
   return state;
 });
 
-export class ReportBuilder extends React.Component { 
+export default class ReportBuilder extends React.Component { 
   constructor(){
     super();
     this.state = {

@@ -5,7 +5,7 @@ import { PartitionDiagram } from "../partition_diagram/PartitionDiagram.js";
 import { reactAdapter } from '../../core/reactAdapter';
 import { get_static_url } from '../../core/request_utils.js';
 
-export class PartitionSubApp {
+export default class PartitionSubApp {
   constructor(container, all_perspectives, all_data_types, initial_perspective_id, initial_data_type_id, url_update_callback){
     this.search_required_chars = 1;
     this.search_debounce_time = 500;

@@ -310,7 +310,7 @@ function A11yContent(){
 
 
 
-class BubbleExplore extends React.Component {
+export default class BubbleExplore extends React.Component {
   render(){
     const {
       match: {
@@ -335,5 +335,3 @@ class BubbleExplore extends React.Component {
 
   }
 }
-
-export { BubbleExplore };

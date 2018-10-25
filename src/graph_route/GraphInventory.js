@@ -1,12 +1,12 @@
 import  {createSelector } from 'reselect';
 import { StandardRouteContainer } from '../core/NavComponents';
-import { ReactPanelGraph } from '../core/PanelCollectionView.js';
+import { ReactPanelGraph } from '../core/PanelCollectionView';
 import { Link } from 'react-router-dom';
 
 /* eslint-disable no-unused-vars */
-import { get_panels_for_subject } from '../infographic/get_panels_for_subject.js';
+import { get_panels_for_subject } from '../infographic/get_panels_for_subject';
 
-import { Subject } from '../models/subject.js';
+import { Subject } from '../models/subject';
 const {
   Dept, 
   Program, 
@@ -15,8 +15,8 @@ const {
   Gov,
   CRSO,
 } = Subject;
-import { ensure_loaded } from '../core/lazy_loader.js';
-import { EverythingSearch, SpinnerWrapper } from '../util_components.js';
+import { ensure_loaded } from '../core/lazy_loader';
+import { EverythingSearch, SpinnerWrapper } from '../util_components';
 import { PanelGraph } from '../core/PanelGraph';
 
 function url_template(subject, graph){
@@ -195,7 +195,7 @@ const PanelTableRow = ({ current_subject, panel, className }) => {
 };
 
 
-export class GraphInventory extends React.Component {
+export default class GraphInventory extends React.Component {
   constructor(){
     super();
     this.state = {
