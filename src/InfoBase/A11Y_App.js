@@ -14,7 +14,7 @@ import { ReactUnmounter } from '../core/NavComponents';
 import { EasyAccess } from '../core/EasyAccess';
 import { SpinnerWrapper } from '../components/SpinnerWrapper.js';
 
-const Home = React.lazy( () => import('../home/A11Y_home.js') );
+const Home = React.lazy( () => import('../home/a11y_home.js') );
 const GraphInventory = React.lazy( () => import('../graph_route/GraphInventory.js') );
 const BudgetMeasuresRoute = React.lazy( () => import('../partition/budget_measures_subapp/BudgetMeasuresRoute.js') );
 const About = React.lazy( () => import('../about/about.js') );
