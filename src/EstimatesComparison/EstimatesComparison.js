@@ -37,7 +37,7 @@ export class EstimatesComparison extends React.Component {
     super();
     this.state = {loading: true};
   }
-  componentWillMount(){
+  UNSAFE_componentWillMount(){
     ensure_loaded({
       table_keys: ["table8"],
       footnotes_for: "estimates",
@@ -78,7 +78,7 @@ const map_state_to_props_from_memoized_funcs = memoized_funcs => {
 }
 
 class ExplorerContainer extends React.Component {
-  componentWillMount(){
+  UNSAFE_componentWillMount(){
     const scheme = estimates_diff_scheme;
     const scheme_key = estimates_diff_scheme.key;
 
