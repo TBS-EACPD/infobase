@@ -178,7 +178,7 @@ export class StandardRouteContainer extends React.Component {
               ),
             }[lang]
           }
-          route_filter={ (match) => (/^\/metadata|infograph\/financial/).test(match.url) }
+          route_filter={ (match) => (/^\/metadata|infograph\/financial|^\/rpb/).test(match.url) }
         />
         <AnalyticsSynchronizer route_key={route_key} />
         { shouldSyncLang !== false &&
