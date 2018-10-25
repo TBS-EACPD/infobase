@@ -1,6 +1,6 @@
 import './ExplorerComponents.scss';
 import classNames from 'classnames';
-import ReactTransitionGroup from 'react-addons-transition-group';
+import { TransitionGroup } from 'react-transition-group';
 import FlipMove from 'react-flip-move';
 import {
   FirstChild,
@@ -287,7 +287,7 @@ export const ExplorerNode = ({
             )}
           </div>
         </div>
-        <ReactTransitionGroup component={FirstChild}>
+        <TransitionGroup component={FirstChild}>
           { isExpanded && 
             <AccordionEnterExit
               component="div"
@@ -299,10 +299,10 @@ export const ExplorerNode = ({
               </div>
             </AccordionEnterExit>
           }
-        </ReactTransitionGroup>
+        </TransitionGroup>
       </div>
     </div>
-    <ReactTransitionGroup component={FirstChild}>
+    <TransitionGroup component={FirstChild}>
       { isExpanded && 
         <AccordionEnterExit
           component="div"
@@ -318,7 +318,7 @@ export const ExplorerNode = ({
           }
         </AccordionEnterExit>
       }
-    </ReactTransitionGroup>
+    </TransitionGroup>
   </div>
 );
 

@@ -1,5 +1,5 @@
 import './Accordions.scss';
-import ReactTransitionGroup from 'react-addons-transition-group';
+import { TransitionGroup } from 'react-transition-group';
 import { get_static_url } from '../core/request_utils.js';
 
 function FirstChild(props) {
@@ -59,7 +59,7 @@ const StatelessPullDownAccordion = ({ title, isExpanded, children, onToggle }) =
     <div className="pull-down-accordion-header" onClick={onToggle}>
       { title }
     </div> 
-    <ReactTransitionGroup component={FirstChild}>
+    <TransitionGroup component={FirstChild}>
       { isExpanded && 
         <AccordionEnterExit
           component="div"
@@ -71,7 +71,7 @@ const StatelessPullDownAccordion = ({ title, isExpanded, children, onToggle }) =
           {children}
         </AccordionEnterExit>
       }
-    </ReactTransitionGroup>
+    </TransitionGroup>
     <div className="pull-down-accordion-footer" onClick={onToggle}>
       <button 
         className="pull-down-accordion-expander"

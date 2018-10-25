@@ -1,7 +1,7 @@
 import './table_picker.scss';
 import { Table } from '../core/TableClass.js';
 import { GlossaryEntry } from '../models/glossary.js';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransitionGroup } from 'react-transition-group';
 import classNames from 'classnames';
 import concepts_to_display_filter from './table_picker_concept_filter.js';
 import { TextMaker } from './rpb_text_provider';
@@ -241,7 +241,7 @@ class TaggedItemCloud extends React.Component {
         </div> :
         <div>
           <div className="row item-cloud-row">
-            <ReactCSSTransitionGroup 
+            <CSSTransitionGroup 
               className="col-md-4 item-cloud-col" 
               component="div"
               transitionName="transi-height"
@@ -249,8 +249,8 @@ class TaggedItemCloud extends React.Component {
               transitionLeaveTimeout={500}
             >
               {items_split[0]}
-            </ReactCSSTransitionGroup>
-            <ReactCSSTransitionGroup 
+            </CSSTransitionGroup>
+            <CSSTransitionGroup 
               className="col-md-4 item-cloud-col"
               component="div"
               transitionName="transi-height"
@@ -258,8 +258,8 @@ class TaggedItemCloud extends React.Component {
               transitionLeaveTimeout={500}
             >
               {items_split[1]}
-            </ReactCSSTransitionGroup>
-            <ReactCSSTransitionGroup 
+            </CSSTransitionGroup>
+            <CSSTransitionGroup 
               className="col-md-4 item-cloud-col"
               component="div"
               transitionName="transi-height"
@@ -267,7 +267,7 @@ class TaggedItemCloud extends React.Component {
               transitionLeaveTimeout={500}
             >
               {items_split[2]}
-            </ReactCSSTransitionGroup>
+            </CSSTransitionGroup>
             <div className="clearfix" />
           </div>
         </div>
