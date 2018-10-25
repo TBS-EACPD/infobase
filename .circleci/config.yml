@@ -119,3 +119,4 @@ workflows:
             branches:
               only:
                 - master
+                - react16point6
