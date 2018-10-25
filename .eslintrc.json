@@ -48,6 +48,11 @@
       "react/no-find-dom-node" : [ "off" ],
       "react/no-children-prop": ["off"]
   },
+  "settings": {
+    "react": {
+      "version": "16"
+    }
+  },
   "globals": {
     "window": true,
     "DEV":true,
