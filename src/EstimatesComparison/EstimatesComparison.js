@@ -37,13 +37,13 @@ export default class EstimatesComparison extends React.Component {
     super();
     this.state = {loading: true};
   }
-  UNSAFE_componentWillMount(){
+  componentDidMount(){
     ensure_loaded({
       table_keys: ["table8"],
       footnotes_for: "estimates",
     }).then(()=> {
       this.setState({ loading: false });
-    })
+    });
   }
   render(){
     const title = text_maker("diff_view_title");
@@ -56,13 +56,11 @@ export default class EstimatesComparison extends React.Component {
       >
         <h1><TM k="diff_view_title"/></h1>
         { this.state.loading ? 
-          <SpinnerWrapper /> :
+          <SpinnerWrapper scale={3} /> :
           <ExplorerContainer />
         }
       </StandardRouteContainer>
     );
-
-
   }
 }
 
@@ -78,7 +76,9 @@ const map_state_to_props_from_memoized_funcs = memoized_funcs => {
 }
 
 class ExplorerContainer extends React.Component {
-  UNSAFE_componentWillMount(){
+  constructor(){
+    super();
+
     const scheme = estimates_diff_scheme;
     const scheme_key = estimates_diff_scheme.key;
 
@@ -105,7 +105,6 @@ class ExplorerContainer extends React.Component {
 
     this.Container = Container;
     this.store = store;
-
   }
   render(){
     const { store, Container } = this;

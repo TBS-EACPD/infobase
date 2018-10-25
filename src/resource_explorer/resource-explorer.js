@@ -378,13 +378,12 @@ export default class ResourceExplorer extends React.Component {
     super();
     this.state = { loading: true };
   }
-
-  UNSAFE_componentWillMount(){
-    ensure_loaded({ 
+  componentDidMount(){
+    ensure_loaded({
       table_keys: ['table6', 'table12'],
     }).then(()=> {
       this.setState({loading: false});
-    })
+    });
   }
   render(){
     const { match } = this.props;
@@ -399,7 +398,7 @@ export default class ResourceExplorer extends React.Component {
       return (
         <StandardRouteContainer {...route_container_args}>
           {header}
-          <SpinnerWrapper scale={4} />
+          <SpinnerWrapper scale={3} />
         </StandardRouteContainer>
       );
     }
