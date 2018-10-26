@@ -69,6 +69,7 @@ export class FilterTable extends React.Component {
                 <span 
                   className="filter-table__icon"
                   key="icon"
+                  aria-hidden="true"
                 >
                   { item.icon }
                 </span>,
@@ -87,9 +88,16 @@ export class FilterTable extends React.Component {
                 onClick={ () => click_callback(item.key) }
                 className={ classNames("filter-table__item", item.active && "filter-table__item--active" ) }
                 key={ item.key }
+                aria-label={ 
+                  {
+                    en: `Activate to filter "${item.text}" items from the following presentation.`,
+                    fr: `DRRTODO`,
+                  }[window.lang]
+                }
               >
                 <div 
                   className="filter-table__eye"
+                  aria-hidden="true"
                   style={{
                     visibility: !nothing_is_filtered || show_eyes_override ? "visible" : "hidden",
                   }}
