@@ -2,7 +2,9 @@ import marked from 'marked';
 import { Fragment } from 'react';
 import { trivial_text_maker, util_components } from '../shared.js';
 import { businessConstants } from '../../models/businessConstants.js';
+import { GlossaryEntry } from '../../models/glossary.js';
 import { get_static_url } from '../../core/request_utils.js';
+import { glossary_href } from '../../link_utils.js';
 import {
   status_key_to_glossary_key,
   status_key_to_svg_name,
@@ -228,19 +230,28 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
           key: status_key,
           active: active_list.length === 0 || _.indexOf(active_list, status_key) !== -1,
           count: icon_counts[status_key] || 0,
-          text: (
-            <span
-              className="link-unstyled"
-              tabIndex={0}
-              aria-hidden="true"
-              data-glossary-key={status_key_to_glossary_key[status_key]}
-              data-toggle="tooltip"
-              data-html="true"
-              data-container="body"
-            >
-              {result_simple_statuses[status_key].text}
-            </span>
-          ),
+          text: !window.is_a11y ? 
+            (
+              <span
+                className="link-unstyled"
+                tabIndex={0}
+                aria-hidden="true"
+                data-glossary-key={status_key_to_glossary_key[status_key]}
+                data-toggle="tooltip"
+                data-html="true"
+                data-container="body"
+              >
+                {result_simple_statuses[status_key].text}
+              </span>
+            ) :
+            (
+              <a 
+                href={ glossary_href( GlossaryEntry.lookup(status_key_to_glossary_key[status_key]) )} 
+                title={trivial_text_maker("glossary_link_title")}
+              >
+                {result_simple_statuses[status_key].text}
+              </a>
+            ),
           icon: large_status_icons[status_key],
         }) )
       }
