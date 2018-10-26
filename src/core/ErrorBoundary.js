@@ -6,17 +6,17 @@ export class ErrorBoundary extends React.Component {
     super();
 
     this.state = {
-      has_error: false,
+      error: null,
       testing_for_stale_client: false,
     };
   }
   static getDerivedStateFromError(error) {
     return {
-      has_error: true,
+      error: error,
       testing_for_stale_client: true,
     };
   }
-  handle_stale_client_error_case(){
+  catch_stale_client_error_case(){
     const unique_query_param = Date.now() + Math.random().toString().replace('.','');
 
     // Stale clients are our most likely production errors, always check for and attempt to handle them
@@ -41,6 +41,7 @@ export class ErrorBoundary extends React.Component {
       log_standard_event({
         SUBAPP: window.location.hash.replace('#',''),
         MISC1: "ERROR_IN_PROD",
+        MISC2: this.state.error.toString(),
       });
     }
 
@@ -49,10 +50,15 @@ export class ErrorBoundary extends React.Component {
     });
   }
   render(){
-    if (!this.state.has_error){
+    const {
+      error,
+      testing_for_stale_client,
+    } = this.state;
+
+    if ( _.isNull(error) ){
       return this.props.children;
-    } else if (this.state.testing_for_stale_client){
-      this.handle_stale_client_error_case();
+    } else if (testing_for_stale_client){
+      this.catch_stale_client_error_case();
       return null;
     } else {
       return (
