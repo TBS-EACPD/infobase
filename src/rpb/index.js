@@ -256,8 +256,8 @@ class RPB extends React.Component {
         }
       />
       {
-          this.state.loading ? 
-          <SpinnerWrapper scale={4} /> :
+        this.state.loading ? 
+          <SpinnerWrapper config_name={"route"} /> :
           <Fragment>
             <LabeledBox
               label={ <TextMaker text_key="blue_text_pick_org" /> }
@@ -438,7 +438,7 @@ export default class ReportBuilder extends React.Component {
         <AnalyticsSynchronizer {...url_state} />
         { 
           this.state.loading ? 
-            <SpinnerWrapper scale={3} /> :
+            <SpinnerWrapper config_name={"route"} /> :
             <Root state={url_state} />
         }
       </StandardRouteContainer>

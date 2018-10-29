@@ -115,7 +115,7 @@ export default class BudgetMeasuresRoute extends React.Component {
         <h1>
           {text_maker("budget_route_title")}
         </h1>
-        { loading && <SpinnerWrapper ref="spinner" scale = { 4 } /> }
+        { loading && <SpinnerWrapper ref="spinner" config_name={"route"} /> }
         { !loading &&
           <div className="budget-measures">
             <div className="budget-measures-top-text">

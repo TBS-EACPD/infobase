@@ -201,7 +201,7 @@ class InfoGraph_ extends React.Component {
                 borderRadius : '5px',
               }}
             >
-              <SpinnerWrapper scale={4} /> 
+              <SpinnerWrapper config_name={"route"} /> 
             </div>
           }
           {

@@ -1,11 +1,10 @@
-import 'spin.js/spin.css';
-import { Spinner } from 'spin.js';
+import { Spinner } from '../core/Spinner.js';
 window.Spinner = Spinner;
 
 export default function(){
 
   const app_el = document.querySelector('#app');
-  const spinner = new Spinner({scale:4});
+  const spinner = new Spinner( Spinner.__configs.initial );
   spinner.spin(app_el);
   app_el.setAttribute('aria-busy', 'true');
 

@@ -71,7 +71,7 @@ export default class PartitionRoute extends React.Component {
           {text_maker("partition_title")}
         </h1>
         <ContainerEscapeHatch>
-          { this.state.loading && <SpinnerWrapper ref="spinner" scale={4} /> }
+          { this.state.loading && <SpinnerWrapper ref="spinner" config_name={"route"} /> }
           <div className="partition-container" ref="container"/>
         </ContainerEscapeHatch>
       </StandardRouteContainer>

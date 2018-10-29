@@ -254,7 +254,7 @@ class BubbleExplore_ extends React.Component {
     
     const sub_app_container = d3.select(el).append('div').attr('aria-hidden', true);
 
-    const spin_el = new Spinner({scale:4}).spin().el;
+    const spin_el = new Spinner( Spinner.__configs.route ).spin().el;
     el.appendChild(spin_el)
     ensure_loaded({
       stat_keys : [ 
@@ -269,10 +269,7 @@ class BubbleExplore_ extends React.Component {
       el.removeChild(spin_el);
       new BubbleOrgList(sub_app_container, perspective);
     });
-
   }
-
-
 }
 
 function A11yContent(){

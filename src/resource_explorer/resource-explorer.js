@@ -234,7 +234,7 @@ class ExplorerPage extends React.Component {
         {loading && 
           <div className="loading-overlay">
             <div style={{height: '200px',position:'relative'}}>
-              <SpinnerWrapper scale={3} /> 
+              <SpinnerWrapper config_name={"sub_route"} /> 
             </div>
           </div>
         }
@@ -398,7 +398,7 @@ export default class ResourceExplorer extends React.Component {
       return (
         <StandardRouteContainer {...route_container_args}>
           {header}
-          <SpinnerWrapper scale={3} />
+          <SpinnerWrapper config_name={"route"} />
         </StandardRouteContainer>
       );
     }

@@ -245,7 +245,7 @@ export default class GraphInventory extends React.Component {
 
     let content;
     if(loading){
-      content = <SpinnerWrapper />;
+      content = <SpinnerWrapper config_name={"sub_route"} />;
     } else {
       content = <div>
         <h1> graph inventory </h1>

@@ -39,7 +39,7 @@ export class App extends React.Component {
           <ReactUnmounter />
           <InsertRuntimeFooterLinks />
           <EasyAccess />
-          <Suspense fallback={<SpinnerWrapper scale={3} />}> 
+          <Suspense fallback={<SpinnerWrapper config_name={"route"} />} > 
             <Switch>
               <Route path="/metadata/:data_source?" component={MetaData}/>
               <Route path="/igoc/:grouping?" component={IgocExplorer} />

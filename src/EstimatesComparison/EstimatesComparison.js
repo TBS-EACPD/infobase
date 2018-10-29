@@ -56,7 +56,7 @@ export default class EstimatesComparison extends React.Component {
       >
         <h1><TM k="diff_view_title"/></h1>
         { this.state.loading ? 
-          <SpinnerWrapper scale={3} /> :
+          <SpinnerWrapper config_name={"sub_route"} /> :
           <ExplorerContainer />
         }
       </StandardRouteContainer>
@@ -344,7 +344,7 @@ class EstimatesExplorer extends React.Component {
           {loading && 
             <div className="loading-overlay">
               <div style={{height: '200px',position:'relative'}}>
-                <SpinnerWrapper scale={3} /> 
+                <SpinnerWrapper config_name={"sub_route"}/> 
               </div>
             </div>
           }

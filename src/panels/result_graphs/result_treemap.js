@@ -301,7 +301,7 @@ class SingleSubjExplorer extends React.Component {
         {loading && 
           <div className="loading-overlay">
             <div style={{height: '200px',position:'relative'}}>
-              <SpinnerWrapper scale={3} /> 
+              <SpinnerWrapper config_name={"sub_route"} /> 
             </div>
           </div>
         }
