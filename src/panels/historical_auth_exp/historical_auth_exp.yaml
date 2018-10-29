@@ -59,7 +59,7 @@ gov_historical_auth_exp_text:
 dept_historical_auth_exp_text:
   transform: [handlebars,markdown]
   en: |
-   Parliamentary authority to spend typically expires at the end of the fiscal year. For example, authorities approved through all appropriation acts for the fiscal year {{pa_last_year}} expired on {{pa_last_year_end_ticks}} for most organzations. 
+   Parliamentary authority to spend typically expires at the end of the fiscal year. For example, authorities approved through all appropriation acts for the fiscal year {{pa_last_year}} expired on {{pa_last_year_end_ticks}} for most organizations. 
    
 
    Over the last five years, **{{subj_name dept}}** has spent an average of **{{fmt_compact1_written dept_hist_diff_average}}** less per year than what had been authorized by Parliament. On average, unused authorities represented **{{fmt_percentage1 dept_hist_avg_tot_pct}}** of approved authorities.
