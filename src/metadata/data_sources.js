@@ -56,12 +56,12 @@ const sources = _.mapValues({
     ix: 1,
     description(){ return desc_from_gloss_keys("PA") },
     title(){ return tm("pa_title" )},
-    last_updated : {"month": 10, "year": 2018},
+    last_updated: { month: 10, year: 2018 },
     open_data: infobase_open_data_page,
     frequency: frequencies.y,
     report_link:{
-      en:"http://www.tpsgc-pwgsc.gc.ca/recgen/cpc-pac/index-eng.html",
-      fr:"http://www.tpsgc-pwgsc.gc.ca/recgen/cpc-pac/index-fra.html",
+      en: "http://www.tpsgc-pwgsc.gc.ca/recgen/cpc-pac/index-eng.html",
+      fr: "http://www.tpsgc-pwgsc.gc.ca/recgen/cpc-pac/index-fra.html",
     },
     items(){ 
       return  _.map(
@@ -77,8 +77,8 @@ const sources = _.mapValues({
     last_updated: { month: 11, year: 2017 },
     frequency: frequencies.q,
     report_link:{
-      en:"https://www.canada.ca/en/treasury-board-secretariat/services/reporting-government-spending/quarterly-financial-reporting.html",
-      fr:"https://www.canada.ca/fr/secretariat-conseil-tresor/services/etablissement-rapports-depenses/rapports-financiers-trimestriels.html",
+      en: "https://www.canada.ca/en/treasury-board-secretariat/services/reporting-government-spending/quarterly-financial-reporting.html",
+      fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/etablissement-rapports-depenses/rapports-financiers-trimestriels.html",
     },
     items(){ 
       return  _.map(
@@ -95,8 +95,8 @@ const sources = _.mapValues({
     open_data: infobase_open_data_page,
     frequency: frequencies.q,
     report_link:{
-      en:"https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates.html",
-      fr:"https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal.html",
+      en: "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates.html",
+      fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal.html",
     },
     items(){ 
       return  _.map(
@@ -139,12 +139,9 @@ const sources = _.mapValues({
     description(){ return desc_from_gloss_keys("DP") },
     title(){ return tm("dp_title")},
     frequency: frequencies.y,
-    last_updated : {month : 4, year:2018},
-    report_link:{
-      en: "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities.html",
-      fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites.html",
-    },
-    open_data:{
+    last_updated: { month: 4, year: 2018 },
+    report_link: infobase_open_data_page,
+    open_data: {
       en: "http://open.canada.ca/data/en/dataset/e03ef931-c096-4710-bc4a-1fcd0cc0ea00",
       fr: "http://ouvert.canada.ca/data/fr/dataset/e03ef931-c096-4710-bc4a-1fcd0cc0ea00",
     },
@@ -162,12 +159,12 @@ const sources = _.mapValues({
     title(){ return tm("drr_title")},
     description(){ return desc_from_gloss_keys("DRR") },
     frequency: frequencies.y,
-    last_updated : {month : 11,year:2017},
-    report_link:{
-      en:"https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html",
-      fr:"https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement.html",
+    last_updated: { month: 11, year: 2017} ,
+    report_link: {
+      en: "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html",
+      fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement.html",
     },
-    open_data:{
+    open_data: {
       en: "http://open.canada.ca/data/en/dataset/311842ca-7958-40fa-8e31-12d11c6223e3",
       fr: "http://ouvert.canada.ca/data/fr/dataset/311842ca-7958-40fa-8e31-12d11c6223e3",
     },
@@ -187,8 +184,8 @@ const sources = _.mapValues({
     frequency: frequencies.y,
     last_updated: { month: 11, year: 2017 },
     open_data: {
-      en:"http://open.canada.ca/data/en/dataset/c05e8a2b-4e8b-4da7-b6f3-33f4848d3c09",
-      fr:"http://ouvert.canada.ca/data/fr/dataset/c05e8a2b-4e8b-4da7-b6f3-33f4848d3c09",
+      en: "http://open.canada.ca/data/en/dataset/c05e8a2b-4e8b-4da7-b6f3-33f4848d3c09",
+      fr: "http://ouvert.canada.ca/data/fr/dataset/c05e8a2b-4e8b-4da7-b6f3-33f4848d3c09",
     },
     items(){
       return [{
