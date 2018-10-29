@@ -1,6 +1,7 @@
 import text from './panel_base_text.yaml'
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Fragment } from 'react';
 import { 
   FootnoteList, 
   create_text_maker_component,
@@ -113,7 +114,7 @@ Col.propTypes = {
 const StdPanel = ({ title, sources, footnotes, children }) => {
   const mapped_children = _.chain(children)
     .flatMap( child => {
-      if ( child.type && child.type.toString() === "Symbol(react.fragment)" ){
+      if ( child.type && child.type === Fragment ){
         return child.props.children;
       } else {
         return child;
@@ -160,7 +161,7 @@ StdPanel.propTypes = {
     const are_children_valid = (children) => {
       const filtered_and_flattened_children = _.chain(children)
         .flatMap( child => {
-          if ( child.type && child.type.toString() === "Symbol(react.fragment)" ){
+          if ( child.type && child.type === Fragment ){
             return child.props.children;
           } else {
             return child;

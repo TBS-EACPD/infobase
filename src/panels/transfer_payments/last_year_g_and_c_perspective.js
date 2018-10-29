@@ -20,15 +20,15 @@ new PanelGraph({
   depends_on: ['table7'],
   footnotes: ['SOBJ10'],
   info_deps: ['table7_gov_info', 'table7_dept_info', 'table4_dept_info'],
-  calculate(subject, info,options){
+  calculate(subject, info, options){
     return {
-      data1 : [
-        { value: info.gov_tp_exp_pa_last_year,name :'y'},
-        { value: info.dept_tp_exp_pa_last_year,name :'x'},
+      data1: [
+        { value: info.gov_tp_exp_pa_last_year, name: 'y'},
+        { value: info.dept_tp_exp_pa_last_year, name: 'x'},
       ],
-      data2 : [
-        { value: info.dept_exp_pa_last_year,name :'z'},
-        { value: info.dept_tp_exp_pa_last_year,name :'x'},
+      data2: [
+        { value: info.dept_exp_pa_last_year, name: 'z'},
+        { value: info.dept_tp_exp_pa_last_year, name: 'x'},
       ],
     }
   },
@@ -45,30 +45,26 @@ new PanelGraph({
         <Col size={6} isText>
           <TM k="dept_last_year_g_and_c_perspective_text" args={info} />
         </Col>
-        { !window.is_a11y_mode && 
+        { !window.is_a11y_mode &&
           <Fragment>
             <Col size={3} isGraph>
               <CirclePieChart 
-                {...{
-                  height: 300,
-                  colors,
-                  formater : formats.compact1,
-                  font_size : "16",
-                  title : Subject.Gov.name,
-                  data : graph_args.data1,
-                }} 
+                height={300}
+                colors={colors}
+                formater={formats.compact1}
+                font_size="16"
+                title={Subject.Gov.name}
+                data={graph_args.data1}
               />
             </Col>
             <Col size={3} isGraph>
               <CirclePieChart
-                {...{
-                  height : 300,
-                  colors,
-                  formater : formats.compact1,
-                  font_size : "16",
-                  title : subject.sexy_name,
-                  data : graph_args.data2,
-                }}
+                height={300}
+                colors={colors}
+                formater={formats.compact1}
+                font_size="16"
+                title={subject.sexy_name}
+                data={graph_args.data2}
               />
             </Col>
           </Fragment>
