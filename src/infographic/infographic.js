@@ -117,13 +117,13 @@ class InfoGraph_ extends React.Component {
     };
   }
   static getDerivedStateFromProps(nextProps, prevState){
-    if(!shallowEqualObjectsOverKeys(nextProps, prevState, ['subject','bubble','level'])){
+    if( !shallowEqualObjectsOverKeys(nextProps, prevState, ['subject','bubble','level']) ){
       return {
         loading: true,
         subject: nextProps.subject,
         bubble: nextProps.bubble,
         level: nextProps.level,
-      }
+      };
     } else {
       return null;
     }
@@ -163,7 +163,7 @@ class InfoGraph_ extends React.Component {
           >
             <EverythingSearch 
               include_gov={false} 
-              href_template={subj => infograph_href_template(subj,null,true)}
+              href_template={subj => infograph_href_template(subj, null, true)}
               search_text={text_maker('subject_search_placeholder')}
               large={true}
               include_tags={true}
@@ -291,9 +291,11 @@ class InfoGraph_ extends React.Component {
       subject: subject,
       footnotes_for: subject,
     }).then(()=> {
-      this.setState({
-        loading: false,
-      });
+      if ( shallowEqualObjectsOverKeys({bubble, subject, level}, this.state, ['subject','bubble','level']) ){
+        this.setState({
+          loading: false,
+        });
+      }
     });
   }
 }
