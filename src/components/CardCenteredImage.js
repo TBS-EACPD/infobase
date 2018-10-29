@@ -32,7 +32,7 @@ const CardCenteredImage = ({
             />
           </div>
           <div className="centered-img-card__bottom-right">
-            <div className="centered-img-card__badge">
+            <div tabIndex={0} className="centered-img-card__badge">
               <TM k={link_key} tmf={tmf} args={text_args} />
             </div>
           </div>

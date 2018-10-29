@@ -138,7 +138,7 @@
   align-items: center;
   justify-content: space-between;
 
-  &:hover {
+  &:hover, &:focus, &:active {
     background-color: #565D64;
   }
 }
@@ -188,7 +188,9 @@
 .linkcard {
   flex-basis: 100%;
   padding: 0px;
-  &:hover {
-    background-color: rgb(236, 236, 236) !important;
+  & > a.link-unstyled:hover, & > a.link-unstyled:focus, & > a.link-unstyled:active {
+    & > .top-img-card {
+      background-color: rgb(236, 236, 236) !important;
+    }
   }
 }

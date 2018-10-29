@@ -25,7 +25,7 @@ const CardBackgroundImage = ({
         </div>
       </div>
       <div className="background-img-card__bottom-right">
-        <div className="background-img-card__badge">
+        <div tabIndex={0} className="background-img-card__badge">
           <TM k={link_key} tmf={tmf} args={text_args} />
         </div>
       </div>
