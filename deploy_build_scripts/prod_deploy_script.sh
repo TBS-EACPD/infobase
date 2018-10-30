@@ -7,6 +7,7 @@ function cleanup {
   unset CDN_URL
   unset GCLOUD_BUCKET_URL
   unset CLOUDFLARE_KEY
+  unset BUILD_DIR
 }
 trap cleanup EXIT
 
