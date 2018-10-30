@@ -4,7 +4,7 @@ const path = require('path');
 const gitsha = require('git-bundle-sha');
 const { create_config } = require('./webpack_common.js');
 
-const build_dir_name = process.env.ALT_BUILD_DIR || "build";
+const build_dir_name = process.env.BUILD_DIR || "build";
 const args = process.argv;
 
 function choose(name){

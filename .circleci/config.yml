@@ -47,16 +47,16 @@ jobs:
             - ib-prod-build-{{ .Branch }}-{{ .Revision }}
       - run:
           command: |
-            [ -f "build/InfoBase/app/app-a11y-en.min.js" ] || ./deploy_build_scripts/build_all.sh
+            [ -f "${BUILD_DIR}/InfoBase/app/app-a11y-en.min.js" ] || ./deploy_build_scripts/build_all.sh
 
       - save_cache:
           paths:
-            - build
+            - $BUILD_DIR
           key: ib-prod-build-{{ .Branch }}-{{ .Revision }}
       - persist_to_workspace:
           root: ./
           paths:
-            - ./build
+            - ./$BUILD_DIR
             - ./node_modules
             - ./tests
             - ./.circleci
@@ -77,8 +77,8 @@ jobs:
       - attach_workspace:
           at: ./
       - run: sh ./.circleci/create_envs.sh
-      - run: sed -i "s#${CDN_URL}#.#g" ./build/InfoBase/app/*.js # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
-      - run: sed -i "s#${CDN_URL}#.#g" ./build/InfoBase/*.html # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
+      - run: sed -i "s#${CDN_URL}#.#g" ./$BUILD_DIR/InfoBase/app/*.js # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
+      - run: sed -i "s#${CDN_URL}#.#g" ./$BUILD_DIR/InfoBase/*.html # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
       - run: 
           name: start_server
           command: npm run ci_serve

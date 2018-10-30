@@ -10,6 +10,7 @@ function cleanup {
 }
 trap cleanup EXIT
 
+export BUILD_DIR="prod_build"
 export CDN_URL="https://cdn-rdc.ea-ad.ca/InfoBase"
 export GCLOUD_BUCKET_URL="gs://cdn-rdc.ea-ad.ca/InfoBase"
 
@@ -23,6 +24,7 @@ gcloud config set compute/zone northamerica-northeast1-a
 
 #make sure node_modules is in-line with package-lock.json
 npm ci
+
 
 #build everything
 ./deploy_build_scripts/build_all.sh

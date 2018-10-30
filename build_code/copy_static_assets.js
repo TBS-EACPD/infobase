@@ -17,7 +17,7 @@ const { get_footnote_file_defs } = require('./write_footnote_bundles.js');
 const { bundle_extended_bootstrap_css } = require('./bundle_extended_bootstrap_css.js');
 const { index_lang_lookups } = require("../src/InfoBase/index_data.js");
 
-const build_dir_name = process.env.ALT_BUILD_DIR || "build";
+const build_dir_name = process.env.BUILD_DIR || "build";
 
 /*
 This copies stuff into the build directory
