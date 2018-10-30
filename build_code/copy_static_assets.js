@@ -17,6 +17,8 @@ const { get_footnote_file_defs } = require('./write_footnote_bundles.js');
 const { bundle_extended_bootstrap_css } = require('./bundle_extended_bootstrap_css.js');
 const { index_lang_lookups } = require("../src/InfoBase/index_data.js");
 
+const build_dir_name = process.env.ALT_BUILD_DIR || "build";
+
 /*
 This copies stuff into the build directory
 
@@ -195,14 +197,14 @@ function write_gitsha_file(dir){
 
 function build_proj(PROJ){
   
-  const dir = 'build/InfoBase';
+  const dir = `${build_dir_name}/InfoBase`;
   const app_dir = `${dir}/app`;
   const results_dir = `${dir}/results`;
   const footnotes_dir = `${dir}/footnotes`;
   const well_known_dir = `${dir}/.well-known`;
 
   _.each(
-    ['build', dir, app_dir, results_dir, footnotes_dir], 
+    [build_dir_name, dir, app_dir, results_dir, footnotes_dir], 
     name => make_dir_if_exists(name)
   )
 
@@ -230,7 +232,7 @@ function build_proj(PROJ){
 
   write_gitsha_file(dir);
 
-  _.each(["en","fr"], lang => {
+  _.each(["en", "fr"], lang => {
 
     const {
       depts: dept_footnotes,
@@ -240,7 +242,7 @@ function build_proj(PROJ){
       estimates: estimate_footnotes,
     } = get_footnote_file_defs(parsed_bilingual_models, lang);
 
-    _.each( _.merge(dept_footnotes, tag_footnotes), (file_str,subj_id) => {
+    _.each( _.merge(dept_footnotes, tag_footnotes), (file_str, subj_id) => {
       fs.writeFileSync(
         `${footnotes_dir}/fn_${lang}_${subj_id}.json.js`,
         file_str
@@ -277,7 +279,7 @@ function build_proj(PROJ){
 
   copy_file_to_target_dir(svg_path, dir);
 
-  ['png', 'js','csv'].forEach(function(type){
+  ['png', 'js', 'csv'].forEach(function(type){
     var this_dir = dir+'/'+type;
     make_dir_if_exists(this_dir);
     PROJ[type].forEach( f_name => copy_file_to_target_dir(f_name, this_dir) );
