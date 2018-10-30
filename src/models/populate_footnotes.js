@@ -23,7 +23,7 @@ function populate_footnotes_info(csv_str){
       footnote,
     } = obj;
 
-    const glossary_keys = topic_keys.split(",").map(key=> key.replace(" ",""));
+    const split_topic_keys = topic_keys.split(",").map( key => key.replace(" ","") );
     
     const year1 = fyear1.split("-")[0];
     const year2 = fyear2.split("-")[0];
@@ -34,25 +34,25 @@ function populate_footnotes_info(csv_str){
     );
 
     if (subject_id !== '*'){
-      
       const subject = Subject[subject_class].lookup(subject_id);
+      
       FootNote.create_and_register({
         id: obj.id,
         subject,
         year1,
         year2,
-        glossary_keys,
+        topic_keys: split_topic_keys,
         text,
       }); 
     } else {
-
       const actual_subject_class = Subject[subject_class];
+
       FootNote.create_and_register({
         id,
         subject: actual_subject_class,
         year1,
         year2,
-        glossary_keys,
+        topic_keys: split_topic_keys,
         text,
       });
     }

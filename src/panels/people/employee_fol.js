@@ -84,7 +84,7 @@ const calculate_funcs_by_level = {
       } else {
         required_footnotes = _.filter(
           footnotes,
-          footnote => !_.some(footnote.glossary_keys, key => key === "SUPPRESSED_DATA")
+          footnote => !_.some(footnote.topic_keys, key => key === "SUPPRESSED_DATA")
         )
       }
 

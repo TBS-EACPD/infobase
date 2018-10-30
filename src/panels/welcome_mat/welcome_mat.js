@@ -719,7 +719,7 @@ function render({calculations, footnotes, sources}){
   //remove DRR_FTE and DRR_EXP footnotes (pipeline will handle this later)
   let new_footnotes = _.filter(
     footnotes,
-    ({glossary_keys}) => _.chain(glossary_keys)
+    ({topic_keys}) => _.chain(topic_keys)
       .intersection(["DRR_FTE", "DRR_EXP"])
       .isEmpty()
       .value()

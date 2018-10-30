@@ -107,8 +107,8 @@ class FootnoteInspector extends React.Component {
     const { level, footnote_concept_keys }  = graph_obj;
 
     return _.chain(this.all_footnotes)
-      .filter( ({subject, subject_class, glossary_keys}) => (
-        _.intersection(footnote_concept_keys,glossary_keys).length > 0
+      .filter( ({subject, subject_class, topic_keys}) => (
+        _.intersection(footnote_concept_keys, topic_keys).length > 0
         && (
           subject && subject.level === level ||
           subject_class && subject_class.type_name === level
@@ -122,7 +122,7 @@ class FootnoteInspector extends React.Component {
   get_all_footnotes_for_concept(concept_key){
 
     return _.chain(this.all_footnotes)
-      .filter( ({subject, subject_class, glossary_keys}) => _.includes(glossary_keys,concept_key))
+      .filter( ({subject, subject_class, topic_keys}) => _.includes(topic_keys, concept_key))
       .groupBy(({subject, subject_class}) => subject_label({subject, subject_class}) )
       .toPairs()
       .sortBy( ([key,val]) => key )
