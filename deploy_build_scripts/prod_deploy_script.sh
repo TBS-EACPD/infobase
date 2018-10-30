@@ -21,6 +21,9 @@ gcloud auth activate-service-account --key-file=$scratch/key.json
 gcloud config set project infobase-prod
 gcloud config set compute/zone northamerica-northeast1-a
 
+#make sure node_modules is in-line with package-lock.json
+npm ci
+
 #build everything
 ./deploy_build_scripts/build_all.sh
 
