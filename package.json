@@ -92,8 +92,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "debug_IB_base": "node --inspect-brk build_code/copy_static_assets.js IB",
-    "IB_base": "node build_code/copy_static_assets.js IB && echo ' bundling extended bootstrap css... \n' && node build_code/bundle_extended_bootstrap_css.js",
+    "debug_IB_base": "node --inspect-brk build_code/copy_static_assets.js",
+    "IB_base": "node build_code/copy_static_assets.js",
     "bundle_bootstrap": "node build_code/bundle_extended_bootstrap_css.js",
     "IB_dev": "node build_code/webpack_starter.js main_client BOTH",
     "IB_dev_en": "node build_code/webpack_starter.js main_client",

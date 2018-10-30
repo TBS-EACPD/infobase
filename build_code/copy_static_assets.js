@@ -14,6 +14,7 @@ global._ = _; //global is the 'window' on the node environment
 
 const { write_result_bundles } = require('./write_result_bundles.js');
 const { get_footnote_file_defs } = require('./write_footnote_bundles.js');
+const { bundle_extended_bootstrap_css } = require('./bundle_extended_bootstrap_css.js');
 const { index_lang_lookups } = require("../src/InfoBase/index_data.js");
 
 /*
@@ -296,6 +297,9 @@ function build_proj(PROJ){
   });
 
   console.log("\n done copying static assets \n");
+
+  console.log("\n bundling extended bootstrap css... \n");
+  bundle_extended_bootstrap_css(app_dir);
 };
 
 
