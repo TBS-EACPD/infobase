@@ -11,7 +11,7 @@ function cleanup {
 }
 trap cleanup EXIT
 
-export BUILD_DIR="prod_build"
+export BUILD_DIR="build_prod"
 export CDN_URL="https://cdn-rdc.ea-ad.ca/InfoBase"
 export GCLOUD_BUCKET_URL="gs://cdn-rdc.ea-ad.ca/InfoBase"
 

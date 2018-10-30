@@ -29,6 +29,7 @@ tests/*test.build.js
 /src/mako/mako/*
 /src/playground/
 /build
+/build_prod
 .vscode/
 build_LED
 watch
