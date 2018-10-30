@@ -56,15 +56,15 @@ const sources = _.mapValues({
     ix: 1,
     description(){ return desc_from_gloss_keys("PA") },
     title(){ return tm("pa_title" )},
+    frequency: frequencies.y,
     last_updated: { month: 10, year: 2018 },
     open_data: infobase_open_data_page,
-    frequency: frequencies.y,
     report_link:{
       en: "http://www.tpsgc-pwgsc.gc.ca/recgen/cpc-pac/index-eng.html",
       fr: "http://www.tpsgc-pwgsc.gc.ca/recgen/cpc-pac/index-fra.html",
     },
     items(){ 
-      return  _.map(
+      return _.map(
         tables_from_source_key("PA"),
         table_to_row_item
       );
@@ -74,14 +74,14 @@ const sources = _.mapValues({
     ix: 4,
     description(){ return desc_from_gloss_keys("QFR") },
     title(){ return tm("qfr_title" )},
-    last_updated: { month: 11, year: 2017 },
     frequency: frequencies.q,
+    last_updated: { month: 11, year: 2017 },
     report_link:{
       en: "https://www.canada.ca/en/treasury-board-secretariat/services/reporting-government-spending/quarterly-financial-reporting.html",
       fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/etablissement-rapports-depenses/rapports-financiers-trimestriels.html",
     },
     items(){ 
-      return  _.map(
+      return _.map(
         tables_from_source_key("QFR"),
         table_to_row_item
       );
@@ -90,16 +90,16 @@ const sources = _.mapValues({
   ESTIMATES: {
     ix: 2,
     description(){ return desc_from_gloss_keys("MAINS", "SUPPS") },
-    title(){ return tm("estimates_title" )},
+    title(){ return tm("estimates_title" ) },
+    frequency: frequencies.q,
     last_updated: { month: 4, year: 2018 },
     open_data: infobase_open_data_page,
-    frequency: frequencies.q,
     report_link:{
       en: "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates.html",
       fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal.html",
     },
     items(){ 
-      return  _.map(
+      return _.map(
         tables_from_source_key("ESTIMATES"),
         table_to_row_item
       );
@@ -108,7 +108,7 @@ const sources = _.mapValues({
   CFMRS: {
     ix: 3,
     description(){ return desc_from_gloss_keys("CFMRS") },
-    title(){ return tm("cfmrs_title" )},
+    title(){ return tm("cfmrs_title" ) },
     last_updated: { month: 10, year: 2017 },
     open_data: {
       en: "http://open.canada.ca/data/en/dataset/5e6dcf6b-dbed-4b51-84e5-1f4926ad7fdf",
@@ -116,7 +116,7 @@ const sources = _.mapValues({
     },
     frequency: frequencies.y,
     items(){ 
-      return  _.map(
+      return _.map(
         tables_from_source_key("CFMRS"),
         table_to_row_item
       );
@@ -125,11 +125,11 @@ const sources = _.mapValues({
   RPS: {
     description(){ return desc_from_gloss_keys("PEOPLE_DATA") },
     ix: 0,
-    title(){ return tm("rps_title" )},
-    last_updated: { month: 10, year: 2018 },
+    title(){ return tm("rps_title" ) },
     frequency: frequencies.y,
+    last_updated: { month: 10, year: 2018 },
     items(){ 
-      return  _.map(
+      return _.map(
         tables_from_source_key("RPS"),
         table_to_row_item
       );
@@ -137,16 +137,16 @@ const sources = _.mapValues({
   },
   DP: {
     description(){ return desc_from_gloss_keys("DP") },
-    title(){ return tm("dp_title")},
+    title(){ return tm("dp_title") },
     frequency: frequencies.y,
     last_updated: { month: 4, year: 2018 },
-    report_link: infobase_open_data_page,
-    open_data: {
-      en: "http://open.canada.ca/data/en/dataset/e03ef931-c096-4710-bc4a-1fcd0cc0ea00",
-      fr: "http://ouvert.canada.ca/data/fr/dataset/e03ef931-c096-4710-bc4a-1fcd0cc0ea00",
+    open_data: infobase_open_data_page,
+    report_link: {
+      en: "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities.html",
+      fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites.html",
     },
     items(){ 
-      return  _.map(
+      return _.map(
         tables_from_source_key("DP"),
         table_to_row_item
       ).concat([{
@@ -159,17 +159,17 @@ const sources = _.mapValues({
     title(){ return tm("drr_title")},
     description(){ return desc_from_gloss_keys("DRR") },
     frequency: frequencies.y,
-    last_updated: { month: 11, year: 2017} ,
-    report_link: {
-      en: "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html",
-      fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement.html",
-    },
+    last_updated: { month: 11, year: 2017},
     open_data: {
       en: "http://open.canada.ca/data/en/dataset/311842ca-7958-40fa-8e31-12d11c6223e3",
       fr: "http://ouvert.canada.ca/data/fr/dataset/311842ca-7958-40fa-8e31-12d11c6223e3",
     },
+    report_link: {
+      en: "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html",
+      fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement.html",
+    },
     items(){ 
-      return  _.map(
+      return _.map(
         tables_from_source_key("DRR"),
         table_to_row_item
       ).concat([{
@@ -179,8 +179,8 @@ const sources = _.mapValues({
     },
   }, 
   IGOC: {
-    title(){ return tm("igoc_source_title")},
-    description(){ return tm("igoc_source_desc"); },
+    title(){ return tm("igoc_source_title") },
+    description(){ return tm("igoc_source_desc") },
     frequency: frequencies.y,
     last_updated: { month: 11, year: 2017 },
     open_data: {
