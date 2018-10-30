@@ -242,7 +242,7 @@ result_statuses:
     en: Result not reported
     fr: DRRTODO
   ongoing:
-    en: Ongoing or to be achieved after March 31, 2018
+    en: Result to be achieved in the future
     fr: DRRTODO
 
 result_simple_statuses:
@@ -256,7 +256,7 @@ result_simple_statuses:
     en: Not reported
     fr: DRRTODO
   ongoing:
-    en: Ongoing
+    en: Result to be achieved
     fr: DRRTODO
 
 months:
