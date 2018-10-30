@@ -239,7 +239,7 @@ result_statuses:
     en: Target not met
     fr: DRRTODO
   not_reported:
-    en: Actual result not reported
+    en: Result not reported
     fr: DRRTODO
   ongoing:
     en: Ongoing or to be achieved after March 31, 2018
