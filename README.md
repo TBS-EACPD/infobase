@@ -1,6 +1,6 @@
 GC InfoBase
 ========
-The GC InfoBase is an interactive data-visualization tool, transforming complex federal data into simple visual stories for Canadians. The live site can be found (here)[https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-eng.html], where our (about page)[https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-eng.html#about] contains further details on who we are and what we do.
+The GC InfoBase is an interactive data-visualization tool, transforming complex federal data into simple visual stories for Canadians. The live site can be found [here](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-eng.html), where our [about page](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-eng.html#about) contains further details on who we are and what we do.
 
 ## Table of Contents
 - [Getting Started](#getting-started)
