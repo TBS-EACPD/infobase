@@ -369,6 +369,10 @@ class Indicator {
       .uniqBy('id')
       .value();
   }
+  //dont use this on multiple indicators, it'll be super slow!
+  get _result(){
+    return Result.lookup(this.result_id)
+  }
 
 }
 const status_key_to_icon_key = {
