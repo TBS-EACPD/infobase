@@ -42,8 +42,7 @@ Note: these are slow, have fairly basic coverage, and are run by CI after each p
 
 ## TODOs
 
-Some TODO's not worth moving to issues right now
----------------------
+Some TODO's not worth moving to issues right now:
 * move all global variables into a namespace
 * swap out core/stat.js for something a more standardized, 
   there must be a JS library that calculates basic stats 
