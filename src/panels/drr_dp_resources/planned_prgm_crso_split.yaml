@@ -4,7 +4,7 @@ planned_prgm_crso_split_title:
    {{planning_year_1}} Planned Spending by Program
   
   fr: |
-   {{planning_year_1}} Dépenses par programme
+   {{planning_year_1}} Dépenses de programmes
 
 planned_prgm_crso_split_text:
   transform: [handlebars,markdown]

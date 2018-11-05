@@ -1,7 +1,7 @@
 detailed_program_spending_split_title:
   transform: [handlebars]
   en: Program Spending
-  fr: Dépenses par programme
+  fr: Dépenses de programmes
 
 
 so_spend_by_prog:
@@ -42,12 +42,12 @@ dept_historical_program_spending_text:
    {{/if}}
 
   fr: |
-   Chaque ministère ou organisme a la responsabilité d’un certain nombre de programmes.
+   Chaque organisation a la responsabilité d’un certain nombre de programmes.
    {{#if dept_prg_top2}} En {{pa_last_year}}, **{{subj_name dept}}** comptait **{{dept_prg_num}}** programmes.
-   Durant cet exercice, le plus important programme en termes de dépenses nettes était «**{{fmt_compact1_written dept_prg_top1}}**» (**{{fmt_compact1_written dept_prg_top1_amnt}}**),
-   suivi de «**{{fmt_compact1_written dept_prg_top2}}**» (**{{fmt_compact1_written dept_prg_top2_amnt}}**). Durant les cinq dernières années, {{fmt_compact1_written dept_prg_top1}} a dépensé en moyenne {{fmt_compact1_written dept_prg_five_year_top_avg}}.
+   Durant cet exercice, le plus important programme en termes de dépenses nettes était « **{{fmt_compact1_written dept_prg_top1}}** » (**{{fmt_compact1_written dept_prg_top1_amnt}}**),
+   suivi de « **{{fmt_compact1_written dept_prg_top2}}** » (**{{fmt_compact1_written dept_prg_top2_amnt}}**). Durant les cinq dernières années, {{fmt_compact1_written dept_prg_top1}} a dépensé en moyenne {{fmt_compact1_written dept_prg_five_year_top_avg}}.
    {{else}} En {{pa_last_year}}, **{{le_dept dept}}** comptait **{{dept_prg_num}}** programme. Durant cet exercice, le plus important programme était
-   _**{{fmt_compact1_written dept_prg_top1}}**_ (**{{fmt_compact1_written dept_prg_top1_amnt}}**).Durant les cinq dernières années, {{fmt_compact1_written dept_prg_top1}} a dépensé en moyenne {{fmt_compact1_written dept_prg_five_year_top_avg}}.
+   _**{{fmt_compact1_written dept_prg_top1}}**_ (**{{fmt_compact1_written dept_prg_top1_amnt}}**). Depuis cinq ans, « **{{fmt_compact1_written dept_prg_top1}}** » a dépensé en moyenne {{fmt_compact1_written dept_prg_five_year_top_avg}}.
    {{/if}}
 
 
@@ -60,7 +60,7 @@ tag_Progam_activity_spending_text:
    {{else}} In {{pa_last_year}}, **{{subj_name subject}}** had **{{tag_prg_num}}** program: **{{tag_prg_top1}}**, with recorded expenditures of **{{fmt_compact1_written tag_prg_top1_amnt}}**. In the past five years, 
    {{fmt_compact1_written tag_prg_top1}} spent on average {{fmt_compact1_written tag_prg_five_year_top_avg}}{{/if}}
   fr: |
-   {{#if tag_prg_top2}} En {{pa_last_year}}, **{{tag_prg_num}}** programmes étaient liés à l’étiquette «**{{subj_name subject}}**». Durant cette période, le programme le plus important était **{{tag_prg_top1}}** (**{{fmt_compact1_written tag_prg_top1_amnt}}**), suivi de **{{fmt_compact1_written tag_prg_top2}}** (**{{fmt_compact1_written tag_prg_top2_amnt}}**). Durant les cinq dernières années, {{fmt_compact1_written tag_prg_top1}} a dépensé en moyenne {{fmt_compact1_written tag_prg_five_year_top_avg}}
+   {{#if tag_prg_top2}} En {{pa_last_year}}, **{{tag_prg_num}}** programmes étaient liés à l’étiquette « **{{subj_name subject}}** ». Durant cette période, le programme le plus important était **{{tag_prg_top1}}** (**{{fmt_compact1_written tag_prg_top1_amnt}}**), suivi de **{{fmt_compact1_written tag_prg_top2}}** (**{{fmt_compact1_written tag_prg_top2_amnt}}**). Durant les cinq dernières années, {{fmt_compact1_written tag_prg_top1}} a dépensé en moyenne {{fmt_compact1_written tag_prg_five_year_top_avg}}
    {{else}} En {{pa_last_year}}, l’étiquette **{{subj_name subject}}** était lié à **{{tag_prg_num}}** programme : **{{tag_prg_top1}}** qui a eu des dépenses de (**{{fmt_compact1_written tag_prg_top1_amnt}}**).   Durant les cinq dernières années, {{fmt_compact1_written tag_prg_top1}} a dépensé en moyenne {{fmt_compact1_written tag_prg_five_year_top_avg}}{{/if}}  
 
 

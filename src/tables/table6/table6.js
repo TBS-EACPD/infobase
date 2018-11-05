@@ -26,7 +26,7 @@ export default {
 
 
   "name": { "en": "Spending by Program",
-    "fr": "Dépenses par programme",
+    "fr": "Dépenses de programmes",
   },
 
   "title": { "en": "Authorities, Expenditures and Planned Spending by Program from {{pa_last_year_5}} to {{planning_year_3}} ($000)",
