@@ -1,7 +1,7 @@
 historical_auth_exp_title:
   transform: [handlebars]
   en: Authorities and Expenditures ({{pa_last_year_5}} to {{pa_last_year}})
-  fr: Utilisation des autorisations parlementaires ({{pa_last_year_5}} à {{pa_last_year}})
+  fr: Autorisations et dépenses ({{pa_last_year_5}} à {{pa_last_year}})
   
 program_historical_auth_exp_text:
   transform: [handlebars,markdown]
@@ -38,8 +38,6 @@ tag_historical_auth_exp_text:
 
 
 
-
-
 gov_historical_auth_exp_text:
   transform: [handlebars,markdown]
   en: |
@@ -63,7 +61,6 @@ dept_historical_auth_exp_text:
    
 
    Over the last five years, **{{subj_name dept}}** has spent an average of **{{fmt_compact1_written dept_hist_diff_average}}** less per year than what had been authorized by Parliament. On average, unused authorities represented **{{fmt_percentage1 dept_hist_avg_tot_pct}}** of approved authorities.
-
 
   fr: |
    L'autorisation parlementaire de dépenser expire habituellement à la fin de l'exercice. Par exemple, pour la plupart des organisations, les autorisations approuvées au moyen des lois de crédits pour {{pa_last_year}} ont expiré le {{pa_last_year_end_ticks}}. 

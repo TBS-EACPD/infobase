@@ -67,12 +67,12 @@ dept_historical_g_and_c_text:
    Of these payments, **{{dept_tp_exp_top}}** accounted for the largest share with an average of **{{fmt_compact1_written dept_tp_exp_top_avg}}** in spending per year.
 
   fr: |
-   Au cours des cinq derniers exercices ({{pa_last_year_5}} à {{pa_last_year}}), **{{le_dept dept}}** a dépensé en moyenne **{{fmt_compact1_written dept_tp_exp_average}}** en {{gl_tt "paiements de transfert" "TP"}}
-   par année. Durant cette même période, le plus important type de paiements de transfert a été **{{fmt_compact1_written dept_tp_type_exp_top}}**, avec des dépenses annuelles moyennes
+   Au cours des cinq derniers exercices ({{pa_last_year_5}} à {{pa_last_year}}), **{{le_dept dept}}** a dépensé en moyenne **{{fmt_compact1_written dept_tp_exp_average}}** par an en {{gl_tt "paiements de transfert" "TP"}}.
+   Durant cette même période, les **{{fmt_compact1_written dept_tp_type_exp_top}}** ont constitué le plus important type de paiements de transfert, avec des dépenses annuelles moyennes
    de **{{fmt_compact1_written dept_tp_type_exp_top_avg}}**.
 
 
-   De {{pa_last_year_5}} à {{pa_last_year}}, le plus important paiement de transfert pour **{{subj_name subject}}** était **{{fmt_compact1_written dept_tp_exp_top}}**, avec des dépenses annuelles moyennes 
+   De {{pa_last_year_5}} à {{pa_last_year}}, le plus important paiement de transfert pour **{{subj_name subject}}** était constitué de **{{fmt_compact1_written dept_tp_exp_top}}**, avec des dépenses annuelles moyennes 
    de **{{fmt_compact1_written dept_tp_exp_top_avg}}**.
 historical_g_and_c_custom_new_row:
   transform: [handlebars]
