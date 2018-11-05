@@ -3,7 +3,7 @@ drr_summary_title:
   en: |
     {{pa_last_year}} Department Results Report Summary
   fr: |
-    Sommaire du Rapport sur les résultats ministériels de {{pa_last_year}}
+    Sommaire des rapports sur les résultats ministériels de {{pa_last_year}}
 
 
 # this a multi-level text 
@@ -27,18 +27,17 @@ drr_summary_text:
     
   fr: |
     {{#if is_gov}}
-      En {{pa_last_year}}, **{{num_depts}}** organisations qui devaient produire un {{gl_tt "Rapport sur les résultats ministériel" "DR"}} ont cherché à rencontrer **{{drr16_results}}** résultats.
-       Les progrès accomplis dans l'atteinte de ces résultats ont été mesurés au moyen de **{{drr16_total}}** {{gl_tt "indicateurs" "IND_RESULT"}}. 
+      En {{pa_last_year}}, les **{{num_depts}}** organisations qui devaient produire un {{gl_tt "rapport sur les résultats ministériel" "DR"}} ont cherché à obtenir **{{drr16_results}}** résultats.
     {{else}}
       En {{pa_last_year}}, {{subj_name subject}} a cherché à atteindre **{{drr16_results}}** résultats.
-      Les progrès accomplis dans l'atteinte de ces résultats ont été mesurés au moyen de **{{drr16_total}}** {{gl_tt "indicateurs" "IND_RESULT"}}. 
     {{/if}}
+    Les progrès accomplis dans l'atteinte de ces résultats ont été mesurés à l’aide de **{{drr16_total}}** {{gl_tt "indicateurs" "IND_RESULT"}}. 
 
     {{#if drr16_past_total}} De ces indicateurs: {{/if}}
     {{#if drr16_future_total}}{{#unless  drr16_past_total}} De ces indicateurs: {{/unless}}{{/if}}
 
-    {{#if drr16_past_total}} * **{{drr16_indicators_past_success}}** des **{{drr16_past_total}}** (ou **{{fmt_percentage1 (divide drr16_indicators_past_success drr16_past_total)}}**) cibles qui devaient être atteintes au plus tard le 31 mars 2017 ont été {{gl_tt "atteintes" "RESULTS_MET"}}. {{/if}}
-    {{#if drr16_future_total}} * **{{drr16_indicators_future_success}}** des **{{drr16_future_total}}** (ou **{{fmt_percentage1 (divide drr16_indicators_future_success drr16_future_total)}}**) cibles récurrentes ou dont la date-butoir est ultérieure au 31 mars 2017 sont {{gl_tt "en voie d'être atteintes" "RESULTS_OT"}}. {{/if}}
+    {{#if drr16_past_total}} * **{{drr16_indicators_past_success}}** des **{{drr16_past_total}}** cibles(**{{fmt_percentage1 (divide drr16_indicators_past_success drr16_past_total)}}**) qui devaient être atteintes au plus tard le 31 mars 2017 ont été {{gl_tt "atteintes" "RESULTS_MET"}}. {{/if}}
+    {{#if drr16_future_total}} * **{{drr16_indicators_future_success}}** des **{{drr16_future_total}}** cibles récurrentes (**{{fmt_percentage1 (divide drr16_indicators_future_success drr16_future_total)}}**) ou dont la date-butoir est ultérieure au 31 mars 2017 sont {{gl_tt "en voie d'être atteintes" "RESULTS_OT"}}. {{/if}}
 
 gov_drr_summary_org_table_text:
   transform: [handlebars,markdown]
@@ -82,4 +81,5 @@ results_icon_array_title:
   transform: [handlebars]
   en: |
     {{pa_last_year}} Performance Indicators
-  fr: Indicateurs de performance {{pa_last_year}}
+  fr: |
+    Indicateurs de rendement de {{pa_last_year}}
