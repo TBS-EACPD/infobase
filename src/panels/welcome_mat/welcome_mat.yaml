@@ -283,9 +283,9 @@ program_welcome_mat_spending_summary:
    {{will_change_by  exp_plan_change "fmt_percentage1"}}
    by {{planning_year_3}}.
   fr: |
-   Au cours des cinq dernières années, les dépenses totales pour «**{{subj_name subject}}**» 
+   Au cours des cinq dernières années, les dépenses totales pour « **{{subj_name subject}}** » 
    {{fr_changed_by  exp_hist_change  "f" "p" "fmt_percentage1"  }}.
-   D'ici {{planning_year_3}}, les dépenses prévues
+   D'ici à {{planning_year_3}}, les dépenses prévues
    {{fr_will_change_by  exp_plan_change "f" "p"  "fmt_percentage1"  }}.
                                                                
 tag_welcome_mat_spending_summary:

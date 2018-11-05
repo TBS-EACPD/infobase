@@ -16,7 +16,7 @@ goco_t:
 
 gocographic_title:
   en: Government of Canada Spending Areas
-  fr: Secteur de dépenses du gouvernement du Canada.
+  fr: Secteurs de dépenses du gouvernement du Canada.
 
 
 goco_intro_text:
@@ -29,10 +29,10 @@ goco_intro_text:
    To further explore a particular spending area, click on its name to expand the graph and discover what {{gl_tt "Government of Canada Activities" "GOCA"}} are included.
   fr: |
    En {{pa_last_year}}, le gouvernement fédéral a dépensé **{{fmt_compact1_written spending}}** et employé **{{fmt_big_int_real ftes}}** {{gl_tt "équivalents temps plein" "FTE"}}. 
-   Le secteur de dépenses le plus important était **{{max_sa}}** avec **{{fmt_percentage1 max_sa_share}}** des dépenses totales du gouvernement. 
+   Le secteur de dépenses le plus important était celui des **{{max_sa}}** qui représentait **{{fmt_percentage1 max_sa_share}}** des dépenses totales du gouvernement. 
 
 
-   Pour explorer plus en détail un secteur en particulier, cliquez sur son nom pour développer le graphique et découvrir quelles {{gl_tt "activités du gouvernement du Canada" "GOCA"}} sont comprises.
+   Pour explorer plus en détail un secteur de dépenses en particulier, cliquez sur son nom pour agrandir le graphique et découvrir les {{gl_tt "activités du gouvernement du Canada" "GOCA"}} qui y sont incluses.
 
 goco_accessible_note:
   en: This panel contains an interactive visualization. To see an accessible plain table, follow one of the following links.

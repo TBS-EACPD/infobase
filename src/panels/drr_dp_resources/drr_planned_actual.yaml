@@ -1,18 +1,18 @@
 drr_planned_actual_title:
   transform: [handlebars]
   en: Planned and Actual Resources ({{pa_last_year}} Departmental Results Reports)
-  fr: Ressources prévues et actuelles ({{pa_last_year}} Rapport sur les résultats ministériels)
+  fr: Ressources prévues et réelles (rapports sur les résultats ministériels de {{pa_last_year}})
 
 dept_drr_planned_actual_text:
   transform: [handlebars, markdown]
   en: |
-    In {{pa_last_year}}, {{subj_name subject}} planned to spend **{{fmt_compact1 planned_spend}}** and employ **{{fmt_big_int_real planned_ftes}}** {{gl_tt "full-time equivalents (FTE)" "FTE"}}. It actually spent {{fmt_compact1 actual_spend}} and employed {{fmt_big_int_real actual_ftes}} FTEs.
+    In {{pa_last_year}}, {{subj_name subject}} planned to spend **{{fmt_compact1_written planned_spend}}** and employ **{{fmt_big_int_real planned_ftes}}** {{gl_tt "full-time equivalents (FTE)" "FTE"}}. It actually spent {{fmt_compact1_written actual_spend}} and employed {{fmt_big_int_real actual_ftes}} FTEs.
   fr: |
-    En {{pa_last_year}}, {{subj_name subject}} avait prévu dépenser **{{fmt_compact1 planned_spend}}** et employer **{{fmt_big_int_real planned_ftes}}** {{gl_tt "équivalents temps plein (ETP)" "FTE"}}. L'organisation a réellement dépensé **{{fmt_compact1 actual_spend}}** et employé **{{fmt_big_int_real actual_ftes}}** ETPs.
+    En {{pa_last_year}}, {{subj_name subject}} prévoyait dépenser **{{fmt_compact1_written planned_spend}}** et employer **{{fmt_big_int_real planned_ftes}}** {{gl_tt "équivalents temps plein (ETP)" "FTE"}}. En fait, l'organisation a dépensé **{{fmt_compact1_written actual_spend}}** et employé **{{fmt_big_int_real actual_ftes}}** ETP.
 
 program_drr_planned_actual_text:
   transform: [handlebars, markdown]
   en: |
-    In {{pa_last_year}}, the **{{subj_name subject}}** program planned to spend **{{fmt_compact1 planned_spend}}** and employ **{{fmt_big_int_real planned_ftes}}** {{gl_tt "full-time equivalents (FTE)" "FTE"}}. It actually spent **{{fmt_compact1 actual_spend}}** and employed **{{fmt_big_int_real actual_ftes}}** FTEs.
+    In {{pa_last_year}}, the **{{subj_name subject}}** program planned to spend **{{fmt_compact1_written planned_spend}}** and employ **{{fmt_big_int_real planned_ftes}}** {{gl_tt "full-time equivalents (FTE)" "FTE"}}. It actually spent **{{fmt_compact1_written actual_spend}}** and employed **{{fmt_big_int_real actual_ftes}}** FTEs.
   fr: |
-    En {{pa_last_year}}, le programme **«{{subj_name subject}}»** avait prévu dépenser **{{fmt_compact1 planned_spend}}** et employer **{{fmt_big_int_real planned_ftes}}** {{gl_tt "équivalents temps plein (ETP)" "FTE"}}. Le programme a réellement dépensé **{{fmt_compact1 actual_spend}}** et employé **{{fmt_big_int_real actual_ftes}}** ETPs.
+    En {{pa_last_year}}, le programme **«{{subj_name subject}}»** prévoyait dépenser **{{fmt_compact1_written planned_spend}}** et employer **{{fmt_big_int_real planned_ftes}}** {{gl_tt "équivalents temps plein (ETP)" "FTE"}}. En fait, le programme a dépensé **{{fmt_compact1_written actual_spend}}** et employé **{{fmt_big_int_real actual_ftes}}** ETP.

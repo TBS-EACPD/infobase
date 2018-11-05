@@ -31,9 +31,9 @@ personnel_spend_text:
    During this five-year time frame, the highest annual expenditure on Personnel was **{{fmt_compact1_written gov_personnel_max}}**, recorded in {{fmt_compact1_written gov_personnel_max_year}}.
    The lowest annual expenditure was **{{fmt_compact1_written gov_personnel_min}}**, recorded in {{fmt_compact1_written gov_personnel_min_year}}.
   fr: |
-   Une autre partie importante des dépenses budgétaires du gouvernement s'explique par les {{gl_tt "dépenses en personnel" "SOBJ1"}}. 
-   Au cours des cinq derniers exercices, le gouvernement a dépensé en moyenne **{{fmt_compact1_written gov_personnel_average}}** par année sur cet {{gl_tt "article courant" "SOBJ"}} de dépenses. 
+   Une autre partie importante des dépenses budgétaires du gouvernement est consacrée au {{gl_tt "personnel" "SOBJ1"}}. 
+   Au cours des cinq derniers exercices, le gouvernement a dépensé en moyenne **{{fmt_compact1_written gov_personnel_average}}** par an pour cet {{gl_tt "article courant" "SOBJ"}}. 
 
 
-   Au cours de cette période quinquennale, les dépenses annuelles de personnel les plus élevées ont été engagées en {{fmt_compact1_written gov_personnel_max_year}} et se sont chiffrées 
-   à **{{fmt_compact1_written gov_personnel_max}}**. Les dépenses annuelles les moins élevées ont été engagées en {{fmt_compact1_written gov_personnel_min_year}} et étaient de **{{fmt_compact1_written gov_personnel_min}}**.
+   Au cours de cette période quinquennale, les dépenses annuelles les plus élevées en personnel ont été engagées en {{fmt_compact1_written gov_personnel_max_year}} et se sont chiffrées 
+   à **{{fmt_compact1_written gov_personnel_max}}**. Les dépenses annuelles les plus faibles étaient de **{{fmt_compact1_written gov_personnel_min}}** et ont été engagées en {{fmt_compact1_written gov_personnel_min_year}}.

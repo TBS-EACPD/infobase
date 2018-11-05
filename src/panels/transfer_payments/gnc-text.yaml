@@ -37,17 +37,17 @@ gov_historical_g_and_c_text:
    average of **{{fmt_compact1_written gov_tp_type_exp_top_avg}}** in spending per year.
 
   fr: |
-   Les {{gl_tt "paiements de transfert" "TP"}} constituent une part importante des dépenses gouvernementales. Au cours des cinq derniers exercices, 
-   le gouvernement a dépensé en moyenne **{{fmt_compact1_written gov_tp_exp_average}}** en paiements de transfert par année. On peut regrouper les paiements de transfert en trois catégories, 
-   soit les {{gl_tt "subventions" "GRANT_TP"}}, les {{gl_tt "contributions" "CONT_TP"}} et les {{gl_tt "autres paiements de transfert" "OTHER_TP"}}. 
+   Les {{gl_tt "paiements de transfert" "TP"}} sont une part importante des dépenses gouvernementales. Au cours des cinq derniers exercices financiers, 
+   le gouvernement a dépensé en moyenne **{{fmt_compact1_written gov_tp_exp_average}}** par an en paiements de transfert. Les paiements de transfert peuvent être classés en trois catégories :
+   « {{gl_tt "subventions" "GRANT_TP"}} », « {{gl_tt "contributions" "CONT_TP"}} » et « {{gl_tt "autres paiements de transfert" "OTHER_TP"}} ».
 
 
-   De {{pa_last_year_5}} à {{pa_last_year}}, le plus important type de paiements de transfert gouvernementaux a été **{{fmt_compact1_written gov_tp_type_exp_top}}**, avec une moyenne de **{{fmt_compact1_written gov_tp_type_exp_top_avg}}** de dépenses par année.
+   De {{pa_last_year_5}} à {{pa_last_year}}, type de transfert le plus important a été « **{{fmt_compact1_written gov_tp_type_exp_top}}** », avec une moyenne de **{{fmt_compact1_written gov_tp_type_exp_top_avg}}** de dépenses par an.
 
 historical_g_and_c_title:
   transform: [handlebars]
   en: Transfer Payments Expenditures ({{pa_last_year_5}} to {{pa_last_year}})
-  fr: Dépenses des paiements de transfert ({{pa_last_year_5}} à {{pa_last_year}})
+  fr: Dépenses en paiements de transfert ({{pa_last_year_5}} à {{pa_last_year}})
 
 historical_g_and_c_detailed_title:
   transform: [handlebars]
