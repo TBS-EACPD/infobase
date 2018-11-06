@@ -1,5 +1,6 @@
-import { text_maker, TM } from './intro_graph_text_provider.js';
 import classNames from 'classnames';
+import { Fragment } from 'react';
+import { text_maker, TM } from './intro_graph_text_provider.js';
 import { 
   Subject, 
   PanelGraph, 
@@ -7,6 +8,7 @@ import {
   util_components, 
 } from '../shared';
 import { WellList } from './WellList.js';
+import { HierarchyDeadElementIcon } from './hierarchy_component.js';
 import { infograph_href_template } from '../../link_utils.js';
 
 const { Dept, Tag, Program } = Subject;
@@ -121,13 +123,16 @@ new PanelGraph({
           .sortBy('dead_program')
           .map(prog => ({
             display: (
-              <span className={classNames(prog.dead_program && 'dead-element')}>
-                <a 
-                  href={infograph_href_template(prog)}
-                > 
-                  {prog.name}
-                </a>
-              </span>
+              <Fragment>
+                { prog.dead_program && <HierarchyDeadElementIcon /> }
+                <span className={classNames(prog.dead_program && 'dead-element')}>
+                  <a 
+                    href={infograph_href_template(prog)}
+                  > 
+                    {prog.name}
+                  </a>
+                </span>
+              </Fragment>
             ),
           }))
           .value(),
@@ -141,8 +146,11 @@ new PanelGraph({
         <div className="col-md-10 col-md-offset-1">
           <HeightClipper clipHeight={250} allowReclip={true}>
             <WellList elements={list_args} />
-            { _.some(subject.programs, 'dead_program') && 
-              <TM k="hierarchy_contains_dead_elements" />
+            { _.some(subject.programs, 'dead_program') &&
+              <Fragment>
+                <HierarchyDeadElementIcon />
+                <TM k="hierarchy_contains_dead_elements" />
+              </Fragment>
             }
           </HeightClipper>
         </div>
