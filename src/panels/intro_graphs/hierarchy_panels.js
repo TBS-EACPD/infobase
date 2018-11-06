@@ -19,7 +19,7 @@ const { HeightClipper } = util_components;
 
 new PanelGraph({
   level: 'dept',
-  key : "portfolio_structure_intro",
+  key: "portfolio_structure_intro",
   footnotes: false,
 
   calculate(subject){
@@ -41,7 +41,7 @@ new PanelGraph({
 
 new PanelGraph({
   level: 'dept',
-  key : "portfolio_structure_related",
+  key: "portfolio_structure_related",
   footnotes: false,
 
   calculate(subject){
@@ -68,7 +68,7 @@ new PanelGraph({
 
 new PanelGraph({
   level: 'program',
-  key : "program_fed_structure",
+  key: "program_fed_structure",
   footnotes: false,
   calculate: _.constant(true),
   render({calculations}){
@@ -95,7 +95,7 @@ new PanelGraph({
 
 new PanelGraph({
   level: 'program',
-  key : "related_program_structure",
+  key: "related_program_structure",
   footnotes: false,
   calculate: _.constant(true),
 
@@ -123,7 +123,7 @@ new PanelGraph({
 
 new PanelGraph({
   level: 'tag',
-  key : "tag_fed_structure",
+  key: "tag_fed_structure",
   footnotes: false,
   calculate: _.constant(true),
 
@@ -147,7 +147,7 @@ new PanelGraph({
 
 new PanelGraph({
   level: 'tag',
-  key : "sibling_tags",
+  key: "sibling_tags",
   footnotes: false,
   calculate: _.constant(true),
 
@@ -172,7 +172,7 @@ new PanelGraph({
 
 new PanelGraph({
   level: 'crso',
-  key : "crso_in_gov",
+  key: "crso_in_gov",
   footnotes: false,
   calculate: _.constant(true),
 
@@ -195,7 +195,7 @@ new PanelGraph({
 
 new PanelGraph({
   level: 'crso',
-  key : "crso_links_to_other_crso",
+  key: "crso_links_to_other_crso",
   footnotes: false,
   calculate: _.constant(true),
 

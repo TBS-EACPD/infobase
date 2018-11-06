@@ -19,9 +19,8 @@ const { Gov } = Subject;
         - How we help
           - Contribution
 
-  
 
-  This component was not designed with government-wide in mind.   
+  This component was not designed with government-wide in mind.
 
 */
 
@@ -32,20 +31,12 @@ const activeStyle = {
   padding: '5px',
 };
 
-const get_style = ({ active, dead}) => {
-  if(active){
-    return activeStyle;
-  }
-  else {
-    return null;
-  }
-};
+const get_style = ({ active, dead}) => active ? activeStyle : null;
     
 const has_dead_elements = root => {
-
   if(root.dead){ 
     return true;
-  } else if(!_.isEmpty(root.children)){
+  } else if( !_.isEmpty(root.children) ){
 
     return _.chain(root.children)
       .map(child => has_dead_elements(child) )
@@ -55,8 +46,6 @@ const has_dead_elements = root => {
   } else {
     return false;
   }
-
-
 }
 
 export const HierarchyPeek = ({root}) => (
@@ -66,7 +55,6 @@ export const HierarchyPeek = ({root}) => (
       has_dead_elements(root) &&
       <TM k="hierarchy_contains_dead_elements" />
     } 
-
   </div>
 );
 
@@ -75,43 +63,52 @@ export const HierarchyPeek = ({root}) => (
 /* Recursive child helper */
 const _HierarchyPeek = ({root}) => (
   <div>
-    { !root.active ?
-    <span className={ classNames(root.dead && 'dead-element') }>
-      { 
-        root.href ? 
-        <a
-          href={root.href} 
+    { 
+      !root.active ?
+        <span className={ classNames(root.dead && 'dead-element') }>
+          { 
+            root.href ? 
+              <a
+                href={root.href} 
+                style={ get_style(root) }
+              >
+                {
+                  root.level === "crso" ? 
+                    (
+                      (root.cr_or_so === "fw" && !root.dead) ? 
+                        (window.lang == "en" ? root.name + " (Core Responsibility) " : root.name + " (Responsabilité Essentielle)" ) :
+                        (window.lang == "en" ? root.name + " (Strategic Outcome)" : root.name + " (Résultat Stratégique)" )
+                    ) : 
+                    root.name
+                } 
+              </a> :
+              <span style={get_style(root)}>
+                {root.name}
+              </span>
+          }
+        </span> : 
+        <span 
           style={ get_style(root) }
+          className={ classNames(root.dead && 'dead-element') }
         >
-          {root.level === "crso" ? 
-            ((root.cr_or_so === "fw" && !root.dead) ? 
-              (window.lang == "en" ? root.name + " (Core Responsibility) " : root.name + " (Responsabilité Essentielle)" )
-            : (window.lang == "en" ? root.name + " (Strategic Outcome)" : root.name + " (Résultat Stratégique)" )) 
-          : root.name} 
-        </a> :
-        <span style={get_style(root)}>
-          {root.name}
+          { root.name }
         </span>
-      }
-    </span> : 
-    <span 
-      style={ get_style(root) }
-      className={ classNames(root.dead && 'dead-element') }
-    >
-      { root.name }
-    </span>
     }
-    {root.children && !_.isEmpty(root.children) &&
-    <ul>
-      {_.map( root.children, (child,index) => 
-        <li key={index}><_HierarchyPeek root={child} /> </li>
-      )}      
-    </ul>
+    { root.children && !_.isEmpty(root.children) &&
+      <ul>
+        {
+          _.map( 
+            root.children, 
+            (child, index) => 
+              <li key={index}> 
+                <_HierarchyPeek root={child} />
+              </li>
+          )
+        }
+      </ul>
     }
   </div>
-
-
-)
+);
 
 
 
@@ -128,8 +125,7 @@ export const org_external_hierarchy = ({ subject, href_generator }) => {
   return {
     name: Gov.name,
     href: href_generator(Gov),
-    children: (
-      _.isEmpty(subject.min) ? 
+    children: _.isEmpty(subject.min) ? 
       [{ 
         name: subject.name,
         active: true,
@@ -141,16 +137,16 @@ export const org_external_hierarchy = ({ subject, href_generator }) => {
             .filter(node => node.status === 'Active' || is_subject(node) )
             .groupBy('type')
             .toPairs()
-            .sortBy( ([type,group]) => _.includes(group, subject) )
+            .sortBy( ([type, group]) => _.includes(group, subject) )
             .reverse()
-            .map( ([type,orgs]) => ({
+            .map( ([type, orgs]) => ({
               name: type,
               children: _.chain(orgs)
                 .sortBy( org => org === subject)
                 .reverse()
                 .map(org => ({
                   name: org.name,
-                  active: subject===org, 
+                  active: subject === org, 
                   href: href_generator(org),
                   dead: _.isEmpty(org.tables),
                 }))
@@ -158,10 +154,8 @@ export const org_external_hierarchy = ({ subject, href_generator }) => {
             }))
             .value()
         ),
-      }]
-    ),
+      }],
   };
-
 } 
 
 /*
@@ -170,7 +164,6 @@ export const org_external_hierarchy = ({ subject, href_generator }) => {
       CRSOs
         programs
 */
-
 export const org_internal_hierarchy = ({subject, href_generator, show_dead_sos, label_crsos}) => ({
   name: subject.name,
   active: true,
@@ -209,7 +202,7 @@ export const program_hierarchy = ({subject, href_generator, show_siblings, show_
         children: [{ 
           name: subject.dept.name,
           href: href_generator(subject.dept),
-          children: ( 
+          children: (
             _.chain(subject.dept.crsos) //CRSO (parent + uncles)
               .filter( show_uncles ? _.constant(true) : is_parent )
               .filter( show_dead_sos ? _.constant(true) : 'is_active' )
@@ -220,13 +213,12 @@ export const program_hierarchy = ({subject, href_generator, show_siblings, show_
                 name: (label_crsos ? crso.singular()+" : " : "") + crso.name,
                 href: crso.is_cr && href_generator(crso),
                 dead: !crso.is_active,
-                children: ( 
-                  show_cousins || is_parent(crso) ? 
+                children: show_cousins || is_parent(crso) ? 
                   _.chain(crso.programs)
                     .filter( show_siblings ? _.constant(true) : is_subject )
                     .map(prog => ({
                       name: prog.name,
-                      active : is_subject(prog),
+                      active: is_subject(prog),
                       href: href_generator(prog),
                       dead: !prog.is_active,
                     }))
@@ -234,9 +226,8 @@ export const program_hierarchy = ({subject, href_generator, show_siblings, show_
                     .reverse()
                     .sortBy('active')
                     .reverse()
-                    .value()
-                  : null
-                ),
+                    .value() :
+                  null,
               }))
               .value()
           ),
@@ -248,12 +239,9 @@ export const program_hierarchy = ({subject, href_generator, show_siblings, show_
 
 /* 
   the following is hacky because we don't know how many levels there are between a tag and government.
-
-
 */
 export const tag_hierarchy = ({subject, showSiblings, showChildren, href_generator }) => {
   const is_subject = subj => subj === subject;
-
 
   const leaf_nodes = _.chain( subject.parent_tag.children_tags )
     .filter(showSiblings ? _.constant(true) : is_subject )
@@ -298,12 +286,10 @@ export const tag_hierarchy = ({subject, showSiblings, showChildren, href_generat
     name: Gov.name,
     children: [ current_structure ],
   };
-
 }
 
-
 export const crso_hierarchy = ({subject, href_generator, show_siblings, show_uncles, show_cousins, show_dead_sos, label_crsos }) => {
-//From Gov to programs under CRSO
+  //From Gov to programs under CRSO
   const is_subject = subj => subj === subject;
 
   return {
@@ -317,32 +303,38 @@ export const crso_hierarchy = ({subject, href_generator, show_siblings, show_unc
         href: href_generator(subject.dept),
         level: subject.dept.level,
         children: //crso
-          _.chain(_.map(_.chain(subject.dept.crsos).value(), crso => ({            
-            level: crso.level,
-            name: crso.name,
-            cr_or_so: crso.dept.dp_status,
-            href: crso.is_cr && href_generator(crso),
-            active : is_subject(crso),
-            dead: !crso.is_active,
-            children: //program
-              _.chain(_.map(_.chain(crso.programs).value(), prg => ({            
-                level: prg.level,
-                name: prg.name,
-                href: href_generator(prg),
-                dead: prg.dead_program,
-              })))
-                .sortBy('dead').value(),
-          })))
-            .sortBy('dead').value(),
+          _.chain(subject.dept.crsos)
+            .map(
+              crso => ({
+                level: crso.level,
+                name: crso.name,
+                cr_or_so: crso.dept.dp_status,
+                href: crso.is_cr && href_generator(crso),
+                active: is_subject(crso),
+                dead: !crso.is_active,
+                children: //program
+                  _.chain(crso.programs)
+                    .map(
+                      prg => ({
+                        level: prg.level,
+                        name: prg.name,
+                        href: href_generator(prg),
+                        dead: prg.dead_program,
+                      })
+                    )
+                    .sortBy('dead')
+                    .value(),
+              })
+            )
+            .sortBy('dead')
+            .value(),
       }],
     }],
   };
 }
 
-export const crso_pi_hierarchy = ({subject, href_generator, show_siblings, show_uncles, show_cousins, show_dead_sos, label_crsos }) => {
-
-
-  return {
+export const crso_pi_hierarchy = ({subject, href_generator, show_siblings, show_uncles, show_cousins, show_dead_sos, label_crsos }) => (
+  {
     name: Gov.name,
     href: href_generator(Gov),
     children: [{ //ministry
@@ -352,24 +344,29 @@ export const crso_pi_hierarchy = ({subject, href_generator, show_siblings, show_
         name: subject.dept.name,
         href: href_generator(subject.dept),
         level: subject.dept.level,
-        children: [{ //crso          
+        children: [{ //crso
           level: subject.level,
           name: subject.name,
-          active : true,
+          active: true,
           cr_or_so: subject.dept.dp_status,
           href: href_generator(subject),
-          children:
-              _.chain(_.map(_.chain(subject.programs).value(), prg => ({            
-                level: prg.level,
-                name: prg.name,
-                href: href_generator(prg),
-                dead: !prg.is_active,
-              }))).sortBy('dead').value(),
+          children: // program
+            _.chain(subject.programs)
+              .map(
+                prg => ({
+                  level: prg.level,
+                  name: prg.name,
+                  href: href_generator(prg),
+                  dead: !prg.is_active,
+                })
+              )
+              .sortBy('dead')
+              .value(),
         }],
       }],
     }],
   }
-}
+);
 
 export const crso_gov_hierarchy = ({subject, href_generator, show_siblings, show_uncles, show_cousins, show_dead_sos, label_crsos }) => {
 
@@ -386,13 +383,18 @@ export const crso_gov_hierarchy = ({subject, href_generator, show_siblings, show
         href: href_generator(subject.dept),
         level: subject.dept.level,
         children: //crso
-          _.map(_.chain(subject.dept.crsos).filter('is_active').value(), crso => ({            
-            level: crso.level,
-            name: crso.name,
-            href: crso.is_cr && href_generator(crso),
-            active : is_subject(crso),
-          })),
+        _.chain(subject.dept.crsos)
+          .filter('is_active')
+          .map(
+            crso => ({
+              level: crso.level,
+              name: crso.name,
+              href: crso.is_cr && href_generator(crso),
+              active : is_subject(crso),
+            })
+          )
+          .value(),
       }],
     }],
   };
-}
+};
