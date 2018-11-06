@@ -36,8 +36,8 @@ const activeStyle = {
 const get_style = ({ active, dead}) => active ? activeStyle : null;
 
 export const HierarchyDeadElementIcon = () => <img 
-  src={get_static_url("svg/attention-req.svg")}
-  style={{ height: "1.7em", width: "1.7em"}}
+  src={get_static_url("svg/attention-triangle.svg")}
+  style={{ height: "1.8em", width: "1.8em", paddingBottom: "0.2em"}}
   alt={text_maker("hierarchy_dead_element_icon_alt_text")}
 />;
 
