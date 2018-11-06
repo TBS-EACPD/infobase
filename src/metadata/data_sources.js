@@ -183,10 +183,7 @@ const sources = _.mapValues({
     description(){ return tm("igoc_source_desc") },
     frequency: frequencies.y,
     last_updated: { month: 11, year: 2017 },
-    open_data: {
-      en: "http://open.canada.ca/data/en/dataset/c05e8a2b-4e8b-4da7-b6f3-33f4848d3c09",
-      fr: "http://ouvert.canada.ca/data/fr/dataset/c05e8a2b-4e8b-4da7-b6f3-33f4848d3c09",
-    },
+    open_data: infobase_open_data_page,
     items(){
       return [{
         id: 'igoc',
