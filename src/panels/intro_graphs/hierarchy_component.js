@@ -1,6 +1,8 @@
-import { text_maker, TM } from './intro_graph_text_provider.js';
 import classNames from 'classnames';
+import { Fragment } from 'react';
+import { text_maker, TM } from './intro_graph_text_provider.js';
 import { Subject } from '../shared.js';
+import { get_static_url } from '../../core/request_utils.js';
 
 const { Gov } = Subject;
 
@@ -32,31 +34,59 @@ const activeStyle = {
 };
 
 const get_style = ({ active, dead}) => active ? activeStyle : null;
-    
-const has_dead_elements = root => {
-  if(root.dead){ 
-    return true;
-  } else if( !_.isEmpty(root.children) ){
 
-    return _.chain(root.children)
-      .map(child => has_dead_elements(child) )
+export const HierarchyDeadElementIcon = () => <img 
+  src={get_static_url("svg/attention-req.svg")}
+  style={{ height: "1.7em", width: "1.7em"}}
+  alt={text_maker("hierarchy_dead_element_icon_alt_text")}
+/>;
+
+const hierarchical_some = (node, predicate) => {
+  const predicate_func = _.isFunction(predicate) ?
+    predicate :
+    (node) => _.get(node, predicate);
+
+  if( predicate_func(node) ){ 
+    return true;
+  } else if( !_.isEmpty(node.children) ){
+
+    return _.chain(node.children)
+      .map(child => hierarchical_some(child, predicate_func) )
       .some()
       .value();
 
   } else {
     return false;
   }
-}
+};
+const has_elements_with_limited_data = root => hierarchical_some(root, 'limited_data');
+const has_dead_elements = root => hierarchical_some(root, 'dead');
 
-export const HierarchyPeek = ({root}) => (
-  <div> 
-    <_HierarchyPeek root={root} />
-    { 
-      has_dead_elements(root) &&
-      <TM k="hierarchy_contains_dead_elements" />
-    } 
-  </div>
-);
+export const HierarchyPeek = ({root}) => {
+  
+  const limited_data_elements = has_elements_with_limited_data(root);
+  const dead_elements = has_dead_elements(root);
+
+  return (
+    <div> 
+      <_HierarchyPeek root={root} />
+      { 
+        limited_data_elements &&
+        <Fragment>
+          <HierarchyDeadElementIcon/>
+          <TM k="hierarchy_contains_elements_with_limited_data" />
+        </Fragment>
+      }
+      { 
+        !limited_data_elements && dead_elements && 
+        <Fragment>
+          <HierarchyDeadElementIcon/>
+          <TM k="hierarchy_contains_dead_elements" />
+        </Fragment>
+      } 
+    </div>
+  );
+};
 
 
 
@@ -65,34 +95,40 @@ const _HierarchyPeek = ({root}) => (
   <div>
     { 
       !root.active ?
-        <span className={ classNames(root.dead && 'dead-element') }>
-          { 
-            root.href ? 
-              <a
-                href={root.href} 
-                style={ get_style(root) }
-              >
-                {
-                  root.level === "crso" ? 
-                    (
-                      (root.cr_or_so === "fw" && !root.dead) ? 
-                        (window.lang == "en" ? root.name + " (Core Responsibility) " : root.name + " (Responsabilité Essentielle)" ) :
-                        (window.lang == "en" ? root.name + " (Strategic Outcome)" : root.name + " (Résultat Stratégique)" )
-                    ) : 
-                    root.name
-                } 
-              </a> :
-              <span style={get_style(root)}>
-                {root.name}
-              </span>
-          }
-        </span> : 
-        <span 
-          style={ get_style(root) }
-          className={ classNames(root.dead && 'dead-element') }
-        >
-          { root.name }
-        </span>
+        <Fragment>
+          { root.dead && <HierarchyDeadElementIcon /> }
+          <span className={ classNames(root.dead && 'dead-element') }>
+            {
+              root.href ? 
+                <a
+                  href={root.href} 
+                  style={ get_style(root) }
+                >
+                  {
+                    root.level === "crso" ? 
+                      (
+                        (root.cr_or_so === "fw" && !root.dead) ? 
+                          (window.lang == "en" ? root.name + " (Core Responsibility) " : root.name + " (Responsabilité Essentielle)" ) :
+                          (window.lang == "en" ? root.name + " (Strategic Outcome)" : root.name + " (Résultat Stratégique)" )
+                      ) : 
+                      root.name
+                  } 
+                </a> :
+                <span style={get_style(root)}>
+                  {root.name}
+                </span>
+            }
+          </span>
+        </Fragment> :
+        <Fragment>
+          { root.dead && <HierarchyDeadElementIcon /> }
+          <span 
+            style={ get_style(root) }
+            className={ classNames(root.dead && 'dead-element') }
+          >
+            { root.name }
+          </span>
+        </Fragment>
     }
     { root.children && !_.isEmpty(root.children) &&
       <ul>
@@ -142,13 +178,14 @@ export const org_external_hierarchy = ({ subject, href_generator }) => {
             .map( ([type, orgs]) => ({
               name: type,
               children: _.chain(orgs)
-                .sortBy( org => org === subject)
+                .sortBy( org => is_subject(org) )
                 .reverse()
                 .map(org => ({
                   name: org.name,
-                  active: subject === org, 
+                  active: is_subject(org),
                   href: href_generator(org),
                   dead: _.isEmpty(org.tables),
+                  limited_data: _.isEmpty(org.tables),
                 }))
                 .value(),
             }))
@@ -175,7 +212,7 @@ export const org_internal_hierarchy = ({subject, href_generator, show_dead_sos, 
       href: crso.is_cr && href_generator(crso),
       dead: !crso.is_active,
       children: _.chain(crso.programs)
-        .map( prog=> ({
+        .map( prog => ({
           name: prog.name,
           href: href_generator(prog),
           dead: !prog.is_active,

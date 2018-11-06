@@ -125,12 +125,26 @@ org_is_tagged_with_following:
   fr: |
     Les Programmes sous **{{subj_name subject}}** ont été étiquetés comme relevant des sujets suivants
 
+hierarchy_dead_element_icon_alt_text:
+  transform: [handlebars]
+  en:  |
+    This item is either a Program and/or Strategic Outcomes has either ended or merged into a new ones between {{pa_last_year_5}} and {{planning_year_1}} or it is an organizations for which the InfoBase has no data.
+  fr: |
+    TODO
+
 hierarchy_contains_dead_elements:
   transform: [handlebars]
   en:  |
-    <div style="display:inline-block" class="dead-element"><span></span></div> : Corresponds to Programs and/or Strategic Outcomes that either ended or merged into new ones between {{pa_last_year_5}} and {{planning_year_1}} or organizations for which the InfoBase has no data.
+    : Corresponds to Programs and/or Strategic Outcomes that either ended or merged into new ones between {{pa_last_year_5}} and {{planning_year_1}}.
   fr: |
-    <div style="display:inline-block" class="dead-element"><span></span></div> : Corresponds aux programmes ou résultats stratégiques qui ont pris fin ou qui ont fusionné entre {{pa_last_year_5}} et {{planning_year_1}}, ou des organisations pour lesquels l'InfoBase n'a pas de données.
+    : Corresponds aux programmes ou résultats stratégiques qui ont pris fin ou qui ont fusionné entre {{pa_last_year_5}} et {{planning_year_1}}.
+
+hierarchy_contains_elements_with_limited_data:
+  en:  |
+    : Corresponds to organizations for which the InfoBase has no data.
+  fr: |
+    : Corresponds aux organisations pour lesquels l'InfoBase n'a pas de données.
+
 
 # CRSO text
 

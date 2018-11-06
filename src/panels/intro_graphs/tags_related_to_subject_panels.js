@@ -38,7 +38,7 @@ function get_related_tag_list_args(subject){
       tags_by_root_id = _.groupBy(subject.tags, "root.id");
       
       break;
-    
+
     case 'dept':
     case 'crso':
       tags_by_root_id = _.chain(subject.programs)
@@ -73,7 +73,7 @@ const title_by_level = {
 _.each(['dept','crso','program'], level => {
   new PanelGraph({
     level,
-    key : "tags_of_interest",
+    key: "tags_of_interest",
     footnotes: false,
     calculate(subject){
       const tags_by_root = get_related_tag_list_args(subject);
@@ -105,8 +105,7 @@ _.each(['dept','crso','program'], level => {
 
 new PanelGraph({
   level: 'tag',
-  key : "tag_progs_by_dept",
-
+  key: "tag_progs_by_dept",
   footnotes: false,
   calculate: _.constant(true),
 
@@ -116,7 +115,7 @@ new PanelGraph({
     const list_args = _.chain(subject.programs)
       .groupBy(prog => prog.dept.id)
       .map( (prog_group, dept_id) => ({
-        display : <div>{Dept.lookup(dept_id).name}</div>,
+        display: <div>{Dept.lookup(dept_id).name}</div>,
         href: infograph_href_template(Dept.lookup(dept_id)),
         children: _.chain(prog_group)
           .sortBy('dead_program')
@@ -149,14 +148,14 @@ new PanelGraph({
         </div>
         <div className="clearfix"/>
       </TextPanel>
-    )
+    );
 
   },
 });
 
 new PanelGraph({
   level: 'tag',
-  key : "related_tags",
+  key: "related_tags",
   footnotes: false,
 
   calculate(subject){
@@ -168,7 +167,7 @@ new PanelGraph({
         .reject({ id: subject.id})
         .groupBy( tag => tag.id )
         .map( group => ({
-          tag : _.first(group),
+          tag: _.first(group),
           count: group.length,
           type: _.first(group).root.id,
         }))
@@ -185,12 +184,14 @@ new PanelGraph({
         .sortBy( ({type}) => _.indexOf(scheme_order, type) )
         .value()
     );
+
     if(_.isEmpty(related_tags_by_type_with_counts)){
       return false;
     }
+
     return {
       related_tags_by_type_with_counts,
-    }
+    };
 
   },
 
@@ -207,7 +208,7 @@ new PanelGraph({
         href: infograph_href_template(tag),
         display: <span>{tag.name} - {count} {Program.plural} <TM k="in_common" /></span>,
       })),
-    }))
+    }));
 
     return (
       <TextPanel
@@ -220,7 +221,7 @@ new PanelGraph({
         </div>
         <div className="clearfix"/>
       </TextPanel>
-    )
+    );
 
   },
 });
