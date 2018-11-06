@@ -130,7 +130,7 @@ hierarchy_dead_element_icon_alt_text:
   en:  |
     This item is either 1) an organization for which the InfoBase has no data, or 2) a Strategic Outcome or program that has ended or merged into a new one between {{pa_last_year_5}} and {{planning_year_1}}.
   fr: |
-    TODO
+    Cet article est soit 1) une organisation pour lesquels l'InfoBase n'a pas de données, ou 2) un résultat stratégique ou programme qui a pris fin ou qui ont fusionné entre {{pa_last_year_5}} et {{planning_year_1}}
 
 hierarchy_contains_dead_elements:
   transform: [handlebars]
