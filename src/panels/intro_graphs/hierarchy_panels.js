@@ -23,7 +23,7 @@ new PanelGraph({
   footnotes: false,
 
   calculate(subject){
-    return _.nonEmpty(subject.ministry)
+    return _.nonEmpty(subject.ministry);
   },
 
   render({calculations}){

@@ -135,7 +135,7 @@ const get_dept_panels = subject => {
       "drr_summary",
       "explore_results",
     ],
-    related: [
+    related: _.nonEmpty(subject.tables) && [
       "portfolio_structure_related",
       "tags_of_interest",
     ],

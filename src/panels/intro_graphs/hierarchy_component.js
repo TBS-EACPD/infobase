@@ -67,6 +67,9 @@ export const HierarchyPeek = ({root}) => {
   const limited_data_elements = has_elements_with_limited_data(root);
   const dead_elements = has_dead_elements(root);
 
+  // Legend text selection is based on the assumption that only the external org hierarchy (panel in org level about panel) can
+  // have items with limited data. If that changes, the legend text selection here will likely become inaccurate. Dealing
+  // with this better's a TODO
   return (
     <div> 
       <_HierarchyPeek root={root} />
