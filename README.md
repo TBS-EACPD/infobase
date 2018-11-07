@@ -1,6 +1,6 @@
 GC InfoBase
 ========
-The GC InfoBase is an interactive data-visualization tool, transforming complex federal data into simple visual stories for Canadians. The live site can be found [here](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-eng.html), where our [about page](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-eng.html#about) contains further details on who we are and what we do.
+The GC InfoBase is an interactive data-visualization tool, transforming complex federal data into visual stories for Canadians. The live site can be found [here](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-eng.html), where our [about page](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-eng.html#about) contains further details on who we are and what we do.
 
 ## Table of Contents
 - [Getting Started](#getting-started)
@@ -8,7 +8,6 @@ The GC InfoBase is an interactive data-visualization tool, transforming complex 
   * [Compiling the InfoBase](#compiling-the-infobase)
 - [Tests](#tests)
   * [Running browser tests](#running-browser-tests)
-- [TODOs](#todos)
 
 ## Getting Started
 
@@ -39,27 +38,3 @@ See package.json for a list of all build comands.
 2. Have an active `sh serve-loopback` process
 3. `npm run headless_test`
 Note: these are slow, have fairly basic coverage, and are run by CI after each push to GitHub, so running them locally is generally unnecessary. They don't tell you much more than that all of the main routes at least load without error.
-
-## TODOs
-
-Some TODO's not worth moving to issues right now:
-* move all global variables into a namespace
-* swap out core/stat.js for something a more standardized, 
-  there must be a JS library that calculates basic stats 
-  like avg, co-var, etc..
-* ditch the tableX naming syntax in favour of something more descriptive
-* add in ability for an amount to be NA (instead of the current standard of reading blanks/.'s from csv's as 0)
-* redo the formaters to make more sense. Currently 'big-int'
-  refers to numbers which should be presented in the thousands
-  while 'big-int-real' refers to numbers where no such adjustment
-  happens. "compact" formatter automatically assume the amounts 
-  are in "$".  Better to re-map to "big-int" being normal, 
-  "big-int-k" being rounded to a nearest thousand and then
-  add a formatter for 'compact' and 'compact$' to indicate
-  more systemically what will be produced.  Consider doing
-  this at the column level with sane defaults.
-* graphics should manage their own panel spans rather than the 
-  requesting function, currently ad-hoc adjustments are made 
-  which luckily always work but it's not systematic
-* get a boolean map in csv format loaded on start to declare which table/dept are available
-* periodically keep up with html/svg -> pdf/png tech for possible exports feature
