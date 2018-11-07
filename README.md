@@ -29,7 +29,7 @@ See package.json for a list of all build comands.
 #### When do I need to restart/rerun these commands?
 * `npm ci` when package-lock.json has changed (e.g. potentially on pull or branch change). Note: use `npm install` if you are adding a new package/updating a package version
 * `IB_base` must be re-run when the data, svgs, or the css in src/extended-bootstrap changes. Changing branches is often a good reason to re-run IB_base
-* `IB_q/IB_dev/IB_prod` can be left on watch while developing, may need to be restarted if certain errors occur. The most common example of an interupting error is a missing node_module (may occur on branch change or durring the execution of `npm ci`) 
+* `IB_q/IB_dev/IB_prod` can be left on watch while developing, may need to be restarted if certain errors occur. The most common example of a halting error is when an imported node_module can't be found (may occur on branch change or durring the execution of `npm ci`) 
 
 ## Tests
 
