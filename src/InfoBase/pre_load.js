@@ -1,5 +1,4 @@
 import { Spinner } from '../core/Spinner.js';
-window.Spinner = Spinner;
 
 export default function(){
 

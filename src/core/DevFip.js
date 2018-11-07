@@ -1,6 +1,6 @@
 export class DevFip extends React.Component {
   componentDidMount(){
-    if(IS_DEV_LINK){
+    if(window.is_dev_link){
       // document.querySelector(".ib-site-header-logo.gl-FIP").innerHTML = `
       //   <div class="canada-logo"> DEV </div>
       // `;

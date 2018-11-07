@@ -1,6 +1,5 @@
 import pre_load from './pre_load';
 
-window.is_a11y_mode = false;
 const kill_spinner = pre_load();
 import('../app_bootstrap/bootstrap.js').then( ({bootstrap}) => {
   import('./App.js').then( ({App, app_reducer }) => {

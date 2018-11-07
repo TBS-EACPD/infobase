@@ -54,27 +54,27 @@
     }
   },
   "globals": {
-    "window": true,
-    "DEV": true,
-    "d3": true,
-    "feature_detection": true,
-    "infobase_colors": true,
-    "_": true,
-    "marked": true,
-    "Handlebars": true,
-    "React": true,
-    "ReactDOM": true,
-    "Spinner": true,
-    "accounting": true,
-    "lang": true,
-    "ga": true,
-    "APPLICATION_LANGUAGE": true,
-    "SHA": true,
-    "PRE_PUBLIC_ACCOUNTS": true,
-    "is_a11y_mode": true,
-    "CDN_URL": true,
     "process": true,
     "__dirname": true,
-    "IS_DEV_LINK": true
+    
+    "window": true,
+
+    "ga": true,
+
+    "lang": true,
+    "is_a11y_mode": true,
+    "long_sha": true,
+    "sha": true,
+    "pre_public_accounts": true,
+    "feature_detection": true,
+    "accounting": true,
+    "marked": true,
+    "React": true,
+    "ReactDOM": true,
+    "d3": true,
+    "infobase_colors": true,
+    "_": true,
+    "Handlebars": true,
+    "Spinner": true
   }
 }

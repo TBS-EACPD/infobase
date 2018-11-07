@@ -59,6 +59,7 @@ gitsha(function(err, commit_sha){
   const config = langs.map(lang => create_config({
     commit_sha,
     language: lang,
+    a11y_client,
     is_prod: prod,
     should_use_babel: babel,
     entry: app_options.entry,

@@ -1,4 +1,4 @@
-const static_url = CDN_URL;
+const static_url = window.cdn_url;
 
 //no URL should start with "./" or "/"
 export const get_static_url = (url, version_query) => {

@@ -101,13 +101,14 @@ const prod_plugins = [
   new webpack.optimize.ModuleConcatenationPlugin(),
 ]
 
-function get_plugins({ is_prod, language, commit_sha, envs }){
+function get_plugins({ is_prod, language, a11y_client, commit_sha, envs }){
   
   const plugins = [
     new webpack.DefinePlugin({
-      SHA : JSON.stringify(commit_sha),
+      SHA: JSON.stringify(commit_sha),
       DEV: !is_prod,
       APPLICATION_LANGUAGE: JSON.stringify(language),
+      IS_A11Y_MODE: !!a11y_client,
       CDN_URL: JSON.stringify(CDN_URL),
       IS_DEV_LINK,
     }),
@@ -136,6 +137,7 @@ function create_config({
   entry,
   output,
   language,
+  a11y_client,
   commit_sha,
   is_prod,
   should_use_babel,
@@ -159,13 +161,14 @@ function create_config({
     plugins: get_plugins({
       is_prod,
       language,
+      a11y_client,
       commit_sha,
     }),
     optimization: get_optimizations(is_prod),
     devtool: (
-      is_prod? 
-      false : 
-      'inline-source-map'
+      is_prod ? 
+        false : 
+        'inline-source-map'
     ),
   }
 }

@@ -1,5 +1,4 @@
 import ReactDOM from 'react-dom';
-window.ReactDOM = ReactDOM;
 class ReactContentRenderer {
   constructor(){
     this.nodes = []
