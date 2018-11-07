@@ -23,12 +23,12 @@
           "warn",
           2,
           {
-            "SwitchCase" : 1,
+            "SwitchCase": 1,
             "ignoredNodes": ["ConditionalExpression"],
             "flatTernaryExpressions": true
           }
       ],
-      "comma-dangle":[ "warn", "always-multiline" ],
+      "comma-dangle": [ "warn", "always-multiline" ],
       "linebreak-style": [
           "off",
           "unix"
@@ -41,12 +41,12 @@
         "warn",
         { "args": "none" }
       ],
-      "no-extra-semi": ["off"],
-      "react/prop-types" : [ "off" ],
-      "react/no-string-refs" : [ "off" ],
-      "react/display-name" : [ "off" ],
-      "react/no-find-dom-node" : [ "off" ],
-      "react/no-children-prop": ["off"]
+      "no-extra-semi": [ "off" ],
+      "react/prop-types": [ "off" ],
+      "react/no-string-refs": [ "off" ],
+      "react/display-name": [ "off" ],
+      "react/no-find-dom-node": [ "off" ],
+      "react/no-children-prop": [ "off" ]
   },
   "settings": {
     "react": {
@@ -55,27 +55,26 @@
   },
   "globals": {
     "window": true,
-    "DEV":true,
+    "DEV": true,
     "d3": true,
     "infobase_colors": true,
     "_": true,
     "marked": true,
     "hasher": true,
-    "$":true,
+    "$": true,
     "Handlebars": true,
     "React": true,
-    "ReactDOM":true,
-    "d4": true,
-    "Spinner":true,
-    "accounting":true,
-    "lang":true,
-    "ga":true,
-    "APPLICATION_LANGUAGE":true,
-    "SHA":true,
-    "PRE_PUBLIC_ACCOUNTS":true,
+    "ReactDOM": true,
+    "Spinner": true,
+    "accounting": true,
+    "lang": true,
+    "ga": true,
+    "APPLICATION_LANGUAGE": true,
+    "SHA": true,
+    "PRE_PUBLIC_ACCOUNTS": true,
     "is_a11y_mode": true,
     "CDN_URL": true,
-    "process":true,
+    "process": true,
     "__dirname": true,
     "IS_DEV_LINK": true
   }
