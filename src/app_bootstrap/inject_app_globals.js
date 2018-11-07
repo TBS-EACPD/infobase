@@ -32,7 +32,7 @@ window.infobase_colors = () => d3.scaleOrdinal().range(infobaseCategory10Colors)
 
 import _ from 'lodash';
 window._ = _;
-import './lodash-extensions'; // extend lodash
+import './lodash-extensions';
 
 import Handlebars from 'handlebars/dist/cjs/handlebars.js';
 window.Handlebars = Handlebars;
