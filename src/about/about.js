@@ -1,7 +1,6 @@
 import about_text_bundle from "./about.yaml";
 import './about.scss';
 import '../gen_expl/explorer-styles.scss';
-import '../common_css/fontawesome-svg-styles.scss';
 import { StandardRouteContainer } from '../core/NavComponents.js';
 import { TextMaker } from '../util_components.js';
 import { create_text_maker } from '../models/text.js';

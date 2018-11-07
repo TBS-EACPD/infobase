@@ -1,4 +1,4 @@
-import '../common_css/non-a11y-site.scss';
+import './non-a11y-styles.scss';
 
 import { Suspense } from 'react';
 import { Route, Switch } from 'react-router';

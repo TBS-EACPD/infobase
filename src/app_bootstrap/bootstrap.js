@@ -1,36 +1,44 @@
-import '../bootstrap/include_common.js';
+import 'dom4';
+import 'whatwg-fetch';
+
+import './inject_app_globals.js';
+
+// Extend Handlebars global with additional helpers
+import '../handlebars/helpers.js';
+
+import '../common_css/common_css_index.js';
+
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { 
-  ConnectedRouter, 
-  routerReducer, 
+  ConnectedRouter,
+  routerReducer,
   routerMiddleware,
-  /*push,*/ 
+  /*push,*/
 } from 'react-router-redux';
 import { default as createHistory } from 'history/createHashHistory';
 import { populate_stores } from '../models/populate_stores.js';
 import { Table } from '../core/TableClass.js';
 import WebFont from 'webfontloader';
-import '../tables/table_common';
 
-import table1 from "../tables/table1/table1";
-import table2 from "../tables/table2/table2";
-import table4 from "../tables/table4/table4";
-import table5 from "../tables/table5/table5";
-import table6 from "../tables/table6/table6";
-import table7 from "../tables/table7/table7";
-import table8 from "../tables/table8/table8";
-import table9 from "../tables/table9/table9";
-import table10 from "../tables/table10/table10";
-import table11 from "../tables/table11/table11";
-import table12 from "../tables/table12/table12";
-import table112 from "../tables/table112/table112";
-import table300 from "../tables/table300/table300";
-import table302 from "../tables/table302/table302";
-import table303 from "../tables/table303/table303";
-import table304 from "../tables/table304/table304";
-import table305 from "../tables/table305/table305";
+import table1 from "../tables/table1/table1.js";
+import table2 from "../tables/table2/table2.js";
+import table4 from "../tables/table4/table4.js";
+import table5 from "../tables/table5/table5.js";
+import table6 from "../tables/table6/table6.js";
+import table7 from "../tables/table7/table7.js";
+import table8 from "../tables/table8/table8.js";
+import table9 from "../tables/table9/table9.js";
+import table10 from "../tables/table10/table10.js";
+import table11 from "../tables/table11/table11.js";
+import table12 from "../tables/table12/table12.js";
+import table112 from "../tables/table112/table112.js";
+import table300 from "../tables/table300/table300.js";
+import table302 from "../tables/table302/table302.js";
+import table303 from "../tables/table303/table303.js";
+import table304 from "../tables/table304/table304.js";
+import table305 from "../tables/table305/table305.js";
 
 const table_defs = [
   table1,

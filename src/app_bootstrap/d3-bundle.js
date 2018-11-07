@@ -36,6 +36,5 @@ function completeAssign(target, ...sources) {
 }
 
 const d3 = completeAssign({}, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
-if(typeof window !== 'undefined'){
-  window.d3 = d3;
-}
+
+export default d3;

@@ -12,30 +12,27 @@ if(typeof CDN_URL !== "undefined"){
   window.CDN_URL = CDN_URL;
 }
 
-import 'dom4';
-
-import * as feature_detection from './feature-detection.js';
+import * as feature_detection from '../core/feature-detection.js';
 window.feature_detection = feature_detection;
-
-import 'whatwg-fetch';
-import '../common_css/site.scss';
-import '../common_css/grid-system.scss';
-import '../common_css/flexbox-grid.css';
-import '../common_css/tables.scss';
 
 //3rd party libraries injected into global scope
 //note that these next few lines must be run before anything using lodash, handlebars, etc.
 import accounting from 'accounting';
 import marked from 'marked';
-import Handlebars from 'handlebars/dist/cjs/handlebars.js';
 import React from 'react';
-
 window.accounting = accounting;
 window.marked = marked;
-window.Handlebars = Handlebars;
 window.React = React;
 
-import './d3-bundle.js';
+import d3 from './d3-bundle.js';
+window.d3 = d3;
+
+import { infobaseCategory10Colors } from '../core/color_schemes.js';
+window.infobase_colors = () => d3.scaleOrdinal().range(infobaseCategory10Colors);
+
 import _ from 'lodash';
 window._ = _;
-import './lodash-extensions';
+import './lodash-extensions'; // extend lodash
+
+import Handlebars from 'handlebars/dist/cjs/handlebars.js';
+window.Handlebars = Handlebars;

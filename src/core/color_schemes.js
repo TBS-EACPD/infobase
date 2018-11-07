@@ -1,18 +1,7 @@
-//this file's responsibility is to pull in most globals
-import './include_basic_dependencies.js';
-
-//dev helper globals 
-import { Subject } from "../models/subject.js";
-import * as utils from '../core/utils.js';
-window._Subject = Subject;
-window._utils = utils;
-
-import '../handlebars/helpers';
-
 //all colors from https://material.io/guidelines/style/color.html#color-color-palette
 //you can use these colors as backgrounds for dark text (#222 or darker)
 //organized to mirror d3 category10
-window.lightCategory10Colors = [
+const lightCategory10Colors = [
   '#9FA8DA', //indigo
   '#FB8C00', //amber
   '#66BB6A', //Green
@@ -26,7 +15,7 @@ window.lightCategory10Colors = [
 ];
 
 //very closely based on category10, most are darkened a little bit to allow them to be used as accessible backgrounds for white text
-window.darkCategory10Colors = [
+const darkCategory10Colors = [
   "#1b679d", //blue
   "#1a7f84", //cyan-ish
   "#238023", //green
@@ -34,13 +23,13 @@ window.darkCategory10Colors = [
   "#8655b4", //purple
   "#8c564b", //brown
   "#bd2891", //pink
-  "#757575",
+  "#757575", //grey
   "#e15814", //orange
   "#949438", //ugly puke green
 ];
 
 //this is mostly d3.category10 with re-ordered colours, and replacing the base blue with the canada.ca header color
-const colors = [
+const infobaseCategory10Colors = [
   "#335075", //canada.ca header
   "#2ca02c", 
   "#ff7f0e", 
@@ -52,5 +41,10 @@ const colors = [
   "#7f7f7f", 
   "#bcbd22", 
 ];
-window.infobase_colors = () => d3.scaleOrdinal().range(colors);
+
+export {
+  lightCategory10Colors,
+  darkCategory10Colors,
+  infobaseCategory10Colors,
+};
 

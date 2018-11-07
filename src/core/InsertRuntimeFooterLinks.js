@@ -1,5 +1,3 @@
-import '../common_css/fontawesome-svg-styles.scss'; // css needed for survey_link_icon
-
 import { trivial_text_maker } from '../models/text.js';
 
 const footer_link_items = [
