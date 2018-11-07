@@ -396,7 +396,7 @@ class ExportButton extends React.Component {
     } = this.state
 
 
-    if( window.download_attr ){
+    if( window.feature_detection.download_attr ){
       return <div>
         <button 
           id={id}
@@ -406,7 +406,7 @@ class ExportButton extends React.Component {
           <TextMaker text_key="export_table" />
         </button>
       </div>
-    } else if(window.clipboard_access){
+    } else if(window.feature_detection.clipboard_access){
       const buttonText = (
         success === false ? 
         <TextMaker text_key="error" /> :

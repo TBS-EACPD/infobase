@@ -57,6 +57,7 @@
     "window": true,
     "DEV": true,
     "d3": true,
+    "feature_detection": true,
     "infobase_colors": true,
     "_": true,
     "marked": true,

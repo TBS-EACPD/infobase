@@ -14,7 +14,8 @@ if(typeof CDN_URL !== "undefined"){
 
 import 'dom4';
 
-import './feature-detection.js';
+import * as feature_detection from './feature-detection.js';
+window.feature_detection = feature_detection;
 
 import 'whatwg-fetch';
 import '../common_css/site.scss';

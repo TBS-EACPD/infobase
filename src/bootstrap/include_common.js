@@ -2,16 +2,12 @@
 import './include_basic_dependencies.js';
 
 //dev helper globals 
-import classnames from 'classnames';
 import { Subject } from "../models/subject.js";
 import * as utils from '../core/utils.js';
-window._classnames = classnames;
 window._Subject = Subject;
-window._UTILS = utils;
+window._utils = utils;
 
-import '../tables/table_common';
 import '../handlebars/helpers';
-
 
 //all colors from https://material.io/guidelines/style/color.html#color-color-palette
 //you can use these colors as backgrounds for dark text (#222 or darker)

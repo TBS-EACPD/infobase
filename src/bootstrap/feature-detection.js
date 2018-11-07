@@ -1,35 +1,39 @@
-if (typeof window !== "undefined"){
-  window.is_IE = function() {
-    var myNav = navigator.userAgent.toLowerCase();
-    return (
-      (myNav.indexOf('msie') !== -1) ? 
-        parseInt(myNav.split('msie')[1]) : 
-        myNav.indexOf('trident') !== -1
-    );
-  };
+const is_IE = function(){
+  const user_agent = navigator.userAgent.toLowerCase();
+  return (
+    (user_agent.indexOf('msie') !== -1) ? 
+      parseInt(user_agent.split('msie')[1]) : 
+      user_agent.indexOf('trident') !== -1
+  );
+}
 
-  window.is_mobile = function(){
-    return (
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-      window.matchMedia("(max-width: 970px)").matches
-    );
+const is_mobile = function(){
+  return (
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+    matchMedia("(max-width: 970px)").matches
+  );
+}
+
+const has_local_storage = (function(){
+  const blah = "blah";
+  try {
+    localStorage.setItem(blah, blah);
+    localStorage.removeItem(blah);
+    return true;
+  } catch(e) {
+    return false;
   }
+})();
 
-  window.has_local_storage = (function(){
-    const blah = "blah";
-    try {
-      localStorage.setItem(blah, blah);
-      localStorage.removeItem(blah);
-      return true;
-    } catch(e) {
-      return false;
-    }
-  })()
+const download_attr = 'download' in document.createElement('a');
+const clipboard_access = 'clipboardData' in window;
+const binary_download = typeof ArrayBuffer !== 'undefined';
 
-  window.windows_os = navigator.appVersion.indexOf("Win") !== -1;
-
-  window.details = 'open' in document.createElement('details');
-  window.download_attr = 'download' in document.createElement('a');
-  window.clipboard_access = 'clipboardData' in window;
-  window.binary_download = typeof ArrayBuffer !== 'undefined';
-}  
+export {
+  is_IE,
+  is_mobile,
+  has_local_storage,
+  download_attr,
+  clipboard_access,
+  binary_download,
+};

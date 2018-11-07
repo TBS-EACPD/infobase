@@ -101,7 +101,7 @@ const prov_split_render = function(graph_node, graph_args){
       formater: formater,
     })
 
-    if ( !window.is_mobile() ) {
+    if ( !window.feature_detection.is_mobile() ) {
       // if it's not mobile, then the graph can go next to the map , under the legend
 
       historical_graph_container = d3.select(legend_area.node()).append("div");
@@ -168,7 +168,7 @@ const prov_split_render = function(graph_node, graph_args){
           position:"relative",
         });
 
-      if( window.is_mobile() ){ // create a bar graph
+      if( window.feature_detection.is_mobile() ){ // create a bar graph
         (new charts_index.Bar(
           container.select("div").node(),
           {
