@@ -60,8 +60,6 @@
     "infobase_colors": true,
     "_": true,
     "marked": true,
-    "hasher": true,
-    "$": true,
     "Handlebars": true,
     "React": true,
     "ReactDOM": true,
