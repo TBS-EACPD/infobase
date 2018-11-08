@@ -52,7 +52,7 @@ new PanelGraph({
               font_size = "16"
               font_weight = "bold"
               colors = {infobase_colors()}
-              formater =  {(d) => (formats["big_int_real_raw"](d) + "\n" + text_maker("employees"))}
+              formater = {(d) => (formats["big_int_real_raw"](d) + "\n" + text_maker("employees"))}
               data = {graph_args.vals}
               center = {graph_args.center}
             />

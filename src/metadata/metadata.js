@@ -58,7 +58,7 @@ export default class MetaData extends React.Component {
                           style={{alignSelf: "center"}}
                         >
                           {text}
-                        </a>  :
+                        </a> :
                         <span
                           style={{alignSelf: "center"}}
                         >

@@ -11,10 +11,10 @@ const stats = {
     _.each(years, (year,i)=>{
       var amount;
       if (_.isFunction(amounts)){
-        amount =  amounts(year,i);
+        amount = amounts(year,i);
         add(prefix+year, amount);
       }else {
-        amount =  amounts[i];
+        amount = amounts[i];
         add(prefix+year, amount);
       }
       total += amount;
@@ -53,17 +53,17 @@ const stats = {
     });
     // divide the total by the number of years active
     average = total/years.length;
-    variance =  _.reduce(amounts, function(x,y){
+    variance = _.reduce(amounts, function(x,y){
       return x + Math.pow(y-average,2);
     },0)/years.length;
     std_dev = Math.sqrt(variance);
     co_var = std_dev / average;
-    add(context_prefix+"_average",  average);
+    add(context_prefix+"_average", average);
     // calculate the variance
     // calculate the standard devitation
     add({
-      key :  context_prefix+"_high_var",
-      value :  co_var > 0.05,
+      key : context_prefix+"_high_var",
+      value : co_var > 0.05,
       type : "boolean",
     });
     // assign the calculated values to the context object
@@ -99,7 +99,7 @@ const stats = {
     var max_row = amounts[max_index];
     var max_label = labels[max_index];
     var max_avg = averages[max_index];
-    var max_co_var =  Math.sqrt(_.reduce(_.tail(max_row), function(x,y){
+    var max_co_var = Math.sqrt(_.reduce(_.tail(max_row), function(x,y){
       return x + Math.pow(y-max_avg,2);
     },0)/_.tail(amounts[0]).length)/max_avg;
 
@@ -108,8 +108,8 @@ const stats = {
     add(context_prefix +"_top_avg",max_avg);
     add(context_prefix +"_top_avg_percent",max/d3.sum(totals));
     add({
-      key :  context_prefix+"_top_high_var",
-      value :  max_co_var > 0.05,
+      key : context_prefix+"_top_high_var",
+      value : max_co_var > 0.05,
       type : "boolean",
     });
   
@@ -124,18 +124,18 @@ const stats = {
       add(context_prefix +"_bottom_avg",min_avg);
       add(context_prefix +"_bottom_avg_percent",min/d3.sum(totals));
       
-      var min_co_var =  Math.sqrt(_.reduce(_.tail(min_row), function(x,y){
+      var min_co_var = Math.sqrt(_.reduce(_.tail(min_row), function(x,y){
         return x + Math.pow(y-min_avg,2);
       },0)/_.tail(amounts[0]).length)/min_avg;
       add({
-        key :  context_prefix+"_bottom_high_var",
-        value :  min_co_var > 0.05,
+        key : context_prefix+"_bottom_high_var",
+        value : min_co_var > 0.05,
         type : "boolean",
       });
     }
   },
 
-  year_over_year_multi_stats_active_years(add, context_prefix, amounts,  act_years, years){
+  year_over_year_multi_stats_active_years(add, context_prefix, amounts, act_years, years){
     // * `context` is an object which will have the calculated values added
     // * `context_prefix` is a string which will be used to created the keys
     //    in `context`
@@ -152,14 +152,14 @@ const stats = {
       active_years = act_years;
     } else { 
       var amounts_temp = amounts;
-      amounts_temp = _.map(amounts_temp, amounts_temp =>  _.tail(amounts_temp) );
+      amounts_temp = _.map(amounts_temp, amounts_temp => _.tail(amounts_temp) );
       amounts_temp = _.zip.apply(_,amounts_temp); 
       amounts_temp = _.map(amounts_temp, amounts_temp => d3.sum(amounts_temp) );
       //The following determines the first and last "active year" for a given department, 
       //assumes no middle stoppage
       var m = run_template;
       var first_active_year_index = _.findIndex( amounts_temp, amounts_temp => amounts_temp !== 0 );
-      var last_active_year_index = _.findLastIndex(amounts_temp, amounts_temp =>  amounts_temp !== 0 );
+      var last_active_year_index = _.findLastIndex(amounts_temp, amounts_temp => amounts_temp !== 0 );
       if (first_active_year_index > 0){
         add(context_prefix +"_first_active_year",m(years[first_active_year_index]));
       } else {
@@ -187,7 +187,7 @@ const stats = {
     var max_row = amounts[max_index];
     var max_label = labels[max_index];
     var max_avg = averages[max_index];
-    var max_co_var =  Math.sqrt(_.reduce(_.tail(max_row), function(x,y){
+    var max_co_var = Math.sqrt(_.reduce(_.tail(max_row), function(x,y){
       return x + Math.pow(y-max_avg,2);
     },0)/_.tail(amounts[0]).length)/max_avg;
   
@@ -196,8 +196,8 @@ const stats = {
     add(context_prefix +"_top_avg",max_avg);
     add(context_prefix +"_top_avg_percent",max/d3.sum(totals));
     add({
-      key :  context_prefix+"_top_high_var",
-      value :  max_co_var > 0.05,
+      key : context_prefix+"_top_high_var",
+      value : max_co_var > 0.05,
       type : "boolean",
     });
   
@@ -212,13 +212,13 @@ const stats = {
       add(context_prefix +"_bottom_avg",min_avg);
       add(context_prefix +"_bottom_avg_percent",min/d3.sum(totals));
 
-      var min_co_var =  Math.sqrt(_.reduce(_.tail(min_row), function(x,y){
+      var min_co_var = Math.sqrt(_.reduce(_.tail(min_row), function(x,y){
         return x + Math.pow(y-min_avg,2);
       },0)/_.tail(amounts[0]).length)/min_avg;
     
       add({
-        key :  context_prefix+"_bottom_high_var",
-        value :  min_co_var > 0.05,
+        key : context_prefix+"_bottom_high_var",
+        value : min_co_var > 0.05,
         type : "boolean",
       });
     }
@@ -245,7 +245,7 @@ const stats = {
       add(context_prefix+"_top3_amnt",amounts[2][1]);
       counter+=1;
     }
-    add(context_prefix+"_top_num",  counter);
+    add(context_prefix+"_top_num", counter);
   },
   
   one_year_top2_bottom1(add,context_prefix,amounts ){

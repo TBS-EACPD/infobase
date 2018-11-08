@@ -8,7 +8,7 @@ import { TextMaker } from './rpb_text_provider';
 
 function toggleArrayElement(arr,el){
   return _.includes(arr,el) ?
-  _.without(arr,el)  :
+  _.without(arr,el) :
   arr.concat(el);
 }
 

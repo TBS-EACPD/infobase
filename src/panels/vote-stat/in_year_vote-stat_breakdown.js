@@ -35,7 +35,7 @@ const planned_vote_or_stat_render = vs => function({calculations, footnotes, sou
 
   const col = "{{est_in_year}}_estimates";  
   const top_10_rows = _.take(data, 10);
-  const complement_amt =  _.last(data)[col];
+  const complement_amt = _.last(data)[col];
   const total_amt = d3.sum(data, _.property(col) );
 
   const rows= _.map(top_10_rows, obj => ({
@@ -47,7 +47,7 @@ const planned_vote_or_stat_render = vs => function({calculations, footnotes, sou
 
   const packing_data = {
     name : "",
-    children : _.map(data,(d,i) =>  _.extend( {id:i} ,d )),
+    children : _.map(data,(d,i) => _.extend( {id:i} ,d )),
   };
 
   const show_pack = !window.is_a11y_mode;
@@ -123,7 +123,7 @@ const planned_vote_or_stat_calculate = vs => function(subject, info){
     .value();
 
   const ret = {};
-  ret.text_func =  d => {
+  ret.text_func = d => {
     const val = formats.compact1(d.value);
     let text = `${d.data.desc}: ${val}`;
 

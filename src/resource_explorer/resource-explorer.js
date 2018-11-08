@@ -281,7 +281,7 @@ class ExplorerPage extends React.Component {
               <TM k="choose_explore_point" />
             </header>
             <div role="radiogroup" className="hierarchy-selection-items">
-              {_.map([ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp18" && INCLUDE_OTHER_TAGS ? [wwh_props /*, mlt_props*/] : [])  ],props =>
+              {_.map([ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp18" && INCLUDE_OTHER_TAGS ? [wwh_props /*, mlt_props*/] : []) ],props =>
                 <HierarchySelectionItem 
                   key={props.id} 
                   url={`#resource-explorer/${props.id}/${doc}`}
@@ -308,7 +308,7 @@ class ExplorerPage extends React.Component {
 
 const map_state_to_props_from_memoized_funcs = memoized_funcs => {
 
-  const  { get_scheme_props } = memoized_funcs;
+  const { get_scheme_props } = memoized_funcs;
   const mapRootStateToRootProps = map_state_to_root_props_from_memoized_funcs(memoized_funcs);
 
   return state => ({
@@ -416,7 +416,7 @@ export default class ResourceExplorer extends React.Component {
     );
 
     //additional validation
-    if(doc == "drr16" &&  !_.includes(['min','dept','GOCO','HWH'], hierarchy_scheme) ){
+    if(doc == "drr16" && !_.includes(['min','dept','GOCO','HWH'], hierarchy_scheme) ){
       hierarchy_scheme = "min";
     }
     

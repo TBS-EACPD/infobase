@@ -110,7 +110,7 @@ export default {
       .add_child([
         {
           "type":"big_int",
-          "nick" :  "last_year_plannedexp",
+          "nick" : "last_year_plannedexp",
           "header":{
             "en":"Planned expenditures for the year ending {{qfr_last_year_end}}",
             "fr":"Dépenses prévues pour l'exercice se terminant le {{qfr_last_year_end}}",
@@ -168,7 +168,7 @@ export default {
             return trivial_text_maker("op_spending");
           } else if (row.so_num > 7 && row.so_num <= 9) {
             return trivial_text_maker("capital_spending");
-          } else if (row.so_num === 21  || row.so_num  === 22) {
+          } else if (row.so_num === 21 || row.so_num === 22) {
             return trivial_text_maker("revenues");
           }
           return row.so;

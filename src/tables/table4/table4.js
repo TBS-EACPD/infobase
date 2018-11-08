@@ -106,16 +106,16 @@ export default {
 
   "queries" : {
     "exp_auth_by_year" : function(year,format){
-      format =  format === undefined ? false : true;
+      format = format === undefined ? false : true;
       var vals = this.sum([year+'auth',year+'exp'],{format: format});
       return [m(year),vals[year+'auth'],vals[year+'exp']];
     },
     "voted_items" : function(cut_off){
-      this.vote_stat_query =  vote_stat_query;
+      this.vote_stat_query = vote_stat_query;
       return this.vote_stat_query(voted_label,cut_off);
     },
     "stat_items" : function(cut_off){
-      this.vote_stat_query =  vote_stat_query;
+      this.vote_stat_query = vote_stat_query;
       return this.vote_stat_query(stat_label,cut_off);
     },
   },
@@ -124,12 +124,12 @@ export default {
     {
       title_key : "major_voted_stat",
       include_in_report_builder : true,
-      filter_func :  major_vote_stat,
+      filter_func : major_vote_stat,
     },
     {
       title_key :"voted_stat",
       include_in_report_builder : true,
-      filter_func :  vote_stat_dimension,
+      filter_func : vote_stat_dimension,
     },
   ],
 
@@ -229,7 +229,7 @@ Statistics.create_and_register({
 
     const unused_auth_diff = _.map(
       std_years,
-      year =>  _.map(q.data, row => (row[year + "auth"] - row[year + "exp"]) ) 
+      year => _.map(q.data, row => (row[year + "auth"] - row[year + "exp"]) ) 
     );
 
     const unused_auth_sum = _.map(unused_auth_diff,d => d3.sum(d) );
@@ -256,19 +256,19 @@ Statistics.create_and_register({
 
 
     stats.add_all_years(add,"auth",std_years,function(year,i){
-      return  q.sum(year+"auth");
+      return q.sum(year+"auth");
     });
 
     stats.add_all_years(add,"exp",std_years,function(year,i){
-      return  q.sum(year+"exp");
+      return q.sum(year+"exp");
     });
 
     stats.add_all_years(add,"voted",std_years,function(year,i){
-      return  table.voted_stat(year+'auth',subject)[voted_label];
+      return table.voted_stat(year+'auth',subject)[voted_label];
     });
 
     stats.add_all_years(add,"stat",std_years,function(year,i){
-      return  table.voted_stat(year+'auth',subject)[stat_label];
+      return table.voted_stat(year+'auth',subject)[stat_label];
     });
 
     add({
@@ -320,10 +320,10 @@ Statistics.create_and_register({
     );
 
     stats.add_all_years(add,"auth",std_years,function(year,i){
-      return  q.sum(year+"auth");
+      return q.sum(year+"auth");
     });
     stats.add_all_years(add,"exp",std_years,function(year,i){
-      return  q.sum(year+"exp");
+      return q.sum(year+"exp");
     });
     
     add("hist_diff_average", c.gov_auth_average - c.gov_exp_average);
@@ -333,7 +333,7 @@ Statistics.create_and_register({
       return table.voted_stat(year+'auth',false)[voted_label];
     });
     stats.add_all_years(add,"stat",std_years,function(year,i){
-      return  table.voted_stat(year+'auth',false)[stat_label];
+      return table.voted_stat(year+'auth',false)[stat_label];
     });
 
 

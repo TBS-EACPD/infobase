@@ -92,7 +92,7 @@ export default {
     },
   },
 
-  "mapper":  function (row) {
+  "mapper": function (row) {
     row.splice(1, 1, fol[row[1]].text);
     return row;
   },

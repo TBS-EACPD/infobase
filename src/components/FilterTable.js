@@ -91,7 +91,7 @@ export class FilterTable extends React.Component {
                 <div 
                   className="filter-table__eye"
                   style={{
-                    visibility: !nothing_is_filtered || show_eyes_override  ? "visible" : "hidden",
+                    visibility: !nothing_is_filtered || show_eyes_override ? "visible" : "hidden",
                   }}
                 >
                   { item.active ? eye_open : eye_closed }

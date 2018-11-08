@@ -13,10 +13,10 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
   const indicator_count_obj = { 
     count: indicators.length, 
     type_key: 'indicator',
-    type_name:  ('indicators'),
+    type_name: ('indicators'),
   };
 
-  const count_items  = _.chain(base_hierarchy)
+  const count_items = _.chain(base_hierarchy)
     .reject('root')
     .groupBy("data.type")
     .toPairs()

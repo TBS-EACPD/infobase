@@ -70,7 +70,7 @@ export const pack_data = function(data, level_name,options = {}){
   //  and then packs them into a structure suitible for presentation
   //  this is useful for when there are large difference between the numbers
   //
-  let  attr = options.attr || 'value';
+  let attr = options.attr || 'value';
   if (options.force_positive){
     _.each(data, x => {
       x["__"+attr+"__"] = x[attr];
@@ -80,7 +80,7 @@ export const pack_data = function(data, level_name,options = {}){
   if (options.filter_zeros){
     data = _.filter(data, x => x[attr] !== 0 );
   }
-  let soften =  _.isUndefined(options.soften) ? true : options.soften;
+  let soften = _.isUndefined(options.soften) ? true : options.soften;
   let accessor = _.property(attr);
   const { level_assigner } = options;
   
@@ -95,7 +95,7 @@ export const pack_data = function(data, level_name,options = {}){
   let __value__;
 
   _.each(sorted,function(group,i){
-    var softened = soften ? soften_spread(group.values,attr):  group.values;
+    var softened = soften ? soften_spread(group.values,attr): group.values;
     if (i === 0){
       __value__ = d3.sum(softened, _.property("__value__"));
       rtn = {
@@ -153,7 +153,7 @@ export class Pack {
 
     common_charts_utils.setup_graph_instance(this,container,options);
 
-    var _graph_area  = this.svg.append("g").attr("class","_graph_area");
+    var _graph_area = this.svg.append("g").attr("class","_graph_area");
     this.graph_area = _graph_area.append("g").attr("class","inner_graph_area");
 
     _.bindAll(this,'setup_for_zoom',"mouse_enter", "mouse_leave", "hover_in","hover_out");
@@ -273,9 +273,9 @@ export class Pack {
     if (!(_.isUndefined(node.parent) || _.isNull(node.parent))){
 
       var svgnode = this.graph_area.selectAll("circle[rid='"+node.rid+"']");
-      var fillopacity =  svgnode.style("fill-opacity");
+      var fillopacity = svgnode.style("fill-opacity");
      
-      var fill =  svgnode.style("fill");
+      var fill = svgnode.style("fill");
       var stroke = svgnode.style("stroke");
 
       svgnode
@@ -307,13 +307,13 @@ export class Pack {
     this.options = _.extend(this.options,options);
     this.fill_func = this.options.fill_func || false;;
     this.colors = this.options.colors || common_charts_utils.tbs_color();
-    this.invisible_grand_parent = _.isUndefined(this.options.invisible_grand_parent) ? true  : this.options.invisible_grand_parent;
+    this.invisible_grand_parent = _.isUndefined(this.options.invisible_grand_parent) ? true : this.options.invisible_grand_parent;
     // be default just add the empty # as the href 
     this.href_func = this.options.href_func || _.constant("#");
     this.aria_label_func = this.options.aria_label_func;
     this.cycle_colours = this.options.cycle_colours || false;
-    this.top_font_size =  this.options.top_font_size || 14;
-    this.bottom_font_size =  this.options.bottom_font_size || 12;
+    this.top_font_size = this.options.top_font_size || 14;
+    this.bottom_font_size = this.options.bottom_font_size || 12;
     this.zoomable = this.options.zoomable || false;
     this.auto_focus_largest = !_.isUndefined(this.options.auto_focus_largest) ? false : this.options.auto_focus_largest;
     let data = this.options.data;
@@ -332,7 +332,7 @@ export class Pack {
 
       const root = this.root = d3.hierarchy(data)
         .sum(function(d) {return d[value_attr]; })
-        .sort((a, b) =>  {return (b.value - a.value)});
+        .sort((a, b) => {return (b.value - a.value)});
     
       this.pack
         .padding(0)
@@ -348,7 +348,7 @@ export class Pack {
     
     // filter to only show the first two depths of the packed circles
     if (!this.zoomable){
-      this.nodes = _.filter(this.nodes,d =>  d.depth <= 1);
+      this.nodes = _.filter(this.nodes,d => d.depth <= 1);
     }
 
     // normal svg setuup with the height, width
@@ -397,7 +397,7 @@ export class Pack {
     var nodes_shown = _.filter(this.nodes, d => d.depth <= depth +2)
     // filter to the ondes which are being drawn
     // i.e. only those who are children of the current node
-    var nodes_with_text =  _.chain(this.nodes)
+    var nodes_with_text = _.chain(this.nodes)
       .filter(d => _.includes(node.children,d))
       // return negative value for reverse sort so
       // the text nodes are sorted according to the 
@@ -406,7 +406,7 @@ export class Pack {
       .value();
 
 
-    var font_scale  = d3.scaleLinear()
+    var font_scale = d3.scaleLinear()
       .domain(d3.extent(nodes_with_text, _.property('zoom_r')))
       .rangeRound([this.bottom_font_size,this.top_font_size]);
 
@@ -457,13 +457,13 @@ export class Pack {
           if (d.__value__ && d.__value__ <0){
             return "red";
           }
-          return  "rgb(37,114,180)";
+          return "rgb(37,114,180)";
         },
         "fill-opacity" : d => {
           if (d.depth === 0 && that.invisible_grand_parent){
             return 0;
           } else if ((d.depth === 0 && !that.invisible_grand_parent) ||
-                      d.depth <=  depth+1 ){
+                      d.depth <= depth+1 ){
             return 0.2;
           } else {
             return 0.4;
@@ -473,7 +473,7 @@ export class Pack {
       .attrs({
         "cx": d => {return d.zoom_pos.x},
         "cy": d => d.zoom_pos.y,
-        "r" : d =>  d.zoom_r,
+        "r" : d => d.zoom_r,
       });
 
     if ( !window.feature_detection.is_mobile() ){
@@ -507,13 +507,13 @@ export class Pack {
           if (d.__value__ && d.__value__ <0){
             return "red";
           }
-          return  "rgb(37,114,180)";
+          return "rgb(37,114,180)";
         },
         "fill-opacity" : d => {
           if (d.depth === 0 && that.invisible_grand_parent){
             return 0;
           } else if ((d.depth === 0 && !that.invisible_grand_parent) ||
-                      d.depth <=  depth+1 ){
+                      d.depth <= depth+1 ){
             return 0.2;
           } else {
             return 0.4;
@@ -523,14 +523,14 @@ export class Pack {
       .attrs({
         "cx": d => d.zoom_pos.x,
         "cy": d => d.zoom_pos.y,
-        "r" : d =>  d.zoom_r,
+        "r" : d => d.zoom_r,
       });
 
     if (this.cycle_colours){
       // the circles should be sorted so the colour application
       // will be predictable
       circles
-        .filter(d=> d.depth ===  depth+1)
+        .filter(d=> d.depth === depth+1)
         .styles({
           "fill" : (d,i)=> {
             return this.colors(i);

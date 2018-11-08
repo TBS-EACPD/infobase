@@ -113,7 +113,7 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
       case 'tag': {
 
         if(subject.is_lowest_level_tag){
-          return  _.chain(subject.programs)
+          return _.chain(subject.programs)
             .map( prog => ({
               id: `${parent_id}-${prog.guid}`,
               data: {
@@ -232,7 +232,7 @@ const get_initial_resource_state = ({hierarchy_scheme, doc}) => ({
 
 const resource_scheme = {
   key: 'resources',
-  get_sort_func_selector: () =>  provide_sort_func_selector('resources'),
+  get_sort_func_selector: () => provide_sort_func_selector('resources'),
   get_props_selector: () => {
 
     return augmented_state => ({ 
@@ -274,7 +274,7 @@ const resource_scheme = {
   get_base_hierarchy_selector: () => createSelector(
     state => state.resources.hierarchy_scheme,
     state => state.resources.doc,
-    (hierarchy_scheme, doc) =>  create_resource_hierarchy({ 
+    (hierarchy_scheme, doc) => create_resource_hierarchy({ 
       hierarchy_scheme,
       doc,
     })

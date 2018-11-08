@@ -260,13 +260,13 @@ function populate_program_tags(tag_rows){
 };
 
 function populate_socr_tags(rows){
-  const [ id, dept_code,  title, desc, is_active, is_drf, is_internal_service ] = [0,1,2,3,4,5,6,7];
+  const [ id, dept_code, title, desc, is_active, is_drf, is_internal_service ] = [0,1,2,3,4,5,6,7];
   _.each(rows,row => {
     const dept = Dept.lookup(row[dept_code]);
     const instance = CRSO.create_and_register({
       dept,
       id: row[id],
-      name:  row[title],
+      name: row[title],
       description: row[desc],
       is_active: !!(+row[is_active]),
       is_drf: !!(+row[is_drf]),
@@ -289,7 +289,7 @@ function populate_programs(rows){
       dept: Dept.lookup(row[dept_code]),
       data : {},
       description : _.trim(row[desc].replace(/^<p>/i,"").replace(/<\/p>$/i,"")),
-      name :  row[name],
+      name : row[name],
       is_active: !!(+row[is_active]),
       is_internal_service: row[is_internal_service] === "1",
       web_links: _.compact([ 
@@ -309,7 +309,7 @@ function populate_program_tag_linkages(programs_m2m_tags){
     const tag = Tag.lookup(tagID);
     const tag_root_id = tag.root.id;
     // if(tag_root_id === "CCOFOG" || tag_root_id === "MLT" || tag_root_id === "WWH"){
-    if(tag_root_id === "CCOFOG" || tag_root_id === "MLT"  ){
+    if(tag_root_id === "CCOFOG" || tag_root_id === "MLT" ){
       return;
     }
     program.tags.push(tag)

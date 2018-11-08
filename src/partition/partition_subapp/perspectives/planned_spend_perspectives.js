@@ -209,7 +209,7 @@ const orgs_in_est_doc = (est_doc_code) => {
 const est_type_node_rules = (node) => {
   if ( node.is("gov") ){
     return subject_to_est_type_nodes(node);
-  }  else if ( node.is("est_type") ){
+  } else if ( node.is("est_type") ){
     return est_type_node_to_vs_type_nodes(node);
   } else if ( node.is("vs_type") ){
     return est_type_or_vs_type_node_to_stat_item_nodes(node);

@@ -105,7 +105,7 @@ export default {
     },
   ],
 
-  "mapper":  function (row) {
+  "mapper": function (row) {
     var new_value = gender[row[1]].text;
     row.splice(1, 1, new_value);
     return row;

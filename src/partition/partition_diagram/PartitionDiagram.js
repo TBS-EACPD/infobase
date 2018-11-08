@@ -1,4 +1,4 @@
-import diagram_text  from './PartitionDiagram.yaml';
+import diagram_text from './PartitionDiagram.yaml';
 import './PartitionDiagram.scss';
 import { PartitionDataWrapper } from './PartitionDataWrapper.js';
 import * as utils from "../../core/utils";

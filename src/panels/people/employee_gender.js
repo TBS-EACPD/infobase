@@ -43,7 +43,7 @@ const calculate_funcs_by_level = {
         const yearly_values = people_years.map(year => table302.horizontal(year,false)[gender_text]);
         return {
           label: gender_text,
-          data:  yearly_values,
+          data: yearly_values,
           five_year_percent: yearly_values.reduce(function(sum, val) { return sum + val }, 0)/gov_five_year_total_head_count,
           active: true,
         };

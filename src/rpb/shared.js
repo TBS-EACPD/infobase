@@ -10,9 +10,9 @@ const { Gov } = Subject;
 const SelectList = ({
   legend_text,
   items, //[ {id,display} ]
-  selected,  //[ ids ]
+  selected, //[ ids ]
   is_multi_select, //true, defaults to false. All it does is provide the aria attr.
-  onSelect,  //(id)=> { ... }
+  onSelect, //(id)=> { ... }
   display,
 }) => {
   const name = "a"+_.uniqueId();

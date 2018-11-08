@@ -83,8 +83,8 @@ export class Table extends mix().with(staticStoreMixin){
     this._cols = []; 
     this.flat_headers = [];
     this.data = [];
-    this['footnote-topics'].group  = this['footnote-topics'].group || '*';
-    this['footnote-topics'].table  = this['footnote-topics'].table || '*';
+    this['footnote-topics'].group = this['footnote-topics'].group || '*';
+    this['footnote-topics'].table = this['footnote-topics'].table || '*';
     this.column_counter = make_unique_func();
     this.loaded = false;
 
@@ -104,21 +104,21 @@ export class Table extends mix().with(staticStoreMixin){
     to_chain
       .filter(col => !_.isUndefined(col.formula))
       .each(col => {
-        var formula =  col.formula;
+        var formula = col.formula;
         col.formula = data => formula(this,data);
       })
       .value();
   
     to_chain
       .filter(function(col){
-        return col.type !== "int"  && col.type !== "str" && col.type !== 'wide-str' && _.isUndefined(col.formula);
+        return col.type !== "int" && col.type !== "str" && col.type !== 'wide-str' && _.isUndefined(col.formula);
       })
       .each(function(col){
         col.formula = function(data){
           if (_.isArray(data)){
             return d3.sum(_.map(data,col.nick || col.wcag));
           }
-          return  data;
+          return data;
         };
         col.formula.default = true;
       })
@@ -254,7 +254,7 @@ export class Table extends mix().with(staticStoreMixin){
       x.header = { [window.lang] : trivial_text_maker('department') };
     }
     if (_.isString(x)){
-      x =  {header : {en: x, fr: x}};
+      x = {header : {en: x, fr: x}};
     }
     if (_.isString(x.header)){
       x.header = {en: x.header, fr: x.header};
@@ -267,7 +267,7 @@ export class Table extends mix().with(staticStoreMixin){
       // ask for a unique attribute for this header
       // this will be used for adding header links 
       // to able cells as per WCAG standard
-      x.wcag =  x.table.column_counter();
+      x.wcag = x.table.column_counter();
       this._cols.push(x);
       x.level = 0;
     }
@@ -333,10 +333,10 @@ export class Table extends mix().with(staticStoreMixin){
   
       var mapped_row = mapper.map(row);
       // turn the array of data into an object with keys based on the defined columns
-      var row_obj =  _.zipObject(this.unique_headers,mapped_row);
+      var row_obj = _.zipObject(this.unique_headers,mapped_row);
       _.toPairs(row_obj).forEach(pair =>{
         const [key,val] = pair;
-        const type =  this.col_from_nick(key).type ;
+        const type = this.col_from_nick(key).type ;
         // in case we have numbers represented as string, we'll convert them to integers
         if ( type === 'big_int' || type === "big_int_real" || type === 'percentage' || type==='decimal' || type==='decimal1' || type==='percentage1' || type==='percentage2'){
           row_obj[key]=accounting.unformat(_.trim(val));
@@ -378,11 +378,11 @@ function add_child(x){
   }
   _.each(x, col => {
     if (_.isString(col)){
-      col =  {header : {en: col, fr: col}};
+      col = {header : {en: col, fr: col}};
     }
     col.parent = this;
     this.table.add_col(col);
-    col.wcag =  col.parent.table.column_counter();
+    col.wcag = col.parent.table.column_counter();
     col.level = col.parent.level +1;
     col.table = col.parent.table;
   });

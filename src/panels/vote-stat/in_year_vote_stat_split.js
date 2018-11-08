@@ -37,7 +37,7 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
 new PanelGraph({
   level: "dept",
   key: 'in_year_voted_stat_split',
-  depends_on :  ['table8'],
+  depends_on : ['table8'],
   info_deps: ['table8_dept_info', 'table8_gov_info' ],
   machinery_footnotes : false,
   calculate(subject,info){
@@ -60,12 +60,12 @@ new PanelGraph({
 new PanelGraph({
   level: "gov",
   key: 'in_year_voted_stat_split',
-  depends_on :  ['table8'],
+  depends_on : ['table8'],
   machinery_footnotes : false,
   info_deps : ['table8_gov_info'],
 
   calculate(subject,info){
-    return   [
+    return [
       {value:info.gov_stat_est_in_year, label : text_maker("stat") },
       {value:info.gov_voted_est_in_year, label :text_maker("voted") },
     ];

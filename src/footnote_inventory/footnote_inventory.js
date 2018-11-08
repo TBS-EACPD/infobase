@@ -32,8 +32,8 @@ const subject_label = ({subject, subject_class}) => {
 
 ROUTER.add_container_route("footnotes/:mode:/:concept_or_graph_key:/:level:","_footnote_inventory",function(container, mode, concept_or_graph_key, level){
   const title = "footnote inventory"
-  const h1 = document.createElement('h1');        // Create a <button> element
-  const txt_node = document.createTextNode(title);       // Create a text node
+  const h1 = document.createElement('h1'); // Create a <button> element
+  const txt_node = document.createTextNode(title); // Create a text node
   h1.appendChild(txt_node);       
   this.add_title(h1);
   this.add_crumbs([{html: title }]);
@@ -104,7 +104,7 @@ class FootnoteInspector extends React.Component {
 
   get_all_footnotes_for_graph(graph_obj){
 
-    const { level, footnote_concept_keys }  = graph_obj;
+    const { level, footnote_concept_keys } = graph_obj;
 
     return _.chain(this.all_footnotes)
       .filter( ({subject, subject_class, topic_keys}) => (
@@ -266,7 +266,7 @@ class FootnoteInspector extends React.Component {
       </div>
 
     } else {
-      const sel =  <Select
+      const sel = <Select
         selected={selected_concept}
         options={all_graph_concepts.map(id => ({id, display:id}))}
         onSelect={id => this.setState({selected_concept: id}) } 

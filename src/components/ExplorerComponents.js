@@ -414,7 +414,7 @@ export class Explorer extends React.Component {
   updateWidth(){
     const { width_setter_el } = this;
     const width = _.get(
-      width_setter_el.querySelector(".ExplorerNode"),  //the first row, but not the header
+      width_setter_el.querySelector(".ExplorerNode"), //the first row, but not the header
       "scrollWidth"
     );
     if(_.isNumber(width) && width > width_setter_el.parentNode.clientWidth){

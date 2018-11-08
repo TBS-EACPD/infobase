@@ -35,7 +35,7 @@ class GranularView extends React.Component {
 
       on_toggle_col_nick,
       on_set_filter,
-    }   = this.props;
+    } = this.props;
 
     return (
       <div>
@@ -433,7 +433,7 @@ class ExportButton extends React.Component {
 
   }
   triggerDownload(){
-    const csv_str =  this.props.get_csv_string();
+    const csv_str = this.props.get_csv_string();
     const uri = "data:text/csv;charset=UTF-8," + encodeURIComponent(csv_str);
     
     const temporary_anchor = document.createElement('a');

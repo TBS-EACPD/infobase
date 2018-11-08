@@ -359,7 +359,7 @@ const URLSynchronizer = withRouter(
 );
 
 const url_state_selector = createSelector(_.identity, str => {
-  let state =  {};
+  let state = {};
   if(_.nonEmpty(str)){
     state = _.chain(str)
       .pipe(str => JSURL.parse(str) )

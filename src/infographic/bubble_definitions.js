@@ -47,7 +47,7 @@ export const bubble_defs = {
     tables: [],
     svg_content: svgs.financial.text,
   },
-  people:  {
+  people: {
     ix: 10,
     id : 'people',
     title: _.constant(text.people_title[lang]),

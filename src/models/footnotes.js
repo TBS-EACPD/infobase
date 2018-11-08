@@ -32,7 +32,7 @@ export default class FootNote extends mix().with(staticStoreMixin){
 
     let ret;
     if (_.isEmpty(topics)){
-      ret =  [];
+      ret = [];
     } else if(_.some(topics, topic => topic === "*")){
       ret = this.lookup(subject);
     } else {

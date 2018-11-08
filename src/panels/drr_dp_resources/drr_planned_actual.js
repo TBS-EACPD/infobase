@@ -56,7 +56,7 @@ _.each(['dept','program'], level => {
       }
 
 
-      const footnotes =  FootNote.get_for_subject(
+      const footnotes = FootNote.get_for_subject(
         subject,
         ['DRR_EXP', 'DRR_FTE']
       );

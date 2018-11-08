@@ -25,11 +25,11 @@ const estimates_split_calculate = function(subject, info,options){
   return {
     in_year: {
       series : {'': _.map(in_year_estimates_split,1) },
-      ticks :  _.map(in_year_estimates_split,0),
+      ticks : _.map(in_year_estimates_split,0),
     },
     last_year: {
       series : {'': _.map(last_year_estimates_split,1) },
-      ticks :  _.map(last_year_estimates_split,0),
+      ticks : _.map(last_year_estimates_split,0),
     },
   };
 };
@@ -108,7 +108,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
 new PanelGraph({
   level: "dept",
   machinery_footnotes : false,
-  depends_on :  ["table8"],
+  depends_on : ["table8"],
 
   info_deps: [
     'table8_gov_info', 
@@ -117,16 +117,16 @@ new PanelGraph({
 
   key : "in_year_estimates_split",
   calculate: estimates_split_calculate,
-  render:   estimates_split_render_w_text_key("dept_in_year_estimates_split_text"),
+  render: estimates_split_render_w_text_key("dept_in_year_estimates_split_text"),
 });
 
 new PanelGraph({
   level: "gov",
   machinery_footnotes : false,
-  depends_on :  ["table8"],
+  depends_on : ["table8"],
   info_deps: ["table8_gov_info"],
   key : "in_year_estimates_split",
   calculate: estimates_split_calculate,
-  render:   estimates_split_render_w_text_key("gov_in_year_estimates_split_text"),
+  render: estimates_split_render_w_text_key("gov_in_year_estimates_split_text"),
 });
 

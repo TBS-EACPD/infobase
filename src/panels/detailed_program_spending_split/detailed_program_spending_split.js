@@ -75,7 +75,7 @@ const info_deps_by_level = {
         .compact()
         .groupBy('so_num')
         .toPairs()
-        .map( ([so_num, group]) =>  ({
+        .map( ([so_num, group]) => ({
           so_num : +so_num, 
           sum: d3.sum(group, _.property('value')),
         }))
@@ -140,7 +140,7 @@ const info_deps_by_level = {
         null
       );
 
-      const arrangements =  [ 
+      const arrangements = [ 
         {
           label: text_maker('all'),
           id: text_maker('all'),
@@ -180,7 +180,7 @@ const info_deps_by_level = {
                 data={_.map(table6_data, ({label,data},ix) => ({
                   label,
                   data,
-                  id: `${ix}-${label}`,  //need unique id, program names don't always work!
+                  id: `${ix}-${label}`, //need unique id, program names don't always work!
                 }))}
               />
             </div>

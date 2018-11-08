@@ -22,7 +22,7 @@ class PanelGraph {
   static get graphs() { return graphs; }
 
   static lookup(key,level){
-    const lookup =  create_graph_key(key,level);
+    const lookup = create_graph_key(key,level);
     if (window.is_dev_build && !graphs[lookup]) {
       /* eslint-disable no-console */
       console.error(`bad graph key - ${lookup} for level ${level && level.type}`);
@@ -87,7 +87,7 @@ class PanelGraph {
     //we copy every thing except render and calculate, which follow a specific API
     this._inner_calculate = def.calculate || (()=> true)
     this._inner_render = def.render;
-    const to_assign  = _.omit(def, [ 'render', 'calculate' ])
+    const to_assign = _.omit(def, [ 'render', 'calculate' ])
     const full_key = create_graph_key(def.key,def.level);
     Object.assign(
       this,  
@@ -102,7 +102,7 @@ class PanelGraph {
 
   get tables(){ //table defs in depends_on indexed by their table ids
     return _.chain(this.depends_on)
-      .map( table_id => [table_id,  Table.lookup(table_id) ] )
+      .map( table_id => [table_id, Table.lookup(table_id) ] )
       .fromPairs()
       .value();
   }
@@ -113,7 +113,7 @@ class PanelGraph {
     }
     const calc_func = this._inner_calculate;
     const info = get_info(subject, this.info_deps)
-    if(info.missing_values && this.missing_info !== 'ok'){  // dept is missing from table or an exception ocurred during one of the info_deps' computations
+    if(info.missing_values && this.missing_info !== 'ok'){ // dept is missing from table or an exception ocurred during one of the info_deps' computations
       return false; 
     }
 
@@ -210,14 +210,14 @@ class PanelGraph {
 
 
 function graphs_with_key(key, level){
-  let graphs =  _.filter(PanelGraph.graphs, { key });
+  let graphs = _.filter(PanelGraph.graphs, { key });
   if(level){
     graphs = _.filter(graphs, { level });
   }
   return graphs;
 }
 
-function tables_for_graph( graph_key, subject_level  ){
+function tables_for_graph( graph_key, subject_level ){
   const graph_objs = graphs_with_key(graph_key, subject_level);
   return _.chain( graph_objs )
     .map('info_deps')

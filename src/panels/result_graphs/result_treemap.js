@@ -363,7 +363,7 @@ class SingleSubjExplorer extends React.Component {
 
 const map_state_to_props_from_memoized_funcs = memoized_funcs => {
 
-  const  { get_scheme_props } = memoized_funcs;
+  const { get_scheme_props } = memoized_funcs;
   const mapRootStateToRootProps = map_state_to_root_props_from_memoized_funcs(memoized_funcs);
 
   return state => ({
@@ -399,7 +399,7 @@ class SingleSubjResultsContainer extends React.Component {
 
     const initialState = {
       root: ({...initial_root_state, scheme_key}),
-      [scheme_key]: get_initial_single_subj_results_state({ subj_guid: subject.guid, has_drr_data, has_dp_data  }),
+      [scheme_key]: get_initial_single_subj_results_state({ subj_guid: subject.guid, has_drr_data, has_dp_data }),
     };
 
     const Container = connect(mapStateToProps, mapDispatchToProps)(SingleSubjExplorer)

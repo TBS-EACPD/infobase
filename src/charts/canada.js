@@ -104,8 +104,8 @@ export class Canada {
 
     svg
       .attrs({
-        "height" :  height +"px",
-        "width" :  this.outside_width +"px",
+        "height" : height +"px",
+        "width" : this.outside_width +"px",
       });
 
     svg.select(".container")

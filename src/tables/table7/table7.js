@@ -109,7 +109,7 @@ export default {
       title_key : "payment_types_v_s",
       include_in_report_builder : true,
 
-      filter_func :  function(options){
+      filter_func : function(options){
         return function(row){
           var type = row.type;
           if (row.tp.substring(0,3) === '(S)' || row.tp.substring(0,3) === "(L)"){
@@ -170,7 +170,7 @@ Statistics.create_and_register({
   compute: (subject, tables, infos, add, c) => {
     const table = tables.table7;
     const q = table.q(subject);
-    var cols =  _.map(std_years, function(year){  return year+"exp"; });
+    var cols = _.map(std_years, function(year){ return year+"exp"; });
     var all_years = q.get_cols(["tp"].concat(cols),{zip:true});
     stats.year_over_year_multi_stats(add, "tp_exp",all_years);
     var all_years_type = _.chain(q.types()) 
@@ -211,7 +211,7 @@ Statistics.create_and_register({
     const t4_info = info_deps.table4_dept_info;
     const q = table7.q(subject);
 
-    const cols =  _.map(std_years, year => year+"exp");
+    const cols = _.map(std_years, year => year+"exp");
 
     var all_years = q.get_cols(["tp"].concat(cols),{zip:true});
     stats.year_over_year_multi_stats(add, "tp_exp",all_years);
@@ -245,7 +245,7 @@ Statistics.create_and_register({
     const type = value < 0.01 ? "percentage2" : "percentage1";
     add({
       "value" : value, 
-      "key":  "tp_exp_ratio_gov_pa_last_year",
+      "key": "tp_exp_ratio_gov_pa_last_year",
       "type": type,
     });
 
@@ -266,8 +266,8 @@ Statistics.create_and_register({
     //});
 
     add({
-      "value" :  c.dept_tp_exp_pa_last_year/ t4_info.dept_exp_pa_last_year,
-      "key":  "tp_exp_ratio_pa_last_year",
+      "value" : c.dept_tp_exp_pa_last_year/ t4_info.dept_exp_pa_last_year,
+      "key": "tp_exp_ratio_pa_last_year",
       "type": "percentage1",
     });
 

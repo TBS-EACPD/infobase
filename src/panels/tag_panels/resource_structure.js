@@ -1,7 +1,7 @@
 import '../../gen_expl/explorer-styles.scss';
 import text from './resource_structure.yaml';
 import classNames from 'classnames';
-import { combineReducers, createStore }  from 'redux';
+import { combineReducers, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import { infograph_href_template } from '../../link_utils.js';
 import { get_root } from '../../gen_expl/hierarchy_tools.js';
@@ -141,7 +141,7 @@ class RootedResourceExplorer extends React.Component {
 
 const map_state_to_props_from_memoized_funcs = memoized_funcs => {
 
-  const  { get_scheme_props } = memoized_funcs;
+  const { get_scheme_props } = memoized_funcs;
   const mapRootStateToRootProps = map_state_to_root_props_from_memoized_funcs(memoized_funcs);
 
   return state => ({

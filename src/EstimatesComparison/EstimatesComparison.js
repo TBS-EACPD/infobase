@@ -67,7 +67,7 @@ export default class EstimatesComparison extends React.Component {
 
 const map_state_to_props_from_memoized_funcs = memoized_funcs => {
 
-  const  { get_scheme_props } = memoized_funcs;
+  const { get_scheme_props } = memoized_funcs;
   const mapRootStateToRootProps = map_state_to_root_props_from_memoized_funcs(memoized_funcs);
 
   return state => _.immutate(

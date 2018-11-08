@@ -12,7 +12,7 @@ const TextMaker = ({text_maker_func, text_key, el, args, template_str}) => {
 };
 
 //shorthand for the above
-const TM = ({k, el, args, tmf}) => <TextMaker text_key={k} el={el} args={args}  text_maker_func={tmf}/>;
+const TM = ({k, el, args, tmf}) => <TextMaker text_key={k} el={el} args={args} text_maker_func={tmf}/>;
 
 export {
   TextMaker,

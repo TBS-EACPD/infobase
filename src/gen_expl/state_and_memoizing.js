@@ -123,7 +123,7 @@ const map_state_to_root_props_from_memoized_funcs = ({ is_filtering, get_flat_no
   base_hierarchy: get_base_hierarchy(entire_state),
 });
 
-const map_dispatch_to_root_props = dispatch  => {
+const map_dispatch_to_root_props = dispatch => {
   const set_query = (query) => {
 
     //because it might take a while, even if synchronous, we dispatch this action separately
@@ -274,7 +274,7 @@ function get_memoized_funcs(schemes){
 
     return (
       !oldState || //if oldState isn't defined yet, we of course have to recompute
-      !oldFlatNodes ||  //ditto for oldFlatNodes
+      !oldFlatNodes || //ditto for oldFlatNodes
       !oldSortFunc ||
       oldState.root.query !== newState.root.query ||
       oldState.root.scheme_key !== newState.root.scheme_key ||
@@ -343,7 +343,7 @@ function get_memoized_funcs(schemes){
 
 }
 
-export  {
+export {
   initial_root_state,
   root_reducer,
   map_dispatch_to_root_props,

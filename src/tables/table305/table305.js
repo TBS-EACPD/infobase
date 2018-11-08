@@ -124,7 +124,7 @@ export default {
             return trivial_text_maker("op_spending");
           } else if (row.so_num > 7 && row.so_num <= 9) {
             return trivial_text_maker("capital_spending");
-          } else if (row.so_num === 21  || row.so_num  === 22) {
+          } else if (row.so_num === 21 || row.so_num === 22) {
             return trivial_text_maker("revenues");
           }
           return row.so;
@@ -135,8 +135,8 @@ export default {
       title_key : "gov_outcome",
       include_in_report_builder : true,
 
-      filter_func :  function(options){
-        var func  = function(row){
+      filter_func : function(options){
+        var func = function(row){
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           const goco = prog.tags_by_scheme.GOCO && prog.tags_by_scheme.GOCO[0];
           return (goco && goco.name) || trivial_text_maker('unknown');
@@ -149,7 +149,7 @@ export default {
       include_in_report_builder : true,
 
       filter_func : function(options){
-        var func  = function(row){
+        var func = function(row){
           //FIXME: this is because I found a program without a goco, 
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           const goco = prog.tags_by_scheme.GOCO && prog.tags_by_scheme.GOCO[0];

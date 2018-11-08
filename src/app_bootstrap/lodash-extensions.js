@@ -15,7 +15,7 @@ const funcs = {
   ),
 
   //shortcut for Object.assign 
-  immutate: (obj, ...to_merge)  => Object.assign({}, obj, ...to_merge),
+  immutate: (obj, ...to_merge) => Object.assign({}, obj, ...to_merge),
 
 
   //in an array, return all the indices of elements that match a predicate

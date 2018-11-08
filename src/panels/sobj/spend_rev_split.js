@@ -48,8 +48,8 @@ function render({calculations, footnotes, sources}) {
   const { graph_args, info, subject } = calculations;       
   const { neg_exp, gross_exp, net_exp } = graph_args; 
   
-  const  series = { "": [ gross_exp, neg_exp] };
-  const  _ticks = [ 'gross', 'revenues'  ];
+  const series = { "": [ gross_exp, neg_exp] };
+  const _ticks = [ 'gross', 'revenues' ];
   // if neg_exp is 0, then no point in showing the net bar
   if (neg_exp !== 0){
     series[""].push(net_exp);
@@ -86,7 +86,7 @@ function render({calculations, footnotes, sources}) {
       {...{footnotes,sources}}
     >
       <Col size={5} isText>
-        <TM k={text_keys_by_level[subject.level]}  args={info} />
+        <TM k={text_keys_by_level[subject.level]} args={info} />
       </Col>
       <Col size={7} isGraph>
         {graph_content}
@@ -125,7 +125,7 @@ Statistics.create_and_register({
   level: 'tag',
   compute: (subject, tables, infos, add, c) => {
     const {table305} = tables;
-    const prog_rows =  table305.q(subject).data;
+    const prog_rows = table305.q(subject).data;
     const exp_rev_results = rows_to_rev_split(prog_rows)
 
     add({
@@ -159,7 +159,7 @@ Statistics.create_and_register({
   level: 'program',
   compute: (subject, tables, infos, add, c) => {
     const table305 = tables.table305;
-    const prog_rows =  table305.programs.get(subject);
+    const prog_rows = table305.programs.get(subject);
     const exp_rev_results = rows_to_rev_split(prog_rows)
 
     add({
@@ -211,7 +211,7 @@ new PanelGraph({
   info_deps : ["tag_revenue"],
   calculate(subject,info,options){
     const {table305} = this.tables;
-    const prog_rows =  table305.q(subject).data;
+    const prog_rows = table305.q(subject).data;
     const rev_split = rows_to_rev_split(prog_rows);
     if(rev_split.neg_exp === 0){
       return false;

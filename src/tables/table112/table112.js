@@ -79,7 +79,7 @@ export default {
         "en": trivial_text_maker("five_year_percent_description"),
         "fr": trivial_text_maker("five_year_percent_description"),
       },
-      "formula"  : people_five_year_percentage_formula("ex_lvl",people_years),
+      "formula" : people_five_year_percentage_formula("ex_lvl",people_years),
     });
   },
 

@@ -30,7 +30,7 @@ class Queries {
 
       func = function(d){ return d[sorter];};
     }
-    var sorted =  _.sortBy(this.data,func);
+    var sorted = _.sortBy(this.data,func);
     if (reverse){
       sorted.reverse();
     }
@@ -139,7 +139,7 @@ class Queries {
     }
 
     if (sorted){
-      data =  this.sort(sort_col,reverse);
+      data = this.sort(sort_col,reverse);
     } else {
       data = this.data;
     }
@@ -171,7 +171,7 @@ class Queries {
         vals[col]= FORMAT.formater(type,vals[col]);
       });
       if (gross_percentage){
-        vals[gp_colname]=  FORMAT.formater("percentage",vals[gp_colname]);
+        vals[gp_colname]= FORMAT.formater("percentage",vals[gp_colname]);
       }
     }
     if (options.pop_single && cols.length === 1){
@@ -192,10 +192,10 @@ class Queries {
     // call ['this.get_cols'](#get_cols)
     var all_vals = this.get_cols(cols,options);
     if (options.zip){
-      all_vals =  _.take(all_vals,x);
+      all_vals = _.take(all_vals,x);
     } else {
       _.each(all_vals, function(list,key){
-        all_vals[key] =  _.take(list,x);
+        all_vals[key] = _.take(list,x);
       });
     }
     return all_vals;

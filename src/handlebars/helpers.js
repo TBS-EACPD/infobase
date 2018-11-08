@@ -160,42 +160,42 @@ const fr_master_change = function(val,formater,preposition,temps,genre, nombre){
   }
   let return_value=change_map[temps][preposition]["fr"][direction][genre+nombre];
   if ( direction !== 'constant' && formater.length>0){
-    return_value  += " " + Handlebars.helpers[formater](Math.abs(val));
+    return_value += " " + Handlebars.helpers[formater](Math.abs(val));
   }
   return new Handlebars.SafeString(return_value);
 };
 Handlebars.registerHelper("changed_to",function(val,formater,context){
-  return  en_master_change(val,formater,"to","past");
+  return en_master_change(val,formater,"to","past");
 });
 Handlebars.registerHelper("changed_by",function(val,formater,context){
-  return  en_master_change(val,formater,"by","past");
+  return en_master_change(val,formater,"by","past");
 });
 // Dom code:
 Handlebars.registerHelper("changing_by",function(val,formater,context){
-  return  en_master_change(val,formater,"ing","past");
+  return en_master_change(val,formater,"ing","past");
 });
 
 Handlebars.registerHelper("will_change_to",function(val,formater,context){
-  return  en_master_change(val,formater,"to","future");
+  return en_master_change(val,formater,"to","future");
 });
 Handlebars.registerHelper("will_change_by",function(val,formater,context){
-  return  en_master_change(val,formater,"by","future");
+  return en_master_change(val,formater,"by","future");
 });
 Handlebars.registerHelper("fr_changed_to",function(val, genre, nombre,formater,context){
-  return  fr_master_change(val,formater,"to","past",genre,nombre);
+  return fr_master_change(val,formater,"to","past",genre,nombre);
 });
 Handlebars.registerHelper("fr_changed_by",function(val, genre, nombre,formater,context){
-  return  fr_master_change(val,formater,"by","past",genre,nombre);
+  return fr_master_change(val,formater,"by","past",genre,nombre);
 });
 // Dom code:
 Handlebars.registerHelper("fr_changing_by",function(val, genre, nombre,formater,context){
-  return  fr_master_change(val,formater,"ing","past",genre,nombre);
+  return fr_master_change(val,formater,"ing","past",genre,nombre);
 });
 Handlebars.registerHelper("fr_will_change_by",function(val, genre, nombre,formater,context){
-  return  fr_master_change(val,formater,"by","future",genre,nombre);
+  return fr_master_change(val,formater,"by","future",genre,nombre);
 });
 Handlebars.registerHelper("fr_will_change_to",function(val, genre, nombre,formater,context){
-  return  fr_master_change(val,formater,"to","future",genre,nombre);
+  return fr_master_change(val,formater,"to","future",genre,nombre);
 });
 
 // Two value change helpers (Ex. "increased/decreased from val1 to val2")
@@ -278,10 +278,10 @@ const fr_master_two_value_change = function(val1,val2,formater,preposition,temps
   return new Handlebars.SafeString(return_value);
 };
 Handlebars.registerHelper("two_value_changed_to",function(val1,val2,formater,context){
-  return  en_master_two_value_change(val1,val2,formater,"to","past");
+  return en_master_two_value_change(val1,val2,formater,"to","past");
 });
 Handlebars.registerHelper("fr_two_value_changed_to",function(val1,val2,genre,nombre,formater,context){
-  return  fr_master_two_value_change(val1,val2,formater,"to","past",genre,nombre);
+  return fr_master_two_value_change(val1,val2,formater,"to","past",genre,nombre);
 });
 
 // Helper to expand positive negative values to "[+/-]abs(value)"
@@ -323,23 +323,23 @@ Handlebars.registerHelper('compare', function(lvalue, rvalue, options) {
   lvalue = +lvalue.toString();
   rvalue = +rvalue.toString();
 
-  if (arguments.length < 3)  {
+  if (arguments.length < 3) {
     throw new Error("Handlerbars Helper 'compare' needs 2 parameters");
   }
 
   var operator = options.hash.operator || "==";
 
   var operators = {
-    '==':       function(l,r) { return l === r; },
-    '===':      function(l,r) { return l === r; },
-    '!=':       function(l,r) { return l !== r; },
-    '<':        function(l,r) { return l < r; },
-    '>':        function(l,r) { return l > r; },
-    '<=':       function(l,r) { return l <= r; },
-    '>=':       function(l,r) { return l >= r; },
+    '==': function(l,r) { return l === r; },
+    '===': function(l,r) { return l === r; },
+    '!=': function(l,r) { return l !== r; },
+    '<': function(l,r) { return l < r; },
+    '>': function(l,r) { return l > r; },
+    '<=': function(l,r) { return l <= r; },
+    '>=': function(l,r) { return l >= r; },
   };
 
-  if (!operators[operator])  {
+  if (!operators[operator]) {
     throw new Error("Handlerbars Helper 'compare' doesn't know the operator "+operator);
   }
 
@@ -557,14 +557,14 @@ Handlebars.registerHelper("gl_def",function(key){
 
 Handlebars.registerHelper("gl_title_and_link",function(key){
   const glos_item = GlossaryEntry.lookup(key);
-  const str =  `<a href="${glossary_href(glos_item)}">${glos_item.title}</a>`;
+  const str = `<a href="${glossary_href(glos_item)}">${glos_item.title}</a>`;
   // SafeString is used to avoid having to use the [Handlebars triple bracket syntax](http://handlebarsjs.com/#html_escaping)
   return new Handlebars.SafeString(str);
 });
 
 Handlebars.registerHelper("gl_title",function(key){
   const glos_item = GlossaryEntry.lookup(key);
-  const str =  glos_item.title;
+  const str = glos_item.title;
   return str;
 })
 

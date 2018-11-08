@@ -18,7 +18,7 @@ export class Pie {
     //
     common_charts_utils.setup_graph_instance(this,d3.select(container),options);
     
-    const _graph_area  = this.svg.append("g").attr("class","_graph_area");
+    const _graph_area = this.svg.append("g").attr("class","_graph_area");
     this.graph_area = _graph_area.append("g").attr("class","inner_graph_area");
 
   }
@@ -72,7 +72,7 @@ export class Pie {
     
     const pie_data = _.each(pie(filtered_data), (d,i,col) => {
       let label_length = 10+ radius;
-      d.label_angle =  (d.endAngle - d.startAngle)/2 + d.startAngle;
+      d.label_angle = (d.endAngle - d.startAngle)/2 + d.startAngle;
       if (i>0 && (d.label_angle - col[i-1].label_angle) <Math.PI/5 ){
         label_length = col[i-1].label_length + 10;
       }
@@ -117,13 +117,13 @@ export class Pie {
     }
 
 
-    const graph_area  = this.graph_area
+    const graph_area = this.graph_area
       .attr("transform", "translate(" + (width/2 )+ "," + this.outside_height/2 + ")");
 
     graph_area.selectAll(".arc").remove();
 
 
-    const  g = graph_area
+    const g = graph_area
       .selectAll(".arc")
       .data(pie_data)
 
@@ -198,7 +198,7 @@ export class Pie {
           } else if (pct_formatter){
             return (
               d.data[label_attr] ? 
-              d.data[label_attr] + " - "  : 
+              d.data[label_attr] + " - " : 
               ""
             )+ pct_formatter(d.data[data_attr]/total);
           } else {

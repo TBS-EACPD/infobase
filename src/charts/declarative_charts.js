@@ -306,9 +306,9 @@ class Line extends React.Component {
 }
 
 const GraphLegend = ({ 
-  isHorizontal,  //defaults to false
+  isHorizontal, //defaults to false
   items, // [ { active, id, label, color }] 
-  onClick,  //id => { }
+  onClick, //id => { }
 }) => ( 
   <ul className={classNames("legend-list-inline", isHorizontal && "horizontal")}>
     {_.map(items, ({ color, label, id, active }) => 
@@ -347,11 +347,11 @@ const GraphLegend = ({
 
 const TabularPercentLegend = ({
   items, // [ { active, id, label, color }] 
-  onClick,  //id => { }
+  onClick, //id => { }
   get_right_content, //item => react element
 }) => (
   <ul className="list-unstyled">
-    {_.map(items, item  => 
+    {_.map(items, item => 
       <li
         key={item.id}
         className="tabular-legend-list-el"

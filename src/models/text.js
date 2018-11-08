@@ -176,7 +176,7 @@ const add_text_bundle = (text_bundle) => {
 
 const combine_bundles = bundles => {
   return _.chain(bundles)
-    .map(bundle =>  {
+    .map(bundle => {
       const { __file_name__ } = bundle;
       if(!_.has(text_bundles_by_filename, __file_name__)){
         add_text_bundle(bundle)
@@ -223,7 +223,7 @@ const _create_text_maker = (deps=template_store) => (key, context={}) => {
   }
 
 
-  const text_obj =  deps[key];
+  const text_obj = deps[key];
   if( _.isString(text_obj) ) { 
     return text_obj;
   }

@@ -10,7 +10,7 @@ export class CirclePieChart {
     // ticks = ["tick1","tick2"."tick3"]
     // ```
     common_charts_utils.setup_graph_instance(this,d3.select(container),options);
-    this.graph_area =  this.svg.append("g").attr("class","_graph_area");
+    this.graph_area = this.svg.append("g").attr("class","_graph_area");
   };
 
   render(options){
@@ -83,7 +83,7 @@ export class CirclePieChart {
           }
         },
         "cx": "0px",
-        "r" : function(d) { return  scale(d.value); },
+        "r" : function(d) { return scale(d.value); },
       })
       .styles({
         "fill" : function(d,i){ return colors(d.name);},
@@ -115,7 +115,7 @@ export class CirclePieChart {
         "font-weight" : "500",
         "font-size" : font_size + "px",
         "width" : width+"px",
-        "top"  : function(d,i){
+        "top" : function(d,i){
           if (i === 0 && data.length === 2) {
             // the containing circle, the text should be located below
             return margin.top +min_dim+"px";
@@ -125,7 +125,7 @@ export class CirclePieChart {
             // the contained circle, the text should be located below
             return margin.top+scale(d.value)+"px";
           }},
-        "left"  : margin.left+"px",
+        "left" : margin.left+"px",
       })
       .classed('wb-inv', hide_labels); 
 

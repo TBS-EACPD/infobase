@@ -6,7 +6,7 @@ import {
   Col,
 } from "../shared";
 
-const render_w_options = ({text_key,graph_col,text_col})  => ({calculations, sources, footnotes}) => {
+const render_w_options = ({text_key,graph_col,text_col}) => ({calculations, sources, footnotes}) => {
   const { info, graph_args } = calculations;
 
   return (
@@ -35,7 +35,7 @@ new PanelGraph({
 
   calculate(subject,info,options){ 
     const {table300} = this.tables;
-    const vote_stat =  _.map(
+    const vote_stat = _.map(
       table300.programs.get(subject), 
       row => ({
         label : row.vote_stat,

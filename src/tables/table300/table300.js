@@ -102,8 +102,8 @@ export default {
       title_key : "gov_outcome",
       include_in_report_builder : true,
 
-      filter_func :  function(options){
-        var func  = function(row){
+      filter_func : function(options){
+        var func = function(row){
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           const goco = prog.tags_by_scheme.GOCO && prog.tags_by_scheme.GOCO[0];
           return (goco && goco.name) || trivial_text_maker('unknown');
@@ -116,7 +116,7 @@ export default {
       include_in_report_builder : true,
 
       filter_func : function(options){
-        var func  = function(row){
+        var func = function(row){
           //FIXME: this is because I found a program without a goco, 
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
 
@@ -151,7 +151,7 @@ Statistics.create_and_register({
     const stat_pct = stat_amount/total;
 
     add("voted_exp", voted_amount);
-    add("stat_exp",  stat_amount);
+    add("stat_exp", stat_amount);
     add("voted_pct", voted_pct);
     add("stat_pct", stat_pct);
     add("total_exp", total);
@@ -183,7 +183,7 @@ Statistics.create_and_register({
     const stat_pct = stat_amount/total;
 
     add("voted_exp", voted_amount);
-    add("stat_exp",  stat_amount);
+    add("stat_exp", stat_amount);
     add("voted_pct", voted_pct);
     add("stat_pct", stat_pct);
     add("total_exp", total);

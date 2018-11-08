@@ -53,14 +53,14 @@ new PanelGraph({
     const employee_by_prov = table10.prov_code("{{ppl_last_year}}", Gov);
     const total_employees = _.chain(employee_by_prov).values().sum().value();
     const ncr_employees = employee_by_prov.ncr;
-    const empl_count_ncr_ratio =  ncr_employees/total_employees;
+    const empl_count_ncr_ratio = ncr_employees/total_employees;
 
 
 
 
     const gov_counts = ResultCounts.get_gov_counts();
 
-    const col  = '{{pa_last_year}}exp';
+    const col = '{{pa_last_year}}exp';
     const largest_items = _.chain(table4.data)
       .sortBy(col)
       .takeRight(3)
@@ -116,7 +116,7 @@ new PanelGraph({
   render({calculations}){
     const { graph_args: big_info } = calculations;
     const Row = props => {
-      const this_row_props =  {className : "grid-row canada-intro-grid", style:{borderTop : 0,padding: "15px 0px",marginLeft:"-50px",marginRight:"-15px"}}
+      const this_row_props = {className : "grid-row canada-intro-grid", style:{borderTop : 0,padding: "15px 0px",marginLeft:"-50px",marginRight:"-15px"}}
       if (props.top_border){
         this_row_props.style.borderTop="#";
       }
@@ -137,7 +137,7 @@ new PanelGraph({
         </div>
         <section className='lg-grid-panel70' style={{flexDirection: 'column'}}>
           <header className="h2 mrgn-tp-sm" style={{textAlign: window.feature_detection.is_mobile() ? 'center' : 'inherit'}}> <TM k={props.title_key}/> </header>
-          <TM el="p" k={props.text_key}  args={big_info} />
+          <TM el="p" k={props.text_key} args={big_info} />
         </section>
       </div>;
     };

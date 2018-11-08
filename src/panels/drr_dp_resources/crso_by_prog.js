@@ -50,9 +50,9 @@ const render_resource_type = (is_fte) => ({calculations, footnotes}) => {
         subject,
         crso_prg_num : _.max([info.crso_fte_prg_num, info.crso_exp_prg_num]),
         crso_prg_top1 : is_fte ? info.crso_fte_prg_top1 : info.crso_exp_prg_top1,
-        crso_prg_top1_amnt  : is_fte ? info.crso_fte_prg_top1_amnt : info.crso_exp_prg_top1_amnt,
+        crso_prg_top1_amnt : is_fte ? info.crso_fte_prg_top1_amnt : info.crso_exp_prg_top1_amnt,
         crso_prg_top2 : is_fte ? info.crso_fte_prg_top2 : info.crso_exp_prg_top2,
-        crso_prg_top2_amnt :  is_fte ? info.crso_fte_prg_top2_amnt : info.crso_exp_prg_top2_amnt,
+        crso_prg_top2_amnt : is_fte ? info.crso_fte_prg_top2_amnt : info.crso_exp_prg_top2_amnt,
         is_fte : is_fte,
       }}
     />
@@ -208,7 +208,7 @@ const get_calculate_func = (is_fte) => {
       })
     );
   
-    return  {
+    return {
       exp_data,
       fte_data,
     };

@@ -23,8 +23,8 @@ export default {
     "PROG",
   ],
 
-  "name": { "en":  "Full-Time Equivalents (FTEs) by Program",
-    "fr":  "Équivalents temps plein (ETP) par programme",
+  "name": { "en": "Full-Time Equivalents (FTEs) by Program",
+    "fr": "Équivalents temps plein (ETP) par programme",
   },
 
   "title": { "en": "Actual and Planned Full-Time Equivalents (FTEs) by Program from {{pa_last_year_5}} to {{planning_year_3}}",
@@ -118,8 +118,8 @@ export default {
       title_key : "gov_outcome",
       include_in_report_builder : true,
 
-      filter_func :  function(options){
-        var func  = function(row){
+      filter_func : function(options){
+        var func = function(row){
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           //FIXME: this is because I found a program without a goco, 
           const goco = _.get(prog, "tags_by_scheme.GOCO[0].name");
@@ -133,7 +133,7 @@ export default {
       include_in_report_builder : true,
 
       filter_func : function(options){
-        var func  = function(row){
+        var func = function(row){
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           //FIXME: this is because I found a program without a goco, 
           const sa = _.get(prog, "tags_by_scheme.GOCO[0].parent_tag.name");
@@ -144,8 +144,8 @@ export default {
     },
     {
       title_key : 'goco_id',
-      filter_func :  function(options){
-        var func  = function(row){
+      filter_func : function(options){
+        var func = function(row){
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           const goco = _.first(prog.tags_by_scheme.GOCO)
           return goco && goco.id;

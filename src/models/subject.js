@@ -339,7 +339,7 @@ Subject.Tag = class Tag extends common(){
       .map(([org_id, programs]) => {
         return {
           name : Subject.Dept.lookup(org_id).name,
-          programs :   _.sortBy(programs,"name"),
+          programs : _.sortBy(programs,"name"),
         };
       })
       .sortBy("name")

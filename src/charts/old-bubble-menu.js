@@ -16,7 +16,7 @@ export const bubble_menu = function(container,options){
 // ```
   common_charts_utils.setup_graph_instance(this,container,options);
   this.html.select(".__svg__").attr("preserve_labels_on_update", true);
-  var _graph_area  = this.svg.append("g").attr("class","_graph_area");
+  var _graph_area = this.svg.append("g").attr("class","_graph_area");
   this.graph_area = _graph_area.append("g").attr("class","inner_graph_area");
   var that = this;
   var start_delay = this.start_delay || 0;
@@ -65,7 +65,7 @@ export const bubble_menu = function(container,options){
   major_labels
     .enter()
     .append("div")
-    .attr({ "class" : "event-target transparent_div"  })
+    .attr({ "class" : "event-target transparent_div" })
   //.on("mouseenter", dispatch.dataMouseEnter)
     .on("click",this.dispatch.dataMouseEnter)
     .append("a")
@@ -90,7 +90,7 @@ exports.bubble_menu.prototype.render = function(options) {
   
   var circle_padding = this.circle_padding= 30;
   var radius = this.radius = 0.25*this.height;
-  var needed_width  = this.needed_width = this.data.length * (radius *2 + 2*circle_padding) ;
+  var needed_width = this.needed_width = this.data.length * (radius *2 + 2*circle_padding) ;
   var x_offset = this.x_offset = this.margin.left + (width - needed_width)/2;
   this.scale = d3.scale.ordinal()
     .domain(d3.range(this.data.length))
@@ -100,7 +100,7 @@ exports.bubble_menu.prototype.render = function(options) {
   this.focus_scale_factor = 1.25;
   this.satellite_radius = (height - this.focus_scale_factor*2*radius)*0.5*0.25;
   this.satellite_padding = (height - this.focus_scale_factor*2*radius)*0.05;
-  this.no_focus_scale_factor = (1/radius) * (needed_width - this.focus_scale_factor*2*(radius+circle_padding) -  ((this.data.length-1)*2*circle_padding))/((this.data.length-1)*2);
+  this.no_focus_scale_factor = (1/radius) * (needed_width - this.focus_scale_factor*2*(radius+circle_padding) - ((this.data.length-1)*2*circle_padding))/((this.data.length-1)*2);
   
   if (needed_width > width + 2*circle_padding){
     d3.select(that.html.node().parentNode).style({
@@ -134,7 +134,7 @@ exports.bubble_menu.prototype.set_positions = function(d, active_d){
   var radius = this.radius;
   d.__r = this.radius;
   d.__margin = this.circle_padding;
-  d.__x =  this.x_offset + this.scale(d.__index);
+  d.__x = this.x_offset + this.scale(d.__index);
   d.__xAdjust = 0; //__xAdjust and __xAdjustMajor are used to re-adjust the bubble menu when there are only two data types/major bubbles being presented
   d.__xAdjustMajor = 0;
   d.__width = this.container_width;
@@ -142,18 +142,18 @@ exports.bubble_menu.prototype.set_positions = function(d, active_d){
     if (d === active_d){
       d.__r *= this.focus_scale_factor;
       d.__margin *= this.focus_scale_factor;
-      d.__x =  this.x_offset + d.__index * 2*radius*this.no_focus_scale_factor;
+      d.__x = this.x_offset + d.__index * 2*radius*this.no_focus_scale_factor;
       d.__width = this.needed_width - (this.data.length-1)*this.no_focus_scale_factor*2*radius;
 
       _.each(d.children, function(child,i){
-        var x_y =  rorate_point( d.__r+this.satellite_radius+this.satellite_padding, i);
-        x_y[0] += d.__x+  d.__r+ d.__margin;
+        var x_y = rorate_point( d.__r+this.satellite_radius+this.satellite_padding, i);
+        x_y[0] += d.__x+ d.__r+ d.__margin;
         x_y[1] += this.height/2;
         child.__x = x_y[0];
         child.__y = x_y[1];
         child.__width = 1.5*d.__r;
 
-        if (child.__x < d.__x+  d.__r+ d.__margin) {
+        if (child.__x < d.__x+ d.__r+ d.__margin) {
           child.__x -= child.__width;
           child.__x += 2*this.satellite_radius;
         } 
@@ -164,10 +164,10 @@ exports.bubble_menu.prototype.set_positions = function(d, active_d){
     } else {
       d.__width -= 2*this.circle_padding;
       d.__width *= this.no_focus_scale_factor;
-      d.__r *=  this.no_focus_scale_factor;
+      d.__r *= this.no_focus_scale_factor;
       d.__margin = 0;
       if (d.__index < active_d.__index){
-        d.__x =  this.x_offset + d.__index * d.__width;
+        d.__x = this.x_offset + d.__index * d.__width;
         d.__xAdjustMajor = (this.data.length === 2) ? -1 * d.__r * this.no_focus_scale_factor * 0.85 : 0;
       } else {
         var index_diff = this.data.length - d.__index;
@@ -206,7 +206,7 @@ exports.bubble_menu.prototype.render_bubble = function(active_d,i,duration,preve
   svg_transition.selectAll("circle.major")
     .attr({
       "cx": function(d){ 
-        return d.__x+  d.__r+ d.__margin + d.__xAdjustMajor; 
+        return d.__x+ d.__r+ d.__margin + d.__xAdjustMajor; 
       },
       "cy" : height/2,
     })
@@ -267,7 +267,7 @@ exports.bubble_menu.prototype.render_bubble = function(active_d,i,duration,preve
         return w+"px";
       },
       "top" : function(d,i){
-        var t =  height/2 ;
+        var t = height/2 ;
         return t+"px";
       },
       "font-size" : function(d){
@@ -296,7 +296,7 @@ exports.bubble_menu.prototype.render_bubble = function(active_d,i,duration,preve
       // and we can use the rendered height and width to position
       // it in the center of the circle
       "top" : function(d,i){
-        var t =  height/2 - this.offsetHeight/2 ;
+        var t = height/2 - this.offsetHeight/2 ;
         return t+"px";
       },
     });
@@ -325,7 +325,7 @@ exports.bubble_menu.prototype.render_bubble = function(active_d,i,duration,preve
         "y" : height/2,
         "height" : 2* satellite_radius,
         "width": function(d) { return d.__width;},
-        "rx" :  satellite_radius,
+        "rx" : satellite_radius,
       })
       .style({
         "fill" : this.colors(active_d.__index),
@@ -338,7 +338,7 @@ exports.bubble_menu.prototype.render_bubble = function(active_d,i,duration,preve
           return d.__x - satellite_radius + active_d.__xAdjust; 
         } ,
         "y" : function(d){ 
-          return d.__y -  satellite_radius; 
+          return d.__y - satellite_radius; 
         },
       });
 
@@ -378,7 +378,7 @@ exports.bubble_menu.prototype.render_bubble = function(active_d,i,duration,preve
           return d.__x- active_d.__x- this.satellite_radius +"px"; 
         }).bind(this),
         "top" : (function(d){ 
-          return d.__y-  this.satellite_radius + "px"; 
+          return d.__y- this.satellite_radius + "px"; 
         }).bind(this),
       });
 

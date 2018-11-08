@@ -62,7 +62,7 @@ const obj_to_node_mapper = level => ({name, id, sub_programs, results, indicator
   },
 });
 
-function data_to_props({ root: { org: { programs  }} }){
+function data_to_props({ root: { org: { programs }} }){
   const root = {
     root: true,
     id: "root",

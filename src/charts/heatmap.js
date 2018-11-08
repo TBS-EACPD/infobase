@@ -6,7 +6,7 @@ var heatmap = function(container,options){
   d3.select(container).select('*').remove();
 
   common_charts_utils.setup_graph_instance(this,d3.select(container),options);
-  this.graph_area  = this.svg.append("g").attr("class","_graph_area");
+  this.graph_area = this.svg.append("g").attr("class","_graph_area");
   this.inner_graph_area = this.graph_area.append("g").attr("class","inner_graph_area");
   // recorded in RGB format for easy sharing between SVG and HTML
   this.pos_color = "23,147,23"; 
@@ -178,8 +178,8 @@ heatmap.prototype.render = function(options){
   cells.merge(new_cells)
     .styles({
       'position':'absolute',
-      'left':function(d){ return  x_scale(d.x)+'px'},
-      'top': function(d){ return  y_scale(d.y)+'px'},
+      'left':function(d){ return x_scale(d.x)+'px'},
+      'top': function(d){ return y_scale(d.y)+'px'},
       "border" : "1px solid #ccc",
       "background": function(d){
         if (d.z === undefined){

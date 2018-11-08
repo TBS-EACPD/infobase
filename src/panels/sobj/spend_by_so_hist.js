@@ -30,7 +30,7 @@ new PanelGraph({
   info_deps: [ 'table5_dept_info', 'table5_gov_info' ],
   calculate (subject,info){
     const {table5} = this.tables;
-    return  {
+    return {
       data: (
         _.chain(sos)
           .sortBy(sobj => sobj.so_num )

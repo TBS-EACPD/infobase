@@ -29,15 +29,15 @@ var compact = function(val,lang, abbrev, precision){
   if (val === 0) { 
     return "0";
   } else if (abs >= 1000000000){
-    new_val = val /  1000000000;
+    new_val = val / 1000000000;
     symbol = abbrev[1000000000][lang];
   }
   else if (abs >= 1000000){
-    new_val = val /  1000000;
+    new_val = val / 1000000;
     symbol = abbrev[1000000][lang];
   }
   else if (abs >= 1000){
-    new_val = val /  1000;
+    new_val = val / 1000;
     symbol = abbrev[1000][lang];
   }
   else {
@@ -87,7 +87,7 @@ const compact_written = (precision,val,lang,options) => {
     lang,
     {
       format : format,
-      1000000000 :  {en : 'billion', 
+      1000000000 : {en : 'billion', 
         fr: 'milliards' },
       1000000 : {en : 'million', fr: 'millions'},
       1000 : {en : 'thousand', fr: 'milliers'},
@@ -134,7 +134,7 @@ var types_to_format = {
     return this.compact(val, lang,options);
   },
   //<div id='percentage'></div>
-  "percentage" :  function(val,lang,options){
+  "percentage" : function(val,lang,options){
     options.precision = options.precision || 0;
     var format;
     if (options.raw){
@@ -162,11 +162,11 @@ var types_to_format = {
       }));
     }
   },
-  "percentage1" :  function(val,lang,options){
+  "percentage1" : function(val,lang,options){
     options.precision = 1;
     return this.percentage(val,lang,options);
   },
-  "percentage2" :  function(val,lang,options){
+  "percentage2" : function(val,lang,options){
     options.precision = 2;
     return this.percentage(val,lang,options);
   },
@@ -210,7 +210,7 @@ var types_to_format = {
     }
   },
   //<div id='big_int'></div>
-  "big_int" :  function(val,lang,options){
+  "big_int" : function(val,lang,options){
     var rtn;
     if (_.isArray(val)){
       val = _.map(val, function(x){return x/1000;});
@@ -229,7 +229,7 @@ var types_to_format = {
     if (options.raw){
       return rtn;
     } else {
-      return  "<span class='text-nowrap'>"+rtn+"</span>";
+      return "<span class='text-nowrap'>"+rtn+"</span>";
     }
   },
   //<div id='big_int_real'></div>
@@ -237,12 +237,12 @@ var types_to_format = {
     return types_to_format["big_int"](val*1000,lang,options);
   },
   //<div id='int'></div>
-  "int" :  function(val,lang){return val;},
+  "int" : function(val,lang){return val;},
   //<div id='ordinal'></div>
   "ordinal" : function(val,lang){return val;},
   //<div id='str'></div>
   "str" : function(val,lang){return val;},
-  "str1" :  function(val,lang,options){
+  "str1" : function(val,lang,options){
     options.precision = 1;
     return this.percentage(val,lang,options);   
   },
@@ -267,7 +267,7 @@ var formater = function(format,val,options){
         .map( (v,k) => [k,formater(format,v,options)] )
         .fromPairs()
         .value();
-    } else  if (_.isNaN(+val) && _.isString(val)){
+    } else if (_.isNaN(+val) && _.isString(val)){
       return val;
     } else {
       return types_to_format[format](val,window.lang,options);

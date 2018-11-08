@@ -15,7 +15,7 @@ export class ProgressDonut {
   constructor(container,options){
   
     common_charts_utils.setup_graph_instance(this,d3.select(container),options);
-    const _graph_area  = this.svg.append("g").attr("class","_graph_area");
+    const _graph_area = this.svg.append("g").attr("class","_graph_area");
     this.graph_area = _graph_area.append("g").attr("class","inner_graph_area");
     
   }
@@ -31,7 +31,7 @@ export class ProgressDonut {
     const colors = this.options.colors || infobase_colors();
     const color = colors(0);
     const background_arc_color = colors(1);
-    const text_color = this.options.text_color ||  color;
+    const text_color = this.options.text_color || color;
 
     const outerRadius = 0.8*(Math.min(this.outside_width, this.outside_height)/2);
     const innerRadius = outerRadius*0.80;
@@ -55,7 +55,7 @@ export class ProgressDonut {
     this.graph_area.selectAll('*').remove();
 
 
-    const pie_area  = this.graph_area
+    const pie_area = this.graph_area
       .attr("transform", "translate(" + (this.outside_width/2 )+ "," + this.outside_height/2 + ")");
 
     const angle_to_arc_attr = angle => d3.arc()

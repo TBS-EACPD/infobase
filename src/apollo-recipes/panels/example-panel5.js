@@ -31,7 +31,7 @@ const query = gql`
   }
 `
 
-function data_to_props({ root: { org: { programs  }} }){
+function data_to_props({ root: { org: { programs }} }){
   return { programs };
 }
 

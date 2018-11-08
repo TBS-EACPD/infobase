@@ -21,7 +21,7 @@ const { A11YTable } = declarative_charts
 const grid_colors = {
   fail: "results-icon-array-fail",
   pass: "results-icon-array-pass",
-  na:  "results-icon-array-na",
+  na: "results-icon-array-na",
 };
 
 const icon_order = {
@@ -105,9 +105,9 @@ const StatusGrid = props => {
   const shouldFactorDown = non_other_total > maxSize;
   const max_past_size = Math.ceil(past_total/non_other_total*maxSize);
   const max_future_size = Math.ceil(future_total/non_other_total*maxSize);
-  const icon_array_size_class = classNames("IconArrayItem", non_other_total > 200 && "IconArrayItem__Small", non_other_total < 100  && "IconArrayItem__Large");
+  const icon_array_size_class = classNames("IconArrayItem", non_other_total > 200 && "IconArrayItem__Small", non_other_total < 100 && "IconArrayItem__Large");
 
-  const [ past_config, future_config ]  = _.map(["past","future"], period => {
+  const [ past_config, future_config ] = _.map(["past","future"], period => {
     const data = _.chain(props)
       .pickBy( (val,key) => (
         _.startsWith(key, period) && 
@@ -124,7 +124,7 @@ const StatusGrid = props => {
           viz_count: (
             shouldFactorDown ? 
             Math.ceil(
-            period === "past"  ?
+            period === "past" ?
               (key_total/past_total)*max_past_size :
               (key_total/future_total)*max_future_size
             ) : 
@@ -199,7 +199,7 @@ const StatusGrid = props => {
           <div className="h4">
             {title}
           </div>
-          <MiniLegend items={legend_data}  />
+          <MiniLegend items={legend_data} />
           <div>
             { 
               _.chain(viz_data)

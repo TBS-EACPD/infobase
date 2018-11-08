@@ -34,7 +34,7 @@ const get_rows_for_subject_from_table = _.memoize((subject,type,doc) => {
     }
   } else if( doc==="dp18" && _.includes(["dept","crso"], subject.level)){
     return table.q(subject).data;
-  }  else if(!_.isEmpty(subject.programs)){
+  } else if(!_.isEmpty(subject.programs)){
     return _.chain(subject.programs)
       .map(prog => get_rows_for_subject_from_table(prog,type,doc) )
       .flatten()
@@ -78,7 +78,7 @@ const get_planning_data_for_subject_from_table = (subject, type, doc) => {
 
 const planned_resource_fragment = (subject, doc) => {
   const spending = get_planning_data_for_subject_from_table(subject, "spending", doc);
-  const ftes =  get_planning_data_for_subject_from_table(subject, "fte", doc);
+  const ftes = get_planning_data_for_subject_from_table(subject, "fte", doc);
 
   return {
     spending,

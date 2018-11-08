@@ -13,7 +13,7 @@ export class Line {
 
     common_charts_utils.setup_graph_instance(this,d3.select(container),options);
 
-    var _graph_area  = this.svg.append("g").attr("class","_graph_area");
+    var _graph_area = this.svg.append("g").attr("class","_graph_area");
     this.grid_line_area = _graph_area.append("g").attr("class","grid_lines");
     this.graph_area = _graph_area.append("g").attr("class","inner_graph_area");
   };
@@ -28,11 +28,11 @@ export class Line {
     };
 
     this.hide_gridlines = this.options.hide_gridlines === undefined ? false : this.options.hide_gridlines;
-    this.add_xaxis = this.options.add_xaxis  === undefined ? true : this.options.add_xaxis;
-    this.add_yaxis =  this.options.add_yaxis  === undefined ? true : this.options.add_yaxis;
-    this.axis_class =  "axis " + (this.options.axis_class  === undefined ? "" :  this.options.axis_class );
+    this.add_xaxis = this.options.add_xaxis === undefined ? true : this.options.add_xaxis;
+    this.add_yaxis = this.options.add_yaxis === undefined ? true : this.options.add_yaxis;
+    this.axis_class = "axis " + (this.options.axis_class === undefined ? "" : this.options.axis_class );
 
-    this.x_axis_line = this.options.x_axis_line  === undefined ? true : this.options.x_axis_line;
+    this.x_axis_line = this.options.x_axis_line === undefined ? true : this.options.x_axis_line;
     this.normalized = this.options.normalized || false;
 
     this.number_formater = this.options.formater;
@@ -105,7 +105,7 @@ export class Line {
       .map(group => ({
         year: _.first(group).index,
         ..._.chain(group)
-          .map( ({key, value}) =>  [ key, value ])
+          .map( ({key, value}) => [ key, value ])
           .fromPairs()
           .value(),
       }))
@@ -135,14 +135,14 @@ export class Line {
 
     // calculate the maximum value for any of the ticks to calibrate
     // the y scale value
-    max_value = d3.max(stacks, function(d) {  return d3.max(d, function(d) { return d[1]; });  })
+    max_value = d3.max(stacks, function(d) { return d3.max(d, function(d) { return d[1]; }); })
 
     this.y = d3.scaleLinear()
       .domain([0, max_value])
       .range([height, 0]);
 
     var area = d3.area()
-      .x((d,i) =>  this.x(d.data.year))
+      .x((d,i) => this.x(d.data.year))
       .y0(d => this.y(d[0]))
       .y1(d=> this.y(d[1]));
 
@@ -167,9 +167,9 @@ export class Line {
         "fill": d => this.colors(d.key),
         "fill-opacity" : 0.6,
         "stroke-width" : "1px",
-        "stroke" :  d => this.colors(d.key),
+        "stroke" : d => this.colors(d.key),
       })
-      .attr("d", d =>  area(d));
+      .attr("d", d => area(d));
 
   };
 

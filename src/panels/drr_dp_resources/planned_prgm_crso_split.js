@@ -131,7 +131,7 @@ const prg_crso_split_render = function({calculations, footnotes}){
       {...{footnotes, sources}}
     >
       <Col size={5} isText>
-        <TM k="planned_prgm_crso_split_text"  args={info} />
+        <TM k="planned_prgm_crso_split_text" args={info} />
       </Col>
       <Col size={7} isGraph>
         {panel_content}
@@ -144,7 +144,7 @@ const prg_crso_split_render = function({calculations, footnotes}){
 new PanelGraph({
   level: "crso",
   key: 'planned_prg_crso_split',
-  depends_on :  ['table6'],
+  depends_on : ['table6'],
   info_deps: ['table6_crso_info'],
   machinery_footnotes : false,
 

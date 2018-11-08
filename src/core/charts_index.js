@@ -102,7 +102,7 @@ const create_graph_with_legend = function(options){
   options.legend_class = options.legend_class || 'fcol-sm-11 fcol-md-11';
 
   options.get_series_label= options.get_series_label || _.property('label');
-  options.sort_data = _.isUndefined(options.sort_data) ? true :  options.sort_data;
+  options.sort_data = _.isUndefined(options.sort_data) ? true : options.sort_data;
   if (options.data.length === 0 ){
     return false;
   }
@@ -115,7 +115,7 @@ const create_graph_with_legend = function(options){
       active : all_active ? true :row.active,
     }));
   if (options.sort_data) {
-    data = data.sortBy(d =>  -d3.sum(d.data) );
+    data = data.sortBy(d => -d3.sum(d.data) );
   }
   data = data.value();
 
@@ -124,7 +124,7 @@ const create_graph_with_legend = function(options){
     // displaying to them in a stacked format  and add
     // the extra option for percentage based display
     if (_.isUndefined(options.stacked)){
-      stacked = _.every(data, d => _.every(d.data, dd =>  dd >= 0));
+      stacked = _.every(data, d => _.every(d.data, dd => dd >= 0));
     } else {
       stacked = options.stacked;
     }
@@ -181,7 +181,7 @@ const create_graph_with_legend = function(options){
         .append("span")
         .html(trivial_text_maker("toggle_graph"));
     }
-    data_to_series_format =  (all_active ?  _.chain(data)
+    data_to_series_format = (all_active ? _.chain(data)
       .map(function(obj){ return [obj.label,obj.data];})
       .fromPairs()
       .value() : {});
@@ -198,7 +198,7 @@ const create_graph_with_legend = function(options){
         normalized : normalized,
         formater : yaxis_formatter,
         normalized_formater : formats.percentage_raw,
-        series :  data_to_series_format,
+        series : data_to_series_format,
       });
     } else {
       graph = new Line(graph_area.select(".x2").node(),{
@@ -266,9 +266,9 @@ const create_graph_with_legend = function(options){
 };
 
 const create_a11y_table = function({
-  container,  //
+  container, //
   data, 
-  label_col_header,  //optional
+  label_col_header, //optional
   data_col_headers, 
   table_name, //optional
 }){

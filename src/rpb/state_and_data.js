@@ -102,7 +102,7 @@ const reducer = (state=initial_state, action) => {
 
     case 'header_click': {
       const col_nick = payload;
-      if(state.sort_col  === col_nick){
+      if(state.sort_col === col_nick){
         return {...state, descending: !state.descending };
       } else {
         return {...state,
@@ -290,7 +290,7 @@ function create_mapStateToProps(){
           activity_code: subject.activity_code, 
         };
 
-      } else if( subject.level  === 'tag' && table.programs){
+      } else if( subject.level === 'tag' && table.programs){
         const prog_ids = _.map(subject.programs, 'id');
         subj_filter = row => _.includes(prog_ids, Program.unique_id(row.dept, row.activity_code) );
 
@@ -312,7 +312,7 @@ function create_mapStateToProps(){
   const get_zero_filter_func = createSelector(
     [_.property('columns')],
     col_nicks => (
-      row =>  _.chain(col_nicks)
+      row => _.chain(col_nicks)
         .map(nick => row[nick])
         .compact()
         .isEmpty()
@@ -375,7 +375,7 @@ function create_mapStateToProps(){
       if(_.isEmpty(flat_data) || columns.length > 1){ 
         return null; 
       }
-      const [ col ]  = columns;
+      const [ col ] = columns;
 
       if(deptBreakoutMode){
         let artificial_filter; 

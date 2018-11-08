@@ -52,7 +52,7 @@ const compact_age_groups = (
     'Non disponible',
   ]
 );
-const emp_age_map =  {
+const emp_age_map = {
   '< 20': compact_age_groups[0], 
   '20-24': compact_age_groups[0],
   '25-29': compact_age_groups[0],
@@ -88,7 +88,7 @@ const ex_level_target = (
     'Non-cadres supérieursn',
   ]
 );
-const compact_ex_level_map =  {
+const compact_ex_level_map = {
   'EX 01': ex_level_target[0], 
   'EX 02': ex_level_target[0],
   'EX 03': ex_level_target[0],

@@ -21,7 +21,7 @@ export class Arrow {
   constructor(container,options){
 
     common_charts_utils.setup_graph_instance(this,d3.select(container),options);
-    this.graph_area  = this.svg.append("g").attr("class","graph_area");
+    this.graph_area = this.svg.append("g").attr("class","graph_area");
   };
 
   render(options){
@@ -71,7 +71,7 @@ export class Arrow {
       d.scale = scale(Math.abs(d.value));
       d.width = d.scale * arrow_width;
       d.height = d.scale * arrow_height;
-      d.y = height -  d.height ;
+      d.y = height - d.height ;
       if (i>0){
         d.x = col[i-1].x + col[i-1].width + padding;
       } else {
@@ -140,7 +140,7 @@ export class Arrow {
         "x" : function(d){
           return (d.width + padding)/2;
         } ,
-        "y" :  function(d){
+        "y" : function(d){
           return d.height/2;
         },
       })
@@ -166,13 +166,13 @@ export class Arrow {
       .html(function(d){ return d.name;})
       .attr("class", "font-serif bottomtext center-text")
       .styles({
-        "top"  : height+margin.bottom+"px",
+        "top" : height+margin.bottom+"px",
         "position" : "absolute",
         "color" : "#222",
         "font-size" : "16px",
         "font-weight" : "500",
         "width" : function(d){ return d.width+padding+"px";},
-        "left"  : function(d){ return x_offset+d.x+"px";},
+        "left" : function(d){ return x_offset+d.x+"px";},
       });
   };
 };

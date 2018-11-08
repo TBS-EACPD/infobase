@@ -67,7 +67,7 @@ const major_vote_big_stat = col_to_sum => (options) =>{
       const group_total = _.sumBy(group,col_to_sum); 
       return (
         (group_size > 30 && group_total > 30000000) //must be a group of at least and have at least 30 million
-        || group_total > 5000000000  //interesting stat items to have minimum 5 billion
+        || group_total > 5000000000 //interesting stat items to have minimum 5 billion
       );
     })
     .map(function(key_grp){return key_grp[0];})
@@ -120,7 +120,7 @@ function people_five_year_percentage_formula(col_name,col_names_to_be_averaged){
     // 5 - one row from the table, passed in as either a row
     //     object or a row object inside an array of length 1
     //
-    var calculated;  // the returned value
+    var calculated; // the returned value
     var cat_totals = []; 
     var total_totals = [];
     var row_orgs;
@@ -147,24 +147,24 @@ function people_five_year_percentage_formula(col_name,col_names_to_be_averaged){
         _.each(table.data, function(d){
           // scenario 2
           if (all_cat_lines) {
-            total_totals[i] = total_totals[i] + d[year]  || d[year];
+            total_totals[i] = total_totals[i] + d[year] || d[year];
           } else if (!_.isUndefined(row_orgs[d.dept])){
             // scenario 3 or 4
-            total_totals[i] = total_totals[i] + d[year]  || d[year];
+            total_totals[i] = total_totals[i] + d[year] || d[year];
           }
         });
         sum = d3.sum(row, function(d){return d[year];});
-        cat_totals[i] = cat_totals[i] + sum  || sum;
+        cat_totals[i] = cat_totals[i] + sum || sum;
       });
       // now divide the category totals by the total totals
       // and produce the average
-      calculated =  d3.sum(cat_totals)/d3.sum(total_totals);
+      calculated = d3.sum(cat_totals)/d3.sum(total_totals);
     } else if (_.isArray(row) && row.length === 1){
       // scenario 5
-      calculated =  row[0].five_year_percent;
+      calculated = row[0].five_year_percent;
     } else {
       // scenario 5
-      calculated =  row.five_year_percent;
+      calculated = row.five_year_percent;
     }
 	
     if (calculated === 0) {

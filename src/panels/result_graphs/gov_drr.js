@@ -125,7 +125,7 @@ class HorizontalStatusTable extends React.Component {
         .reject( ({counts}) => counts.drr16_total === 0)
         .sortBy(row => row.counts.drr16_total )
         .reverse()
-        .pipe( show_all ? _.identity :  list => _.take(list, 15)  )
+        .pipe( show_all ? _.identity : list => _.take(list, 15) )
         .sortBy( 
           sort_by ==='subject' ? 
           ({subject}) => subject.name : 

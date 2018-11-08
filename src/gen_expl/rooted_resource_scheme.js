@@ -35,7 +35,7 @@ function create_rooted_resource_hierarchy({doc,root_subject}){
           throw "Only lowest_level_tag tags allowed here";          
         }
 
-        return  _.chain(subject.programs)
+        return _.chain(subject.programs)
           .groupBy(prog => prog.dept.sexy_name)
           .map( (progs, org_name) => (
             _.map(progs, prog => ({
@@ -168,7 +168,7 @@ function create_rooted_resource_scheme({subject}){
   return {...partial_scheme,
     get_base_hierarchy_selector: () => createSelector(
       state => state.rooted_resources.doc,
-      doc =>  create_rooted_resource_hierarchy({ 
+      doc => create_rooted_resource_hierarchy({ 
         doc,
         root_subject: subject,
       })

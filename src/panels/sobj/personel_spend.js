@@ -29,9 +29,9 @@ new PanelGraph({
 
 
   calculate(subject,info,data){
-    return  {
-      series :  {
-        '0':  std_years.map( year => this.tables.table5.horizontal(year,false)[sos[1].text]),
+    return {
+      series : {
+        '0': std_years.map( year => this.tables.table5.horizontal(year,false)[sos[1].text]),
       },
     };
   },

@@ -32,8 +32,8 @@ const prov_split_render = function(graph_node, graph_args){
   // reformat the data for display
   //note: here we deep clone stuff because the graph_args should be immutable, because table dimensions are memoized
   const years_by_province = _.chain(graph_args.years_by_province)
-    .map( obj => ({...obj}) )  //deep clone each row  
-    .each( year  => {
+    .map( obj => ({...obj}) ) //deep clone each row  
+    .each( year => {
       if (year['qclessncr']) {
         year.qc = year['qclessncr'];
       } else if (has_qc) {
@@ -183,7 +183,7 @@ const prov_split_render = function(graph_node, graph_args){
         )).render();
 
         container.selectAll("rect").styles({
-          "opacity":  color_scale(_.last(prov_data)) }); 
+          "opacity": color_scale(_.last(prov_data)) }); 
         container.selectAll(".x.axis .tick text")
           .styles({ 'font-size': "10px" });
       } else { //use hbar
@@ -246,7 +246,7 @@ const prov_split_render = function(graph_node, graph_args){
           });
 
           const five_year_avg_share = d3.sum(yearly_headcounts)/all_year_headcount_total;
-          const formated_avg_share =  five_year_avg_share > 0 ? 
+          const formated_avg_share = five_year_avg_share > 0 ? 
             formats["percentage1_raw"](five_year_avg_share) :
             undefined;
 

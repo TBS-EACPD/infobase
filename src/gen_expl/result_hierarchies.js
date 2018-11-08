@@ -16,7 +16,7 @@ function result_to_node(result, parent_id, doc){
       type: result.is_dr ? 'dr' : 'result',
       name: result.name,
       result,
-      contributing_programs:  _.chain(PI_DR_Links.get_contributing_program_ids_for_result(result.id))
+      contributing_programs: _.chain(PI_DR_Links.get_contributing_program_ids_for_result(result.id))
         .map(id => Program.lookup(id) )
         .compact()
         .value(),
@@ -215,7 +215,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
         }));
 
         const results = _.chain(Result.get_entity_results(subject.id))
-          .reject(root_subject.level === subject  ? _.constant(false) : 'is_dr'  ) //DRs will be attached at the dept level. Only ever attach them to the cr if they are the root.
+          .reject(root_subject.level === subject ? _.constant(false) : 'is_dr' ) //DRs will be attached at the dept level. Only ever attach them to the cr if they are the root.
           .map( result => result_to_node(result, parent_id, doc) )
           .value();
     
@@ -223,7 +223,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
 
       }
 
-      case 'program':  {
+      case 'program': {
 
         const subs = SubProgramEntity.sub_programs(subject.id);
 
@@ -246,7 +246,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
 
       }
 
-      case 'sub_program':  {
+      case 'sub_program': {
         const results = _.map(
           Result.get_entity_results(subject.id),
           result => result_to_node(result, parent_id, doc)
@@ -268,7 +268,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
 
       }
 
-      case 'sub_sub_program':  {
+      case 'sub_sub_program': {
         return _.map(
           Result.get_entity_results(subject.id),
           result => result_to_node(result, parent_id, doc)

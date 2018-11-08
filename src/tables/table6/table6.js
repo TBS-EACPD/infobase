@@ -151,8 +151,8 @@ export default {
       title_key : "gov_outcome",
       include_in_report_builder : true,
 
-      filter_func :  function(options){
-        var func  = function(row){
+      filter_func : function(options){
+        var func = function(row){
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           const goco = _.get(prog, "tags_by_scheme.GOCO[0].name");
           return goco || trivial_text_maker('unknown');
@@ -165,7 +165,7 @@ export default {
       include_in_report_builder : true,
 
       filter_func : function(options){
-        var func  = function(row){
+        var func = function(row){
           //FIXME: this is because I found a program without a goco, 
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           const sa = _.get(prog, "tags_by_scheme.GOCO[0].parent_tag.name");
@@ -176,8 +176,8 @@ export default {
     },
     {
       title_key : 'goco_id',
-      filter_func :  function(options){
-        var func  = function(row){
+      filter_func : function(options){
+        var func = function(row){
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           const goco = _.first(prog.tags_by_scheme.GOCO)
           return goco && goco.id;
@@ -255,7 +255,7 @@ Statistics.create_and_register({
 
     const CRSO_data = _.map(crsos, crso => ({
       crso:crso,
-      data:  d3.sum(_.map(table.q(crso).data, prg => prg["{{planning_year_1}}"])),
+      data: d3.sum(_.map(table.q(crso).data, prg => prg["{{planning_year_1}}"])),
     })
     )
 

@@ -99,7 +99,7 @@ const sorted_bubbles_for_subj = createSelector(
 const panels_for_subj_bubble = createSelector(
   panels_by_bubble_for_subj,
   _.property('bubble'),
-  (panels_by_bubble, bubble_id) =>  panels_by_bubble[bubble_id] 
+  (panels_by_bubble, bubble_id) => panels_by_bubble[bubble_id] 
 );
 
 function reset_scroll(){

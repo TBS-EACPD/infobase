@@ -66,11 +66,11 @@ export default {
           // although it would be okay if it just always did, and even better if we could clarify that it is the total FPS weighted average in the text
           if (_.isArray(row)){
             if (row.length === table.data.length ) {
-              return  table.GOC[0][header];
+              return table.GOC[0][header];
             } else if(row.length === 1) {
               return row[0][header];
             } else {
-              return  table.GOC[0][header];
+              return table.GOC[0][header];
             }
           }
           return row[header];

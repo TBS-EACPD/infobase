@@ -51,7 +51,7 @@ new PanelGraph({
     const gov_fte_total = table12.q(Gov).sum(last_year_fte_col);
     const gov_isc_fte = table12.q(isc_tag).sum(last_year_fte_col);
 
-    const series = _.map(std_years,  yr => {
+    const series = _.map(std_years, yr => {
       const isc_amt = _.sum( _.map(isc_crsos, crso => table12.q(crso).sum(yr) ) );
       return {
         isc: isc_amt,

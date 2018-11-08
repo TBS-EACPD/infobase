@@ -41,8 +41,8 @@ export default {
 
   source: ["ESTIMATES"],
 
-  "name": { "en":  "Tabled Estimates",
-    "fr":  "Budgets déposés",
+  "name": { "en": "Tabled Estimates",
+    "fr": "Budgets déposés",
   },
 
   "title": { "en": "Tabled Estimates ($000)",
@@ -145,7 +145,7 @@ export default {
   },
 
   "queries" : {
-    "estimates_split"  : function(options,format){
+    "estimates_split" : function(options,format){
       format = format || false;
       const col = options.col || in_year_col;
       var filter = options.filter;
@@ -225,22 +225,22 @@ export default {
     {
       title_key : "major_voted_stat",
       include_in_report_builder : true,
-      filter_func :  major_vote_stat,
+      filter_func : major_vote_stat,
     },
     {
       title_key : "major_voted_big_stat",
       exclude_from_rpb: true,
-      filter_func :  major_vote_big_stat("{{est_in_year}}_estimates"),
+      filter_func : major_vote_big_stat("{{est_in_year}}_estimates"),
     },
     {
       title_key :"voted_stat",
       include_in_report_builder : true,
-      filter_func :  vote_stat_dimension,
+      filter_func : vote_stat_dimension,
     },{
       title_key :"by_estimates_doc",
       include_in_report_builder : true,
 
-      filter_func :  function(options){
+      filter_func : function(options){
         return function(d){
           return d.est_doc;
         };
@@ -311,18 +311,18 @@ Statistics.create_and_register({
       })
       .value()
       .length;
-    const  _voted_num_in_year =  _.chain(table.voted_stat("est_in_year_estimates", false,false)[voted]) 
+    const _voted_num_in_year = _.chain(table.voted_stat("est_in_year_estimates", false,false)[voted]) 
       .filter(function(row){
         return row.est_in_year_estimates !== 0;
       })
       .groupBy(function(row){
         return row.dept +row.votenum;
       });
-    const  voted_num_in_year = _voted_num_in_year
+    const voted_num_in_year = _voted_num_in_year
       .keys()
       .value()
       .length;
-    const  voted_central_num_in_year = _voted_num_in_year
+    const voted_central_num_in_year = _voted_num_in_year
       .filter(function(lines, key){
         return lines[0].votestattype === 6;
       })

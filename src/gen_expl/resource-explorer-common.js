@@ -53,7 +53,7 @@ export const provide_sort_func_selector = (scheme_key) => {
   const attr_getters = {
     ftes: node => _.get(node,'data.resources.ftes') || 0,
     spending:node => _.get(node,"data.resources.spending") || 0,
-    name:  node => node.data.name,
+    name: node => node.data.name,
   };
 
   const reverse_array = arr => _.clone(arr).reverse();

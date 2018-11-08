@@ -25,7 +25,7 @@ _.each(["dept","crso","program"], level => {
   new PanelGraph({
     level,
     key: 'dp_rev_split',
-    depends_on :  ['table6'],
+    depends_on : ['table6'],
     machinery_footnotes : false,
     footnotes : ["PLANNED_GROSS"],
     calculate(subject,info){
@@ -84,7 +84,7 @@ _.each(["dept","crso","program"], level => {
                   <th scope="col"> <TM k="year" /> </th>
                   <th scope="col"> <TM k="dp_gross" /> </th>
                   <th scope="col"> <TM k="dp_revenue" /> </th>
-                  <th style={{maxWidth: "150px"}}  scope="col"> <TM k="dp_spa" /> </th>
+                  <th style={{maxWidth: "150px"}} scope="col"> <TM k="dp_spa" /> </th>
                   <th scope="col"> <TM k="dp_net" /> </th>
                 </tr>
               </thead>     
@@ -94,7 +94,7 @@ _.each(["dept","crso","program"], level => {
                     <th scope="row">
                       {run_template(year)}
                     </th>
-                    <td  className="data-col-cell"> <Format type="compact1" content={gross} /> </td>
+                    <td className="data-col-cell"> <Format type="compact1" content={gross} /> </td>
                     <td className="data-col-cell"> <Format type="compact1" content={rev} /> </td>
                     <td className="data-col-cell"> <Format type="compact1" content={spa} /> </td>
                     <td className="data-col-cell"> <Format type="compact1" content={net} /> </td>

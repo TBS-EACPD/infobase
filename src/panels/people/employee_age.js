@@ -54,7 +54,7 @@ const calculate_funcs_by_level = {
       .value();
 
     const age_group = compact_age_groups.map(age_range => {
-      const yearly_values = people_years.map( year =>  table11.horizontal(year,false)[age_range]);
+      const yearly_values = people_years.map( year => table11.horizontal(year,false)[age_range]);
       return {
         label: age_range,
         active: true,

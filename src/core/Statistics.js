@@ -3,7 +3,7 @@ import { staticStoreMixin } from '../models/staticStoreMixin.js';
 import { Table } from './TableClass.js';
 import { years } from '../models/years.js';
 import { Subject } from '../models/subject.js';
-import { run_template } from '../models/text.js';  //just needed for a few constants, consider moving this elsewhere...
+import { run_template } from '../models/text.js'; //just needed for a few constants, consider moving this elsewhere...
 
 const { Gov } = Subject;
 
@@ -11,7 +11,7 @@ const some_constants = {
   lang : window.lang,
   last_years : _.map(years.std_years, e => run_template(e)),
   people_years : _.map(years.people_years, e => run_template(e)),
-  planning_years :  _.map(years.planning_years, e => run_template(e)),
+  planning_years : _.map(years.planning_years, e => run_template(e)),
   est_next_year : run_template("{{est_next_year}}"),
   est_in_year : run_template("{{est_in_year}}"),
 }
@@ -39,14 +39,14 @@ const get_single_info = _.memoize(
     } else if ((subject.is('program') || subject.is('crso')) && stats.level === 'dept' ){
       report_subject = subject.dept;
     } else {
-      report_subject  = subject;
+      report_subject = subject;
     }
-    return   stats.report_on(report_subject);
+    return stats.report_on(report_subject);
   }, 
   ( 
     window.is_dev_build ?  
-    (stats_key, subject) =>  `${stats_key}_${subject.guid}_${Date.now()}`:
-    (stats_key, subject) =>  `${stats_key}_${subject.guid}`
+    (stats_key, subject) => `${stats_key}_${subject.guid}_${Date.now()}`:
+    (stats_key, subject) => `${stats_key}_${subject.guid}`
   )
 )
 

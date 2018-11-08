@@ -42,7 +42,7 @@ export function by_min_dept(){
   // minisries and then do a reduce sum to extract the fin size
   // of each ministry
 
-  var min_objs =  _.chain(table.depts)
+  var min_objs = _.chain(table.depts)
     .keys()
     .map(dept_code => ({ 
       dept: Dept.lookup(dept_code),
@@ -98,7 +98,7 @@ export function by_dept_type(){
   // group the departments by
   // minisries and then do a reduce sum to extract the fin size
   // of each ministry
-  var type_objs =  _.chain(table.depts)
+  var type_objs = _.chain(table.depts)
     .keys()
     .map(function(key){
       const dept = Dept.lookup(key);
@@ -161,7 +161,7 @@ export function by_dept_type(){
 
 export function by_this_year_emp(){
   var table = Table.lookup("table12");
-  var by_people =  _.chain(table.depts)
+  var by_people = _.chain(table.depts)
     .keys()
     .map(key => {
       const dept = Dept.lookup(key);

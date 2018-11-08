@@ -12,7 +12,7 @@ function get_leaves(flat_nodes){
 
 
 
-function filter_hierarchy(flat_nodes, filter_func, { leaves_only=false,  markSearchResults=false }){
+function filter_hierarchy(flat_nodes, filter_func, { leaves_only=false, markSearchResults=false }){
   //filters flat-nodes or just the leaves then assembles the tree from positive search results, 
   // *All descendants of positive search results are included in the tree.
   //  algo: get flat set of positive nodes
@@ -25,7 +25,7 @@ function filter_hierarchy(flat_nodes, filter_func, { leaves_only=false,  markSea
   const to_search = leaves_only ? get_leaves(flat_nodes) : flat_nodes;
   const positive_search_results = _.filter(to_search, filter_func);
 
-  const positive_search_ids =  _.keyBy(positive_search_results, 'id');
+  const positive_search_ids = _.keyBy(positive_search_results, 'id');
 
   if(_.isEmpty(positive_search_results)){
     return [ 

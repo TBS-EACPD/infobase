@@ -91,9 +91,9 @@ class SpendInTagPerspective extends React.Component {
               k="program_spending_in_tag_perspective_text"
               args={{
                 subject,
-                tag  : active_tag,
-                tag_spend :  active_tag_exp,
-                tag_exp_pct :  prog_exp / active_tag_exp,
+                tag : active_tag,
+                tag_spend : active_tag_exp,
+                tag_exp_pct : prog_exp / active_tag_exp,
               }}
             />
           </div>
@@ -176,7 +176,7 @@ new PanelGraph({
     const { graph_args, subject, info } = calculations;
 
     const { tag_exps } = graph_args;
-    const  prog_exp = info.program_exp_planning_year_1;
+    const prog_exp = info.program_exp_planning_year_1;
 
     return (
       <Panel

@@ -24,11 +24,14 @@
           2,
           {
             "SwitchCase": 1,
-            "ignoredNodes": ["ConditionalExpression"],
+            "ignoredNodes": [ "ConditionalExpression" ],
             "flatTernaryExpressions": true
           }
       ],
-      "comma-dangle": [ "warn", "always-multiline" ],
+      "comma-dangle": [
+        "warn",
+        "always-multiline"
+      ],
       "linebreak-style": [
           "off",
           "unix"
@@ -38,8 +41,12 @@
           "always"
       ],
       "no-unused-vars": [
-        "warn",
-        { "args": "none" }
+          "warn",
+          { "args": "none" }
+      ],
+      "no-multi-spaces": [
+          "warn",
+          { "exceptions": { "Property": false } }
       ],
       "no-extra-semi": [ "off" ],
       "react/prop-types": [ "off" ],

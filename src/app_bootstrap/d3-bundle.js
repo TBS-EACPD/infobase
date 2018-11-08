@@ -1,18 +1,18 @@
-import * as a from  "d3-array";
-import * as b from  "d3-axis";
-import * as c from  "d3-collection";
-import * as d from  "d3-color";
-import * as e from  "d3-dispatch";
-import * as f from  "d3-dsv";
-import * as g from  "d3-ease";
-import * as h from  "d3-hierarchy";
-import * as i from  "d3-interpolate";
-import * as j from  "d3-path";
-import * as k from  "d3-scale";
-import * as l from  "d3-selection";
-import * as m from  "d3-selection-multi";
-import * as n from  "d3-shape";
-import * as o from  "d3-transition";
+import * as a from "d3-array";
+import * as b from "d3-axis";
+import * as c from "d3-collection";
+import * as d from "d3-color";
+import * as e from "d3-dispatch";
+import * as f from "d3-dsv";
+import * as g from "d3-ease";
+import * as h from "d3-hierarchy";
+import * as i from "d3-interpolate";
+import * as j from "d3-path";
+import * as k from "d3-scale";
+import * as l from "d3-selection";
+import * as m from "d3-selection-multi";
+import * as n from "d3-shape";
+import * as o from "d3-transition";
 
 // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 // "This is an assign function that copies full descriptors"

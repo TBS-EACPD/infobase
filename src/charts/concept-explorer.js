@@ -1,6 +1,6 @@
 import common_charts_utils from './common_charts_utils';
 
-var base_colour =  'rgba(49,91,126,0.5)' ;
+var base_colour = 'rgba(49,91,126,0.5)' ;
 var hover_colour = 'rgba(49,91,126,1)';
 var arc_color = "rgba(48,149,180,0.1)";
 var soft_selected_color = "rgba(48,149,180,0.3)";
@@ -12,7 +12,7 @@ export class ConceptExplorer {
   constructor(container,options){
    
     common_charts_utils.setup_graph_instance(this,d3.select(container),options);
-    var _graph_area  = this._graph_area = this.svg.append("g").attr("class","_graph_area");
+    var _graph_area = this._graph_area = this.svg.append("g").attr("class","_graph_area");
     this.arc_area = _graph_area.append("g").attr("class","arcs");
     this.links_area = _graph_area.append("g").attr("class","links");
     this.tags_area = _graph_area.append("g").attr("class","tags");
@@ -179,7 +179,7 @@ export class ConceptExplorer {
         "top": "0px",
         "left" : function(d,i){ return i * that.width/3 +"px"},
         "font-weight" : "500",
-        "font-size"  : "15px" ,
+        "font-size" : "15px" ,
         "text-align" : "center" ,
         "padding" : "3px",
       });
@@ -188,11 +188,11 @@ export class ConceptExplorer {
   render_legend() {    
     var legend_text = [
       { text : this.legend_text.selected,
-        "background-color"  : selected_colour,
+        "background-color" : selected_colour,
         "color" : "white",
       },
       { text: this.legend_text.soft_selected,
-        "background-color"   : soft_selected_color,
+        "background-color" : soft_selected_color,
         "color" : "black",
       },
     ];
@@ -211,8 +211,8 @@ export class ConceptExplorer {
       .html(function(d){ return d.text;})
       .styles({
         "float": "right",
-        "background-color"  : _.property("background-color"),
-        "color"  : _.property("color"),
+        "background-color" : _.property("background-color"),
+        "color" : _.property("color"),
         "border" : "1px solid grey",
         "bottom" : "0px",
         "margin" : "5px" ,
@@ -234,8 +234,8 @@ export class ConceptExplorer {
     },this);
     
     if (this.small_window) {
-      text_x = {"pre_trans" : function(d) {return  that.width - bar_width -20+ "px";},
-        "post_trans" : function(d) {return   that.width - bar_width -20 +  "px";},
+      text_x = {"pre_trans" : function(d) {return that.width - bar_width -20+ "px";},
+        "post_trans" : function(d) {return that.width - bar_width -20 + "px";},
       };
     } else {
       text_x = {"pre_trans" : function(d) {return that.width / 2 + (bar_width / -2 - 10) + "px";},
@@ -288,14 +288,14 @@ export class ConceptExplorer {
         "left": text_x.post_trans,
         "top": function(d){ return d.y+"px"},
         "cursor": "pointer",
-        "border"  : function(d){
+        "border" : function(d){
           return "2px solid " + d.selected ? selected_colour : base_colour ;
         },
-        "color"  : function(d){
-          return d.selected ? "#fff"  : hover_colour ;
+        "color" : function(d){
+          return d.selected ? "#fff" : hover_colour ;
         },
-        "background-color"  : function(d){
-          return d.selected ?  selected_colour : "white"; //"#d9edf7" 
+        "background-color" : function(d){
+          return d.selected ? selected_colour : "white"; //"#d9edf7" 
         },
       });
           
@@ -305,7 +305,7 @@ export class ConceptExplorer {
   toggle_tag_arc() {    
     var angle_offset = this.angle_offset - 20;
     var to_rads = function(deg) { return deg * Math.PI/180;}
-    var num_sel =  _.filter(this.tagged_data.values().concat(this.tag_data.values()),{selected : true}).length;
+    var num_sel = _.filter(this.tagged_data.values().concat(this.tag_data.values()),{selected : true}).length;
 
     // draw the visual flourish of the coloured arcs around the tags
     if (this.arc_area.select("path.arc").node() === null && num_sel === 0){
@@ -525,9 +525,9 @@ export class ConceptExplorer {
         // "text-align": label.text_align,
         "background-color": function(d) {
           if (d.found) {
-            return  found_colour;
+            return found_colour;
           } else if (d.selected) {
-            return  selected_colour;
+            return selected_colour;
           } else if (d.soft_selected) {
             return soft_selected_color;
           } else {
@@ -567,8 +567,8 @@ export class ConceptExplorer {
     const diagonal_generator = function link(d) {
       return "M" + (Math.cos((d.source.angle) * Math.PI / -180) * d.source.dr) + "," + (Math.sin((d.source.angle) * Math.PI / -180) * d.source.dr)
           + "C" + ((Math.cos((d.source.angle) * Math.PI / -180) * d.source.dr) + (d.source.side === "left" ? d.target.x : - d.target.x)) / 2 + "," + (Math.sin((d.source.angle) * Math.PI / -180) * d.source.dr)
-          + " " + ((Math.cos((d.source.angle) * Math.PI / -180) * d.source.dr) + (d.source.side === "left" ? d.target.x : - d.target.x)) / 2 + "," + (d.target.y + that.bar_height/2 -  that.height/2 )
-          + " " + (d.source.side === "left" ? d.target.x : - d.target.x) + "," + (d.target.y + that.bar_height/2 -  that.height/2) ;
+          + " " + ((Math.cos((d.source.angle) * Math.PI / -180) * d.source.dr) + (d.source.side === "left" ? d.target.x : - d.target.x)) / 2 + "," + (d.target.y + that.bar_height/2 - that.height/2 )
+          + " " + (d.source.side === "left" ? d.target.x : - d.target.x) + "," + (d.target.y + that.bar_height/2 - that.height/2) ;
     }
 
     const links = this.links_area
@@ -588,7 +588,7 @@ export class ConceptExplorer {
     links.merge(new_links)
       .attr("d", diagonal_generator)
       .attr("stroke", function(d){
-        return d.selected ?  selected_colour : base_colour ;
+        return d.selected ? selected_colour : base_colour ;
       });
    
   };
@@ -616,7 +616,7 @@ export class ConceptExplorer {
       .each(function(d) {
         that.tags_area.select("g#tag-circle" + d.source.rid + " circle")
           .attr("stroke", function() {
-            return highlight  || d.selected ? hover_colour : base_colour;
+            return highlight || d.selected ? hover_colour : base_colour;
           })
           .attr("fill", function(){;
             if (highlight){ return d.selected ;}

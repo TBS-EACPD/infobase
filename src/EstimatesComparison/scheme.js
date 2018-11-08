@@ -87,7 +87,7 @@ function get_data_by_org(include_stat){
         },
         children: _.map(rows, row => {
           const sups = row["sups"] || 0;
-          const mains  = row["mains"] || 0;
+          const mains = row["mains"] || 0;
           const inc_pct = sups/mains;
 
           return {
@@ -163,7 +163,7 @@ function get_data_by_item_types(){
   
   const nested_data = _.chain( Table.lookup('table8').major_voted_big_stat([this_year_col,last_year_col], false, false) )
     .toPairs()
-    .map( ([ category, rows ])  => {  
+    .map( ([ category, rows ]) => {  
 
       const sup_rows = _.filter(rows, row => keys_in_supps[key_for_table_row(row)]);
       if( _.isEmpty(sup_rows)){
@@ -362,7 +362,7 @@ export const estimates_diff_scheme = {
     const { type, payload } = action;
 
     if(type === "set_h7y_layout"){ //this should always reset the show_stat filter 
-      if(payload === state.h7y_layout){  //if no change, state don't change
+      if(payload === state.h7y_layout){ //if no change, state don't change
         return state;
       }
       return {

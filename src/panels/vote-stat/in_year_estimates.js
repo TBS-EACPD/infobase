@@ -11,7 +11,7 @@ const { CirclePieChart } = declarative_charts;
 
 new PanelGraph({
   level: "dept",
-  depends_on :  ["table8"],
+  depends_on : ["table8"],
   machinery_footnotes : false,
 
   info_deps: [

@@ -113,7 +113,7 @@ export default {
             return trivial_text_maker("op_spending");
           } else if (row.so_num > 7 && row.so_num <= 9) {
             return trivial_text_maker("capital_spending");
-          } else if (row.so_num === 21  || row.so_num  === 22) {
+          } else if (row.so_num === 21 || row.so_num === 22) {
             return trivial_text_maker("revenues");
           }
           return row.so;
@@ -166,7 +166,7 @@ Statistics.create_and_register({
     const table = tables.table5;
     const q = table.q(subject);
 
-    stats.year_over_year_single_stats(add,  "personnel", _.map(std_years,m),_.map(std_years,(year,i)=>{
+    stats.year_over_year_single_stats(add, "personnel", _.map(std_years,m),_.map(std_years,(year,i)=>{
       return table.horizontal(year,false)[sos[1].text];
     }));
     var last_year = q.get_top_x(["so","{{pa_last_year}}"],Infinity,{zip:true,sort_col:"{{pa_last_year}}"});

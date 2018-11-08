@@ -113,7 +113,7 @@ const create_spend_type_hierarchy = function(){
 const spend_type_data_wrapper_node_rules = node => {
   node.__value__ = node.value;
   node.open = true;
-  if ( node.data.is("gov") ||  node.data.is("type_of_spending") ){
+  if ( node.data.is("gov") || node.data.is("type_of_spending") ){
     node.how_many_to_show = Infinity;
   } else if (node.data.is("so")){
     const root_value = _.last(node.ancestors()).value;

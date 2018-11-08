@@ -69,7 +69,7 @@ const get_level_appropriate_query_for_panel = (panel_def, level) => {
   }
 
   if(query){
-    return query[level]  || query["*"];
+    return query[level] || query["*"];
   }
   
 
@@ -114,7 +114,7 @@ const Presentational = props => {
           data={
             _.isFunction(data_to_props) ? 
             data_to_props(data_props, level) : 
-            null  // static panels won't have data_to_props nor data_props
+            null // static panels won't have data_to_props nor data_props
           }
           gql_props={
             _.pick(data_props, [

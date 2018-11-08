@@ -162,8 +162,8 @@ export default {
       var this_year = "thisyearauthorities",
         last_year= "lastyearauthorities",
         total = this.sum([this_year, last_year]),
-        change =  total[this_year] / (total[last_year])-1,
-        data =  [total[this_year],total[last_year],change];
+        change = total[this_year] / (total[last_year])-1,
+        data = [total[this_year],total[last_year],change];
       if (!format){
         return data;
       }
@@ -174,8 +174,8 @@ export default {
       var this_year = "thisyearexpenditures",
         last_year= "lastyearexpenditures",
         total = this.sum([this_year, last_year]),
-        change =  total[this_year] / (total[last_year]) - 1,
-        data =  [total[this_year],total[last_year],change];
+        change = total[this_year] / (total[last_year]) - 1,
+        data = [total[this_year],total[last_year],change];
       if (!format){
         return data;
       }
@@ -187,12 +187,12 @@ export default {
     {
       title_key : "major_voted_stat",
       include_in_report_builder : true,
-      filter_func :  major_vote_stat,
+      filter_func : major_vote_stat,
     },
     {
       title_key :"voted_stat",
       include_in_report_builder : true,
-      filter_func :  vote_stat_dimension,
+      filter_func : vote_stat_dimension,
     },
   ],
 
@@ -238,17 +238,17 @@ Statistics.create_and_register({
     const q = table.q(subject);
     add({
       key : "qfr_auth_change",
-      value:  q.auth_change(false)[2],
+      value: q.auth_change(false)[2],
       type : "percentage1",
     });
     add({
       key : "qfr_spend_change",
-      value:  q.exp_change(false)[2],
+      value: q.exp_change(false)[2],
       type : "percentage1",
     });
-    add("qfr_auth_this_year",  q.sum("thisyearauthorities"));
-    add("qfr_spend_this_year",  q.sum("thisyearexpenditures"));
-    add("qfr_auth_last_year",  q.sum("lastyearauthorities"));
+    add("qfr_auth_this_year", q.sum("thisyearauthorities"));
+    add("qfr_spend_this_year", q.sum("thisyearexpenditures"));
+    add("qfr_auth_last_year", q.sum("lastyearauthorities"));
     add("qfr_spend_last_year", q.sum("lastyearexpenditures"));
     add({
       key : "qfr_spend_percent_this_year", 
@@ -267,19 +267,19 @@ Statistics.create_and_register({
     const q = table.q(subject);
     add({
       key : "qfr_auth_change",
-      value:  q.auth_change(false)[2],
+      value: q.auth_change(false)[2],
       type : "percentage1",
     });
     add({
       key : "qfr_spend_change",
-      value:  q.exp_change(false)[2],
+      value: q.exp_change(false)[2],
       type : "percentage1",
     });
-    add("qfr_auth_this_year",  q.sum("thisyearauthorities"));
-    add("qfr_spend_this_year",  q.sum("thisyearexpenditures"));
+    add("qfr_auth_this_year", q.sum("thisyearauthorities"));
+    add("qfr_spend_this_year", q.sum("thisyearexpenditures"));
     add({
       key :"qfr_spend_percent_this_year",
-      value:  c.gov_qfr_spend_this_year / c.gov_qfr_auth_this_year,
+      value: c.gov_qfr_spend_this_year / c.gov_qfr_auth_this_year,
       type : "percentage1",
     });
     add("qfr_auth_last_year", q.sum("lastyearauthorities"));

@@ -31,7 +31,7 @@ function populate_footnotes_info(csv_str){
 
     const text = marked(
       run_template(footnote),
-      { sanitize: false,  gfm: true }
+      { sanitize: false, gfm: true }
     );
 
     if (subject_id !== '*'){

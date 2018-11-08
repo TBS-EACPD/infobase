@@ -1,4 +1,4 @@
-import  {createSelector } from 'reselect';
+import {createSelector } from 'reselect';
 import { StandardRouteContainer } from '../core/NavComponents';
 import { ReactPanelGraph } from '../core/PanelCollectionView';
 import { Link } from 'react-router-dom';
@@ -34,7 +34,7 @@ const getSubj = (level, id) => {
   let subject;
   switch(level){
     case 'dept':
-      subject =  Dept.lookup(id) || Dept.lookup(defaultSubjectKeys.dept);
+      subject = Dept.lookup(id) || Dept.lookup(defaultSubjectKeys.dept);
       break;
     case 'tag':
       subject = Tag.lookup(id) || Tag.lookup(defaultSubjectKeys.tag);
@@ -49,7 +49,7 @@ const getSubj = (level, id) => {
       subject = CRSO.lookup(id) || CRSO.lookup( defaultSubjectKeys.crso );
       break;
     default:
-      subject =  Gov;
+      subject = Gov;
   }
   return subject;
 
@@ -96,7 +96,7 @@ const get_graph_obj = createSelector(
   get_subj,
   props => _.get(props, "match.params.graph"),
   (subject, graph_key) => {
-    return PanelGraph.lookup(graph_key, subject.level) ||  PanelGraph.lookup('financial_intro', 'gov');
+    return PanelGraph.lookup(graph_key, subject.level) || PanelGraph.lookup('financial_intro', 'gov');
   }
 );
 

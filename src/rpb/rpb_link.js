@@ -10,11 +10,11 @@ const rpb_link = (naive_state, useRouterFormat) => _.chain(naive_state)
     return {...obj, 
       table: ( 
         table && table.is_table ?
-          table.id  :
+          table.id :
           table
       ),
       subject: (
-        subject && subject.level  ?
+        subject && subject.level ?
           subject.guid : 
           subject
       ),

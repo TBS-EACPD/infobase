@@ -86,7 +86,7 @@ const Chart = ({
   hide_gridlines : true,
   ticks: _.range(0,data.length),
   colors : _.constant(is_light ? "#335075" : 'black'),
-  formater :  formats[ is_fte ? "big_int_real_raw" : "compact1_raw" ],
+  formater : formats[ is_fte ? "big_int_real_raw" : "compact1_raw" ],
   series : {"0": data },
 })
 
@@ -795,7 +795,7 @@ function get_calcs(subject, q6, q12){
   const has_planned = has_planning_data(subject,q6);
   const has_hist = has_hist_data(subject,q6);
 
-  const hist_spend_data =  _.map(exp_cols, col => q6.sum(col) || 0);
+  const hist_spend_data = _.map(exp_cols, col => q6.sum(col) || 0);
   const planned_spend_data = _.map(planning_years, col => q6.sum(col) || 0);
   
   const hist_fte_data = _.map(std_years, col => q12.sum(col) || 0);

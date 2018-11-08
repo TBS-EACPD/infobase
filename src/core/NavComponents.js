@@ -19,7 +19,7 @@ class DocumentTitle extends React.Component {
   _update(){
     const { title_str } = this.props;
 
-    const title =  (
+    const title = (
       _.isEmpty(title_str) ? 
       default_title[window.lang] : 
       `${default_title[window.lang]} - ${title_str}`

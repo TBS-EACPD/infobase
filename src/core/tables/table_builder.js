@@ -53,7 +53,7 @@ function prepare_data(options){
       _.each(header_row, function(header,j){
         // [utils.make_uniqe](../utils.html#make_unique)
         var wcag_headers;
-        var  id =  UTILS.make_unique();
+        var id = UTILS.make_unique();
         header_links[j] += ' ' + id;
         if (i > 0){
           wcag_headers = _.chain(headers)
@@ -89,7 +89,7 @@ function prepare_data(options){
       } else {
         row[j] = {
           val : val,
-          __table_opts__ :  __table_opts__,
+          __table_opts__ : __table_opts__,
         };
       }
     });

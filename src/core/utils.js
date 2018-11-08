@@ -31,7 +31,7 @@ export class Select {
       container, 
       data, 
       onSelect, 
-      display_func,  //required, unless the items have a display or text field
+      display_func, //required, unless the items have a display or text field
       selected, //optional
       selected_key, //optional
       disabled_key, //optional

@@ -13,7 +13,7 @@ class SubProgramEntity {
     return parent_indexed_sub_program_entities[program_id] || [];
   } 
   static lookup(id){
-    return  sub_program_entities_by_id[id];
+    return sub_program_entities_by_id[id];
   }
   static create_and_register(def){
     const { id, parent_id } = def;
@@ -109,7 +109,7 @@ class SubProgramEntity {
       .value();
   }
   get level(){
-    const { parent_id }  = this;
+    const { parent_id } = this;
     return (
       this.constructor.lookup(parent_id) ?
       'sub_sub_program' :
@@ -135,7 +135,7 @@ class SubProgramEntity {
         'fte_planning_year_2',
         'fte_planning_year_3',
       ])
-      .some(num =>  _.isNumber(num) && !_.isNaN(num) )
+      .some(num => _.isNumber(num) && !_.isNaN(num) )
       .value();
   }
   get has_drr_resources(){
@@ -147,7 +147,7 @@ class SubProgramEntity {
         "fte_pa_last_year",
         "planned_fte_pa_last_year",
       ])
-      .some(num =>  _.isNumber(num) && !_.isNaN(num) )
+      .some(num => _.isNumber(num) && !_.isNaN(num) )
       .value();
   }
 }

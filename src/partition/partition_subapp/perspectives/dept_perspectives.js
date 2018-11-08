@@ -25,7 +25,7 @@ const create_ministry_hierarchy = function(data_type, skip_crsos = true){
         return node.orgs;
       } else if ( node.is("dept") ){
         if (skip_crsos) {
-          return  _.reduce(node.crsos, (memo, crso) => memo.concat(crso.programs), []);
+          return _.reduce(node.crsos, (memo, crso) => memo.concat(crso.programs), []);
         } else {
           return node.crsos;
         }

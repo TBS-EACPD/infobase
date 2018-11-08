@@ -94,7 +94,7 @@ const inst_form_sort_order = [
   "other",
 ];
 
-const react_html_string  = str => <span dangerouslySetInnerHTML={{ __html: str }} />;
+const react_html_string = str => <span dangerouslySetInnerHTML={{ __html: str }} />;
 const get_col_defs = ({show_counts}) => [{
   id: "name",
   width: 250,
@@ -120,7 +120,7 @@ const get_col_defs = ({show_counts}) => [{
 
 const get_children_grouper = createSelector(
   _.property("grouping"),
-  grouping  => (node, children) => {
+  grouping => (node, children) => {
     const trivial_grouping = [{node_group: children}];
     if(node.root){
       return trivial_grouping;

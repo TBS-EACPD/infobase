@@ -14,7 +14,7 @@ export class HBar {
 
     common_charts_utils.setup_graph_instance(this,d3.select(container),options);
 
-    var _graph_area  = this.svg.append("g").attr("class","_graph_area");
+    var _graph_area = this.svg.append("g").attr("class","_graph_area");
     this.graph_area = _graph_area.append("g").attr("class","inner_graph_area");
     
     var margin = this.options.margin || {top: 50,
@@ -133,7 +133,7 @@ export class HBar {
     //removeing dead bars
     g.exit().remove();
 
-    var new_g =  g
+    var new_g = g
       .enter()
       .append("g")
       .merge(g)
@@ -152,13 +152,13 @@ export class HBar {
 
     new_g
       .append("rect")
-      .attrs({  "width": '0px',
+      .attrs({ "width": '0px',
         "height" : y.bandwidth()-8+"px",
         "y": "4px",
         'class' : "fill",
       })
       .styles({
-        "fill" : function(d){return d.value > 0 ?  pos_color : neg_color;},
+        "fill" : function(d){return d.value > 0 ? pos_color : neg_color;},
         "fill-opacity" : 0.5,
       })
 
@@ -232,7 +232,7 @@ export class HBar {
           "width": Math.abs(x_scale(d.value) - x_scale(0)),
         })
         .styles({
-          "fill" : d.value > 0 ?  pos_color : neg_color,
+          "fill" : d.value > 0 ? pos_color : neg_color,
         });
       
       single

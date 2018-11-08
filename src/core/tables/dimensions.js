@@ -111,7 +111,7 @@ const make_horizontal_func = function(func,table){
     if (_.isArray(col)){
       col_obj = _.map(col,e => table.col_from_nick(e));
     } else {
-      col_obj  = table.col_from_nick(col);
+      col_obj = table.col_from_nick(col);
     }
 
     // table has  data attached and the requested 
@@ -126,11 +126,11 @@ const make_horizontal_func = function(func,table){
       data = table.data;
       // if `de_dept` is not defined then set the default
       // to true
-      include_dept =  include_dept === false ? false : true;
+      include_dept = include_dept === false ? false : true;
     }
     // if `rollup` is not defined then set the default
     // to true
-    rollup =   rollup === false ? false : true;
+    rollup = rollup === false ? false : true;
     // if func is a function, then call it and pass along
     // `table` and `col` to produce a key function
     //
@@ -144,10 +144,10 @@ const make_horizontal_func = function(func,table){
       nest = nest.rollup(function(leaves){
         if (_.isArray(col)){
           return _.map(col, function(_col,i){
-            return  col_obj[i].formula(leaves);
+            return col_obj[i].formula(leaves);
           });
         } else {
-          return  col_obj.formula(leaves);
+          return col_obj.formula(leaves);
         }
       });
     }
@@ -165,7 +165,7 @@ const make_horizontal_func = function(func,table){
 };
 
 export const trivial_dimension = {
-  title_key :"all"  ,
+  title_key :"all" ,
   include_in_report_builder : true,
   filter_func: () => ()=> text_maker('all'),
 }
@@ -176,14 +176,14 @@ export function attach_dimensions(table){
   // create additional, more specialized horizontal dimensions
   _.each(table.dimensions, (dimension,ix) => {
     const table_attr_name = dimension.title_key;
-    table[table_attr_name] =  make_horizontal_func(dimension.filter_func,table);
+    table[table_attr_name] = make_horizontal_func(dimension.filter_func,table);
 
     dimension.table_attr_name = table_attr_name;
     dimension.filter_func = _.bind(dimension.filter_func,dimension);
 
     if (ix===0){
       // add the first dimension under another common name of "horizontal"
-      table.horizontal =  table[table_attr_name];
+      table.horizontal = table[table_attr_name];
     }
   });
 }

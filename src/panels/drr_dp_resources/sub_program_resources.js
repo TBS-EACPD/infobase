@@ -3,7 +3,7 @@ import text from "./sub_program_resources.yaml";
 
 import { createSelector } from 'reselect';
 import classNames from 'classnames';
-import { combineReducers, createStore }  from 'redux';
+import { combineReducers, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 
 import { 
@@ -70,7 +70,7 @@ const sub_to_node = (sub,doc) => ({
       diff_spend: sub.spend_pa_last_year - sub.planned_spend_pa_last_year,
       actual_ftes: sub.fte_pa_last_year,
       planned_ftes: sub.planned_fte_pa_last_year,
-      diff_ftes:  sub.fte_pa_last_year - sub.planned_fte_pa_last_year,
+      diff_ftes: sub.fte_pa_last_year - sub.planned_fte_pa_last_year,
     },
   }, 
 });
@@ -187,7 +187,7 @@ const sub_program_resource_scheme = {
   get_base_hierarchy_selector: () => createSelector(
     state => state.sub_program_resource.doc,
     state => state.sub_program_resource.subj_guid,
-    (doc, subj_guid) =>  create_resource_hierarchy({ 
+    (doc, subj_guid) => create_resource_hierarchy({ 
       program: get_by_guid(subj_guid),
       doc,
     })
@@ -279,7 +279,7 @@ class SubProgramResourceTree extends React.Component {
 
 const map_state_to_props_from_memoized_funcs = memoized_funcs => {
 
-  const  { get_scheme_props } = memoized_funcs;
+  const { get_scheme_props } = memoized_funcs;
   const mapRootStateToRootProps = map_state_to_root_props_from_memoized_funcs(memoized_funcs);
 
   return state => ({

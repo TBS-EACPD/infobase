@@ -218,7 +218,7 @@ class SimpleView extends React.Component {
       >
         <thead>
           <tr className="table-header">
-            {_.map(headers,  ( {nick, display} , ix) => 
+            {_.map(headers, ( {nick, display} , ix) => 
               <th 
                 key={nick}
                 onClick={()=>{ on_header_click(nick); }}
@@ -270,7 +270,7 @@ class SimpleView extends React.Component {
             >
               <TextMaker el="span" text_key='total' /> 
             </td>
-            {_.map(columns, ({nick,type})  => 
+            {_.map(columns, ({nick,type}) => 
               <td 
                 className="data-col-cell"
                 key={nick}

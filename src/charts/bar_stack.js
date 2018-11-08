@@ -11,7 +11,7 @@ export default function barStack(data) {
     _.each(data, function(d) {
       d = d.data[l];
       d.size = Math.abs(d.y);
-      if (d.y < 0)  {
+      if (d.y < 0) {
         d.y0 = negBase;
         negBase -= d.size;
       } else { 

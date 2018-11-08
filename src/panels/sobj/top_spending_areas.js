@@ -14,7 +14,7 @@ import {
   create_text_maker_component,
 } from "../shared";
 
-const { std_years } =  years;
+const { std_years } = years;
 const { Format } = util_components;
 const { A11YTable } = declarative_charts;
 
@@ -55,7 +55,7 @@ Statistics.create_and_register({
       value: top_so_amount,
     } = _.first(rows_by_so);
 
-    const total_spent =  d3.sum( rows_by_so, _.property('value') );
+    const total_spent = d3.sum( rows_by_so, _.property('value') );
     const top_so_pct = top_so_amount/total_spent;
 
     add("top_so_name", top_so_name);
@@ -79,7 +79,7 @@ Statistics.create_and_register({
       value: top_so_amount,
     } = _.first(rows_by_so);
 
-    const total_spent =  d3.sum(rows_by_so, _.property('value'))
+    const total_spent = d3.sum(rows_by_so, _.property('value'))
 
     const top_so_pct = top_so_amount/total_spent;
 
@@ -138,7 +138,7 @@ new PanelGraph({
     if (_.isEmpty( this.tables.table305.programs.get(subject) ) ){
       return false;
     }
-    return  common_cal([subject], this.tables.table305);
+    return common_cal([subject], this.tables.table305);
   },
 
   render: render_w_options({text_key: "program_top_spending_areas_text"}),
