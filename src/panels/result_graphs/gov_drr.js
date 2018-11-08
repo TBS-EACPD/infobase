@@ -3,6 +3,7 @@ import {
   Subject,
   PanelGraph,
   Panel,
+  util_components,
 } from "../shared.js";
 import {
   link_to_results_infograph,
@@ -13,6 +14,8 @@ import {
 import { DrrSummary } from './drr_summary.js';
 
 const { Gov, Dept } = Subject;
+
+const { SortIndicators } = util_components;
 
 new PanelGraph({
   level: 'gov',
@@ -140,21 +143,36 @@ class HorizontalStatusTable extends React.Component {
         <caption> <TM k="indicator_targets" />  </caption>
         <thead>
           <tr className="table-header">
-            <th className="center-text" role="col">
+            <th 
+              className="center-text" 
+              role="col"
+              onClick={ () => this.header_click("subject") }
+            >
               <TM k="org" />
+              <SortIndicators 
+                asc={!descending && sort_by === "subject"} 
+                desc={descending && sort_by === "subject"}
+              />
             </th>
-            <th className="center-text" role="col">
-              { result_statuses.met.text }
-            </th>
-            <th className="center-text" role="col">
-              { result_statuses.not_met.text }
-            </th>
-            <th className="center-text" role="col">
-              { result_statuses.not_reported.text }
-            </th>
-            <th className="center-text" role="col">
-              { result_statuses.ongoing.text }
-            </th>
+            {
+              _.map(result_statuses, (status_text, status_key) => {
+                const col_name = `drr17_indicators_${status_key}`;
+                return (
+                  <th 
+                    key={status_key} 
+                    className="center-text" 
+                    role="col"
+                    onClick={ () => this.header_click(col_name) }
+                  >
+                    { status_text.text }
+                    <SortIndicators 
+                      asc={!descending && sort_by === col_name} 
+                      desc={descending && sort_by === col_name}
+                    />
+                  </th>
+                );
+              })
+            }
           </tr>
         </thead>
         <tbody>
