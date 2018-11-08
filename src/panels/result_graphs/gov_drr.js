@@ -88,7 +88,7 @@ class GovDRR extends React.Component {
         </div>
         <HorizontalStatusTable 
           counts_by_dept={counts_by_dept}
-          gov_counts={gov_counts}
+          gov_counts={verbose_gov_counts}
         />
       </div>
       
@@ -120,42 +120,17 @@ class HorizontalStatusTable extends React.Component {
   }
 
   render(){
-    const { counts_by_dept } = this.props;
+    const { counts_by_dept, gov_counts } = this.props;
     const { sort_by, descending, show_all } = this.state;
 
-    const count_keys = _.chain(counts_by_dept[0].counts)
-      .keys()
-      .difference(["id", "level"])
-      .value();
-    const gov_counts = _.chain(counts_by_dept)
-      .reduce(
-        (memo, dept_counts) => {
-          _.each(
-            count_keys,
-            key => memo[key] += dept_counts.counts[key]
-          );
-          return memo;
-        },
-        _.chain(count_keys)
-          .map(key => [key, 0] )
-          .fromPairs()
-          .value()
-      )
-      .thru(
-        gov_counts => ({
-          subject: Gov,
-          counts: {
-            ...gov_counts,
-            id: Gov.id,
-            level: Gov.level,
-          },
-          total: gov_counts.drr17_total,
-        })
-      )
-      .value()
+    const status_rows = [
+      'drr17_indicators_met',
+      'drr17_indicators_not_met',
+      'drr17_indicators_not_reported',
+      'drr17_indicators_ongoing',
+    ];
 
     const sorted_filtered_counts =  _.chain(counts_by_dept)
-      .concat(gov_counts)
       .reject( ({counts}) => counts.drr17_total === 0)
       .sortBy(row => row.counts.drr17_total )
       .reverse()
@@ -218,12 +193,7 @@ class HorizontalStatusTable extends React.Component {
               </td> 
 
               {_.map(
-                [
-                  'drr17_indicators_met',
-                  'drr17_indicators_not_met',
-                  'drr17_indicators_not_reported',
-                  'drr17_indicators_ongoing',
-                ], 
+                status_rows, 
                 status => (
                   <td key={status} className="right_number">
                     {counts[status]}
@@ -232,6 +202,19 @@ class HorizontalStatusTable extends React.Component {
               )}
             </tr>
           )}
+          <tr>
+            <td>
+              <TM k="goc_total"/>
+            </td>
+            {_.map(
+              status_rows, 
+              status => (
+                <td key={status} className="right_number">
+                  {gov_counts[status]}
+                </td>
+              )
+            )}
+          </tr>
         </tbody>
       </table>
       { !show_all && 
