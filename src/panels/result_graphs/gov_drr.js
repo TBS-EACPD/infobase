@@ -8,6 +8,7 @@ import {
   link_to_results_infograph,
   row_to_drr_status_counts,
   ResultCounts,
+  result_statuses,
 } from './results_common.js';
 import { DrrSummary } from './drr_summary.js';
 
@@ -98,7 +99,7 @@ class HorizontalStatusTable extends React.Component {
   constructor(){
     super();
     this.state = {
-      sort_by: 'drr17_total',
+      sort_by: 'drr17_indicators_met',
       descending: true,
       show_all: false,
     };
@@ -109,8 +110,8 @@ class HorizontalStatusTable extends React.Component {
       sort_by: col_name,
       descending: (
         this.state.sort_by === col_name ?
-        !this.state.descending :
-        true
+          !this.state.descending :
+          true
       ),
     });
   }
@@ -119,8 +120,7 @@ class HorizontalStatusTable extends React.Component {
     const { counts_by_dept } = this.props;
     const { sort_by, descending, show_all } = this.state;
 
-
-    const simpler_counts = (
+    const sorted_filtered_counts = (
       _.chain(counts_by_dept)
         .reject( ({counts}) => counts.drr17_total === 0)
         .sortBy(row => row.counts.drr17_total )
@@ -128,8 +128,8 @@ class HorizontalStatusTable extends React.Component {
         .pipe( show_all ? _.identity : list => _.take(list, 15) )
         .sortBy( 
           sort_by ==='subject' ? 
-          ({subject}) => subject.name : 
-          row => row.counts[sort_by]
+            ({subject}) => subject.name : 
+            row => row.counts[sort_by]
         )
         .pipe( descending ? arr => arr.reverse() : _.identity )
         .value()
@@ -143,19 +143,22 @@ class HorizontalStatusTable extends React.Component {
             <th className="center-text" role="col">
               <TM k="org" />
             </th>
-
             <th className="center-text" role="col">
-              <TM k="targets_to_achieve_past" />
+              { result_statuses.met.text }
             </th>
-
             <th className="center-text" role="col">
-              <TM k="targets_to_achieve_future_and_ongoing" />
+              { result_statuses.not_met.text }
             </th>
-
+            <th className="center-text" role="col">
+              { result_statuses.not_reported.text }
+            </th>
+            <th className="center-text" role="col">
+              { result_statuses.ongoing.text }
+            </th>
           </tr>
         </thead>
         <tbody>
-          {_.map(simpler_counts, ({ subject, counts }) => 
+          {_.map(sorted_filtered_counts, ({ subject, counts }) => 
             <tr key={subject.id}>
               <td>
                 <a href={link_to_results_infograph(subject)}>
@@ -163,10 +166,18 @@ class HorizontalStatusTable extends React.Component {
                 </a>
               </td> 
 
-              {_.map(['drr17_past_total', 'drr17_future_total'], status => 
-                <td key={status} className="right_number">
-                  {counts[status]}
-                </td>
+              {_.map(
+                [
+                  'drr17_indicators_met',
+                  'drr17_indicators_not_met',
+                  'drr17_indicators_not_reported',
+                  'drr17_indicators_ongoing',
+                ], 
+                status => (
+                  <td key={status} className="right_number">
+                    {counts[status]}
+                  </td>
+                )
               )}
             </tr>
           )}
