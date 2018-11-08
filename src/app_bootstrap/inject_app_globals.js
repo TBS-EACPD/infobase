@@ -24,16 +24,8 @@ if(typeof DEV !== "undefined"){
 /* eslint-enable no-undef */
 
 
-import * as feature_detection from '../core/feature-detection.js';
-window.feature_detection = feature_detection;
-
-//3rd party libraries injected into global scope
-//note that these next few lines must be run before anything using lodash, handlebars, etc.
-import marked from 'marked';
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-window.marked = marked;
 window.React = React;
 window.ReactDOM = ReactDOM;
 
@@ -46,6 +38,10 @@ window.d3 = d3;
 
 import Handlebars from 'handlebars/dist/cjs/handlebars.js';
 window.Handlebars = Handlebars;
+
+
+import * as feature_detection from '../core/feature-detection.js';
+window.feature_detection = feature_detection;
 
 import { infobaseCategory10Colors } from '../core/color_schemes.js';
 window.infobase_colors = () => d3.scaleOrdinal().range(infobaseCategory10Colors);

@@ -70,7 +70,6 @@
     "is_dev_link": true,
     "is_dev_build": true,
     "feature_detection": true,
-    "marked": true,
     "React": true,
     "ReactDOM": true,
     "d3": true,

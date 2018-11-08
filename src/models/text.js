@@ -1,3 +1,4 @@
+import marked from 'marked';
 import template_globals_file from '../common_text/template_globals.csv';
 import common_lang from '../common_text/common_lang.yaml';
 import igoc_lang from '../common_text/igoc-lang.yaml';

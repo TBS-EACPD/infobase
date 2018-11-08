@@ -1,3 +1,4 @@
+import marked from 'marked';
 import { get_static_url, make_request } from '../core/request_utils.js';
 import { Subject } from './subject.js';
 import FootNote from './footnotes.js';

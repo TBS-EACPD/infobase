@@ -1,3 +1,4 @@
+import marked from 'marked';
 import { Fragment } from 'react';
 import { trivial_text_maker, util_components } from '../shared.js';
 import { businessConstants } from '../../models/businessConstants.js';
