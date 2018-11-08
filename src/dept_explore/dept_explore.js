@@ -6,6 +6,7 @@ import { text_abbrev } from '../core/utils.js';
 import { formats } from '../core/format.js';
 import { get_info } from '../core/Statistics.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
+import { Spinner } from '../core/Spinner.js';
 import { rpb_link } from '../rpb/rpb_link.js';
 import { Subject } from '../models/subject.js';
 import { text_maker, TM } from './text_provider.js';
