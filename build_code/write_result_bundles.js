@@ -142,13 +142,13 @@ function dept_result_data(dept_code){
     .pipe(get_subs_for_parent_ids)
     .value()
 
-  const entity_ids = [
+  const entity_ids = _.uniq([
     dept_code,
     ...crsos,
     ...program_ids,
     ..._.map(sub_programs, 'id'),
     ..._.map(sub_subs, 'id'),
-  ];
+  ]);
 
   const results = _.chain(entity_ids)
     .map(id => resultBySubjId[id] )
@@ -199,11 +199,11 @@ function tag_result_data(tag_id){
     .pipe(get_subs_for_parent_ids)
     .value()
 
-  const entity_ids = [
+  const entity_ids = _.uniq([
     ...program_ids,
     ..._.map(sub_programs, 'id'),
     ..._.map(sub_subs, 'id'),
-  ];
+  ]);
 
   const results = _.chain(entity_ids)
     .map(id => resultBySubjId[id] )
