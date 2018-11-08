@@ -123,20 +123,50 @@ class HorizontalStatusTable extends React.Component {
     const { counts_by_dept } = this.props;
     const { sort_by, descending, show_all } = this.state;
 
-    const sorted_filtered_counts = (
-      _.chain(counts_by_dept)
-        .reject( ({counts}) => counts.drr17_total === 0)
-        .sortBy(row => row.counts.drr17_total )
-        .reverse()
-        .pipe( show_all ? _.identity : list => _.take(list, 15) )
-        .sortBy( 
-          sort_by ==='subject' ? 
-            ({subject}) => subject.name : 
-            row => row.counts[sort_by]
-        )
-        .pipe( descending ? arr => arr.reverse() : _.identity )
-        .value()
-    );
+    const count_keys = _.chain(counts_by_dept[0].counts)
+      .keys()
+      .difference(["id", "level"])
+      .value();
+    const gov_counts = _.chain(counts_by_dept)
+      .reduce(
+        (memo, dept_counts) => {
+          _.each(
+            count_keys,
+            key => memo[key] += dept_counts.counts[key]
+          );
+          return memo;
+        },
+        _.chain(count_keys)
+          .map(key => [key, 0] )
+          .fromPairs()
+          .value()
+      )
+      .thru(
+        gov_counts => ({
+          subject: Gov,
+          counts: {
+            ...gov_counts,
+            id: Gov.id,
+            level: Gov.level,
+          },
+          total: gov_counts.drr17_total,
+        })
+      )
+      .value()
+
+    const sorted_filtered_counts =  _.chain(counts_by_dept)
+      .concat(gov_counts)
+      .reject( ({counts}) => counts.drr17_total === 0)
+      .sortBy(row => row.counts.drr17_total )
+      .reverse()
+      .pipe( show_all ? _.identity : list => _.take(list, 15) )
+      .sortBy( 
+        sort_by ==='subject' ? 
+          ({subject}) => subject.name : 
+          row => row.counts[sort_by]
+      )
+      .pipe( descending ? arr => arr.reverse() : _.identity )
+      .value();
 
     return <div style={{overflowX: "auto"}}>
       <table className="table table-dark-blue table-dark-bordered no-total-row">
@@ -179,9 +209,12 @@ class HorizontalStatusTable extends React.Component {
           {_.map(sorted_filtered_counts, ({ subject, counts }) => 
             <tr key={subject.id}>
               <td>
-                <a href={link_to_results_infograph(subject)}>
-                  {subject.name}
-                </a>
+                { subject.level === "gov" && <TM k="goc_total"/> }
+                { subject.level === "dept" &&
+                  <a href={link_to_results_infograph(subject)}>
+                    {subject.name}
+                  </a>
+                }
               </td> 
 
               {_.map(
