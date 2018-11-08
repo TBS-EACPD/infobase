@@ -476,10 +476,10 @@ export {
   ResultCounts,
 };
 
-Object.assign(window, {
-  _Result : Result,
-  _Indicator : Indicator,
-  _SubProgramEntity : SubProgramEntity,
-  _PI_DR_Links : PI_DR_Links,
-  _ResultCounts : ResultCounts,
+Object.assign(window._DEV_HELPERS, {
+  Result,
+  Indicator,
+  SubProgramEntity,
+  PI_DR_Links,
+  ResultCounts,
 });
