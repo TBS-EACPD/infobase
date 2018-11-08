@@ -38,7 +38,6 @@ import { Table } from '../core/TableClass.js';
 //misc app stuff
 import { rpb_link } from './rpb_link.js';
 import JSURL from 'jsurl';
-window.JSURL = JSURL;
 
 const sub_app_name = "_rpb";
 
