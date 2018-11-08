@@ -17,7 +17,7 @@ class GlossaryEntry extends mix().with(staticStoreMixin) {
   get definition(){ 
     if(this.no_def){
       /* eslint-disable no-console*/
-      DEV && console.warn("definition for non-defined concept"); 
+      window.is_dev_build && console.warn("definition for non-defined concept"); 
       return "";
     }
     return compiled_definitions(this.id);

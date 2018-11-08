@@ -18,6 +18,9 @@ if(typeof CDN_URL !== "undefined"){
 if(typeof IS_DEV_LINK !== "undefined"){
   window.is_dev_link = IS_DEV_LINK;
 }
+if(typeof DEV !== "undefined"){
+  window.is_dev_build = DEV;
+}
 /* eslint-enable no-undef */
 
 

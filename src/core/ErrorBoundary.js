@@ -20,13 +20,13 @@ export class ErrorBoundary extends React.Component {
     const unique_query_param = Date.now() + Math.random().toString().replace('.','');
 
     // Stale clients are our most likely production errors, always check for and attempt to handle them
-    // That is, reload the page without cache if the client/CDN sha's are mismatched (and the build is non-DEV)
-    // Otherwise, log the error (again, if non-DEV) and display error component
+    // That is, reload the page without cache if the client/CDN sha's are mismatched (and the build is non-dev)
+    // Otherwise, log the error (again, if non-dev) and display error component
     make_request( get_static_url('build_sha', unique_query_param) )
       .then( build_sha => {
         const local_sha_matches_remote_sha = build_sha.search(`^${window.sha}`) !== -1;
     
-        if (!local_sha_matches_remote_sha && !DEV) {
+        if (!local_sha_matches_remote_sha && !window.is_dev_build) {
           window.location.reload(true);
         } else {
           this.log_error_and_display_error_page();
@@ -37,7 +37,7 @@ export class ErrorBoundary extends React.Component {
       });
   }
   log_error_and_display_error_page(){
-    if (!DEV){
+    if (!window.is_dev_build){
       log_standard_event({
         SUBAPP: window.location.hash.replace('#',''),
         MISC1: "ERROR_IN_PROD",

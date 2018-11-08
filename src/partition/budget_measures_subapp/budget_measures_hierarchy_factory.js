@@ -140,7 +140,7 @@ const make_program_allocation_nodes = (measure_id, org_id) => {
       } else {
         // Budget data can be a bit messy, and might also be introducing new programs not yet in the InfoBase,
         // worth handling cases and just logging it in the console, for ease of catching them
-        DEV && console.warn(`Budget hierarchy: missing program ${subject_id}`); // eslint-disable-line
+        window.is_dev_build && console.warn(`Budget hierarchy: missing program ${subject_id}`); // eslint-disable-line
 
         return {
           name: subject_id,

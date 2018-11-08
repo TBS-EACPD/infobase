@@ -423,7 +423,7 @@ Handlebars.registerHelper('du_crso', crso => {
 // looks up the name for the department if passed
 // a department object
 Handlebars.registerHelper("dept", context => {
-  if(DEV){
+  if(window.is_dev_build){
     console.error('"dept" handlebars helper is deprecated, pass the subject OBJECT to the helper "subj_name" instead');
   }
 

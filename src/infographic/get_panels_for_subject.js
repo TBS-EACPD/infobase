@@ -272,7 +272,7 @@ export function get_panels_for_subject(subject){
         .map(key => {
           const panel_obj = PanelGraph.lookup(key, subject.level);
 
-          if(!panel_obj && DEV){
+          if(!panel_obj && window.is_dev_build){
             throw `${key} is not a valid graph`;
           }
 

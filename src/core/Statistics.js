@@ -44,7 +44,7 @@ const get_single_info = _.memoize(
     return   stats.report_on(report_subject);
   }, 
   ( 
-    DEV ?  
+    window.is_dev_build ?  
     (stats_key, subject) =>  `${stats_key}_${subject.guid}_${Date.now()}`:
     (stats_key, subject) =>  `${stats_key}_${subject.guid}`
   )
@@ -125,7 +125,7 @@ class Statistics extends mix().with(staticStoreMixin){
     try {
       this.compute.call(null, subject, tables, infos, add, stats);
     } catch (e){ 
-      if(DEV){
+      if(window.is_dev_build){
         /* eslint-disable no-console */
         console.error(`missing values for ${subject.name}`)
       }
