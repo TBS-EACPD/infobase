@@ -1,5 +1,5 @@
-// module makes use of 6. [accountingJS(http://openexchangerates.github.io/accounting.js/)
-//
+import accounting from 'accounting';
+
 // for properly formating numbers in multiple formats in both English and French
 // * [compact written](#compact1_written) -> 2000000000 -> 2.0 billion
 // * [compact1 ](#compact1) : 2100000000 -> 2.1 B
@@ -314,7 +314,3 @@ export {
   formater, 
   formats, 
 };
-
-window._formats = formats;
-
-

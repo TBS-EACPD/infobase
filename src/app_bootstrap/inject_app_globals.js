@@ -29,12 +29,10 @@ window.feature_detection = feature_detection;
 
 //3rd party libraries injected into global scope
 //note that these next few lines must be run before anything using lodash, handlebars, etc.
-import accounting from 'accounting';
 import marked from 'marked';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-window.accounting = accounting;
 window.marked = marked;
 window.React = React;
 window.ReactDOM = ReactDOM;
@@ -46,11 +44,8 @@ import './lodash-extensions';
 import d3 from './d3-bundle.js';
 window.d3 = d3;
 
-import { Spinner } from '../core/Spinner.js';
-window.Spinner = Spinner;
+import Handlebars from 'handlebars/dist/cjs/handlebars.js';
+window.Handlebars = Handlebars;
 
 import { infobaseCategory10Colors } from '../core/color_schemes.js';
 window.infobase_colors = () => d3.scaleOrdinal().range(infobaseCategory10Colors);
-
-import Handlebars from 'handlebars/dist/cjs/handlebars.js';
-window.Handlebars = Handlebars;
