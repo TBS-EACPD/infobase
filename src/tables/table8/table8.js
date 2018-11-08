@@ -2,6 +2,7 @@
 // of the table spec
 
 import text from './table8.yaml';
+import estimates_docs from './estimates_docs.js'
 import * as FORMAT from '../../core/format';
 import { 
   vote_stat_dimension, 
@@ -15,97 +16,6 @@ const { estimates_years } = years;
 const est_cols = _.map(estimates_years, yr=> yr+"_estimates");
 const in_year_col = est_cols[4];
 const last_year_col = est_cols[3];
-
-window.estimates_docs = {
-  "IM":{
-    en:"Interim Estimates",
-    fr:"Budget provisoire des dépenses",
-    order: 0,
-    tabled: true,
-  },
-  "MAINS":{
-    "en":"Main Estimates",
-    "fr":"Budget principal",
-    "tabled"  : true,
-    "order" : 0,
-  },
-  "MYA":{
-    // tabled should only be set once MYA is available for the current 
-    // year around the end of the summer
-    "order" : 1,
-    "tabled" : true,
-    "en":"Multi Year Appropriations",
-    "fr":"Crédits disponibles des précédents exercices",
-  },
-  "VA":{
-    // tabled should only be set once MYA is available for the current 
-    // year around the end of the summer
-    "order" : 11,
-    "tabled" : true,
-    "en":"Voted Adjustments",
-    "fr": "Réajustement votés",
-  },
-  "SA":{
-    // tabled should only be set once MYA is available for the current 
-    // year around the end of the summer
-    "order" : 12,
-    "tabled" : true,
-    "en":"Statutory Adjustments",
-    "fr": "Réajustements législatifs",
-  },
-  "SEA":{
-    "order" : 2,
-    "tabled"  : true,
-    "en":"Supp. Estimates A",
-    "fr":"Budget supp. A",
-  },
-  "SEB":{
-    "order" : 3,
-    "en":"Supp. Estimates B",
-    "fr":"Budget supp. B",
-  },
-  "SEC":{
-    "order" : 4,
-    "en":"Supp. Estimates C",
-    "fr":"Budget supp. C",
-  },
-  "V5":{
-    "order" : 6,
-    "en":"Government Contingencies",
-    "fr":"Éventualités du gouvernement",
-  },
-  "V10":{
-    "order" : 7,
-    "en":"Operating Budget Carry Forward",
-    "fr":"Report du budget de fonctionnement",
-  },
-  "V15":{
-    "order" : 8,
-    "en":"Compensation adjustments",
-    "fr":"Rajustements à la rémunération",
-  },
-  "V25":{
-    "order" : 9,
-    "en":"Operating Budget Carry Forward",
-    "fr":"Report du budget de fonctionnement",
-  },
-  "V30":{
-    "order" : 10,
-    "en":"Paylist requirements",
-    "fr":"Besoins en matière de rémunération",
-  },
-  "V33":{
-    "order" : 11,
-    "en":"Capital Budget Carry Forward",
-    "fr":"Report du budget de dépenses en capital",
-  },
-  "DEEM":{
-    "order" : 12,
-    "en":"Deemed appropriation",
-    "fr":"Crédit réputé",
-  },
-};
-
 
 const map_helper = {
   "ME":"MAINS",
@@ -216,7 +126,7 @@ export default {
     if (row[5] in map_helper) { 
       row[5] = map_helper[row[5]]; 
     }
-    row.splice(6,0,window.estimates_docs[row[5]][window.lang]);
+    row.splice(6, 0, estimates_docs[row[5]][window.lang]);
 	
     if (this.lang === 'en') {
       row.splice(4, 1);
@@ -252,7 +162,7 @@ export default {
         .toPairs()
         .sortBy(function(est_doc_lines){
           var first_line = est_doc_lines[1][0];
-          return window.estimates_docs[first_line.est_doc_code].order;
+          return estimates_docs[first_line.est_doc_code].order;
         })
         .map((est_doc_lines)=>{
           var est_doc = est_doc_lines[0];

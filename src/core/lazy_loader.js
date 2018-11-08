@@ -126,5 +126,3 @@ function ensure_loaded({
 export { 
   ensure_loaded,
 };
-
-window._ensure_loaded = ensure_loaded;

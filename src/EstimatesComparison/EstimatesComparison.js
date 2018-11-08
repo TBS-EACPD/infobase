@@ -6,6 +6,7 @@ import { Provider, connect } from 'react-redux';
 import { StandardRouteContainer } from '../core/NavComponents';
 import { infograph_href_template } from '../link_utils.js';
 import { sources } from '../metadata/data_sources.js';
+import estimates_docs from '../tables/table8/estimates_docs.js';
 import {
   SpinnerWrapper,
   FootnoteList,
@@ -119,7 +120,7 @@ class ExplorerContainer extends React.Component {
 
 const DetailedAmountsByDoc = ({amounts_by_doc}) => {
 
-  const sorted_items = _.sortBy(amounts_by_doc, ({doc_code}) => window.estimates_docs[doc_code].order );
+  const sorted_items = _.sortBy(amounts_by_doc, ({doc_code}) => estimates_docs[doc_code].order );
 
   return (
     <section className="LastYearEstimatesSection"><div>
@@ -143,7 +144,7 @@ const DetailedAmountsByDoc = ({amounts_by_doc}) => {
         <tbody>
           {_.map(sorted_items, ({ doc_code, amount_last_year, amount_this_year }) => 
             <tr key={doc_code}>
-              <td> {window.estimates_docs[doc_code][lang]} </td>
+              <td> {estimates_docs[doc_code][lang]} </td>
               <td> 
                 {
                   amount_last_year && 
