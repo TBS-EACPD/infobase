@@ -243,4 +243,4 @@ export {
   tables_for_graph,  
 };
 
-window._PanelGraph = PanelGraph;
+window._DEV_HELPERS.PanelGraph = PanelGraph;

@@ -438,5 +438,5 @@ class Mapper {
 
 }
 
-window._Table = Table;
+window._DEV_HELPERS.Table = Table;
 

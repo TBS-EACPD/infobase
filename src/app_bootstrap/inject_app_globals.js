@@ -45,3 +45,5 @@ window.feature_detection = feature_detection;
 
 import { infobaseCategory10Colors } from '../core/color_schemes.js';
 window.infobase_colors = () => d3.scaleOrdinal().range(infobaseCategory10Colors);
+
+window._DEV_HELPERS = {};

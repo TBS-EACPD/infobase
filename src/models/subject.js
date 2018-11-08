@@ -748,7 +748,7 @@ _.each(Subject, (subject_item, key) => {
 });
 
 
-window._Subject = Subject;
+window._DEV_HELPERS.Subject = Subject;
 
 export { Subject };
 

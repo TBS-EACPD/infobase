@@ -146,7 +146,7 @@ function tables_for_statistics( stat_key ){
     .value();
 }
 
-window._Statistics = Statistics;
+window._DEV_HELPERS.Statistics = Statistics;
 
 export { 
   Statistics, 

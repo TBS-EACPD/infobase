@@ -108,6 +108,6 @@ const ex_level_stuff = { ex_level_target, compact_ex_level_map, ex_level_rev_map
 
 const businessConstants = { ...yaml, ...emp_age_stuff, ...ex_level_stuff};
 
-window._businessConstants = businessConstants;
+window._DEV_HELPERS.businessConstants = businessConstants;
 
 export { businessConstants };

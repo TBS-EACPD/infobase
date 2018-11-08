@@ -42,7 +42,7 @@ const glossary_display = item => `<div>
 const get_glossary_item_tooltip_html = key => glossary_display(GlossaryEntry.lookup(key));
 
 
-window._GlossaryEntry = GlossaryEntry;
+window._DEV_HELPERS.GlossaryEntry = GlossaryEntry;
 
 export { 
   GlossaryEntry,

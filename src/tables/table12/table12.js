@@ -163,14 +163,6 @@ export default {
 
   "mapper": function (row) {
     const program = Program.get_from_activity_code(row[0], row[1]);
-    //TODO: get rid of this, only for dev 
-    if(!program){
-      /* eslint-disable */
-      console.log( `${window._Subject.Dept.lookup(row[0]).acronym}-${row[1]}` )
-      row.splice(2,0,"?");
-      row.splice(3,0,"?");
-      return row;
-    }
     row.splice(2,0,program.id);
     row.splice(3,0,program.name);
     return row;

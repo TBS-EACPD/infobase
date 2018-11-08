@@ -353,7 +353,7 @@ const setup_graph_instance = function(instance, container, options = {}) {
   graph_registry.add(instance);
 };
 
-window._graph_registry = graph_registry;
+window._DEV_HELPERS.graph_registry = graph_registry;
 
 export default {
   formats,

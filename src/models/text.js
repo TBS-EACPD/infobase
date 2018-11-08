@@ -268,11 +268,11 @@ const _create_text_maker = (deps=template_store) => (key, context={}) => {
 
 const trivial_text_maker = _create_text_maker(combined_global_bundle);
 
-window._trivial_text_maker = trivial_text_maker;
-window._run_template = run_template;
-window._template_store = template_store;
-window._template_globlals = template_globals;
-window._create_text_maker = create_text_maker;
+window._DEV_HELPERS.trivial_text_maker = trivial_text_maker;
+window._DEV_HELPERS.run_template = run_template;
+window._DEV_HELPERS.template_store = template_store;
+window._DEV_HELPERS.template_globlals = template_globals;
+window._DEV_HELPERS.create_text_maker = create_text_maker;
 
 export {
   template_globals, //this is currently only exposed to table_common because it wants the pre_public_accounts variable.
