@@ -46,11 +46,11 @@ var compact = function(val,lang, abbrev, precision){
   }
   if (lang === 'en'){
     return accounting.formatMoney(new_val,
-      {symbol:symbol,precision: precision, format: format});
+      {symbol: symbol,precision: precision, format: format});
   } else if (lang === 'fr'){
     return accounting.formatMoney(new_val,{
-      decimal : ',', thousand:' ',
-      format:format, symbol:symbol,
+      decimal: ',', thousand: ' ',
+      format: format, symbol: symbol,
       precision: precision,
     });
   }
@@ -86,12 +86,12 @@ const compact_written = (precision,val,lang,options) => {
     val,
     lang,
     {
-      format : format,
-      1000000000 : {en : 'billion', 
+      format: format,
+      1000000000: {en: 'billion', 
         fr: 'milliards' },
-      1000000 : {en : 'million', fr: 'millions'},
-      1000 : {en : 'thousand', fr: 'milliers'},
-      999 : {en : '', fr: ''},
+      1000000: {en: 'million', fr: 'millions'},
+      1000: {en: 'thousand', fr: 'milliers'},
+      999: {en: '', fr: ''},
     },
     precision
   );
@@ -99,10 +99,10 @@ const compact_written = (precision,val,lang,options) => {
 
 var types_to_format = {
   //<div id='compact1_written'></div>
-  "compact1_written" : _.curry(compact_written)(1),
-  "compact2_written" : _.curry(compact_written)(2),
+  "compact1_written": _.curry(compact_written)(1),
+  "compact2_written": _.curry(compact_written)(2),
   //<div id='compact1'></div>
-  "compact" : function(val, lang,options){
+  "compact": function(val, lang,options){
     var format;
     options.precision = options.precision || 0;
     if (options.raw){
@@ -117,24 +117,24 @@ var types_to_format = {
       };
     }
     return compact(val, lang, {
-      format :format,
-      1000000000 : {en : 'B', fr: 'G'},
-      1000000 : {en : 'M', fr: 'M'},
-      1000 : {en : 'K', fr: 'k'},
-      999 : {en : '', fr: ''},
+      format: format,
+      1000000000: {en: 'B', fr: 'G'},
+      1000000: {en: 'M', fr: 'M'},
+      1000: {en: 'K', fr: 'k'},
+      999: {en: '', fr: ''},
     },options.precision );
   },
   //<div id='compact0'></div>
-  "compact1" : function(val, lang,options){
+  "compact1": function(val, lang,options){
     options.precision = 1;
     return this.compact(val, lang,options);
   },
-  "compact2" : function(val, lang,options){
+  "compact2": function(val, lang,options){
     options.precision = 2;
     return this.compact(val, lang,options);
   },
   //<div id='percentage'></div>
-  "percentage" : function(val,lang,options){
+  "percentage": function(val,lang,options){
     options.precision = options.precision || 0;
     var format;
     if (options.raw){
@@ -143,9 +143,9 @@ var types_to_format = {
       format = "<span class='text-nowrap'>%v%s</span>";
     }
     var _options = {
-      symbol : "%",
-      format : format,
-      precision : options.precision || 0,
+      symbol: "%",
+      format: format,
+      precision: options.precision || 0,
     };
 
     if (_.isArray(val)){
@@ -157,60 +157,60 @@ var types_to_format = {
       return accounting.formatMoney(val,_options);
     } else if (lang === 'fr'){
       return accounting.formatMoney(val,_.extend(_options,{
-        decimal : ',',
-        thousand:' ',
+        decimal: ',',
+        thousand: ' ',
       }));
     }
   },
-  "percentage1" : function(val,lang,options){
+  "percentage1": function(val,lang,options){
     options.precision = 1;
     return this.percentage(val,lang,options);
   },
-  "percentage2" : function(val,lang,options){
+  "percentage2": function(val,lang,options){
     options.precision = 2;
     return this.percentage(val,lang,options);
   },
-  "result_percentage" : function(val){
+  "result_percentage": function(val){
     return (+val).toString()+"%";
   },
-  "result_num" :function(val){
+  "result_num": function(val){
     return remove_trailing_zeroes_from_string(formats.decimal.call(this, val));
   },
   "decimal": function(val,lang,options){
-    var _options = {symbol : "", precision : 3 };
+    var _options = {symbol: "", precision: 3 };
     if (lang === 'en'){
       return accounting.formatMoney(val,_options);
     } else if (lang === 'fr'){
       return accounting.formatMoney(val,_.extend(_options,{
-        decimal : ',',
-        thousand:' ',
+        decimal: ',',
+        thousand: ' ',
       }));
     }
   },
   "decimal1": function(val,lang,options){
-    var _options = {symbol : "", precision : 1 };
+    var _options = {symbol: "", precision: 1 };
     if (lang === 'en'){
       return accounting.formatMoney(val,_options);
     } else if (lang === 'fr'){
       return accounting.formatMoney(val,_.extend(_options,{
-        decimal : ',',
-        ten:' ',
+        decimal: ',',
+        ten: ' ',
       }));
     }
   },
   "decimal2": function(val,lang,options){
-    var _options = {symbol : "", precision : 2 };
+    var _options = {symbol: "", precision: 2 };
     if (lang === 'en'){
       return accounting.formatMoney(val,_options);
     } else if (lang === 'fr'){
       return accounting.formatMoney(val,_.extend(_options,{
-        decimal : ',',
-        ten:' ',
+        decimal: ',',
+        ten: ' ',
       }));
     }
   },
   //<div id='big_int'></div>
-  "big_int" : function(val,lang,options){
+  "big_int": function(val,lang,options){
     var rtn;
     if (_.isArray(val)){
       val = _.map(val, function(x){return x/1000;});
@@ -221,8 +221,8 @@ var types_to_format = {
       rtn = accounting.formatNumber(val,{precision: 0});
     } else if (lang === 'fr'){
       rtn = accounting.formatNumber(val,{
-        decimal : ',',
-        thousand:' ',
+        decimal: ',',
+        thousand: ' ',
         precision: 0,
       });
     }
@@ -233,27 +233,27 @@ var types_to_format = {
     }
   },
   //<div id='big_int_real'></div>
-  "big_int_real" : function(val,lang,options){
+  "big_int_real": function(val,lang,options){
     return types_to_format["big_int"](val*1000,lang,options);
   },
   //<div id='int'></div>
-  "int" : function(val,lang){return val;},
+  "int": function(val,lang){return val;},
   //<div id='ordinal'></div>
-  "ordinal" : function(val,lang){return val;},
+  "ordinal": function(val,lang){return val;},
   //<div id='str'></div>
-  "str" : function(val,lang){return val;},
-  "str1" : function(val,lang,options){
+  "str": function(val,lang){return val;},
+  "str1": function(val,lang,options){
     options.precision = 1;
     return this.percentage(val,lang,options);   
   },
   //<div id='str'></div>
-  "boolean" : function(val,lang){return val;},
+  "boolean": function(val,lang){return val;},
   //<div id='wide-str'></div>
-  "wide-str" : function(val,lang){return val;},
+  "wide-str": function(val,lang){return val;},
   //<div id='short-str'></div>
-  "short-str" : function(val,lang){return val;},
+  "short-str": function(val,lang){return val;},
   //<div id='date'></div>
-  "date" : function(val,lang){return val;},
+  "date": function(val,lang){return val;},
 };
 
 // <div id='formater'></div>

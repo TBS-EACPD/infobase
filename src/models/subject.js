@@ -20,8 +20,8 @@ const gov_name = (
 const Subject = {};
 
 Subject.Gov = {
-  constructor : {
-    type_name : 'gov',
+  constructor: {
+    type_name: 'gov',
   },
   id: 'gov',
   guid: 'gov_gov',
@@ -35,7 +35,7 @@ Subject.Gov = {
   get has_planned_spending(){ return true},
   lookup(){ return this; },
   name: gov_name,
-  description : gov_name,
+  description: gov_name,
   // the following name-like fields are for compatibility with old APIs and to ensure it's searchable in org-searches
   title: gov_name,
   legal_name: gov_name, //hacky thing to include gov in the search
@@ -104,11 +104,11 @@ Subject.Dept = class Dept extends common(){
     Object.assign(
       this, 
       {
-        name : def.legal_name,
-        id : def.unique_id,
+        name: def.legal_name,
+        id: def.unique_id,
         minister_objs: [],
         table_ids: [],
-        crsos:[],
+        crsos: [],
       },
       def
     );
@@ -338,8 +338,8 @@ Subject.Tag = class Tag extends common(){
       .toPairs()
       .map(([org_id, programs]) => {
         return {
-          name : Subject.Dept.lookup(org_id).name,
-          programs : _.sortBy(programs,"name"),
+          name: Subject.Dept.lookup(org_id).name,
+          programs: _.sortBy(programs,"name"),
         };
       })
       .sortBy("name")
@@ -357,7 +357,7 @@ Subject.Tag = class Tag extends common(){
       .flatten()
       .uniqBy()
       .without(this)
-      .filter({ root : this.root })
+      .filter({ root: this.root })
       .value();
   }
 };

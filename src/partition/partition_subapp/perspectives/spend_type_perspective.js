@@ -27,7 +27,7 @@ const mock_model = function(id, name, description, type, extra_attrs={}){
     id,
     description,
     name,
-    is : __type__ => __type__ === type,
+    is: __type__ => __type__ === type,
     ...extra_attrs};
 }
 

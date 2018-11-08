@@ -104,12 +104,12 @@ function render_non_col_content({node}){
 class ExplorerPage extends React.Component {
   constructor(){
     super()
-    this.state = { _query : "" };
+    this.state = { _query: "" };
     this.debounced_set_query = _.debounce(this.debounced_set_query, 500);
   }
   handleQueryChange(new_query){
     this.setState({
-      _query : new_query,
+      _query: new_query,
       loading: new_query.length > 3 ? true : undefined,
     });
     this.debounced_set_query(new_query);
@@ -127,7 +127,7 @@ class ExplorerPage extends React.Component {
     !_.isUndefined(this.timedOutStateChange) && clearTimeout(this.timedOutStateChange);
   }
   clearQuery(){
-    this.setState({_query : ""});
+    this.setState({_query: ""});
     this.props.clear_query("");
   }
   render(){
@@ -211,7 +211,7 @@ class ExplorerPage extends React.Component {
             aria-label={text_maker("explorer_search_is_optional")}
             className="form-control input-lg"
             type="text"
-            style={{width:"100%", backgroundColor:"#fafafa"}}
+            style={{width: "100%", backgroundColor: "#fafafa"}}
             placeholder={text_maker('everything_search_placeholder')}
             onChange={evt => this.handleQueryChange(evt.target.value)}
           />
@@ -228,18 +228,18 @@ class ExplorerPage extends React.Component {
       <div 
         tabIndex={-1} 
         ref="focus_mount" 
-        style={{position:'relative'}}
+        style={{position: 'relative'}}
         aria-label={text_maker("explorer_focus_mount")}
       >
         {loading && 
           <div className="loading-overlay">
-            <div style={{height: '200px',position:'relative'}}>
+            <div style={{height: '200px',position: 'relative'}}>
               <SpinnerWrapper config_name={"sub_route"} /> 
             </div>
           </div>
         }
         {is_filtering && _.isEmpty(root.children) &&
-          <div style={{fontWeight: '500', fontSize: '1.5em', textAlign:'center'}}>  
+          <div style={{fontWeight: '500', fontSize: '1.5em', textAlign: 'center'}}>  
             <TM k="search_no_results" />
           </div>
         }
@@ -255,7 +255,7 @@ class ExplorerPage extends React.Component {
     </div>;
     
     return <div>
-      <div style={{marginBottom:'35px'}}>
+      <div style={{marginBottom: '35px'}}>
         <TM k="tag_nav_intro_text" el="div" />
         <Details
           summary_content={<TM k="where_can_find_subs_question" />}
@@ -276,7 +276,7 @@ class ExplorerPage extends React.Component {
           </li>
         </ul>
         <div className="tabbed_content_pane">
-          <div className="hierarchy-selection" style={{marginTop:"20px"}}>
+          <div className="hierarchy-selection" style={{marginTop: "20px"}}>
             <header className="hierarchy-selection-header">
               <TM k="choose_explore_point" />
             </header>
@@ -390,7 +390,7 @@ export default class ResourceExplorer extends React.Component {
     const route_container_args = {
       title: text_maker("tag_nav"),
       breadcrumbs: [text_maker("tag_nav")],
-      route_key:"_resource-explorer",
+      route_key: "_resource-explorer",
     };
     const header = <h1><TM k="tag_nav" /></h1>;
 
@@ -403,7 +403,7 @@ export default class ResourceExplorer extends React.Component {
       );
     }
     let { 
-      params : {
+      params: {
         hierarchy_scheme,
         doc,
       },

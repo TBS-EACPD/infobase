@@ -19,7 +19,7 @@ export default {
   text,
   "id": "table5",
 
-  "tags" : [
+  "tags": [
     "SOBJ",
     "EXP",
     "PA",
@@ -36,38 +36,38 @@ export default {
   },
 
 
-  add_cols : function(){
+  add_cols: function(){
     this.add_col( {
-      "type":"int",
-      "key" : true,
-      "hidden" : true,
-      "nick" : "dept",
-      "header":'',
+      "type": "int",
+      "key": true,
+      "hidden": true,
+      "nick": "dept",
+      "header": '',
     });
     this.add_col( {
-      "key" : true,
-      "type":"int",
-      "hidden" : true,
-      "nick" : 'so_num',
-      "header":{
-        "en":"Standard Object",
-        "fr":"Article courtant",
+      "key": true,
+      "type": "int",
+      "hidden": true,
+      "nick": 'so_num',
+      "header": {
+        "en": "Standard Object",
+        "fr": "Article courtant",
       },
     });
     this.add_col( {
-      "key" : true,
-      "type":"str",
-      "nick" : 'so',
-      "header":{
-        "en":"Standard Object",
-        "fr":"Article courtant",
+      "key": true,
+      "type": "str",
+      "nick": 'so',
+      "header": {
+        "en": "Standard Object",
+        "fr": "Article courtant",
       },
     });
     _.each(std_years, (header, i) => {
       this.add_col({ 
-        "type":"big_int",
+        "type": "big_int",
         "simple_default": i === 4,
-        "nick":header,
+        "nick": header,
         "header": header,
         "description": {
           "en": "Corresponds to the funds spent by standard object in the fiscal year " + header,
@@ -90,12 +90,12 @@ export default {
     return row;
   },
 
-  "dimensions" : [
+  "dimensions": [
     {
       //TODO get rid of this one, we should only be using so_num, not so 
-      title_key :"so",
+      title_key: "so",
 
-      include_in_report_builder : true,
+      include_in_report_builder: true,
 
       filter_func: function(options){
         return function(row){
@@ -104,8 +104,8 @@ export default {
       },
     },
     {
-      title_key :"so_cat",
-      include_in_report_builder : true,
+      title_key: "so_cat",
+      include_in_report_builder: true,
 
       filter_func: function(options){
         return function(row){
@@ -142,8 +142,8 @@ Statistics.create_and_register({
     add("pa_last_year_rev_minus", -pa_last_year_rev);
 
     add("pa_last_year_gross_exp", d3.sum(_.map(_.range(1,13), i => last_year_spend[i] || 0)));
-    const last_year = q.get_top_x(["so","{{pa_last_year}}"],Infinity,{zip:true,sort_col:"{{pa_last_year}}"});
-    const all_years = q.get_top_x(["so"].concat(std_years),Infinity,{zip:true});
+    const last_year = q.get_top_x(["so","{{pa_last_year}}"],Infinity,{zip: true,sort_col: "{{pa_last_year}}"});
+    const all_years = q.get_top_x(["so"].concat(std_years),Infinity,{zip: true});
     stats.one_year_top3(add, "so",last_year);
     stats.year_over_year_multi_stats(add,"so_five_year",all_years);
 
@@ -169,8 +169,8 @@ Statistics.create_and_register({
     stats.year_over_year_single_stats(add, "personnel", _.map(std_years,m),_.map(std_years,(year,i)=>{
       return table.horizontal(year,false)[sos[1].text];
     }));
-    var last_year = q.get_top_x(["so","{{pa_last_year}}"],Infinity,{zip:true,sort_col:"{{pa_last_year}}"});
-    var all_years = q.get_top_x(["so"].concat(std_years),Infinity,{zip:true});
+    var last_year = q.get_top_x(["so","{{pa_last_year}}"],Infinity,{zip: true,sort_col: "{{pa_last_year}}"});
+    var all_years = q.get_top_x(["so"].concat(std_years),Infinity,{zip: true});
     stats.one_year_top3(add, "so",last_year);
     stats.year_over_year_multi_stats(add,"so_five_year",all_years);
   },

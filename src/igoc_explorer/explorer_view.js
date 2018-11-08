@@ -176,12 +176,12 @@ const get_non_col_content_func = createSelector(
 class ExplorerForIgoc extends React.Component {
   constructor(){
     super()
-    this.state = { _query : "" };
+    this.state = { _query: "" };
     this.debounced_set_query = _.debounce(this.debounced_set_query, 500);
   }
   handleQueryChange(new_query){
     this.setState({
-      _query : new_query,
+      _query: new_query,
       loading: new_query.length > 3 ? true : undefined,
     });
     this.debounced_set_query(new_query);
@@ -199,7 +199,7 @@ class ExplorerForIgoc extends React.Component {
     !_.isUndefined(this.timedOutStateChange) && clearTimeout(this.timedOutStateChange);
   }
   clearQuery(){
-    this.setState({_query : ""});
+    this.setState({_query: ""});
     this.props.clear_query("");
   }
   render(){
@@ -249,7 +249,7 @@ class ExplorerForIgoc extends React.Component {
         }}
       >
         <form
-          style={{marginBottom:"5px"}}
+          style={{marginBottom: "5px"}}
           onSubmit={evt => {
             evt.preventDefault()
             evt.stopPropagation()
@@ -261,7 +261,7 @@ class ExplorerForIgoc extends React.Component {
             aria-label={text_maker("explorer_search_is_optional")}            
             className="form-control input-lg"
             type="text"
-            style={{width:"100%", backgroundColor:"#fafafa"}}
+            style={{width: "100%", backgroundColor: "#fafafa"}}
             placeholder={text_maker('igoc_search_text')}
             onChange={evt => this.handleQueryChange(evt.target.value)}
 
@@ -293,18 +293,18 @@ class ExplorerForIgoc extends React.Component {
       <div 
         tabIndex={-1} 
         ref="focus_mount" 
-        style={{position:'relative'}}
+        style={{position: 'relative'}}
         aria-label={text_maker("explorer_focus_mount")}
       >
         {loading && 
           <div className="loading-overlay">
-            <div style={{height: '200px',position:'relative'}}>
+            <div style={{height: '200px',position: 'relative'}}>
               <SpinnerWrapper config_name={"sub_route"} /> 
             </div>
           </div>
         }
         {is_filtering && _.isEmpty(root.children) &&
-          <div style={{fontWeight: 'bold', fontSize: '1.5em', textAlign:'center'}}>  
+          <div style={{fontWeight: 'bold', fontSize: '1.5em', textAlign: 'center'}}>  
             <TM k="search_no_results" />
           </div>
         }

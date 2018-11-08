@@ -11,8 +11,8 @@ export default function(a11y_mode){
             columns: [ "{{est_in_year}}_estimates"], 
             dimension: 'by_estimates_doc', 
             filter: ({ //TODO: D.R.Y this against table8
-              "en":"Supp. Estimates A",
-              "fr":"Budget supp. A",
+              "en": "Supp. Estimates A",
+              "fr": "Budget supp. A",
             })[window.lang],
           }) :
           "#compare_estimates"

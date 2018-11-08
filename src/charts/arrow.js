@@ -5,13 +5,13 @@ function add_arrow(sel){
   return sel
     .append("path")
     .styles({
-      "stroke-width":1,
-      "stroke-opacity":1,
-      "fill-opacity":0.5,
+      "stroke-width": 1,
+      "stroke-opacity": 1,
+      "fill-opacity": 0.5,
     })   
     .attrs({
-      "d" : "M 29.653912,-0.10968436 0.36255227,38.029976 l 12.51457473,0 0,61.44578 33.074233,0 0,-61.41987 12.929135,0 -29.226583,-38.16557036 z",
-      "class" : "arrow",
+      "d": "M 29.653912,-0.10968436 0.36255227,38.029976 l 12.51457473,0 0,61.44578 33.074233,0 0,-61.41987 12.929135,0 -29.226583,-38.16557036 z",
+      "class": "arrow",
     });
 }
 
@@ -114,7 +114,7 @@ export class Arrow {
         return transform;
       })
       .styles({
-        "fill" : function(d,x,i){ return color(i);},
+        "fill": function(d,x,i){ return color(i);},
         "stroke": function(d,x,i){ return color(i);},
       });
 
@@ -125,28 +125,28 @@ export class Arrow {
       })
       .append("line")
       .attrs({
-        "class" : "flat",
-        "x1" : 0,
-        "x2" : function(d){ return padding+d.width;},
-        "y1" : function(d){ return d.height/2 - 20;},
-        "y2" : function(d){ return d.height/2 - 20;},
-        "stroke" : function(d,x,i){ return color(i);},
-        "stroke-width" : "10px",
+        "class": "flat",
+        "x1": 0,
+        "x2": function(d){ return padding+d.width;},
+        "y1": function(d){ return d.height/2 - 20;},
+        "y2": function(d){ return d.height/2 - 20;},
+        "stroke": function(d,x,i){ return color(i);},
+        "stroke-width": "10px",
       }) ;
 
     new_arrow
       .append("text")
       .attrs({
-        "x" : function(d){
+        "x": function(d){
           return (d.width + padding)/2;
         } ,
-        "y" : function(d){
+        "y": function(d){
           return d.height/2;
         },
       })
       .styles({
-        "text-anchor" : "middle",
-        "font-weight" : "500",
+        "text-anchor": "middle",
+        "font-weight": "500",
       })
       .text(function(d){
         return formater(d.value);
@@ -166,13 +166,13 @@ export class Arrow {
       .html(function(d){ return d.name;})
       .attr("class", "font-serif bottomtext center-text")
       .styles({
-        "top" : height+margin.bottom+"px",
-        "position" : "absolute",
-        "color" : "#222",
-        "font-size" : "16px",
-        "font-weight" : "500",
-        "width" : function(d){ return d.width+padding+"px";},
-        "left" : function(d){ return x_offset+d.x+"px";},
+        "top": height+margin.bottom+"px",
+        "position": "absolute",
+        "color": "#222",
+        "font-size": "16px",
+        "font-weight": "500",
+        "width": function(d){ return d.width+padding+"px";},
+        "left": function(d){ return x_offset+d.x+"px";},
       });
   };
 };

@@ -5,7 +5,7 @@ class BubbleMenu extends React.Component {
   render(){
     return (
       <div 
-        style={{position:'relative'}}
+        style={{position: 'relative'}}
       >
         <nav 
           ref="main" 

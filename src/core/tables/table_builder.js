@@ -64,11 +64,11 @@ function prepare_data(options){
           wcag_headers = '';
         }
         header_row[j] = {
-          val : header,
-          id : id,
-          headers : wcag_headers,
-          css : headers_css[j],
-          "class" : headers_class[j],
+          val: header,
+          id: id,
+          headers: wcag_headers,
+          css: headers_css[j],
+          "class": headers_class[j],
         };
       });
     });
@@ -79,17 +79,17 @@ function prepare_data(options){
   _.each(rows, function(row,i){
     _.each(row, function(val,j){
       var __table_opts__= {
-        headers : _.trim(header_links[j]),
-        css : row_css[j],
-        "class" : row_class[j],
+        headers: _.trim(header_links[j]),
+        css: row_css[j],
+        "class": row_class[j],
       };
       // if already an object 
       if (_.isObject(val)){
         val.__table_opts__ = __table_opts__;
       } else {
         row[j] = {
-          val : val,
-          __table_opts__ : __table_opts__,
+          val: val,
+          __table_opts__: __table_opts__,
         };
       }
     });

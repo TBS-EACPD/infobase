@@ -21,8 +21,8 @@ import { formats } from '../core/format.js';
 const { Gov, Dept } = Subject;
 
 //note: don't use these outside the context of simple view, and always pass all props in currentProps
-const granular_rpb_link_for_org = (currentProps, subject)=> rpb_link( { ...currentProps, subject, mode:'details' } );
-const granular_rpb_link_for_filter = (currentProps, filter) => rpb_link({ ...currentProps, filter, mode:'details' } );
+const granular_rpb_link_for_org = (currentProps, subject)=> rpb_link( { ...currentProps, subject, mode: 'details' } );
+const granular_rpb_link_for_filter = (currentProps, filter) => rpb_link({ ...currentProps, filter, mode: 'details' } );
 
 
 class SimpleView extends React.Component {
@@ -103,7 +103,7 @@ class SimpleView extends React.Component {
                 }
                 <div className="rpb-config-item">
                   <div className="row">
-                    <div className="col-md-2" style={{paddingLeft:"0px"}}>
+                    <div className="col-md-2" style={{paddingLeft: "0px"}}>
                       <label className="rpb-config-header" htmlFor="dim-select"> 
                         <span className="nowrap">
                           <TextMaker text_key="group_by" />
@@ -125,7 +125,7 @@ class SimpleView extends React.Component {
                 { deptBreakoutMode &&
                   <div className="rpb-config-item">
                     <div className="row">
-                      <div className="col-md-2" style={{paddingLeft:"0px"}}>
+                      <div className="col-md-2" style={{paddingLeft: "0px"}}>
                         <label className="rpb-config-header" htmlFor="filt-select"> <TextMaker text_key="filter" /> </label>
                       </div>
                       <div className="col-md-10">
@@ -150,7 +150,7 @@ class SimpleView extends React.Component {
           }
         />
         <LabeledBox
-          label={ <TextMaker text_key="blue_text_report_details" args={{table_name:table.name}} /> }
+          label={ <TextMaker text_key="blue_text_report_details" args={{table_name: table.name}} /> }
           content={
             <Details
               summary_content={
@@ -165,7 +165,7 @@ class SimpleView extends React.Component {
           }
         />
         <LabeledBox
-          label={ <TextMaker text_key="blue_text_report_data_sources" args={{table_name:table.name}} /> }
+          label={ <TextMaker text_key="blue_text_report_data_sources" args={{table_name: table.name}} /> }
           content={ <ReportDatasets {...this.props} /> }
         />
         <div id="rpb-main-content" >
@@ -222,7 +222,7 @@ class SimpleView extends React.Component {
               <th 
                 key={nick}
                 onClick={()=>{ on_header_click(nick); }}
-                style={{cursor:'pointer'}}
+                style={{cursor: 'pointer'}}
                 scope="col"
               >
                 {display}
@@ -294,7 +294,7 @@ class SimpleView extends React.Component {
       deptBreakoutMode,
       columns,
       flat_data,
-      graph_data : data,
+      graph_data: data,
       table,
     } = this.props;
 
@@ -378,7 +378,7 @@ class SimpleView extends React.Component {
           </div>
         </div>
 
-        <div style={{position:'relative'}}>
+        <div style={{position: 'relative'}}>
           <StackedHbarChart
             font_size="14px"
             bar_height={50} 

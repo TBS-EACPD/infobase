@@ -63,9 +63,9 @@ heatmap.prototype.render = function(options){
     .map(function(x){
       return _.map(y_values, function(y){
         return x_y_lookup(x,y) || {
-          x : x,
-          y : y,
-          z : undefined,
+          x: x,
+          y: y,
+          z: undefined,
         };
       })
     })
@@ -87,11 +87,11 @@ heatmap.prototype.render = function(options){
   var html_graph_area = this.html
     .append('div')
     .styles({
-      position:'relative', 
+      position: 'relative', 
       height: height+'px', 
       width: width+'px',
-      top:margin.top+'px', 
-      left:margin.left+'px',
+      top: margin.top+'px', 
+      left: margin.left+'px',
     })
   
   var y_labels = this.html
@@ -107,21 +107,21 @@ heatmap.prototype.render = function(options){
 
   y_labels.merge(new_y_labels)
     .styles({
-      "width" : margin.left + "px",
-      "height" : y_scale.bandwidth() + "px",
-      "position" : "absolute",
-      "top" : function(d){
+      "width": margin.left + "px",
+      "height": y_scale.bandwidth() + "px",
+      "position": "absolute",
+      "top": function(d){
         return y_scale(d)+ margin.top+"px" ;
       },
-      "text-align" : "right",
-      "border-bottom" : "1px solid #ccc",
+      "text-align": "right",
+      "border-bottom": "1px solid #ccc",
     })
     .append("div")
     .styles({
-      "font-size" : "10px" ,
-      "font-weight" : "500",
+      "font-size": "10px" ,
+      "font-weight": "500",
       "position": "relative",
-      "left" : "-10px",
+      "left": "-10px",
       "top": "50%",
       "transform": "translateY(-50%)",
     })
@@ -142,22 +142,22 @@ heatmap.prototype.render = function(options){
 
   x_labels.merge(new_x_labels)
     .styles({
-      "width" : x_scale.bandwidth() + "px",
-      "height" : margin.top + "px",
-      "position" : "absolute",
-      "left" : function(d){
+      "width": x_scale.bandwidth() + "px",
+      "height": margin.top + "px",
+      "position": "absolute",
+      "left": function(d){
         return margin.left + x_scale(d)+"px" ;
       },
-      "top" : "0px",
-      "border-right" : "1px solid #ccc",
-      "text-align" : "center",
+      "top": "0px",
+      "border-right": "1px solid #ccc",
+      "text-align": "center",
     })
     .append("div")
     .styles({
-      "font-size" : "10px" ,
-      "font-weight" : "500",
+      "font-size": "10px" ,
+      "font-weight": "500",
       "position": "relative",
-      "bottom" : "0px",
+      "bottom": "0px",
     })
     .html(function(d){
       return d;
@@ -177,10 +177,10 @@ heatmap.prototype.render = function(options){
 
   cells.merge(new_cells)
     .styles({
-      'position':'absolute',
-      'left':function(d){ return x_scale(d.x)+'px'},
+      'position': 'absolute',
+      'left': function(d){ return x_scale(d.x)+'px'},
       'top': function(d){ return y_scale(d.y)+'px'},
-      "border" : "1px solid #ccc",
+      "border": "1px solid #ccc",
       "background": function(d){
         if (d.z === undefined){
           return "#FFF";
@@ -190,11 +190,11 @@ heatmap.prototype.render = function(options){
           return "rgba("+neg_color+","+neg_color_scale(d.z)+")" ;
         }
       },
-      "width" : x_scale.bandwidth()+'px',
-      "height" : y_scale.bandwidth()+'px',
-      'line-height':y_scale.bandwidth()+'px',
-      'vertical-align':'middle',
-      'text-align':'center',
+      "width": x_scale.bandwidth()+'px',
+      "height": y_scale.bandwidth()+'px',
+      'line-height': y_scale.bandwidth()+'px',
+      'vertical-align': 'middle',
+      'text-align': 'center',
     })
     .attrs({
       "class": 'heatmap-square',

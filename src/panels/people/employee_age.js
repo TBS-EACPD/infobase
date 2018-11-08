@@ -116,7 +116,7 @@ const calculate_funcs_by_level = {
   level => new PanelGraph({
     key: "employee_age",
     level: level,
-    depends_on : [
+    depends_on: [
       'table11', 
       'table304',
     ],

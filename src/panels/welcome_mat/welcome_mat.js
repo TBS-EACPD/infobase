@@ -80,14 +80,14 @@ const Chart = ({
   data,
   is_light,
 }) => React.createElement(use_line ? Line : Bar, {
-  margin : {top:5,bottom:5,left:75,right:5},
-  height : 200,
-  add_xaxis : false,
-  hide_gridlines : true,
+  margin: {top: 5,bottom: 5,left: 75,right: 5},
+  height: 200,
+  add_xaxis: false,
+  hide_gridlines: true,
   ticks: _.range(0,data.length),
-  colors : _.constant(is_light ? "#335075" : 'black'),
-  formater : formats[ is_fte ? "big_int_real_raw" : "compact1_raw" ],
-  series : {"0": data },
+  colors: _.constant(is_light ? "#335075" : 'black'),
+  formater: formats[ is_fte ? "big_int_real_raw" : "compact1_raw" ],
+  series: {"0": data },
 })
 
 
@@ -868,8 +868,8 @@ function get_calcs(subject, q6, q12){
 new PanelGraph({
   level: "dept",
   key: 'welcome_mat',
-  footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-  depends_on : ['table6','table12', 'table8'],
+  footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+  depends_on: ['table6','table12', 'table8'],
   missing_info: "ok",
   calculate (subject,info,options){
     const { table6, table12, table8 } = this.tables; 
@@ -926,8 +926,8 @@ new PanelGraph({
 new PanelGraph({
   level: "program",
   key: 'welcome_mat',
-  footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-  depends_on : ['table6','table12'],
+  footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+  depends_on: ['table6','table12'],
   missing_info: "ok",
   calculate (subject,info,options){
     const { table6, table12 } = this.tables; 
@@ -966,8 +966,8 @@ new PanelGraph({
 new PanelGraph({
   level: "crso",
   key: 'welcome_mat',
-  footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-  depends_on : ['table6','table12'],
+  footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+  depends_on: ['table6','table12'],
   missing_info: "ok",
   calculate (subject,info,options){
     const { table6, table12 } = this.tables; 
@@ -994,8 +994,8 @@ new PanelGraph({
 new PanelGraph({
   level: "gov",
   key: 'welcome_mat',
-  footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-  depends_on : ['table6','table12'],
+  footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+  depends_on: ['table6','table12'],
   missing_info: "ok",
   calculate (subject,info,options){
     const { table6, table12 } = this.tables; 
@@ -1017,8 +1017,8 @@ new PanelGraph({
 new PanelGraph({
   level: "tag",
   key: 'welcome_mat',
-  footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-  depends_on : ['table6','table12'],
+  footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+  depends_on: ['table6','table12'],
   missing_info: "ok",
   calculate (subject,info,options){
     const { table6, table12 } = this.tables; 

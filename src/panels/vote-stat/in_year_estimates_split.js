@@ -24,12 +24,12 @@ const estimates_split_calculate = function(subject, info,options){
   }
   return {
     in_year: {
-      series : {'': _.map(in_year_estimates_split,1) },
-      ticks : _.map(in_year_estimates_split,0),
+      series: {'': _.map(in_year_estimates_split,1) },
+      ticks: _.map(in_year_estimates_split,0),
     },
     last_year: {
-      series : {'': _.map(last_year_estimates_split,1) },
-      ticks : _.map(last_year_estimates_split,0),
+      series: {'': _.map(last_year_estimates_split,1) },
+      ticks: _.map(last_year_estimates_split,0),
     },
   };
 };
@@ -39,7 +39,7 @@ const estimates_split_calculate = function(subject, info,options){
 const estimates_split_render_w_text_key = text_key => ({calculations, footnotes, sources}) => {
   const {
     info,
-    graph_args : {
+    graph_args: {
       in_year: in_year_bar_args,
     },
   } = calculations;
@@ -60,9 +60,9 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
     content = (
       <A11YTable
         {...{
-          label_col_header : text_maker("estimates_doc"), 
+          label_col_header: text_maker("estimates_doc"), 
           data_col_headers: [ run_template("{{est_in_year}}") ],
-          data : data,
+          data: data,
         }}
       />
     );
@@ -71,13 +71,13 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
   } else {
 
     const static_bar_args = {
-      add_xaxis : true,
-      x_axis_line : true,
-      add_yaxis : false,
-      add_labels : true,
-      colors : infobase_colors(),
-      margin : {top: 20, right:20, left: 60, bottom: 80},
-      formater : formats.compact1,
+      add_xaxis: true,
+      x_axis_line: true,
+      add_yaxis: false,
+      add_labels: true,
+      colors: infobase_colors(),
+      margin: {top: 20, right: 20, left: 60, bottom: 80},
+      formater: formats.compact1,
     };
 
     content = (
@@ -107,25 +107,25 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
 
 new PanelGraph({
   level: "dept",
-  machinery_footnotes : false,
-  depends_on : ["table8"],
+  machinery_footnotes: false,
+  depends_on: ["table8"],
 
   info_deps: [
     'table8_gov_info', 
     'table8_dept_info', 
   ],
 
-  key : "in_year_estimates_split",
+  key: "in_year_estimates_split",
   calculate: estimates_split_calculate,
   render: estimates_split_render_w_text_key("dept_in_year_estimates_split_text"),
 });
 
 new PanelGraph({
   level: "gov",
-  machinery_footnotes : false,
-  depends_on : ["table8"],
+  machinery_footnotes: false,
+  depends_on: ["table8"],
   info_deps: ["table8_gov_info"],
-  key : "in_year_estimates_split",
+  key: "in_year_estimates_split",
   calculate: estimates_split_calculate,
   render: estimates_split_render_w_text_key("gov_in_year_estimates_split_text"),
 });

@@ -46,8 +46,8 @@ const planned_vote_or_stat_render = vs => function({calculations, footnotes, sou
   }));
 
   const packing_data = {
-    name : "",
-    children : _.map(data,(d,i) => _.extend( {id:i} ,d )),
+    name: "",
+    children: _.map(data,(d,i) => _.extend( {id: i} ,d )),
   };
 
   const show_pack = !window.is_a11y_mode;
@@ -83,14 +83,14 @@ const planned_vote_or_stat_render = vs => function({calculations, footnotes, sou
         <Col isGraph size={7}>
           <CirclePack
             {...{
-              zoomable : true,
-              data : packing_data,
-              value_attr : main_col,
+              zoomable: true,
+              data: packing_data,
+              value_attr: main_col,
               colors: tbs_color(),
-              height : 500,
+              height: 500,
               cycle_colours: true,
-              invisible_grand_parent : false,
-              top_font_size : 12,
+              invisible_grand_parent: false,
+              top_font_size: 12,
               hover_text_func(d){
                 let text = "";
 
@@ -141,9 +141,9 @@ const planned_vote_or_stat_calculate = vs => function(subject, info){
     ret.data.forEach(row => row.desc = row.desc.replace(/-.+$/,""));
   }
   ret.data.push({
-    desc : text_maker(`all_other_${vs}_items`),
-    others : true,
-    [main_col] : d3.sum(_.tail(all_rows,10), d => d[main_col]),
+    desc: text_maker(`all_other_${vs}_items`),
+    others: true,
+    [main_col]: d3.sum(_.tail(all_rows,10), d => d[main_col]),
   });
 
   return ret;

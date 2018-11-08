@@ -15,7 +15,7 @@ export default class MetaData extends React.Component {
   render(){
     const { 
       match: {
-        params : {
+        params: {
           data_source,
         },
       },
@@ -85,7 +85,7 @@ export default class MetaData extends React.Component {
                   </div>
                   { source.open_data &&
                     <a 
-                      style={{marginLeft:'auto'}} //fix a flexbox bug
+                      style={{marginLeft: 'auto'}} //fix a flexbox bug
                       className="btn btn-ib-primary" 
                       target="_blank"
                       rel="noopener noreferrer"

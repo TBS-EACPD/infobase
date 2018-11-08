@@ -3,12 +3,12 @@ import { Pie } from './pie.js';
 import { Bar } from './bar.js';
 
 const bar_options = {
-  add_xaxis : true,                                   
-  x_axis_line : true,                                
-  add_yaxis : false,                                  
-  add_labels : true,                                  
-  margin : {top: 20, right:20, left: 60, bottom: 80} ,
-  formater : common_charts_utils.formats.compact1,
+  add_xaxis: true,                                   
+  x_axis_line: true,                                
+  add_yaxis: false,                                  
+  add_labels: true,                                  
+  margin: {top: 20, right: 20, left: 60, bottom: 80} ,
+  formater: common_charts_utils.formats.compact1,
 };
 
 export class PieOrBar {
@@ -49,11 +49,11 @@ export class PieOrBar {
       this.options = _.clone( bar_options );
       this.graph_type = Bar;
       this.options.colors = colors;
-      this.options.series = {"" : _.map(data, data_attr)};
+      this.options.series = {"": _.map(data, data_attr)};
       this.options.ticks = _.map(data, label_attr);
       this.graph = new Bar(this.__container__,this.options );
     } else if (min < 0 && this.graph_type === Bar){
-      this.options.data = {"" : _.map(data, data_attr)};
+      this.options.data = {"": _.map(data, data_attr)};
       this.options.ticks = _.map(data, label_attr);
     }
     this.graph.render(this.options);

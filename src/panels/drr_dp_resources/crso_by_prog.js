@@ -48,12 +48,12 @@ const render_resource_type = (is_fte) => ({calculations, footnotes}) => {
       k="crso_by_prog_exp_or_ftes"
       args={{
         subject,
-        crso_prg_num : _.max([info.crso_fte_prg_num, info.crso_exp_prg_num]),
-        crso_prg_top1 : is_fte ? info.crso_fte_prg_top1 : info.crso_exp_prg_top1,
-        crso_prg_top1_amnt : is_fte ? info.crso_fte_prg_top1_amnt : info.crso_exp_prg_top1_amnt,
-        crso_prg_top2 : is_fte ? info.crso_fte_prg_top2 : info.crso_exp_prg_top2,
-        crso_prg_top2_amnt : is_fte ? info.crso_fte_prg_top2_amnt : info.crso_exp_prg_top2_amnt,
-        is_fte : is_fte,
+        crso_prg_num: _.max([info.crso_fte_prg_num, info.crso_exp_prg_num]),
+        crso_prg_top1: is_fte ? info.crso_fte_prg_top1 : info.crso_exp_prg_top1,
+        crso_prg_top1_amnt: is_fte ? info.crso_fte_prg_top1_amnt : info.crso_exp_prg_top1_amnt,
+        crso_prg_top2: is_fte ? info.crso_fte_prg_top2 : info.crso_exp_prg_top2,
+        crso_prg_top2_amnt: is_fte ? info.crso_fte_prg_top2_amnt : info.crso_exp_prg_top2_amnt,
+        is_fte: is_fte,
       }}
     />
   );
@@ -196,15 +196,15 @@ const get_calculate_func = (is_fte) => {
   
     const exp_data = _.map(
       table6.q(subject).data, row => ({
-        label : row.prgm,
-        data : planning_years.map(col => row[col]),
+        label: row.prgm,
+        data: planning_years.map(col => row[col]),
       })
     );
   
     const fte_data = _.map(
       table12.q(subject).data, row => ({
-        label : row.prgm,
-        data : planning_years.map(col => row[col]),
+        label: row.prgm,
+        data: planning_years.map(col => row[col]),
       })
     );
   
@@ -218,8 +218,8 @@ const get_calculate_func = (is_fte) => {
 _.each([true,false], is_fte => {
   new PanelGraph({
     level: "crso",
-    footnotes : ["PLANNED_EXP"],
-    key : (
+    footnotes: ["PLANNED_EXP"],
+    key: (
       is_fte ?
       "crso_by_prog_fte" : 
       "crso_by_prog_exp"

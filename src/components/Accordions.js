@@ -64,7 +64,7 @@ const StatelessPullDownAccordion = ({ title, isExpanded, children, onToggle }) =
         <AccordionEnterExit
           component="div"
           className="pull-down-accordion-body"
-          style={{paddingTop:"5px"}}
+          style={{paddingTop: "5px"}}
           expandDuration={600}
           collapseDuration={600}
         >
@@ -107,7 +107,7 @@ class AutoAccordion extends React.Component {
       StatelessPullDownAccordion,
       { ...this.props, 
         isExpanded,
-        onToggle:()=> this.setState({ isExpanded : !isExpanded }),
+        onToggle: ()=> this.setState({ isExpanded: !isExpanded }),
       }
     );
   }

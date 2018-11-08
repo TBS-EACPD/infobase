@@ -55,7 +55,7 @@ const obj_to_node_mapper = level => ({name, id, sub_programs, results, indicator
     level, 
   },
   //hacky temp property used to generate hierarchy
-  unmapped : {
+  unmapped: {
     sub_programs,
     results,
     indicators,
@@ -172,7 +172,7 @@ class ResultTreeMapContainer extends React.Component {
 }
 
 
-const Component = ({ gql_props : {variables } }) => {
+const Component = ({ gql_props: {variables } }) => {
   const Comp = LoadingHoc({
     query,
     variables: ({doc: "drr16", ...variables}),

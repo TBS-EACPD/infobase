@@ -56,7 +56,7 @@ const ReportDetails = ({
   def_ready_columns,
   footnotes,
 }) => {
-  const { title: table_title, description : table_description } = table;
+  const { title: table_title, description: table_description } = table;
 
   return (
     <section>
@@ -188,7 +188,7 @@ const SubjectFilterPicker = ({ subject, onSelect })=> <div style={{paddingTop: '
         verticalAlign: 'baseline',
       }}
     > 
-      <TextMaker text_key="see_all_data" args={{selected:subject.guid==='gov_gov'}} />
+      <TextMaker text_key="see_all_data" args={{selected: subject.guid==='gov_gov'}} />
     </button>
   </div>
   <div className="md-half-width md-gutter-left row-opition-content-search">
@@ -221,7 +221,7 @@ const AlertMessage = ({table}) => {
       <div 
         className={classNames("alert", alert_info.css_class)}
         style={{
-          textAlign:'center', 
+          textAlign: 'center', 
           fontSize: '2.0em', 
           fontWeight: '500',
           marginBottom: 0,

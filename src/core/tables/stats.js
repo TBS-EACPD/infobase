@@ -62,9 +62,9 @@ const stats = {
     // calculate the variance
     // calculate the standard devitation
     add({
-      key : context_prefix+"_high_var",
-      value : co_var > 0.05,
-      type : "boolean",
+      key: context_prefix+"_high_var",
+      value: co_var > 0.05,
+      type: "boolean",
     });
     // assign the calculated values to the context object
     // using the provided context_prefix
@@ -108,9 +108,9 @@ const stats = {
     add(context_prefix +"_top_avg",max_avg);
     add(context_prefix +"_top_avg_percent",max/d3.sum(totals));
     add({
-      key : context_prefix+"_top_high_var",
-      value : max_co_var > 0.05,
-      type : "boolean",
+      key: context_prefix+"_top_high_var",
+      value: max_co_var > 0.05,
+      type: "boolean",
     });
   
     if (amounts.length > 1) {
@@ -128,9 +128,9 @@ const stats = {
         return x + Math.pow(y-min_avg,2);
       },0)/_.tail(amounts[0]).length)/min_avg;
       add({
-        key : context_prefix+"_bottom_high_var",
-        value : min_co_var > 0.05,
-        type : "boolean",
+        key: context_prefix+"_bottom_high_var",
+        value: min_co_var > 0.05,
+        type: "boolean",
       });
     }
   },
@@ -196,9 +196,9 @@ const stats = {
     add(context_prefix +"_top_avg",max_avg);
     add(context_prefix +"_top_avg_percent",max/d3.sum(totals));
     add({
-      key : context_prefix+"_top_high_var",
-      value : max_co_var > 0.05,
-      type : "boolean",
+      key: context_prefix+"_top_high_var",
+      value: max_co_var > 0.05,
+      type: "boolean",
     });
   
     if (amounts.length > 1) {
@@ -217,9 +217,9 @@ const stats = {
       },0)/_.tail(amounts[0]).length)/min_avg;
     
       add({
-        key : context_prefix+"_bottom_high_var",
-        value : min_co_var > 0.05,
-        type : "boolean",
+        key: context_prefix+"_bottom_high_var",
+        value: min_co_var > 0.05,
+        type: "boolean",
       });
     }
   },

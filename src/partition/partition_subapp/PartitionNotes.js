@@ -17,7 +17,7 @@ export class PartitionNotes extends React.Component {
           title={text_maker("some_things_to_keep_in_mind")}
           ref="autoAccordion"
         >
-          <div style={{paddingLeft: '10px', paddingRight:'10px'}}>
+          <div style={{paddingLeft: '10px', paddingRight: '10px'}}>
             { note_content }
           </div>
         </AutoAccordion>

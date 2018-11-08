@@ -23,8 +23,8 @@ export class ProgressDonut {
     this.options = _.extend(this.options,options);
 
     this.svg.attrs({ 
-      width : this.outside_width, 
-      height : this.outside_height,
+      width: this.outside_width, 
+      height: this.outside_height,
     });
 
     this.options.font_size || 30;
@@ -72,7 +72,7 @@ export class ProgressDonut {
         d: angle_to_arc_attr(TAU),
       })
       .styles({ 
-        fill:background_arc_color,
+        fill: background_arc_color,
       });
 
     //leading circle
@@ -90,14 +90,14 @@ export class ProgressDonut {
       append('text')
       .text(percent_text)
       .attrs({
-        class:'middleText',
-        'text-anchor':'middle',
+        class: 'middleText',
+        'text-anchor': 'middle',
         dy: 0.25*fontSize,
         dx: 0.25*fontSize,
       })
       .styles({
-        fill:text_color,
-        'font-size':fontSize+'px',
+        fill: text_color,
+        'font-size': fontSize+'px',
       });
 
     return this;

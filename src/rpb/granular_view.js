@@ -91,7 +91,7 @@ class GranularView extends React.Component {
           }
         />
         <LabeledBox
-          label={ <TextMaker text_key="blue_text_report_details" args={{table_name:table.name}} /> }
+          label={ <TextMaker text_key="blue_text_report_details" args={{table_name: table.name}} /> }
           content={
             <Details
               summary_content={
@@ -273,7 +273,7 @@ class GranularView extends React.Component {
                 >
                   <span
                     tabIndex={0}
-                    style={ix===page_num ? {color:'#fcfcfc'} : null }
+                    style={ix===page_num ? {color: '#fcfcfc'} : null }
                     disabled={page_num === ix}
                     role="button" 
                     onClick={ 
@@ -379,12 +379,12 @@ class ExportButton extends React.Component {
   constructor(){
     super();
     this.state = { 
-      success : null,
+      success: null,
     }; 
   }
   static getDerivedStateFromProps(nextProps, prevState){
     return { 
-      success : null,
+      success: null,
     };
   }
   render(){

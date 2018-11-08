@@ -28,18 +28,18 @@ const render_w_options = ({text_key,graph_col,text_col}) => ({calculations, sour
 
 new PanelGraph({
   key: 'vote_stat_split',
-  depends_on : ['table300'],
+  depends_on: ['table300'],
   info_deps: ["table300_program_info"],
-  level : "program",
-  footnotes : ["VOTED", "STAT"],
+  level: "program",
+  footnotes: ["VOTED", "STAT"],
 
   calculate(subject,info,options){ 
     const {table300} = this.tables;
     const vote_stat = _.map(
       table300.programs.get(subject), 
       row => ({
-        label : row.vote_stat,
-        value : row["{{pa_last_year}}"],
+        label: row.vote_stat,
+        value: row["{{pa_last_year}}"],
       })
     );
 
@@ -53,17 +53,17 @@ new PanelGraph({
   render: render_w_options({
     text_key: "program_vote_stat_split_text",
     graph_col: 7,
-    text_col : 5,
+    text_col: 5,
   }),
 });
 
 
 new PanelGraph({
   key: 'vote_stat_split',
-  depends_on : ['table300'],
+  depends_on: ['table300'],
   info_deps: ["table300_tag_info"],
-  footnotes : ["VOTED", "STAT"],
-  level : "tag",
+  footnotes: ["VOTED", "STAT"],
+  level: "tag",
   calculate(subject,info,options){ 
     const {table300} = this.tables;
 
@@ -71,8 +71,8 @@ new PanelGraph({
       .groupBy("vote_stat")
       .map((lines, key)=> {
         return {
-          label : key,
-          value : d3.sum(lines,_.property("{{pa_last_year}}")),
+          label: key,
+          value: d3.sum(lines,_.property("{{pa_last_year}}")),
         }
       })
       .value();

@@ -153,12 +153,12 @@ export class ConceptExplorer {
     var that = this;
 
     var label_text = [
-      {text : this.top_label.tag},
-      {text : this.top_label.tagged},
+      {text: this.top_label.tag},
+      {text: this.top_label.tagged},
     ];
 
     if (!this.small_window){
-      label_text.push({text : this.top_label.tag});
+      label_text.push({text: this.top_label.tag});
     }
 
     const div_label = this.html.selectAll("div.label")
@@ -177,23 +177,23 @@ export class ConceptExplorer {
         "position": "absolute",
         "width": "33%",
         "top": "0px",
-        "left" : function(d,i){ return i * that.width/3 +"px"},
-        "font-weight" : "500",
-        "font-size" : "15px" ,
-        "text-align" : "center" ,
-        "padding" : "3px",
+        "left": function(d,i){ return i * that.width/3 +"px"},
+        "font-weight": "500",
+        "font-size": "15px" ,
+        "text-align": "center" ,
+        "padding": "3px",
       });
   };
 
   render_legend() {    
     var legend_text = [
-      { text : this.legend_text.selected,
-        "background-color" : selected_colour,
-        "color" : "white",
+      { text: this.legend_text.selected,
+        "background-color": selected_colour,
+        "color": "white",
       },
       { text: this.legend_text.soft_selected,
-        "background-color" : soft_selected_color,
-        "color" : "black",
+        "background-color": soft_selected_color,
+        "color": "black",
       },
     ];
 
@@ -211,13 +211,13 @@ export class ConceptExplorer {
       .html(function(d){ return d.text;})
       .styles({
         "float": "right",
-        "background-color" : _.property("background-color"),
-        "color" : _.property("color"),
-        "border" : "1px solid grey",
-        "bottom" : "0px",
-        "margin" : "5px" ,
-        "text-align" : "center" ,
-        "padding" : "3px",
+        "background-color": _.property("background-color"),
+        "color": _.property("color"),
+        "border": "1px solid grey",
+        "bottom": "0px",
+        "margin": "5px" ,
+        "text-align": "center" ,
+        "padding": "3px",
       });
   };
 
@@ -234,12 +234,12 @@ export class ConceptExplorer {
     },this);
     
     if (this.small_window) {
-      text_x = {"pre_trans" : function(d) {return that.width - bar_width -20+ "px";},
-        "post_trans" : function(d) {return that.width - bar_width -20 + "px";},
+      text_x = {"pre_trans": function(d) {return that.width - bar_width -20+ "px";},
+        "post_trans": function(d) {return that.width - bar_width -20 + "px";},
       };
     } else {
-      text_x = {"pre_trans" : function(d) {return that.width / 2 + (bar_width / -2 - 10) + "px";},
-        "post_trans" : function(d) {return that.width / 2 + (d.x - 10) + "px";},
+      text_x = {"pre_trans": function(d) {return that.width / 2 + (bar_width / -2 - 10) + "px";},
+        "post_trans": function(d) {return that.width / 2 + (d.x - 10) + "px";},
       };
     }
     
@@ -270,10 +270,10 @@ export class ConceptExplorer {
         "position": "absolute",
         "left": text_x.pre_trans,
         "top": function(d){ return d.y+"px"},
-        "padding-left" : "5px",
+        "padding-left": "5px",
         "margin-left": (bar_width / 80 + 5) + "px",
         "margin-right": (bar_width / 80 + 5) + "px",
-        "text-align" : "center",
+        "text-align": "center",
         "cursor": "default",
       })
       .text(function(d) {return d.name;})
@@ -288,13 +288,13 @@ export class ConceptExplorer {
         "left": text_x.post_trans,
         "top": function(d){ return d.y+"px"},
         "cursor": "pointer",
-        "border" : function(d){
+        "border": function(d){
           return "2px solid " + d.selected ? selected_colour : base_colour ;
         },
-        "color" : function(d){
+        "color": function(d){
           return d.selected ? "#fff" : hover_colour ;
         },
-        "background-color" : function(d){
+        "background-color": function(d){
           return d.selected ? selected_colour : "white"; //"#d9edf7" 
         },
       });
@@ -305,7 +305,7 @@ export class ConceptExplorer {
   toggle_tag_arc() {    
     var angle_offset = this.angle_offset - 20;
     var to_rads = function(deg) { return deg * Math.PI/180;}
-    var num_sel = _.filter(this.tagged_data.values().concat(this.tag_data.values()),{selected : true}).length;
+    var num_sel = _.filter(this.tagged_data.values().concat(this.tag_data.values()),{selected: true}).length;
 
     // draw the visual flourish of the coloured arcs around the tags
     if (this.arc_area.select("path.arc").node() === null && num_sel === 0){
@@ -390,26 +390,26 @@ export class ConceptExplorer {
     
     // Re-used label functions
     var label = {
-      left : function(d) {
+      left: function(d) {
         var left = that.width / 2; // use center as ref point
         left += (d.dr + 2 * r) * Math.cos(d.angle * Math.PI / -180);
         left -= d.side === "left" ? this.offsetWidth : 0;
         return left + "px";
       },
-      top : function(d) {
+      top: function(d) {
 
         var top = that.html.node().offsetHeight / 2; // use center as ref point
         top += (d.dr + 2 * r) * Math.sin(d.angle * Math.PI / -180);
         top -= this.offsetHeight / 2;
         return top + "px";
       },
-      transform : function(d) {
+      transform: function(d) {
         var trans = "rotate(" + -d.angle + "deg)";
         trans += d.side === "left" ? " rotate(180deg)" : "";
         return trans;
       },
-      transform_origin : function(d) {return d.side === "left" ? "100%" : "0%";},
-      text_align : function(d) {return d.side === "left" ? "right" : "left";},
+      transform_origin: function(d) {return d.side === "left" ? "100%" : "0%";},
+      text_align: function(d) {return d.side === "left" ? "right" : "left";},
     };
     
     // Render tags
@@ -503,10 +503,10 @@ export class ConceptExplorer {
         "white-space": "nowrap",
         "line-height": "12px",
         "width": "auto",
-        "font-size" : "12px" ,
+        "font-size": "12px" ,
         "opacity": 1,
         "text-align": label.text_align,
-        "overflow-x" : "hidden",
+        "overflow-x": "hidden",
         "padding": "4px 7.5px",
         "left": label.left,
         "top": label.top,
@@ -535,7 +535,7 @@ export class ConceptExplorer {
           }
         },
         "border-radius": "25px",
-        "border" : function(d){
+        "border": function(d){
           if (d.found){
             return "1px solid black";
           }
@@ -556,7 +556,7 @@ export class ConceptExplorer {
       _.each(tag_data.tagged, tagged => {
         links_data.push({
           source: tag_data,
-          selected : tag_data.selected,
+          selected: tag_data.selected,
           target: tagged,
           key: tag_data.tag + "-to-" + tagged.id,
         });
@@ -632,7 +632,7 @@ export class ConceptExplorer {
             "background-color": function() {
               return highlight ? hover_colour : "#fff";
             },
-            "color":function(){
+            "color": function(){
               return highlight ? "#fff" : hover_colour;
             },
           });

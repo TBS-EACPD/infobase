@@ -3,7 +3,7 @@ import { escapeRegExp } from '../core/utils.js';
 
 function node_to_match_tokens(node){
   const {
-    data : {
+    data: {
       type,
       name,
       subject, 

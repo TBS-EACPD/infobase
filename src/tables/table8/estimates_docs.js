@@ -14,7 +14,7 @@ const estimates_docs = {
     // year around the end of the summer
     order: 1,
     en: "Multi Year Appropriations",
-    fr:"Crédits disponibles des précédents exercices",
+    fr: "Crédits disponibles des précédents exercices",
   },
   VA: {
     // tabled should only be set once MYA is available for the current 
@@ -76,7 +76,7 @@ const estimates_docs = {
     fr: "Report du budget de dépenses en capital",
   },
   DEEM: {
-    order:12,
+    order: 12,
     en: "Deemed appropriation",
     fr: "Crédit réputé",
   },

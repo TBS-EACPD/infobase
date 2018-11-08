@@ -232,10 +232,10 @@ function create_tag_branches(program_tag_types){
   const l = window.lang === "en";
   _.each(program_tag_types, row => {
     Tag.create_new_root({
-      id : row[0],
-      cardinality : row[1],
-      name : row[l ? 2 :3],
-      description : row[l ? 4 :5],
+      id: row[0],
+      cardinality: row[1],
+      name: row[l ? 2 :3],
+      description: row[l ? 4 :5],
     });
   });
 };
@@ -249,9 +249,9 @@ function populate_program_tags(tag_rows){
     const parent_tag = Tag.lookup(row[parent_id]);
     //HACKY: Note that parent rows must precede child rows
     const instance = Tag.create_and_register({
-      id : row[tag_id],
-      name : row[l? name_en: name_fr],
-      description : row[l? desc_en: desc_fr],
+      id: row[tag_id],
+      name: row[l? name_en: name_fr],
+      description: row[l? desc_en: desc_fr],
       root: parent_tag.root,
       parent_tag,
     });
@@ -287,9 +287,9 @@ function populate_programs(rows){
       crso,
       activity_code: row[activity_code],
       dept: Dept.lookup(row[dept_code]),
-      data : {},
-      description : _.trim(row[desc].replace(/^<p>/i,"").replace(/<\/p>$/i,"")),
-      name : row[name],
+      data: {},
+      description: _.trim(row[desc].replace(/^<p>/i,"").replace(/<\/p>$/i,"")),
+      name: row[name],
       is_active: !!(+row[is_active]),
       is_internal_service: row[is_internal_service] === "1",
       web_links: _.compact([ 

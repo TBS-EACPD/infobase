@@ -28,13 +28,13 @@ const exp_years = std_years.map(year=> year+'exp');
 
 new PanelGraph({
   level: "gov",
-  key : "historical_g_and_c",
+  key: "historical_g_and_c",
 
   info_deps: [
     'table7_gov_info',
   ],
 
-  depends_on : ['table7'],
+  depends_on: ['table7'],
   calculate(subject){
     const {table7} = this.tables;
     return table7.payment_type_ids(exp_years,false);
@@ -65,20 +65,20 @@ new PanelGraph({
 
 new PanelGraph({
   level: "dept",
-  depends_on : ['table7'],
+  depends_on: ['table7'],
 
   info_deps: [
     'table7_gov_info',
     'table7_dept_info',
   ],
 
-  key : "historical_g_and_c",
+  key: "historical_g_and_c",
   footnotes: ['SOBJ10'],
   calculate(dept){
     const {table7} = this.tables;
 
     return {
-      rolled_up : table7.payment_type_ids(exp_years,dept.unique_id),
+      rolled_up: table7.payment_type_ids(exp_years,dept.unique_id),
       rows: _.chain(table7.q(dept).data)
         .sortBy("{{pa_last_year}}exp")
         .reverse()

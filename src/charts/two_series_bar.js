@@ -162,7 +162,7 @@ export class TwoSeriesBar {
             tick, 
             label: larger.label,name, 
             value: larger.data[i], 
-            display_value:larger.formater(larger.data[i]),
+            display_value: larger.formater(larger.data[i]),
             labelSize: get_label_size_actual(larger.formater(larger.data[i]).replace(/<[^>]*>/g, '')),
           },
           {

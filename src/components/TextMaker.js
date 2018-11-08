@@ -7,7 +7,7 @@ const TextMaker = ({text_maker_func, text_key, el, args, template_str}) => {
   const html = tm_func(text_key,_.clone(args)); //must clone args because props are immutable, text-maker will mutate obj
   return React.createElement(
     el || 'span',
-    { dangerouslySetInnerHTML:{__html: html} }
+    { dangerouslySetInnerHTML: {__html: html} }
   );
 };
 

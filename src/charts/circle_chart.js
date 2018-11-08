@@ -46,15 +46,15 @@ export class CirclePieChart {
       this.html.append("div")
         .attr("class", "title center-text")
         .styles({
-          "font-size" : font_size + "px",
-          "position" : "absolute",
-          "font-weight" : "500",
+          "font-size": font_size + "px",
+          "position": "absolute",
+          "font-weight": "500",
           "left": margin.left+"px",
           "top": "0px",
-          "width" : width+"px",
+          "width": width+"px",
         })
         .append("div")
-        .styles({"width": "80%","margin" : "auto"})
+        .styles({"width": "80%","margin": "auto"})
         .html(title);
     }
 
@@ -83,16 +83,16 @@ export class CirclePieChart {
           }
         },
         "cx": "0px",
-        "r" : function(d) { return scale(d.value); },
+        "r": function(d) { return scale(d.value); },
       })
       .styles({
-        "fill" : function(d,i){ return colors(d.name);},
-        "fill-opacity" : function(d,i){
+        "fill": function(d,i){ return colors(d.name);},
+        "fill-opacity": function(d,i){
           return i === 0 ? 0.5 : 1;
         },
-        "stroke" : function(d,i){ return colors(d.name);},
-        "stroke-width" : "2px",
-        "stroke-opacity" : function(d,i){
+        "stroke": function(d,i){ return colors(d.name);},
+        "stroke-width": "2px",
+        "stroke-opacity": function(d,i){
           return i === 0 ? 0.3 : 0.8;
         },
       });
@@ -111,11 +111,11 @@ export class CirclePieChart {
       .html(function(d){ return formater(d.value);})
       .styles({
         "text-align": "center",
-        "position" : "absolute",
-        "font-weight" : "500",
-        "font-size" : font_size + "px",
-        "width" : width+"px",
-        "top" : function(d,i){
+        "position": "absolute",
+        "font-weight": "500",
+        "font-size": font_size + "px",
+        "width": width+"px",
+        "top": function(d,i){
           if (i === 0 && data.length === 2) {
             // the containing circle, the text should be located below
             return margin.top +min_dim+"px";
@@ -125,7 +125,7 @@ export class CirclePieChart {
             // the contained circle, the text should be located below
             return margin.top+scale(d.value)+"px";
           }},
-        "left" : margin.left+"px",
+        "left": margin.left+"px",
       })
       .classed('wb-inv', hide_labels); 
 

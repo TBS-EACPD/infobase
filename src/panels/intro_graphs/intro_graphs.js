@@ -45,7 +45,7 @@ const curried_render = ({q_a_keys, omit_name_item}) => function({ calculations: 
 
   return <div className="mrgn-bttm-md">
     <AutoAccordion title={text_maker("some_things_to_keep_in_mind")}>
-      <div style={{paddingLeft: '10px', paddingRight:'10px'}}>
+      <div style={{paddingLeft: '10px', paddingRight: '10px'}}>
         <KeyConceptList question_answer_keys={ rendered_q_a_keys } args={{subject}}/>
       </div>
     </AutoAccordion>
@@ -60,13 +60,13 @@ _.each(['gov', 'dept', 'program', 'tag', 'crso'], lvl => {
     level: lvl,
     static: true,
     footnotes: false,
-    key : 'financial_intro',
+    key: 'financial_intro',
     info_deps: [],
     source: false,
     calculate: _.constant(true),
 
     render: curried_render({ 
-      q_a_keys : [ 
+      q_a_keys: [ 
         'where_does_authority_come_from',
         'what_are_voted_auth',
         'what_are_stat_auth',
@@ -88,7 +88,7 @@ _.each(['gov', 'dept', 'program', 'crso'], lvl => {
     level: lvl,
     static: true,
     footnotes: false,
-    key : 'results_intro',
+    key: 'results_intro',
     info_deps: [],
     source: false,
     calculate: _.constant(true),
@@ -112,13 +112,13 @@ _.each(['gov', 'dept'], lvl => {
     level: lvl,
     static: true,
     footnotes: false,
-    key : 'people_intro',
+    key: 'people_intro',
     info_deps: [],
     source: false,
     calculate: _.constant(true),
 
     render: curried_render({ 
-      q_a_keys : [
+      q_a_keys: [
         'who_is_fps',
         'what_are_ftes',
         'what_are_headcounts',
@@ -136,13 +136,13 @@ new PanelGraph({
   level: 'tag',
   static: true,
   footnotes: false,
-  key : 'tagging_key_concepts',
+  key: 'tagging_key_concepts',
   info_deps: [],
   source: false,
   calculate: _.constant(true),
 
   render: curried_render({ 
-    q_a_keys : [
+    q_a_keys: [
       'what_is_tagging',
       'what_is_prog_tagging',
       'what_tags_are_available',
@@ -161,7 +161,7 @@ _.each(['gov', 'dept'], lvl => {
     footnotes: false,
     source: false,
     info_deps: [],
-    key : "march_snapshot_warning",
+    key: "march_snapshot_warning",
     calculate: _.constant(true),
 
     render(){
@@ -179,7 +179,7 @@ _.each(['gov', 'dept'], lvl => {
     footnotes: false,
     source: false,
     info_deps: [],
-    key : "ppl_open_data_info",
+    key: "ppl_open_data_info",
     calculate: _.constant(true),
     render: () => (
       <div className="alert alert-info alert-no-symbol alert--is-bordered large_panel_text">

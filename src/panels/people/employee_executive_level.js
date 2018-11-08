@@ -47,7 +47,7 @@ const calculate_funcs_by_level = {
         return {
           label: ex_level_name,
           data: yearly_values,
-          five_year_percent : yearly_values.reduce(function(sum, val) { return sum + val }, 0)/gov_five_year_total_head_count,
+          five_year_percent: yearly_values.reduce(function(sum, val) { return sum + val }, 0)/gov_five_year_total_head_count,
           active: (ex_level_name !== "Non-EX"),
         };
       })

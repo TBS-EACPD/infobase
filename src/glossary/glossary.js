@@ -48,13 +48,13 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
       <div
         aria-hidden={true}
         className="glossary-letters mrgn-bttm-xl"
-        style={{ textAlign:"center" }}
+        style={{ textAlign: "center" }}
       >
         <ul
           className="list-inline glossary-letter-list"
           style={{
-            display:"inline",
-            margin:"0px",
+            display: "inline",
+            margin: "0px",
           }}
         >
           {_.map(items_by_letter, ({ letter }) => 
@@ -101,7 +101,7 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
               </dt>
               <dd>
                 <div 
-                  dangerouslySetInnerHTML={{__html:item.definition}}
+                  dangerouslySetInnerHTML={{__html: item.definition}}
                 />
               </dd>
             </Fragment>))}
@@ -115,7 +115,7 @@ export default class Glossary extends React.Component {
   render(){
     const { 
       match: {
-        params : {
+        params: {
           active_key,
         },
       },

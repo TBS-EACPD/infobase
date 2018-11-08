@@ -13,7 +13,7 @@ export default {
   text,
   "id": "table4",
 
-  "tags" : [
+  "tags": [
     "PA",
     "AUTH",
     "EXP",
@@ -34,42 +34,42 @@ export default {
 
   "add_cols": function(){
     this.add_col({
-      "header":{
-        "en":"Vote {{pa_last_year}} / Statutory",
-        "fr":"Crédit {{pa_last_year}} / Poste législatif",
+      "header": {
+        "en": "Vote {{pa_last_year}} / Statutory",
+        "fr": "Crédit {{pa_last_year}} / Poste législatif",
       }})
       .add_child([
         {
-          "type":"int",
-          "key" : true,
-          "hidden" : true,
-          "nick" : "dept",
-          "header":'',
+          "type": "int",
+          "key": true,
+          "hidden": true,
+          "nick": "dept",
+          "header": '',
         },
         {
-          "type":"int",
-          "key" : true,
-          "hidden":true,
-          "nick" : "votenum",
-          "header":{
-            "en":"Number",
-            "fr":"Numéro",
+          "type": "int",
+          "key": true,
+          "hidden": true,
+          "nick": "votenum",
+          "header": {
+            "en": "Number",
+            "fr": "Numéro",
           },
         },
         {
-          "type":"int",
-          "key" : true,
-          "hidden" : true,
-          "nick" : "votestattype",
-          "header":'',
+          "type": "int",
+          "key": true,
+          "hidden": true,
+          "nick": "votestattype",
+          "header": '',
         },
         {
-          "type":"wide-str",
-          "key" : true,
-          "nick" : "desc",
-          "header":{
-            "en":"Description",
-            "fr":"Description",
+          "type": "wide-str",
+          "key": true,
+          "nick": "desc",
+          "header": {
+            "en": "Description",
+            "fr": "Description",
           },
         },
       ]);
@@ -104,32 +104,32 @@ export default {
     });
   },
 
-  "queries" : {
-    "exp_auth_by_year" : function(year,format){
+  "queries": {
+    "exp_auth_by_year": function(year,format){
       format = format === undefined ? false : true;
       var vals = this.sum([year+'auth',year+'exp'],{format: format});
       return [m(year),vals[year+'auth'],vals[year+'exp']];
     },
-    "voted_items" : function(cut_off){
+    "voted_items": function(cut_off){
       this.vote_stat_query = vote_stat_query;
       return this.vote_stat_query(voted_label,cut_off);
     },
-    "stat_items" : function(cut_off){
+    "stat_items": function(cut_off){
       this.vote_stat_query = vote_stat_query;
       return this.vote_stat_query(stat_label,cut_off);
     },
   },
 
-  "dimensions" : [
+  "dimensions": [
     {
-      title_key : "major_voted_stat",
-      include_in_report_builder : true,
-      filter_func : major_vote_stat,
+      title_key: "major_voted_stat",
+      include_in_report_builder: true,
+      filter_func: major_vote_stat,
     },
     {
-      title_key :"voted_stat",
-      include_in_report_builder : true,
-      filter_func : vote_stat_dimension,
+      title_key: "voted_stat",
+      include_in_report_builder: true,
+      filter_func: vote_stat_dimension,
     },
   ],
 
@@ -237,13 +237,13 @@ Statistics.create_and_register({
     const unused_auth_avg = d3.sum(unused_auth_sum)/ unused_auth_sum.length
 
     add({
-      key : "hist_diff_average", 
-      value : unused_auth_avg,
+      key: "hist_diff_average", 
+      value: unused_auth_avg,
     });
 
     add({
-      key : "hist_avg_tot_pct", 
-      value : (c.dept_hist_diff_average / c.dept_five_year_auth_average),
+      key: "hist_avg_tot_pct", 
+      value: (c.dept_hist_diff_average / c.dept_five_year_auth_average),
     });
 
     stats.year_over_year_single_stats(add, 
@@ -272,14 +272,14 @@ Statistics.create_and_register({
     });
 
     add({
-      key : "stat_five_year_pct", 
-      value : c.dept_stat_total / (c.dept_stat_total+c.dept_voted_total),
-      type : "percentage1",
+      key: "stat_five_year_pct", 
+      value: c.dept_stat_total / (c.dept_stat_total+c.dept_voted_total),
+      type: "percentage1",
     });
     add({
-      key : "voted_five_year_pct", 
-      value : c.dept_voted_total / (c.dept_stat_total+c.dept_voted_total),
-      type : "percentage1",
+      key: "voted_five_year_pct", 
+      value: c.dept_voted_total / (c.dept_stat_total+c.dept_voted_total),
+      type: "percentage1",
     });
   },
 });

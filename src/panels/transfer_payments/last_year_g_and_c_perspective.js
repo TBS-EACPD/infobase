@@ -16,7 +16,7 @@ const { CirclePieChart } = declarative_charts;
 
 new PanelGraph({
   level: "dept",
-  key : "last_year_g_and_c_perspective",
+  key: "last_year_g_and_c_perspective",
   depends_on: ['table7'],
   footnotes: ['SOBJ10'],
   info_deps: ['table7_gov_info', 'table7_dept_info', 'table4_dept_info'],

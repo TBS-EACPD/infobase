@@ -11,9 +11,9 @@ const { Dept } = Subject;
 
 function nest_data_for_exploring(to_be_nested, top_name, level_assigner){
   var data = Pack.pack_data(to_be_nested,text_maker("smaller_orgs"),{
-    soften : false,
+    soften: false,
     level_assigner,
-    per_group : grp => {
+    per_group: grp => {
       grp._value = d3.sum(grp.children,_.property('__value__'));
     },
   });
@@ -51,22 +51,22 @@ export function by_min_dept(){
     .filter( ({last_year}) => _.isNumber(last_year) && last_year !== 0)
     .filter(({dept}) => !_.isUndefined(dept.status) && !_.isUndefined(dept.ministry) )
     .map( ({ dept, last_year}) => ({
-      subj_obj : dept,
-      min : dept.ministry.name,
-      unique_id : dept.unique_id,
-      name : dept.sexy_name,
-      __value__ : last_year,
-      value : Math.abs(last_year),
+      subj_obj: dept,
+      min: dept.ministry.name,
+      unique_id: dept.unique_id,
+      name: dept.sexy_name,
+      __value__: last_year,
+      value: Math.abs(last_year),
     }))
     .filter(d => d.value !== 0)
     .groupBy(_.property('min'))
     .map((depts, min_name) => {
       Pack.soften_spread(depts);
       return {
-        name : min_name,
-        children : depts,
-        value : d3.sum(depts, _.property('value')),
-        __value__ : d3.sum(depts, _.property('__value__')),
+        name: min_name,
+        children: depts,
+        value: d3.sum(depts, _.property('value')),
+        __value__: d3.sum(depts, _.property('__value__')),
       };
     })
     .value();
@@ -104,22 +104,22 @@ export function by_dept_type(){
       const dept = Dept.lookup(key);
       const total = table.q(key).sum("{{pa_last_year}}exp");
       return {
-        subj_obj : dept,
-        type : dept.type,
-        unique_id : dept.unique_id,
-        name : dept.sexy_name,
-        __value__ : total,
-        value : Math.abs(total),
+        subj_obj: dept,
+        type: dept.type,
+        unique_id: dept.unique_id,
+        name: dept.sexy_name,
+        __value__: total,
+        value: Math.abs(total),
       };
     })
     .filter(d => d.value !== 0)
     .groupBy(_.property('type'))
     .tap( dept_groups => _.each(dept_groups, depts => Pack.soften_spread(depts) ) )
     .map( (depts, type) => ({
-      name : type,
-      children : depts,
-      value : d3.sum(depts, _.property('value')),
-      __value__ : d3.sum(depts, _.property('__value__')),
+      name: type,
+      children: depts,
+      value: d3.sum(depts, _.property('value')),
+      __value__: d3.sum(depts, _.property('__value__')),
     }))
     .value();
 
@@ -167,11 +167,11 @@ export function by_this_year_emp(){
       const dept = Dept.lookup(key);
       const total = table.q(key).sum("{{pa_last_year}}");
       return {
-        subj_obj : dept,
-        unique_id : dept.unique_id,
-        name : dept.sexy_name,
-        __value__ : total,
-        value : Math.abs(total),
+        subj_obj: dept,
+        unique_id: dept.unique_id,
+        name: dept.sexy_name,
+        __value__: total,
+        value: Math.abs(total),
       };
     })
     .filter(d => d.value !== 0)

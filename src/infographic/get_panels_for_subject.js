@@ -113,7 +113,7 @@ const get_dept_panels = subject => {
       'igoc_fields',
       'igoc_links',
     ],
-    financial : _.includes(subject.tables,'table6') && [
+    financial: _.includes(subject.tables,'table6') && [
       "financial_intro", 
       "welcome_mat",
       "budget_measures_panel",

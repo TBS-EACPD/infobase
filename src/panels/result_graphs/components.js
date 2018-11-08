@@ -311,7 +311,7 @@ const InlineStatusIconList = ({indicators}) => {
 
 
 const StatusDisplay = ({
-  indicator:{
+  indicator: {
     status_key, 
     status_period, 
     icon_key, 

@@ -165,8 +165,8 @@ const prov_split_render = function(graph_node, graph_args){
       // labels will line up with the graphics
       container.append("div")
         .styles({ 
-          "margin-bottom":"10px",
-          position:"relative",
+          "margin-bottom": "10px",
+          position: "relative",
         });
 
       if( window.feature_detection.is_mobile() ){ // create a bar graph
@@ -195,7 +195,7 @@ const prov_split_render = function(graph_node, graph_args){
             axisFormater: formater,
             formater: formater,
             tick_number: 5,
-            data: ticks.map((tick,i) => ({value : prov_data[i], name: tick}) ),
+            data: ticks.map((tick,i) => ({value: prov_data[i], name: tick}) ),
           }
         )).render();
       }
@@ -257,7 +257,7 @@ const prov_split_render = function(graph_node, graph_args){
         })
         .filter(row => _.some(row.data, data => !_.isUndefined(data)))
         .value(), 
-      table_name : text_maker("employee_prov_title"),
+      table_name: text_maker("employee_prov_title"),
     });
   }
 

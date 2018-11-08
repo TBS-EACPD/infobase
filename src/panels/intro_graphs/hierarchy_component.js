@@ -430,7 +430,7 @@ export const crso_gov_hierarchy = ({subject, href_generator, show_siblings, show
               level: crso.level,
               name: crso.name,
               href: crso.is_cr && href_generator(crso),
-              active : is_subject(crso),
+              active: is_subject(crso),
             })
           )
           .value(),

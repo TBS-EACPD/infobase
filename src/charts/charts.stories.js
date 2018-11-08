@@ -10,7 +10,7 @@ import {
 const separator_style = {
   padding: "20px",
   maxWidth: "800px",
-  border:"2px dashed black",
+  border: "2px dashed black",
 };
 
 storiesOf("chart components", module)

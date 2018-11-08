@@ -13,10 +13,10 @@ const { Program, Gov } = Subject;
 export default {
   text,
   "id": "table12",
-  subject_type:"program",
+  subject_type: "program",
   source: [ "DP", "DRR" ],
   //"tags" : ["results", "expenditures", "FTE", "planning","report","RPP"],
-  "tags" : [
+  "tags": [
     "GOV_FRAM",
     "PA",
     "FTE",
@@ -31,48 +31,48 @@ export default {
     "fr": "Équivalents temps plein (ETP) actuels et prévus par programme de {{pa_last_year_5}} à {{planning_year_3}}",
   },
 
-  "footnote-topics" : {
-    "group" :["planned_spending"],
-    "table" :["~planned_spending","planned_spending_gov"],
+  "footnote-topics": {
+    "group": ["planned_spending"],
+    "table": ["~planned_spending","planned_spending_gov"],
   },
 
   "add_cols": function(){
     this.add_col({
-      "type":"int",
-      "key" : true,
-      "hidden" : true,
-      "nick" : "dept",
-      "header":'',
+      "type": "int",
+      "key": true,
+      "hidden": true,
+      "nick": "dept",
+      "header": '',
     })
     this.add_col({
-      "key" : true,
-      "hidden" : true,
-      "type":"str",
-      'nick' : 'activity_code',
+      "key": true,
+      "hidden": true,
+      "type": "str",
+      'nick': 'activity_code',
       "header": "",
     })
     this.add_col({
-      "key" : true,
-      "hidden" : true,
-      "type":"str",
-      'nick' : 'program_id',
+      "key": true,
+      "hidden": true,
+      "type": "str",
+      'nick': 'program_id',
       "header": "",
     });
     this.add_col({
-      "key" : true,
-      "type":"wide-str",
-      'nick' : 'prgm',
-      "header":{
-        "en":"Program",
-        "fr":"Programme",
+      "key": true,
+      "type": "wide-str",
+      'nick': 'prgm',
+      "header": {
+        "en": "Program",
+        "fr": "Programme",
       },
     })
     _.each(std_years, (header, ix) => {
       this.add_col(
-        { "type":"big_int_real",
+        { "type": "big_int_real",
           "simple_default": ix===4,
-          "nick":header,
-          "header":{
+          "nick": header,
+          "header": {
             "en": header + "  " + m("Actual FTEs"),
             "fr": header + "  " + m("ETP réel"),
           },
@@ -84,10 +84,10 @@ export default {
     });
 
     this.add_col({ 
-      "type":"big_int_real",
+      "type": "big_int_real",
       "nick": "drr_last_year" ,
-      "hidden" : true,
-      "header":{
+      "hidden": true,
+      "header": {
         "en": "{{pa_last_year}}  "+ m("Planned FTEs"),
         "fr": "{{pa_last_year}}  "+ m("ETP prévus"),
       },
@@ -98,9 +98,9 @@ export default {
     });
     _.each(planning_years, (header)=>{
       this.add_col({ 
-        "type":"big_int_real",
-        "nick":header,
-        "header":{
+        "type": "big_int_real",
+        "nick": header,
+        "header": {
           "en": header + "  " + m("Planned FTEs"),
           "fr": header + "  " + m("ETP prévus"),
         },
@@ -113,12 +113,12 @@ export default {
 
   },
 
-  "dimensions" : [
+  "dimensions": [
     {
-      title_key : "gov_outcome",
-      include_in_report_builder : true,
+      title_key: "gov_outcome",
+      include_in_report_builder: true,
 
-      filter_func : function(options){
+      filter_func: function(options){
         var func = function(row){
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           //FIXME: this is because I found a program without a goco, 
@@ -129,10 +129,10 @@ export default {
       },
     },
     {
-      title_key :"gov_goco",
-      include_in_report_builder : true,
+      title_key: "gov_goco",
+      include_in_report_builder: true,
 
-      filter_func : function(options){
+      filter_func: function(options){
         var func = function(row){
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           //FIXME: this is because I found a program without a goco, 
@@ -143,8 +143,8 @@ export default {
       },
     },
     {
-      title_key : 'goco_id',
-      filter_func : function(options){
+      title_key: 'goco_id',
+      filter_func: function(options){
         var func = function(row){
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           const goco = _.first(prog.tags_by_scheme.GOCO)
@@ -155,7 +155,7 @@ export default {
     },
   ],
 
-  "sort" : function(mapped_rows, lang){
+  "sort": function(mapped_rows, lang){
     return _.sortBy(mapped_rows, function(row){
       return [row.goco_gov, row.goco];
     });
@@ -173,8 +173,8 @@ export default {
     this.programs.set(program_obj, [mapped_row]); //assumption: only one row per program... This is not consistent with e.g. table305. 
   },
 
-  "queries" : {
-    "sorted_programs" : function(yrs){
+  "queries": {
+    "sorted_programs": function(yrs){
       return _.chain(this.data)
         .map(function(d){
           return [d.prgm].concat(_.map(yrs,function(x){ return d[x];}));

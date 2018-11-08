@@ -9,8 +9,8 @@ const { population_groups } = businessConstants;
 
 const org_to_node = (subject, parent_id="a") => ({
   id: `${parent_id}-${subject.id}`,
-  data:{
-    type:'org',
+  data: {
+    type: 'org',
     name: subject.legal_name,
     subject,
   },
@@ -46,7 +46,7 @@ const create_igoc_hierarchy = grouping => {
         .map( (orgs,min_name)=>({
           id: min_name,
           data: {
-            type:'ministry',
+            type: 'ministry',
             name: min_name,
           },
           children: _.chain(orgs)
@@ -76,7 +76,7 @@ const create_igoc_hierarchy = grouping => {
             .map( (orgs,type_id) => ({
               id: type_id,
               data: {
-                type:'inst_form',
+                type: 'inst_form',
                 name: InstForm.lookup(type_id).name,
               },
               children: _.chain(orgs)
@@ -185,7 +185,7 @@ const create_igoc_hierarchy = grouping => {
     id: 'root',
     root: true,
     data: {
-      type:'root',
+      type: 'root',
     },
     children: nodes,
   };

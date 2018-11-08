@@ -30,7 +30,7 @@ function filter_hierarchy(flat_nodes, filter_func, { leaves_only=false, markSear
   if(_.isEmpty(positive_search_results)){
     return [ 
       { ...get_root(flat_nodes), 
-        children : [], 
+        children: [], 
       }, 
     ];
   }
@@ -62,7 +62,7 @@ function filter_hierarchy(flat_nodes, filter_func, { leaves_only=false, markSear
   //up to this point, the parent links are still accurate.
   const new_nodes = _.map(all_flat_nodes, node => ({
     ...node, 
-    ...markSearchResults ? { is_search_match : !!positive_search_ids[node.id] } : {}}
+    ...markSearchResults ? { is_search_match: !!positive_search_ids[node.id] } : {}}
   ));
 
   create_children_links(new_nodes);

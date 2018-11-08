@@ -15,7 +15,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 _.each(['dept','program'], level => {
   new PanelGraph({
     depends_on: ['table6', 'table12'],
-    key:'drr_planned_actual',
+    key: 'drr_planned_actual',
     //used as as a fail mechanism. If result counts aren't present, bail
     requires_result_counts: true,
     level,

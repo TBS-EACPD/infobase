@@ -41,7 +41,7 @@ class SpendInTagPerspective extends React.Component {
     
     const { active_tag_index } = this.state;
     
-    const { tag: active_tag, amount : active_tag_exp } = tag_exps[active_tag_index];
+    const { tag: active_tag, amount: active_tag_exp } = tag_exps[active_tag_index];
     
 
     const color_scale = infobase_colors();
@@ -84,16 +84,16 @@ class SpendInTagPerspective extends React.Component {
       <div className="grid-row">
         <div 
           className="lg-grid-panel50" 
-          style={{ padding:"10px", marginBottom: 'auto', marginTop: 'auto'}}
+          style={{ padding: "10px", marginBottom: 'auto', marginTop: 'auto'}}
         >
           <div className="medium_panel_text">
             <TM
               k="program_spending_in_tag_perspective_text"
               args={{
                 subject,
-                tag : active_tag,
-                tag_spend : active_tag_exp,
-                tag_exp_pct : prog_exp / active_tag_exp,
+                tag: active_tag,
+                tag_spend: active_tag_exp,
+                tag_exp_pct: prog_exp / active_tag_exp,
               }}
             />
           </div>
@@ -101,8 +101,8 @@ class SpendInTagPerspective extends React.Component {
         <div 
           className="lg-grid-panel50"
           style={{
-            padding:"10px",
-            flexDirection:"column",
+            padding: "10px",
+            flexDirection: "column",
           }} 
         >
           {tag_exps.length > 1 && 
@@ -120,7 +120,7 @@ class SpendInTagPerspective extends React.Component {
                 }}
                 selected={active_tag_index}
                 className="form-control"
-                style={{width:"100%"}}
+                style={{width: "100%"}}
               />
             </div>
           }
@@ -145,7 +145,7 @@ class SpendInTagPerspective extends React.Component {
 //spending in tag perspective also included
 new PanelGraph({
   level: "program",
-  key : "spending_in_tag_perspective",
+  key: "spending_in_tag_perspective",
   depends_on: ['table6'],
   info_deps: ["table6_program_info"],
   calculate(subject,info,options){
@@ -167,7 +167,7 @@ new PanelGraph({
 
     const tag_exps = _.map(tags,tag => ({ 
       tag,
-      amount : sum_a_tag_col(tag, table6, col),
+      amount: sum_a_tag_col(tag, table6, col),
     }));
     return { tag_exps };
   },

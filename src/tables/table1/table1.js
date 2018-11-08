@@ -13,7 +13,7 @@ export default {
   text,
   "id": 'table1',
   source: [ "QFR" ],
-  "tags" : [
+  "tags": [
     "QFR",
     "SPENDING_RATE",
     "AUTH",
@@ -24,7 +24,7 @@ export default {
 
   "link": {
     en: "http://open.canada.ca/data/en/dataset/cd7ba75e-e0a2-400b-906e-5b2608900f71",
-    fr : "http://ouvert.canada.ca/data/fr/dataset/cd7ba75e-e0a2-400b-906e-5b2608900f71",
+    fr: "http://ouvert.canada.ca/data/fr/dataset/cd7ba75e-e0a2-400b-906e-5b2608900f71",
   },
 
   "name": { 
@@ -39,43 +39,43 @@ export default {
 
   "add_cols": function(){
     this.add_col({
-      "header" : {
-        "en":"Vote / Statutory",
-        "fr":"Crédit / Statutaire",
+      "header": {
+        "en": "Vote / Statutory",
+        "fr": "Crédit / Statutaire",
       },
     })
       .add_child([
         {
-          "type":"int",
-          "key" : true,
-          "hidden" : true,
-          "nick" : "dept",
-          "header":'',
+          "type": "int",
+          "key": true,
+          "hidden": true,
+          "nick": "dept",
+          "header": '',
         },
         {
-          "type":"int",
-          "key" : true,
-          "nick" : "votenum",
-          "hidden":true,
-          "header":{
-            "en":"Number",
-            "fr":"Numéro",
+          "type": "int",
+          "key": true,
+          "nick": "votenum",
+          "hidden": true,
+          "header": {
+            "en": "Number",
+            "fr": "Numéro",
           },
         },
         {
-          "type":"int",
-          "key" : true,
-          "hidden" : true,
-          "nick" : "votestattype",
-          "header":'',
+          "type": "int",
+          "key": true,
+          "hidden": true,
+          "nick": "votestattype",
+          "header": '',
         },
         {
-          "type":"wide-str",
-          "nick" : "desc",
-          "key" : true,
-          "header":{
-            "en":"Description",
-            "fr":"Description",
+          "type": "wide-str",
+          "nick": "desc",
+          "key": true,
+          "header": {
+            "en": "Description",
+            "fr": "Description",
           },
         },
       ]);
@@ -156,8 +156,8 @@ export default {
       }]);
   },
 
-  "queries" : {
-    "auth_change" : function(format) {
+  "queries": {
+    "auth_change": function(format) {
       // returns last year, this year, and change
       var this_year = "thisyearauthorities",
         last_year= "lastyearauthorities",
@@ -169,7 +169,7 @@ export default {
       }
       return FORMAT.list_formater(['big_int','big_int',"percentage"], data);
     },
-    "exp_change" : function(format) {
+    "exp_change": function(format) {
       // returns last year, this year, and change
       var this_year = "thisyearexpenditures",
         last_year= "lastyearexpenditures",
@@ -183,16 +183,16 @@ export default {
     },
   },
 
-  "dimensions" : [
+  "dimensions": [
     {
-      title_key : "major_voted_stat",
-      include_in_report_builder : true,
-      filter_func : major_vote_stat,
+      title_key: "major_voted_stat",
+      include_in_report_builder: true,
+      filter_func: major_vote_stat,
     },
     {
-      title_key :"voted_stat",
-      include_in_report_builder : true,
-      filter_func : vote_stat_dimension,
+      title_key: "voted_stat",
+      include_in_report_builder: true,
+      filter_func: vote_stat_dimension,
     },
   ],
 
@@ -237,23 +237,23 @@ Statistics.create_and_register({
     const table = tables.table1;
     const q = table.q(subject);
     add({
-      key : "qfr_auth_change",
+      key: "qfr_auth_change",
       value: q.auth_change(false)[2],
-      type : "percentage1",
+      type: "percentage1",
     });
     add({
-      key : "qfr_spend_change",
+      key: "qfr_spend_change",
       value: q.exp_change(false)[2],
-      type : "percentage1",
+      type: "percentage1",
     });
     add("qfr_auth_this_year", q.sum("thisyearauthorities"));
     add("qfr_spend_this_year", q.sum("thisyearexpenditures"));
     add("qfr_auth_last_year", q.sum("lastyearauthorities"));
     add("qfr_spend_last_year", q.sum("lastyearexpenditures"));
     add({
-      key : "qfr_spend_percent_this_year", 
-      value : c.dept_qfr_spend_this_year / c.dept_qfr_auth_this_year,
-      type : "percentage1",
+      key: "qfr_spend_percent_this_year", 
+      value: c.dept_qfr_spend_this_year / c.dept_qfr_auth_this_year,
+      type: "percentage1",
     });
   },
 })
@@ -266,21 +266,21 @@ Statistics.create_and_register({
     const table = tables.table1;
     const q = table.q(subject);
     add({
-      key : "qfr_auth_change",
+      key: "qfr_auth_change",
       value: q.auth_change(false)[2],
-      type : "percentage1",
+      type: "percentage1",
     });
     add({
-      key : "qfr_spend_change",
+      key: "qfr_spend_change",
       value: q.exp_change(false)[2],
-      type : "percentage1",
+      type: "percentage1",
     });
     add("qfr_auth_this_year", q.sum("thisyearauthorities"));
     add("qfr_spend_this_year", q.sum("thisyearexpenditures"));
     add({
-      key :"qfr_spend_percent_this_year",
+      key: "qfr_spend_percent_this_year",
       value: c.gov_qfr_spend_this_year / c.gov_qfr_auth_this_year,
-      type : "percentage1",
+      type: "percentage1",
     });
     add("qfr_auth_last_year", q.sum("lastyearauthorities"));
     add("qfr_spend_last_year",q.sum("lastyearexpenditures"));

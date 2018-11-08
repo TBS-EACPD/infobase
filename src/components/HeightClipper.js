@@ -9,7 +9,7 @@ export class HeightClipper extends React.Component {
   constructor(){
     super();
     this.state = {
-      exceedsHeight : null, 
+      exceedsHeight: null, 
       shouldClip: true,
     };
   }
@@ -99,7 +99,7 @@ export class HeightClipper extends React.Component {
             left: '0px', 
             height: pixelClipHeight,
             cursor: 'pointer',
-            zIndex:100,
+            zIndex: 100,
           }}
           className={
             gradientClasses ? 

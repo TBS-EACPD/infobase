@@ -110,9 +110,9 @@ const create_graph_with_legend = function(options){
   // transform the data
   data = _.chain(options.data)
     .map(row => ({
-      label : options.get_series_label(row),
-      data : options.get_data(row),
-      active : all_active ? true :row.active,
+      label: options.get_series_label(row),
+      data: options.get_data(row),
+      active: all_active ? true :row.active,
     }));
   if (options.sort_data) {
     data = data.sortBy(d => -d3.sum(d.data) );
@@ -145,16 +145,16 @@ const create_graph_with_legend = function(options){
     // create the list as a dynamic graph legend
 
     list = common_charts_utils.create_list(graph_area.select(".x1").node(), data, {
-      html : _.property("label"),
-      align : options.align,
-      legend_class : options.legend_class,
-      orientation : options.legend_orientation,
-      colors : colors,
-      interactive : true,
-      title : legend_title,
-      height : 500,
-      legend : true,
-      ul_classes : "legend",
+      html: _.property("label"),
+      align: options.align,
+      legend_class: options.legend_class,
+      orientation: options.legend_orientation,
+      colors: colors,
+      interactive: true,
+      title: legend_title,
+      height: 500,
+      legend: true,
+      ul_classes: "legend",
     });
 
 
@@ -173,9 +173,9 @@ const create_graph_with_legend = function(options){
           normalized = !normalized && stacked;
           stacked = !stacked || normalized;
           graph.render({
-            stacked : stacked,
-            normalized : normalized,
-            y_axis : normalized ? "%" : options.y_axis,
+            stacked: stacked,
+            normalized: normalized,
+            y_axis: normalized ? "%" : options.y_axis,
           });
         })
         .append("span")
@@ -190,30 +190,30 @@ const create_graph_with_legend = function(options){
     // create the graph
     if (options.bar){
       graph = new Bar(graph_area.select(".x2").node(),{
-        y_axis : yaxis,
-        colors : colors,
-        ticks : options.ticks,
-        stacked : stacked,
-        graph_areas : options.graph_areas,
-        normalized : normalized,
-        formater : yaxis_formatter,
-        normalized_formater : formats.percentage_raw,
-        series : data_to_series_format,
+        y_axis: yaxis,
+        colors: colors,
+        ticks: options.ticks,
+        stacked: stacked,
+        graph_areas: options.graph_areas,
+        normalized: normalized,
+        formater: yaxis_formatter,
+        normalized_formater: formats.percentage_raw,
+        series: data_to_series_format,
       });
     } else {
       graph = new Line(graph_area.select(".x2").node(),{
-        y_axis : yaxis,
-        colors : colors,
-        ticks : options.ticks,
-        stacked : stacked,
-        add_line_diff : options.add_line_diff,
-        graph_areas : options.graph_areas,
-        normalized : normalized,
-        formater : yaxis_formatter,
-        normalized_formater : formats.percentage_raw,
-        series : data_to_series_format,
-        yBottom : y_bottom,
-        yTop : y_top,
+        y_axis: yaxis,
+        colors: colors,
+        ticks: options.ticks,
+        stacked: stacked,
+        add_line_diff: options.add_line_diff,
+        graph_areas: options.graph_areas,
+        normalized: normalized,
+        formater: yaxis_formatter,
+        normalized_formater: formats.percentage_raw,
+        series: data_to_series_format,
+        yBottom: y_bottom,
+        yTop: y_top,
       });
     }
 
@@ -325,7 +325,7 @@ const create_a11y_table = function({
           >
             {label_col_header || ""}
           </th>
-          {_.map(data_col_headers, (tick,i) => <th key={i}> <span dangerouslySetInnerHTML={{__html:tick}} /> </th>)} 
+          {_.map(data_col_headers, (tick,i) => <th key={i}> <span dangerouslySetInnerHTML={{__html: tick}} /> </th>)} 
         </tr>
       </thead>
       <tbody>

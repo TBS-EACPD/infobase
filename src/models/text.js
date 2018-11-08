@@ -237,7 +237,7 @@ const _create_text_maker = (deps=template_store) => (key, context={}) => {
       }
       rtn = run_template(rtn, context);
     } else if (transform === 'markdown'){
-      rtn = marked(rtn, {sanitize:false, gfm:true});
+      rtn = marked(rtn, {sanitize: false, gfm: true});
     } else if (transform === 'embeded-markdown'){
       const temp_dom_node = document.createElement("div");
 
@@ -250,7 +250,7 @@ const _create_text_maker = (deps=template_store) => (key, context={}) => {
           .forEach(
             (node) => node.innerHTML = marked(
               node.innerHTML,
-              {sanitize:false, gfm:true}
+              {sanitize: false, gfm: true}
             ) 
           );
       }

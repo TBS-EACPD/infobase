@@ -13,7 +13,7 @@ const title_keys = {
 _.each(['tag','crso','program'], level => {
   new PanelGraph({
     level,
-    key : "description",
+    key: "description",
     footnotes: false,
     calculate: subject => _.nonEmpty(subject.description),
 
@@ -30,7 +30,7 @@ _.each(['tag','crso','program'], level => {
               {_.map(subject.web_links, href => 
                 <li key={href}>
                   <a target="_blank" rel="noopener noreferrer" href={href}>
-                    {_.truncate(href, {length:150})}
+                    {_.truncate(href, {length: 150})}
                   </a>
                 </li>
               )}

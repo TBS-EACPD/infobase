@@ -13,7 +13,7 @@ export default {
   text,
   id: "table2",
   source: [ "QFR" ],
-  "tags" : [
+  "tags": [
     "QFR",
     "SPENDING_RATE",
     "EXP",
@@ -36,44 +36,44 @@ export default {
     "fr": "Dépenses par article courant (Rapports Financiers Trimestriels) (en milliers de dollars)",
   },
 
-  "add_cols" : function(){
+  "add_cols": function(){
     this.add_col("")
       .add_child([
         {
-          "type":"int",
-          "key" : true,
-          "hidden" : true,
-          "nick" : "dept",
-          "header":'',
+          "type": "int",
+          "key": true,
+          "hidden": true,
+          "nick": "dept",
+          "header": '',
         },
         {
-          "key" : true,
-          "type":"int",
-          "hidden" : true,
-          "nick" : 'so_num',
-          "header":{
-            "en":"Standard Object",
-            "fr":"Article courtant",
+          "key": true,
+          "type": "int",
+          "hidden": true,
+          "nick": 'so_num',
+          "header": {
+            "en": "Standard Object",
+            "fr": "Article courtant",
           },
         },
         {
-          "key" : true,
-          "type":"str",
-          "nick" : "so",
-          "header":{
-            "en":"Standard Object",
-            "fr":"Article Courant",
+          "key": true,
+          "type": "str",
+          "nick": "so",
+          "header": {
+            "en": "Standard Object",
+            "fr": "Article Courant",
           },
         },
       ]);
     this.add_col("{{qfr_in_year}}")
       .add_child([
         {
-          "type":"big_int",
-          "nick" : "plannedexp",
-          "header":{
-            "en":"Planned expenditures for the year ending {{qfr_in_year_end}}",
-            "fr":"Dépenses prévues pour l'exercice se terminant le {{qfr_in_year_end}}",
+          "type": "big_int",
+          "nick": "plannedexp",
+          "header": {
+            "en": "Planned expenditures for the year ending {{qfr_in_year_end}}",
+            "fr": "Dépenses prévues pour l'exercice se terminant le {{qfr_in_year_end}}",
           },
           "description": {
             "en": "Corresponds to the planned expenditures tabled by the organization in their QFR for the fiscal year ending on {{mar_31}} of the relevant year.",
@@ -81,11 +81,11 @@ export default {
           },
         },
         {
-          "type":"big_int",
+          "type": "big_int",
           "nick": 'thisyear_quarterexpenditures',
-          "header":{
-            "en":"Expended during the quarter ended {{qfr_month_name}}, {{qfr_in_year_short_first}}",
-            "fr":"Dépenses engagées durant le trimestre terminé le {{qfr_month_name}} {{qfr_in_year_short_first}}",
+          "header": {
+            "en": "Expended during the quarter ended {{qfr_month_name}}, {{qfr_in_year_short_first}}",
+            "fr": "Dépenses engagées durant le trimestre terminé le {{qfr_month_name}} {{qfr_in_year_short_first}}",
           },
           "description": {
             "en": "Represents the expenditures that have been made for the selected quarter.",
@@ -93,12 +93,12 @@ export default {
           },
         },
         {
-          "type":"big_int",
+          "type": "big_int",
           "simple_default": true,
-          "nick" : "in_year_ytd-exp",
-          "header":{
-            "en":"Year to date used at quarter-end",
-            "fr":"Cumul des crédits utilisés à la fin du trimestre",
+          "nick": "in_year_ytd-exp",
+          "header": {
+            "en": "Year to date used at quarter-end",
+            "fr": "Cumul des crédits utilisés à la fin du trimestre",
           },
           "description": {
             "en": "Represents the sum of all spending made by the organization up to the specified period.",
@@ -109,11 +109,11 @@ export default {
     this.add_col("{{qfr_last_year}}")
       .add_child([
         {
-          "type":"big_int",
-          "nick" : "last_year_plannedexp",
-          "header":{
-            "en":"Planned expenditures for the year ending {{qfr_last_year_end}}",
-            "fr":"Dépenses prévues pour l'exercice se terminant le {{qfr_last_year_end}}",
+          "type": "big_int",
+          "nick": "last_year_plannedexp",
+          "header": {
+            "en": "Planned expenditures for the year ending {{qfr_last_year_end}}",
+            "fr": "Dépenses prévues pour l'exercice se terminant le {{qfr_last_year_end}}",
           },
           "description": {
             "en": "Corresponds to the planned expenditures tabled by the organization in their QFR for the fiscal year ending on {{mar_31}} of the relevant year.",
@@ -121,11 +121,11 @@ export default {
           },
         },
         {
-          "type":"big_int",
+          "type": "big_int",
           "nick": 'lastyear_quarterexpenditures',
-          "header":{
-            "en":"Expended during the quarter ended {{qfr_month_name}}, {{qfr_last_year_short_first}}",
-            "fr":"Dépensées durant le trimestre terminé le {{qfr_month_name}} {{qfr_last_year_short_first}}",
+          "header": {
+            "en": "Expended during the quarter ended {{qfr_month_name}}, {{qfr_last_year_short_first}}",
+            "fr": "Dépensées durant le trimestre terminé le {{qfr_month_name}} {{qfr_last_year_short_first}}",
           },
           "description": {
             "en": "Represents the expenditures that have been made for the selected quarter.",
@@ -133,11 +133,11 @@ export default {
           },
         },
         {
-          "type":"big_int",
-          "nick" : "last_year_ytd-exp",
-          "header":{
-            "en":"Year to date used at quarter-end",
-            "fr":"Cumul des crédits utilisés à la fin du trimestre",
+          "type": "big_int",
+          "nick": "last_year_ytd-exp",
+          "header": {
+            "en": "Year to date used at quarter-end",
+            "fr": "Cumul des crédits utilisés à la fin du trimestre",
           },
           "description": {
             "en": "Represents the sum of all spending made by the organization up to the specified period.",
@@ -147,10 +147,10 @@ export default {
       ]);
   },
 
-  "dimensions" : [
+  "dimensions": [
     {
-      title_key :"so",
-      include_in_report_builder : true,
+      title_key: "so",
+      include_in_report_builder: true,
 
       filter_func: function(options){
         return function(row){
@@ -159,8 +159,8 @@ export default {
       },
     },
     {
-      title_key :"so_cat",
-      include_in_report_builder : true,
+      title_key: "so_cat",
+      include_in_report_builder: true,
 
       filter_func: function(options){
         return function(row){
@@ -198,9 +198,9 @@ Statistics.create_and_register({
       ["so","in_year_ytd-exp"], 
       Infinity,
       {
-        zip:true,
-        sort_col : "in_year_ytd-exp",
-        reverse : true,
+        zip: true,
+        sort_col: "in_year_ytd-exp",
+        reverse: true,
       }
     );
     stats.one_year_top2_bottom1(add, "qfr_so",all_ordered_so);
@@ -219,9 +219,9 @@ Statistics.create_and_register({
       ["so","in_year_ytd-exp"], 
       Infinity,
       {
-        zip:true,
-        sort_col : "in_year_ytd-exp",
-        reverse : true,
+        zip: true,
+        sort_col: "in_year_ytd-exp",
+        reverse: true,
       }
     );
     stats.one_year_top2_bottom1(add, "qfr_so",all_ordered_so);

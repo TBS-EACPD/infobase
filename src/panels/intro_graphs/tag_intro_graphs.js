@@ -3,7 +3,7 @@ import { PanelGraph } from "../shared";
 
 new PanelGraph({
   level: 'tag',
-  key : "m2m_warning",
+  key: "m2m_warning",
   footnotes: false,
   calculate(subject){
     //only display this warning

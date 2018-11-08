@@ -5,7 +5,7 @@ const WellList = ({ elements }) => <div>
     {_.chain(elements)
       .map( ({ display, href, children }, index) => 
         _.isEmpty(children) ? null : 
-        <li key={index} style={{ padding:"0px 20px" }}>
+        <li key={index} style={{ padding: "0px 20px" }}>
           <div 
             className="well well-sm mrgn-bttm-0"
           >
@@ -13,7 +13,7 @@ const WellList = ({ elements }) => <div>
             href ? 
             <a 
               href={href}
-              style={{color:'white'}}
+              style={{color: 'white'}}
             >
               {display}
             </a> :

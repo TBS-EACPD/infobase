@@ -58,7 +58,7 @@ export const single_subj_results_scheme = {
     const get_icon_counts = createSelector(
       get_subj,
       subj => _.chain(Indicator.get_flat_indicators(subj))
-        .filter({doc:'drr16'})
+        .filter({doc: 'drr16'})
         .groupBy('icon_key')
         .mapValues( (group, icon_key ) => group.length )
         .value()
@@ -79,7 +79,7 @@ export const single_subj_results_scheme = {
         doc,
         status_icon_key_whitelist,
         
-        has_subs : has_sub_selector(augmented_state),
+        has_subs: has_sub_selector(augmented_state),
         subject: get_subj(augmented_state),
         icon_counts: get_icon_counts(augmented_state),
         is_status_filter_enabled: is_status_filter_enabled_selector(augmented_state),
@@ -88,8 +88,8 @@ export const single_subj_results_scheme = {
   },
   dispatch_to_props: dispatch => ({ 
     set_doc: key => dispatch({type: 'set_doc', payload: key}), 
-    toggle_status_icon_key: key => dispatch({type:"status_click", payload: key}),
-    clear_status_filter: ()=> dispatch({type:'clear_status_filter'}),
+    toggle_status_icon_key: key => dispatch({type: "status_click", payload: key}),
+    clear_status_filter: ()=> dispatch({type: 'clear_status_filter'}),
   }),
   reducer: (state=get_initial_single_subj_results_state({}), action) => {
     const { type, payload } = action;

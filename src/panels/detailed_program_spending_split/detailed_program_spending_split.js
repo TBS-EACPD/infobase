@@ -49,7 +49,7 @@ const info_deps_by_level = {
     level: level_name,
     key: "detailed_program_spending_split",
     info_deps: info_deps_by_level[level_name],
-    depends_on : ['table305', "table6"],
+    depends_on: ['table305', "table6"],
 
     footnotes: [ 'PROG', 'SOBJ' ],
     calculate(subject,info,options){
@@ -76,7 +76,7 @@ const info_deps_by_level = {
         .groupBy('so_num')
         .toPairs()
         .map( ([so_num, group]) => ({
-          so_num : +so_num, 
+          so_num: +so_num, 
           sum: d3.sum(group, _.property('value')),
         }))
         .sortBy('sum')
@@ -106,9 +106,9 @@ const info_deps_by_level = {
         })
         .map(row => 
           ({
-            label : is_tag ? `${row.prgm} (${Subject.Dept.lookup(row.dept).acronym})` : row.prgm,
-            data : exp_cols.map(col => row[col]),
-            active : false,
+            label: is_tag ? `${row.prgm} (${Subject.Dept.lookup(row.dept).acronym})` : row.prgm,
+            data: exp_cols.map(col => row[col]),
+            active: false,
           })
         )
         .sortBy(x => -d3.sum(x.data))
@@ -237,7 +237,7 @@ class HistoricalProgramBars extends React.Component {
 
     return <div>
       <div className="results-separator" />
-      <div style={{paddingBottom:'10px'}} className='center-text font-xlarge'>
+      <div style={{paddingBottom: '10px'}} className='center-text font-xlarge'>
         <strong><TM k="historical_prog_title" /></strong>
       </div>
       <div className="frow">
@@ -332,7 +332,7 @@ class DetailedProgramSplit extends React.Component {
             //the mapping take so_num and produces new so_labels, 
             .map( obj => ({
               ...obj,
-              so_label : mapping(obj.so_num),
+              so_label: mapping(obj.so_num),
             }))
             .filter('so_label') //the mapping assigns falsey values in order to throw things out.
             .groupBy('so_label')
@@ -383,7 +383,7 @@ class DetailedProgramSplit extends React.Component {
 
     return <div>
       <div className="results-separator" />
-      <div style={{paddingBottom:'10px'}} className='center-text font-xlarge'>
+      <div style={{paddingBottom: '10px'}} className='center-text font-xlarge'>
         <strong><TM k="so_spend_by_prog" /></strong>
       </div>
       <div className="frow">

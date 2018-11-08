@@ -165,8 +165,8 @@ const make_horizontal_func = function(func,table){
 };
 
 export const trivial_dimension = {
-  title_key :"all" ,
-  include_in_report_builder : true,
+  title_key: "all" ,
+  include_in_report_builder: true,
   filter_func: () => ()=> text_maker('all'),
 }
 

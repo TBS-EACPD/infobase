@@ -16,21 +16,21 @@ const { TextMaker } = util_components;
 const { std_years, planning_years } = years;
 
 const pane_templates = {
-  exp : {
+  exp: {
     was: "spending_was",
     changed_to: "spending_change_was",
     will_be: "spending_change_will",
     will_be_1: "spending_will_be_1",
-    bad_dept_will_be : "spending_authority_this_year",
-    bad_dept_no_main_will_be : "no_spend_auth_this_year",
-    no_history : "no_historical_spending",
+    bad_dept_will_be: "spending_authority_this_year",
+    bad_dept_no_main_will_be: "no_spend_auth_this_year",
+    no_history: "no_historical_spending",
   },
-  fte : {
+  fte: {
     was: "fte_was",
     changed_to: "fte_change_was",
     will_be: "fte_change_will",
     will_be_1: "fte_will_be_1",
-    no_history : "no_historical_fte",
+    no_history: "no_historical_fte",
   },
 };
 
@@ -38,7 +38,7 @@ const pane_templates = {
 const Pane = props => {
 
   const s = props.parent_props.subject;
-  const header = _.find(props.parent_props.calcs.headers,{key:props._key});
+  const header = _.find(props.parent_props.calcs.headers,{key: props._key});
   const half_layout = props.parent_props.half_layout;
   const calcs = props.parent_props.calcs;
   const template = pane_templates[props.row_key];
@@ -89,7 +89,7 @@ const Pane = props => {
       className={`mat-grid__lg-panel${half_layout ? 100 : header.span} mat-grid__sm-panel`}>
       <div 
         className='mat-grid__inner-grid welcome-mat-rect' 
-        dangerouslySetInnerHTML={{__html : dangerousHTML}}
+        dangerouslySetInnerHTML={{__html: dangerousHTML}}
       />
     </div>
   );
@@ -117,27 +117,27 @@ const GridRow = props => {
     _key === 'exp' ? 
     <GraphEl
       {...{
-        margin : {top:5,bottom:5,left:75,right:5},
-        height : 200,
-        add_xaxis : false,
-        hide_gridlines : true,
+        margin: {top: 5,bottom: 5,left: 75,right: 5},
+        height: 200,
+        add_xaxis: false,
+        hide_gridlines: true,
         ticks,
-        colors : graph_color,
-        formater : formats.compact1_raw,
-        series : {"0": calcs.exp.graph_data},
+        colors: graph_color,
+        formater: formats.compact1_raw,
+        series: {"0": calcs.exp.graph_data},
       }} 
     /> :
     <GraphEl
       {...{
-        margin : {top:5,bottom:5,left:75,right:5},
-        height : 200,
-        add_xaxis : false,
-        axis_class : "black",
-        hide_gridlines : true,
+        margin: {top: 5,bottom: 5,left: 75,right: 5},
+        height: 200,
+        add_xaxis: false,
+        axis_class: "black",
+        hide_gridlines: true,
         ticks,
-        colors : graph_color,
-        formater : formats.big_int_real_raw,
-        series : {"1": calcs.fte.graph_data},
+        colors: graph_color,
+        formater: formats.big_int_real_raw,
+        series: {"1": calcs.fte.graph_data},
       }}
     />
   );
@@ -149,7 +149,7 @@ const GridRow = props => {
     <div className={`mat-grid__lg-panel${half_layout? 100 : 40} mat-grid__sm-panel`}>
       <div 
         className={`welcome-mat-rect graph font-xsmall ${_key}`}
-        style={{position:"relative"}}
+        style={{position: "relative"}}
       >
         { graph_markup }
       </div>
@@ -173,7 +173,7 @@ const WelcomeMatHeaderRow = props => {
         >
           <div 
             className='mat-grid__title welcome-mat-rect'
-            dangerouslySetInnerHTML={{__html : text_maker(header.header)}}
+            dangerouslySetInnerHTML={{__html: text_maker(header.header)}}
           />
         </div>
       );
@@ -266,23 +266,23 @@ const create_headers = (subject,calcs) => {
 
   if (calcs.new_program === true){
     headers.push(
-      {header : 'in_this_year',key : "will_be_1", span:20},
-      {header : 'in_three_years',key : "will_be", span:20},
-      {header : '3_year_trend' ,key : "graph", span:40}
+      {header: 'in_this_year',key: "will_be_1", span: 20},
+      {header: 'in_three_years',key: "will_be", span: 20},
+      {header: '3_year_trend' ,key: "graph", span: 40}
     );
   }
   else{
-    headers.push({header : 'five_years_ago',key : "was", span:20}); 
-    headers.push({header:'last_year',key:"changed_to",span:20})
+    headers.push({header: 'five_years_ago',key: "was", span: 20}); 
+    headers.push({header: 'last_year',key: "changed_to",span: 20})
 
     if (calcs.planning_or_fte_data) {
-      headers.push({header : 'in_three_years',key : "will_be", span:20});
-      headers.push({header : '8_year_trend' ,key : "graph", span:40}); 
+      headers.push({header: 'in_three_years',key: "will_be", span: 20});
+      headers.push({header: '8_year_trend' ,key: "graph", span: 40}); 
     } else {
       if (subject.is("dept")){
-        headers.push({ header : 'in_this_year',key : "will_be", span:20});       
+        headers.push({ header: 'in_this_year',key: "will_be", span: 20});       
       }
-      headers.push({header : '5_year_trend' ,key : "graph", span:40});
+      headers.push({header: '5_year_trend' ,key: "graph", span: 40});
     }
   } 
   return headers;
@@ -292,8 +292,8 @@ const create_headers = (subject,calcs) => {
 const cols = subject => {
   const has_planning_data = subject.has_planned_spending;
   return {
-    exp : _.map(std_years,y=>y+"exp").concat(has_planning_data? planning_years : []),
-    fte : std_years.concat(has_planning_data ? planning_years : []),
+    exp: _.map(std_years,y=>y+"exp").concat(has_planning_data? planning_years : []),
+    fte: std_years.concat(has_planning_data ? planning_years : []),
   };
 };
 
@@ -394,13 +394,13 @@ const render = function( panel, calculations, options ) {
 new PanelGraph({
   level: "gov",
   key: 'old_welcome_mat',
-  depends_on : ['table4','table6','table12'],
+  depends_on: ['table4','table6','table12'],
   info_deps: [ 'table4_gov_info', 'table6_gov_info','table12_gov_info'],
   layout: {
-    full: {text: 12, graph:0},
-    half : {text: 12, graph:0},
+    full: {text: 12, graph: 0},
+    half: {text: 12, graph: 0},
   },
-  title : "welcome_mat_title",
+  title: "welcome_mat_title",
   calculate(subject,info,options) {
     const c = cols(subject); 
     const {
@@ -408,22 +408,22 @@ new PanelGraph({
       table12,
     } = this.tables;
     return calculate({
-      planning_or_fte_data : true,
-      exp : {
-        was : info.gov_exp_pa_last_year_5,    
-        changed_to : info.gov_exp_pa_last_year,      
-        will_be : info.gov_exp_planning_year_3,
-        graph_data : table6.q().sum(c.exp , {as_object: false}),
+      planning_or_fte_data: true,
+      exp: {
+        was: info.gov_exp_pa_last_year_5,    
+        changed_to: info.gov_exp_pa_last_year,      
+        will_be: info.gov_exp_planning_year_3,
+        graph_data: table6.q().sum(c.exp , {as_object: false}),
       },
-      fte : {
-        was : info.gov_fte_pa_last_year_5,    
-        changed_to : info.gov_fte_pa_last_year,      
-        will_be : info.gov_fte_planning_year_3,
-        graph_data : table12.q().sum(c.fte, {as_object: false}),
+      fte: {
+        was: info.gov_fte_pa_last_year_5,    
+        changed_to: info.gov_fte_pa_last_year,      
+        will_be: info.gov_fte_planning_year_3,
+        graph_data: table12.q().sum(c.fte, {as_object: false}),
       },
-      footers : {
-        exp : "gov_welcome_mat_spending_summary",
-        fte : "welcome_mat_fte_summary",
+      footers: {
+        exp: "gov_welcome_mat_spending_summary",
+        fte: "welcome_mat_fte_summary",
       },
     },subject,info,options);
   },
@@ -433,16 +433,16 @@ new PanelGraph({
 new PanelGraph({
   level: "dept",
   key: 'old_welcome_mat',
-  footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+  footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
 
-  depends_on : [ 'table6','table12', 'table4', 'table8'],
+  depends_on: [ 'table6','table12', 'table4', 'table8'],
   info_deps: ['table4_dept_info', 'table6_dept_info','table12_dept_info', 'table8_dept_info'],
-  missing_info :'ok' ,
+  missing_info: 'ok' ,
   layout: {
-    full: {text: 12, graph:0},
-    half : {text: 12, graph:0},
+    full: {text: 12, graph: 0},
+    half: {text: 12, graph: 0},
   },
-  title : "welcome_mat_title",
+  title: "welcome_mat_title",
   calculate(subject,info,options) {
     const c = cols(subject); 
     const pd = subject.has_planned_spending;
@@ -452,22 +452,22 @@ new PanelGraph({
     } = this.tables;
 
     return calculate({
-      planning_or_fte_data : pd,
-      exp : {
-        was : info.dept_exp_pa_last_year_5,    
-        changed_to : info.dept_exp_pa_last_year,      
-        will_be : pd ? info.dept_exp_planning_year_3 : info.dept_tabled_est_in_year_estimates,
-        graph_data : table6.q(subject).sum(c.exp , {as_object: false}),
+      planning_or_fte_data: pd,
+      exp: {
+        was: info.dept_exp_pa_last_year_5,    
+        changed_to: info.dept_exp_pa_last_year,      
+        will_be: pd ? info.dept_exp_planning_year_3 : info.dept_tabled_est_in_year_estimates,
+        graph_data: table6.q(subject).sum(c.exp , {as_object: false}),
       },
-      fte : {
-        was : pd ? info.dept_fte_pa_last_year_5 : undefined,
-        changed_to : pd ? info.dept_fte_pa_last_year : undefined,
-        will_be : pd ? info.dept_fte_planning_year_3 : undefined,
-        graph_data : table12.q(subject).sum(c.fte, {as_object: false}),
+      fte: {
+        was: pd ? info.dept_fte_pa_last_year_5 : undefined,
+        changed_to: pd ? info.dept_fte_pa_last_year : undefined,
+        will_be: pd ? info.dept_fte_planning_year_3 : undefined,
+        graph_data: table12.q(subject).sum(c.fte, {as_object: false}),
       },
-      footers : {
-        exp : pd ? "dept1_welcome_mat_spending_summary" : "dept2_welcome_mat_spending_summary", 
-        fte : "welcome_mat_fte_summary",
+      footers: {
+        exp: pd ? "dept1_welcome_mat_spending_summary" : "dept2_welcome_mat_spending_summary", 
+        fte: "welcome_mat_fte_summary",
       },
     },subject,info,options);
   },
@@ -479,15 +479,15 @@ new PanelGraph({
 new PanelGraph({
   level: "program",
   key: 'old_welcome_mat',
-  footnotes : ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-  depends_on : [ 'table6','table12'],
+  footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+  depends_on: [ 'table6','table12'],
   info_deps: [ 'table6_program_info','table12_program_info'],
-  missing_info :'ok' ,
+  missing_info: 'ok' ,
   layout: {
-    full: {text: 12, graph:0},
-    half : {text: 12, graph:0},
+    full: {text: 12, graph: 0},
+    half: {text: 12, graph: 0},
   },
-  title : "welcome_mat_title",
+  title: "welcome_mat_title",
   calculate (subject,info,options) {
     const {
       table6,
@@ -514,18 +514,18 @@ new PanelGraph({
     }
 
     return calculate({
-      planning_or_fte_data : pd,
+      planning_or_fte_data: pd,
       new_program,
-      exp : {
-        was : new_program ? undefined : info.program_exp_pa_last_year_5,
-        changed_to : new_program ? undefined : info.program_exp_pa_last_year,      
-        will_be_1 : (new_program && pd) ? info.program_exp_planning_year_1 : undefined,
-        will_be : pd ? info.program_exp_planning_year_3 : undefined,
-        graph_data : exp_graph_data,
+      exp: {
+        was: new_program ? undefined : info.program_exp_pa_last_year_5,
+        changed_to: new_program ? undefined : info.program_exp_pa_last_year,      
+        will_be_1: (new_program && pd) ? info.program_exp_planning_year_1 : undefined,
+        will_be: pd ? info.program_exp_planning_year_3 : undefined,
+        graph_data: exp_graph_data,
       },
-      fte : {
-        was : pd ? info.program_fte_pa_last_year_5 : undefined,
-        changed_to : (
+      fte: {
+        was: pd ? info.program_fte_pa_last_year_5 : undefined,
+        changed_to: (
           new_program ? 
           undefined : (
             pd ? 
@@ -533,12 +533,12 @@ new PanelGraph({
             undefined
           )
         ),
-        will_be_1 : (new_program && pd) ? info.program_fte_planning_year_1 : undefined,
-        will_be : pd ? info.program_fte_planning_year_3 : undefined,
-        graph_data : fte_graph_data,
+        will_be_1: (new_program && pd) ? info.program_fte_planning_year_1 : undefined,
+        will_be: pd ? info.program_fte_planning_year_3 : undefined,
+        graph_data: fte_graph_data,
       },
-      footers : {
-        exp : pd ? "program_welcome_mat_spending_summary" : "dept2_welcome_mat_spending_summary",
+      footers: {
+        exp: pd ? "program_welcome_mat_spending_summary" : "dept2_welcome_mat_spending_summary",
         fte: pd ? "welcome_mat_fte_summary" : undefined, 
       },
     }, subject,info,options);
@@ -549,15 +549,15 @@ new PanelGraph({
 new PanelGraph({
   level: "tag",
   key: 'old_welcome_mat',
-  footnotes : ["MACHINERY"],
-  depends_on : [ 'table6','table12'],
+  footnotes: ["MACHINERY"],
+  depends_on: [ 'table6','table12'],
   info_deps: [ 'table6_tag_info','table12_tag_info'],
-  missing_info :'ok' ,
+  missing_info: 'ok' ,
   layout: {
-    full: {text: 12, graph:0},
-    half : {text: 12, graph:0},
+    full: {text: 12, graph: 0},
+    half: {text: 12, graph: 0},
   },
-  title : "welcome_mat_title",
+  title: "welcome_mat_title",
   calculate(subject,info,options) {
     const c = cols(subject); 
     const pd = subject.has_planned_spending;
@@ -566,22 +566,22 @@ new PanelGraph({
       table12,
     } = this.tables;
     return calculate({
-      planning_or_fte_data : pd,
-      exp : {
-        was : info.tag_exp_pa_last_year_5,    
-        changed_to : info.tag_exp_pa_last_year,      
-        will_be : pd ? info.tag_exp_planning_year_3 : undefined,
-        graph_data : table6.q(subject).sum(c.exp , {as_object: false}),
+      planning_or_fte_data: pd,
+      exp: {
+        was: info.tag_exp_pa_last_year_5,    
+        changed_to: info.tag_exp_pa_last_year,      
+        will_be: pd ? info.tag_exp_planning_year_3 : undefined,
+        graph_data: table6.q(subject).sum(c.exp , {as_object: false}),
       },
-      fte : {
-        was : pd ? info.tag_fte_pa_last_year_5 : undefined,
-        changed_to : pd ? info.tag_fte_pa_last_year : undefined,
-        will_be : pd ? info.tag_fte_planning_year_3 : undefined,
-        graph_data : table12.q(subject).sum(c.fte, {as_object: false}),
+      fte: {
+        was: pd ? info.tag_fte_pa_last_year_5 : undefined,
+        changed_to: pd ? info.tag_fte_pa_last_year : undefined,
+        will_be: pd ? info.tag_fte_planning_year_3 : undefined,
+        graph_data: table12.q(subject).sum(c.fte, {as_object: false}),
       },
-      footers : {
-        exp : "tag_welcome_mat_spending_summary", 
-        fte : pd ? "tag_welcome_mat_fte_summary" : "dept2_welcome_mat_spending_summary",
+      footers: {
+        exp: "tag_welcome_mat_spending_summary", 
+        fte: pd ? "tag_welcome_mat_fte_summary" : "dept2_welcome_mat_spending_summary",
       },
     }, subject,info,options);
   },
@@ -591,15 +591,15 @@ new PanelGraph({
 new PanelGraph({
   level: "crso",
   key: 'old_welcome_mat',
-  footnotes : ["MACHINERY"],
-  depends_on : [ 'table6','table12'],
+  footnotes: ["MACHINERY"],
+  depends_on: [ 'table6','table12'],
   info_deps: [ 'table6_crso_info','table12_crso_info'],
-  missing_info :'ok' ,
+  missing_info: 'ok' ,
   layout: {
-    full: {text: 12, graph:0},
-    half : {text: 12, graph:0},
+    full: {text: 12, graph: 0},
+    half: {text: 12, graph: 0},
   },
-  title : "welcome_mat_title",
+  title: "welcome_mat_title",
   calculate (subject,info,options) {
     const c = cols(subject); 
 
@@ -641,26 +641,26 @@ new PanelGraph({
     }
   
     return calculate({
-      planning_or_fte_data : pd,
+      planning_or_fte_data: pd,
       new_program,
-      exp : {
-        was : info.crso_exp_pa_last_year_5,    
-        changed_to : info.crso_exp_pa_last_year,      
-        will_be_1 : psd ? info.crso_exp_planning_year_1 : undefined,
-        will_be : psd ? info.crso_exp_planning_year_3 : undefined,
-        graph_data : exp_graph_data,
+      exp: {
+        was: info.crso_exp_pa_last_year_5,    
+        changed_to: info.crso_exp_pa_last_year,      
+        will_be_1: psd ? info.crso_exp_planning_year_1 : undefined,
+        will_be: psd ? info.crso_exp_planning_year_3 : undefined,
+        graph_data: exp_graph_data,
       },
-      fte : {
-        was : pd ? info.crso_fte_pa_last_year_5 : undefined,
-        changed_to : pd ? info.crso_fte_pa_last_year : undefined,
-        will_be_1 : pd ? info.crso_fte_planning_year_1 : undefined,
-        will_be : pd ? info.crso_fte_planning_year_3 : undefined,
-        graph_data : fte_graph_data,
+      fte: {
+        was: pd ? info.crso_fte_pa_last_year_5 : undefined,
+        changed_to: pd ? info.crso_fte_pa_last_year : undefined,
+        will_be_1: pd ? info.crso_fte_planning_year_1 : undefined,
+        will_be: pd ? info.crso_fte_planning_year_3 : undefined,
+        graph_data: fte_graph_data,
       },
-      footers : {
-        exp : pd ? "program_welcome_mat_spending_summary" : "dept2_welcome_mat_spending_summary",
-        fte : pd ? "welcome_mat_fte_summary": "dept2_welcome_mat_spending_summary",
-        CR : "CR_exp_ftes_fte_summary",
+      footers: {
+        exp: pd ? "program_welcome_mat_spending_summary" : "dept2_welcome_mat_spending_summary",
+        fte: pd ? "welcome_mat_fte_summary": "dept2_welcome_mat_spending_summary",
+        CR: "CR_exp_ftes_fte_summary",
       },
     }, subject,info,options);
   },

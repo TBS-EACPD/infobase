@@ -33,9 +33,9 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 new PanelGraph({
   level: "dept",
-  key:"internal_services",
-  depends_on : ['table12', "table6"],
-  title : "internal_service_panel_title",
+  key: "internal_services",
+  depends_on: ['table12', "table6"],
+  title: "internal_service_panel_title",
   calculate(subject,info){
     const { table12 } = this.tables;
 
@@ -134,11 +134,11 @@ new PanelGraph({
         <div className="fcol-md-9">
           <Bar
             {...{
-              colors : window.infobase_colors(),
+              colors: window.infobase_colors(),
               height: 300,
               series: bar_series,
               stacked: true,
-              ticks : _.map(std_years, yr => run_template(yr)),
+              ticks: _.map(std_years, yr => run_template(yr)),
               formater: formats.big_int_real_raw,
               y_axis: text_maker("ftes"),
             }}

@@ -24,7 +24,7 @@ export const bubble_defs = {
     },
     description: _.constant(""),
   },
-  structure:{
+  structure: {
     ix: 3,
     id: 'structure',
     title(subject){
@@ -38,9 +38,9 @@ export const bubble_defs = {
     tables: [],
     svg_content: svgs.structure.text,
   },
-  financial : {
+  financial: {
     ix: 5,
-    id : "financial",
+    id: "financial",
     title: _.constant(text.fin_title[lang]),
     // slightly modify the description for Financial data for ib plus
     description: _.constant(text.fin_desc[lang]),
@@ -49,7 +49,7 @@ export const bubble_defs = {
   },
   people: {
     ix: 10,
-    id : 'people',
+    id: 'people',
     title: _.constant(text.people_title[lang]),
     description: _.constant(text.people_desc[lang]),
     tables: [],
@@ -57,7 +57,7 @@ export const bubble_defs = {
   },
   results: {
     ix: 15,
-    id : "results",
+    id: "results",
     title: _.constant(text.planning_title[lang]),
     description: _.constant(text.planning_desc[lang]),
     tables: [],
@@ -78,7 +78,7 @@ export const bubble_defs = {
     tables: [],
     color: "#009652",
     title: ({level}) => text[`all_data_${level}_title`][lang],
-    description : _.constant(text.all_data_description[lang]),
+    description: _.constant(text.all_data_description[lang]),
     svg_content: svgs.all_data.text,
   },
 

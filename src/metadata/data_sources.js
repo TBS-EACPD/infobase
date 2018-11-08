@@ -10,13 +10,13 @@ import { create_text_maker } from '../models/text.js';
 const tm = create_text_maker([data_source_text, freq_text]);
 
 const frequencies = {
-  m : {
+  m: {
     get text(){ return tm("monthly"); },
   },
-  q : {
+  q: {
     get text(){ return tm("quarterly"); },
   },
-  y : {
+  y: {
     get text(){ return tm("yearly"); },
   },
 };
@@ -59,7 +59,7 @@ const sources = _.mapValues({
     frequency: frequencies.y,
     last_updated: { month: 10, year: 2018 },
     open_data: infobase_open_data_page,
-    report_link:{
+    report_link: {
       en: "http://www.tpsgc-pwgsc.gc.ca/recgen/cpc-pac/index-eng.html",
       fr: "http://www.tpsgc-pwgsc.gc.ca/recgen/cpc-pac/index-fra.html",
     },
@@ -76,7 +76,7 @@ const sources = _.mapValues({
     title(){ return tm("qfr_title" )},
     frequency: frequencies.q,
     last_updated: { month: 11, year: 2017 },
-    report_link:{
+    report_link: {
       en: "https://www.canada.ca/en/treasury-board-secretariat/services/reporting-government-spending/quarterly-financial-reporting.html",
       fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/etablissement-rapports-depenses/rapports-financiers-trimestriels.html",
     },
@@ -94,7 +94,7 @@ const sources = _.mapValues({
     frequency: frequencies.q,
     last_updated: { month: 4, year: 2018 },
     open_data: infobase_open_data_page,
-    report_link:{
+    report_link: {
       en: "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates.html",
       fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal.html",
     },

@@ -45,7 +45,7 @@ const prg_crso_split_render = function({calculations, footnotes}){
       value: d[col],
       label: d.prgm,
       data: d[col],
-      formater : formats.compact1,
+      formater: formats.compact1,
       li_href: Program.lookup(Program.unique_id(d.dept, d.activity_code)).link_to_infographic,
     }))
     .sortBy('value')
@@ -144,9 +144,9 @@ const prg_crso_split_render = function({calculations, footnotes}){
 new PanelGraph({
   level: "crso",
   key: 'planned_prg_crso_split',
-  depends_on : ['table6'],
+  depends_on: ['table6'],
   info_deps: ['table6_crso_info'],
-  machinery_footnotes : false,
+  machinery_footnotes: false,
 
   calculate(subject,info){
 

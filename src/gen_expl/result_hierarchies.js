@@ -285,7 +285,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
             id: `${parent_id}-${indicator.id}`,
             data: {
               indicator,
-              type:'indicator',
+              type: 'indicator',
             },
           }))
           .value()

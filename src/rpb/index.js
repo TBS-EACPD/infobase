@@ -131,7 +131,7 @@ class RPB extends React.Component {
   pickTable(table_id){
     if(this.state.loading){ return; }
     this.setState({
-      loading:true,
+      loading: true,
       table_picking: false,
     });
     ensure_loaded({ 
@@ -159,7 +159,7 @@ class RPB extends React.Component {
     } = this.props;
 
 
-    return <div style={{minHeight:'800px', marginBottom: '100px'}} id="">
+    return <div style={{minHeight: '800px', marginBottom: '100px'}} id="">
       <URLSynchronizer state={this.props} />
       <LangSynchronizer 
         lang_modifier={hash=>{
@@ -229,8 +229,8 @@ class RPB extends React.Component {
                 getApplicationNode={()=>document.getElementById('app')}
                 verticallyCenter={true}
                 underlayStyle={{
-                  paddingTop:"50px",
-                  paddingBottom:"50px",
+                  paddingTop: "50px",
+                  paddingBottom: "50px",
                 }}
                 focusDialog={true}
               >
@@ -241,7 +241,7 @@ class RPB extends React.Component {
                   style={{
                     backgroundColor: 'white',
                     overflow: 'auto',
-                    lineHeight : 1.5,
+                    lineHeight: 1.5,
                     padding: "0px 20px 0px 20px",
                     borderRadius: "5px",
                     fontWeight: 400,

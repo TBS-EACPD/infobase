@@ -23,7 +23,7 @@ const PanelSource = ({links}) => {
       <span className="sr-only"> <TM k="a11y_source_expl"/> </span>
       <ul
         className="list-unstyled list-inline"
-        style={{display:"inline"}}
+        style={{display: "inline"}}
       >
         {_.map(links, ({href, html},ix) =>
           <li key={ix}>
@@ -31,7 +31,7 @@ const PanelSource = ({links}) => {
               className="source-link"
               href={href}
             >
-              <span dangerouslySetInnerHTML={{__html:html}} />
+              <span dangerouslySetInnerHTML={{__html: html}} />
             </a>{ix !== last_ix && ", "}
           </li>
         )}
@@ -134,7 +134,7 @@ const StdPanel = ({ title, sources, footnotes, children }) => {
               !_.isUndefined(extraClasses) && extraClasses
             )
           }
-          style={ isGraph ? {position:"relative"} : null }
+          style={ isGraph ? {position: "relative"} : null }
           key={ix}
           ref={passedRef}
         >

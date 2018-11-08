@@ -7,14 +7,14 @@ const alphabetic_name_sort = (a,b) => a.data.name.toLowerCase().localeCompare( b
 const get_glossary_entry = (glossary_key) => GlossaryEntry.lookup(glossary_key) ? GlossaryEntry.lookup(glossary_key).definition : false;
 
 const value_functions = {
-  "exp" : function(node){
+  "exp": function(node){
     const table6 = Table.lookup('table6');
     if ( !table6.programs.has(node) ){  
       return false;
     }
     return _.first(table6.programs.get(node))["{{pa_last_year}}exp"];
   },
-  "fte" : function(node){
+  "fte": function(node){
     const table12 = Table.lookup('table12');
     if ( !table12.programs.has(node) ){  
       return false;

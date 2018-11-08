@@ -67,7 +67,7 @@ const HomeLayout = props => (
   <div className="home-root">
     <div 
       className="intro-box" 
-      style={{ backgroundImage:`URL(${get_static_url("svg/backbanner.svg")})` }}
+      style={{ backgroundImage: `URL(${get_static_url("svg/backbanner.svg")})` }}
     >
       <div className="container">
         <h1> <TM k="welcome" /> </h1>

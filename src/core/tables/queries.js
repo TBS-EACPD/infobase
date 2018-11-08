@@ -71,7 +71,7 @@ class Queries {
   //    }
   //  ```
   sum(cols, options){
-    options = options || {include_defaults : false};
+    options = options || {include_defaults: false};
     var format = options.format || false;
     var as_object = options.as_object === undefined ? true : options.as_object;
     var data = this.data;
@@ -188,7 +188,7 @@ class Queries {
     // x is the number of rows requested
     // sorts by the first col 
     options = options || {};
-    _.extend(options,{sorted:true,reverse:true} );
+    _.extend(options,{sorted: true,reverse: true} );
     // call ['this.get_cols'](#get_cols)
     var all_vals = this.get_cols(cols,options);
     if (options.zip){

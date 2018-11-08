@@ -52,7 +52,7 @@ var _navigate_packing = function(dispatcher,parents,speed){
   };
 
   dispatcher.on("renderEnd.__nav__",navigate_to_next);
-  dispatcher.call("dataClick", matching_circle,head, {auto_focus_largest : false});
+  dispatcher.call("dataClick", matching_circle,head, {auto_focus_largest: false});
 };
 
 export const navigate_packing = function(dispatcher,packed_data,filter,speed){
@@ -99,24 +99,24 @@ export const pack_data = function(data, level_name,options = {}){
     if (i === 0){
       __value__ = d3.sum(softened, _.property("__value__"));
       rtn = {
-        name:level_name, 
-        children:softened, 
+        name: level_name, 
+        children: softened, 
         __value__,
       };
     } else if (i === groups.length -1){
       softened = softened.concat(rtn);
       __value__ = d3.sum(softened, _.property("__value__"))
       rtn = {
-        name:"", 
-        children:softened, 
+        name: "", 
+        children: softened, 
         __value__,
       };
     } else {
       softened = softened.concat(rtn);
       __value__ = d3.sum(softened, _.property("__value__"));
       rtn = {
-        name:level_name, 
-        children:softened, 
+        name: level_name, 
+        children: softened, 
         __value__,
       };
     }
@@ -169,7 +169,7 @@ export class Pack {
       left: parent_element.offsetLeft,
     };
     var pos = this.zoom_position(x,y);
-    return {x:pos.x+offset.left,y:pos.y+offset.top};
+    return {x: pos.x+offset.left,y: pos.y+offset.top};
   }
 
   apply_scales(){
@@ -201,14 +201,14 @@ export class Pack {
       .attr("class","full_label center-text")
       .attr("aria-hidden",true)
       .styles({
-        "padding" : "1px",
-        "background-color" : "#F0F0F0",
-        "border-radius" : "5px",
-        "border" : "1px solid grey",
-        "font-size" : "12px",
-        "top" : d.zoom_pos.y-d.zoom_r + "px",
-        "left" : this.translate[0]+d.zoom_pos.x + "px",
-        "position":"absolute",
+        "padding": "1px",
+        "background-color": "#F0F0F0",
+        "border-radius": "5px",
+        "border": "1px solid grey",
+        "font-size": "12px",
+        "top": d.zoom_pos.y-d.zoom_r + "px",
+        "left": this.translate[0]+d.zoom_pos.x + "px",
+        "position": "absolute",
       })
       .html(this.hover_text_func(d));
   }
@@ -222,9 +222,9 @@ export class Pack {
         .insert("div", "div.__svg__")
         .attr("class","zoom")
         .styles({
-          "position" : "absolute",
-          "left" : "10px",
-          "top" : "10px",
+          "position": "absolute",
+          "left": "10px",
+          "top": "10px",
         })
         .append("button")
         .datum(node)
@@ -282,18 +282,18 @@ export class Pack {
         .styles({
           "stroke-width": "5px",
           "stroke-opacity": "1",
-          "stroke" : "rgb(152, 223, 138)",
-          "fill" : "rgb(152, 223, 138)",
-          "fill-opacity" : 0.9,
+          "stroke": "rgb(152, 223, 138)",
+          "fill": "rgb(152, 223, 138)",
+          "fill-opacity": 0.9,
         })
         .transition()
         .duration(500)
         .styles({
           "stroke-width": "1px",
           "stroke-opacity": "0.6",
-          "stroke" : stroke,
-          "fill" : fill,
-          "fill-opacity" : fillopacity,
+          "stroke": stroke,
+          "fill": fill,
+          "fill-opacity": fillopacity,
         }) 
         .on("end",_setup_for_zoom);
 
@@ -437,20 +437,20 @@ export class Pack {
         "pointer-events": d => (
           d.depth === depth+2 ? "none" : "all"
         ),
-        "stroke" : d => (
+        "stroke": d => (
           d.__value__ && d.__value__ < 0 ? 
           "red" :
           "rgba(37,114,180,0.9)"
         ),
-        "stoke-width" : "2px",
-        "stroke-opacity" : d => {
+        "stoke-width": "2px",
+        "stroke-opacity": d => {
 
           if (d.depth === 0 && that.invisible_grand_parent){
             return 0;
           }
           return 0.6;
         },
-        "fill" : d => {
+        "fill": d => {
           if ( this.fill_func) { 
             return this.fill_func(d);
           }
@@ -459,7 +459,7 @@ export class Pack {
           }
           return "rgb(37,114,180)";
         },
-        "fill-opacity" : d => {
+        "fill-opacity": d => {
           if (d.depth === 0 && that.invisible_grand_parent){
             return 0;
           } else if ((d.depth === 0 && !that.invisible_grand_parent) ||
@@ -473,7 +473,7 @@ export class Pack {
       .attrs({
         "cx": d => {return d.zoom_pos.x},
         "cy": d => d.zoom_pos.y,
-        "r" : d => d.zoom_r,
+        "r": d => d.zoom_r,
       });
 
     if ( !window.feature_detection.is_mobile() ){
@@ -488,19 +488,19 @@ export class Pack {
         "pointer-events": d => (
           d.depth === depth+2 ? "none" : "all"
         ),
-        "stroke" : d => (
+        "stroke": d => (
           d.__value__ && d.__value__ < 0 ? 
           "red" :
           "rgba(37,114,180,0.9)"
         ),
-        "stoke-width" : "2px",
-        "stroke-opacity" : d => {
+        "stoke-width": "2px",
+        "stroke-opacity": d => {
           if (d.depth === 0 && that.invisible_grand_parent){
             return 0;
           }
           return 0.6;
         },
-        "fill" : d => {
+        "fill": d => {
           if ( this.fill_func) { 
             return this.fill_func(d);
           }
@@ -509,7 +509,7 @@ export class Pack {
           }
           return "rgb(37,114,180)";
         },
-        "fill-opacity" : d => {
+        "fill-opacity": d => {
           if (d.depth === 0 && that.invisible_grand_parent){
             return 0;
           } else if ((d.depth === 0 && !that.invisible_grand_parent) ||
@@ -523,7 +523,7 @@ export class Pack {
       .attrs({
         "cx": d => d.zoom_pos.x,
         "cy": d => d.zoom_pos.y,
-        "r" : d => d.zoom_r,
+        "r": d => d.zoom_r,
       });
 
     if (this.cycle_colours){
@@ -532,12 +532,12 @@ export class Pack {
       circles
         .filter(d=> d.depth === depth+1)
         .styles({
-          "fill" : (d,i)=> {
+          "fill": (d,i)=> {
             return this.colors(i);
           },
-          "stroke" : (d,i)=> this.colors(i),
-          "stroke-width" : "2px",
-          "fill-opacity" : "0.5",
+          "stroke": (d,i)=> this.colors(i),
+          "stroke-width": "2px",
+          "fill-opacity": "0.5",
         });
     }
 
@@ -567,11 +567,11 @@ export class Pack {
     text_divs
       .classed("center-text",true)
       .styles({
-        "color" : "#000",
-        "text-decoration" : "none",
-        "font-size" : d => font_scale(d.zoom_r)+"px",
-        "position" : "absolute",
-        "width" : d => d.zoom_r*1.5+"px",
+        "color": "#000",
+        "text-decoration": "none",
+        "font-size": d => font_scale(d.zoom_r)+"px",
+        "position": "absolute",
+        "width": d => d.zoom_r*1.5+"px",
       })
       .attr("rid",d => d.rid)
       .html(this.text_func)
@@ -612,7 +612,7 @@ export class Pack {
         var l = that.translate[0] + d.zoom_pos.x - this.offsetWidth/2; 
         d3.select(this).styles({
           "top": t+'px',
-          "left" : l+"px",
+          "left": l+"px",
         });
       });
 

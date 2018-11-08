@@ -13,7 +13,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 new PanelGraph({
   level: 'dept',
   title: "org_profile",
-  key : "igoc_fields",
+  key: "igoc_fields",
   calculate: _.constant(true),
   render({calculations}){
     const { subject } = calculations;
@@ -35,7 +35,7 @@ new PanelGraph({
 
 new PanelGraph({
   level: 'dept',
-  key : "igoc_links",
+  key: "igoc_links",
   calculate(subject){
     if(subject.status !== 'Active'){
       return false;

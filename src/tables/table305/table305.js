@@ -19,9 +19,9 @@ const { sos } = businessConstants;
 export default {
   text,
   "id": "table305",
-  subject_type:"program",
+  subject_type: "program",
   source: [ "CFMRS" ],
-  "tags" : [ 
+  "tags": [ 
     "PA",
     "SOBJ",
     "EXP",
@@ -37,49 +37,49 @@ export default {
   },
   add_cols () {
     this.add_col( {
-      "type":"int",
-      "key" : true,
-      "hidden" : true,
-      "nick" : "dept",
-      "header":'',
+      "type": "int",
+      "key": true,
+      "hidden": true,
+      "nick": "dept",
+      "header": '',
     });
     this.add_col({
-      "type":"string",
-      "key" : true,
-      "hidden" : true,
-      "nick" : "activity_code",
+      "type": "string",
+      "key": true,
+      "hidden": true,
+      "nick": "activity_code",
     });
     this.add_col({
-      "key" : true,
-      "type":"wide-str",
-      'nick' : 'prgm',
-      "header":{
-        "en":"Program",
-        "fr":"Programme",
+      "key": true,
+      "type": "wide-str",
+      'nick': 'prgm',
+      "header": {
+        "en": "Program",
+        "fr": "Programme",
       },
     });
     this.add_col( {
-      "key" : true,
-      "type":"int",
-      "hidden" : true,
-      "nick" : 'so_num',
+      "key": true,
+      "type": "int",
+      "hidden": true,
+      "nick": 'so_num',
     });
     this.add_col( {
-      "key" : true,
-      "type":"str",
-      "nick" : 'so',
-      "header":{
-        "en":"Standard Object",
-        "fr":"Article courant",
+      "key": true,
+      "type": "str",
+      "nick": 'so',
+      "header": {
+        "en": "Standard Object",
+        "fr": "Article courant",
       },
     });
     const years = _.takeRight(std_years,2);
     years.forEach(yr=> {
       this.add_col({ 
-        "type":"big_int",
-        "nick":yr,
+        "type": "big_int",
+        "nick": yr,
         "simple_default": true,
-        "header":yr,
+        "header": yr,
         "description": {
           "en": "Corresponds to the funds spent by standard object during the fiscal year " + yr,
           "fr": "Correspond aux dépenses effectuées par article courant durant l'exercice financier " + yr,
@@ -103,10 +103,10 @@ export default {
     }
     this.programs.get(program_obj).push(mapped_row); 
   },
-  "dimensions" : [
+  "dimensions": [
     {
-      title_key :"so",
-      include_in_report_builder : false,
+      title_key: "so",
+      include_in_report_builder: false,
 
       filter_func: function(options){
         return function(row){
@@ -115,8 +115,8 @@ export default {
       },
     },
     {
-      title_key :"so_cat",
-      include_in_report_builder : true,
+      title_key: "so_cat",
+      include_in_report_builder: true,
 
       filter_func: function(options){
         return function(row){
@@ -132,10 +132,10 @@ export default {
       },
     },
     {
-      title_key : "gov_outcome",
-      include_in_report_builder : true,
+      title_key: "gov_outcome",
+      include_in_report_builder: true,
 
-      filter_func : function(options){
+      filter_func: function(options){
         var func = function(row){
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           const goco = prog.tags_by_scheme.GOCO && prog.tags_by_scheme.GOCO[0];
@@ -145,10 +145,10 @@ export default {
       },
     },
     {
-      title_key :"gov_goco",
-      include_in_report_builder : true,
+      title_key: "gov_goco",
+      include_in_report_builder: true,
 
-      filter_func : function(options){
+      filter_func: function(options){
         var func = function(row){
           //FIXME: this is because I found a program without a goco, 
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )

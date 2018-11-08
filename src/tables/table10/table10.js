@@ -177,7 +177,7 @@ Statistics.create_and_register({
     const q = table.q(subject);
     c.dept = subject;
 
-    var all_years = q.get_top_x(["region"].concat(people_years),Infinity,{zip:true});
+    var all_years = q.get_top_x(["region"].concat(people_years),Infinity,{zip: true});
     stats.year_over_year_multi_stats_active_years(add,"head_count_region",all_years,false,people_years);
   },
 });

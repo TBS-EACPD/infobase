@@ -18,7 +18,7 @@ const in_year_col = est_cols[4];
 const last_year_col = est_cols[3];
 
 const map_helper = {
-  "ME":"MAINS",
+  "ME": "MAINS",
   "CONT": "V5",
   "COMP": "V15",
   "GWIDE": "V10",
@@ -31,7 +31,7 @@ export default {
   text,
   "id": "table8",
 
-  "tags" : [
+  "tags": [
     "AUTH",
     "EST_PROC",
     "VOTED",
@@ -49,62 +49,62 @@ export default {
     "fr": "Budgets déposés (en milliers de dollars)",
   },
 
-  "footnote-topics" : {
-    "group" :["mains_text"],
-    "table" :["~main_text","mains_text_gov"],
+  "footnote-topics": {
+    "group": ["mains_text"],
+    "table": ["~main_text","mains_text_gov"],
   },
 
-  "add_cols" : function(){
+  "add_cols": function(){
     this.add_col({
-      "type":"int",
-      "key" : true,
-      "hidden" : true,
-      "nick" : "dept",
-      "header":'',
+      "type": "int",
+      "key": true,
+      "hidden": true,
+      "nick": "dept",
+      "header": '',
     });
     this.add_col({
-      "type":"int",
-      "key":true,
-      "hidden":true,
-      'nick' : "votenum",
-      "header":{
-        "en":"Vote / Statutory Number",
-        "fr":"Crédit / Poste législatif Numéro",
+      "type": "int",
+      "key": true,
+      "hidden": true,
+      'nick': "votenum",
+      "header": {
+        "en": "Vote / Statutory Number",
+        "fr": "Crédit / Poste législatif Numéro",
       },
     });
     this.add_col({
-      "type":"int",
-      "key" : true,
-      "hidden" : true,
-      "nick" : "votestattype",
-      "header":'',
+      "type": "int",
+      "key": true,
+      "hidden": true,
+      "nick": "votestattype",
+      "header": '',
     });
     this.add_col({
-      "type":"wide-str",
-      "key" : true,
-      "nick" : "desc",
-      "header":{
-        "en":"Vote / Statutory Description",
-        "fr":"Crédit / Poste législatif Description",
+      "type": "wide-str",
+      "key": true,
+      "nick": "desc",
+      "header": {
+        "en": "Vote / Statutory Description",
+        "fr": "Crédit / Poste législatif Description",
       },
     });
     this.add_col({
-      "type":"wide-str",
-      "key" : true,
-      "hidden" : true,
-      "nick" : "est_doc_code",
-      "header":{
-        "en":"Estimates",
-        "fr":"Budget des dépenses",
+      "type": "wide-str",
+      "key": true,
+      "hidden": true,
+      "nick": "est_doc_code",
+      "header": {
+        "en": "Estimates",
+        "fr": "Budget des dépenses",
       },
     });
     this.add_col({
-      "type":"wide-str",
-      "key" : true,
-      "nick" : "est_doc",
-      "header":{
-        "en":"Estimates Instrument",
-        "fr":"Instrument des dépenses",
+      "type": "wide-str",
+      "key": true,
+      "nick": "est_doc",
+      "header": {
+        "en": "Estimates Instrument",
+        "fr": "Instrument des dépenses",
       },
     });
     _.each(estimates_years, yr=> { 
@@ -144,8 +144,8 @@ export default {
     return row;
   },
 
-  "queries" : {
-    "estimates_split" : function(options,format){
+  "queries": {
+    "estimates_split": function(options,format){
       format = format || false;
       const col = options.col || in_year_col;
       var filter = options.filter;
@@ -221,26 +221,26 @@ export default {
     return grps[true].concat(grps[false]);
   },
 
-  "dimensions" : [
+  "dimensions": [
     {
-      title_key : "major_voted_stat",
-      include_in_report_builder : true,
-      filter_func : major_vote_stat,
+      title_key: "major_voted_stat",
+      include_in_report_builder: true,
+      filter_func: major_vote_stat,
     },
     {
-      title_key : "major_voted_big_stat",
+      title_key: "major_voted_big_stat",
       exclude_from_rpb: true,
-      filter_func : major_vote_big_stat("{{est_in_year}}_estimates"),
+      filter_func: major_vote_big_stat("{{est_in_year}}_estimates"),
     },
     {
-      title_key :"voted_stat",
-      include_in_report_builder : true,
-      filter_func : vote_stat_dimension,
+      title_key: "voted_stat",
+      include_in_report_builder: true,
+      filter_func: vote_stat_dimension,
     },{
-      title_key :"by_estimates_doc",
-      include_in_report_builder : true,
+      title_key: "by_estimates_doc",
+      include_in_report_builder: true,
 
-      filter_func : function(options){
+      filter_func: function(options){
         return function(d){
           return d.est_doc;
         };
@@ -273,8 +273,8 @@ Statistics.create_and_register({
 
     add('tabled_voted_mains_est_in_year', voted_in_mains)
 
-    add('in_year_estimates_split', q.estimates_split({filter_zeros : true, as_tuple : true, col: in_year_col}) )
-    add('last_year_estimates_split', q.estimates_split({filter_zeros : true, as_tuple : true, col: last_year_col}) )
+    add('in_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: in_year_col}) )
+    add('last_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: last_year_col}) )
 
     //add({
     // "key" : "mains_tabled_diff",
@@ -284,13 +284,13 @@ Statistics.create_and_register({
   
     add({
       "key": "voted_percent_est_in_year" ,
-      "value" : c.dept_voted_est_in_year/c.dept_tabled_est_in_year_estimates,
-      "type" : "percentage1",
+      "value": c.dept_voted_est_in_year/c.dept_tabled_est_in_year_estimates,
+      "type": "percentage1",
     });
     add({
       "key": "stat_percent_est_in_year" ,
-      "value" : c.dept_stat_est_in_year/c.dept_tabled_est_in_year_estimates,
-      "type" : "percentage1",                                    
+      "value": c.dept_stat_est_in_year/c.dept_tabled_est_in_year_estimates,
+      "type": "percentage1",                                    
     });
   },
 });
@@ -346,8 +346,8 @@ Statistics.create_and_register({
     add("voted_est_in_year",table.voted_stat(in_year_col,false)[voted] || 0);
     add("stat_est_in_year",table.voted_stat(in_year_col,false)[stat] || 0);
 
-    add('in_year_estimates_split', q.estimates_split({filter_zeros : true, as_tuple : true, col: in_year_col}) )
-    add('last_year_estimates_split', q.estimates_split({filter_zeros : true, as_tuple : true, col: last_year_col}) )
+    add('in_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: in_year_col}) )
+    add('last_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: last_year_col}) )
 
     _.each(estimates_years, yr=> { add("tabled_"+yr, q.sum(yr+"_estimates")) } );
 
@@ -362,13 +362,13 @@ Statistics.create_and_register({
 
     add({
       "key": "voted_percent_est_in_year" ,
-      "value" : c.gov_voted_est_in_year/c.gov_tabled_est_in_year,
-      "type" : "percentage",
+      "value": c.gov_voted_est_in_year/c.gov_tabled_est_in_year,
+      "type": "percentage",
     });
     add({
       "key": "stat_percent_est_in_year" ,
-      "value" : c.gov_stat_est_in_year/c.gov_tabled_est_in_year,
-      "type" : "percentage",
+      "value": c.gov_stat_est_in_year/c.gov_tabled_est_in_year,
+      "type": "percentage",
     });
 
   },

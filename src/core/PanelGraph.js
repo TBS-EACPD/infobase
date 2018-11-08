@@ -14,7 +14,7 @@ const default_args = {
   info_deps: [],
   machinery_footnotes: true,
   layout: {
-    full: {graph:12, text: 12},
+    full: {graph: 12, text: 12},
   },
 };
 
@@ -48,7 +48,7 @@ class PanelGraph {
   }
 
   static graphs_for_level(level_name){
-    return _.filter(graphs, {level : level_name});
+    return _.filter(graphs, {level: level_name});
   }
 
   static register_instance(instance){

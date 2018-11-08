@@ -56,7 +56,7 @@ const FancyUL = ({children, ul_class})=> (
   </ul>
 );
 
-const FootnoteList = ({ footnotes }) => <div style={{padding:"10px"}}>
+const FootnoteList = ({ footnotes }) => <div style={{padding: "10px"}}>
   <ul>
     {footnotes.map( ({text},ix) => 
       <li key={ix}>

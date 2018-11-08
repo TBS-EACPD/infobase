@@ -67,8 +67,8 @@ export class Canada {
       if (prev_prov) {
         svg.select("#CA-" + prev_prov)
           .styles({
-            "stroke-width" : "2px",
-            "stroke" : "#1f77b4",
+            "stroke-width": "2px",
+            "stroke": "#1f77b4",
           })
       }
       graph_dispatcher.call("dataMouseLeave");
@@ -78,8 +78,8 @@ export class Canada {
       if (prev_prov) {
         svg.select("#CA-" + prev_prov)
           .styles({
-            "stroke-width" : "2px",
-            "stroke" : "#1f77b4",
+            "stroke-width": "2px",
+            "stroke": "#1f77b4",
           })
       }
 
@@ -87,8 +87,8 @@ export class Canada {
         prev_prov = d[0];
         svg.select("#CA-" + d[0])
           .styles({
-            "stroke-width" : ((d[0]==="abroad"||d[0]==="na")? "8px" : "15px"),
-            "stroke" : "#1f77b4",
+            "stroke-width": ((d[0]==="abroad"||d[0]==="na")? "8px" : "15px"),
+            "stroke": "#1f77b4",
           })
   
         graph_dispatcher.call("dataMouseEnter","",d[0]);
@@ -104,8 +104,8 @@ export class Canada {
 
     svg
       .attrs({
-        "height" : height +"px",
-        "width" : this.outside_width +"px",
+        "height": height +"px",
+        "width": this.outside_width +"px",
       });
 
     svg.select(".container")
@@ -113,7 +113,7 @@ export class Canada {
 
     svg.selectAll("."+ window.lang +"-only")
       .styles({
-        "opacity" : "1",
+        "opacity": "1",
       })
 
     svg.selectAll(".province")
@@ -123,15 +123,15 @@ export class Canada {
         d3.select(this).datum([prov,undefined]);
       })
       .styles({
-        "fill" : "#1f77b4",
-        "fill-opacity" : function(d,i){
+        "fill": "#1f77b4",
+        "fill-opacity": function(d,i){
           var prov = d3.select(this).attr("id").replace("CA-","");
           var val = last_year_data[prov];
           return color_scale(val || 0);
         },
-        "stroke-width" : "2px",
-        "stroke" : "#1f77b4",
-        "stroke-opacity" : function(d,i){
+        "stroke-width": "2px",
+        "stroke": "#1f77b4",
+        "stroke-opacity": function(d,i){
           var prov = d3.select(this).attr("id").replace("CA-","");
           var val = last_year_data[prov];
           return color_scale(val || 0);
@@ -143,42 +143,42 @@ export class Canada {
     if(_.filter(data, function(d){return d.abroad}).length === 0){
       svg.selectAll(".province#CA-abroad")
         .styles({
-          "visibility" : "hidden",
+          "visibility": "hidden",
         })
     }
     
     if(_.filter(data, function(d){return d.na}).length === 0){
       svg.selectAll(".province#CA-na")
         .styles({
-          "visibility" : "hidden",
+          "visibility": "hidden",
         })
     } 
 
     if(_.filter(data, function(d){return d.pe}).length === 0){
       svg.selectAll("path#CA-pe-Marker")
         .styles({
-          "visibility" : "hidden",
+          "visibility": "hidden",
         })
     }
     
     if(_.filter(data, function(d){return d.ns}).length === 0){
       svg.selectAll("path#CA-ns-Marker")
         .styles({
-          "visibility" : "hidden",
+          "visibility": "hidden",
         })
     } 
     
     if(_.filter(data, function(d){return d.nb}).length === 0){
       svg.selectAll("path#CA-nb-Marker")
         .styles({
-          "visibility" : "hidden",
+          "visibility": "hidden",
         })
     } 
     
     if(_.filter(data, function(d){return d.ncr}).length === 0){
       svg.selectAll("path#CA-ncr-Marker")
         .styles({
-          "visibility" : "hidden",
+          "visibility": "hidden",
         })
     } 
     
@@ -211,16 +211,16 @@ export class Canada {
 
         d3.select(this)
           .styles({
-            "border-radius" : "5px",
-            "position" : "absolute",
-            "left" : padding+scale*coords[0]+"px",
-            "top" : scale*coords[1]+"px",
+            "border-radius": "5px",
+            "position": "absolute",
+            "left": padding+scale*coords[0]+"px",
+            "top": scale*coords[1]+"px",
             "text-align": "center",
-            "font-size" : "10px",
-            "min-width" : scale*110+"px",
-            "min-height" : "35px",
-            "height" : scale*80+"px",
-            "background-color" : "#CCC",
+            "font-size": "10px",
+            "min-width": scale*110+"px",
+            "min-height": "35px",
+            "height": scale*80+"px",
+            "background-color": "#CCC",
           }); 
 
         var provName = prov; //Default, uses prov code
@@ -244,8 +244,8 @@ export class Canada {
           .append("a")
           .attr('tabindex',-1)
           .styles({
-            "color" : "black",
-            "text-decoration" : "none",
+            "color": "black",
+            "text-decoration": "none",
           })
           .html(formater(d[1]))
       });

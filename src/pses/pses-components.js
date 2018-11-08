@@ -34,8 +34,8 @@ const QuestionDataVis = ({ org_data, gov_data, acronym, question_id }) => (
       { 
         null && (
         org_data.pct_agree === org_data.pct_negative ?
-        <div style={{color:'red'}}> <Format type="percentage1" content={org_data.pct_agree} /> agree </div> :
-        <div style={{color:'green'}}> <Format type="percentage1" content={org_data.pct_agree} /> agree </div>
+        <div style={{color: 'red'}}> <Format type="percentage1" content={org_data.pct_agree} /> agree </div> :
+        <div style={{color: 'green'}}> <Format type="percentage1" content={org_data.pct_agree} /> agree </div>
         )
       }
     </div>
@@ -145,7 +145,7 @@ const data_to_props = ({ root: {
 }})=> {
 
   const joined_questions = _.chain(question_metadata)
-    .filter({type:"numeric"})
+    .filter({type: "numeric"})
     .map( ({id, name}) => ({
       id,
       name,
@@ -165,7 +165,7 @@ const GradientBar = ({ series, startsPositive, height, width, labels }) => {
   const [ leftLabel, rightLabel ] = labels;
 
   return (
-    <div style={{padding:"40px"}}>
+    <div style={{padding: "40px"}}>
       <div 
         style={{
           display: "flex",
@@ -178,16 +178,16 @@ const GradientBar = ({ series, startsPositive, height, width, labels }) => {
         <div
           style={{
             backgroundImage: `linear-gradient(${startsPositive ? "to right" : "to left"}, rgba(255, 0, 0, 0.6), hsla(0, 0%, 70%, 0.6), rgba(0, 128, 0, 0.6))`,
-            position:"relative",
+            position: "relative",
             display: "flex",
-            alignItems:"stretch",
+            alignItems: "stretch",
             flexBasis: "100%",
           }}
         >
           <div
             key="left-label"
             style={{
-              position:"absolute",
+              position: "absolute",
               left: "0%",
               top: "50%",
               fontSize: "1rem",
@@ -201,7 +201,7 @@ const GradientBar = ({ series, startsPositive, height, width, labels }) => {
           <div
             key="right-label"
             style={{
-              position:"absolute",
+              position: "absolute",
               right: "0%",
               top: "50%",
               fontSize: "1rem",
@@ -216,7 +216,7 @@ const GradientBar = ({ series, startsPositive, height, width, labels }) => {
             <Fragment key={ix}> 
               {name && 
               <div style={{
-                position:"absolute",
+                position: "absolute",
                 top: isLabelBelow ? "120%" : "-30%",
                 left: `${ (val*100) - 5}%`,
                 fontweight: "bold",
@@ -229,7 +229,7 @@ const GradientBar = ({ series, startsPositive, height, width, labels }) => {
               </div>
               }
               <div style={{
-                position:"absolute",
+                position: "absolute",
                 width: "2px",
                 backgroundColor: "#333",
                 left: `${val*100}%`,

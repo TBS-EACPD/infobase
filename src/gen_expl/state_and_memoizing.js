@@ -8,7 +8,7 @@ import {
 import { substr_search_generator } from './search_tools.js';
 
 const initial_root_state = {
-  scheme_key : 'results',
+  scheme_key: 'results',
   query: "",
   loading: false,
   userExpanded: [],
@@ -42,7 +42,7 @@ function root_reducer(state=initial_root_state, action){
       const { id } = node;
 
       const { 
-        userExpanded : oldExpanded,
+        userExpanded: oldExpanded,
         userCollapsed: oldCollapsed,
       } = state;
 
@@ -76,7 +76,7 @@ function root_reducer(state=initial_root_state, action){
 
     case 'clear_query': {
       return {...state,
-        loading:false,
+        loading: false,
         query: "",
       };
 
@@ -148,7 +148,7 @@ const map_dispatch_to_root_props = dispatch => {
     payload: { scheme_key },
   });
 
-  const clear_query = ()=> dispatch({type:'clear_query'});
+  const clear_query = ()=> dispatch({type: 'clear_query'});
 
   const enable_loading = ()=> dispatch({type: 'enable_loading'});
 
@@ -268,7 +268,7 @@ function get_memoized_funcs(schemes){
     //unless it exposes a shouldUpdateFlatNodes(oldSchemeState, newSchemeState), any scheme-state change will trigger flat nodes to be recomputed.
     //recall that recomputing hierarchy will involve resetting userExpands/Collapses (this is the main reason for a scheme to implement shouldUpdateFlatNodes )
 
-    const scheme_should_compute_func = _.find(schemes, {key : newState.root.scheme_key}).shouldUpdateFlatNodes || ( (oldSchemeState, newSchemeState) => oldSchemeState !== newSchemeState );
+    const scheme_should_compute_func = _.find(schemes, {key: newState.root.scheme_key}).shouldUpdateFlatNodes || ( (oldSchemeState, newSchemeState) => oldSchemeState !== newSchemeState );
 
     const { scheme_key } = newState.root;
 

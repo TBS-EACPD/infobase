@@ -11,8 +11,8 @@ const text_maker = create_text_maker(text);
 new PanelGraph({
   level: 'gov',
   footnotes: false,
-  key : "gov_related_info",
-  depends_on : [ ],
+  key: "gov_related_info",
+  depends_on: [ ],
   info_deps: [ ],
   calculate: _.constant(true),
   render(){

@@ -16,7 +16,7 @@ export default {
   text,
   "id": "table304",
   source: ["RPS"],
-  "tags" : [
+  "tags": [
     "PEOPLE",
     "FPS",
   ],
@@ -61,7 +61,7 @@ export default {
           "en": "Corresponds to the departmental average age, as of March 31 "+people_years_short_second[ix],
           "fr": "Correspond à l'âge moyen au ministère, au 31 mars "+people_years_short_second[ix],
         },
-        "formula" : function(table,row){
+        "formula": function(table,row){
           // Displays FPS total average as the total row in every case except when you have a single department selected; good enough
           // although it would be okay if it just always did, and even better if we could clarify that it is the total FPS weighted average in the text
           if (_.isArray(row)){
@@ -84,8 +84,8 @@ export default {
     return row;
   },
 
-  "queries" : {
-    "gov_grouping" : function() {
+  "queries": {
+    "gov_grouping": function() {
       return _.chain(this.table.horizontal(people_years,false))
         .map(function(people_years, key){
           return [key].concat(people_years);
@@ -95,7 +95,7 @@ export default {
         })
         .value();
     },
-    "ZGOC_row" : function() {
+    "ZGOC_row": function() {
       var table = this.table;
       var data_temporary = _.map(people_years, function(year){
         return table.GOC[0][year];
@@ -104,18 +104,18 @@ export default {
     },
   },
 
-  "details" : { 
-    "prepare_total" : function(col_objs,raw_data){ 
+  "details": { 
+    "prepare_total": function(col_objs,raw_data){ 
       return [];
     },
   },
 
-  "dimensions" : [
+  "dimensions": [
     {
-      "title_key" : "horizontal",
-      include_in_report_builder : true,
+      "title_key": "horizontal",
+      include_in_report_builder: true,
 
-      filter_func :function(options){
+      filter_func: function(options){
         return function(row){
           return trivial_text_maker("fps");
         };

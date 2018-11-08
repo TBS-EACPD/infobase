@@ -33,8 +33,8 @@ export const PplSharePie = ({graph_args, label_col_header, sort_func}) => {
   const data = graph_args
     .map( d => 
       ({
-        value : d.five_year_percent, 
-        label : d.label,
+        value: d.five_year_percent, 
+        label: d.label,
       })
     ).sort(function (a, b) {
       return sort_func(a,b);
@@ -108,9 +108,9 @@ export const collapse_by_so = function(programs,table,filter){
     .groupBy("so")
     .toPairs()
     .map(key_value => ({
-      label : key_value[0], 
-      so_num : key_value[1][0].so_num,
-      value : d3.sum(key_value[1],d=>d["{{pa_last_year}}"]),
+      label: key_value[0], 
+      so_num: key_value[1][0].so_num,
+      value: d3.sum(key_value[1],d=>d["{{pa_last_year}}"]),
     }))
     .filter(filter || (()=>true))
     .sortBy(d=>-d.value)

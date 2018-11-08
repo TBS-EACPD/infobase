@@ -14,7 +14,7 @@ export function get_client(){
     client = new ApolloClient({
       // By default, this client will send queries to the
       //  `/graphql` endpoint on the same host
-      link: new HttpLink({uri:api_url}),
+      link: new HttpLink({uri: api_url}),
       cache: new InMemoryCache(),
       defaultOptions: {
         query: {

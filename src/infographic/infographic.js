@@ -187,7 +187,7 @@ class InfoGraph_ extends React.Component {
         </div>
       }
       <div>
-        <div style={{position:'relative'}}>
+        <div style={{position: 'relative'}}>
           { loading && 
             <div
               className='no-cursor opaque-overlay'
@@ -198,7 +198,7 @@ class InfoGraph_ extends React.Component {
                 width: "100%",
                 height: "100%",
                 backgroundColor: 'rgba(204,204,204,.5)',
-                borderRadius : '5px',
+                borderRadius: '5px',
               }}
             >
               <SpinnerWrapper config_name={"route"} /> 
@@ -244,12 +244,12 @@ class InfoGraph_ extends React.Component {
                   className="previous_bubble_link btn-lg btn-ib-primary" 
                   href={infograph_href_template(subject, prev.id)}
                   onClick={reset_scroll}
-                  style={{textDecoration:"none"}}
+                  style={{textDecoration: "none"}}
                 >
                   {`←  ${prev.title}`}
                 </a>
               ) :
-              (<a style={{visibility:"hidden"}}></a>)
+              (<a style={{visibility: "hidden"}}></a>)
             }
             { next ? 
               (
@@ -257,12 +257,12 @@ class InfoGraph_ extends React.Component {
                   className="next_bubble_link btn-lg btn-ib-primary" 
                   href={infograph_href_template(subject, next.id)}
                   onClick={reset_scroll}
-                  style={{textDecoration:"none"}}
+                  style={{textDecoration: "none"}}
                 > 
                   {`${next.title}  →`}
                 </a>
               ) :
-              (<a style={{visibility:"hidden"}}></a>)
+              (<a style={{visibility: "hidden"}}></a>)
             }
           </div>
           <div className="clearfix" />
@@ -287,7 +287,7 @@ class InfoGraph_ extends React.Component {
 
     ensure_loaded({
       graph_keys: panel_keys,
-      subject_level : level,
+      subject_level: level,
       subject: subject,
       footnotes_for: subject,
     }).then(()=> {
@@ -302,7 +302,7 @@ class InfoGraph_ extends React.Component {
 
 const InfoGraph = ({ 
   match: {
-    params : {
+    params: {
       level, 
       subject_id, 
       bubble,
@@ -329,7 +329,7 @@ const InfoGraph = ({
       description={ desc_key && text_maker(desc_key)}
       route_key={sub_app_name}
     >
-      <h1 dangerouslySetInnerHTML={{__html:title }} />
+      <h1 dangerouslySetInnerHTML={{__html: title }} />
       <InfoGraph_
         level={level}
         subject={subject}

@@ -8,7 +8,7 @@ const funcs = {
   //this is ideal for a list of id's in a piece of state that are often toggled
   // _.toggle_list([1,2,3],1) => [1,2]
   // _.toggle_list([1,2,3],4) => [1,2,3,4]
-  toggle_list : (arr, el) => (
+  toggle_list: (arr, el) => (
     _.includes(arr,el) ?
     _.without(arr,el) :
     arr.concat([el])

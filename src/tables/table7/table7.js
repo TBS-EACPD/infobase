@@ -11,7 +11,7 @@ export default {
   text,
   "id": "table7",
 
-  "tags" : [
+  "tags": [
     "AUTH",
     "EXP",
     "PA",
@@ -31,43 +31,43 @@ export default {
     "fr": "Paiements de transfert de {{pa_last_year_5}} à {{pa_last_year}} (en milliers de dollars)",
   },
 
-  "add_cols" :function(){
+  "add_cols": function(){
     this.add_col({
       "header": {
-        "en":"Transfer Payment",
-        "fr":"Paiement de transfert",
+        "en": "Transfer Payment",
+        "fr": "Paiement de transfert",
       },
     })
       .add_child([
         {
-          "type":"int",
-          "key" : true,
-          "hidden" : true,
-          "nick" : "dept",
-          "header":'',
+          "type": "int",
+          "key": true,
+          "hidden": true,
+          "nick": "dept",
+          "header": '',
         },
         {
-          "type":"int",
-          "hidden":true,
-          "key" : true,
-          "nick" : "type_id",
+          "type": "int",
+          "hidden": true,
+          "key": true,
+          "nick": "type_id",
         },
         {
-          "type":"int",
-          "key" : true,
-          "nick" : "type",
-          "header":{
-            "en":"Type",
-            "fr":"Type",
+          "type": "int",
+          "key": true,
+          "nick": "type",
+          "header": {
+            "en": "Type",
+            "fr": "Type",
           },
         },
         {
-          "type":"wide-str",
-          "key" : true,
-          "nick" : 'tp',
-          "header":{
-            "en":"Name",
-            "fr":"Nom",
+          "type": "wide-str",
+          "key": true,
+          "nick": 'tp',
+          "header": {
+            "en": "Name",
+            "fr": "Nom",
           },
         },
       ]);
@@ -75,11 +75,11 @@ export default {
       this.add_col(header).add_child(
         [
           {
-            "type":"big_int",
-            "nick" : header+'auth',
-            "header":{
-              "en":"Total budgetary authority available for use",
-              "fr":"Autorisations budgétaires disponibles pour l'emploi",
+            "type": "big_int",
+            "nick": header+'auth',
+            "header": {
+              "en": "Total budgetary authority available for use",
+              "fr": "Autorisations budgétaires disponibles pour l'emploi",
             },
             "description": {
               "en": "Corresponds to the authorities provided by Parliament, including transfers from other organizations or adjustments that are made during the year.",
@@ -87,12 +87,12 @@ export default {
             },
           },
           {
-            "type":"big_int",
+            "type": "big_int",
             "simple_default": i===4,
-            "nick" : header+'exp',
-            "header":{
-              "en":"Expenditures",
-              "fr":"Dépenses",
+            "nick": header+'exp',
+            "header": {
+              "en": "Expenditures",
+              "fr": "Dépenses",
             },
             "description": {
               "en": "Corresponds to the funds spent against authorities available that year.",
@@ -104,12 +104,12 @@ export default {
     });
   },
 
-  "dimensions" : [
+  "dimensions": [
     {
-      title_key : "payment_types_v_s",
-      include_in_report_builder : true,
+      title_key: "payment_types_v_s",
+      include_in_report_builder: true,
 
-      filter_func : function(options){
+      filter_func: function(options){
         return function(row){
           var type = row.type;
           if (row.tp.substring(0,3) === '(S)' || row.tp.substring(0,3) === "(L)"){
@@ -121,18 +121,18 @@ export default {
       },
     },
     {
-      title_key :"payment_types",
-      include_in_report_builder : true,
+      title_key: "payment_types",
+      include_in_report_builder: true,
 
-      filter_func : function(options){
+      filter_func: function(options){
         return function(row){
           return row.type;
         };               
       },
     },
     {
-      title_key :"payment_type_ids",
-      filter_func : function(options){
+      title_key: "payment_type_ids",
+      filter_func: function(options){
         return function(row){
           return row.type_id;
         };               
@@ -141,7 +141,7 @@ export default {
   ],
 
   "queries": {
-    "types" : function(){
+    "types": function(){
       return _.uniqBy(this.get_cols(["type"]).type);
     },
   },
@@ -171,7 +171,7 @@ Statistics.create_and_register({
     const table = tables.table7;
     const q = table.q(subject);
     var cols = _.map(std_years, function(year){ return year+"exp"; });
-    var all_years = q.get_cols(["tp"].concat(cols),{zip:true});
+    var all_years = q.get_cols(["tp"].concat(cols),{zip: true});
     stats.year_over_year_multi_stats(add, "tp_exp",all_years);
     var all_years_type = _.chain(q.types()) 
       .map(function(type){
@@ -213,7 +213,7 @@ Statistics.create_and_register({
 
     const cols = _.map(std_years, year => year+"exp");
 
-    var all_years = q.get_cols(["tp"].concat(cols),{zip:true});
+    var all_years = q.get_cols(["tp"].concat(cols),{zip: true});
     stats.year_over_year_multi_stats(add, "tp_exp",all_years);
 
     var all_years_type = _.chain(q.types()) 
@@ -244,7 +244,7 @@ Statistics.create_and_register({
     const value = c.dept_tp_exp_pa_last_year/ gov_info.gov_tp_exp_pa_last_year;
     const type = value < 0.01 ? "percentage2" : "percentage1";
     add({
-      "value" : value, 
+      "value": value, 
       "key": "tp_exp_ratio_gov_pa_last_year",
       "type": type,
     });
@@ -266,7 +266,7 @@ Statistics.create_and_register({
     //});
 
     add({
-      "value" : c.dept_tp_exp_pa_last_year/ t4_info.dept_exp_pa_last_year,
+      "value": c.dept_tp_exp_pa_last_year/ t4_info.dept_exp_pa_last_year,
       "key": "tp_exp_ratio_pa_last_year",
       "type": "percentage1",
     });

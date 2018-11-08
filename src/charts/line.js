@@ -41,8 +41,8 @@ export class Line {
     // resize the svg if necessary
     this.svg
       .attrs({
-        width : this.outside_width,
-        height : this.outside_height,
+        width: this.outside_width,
+        height: this.outside_height,
       })
       .select("._graph_area")
       .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
@@ -99,7 +99,7 @@ export class Line {
 
     const series = _.chain(this.series)
       .toPairs()
-      .map( ([key, vals]) => _.map( vals, (val,ix) => {return {key: key, value: val, index:this.ticks[ix]}}))
+      .map( ([key, vals]) => _.map( vals, (val,ix) => {return {key: key, value: val, index: this.ticks[ix]}}))
       .flatten()
       .groupBy("index")
       .map(group => ({
@@ -165,9 +165,9 @@ export class Line {
       .select('path.area')
       .styles({
         "fill": d => this.colors(d.key),
-        "fill-opacity" : 0.6,
-        "stroke-width" : "1px",
-        "stroke" : d => this.colors(d.key),
+        "fill-opacity": 0.6,
+        "stroke-width": "1px",
+        "stroke": d => this.colors(d.key),
       })
       .attr("d", d => area(d));
 
@@ -227,10 +227,10 @@ export class Line {
 
         path.merge(path_enter)
           .styles({
-            "fill" : "none",
-            "stroke" : that.colors(d),
-            "stroke-opacity" : 1,
-            "stroke-width" : "3px",
+            "fill": "none",
+            "stroke": that.colors(d),
+            "stroke-opacity": 1,
+            "stroke-width": "3px",
           })
           .attr("d", line);
 
@@ -246,13 +246,13 @@ export class Line {
 
         dots.merge(dots_enter)
           .attrs({
-            "class" : "dots",
-            "cy" : yfunc,
-            "cx" : xfunc,
-            "r" : "4",
+            "class": "dots",
+            "cy": yfunc,
+            "cx": xfunc,
+            "r": "4",
           })
           .styles({
-            "fill" :that.colors(d),
+            "fill": that.colors(d),
             "fill-opacity": 0.8,
           })
         ;
@@ -269,14 +269,14 @@ export class Line {
       this.svg.select("text.title").remove();
       this.svg.append("text")
         .attrs({
-          "class" : "title",
-          "x" : this.margin.left + width/2,
-          "y" : 12,
+          "class": "title",
+          "x": this.margin.left + width/2,
+          "y": 12,
         })
         .styles({
-          "text-anchor" : "middle",
-          "font-size" : "12px",
-          "font-weight" : "500",
+          "text-anchor": "middle",
+          "font-size": "12px",
+          "font-weight": "500",
         })
         .text(this.title);
     }

@@ -20,8 +20,8 @@ const { Format } = util_components;
 
 new PanelGraph({
   level: "gov",
-  depends_on : ['table5'],
-  key : "personnel_spend",
+  depends_on: ['table5'],
+  key: "personnel_spend",
 
   info_deps: [
     'table5_gov_info',
@@ -30,7 +30,7 @@ new PanelGraph({
 
   calculate(subject,info,data){
     return {
-      series : {
+      series: {
         '0': std_years.map( year => this.tables.table5.horizontal(year,false)[sos[1].text]),
       },
     };
@@ -61,13 +61,13 @@ new PanelGraph({
       graph_content = <div>
         <Line
           {...{
-            series : graph_args.series,
-            ticks : info.last_years,
-            colors : charts_index.common_charts_utils.tbs_color(),
-            add_yaxis : true,
-            add_xaxis : true,
+            series: graph_args.series,
+            ticks: info.last_years,
+            colors: charts_index.common_charts_utils.tbs_color(),
+            add_yaxis: true,
+            add_xaxis: true,
             y_axis: "($)",
-            formater : formats.compact1_raw,
+            formater: formats.compact1_raw,
           }}
 
         />

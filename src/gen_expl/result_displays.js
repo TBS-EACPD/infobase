@@ -78,16 +78,16 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
         args={{
           subject,
 
-          num_programs:count_items.program,
-          num_prog_results:count_items.result,
+          num_programs: count_items.program,
+          num_prog_results: count_items.result,
           num_results: (count_items.result || 0) + (count_items.dr || 0),
-          num_indicators:count_items.indicator,
+          num_indicators: count_items.indicator,
 
-          num_subs:count_items.sub_program,
-          num_sub_subs:count_items.sub_sub_program,
+          num_subs: count_items.sub_program,
+          num_sub_subs: count_items.sub_sub_program,
 
-          num_drs:count_items.dr,
-          num_crs:count_items.cr,
+          num_drs: count_items.dr,
+          num_crs: count_items.cr,
         }}
 
       />
@@ -114,7 +114,7 @@ const type_text_keys = {
   program: "programs",
   sub_program: "sub_programs",
   sub_sub_program: "sub_sub_programs",
-  dr:"dept_results",
+  dr: "dept_results",
   result: "results",
 };
 
@@ -131,7 +131,7 @@ export const ResultNodeContent = ({
       result_subject, 
       indicators, 
     },
-    children : indicator_nodes,
+    children: indicator_nodes,
   },
   doc,
 }) => (

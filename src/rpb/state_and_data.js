@@ -304,7 +304,7 @@ function create_mapStateToProps(){
     (dim_key, filter_val) => (
       filter_val === text_maker('all') ? 
         _.constant(true) : 
-        { [ dim_key ] : filter_val }
+        { [ dim_key ]: filter_val }
     )
   );
 

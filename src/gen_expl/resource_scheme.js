@@ -223,7 +223,7 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
 
 
 const get_initial_resource_state = ({hierarchy_scheme, doc}) => ({
-  hierarchy_scheme : hierarchy_scheme || "min",
+  hierarchy_scheme: hierarchy_scheme || "min",
   doc: doc || 'dp18',
   
   sort_col: 'spending',
@@ -237,11 +237,11 @@ const resource_scheme = {
 
     return augmented_state => ({ 
       ...augmented_state.resources,
-      is_m2m : _.includes(['HWH', 'WWH', 'MLT'], augmented_state.resources.hierarchy_scheme ),
+      is_m2m: _.includes(['HWH', 'WWH', 'MLT'], augmented_state.resources.hierarchy_scheme ),
     });
   },
   dispatch_to_props: dispatch => ({ 
-    col_click : col_key => dispatch({type: 'column_header_click', payload: col_key }),
+    col_click: col_key => dispatch({type: 'column_header_click', payload: col_key }),
   }),
   //this helps the URL override store actions. 
   set_hierarchy_and_doc(store, hierarchy_scheme, doc){
@@ -261,7 +261,7 @@ const resource_scheme = {
       const { is_descending, sort_col } = state;
       const clicked_col = payload;
 
-      const mods = clicked_col === sort_col ? { is_descending : !is_descending } : { is_descending: true, sort_col : clicked_col };
+      const mods = clicked_col === sort_col ? { is_descending: !is_descending } : { is_descending: true, sort_col: clicked_col };
 
       return ({...state, ...mods});
     } else if(type==="set_doc"){

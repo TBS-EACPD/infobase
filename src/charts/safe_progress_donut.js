@@ -3,12 +3,12 @@ import { Bar } from './bar';
 import { ProgressDonut } from './progress_donut.js';
 
 const bar_options = {
-  add_xaxis : true,                                   
-  x_axis_line : true,                                
-  add_yaxis : false,                                  
-  add_labels : true,                                  
-  margin : {top: 0, right:0, left: 0, bottom: 0} ,
-  formater : common_charts_utils.formats.compact1,
+  add_xaxis: true,                                   
+  x_axis_line: true,                                
+  add_yaxis: false,                                  
+  add_labels: true,                                  
+  margin: {top: 0, right: 0, left: 0, bottom: 0} ,
+  formater: common_charts_utils.formats.compact1,
 };
 
 export class SafeProgressDonut {
@@ -48,8 +48,8 @@ export class SafeProgressDonut {
       const options = {
         ...this.options,
         ...bar_options,
-        series: { "" : _.map(data, 'value')},
-        ticks : _.map(data, 'label'), 
+        series: { "": _.map(data, 'value')},
+        ticks: _.map(data, 'label'), 
       };
 
       new Bar(

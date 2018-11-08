@@ -23,7 +23,7 @@ const get_table_type = table => (
 
 new PanelGraph({
   level: 'dept',
-  key : "links_to_rpb",
+  key: "links_to_rpb",
   footnotes: false,
 
   calculate(subject){
@@ -46,7 +46,7 @@ new PanelGraph({
           .map(table => ({
             href: rpb_link({
               subject: subject.guid,
-              table:table.id,
+              table: table.id,
               mode: 'details',
             }),
             display: table.name,
@@ -65,7 +65,7 @@ new PanelGraph({
 
 new PanelGraph({
   level: 'gov',
-  key : "links_to_rpb",
+  key: "links_to_rpb",
   footnotes: false,
   calculate: _.constant(true),
 
@@ -79,7 +79,7 @@ new PanelGraph({
         display: <strong dangerouslySetInnerHTML={{__html: table_type_title}} />,
         children: _.chain(group_of_tables)
           .map(table => ({
-            href: rpb_link({subject: subject.guid, table:table.id}),
+            href: rpb_link({subject: subject.guid, table: table.id}),
             display: table.name,
           }))
           .sortBy('display')

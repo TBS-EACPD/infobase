@@ -138,7 +138,7 @@ Statistics.create_and_register({
         }
       )
     );
-    const all_years = q.get_top_x(["employee_type"].concat(people_years),Infinity,{zip:true});
+    const all_years = q.get_top_x(["employee_type"].concat(people_years),Infinity,{zip: true});
     stats.year_over_year_multi_stats_active_years(add,"head_count_type",all_years,false,people_years);
 	
     const total_head_count_by_year = _.chain(people_years)

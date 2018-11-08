@@ -67,7 +67,7 @@ function get_data_by_org(include_stat){
       const amounts_by_doc = get_doc_code_breakdowns( _.flatMap(rows, "_rows") );
 
       return {
-        id : org_id,
+        id: org_id,
         data: {
           name: org.name,
           subject: org,
@@ -251,8 +251,8 @@ function get_keys_in_supps(include_stat){
 }
 
 
-const Green = ({children}) => <span style={{color:"hsla(120, 100%, 25%, 1)"}}>{children}</span>
-const Red = ({children}) => <span style={{color:"hsla(0, 100%, 40%, 1)"}}>{children}</span>
+const Green = ({children}) => <span style={{color: "hsla(120, 100%, 25%, 1)"}}>{children}</span>
+const Red = ({children}) => <span style={{color: "hsla(0, 100%, 40%, 1)"}}>{children}</span>
 
 export const col_defs = [
   {
@@ -343,7 +343,7 @@ export const estimates_diff_scheme = {
       ],
       (is_descending, sort_col) => {
   
-        const attr_getter = _.find(col_defs, { id:sort_col }).get_val;
+        const attr_getter = _.find(col_defs, { id: sort_col }).get_val;
   
         return list => _.chain(list) //sort by search relevance, than the initial sort func
           .sortBy(attr_getter)
@@ -354,7 +354,7 @@ export const estimates_diff_scheme = {
   },
   get_props_selector: () => augmented_state => _.clone(augmented_state.estimates_diff),
   dispatch_to_props: dispatch => ({ 
-    col_click : col_key => dispatch({type: 'column_header_click', payload: col_key }),
+    col_click: col_key => dispatch({type: 'column_header_click', payload: col_key }),
     toggle_stat_filter: ()=> dispatch({type: "toggle_stat_filter"}),
     set_h7y_layout: layout_key=> dispatch({type: "set_h7y_layout", payload: layout_key}),
   }),
@@ -382,8 +382,8 @@ export const estimates_diff_scheme = {
       const clicked_col = payload;
       const mods = (
         clicked_col === sort_col ?
-        { is_descending : !is_descending } :
-        { is_descending: true, sort_col : clicked_col }
+        { is_descending: !is_descending } :
+        { is_descending: true, sort_col: clicked_col }
       );
       return {...state,...mods}
     } else {

@@ -152,7 +152,7 @@ class TablePicker extends React.Component {
   }
   selectConcept(concept_id){
     const new_active_concepts = toggleArrayElement(this.state.active_concepts, concept_id)
-    this.setState({active_concepts : new_active_concepts})
+    this.setState({active_concepts: new_active_concepts})
   }
   selectTable(selected_table){
     const { onSelect } = this.props;
@@ -189,7 +189,7 @@ class TaggedItemCloud extends React.Component {
                   <div className="item-tags">
                     {_.chain(item_tag_linkage)
                       .filter({item_id: id})
-                      .map( ({tag_id}) => _.find(tags, {id:tag_id} ) )
+                      .map( ({tag_id}) => _.find(tags, {id: tag_id} ) )
                       .map( ({id, display, active}) => 
                         <div key={id} className={classNames(active && "active", active && "active", 'item-tag')}>
                           {display}

@@ -43,7 +43,7 @@ export default {
 
   "add_cols": function(){
     this.add_col({
-      "type":"int",
+      "type": "int",
       "key": true,
       "hidden": true,
       "nick": "dept",
@@ -121,7 +121,7 @@ Statistics.create_and_register({
     const q = table.q(subject);
     c.dept = subject;
     
-    const all_years = q.get_top_x(["gender"].concat(people_years),Infinity,{zip:true});
+    const all_years = q.get_top_x(["gender"].concat(people_years),Infinity,{zip: true});
     const five_year_total = d3.sum(q.sum(people_years, {as_object: false}));
     
     // Filter out unknowns and suppressed values for sake of multi stats. Note: they're still included in denominator used to calculate separate %'s below

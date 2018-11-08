@@ -71,7 +71,7 @@ ROUTER.add_container_route("footnotes/:mode:/:concept_or_graph_key:/:level:","_f
   reactAdapter.render(
     <FootnoteInspector 
       initialState={initialState}
-      updateURL={url => ROUTER.navigate(url, {trigger:false}) }
+      updateURL={url => ROUTER.navigate(url, {trigger: false}) }
     />,
     container
   );
@@ -159,13 +159,13 @@ class FootnoteInspector extends React.Component {
     const nav_bar = <ul className="nav nav-pills nav-justified mrgn-bttm-xl">
       <li 
         className={classNames(mode==='graphs' && 'active')}
-        onClick={()=> this.setState({mode:'graphs'}) }
+        onClick={()=> this.setState({mode: 'graphs'}) }
       >
         <a href="#"> Graphs </a>
       </li>
       <li 
         className={classNames(mode==='concepts' && 'active')}
-        onClick={()=> this.setState({mode:'concepts'}) }
+        onClick={()=> this.setState({mode: 'concepts'}) }
       >
         <a href="#"> Concepts </a>
       </li>
@@ -268,7 +268,7 @@ class FootnoteInspector extends React.Component {
     } else {
       const sel = <Select
         selected={selected_concept}
-        options={all_graph_concepts.map(id => ({id, display:id}))}
+        options={all_graph_concepts.map(id => ({id, display: id}))}
         onSelect={id => this.setState({selected_concept: id}) } 
       />;
       body = <div>

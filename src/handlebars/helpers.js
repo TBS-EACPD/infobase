@@ -6,133 +6,133 @@ import { infograph_href_template, glossary_href } from '../link_utils.js';
 import { trivial_text_maker, run_template } from '../models/text.js';
 
 const change_map = {
-  past : {
-    to : {
-      en : {
-        increase : "increased to",
-        decrease : "decreased to",
-        constant : "remained unchanged",
+  past: {
+    to: {
+      en: {
+        increase: "increased to",
+        decrease: "decreased to",
+        constant: "remained unchanged",
       },
       fr: {
-        increase : {
-          ms : "a atteint",
-          mp : "ont atteint",
-          fs : "a atteint",
-          fp : "ont atteint",
+        increase: {
+          ms: "a atteint",
+          mp: "ont atteint",
+          fs: "a atteint",
+          fp: "ont atteint",
         },
-        decrease : {
-          ms : "a diminué jusqu'à",
-          mp : "ont diminué jusqu'à",
-          fs : "a diminuée jusqu'à",
-          fp : "ont diminué jusqu'à",
+        decrease: {
+          ms: "a diminué jusqu'à",
+          mp: "ont diminué jusqu'à",
+          fs: "a diminuée jusqu'à",
+          fp: "ont diminué jusqu'à",
         }, 
-        constant : {
-          ms : "est demeuré constant",
-          mp : "sont demeurés constants",
-          fs : "est demeurée constante",
-          fp : "sont demeurées constantes",
+        constant: {
+          ms: "est demeuré constant",
+          mp: "sont demeurés constants",
+          fs: "est demeurée constante",
+          fp: "sont demeurées constantes",
         },
       },
     },
-    by : {
-      en : {
-        increase : "increased by",
-        decrease : "decreased by",
-        constant : "remained unchanged",
+    by: {
+      en: {
+        increase: "increased by",
+        decrease: "decreased by",
+        constant: "remained unchanged",
       },
       fr: {
-        increase : {
-          ms : "a augmenté de ",
-          mp : "ont affiché une hausse de ",
-          fs : "a augmenté de ",
-          fp : "ont affiché une hausse de ",
+        increase: {
+          ms: "a augmenté de ",
+          mp: "ont affiché une hausse de ",
+          fs: "a augmenté de ",
+          fp: "ont affiché une hausse de ",
         },
-        decrease : {
-          ms : "a diminué de ",
-          mp : "ont diminué de ",
-          fs : "a diminué de ",
-          fp : "ont diminué de ",
+        decrease: {
+          ms: "a diminué de ",
+          mp: "ont diminué de ",
+          fs: "a diminué de ",
+          fp: "ont diminué de ",
         }, 
-        constant : {
-          ms : "est demeuré constant",
-          mp : "sont demeurés constants",
-          fs : "est demeurée constante",
-          fp : "sont demeurées constantes",
+        constant: {
+          ms: "est demeuré constant",
+          mp: "sont demeurés constants",
+          fs: "est demeurée constante",
+          fp: "sont demeurées constantes",
         },
       },
     },
-    ing : {
-      en : {
-        increase : "an increase of",
-        decrease : "a decrease of",
-        constant : "remaining unchanged",
+    ing: {
+      en: {
+        increase: "an increase of",
+        decrease: "a decrease of",
+        constant: "remaining unchanged",
       },
       fr: {
-        increase : {
-          ms : "une hausse de ",
-          mp : "ont affiché une hausse de ",
-          fs : "une hausse de ",
-          fp : "ont affiché une hausse de ",
+        increase: {
+          ms: "une hausse de ",
+          mp: "ont affiché une hausse de ",
+          fs: "une hausse de ",
+          fp: "ont affiché une hausse de ",
         },
-        decrease : {
-          ms : "une baisse de ",
-          mp : "ont affiché une baisse de ",
-          fs : "une baisse de ",
-          fp : "ont affiché une baisse de ",
+        decrease: {
+          ms: "une baisse de ",
+          mp: "ont affiché une baisse de ",
+          fs: "une baisse de ",
+          fp: "ont affiché une baisse de ",
         },
-        constant : {
-          ms : "est demeuré constant",
-          mp : "sont demeurés constants",
-          fs : "est demeurée constante",
-          fp : "sont demeurées constantes",
+        constant: {
+          ms: "est demeuré constant",
+          mp: "sont demeurés constants",
+          fs: "est demeurée constante",
+          fp: "sont demeurées constantes",
         },
       },
     },
   },
-  future : {
-    to : {
-      en : {
-        increase : "planned to increase to",
-        decrease : "planned to decrease to", 
-        constant : "planned to remain unchanged",
+  future: {
+    to: {
+      en: {
+        increase: "planned to increase to",
+        decrease: "planned to decrease to", 
+        constant: "planned to remain unchanged",
       },
       fr: {
-        increase : {
-          s : "va atteindre",
-          p : "vont atteindre",
+        increase: {
+          s: "va atteindre",
+          p: "vont atteindre",
         },
-        decrease : {
-          s : "va diminuer jusqu'à",
-          p : "vont diminuer jusqu'à",
+        decrease: {
+          s: "va diminuer jusqu'à",
+          p: "vont diminuer jusqu'à",
         }, 
-        constant : {
-          ms : "va demeurer constant",
-          fs : "va demeurer constante",
-          mp : "vont demeurer constants",
-          fp : "vont demeurer constantes",
+        constant: {
+          ms: "va demeurer constant",
+          fs: "va demeurer constante",
+          mp: "vont demeurer constants",
+          fp: "vont demeurer constantes",
         },
       },
     },
-    by : {
-      en : {
-        increase : "planned to increase by",
-        decrease : "planned to decrease by", 
-        constant : "planned to remain unchanged",
+    by: {
+      en: {
+        increase: "planned to increase by",
+        decrease: "planned to decrease by", 
+        constant: "planned to remain unchanged",
       },
       fr: {
-        increase : {
-          s : "va augmenter de",
-          p : "vont augmenter de",
+        increase: {
+          s: "va augmenter de",
+          p: "vont augmenter de",
         },
-        decrease : {
-          s : "va diminuer de",
-          p : "vont diminuer de",
+        decrease: {
+          s: "va diminuer de",
+          p: "vont diminuer de",
         }, 
-        constant : {
-          ms : "va demeurer constant",
-          fs : "va demeurer constante",
-          mp : "vont demeurer constants",
-          fp : "vont demeurer constantes",
+        constant: {
+          ms: "va demeurer constant",
+          fs: "va demeurer constante",
+          mp: "vont demeurer constants",
+          fp: "vont demeurer constantes",
         },
       },
     },
@@ -200,31 +200,31 @@ Handlebars.registerHelper("fr_will_change_to",function(val, genre, nombre,format
 
 // Two value change helpers (Ex. "increased/decreased from val1 to val2")
 const two_value_change_map = {
-  past : {
-    to : {
-      en : {
-        increase : ["increased from", "to"],
-        decrease : ["decreased from", "to"],
-        constant : "remained unchanged at",
+  past: {
+    to: {
+      en: {
+        increase: ["increased from", "to"],
+        decrease: ["decreased from", "to"],
+        constant: "remained unchanged at",
       },
       fr: {
-        increase : {
-          ms : ["a augmenté de", "à"],
-          mp : ["ont augmenté de", "à"],
-          fs : ["a augmenté de", "à"],
-          fp : ["ont augmenté de", "à"],
+        increase: {
+          ms: ["a augmenté de", "à"],
+          mp: ["ont augmenté de", "à"],
+          fs: ["a augmenté de", "à"],
+          fp: ["ont augmenté de", "à"],
         },
-        decrease : {
-          ms : ["a diminué de", "à"],
-          mp : ["ont diminué de", "à"],
-          fs : ["a diminuée de", "à"],
-          fp : ["ont diminué de", "à"],
+        decrease: {
+          ms: ["a diminué de", "à"],
+          mp: ["ont diminué de", "à"],
+          fs: ["a diminuée de", "à"],
+          fp: ["ont diminué de", "à"],
         }, 
-        constant : {
-          ms : "est demeuré constant",
-          mp : "sont demeurés constants",
-          fs : "est demeurée constante",
-          fp : "sont demeurées constantes",
+        constant: {
+          ms: "est demeuré constant",
+          mp: "sont demeurés constants",
+          fs: "est demeurée constante",
+          fp: "sont demeurées constantes",
         },
       },
     },

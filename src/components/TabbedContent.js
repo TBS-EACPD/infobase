@@ -9,7 +9,7 @@ export class TabbedContent extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      openTabKey : props.tabKeys[0],
+      openTabKey: props.tabKeys[0],
     };
   }
   render(){

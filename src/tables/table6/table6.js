@@ -13,9 +13,9 @@ const exp_cols = _.map(std_years, yr=>yr+"exp");
 export default {
   text,
   "id": "table6",
-  subject_type:"program",
+  subject_type: "program",
   source: [ "PA" , "DP", "DRR" ],
-  "tags" : [
+  "tags": [
     "GOV_FRAM",
     "PLANNED_EXP",
     "PA",
@@ -34,36 +34,36 @@ export default {
   },
 
 
-  "add_cols" : function(){
-    this.add_col({nick : "preamble","header": ""})
+  "add_cols": function(){
+    this.add_col({nick: "preamble","header": ""})
       .add_child([
         {
-          "type":"int",
-          "key" : true,
-          "hidden" : true,
-          "nick" : "dept",
-          "header":'',
+          "type": "int",
+          "key": true,
+          "hidden": true,
+          "nick": "dept",
+          "header": '',
         },{
-          "key" : true,
-          "hidden" : true,
-          "type":"str",
-          'nick' : 'activity_code',
+          "key": true,
+          "hidden": true,
+          "type": "str",
+          'nick': 'activity_code',
           "header": "",
         },
         {
-          "key" : true,
-          "hidden" : true,
-          "type":"str",
-          'nick' : 'program_id',
+          "key": true,
+          "hidden": true,
+          "type": "str",
+          'nick': 'program_id',
           "header": "",
         },
         {
-          "key" : true,
-          "type":"wide-str",
-          'nick' : 'prgm',
-          "header":{
-            "en":"Program",
-            "fr":"Programme",
+          "key": true,
+          "type": "wide-str",
+          'nick': 'prgm',
+          "header": {
+            "en": "Program",
+            "fr": "Programme",
           },
         },
       ]);
@@ -72,9 +72,9 @@ export default {
       this.add_col(header)
         .add_child([
           {
-            "type":"big_int",
+            "type": "big_int",
             "nick": `${header}auth`,
-            "header":{
+            "header": {
               "en": "Total Authorities available for use",
               "fr": "Total des autorisations disponibles pour emploi",
             },
@@ -84,10 +84,10 @@ export default {
             },
           },
           {
-            "type":"big_int",
+            "type": "big_int",
             "simple_default": ix === 4,
             "nick": `${header}exp`,
-            "header":{
+            "header": {
               "en": "Expenditures",
               "fr": "Dépenses",
             },
@@ -99,10 +99,10 @@ export default {
         ]);
     });
     this.add_col({
-      "type":"big_int",
+      "type": "big_int",
       "nick": "drr_last_year",
-      "hidden" : true,
-      "header":{
+      "hidden": true,
+      "header": {
         "en": "{{pa_last_year}} - Planned Spending",
         "fr": "{{pa_last_year}} - Dépenses prévues",
       },
@@ -115,9 +115,9 @@ export default {
       this.add_col(header)
         .add_child([
           {
-            "type":"big_int",
-            "nick":header,
-            "header":{
+            "type": "big_int",
+            "nick": header,
+            "header": {
               "en": "Planned Spending",
               "fr": "Dépenses prévues",
             },
@@ -127,17 +127,17 @@ export default {
             },
           },
           {
-            "type":"big_int",
+            "type": "big_int",
             "nick": `${header}_rev`,
             hidden: true,
           },
           {
-            "type":"big_int",
+            "type": "big_int",
             "nick": `${header}_spa`,
             hidden: true,
           },
           {
-            "type":"big_int",
+            "type": "big_int",
             "nick": `${header}_gross`,
             hidden: true,
           },
@@ -146,12 +146,12 @@ export default {
 
   },
 
-  "dimensions" : [
+  "dimensions": [
     {
-      title_key : "gov_outcome",
-      include_in_report_builder : true,
+      title_key: "gov_outcome",
+      include_in_report_builder: true,
 
-      filter_func : function(options){
+      filter_func: function(options){
         var func = function(row){
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           const goco = _.get(prog, "tags_by_scheme.GOCO[0].name");
@@ -161,10 +161,10 @@ export default {
       },
     },
     {
-      title_key :"gov_goco",
-      include_in_report_builder : true,
+      title_key: "gov_goco",
+      include_in_report_builder: true,
 
-      filter_func : function(options){
+      filter_func: function(options){
         var func = function(row){
           //FIXME: this is because I found a program without a goco, 
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
@@ -175,8 +175,8 @@ export default {
       },
     },
     {
-      title_key : 'goco_id',
-      filter_func : function(options){
+      title_key: 'goco_id',
+      filter_func: function(options){
         var func = function(row){
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           const goco = _.first(prog.tags_by_scheme.GOCO)
@@ -203,8 +203,8 @@ export default {
     this.programs.set(program_obj, [mapped_row]); //assumption: only one row per program... This is not consistent with e.g. table305. 
   },
 
-  "queries" : {
-    "sorted_programs" : function(){
+  "queries": {
+    "sorted_programs": function(){
       return _.sortBy(this.data, function(x){
         return -x[_.last(std_years)+"exp"];
       });
@@ -227,8 +227,8 @@ Statistics.create_and_register({
     }).length;
 
 
-    var last_year = q.get_top_x(["prgm","{{pa_last_year}}exp"],Infinity,{zip:true,sort_col:"{{pa_last_year}}exp"});
-    var all_years = q.get_top_x(["prgm"].concat(exp_cols),Infinity,{zip:true});
+    var last_year = q.get_top_x(["prgm","{{pa_last_year}}exp"],Infinity,{zip: true,sort_col: "{{pa_last_year}}exp"});
+    var all_years = q.get_top_x(["prgm"].concat(exp_cols),Infinity,{zip: true});
     var all_years_spend_areas = (
       _.chain( table.gov_goco(exp_cols,c.dept,true) )
         .map(function(vals, key){ return [key].concat(vals);})
@@ -254,7 +254,7 @@ Statistics.create_and_register({
     add("crso_num",crso_num);
 
     const CRSO_data = _.map(crsos, crso => ({
-      crso:crso,
+      crso: crso,
       data: d3.sum(_.map(table.q(crso).data, prg => prg["{{planning_year_1}}"])),
     })
     )
@@ -295,7 +295,7 @@ Statistics.create_and_register({
 Statistics.create_and_register({
   id: 'table6_program_info', 
   table_deps: [ 'table6', 'table4'],
-  info_deps : ['table4_dept_info','table6_dept_info'],
+  info_deps: ['table4_dept_info','table6_dept_info'],
   level: 'program',
   compute: (subject, tables, infos, add, c) => {
     const table = tables.table6;
@@ -345,7 +345,7 @@ Statistics.create_and_register({
   compute: (subject, tables, infos, add, c) => {
     const table = tables.table6;
     const q = table.q(subject);
-    var all_years = q.get_top_x(["prgm"].concat(exp_cols),Infinity,{zip:true});
+    var all_years = q.get_top_x(["prgm"].concat(exp_cols),Infinity,{zip: true});
 
     var last_year_prg_num = _.filter(q.data,function(d){ 
       const amt = d["{{pa_last_year}}exp"];
@@ -353,7 +353,7 @@ Statistics.create_and_register({
     }).length;
 
     var last_year = _.map(
-      q.get_top_x(["dept","activity_code","{{pa_last_year}}exp"],Infinity,{zip:true,sort_col:"{{pa_last_year}}exp"}),
+      q.get_top_x(["dept","activity_code","{{pa_last_year}}exp"],Infinity,{zip: true,sort_col: "{{pa_last_year}}exp"}),
       ([ org_id, ac, val]) => [ `${Dept.lookup(org_id).sexy_name} - ${Program.get_from_activity_code(org_id, ac).name}`, val]
     )
     stats.one_year_top3(add, "prg", last_year);
@@ -394,7 +394,7 @@ Statistics.create_and_register({
       _.map(planning_years, yr => Number(yr.match(/\d+/)))
     ) +"}}"
 
-    const sorted_first_yr = q.get_top_x(["prgm",min_planning_yr],Infinity,{zip:true,sort_col:min_planning_yr});
+    const sorted_first_yr = q.get_top_x(["prgm",min_planning_yr],Infinity,{zip: true,sort_col: min_planning_yr});
 
     stats.one_year_top3(add, "exp_prg", sorted_first_yr);
 
@@ -418,7 +418,7 @@ Statistics.create_and_register({
         value: d["{{planning_year_1}}"],
         label: d.prgm,
         id: d.activity_code,
-        link:Program.lookup(Program.unique_id(d.dept, d.activity_code)).link_to_infographic,
+        link: Program.lookup(Program.unique_id(d.dept, d.activity_code)).link_to_infographic,
       })
     )
     add("program_list", data);

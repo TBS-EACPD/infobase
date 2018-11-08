@@ -63,7 +63,7 @@ const sub_to_node = (sub,doc) => ({
     },
     description: sub.description,
     notes: sub.resource_notes(doc),
-    subject : sub,
+    subject: sub,
     resource_table_props: doc==="drr16" && {
       actual_spend: sub.spend_pa_last_year,
       planned_spend: sub.planned_spend_pa_last_year,
@@ -164,7 +164,7 @@ const sub_program_resource_scheme = {
     return augmented_state => _.clone(augmented_state.sub_program_resource);
   },
   dispatch_to_props: dispatch => ({
-    col_click : col_key => dispatch({type: 'column_header_click', payload: col_key }),
+    col_click: col_key => dispatch({type: 'column_header_click', payload: col_key }),
     set_doc: doc => dispatch({type: 'set_doc', payload: doc }),
   }),
   reducer: (state=initial_sub_program_state, action) => {
@@ -174,7 +174,7 @@ const sub_program_resource_scheme = {
       const { is_descending, sort_col } = state;
       const clicked_col = payload;
 
-      const mods = clicked_col === sort_col ? { is_descending : !is_descending } : { is_descending: true, sort_col : clicked_col };
+      const mods = clicked_col === sort_col ? { is_descending: !is_descending } : { is_descending: true, sort_col: clicked_col };
 
       return {...state, ...mods};
     } else if(type==="set_doc"){
@@ -204,7 +204,7 @@ const sub_program_resource_scheme = {
 class SubProgramResourceTree extends React.Component {
   constructor(){
     super()
-    this.state = { _query : "" };
+    this.state = { _query: "" };
   }
   render(){
     const {
@@ -318,7 +318,7 @@ const SubProgramResourceTreeContainer = ({
 
   const initialState = {
     root: ({...initial_root_state, scheme_key}),
-    [scheme_key] : ({...initial_sub_program_state, ...initial_scheme_state_slice}),
+    [scheme_key]: ({...initial_sub_program_state, ...initial_scheme_state_slice}),
   };
 
   const Container = connect(mapStateToProps, mapDispatchToProps)(SubProgramResourceTree)
@@ -344,8 +344,8 @@ new PanelGraph({
   level: 'program',
   requires_results: true,
   requires_result_counts: true,
-  footnotes:false,
-  depends_on : ['table12'],
+  footnotes: false,
+  depends_on: ['table12'],
   source: false,
   calculate(subject){
     
@@ -429,14 +429,14 @@ new PanelGraph({
                 {
                   subject,
                   num_subs: drr_subs.length,
-                  has_sub_subs : _.nonEmpty(drr_sub_subs),
+                  has_sub_subs: _.nonEmpty(drr_sub_subs),
                   num_sub_subs: drr_sub_subs.length,
                   ftes: drr_ftes,
                 } :
                 {
                   subject,
                   num_subs: dp_subs.length,
-                  has_sub_subs : _.nonEmpty(dp_sub_subs),
+                  has_sub_subs: _.nonEmpty(dp_sub_subs),
                   num_sub_subs: dp_sub_subs.length,
                   ftes: dp_ftes,
                 }

@@ -67,13 +67,13 @@ function render({calculations, footnotes, sources}) {
         {...{
           series,
           ticks,
-          add_xaxis : true,
-          add_yaxis : false,
-          add_labels : true,                                  
-          x_axis_line : true,                                
-          colors : infobase_colors(),
-          formater : formats.compact1_raw,
-          margin : {top: 20, right:20, left: 60, bottom: 80},
+          add_xaxis: true,
+          add_yaxis: false,
+          add_labels: true,                                  
+          x_axis_line: true,                                
+          colors: infobase_colors(),
+          formater: formats.compact1_raw,
+          margin: {top: 20, right: 20, left: 60, bottom: 80},
         }}
       />
     );
@@ -100,18 +100,18 @@ const key = "spend_rev_split";
 
 new PanelGraph({
   key,
-  depends_on : ["table4","table5"],
-  footnotes : ["SOBJ_REV"],
-  level : "dept",
-  info_deps : ["table5_dept_info","table4_dept_info"],
+  depends_on: ["table4","table5"],
+  footnotes: ["SOBJ_REV"],
+  level: "dept",
+  info_deps: ["table5_dept_info","table4_dept_info"],
 
   calculate(subject,info,options){
     if ( info.dept_pa_last_year_rev === 0 ){
       return false;
     }
     return { neg_exp: info.dept_pa_last_year_rev,
-      gross_exp : info.dept_pa_last_year_gross_exp,
-      net_exp : info.dept_exp_pa_last_year,
+      gross_exp: info.dept_pa_last_year_gross_exp,
+      net_exp: info.dept_exp_pa_last_year,
     };
   },
 
@@ -129,23 +129,23 @@ Statistics.create_and_register({
     const exp_rev_results = rows_to_rev_split(prog_rows)
 
     add({
-      key : "exp_rev_gross", 
-      value : exp_rev_results.gross_exp,
+      key: "exp_rev_gross", 
+      value: exp_rev_results.gross_exp,
     });
 
     add({
-      key : "exp_rev_neg", 
-      value : exp_rev_results.neg_exp,
+      key: "exp_rev_neg", 
+      value: exp_rev_results.neg_exp,
     });
 
     add({
-      key : "exp_rev_neg_minus", 
-      value : -exp_rev_results.neg_exp,
+      key: "exp_rev_neg_minus", 
+      value: -exp_rev_results.neg_exp,
     });
 
     add({
-      key : "exp_rev_net", 
-      value : exp_rev_results.net_exp,
+      key: "exp_rev_net", 
+      value: exp_rev_results.net_exp,
     });
 
   },
@@ -163,23 +163,23 @@ Statistics.create_and_register({
     const exp_rev_results = rows_to_rev_split(prog_rows)
 
     add({
-      key : "exp_rev_gross", 
-      value : exp_rev_results.gross_exp,
+      key: "exp_rev_gross", 
+      value: exp_rev_results.gross_exp,
     });
 
     add({
-      key : "exp_rev_neg", 
-      value : exp_rev_results.neg_exp,
+      key: "exp_rev_neg", 
+      value: exp_rev_results.neg_exp,
     });
 
     add({
-      key : "exp_rev_neg_minus", 
-      value : -exp_rev_results.neg_exp,
+      key: "exp_rev_neg_minus", 
+      value: -exp_rev_results.neg_exp,
     });
 
     add({
-      key : "exp_rev_net", 
-      value : exp_rev_results.net_exp,
+      key: "exp_rev_net", 
+      value: exp_rev_results.net_exp,
     });
 
   },
@@ -188,9 +188,9 @@ Statistics.create_and_register({
 
 new PanelGraph({
   key,
-  depends_on : ["table305"],
-  info_deps : ["program_revenue"],
-  level : "program",
+  depends_on: ["table305"],
+  info_deps: ["program_revenue"],
+  level: "program",
   calculate(subject,info,options){ 
     const {table305} = this.tables;
     const prog_rows = table305.programs.get(subject);
@@ -206,9 +206,9 @@ new PanelGraph({
 
 new PanelGraph({
   key,
-  depends_on : ["table305"],
-  level : "tag",
-  info_deps : ["tag_revenue"],
+  depends_on: ["table305"],
+  level: "tag",
+  info_deps: ["tag_revenue"],
   calculate(subject,info,options){
     const {table305} = this.tables;
     const prog_rows = table305.q(subject).data;

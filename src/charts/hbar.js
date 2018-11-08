@@ -38,11 +38,11 @@ export class HBar {
     this.html.append("div")
       .attr("class","total")
       .styles({
-        "top" : "0px",
-        "left" : "0px",
-        "margin-left" : margin.left + "px",
-        "position" : "absolute",
-        "font-weight" : "500"});
+        "top": "0px",
+        "left": "0px",
+        "margin-left": margin.left + "px",
+        "position": "absolute",
+        "font-weight": "500"});
 
     this.pos_color = "#1f77b4" ;
     this.neg_color = '#A52A2A';
@@ -99,11 +99,11 @@ export class HBar {
         this.html.append("div")
           .attr("class","total")
           .styles({
-            "top" : "0px",
-            "left" : "0px",
-            "margin-left" : this.margins.left + "px",
-            "position" : "absolute",
-            "font-weight" : "500"});
+            "top": "0px",
+            "left": "0px",
+            "margin-left": this.margins.left + "px",
+            "position": "absolute",
+            "font-weight": "500"});
       }
     
       this.html.select("div.total").html(total);
@@ -142,24 +142,24 @@ export class HBar {
     new_g
       .append("rect")
       .attrs({ "width": this.width +"px",
-        "height" : y.bandwidth()+"px",
+        "height": y.bandwidth()+"px",
         "y": "0px",
       })
       .styles({
-        "fill" : "#e6e6e6",
+        "fill": "#e6e6e6",
       })
       
 
     new_g
       .append("rect")
       .attrs({ "width": '0px',
-        "height" : y.bandwidth()-8+"px",
+        "height": y.bandwidth()-8+"px",
         "y": "4px",
-        'class' : "fill",
+        'class': "fill",
       })
       .styles({
-        "fill" : function(d){return d.value > 0 ? pos_color : neg_color;},
-        "fill-opacity" : 0.5,
+        "fill": function(d){return d.value > 0 ? pos_color : neg_color;},
+        "fill-opacity": 0.5,
       })
 
     text.exit().remove();
@@ -170,11 +170,11 @@ export class HBar {
       .merge(text)
       .attr("class","hbar_chart_labels")
       .styles({
-        "text-align" : text_align,
-        "position" : "absolute",
-        "width" : this.width+"px",
-        "left" : margins.left+"px",
-        "font-size" : "13px",
+        "text-align": text_align,
+        "position": "absolute",
+        "width": this.width+"px",
+        "left": margins.left+"px",
+        "font-size": "13px",
         "padding": "0 10px", 
       })
       .each(function(){
@@ -201,7 +201,7 @@ export class HBar {
         .transition()
         .duration(750)
         .styles({
-          "top" : margins.top +4+ y(d.name) + "px",
+          "top": margins.top +4+ y(d.name) + "px",
         });
       if (href) {
         single.selectAll("a")
@@ -232,7 +232,7 @@ export class HBar {
           "width": Math.abs(x_scale(d.value) - x_scale(0)),
         })
         .styles({
-          "fill" : d.value > 0 ? pos_color : neg_color,
+          "fill": d.value > 0 ? pos_color : neg_color,
         });
       
       single

@@ -1,6 +1,6 @@
 // Used by copy_static_asset, node only supports commonjs syntax
 module.exports = {  
-  "table1":{ 
+  "table1": { 
     url: "qfr_vs.csv",
   },
   "table2": {
@@ -9,31 +9,31 @@ module.exports = {
   "table4": {
     url: "pa_vote_stat.csv",
   },
-  "table5":{
+  "table5": {
     url: "org_sobjs.csv",
   },
-  "table6":{
+  "table6": {
     url: "program_spending.csv",
   },
-  "table7":{
+  "table7": {
     url: "transfer_payments.csv",
   },
   "table8": {
     url: "estimates_votestat.csv",
   },
-  "table9":{
-    url:"employee_type.csv",
+  "table9": {
+    url: "employee_type.csv",
   },
-  "table10":{ 
-    url:"employee_region.csv",
+  "table10": { 
+    url: "employee_region.csv",
   },
-  "table11":{ 
-    url:"employee_age_group.csv",
+  "table11": { 
+    url: "employee_age_group.csv",
   },
-  "table12":{ 
+  "table12": { 
     url: "program_ftes.csv",
   },
-  "table112":{
+  "table112": {
     url: "employee_ex_lvl.csv",
   },
   "table300": { 
@@ -46,9 +46,9 @@ module.exports = {
     url: "employee_gender.csv",
   },
   "table303": {
-    url:"employee_fol.csv",
+    url: "employee_fol.csv",
   },
-  "table304" :{
+  "table304": {
     url: "employee_avg_age.csv",
   },
 };

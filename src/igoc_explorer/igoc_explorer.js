@@ -54,7 +54,7 @@ const scheme = {
     const { type, payload } = action;
     switch(type){
       case 'toggle_orgs_without_data':
-        return {...state, should_show_orgs_without_data : !state.should_show_orgs_without_data };
+        return {...state, should_show_orgs_without_data: !state.should_show_orgs_without_data };
       case 'set_grouping':
         return {...state, grouping: payload};
       default: 
@@ -160,7 +160,7 @@ const IgocExplorer = ({match}) => {
         <h1> <TM k="igoc" /> </h1>
       </div>
       <div className="medium_panel_text">
-        <div style={{marginBottom:"1.5em"}}>
+        <div style={{marginBottom: "1.5em"}}>
           <TM k="about_inventory"/>
         </div>
         <ExplorerContainer grouping={grouping} />

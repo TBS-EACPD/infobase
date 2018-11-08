@@ -82,7 +82,7 @@ const StdPanel = ({ title, sources, footnotes, children }) => {
     return (
       <div 
         className={classNames(`col-xs-12 col-md-${size}`, isText && "medium_panel_text" )}
-        style={ isGraph ? {position:"relative"} : null }
+        style={ isGraph ? {position: "relative"} : null }
         key={ix}
       >
         {props.children}

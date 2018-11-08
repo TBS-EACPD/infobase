@@ -16,11 +16,11 @@ const { TM } = create_text_maker_component(simplographic_text);
 
 new PanelGraph({
   level: 'gov',
-  key : "simplographic",
+  key: "simplographic",
   footnotes: false,
   requires_result_counts: true,
 
-  depends_on : [ 
+  depends_on: [ 
     'table4', 
     'table10', 
   ],
@@ -39,7 +39,7 @@ new PanelGraph({
       .filter('inst_form.parent_form.parent_form')
       .filter(org => org.inst_form.parent_form.parent_form.id === 'fed_int_gp')
       .reject('end_yr')
-      .reject({unique_id:"999"})
+      .reject({unique_id: "999"})
       .value()
 
     const ministries = _.chain(federal_institutions)  
@@ -68,7 +68,7 @@ new PanelGraph({
       .map(row => ({
         subject: Dept.lookup(row.dept),
         desc: row.desc,
-        amt : row[col],
+        amt: row[col],
       }))
       .value();
 
@@ -116,12 +116,12 @@ new PanelGraph({
   render({calculations}){
     const { graph_args: big_info } = calculations;
     const Row = props => {
-      const this_row_props = {className : "grid-row canada-intro-grid", style:{borderTop : 0,padding: "15px 0px",marginLeft:"-50px",marginRight:"-15px"}}
+      const this_row_props = {className: "grid-row canada-intro-grid", style: {borderTop: 0,padding: "15px 0px",marginLeft: "-50px",marginRight: "-15px"}}
       if (props.top_border){
         this_row_props.style.borderTop="#";
       }
       return <div {...this_row_props}>
-        <div className='lg-grid-panel20' style={{flexDirection:'column', justifyContent: "center"}}>
+        <div className='lg-grid-panel20' style={{flexDirection: 'column', justifyContent: "center"}}>
           <div className="inner-grid">
             <img 
               role="presentation"
@@ -130,7 +130,7 @@ new PanelGraph({
               width="150" height="150" 
               style={{
                 alignSelf: "center",
-                maxWidth:"100%", 
+                maxWidth: "100%", 
               }}
             />
           </div>

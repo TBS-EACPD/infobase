@@ -427,7 +427,7 @@ const ResultCounts = {
       throw "result counts have not yet been loaded!"
     }
     return _.chain(this.data)
-      .find({ id : dept_code })
+      .find({ id: dept_code })
       .value()
   },
   get_gov_counts(){
@@ -460,10 +460,10 @@ const ResultCounts = {
 
   },
   get_all_dept_counts(){
-    return _.filter(this.data, {level:'dept'}); 
+    return _.filter(this.data, {level: 'dept'}); 
   },
   get_all_tag_counts(){
-    return _.filter(this.data, {level:'tag'}); 
+    return _.filter(this.data, {level: 'tag'}); 
   },
 }
 

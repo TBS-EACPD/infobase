@@ -79,7 +79,7 @@ export default {
         "en": trivial_text_maker("five_year_percent_description"),
         "fr": trivial_text_maker("five_year_percent_description"),
       },
-      "formula" : people_five_year_percentage_formula("ex_lvl",people_years),
+      "formula": people_five_year_percentage_formula("ex_lvl",people_years),
     });
   },
 
@@ -139,7 +139,7 @@ Statistics.create_and_register({
     const q = table.q(subject);
     c.dept = subject;
 
-    const all_years = q.get_top_x(["ex_lvl", ...people_years], Infinity,{zip:true});
+    const all_years = q.get_top_x(["ex_lvl", ...people_years], Infinity,{zip: true});
     stats.year_over_year_multi_stats_active_years(add,"head_count_ex_level_years",all_years,false,people_years);
 
     const num_active_years = _.chain( all_years )

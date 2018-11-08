@@ -24,7 +24,7 @@ import { TwoLevelSelect } from './TwoLevelSelect.js'
 
 import { LabeledBox } from './LabeledBox.js';
 
-const separator_style = {padding: "20px", maxWidth: "800px", border:"2px dashed black"};
+const separator_style = {padding: "20px", maxWidth: "800px", border: "2px dashed black"};
 storiesOf('flat design modifications', module)
   .add("button", ()=> 
     <div>
@@ -49,8 +49,8 @@ storiesOf('flat design modifications', module)
   )
   .add("panel", ()=>
     <div style={separator_style}>
-      <div style={{overflow:'hidden'}}>
-        <div className="panel panel-info panel-flat fcol-sm-12 fcol-md-12 mrgn-bttm-md" style={{padding:0}}>
+      <div style={{overflow: 'hidden'}}>
+        <div className="panel panel-info panel-flat fcol-sm-12 fcol-md-12 mrgn-bttm-md" style={{padding: 0}}>
           <div className="panel-heading">
             <h3 className="panel-title">
               Panel title
@@ -187,8 +187,8 @@ storiesOf("Tabbed Content",module)
       <TabbedContent
         tabKeys={["tab1","tab2"]}
         tabLabels={{
-          tab1 : "tab1",
-          tab2 : "tab2",
+          tab1: "tab1",
+          tab2: "tab2",
         }}
         tabPaneContents={{
           tab1: <div>
@@ -240,7 +240,7 @@ storiesOf("Accordions",module)
       <AutoAccordion 
         title={"Accordion Title"}
       >
-        <div style={{paddingLeft: '10px', paddingRight:'10px'}}>
+        <div style={{paddingLeft: '10px', paddingRight: '10px'}}>
           Accordion content
         </div>
       </AutoAccordion>
@@ -340,7 +340,7 @@ storiesOf("Select menus",module)
           {id: 'simple', display: 'Condensed Scheme : Min > CRSO > results'},
           {id: 'granular', display: 'Lowest Level (as per DP/DRR)'},
         ]}
-        style={{fontSize:'1em'}}
+        style={{fontSize: '1em'}}
         className="form-control"
       />
     </div>

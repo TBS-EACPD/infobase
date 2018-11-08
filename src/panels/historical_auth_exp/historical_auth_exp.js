@@ -45,12 +45,12 @@ const calculate = function( subject,info,options ) {
 
   if (subject.is("gov")){
     const q = table4.q();
-    auth = q.sum(auth_cols,{as_object:false});
-    exp = q.sum(exp_cols,{as_object:false});
+    auth = q.sum(auth_cols,{as_object: false});
+    exp = q.sum(exp_cols,{as_object: false});
   } else if ( subject.is("dept")) {
     const q = table4.q(subject);
-    auth = q.sum(auth_cols,{as_object:false});
-    exp = q.sum(exp_cols,{as_object:false});
+    auth = q.sum(auth_cols,{as_object: false});
+    exp = q.sum(exp_cols,{as_object: false});
   } else if ( subject.is("program") ) {
     const row = _.first(table6.programs.get(subject));
     auth = _.map(auth_cols, col => row[col] );
@@ -64,8 +64,8 @@ const calculate = function( subject,info,options ) {
       return false; 
     }
     const q = table6.q(subject);
-    auth = q.sum(auth_cols,{as_object:false});
-    exp = q.sum(exp_cols,{as_object:false});
+    auth = q.sum(auth_cols,{as_object: false});
+    exp = q.sum(exp_cols,{as_object: false});
   }
 
   if (_.every(auth, (x,i)=> auth[i]-exp[i] >= 0 ) &&
@@ -140,11 +140,11 @@ const render = function({calculations, footnotes, sources}) {
             series_labels,
             ticks,
             stacked, 
-            formater : formats.compact_raw,
-            height : 400,
-            series : {
-              [series_labels[0]] : stacked ? exp : auth,
-              [series_labels[1]] : stacked ? auth : exp,
+            formater: formats.compact_raw,
+            height: 400,
+            series: {
+              [series_labels[0]]: stacked ? exp : auth,
+              [series_labels[1]]: stacked ? auth : exp,
             },
           }}
         />
@@ -171,8 +171,8 @@ const render = function({calculations, footnotes, sources}) {
 
 new PanelGraph({
   level: "gov",
-  key : "historical_auth_exp",
-  info_deps : ["table4_gov_info"],
+  key: "historical_auth_exp",
+  info_deps: ["table4_gov_info"],
   depends_on: ["table4"],
   calculate,
   render,
@@ -180,27 +180,27 @@ new PanelGraph({
 
 new PanelGraph({
   level: "dept",
-  key : "historical_auth_exp",
+  key: "historical_auth_exp",
   depends_on: ["table4"],
-  info_deps : ["table4_dept_info"],
+  info_deps: ["table4_dept_info"],
   calculate,
   render,
 });
 
 new PanelGraph({
   level: "program",
-  key : "historical_auth_exp",
+  key: "historical_auth_exp",
   depends_on: ["table6"],
-  info_deps : ["table6_program_info"],
+  info_deps: ["table6_program_info"],
   calculate,
   render,
 });
 
 new PanelGraph({
   level: "tag",
-  key : "historical_auth_exp",
+  key: "historical_auth_exp",
   depends_on: ["table6"],
-  info_deps : ["table6_tag_info"],
+  info_deps: ["table6_tag_info"],
   calculate,
   render,
 });

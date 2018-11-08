@@ -13,7 +13,7 @@ function create_rooted_resource_hierarchy({doc,root_subject}){
     root: true,
     id: 'root',
     data: {
-      subject : root_subject,
+      subject: root_subject,
     },
   };
   
@@ -134,7 +134,7 @@ const partial_scheme = {
     return augmented_state => _.clone(augmented_state.rooted_resources);
   },
   dispatch_to_props: dispatch => ({ 
-    col_click : col_key => dispatch({type: 'column_header_click', payload: col_key }),
+    col_click: col_key => dispatch({type: 'column_header_click', payload: col_key }),
     set_doc: doc => dispatch({type: 'set_doc', payload: doc }),
   }),
   reducer: (state=get_initial_resource_state({}), action) => {
@@ -143,7 +143,7 @@ const partial_scheme = {
       const { is_descending, sort_col } = state;
       const clicked_col = payload;
 
-      const mods = clicked_col === sort_col ? { is_descending : !is_descending } : { is_descending: true, sort_col : clicked_col };
+      const mods = clicked_col === sort_col ? { is_descending: !is_descending } : { is_descending: true, sort_col: clicked_col };
 
       return {...state, ...mods};
     } else if(type==="set_doc"){

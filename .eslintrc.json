@@ -48,6 +48,7 @@
           "warn",
           { "exceptions": { "Property": false } }
       ],
+      "key-spacing": [ "warn" ],
       "no-extra-semi": [ "off" ],
       "react/prop-types": [ "off" ],
       "react/no-string-refs": [ "off" ],

@@ -14,7 +14,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 new PanelGraph({
   level: "tag",
-  key : "tag_top_3_depts",
+  key: "tag_top_3_depts",
   depends_on: ['table6'],
   info_deps: ["table6_tag_info"],
 
@@ -38,7 +38,7 @@ new PanelGraph({
       .value();
 
     const top_3_last_year_total_exps = _.chain(top_3_last_year_tag_exps)
-      .map(d => ({dept:d.dept, exp: table6.q(d.dept).sum(col) }))
+      .map(d => ({dept: d.dept, exp: table6.q(d.dept).sum(col) }))
       .value();
 
     const top_3_depts = _.chain(top_3_last_year_tag_exps)
@@ -78,7 +78,7 @@ new PanelGraph({
         </Col>
         <Col isGraph size={7}>
           <div>
-            <ul style={{padding:0}}>
+            <ul style={{padding: 0}}>
               {_.map(top_3_depts, ({dept, tag_spent, total_spent}) => 
                 <li
                   key={dept.id}

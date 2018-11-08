@@ -11,7 +11,7 @@ export default {
   text,
   id: "table300",
   subject_type: "program",
-  tags : [
+  tags: [
     "PROG",
     "PA",
     "EXP",
@@ -27,45 +27,45 @@ export default {
     en: "Program Expenditures by Authority Type {{pa_last_year}} ($000)",
     fr: "Dépenses de programme par type d'autorisation {{last_year}} (en milliers de dollars)",
   },
-  add_cols : function(){
+  add_cols: function(){
     this.add_col( {
-      "type":"int",
-      "key" : true,
-      "hidden" : true,
-      "nick" : "dept",
-      "header":'',
+      "type": "int",
+      "key": true,
+      "hidden": true,
+      "nick": "dept",
+      "header": '',
     });
     this.add_col( {
-      "key" : true,
-      "type":"int",
-      "hidden" : true,
-      "nick" : 'activity_code',
-      "header":"",
+      "key": true,
+      "type": "int",
+      "hidden": true,
+      "nick": 'activity_code',
+      "header": "",
     });
     this.add_col( {
-      "key" : true,
-      "type":"str",
-      "nick" : 'prgm',
-      "header":{
-        "en":"Program",
-        "fr":"Program",
+      "key": true,
+      "type": "str",
+      "nick": 'prgm',
+      "header": {
+        "en": "Program",
+        "fr": "Program",
       },
     });
     this.add_col( {
       "key": true,
-      "type":"str",
-      "nick" : 'vote_stat',
-      "header":{
-        "en":"Voted / Stat",
-        "fr":"Crédit / législatif",
+      "type": "str",
+      "nick": 'vote_stat',
+      "header": {
+        "en": "Voted / Stat",
+        "fr": "Crédit / législatif",
       },
     });
     const years = _.takeRight(std_years,2);
     years.forEach(yr=> {
       this.add_col({
-        "type":"big_int",
+        "type": "big_int",
         "simple_default": true,
-        "nick":yr,
+        "nick": yr,
         "header": yr,
         "description": {
           "en": "Corresponds to the funds spent against authorities available for the fiscal year " + yr,
@@ -92,17 +92,17 @@ export default {
     }
     this.programs.get(program_obj).push(mapped_row); 
   },
-  "dimensions" : [
+  "dimensions": [
     {
-      title_key :"voted_stat",
-      include_in_report_builder : true,
-      filter_func : () => _.property('vote_stat'),
+      title_key: "voted_stat",
+      include_in_report_builder: true,
+      filter_func: () => _.property('vote_stat'),
     },
     {
-      title_key : "gov_outcome",
-      include_in_report_builder : true,
+      title_key: "gov_outcome",
+      include_in_report_builder: true,
 
-      filter_func : function(options){
+      filter_func: function(options){
         var func = function(row){
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
           const goco = prog.tags_by_scheme.GOCO && prog.tags_by_scheme.GOCO[0];
@@ -112,10 +112,10 @@ export default {
       },
     },
     {
-      title_key :"gov_goco",
-      include_in_report_builder : true,
+      title_key: "gov_goco",
+      include_in_report_builder: true,
 
-      filter_func : function(options){
+      filter_func: function(options){
         var func = function(row){
           //FIXME: this is because I found a program without a goco, 
           const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
@@ -140,8 +140,8 @@ Statistics.create_and_register({
     const last_year_col = _.last(std_years);
     const rows = table300.programs.get(subject);
     const { 
-      [trivial_text_maker("voted")] : voted_rows,
-      [trivial_text_maker("stat")] : stat_rows,
+      [trivial_text_maker("voted")]: voted_rows,
+      [trivial_text_maker("stat")]: stat_rows,
     } = _.groupBy(rows, type_col);
    
     const voted_amount = _.first(voted_rows) && _.first(voted_rows)[ last_year_col ] || 0;
@@ -172,8 +172,8 @@ Statistics.create_and_register({
     const rows = table300.q(subject).data;
 
     const { 
-      [trivial_text_maker("voted")] : voted_rows,
-      [trivial_text_maker("stat")] : stat_rows,
+      [trivial_text_maker("voted")]: voted_rows,
+      [trivial_text_maker("stat")]: stat_rows,
     } = _.groupBy(rows, type_col);
    
     const voted_amount = last_year_col_obj.formula(voted_rows);

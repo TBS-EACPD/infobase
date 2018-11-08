@@ -71,7 +71,7 @@ class StackedHbarChart extends React.Component {
     };
 
     return <Fragment>
-      <div ref="graph_area" style={{position:'relative'}} />
+      <div ref="graph_area" style={{position: 'relative'}} />
       { (this.props.paginate && number_of_pages > 1) &&
         <div className="centerer">
           <button
@@ -173,7 +173,7 @@ class StackedHbarChart extends React.Component {
 
 class ProgressDonut extends React.Component {
   render(){
-    return <div ref="graph_area" style={{position:'relative'}} />
+    return <div ref="graph_area" style={{position: 'relative'}} />
   }
   _render(){
     this.graph_instance.render(_.clone(this.props));
@@ -195,9 +195,9 @@ class D3GraphWithLegend extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      legend_col_full_size : props.options.legend_col_full_size, 
-      graph_col_full_size : props.options.graph_col_full_size,
-      graph_col_class : props.options.graph_col_class,
+      legend_col_full_size: props.options.legend_col_full_size, 
+      graph_col_full_size: props.options.graph_col_full_size,
+      graph_col_class: props.options.graph_col_class,
     };
   }
   render(){
@@ -208,11 +208,11 @@ class D3GraphWithLegend extends React.Component {
       >
         <div 
           className={"x1 fcol-xs-12 fcol-md-"+this.state.legend_col_full_size}
-          style={{position:"relative"}}
+          style={{position: "relative"}}
         />
         <div 
           className={"x2 fcol-xs-12 fcol-md-"+this.state.graph_col_full_size+" "+this.state.graph_col_class}
-          style={{position:"relative"}}
+          style={{position: "relative"}}
           tabIndex="-1"
         />
       </div>
@@ -222,7 +222,7 @@ class D3GraphWithLegend extends React.Component {
     if(!window.is_a11y_mode){
       this.graph_instance.render(
         _.chain(this.props.options)
-          .extend({graph_area : d3.select(this.refs.graph_area)})
+          .extend({graph_area: d3.select(this.refs.graph_area)})
           .clone()
           .value()
       );
@@ -233,7 +233,7 @@ class D3GraphWithLegend extends React.Component {
     this.graph_instance = create_graph_with_legend.call(
       d3.select(this.refs.graph_area).node(),
       _.chain(this.props.options)
-        .extend({graph_area : d3.select(this.refs.graph_area)})
+        .extend({graph_area: d3.select(this.refs.graph_area)})
         .clone()
         .value()
     );
@@ -247,7 +247,7 @@ class D3GraphWithLegend extends React.Component {
 
 class Bar extends React.Component {
   render(){
-    return <div ref="graph_area" style={{position:'relative'}} />
+    return <div ref="graph_area" style={{position: 'relative'}} />
   }
   _render(){
     this.graph_instance.render(_.clone(this.props));
@@ -267,7 +267,7 @@ class Bar extends React.Component {
 
 class SafePie extends React.Component {
   render(){
-    return <div ref="graph_area" style={{position:'relative'}} />
+    return <div ref="graph_area" style={{position: 'relative'}} />
   }
   _render(){
     this.graph_instance.render(_.clone(this.props));
@@ -287,7 +287,7 @@ class SafePie extends React.Component {
 
 class Line extends React.Component {
   render(){
-    return <div ref="graph_area" style={{position:'relative'}} />
+    return <div ref="graph_area" style={{position: 'relative'}} />
   }
   _render(){
     this.graph_instance.render(_.clone(this.props));
@@ -364,7 +364,7 @@ const TabularPercentLegend = ({
         <span>
           {item.label}
         </span>
-        <span style={{marginLeft:'auto', textAlign: 'right', whiteSpace: "nowrap"}}>
+        <span style={{marginLeft: 'auto', textAlign: 'right', whiteSpace: "nowrap"}}>
           { get_right_content(item) } 
         </span>
       </li>
@@ -396,7 +396,7 @@ class A11YTable extends React.PureComponent {
 
 class CirclePack extends React.Component {
   render(){
-    return <div ref="graph_area" style={{position:'relative'}} />
+    return <div ref="graph_area" style={{position: 'relative'}} />
   }
   _render(){
     this.graph_instance.render(_.clone(this.props));
@@ -416,7 +416,7 @@ class CirclePack extends React.Component {
 
 class CirclePieChart extends React.Component {
   render(){
-    return <div ref="graph_area" style={{position:'relative'}} />
+    return <div ref="graph_area" style={{position: 'relative'}} />
   }
   _render(){
     this.graph_instance.render(_.clone(this.props));
@@ -436,7 +436,7 @@ class CirclePieChart extends React.Component {
 
 class DualAxisBarChart extends React.Component {
   render(){
-    return <div ref="graph_area" style={{position:'relative'}} />
+    return <div ref="graph_area" style={{position: 'relative'}} />
   }
   _render(){
     this.graph_instance.render(_.clone(this.props));

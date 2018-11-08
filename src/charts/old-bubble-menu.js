@@ -53,23 +53,23 @@ export const bubble_menu = function(container,options){
     .append("circle")
     .on("mouseenter", this.dispatch.dataMouseEnter)
     .attr({
-      "class" : "major",
-      cx : 0,
-      cy : 0,
-      r : 0,
+      "class": "major",
+      cx: 0,
+      cy: 0,
+      r: 0,
     })
     .style({
-      fill : (function(d,i) { return this.colors(i);}).bind(this),
+      fill: (function(d,i) { return this.colors(i);}).bind(this),
     });
 
   major_labels
     .enter()
     .append("div")
-    .attr({ "class" : "event-target transparent_div" })
+    .attr({ "class": "event-target transparent_div" })
   //.on("mouseenter", dispatch.dataMouseEnter)
     .on("click",this.dispatch.dataMouseEnter)
     .append("a")
-    .attr({ "class" : "bubble-label","href": "#" })
+    .attr({ "class": "bubble-label","href": "#" })
     .on("focus", this.dispatch.dataMouseEnter);
 
   this.dispatch.on("dataMouseEnter",this.render_bubble.bind(this));
@@ -105,7 +105,7 @@ exports.bubble_menu.prototype.render = function(options) {
   if (needed_width > width + 2*circle_padding){
     d3.select(that.html.node().parentNode).style({
       //width : width+"px",
-      "overflow-x" : "auto",
+      "overflow-x": "auto",
     });
     x_offset = this.x_offset = 0;
     width = needed_width;
@@ -208,10 +208,10 @@ exports.bubble_menu.prototype.render_bubble = function(active_d,i,duration,preve
       "cx": function(d){ 
         return d.__x+ d.__r+ d.__margin + d.__xAdjustMajor; 
       },
-      "cy" : height/2,
+      "cy": height/2,
     })
     .style({
-      "fill-opacity" : function(d){
+      "fill-opacity": function(d){
         if (active_d && d !== active_d){
           return 0.2;
         }
@@ -219,21 +219,21 @@ exports.bubble_menu.prototype.render_bubble = function(active_d,i,duration,preve
       },
     })
     .attr({
-      "r" : function(d){ return d.__r;},
+      "r": function(d){ return d.__r;},
     });
    
   this.graph_area.selectAll("rect.sattelite").remove();
   this.html.selectAll("div.sattelite").remove();
-  this.graph_area.select("circle.background").style({ "fill-opacity" : 0 });
+  this.graph_area.select("circle.background").style({ "fill-opacity": 0 });
 
   this.html.selectAll("div.event-target")
     .style({
       //"border": "1px solid black",
-      "position" : "absolute",
-      "height" : height + "px",
-      "top" : this.margin.top +"px",
+      "position": "absolute",
+      "height": height + "px",
+      "top": this.margin.top +"px",
       "width": function(d){ return d.__width+"px";},
-      "left" : function(d){return d.__x + d.__xAdjustMajor + "px";},
+      "left": function(d){return d.__x + d.__xAdjustMajor + "px";},
     })
     .select("a.bubble-label")
     .classed("center-text", true)
@@ -252,11 +252,11 @@ exports.bubble_menu.prototype.render_bubble = function(active_d,i,duration,preve
           return "300";
         }
       },
-      "position" : "absolute",
-      "color" : "black",
+      "position": "absolute",
+      "color": "black",
       "text-decoration": "none",
-      "opacity" : 0,
-      "width" : function(d){
+      "opacity": 0,
+      "width": function(d){
         if (d === active_d){
           return 1.8*radius+"px";
         }
@@ -266,11 +266,11 @@ exports.bubble_menu.prototype.render_bubble = function(active_d,i,duration,preve
         var w = d.__width/2;
         return w+"px";
       },
-      "top" : function(d,i){
+      "top": function(d,i){
         var t = height/2 ;
         return t+"px";
       },
-      "font-size" : function(d){
+      "font-size": function(d){
         var size;
         if (d === active_d){
           size = 14;
@@ -285,7 +285,7 @@ exports.bubble_menu.prototype.render_bubble = function(active_d,i,duration,preve
 
   html_transition.selectAll("a.bubble-label")
     .style({
-      "opacity" : 1,
+      "opacity": 1,
       "left": function(d){
         if (d === active_d){
           return d.__margin + (2*d.__r - this.offsetWidth)/2+"px" ; 
@@ -295,7 +295,7 @@ exports.bubble_menu.prototype.render_bubble = function(active_d,i,duration,preve
       // after the transition time, the text has been rendered
       // and we can use the rendered height and width to position
       // it in the center of the circle
-      "top" : function(d,i){
+      "top": function(d,i){
         var t = height/2 - this.offsetHeight/2 ;
         return t+"px";
       },
@@ -307,12 +307,12 @@ exports.bubble_menu.prototype.render_bubble = function(active_d,i,duration,preve
     this.graph_area.select("circle.background")
       .attr({
         "cx": active_d.__x + active_d.__width/2 ,
-        "cy" : height/2,
-        "r" : 2 *active_d.__r,
+        "cy": height/2,
+        "r": 2 *active_d.__r,
       })
       .style({
-        "fill" : this.colors(active_d.__index),
-        "fill-opacity" : 0.2,
+        "fill": this.colors(active_d.__index),
+        "fill-opacity": 0.2,
       });
 
     this.graph_area.selectAll("rect.sattelite")
@@ -320,24 +320,24 @@ exports.bubble_menu.prototype.render_bubble = function(active_d,i,duration,preve
       .enter()
       .append("rect")
       .attr({
-        "class" : "sattelite",
-        "x" : active_d.__x +active_d.__r + active_d.__xAdjust,
-        "y" : height/2,
-        "height" : 2* satellite_radius,
+        "class": "sattelite",
+        "x": active_d.__x +active_d.__r + active_d.__xAdjust,
+        "y": height/2,
+        "height": 2* satellite_radius,
         "width": function(d) { return d.__width;},
-        "rx" : satellite_radius,
+        "rx": satellite_radius,
       })
       .style({
-        "fill" : this.colors(active_d.__index),
-        "fill-opacity" : 0.7,
+        "fill": this.colors(active_d.__index),
+        "fill-opacity": 0.7,
       });
 
     svg_transition.selectAll("rect.sattelite")    
       .attr({
-        "x" : function(d){ 
+        "x": function(d){ 
           return d.__x - satellite_radius + active_d.__xAdjust; 
         } ,
-        "y" : function(d){ 
+        "y": function(d){ 
           return d.__y - satellite_radius; 
         },
       });
@@ -348,25 +348,25 @@ exports.bubble_menu.prototype.render_bubble = function(active_d,i,duration,preve
       .data(active_d.children)
       .enter()
       .append("div")
-      .attr({ "class" : "sattelite center-text" })
+      .attr({ "class": "sattelite center-text" })
       .style({
         "opacity": 0,
-        "font-size" : "13px",
-        "font-weight" : "500",
-        "position" : "absolute",
+        "font-size": "13px",
+        "font-weight": "500",
+        "position": "absolute",
         "width": function(d){ return d.__width+"px";},
-        "height" : 2* this.satellite_radius + "px",
-        "border-radius" : this.satellite_radius+'px',
-        "left" : "0px",
-        "top" : "0px",
+        "height": 2* this.satellite_radius + "px",
+        "border-radius": this.satellite_radius+'px',
+        "left": "0px",
+        "top": "0px",
       })
       .append("a")
       .style({
-        "position" : "absolute",
-        "color" : "black",
+        "position": "absolute",
+        "color": "black",
         "width": function(d){ return d.__width+"px";},
-        "left" : "0px",
-        "top" : this.height/2 +"px",
+        "left": "0px",
+        "top": this.height/2 +"px",
       })
       .attr("href",function(d){return d.href;})
       .html(function(d){ return d.text; });
@@ -374,20 +374,20 @@ exports.bubble_menu.prototype.render_bubble = function(active_d,i,duration,preve
     html_transition.selectAll("div.sattelite")
       .style({
         "opacity": 1,
-        "left" : (function(d){ 
+        "left": (function(d){ 
           return d.__x- active_d.__x- this.satellite_radius +"px"; 
         }).bind(this),
-        "top" : (function(d){ 
+        "top": (function(d){ 
           return d.__y- this.satellite_radius + "px"; 
         }).bind(this),
       });
 
     html_transition.selectAll("div.sattelite a")
       .style({
-        "left" : function(d){
+        "left": function(d){
           return d.__width/2 - this.offsetWidth/2 + "px";
         },
-        "top" : function(d){ 
+        "top": function(d){ 
           return satellite_radius - this.offsetHeight/2+"px"; 
         }, 
       });

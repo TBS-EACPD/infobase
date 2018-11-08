@@ -103,7 +103,7 @@ const example_data = {
         ftes: "42",
         type: "cr",
       },
-      isExpanded:true,
+      isExpanded: true,
       children: [
         {
           id: 'a1eee',
@@ -121,7 +121,7 @@ const example_data = {
             name: "b-results-1",
             spend: "2000",
             ftes: "5",
-            type:"program",
+            type: "program",
           },
           is_search_match: true,
         },
@@ -184,7 +184,7 @@ const get_children_content = ({
   const children_groups = (
     _.isFunction(children_grouper) ? 
     children_grouper(node, children) : 
-    [{ node_group:children }]
+    [{ node_group: children }]
   );
 
   return _.map(children_groups, ({display, node_group},ix) => (
@@ -274,7 +274,7 @@ export const ExplorerNode = ({
                 className="ExplorerRow__Cell"
                 style={
                   ix===0 ? 
-                  { ...computed_col_styles[id], flex : `1 0 ${width-depth*INDENT_SIZE}px`} :
+                  { ...computed_col_styles[id], flex: `1 0 ${width-depth*INDENT_SIZE}px`} :
                   computed_col_styles[id]
                 }
               >

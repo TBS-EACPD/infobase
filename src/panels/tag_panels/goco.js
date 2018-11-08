@@ -41,7 +41,7 @@ const fade_out = function(d){
   this.html.selectAll("div.tick")
     .filter(dd => d !== dd)
     .styles({
-      "opacity" :0.4,
+      "opacity": 0.4,
       "font-weight": "300",
     });
 

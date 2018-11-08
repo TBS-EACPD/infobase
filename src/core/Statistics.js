@@ -8,12 +8,12 @@ import { run_template } from '../models/text.js'; //just needed for a few consta
 const { Gov } = Subject;
 
 const some_constants = {
-  lang : window.lang,
-  last_years : _.map(years.std_years, e => run_template(e)),
-  people_years : _.map(years.people_years, e => run_template(e)),
-  planning_years : _.map(years.planning_years, e => run_template(e)),
-  est_next_year : run_template("{{est_next_year}}"),
-  est_in_year : run_template("{{est_in_year}}"),
+  lang: window.lang,
+  last_years: _.map(years.std_years, e => run_template(e)),
+  people_years: _.map(years.people_years, e => run_template(e)),
+  planning_years: _.map(years.planning_years, e => run_template(e)),
+  est_next_year: run_template("{{est_next_year}}"),
+  est_in_year: run_template("{{est_in_year}}"),
 }
 //this is the part of the module that gets consumed by those who want info, ie. core/graphs.js
 function get_info(subject, infokeys){

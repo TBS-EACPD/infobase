@@ -41,7 +41,7 @@ export class Table extends mix().with(staticStoreMixin){
         group: '*',
         table: '*', 
       },
-      horizontal_group_sort : _.identity,
+      horizontal_group_sort: _.identity,
       sort: _.identity,
       classification: 'none',
       link: {en: "", fr: "" }, //some handlebar templates will crash if they don't see a link    
@@ -51,7 +51,7 @@ export class Table extends mix().with(staticStoreMixin){
   constructor(table_def){
     super();
     const {
-      title : title_def,
+      title: title_def,
       name: name_def,
       tags: tags_def,
     } = table_def;
@@ -145,9 +145,9 @@ export class Table extends mix().with(staticStoreMixin){
   get description(){
     const tmf = create_text_maker(this.text);
     return tmf(this.id, {
-      table : this,
-      table_level : true,
-      details : true,
+      table: this,
+      table_level: true,
+      details: true,
       links: this.links,
     });
   }
@@ -222,8 +222,8 @@ export class Table extends mix().with(staticStoreMixin){
         return;
       }
       var presentation_copy = {
-        val : run_template(header.header[lang]),
-        id : header.wcag,
+        val: run_template(header.header[lang]),
+        id: header.wcag,
       };
       if (_.isUndefined(headers[header.level])){
         headers[header.level] = [];
@@ -251,10 +251,10 @@ export class Table extends mix().with(staticStoreMixin){
   add_col(x){
     // this === a table obj or null
     if(x && x.nick === 'dept'){
-      x.header = { [window.lang] : trivial_text_maker('department') };
+      x.header = { [window.lang]: trivial_text_maker('department') };
     }
     if (_.isString(x)){
-      x = {header : {en: x, fr: x}};
+      x = {header: {en: x, fr: x}};
     }
     if (_.isString(x.header)){
       x.header = {en: x.header, fr: x.header};
@@ -378,7 +378,7 @@ function add_child(x){
   }
   _.each(x, col => {
     if (_.isString(col)){
-      col = {header : {en: col, fr: col}};
+      col = {header: {en: col, fr: col}};
     }
     col.parent = this;
     this.table.add_col(col);

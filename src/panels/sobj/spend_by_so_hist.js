@@ -24,9 +24,9 @@ const { Format } = util_components;
 
 new PanelGraph({
   level: "dept",
-  key : "spend_by_so_hist",
+  key: "spend_by_so_hist",
   depends_on: ['table5'],
-  footnotes : [ "SOBJ", "EXP"],
+  footnotes: [ "SOBJ", "EXP"],
   info_deps: [ 'table5_dept_info', 'table5_gov_info' ],
   calculate (subject,info){
     const {table5} = this.tables;

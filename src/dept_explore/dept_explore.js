@@ -25,9 +25,9 @@ BubbleOrgList = function(container,method){
   // match the different organization schemes to their respective
   // functions
   this.organization_schemes = {
-    "dept" : {func: by_min_dept, href:"#explore-dept"},
-    "people-total": {func: by_this_year_emp, href:"#explore-people-total"},
-    "dept-type" : {func: by_dept_type, href:"#explore-dept-type"},
+    "dept": {func: by_min_dept, href: "#explore-dept"},
+    "people-total": {func: by_this_year_emp, href: "#explore-people-total"},
+    "dept-type": {func: by_dept_type, href: "#explore-dept-type"},
   };
 
   this.container = container;
@@ -50,17 +50,17 @@ BubbleOrgList = function(container,method){
         button_explain_text = "explore_" + key + "_text";
       }
       return {
-        button_text : text_maker("by_"+key),
-        href :val.href, 
-        active : key === method,
+        button_text: text_maker("by_"+key),
+        href: val.href, 
+        active: key === method,
       };
     })
     .value();
 
   common_content.html( text_maker("explore_common_t",{
-    buttons : other_methods, 
-    summary : text_maker("details"),
-    __details : text_maker(button_explain_text, infos),
+    buttons: other_methods, 
+    summary: text_maker("details"),
+    __details: text_maker(button_explain_text, infos),
   }));
 
   const { data, keys, format } = this.organization_schemes[method].func();
@@ -105,7 +105,7 @@ p.build_graphic = function(data,depts,formater){
   chart = new Pack.Pack(
     container.select('.svg-container'),
     { height: 680 ,
-      fill_func : d => {
+      fill_func: d => {
         if (d.subj_obj && d.subj_obj.is("dept")){
           return colors(1);
         }
@@ -173,9 +173,9 @@ p.build_graphic = function(data,depts,formater){
       .append("div")
       .attr("class",'crumb ')
       .styles({ 
-        "margin":"10px 0px 0px 0px",
-        "width":"200px",
-        "float" : "left",
+        "margin": "10px 0px 0px 0px",
+        "width": "200px",
+        "float": "left",
       })
 
     // containers is just the newly added
@@ -190,17 +190,17 @@ p.build_graphic = function(data,depts,formater){
       .append("circle")
       .attr("fill","rgba(37,114,180,0.7)")
       .attrs({
-        cx : function(d){
+        cx: function(d){
           return this.parentNode.parentNode.offsetWidth/2;
         },
-        cy : height/2,
-        r : function(d){return scale(d.r);},
+        cy: height/2,
+        r: function(d){return scale(d.r);},
       })
 
     // for each container, add the label
     containers
       .append("div")
-      .attrs({ "class" : "center-text" })
+      .attrs({ "class": "center-text" })
       .html(d => 
         _.isUndefined(d.parent) ?
         `${d.name} - ${formater(d.__value__)}` : 
@@ -218,17 +218,17 @@ p.build_graphic = function(data,depts,formater){
   });
 
   chart.render({
-    zoomable : true,
-    invisible_grand_parent : false,
+    zoomable: true,
+    invisible_grand_parent: false,
     data: data,
-    hover_text_func : d => d.data.name + " - " + formater(d.data.__value__),
-    aria_label_func : d => ( 
+    hover_text_func: d => d.data.name + " - " + formater(d.data.__value__),
+    aria_label_func: d => ( 
       d.subj_obj ? 
-      text_maker("a11y_see_infograph_for",{subject:d.subj_obj}) :
+      text_maker("a11y_see_infograph_for",{subject: d.subj_obj}) :
       text_maker("a11y_drill_down_label")
     ),
-    href_func : d => ( d.data.subj_obj && infograph_href_template(d.data.subj_obj) ) || '',
-    text_func : d => {
+    href_func: d => ( d.data.subj_obj && infograph_href_template(d.data.subj_obj) ) || '',
+    text_func: d => {
 
       const val = formater(d.data.__value__);
       if (d.zoom_r > 60) {
@@ -258,11 +258,11 @@ class BubbleExplore_ extends React.Component {
     const spin_el = new Spinner( Spinner.__configs.route ).spin().el;
     el.appendChild(spin_el)
     ensure_loaded({
-      stat_keys : [ 
+      stat_keys: [ 
         'table4_gov_info', 
         'table12_gov_info',
       ],
-      table_keys : [
+      table_keys: [
         'table4',
         'table12',
       ],
@@ -280,13 +280,13 @@ function A11yContent(){
     columns: [ 
       "{{pa_last_year}}exp",
     ],
-    sorting_column : "{{pa_last_year}}exp",
+    sorting_column: "{{pa_last_year}}exp",
     descending: true,
   });
   const table12_link= rpb_link({
     preferTable: true,
     table: 'table12',
-    sorting_column : "{{pa_last_year}}",
+    sorting_column: "{{pa_last_year}}",
     descending: true,
     columns: [ 
       "{{pa_last_year}}",
@@ -312,7 +312,7 @@ export default class BubbleExplore extends React.Component {
   render(){
     const {
       match: {
-        params : {
+        params: {
           perspective,
         },
       },

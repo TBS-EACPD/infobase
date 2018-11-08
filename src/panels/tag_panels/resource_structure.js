@@ -35,7 +35,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const get_non_col_content = ({node}) => { 
   const {
-    data:{
+    data: {
       defs,
       subject,
     },
@@ -96,7 +96,7 @@ class RootedResourceExplorer extends React.Component {
       <div 
         tabIndex={-1} 
         ref="focus_mount" 
-        style={{position:'relative'}}
+        style={{position: 'relative'}}
       >
         <Explorer
           config={explorer_config}
@@ -167,7 +167,7 @@ const children_grouper = (node, children) => {
 class RootedResourceExplorerContainer extends React.Component {
   render(){
     const { 
-      rooted_resource_scheme : scheme,
+      rooted_resource_scheme: scheme,
       initial_rooted_resource_state,
       subject,
     } = this.props;
@@ -210,7 +210,7 @@ class RootedResourceExplorerContainer extends React.Component {
 new PanelGraph({
   level: 'tag',
   footnotes: false,
-  depends_on : ['table6','table12'],
+  depends_on: ['table6','table12'],
   key: "resource_structure",
 
   calculate(subject){

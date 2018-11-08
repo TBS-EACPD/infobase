@@ -28,8 +28,8 @@ export class Pie {
     this.options = _.extend(this.options,options);
 
     this.svg.attrs({ 
-      "width" : this.outside_width, 
-      "height" : this.outside_height,
+      "width": this.outside_width, 
+      "height": this.outside_height,
     });
 	
     let that = this;
@@ -100,17 +100,17 @@ export class Pie {
     });
     
     const html_offset = {
-      top : this.outside_height/2,
-      left : this.outside_width/2,
+      top: this.outside_height/2,
+      left: this.outside_width/2,
     };
 
     if (title) {
       this.html.append("div")
         .attr("class", "title center-text")
         .style({
-          "position" : "absolute",
+          "position": "absolute",
           "top": "0px",
-          "width" : width+"px",
+          "width": width+"px",
         })
         .append("div")
         .html(title);
@@ -176,8 +176,8 @@ export class Pie {
         .append("path")
         .attr("class", "line_path")
         .styles({
-          "stroke-width" : "1px",
-          "stroke" : "grey",
+          "stroke-width": "1px",
+          "stroke": "grey",
         })
 
       const pie_label = html
@@ -206,10 +206,10 @@ export class Pie {
           }
         })
         .styles({
-          "position" : "absolute",
-          "font-size" : font_size+"px",
-          "font-weight" : "500",
-          "top" : (d,i) => {
+          "position": "absolute",
+          "font-size": font_size+"px",
+          "font-weight": "500",
+          "top": (d,i) => {
             const lower = d.label_angle> Math.PI/2 && d.label_angle < Math.PI*3/2 ;
             const offset = lower ? 0 : - font_size - 10;
             return offset + html_offset.top + d.label_length * Math.sin(d.label_angle - Math.PI / 2)+"px";
