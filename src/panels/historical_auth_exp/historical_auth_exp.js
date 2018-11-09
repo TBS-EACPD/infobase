@@ -49,7 +49,7 @@ const calculate = function( subject,info,options ) {
   }
 
   if(
-    _.every(auth, (x,i)=> auth[i]-exp[i] >= 0   ) &&
+    _.every(auth, (x,i)=> auth[i]-exp[i] >= 0 ) &&
     _.every(auth.concat(exp), d=> d>=0)
   ){
     auth = _.map(auth, (x,i)=> auth[i] - exp[i]);

@@ -130,7 +130,7 @@ class HorizontalStatusTable extends React.Component {
       'drr17_indicators_ongoing',
     ];
 
-    const sorted_filtered_counts =  _.chain(counts_by_dept)
+    const sorted_filtered_counts = _.chain(counts_by_dept)
       .reject( ({counts}) => counts.drr17_total === 0)
       .sortBy(row => row.counts.drr17_total )
       .reverse()
