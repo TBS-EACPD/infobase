@@ -1,19 +1,18 @@
 /* eslint-disable no-console */
 const fs = require("fs");
-const path = require('path');
-const os = require('os');
 const _ = require("lodash");
 const createTestCafe = require('testcafe');
 
 const route_load_tests_config = require('./route-load-tests-config.js');
 
+// BIG TODO: don't really need route specific text to look for, should just check that app is neither empty nor displaying the error page
 
 const route_load_tests = (config) => {
   const args = process.argv;
   const options = get_options_from_args(args);
 
   // Make a temp directory to hold the test files to be generated from the config 
-  const temp_dir = fs.mkdtempSync( path.join( os.tmpdir(), 'route-tests-' ) );
+  const temp_dir = fs.mkdtempSync('temp-route-tests-');
 
   console.log('\n  Generating route test files from config...');
 
@@ -52,12 +51,16 @@ const route_load_tests = (config) => {
     }
   );
 
-  Promise.all(test_file_write_promises).then( () => {
-    console.log('\n  ... done generating tests \n\n');
-
-    // Run all tests in temp_dir, test report sent to stdout
-    run_tests(temp_dir, options);
-  });
+  Promise.all(test_file_write_promises)
+    .then( 
+      () => {
+        console.log('\n  ... done generating tests \n\n');
+    
+        // Run all tests in temp_dir, test report sent to stdout
+        run_tests(temp_dir, options);
+      }
+    )
+    .finally( () => temp_dir && fs.rmdir(temp_dir) );
 } 
 
 
@@ -85,7 +88,7 @@ const test_config_to_test_file_object = (test_config) => ({
     test(
       '${test_config.app} ${test_config.name} route loads without error', 
       async page => {
-        await page.expect(Selector('${test_config.selector}').innerText).contains('${test_config.expected_text}');
+        await page.expect(Selector('${test_config.selector}').innerText).contains('${test_config.expected_text}'); 
       }
     );
   `,
@@ -111,12 +114,7 @@ const run_tests = (test_dir, options) => {
           .run();
       }
     )
-    .finally( 
-      () => {
-        !_.isNull(testcafe) && testcafe.close();
-        test_dir && fs.rmdir(test_dir);
-      } 
-    );
+    .finally( () => !_.isNull(testcafe) && testcafe.close() );
 };
 
 
