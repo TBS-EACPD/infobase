@@ -106,9 +106,9 @@
     "a11y_dev": "node build_code/webpack_starter.js a11y_client BOTH",
     "a11y_prod": "node build_code/webpack_starter.js a11y_client BOTH PROD",
     "a11y_prod_no_watch": "node build_code/webpack_starter.js a11y_client BOTH PROD NO-WATCH",
-    "browser_test": "testcafe chrome browser-tests/active/",
+    "browser_test": "node browser-tests/route-load-tests.js CHROME",
     "headless_test": "node browser-tests/route-load-tests.js CHROME HEADLESS",
-    "ci_test": "testcafe 'chromium:headless --no-sandbox' browser-tests/active/",
+    "ci_test": "node browser-tests/route-load-tests.js CHROMIUM HEADLESS NO_SANDBOX",
     "ci_serve": "http-server -s -a 127.0.0.1"
   },
   "authors": [

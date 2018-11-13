@@ -68,7 +68,7 @@ const route_load_tests = (config) => {
 const get_options_from_args = (args) => ({
   chrome: !!choose(args, 'CHROME'),
   chromium: !!choose(args, 'CHROMIUM'),
-  no_sandbox: !!choose(args, 'BROWSER_NO_SANDBOX'),
+  no_sandbox: !!choose(args, 'NO_SANDBOX'),
   headless: !!choose(args, 'HEADLESS'),
 });
 const choose = (args, arg_name) => (args.indexOf(arg_name) > -1) && arg_name;
