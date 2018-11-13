@@ -87,8 +87,11 @@ const test_config_to_test_file_object = (test_config) => ({
     
     test(
       '${test_config.app} ${test_config.name} route loads without error', 
-      async page => {
-        await page.expect(Selector('${test_config.selector}').innerText).contains('${test_config.expected_text}'); 
+      async test_controller => {
+        // Checks that the route loads a spinner, that the spinner eventually ends, and that the post-spinner page isn't the error page
+        await t.expect( Selector('.spinner').exists );
+        await t.expect( Selector('.spinner').exists ).notOk( {timeout: 10000} );
+        await t.expect( Selector('#error-boundary-icon').exists ).notOk();
       }
     );
   `,

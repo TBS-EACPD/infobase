@@ -78,7 +78,8 @@ export class ErrorBoundary extends React.Component {
             }
           </span>
           <img 
-            className = "aria-hidden" 
+            aria-hidden = {true}
+            id = "error-boundary-icon"
             src = { get_static_url("svg/not-available.svg") }
             style = {{
               maxWidth: "100%",
