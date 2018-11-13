@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
-const fs = require("fs");
-const rimraf = require("rimraf");
 const _ = require("lodash");
+const fs = require("fs");
 const createTestCafe = require('testcafe');
+const glob = require("glob");
+const rimraf = require("rimraf");
 
 const { route_load_tests_config } = require('./route-load-tests-config.js');
 
@@ -108,8 +109,12 @@ const run_tests = (test_dir, options) => {
         testcafe = tc;
         const runner = testcafe.createRunner();
 
+        const test_files = fs
+          .readdirSync(test_dir)
+          .map( file_name => `${test_dir}/${file_name}`);
+
         return runner
-          .src(test_dir)
+          .src(test_files)
           .browsers( 
             _.filter([
               options.chrome && `chrome${options.headless ? ':headless' : ''}${options.no_sandbox ? ' --no-sandbox' : ''}`, 
