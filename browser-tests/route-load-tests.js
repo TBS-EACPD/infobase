@@ -32,7 +32,7 @@ const route_load_tests = (config) => {
         test_file_object => new Promise(
           (resolve, reject) => {
             fs.writeFile(
-              `${temp_dir}/${test_file_object.name}`, 
+              `${temp_dir}/${test_file_object.file_name}`, 
               test_file_object.js_string, 
               'utf8',
               (err) => {
@@ -74,7 +74,22 @@ const test_configs_from_route_config = (route_config) => []; // TODO
 
 const test_is_optional = (test_config) => false; // TODO
 
-const test_config_to_test_file_object = (test_config) => {}; // TODO
+const test_config_to_test_file_object = (test_config) => ({
+  file_name: `${test_config.app}_${test_config.name}`,
+  js_string: `
+    import { Selector } from 'testcafe';
+    
+    fixture '${test_config.app}'
+      .page 'http://localhost:8080/build/InfoBase/index-${test_config.app}.html#${test_config.route}';
+    
+    test(
+      '${test_config.app} ${test_config.name} route loads without error', 
+      async page => {
+        await page.expect(Selector('${test_config.selector}').innerText).contains('${test_config.expected_text}');
+      }
+    );
+  `,
+});
 
 const run_tests = (test_dir, options) => {
   let testcafe = null;
