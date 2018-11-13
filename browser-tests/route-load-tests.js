@@ -1,18 +1,18 @@
 /* eslint-disable no-console */
 const fs = require("fs");
+const rimraf = require("rimraf");
 const _ = require("lodash");
 const createTestCafe = require('testcafe');
 
-const route_load_tests_config = require('./route-load-tests-config.js');
+const { route_load_tests_config } = require('./route-load-tests-config.js');
 
-// BIG TODO: don't really need route specific text to look for, should just check that app is neither empty nor displaying the error page
 
 const route_load_tests = (config) => {
   const args = process.argv;
   const options = get_options_from_args(args);
 
   // Make a temp directory to hold the test files to be generated from the config 
-  const temp_dir = fs.mkdtempSync('temp-route-tests-');
+  const temp_dir = fs.mkdtempSync('browser-tests/temp-route-tests-');
 
   console.log('\n  Generating route test files from config...');
 
@@ -22,7 +22,6 @@ const route_load_tests = (config) => {
     route_level_config => {
       const test_file_objects = _.chain(route_level_config)
         .thru( test_configs_from_route_config )
-        .filter( test_config => options.run_optional_tests || !test_is_optional(test_config) )
         .map( test_config_to_test_file_object )
         .value();
 
@@ -38,7 +37,7 @@ const route_load_tests = (config) => {
                 if (err){
                   reject(err);
                 } else {
-                  console.log(`\n    ${test_file_object.name}`);
+                  console.log(`\n    ${test_file_object.file_name}`);
                   resolve();
                 }
               }
@@ -51,21 +50,21 @@ const route_load_tests = (config) => {
     }
   );
 
-  Promise.all(test_file_write_promises)
+  Promise
+    .all(test_file_write_promises)
     .then( 
       () => {
         console.log('\n  ... done generating tests \n\n');
-    
+
         // Run all tests in temp_dir, test report sent to stdout
         run_tests(temp_dir, options);
       }
     )
-    .finally( () => temp_dir && fs.rmdir(temp_dir) );
+    .catch( (err) => console.log(err) );
 } 
 
 
 const get_options_from_args = (args) => ({
-  run_optional_tests: !!choose(args, 'RUN_OPTIONAL'),
   chrome: !!choose(args, 'CHROME'),
   chromium: !!choose(args, 'CHROMIUM'),
   no_sandbox: !!choose(args, 'BROWSER_NO_SANDBOX'),
@@ -73,28 +72,32 @@ const get_options_from_args = (args) => ({
 });
 const choose = (args, arg_name) => (args.indexOf(arg_name) > -1) && arg_name;
 
-const test_configs_from_route_config = (route_config) => []; // TODO
-
-const test_is_optional = (test_config) => false; // TODO
+const test_configs_from_route_config = (route_config) => _.map(
+  route_config.test_on,
+  app => ({
+    name: route_config.name,
+    route: route_config.route,
+    app,
+  })
+);
 
 const test_config_to_test_file_object = (test_config) => ({
-  file_name: `${test_config.app}_${test_config.name}`,
+  file_name: `${test_config.app}-${_.kebabCase(test_config.name)}-test.js`,
   js_string: `
-    import { Selector } from 'testcafe';
-    
-    fixture '${test_config.app}'
-      .page 'http://localhost:8080/build/InfoBase/index-${test_config.app}.html#${test_config.route}';
-    
-    test(
-      '${test_config.app} ${test_config.name} route loads without error', 
-      async test_controller => {
-        // Checks that the route loads a spinner, that the spinner eventually ends, and that the post-spinner page isn't the error page
-        await t.expect( Selector('.spinner').exists );
-        await t.expect( Selector('.spinner').exists ).notOk( {timeout: 10000} );
-        await t.expect( Selector('#error-boundary-icon').exists ).notOk();
-      }
-    );
-  `,
+import { Selector } from 'testcafe';
+
+fixture \`${test_config.app}\`
+  .page \`http://localhost:8080/build/InfoBase/index-${test_config.app}.html#${test_config.route}\`;
+
+test(
+  '${test_config.app} ${test_config.name} route loads without error', 
+  async test_controller => {
+    // Checks that the route loads a spinner, that the spinner eventually ends, and that the post-spinner page isn't the error page
+    await test_controller.expect( Selector('.spinner').exists );
+    await test_controller.expect( Selector('.spinner').exists ).notOk( {timeout: 10000} );
+    await test_controller.expect( Selector('#error-boundary-icon').exists ).notOk();
+  }
+);`,
 });
 
 const run_tests = (test_dir, options) => {
@@ -104,7 +107,7 @@ const run_tests = (test_dir, options) => {
       tc => {
         testcafe = tc;
         const runner = testcafe.createRunner();
-    
+
         return runner
           .src(test_dir)
           .browsers( 
@@ -117,7 +120,10 @@ const run_tests = (test_dir, options) => {
           .run();
       }
     )
-    .finally( () => !_.isNull(testcafe) && testcafe.close() );
+    .finally( () => {
+      !_.isNull(testcafe) && testcafe.close();
+      test_dir && rimraf.sync(test_dir);
+    });
 };
 
 
