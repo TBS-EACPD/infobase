@@ -25,6 +25,7 @@ const get_options_from_args = (args) => ({
   run_optional_tests: !!choose(args, 'RUN_OPTIONAL'),
   chrome: !!choose(args, 'CHROME'),
   chromium: !!choose(args, 'CHROMIUM'),
+  no_sandbox: !!choose(args, 'BROWSER_NO_SANDBOX'),
   headless: !!choose(args, 'HEADLESS'),
 });
 const choose = (args, arg_name) => (args.indexOf(arg_name) > -1) && arg_name;
@@ -43,8 +44,8 @@ const run_tests = (test_dir, options) => {
           .src(test_dir)
           .browsers( 
             _.filter([
-              options.chrome && `chrome${options.headless ? ':headless' : ''}`, 
-              options.chromium && `chromium${options.headless ? ':headless' : ''} --no-sandbox`,
+              options.chrome && `chrome${options.headless ? ':headless' : ''}${options.no_sandbox ? ' --no-sandbox' : ''}`, 
+              options.chromium && `chromium${options.headless ? ':headless' : ''}${options.no_sandbox ? ' --no-sandbox' : ''}`,
             ])
           )
           .reporter('spec') // the default testcafe reporter, sending to stdout
