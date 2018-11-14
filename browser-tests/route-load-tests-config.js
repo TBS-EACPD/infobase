@@ -86,7 +86,7 @@ module.exports.route_load_tests_config = [
   },
   {
     name: "Infographic - Dept - People",
-    route: "orgs/dept/1/infograph/financial",
+    route: "orgs/dept/1/infograph/people",
     test_on: ["eng", "basic-eng"],
   },
   {
@@ -116,7 +116,7 @@ module.exports.route_load_tests_config = [
   },
   {
     name: "Infographic - CRSO - People",
-    route: "orgs/crso/AGR-BWN00/infograph/financial",
+    route: "orgs/crso/AGR-BWN00/infograph/people",
     test_on: ["eng", "basic-eng"],
   },
   {
