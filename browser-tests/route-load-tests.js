@@ -140,15 +140,16 @@ const run_tests = (test_dir, options) => {
       }
     )
     .then( (failed_count) => {
-      if (+failed_count !== 0){
-        process.exitCode = 1;
+      if (failed_count){
+        // Just setting an error exit code here was flaky in CI, so this event forces the exit code to be an error when any test have failed
+        // Using an on exit event handler to allow node to, otherwise, exit gracefully ( explicitly calling exit here could stomp stdout logging, etc.)
+        process.on( 'exit', () => process.exit(1) );
       }
     })
     .catch( handle_error )
     .finally( () => {
       !_.isNull(testcafe) && testcafe.close();
       test_dir && rimraf.sync(test_dir);
-      console.log('exit code is ' +process.exitCode )
     });
 };
 
