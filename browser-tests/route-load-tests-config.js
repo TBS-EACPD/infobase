@@ -56,12 +56,12 @@ module.exports.route_load_tests_config = [
   },
   {
     name: "Infographic - Gov - People",
-    route: "",
+    route: "orgs/gov/gov/infograph/people",
     test_on: ["eng", "basic-eng"],
   },
   {
     name: "Infographic - Gov - Results",
-    route: "",
+    route: "orgs/gov/gov/infograph/results",
     test_on: ["eng", "basic-eng"],
   },
   {
@@ -75,8 +75,38 @@ module.exports.route_load_tests_config = [
     test_on: ["eng", "basic-eng"],
   },
   {
+    name: "Infographic - Dept - About",
+    route: "orgs/dept/1/infograph/intro",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
     name: "Infographic - Dept - Finance",
     route: "orgs/dept/1/infograph/financial",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Dept - People",
+    route: "orgs/dept/1/infograph/financial",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Dept - Results",
+    route: "orgs/dept/1/infograph/results",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Dept - Where can I go from here?",
+    route: "orgs/dept/1/infograph/related",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Dept - All data",
+    route: "orgs/dept/1/infograph/all_data",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - CRSO - About",
+    route: "orgs/crso/AGR-BWN00/infograph/intro",
     test_on: ["eng", "basic-eng"],
   },
   {
@@ -85,8 +115,58 @@ module.exports.route_load_tests_config = [
     test_on: ["eng", "basic-eng"],
   },
   {
+    name: "Infographic - CRSO - People",
+    route: "orgs/crso/AGR-BWN00/infograph/financial",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - CRSO - Results",
+    route: "orgs/crso/AGR-BWN00/infograph/results",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - CRSO - Where can I go from here?",
+    route: "orgs/crso/AGR-BWN00/infograph/related",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - CRSO - All data",
+    route: "orgs/crso/AGR-BWN00/infograph/all_data",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Program - About",
+    route: "orgs/program/AGR-BWN01/infograph/intro",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
     name: "Infographic - Program - Finance",
-    route: "orgs/program/AGR-BWN01/infograph/",
+    route: "orgs/program/AGR-BWN01/infograph/financial",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Program - Results",
+    route: "orgs/program/AGR-BWN01/infograph/results",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Program - Where can I go from here?",
+    route: "orgs/program/AGR-BWN01/infograph/related",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Tag - About",
+    route: "orgs/tag/GOC002/infograph/intro",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Tag - Tagged Programs",
+    route: "orgs/tag/GOC002/infograph/structure",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Tag - Where can I go from here?",
+    route: "orgs/tag/GOC002/infograph/related",
     test_on: ["eng", "basic-eng"],
   },
   {
