@@ -59,7 +59,8 @@ const route_load_tests = (config) => {
         // Run all tests in temp_dir, test report sent to stdout
         run_tests(temp_dir, options);
       }
-    );
+    )
+    .catch( handle_error );
 };
 
 
@@ -113,7 +114,7 @@ test(
 
 const run_tests = (test_dir, options) => {
   let testcafe = null;
-  createTestCafe()
+  createTestCafe('localhost', 8080)
     .then(
       tc => {
         testcafe = tc;
@@ -138,14 +139,21 @@ const run_tests = (test_dir, options) => {
           .run();
       }
     )
+    .catch( handle_error )
     .finally( () => {
       !_.isNull(testcafe) && testcafe.close();
       test_dir && rimraf.sync(test_dir);
     });
 };
 
+const handle_error = (e) => {
+  process.exitCode = 1;
+  console.log(e)
+};
+
+
 try {
   route_load_tests(route_load_tests_config);
 } catch (e) {
-  process.exitCode = 1;
+  handle_error(e);
 }
