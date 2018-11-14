@@ -95,7 +95,7 @@ test(
   async test_controller => {
     // Checks that the route loads a spinner, that the spinner eventually ends, and that the post-spinner page isn't the error page
     await test_controller.expect( Selector('.spinner').exists ).ok()
-      .expect( Selector('.spinner').exists ).notOk( {timeout: 10000} )
+      .expect( Selector('.spinner').exists ).notOk( {timeout: 20000} )
       .expect( Selector('#error-boundary-icon').exists ).notOk();
   }
 );`,
@@ -121,6 +121,7 @@ const run_tests = (test_dir, options) => {
               options.chromium && `chromium${options.headless ? ':headless' : ''}${options.no_sandbox ? ' --no-sandbox' : ''}`,
             ])
           )
+          .concurrency(2)
           .reporter('spec') // the default testcafe reporter, sending to stdout
           .run();
       }
