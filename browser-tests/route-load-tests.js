@@ -91,12 +91,12 @@ fixture \`${test_config.app}\`
   .page \`http://localhost:8080/build/InfoBase/index-${test_config.app}.html#${test_config.route}\`;
 
 test(
-  '${test_config.app} ${test_config.name} route loads without error', 
+  '${test_config.name} route loads without error', 
   async test_controller => {
     // Checks that the route loads a spinner, that the spinner eventually ends, and that the post-spinner page isn't the error page
-    await test_controller.expect( Selector('.spinner').exists );
-    await test_controller.expect( Selector('.spinner').exists ).notOk( {timeout: 10000} );
-    await test_controller.expect( Selector('#error-boundary-icon').exists ).notOk();
+    await test_controller.expect( Selector('.spinner').exists ).ok()
+      .expect( Selector('.spinner').exists ).notOk( {timeout: 10000} )
+      .expect( Selector('#error-boundary-icon').exists ).notOk();
   }
 );`,
 });
