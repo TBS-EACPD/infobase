@@ -59,8 +59,7 @@ const route_load_tests = (config) => {
         // Run all tests in temp_dir, test report sent to stdout
         run_tests(temp_dir, options);
       }
-    )
-    .catch( (err) => console.log(err) );
+    );
 };
 
 
@@ -114,7 +113,7 @@ test(
 
 const run_tests = (test_dir, options) => {
   let testcafe = null;
-  createTestCafe('localhost', 8080)
+  createTestCafe()
     .then(
       tc => {
         testcafe = tc;
