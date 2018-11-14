@@ -1,7 +1,7 @@
 module.exports.route_load_tests_config = [
   {
     name: "Homepage",
-    route: "asfasfasd",
+    route: "",
     test_on: ["eng", "fra", "basic-eng", "basic-fra"],
   },
   {
@@ -76,7 +76,7 @@ module.exports.route_load_tests_config = [
   },
   {
     name: "Infographic - Dept - About",
-    route: "orgs/dept/1/infograph/intro",
+    route: "orgs/dept/9999999/infograph/intro",
     test_on: ["eng", "basic-eng"],
   },
   {
