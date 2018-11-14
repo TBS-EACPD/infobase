@@ -58,7 +58,7 @@ jobs:
           paths:
             - ./build
             - ./node_modules
-            - ./tests
+            - ./browser-tests
             - ./.circleci
             - ./deploy_build_scripts
             - ./package.json
