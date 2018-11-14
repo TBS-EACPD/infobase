@@ -67,9 +67,25 @@ jobs:
   # Test job steps:
   #  1) mount workspace (meaning this job must be run in a workflow where it is proceeded by a build job)
   #  2) run the ci_serve command from package.json (start a localhost server on the container)
-  #  3) run the ci_test command from package.json (use testcafe and headless chromium to visit the build on the container)
+  #  3) run the ci_route_load_tests command from package.json (use testcafe and headless chromium to visit the build on the container)
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   test:
+    docker:
+      - image: gcr.io/ib-static-content/ib-client-ci-test:latest
+        <<: *gcloud_auth
+    steps:
+      - attach_workspace:
+          at: ./
+      - run: sh ./.circleci/create_envs.sh
+      - run: sed -i "s#${CDN_URL}#.#g" ./build/InfoBase/app/*.js # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
+      - run: sed -i "s#${CDN_URL}#.#g" ./build/InfoBase/*.html # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
+      - run: 
+          name: start_server
+          command: npm run ci_serve
+          background: true
+      - run: npm run ci_route_load_tests
+
+  testold:
     docker:
       - image: gcr.io/ib-static-content/ib-client-ci-test:latest
         <<: *gcloud_auth
@@ -112,9 +128,13 @@ workflows:
       - test:
           requires:
             - build
+      - testold:
+          requires:
+            - build
       - deploy:
           requires:
             - test
+            - testold
           filters:
             branches:
               only:

@@ -35,6 +35,11 @@ module.exports.route_load_tests_config = [
     test_on: ["eng", "basic-eng"],
   },
   {
+    name: "Government at a Glance",
+    route: "partition/dept/exp",
+    test_on: ["eng"],
+  },
+  {
     name: "IGOC",
     route: "igoc",
     test_on: ["eng", "basic-eng"],
@@ -93,10 +98,5 @@ module.exports.route_load_tests_config = [
     name: "Resource Explorer",
     route: "resource-explorer",
     test_on: ["eng", "basic-eng"],
-  },
-  {
-    name: "Government at a Glance",
-    route: "partition/dept/exp",
-    test_on: ["eng"],
   },
 ];
