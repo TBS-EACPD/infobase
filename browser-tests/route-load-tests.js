@@ -2,7 +2,6 @@
 const _ = require("lodash");
 const fs = require("fs");
 const createTestCafe = require('testcafe');
-const glob = require("glob");
 const rimraf = require("rimraf");
 
 const { route_load_tests_config } = require('./route-load-tests-config.js');
@@ -62,7 +61,7 @@ const route_load_tests = (config) => {
       }
     )
     .catch( (err) => console.log(err) );
-} 
+};
 
 
 const get_options_from_args = (args) => ({
@@ -122,7 +121,7 @@ const run_tests = (test_dir, options) => {
             ])
           )
           .concurrency(2)
-          .reporter('spec') // the default testcafe reporter, sending to stdout
+          .reporter('spec') // the default testcafe reporter, sending to stdout by default
           .run();
       }
     )
