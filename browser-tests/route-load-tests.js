@@ -145,5 +145,8 @@ const run_tests = (test_dir, options) => {
     });
 };
 
-
-route_load_tests(route_load_tests_config);
+try {
+  route_load_tests(route_load_tests_config);
+} catch {
+  process.exitCode = 1;
+}
