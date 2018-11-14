@@ -14,7 +14,7 @@ const route_load_tests = (config) => {
   // Make a temp directory to hold the test files to be generated from the config 
   const temp_dir = fs.mkdtempSync('browser-tests/temp-route-tests-');
 
-  console.log('\n  Generating route test files from config...');
+  console.log('\n  Generating route test files from config...\n');
 
   // Could have a lot of files to write, so doing it async while the config's being parsed
   const test_file_write_promises = _.flatMap(
@@ -37,7 +37,7 @@ const route_load_tests = (config) => {
                 if (err){
                   reject(err);
                 } else {
-                  console.log(`\n    ${test_file_object.file_name}`);
+                  console.log(`    ${test_file_object.file_name}`);
                   resolve();
                 }
               }
@@ -64,12 +64,24 @@ const route_load_tests = (config) => {
 };
 
 
-const get_options_from_args = (args) => ({
-  chrome: !!choose(args, 'CHROME'),
-  chromium: !!choose(args, 'CHROMIUM'),
-  no_sandbox: !!choose(args, 'NO_SANDBOX'),
-  headless: !!choose(args, 'HEADLESS'),
-});
+const get_options_from_args = (args) => {
+  const arg_options = {
+    chrome: !!choose(args, 'CHROME'),
+    chromium: !!choose(args, 'CHROMIUM'),
+    no_sandbox: !!choose(args, 'NO_SANDBOX'),
+    headless: !!choose(args, 'HEADLESS'),
+  };
+
+  // If neither browser option passed, defaults to chrome
+  if ( !arg_options.chrome && !arg_options.chromium ){
+    return {
+      ...arg_options,
+      chrome: true,
+    };
+  } else {
+    return arg_options;
+  }
+};
 const choose = (args, arg_name) => (args.indexOf(arg_name) > -1) && arg_name;
 
 const test_configs_from_route_config = (route_config) => _.map(
@@ -112,12 +124,14 @@ const run_tests = (test_dir, options) => {
           .readdirSync(test_dir)
           .map( file_name => `${test_dir}/${file_name}`);
 
+        const browser_options = `${options.headless ? ':headless' : ''}${options.no_sandbox ? ' --no-sandbox' : ''}`;
+
         return runner
           .src(test_files)
           .browsers( 
             _.filter([
-              options.chrome && `chrome${options.headless ? ':headless' : ''}${options.no_sandbox ? ' --no-sandbox' : ''}`, 
-              options.chromium && `chromium${options.headless ? ':headless' : ''}${options.no_sandbox ? ' --no-sandbox' : ''}`,
+              options.chrome && `chrome${browser_options}`, 
+              options.chromium && `chromium${browser_options}`,
             ])
           )
           .concurrency(2)
