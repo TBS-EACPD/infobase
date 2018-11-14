@@ -140,8 +140,8 @@ const run_tests = (test_dir, options) => {
       }
     )
     .then( (failed_count) => {
-      if (failed_count > 0){
-        process.exitCode = 1;
+      if (+failed_count === 0){
+        process.exitCode = 0;
       }
     })
     .catch( handle_error )
@@ -151,13 +151,11 @@ const run_tests = (test_dir, options) => {
     });
 };
 
-const handle_error = (e) => {
-  process.exitCode = 1;
-  console.log(e)
-};
+const handle_error = (e) => console.log(e);
 
 
 try {
+  process.exitCode = 1; // Always exit in fail state, UNLESS failed test count is exactly 0
   route_load_tests(route_load_tests_config);
 } catch (e) {
   handle_error(e);
