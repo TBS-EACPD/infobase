@@ -147,6 +147,6 @@ const run_tests = (test_dir, options) => {
 
 try {
   route_load_tests(route_load_tests_config);
-} catch {
+} catch (e) {
   process.exitCode = 1;
 }
