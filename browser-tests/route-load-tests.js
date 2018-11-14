@@ -104,8 +104,8 @@ fixture \`${test_config.app}\`
 test(
   '${test_config.name} route loads without error', 
   async test_controller => {
-    // Checks that the route loads a spinner, that the spinner eventually ends, and that the post-spinner page isn't the error page
-    await test_controller.expect( Selector('.spinner').exists ).ok()
+    // Checks that the route loads anying (appends any children to the #app element), that the spinner eventually ends, and that the post-spinner page isn't the error page
+    await test_controller.expect( Selector('#app').childElementCount ).notEql( 0, {timeout: 20000} )
       .expect( Selector('.spinner').exists ).notOk( {timeout: 20000} )
       .expect( Selector('#error-boundary-icon').exists ).notOk();
   }
@@ -114,7 +114,7 @@ test(
 
 const run_tests = (test_dir, options) => {
   let testcafe = null;
-  createTestCafe()
+  return createTestCafe()
     .then(
       tc => {
         testcafe = tc;
@@ -140,22 +140,25 @@ const run_tests = (test_dir, options) => {
       }
     )
     .then( (failed_count) => {
-      if (+failed_count === 0){
-        process.exitCode = 0;
+      if (+failed_count !== 0){
+        process.exitCode = 1;
       }
     })
     .catch( handle_error )
     .finally( () => {
       !_.isNull(testcafe) && testcafe.close();
       test_dir && rimraf.sync(test_dir);
+      console.log('exit code is ' +process.exitCode )
     });
 };
 
-const handle_error = (e) => console.log(e);
+const handle_error = (e) => {
+  process.exitCode = 1;
+  console.log(e);
+}
 
 
 try {
-  process.exitCode = 1; // Always exit in fail state, UNLESS failed test count is exactly 0
   route_load_tests(route_load_tests_config);
 } catch (e) {
   handle_error(e);
