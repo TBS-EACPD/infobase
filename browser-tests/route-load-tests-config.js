@@ -170,7 +170,12 @@ module.exports.route_load_tests_config = [
     test_on: ["eng", "basic-eng"],
   },
   {
-    name: "Report Builder",
+    name: "Report Builder - Table Picker",
+    route: "rpb",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Report Builder - Report",
     route: "rpb/~(columns~(~'thisyearexpenditures)~subject~'gov_gov~mode~'simple~dimension~'major_voted_stat~table~'table1~preferDeptBreakout~true~descending~false~filter~'All)",
     test_on: ["eng", "basic-eng"],
   },
