@@ -1,7 +1,7 @@
 module.exports.route_load_tests_config = [
   {
     name: "Homepage",
-    route: "",
+    route: "asfasfasd",
     test_on: ["eng", "fra", "basic-eng", "basic-fra"],
   },
   {

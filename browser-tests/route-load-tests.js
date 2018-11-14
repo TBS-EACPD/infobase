@@ -114,7 +114,7 @@ test(
 
 const run_tests = (test_dir, options) => {
   let testcafe = null;
-  createTestCafe('localhost', 8080)
+  createTestCafe()
     .then(
       tc => {
         testcafe = tc;
