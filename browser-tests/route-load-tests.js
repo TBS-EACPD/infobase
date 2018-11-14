@@ -139,6 +139,11 @@ const run_tests = (test_dir, options) => {
           .run();
       }
     )
+    .then( (failed_count) => {
+      if (failed_count > 0){
+        process.exitCode = 1;
+      }
+    })
     .catch( handle_error )
     .finally( () => {
       !_.isNull(testcafe) && testcafe.close();
