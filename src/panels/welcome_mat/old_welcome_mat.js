@@ -21,8 +21,8 @@ const pane_templates = {
     changed_to: "spending_change_was",
     will_be: "spending_change_will",
     will_be_1: "spending_will_be_1",
-    bad_dept_will_be: "spending_authority_this_year",
-    bad_dept_no_main_will_be: "no_spend_auth_this_year",
+    dept_incomplete_planning_will_be: "spending_authority_this_year",
+    dept_incomplete_planning_will_be_no_main: "no_spend_auth_this_year",
     no_history: "no_historical_spending",
   },
   fte: {
@@ -55,20 +55,30 @@ const Pane = props => {
     (s.is("program") || s.is("crso")) && calcs.new_program 
   );
 
+  
+
   const no_data = no_data_because_not_provided || no_data_because_new_program;
   if (no_data ){
     return null;
   }
-  let template_key;;
 
-  //FCAC funding comes from stat exp, no mains.
-  if (!calcs.planning_or_fte_data && (s.acronym !== "FCAC") && s.is("dept") && props._key === 'will_be' ){
-    template_key = "bad_dept_will_be";
-  } else if (!calcs.planning_or_fte_data && ((s.acronym === "FCAC")) && s.is("dept") && props._key === 'will_be' ){
-    template_key = "bad_dept_no_main_will_be";
-  } 
-  else if (props._key === "was" 
-  && calcs.new_program && (s.is("program") || s.is("crso"))) {
+  const dept_incomplete_planning_data = (
+    props._key === 'will_be' &&
+    s.is("dept") && 
+    !calcs.planning_or_fte_data
+  );
+
+  const no_history = (
+    props._key === "was" &&
+    ( s.is("program") || s.is("crso") ) &&
+    calcs.new_program
+  );
+
+  let template_key;
+  if (dept_incomplete_planning_data){
+    //FCAC funding comes from stat exp, no mains.
+    template_key = s.acronym === "FCAC" ? "dept_incomplete_planning_will_be_no_main" : "dept_incomplete_planning_will_be";
+  } else if (no_history) {
     template_key = "no_history";
   } else {
     template_key = props._key;
@@ -77,7 +87,7 @@ const Pane = props => {
   // need to use this method in order to stack 4 elements (can't have nesting or else it will ruin the flex styling)
 
   const dangerousHTML = `
-    <div class="mat-grid__inner-panel mat-grid__inner-panel--large ${half_layout ?"": "mat-grid__inner-panel--large-hide"}">
+    <div class="mat-grid__inner-panel mat-grid__inner-panel--large ${half_layout ? "": "mat-grid__inner-panel--large-hide"}">
       ${text_maker(header.header)}
     </div>
     ${text_maker(template[template_key],calcs[props.row_key])}
@@ -115,38 +125,38 @@ const GridRow = props => {
   const GraphEl = new_program ? Bar : Line;
   const graph_markup = (
     _key === 'exp' ? 
-    <GraphEl
-      {...{
-        margin: {top: 5,bottom: 5,left: 75,right: 5},
-        height: 200,
-        add_xaxis: false,
-        hide_gridlines: true,
-        ticks,
-        colors: graph_color,
-        formater: formats.compact1_raw,
-        series: {"0": calcs.exp.graph_data},
-      }} 
-    /> :
-    <GraphEl
-      {...{
-        margin: {top: 5,bottom: 5,left: 75,right: 5},
-        height: 200,
-        add_xaxis: false,
-        axis_class: "black",
-        hide_gridlines: true,
-        ticks,
-        colors: graph_color,
-        formater: formats.big_int_real_raw,
-        series: {"1": calcs.fte.graph_data},
-      }}
-    />
+      <GraphEl
+        {...{
+          margin: {top: 5, bottom: 5, left: 75, right: 5},
+          height: 200,
+          add_xaxis: false,
+          hide_gridlines: true,
+          ticks,
+          colors: graph_color,
+          formater: formats.compact1_raw,
+          series: {"0": calcs.exp.graph_data},
+        }} 
+      /> :
+      <GraphEl
+        {...{
+          margin: {top: 5,bottom: 5,left: 75,right: 5},
+          height: 200,
+          add_xaxis: false,
+          axis_class: "black",
+          hide_gridlines: true,
+          ticks,
+          colors: graph_color,
+          formater: formats.big_int_real_raw,
+          series: {"1": calcs.fte.graph_data},
+        }}
+      />
   );
 
   return <div className={props.half_layout ? "" : "mat-grid__row"}>
     <Pane row_key={_key} _key={props.calcs.new_program ? "will_be_1" : "was"} parent_props={props}/>
     <Pane row_key={_key} _key="changed_to" parent_props={props}/>
     <Pane row_key={_key} _key= "will_be" parent_props={props}/>
-    <div className={`mat-grid__lg-panel${half_layout? 100 : 40} mat-grid__sm-panel`}>
+    <div className={`mat-grid__lg-panel${half_layout ? 100 : 40} mat-grid__sm-panel`}>
       <div 
         className={`welcome-mat-rect graph font-xsmall ${_key}`}
         style={{position: "relative"}}

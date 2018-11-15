@@ -87,11 +87,10 @@ const planned_resource_fragment = (subject, doc) => {
 
 };
 
-const isBadDeptWithoutResults = (subject) => _.chain(subject.programs)
+const isDeptWithoutResults = (subject) => _.chain(subject.programs)
   .map(prog => _.isEmpty(Result.get_entity_results(prog.id)) )
   .every()
   .value();
-
 
 
 const row_to_drr_status_counts = ({
@@ -129,7 +128,7 @@ export {
 
   planned_resource_fragment,
   link_to_results_infograph,
-  isBadDeptWithoutResults,
+  isDeptWithoutResults,
   row_to_drr_status_counts,
   result_statuses,
   
