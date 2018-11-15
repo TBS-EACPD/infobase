@@ -23,7 +23,7 @@ const get_rules = ({
             ["env", {
               modules: false,
               targets: {
-                browsers: should_use_babel ?  ["Safari >= 7", "Explorer 11"] : ["Chrome >= 66"],
+                browsers: should_use_babel ? ["Safari >= 7", "Explorer 11"] : ["Chrome >= 66"],
                 uglify: is_prod,
               },
             }],
@@ -41,7 +41,7 @@ const get_rules = ({
     use: ['script-loader'],
   },
   {
-    test:/\.css$/,
+    test: /\.css$/,
     use: [
       { loader: "style-loader" },
       { 

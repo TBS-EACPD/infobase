@@ -47,7 +47,7 @@ function bundle_extended_bootstrap_css(app_dir){
   };
   
   webpack(config, function(err,stats){
-    console.log(stats.toString({cached:true,modules:true}));
+    console.log(stats.toString({cached: true,modules: true}));
     if( err || stats.hasErrors() ){ process.exitCode = 1; }
   });
 }

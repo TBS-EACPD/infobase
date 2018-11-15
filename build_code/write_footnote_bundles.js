@@ -46,7 +46,7 @@ function populate_stores(parsed_models){
   });
 
   _.each(programs, ({ dept_code, activity_code, crso_id })=> {
-    const prog_id  = `${dept_code}-${activity_code}`;
+    const prog_id = `${dept_code}-${activity_code}`;
     program_deptcodes[prog_id] = dept_code;
   });
 

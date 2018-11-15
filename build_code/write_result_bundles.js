@@ -1,5 +1,4 @@
 const fs = require("fs");
-const cp = require("child_process");
 const _ = require("lodash");
 const d3_dsv = require('d3-dsv');
 const { compute_counts_from_set } = require('../src/models/result_counts.js');
@@ -19,8 +18,6 @@ let sub_programs_by_parent_id = {};
 let pi_dr_links_by_program_id = {};
 
 
-const status_colors = ['success','success','failure', 'not_avail', 'not_appl'];
-const status_periods = ['past', 'future','past', 'future','future', 'future', 'other' ];
 function populate_stores(parsed_models){
 
   org_store = [];
@@ -62,7 +59,7 @@ function populate_stores(parsed_models){
   });
 
   _.each(programs, ({ dept_code, activity_code, crso_id })=> {
-    const prog_id  = `${dept_code}-${activity_code}`;
+    const prog_id = `${dept_code}-${activity_code}`;
 
     if(!programs_by_crso_id[crso_id]){
       programs_by_crso_id[crso_id] = [];
@@ -107,13 +104,13 @@ function populate_stores(parsed_models){
 
   //TODO: once we have not-met/met etc. 
   _.each(indicators, obj => {
-      const { result_id } = obj;
-      if(!indicatorsByResultId[result_id]){
-        indicatorsByResultId[result_id] = [];
-      }
-      indicatorsByResultId[result_id].push(obj);
-      obj.status_key = obj.status_period && `${obj.status_period}_${obj.status_color}`;
-    })
+    const { result_id } = obj;
+    if(!indicatorsByResultId[result_id]){
+      indicatorsByResultId[result_id] = [];
+    }
+    indicatorsByResultId[result_id].push(obj);
+    obj.status_key = obj.status_period && `${obj.status_period}_${obj.status_color}`;
+  })
 
   _.each(PI_DR_links, obj => {
     const { program_id } = obj;
@@ -183,11 +180,11 @@ function dept_result_data(dept_code){
 
 const get_subs_for_parent_ids = parent_ids => _.chain(parent_ids)
   .map(id => sub_programs_by_parent_id[id])
-    .flatten()
-    .compact()
-    .map('obj')
-    .compact()
-    .value();
+  .flatten()
+  .compact()
+  .map('obj')
+  .compact()
+  .value();
 
 function tag_result_data(tag_id){
   const program_ids = programs_by_tag_id[tag_id];
@@ -251,7 +248,7 @@ function get_all_data(){
         .compact()
         .value()
     ),
-    indicators : (
+    indicators: (
       _.chain(indicatorsByResultId)
         .map(_.identity)
         .flatten()
@@ -283,7 +280,7 @@ function write_result_bundles(file_obj, dir){
     .fromPairs()
     .value();
 
-  const all_data =  get_all_data();
+  const all_data = get_all_data();
 
   write_result_bundles_from_data(
     Object.assign(
@@ -305,7 +302,7 @@ function write_result_bundles(file_obj, dir){
 const unilingual_keys_by_model = {
   results: ["name"],
   indicators: ["name","explanation","target_narrative","actual_result","methodology","measure"],
-  sub_programs : [
+  sub_programs: [
     "name",
     "description",
     "drr_spend_expl",
@@ -345,7 +342,7 @@ function data_to_str(obj, lang){
 }
 
 function write_result_bundles_from_data(obj, dir){
-  _.each(obj, (data, key) =>  {
+  _.each(obj, (data, key) => {
 
     _.each(["en","fr"], lang => {
 
