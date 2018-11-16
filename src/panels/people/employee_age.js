@@ -128,15 +128,6 @@ const calculate_funcs_by_level = {
       
       const ticks = _.map(people_years, y => `${run_template(y)}`);
       
-      // Pre-calculate tighter yTop and yBottom values for line graph, to pass in options
-      const all_avg_ages = _.chain(graph_args.avg_age)
-        .map(d => d.data)
-        .flatten()
-        .value();
-      // Rounded down/up to nearest .5 or .0
-      const avg_age_yBottom = (Math.floor(_.min(all_avg_ages)*2)/2).toFixed(1);
-      const avg_age_yTop = (Math.ceil(_.max(all_avg_ages)*2)/2).toFixed(1);
-      
       // Options for D3GraphWithLegend React components
       const age_group_options = {
         legend_col_full_size: 4,
@@ -164,8 +155,6 @@ const calculate_funcs_by_level = {
         legend_title: "legend",
         get_data: _.property("data"),
         data: graph_args.avg_age,
-        yBottom: avg_age_yBottom, // Pre-calculated lower y-axis value
-        yTop: avg_age_yTop, // Pre-calculated upper y-axis value
       };
       
       return (

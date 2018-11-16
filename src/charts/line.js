@@ -89,7 +89,6 @@ export class Line {
   };
 
   render_stacked(){
-    let max_value;
     const height = this.outside_height - this.margin.top - this.margin.bottom;
 
     // remap the data to suitable format for the stacked
@@ -135,7 +134,7 @@ export class Line {
 
     // calculate the maximum value for any of the ticks to calibrate
     // the y scale value
-    max_value = d3.max(stacks, function(d) { return d3.max(d, function(d) { return d[1]; }); })
+    const max_value = d3.max(stacks, function(d) { return d3.max(d, function(d) { return d[1]; }); })
 
     this.y = d3.scaleLinear()
       .domain([0, max_value])
@@ -180,8 +179,8 @@ export class Line {
     
     // for a line chart, calculate the window of values to show
     // not just 0 - max
-    var y_bottom = that.options.yBottom || (this.extent[0] > 0 ? 0.9 * this.extent[0] : 1.1 * this.extent[0]);
-    var y_top = that.options.yTop || (this.extent[1] < 0 ? 0 : 1.1 * this.extent[1]);
+    var y_bottom = this.extent[0] > 0 ? 0.9 * this.extent[0] : 1.1 * this.extent[0];
+    var y_top = this.extent[1] < 0 ? 0 : 1.1 * this.extent[1];
     this.y = d3.scaleLinear()
       .domain([y_bottom, y_top])
       .range([height, 0]);
