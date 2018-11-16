@@ -113,8 +113,8 @@ budget_alignment_video_title:
     Vidéo intégrée: Alignement du budget des dépenses sur le budget
 
 budget_alignment_video_src:
-  en: https://www.youtube-nocookie.com/embed/ZJ3fo7LGflQ?rel=0
-  fr: https://www.youtube-nocookie.com/embed/EIuzwKojs-w?rel=0
+  en: https://www.youtube-nocookie.com/embed/mdAFB9PDgh8?rel=0
+  fr: https://www.youtube-nocookie.com/embed/c75SLC5d7FM?rel=0
 
 budget_alignment_video_transcript:
   transform: [markdown]
