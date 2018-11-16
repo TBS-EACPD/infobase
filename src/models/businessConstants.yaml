@@ -237,27 +237,27 @@ result_statuses:
     fr: Cible atteinte
   not_met:
     en: Target not met
-    fr: DRRTODO
+    fr: Cible non atteinte
   not_reported:
     en: Result not reported
-    fr: DRRTODO
+    fr: Résultat non rapporté
   ongoing:
     en: Result to be achieved in the future
-    fr: DRRTODO
+    fr: Résultat a atteindre dans le future
 
 result_simple_statuses:
   met:
     en: Met
-    fr: Cible atteinte
+    fr: Atteinte
   not_met:
     en: Not Met
-    fr: DRRTODO
+    fr: Non atteinte
   not_reported:
     en: Not reported
-    fr: DRRTODO
+    fr: Non rapporté
   ongoing:
     en: Result to be achieved
-    fr: DRRTODO
+    fr: Résultat a atteindre
 
 months:
   0:

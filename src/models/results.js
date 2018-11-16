@@ -455,9 +455,9 @@ const ResultCounts = {
 const ordered_status_keys = ['met', 'not_met', 'not_reported', 'ongoing'];
 const status_key_to_glossary_key = {
   met: "RESULTS_MET",
-  not_met: "RESULTS_MET", // DRRTODO
-  not_reported: "RESULTS_MET", // DRRTODO
-  ongoing: "RESULTS_MET", // DRRTODO
+  not_met: "RESULTS_NOT_MET",
+  not_reported: "RESULTS_NOT_REPORTED",
+  ongoing: "RESULTS_ONGOING",
 };
 const status_key_to_svg_name = {
   met: "met",
