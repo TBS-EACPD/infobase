@@ -47,7 +47,7 @@ dept_historical_program_spending_text:
    Durant cet exercice, le plus important programme en termes de dépenses nettes était « **{{fmt_compact1_written dept_prg_top1}}** » (**{{fmt_compact1_written dept_prg_top1_amnt}}**),
    suivi de « **{{fmt_compact1_written dept_prg_top2}}** » (**{{fmt_compact1_written dept_prg_top2_amnt}}**). Durant les cinq dernières années, {{fmt_compact1_written dept_prg_top1}} a dépensé en moyenne {{fmt_compact1_written dept_prg_five_year_top_avg}}.
    {{else}} En {{pa_last_year}}, **{{le_dept dept}}** comptait **{{dept_prg_num}}** programme. Durant cet exercice, le plus important programme était
-   _**{{fmt_compact1_written dept_prg_top1}}**_ (**{{fmt_compact1_written dept_prg_top1_amnt}}**). Depuis cinq ans, « **{{fmt_compact1_written dept_prg_top1}}** » a dépensé en moyenne {{fmt_compact1_written dept_prg_five_year_top_avg}}.
+   _**{{fmt_compact1_written dept_prg_top1}}**_ (**{{fmt_compact1_written dept_prg_top1_amnt}}**). Durant les cinq dernières années, « **{{fmt_compact1_written dept_prg_top1}}** » a dépensé en moyenne {{fmt_compact1_written dept_prg_five_year_top_avg}}.
    {{/if}}
 
 
