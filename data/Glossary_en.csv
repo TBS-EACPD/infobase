@@ -448,7 +448,7 @@ BIV_REMA,Remaining,Balance of funding that remains unallocated in the Budget Imp
 RESULTS_STATUS,Result Status,"If the date to achieve the target is **before or by the end of fiscal year 2017-18 (March 31, 2018)**:
 * Target met: If the result is higher than the minimum target; lower than the maximum target; within the target range; or is exactly equal to the unique value target.
 * Not met: If the result is lower than the minimum target; higher than the maximum target; outside the target range; or is not equal to the target value.  
-* Result not reported: If the result has not been collected or is not available for any other reason. As well as if there is no target or if the target is no longer relevant due to changes in policy or other circumstances (e.g. dissolution of a department, change in government direction, etc.). 
+* Result not available: If the result has not been collected or is not available for any other reason. As well as if there is no target or if the target is no longer relevant due to changes in policy or other circumstances (e.g. dissolution of a department, change in government direction, etc.). 
 
 
 If the date to achieve target is after the end of fiscal year 2017-18 (after March 31,2018)**:
