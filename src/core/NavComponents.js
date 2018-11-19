@@ -155,42 +155,7 @@ export class StandardRouteContainer extends React.Component {
         <DocumentTitle title_str={title} />
         <DocumentDescription description_str={description} />
         <BreadCrumbs crumbs={breadcrumbs} />
-        <HeaderBanner
-          banner_class = "alert-warning"
-          banner_content = {
-            {
-              en: (
-                <p>
-                  The 2017-18 Departmental Results Reports data is not available for this organization. Information will be updated as soon as the data is submitted.
-                </p>
-              ),
-              fr: (
-                <p>
-                  L’information des rapports sur les résultats ministériels 2017-2018 n’est pas disponible pour cette organisation. L’information sera mise-à-jour dès que les données auront été soumises.
-                </p>
-              ),
-            }[lang]
-          }
-          route_filter={ (match) => (/\/129\/infograph|\/348\/infograph/).test(match.url) }
-        />
-        <HeaderBanner
-          banner_class = "alert-warning"
-          banner_content = {
-            {
-              en: (
-                <p>
-                  The 2017-18 Departmental Results Reports data is not available for this program. Information will be updated as soon as the data is submitted.
-                </p>
-              ),
-              fr: (
-                <p>
-                  L’information des rapports sur les résultats ministériels 2017-2018 n’est pas disponible pour ce programme. L’information sera mise-à-jour dès que les données auront été soumises.
-                </p>
-              ),
-            }[lang]
-          }
-          route_filter={ (match) => (/\/INAC-[A-Z]+[0-9][1-9]\/infograph|\/INDSC-[A-Z]+[0-9][1-9]\/infograph/).test(match.url) }
-        />
+        <HeaderBanner route_filter={_.constant(false)} />
         <AnalyticsSynchronizer route_key={route_key} />
         { shouldSyncLang !== false &&
           <LangSynchronizer /> 

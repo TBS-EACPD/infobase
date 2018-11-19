@@ -114,7 +114,8 @@ const get_dept_panels = subject => {
       'igoc_links',
     ],
     financial: _.includes(subject.tables,'table6') && [
-      "financial_intro", 
+      "financial_intro",
+      "late_drr17_warning",
       "welcome_mat",
       "budget_measures_panel",
       "estimates_in_perspective",
@@ -132,6 +133,7 @@ const get_dept_panels = subject => {
     people: _.includes(subject.tables, 'table9') && get_people_panels(subject),
     results: subject.dp_status && [
       "results_intro",
+      "late_drr17_warning",
       "drr_summary",
       "explore_results",
     ],
@@ -155,7 +157,8 @@ const get_program_panels = subject => {
     ],
     financial: [
       'dead_program_warning',
-      "financial_intro", 
+      "financial_intro",
+      "late_drr17_warning",
       "welcome_mat",
       "budget_measures_panel",
 
@@ -170,6 +173,7 @@ const get_program_panels = subject => {
     ],
     results: subject.dept.dp_status && !subject.is_internal_service && [
       "results_intro",
+      "late_drr17_warning",
       "drr_summary",
       "explore_results",
     ],
@@ -192,6 +196,7 @@ const get_crso_panels = subject => {
     financial: [
       'dead_crso_warning',
       'financial_intro',
+      "late_drr17_warning",
       'welcome_mat',
       "budget_measures_panel",
 
@@ -202,6 +207,7 @@ const get_crso_panels = subject => {
     ],
     results: subject.dept.dp_status && !subject.is_internal_service && [
       "results_intro",
+      "late_drr17_warning",
       "explore_results",
     ],
     related: [
