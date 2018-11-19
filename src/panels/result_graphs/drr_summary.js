@@ -22,7 +22,7 @@ const { result_simple_statuses } = businessConstants;
 const grid_colors = {
   met: "results-icon-array-pass",
   not_met: "results-icon-array-fail",
-  not_reported: "results-icon-array-na",
+  not_available: "results-icon-array-na",
   ongoing: "results-icon-array-neutral",
 };
 
@@ -71,11 +71,11 @@ const StatusGrid = props => {
   const {
     met,
     not_met,
-    not_reported,
+    not_available,
     ongoing,
   } = props;
   
-  const total = met + not_met + not_reported + ongoing;
+  const total = met + not_met + not_available + ongoing;
   const shouldFactorDown = total > max_size;
   const icon_array_size_class = classNames("IconArrayItem", total > 200 && "IconArrayItem__Small", total < 100 && "IconArrayItem__Large");
 

@@ -238,9 +238,9 @@ result_statuses:
   not_met:
     en: Target not met
     fr: Cible non atteinte
-  not_reported:
-    en: Result not reported
-    fr: Résultat non rapporté
+  not_available:
+    en: Result not available
+    fr: Résultat non disponible
   ongoing:
     en: Result to be achieved in the future
     fr: Résultat a atteindre dans le future
@@ -252,9 +252,9 @@ result_simple_statuses:
   not_met:
     en: Not Met
     fr: Non atteinte
-  not_reported:
-    en: Not reported
-    fr: Non rapporté
+  not_available:
+    en: Not available
+    fr: Non disponible
   ongoing:
     en: Result to be achieved
     fr: Résultat a atteindre

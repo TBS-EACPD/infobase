@@ -9,8 +9,8 @@ const mock_status_map = {
   past: {
     success: "met",
     failure: "not_met",
-    not_appl: "not_reported",
-    not_avail: "not_reported",
+    not_appl: "not_available",
+    not_avail: "not_available",
   },
   future: {
     success: "ongoing",

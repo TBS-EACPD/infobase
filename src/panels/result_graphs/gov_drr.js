@@ -141,7 +141,7 @@ class HorizontalStatusTable extends React.Component {
     const status_rows = [
       'drr17_indicators_met',
       'drr17_indicators_not_met',
-      'drr17_indicators_not_reported',
+      'drr17_indicators_not_available',
       'drr17_indicators_ongoing',
     ];
 
