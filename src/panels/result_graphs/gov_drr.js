@@ -53,11 +53,26 @@ new PanelGraph({
     const {
       graph_args,
     } = calculations;
+    
+    // Don't want to put this transitory footnote in the master footnotes doc, but I also don't
+    // want to have to manually merge it in to the output footnotes file after each pipeline run. 
+    // Instead, mocking it up here (just a temporary hting anyway)
+    const temp_drr17_footnote_mock = {
+      id: "1234567",
+      subject: Gov,
+      text: {
+        en: "The count of indicators does not include indicators for Indigenous and Northern Affairs Canada and Indigenous Services Canada. Information will be updated as soon as the data is submitted.",
+        fr: "Le nombre indicateurs n’inclus pas les indicateurs pour Affaires autochtones et du Nord Canada et Services aux Autochtones Canada. L’information sera mise-à-jour dès que les données auront été soumises.",
+      }[window.lang],
+      topc_keys: ["RESULTS_COUNTS"],
+      year1: "2017",
+      year2: "",
+    };
 
     return (
       <Panel
         title={text_maker("drr_summary_title")}
-        {...{footnotes}}
+        {...{footnotes: [...footnotes, temp_drr17_footnote_mock]}}
       >
         <GovDRR {...graph_args} />
       </Panel>
