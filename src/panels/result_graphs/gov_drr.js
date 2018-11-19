@@ -61,8 +61,8 @@ new PanelGraph({
       id: "1234567",
       subject: Gov,
       text: {
-        en: "The count of indicators does not include indicators for Indigenous and Northern Affairs Canada and Indigenous Services Canada. Information will be updated as soon as the data is submitted.",
-        fr: "Le nombre indicateurs n’inclus pas les indicateurs pour Affaires autochtones et du Nord Canada et Services aux Autochtones Canada. L’information sera mise-à-jour dès que les données auront été soumises.",
+        en: "The count of indicators does not include indicators for Indigenous and Northern Affairs Canada, Indigenous Services Canada, and Transport Canada. Information will be updated as soon as the data is submitted.",
+        fr: "Le nombre indicateurs n’inclus pas les indicateurs pour Affaires autochtones et du Nord Canada, Services aux Autochtones Canada, et Transports Canada. L’information sera mise-à-jour dès que les données auront été soumises.",
       }[window.lang],
       topc_keys: ["RESULTS_COUNTS"],
       year1: "2017",
