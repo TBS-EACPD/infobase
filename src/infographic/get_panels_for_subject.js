@@ -115,7 +115,6 @@ const get_dept_panels = subject => {
     ],
     financial: _.includes(subject.tables,'table6') && [
       "financial_intro",
-      "late_drr17_warning",
       "welcome_mat",
       "budget_measures_panel",
       "estimates_in_perspective",
@@ -158,7 +157,6 @@ const get_program_panels = subject => {
     financial: [
       'dead_program_warning',
       "financial_intro",
-      "late_drr17_warning",
       "welcome_mat",
       "budget_measures_panel",
 
@@ -196,7 +194,6 @@ const get_crso_panels = subject => {
     financial: [
       'dead_crso_warning',
       'financial_intro',
-      "late_drr17_warning",
       'welcome_mat',
       "budget_measures_panel",
 
