@@ -58,20 +58,47 @@ export class Line {
     // if there are no associated values  
     this.all_ticks = this.options.ticks;
     this.ticks_formatter = _.isFunction(this.options.ticks_formatter) ? this.options.ticks_formatter : _.identity;
-    this.ticks = ( 
+    this.ticks = (
       _.filter(
         this.all_ticks, 
-        (tick,i) => _.some(this.series, serie => !_.isUndefined(serie[i])) 
+        (tick, i) => _.some( this.series, serie => !_.isUndefined(serie[i]) ) 
       )
-    )
+    );
 
     this.x = d3.scalePoint()
       .domain(this.ticks)
       .range([0, width]);
 
-
     this.tick_width = this.x.step();
-    this.extent = d3.extent(d3.merge(this.values));
+
+    this.extent = d3.extent( d3.merge(this.values) );
+
+    // Historically, we always used a 10% padding above and below the max values on the y-axis
+    // That flat rate is an issue when the scale of the values is much greater than the variation (get a bunch of flat lines)
+    const calculate_delta_based_padding_factor = () => {
+      const center = _.mean(this.extent);
+      const average_delta = _.chain(this.values)
+        .map( series => _.chain(series)
+          .map( (value, ix) => ix+1 < series.length ? 
+            Math.abs(series[ix+1] - value) : 
+            false
+          )
+          .filter()
+          .mean()
+          .value()
+        )
+        .filter()
+        .mean()
+        .value();
+
+      const delta_based_padding_factor = 2*average_delta/center;
+
+      return delta_based_padding_factor > 0.1 ? 0.1 : delta_based_padding_factor;
+    };
+
+    this.y_domain_padding = _.isNumber(this.options.y_domain_padding) ?
+      this.options.y_domain_padding :
+      calculate_delta_based_padding_factor();
 
     if (this.series_labels.length === 0){
       return;
@@ -134,16 +161,19 @@ export class Line {
 
     // calculate the maximum value for any of the ticks to calibrate
     // the y scale value
-    const max_value = d3.max(stacks, function(d) { return d3.max(d, function(d) { return d[1]; }); })
+    const max_value = d3.max(
+      stacks, 
+      (stack) => d3.max(stack, (d) => d[1] ) 
+    );
 
     this.y = d3.scaleLinear()
       .domain([0, max_value])
       .range([height, 0]);
 
     var area = d3.area()
-      .x((d,i) => this.x(d.data.year))
-      .y0(d => this.y(d[0]))
-      .y1(d=> this.y(d[1]));
+      .x( (d, i) => this.x(d.data.year) )
+      .y0( d => this.y(d[0]) )
+      .y1( d => this.y(d[1]) );
 
     var join = this.graph_area
       .selectAll(".serie")
@@ -177,26 +207,32 @@ export class Line {
     var that = this;
     var height = this.outside_height - this.margin.top - this.margin.bottom;
     
-    // for a line chart, calculate the window of values to show
-    // not just 0 - max
-    var y_bottom = this.extent[0] > 0 ? 0.9 * this.extent[0] : 1.1 * this.extent[0];
-    var y_top = this.extent[1] < 0 ? 0 : 1.1 * this.extent[1];
+    const y_bottom = this.extent[0] > 0 ? 
+      (1 - this.y_domain_padding) * this.extent[0] : 
+      (1 + this.y_domain_padding) * this.extent[0];
+
+    const y_top = this.extent[1] >= 0 ? 
+      (1 + this.y_domain_padding) * this.extent[1] :
+      0;
+
+    const y_domain = [y_bottom, y_top];
+
     this.y = d3.scaleLinear()
-      .domain([y_bottom, y_top])
+      .domain(y_domain)
       .range([height, 0]);
 
     var lines = this.graph_area
       .selectAll("g.line")
-      .data(d3.keys(this.series), d=> d)
+      .data( d3.keys(this.series), d => d );
 
     lines.exit().remove();
 
     const lines_enter = lines.enter()
       .append("g")
-      .attr("class","line");
+      .attr("class", "line");
 
     lines.merge(lines_enter)
-      .each(function(d,i){
+      .each(function(d, i){
         // d = the series name
         // i = the index
 
@@ -211,8 +247,8 @@ export class Line {
           })
           .value();
 
-        var xfunc = function(_d){ return that.x(_d[0]);};
-        var yfunc = function(_d){ return that.y(_d[1]);};
+        var xfunc = (_d) => that.x(_d[0]);
+        var yfunc = (_d) => that.y(_d[1]);
       
         var line = d3.line() 
           .x(xfunc)
@@ -221,7 +257,7 @@ export class Line {
         var path = g.selectAll("path")
           .data([data]);
 
-        let path_enter = path.enter()
+        const path_enter = path.enter()
           .append("path");
 
         path.merge(path_enter)
@@ -236,12 +272,12 @@ export class Line {
         var dots = g.selectAll("circle.dots")
           .data(data);
 
-        let dots_enter = dots
+        const dots_enter = dots
           .enter()
           .append("circle")
-          .attr("class","dots")
+          .attr("class", "dots")
           .on("mouseover", that.dispatch.dataHover)
-          .on("mouseout", that.dispatch.dataHoverOut)
+          .on("mouseout", that.dispatch.dataHoverOut);
 
         dots.merge(dots_enter)
           .attrs({
@@ -253,8 +289,7 @@ export class Line {
           .styles({
             "fill": that.colors(d),
             "fill-opacity": 0.8,
-          })
-        ;
+          });
 
       });
   };
@@ -346,8 +381,6 @@ export class Line {
         .ticks(5)
         .tickSizeOuter(0)
         .tickFormat(this.formater)
-
-      
 
       var yaxis_node = this.graph_area.select(".y.axis");
 
