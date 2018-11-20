@@ -3,7 +3,7 @@ import { default as withRouter } from 'react-router/withRouter';
 import { BaseTypeahead } from './BaseTypeahead.js';
 import { glossary as glossary_search_config } from './search_configs.js';
 
-const item_url = item_key => `/glossary/${item_key}`
+import { glossary_href } from '../link_utils.js';
 
 const glossary_placeholder = {
   en: "Search for a term used in the InfoBase",
@@ -20,7 +20,7 @@ const GlossarySearch = withRouter(
         search_configs = { [ glossary_search_config ] }
         onSelect = {
           item => {
-            history.push(item_url(item.id));
+            history.push( glossary_href(item.id) );
           }
         }
         minLength = { 4 }
