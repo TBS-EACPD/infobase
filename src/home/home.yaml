@@ -6,30 +6,13 @@ home_finance_title:
   en: Finances
   fr: Finances
 
-home_finance_intro:
-  transform: [handlebars,markdown]
-  en: We spent {{fmt_compact1_written spent_last_year}} in {{pa_last_year}}
-  fr: Nous avons dépensé {{fmt_compact1_written spent_last_year}} en {{pa_last_year}}
-
 home_ppl_title:
   en: People
   fr: Personnel
 
-home_ppl_intro:
-  transform: [handlebars,markdown]
-  en: The Federal Public Service counted {{fmt_big_int_real headcount_last_year}} employees at the end of {{ppl_last_year}}
-  fr: La Fonction publique fédérale comptait {{fmt_big_int_real headcount_last_year}} employés à la fin de {{ppl_last_year}}
-
 home_results_title:
   en: Results
   fr: Résultats
-
-home_results_intro:
-  transform: [handlebars,markdown]
-  en: |
-    We met {{targets_met}} targets in {{pa_last_year}}
-  fr: |
-    Nous avons atteint {{targets_met}} cibles en {{pa_last_year}}
 
 home_sub_title:
   en: Find the latest information on all government finances, people and results
@@ -83,11 +66,9 @@ explorer_home_text:
   en: Explore data from your area of interest by organization, program, or keyword "tag"
   fr: Recherche par organisation, programme ou mot clé pour étudier les données dans le domaine qui vous intéresse
 
-
 other_ways_of_exploring_title:
   en: Other ways to explore the data
   fr: Autres moyens d'exploration des données
-
 
 dashboard_home:
   en: Search by topic to build your own customized dashboard
@@ -129,56 +110,6 @@ whats_new:
   en: What's new?
   fr: Quoi de neuf?
 
-planned_spending_by_program_home:
-  en: Planned spending by Program
-  fr: Dépenses prévues par Programme
-   
-planned_ftes_by_program_home:
-  en: Number of employees (FTEs) we plan to employ by Program
-  fr: Nombre d'employés (ETP) que nous prévoyons employer par Programme
-
-tabled_estimates_home:
-  en: Tabled Estimates
-  fr: Budget des dépenses déposés
-
-DRR_1617:
-  en: 2016-17 Departmental Results Reports
-  fr: Rapport sur les résultats ministériels de 2016-2017
-
-DP_1819:
-  en: 2018-19 Departmental Plans
-  fr: Plan ministériels de 2018-2019
-
-lapse_home_title:
-  transform: [handlebars]
-  en: | 
-    {{lapse_in_year}} Gross Lapse Forecast at Year End 
-  fr: Prévision des fonds inutilisés bruts à la fin de l'exercice {{lapse_in_year}}
-
-CFMRS_exp_title:
-  transform: [handlebars]
-  en: |
-    {{lapse_in_year}} Voted Expenditures as of {{p}}
-  fr: Dépenses votées en date de {{p}} {{lapse_in_year}}
-
-
-upcoming_features_content:
-  en: Upcoming features and content
-  fr: Fonctions et contenu à venir
-
-prog_by_vote_stat:
-  en: Program expenditures by authority type (discretionary and mandatory spending)
-  fr: Dépenses de programme par type d'autorisation (dépenses discrétionnaires et obligatoires)
-
-prog_by_so:
-  en: Program by standard object (spending by category of expenditures)
-  fr: Programme par articles courants (par catégories de dépenses)
-
-infographs_for_crso:
-  en: Core Responsibility/Strategic Outcome Infographics on spending and results
-  fr: Infographies sur les dépenses et les résultats pour les responsabilités essentielles et les résultats stratégiques
-
-
 home_featured_row_title:
   en: Featured content
   fr: En vedette
@@ -203,20 +134,41 @@ survey_home_desc:
   en: Help us make improvements by telling us about your experience!
   fr: Aidez-nous à l’améliorer en nous relatant votre expérience!
 
-home_people_data_quicklink:
-  en: People Management Data - March 31, 2018
-  fr: Données sur la gestion des personnes – 31 mars 2018
-
-home_who_we_help_quicklink:
-  en: Who We Help tag
-  fr: Étiquetage Qui aidons-nous
-
 check_home_link:
   en: Check it out!
   fr: Consultez-le!
-
 
 home_desc_meta_attr:
   en: The best place to find answers about the federal government like how much is being spent, employee demographics and government results. We use visuals to make complex data a simple story. 
   fr: Meilleur endroit pour trouver des réponses sur le gouvernement fédéral, comme le montant des dépenses, le profil démographique des employés et les résultats obtenus. Nous utilisons des graphiques pour faire un récit simple de données complexes. 
 
+
+## Featured content titles
+
+quick_link_DRR_1718:
+  en: 2017-18 Departmental Results Reports
+  fr: Rapport sur les résultats ministériels de 2017-2018
+
+quick_link_auth_and_exp:
+  en: 2017-18 Authorities and Expenditures
+  fr: Autorisations et dépenses de 2017-2018
+
+quick_link_exp_by_so:
+  en: 2017-18 Expenditures by Standard Object
+  fr: Dépenses par article courant de 2017-2018
+
+quick_link_spending_by_program:
+  en: 2017-18 Spending by Program
+  fr: Dépenses par Programme de 2017-2018
+
+quick_link_transfer_payment:
+  en: 2017-18 Transfer Payments
+  fr: Paiements de transfert de 2017-2018
+
+quick_link_prog_by_vote_stat:
+  en: 2017-18 Program expenditures by authority type
+  fr: Dépenses de programme par type d'autorisation de 2017-2018
+
+quick_link_prog_by_so:
+  en: 2017-18 Program expenditures by standard object
+  fr: Dépenses de programme par articles courants de 2017-2018
