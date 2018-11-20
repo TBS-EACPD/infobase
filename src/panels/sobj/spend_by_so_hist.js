@@ -2,7 +2,7 @@ import {
   PanelGraph,
   businessConstants,
   years,
-  formats,
+  dollar_formats,
   util_components,
   Panel,
   declarative_charts,
@@ -146,7 +146,7 @@ class SobjLine extends React.Component {
             series={graph_series}
             ticks={_.map(std_years, run_template)}
             y_axis="($)"
-            formater={formats.compact1_raw}
+            formaters={dollar_formats}
             colors={colors}
           />
         </div>

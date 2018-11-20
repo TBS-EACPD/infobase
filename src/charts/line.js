@@ -35,7 +35,8 @@ export class Line {
     this.x_axis_line = this.options.x_axis_line === undefined ? true : this.options.x_axis_line;
     this.normalized = this.options.normalized || false;
 
-    this.number_formater = this.options.formater;
+    this.formaters = _.map(this.options.formaters);
+    this.number_formater = !_.isEmpty(this.formaters) ? this.formaters[0] : this.options.formater;
     this.normalized_formater = this.options.normalized_formater;
 
     // resize the svg if necessary
@@ -57,7 +58,7 @@ export class Line {
     // restrict either the beginning or end of the ticks
     // if there are no associated values  
     this.all_ticks = this.options.ticks;
-    this.ticks_formatter = _.isFunction(this.options.ticks_formatter) ? this.options.ticks_formatter : _.identity;
+    this.ticks_formater = _.isFunction(this.options.ticks_formater) ? this.options.ticks_formater : _.identity;
     this.ticks = (
       _.filter(
         this.all_ticks, 
@@ -93,7 +94,9 @@ export class Line {
 
       const delta_based_padding_factor = Math.abs(2*average_delta/center);
 
-      return delta_based_padding_factor > 0.1 ? 0.1 : delta_based_padding_factor;
+      return (!_.isNaN(delta_based_padding_factor) && delta_based_padding_factor < 0.1) ? 
+        delta_based_padding_factor :
+        0.1;
     };
 
     this.y_domain_padding = _.isNumber(this.options.y_domain_padding) ?
@@ -125,13 +128,18 @@ export class Line {
 
     const series = _.chain(this.series)
       .toPairs()
-      .map( ([key, vals]) => _.map( vals, (val,ix) => {return {key: key, value: val, index: this.ticks[ix]}}))
+      .map( ([key, vals]) => 
+        _.map( 
+          vals, 
+          (val,ix) => ({key: key, value: val, index: this.ticks[ix]}) 
+        ) 
+      )
       .flatten()
       .groupBy("index")
       .map(group => ({
         year: _.first(group).index,
         ..._.chain(group)
-          .map( ({key, value}) => [ key, value ])
+          .map( ({key, value}) => [ key, value ] )
           .fromPairs()
           .value(),
       }))
@@ -361,7 +369,7 @@ export class Line {
           "width": this.tick_width+"px",
           "left": d => this.x(d)-this.tick_width/2+this.margin.left+"px",
         })
-        .html(this.ticks_formatter);
+        .html(this.ticks_formater);
       
       if (!this.x_axis_line){
         this.graph_area.select(".x.axis path").remove();
@@ -376,11 +384,28 @@ export class Line {
 
       this.graph_area.select(".y.axis").remove();
 
+      const formater_gives_unique_ticks = (formater) => _.chain( this.y.ticks(5) )
+        .map(formater)
+        .uniq()
+        .value().length === this.y.ticks(5).length;
+      const pick_best_formater_option = () => {
+        if ( this.normalized || _.isEmpty(this.formaters) ){
+          return this.formater;
+        } else {
+          const good_formaters = _.filter(this.formaters, formater_gives_unique_ticks);
+          if ( !_.isEmpty(good_formaters) ){
+            return good_formaters[0];
+          } else {
+            return this.formater;
+          }
+        }
+      };
+
       var yAxis = d3.axisLeft()
         .scale(this.y)
         .ticks(5)
         .tickSizeOuter(0)
-        .tickFormat(this.formater);
+        .tickFormat( pick_best_formater_option() );
 
       var yaxis_node = this.graph_area.select(".y.axis");
 

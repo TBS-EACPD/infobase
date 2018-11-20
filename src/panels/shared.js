@@ -5,7 +5,7 @@ import * as declarative_charts from '../charts/declarative_charts.js';
 import * as charts_index from '../core/charts_index';
 import * as Results from '../models/results.js';
 import { create_text_maker, trivial_text_maker, run_template } from '../models/text.js';
-import { formats } from '../core/format.js';
+import { formats, dollar_formats } from '../core/format.js';
 import { PanelGraph, layout_types } from '../core/PanelGraph.js';
 import { Panel, StdPanel, TextPanel, Col } from '../components/panel-components.js';
 import { reactAdapter } from '../core/reactAdapter';
@@ -340,7 +340,8 @@ export {
   Results,
   Statistics,
   declarative_charts, 
-  formats, 
+  formats,
+  dollar_formats,
   trivial_text_maker, 
   create_text_maker, 
   run_template, 

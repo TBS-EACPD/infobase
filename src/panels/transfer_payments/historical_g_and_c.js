@@ -4,7 +4,7 @@ import {
   TM,
 } from './gnc_text_provider.js';
 import {
-  formats,
+  dollar_formats,
   run_template,
   PanelGraph,
   years,
@@ -193,7 +193,7 @@ class HistTPTypes extends React.Component {
           />  
         </div>
         <Line
-          formater={formats.compact_raw}
+          formaters={dollar_formats}
           y_axis="($)"
           height={375}
           stacked
@@ -337,7 +337,7 @@ class DetailedHistTPItems extends React.Component {
           <Line
             height={400}
             series={graph_series}
-            formater={formats.compact_raw}
+            formaters={dollar_formats}
             y_axis="($)"
             colors={color_scale}
             ticks={_.map(std_years,run_template)}

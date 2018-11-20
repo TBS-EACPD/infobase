@@ -1,6 +1,6 @@
 import { text_maker, TM } from './sobj_text_provider.js';
 import {
-  formats,
+  dollar_formats,
   PanelGraph,
   years,
   businessConstants,
@@ -67,7 +67,7 @@ new PanelGraph({
             add_yaxis: true,
             add_xaxis: true,
             y_axis: "($)",
-            formater: formats.compact1_raw,
+            formaters: dollar_formats,
           }}
 
         />

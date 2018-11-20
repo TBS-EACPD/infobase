@@ -211,13 +211,13 @@ const types_to_format = {
     }
   },
   "big_int_real": (val, lang, options) => types_to_format["big_int"](val*1000, lang, options),
-  "int": (val, lang) => val,
-  "ordinal": (val, lang) => val,
-  "str": (val, lang) => val,
-  "boolean": (val, lang) => val,
-  "wide-str": (val, lang) => val,
-  "short-str": (val, lang) => val,
-  "date": (val, lang) => val,
+  "int": (val) => val,
+  "ordinal": (val) => val,
+  "str": (val) => val,
+  "boolean": (val) => val,
+  "wide-str": (val) => val,
+  "short-str": (val) => val,
+  "date": (val) => val,
 };
 
 
@@ -275,9 +275,11 @@ _.each(
   }
 );
 
+const dollar_formats = _.pickBy( formats, (format, key) => /^compact([0-9?]?)+_raw$/.test(key) );
 
 export { 
   formater, 
   list_formater, 
-  formats, 
+  formats,
+  dollar_formats,
 };
