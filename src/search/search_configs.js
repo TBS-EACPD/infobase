@@ -1,37 +1,18 @@
 import { Fragment } from 'react';
-import { Highlighter } from 'react-bootstrap-typeahead';
 
 import { Table } from '../core/TableClass.js';
 import { GlossaryEntry } from '../models/glossary.js';
-import { escapeRegExp } from '../core/utils.js';
+
 import { Subject } from '../models/subject.js';
 import { trivial_text_maker } from '../models/text.js';
 
+import { 
+  query_to_reg_exps,
+  highlight_search_match,
+  InfoBaseHighlighter,
+} from './search_utils.js';
+
 const { Dept, Gov, Program, Tag, CRSO } = Subject;
-
-const query_to_reg_exps = (query) => {
-  const raw_tokens = query.split(" ");
-  const reg_exps = _.map(
-    raw_tokens, 
-    token => new RegExp( escapeRegExp(_.deburr(token) ), 'gi')
-  );
-  return reg_exps;
-}
-
-// Used where Highlighter component can't be, e.g. where searched string already 
-// contains markup and will need to be rendered with dangerouslySetInnerHTML
-const highlight_search_match = (search, content) => {
-  const reg_exps = query_to_reg_exps(search);
-
-  let modified_string = _.clone(content);
-
-  _.each(
-    reg_exps,
-    (reg_exp) => modified_string = modified_string.replace(reg_exp, match => `<strong>${match}</strong>`)
-  );
-
-  return modified_string
-}
 
 function create_re_matcher(query, accessors, config_name){
 
@@ -81,16 +62,18 @@ const org_templates = {
     if ( org.level !== "gov" && _.isEmpty(org.tables) ){
       return (
         <span className="search-grayed-out-hint">
-          <Highlighter search={search}>
-            { `${org.name} ${trivial_text_maker("limited_data")}` }
-          </Highlighter>
+          <InfoBaseHighlighter 
+            search={search} 
+            content={`${org.name} ${trivial_text_maker("limited_data")}`} 
+          />
         </span>
       );
     } else {
       return (
-        <Highlighter search={search}>
-          { this.name_function(org) }
-        </Highlighter>
+        <InfoBaseHighlighter 
+          search={search}
+          content={ this.name_function(org) }
+        />
       );
     }
   },
@@ -217,6 +200,8 @@ const crsos = {
 };
 
 export {
+  highlight_search_match,
+
   all_orgs_without_gov,
   orgs_with_data_with_gov,
   all_orgs_with_gov,

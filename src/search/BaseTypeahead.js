@@ -5,7 +5,6 @@ import './BaseTypeahead.scss';
 
 import {
   Typeahead,
-  Highlighter,
   Menu,
   MenuItem,
 } from 'react-bootstrap-typeahead';
@@ -15,6 +14,8 @@ import { get_static_url } from '../core/request_utils.js';
 import text from "./BaseTypeahead.yaml";
 import { create_text_maker } from '../models/text.js';
 import { TM } from '../components/TextMaker.js';
+
+import { InfoBaseHighlighter } from './search_utils.js';
 
 const text_maker = create_text_maker(text);
 const TextMaker = (props) => <TM tmf={text_maker} {...props}/>;
@@ -93,11 +94,7 @@ export class BaseTypeahead extends React.Component {
             menu_content: (search) => (
               _.isFunction(search_config.menu_content_function) ?
                 search_config.menu_content_function(data, search) :
-                (
-                  <Highlighter search={search}>
-                    {search_config.name_function(data)}
-                  </Highlighter>
-                )
+                <InfoBaseHighlighter search={search} content={search_config.name_function(data)}/>
             ),
             config_group_index: ix,
           })
