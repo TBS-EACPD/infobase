@@ -170,14 +170,14 @@ const gocos = {
     .filter( ({root}) => root === Tag.tag_roots.GOCO )
     .filter('is_lowest_level_tag')
     .value(),
-  filter: (query, datum) => memoized_re_matchers(query, ['name', 'description'], "gocos")(datum),
+  filter: (query, datum) => memoized_re_matchers(query, ['name'], "gocos")(datum),
 };
 
 const how_we_help = {
   header_function: () => `${Tag.plural} - ${Tag.tag_roots.HWH.name}`,
   name_function: _.property('name'),
   get_data: () => _.filter(Tag.get_all(), {root: Tag.tag_roots.HWH}),
-  filter: (query, datum) => memoized_re_matchers(query, ['name', 'description'], "how_we_help")(datum),
+  filter: (query, datum) => memoized_re_matchers(query, ['name'], "how_we_help")(datum),
 };
 
 const datasets = {
@@ -205,7 +205,7 @@ const programs = {
   header_function: () => trivial_text_maker('programs'),
   name_function: program => `${program.name} (${program.dept.sexy_name})`,
   get_data: () => _.reject(Program.get_all(), 'dead_program'),
-  filter: (query, datum) => memoized_re_matchers(query, ['name', 'description'], "programs")(datum),
+  filter: (query, datum) => memoized_re_matchers(query, ['name'], "programs")(datum),
 };
 
 //only include CRs because SO's have really really long names
