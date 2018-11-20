@@ -13,7 +13,7 @@ const general_href_for_item = item => {
 
   } else if(item.table && item.table.constructor === Table){
 
-    return rpb_link({ table: item.table.id });
+    return rpb_link({ table: item.table.id }, true);
 
   } else if(item.constructor === GlossaryEntry){
     return glossary_href(item);
