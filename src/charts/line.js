@@ -91,7 +91,7 @@ export class Line {
         .mean()
         .value();
 
-      const delta_based_padding_factor = 2*average_delta/center;
+      const delta_based_padding_factor = Math.abs(2*average_delta/center);
 
       return delta_based_padding_factor > 0.1 ? 0.1 : delta_based_padding_factor;
     };
@@ -380,7 +380,7 @@ export class Line {
         .scale(this.y)
         .ticks(5)
         .tickSizeOuter(0)
-        .tickFormat(this.formater)
+        .tickFormat(this.formater);
 
       var yaxis_node = this.graph_area.select(".y.axis");
 
