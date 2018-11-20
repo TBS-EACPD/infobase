@@ -1,5 +1,5 @@
-import './FilterTable.scss';
 import classNames from 'classnames';
+import './FilterTable.scss';
 
 const eye_open = (
   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
@@ -91,7 +91,7 @@ export class FilterTable extends React.Component {
                 aria-label={ 
                   {
                     en: `Activate to filter "${item.text}" items from the following presentation.`,
-                    fr: `DRRTODO`,
+                    fr: `Appuyez pour filtrer les données «${item.text}» de la présentation`,
                   }[window.lang]
                 }
               >

@@ -36,8 +36,8 @@ drr_summary_text:
     {{#if drr17_past_total}} De ces indicateurs: {{/if}}
     {{#if drr17_future_total}}{{#unless  drr17_past_total}} De ces indicateurs: {{/unless}}{{/if}}
 
-    {{#if drr17_past_total}} * **{{drr17_indicators_met}}** des **{{drr17_past_total}}** cibles(**{{fmt_percentage1 (divide drr17_indicators_met drr17_past_total)}}**) qui devaient être atteintes au plus tard le 31 mars {{pa_last_year_short_second}} ont été {{gl_tt "atteintes" "RESULTS_MET"}}. {{/if}}
-    {{#if drr17_future_total}} * DRRTODO {{/if}}
+    {{#if drr17_past_total}} * **{{drr17_indicators_met}}** des **{{drr17_past_total}}** cibles (**{{fmt_percentage1 (divide drr17_indicators_met drr17_past_total)}}**) qui devaient être atteintes au plus tard le 31 mars {{pa_last_year_short_second}} ont été {{gl_tt "atteintes" "RESULTS_MET"}}. {{/if}}
+    {{#if drr17_future_total}} * **{{drr17_indicators_met}}** autres indicateurs visent à atteindre leurs cibles continuellement ou après Mars 31, {{pa_last_year_short_second}} {{/if}}
 
 gov_drr_summary_org_table_text:
   transform: [handlebars,markdown]
