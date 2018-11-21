@@ -502,7 +502,7 @@ class GraphWithLegend extends React.Component {
       </div>
     );
   }
-}
+};
 GraphWithLegend.defaultProps = {
   legend_col_full_size: 4,
   graph_col_full_size: 8,
