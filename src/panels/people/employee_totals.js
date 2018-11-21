@@ -68,8 +68,6 @@ const info_deps_by_level = {
                  series = {series}
                  ticks = {ticks}
                  colors = {infobase_colors()}
-                 add_yaxis = {true}
-                 add_xaxis = {true}
                  y_axis = {text_maker("employees")}
                  formater = {formats["big_int_real_raw"]}
                />

@@ -18,7 +18,7 @@ const { ex_levels } = businessConstants;
 
 const {
   A11YTable,
-  D3GraphWithLegend,
+  GraphWithLegend,
 } = declarative_charts;
 
 
@@ -56,16 +56,16 @@ const calculate_funcs_by_level = {
   },
   dept: function(dept, info){
     const {table112} = this.tables;
-    return (
-      table112.q(dept).data
-        .map(row => ({
-          label: row.ex_lvl,
-          data: people_years.map(year => row[year]),
-          five_year_percent: row.five_year_percent,
-          active: (row.ex_lvl !== "Non-EX"),
-        }))
-        .filter(d => d3.sum(d.data) !== 0)
-    );
+    return _.chain(table112.q(dept).data)
+      .map(row => ({
+        label: row.ex_lvl,
+        data: people_years.map(year => row[year]),
+        five_year_percent: row.five_year_percent,
+        active: (row.ex_lvl !== "Non-EX"),
+      }))
+      .filter(d => d3.sum(d.data) !== 0)
+      .sortBy(d => d.label)
+      .value();
   },
 };
 
@@ -92,19 +92,21 @@ const calculate_funcs_by_level = {
           </Col>
           { !window.is_a11y_mode &&
             <Col size={12} isGraph>
-              <D3GraphWithLegend
-                options = {{
-                  legend_col_full_size: 4,
-                  graph_col_full_size: 8,
-                  legend_class: 'fcol-sm-11 fcol-md-11',
-                  y_axis: text_maker("employees"),
-                  ticks: ticks,
-                  bar: true,
-                  yaxis_formatter: formats["big_int_real_raw"],
+              <GraphWithLegend
+                {...{
                   legend_title: text_maker("ex_level"),
-                  get_data: _.property("data"),
+                  bar: true,
+                  graph_options: {
+                    y_axis: text_maker("employees"),
+                    ticks: ticks,
+                    yaxis_formatter: formats.big_int_real_raw,
+                  },
+                  graph_mode_options: [
+                    "stacked",
+                    "not-stacked",
+                    "normalized",
+                  ],
                   data: graph_args,
-                  "sort_data": false,
                 }}
               />
             </Col>

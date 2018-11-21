@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import * as charts_index from '../core/charts_index.js';
+import { formats }from '../core/format.js';
 import { Bar as D3Bar } from './bar.js';
 import { Line as D3Line } from './line.js';
 import { HBarComposition } from './hbar_composition.js';
@@ -11,7 +12,7 @@ import { TwoSeriesBar } from './two_series_bar.js';
 
 import { Fragment } from 'react';
 
-const { create_graph_with_legend, create_a11y_table } = charts_index;
+const { create_a11y_table } = charts_index;
 
 /* 
   data : [{ 
@@ -182,60 +183,6 @@ class ProgressDonut extends React.Component {
     this.graph_instance = new SafeProgressDonut(
       this.refs.graph_area,
       _.clone(this.props)
-    );
-    this._render()
-
-  }
-  componentDidUpdate(){
-    this._render();
-  }
-}
-
-class D3GraphWithLegend extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      legend_col_full_size: props.options.legend_col_full_size, 
-      graph_col_full_size: props.options.graph_col_full_size,
-      graph_col_class: props.options.graph_col_class,
-    };
-  }
-  render(){
-    return (
-      <div 
-        ref="graph_area"
-        className="frow" 
-      >
-        <div 
-          className={"x1 fcol-xs-12 fcol-md-"+this.state.legend_col_full_size}
-          style={{position: "relative"}}
-        />
-        <div 
-          className={"x2 fcol-xs-12 fcol-md-"+this.state.graph_col_full_size+" "+this.state.graph_col_class}
-          style={{position: "relative"}}
-          tabIndex="-1"
-        />
-      </div>
-    );
-  }
-  _render(){
-    if(!window.is_a11y_mode){
-      this.graph_instance.render(
-        _.chain(this.props.options)
-          .extend({graph_area: d3.select(this.refs.graph_area)})
-          .clone()
-          .value()
-      );
-    }
-    
-  }
-  componentDidMount(){
-    this.graph_instance = create_graph_with_legend.call(
-      d3.select(this.refs.graph_area).node(),
-      _.chain(this.props.options)
-        .extend({graph_area: d3.select(this.refs.graph_area)})
-        .clone()
-        .value()
     );
     this._render()
 
@@ -455,10 +402,120 @@ class DualAxisBarChart extends React.Component {
   }
 }
 
+class GraphWithLegend extends React.Component {
+  constructor(props){
+    super(props);
+
+    const colors = props.colors || props.get_colors();
+
+    const set_graph_colors = (items) => _.each(
+      items,
+      (item) => colors(item.label)
+    );
+    set_graph_colors(props.data);
+
+    this.state = {
+      colors,
+      selected: _.chain(props.data)
+        .filter( ({active}) => _.isUndefined(active) || active )
+        .map( ({label}) => label )
+        .value(),
+      graph_mode: props.graph_mode_options[0],
+    };
+  }
+  render(){
+    const {
+      data,
+
+      legend_col_full_size,
+      legend_col_class,
+      legend_title, // todo: add title option to GraphLegend component
+
+      graph_col_full_size,
+      graph_col_class,
+
+      bar,
+      graph_options,
+    } = this.props;
+
+    const {
+      colors,
+      selected,
+      graph_mode,
+    } = this.state;
+
+    const series = _.chain(data)
+      .filter( ({label}) => _.includes(selected, label) )
+      .map( ({label, data }) => [ label, data ])
+      .fromPairs()
+      .value();
+
+    const extended_graph_options = {
+      ...graph_options,
+      colors,
+      series,
+      stacked: graph_mode === "stacked",
+      normalized: graph_mode === "normalized",
+      normalized_formater: formats.percentage_raw,
+      y_axis: graph_mode === "normalized" ? "%" : graph_options.y_axis,
+    };
+
+    return (
+      <div className="frow">
+        <div 
+          className={classNames(`fcol-xs-12 fcol-md-${legend_col_full_size}`, legend_col_class)} 
+          style={{ width: "100%", position: "relative" }}
+        >
+          <div
+            className="legend-container"
+            style={{ maxHeight: "400px" }}
+          >
+            <GraphLegend
+              items={
+                _.map( 
+                  data,
+                  ({label}) => ({
+                    label,
+                    active: _.includes(selected, label),
+                    id: label,
+                    color: colors(label),
+                  })
+                )
+              }
+              onClick={label => {
+                this.setState({
+                  selected: _.toggle_list(selected, label),
+                });
+              }}
+              // todo: button for toggling graph mode based on array of modes passed in props
+            />
+          </div>
+        </div>
+        <div 
+          className={classNames(`fcol-xs-12 fcol-md-${graph_col_full_size}`, graph_col_class)} 
+          style={{ width: "100%", position: "relative" }}
+          tabIndex="-1"
+        >
+          { bar && <Bar {...extended_graph_options}/> }
+          { !bar && <Line {...extended_graph_options}/> }
+        </div>
+      </div>
+    );
+  }
+}
+GraphWithLegend.defaultProps = {
+  legend_col_full_size: 4,
+  graph_col_full_size: 8,
+  legend_class: false,
+  graph_col_class: false,
+  get_colors: () => infobase_colors(),
+};
+
+
 export {
   StackedHbarChart,
   GraphLegend,
-  D3GraphWithLegend,
+  GraphWithLegend,
   Bar,
   Line,
   A11YTable,

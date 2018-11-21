@@ -37,7 +37,8 @@ const calculate_funcs_by_level = {
       .reduce((sum, val) => sum + val, 0)
       .value();
 
-    return _.values(fol)
+    return _.chain(fol)
+      .values()
       .map(fol_type => {
         const fol_text = fol_type.text;
         const yearly_values = people_years.map(year => table303.horizontal(year,false)[fol_text]);
@@ -47,11 +48,13 @@ const calculate_funcs_by_level = {
           five_year_percent: yearly_values.reduce(function(sum, val) { return sum + val }, 0)/gov_five_year_total_head_count,
           active: true,
         };
-      });
+      })
+      .sortBy( d => -d3.sum(d.data) )
+      .value();
   },
   dept: function(dept, info){
     const {table303} = this.tables;
-    return table303.q(dept).data
+    return _.chain(table303.q(dept).data)
       .map(row =>
         ({
           label: row.fol,
@@ -60,7 +63,9 @@ const calculate_funcs_by_level = {
           active: true,
         })
       )
-      .filter(d => d3.sum(d.data) !== 0 );
+      .filter( d => d3.sum(d.data) !== 0 )
+      .sortBy( d => -d3.sum(d.data) )
+      .value();
   },
 };
 
@@ -107,17 +112,19 @@ const calculate_funcs_by_level = {
           { !window.is_a11y_mode && level === "dept" &&
             <Col size={12} isGraph>
               <HeightClippedGraphWithLegend
-                create_graph_with_legend_options = {{
-                  legend_col_full_size: 4,
-                  graph_col_full_size: 8,
-                  graph_col_class: "height-clipped-bar-area",
-                  legend_class: 'fcol-sm-11 fcol-md-11',
-                  y_axis: text_maker("employees"),
-                  ticks: ticks,
-                  bar: true,
-                  yaxis_formatter: formats["big_int_real_raw"],
+                graph_props = {{
                   legend_title: text_maker("FOL"),
-                  get_data: _.property("data"),
+                  bar: true,
+                  graph_options: {
+                    y_axis: text_maker("employees"),
+                    ticks: ticks,
+                    yaxis_formatter: formats.big_int_real_raw,
+                  },
+                  graph_mode_options: [
+                    "stacked",
+                    "not-stacked",
+                    "normalized",
+                  ],
                   data: graph_args,
                 }}
               />

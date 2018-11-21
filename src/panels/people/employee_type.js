@@ -34,7 +34,8 @@ const info_deps_by_level = {
 const calculate_funcs_by_level = {
   gov: function(gov,info){
     const {table9} = this.tables;				  
-    return _.values(tenure)
+    return _.chain(tenure)
+      .values()
       .map(tenure_type => {
         const tenure_text = tenure_type.text;
         const yearly_values = people_years.map(year => table9.horizontal(year, false)[tenure_text]);
@@ -44,11 +45,13 @@ const calculate_funcs_by_level = {
           five_year_percent: yearly_values.reduce(function(sum, val) { return sum + val }, 0)/info.gov_five_year_total_head_count,
           active: true,
         };
-      });
+      })
+      .sortBy( d => -d3.sum(d.data) )
+      .value();
   },
   dept: function(dept,info){
     const {table9} = this.tables;
-    return table9.q(dept).data
+    return _.chain(table9.q(dept).data)
       .map(row =>
         ({
           label: row.employee_type,
@@ -57,7 +60,9 @@ const calculate_funcs_by_level = {
           active: true,
         })
       )
-      .filter(d => d3.sum(d.data) !== 0 );
+      .filter( d => d3.sum(d.data) !== 0 )
+      .sortBy( d => -d3.sum(d.data) )
+      .value();
   },
 };
 
@@ -93,17 +98,19 @@ const calculate_funcs_by_level = {
           { !window.is_a11y_mode && level === "dept" &&
             <Col size={12} isGraph>
               <HeightClippedGraphWithLegend
-                create_graph_with_legend_options = {{
-                  legend_col_full_size: 4,
-                  graph_col_full_size: 8,
-                  graph_col_class: "height-clipped-bar-area",
-                  legend_class: 'fcol-sm-11 fcol-md-11',
-                  y_axis: text_maker("employees"),
-                  ticks: ticks,
-                  bar: true,
-                  yaxis_formatter: formats["big_int_real_raw"],
+                graph_props = {{
                   legend_title: text_maker("employee_type"),
-                  get_data: _.property("data"),
+                  bar: true,
+                  graph_options: {
+                    ticks: ticks,
+                    y_axis: text_maker("employees"),
+                    yaxis_formatter: formats.big_int_real_raw,
+                  },
+                  graph_mode_options: [
+                    "stacked",
+                    "not-stacked",
+                    "normalized",
+                  ],
                   data: graph_args,
                 }}
               />

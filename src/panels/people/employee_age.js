@@ -19,7 +19,7 @@ const { people_years } = years;
 const { compact_age_groups } = businessConstants;
 
 const { 
-  D3GraphWithLegend,
+  GraphWithLegend,
   A11YTable,
 } = declarative_charts;
 
@@ -73,7 +73,7 @@ const calculate_funcs_by_level = {
     const {table304} = this.tables;
     const series = table11.q(dept).high_level_rows();
     
-    const avg_age = table304.q(dept).data
+    const avg_age = _.chain(table304.q(dept).data)
       .map(row => ({
         label: Subject.Dept.lookup(row.dept).sexy_name,
         data: people_years.map(year =>row[year]),
@@ -84,7 +84,9 @@ const calculate_funcs_by_level = {
         label: text_maker("fps"),
         data: people_years.map(year => table304.GOC[0][year]),
         active: true,
-      });
+      })
+      .sortBy( d => -d3.sum(d.data) )
+      .value();
     
     const dept_five_year_total_head_count = _.chain(series)
       .map(row => d3.sum(_.drop(row)))
@@ -128,32 +130,33 @@ const calculate_funcs_by_level = {
       
       const ticks = _.map(people_years, y => `${run_template(y)}`);
       
-      // Options for D3GraphWithLegend React components
+      // Options for GraphWithLegend React components
       const age_group_options = {
-        legend_col_full_size: 4,
-        graph_col_full_size: 8,
-        graph_col_class: "height-clipped-bar-area",
-        ticks: ticks,
-        y_axis: text_maker("employees"),
+        legend_title: text_maker("age_group"),
         bar: true,
-        stacked: false,
-        sort_data: false,
-        yaxis_formatter: formats["big_int_real_raw"],
-        get_data: _.property("data"), 
-        legend_title: "age_group",
+        graph_options: {
+          ticks: ticks,
+          y_axis: text_maker("employees"),
+          yaxis_formatter: formats.big_int_real_raw,
+        },
+        graph_mode_options: [
+          "not-stacked",
+          "stacked",
+          "normalized",
+        ],
         data: graph_args.age_group,
       };
       const avg_age_options = {
-        legend_col_full_size: 4,
-        graph_col_full_size: 8,
-        legend_class: 'fcol-sm-11 fcol-md-11',
-        stacked: false,
-        y_axis: text_maker("avgage"),
-        ticks: ticks,
+        legend_title: text_maker("legend"),
         bar: false,
-        yaxis_formatter: formats["int"],
-        legend_title: "legend",
-        get_data: _.property("data"),
+        graph_options: {
+          ticks: ticks,
+          y_axis: text_maker("avgage"),
+          yaxis_formatter: formats.int,
+        },
+        graph_mode_options: [
+          "not-stacked",
+        ],
         data: graph_args.avg_age,
       };
       
@@ -175,20 +178,14 @@ const calculate_funcs_by_level = {
                 }}
                 tabPaneContents={{
                   age_group: (
-                    <div 
-                      id={"emp_age_tab_pane"}
-                      aria-hidden={true}
-                    >
-                      <D3GraphWithLegend options={age_group_options}/>
+                    <div id={"emp_age_tab_pane"}>
+                      <GraphWithLegend {...age_group_options} />
                       <div className='clearfix'></div>
                     </div>
                   ), 
                   avgage: (
-                    <div 
-                      id={"emp_age_tab_pane"}
-                      aria-hidden={true}
-                    >
-                      <D3GraphWithLegend options={avg_age_options}/>
+                    <div id={"emp_age_tab_pane"}>
+                      <GraphWithLegend {...avg_age_options} />
                       <div className='clearfix'></div>
                     </div>
                   ),

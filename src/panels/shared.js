@@ -22,7 +22,7 @@ import { Statistics } from '../core/Statistics.js';
 const {
   SafePie,
   TabularPercentLegend,
-  D3GraphWithLegend,
+  GraphWithLegend,
 } = declarative_charts;
 
 const { Format, HeightClipper, TabbedContent, TM, create_text_maker_component } = util_components;
@@ -85,11 +85,18 @@ export const PplSharePie = ({graph_args, label_col_header, sort_func}) => {
   </div>;
 };
 
-export const HeightClippedGraphWithLegend = ({create_graph_with_legend_options}) => {
+export const HeightClippedGraphWithLegend = ({graph_props}) => {
   return (
     <HeightClipper clipHeight={185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient gradient-strong"}>
       <div className="height-clipped-graph-area" aria-hidden={true}>
-        <D3GraphWithLegend options={create_graph_with_legend_options}/>
+        <GraphWithLegend 
+          {...{
+            ...graph_props, 
+            graph_col_class: graph_props.graph_options.bar ? 
+              `${graph_props.graph_col_class || ''} height-clipped-bar-area` : 
+              graph_props.graph_col_class,
+          }}
+        />
       </div>
     </HeightClipper>
   );

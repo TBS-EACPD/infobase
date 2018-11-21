@@ -69,15 +69,6 @@ new PanelGraph({
       graph_content = (
         <SobjLine data={data} />
       );
-      // charts_index.create_graph_with_legend.call({panel},{
-      //   get_data: _.property('data'), 
-      //   data,
-      //   ticks,
-      //   y_axis : "$",
-      //   yaxis_formatter: formats.compact1_raw,
-      //   sort_data: false,
-      //   legend_title: legend_title,
-      // });
     }
 
     return (
