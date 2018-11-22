@@ -18,11 +18,14 @@ import FootNote from '../models/footnotes';
 import { infograph_href_template as infograph_href_template } from '../infographic/routes.js';
 import { glossary_href } from '../link_utils.js';
 import { Statistics } from '../core/Statistics.js';
+import classNames from 'classnames';
 
 const {
   SafePie,
   TabularPercentLegend,
-  GraphWithLegend,
+  GraphLegend,
+  Bar,
+  Line,
 } = declarative_charts;
 
 const { Format, HeightClipper, TabbedContent, TM, create_text_maker_component } = util_components;
@@ -85,11 +88,130 @@ export const PplSharePie = ({graph_args, label_col_header, sort_func}) => {
   </div>;
 };
 
-export const HeightClippedGraphWithLegend = ({graph_props}) => {
+export class LineBarToggleGraph extends React.Component {
+  constructor(props){
+    super(props);
+
+    const colors = props.colors || props.get_colors();
+
+    const set_graph_colors = (items) => _.each(
+      items,
+      (item) => colors(item.label)
+    );
+    set_graph_colors(props.data);
+
+    this.state = {
+      colors,
+      selected: _.chain(props.data)
+        .filter( ({active}) => _.isUndefined(active) || active )
+        .map( ({label}) => label )
+        .value(),
+      graph_mode: props.graph_mode_options[0],
+    };
+  }
+  render(){
+    const {
+      data,
+
+      legend_col_full_size,
+      legend_col_class,
+      legend_title,
+
+      graph_col_full_size,
+      graph_col_class,
+
+      bar,
+      graph_options,
+    } = this.props;
+
+    const {
+      colors,
+      selected,
+      graph_mode,
+    } = this.state;
+
+    const series = _.chain(data)
+      .filter( ({label}) => _.includes(selected, label) )
+      .map( ({label, data }) => [ label, data ])
+      .fromPairs()
+      .value();
+
+    const extended_graph_options = {
+      ...graph_options,
+      colors,
+      series,
+      stacked: graph_mode === "stacked",
+      normalized: graph_mode === "normalized",
+      normalized_formater: formats.percentage_raw,
+      y_axis: graph_mode === "normalized" ? "%" : graph_options.y_axis,
+    };
+
+    return (
+      <div className="frow">
+        <div 
+          className={classNames(`fcol-xs-12 fcol-md-${legend_col_full_size}`, legend_col_class)} 
+          style={{ width: "100%", position: "relative" }}
+        >
+          <div
+            className="legend-container"
+            style={{ maxHeight: "400px" }}
+          >
+            { legend_title &&
+              <p className="mrgn-bttm-0 mrgn-tp-0 nav-header centerer">
+                {legend_title}
+              </p>
+            }
+            <GraphLegend
+              items={
+                _.map( 
+                  data,
+                  ({label}) => ({
+                    label,
+                    active: _.includes(selected, label),
+                    id: label,
+                    color: colors(label),
+                  })
+                )
+              }
+              onClick={label => {
+                this.setState({
+                  selected: _.toggle_list(selected, label),
+                });
+              }}
+              // todo: button for toggling graph mode based on array of modes passed in props
+            />
+            <span className="centerer" style={{paddingBottom: "15px"}}>
+              <button className="btn-ib-primary">
+
+              </button>
+            </span>
+          </div>
+        </div>
+        <div 
+          className={classNames(`fcol-xs-12 fcol-md-${graph_col_full_size}`, graph_col_class)} 
+          style={{ width: "100%", position: "relative" }}
+          tabIndex="-1"
+        >
+          { bar && <Bar {...extended_graph_options}/> }
+          { !bar && <Line {...extended_graph_options}/> }
+        </div>
+      </div>
+    );
+  }
+};
+LineBarToggleGraph.defaultProps = {
+  legend_col_full_size: 4,
+  graph_col_full_size: 8,
+  legend_class: false,
+  graph_col_class: false,
+  get_colors: () => infobase_colors(),
+};
+
+export const HeightClippedLineBarToggleGraph = ({graph_props}) => {
   return (
     <HeightClipper clipHeight={185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient gradient-strong"}>
       <div className="height-clipped-graph-area" aria-hidden={true}>
-        <GraphWithLegend 
+        <LineBarToggleGraph 
           {...{
             ...graph_props, 
             graph_col_class: graph_props.graph_options.bar ? 

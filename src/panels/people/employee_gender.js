@@ -4,7 +4,7 @@ import {
   run_template,
   PanelGraph,
   PplSharePie,
-  HeightClippedGraphWithLegend,
+  HeightClippedLineBarToggleGraph,
   businessConstants,
   years,
   create_text_maker_component,
@@ -18,9 +18,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 const { people_years } = years;
 const { gender } = businessConstants;
 
-const {
-  A11YTable,
-} = declarative_charts;
+const { A11YTable } = declarative_charts;
 
 
 const info_deps_by_level = {
@@ -111,7 +109,7 @@ const calculate_funcs_by_level = {
           }
           { !window.is_a11y_mode && level === "dept" &&
             <Col size={12} isGraph>
-              <HeightClippedGraphWithLegend
+              <HeightClippedLineBarToggleGraph
                 graph_props = {{
                   legend_title: text_maker("employee_gender"),
                   bar: true,

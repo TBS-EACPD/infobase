@@ -9,6 +9,7 @@ import {
   declarative_charts,
   StdPanel,
   Col,
+  LineBarToggleGraph,
 } from "../shared"; 
 
 const { text_maker, TM } = create_text_maker_component(text);
@@ -16,10 +17,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 const { people_years } = years;
 const { ex_levels } = businessConstants;
 
-const {
-  A11YTable,
-  GraphWithLegend,
-} = declarative_charts;
+const { A11YTable } = declarative_charts;
 
 
 const info_deps_by_level = {
@@ -92,7 +90,7 @@ const calculate_funcs_by_level = {
           </Col>
           { !window.is_a11y_mode &&
             <Col size={12} isGraph>
-              <GraphWithLegend
+              <LineBarToggleGraph
                 {...{
                   legend_title: text_maker("ex_level"),
                   bar: true,

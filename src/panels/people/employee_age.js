@@ -11,6 +11,7 @@ import {
   declarative_charts,
   StdPanel,
   Col,
+  LineBarToggleGraph,
 } from "../shared"; 
 
 const { text_maker, TM } = create_text_maker_component(text);
@@ -18,10 +19,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 const { people_years } = years;
 const { compact_age_groups } = businessConstants;
 
-const { 
-  GraphWithLegend,
-  A11YTable,
-} = declarative_charts;
+const { A11YTable } = declarative_charts;
 
 
 const info_deps_by_level = {
@@ -130,7 +128,7 @@ const calculate_funcs_by_level = {
       
       const ticks = _.map(people_years, y => `${run_template(y)}`);
       
-      // Options for GraphWithLegend React components
+      // Options for LineBarToggleGraph React components
       const age_group_options = {
         legend_title: text_maker("age_group"),
         bar: true,
@@ -179,13 +177,13 @@ const calculate_funcs_by_level = {
                 tabPaneContents={{
                   age_group: (
                     <div id={"emp_age_tab_pane"}>
-                      <GraphWithLegend {...age_group_options} />
+                      <LineBarToggleGraph {...age_group_options} />
                       <div className='clearfix'></div>
                     </div>
                   ), 
                   avgage: (
                     <div id={"emp_age_tab_pane"}>
-                      <GraphWithLegend {...avg_age_options} />
+                      <LineBarToggleGraph {...avg_age_options} />
                       <div className='clearfix'></div>
                     </div>
                   ),
