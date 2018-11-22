@@ -30,6 +30,7 @@ const IndicatorResultDisplay = ({
   narrative,
 }) => {
   switch(data_type){
+    case 'exact_num':
     case 'num': {
       const num = min || max;
       if( !num ){ return null; }
