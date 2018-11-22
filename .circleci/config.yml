@@ -115,7 +115,8 @@ workflows:
             - build
       - deploy:
           requires:
-            - build
+            - test
+            - testold
           filters:
             branches:
               only:
