@@ -5,36 +5,6 @@ const { compute_counts_from_set } = require('../src/models/result_counts.js');
 
 _.mixin({ pipe: (obj, func) => func(obj) });
 
-const mock_status_map = {
-  past: {
-    success: "met",
-    failure: "not_met",
-    not_appl: "not_available",
-    not_avail: "not_available",
-  },
-  future: {
-    success: "ongoing",
-    failure: "ongoing",
-    not_appl: "ongoing",
-    not_avail: "ongoing",
-  },
-}
-const convert_drr16_to_mock_drr17 = (obj) => {
-  if (obj.doc !== "drr16"){
-    return obj;
-  }
-  return {
-    ...obj,
-    ..._.omitBy(
-      {
-        doc: "drr17",
-        status_key: !_.isUndefined(obj.status_period) && mock_status_map[obj.status_period][obj.status_color],
-      },
-      _.isUndefined,
-    ),
-  };
-}
-
 let org_store, 
   crso_by_deptcode,
   programs_by_crso_id,
@@ -119,22 +89,20 @@ function populate_stores(parsed_models){
   });
 
   _.each(results, obj => {
-    const mocked_drr17_obj = convert_drr16_to_mock_drr17(obj);
-    const { subject_id } = mocked_drr17_obj;
+    const { subject_id } = obj;
     if(!resultBySubjId[subject_id]){
       resultBySubjId[subject_id] = [];
     }
-    resultBySubjId[subject_id].push(mocked_drr17_obj);
+    resultBySubjId[subject_id].push(obj);
   });
 
   _.each(indicators, obj => {
-    const mocked_drr17_obj = convert_drr16_to_mock_drr17(obj);
-    const { result_id } = mocked_drr17_obj;
+    const { result_id } = obj;
     if(!indicatorsByResultId[result_id]){
       indicatorsByResultId[result_id] = [];
     }
-    indicatorsByResultId[result_id].push(mocked_drr17_obj);
-  })
+    indicatorsByResultId[result_id].push(obj);
+  });
 
   _.each(PI_DR_links, obj => {
     const { program_id } = obj;

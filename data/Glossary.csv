@@ -649,29 +649,25 @@ Remarque: En navigant l'InfoBase, vous remarquerez les références aux termes "
 "GOC015","Government of Canada Activities: Transparency and Accountability","Activités du gouvernement du Canada: Transparent et responsable","Program activities that aim to safeguard public trust in government and strengthen the interaction between the government and Canadian citizens. This is done through the delivery of services that are responsive to citizens’ needs, and through public accountability, compliance and recourse measures.","Les activités de programme qui visent à maintenir la confiance du public et à renforcer l’interaction entre le gouvernement et les citoyens canadiens. Cela se fait par la prestation de services qui répondent aux besoins des citoyens et par des mesures visant à assurer la responsabilisation de l’administration publique, le respect des règles et la possibilité de demander des recours."
 "GOC016","Government of Canada Activities: Government Operations","Activités du gouvernement du Canada: Activités gouvernementales","Program activities that aim to support the government in delivering its core operations, and to maintain rigorous stewardship over financial resources, assets and human resources. This includes the federal treasury, tax collection, public service recruitment and development, the provision of linguistic and procurement services, and administrative tribunals.","Les activités de programme qui visent à appuyer le gouvernement dans l’exécution de ses activités essentielles et à assurer l’administration rigoureuse des ressources financières, des actifs et des ressources humaines. Cela comprend le Trésor fédéral, le recouvrement de l’impôt, le recrutement et le perfectionnement dans la fonction publique, la prestation de services linguistiques et de services d’approvisionnement, et les tribunaux administratifs."
 "IFORM_INT","Interests","Intérêts","Interests are entities in which the federal government holds an interest (via share ownership) or participates in oversight (via the right to appoint or nominate a member of the organization’s governing body).","Intérêts sont des institutions dans lesquelles le gouvernement fédéral détient des intérêts (par l’actionnariat) ou participe à la surveillance (avec le droit de nommer un membre de l’organe directeur de l’organisation ou de présenter une candidature)."
-"RESULTS_STATUS","Result Status","Statut du résultat","If the date to achieve target is **before or by the end of fiscal year 2016-17 (March 31, 2017)**:
-* Target met: If the result is higher than the minimum target; lower than the maximum target; within the target range; or is exactly equal to the unique value target.
-* Attention required: If the result is lower than the minimum target; higher than the maximum target; outside the target range; or is not equal to the target value.  
-* No Target/Target no longer applicable:  If there is no target or if the target is no longer relevant due to changes in policy or other circumstances (e.g. dissolution of a department, change in government direction, etc.). 
-* Not available: If the result has not been collected or is not available for any other reason. 
+"RESULTS_STATUS","Result Status","Statut du résultat","If the date to achieve the target is **before or by the end of fiscal year 2017-18 (March 31, 2018)** and:
+* Target met: The result is higher than the minimum target; lower than the maximum target; within the target range; or is exactly equal to the unique target value.
+* Not met: The result is lower than the minimum target; higher than the maximum target; outside the target range; or is not equal to the target value.  
+* Result not available: The result has not been collected or is not available for any other reason. Includes cases when no target was set or when the target is no longer relevant due to changes in policy or other circumstances (e.g. dissolution of a department, change in government direction, etc.).
 
 
-If the date to achieve target is **ongoing or after the end of fiscal year 2016-17 (after March 31,2017)**:
-* On track: If there is a high probability that the actual result will be higher than the minimum target; lower than the maximum target; within the target range; or will be exactly equal to the unique value target.
-* Attention required: If there are any reasons to believe that the target may not be met by the date to achieve target. 
-* No Target/Target no longer applicable:  If there is no target or if target is no longer relevant due to changes in policy or other circumstances (e.g. dissolution of a department, change in government direction, etc.).
-* Not available: If it is not possible to predict whether the target will be met or not by the date to achieve target.","Si la date butoir d’atteinte de la cible est **avant ou d’ici la fin de l’exercice 2016-2017 (31 mars 2017)** :
-* La cible est atteinte : Le résultat est supérieur à la cible minimale, inférieur à la cible maximale, dans la fourchette cible ou exactement égal à la valeur unique de la cible.
-* Attention requise: Le résultat est inférieur à la cible minimale, supérieur à la cible maximal, hors de la fourchette cible ou n’est pas égal à la valeur unique de la cible. 
-* Aucune cible/la cible ne s’applique plus : La cible n'est pas disponible ou n’est plus pertinente parce que la politique a été modifiée ou en raison des circonstances (p. ex. la dissolution d’un ministère, le changement d’orientation du gouvernement).
-* Non disponible : Le résultat n’a pas été consigné ou n’est pas disponible pour toute autre raison. 
+If the date to achieve target is after the end of fiscal year 2017-18 (after March 31,2018)**:
+* Result to be achieved in the future","Si la date butoir d’atteinte de la cible est **avant ou d’ici la fin de l’exercice 2017-2018 (31 mars 2018)** :
+* Cible atteinte : Le résultat est supérieur à la cible minimale, inférieur à la cible maximale, dans la fourchette cible ou exactement égal à la valeur unique de la cible.
+* Cible non atteinte: Le résultat est inférieur à la cible minimale, supérieur à la cible maximal, hors de la fourchette cible ou n’est pas égal à la valeur unique de la cible. 
+* Résultat non disponible : Le résultat n’a pas été consigné ou n’est pas disponible pour toute autre raison. La cible n'est pas disponible ou n’est plus pertinente parce que la politique a été modifiée ou en raison des circonstances (p. ex. la dissolution d’un ministère, le changement d’orientation du gouvernement).
 
 
-Si la date butoir d’atteinte de la cible dépasse la fin de l’exercice 2016-2017 (après le 31 mars 2017) :
-* En voie d'être atteinte: Forte probabilité d’atteindre la cible ou aucune raison de croire que la cible ne sera pas atteinte.
-* Attention requise : Il y a des raisons de croire que la cible ne sera pas atteinte à la date butoir.
-* Aucune cible/la cible ne s’applique plus : La cible n'est pas disponible ou n’est plus pertinente parce que la politique a été modifiée ou en raison des circonstances (p. ex. la dissolution d’un ministère, le changement d’orientation du gouvernement).
-* Non disponible : S’il n’est pas possible de prédire si la cible sera rencontrée ou non d’ici la date butoir."
+Si la date butoir d’atteinte de la cible dépasse la fin de l’exercice 2017-2018 (après le 31 mars 2018) :
+* Résultat a atteindre dans le future"
+"RESULTS_MET","Result Status: Target Met","Statut du résultat: Cible atteinte","The date to achieve the target is before or by the end of fiscal year 2017-18 (March 31, 2018) **and** the result is higher than the minimum target; lower than the maximum target; within the target range; or is exactly equal to the unique target value.","La date butoir d’atteinte de la cible est avant ou d’ici la fin de l’exercice 2017-2018 (31 mars 2018) **et**  le résultat est supérieur à la cible minimale, inférieur à la cible maximale, dans la fourchette cible ou exactement égal à la valeur unique de la cible."
+"RESULTS_NOT_MET","Result Status: Target not met","Statut du résultat: Cible non atteinte","The date to achieve the target is before or by the end of fiscal year 2017-18 (March 31, 2018) **and** the result is lower than the minimum target; higher than the maximum target; outside the target range; or is not equal to the target value","La date butoir d’atteinte de la cible est avant ou d’ici la fin de l’exercice 2017-2018 (31 mars 2018) **et**  le résultat est inférieur à la cible minimale, supérieur à la cible maximal, hors de la fourchette cible ou n’est pas égal à la valeur unique de la cible."
+"RESULTS_NOT_AVAILABLE","Result Status: Result not available","Statut du résultat: Résultat non disponible","The date to achieve the target is before or by the end of fiscal year 2017-18 (March 31, 2018) **and**  the result has not been collected or is not available for any other reason. Includes cases when no target was set or when the target is no longer relevant due to changes in policy or other circumstances (e.g. dissolution of a department, change in government direction, etc.).","La date butoir d’atteinte de la cible est avant ou d’ici la fin de l’exercice 2017-2018 (31 mars 2018) **et** le résultat n’a pas été consigné ou n’est pas disponible pour toute autre raison. La cible n'est pas disponible ou n’est plus pertinente parce que la politique a été modifiée ou en raison des circonstances (p. ex. la dissolution d’un ministère, le changement d’orientation du gouvernement)."
+"RESULTS_ONGOING","Result Status: Result to be achieved in the future","Statut du résultat: Résultat a atteindre dans le future","The date to achieve target is after the end of fiscal year 2017-18 (after March 31,2018).","Si la date butoir d’atteinte de la cible dépasse la fin de l’exercice 2017-2018 (après le 31 mars 2018)."
 "HWM","Method of Intervention","Méthode d’intervention","‘Method of Intervention’ refers to the means by which policy objectives are pursued. It is the method used by a Program to achieve a desired outcome (e.g., regulations, transfer payments, services, etc.). 
 
 
@@ -679,46 +675,6 @@ Each program should have one primary method of intervention. However, in some ca
 ","« Méthode d’intervention » renvoie aux moyens avec lesquels on vise les objectifs stratégiques. Les programmes utilisent cette méthode pour atteindre un résultat souhaité (par exemple des règlements, des paiements de transfert, etc.). 
 
 Chaque programme devrait avoir une méthode d’intervention principale. Toutefois, dans certains cas, il y a une méthode d’intervention secondaire (par exemple si un programme comprend des subventions et des contributions)."
-"RESULTS_MET","Met","Atteinte","If the date to achieve target is **before or by the end of fiscal year 2016-17 (March 31, 2017)**:
-* Target met: If the result is higher than the minimum target; lower than the maximum target; within the target range; or is exactly equal to the unique value target.","Si la date butoir d’atteinte de la cible est **avant ou d’ici l’a fin de l’exercice 2016-2017 (31 mars 2017)** :
-* La cible est atteinte : Le résultat  est supérieur à la cible minimale, inférieur à la cible maximale, dans la fourchette cible ou exactement égal à la valeur unique de la cible."
-"RESULTS_AR","Attention Required","Attention requise","If the date to achieve target is **before or by the end of fiscal year 2016-17 (March 31, 2017)**:
-* Attention required: If the result is lower than the minimum target; higher than the maximum target; outside the target range; or is not equal to the target value.  
-
-
-If the date to achieve target is **ongoing or after the end of fiscal year 2016-17 (after March 31,2017)**:
-* Attention required: If there are any reasons to believe that the target may not be met by the date to achieve target.","Si la date butoir d’atteinte de la cible est **avant ou d’ici l’a fin de l’exercice 2016-2017 (31 mars 2017)** :
-* Attention requise: Le résultat est inférieur à la cible minimale, supérieur à la cible maximal, hors de la fourchette cible ou n’est pas égal à la valeur unique de la cible. 
-
-
-Si la date butoir d’atteinte de la cible dépasse la fin de l’exercice 2016-2017 (après le 31 mars 2017) :
-* Attention requise : Il y a des raisons de croire que la cible ne sera pas atteinte à la date butoir."
-"RESULTS_NOTAPP","Not applicable","Ne s'applique plus","If the date to achieve target is **before or by the end of fiscal year 2016-17 (March 31, 2017)**:
-* No Target/Target no longer applicable:  If there is no target or if the target is no longer relevant due to changes in policy or other circumstances (e.g. dissolution of a department, change in government direction, etc.). 
-
-
-If the date to achieve target is **ongoing or after the end of fiscal year 2016-17 (after March 31,2017)**:
-* No Target/Target no longer applicable:  If there is no target or if target is no longer relevant due to changes in policy or other circumstances (e.g. dissolution of a department, change in government direction, etc.).
-","Si la date butoir d’atteinte de la cible est **avant ou d’ici l’a fin de l’exercice 2016-2017 (31 mars 2017)** :
-* Aucune cible/la cible ne s’applique plus : La cible n'est pas disponible ou n’est plus pertinente parce que la politique a été modifiée ou en raison des circonstances (p. ex. la dissolution d’un ministère, le changement d’orientation du gouvernement).
-
-
-Si la date butoir d’atteinte de la cible dépasse la fin de l’exercice 2016-2017 (après le 31 mars 2017) :
-* Aucune cible/la cible ne s’applique plus : La cible n'est pas disponible ou n’est plus pertinente parce que la politique a été modifiée ou en raison des circonstances (p. ex. la dissolution d’un ministère, le changement d’orientation du gouvernement)."
-"RESULTS_NA","Not available","Non disponible","If the date to achieve target is **before or by the end of fiscal year 2016-17 (March 31, 2017)**:
-* Not available: If the result has not been collected or is not available for any other reason. 
-
-
-If the date to achieve target is **ongoing or after the end of fiscal year 2016-17 (after March 31,2017)**:
-* Not available: If it is not possible to predict whether the target will be met or not by the date to achieve target.","Si la date butoir d’atteinte de la cible est **avant ou d’ici l’a fin de l’exercice 2016-2017 (31 mars 2017)** :
-* Non disponible : Le résultat n’a pas été consigné ou n’est pas disponible pour toute autre raison. 
-
-
-Si la date butoir d’atteinte de la cible dépasse la fin de l’exercice 2016-2017 (après le 31 mars 2017) :
-* Non disponible : S’il n’est pas possible de prédire si la cible sera rencontrée ou non d’ici la date butoir."
-"RESULTS_OT","On track","En voie d'être atteinte","If the date to achieve target is **ongoing or after the end of fiscal year 2016-17 (after March 31,2017)**:
-* On track: If there is a high probability that the actual result will be higher than the minimum target; lower than the maximum target; within the target range; or will be exactly equal to the unique value target.","Si la date butoir d’atteinte de la cible dépasse la fin de l’exercice 2016-2017 (après le 31 mars 2017) :
-* En voie d'être atteinte: Forte probabilité d’atteindre la cible ou aucune raison de croire que la cible ne sera pas atteinte."
 "RESULTS_COUNT","Count of Indicators","Décompte d'indicateurs","",""
 "MYA","Multi-Year Appropriation","Crédit pluriannuel","A multi-year appropriation is an appropriation with a specific purpose and monetary limit granted by Parliament that can be utilized over more than one fiscal year.","Le crédit pluriannuel est une autorisation de dépenser donnée par le Parlement à une fin spécifique dont le montant est défini et  qui peut être utilisée sur plus d'une année fiscale."
 "PAY_CC","Payments to Crown Corporation","Payments aux sociétés d'État","The Payments to Crown Corporations includes all the voted and statutory authorities approved by Parliament through Appropriations Acts and legislation to Crown Corporation","Les payments aux sociétés d'État inclus les « autorisations votées et législatives » ccordées par le Parlement à la suite de l'adoption d'une loi de crédits ou d'une loi aux sociétés d'État."
@@ -782,4 +738,7 @@ des dépenses sont prévus pour 2018-2019, lesquels seront déposés au Parlemen
 "BIV_ALLO","Allocated","Affectés","Funding approved by the Treasury Board, to be transferred from the Budget Implementation vote to an organization’s votes for operating or capital expenditures, grants or contributions upon receipt of full supply.","Fonds approuvés par le Conseil du Trésor qui seront transférés du crédit d’exécution du budget aux crédits d’une organisation pour des dépenses de fonctionnement, des dépenses en capital, des subventions ou des contributions lors de l’obtention de la totalité des crédits pour le budget principal des dépenses."
 "BIV_WITH","Withheld","Retenus","Expenditures to be made through other authorities, such as statutory expenditures for Employee Benefits Plans, or amounts set aside to cover the costs of office accommodation and information technology services.","Dépenses engagées au moyen d’autres autorisations, telles que les dépenses législatives pour les régimes d’avantages sociaux des employés, ou les montants en réserve pour couvrir les coûts des services de la technologie de l’information et de la gestion des locaux à bureaux."
 "BIV_REMA","Remaining","Restants","Balance of funding that remains unallocated in the Budget Implementation vote.","Solde des fonds non affectés dans le crédit d’exécution du budget."
+"PLANNED_SPEND_FTE","Planned Spending and Planned Full-Time Equivalents (FTEs)","Dépenses prévues et ETP prévus","For Departmental Plans (DPs) and Departmental Results Reports (DRRs), planned spending refers to those amounts that receive Treasury Board approval by February 1. Therefore, planned spending (including voted and statutory items) may include amounts incremental to planned expenditures presented in the Main Estimates.
+Planned FTEs is a measure of the extent to which an employee represents a full person-year charge against the departmental budget for future spending years. Full-time equivalents are calculated as a ratio of assigned hours of work to scheduled hours of work. Scheduled hours of work are set out in collective agreements.","Pour les plans ministériels (PM) et les rapports sur les résultats ministériels (RRM), on entend par « dépenses prévues » les montants approuvés par le Conseil du Trésor en date du 1er février. Les dépenses prévues (y compris les crédits votés et les postes législatifs) peuvent donc comprendre les sommes supplémentaires figurant au budget principal des dépenses.
+Les équivalents temps plein (ETP) prévus sont la mesure utilisée pour représenter une année-personne complète d'un employé dans le budget ministériel. Les ETP sont calculés en fonction du coefficient des heures de travail assignées et des heures de travail prescrites. Les heures de travail prescrites sont établies dans les conventions collectives."
 
