@@ -33,9 +33,8 @@ export class Line {
     this.axis_class = "axis " + (this.options.axis_class === undefined ? "" : this.options.axis_class );
 
     this.x_axis_line = this.options.x_axis_line === undefined ? true : this.options.x_axis_line;
-    this.normalized = this.options.normalized || false;
 
-    this.formaters = _.map(this.options.formaters);
+    this.formaters = _.map(this.options.formaters); 
     this.formater = !_.isEmpty(this.formaters) ? this.formaters[0] : this.options.formater;
 
     // resize the svg if necessary
@@ -106,8 +105,10 @@ export class Line {
     }
 
     if (this.options.stacked === true){
+      this.clear_lines();
       this.render_stacked();
-    }else {
+    } else {
+      this.clear_stacks();
       this.render_lines();
     }
 
@@ -115,8 +116,24 @@ export class Line {
 
     return this;
   };
-
+  clear_lines(){
+    this.graph_area
+      .selectAll("g.line")
+      .transition()
+      .duration(750)
+      .attr("transform", "scale(0,1)")
+      .remove();
+  };
+  clear_stacks(){
+    this.graph_area
+      .selectAll("g.serie")
+      .transition()
+      .duration(750)
+      .attr("transform", "scale(0,1)")
+      .remove();
+  };
   render_stacked(){
+
     const height = this.outside_height - this.margin.top - this.margin.bottom;
 
     // remap the data to suitable format for the stacked
@@ -147,22 +164,6 @@ export class Line {
     var stack_layout = d3.stack()
       .keys(keys);
 
-    if (this.normalized){
-      _.each(series, (serie, ix, series) => {
-        var sum = d3.sum(
-          _.chain(serie)
-            .omit("year")
-            .values()
-            .value()
-        );
-        
-        _.chain(serie)
-          .omit("year")
-          .each((value, key) => {
-            series[ix][key] = value/sum;
-          });
-      });
-    }
     var stacks = stack_layout(series);
 
     // calculate the maximum value for any of the ticks to calibrate
@@ -181,31 +182,41 @@ export class Line {
       .y0( d => this.y(d[0]) )
       .y1( d => this.y(d[1]) );
 
-    var join = this.graph_area
-      .selectAll(".serie")
-      .data(stacks);
+    var lines = this.graph_area
+      .selectAll("g.serie")
+      .data( _.map(stacks, stack => stack.key) );
                 
-    join.exit().remove();
-
-    const series_enter = join
+    const lines_enter = lines
       .enter()
       .append('g')
-      .attr("class", "serie");
+      .attr("class", "serie")
+      .attr("transform", "scale(0,1)"); // scale transform's used for the entering animation
 
-    series_enter
+    lines_enter
       .append("path")
       .attr("class", "area");
 
-    join.merge(series_enter)
+    lines.merge(lines_enter)
       .select('path.area')
       .styles({
-        "fill": d => this.colors(d.key),
+        "fill": key => this.colors(key),
         "fill-opacity": 0.6,
         "stroke-width": "1px",
-        "stroke": d => this.colors(d.key),
+        "stroke": key => this.colors(key),
       })
-      .attr("d", d => area(d));
+      .attr( "d", key => area( _.find(stacks, stack => stack.key === key) ) );
 
+    this.graph_area
+      .selectAll(".serie")
+      .transition()
+      .duration(750)
+      .attr("transform", "scale(1,1)");
+
+    lines.exit()
+      .transition()
+      .duration(750)
+      .attr("transform", "scale(0,1)")
+      .remove();
   };
 
   render_lines(){
@@ -231,11 +242,10 @@ export class Line {
       .selectAll("g.line")
       .data( d3.keys(this.series), d => d );
 
-    lines.exit().remove();
-
     const lines_enter = lines.enter()
       .append("g")
-      .attr("class", "line");
+      .attr("class", "line")
+      .attr("transform", "scale(0,1)"); // scale transform's used for the entering animation
 
     lines.merge(lines_enter)
       .each(function(d, i){
@@ -296,8 +306,19 @@ export class Line {
             "fill": that.colors(d),
             "fill-opacity": 0.8,
           });
-
       });
+
+    this.graph_area
+      .selectAll(".line")
+      .transition()
+      .duration(750)
+      .attr("transform", "scale(1,1)");
+
+    lines.exit()
+      .transition()
+      .duration(750)
+      .attr("transform", "scale(0,1)")
+      .remove();
   };
 
   render_common(){
@@ -387,7 +408,7 @@ export class Line {
         .uniq()
         .value().length === this.y.ticks(5).length;
       const pick_best_formater_option = () => {
-        if ( this.normalized || _.isEmpty(this.formaters) ){
+        if ( _.isEmpty(this.formaters) ){
           return this.formater;
         } else {
           const good_formaters = _.filter(this.formaters, formater_gives_unique_ticks);
