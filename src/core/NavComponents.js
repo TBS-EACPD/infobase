@@ -160,13 +160,13 @@ export class StandardRouteContainer extends React.Component {
             {
               en: (
                 <p>
-                  The <a href="https://www.canada.ca/en/treasury-board-secretariat/corporate/reports/2017-18-departmental-results-reports.html" target="_blank" rel="noopener noreferrer">
+                  The <a href="https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports/2017-18-departmental-results-reports.html" target="_blank" rel="noopener noreferrer">
                   2017-18 Departmental Results Reports</a> were tabled on <strong>November 20, 2018</strong>. The GC InfoBase will be updated within the next few days.
                 </p>
               ),
               fr: (
                 <p>
-                  Les <a href="https://www.canada.ca/fr/secretariat-conseil-tresor/organisation/rapports/2017-2018-rapport-resultats-ministeriels.html" target="_blank" rel="noopener noreferrer">
+                  Les <a href="https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement/rapport-resultats-ministeriels-2017-2018.html" target="_blank" rel="noopener noreferrer">
                   rapports sur les résultats ministériels 2017-2018</a> ont été déposés au Parlement le <strong>20 novembre 2018</strong>. L’InfoBase du GC sera mise à jour dans les prochains jours.
                 </p>
               ),
@@ -180,7 +180,7 @@ export class StandardRouteContainer extends React.Component {
               en: (
                 <p>
                   The 2017-18 Public Accounts of Canada were tabled on <strong>October 19, 2018</strong>. 
-                  The <a href="https://www.canada.ca/en/treasury-board-secretariat/corporate/reports/2017-18-departmental-results-reports.html" target="_blank" rel="noopener noreferrer">
+                  The <a href="https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports/2017-18-departmental-results-reports.html" target="_blank" rel="noopener noreferrer">
                   2017-18 Departmental Results Reports</a> were tabled on <strong>November 20, 2018</strong>; the GC InfoBase will be updated within the next few days. 
                   In the meantime, the latest data from the Public Accounts 2017-18 is available 
                   on <a href="https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f" target="_blank" rel="noopener noreferrer">Open Data</a>, where 
@@ -190,7 +190,7 @@ export class StandardRouteContainer extends React.Component {
               fr: (
                 <p>
                   Les Comptes publics du Canada 2017-2018 ont été déposés au Parlement le <strong>19 octobre 2018</strong>. 
-                  Les <a href="https://www.canada.ca/fr/secretariat-conseil-tresor/organisation/rapports/2017-2018-rapport-resultats-ministeriels.html" target="_blank" rel="noopener noreferrer">
+                  Les <a href="https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement/rapport-resultats-ministeriels-2017-2018.html" target="_blank" rel="noopener noreferrer">
                   rapports sur les résultats ministériels 2017-2018</a> ont été déposés le <strong>20 novembre 2018</strong>; l’InfoBase du GC sera mise à jour avec ces données dans les prochains jours.
                   Pendant ce temps, les données pour les plus récents Comptes publics de 2017-2018 sont disponibles 
                   sur <a href="https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f" target="_blank" rel="noopener noreferrer">« Données ouvertes ».</a> Tous 
