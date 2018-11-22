@@ -241,7 +241,7 @@ result_statuses:
   not_available:
     en: Result not available
     fr: Résultat non disponible
-  ongoing:
+  future:
     en: Result to be achieved in the future
     fr: Résultat a atteindre dans le future
 
@@ -255,7 +255,7 @@ result_simple_statuses:
   not_available:
     en: Not available
     fr: Non disponible
-  ongoing:
+  future:
     en: Result to be achieved
     fr: Résultat a atteindre
 

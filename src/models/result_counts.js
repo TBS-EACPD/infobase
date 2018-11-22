@@ -4,7 +4,7 @@ function compute_counts_from_set({results, indicators}){
     drr17_indicators_met = _.filter(drr17_indicators, {status_key: 'met'}).length,
     drr17_indicators_not_met = _.filter(drr17_indicators, {status_key: 'not_met'}).length,
     drr17_indicators_not_available = _.filter(drr17_indicators, {status_key: 'not_available'}).length,
-    drr17_indicators_ongoing = _.filter(drr17_indicators, {status_key: 'ongoing'}).length,
+    drr17_indicators_ongoing = _.filter(drr17_indicators, {status_key: 'future'}).length,
 
     drr17_past_total = drr17_indicators_not_available + drr17_indicators_met + drr17_indicators_not_met,
     drr17_future_total = drr17_indicators_ongoing,

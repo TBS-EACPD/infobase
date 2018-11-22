@@ -23,7 +23,7 @@ const grid_colors = {
   met: "results-icon-array-pass",
   not_met: "results-icon-array-fail",
   not_available: "results-icon-array-na",
-  ongoing: "results-icon-array-neutral",
+  future: "results-icon-array-neutral",
 };
 
 const icon_order = _.chain(ordered_status_keys)
@@ -72,10 +72,10 @@ const StatusGrid = props => {
     met,
     not_met,
     not_available,
-    ongoing,
+    future,
   } = props;
   
-  const total = met + not_met + not_available + ongoing;
+  const total = met + not_met + not_available + future;
   const shouldFactorDown = total > max_size;
   const icon_array_size_class = classNames("IconArrayItem", total > 200 && "IconArrayItem__Small", total < 100 && "IconArrayItem__Large");
 
