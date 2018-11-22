@@ -6,7 +6,7 @@ div.height-clipped-graph-area {
   padding-bottom: 20px;
 }
 
-div.height-clipped-bar-area {
+div.height-clipped-graph-area {
   position: relative;
   margin-bottom: 10px;
   left: -20px; /* graph needs to be shifted left to avoid x-overflow with height clipper */

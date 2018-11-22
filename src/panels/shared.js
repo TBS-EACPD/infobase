@@ -88,9 +88,38 @@ export const PplSharePie = ({graph_args, label_col_header, sort_func}) => {
   </div>;
 };
 
+
 export class LineBarToggleGraph extends React.Component {
   constructor(props){
     super(props);
+
+    this.extra_options_by_graph_mode = {
+      bar_stack: {
+        bar: true,
+        stacked: true,
+      },
+      bar_normalized: {
+        bar: true,
+        stacked: true,
+        normalized: true,
+        formater: formats.percentage_raw,
+        y_axis: "%",
+      },
+      bar_grouped: {
+        bar: true,
+        stacked: false,
+        normalized: false,
+      },
+      line: {
+        bar: false,
+        stacked: false,
+      },
+      line_stack: {
+        bar: false,
+        stacked: true,
+      },
+    };
+    this.graph_modes = _.keys(this.extra_options_by_graph_mode);
 
     const colors = props.colors || props.get_colors();
 
@@ -106,7 +135,7 @@ export class LineBarToggleGraph extends React.Component {
         .filter( ({active}) => _.isUndefined(active) || active )
         .map( ({label}) => label )
         .value(),
-      graph_mode: props.graph_mode_options[0],
+      graph_mode: props.initial_graph_mode,
     };
   }
   render(){
@@ -120,7 +149,8 @@ export class LineBarToggleGraph extends React.Component {
       graph_col_full_size,
       graph_col_class,
 
-      bar,
+      disable_toggle,
+
       graph_options,
     } = this.props;
 
@@ -129,6 +159,8 @@ export class LineBarToggleGraph extends React.Component {
       selected,
       graph_mode,
     } = this.state;
+
+    const extra_graph_options = this.extra_options_by_graph_mode[graph_mode];
 
     const series = _.chain(data)
       .filter( ({label}) => _.includes(selected, label) )
@@ -140,10 +172,7 @@ export class LineBarToggleGraph extends React.Component {
       ...graph_options,
       colors,
       series,
-      stacked: graph_mode === "stacked",
-      normalized: graph_mode === "normalized",
-      normalized_formater: formats.percentage_raw,
-      y_axis: graph_mode === "normalized" ? "%" : graph_options.y_axis,
+      ...extra_graph_options,
     };
 
     return (
@@ -178,13 +207,26 @@ export class LineBarToggleGraph extends React.Component {
                   selected: _.toggle_list(selected, label),
                 });
               }}
-              // todo: button for toggling graph mode based on array of modes passed in props
             />
-            <span className="centerer" style={{paddingBottom: "15px"}}>
-              <button className="btn-ib-primary">
+            { !disable_toggle &&
+              <span className="centerer" style={{paddingBottom: "15px"}}>
+                <button 
+                  className="btn-ib-primary"
+                  onClick={ 
+                    () => {
+                      const current_mode_index = _.indexOf(this.graph_modes, graph_mode);
+                      const name_of_next_graph_mode = this.graph_modes[current_mode_index+1 % this.graph_modes.length];
 
-              </button>
-            </span>
+                      this.setState({
+                        graph_mode: name_of_next_graph_mode,
+                      });
+                    }
+                  }
+                >
+                  <TM k="toggle_graph"/>
+                </button>
+              </span>
+            }
           </div>
         </div>
         <div 
@@ -192,8 +234,8 @@ export class LineBarToggleGraph extends React.Component {
           style={{ width: "100%", position: "relative" }}
           tabIndex="-1"
         >
-          { bar && <Bar {...extended_graph_options}/> }
-          { !bar && <Line {...extended_graph_options}/> }
+          { extra_graph_options.bar && <Bar {...extended_graph_options}/> }
+          { !extra_graph_options.bar && <Line {...extended_graph_options}/> }
         </div>
       </div>
     );
@@ -205,24 +247,23 @@ LineBarToggleGraph.defaultProps = {
   legend_class: false,
   graph_col_class: false,
   get_colors: () => infobase_colors(),
+  initial_graph_mode: "bar_stack",
 };
 
-export const HeightClippedLineBarToggleGraph = ({graph_props}) => {
-  return (
-    <HeightClipper clipHeight={185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient gradient-strong"}>
-      <div className="height-clipped-graph-area" aria-hidden={true}>
-        <LineBarToggleGraph 
-          {...{
-            ...graph_props, 
-            graph_col_class: graph_props.graph_options.bar ? 
-              `${graph_props.graph_col_class || ''} height-clipped-bar-area` : 
-              graph_props.graph_col_class,
-          }}
-        />
-      </div>
-    </HeightClipper>
-  );
-};
+export const HeightClippedLineBarToggleGraph = ({graph_props}) => (
+  <HeightClipper clipHeight={185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient gradient-strong"}>
+    <div className="height-clipped-graph-area" aria-hidden={true}>
+      <LineBarToggleGraph 
+        {...{
+          ...graph_props, 
+          graph_col_class: graph_props.graph_options.bar ? 
+            `${graph_props.graph_col_class || ''} height-clipped-graph-area` : 
+            graph_props.graph_col_class,
+        }}
+      />
+    </div>
+  </HeightClipper>
+);
 
 export const collapse_by_so = function(programs,table,filter){
   // common calculation for organizing program/so row data by so
