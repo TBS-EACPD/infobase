@@ -429,7 +429,7 @@ class GraphWithLegend extends React.Component {
 
       legend_col_full_size,
       legend_col_class,
-      legend_title, // todo: add title option to GraphLegend component
+      legend_title,
 
       graph_col_full_size,
       graph_col_class,
@@ -470,6 +470,11 @@ class GraphWithLegend extends React.Component {
             className="legend-container"
             style={{ maxHeight: "400px" }}
           >
+            { legend_title &&
+              <p className="mrgn-bttm-0 mrgn-tp-0 nav-header centerer">
+                {legend_title}
+              </p>
+            }
             <GraphLegend
               items={
                 _.map( 
