@@ -36,8 +36,7 @@ export class Line {
     this.normalized = this.options.normalized || false;
 
     this.formaters = _.map(this.options.formaters);
-    this.number_formater = !_.isEmpty(this.formaters) ? this.formaters[0] : this.options.formater;
-    this.normalized_formater = this.options.normalized_formater;
+    this.formater = !_.isEmpty(this.formaters) ? this.formaters[0] : this.options.formater;
 
     // resize the svg if necessary
     this.svg
@@ -50,7 +49,6 @@ export class Line {
 
     var width = this.outside_width - this.margin.left - this.margin.right;
 
-    this.formater = this.normalized ? this.normalized_formater : this.number_formater;
     this.series = this.options.series;
     this.values = d3.values(this.series);
     this.series_labels = d3.keys(this.series);

@@ -42,12 +42,9 @@ export class Bar {
       .select("._graph_area")
       .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
   
-    this.normalized_formater = this.options.normalized_formater;
-    this.number_formater = this.options.formater;
-    var normalized= this.options.normalized || false;
-  
-  
-    this.formater = normalized ? this.normalized_formater : this.number_formater;
+    this.formater = this.options.formater;
+    var normalized = this.options.normalized || false;
+
     let data;
   
     const series = this.options.series;

@@ -116,7 +116,7 @@ const calculate_funcs_by_level = {
                   graph_options: {
                     y_axis: text_maker("employees"),
                     ticks: ticks,
-                    yaxis_formatter: formats.big_int_real_raw,
+                    formater: formats.big_int_real_raw,
                   },
                   graph_mode_options: [
                     "not-stacked",

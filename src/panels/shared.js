@@ -102,13 +102,12 @@ export class LineBarToggleGraph extends React.Component {
         bar: true,
         stacked: true,
         normalized: true,
-        formater: formats.percentage_raw,
         y_axis: "%",
+        formater: formats.percentage_raw,
       },
       bar_grouped: {
         bar: true,
         stacked: false,
-        normalized: false,
       },
       line: {
         bar: false,
@@ -215,7 +214,7 @@ export class LineBarToggleGraph extends React.Component {
                   onClick={ 
                     () => {
                       const current_mode_index = _.indexOf(this.graph_modes, graph_mode);
-                      const name_of_next_graph_mode = this.graph_modes[current_mode_index+1 % this.graph_modes.length];
+                      const name_of_next_graph_mode = this.graph_modes[(current_mode_index+1) % this.graph_modes.length];
 
                       this.setState({
                         graph_mode: name_of_next_graph_mode,
