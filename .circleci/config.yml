@@ -116,7 +116,6 @@ workflows:
       - deploy:
           requires:
             - test
-            - testold
           filters:
             branches:
               only:
