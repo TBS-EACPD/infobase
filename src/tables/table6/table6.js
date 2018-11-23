@@ -29,8 +29,9 @@ export default {
     "fr": "Dépenses de programmes",
   },
 
-  "title": { "en": "Authorities, Expenditures and Planned Spending by Program from {{pa_last_year_5}} to {{planning_year_3}} ($000)",
-    "fr": "Autorisation et dépenses réelles et prévues par programme de {{pa_last_year_5}} à {{planning_year_3}} (en milliers de dollars)",
+  "title": { 
+    "en": "Expenditures and Planned Spending by Program from {{pa_last_year_5}} to {{planning_year_3}} ($000)",
+    "fr": "Dépenses réelles et prévues par programme de {{pa_last_year_5}} à {{planning_year_3}} (en milliers de dollars)",
   },
 
 
