@@ -88,7 +88,7 @@ _.each(['dept','program'], level => {
 
 
       return (
-        <TextPanel title={text_maker("drr_planned_actual_title")}>
+        <TextPanel title={text_maker("drr_planned_actual_title")} footnotes={footnotes}>
           <TM 
             k={ 
               subject.level === 'dept' ? 
@@ -109,15 +109,6 @@ _.each(['dept','program'], level => {
               diff_spend,
             }}
           />
-          {!_.isEmpty(footnotes) && 
-            <ul>
-              {_.map(footnotes, ({text},i) => 
-                <li key={i}>
-                  <div dangerouslySetInnerHTML={{__html: text}} />
-                </li>
-              )}
-            </ul>
-          }
         </TextPanel>
       );
 
