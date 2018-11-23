@@ -249,13 +249,9 @@ LineBarToggleGraph.defaultProps = {
   initial_graph_mode: "bar_stacked",
 };
 
-export const HeightClippedLineBarToggleGraph = ({graph_props}) => (
+export const HeightClippedGraph = ({children}) => (
   <HeightClipper clipHeight={185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient gradient-strong"}>
-    <div aria-hidden={true}>
-      <LineBarToggleGraph 
-        {...graph_props}
-      />
-    </div>
+    {children}
   </HeightClipper>
 );
 

@@ -4,7 +4,8 @@ import {
   run_template,
   PanelGraph,
   PplSharePie,
-  HeightClippedLineBarToggleGraph,
+  LineBarToggleGraph,
+  HeightClippedGraph,
   businessConstants,
   years,
   create_text_maker_component,
@@ -95,19 +96,21 @@ const calculate_funcs_by_level = {
           }
           { !window.is_a11y_mode && level === "dept" &&
             <Col size={12} isGraph>
-              <HeightClippedLineBarToggleGraph
-                graph_props = {{
-                  legend_title: text_maker("employee_type"),
-                  bar: true,
-                  graph_options: {
-                    ticks: ticks,
-                    y_axis: text_maker("employees"),
-                    formater: formats.big_int_real_raw,
-                  },
-                  initial_graph_mode: "bar_stacked",
-                  data: graph_args,
-                }}
-              />
+              <HeightClippedGraph>
+                <LineBarToggleGraph 
+                  {...{
+                    legend_title: text_maker("employee_type"),
+                    bar: true,
+                    graph_options: {
+                      ticks: ticks,
+                      y_axis: text_maker("employees"),
+                      formater: formats.big_int_real_raw,
+                    },
+                    initial_graph_mode: "bar_stacked",
+                    data: graph_args,
+                  }}
+                />
+              </HeightClippedGraph>
             </Col>
           }
           { window.is_a11y_mode &&
