@@ -85,22 +85,7 @@ jobs:
           background: true
       - run: npm run ci_route_load_tests
 
-  testold:
-    docker:
-      - image: gcr.io/ib-static-content/ib-client-ci-test:latest
-        <<: *gcloud_auth
-    steps:
-      - attach_workspace:
-          at: ./
-      - run: sh ./.circleci/create_envs.sh
-      - run: sed -i "s#${CDN_URL}#.#g" ./build/InfoBase/app/*.js # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
-      - run: sed -i "s#${CDN_URL}#.#g" ./build/InfoBase/*.html # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
-      - run: 
-          name: start_server
-          command: npm run ci_serve
-          background: true
-      - run: npm run ci_test
-  
+
   # Deploy job steps:
   #  1) mount workspace (meaning this job must be run in a workflow where it is proceeded by a build job)
   #  2) make ./.circleci/authenticate-gcloud.sh executable
@@ -128,13 +113,9 @@ workflows:
       - test:
           requires:
             - build
-      - testold:
-          requires:
-            - build
       - deploy:
           requires:
             - test
-            - testold
           filters:
             branches:
               only:
