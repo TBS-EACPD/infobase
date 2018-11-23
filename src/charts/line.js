@@ -189,8 +189,7 @@ export class Line {
     const lines_enter = lines
       .enter()
       .append('g')
-      .attr("class", "serie")
-      .attr("transform", "scale(0,1)"); // scale transform's used for the entering animation
+      .attr("class", "serie");
 
     lines_enter
       .append("path")
@@ -198,6 +197,7 @@ export class Line {
 
     lines.merge(lines_enter)
       .select('path.area')
+      .attr("transform", "scale(0,1)") // scale transform's used for the entering animation
       .styles({
         "fill": key => this.colors(key),
         "fill-opacity": 0.6,
@@ -207,16 +207,12 @@ export class Line {
       .attr( "d", key => area( _.find(stacks, stack => stack.key === key) ) );
 
     this.graph_area
-      .selectAll(".serie")
+      .selectAll("path.area")
       .transition()
       .duration(750)
       .attr("transform", "scale(1,1)");
 
-    lines.exit()
-      .transition()
-      .duration(750)
-      .attr("transform", "scale(0,1)")
-      .remove();
+    lines.exit().remove();
   };
 
   render_lines(){
