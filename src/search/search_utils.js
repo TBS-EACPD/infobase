@@ -55,8 +55,8 @@ class InfoBaseHighlighter extends React.Component {
           _.map(
             string_split_on_matched_tokens,
             (sub_string, ix) => ix % 2 === 0 ?
-              <span>{sub_string}</span> :
-              <mark className="rbt-highlight-text">{sub_string}</mark>
+              <span key={ix}>{sub_string}</span> :
+              <mark key={ix} className="rbt-highlight-text">{sub_string}</mark>
           )
         }
       </span>

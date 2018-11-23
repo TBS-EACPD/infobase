@@ -970,5 +970,9 @@ survey_link_href:
 
 
 limited_data:
-  en: (Limited Data)
-  fr: (très peu de données)
+  en: limited data
+  fr: très peu de données
+
+non_active_program:
+  en: non-active program
+  fr: programme non actif

@@ -64,7 +64,7 @@ const org_templates = {
         <span className="search-grayed-out-hint">
           <InfoBaseHighlighter 
             search={search} 
-            content={`${org.name} ${trivial_text_maker("limited_data")}`} 
+            content={`${org.name} (${trivial_text_maker("limited_data")})`} 
           />
         </span>
       );
@@ -187,8 +187,27 @@ const datasets = {
 const programs = {
   header_function: () => trivial_text_maker('programs'),
   name_function: program => `${program.name} (${program.dept.sexy_name})`,
-  get_data: () => _.reject(Program.get_all(), 'dead_program'),
+  get_data: () => Program.get_all(),
   filter: (query, datum) => memoized_re_matchers(query, ['name'], "programs")(datum),
+  menu_content_function: function(program, search){
+    if ( program.dead_program ){
+      return (
+        <span className="search-grayed-out-hint">
+          <InfoBaseHighlighter 
+            search={search} 
+            content={`${program.name} (${program.dept.fancy_acronym}) (${trivial_text_maker("non_active_program")})`} 
+          />
+        </span>
+      );
+    } else {
+      return (
+        <InfoBaseHighlighter 
+          search={search}
+          content={ this.name_function(program) }
+        />
+      );
+    }
+  },
 };
 
 //only include CRs because SO's have really really long names
