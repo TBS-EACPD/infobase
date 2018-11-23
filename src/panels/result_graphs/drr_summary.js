@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { Fragment } from 'React';
 import {
   PanelGraph,
   declarative_charts,
@@ -169,19 +170,42 @@ const StatusGrid = props => {
 }
 
 
-export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts }) => (
-  <div className="frow middle-xs between-md" style={{marginBottom: "30px"}}>
-    <div className="fcol-md-5 fcol-xs-12 medium_panel_text" >
-      <TM 
-        k="drr_summary_text"
-        args={{ subject, num_depts, is_gov, ...verbose_counts }} 
-      />
+export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts }) => {
+  const summary_text_args = { 
+    subject, 
+    num_depts, 
+    is_gov, 
+    ...verbose_counts,
+  };
+
+  return <Fragment>
+    <div className="frow middle-xs between-md">
+      <div className="fcol-md-5 fcol-xs-12 medium_panel_text" >
+        <TM 
+          k="drr_summary_text_top_left"
+          args={summary_text_args} 
+        />
+      </div>
+      <div className="fcol-md-6 fcol-xs-12 medium_panel_text" >
+        <TM 
+          k="drr_summary_text_top_right"
+          args={summary_text_args} 
+        />
+      </div>
     </div>
-    <div className="fcol-md-6 col-xs-12">
-      <StatusGrid {...counts} />
+    <div className="frow middle-xs between-md" style={{marginBottom: "30px"}}>
+      <div className="fcol-md-6 fcol-xs-12 medium_panel_text" >
+        <TM 
+          k="drr_summary_text_bottom_left"
+          args={summary_text_args} 
+        />
+      </div>
+      <div className="fcol-md-6 col-xs-12">
+        <StatusGrid {...counts} />
+      </div>
     </div>
-  </div>
-);
+  </Fragment>;
+};
 
 const render = ({calculations, footnotes}) => {
   const {

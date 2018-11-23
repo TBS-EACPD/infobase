@@ -7,24 +7,15 @@ drr_summary_title:
 
 
 # this a multi-level text 
-drr_summary_text:
+drr_summary_text_top_left:
   transform: [handlebars,markdown]
   en: |
     {{#if is_gov}}
-      In {{pa_last_year}}, **{{num_depts}}** organizations required to produce a {{gl_tt "Departmental Results Report" "DR"}} sought to achieve **{{drr17_results}}** results.
-      Progress towards meeting these results was measured using **{{drr17_total}}** {{gl_tt "indicators" "IND_RESULT"}}.
+      In {{pa_last_year}}, **{{num_depts}}** organizations were required to produce a {{gl_tt "Departmental Results Report" "DR"}}. These departments sought to achieve **{{fmt_big_int_real drr17_results}}** results.
     {{else}}
-      In {{pa_last_year}}, {{subj_name subject}} sought to achieve **{{drr17_results}}** results.
-      Progress towards meeting these results was measured using **{{drr17_total}}** {{gl_tt "indicators" "IND_RESULT"}}.
+      In {{pa_last_year}}, {{subj_name subject}} sought to achieve **{{fmt_big_int_real drr17_results}}** results.
     {{/if}}
-
-    {{#if drr17_past_total}} Of those indicators: {{/if}}
-    {{#if drr17_future_total}}{{#unless  drr17_past_total}} Of those indicators: {{/unless}}{{/if}}
-
-    {{#if drr17_past_total}} * **{{drr17_indicators_met}}** out of the **{{drr17_past_total}}** (or **{{fmt_percentage1 (divide drr17_indicators_met drr17_past_total)}}**) that were seeking to achieve their target by March 31, {{pa_last_year_short_second}} **{{gl_tt "met" "RESULTS_MET"}} their target**. {{/if}}
-    {{#if drr17_future_total}} * **{{drr17_future_total}}** further indicators are seeking to achieve their target after March 31, {{pa_last_year_short_second}} or on an ongoing basis.{{/if}}
-
-    
+    Progress towards meeting these results was measured using **{{fmt_big_int_real drr17_total}}** {{gl_tt "indicators" "IND_RESULT"}}.
   fr: |
     {{#if is_gov}}
       En {{pa_last_year}}, les **{{num_depts}}** organisations qui devaient produire un {{gl_tt "rapport sur les résultats ministériel" "DR"}} ont cherché à obtenir **{{drr17_results}}** résultats.
@@ -32,12 +23,30 @@ drr_summary_text:
       En {{pa_last_year}}, {{subj_name subject}} a cherché à atteindre **{{drr17_results}}** résultats.
     {{/if}}
     Les progrès accomplis dans l'atteinte de ces résultats ont été mesurés à l’aide de **{{drr17_total}}** {{gl_tt "indicateurs" "IND_RESULT"}}. 
+drr_summary_text_top_right:
+  transform: [handlebars,markdown]
+  en: |
+    {{#if drr17_past_total}} Of those indicators: {{/if}}
+    {{#if drr17_future_total}}{{#unless  drr17_past_total}} Of those indicators: {{/unless}}{{/if}}
 
+    {{#if drr17_past_total}} * **{{fmt_big_int_real drr17_past_total}}** indicators were seeking to achieve their target **by** March 31, {{pa_last_year_short_second}}{{#if drr17_future_total}}; and,{{else}}.{{/if}} {{/if}}
+    {{#if drr17_future_total}} * **{{fmt_big_int_real drr17_future_total}}** indicators are seeking to achieve their target **after** March 31, {{pa_last_year_short_second}} or on an **ongoing** basis.{{/if}}
+  fr: |
     {{#if drr17_past_total}} De ces indicateurs: {{/if}}
     {{#if drr17_future_total}}{{#unless  drr17_past_total}} De ces indicateurs: {{/unless}}{{/if}}
 
     {{#if drr17_past_total}} * **{{drr17_indicators_met}}** des **{{drr17_past_total}}** cibles (**{{fmt_percentage1 (divide drr17_indicators_met drr17_past_total)}}**) qui devaient être atteintes au plus tard le 31 mars {{pa_last_year_short_second}} ont été {{gl_tt "atteintes" "RESULTS_MET"}}. {{/if}}
     {{#if drr17_future_total}} * **{{drr17_indicators_met}}** autres indicateurs visent à atteindre leurs cibles continuellement ou après Mars 31, {{pa_last_year_short_second}} {{/if}}
+drr_summary_text_bottom_left:
+  transform: [handlebars,markdown]
+  en: |
+    {{#if drr17_past_total}}
+    Of the **{{fmt_big_int_real drr17_past_total}}** indicators that sought to achieve their target by March 31, {{pa_last_year_short_second}}:
+      * **{{fmt_big_int_real drr17_indicators_met}}** (or **{{fmt_percentage1 (divide drr17_indicators_met drr17_past_total)}}**) {{gl_tt "met" "RESULTS_MET"}} their target;
+      * **{{fmt_big_int_real drr17_indicators_not_met}}** (or **{{fmt_percentage1 (divide drr17_indicators_not_met drr17_past_total)}}**) did {{gl_tt "not meet" "RESULTS_NOT_MET"}} their target; and,
+      * **{{fmt_big_int_real drr17_indicators_not_available}}** (or **{{fmt_percentage1 (divide drr17_indicators_not_available drr17_past_total)}}**) have {{gl_tt "no result available" "RESULTS_NOT_AVAILABLE"}}.
+    {{/if}}
+  fr: |
 
 gov_drr_summary_org_table_text:
   transform: [handlebars,markdown]
