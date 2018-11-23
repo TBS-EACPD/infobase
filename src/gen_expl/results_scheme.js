@@ -14,7 +14,7 @@ const {
 
 
 export const get_initial_single_subj_results_state = ({subj_guid, doc, mode, has_drr_data, has_dp_data}) => ({
-  doc: has_dp_data ? 'dp18': "drr17",
+  doc: has_drr_data ? "drr17" : 'dp18',
   subject_guid: subj_guid || 'dept_1',
   status_status_key_whitelist: [],
 });
@@ -63,7 +63,7 @@ export const single_subj_results_scheme = {
         .mapValues( (group, status_key ) => group.length )
         .value()
     );
-    
+
     return augmented_state => {
       const { 
         single_subj_results: {

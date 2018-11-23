@@ -300,7 +300,7 @@ class SingleSubjExplorer extends React.Component {
       >
         {loading && 
           <div className="loading-overlay">
-            <div style={{height: '200px',position: 'relative'}}>
+            <div style={{height: '200px', position: 'relative'}}>
               <SpinnerWrapper config_name={"sub_route"} /> 
             </div>
           </div>
@@ -343,7 +343,7 @@ class SingleSubjExplorer extends React.Component {
               aria-pressed={doc === "dp18"}
               className="tab_label_text"
               onClick={()=> tab_on_click('dp18')}
-              onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32)&& tab_on_click('dp18')}
+              onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('dp18')}
             >
               <TM k="DP_results_option_title" />
             </span>
