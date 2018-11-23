@@ -202,7 +202,7 @@ _.each(['dept', 'crso', 'program'], lvl => {
       const dept_id = lvl === "dept" ? 
         subject.id :
         subject.dept.id;
-      return _.includes([129, 138, 348], dept_id)
+      return dept_id === 138;
     },
     render(){
       return (

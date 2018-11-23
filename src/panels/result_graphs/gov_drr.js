@@ -54,25 +54,10 @@ new PanelGraph({
       graph_args,
     } = calculations;
     
-    // Don't want to put this transitory footnote in the master footnotes doc, but I also don't
-    // want to have to manually merge it in to the output footnotes file after each pipeline run. 
-    // Instead, mocking it up here (just a temporary hting anyway)
-    const temp_drr17_footnote_mock = {
-      id: "1234567",
-      subject: Gov,
-      text: {
-        en: "The count of indicators does not include indicators for Indigenous and Northern Affairs Canada, Indigenous Services Canada, and Transport Canada. Information will be updated as soon as the data is submitted.",
-        fr: "Le nombre indicateurs n’inclus pas les indicateurs pour Affaires autochtones et du Nord Canada, Services aux Autochtones Canada, et Transports Canada. L’information sera mise-à-jour dès que les données auront été soumises.",
-      }[window.lang],
-      topc_keys: ["RESULTS_COUNTS"],
-      year1: "2017",
-      year2: "",
-    };
-
     return (
       <Panel
         title={text_maker("drr_summary_title")}
-        {...{footnotes: [...footnotes, temp_drr17_footnote_mock]}}
+        {...footnotes}
       >
         <GovDRR {...graph_args} />
       </Panel>
@@ -90,6 +75,16 @@ class GovDRR extends React.Component {
     } = this.props;
 
     return <div>
+      <div
+        className = { 'alert alert-no-symbol alert--is-bordered alert-info center-text' }
+      >
+        { 
+          {
+            en: "The count of indicators does not include indicators for Transport Canada. Information will be updated as soon as their data is submitted.",
+            fr: "Le nombre indicateurs n’inclus pas les indicateurs pour Transports Canada. L’information sera mise-à-jour dès que les données auront été soumises.",
+          }[window.lang] // Temporary banner, will go away shortly hopefully
+        }
+      </div>
       <DrrSummary
         subject={Gov}
         verbose_counts={verbose_gov_counts}
@@ -160,7 +155,7 @@ class HorizontalStatusTable extends React.Component {
 
     return <div style={{overflowX: "auto"}}>
       <table className="table table-dark-blue table-dark-bordered no-total-row">
-        <caption> <TM k="indicator_targets" />  </caption>
+        <caption className="sr-only" > <TM k="indicator_targets" />  </caption>
         <thead>
           <tr className="table-header">
             <th 
