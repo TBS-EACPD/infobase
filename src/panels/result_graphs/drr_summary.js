@@ -180,27 +180,29 @@ export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts 
 
   return <Fragment>
     <div className="frow middle-xs between-md">
-      <div className="fcol-md-5 fcol-xs-12 medium_panel_text" >
+      <div className="fcol-md-12 fcol-xs-12 medium_panel_text" >
         <TM 
-          k="drr_summary_text_top_left"
-          args={summary_text_args} 
-        />
-      </div>
-      <div className="fcol-md-6 fcol-xs-12 medium_panel_text" >
-        <TM 
-          k="drr_summary_text_top_right"
+          k="drr_summary_text_intro"
           args={summary_text_args} 
         />
       </div>
     </div>
-    <div className="frow middle-xs between-md" style={{marginBottom: "30px"}}>
+    <div className="frow middle-xs between-md">
       <div className="fcol-md-6 fcol-xs-12 medium_panel_text" >
         <TM 
-          k="drr_summary_text_bottom_left"
+          k="drr_summary_text_summary_left"
           args={summary_text_args} 
         />
       </div>
-      <div className="fcol-md-6 col-xs-12">
+      <div className="fcol-md-6 fcol-xs-12 medium_panel_text" >
+        <TM 
+          k="drr_summary_text_summary_right"
+          args={summary_text_args} 
+        />
+      </div>
+    </div>
+    <div className="frow center-xs" style={{marginBottom: "30px"}}>
+      <div className="fcol-md-6 fcol-sm-8 col-xs-12">
         <StatusGrid {...counts} />
       </div>
     </div>
