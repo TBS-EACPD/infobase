@@ -251,14 +251,9 @@ LineBarToggleGraph.defaultProps = {
 
 export const HeightClippedLineBarToggleGraph = ({graph_props}) => (
   <HeightClipper clipHeight={185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient gradient-strong"}>
-    <div className="height-clipped-graph-area" aria-hidden={true}>
+    <div aria-hidden={true}>
       <LineBarToggleGraph 
-        {...{
-          ...graph_props, 
-          graph_col_class: graph_props.graph_options.bar ? 
-            `${graph_props.graph_col_class || ''} height-clipped-graph-area` : 
-            graph_props.graph_col_class,
-        }}
+        {...graph_props}
       />
     </div>
   </HeightClipper>
