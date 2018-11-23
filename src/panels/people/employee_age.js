@@ -137,11 +137,7 @@ const calculate_funcs_by_level = {
           y_axis: text_maker("employees"),
           formater: formats.big_int_real_raw,
         },
-        graph_mode_options: [
-          "not-stacked",
-          "stacked",
-          "normalized",
-        ],
+        initial_graph_mode: "bar_grouped",
         data: graph_args.age_group,
       };
       const avg_age_options = {
@@ -152,9 +148,8 @@ const calculate_funcs_by_level = {
           y_axis: text_maker("avgage"),
           formater: formats.int,
         },
-        graph_mode_options: [
-          "not-stacked",
-        ],
+        disable_toggle: true,
+        initial_graph_mode: "line",
         data: graph_args.avg_age,
       };
       

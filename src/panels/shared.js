@@ -94,7 +94,7 @@ export class LineBarToggleGraph extends React.Component {
     super(props);
 
     this.extra_options_by_graph_mode = {
-      bar_stack: {
+      bar_stacked: {
         bar: true,
         stacked: true,
       },
@@ -113,7 +113,7 @@ export class LineBarToggleGraph extends React.Component {
         bar: false,
         stacked: false,
       },
-      line_stack: {
+      line_stacked: {
         bar: false,
         stacked: true,
       },
@@ -246,7 +246,7 @@ LineBarToggleGraph.defaultProps = {
   legend_class: false,
   graph_col_class: false,
   get_colors: () => infobase_colors(),
-  initial_graph_mode: "bar_stack",
+  initial_graph_mode: "bar_stacked",
 };
 
 export const HeightClippedLineBarToggleGraph = ({graph_props}) => (

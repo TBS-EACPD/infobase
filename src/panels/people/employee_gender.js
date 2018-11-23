@@ -118,11 +118,7 @@ const calculate_funcs_by_level = {
                     ticks: ticks,
                     formater: formats.big_int_real_raw,
                   },
-                  graph_mode_options: [
-                    "not-stacked",
-                    "stacked",
-                    "normalized",
-                  ],
+                  initial_graph_mode: "bar_grouped",
                   data: graph_args,
                 }}
               />
