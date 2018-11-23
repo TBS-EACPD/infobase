@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { Fragment } from 'React';
+import { Fragment } from 'react';
 import {
   PanelGraph,
   declarative_charts,
