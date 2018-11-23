@@ -317,7 +317,6 @@ const InlineStatusIconList = ({indicators}) => {
 const StatusDisplay = ({
   indicator: {
     status_key, 
-    status_period, 
   },  
 }) => <div>
   <span className="nowrap">
