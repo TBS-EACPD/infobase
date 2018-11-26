@@ -32,16 +32,16 @@ drr_summary_text_summary_left:
   en: |
     {{#if drr17_past_total}}
     Of the **{{fmt_big_int_real drr17_past_total}}** indicators that sought to achieve their target by March 31, {{pa_last_year_short_second}}:
-      * **{{fmt_big_int_real drr17_indicators_met}}** (**{{fmt_percentage1 (divide drr17_indicators_met drr17_past_total)}}**) {{gl_tt "met" "RESULTS_MET"}} their target;
-      * **{{fmt_big_int_real drr17_indicators_not_met}}** (**{{fmt_percentage1 (divide drr17_indicators_not_met drr17_past_total)}}**) did {{gl_tt "not meet" "RESULTS_NOT_MET"}} their target; and,
-      * **{{fmt_big_int_real drr17_indicators_not_available}}** (**{{fmt_percentage1 (divide drr17_indicators_not_available drr17_past_total)}}**) have {{gl_tt "no result available" "RESULTS_NOT_AVAILABLE"}}.
+      {{#if drr17_indicators_met}} * **{{fmt_big_int_real drr17_indicators_met}}** (**{{fmt_percentage1 (divide drr17_indicators_met drr17_past_total)}}**) {{gl_tt "met" "RESULTS_MET"}} their target {{/if}}
+      {{#if drr17_indicators_not_met}} * **{{fmt_big_int_real drr17_indicators_not_met}}** (**{{fmt_percentage1 (divide drr17_indicators_not_met drr17_past_total)}}**) did {{gl_tt "not meet" "RESULTS_NOT_MET"}} their target {{/if}}
+      {{#if drr17_indicators_not_available}} * **{{fmt_big_int_real drr17_indicators_not_available}}** (**{{fmt_percentage1 (divide drr17_indicators_not_available drr17_past_total)}}**) have {{gl_tt "no result available" "RESULTS_NOT_AVAILABLE"}} {{/if}}
     {{/if}}
   fr: |
     {{#if drr17_past_total}}
     De ces **{{fmt_big_int_real drr17_past_total}}** indicateurs qui devaient atteindre leur cible au plus tard le 31 mars {{pa_last_year_short_second}}:
-      * **{{fmt_big_int_real drr17_indicators_met}}** (**{{fmt_percentage1 (divide drr17_indicators_met drr17_past_total)}}**) {{gl_tt "ont atteint" "RESULTS_MET"}} leur cible,
-      * **{{fmt_big_int_real drr17_indicators_not_met}}** (**{{fmt_percentage1 (divide drr17_indicators_not_met drr17_past_total)}}**) {{gl_tt "n’ont pas atteint" "RESULTS_NOT_MET"}} leur cible, et
-      * **{{fmt_big_int_real drr17_indicators_not_available}}** (**{{fmt_percentage1 (divide drr17_indicators_not_available drr17_past_total)}}**) {{gl_tt "n’ont pas de résultat disponible" "RESULTS_NOT_AVAILABLE"}}.
+      {{#if drr17_indicators_met}} * **{{fmt_big_int_real drr17_indicators_met}}** (**{{fmt_percentage1 (divide drr17_indicators_met drr17_past_total)}}**) {{gl_tt "ont atteint" "RESULTS_MET"}} leur cible {{/if}}
+      {{#if drr17_indicators_not_met}} * **{{fmt_big_int_real drr17_indicators_not_met}}** (**{{fmt_percentage1 (divide drr17_indicators_not_met drr17_past_total)}}**) {{gl_tt "n’ont pas atteint" "RESULTS_NOT_MET"}} leur cible {{/if}}
+      {{#if drr17_indicators_not_available}} * **{{fmt_big_int_real drr17_indicators_not_available}}** (**{{fmt_percentage1 (divide drr17_indicators_not_available drr17_past_total)}}**) {{gl_tt "n’ont pas de résultat disponible" "RESULTS_NOT_AVAILABLE"}} {{/if}}
     {{/if}}
 
 gov_drr_summary_org_table_text:
