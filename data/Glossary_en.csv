@@ -405,7 +405,7 @@ Note: As you navigate the InfoBase, you will notice that the tool uses ""Areas o
 "IFORM_INT","Interests","Interests are entities in which the federal government holds an interest (via share ownership) or participates in oversight (via the right to appoint or nominate a member of the organization’s governing body)."
 "RESULTS_STATUS","Result Status","If the date to achieve the target is **before or by the end of fiscal year 2017-18 (March 31, 2018)** and:
 * Target met: The result is higher than the minimum target; lower than the maximum target; within the target range; or is exactly equal to the unique target value.
-* Not met: The result is lower than the minimum target; higher than the maximum target; outside the target range; or is not equal to the target value.  
+* Target Not met: The result is lower than the minimum target; higher than the maximum target; outside the target range; or is not equal to the target value.  
 * Result not available: The result has not been collected or is not available for any other reason. Includes cases when no target was set or when the target is no longer relevant due to changes in policy or other circumstances (e.g. dissolution of a department, change in government direction, etc.).
 
 
