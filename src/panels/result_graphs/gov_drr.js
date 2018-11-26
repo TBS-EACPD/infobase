@@ -137,7 +137,7 @@ class HorizontalStatusTable extends React.Component {
       'drr17_indicators_met',
       'drr17_indicators_not_met',
       'drr17_indicators_not_available',
-      'drr17_indicators_ongoing',
+      'drr17_indicators_future',
     ];
 
     const sorted_filtered_counts = _.chain(counts_by_dept)

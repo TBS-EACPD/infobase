@@ -97,7 +97,7 @@ const row_to_drr_status_counts = ({
   drr17_indicators_met: met,
   drr17_indicators_not_met: not_met,
   drr17_indicators_not_available: not_available,
-  drr17_indicators_ongoing: future,
+  drr17_indicators_future: future,
 }) => ({
   met,
   not_met,
