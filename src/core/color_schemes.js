@@ -42,9 +42,20 @@ const infobaseCategory10Colors = [
   "#bcbd22", 
 ];
 
+//classic InfoBase graph colours, good for graphs with a limited number of items
+const infobaseGraphColors = [ 
+  '#005172', 
+  '#3095B4', 
+  '#37424A', 
+  '#63CECA',
+  '#CD202C', 
+  '#CCDC00',
+];
+
 export {
   lightCategory10Colors,
   darkCategory10Colors,
   infobaseCategory10Colors,
+  infobaseGraphColors,
 };
 
