@@ -15,29 +15,19 @@ drr_summary_text_intro:
     {{else}}
       In {{pa_last_year}}, {{subj_name subject}} sought to achieve **{{fmt_big_int_real drr17_results}}** results.
     {{/if}}
-    Progress towards meeting these results was measured using **{{fmt_big_int_real drr17_total}}** {{gl_tt "indicators" "IND_RESULT"}}.
+    Progress towards meeting these results was measured using **{{fmt_big_int_real drr17_total}}** {{gl_tt "indicators" "IND_RESULT"}}, 
+    {{#if drr17_past_total}} **{{fmt_big_int_real drr17_past_total}}** of which were seeking to achieve their target **by** March 31, {{pa_last_year_short_second}}{{#if drr17_future_total}} and{{else}}.{{/if}} {{/if}}
+    {{#if drr17_future_total}} **{{fmt_big_int_real drr17_future_total}}** of which are seeking to achieve their target **after** March 31, {{pa_last_year_short_second}} or on an **ongoing** basis.{{/if}}
   fr: |
     {{#if is_gov}}
       En {{pa_last_year}}, **{{num_depts}}** organisations ont produit un {{gl_tt "rapport sur les résultats ministériel" "DR"}}. Ces organisations ont cherché à obtenir **{{fmt_big_int_real drr17_results}}** résultats.
     {{else}}
       En {{pa_last_year}}, {{subj_name subject}} a cherché à atteindre **{{fmt_big_int_real drr17_results}}** résultats.
     {{/if}}
-    Les progrès accomplis dans l'atteinte de ces résultats ont été mesurés à l’aide de **{{fmt_big_int_real drr17_total}}** {{gl_tt "indicateurs" "IND_RESULT"}}. 
+    Les progrès accomplis dans l'atteinte de ces résultats ont été mesurés à l’aide de **{{fmt_big_int_real drr17_total}}** {{gl_tt "indicateurs" "IND_RESULT"}},
+    {{#if drr17_past_total}} dont **{{fmt_big_int_real drr17_past_total}}** avaient des cibles à **atteindre au plus tard** le 31 mars {{pa_last_year_short_second}}{{#if drr17_future_total}} et{{else}}.{{/if}} {{/if}}
+    {{#if drr17_future_total}} dont **{{fmt_big_int_real drr17_future_total}}** visaient à atteindre leurs cibles **continuellement** ou **après** mars 31 {{pa_last_year_short_second}}.{{/if}}
 drr_summary_text_summary_left:
-  transform: [handlebars,markdown]
-  en: |
-    {{#if drr17_past_total}} Of those **{{fmt_big_int_real drr17_total}}** indicators: {{/if}}
-    {{#if drr17_future_total}}{{#unless  drr17_past_total}} Of those **{{fmt_big_int_real drr17_total}}** indicators: {{/unless}}{{/if}}
-
-    {{#if drr17_past_total}} * **{{fmt_big_int_real drr17_past_total}}** indicators were seeking to achieve their target **by** March 31, {{pa_last_year_short_second}}{{#if drr17_future_total}}; and,{{else}}.{{/if}} {{/if}}
-    {{#if drr17_future_total}} * **{{fmt_big_int_real drr17_future_total}}** indicators are seeking to achieve their target **after** March 31, {{pa_last_year_short_second}} or on an **ongoing** basis.{{/if}}
-  fr: |
-    {{#if drr17_past_total}} De ces **{{fmt_big_int_real drr17_total}}** indicateurs: {{/if}}
-    {{#if drr17_future_total}}{{#unless  drr17_past_total}} De ces **{{fmt_big_int_real drr17_total}}** indicateurs: {{/unless}}{{/if}}
-
-    {{#if drr17_past_total}} * **{{fmt_big_int_real drr17_past_total}}** indicateurs avaient des cibles à **atteindre au plus tard** le 31 mars {{pa_last_year_short_second}}{{#if drr17_future_total}}, et{{else}}.{{/if}} {{/if}}
-    {{#if drr17_future_total}} * **{{fmt_big_int_real drr17_future_total}}** indicateurs visaient à atteindre leurs cibles **continuellement** ou **après** mars 31 {{pa_last_year_short_second}} {{/if}}
-drr_summary_text_summary_right:
   transform: [handlebars,markdown]
   en: |
     {{#if drr17_past_total}}
