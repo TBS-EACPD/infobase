@@ -424,7 +424,7 @@ export default class ResourceExplorer extends React.Component {
     doc = (
       _.includes(['drr17','dp18'], doc) ? 
       doc :
-      'dp18'
+      'dp17'
     );
 
     return (
