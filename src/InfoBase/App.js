@@ -9,11 +9,10 @@ export const app_reducer = (state={ lang: window.lang }, { type, payload }) => {
   return state;
 };
 
-import { ErrorBoundary } from '../core/ErrorBoundary.js';
+import { ErrorBoundary, ReactUnmounter } from '../core/NavComponents';
 import { DevFip } from '../core/DevFip.js';
 import { TooltipActivator } from '../glossary/TooltipActivator';
 import { InsertRuntimeFooterLinks } from '../core/InsertRuntimeFooterLinks.js';
-import { ReactUnmounter } from '../core/NavComponents';
 import { EasyAccess } from '../core/EasyAccess';
 import { SpinnerWrapper } from '../components/SpinnerWrapper.js';
 
