@@ -10,6 +10,7 @@ import {
   declarative_charts,
   businessConstants,
   Panel,
+  FootNote,
 } from "../shared";
 
 const { std_years } = years; 
@@ -42,6 +43,7 @@ const info_deps_by_level = {
   tag: [ "table6_tag_info" ],
 };
 
+const footnote_topics = [ 'PROG', 'SOBJ' ];
 
 ['dept', 'tag'].forEach( level_name => {
 
@@ -51,7 +53,7 @@ const info_deps_by_level = {
     info_deps: info_deps_by_level[level_name],
     depends_on: ['table305', "table6"],
 
-    footnotes: [ 'PROG', 'SOBJ' ],
+    footnotes: footnote_topics,
     calculate(subject,info,options){
 
       const is_tag = subject.level === "tag";
@@ -99,7 +101,7 @@ const info_deps_by_level = {
       }
 
       const exp_cols = _.map(std_years, yr=>yr+"exp");
-      const table6_data = _.chain( table6.q(subject).data)
+      const table6_data = _.chain(table6.q(subject).data)
         .filter(row => {
           return d3.sum(exp_cols, col=> row[col]) !== 0;
         })
@@ -111,13 +113,34 @@ const info_deps_by_level = {
           })
         )
         .sortBy(x => -d3.sum(x.data))
-        .value()
+        .value();
+
+      const program_footnotes = _.chain(flat_data)
+        .map( ({program}) => program)
+        .uniqBy( program => program.activity_code)
+        .flatMap( program => _.chain(
+          FootNote.get_for_subject(
+            program,
+            [ 
+              ...footnote_topics,
+              "EXP",
+            ]
+          ) )
+          .map( footnote => ({
+            ...footnote,
+            text: `<strong>${footnote.subject.name}: </strong>${footnote.text}`,
+          }) )
+          .value()
+        )
+        .filter()
+        .value();
 
       return {
         top_3_so_nums,
         flat_data,
         higher_level_mapping,
         table6_data,
+        program_footnotes,
       };
 
     },
@@ -129,6 +152,7 @@ const info_deps_by_level = {
           higher_level_mapping,
           top_3_so_nums,
           table6_data,
+          program_footnotes,
         },
         info,
       } = calculations;
@@ -161,7 +185,7 @@ const info_deps_by_level = {
       return (
         <Panel
           title={text_maker("detailed_program_spending_split_title")}
-          {...{sources, footnotes}}
+          {...{sources, footnotes: [...footnotes, ...program_footnotes]}}
         >
           <div className="medium_panel_text">
             <TM k={text_keys[level_name]} args={info} />

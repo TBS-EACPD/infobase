@@ -234,10 +234,10 @@ gender:
 result_statuses:
   met:
     en: Target Met
-    fr: Cible atteint
+    fr: Cible atteinte
   not_met:
     en: Target not met
-    fr: Cible non atteint
+    fr: Cible non atteinte
   not_available:
     en: Result not available
     fr: Résultat non disponible
