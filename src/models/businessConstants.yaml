@@ -234,30 +234,30 @@ gender:
 result_statuses:
   met:
     en: Target Met
-    fr: Cible atteinte
+    fr: Cible atteint
   not_met:
     en: Target not met
-    fr: Cible non atteinte
+    fr: Cible non atteint
   not_available:
     en: Result not available
     fr: Résultat non disponible
   future:
     en: Result to be achieved in the future
-    fr: Résultat a atteindre dans le future
+    fr: Résultat á atteindre dans le future
 
 result_simple_statuses:
   met:
     en: Met
-    fr: Atteinte
+    fr: Atteint
   not_met:
     en: Not Met
-    fr: Non atteinte
+    fr: Non atteint
   not_available:
     en: Not available
     fr: Non disponible
   future:
     en: Result to be achieved
-    fr: Résultat a atteindre
+    fr: Résultat á atteindre
 
 months:
   0:

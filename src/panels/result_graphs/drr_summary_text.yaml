@@ -11,7 +11,7 @@ drr_summary_text_intro:
   transform: [handlebars,markdown]
   en: |
     {{#if is_gov}}
-      In {{pa_last_year}}, **{{num_depts}}** organizations produced a {{gl_tt "Departmental Results Report" "DR"}}. These departments sought to achieve **{{fmt_big_int_real drr17_results}}** results.
+      In {{pa_last_year}}, **{{num_depts}}** organizations sought to achieve **{{fmt_big_int_real drr17_results}}** results.
     {{else}}
       In {{pa_last_year}}, {{subj_name subject}} sought to achieve **{{fmt_big_int_real drr17_results}}** results.
     {{/if}}
@@ -21,7 +21,7 @@ drr_summary_text_intro:
     or on an **ongoing** basis.{{/if}}
   fr: |
     {{#if is_gov}}
-      En {{pa_last_year}}, **{{num_depts}}** organisations ont produit un {{gl_tt "rapport sur les résultats ministériel" "DR"}}. Ces organisations ont cherché à obtenir **{{fmt_big_int_real drr17_results}}** résultats.
+      En {{pa_last_year}}, **{{num_depts}}** organisations ont cherché à obtenir **{{fmt_big_int_real drr17_results}}** résultats.
     {{else}}
       En {{pa_last_year}}, {{subj_name subject}} a cherché à atteindre **{{fmt_big_int_real drr17_results}}** résultats.
     {{/if}}
