@@ -110,17 +110,6 @@ const SingleIndicatorDisplay = ({indicator}) => {
         {indicator.target_date}
       </dd>
 
-      { is_drr && 
-        <Fragment>
-          <dt>
-            <TM k="status" />
-          </dt>
-          <dd>
-            <StatusDisplay indicator={indicator} /> 
-          </dd>
-        </Fragment>
-      }
-
       <dt>
         <TM k="target" />
       </dt>
@@ -138,17 +127,28 @@ const SingleIndicatorDisplay = ({indicator}) => {
         }
       </dd>
 
-      { is_drr && 
+      { is_drr && indicator.actual_result &&
         <Fragment>
           <dt>
             <TM k="target_result" />
           </dt>
           <dd>
             <IndicatorResultDisplay
-              data_type={indicator.actual_datatype}
+              data_type={ indicator.actual_datatype }
               min={ indicator.actual_result }
-              narrative={indicator.actual_result}
+              narrative={ indicator.actual_result }
             />
+          </dd>
+        </Fragment>
+      }
+
+      { is_drr && 
+        <Fragment>
+          <dt>
+            <TM k="status" />
+          </dt>
+          <dd>
+            <StatusDisplay indicator={indicator} /> 
           </dd>
         </Fragment>
       }

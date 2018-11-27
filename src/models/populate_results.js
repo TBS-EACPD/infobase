@@ -113,10 +113,15 @@ function populate_results_info(data){
 
   _.each(indicators, obj => {
     
-    const { target_year, target_month } = obj;
-    
+    const {
+      actual_result,
+      target_year,
+      target_month,
+    } = obj;
+
+    obj.actual_result = _.isNull(actual_result) || actual_result === '.' ? null : actual_result;
     obj.target_year = _.isNaN(parseInt(target_year)) ? null : parseInt(target_year);
-    obj.target_month= _.isEmpty(target_month) ? null : +target_month;
+    obj.target_month = _.isEmpty(target_month) ? null : +target_month;
 
     Indicator.create_and_register(obj);
   })
