@@ -188,13 +188,15 @@ export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts 
       </div>
     </div>
     <div className="frow middle-xs between-md" style={{marginBottom: "30px"}} >
-      <div className="fcol-md-6 fcol-xs-12 medium_panel_text" >
-        <TM 
-          k="drr_summary_text_summary_left"
-          args={summary_text_args} 
-        />
-      </div>
-      <div className="fcol-md-6 fcol-xs-12 medium_panel_text" >
+      { summary_text_args.drr17_past_total !== 0 &&
+        <div className="fcol-md-6 fcol-xs-12 medium_panel_text" >
+          <TM
+            k="drr_summary_text_summary_left"
+            args={summary_text_args} 
+          />
+        </div>
+      }
+      <div className={`fcol-md-${ summary_text_args.drr17_past_total !== 0 ? 6 : 12 } fcol-xs-12 medium_panel_text`} >
         <StatusGrid {...counts} />
       </div>
     </div>
