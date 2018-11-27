@@ -291,7 +291,8 @@ class ExplorerForIgoc extends React.Component {
         </div>
       </div>
       <div 
-        tabIndex={-1} 
+        tabIndex={-1}
+        className="explorer-focus-mount"
         ref="focus_mount" 
         style={{position: 'relative'}}
         aria-label={text_maker("explorer_focus_mount")}

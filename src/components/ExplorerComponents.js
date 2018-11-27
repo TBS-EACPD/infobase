@@ -254,7 +254,7 @@ export const ExplorerNode = ({
       <div className={classNames("ExplorerNode__ExpanderContainer", noExpand && "ExplorerNode__ExpanderContainer--no-expand")}>
         {!noExpand && 
           <button
-            className={classNames("ExplorerNode__Expander", window.is_a11y_mode && "ExplorerNode__Expander--a11y-compliant")}
+            className="ExplorerNode__Expander"
             onClick={()=>onClickExpand(node)}
             aria-label={trivial_text_maker(isExpanded ? "select_to_collapse_a11y" : "select_to_expand_a11y") }
           >
