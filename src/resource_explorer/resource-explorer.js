@@ -412,8 +412,14 @@ export default class ResourceExplorer extends React.Component {
 
     hierarchy_scheme = (
       _.includes(['min','dept','GOCO','HWH', "WWH", "CCOFOG", "MLT"], hierarchy_scheme) ? 
-      hierarchy_scheme :
-      'min'
+        hierarchy_scheme :
+        'min'
+    );
+
+    doc = (
+      _.includes(['drr17','dp18'], doc) ? 
+        doc :
+        'drr17'
     );
 
     //additional validation
@@ -421,12 +427,6 @@ export default class ResourceExplorer extends React.Component {
       hierarchy_scheme = "min";
     }
     
-    doc = (
-      _.includes(['drr17','dp18'], doc) ? 
-      doc :
-      'dp17'
-    );
-
     return (
       <StandardRouteContainer {...route_container_args}>
         {header}
