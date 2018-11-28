@@ -55,7 +55,7 @@ const common_lookups = _.map(
     'program_tag_types.csv',
 
     //most igoc lookups are small enough to keep bilingual
-    'DeptcodetoTableID.csv',
+    'dept_code_to_table_id.csv',
     'org_to_minister.csv',
     'ministers.csv',
     'ministries.csv',
@@ -70,7 +70,7 @@ const common_lookups = _.map(
 const lang_specific_lookups = lang => [
   "program",
   "crso",
-  "Glossary",
+  "glossary",
   "igoc",
 ].map( name => `${name}_${lang}.csv`);
 
@@ -215,8 +215,8 @@ function build_proj(PROJ){
     programs: "program.csv",
 
     sub_programs: "subprograms.csv",
-    results: "Results.csv",
-    indicators: "Indicators.csv",
+    results: "results.csv",
+    indicators: "indicators.csv",
     PI_DR_links: "pi_dr_links.csv",
 
     footnotes: "footnotes.csv",

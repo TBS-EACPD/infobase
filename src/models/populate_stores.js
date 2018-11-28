@@ -27,7 +27,7 @@ function process_lookups(data){
  
   //TODO: stop referring to data by the names of its csv, design an interface with copy_static_assets.js
   populate_igoc_models({
-    dept_to_table_id: data['DeptcodetoTableID.csv'],
+    dept_to_table_id: data['dept_code_to_table_id.csv'],
     org_to_minister: data['org_to_minister.csv'],
     inst_forms: data['inst_forms.csv'],
     ministers: data['ministers.csv'],
@@ -36,7 +36,7 @@ function process_lookups(data){
     igoc_rows: data['igoc.csv'],
   });
 
-  populate_glossary(data["Glossary.csv"]);
+  populate_glossary(data[`glossary.csv`]);
 
   create_tag_branches(data["program_tag_types.csv"]);
   populate_program_tags(data["program_tags.csv"]);
@@ -213,7 +213,6 @@ function populate_igoc_models({
 
 
 function populate_glossary(lines){
-  //const [key, title_en, title_fr, def_en, def_fr, link_en, link_fr ] = [0,1,2,3,4,5,6];
   const [key, term, markdown_def ] = [0,1,2];
   
   lines.forEach( line => {
