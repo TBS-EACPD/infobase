@@ -1,12 +1,12 @@
 import { log_standard_event } from '../core/analytics.js';
 import { retry_promise } from '../core/utils.js';
 
-// Link tags for stylesheets should all have non null sheet properties with non empty cssRules objects
+// Link tags for stylesheets should all have non null sheet properties
 const linked_stylesheets_loaded = () => {
   try {
-    const linked_style_sheets_have_loaded = _.chain( document.head.querySelectorAll('link[rel*="stylesheet"]') )
-      .map(_.identity )
-      .every( (link_tag) => !_.isNull(link_tag.sheet) && link_tag.sheet.cssRules.length !== 0 )
+    const linked_style_sheets_have_loaded = _.chain( document.head.querySelectorAll(`link[rel='stylesheet'][href^='${window.cdn_url}']`) )
+      .map( _.identity )
+      .every( (link_tag) => !_.isNull(link_tag.sheet) )
       .value();
     return linked_style_sheets_have_loaded;
   } catch (e) {
