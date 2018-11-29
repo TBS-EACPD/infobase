@@ -69,27 +69,11 @@ const load_fonts = () => (
   })
 );
 
-// Can't be used in FireFox, where cssRules from off-site style sheets are considered security risks
-// Luckily only needed in IE
-const has_loaded_linked_stylesheet = () => document
-  .head
-  .querySelector(`link[href*='${window.cdn_url}/app/extended-bootstrap.css']`)
-  .sheet
-  .cssRules
-  .length !== 0;
-
 function bootstrap(App, app_reducer, done){
   
   load_fonts();
 
   populate_stores().then(()=>{
-
-    if ( window.feature_detection.is_IE() && !has_loaded_linked_stylesheet() ){
-      // IE occasionally fails loading the extended-bootstrap style sheet 
-      // (reason why unclear, very rare and won't occur with debugger open and watching the network)
-      // If it hasn't been loaded by this point, then it has certainly failed, need to refresh the page to fix
-      window.location.reload();
-    }
 
     _.each(table_defs, table_def => Table.create_and_register(table_def));
 

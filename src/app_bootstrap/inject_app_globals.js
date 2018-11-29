@@ -40,7 +40,7 @@ import Handlebars from 'handlebars/dist/cjs/handlebars.js';
 window.Handlebars = Handlebars;
 
 
-import * as feature_detection from '../core/feature-detection.js';
+import * as feature_detection from '../core/feature_detection.js';
 window.feature_detection = feature_detection;
 
 import { infobaseCategory10Colors } from '../core/color_schemes.js';

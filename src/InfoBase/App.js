@@ -4,6 +4,8 @@ import { Suspense } from 'react';
 import { Route, Switch } from 'react-router';
 import { initialize_analytics } from '../core/analytics.js';
 
+import { ensure_linked_stylesheets_load } from './ensure_linked_stylesheets_load.js'
+
 export const app_reducer = (state={ lang: window.lang }, { type, payload }) => {
   //doesn't do anything yet...
   return state;
@@ -35,6 +37,8 @@ export class App extends React.Component {
   constructor(){
     super();
     initialize_analytics();
+
+    ensure_linked_stylesheets_load();
   }
   render(){
     return (
