@@ -6,7 +6,7 @@ budget_measure_a11y_table_open_data_link:
   transform: [handlebars, markdown]
   en: |
     This table presents an overview of Budget 2018 funding decisions, including descriptions of budget measures and links to corresponding sections of the Budget Plan. 
-    For access to all available data, down to the lowest level, see the {{ext_link "GC InfoBase Open Data Page" "https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f"}}.
+    For access to all available data, down to the lowest level, visit the {{ext_link "GC InfoBase Open Data Page" "https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f"}}.
   fr: |
     Ce tableau donne un aperçu des décisions relatives au financement du budget de 2018 et comprend une description des mesures budgétaires ainsi que des liens vers les 
     sections correspondantes du plan budgétaire. Pour avoir accès à toutes les données disponibles, jusqu'au niveau le plus bas, 
