@@ -1,12 +1,12 @@
 import { log_standard_event } from '../core/analytics.js';
 
-// Linked style sheets have a non null href property, and the only way to tell if they're loaded properly is to make sure their cssRules object has items
+// Link tags for stylesheets should all have non null sheet properties with non empty cssRules objects
 const linked_stylesheets_loaded = () => {
   try {
-    const linked_style_sheets_have_loaded = _.every(
-      document.styleSheets,
-      (styleSheet) => !_.isNull(styleSheet.href) || styleSheet.cssRules.length !== 0
-    );
+    const linked_style_sheets_have_loaded = _.chain( document.head.querySelectorAll('link[rel*="stylesheet"]') )
+      .map(_.identity )
+      .every( (link_tag) => !_.isNull(link_tag.sheet) || link_tag.sheet.cssRules.length !== 0 )
+      .value();
     return linked_style_sheets_have_loaded;
   } catch (e) {
     // Some versions of FireFox throw a security error on accessing cssRules from a non-local styleSheet
