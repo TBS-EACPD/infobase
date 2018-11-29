@@ -6,7 +6,7 @@ const linked_stylesheets_loaded = () => {
   try {
     const linked_style_sheets_have_loaded = _.chain( document.head.querySelectorAll('link[rel*="stylesheet"]') )
       .map(_.identity )
-      .every( (link_tag) => !_.isNull(link_tag.sheet) || link_tag.sheet.cssRules.length !== 0 )
+      .every( (link_tag) => !_.isNull(link_tag.sheet) && link_tag.sheet.cssRules.length !== 0 )
       .value();
     return linked_style_sheets_have_loaded;
   } catch (e) {
