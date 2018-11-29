@@ -428,7 +428,8 @@ const budget_overview_hierarchy_factory = (filtered_chapter_keys) => {
     });
 }
 
-export function budget_measures_hierarchy_factory(selected_value, first_column, filtered_chapter_keys){
+export function budget_measures_hierarchy_factory(selected_value, first_column){
+  const filtered_chapter_keys = []; // TODO: this filter option has been removed from the controls, should be cleaned out of this code too
   if (selected_value === "overview"){
     return budget_overview_hierarchy_factory(filtered_chapter_keys);
   } else {
