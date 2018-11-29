@@ -120,4 +120,3 @@ workflows:
             branches:
               only:
                 - master
-                - catch-ie-missing-css
