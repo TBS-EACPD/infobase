@@ -192,7 +192,7 @@ const update_diagram = (diagram, props) => {
 }
 
 const standard_update = (diagram, props) => {
-  const data = budget_measures_hierarchy_factory(props.selected_value, props.first_column);
+  const data = budget_measures_hierarchy_factory(props.selected_value, props.first_column, props.filtered_chapter_keys);
   const dont_fade = [];
   const data_wrapper_node_rules = _.curry(data_wrapper_node_rules_to_be_curried)(props.selected_value === "overview");
   render_diagram(diagram, props, data, data_wrapper_node_rules, dont_fade);
@@ -202,7 +202,7 @@ const update_with_search = (diagram, props) => {
   const dont_fade = [];
   const search_matching = [];
     
-  const search_tree = budget_measures_hierarchy_factory(props.selected_value, props.first_column);
+  const search_tree = budget_measures_hierarchy_factory(props.selected_value, props.first_column, props.filtered_chapter_keys);
   const deburred_query = _.deburr(props.filter_string).toLowerCase();
 
   search_tree.each(node => {
@@ -250,8 +250,9 @@ const update_with_search = (diagram, props) => {
 
 const render_diagram = (diagram, props, data, data_wrapper_node_rules, dont_fade) => {
   const displayed_measure_count = _.filter(BudgetMeasure.get_all(), measure => {
+    const measure_is_filtered_out_for_chapter = _.indexOf(props.filtered_chapter_keys, measure.chapter_key) !== -1;
     const measure_is_filtered_out_for_value = props.selected_value !== "funding" && !_.some(measure.data, (row) => row[props.selected_value] !== 0);
-    return !measure_is_filtered_out_for_value;
+    return !measure_is_filtered_out_for_chapter && !measure_is_filtered_out_for_value;
   }).length;
 
   diagram.configure_then_render({
