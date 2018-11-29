@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import { Route, Switch } from 'react-router';
 import { initialize_analytics } from '../core/analytics.js';
 
-import { ensure_linked_stylesheets_load } from './ensure_linked_stylesheets_load.js'
+import { ensure_linked_stylesheets_load, retrying_react_lazy } from './common_app_component_utils.js'
 
 export const app_reducer = (state={ lang: window.lang }, { type, payload }) => {
   //doesn't do anything yet...
@@ -19,19 +19,19 @@ import { ReactUnmounter } from '../core/NavComponents';
 import { EasyAccess } from '../core/EasyAccess';
 import { SpinnerWrapper } from '../components/SpinnerWrapper.js';
 
-const Home = React.lazy( () => import('../home/home.js') );
-const GraphInventory = React.lazy( () => import('../graph_route/GraphInventory.js') );
-const PartitionRoute = React.lazy( () => import('../partition/partition_subapp/PartitionRoute.js') );
-const BudgetMeasuresRoute = React.lazy( () => import('../partition/budget_measures_subapp/BudgetMeasuresRoute.js') );
-const BubbleExplore = React.lazy( () => import("../dept_explore/dept_explore.js") );
-const About = React.lazy( () => import('../about/about.js') );
-const MetaData = React.lazy( () => import('../metadata/metadata.js') );
-const IgocExplorer = React.lazy( () => import('../igoc_explorer/igoc_explorer.js') );
-const ResourceExplorer = React.lazy( () => import('../resource_explorer/resource-explorer.js') );
-const Glossary = React.lazy( () => import('../glossary/glossary.js') );
-const ReportBuilder = React.lazy( () => import("../rpb/index.js") );
-const InfoGraph = React.lazy( () => import ("../infographic/infographic.js") );
-const EstimatesComparison = React.lazy( () => import ("../EstimatesComparison/EstimatesComparison.js") );
+const Home = retrying_react_lazy( () => import('../home/home.js') );
+const GraphInventory = retrying_react_lazy( () => import('../graph_route/GraphInventory.js') );
+const PartitionRoute = retrying_react_lazy( () => import('../partition/partition_subapp/PartitionRoute.js') );
+const BudgetMeasuresRoute = retrying_react_lazy( () => import('../partition/budget_measures_subapp/BudgetMeasuresRoute.js') );
+const BubbleExplore = retrying_react_lazy( () => import('../dept_explore/dept_explore.js') );
+const About = retrying_react_lazy( () => import('../about/about.js') );
+const MetaData = retrying_react_lazy( () => import('../metadata/metadata.js') );
+const IgocExplorer = retrying_react_lazy( () => import('../igoc_explorer/igoc_explorer.js') );
+const ResourceExplorer = retrying_react_lazy( () => import('../resource_explorer/resource-explorer.js') );
+const Glossary = retrying_react_lazy( () => import('../glossary/glossary.js') );
+const ReportBuilder = retrying_react_lazy( () => import('../rpb/index.js') );
+const InfoGraph = retrying_react_lazy( () => import('../infographic/infographic.js') );
+const EstimatesComparison = retrying_react_lazy( () => import('../EstimatesComparison/EstimatesComparison.js') );
 
 export class App extends React.Component {
   constructor(){

@@ -1,4 +1,5 @@
 import { log_standard_event } from '../core/analytics.js';
+import { retry_promise } from '../core/utils.js';
 
 // Link tags for stylesheets should all have non null sheet properties with non empty cssRules objects
 const linked_stylesheets_loaded = () => {
@@ -32,4 +33,11 @@ const ensure_linked_stylesheets_load = () => {
   }
 }
 
-export { ensure_linked_stylesheets_load };
+
+const retrying_react_lazy = (import_promise) => React.lazy( () => retry_promise(import_promise) );
+
+
+export { 
+  ensure_linked_stylesheets_load,
+  retrying_react_lazy,
+};

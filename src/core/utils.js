@@ -71,3 +71,21 @@ export const escapeSingleQuotes = function(str){
 };
 
 export const shallowEqualObjectsOverKeys = (obj1, obj2, keys_to_compare) => _.reduce(keys_to_compare, (memo, key) => ( memo && (obj1[key] === obj2[key]) ), true);
+
+export const retry_promise = (promise_to_try, retries = 2, interval = 500) => {
+  return new Promise( (resolve, reject) => {
+    promise_to_try()
+      .then(resolve)
+      .catch( (error) => setTimeout(
+        () => {
+          if (retries === 0) {
+            reject(error);
+            return;
+          }
+  
+          retry_promise(promise_to_try, interval, retries - 1).then(resolve, reject);
+        }, 
+        interval
+      ));
+  });
+};
