@@ -50,93 +50,89 @@ export class Canada {
 
     const x_scale_factor = 1396;
     const y_scale_factor = 1346;
-
-    var data = this.options.data;
-    var formater = this.options.formater;
-    var color_scale = this.options.color_scale;
-    var last_year_data = _.last(data);
-    var max_height = 700;
-    var x_scale = this.outside_width / x_scale_factor;
-    var y_scale = max_height / y_scale_factor;
-    var scale = Math.min(x_scale, y_scale);
-    var height = scale * y_scale_factor;
-    var padding = ( this.outside_width - (scale * x_scale_factor) ) / 2;
-    var html = this.html;
-    var svg = this.svg;
-    var graph_dispatcher = this.dispatch;
-    var prev_prov;
     
-    var dispatch_mouseLeave = function(){
-      if (prev_prov) {
-        svg.select(`#CA-${prev_prov}`)
-          .styles({
-            "stroke-width": "2px",
-            stroke: "#1f77b4",
-          })
-      }
-      graph_dispatcher.call("dataMouseLeave");
-    }
+    const max_height = 700;
+    const x_scale = this.outside_width / x_scale_factor;
+    const y_scale = max_height / y_scale_factor;
+    const scale = Math.min(x_scale, y_scale);
+    const height = scale * y_scale_factor;
+    const padding = ( this.outside_width - (scale * x_scale_factor) ) / 2;
+    const color_scale = this.options.color_scale;
+    const formater = this.options.formater;
     
-    var dispatch_mouseEnter = function(d) {
-      if (prev_prov) {
-        svg.select(`#CA-${prev_prov}`)
-          .styles({
-            "stroke-width": "2px",
-            stroke: "#1f77b4",
-          })
-      }
+    const data = this.options.data;
+    const last_year_data = _.last(data);
 
-      if ( !_.isUndefined(last_year_data[ d[0] ]) ){
-        prev_prov = d[0];
-        svg.select(`#CA-${d[0]}`)
-          .styles({
-            "stroke-width": (d[0]==="abroad" || d[0]==="na") ? "8px" : "15px",
-            stroke: "#1f77b4",
-          })
-  
-        graph_dispatcher.call("dataMouseEnter", "", d[0]);
-      }
-    };
+    const html = this.html;
+    const svg = this.svg;
+    const graph_dispatcher = this.dispatch;
     
-    //remove the default svg node, it will be replaced from the template
-    //set the html of the svg
-    // append the second div element which will hold the bar graph
 
-    svg = html.select("svg");
-
-
+    // Set dimensions and scaling of svg
     svg
       .attrs({
         height: height + "px",
         width: this.outside_width + "px",
       });
-
     svg.select(".container")
       .attr("transform", `translate(${padding},0), scale(${scale})`);
 
+    // Unhide map comonents specific to current language
     svg.selectAll(`.${window.lang}-only`)
       .styles({
         opacity: "1",
-      })
+      });
 
+
+    // Graph event dispatchers
+    let prev_prov = false;
+    const dispatch_mouseLeave = function(){
+      if (prev_prov) {
+        svg.select(`#CA-${prev_prov}`)
+          .styles({
+            "stroke-width": "2px",
+            stroke: "#1f77b4",
+          });
+      }
+      graph_dispatcher.call("dataMouseLeave");
+    }
+    const dispatch_mouseEnter = function(prov_key){
+      if (prev_prov) {
+        svg.select(`#CA-${prev_prov}`)
+          .styles({
+            "stroke-width": "2px",
+            stroke: "#1f77b4",
+          });
+      }
+      if ( !_.isUndefined(last_year_data[prov_key]) ){
+        prev_prov = prov_key;
+        svg.select(`#CA-${prov_key}`)
+          .styles({
+            "stroke-width": (prov_key === "abroad" || prov_key === "na") ? "8px" : "15px",
+            stroke: "#1f77b4",
+          })
+  
+        graph_dispatcher.call("dataMouseEnter", "", prov_key);
+      }
+    };
+
+    // Set province colours, attach mouse event dispatchers
     svg.selectAll(".province")
       .each(function(d){
         var that = d3.select(this);
-        var prov = that.attr("id").split("-")[1];
-        d3.select(this).datum([prov,undefined]);
+        var prov_key = that.attr("id").split("-")[1];
+        d3.select(this).datum(prov_key);
       })
       .styles({
         fill: "#1f77b4",
-        "fill-opacity": function(d, i){
-          var prov = d3.select(this).attr("id").replace("CA-", "");
-          var val = last_year_data[prov];
+        "fill-opacity": function(prov_key, i){
+          var val = last_year_data[prov_key];
           return color_scale(val || 0);
         },
         "stroke-width": "2px",
         stroke: "#1f77b4",
-        "stroke-opacity": function(d, i){
-          var prov = d3.select(this).attr("id").replace("CA-", "");
-          var val = last_year_data[prov];
+        "stroke-opacity": function(prov_key, i){
+          var val = last_year_data[prov_key];
           return color_scale(val || 0);
         },
       })
@@ -144,41 +140,14 @@ export class Canada {
       .on("mouseleave", dispatch_mouseLeave);
 
 
-    const hide_map_components = (selector) => svg
-      .selectAll(selector)
-      .styles({
-        visibility: "hidden",
-      });
-    const hide_optional_components = (provs, selector_template) => _.each(
-      provs,
-      (prov) => !_.some( data, (d) => d[prov] ) && hide_map_components( selector_template(prov) )
-    );
-    
-    const optional_provinces = [
-      "abroad", 
-      "na",
-    ];
-    hide_optional_components(
-      optional_provinces,
-      (prov) => `.province#CA-${prov}`
-    );
-
-    const provinces_with_optional_markers = [
-      "pe",
-      "ns",
-      "nb",
-      "ncr",
-    ];
-    hide_optional_components(
-      provinces_with_optional_markers,
-      (prov) => `path#CA-${prov}-Marker`
-    );
+    hide_optional_map_components(svg, data);
 
 
     html.selectAll("div.label")
       .data( _.chain(last_year_data)
         .toPairs()
-        .sortBy( (d) => ordering[ d[0] ] )
+        .map( ([prov_key, prov_value]) => prov_key )
+        .sortBy( (prov_key) => ordering[prov_key] )
         .value()
       )
       .enter()
@@ -190,15 +159,14 @@ export class Canada {
       .on("focus", dispatch_mouseEnter)
       .on("mouseleave", dispatch_mouseLeave)
       .on("blur", dispatch_mouseLeave)
-      .each( function(d, i){
-        var prov = d[0];
+      .each( function(prov_key, i){
 
-        var label = svg.selectAll("g.label")
+        const label = svg.selectAll("g.label")
           .filter(function(){ 
-            return d3.select(this).attr("id") === `label-${prov}`;
+            return d3.select(this).attr("id") === `label-${prov_key}`;
           });
 
-        var coords = label.attr("transform")
+        const coords = label.attr("transform")
           .replace(/(translate\(|\)|)/g,"")
           .replace(","," ")
           .split(" ");
@@ -207,45 +175,74 @@ export class Canada {
           .styles({
             "border-radius": "5px",
             position: "absolute",
-            left: padding+scale*coords[0]+"px",
-            top: scale*coords[1]+"px",
+            left: padding + (scale * coords[0]) + "px",
+            top: scale * coords[1] + "px",
             "text-align": "center",
             "font-size": "10px",
-            "min-width": scale*110+"px",
+            "min-width": scale * 110 + "px",
             "min-height": "35px",
-            height: scale*80+"px",
+            height: scale * 80 + "px",
             "background-color": "#CCC",
           }); 
 
         
-        const prov_text_key = (prov === 'ON' || prov === 'QC') ? 
-          `${prov}lessncr` : 
-          prov;
+        const prov_text_key = (prov_key === 'ON' || prov_key === 'QC') ? 
+          `${prov_key}lessncr` : 
+          prov_key;
         
-        let provName;
+        let prov_name;
         if ( provinces[prov_text_key] && (scale > 0.5) ){
           //If the graph is large enough and the full name is defined, use full name
-          provName = provinces[prov_text_key].text; 
+          prov_name = provinces[prov_text_key].text; 
         } else if ( provinces_short[prov_text_key] && (scale < 0.5) ){ 
           //If the graph is too small and the short name is defined, use short name. Basically bilingual prov codes
-          provName = provinces_short[prov_text_key].text; 
+          prov_name = provinces_short[prov_text_key].text; 
         } else {
-          provName = prov;
+          prov_name = prov_key;
         }
 
         
         d3.select(this)
-          .append("div")
-          .html(provName);
+          .append("p")
+          .style("margin-bottom", "0px")
+          .html(prov_name);
 
         d3.select(this)
-          .append("a")
-          .attr('tabindex', -1)
-          .styles({
-            color: "black",
-            "text-decoration": "none",
-          })
-          .html( formater(d[1]) )
+          .append("p")
+          .html( formater(last_year_data[prov_key]) )
       });
   };
 }
+
+
+const hide_optional_map_components = (svg, data) => {
+  const hide_map_components = (selector) => svg
+    .selectAll(selector)
+    .styles({
+      visibility: "hidden",
+    });
+  const hide_optional_components = (prov_keys, selector_template) => _.each(
+    prov_keys,
+    (prov_key) => !_.some( data, (yearly_data) => yearly_data[prov_key] ) && hide_map_components( selector_template(prov_key) )
+  );
+  
+  const optional_provinces = [
+    "abroad", 
+    "na",
+  ];
+  hide_optional_components(
+    optional_provinces,
+    (prov_key) => `.province#CA-${prov_key}`
+  );
+
+  const provinces_with_optional_markers = [
+    "pe",
+    "ns",
+    "nb",
+    "ncr",
+  ];
+  hide_optional_components(
+    provinces_with_optional_markers,
+    (prov_key) => `path#CA-${prov_key}-Marker`
+  );
+};
