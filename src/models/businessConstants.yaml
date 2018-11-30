@@ -243,7 +243,7 @@ result_statuses:
     fr: Résultat non disponible
   future:
     en: Result to be achieved in the future
-    fr: Résultat á atteindre dans le future
+    fr: Résultat à atteindre dans le future
 
 result_simple_statuses:
   met:
@@ -257,7 +257,7 @@ result_simple_statuses:
     fr: Non disponible
   future:
     en: Result to be achieved
-    fr: Résultat á atteindre
+    fr: Résultat à atteindre
 
 months:
   0:
