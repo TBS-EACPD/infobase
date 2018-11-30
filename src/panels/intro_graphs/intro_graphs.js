@@ -189,29 +189,3 @@ _.each(['gov', 'dept'], lvl => {
   });
   
 });
-
-_.each(['dept', 'crso', 'program'], lvl => {
-  new PanelGraph({
-    level: lvl,
-    static: true,
-    footnotes: false,
-    source: false,
-    info_deps: [],
-    key: "late_drr17_warning",
-    calculate: (subject) => {
-      const dept_id = lvl === "dept" ? 
-        subject.id :
-        subject.dept.id;
-      return _.includes([129, 138, 348], dept_id);
-    },
-    render(){
-      return (
-        <div className="alert alert-warning alert-no-symbol alert--is-bordered large_panel_text">
-          <TM k={`${lvl}_late_drr17_warning`} />
-        </div>
-      );
-    },
-  });
-});
-
-

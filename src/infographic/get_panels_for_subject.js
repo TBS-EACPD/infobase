@@ -132,7 +132,6 @@ const get_dept_panels = subject => {
     people: _.includes(subject.tables, 'table9') && get_people_panels(subject),
     results: subject.dp_status && [
       "results_intro",
-      "late_drr17_warning",
       "drr_summary",
       "explore_results",
     ],
@@ -171,7 +170,6 @@ const get_program_panels = subject => {
     ],
     results: subject.dept.dp_status && !subject.is_internal_service && [
       "results_intro",
-      "late_drr17_warning",
       "drr_summary",
       "explore_results",
     ],
@@ -204,7 +202,6 @@ const get_crso_panels = subject => {
     ],
     results: subject.dept.dp_status && !subject.is_internal_service && [
       "results_intro",
-      "late_drr17_warning",
       "explore_results",
     ],
     related: [

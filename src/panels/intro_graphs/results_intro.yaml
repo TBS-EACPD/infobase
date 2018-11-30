@@ -116,14 +116,3 @@ what_are_DPs_and_DRRs_a:
     * {{gl_tt "indicateurs" "IND_RESULT"}} détaillés pour mesurer le rendement.
 
     Veillez noter que les société d'État, les entités parlementaires, le Bureau du gouverneur général et certains ministères et organismes ne sont pas tenus de présenter des plans ministériels et des rapports sur les résultats ministériels. Par conséquant, aucun renseignment sur les résultats n'est disponible pour ces organisastions.   
-    
-
-dept_late_drr17_warning:
-  en: The 2017-18 Departmental Results Reports data is not available for this organization. Information will be updated as soon as their data is submitted.
-  fr: L'information des rapports sur les résultats ministériels 2017-2018 n'est pas disponible pour cette organisation. L'information sera mise-à-jour dès que les données auront été soumises.
-crso_late_drr17_warning:
-  en: The 2017-18 Departmental Results Reports data is not available for this core responsibility. Information will be updated as soon as their data is submitted.
-  fr: L'information des rapports sur les résultats ministériels 2017-2018 n'est pas disponible pour cette responsabilité essentielle. L'information sera mise-à-jour dès que les données auront été soumises.
-program_late_drr17_warning:
-  en: The 2017-18 Departmental Results Reports data is not available for this program. Information will be updated as soon as their data is submitted.
-  fr: L'information des rapports sur les résultats ministériels 2017-2018 n'est pas disponible pour ce programme. L'information sera mise-à-jour dès que les données auront été soumises.

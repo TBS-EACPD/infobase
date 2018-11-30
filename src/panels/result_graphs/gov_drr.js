@@ -75,16 +75,6 @@ class GovDRR extends React.Component {
     } = this.props;
 
     return <div>
-      <div
-        className = { 'alert alert-no-symbol alert--is-bordered alert-info' }
-      >
-        { 
-          {
-            en: "The count of indicators does not include indicators for Indigenous and Northern Affairs Canada, Indigenous Services Canada, and Transport Canada. This information will be updated as soon as their data is submitted.",
-            fr: "Le nombre indicateurs n’inclus pas les indicateurs pour Affaires autochtones et du Nord Canada, Services aux Autochtones Canada, et Transports Canada. L’information sera mise-à-jour dès que les données auront été soumises.",
-          }[window.lang] // Temporary banner, will go away shortly hopefully
-        }
-      </div>
       <DrrSummary
         subject={Gov}
         verbose_counts={verbose_gov_counts}
