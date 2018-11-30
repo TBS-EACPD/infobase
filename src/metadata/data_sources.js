@@ -160,10 +160,7 @@ const sources = _.mapValues({
     description(){ return desc_from_gloss_keys("DRR") },
     frequency: frequencies.y,
     last_updated: { month: 11, year: 2017},
-    open_data: {
-      en: "http://open.canada.ca/data/en/dataset/311842ca-7958-40fa-8e31-12d11c6223e3",
-      fr: "http://ouvert.canada.ca/data/fr/dataset/311842ca-7958-40fa-8e31-12d11c6223e3",
-    },
+    open_data: infobase_open_data_page,
     report_link: {
       en: "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html",
       fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement.html",
