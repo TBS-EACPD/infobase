@@ -1,4 +1,3 @@
-import { businessConstants } from '../models/businessConstants.js';
 /* 1,043 × 1010 style="opacity:0.65822784;fill:#000000;fill-opacity:1;stroke:none" width="94.350761" height="81.185539" */ // base map obtained from [here](http://commons.wikimedia.org/wiki/File:Canada_blank_map.svg) 
 //
 // data in the following format:
@@ -10,6 +9,8 @@ import { businessConstants } from '../models/businessConstants.js';
 //  ```
 //  with the data being assumed to be ordered by fiscal year
 //
+
+import { businessConstants } from '../models/businessConstants.js';
 
 import common_charts_utils from "./common_charts_utils";
 import { canada_svg } from "./canada.yaml";
@@ -77,7 +78,7 @@ export class Canada {
     svg.select(".container")
       .attr("transform", `translate(${padding},0), scale(${scale})`);
 
-    // Unhide map comonents specific to current language
+    // Unhide map components specific to current language
     svg.selectAll(`.${window.lang}-only`)
       .styles({
         opacity: "1",
@@ -85,27 +86,28 @@ export class Canada {
 
 
     // Graph event dispatchers
-    let prev_prov = false;
+    let previous_event_target_prov_key = false;
     const dispatch_mouseLeave = function(){
-      if (prev_prov) {
-        svg.select(`#CA-${prev_prov}`)
+      if (previous_event_target_prov_key) {
+        svg.select(`#CA-${previous_event_target_prov_key}`)
           .styles({
             "stroke-width": "2px",
             stroke: "#1f77b4",
           });
       }
+      previous_event_target_prov_key = false;
       graph_dispatcher.call("dataMouseLeave");
     }
     const dispatch_mouseEnter = function(prov_key){
-      if (prev_prov) {
-        svg.select(`#CA-${prev_prov}`)
+      if (previous_event_target_prov_key) {
+        svg.select(`#CA-${previous_event_target_prov_key}`)
           .styles({
             "stroke-width": "2px",
             stroke: "#1f77b4",
           });
       }
       if ( !_.isUndefined(last_year_data[prov_key]) ){
-        prev_prov = prov_key;
+        previous_event_target_prov_key = prov_key;
         svg.select(`#CA-${prov_key}`)
           .styles({
             "stroke-width": (prov_key === "abroad" || prov_key === "na") ? "8px" : "15px",
@@ -116,7 +118,8 @@ export class Canada {
       }
     };
 
-    // Set province colours, attach mouse event dispatchers
+
+    // Set province colours, attach event dispatchers
     svg.selectAll(".province")
       .each(function(d){
         var that = d3.select(this);
@@ -137,12 +140,11 @@ export class Canada {
         },
       })
       .on("mouseenter", dispatch_mouseEnter)
-      .on("mouseleave", dispatch_mouseLeave);
+      .on("focus", dispatch_mouseEnter)
+      .on("mouseleave", dispatch_mouseLeave)
+      .on("blur", dispatch_mouseLeave);
 
-
-    hide_optional_map_components(svg, data);
-
-
+    // Add labels to provinces with data, attach event dispatchers
     html.selectAll("div.label")
       .data( _.chain(last_year_data)
         .toPairs()
@@ -192,10 +194,10 @@ export class Canada {
         
         let prov_name;
         if ( provinces[prov_text_key] && (scale > 0.5) ){
-          //If the graph is large enough and the full name is defined, use full name
+          // If the graph is large enough and the full name is defined, use full name
           prov_name = provinces[prov_text_key].text; 
         } else if ( provinces_short[prov_text_key] && (scale < 0.5) ){ 
-          //If the graph is too small and the short name is defined, use short name. Basically bilingual prov codes
+          // If the graph is too small and the short name is defined, use short name. Basically bilingual prov codes
           prov_name = provinces_short[prov_text_key].text; 
         } else {
           prov_name = prov_key;
@@ -211,38 +213,37 @@ export class Canada {
           .append("p")
           .html( formater(last_year_data[prov_key]) )
       });
+
+
+    // Hide optional map components based on data availability
+    const hide_map_components = (selector) => svg
+      .selectAll(selector)
+      .styles({
+        visibility: "hidden",
+      });
+    const hide_optional_components = (prov_keys, selector_template) => _.each(
+      prov_keys,
+      (prov_key) => !_.some( data, (yearly_data) => yearly_data[prov_key] ) && hide_map_components( selector_template(prov_key) )
+    );
+    
+    const optional_provinces = [
+      "abroad", 
+      "na",
+    ];
+    hide_optional_components(
+      optional_provinces,
+      (prov_key) => `.province#CA-${prov_key}`
+    );
+  
+    const provinces_with_optional_markers = [
+      "pe",
+      "ns",
+      "nb",
+      "ncr",
+    ];
+    hide_optional_components(
+      provinces_with_optional_markers,
+      (prov_key) => `path#CA-${prov_key}-Marker`
+    );
   };
 }
-
-
-const hide_optional_map_components = (svg, data) => {
-  const hide_map_components = (selector) => svg
-    .selectAll(selector)
-    .styles({
-      visibility: "hidden",
-    });
-  const hide_optional_components = (prov_keys, selector_template) => _.each(
-    prov_keys,
-    (prov_key) => !_.some( data, (yearly_data) => yearly_data[prov_key] ) && hide_map_components( selector_template(prov_key) )
-  );
-  
-  const optional_provinces = [
-    "abroad", 
-    "na",
-  ];
-  hide_optional_components(
-    optional_provinces,
-    (prov_key) => `.province#CA-${prov_key}`
-  );
-
-  const provinces_with_optional_markers = [
-    "pe",
-    "ns",
-    "nb",
-    "ncr",
-  ];
-  hide_optional_components(
-    provinces_with_optional_markers,
-    (prov_key) => `path#CA-${prov_key}-Marker`
-  );
-};
