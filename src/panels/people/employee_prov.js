@@ -175,7 +175,7 @@ const create_list = function(container, data,options){
 };
 
 
-const prov_split_render = function(graph_node, graph_args){
+const prov_split_render = function(legend_area, graph_area, graph_args){
 
   const { years_by_province } = graph_args;
 
@@ -183,13 +183,6 @@ const prov_split_render = function(graph_node, graph_args){
   const color_a = a => `rgba(31, 119, 180,${a})`;
 
   let historical_graph_container;
-
-  const row = graph_node.append("div").classed("frow no-container",true);
-  const legend_area = row.append("div").classed("fcol-md-3 fcol-xs-12",true);
-  const graph_area = row.append("div")
-    .classed("fcol-md-9 fcol-xs-12",true)
-    .style("position","relative");
-
 
   // calculate the maximum value to set the darkest shading
   const max = d3.max(d3.values(_.last(years_by_province)));
@@ -347,13 +340,15 @@ const prov_split_render = function(graph_node, graph_args){
 class ProvPanel extends React.Component {
   constructor(){
     super();
-    this.graph_col = React.createRef();
+    this.legend_area = React.createRef();
+    this.graph_area = React.createRef();
   }
   componentDidMount(){
     if (!window.is_a11y_mode){
       const { graph_args } = this.props.render_args.calculations;
-      const graph_node = d3.select(ReactDOM.findDOMNode(this.graph_col.current));
-      prov_split_render(graph_node, graph_args);
+      const legend_area = d3.select(ReactDOM.findDOMNode(this.legend_area.current));
+      const graph_area = d3.select(ReactDOM.findDOMNode(this.graph_area.current));
+      prov_split_render(legend_area, graph_area, graph_args);
     }
   }
   render(){
@@ -393,7 +388,12 @@ class ProvPanel extends React.Component {
           <TM k={level+"_employee_prov_text"} args={info} />
         </Col>
         { !window.is_a11y_mode &&
-          <Col size={12} isGraph passedRef={this.graph_col}/>
+          <Col size={12} isGraph>
+            <div className="frow no-container">
+              <div className="fcol-md-3 fcol-xs-12" ref={this.legend_area}/>
+              <div className="fcol-md-9 fcol-xs-12" style={{position: "relative"}} ref={this.graph_area}/>
+            </div>
+          </Col>
         }
         { window.is_a11y_mode &&
           <Col size={12} isGraph>
