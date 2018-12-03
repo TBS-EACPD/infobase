@@ -114,7 +114,7 @@ Subject.Dept = class Dept extends common(){
     );
   }
   get is_first_wave(){
-    return this.dp_status === 'fw'
+    return this.dp_status === 'fw';
   }
 
   get programs(){

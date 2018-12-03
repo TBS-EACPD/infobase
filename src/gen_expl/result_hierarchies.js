@@ -147,7 +147,20 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
       }
       case 'dept': {
 
-        if(doc==='dp18'){
+        if (!subject.is_first_wave && doc === 'drr17'){
+          // for PAA structures, the SO adds an annoying layer of drilling down for no reason
+          return subject.programs.map(prog => ({
+            id: prog.guid,
+            isExpanded: true,
+            data: {
+              subject: prog,
+              type: 'program',
+              name: prog.name,
+              resources: get_resources(prog),
+            }, 
+          }));
+
+        } else if ( (subject.is_first_wave && doc === 'drr17') || doc === 'dp18'){
 
           return _.chain(subject.crsos)
             .filter('is_cr')
@@ -161,21 +174,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
                 resources: get_resources(crso),
               }, 
             }))
-            .value()
-
-        } else if(doc==='drr17'){
-          //for PAA structures, the SO adds an annoying layer of drilling down for no reason
-
-          return subject.programs.map(prog => ({
-            id: prog.guid,
-            isExpanded: true,
-            data: {
-              subject: prog,
-              type: 'program',
-              name: prog.name,
-              resources: get_resources(prog),
-            }, 
-          }));
+            .value();
 
         } 
 

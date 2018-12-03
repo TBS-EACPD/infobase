@@ -180,7 +180,7 @@ class SingleSubjExplorer extends React.Component {
       this.setState({
         loading: false,
       });
-    }, 500)
+    }, 500);
   }
   componentWillUnmount(){
     !_.isUndefined(this.debounced_set_query) && this.debounced_set_query.cancel();
