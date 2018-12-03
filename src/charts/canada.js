@@ -1,18 +1,17 @@
-/* 1,043 × 1010 style="opacity:0.65822784;fill:#000000;fill-opacity:1;stroke:none" width="94.350761" height="81.185539" */ // base map obtained from [here](http://commons.wikimedia.org/wiki/File:Canada_blank_map.svg) 
+// base map obtained from [here](http://commons.wikimedia.org/wiki/File:Canada_blank_map.svg) 
 //
 // data in the following format:
 //  ```javascript
-//  [ {"ON" : 1000, "QC": 2000, etc..}]
-//  [ {"ON" : 1000, "QC": 2000, etc..}]
-//  [ {"ON" : 1000, "QC": 2000, etc..}]
-//  [ {"ON" : 1000, "QC": 2000, etc..}]
+//  [ {"on" : 1000, "qc": 2000, etc..}]
+//  [ {"on" : 1000, "qc": 2000, etc..}]
+//  [ {"on" : 1000, "qc": 2000, etc..}]
+//  [ {"on" : 1000, "qc": 2000, etc..}]
 //  ```
-//  with the data being assumed to be ordered by fiscal year
+//  with the array ordered by fiscal year
 //
 
-import { businessConstants } from '../models/businessConstants.js';
-
 import common_charts_utils from "./common_charts_utils";
+import { businessConstants } from '../models/businessConstants.js';
 import { canada_svg } from "./canada.yaml";
 
 const { provinces, provinces_short } = businessConstants;
@@ -175,15 +174,13 @@ export class Canada {
 
         d3.select(this)
           .styles({
-            "border-radius": "5px",
-            position: "absolute",
             left: padding + (scale * coords[0]) + "px",
             top: scale * coords[1] + "px",
+            padding: "5px",
+            position: "absolute",
+            "border-radius": "5px",
             "text-align": "center",
             "font-size": "10px",
-            "min-width": scale * 110 + "px",
-            "min-height": "35px",
-            height: scale * 80 + "px",
             "background-color": "#CCC",
           }); 
 
@@ -211,6 +208,7 @@ export class Canada {
 
         d3.select(this)
           .append("p")
+          .style("margin-bottom", "0px")
           .html( formater(last_year_data[prov_key]) )
       });
 
