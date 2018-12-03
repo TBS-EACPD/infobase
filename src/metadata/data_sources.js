@@ -75,7 +75,7 @@ const sources = _.mapValues({
     description(){ return desc_from_gloss_keys("QFR") },
     title(){ return tm("qfr_title" )},
     frequency: frequencies.q,
-    last_updated: { month: 11, year: 2017 },
+    last_updated: { month: 6, year: 2018 },
     report_link: {
       en: "https://www.canada.ca/en/treasury-board-secretariat/services/reporting-government-spending/quarterly-financial-reporting.html",
       fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/etablissement-rapports-depenses/rapports-financiers-trimestriels.html",
@@ -159,7 +159,7 @@ const sources = _.mapValues({
     title(){ return tm("drr_title")},
     description(){ return desc_from_gloss_keys("DRR") },
     frequency: frequencies.y,
-    last_updated: { month: 11, year: 2017},
+    last_updated: { month: 11, year: 2018},
     open_data: infobase_open_data_page,
     report_link: {
       en: "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html",
