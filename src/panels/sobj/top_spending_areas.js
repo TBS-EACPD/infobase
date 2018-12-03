@@ -27,15 +27,15 @@ const common_cal = (programs,table305) => {
   const cut_off_index = 3;
   const rows_by_so = collapse_by_so(programs, table305, is_non_revenue);
 
-  if (rows_by_so.length <= 1) {
+  if ( rows_by_so.length <= 1 || _.every(rows_by_so, ({value}) => value ===0) ) {
     return false;
   }
 
-  const top_3_sos = _.take(rows_by_so,cut_off_index);
+  const top_3_sos = _.take(rows_by_so, cut_off_index);
   const remainder = top_3_sos.length > cut_off_index -1 ? 
     {
       label: text_maker("other"), 
-      value: d3.sum( _.tail(rows_by_so,cut_off_index), _.property("value") ),
+      value: d3.sum( _.tail(rows_by_so, cut_off_index), _.property("value") ),
     } : 
     [];
 
@@ -135,7 +135,7 @@ new PanelGraph({
   footnotes: ["SOBJ"],
 
   calculate(subject,info,options){ 
-    if (_.isEmpty( this.tables.table305.programs.get(subject) ) ){
+    if ( _.isEmpty( this.tables.table305.programs.get(subject) ) ){
       return false;
     }
     return common_cal([subject], this.tables.table305);

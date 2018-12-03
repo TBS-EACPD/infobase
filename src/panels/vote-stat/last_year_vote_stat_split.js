@@ -43,7 +43,7 @@ new PanelGraph({
       })
     );
 
-    if(_.isEmpty(vote_stat)){
+    if( _.every( vote_stat, ({value}) => value === 0) ){
       return false;
     }
 
@@ -72,7 +72,7 @@ new PanelGraph({
       .map((lines, key)=> {
         return {
           label: key,
-          value: d3.sum(lines,_.property("{{pa_last_year}}")),
+          value: d3.sum( lines, _.property("{{pa_last_year}}") ),
         }
       })
       .value();

@@ -41,8 +41,12 @@ new PanelGraph({
   info_deps: ['table8_dept_info', 'table8_gov_info' ],
   machinery_footnotes: false,
   calculate(subject,info){
-    // check for negative voted or statutory values
-    if ( info.dept_stat_est_in_year <= 0 || info.dept_voted_est_in_year <= 0 ){
+    // check for negative voted or statutory values, or 0 for both
+    if ( 
+      info.dept_stat_est_in_year < 0 || 
+      info.dept_voted_est_in_year < 0 ||
+      (info.dept_stat_est_in_year === 0 && info.dept_stat_est_in_year === 0)
+    ){
       return false;
     }
     return [
