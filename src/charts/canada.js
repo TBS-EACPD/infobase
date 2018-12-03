@@ -27,8 +27,8 @@ const ordering = {
   ab: 6,
   sk: 7,
   mb: 8,
-  ON: 9,
-  QC: 10,
+  on: 9,
+  qc: 10,
   ncr: 11,
   nb: 12,
   ns: 13,
@@ -188,7 +188,7 @@ export class Canada {
           }); 
 
         
-        const prov_text_key = (prov_key === 'ON' || prov_key === 'QC') ? 
+        const prov_text_key = (prov_key === 'on' || prov_key === 'qc') ? 
           `${prov_key}lessncr` : 
           prov_key;
         

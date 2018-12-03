@@ -147,7 +147,7 @@ provinces_short:
     text: PE
   qc:
     text: QC
-  qcnlesscr:
+  qclessncr:
     en: QC (non-NCR)
     fr: QC (hors RCN)
   sk: 
