@@ -64,14 +64,9 @@ const IndicatorResultDisplay = ({
         return null; 
       }
       return (
-        <span
-          dangerouslySetInnerHTML={{
-            __html: marked(narrative, { 
-              sanitize: false, 
-              gfm: true,
-            }),
-          }}
-        />
+        <span>
+          {narrative}
+        </span>
       );
 
     default: //certain indicators have no targets
