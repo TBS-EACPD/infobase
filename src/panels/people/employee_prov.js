@@ -1,4 +1,3 @@
-import accounting from 'accounting';
 import text from "./employee_prov.yaml";
 import {
   formats,
@@ -15,202 +14,20 @@ import {
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const {people_years} = years;
-const {provinces} = businessConstants;
-const { A11YTable } = declarative_charts;
-
-
-// Old multi-purpose D3 legend code. The ancient prov graph's the only thing using it, so I yanked it from
-// common_charts_utils and stuck it here (so that it A: stays deprecated, and B: is for sure cleaned out
-// when employee_prov finally gets refactored)
-const create_list = function(container, data,options){
-  //
-  //  `container` is html element
-  //  `data` is an array of data objects with no standard
-  //  applied as to the attributes, accessor functions are supplied
-  //  through the `options` object below, however, if they aren't
-  //  supplied, some defaults are provided
-  //  options
-  //  * `html` is funciton which extacts
-  //   the relevant data to be displayed
-  //  * `
-  //  * `height` is a number
-  //  * `legend` is the title
-  //  * `ul_classes` : the classes applied to the list el
-  //  * `li_classes` : the classes applied to each of the li
-  //  * `interactive` - if set to true, will
-  //   put all legend text in anchor elements
-  //   and dispatch an event when they are clicked
-  //  * `align` specifies whether to right or left align
-  //     the legend
-  //
-  //
-  options.key = options.key || ( (d,i) => i );
-  options.colors = options.colors || ( () => "transparent" );
-  options.legend = options.legend || false;
-  options.html = options.html || _.identity;
-  options.legend_class = options.legend_class || "";
-  options.li_classes = options.li_classes || "";
-  options.a_class = options.a_class || "";
-  options.align = options.align || "center";
-  const horizontal = options.orientation === 'horizontal';
-  const non_interactive_legend = !options.interactive && options.legend;
-
-  //added extra class to style legends with targetted specificity
-  if (options.legend){
-    options.legend_class = "legend-container " + (horizontal ? "horizontal " : "") + options.legend_class ;
-    options.ul_classes = "legend-list-inline " + options.ul_classes;
-    options.li_classes = "legend-list-el " + options.li_classes;
-  }
-
-  const dispatch = d3.dispatch("click", "hover");
-
-  container = d3
-    .select(container)
-    .append("div")
-    .attr("aria-hidden", options.legend)
-    .classed("d3-list " + options.legend_class, true);
-
-  if (horizontal) {
-    options.ul_classes = "horizontal " + options.ul_classes;
-  } else {
-    container.classed("well", true);
-  }
-  
-  // the height will not always be specified
-  if (options.height){
-    container.style("max-height", options.height+"px");
-  }
-
-  if (options.title && !horizontal) {
-    container.append("p")
-      .attr("class", "mrgn-bttm-0 mrgn-tp-0 nav-header centerer")
-      .html(options.title);
-  }
-
-  const list = container
-    .append("ul")
-    .attr("class", "list-unstyled " + options.ul_classes)
-    .style("margin-left", "5px")
-    .selectAll("li.d3-list")
-    .data(data, options.key);
-
-  list.exit().remove();
-
-  const new_lis = list
-    .enter()
-    .append("li")
-    .attr("class","d3-list " + options.li_classes);
-
-  // if the legend tag is true, then coloured squares  will be 
-  // added
-  if (options.legend) {
-    new_lis
-      .append("span")
-      .attr("class", "legend-color-checkbox color-tag transparent_div")
-      .styles({
-        "float": "left",
-        "width": "20px",
-        "height": "20px",
-        "border-radius": "3px",
-        "margin-left": "5px",
-        "margin-right": "5px",
-      })
-      .styles({ 
-        "border": (d,i) => "1px solid " + options.colors( options.html(d) ),
-      })
-      .filter( (d) => d.active || non_interactive_legend )
-      .styles({ 
-        "background-color": (d,i) => options.colors( options.html(d) ),
-      });
-  }
-
-  new_lis
-    .append("div")
-    .styles({
-      "float": "left",
-      "width": () => horizontal ? undefined : "75%",
-    })
-
-  list.merge(new_lis);
-
-  // if interactive is true, then each of the items
-  // will be placed inside an anchor element
-  if (options.interactive){
-
-    // make the coloured square created above clickable 
-    new_lis
-      .selectAll(".color-tag")
-      .style("cursor", "pointer")
-      .on( "click", (d,i) => dispatch.call("click", "", d, i, d3.select(this), new_lis) );
-
-    new_lis
-      .selectAll('div')
-      .append("span")
-      .attr("role", "button")
-      .attr("tabindex", 0)
-      .attr("class", "link-styled " + options.a_class)
-      .on( "click", (d,i) => dispatch.call("click", "", d, i, d3.select(this), new_lis) )
-      .on( "keydown", (d,i) => {
-        if(d3.event.which === 13 || d3.event.which === 32){
-          dispatch.call("click", "", d, i, d3.select(this), new_lis);
-        }
-      })
-      .html(options.html);
-  }
-  
-  if (!options.interactive){
-    new_lis.selectAll('div').html(options.html);
-  }
-
-  new_lis.append("div").attr("class","clearfix");
-
-  // return the dispatcher, the list of li, the first li and the container
-  return {
-    dispatch,
-    new_lis,
-    first: d3.select( new_lis.node() ),
-    legend: container,
-  };
-};
+const { people_years } = years;
+const { provinces } = businessConstants;
+const { GraphLegend, A11YTable } = declarative_charts;
 
 
 const prov_split_render = function(legend_area, graph_area, graph_args){
 
-  const { years_by_province } = graph_args;
+  const { years_by_province, color_scale } = graph_args;
 
   const formater = formats["big_int_real_raw"];
-  const color_a = a => `rgba(31, 119, 180,${a})`;
 
   let historical_graph_container;
 
-  // calculate the maximum value to set the darkest shading
-  const max = d3.max(d3.values(_.last(years_by_province)));
-  // use the max to calibrate the scale
-
-  const color_scale = d3.scaleLinear()
-    .domain([0,max])
-    .range([0.2,1]);
-
-  // add legend
-  var list = create_list(
-    legend_area.node(),
-    _.map(color_scale.ticks(5).reverse(), tick => 
-      ({
-        label: tick, 
-        active: true,
-      })
-    ),
-    {
-      html: d => formater(d.label)+"+",
-      legend: true,
-      width: "100%",
-      title: text_maker("legend"),
-      ul_classes: "legend",
-      interactive: false,
-      colors: label => color_a(color_scale(accounting.unformat(label))),
-    }
-  );
+  var list = legend_area.select(".legend-container");
 
   const ticks = _.map(people_years, y => `${run_template(y)}`);
   
@@ -228,8 +45,8 @@ const prov_split_render = function(legend_area, graph_area, graph_args){
     historical_graph_container = d3.select(legend_area.node()).append("div");
 
     // copy the class names and style properties of the legend to ensure the graph fits in nicely
-    historical_graph_container.node().className = list.legend.node().className;
-    historical_graph_container.node().style.cssText = list.legend.node().style.cssText;
+    historical_graph_container.node().className = list.node().className;
+    historical_graph_container.node().style.cssText = list.node().style.cssText;
     
     historical_graph_container.styles({ 
       "margin-top": "10px", 
@@ -360,7 +177,7 @@ class ProvPanel extends React.Component {
     } = this.props.render_args;
 
     const { info, graph_args } = calculations;
-    const { years_by_province } = graph_args;
+    const { years_by_province, color_scale } = graph_args;
 
     const ordered_provs = window.is_a11y_mode && _.chain(provinces)
       .map( (val, key) => ({ key, display: val.text }) )
@@ -379,6 +196,9 @@ class ProvPanel extends React.Component {
       .reduce( (sum, value) => sum + value, 0)
       .value();
 
+
+    const formater = formats["big_int_real_raw"];
+
     return (
       <StdPanel
         title={text_maker("employee_prov_title")}
@@ -390,7 +210,29 @@ class ProvPanel extends React.Component {
         { !window.is_a11y_mode &&
           <Col size={12} isGraph>
             <div className="frow no-container">
-              <div className="fcol-md-3 fcol-xs-12" ref={this.legend_area}/>
+              <div className="fcol-md-3 fcol-xs-12" ref={this.legend_area}>
+                <div
+                  className="legend-container"
+                  style={{ maxHeight: "400px", width: "100%" }}
+                >
+                  <p className="mrgn-bttm-0 mrgn-tp-0 nav-header centerer">
+                    {text_maker("legend")}
+                  </p>
+                  <GraphLegend
+                    items={
+                      _.map( 
+                        color_scale.ticks(5).reverse(),
+                        (tick) => ({
+                          label: `${formater(tick)}+`,
+                          active: true,
+                          id: tick,
+                          color: `rgba(31, 119, 180, ${color_scale(tick)})`,
+                        })
+                      )
+                    }
+                  />
+                </div>
+              </div>
               <div className="fcol-md-9 fcol-xs-12" style={{position: "relative"}} ref={this.graph_area}/>
             </div>
           </Col>
@@ -445,7 +287,13 @@ const calculate_common = (data) => {
       (value, key) => key.replace('lessncr', '')
     )
   );
-  return { years_by_province };
+
+  const max = d3.max(d3.values(_.last(years_by_province)));
+  const color_scale = d3.scaleLinear()
+    .domain([0,max])
+    .range([0.2,1]);
+
+  return { years_by_province, color_scale };
 };
 const calculate_funcs_by_level = {
   gov: function(){
