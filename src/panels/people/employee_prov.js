@@ -18,6 +18,8 @@ const { people_years } = years;
 const { provinces } = businessConstants;
 const { GraphLegend, A11YTable } = declarative_charts;
 
+const graph_color = (alpha) => `rgba(31, 119, 180, ${alpha || 1})`;
+
 
 const prov_split_render = function(legend_area, graph_area, graph_args){
 
@@ -25,47 +27,33 @@ const prov_split_render = function(legend_area, graph_area, graph_args){
 
   const formater = formats["big_int_real_raw"];
 
-  let historical_graph_container;
-
-  var list = legend_area.select(".legend-container");
-
   const ticks = _.map(people_years, y => `${run_template(y)}`);
   
   const canada_graph = new charts_index.Canada(graph_area.node(), {
-    color: "rgb(31, 119, 180)",
+    color: graph_color(1),
     data: years_by_province,
     ticks: ticks,
     color_scale: color_scale,
     formater: formater,
   })
 
-  if ( !window.feature_detection.is_mobile() ) {
+  const historical_graph_container = d3.select( legend_area.node() ).append("div");
+  if ( !window.feature_detection.is_mobile() ){
     // if it's not mobile, then the graph can go next to the map , under the legend
 
-    historical_graph_container = d3.select(legend_area.node()).append("div");
-
     // copy the class names and style properties of the legend to ensure the graph fits in nicely
-    historical_graph_container.node().className = list.node().className;
-    historical_graph_container.node().style.cssText = list.node().style.cssText;
+    const legend_container = legend_area.select(".legend-container");
+    historical_graph_container.node().className = legend_container.node().className;
+    historical_graph_container.node().style.cssText = legend_container.node().style.cssText;
     
-    historical_graph_container.styles({ 
-      "margin-top": "10px", 
-    });
-
-  } else {
-    historical_graph_container = d3.select(graph_area.node()).append("div");
+    historical_graph_container.styles({ "margin-top": "10px" });
   }
-
 
   const province_graph_title = function(prov){
     if (prov === 'on' || prov === 'qc'){
       prov += "lessncr";
     }
-    if (prov === 'Canada'){
-      return text_maker("five_year_history") + " " + prov;
-    } else {
-      return text_maker("five_year_history") + " " + provinces[prov].text;
-    }
+    return `${text_maker("five_year_history")} ${prov === "Canada" ? prov : provinces[prov].text}`;
   }
 
   let active_prov;
@@ -77,14 +65,12 @@ const prov_split_render = function(legend_area, graph_area, graph_args){
     var no_data = false;
     if (prov !== "Canada") {
       prov_data = _.map(years_by_province, prov);
-      no_data = _.every(prov_data,_.isUndefined);
-    } 
+      no_data = _.every(prov_data, _.isUndefined);
+    } else 
     
-    if (prov ==='Canada' || no_data) {
+    if (prov === 'Canada' || no_data) {
       prov = 'Canada';
-      prov_data = _.map(years_by_province,function(year_data){
-        return d3.sum(_.values(year_data));
-      });
+      prov_data = _.map(years_by_province, (year_data) => d3.sum( _.values(year_data) ) );
     }
 
     if (container.datum() === prov){
@@ -97,7 +83,7 @@ const prov_split_render = function(legend_area, graph_area, graph_args){
     // add title
     container.append("p")
       .classed("mrgn-bttm-0 mrgn-tp-0 centerer", true)
-      .html(province_graph_title(prov));
+      .html( province_graph_title(prov) );
     // add in the require div with relative positioning so the
     // labels will line up with the graphics
     container.append("div")
@@ -119,12 +105,9 @@ const prov_split_render = function(legend_area, graph_area, graph_args){
         }
       )).render();
 
-      container.selectAll("rect").styles({
-        "opacity": color_scale(_.last(prov_data)) }); 
-      container.selectAll(".x.axis .tick text")
-        .styles({ 'font-size': "10px" });
+      container.selectAll("rect").styles({ "opacity": color_scale(_.last(prov_data)) }); 
+      container.selectAll(".x.axis .tick text").styles({ 'font-size': "10px" });
     } else { //use hbar
-
       (new charts_index.HBar(
         container.select("div").node(),
         {
@@ -137,22 +120,24 @@ const prov_split_render = function(legend_area, graph_area, graph_args){
       )).render();
     }
   };
-  canada_graph.dispatch.on('dataMouseEnter',prov => {
+
+  canada_graph.dispatch.on('dataMouseEnter', prov => {
     active_prov = true;
     add_graph(prov);    
   });
-  canada_graph.dispatch.on('dataMouseLeave',() => {
+  canada_graph.dispatch.on('dataMouseLeave', () => {
     _.delay(() => {
       if (!active_prov) {
         add_graph("Canada");
       }
     }, 200);
     active_prov = false;
-
   });
+
   canada_graph.render();
   add_graph("Canada");
 };
+
 
 class ProvPanel extends React.Component {
   constructor(){
@@ -163,8 +148,8 @@ class ProvPanel extends React.Component {
   componentDidMount(){
     if (!window.is_a11y_mode){
       const { graph_args } = this.props.render_args.calculations;
-      const legend_area = d3.select(ReactDOM.findDOMNode(this.legend_area.current));
-      const graph_area = d3.select(ReactDOM.findDOMNode(this.graph_area.current));
+      const legend_area = d3.select( ReactDOM.findDOMNode(this.legend_area.current) );
+      const graph_area = d3.select( ReactDOM.findDOMNode(this.graph_area.current) );
       prov_split_render(legend_area, graph_area, graph_args);
     }
   }
@@ -196,9 +181,6 @@ class ProvPanel extends React.Component {
       .reduce( (sum, value) => sum + value, 0)
       .value();
 
-
-    const formater = formats["big_int_real_raw"];
-
     return (
       <StdPanel
         title={text_maker("employee_prov_title")}
@@ -223,10 +205,10 @@ class ProvPanel extends React.Component {
                       _.map( 
                         color_scale.ticks(5).reverse(),
                         (tick) => ({
-                          label: `${formater(tick)}+`,
+                          label: `${formats["big_int_real_raw"](tick)}+`,
                           active: true,
                           id: tick,
-                          color: `rgba(31, 119, 180, ${color_scale(tick)})`,
+                          color: graph_color( color_scale(tick) ),
                         })
                       )
                     }
@@ -241,7 +223,7 @@ class ProvPanel extends React.Component {
           <Col size={12} isGraph>
             <A11YTable
               label_col_header = {text_maker("prov")}
-              data_col_headers = {[..._.map(people_years, y => `${run_template(y)}`), text_maker("five_year_percent_header")]}
+              data_col_headers = {[..._.map( people_years, y => run_template(y) ), text_maker("five_year_percent_header")]}
               data = {
                 _.chain(ordered_provs)
                   .map( (province) => {
@@ -260,7 +242,7 @@ class ProvPanel extends React.Component {
                       data: [...yearly_headcounts, formated_avg_share],
                     };
                   })
-                  .filter(row => _.some(row.data, data => !_.isUndefined(data)))
+                  .filter( row => _.some( row.data, data => !_.isUndefined(data) ) )
                   .value()
               }
             />
@@ -270,6 +252,7 @@ class ProvPanel extends React.Component {
     );
   }
 };
+
 
 const info_deps_by_level = {
   gov: ['table10_gov_info'],
