@@ -164,23 +164,6 @@ class ProvPanel extends React.Component {
     const { info, graph_args } = calculations;
     const { years_by_province, color_scale } = graph_args;
 
-    const ordered_provs = window.is_a11y_mode && _.chain(provinces)
-      .map( (val, key) => ({ key, display: val.text }) )
-      .reject( 
-        ({key}) => _.includes(
-          [
-            'qclessncr',
-            'onlessncr',
-          ], 
-          key
-        ) 
-      )
-      .value();
-    const all_year_headcount_total = window.is_a11y_mode && _.chain(years_by_province)
-      .map( year_by_province => d3.sum( _.values(year_by_province) ) )
-      .reduce( (sum, value) => sum + value, 0)
-      .value();
-
     return (
       <StdPanel
         title={text_maker("employee_prov_title")}
@@ -224,27 +207,7 @@ class ProvPanel extends React.Component {
             <A11YTable
               label_col_header = {text_maker("prov")}
               data_col_headers = {[..._.map( people_years, y => run_template(y) ), text_maker("five_year_percent_header")]}
-              data = {
-                _.chain(ordered_provs)
-                  .map( (province) => {
-                    const yearly_headcounts = _.map(
-                      years_by_province, 
-                      (year_by_province) => year_by_province[province.key] 
-                    );
-          
-                    const five_year_avg_share = d3.sum(yearly_headcounts)/all_year_headcount_total;
-                    const formated_avg_share = five_year_avg_share > 0 ? 
-                      formats["percentage1_raw"](five_year_avg_share) :
-                      undefined;
-          
-                    return {
-                      label: province.display,
-                      data: [...yearly_headcounts, formated_avg_share],
-                    };
-                  })
-                  .filter( row => _.some( row.data, data => !_.isUndefined(data) ) )
-                  .value()
-              }
+              data = { prepare_data_for_a11y_table(years_by_province) }
             />
           </Col>
         }
@@ -253,6 +216,42 @@ class ProvPanel extends React.Component {
   }
 };
 
+const prepare_data_for_a11y_table = (years_by_province) => {
+  const all_year_headcount_total = _.chain(years_by_province)
+    .map( year_by_province => d3.sum( _.values(year_by_province) ) )
+    .reduce( (sum, value) => sum + value, 0)
+    .value();
+
+  return _.chain(provinces)
+    .map( (val, key) => ({ key, label: val.text }) )
+    .reject( 
+      ({key}) => _.includes(
+        [
+          'qclessncr',
+          'onlessncr',
+        ], 
+        key
+      ) 
+    )
+    .map( (province) => {
+      const yearly_headcounts = _.map(
+        years_by_province, 
+        (year_by_province) => year_by_province[province.key] 
+      );
+  
+      const five_year_avg_share = d3.sum(yearly_headcounts)/all_year_headcount_total;
+      const formated_avg_share = five_year_avg_share > 0 ? 
+        formats["percentage1_raw"](five_year_avg_share) :
+        undefined;
+  
+      return {
+        label: province.label,
+        data: [...yearly_headcounts, formated_avg_share],
+      };
+    })
+    .filter( row => _.some( row.data, data => !_.isUndefined(data) ) )
+    .value();
+};
 
 const info_deps_by_level = {
   gov: ['table10_gov_info'],
