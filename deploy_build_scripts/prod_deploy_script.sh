@@ -1,35 +1,8 @@
 #!/bin/bash
 set -e # will exit if any command has non-zero exit value
 
-scratch=$(mktemp -d -t tmp.XXXXXXXXXX)
-function cleanup {
-  rm -rf "$scratch"
-  unset BUILD_DIR
-  unset CDN_URL
-  unset GCLOUD_BUCKET
-  unset STAGING_BUCKET
-  unset PROD_BUCKET
-  unset ROLLBACK_BUCKET
-  unset CLOUDFLARE_KEY
-  unset GCLOUD_BUCKET_URL
-}
-trap cleanup EXIT
-
-export BUILD_DIR="build_prod"
-export CDN_URL="https://cdn-rdc.ea-ad.ca/InfoBase"
-
-export GCLOUD_BUCKET="gs://cdn-rdc.ea-ad.ca"
-export STAGING_BUCKET="$GCLOUD_BUCKET/staging"
-export PROD_BUCKET="$GCLOUD_BUCKET/InfoBase"
-export ROLLBACK_BUCKET="$GCLOUD_BUCKET/rollback"
-
-export CLOUDFLARE_KEY=$(lpass show CLOUDFLARE_KEY --notes)
-echo $(lpass show IB_SERVICE_KEY --notes) | base64 -D > $scratch/key.json
-
-gcloud auth activate-service-account --key-file=$scratch/key.json
-
-gcloud config set project infobase-prod
-gcloud config set compute/zone northamerica-northeast1-a
+source ./deploy_build_Scripts/create_transient_secrets.sh
+source ./deploy_build_Scripts/create_prod_env_vars.sh
 
 #refresh node_modules
 npm ci
