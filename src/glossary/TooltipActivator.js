@@ -62,94 +62,60 @@ const get_tooltip_title = (tooltip_node) => {
 };
 
 
-export class TooltipActivator extends React.Component {
-  constructor(){
-    super();
-
-    this.state = {
-      current_tooltip_nodes: [],
-    };
-    this.tooltip_instances = [];
-
-    this.debounced_mutation_callback = _.debounce(
-      (mutationList, observer) => {
-        const previous_tooltip_nodes = _.map( this.tooltip_instances, tooltip_instance => tooltip_instance.node );
-        const current_tooltip_nodes = document.querySelectorAll('[data-toggle=tooltip]') || [];
-
-        const tooltip_nodes_have_changed = (
-          !( _.isEmpty(previous_tooltip_nodes) && _.isEmpty(current_tooltip_nodes) ) && 
-          (
-            previous_tooltip_nodes.length !== current_tooltip_nodes.length ||
-            !_.chain(previous_tooltip_nodes)
-              .zip(current_tooltip_nodes)
-              .find( nodes_to_compare => nodes_to_compare[0] !== nodes_to_compare[1] )
-              .isUndefined()
-              .value()
-          )
-        );
-
-        if (tooltip_nodes_have_changed){
-          this.setState({ current_tooltip_nodes });
-        }
-      },
-      250
-    );
-    
-    this.observer = new MutationObserver(this.debounced_mutation_callback);
-
-    this.observer.observe(
-      app,
-      {
-        childList: true,
-        attributes: false,
-        subtree: true,
-      }
-    );
-  }
-  componentDidUpdate(){
-
-    const { current_tooltip_nodes } = this.state;
-    
-    if ( _.isEmpty(this.tooltip_instances) ){
-      this.tooltip_instances = _.map(
-        current_tooltip_nodes, 
-        (node) => ({
-          node,
-          tooltip: new Tooltip(
-            node,
-            {
-              container: body,
-              html: true,
-              placement: 'bottom',
-              title: get_tooltip_title(node),
-            }
-          ),
-        }),
+const TooltipActivator = _.isUndefined(MutationObserver) ? 
+  _.constant(false) :
+  class TooltipActivator extends React.Component {
+    constructor(){
+      super();
+  
+      this.state = {
+        current_tooltip_nodes: [],
+      };
+      this.tooltip_instances = [];
+  
+      this.debounced_mutation_callback = _.debounce(
+        (mutationList, observer) => {
+          const previous_tooltip_nodes = _.map( this.tooltip_instances, tooltip_instance => tooltip_instance.node );
+          const current_tooltip_nodes = document.querySelectorAll('[data-toggle=tooltip]') || [];
+  
+          const tooltip_nodes_have_changed = (
+            !( _.isEmpty(previous_tooltip_nodes) && _.isEmpty(current_tooltip_nodes) ) && 
+            (
+              previous_tooltip_nodes.length !== current_tooltip_nodes.length ||
+              !_.chain(previous_tooltip_nodes)
+                .zip(current_tooltip_nodes)
+                .find( nodes_to_compare => nodes_to_compare[0] !== nodes_to_compare[1] )
+                .isUndefined()
+                .value()
+            )
+          );
+  
+          if (tooltip_nodes_have_changed){
+            this.setState({ current_tooltip_nodes });
+          }
+        },
+        250
       );
-
-    } else {
-      const remaining_tooltips = [];
-      const outgoing_tooltips = [];
-
-      this.tooltip_instances.forEach( tooltip_instance => {
-        const is_remaining_tooltip = _.chain(current_tooltip_nodes)
-          .map( node => node !== tooltip_instance.node )
-          .some()
-          .value();
-
-        if (is_remaining_tooltip){
-          remaining_tooltips.push(tooltip_instance);
-        } else {
-          outgoing_tooltips.push(tooltip_instance);
+      
+      this.observer = new MutationObserver(this.debounced_mutation_callback);
+  
+      this.observer.observe(
+        app,
+        {
+          childList: true,
+          attributes: false,
+          subtree: true,
         }
-      });
-
-      outgoing_tooltips.forEach( outgoing_instance => outgoing_instance.tooltip.dispose() );
-
-      const incoming_tooltips = _.chain(current_tooltip_nodes)
-        .without( ..._.map(remaining_tooltips, tooltip => tooltip.node) )
-        .map( 
-          node => ({
+      );
+    }
+    componentDidUpdate(){
+  
+      const { current_tooltip_nodes } = this.state;
+      
+      if ( _.isEmpty(this.tooltip_instances) ){
+        this.tooltip_instances = _.map(
+          current_tooltip_nodes, 
+          (node) => ({
             node,
             tooltip: new Tooltip(
               node,
@@ -160,22 +126,60 @@ export class TooltipActivator extends React.Component {
                 title: get_tooltip_title(node),
               }
             ),
-          }) 
-        )
-        .value();
-
-      this.tooltip_instances = [
-        ...remaining_tooltips,
-        ...incoming_tooltips,
-      ];
+          }),
+        );
+  
+      } else {
+        const remaining_tooltips = [];
+        const outgoing_tooltips = [];
+  
+        this.tooltip_instances.forEach( tooltip_instance => {
+          const is_remaining_tooltip = _.chain(current_tooltip_nodes)
+            .map( node => node !== tooltip_instance.node )
+            .some()
+            .value();
+  
+          if (is_remaining_tooltip){
+            remaining_tooltips.push(tooltip_instance);
+          } else {
+            outgoing_tooltips.push(tooltip_instance);
+          }
+        });
+  
+        outgoing_tooltips.forEach( outgoing_instance => outgoing_instance.tooltip.dispose() );
+  
+        const incoming_tooltips = _.chain(current_tooltip_nodes)
+          .without( ..._.map(remaining_tooltips, tooltip => tooltip.node) )
+          .map( 
+            node => ({
+              node,
+              tooltip: new Tooltip(
+                node,
+                {
+                  container: body,
+                  html: true,
+                  placement: 'bottom',
+                  title: get_tooltip_title(node),
+                }
+              ),
+            }) 
+          )
+          .value();
+  
+        this.tooltip_instances = [
+          ...remaining_tooltips,
+          ...incoming_tooltips,
+        ];
+      }
     }
-  }
-  componentWillUnmount(){
-    this.observer.disconnect();
-    this.debounced_mutation_callback.cancel();
-    this.tooltip_instances.forEach( tooltip_instance => tooltip_instance.tooltip.dispose() );
-  }
-  render(){
-    return null;
-  }
-}
+    componentWillUnmount(){
+      this.observer.disconnect();
+      this.debounced_mutation_callback.cancel();
+      this.tooltip_instances.forEach( tooltip_instance => tooltip_instance.tooltip.dispose() );
+    }
+    render(){
+      return null;
+    }
+  };
+
+export { TooltipActivator };
