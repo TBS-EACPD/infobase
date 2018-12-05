@@ -43,8 +43,8 @@ export GCLOUD_BUCKET_URL=$STAGING_BUCKET
 
 #within the GCloud bucket, backup the live prod directory (/InfoBase) to the /rollback dir, rsync /staging to /InfoBase
 #leaves us a safe version to roll back to in /rollback, and minimizes the mid-deploy downtime for the InfoBase
-gsutil -m rsync -r -d $PROD_BUCKET $ROLLBACK_BUCKET
-gsutil -m rsync -r -d $STAGING_BUCKET $PROD_BUCKET
+gsutil -m rsync -a public-read -r -d $PROD_BUCKET $ROLLBACK_BUCKET
+gsutil -m rsync -a public-read -r -d $STAGING_BUCKET $PROD_BUCKET
 
 #clear certain cloudflare caches
 ./deploy_build_scripts/selectively_clear_cloudflare_cache.sh
