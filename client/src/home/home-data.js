@@ -16,6 +16,11 @@ const featured_content_items = _.compact([
     is_new: true,
   },
   {
+    text_key: 'quick_link_hi_tags',
+    href: '#resource-explorer/HI/drr17',
+    is_new: true,
+  },
+  {
     text_key: "interim_mains",
     href: (
       window.is_a11y_mode ? 
@@ -30,7 +35,6 @@ const featured_content_items = _.compact([
         }) :
         "#partition/est_doc_ie/planned_exp"
     ),
-    is_new: false,
   },
   {
     text_key: "supps_b",
@@ -47,7 +51,6 @@ const featured_content_items = _.compact([
         }) :
         "#compare_estimates"
     ),
-    is_new: false,
   },
   {
     text_key: 'quick_link_DRR_1718',
