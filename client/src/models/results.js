@@ -367,7 +367,7 @@ class Indicator {
 }
 
 
-//does not use staticStoreMixin because it's a linkage table, there's no primary key
+//does not use storeMixins because it's a linkage table, there's no primary key
 const links = [];
 const id_indexed_links = {}; //IDs === <PI_ID>-<DR_ID>
 

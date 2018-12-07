@@ -1,8 +1,8 @@
 import { sanitized_marked } from '../general_utils.js';
-import { mix, staticStoreMixin } from './staticStoreMixin.js';
+import { mix, storeMixins } from './storeMixins.js';
 import { trivial_text_maker } from './text.js';
 
-class GlossaryEntry extends mix().with(staticStoreMixin) {
+class GlossaryEntry extends mix().with(storeMixins) {
   constructor(id, title, def_text){
     super();
     this.id = id;

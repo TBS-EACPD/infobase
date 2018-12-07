@@ -1,15 +1,17 @@
 import { 
   mix,
-  staticStoreMixin, 
+  storeMixins,
+  exstensibleStoreMixin,
   PluralSingular, 
   SubjectMixin,
   CanHaveResultsMixin,
-} from './staticStoreMixin.js';
+} from './storeMixins.js';
 import { trivial_text_maker } from '../models/text.js';
 
-const common = () => mix().with(staticStoreMixin, PluralSingular, SubjectMixin);
+const static_subject_store = () => mix().with(storeMixins, PluralSingular, SubjectMixin);
+const extensible_subject_store = () => mix().with(exstensibleStoreMixin, PluralSingular, SubjectMixin);
 
-const can_have_results = () => mix().with(staticStoreMixin, PluralSingular, SubjectMixin, CanHaveResultsMixin);
+const can_have_results = () => mix().with(storeMixins, PluralSingular, SubjectMixin, CanHaveResultsMixin);
 
 const gov_name = ( 
   window.lang === 'en' ? 
@@ -44,13 +46,13 @@ Subject.Gov = {
 
 
 //TODO: MandateItem class
-//class MandateItem extends common() {
+//class MandateItem extends static_subject_store() {
 //  static get type_name() { return 'mandate_item'; }
 //  static get singular(){ return trivial_text_maker("mandate_commitment");}
 //  static get plural(){ return trivial_text_maker("mandate_commitments");}
 //};
 
-Subject.Ministry = class Ministry extends common(){
+Subject.Ministry = class Ministry extends static_subject_store(){
   static get type_name() { return 'ministry'; }
   static get singular(){ return trivial_text_maker("ministry") }
   static get plural(){ return trivial_text_maker("ministries")}
@@ -245,7 +247,7 @@ Subject.Dept = class Dept extends can_have_results(){
 }
 
 const tag_roots = [];
-Subject.Tag = class Tag extends common(){
+Subject.Tag = class Tag extends extensible_subject_store(){
   static get tag_roots(){ 
     return _.chain(tag_roots)
       .map(tag_root => [ tag_root.id, tag_root ] )
@@ -468,7 +470,7 @@ Subject.Program = class Program extends can_have_results(){
 
 
 //Currently doesnt do anything, not even link to other departments
-Subject.Minister = class Minister extends common(){
+Subject.Minister = class Minister extends static_subject_store(){
   static get type_name() { return 'minister'; }
   static get singular(){ return trivial_text_maker("minister") }
   static get plural(){ return trivial_text_maker("minister")}
@@ -487,7 +489,7 @@ Subject.Minister = class Minister extends common(){
 };
 
 
-Subject.InstForm = class InstForm extends common(){
+Subject.InstForm = class InstForm extends static_subject_store(){
   static grandparent_forms(){
     return _.filter(
       this.get_all(), 
@@ -534,7 +536,7 @@ Subject.InstForm = class InstForm extends common(){
 }
 
 const submeasures_by_parent_id = {};
-Subject.BudgetMeasure = class BudgetMeasure extends common(){
+Subject.BudgetMeasure = class BudgetMeasure extends static_subject_store(){
   static get type_name(){ return 'budget_measure'; }
   static get singular(){ return trivial_text_maker("budget_measure"); }
   static get plural(){ return trivial_text_maker("budget_measures"); }

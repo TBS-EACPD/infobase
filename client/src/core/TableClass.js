@@ -1,11 +1,11 @@
-import { get_static_url, make_request } from '../request_utils';
+import { get_static_url, make_request } from '../request_utils.js';
 import { query_adapter } from './tables/queries.js';
 import { 
   attach_dimensions, 
   fill_dimension_columns, 
   trivial_dimension,
 } from './tables/dimensions.js';
-import { mix, staticStoreMixin } from '../models/staticStoreMixin.js';
+import { mix, storeMixins } from '../models/storeMixins.js';
 import { Subject } from '../models/subject.js';
 import { 
   trivial_text_maker, 
@@ -22,7 +22,7 @@ import {
 const table_id_to_csv_path = (table_id) => `csv/${_.snakeCase(table_id)}.csv`;
 const { Dept } = Subject;
 
-export class Table extends mix().with(staticStoreMixin){
+export class Table extends mix().with(storeMixins){
 
   static create_and_register(def){
     const inst = new Table(def);

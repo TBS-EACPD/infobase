@@ -1,3 +1,5 @@
+import { completeAssign } from '../general_utils.js';
+
 import * as a from "d3-array";
 import * as b from "d3-axis";
 import * as c from "d3-collection";
@@ -14,27 +16,6 @@ import * as m from "d3-selection-multi";
 import * as n from "d3-shape";
 import * as o from "d3-transition";
 import * as p from "d3-scale-chromatic";
-
-// From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
-// "This is an assign function that copies full descriptors"
-// Here, used to preserve getters (like d3-selection.event), as opposed to Object.assign which just copies the value once (null for most)
-function completeAssign(target, ...sources) {
-  sources.forEach(source => {
-    let descriptors = Object.keys(source).reduce((descriptors, key) => {
-      descriptors[key] = Object.getOwnPropertyDescriptor(source, key);
-      return descriptors;
-    }, {});
-    // by default, Object.assign copies enumerable Symbols too
-    Object.getOwnPropertySymbols(source).forEach(sym => {
-      let descriptor = Object.getOwnPropertyDescriptor(source, sym);
-      if (descriptor.enumerable) {
-        descriptors[sym] = descriptor;
-      }
-    });
-    Object.defineProperties(target, descriptors);
-  });
-  return target;
-}
 
 const d3 = completeAssign({}, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 

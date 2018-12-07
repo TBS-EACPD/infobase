@@ -1,4 +1,4 @@
-import { mix, staticStoreMixin } from '../models/staticStoreMixin.js';
+import { mix, storeMixins } from '../models/storeMixins.js';
 import { Table } from './TableClass.js';
 import { years } from '../models/years.js';
 import { Subject } from '../models/subject.js';
@@ -51,7 +51,7 @@ const get_single_info = _.memoize(
 //  }
 //);
 
-class Statistics extends mix().with(staticStoreMixin){
+class Statistics extends mix().with(storeMixins){
   constructor(def){
     super();
     Object.assign(this,def);

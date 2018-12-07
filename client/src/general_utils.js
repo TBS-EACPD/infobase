@@ -103,3 +103,25 @@ export const retry_promise = (promise_to_try, retries = 2, interval = 500) => {
       ));
   });
 };
+
+
+// From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+// "This is an assign function that copies full descriptors"
+// Here, used to preserve getters (like d3-selection.event), as opposed to Object.assign which just copies the value once (null for most)
+export function completeAssign(target, ...sources) {
+  sources.forEach(source => {
+    let descriptors = Object.keys(source).reduce((descriptors, key) => {
+      descriptors[key] = Object.getOwnPropertyDescriptor(source, key);
+      return descriptors;
+    }, {});
+    // by default, Object.assign copies enumerable Symbols too
+    Object.getOwnPropertySymbols(source).forEach(sym => {
+      let descriptor = Object.getOwnPropertyDescriptor(source, sym);
+      if (descriptor.enumerable) {
+        descriptors[sym] = descriptor;
+      }
+    });
+    Object.defineProperties(target, descriptors);
+  });
+  return target;
+}

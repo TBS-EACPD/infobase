@@ -63,6 +63,9 @@ const lang_specific_lookups = lang => [
   "crso",
   "glossary",
   "igoc",
+  "hi_lookups",
+  "hi_to_shared_outcomes",
+  "hi_to_dept_ha",
 ].map( name => `${name}_${lang}.csv`);
 
 const common_lookups_en = _.map(

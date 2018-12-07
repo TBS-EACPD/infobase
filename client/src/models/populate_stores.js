@@ -50,6 +50,12 @@ function process_lookups(data){
   //once all programs and tags are created, link them 
   populate_program_tag_linkages(data["tags_to_programs.csv"]);
 
+  extend_hi_tags(
+    data['hi_lookups.csv'], 
+    data['hi_to_shared_outcomes.csv'], 
+    data['hi_to_dept_ha.csv']
+  );
+
   populate_global_footnotes(data.global_footnotes);
 };
 
@@ -256,13 +262,7 @@ function populate_program_tags(tag_rows){
     const instance = Tag.create_and_register({
       id: row[tag_id],
       name: row[l? name_en: name_fr],
-      description: marked(
-        row[l? desc_en: desc_fr],
-        { 
-          sanitize: false, 
-          gfm: true,
-        }
-      ),
+      description: sanitized_marked(row[l ? desc_en : desc_fr]),
       root: parent_tag.root,
       parent_tag,
     });
@@ -324,4 +324,47 @@ function populate_program_tag_linkages(programs_m2m_tags){
     program.tags.push(tag)
     tag.programs.push(program)
   }); 
+};
+
+
+function extend_hi_tags(hi_lookups, hi_to_shared_outcomes, hi_to_dept_ha){
+
+  const processed_hi_lookups = []; // TODO
+
+  const processed_hi_to_shared_outcomes = _.chain(hi_to_shared_outcomes)
+    .groupBy( ([hi_id, shared_outcome, result]) => hi_id)
+    .mapValues(
+      hi_grouped_rows => _.map(
+        hi_grouped_rows,
+        ([hi_id, shared_outcome, result]) => ({shared_outcome, result})
+      )
+    )
+    .value();
+
+  const processed_hi_to_dept_ha = _.chain(hi_to_dept_ha)
+    .groupBy( ([hi_id, dept_code, horizontal_activity]) => hi_id )
+    .mapValues(
+      hi_grouped_rows => _.chain(hi_grouped_rows)
+        .groupBy( ([hi_id, dept_code, horizontal_activity]) => dept_code )
+        .mapValues(
+          dept_subgrouped_rows => _.map(
+            dept_subgrouped_rows,
+            ([hi_id, dept_code, horizontal_activity]) => horizontal_activity
+          )
+        )
+        .value()
+    )
+    .value();
+
+  _.each(
+    Tag.tag_roots.HI.children_tags,
+    ({id}) => Tag.extend(
+      id, 
+      {
+        ...(processed_hi_lookups[id] || {}),
+        shared_outcomes: processed_hi_to_shared_outcomes[id] || {},
+        horizontal_activities_by_department: processed_hi_to_dept_ha[id] || {},
+      }
+    )
+  );
 };
