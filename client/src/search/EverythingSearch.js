@@ -8,6 +8,7 @@ import {
   how_we_help as hwh_search_config, 
   glossary_lite as glossary_lite_search_config, 
   gocos as goco_search_config, 
+  horizontal_initiative as horizontal_initiative_config,
   datasets as table_search_config, 
   programs as program_search_config, 
   crsos as crso_search_config,
@@ -48,7 +49,8 @@ const EverythingSearch = withRouter(
       const search_configs = _.compact([
         org_search_config,
         include_tags ? goco_search_config : null, 
-        include_tags ? hwh_search_config : null, 
+        include_tags ? hwh_search_config : null,
+        include_tags ? horizontal_initiative_config : null,
         include_crsos ? crso_search_config : null,
         include_programs ? program_search_config : null, 
         include_tables ? table_search_config : null,

@@ -189,9 +189,17 @@ const gocos = {
 const how_we_help = {
   header_function: () => `${Tag.plural} - ${Tag.tag_roots.HWH.name}`,
   name_function: _.property('name'),
-  get_data: () => _.filter(Tag.get_all(), {root: Tag.tag_roots.HWH}),
+  get_data: () => _.filter(Tag.get_all(), tag => tag.root.id === "HWH"),
   filter: (query, datum) => memoized_re_matchers(query, ['name'], "how_we_help")(datum),
 };
+
+const horizontal_initiative = {
+  header_function: () => `${Tag.plural} - ${Tag.tag_roots.HI.name}`,
+  name_function: _.property('name'),
+  get_data: () => _.filter(Tag.get_all(), tag => tag.root.id === "HI"),
+  filter: (query, datum) => memoized_re_matchers(query, ['name'], "horizontal_initiative")(datum),
+};
+
 
 const datasets = {
   header_function: () => trivial_text_maker('build_a_report'),
@@ -271,6 +279,7 @@ export {
   glossary_lite,
   how_we_help,
   gocos,
+  horizontal_initiative,
   datasets,
   programs,
   crsos,

@@ -256,7 +256,13 @@ function populate_program_tags(tag_rows){
     const instance = Tag.create_and_register({
       id: row[tag_id],
       name: row[l? name_en: name_fr],
-      description: row[l? desc_en: desc_fr],
+      description: marked(
+        row[l? desc_en: desc_fr],
+        { 
+          sanitize: false, 
+          gfm: true,
+        }
+      ),
       root: parent_tag.root,
       parent_tag,
     });
