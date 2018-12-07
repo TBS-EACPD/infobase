@@ -78,6 +78,8 @@ class RootedResourceExplorer extends React.Component {
       doc,
       set_doc,
       subject,
+      has_dp_data,
+      has_drr_data,
     } = this.props;
 
     const root = get_root(flat_nodes);
@@ -118,16 +120,20 @@ class RootedResourceExplorer extends React.Component {
     return <div>
       <div className="tabbed_content">
         <ul className="tabbed_content_label_bar">
-          <li className={classNames("tab_label", doc==="drr17" && "active_tab")} onClick={()=> tab_on_click('drr17')}>
-            <span tabIndex={0} role="button" aria-pressed={doc === "drr17"} className="tab_label_text" onClick={()=> tab_on_click('drr17')} onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('drr17')}>
-              <TM k="DRR_resources" />
-            </span>
-          </li>
-          <li className={classNames("tab_label", doc==="dp18" && "active_tab")} onClick={()=> tab_on_click('dp18')}>
-            <span tabIndex={0} role="button" aria-pressed={doc === "dp18"} className="tab_label_text" onClick={()=> tab_on_click('dp18')} onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('dp18')}>
-              <TM k="DP_resources" />
-            </span>
-          </li>
+          { has_drr_data &&
+            <li className={classNames("tab_label", doc==="drr17" && "active_tab")} onClick={()=> tab_on_click('drr17')}>
+              <span tabIndex={0} role="button" aria-pressed={doc === "drr17"} className="tab_label_text" onClick={()=> tab_on_click('drr17')} onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('drr17')}>
+                <TM k="DRR_resources" />
+              </span>
+            </li>
+          }
+          { has_dp_data &&
+            <li className={classNames("tab_label", doc==="dp18" && "active_tab")} onClick={()=> tab_on_click('dp18')}>
+              <span tabIndex={0} role="button" aria-pressed={doc === "dp18"} className="tab_label_text" onClick={()=> tab_on_click('dp18')} onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('dp18')}>
+                <TM k="DP_resources" />
+              </span>
+            </li>
+          }
         </ul>
         <div className="tabbed_content_pane">
           {inner_content}
@@ -170,8 +176,10 @@ class RootedResourceExplorerContainer extends React.Component {
       rooted_resource_scheme: scheme,
       initial_rooted_resource_state,
       subject,
+      has_dp_data,
+      has_drr_data,
     } = this.props;
-    
+
     const scheme_key = scheme.key;
 
     const reducer = combineReducers({
@@ -198,6 +206,8 @@ class RootedResourceExplorerContainer extends React.Component {
         <Container
           scheme={scheme}
           subject={subject}
+          has_dp_data={has_dp_data}
+          has_drr_data={has_drr_data}
         />
       </Provider>
     );
@@ -218,6 +228,11 @@ new PanelGraph({
 
     let has_dp_data = true;
     let has_drr_data = true;
+
+    if(subject.level === 'tag'){
+      has_dp_data = _.some( subject.programs, program => !program.dead_program );
+      has_drr_data = _.some( subject.programs, program => !program.crso.is_cr );
+    }
 
     if(subject.level === 'program'){
       has_dp_data = !subject.dead_program;
@@ -264,7 +279,7 @@ new PanelGraph({
           has_dp_data={has_dp_data}
           has_drr_data={has_drr_data}
           rooted_resource_scheme={scheme}
-          initial_resource_state={get_initial_resource_state({subject, has_dp_data, has_drr_data})}
+          initial_rooted_resource_state={get_initial_resource_state({subject, has_dp_data, has_drr_data})}
         />
       </Panel>
     );
