@@ -250,7 +250,7 @@ const resource_scheme = {
   get_props_selector: () => {
     return augmented_state => ({ 
       ...augmented_state.resources,
-      is_m2m: _.includes(['HWH', 'WWH', 'MLT'], augmented_state.resources.hierarchy_scheme),
+      is_m2m: _.includes(['HWH', 'WWH', 'MLT', 'HI'], augmented_state.resources.hierarchy_scheme),
     });
   },
   dispatch_to_props: dispatch => ({ 
