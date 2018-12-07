@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 import { sanitized_marked } from '../general_utils.js';
 import { mix, storeMixins } from './storeMixins.js';
+=======
+import marked from 'marked';
+import { mix } from '../generalUtils.js';
+import { staticStoreMixin } from './storeMixins.js';
+>>>>>>> Enable the HI tags in the resource explorer
 import { trivial_text_maker } from './text.js';
 
-class GlossaryEntry extends mix().with(storeMixins) {
-  constructor(id, title, def_text){
+class GlossaryEntry extends mix().with(staticStoreMixin) {
+  constructor(id,title,def_text){
     super();
     this.id = id;
     this.title = title;

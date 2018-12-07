@@ -1,8 +1,8 @@
-import { mix, storeMixins } from './storeMixins.js';
+import { mix, staticStoreMixin } from './storeMixins.js';
 
 const footnotes_by_id = {};
 
-export default class FootNote extends mix().with(storeMixins){  
+export default class FootNote extends mix().with(staticStoreMixin){  
   static create_and_register(def){
     const {id} = def;
     if(footnotes_by_id[id]){

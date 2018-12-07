@@ -5,7 +5,7 @@ import {
   fill_dimension_columns, 
   trivial_dimension,
 } from './tables/dimensions.js';
-import { mix, storeMixins } from '../models/storeMixins.js';
+import { mix, staticStoreMixin } from '../models/storeMixins.js';
 import { Subject } from '../models/subject.js';
 import { 
   trivial_text_maker, 
@@ -22,7 +22,7 @@ import {
 const table_id_to_csv_path = (table_id) => `csv/${_.snakeCase(table_id)}.csv`;
 const { Dept } = Subject;
 
-export class Table extends mix().with(storeMixins){
+export class Table extends mix().with(staticStoreMixin){
 
   static create_and_register(def){
     const inst = new Table(def);

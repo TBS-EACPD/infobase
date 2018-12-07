@@ -13,7 +13,7 @@ class MixinBuilder {
 // class MyClass extends mix(MyBaseClass).with(Mixin1, Mixin2) { ... }
 export const mix = (superclass) => new MixinBuilder(superclass);
 
-export const storeMixins = superclass => {
+export const staticStoreMixin = superclass => {
   const _storeMap = new Map();
   const baseclass = superclass || BaseClass;
   return class extends baseclass {
@@ -32,7 +32,7 @@ export const storeMixins = superclass => {
 
 export const exstensibleStoreMixin = superclass => {
   const baseclass = superclass || BaseClass;
-  const baseclassWithStaticStore = storeMixins(baseclass);
+  const baseclassWithStaticStore = staticStoreMixin(baseclass);
   return class extends baseclassWithStaticStore {
     static extend(id, extension_object){
       const target_member = this.lookup(id);

@@ -179,11 +179,13 @@ class ExplorerPage extends React.Component {
       hwh_props,
       //mlt_props,
       wwh_props,
+      hi_props,
     ] = _.chain([ 
       Tag.lookup("GOCO"),
       Tag.lookup("HWH"),
       //Tag.lookup("MLT"),
       Tag.lookup("WWH"),
+      Tag.lookup("HI"),
     ])
       .compact()
       .map( ({ description, name, id }) => ({
@@ -308,7 +310,7 @@ class ExplorerPage extends React.Component {
               <TM k="choose_explore_point" />
             </header>
             <div role="radiogroup" className="hierarchy-selection-items">
-              {_.map([ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp19" && INCLUDE_OTHER_TAGS ? [wwh_props /*, mlt_props*/] : []) ],props =>
+              {_.map([ min_props, dept_props, goco_props, hwh_props, hi_props, ...(doc === "dp19" && INCLUDE_OTHER_TAGS ? [wwh_props /*, mlt_props*/] : []) ],props =>
                 <HierarchySelectionItem 
                   key={props.id} 
                   url={`#resource-explorer/${props.id}/${doc}`}
@@ -451,7 +453,7 @@ export default class ResourceExplorer extends React.Component {
     } = match;
 
     hierarchy_scheme = (
-      _.includes(['min','dept','GOCO','HWH', "WWH", "CCOFOG", "MLT"], hierarchy_scheme) ? 
+      _.includes(['min','dept','GOCO','HWH', "WWH", "CCOFOG", "MLT", "HI"], hierarchy_scheme) ? 
         hierarchy_scheme :
         'min'
     );
@@ -463,7 +465,7 @@ export default class ResourceExplorer extends React.Component {
     );
 
     //additional validation
-    if(doc == "drr17" && !_.includes(['min','dept','GOCO','HWH'], hierarchy_scheme) ){
+    if(doc == "drr17" && !_.includes(['min','dept','GOCO','HWH','HI'], hierarchy_scheme) ){
       hierarchy_scheme = "min";
     }
     
