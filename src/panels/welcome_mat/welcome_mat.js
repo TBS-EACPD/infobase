@@ -54,7 +54,7 @@ const get_historical_spending_source_link = subject => {
       subject: appropriate_subject.guid,
       table: table.id,
       mode: 'details',
-      columns: std_years.map(yr => `${yr}_exp`), 
+      columns: std_years.map(yr => `${yr}exp`), 
     }),
   }
 };
@@ -96,7 +96,7 @@ const Pane = ({ size, children, is_header, noPadding }) => (
     <div 
       className={classNames(
         "welcome-mat-rect",
-        is_header ? "mat-grid__title": "mat-grid__inner-grid",
+        is_header ? "mat-grid__title" : "mat-grid__inner-grid",
         noPadding && "mat-grid__inner-grid--no-padding"
       )}
     >
