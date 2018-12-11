@@ -53,11 +53,11 @@ new PanelGraph({
     const {
       graph_args,
     } = calculations;
-    
+
     return (
       <Panel
         title={text_maker("drr_summary_title")}
-        {...footnotes}
+        { ...{footnotes} }
       >
         <GovDRR {...graph_args} />
       </Panel>
