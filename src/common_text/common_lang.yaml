@@ -976,3 +976,13 @@ limited_data:
 non_active_program:
   en: non-active program
   fr: programme non actif
+
+
+
+temp_qfr_late_depts_note:
+  en: |
+    The 2018-19 Quarterly Financial Reports (QFR) dataset for the first quarter does not include data for the Canadian Centre for Occupational Health and Safety 
+    and the Royal Canadian Mounted Police External Review Committee. Information will be updated as soon as the data is available.
+  fr: |
+    L’ensemble des données pour la première trimestre des rapports financiers trimestriels (RFT) n’inclus pas les données pour la Centre canadien d’hygiène
+    et de sécurité au travail et la Comité externe d’externe d’examen de la GRC. L’information sera mise-à-jour dès que les données seront disponible.

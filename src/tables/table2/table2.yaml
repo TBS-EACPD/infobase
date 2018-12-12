@@ -18,6 +18,7 @@ table2:
    
 
    **Notes**:
+   * {{gt "temp_qfr_late_depts_note"}}
    * QFRs may revise estimates of statutory expenditures related to plans previously 
    published in the Estimates documents.
    * {{gl_tt "Internal" "INT_REV"}} and {{gl_tt "external" "EXT_REV"}} revenues,
@@ -35,6 +36,7 @@ table2:
 
 
    ** Remarques:**
+   * {{gt "temp_qfr_late_depts_note"}}
    * Les rapports financiers trimestriels peuvent servir à réviser des prévisions des dépenses associées à des plans déjà publiés dans les documents budgétaires. 
    * Les {{gl_tt "recettes internes" "INT_REV"}} et {{gl_tt "externes" "EXT_REV"}} et, qui sont présentées comme des dépenses négatives, sont fournies à titre d’information.
 

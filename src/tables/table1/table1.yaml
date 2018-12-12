@@ -21,8 +21,9 @@ table1:
    {{{gt "table1_short"}}}
 
 
-   **Note** that QFRs may revise estimates of statutory expenditures related to plans previously published in the Estimates 
-   documents.
+   **Notes**:
+   * {{gt "temp_qfr_late_depts_note"}}
+   * QFRs may revise estimates of statutory expenditures related to plans previously published in the Estimates documents.
 
 
    All figures presented reflect information published in the {{qfr_in_year}} Departmental and Agency {{gl_tt "Quarterly Financial Reports" "QFR"}}, 
@@ -34,7 +35,9 @@ table1:
    {{{gt "table1_short"}}}
 
 
-   **À remarquer** que les RFT peuvent servir à réviser les prévisions de dépenses législatives annoncées dans des documents budgétaires antérieurs.
+   ** Remarques:**
+   * {{gt "temp_qfr_late_depts_note"}}
+   * Les RFT peuvent servir à réviser les prévisions de dépenses législatives annoncées dans des documents budgétaires antérieurs.
 
 
    Tous les chiffres sont tirés de données publiées dans les {{gl_tt "rapports financiers trimestriels" "QFR"}} des ministères et organismes pour {{qfr_in_year}}. 
