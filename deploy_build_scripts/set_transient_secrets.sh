@@ -9,7 +9,10 @@ set -e # will exit if any command has non-zero exit value
 scratch=$(mktemp -d -t tmp.XXXXXXXXXX)
 function cleanup {
   rm -rf "$scratch"
-  gcloud auth revoke infobase-prod-cdn-account@infobase-prod.iam.gserviceaccount.com #log out the service user
+  
+  #log out the service user
+  gcloud auth list --filter="account:infobase AND account:prod AND account:gserviceaccount.com" --format="value(account)" | gcloud auth revoke
+
   unset SCRATCH
   unset CLOUDFLARE_KEY
 }
