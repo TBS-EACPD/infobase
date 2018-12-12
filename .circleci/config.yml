@@ -120,4 +120,3 @@ workflows:
             branches:
               only:
                 - master
-                - drr_data_fixes
