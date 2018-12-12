@@ -27,49 +27,109 @@ const IndicatorResultDisplay = ({
   min, 
   max,
   narrative,
+  measure,
 }) => {
+
+  const target_unspecified_display = <TM k="unspecified_target"/>;
+  
+  const measure_display = !_.isEmpty(measure) && <span> ( {measure} )</span>;
+
   switch(data_type){
     case 'exact_num':
     case 'num': {
       const num = min || max;
-      if( !num ){ return null; }
-      return <span> <Format type="result_num" content={+num} /> </span>;
+      if( !num ){ return target_unspecified_display; }
+      return (
+        <Fragment>
+          <span> 
+            <Format type="result_num" content={+num} /> 
+          </span> 
+          {measure_display}
+        </Fragment>
+      );
     }
 
-    case 'dollar':
-      if( !min && !max){ return null; }
-      return <span> <Format type="compact1" content={+min || +max} /> </span>;
+    case 'dollar': {
+      if( !min && !max){ return target_unspecified_display; }
+      return (
+        <Fragment>
+          <span> 
+            <Format type="compact1" content={+min || +max} />
+          </span> 
+          {measure_display}
+        </Fragment>
+      );
+    }
 
-    case 'percent':
-      if( !min && !max){ return null; }
-      return <Format type="result_percentage" content={min || max}/>
+    case 'percent': {
+      if( !min && !max){ return target_unspecified_display; }
+      return (
+        <Fragment>
+          <span> 
+            <Format type="result_percentage" content={min || max} />
+          </span> 
+          {measure_display}
+        </Fragment>
+      );
+    }
 
-    case 'num_range':
-      if( !min && !max){ return null; }
-      return <span> <Format type="result_num" content={+min} /> <TextMaker text_key="to" /> <Format type="result_num" content={+max} /> </span>
+    case 'num_range': {
+      if( !min && !max){ return target_unspecified_display; }
+      return (
+        <Fragment>
+          <span> 
+            <Format type="result_num" content={+min} />
+            <TextMaker text_key="to" />
+            <Format type="result_num" content={+max} />
+          </span> 
+          {measure_display}
+        </Fragment>
+      );
+    }
 
-    case 'percent_range':
-      if( !min && !max){ return null; }
-      return <span> <Format type="result_percentage" content={min}/> <TextMaker text_key="to" /> <Format type="result_percentage" content={max}/> </span>
+    case 'percent_range': {
+      if( !min && !max){ return target_unspecified_display; }
+      return (
+        <Fragment>
+          <span> 
+            <Format type="result_percentage" content={min} />
+            <TextMaker text_key="to" />
+            <Format type="result_percentage" content={max} />
+          </span> 
+          {measure_display}
+        </Fragment>
+      );
+    }
 
-    case 'dollar_range':
-      if( !min && !max){ return null; }
-      return <span> 
-        <Format type="compact1" content={+min} />  <span> <TextMaker text_key="to" /> </span><Format type="compact1" content={+min} /> 
-      </span>;
+    case 'dollar_range': {
+      if( !min && !max){ return target_unspecified_display; }
+      return (
+        <Fragment>
+          <span> 
+            <Format type="compact1" content={+min} />  
+            <TextMaker text_key="to" />
+            <Format type="compact1" content={+min} />
+          </span> 
+          {measure_display}
+        </Fragment>
+      );
+    }
 
-    case 'text' : 
+    case 'text' : {
       if( _.isEmpty(narrative) ){ 
-        return null; 
+        return target_unspecified_display; 
       }
       return (
         <span>
           {narrative}
         </span>
       );
+    }
 
-    default: //certain indicators have no targets
+    default: {
+      //certain indicators have no targets
       return null;
+    }
   }
 
 }
@@ -113,12 +173,8 @@ const SingleIndicatorDisplay = ({indicator}) => {
           min={indicator.target_min}
           max={indicator.target_max}
           narrative={indicator.target_narrative}
+          measure={indicator.measure}
         />
-        {
-          indicator.target_type !== "text" && //don't show unit of measurement for narrative targets
-          !_.isEmpty(indicator.measure) &&
-          <span> ( {indicator.measure} )</span>
-        }
       </dd>
 
       { is_drr && indicator.actual_result &&
