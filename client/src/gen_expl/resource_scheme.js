@@ -14,6 +14,8 @@ const {
   Ministry, 
 } = Subject;
 
+const non_rolling_up_schemes = ['WWH', 'MLT', 'HI'];
+
 const related_tags_row = (related_tags, subject_type) => {
   const term = subject_type === "program" ? 
     text_maker('related_tags_for_program') : 
@@ -44,8 +46,7 @@ const related_tags_row = (related_tags, subject_type) => {
   }
 }
 
-
-function create_resource_hierarchy({hierarchy_scheme, doc}){
+function create_resource_hierarchy({hierarchy_scheme,doc}){
 
   const get_resources = subject => get_resources_for_subject(subject, doc);
 
@@ -73,7 +74,7 @@ function create_resource_hierarchy({hierarchy_scheme, doc}){
             id: tag.guid,
             data: {
               name: tag.name,
-              resources: _.includes(['WWH', 'MLT'], hierarchy_scheme) ? null : get_resources(tag),
+              resources: _.includes(non_rolling_up_schemes, hierarchy_scheme) ? null : get_resources(tag),
               subject: tag,
               defs: tag.is_lowest_level_tag && _.compact(
                 [
@@ -240,8 +241,8 @@ function create_resource_hierarchy({hierarchy_scheme, doc}){
 const get_initial_resource_state = ({hierarchy_scheme, doc}) => ({
   hierarchy_scheme: hierarchy_scheme || "min",
   doc: doc || 'dp19',
-  sort_col: 'spending',
-  is_descending: true,
+  sort_col: _.includes(non_rolling_up_schemes, hierarchy_scheme) ? 'name' : 'spending',
+  is_descending: !_.includes(non_rolling_up_schemes, hierarchy_scheme),
 });
 
 const resource_scheme = {
