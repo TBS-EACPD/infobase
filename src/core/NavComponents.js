@@ -107,15 +107,7 @@ const HeaderBanner = withRouter(
         history,
       } = this.props;
 
-      const banner_container_id = "banner-container";
-
-      let banner_container = document.getElementById(banner_container_id);
-      if ( _.isNull(banner_container) ){
-        // This case is temporary, can be deleted once #banner-container is in live index files
-        banner_container = document.createElement("div");
-        banner_container.id = banner_container_id;
-        document.querySelector("#wb-bc > .container").appendChild(banner_container);
-      }
+      const banner_container = document.getElementById("banner-container");
       
       const should_show_banner = !_.isFunction(route_filter) || route_filter(match, history);
 

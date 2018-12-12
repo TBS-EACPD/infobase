@@ -28,7 +28,6 @@ actually simpler now.
 
 PROJ -> {
   (mkdir if doesn't exist) build/, build/PROJ.name/, js/ , csv/ , svg/
-  copy PROJ.js to build/PROJ.name/js/ (this will include external dependencies)
   copy other to build/PROJ.name (this is where index-en/fr get copied)
   forEach file in PROJ.spreadsheets, copy it to to build/PROJ.name/csv/
   copy entire svg directory, src/svg, to build/PROJ.name/svg
@@ -37,7 +36,6 @@ PROJ -> {
 
 const csv_names_by_table_id = require('../src/tables/table_id_to_csv_map.js');
 
-const external_deps_names = glob.sync('external-dependencies/*.js')
 
 const public_data_dir = "data/";
 
@@ -132,7 +130,6 @@ var IB = {
   lookups_fr: common_lookups.concat(common_lookups_fr),
   svg: svg_path,
   png: common_png,
-  js: external_deps_names,
   csv: csv_from_table_names(IB_tables).concat(other_csvs),
   well_known: ['src/InfoBase/security.txt'],
   other: [
@@ -279,7 +276,7 @@ function build_proj(PROJ){
 
   copy_file_to_target_dir(svg_path, dir);
 
-  ['png', 'js', 'csv'].forEach(function(type){
+  ['png', 'csv'].forEach(function(type){
     var this_dir = dir+'/'+type;
     make_dir_if_exists(this_dir);
     PROJ[type].forEach( f_name => copy_file_to_target_dir(f_name, this_dir) );
