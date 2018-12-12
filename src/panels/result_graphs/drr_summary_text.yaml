@@ -59,7 +59,10 @@ gov_drr_summary_org_table_text:
     Pour en savoir plus sur les résultats et les indicateurs de rendement d'une organisation, 
     il suffit de cliquer sur le nom de l'organisation pour être dirigé vers l'infographie où figurent ses résultats particuliers.
 
-    TODO
+    À la suite des corrections apportées aux données du Rapport ministériel sur les résultats 2017-2018, les indicateurs pour **10** organisations ont été mis à jour dans l'InfoBase du GC en date du **10 décembre 2018**. 
+    Voir les notes de bas de page ci-dessous pour la liste de ces 10 organisations.
+
+
 
 show_all_orgs:
   en: Show all organizations
