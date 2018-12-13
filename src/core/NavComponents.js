@@ -111,15 +111,22 @@ const HeaderBanner = withRouter(
       
       const should_show_banner = !_.isFunction(route_filter) || route_filter(match, history);
 
-      return ReactDOM.createPortal(
-        <div
-          className = { `alert alert-no-symbol alert--is-bordered large_panel_text ${banner_class || 'alert-info'}` }
-          style = { should_show_banner ? {} : { display: "none" } }
-        >
-          { banner_content }
-        </div>,
-        banner_container
-      );
+      if (banner_container){
+        return ReactDOM.createPortal(
+          <div
+            className = { `alert alert-no-symbol alert--is-bordered large_panel_text ${banner_class || 'alert-info'}` }
+            style = { should_show_banner ? {} : { display: "none" } }
+          >
+            { banner_content }
+          </div>,
+          banner_container
+        );
+      } else {
+        // This shouldn't happen, unless someone has cached an old version of the index html or some other code has mangled our header html
+        // ... leaving this in as a quiet fail over though, because I suspect, immediately following the update, many users had cached index html files 
+        // (??? the files are served with no-cache, but I guess some sys admins may be forcing all html to cache as a messy optimization)
+        return null;
+      }
     }
   }
 );
