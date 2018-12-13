@@ -4,6 +4,7 @@ import { Statistics, tables_for_statistics } from './Statistics.js';
 import { api_load_results_bundle, api_load_results_counts, subject_has_results } from '../models/populate_results.js';
 import { load_footnotes_bundle } from '../models/populate_footnotes.js';
 import { load_budget_measures } from '../models/populate_budget_measures.js';
+import { load_horizontal_initiative_lookups } from '../models/populate_horizontal_initiative_lookups.js';
 import { Subject } from '../models/subject.js';
 
 const { BudgetMeasure } = Subject;
@@ -106,6 +107,13 @@ function ensure_loaded({
       _.isEmpty( BudgetMeasure.get_all() )
   );
 
+  const should_load_horizontal_initiative_lookups = (
+    subject && 
+    subject.level === "tag" &&
+    subject.root.id === "HI" &&
+    _.isUndefined(subject.lookups)
+  );
+
   const result_docs_to_load = !_.isEmpty(result_docs) ?
     result_docs :
     _.chain(graph_keys)
@@ -157,6 +165,13 @@ function ensure_loaded({
       load_budget_measures() :
       Promise.resolve()
   );
+
+  const horizontal_initiative_lookups_prom = (
+    should_load_horizontal_initiative_lookups ?
+      load_horizontal_initiative_lookups() :
+      Promise.resolve()
+  );
+
   
   return Promise.all([
     load(table_set),
@@ -166,6 +181,7 @@ function ensure_loaded({
     granular_result_counts_prom,
     footnotes_prom,
     budget_measures_prom,
+    horizontal_initiative_lookups_prom,
   ]);
 }
 

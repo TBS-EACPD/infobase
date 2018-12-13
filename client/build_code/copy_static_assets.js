@@ -63,9 +63,6 @@ const lang_specific_lookups = lang => [
   "crso",
   "glossary",
   "igoc",
-  "hi_lookups",
-  "hi_to_shared_outcomes",
-  "hi_to_dept_ha",
 ].map( name => `${name}_${lang}.csv`);
 
 const common_lookups_en = _.map(
@@ -105,11 +102,22 @@ const table_csvs = _.map(
   name => public_dir_prefixer(`${name}.csv`)
 );
 
+const other_csv_names_unilingual = [
+  'budget_2018_measure_data.csv',
+];
+const other_csv_names_bilingual = _.flatMap(
+  [
+    'budget_2018_measure_lookups',
+    "hi_lookups",
+    "hi_to_shared_outcomes",
+    "hi_to_dept_ha",
+  ],
+  (name) => [`${name}_en.csv`, `${name}_fr.csv`] 
+);
 const other_csvs = _.map(
   [
-    'budget_2018_measure_data.csv',
-    'budget_2018_measure_lookups_en.csv',
-    'budget_2018_measure_lookups_fr.csv',
+    ...other_csv_names_unilingual,
+    ...other_csv_names_bilingual,
   ],
   public_dir_prefixer
 );
