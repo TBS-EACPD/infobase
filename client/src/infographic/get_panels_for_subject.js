@@ -48,6 +48,7 @@ import '../panels/historical_auth_exp/historical_auth_exp.js';
 //tag-only panels
 import '../panels/tag_panels/resource_structure.js'
 import '../panels/tag_panels/goco.js';
+import '../panels/tag_panels/horizontal_initiative_profile.js';
 // import '../panels/tag_panels/top_3_dept_graph.js';
 
 //dp/drr stuff but not results
@@ -203,6 +204,7 @@ const get_tag_panels = subject => ({
   intro: [
     'tagging_key_concepts',
     'description',
+    'horizontal_initiative_profile',
     'tag_fed_structure',
     'tag_progs_by_dept',
   ],
