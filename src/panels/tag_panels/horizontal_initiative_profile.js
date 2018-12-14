@@ -5,9 +5,12 @@ import {
   TextPanel,
 } from '../shared';
 
-const { create_text_maker_component } = util_components;
+const { 
+  create_text_maker_component,
+  LabeledTombstone,
+} = util_components;
 
-const { text_maker, TM } = create_text_maker_component(text);
+const { text_maker } = create_text_maker_component(text);
 
 new PanelGraph({
   level: 'tag',
@@ -17,25 +20,16 @@ new PanelGraph({
   render({calculations}){
     const { subject } = calculations;
 
+    const labels_and_items = _.chain(subject.lookups)
+      .map(
+        (value, key) => [key, value]
+      )
+      .filter( ([label, item]) => item && !_.isArray(item) && !_.isObject(item) )
+      .value()
+
     return (
       <TextPanel title={text_maker("horizontal_initiative_profile")}>
-        <span>
-          {"Messy dev placeholder:"}
-        </span>
-        <ul>
-          {
-            _.chain(subject.lookups)
-              .sort()
-              .map(
-                (value, key) => (
-                  <li key={key}>
-                    {`${key}: ${value}`}
-                  </li>
-                )
-              )
-              .value()
-          }
-        </ul>
+        <LabeledTombstone labels_and_items={labels_and_items} />
       </TextPanel>
     );
   },
