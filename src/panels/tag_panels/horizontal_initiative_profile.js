@@ -28,6 +28,7 @@ new PanelGraph({
 
     const labels_and_items = _.chain(
       [
+        ["hi_name", subject.name],
         ["hi_lead_dept", Dept.lookup(hi_lookups.lead_dept) && `${Dept.lookup(hi_lookups.lead_dept).name} (${Dept.lookup(hi_lookups.lead_dept).fancy_acronym})`],
         ["hi_governance", hi_lookups.governance],
         ["hi_start_year", hi_lookups.start_year],
