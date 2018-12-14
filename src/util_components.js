@@ -22,6 +22,11 @@ import { FilterTable } from './components/FilterTable.js';
 import { Details } from './components/Details.js';
 import { EmbeddedVideo } from './components/EmbeddedVideo.js';
 import { SpinnerWrapper } from './components/SpinnerWrapper.js';
+import {
+  UnlabeledTombstone,
+  LabeledTombstone,
+} from './components/Tombstones.js'
+
 
 import { DeptSearch, DeptSearchWithoutRouter } from './search/DeptSearch.js';
 import { EverythingSearch } from './search/EverythingSearch.js';
@@ -30,6 +35,8 @@ import { GlossarySearch } from './search/GlossarySearch.js';
 import { text_abbrev } from './core/utils.js';
 
 // Misc. utility components that don't justify having their own file in ./components, for various reasons
+
+const ExternalLink = ({display, href}) => <a target="_blank" rel="noopener noreferrer" href={href}>{display}</a>;
 
 function lang(obj){ return obj[window.lang] || obj.text || "" }
 
@@ -95,6 +102,7 @@ export {
   TM,
   TrivialTextMaker,
   TrivialTM,
+  ExternalLink,
   lang,
   SpinnerWrapper,
   Select,
@@ -112,6 +120,8 @@ export {
   Details,
   EmbeddedVideo,
   ContainerEscapeHatch,
+  UnlabeledTombstone,
+  LabeledTombstone,
   TextAbbrev,
   create_text_maker_component,
 };
