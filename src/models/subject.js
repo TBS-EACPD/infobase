@@ -355,9 +355,9 @@ Subject.Tag = class Tag extends common(){
     return _.chain(this.programs)
       .map( prog => prog.tags )
       .flatten()
+      .filter( tag => tag.root.id === this.root.id)
       .uniqBy()
       .without(this)
-      .filter({ root: this.root })
       .value();
   }
 };
