@@ -15,20 +15,11 @@ function extend_hi_tags(hi_lookups, hi_to_shared_outcomes, hi_to_dept_ha){
       hi_id,
       _.chain([
         'lead_dept',
-        'start_month',
         'start_year',
-        'end_month',
         'end_year',
-        'renewal_month',
-        'renewal_year',
-        'renewal_length',
-        'years_funded',
-        'eval_year',
-        'spending_cumulative',
         'spending_planned',
-        'spending_actual',
         'governance',
-        'performance',
+        'website',
       ])
         .zip( lookups )
         .fromPairs()
