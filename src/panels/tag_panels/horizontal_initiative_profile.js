@@ -12,6 +12,7 @@ const { Dept } = Subject;
 const { 
   create_text_maker_component,
   LabeledTombstone,
+  ExternalLink,
 } = util_components;
 
 const { text_maker } = create_text_maker_component(text);
@@ -34,7 +35,7 @@ new PanelGraph({
         ["hi_start_year", hi_lookups.start_year],
         ["hi_end_year", hi_lookups.end_year],
         ["hi_spending_planned", hi_lookups.spending_planned && formats.compact_raw(hi_lookups.spending_planned)],
-        ["hi_website", hi_lookups.website],
+        ["hi_website", hi_lookups.website && <ExternalLink href={hi_lookups.website} display={hi_lookups.website}/>],
       ]
     )
       .map( ([label_key, item]) => [text_maker(label_key), item] )
