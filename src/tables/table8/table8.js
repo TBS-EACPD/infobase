@@ -2,7 +2,6 @@
 // of the table spec
 
 import text from './table8.yaml';
-import estimates_docs from './estimates_docs.js'
 import * as FORMAT from '../../core/format';
 import { 
   vote_stat_dimension, 
@@ -10,12 +9,15 @@ import {
   trivial_text_maker, 
   major_vote_big_stat, 
   Statistics, 
-  years, 
+  years,
+  businessConstants,
 } from '../table_common';
 const { estimates_years } = years;
 const est_cols = _.map(estimates_years, yr=> yr+"_estimates");
 const in_year_col = est_cols[4];
 const last_year_col = est_cols[3];
+
+const { estimates_docs } = businessConstants;
 
 const map_helper = {
   "ME": "MAINS",

@@ -6,7 +6,6 @@ import { Provider, connect } from 'react-redux';
 import { StandardRouteContainer } from '../core/NavComponents';
 import { infograph_href_template } from '../link_utils.js';
 import { sources } from '../metadata/data_sources.js';
-import estimates_docs from '../tables/table8/estimates_docs.js';
 import {
   SpinnerWrapper,
   FootnoteList,
@@ -32,6 +31,9 @@ import {
   col_defs,
   initial_state as initial_scheme_state,
 } from './scheme.js';
+import { businessConstants } from '../models/businessConstants.js';
+
+const { estimates_docs } = businessConstants;
 
 export default class EstimatesComparison extends React.Component {
   constructor(){

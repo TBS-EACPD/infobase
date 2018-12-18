@@ -77,6 +77,7 @@ const emp_age_rev_map = _.chain(emp_age_map)
 
 const emp_age_stuff = { compact_age_groups, emp_age_map, emp_age_rev_map };
 
+
 const ex_level_target = (
   window.lang === 'en' ? 
   [
@@ -106,7 +107,87 @@ const ex_level_rev_map = _.chain(compact_ex_level_map)
 
 const ex_level_stuff = { ex_level_target, compact_ex_level_map, ex_level_rev_map };
 
-const businessConstants = { ...yaml, ...emp_age_stuff, ...ex_level_stuff};
+
+const estimates_docs = {
+  IM: {
+    order: 0,
+    en: "Interim Estimates",
+    fr: "Budget provisoire des dépenses",
+  },
+  MAINS: {
+    order: 0,
+    en: "Main Estimates",
+    fr: "Budget principal",
+  },
+  MYA: {
+    order: 1,
+    en: "Multi Year Appropriations",
+    fr: "Crédits disponibles des précédents exercices",
+  },
+  VA: {
+    order: 11,
+    en: "Voted Adjustments",
+    fr: "Réajustement votés",
+  },
+  SA: {
+    order: 12,
+    en: "Statutory Adjustments",
+    fr: "Réajustements législatifs",
+  },
+  SEA: {
+    order: 2,
+    en: "Supp. Estimates A",
+    fr: "Budget supp. A",
+  },
+  SEB: {
+    order: 3,
+    en: "Supp. Estimates B",
+    fr: "Budget supp. B",
+  },
+  SEC: {
+    order: 4,
+    en: "Supp. Estimates C",
+    fr: "Budget supp. C",
+  },
+  V5: {
+    order: 6,
+    en: "Government Contingencies",
+    fr: "Éventualités du gouvernement",
+  },
+  V10: {
+    order: 7,
+    en: "Operating Budget Carry Forward",
+    fr: "Report du budget de fonctionnement",
+  },
+  V15: {
+    order: 8,
+    en: "Compensation adjustments",
+    fr: "Rajustements à la rémunération",
+  },
+  V25: {
+    order: 9,
+    en: "Operating Budget Carry Forward",
+    fr: "Report du budget de fonctionnement",
+  },
+  V30: {
+    order: 10,
+    en: "Paylist requirements",
+    fr: "Besoins en matière de rémunération",
+  },
+  V33: {
+    order: 11,
+    en: "Capital Budget Carry Forward",
+    fr: "Report du budget de dépenses en capital",
+  },
+  DEEM: {
+    order: 12,
+    en: "Deemed appropriation",
+    fr: "Crédit réputé",
+  },
+};
+
+
+const businessConstants = { ...yaml, ...emp_age_stuff, ...ex_level_stuff, estimates_docs};
 
 window._DEV_HELPERS.businessConstants = businessConstants;
 
