@@ -58,14 +58,12 @@ const get_non_col_content_func = createSelector(
       }
 
       return <div>
-        {resources && 
-          <dl className={classNames("dl-horizontal dl-no-bold-dts", window.lang === "en" ? "dl-long-terms" : "dl-really-long-terms")}>
-            <dt> <span className="nowrap">{spending_header(doc) }</span> </dt>
-            <dd> <Format type="compact1" content={resources.spending} /> </dd>
-            <dt> <span className="nowrap">{fte_header(doc) }</span> </dt>
-            <dd> <Format type="big_int_real" content={resources.ftes} /> </dd>
-          </dl>
-        }
+        <dl className={classNames("dl-horizontal dl-no-bold-dts", window.lang === "en" ? "dl-long-terms" : "dl-really-long-terms")}>
+          <dt> <span className="nowrap">{spending_header(doc) }</span> </dt>
+          <dd> <Format type="compact1" content={resources ? resources.spending : 0} /> </dd>
+          <dt> <span className="nowrap">{fte_header(doc) }</span> </dt>
+          <dd> <Format type="big_int_real" content={resources ? resources.ftes : 0} /> </dd>
+        </dl>
         {_.includes(['program','dept','cr'],type) && 
           <div className="ExplorerNode__BRLinkContainer">
             <a href={infograph_href_template(subject)}> 
