@@ -53,7 +53,6 @@ import '../panels/tag_panels/goco.js';
 //dp/drr stuff but not results
 import '../panels/drr_dp_resources/drr_planned_actual.js';
 import '../panels/drr_dp_resources/sub_program_resources.js';
-import '../panels/drr_dp_resources/planned_prgm_crso_split.js';
 import '../panels/drr_dp_resources/crso_by_prog.js';
 import '../panels/drr_dp_resources/spending_in_perspective.js';
 import '../panels/drr_dp_resources/dp_rev_split.js';
@@ -197,7 +196,6 @@ const get_crso_panels = subject => {
 
       'crso_by_prog_exp',
       'crso_by_prog_fte',
-      'planned_prg_crso_split',
       "dp_rev_split",
     ],
     results: subject.dept.dp_status && !subject.is_internal_service && [
