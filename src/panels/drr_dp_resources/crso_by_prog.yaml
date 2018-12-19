@@ -14,7 +14,7 @@ crso_by_prog_exp_or_ftes:
   en: |
    In {{planning_year_1}}, {{gl_tt (pluralize crso_prg_num "program")  "PROG"}} fall under this {{gt "core_resp"}}
    {{#if is_fte}}
-   with **{{crso_prg_top1}}** ({{fmt_big_int_real crso_prg_top1_amnt}} FTEs) being the largest in terms of of employment,
+   with **{{crso_prg_top1}}** ({{fmt_big_int_real crso_prg_top1_amnt}} FTEs) being the largest in terms of employment,
    {{#if crso_prg_top2_amnt}} followed by **{{crso_prg_top2}}** ({{fmt_big_int_real crso_prg_top2_amnt}} FTEs). {{else}}. {{/if}}
    {{else}}
    with **{{fmt_compact1_written crso_prg_top1}}** ({{fmt_compact1_written crso_prg_top1_amnt}}) being the largest in terms of spending,
