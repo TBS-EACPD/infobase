@@ -567,7 +567,6 @@ const WelcomeMat = (props) => {
       fte_summary_key = false;
     }
 
-    // TODO: make this sensitive to the number of historical years available (looking at both FTE and EXP), in particular for the tend lines
     return (
       <WelcomeMatShell
         header_row={[
@@ -932,10 +931,10 @@ new PanelGraph({
 
     if(!subject.dp_status){
       //for non-dp orgs, we refer to estimate authorities. Must use table8 to get amounts
-      const proper_calcs = _.immutate(calcs,{
-        spend_plan_1: table8.q(subject).sum("{{est_in_year}}_estimates"),
-        
-      });
+      const proper_calcs = _.immutate(
+        calcs,
+        { spend_plan_1: table8.q(subject).sum("{{est_in_year}}_estimates") }
+      );
       return {
         type: "hist_estimates",
         calcs: proper_calcs,
