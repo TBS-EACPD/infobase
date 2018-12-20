@@ -80,14 +80,14 @@ const Chart = ({
   data,
   is_light,
 }) => React.createElement(use_line ? Line : Bar, {
-  margin: {top: 5,bottom: 5,left: 75,right: 5},
+  margin: {top: 5, bottom: 5, left: 75, right: 5},
   height: 200,
   add_xaxis: false,
   hide_gridlines: true,
   ticks: _.range(0,data.length),
   colors: _.constant(is_light ? "#335075" : 'black'),
   formater: formats[ is_fte ? "big_int_real_raw" : "compact1_raw" ],
-  series: {"0": data },
+  series: {"0": data},
 })
 
 
@@ -550,23 +550,24 @@ const WelcomeMat = (props) => {
 
     const { level } = subject;
     let spend_summary_key;
-    if(level === "gov"){
-      spend_summary_key = "gov_welcome_mat_spending_summary";
-    } else if(level === "dept"){
-      spend_summary_key = "dept1_welcome_mat_spending_summary";
-    } else if(level === "tag"){
-      spend_summary_key = "tag_welcome_mat_spending_summary";
-      //TODO... is it possible for programs or CRs to have hist_planned ?
+    let fte_summary_key;
+    if ( !_.includes(["crso", "program"], level) ){
+      if(level === "gov"){
+        spend_summary_key = "gov_welcome_mat_spending_summary";
+        fte_summary_key = "welcome_mat_fte_summary";
+      } else if(level === "dept"){
+        spend_summary_key = "dept1_welcome_mat_spending_summary";
+        fte_summary_key = "welcome_mat_fte_summary";
+      } else if(level === "tag"){
+        spend_summary_key = "tag_welcome_mat_spending_summary";
+        fte_summary_key = "tag_welcome_mat_fte_summary";
+      } 
+    } else {
+      spend_summary_key = false;
+      fte_summary_key = false;
     }
 
-    const fte_summary_key = (
-      level === "tag" ? 
-      "tag_welcome_mat_fte_summary" : 
-      "welcome_mat_fte_summary"
-    );
-
-    
-
+    // TODO: make this sensitive to the number of historical years available (looking at both FTE and EXP), in particular for the tend lines
     return (
       <WelcomeMatShell
         header_row={[
@@ -673,30 +674,32 @@ const WelcomeMat = (props) => {
           </Pane>,
         ]}
         text_row={[
-          <Pane key="a" size={50}>
-            <PaneItem textSize="small">
-              <TM
-                k={spend_summary_key}
-                args={{
-                  exp_hist_change: hist_spend_diff,
-                  exp_plan_change: planned_spend_diff,
-                  subject,
-                }}
-              />
-            </PaneItem>
-          </Pane>,
-          <Pane key="b" size={50}>
-            <PaneItem textSize="small">
-              <TM
-                k={fte_summary_key}
-                args={{
-                  fte_hist_change: hist_fte_diff,
-                  fte_plan_change: planned_fte_diff,
-                  subject,
-                }}
-              />
-            </PaneItem>
-          </Pane>,
+          spend_summary_key &&
+            <Pane key="a" size={50}>
+              <PaneItem textSize="small">
+                <TM
+                  k={spend_summary_key}
+                  args={{
+                    exp_hist_change: hist_spend_diff,
+                    exp_plan_change: planned_spend_diff,
+                    subject,
+                  }}
+                />
+              </PaneItem>
+            </Pane>,
+          fte_summary_key &&
+            <Pane key="b" size={50}>
+              <PaneItem textSize="small">
+                <TM
+                  k={fte_summary_key}
+                  args={{
+                    fte_hist_change: hist_fte_diff,
+                    fte_plan_change: planned_fte_diff,
+                    subject,
+                  }}
+                />
+              </PaneItem>
+            </Pane>,
         ]}
       />
       
@@ -715,15 +718,6 @@ const MobileOrA11YContent = ({ children }) => [
 
 function render({calculations, footnotes, sources}){
   const { graph_args, subject } = calculations;
-
-  //remove DRR_FTE and DRR_EXP footnotes (pipeline will handle this later)
-  let new_footnotes = _.filter(
-    footnotes,
-    ({topic_keys}) => _.chain(topic_keys)
-      .intersection(["DRR_FTE", "DRR_EXP"])
-      .isEmpty()
-      .value()
-  );
 
   let sources_override = sources;
   const { type, calcs } = graph_args;
@@ -755,7 +749,7 @@ function render({calculations, footnotes, sources}){
     <Panel
       title={text_maker("welcome_mat_title")}
       sources={sources_override}
-      footnotes={new_footnotes}
+      footnotes={footnotes}
     >
       <WelcomeMat subject={subject} {...graph_args} />
     </Panel>
@@ -865,27 +859,71 @@ function get_calcs(subject, q6, q12){
 }
 
 
+const common_program_crso_calculate = function(subject, info, options){
+  const { table6, table12 } = this.tables; 
+  const q6 = table6.q(subject);
+  const q12 = table12.q(subject);
+
+  const has_planned = has_planning_data(subject, q6);
+  const has_hist = has_hist_data(subject, q6);
+  const calcs = get_calcs(subject, q6, q12);
+
+  let type;
+  if(has_hist && has_planned){
+    type = "hist_planned"
+  } else if(has_planned){
+    type = "planned";
+  } else if (has_hist){
+    type = "hist";
+  } else {
+    // No data, bail
+    return false;
+  }
+
+  return {type, calcs};
+};
+
+new PanelGraph({
+  level: "program",
+  key: 'welcome_mat',
+  footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+  depends_on: ['table6', 'table12'],
+  missing_info: "ok",
+  calculate: common_program_crso_calculate,
+  render,
+});
+
+new PanelGraph({
+  level: "crso",
+  key: 'welcome_mat',
+  footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+  depends_on: ['table6', 'table12'],
+  missing_info: "ok",
+  calculate: common_program_crso_calculate,
+  render,
+});
+
 new PanelGraph({
   level: "dept",
   key: 'welcome_mat',
   footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-  depends_on: ['table6','table12', 'table8'],
+  depends_on: ['table6', 'table12', 'table8'],
   missing_info: "ok",
-  calculate (subject,info,options){
+  calculate (subject, info, options){
     const { table6, table12, table8 } = this.tables; 
     const q6 = table6.q(subject);
     const q12 = table12.q(subject);
 
-    const has_planned = has_planning_data(subject,q6);
+    const has_planned = has_planning_data(subject, q6);
     const has_hist = has_hist_data(subject, q6);
     const estimates_amt = table8.q(subject).sum("{{est_in_year}}_estimates");
-    const calcs = get_calcs(subject,q6,q12);
+    const calcs = get_calcs(subject, q6, q12);
 
-    if(! (has_planned || has_hist) ){
+    if( !(has_planned || has_hist) ){
       if(estimates_amt){
         return {
           type: "estimates",
-          calcs: _.immutate(calcs,{ spend_plan_1: estimates_amt }),
+          calcs: _.immutate(calcs, { spend_plan_1: estimates_amt }),
         };
       } else {
         return false;
@@ -921,96 +959,24 @@ new PanelGraph({
   render,
 });
 
-
-
-new PanelGraph({
-  level: "program",
-  key: 'welcome_mat',
-  footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-  depends_on: ['table6','table12'],
-  missing_info: "ok",
-  calculate (subject,info,options){
-    const { table6, table12 } = this.tables; 
-    const q6 = table6.q(subject);
-    const q12 = table12.q(subject);
-
-    const has_planned = has_planning_data(subject,q6);
-    const has_hist = has_hist_data(subject, q6);
-    const calcs = get_calcs(subject,q6,q12);
-
-    if(! (has_planned || has_hist) ){
-      return false;
-    }
-    let type;
-    if(!subject.dept.dp_status){
-      if(has_planned){
-        type = "estimates";
-      } else {
-        type ="hist";
-      }
-    } else if(has_planned){
-      //program with DP: only planned
-      type = "planned";
-    } else {
-      //old program, only historical
-      type = "hist";
-    }
-
-    return {type, calcs};
-
-  },
-
-  render,
-});
-
-new PanelGraph({
-  level: "crso",
-  key: 'welcome_mat',
-  footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-  depends_on: ['table6','table12'],
-  missing_info: "ok",
-  calculate (subject,info,options){
-    const { table6, table12 } = this.tables; 
-    const q6 = table6.q(subject);
-    const q12 = table12.q(subject);
-
-    const has_planned = has_planning_data(subject,q6);
-    const has_hist = has_hist_data(subject, q6);
-    const calcs = get_calcs(subject,q6,q12);
-
-    if(! (has_planned || has_hist) ){
-      return false;
-    }
-    return {
-      type: "planned",
-      calcs,
-    };
-
-  },
-
-  render,
-});
-
 new PanelGraph({
   level: "gov",
   key: 'welcome_mat',
   footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-  depends_on: ['table6','table12'],
+  depends_on: ['table6', 'table12'],
   missing_info: "ok",
-  calculate (subject,info,options){
+  calculate (subject, info, options){
     const { table6, table12 } = this.tables; 
     const q6 = table6.q(subject);
     const q12 = table12.q(subject);
 
-    const calcs = get_calcs(subject,q6,q12);
+    const calcs = get_calcs(subject, q6, q12);
 
     return {
       type: "hist_planned",
       calcs,
     };
-
   },
-
   render,
 });
 
@@ -1018,22 +984,20 @@ new PanelGraph({
   level: "tag",
   key: 'welcome_mat',
   footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-  depends_on: ['table6','table12'],
+  depends_on: ['table6', 'table12'],
   missing_info: "ok",
-  calculate (subject,info,options){
+  calculate (subject, info, options){
     const { table6, table12 } = this.tables; 
     const q6 = table6.q(subject);
     const q12 = table12.q(subject);
 
-    const calcs = get_calcs(subject,q6,q12);
+    const calcs = get_calcs(subject, q6, q12);
 
     return {
       type: "hist_planned",
       calcs,
       is_m2m: subject.root.cardinality === "MtoM",
     };
-
   },
-
   render,
 });
