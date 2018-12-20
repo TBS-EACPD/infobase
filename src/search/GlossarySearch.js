@@ -3,7 +3,7 @@ import { default as withRouter } from 'react-router/withRouter';
 import { BaseTypeahead } from './BaseTypeahead.js';
 import { glossary as glossary_search_config } from './search_configs.js';
 
-import { glossary_href } from '../link_utils.js';
+import { glossary_href } from '../link_utils.js'; // This is showing up as undefiend at run time, seems like we may have a circular dependency somewhere?
 
 const glossary_placeholder = {
   en: "Search for a term used in the InfoBase",
@@ -20,7 +20,7 @@ const GlossarySearch = withRouter(
         search_configs = { [ glossary_search_config ] }
         onSelect = {
           item => {
-            history.push( glossary_href(item.id) );
+            history.push( `/glossary/${item.id}` ); // should be using glossary_href for DRYness, see above comment
           }
         }
         minLength = { 4 }
