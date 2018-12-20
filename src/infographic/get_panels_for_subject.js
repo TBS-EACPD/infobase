@@ -192,8 +192,8 @@ const get_crso_panels = subject => {
       'dead_crso_warning',
       'financial_intro',
       'welcome_mat',
-      "budget_measures_panel",
-
+      'budget_measures_panel',
+      'drr_planned_actual',
       'crso_by_prog_exp',
       'crso_by_prog_fte',
       "dp_rev_split",

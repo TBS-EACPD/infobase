@@ -12,15 +12,16 @@ import { ResultCounts } from '../result_graphs/results_common.js';
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-_.each(['dept','program'], level => {
+_.each(['dept','program','crso'], level => {
   new PanelGraph({
     depends_on: ['table6', 'table12'],
+    info_deps: level === 'crso' ? ['table6_crso_info','table12_crso_info'] : [],
     key: 'drr_planned_actual',
     //used as as a fail mechanism. If result counts aren't present, bail
     requires_result_counts: true,
     level,
     title: "drr_planned_actual_title",
-    calculate(subject,info){
+    calculate(subject, info){
       if(subject.level === 'dept'){
         if(!subject.is_rpp_org){
           return false;
@@ -74,7 +75,7 @@ _.each(['dept','program'], level => {
     },
 
     render({calculations}){
-      const { graph_args, subject } = calculations;
+      const { graph_args, subject, info } = calculations;
       
       const { 
         actual_spend,
@@ -90,13 +91,11 @@ _.each(['dept','program'], level => {
       return (
         <TextPanel title={text_maker("drr_planned_actual_title")} footnotes={footnotes}>
           <TM 
-            k={ 
-              subject.level === 'dept' ? 
-              "dept_drr_planned_actual_text" :
-              "program_drr_planned_actual_text"
-            }
-            args={{...graph_args,
+            k={ `${subject.level}_drr_planned_actual_text` }
+            args={{
+              ...graph_args,
               subject,
+              crso_prg_num: subject.level === "crso" && _.max([info.crso_fte_prg_num, info.crso_exp_prg_num]),
             }}
           />
           <PlannedActualTable 
