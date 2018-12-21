@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const CircularDependencyPlugin = require('circular-dependency-plugin')
 
 const CDN_URL = process.env.CDN_URL || ".";
 const IS_DEV_LINK = process.env.IS_DEV_LINK || false;
@@ -111,6 +112,12 @@ function get_plugins({ is_prod, language, a11y_client, commit_sha, envs }){
       IS_A11Y_MODE: !!a11y_client,
       CDN_URL: JSON.stringify(CDN_URL),
       IS_DEV_LINK,
+    }),
+    new CircularDependencyPlugin({
+      exclude: /node_modules/,
+      onDetected({ module: webpackModuleRecord, paths, compilation }) {
+        compilation.warnings.push( new Error(`${paths.join(' -> ')} \x1b[33m(circular dependency)\x1b[0m`) );
+      },
     }),
   ];
 
