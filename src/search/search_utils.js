@@ -4,7 +4,7 @@ const query_to_regexps_func = (query) => {
   const raw_tokens = _.filter(query.split(" "));
   const reg_exps = _.map(
     raw_tokens, 
-    token => new RegExp( escapeRegExp(_.deburr(token) ), 'gi')
+    token => new RegExp( `${escapeRegExp( _.deburr(token) )}(?![^<]*>)`, 'gi')
   );
   return reg_exps;
 }
