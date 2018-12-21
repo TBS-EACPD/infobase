@@ -7,11 +7,8 @@
 import '../charts/charts.scss';
 
 import * as FORMAT from './format.js';
-import * as UTILS from './utils.js';
 import common_charts_utils from '../charts/common_charts_utils.js';
 import { trivial_text_maker } from '../models/text.js';
-
-const make_unique = UTILS.make_unique;
 
 import { Bar } from '../charts/bar.js';
 import { HBar } from '../charts/hbar.js';
@@ -130,7 +127,6 @@ const create_a11y_table = function({
 
 export {
   create_a11y_table,
-  make_unique,
   Bar,
   templates,
   formats,

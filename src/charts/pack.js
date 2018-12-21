@@ -1,5 +1,5 @@
 import common_charts_utils from './common_charts_utils.js';
-import { make_unique } from '../core/charts_index.js';
+import { make_unique } from '../core/utils.js';
 
 const navigate_class = "navigate_packing";
 

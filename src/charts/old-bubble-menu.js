@@ -1,4 +1,5 @@
 import common_charts_utils from './common_charts_utils';
+import { make_unique } from './core/utils.js';
 
 var rorate_point = function(r,i){
   var angle_increment = 35*Math.PI/180;
@@ -29,7 +30,7 @@ export const bubble_menu = function(container,options){
   
   _.each(this.data, function(d,i){
     d.__index = i;
-    d.__rid__ = common_charts_utils.make_unique();
+    d.__rid__ = make_unique();
   });
   
   this.render(this.options);
