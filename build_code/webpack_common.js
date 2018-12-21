@@ -116,7 +116,18 @@ function get_plugins({ is_prod, language, a11y_client, commit_sha, envs }){
     new CircularDependencyPlugin({
       exclude: /node_modules/,
       onDetected({ module: webpackModuleRecord, paths, compilation }) {
-        compilation.warnings.push( new Error(`${paths.join(' -> ')} \x1b[33m(circular dependency)\x1b[0m`) );
+        const allowed_circular_dependencies = [
+          ["src/metadata/data_sources.js", "src/core/TableClass.js"],
+        ];
+
+        const detected_circular_dependency_is_allowed = _.some(
+          allowed_circular_dependencies,
+          (allowed_circular_dependency) => _.every( paths, path => _.includes(allowed_circular_dependency, path) )
+        );
+
+        if (!detected_circular_dependency_is_allowed){
+          compilation.warnings.push( new Error(`${paths.join(' -> ')} \x1b[33m(circular dependency)\x1b[0m`) );
+        }
       },
     }),
   ];
