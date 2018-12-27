@@ -24,7 +24,8 @@ const {
 
 export default {
   text,
-  "id": "orgEmployeeAgeGroup",
+  id: "orgEmployeeAgeGroup",
+  legacy_id: "table11",
   source: ["RPS"],
   "tags": [
     "PEOPLE",

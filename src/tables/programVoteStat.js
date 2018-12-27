@@ -10,6 +10,7 @@ const { std_years } = years;
 export default {
   text,
   id: "programVoteStat",
+  legacy_id: "table300",
   subject_type: "program",
   tags: [
     "PROG",

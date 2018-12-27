@@ -11,9 +11,9 @@ const stat_label = trivial_text_maker("stat")
 
 export default {
   text,
-  "id": "orgVoteStatPa",
-
-  "tags": [
+  id: "orgVoteStatPa",
+  legacy_id: "table4",
+  tags: [
     "PA",
     "AUTH",
     "EXP",
@@ -22,13 +22,14 @@ export default {
   ],
 
   source: [ "PA" ],
-  "name": { 
+  name: { 
     en: "Authorities and Expenditures",
     fr: "Autorisations et dépenses",
   },
 
-  "title": { "en": "Authorities and Actual Expenditures from {{pa_last_year_5}} to {{pa_last_year}} ($000)",
-    "fr": "Autorisations et dépenses réelles {{pa_last_year_5}} à {{pa_last_year}} (en milliers de dollars)",
+  title: { 
+    en: "Authorities and Actual Expenditures from {{pa_last_year_5}} to {{pa_last_year}} ($000)",
+    fr: "Autorisations et dépenses réelles {{pa_last_year_5}} à {{pa_last_year}} (en milliers de dollars)",
   },
 
 

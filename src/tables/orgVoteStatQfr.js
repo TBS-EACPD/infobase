@@ -8,9 +8,10 @@ import * as FORMAT from '../core/format';
 
 export default {
   text,
-  "id": 'orgVoteStatQfr',
+  id: 'orgVoteStatQfr',
+  legacy_id: "table1",
   source: [ "QFR" ],
-  "tags": [
+  tags: [
     "QFR",
     "SPENDING_RATE",
     "AUTH",
@@ -19,22 +20,22 @@ export default {
     "STAT",
   ],
 
-  "link": {
+  link: {
     en: "http://open.canada.ca/data/en/dataset/cd7ba75e-e0a2-400b-906e-5b2608900f71",
     fr: "http://ouvert.canada.ca/data/fr/dataset/cd7ba75e-e0a2-400b-906e-5b2608900f71",
   },
 
-  "name": { 
-    "en": "Authorities and Expenditures (QFR)",
-    "fr": "Autorisations et dépenses (RFT)",
+  name: { 
+    en: "Authorities and Expenditures (QFR)",
+    fr: "Autorisations et dépenses (RFT)",
   },
 
-  "title": { 
-    "en": "Authorities and Expenditures (QFR) ($000)",
-    "fr": "Autorisations et dépenses (RFT) (en milliers de dollars)",
+  title: { 
+    en: "Authorities and Expenditures (QFR) ($000)",
+    fr: "Autorisations et dépenses (RFT) (en milliers de dollars)",
   },
 
-  "add_cols": function(){
+  add_cols: function(){
     this.add_col({
       "header": {
         "en": "Vote / Statutory",

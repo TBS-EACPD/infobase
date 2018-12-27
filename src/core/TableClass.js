@@ -21,14 +21,15 @@ import {
 } from './utils.js';
 
 
-const table_id_to_csv_path = (table_id) => `csv/${_.snakeCase(table_id)}.csv`
+const table_id_to_csv_path = (table_id) => `csv/${_.snakeCase(table_id)}.csv`;
 const { Dept } = Subject;
 
 export class Table extends mix().with(staticStoreMixin){
 
   static create_and_register(def){
-    const inst = new Table(def)
+    const inst = new Table(def);
     this.register(inst.id, inst);
+    inst.legacy_id && this.register(inst.legacy_id, inst);
     return inst;
   }
 

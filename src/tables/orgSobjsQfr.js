@@ -12,6 +12,7 @@ import { trivial_text_maker } from '../models/text';
 export default {
   text,
   id: "orgSobjsQfr",
+  legacy_id: "table2",
   source: [ "QFR" ],
   "tags": [
     "QFR",

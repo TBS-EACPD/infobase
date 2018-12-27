@@ -35,8 +35,8 @@ function naive_to_real_state(naive_state){
     mode: 'simple',
     ...( //tables imply their own default state
       table ? 
-      get_default_state_for_new_table(naive_state.table) : 
-      {} 
+        get_default_state_for_new_table(naive_state.table) : 
+        {} 
     ),
     ...naive_state, //whatever state is already defined takes precedence.
   };

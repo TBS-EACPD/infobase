@@ -18,9 +18,10 @@ const {
 
 export default {
   text,
-  "id": "orgEmployeeFol",
+  id: "orgEmployeeFol",
+  legacy_id: "table303",
   source: ["RPS"],
-  "tags": [
+  tags: [
     "PEOPLE",
     "FPS",
     "SUPPRESSED_DATA",

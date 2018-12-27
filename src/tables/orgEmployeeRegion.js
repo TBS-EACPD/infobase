@@ -20,7 +20,8 @@ const {
 
 export default {
   text,
-  "id": "orgEmployeeRegion",
+  id: "orgEmployeeRegion",
+  legacy_id: "table10",
   source: ["RPS"],
   "tags": [
     "PEOPLE",

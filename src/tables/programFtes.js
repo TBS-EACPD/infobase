@@ -12,7 +12,8 @@ const { Program, Gov } = Subject;
 
 export default {
   text,
-  "id": "programFtes",
+  id: "programFtes",
+  legacy_id: "table12",
   subject_type: "program",
   source: [ "DP", "DRR" ],
   //"tags" : ["results", "expenditures", "FTE", "planning","report","RPP"],

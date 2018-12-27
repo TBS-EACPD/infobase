@@ -9,9 +9,9 @@ const { transfer_payments } = businessConstants;
 
 export default {
   text,
-  "id": "orgTransferPayments",
-
-  "tags": [
+  id: "orgTransferPayments",
+  legacy_id: "table7",
+  tags: [
     "AUTH",
     "EXP",
     "PA",

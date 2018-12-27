@@ -18,7 +18,8 @@ const { sos } = businessConstants;
 
 export default {
   text,
-  "id": "programSobjs",
+  id: "programSobjs",
+  legacy_id: "table305",
   subject_type: "program",
   source: [ "CFMRS" ],
   "tags": [ 

@@ -21,9 +21,10 @@ const {
 
 export default {
   text,
-  "id": "orgEmployeeExLvl",
-  source: ["RPS"],
-  "tags": [
+  id: "orgEmployeeExLvl",
+  legacy_id: "table112",
+  source: [ "RPS" ],
+  tags: [
     "PEOPLE",
     "FPS",
     "EX_LVL",

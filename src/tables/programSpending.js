@@ -12,7 +12,8 @@ const exp_cols = _.map(std_years, yr=>yr+"exp");
 
 export default {
   text,
-  "id": "programSpending",
+  id: "programSpending",
+  legacy_id: "table6",
   subject_type: "program",
   source: [ "PA" , "DP", "DRR" ],
   "tags": [

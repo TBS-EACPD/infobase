@@ -31,9 +31,9 @@ const map_helper = {
 
 export default {
   text,
-  "id": "orgVoteStatEstimates",
-
-  "tags": [
+  id: "orgVoteStatEstimates",
+  legacy_id: "table8",
+  tags: [
     "AUTH",
     "EST_PROC",
     "VOTED",

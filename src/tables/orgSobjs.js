@@ -17,9 +17,9 @@ const { std_years } = years;
 
 export default {
   text,
-  "id": "orgSobjs",
-
-  "tags": [
+  id: "orgSobjs",
+  legacy_id: "table5",
+  tags: [
     "SOBJ",
     "EXP",
     "PA",
