@@ -93,7 +93,7 @@ const create_spend_type_hierarchy = function(){
             }
           );
         };
-        return Table.lookup('table305').data
+        return Table.lookup('programSobjs').data
           .filter(row => row.so_num === node.so_num)
           .map(_mock_model);
       }

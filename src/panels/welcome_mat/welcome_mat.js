@@ -33,7 +33,7 @@ const SpendFormat = ({amt}) => <Format type="compact1" content={amt} />
 const FteFormat = ({amt}) => <Format type="big_int_real" content={amt} />
 
 const get_estimates_source_link = subject => {
-  const table = Table.lookup('table8');
+  const table = Table.lookup('orgVoteStatEstimates');
   return {
     html: table.name,
     href: rpb_link({
@@ -46,7 +46,7 @@ const get_estimates_source_link = subject => {
 };
 
 const get_historical_spending_source_link = subject => {
-  const table = Table.lookup('table6');
+  const table = Table.lookup('programSpending');
   const appropriate_subject = get_appropriate_rpb_subject(subject);
   return {
     html: table.name,
@@ -60,7 +60,7 @@ const get_historical_spending_source_link = subject => {
 };
 
 const get_historical_fte_source_link = subject => {
-  const table = Table.lookup('table12');
+  const table = Table.lookup('programFtes');
   const appropriate_subject = get_appropriate_rpb_subject(subject);
   return {
     html: table.name,
@@ -755,7 +755,7 @@ function render({calculations, footnotes, sources}){
   );
 }
 
-//assumes table6/12 are loaded
+//assumes programSpending/12 are loaded
 function has_hist_data(subject,q6){
   return _.chain(exp_cols)
     .map(yr => q6.sum(yr) || 0)
@@ -906,16 +906,16 @@ new PanelGraph({
   level: "dept",
   key: 'welcome_mat',
   footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-  depends_on: ['table6', 'table12', 'table8'],
+  depends_on: ['programSpending','programFtes', 'orgVoteStatEstimates'],
   missing_info: "ok",
   calculate (subject, info, options){
-    const { table6, table12, table8 } = this.tables; 
-    const q6 = table6.q(subject);
-    const q12 = table12.q(subject);
+    const { programSpending, programFtes, orgVoteStatEstimates } = this.tables; 
+    const q6 = programSpending.q(subject);
+    const q12 = programFtes.q(subject);
 
     const has_planned = has_planning_data(subject, q6);
     const has_hist = has_hist_data(subject, q6);
-    const estimates_amt = table8.q(subject).sum("{{est_in_year}}_estimates");
+    const estimates_amt = orgVoteStatEstimates.q(subject).sum("{{est_in_year}}_estimates");
     const calcs = get_calcs(subject, q6, q12);
 
     if( !(has_planned || has_hist) ){
@@ -930,10 +930,10 @@ new PanelGraph({
     }
 
     if(!subject.dp_status){
-      //for non-dp orgs, we refer to estimate authorities. Must use table8 to get amounts
+      //for non-dp orgs, we refer to estimate authorities. Must use orgVoteStatEstimates to get amounts
       const proper_calcs = _.immutate(
         calcs,
-        { spend_plan_1: table8.q(subject).sum("{{est_in_year}}_estimates") }
+        { spend_plan_1: orgVoteStatEstimates.q(subject).sum("{{est_in_year}}_estimates") }
       );
       return {
         type: "hist_estimates",
@@ -962,12 +962,12 @@ new PanelGraph({
   level: "gov",
   key: 'welcome_mat',
   footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-  depends_on: ['table6', 'table12'],
+  depends_on: ['programSpending','programFtes'],
   missing_info: "ok",
   calculate (subject, info, options){
-    const { table6, table12 } = this.tables; 
-    const q6 = table6.q(subject);
-    const q12 = table12.q(subject);
+    const { programSpending, programFtes } = this.tables; 
+    const q6 = programSpending.q(subject);
+    const q12 = programFtes.q(subject);
 
     const calcs = get_calcs(subject, q6, q12);
 
@@ -983,12 +983,12 @@ new PanelGraph({
   level: "tag",
   key: 'welcome_mat',
   footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-  depends_on: ['table6', 'table12'],
+  depends_on: ['programSpending','programFtes'],
   missing_info: "ok",
   calculate (subject, info, options){
-    const { table6, table12 } = this.tables; 
-    const q6 = table6.q(subject);
-    const q12 = table12.q(subject);
+    const { programSpending, programFtes } = this.tables; 
+    const q6 = programSpending.q(subject);
+    const q12 = programFtes.q(subject);
 
     const calcs = get_calcs(subject, q6, q12);
 

@@ -345,11 +345,11 @@ new PanelGraph({
   requires_results: true,
   requires_result_counts: true,
   footnotes: false,
-  depends_on: ['table12'],
+  depends_on: ['programFtes'],
   source: false,
   calculate(subject){
     
-    const t12_q = this.tables.table12.q(subject);
+    const t12_q = this.tables.programFtes.q(subject);
 
     const dp_ftes = t12_q.sum("{{planning_year_1}}");
     const drr_ftes = t12_q.sum("{{pa_last_year}}");

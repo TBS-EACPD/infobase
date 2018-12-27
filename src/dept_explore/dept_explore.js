@@ -38,8 +38,8 @@ BubbleOrgList = function(container,method){
   const infos = get_info(
     Gov, 
     [
-      'table4_gov_info', 
-      'table12_gov_info',
+      'orgVoteStatPa_gov_info', 
+      'programFtes_gov_info',
     ]
   );
 
@@ -259,12 +259,12 @@ class BubbleExplore_ extends React.Component {
     el.appendChild(spin_el)
     ensure_loaded({
       stat_keys: [ 
-        'table4_gov_info', 
-        'table12_gov_info',
+        'orgVoteStatPa_gov_info', 
+        'programFtes_gov_info',
       ],
       table_keys: [
-        'table4',
-        'table12',
+        'orgVoteStatPa',
+        'programFtes',
       ],
     }).then(()=> {
       el.removeChild(spin_el);
@@ -274,18 +274,18 @@ class BubbleExplore_ extends React.Component {
 }
 
 function A11yContent(){
-  const table4_link = rpb_link({
+  const orgVoteStatPa_link = rpb_link({
     preferTable: true,
-    table: 'table4', 
+    table: 'orgVoteStatPa', 
     columns: [ 
       "{{pa_last_year}}exp",
     ],
     sorting_column: "{{pa_last_year}}exp",
     descending: true,
   });
-  const table12_link= rpb_link({
+  const programFtes_link= rpb_link({
     preferTable: true,
-    table: 'table12',
+    table: 'programFtes',
     sorting_column: "{{pa_last_year}}",
     descending: true,
     columns: [ 
@@ -298,8 +298,8 @@ function A11yContent(){
     <div className="sr-only">
       <div className="h2"> {"Explore the government's organizations..."} </div>
       <ul> 
-        <li> <a href={table4_link}> By their total spending  </a> </li>
-        <li> <a href={table12_link}> By their employment numbers   </a> </li>
+        <li> <a href={orgVoteStatPa_link}> By their total spending  </a> </li>
+        <li> <a href={programFtes_link}> By their employment numbers   </a> </li>
         <li> <a href={igoc_link}> By the type of organization   </a> </li>
       </ul>
     </div>

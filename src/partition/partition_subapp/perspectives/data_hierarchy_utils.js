@@ -8,18 +8,18 @@ const get_glossary_entry = (glossary_key) => GlossaryEntry.lookup(glossary_key) 
 
 const value_functions = {
   "exp": function(node){
-    const table6 = Table.lookup('table6');
-    if ( !table6.programs.has(node) ){  
+    const programSpending = Table.lookup('programSpending');
+    if ( !programSpending.programs.has(node) ){  
       return false;
     }
-    return _.first(table6.programs.get(node))["{{pa_last_year}}exp"];
+    return _.first(programSpending.programs.get(node))["{{pa_last_year}}exp"];
   },
   "fte": function(node){
-    const table12 = Table.lookup('table12');
-    if ( !table12.programs.has(node) ){  
+    const programFtes = Table.lookup('programFtes');
+    if ( !programFtes.programs.has(node) ){  
       return false;
     }
-    return _.first(table12.programs.get(node))["{{pa_last_year}}"];
+    return _.first(programFtes.programs.get(node))["{{pa_last_year}}"];
   },
 }
 

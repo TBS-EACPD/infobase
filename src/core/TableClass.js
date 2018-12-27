@@ -8,7 +8,6 @@ import {
 } from './tables/dimensions.js';
 import { mix } from '../generalUtils.js';
 import { staticStoreMixin } from '../models/staticStoreMixin.js';
-import _csv_names_by_table_id from '../tables/table_id_to_csv_map.js';
 import { Subject } from '../models/subject.js';
 import { 
   trivial_text_maker, 
@@ -22,7 +21,7 @@ import {
 } from './utils.js';
 
 
-const csv_names_by_table_id = _.mapValues( _csv_names_by_table_id, ({url}) => "csv/"+url);
+const table_id_to_csv_path = (table_id) => `csv/${_.snakeCase(table_id)}.csv`
 const { Dept } = Subject;
 
 export class Table extends mix().with(staticStoreMixin){
@@ -357,7 +356,7 @@ export class Table extends mix().with(staticStoreMixin){
     };
   }
   load(){
-    return make_request(get_static_url(csv_names_by_table_id[this.id]))
+    return make_request( get_static_url( table_id_to_csv_path(this.id) ) )
       .then( data => { 
         this.populate_with_data(data) 
         this.loaded = true;

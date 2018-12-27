@@ -47,7 +47,7 @@ function get_data_by_org(include_stat){
 
   const keys_in_supps = get_keys_in_supps(include_stat);
 
-  const data = _.chain(Table.lookup('table8').data)
+  const data = _.chain(Table.lookup('orgVoteStatEstimates').data)
     .pipe(include_stat ? _.identity : rows => _.reject(rows, {votestattype: 999}))
     .pipe( reduce_by_supps_dim )
     .groupBy('dept')
@@ -161,7 +161,7 @@ const get_category_children = (rows) => _.chain(rows)
 function get_data_by_item_types(){
   const keys_in_supps = get_keys_in_supps(true);
   
-  const nested_data = _.chain( Table.lookup('table8').major_voted_big_stat([this_year_col,last_year_col], false, false) )
+  const nested_data = _.chain( Table.lookup('orgVoteStatEstimates').major_voted_big_stat([this_year_col,last_year_col], false, false) )
     .toPairs()
     .map( ([ category, rows ]) => {  
 
@@ -242,7 +242,7 @@ function get_data_by_item_types(){
 
 
 function get_keys_in_supps(include_stat){
-  return _.chain(Table.lookup('table8').data)
+  return _.chain(Table.lookup('orgVoteStatEstimates').data)
     .pipe(include_stat ? _.identity : rows => _.reject(rows, {votestattype: 999}))
     .filter(row => row[this_year_col] && row.est_doc_code === "SEA")
     .map(row => [key_for_table_row(row),1] )

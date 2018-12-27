@@ -114,10 +114,10 @@ const planned_vote_or_stat_render = vs => function({calculations, footnotes, sou
 };
 
 const planned_vote_or_stat_calculate = vs => function(subject, info){
-  const {table8} = this.tables;
+  const {orgVoteStatEstimates} = this.tables;
 
   const text = text_maker(vs);
-  const all_rows = _.chain(table8.voted_stat(main_col,false,false)[text])
+  const all_rows = _.chain(orgVoteStatEstimates.voted_stat(main_col,false,false)[text])
     .sortBy(x => -x[main_col] )
     .map(d => _.pick(d,"desc",'dept',main_col) )               
     .value();
@@ -159,8 +159,8 @@ const planned_vote_or_stat_calculate = vs => function(subject, info){
       "in_year_stat_breakdown"
     ),
 
-    depends_on: ['table8'],
-    info_deps: [ 'table8_gov_info'],
+    depends_on: ['orgVoteStatEstimates'],
+    info_deps: [ 'orgVoteStatEstimates_gov_info'],
     calculate: planned_vote_or_stat_calculate(vs),
     render: planned_vote_or_stat_render(vs),
   });

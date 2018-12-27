@@ -22,10 +22,10 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const is_non_revenue = d => +(d.so_num) < 19;
 
-const common_cal = (programs,table305) => {
+const common_cal = (programs,programSobjs) => {
 
   const cut_off_index = 3;
-  const rows_by_so = collapse_by_so(programs, table305, is_non_revenue);
+  const rows_by_so = collapse_by_so(programs, programSobjs, is_non_revenue);
 
   if ( rows_by_so.length <= 1 || _.every(rows_by_so, ({value}) => value ===0) ) {
     return false;
@@ -44,12 +44,12 @@ const common_cal = (programs,table305) => {
 
 Statistics.create_and_register({
   id: 'program_std_obj', 
-  table_deps: ['table305'],
+  table_deps: ['programSobjs'],
   level: 'program',
   compute: (subject, tables, infos, add, c) => {
-    const {table305} = tables;
+    const {programSobjs} = tables;
 
-    const rows_by_so = collapse_by_so([subject], table305, is_non_revenue);
+    const rows_by_so = collapse_by_so([subject], programSobjs, is_non_revenue);
     const { 
       label: top_so_name, 
       value: top_so_amount,
@@ -68,12 +68,12 @@ Statistics.create_and_register({
 
 Statistics.create_and_register({
   id: 'tag_std_obj', 
-  table_deps: ['table305'],
+  table_deps: ['programSobjs'],
   level: 'tag',
   compute: (subject, tables, infos, add, c) => {
-    const {table305} = tables;
+    const {programSobjs} = tables;
 
-    const rows_by_so = collapse_by_so(subject.programs, table305, is_non_revenue);
+    const rows_by_so = collapse_by_so(subject.programs, programSobjs, is_non_revenue);
     const { 
       label: top_so_name, 
       value: top_so_amount,
@@ -129,16 +129,16 @@ const render_w_options = ({text_key}) => ({calculations, footnotes, sources}) =>
 
 new PanelGraph({
   key: 'top_spending_areas',
-  depends_on: ['table305'],
+  depends_on: ['programSobjs'],
   info_deps: ["program_std_obj"],
   level: "program",
   footnotes: ["SOBJ"],
 
   calculate(subject,info,options){ 
-    if ( _.isEmpty( this.tables.table305.programs.get(subject) ) ){
+    if ( _.isEmpty( this.tables.programSobjs.programs.get(subject) ) ){
       return false;
     }
-    return common_cal([subject], this.tables.table305);
+    return common_cal([subject], this.tables.programSobjs);
   },
 
   render: render_w_options({text_key: "program_top_spending_areas_text"}),
@@ -147,12 +147,12 @@ new PanelGraph({
 new PanelGraph({
   key: 'top_spending_areas',
   info_deps: ["tag_std_obj"],
-  depends_on: ['table305'],
+  depends_on: ['programSobjs'],
   level: "tag",
   footnotes: ["SOBJ"],
 
   calculate(subject,info,options){ 
-    return common_cal(subject.programs, this.tables.table305);
+    return common_cal(subject.programs, this.tables.programSobjs);
   },
 
   render: render_w_options({text_key: "tag_top_spending_areas_text"}),

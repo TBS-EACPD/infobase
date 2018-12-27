@@ -1,8 +1,6 @@
 /* eslint-disable no-console */
 
-//glob.sync takes a pattern and returns an array of  filenames matching that pattern
 //fse just adds the ability to do 'cp -r' to the regular filesystem tools for node
-const glob = require('glob');
 const fse = require('fs-extra');
 const fs = require("fs");
 const _ = require("lodash");
@@ -33,10 +31,6 @@ PROJ -> {
   copy entire svg directory, src/svg, to build/PROJ.name/svg
 }
 */
-
-const csv_names_by_table_id = require('../src/tables/table_id_to_csv_map.js');
-
-
 const public_data_dir = "data/";
 
 const public_dir_prefixer = file_name => public_data_dir+file_name;
@@ -53,7 +47,7 @@ const common_lookups = _.map(
     'program_tag_types.csv',
 
     //most igoc lookups are small enough to keep bilingual
-    'dept_code_to_table_id.csv',
+    'dept_code_to_csv_name.csv',
     'org_to_minister.csv',
     'ministers.csv',
     'ministries.csv',
@@ -86,34 +80,28 @@ const common_png = _.map(['en', 'fr'], lang => `src/panels/result_graphs/result-
 
 const svg_path = 'src/svg';
 
-const IB_tables = [
-  'table1',
-  'table2',
-  'table4',
-  'table5',
-  'table6',
-  'table7',
-  'table8',
-  'table9',
-  'table10',
-  'table11',
-  'table12',
-  'table305',
-  'table300',
-  'table112',
-  'table302',
-  'table303',
-  'table304',
-];
-
-var csv_from_table_names = function(table_ids){
-  return _.map(table_ids, function(table_id){
-    const obj = csv_names_by_table_id[table_id];
-    const prefix = public_data_dir;
-
-    return prefix+obj.url;
-  });
-};
+const table_csvs = _.map(
+  [
+    'org_employee_age_group',
+    'org_employee_avg_age',
+    'org_employee_ex_lvl',
+    'org_employee_fol',
+    'org_employee_gender',
+    'org_employee_region',
+    'org_employee_type',
+    'org_sobjs',
+    'org_sobjs_qfr',
+    'org_transfer_payments',
+    'org_vote_stat_estimates',
+    'org_vote_stat_pa',
+    'org_vote_stat_qfr',
+    'program_ftes',
+    'program_sobjs',
+    'program_spending',
+    'program_vote_stat', 
+  ],
+  name => public_dir_prefixer(`${name}.csv`)
+);
 
 const other_csvs = _.map(
   [
@@ -130,7 +118,7 @@ var IB = {
   lookups_fr: common_lookups.concat(common_lookups_fr),
   svg: svg_path,
   png: common_png,
-  csv: csv_from_table_names(IB_tables).concat(other_csvs),
+  csv: table_csvs.concat(other_csvs),
   well_known: ['src/InfoBase/security.txt'],
   other: [
     'src/robots/robots.txt',

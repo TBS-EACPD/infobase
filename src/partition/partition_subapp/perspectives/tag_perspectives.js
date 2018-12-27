@@ -29,8 +29,8 @@ const create_tag_hierarchy = function(tag_scheme, data_type) {
       post_traversal_search_string_set(node);
     })
     .sort( absolute_value_sort );
-  hierarchy.exp = Table.lookup('table6').q().sum("{{pa_last_year}}exp");
-  hierarchy.fte = Table.lookup('table12').q().sum("{{pa_last_year}}");
+  hierarchy.exp = Table.lookup('programSpending').q().sum("{{pa_last_year}}exp");
+  hierarchy.fte = Table.lookup('programFtes').q().sum("{{pa_last_year}}");
   hierarchy.value = hierarchy[data_type]; 
   return hierarchy;
 };

@@ -397,7 +397,7 @@ export default class ResourceExplorer extends React.Component {
   }
   componentDidMount(){
     ensure_loaded({
-      table_keys: ['table6', 'table12'],
+      table_keys: ['programSpending', 'programFtes'],
     }).then(()=> {
       this.setState({loading: false});
     });

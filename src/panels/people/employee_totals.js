@@ -27,10 +27,10 @@ const {
 } = declarative_charts;
 
 const info_deps_by_level = {
-  gov: ['table9_gov_info'],
+  gov: ['orgEmployeeType_gov_info'],
   dept: [
-    'table9_gov_info',
-    'table9_dept_info',
+    'orgEmployeeType_gov_info',
+    'orgEmployeeType_dept_info',
   ],
 };
 
@@ -38,12 +38,12 @@ const info_deps_by_level = {
   level => new PanelGraph({
     key: "employee_totals",
     level: level,
-    depends_on: ['table9'],
+    depends_on: ['orgEmployeeType'],
     info_deps: info_deps_by_level[level],
 
     calculate(subject, info){
-      const {table9} = this.tables;
-      const q = table9.q(subject);
+      const {orgEmployeeType} = this.tables;
+      const q = orgEmployeeType.q(subject);
       return { 
         series: { '': people_years.map(y => q.sum(y)) },
         ticks: _.map(people_years_short_second, y => `${months[3].text}<br>${run_template(y)}`),

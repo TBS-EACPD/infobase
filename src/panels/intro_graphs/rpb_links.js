@@ -6,13 +6,13 @@ import { WellList } from './WellList.js';
 
 
 const people_table_ids = [
-  'table9',
-  'table10',
-  'table11',
-  'table112',
-  'table302',
-  'table303',
-  'table304',
+  'orgEmployeeType',
+  'orgEmployeeRegion',
+  'orgEmployeeAgeGroup',
+  'orgEmployeeExLvl',
+  'orgEmployeeGender',
+  'orgEmployeeFol',
+  'orgEmployeeAvgAge',
 ];
 
 const get_table_type = table => (

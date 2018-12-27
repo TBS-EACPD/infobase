@@ -100,10 +100,10 @@ const key = "spend_rev_split";
 
 new PanelGraph({
   key,
-  depends_on: ["table4","table5"],
+  depends_on: ["orgVoteStatPa","orgSobjs"],
   footnotes: ["SOBJ_REV"],
   level: "dept",
-  info_deps: ["table5_dept_info","table4_dept_info"],
+  info_deps: ["orgSobjs_dept_info","orgVoteStatPa_dept_info"],
 
   calculate(subject,info,options){
     if ( info.dept_pa_last_year_rev === 0 ){
@@ -121,11 +121,11 @@ new PanelGraph({
 
 Statistics.create_and_register({
   id: 'tag_revenue', 
-  table_deps: [ 'table305'],
+  table_deps: [ 'programSobjs'],
   level: 'tag',
   compute: (subject, tables, infos, add, c) => {
-    const {table305} = tables;
-    const prog_rows = table305.q(subject).data;
+    const {programSobjs} = tables;
+    const prog_rows = programSobjs.q(subject).data;
     const exp_rev_results = rows_to_rev_split(prog_rows)
 
     add({
@@ -155,11 +155,11 @@ Statistics.create_and_register({
 
 Statistics.create_and_register({
   id: 'program_revenue', 
-  table_deps: [ 'table305'],
+  table_deps: [ 'programSobjs'],
   level: 'program',
   compute: (subject, tables, infos, add, c) => {
-    const table305 = tables.table305;
-    const prog_rows = table305.programs.get(subject);
+    const programSobjs = tables.programSobjs;
+    const prog_rows = programSobjs.programs.get(subject);
     const exp_rev_results = rows_to_rev_split(prog_rows)
 
     add({
@@ -188,12 +188,12 @@ Statistics.create_and_register({
 
 new PanelGraph({
   key,
-  depends_on: ["table305"],
+  depends_on: ["programSobjs"],
   info_deps: ["program_revenue"],
   level: "program",
   calculate(subject,info,options){ 
-    const {table305} = this.tables;
-    const prog_rows = table305.programs.get(subject);
+    const {programSobjs} = this.tables;
+    const prog_rows = programSobjs.programs.get(subject);
     const rev_split = rows_to_rev_split(prog_rows);
     if(rev_split.neg_exp === 0){
       return false;
@@ -206,12 +206,12 @@ new PanelGraph({
 
 new PanelGraph({
   key,
-  depends_on: ["table305"],
+  depends_on: ["programSobjs"],
   level: "tag",
   info_deps: ["tag_revenue"],
   calculate(subject,info,options){
-    const {table305} = this.tables;
-    const prog_rows = table305.q(subject).data;
+    const {programSobjs} = this.tables;
+    const prog_rows = programSobjs.q(subject).data;
     const rev_split = rows_to_rev_split(prog_rows);
     if(rev_split.neg_exp === 0){
       return false;

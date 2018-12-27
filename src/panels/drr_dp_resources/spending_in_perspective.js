@@ -146,8 +146,8 @@ class SpendInTagPerspective extends React.Component {
 new PanelGraph({
   level: "program",
   key: "spending_in_tag_perspective",
-  depends_on: ['table6'],
-  info_deps: ["table6_program_info"],
+  depends_on: ['programSpending'],
+  info_deps: ["programSpending_program_info"],
   calculate(subject,info,options){
     if(window.is_a11y_mode){
       //turn off this panel in a11y mode
@@ -156,9 +156,9 @@ new PanelGraph({
     if(subject.dead_program){
       return false;
     }
-    const {table6} = this.tables;
+    const {programSpending} = this.tables;
     //analysis: as of writing this (oct 2016) the max number of tags encountered is 13.
-    const prog_row = _.first(table6.programs.get(subject));
+    const prog_row = _.first(programSpending.programs.get(subject));
 
     if(!(prog_row[col] > 0)){
       return false;
@@ -167,7 +167,7 @@ new PanelGraph({
 
     const tag_exps = _.map(tags,tag => ({ 
       tag,
-      amount: sum_a_tag_col(tag, table6, col),
+      amount: sum_a_tag_col(tag, programSpending, col),
     }));
     return { tag_exps };
   },

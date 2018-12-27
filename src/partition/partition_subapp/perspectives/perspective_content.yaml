@@ -384,7 +384,7 @@ partition_spending_will_be_value_and_rpb_link_partial:
   handlebars_partial: true
   text: |
     <p class='amount'>
-      <a class="partition-link-out" href="#rpb/~(columns~(~'*7b*7b{{clean_year}}*7d*7d_estimates)~subject~'gov_gov~mode~'details~dimension~'by_estimates_doc~filter~'All~table~'table8~preferDeptBreakout~true~descending~false{{rpb_filter}})">
+      <a class="partition-link-out" href="#rpb/~(columns~(~'*7b*7b{{clean_year}}*7d*7d_estimates)~subject~'gov_gov~mode~'details~dimension~'by_estimates_doc~filter~'All~table~'orgVoteStatEstimates~preferDeptBreakout~true~descending~false{{rpb_filter}})">
         {{rawfmt_compact1 x}}
       </a>
     </p>

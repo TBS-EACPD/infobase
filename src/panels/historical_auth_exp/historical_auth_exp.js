@@ -33,17 +33,17 @@ const text_keys_by_level = {
 
 
 const calculate = function( subject,info,options ) {
-  const { table4 } = this.tables;
+  const { orgVoteStatPa } = this.tables;
 
   let stacked = false;
   let auth,exp;
 
   if ( subject.is("gov") ){
-    const q = table4.q();
+    const q = orgVoteStatPa.q();
     auth = q.sum(auth_cols, {as_object: false});
     exp = q.sum(exp_cols, {as_object: false});
   } else if ( subject.is("dept") ) {
-    const q = table4.q(subject);
+    const q = orgVoteStatPa.q(subject);
     auth = q.sum(auth_cols, {as_object: false});
     exp = q.sum(exp_cols, {as_object: false});
   }
@@ -153,8 +153,8 @@ const render = function({calculations, footnotes, sources}) {
 new PanelGraph({
   level: "gov",
   key: "historical_auth_exp",
-  info_deps: ["table4_gov_info"],
-  depends_on: ["table4"],
+  info_deps: ["orgVoteStatPa_gov_info"],
+  depends_on: ["orgVoteStatPa"],
   calculate,
   render,
 });
@@ -162,8 +162,8 @@ new PanelGraph({
 new PanelGraph({
   level: "dept",
   key: "historical_auth_exp",
-  depends_on: ["table4"],
-  info_deps: ["table4_dept_info"],
+  depends_on: ["orgVoteStatPa"],
+  info_deps: ["orgVoteStatPa_dept_info"],
   calculate,
   render,
 });

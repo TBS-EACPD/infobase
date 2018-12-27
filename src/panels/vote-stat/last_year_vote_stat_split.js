@@ -28,15 +28,15 @@ const render_w_options = ({text_key,graph_col,text_col}) => ({calculations, sour
 
 new PanelGraph({
   key: 'vote_stat_split',
-  depends_on: ['table300'],
-  info_deps: ["table300_program_info"],
+  depends_on: ['programVoteStat'],
+  info_deps: ["programVoteStat_program_info"],
   level: "program",
   footnotes: ["VOTED", "STAT"],
 
   calculate(subject,info,options){ 
-    const {table300} = this.tables;
+    const {programVoteStat} = this.tables;
     const vote_stat = _.map(
-      table300.programs.get(subject), 
+      programVoteStat.programs.get(subject), 
       row => ({
         label: row.vote_stat,
         value: row["{{pa_last_year}}"],
@@ -60,14 +60,14 @@ new PanelGraph({
 
 new PanelGraph({
   key: 'vote_stat_split',
-  depends_on: ['table300'],
-  info_deps: ["table300_tag_info"],
+  depends_on: ['programVoteStat'],
+  info_deps: ["programVoteStat_tag_info"],
   footnotes: ["VOTED", "STAT"],
   level: "tag",
   calculate(subject,info,options){ 
-    const {table300} = this.tables;
+    const {programVoteStat} = this.tables;
 
-    return _.chain(table300.q(subject).data)
+    return _.chain(programVoteStat.q(subject).data)
       .groupBy("vote_stat")
       .map((lines, key)=> {
         return {

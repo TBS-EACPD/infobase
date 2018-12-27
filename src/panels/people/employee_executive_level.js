@@ -21,18 +21,18 @@ const { A11YTable } = declarative_charts;
 
 
 const info_deps_by_level = {
-  gov: ['table112_gov_info'],
+  gov: ['orgEmployeeExLvl_gov_info'],
   dept: [
-    'table112_gov_info',
-    'table112_dept_info',
+    'orgEmployeeExLvl_gov_info',
+    'orgEmployeeExLvl_dept_info',
   ],
 };
 
 const calculate_funcs_by_level = {
   gov: function(gov, info){
-    const {table112} = this.tables;
+    const {orgEmployeeExLvl} = this.tables;
     
-    const gov_five_year_total_head_count =_.chain(table112.q().gov_grouping())
+    const gov_five_year_total_head_count =_.chain(orgEmployeeExLvl.q().gov_grouping())
       .map(row => d3.sum(_.drop(row)))
       .reduce((sum, val) => sum + val, 0)
       .value();
@@ -41,7 +41,7 @@ const calculate_funcs_by_level = {
       .values()
       .map(ex_level => {
         const ex_level_name = ex_level.text;
-        const yearly_values = people_years.map(year => table112.horizontal(year,false)[ex_level_name]);
+        const yearly_values = people_years.map(year => orgEmployeeExLvl.horizontal(year,false)[ex_level_name]);
         return {
           label: ex_level_name,
           data: yearly_values,
@@ -53,8 +53,8 @@ const calculate_funcs_by_level = {
       .value();
   },
   dept: function(dept, info){
-    const {table112} = this.tables;
-    return _.chain(table112.q(dept).data)
+    const {orgEmployeeExLvl} = this.tables;
+    return _.chain(orgEmployeeExLvl.q(dept).data)
       .map(row => ({
         label: row.ex_lvl,
         data: people_years.map(year => row[year]),
@@ -71,7 +71,7 @@ const calculate_funcs_by_level = {
   level => new PanelGraph({
     key: "employee_executive_level",
     level: level,
-    depends_on: ['table112'],
+    depends_on: ['orgEmployeeExLvl'],
     info_deps: info_deps_by_level[level],
     calculate: calculate_funcs_by_level[level],
   

@@ -27,7 +27,10 @@ function process_lookups(data){
  
   //TODO: stop referring to data by the names of its csv, design an interface with copy_static_assets.js
   populate_igoc_models({
-    dept_to_table_id: data['dept_code_to_table_id.csv'],
+    dept_to_table_id: _.map(
+      data['dept_code_to_csv_name.csv'], 
+      row => [ row[0], _.camelCase(row[1]) ]
+    ),
     org_to_minister: data['org_to_minister.csv'],
     inst_forms: data['inst_forms.csv'],
     ministers: data['ministers.csv'],

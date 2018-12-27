@@ -37,8 +37,8 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
 new PanelGraph({
   level: "dept",
   key: 'in_year_voted_stat_split',
-  depends_on: ['table8'],
-  info_deps: ['table8_dept_info', 'table8_gov_info' ],
+  depends_on: ['orgVoteStatEstimates'],
+  info_deps: ['orgVoteStatEstimates_dept_info', 'orgVoteStatEstimates_gov_info' ],
   machinery_footnotes: false,
   calculate(subject,info){
     // check for negative voted or statutory values, or 0 for both
@@ -64,9 +64,9 @@ new PanelGraph({
 new PanelGraph({
   level: "gov",
   key: 'in_year_voted_stat_split',
-  depends_on: ['table8'],
+  depends_on: ['orgVoteStatEstimates'],
   machinery_footnotes: false,
-  info_deps: ['table8_gov_info'],
+  info_deps: ['orgVoteStatEstimates_gov_info'],
 
   calculate(subject,info){
     return [

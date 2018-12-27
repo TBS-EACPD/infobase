@@ -184,10 +184,10 @@ const get_calculate_func = (is_fte) => {
       return false;
     }
   
-    const {table6, table12} = this.tables;
+    const {programSpending, programFtes} = this.tables;
   
-    const all_exp = _.sumBy(planning_years, col => table6.q(subject).sum(col) )
-    const all_fte = _.sumBy(planning_years, col => table12.q(subject).sum(col) )
+    const all_exp = _.sumBy(planning_years, col => programSpending.q(subject).sum(col) )
+    const all_fte = _.sumBy(planning_years, col => programFtes.q(subject).sum(col) )
   
     const should_bail = is_fte ? all_fte === 0 : all_exp === 0;
     if (should_bail){
@@ -195,14 +195,14 @@ const get_calculate_func = (is_fte) => {
     }
   
     const exp_data = _.map(
-      table6.q(subject).data, row => ({
+      programSpending.q(subject).data, row => ({
         label: row.prgm,
         data: planning_years.map(col => row[col]),
       })
     );
   
     const fte_data = _.map(
-      table12.q(subject).data, row => ({
+      programFtes.q(subject).data, row => ({
         label: row.prgm,
         data: planning_years.map(col => row[col]),
       })
@@ -224,8 +224,8 @@ _.each([true,false], is_fte => {
       "crso_by_prog_fte" : 
       "crso_by_prog_exp"
     ),
-    depends_on: ['table6', 'table12'],
-    info_deps: ['table6_crso_info','table12_crso_info'],
+    depends_on: ['programSpending', 'programFtes'],
+    info_deps: ['programSpending_crso_info','programFtes_crso_info'],
     calculate: get_calculate_func(is_fte),
     render: render_resource_type(is_fte),
   });

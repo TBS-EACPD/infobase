@@ -11,12 +11,12 @@ const { CirclePieChart } = declarative_charts;
 
 new PanelGraph({
   level: "dept",
-  depends_on: ["table8"],
+  depends_on: ["orgVoteStatEstimates"],
   machinery_footnotes: false,
 
   info_deps: [
-    'table8_dept_info',
-    'table8_gov_info',
+    'orgVoteStatEstimates_dept_info',
+    'orgVoteStatEstimates_gov_info',
   ],
 
   key: 'estimates_in_perspective',

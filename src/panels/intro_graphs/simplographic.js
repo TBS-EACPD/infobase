@@ -21,18 +21,18 @@ new PanelGraph({
   requires_result_counts: true,
 
   depends_on: [ 
-    'table4', 
-    'table10', 
+    'orgVoteStatPa', 
+    'orgEmployeeRegion', 
   ],
 
   info_deps: [ 
-    'table10_gov_info',
+    'orgEmployeeRegion_gov_info',
   ],
 
 
   calculate(dept, info){
-    const {table4, table10} = this.tables;
-    const gov_exp_pa_last_year = table4.q().sum('{{pa_last_year}}exp');
+    const {orgVoteStatPa, orgEmployeeRegion} = this.tables;
+    const gov_exp_pa_last_year = orgVoteStatPa.q().sum('{{pa_last_year}}exp');
 
     const federal_institutions = _.chain(Dept.get_all())
       //HACKY: "Active" is coming from an igoc column, we're taking advantage of "Active" being the same in Englihs and french.
@@ -49,7 +49,7 @@ new PanelGraph({
 
 
     //People calcs
-    const employee_by_prov = table10.prov_code("{{ppl_last_year}}", Gov);
+    const employee_by_prov = orgEmployeeRegion.prov_code("{{ppl_last_year}}", Gov);
     const total_employees = _.chain(employee_by_prov).values().sum().value();
     const ncr_employees = employee_by_prov.ncr;
     const empl_count_ncr_ratio = ncr_employees/total_employees;
@@ -58,7 +58,7 @@ new PanelGraph({
     const gov_counts = ResultCounts.get_gov_counts();
 
     const col = '{{pa_last_year}}exp';
-    const largest_items = _.chain(table4.data)
+    const largest_items = _.chain(orgVoteStatPa.data)
       .sortBy(col)
       .takeRight(3)
       .reverse()
@@ -69,12 +69,12 @@ new PanelGraph({
       }))
       .value();
 
-    const t9_link = rpb_link({ table: 'table9' });
+    const t9_link = rpb_link({ table: 'orgEmployeeType' });
     const t10_link = rpb_link({ 
-      table: 'table10', 
+      table: 'orgEmployeeRegion', 
       preferDeptBreakout: false,
     });
-    const t4_link = rpb_link({ table: 'table4' });
+    const t4_link = rpb_link({ table: 'orgVoteStatPa' });
 
     const results_link = infograph_href_template(Gov, 'results');
 

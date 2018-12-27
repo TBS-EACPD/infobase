@@ -424,7 +424,7 @@ _.each(['program','dept','crso'], lvl => {
     source: false,
     level: lvl,
     footnotes: false,
-    depends_on: ["table6", "table12"],
+    depends_on: ["programSpending", "programFtes"],
     requires_results: true,
     key: "explore_results",
     calculate(subject){

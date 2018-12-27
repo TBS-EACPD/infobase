@@ -7,7 +7,7 @@ import { GlossaryEntry } from '../../models/glossary.js';
   _.chain(_Subject.Dept.get_all())
     .map(org => ({ 
       org: org.name, 
-      pct: (_.get(_Table.lookup('table12').horizontal("{{pa_last_year}}"), `Internal Services.${org.id}`) ||0) / (_Table.lookup('table12').q(org).sum("{{pa_last_year}}")) 
+      pct: (_.get(_Table.lookup('programFtes').horizontal("{{pa_last_year}}"), `Internal Services.${org.id}`) ||0) / (_Table.lookup('programFtes').q(org).sum("{{pa_last_year}}")) 
     })).reject( ({pct}) => _.isNaN(pct) )
     .sortBy('pct')
     .reverse()
@@ -34,10 +34,10 @@ const { text_maker, TM } = create_text_maker_component(text);
 new PanelGraph({
   level: "dept",
   key: "internal_services",
-  depends_on: ['table12', "table6"],
+  depends_on: ['programFtes', "programSpending"],
   title: "internal_service_panel_title",
   calculate(subject,info){
-    const { table12 } = this.tables;
+    const { programFtes } = this.tables;
 
     const isc_crsos = _.filter(subject.crsos, "is_internal_service");
     if(_.isEmpty(isc_crsos)){
@@ -48,18 +48,18 @@ new PanelGraph({
     const isc_tag = Tag.lookup("GOC017");
 
     const last_year_fte_col = "{{pa_last_year}}";
-    const gov_fte_total = table12.q(Gov).sum(last_year_fte_col);
-    const gov_isc_fte = table12.q(isc_tag).sum(last_year_fte_col);
+    const gov_fte_total = programFtes.q(Gov).sum(last_year_fte_col);
+    const gov_isc_fte = programFtes.q(isc_tag).sum(last_year_fte_col);
 
     const series = _.map(std_years, yr => {
-      const isc_amt = _.sum( _.map(isc_crsos, crso => table12.q(crso).sum(yr) ) );
+      const isc_amt = _.sum( _.map(isc_crsos, crso => programFtes.q(crso).sum(yr) ) );
       return {
         isc: isc_amt,
-        non_isc: table12.q(subject).sum(yr) - isc_amt,
+        non_isc: programFtes.q(subject).sum(yr) - isc_amt,
       };
     });
 
-    const total_fte = table12.q(subject).sum(last_year_fte_col);
+    const total_fte = programFtes.q(subject).sum(last_year_fte_col);
     if(total_fte === 0){
       return false;
     }

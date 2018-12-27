@@ -39,8 +39,8 @@ const text_keys = {
 };
 
 const info_deps_by_level = {
-  dept: [ "table6_dept_info" ],
-  tag: [ "table6_tag_info" ],
+  dept: [ "programSpending_dept_info" ],
+  tag: [ "programSpending_tag_info" ],
 };
 
 const footnote_topics = [ 'PROG', 'SOBJ' ];
@@ -51,16 +51,16 @@ const footnote_topics = [ 'PROG', 'SOBJ' ];
     level: level_name,
     key: "detailed_program_spending_split",
     info_deps: info_deps_by_level[level_name],
-    depends_on: ['table305', "table6"],
+    depends_on: ['programSobjs', "programSpending"],
 
     footnotes: footnote_topics,
     calculate(subject,info,options){
 
       const is_tag = subject.level === "tag";
   
-      const {table305, table6} = this.tables;
+      const {programSobjs, programSpending} = this.tables;
 
-      const table_data = table305.q(subject).data;
+      const table_data = programSobjs.q(subject).data;
 
       if(_.isEmpty(table_data)){
         return false;
@@ -101,7 +101,7 @@ const footnote_topics = [ 'PROG', 'SOBJ' ];
       }
 
       const exp_cols = _.map(std_years, yr=>yr+"exp");
-      const table6_data = _.chain(table6.q(subject).data)
+      const programSpending_data = _.chain(programSpending.q(subject).data)
         .filter(row => {
           return d3.sum(exp_cols, col=> row[col]) !== 0;
         })
@@ -139,7 +139,7 @@ const footnote_topics = [ 'PROG', 'SOBJ' ];
         top_3_so_nums,
         flat_data,
         higher_level_mapping,
-        table6_data,
+        programSpending_data,
         program_footnotes,
       };
 
@@ -151,7 +151,7 @@ const footnote_topics = [ 'PROG', 'SOBJ' ];
           flat_data,
           higher_level_mapping,
           top_3_so_nums,
-          table6_data,
+          programSpending_data,
           program_footnotes,
         },
         info,
@@ -200,7 +200,7 @@ const footnote_topics = [ 'PROG', 'SOBJ' ];
             </div>
             <div>
               <HistoricalProgramBars
-                data={_.map(table6_data, ({label,data},ix) => ({
+                data={_.map(programSpending_data, ({label,data},ix) => ({
                   label,
                   data,
                   id: `${ix}-${label}`, //need unique id, program names don't always work!

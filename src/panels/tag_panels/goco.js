@@ -57,7 +57,7 @@ const fade_out = function(d){
 new PanelGraph({
   key: 'gocographic',
   level: 'gov',
-  depends_on: ['table6', 'table12'],
+  depends_on: ['programSpending', 'programFtes'],
   footnotes: ["GOCA"],
   calculate: _.constant(true),
   render,
@@ -67,8 +67,8 @@ class Goco {
   constructor(container, history){
     this.history = history;
     this.container = container;
-    const table6 = Table.lookup("table6");
-    const table12 = Table.lookup("table12");
+    const programSpending = Table.lookup("programSpending");
+    const programFtes = Table.lookup("programFtes");
     const spend_col = "{{pa_last_year}}exp";
     const fte_col = "{{pa_last_year}}";
     const legend_area = this.container.select(".legend_area");
@@ -80,10 +80,10 @@ class Goco {
       .map(sa=> {
         const children = _.map(sa.children_tags, goco => {
           const spending = d3.sum(goco.programs, p => {
-            return table6.programs.get(p) ? _.first(table6.programs.get(p))[spend_col] : 0;
+            return programSpending.programs.get(p) ? _.first(programSpending.programs.get(p))[spend_col] : 0;
           });
           const ftes = d3.sum(goco.programs, p => {
-            return table12.programs.get(p) ? _.first(table12.programs.get(p))[fte_col] : 0;
+            return programFtes.programs.get(p) ? _.first(programFtes.programs.get(p))[fte_col] : 0;
           });
           return {
             href: `#orgs/tag/${goco.id}/infograph`,
@@ -222,8 +222,8 @@ class Goco {
 
 function render({calculations, footnotes, sources }, { history }){
 
-  const table6 = Table.lookup("table6");
-  const table12 = Table.lookup("table12");
+  const programSpending = Table.lookup("programSpending");
+  const programFtes = Table.lookup("programFtes");
 
   const spend_yr = "{{pa_last_year}}exp";
   const fte_yr = "{{pa_last_year}}";
@@ -232,10 +232,10 @@ function render({calculations, footnotes, sources }, { history }){
     .map(sa => {
       const children = _.map(sa.children_tags, goco => {
         const spending = d3.sum(goco.programs, p => {
-          return table6.programs.get(p) ? _.first(table6.programs.get(p))[spend_yr] : 0;
+          return programSpending.programs.get(p) ? _.first(programSpending.programs.get(p))[spend_yr] : 0;
         });
         const ftes = d3.sum(goco.programs, p => {
-          return table12.programs.get(p) ? _.first(table12.programs.get(p))[fte_yr] : 0;
+          return programFtes.programs.get(p) ? _.first(programFtes.programs.get(p))[fte_yr] : 0;
         });
         return {
           spending,

@@ -20,18 +20,18 @@ const { Format } = util_components;
 
 new PanelGraph({
   level: "gov",
-  depends_on: ['table5'],
+  depends_on: ['orgSobjs'],
   key: "personnel_spend",
 
   info_deps: [
-    'table5_gov_info',
+    'orgSobjs_gov_info',
   ],
 
 
   calculate(subject,info,data){
     return {
       series: {
-        '0': std_years.map( year => this.tables.table5.horizontal(year,false)[sos[1].text]),
+        '0': std_years.map( year => this.tables.orgSobjs.horizontal(year,false)[sos[1].text]),
       },
     };
   },

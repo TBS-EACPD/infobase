@@ -17,13 +17,13 @@ import { ResultCounts } from './results_common.js';
 
 const get_dp_rpb_links = () => ({
   spend: rpb_link({
-    table: "table6",
+    table: "programSpending",
     columns: ['{{planning_year_1}}','{{planning_year_2}}','{{planning_year_3}}'], 
     mode: "details",
     
   }),
   ftes: rpb_link({
-    table: "table12",
+    table: "programFtes",
     columns: ['{{planning_year_1}}','{{planning_year_2}}','{{planning_year_3}}'], 
     mode: "details",
   }),

@@ -71,14 +71,14 @@ const vs_type_node_mapping_common_options = {
 };
 
 const subject_to_vs_type_nodes = (node) => {
-  const table8 = Table.lookup('table8');
-  const estimates_data = table8.q(node).data;
+  const orgVoteStatEstimates = Table.lookup('orgVoteStatEstimates');
+  const estimates_data = orgVoteStatEstimates.q(node).data;
   return subject_to_vs_type_nodes_common(estimates_data);
 }
 
 const subject_to_vs_type_nodes_filtered_by_est_doc_code = (node, est_doc_code) => {
-  const table8 = Table.lookup('table8');
-  const estimates_data = _.chain(table8.q(node).data)
+  const orgVoteStatEstimates = Table.lookup('orgVoteStatEstimates');
+  const estimates_data = _.chain(orgVoteStatEstimates.q(node).data)
     .filter( row => row.est_doc_code === est_doc_code)
     .value();
 
@@ -125,8 +125,8 @@ const est_type_node_mapping_common_options = {
 };
 
 const subject_to_est_type_nodes = (node) => {
-  const table8 = Table.lookup('table8');
-  const estimates_data = table8.q(node).data;
+  const orgVoteStatEstimates = Table.lookup('orgVoteStatEstimates');
+  const estimates_data = orgVoteStatEstimates.q(node).data;
 
   const data_for_node_mapping = _.map(estimates_data, row => {
     return {
@@ -191,18 +191,18 @@ const orgs_with_planned_spending = () => {
   return _.chain(Subject.Ministry.get_all())
     .map(ministry => ministry.orgs)
     .flatten()
-    .filter( org => _.indexOf(org.table_ids, "table8") !== -1)
+    .filter( org => _.indexOf(org.table_ids, "orgVoteStatEstimates") !== -1)
     .value();
 }
 
 const orgs_in_est_doc = (est_doc_code) => {
-  const table8 = Table.lookup('table8');
+  const orgVoteStatEstimates = Table.lookup('orgVoteStatEstimates');
 
   return _.chain(Subject.Ministry.get_all())
     .map(ministry => ministry.orgs)
     .flatten()
-    .filter( org => _.indexOf(org.table_ids, "table8") !== -1)
-    .filter( org => _.some(table8.q(org).data, row => row.est_doc_code === est_doc_code))
+    .filter( org => _.indexOf(org.table_ids, "orgVoteStatEstimates") !== -1)
+    .filter( org => _.some(orgVoteStatEstimates.q(org).data, row => row.est_doc_code === est_doc_code))
     .value();
 }
 
@@ -255,7 +255,7 @@ const get_rpb_subject_code_from_context = (node, presentation_scheme) => {
 }
 
 const planned_spending_post_traversal_rule_set = (node,data_type, presentation_scheme) => {
-  const table8 = Table.lookup('table8');
+  const orgVoteStatEstimates = Table.lookup('orgVoteStatEstimates');
   
   const default_rpb_link_options = { 
     columns: [year],
@@ -263,7 +263,7 @@ const planned_spending_post_traversal_rule_set = (node,data_type, presentation_s
     mode: "details",
     dimension: "voted_stat",
     filter: text_maker("all"),
-    table: table8.id,
+    table: orgVoteStatEstimates.id,
     preferDeptBreakout: true,
     descending: false,
   }

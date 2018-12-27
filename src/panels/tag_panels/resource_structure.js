@@ -220,11 +220,11 @@ class RootedResourceExplorerContainer extends React.Component {
 new PanelGraph({
   level: 'tag',
   footnotes: false,
-  depends_on: ['table6','table12'],
+  depends_on: ['programSpending','programFtes'],
   key: "resource_structure",
 
   calculate(subject){
-    const { table6 } = this.tables;
+    const { programSpending } = this.tables;
 
     let has_dp_data = true;
     let has_drr_data = true;
@@ -243,7 +243,7 @@ new PanelGraph({
       has_dp_data = !subject.dead_so;
       //there are some cases where an SO that died before pa_last_year can crash this graph...
       has_drr_data = _.some(subject.programs, prog => {
-        const rows = table6.programs.get(prog);
+        const rows = programSpending.programs.get(prog);
         return !_.isEmpty(rows) && _.first(rows)["{{pa_last_year}}"] > 0;
       });
     }

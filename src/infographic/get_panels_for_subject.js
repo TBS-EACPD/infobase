@@ -112,7 +112,7 @@ const get_dept_panels = subject => {
       'igoc_fields',
       'igoc_links',
     ],
-    financial: _.includes(subject.tables,'table6') && [
+    financial: _.includes(subject.tables,'programSpending') && [
       "financial_intro",
       "welcome_mat",
       "budget_measures_panel",
@@ -128,7 +128,7 @@ const get_dept_panels = subject => {
       'drr_planned_actual',
       "dp_rev_split",
     ],
-    people: _.includes(subject.tables, 'table9') && get_people_panels(subject),
+    people: _.includes(subject.tables, 'orgEmployeeType') && get_people_panels(subject),
     results: subject.dp_status && [
       "results_intro",
       "drr_summary",

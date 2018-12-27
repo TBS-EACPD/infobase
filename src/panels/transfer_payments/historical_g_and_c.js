@@ -31,13 +31,13 @@ new PanelGraph({
   key: "historical_g_and_c",
 
   info_deps: [
-    'table7_gov_info',
+    'orgTransferPayments_gov_info',
   ],
 
-  depends_on: ['table7'],
+  depends_on: ['orgTransferPayments'],
   calculate(subject){
-    const {table7} = this.tables;
-    return table7.payment_type_ids(exp_years,false);
+    const {orgTransferPayments} = this.tables;
+    return orgTransferPayments.payment_type_ids(exp_years,false);
   },
   render({calculations, footnotes, sources}){
     const { 
@@ -65,21 +65,21 @@ new PanelGraph({
 
 new PanelGraph({
   level: "dept",
-  depends_on: ['table7'],
+  depends_on: ['orgTransferPayments'],
 
   info_deps: [
-    'table7_gov_info',
-    'table7_dept_info',
+    'orgTransferPayments_gov_info',
+    'orgTransferPayments_dept_info',
   ],
 
   key: "historical_g_and_c",
   footnotes: ['SOBJ10'],
   calculate(dept){
-    const {table7} = this.tables;
+    const {orgTransferPayments} = this.tables;
 
     return {
-      rolled_up: table7.payment_type_ids(exp_years,dept.unique_id),
-      rows: _.chain(table7.q(dept).data)
+      rolled_up: orgTransferPayments.payment_type_ids(exp_years,dept.unique_id),
+      rows: _.chain(orgTransferPayments.q(dept).data)
         .sortBy("{{pa_last_year}}exp")
         .reverse()
         .value(),

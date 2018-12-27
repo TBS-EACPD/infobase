@@ -25,12 +25,12 @@ _.each(["dept","crso","program"], level => {
   new PanelGraph({
     level,
     key: 'dp_rev_split',
-    depends_on: ['table6'],
+    depends_on: ['programSpending'],
     machinery_footnotes: false,
     footnotes: ["PLANNED_GROSS"],
     calculate(subject,info){
-      const { table6 } = this.tables;
-      const q = table6.q(subject);
+      const { programSpending } = this.tables;
+      const q = programSpending.q(subject);
 
       const data = _.map(dp_cols, col => ({
         col,

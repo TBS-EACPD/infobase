@@ -5,7 +5,7 @@ import { formats } from '../core/format.js';
 import { Subject } from '../models/subject.js';
 
 
-//these functions assume table4 and table12 are already loaded.
+//these functions assume orgVoteStatPa and programFtes are already loaded.
 
 const { Dept } = Subject;
 
@@ -25,7 +25,7 @@ function nest_data_for_exploring(to_be_nested, top_name, level_assigner){
 
 export function by_min_dept(){
   // this function regroups departments into their respective ministries
-  // 1 - all departments in table8 are obtained
+  // 1 - all departments in orgVoteStatEstimates are obtained
   // 2 - the depratments are mapped into an object with three keys
   //      min, name, value=total_net_auth, _value
   //      becuase value will be changed during the softening, _value is held
@@ -36,7 +36,7 @@ export function by_min_dept(){
   //      name, children=depts and value=sum of total net auth
   //      in addition, the relative value of each department's total not auth
   //      is softened for display purposes'
-  var table = Table.lookup('table4');
+  var table = Table.lookup('orgVoteStatPa');
 
   // group the departments by
   // minisries and then do a reduce sum to extract the fin size
@@ -94,7 +94,7 @@ export function by_min_dept(){
 };
 
 export function by_dept_type(){
-  var table = Table.lookup('table4');
+  var table = Table.lookup('orgVoteStatPa');
   // group the departments by
   // minisries and then do a reduce sum to extract the fin size
   // of each ministry
@@ -160,7 +160,7 @@ export function by_dept_type(){
 };
 
 export function by_this_year_emp(){
-  var table = Table.lookup("table12");
+  var table = Table.lookup("programFtes");
   var by_people = _.chain(table.depts)
     .keys()
     .map(key => {

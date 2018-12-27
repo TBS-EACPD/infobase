@@ -22,42 +22,42 @@ import { populate_stores } from '../models/populate_stores.js';
 import { Table } from '../core/TableClass.js';
 import WebFont from 'webfontloader';
 
-import table1 from "../tables/table1/table1.js";
-import table2 from "../tables/table2/table2.js";
-import table4 from "../tables/table4/table4.js";
-import table5 from "../tables/table5/table5.js";
-import table6 from "../tables/table6/table6.js";
-import table7 from "../tables/table7/table7.js";
-import table8 from "../tables/table8/table8.js";
-import table9 from "../tables/table9/table9.js";
-import table10 from "../tables/table10/table10.js";
-import table11 from "../tables/table11/table11.js";
-import table12 from "../tables/table12/table12.js";
-import table112 from "../tables/table112/table112.js";
-import table300 from "../tables/table300/table300.js";
-import table302 from "../tables/table302/table302.js";
-import table303 from "../tables/table303/table303.js";
-import table304 from "../tables/table304/table304.js";
-import table305 from "../tables/table305/table305.js";
+import orgVoteStatQfr from "../tables/orgVoteStatQfr.js";
+import orgSobjsQfr from "../tables/orgSobjsQfr.js";
+import orgVoteStatPa from "../tables/orgVoteStatPa.js";
+import orgSobjs from "../tables/orgSobjs.js";
+import programSpending from "../tables/programSpending.js";
+import orgTransferPayments from "../tables/orgTransferPayments.js";
+import orgVoteStatEstimates from "../tables/orgVoteStatEstimates.js";
+import orgEmployeeType from "../tables/orgEmployeeType.js";
+import orgEmployeeRegion from "../tables/orgEmployeeRegion.js";
+import orgEmployeeAgeGroup from "../tables/orgEmployeeAgeGroup.js";
+import programFtes from "../tables/programFtes.js";
+import orgEmployeeExLvl from "../tables/orgEmployeeExLvl.js";
+import programVoteStat from "../tables/programVoteStat.js";
+import orgEmployeeGender from "../tables/orgEmployeeGender.js";
+import orgEmployeeFol from "../tables/orgEmployeeFol.js";
+import orgEmployeeAvgAge from "../tables/orgEmployeeAvgAge.js";
+import programSobjs from "../tables/programSobjs.js";
 
 const table_defs = [
-  table1,
-  table2,
-  table4,
-  table5,
-  table6,
-  table7,
-  table8,
-  table9,
-  table10,
-  table11,
-  table12,
-  table112,
-  table300,
-  table302,
-  table303,
-  table304,
-  table305,
+  orgVoteStatQfr,
+  orgSobjsQfr,
+  orgVoteStatPa,
+  orgSobjs,
+  programSpending,
+  orgTransferPayments,
+  orgVoteStatEstimates,
+  orgEmployeeType,
+  orgEmployeeRegion,
+  orgEmployeeAgeGroup,
+  programFtes,
+  orgEmployeeExLvl,
+  programVoteStat,
+  orgEmployeeGender,
+  orgEmployeeFol,
+  orgEmployeeAvgAge,
+  programSobjs,
 ];
 
 

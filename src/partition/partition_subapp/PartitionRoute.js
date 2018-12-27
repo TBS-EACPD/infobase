@@ -29,7 +29,7 @@ export default class PartitionRoute extends React.Component {
   }
   componentDidMount(){
     ensure_loaded({
-      table_keys: ['table6', 'table8', 'table12','table305'],
+      table_keys: ['programSpending', 'orgVoteStatEstimates', 'programFtes','programSobjs'],
     }).then( () => {
       this.all_perspectives = get_all_perspectives();
       this.setState({loading: false});

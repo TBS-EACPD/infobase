@@ -42,7 +42,7 @@ export default class EstimatesComparison extends React.Component {
   }
   componentDidMount(){
     ensure_loaded({
-      table_keys: ["table8"],
+      table_keys: ["orgVoteStatEstimates"],
       footnotes_for: "estimates",
     }).then(()=> {
       this.setState({ loading: false });

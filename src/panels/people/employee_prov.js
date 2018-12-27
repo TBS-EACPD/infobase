@@ -254,10 +254,10 @@ const prepare_data_for_a11y_table = (years_by_province) => {
 };
 
 const info_deps_by_level = {
-  gov: ['table10_gov_info'],
+  gov: ['orgEmployeeRegion_gov_info'],
   dept: [
-    'table10_gov_info',
-    'table10_dept_info',
+    'orgEmployeeRegion_gov_info',
+    'orgEmployeeRegion_dept_info',
   ],
 };
 
@@ -279,12 +279,12 @@ const calculate_common = (data) => {
 };
 const calculate_funcs_by_level = {
   gov: function(){
-    const { table10 } = this.tables;
-    return calculate_common( people_years.map( year => table10.prov_code(year, false) ) );
+    const { orgEmployeeRegion } = this.tables;
+    return calculate_common( people_years.map( year => orgEmployeeRegion.prov_code(year, false) ) );
   },
   dept: function(subject){
-    const { table10 } = this.tables;
-    return calculate_common( people_years.map( year => table10.prov_code(year, subject.unique_id) ) );
+    const { orgEmployeeRegion } = this.tables;
+    return calculate_common( people_years.map( year => orgEmployeeRegion.prov_code(year, subject.unique_id) ) );
   },
 };
 
@@ -292,7 +292,7 @@ const calculate_funcs_by_level = {
   level => new PanelGraph({
     key: "employee_prov",
     level: level,
-    depends_on: ['table10'],
+    depends_on: ['orgEmployeeRegion'],
     info_deps: info_deps_by_level[level],
     calculate: calculate_funcs_by_level[level],
     

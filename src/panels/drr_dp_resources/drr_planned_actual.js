@@ -14,8 +14,8 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 _.each(['dept','program','crso'], level => {
   new PanelGraph({
-    depends_on: ['table6', 'table12'],
-    info_deps: level === 'crso' ? ['table6_crso_info','table12_crso_info'] : [],
+    depends_on: ['programSpending', 'programFtes'],
+    info_deps: level === 'crso' ? ['programSpending_crso_info','programFtes_crso_info'] : [],
     key: 'drr_planned_actual',
     //used as as a fail mechanism. If result counts aren't present, bail
     requires_result_counts: true,
@@ -40,9 +40,9 @@ _.each(['dept','program','crso'], level => {
         return false;
       }
 
-      const { table6, table12 } = this.tables;
-      const spend_q = table6.q(subject);
-      const fte_q = table12.q(subject);
+      const { programSpending, programFtes } = this.tables;
+      const spend_q = programSpending.q(subject);
+      const fte_q = programFtes.q(subject);
 
       const planned_spend = spend_q.sum("drr_last_year");
       const planned_ftes = fte_q.sum("drr_last_year");

@@ -23,21 +23,21 @@ const { A11YTable } = declarative_charts;
 
 
 const info_deps_by_level = {
-  gov: ['table9_gov_info'],
+  gov: ['orgEmployeeType_gov_info'],
   dept: [
-    'table9_gov_info',
-    'table9_dept_info',
+    'orgEmployeeType_gov_info',
+    'orgEmployeeType_dept_info',
   ],
 };
 
 const calculate_funcs_by_level = {
   gov: function(gov,info){
-    const {table9} = this.tables;				  
+    const {orgEmployeeType} = this.tables;				  
     return _.chain(tenure)
       .values()
       .map(tenure_type => {
         const tenure_text = tenure_type.text;
-        const yearly_values = people_years.map(year => table9.horizontal(year, false)[tenure_text]);
+        const yearly_values = people_years.map(year => orgEmployeeType.horizontal(year, false)[tenure_text]);
         return {
           label: tenure_text,
           data: yearly_values,
@@ -49,8 +49,8 @@ const calculate_funcs_by_level = {
       .value();
   },
   dept: function(dept,info){
-    const {table9} = this.tables;
-    return _.chain(table9.q(dept).data)
+    const {orgEmployeeType} = this.tables;
+    return _.chain(orgEmployeeType.q(dept).data)
       .map(row =>
         ({
           label: row.employee_type,
@@ -69,7 +69,7 @@ const calculate_funcs_by_level = {
   level => new PanelGraph({
     key: "employee_type",
     level: level,
-    depends_on: ['table9'],
+    depends_on: ['orgEmployeeType'],
     info_deps: info_deps_by_level[level],
     calculate: calculate_funcs_by_level[level],
   

@@ -15,11 +15,11 @@ const { CirclePieChart } = declarative_charts;
 new PanelGraph({
   key: "employee_last_year_totals",
   level: "dept",
-  depends_on: ['table9'],
+  depends_on: ['orgEmployeeType'],
 
   info_deps: [
-    'table9_dept_info',
-    'table9_gov_info',
+    'orgEmployeeType_dept_info',
+    'orgEmployeeType_gov_info',
   ],
 
   calculate(subject,info){

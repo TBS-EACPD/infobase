@@ -457,7 +457,7 @@ export const PlannedActualTable = ({
 
 export const get_planned_spending_source_link = subject => {
   const appropriate_subject = get_appropriate_rpb_subject(subject);
-  const table = Table.lookup('table6');
+  const table = Table.lookup('programSpending');
   return {
     html: table.name,
     href: rpb_link({
@@ -471,7 +471,7 @@ export const get_planned_spending_source_link = subject => {
 
 export const get_planned_fte_source_link = subject => {
   const appropriate_subject = get_appropriate_rpb_subject(subject);
-  const table = Table.lookup('table12');
+  const table = Table.lookup('programFtes');
   return {
     html: table.name,
     href: rpb_link({

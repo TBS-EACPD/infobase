@@ -108,11 +108,11 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
 new PanelGraph({
   level: "dept",
   machinery_footnotes: false,
-  depends_on: ["table8"],
+  depends_on: ["orgVoteStatEstimates"],
 
   info_deps: [
-    'table8_gov_info', 
-    'table8_dept_info', 
+    'orgVoteStatEstimates_gov_info', 
+    'orgVoteStatEstimates_dept_info', 
   ],
 
   key: "in_year_estimates_split",
@@ -123,8 +123,8 @@ new PanelGraph({
 new PanelGraph({
   level: "gov",
   machinery_footnotes: false,
-  depends_on: ["table8"],
-  info_deps: ["table8_gov_info"],
+  depends_on: ["orgVoteStatEstimates"],
+  info_deps: ["orgVoteStatEstimates_gov_info"],
   key: "in_year_estimates_split",
   calculate: estimates_split_calculate,
   render: estimates_split_render_w_text_key("gov_in_year_estimates_split_text"),

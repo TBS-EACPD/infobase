@@ -25,11 +25,11 @@ const { Format } = util_components;
 new PanelGraph({
   level: "dept",
   key: "spend_by_so_hist",
-  depends_on: ['table5'],
+  depends_on: ['orgSobjs'],
   footnotes: [ "SOBJ", "EXP"],
-  info_deps: [ 'table5_dept_info', 'table5_gov_info' ],
+  info_deps: [ 'orgSobjs_dept_info', 'orgSobjs_gov_info' ],
   calculate (subject,info){
-    const {table5} = this.tables;
+    const {orgSobjs} = this.tables;
     return {
       data: (
         _.chain(sos)
@@ -37,7 +37,7 @@ new PanelGraph({
           .map(sobj => 
             ({
               "label": sobj.text,
-              "data": std_years.map( year => table5.so_num(year,subject)[sobj.so_num]),
+              "data": std_years.map( year => orgSobjs.so_num(year,subject)[sobj.so_num]),
             })
           )
           .filter(d => d3.sum(d.data) )
