@@ -90,10 +90,8 @@
   padding: 1px 10px 2px 0px;
 }
 
-.ExplorerNode__SmallTextList { 
+.ExplorerNode__List { 
   @include unstyled-list;
-  font-size: 0.8em;
-  line-height: 1.6;
 }
 
 
