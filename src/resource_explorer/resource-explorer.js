@@ -293,8 +293,10 @@ class ExplorerPage extends React.Component {
             
           </div>
       
-          { is_m2m && 
-            <div dangerouslySetInnerHTML={{__html: text_maker('m2m_warning_text')}} />
+          { is_m2m &&
+            <div className='bs-callout bs-callout-danger'>
+              <div dangerouslySetInnerHTML={{__html: text_maker('MtoM_tag_warning')}} />
+            </div>
           }
           <div>
             {inner_content}

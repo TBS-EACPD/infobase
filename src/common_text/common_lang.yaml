@@ -785,12 +785,6 @@ MtoM_tag_warning:
         </div>
       </div>
     </div>
-m2m_warning_text:
-  transform: [handlebars,markdown]
-  text: |
-    <div class='bs-callout bs-callout-danger'>
-      {{{gt "MtoM_tag_warning"}}}
-    </div>
 
 
 a11y_sort_desc:

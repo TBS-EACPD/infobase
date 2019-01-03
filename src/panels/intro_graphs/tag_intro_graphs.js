@@ -10,6 +10,10 @@ new PanelGraph({
     return subject.root.id !== "GOCO";
   },
 
-  render: () => <TM k="m2m_warning_text"/>,
+  render: () => (
+    <div className='bs-callout bs-callout-danger'>
+      <TM k="MtoM_tag_warning"/>
+    </div>
+  ),
 });
 
