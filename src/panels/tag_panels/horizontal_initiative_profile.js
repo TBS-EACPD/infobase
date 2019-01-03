@@ -5,6 +5,7 @@ import {
   TextPanel,
   Subject,
   formats,
+  infograph_href_template,
 } from '../shared';
 
 const { Dept } = Subject;
@@ -27,10 +28,18 @@ new PanelGraph({
 
     const hi_lookups = subject.lookups || {};
 
+    const lead_dept = Dept.lookup(hi_lookups.lead_dept)
+
     const labels_and_items = _.chain(
       [
         ["hi_name", subject.name],
-        ["hi_lead_dept", Dept.lookup(hi_lookups.lead_dept) && `${Dept.lookup(hi_lookups.lead_dept).name} (${Dept.lookup(hi_lookups.lead_dept).fancy_acronym})`],
+        ["hi_lead_dept", 
+          lead_dept && (
+            <a href={infograph_href_template(lead_dept)}>
+              {`${lead_dept.name} (${lead_dept.fancy_acronym})`}
+            </a>
+          ),
+        ],
         ["hi_governance", hi_lookups.governance],
         ["hi_start_year", hi_lookups.start_year],
         ["hi_end_year", hi_lookups.end_year],
