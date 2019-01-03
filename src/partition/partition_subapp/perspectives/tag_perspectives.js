@@ -1,6 +1,6 @@
 import { Subject } from '../../../models/subject.js';
 import { text_maker } from '../partition_text_provider.js';
-import { TextMaker as StandardTextMaker } from '../../../util_components';
+import { TM, KeyConceptList } from '../../../util_components';
 import { Table } from '../../../core/TableClass.js';
 import { PartitionPerspective } from './PartitionPerspective.js';
 
@@ -15,7 +15,6 @@ import {
   wrap_in_brackets, 
   formats_by_data_type,
 } from './perspective_utils.js';
-const TextMaker = props => <StandardTextMaker text_maker_func={text_maker} {...props} />;
 
 
 const create_tag_hierarchy = function(tag_scheme, data_type) {
@@ -138,7 +137,24 @@ const hwh_perspective_factory = (data_type) => new PartitionPerspective({
     "2": text_maker("program"),
   },
   root_text_func: root_value => text_maker("partiton_default_was_root", {x: root_value}),
-  diagram_note_content: <TextMaker text_key={"MtoM_tag_warning"} />,
+  diagram_note_content: (
+    <KeyConceptList 
+      question_answer_pairs={
+        _.map( 
+          [
+            "MtoM_tag_warning_reporting_level",
+            "MtoM_tag_warning_resource_splitting",
+            "MtoM_tag_warning_double_counting",
+          ], 
+          key => [
+            <TM key={key+"_q"} k={key+"_q"} />, 
+            <TM key={key+"_a"} k={key+"_a"} />,
+          ] 
+        )
+      }
+      compact={true}
+    />
+  ),
 })
 
 const make_goca_exp_perspective = () => goca_perspective_factory("exp");

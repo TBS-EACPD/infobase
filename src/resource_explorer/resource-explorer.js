@@ -5,7 +5,7 @@ import { infograph_href_template } from '../link_utils.js';
 import { StandardRouteContainer } from '../core/NavComponents';
 import { get_col_defs } from '../gen_expl/resource-explorer-common.js';
 import { Subject } from '../models/subject.js';
-import { create_text_maker_component, SpinnerWrapper } from '../util_components.js';
+import { create_text_maker_component, SpinnerWrapper, KeyConceptList } from '../util_components.js';
 import { Details } from '../components/Details.js';
 import classNames from 'classnames';
 
@@ -295,7 +295,22 @@ class ExplorerPage extends React.Component {
       
           { is_m2m &&
             <div className='bs-callout bs-callout-danger'>
-              <div dangerouslySetInnerHTML={{__html: text_maker('MtoM_tag_warning')}} />
+              <KeyConceptList 
+                question_answer_pairs={
+                  _.map( 
+                    [
+                      "MtoM_tag_warning_reporting_level",
+                      "MtoM_tag_warning_resource_splitting",
+                      "MtoM_tag_warning_double_counting",
+                    ], 
+                    key => [
+                      <TM key={key+"_q"} k={key+"_q"} />, 
+                      <TM key={key+"_a"} k={key+"_a"} />,
+                    ] 
+                  )
+                }
+                compact={true}
+              />
             </div>
           }
           <div>

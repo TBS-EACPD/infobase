@@ -1,5 +1,7 @@
 import { TM } from './intro_graph_text_provider.js';
-import { PanelGraph } from "../shared";
+import { PanelGraph, util_components } from "../shared";
+
+const { KeyConceptList } = util_components;
 
 new PanelGraph({
   level: 'tag',
@@ -12,7 +14,22 @@ new PanelGraph({
 
   render: () => (
     <div className='bs-callout bs-callout-danger'>
-      <TM k="MtoM_tag_warning"/>
+      <KeyConceptList 
+        question_answer_pairs={
+          _.map( 
+            [
+              "MtoM_tag_warning_reporting_level",
+              "MtoM_tag_warning_resource_splitting",
+              "MtoM_tag_warning_double_counting",
+            ], 
+            key => [
+              <TM key={key+"_q"} k={key+"_q"} />, 
+              <TM key={key+"_a"} k={key+"_a"} />,
+            ] 
+          )
+        }
+        compact={true}
+      />
     </div>
   ),
 });
