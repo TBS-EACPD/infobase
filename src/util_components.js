@@ -22,6 +22,7 @@ import { FilterTable } from './components/FilterTable.js';
 import { Details } from './components/Details.js';
 import { EmbeddedVideo } from './components/EmbeddedVideo.js';
 import { SpinnerWrapper } from './components/SpinnerWrapper.js';
+import { KeyConceptList } from './components/KeyConceptList.js';
 import {
   UnlabeledTombstone,
   LabeledTombstone,
@@ -105,6 +106,7 @@ export {
   ExternalLink,
   lang,
   SpinnerWrapper,
+  KeyConceptList,
   Select,
   TwoLevelSelect,
   SortIndicators,

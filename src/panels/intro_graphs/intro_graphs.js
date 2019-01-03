@@ -9,20 +9,22 @@ import './hierarchy_panels.js';
 import './tags_related_to_subject_panels.js';
 import './description_panels.js';
 
-const { AutoAccordion } = util_components;
+const { 
+  AutoAccordion,
+  KeyConceptList,
+} = util_components;
 
-const KeyConceptList = ({ question_answer_keys, args }) => (
-  <div>
-    <div className="lg-grid">
-      { _.map(question_answer_keys, key =>
-        <div key={key} className="grid-row">
-          <div className="lg-grid-panel30 key_concept_term"> <TM k={key+"_q"} args={args}/> </div>
-          <div className="lg-grid-panel70 key_concept_def"> <TM k={key+"_a"} args={args}/> </div>
-        </div>
-      )}
-    </div>
-  </div>
-);
+const KeyConceptListWrapper = ({ question_answer_keys, args }) => <KeyConceptList 
+  question_answer_pairs={
+    _.map( 
+      question_answer_keys, 
+      key => [
+        <TM key={key+"_q"} k={key+"_q"} args={args}/>, 
+        <TM key={key+"_a"} k={key+"_a"} args={args}/>,
+      ] 
+    )
+  }
+/>;
 
 
 const curried_render = ({q_a_keys, omit_name_item}) => function({ calculations: { subject } }){
@@ -46,7 +48,7 @@ const curried_render = ({q_a_keys, omit_name_item}) => function({ calculations: 
   return <div className="mrgn-bttm-md">
     <AutoAccordion title={text_maker("some_things_to_keep_in_mind")}>
       <div style={{paddingLeft: '10px', paddingRight: '10px'}}>
-        <KeyConceptList question_answer_keys={ rendered_q_a_keys } args={{subject}}/>
+        <KeyConceptListWrapper question_answer_keys={ rendered_q_a_keys } args={{subject}}/>
       </div>
     </AutoAccordion>
   </div>;
