@@ -218,7 +218,10 @@ const get_tag_panels = subject => {
       'tag_fed_structure',
       'tag_progs_by_dept',
     ],
-    structure: [ 'resource_structure' ],
+    structure: [ 
+      'm2m_warning',
+      'resource_structure',
+    ],
     //Financial turned off indefinitely
     // financial: [
     //   'm2m_warning',

@@ -8,8 +8,7 @@ new PanelGraph({
   key: "m2m_warning",
   footnotes: false,
   calculate(subject){
-    //only display this warning
-    return subject.root.id !== "GOCO";
+    return subject.is_m2m;
   },
 
   render: () => (
