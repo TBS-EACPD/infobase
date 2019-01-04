@@ -32,7 +32,7 @@ See package.json for a list of all build comands.
 #### When do I need to restart/rerun these commands?
 * `npm ci` when package-lock.json has changed (e.g. potentially on pull or branch change). Note: use `npm install` if you are adding a new package/updating a package version
 * `IB_base` must be re-run when the data, svgs, or the css in src/extended-bootstrap changes. Changing branches is often a good reason to re-run IB_base
-* `IB_q/IB_dev/IB_prod` can be left on watch while developing, may need to be restarted if certain errors occur. The most common example of a halting error is when an imported node_module can't be found (may occur on branch change or durring the execution of `npm ci`) 
+* `IB_q/IB_dev/IB_prod` can be left on watch while developing, may need to be restarted if certain errors occur. Again, there are a number of build commands that produce different bundles, so you may need to stop and switch build scripts depending on your requirments. 
 
 ### Visiting a local build
 0. Go to your InfoBase repo in a terminal, e.g. `cd ~/Documents/infobase`
@@ -48,4 +48,5 @@ Route load tests are a quick and dirty form of fairly basic coverage. They just 
 1. Do a full prod build (run both `IB_prod` and `a11y_prod`)
 2. Have an active `sh serve-loopback` process
 3. `npm run headless_route_load_tests`
+New route load tests can be added in `browser-tests/route-load-tests-config.js`.
 
