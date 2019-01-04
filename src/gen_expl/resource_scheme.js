@@ -14,9 +14,40 @@ const {
   Ministry, 
 } = Subject;
 
-function create_resource_hierarchy({hierarchy_scheme,doc}){
+const related_tags_row = (related_tags, subject_type) => {
+  const term = subject_type === "program" ? 
+    text_maker('related_tags_for_program') : 
+    text_maker('related_tags');
+  
+  const list_content = (
+    <ul className="ExplorerNode__List">
+      {_.map(related_tags, related_tag =>
+        <li key={related_tag.id}>
+          <a href={infograph_href_template(related_tag)} >
+            {related_tag.name} 
+          </a>
+        </li>
+      )}
+    </ul>
+  );
+  const def = related_tags.length > 6 ?
+    <HeightClipper 
+      allowReclip={true} 
+      clipHeight={110}
+      children={list_content} 
+    /> :
+    list_content;
 
-  const get_resources = subject => get_resources_for_subject(subject,doc);
+  return {
+    term,
+    def,
+  }
+}
+
+
+function create_resource_hierarchy({hierarchy_scheme, doc}){
+
+  const get_resources = subject => get_resources_for_subject(subject, doc);
 
   const root = {
     root: true,
@@ -49,32 +80,8 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
                     term: text_maker('description'),
                     def: <div dangerouslySetInnerHTML={{__html: tag.description }} />,
                   },
-                  tag.is_m2m && !_.isEmpty( tag.related_tags() ) && {
-                    term: text_maker('related_tags'),
-                    def: (() => {
-                      const list_content = (
-                        <ul className="ExplorerNode__List">
-                          {_.map(tag.related_tags(), related_tag =>
-                            <li key={related_tag.id}>
-                              <a href={infograph_href_template(related_tag)} >
-                                {related_tag.name} 
-                              </a>
-                            </li>
-                          )}
-                        </ul>
-                      );
-  
-                      if ( tag.related_tags().length > 6 ){
-                        return <HeightClipper 
-                          allowReclip={true} 
-                          clipHeight={110}
-                          children={list_content} 
-                        />;
-                      } else {
-                        return list_content;
-                      }
-                    })(),
-                  },
+                  tag.is_m2m && !_.isEmpty( tag.related_tags() ) && 
+                    related_tags_row( tag.related_tags(), "tag" ),
                 ]
               ),  
             },
@@ -128,26 +135,30 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
       case 'tag': {
         if(subject.is_lowest_level_tag){
           return _.chain(subject.programs)
-            .map( prog => ({
-              id: `${parent_id}-${prog.guid}`,
-              data: {
-                name: `${prog.name} (${prog.dept.fancy_acronym || prog.dept.name})`,
-                subject: prog,
-                resources: get_resources(prog),
-                defs: [
-                  {
-                    term: text_maker('org'),
-                    def: <a href={infograph_href_template(prog.dept)}> {prog.dept.name} </a>,
-                  },
-                  {
-                    term: text_maker('description'),
-                    def: <div dangerouslySetInnerHTML={{__html: prog.description }} />,
-                  },
-                ],
-              }, 
-            }))
+            .map( 
+              prog => ({
+                id: `${parent_id}-${prog.guid}`,
+                data: {
+                  name: `${prog.name} (${prog.dept.fancy_acronym || prog.dept.name})`,
+                  subject: prog,
+                  resources: get_resources(prog),
+                  defs: _.compact([
+                    {
+                      term: text_maker('org'),
+                      def: <a href={infograph_href_template(prog.dept)}> {prog.dept.name} </a>,
+                    },
+                    {
+                      term: text_maker('description'),
+                      def: <div dangerouslySetInnerHTML={{__html: prog.description }} />,
+                    },
+                    subject.is_m2m && !_.isEmpty( _.filter(prog.tags_by_scheme[subject.root.id], tag => tag.id !== subject.id) ) && 
+                      related_tags_row( _.filter(prog.tags_by_scheme[subject.root.id], tag => tag.id !== subject.id), "program" ),
+                  ]),
+                }, 
+              })
+            )
             .value();
-        } else if( !_.isEmpty(subject.children_tags) ) {
+        } else if( !_.isEmpty(subject.children_tags) ){
           return _.map(
             subject.children_tags, 
             tag => ({

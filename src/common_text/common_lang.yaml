@@ -842,7 +842,9 @@ related_tags:
   en: Programs under this tag also appear under the following tags
   fr: Les programmes relevant de cette étiquette relèvent également des étiquettes suivantes
 
-
+related_tags_for_program:
+  en: This program also appears under the following tags
+  fr: Ce programme apparaît également sous les étiquettes suivantes
 
 
 explorer_search:
