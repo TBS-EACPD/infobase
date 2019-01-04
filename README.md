@@ -48,5 +48,6 @@ Route load tests are a quick and dirty form of fairly basic coverage. They just 
 1. Do a full prod build (run both `IB_prod` and `a11y_prod`)
 2. Have an active `sh serve-loopback` process
 3. `npm run headless_route_load_tests`
+
 New route load tests can be added in `browser-tests/route-load-tests-config.js`.
 
