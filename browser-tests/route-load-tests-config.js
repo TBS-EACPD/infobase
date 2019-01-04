@@ -12,7 +12,7 @@ module.exports.route_load_tests_config = [
   {
     name: "Budget Tracker",
     route: "budget-measures/budget-measure/overview",
-    test_on: ["eng"],
+    test_on: ["eng", "basic-eng"],
   },
   {
     name: "Bubble Explorer",
