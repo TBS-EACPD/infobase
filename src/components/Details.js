@@ -12,11 +12,22 @@ export class Details extends React.Component {
     const { summary_content, content } = this.props;
     const { isOpen } = this.state;
 
+    const aria_labels = {
+      en: {
+        open: "Content follows, activate to collapse content",
+        closed: "Activate to expand content",
+      },
+      fr: {
+        open: "Le contenu suit, activez pour réduire le contenu",
+        closed: "Actiavte pour élargir le contenu",
+      },
+    };
+
     return <div className="IBDetails"> 
       <button
         className={classNames("IBDetails__Summary", isOpen && "IBDetails__Summary--open")}
         onClick={()=> this.setState({isOpen: !isOpen})}
-        aria-label={isOpen ? "content follows, active to collapse content": "Expand content" }
+        aria-label={aria_labels[window.lang][isOpen ? "open" : "closed"]}
       >
         <span aria-disabled className="IBDetails__TogglerIcon">
           { isOpen ? "▼" : "►" }
