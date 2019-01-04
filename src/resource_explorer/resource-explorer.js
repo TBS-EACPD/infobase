@@ -309,7 +309,6 @@ class ExplorerPage extends React.Component {
                     ] 
                   )
                 }
-                compact={true}
               />
             </div>
           }

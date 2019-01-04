@@ -14,19 +14,6 @@ const {
   KeyConceptList,
 } = util_components;
 
-const KeyConceptListWrapper = ({ question_answer_keys, args }) => <KeyConceptList 
-  question_answer_pairs={
-    _.map( 
-      question_answer_keys, 
-      key => [
-        <TM key={key+"_q"} k={key+"_q"} args={args}/>, 
-        <TM key={key+"_a"} k={key+"_a"} args={args}/>,
-      ] 
-    )
-  }
-/>;
-
-
 const curried_render = ({q_a_keys, omit_name_item}) => function({ calculations: { subject } }){
   let rendered_q_a_keys = _.clone(q_a_keys);
   if(!omit_name_item){
@@ -48,7 +35,17 @@ const curried_render = ({q_a_keys, omit_name_item}) => function({ calculations: 
   return <div className="mrgn-bttm-md">
     <AutoAccordion title={text_maker("some_things_to_keep_in_mind")}>
       <div style={{paddingLeft: '10px', paddingRight: '10px'}}>
-        <KeyConceptListWrapper question_answer_keys={ rendered_q_a_keys } args={{subject}}/>
+        <KeyConceptList 
+          question_answer_pairs={
+            _.map( 
+              rendered_q_a_keys, 
+              key => [
+                <TM key={key+"_q"} k={key+"_q"} args={{subject}}/>, 
+                <TM key={key+"_a"} k={key+"_a"} args={{subject}}/>,
+              ]
+            )
+          }
+        />
       </div>
     </AutoAccordion>
   </div>;

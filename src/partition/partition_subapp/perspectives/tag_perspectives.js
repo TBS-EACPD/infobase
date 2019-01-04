@@ -152,7 +152,6 @@ const hwh_perspective_factory = (data_type) => new PartitionPerspective({
           ] 
         )
       }
-      compact={true}
     />
   ),
 })

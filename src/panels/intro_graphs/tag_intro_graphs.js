@@ -27,7 +27,6 @@ new PanelGraph({
             ] 
           )
         }
-        compact={true}
       />
     </div>
   ),

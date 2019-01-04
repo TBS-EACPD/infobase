@@ -2,7 +2,7 @@ import '../common_css/grid-system.scss';
 import { Fragment } from 'react';
 import { Details } from './Details.js'
 
-const KeyConceptList = ({question_answer_pairs, compact=false}) => (
+const KeyConceptList = ({question_answer_pairs, compact=true}) => (
   <div>
     <div className="lg-grid">
       { _.map(question_answer_pairs, ([question, answer], ix) =>
