@@ -110,7 +110,9 @@
     "browser_route_load_tests": "node browser-tests/route-load-tests.js CHROME",
     "headless_route_load_tests": "node browser-tests/route-load-tests.js CHROME HEADLESS",
     "ci_route_load_tests": "node browser-tests/route-load-tests.js CHROMIUM HEADLESS NO_SANDBOX",
-    "ci_serve": "http-server -s -a 127.0.0.1"
+    "ci_serve": "http-server -s -a 127.0.0.1",
+    "serve-loopback": "http-server -a 127.0.0.1",
+    "serve": "http-server"
   },
   "authors": [
     "Andrew Gibson",

@@ -36,7 +36,7 @@ See package.json for a list of all build comands.
 
 ### Visiting a local build
 0. Go to your InfoBase repo in a terminal, e.g. `cd ~/Documents/infobase`
-1. `sh serve-loopback` to start a server in the InfoBase directory, localhost only
+1. `npm run serve-loopback` to start a server in the InfoBase directory, localhost only
 2. visit localhost:8080/build/InfoBase/index-eng.html
 
 ## Tests
@@ -46,7 +46,7 @@ See package.json for a list of all build comands.
 #### Route load tests
 Route load tests are a quick and dirty form of fairly basic coverage. They just ensure that all routes are able to load without throwing an error. 
 1. Do a full prod build (run both `IB_prod` and `a11y_prod`)
-2. Have an active `sh serve-loopback` process
+2. Have an active `npm run serve-loopback` process
 3. `npm run headless_route_load_tests`
 
 New route load tests can be added in `browser-tests/route-load-tests-config.js`.
