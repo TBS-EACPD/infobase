@@ -796,8 +796,8 @@ a11y_sort_asc:
   fr: Sélectioner pour trier par cette colonne en ordre croissant
 
 everything_search_placeholder:
-  en:  Search for an organization, a program or a keyword
-  fr:  Recherche d'une organisation, d'un programme ou d'un mot-clé
+  en:  Search for organizations, programs or keywords
+  fr:  Recherche des organisations, programmes ou mot-clés
 
 subject_search_placeholder:
   en: Search for a department, a program or a tag
