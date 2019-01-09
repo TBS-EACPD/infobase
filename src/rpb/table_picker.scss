@@ -39,10 +39,9 @@
 }
 
 .tag-cloud-main > li > button:hover,
-.tag-cloud-main > li > button:active,
 .tag-cloud-main > li > button:focus,
- {
-  background-color: $primaryColor;
+{
+  background-color: #679bdf;
 }
 
 .tag-cloud > li.active > button {
