@@ -6,6 +6,12 @@
   border-radius: 10px;
 }
 
+@media screen and (max-width:991px){
+  .pull-down-accordion{
+    margin-top:15px;
+  }
+}
+
 .pull-down-accordion-header,
 .pull-down-accordion-footer {
   font-size: 1.2em;
