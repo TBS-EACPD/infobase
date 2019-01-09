@@ -30,7 +30,7 @@ new PanelGraph({
         ["type", subject.type],
         ["website", subject.website && <ExternalLink href={`https://${subject.website}`} display={subject.website} />],
         ["minister", !_.isEmpty(subject.minister) && _.chain(subject.minister).flatMap( (minister, ix) => [minister, <br key={ix} />]).dropRight().value()],
-        ["mandate", subject.mandate],
+        ["mandate", subject.mandate && <div dangerouslySetInnerHTML={{ __html: subject.mandate }}/>],
         ["legislation", subject.legislation && <ExternalLink href={`https://google.com/search?q=${encodeURI(subject.legislation)}`} display={subject.legislation} />],
         ["fiscal_end_yr", subject.fiscal_end_yr],
         ["auditor", !_.isEmpty(subject.auditor) && _.chain(subject.auditor).flatMap( (auditor, ix) => [auditor, <br key={ix} />]).dropRight().value()],
