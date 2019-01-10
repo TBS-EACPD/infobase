@@ -37,7 +37,7 @@ See package.json for a list of all build comands.
 ### Visiting a local build
 0. Go to your InfoBase repo in a terminal, e.g. `cd ~/Documents/infobase`
 1. `npm run serve-loopback` to start a server in the InfoBase directory, localhost only
-2. visit localhost:8080/build/InfoBase/index-eng.html
+2. open a browser and paste `localhost:8080/build/InfoBase/index-eng.html` in the address bar
 
 ## Tests
 
