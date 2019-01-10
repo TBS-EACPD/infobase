@@ -157,7 +157,7 @@ class InfoGraph_ extends React.Component {
             <TM k="a11y_search_other_infographs" />
           </a>
         </div> :
-        <div className="row mrgn-bttm-md">
+        <div className="row mrgn-bttm-md sd-and-adv-search"> 
           <div 
             className="col-md-8" 
           >
