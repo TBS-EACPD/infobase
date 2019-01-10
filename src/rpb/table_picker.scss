@@ -41,7 +41,7 @@
 .tag-cloud-main > li > button:hover,
 .tag-cloud-main > li > button:focus,
 {
-  background-color: $secondaryColor;
+  background-color: $buttonSecondaryColor;
 }
 
 .tag-cloud > li.active > button {
@@ -150,7 +150,7 @@
   padding: 6px 7px;
   margin: 12px 12px 0 0;
   color: black;
-  background-color: $buttonSecondaryColor;
+  background-color: $tertiaryColor;
   border-radius: 0px 5px 5px 0px;
   border-style: solid;
   border-width: 0 0 0 4px;
