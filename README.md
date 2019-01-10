@@ -25,14 +25,16 @@ The GC InfoBase is an interactive data-visualization tool, transforming complex 
 0. Go to your InfoBase repo in a terminal, e.g. `cd ~/Documents/infobase`
 1. `npm ci` to get node modules (needs to be run least frequently, see following section for when)
 2. `npm run IB_base` to gather and bundle static files (csv's, svg's, extended bootstrap css)
-3. `npm run IB_q` to webpack the source code (`IB_q` builds quickly, requires a browser with ES6 support) or `npm run IB_dev` (transpiles to ES5 so you can test in IE/safari/mobile)
+3. `npm run IB_q` to webpack the source code (`IB_q` builds quickly, requires a browser with ES6 support) or `npm run IB_dev` (transpiles to ES5 so you can test in IE/safari/mobile)\*
 
-See package.json for a list of all build comands.
+\* See package.json for a list of all build comands, there are quite a few.
 
 #### When do I need to restart/rerun these commands?
 * `npm ci` when package-lock.json has changed (e.g. potentially on pull or branch change). Note: use `npm install` if you are adding a new package/updating a package version
-* `IB_base` must be re-run when the data, svgs, or the css in src/extended-bootstrap changes. Changing branches is often a good reason to re-run IB_base
-* `IB_q/IB_dev/IB_prod` can be left on watch while developing, may need to be restarted if certain errors occur. Again, there are a number of build commands that produce different bundles, so you may need to stop and switch build scripts depending on your requirments. 
+* `IB_base` must be re-run when the data, svgs, or the css in src/extended-bootstrap changes. Changing branches is often a good reason to re-run `IB_base`
+* `IB_q` and the like\** can be left running while you work, as they will automatically re-build whenever you save changes to any of the source files that they bundle. 
+
+\** Again, there are a number of build commands that produce different bundles, so you may need to stop and switch build scripts depending on your requirments. A running process can be killed with ctrl+c
 
 ### Visiting a local build
 0. Go to your InfoBase repo in a terminal, e.g. `cd ~/Documents/infobase`
