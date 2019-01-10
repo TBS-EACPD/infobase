@@ -1,17 +1,25 @@
 /* Adjusts different property sizes 
 of the advanced search for mobile */
 
-/* Text shown fully on display > or < or  = to the IPhone/ IPhone Plus variants */
+/* //Text shown fully on display > or < or  = to the IPhone/ IPhone Plus variants */
 @media all and (max-width: 458px){
   .sd-and-adv-search > div > a.btn {
     font-size: 18px;
-    transform: translateX(-22px) scale(0.7,0.7);
+    transform: translateX(-15px) scale(0.8,0.8);
     text-align: left;
     padding: 8px;
     width: fit-content;
   }
 }
 
+@media all and (max-width: 374px) {
+  .sd-and-adv-search > div > a.btn {
+    font-size: 18px;
+    transform: translateX(-22px) scale(0.7,0.7);
+    text-align: left;
+    padding: 8px;
+    width: fit-content;
+}
 
 .no-cursor {
   pointer-events: 'none' /*missing semi colon*/
