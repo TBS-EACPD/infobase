@@ -1,7 +1,7 @@
 /* Adjusts different property sizes 
 of the advanced search for mobile */
 
-/* //display > or  = to the IPhone Plus variants */
+/* // Display > or  = to the IPhone Plus variants */
 @media all and (max-width: 458px){
   .sd-and-adv-search > div > a.btn {
     font-size: 18px;
@@ -12,6 +12,7 @@ of the advanced search for mobile */
   }
 }
 
+/* //Display < than IPhone 6,7,8,X */
 @media all and (max-width: 374px) {
   .sd-and-adv-search > div > a.btn {
     font-size: 18px;
