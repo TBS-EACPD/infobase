@@ -4,10 +4,8 @@
   border: 2px solid $secondaryColor;
   background-color: $secondaryColor;
   border-radius: 10px;
-}
 
-@media screen and (max-width:991px){
-  .pull-down-accordion{
+  @media (max-width:991px){
     margin-top:15px;
   }
 }
