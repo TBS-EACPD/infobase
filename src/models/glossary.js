@@ -31,6 +31,7 @@ class GlossaryEntry extends mix().with(staticStoreMixin) {
     return _.reject(this.get_all(), 'no_def');
   }
 }
+
 const compiled_definitions = _.memoize( glossary_id => marked(GlossaryEntry.lookup(glossary_id)._def_text) );
 
 const glossary_display = item => `<div>
@@ -41,8 +42,15 @@ const glossary_display = item => `<div>
 
 const get_glossary_item_tooltip_html = key => glossary_display(GlossaryEntry.lookup(key));
 
-
 window._DEV_HELPERS.GlossaryEntry = GlossaryEntry;
+
+class TopicGlossaryEntry extends GlossaryEntry {
+  constructor(id,title,def_text,topic){
+    super(id,title,def_text);
+    this.topic = topic;
+  }
+  
+}
 
 export { 
   GlossaryEntry,

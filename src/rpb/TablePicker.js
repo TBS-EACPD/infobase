@@ -125,7 +125,7 @@ class TablePicker extends React.Component {
       <div>
         <TaggedItemCloud 
           exiting={this.state.exiting}
-          items={tables_to_render } 
+          items={tables_to_render} 
           tags={concepts_to_display}
           item_tag_linkage={relevant_linkage}
           onSelectTag={concept_id=>{this.selectConcept(concept_id)}}
