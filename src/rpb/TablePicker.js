@@ -1,6 +1,6 @@
 import './table_picker.scss';
 import { Table } from '../core/TableClass.js';
-import { GlossaryEntry } from '../models/glossary.js';
+import { TopicGlossaryEntry } from '../models/glossary.js';
 import { CSSTransitionGroup } from 'react-transition-group';
 import classNames from 'classnames';
 import concepts_to_display_filter from './table_picker_concept_filter.js';
@@ -15,7 +15,7 @@ function toggleArrayElement(arr,el){
 function get_concepts_for_table(table_obj){
   return _.chain(table_obj.tags)
     .filter(concepts_to_display_filter)
-    .map( tag => GlossaryEntry.lookup(tag) )
+    .map( tag => TopicGlossaryEntry.lookup(tag) )
     .compact()
     .value();
 }
@@ -65,7 +65,8 @@ class TablePicker extends React.Component {
       .uniqBy()
       .map( concept_id => ({ 
         id: concept_id, 
-        display: GlossaryEntry.lookup(concept_id).title,
+        display: TopicGlossaryEntry.lookup(concept_id).title,
+        topic: TopicGlossaryEntry.lookup(concept_id).topic,
       }))
       .value();
 
@@ -108,7 +109,7 @@ class TablePicker extends React.Component {
         display,
         active: _.includes(active_concepts, id),
       }))
-      .sortBy('display')
+      .sortBy('topic')
       .value();
 
     const relevant_linkage = _.chain(linkage)
