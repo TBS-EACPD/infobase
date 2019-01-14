@@ -4,8 +4,9 @@ import { GlossaryEntry } from '../models/glossary.js';
 import { CSSTransitionGroup } from 'react-transition-group';
 import classNames from 'classnames';
 import { 
+  categories,
+  concepts_by_category,
   concept_filter,
-  concept_categories_reversed,
 } from './table_picker_concept_filter.js';
 import { TextMaker } from './rpb_text_provider';
 
@@ -220,17 +221,21 @@ class TaggedItemCloud extends React.Component {
       .value();
     
 
-    /* TODO: these should be put in table_picker_concept_filter*/
-    const categories = ["people","money","timing","organization"];
-
-    const concepts_by_category = _.fromPairs(_.map(categories,cat => [cat,concept_categories_reversed[cat]]));
-
     const tags_by_category = _.fromPairs(
       _.map(categories, cat => [cat,_.chain(concepts_by_category[cat])
         .map(c => _.filter(tags,{ "id": c }))
         .flatten()
         .value()]));
 
+
+    function generate_glossary_link(concept_id){
+      var entry = GlossaryEntry.lookup(concept_id);
+      if(entry.no_def){
+        return('');
+      } else{
+        return(<a href={"#glossary/"+concept_id}>[?]</a>);
+      }
+    }
 
     return <div>
       <div style={{padding: '0px'}}>
@@ -249,7 +254,7 @@ class TaggedItemCloud extends React.Component {
                     className="button-unstyled"
                     onClick={()=>onSelectTag(id)}
                   >
-                    { display }
+                    { display } {generate_glossary_link(id)}
                   </button>
                 </li>
               )}
@@ -257,28 +262,6 @@ class TaggedItemCloud extends React.Component {
           </div>
         ) }
       </div>
-      {/*      <div style={{padding: '0px'}}>
-        <ul className="tag-cloud tag-cloud-main">
-          {_.chain(tags)
-            .map(({display, id, active}) => 
-              <li 
-                key={id}
-                className={classNames(active && 'active')}
-              >
-                <button 
-                  role="checkbox"
-                  aria-checked={!!active}
-                  className="button-unstyled"
-                  onClick={()=>onSelectTag(id)}
-                >
-                  { display }
-                </button>
-              </li>
-            )
-            .value()} 
-        </ul> 
-        }
-      </div> */}
       { _.isEmpty(items) ? 
         <div className="centerer" style={{minHeight: '300px'}}> 
           <p className="large_panel_text"> {noItemsMessage} </p> 

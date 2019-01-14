@@ -196,6 +196,10 @@
 
 }
 
+a:link, a:visited, a:link, a:visited {
+  color: white;
+  padding: 0px 5px;
+}
 /* our app-wide a:visited: black is overriding all the bootstrap white on dark blue styles...  */
 .nav-pills > li.active > a {
   color: white !important;
