@@ -1,25 +1,20 @@
 /* Adjusts different property sizes 
 of the advanced search for mobile */
 
-/* // Display > or  = to the IPhone Plus variants */
-@media (max-width: 458px){
-  .infographic-search-container > div > a.btn {
-    font-size: 18px;
-    transform: translateX(-15px) scale(0.8,0.8);
-    text-align: left;
-    padding: 8px;
-    display: table-cell;
-  }
-}
+.infographic-search-container > div > a.btn {
+  font-size: 18px;
+  text-align: left;
+  padding: 8px;
+  display: table-cell;
 
-/* //Display < than IPhone 6,7,8,X */
-@media (max-width: 374px) {
-  .infographic-search-container > div > a.btn {
-    font-size: 18px;
-    transform: translateX(-22px) scale(0.7,0.7);
-    text-align: left;
-    padding: 8px;
-    display: table-cell;
+  /* // Display > or  = to the IPhone Plus variants */
+  @media (max-width: 458px){
+      transform: translateX(-15px) scale(0.8,0.8);
+  }
+
+  /* //Display < than IPhone 6,7,8,X */
+  @media (max-width: 374px) {
+      transform: translateX(-22px) scale(0.7,0.7);
   }
 }
 
