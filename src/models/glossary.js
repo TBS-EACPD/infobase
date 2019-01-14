@@ -44,13 +44,6 @@ const get_glossary_item_tooltip_html = key => glossary_display(GlossaryEntry.loo
 
 window._DEV_HELPERS.GlossaryEntry = GlossaryEntry;
 
-class TopicGlossaryEntry extends GlossaryEntry {
-  constructor(id,title,def_text,topic){
-    super(id,title,def_text);
-    this.topic = topic;
-  }
-  
-}
 
 export { 
   GlossaryEntry,

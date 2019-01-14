@@ -1,6 +1,6 @@
 import './table_picker.scss';
 import { Table } from '../core/TableClass.js';
-import { TopicGlossaryEntry } from '../models/glossary.js';
+import { GlossaryEntry } from '../models/glossary.js';
 import { CSSTransitionGroup } from 'react-transition-group';
 import classNames from 'classnames';
 import { 
@@ -68,8 +68,8 @@ class TablePicker extends React.Component {
       .uniqBy()
       .map( concept_id => ({ 
         id: concept_id, 
-        display: TopicGlossaryEntry.lookup(concept_id).title,
-        topic: TopicGlossaryEntry.lookup(concept_id).topic,
+        display: GlossaryEntry.lookup(concept_id).title,
+        topic: GlossaryEntry.lookup(concept_id).topic,
       }))
       .value();
 
