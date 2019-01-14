@@ -9,6 +9,7 @@ import './hierarchy_panels.js';
 import './tags_related_to_subject_panels.js';
 import './description_panels.js';
 import MediaQuery from 'react-responsive';
+import classNames from 'classnames';
 
 
 const {
@@ -35,7 +36,7 @@ const curried_render = ({ q_a_keys, omit_name_item }) => function ({ calculation
   }
 
   return <MediaQuery maxWidth={991}>
-    {() => <div className="mrgn-bttm-md" style={{ marginTop: window.innerWidth > 991 ? '0px' : '15px' }}>
+    {(matches) => <div className={classNames("mrgn-bttm-md", matches && "mrgn-tp-md")}>
       <AutoAccordion title={text_maker("some_things_to_keep_in_mind")}>
         <div style={{ paddingLeft: '10px', paddingRight: '10px' }}>
           <KeyConceptList
