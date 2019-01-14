@@ -200,6 +200,25 @@ a:link, a:visited, a:link, a:visited {
   color: white;
   padding: 0px 5px;
 }
+
+/* https://www.w3schools.com/css/css_tooltip.asp */
+
+.tooltiptext {
+  visibility: hidden;
+  color: #fff;
+  background-color: black;
+  text-align: center;
+  border-radius: 0px;
+  padding: 0px 5px;
+  position: absolute;
+  z-index: 1;
+}
+
+.glossarylink:hover .tooltiptext {
+  visibility: visible;
+  font-size: 0.8em;
+}
+
 /* our app-wide a:visited: black is overriding all the bootstrap white on dark blue styles...  */
 .nav-pills > li.active > a {
   color: white !important;

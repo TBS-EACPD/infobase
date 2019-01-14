@@ -233,7 +233,9 @@ class TaggedItemCloud extends React.Component {
       if(entry.no_def){
         return('');
       } else{
-        return(<a href={"#glossary/"+concept_id}>[?]</a>);
+        return(<a className="glossarylink" href={"#glossary/"+concept_id}>
+              [?] <span className="tooltiptext"><TextMaker text_key="glossary_link_title" /></span>
+        </a>);
       }
     }
 
