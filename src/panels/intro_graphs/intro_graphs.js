@@ -8,48 +8,52 @@ import './program_meta_graphs.js';
 import './hierarchy_panels.js';
 import './tags_related_to_subject_panels.js';
 import './description_panels.js';
+import MediaQuery from 'react-responsive';
 
-const { 
+
+const {
   AutoAccordion,
   KeyConceptList,
 } = util_components;
 
-const curried_render = ({q_a_keys, omit_name_item}) => function({ calculations: { subject } }){
+const curried_render = ({ q_a_keys, omit_name_item }) => function ({ calculations: { subject } }) {
   let rendered_q_a_keys = _.clone(q_a_keys);
-  if(!omit_name_item){
-    if(shouldAddOrgNameItem(subject)){
+  if (!omit_name_item) {
+    if (shouldAddOrgNameItem(subject)) {
       rendered_q_a_keys.unshift('applied_title');
     } else {
       rendered_q_a_keys.push('different_org_names_static');
     }
   }
 
-  if(subject.level === 'crso'){
-    if(subject.is_cr){
-      rendered_q_a_keys = [ 'what_are_CR', ...rendered_q_a_keys ];
+  if (subject.level === 'crso') {
+    if (subject.is_cr) {
+      rendered_q_a_keys = ['what_are_CR', ...rendered_q_a_keys];
     } else {
-      rendered_q_a_keys = [ 'what_are_SOut', ...rendered_q_a_keys ];
+      rendered_q_a_keys = ['what_are_SOut', ...rendered_q_a_keys];
     }
   }
 
-  return <div className="mrgn-bttm-md">
-    <AutoAccordion title={text_maker("some_things_to_keep_in_mind")}>
-      <div style={{paddingLeft: '10px', paddingRight: '10px'}}>
-        <KeyConceptList 
-          question_answer_pairs={
-            _.map( 
-              rendered_q_a_keys, 
-              key => [
-                <TM key={key+"_q"} k={key+"_q"} args={{subject}}/>, 
-                <TM key={key+"_a"} k={key+"_a"} args={{subject}}/>,
-              ]
-            )
-          }
-        />
-      </div>
-    </AutoAccordion>
-  </div>;
-
+  return <MediaQuery maxWidth={991}>
+    {() => <div className="mrgn-bttm-md" style={{ marginTop: window.innerWidth > 991 ? '0px' : '15px' }}>
+      <AutoAccordion title={text_maker("some_things_to_keep_in_mind")}>
+        <div style={{ paddingLeft: '10px', paddingRight: '10px' }}>
+          <KeyConceptList
+            question_answer_pairs={
+              _.map(
+                rendered_q_a_keys,
+                key => [
+                  <TM key={key + "_q"} k={key + "_q"} args={{ subject }} />,
+                  <TM key={key + "_a"} k={key + "_a"} args={{ subject }} />,
+                ]
+              )
+            }
+          />
+        </div>
+      </AutoAccordion>
+    </div>
+    }
+  </MediaQuery>
 };
 
 const shouldAddOrgNameItem = subject => subject.is('dept') && subject.applied_title && subject.name !== subject.applied_title;
@@ -64,8 +68,8 @@ _.each(['gov', 'dept', 'program', 'tag', 'crso'], lvl => {
     source: false,
     calculate: _.constant(true),
 
-    render: curried_render({ 
-      q_a_keys: [ 
+    render: curried_render({
+      q_a_keys: [
         'where_does_authority_come_from',
         'what_are_voted_auth',
         'what_are_stat_auth',
@@ -116,7 +120,7 @@ _.each(['gov', 'dept'], lvl => {
     source: false,
     calculate: _.constant(true),
 
-    render: curried_render({ 
+    render: curried_render({
       q_a_keys: [
         'who_is_fps',
         'what_are_ftes',
@@ -140,7 +144,7 @@ new PanelGraph({
   source: false,
   calculate: _.constant(true),
 
-  render: curried_render({ 
+  render: curried_render({
     q_a_keys: [
       'what_is_tagging',
       'what_is_prog_tagging',
@@ -163,7 +167,7 @@ _.each(['gov', 'dept'], lvl => {
     key: "march_snapshot_warning",
     calculate: _.constant(true),
 
-    render(){
+    render() {
       return (
         <div className="alert alert-info alert-no-symbol alert--is-bordered large_panel_text">
           <TM k="march_snapshot_warning" />
@@ -171,7 +175,7 @@ _.each(['gov', 'dept'], lvl => {
       );
     },
   });
-  
+
   new PanelGraph({
     level: lvl,
     static: true,
@@ -186,5 +190,5 @@ _.each(['gov', 'dept'], lvl => {
       </div>
     ),
   });
-  
+
 });
