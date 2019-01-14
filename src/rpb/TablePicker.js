@@ -3,7 +3,10 @@ import { Table } from '../core/TableClass.js';
 import { TopicGlossaryEntry } from '../models/glossary.js';
 import { CSSTransitionGroup } from 'react-transition-group';
 import classNames from 'classnames';
-import concepts_to_display_filter from './table_picker_concept_filter.js';
+import { 
+  concept_filter,
+  concept_categories_reversed,
+} from './table_picker_concept_filter.js';
 import { TextMaker } from './rpb_text_provider';
 
 function toggleArrayElement(arr,el){
@@ -14,8 +17,8 @@ function toggleArrayElement(arr,el){
 
 function get_concepts_for_table(table_obj){
   return _.chain(table_obj.tags)
-    .filter(concepts_to_display_filter)
-    .map( tag => TopicGlossaryEntry.lookup(tag) )
+    .filter(concept_filter)
+    .map( tag => GlossaryEntry.lookup(tag) )
     .compact()
     .value();
 }
@@ -216,26 +219,66 @@ class TaggedItemCloud extends React.Component {
       .map( group => _.map(group, 'item') )
       .value();
     
+
+    /* TODO: these should be put in table_picker_concept_filter*/
+    const categories = ["people","money","timing","organization"];
+
+    const concepts_by_category = _.fromPairs(_.map(categories,cat => [cat,concept_categories_reversed[cat]]));
+
+    const tags_by_category = _.fromPairs(
+      _.map(categories, cat => [cat,_.chain(concepts_by_category[cat])
+        .map(c => _.filter(tags,{ "id": c }))
+        .flatten()
+        .value()]));
+
+
     return <div>
       <div style={{padding: '0px'}}>
-        <ul className="tag-cloud tag-cloud-main">
-          {_.map(tags, ({display, id, active}) => 
-            <li 
-              key={id}
-              className={classNames(active && 'active')}
-            >
-              <button 
-                role="checkbox"
-                aria-checked={!!active}
-                className="button-unstyled"
-                onClick={()=>onSelectTag(id)}
-              >
-                { display }
-              </button>
-            </li>
-          )} 
-        </ul> 
+        {_.map(categories, cat => 
+          <div style={{padding: '0px'}}>
+            Related to {cat}:
+            <ul className="tag-cloud tag-cloud-main">
+              {_.map(tags_by_category[cat],({display, id, active}) => 
+                <li 
+                  key={id}
+                  className={classNames(active && 'active')}
+                >
+                  <button 
+                    role="checkbox"
+                    aria-checked={!!active}
+                    className="button-unstyled"
+                    onClick={()=>onSelectTag(id)}
+                  >
+                    { display }
+                  </button>
+                </li>
+              )}
+            </ul> 
+          </div>
+        ) }
       </div>
+      {/*      <div style={{padding: '0px'}}>
+        <ul className="tag-cloud tag-cloud-main">
+          {_.chain(tags)
+            .map(({display, id, active}) => 
+              <li 
+                key={id}
+                className={classNames(active && 'active')}
+              >
+                <button 
+                  role="checkbox"
+                  aria-checked={!!active}
+                  className="button-unstyled"
+                  onClick={()=>onSelectTag(id)}
+                >
+                  { display }
+                </button>
+              </li>
+            )
+            .value()} 
+        </ul> 
+        }
+      </div> */}
       { _.isEmpty(items) ? 
         <div className="centerer" style={{minHeight: '300px'}}> 
           <p className="large_panel_text"> {noItemsMessage} </p> 
