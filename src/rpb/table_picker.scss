@@ -219,6 +219,10 @@ a:link, a:visited, a:link, a:visited {
   font-size: 0.8em;
 }
 
+img.glossaryitem {
+  vertical-align:middle;
+}
+
 /* our app-wide a:visited: black is overriding all the bootstrap white on dark blue styles...  */
 .nav-pills > li.active > a {
   color: white !important;

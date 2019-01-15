@@ -9,6 +9,7 @@ import {
   concept_filter,
 } from './table_picker_concept_filter.js';
 import { TextMaker } from './rpb_text_provider';
+import { get_static_url } from '../core/request_utils.js';
 
 function toggleArrayElement(arr,el){
   return _.includes(arr,el) ?
@@ -234,7 +235,8 @@ class TaggedItemCloud extends React.Component {
         return('');
       } else{
         return(<a className="glossarylink" href={"#glossary/"+concept_id}>
-              [?] <span className="tooltiptext"><TextMaker text_key="glossary_link_title" /></span>
+          <img className="glossaryitem" width={18} aria-hidden="true" src={get_static_url('svg/not-available-white.svg')}/>
+          <span className="tooltiptext"><TextMaker text_key="glossary_link_title" /></span>
         </a>);
       }
     }
