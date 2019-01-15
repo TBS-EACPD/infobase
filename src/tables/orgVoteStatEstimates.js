@@ -262,7 +262,6 @@ Statistics.create_and_register({
     const q = table.q(subject);
     const voted = trivial_text_maker("voted");
     const stat = trivial_text_maker("stat");
-    //var tabled_mains_next_year = this.by_estimates_doc("next_year_estimates",c.dept,true)[mains];
     add("voted_est_in_year",table.voted_stat(in_year_col,c.dept,true)[voted] || 0);
     add("stat_est_in_year",table.voted_stat(in_year_col,c.dept,true)[stat] || 0);
     _.each(est_cols, yr => {
@@ -279,11 +278,11 @@ Statistics.create_and_register({
     add('in_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: in_year_col}) )
     add('last_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: last_year_col}) )
 
-    //add({
-    // "key" : "mains_tabled_diff",
-    // "value" : (c.dept_tabled_est_next_year_estimates - c.dept_tabled_est_in_year_estimates)/c.dept_tabled_est_in_year_estimates,
-    // "type" : "percentage"
-    //});
+    add({
+      "key": "mains_tabled_diff",
+      "value": (c.dept_tabled_est_next_year_estimates - c.dept_tabled_est_in_year_estimates)/c.dept_tabled_est_in_year_estimates,
+      "type": "percentage",
+    });
   
     add({
       "key": "voted_percent_est_in_year" ,
@@ -337,7 +336,6 @@ Statistics.create_and_register({
       _.property(in_year_col)
     );
     add('tabled_voted_mains_est_in_year', voted_in_mains);
-    //var tabled_mains_next_year = this.by_estimates_doc("next_year_estimates",false,true)[mains];
 
     add("dept_number", dept_number);
     add("voted_num_est_in_year",voted_num_in_year);
@@ -345,7 +343,7 @@ Statistics.create_and_register({
     add("voted_central_num_est_in_year",voted_central_num_in_year);
     add("voted_non_centralnum_est_in_year",voted_num_in_year - voted_central_num_in_year);
 
-    //add("stat_num_in_year",this.voted_stat("in_year_estimates", false,false)[stat].length);
+    add("stat_num_in_year",this.voted_stat("in_year_estimates", false,false)[stat].length);
     add("voted_est_in_year",table.voted_stat(in_year_col,false)[voted] || 0);
     add("stat_est_in_year",table.voted_stat(in_year_col,false)[stat] || 0);
 
@@ -355,13 +353,13 @@ Statistics.create_and_register({
     _.each(estimates_years, yr=> { add("tabled_"+yr, q.sum(yr+"_estimates")) } );
 
     // does nothing:
-    // add("tabled_next_year",q.sum("next_year_estimates"));
+    add("tabled_next_year", q.sum("next_year_estimates"));
     
-    //add({
-    // "key" : "mains_tabled_diff",
-    // "value" : (c.gov_tabled_est_next_year - c.gov_tabled_est_in_year)/c.gov_tabled_est_in_year,
-    // "type" : "percentage"
-    //});
+    add({
+      "key": "mains_tabled_diff",
+      "value": (c.gov_tabled_est_next_year - c.gov_tabled_est_in_year)/c.gov_tabled_est_in_year,
+      "type": "percentage",
+    });
 
     add({
       "key": "voted_percent_est_in_year" ,

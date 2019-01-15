@@ -15,6 +15,7 @@ const years = {
     "{{est_last_year_2}}",
     "{{est_last_year}}",
     "{{est_in_year}}",
+    "{{est_next_year}}",
   ],
   planning_years: [
     '{{planning_year_1}}',

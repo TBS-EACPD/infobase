@@ -296,7 +296,7 @@ partition_interim_estimates_def:
     <div class="lg-grid">
       <div class="grid-row">
         <div> 
-          On February 12th 2018, the 2018-19 [Interim Estimates]{{gl "INTER_EST"}} were tabled in Parliament to begin the new fiscal year. This funding supports the government’s financial requirements for the first three months of the fiscal year.
+          On [TODO: WHO KNOWS] 2019, the {{est_next_year}} [Interim Estimates]{{gl "INTER_EST"}} were tabled in Parliament to begin the new fiscal year. This funding supports the government’s financial requirements for the first three months of the fiscal year.
         </div>
       </div>
     </div> 
@@ -304,7 +304,7 @@ partition_interim_estimates_def:
     <div class="lg-grid">
       <div class="grid-row">
         <div> 
-          Le [Budget provisoire]{{gl "INTER_EST"}} des dépenses pour 2018-2019 a été déposé le 12 février 2018 afin de disposer d’un financement suffisant au début du nouvel exercice. Ce financement vise à soutenir les besoins financiers du gouvernement pour les trois premiers mois de l’exercice.
+          Le [Budget provisoire]{{gl "INTER_EST"}} des dépenses pour {{est_next_year}} a été déposé le [TODO: WHO KNOWS] 2019 afin de disposer d’un financement suffisant au début du nouvel exercice. Ce financement vise à soutenir les besoins financiers du gouvernement pour les trois premiers mois de l’exercice.
         </div>
       </div>
     </div>
