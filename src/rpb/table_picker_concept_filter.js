@@ -26,12 +26,12 @@ const concept_categories = {
   VOTED: "money",
   STAT: "money",
   PEOPLE: "people",
-  SOBJ: "organization",
+  SOBJ: "process",
   PA: "timing",
-  GOV_FRAM: "organization",
+  GOV_FRAM: "orgprocessanization",
   PLANNED_EXP: "money",
-  PROG: "organization",
-  SOBJ10: "organization",
+  PROG: "process",
+  SOBJ10: "process",
   EST_PROC: "todelete",
   FPS: "todelete",
   FTE: "people",
@@ -42,10 +42,10 @@ const concept_categories_reversed = {
   timing: ["QFR","PA"],
   money: ["AUTH","EXP","VOTED","STAT","PLANNED_EXP"],
   people: ["PEOPLE","FTE"],
-  organization: ["SOBJ","GOV_FRAM","PROJ","SOBJ10"],
+  process: ["SOBJ","GOV_FRAM","PROJ","SOBJ10"],
 }
 
-const categories = ["people","money","timing","organization"];
+const categories = ["people","money","timing","process"];
 const concepts_by_category = _.fromPairs(_.map(categories,cat => [cat,concept_categories_reversed[cat]]));
 
 export {
