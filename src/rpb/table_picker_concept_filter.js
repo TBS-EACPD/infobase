@@ -28,11 +28,11 @@ const concept_categories = {
   PEOPLE: "people",
   SOBJ: "process",
   PA: "timing",
-  GOV_FRAM: "orgprocessanization",
+  GOV_FRAM: "process",
   PLANNED_EXP: "money",
   PROG: "process",
   SOBJ10: "process",
-  EST_PROC: "todelete",
+  EST_PROC: "process",
   FPS: "todelete",
   FTE: "people",
 };
@@ -42,7 +42,7 @@ const concept_categories_reversed = {
   timing: ["QFR","PA"],
   money: ["AUTH","EXP","VOTED","STAT","PLANNED_EXP"],
   people: ["PEOPLE","FTE"],
-  process: ["SOBJ","GOV_FRAM","PROJ","SOBJ10"],
+  process: ["SOBJ","GOV_FRAM","PROJ","SOBJ10","EST_PROC"],
 }
 
 const categories = ["people","money","timing","process"];
