@@ -1,4 +1,4 @@
-import './infographic.css';
+import './infographic.scss';
 import text from "./infographic.yaml";
 
 import { StandardRouteContainer } from '../core/NavComponents';
