@@ -4,9 +4,10 @@
   display: flex;
   flex-direction:row;
   flex-wrap: wrap;
+  justify-content: center;
   border-radius: 5px;
   padding: 0px;
-  margin: 10px 0px; 
+  margin: 5px 0px 0px 10px; 
 }
 
 .tag-cloud.tag-cloud-legend {
@@ -16,7 +17,7 @@
 
 .tag-cloud > li {
   display: flex;
-  flex: 1 1 auto;
+  flex: 0 0 auto;
   padding: 0px;
   border: none;
   margin: 1px;
@@ -27,25 +28,41 @@
 
 .tag-cloud > li > button {
   display: flex;
-  flex: 1 1 auto;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: center;
   text-align: center;
   background-color: $buttonPrimaryColor;
-  padding: 5px 20px 5px 20px;
-  border-radius: 3px;
+  padding: 5px 0px 5px 20px;
+  border-radius: 10px 0px 0px 10px;
   color: #fff;
   border: none;
 }
 
-.tag-cloud-main > li > button:hover,
-.tag-cloud-main > li > button:focus,
+.tag-cloud > li > span.buttonhelper {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: $buttonPrimaryColor;
+  padding: 0px 10px 0px 10px;
+  border-radius: 0px 10px 10px 0px;
+  border:none;
+  color: #fff;
+}
+
+.tag-cloud-main > li:hover > button,
+.tag-cloud-main > li:focus > button,
+.tag-cloud-main > li:hover > span,
+.tag-cloud-main > li:focus > span,
 {
   background-color: $buttonSecondaryColor;
 }
 
-.tag-cloud > li.active > button {
-  color: #fff;
+.tag-cloud > li.active > button,
+.tag-cloud > li.active > span,
+{
   background-color: $primaryColor;
 }
 
@@ -196,22 +213,21 @@
 
 }
 
-/* https://www.w3schools.com/css/css_tooltip.asp */
 
 .tooltiptext {
   visibility: hidden;
   color: #fff;
-  background-color: black;
+  background-color: $primaryColor;
   text-align: center;
-  border-radius: 0px;
+  border-radius: 5px;
   padding: 0px 5px;
   position: absolute;
   z-index: 1;
+  font-size: 0.8em;
 }
 
 .glossarylink:hover .tooltiptext {
   visibility: visible;
-  font-size: 0.8em;
 }
 
 img.glossaryitem {

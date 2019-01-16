@@ -236,16 +236,17 @@ class TaggedItemCloud extends React.Component {
       } else{
         return(<a className="glossarylink" href={"#glossary/"+concept_id}>
           <img className="glossaryitem" width={18} aria-hidden="true" src={get_static_url('svg/not-available-white.svg')}/>
-          <span className="tooltiptext"><TextMaker text_key="glossary_link_title" /></span>
+          <div className="tooltiptext"><TextMaker text_key="glossary_link_title" /></div>
         </a>);
       }
     }
 
+
     return <div>
       <div style={{padding: '0px'}}>
         {_.map(categories, cat => 
-          <div style={{padding: '0px'}}>
-            Related to {cat}:
+          <div className="centerer" style={{padding: '0px'}}>
+            Related to {cat}
             <ul className="tag-cloud tag-cloud-main">
               {_.map(tags_by_category[cat],({display, id, active}) => 
                 <li 
@@ -258,8 +259,11 @@ class TaggedItemCloud extends React.Component {
                     className="button-unstyled"
                     onClick={()=>onSelectTag(id)}
                   >
-                    { display } {generate_glossary_link(id)}
+                    { display } 
                   </button>
+                  <span className="buttonhelper">
+                    {generate_glossary_link(id)}
+                  </span>
                 </li>
               )}
             </ul> 
