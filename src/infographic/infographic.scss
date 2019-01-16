@@ -2,20 +2,15 @@
 of the advanced search for mobile */
 
 .infographic-search-container > div > a.btn {
-  font-size: 18px;
-  text-align: left;
-  padding: 8px;
-  display: table-cell;
-
   /* // Display > or  = to the IPhone Plus variants */
   @media (max-width: 458px){
-      transform: translateX(-15px) scale(0.8,0.8);
+      padding: 6px;
+      font-size: 14px
   }
+}
 
-  /* //Display < than IPhone 6,7,8,X */
-  @media (max-width: 374px) {
-      transform: translateX(-22px) scale(0.7,0.7);
-  }
+.col-md-4 {
+  display: inline-block;
 }
 
 
