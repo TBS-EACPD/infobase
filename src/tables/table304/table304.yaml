@@ -24,4 +24,4 @@ table304:
   fr: |
     {{{gt "table304_short"}}}
 
-    {{> ochro_includes_excludes_en}}
+    {{> ochro_includes_excludes_fr}}
