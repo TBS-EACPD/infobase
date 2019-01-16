@@ -634,7 +634,6 @@ interim_mains:
     {{est_next_year}} Interim Estimates
   fr: Budget provisoire des dépenses {{est_next_year}}
 
-
 tabled_estimates:
   transform: [handlebars]
   en: Currently Tabled But Not Approved Estimates

@@ -2,7 +2,7 @@ key,en,fr
 qfr_month_name,June 30,30 juin
 qfr_in_year_end,"March 31st, 2019",31 mars 2019
 qfr_last_year_end,"March 31st, 2018",31 mars 2018
-last_estimates,Supplementary Estimates A,Budget supplémentaire des dépenses A
+last_estimates,Supplementary Estimates B,Budget supplémentaire des dépenses B
 quarter_name,Q1,premier trimestre
 qfr_month_quarter_names,April to June,avril à juin
 in_year_month_name,April,April
@@ -20,6 +20,7 @@ est_last_year,2017-18,2017-2018
 est_last_year_2,2016-17,2016-2017
 est_last_year_3,2015-16,2015-2016
 est_last_year_4,2014-15,2014-2015
+interim_mains_table_date,TODO-WHO-KNOWS 2019,TODO-WHO-KNOWS 2019
 lapse_in_year,2016-17,2016-2017
 lapse_last_year,2015-16,2015-2016
 planning_year_1,2018-19,2018-2019
