@@ -3,16 +3,13 @@ of the advanced search for mobile */
 
 .infographic-search-container > div > a.btn {
   /* // Display > or  = to the IPhone Plus variants */
-  @media (max-width: 458px){
+  @media(max-width:991px){
+      display: inline-block;
+      width: auto;
       padding: 6px;
       font-size: 14px
   }
 }
-
-.col-md-4 {
-  display: inline-block;
-}
-
 
 .no-cursor {
   pointer-events: 'none';

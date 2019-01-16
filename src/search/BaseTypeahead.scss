@@ -2,19 +2,8 @@
 
 .rbt-input-hint-container > .form-control {
   width: 100%;
-
-  //MOBILE VISUAL OPTIMIZATION
-  
-  //Text shown fully on display > or = to the IPhone Plus variants
-  @media all and (max-width: 458px) {
-        font-size: 15px;
-  }
-  //Text shown fully on display > or = to the IPhone 6/7/8/X
-  @media all and (max-width: 394px) {
-        font-size: 14px;
-  }
-  @media all and (max-width: 374px) {
-        font-size: 13px;
+  @media(max-width:991px){
+      font-size: 14px;
   }
 }
 
