@@ -13,7 +13,7 @@ import {
   businessConstants,
 } from './table_common';
 const { estimates_years } = years;
-const est_cols = _.map(estimates_years, yr=> yr+"_estimates");
+const est_cols = _.map(estimates_years, yr => yr+"_estimates");
 const in_year_col = est_cols[4];
 const last_year_col = est_cols[3];
 
@@ -44,11 +44,13 @@ export default {
 
   source: ["ESTIMATES"],
 
-  "name": { "en": "Tabled Estimates",
+  "name": { 
+    "en": "Tabled Estimates",
     "fr": "Budgets déposés",
   },
 
-  "title": { "en": "Tabled Estimates ($000)",
+  "title": {
+    "en": "Tabled Estimates ($000)",
     "fr": "Budgets déposés (en milliers de dollars)",
   },
 
@@ -277,12 +279,6 @@ Statistics.create_and_register({
 
     add('in_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: in_year_col}) )
     add('last_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: last_year_col}) )
-
-    add({
-      "key": "mains_tabled_diff",
-      "value": (c.dept_tabled_est_next_year_estimates - c.dept_tabled_est_in_year_estimates)/c.dept_tabled_est_in_year_estimates,
-      "type": "percentage",
-    });
   
     add({
       "key": "voted_percent_est_in_year" ,
@@ -343,7 +339,6 @@ Statistics.create_and_register({
     add("voted_central_num_est_in_year",voted_central_num_in_year);
     add("voted_non_centralnum_est_in_year",voted_num_in_year - voted_central_num_in_year);
 
-    add("stat_num_in_year",this.voted_stat("in_year_estimates", false,false)[stat].length);
     add("voted_est_in_year",table.voted_stat(in_year_col,false)[voted] || 0);
     add("stat_est_in_year",table.voted_stat(in_year_col,false)[stat] || 0);
 
@@ -351,16 +346,7 @@ Statistics.create_and_register({
     add('last_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: last_year_col}) )
 
     _.each(estimates_years, yr=> { add("tabled_"+yr, q.sum(yr+"_estimates")) } );
-
-    // does nothing:
-    add("tabled_next_year", q.sum("next_year_estimates"));
     
-    add({
-      "key": "mains_tabled_diff",
-      "value": (c.gov_tabled_est_next_year - c.gov_tabled_est_in_year)/c.gov_tabled_est_in_year,
-      "type": "percentage",
-    });
-
     add({
       "key": "voted_percent_est_in_year" ,
       "value": c.gov_voted_est_in_year/c.gov_tabled_est_in_year,
