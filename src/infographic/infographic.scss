@@ -2,7 +2,6 @@
 of the advanced search for mobile */
 
 .infographic-search-container > div > a.btn {
-  /* // Display > or  = to the IPhone Plus variants */
   @media(max-width:991px){
       display: inline-block;
       width: auto;
