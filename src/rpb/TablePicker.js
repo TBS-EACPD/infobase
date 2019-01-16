@@ -245,8 +245,8 @@ class TaggedItemCloud extends React.Component {
     return <div>
       <div style={{padding: '0px'}}>
         {_.map(categories, cat => 
-          <div className="centerer" style={{padding: '0px'}}>
-            Related to {cat}
+          <div className="tag-cloud centerer" style={{padding: '0px'}}>
+            <div className="tag-cloud-label">Related to {cat}</div>
             <ul className="tag-cloud tag-cloud-main">
               {_.map(tags_by_category[cat],({display, id, active}) => 
                 <li 

@@ -1,53 +1,62 @@
 @import '../common_css/common-variables';
 
-.tag-cloud.tag-cloud-main {
+.tag-cloud {
   display: flex;
   flex-direction:row;
   flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.tag-cloud-label {
+  font-size: 1em;
+  text-align: right;
+  padding: 5px;
+}
+
+
+.tag-cloud-main {
+  font-size: 1em;
+  flex-wrap: wrap;
+  width: 70%;
   justify-content: center;
-  border-radius: 5px;
+  border-width: 0px 0px 0px 3px;
+  border-color: $buttonPrimaryColor;
+  border-style: solid;
+  border-radius: 0px;
   padding: 0px;
-  margin: 5px 0px 0px 10px; 
 }
 
-.tag-cloud.tag-cloud-legend {
-  display: inline;
-}
-
-
-.tag-cloud > li {
+.tag-cloud-main > li {
   display: flex;
   flex: 0 0 auto;
   padding: 0px;
   border: none;
   margin: 1px;
   background-color: transparent;
-  line-height: 1.8em;;
+  line-height: 1.8em;
   font-size: 1em;
 }
 
-.tag-cloud > li > button {
+.tag-cloud-main > li > button {
   display: flex;
   flex: 0 0 auto;
-  align-items: center;
-  justify-content: center;
   text-align: center;
   background-color: $buttonPrimaryColor;
-  padding: 5px 0px 5px 20px;
-  border-radius: 10px 0px 0px 10px;
+  padding: 3px 0px 3px 10px;
+  border-radius: 8px 0px 0px 8px;
   color: #fff;
   border: none;
 }
 
-.tag-cloud > li > span.buttonhelper {
+.tag-cloud-main > li > span.buttonhelper {
   display: flex;
   flex: 0 0 auto;
   align-items: center;
-  justify-content: center;
   text-align: center;
   background-color: $buttonPrimaryColor;
   padding: 0px 10px 0px 10px;
-  border-radius: 0px 10px 10px 0px;
+  border-radius: 0px 8px 8px 0px;
   border:none;
   color: #fff;
 }
@@ -212,7 +221,6 @@
   transition: max-height 500ms ease-out, opacity 500ms ease-out;
 
 }
-
 
 .tooltiptext {
   visibility: hidden;
