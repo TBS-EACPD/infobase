@@ -58,7 +58,12 @@ Cette nouvelle structure, qui sera adoptée par toutes les organisations d’ici
 
 
 Dans le RRM, les ministères et organismes donnent de l’information sur les progrès accomplis vers l’atteinte de leurs objectifs stratégiques. Les RRM couvrent l’exercice précédent et sont habituellement déposés à l’automne."
-"EE","Équité en matière d’emploi",""
+"EE","Loi sur l'équité en matière d'emploi","La Loi sur l'équité en matière d'emploi a pour but de réaliser l'égalité en milieu de travail en corrigeant les désavantages subis, dans le domaine de l'emploi, en déterminant et en éliminant les obstacles à l'emploi des membres des 4 groupes visés par l'équité en matière d'emploi suivants :
+
+* les femmes;
+* les Autochtones;
+* les personnes handicapées;
+* les membres de minorités visibles."
 "EFF_ID","Efficience","Mesure dans laquelle les ressources sont utilisées de manière à produire un plus grand niveau d’extrants avec le même niveau d’intrants, ou le même niveau d’extrants avec un plus faible niveau d’intrants. Les niveaux d’intrants et d’extrants peuvent se traduire par des hausses ou des baisses de qualité, de quantité, ou les deux."
 "EI_IGOC","Instruments habilitants","Instrument utilisé pour créer une organisation et lui donner les moyens de faire quelque chose"
 "EST_DOC","Document budgétaires","Les documents budgétaires comprennent :
@@ -86,6 +91,7 @@ Nota : le reste de l'administration publique centrale est composée d’organisa
 "FULL_PEOPLE","Employé à temps plein","Employé à plein temps correspond à une personne nommée à la fonction publique qui doit habituellement effectuer le nombre d'heures de travail prévu dans la convention collective applicable ou déterminé par l'employeur, le cas échéant."
 "FY","Exercice financier","L’année financière du gouvernement du Canada commence le 1er avril et se termine le 31 mars. Elle peut varier dans certaines organisations (p. ex. les sociétés d’État)."
 "G_AND_C","Crédit pour subventions et contributions","Le crédit pour subventions et contributions est une autorisation de crédit non législative (en application d'une loi de crédits) pour des dépenses consacrées à des subventions et des contributions (c.-à-d. un programme de subventions et de contributions dont les montants s'élèvent à 5 millions de dollars ou plus)."
+"GENDER","Sexe",""
 "GOV_FRAM","Cadre pangouvernemental","Le cadre pangouvernemental établit les liens entre les contributions financières et non financières des ministères, organismes et sociétés d'État qui reçoivent des crédits et un ensemble de seize grands secteurs d'activités du gouvernement du Canada dans quatre secteurs de dépenses, notamment les affaires économiques, sociales, internationales et gouvernementales."
 "GRANT_TP","Subvention","Une subvention est un paiement de transfert effectué en fonction de critères d'admissibilité préétablis et d’autres critères . Une subvention n'est ni assujettie à une reddition de comptes par le bénéficiaire ni, en règle générale, à une vérification par le ministère. Le bénéficiaire peut  tenu de faire état des  résultats obtenus."
 "HEAD","Relevé des effectifs","Par « relevé des effectifs », on entend le dénombrement des employés, toutes situations d’emploi confondues (employés nommés pour une période indéterminée ou déterminée, occasionnels et étudiants),  des personnes nommées par décret, des sous-ministres et des juges nommés par le gouvernement fédéral au  31 mars de chaque année. Les employés en congé non payé ne sont pas compris. Le relevé comprend les employés des organisations figurant aux annexes I, IV, et V de la Loi sur la gestion des finances publiques. Aucun rajustement n’a été apporté pour les heures de travail."

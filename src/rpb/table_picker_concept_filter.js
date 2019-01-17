@@ -16,8 +16,9 @@ const minus_concept_whitelist = [
   "FPS",
   "FTE",
   "GEO",
-  "EE",
   "AGE",
+  "FOL",
+  "GENDER",
 ];
 
 const concept_filter = concept_key => _.includes(minus_concept_whitelist, concept_key);
@@ -26,7 +27,7 @@ const concept_filter = concept_key => _.includes(minus_concept_whitelist, concep
 const concept_categories = {
   timing: ["QFR","PA","EST_PROC"],
   money: ["AUTH","EXP","VOTED","STAT","PLANNED_EXP","SOBJ10"],
-  people: ["PEOPLE","FTE","FPS","EE","AGE"],
+  people: ["PEOPLE","FTE","FPS","GENDER","AGE","FOL"],
   organization: ["GOV_FRAM","SOBJ","PROG","GEO"],
 }
 
