@@ -8,6 +8,7 @@
 * les modifications aux montants législatifs suite à des redressements aux estimés de dépenses comprises dans les Budgets des dépenses, suite à l'annulation ou la modification aux lois ou suite à des redressements des autorisations d'emprunt des sociétés d'État;
 * les montants du suremploi des autorisations des exercices antérieurs versés ou réglés au cours de l'exercice et le produit de la vente de biens excédentaires de l'État; 
 * les mandats spéciaux du gouverneur général pour couvrir les paiements requis lorsque le Parlement est dissous pour une élection générale."
+"AGE","Âge des employés",""
 "AM_IGOC","Ministres de tutelle","Ministres désignés au sein d’une organisation aux fins de la reddition de compte."
 "APP_ACT","Loi de crédits","Une loi de crédits est un mécanisme d’autorisation de dépenses imputées au Trésor pour payer des programmes et services du gouvernement.
 
@@ -57,6 +58,7 @@ Cette nouvelle structure, qui sera adoptée par toutes les organisations d’ici
 
 
 Dans le RRM, les ministères et organismes donnent de l’information sur les progrès accomplis vers l’atteinte de leurs objectifs stratégiques. Les RRM couvrent l’exercice précédent et sont habituellement déposés à l’automne."
+"EE","Équité en matière d’emploi",""
 "EFF_ID","Efficience","Mesure dans laquelle les ressources sont utilisées de manière à produire un plus grand niveau d’extrants avec le même niveau d’intrants, ou le même niveau d’extrants avec un plus faible niveau d’intrants. Les niveaux d’intrants et d’extrants peuvent se traduire par des hausses ou des baisses de qualité, de quantité, ou les deux."
 "EI_IGOC","Instruments habilitants","Instrument utilisé pour créer une organisation et lui donner les moyens de faire quelque chose"
 "EST_DOC","Document budgétaires","Les documents budgétaires comprennent :

@@ -24,6 +24,7 @@ export default {
     "PEOPLE",
     "FPS",
     "SUPPRESSED_DATA",
+    "EE",
   ],
 
   "link": {

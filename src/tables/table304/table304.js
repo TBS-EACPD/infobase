@@ -19,6 +19,7 @@ export default {
   "tags": [
     "PEOPLE",
     "FPS",
+    "AGE",
   ],
   
   "link": {

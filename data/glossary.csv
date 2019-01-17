@@ -14,6 +14,7 @@
 * les modifications aux montants législatifs suite à des redressements aux estimés de dépenses comprises dans les Budgets des dépenses, suite à l'annulation ou la modification aux lois ou suite à des redressements des autorisations d'emprunt des sociétés d'État;
 * les montants du suremploi des autorisations des exercices antérieurs versés ou réglés au cours de l'exercice et le produit de la vente de biens excédentaires de l'État; 
 * les mandats spéciaux du gouverneur général pour couvrir les paiements requis lorsque le Parlement est dissous pour une élection générale."
+"AGE","Employee Age","Âge des employés","",""
 "AM_IGOC","Appropriate Ministers","Ministres de tutelle","The designated Minister(s) identified with an organization for reporting purposes.","Ministres désignés au sein d’une organisation aux fins de la reddition de compte."
 "APP_ACT","Appropriation act","Loi de crédits","An appropriation act is the vehicle through which expenditures from the consolidated revenue fund are authorized in order to pay for government programs and services. 
 Appropriation acts begin as supply bills. Supply bills are prepared for Main and Supplementary Estimates. Once a bill is introduced to Parliament, approved and granted royal assent, it becomes law in the form of an appropriation act.","Une loi de crédits est un mécanisme d’autorisation de dépenses imputées au Trésor pour payer des programmes et services du gouvernement.
@@ -92,6 +93,7 @@ Through DRRs, individual departments and agencies provide information on how the
 
 
 Dans le RRM, les ministères et organismes donnent de l’information sur les progrès accomplis vers l’atteinte de leurs objectifs stratégiques. Les RRM couvrent l’exercice précédent et sont habituellement déposés à l’automne."
+"EE","Employment equity","Équité en matière d’emploi","",""
 "EFF_ID","Efficiency","Efficience","The extent to which resources are used such that a greater level of output/outcome is produced with the same level of input or, a lower level of input is used to produce the same level of output/outcome. The level of input and output/outcome could be increases or decreases in quantity, quality, or both.","Mesure dans laquelle les ressources sont utilisées de manière à produire un plus grand niveau d’extrants avec le même niveau d’intrants, ou le même niveau d’extrants avec un plus faible niveau d’intrants. Les niveaux d’intrants et d’extrants peuvent se traduire par des hausses ou des baisses de qualité, de quantité, ou les deux."
 "EI_IGOC","Enabling Instrument(s)","Instruments habilitants","The instrument used to create and enable an organization.","Instrument utilisé pour créer une organisation et lui donner les moyens de faire quelque chose"
 "EST_DOC","Estimates Documents","Document budgétaires","Estimates Documents includes:
