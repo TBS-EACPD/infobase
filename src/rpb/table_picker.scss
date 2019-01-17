@@ -1,29 +1,15 @@
 @import '../common_css/common-variables';
 
-.tag-cloud {
-  display: flex;
-  flex-direction:row;
-  flex-wrap: wrap;
-  align-items: stretch;
-  justify-content: flex-start;
-}
-
-.tag-cloud-label {
-  font-size: 1em;
-  text-align: right;
-  padding: 5px;
-}
 
 
 .tag-cloud-main {
-  font-size: 1em;
+  display: flex;
+  flex-direction:row;
   flex-wrap: wrap;
-  width: 70%;
-  justify-content: center;
-  border-width: 0px 0px 0px 3px;
-  border-color: $buttonPrimaryColor;
-  border-style: solid;
-  border-radius: 0px;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1em;
+  line-height: 1;
   padding: 0px;
 }
 
@@ -34,13 +20,11 @@
   border: none;
   margin: 1px;
   background-color: transparent;
-  line-height: 1.8em;
+  line-height: 1.5em;
   font-size: 1em;
 }
 
 .tag-cloud-main > li > button {
-  display: flex;
-  flex: 0 0 auto;
   text-align: center;
   background-color: $buttonPrimaryColor;
   padding: 3px 0px 3px 10px;
@@ -50,9 +34,6 @@
 }
 
 .tag-cloud-main > li > span.buttonhelper {
-  display: flex;
-  flex: 0 0 auto;
-  align-items: center;
   text-align: center;
   background-color: $buttonPrimaryColor;
   padding: 0px 10px 0px 10px;

@@ -1,4 +1,5 @@
 import './table_picker.scss';
+import '../components/LabeledBox.scss';
 import { Table } from '../core/TableClass.js';
 import { GlossaryEntry } from '../models/glossary.js';
 import { CSSTransitionGroup } from 'react-transition-group';
@@ -245,28 +246,34 @@ class TaggedItemCloud extends React.Component {
     return <div>
       <div style={{padding: '0px'}}>
         {_.map(categories, cat => 
-          <div className="tag-cloud centerer" style={{padding: '0px'}}>
-            <div className="tag-cloud-label">Related to {cat}</div>
-            <ul className="tag-cloud tag-cloud-main">
-              {_.map(tags_by_category[cat],({display, id, active}) => 
-                <li 
-                  key={id}
-                  className={classNames(active && 'active')}
-                >
-                  <button 
-                    role="checkbox"
-                    aria-checked={!!active}
-                    className="button-unstyled"
-                    onClick={()=>onSelectTag(id)}
+          <div className="labeled-box">
+            <div className="labeled-box-label">
+              <div className="labeled-box-label-text">
+                Related to {cat}
+              </div>
+            </div>
+            <div className="labeled-box-content" style={{'padding': '10px 0px 0px 10px', 'border': '2px solid #284162'}}>
+              <ul className="tag-cloud-main">
+                {_.map(tags_by_category[cat],({display, id, active}) => 
+                  <li 
+                    key={id}
+                    className={classNames(active && 'active')}
                   >
-                    { display } 
-                  </button>
-                  <span className="buttonhelper">
-                    {generate_glossary_link(id)}
-                  </span>
-                </li>
-              )}
-            </ul> 
+                    <button 
+                      role="checkbox"
+                      aria-checked={!!active}
+                      className="button-unstyled"
+                      onClick={()=>onSelectTag(id)}
+                    >
+                      { display } 
+                    </button>
+                    <span className="buttonhelper">
+                      {generate_glossary_link(id)}
+                    </span>
+                  </li>
+                )} 
+              </ul>
+            </div> 
           </div>
         ) }
       </div>
