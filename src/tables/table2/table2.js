@@ -28,12 +28,12 @@ export default {
 
   "name": { 
     "en": "Expenditures by Standard Object (QFR)",
-    "fr": "Dépenses par article courant (Rapports Financiers Trimestriels)",
+    "fr": "Dépenses par article courant (RFT)",
   },
 
   "title": { 
     "en": "Expenditures by Standard Object (QFR) ($000)",
-    "fr": "Dépenses par article courant (Rapports Financiers Trimestriels) (en milliers de dollars)",
+    "fr": "Dépenses par article courant (RFT) (en milliers de dollars)",
   },
 
   "add_cols": function(){

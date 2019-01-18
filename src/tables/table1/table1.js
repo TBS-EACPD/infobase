@@ -29,12 +29,12 @@ export default {
 
   "name": { 
     "en": "Authorities and Expenditures (QFR)",
-    "fr": "Autorisations et dépenses (Rapports Financiers Trimestriels)",
+    "fr": "Autorisations et dépenses (RFT)",
   },
 
   "title": { 
     "en": "Authorities and Expenditures (QFR) ($000)",
-    "fr": "Autorisations et dépenses (Rapports Financiers Trimestriels) (en milliers de dollars)",
+    "fr": "Autorisations et dépenses (RFT) (en milliers de dollars)",
   },
 
   "add_cols": function(){
