@@ -203,7 +203,7 @@
 
 }
 
-.tooltiptext {
+.tooltip-text {
   visibility: hidden;
   color: #fff;
   background-color: $primaryColor;
@@ -215,11 +215,11 @@
   font-size: 0.8em;
 }
 
-.glossarylink:hover .tooltiptext {
+.glossary-link:hover .tooltip-text {
   visibility: visible;
 }
 
-img.glossaryitem {
+img.glossary-item {
   vertical-align:middle;
 }
 
