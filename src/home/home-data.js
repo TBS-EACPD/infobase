@@ -12,9 +12,42 @@ export default function(a11y_mode){
       is_youtube: true,
     },
     {
+      text_key: "interim_mains",
+      href: (
+        window.is_a11y_mode ? 
+          rpb_link({ 
+            table: 'table8', 
+            columns: [ "{{est_in_year}}_estimates"], 
+            dimension: 'by_estimates_doc', 
+            filter: ({ //TODO: D.R.Y this against table8
+              en: "Interim Estimates",
+              fr: "Budget provisoire des dépenses",
+            })[window.lang],
+          }) :
+          "#partition/est_doc_im/planned_exp"
+      ),
+      is_new: true,
+    },
+    {
+      text_key: "supps_b",
+      href: (
+        window.is_a11y_mode ? 
+          rpb_link({ 
+            table: 'table8', 
+            columns: [ "{{est_in_year}}_estimates"], 
+            dimension: 'by_estimates_doc', 
+            filter: ({ //TODO: D.R.Y this against table8
+              en: "Supp. Estimates B",
+              fr: "Budget supp. B",
+            })[window.lang],
+          }) :
+          "#compare_estimates"
+      ),
+      is_new: true,
+    },
+    {
       text_key: 'quick_link_DRR_1718',
       href: '#orgs/gov/gov/infograph/results',
-      is_new: true,
     },
     {
       text_key: 'quick_link_auth_and_exp',
@@ -22,7 +55,6 @@ export default function(a11y_mode){
         table: 'orgVoteStatPa', 
         mode: 'details',
       }),
-      is_new: true,
     },
     {
       text_key: 'quick_link_exp_by_so',
@@ -30,7 +62,6 @@ export default function(a11y_mode){
         table: 'orgSobjs', 
         mode: 'details',
       }),
-      is_new: true,
     },
     {
       text_key: 'quick_link_spending_by_program',
@@ -38,7 +69,6 @@ export default function(a11y_mode){
         table: 'programSpending', 
         mode: 'details',
       }),
-      is_new: true,
     },
     {
       text_key: 'quick_link_transfer_payment',
@@ -46,7 +76,6 @@ export default function(a11y_mode){
         table: 'orgTransferPayments', 
         mode: 'details',
       }),
-      is_new: true,
     },
     { 
       text_key: 'quick_link_prog_by_vote_stat',
@@ -54,15 +83,6 @@ export default function(a11y_mode){
         table: 'programVoteStat', 
         mode: 'details',
       }),
-      is_new: true,
-    },
-    { 
-      text_key: 'quick_link_prog_by_so',
-      href: rpb_link({ 
-        table: 'programSobjs', 
-        mode: 'details',
-      }),
-      is_new: true,
     },
   ];
 
