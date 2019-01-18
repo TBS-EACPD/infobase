@@ -210,11 +210,10 @@
   /*background-color: hsla(205, 40%, 50%, 1); */
   text-align: left !important; /* is this a good idea? copied from the other tooltip */
   border-radius: 5px;
-  padding: 1px 20px;
+  padding: 1px 20px 10px 20px;
   position: absolute;
   z-index: 1;
   font-size: 0.8em;
-  margin-top: 7px;
   border: none; 
   
   @media (min-width:1200px){
