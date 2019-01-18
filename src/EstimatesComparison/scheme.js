@@ -9,10 +9,15 @@ import { convert_d3_hierarchy_to_explorer_hierarchy } from '../gen_expl/hierarch
 import { shallowEqualObjectsOverKeys } from '../core/utils';
 
 const { Dept } = Subject;
+
 const biv_footnote = text_maker("biv_footnote");
 const this_year_col = "{{est_in_year}}_estimates";
 const last_year_col = "{{est_last_year}}_estimates";
 const row_identifier_func = row => `${row.dept}-${row.votenum}-${row.desc}`; 
+
+
+export const current_sups = "B"
+
 
 //in this cpn, we don't care about supps
 const reduce_by_supps_dim = (rows) => _.chain(rows)
@@ -24,7 +29,7 @@ const reduce_by_supps_dim = (rows) => _.chain(rows)
       dept: first.dept,
       desc: first.desc,
       votenum: first.votenum,
-      sups: _.chain(group).filter({est_doc_code: "SEA"}).sumBy(this_year_col).value(),
+      sups: _.chain(group).filter({est_doc_code: `SE${current_sups}`}).sumBy(this_year_col).value(),
       mains: _.chain(group).filter({est_doc_code: "MAINS"}).sumBy(this_year_col).value(),
       _rows: group,
     };
@@ -244,7 +249,7 @@ function get_data_by_item_types(){
 function get_keys_in_supps(include_stat){
   return _.chain(Table.lookup('orgVoteStatEstimates').data)
     .pipe(include_stat ? _.identity : rows => _.reject(rows, {votestattype: 999}))
-    .filter(row => row[this_year_col] && row.est_doc_code === "SEA")
+    .filter(row => row[this_year_col] && row.est_doc_code === `SE${current_sups}`)
     .map(row => [key_for_table_row(row),1] )
     .fromPairs()
     .value();
@@ -266,7 +271,7 @@ export const col_defs = [
     id: "sups",
     width: 150,
     textAlign: "right",
-    header_display: <TM k="supps_a_this_year" />,
+    header_display: <TM k="current_supps_this_year" args={{current_sups}} />,
     get_val: node => _.get(node, "data.sups"),
     val_display: val => <Format type="compact1" content={val} />,
   },
