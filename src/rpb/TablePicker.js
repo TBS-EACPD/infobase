@@ -231,14 +231,16 @@ class TaggedItemCloud extends React.Component {
 
 
     function generate_glossary_link(concept_id){
-      var entry = GlossaryEntry.lookup(concept_id);
-      if(entry.no_def){
-        return('');
-      } else{
-        return(<a className="glossarylink" href={"#glossary/"+concept_id}>
-          <img className="glossary-item" width={18} aria-hidden="true" src={get_static_url('svg/not-available-white.svg')}/>
-          <div className="tooltip-text"><TextMaker text_key="glossary_link_title" /></div>
-        </a>);
+      const entry = GlossaryEntry.lookup(concept_id);
+      if( entry && !entry.no_def ){
+        return (
+          <a className="glossary-link" href={"#glossary/"+concept_id}>
+            <img className="glossary-item" width={18} aria-hidden="true" src={get_static_url('svg/not-available-white.svg')}/>
+            <div className="tooltip-text">
+              <TextMaker text_key="glossary_link_title" />
+            </div>
+          </a>
+        );
       }
     }
 
