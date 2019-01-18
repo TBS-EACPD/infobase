@@ -5,8 +5,8 @@ diff_view_title:
 
 diff_view_top_text:
   transform: [handlebars, markdown]
-  en: A presentation of the recently tabled Supplementary Estimates {{current_sups}} {{est_in_year}} with context from previously tabled estimate documents
-  fr: Une présentation du budget supplémentaire des dépenses {{current_sups}} {{est_in_year}} récemment déposé avec de l'information contextuelle des budget de dépenses précédents
+  en: A presentation of the recently tabled Supplementary Estimates {{current_sups_letter}} {{est_in_year}} with context from previously tabled estimate documents
+  fr: Une présentation du budget supplémentaire des dépenses {{current_sups_letter}} {{est_in_year}} récemment déposé avec de l'information contextuelle des budget de dépenses précédents
 
 new:
   en: New Item
@@ -49,13 +49,13 @@ doc_breakout_details:
 
 current_supps_this_year:
   transform: [handlebars]
-  en: Supplementary Estimates {{current_sups}} <span class="nowrap">{{est_in_year}}</span>
-  fr: Budget supplémentaire {{current_sups}} des dépenses <span class="nowrap">{{est_in_year}}</span>
+  en: Supplementary Estimates {{current_sups_letter}} <span class="nowrap">{{est_in_year}}</span>
+  fr: Budget supplémentaire {{current_sups_letter}} des dépenses <span class="nowrap">{{est_in_year}}</span>
 
-change_from_mains:
+change_from_comparison_value:
   transform: [handlebars]
-  en: Amount added to <span class="nowrap">{{est_in_year}}</span> Main Estimates (%)
-  fr: Différence ajouté au budget principale <span class="nowrap">{{est_in_year}}</span> (%)
+  en: Amount added to previous <span class="nowrap">{{est_in_year}}</span> Authorities (%)
+  fr: TODO update this text - Différence ajouté au budget principale <span class="nowrap">{{est_in_year}}</span> (%)
 
 
 show_only_votes:
@@ -97,5 +97,5 @@ estimates_source_link:
 
 
 estimates_comparison_desc_meta_attr:
-  en: Find out more about in-year changes in funding by viewing Supplementary Estimates {{current_sups}} amounts alongside useful contextual information
-  fr: Renseignez-vous davantage sur les changements du financement de l'année en examiner le budget supplémentaire des dépenses {{current_sups}} avec d'autres informations contextuelles
+  en: Find out more about in-year changes in funding by viewing Supplementary Estimates {{current_sups_letter}} amounts alongside useful contextual information
+  fr: Renseignez-vous davantage sur les changements du financement de l'année en examiner le budget supplémentaire des dépenses {{current_sups_letter}} avec d'autres informations contextuelles

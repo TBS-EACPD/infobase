@@ -1,6 +1,6 @@
 import './EstimatesComparison.scss';
 import classNames from 'classnames';
-import { text_maker, TM } from './text-provider';
+import { text_maker, TM } from './text-provider.js';
 import { combineReducers, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import { StandardRouteContainer } from '../core/NavComponents';
@@ -30,7 +30,7 @@ import {
   estimates_diff_scheme,
   col_defs,
   initial_state as initial_scheme_state,
-  current_sups,
+  current_sups_letter,
 } from './scheme.js';
 import { businessConstants } from '../models/businessConstants.js';
 
@@ -55,7 +55,7 @@ export default class EstimatesComparison extends React.Component {
       <StandardRouteContainer
         title={title}
         breadcrumbs={[title]}
-        description={text_maker("estimates_comparison_desc_meta_attr", {current_sups})}
+        description={text_maker("estimates_comparison_desc_meta_attr", {current_sups_letter})}
         route_key="_dev"
       >
         <h1><TM k="diff_view_title"/></h1>
@@ -270,7 +270,7 @@ class EstimatesExplorer extends React.Component {
     return (
       <div>
         <div className="medium_panel_text mrgn-tp-lg">
-          <TM k="diff_view_top_text" args={{current_sups}} />
+          <TM k="diff_view_top_text" args={{current_sups_letter}} />
         </div>
         <div 
           style={{

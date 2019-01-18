@@ -16,10 +16,15 @@ const last_year_col = "{{est_last_year}}_estimates";
 const row_identifier_func = row => `${row.dept}-${row.votenum}-${row.desc}`; 
 
 
-export const current_sups = "B"
+export const current_sups_letter = "B";
+const current_sups_code = `SE${current_sups_letter}`;
+const ordered_est_docs = ["MAINS", "VA", "SEA", "SEB", "SEC"];
+const prior_in_year_doc_filter = (item) => _.chain(ordered_est_docs)
+  .takeWhile( est_doc => est_doc !== current_sups_code)
+  .includes( item.est_doc_code )
+  .value();
 
-
-//in this cpn, we don't care about supps
+  
 const reduce_by_supps_dim = (rows) => _.chain(rows)
   .groupBy(row_identifier_func)
   .toPairs()
@@ -29,8 +34,8 @@ const reduce_by_supps_dim = (rows) => _.chain(rows)
       dept: first.dept,
       desc: first.desc,
       votenum: first.votenum,
-      sups: _.chain(group).filter({est_doc_code: `SE${current_sups}`}).sumBy(this_year_col).value(),
-      mains: _.chain(group).filter({est_doc_code: "MAINS"}).sumBy(this_year_col).value(),
+      sups: _.chain(group).filter({est_doc_code: current_sups_code}).sumBy(this_year_col).value(),
+      comparison_value: _.chain(group).filter(prior_in_year_doc_filter).sumBy(this_year_col).value(),
       _rows: group,
     };
   })
@@ -53,21 +58,21 @@ function get_data_by_org(include_stat){
   const keys_in_supps = get_keys_in_supps(include_stat);
 
   const data = _.chain(Table.lookup('orgVoteStatEstimates').data)
-    .pipe(include_stat ? _.identity : rows => _.reject(rows, {votestattype: 999}))
+    .pipe( include_stat ? _.identity : rows => _.reject(rows, {votestattype: 999}) )
     .pipe( reduce_by_supps_dim )
     .groupBy('dept')
     .toPairs()
     .map( ([org_id, rows]) => {
 
       const sups_rows = _.filter(rows,row => keys_in_supps[key_for_table_row(row)]);
-      if(_.isEmpty(sups_rows)){
+      if( _.isEmpty(sups_rows) ){
         return null;
       }
 
       const org = Dept.lookup(org_id);
       const sups = _.sumBy(sups_rows, "sups") || 0;
-      const mains = _.sumBy(rows, "mains") || 0;
-      const inc_pct = sups/mains;
+      const comparison_value = _.sumBy(rows, "comparison_value") || 0;
+      const percent_increase = sups/comparison_value;
 
       const amounts_by_doc = get_doc_code_breakdowns( _.flatMap(rows, "_rows") );
 
@@ -77,8 +82,8 @@ function get_data_by_org(include_stat){
           name: org.name,
           subject: org,
           sups,
-          mains,
-          inc_pct,
+          comparison_value,
+          percent_increase,
           footnotes: FootNote.get_for_subject(
             org,
             [
@@ -92,16 +97,16 @@ function get_data_by_org(include_stat){
         },
         children: _.map(rows, row => {
           const sups = row["sups"] || 0;
-          const mains = row["mains"] || 0;
-          const inc_pct = sups/mains;
+          const comparison_value = row["comparison_value"] || 0;
+          const percent_increase = sups/comparison_value;
 
           return {
             id: `${org_id}-${row.desc}`,
             data: {
               name: row.desc,
               sups,
-              mains,
-              inc_pct,
+              comparison_value,
+              percent_increase,
               footnotes: get_footnotes_for_votestat_item({
                 desc: row.desc, 
                 org_id, 
@@ -124,7 +129,7 @@ function get_data_by_org(include_stat){
     children: data,
   };
 
-  const d3_h7y = d3.hierarchy(root, _.property('children'));
+  const d3_h7y = d3.hierarchy( root, _.property('children') );
   return convert_d3_hierarchy_to_explorer_hierarchy(d3_h7y);
 
 }
@@ -135,9 +140,9 @@ const get_category_children = (rows) => _.chain(rows)
   .pipe(reduce_by_supps_dim)
   .map(new_row => {
     const { votenum, desc, dept } = new_row;
-    const mains = new_row.mains || 0;
+    const comparison_value = new_row.comparison_value || 0;
     const sups = new_row.sups || 0;
-    const inc_pct = sups/mains;
+    const percent_increase = sups/comparison_value;
 
     if(!sups){
       return null;
@@ -147,9 +152,9 @@ const get_category_children = (rows) => _.chain(rows)
       id: `${dept}-${votenum}-${desc}`,
       data: {
         name: `${Dept.lookup(dept).name} - ${strip_stat_marker(desc)}`,
-        mains,
+        comparison_value,
         sups,
-        inc_pct,
+        percent_increase,
         amounts_by_doc: get_doc_code_breakdowns(new_row._rows),
         footnotes: get_footnotes_for_votestat_item({
           desc,
@@ -177,8 +182,8 @@ function get_data_by_item_types(){
       const children = get_category_children(rows, keys_in_supps);
 
       const sups = _.sumBy(children, "data.sups") || 0;
-      const mains = _.chain(rows).filter({est_doc_code: "MAINS"}).sumBy(this_year_col).value();
-      const inc_pct = sups/mains;
+      const comparison_value = _.chain(rows).filter(prior_in_year_doc_filter).sumBy(this_year_col).value();
+      const percent_increase = sups/comparison_value;
 
       const is_voted = _.isNumber(_.first(rows).votenum);
     
@@ -195,9 +200,9 @@ function get_data_by_item_types(){
         id: category,
         data: {
           name,
-          mains,
+          comparison_value,
           sups,
-          inc_pct,
+          percent_increase,
           amounts_by_doc: get_doc_code_breakdowns(rows),
           is_voted,
         },
@@ -215,9 +220,9 @@ function get_data_by_item_types(){
     .partition("data.is_voted")
     .map( (categories, ix) => {
       const is_voted = ix === 0;
-      const sups = _.sumBy(categories,"data.sups");
-      const mains = _.sumBy(categories,"data.mains")
-      const inc_pct = sups/mains;
+      const sups = _.sumBy(categories, "data.sups");
+      const comparison_value = _.sumBy(categories, "data.comparison_value")
+      const percent_increase = sups/comparison_value;
 
       return {
         id: is_voted ? "voted" : "stat",
@@ -225,8 +230,8 @@ function get_data_by_item_types(){
         data: {
           name: text_maker(is_voted ? "voted_items" : "stat_items"),
           sups,
-          mains,
-          inc_pct,
+          comparison_value,
+          percent_increase,
         },
         isExpanded: true,
       };
@@ -249,7 +254,7 @@ function get_data_by_item_types(){
 function get_keys_in_supps(include_stat){
   return _.chain(Table.lookup('orgVoteStatEstimates').data)
     .pipe(include_stat ? _.identity : rows => _.reject(rows, {votestattype: 999}))
-    .filter(row => row[this_year_col] && row.est_doc_code === `SE${current_sups}`)
+    .filter(row => row[this_year_col] && row.est_doc_code === current_sups_code)
     .map(row => [key_for_table_row(row),1] )
     .fromPairs()
     .value();
@@ -271,16 +276,16 @@ export const col_defs = [
     id: "sups",
     width: 150,
     textAlign: "right",
-    header_display: <TM k="current_supps_this_year" args={{current_sups}} />,
+    header_display: <TM k="current_supps_this_year" args={{current_sups_letter}} />,
     get_val: node => _.get(node, "data.sups"),
     val_display: val => <Format type="compact1" content={val} />,
   },
   {
-    id: "mains_pct",
+    id: "comparison_value_pct",
     width: 150,
     textAlign: "right",
-    header_display: <TM k="change_from_mains" />,
-    get_val: node => _.get(node, "data.inc_pct"),
+    header_display: <TM k="change_from_comparison_value" />,
+    get_val: node => _.get(node, "data.percent_increase"),
     val_display: val => {
       let content;
       if( Math.abs( -1-val ) < 0.001){
@@ -360,8 +365,8 @@ export const estimates_diff_scheme = {
   get_props_selector: () => augmented_state => _.clone(augmented_state.estimates_diff),
   dispatch_to_props: dispatch => ({ 
     col_click: col_key => dispatch({type: 'column_header_click', payload: col_key }),
-    toggle_stat_filter: ()=> dispatch({type: "toggle_stat_filter"}),
-    set_h7y_layout: layout_key=> dispatch({type: "set_h7y_layout", payload: layout_key}),
+    toggle_stat_filter: () => dispatch({type: "toggle_stat_filter"}),
+    set_h7y_layout: layout_key => dispatch({type: "set_h7y_layout", payload: layout_key}),
   }),
   reducer: (state=initial_state, action) => {
     const { type, payload } = action;
@@ -387,10 +392,10 @@ export const estimates_diff_scheme = {
       const clicked_col = payload;
       const mods = (
         clicked_col === sort_col ?
-        { is_descending: !is_descending } :
-        { is_descending: true, sort_col: clicked_col }
+          { is_descending: !is_descending } :
+          { is_descending: true, sort_col: clicked_col }
       );
-      return {...state,...mods}
+      return {...state, ...mods}
     } else {
       return state;
     }
