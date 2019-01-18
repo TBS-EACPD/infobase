@@ -1,5 +1,5 @@
 
-const minus_concept_whitelist = [
+const concept_whitelist = [
   "QFR",
   "AUTH",
   "EXP",
@@ -21,7 +21,7 @@ const minus_concept_whitelist = [
   "GENDER",
 ];
 
-const concept_filter = concept_key => _.includes(minus_concept_whitelist, concept_key);
+const concept_filter = concept_key => _.includes(concept_whitelist, concept_key);
 
 
 const concept_categories = {
