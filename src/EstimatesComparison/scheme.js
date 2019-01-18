@@ -16,7 +16,7 @@ const last_year_col = "{{est_last_year}}_estimates";
 const row_identifier_func = row => `${row.dept}-${row.votenum}-${row.desc}`; 
 
 
-export const current_sups_letter = "B";
+export const current_sups_letter = "B"; // Update this on each new sups release, should be all you need to do!
 const current_sups_code = `SE${current_sups_letter}`;
 const ordered_est_docs = ["MAINS", "VA", "SEA", "SEB", "SEC"];
 const prior_in_year_doc_filter = (item) => _.chain(ordered_est_docs)
@@ -50,7 +50,7 @@ const get_doc_code_breakdowns = rows => _.chain(rows)
     amount_last_year: _.some(group, last_year_col) && _.sumBy(group, last_year_col),
     amount_this_year: _.some(group, this_year_col) && _.sumBy(group, this_year_col),
   }))
-  .value()
+  .value();
 
 const key_for_table_row = row => `${row.dept}-${row.votenum}-${row.desc}`;
 function get_data_by_org(include_stat){
@@ -64,15 +64,15 @@ function get_data_by_org(include_stat){
     .toPairs()
     .map( ([org_id, rows]) => {
 
-      const sups_rows = _.filter(rows,row => keys_in_supps[key_for_table_row(row)]);
-      if( _.isEmpty(sups_rows) ){
+      const sups_rows = _.filter(rows, row => keys_in_supps[key_for_table_row(row)]);
+      if( _.isEmpty(sups_rows) || !_.some(sups_rows, row => row.sups || row.comparison_value) ){
         return null;
       }
 
       const org = Dept.lookup(org_id);
       const sups = _.sumBy(sups_rows, "sups") || 0;
       const comparison_value = _.sumBy(rows, "comparison_value") || 0;
-      const percent_increase = sups/comparison_value;
+      const percent_increase = sups/comparison_value || 0;
 
       const amounts_by_doc = get_doc_code_breakdowns( _.flatMap(rows, "_rows") );
 
@@ -95,30 +95,35 @@ function get_data_by_org(include_stat){
           ),
           amounts_by_doc,
         },
-        children: _.map(rows, row => {
-          const sups = row["sups"] || 0;
-          const comparison_value = row["comparison_value"] || 0;
-          const percent_increase = sups/comparison_value;
+        children: _.chain(rows)
+          .map(row => {
+            const sups = row["sups"] || 0;
+            const comparison_value = row["comparison_value"] || 0;
+            const percent_increase = sups/comparison_value || 0;
+  
+            if ( !sups && !comparison_value ){
+              return null;
+            }
 
-          return {
-            id: `${org_id}-${row.desc}`,
-            data: {
-              name: row.desc,
-              sups,
-              comparison_value,
-              percent_increase,
-              footnotes: get_footnotes_for_votestat_item({
-                desc: row.desc, 
-                org_id, 
-                votenum: row.votenum,
-              }),
-              amounts_by_doc: get_doc_code_breakdowns(row._rows),
-            },
-          };
-        }),
+            return {
+              id: `${org_id}-${row.desc}`,
+              data: {
+                name: row.desc,
+                sups,
+                comparison_value,
+                percent_increase,
+                footnotes: get_footnotes_for_votestat_item({
+                  desc: row.desc, 
+                  org_id, 
+                  votenum: row.votenum,
+                }),
+                amounts_by_doc: get_doc_code_breakdowns(row._rows),
+              },
+            };
+          })
+          .compact()
+          .value(),
       };
-
-
     })
     .compact()
     .value();
@@ -140,11 +145,11 @@ const get_category_children = (rows) => _.chain(rows)
   .pipe(reduce_by_supps_dim)
   .map(new_row => {
     const { votenum, desc, dept } = new_row;
-    const comparison_value = new_row.comparison_value || 0;
     const sups = new_row.sups || 0;
-    const percent_increase = sups/comparison_value;
+    const comparison_value = new_row.comparison_value || 0;
+    const percent_increase = sups/comparison_value || 0;
 
-    if(!sups){
+    if( !sups && !comparison_value ){
       return null;
     }
 
@@ -163,7 +168,6 @@ const get_category_children = (rows) => _.chain(rows)
         }),
       },
     };
-    
   })
   .compact()
   .value();
@@ -176,23 +180,22 @@ function get_data_by_item_types(){
     .map( ([ category, rows ]) => {  
 
       const sup_rows = _.filter(rows, row => keys_in_supps[key_for_table_row(row)]);
-      if( _.isEmpty(sup_rows)){
+      if( _.isEmpty(sup_rows) ){
         return null;
       }
       const children = get_category_children(rows, keys_in_supps);
 
       const sups = _.sumBy(children, "data.sups") || 0;
       const comparison_value = _.chain(rows).filter(prior_in_year_doc_filter).sumBy(this_year_col).value();
-      const percent_increase = sups/comparison_value;
+      const percent_increase = sups/comparison_value || 0;
 
       const is_voted = _.isNumber(_.first(rows).votenum);
-    
 
       const is_single_item = _.chain(rows).map(row_identifier_func).uniq().value().length === 1;
       const name = (
         is_single_item ?
-        `${strip_stat_marker(category)} - ${Dept.lookup(rows[0].dept).name}` :
-        strip_stat_marker(category)
+          `${strip_stat_marker(category)} - ${Dept.lookup(rows[0].dept).name}` :
+          strip_stat_marker(category)
       );
 
 
@@ -208,8 +211,8 @@ function get_data_by_item_types(){
         },
         children: (
           is_single_item ? 
-          null :
-          children
+            null :
+            children
         ),
       };
     })
@@ -222,7 +225,11 @@ function get_data_by_item_types(){
       const is_voted = ix === 0;
       const sups = _.sumBy(categories, "data.sups");
       const comparison_value = _.sumBy(categories, "data.comparison_value")
-      const percent_increase = sups/comparison_value;
+      const percent_increase = sups/comparison_value || 0;
+
+      if ( !sups && !comparison_value ){
+        return null;
+      }
 
       return {
         id: is_voted ? "voted" : "stat",
@@ -252,10 +259,17 @@ function get_data_by_item_types(){
 
 
 function get_keys_in_supps(include_stat){
+<<<<<<< HEAD
   return _.chain(Table.lookup('orgVoteStatEstimates').data)
-    .pipe(include_stat ? _.identity : rows => _.reject(rows, {votestattype: 999}))
-    .filter(row => row[this_year_col] && row.est_doc_code === current_sups_code)
-    .map(row => [key_for_table_row(row),1] )
+    .pipe( include_stat ? _.identity : rows => _.reject(rows, {votestattype: 999}) )
+    .filter( row => row[this_year_col] && row.est_doc_code === current_sups_code )
+    .map( row => [key_for_table_row(row), 1] )
+=======
+  return _.chain(Table.lookup('table8').data)
+    .pipe( include_stat ? _.identity : rows => _.reject(rows, {votestattype: 999}) )
+    .filter( row => row[this_year_col] && row.est_doc_code === current_sups_code )
+    .map( row => [key_for_table_row(row), 1] )
+>>>>>>> Fix a lot of cases where the EstimatesExplorer displayed nodes it shouldn't have (no or NaN data)
     .fromPairs()
     .value();
 }
