@@ -13,7 +13,6 @@ import {
 import { TextMaker } from './rpb_text_provider.js';
 import { get_static_url } from '../core/request_utils.js';
 
-import { trivial_text_maker } from '../models/text.js';
 
 function toggleArrayElement(arr,el){
   return _.includes(arr,el) ?
