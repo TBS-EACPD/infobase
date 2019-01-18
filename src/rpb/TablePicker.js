@@ -1,7 +1,8 @@
 import './table_picker.scss';
 import '../components/LabeledBox.scss';
 import { Table } from '../core/TableClass.js';
-import { GlossaryEntry } from '../models/glossary.js';
+import { GlossaryEntry,
+  get_glossary_item_tooltip_html } from '../models/glossary.js';
 import { CSSTransitionGroup } from 'react-transition-group';
 import classNames from 'classnames';
 import { 
@@ -11,6 +12,8 @@ import {
 } from './table_picker_concept_filter.js';
 import { TextMaker } from './rpb_text_provider.js';
 import { get_static_url } from '../core/request_utils.js';
+
+import { trivial_text_maker } from '../models/text.js';
 
 function toggleArrayElement(arr,el){
   return _.includes(arr,el) ?
@@ -228,17 +231,18 @@ class TaggedItemCloud extends React.Component {
         .map(c => _.filter(tags,{ "id": c }))
         .flatten()
         .value()]));
-
-
+    
     function generate_glossary_link(concept_id){
       const entry = GlossaryEntry.lookup(concept_id);
       if( entry && !entry.no_def ){
         return (
           <a className="glossary-link" href={"#glossary/"+concept_id}>
-            <img className="glossary-item" width={18} aria-hidden="true" src={get_static_url('svg/not-available-white.svg')}/>
-            <div className="tooltip-text">
-              <TextMaker text_key="glossary_link_title" />
-            </div>
+            <img className="glossary-item"
+              width={18}
+              aria-hidden="true"
+              src={get_static_url('svg/not-available-white.svg')} 
+            />
+            <div className="tooltip-text" dangerouslySetInnerHTML={{ __html: get_glossary_item_tooltip_html(concept_id) }} />
           </a>
         );
       }
