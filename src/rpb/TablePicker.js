@@ -231,18 +231,18 @@ class TaggedItemCloud extends React.Component {
         .flatten()
         .value()]));
     
-    function generate_glossary_link(concept_id){
+    function generate_glossary_tooltip(concept_id){
       const entry = GlossaryEntry.lookup(concept_id);
       if( entry && !entry.no_def ){
         return (
-          <a className="glossary-link" href={"#glossary/"+concept_id}>
+          <div>
             <img className="glossary-item"
               width={18}
               aria-hidden="true"
               src={get_static_url('svg/not-available-white.svg')} 
             />
             <div className="tooltip-text" dangerouslySetInnerHTML={{ __html: get_glossary_item_tooltip_html(concept_id) }} />
-          </a>
+          </div>
         );
       }
     }
@@ -273,7 +273,7 @@ class TaggedItemCloud extends React.Component {
                       { display } 
                     </button>
                     <span className="buttonhelper">
-                      {generate_glossary_link(id)}
+                      {generate_glossary_tooltip(id)}
                     </span>
                   </li>
                 )} 
