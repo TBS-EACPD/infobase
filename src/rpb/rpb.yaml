@@ -213,3 +213,19 @@ pagination_a11y:
   transform: [handlebars]
   en: There is too much data to show in a single table, the table above is showing page {{current}} of {{total}}. To view another page, select its number in the navigation list below.
   fr: Il y a trop de données pour les montrer dans une table. La table ci-dessus représente la page numéro {{current}} de {{total}} pages. Pour voir la prochaine page, sélectionnez là de la liste ci-dessous.
+
+concept_category_timing:
+  en: Related to timing
+  fr: (TODO) Related to timing
+
+concept_category_people:
+  en: Related to people
+  fr: (TODO) Related to people
+
+concept_category_money:
+  en: Related to money
+  fr: (TODO) Related to money
+
+concept_category_other:
+  en: Other
+  fr: Autres

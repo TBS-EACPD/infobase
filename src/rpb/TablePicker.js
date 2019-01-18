@@ -9,7 +9,7 @@ import {
   concepts_by_category,
   concept_filter,
 } from './table_picker_concept_filter.js';
-import { TextMaker } from './rpb_text_provider';
+import { TextMaker } from './rpb_text_provider.js';
 import { get_static_url } from '../core/request_utils.js';
 
 function toggleArrayElement(arr,el){
@@ -251,7 +251,7 @@ class TaggedItemCloud extends React.Component {
           <div className="labeled-box">
             <div className="labeled-box-label">
               <div className="labeled-box-label-text">
-                Related to {cat}
+                <TextMaker text_key={cat} />
               </div>
             </div>
             <div className="labeled-box-content" style={{'padding': '10px 0px 0px 10px', 'border': '2px solid #284162'}}>

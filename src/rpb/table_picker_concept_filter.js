@@ -1,8 +1,8 @@
 const concept_categories = {
-  timing: ["QFR", "PA", "EST_PROC"],
-  money: ["AUTH", "EXP", "VOTED", "STAT", "PLANNED_EXP", "SOBJ10"],
-  people: ["PEOPLE", "FTE", "FPS", "GENDER", "AGE", "FOL"],
-  organization: ["GOV_FRAM", "SOBJ", "PROG", "GEO"],
+  concept_category_timing: ["QFR", "PA", "EST_PROC"],
+  concept_category_money: ["AUTH", "EXP", "VOTED", "STAT", "PLANNED_EXP", "SOBJ10"],
+  concept_category_people: ["PEOPLE", "FTE", "FPS", "GENDER", "AGE", "FOL"],
+  concept_category_other: ["GOV_FRAM", "SOBJ", "PROG", "GEO"],
 }
 
 /* some tables have tags that we don't want to show, so establish a whitelist */
