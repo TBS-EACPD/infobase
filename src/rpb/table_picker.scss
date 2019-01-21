@@ -1,7 +1,5 @@
 @import '../common_css/common-variables';
 
-
-
 .tag-cloud-main {
   display: flex;
   flex-direction:row;
@@ -41,7 +39,7 @@
   border:none;
   color: #fff;
 
-  @media (max-width:600px){
+  @media (max-width: 600px){
     padding: 0px;
   }
 }
@@ -207,7 +205,7 @@
 
 }
 
-.tooltip-text {
+.tag-tooltip-text {
   visibility: hidden;
   color: #fff;
   background-color: $primaryColor;
@@ -233,16 +231,14 @@
   }
 }
 
-.glossary-item {
-  vertical-align:middle;
-
+.tag-glossary-item {
   @media (max-width:600px){
     visibility: hidden;
   }
 }
 
-.glossary-item:hover > .tooltip-text,
-.button-helper:focus > .glossary-item > .tooltip-text {
+.tag-glossary-item:hover > .tag-tooltip-text,
+.tag-button-helper:focus > .tag-glossary-item > .tag-tooltip-text {
   visibility: visible;
 }
 

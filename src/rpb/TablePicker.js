@@ -235,13 +235,13 @@ class TaggedItemCloud extends React.Component {
       const entry = GlossaryEntry.lookup(concept_id);
       if( entry && !entry.no_def ){
         return (
-          <div className="glossary-item">
-            <img className="glossary-item"
+          <div className="tag-glossary-item">
+            <img className="tag-glossary-icon"
               width={18}
               aria-hidden="true"
               src={get_static_url('svg/not-available-white.svg')} 
             />
-            <div className="tooltip-text" dangerouslySetInnerHTML={{ __html: get_glossary_item_tooltip_html(concept_id) }} />
+            <div className="tag-tooltip-text" dangerouslySetInnerHTML={{ __html: get_glossary_item_tooltip_html(concept_id) }} />
           </div>
         );
       }
@@ -271,7 +271,7 @@ class TaggedItemCloud extends React.Component {
                     >
                       { display } 
                     </button>
-                    <span className="button-helper" tabIndex="0" >
+                    <span className="tag-button-helper" tabIndex="0" >
                       {generate_glossary_tooltip(id)}
                     </span>
                   </li>
