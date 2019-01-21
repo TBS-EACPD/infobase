@@ -56,9 +56,13 @@ doc_breakout_details:
 
 change_from_comparison_value:
   transform: [handlebars]
-  en: Amount added to previous <span class="nowrap">{{est_in_year}}</span> Authorities (%)
-  fr: TODO update this text - Différence ajouté au budget principale <span class="nowrap">{{est_in_year}}</span> (%)
+  en: Adjustment to prior <span class="nowrap">{{est_in_year}}</span> Authorities (%)
+  fr: Adaptation aux autorisations <span class="nowrap">{{est_in_year}}</span> précédent (%)
 
+previous_mains_comparison_value:
+  transform: [handlebars]
+  en: Comparison to Main Estimates <span class="nowrap">{{est_last_year}}</span>
+  fr: Comparaison avec le budget principale <span class="nowrap">{{est_in_year}}</span> (%)
 
 show_only_votes:
   en: Only show voted items
