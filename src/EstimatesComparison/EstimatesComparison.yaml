@@ -5,8 +5,15 @@ diff_view_title:
 
 diff_view_top_text:
   transform: [handlebars, markdown]
-  en: A presentation of the recently tabled Supplementary Estimates {{current_sups_letter}} {{est_in_year}} with context from previously tabled estimate documents
-  fr: Une présentation du budget supplémentaire des dépenses {{current_sups_letter}} {{est_in_year}} récemment déposé avec de l'information contextuelle des budget de dépenses précédents
+  en: A presentation of the recently tabled {{#if current_doc_is_mains}}Main Estimates{{else}}Supplementary Estimates {{current_sups_letter}}{{/if}} {{est_in_year}} with context from previously tabled estimate documents
+  fr: Une présentation du budget {{#if current_doc_is_mains}}Budget principal des dépenses{{else}}supplémentaire des dépenses {{current_sups_letter}}{{/if}} {{est_in_year}} récemment déposé avec de l'information contextuelle des budget de dépenses précédents
+
+current_doc_this_year:
+  transform: [handlebars]
+  en: |
+   {{#if current_doc_is_mains}}Main Estimates{{else}}Supplementary Estimates {{current_sups_letter}}{{/if}} <span class="nowrap">{{est_in_year}}</span>
+  fr: |
+    {{#if current_doc_is_mains}}Budget principal des dépenses{{else}}supplémentaire des dépenses {{current_sups_letter}}{{/if}} <span class="nowrap">{{est_in_year}}</span>
 
 new:
   en: New Item
@@ -46,11 +53,6 @@ this_year_authorities:
 doc_breakout_details:
   en: Detailed Breakout by Estimate Mechanism
   fr: Répartition détaillée par instrument des dépenses
-
-current_supps_this_year:
-  transform: [handlebars]
-  en: Supplementary Estimates {{current_sups_letter}} <span class="nowrap">{{est_in_year}}</span>
-  fr: Budget supplémentaire {{current_sups_letter}} des dépenses <span class="nowrap">{{est_in_year}}</span>
 
 change_from_comparison_value:
   transform: [handlebars]
@@ -97,5 +99,5 @@ estimates_source_link:
 
 
 estimates_comparison_desc_meta_attr:
-  en: Find out more about in-year changes in funding by viewing Supplementary Estimates {{current_sups_letter}} amounts alongside useful contextual information
-  fr: Renseignez-vous davantage sur les changements du financement de l'année en examiner le budget supplémentaire des dépenses {{current_sups_letter}} avec d'autres informations contextuelles
+  en: Find out more about in-year changes in funding by viewing the latest estimates document amounts alongside useful contextual information
+  fr: Renseignez-vous davantage sur les changements du financement de l'année en examiner les dernières documents budgétaires avec d'autres informations contextuelles

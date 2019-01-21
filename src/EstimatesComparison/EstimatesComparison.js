@@ -30,6 +30,7 @@ import {
   estimates_diff_scheme,
   col_defs,
   initial_state as initial_scheme_state,
+  current_doc_is_mains,
   current_sups_letter,
 } from './scheme.js';
 import { businessConstants } from '../models/businessConstants.js';
@@ -55,7 +56,7 @@ export default class EstimatesComparison extends React.Component {
       <StandardRouteContainer
         title={title}
         breadcrumbs={[title]}
-        description={text_maker("estimates_comparison_desc_meta_attr", {current_sups_letter})}
+        description={text_maker("estimates_comparison_desc_meta_attr")}
         route_key="_dev"
       >
         <h1><TM k="diff_view_title"/></h1>
@@ -270,7 +271,7 @@ class EstimatesExplorer extends React.Component {
     return (
       <div>
         <div className="medium_panel_text mrgn-tp-lg">
-          <TM k="diff_view_top_text" args={{current_sups_letter}} />
+          <TM k="diff_view_top_text" args={{current_doc_is_mains, current_sups_letter}} />
         </div>
         <div 
           style={{

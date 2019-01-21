@@ -16,16 +16,21 @@ const last_year_col = "{{est_last_year}}_estimates";
 const row_identifier_func = row => `${row.dept}-${row.votenum}-${row.desc}`; 
 
 
-export const current_sups_letter = "B"; // Update this on each new sups release, should be all you need to do!
-const current_sups_code = `SE${current_sups_letter}`;
+export const current_doc_is_mains = false; // Update this for Mains tabling and Sups A!
+export const current_sups_letter = "B"; // Update this on each new sups release!
+
+const current_doc_code = current_doc_is_mains ? "MAINS" : `SE${current_sups_letter}`;
 const ordered_est_docs = ["MAINS", "VA", "SEA", "SEB", "SEC"];
 const prior_in_year_doc_filter = (item) => _.chain(ordered_est_docs)
-  .takeWhile( est_doc => est_doc !== current_sups_code)
+  .takeWhile( est_doc => est_doc !== current_doc_code)
   .includes( item.est_doc_code )
   .value();
+const get_comparision_value = (group) => current_doc_is_mains ?
+  _.chain(group).filter(item => item.est_doc_code === "MAINS").sumBy(last_year_col).value() :
+  _.chain(group).filter(prior_in_year_doc_filter).sumBy(this_year_col).value();
 
   
-const reduce_by_supps_dim = (rows) => _.chain(rows)
+const reduce_by_sups_dim = (rows) => _.chain(rows)
   .groupBy(row_identifier_func)
   .toPairs()
   .map( ([_x, group]) => {
@@ -34,8 +39,8 @@ const reduce_by_supps_dim = (rows) => _.chain(rows)
       dept: first.dept,
       desc: first.desc,
       votenum: first.votenum,
-      sups: _.chain(group).filter({est_doc_code: current_sups_code}).sumBy(this_year_col).value(),
-      comparison_value: _.chain(group).filter(prior_in_year_doc_filter).sumBy(this_year_col).value(),
+      current_value: _.chain(group).filter({est_doc_code: current_doc_code}).sumBy(this_year_col).value(),
+      comparison_value: get_comparision_value(group),
       _rows: group,
     };
   })
@@ -55,24 +60,24 @@ const get_doc_code_breakdowns = rows => _.chain(rows)
 const key_for_table_row = row => `${row.dept}-${row.votenum}-${row.desc}`;
 function get_data_by_org(include_stat){
 
-  const keys_in_supps = get_keys_in_supps(include_stat);
+  const keys_in_sups = get_keys_in_sups(include_stat);
 
   const data = _.chain(Table.lookup('orgVoteStatEstimates').data)
     .pipe( include_stat ? _.identity : rows => _.reject(rows, {votestattype: 999}) )
-    .pipe( reduce_by_supps_dim )
+    .pipe( reduce_by_sups_dim )
     .groupBy('dept')
     .toPairs()
     .map( ([org_id, rows]) => {
 
-      const sups_rows = _.filter(rows, row => keys_in_supps[key_for_table_row(row)]);
-      if( _.isEmpty(sups_rows) || !_.some(sups_rows, row => row.sups || row.comparison_value) ){
+      const sups_rows = _.filter(rows, row => keys_in_sups[key_for_table_row(row)]);
+      if( _.isEmpty(sups_rows) || !_.some(sups_rows, row => row.current_value || row.comparison_value) ){
         return null;
       }
 
       const org = Dept.lookup(org_id);
-      const sups = _.sumBy(sups_rows, "sups") || 0;
+      const current_value = _.sumBy(sups_rows, "current_value") || 0;
       const comparison_value = _.sumBy(rows, "comparison_value") || 0;
-      const percent_increase = sups/comparison_value || 0;
+      const percent_increase = current_value/comparison_value || 0;
 
       const amounts_by_doc = get_doc_code_breakdowns( _.flatMap(rows, "_rows") );
 
@@ -81,7 +86,7 @@ function get_data_by_org(include_stat){
         data: {
           name: org.name,
           subject: org,
-          sups,
+          current_value,
           comparison_value,
           percent_increase,
           footnotes: FootNote.get_for_subject(
@@ -97,11 +102,11 @@ function get_data_by_org(include_stat){
         },
         children: _.chain(rows)
           .map(row => {
-            const sups = row["sups"] || 0;
+            const current_value = row["current_value"] || 0;
             const comparison_value = row["comparison_value"] || 0;
-            const percent_increase = sups/comparison_value || 0;
+            const percent_increase = current_value/comparison_value || 0;
   
-            if ( !sups && !comparison_value ){
+            if ( !current_value && !comparison_value ){
               return null;
             }
 
@@ -109,7 +114,7 @@ function get_data_by_org(include_stat){
               id: `${org_id}-${row.desc}`,
               data: {
                 name: row.desc,
-                sups,
+                current_value,
                 comparison_value,
                 percent_increase,
                 footnotes: get_footnotes_for_votestat_item({
@@ -142,14 +147,14 @@ function get_data_by_org(include_stat){
 const strip_stat_marker = str => str.indexOf("(S) ") > -1 ? str.split("(S) ")[1] : str;
 
 const get_category_children = (rows) => _.chain(rows)
-  .pipe(reduce_by_supps_dim)
+  .pipe(reduce_by_sups_dim)
   .map(new_row => {
     const { votenum, desc, dept } = new_row;
-    const sups = new_row.sups || 0;
+    const current_value = new_row.current_value || 0;
     const comparison_value = new_row.comparison_value || 0;
-    const percent_increase = sups/comparison_value || 0;
+    const percent_increase = current_value/comparison_value || 0;
 
-    if( !sups && !comparison_value ){
+    if( !current_value && !comparison_value ){
       return null;
     }
 
@@ -158,7 +163,7 @@ const get_category_children = (rows) => _.chain(rows)
       data: {
         name: `${Dept.lookup(dept).name} - ${strip_stat_marker(desc)}`,
         comparison_value,
-        sups,
+        current_value,
         percent_increase,
         amounts_by_doc: get_doc_code_breakdowns(new_row._rows),
         footnotes: get_footnotes_for_votestat_item({
@@ -173,21 +178,21 @@ const get_category_children = (rows) => _.chain(rows)
   .value();
 
 function get_data_by_item_types(){
-  const keys_in_supps = get_keys_in_supps(true);
+  const keys_in_sups = get_keys_in_sups(true);
   
   const nested_data = _.chain( Table.lookup('orgVoteStatEstimates').major_voted_big_stat([this_year_col,last_year_col], false, false) )
     .toPairs()
     .map( ([ category, rows ]) => {  
 
-      const sup_rows = _.filter(rows, row => keys_in_supps[key_for_table_row(row)]);
+      const sup_rows = _.filter(rows, row => keys_in_sups[key_for_table_row(row)]);
       if( _.isEmpty(sup_rows) ){
         return null;
       }
-      const children = get_category_children(rows, keys_in_supps);
+      const children = get_category_children(rows, keys_in_sups);
 
-      const sups = _.sumBy(children, "data.sups") || 0;
-      const comparison_value = _.chain(rows).filter(prior_in_year_doc_filter).sumBy(this_year_col).value();
-      const percent_increase = sups/comparison_value || 0;
+      const current_value = _.sumBy(children, "data.current_value") || 0;
+      const comparison_value = get_comparision_value(rows);
+      const percent_increase = current_value/comparison_value || 0;
 
       const is_voted = _.isNumber(_.first(rows).votenum);
 
@@ -204,7 +209,7 @@ function get_data_by_item_types(){
         data: {
           name,
           comparison_value,
-          sups,
+          current_value,
           percent_increase,
           amounts_by_doc: get_doc_code_breakdowns(rows),
           is_voted,
@@ -223,11 +228,11 @@ function get_data_by_item_types(){
     .partition("data.is_voted")
     .map( (categories, ix) => {
       const is_voted = ix === 0;
-      const sups = _.sumBy(categories, "data.sups");
+      const current_value = _.sumBy(categories, "data.current_value");
       const comparison_value = _.sumBy(categories, "data.comparison_value")
-      const percent_increase = sups/comparison_value || 0;
+      const percent_increase = current_value/comparison_value || 0;
 
-      if ( !sups && !comparison_value ){
+      if ( !current_value && !comparison_value ){
         return null;
       }
 
@@ -236,7 +241,7 @@ function get_data_by_item_types(){
         children: categories,
         data: {
           name: text_maker(is_voted ? "voted_items" : "stat_items"),
-          sups,
+          current_value,
           comparison_value,
           percent_increase,
         },
@@ -258,18 +263,11 @@ function get_data_by_item_types(){
 }
 
 
-function get_keys_in_supps(include_stat){
-<<<<<<< HEAD
+function get_keys_in_sups(include_stat){
   return _.chain(Table.lookup('orgVoteStatEstimates').data)
     .pipe( include_stat ? _.identity : rows => _.reject(rows, {votestattype: 999}) )
-    .filter( row => row[this_year_col] && row.est_doc_code === current_sups_code )
+    .filter( row => row[this_year_col] && row.est_doc_code === current_doc_code )
     .map( row => [key_for_table_row(row), 1] )
-=======
-  return _.chain(Table.lookup('table8').data)
-    .pipe( include_stat ? _.identity : rows => _.reject(rows, {votestattype: 999}) )
-    .filter( row => row[this_year_col] && row.est_doc_code === current_sups_code )
-    .map( row => [key_for_table_row(row), 1] )
->>>>>>> Fix a lot of cases where the EstimatesExplorer displayed nodes it shouldn't have (no or NaN data)
     .fromPairs()
     .value();
 }
@@ -287,11 +285,11 @@ export const col_defs = [
     get_val: ({data}) => data.name,
   },
   {
-    id: "sups",
+    id: "current_value",
     width: 150,
     textAlign: "right",
-    header_display: <TM k="current_supps_this_year" args={{current_sups_letter}} />,
-    get_val: node => _.get(node, "data.sups"),
+    header_display: <TM k="current_doc_this_year" args={{current_doc_is_mains, current_sups_letter}} />,
+    get_val: node => _.get(node, "data.current_value"),
     val_display: val => <Format type="compact1" content={val} />,
   },
   {
@@ -352,7 +350,7 @@ function get_footnotes_for_votestat_item({desc, org_id, votenum}){
 
 const scheme_key = "estimates_diff";
 export const initial_state = {
-  sort_col: "sups",
+  sort_col: "current_value",
   is_descending: true,
   show_stat: true,
   h7y_layout: "item_type",
