@@ -251,7 +251,7 @@ class TaggedItemCloud extends React.Component {
     return <div>
       <div style={{padding: '0px'}}>
         {_.map(categories, cat => 
-          <div className="labeled-box">
+          <div key={cat} className="labeled-box">
             <div className="labeled-box-label">
               <div className="labeled-box-label-text">
                 <TextMaker text_key={cat} />
