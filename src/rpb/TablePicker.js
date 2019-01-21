@@ -235,7 +235,7 @@ class TaggedItemCloud extends React.Component {
       const entry = GlossaryEntry.lookup(concept_id);
       if( entry && !entry.no_def ){
         return (
-          <div>
+          <div className="glossary-item">
             <img className="glossary-item"
               width={18}
               aria-hidden="true"
@@ -267,12 +267,11 @@ class TaggedItemCloud extends React.Component {
                     <button 
                       role="checkbox"
                       aria-checked={!!active}
-                      className="button-unstyled"
                       onClick={()=>onSelectTag(id)}
                     >
                       { display } 
                     </button>
-                    <span className="buttonhelper">
+                    <span className="button-helper" tabIndex="0" >
                       {generate_glossary_tooltip(id)}
                     </span>
                   </li>

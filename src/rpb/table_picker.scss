@@ -33,19 +33,23 @@
   border: none;
 }
 
-.tag-cloud-main > li > span.buttonhelper {
+.tag-cloud-main > li > span.button-helper {
   text-align: center;
   background-color: $buttonPrimaryColor;
   padding: 0px 10px 0px 0px;
   border-radius: 0px 8px 8px 0px;
   border:none;
   color: #fff;
+
+  @media (max-width:600px){
+    padding: 0px;
+  }
 }
 
 .tag-cloud-main > li:hover > button,
-.tag-cloud-main > li:focus > button,
+.tag-cloud-main > li > button:focus,
 .tag-cloud-main > li:hover > span,
-.tag-cloud-main > li:focus > span,
+.tag-cloud-main > li > span:focus,
 {
   background-color: $buttonSecondaryColor;
 }
@@ -207,8 +211,7 @@
   visibility: hidden;
   color: #fff;
   background-color: $primaryColor;
-  /*background-color: hsla(205, 40%, 50%, 1); */
-  text-align: left !important; /* is this a good idea? copied from the other tooltip */
+  text-align: left;
   border-radius: 5px;
   padding: 1px 20px 10px 20px;
   position: absolute;
@@ -220,17 +223,29 @@
     max-width: 600px !important;
     line-height: 1.6em;
   }
-  @media (min-width:900px) and (max-width: 1199px) { max-width: 60vw !important }
-  @media (max-width:899px){ max-width: 90vw !important }
+  @media (min-width:900px) and (max-width: 1199px) { 
+    max-width: 60vw !important;
+    padding: 1px 5px 2px 5px;
+  }
+  @media (max-width:899px){
+    max-width: 90vw !important;
+    padding: 1px;
+  }
 }
 
-.glossary-link:hover >.tooltip-text {
+.glossary-item {
+  vertical-align:middle;
+
+  @media (max-width:600px){
+    visibility: hidden;
+  }
+}
+
+.glossary-item:hover > .tooltip-text,
+.button-helper:focus > .tooltip-text {
   visibility: visible;
 }
 
-img.glossary-item {
-  vertical-align:middle;
-}
 
 /* our app-wide a:visited: black is overriding all the bootstrap white on dark blue styles...  */
 .nav-pills > li.active > a {
