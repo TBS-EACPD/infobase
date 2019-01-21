@@ -31,10 +31,10 @@
   border: none;
 }
 
-.tag-cloud-main > li > span.button-helper {
+.tag-cloud-main > li > span.tag-button-helper {
   text-align: center;
   background-color: $buttonPrimaryColor;
-  padding: 0px 10px 0px 0px;
+  padding-right: 3px;
   border-radius: 0px 8px 8px 0px;
   border:none;
   color: #fff;
@@ -231,11 +231,23 @@
   }
 }
 
-.tag-glossary-item {
+.tag-button-helper {
   @media (max-width:600px){
     visibility: hidden;
   }
+
+  & > .tag-glossary-item {
+    width: 25px;
+    height: 30px;
+
+    & > .tag-glossary-icon {
+      height: inherit;
+      width: inherit;
+    }
+  }
+
 }
+
 
 .tag-glossary-item:hover > .tag-tooltip-text,
 .tag-button-helper:focus > .tag-glossary-item > .tag-tooltip-text {
