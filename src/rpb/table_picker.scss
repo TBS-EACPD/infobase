@@ -242,7 +242,7 @@
 }
 
 .glossary-item:hover > .tooltip-text,
-.button-helper:focus .tooltip-text {
+.button-helper:focus > .glossary-item > .tooltip-text {
   visibility: visible;
 }
 
