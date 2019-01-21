@@ -29,6 +29,15 @@
   border-radius: 8px 0px 0px 8px;
   color: #fff;
   border: none;
+
+  &:only-child {
+    padding: 3px 15px;
+    border-radius: 8px;
+  }
+  @media (max-width: 600px){
+    padding: 3px 15px;
+    border-radius: 8px;
+  }
 }
 
 .tag-cloud-main > li > span.tag-button-helper {
@@ -41,7 +50,50 @@
 
   @media (max-width: 600px){
     padding: 0px;
+    visibility: hidden;
+    width: 0px;
   }
+}
+
+.tag-glossary-item {
+  width: 25px;
+  height: 30px;
+  
+  & > .tag-glossary-icon {
+    height: inherit;
+    width: inherit;
+  }
+
+  & > .tag-tooltip-text {
+    visibility: hidden;
+    color: #fff;
+    background-color: $primaryColor;
+    text-align: left;
+    border-radius: 5px;
+    padding: 1px 20px 10px 20px;
+    position: absolute;
+    z-index: 1;
+    font-size: 0.8em;
+    border: none; 
+    
+    @media (min-width:1200px){
+      max-width: 600px !important;
+      line-height: 1.6em;
+    }
+    @media (min-width:900px) and (max-width: 1199px) { 
+      max-width: 60vw !important;
+      padding: 1px 5px 2px 5px;
+    }
+    @media (max-width:899px){
+      max-width: 90vw !important;
+      padding: 1px;
+    }
+  }
+}
+
+.tag-glossary-item:hover > .tag-tooltip-text,
+.tag-button-helper:focus > .tag-glossary-item > .tag-tooltip-text {
+  visibility: visible;
 }
 
 .tag-cloud-main > li:hover > button,
@@ -203,55 +255,6 @@
   opacity: 0.01;
   transition: max-height 500ms ease-out, opacity 500ms ease-out;
 
-}
-
-.tag-tooltip-text {
-  visibility: hidden;
-  color: #fff;
-  background-color: $primaryColor;
-  text-align: left;
-  border-radius: 5px;
-  padding: 1px 20px 10px 20px;
-  position: absolute;
-  z-index: 1;
-  font-size: 0.8em;
-  border: none; 
-  
-  @media (min-width:1200px){
-    max-width: 600px !important;
-    line-height: 1.6em;
-  }
-  @media (min-width:900px) and (max-width: 1199px) { 
-    max-width: 60vw !important;
-    padding: 1px 5px 2px 5px;
-  }
-  @media (max-width:899px){
-    max-width: 90vw !important;
-    padding: 1px;
-  }
-}
-
-.tag-button-helper {
-  @media (max-width:600px){
-    visibility: hidden;
-  }
-
-  & > .tag-glossary-item {
-    width: 25px;
-    height: 30px;
-
-    & > .tag-glossary-icon {
-      height: inherit;
-      width: inherit;
-    }
-  }
-
-}
-
-
-.tag-glossary-item:hover > .tag-tooltip-text,
-.tag-button-helper:focus > .tag-glossary-item > .tag-tooltip-text {
-  visibility: visible;
 }
 
 
