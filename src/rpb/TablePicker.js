@@ -231,22 +231,20 @@ class TaggedItemCloud extends React.Component {
         .flatten()
         .value()]));
     
-    function generate_glossary_tooltip(concept_id){
-      const entry = GlossaryEntry.lookup(concept_id);
-      if( entry && !entry.no_def ){
-        return (
-          <div className="tag-glossary-item">
-            <img className="tag-glossary-icon"
-              width={18}
-              aria-hidden="true"
-              src={get_static_url('svg/not-available-white.svg')} 
-            />
-            <div className="tag-tooltip-text" dangerouslySetInnerHTML={{ __html: get_glossary_item_tooltip_html(concept_id) }} />
-          </div>
-        );
-      }
-    }
-
+    const is_glossary_item_with_def = (id) => {
+      const entry = GlossaryEntry.lookup(id);
+      return entry && !entry.no_def
+    };
+    const generate_glossary_tooltip = (concept_id) => (
+      <div className="tag-glossary-item">
+        <img className="tag-glossary-icon"
+          width={18}
+          aria-hidden="true"
+          src={get_static_url('svg/not-available-white.svg')} 
+        />
+        <div className="tag-tooltip-text" dangerouslySetInnerHTML={{ __html: get_glossary_item_tooltip_html(concept_id) }} />
+      </div>
+    );
 
     return <div>
       <div style={{padding: '0px'}}>
@@ -271,9 +269,11 @@ class TaggedItemCloud extends React.Component {
                     >
                       { display } 
                     </button>
-                    <span className="tag-button-helper" tabIndex="0" >
-                      {generate_glossary_tooltip(id)}
-                    </span>
+                    { is_glossary_item_with_def(id) &&
+                      <span className="tag-button-helper" tabIndex="0" >
+                        {generate_glossary_tooltip(id)}
+                      </span>
+                    }
                   </li>
                 )} 
               </ul>
