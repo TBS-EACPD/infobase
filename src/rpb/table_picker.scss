@@ -76,17 +76,16 @@
     font-size: 0.8em;
     border: none; 
     
-    @media (min-width:1200px){
-      max-width: 600px !important;
-      line-height: 1.6em;
+    @media (min-width: 1200px) { 
+      width: 600px;
     }
-    @media (min-width:900px) and (max-width: 1199px) { 
-      max-width: 60vw !important;
-      padding: 1px 5px 2px 5px;
+    @media (min-width: 900px) and (max-width: 1200px) { 
+      width: 70vw;
+      right: 0vw;
     }
-    @media (max-width:899px){
-      max-width: 90vw !important;
-      padding: 1px;
+    @media (max-width: 900px) { 
+      width: 80vw;
+      right: 0vw;
     }
   }
 }
