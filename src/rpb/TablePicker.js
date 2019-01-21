@@ -261,11 +261,11 @@ class TaggedItemCloud extends React.Component {
                   <li 
                     key={id}
                     className={classNames(active && 'active')}
+                    onClick={() => onSelectTag(id)}
                   >
                     <button 
                       role="checkbox"
                       aria-checked={!!active}
-                      onClick={()=>onSelectTag(id)}
                     >
                       { display } 
                     </button>
