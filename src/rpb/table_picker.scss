@@ -53,12 +53,16 @@
     visibility: hidden;
     width: 0px;
   }
+
+  // Fix inconsistent sub-pixel white gaps in IE11
+  padding-left: 1px;
+  margin-right: -1px;
 }
 
 .tag-glossary-item {
   width: 25px;
   height: 30px;
-  
+
   & > .tag-glossary-icon {
     height: inherit;
     width: inherit;
