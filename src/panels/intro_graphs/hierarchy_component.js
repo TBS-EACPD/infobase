@@ -232,48 +232,53 @@ export const program_hierarchy = ({subject, href_generator, show_siblings, show_
   const is_subject = subj => subj === subject;
   const is_parent = subj => subj === subject.crso;
 
+  const dept_node = [
+    { 
+      name: subject.dept.name,
+      href: href_generator(subject.dept),
+      children: (
+        _.chain(subject.dept.crsos) //CRSO (parent + uncles)
+          .filter( show_uncles ? _.constant(true) : is_parent )
+          .filter( show_dead_sos ? _.constant(true) : 'is_active' )
+          .sortBy('is_active')
+          .sortBy( is_parent )
+          .reverse()
+          .map( crso => ({
+            name: (label_crsos ? crso.singular()+" : " : "") + crso.name,
+            href: crso.is_cr && href_generator(crso),
+            dead: !crso.is_active,
+            children: show_cousins || is_parent(crso) ? 
+              _.chain(crso.programs)
+                .filter( show_siblings ? _.constant(true) : is_subject )
+                .map(prog => ({
+                  name: prog.name,
+                  active: is_subject(prog),
+                  href: href_generator(prog),
+                  dead: !prog.is_active,
+                }))
+                .sortBy('dead')
+                .reverse()
+                .sortBy('active')
+                .reverse()
+                .value() :
+              null,
+          }))
+          .value()
+      ),
+    },
+  ];
+
+  const ministry_node = subject.dept.ministry && [
+    { 
+      name: `${subject.dept.ministry.name} (${text_maker('ministry')})`,
+      children: dept_node,
+    },
+  ];
+
   return {
     name: Gov.name,
     href: href_generator(Gov),
-    children: [{ 
-      name: `${subject.dept.ministry.name} (${text_maker('ministry')})`,
-      children: [{ //dept
-        name: subject.dept.type,
-        children: [{ 
-          name: subject.dept.name,
-          href: href_generator(subject.dept),
-          children: (
-            _.chain(subject.dept.crsos) //CRSO (parent + uncles)
-              .filter( show_uncles ? _.constant(true) : is_parent )
-              .filter( show_dead_sos ? _.constant(true) : 'is_active' )
-              .sortBy('is_active')
-              .sortBy( is_parent )
-              .reverse()
-              .map( crso => ({
-                name: (label_crsos ? crso.singular()+" : " : "") + crso.name,
-                href: crso.is_cr && href_generator(crso),
-                dead: !crso.is_active,
-                children: show_cousins || is_parent(crso) ? 
-                  _.chain(crso.programs)
-                    .filter( show_siblings ? _.constant(true) : is_subject )
-                    .map(prog => ({
-                      name: prog.name,
-                      active: is_subject(prog),
-                      href: href_generator(prog),
-                      dead: !prog.is_active,
-                    }))
-                    .sortBy('dead')
-                    .reverse()
-                    .sortBy('active')
-                    .reverse()
-                    .value() :
-                  null,
-              }))
-              .value()
-          ),
-        }],
-      }],
-    }],
+    children: ministry_node || dept_node,
   };
 }
 
