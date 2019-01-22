@@ -215,16 +215,19 @@ function populate_igoc_models({
 function populate_glossary(lines){
   const [key, term, markdown_def ] = [0,1,2];
   
-  lines.forEach( line => {
-    GlossaryEntry.register(
-      line[key],
-      new GlossaryEntry(
-        line[key], 
-        line[term],
-        line[markdown_def]
-      )
-    );
-  });
+  _.chain(lines)
+    .filter( line => !_.isEmpty(line[markdown_def]) )
+    .each( line => {
+      GlossaryEntry.register(
+        line[key],
+        new GlossaryEntry(
+          line[key], 
+          line[term],
+          line[markdown_def]
+        )
+      );
+    })
+    .value();
 }
 
 function create_tag_branches(program_tag_types){

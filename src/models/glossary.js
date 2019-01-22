@@ -4,31 +4,17 @@ import { staticStoreMixin } from './staticStoreMixin.js';
 import { trivial_text_maker } from './text.js';
 
 class GlossaryEntry extends mix().with(staticStoreMixin) {
-  constructor(id,title,def_text){
+  constructor(id, title, def_text){
     super();
     this.id = id;
     this.title = title;
-    if(_.isEmpty(def_text)){
-      this.no_def = true;
-    } else {
-      this._def_text = def_text;
-    }
-    //this.compiled = false;
+    this._def_text = def_text;
   }
   get definition(){ 
-    if(this.no_def){
-      /* eslint-disable no-console*/
-      window.is_dev_build && console.warn("definition for non-defined concept"); 
-      return "";
-    }
     return compiled_definitions(this.id);
   }
   static query(query){
-    const results = super.query(query);
-    return _.reject(results, 'no_def');
-  }
-  static get fully_defined_entries(){
-    return _.reject(this.get_all(), 'no_def');
+    return super.query(query);
   }
 }
 

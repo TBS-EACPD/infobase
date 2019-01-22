@@ -14,7 +14,7 @@ import {
 const { text_maker, TM } = create_text_maker_component(glossary_text);
 
 function get_glossary_items_by_letter(){
-  const glossary_items = GlossaryEntry.fully_defined_entries;
+  const glossary_items = GlossaryEntry.get_all();
 
   const glossary_items_by_letter = _.chain(glossary_items)
     .groupBy(item => {

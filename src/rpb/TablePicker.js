@@ -221,10 +221,6 @@ class TaggedItemCloud extends React.Component {
         .flatten()
         .value()]));
     
-    const is_glossary_item_with_def = (id) => {
-      const entry = GlossaryEntry.lookup(id);
-      return entry && !entry.no_def
-    };
     const generate_glossary_tooltip = (concept_id) => (
       <div className="tag-glossary-item">
         <img className="tag-glossary-icon"
@@ -259,7 +255,7 @@ class TaggedItemCloud extends React.Component {
                     >
                       <TextMaker text_key={id} />
                     </button>
-                    { is_glossary_item_with_def(id) &&
+                    { GlossaryEntry.lookup(id) &&
                       <span className="tag-button-helper" tabIndex="0" >
                         {generate_glossary_tooltip(id)}
                       </span>

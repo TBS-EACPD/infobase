@@ -134,14 +134,14 @@ const glossary = {
       />
     </Fragment>
   ),
-  get_data: () => GlossaryEntry.fully_defined_entries,
+  get_data: () => GlossaryEntry.get_all(),
   filter: (query, datum) => memoized_re_matchers(query, glossary_attributes_to_match, "glossary")(datum),
 };
 
 const glossary_lite = {
   header_function: () => trivial_text_maker('glossary'),
   name_function: _.property('title'),
-  get_data: () => GlossaryEntry.fully_defined_entries,
+  get_data: () => GlossaryEntry.get_all(),
   filter: (query, datum) => memoized_re_matchers(query, glossary_attributes_to_match, "glossary_lite")(datum),
 };
 
