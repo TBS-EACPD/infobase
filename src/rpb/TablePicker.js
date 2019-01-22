@@ -20,12 +20,6 @@ function toggleArrayElement(arr,el){
   arr.concat(el);
 }
 
-function filter_concepts_for_table(table_obj){
-  return _.chain(table_obj.tags)
-    .filter(concept_filter)
-    .value();
-}
-
 
 /* 
   props:
@@ -57,7 +51,7 @@ class TablePicker extends React.Component {
       .reject('reference_table')
       .map(table_obj => (
         _.map(
-          filter_concepts_for_table(table_obj),
+          _.filter(table_obj.tags, concept_filter),
           concept => ({table_id: table_obj.id, concept_id: concept }) 
         )
       ))
