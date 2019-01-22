@@ -112,7 +112,7 @@ const est_doc_code_to_glossary_key_dictionary = {
   SEA: "SUPPSA",
   SEB: "SUPPSB",
   SEC: "SUPPSC",
-  //IM: "INTER_EST",
+  IE: "INTER_EST",
 };
 const get_glossary_entry_by_est_doc_code = (est_doc_code) => {
   const glossary_key = est_doc_code_to_glossary_key_dictionary[est_doc_code]
@@ -364,7 +364,7 @@ const get_year = (presentation_scheme) => {
     case "est_doc_mains" : return "{{est_in_year}}";
     case "est_doc_sea" : return "{{est_in_year}}";
     case "est_doc_seb" : return "{{est_in_year}}";
-    case "est_doc_im" : return "{{est_next_year}}";
+    case "est_doc_ie" : return "{{est_next_year}}";
     default : return "{{est_last_year}}";
   }
 }
@@ -382,7 +382,7 @@ const get_name_text_fragment = (presentation_scheme) => {
     case "est_doc_sea" : return text_maker("est_doc_sea");
     case "est_doc_seb" : return text_maker("est_doc_seb");
     case "est_doc_sec" : return text_maker("est_doc_sec");
-    case "est_doc_im" : return text_maker("est_doc_im");
+    case "est_doc_ie" : return text_maker("est_doc_ie");
   }
 }
 
@@ -396,7 +396,7 @@ const get_lang_specific_filter_name = (presentation_scheme) => {
     case "est_doc_sea" : return text_maker("est_doc_sea");
     case "est_doc_seb" : return text_maker("est_doc_seb");
     case "est_doc_sec" : return text_maker("est_doc_sec");
-    case "est_doc_im" : return text_maker("est_doc_im");
+    case "est_doc_ie" : return text_maker("est_doc_ie");
     default : return "";
   }
 }
@@ -435,7 +435,7 @@ const get_root_text_key = (presentation_scheme) => {
     case "est_doc_sea" : return "partition_spending_will_be_by_est_doc";
     case "est_doc_seb" : return "partition_spending_will_be_by_est_doc";
     case "est_doc_sec" : return "partition_spending_will_be_by_est_doc";
-    case "est_doc_im" : return "partition_spending_will_be_by_est_doc";
+    case "est_doc_ie" : return "partition_spending_will_be_by_est_doc";
     default : return "partition_spending_will_be_variable_year";
   }
 }
@@ -459,7 +459,7 @@ const planned_exp_perspective_factory = (presentation_scheme) => new PartitionPe
     }
   ),
   level_headers: get_level_headers(presentation_scheme),
-  diagram_note_content: presentation_scheme === "est_doc_im" ? <TextMaker text_key={"partition_interim_estimates_def"} /> : false,
+  diagram_note_content: presentation_scheme === "est_doc_ie" ? <TextMaker text_key={"partition_interim_estimates_def"} /> : false,
 })
 
 
@@ -467,7 +467,7 @@ const make_planned_spend_est_doc_mains_perspective = () => planned_exp_perspecti
 const make_planned_spend_est_doc_sea_perspective = () => planned_exp_perspective_factory("est_doc_sea");
 const make_planned_spend_est_doc_seb_perspective = () => planned_exp_perspective_factory("est_doc_seb");
 const make_planned_spend_est_doc_sec_perspective = () => planned_exp_perspective_factory("est_doc_sec");
-const make_planned_spend_est_doc_im_perspective = () => planned_exp_perspective_factory("est_doc_im");
+const make_planned_spend_est_doc_im_perspective = () => planned_exp_perspective_factory("est_doc_ie");
 const make_planned_spend_est_type_perspective = () => planned_exp_perspective_factory("est_type");
 const make_planned_spend_vs_type_perspective = () => planned_exp_perspective_factory("vs_type");
 const make_planned_spend_org_planned_spend_perspective = () => planned_exp_perspective_factory("org_planned_spend");

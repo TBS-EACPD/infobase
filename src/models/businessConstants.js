@@ -109,7 +109,7 @@ const ex_level_stuff = { ex_level_target, compact_ex_level_map, ex_level_rev_map
 
 
 const estimates_docs = {
-  IM: {
+  IE: {
     order: 0,
     en: "Interim Estimates",
     fr: "Budget provisoire des dépenses",

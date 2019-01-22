@@ -24,7 +24,7 @@ export default function(a11y_mode){
               fr: "Budget provisoire des dépenses",
             })[window.lang],
           }) :
-          "#partition/est_doc_im/planned_exp"
+          "#partition/est_doc_ie/planned_exp"
       ),
       is_new: true,
     },
