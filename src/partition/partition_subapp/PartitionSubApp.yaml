@@ -72,7 +72,7 @@ partition_intro_popup:
         <li>
           [Planned Spending]{{gl "AUTH"}} ⟹ how much we plan to spend;
         <li>
-          [Full-Time Equivalents (FTEs)]{{gl "FTE"}} ⟹ how many people we employ; and,
+          [Full-Time Equivalents (FTEs)]{{gl "FTE"}} ⟹ how many people we employed; and,
         </li>
         <li>
           Organizations ⟹ how we're structured.

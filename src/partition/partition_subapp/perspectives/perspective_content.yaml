@@ -389,34 +389,20 @@ partition_spending_will_be_value_and_rpb_link_partial:
       </a>
     </p>
 partiton_planned_spending_was:
+  transform: [handlebars]
   en: |
-    We planned to spend
+    in total planned budgetary expenditures were tabled in
   fr: |
-    Nous avons prévu de dépenser
-    
-partiton_planned_spending_will_be:
-  en: |
-    We plan on spending
-  fr: |
-    Nous prévoyons dépenser
+    en total dépenses budgétaires prévues présenté en
 partition_spending_will_be_variable_year:
   transform: [handlebars]
   en: |
-    {{#if past_tense}}
-      {{gt "partiton_planned_spending_was"}}
-    {{else}}
-      {{gt "partiton_planned_spending_will_be"}}
-    {{/if}}
     {{> "partition_spending_will_be_value_and_rpb_link_partial"}}
-    in
+      {{gt "partiton_planned_spending_was"}}
     <span class='text-nowrap'>{{rt year}}</span>
   fr: |
-    {{#if past_tense}}
-      {{gt "partiton_planned_spending_was"}}
-    {{else}}
-      {{gt "partiton_planned_spending_will_be"}}
-    {{/if}}
     {{> "partition_spending_will_be_value_and_rpb_link_partial"}}
+    {{gt "partiton_planned_spending_was"}}
     en
     <span class='text-nowrap'>{{rt year}}</span>
 partition_spending_will_be_by_est_doc:
