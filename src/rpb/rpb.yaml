@@ -228,3 +228,95 @@ concept_category_money:
 concept_category_other:
   en: Other
   fr: Autres
+
+GENDER:
+  en: Employee gender
+  fr: Sexe
+
+QFR:
+  en: Quarterly Financial Reports (QFRs)
+  fr: Rapports financiers trimestriels (RFT)
+
+PA:
+  en: Public Accounts of Canada
+  fr: Comptes publics du Canada
+
+EST_PROC:
+  en: Estimates Process
+  fr: Processus du budget des dépenses
+
+AUTH:
+  en: Authorities
+  fr: Autorisations
+
+EXP:
+  en: Expenditures
+  fr: Dépenses
+
+VOTED:
+  en: Voted amounts
+  fr: Montants votés
+
+STAT:
+  en: Statutory authorities
+  fr: Autorisations législatives
+
+PLANNED_EXP:
+  en: Planned Spending
+  fr: Dépenses prévues
+
+SOBJ10:
+  en: Transfer payments
+  fr: Paiements de transfert
+
+PEOPLE:
+  en: Data about Public Servants
+  fr: Données sur les fonctionaires
+
+FTE:
+  en: Full-Time Equivalent (FTE)
+  fr: Équivalent temps plein (ETP)
+
+FPS:
+  en: Federal Public Service (FPS)
+  fr: Fonction publique fédérale (FPF)
+
+AGE:
+  en: Employee Age
+  fr: Âge des employés
+
+GOV_FRAM:
+  en: Whole-of-government framework
+  fr: Cadre pangouvernemental
+
+SOBJ:
+  en: Standard Objects
+  fr: Articles courants
+
+PROG:
+  en: Program
+  fr: Programme
+
+GEO:
+  en: Geographic Data
+  fr: Données géographique
+
+FOL:
+  en: First Official Language
+  fr: Première langue officielle
+
+PLAN_DATA:
+  en: Planning Data
+  fr: Données relatives à la planification
+
+ESTIMATES:
+  en: Estimates
+  fr: Budget des dépenses
+
+EX_LVL:
+  en: Executive Level
+  fr: Niveaux des cadres supérieurs
+
+SUPPRESSED_DATA:
+  en: Suppressed Data
+  fr: Données supprimées
