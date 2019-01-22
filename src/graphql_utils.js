@@ -3,9 +3,16 @@ import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import gql from 'graphql-tag';
 import { graphql as apollo_connect } from 'react-apollo';
+import { log_standard_event } from './core/analytics.js';
 
-
-const api_url = "http://127.0.0.1:1337/?";
+let api_url;
+// if(window.is_dev_build){
+/* eslint-disable no-constant-condition */
+if(false){
+  api_url = "http://127.0.0.1:1337/graphql";
+} else {
+  api_url = "https://us-central1-ib-serverless-api-dev.cloudfunctions.net/app/graphql";
+}
 
 let client = null;
 
@@ -53,12 +60,46 @@ export const LoadingHoc = ({Component,query,data_to_props=_.identity,variables})
 
 const query = gql`
 query {
-  orgs {
-    name
+  root(lang:"${window.lang}"){
+    org(org_id:"1") {
+      name
+    }
   }
 }
 `;
 
 window.query_client = () => {
   return client.query({ query });
+}
+
+
+export function test_api_query(){
+  const time_at_request = Date.now()
+  get_client().query({query})
+    .then(function(data){
+      const resp_time = Date.now() - time_at_request
+      if(_.get(data, "data.root.org.name") == window._DEV_HELPERS.Subject.Dept.lookup(1).applied_title){
+        log_standard_event({
+          SUBAPP: window.location.hash.replace('#',''),
+          MISC1: "API_QUERY_SUCCESS",
+          MISC2: `took ${resp_time} ms`,
+        });
+      } else {
+        log_standard_event({
+          SUBAPP: window.location.hash.replace('#',''),
+          MISC1: "API_QUERY_UNEXPECTED",
+          MISC2: `took  ${resp_time} ms - ${JSON.stringify(data.data)}`,
+        });  
+      }
+      
+    
+    })
+    .catch(function(error){
+      const resp_time = Date.now() - time_at_request      
+      log_standard_event({
+        SUBAPP: window.location.hash.replace('#',''),
+        MISC1: "API_QUERY_FAILURE",
+        MISC2: `took  ${resp_time} ms - ${error.toString()}`,
+      });
+    });
 }
