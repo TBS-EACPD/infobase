@@ -20,11 +20,9 @@ function toggleArrayElement(arr,el){
   arr.concat(el);
 }
 
-function get_concepts_for_table(table_obj){
+function filter_concepts_for_table(table_obj){
   return _.chain(table_obj.tags)
     .filter(concept_filter)
-    .map( tag => GlossaryEntry.lookup(tag) )
-    .compact()
     .value();
 }
 
@@ -59,8 +57,8 @@ class TablePicker extends React.Component {
       .reject('reference_table')
       .map(table_obj => (
         _.map(
-          get_concepts_for_table(table_obj),
-          concept => ({table_id: table_obj.id, concept_id: concept.id }) 
+          filter_concepts_for_table(table_obj),
+          concept => ({table_id: table_obj.id, concept_id: concept }) 
         )
       ))
       .flatten()
@@ -73,8 +71,6 @@ class TablePicker extends React.Component {
       .uniqBy()
       .map( concept_id => ({ 
         id: concept_id, 
-        display: GlossaryEntry.lookup(concept_id).title,
-        topic: GlossaryEntry.lookup(concept_id).topic,
       }))
       .value();
 
@@ -112,9 +108,8 @@ class TablePicker extends React.Component {
       .map('concept_id')
       .uniqBy()
       .map( id => _.find(concepts, { id }) )
-      .map( ({id, display }) => ({
+      .map( ({id }) => ({
         id,
-        display,
         active: _.includes(active_concepts, id),
       }))
       .sortBy('topic')
@@ -127,6 +122,7 @@ class TablePicker extends React.Component {
         item_id: table_id,
       }))
       .value()
+
 
     return <div ref="main">
       <h2 id="tbp-title"> <TextMaker text_key="table_picker_title" /> </h2>
@@ -199,9 +195,9 @@ class TaggedItemCloud extends React.Component {
                     {_.chain(item_tag_linkage)
                       .filter({item_id: id})
                       .map( ({tag_id}) => _.find(tags, {id: tag_id} ) )
-                      .map( ({id, display, active}) => 
+                      .map( ({id, active}) => 
                         <div key={id} className={classNames(active && "active", active && "active", 'item-tag')}>
-                          {display}
+                          <TextMaker text_key={id} />
                         </div>
                       )
                       .value()
@@ -257,7 +253,7 @@ class TaggedItemCloud extends React.Component {
             </div>
             <div className="labeled-box-content" style={{'padding': '10px 0px 0px 10px', 'border': '2px solid #284162'}}>
               <ul className="tag-cloud-main">
-                {_.map(tags_by_category[cat],({display, id, active}) => 
+                {_.map(tags_by_category[cat],({id, active}) => 
                   <li 
                     key={id}
                     className={classNames(active && 'active')}
@@ -267,7 +263,7 @@ class TaggedItemCloud extends React.Component {
                       role="checkbox"
                       aria-checked={!!active}
                     >
-                      { display } 
+                      <TextMaker text_key={id} />
                     </button>
                     { is_glossary_item_with_def(id) &&
                       <span className="tag-button-helper" tabIndex="0" >
