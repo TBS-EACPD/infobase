@@ -34,6 +34,7 @@ const ReportBuilder = retrying_react_lazy( () => import('../rpb/index.js') );
 const InfoGraph = retrying_react_lazy( () => import('../infographic/infographic.js') );
 const EstimatesComparison = retrying_react_lazy( () => import('../EstimatesComparison/EstimatesComparison.js') );
 const PrivacyStatement = retrying_react_lazy( () => import('../PrivacyStatement/PrivacyStatement.js') );
+const TreeMap = retrying_react_lazy( () => import('../TreeMap/TreeMap.js') ); 
 
 export class App extends React.Component {
   constructor(){
@@ -66,6 +67,7 @@ export class App extends React.Component {
               <Route path="/graph/:level?/:graph?/:id?" component={GraphInventory} />
               <Route path="/compare_estimates" component={EstimatesComparison} />
               <Route path="/privacy" component={PrivacyStatement} />
+              <Route path="/treemap" component={TreeMap} />
               <Route path="/" component={Home} />
             </Switch>
             <PageDetails />
