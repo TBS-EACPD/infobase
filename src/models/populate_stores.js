@@ -3,6 +3,7 @@ import { GlossaryEntry } from './glossary.js';
 import { populate_global_footnotes } from './populate_footnotes.js';
 import { Subject } from './subject.js';
 import { trivial_text_maker } from './text';
+import marked from 'marked';
 
 const { Ministry, Program, Dept, Tag, CRSO, Minister, InstForm } = Subject;
 
@@ -162,7 +163,11 @@ function populate_igoc_models({
       applied_title,
       status: statuses[status],
       _legislation, //no longer array based
-      mandate,
+      raw_mandate: mandate,
+      mandate: marked(
+        _.trim(mandate),
+        { sanitize: false, gfm: true }
+      ),
       pas_code,
       schedule,
       faa_hr,
