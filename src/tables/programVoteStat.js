@@ -18,6 +18,7 @@ export default {
     "EXP",
     "VOTED",
     "STAT",
+    "ANNUAL",
   ],
   source: [ "CFMRS" ],
   name: { 

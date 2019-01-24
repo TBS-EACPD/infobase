@@ -23,6 +23,7 @@ export default {
     "SOBJ",
     "EXP",
     "PA",
+    "ANNUAL",
   ],
   source: [ "PA" ],
   "name": { 

@@ -18,6 +18,7 @@ export default {
     "VOTED",
     "STAT",
     "SOBJ10",
+    "ANNUAL",
   ],
 
   source: [ "PA" ],

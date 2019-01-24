@@ -18,6 +18,7 @@ export default {
     "EXP",
     "VOTED",
     "STAT",
+    "QUARTERLY",
   ],
 
   link: {

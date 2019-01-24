@@ -17,12 +17,13 @@ export default {
   subject_type: "program",
   source: [ "PA" , "DP", "DRR" ],
   "tags": [
-    "GOV_FRAM",
-    "PLANNED_EXP",
+    "GOCA",
+    "PLANNED_EXP_TAG",
     "PA",
     "EXP",
     "AUTH",
     "PROG",
+    "ANNUAL",
   ],
 
 

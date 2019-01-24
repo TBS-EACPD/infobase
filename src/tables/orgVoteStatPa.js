@@ -19,6 +19,7 @@ export default {
     "EXP",
     "VOTED",
     "STAT",
+    "ANNUAL",
   ],
 
   source: [ "PA" ],

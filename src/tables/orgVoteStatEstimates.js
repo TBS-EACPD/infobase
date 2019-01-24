@@ -38,6 +38,7 @@ export default {
     "EST_PROC",
     "VOTED",
     "STAT",
+    "PLANNED_EXP_TAG",
   ],
 
 

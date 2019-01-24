@@ -18,8 +18,8 @@ export default {
     "QFR",
     "SPENDING_RATE",
     "EXP",
-    "PEOPLE",
     "SOBJ",
+    "QUARTERLY",
   ],
 
   "link": {

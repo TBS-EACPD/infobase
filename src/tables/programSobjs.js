@@ -27,6 +27,8 @@ export default {
     "SOBJ",
     "EXP",
     "PROG",
+    "ANNUAL",
+    "GOCA"
   ],
   "name": { 
     "en": "Program Expenditures by Standard Object",

@@ -214,8 +214,8 @@ pagination_a11y:
   fr: Il y a trop de données pour les montrer dans une table. La table ci-dessus représente la page numéro {{current}} de {{total}} pages. Pour voir la prochaine page, sélectionnez là de la liste ci-dessous.
 
 concept_category_timing:
-  en: Related to timing
-  fr: Reliées aux dates
+  en: Release frequency
+  fr: Fréquence de mise à jour
 
 concept_category_people:
   en: Related to people
@@ -228,6 +228,11 @@ concept_category_money:
 concept_category_other:
   en: Other
   fr: Autres
+
+concept_category_source:
+  en: Data source
+  fr: Source de données
+
 
 GENDER:
   en: Employee gender
@@ -261,8 +266,8 @@ STAT:
   en: Statutory authorities
   fr: Autorisations législatives
 
-PLANNED_EXP:
-  en: Planned Spending
+PLANNED_EXP_TAG:
+  en: Planned spending
   fr: Dépenses prévues
 
 SOBJ10:
@@ -320,3 +325,19 @@ EX_LVL:
 SUPPRESSED_DATA:
   en: Suppressed Data
   fr: Données supprimées
+
+GOCA:
+  en: Government of Canada Spending areas and Activities
+  fr: Secteurs de dépenses et d’activités du gouvernement du Canada
+
+ANNUAL:
+  en: Annual
+  fr: Annuel
+
+QUARTERLY:
+  en: Quarterly
+  fr: Trimestriel
+
+DP:
+  en: Departmental Plans
+  fr: Plans ministériels
