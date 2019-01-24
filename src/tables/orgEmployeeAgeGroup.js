@@ -31,6 +31,7 @@ export default {
     "PEOPLE",
     "FPS",
     "AGE",
+    "ANNUAL",
   ],
 
   "link": {

@@ -24,6 +24,7 @@ export default {
   tags: [
     "PEOPLE",
     "FPS",
+    "ANNUAL",
   ],
 
   "link": {

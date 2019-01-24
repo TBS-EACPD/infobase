@@ -28,6 +28,7 @@ export default {
     "PEOPLE",
     "FPS",
     "EX_LVL",
+    "ANNUAL",
   ],
   
   "link": {

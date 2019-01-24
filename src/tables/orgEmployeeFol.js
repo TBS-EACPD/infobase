@@ -26,6 +26,7 @@ export default {
     "FPS",
     "SUPPRESSED_DATA",
     "FOL",
+    "ANNUAL",
   ],
 
   "link": {

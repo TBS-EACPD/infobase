@@ -22,6 +22,8 @@ export default {
     "PA",
     "FTE",
     "PROG",
+    "ANNUAL",
+    "PLANNED_EXP_TAG",
   ],
 
   "name": { "en": "Full-Time Equivalents (FTEs) by Program",

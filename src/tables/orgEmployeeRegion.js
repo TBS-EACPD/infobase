@@ -27,6 +27,7 @@ export default {
     "PEOPLE",
     "GEO",
     "FPS",
+    "ANNUAL",
   ],
 
   "link": {
