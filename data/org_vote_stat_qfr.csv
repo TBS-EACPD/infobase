@@ -8,16 +8,16 @@
 "AGR",1,1,"Operating and Program","Fonctionnement et Programme",568454000,122958000,122958000,541800000,124066000,124066000
 "AGR",5,2,"Capital","Capital",54888000,1874000,1874000,74990000,5175000,5175000
 "AGR",10,3,"Grants & Contributions","Subventions et Contributions",425525000,8191000,8191000,375882000,14729000,14729000
-"AGR","S",999,"Canadian Pari-Mutuel Agency Revolving Fund","Fonds renouvelable de l’Agence canadienne du pari mutuel",0,-781000,-781000,0,-1147000,-1147000
+"AGR","S",999,"Canadian Pari-Mutuel Agency Revolving Fund","Fonds renouvelable de l’Agence canadienne du pari mutuel",".",-781000,-781000,0,-1147000,-1147000
 "AGR","S",999,"Class grant payments for the Farm Income program","Paiements de subvention par catégorie pour le programme de revenu agricole",0,2000,2000,0,0,0
 "AGR","S",999,"Class grant payments for the Transitional Industry Support program","Paiements de subvention par catégorie pour le programme d’aide transitoire à l’industrie",0,-2000,-2000,0,0,0
 "AGR","S",999,"Contribution payments for the AgriInsurance program","Paiements de contribution pour le programme Agri-protection",623000000,20658000,20658000,640800000,6005000,6005000
 "AGR","S",999,"Contribution payments for the AgriInvest program","Paiements de contribution pour le programme Agriinvestissement",18602000,0,0,17500000,402000,402000
 "AGR","S",999,"Contribution payments for the AgriStability program","Paiements de contribution pour le programme Agri-stabilité",384830000,-5857000,-5857000,219300000,1068000,1068000
-"AGR","S",999,"Contribution payments for the Agricultural Disaster Relief  Program (ADRP) and AgriRecovery","Paiements de contribution pour le programme d’aide en cas de catastrophe agricole – Agrirelance",118513000,0,0,118513000,0,0
-"AGR","S",999,"Contribution payments for the Canadian Agricultural Income Stabilization program Inventory Transition Initiative","Paiements de contribution pour l’Initiative de transition du programme canadien de stabilisation du revenu agricole pour l’évaluation des stocks",0,-163000,-163000,0,-13000,-13000
+"AGR","S",999,"Contribution payments for the Agricultural Disaster Relief  Program (ADRP) and AgriRecovery","Paiements de contribution pour le programme d’aide en cas de catastrophe agricole – Agrirelance",118513000,".",".",118513000,0,0
+"AGR","S",999,"Contribution payments for the Canadian Agricultural Income Stabilization program Inventory Transition Initiative","Paiements de contribution pour l’Initiative de transition du programme canadien de stabilisation du revenu agricole pour l’évaluation des stocks",".",-163000,-163000,0,-13000,-13000
 "AGR","S",999,"Contributions for agricultural risk management - Enhanced Spring Credit Advance program Business Risk Management","Contributions pour la gestion des risques agricoles – Gestion des risques de l’entreprise du programme d’avances printanières bonifié",0,-89000,-89000,0,-145000,-145000
-"AGR","S",999,"Contributions in support of the Assistance to the Pork Industry Initiative","Contributions à l’appui de l’Initiative d’aide à l’industrie porcine",0,-25210000,-25210000,0,-2502000,-2502000
+"AGR","S",999,"Contributions in support of the Assistance to the Pork Industry Initiative","Contributions à l’appui de l’Initiative d’aide à l’industrie porcine",".",-25210000,-25210000,0,-2502000,-2502000
 "AGR","S",999,"Contributions to Employee Benefit Plans","Contributions aux régimes d’avantages sociaux des employés",65526000,16381000,16381000,63449000,15695000,15695000
 "AGR","S",999,"Grant payments for the AgriInvest program","Paiements de subvention pour le programme Agriinvestissement",138148000,34461000,34461000,126200000,31017000,31017000
 "AGR","S",999,"Grant payments for the AgriStability program","Paiements de subvention pour le programme Agristabilité",39320000,-97000,-97000,41000000,-597000,-597000
@@ -118,8 +118,8 @@
 "CTA","S",999,"Contributions to Employee Benefit Plans","Contributions aux régimes d’avantages sociaux des employés",3339271,793372,793372,3199401,799850,799850
 "CTAIB",1,1,"Operating and Program","Fonctionnement et Programme",26962000,6136000,6136000,26202000,5963000,5963000
 "CTAIB","S",999,"Main Estimates: Statutory authorities - Employee Benefit Plans","Budget principal des dépenses : Autorisations législatives – Régimes d'avantages sociaux des employés",3227000,807000,807000,3214000,804000,804000
-"CTAIB","S",999,"Statutory authorities - Expenditures Paragraph 29.1(1) of the Financial Administration Act","Autorisations législatives – Dépenses paragraphe 29.1(1) de la Loi sur la gestion des finances publiques",1000,0,0,6000,0,0
-"CTAIB","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",23000,0,0,11000,0,0
+"CTAIB","S",999,"Statutory authorities - Expenditures Paragraph 29.1(1) of the Financial Administration Act","Autorisations législatives – Dépenses paragraphe 29.1(1) de la Loi sur la gestion des finances publiques",1000,".",".",6000,".","."
+"CTAIB","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",23000,".",".",11000,".","."
 "EA",1,1,"Operating and Program","Fonctionnement et Programme",1750085000,366828000,366828000,1575874000,346796000,346796000
 "EA",5,2,"Capital","Capital",135243000,11347000,11347000,106313000,6876000,6876000
 "EA",10,3,"Grants & Contributions","Subventions et Contributions",4283434000,688746000,688746000,3903487000,508574000,508574000
@@ -235,14 +235,14 @@
 "INAC","S",999,"Minister's Salary and Motor Car Allowance","Traitement et allocation pour automobile du ministre",86000,22000,22000,84000,21000,21000
 "INAC","S",999,"Other","Autres",0,32000,32000,0,618000,618000
 "INAC","S",999,"Payments to comprehensive claim beneficiaries in compensation for resource royalties","Paiements d'indemnités aux bénéficiaires des revendications territoriales globales pour des redevances sur les ressources",2952000,0,0,2931000,0,0
-"INDSC",1,1,"Operating and Program","Fonctionnement et Programme",1576524000,343383000,343383000,0,0,0
-"INDSC",5,2,"Capital","Capital",5412000,32000,32000,0,0,0
-"INDSC",10,3,"Grants & Contributions","Subventions et Contributions",7907466000,2173494000,2173494000,0,0,0
-"INDSC","S",999,"Contributions in connection with First Nations infrastructure","Contributions en lien avec l'infrastructure des Premières Nations",29404000,436000,436000,0,0,0
-"INDSC","S",999,"Contributions to employee benefit plans (EBP)","Contributions aux régimes d'avantages sociaux des employés",50956000,11974000,11974000,0,0,0
-"INDSC","S",999,"Liabilities in respect of loan guarantees made to Indians for Housing and Economic Development","Obligations relatives aux garanties de prêts accordés aux Indiens pour le logement et le développement économique",2000000,75000,75000,0,0,0
-"INDSC","S",999,"Minister's Salary and Motor Car Allowance","Traitement et allocation pour automobile du ministre",86000,22000,22000,0,0,0
-"INDSC","S",999,"Other","Autres",0,1000,1000,0,0,0
+"INDSC",1,1,"Operating and Program","Fonctionnement et Programme",1576524000,343383000,343383000,".",".","."
+"INDSC",5,2,"Capital","Capital",5412000,32000,32000,".",".","."
+"INDSC",10,3,"Grants & Contributions","Subventions et Contributions",7907466000,2173494000,2173494000,".",".","."
+"INDSC","S",999,"Contributions in connection with First Nations infrastructure","Contributions en lien avec l'infrastructure des Premières Nations",29404000,436000,436000,".",".","."
+"INDSC","S",999,"Contributions to employee benefit plans (EBP)","Contributions aux régimes d'avantages sociaux des employés",50956000,11974000,11974000,".",".","."
+"INDSC","S",999,"Liabilities in respect of loan guarantees made to Indians for Housing and Economic Development","Obligations relatives aux garanties de prêts accordés aux Indiens pour le logement et le développement économique",2000000,75000,75000,".",".","."
+"INDSC","S",999,"Minister's Salary and Motor Car Allowance","Traitement et allocation pour automobile du ministre",86000,22000,22000,".",".","."
+"INDSC","S",999,"Other","Autres",0,1000,1000,".",".","."
 "IPC",1,1,"Operating and Program","Fonctionnement et Programme",13007000,2282000,2282000,9947000,2192000,2192000
 "IPC",5,1,"Operating and Program","Fonctionnement et Programme",22716000,4811000,4811000,22075000,5322000,5322000
 "IPC","S",999,"Statutory Authorities","Autorisations législatives",1236000,309000,309000,1248000,312000,312000
@@ -310,7 +310,7 @@
 "NSERC",1,1,"Operating and Program","Fonctionnement et Programme",1249030000,348930000,348930000,1201664000,321912000,321912000
 "NSERC","S",999,"Contributions to the employee benefit plan","Régimes d'avantages sociaux des employés",5362000,1318000,1318000,4787000,1197000,1197000
 "NSERC","S",999,"Spending of revenues pursuant to subsection 4(2) of the Natural Sciences and Engineering Research Council Act","Dépense des revenus en vertu du paragraphe 4(2) de la Loi sur le Conseil de recherches en sciences naturelles et en génie",88000,0,0,579000,0,0
-"NSICP",1,1,"Operating and Program","Fonctionnement et Programme",3493828,68562,68562,0,0,0
+"NSICP",1,1,"Operating and Program","Fonctionnement et Programme",3493828,68562,68562,".",".","."
 "OAG",1,1,"Operating and Program","Fonctionnement et Programme",69028000,18032000,18032000,68269000,18151000,18151000
 "OAG","S",999,"Statutory Authorities","Autorisations législatives",9197000,2299000,2299000,9421000,2308000,2308000
 "OCI",1,1,"Operating and Program","Fonctionnement et Programme",4657406,947374,947374,4278515,924909,924909
@@ -385,7 +385,7 @@
 "SWC","S",999,"Minister's Salary and Motor Car Allowance","Traitement et allocation pour automobile du ministre",2000,1000,1000,2000,0,0
 "TBC",1,1,"Operating and Program","Fonctionnement et Programme",240297640,60359571,60359571,249305302,50793704,50793704
 "TBC",20,6,"Treasury Board Central","Crédit du Conseil du Trésor",2952919397,669417254,669417254,2398570604,620667939,620667939
-"TBC","S",999,"A681 - Payments under the Public Service Pension Adjustment Act","A681 - Versements en vertu de la Loi sur la mise au point des pensions du service public",0,13,13,0,67,67
+"TBC","S",999,"A681 - Payments under the Public Service Pension Adjustment Act","A681 - Versements en vertu de la Loi sur la mise au point des pensions du service public",".",13,13,".",67,67
 "TBC","S",999,"Contributions to Employee Benefit Plans","Contributions aux régimes d’avantages sociaux des employés",28497698,6974326,6974326,27342934,6775186,6775186
 "TBC","S",999,"Minister's Salary and Motor Car Allowance","Traitement et allocation pour automobile du ministre",86000,21500,21500,84400,21150,21150
 "TBC","S",999,"Unallocated employer contributions made under the PSSA and other retirement acts and the Employment Act (EI)","Contributions de l’employeur non affectées et versées en vertu de la LPFP, d’autres lois concernant la retraite et la Loi sur l’assurance-emploi",340000000,2924786,2924786,340000000,-81739525,-81739525

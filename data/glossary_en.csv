@@ -8,7 +8,6 @@
 * changes to statutory amounts due to adjustments of spending forecasts included in the Estimates, due to cancellation or amendment to statutes or due to adjustments of Crown corporations borrowing authorities;
 * amounts of previous years' over expenditures paid or settled in the current year and proceeds from the disposal of surplus Crown assets;
 * Governor General Special Warrants to cover payments that are required when Parliament is dissolved for a general election."
-"AGE","Employee Age",""
 "AM_IGOC","Appropriate Ministers","The designated Minister(s) identified with an organization for reporting purposes."
 "APP_ACT","Appropriation act","An appropriation act is the vehicle through which expenditures from the consolidated revenue fund are authorized in order to pay for government programs and services. 
 Appropriation acts begin as supply bills. Supply bills are prepared for Main and Supplementary Estimates. Once a bill is introduced to Parliament, approved and granted royal assent, it becomes law in the form of an appropriation act."
@@ -57,12 +56,6 @@ By the 2018-19 fiscal year this new format will be adopted by all organizations,
 
 
 Through DRRs, individual departments and agencies provide information on how they are progressing toward their strategic goals. DRRs cover the most recently completed fiscal year and are normally tabled in the fall."
-"EE","Employment Equity Act","The purpose of the Employment Equity Act is to achieve equity in Canadian workplaces by correcting conditions of disadvantage in employment through identifying and removing barriers experienced by members of the 4 employment equity designated groups:
-
-* women
-* Aboriginal peoples
-* persons with disabilities
-* members of visible minorities"
 "EFF_ID","Efficiency","The extent to which resources are used such that a greater level of output/outcome is produced with the same level of input or, a lower level of input is used to produce the same level of output/outcome. The level of input and output/outcome could be increases or decreases in quantity, quality, or both."
 "EI_IGOC","Enabling Instrument(s)","The instrument used to create and enable an organization."
 "EST_DOC","Estimates Documents","Estimates Documents includes:
@@ -167,7 +160,7 @@ Each department and agency is responsible for reconciling its accounts to the co
 "PARL_ORG","Appropriated Parliamentary Entities","Organizations covered by the Parliament of Canada Act."
 "PART_PEOPLE","Part-time Employee","Part-time employees are persons employed to work less than the normally scheduled daily or weekly hours of work, prescribed by the relevant collective bargaining agreement or the employer, established for full-time employees of the same occupational group and level."
 "PART1","Government Expenditure Plan","The Government Expenditure Plan corresponds to Part I of the Estimates process. It provides a summary and highlights of year-over-year changes in departmental spending and transfer payments in order to provide perspective on the major issues influencing government planned spending."
-"PEOPLE","Data about Public Servants",""
+"PEOPLE","Data about Public Servants",
 "PEOPLE_DATA","People Management","People Management data presents key demographics of the Federal Public Service (FPS) workforce."
 "PERC_IGOC","Percentage Share of Federal Ownership","The share ownership by the Government of Canada of a corporate interest."
 "PI","Program Inventory","Identifies all of the department’s programs and describes how resources are organized to contribute to the department’s Core Responsibilities and Results.
@@ -184,7 +177,7 @@ Note: In the 2017-18 fiscal year, a new reporting format consisting of a Departm
 
 
 By the 2018-19 fiscal year this new format will be adopted by all organizations, replacing the Program Alignment Architecture instituted by the rescinded TBS Policy on Management, Resources and Results Structure."
-"PLAN_DATA","Planning Data",""
+"PLAN_DATA","Planning Data",
 "PLANNED_EXP","Planned Spending","For Departmental Plans (DPs) and Departmental Results Reports (DRRs), planned spending refers to those amounts that receive Treasury Board approval by February 1. Therefore, planned spending (including voted and statutory items) may include amounts incremental to planned expenditures presented in the Main Estimates."
 "PLANNED_FTE","Planned Full-Time Equivalents (FTEs)","Planned FTEs is a measure of the extent to which an employee represents a full person-year charge against the departmental budget for future spending years. Full-time equivalents are calculated as a ratio of assigned hours of work to scheduled hours of work. Scheduled hours of work are set out in collective agreements."
 "PO","Program Outcome","A change or consequence attributable to outputs or to which outputs or other outcomes of the program contribute. Program outcomes may be a hierarchy of short-, medium-, or long-term, and are generally more directly influenced by departments and within their immediate control than Departmental Results. Program outcomes are found at the Program level, whereas Departmental Results are found at the Core Responsibility level."
@@ -368,11 +361,13 @@ Program metadata, which comprises: (1) linkage tags that identify the connection
 "VOTED","Voted amounts","Voted amounts refer to the amounts approved in appropriation acts."
 "YI_IGOC","Year of Incorporation","The year in which an organization was legally established."
 "MRRS","Policy on Management, Resources and Results Structures","The Policy on Management, Resources and Results Structures (MRRS) supports the development of a common government-wide approach to the identification of programs and to the collection, management, and reporting of financial and non-financial information relative to those programs. The policy provides departments with the flexibility and discretion they need to design and manage their programs in a manner that best achieves results for Canadians."
+"GEO","Geographic Data",
+"ESTIMATES","Estimates",
 "OC_PEOPLE","Occupational category","A generalized classification system of each employee's type of work. An individual employee's classification is determined by their collective agreement and, as such, may not precisely or entirely describe their work."
 "RPS","Regional Pay System (RPS)","Regional Pay System (RPS) serves as the main data source for central HR reporting including demographic reports, analyses, open data and data extracts in response to people management information requests. In 2011, the Office of the Chief Human Resources Officer (OCHRO) of the Treasury Board of Canada, Secretariat (TBS) repatriated nine legacy Human Resources (HR) data files from Public Works and Government Services Canada (PWGSC). These files collectively identified as the HR Data Integration Broker (HRDIB). Some HRDIB data is also provided to multiple users within TBS and sent to multiple departments and agencies, bargaining agents, and other organizations."
 "FOL","First Official Language","The official language (English or French) with which an employee has a primary personal identification (that is, the official language in which a person is generally more proficient)."
-"EX_LVL","Executive Level",""
-"SUPPRESSED_DATA","Suppressed Data",""
+"EX_LVL","Executive Level",
+"SUPPRESSED_DATA","Suppressed Data",
 "GOCA","Government of Canada Spending areas and Activities","All federal organizations receiving appropriations must plan and manage their operations and report their performance against strategic outcomes or departmental results framework.
 
 
@@ -425,7 +420,7 @@ If the date to achieve target is after the end of fiscal year 2017-18 (after Mar
 
 Each program should have one primary method of intervention. However, in some cases, there is a secondary method of intervention, e.g. if a program maintains both grants and a contributions.
 "
-"RESULTS_COUNT","Count of Indicators",""
+"RESULTS_COUNT","Count of Indicators",
 "MYA","Multi-Year Appropriation","A multi-year appropriation is an appropriation with a specific purpose and monetary limit granted by Parliament that can be utilized over more than one fiscal year."
 "PAY_CC","Payments to Crown Corporation","The Payments to Crown Corporations includes all the voted and statutory authorities approved by Parliament through Appropriations Acts and legislation to Crown Corporation"
 "INTER_EST","Interim Estimates","In June 2017, the House of Commons approved a motion to change Standing Order 81. This means that, for the duration of this parliament :

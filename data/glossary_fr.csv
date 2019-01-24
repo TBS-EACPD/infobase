@@ -8,7 +8,6 @@
 * les modifications aux montants législatifs suite à des redressements aux estimés de dépenses comprises dans les Budgets des dépenses, suite à l'annulation ou la modification aux lois ou suite à des redressements des autorisations d'emprunt des sociétés d'État;
 * les montants du suremploi des autorisations des exercices antérieurs versés ou réglés au cours de l'exercice et le produit de la vente de biens excédentaires de l'État; 
 * les mandats spéciaux du gouverneur général pour couvrir les paiements requis lorsque le Parlement est dissous pour une élection générale."
-"AGE","Âge des employés",""
 "AM_IGOC","Ministres de tutelle","Ministres désignés au sein d’une organisation aux fins de la reddition de compte."
 "APP_ACT","Loi de crédits","Une loi de crédits est un mécanisme d’autorisation de dépenses imputées au Trésor pour payer des programmes et services du gouvernement.
 
@@ -58,12 +57,6 @@ Cette nouvelle structure, qui sera adoptée par toutes les organisations d’ici
 
 
 Dans le RRM, les ministères et organismes donnent de l’information sur les progrès accomplis vers l’atteinte de leurs objectifs stratégiques. Les RRM couvrent l’exercice précédent et sont habituellement déposés à l’automne."
-"EE","Loi sur l'équité en matière d'emploi","La Loi sur l'équité en matière d'emploi a pour but de réaliser l'égalité en milieu de travail en corrigeant les désavantages subis, dans le domaine de l'emploi, en déterminant et en éliminant les obstacles à l'emploi des membres des 4 groupes visés par l'équité en matière d'emploi suivants :
-
-* les femmes;
-* les Autochtones;
-* les personnes handicapées;
-* les membres de minorités visibles."
 "EFF_ID","Efficience","Mesure dans laquelle les ressources sont utilisées de manière à produire un plus grand niveau d’extrants avec le même niveau d’intrants, ou le même niveau d’extrants avec un plus faible niveau d’intrants. Les niveaux d’intrants et d’extrants peuvent se traduire par des hausses ou des baisses de qualité, de quantité, ou les deux."
 "EI_IGOC","Instruments habilitants","Instrument utilisé pour créer une organisation et lui donner les moyens de faire quelque chose"
 "EST_DOC","Document budgétaires","Les documents budgétaires comprennent :
@@ -90,7 +83,7 @@ Nota : le reste de l'administration publique centrale est composée d’organisa
 "FTE","Équivalent temps plein (ETP)","Les équivalents temps plein (ETP) sont la mesure utilisée pour représenter une année-personne complète d'un employé dans le budget ministériel. Les ETP sont calculés en fonction du coefficient des heures de travail assignées et des heures de travail prescrites, tel que stipulé dans les conventions collectives. Dans le cas des employés nommés pour une période déterminée et des employés saisonniers, le calcul des ETP est rajusté en fonction de la proportion des semaines payées dans une année."
 "FULL_PEOPLE","Employé à temps plein","Employé à plein temps correspond à une personne nommée à la fonction publique qui doit habituellement effectuer le nombre d'heures de travail prévu dans la convention collective applicable ou déterminé par l'employeur, le cas échéant."
 "FY","Exercice financier","L’année financière du gouvernement du Canada commence le 1er avril et se termine le 31 mars. Elle peut varier dans certaines organisations (p. ex. les sociétés d’État)."
-"G_AND_C","Crédit pour subventions et contributions","Le crédit pour subventions et contributions est une autorisation de crédit non législative (en application d'une loi de crédits) pour des dépenses consacrées à des subventions et des contributions (c.-à-d. un programme de subventions et de contributions dont les montants s'élèvent à 5 millions de dollars ou plus).
+"G_AND_C","Crédit pour subventions et contributions","Le crédit pour subventions et contributions est une autorisation de crédit non législative (en application d'une loi de crédits) pour des dépenses consacrées à des subventions et des contributions (c.-à-d. un programme de subventions et de contributions dont les montants s'élèvent à 5 millions de dollars ou plus)."
 "GOV_FRAM","Cadre pangouvernemental","Le cadre pangouvernemental établit les liens entre les contributions financières et non financières des ministères, organismes et sociétés d'État qui reçoivent des crédits et un ensemble de seize grands secteurs d'activités du gouvernement du Canada dans quatre secteurs de dépenses, notamment les affaires économiques, sociales, internationales et gouvernementales."
 "GRANT_TP","Subvention","Une subvention est un paiement de transfert effectué en fonction de critères d'admissibilité préétablis et d’autres critères . Une subvention n'est ni assujettie à une reddition de comptes par le bénéficiaire ni, en règle générale, à une vérification par le ministère. Le bénéficiaire peut  tenu de faire état des  résultats obtenus."
 "HEAD","Relevé des effectifs","Par « relevé des effectifs », on entend le dénombrement des employés, toutes situations d’emploi confondues (employés nommés pour une période indéterminée ou déterminée, occasionnels et étudiants),  des personnes nommées par décret, des sous-ministres et des juges nommés par le gouvernement fédéral au  31 mars de chaque année. Les employés en congé non payé ne sont pas compris. Le relevé comprend les employés des organisations figurant aux annexes I, IV, et V de la Loi sur la gestion des finances publiques. Aucun rajustement n’a été apporté pour les heures de travail."
@@ -168,7 +161,7 @@ Chaque ministère et organisme est responsable de la conciliation de ses comptes
 "PARL_ORG","Entités parlementaires qui reçoivent des crédits","Organisations couvertes par la Loi sur le Parlement du Canada"
 "PART_PEOPLE","Employé à temps partiel","Un Employé à temps partiel est une personne qui doit travailler un nombre d'heures inférieur à l'horaire de travail quotidien ou hebdomadaire prévu pour un employé à temps plein de mêmes groupe et niveau. Les heures de travail prescrites sont établies dans les conventions collectives ou par l'employeur."
 "PART1","Plan de dépenses du gouvernement","Le Plan de dépenses du gouvernement correspond à la partie I du processus d'établissement du budget des dépenses. Il présente un résumé et les faits saillants des changements qui se produisent d'une année à l'autre dans les dépenses ministérielles et les paiements de transfert afin de mettre en perspective les grands enjeux qui influencent les prévisions de dépenses du gouvernement."
-"PEOPLE","Données sur les fonctionaires",""
+"PEOPLE","Données sur les fonctionaires",
 "PEOPLE_DATA","Gestion du personnel","Les données sur la gestion du personnel décrivent les caractéristiques démographiques des employées travaillant au sein de la fonction publique fédérale."
 "PERC_IGOC","Pourcentage de la participation fédérale","Actions détenues par le gouvernement fédéral dans une société dans laquelle le Canada détient des intérêts."
 "PI","Répertoire de programmes","Compilation de tous les programmes du ministère et description de la façon dont les ressources sont organisées pour permettre au ministère d’exercer ses responsabilités essentielles et d’atteindre les résultats.
@@ -185,7 +178,7 @@ Nota : En 2017-2018, les sept ministères suivants ont adopté la nouvelle struc
 
 
 Cette nouvelle structure, qui sera adoptée par toutes les organisations d’ici 2018-2019, remplace l'architecture d'alignement des programmes établie par la Politique sur la structure de la gestion, des ressources et des résultats du SCT, maintenant annulée."
-"PLAN_DATA","Données relatives à la planification",""
+"PLAN_DATA","Données relatives à la planification",
 "PLANNED_EXP","Dépenses prévues","Pour les plans ministériels (PM) et les rapports sur les résultats ministériels (RRM), on entend par « dépenses prévues » les montants approuvés par le Conseil du Trésor en date du 1er février. Les dépenses prévues (y compris les crédits votés et les postes législatifs) peuvent donc comprendre les sommes supplémentaires figurant au budget principal des dépenses."
 "PLANNED_FTE","ETP prévus","Les équivalents temps plein (ETP) prévus sont la mesure utilisée pour représenter une année-personne complète d'un employé dans le budget ministériel. Les ETP sont calculés en fonction du coefficient des heures de travail assignées et des heures de travail prescrites. Les heures de travail prescrites sont établies dans les conventions collectives."
 "PO","Résultat du programme","Changement ou conséquence attribuable à des extrants ou auquel contribuent d’autres extrants ou résultats du programme. Les résultats des programmes peuvent être à court, à moyen ou à long terme; généralement, ils subissent davantage l’influence des ministères et relèvent davantage de leur contrôle direct que les résultats ministériels. Les résultats des programmes se trouvent au niveau des programmes, alors que les résultats ministériels se situent au niveau des responsabilités essentielles."
@@ -370,11 +363,13 @@ Programme de métadonnées, comprenant ce qui suit : 1) des étiquettes de lien 
 "VOTED","Montants votés","Par «  votés », on entend les montants autorisés aux termes des lois de crédits"
 "YI_IGOC","Année de constitution en société","Année au cours de laquelle l’organisation a été légalement constituée en société."
 "MRRS","Politique sur la structure de la gestion, des ressources et des résultats","La Politique sur la structure de gestion, des ressources et des résultats (SGRR) vise à faciliter l'élaboration d'une approche pangouvernementale commune pour la désignation des programmes, et pour la collecte, la gestion et la déclaration de données financières et non financières relatives à ces programmes. La Politique fournit aux ministères la marge de manœuvre et les pouvoirs discrétionnaires dont ils ont besoin pour concevoir et gérer leurs programmes de la manière la plus susceptible de fournir des résultats pour les Canadiens."
+"GEO","Données géographique",
+"ESTIMATES","Budget des dépenses",
 "OC_PEOPLE","Catégorie professionnelle","Un système de classification généralisé du type de travail de chaque employé;  la classification d'un employé individuel est déterminée en fonction de sa convention collective et, par conséquent, ne décrit pas forcément le travail de cet employé de façon précise ou exhaustive."
 "RPS","Système régional de paye (SRP)","Le Système régional de paye (SRP) sert de source principale de données aux fins d'établissement de rapports centraux, notamment les rapports démographiques, les analyses, les données ouvertes et les extractions de données en réponse aux demandes de renseignements en matière de gestion des personnes. En 2011, le Bureau du dirigeant principal des ressources humaines (BDPRH) du Secrétariat du Conseil du Trésor (SCT) du Canada a récupéré neuf anciens fichiers de données des Ressources humaines (RH) auprès de Travaux publics et Services gouvernementaux Canada (TPSGC). Ces fichiers sont désignés collectivement comme étant le Service d'intégration des données sur les ressources humaines (SIDRH). Certaines données du SIDRH sont également fournies à de nombreux utilisateurs du SCT et envoyées à divers ministères et organismes, agents négociateurs et autres organisations."
 "FOL","Première langue officielle","La langue (le français ou l'anglais) à laquelle l'employé s'identifie le mieux (la langue officielle dans laquelle une personne est généralement la plus compétente)."
-"EX_LVL","Niveaux des cadres supérieurs",""
-"SUPPRESSED_DATA","Données supprimées",""
+"EX_LVL","Niveaux des cadres supérieurs",
+"SUPPRESSED_DATA","Données supprimées",
 "GOCA","Secteurs de dépenses et d’activités du gouvernement du Canada","Les organisations fédérales qui reçoivent des crédits doivent planifier leurs opérations, les gérer et rendre compte de leur rendement par rapport à des résultats stratégiques ou des résultats ministériels.
 
 
@@ -425,7 +420,7 @@ Si la date butoir d’atteinte de la cible dépasse la fin de l’exercice 2017-
 "HWM","Méthode d’intervention","« Méthode d’intervention » renvoie aux moyens avec lesquels on vise les objectifs stratégiques. Les programmes utilisent cette méthode pour atteindre un résultat souhaité (par exemple des règlements, des paiements de transfert, etc.). 
 
 Chaque programme devrait avoir une méthode d’intervention principale. Toutefois, dans certains cas, il y a une méthode d’intervention secondaire (par exemple si un programme comprend des subventions et des contributions)."
-"RESULTS_COUNT","Décompte d'indicateurs",""
+"RESULTS_COUNT","Décompte d'indicateurs",
 "MYA","Crédit pluriannuel","Le crédit pluriannuel est une autorisation de dépenser donnée par le Parlement à une fin spécifique dont le montant est défini et  qui peut être utilisée sur plus d'une année fiscale."
 "PAY_CC","Payments aux sociétés d'État","Les payments aux sociétés d'État inclus les « autorisations votées et législatives » ccordées par le Parlement à la suite de l'adoption d'une loi de crédits ou d'une loi aux sociétés d'État."
 "INTER_EST","Budget provisoire des dépenses","En juin 2017, la Chambre des communes a approuvé une motion visant à modifier l?article 81 du Règlement de la Chambre. Cela signifie que pour la durée de la présente législature :
@@ -464,4 +459,8 @@ des dépenses sont prévus pour 2018-2019, lesquels seront déposés au Parlemen
 "BIV_REMA","Restants","Solde des fonds non affectés dans le crédit d’exécution du budget."
 "PLANNED_SPEND_FTE","Dépenses prévues et ETP prévus","Pour les plans ministériels (PM) et les rapports sur les résultats ministériels (RRM), on entend par « dépenses prévues » les montants approuvés par le Conseil du Trésor en date du 1er février. Les dépenses prévues (y compris les crédits votés et les postes législatifs) peuvent donc comprendre les sommes supplémentaires figurant au budget principal des dépenses.
 Les équivalents temps plein (ETP) prévus sont la mesure utilisée pour représenter une année-personne complète d'un employé dans le budget ministériel. Les ETP sont calculés en fonction du coefficient des heures de travail assignées et des heures de travail prescrites. Les heures de travail prescrites sont établies dans les conventions collectives."
+
+"Obs","SubjectClass","subjectID","Footnote_en","Footnote_fr","fyear1","fyear2","keys"
+"141","dept","HRSD","The variance is due mainly to additional resources for implementation and service delivery related to Budget 2017 EI measures such as changes to EI special benefits, to support the increase to call centre service standards, to process claims above the EI claims baseline, and for NHQ transformation.It also reflects additional investments in processing-related activities to ensure that seniors have timely access to the OAS benefits. Those resources were received after Planned FTEs were determined.",,"2017-18","2017-18","FTE,DRR_FTE"
+"509","program","INAC-AFA00","Ce programme porte sur les paiements liés au règlement des litiges ou aux règlements à l’amiable. Les dépenses se rapportent uniquement aux montants de règlement; aucun équivalent temps plein n’est associé à ce programme.",,"2017-18","2017-18","FTE,DRR_FTE"
 
