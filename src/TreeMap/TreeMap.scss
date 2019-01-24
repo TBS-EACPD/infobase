@@ -1,0 +1,191 @@
+.TreeMap__SideBar {
+    background-color: #767f89;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+  }
+  .TreeMap_SideBar__Title {
+    padding: 20px;
+    font-size: 2em;
+  }
+  .TreeMap_SideBar__Text {
+    line-height: 2em;
+    font-size: 1em;
+  }
+  .TreeMap__SideBar__Chevron.glyphicon.glyphicon-chevron-down{
+    padding-top: 10px;
+    color: #78c3fc;
+  }
+  
+  .TreeMap__ZoomControl {
+    border: 2px solid #fff;
+    border-top-width: 0;
+    background-color: #D9D9D9;
+    padding: 1rem;
+    &.TreeMap__ZoomControl--has-zoom-out {
+      &:hover {
+        background-color: #FF5E59 !important;
+      }
+      cursor: pointer;
+    }
+  }
+  
+  .TreeMap__Rectangle {
+    position: absolute;
+    border: 1px solid #fff;
+  
+    &.TreeMap__Rectangle--is-parent {
+      border-width: 2px;
+    }
+    &.TreeMap__Rectangle--is-child {
+      opacity: 0;
+    }
+  }
+  
+  /* division contains the rectangle (parent and children) as well as the overlaid content boxes */
+  .TreeMap__Division:hover {
+    .TreeMap__Rectangle--is-child {
+      opacity: 0.8;
+      border-width: 1px;
+    }
+    .TreeMap__Rectangle--is-parent {
+      opacity: 0.2;
+    }
+  }
+  .TreeMapNode__ContentBoxContainer {
+    &:hover{
+      background-color: rgba(255, 255, 255, 0.5)
+    }
+    position: absolute;
+    border: 2px solid white;
+  
+    &.TreeMapNode__ContentBoxContainer--has-children {
+      cursor: pointer;
+    }
+  }
+  .TreeMapNode__ContentBox {
+    &.TreeMapNode__ContentBox--standard {
+      font-size:1em;
+      vertical-align: middle;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      max-width: 90%;
+      max-height: 90%;
+      overflow:hidden;
+      text-align: center;
+    }
+  }
+  .TreeMapNode__ContentTitle {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+  }
+  .TreeMapNode__ContentText {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .TreeMap_IndicatorGrid {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0.35;
+    overflow: hidden;
+    border: 2px solid black;
+  }
+  .TreeMap_IndicatorGrid__Item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    flex: 1 1 auto;
+    &.TreeMap_IndicatorGrid__Item--success {
+      background-color: #33FF33;
+    }
+    &.TreeMap_IndicatorGrid__Item--failure {
+      background-color: #FF6666;
+    }
+    &.TreeMap_IndicatorGrid__Item--other {
+      background-color: #c2c2c2;
+    }
+  }
+  
+  .TM_TooltipContainer {
+    position: absolute;
+    width: 250px;
+    height: auto;
+    border-radius:5px;
+    border: 2px solid white;
+    background: none repeat scroll 0 0 #767f89;
+    color: white;
+    font-size: 1em;
+    padding: 10px;
+    text-align: center;
+    z-index: 10;
+    transform: translate(-50%, 0);
+    top: 75%;
+    left: 50%;
+    &:before {
+      text-shadow: 1px 1px 0px white;
+      content: " ";
+      position: absolute;
+      bottom: 100%;  /* At the top of the tooltip */
+      left: 50%;
+      margin-left: -10px;
+      border-width: 10px;
+      border-style: solid;
+      border-color: transparent transparent white transparent;
+    }
+    &:after {
+      text-shadow: 1px 1px 0px white;
+      content: " ";
+      position: absolute;
+      bottom: 100%;  /* At the top of the tooltip */
+      left: 50%;
+      margin-left: -7px;
+      border-width: 7px;
+      border-style: solid;
+      border-color: transparent transparent #767f89 transparent;
+    }
+  }
+  
+  .BlueHLine {
+    display: block;
+    height: 1px;
+    border-top: 3px solid #78c3fc;
+    margin-top: 2px;  
+  }
+  
+  // .toolTipr {
+  //   position: absolute;
+  //   width: 250px;
+  //   background: none repeat scroll 0 0 #767f89;
+  //   color: white;
+  
+  //   font-size: 1em;
+  //   padding: 10px;
+  //   text-align: center;
+  //   z-index: 5;
+  
+  // }
+  // .toolTipr:after {
+  //   content: " ";
+  //   position: absolute;
+  //   top: 50%;
+  //   left: 100%; /* To the right of the tooltip */
+  //   margin-top: -10px;
+  //   border-width: 10px;
+  //   border-style: solid;
+  //   border-color: transparent transparent transparent #767f89;
+  // }
+  
+  /* Tooltip (inner) styles */ 
+  // .TM_Tooltip {
+  // }
