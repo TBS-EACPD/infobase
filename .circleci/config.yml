@@ -120,3 +120,4 @@ workflows:
             branches:
               only:
                 - master
+                - table_picker_tweaks
