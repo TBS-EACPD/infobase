@@ -24,6 +24,8 @@ export default {
     "PROG",
     "ANNUAL",
     "PLANNED_EXP_TAG",
+    "DP",
+    "DRR",
   ],
 
   "name": { "en": "Full-Time Equivalents (FTEs) by Program",

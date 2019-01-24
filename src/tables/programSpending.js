@@ -24,6 +24,8 @@ export default {
     "AUTH",
     "PROG",
     "ANNUAL",
+    "DP",
+    "DRR",
   ],
 
 
