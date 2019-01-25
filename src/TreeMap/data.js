@@ -47,12 +47,12 @@ function group_smallest(node_list, node_creator, shouldRecurse=true){
   const cutoff = (
     window.is_mobile ? 
     total*(2/100) : 
-    total*(0.3/100)
+    total*(1/100)
   ); //TODO: modify cutoff based on screenWidth, mobile should have more nesting for visibility...
   const tiny_nodes = _.filter(node_list, ({size}) => size < cutoff )
-  let ret;
 
-  if(tiny_nodes.length > 3){
+
+  if(tiny_nodes.length > 2){
     const new_node = node_creator(tiny_nodes);
     
     //"prep_nodes" equivalent TODO: extract to other func
@@ -64,9 +64,13 @@ function group_smallest(node_list, node_creator, shouldRecurse=true){
     new_node.children = group_smallest(tiny_nodes, node_creator);
 
     const old_node_list = _.without(node_list, ...tiny_nodes);
+    //and the other ones might be able to get grouped
+    _.each(old_node_list, n => {n.children = group_smallest(n.children, node_creator)} );
 
     return old_node_list.concat(new_node);
   } else {
+    //all the children have the possibility to get grouped
+    _.each(node_list, n => {n.children = group_smallest(n.children, node_creator)} );
 
     return node_list;
   }
