@@ -4,7 +4,7 @@ import { StandardRouteContainer } from '../core/NavComponents.js';
 import { Format, TM } from '../util_components.js';
 import { get_data } from './data.js';
 import { formats } from '../core/format.js';
-import './TreeMapExample.scss';
+import './TreeMap.scss';
 import { TreeMap } from './visualization.js';
 import AriaModal from 'react-aria-modal';
 import { IndicatorDisplay } from '../panels/result_graphs/components.js'
@@ -164,7 +164,7 @@ const render_modal = (node) => {
 }
 
 
-export class TreeMapExample extends React.Component {
+export default class TreeMapper extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -265,16 +265,16 @@ export class TreeMapExample extends React.Component {
           <div>
             <ul>
               <li>
-                <a href="#tree_map_example/drf"> DRF spending </a>
+                <a href="#treemap/drf"> DRF spending </a>
               </li>
               <li>
-                <a href="#tree_map_example/tp"> Transfer Payments </a>
+                <a href="#treemap/tp"> Transfer Payments </a>
               </li>
               <li>
-                <a href="#tree_map_example/vote_stat"> Vote stat items </a>
+                <a href="#treemap/vote_stat"> Vote stat items </a>
               </li>
               <li>
-                <a href="#tree_map_example/org_results"> Organization results </a>
+                <a href="#treemap/org_results"> Organization results </a>
               </li>
             </ul>
             <TreeMap 

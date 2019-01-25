@@ -2,11 +2,11 @@ import { Table } from '../core/TableClass.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
 
 
-export const smaller_items_text = (
-  APPLICATION_LANGUAGE === "en" ? 
-  "Smaller Items" :
-  "Objets plus petits"
-)
+export const smaller_items_text = "Smaller Items" //(
+  //APPLICATION_LANGUAGE === "en" ? 
+  //"Smaller Items" :
+  //"Objets plus petits"
+//)
 
 import { Subject } from '../models/subject.js';
 import { 
@@ -129,6 +129,7 @@ export async function get_data(type,org_id){
   
 
   let data;
+
   if(type==="org_results"){
     const org = Dept.lookup(org_id || 'ND');
     await ensure_loaded({
@@ -138,14 +139,14 @@ export async function get_data(type,org_id){
 
     const result_hierarchy = create_full_results_hierarchy({
       subject_guid: org.guid,
-      doc: "drr16",
+      doc: "drr17",
       allow_no_result_branches: true,
     });
 
     data = _.map(
       get_root(result_hierarchy).children,
       result_h7y_mapper
-    );
+    );  
 
     _.each(data, prep_nodes);
     const grouped_data = group_smallest(

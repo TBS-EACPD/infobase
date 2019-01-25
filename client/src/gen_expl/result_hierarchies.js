@@ -45,7 +45,6 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
   const get_resources = subject => get_resources_for_subject(subject, doc);
 
   const root_subject = Subject.get_by_guid(subject_guid);
-
   let root;
   if( root_subject){
 
@@ -59,6 +58,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
         'so'
       )
     );
+
 
     root = {
       id: "root",
@@ -79,7 +79,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
     };
 
   }
-  
+
   const d3_hierarchy = d3.hierarchy(root, node => {
 
     if(!_.isEmpty(node.children)){
