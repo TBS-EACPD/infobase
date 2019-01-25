@@ -2,6 +2,12 @@ import { rpb_link } from '../rpb/rpb_link.js';
 
 export default function(a11y_mode){
   const featured_content_items = [
+    !a11y_mode && {
+      text_key: 'quick_link_youtube_video',
+      href: '#orgs/gov/gov/infograph/results',
+      is_link_out: true,
+      is_youtube: true,
+    },
     {
       text_key: 'quick_link_DRR_1718',
       href: '#orgs/gov/gov/infograph/results',
@@ -54,22 +60,6 @@ export default function(a11y_mode){
         mode: 'details',
       }),
       is_new: true,
-    },
-    {
-      text_key: "supps_a",
-      href: (
-        window.is_a11y_mode ? 
-          rpb_link({ 
-            table: 'orgVoteStatEstimates', 
-            columns: [ "{{est_in_year}}_estimates"], 
-            dimension: 'by_estimates_doc', 
-            filter: ({ //TODO: D.R.Y this against orgVoteStatEstimates
-              en: "Supp. Estimates A",
-              fr: "Budget supp. A",
-            })[window.lang],
-          }) :
-          "#compare_estimates"
-      ),
     },
   ];
 

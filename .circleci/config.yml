@@ -120,3 +120,4 @@ workflows:
             branches:
               only:
                 - master
+                - home-vid-link
