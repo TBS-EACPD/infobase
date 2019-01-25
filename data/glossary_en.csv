@@ -58,6 +58,11 @@ By the 2018-19 fiscal year this new format will be adopted by all organizations,
 Through DRRs, individual departments and agencies provide information on how they are progressing toward their strategic goals. DRRs cover the most recently completed fiscal year and are normally tabled in the fall."
 "EFF_ID","Efficiency","The extent to which resources are used such that a greater level of output/outcome is produced with the same level of input or, a lower level of input is used to produce the same level of output/outcome. The level of input and output/outcome could be increases or decreases in quantity, quality, or both."
 "EI_IGOC","Enabling Instrument(s)","The instrument used to create and enable an organization."
+"EMPLOYMENT_EQUITY","Employment Equity","The purpose of the Employment Equity Act is to achieve equity in Canadian workplaces by correcting conditions of disadvantage in employment through identifying and removing barriers experienced by members of the 4 employment equity designated groups:
+* women
+* Aboriginal peoples
+* persons with disabilities
+* members of visible minorities"
 "EST_DOC","Estimates Documents","Estimates Documents includes:
 * Main Estimates;
 * Supplementary Estimates (A);
@@ -160,7 +165,6 @@ Each department and agency is responsible for reconciling its accounts to the co
 "PARL_ORG","Appropriated Parliamentary Entities","Organizations covered by the Parliament of Canada Act."
 "PART_PEOPLE","Part-time Employee","Part-time employees are persons employed to work less than the normally scheduled daily or weekly hours of work, prescribed by the relevant collective bargaining agreement or the employer, established for full-time employees of the same occupational group and level."
 "PART1","Government Expenditure Plan","The Government Expenditure Plan corresponds to Part I of the Estimates process. It provides a summary and highlights of year-over-year changes in departmental spending and transfer payments in order to provide perspective on the major issues influencing government planned spending."
-"PEOPLE","Data about Public Servants",
 "PEOPLE_DATA","People Management","People Management data presents key demographics of the Federal Public Service (FPS) workforce."
 "PERC_IGOC","Percentage Share of Federal Ownership","The share ownership by the Government of Canada of a corporate interest."
 "PI","Program Inventory","Identifies all of the department’s programs and describes how resources are organized to contribute to the department’s Core Responsibilities and Results.
@@ -177,7 +181,6 @@ Note: In the 2017-18 fiscal year, a new reporting format consisting of a Departm
 
 
 By the 2018-19 fiscal year this new format will be adopted by all organizations, replacing the Program Alignment Architecture instituted by the rescinded TBS Policy on Management, Resources and Results Structure."
-"PLAN_DATA","Planning Data",
 "PLANNED_EXP","Planned Spending","For Departmental Plans (DPs) and Departmental Results Reports (DRRs), planned spending refers to those amounts that receive Treasury Board approval by February 1. Therefore, planned spending (including voted and statutory items) may include amounts incremental to planned expenditures presented in the Main Estimates."
 "PLANNED_FTE","Planned Full-Time Equivalents (FTEs)","Planned FTEs is a measure of the extent to which an employee represents a full person-year charge against the departmental budget for future spending years. Full-time equivalents are calculated as a ratio of assigned hours of work to scheduled hours of work. Scheduled hours of work are set out in collective agreements."
 "PO","Program Outcome","A change or consequence attributable to outputs or to which outputs or other outcomes of the program contribute. Program outcomes may be a hierarchy of short-, medium-, or long-term, and are generally more directly influenced by departments and within their immediate control than Departmental Results. Program outcomes are found at the Program level, whereas Departmental Results are found at the Core Responsibility level."
@@ -361,13 +364,9 @@ Program metadata, which comprises: (1) linkage tags that identify the connection
 "VOTED","Voted amounts","Voted amounts refer to the amounts approved in appropriation acts."
 "YI_IGOC","Year of Incorporation","The year in which an organization was legally established."
 "MRRS","Policy on Management, Resources and Results Structures","The Policy on Management, Resources and Results Structures (MRRS) supports the development of a common government-wide approach to the identification of programs and to the collection, management, and reporting of financial and non-financial information relative to those programs. The policy provides departments with the flexibility and discretion they need to design and manage their programs in a manner that best achieves results for Canadians."
-"GEO","Geographic Data",
-"ESTIMATES","Estimates",
 "OC_PEOPLE","Occupational category","A generalized classification system of each employee's type of work. An individual employee's classification is determined by their collective agreement and, as such, may not precisely or entirely describe their work."
 "RPS","Regional Pay System (RPS)","Regional Pay System (RPS) serves as the main data source for central HR reporting including demographic reports, analyses, open data and data extracts in response to people management information requests. In 2011, the Office of the Chief Human Resources Officer (OCHRO) of the Treasury Board of Canada, Secretariat (TBS) repatriated nine legacy Human Resources (HR) data files from Public Works and Government Services Canada (PWGSC). These files collectively identified as the HR Data Integration Broker (HRDIB). Some HRDIB data is also provided to multiple users within TBS and sent to multiple departments and agencies, bargaining agents, and other organizations."
 "FOL","First Official Language","The official language (English or French) with which an employee has a primary personal identification (that is, the official language in which a person is generally more proficient)."
-"EX_LVL","Executive Level",
-"SUPPRESSED_DATA","Suppressed Data",
 "GOCA","Government of Canada Spending areas and Activities","All federal organizations receiving appropriations must plan and manage their operations and report their performance against strategic outcomes or departmental results framework.
 
 
@@ -431,22 +430,22 @@ Each program should have one primary method of intervention. However, in some ca
 These changes address the government’s commitment to provide more coherent information to Parliament and to align the federal budget and the estimates.
 
 
-Given that voted spending authorities expire at the end of each fiscal year, the Government must seek sufficient spending authorities to begin the fiscal year. This will be done through the first appropriation act of 2018–19, for approval by the end of March. The first appropriation act will be supported by this new document, called “Interim Estimates”.
+Given that voted spending authorities expire at the end of each fiscal year, the Government must seek sufficient spending authorities to begin the fiscal year. This will be done through a first appropriation act, for approval by the end of March. The first appropriation act will be supported by this new document, called “Interim Estimates”.
 
 
-These **2018–19 Interim Estimates** include:
-* an overview of spending requirements for the first three months of the fiscal year as they compare to 2017–18 Estimates;
-* a listing of planned grants to allow organizations to make grant payments effective April 1, 2018; and,
+These **Interim Estimates** include:
+* an overview of spending requirements for the first three months of the fiscal year as they compare to last year's Estimates;
+* a listing of planned grants to allow organizations to make grant payments effective April 1 st; and,
 * the proposed schedules to the first appropriation bill.
 
 
-This funding supports the government’s financial requirements for the first three months of the fiscal year. In March 2018, the Government will introduce a supply bill and Parliament will vote on appropriations for the 2018–19 Interim Estimates.
-
-_Other Estimates in 2018–19_
-The Government will table a full Main Estimates, including planned voted and statutory expenditures for the full fiscal year, on or by April 16, 2018. These Main Estimates will likely be tabled after the 2018 Federal Budget and therefore be able to reflect Budget priorities. The Government will introduce another appropriation act in June to reflect the additional amounts requested in the Main Estimates.  
+This funding supports the government’s financial requirements for the first three months of the fiscal year. In March, the Government will introduce a supply bill and Parliament will vote on appropriations for the Interim Estimates.
 
 
-Supplementary Estimates will continue to present information on additional spending requirements which were either not sufficiently developed in time for inclusion in the Main Estimates, or have subsequently been refined to account for developments in particular programs and services. Two Supplementary Estimates are planned for 2018–19, to be tabled in the fall of 2018 and in early 2019, and the associated appropriation acts will follow shortly thereafter.
+The Government will table a full Main Estimates, including planned voted and statutory expenditures for the full fiscal year, on or by April 16. The Government will introduce another appropriation act in June to reflect the additional amounts requested in the Main Estimates.  
+
+
+Supplementary Estimates will continue to present information on additional spending requirements which were either not sufficiently developed in time for inclusion in the Main Estimates, or have subsequently been refined to account for developments in particular programs and services. 
 
 
 "

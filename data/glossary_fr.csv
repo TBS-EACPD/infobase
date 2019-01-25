@@ -59,6 +59,11 @@ Cette nouvelle structure, qui sera adoptée par toutes les organisations d’ici
 Dans le RRM, les ministères et organismes donnent de l’information sur les progrès accomplis vers l’atteinte de leurs objectifs stratégiques. Les RRM couvrent l’exercice précédent et sont habituellement déposés à l’automne."
 "EFF_ID","Efficience","Mesure dans laquelle les ressources sont utilisées de manière à produire un plus grand niveau d’extrants avec le même niveau d’intrants, ou le même niveau d’extrants avec un plus faible niveau d’intrants. Les niveaux d’intrants et d’extrants peuvent se traduire par des hausses ou des baisses de qualité, de quantité, ou les deux."
 "EI_IGOC","Instruments habilitants","Instrument utilisé pour créer une organisation et lui donner les moyens de faire quelque chose"
+"EMPLOYMENT_EQUITY","Équité en matière d'emploi","La Loi sur l'équité en matière d'emploi a pour but de réaliser l'égalité en milieu de travail en corrigeant les désavantages subis, dans le domaine de l'emploi, en déterminant et en éliminant les obstacles à l'emploi des membres des 4 groupes visés par l'équité en matière d'emploi suivants :
+* les femmes;
+* les Autochtones;
+* les personnes handicapées;
+* les membres de minorités visibles."
 "EST_DOC","Document budgétaires","Les documents budgétaires comprennent :
 * le budget principal des dépenses;
 * le budget supplémentaire des dépenses A;
@@ -161,7 +166,6 @@ Chaque ministère et organisme est responsable de la conciliation de ses comptes
 "PARL_ORG","Entités parlementaires qui reçoivent des crédits","Organisations couvertes par la Loi sur le Parlement du Canada"
 "PART_PEOPLE","Employé à temps partiel","Un Employé à temps partiel est une personne qui doit travailler un nombre d'heures inférieur à l'horaire de travail quotidien ou hebdomadaire prévu pour un employé à temps plein de mêmes groupe et niveau. Les heures de travail prescrites sont établies dans les conventions collectives ou par l'employeur."
 "PART1","Plan de dépenses du gouvernement","Le Plan de dépenses du gouvernement correspond à la partie I du processus d'établissement du budget des dépenses. Il présente un résumé et les faits saillants des changements qui se produisent d'une année à l'autre dans les dépenses ministérielles et les paiements de transfert afin de mettre en perspective les grands enjeux qui influencent les prévisions de dépenses du gouvernement."
-"PEOPLE","Données sur les fonctionaires",
 "PEOPLE_DATA","Gestion du personnel","Les données sur la gestion du personnel décrivent les caractéristiques démographiques des employées travaillant au sein de la fonction publique fédérale."
 "PERC_IGOC","Pourcentage de la participation fédérale","Actions détenues par le gouvernement fédéral dans une société dans laquelle le Canada détient des intérêts."
 "PI","Répertoire de programmes","Compilation de tous les programmes du ministère et description de la façon dont les ressources sont organisées pour permettre au ministère d’exercer ses responsabilités essentielles et d’atteindre les résultats.
@@ -178,7 +182,6 @@ Nota : En 2017-2018, les sept ministères suivants ont adopté la nouvelle struc
 
 
 Cette nouvelle structure, qui sera adoptée par toutes les organisations d’ici 2018-2019, remplace l'architecture d'alignement des programmes établie par la Politique sur la structure de la gestion, des ressources et des résultats du SCT, maintenant annulée."
-"PLAN_DATA","Données relatives à la planification",
 "PLANNED_EXP","Dépenses prévues","Pour les plans ministériels (PM) et les rapports sur les résultats ministériels (RRM), on entend par « dépenses prévues » les montants approuvés par le Conseil du Trésor en date du 1er février. Les dépenses prévues (y compris les crédits votés et les postes législatifs) peuvent donc comprendre les sommes supplémentaires figurant au budget principal des dépenses."
 "PLANNED_FTE","ETP prévus","Les équivalents temps plein (ETP) prévus sont la mesure utilisée pour représenter une année-personne complète d'un employé dans le budget ministériel. Les ETP sont calculés en fonction du coefficient des heures de travail assignées et des heures de travail prescrites. Les heures de travail prescrites sont établies dans les conventions collectives."
 "PO","Résultat du programme","Changement ou conséquence attribuable à des extrants ou auquel contribuent d’autres extrants ou résultats du programme. Les résultats des programmes peuvent être à court, à moyen ou à long terme; généralement, ils subissent davantage l’influence des ministères et relèvent davantage de leur contrôle direct que les résultats ministériels. Les résultats des programmes se trouvent au niveau des programmes, alors que les résultats ministériels se situent au niveau des responsabilités essentielles."
@@ -363,13 +366,9 @@ Programme de métadonnées, comprenant ce qui suit : 1) des étiquettes de lien 
 "VOTED","Montants votés","Par «  votés », on entend les montants autorisés aux termes des lois de crédits"
 "YI_IGOC","Année de constitution en société","Année au cours de laquelle l’organisation a été légalement constituée en société."
 "MRRS","Politique sur la structure de la gestion, des ressources et des résultats","La Politique sur la structure de gestion, des ressources et des résultats (SGRR) vise à faciliter l'élaboration d'une approche pangouvernementale commune pour la désignation des programmes, et pour la collecte, la gestion et la déclaration de données financières et non financières relatives à ces programmes. La Politique fournit aux ministères la marge de manœuvre et les pouvoirs discrétionnaires dont ils ont besoin pour concevoir et gérer leurs programmes de la manière la plus susceptible de fournir des résultats pour les Canadiens."
-"GEO","Données géographique",
-"ESTIMATES","Budget des dépenses",
 "OC_PEOPLE","Catégorie professionnelle","Un système de classification généralisé du type de travail de chaque employé;  la classification d'un employé individuel est déterminée en fonction de sa convention collective et, par conséquent, ne décrit pas forcément le travail de cet employé de façon précise ou exhaustive."
 "RPS","Système régional de paye (SRP)","Le Système régional de paye (SRP) sert de source principale de données aux fins d'établissement de rapports centraux, notamment les rapports démographiques, les analyses, les données ouvertes et les extractions de données en réponse aux demandes de renseignements en matière de gestion des personnes. En 2011, le Bureau du dirigeant principal des ressources humaines (BDPRH) du Secrétariat du Conseil du Trésor (SCT) du Canada a récupéré neuf anciens fichiers de données des Ressources humaines (RH) auprès de Travaux publics et Services gouvernementaux Canada (TPSGC). Ces fichiers sont désignés collectivement comme étant le Service d'intégration des données sur les ressources humaines (SIDRH). Certaines données du SIDRH sont également fournies à de nombreux utilisateurs du SCT et envoyées à divers ministères et organismes, agents négociateurs et autres organisations."
 "FOL","Première langue officielle","La langue (le français ou l'anglais) à laquelle l'employé s'identifie le mieux (la langue officielle dans laquelle une personne est généralement la plus compétente)."
-"EX_LVL","Niveaux des cadres supérieurs",
-"SUPPRESSED_DATA","Données supprimées",
 "GOCA","Secteurs de dépenses et d’activités du gouvernement du Canada","Les organisations fédérales qui reçoivent des crédits doivent planifier leurs opérations, les gérer et rendre compte de leur rendement par rapport à des résultats stratégiques ou des résultats ministériels.
 
 
@@ -431,24 +430,22 @@ Chaque programme devrait avoir une méthode d’intervention principale. Toutefo
 Ces changements donnent suite à l’engagement du gouvernement à fournir des renseignements plus cohérents au Parlement et à harmoniser le budget fédéral et le budget des dépenses.
 
 
-Comme les autorisations votées expirent à la fin de chaque exercice, le gouvernement doit demander des autorisations de dépenser afin de disposer d’un financement suffisant au début du nouvel exercice. Cette demande s?effectue par le truchement de la première loi de crédits de 2018-2019 aux fins d?approbation avant la fin de mars. La première loi de crédits sera appuyée par ce nouveau document, appelé « budget provisoire des dépenses ».
+Comme les autorisations votées expirent à la fin de chaque exercice, le gouvernement doit demander des autorisations de dépenser afin de disposer d’un financement suffisant au début du nouvel exercice. Cette demande s?effectue par le truchement de la première loi de crédits aux fins d?approbation avant la fin de mars. La première loi de crédits sera appuyée par ce nouveau document, appelé « budget provisoire des dépenses ».
 
 
-Le **Budget provisoire des dépenses 2018-2019** comprend :
-* un aperçu des besoins de dépenses pour les trois premiers mois de l’exercice, par rapport au budget des dépenses 2017-2018;
-* une liste des subventions prévues pour permettre aux organisations d?effectuer des paiements de subventions à compter du 1er avril 2018;
+Le **Budget provisoire des dépenses** comprend :
+* un aperçu des besoins de dépenses pour les trois premiers mois de l’exercice, par rapport au budget des dépenses de l'année précédente;
+* une liste des subventions prévues pour permettre aux organisations d?effectuer des paiements de subventions à compter du 1er avril;
 * les annexes proposées pour le premier projet de loi de crédits.
 
 
-Ce financement vise à soutenir les besoins financiers du gouvernement pour les trois premiers mois de l’exercice. En mars 2018, le gouvernement présentera un projet de loi de crédits, et le Parlement votera les crédits afférents au Budget provisoire des dépenses 2018-2019.
+Ce financement vise à soutenir les besoins financiers du gouvernement pour les trois premiers mois de l’exercice. En mars, le gouvernement présentera un projet de loi de crédits, et le Parlement votera les crédits afférents au Budget provisoire des dépenses.
 
 
-_Autres budgets pour 2018-2019_
-Le gouvernement déposera un budget principal des dépenses complet, incluant les dépenses votées prévues et les dépenses législatives prévues pour l?ensemble de l’exercice, le ou avant le 16 avril 2018. Le budget principal des dépenses sera probablement déposé après la présentation du budget fédéral de 2018 et pourra donc prendre en compte les priorités du budget annuel. Le gouvernement déposera un autre projet de loi de crédits en juin pour tenir compte des montants supplémentaires demandés dans le budget principal des dépenses. 
+Le gouvernement déposera un budget principal des dépenses complet, incluant les dépenses votées prévues et les dépenses législatives prévues pour l?ensemble de l’exercice, le ou avant le 16 avril. Le gouvernement déposera un autre projet de loi de crédits en juin pour tenir compte des montants supplémentaires demandés dans le budget principal des dépenses. 
 
 
-Les budgets supplémentaires des dépenses continueront de présenter de l’information sur les besoins supplémentaires en matière de dépenses, besoins qui n’étaient pas suffisamment étoffés au moment du dépôt du budget principal des dépenses ou qui ont été peaufinés par la suite pour prendre en compte les changements apportés à des programmes ou des services particuliers. Deux budgets supplémentaires
-des dépenses sont prévus pour 2018-2019, lesquels seront déposés au Parlement à l’automne 2018 et au début de 2019, et les lois de crédits connexes suivront peu après."
+Les budgets supplémentaires des dépenses continueront de présenter de l’information sur les besoins supplémentaires en matière de dépenses, besoins qui n’étaient pas suffisamment étoffés au moment du dépôt du budget principal des dépenses ou qui ont été peaufinés par la suite pour prendre en compte les changements apportés à des programmes ou des services particuliers."
 "NB_EXP","Dépenses non budgétaires","Les dépenses non budgétaires, ou les prêts, placements et avances, sont des dépenses qui correspondent à des modifications de la valeur des actifs financiers du gouvernement. Les montants négatifs indiquent que les recouvrements sont supérieurs aux dépenses."
 "SPA","Dépenses budgétaires prévues dans des comptes à fins déterminées","Les comptes à fins déterminées correspondent à une classification de comptes établis dans les Comptes publics du Canada et qui servent à comptabiliser les recettes déposées dans le Trésor et les montants prélevés sur le Trésor aux termes d’autorisations législatives établies à des fins déterminées."
 "CRF","Trésor","Le total des fonds publics en dépôt au crédit du receveur général."
