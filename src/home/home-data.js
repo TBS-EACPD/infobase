@@ -4,7 +4,10 @@ export default function(a11y_mode){
   const featured_content_items = [
     !a11y_mode && {
       text_key: 'quick_link_youtube_video',
-      href: '#orgs/gov/gov/infograph/results',
+      href: {
+        en: "https://www.youtube.com/watch?v=WG1ngAI49Bw",
+        fr: "https://www.youtube.com/watch?v=RrvWQJsrSVk",
+      }[window.lang],
       is_link_out: true,
       is_youtube: true,
     },
