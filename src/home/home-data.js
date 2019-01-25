@@ -77,13 +77,6 @@ export default function(a11y_mode){
         mode: 'details',
       }),
     },
-    { 
-      text_key: 'quick_link_prog_by_vote_stat',
-      href: rpb_link({ 
-        table: 'programVoteStat', 
-        mode: 'details',
-      }),
-    },
   ];
 
 
