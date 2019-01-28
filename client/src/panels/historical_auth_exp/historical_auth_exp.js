@@ -138,13 +138,13 @@ const render = function({calculations, footnotes, sources}) {
 
     // const colors = infobase_colors();
     graph_content = <div>
-      <div className="legend-container">
+      {/* <div className="legend-container">
         <GraphLegend
           items={legend_items}
           isHorizontal
         />
-      </div>
-      <div style={{height: 400}}>
+      </div> */}
+      <div style={{height: 450}}>
         {
           <ResponsiveBar
             data={dataExp}
