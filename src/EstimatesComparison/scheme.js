@@ -306,7 +306,7 @@ export const col_defs = [
     textAlign: "right",
     header_display: <TM k="current_doc_this_year" args={{current_doc_is_mains, current_sups_letter}} />,
     get_val: node => _.get(node, "data.current_value"),
-    val_display: val => <Format type="compact1" content={val} />,
+    val_display: val => <Format type="compact2" content={val} />,
   },
   {
     id: "comparison_value_pct",

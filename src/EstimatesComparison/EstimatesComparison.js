@@ -152,13 +152,13 @@ const DetailedAmountsByDoc = ({amounts_by_doc}) => {
               <td> 
                 {
                   amount_last_year && 
-                  <Format type="compact1" content={amount_last_year} />
+                  <Format type="compact2" content={amount_last_year} />
                 } 
               </td>
               <td> 
                 {
                   amount_this_year && 
-                  <Format type="compact1" content={amount_this_year} />
+                  <Format type="compact2" content={amount_this_year} />
                 } 
               </td>
             </tr>
