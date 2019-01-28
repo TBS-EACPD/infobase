@@ -2,7 +2,7 @@ import { rpb_link } from '../rpb/rpb_link.js';
 
 export default function(a11y_mode){
   const featured_content_items = [
-    !a11y_mode && {
+    !window.is_a11y_mode && {
       text_key: 'quick_link_youtube_video',
       href: {
         en: "https://www.youtube.com/watch?v=WG1ngAI49Bw",
