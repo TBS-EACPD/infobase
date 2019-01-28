@@ -12,12 +12,15 @@ import { IndicatorDisplay } from '../panels/result_graphs/components.js'
 
 function std_node_render(foreign_sel){
   foreign_sel.html(function(node){
-    // debugger;
-    if(this.offsetHeight > 45 ){
+    if (this.offsetHeight <= 30 ) { return }
+
+    const name_to_display = ( node.data.subject && node.data.subject.fancy_acronym && this.offsetWidth < 150 ? node.data.subject.fancy_acronym : node.data.name );
+    
+    if(this.offsetHeight > 50){
       return `
-      <div class="TreeMapNode__ContentBox TreeMapNode__ContentBox--standard">
+        <div class="TreeMapNode__ContentBox TreeMapNode__ContentBox--standard">
         <div class="TreeMapNode__ContentTitle">
-          ${node.data.name}
+          ${name_to_display}
         </div>
         <div class="TreeMapNode__ContentText">
           ${formats.compact1(node.data.amount)}
@@ -25,17 +28,14 @@ function std_node_render(foreign_sel){
       </div>
     `
     }
-    else if (this.offsetHeight > 25 ){
+    else {
       return `
       <div class="TreeMapNode__ContentBox TreeMapNode__ContentBox--standard">
         <div class="TreeMapNode__ContentTitle">
-          ${node.data.name}
+          ${name_to_display}
         </div>
       </div>
     `
-    }
-    else {
-      return
     }
   });
 }

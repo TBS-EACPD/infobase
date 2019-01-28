@@ -79,7 +79,6 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
     };
 
   }
-
   const d3_hierarchy = d3.hierarchy(root, node => {
 
     if(!_.isEmpty(node.children)){

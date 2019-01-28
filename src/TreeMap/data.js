@@ -191,18 +191,20 @@ export async function get_data(type,org_id){
       .filter(has_non_zero_or_non_zero_children)
       .value();
 
-      data =  _.chain(orgs)
-        .groupBy('subject.ministry.name')
-        .toPairs()
-        .map( ([min_name, orgs]) => (
-            orgs.length > 1 ? 
-            {
-              name: min_name,
-              children: orgs,
-            } : 
-            _.first(orgs)
-        ))
-        .value();
+      // TODO: this is the bit that makes it so that ministries don't have acronyms and we can't display acronyms for the top level
+      // of the hierarchy.
+    data = _.chain(orgs)
+      .groupBy('subject.ministry.name')
+      .toPairs()
+      .map( ([min_name, orgs]) => (
+          orgs.length > 1 ? 
+          {
+            name: min_name,
+            children: orgs,
+          } : 
+          _.first(orgs)
+      ))
+      .value(); 
   } else if(type === "tp"){
     const table7 = Table.lookup('table7');
     const orgs = _.chain(Dept.get_all())
