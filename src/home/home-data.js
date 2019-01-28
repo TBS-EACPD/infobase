@@ -17,7 +17,7 @@ export default function(a11y_mode){
         window.is_a11y_mode ? 
           rpb_link({ 
             table: 'table8', 
-            columns: [ "{{est_in_year}}_estimates"], 
+            columns: [ "{{est_next_year}}_estimates"], 
             dimension: 'by_estimates_doc', 
             filter: ({ //TODO: D.R.Y this against table8
               en: "Interim Estimates",
