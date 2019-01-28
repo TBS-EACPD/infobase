@@ -34,25 +34,28 @@ function has_non_zero_or_non_zero_children(node){
 
 
 //asumes real_value is set on all nodes
-function group_smallest(node_list, node_creator, shouldRecurse=true){
+function group_smallest(node_list, node_creator, shouldRecurse=true, perc_cutoff=0.02){
   if(_.isEmpty(node_list)){
     return node_list;
   }
-  //apply recursion first
-  _.each(node_list, child => {
-    child.children = group_smallest(child.children, node_creator);
-  });
+  if(shouldRecurse){
+    //apply recursion first
+    _.each(node_list, child => {
+      child.children = group_smallest(child.children, node_creator, shouldRecurse, perc_cutoff);
+    });
+  }
 
   const total = _.sumBy(node_list, "size");
   const cutoff = (
-    window.is_mobile ? 
-    total*(2/100) : 
-    total*(1/100)
+    //window.is_mobile ? 
+    //total*(3/100) : 
+    total*perc_cutoff
   ); //TODO: modify cutoff based on screenWidth, mobile should have more nesting for visibility...
+  //TODO: should cutoffs vary based on which type we're showing?
   const tiny_nodes = _.filter(node_list, ({size}) => size < cutoff )
 
 
-  if(tiny_nodes.length > 2){
+  if(tiny_nodes.length > 1){
     const new_node = node_creator(tiny_nodes);
     
     //"prep_nodes" equivalent TODO: extract to other func
@@ -60,8 +63,11 @@ function group_smallest(node_list, node_creator, shouldRecurse=true){
     new_node.size = _.sumBy(tiny_nodes,"size")
     new_node.is_negative = new_node.amount < 0;
     
-    //the newly split up children might be able to get grouped again!
-    new_node.children = group_smallest(tiny_nodes, node_creator);
+    
+    if(shouldRecurse){
+      //the newly split up children might be able to get grouped again!
+      new_node.children = group_smallest(tiny_nodes, node_creator, shouldRecurse, perc_cutoff);
+    }
 
     const old_node_list = _.without(node_list, ...tiny_nodes);
 
@@ -200,6 +206,17 @@ export async function get_data(type,org_id){
           _.first(orgs)
       ))
       .value(); 
+    _.each(data, prep_nodes);
+    const grouped_data = group_smallest(
+      data, 
+      children => ({ name: smaller_items_text, children })
+    );
+    const root = {
+      name: "Government",
+      children: grouped_data,
+      amount: _.sumBy(data, "amount")
+    };
+    return d3.hierarchy(root);
   } else if(type === "tp"){
     const table7 = Table.lookup('table7');
     const orgs = _.chain(Dept.get_all())
@@ -218,6 +235,19 @@ export async function get_data(type,org_id){
       .value();
       
     data = orgs;
+    _.each(data, prep_nodes);
+    const grouped_data = group_smallest(
+      data, 
+      children => ({ name: smaller_items_text, children }),
+      true,
+      0.007
+    );
+    const root = {
+      name: "Government",
+      children: grouped_data,
+      amount: _.sumBy(data, "amount")
+    };
+    return d3.hierarchy(root);
 
   } else if(type === "vote_stat"){
     const table8 = Table.lookup('table8');
@@ -240,19 +270,21 @@ export async function get_data(type,org_id){
 
     
     data = orgs;
+    _.each(data, prep_nodes);
+    const grouped_data = group_smallest(
+      data, 
+      children => ({ name: smaller_items_text, children }),
+      true,
+      0.005
+    );
+    const root = {
+      name: "Government",
+      children: grouped_data,
+      amount: _.sumBy(data, "amount")
+    };
+    return d3.hierarchy(root);
   }
 
-  _.each(data, prep_nodes);
-  const grouped_data = group_smallest(
-    data, 
-    children => ({ name: smaller_items_text, children })
-  );
-  const root = {
-    name: "Government",
-    children: grouped_data,
-    amount: _.sumBy(data, "amount")
-  };
-  return d3.hierarchy(root)
   
 
 
