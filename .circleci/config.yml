@@ -120,4 +120,3 @@ workflows:
             branches:
               only:
                 - master
-                - interim_mains_sups_b
