@@ -112,7 +112,7 @@ const get_dept_panels = subject => {
       'igoc_fields',
       'igoc_links',
     ],
-    financial: _.includes(subject.tables,'programSpending') && [
+    financial: _.includes(subject.tables, 'programSpending') && [
       "financial_intro",
       "welcome_mat",
       "budget_measures_panel",
@@ -134,7 +134,7 @@ const get_dept_panels = subject => {
       "drr_summary",
       "explore_results",
     ],
-    related: _.nonEmpty(subject.tables) && [
+    related: _.nonEmpty(subject.programs) && [
       "portfolio_structure_related",
       "tags_of_interest",
     ],
