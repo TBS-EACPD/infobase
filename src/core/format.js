@@ -186,7 +186,7 @@ const types_to_format = {
     val, 
     {
       symbol: "",
-      precision: 3,
+      precision: 2,
       ...lang_options[lang],
     }
   ),

@@ -8,24 +8,24 @@ gov_employee_age_text:
   en: |
    From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, people aged **{{fmt_big_int_real gov_head_count_age_top}}** accounted for the largest average share (**{{fmt_percentage1 gov_head_count_age_top_avg_percent}}**) of **Federal Public Service** employees.
    
-   Over this period, the **average age** of **Federal Public Service** employees **{{two_value_changed_to gov_avgage_last_year_5 gov_avgage_last_year "fmt_decimal1"}}**, with an average March-to-March change of **{{plus_or_minus_val gov_avgage_avg_change "fmt_decimal2"}}** years.
+   Over this period, the **average age** of **Federal Public Service** employees **{{two_value_changed_to gov_avgage_last_year_5 gov_avgage_last_year "fmt_decimal1"}}**, with an average March-to-March change of **{{plus_or_minus_val gov_avgage_avg_change "fmt_decimal"}}** years.
   fr: |
    De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, les personnes âgées de **{{fmt_big_int_real gov_head_count_age_top}}** constituaient en moyenne le plus fort contingent (**{{fmt_percentage1 gov_head_count_age_top_avg_percent}}**) de l’effectif de la **fonction publique fédérale**.
 
-   Au cours de cette période, **l’âge moyen** des employés de la **fonction publique fédérale** **{{fr_two_value_changed_to gov_avgage_last_year_5 gov_avgage_last_year "m" "s" "fmt_decimal1"}}**, l’écart moyen de mars à mars étant **{{plus_or_minus_val gov_avgage_avg_change "fmt_decimal2"}}** année.
+   Au cours de cette période, **l’âge moyen** des employés de la **fonction publique fédérale** **{{fr_two_value_changed_to gov_avgage_last_year_5 gov_avgage_last_year "m" "s" "fmt_decimal1"}}**, l’écart moyen de mars à mars étant **{{plus_or_minus_val gov_avgage_avg_change "fmt_decimal"}}** année.
 
 dept_employee_age_text:
   transform: [handlebars,markdown]
   en: |
    From **{{fmt_big_int_real dept_head_count_age_first_active_year}}** to **{{fmt_big_int_real dept_head_count_age_last_active_year}}**, people aged **{{fmt_big_int_real dept_head_count_age_top}}** accounted for the largest average share (**{{fmt_percentage1 dept_head_count_age_top_avg_percent}}**) of **{{subj_name subject}}** employees.
 
-   Over this period, the **average age** of **{{subj_name subject}}** employees **{{two_value_changed_to dept_avgage_first_active_value dept_avgage_last_active_value "fmt_decimal1"}}**, with an average March-to-March change of **{{plus_or_minus_val dept_avgage_avg_change "fmt_decimal2"}}** years.
-   For comparison, from **{{dept_avgage_first_active_year}}** to **{{dept_avgage_last_active_year}}**, the average March-to-March change for the overall **Federal Public Service** was **{{plus_or_minus_val dept_gov_avgage_avg_change "fmt_decimal2"}}** years.
+   Over this period, the **average age** of **{{subj_name subject}}** employees **{{two_value_changed_to dept_avgage_first_active_value dept_avgage_last_active_value "fmt_decimal1"}}**, with an average March-to-March change of **{{plus_or_minus_val dept_avgage_avg_change "fmt_decimal"}}** years.
+   For comparison, from **{{dept_avgage_first_active_year}}** to **{{dept_avgage_last_active_year}}**, the average March-to-March change for the overall **Federal Public Service** was **{{plus_or_minus_val dept_gov_avgage_avg_change "fmt_decimal"}}** years.
   fr: |
    De **{{fmt_big_int_real dept_head_count_age_first_active_year}}** à **{{fmt_big_int_real dept_head_count_age_last_active_year}}**, les personnes âgées de **{{fmt_big_int_real dept_head_count_age_top}}** constituaient en moyenne le plus fort contingent (**{{fmt_percentage1 dept_head_count_age_top_avg_percent}}**) d’employés **{{de_dept dept}}**.
 
-   Au cours de cette période, **l’âge moyen** des employés **{{de_dept dept}}** **{{fr_two_value_changed_to dept_avgage_first_active_value dept_avgage_last_active_value "m" "s" "fmt_decimal1"}}**, l’écart moyen de mars à mars étant **{{plus_or_minus_val dept_avgage_avg_change "fmt_decimal2"}}** année.
-   Aux fins de comparaison, de **{{dept_avgage_first_active_year}}** à **{{dept_avgage_last_active_year}}**, l’écart moyen de mars à mars pour l’ensemble de la **fonction publique fédérale** était **{{plus_or_minus_val dept_gov_avgage_avg_change "fmt_decimal2"}}** année.
+   Au cours de cette période, **l’âge moyen** des employés **{{de_dept dept}}** **{{fr_two_value_changed_to dept_avgage_first_active_value dept_avgage_last_active_value "m" "s" "fmt_decimal1"}}**, l’écart moyen de mars à mars étant **{{plus_or_minus_val dept_avgage_avg_change "fmt_decimal"}}** année.
+   Aux fins de comparaison, de **{{dept_avgage_first_active_year}}** à **{{dept_avgage_last_active_year}}**, l’écart moyen de mars à mars pour l’ensemble de la **fonction publique fédérale** était **{{plus_or_minus_val dept_gov_avgage_avg_change "fmt_decimal"}}** année.
 
 gov_employee_age_text_temporary_no_avg_age:
   transform: [handlebars,markdown]
