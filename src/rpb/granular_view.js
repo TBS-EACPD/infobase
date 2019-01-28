@@ -70,7 +70,16 @@ class GranularView extends React.Component {
                     on_set_filter({filter: filt_key, dimension: dim_key});
                   }}
                   selected={dimension+'__'+filter}
-                  grouped_options={filters_by_dimension}
+                  grouped_options={ 
+                    _.mapValues(filters_by_dimension, 
+                      filter_by_dim => (
+                        {
+                          ...filter_by_dim, 
+                          children: _.sortBy(filter_by_dim.children, "display"),
+                        }
+                      ) 
+                    )
+                  }
                 />
                 <div className="mrgn-tp-lg">
                   <ExportButton 
