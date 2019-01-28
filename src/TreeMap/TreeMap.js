@@ -8,6 +8,8 @@ import './TreeMap.scss';
 import { TreeMap } from './visualization.js';
 import AriaModal from 'react-aria-modal';
 import { IndicatorDisplay } from '../panels/result_graphs/components.js'
+import { infograph_href_template } from '../link_utils.js';
+import { trivial_text_maker } from '../models/text.js';
 
 
 function std_node_render(foreign_sel){
@@ -122,8 +124,17 @@ function std_tooltip_render(tooltip_sel){
       <div>${d.data.name}</div>
       <hr class="BlueHLine">
       <div>${formats.compact1(d.data.amount)}</div>
+      ${generate_infograph_href(d)}
     </div>
   `);
+}
+
+function generate_infograph_href(d){
+  if (d.data.subject ){
+    return `<div style="padding-top: 10px">
+      <a class="TM_Tooltip__link" href=${infograph_href_template(d.data.subject)}> ${ trivial_text_maker("see_the_infographic") } </a>
+    </div>`;
+  } else { return ''}
 }
 
 function create_results_tooltip_render_func(activate_modal){
