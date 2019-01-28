@@ -112,9 +112,9 @@ export default {
         "fr": "Instrument des dépenses",
       },
     });
-    _.each(estimates_years, yr=> { 
+    _.each(estimates_years, (yr, ix) => { 
       this.add_col({
-        "simple_default": yr === _.last(estimates_years),
+        "simple_default": ix === 4,
         type: "big_int",
         nick: yr+"_estimates",
         description: {
@@ -138,7 +138,7 @@ export default {
     } else {
       row.splice(3, 1);
     }
-    if (_.isNaN(+row[1])) {
+    if ( _.isNaN(+row[1]) ){
       row[1] = 'S';
       row[2] = 999;
     } else {
@@ -194,9 +194,9 @@ export default {
         .map(function(row){
           if (format) {
             if (add_percentage) {
-              return FORMAT.list_formater(["","big-int","percentage"],row);
+              return FORMAT.list_formater(["", "big-int", "percentage"], row);
             } else {
-              return FORMAT.list_formater(["","big-int"],row);
+              return FORMAT.list_formater(["", "big-int"], row);
             }
           }
           return row;
@@ -211,12 +211,12 @@ export default {
     });
       // grps[true]  ==> voted rows
       // grps[false] ==> stat rows
-    if (_.has(grps, false)) {
+    if ( _.has(grps, false) ){
       grps[false] = _.sortBy(grps[false], function (row) { return row[0]; });
     } else {
       grps[false] = [];
     }
-    if (_.has(grps, true)) {
+    if ( _.has(grps, true) ){
       grps[true] = _.sortBy(grps[true], function (row) { 
         return row.votenum; 
       });
@@ -228,6 +228,20 @@ export default {
 
   "dimensions": [
     {
+      title_key: "by_estimates_doc",
+      include_in_report_builder: true,
+      filter_func: function(options){
+        return function(d){
+          return d.est_doc;
+        };
+      },
+    },
+    {
+      title_key: "voted_stat",
+      include_in_report_builder: true,
+      filter_func: vote_stat_dimension,
+    },
+    {
       title_key: "major_voted_stat",
       include_in_report_builder: true,
       filter_func: major_vote_stat,
@@ -236,20 +250,6 @@ export default {
       title_key: "major_voted_big_stat",
       exclude_from_rpb: true,
       filter_func: major_vote_big_stat("{{est_in_year}}_estimates"),
-    },
-    {
-      title_key: "voted_stat",
-      include_in_report_builder: true,
-      filter_func: vote_stat_dimension,
-    },{
-      title_key: "by_estimates_doc",
-      include_in_report_builder: true,
-
-      filter_func: function(options){
-        return function(d){
-          return d.est_doc;
-        };
-      },
     },
   ],
 };
@@ -264,10 +264,10 @@ Statistics.create_and_register({
     const q = table.q(subject);
     const voted = trivial_text_maker("voted");
     const stat = trivial_text_maker("stat");
-    add("voted_est_in_year",table.voted_stat(in_year_col,c.dept,true)[voted] || 0);
-    add("stat_est_in_year",table.voted_stat(in_year_col,c.dept,true)[stat] || 0);
+    add("voted_est_in_year",table.voted_stat(in_year_col,c.dept, true)[voted] || 0);
+    add("stat_est_in_year",table.voted_stat(in_year_col,c.dept, true)[stat] || 0);
     _.each(est_cols, yr => {
-      add("tabled_"+yr,q.sum(yr));
+      add("tabled_"+yr, q.sum(yr));
     })
 
     const voted_in_mains = d3.sum(
