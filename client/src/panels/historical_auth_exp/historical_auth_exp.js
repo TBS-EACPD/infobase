@@ -125,13 +125,13 @@ const render = function({calculations, footnotes, sources}) {
     ];
 
     graph_content = <div>
-      <div className="legend-container">
+      {/* <div className="legend-container">
         <GraphLegend
           items={legend_items}
           isHorizontal
         />
-      </div>
-      <div style={{height: 400}}>
+      </div> */}
+      <div style={{height: 450}}>
         {
           <ResponsiveBar
             data={dataExp}
@@ -139,8 +139,8 @@ const render = function({calculations, footnotes, sources}) {
             indexBy="years"
             margin={{
               "top": 50,
-              "right": 130,
-              "bottom": 50,
+              "right": 55,
+              "bottom": 40,
               "left": 60,
             }}
             padding={0.3}
@@ -153,7 +153,6 @@ const render = function({calculations, footnotes, sources}) {
                 "background": "inherit",
                 "color": "#38bcb2",
                 "size": 4,
-                "padding": 1,
                 "stagger": true,
               },
               {
@@ -166,38 +165,23 @@ const render = function({calculations, footnotes, sources}) {
                 "spacing": 10,
               },
             ]}
-            fill={[
-              {
-                "match": {
-                  "id": "fries",
-                },
-                "id": "dots",
-              },
-              {
-                "match": {
-                  "id": "sandwich",
-                },
-                "id": "lines",
-              }
-            ]}
             borderColor="inherit:darker(1.6)"
             axisTop={null}
             axisRight={null}
             axisBottom={{
               "tickSize": 5,
               "tickPadding": 5,
-              "tickRotation": 0,
+              "tickRotation": -15,
               "legendPosition": "middle",
               "legendOffset": 32,
+
             }}
-            axisLeft={{
-              "tickSize": 5,
-              "tickPadding": 5,
-              "tickRotation": 0,
-              "legend": "food",
-              "legendPosition": "middle",
-              "legendOffset": -40,
-            }}
+            axisLeft={
+              {
+                "tickValues": 4,
+                "format": d => formats.compact1(d,{raw: true})}
+            }
+            label={null}
             labelSkipWidth={12}
             labelSkipHeight={12}
             labelTextColor="inherit:darker(1.6)"
@@ -206,18 +190,17 @@ const render = function({calculations, footnotes, sources}) {
             motionDamping={15}
             legends={[
               {
+                
                 "dataFrom": "keys",
-                "anchor": "bottom-right",
-                "direction": "column",
+                "direction": "row",
+                "anchor": "top",
                 "justify": false,
-                "translateX": 120,
-                "translateY": 0,
-                "itemsSpacing": 2,
+                "itemsSpacing": 50,
                 "itemWidth": 100,
-                "itemHeight": 20,
-                "itemDirection": "left-to-right",
+                "itemHeight": -35,
                 "itemOpacity": 0.85,
-                "symbolSize": 20,
+                "symbolSize": 30,
+                
                 "effects": [
                   {
                     "on": "hover",
@@ -228,20 +211,7 @@ const render = function({calculations, footnotes, sources}) {
                 ],
               },
             ]}
-          />/* <Bar
-          {...{
-            colors,
-            series_labels,
-            ticks,
-            stacked, 
-            formatter: formats.compact_raw,
-            height: 400,
-            series: {
-              [series_labels[0]]: stacked ? exp : auth,
-              [series_labels[1]]: stacked ? auth : exp,
-            },
-          }}
-        /> */}
+          />}
       </div>
     </div>;
 
