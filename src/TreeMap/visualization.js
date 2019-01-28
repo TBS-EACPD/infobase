@@ -64,7 +64,7 @@ export class TreeMap extends React.PureComponent {
               >
             </div>
         </div>
-        <div class=" fcol-md-2 sm-hide">
+        <div style="padding-left: 1px; padding-bottom: 2px" class=" fcol-md-2 sm-hide">
           <div 
             class="TreeMap__SideBar"
             style="min-height:100%"
