@@ -21,38 +21,36 @@ export default class FootNote extends mix().with(staticStoreMixin){
       footnotes_by_id[id] = inst;
 
       return inst;
-
     }
   }
   static lookup(subject){
-    return (super.lookup(subject) || []).concat(super.lookup(subject.constructor) || []);
+    return ( super.lookup(subject) || []).concat(super.lookup(subject.constructor) || [] );
   } 
-  static get_for_subject(subject, topics ="*"){
+  static get_for_subject(subject, topics="*"){
     topics = _.isArray(topics) ? [...topics] : [topics]; 
 
     let ret;
-    if (_.isEmpty(topics)){
+    if ( _.isEmpty(topics) ){
       ret = [];
-    } else if(_.some(topics, topic => topic === "*")){
+    } else if ( _.some(topics, topic => topic === "*") ){
       ret = this.lookup(subject);
     } else {
       ret = _.filter(
         this.lookup(subject), 
-        note => _.some(topics, topic => _.includes(note.topic_keys, topic) )
+        note => _.some( [...topics, "ANY"], topic => _.includes(note.topic_keys, topic) )
       );
     }
 
     return _.uniqBy(ret, 'text');
   }
   static get_all_flat(){
-    return _.chain(this.get_all())
+    return _.chain( this.get_all() )
       .flatten()
-      .value()
-
+      .value();
   }
   constructor(def){
     super();
-    Object.assign(this,def);
+    Object.assign(this, def);
   }
 };
 
