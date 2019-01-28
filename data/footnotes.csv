@@ -1504,7 +1504,7 @@ This decrease in funding is primarily attributable to a net decrease in contribu
 190,"dept","*","2016-17",,"RESULTS_COUNTS","The count of indicators presented in this page includes all programs (excluding internal services) indicators, and where applicable, all sub-programs and sub-sub programs.","Le nombre d'indicateurs indiqués dans cette page comprend les indicateurs de tous les programmes (à l'exception des services internes) et, le cas échéant, les indicateurs des sous-programmes et des sous sous programmes."
 191,"dept","CH",,,"STAT","_Minister's Salary and Motor Car Allowance_ is presented as one statutory item for comparison purposes.","Traitement et allocation pour automobile des ministres est présenté comme un seul item législatif pour faciliter la comparaison."
 192,"dept","CI",,,"STAT","_Minister's Salary and Motor Car Allowance_ is presented as one statutory item for comparison purposes.","_Traitement et allocation pour automobile des ministres_ est présenté comme un seul item législatif pour faciliter la comparaison."
-193,"dept","CIDA","2012-13","2013-14","table4","The Canadian International Development Agency's (CIDA) authorities and expenditures are included in Foreign Affairs, Trade and Development Canada.",
+193,"dept","CIDA","2012-13","2013-14","paVoteStat","The Canadian International Development Agency's (CIDA) authorities and expenditures are included in Foreign Affairs, Trade and Development Canada.",
 194,"dept","CIDA","2013-14","2013-14","MACHINERY","Canadian International Development Agency (CIDA) was unified with Foreign Affairs and International Trade Canada (DFAIT) to form Foreign Affairs, Trade and Development Canada (DFATD) in 2013-14.","L'Agence canadienne de développement international (ACDI) a été fusionnée avec le ministère des Affaires étrangères et du Commerce international (MAECI), en 2013-2014, pour former le ministère des Affaires étrangères, du Commerce et du Développement (MAECD) du Canada."
 195,"dept","CPCC",,,"AUTH, EXP","Financial information presented prior to it June 1, 2015 corresponds to Canadian Polar Commission information.","L'information financière présenté avant le 1er juin 2015 correspond aux données de la Commission canadienne des affaires polaires."
 196,"dept","CSIS",,,"PEOPLE","Employment information is not available.","Les données sur l'emploi ne sont pas disponibles."
@@ -1531,7 +1531,7 @@ In the InfoBase, people management data for **Health** contains both the **Depar
 
 Dans l'InfoBase, des données sur la gestion des personnes pour **Santé** contiennent les données à  la fois du **Ministère de la Santé** et du **Ministère de la Santé nationale et du Bien-àªtre social**."
 207,"dept","HC",,,"PEOPLE","Employment information is not available.","Les données sur l'emploi ne sont pas disponibles."
-208,"dept","HMIRC","2012-13","2013-14","table4","The Hazardous Materials Information Review Commission's authorities and expenditures are included in Health Canada.",
+208,"dept","HMIRC","2012-13","2013-14","paVoteStat","The Hazardous Materials Information Review Commission's authorities and expenditures are included in Health Canada.",
 209,"dept","HRSD",,,"PEOPLE","The InfoBase is primarily aligned with the financial data universe. In a few cases, what would be viewed as two or more distinct organizations in the people management data universe are presented as a single entity in the financial data universe.
 
 
