@@ -95,6 +95,34 @@ const render = function({calculations, footnotes, sources}) {
 
 
   } else {
+    let dataExp = exp;
+    let dataAuth = auth;
+    let keys = ["Expenditures","Unused Authorities"];
+
+    dataExp = dataExp.map((d,i) =>{
+      const value = d;
+      const value2 = dataAuth[i];
+      let result = {};
+      result[keys[0]]=value;
+      result[keys[1]]=value2;
+      result["years"]=`${2013+i}-${14+i}`;
+      return result;
+    });
+
+
+    const colors = infobase_colors();
+    const legend_items = [
+      {
+        id: "x",
+        label: series_labels[0],
+        color: colors(series_labels[0]),
+      },
+      {
+        id: "y",
+        label: series_labels[1],
+        color: colors(series_labels[1]),
+      },
+    ];
 
     let keys = ["Expenditures","Unused Authorities"];
     let dataExp = exp.map((d,i) =>{
@@ -110,7 +138,12 @@ const render = function({calculations, footnotes, sources}) {
 
     // const colors = infobase_colors();
     graph_content = <div>
-
+      <div className="legend-container">
+        <GraphLegend
+          items={legend_items}
+          isHorizontal
+        />
+      </div>
       <div style={{height: 400}}>
         {
           <ResponsiveBar
