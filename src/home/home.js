@@ -1,6 +1,6 @@
 import './home.scss';
 import home_text_bundle from "./home.yaml";
-import get_home_content from './home-data.js';
+import { featured_content_items } from './home-data.js';
 import { log_standard_event } from '../core/analytics.js';
 import MediaQuery from 'react-responsive';
 
@@ -21,9 +21,6 @@ const { text_maker: home_tm, TM } = create_text_maker_component(home_text_bundle
 
 export default class Home extends React.Component {
   render(){
-
-    const { featured_content_items } = get_home_content();
-
     return (
       <StandardRouteContainer 
         route_key="start"

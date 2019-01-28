@@ -1,7 +1,7 @@
 import home_text1 from "./home.yaml";
 import home_text2 from "./home-a11y.yaml";
 
-import get_home_content from './home-data.js';
+import { featured_content_items } from './home-data.js';
 
 import { StandardRouteContainer } from '../core/NavComponents.js';
 import { create_text_maker_component } from '../util_components.js';
@@ -17,9 +17,6 @@ const Home = (props) => {
       },
     },
   } = props;
-
-  const { featured_content_items } = get_home_content();
-
 
   return (
     <StandardRouteContainer route_key="start">
