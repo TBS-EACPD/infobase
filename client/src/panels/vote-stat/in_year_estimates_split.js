@@ -8,6 +8,7 @@ import {
   declarative_charts,
   StdPanel,
   Col,
+  dollar_formats,
 } from "../shared";
 
 const { Format } = util_components;
@@ -78,7 +79,6 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
       return result;
     });
 
-
     // const static_bar_args = {
     //   add_xaxis: true,
     //   x_axis_line: true,
@@ -120,6 +120,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
       </div>
     );
   }
+  
 
   return (
     <StdPanel
