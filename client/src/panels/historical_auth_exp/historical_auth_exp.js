@@ -95,19 +95,6 @@ const render = function({calculations, footnotes, sources}) {
 
 
   } else {
-    let dataExp = exp;
-    let dataAuth = auth;
-    let keys = ["Expenditures","Unused Authorities"];
-
-    dataExp = dataExp.map((d,i) =>{
-      const value = d;
-      const value2 = dataAuth[i];
-      let result = {};
-      result[keys[0]]=value;
-      result[keys[1]]=value2;
-      result["years"]=`${2013+i}-${14+i}`;
-      return result;
-    });
 
 
     const colors = infobase_colors();
