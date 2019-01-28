@@ -1,4 +1,7 @@
 import { text_maker, TM } from './vote-stat-text-prodiver.js';
+import { ResponsiveBar } from '@nivo/bar';
+import { Table } from '../../core/TableClass.js';
+import { ensure_loaded } from '../../core/lazy_loader.js';
 import {
   formats,
   PanelGraph,
@@ -7,13 +10,13 @@ import {
   declarative_charts,
   StdPanel,
   Col,
+  dollar_formats,
 } from "../shared";
 
 const { Format } = util_components;
 
 const { 
   A11YTable,
-  Bar,
 } = declarative_charts;
 
 const estimates_split_calculate = function(subject, info,options){
@@ -43,7 +46,6 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
       in_year: in_year_bar_args,
     },
   } = calculations;
-
   let content;
 
   if(window.is_a11y_mode){
@@ -55,8 +57,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
         data: <Format type="compact1" content={amt} />,
       }))
       .value();
-
-
+    
     content = (
       <A11YTable
         {...{
@@ -66,27 +67,63 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
         }}
       />
     );
+  
+  } else {    
+    let keenanSuckss = calculations.info.gov_in_year_estimates_split
+    let keys = [];
+    keenanSuckss = keenanSuckss.map((d,i) =>{
+      const label = d[0];
+      const value = d[1];
+      keys.push(label);
+      let result = {};
+      result[label]=value;
+      result["title"]=label;
+      return result;
+    });
 
-
-  } else {
-
-    const static_bar_args = {
-      add_xaxis: true,
-      x_axis_line: true,
-      add_yaxis: false,
-      add_labels: true,
-      colors: infobase_colors(),
-      margin: {top: 20, right: 20, left: 20, bottom: 80},
-      formatter: formats.compact1,
-    };
-
+    // const static_bar_args = {
+    //   add_xaxis: true,
+    //   x_axis_line: true,
+    //   add_yaxis: false,
+    //   add_labels: true,
+    //   colors: infobase_colors(),
+    //   margin: {top: 20, right: 20, left: 20, bottom: 80},
+    //   formater: formats.compact1,
+    // };
     content = (
-      <Bar 
-        {...static_bar_args}
-        {...in_year_bar_args}
-      />
+      <div className="keenansucks" style={{
+        height: "400px",
+      }} >
+        <ResponsiveBar
+          data={keenanSuckss}
+          keys={keys}
+          indexBy="title"
+          margin={{
+            "top": 50,
+            "right": 55,
+            "bottom": 50,
+            "left": 50,
+          }}
+          labelFormat={d => <tspan y={ -4 }> {formats.compact1(d, {raw: true})} </tspan>}
+          padding={0.3}
+          colors="nivo"
+          colorBy="id"
+          borderColor="inherit:darker(1.6)"
+          axisBottom={{
+            "tickSize": 3,
+            "tickRotation": -15,            
+          }}
+          axisLeft={null}
+          labelTextColor="inherit:darker(1.6)"
+          motionStiffness={90}
+          motionDamping={15}    
+          // tooltipFormat={} 
+          
+        />
+      </div>
     );
   }
+  
 
   return (
     <StdPanel
@@ -101,9 +138,8 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
       </Col>
     </StdPanel>
   )
-
 };
-
+window._
 
 new PanelGraph({
   level: "dept",
@@ -114,12 +150,13 @@ new PanelGraph({
     'orgVoteStatEstimates_gov_info', 
     'orgVoteStatEstimates_dept_info', 
   ],
-
   key: "in_year_estimates_split",
+
   calculate: estimates_split_calculate,
   render: estimates_split_render_w_text_key("dept_in_year_estimates_split_text"),
 });
 
+//change this back after
 new PanelGraph({
   level: "gov",
   machinery_footnotes: false,
