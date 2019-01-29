@@ -13,6 +13,7 @@ import * as l from "d3-selection";
 import * as m from "d3-selection-multi";
 import * as n from "d3-shape";
 import * as o from "d3-transition";
+import * as p from "d3-scale-chromatic";
 
 // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 // "This is an assign function that copies full descriptors"
@@ -35,6 +36,6 @@ function completeAssign(target, ...sources) {
   return target;
 }
 
-const d3 = completeAssign({}, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
+const d3 = completeAssign({}, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
 
 export default d3;
