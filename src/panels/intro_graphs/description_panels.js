@@ -2,7 +2,10 @@ import { text_maker, TM } from './intro_graph_text_provider.js';
 import {
   PanelGraph,
   TextPanel,
+  general_utils,
 } from "../shared";
+
+const { sanitized_dangerous_inner_html } = general_utils;
 
 const title_keys = {
   tag: 'tag_desc_title',
@@ -40,7 +43,7 @@ _.each(['tag','crso','program'], level => {
       }
       
       return <TextPanel title={text_maker(title_keys[level])}>
-        <div dangerouslySetInnerHTML={{__html: subject.description }} />
+        <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(subject.description)} />
         { link_content }
       </TextPanel>
 

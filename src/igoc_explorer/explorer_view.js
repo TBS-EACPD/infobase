@@ -6,6 +6,7 @@ import { infograph_href_template } from '../link_utils.js';
 import { get_root } from '../gen_expl/hierarchy_tools.js';
 import { igoc_tmf as text_maker, TM } from './igoc_explorer_text.js';
 import { SpinnerWrapper } from '../util_components.js';
+import { sanitized_dangerous_inner_html } from '../general_utils.js';
 import { Explorer } from '../components/ExplorerComponents.js';
 import { Subject } from '../models/subject.js';
 
@@ -64,7 +65,7 @@ const SubjectFields = ({ subject, grouping }) => <div style={{marginTop: "2em"}}
       _.nonEmpty(subject.mandate) && 
       <DlItem
         term={<TM k="mandate" />}
-        def={ <div dangerouslySetInnerHTML={{__html: subject.mandate }} /> }
+        def={ <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(subject.mandate)} /> }
       />
     }
     {

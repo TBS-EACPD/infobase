@@ -1,8 +1,10 @@
 import './table_picker.scss';
 import '../components/LabeledBox.scss';
 import { Table } from '../core/TableClass.js';
-import { GlossaryEntry,
-  get_glossary_item_tooltip_html } from '../models/glossary.js';
+import { 
+  GlossaryEntry,
+  get_glossary_item_tooltip_html,
+} from '../models/glossary.js';
 import { CSSTransitionGroup } from 'react-transition-group';
 import classNames from 'classnames';
 import { 

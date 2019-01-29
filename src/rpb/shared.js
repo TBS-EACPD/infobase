@@ -1,5 +1,6 @@
 import { TextMaker, text_maker } from './rpb_text_provider.js';
 import { sources as all_sources } from '../metadata/data_sources.js';
+import { sanitized_dangerous_inner_html } from '../general_utils.js';
 import { DeptSearch, FancyUL } from '../util_components.js';
 import alerts from '../models/alerts.js';
 import classNames from 'classnames';
@@ -97,7 +98,7 @@ const ReportDetails = ({
         <div className="h5"> <TextMaker text_key="footnotes" /> </div>
         <ul>
           {_.map( footnotes, (note, index) => 
-            <li key={index}> <div dangerouslySetInnerHTML={{__html: note}} /> </li> 
+            <li key={index}> <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(note)} /> </li> 
           )}
         </ul>
       </div>

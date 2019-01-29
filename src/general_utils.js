@@ -8,7 +8,7 @@ export const sanitized_marked = (markdown) => DOMPurify.sanitize(
   )
 );
 
-export const sanitized_inner_html = (html) => ({ 
+export const sanitized_dangerous_inner_html = (html) => ({ 
   __html: DOMPurify.sanitize(html),
 });
 

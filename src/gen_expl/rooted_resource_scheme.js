@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { shallowEqualObjectsOverKeys } from '../general_utils.js';
+import { shallowEqualObjectsOverKeys, sanitized_dangerous_inner_html } from '../general_utils.js';
 import { filter_hierarchy, convert_d3_hierarchy_to_explorer_hierarchy } from './hierarchy_tools.js';
 import { get_resources_for_subject } from './resource_utils.js';
 import { provide_sort_func_selector } from './resource-explorer-common.js';
@@ -48,7 +48,7 @@ function create_rooted_resource_hierarchy({doc,root_subject}){
                 defs: [
                   {
                     term: description_term,
-                    def: <div dangerouslySetInnerHTML={{__html: prog.description }} />,
+                    def: <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(prog.description)} />,
                   },
                 ],
               }, 
@@ -72,7 +72,7 @@ function create_rooted_resource_hierarchy({doc,root_subject}){
                 null : 
                 [{
                   term: description_term,
-                  def: <div dangerouslySetInnerHTML={{__html: crso.description }} />,
+                  def: <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(crso.description)} />,
                 }]
               ),
             }, 
@@ -91,7 +91,7 @@ function create_rooted_resource_hierarchy({doc,root_subject}){
             defs: [
               {
                 term: description_term,
-                def: <div dangerouslySetInnerHTML={{__html: prog.description }} />,
+                def: <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(prog.description)} />,
               },
             ],
           }, 

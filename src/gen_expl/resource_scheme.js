@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import { infograph_href_template } from '../link_utils.js';
 import { provide_sort_func_selector } from './resource-explorer-common.js';
-import { shallowEqualObjectsOverKeys } from '../general_utils.js';
+import { shallowEqualObjectsOverKeys, sanitized_dangerous_inner_html } from '../general_utils.js';
 import { HeightClipper } from '../util_components.js'
 import { get_resources_for_subject } from './resource_utils.js';
 import { Subject } from '../models/subject.js';
@@ -78,7 +78,7 @@ function create_resource_hierarchy({hierarchy_scheme, doc}){
                 [
                   !_.isEmpty(tag.description) && {
                     term: text_maker('description'),
-                    def: <div dangerouslySetInnerHTML={{__html: tag.description }} />,
+                    def: <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(tag.description)} />,
                   },
                   tag.is_m2m && !_.isEmpty( tag.related_tags() ) && 
                     related_tags_row( tag.related_tags(), "tag" ),
@@ -149,7 +149,7 @@ function create_resource_hierarchy({hierarchy_scheme, doc}){
                     },
                     {
                       term: text_maker('description'),
-                      def: <div dangerouslySetInnerHTML={{__html: prog.description }} />,
+                      def: <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(prog.description)} />,
                     },
                     subject.is_m2m && !_.isEmpty( _.filter(prog.tags_by_scheme[subject.root.id], tag => tag.id !== subject.id) ) && 
                       related_tags_row( _.filter(prog.tags_by_scheme[subject.root.id], tag => tag.id !== subject.id), "program" ),
@@ -170,7 +170,7 @@ function create_resource_hierarchy({hierarchy_scheme, doc}){
                 defs: tag.description && [
                   {
                     term: text_maker('description'),
-                    def: <div dangerouslySetInnerHTML={{__html: tag.description }} />,
+                    def: <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(tag.description)} />,
                   },
                 ],
               },
@@ -193,7 +193,7 @@ function create_resource_hierarchy({hierarchy_scheme, doc}){
                   null : 
                   [{
                     term: text_maker('description'),
-                    def: <div dangerouslySetInnerHTML={{__html: crso.description }} />,
+                    def: <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(crso.description)} />,
                   }]
               ),
             }, 
@@ -211,7 +211,7 @@ function create_resource_hierarchy({hierarchy_scheme, doc}){
             defs: [
               {
                 term: text_maker('description'),
-                def: <div dangerouslySetInnerHTML={{__html: prog.description }} />,
+                def: <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(prog.description)} />,
               },
             ],
           }, 

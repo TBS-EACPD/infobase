@@ -49,6 +49,7 @@ const {
 
 const { 
   shallowEqualObjectsOverKeys,
+  sanitized_dangerous_inner_html,
 } = general_utils;
 
 
@@ -137,7 +138,7 @@ const get_non_col_renderer = ({doc}) => ({node}) => {
           <ul>
             {_.map(notes, note => 
               <li key={note}>
-                <div dangerouslySetInnerHTML={{__html: note }} />   
+                <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(note)} />   
               </li>
             )}
           </ul>

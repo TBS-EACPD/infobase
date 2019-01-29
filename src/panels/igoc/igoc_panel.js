@@ -1,6 +1,7 @@
 import { 
   PanelGraph, 
-  util_components, 
+  util_components,
+  general_utils,
   TextPanel,
   trivial_text_maker,
 } from '../shared';
@@ -10,6 +11,8 @@ const {
   LabeledTombstone,
   ExternalLink,
 } = util_components;
+
+const { sanitized_dangerous_inner_html } = general_utils;
 
 new PanelGraph({
   level: 'dept',
@@ -30,7 +33,7 @@ new PanelGraph({
         ["type", subject.type],
         ["website", !subject.is_dead && subject.website_url && <ExternalLink href={`https://${subject.website_url}`} display={subject.website_url} />],
         ["minister", !_.isEmpty(subject.minister) && _.chain(subject.minister).flatMap( (minister, ix) => [minister, <br key={ix} />]).dropRight().value()],
-        ["mandate", subject.mandate && <div dangerouslySetInnerHTML={{ __html: subject.mandate }}/>],
+        ["mandate", subject.mandate && <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(subject.mandate)}/>],
         ["legislation", subject.legislation && <ExternalLink href={`https://google.com/search?q=${encodeURI(subject.legislation)}`} display={subject.legislation} />],
         ["fiscal_end_yr", subject.fiscal_end_yr],
         ["auditor", !_.isEmpty(subject.auditor) && _.chain(subject.auditor).flatMap( (auditor, ix) => [auditor, <br key={ix} />]).dropRight().value()],

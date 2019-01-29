@@ -33,7 +33,10 @@ import { DeptSearch, DeptSearchWithoutRouter } from './search/DeptSearch.js';
 import { EverythingSearch } from './search/EverythingSearch.js';
 import { GlossarySearch } from './search/GlossarySearch.js';
 
-import { text_abbrev } from './general_utils.js';
+import { 
+  text_abbrev,
+  sanitized_dangerous_inner_html,
+} from './general_utils.js';
 
 // Misc. utility components that don't justify having their own file in ./components, for various reasons
 
@@ -66,9 +69,9 @@ const FancyUL = ({children, ul_class})=> (
 
 const FootnoteList = ({ footnotes }) => <div style={{padding: "10px"}}>
   <ul>
-    {footnotes.map( ({text},ix) => 
+    {footnotes.map( ({text}, ix) => 
       <li key={ix}>
-        <div dangerouslySetInnerHTML={{__html: text}} />
+        <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(text)} />
       </li>
     )}
   </ul>

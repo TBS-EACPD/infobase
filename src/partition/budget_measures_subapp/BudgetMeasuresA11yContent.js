@@ -7,6 +7,7 @@ import {
 import { budget_measures_hierarchy_factory } from './budget_measures_hierarchy_factory.js';
 import { businessConstants } from '../../models/businessConstants.js';
 import { Subject } from '../../models/subject';
+import { sanitized_dangerous_inner_html } from '../../general_utils.js';
 
 const { budget_values } = businessConstants;
 const { BudgetMeasure } = Subject;
@@ -89,7 +90,7 @@ export function BudgetMeasuresA11yContent(){
                   rowSpan={ rows_to_span }
                 >
                   { !_.isEmpty(budget_measure.data.description) && 
-                    <div dangerouslySetInnerHTML={{__html: budget_measure.data.description}} />
+                    <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(budget_measure.data.description)} />
                   }
                 </td>
                 <td
