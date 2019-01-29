@@ -391,9 +391,9 @@ partition_spending_will_be_value_and_rpb_link_partial:
 partiton_planned_spending_was:
   transform: [handlebars]
   en: |
-    in total planned budgetary expenditures were tabled in
+    in planned budgetary expenditures have been tabled in
   fr: |
-    en total dépenses budgétaires prévues présenté en
+    en dépenses budgétaires prévues ont été présenté en
 partition_spending_will_be_variable_year:
   transform: [handlebars]
   en: |
