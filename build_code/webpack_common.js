@@ -26,8 +26,7 @@ const get_rules = ({
               targets: {
                 browsers: should_use_babel ? ["Safari >= 7", "Explorer 11"] : ["Chrome >= 66"],
               },
-              debug: true,
-              forceAllTransforms: is_prod,
+              forceAllTransforms: is_prod, // for uglifyjs
             }],
             "@babel/preset-react",
           ],

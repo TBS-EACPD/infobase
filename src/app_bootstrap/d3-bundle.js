@@ -36,6 +36,6 @@ function completeAssign(target, ...sources) {
   return target;
 }
 
-const d3 = completeAssign({}, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
+const d3 = completeAssign({}, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 
 export default d3;
