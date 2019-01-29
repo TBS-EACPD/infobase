@@ -1,4 +1,4 @@
-import marked from 'marked';
+import { sanitized_marked } from '../general_utils.js';
 import { mix, staticStoreMixin } from './staticStoreMixin.js';
 import { trivial_text_maker } from './text.js';
 
@@ -17,7 +17,7 @@ class GlossaryEntry extends mix().with(staticStoreMixin) {
   }
 }
 
-const compiled_definitions = _.memoize( glossary_id => marked(GlossaryEntry.lookup(glossary_id)._def_text) );
+const compiled_definitions = _.memoize( glossary_id => sanitized_marked(GlossaryEntry.lookup(glossary_id)._def_text) );
 
 const glossary_display = item => `<div>
   <span class="sr-only"> A definition follows </span>

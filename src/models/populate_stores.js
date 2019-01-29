@@ -1,9 +1,9 @@
+import { sanitized_marked } from '../general_utils.js';
 import { get_static_url, make_request } from "../request_utils.js";
 import { GlossaryEntry } from './glossary.js';
 import { populate_global_footnotes } from './populate_footnotes.js';
 import { Subject } from './subject.js';
 import { trivial_text_maker } from './text';
-import marked from 'marked';
 
 const { Ministry, Program, Dept, Tag, CRSO, Minister, InstForm } = Subject;
 
@@ -160,10 +160,7 @@ function populate_igoc_models({
       status: statuses[status],
       _legislation, //no longer array based
       raw_mandate: mandate,
-      mandate: marked(
-        _.trim(mandate),
-        { sanitize: false, gfm: true }
-      ),
+      mandate: sanitized_marked( _.trim(mandate) ),
       pas_code,
       schedule,
       faa_hr,

@@ -1,4 +1,4 @@
-import marked from 'marked';
+import { sanitized_marked } from '../general_utils.js';
 import { get_static_url, make_request } from '../request_utils.js';
 import { Subject } from './subject.js';
 
@@ -41,10 +41,7 @@ const populate_budget_measures = (budget_measure_lookups, budget_measure_data) =
         .replace(/•/g, "\n\n* ")
         .replace(/((\r\n){1}|\r{1}|\n{1})/gm, "\n\n")
       )
-      .thru( description => marked(
-        _.trim(description),
-        { sanitize: false, gfm: true }
-      ) )
+      .thru( description => sanitized_marked( _.trim(description) ) )
       .value();
     
     BudgetMeasure.create_and_register({

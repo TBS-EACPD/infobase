@@ -1,4 +1,4 @@
-import marked from 'marked';
+import { sanitized_marked } from '../general_utils.js';
 import { get_static_url, make_request } from '../request_utils.js';
 import { Subject } from './subject.js';
 import FootNote from './footnotes.js';
@@ -29,10 +29,7 @@ function populate_footnotes_info(csv_str){
     const year1 = fyear1.split("-")[0];
     const year2 = fyear2.split("-")[0];
 
-    const text = marked(
-      run_template(footnote),
-      { sanitize: false, gfm: true }
-    );
+    const text = sanitized_marked( run_template(footnote) );
 
     if (subject_id !== '*'){
       const subject = Subject[subject_class].lookup(subject_id);

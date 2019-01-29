@@ -1,4 +1,4 @@
-import marked from 'marked';
+import { sanitized_marked } from '../general_utils.js';
 import { businessConstants } from './businessConstants.js';
 import { Subject } from '../models/subject.js';
 import { trivial_text_maker } from './text.js';
@@ -91,10 +91,7 @@ class SubProgramEntity {
       )
       .values()
       .compact()
-      .map( txt => marked(txt, { 
-        sanitize: false, 
-        gfm: true,
-      }))
+      .map( txt => sanitized_marked(txt) )
       .value();
   }
   children(){

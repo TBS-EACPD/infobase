@@ -1,3 +1,17 @@
+import marked from 'marked';
+import DOMPurify from 'dompurify';
+
+export const sanitized_marked = (markdown) => DOMPurify.sanitize(
+  marked(
+    markdown,
+    { sanitize: false, gfm: true }
+  )
+);
+
+export const sanitized_inner_html = (html) => ({ 
+  __html: DOMPurify.sanitize(html),
+});
+
 export const text_abbrev = function(text, length){
   const length_value = _.isFunction(length) ? length() : length || 60;
 
