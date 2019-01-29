@@ -52,10 +52,25 @@ const infobaseGraphColors = [
   '#CCDC00',
 ];
 
+//this is (as of this writing) a straight copy of d3.category20
+const infobaseCategory20Colors = [
+  "#1f77b4", "#aec7e8",
+  "#ff7f0e", "#ffbb78",
+  "#2ca02c", "#98df8a",
+  "#d62728", "#ff9896",
+  "#9467bd", "#c5b0d5",
+  "#8c564b", "#c49c94",
+  "#e377c2", "#f7b6d2",
+  "#7f7f7f", "#c7c7c7",
+  "#bcbd22", "#dbdb8d",
+  "#17becf", "#9edae5",
+];
+
 export {
   lightCategory10Colors,
   darkCategory10Colors,
   infobaseCategory10Colors,
   infobaseGraphColors,
+  infobaseCategory20Colors,
 };
 
