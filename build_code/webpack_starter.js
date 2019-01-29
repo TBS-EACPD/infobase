@@ -21,7 +21,7 @@ const main_client = choose('main_client');
 
 const app = a11y_client || main_client;
 
-const common_entry = ['babel-polyfill'];
+const common_entry = ['@babel/polyfill'];
 
 const options_by_app = {
   a11y_client: {
