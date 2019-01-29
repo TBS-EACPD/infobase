@@ -6,8 +6,7 @@ import {
   fill_dimension_columns, 
   trivial_dimension,
 } from './tables/dimensions.js';
-import { mix } from '../generalUtils.js';
-import { staticStoreMixin } from '../models/staticStoreMixin.js';
+import { mix, staticStoreMixin } from '../models/staticStoreMixin.js';
 import { Subject } from '../models/subject.js';
 import { 
   trivial_text_maker, 

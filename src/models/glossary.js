@@ -1,6 +1,5 @@
 import marked from 'marked';
-import { mix } from '../generalUtils.js';
-import { staticStoreMixin } from './staticStoreMixin.js';
+import { mix, staticStoreMixin } from './staticStoreMixin.js';
 import { trivial_text_maker } from './text.js';
 
 class GlossaryEntry extends mix().with(staticStoreMixin) {
@@ -35,6 +34,3 @@ export {
   GlossaryEntry,
   get_glossary_item_tooltip_html,
 }; 
-
-
-

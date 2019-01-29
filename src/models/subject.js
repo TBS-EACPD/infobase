@@ -1,5 +1,5 @@
-import { mix } from '../generalUtils.js';
 import { 
+  mix,
   staticStoreMixin, 
   PluralSingular, 
   SubjectMixin,

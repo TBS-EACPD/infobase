@@ -1,4 +1,16 @@
-import { BaseClass } from '../generalUtils.js';
+
+class BaseClass {}
+class MixinBuilder {
+  constructor(superclass){
+    this.superclass = superclass;
+  }
+  with(...mixins){
+    return mixins.reduce((c,mixin) => mixin(c), this.superclass);
+  }
+}
+
+// class MyClass extends mix(MyBaseClass).with(Mixin1, Mixin2) { ... }
+export const mix = (superclass) => new MixinBuilder(superclass);
 
 export const staticStoreMixin = superclass => {
   const _storeMap = new Map();

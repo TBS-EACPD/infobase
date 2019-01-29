@@ -1,5 +1,4 @@
-import { mix } from '../generalUtils.js';
-import { staticStoreMixin } from '../models/staticStoreMixin.js';
+import { mix, staticStoreMixin } from '../models/staticStoreMixin.js';
 import { Table } from './TableClass.js';
 import { years } from '../models/years.js';
 import { Subject } from '../models/subject.js';

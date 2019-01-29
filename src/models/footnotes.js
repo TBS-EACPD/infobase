@@ -1,5 +1,4 @@
-import { mix } from '../generalUtils';
-import { staticStoreMixin } from './staticStoreMixin';
+import { mix, staticStoreMixin } from './staticStoreMixin';
 
 const footnotes_by_id = {};
 
