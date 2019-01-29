@@ -3,7 +3,7 @@ import { text_maker } from './partition_text_provider.js';
 import { PartitionNotes } from "./PartitionNotes.js";
 import { PartitionDiagram } from "../partition_diagram/PartitionDiagram.js";
 import { reactAdapter } from '../../core/reactAdapter';
-import { get_static_url } from '../../core/request_utils.js';
+import { get_static_url } from '../../request_utils.js';
 import { darkCategory10Colors } from '../../core/color_schemes.js';
 
 export class PartitionSubApp {

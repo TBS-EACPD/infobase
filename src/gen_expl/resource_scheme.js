@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import { infograph_href_template } from '../link_utils.js';
 import { provide_sort_func_selector } from './resource-explorer-common.js';
-import { shallowEqualObjectsOverKeys } from '../core/utils.js';
+import { shallowEqualObjectsOverKeys } from '../general_utils.js';
 import { HeightClipper } from '../util_components.js'
 import { get_resources_for_subject } from './resource_utils.js';
 import { Subject } from '../models/subject.js';

@@ -1,4 +1,4 @@
-import UTILS from '../utils';
+import general_utls from '../../general_utils.js';
 
 
 //  Generates all the tables displayed on the page
@@ -51,9 +51,8 @@ function prepare_data(options){
     // process the headers
     _.each(headers, function(header_row,i){
       _.each(header_row, function(header,j){
-        // [utils.make_uniqe](../utils.html#make_unique)
         var wcag_headers;
-        var id = UTILS.make_unique();
+        var id = general_utls.make_unique();
         header_links[j] += ' ' + id;
         if (i > 0){
           wcag_headers = _.chain(headers)

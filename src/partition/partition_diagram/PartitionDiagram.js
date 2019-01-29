@@ -1,7 +1,7 @@
 import diagram_text from './PartitionDiagram.yaml';
 import './PartitionDiagram.scss';
 import { PartitionDataWrapper } from './PartitionDataWrapper.js';
-import * as utils from "../../core/utils";
+import * as general_utils from "../../general_utils";
 import { create_text_maker } from '../../models/text.js';
 
 const text_maker = create_text_maker(diagram_text);
@@ -75,7 +75,7 @@ export class PartitionDiagram {
       if (should_add_value && d !== this.data.root) {
         name = d.data.name + this.formatter(d);
       } else if ( !should_add_value && d !== this.data.root ) {
-        name = utils.text_abbrev(d.data.name, 80);
+        name = general_utils.text_abbrev(d.data.name, 80);
       } else if ( d === this.data.root ) {
         name = this.root_text_func(this.data.root.value);
       }

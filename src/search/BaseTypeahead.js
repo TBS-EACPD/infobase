@@ -9,7 +9,7 @@ import {
   MenuItem,
 } from 'react-bootstrap-typeahead';
 
-import { get_static_url } from '../core/request_utils.js';
+import { get_static_url } from '../request_utils.js';
 
 import text from "./BaseTypeahead.yaml";
 import { create_text_maker } from '../models/text.js';

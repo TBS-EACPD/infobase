@@ -1,5 +1,5 @@
 import { log_standard_event } from '../core/analytics.js';
-import { retry_promise } from '../core/utils.js';
+import { retry_promise } from '../general_utils.js';
 
 // Link tags for stylesheets should all have non null sheet properties
 const linked_stylesheets_loaded = () => {

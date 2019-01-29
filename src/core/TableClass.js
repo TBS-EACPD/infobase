@@ -1,5 +1,5 @@
 import accounting from 'accounting';
-import { get_static_url, make_request } from './request_utils';
+import { get_static_url, make_request } from '../request_utils';
 import { query_adapter } from './tables/queries.js';
 import { 
   attach_dimensions, 
@@ -17,7 +17,7 @@ import { sources as all_sources } from '../metadata/data_sources.js';
 import { 
   make_unique_func, 
   make_unique, 
-} from './utils.js';
+} from '../general_utils.js';
 
 
 const table_id_to_csv_path = (table_id) => `csv/${_.snakeCase(table_id)}.csv`;

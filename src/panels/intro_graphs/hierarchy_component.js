@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { Fragment } from 'react';
 import { text_maker, TM } from './intro_graph_text_provider.js';
 import { Subject } from '../shared.js';
-import { get_static_url } from '../../core/request_utils.js';
+import { get_static_url } from '../../request_utils.js';
 
 const { Gov } = Subject;
 

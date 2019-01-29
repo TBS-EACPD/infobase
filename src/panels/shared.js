@@ -1,5 +1,5 @@
 import './shared.scss';
-import * as utils from '../core/utils.js';
+import * as general_utils from '../general_utils.js';
 import * as util_components from '../util_components.js';
 import * as declarative_charts from '../charts/declarative_charts.js';
 import * as charts_index from '../core/charts_index';
@@ -491,7 +491,7 @@ export {
   Subject, 
   years, 
   businessConstants, 
-  utils, 
+  general_utils, 
   FootNote, 
   reactAdapter, 
   util_components, 

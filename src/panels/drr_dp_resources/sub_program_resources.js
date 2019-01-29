@@ -16,7 +16,7 @@ import {
   Subject,
   PlannedActualTable,
   Results,
-  utils,
+  general_utils,
   Panel,
   create_text_maker_component,
 } from "../shared";
@@ -49,8 +49,7 @@ const {
 
 const { 
   shallowEqualObjectsOverKeys,
-} = utils;
-
+} = general_utils;
 
 
 const sub_to_node = (sub,doc) => ({

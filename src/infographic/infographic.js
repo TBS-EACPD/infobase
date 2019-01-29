@@ -6,7 +6,7 @@ import { createSelector } from 'reselect';
 import { log_standard_event } from '../core/analytics.js';
 import { BubbleMenu } from './BubbleMenu.js';
 import AccessibleBubbleMenu from './a11y_bubble_menu.js';
-import { shallowEqualObjectsOverKeys } from '../core/utils.js';
+import { shallowEqualObjectsOverKeys } from '../general_utils.js';
 import { Subject } from "../models/subject.js";
 import { ensure_loaded } from '../core/lazy_loader.js'; 
 import { get_panels_for_subject } from './get_panels_for_subject.js';

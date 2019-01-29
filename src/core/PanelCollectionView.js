@@ -1,6 +1,6 @@
 import withRouter from 'react-router/withRouter';
 
-import { shallowEqualObjectsOverKeys } from './utils.js';
+import { shallowEqualObjectsOverKeys } from '../general_utils.js';
 import { PanelGraph } from '../core/PanelGraph.js';
 
 export const ReactPanelGraph = withRouter(

@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { trivial_text_maker, util_components } from '../shared.js';
 import { businessConstants } from '../../models/businessConstants.js';
 import { GlossaryEntry } from '../../models/glossary.js';
-import { get_static_url } from '../../core/request_utils.js';
+import { get_static_url } from '../../request_utils.js';
 import { glossary_href } from '../../link_utils.js';
 import {
   status_key_to_glossary_key,

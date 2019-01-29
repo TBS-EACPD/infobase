@@ -1,4 +1,4 @@
-import { get_static_url, make_request } from "../core/request_utils.js";
+import { get_static_url, make_request } from "../request_utils.js";
 import { GlossaryEntry } from './glossary.js';
 import { populate_global_footnotes } from './populate_footnotes.js';
 import { Subject } from './subject.js';

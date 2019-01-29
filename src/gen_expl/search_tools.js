@@ -1,5 +1,5 @@
 import { GlossaryEntry } from '../models/glossary.js';
-import { escapeRegExp } from '../core/utils.js';
+import { escapeRegExp } from '../general_utils.js';
 
 function node_to_match_tokens(node){
   const {

@@ -11,7 +11,7 @@ import {
   concept_filter,
 } from './table_picker_concept_filter.js';
 import { TextMaker } from './rpb_text_provider.js';
-import { get_static_url } from '../core/request_utils.js';
+import { get_static_url } from '../request_utils.js';
 
 
 function toggleArrayElement(arr,el){

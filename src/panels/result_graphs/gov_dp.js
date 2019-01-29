@@ -1,4 +1,4 @@
-import { get_static_url } from '../../core/request_utils';
+import { get_static_url } from '../../request_utils.js';
 import {Fragment} from 'react';
 import text from './gov_dp_text.yaml';
 

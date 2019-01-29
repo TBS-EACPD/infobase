@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { shallowEqualObjectsOverKeys } from '../core/utils.js';
+import { shallowEqualObjectsOverKeys } from '../general_utils.js';
 import { filter_hierarchy, convert_d3_hierarchy_to_explorer_hierarchy } from './hierarchy_tools.js';
 import { get_resources_for_subject } from './resource_utils.js';
 import { provide_sort_func_selector } from './resource-explorer-common.js';

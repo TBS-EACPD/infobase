@@ -7,7 +7,7 @@ import {
 } from '../shared';
 import { infograph_href_template, rpb_link } from '../../link_utils.js';
 import { ResultCounts } from '../../models/results.js';
-import { get_static_url } from '../../core/request_utils.js';
+import { get_static_url } from '../../request_utils.js';
 
 const { Gov, Dept } = Subject;
 const { create_text_maker_component} = util_components;

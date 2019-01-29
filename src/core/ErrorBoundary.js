@@ -1,4 +1,4 @@
-import { get_static_url, make_request } from './request_utils.js';
+import { get_static_url, make_request } from '../request_utils.js';
 import { log_standard_event } from './analytics.js';
 
 export class ErrorBoundary extends React.Component {

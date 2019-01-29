@@ -33,7 +33,7 @@ import { DeptSearch, DeptSearchWithoutRouter } from './search/DeptSearch.js';
 import { EverythingSearch } from './search/EverythingSearch.js';
 import { GlossarySearch } from './search/GlossarySearch.js';
 
-import { text_abbrev } from './core/utils.js';
+import { text_abbrev } from './general_utils.js';
 
 // Misc. utility components that don't justify having their own file in ./components, for various reasons
 

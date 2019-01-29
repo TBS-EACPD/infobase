@@ -4,7 +4,7 @@ import {
   Subject, 
   formats, 
   PanelGraph, 
-  utils, 
+  general_utils, 
   charts_index, 
   util_components, 
   declarative_charts, 
@@ -12,7 +12,7 @@ import {
   StdPanel, 
   Col,
 } from '../shared';
-const { text_abbrev } = utils;
+const { text_abbrev } = general_utils;
 const { tbs_color } = charts_index.common_charts_utils;
 const { Format } = util_components;
 const { CirclePack } = declarative_charts;

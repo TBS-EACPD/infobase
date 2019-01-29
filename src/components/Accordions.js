@@ -1,6 +1,6 @@
 import './Accordions.scss';
 import { TransitionGroup } from 'react-transition-group';
-import { get_static_url } from '../core/request_utils.js';
+import { get_static_url } from '../request_utils.js';
 
 function FirstChild(props) {
   const childrenArray = React.Children.toArray(props.children);

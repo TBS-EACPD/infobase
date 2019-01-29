@@ -1,4 +1,4 @@
-import { escapeRegExp } from '../core/utils.js';
+import { escapeRegExp } from '../general_utils.js';
 
 const query_to_regexps_func = (query) => {
   const raw_tokens = _.filter(query.split(" "));
