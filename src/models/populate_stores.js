@@ -102,7 +102,6 @@ function populate_igoc_models({
     .mapValues( (group, org_id) => _.map(group, 1) )
     .value();
 
-
   const statuses = {
     a: trivial_text_maker('active'),
     t: trivial_text_maker('transferred'),
@@ -110,8 +109,6 @@ function populate_igoc_models({
   };
 
   _.each(igoc_rows, row => {
-
-    
     const [
       org_id,
       dept_code,
@@ -141,7 +138,6 @@ function populate_igoc_models({
       other_lang_fancy_acronym,
       other_lang_applied_title, 
     ] = row;
-
 
     const [
       qfr_url,

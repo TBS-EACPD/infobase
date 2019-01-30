@@ -28,7 +28,7 @@ new PanelGraph({
         ["applied_title", subject.applied_title],
         ["incorp_yr", subject.incorp_yr],
         ["type", subject.type],
-        ["website", subject.website && <ExternalLink href={`https://${subject.website}`} display={subject.website} />],
+        ["website", !subject.is_dead && subject.website_url && <ExternalLink href={`https://${subject.website_url}`} display={subject.website_url} />],
         ["minister", !_.isEmpty(subject.minister) && _.chain(subject.minister).flatMap( (minister, ix) => [minister, <br key={ix} />]).dropRight().value()],
         ["mandate", subject.mandate && <div dangerouslySetInnerHTML={{ __html: subject.mandate }}/>],
         ["legislation", subject.legislation && <ExternalLink href={`https://google.com/search?q=${encodeURI(subject.legislation)}`} display={subject.legislation} />],
