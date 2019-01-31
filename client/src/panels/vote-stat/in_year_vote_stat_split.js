@@ -1,18 +1,31 @@
 import { text_maker, TM } from './vote-stat-text-prodiver.js';
+import { ResponsivePie } from '@nivo/pie';
 import {
+  formats,
   CommonDonut,
   PanelGraph,
   StdPanel,
   Col,
 } from "../shared";
 
-
-
 const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,footnotes,sources}) => {
   const { 
     info,
-    graph_args,
   } = calculations;
+
+  let stat = calculations.info.gov_stat_est_in_year;
+  let vote = calculations.info.gov_voted_est_in_year;
+  let keys = ["Statutory\nItem", "Voted"];
+  let dataVoteStat = keys.map((d, i) =>{
+    const label = d;
+    const value = (i? vote: stat);
+    let result = {};
+    result["id"] = label;
+    result["label"] = label;
+    result["value"] = value;
+    return result;
+  })
+
   return (
     <StdPanel 
       title={text_maker("in_year_voted_stat_split_title")}
@@ -23,10 +36,52 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
       </Col>
       {!window.is_a11y_mode &&
         <Col isGraph size={graph_col}>
-          <CommonDonut 
-            data={graph_args}
-            height={300}
-          />
+          <div style={{height: "400px"}}>
+            <ResponsivePie
+              data={ dataVoteStat }
+              margin={{
+                "top": 30,
+                "right": 80,
+                "bottom": 60,
+                "left": 50
+              }}
+              innerRadius={0.5}
+              colors="paired"
+              colorBy="id"
+              borderWidth={1}
+              borderColor="inherit:darker(0.2)"
+              radialLabelsSkipAngle={100}
+              radialLabelsTextXOffset={6}
+              startAngle={-120}
+              enableSlicesLabels = {false}
+              animate={true}
+              motionStiffness={30}
+              motionDamping={15}
+              tooltipFormat={d=> `$${formats.big_int_real(d, {raw: true})}`}           
+              legends={[
+                {
+                  "anchor": "bottom",
+                  "direction": "row",
+                  "translateY": 60,
+                  "translateX": 50,
+                  "itemWidth": 150,
+                  "itemHeight": 25,
+                  "itemTextColor": "#999",
+                  "symbolSize": 20,
+                  "font": 100,
+                  "symbolShape": "circle",
+                  "effects": [
+                    {
+                      "on": "hover",
+                      "style": {
+                        "itemTextColor": "#000"
+                      }
+                    },
+                  ]
+                }
+              ]}
+            />
+          </div>
         </Col>
       }
     </StdPanel>

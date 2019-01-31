@@ -1,5 +1,7 @@
 import { text_maker, TM } from './sobj_text_provider.js';
+import { ResponsiveLine } from '@nivo/line';
 import {
+  formats,
   dollar_formats,
   PanelGraph,
   years,
@@ -11,7 +13,6 @@ import {
   Col,
 } from "../shared";
 const { 
-  Line,
   A11YTable,
 } = declarative_charts;
 const { sos } = businessConstants;
@@ -57,19 +58,55 @@ new PanelGraph({
         />
       );
 
-    } else {
-      graph_content = <div>
-        <Line
-          {...{
-            series: graph_args.series,
-            ticks: info.last_years,
-            colors: charts_index.common_charts_utils.tbs_color(),
-            add_yaxis: true,
-            add_xaxis: true,
-            y_axis: "($)",
-            formatters: dollar_formats,
-          }}
+    } else {      
+      let values = graph_args.series[0];
+      let labels = calculations.info.last_years;
+      let personnelData = values.map((d,i) =>{
+        const value2 = d;
+        const label2 = labels[i]; 
+        let result = {}
+        result["x"] = label2;
+        result["y"] = value2;
+        return result;
+      });
+      let graphData = {};
+      graphData["id"] = "Personnel";
+      graphData["data"] = personnelData;
 
+      graph_content = <div style={{height: 400}}>
+        <ResponsiveLine
+          data={[graphData]}
+          margin={{
+            "top": 50,
+            "right": 40,
+            "bottom": 40,
+            "left": 65,
+          }}
+          xScale={{
+            "type": "point",
+          }}
+          yScale={{
+            "type": "linear",
+            "min": `${_.min(values)*.90}`,
+            "max": `${_.max(values)*1.05}`,
+          }}
+          axisTop={null}
+          axisRight={null}
+          axisLeft={{
+            "format": d => formats.compact1(d,{raw: true}),
+            "tickValues": 5,
+          }}
+          dotSize={10}
+          dotColor="inherit:darker(0.3)"
+          enableDotLabel={false}
+          colors="paired"
+          dotLabel="y"
+          dotLabelYOffset={-12}
+          animate={true}
+          motionStiffness={90}
+          motionDamping={15}
+          // curve="monotoneX"
+          tooltipFormat={d=> `$${formats.big_int_real(d, {raw: true})}`}
         />
       </div>;
     }

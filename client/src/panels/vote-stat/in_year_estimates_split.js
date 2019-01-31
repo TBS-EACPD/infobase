@@ -1,7 +1,6 @@
 import { text_maker, TM } from './vote-stat-text-prodiver.js';
 import { ResponsiveBar } from '@nivo/bar';
-import { Table } from '../../core/TableClass.js';
-import { ensure_loaded } from '../../core/lazy_loader.js';
+
 import {
   formats,
   PanelGraph,
@@ -81,15 +80,6 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
       return result;
     });
 
-    // const static_bar_args = {
-    //   add_xaxis: true,
-    //   x_axis_line: true,
-    //   add_yaxis: false,
-    //   add_labels: true,
-    //   colors: infobase_colors(),
-    //   margin: {top: 20, right: 20, left: 20, bottom: 80},
-    //   formater: formats.compact1,
-    // };
     content = (
       <div className="keenansucks" style={{
         height: "400px",
@@ -102,23 +92,22 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
             "top": 50,
             "right": 55,
             "bottom": 50,
-            "left": 50,
+            "left": 40,
           }}
           labelFormat={d => <tspan y={ -4 }> {formats.compact1(d, {raw: true})} </tspan>}
           padding={0.3}
-          colors="nivo"
-          colorBy="id"
+          labelSkipHeight={0}
+          colors="paired"
           borderColor="inherit:darker(1.6)"
           axisBottom={{
             "tickSize": 3,
-            "tickRotation": -15,            
+            "tickRotation": -15,
           }}
           axisLeft={null}
           labelTextColor="inherit:darker(1.6)"
           motionStiffness={90}
           motionDamping={15}    
-          // tooltipFormat={} 
-          
+          tooltipFormat={d=> `\n$${formats.big_int_real(d, {raw: true})}`}          
         />
       </div>
     );

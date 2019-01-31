@@ -1,5 +1,6 @@
 import text from './historical_auth_exp.yaml';
 import { ResponsiveBar } from '@nivo/bar';
+
 import {
   formats,
   run_template,
@@ -13,8 +14,7 @@ import {
 } from "../shared";
 
 const { 
-  Bar, 
-  GraphLegend,
+  // GraphLegend,
   A11YTable,
 } = declarative_charts;
 
@@ -95,13 +95,11 @@ const render = function({calculations, footnotes, sources}) {
 
 
   } else {
-    let dataExp = exp;
-    let dataAuth = auth;
-    let keys = ["Expenditures","Unused Authorities"];
 
-    dataExp = dataExp.map((d,i) =>{
+    let keys = ["Expenditures","Unused Authorities"];
+    let dataExp = exp.map((d,i) =>{
       const value = d;
-      const value2 = dataAuth[i];
+      const value2 = auth[i];
       let result = {};
       result[keys[0]]=value;
       result[keys[1]]=value2;
@@ -110,28 +108,10 @@ const render = function({calculations, footnotes, sources}) {
     });
 
 
-    const colors = infobase_colors();
-    const legend_items = [
-      {
-        id: "x",
-        label: series_labels[0],
-        color: colors(series_labels[0]),
-      },
-      {
-        id: "y",
-        label: series_labels[1],
-        color: colors(series_labels[1]),
-      },
-    ];
-
+    // const colors = infobase_colors();
     graph_content = <div>
-      {/* <div className="legend-container">
-        <GraphLegend
-          items={legend_items}
-          isHorizontal
-        />
-      </div> */}
-      <div style={{height: 450}}>
+
+      <div style={{height: 400}}>
         {
           <ResponsiveBar
             data={dataExp}
@@ -141,32 +121,12 @@ const render = function({calculations, footnotes, sources}) {
               "top": 50,
               "right": 55,
               "bottom": 40,
-              "left": 60,
+              "left": 65,
             }}
             padding={0.3}
-            colors="nivo"
-            colorBy="id"
-            defs={[
-              {
-                "id": "dots",
-                "type": "patternDots",
-                "background": "inherit",
-                "color": "#38bcb2",
-                "size": 4,
-                "stagger": true,
-              },
-              {
-                "id": "lines",
-                "type": "patternLines",
-                "background": "inherit",
-                "color": "#eed312",
-                "rotation": -45,
-                "lineWidth": 6,
-                "spacing": 10,
-              },
-            ]}
-            borderColor="inherit:darker(1.6)"
+            colors="paired"
             axisTop={null}
+            maxValue={`${_.max(exp)*1.1}`}
             axisRight={null}
             axisBottom={{
               "tickSize": 5,
@@ -178,7 +138,7 @@ const render = function({calculations, footnotes, sources}) {
             }}
             axisLeft={
               {
-                "tickValues": 4,
+                "tickValues": 6,
                 "format": d => formats.compact1(d,{raw: true})}
             }
             label={null}
@@ -188,6 +148,7 @@ const render = function({calculations, footnotes, sources}) {
             animate={true}
             motionStiffness={90}
             motionDamping={15}
+            tooltipFormat={d=> `$${formats.big_int_real(d, {raw: true})}`}
             legends={[
               {
                 
@@ -197,10 +158,9 @@ const render = function({calculations, footnotes, sources}) {
                 "justify": false,
                 "itemsSpacing": 50,
                 "itemWidth": 100,
-                "itemHeight": -35,
+                "itemHeight": -55,
                 "itemOpacity": 0.85,
                 "symbolSize": 30,
-                
                 "effects": [
                   {
                     "on": "hover",
@@ -214,7 +174,6 @@ const render = function({calculations, footnotes, sources}) {
           />}
       </div>
     </div>;
-
   }
 
   return (
