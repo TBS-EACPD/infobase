@@ -79,7 +79,6 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
       return result;
     });
 
-
     content = (
       <div className="keenansucks" style={{
         height: "450px",
