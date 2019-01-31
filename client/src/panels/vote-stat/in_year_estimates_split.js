@@ -117,7 +117,6 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
           motionStiffness={90}
           motionDamping={50}    
           tooltipFormat={d=> `\n$${formats.big_int_real(d, {raw: true})}`}          
-
         />
       </div>
     );
