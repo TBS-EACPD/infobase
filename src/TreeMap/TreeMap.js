@@ -14,7 +14,7 @@ import { trivial_text_maker } from '../models/text.js';
 
 function std_node_render(foreign_sel){
   foreign_sel.html(function(node){
-    if (this.offsetHeight <= 30 ) { return }
+    if (this.offsetHeight <= 30 || this.offsetWidth < 50) { return }
 
     const name_to_display = ( node.data.subject && node.data.subject.fancy_acronym && this.offsetWidth < 150 ? node.data.subject.fancy_acronym : node.data.name );
     
