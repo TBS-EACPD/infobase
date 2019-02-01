@@ -18,7 +18,7 @@ function std_node_render(foreign_sel){
 
     const name_to_display = ( node.data.subject && node.data.subject.fancy_acronym && this.offsetWidth < 150 ? node.data.subject.fancy_acronym : node.data.name );
     
-    if(this.offsetHeight > 50){
+    if(this.offsetHeight > 100){
       return `
         <div class="TreeMapNode__ContentBox TreeMapNode__ContentBox--standard">
         <div class="TreeMapNode__ContentTitle">
@@ -29,11 +29,22 @@ function std_node_render(foreign_sel){
         </div>
       </div>
     `
+    } else if (this.offsetHeight > 50){
+      return `
+        <div class="TreeMapNode__ContentBox TreeMapNode__ContentBox--standard">
+        <div class="TreeMapNode__ContentTitle TreeMapNode__ContentTitle--small">
+          ${name_to_display}
+        </div>
+        <div class="TreeMapNode__ContentText TreeMapNode__ContentText--small">
+          ${formats.compact1(node.data.amount)}
+        </div>
+      </div>
+    `
     }
     else {
       return `
       <div class="TreeMapNode__ContentBox TreeMapNode__ContentBox--standard">
-        <div class="TreeMapNode__ContentTitle">
+        <div class="TreeMapNode__ContentTitle TreeMapNode__ContentTitle--small">
           ${name_to_display}
         </div>
       </div>

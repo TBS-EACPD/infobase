@@ -83,12 +83,20 @@
     overflow: hidden;
     margin-bottom: 0.5em;
     font-weight: bold;
+    &.TreeMapNode__ContentTitle--small {
+      font-size:0.8em;
+      margin-bottom: 0.2em;
+    }
   }
   .TreeMapNode__ContentText {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    &.TreeMapNode__ContentText--small {
+      font-size:0.8em;
+    }
   }
+  
   .TreeMap_IndicatorGrid {
     display: flex;
     justify-content: flex-start;
