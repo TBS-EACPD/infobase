@@ -274,20 +274,6 @@ export default class TreeMapper extends React.Component {
         { loading ? 
           <p> Loading... </p> : 
           <div>
-            <ul>
-              <li>
-                <a href="#treemap/drf"> DRF spending </a>
-              </li>
-              <li>
-                <a href="#treemap/tp"> Transfer Payments </a>
-              </li>
-              <li>
-                <a href="#treemap/vote_stat"> Vote stat items </a>
-              </li>
-              <li>
-                <a href="#treemap/org_results"> Organization results </a>
-              </li>
-            </ul>
             <TreeMap 
               side_bar_title={"2018-19"}
               data={data}

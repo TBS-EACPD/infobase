@@ -69,6 +69,22 @@ export class TreeMap extends React.PureComponent {
             class="TreeMap__SideBar"
             style="min-height:100%"
           >
+            <div>
+              <ul>
+                <li>
+                  <a href="#treemap/drf"> DRF spending </a>
+                </li>
+                <li>
+                  <a href="#treemap/tp"> Transfer Payments </a>
+                </li>
+                <li>
+                  <a href="#treemap/vote_stat"> Vote stat items </a>
+                </li>
+                <li>
+                  <a href="#treemap/org_results"> Organization results </a>
+                </li>
+              </ul>
+            </div>
             <div class="TreeMap_SideBar__Title">
               ${side_bar_title}
               <hr class="BlueHLine"/>
@@ -99,12 +115,11 @@ export class TreeMap extends React.PureComponent {
       .domain([0, height]) 
       .range([0, height]);
     
-    // width/ratio to make the treemap lay rectangles horizantally
-    // TODO: maybe  should be vertically?
     const treemap = d3.treemap()
       .tile(d3.treemapSquarify.ratio(1))
       .size([width / ratio, height]);
 
+    
     let transitioning;
     
   
