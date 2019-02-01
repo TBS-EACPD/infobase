@@ -40,7 +40,7 @@ export class BaseTypeahead extends React.Component {
     }
   }
   componentDidMount(){
-    this.typeahead.componentNode
+    this.typeahead_node
       .querySelector(".rbt-input-hint-container")
       .insertAdjacentHTML(
         'beforeend', 
@@ -139,7 +139,12 @@ export class BaseTypeahead extends React.Component {
 
     return (
       <Typeahead
-        ref = { (ref) => this.typeahead = ref }
+        ref = { 
+          (ref) => {
+            this.typeahead = ref;
+            this.typeahead_node = ReactDOM.findDOMNode(ref);
+          }
+        }
         labelKey = "name"
         paginate = { false } // Turn off built in pagination
 
@@ -182,7 +187,7 @@ export class BaseTypeahead extends React.Component {
 
             if (e.type !== "click"){
               // for non-click events, the target item  has been classed "active" by onPaginate call
-              selected_item = this.typeahead.componentNode.querySelector("li.active");
+              selected_item = this.typeahead_node.querySelector("li.active");
             } else {
               // for click events, need to find the targeted li, possibly an ancestor of the event target
               selected_item = e.target.tagName.toLowerCase() === "li" ?
