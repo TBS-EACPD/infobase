@@ -51,11 +51,10 @@ function group_smallest(node_list, node_creator, shouldRecurse=true, perc_cutoff
     //total*(3/100) : 
     total*perc_cutoff
   ); //TODO: modify cutoff based on screenWidth, mobile should have more nesting for visibility...
-  //TODO: should cutoffs vary based on which type we're showing?
-  const tiny_nodes = _.filter(node_list, ({size}) => size < cutoff )
+  let tiny_nodes = _.filter(node_list, ({size}) => size < cutoff )
 
-
-  if(tiny_nodes.length > 1){
+  // we want to avoid making another level to the hierarchy if unnecessary
+   if(tiny_nodes.length > 3){
     const new_node = node_creator(tiny_nodes);
     
     //"prep_nodes" equivalent TODO: extract to other func
@@ -72,10 +71,28 @@ function group_smallest(node_list, node_creator, shouldRecurse=true, perc_cutoff
     const old_node_list = _.without(node_list, ...tiny_nodes);
 
     return old_node_list.concat(new_node);
+  } else if(tiny_nodes.length > 0){
+    // we want to avoid cases where there are nodes that are too tiny to see
+    // e.g. DRF > treasury board > PSIC
+    const old_node_list = _.without(node_list, ...tiny_nodes);
+    tiny_nodes = _.each(tiny_nodes, function(item){
+      _.set(item, 'size', cutoff);
+      _.each(item.children, child => {recurse_adjust_size(child,cutoff/item.amount)});
+    });
+
+    return old_node_list.concat(tiny_nodes);
   } else {
     return node_list;
   }
 }
+
+function recurse_adjust_size(node,parent_ratio){
+  const new_size = node.size*parent_ratio;
+  _.set(node, 'size', new_size);
+  _.each(node.children, child => {recurse_adjust_size(child,new_size/node.amount)});
+}
+
+
 
 function prep_nodes(node){
   const { children } = node;
@@ -209,7 +226,9 @@ export async function get_data(type,org_id){
     _.each(data, prep_nodes);
     const grouped_data = group_smallest(
       data, 
-      children => ({ name: smaller_items_text, children })
+      children => ({ name: smaller_items_text, children }),
+      true,
+      0.007,
     );
     const root = {
       name: "Government",
@@ -245,7 +264,7 @@ export async function get_data(type,org_id){
     const root = {
       name: "Government",
       children: grouped_data,
-      amount: _.sumBy(data, "amount")
+      amount: _.sumBy(data, "amount"),
     };
     return d3.hierarchy(root);
 
@@ -275,12 +294,12 @@ export async function get_data(type,org_id){
       data, 
       children => ({ name: smaller_items_text, children }),
       true,
-      0.005
+      0.005,
     );
     const root = {
       name: "Government",
       children: grouped_data,
-      amount: _.sumBy(data, "amount")
+      amount: _.sumBy(data, "amount"),
     };
     return d3.hierarchy(root);
   }

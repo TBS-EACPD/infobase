@@ -98,20 +98,20 @@ export class TreeMap extends React.PureComponent {
     const y = d3.scaleLinear()
       .domain([0, height]) 
       .range([0, height]);
-
+    
     // width/ratio to make the treemap lay rectangles horizantally
+    // TODO: maybe  should be vertically?
     const treemap = d3.treemap()
       .tile(d3.treemapSquarify.ratio(1))
-      .size([width / ratio, height])
-
+      .size([width / ratio, height]);
 
     let transitioning;
     
   
     // d3 creating the treemap using the data
     const root = data;
-    treemap(root
-      .sum( d=> _.isEmpty(d.children) ? d.size : 0 ) //ternary avoid double counting
+    const ym = treemap(root
+      .sum( d => _.isEmpty(d.children) ? d.size : 0 ) // ternary to avoid double counting
       .sort( (a, b) => {
         if(a.data.name === smaller_items_text){ 
           return 9999999 
@@ -120,16 +120,15 @@ export class TreeMap extends React.PureComponent {
           return -9999999 
         }
         return b.value - a.value || b.height - a.height 
-      }) 
+      })
     );
-
+    
     const main = display(root);
     //node_render is special, we call it once on first render (here) 
     //and after transitions
     main.selectAll('.TreeMapNode__ContentBoxContainer').call(node_render);
 
     function display(d) {
-
       // inserts text on the top bar
       zoom_ctrl
         .datum(d.parent)
@@ -230,9 +229,6 @@ export class TreeMap extends React.PureComponent {
             .selectAll('.TM_TooltipContainer')
             .filter(tooltip_data => tooltip_data === d)
             .remove();
-          // d3.select(this)
-          //   .select('.toolTipr')
-          //   .remove();
         })
         .call(treemap_node_content_container)
         
@@ -245,13 +241,12 @@ export class TreeMap extends React.PureComponent {
         d3.select(this)
           .select('.TM_TooltipContainer')
           .remove();
-        // d3.select(this)
-        //   .select('.toolTipr')
-        //   .remove();
 
         const g2 = display(d);
         const t1 = g1.transition().duration(650);
         const t2 = g2.transition().duration(650);
+
+
         
         x.domain([d.x0, d.x1]);
         y.domain([d.y0, d.y1]);
@@ -329,3 +324,4 @@ const sidebar_item_html = function(d){
   <div> ${formats.compact1(d.data.amount)} </div>
 `)
 }
+
