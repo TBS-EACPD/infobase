@@ -29,7 +29,14 @@
       cursor: pointer;
     }
   }
-  
+
+  .TreeMap__ZoomControl__Text{
+    color: black;
+  }
+  .TreeMap__ZoomControl__Title{
+    font-weight: bold;
+  }
+
   .TreeMap__Rectangle {
     position: absolute;
     border: 1px solid #fff;

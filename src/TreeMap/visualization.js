@@ -325,7 +325,7 @@ export class TreeMap extends React.PureComponent {
 function zoom_ctrl_text(d) {
   return (
     d.parent ? 
-    `${d.data.name} - ${text_maker("click_to_zoom_out")}` :
+    `<span class="TreeMap__ZoomControl__Title">${d.data.name} - </span>${text_maker("click_to_zoom_out")}` :
     text_maker("click_rect_to_zoom_in")
   );
 }
