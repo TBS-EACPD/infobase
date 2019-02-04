@@ -46,7 +46,7 @@ export class TreeMap extends React.PureComponent {
     const el = this.el;
 
     let height=700;
-    if(window.is_mobile){
+    if(window.feature_detection.is_mobile()){
       height= Math.ceil(0.8*screen.height);
     }
 
@@ -184,10 +184,12 @@ export class TreeMap extends React.PureComponent {
         .append('div')
 
       // add class and click handler to all g's with children
-      main
-        .filter( d => d.children )
-        .classed('TreeMap__Division', true)
-        .on('click', transition)
+      if(!window.feature_detection.is_mobile()){
+        main
+          .filter( d => d.children )
+          .classed('TreeMap__Division', true)
+          .on('click', transition)
+      }
 
       main.selectAll('.TreeMap__Rectangle--is-child')
         .data( d => d.children || [d] )
@@ -200,53 +202,79 @@ export class TreeMap extends React.PureComponent {
         .attr('class', 'TreeMap__Rectangle TreeMap__Rectangle--is-parent')
         .call(rectan)
 
- 
-      main.append('div')
-        .attr('class', d => classNames('TreeMapNode__ContentBoxContainer', !_.isEmpty(d.children) && "TreeMapNode__ContentBoxContainer--has-children") )
-        .on("mouseenter", function(d) {
-          const el = this;
-          setTimeout(()=> {
-            const coords = el.getBoundingClientRect();
-            if( !(
-              currentMouseX >= coords.left && currentMouseX <= coords.right &&
-              currentMouseY >= coords.top && currentMouseY <= coords.bottom
-            )){
-              return;
-            }
-            var tool = d3.select(this).append("div")
-              .attr("class", "TM_TooltipContainer")
-              .style("opacity", 0);
-            // var tool_r = d3.select(this).append("div")
-            //   .attr("class", "toolTipr")
-            //   .style("opacity", 0);
-            // tool_r points to the right and is places on the left
-            // if ( x(d.x0) > 500 ) { 
-            //TODO: decide if we need to keep right-pointing tooltips (makes it harder to hover over small nodes)
-            //if (false) { 
-              // tool_r.transition()
-              //   .style("opacity", 1)
-              // tool_r
-              //   .call(tooltip_render)
-              //   .style('left', '-250px')
-              //   .style('top', (height < 80) ? `${-(height/2)}px` : `${(height/4)}px`)
-            //}
-            // tool points upwards and is centered horizantally
-            //else{
+      if(!window.feature_detection.is_mobile()){
+        main.append('div')
+          .attr('class', d => classNames('TreeMapNode__ContentBoxContainer', !_.isEmpty(d.children) && "TreeMapNode__ContentBoxContainer--has-children") )
+          .on("mouseenter", function(d) {
+            const el = this;
+            setTimeout(()=> {
+              const coords = el.getBoundingClientRect();
+              if( !(
+                currentMouseX >= coords.left && currentMouseX <= coords.right &&
+                currentMouseY >= coords.top && currentMouseY <= coords.bottom
+              )){
+                return;
+              }
+              var tool = d3.select(this).append("div")
+                .attr("class", "TM_TooltipContainer")
+                .style("opacity", 0);
               tool.transition()
                 .style("opacity", 1);
               tool
                 .call(tooltip_render)
-            //}
-          }, 300)
-        })  
-        .on("mouseleave", function(d) {
-          d3.select(this)
-            .selectAll('.TM_TooltipContainer')
-            .filter(tooltip_data => tooltip_data === d)
-            .remove();
-        })
-        .call(treemap_node_content_container)
-        
+            }, 300)
+          })
+          .on("mouseleave", function(d) {
+            d3.select(this)
+              .selectAll('.TM_TooltipContainer')
+              .filter(tooltip_data => tooltip_data === d)
+              .remove();
+          })
+          .call(treemap_node_content_container)
+      } else{
+        main.append('div')
+          .attr('class', d => classNames('TreeMapNode__ContentBoxContainer', !_.isEmpty(d.children) && "TreeMapNode__ContentBoxContainer--has-children") )
+          .on("click", function(d) {
+            //debugger;
+            if(d.toolTipped){
+              d3.select(this)
+                .selectAll('.TM_TooltipContainer')
+                .remove();
+              d.toolTipped = false;
+              if(d.children){
+                transition(d);
+              }
+            } else{
+              //remove others first
+              d3.selectAll('.TM_TooltipContainer')
+                .remove();
+              d3.selectAll('.TreeMapNode__ContentBoxContainer')
+                .each(function(d) {
+                  d.toolTipped = false;
+                });
+              // need to figure out how to set their toolTipped var
+              setTimeout(()=> {
+                const coords = el.getBoundingClientRect();
+                if( !(
+                  currentMouseX >= coords.left && currentMouseX <= coords.right &&
+                  currentMouseY >= coords.top && currentMouseY <= coords.bottom
+                )){
+                  return;
+                }
+                var tool = d3.select(this).append("div")
+                  .attr("class", "TM_TooltipContainer")
+                  .style("opacity", 0);
+                tool.transition()
+                  .style("opacity", 1);
+                tool
+                  .call(tooltip_render)
+              }, 100)
+              d.toolTipped = true;
+            }
+          })
+          .call(treemap_node_content_container)
+      }
+      
         
       function transition(d) {
         if (transitioning || !d) return;
@@ -261,8 +289,6 @@ export class TreeMap extends React.PureComponent {
         const t1 = g1.transition().duration(650);
         const t2 = g2.transition().duration(650);
 
-
-        
         x.domain([d.x0, d.x1]);
         y.domain([d.y0, d.y1]);
 
