@@ -3,17 +3,12 @@ import { ensure_loaded } from '../core/lazy_loader.js';
 
 
 export const smaller_items_text = "Smaller Items" //(
-  //APPLICATION_LANGUAGE === "en" ? 
-  //"Smaller Items" :
-  //"Objets plus petits"
+//APPLICATION_LANGUAGE === "en" ? 
+//"Smaller Items" :
+//"Objets plus petits"
 //)
 
 import { Subject } from '../models/subject.js';
-import { 
-  by_min_dept, 
-  by_dept_type,
-  by_this_year_emp,
-} from '../dept_explore/data_schemes.js';
 
 import { create_full_results_hierarchy } from '../gen_expl/result_hierarchies.js';
 import { get_root } from '../gen_expl/hierarchy_tools.js';
@@ -54,7 +49,7 @@ function group_smallest(node_list, node_creator, shouldRecurse=true, perc_cutoff
   let tiny_nodes = _.filter(node_list, ({size}) => size < cutoff )
 
   // we want to avoid making another level to the hierarchy if unnecessary
-   if(tiny_nodes.length > 3){
+  if(tiny_nodes.length > 3){
     const new_node = node_creator(tiny_nodes);
     
     //"prep_nodes" equivalent TODO: extract to other func
@@ -182,7 +177,7 @@ export async function get_data(type,org_id){
     const root = {
       name: org.name,
       children: grouped_data,
-      amount: _.sumBy(data, "amount")
+      amount: _.sumBy(data, "amount"),
     };
     return d3.hierarchy(root)
     
@@ -237,7 +232,7 @@ export async function get_data(type,org_id){
     const root = {
       name: "Government",
       children: grouped_data,
-      amount: _.sumBy(data, "amount")
+      amount: _.sumBy(data, "amount"),
     };
     return d3.hierarchy(root);
   } else if(type === "tp"){
