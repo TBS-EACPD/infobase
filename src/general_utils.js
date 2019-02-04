@@ -96,7 +96,7 @@ export const retry_promise = (promise_to_try, retries = 2, interval = 500) => {
             reject(error);
             return;
           }
-  
+
           retry_promise(promise_to_try, interval, retries - 1).then(resolve, reject);
         }, 
         interval

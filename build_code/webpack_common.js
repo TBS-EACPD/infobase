@@ -1,7 +1,7 @@
 const _ = require('lodash');
 const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const CircularDependencyPlugin = require('circular-dependency-plugin')
+const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 const CDN_URL = process.env.CDN_URL || ".";
 const IS_DEV_LINK = process.env.IS_DEV_LINK || false;
@@ -12,21 +12,28 @@ const get_rules = ({
   is_prod,
 }) => [
   {
-    test: /^((?!\.exec).)*\.js$/, 
-    exclude: /node_modules|external-dependencies/, //es2015 loader adds 'use strict' everywhere, which breaks scripts from external-dependencies/
+    test: /\.js$/, 
+    exclude: /node_modules/,
     use: [
       {
         loader: 'babel-loader',
         options: {
           cacheDirectory: true,
-          plugins: ["transform-object-rest-spread", "syntax-dynamic-import"],
+          sourceType: "unambiguous",
+          plugins: ["@babel/plugin-proposal-object-rest-spread", "@babel/plugin-syntax-dynamic-import"],
           presets: [
             ["@babel/preset-env", {
+              useBuiltIns: false,
               modules: false,
-              targets: {
-                browsers: should_use_babel ? ["Safari >= 7", "Explorer 11"] : ["Chrome >= 66"],
-              },
-              forceAllTransforms: is_prod, // for uglifyjs
+              targets: should_use_babel ? 
+                {
+                  Safari: "7",
+                  ie: "11",
+                } : 
+                {
+                  Chrome: "66",
+                },
+              forceAllTransforms: is_prod,
             }],
             "@babel/preset-react",
           ],
@@ -36,10 +43,6 @@ const get_rules = ({
         loader: 'eslint-loader',
       },
     ],
-  },
-  {
-    test: /\.exec\.js$/,
-    use: ['script-loader'],
   },
   {
     test: /\.css$/,
