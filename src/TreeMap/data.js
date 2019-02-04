@@ -62,6 +62,10 @@ function group_smallest(node_list, node_creator, shouldRecurse=true, perc_cutoff
     new_node.size = _.sumBy(tiny_nodes,"size")
     new_node.is_negative = new_node.amount < 0;
     
+    if (new_node.size < cutoff){
+      _.set(new_node, 'size', cutoff);
+      _.each(new_node.children, child => {recurse_adjust_size(child,cutoff/new_node.amount)});
+    }
     
     if(shouldRecurse){
       //the newly split up children might be able to get grouped again!
@@ -100,7 +104,8 @@ function prep_nodes(node){
     _.each(children, prep_nodes);
     node.amount = _.sumBy(children,"amount")
     node.size = _.sumBy(children, "size")
-    
+    _.each(children, n => { _.set(n, "parent_amount", node.amount)});
+    _.each(children, n => { _.set(n, "parent_name", node.name)});
   } else {
     //leaf node, already has amount but no size
     node.size = Math.abs(node.amount);

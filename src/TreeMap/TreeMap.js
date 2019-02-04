@@ -130,15 +130,26 @@ function standard_color_scale(node, chart_scale){
 }
 
 function std_tooltip_render(tooltip_sel){
-  tooltip_sel.html(d => `
-    <div>
+  tooltip_sel.html(function(d){
+    if(d.data.parent_amount){
+      return `<div>
+      <div>${d.data.name}</div>
+      <hr class="BlueHLine">
+      <div>${formats.compact1(d.data.amount)}</div>
+      <div>${formats.percentage1(d.data.amount/d.data.parent_amount)} of ${d.data.parent_name}</div>
+      ${generate_infograph_href(d)}
+    </div>`
+    } else {
+      return `<div>
       <div>${d.data.name}</div>
       <hr class="BlueHLine">
       <div>${formats.compact1(d.data.amount)}</div>
       ${generate_infograph_href(d)}
-    </div>
-  `);
+    </div>`
+    }
+  })
 }
+
 
 function generate_infograph_href(d){
   if (d.data.subject ){
