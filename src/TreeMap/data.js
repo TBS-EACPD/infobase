@@ -152,8 +152,7 @@ function result_h7y_mapper(node){
 }
 
 export async function get_data(type,org_id){
-  await ensure_loaded({table_keys: ["table8","table7","table6","table4","table12"]});
-  
+  await ensure_loaded({table_keys: ["orgVoteStatEstimates","orgTransferPayments","programSpending","programFtes"]});
 
   let data;
 
@@ -189,8 +188,8 @@ export async function get_data(type,org_id){
     
   }
   else if(type === "drf"){
-    const table12 = Table.lookup('table12');
-    const table6 = Table.lookup('table6');
+    const program_ftes_table = Table.lookup('programFtes');
+    const program_spending_table = Table.lookup('programSpending');
     const orgs = _.chain(Dept.get_all())
       .map(org => ({
         subject: org,
@@ -203,7 +202,7 @@ export async function get_data(type,org_id){
               .map(prog => ({
                 subject: prog,
                 name: prog.name,
-                amount: table6.q(prog).sum(exp_col),
+                amount: program_spending_table.q(prog).sum(exp_col),
               }))
               .filter(has_non_zero_or_non_zero_children)
               .value(),
@@ -242,12 +241,12 @@ export async function get_data(type,org_id){
     };
     return d3.hierarchy(root);
   } else if(type === "tp"){
-    const table7 = Table.lookup('table7');
+    const tp_table = Table.lookup('orgTransferPayments');
     const orgs = _.chain(Dept.get_all())
       .map(org => ({
         subject: org,
         name: org.name,
-        children: _.chain(table7.q(org).data)
+        children: _.chain(tp_table.q(org).data)
           .map(row => ({
             name: row.tp,
             amount: row["{{pa_last_year}}exp"],
@@ -274,12 +273,12 @@ export async function get_data(type,org_id){
     return d3.hierarchy(root);
 
   } else if(type === "vote_stat"){
-    const table8 = Table.lookup('table8');
+    const vote_stat_table = Table.lookup('orgVoteStatEstimates');
     const orgs = _.chain(Dept.get_all())
       .map(org => ({
         subject: org,
         name: org.name,
-        children: _.chain(table8.q(org).data)
+        children: _.chain(vote_stat_table.q(org).data)
           .groupBy('desc')
           .toPairs()
           .map( ([desc, rows]) => ({
