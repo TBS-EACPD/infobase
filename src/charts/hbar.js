@@ -14,13 +14,15 @@ export class HBar {
 
     common_charts_utils.setup_graph_instance(this,d3.select(container),options);
 
-    var _graph_area = this.svg.append("g").attr("class","_graph_area");
-    this.graph_area = _graph_area.append("g").attr("class","inner_graph_area");
+    var _graph_area = this.svg.append("g").attr("class", "_graph_area");
+    this.graph_area = _graph_area.append("g").attr("class", "inner_graph_area");
     
-    var margin = this.options.margin || {top: 50,
+    var margin = this.options.margin || {
+      top: 50,
       right: 20, 
       bottom: 30, 
-      left: 10};
+      left: 10,
+    };
     this.bar_height = 30;
     this.margins = margin;
     this.width = this.outside_width - margin.left - margin.right;
@@ -29,27 +31,26 @@ export class HBar {
     this.text_align = this.options.text_align || "right";
 
     this.graph_area
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      .attr("transform", `translate(${margin.left},${margin.top})`);
 
     this.graph_area.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0,0)");
 
     this.html.append("div")
-      .attr("class","total")
+      .attr("class", "total")
       .styles({
         "top": "0px",
         "left": "0px",
         "margin-left": margin.left + "px",
         "position": "absolute",
-        "font-weight": "500"});
+        "font-weight": "500",
+      });
 
-    this.pos_color = "#1f77b4" ;
+    this.pos_color = "#1f77b4";
     this.neg_color = '#A52A2A';
 
-
     this.x_scale = this.options.x_scale;
-
   };
 
   render(options){
@@ -71,7 +72,7 @@ export class HBar {
 
     var margins = this.margins;
     var href = this.options.href;
-    var extent = d3.extent(data, function(d){return d.value;});
+    var extent = d3.extent(data, (d) => d.value);
     var x_left = extent[0] > 0 ? 0 : extent[0];
     var x_right = extent[1] < 0 ? 0 : extent[1];
     var formater = this.options.formater || _.identity;
@@ -81,29 +82,30 @@ export class HBar {
 
     //binding data to bars.
     var g = this.graph_area.selectAll("g.bar")
-      .data(data,function(d){return d.name;});
+      .data(data, (d) => d.name);
 
     var text = this.html.selectAll("div.hbar_chart_labels")
-      .data(data,function(d){return d.name;});
+      .data(data, (d) => d.name);
 
     var total = this.options.total;
 
     var x_scale = this.x_scale
       .range([0,this.width])
-      .domain([x_left,x_right]);
+      .domain([x_left, x_right]);
 
     var text_align = this.text_align;
 
     if (total) {
-      if (this.html.select("div.total").empty()) {
+      if ( this.html.select("div.total").empty() ){
         this.html.append("div")
-          .attr("class","total")
+          .attr("class", "total")
           .styles({
             "top": "0px",
             "left": "0px",
             "margin-left": this.margins.left + "px",
             "position": "absolute",
-            "font-weight": "500"});
+            "font-weight": "500",
+          });
       }
     
       this.html.select("div.total").html(total);
@@ -111,9 +113,7 @@ export class HBar {
 
     var xAxis = d3
       .axisTop(this.x_scale)
-      .ticks(tick_number || 7)
-          ;
-          // .orient("top");
+      .ticks(tick_number || 7);
 
     if (this.ticks){
       xAxis.ticks(this.ticks);
@@ -137,30 +137,32 @@ export class HBar {
       .enter()
       .append("g")
       .merge(g)
-      .attr("class" , "bar" )
+      .attr("class", "bar");
 
     new_g
       .append("rect")
-      .attrs({ "width": this.width +"px",
-        "height": y.bandwidth()+"px",
-        "y": "0px",
+      .attrs({ 
+        "width": this.width,
+        "height": y.bandwidth(),
+        "y": 0,
       })
       .styles({
         "fill": "#e6e6e6",
-      })
+      });
       
 
     new_g
       .append("rect")
-      .attrs({ "width": '0px',
-        "height": y.bandwidth()-8+"px",
-        "y": "4px",
+      .attrs({ 
+        "width": 0,
+        "height": y.bandwidth() - 8,
+        "y": 4,
         'class': "fill",
       })
       .styles({
-        "fill": function(d){return d.value > 0 ? pos_color : neg_color;},
+        "fill": (d) => d.value > 0 ? pos_color : neg_color,
         "fill-opacity": 0.5,
-      })
+      });
 
     text.exit().remove();
 
@@ -168,7 +170,7 @@ export class HBar {
       .enter()
       .append("div")
       .merge(text)
-      .attr("class","hbar_chart_labels")
+      .attr("class", "hbar_chart_labels")
       .styles({
         "text-align": text_align,
         "position": "absolute",
@@ -179,48 +181,40 @@ export class HBar {
       })
       .each(function(){
         var that = d3.select(this);
-        if (href){
-          that
-            .append("a")
-            .style("color","black");
-        } else {
-          that
-            .append("span")
-          // .merge(that)
-            .style("color","black")
-        }
+        that
+          .append( href ? "a" : "span")
+          .style("color", "black");
       });
 
 
     new_text.order();
 
-    new_text.each(function(d,i){
-
+    new_text.each(function(d, i){
       var single = d3.select(this);
       single
         .transition()
         .duration(750)
         .styles({
-          "top": margins.top +4+ y(d.name) + "px",
+          "top": margins.top + 4 + y(d.name) + "px",
         });
+
       if (href) {
         single.selectAll("a")
-          .html(d.name + ": "+ formater(d.value))
-          .attr("href",href);
+          .html(d.name + ": " + formater(d.value))
+          .attr("href", href);
       } else {
         single.selectAll("span")
-          .html(d.name + ": "+ formater(d.value));
+          .html(d.name + ": " + formater(d.value));
       }
     });
 
-    new_g.each(function(d,i){
+    new_g.each(function(d, i){
       var x_val = y(d.name);
-      var single;
-      single = d3.select(this);
+      var single = d3.select(this);
       single
         .transition()
         .duration(750)
-        .attr("transform", "translate(0,"+x_val+")" ); 
+        .attr("transform", `translate(0,${x_val})`); 
 
       single
         .selectAll("rect.fill")
@@ -228,8 +222,8 @@ export class HBar {
         .delay(1000)
         .duration(500)
         .attrs({
-          "x": x_scale(Math.min(0, d.value)),
-          "width": Math.abs(x_scale(d.value) - x_scale(0)),
+          "x": x_scale( Math.min(0, d.value) ),
+          "width": Math.abs( x_scale(d.value) - x_scale(0) ),
         })
         .styles({
           "fill": d.value > 0 ? pos_color : neg_color,
@@ -237,8 +231,8 @@ export class HBar {
       
       single
         .selectAll("rect")
-        .filter(function(d, i) {return d3.select(this).attr("class") === null;})
-        .attr("width", d3.max(x_scale.range()));
+        .filter( function(d, i) {return d3.select(this).attr("class") === null;} )
+        .attr( "width", d3.max( x_scale.range() ) );
     });
   };
 };
