@@ -50,7 +50,7 @@
   }
   
   /* division contains the rectangle (parent and children) as well as the overlaid content boxes */
-  .TreeMap__Division:hover {
+  .TreeMap__Division:hover { // I dont think a mobile version is necessary for this
     .TreeMap__Rectangle--is-child {
       opacity: 0.8;
       border-width: 1px;
@@ -59,6 +59,7 @@
       opacity: 0.2;
     }
   }
+
   .TreeMapNode__ContentBoxContainer {
     &:hover{
       background-color: rgba(200, 200, 200, 0.1);
@@ -70,6 +71,12 @@
       cursor: pointer;
     }
   }
+
+  .TreeMapNode__ContentBoxContainer--tapped {
+    background-color: rgba(200, 200, 200, 0.1);
+    border: 2px solid #056bba;
+  }
+
   .TreeMapNode__ContentBox {
     &.TreeMapNode__ContentBox--standard {
       font-size:1em;

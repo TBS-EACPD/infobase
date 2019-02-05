@@ -189,6 +189,10 @@ export class TreeMap extends React.PureComponent {
           .filter( d => d.children )
           .classed('TreeMap__Division', true)
           .on('click', transition)
+      } else {
+        main
+          .filter( d => d.children )
+          .classed('TreeMap__Division', true)
       }
 
       main.selectAll('.TreeMap__Rectangle--is-child')
@@ -241,6 +245,7 @@ export class TreeMap extends React.PureComponent {
               d3.select(this)
                 .selectAll('.TM_TooltipContainer')
                 .remove();
+              d3.select(this).classed("TreeMapNode__ContentBoxContainer--tapped",false);
               d.toolTipped = false;
               if(d.children){
                 transition(d);
@@ -250,10 +255,11 @@ export class TreeMap extends React.PureComponent {
               d3.selectAll('.TM_TooltipContainer')
                 .remove();
               d3.selectAll('.TreeMapNode__ContentBoxContainer')
+                .classed("TreeMapNode__ContentBoxContainer--tapped",false)
                 .each(function(d) {
                   d.toolTipped = false;
                 });
-              // need to figure out how to set their toolTipped var
+              d3.select(this).classed("TreeMapNode__ContentBoxContainer--tapped",true);
               setTimeout(()=> {
                 var tool = d3.select(this).append("div")
                   .attr("class", "TM_TooltipContainer")
@@ -264,6 +270,7 @@ export class TreeMap extends React.PureComponent {
                   .call(tooltip_render)
               }, 100)
               d.toolTipped = true;
+              
             }
           })
           .call(treemap_node_content_container)
