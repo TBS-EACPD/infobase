@@ -61,10 +61,10 @@
   }
   .TreeMapNode__ContentBoxContainer {
     &:hover{
-      background-color: rgba(255, 255, 255, 0.5)
+      background-color: rgba(200, 200, 200, 0.1);
+      border: 2px solid #056bba;
     }
     position: absolute;
-    border: 2px solid white;
   
     &.TreeMapNode__ContentBoxContainer--has-children {
       cursor: pointer;
@@ -181,30 +181,3 @@
     border-top: 3px solid #78c3fc;
     margin-top: 2px;  
   }
-  
-  // .toolTipr {
-  //   position: absolute;
-  //   width: 250px;
-  //   background: none repeat scroll 0 0 #767f89;
-  //   color: white;
-  
-  //   font-size: 1em;
-  //   padding: 10px;
-  //   text-align: center;
-  //   z-index: 5;
-  
-  // }
-  // .toolTipr:after {
-  //   content: " ";
-  //   position: absolute;
-  //   top: 50%;
-  //   left: 100%; /* To the right of the tooltip */
-  //   margin-top: -10px;
-  //   border-width: 10px;
-  //   border-style: solid;
-  //   border-color: transparent transparent transparent #767f89;
-  // }
-  
-  /* Tooltip (inner) styles */ 
-  // .TM_Tooltip {
-  // }

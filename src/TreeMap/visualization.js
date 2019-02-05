@@ -202,6 +202,7 @@ export class TreeMap extends React.PureComponent {
         .attr('class', 'TreeMap__Rectangle TreeMap__Rectangle--is-parent')
         .call(rectan)
 
+      //TODO: some of this needs to be put into functions
       if(!window.feature_detection.is_mobile()){
         main.append('div')
           .attr('class', d => classNames('TreeMapNode__ContentBoxContainer', !_.isEmpty(d.children) && "TreeMapNode__ContentBoxContainer--has-children") )
@@ -254,13 +255,6 @@ export class TreeMap extends React.PureComponent {
                 });
               // need to figure out how to set their toolTipped var
               setTimeout(()=> {
-                const coords = el.getBoundingClientRect();
-                if( !(
-                  currentMouseX >= coords.left && currentMouseX <= coords.right &&
-                  currentMouseY >= coords.top && currentMouseY <= coords.bottom
-                )){
-                  return;
-                }
                 var tool = d3.select(this).append("div")
                   .attr("class", "TM_TooltipContainer")
                   .style("opacity", 0);
