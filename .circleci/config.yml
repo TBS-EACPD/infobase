@@ -125,3 +125,4 @@ workflows:
             branches:
               only:
                 - master
+                - new_treemap
