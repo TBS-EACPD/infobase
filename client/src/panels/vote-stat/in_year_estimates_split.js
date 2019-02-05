@@ -93,7 +93,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
     // };
     content = (
       <div className="keenansucks" style={{
-        height: "400px",
+        height: "450px",
       }} >
         <ResponsiveBar
           data={keenanSuckss}
@@ -102,17 +102,17 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
           margin={{
             "top": 50,
             "right": 55,
-            "bottom": 50,
+            "bottom": 80,
             "left": 40,
           }}
           labelFormat={d => <tspan y={ -4 }> {formats.compact1(d, {raw: true})} </tspan>}
           padding={0.3}
-          labelSkipHeight={0}
+          labelSkipHeight="0"
           colors="paired"
           borderColor="inherit:darker(1.6)"
           axisBottom={{
             "tickSize": 3,
-            "tickRotation": -15,
+            "tickRotation": -30,
           }}
           axisLeft={null}
           labelTextColor="inherit:darker(1.6)"
