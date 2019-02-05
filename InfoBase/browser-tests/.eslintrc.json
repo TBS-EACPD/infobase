@@ -1,0 +1,7 @@
+{
+  "globals": {
+    "process": true,
+    "fixture": true,
+    "test": true
+  }
+}

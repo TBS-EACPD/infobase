@@ -1,0 +1,92 @@
+@import '../../common_css/common-variables';
+@import './budget_measure_common';
+
+
+.budget-measures-partition-controls {
+  @include budget-controls-footer-mixin();
+  margin-bottom: -20px;
+  padding: 8px 6px 13px 8px;
+
+  & > .labeled-box {
+    margin-bottom: 8px;
+
+    & > .labeled-box-content > .centerer > .radio-buttons {
+      border-color: $controlsColorLighter;
+      & > .radio-buttons__option {
+        color: $controlsColorLighter;
+      }
+      
+      & > .radio-buttons__option.radio-buttons__option--active {
+        color: #FFFFFF;
+        background-color: $controlsColorLighter;
+      }
+      
+      
+      & > .radio-buttons__option:not(:last-child):after,
+      & > .radio-buttons__option:not(:first-child):before {
+        border-color: $controlsColorLighter;
+      }
+      
+      & > .radio-buttons__option:not(.radio-buttons__option--active):hover,
+      & > .radio-buttons__option:not(.radio-buttons__option--active):active,
+      & > .radio-buttons__option:not(.radio-buttons__option--active):focus { 
+        background-color: change-color($color: $controlsColorLighter, $alpha: 0.75);
+        color: #FFFFFF !important;
+      }
+    }
+  }
+}
+
+
+// Overwrite some default styles from the FilterTable component
+.chapter-key-table {
+  & > .filter-table {
+    padding: 10px 0px 10px 0px;
+
+    & > .filter-table__item {
+      border-color: $controlsColorLighter;
+      color: $controlsColorLighter;
+
+      & > .filter-table__eye > .eye-open {
+        color: $controlsColorLighter;
+      }
+      & > .filter-table > .eye-close {
+        color: $controlsColor;
+      }
+
+      & > .filter-table__components {
+        @media(min-width:1201px){
+          margin-bottom: 20px;
+        }
+
+        & > .filter-table__text {
+          font-size: 20px;
+        }
+        & > .filter-table__count_area {
+          text-align: center;
+
+          & > .filter-table__count {
+            font-size: 19px; 
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.budget-measures-search-box {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0px 10px 0px;
+
+  & > .form-control.search {
+    width: 100%;
+    @media(min-width:1200px){
+      border: 2px solid $controlsColorLighter;
+    }
+    @media(max-width:1200px){
+      border: 1px solid $controlsColor, 25%;
+    }
+  }
+}

@@ -1,0 +1,76 @@
+pa_title:
+  en: Public Accounts of Canada
+  fr: Comptes publics du Canada
+
+qfr_title:
+  en: Quarterly Financial Reports (QFR)
+  fr: Rapports financiers trimestriels (RFT)
+
+estimates_title:
+  en: Main Estimates and Supplementary Estimates (A, B and C)
+  fr: Budget principal de dépenses et budgets supplémentaires de dépenses (A, B et C)
+
+cfmrs_title:
+  en: Central Financial Management Reporting System (CFMRS)
+  fr: Système central de gestion des rapports financiers (SCGRF)
+
+rps_title:
+  en: Regional Pay System (People Management Data)
+  fr: Système régional de paye (Données sur la gestion des personnes)
+
+dp_title:
+  en: Departmental Plans
+  fr: Plans Ministériels
+
+drr_title:
+  en: Departmental Results Reports
+  fr: Rapport sur les résultats ministériels
+
+igoc_source_title:
+  en: Inventory of Federal Organizations and Interests
+  fr: Répertoire des organisations et intérêts fédéraux
+
+igoc_source_desc:
+  en: The Inventory of Federal Organizations and Interests provides a comprehensive listing of federal organizations and interests that can be grouped by various categories (e.g., by portfolio).
+  fr: Le Répertoire des organisations et intérêts fédéraux dresse la liste complète des organisations fédérales et des sociétés dans lesquelles le Canada détient des intérêts, que l’on peut regrouper en diverses catégories (p. ex. par portefeuille). 
+
+
+drr_results_item_name:
+  en: Performance information (results and indicators) by Program and by Organization
+  fr: Information sur le rendement (résultats et indicateurs) par programme et par organisation
+
+dp_results_item_name:
+  en: Planned performance information by Program and by Organization
+  fr: Information sur le rendement prévu par programme et par organisation
+
+igoc_item_name:
+  en: Federal organizations and interests
+  fr: Organisations et intérêts fédéraux
+
+
+budget_source_title:
+  text: Budget 2018
+
+budget_source_desc:
+  transform: [handlebars, markdown]
+  en: |
+    On February 27, the {{ext_link "2018 Budget Plan" "https://www.budget.gc.ca/2018/home-accueil-en.html"}} included details on new spending measures by organization in {{ext_link "Table A2.11" "https://www.budget.gc.ca/2018/docs/plan/anx-02-en.html#41-Policy-Actions-and-Budget-Investments-by-Department-(Cash-Basis)"}}.  
+
+    For the first time in recent years, the  2018-19 Main Estimates were tabled after the federal Budget. In these Estimates, the Government introduced a new centrally managed Budget Implementation vote that includes 100% of the measures announced in the Budget 2018 as set out in Table A2.11. Treasury Board can only allocate these funds to specific new budget measures, as per the Budget’s detailed list of funding for every new spending measure.  
+  
+    This data includes details on Budget measures and shows exactly how Treasury Board is allocating funds to departments for specific budget measures, and which programs are being funded to deliver each Budget measure.  
+  fr: |
+    Le 27 février, le {{ext_link "plan budgétaire de 2018" "https://www.budget.gc.ca/2018/home-accueil-fr.html"}} précisait en détail les nouvelles mesures de dépenses, par organisation, dans le {{ext_link "tableau A2.11" "https://www.budget.gc.ca/2018/docs/plan/anx-02-fr.html#41-Mesures-strategiques-et-investissements-du-budget-par-ministere-et-organisme-(selon-la-comptabilite-de-caisse)"}}.  
+
+    Pour la première fois ces dernières années, le Budget principal des dépenses 2018-2019 a été déposé après le budget fédéral. Dans ce budget des dépenses, le gouvernement a présenté un nouveau crédit central d’exécution du budget, géré par le Conseil du Trésor, qui couvre la totalité des mesures annoncées dans le budget de 2018 figurant dans le tableau A2.11. Le Conseil du Trésor ne peut affecter ces fonds qu’à de nouvelles mesures budgétaires précises, selon la liste détaillée des fonds prévus dans le budget pour chaque nouvelle mesure de dépenses.  
+    
+    Cette information inclut des détails sur les mesures budgétaires et montre exactement comment le Conseil du Trésor affecte les fonds aux ministères pour des mesures budgétaires précises ainsi que les programmes financés pour exécuter chacune des mesures.  
+
+budget_dept_item_name:
+  en: Sources and Uses of the Budget Implementation vote by Department
+  fr: Provenance et utilisation du crédit d’exécution du budget par ministère
+
+budget_program_item_name:
+  en: Budget Implementation vote allocations by Program
+  fr: Affectations du vote sur l’exécution du budget par programme
+

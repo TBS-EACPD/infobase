@@ -1,0 +1,107 @@
+diff_view_title:
+  en: Estimates Comparison
+  fr: Comparaison des budgets des dépenses
+
+
+diff_view_top_text:
+  transform: [handlebars, markdown]
+  en: A presentation of the recently tabled {{#if current_doc_is_mains}}Main Estimates{{else}}Supplementary Estimates {{current_sups_letter}}{{/if}} {{est_in_year}} with context from previously tabled estimate documents
+  fr: Une présentation du budget {{#if current_doc_is_mains}}Budget principal des dépenses{{else}}supplémentaire des dépenses {{current_sups_letter}}{{/if}} {{est_in_year}} récemment déposé avec de l'information contextuelle des budget de dépenses précédents
+
+current_doc_this_year:
+  transform: [handlebars]
+  en: |
+   {{#if current_doc_is_mains}}Main Estimates{{else}}Supplementary Estimates {{current_sups_letter}}{{/if}} <span class="nowrap">{{est_in_year}}</span>
+  fr: |
+    {{#if current_doc_is_mains}}Budget principal des dépenses{{else}}supplémentaire des dépenses {{current_sups_letter}}{{/if}} <span class="nowrap">{{est_in_year}}</span>
+
+new:
+  en: New Item
+  fr: Nouvel objet
+
+item_no_longer_active:
+  en: Inactive
+  fr: Inactif
+
+
+biv_footnote:
+  transform: [handlebars, markdown]
+  en: |
+    This **new** central vote will facilitate timely availability of supply for Budget 2018 measures carried out in 2018-19. For a breakout of this funding by measure and organization, see the InfoBase's [budget mesures section](#budget-measures/budget-measure).
+  fr: |
+    Ce nouveau crédit central aidera à rendre disponibles en temps oppurtun les fonds requis pour les mesures du budgets qui seront mises en œuvre en 2018-2019. Pour voir une répartition des fonds par mesure et par organisation, voir la [section des mesures budgétaires de l'InfoBase](#budget-measures/budget-measure).  
+
+
+no_historical_info:
+  en: No historical information available
+  fr: Aucune information historique n'est disponible
+
+
+last_year_authorities:
+  transform: [handlebars]
+  en: |
+    {{est_last_year}} Authorities
+  fr: Montants déposés en {{est_last_year}}
+
+this_year_authorities:
+  transform: [handlebars]
+  en: |
+    {{est_in_year}} Authorities
+  fr: Montants déposés en {{est_in_year}}
+
+
+doc_breakout_details:
+  en: Detailed Breakout by Estimate Mechanism
+  fr: Répartition détaillée par instrument des dépenses
+
+change_from_comparison_value:
+  transform: [handlebars]
+  en: Adjustment to prior <span class="nowrap">{{est_in_year}}</span> Authorities (%)
+  fr: Adaptation aux autorisations <span class="nowrap">{{est_in_year}}</span> précédent (%)
+
+previous_mains_comparison_value:
+  transform: [handlebars]
+  en: Comparison to Main Estimates <span class="nowrap">{{est_last_year}}</span>
+  fr: Comparaison avec le budget principale <span class="nowrap">{{est_in_year}}</span> (%)
+
+show_only_votes:
+  en: Only show voted items
+  fr: Seulement afficher les crédits votés
+
+
+showing_only_votes:
+  en: Only showing voted items
+  fr: Seulement les objet votés sont affichés
+
+
+voted_items:
+  en: Voted items
+  fr: Crédits votés
+
+stat_items:
+  en: Statutory items
+  fr: Objet Statutaires
+
+by_org:
+  en: By Organization
+  fr: Par organisation
+
+by_item_type:
+  en: By Item Type 
+  fr: Par type d'objet
+
+
+choose_grouping_scheme:
+  en: Item grouping scheme
+  fr: Regroupement des objets
+
+
+estimates_source_link:
+  transform: [handlebars]
+  en: Data available on <a href={{href}}> Open Data</a>
+  fr: Les données sont disponibles sur <a href={{href}}>données ouvertes</a>
+
+
+estimates_comparison_desc_meta_attr:
+  en: Find out more about in-year changes in funding by viewing the latest estimates document amounts alongside useful contextual information
+  fr: Renseignez-vous davantage sur les changements du financement de l'année en examiner les dernières documents budgétaires avec d'autres informations contextuelles

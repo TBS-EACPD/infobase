@@ -1,0 +1,49 @@
+version: 2
+jobs:
+  test:
+    docker:
+      - image: circleci/node:9.2.0
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package-lock.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+        
+      # run tests!
+      - run: npm test
+
+  deploy:
+    docker:
+      - image: google/cloud-sdk:latest
+
+    steps:
+      - checkout
+      - run: chmod +x ./.circleci/authenticate-gcloud.sh
+      - run: ./.circleci/authenticate-gcloud.sh
+      - setup_remote_docker
+      - run: chmod +x ./.circleci/deploy.sh
+      - run: ./.circleci/deploy.sh
+
+workflows:
+  version: 2
+  test-and-deploy:
+    jobs:
+      - test
+      #- deploy:
+      #    requires:
+      #      - test
+      #    filters:
+      #      branches:
+      #        only: master

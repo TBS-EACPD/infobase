@@ -1,0 +1,43 @@
+@import "../common_css/common-variables";
+
+.pull-down-accordion {
+  border: 2px solid $secondaryColor;
+  background-color: $secondaryColor;
+  border-radius: 10px;
+}
+
+.pull-down-accordion-header,
+.pull-down-accordion-footer {
+  font-size: 1.2em;
+  color: $backgroundColor;
+  cursor: pointer;
+  text-align: center; 
+}
+
+.pull-down-accordion-header {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px 5px 0px 0px;
+}
+
+.pull-down-accordion-body {
+  background-color: $backgroundColor;
+  overflow: hidden;
+}
+
+.pull-down-accordion-footer {
+  min-height: 10px;
+  padding: 5px 0 2px 0;
+  border-radius: 0 0 5px 5px;
+  border-top: 1px solid white;
+}
+
+.pull-down-accordion-expander {
+  @include unstyled-button;
+  color: $backgroundColor;
+  background-color: transparent;
+}
+.pull-down-accordion-expander:focus,
+.pull-down-accordion-expander:active {
+  border: 1px solid rgba(37,114,180,0.5);
+}

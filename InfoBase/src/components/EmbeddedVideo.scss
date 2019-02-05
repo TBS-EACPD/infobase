@@ -1,0 +1,28 @@
+.embedded-video-container {
+  margin: auto;
+
+  @media(min-width: 992px){
+    width: 60%;
+  }
+  @media(min-width: 767px) and (max-width: 991px){
+    width: 80%;
+  }
+  @media(max-width: 766px){
+    width: 100%;
+  }
+}
+
+.embedded-video {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+}
+
+.embedded-video > iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}

@@ -1,0 +1,8 @@
+FROM mhart/alpine-node:latest
+RUN apk update && apk upgrade && \
+    apk add --no-cache \
+    udev \
+    xvfb \
+    chromium \
+    ca-certificates
+RUN apk add --no-cache bash

@@ -1,0 +1,130 @@
+@import '../../common_css/common-variables';
+
+$partitionBackgroundColour: rgb(4, 18, 37);
+$partitionPopupColour: rgb(69, 161, 227);
+
+.partition-container {
+  padding-top: 10px;
+  padding-bottom: 110px;
+  margin-bottom: -50px; //counter-act .mrgn-bttm-xl on main
+  background-color: $partitionBackgroundColour;
+
+  & > .__partition__ {
+    margin-left: 20px;
+    margin-right: 100%;
+  }
+
+  & > .partition-bg-fill {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: $partitionBackgroundColour;
+    z-index: -1;
+
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      // Disable in IE, too choppy
+      position: relative;
+      width: 0%;
+      height: 0%;
+    }
+  }
+}
+
+.__partition__ > .partition-diagram-fader {
+  height: 100%;
+  width: inherit;
+  position: absolute;
+  background-color: rgba( $partitionBackgroundColour, 0.81);
+  border-radius: 10px;
+  z-index: 101;
+}
+
+.__partition__ > .partition-notes {
+  margin-bottom: 10px;
+  overflow-y: hidden;
+}
+
+.__partition__ > .partition-controls {
+  width: inherit;
+  min-width: inherit;
+  background-color: $partitionBackgroundColour;
+}
+
+.__partition__ > .partition-controls > .form-horizontal {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  padding: 15px;
+  padding-top: 9px;
+}
+
+
+.partition-control-element {
+  display: flex;
+  flex-direction: column;
+  padding-right: 9px;
+}
+
+.partition-control-element > .info-icon {
+  width: 70px;
+  margin-left: -10px;
+  z-index: 101;
+}
+
+.partition-control-element > text {
+  color: #fff;
+  font-size: 20px;
+  font-weight: $lightFontWeight;
+}
+
+.partition-control-element > input.form-control.search {
+  &:disabled {
+    cursor: default;
+  }
+  &::-ms-clear {
+    width: 0;
+    height: 0;
+  }
+}
+
+/* Over-ride bootstrap .form-control width style */
+.partition-control-element > select.form-control {
+  font-weight: $mediumFontWeight;
+}
+
+ul.partition-intro-two-col-list {
+  width: 100%;
+  display: inline-block;
+  & > li {
+    float: left;
+    width: 50%;
+    padding-right: 20px;
+  }
+}
+
+.partition-popup.partition-intro {
+  z-index: 102;
+  border: 3px solid $partitionPopupColour; 
+  top: 100px; 
+  left: 0px;
+  width: 800px;
+}
+.partition-popup.partition-intro > .intro-popup-color { 
+  color:$partitionPopupColour;
+}
+.partition-popup.partition-intro > .popup-intro-text {
+  line-height:1; 
+  text-align:left; 
+}
+.partition-popup.partition-intro > .popup-pointer-up {
+  top: -40px;
+  left: 12px;
+  position: absolute;
+	width: 0;
+	height: 0;
+	border-left: 25px solid transparent;
+	border-bottom: 40px solid #efefef;
+	border-right: 25px solid transparent;
+}

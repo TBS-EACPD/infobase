@@ -1,0 +1,128 @@
+@import '../common_css/common-variables';
+
+
+.table-rpb {
+  margin: 0 auto;
+  min-width: 75%;
+}
+
+
+li.select-list-item {
+  margin: 5px 0;
+}
+
+@media(min-width: 992px){
+  .rpb-config-item.col-selection.simple {
+    max-height: 500px;
+    overflow-y: auto; 
+  }
+
+  .rpb-config-item.col-selection.granular {
+    max-height: 500px;
+    overflow-y: auto; 
+  }
+
+  .md-half-width{
+    min-width: 50%;
+    display: inline-block;
+    padding-left: 20px;
+    padding-right: 10px; 
+  }
+
+  .md-gutter-right {
+    padding-right: 10px;
+  }
+
+  .md-gutter-left {
+    padding-left: 10px;
+  }
+
+}
+
+.rpb-option-fancy-ul-container {
+  padding: 14px 15px 12px 20px; 
+  width: 100%;
+  & > .fancy-ul {
+    margin-bottom: 0px;
+  }
+}
+
+.graph_report { 
+  border: 1px solid rgba(37,114,180,0.9) ;
+}
+
+.rpb-config-item {
+  margin-right: 0px;
+  margin-bottom: 5px;
+  padding: 5px;
+  min-height: 46px;
+  & > .row {
+    margin: 0px;
+  }
+}
+
+.rpb-config-header {
+  display: block;
+  padding: 3px 0;
+  font-size: 12px;
+  font-weight: $heavyFontWeight;
+  line-height: 20px;
+  color: rgb(35, 68, 126);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+
+.rpb-simple-select {
+  width: 100%;
+  margin-top: -6px;
+}
+
+#rpb_graph_legend > div {
+  height: 240px !important;
+}
+
+.graph_total_and_col_expl {
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 1px solid #7b8c9d;
+  background-color: $backgroundColor;
+  border-radius: 10px;
+  height: 240px; 
+  padding: 25px; 
+}
+
+
+
+
+.rpb-data-cell {
+  text-align: right;
+}
+
+.rpb-key-cell {
+  text-align: left;
+}
+
+/* allows bootstrap columns to stick together */
+@media(min-width: 992px){
+  .md-no-right-gutter {
+    padding-right: 0;
+  }
+  .md-no-left-gutter {
+    padding-left: 0;
+  }
+}
+
+
+.pagination-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  & > .pagination > li > span {
+    padding: 10px 16px;
+  } 
+}
+
+.row-opition-content-search > div > div > .input-lg {
+  height: 38px;
+  line-height: 0.9;
+}

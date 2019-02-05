@@ -1,0 +1,23 @@
+table.tombstone-table {
+  background-color: transparent;
+  width: 100%;
+}
+table.tombstone-table > tbody > tr > td {
+  border: none;
+  border-bottom: 1px #ccc solid;
+  padding: 5px 0;
+}
+table.tombstone-table > tbody > tr:last-child > td {
+  border: none !important;
+}
+table.tombstone-table > tbody > tr > td > p {
+  margin: 0px;
+}
+
+dl.tombstone-data-list {
+  margin-bottom: 0px;
+  & > dt:first-of-type,
+  & > dd:first-of-type {
+    border-top: none;
+  }
+}

@@ -1,0 +1,76 @@
+drr_summary_title:
+  transform: [handlebars]
+  en: |
+    {{pa_last_year}} Department Results Report Summary
+  fr: |
+    Sommaire des rapports sur les résultats ministériels de {{pa_last_year}}
+
+
+# this a multi-level text 
+drr_summary_text_intro:
+  transform: [handlebars,markdown]
+  en: |
+    {{#if is_gov}}
+      In {{pa_last_year}}, **{{num_depts}}** organizations sought to achieve **{{fmt_big_int_real drr17_results}}** results.
+    {{else}}
+      In {{pa_last_year}}, {{subj_name subject}} sought to achieve **{{fmt_big_int_real drr17_results}}** results.
+    {{/if}}
+    Progress towards meeting these results was measured using **{{fmt_big_int_real drr17_total}}** {{gl_tt "indicators" "IND_RESULT"}}, {{#if drr17_past_total}} **{{fmt_big_int_real drr17_past_total}}**
+    of which were seeking to achieve their target **by** March 31, {{pa_last_year_short_second}}{{#if drr17_future_total}} and{{else}}.{{/if}}
+    {{/if}}{{#if drr17_future_total}} **{{fmt_big_int_real drr17_future_total}}** of which are seeking to achieve their target **after** March 31, {{pa_last_year_short_second}}
+    or on an **ongoing** basis.{{/if}}
+  fr: |
+    {{#if is_gov}}
+      En {{pa_last_year}}, **{{num_depts}}** organisations ont cherché à obtenir **{{fmt_big_int_real drr17_results}}** résultats.
+    {{else}}
+      En {{pa_last_year}}, {{subj_name subject}} a cherché à atteindre **{{fmt_big_int_real drr17_results}}** résultats.
+    {{/if}}
+    Les progrès accomplis dans l'atteinte de ces résultats ont été mesurés à l’aide de **{{fmt_big_int_real drr17_total}}** {{gl_tt "indicateurs" "IND_RESULT"}}, {{#if drr17_past_total}} dont
+    **{{fmt_big_int_real drr17_past_total}}** avaient des cibles à **atteindre au plus tard** le 31 mars {{pa_last_year_short_second}}{{#if drr17_future_total}} et{{else}}.{{/if}}
+    {{/if}}{{#if drr17_future_total}} dont **{{fmt_big_int_real drr17_future_total}}** visaient à atteindre leurs cibles **continuellement** ou **après** mars 31
+    {{pa_last_year_short_second}}.{{/if}}
+drr_summary_text_summary_left:
+  transform: [handlebars,markdown]
+  en: |
+    {{#if drr17_past_total}}
+    Of the **{{fmt_big_int_real drr17_past_total}}** indicators that sought to achieve their target by March 31, {{pa_last_year_short_second}}:
+      {{#if drr17_indicators_met}}* **{{fmt_big_int_real drr17_indicators_met}}** (**{{fmt_percentage1 (divide drr17_indicators_met drr17_past_total)}}**) {{gl_tt "met" "RESULTS_MET"}} their target{{/if}}
+      {{#if drr17_indicators_not_met}}* **{{fmt_big_int_real drr17_indicators_not_met}}** (**{{fmt_percentage1 (divide drr17_indicators_not_met drr17_past_total)}}**) did {{gl_tt "not meet" "RESULTS_NOT_MET"}} their target{{/if}}
+      {{#if drr17_indicators_not_available}}* **{{fmt_big_int_real drr17_indicators_not_available}}** (**{{fmt_percentage1 (divide drr17_indicators_not_available drr17_past_total)}}**) have {{gl_tt "no result available" "RESULTS_NOT_AVAILABLE"}}{{/if}}
+    {{/if}}
+  fr: |
+    {{#if drr17_past_total}}
+    De ces **{{fmt_big_int_real drr17_past_total}}** indicateurs qui devaient atteindre leur cible au plus tard le 31 mars {{pa_last_year_short_second}}:
+      {{#if drr17_indicators_met}}* **{{fmt_big_int_real drr17_indicators_met}}** (**{{fmt_percentage1 (divide drr17_indicators_met drr17_past_total)}}**) {{gl_tt "ont atteint" "RESULTS_MET"}} leur cible{{/if}}
+      {{#if drr17_indicators_not_met}}* **{{fmt_big_int_real drr17_indicators_not_met}}** (**{{fmt_percentage1 (divide drr17_indicators_not_met drr17_past_total)}}**) {{gl_tt "n’ont pas atteint" "RESULTS_NOT_MET"}} leur cible{{/if}}
+      {{#if drr17_indicators_not_available}}* **{{fmt_big_int_real drr17_indicators_not_available}}** (**{{fmt_percentage1 (divide drr17_indicators_not_available drr17_past_total)}}**) {{gl_tt "n’ont pas de résultat disponible" "RESULTS_NOT_AVAILABLE"}}{{/if}}
+    {{/if}}
+
+gov_drr_summary_org_table_text:
+  transform: [handlebars,markdown]
+  en: |
+    To learn more on the result and their associated performance indicators for an organization, 
+    simply click on the name of the organization you want to explore to be redirected toward their specific results infographic.
+
+    Following corrections to their 2017-18 Departmental Results Report datasets, the indicators for **10** organizations have been updated on the GC InfoBase as of **December 12, 2018**.
+    See the footnotes below for a list of effected organizations.
+    
+  fr: |
+    Pour en savoir plus sur les résultats et les indicateurs de rendement d'une organisation, 
+    il suffit de cliquer sur le nom de l'organisation pour être dirigé vers l'infographie où figurent ses résultats particuliers.
+
+    À la suite des corrections apportées aux données du Rapport ministériel sur les résultats 2017-2018, les indicateurs pour **10** organisations ont été mis à jour dans l'InfoBase du GC en date du **12 décembre 2018**. 
+    Voir les notes de bas de page ci-dessous pour la liste de ces 10 organisations.
+
+
+
+show_all_orgs:
+  en: Show all organizations
+  fr: Montrer toutes les organisations
+
+results_icon_array_title:
+  transform: [handlebars]
+  en: |
+    {{pa_last_year}} Performance Indicators
+  fr: |
+    Indicateurs de performance {{pa_last_year}}

@@ -1,0 +1,178 @@
+welcome:
+  en: GC InfoBase
+  fr: InfoBase du GC
+
+home_finance_title:
+  en: Finances
+  fr: Finances
+
+home_ppl_title:
+  en: People
+  fr: Personnel
+
+home_results_title:
+  en: Results
+  fr: Résultats
+
+home_sub_title:
+  en: Find the latest information on all government finances, people and results
+  fr: Trouver l'information la plus récente sur les finances, l'effectif et les résultats du gouvernement
+
+partition_home_title:
+  en: The government at a glance
+  fr: Panorama de l'administration publique
+
+partition_home_text:
+  en: See how government resources flow across different tagging schemes
+  fr: Voir comment les ressources gouvernementales sont distribuées d'un mécanisme à l'autre
+
+budget_home_title:
+  en: Budget 2018 Tracker
+  fr: Suivi budgétaire de 2018
+
+budget_home_text:
+  en: Explore a breakout of the new Budget 2018 measures which are being funded through Estimates.
+  fr: Découvrir une visualisation des nouvelles mesures du Budget 2018 qui seront financées par le Budget des dépenses.
+
+planet_home_title:
+  en: Bubble Explorer
+  fr: Diagrammes circulaires
+
+planet_home_text:
+  en: Compare organizations by how much they spend and how many people they employ
+  fr: Comparer les dépenses des organisations et le nombre d'employés à leur service
+
+home_search_bar_title:
+  en: Jump to an infographic
+  fr: Infographie rapide
+
+estimates_comp_home_title:
+  en: Estimates Comparison
+  fr: Comparaison des budgets principal de dépenses
+
+estimates_comp_home_text:
+  en: See how the government's recent supplementary spending plan compares to the original plan
+  fr: Voir comment le plan de dépenses supplémentaire du gouvernement compare à leur plan principal
+
+featured_data_title:
+  en: Quick links
+  fr: Liens directs
+
+explorer_home_title: 
+  en: Tag Explorer
+  fr: Explorer les étiquettes
+
+explorer_home_text: 
+  en: Explore data from your area of interest by organization, program, or keyword "tag"
+  fr: Recherche par organisation, programme ou mot clé pour étudier les données dans le domaine qui vous intéresse
+
+other_ways_of_exploring_title:
+  en: Other ways to explore the data
+  fr: Autres moyens d'exploration des données
+
+dashboard_home:
+  en: Search by topic to build your own customized dashboard
+  fr: Recherche par sujet pour bâtir un tableau de bord personnalisé
+
+home_build_a_report: 
+  en: Report Builder
+  fr: Outil de création de rapport
+
+report_builder_home_desc:
+  en: Create a customized and exportable report of the data you want to analyze
+  fr: Créer un rapport adapté et exportable sur les données que vous voulez analyser
+
+igoc_home_title:
+  en: List of organizations (A to Z)
+  fr: Liste des organisations (A à Z)
+
+igoc_home_desc:
+  en: Consult a comprehensive listing of federal organizations and interests
+  fr: Une liste exhaustive des organisations et intérêts fédéraux
+
+glossary_home_title:
+  en: Glossary
+  fr: Glossaire
+
+glossary_home_desc:
+  en: Search a list of definitions for terms used in the InfoBase
+  fr: Liste interrogeable des définitions pour les termes employés dans l'InfoBase
+
+metadata_home_title:
+  en: Datasets
+  fr: Données
+
+metadata_home_desc: 
+  en: Find information on, and external links to, the InfoBase's data sources
+  fr: Voir le complément d'information sur les données et sur les liens vers des sites de données ouvertes
+
+whats_new:
+  en: What's new?
+  fr: Quoi de neuf?
+
+home_featured_row_title:
+  en: Featured content
+  fr: En vedette
+
+home_explore_row_title:
+  en: Search and build
+  fr: Chercher et construire
+
+home_misc_row_title:
+  en: Helpful resources 
+  fr: Ressources utiles
+
+about_home_title:
+  en: About Us
+  fr: À propos de nous
+
+about_home_desc:
+  en: Learn more about our team, principles, data, and technology!
+  fr: En apprendre d'avantage sur notre équipe, nos principes, nos données et technologies!
+
+survey_home_desc:
+  en: Help us make improvements by telling us about your experience!
+  fr: Aidez-nous à l’améliorer en nous relatant votre expérience!
+
+check_home_link:
+  en: Check it out!
+  fr: Consultez-le!
+
+home_desc_meta_attr:
+  en: The best place to find answers about the federal government like how much is being spent, employee demographics and government results. We use visuals to make complex data a simple story. 
+  fr: Meilleur endroit pour trouver des réponses sur le gouvernement fédéral, comme le montant des dépenses, le profil démographique des employés et les résultats obtenus. Nous utilisons des graphiques pour faire un récit simple de données complexes. 
+
+
+## Featured content titles
+
+quick_link_DRR_1718:
+  en: 2017-18 Departmental Results Reports
+  fr: Rapport sur les résultats ministériels de 2017-2018
+
+quick_link_auth_and_exp:
+  en: 2017-18 Authorities and Expenditures
+  fr: Autorisations et dépenses de 2017-2018
+
+quick_link_exp_by_so:
+  en: 2017-18 Expenditures by Standard Object
+  fr: Dépenses par article courant de 2017-2018
+
+quick_link_spending_by_program:
+  en: 2017-18 Spending by Program
+  fr: Dépenses par Programme de 2017-2018
+
+quick_link_transfer_payment:
+  en: 2017-18 Transfer Payments
+  fr: Paiements de transfert de 2017-2018
+
+quick_link_prog_by_vote_stat:
+  en: 2017-18 Program expenditures by authority type
+  fr: Dépenses de programme par type d'autorisation de 2017-2018
+
+quick_link_prog_by_so:
+  en: 2017-18 Program expenditures by standard object
+  fr: Dépenses de programme par articles courants de 2017-2018
+
+quick_link_youtube_video:
+  en: GC InfoBase at a glance (introduction video)
+  fr: InfoBase du GC en un coup d’œil (vidéo d'introduction)

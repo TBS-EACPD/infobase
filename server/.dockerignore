@@ -1,0 +1,15 @@
+node_modules/
+npm-debug.log
+.git
+.gitignore
+.DS_Store
+*.test.js
+src/set_up_tests.js
+README.md
+jest.config.js
+__snapshots__
+*.snap
+coverage/
+docker-compose.yml
+Dockerfile
+.dockerignore

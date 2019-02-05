@@ -1,0 +1,155 @@
+@import "../../common_css/common-variables";
+
+.quadrant-dl > div:first-child {
+  float:left;
+  border-bottom: none;
+  border-right: none;
+}
+
+.quadrant-dl > div:nth-child(2) {
+  float:right;
+  border-bottom: none;
+}
+
+.quadrant-dl > div:nth-child(3) {
+  float:left;
+  border-right: none;
+}
+
+.quadrant-dl > div:nth-child(4) {
+  float:right;  
+}
+
+.quadrant-dl{
+  overflow: visible;
+  margin: 0;
+}
+.quadrant-dl > div {
+  width: 50%;
+}
+
+.number-box {
+  height: 125px;
+  border: 1px solid #ccc;
+  margin: 0;
+
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  background-color: rgba(86, 134, 205, 0.9);
+  border: 1px solid rgba(37,114,180,0.9);
+}
+.quadrant-dl > div > dt,
+.line-quadrant-dl > div > dt {
+  display: block;
+  order: 2;
+  font-weight: $mediumFontWeight;
+}
+.quadrant-dl > div > dd,
+.line-quadrant-dl > div > dd {
+  display: flex;
+  order: 1;
+  align-items: center;
+  justify-content: center;
+  font-size : 40px;
+  margin-bottom: 0px;
+}
+
+/* TODO: get rid of this elsewhere and then delete it */
+.results-separator {
+  margin: 20px 60px 20px 60px;
+  border-top: 1px solid #ccc;
+}
+
+
+ul.indicator-list > li {
+  @include unstyled-list;
+  padding: 10px;
+  margin-left: -15px;
+  margin-right: 20px;
+  background-color: inherit;
+}
+
+ul.indicator-list > li:not(:first-child) {
+  border-top: 2px solid #bbb;
+  margin-top: 6rem;
+}
+
+.indicator-item__header {
+  font-size: 1.2em;
+  text-align:center;
+  margin-top: 10px; 
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+/* mostly resetting bootstrap's normalization of dd/dt */
+
+
+dl.indicator-item__dl {
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+dl.indicator-item__dl dt+dd {
+  padding-bottom: 10px;
+}
+
+@media(min-width: 768px){
+  dl.indicator-item__dl > dd,
+  dl.indicator-item__dl > dt {
+    margin-bottom:0;
+  }
+
+  dl.indicator-item__dl > dt:first-of-type,
+  dl.indicator-item__dl > dd:first-of-type {
+    border-top: none;
+  }
+}
+
+.status-icon-array {
+  @media(max-width: 570px){
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+.inline-status-icon {
+  padding-left: 6px;
+  padding-right: 5px;
+  font-size: 1.2em;
+  white-space: nowrap;
+  position: relative;
+}
+.inline-status-icon__count {
+  color: #000;
+  position: absolute;
+  left: 100%;
+  margin-left: -8px;
+  bottom: 2px;
+  font-size: 60%;
+}
+
+/* color classes for icon-array viz */
+.results-icon-array-pass {
+  background-color:hsla(120, 85%, 30%, 0.8);
+}
+
+.results-icon-array-fail {
+  background-color: hsla(0, 100%, 55%, 0.8);
+}
+
+.results-icon-array-na {
+  background-color:hsla(39, 100%, 50%, 0.8);
+}
+
+.results-icon-array-neutral {
+  background-color:hsla(39, 5%, 50%, 0.8);
+}
+
+//used in results-explorer 
+.indicator-container-container {
+  padding-right:10px;
+  padding-top:10px;
+}

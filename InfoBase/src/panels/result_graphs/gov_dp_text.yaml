@@ -1,0 +1,33 @@
+gov_dp_summary_title:
+  transform: [handlebars]
+  en: Summary of planned results ({{planning_year_1}})
+  fr: Sommaire des résultats escomptés ({{planning_year_1}})
+
+
+gov_dp_text:
+  transform: [handlebars,markdown]
+  en: |
+    Starting in April 2018, all organizations have migrated to a new {{gl_tt "reporting structure" "DRF"}} based on results. 
+    
+    Organizations group their {{gl_tt "programs" "PROG"}} and {{gl_tt "departmental results" "DR"}} by their {{gl_tt "Core Responsibilities" "CR"}}. In addition, programs also have {{gl_tt "results" "PO"}}. Progress for each result is measured by {{gl_tt "indicator targets" "IND_RESULT"}}. 
+
+
+    This year ({{planning_year_1}}), organizations have **{{fmt_big_int_real dp18_results}}** results to achieve, measured by **{{fmt_big_int_real dp18_indicators}}** indicators. Assessed performance against these indicators will be reported in fall 2019.
+  fr: |
+    En avril 2018, les organisations de l’administration publique ont adopté une {{gl_tt "nouvelle structure redditionnelle" "DRF"}} fondée sur les résultats.
+
+    Les organisations groupent leurs {{gl_tt "programmes" "PROG"}} et {{gl_tt "résultats ministériels" "DR"}} en fonction de leurs {{gl_tt "responsabilités essentielles" "CR"}}. De plus, les programmes doivent aussi obtenir des {{gl_tt "résultats" "PO"}} et chaque résultat est mesuré à l’aide des cibles figurant aux {{gl_tt "indicateurs" "IND_RESULT"}}.
+
+    Cette année ({{planning_year_1}}), les organisations comptent atteindre **{{fmt_big_int_real dp18_results}}** résultats, mesurés par **{{fmt_big_int_real dp18_indicators}}** indicateurs. L'évaluation du rendement par rapport à ces indicateurs fera l’objet d’un rapport à l’automne 2019.
+
+
+gov_dp_above_search_bar_text:
+  transform: [handlebars,markdown]
+  en: |
+    Planned results and indicators for a particular organization can be found in its infographic
+  fr: |
+    Vous pouvez trouver les résultats escomptés d'une organisation et les indicateurs connexes dans son infographie.
+
+gov_dp_search_bar_placeholder:
+  en: Search for an organization to see its results
+  fr: Recherchez une organisation pour visualiser ses résultats

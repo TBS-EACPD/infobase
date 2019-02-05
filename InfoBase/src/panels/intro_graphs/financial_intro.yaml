@@ -1,0 +1,182 @@
+applied_title_q:
+  transform: [handlebars, markdown]
+  en: Other names for this organization?
+  fr: Autre nom pour cette organisation?
+    
+
+applied_title_a:
+  transform: [handlebars, markdown]
+  en: |
+    **{{subject.applied_title}}**
+
+    In some cases, the InfoBase will display two names for an organization—a legal title and an applied title. An organization’s legal title is the name that appears in its enabling legislation (act), proclamation, order in council, or other instrument used to create a branch of government.  The applied name is used in communications and is therefore the title that most people associate with the organization.
+  
+  fr: |
+    **{{subject.applied_title}}**
+
+    Dans certain cas l’InfoBase utilise deux noms pour une seule organisation—l’appellation légale et le titre d’usage. L’appellation légale est le nom figurant dans la loi d’habilitation, la proclamation, le décret ou tout autre instrument utilisé pour créer un organisme gouvernemental.  Le titre d’usage est utilisé pour toutes les communications et il est donc plus souvent associé à l’organisation.
+
+
+where_does_authority_come_from_q:
+  en: |
+    Where does the authority to spend public funds come from?
+  fr: |
+    D’où vient l’autorisation de dépenser du gouvernement?
+
+where_does_authority_come_from_a:
+  transform: [markdown]
+  en: |
+    Most people associate Government of Canada spending with its annual Budget. While the Budget outlines the Government of Canada's fiscal, social and economic policies and priorities for the next fiscal year, it does not authorize it to spend.
+
+
+    **Expenditures made by government are authorized by Act of Parliament.**
+  fr: |
+    La plupart des gens associent les dépenses du gouvernement du Canada à son Budget annuel. Bien que le Budget fasse état des politiques et des priorités budgétaires, sociales et économiques du gouvernement du Canada pour le prochain exercice financier, il n’autorise pas celui-ci à dépenser. 
+
+
+    **Les dépenses du gouvernement sont autorisées par une loi du Parlement.**
+
+
+what_are_voted_auth_q:
+  en: |
+    What are "voted" authorities?
+  fr: |
+    Que sont les autorisations «votées»?
+what_are_voted_auth_a:
+  en: |
+    Voted spending authorities are sought through appropriation (or "supply") acts tabled in Parliament
+  fr: |
+    Les autorisations de dépenses votées sont demandées par l’entremise des lois de crédits déposées au Parlement. 
+
+
+what_are_stat_auth_q:
+  en: |
+    What are "statutory" authorities?
+  fr: |
+    Que sont les autorités «législatives»?
+
+what_are_stat_auth_a:
+  en: |
+    Statutory spending authorities come from specific statutes. They allow the government to spend on a continual basis without the need to vote on an appropriation act every fiscal year.
+  fr: |
+    Les pouvoirs législatifs de dépenser proviennent de lois précises. Ils permettent au gouvernement de dépenser sur une base continue sans avoir à voter sur une loi de crédits à chaque exercice financier.
+
+what_are_mains_q:
+  en: |
+    What are the Main Estimates?
+  fr: |
+    Qu’est-ce que le Budget principal des dépenses?
+
+what_are_mains_a:
+  en: |
+    Tabled on or before March 1, they present each organization's planned spending (voted and statutory) for the coming fiscal year (April to March 31). The government seeks the authority to spend the non-statutory planned spending 
+    outlined in the Main Estimates, and any subsequent supplementary estimates through associated appropriation acts.
+  fr: |
+    Déposé le 1er mars ou avant, il présente les dépenses prévues (votées et législatives) de chaque organisme pour le prochain exercice (d’avril au 31 mars). Le gouvernement demande alors le pouvoir d'effectuer les dépenses non législatives prévues dans le Budget 
+    principal des dépenses, et dans tout Budget supplémentaire des dépenses subséquent, en vertu de lois de crédits.
+what_are_supps_q:
+  en: |
+    What are Supplementary Estimates?
+  fr: |
+    Qu’est-ce que le Budget supplémentaire des dépenses?
+  
+what_are_supps_a:
+  en: |
+    Changes and updates to planned spending outlined in the Main Estimates are presented in supplementary estimates, which are identified in alphabetical sequence (A, B, C, etc.). The government seeks the authority to spend non-statutory 
+    planned spending outlined in the Main Estimates and any subsequent supplementary estimates through associated appropriation acts.
+  fr: |
+    Les changements et les mises à jour des dépenses prévues du Budget principal des dépenses sont indiqués dans le Budget supplémentaire des dépenses, et sont classés par ordre alphabétique (A, B, C, etc.). Le gouvernement demande alors le pouvoir d'effectuer les dépenses non législatives prévues dans le Budget 
+    principal des dépenses, et dans tout Budget supplémentaire des dépenses subséquent.
+
+what_are_exps_q:
+  en: |
+    What are "expenditures"?
+  fr: |
+    Que sont les «dépenses»?
+
+what_are_exps_a:
+  en: |
+    Authorities from Parliament represent how much the government is allowed to spend. Expenditures represent how much the government actually spent and are reported through the Public Accounts of Canada.
+  fr: |
+    Les autorisations parlementaires représentent les montants que le gouvernement est autorisé à dépenser.  Les dépenses correspondent aux montants que le gouvernement a réellement dépensés et qui sont reportés chaque année par l’intermédiaire des Comptes publics du Canada.
+
+what_is_prog_q:
+  en: |
+    What is a Program?
+  fr: |
+    Qu’est-ce qu’un Programme?
+
+what_is_prog_a:
+  en: |
+    A Program is a group of related activities and resource inputs within a federal organization that are reported on as a budgetary unit.
+  fr: |
+    Un Programme constitue un groupe de ressources et d’activités connexes au sein d’une organisation fédérale, lesquelles sont déclarées comme une unité budgétaire.
+
+what_is_so_q:
+  en: |
+    What is a standard object?
+  fr: |
+    Qu’est-ce qu’un article courant?
+
+what_is_so_a:
+  transform: [handlebars,markdown]
+  en: |
+    Standard objects are the highest level of classification for categorizing expenditures used for parliamentary, management and reporting purposes. The allocation of the categories by standard object is as follow:
+    
+    
+     1. Personnel
+     2. Transportation and communications
+     3. Information
+     4. Professional and special services
+     5. Rentals
+     6. Purchased repairs and maintenance
+     7. Utilities, material and supplies
+     8. Acquisition of land, buildings and works
+     9. Acquisition of machinery and equipment
+     10. Transfer payments
+     11. Public debt charge
+     12. Other subsidies and payments
+  
+  fr: |
+    Les articles courants représentent le niveau le plus élevé de la classification des catégories de dépenses qu'utilisent le Parlement et la gestion, et servent à rapporter. Ils s'appliquent aux dépenses seulement. La répartition des catégories par article courant est comme suit :
+
+    1. Personnel
+    2. Transports et communications
+    3. Information
+    4. Services professionnels et spéciaux
+    5. Location
+    6. Réparation et entretien
+    7. Services publics, fournitures et approvisionnements
+    8. Acquisition de terrains, de bâtiments et travaux
+    9. Acquisition de machines et de matériel
+    10. Paiements de transfert
+    11. Frais de la dette publique
+    12. Autres subventions et paiements
+    
+
+what_is_fy_q:
+  en: Why does a year seem to span over two in the InfoBase (e.g. 2017-18)?
+  fr: Pourquoi une année semble s’étendre sur deux dans l’InfoBase (p. ex. 2017-2018)?
+
+what_is_fy_a:
+  transform: [handlebars,markdown]
+  en: |
+    The Government of Canada fiscal year runs from April 1 to March 31 of the following year. So for the fiscal year beginning April 1, 2017 and ending March 31, 2018, the InfoBase would label the year as 2017-18.
+  fr: |
+    L’exercice du Gouvernement du Canada s'étend du 1er avril au 31 mars. Ainsi, pour l’exercice commençant le 1er avril 2017 et se terminant le 31 mars 2018, l’InfoBase va présenter l’année comme 2017-2018.
+
+
+  
+why_cant_i_see_prov_spend_q:
+  en: |
+    If the InfoBase provides information on government spending, why can't I find information on how much my province or territory spends?
+  fr: |
+    Si l'InfoBase fournit des renseignements sur les dépenses du gouvernement, pourquoi ne puis-je trouver des renseignements sur les dépenses d'une province ou d'un territoire en particulier?
+
+why_cant_i_see_prov_spend_a:
+  transform:  [handlebars, markdown]
+  en: |
+    The InfoBase contains information on all organizations that receive approporations from the Parliament of Canada, so it does not include spending from other levels of government. For ease of use, the term "government" and "government spending" in the InfoBase encompasses spending by three independent arms of Canada's government system--the judiciary, the legislature, and the executive--unless otherwise specified.
+  fr: |
+    L'InfoBase contient des renseignements sur toutes les organisations qui reçoivent des crédits du Parlement du Canada. Donc, il ne contient pas les dépenses d'autres ordres du gouvernement. À des fins de convivialité, le terme "gouvernement" et "dépenses du gouvernement" dans l'InfoBase englobe les dépenses des trois pouvoirs indépendant du système gouvernemental du gouvernement du Canada, soit les pouvoirs exécutives, législatives et judiciaires, sauf indication contraire.
+

@@ -1,0 +1,653 @@
+@import "../common_css/common-variables";
+
+html {
+  font-family: sans-serif;
+  font-size: 10px;
+  -webkit-tap-highlight-color: transparent;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.4375;
+  color: #333333;
+  background-color: #fdfdfd;
+  margin: 0; }
+
+h1 {
+  border-bottom: 3px solid $highlightColor;
+}
+
+hr {
+  //default is #eee, a little too bright
+  border-color: #ddd;
+}
+
+/* tooltips */
+.tooltip {
+  opacity: 1;
+
+  &[x-placement=bottom]{
+    margin-top: 7px;
+
+    & > .tooltip-arrow {
+      top: -6px;
+      border-width: 0px 6px 6px 6px;
+      border-bottom-color: hsla(205, 40%, 50%, 1);
+    }
+  }
+
+  &[x-placement=top] {
+    top: -5px !important;
+
+    & > .tooltip-arrow {
+      bottom: -6px;
+      border-width: 6px 6px 0px 6px;
+      border-top-color: hsla(205, 40%, 50%, 1);
+    }
+  }
+}
+
+.tooltip-inner {
+  color: #fff;
+  background-color: hsla(205, 40%, 50%, 1);
+  text-align: left !important;
+  border: none;
+  padding: 1px 20px;
+  border-radius: 5px;
+
+  @media (min-width:1200px){
+    max-width: 600px !important;
+    line-height: 1.6em;
+  }
+  @media (min-width:900px) and (max-width: 1199px) { max-width: 60vw !important }
+  @media (max-width:899px){ max-width: 90vw !important }
+}
+
+.pop.in, .fade.in {
+  opacity: 1;
+  visibility: visible; 
+}
+
+.glossary-tooltip-link,
+.glossary-tooltip-link:visited {
+  text-decoration: none !important;
+  border-bottom: 2px dashed #135bbb !important;
+  color: #135bbb !important;
+  transition: width 2s;
+}
+
+/* reseting WET styles*/
+.link-unstyled,
+.link-unstyled:link,
+.link-unstyled:hover,
+.link-unstyled:visited {
+  color: inherit;
+  text-decoration: inherit;
+}
+.clickable {
+  cursor: pointer;
+}
+
+
+.button-unstyled {
+  border: none;
+  background-color: inherit;
+  outline: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+
+.breadcrumb-external-link {
+  opacity: 0.7;
+}
+
+#wb-lng {
+  padding-top: 0 !important;
+}
+
+.wb-slc {
+  z-index: 0 !important;
+}
+
+.wb-sl {
+  z-index: 0 !important; 
+}
+
+
+@media(max-width:1000px) {
+  main.container {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}
+
+#app {
+  border-top: 4px;
+  min-height: 400px;
+}
+
+div#app:focus {
+  outline: none!important;
+}
+
+h1 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+h2 {
+  font-size: 140%;
+  margin-top: 20px;
+}
+#app {
+  font-size: 90%
+}
+
+.font-large {
+  font-size: 100%;
+}
+.font-xlarge {
+  font-size: 120%;
+}
+.font-small {
+  font-size: 80%;
+}
+.font-xsmall {
+  font-size: 70%;
+}
+.font-smaller {
+  font-size: 90%;
+}
+
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.bold {
+  font-weight: $heavyFontWeight;
+}
+.bolder {
+  font-weight: bolder;
+}
+
+.gradient {
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.75));
+}
+table.border,
+table.border > tbody > tr > td {
+  border: none;
+  border-collapse: separate;
+  border-spacing: 5px;
+  font-size: 13px;
+}
+.right-border {
+  border-right: 1px solid #CCC;
+}                   
+.input-sm {
+height: 25px;
+font-size: 12px;
+line-height: 1;
+}
+div.label {
+  border: none;
+  line-height: 1.5;
+  color: black;
+}
+.border-bottom {
+ border-bottom: 1px solid #ccc;
+}
+.paddng-bttm-md {
+  padding-bottom: 10px;
+}
+.line {
+  width : 100%
+}
+
+
+.huge_panel_text {
+  font-size: 1.8em;
+  line-height: 2.2em;
+}
+
+.large_panel_text {
+  font-size: 1.4em;
+  line-height: 1.8em;
+}
+
+.medium_panel_text {
+  font-size: 1.2em;
+  line-height: 1.8em;
+}
+
+/* our app-wide a:visited: black is overriding all the bootstrap white on dark blue styles...  */
+.nav-pills > li.active > a {
+  background-color: #284162 !important;
+  color: white !important;
+}
+
+.small_panel_text {
+  font-size: 0.8em;
+  line-height: normal;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+
+.btn-success, .btn-info, .btn-ib-info, .btn-danger, .btn-warning {
+  color: white !important;
+}
+
+/* to be used with light-background */
+a.btn-ib-light {
+  color: inherit;
+}
+.btn-ib-light {
+  background-color: inherit;
+  border: 2px solid $buttonPrimaryColor;
+  color: inherit;
+  border-radius: 10px; 
+  
+  &:focus,
+  &:active,
+  &:hover {
+    background-color: $buttonPrimaryColor;
+    color: $backgroundColor !important;
+  }
+}
+
+.btn-ib-primary { 
+   background-color: $backgroundColor;
+   border: 2px solid $buttonPrimaryColor;
+   color: $buttonPrimaryColor !important;
+   border-radius: 10px;
+}
+.btn-ib-primary:hover,
+.btn-ib-primary:active,
+.btn-ib-primary:focus { 
+  background-color: $buttonPrimaryColor;
+  color: $backgroundColor !important;
+}
+.btn-ib-primary.btn-ib-primary--selected { 
+  background-color: $buttonPrimaryColor;
+  color: $backgroundColor !important;
+  cursor: default;
+}
+.btn-ib-info {
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+
+.btn-height-clipper {
+  background-color: rgb(202,219,228);
+  border-color: rgb(51, 80, 117);
+  padding: 0px 40px;
+  font-weight: $heavyFontWeight;
+  border-width: 2px;
+}
+
+li.list-group-item {
+  border: 1px solid #7b8b9e;
+  &:first-child {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  &:last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+}
+.list-group-item:hover:not(.active),
+.list-group-item:focus:not(.active) {
+  color: #555;
+  background-color: #f5f5f5;
+}
+.list-group-item.active a {
+  color: white;
+}
+
+/* for table striped header */
+.table-striped>tbody>tr:nth-child(odd) {
+  background-color: #f5f5f5;
+}
+
+.table-striped>tbody>tr:nth-child(even) {
+  background-color: #a5aeb8;
+}
+
+/* 
+  The below callouts are part of the bootstrap documentation 
+  but for some reason are not included in bootstrap's bundle 
+*/
+.bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+.bs-callout h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.bs-callout p:last-child {
+    margin-bottom: 0;
+}
+.bs-callout code {
+    border-radius: 3px;
+}
+.bs-callout+.bs-callout {
+    margin-top: -5px;
+}
+.bs-callout-default {
+    border-left-color: #777;
+}
+.bs-callout-default h4 {
+    color: #777;
+}
+.bs-callout-primary {
+    border-left-color: #428bca;
+}
+.bs-callout-primary h4 {
+    color: #428bca;
+}
+.bs-callout-success {
+    border-left-color: #5cb85c;
+}
+.bs-callout-success h4 {
+    color: #5cb85c;
+}
+.bs-callout-danger {
+    border-left-color: #d9534f;
+}
+.bs-callout-danger h4 {
+    color: #d9534f;
+}
+.bs-callout-warning {
+    border-left-color: #f0ad4e;
+    background: #f9f4d4;
+    border-color: #f90;
+}
+.bs-callout-warning h4 {
+    color: #f0ad4e;
+}
+.bs-callout-info {
+    border-left-color: #5bc0de;
+    background: #d7faff; 
+    border-color: #269abc;
+}
+.bs-callout-info h4 {
+    color: #5bc0de;
+}
+
+ol, ul {
+  margin-bottom: 12px;
+}
+
+li.checkbox > label{
+  font-weight: $mediumFontWeight;
+}
+
+ol.breadcrumb {
+  padding: 8px 0;
+}
+
+.breadcrumb > li + li:before {
+  content: none;
+}
+
+.breadcrumb {
+  background-color: #f8f8f8;
+}
+
+dl.dl-horizontal.dl-long-terms {
+  @media(min-width:768px){
+    > dt {
+      // default set by bootstrap is 160px
+      width: 250px;
+    }
+    > dd {
+      // must match dt's width
+      margin-left: 250px;
+    }
+  }
+}
+
+dl.dl-horizontal.dl-really-long-terms {
+  @media(min-width:768px){
+    > dt {
+      // default set by bootstrap is 160px
+      width: 300px;
+    }
+    > dd {
+      // must match dt's width
+      margin-left: 300px;
+    }
+  }
+}
+
+dl.dl-no-bold-dts {
+  > dt {
+    font-weight: inherit;
+  }
+}
+
+.zero-padding {
+  padding: 0px !important;
+}
+
+/* Modifiers for GCWeb alert boxes */
+.alert-no-symbol > :first-child {
+  margin-left: 0px !important;
+}
+
+.alert-no-symbol > :first-child::before {
+  content: "" !important;
+}
+
+.alert--is-bordered { 
+border-width: 2px 2px 2px 8px;
+border-bottom-right-radius: 10px;
+border-top-right-radius: 10px;
+}
+.alert { 
+background-color: $backgroundColor;
+}
+
+/* extending bootstrap nav style */
+ul.nav.nav-underline-active > li { 
+border-bottom: 3px solid rgba(0,0,0,0); /* invisible to remain same height as the active */
+}
+ul.nav.nav-underline-active > li.active {
+border-bottom: 3px solid #00BCD4;
+}
+
+/* extending bootstrap well which does not look good in regular GoC background */
+.well.dark-well {
+background-color: #ebebeb;
+border: 1px solid #bfbfbf;
+}
+
+.well {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: none; 
+ }
+
+
+// Link styles from flat redesign
+a, a:visited {
+  text-decoration: none;
+  color: $ibLinkColor;
+}
+
+#wb-lng > .row > div > ul > li > a,
+#wb-info > .wb-navcurr > ul > li > a,
+#wb-info > .brand > .container > .row > nav > ul > li > a {
+  color: darken($wetLinkColor, 5%);
+  &:visited {
+    color: darken($wetLinkVisitedColor, 5%);
+  }
+}
+
+ol.breadcrumb > li:last-child > :last-child {
+  text-decoration: none;
+  color: #333;
+}
+
+// Misc. styles from flat redesign
+.well-sm {
+  background-color: $tertiaryColor;
+  text-align: center;
+  border-color: $tertiaryColor;
+  border-radius: 10px 10px 0px 0px;
+  padding: 10px;
+}
+
+.form-control.input-lg {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  box-shadow: none !important;
+  opacity: 1;
+  background: none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255);
+}
+
+#app, #wb-bc, .app-font, .easy-access, wb-lng {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+#app, #wb-bc, .app-font {
+  font-family: 'Roboto', sans-serif;
+  font-weight: $mediumFontWeight;
+}
+
+
+/* Panel extensions */
+.panel {
+  box-shadow: 0 0 transparent;
+}
+.panel.panel-overflow {
+  overflow: visible;
+
+  & > .panel-body {
+    /* .panel has a border radius of 10px, if the overflow is visible we need to correct the the white rectangle that starts popping out */ 
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+}
+.panel-body > .row > .source {
+  opacity: 0.8;
+}
+
+.panel-title {
+  margin: -0.25em 0 !important;
+  font-size: 18px;
+}
+
+.panel-sub-title {
+  margin-top: 3px;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+/* 
+  Fixes Safari-specific bug, does nothing on other browsers. 
+  Only needed on larger screens. 
+*/
+.panel-body {
+  @media (min-width:1000px){
+    content: none!important;
+  }
+
+  @media (max-width:1000px){
+    padding: 1rem; /* on mobile, we need way less padding */
+  }
+}
+
+.panel-heading {
+  @media (min-width:1000px){
+    padding: 15px 15px; /* bootstrap default is 10 15 */
+  }
+  @media (max-width:1000px){
+    /* on mobile, we need way less padding */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}
+
+.panel.panel-info.panel-flat {
+  margin-bottom: 23px;
+  background-color: $backgroundColor;
+  border-radius: 10px;
+  border: 2px solid $primaryColor;
+}
+
+.panel.panel-info.panel-flat > .panel-heading {
+  color: $backgroundColor;
+  background-color: $primaryColor;
+}
+
+section.panel {
+  background-color: $primaryColor;
+  border-radius: 10px;
+  border: 2px solid $primaryColor;
+  overflow:hidden
+}
+
+section.panel  > .panel-heading {
+  color: $backgroundColor;
+  background-color: inherit;
+  border: none;
+}
+
+section.panel > .panel-body {
+  background-color: $backgroundColor;
+}
+
+
+.form-control {
+  max-width: 100%;
+  width: auto;
+  height: 37px;
+  font-size: 16px;
+
+  &.input-lg {
+    height: 46px;
+    font-size: 18px;
+  }
+}
+
+
+#wb-lng {
+  display: block;
+  text-align: right;
+  width: 100%;
+}
+#wb-lng > a.lang-switcher {
+  display: inline-block;
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-top: 0.75rem;
+  text-align: center;
+  padding-bottom: 1rem;
+}
+@media (min-width: 768px) {
+  #wb-lng > a.lang-switcher {
+    font-weight: 200;
+    font-size: 1.5rem;
+  }
+}
+
+
+#wb-bc {
+  background-color: #f8f8f8 !important;
+}

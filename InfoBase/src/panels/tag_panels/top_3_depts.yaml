@@ -1,0 +1,28 @@
+dept_tag_spent_text:
+  transform: [handlebars, markdown]
+  en: |
+    **{{infograph_link dept}}** spent up to **{{fmt_compact1_written tag_spent}}** on Programs tagged under this tag, which represents {{fmt_percentage tag_spent_pct}} of the organization's total expenditures.
+  fr: |
+    **{{infograph_link dept}}** a dépensé jusqu'à **{{fmt_compact1_written tag_spent}}** sur les programmes étiquetés sous  cette étiquette, qui représente {{fmt_percentage tag_spent_pct}} des dépenses totales de l'organisation.
+
+
+tag_top_3_depts_title:
+  transform: [handlebars]
+  en: Top 3 Contributing Organizations ({{pa_last_year}})
+  fr: Les 3 principaux ministères contributeurs ({{pa_last_year}})
+
+tag_top_3_depts_text:
+  transform: [handlebars,markdown]
+  en: |
+   Of the maximum **{{fmt_compact1_written tag_exp_pa_last_year}}** spent on the tag "**{{subj_name subject}}**", the three largest contributing 
+   organizations in {{pa_last_year}} were:
+   {{#each top_3_depts}}
+    * **{{dept.fancy_name}}**
+   {{/each}}
+
+  fr: |
+   Les trois organisations qui ont le plus contribué au montant maximal de **{{fmt_compact1_written tag_exp_pa_last_year}}** dépensé
+   sur l'étiquette «**{{subj_name subject}}**» en {{pa_last_year}} étaient:
+   {{#each top_3_depts}}
+    * **{{dept.fancy_name}}**
+   {{/each}}

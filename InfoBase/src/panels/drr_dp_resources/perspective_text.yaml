@@ -1,0 +1,15 @@
+program_spending_in_tag_perspective_title:
+  transform: [handlebars]
+  en: Planned Spending Compared to Overall Tag Spending ({{planning_year_1}})
+  fr: Dépenses planifiées comparées aux dépenses globales étiquetées ({{planning_year_1}})
+
+
+program_spending_in_tag_perspective_text:
+  transform: [handlebars, markdown]
+  en: |
+   In {{planning_year_1}}, planned spending on the program "**{{subj_name subject}}**" is expected to represent **{{fmt_percentage1 tag_exp_pct}}**
+   of the **{{fmt_compact1_written tag_spend}}** maximum planned spending for the tag **"{{infograph_link tag}}"**.
+  fr: |
+    En {{planning_year_1}}, les dépenses liées au programme «**{{subj_name subject}}**» représentera **{{fmt_percentage1 tag_exp_pct}}**
+    du total maximal de **{{fmt_compact1_written tag_spend}}** en dépenses prévues pour l'étiquette **"{{infograph_link tag}}"**.
+

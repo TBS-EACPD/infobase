@@ -1,0 +1,267 @@
+@import '../common_css/common-variables';
+
+.tag-cloud-main {
+  display: flex;
+  flex-direction:row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1em;
+  line-height: 1;
+  padding: 0px;
+}
+
+.tag-cloud-main > li {
+  display: flex;
+  flex: 0 0 auto;
+  padding: 0px;
+  border: none;
+  margin: 1px;
+  background-color: transparent;
+  line-height: 1.5em;
+  font-size: 1em;
+}
+
+.tag-cloud-main > li > button {
+  text-align: center;
+  background-color: $buttonPrimaryColor;
+  padding: 3px 8px 3px 15px;
+  border-radius: 8px 0px 0px 8px;
+  color: #fff;
+  border: none;
+
+  &:only-child {
+    padding: 3px 15px;
+    border-radius: 8px;
+  }
+  @media (max-width: 600px){
+    padding: 3px 15px;
+    border-radius: 8px;
+  }
+}
+
+.tag-cloud-main > li > span.tag-button-helper {
+  text-align: center;
+  background-color: $buttonPrimaryColor;
+  padding-right: 3px;
+  border-radius: 0px 8px 8px 0px;
+  border:none;
+  color: #fff;
+
+  @media (max-width: 600px){
+    padding: 0px;
+    visibility: hidden;
+    width: 0px;
+  }
+
+  // Fix inconsistent sub-pixel white gaps in IE11
+  padding-left: 1px;
+  margin-right: -1px;
+}
+
+.tag-glossary-item {
+  width: 25px;
+  height: 30px;
+
+  & > .tag-glossary-icon {
+    height: inherit;
+    width: inherit;
+  }
+
+  & > .tag-tooltip-text {
+    visibility: hidden;
+    color: #fff;
+    background-color: $primaryColor;
+    text-align: left;
+    border-radius: 5px;
+    padding: 1px 20px 10px 20px;
+    position: absolute;
+    z-index: 1;
+    font-size: 0.8em;
+    border: none; 
+    
+    @media (min-width: 1200px) { 
+      width: 550px;
+    }
+    @media (min-width: 900px) and (max-width: 1200px) { 
+      width: 70vw;
+      right: 0vw;
+    }
+    @media (max-width: 900px) { 
+      width: 80vw;
+      right: 0vw;
+    }
+  }
+}
+
+.tag-glossary-item:hover > .tag-tooltip-text,
+.tag-button-helper:focus > .tag-glossary-item > .tag-tooltip-text {
+  visibility: visible;
+}
+
+.tag-cloud-main > li:hover > button,
+.tag-cloud-main > li > button:focus,
+.tag-cloud-main > li:hover > span,
+.tag-cloud-main > li > span:focus,
+{
+  background-color: $buttonSecondaryColor;
+}
+
+.tag-cloud-main > li.active > button,
+.tag-cloud-main > li.active > span,
+{
+  background-color: $primaryColor;
+}
+
+
+.item-cloud-row {
+  min-height: 300px;
+  margin-bottom: 100px;  
+  padding: 0;
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+@media (min-width: 992px) { 
+  .item-cloud-col {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+  .item-cloud-col > div {
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 992px) { 
+  .item-cloud-col > div {
+    margin: 10px;
+  }
+}
+
+
+.item-card {
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 10px;
+  border-color: $primaryColor;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: $primaryColor;
+}
+
+.item-card-mat {
+  background-color: white;
+  border-radius: 0 0 9px 9px;
+}
+
+.item-card > .item-title {
+  padding: 0px;
+  margin-bottom: -5px;
+  font-weight: $mediumFontWeight;
+  text-align:center;
+  color: #fff;
+  background-color: $primaryColor;
+  border-color: $primaryColor;
+  border-radius: 8px 8px 0 0;
+  height: 40px;
+}
+
+
+.item-card > .item-title.active {
+  font-weight: $mediumFontWeight;
+  color: #fff;
+  background-color: $primaryColor;
+}
+
+.item-card-footer {
+  padding: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  min-height: 50px;
+  padding-top: 10px;
+
+}
+
+.item-tag-container {
+  max-width: 85%;
+  width: 85%;
+}
+
+.item-select > button {
+  width: 110px;
+  min-height: 35px;
+}
+
+
+.item-card .item-description {
+  padding: 10px;
+}
+
+.item-tags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  line-height: 1em;
+  font-size: 0.8em;
+  padding: 0px;
+}
+
+.item-tags > .item-tag {
+  display: inline;
+  padding: 6px 7px;
+  margin: 12px 12px 0 0;
+  color: black;
+  background-color: $tertiaryColor;
+  border-radius: 0px 5px 5px 0px;
+  border-style: solid;
+  border-width: 0 0 0 4px;
+  border-color: $secondaryColor;
+}
+
+.item-tags > .item-tag.active {
+  color: #fff;
+  background-color: $secondaryColor;
+  border-color: $secondaryColor;
+}
+
+.item-card > .item-select {
+  line-height: 1em;
+  font-size: 0.8em;
+  padding: 5px 10px;
+  align-self: flex-end;
+  padding: 5px;
+}
+
+.transi-height-enter {
+  max-height: 1px;
+  opacity: 0.01;
+  transition: max-height 500ms ease-in, opacity 500ms ease-in;
+}
+
+.transi-height-enter-active {
+  max-height: 500px;
+  opacity: 1;
+  transition: max-height 500ms ease-in, opacity 500ms ease-in;
+}
+
+.transi-height-leave {
+  max-height: 500px;
+  opacity: 1;
+  transition: max-height 500ms ease-in, opacity 500ms ease-in;
+}
+
+.transi-height-leave-active {
+  max-height: 1px;
+  opacity: 0.01;
+  transition: max-height 500ms ease-out, opacity 500ms ease-out;
+
+}
+
+
+/* our app-wide a:visited: black is overriding all the bootstrap white on dark blue styles...  */
+.nav-pills > li.active > a {
+  color: white !important;
+}

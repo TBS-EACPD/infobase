@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /ennojs*.html$
+Disallow: /frnojs*.html$
+Disallow: /test-eng.html
+Disallow: /.well-known

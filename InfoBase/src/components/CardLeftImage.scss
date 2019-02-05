@@ -1,0 +1,107 @@
+@import '../common_css/common-variables';
+
+/* left-img-card 
+
+  this component attempts to use BEM naming convention  
+
+  ------------------------
+  | ///// | Title        |
+  | ///// | -------------|
+  |  IMG  | text content |
+  | ///// |              |
+  | ///// |         Link |
+  ------------------------
+
+  structure: 
+    .left-img-card
+      .left-img-card__left
+        .left-img-card__img-link
+          .left-img-card__img
+      .left-img-card__right-container {
+        .left-img-card__right
+          .left-img-card__title
+          .left-img-card__text
+          .left-img-card__bottom-right
+
+*/
+.left-img-card {
+  display: flex;
+  flex: auto;
+  width: 100%;
+  max-width: 100%;
+  flex-direction: row;
+  align-items: stretch;
+  min-height: 1px; /* IE11 image bug */
+}
+
+.left-img-card__left { 
+  flex: 0 0 30%;
+  border-right: 1px solid #333;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  min-height: 1px; /* IE11 image bug */
+}
+
+.left-img-card__img-link {
+  width: 100%;
+  max-width: 100%;
+  min-height: 1px; /* IE11 image bug */
+}
+
+.left-img-card__img {
+  width: 100%;
+  max-width: 100%;
+  min-height: 1px; /* IE11 image bug */
+}
+
+.left-img-card__right-container {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+}
+
+.left-img-card__right {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex: 1 0 auto;
+}
+
+.left-img-card__title {
+  font-size: 1.6em;
+  font-weight: $mediumFontWeight;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  padding: 8px;
+}
+
+.left-img-card__text {
+  font-size: 1.2em;
+  font-weight: $mediumFontWeight;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 100%;
+  text-align: left;
+  padding: 0 20px;
+}
+
+.left-img-card__bottom-right {
+  text-align: right;
+  width: 100%;
+  max-width: 100%;
+  margin-top: auto;
+  padding-top: 10px;
+  font-size: 1.2em;
+  padding: 15px 10px 10px 10px;
+}

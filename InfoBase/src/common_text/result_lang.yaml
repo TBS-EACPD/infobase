@@ -1,0 +1,277 @@
+result:
+  en: Results
+  fr: Résulat
+
+results: 
+  en: Results
+  fr: Résultats
+
+
+indicator:
+  en: Indicator
+  fr: Indicateur
+
+indicators:
+  en: Indicators
+  fr: Indicateurs
+
+
+target:
+  en: Target
+  fr: Cible
+
+targets:
+  en: Targets
+  fr: Cibles 
+
+target_result:
+  en: Actual Result 
+  fr: Résultat Réel
+
+date_to_achieve:
+  en: Date to Achieve Target
+  fr: Date d’atteinte de la cible
+
+
+indicator_targets:
+  en: Indicator Targets
+  fr: Cibles des indicateurs
+
+drr_report:
+  en: Departmental Results Report 
+  fr: Rapport sur les résultats ministériels
+
+drr_links:
+  en: Departmental Results Report (DRR)
+  fr: Rapport sur les résultats ministériels (RRM)
+
+sub_program:
+  en: Sub-Program
+  fr: Sous-Programme
+
+sub_programs:
+  en: Sub-Programs
+  fr: Sous-Programmes
+
+sub_sub_program:
+  en: Sub-Sub-Program
+  fr: Sous-sous-Programme
+
+sub_sub_programs:
+  en: Sub-Sub-Programs
+  fr: Sous-sous-Programmes
+
+
+dept_result:
+  en: Departmental Result
+  fr: Résultat ministériel
+
+dept_results:
+  en: Departmental Results
+  fr: Résultats ministériels
+
+
+no_indicators_for_this_result:
+  en: No performance indicators are available for this result
+  fr: Aucun indicateurs de rendement n'est disponible pour ce résultat
+
+no_results_for_this_subject:
+  transform: [handlebars, markdown]
+  en: There are no available results for **{{subj_name subject}}**
+  fr: Aucun résultat n'est disponible pour **{{subj_name subject}}**
+
+
+targets_to_achieve_past:
+  transform: [handlebars]
+  en: To be achieved by March 31, {{pa_last_year_short_second}}
+  fr: Indicateurs à atteindre au plus tard le 31 mars {{pa_last_year_short_second}}
+
+
+targets_to_achieve_future_and_ongoing:
+  transform: [handlebars]
+  en: Ongoing or to be achieved after March 31, {{pa_last_year_short_second}}
+  fr: Indicateurs permanents ou à atteindre après le 31 mars {{pa_last_year_short_second}}
+
+
+targets_to_achieve_other:
+  en: Date not specified by organization
+  fr: Aucune date fixée par l'organisation
+
+
+pa_last_year_spend:
+  transform: [handlebars]
+  en: |
+    {{pa_last_year}} actual spending  
+  fr: |
+    {{pa_last_year}} dépenses actuelles
+
+pa_last_year_ftes:
+  transform: [handlebars]
+  en: |
+    {{pa_last_year}} actual FTEs  
+  fr: |
+    {{pa_last_year}} ETPs actuels
+  
+
+planning_year_1_spend:
+  transform: [handlebars]
+  en: |
+    {{planning_year_1}} planned spending  
+  fr: |
+    {{planning_year_1}} dépenses planifiés
+
+planning_year_1_ftes:
+  transform: [handlebars]
+  en: |
+    {{planning_year_1}} planned FTEs  
+  fr: |
+    {{planning_year_1}} ETPs planifiés
+
+
+dept_did_not_provide_results:
+  transform: [handlebars,markdown]
+  en: Results data was not provided by the organization for inclusion in the GC InfoBase
+  fr: Les données sur les résultats n'ont pas été fournies par l'organisation et ne figurent donc pas à l'InfoBase du GC
+
+
+indicator_to_sub_association:
+  transform: [handlebars, markdown]
+  en: This indicator is associated to the **{{name}}** {{type}}
+  fr: Cet indicateur est associé au {{type}} **{{name}}**
+
+programs_tagged_as_dr_contributors:
+  transform: [handlebars, markdown]
+  en: Programs tagged as contributing to this result
+  fr: Programmes étiquettés comme contribuants à ce résultat
+
+
+
+spend_planning_year_1:
+  transform: [handlebars]
+  en: |
+    {{planning_year_1}} Planned Spending
+  fr: Dépenses prévues {{planning_year_1}}
+
+spend_planning_year_2:
+  transform: [handlebars]
+  en: |
+    {{planning_year_2}} Planned Spending
+  fr: Dépenses prévues {{planning_year_2}}
+
+spend_planning_year_3:
+  transform: [handlebars]
+  en: |
+    {{planning_year_3}} Planned Spending
+  fr: Dépenses prévues {{planning_year_3}}
+
+fte_planning_year_1:
+  transform: [handlebars]
+  en: |
+    {{planning_year_1}} Planned FTEs
+  fr: ETP prévues {{planning_year_1}}
+
+fte_planning_year_2:
+  transform: [handlebars]
+  en: |
+    {{planning_year_2}} Planned FTEs
+  fr: ETP prévues {{planning_year_2}}
+
+fte_planning_year_3:
+  transform: [handlebars]
+  en: |
+    {{planning_year_3}} Planned FTEs
+  fr: ETP prévues {{planning_year_3}}
+
+
+ftes_pa_last_year:
+  transform: [handlebars]
+  en: |
+    {{pa_last_year}} FTEs
+  fr: ETP {{pa_last_year}}
+
+planned_fte_pa_last_year:
+  transform: [handlebars]
+  en: |
+    {{pa_last_year}} planned FTEs
+  fr: ETP prévues {{pa_last_year}}
+  
+spend_pa_last_year:
+  transform: [handlebars]
+  en: |
+    {{pa_last_year}} actual spending
+  fr: Dépenses {{pa_last_year}}
+
+planned_spend_pa_last_year:
+  transform: [handlebars]
+  en: |
+    {{pa_last_year}} planned spending
+  fr: Dépenses prévues {{pa_last_year}}
+
+planned:
+  en: Planned
+  fr: Prévu
+
+actual:
+  en: Actual
+  fr: Réel
+
+DRF:
+  transform: [handlebars]
+  text: |
+    {{{gl_title "DRF"}}}
+
+MRRS:
+  transform: [handlebars]
+  text: |
+    {{{gl_title "MRRS"}}}
+
+PAA:
+  transform: [handlebars]
+  text: |
+    {{{gl_title "PAA"}}}
+
+POL_RES:
+  transform: [handlebars]
+  text: |
+    {{{gl_title "POL_RES"}}}
+
+ongoing:
+  en: Ongoing
+  fr: Continu
+  
+
+where_can_find_subs_question:
+  en: Where can I get more information on sub-programs?
+  fr: Où puis-je trouver de plus amples renseignements sur les sous-programmes?
+
+where_can_find_subs_answer:
+  transform: [handlebars]
+  en: More resources information on {{gl_tt "sub and sub-sub programs" "SSP"}} (i.e. spending and {{gl_tt "full-time equivalents" "FTE"}}) can be found through the parent program infographic. Simply click "{{gt "see_infographic"}}" to be redirected to the program specific infographic and select the Finance bubble.
+  fr: Vous trouverez de plus amples renseignements sur les ressources des sous programmes et des sous-sous programmes (c'est-à-dire les dépenses et les {{gl_tt "équivalents temps pleins" "FTE"}}) dans l'infographie du programme parent. Pour être redirigé vers l'infographie de ce programme particulier, cliquez sur "Voir l'infographie" et sélectionner la bulle "Finance".
+
+
+filter_results:
+  en: Filter results
+  fr: Filtrer les résultats
+
+all_drrs_link:
+  en: https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html 
+  fr: https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement.html
+
+
+unspecified_date_to_achieve:
+  en: Unspecified
+  fr: Non spécifié
+
+unspecified_target:
+  en: Target not specified
+  fr: cible non spécifiée
+  
+methodology:
+  en: Methodology
+  fr: Méthodologie
+
+result_status_with_gl:
+  transform: [handlebars]
+  text: |
+    {{gl_tt text glossary_key}}

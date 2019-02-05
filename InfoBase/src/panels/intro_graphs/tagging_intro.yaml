@@ -1,0 +1,95 @@
+what_is_tagging_q:
+    en: |
+      What is Tagging?
+    fr: |
+      Qu’est-ce que l’étiquetage?
+
+
+what_is_tagging_a:
+  transform: [handlebars, markdown]
+  en: |
+    Tagging refers to the act of assigning a keyword or category name to a piece of information. It is one of the most efficient ways to organize, categorize and search information by allowing users to explore content/topics/item based on keywords ("tags"). It is used to enhance the searchability of something.
+  fr: |
+    L’étiquetage renvoie à l’action d’attribuer un mot-clé ou un nom de catégorie à un renseignement. Il s’agit d’une des façons les plus efficaces d’organiser, de catégoriser et de rechercher des renseignements en permettant aux utilisateurs d’explorer les différents contenus, sujets et éléments au moyen de mots-clés (« étiquettes »). Ces étiquettes sont utilisées pour améliorer les capacités de recherche des éléments.
+
+what_is_prog_tagging_q:
+  en: What is Program Tagging?
+  fr: Qu’est-ce que l’étiquetage de Programme?
+  
+
+what_is_prog_tagging_a:
+  transform: [handlebars, markdown]
+  en: |
+    "Program tagging" involves assigning certain 'tags' (or 'areas of interest') to government programs based on their attributes. So, for example, if a government program is delivered through grants, then it would fall under the 'grant' tag, as would all the other government programs that are delivered in this way. 
+  fr: |
+    L’« étiquetage de Programmes » consiste à attribuer certaines « étiquettes » (ou « champs d’intérêt ») aux programmes du gouvernement en fonction de leurs attributs. Par exemple, si un programme gouvernemental est offert au moyen de subventions, on lui attribuera l’étiquette « subvention », comme à tous les autres programmes gouvernementaux offerts de la même façon. 
+
+what_tags_are_available_q:
+  en: What are the types of tags available in the InfoBase?
+  fr: Quels sont les types d’étiquettes offertes dans l’InfoBase?
+
+
+what_tags_are_available_a:
+  transform: [handlebars, markdown]
+  en: |
+    In the context of Program tagging there are two types of tags, those that:
+
+      1. Linkage tags that identify the connection between Programs and Departmental and Government of Canada Spending and Outcome Area. 
+      2. Descriptive tags that identify standardized characteristics of Programs (i.e. Method of intervention  - How we help)
+
+    A full list of tags can be found in the {{ext_link "Standard on Tagging" "http://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31306"}} under the  {{ext_link "Policy on Results" "http://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300"}}. 
+
+  fr: |
+    Dans le contexte de l’étiquetage de Programmes, il existe deux types d’étiquettes :
+
+      1. Les étiquettes établissant des liens, qui indiquent le lien entre les Programmes et le secteur des dépenses et des résultats ministériels et du gouvernement du Canada. 
+      2. Les étiquettes descriptives, qui indiquent les caractéristiques uniformisées des Programmes (par exemple, méthode d’intervention – Comment  nous aidons).
+
+    Une liste complète des étiquettes est accessible dans la {{ext_link "Norme sur l’étiquetage" "http://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=31306"}} de la {{ext_link "Politique sur les résultats" "http://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=31300"}}.  
+
+what_are_how_we_help_q:
+  en: What are 'Method of intervention' ( or 'How we help') tags?
+  fr: Que sont les étiquettes de la « méthode d’intervention » (ou « De quelle façon nous aidons »).
+
+
+what_are_how_we_help_a:
+  transform: [handlebars, markdown]
+  en: |
+    ‘Method of Intervention’ (How we help) refers to the means by which policy objectives are achieved and/or programs are delivered (e.g., regulations, transfer payments, services, etc.). 
+
+    Note that each program should have one primary method of intervention. However, in exceptional cases, a secondary method of intervention may also be selected, e.g. if a program maintains both grants and a contributions.
+
+  fr: |
+    La « Méthode d’intervention » (Comment nous aidons) renvoie aux moyen desquels les objectifs stratégiques sont atteints et/ou les programmes sont exécutés (par exemple, règlements, paiements de transfert, services, etc.). 
+
+    Veuillez prendre note que chaque programme devrait avoir une méthode d’intervention principale. Toutefois, dans des cas exceptionnels, une méthode d’intervention secondaire pourrait également être choisie, par exemple si un programme comprend des subventions et des contributions.
+
+
+what_are_gocos_q:
+  en: What are Government of Canada Spending (Areas of Work) and Activities Areas tags?
+  fr: Quelles sont les étiquettes des secteurs des dépenses (secteurs de travail) et des secteurs d'activités du gouvernement du Canada?
+
+what_are_gocos_a:
+  transform: [handlebars, markdown]
+  en: | 
+    Each governmental program is mapped to a high-level activity which is itself associated to a major area of work.
+
+    Departments and agencies are required to indicate the alignment of programs to Government of Canada activities. Because this alignment is intended to make it possible to calculate spending by Government of Canada activity, while correctly totaling all government spending, a {{gl_tt "program" "PROG"}} can only be aligned to one Government of Canada activity. A {{gl_tt "Core Responsibility" "CR"}}  and a {{gl_tt "Strategic Outcome" "SO"}}, however, can contribute to more than one activity.
+
+  fr: |
+    Chaque programme gouvernemental est mis en correspondance avec une activité de haut niveau, qui est lui-même associé à un secteur de travail important.
+
+    Les ministères et les organismes doivent indiquer l’harmonisation des programmes par rapport aux activités du gouvernement du Canada. Étant donné que l’harmonisation vise à permettre le calcul des dépenses du gouvernement du Canada pour chacune des secteurs d'activités, même tout en calculant correctement le total de l’ensemble des dépenses du gouvernement, un {{gl_tt "programme" "PROG"}} ne peut être harmonisé qu’à une seule activité. Une {{gl_tt "responsabilité essentielle" "CR"}} et un {{gl_tt "résultat stratéqigue" "SO"}} peuvent toutefois contribuer à plus d’un secteur d'activités.
+
+how_do_progs_support_DRs_q:
+  en: How do programs support Departmental Results? 
+  fr: De quelle façon les programmes soutiennent-ils les résultats ministériels? 
+
+how_do_progs_support_DRs_a:
+  transform: [handlebars, markdown]
+  en: |
+    Under the programs in the Program Inventory can support the achievement of one or multiple more specific {{gl_tt "Departmental Results (DR)" "DR"}} under the {{gl_tt "Core Responsibility (CR)" "CR"}} to which they are reporting under. 
+  fr: |
+    Sous les programmes du Répertoire de programmes, il est possible de soutenir la réalisation d’un ou de plusieurs {{gl_tt "résultats ministériels (DR)" "DR"}} précis liés à la {{gl_tt "par exemple, responsabilité essentielle (CR)" "CR"}} dont ils relèvent. 
+
+

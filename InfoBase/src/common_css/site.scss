@@ -1,0 +1,179 @@
+@import "common-variables";
+
+div.int{width: 95px;text-align:center;}
+div.big_int{width: 100px;text-align:right;}
+div.big_int_real,
+div.decimal, 
+div.short-str,
+div.decimal1 {
+  width: 100px;
+  text-align:right;
+}
+div.str {
+  width: 150px;
+  color: #31708f; /* overide the WET standard for .str */
+}
+div.wide-str {
+  width: 300px;
+}
+div.percentage {
+  width: 90px;
+  text-align:center;
+}
+div.percentage1 {
+  width: 100px;
+  text-align:right;
+}
+div.date {
+  width: 90px;
+}
+div.ordinal {
+  width: 150px;
+  text-align:center;
+}
+
+.nav-header {
+  display: block;
+  padding: 3px 15px;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 20px;
+  color: rgb(35, 68, 126);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+
+.success {
+  background-color: #dff0d8;
+}
+
+/* added for IE9, this adds a transparents 1x1 png file
+ * so that mouseneter events can be registered on 
+ * empty divs */
+.transparent_div {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=);
+}
+
+
+/* utility class. Apply class to a container if you want its content (no matter what kind) centered */
+.centerer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width:100%;
+}
+
+
+.btn-responsive-fixed-width {
+  margin-left: auto;
+  min-width: 150px;
+  align-self: center;
+  @media (max-width:700px) {
+    max-width: 150px;
+  }
+}
+
+
+/* similar to bootstrap list-group but without the hover/active colors.*/
+ul.fancy-ul {
+  margin-bottom: 20px;
+  padding-left: 0;  
+}
+
+ul.fancy-ul > li {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid #7b8b9e;
+  font-size: 16px;
+}
+
+ul.fancy-ul > li:first-child {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+ul.fancy-ul > li:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.fancy-ul-span-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+
+.fancy-ul-title-row {
+  width: 100%;
+  text-align: center;
+  font-weight: bold; 
+  font-size: 16px;
+}
+
+/* use when you don't want an h3/4/5/6 */
+.agnostic-header {
+  margin-top: 15px;
+  font-weight: $heavyFontWeight;
+  font-size: 12pt;
+}
+
+.agnostic-header.agnostic-header--medium-weight {
+  font-weight: $mediumFontWeight;
+}
+
+.agnostic-header.extra-margin {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.agnostic-header.no-top-margin {
+  margin-top: 0;
+}
+
+.dead-element {
+  opacity: 0.75;
+}
+
+.text-overflow {
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 80%;
+  white-space: nowrap;
+  margin-bottom: 0px
+}
+.text-overflow > span {
+  font-weight: normal;
+  color: black;
+}
+
+a.source-link {
+  font-weight: bold;
+}
+
+// Misc. styles from flat redesign
+body {
+  background-color: $backgroundColor;
+}
+
+b, strong {
+  font-weight: $heavyFontWeight;
+}
+
+header, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-weight: $lightFontWeight;
+  font-family: $fontFamily;
+}
+
+.link-styled {
+  cursor: pointer;
+  text-decoration: none;
+  color: $ibLinkColor;
+  background-color: transparent;
+}

@@ -1,0 +1,277 @@
+.mrgn-lft-0 {
+  margin-left: 0; }
+.mrgn-lft-sm {
+  margin-left: 5px; }
+.mrgn-lft-md {
+  margin-left: 15px; }
+.mrgn-lft-lg {
+  margin-left: 30px; }
+.mrgn-lft-xl {
+  margin-left: 50px; }
+.mrgn-bttm-0 {
+  margin-bottom: 0; }
+.mrgn-bttm-sm {
+  margin-bottom: 5px; }
+.mrgn-bttm-md {
+  margin-bottom: 15px; }
+.mrgn-bttm-lg {
+  margin-bottom: 30px; }
+.mrgn-bttm-xl {
+  margin-bottom: 50px; }
+.mrgn-tp-0 {
+  margin-top: 0; }
+.mrgn-tp-sm {
+  margin-top: 5px; }
+.mrgn-tp-md {
+  margin-top: 15px; }
+.mrgn-tp-lg {
+  margin-top: 30px; }
+.mrgn-tp-xl {
+  margin-top: 50px; }
+.mrgn-rght-0 {
+  margin-right: 0; }
+.mrgn-rght-sm {
+  margin-right: 5px; }
+.mrgn-rght-md {
+  margin-right: 15px; }
+.mrgn-rght-lg {
+  margin-right: 30px; }
+.mrgn-rght-xl {
+  margin-right: 50px; }
+
+
+.dl-horizontal dd:before, .dl-horizontal dd:after {
+  content: " ";
+  display: table; }
+.dl-horizontal dd:after {
+  clear: both; }
+@media (min-width: 768px) {
+  .dl-horizontal dt {
+    float: left;
+    width: 160px;
+    clear: left;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
+  .dl-horizontal dd {
+    margin-left: 180px; } }
+@media (min-width: 768px) {
+  .dl-horizontal dt {
+    border-top: 1px solid #ccc;
+    padding: 10px 10px 10px 0;
+    text-align: left;
+    white-space: normal; }
+  .dl-horizontal dd {
+    border-top: 1px solid #ccc;
+    margin-bottom: 3px;
+    margin-left: 160px;
+    padding: 10px 10px 10px 0; }
+  .dl-horizontal dt + dd {
+    padding-bottom: 0; } }
+
+
+// WET form placeholder a11y
+input[placeholder],
+[placeholder],
+*[placeholder] {
+  color: #5c5c5c !important; }
+.form-control::-moz-placeholder {
+  color: #5c5c5c !important;
+  opacity: 1; }
+.form-control:-ms-input-placeholder {
+  color: #5c5c5c !important; }
+.form-control::-webkit-input-placeholder {
+  color: #5c5c5c !important; }
+
+
+.nowrap {
+  white-space: nowrap; }
+
+
+/*
+ *	Use button border style 'outset' to give buttons depth, except when disabled
+ */
+.btn {
+  border-style: outset;
+  /*
+	 * These two property overrides should be recommended upstream to
+	 * Bootstrap as a fix for button wrapping (see wet-boew/wet-boew#4454)
+	 */
+  height: auto;
+  min-height: 36px;
+  min-width: 36px;
+  white-space: normal; 
+  font-size: 16px; }
+/*
+ * btn-xs should be equal to btn-sm in >v4.0.*
+*/
+.btn-group-xs .btn,
+.btn.btn-xs,
+.btn-group-xs > .btn {
+  min-height: 0; }
+
+
+/*
+*	Override the design of alerts and labels
+*/
+.alert, .label {
+  border-radius: 0;
+  border-style: solid;
+  border-width: 0 0 0 4px; }
+
+.alert > :first-child {
+  margin-left: 1.2em;
+  margin-top: auto; }
+  .alert > :first-child:before {
+    display: inline-block;
+    font-family: "Glyphicons Halflings";
+    margin-left: -1.3em;
+    position: absolute; }
+
+.alert > strong:first-child,
+.alert > em:first-child,
+.alert > span:first-child {
+  display: inline-block; }
+
+.label-default, .label-default[href]:hover, .label-default[href]:focus, .label-default[href]:active, .label-primary, .label-primary[href]:hover, .label-primary[href]:focus, .label-primary[href]:active, .label-success, .label-success[href]:hover, .label-success[href]:focus, .label-success[href]:active, .alert-success, .label-info, .label-info[href]:hover, .label-info[href]:focus, .label-info[href]:active, .alert-info, .label-warning, .label-warning[href]:hover, .label-warning[href]:focus, .label-warning[href]:active, .alert-warning, .label-danger, .label-danger[href]:hover, .label-danger[href]:focus, .label-danger[href]:active, .alert-danger {
+  color: #000; }
+
+.label-default[href]:hover, .label-default[href]:focus, .label-default[href]:active, .label-primary[href]:hover, .label-primary[href]:focus, .label-primary[href]:active, .label-success[href]:hover, .label-success[href]:focus, .label-success[href]:active, .label-info[href]:hover, .label-info[href]:focus, .label-info[href]:active, .label-warning[href]:hover, .label-warning[href]:focus, .label-warning[href]:active, .label-danger[href]:hover, .label-danger[href]:focus, .label-danger[href]:active {
+  text-decoration: underline; }
+
+.label-default, .label-default[href]:hover, .label-default[href]:focus, .label-default[href]:active {
+  background: #eee;
+  border-color: #acacac; }
+
+.label-primary, .label-primary[href]:hover, .label-primary[href]:focus, .label-primary[href]:active {
+  background: #e8f2f4;
+  border-color: #083c6c; }
+
+.label-success, .label-success[href]:hover, .label-success[href]:focus, .label-success[href]:active, .alert-success, details.alert.alert-success, details.alert[open].alert-success {
+  background: #d8eeca;
+  border-color: #278400; }
+
+.alert-success > :first-child:before {
+  color: #278400;
+  content: "\e084"; }
+
+.label-info, .label-info[href]:hover, .label-info[href]:focus, .label-info[href]:active, .alert-info, details.alert.alert-info, details.alert[open].alert-info {
+  background: #d7faff;
+  border-color: #269abc; }
+
+.alert-info > :first-child:before {
+  color: #269abc;
+  content: "\e086"; }
+
+.label-warning, .label-warning[href]:hover, .label-warning[href]:focus, .label-warning[href]:active, .alert-warning, details.alert.alert-warning, details.alert[open].alert-warning {
+  background: #f9f4d4;
+  border-color: #f90; }
+
+.alert-warning > :first-child:before {
+  color: #f90;
+  content: "\e107"; }
+
+.label-danger, .label-danger[href]:hover, .label-danger[href]:focus, .label-danger[href]:active, .alert-danger, details.alert.alert-danger, details.alert[open].alert-danger {
+  background: #f3e9e8;
+  border-color: #d3080c; }
+
+.alert-danger > :first-child:before {
+  color: #d3080c;
+  content: "\e101"; }
+
+  
+/*
+ * GCWeb Theme
+ */
+/* Theme base styles */
+h1 {
+  font-size: 34px;
+  padding-bottom: 0.2em; }
+h2, .h2 {
+  font-size: 26px; }
+h3, .h3 {
+  font-size: 22px; }
+h4, .h4 {
+  font-size: 18px; }
+h5, .h5 {
+  font-size: 16px; }
+h6, .h6 {
+  font-size: 14px; }
+.h3, .h4, .h5, .h6 {
+  border: 0; }
+
+
+/*
+ Site information
+*/
+#wb-info {
+  background: #e1e4e7;
+  position: relative;
+  z-index: 5; }
+  #wb-info a {
+    font-size: 0.875em;
+    text-decoration: none; }
+    #wb-info a.wb-navcurr {
+      font-weight: 800; }
+  #wb-info .brand {
+    background: #f8f8f8;
+    border-top: 4px solid #335175;
+    line-height: 30px; }
+    #wb-info .brand object,
+    #wb-info .brand img {
+      height: 40px;
+      margin-bottom: 10px;
+      margin-top: 20px;
+      width: auto; }
+  #wb-info .ftr-urlt-lnk ul {
+    margin: 0;
+    padding: 0; }
+    #wb-info .ftr-urlt-lnk ul li {
+      display: inline-block;
+      margin-right: 0.5em;
+      padding: 0; }
+      #wb-info .ftr-urlt-lnk ul li:before {
+        content: "\2022";
+        margin-right: 0.7em; }
+      #wb-info .ftr-urlt-lnk ul li:first-child:before {
+        content: none; }
+  #wb-info .tofpg {
+    line-height: 90px; }
+    #wb-info .tofpg a {
+      color: #000; }
+      #wb-info .tofpg a span {
+        margin-left: 25px; }
+      #wb-info .tofpg a:hover {
+        text-decoration: none; }
+  #wb-info nav {
+    padding-bottom: 2em;
+    padding-top: 2em;
+    position: relative; }
+    #wb-info nav li {
+      margin-bottom: 0.75em; }
+
+/*
+  WET-BOEW
+  @title: Breadcrumb CSS
+ */
+ #wb-bc {
+  background-color: #f5f5f5; }
+  #wb-bc ol {
+    border-radius: 0;
+    margin-bottom: 0; }
+  #wb-bc li {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
+
+
+
+.wb-invisible, .wb-inv, .wb-show-onfocus, .wb-sl, #wb-lng h2, #wb-info h2, #wb-bc h2 {
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 1px; }

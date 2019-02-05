@@ -1,0 +1,116 @@
+result_treemap_title_part:
+  en: Detailed Results
+  fr: Résultats Détaillés
+
+result_treemap_title:
+  transform: [handlebars]
+  en: |
+    {{#if has_drr_data}}
+      {{#if has_dp_data}}
+        {{gt "result_treemap_title_part"}} ({{pa_last_year}} and {{planning_year_1}})
+      {{else}}
+        {{gt "result_treemap_title_part"}} ({{pa_last_year}})
+      {{/if}}
+    {{else}}
+      {{gt "result_treemap_title_part"}} ({{planning_year_1}})
+    {{/if}}
+
+  fr: |
+    {{#if has_drr_data}}
+      {{#if has_dp_data}}
+        {{gt "result_treemap_title_part"}} ({{pa_last_year}} et {{planning_year_1}})
+      {{else}}
+        {{gt "result_treemap_title_part"}} ({{pa_last_year}})
+      {{/if}}
+    {{else}}
+      {{gt "result_treemap_title_part"}} ({{planning_year_1}})
+    {{/if}}
+
+
+result_counts_drr_dept_first_wave:
+  transform: [handlebars,markdown]
+  en: |
+    In {{pa_last_year}}, **{{subj_name subject}}** sought to achieve **{{fmt_big_int_real num_results}}** results through **{{fmt_big_int_real num_crs}}** {{gl_tt (plural_branch num_crs "Core Responsibility" "Core Responsibilities") "CR"}} and **{{fmt_big_int_real num_programs}}** {{gl_tt (plural_branch num_programs "Program" "Programs") "PROG"}}.. Progress towards meeting these results was {{gl_tt "measured" "RESULTS_STATUS"}} using **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicators" "IND_RESULT"}}.
+  fr: |
+    En {{pa_last_year}}, **{{subj_name subject}}** a cherché à rencontrer **{{fmt_big_int_real num_results}} résultats** à l’aide de **{{fmt_big_int_real num_crs}}** {{gl_tt (plural_branch num_crs "responsabilité essentielle" "responsabilités essentielles") "CR"}} et **{{fmt_big_int_real num_programs}}** {{gl_tt (plural_branch num_programs "programme" "programmes") "PROG"}}. Les progrès accomplis dans l’atteinte de ces résultats ont été {{gl_tt "mesurés" "RESULTS_STATUS"}} au moyen de **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicateurs" "IND_RESULT"}}.
+
+result_counts_drr_dept_sub:
+  transform: [handlebars,markdown]
+  en: |
+    In {{pa_last_year}}, **{{subj_name subject}}** sought to achieve **{{fmt_big_int_real num_results}}** results through **{{fmt_big_int_real num_programs}}** {{gl_tt "Programs" "PROG"}} and **{{fmt_big_int_real num_subs}}** {{gl_tt "Sub-Programs" "SSP"}}. Progress towards meeting these results was {{gl_tt "measured" "RESULTS_STATUS"}} using **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicators" "IND_RESULT"}}.
+  fr: |
+    En {{pa_last_year}}, **{{subj_name subject}}** a cherché à obtenir **{{fmt_big_int_real num_results}} résultats** à l’aide de **{{fmt_big_int_real num_programs}}** {{gl_tt "programmes" "PROG"}} et **{{fmt_big_int_real num_subs}}** {{gl_tt "sous-programmes" "SSP"}}. Les progrès vers l’atteinte de ces résultats ont été {{gl_tt "mesurés" "RESULTS_STATUS"}} à l’aide de **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicateurs" "IND_RESULT"}}.
+
+result_counts_drr_dept_no_subs:
+  transform: [handlebars,markdown]
+  en: |
+    In {{pa_last_year}}, **{{subj_name subject}}** sought to achieve **{{fmt_big_int_real num_results}}** results through **{{fmt_big_int_real num_programs}}** {{gl_tt "Programs" "PROG"}}. Progress towards meeting these results was {{gl_tt "measured" "RESULTS_STATUS"}} using **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicators" "IND_RESULT"}}.
+  fr: |
+    En {{pa_last_year}}, **{{subj_name subject}}** a cherché à obtenir **{{fmt_big_int_real num_results}}** résultats à l’aide de **{{fmt_big_int_real num_programs}}** {{gl_tt "programmes" "PROG"}}. Les progrès vers l’atteinte de ces résultats ont été {{gl_tt "mesurés" "RESULTS_STATUS"}} à l’aide de **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicateurs" "IND_RESULT"}} 
+
+result_counts_drr_dept_sub_sub:
+  transform: [handlebars,markdown]
+  en: |
+    In {{pa_last_year}}, **{{subj_name subject}}** sought to achieve **{{fmt_big_int_real num_results}}** results through **{{fmt_big_int_real num_programs}}** {{gl_tt "Programs" "PROG"}}, **{{fmt_big_int_real num_subs}}** {{gl_tt "Sub-Programs" "SSP"}} and **{{fmt_big_int_real num_sub_subs}}** Sub-Sub Programs. Progress towards meeting these results was {{gl_tt "measured" "RESULTS_STATUS"}} using **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicators" "IND_RESULT"}}.
+  fr: |
+    En {{pa_last_year}}, **{{subj_name subject}}** a cherché à atteindre **{{fmt_big_int_real num_results}}** résultats à l’aide de **{{fmt_big_int_real num_programs}}** {{gl_tt "programmes" "PROG"}}, **{{fmt_big_int_real num_subs}}** {{gl_tt "sous-programmes" "SSP"}} et **{{fmt_big_int_real num_sub_subs}}** sous-sous-programmes. Les progrès vers l’atteinte de ces résultats ont été {{gl_tt "mesurés" "RESULTS_STATUS"}} à l’aide de **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicateurs" "IND_RESULT"}}. 
+
+result_counts_drr_prog_paa_sub_sub:
+  transform: [handlebars,markdown]
+  en: |
+    In {{pa_last_year}}, **{{subj_name subject}}** sought to achieve **{{fmt_big_int_real num_results}}** results. Progress towards meeting these results was {{gl_tt "measured" "RESULTS_STATUS"}} using **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicators" "IND_RESULT"}}. During that fiscal year, the program was comprised of **{{fmt_big_int_real num_subs}}** {{gl_tt "sub-Programs" "SSP"}} and **{{fmt_big_int_real num_sub_subs}}** sub-sub programs.
+  fr: |
+    En {{pa_last_year}}, **{{subj_name subject}}** a cherché à obtenir **{{fmt_big_int_real num_results}}** résultats. Les progrès vers l’atteinte de ces résultats ont été {{gl_tt "mesurés" "RESULTS_STATUS"}} à l’aide de **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicateurs" "IND_RESULT"}}. Au cours de cet exercice, le programme comprenait **{{fmt_big_int_real num_subs}}** {{gl_tt "sous-programmes" "SSP"}} et **{{fmt_big_int_real num_sub_subs}}** sous-sous programmes.
+  
+
+result_counts_drr_prog_paa_sub:
+  transform: [handlebars,markdown]
+  en: |
+    In {{pa_last_year}}, **{{subj_name subject}}** sought to achieve **{{fmt_big_int_real num_results}}** results. Progress towards meeting these results was {{gl_tt "measured" "RESULTS_STATUS"}} using **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicators" "IND_RESULT"}}. During that fiscal year, the program was comprised of **{{fmt_big_int_real num_subs}}** {{gl_tt "sub-Programs" "SSP"}}.
+  fr: |
+    En {{pa_last_year}}, **{{subj_name subject}}** a cherché à obtenir **{{fmt_big_int_real num_results}}** résultats. Les progrès vers l’atteinte de ces résultats ont été {{gl_tt "mesurés" "RESULTS_STATUS"}} à l’aide de **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicateurs" "IND_RESULT"}}. Au cours de cet exercice, le programme comprenait **{{fmt_big_int_real num_subs}}** {{gl_tt "sous-programmes" "SSP"}}.
+
+result_counts_drr_prog_paa_no_subs:
+  transform: [handlebars,markdown]
+  en: |
+    In {{pa_last_year}}, **{{subj_name subject}}** sought to achieve **{{fmt_big_int_real num_results}}** results. Progress towards meeting these results was {{gl_tt "measured" "RESULTS_STATUS"}} using **{{fmt_big_int_real num_indicators}} {{gl_tt "indicators" "IND_RESULT"}}**.
+  fr: |
+    En {{pa_last_year}}, **{{subj_name subject}}** a cherché à obtenir **{{fmt_big_int_real num_results}}** résultats. Les progrès vers l’atteinte de ces résultats ont été {{gl_tt "mesurés" "RESULTS_STATUS"}} à l’aide de **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicateurs" "IND_RESULT"}}.
+
+
+result_counts_dp_dept:
+  transform: [handlebars,markdown]
+  en: |
+    In {{planning_year_1}}, **{{subj_name subject}}** seeks to achieve **{{fmt_big_int_real num_results}}** results through **{{fmt_big_int_real num_crs}}** {{gl_tt (plural_branch num_crs "Core Responsibility" "Core Responsibilities") "CR"}} and **{{fmt_big_int_real num_programs}}** {{gl_tt (plural_branch num_programs "Program" "Programs") "PROG"}}. Progress towards meeting these results will be {{gl_tt "measured" "RESULTS_STATUS"}} using **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicators" "IND_RESULT"}}.
+  fr: |
+    En {{planning_year_1}}, **{{subj_name subject}}** cherche à rencontrer **{{fmt_big_int_real num_results}}** résultats à l’aide de **{{fmt_big_int_real num_crs}}** {{gl_tt (plural_branch num_crs "responsabilité essentielle" "responsabilités essentielles") "CR"}} et **{{fmt_big_int_real num_programs}}** {{gl_tt (plural_branch num_programs "programme" "programmes") "PROG"}}. Les progrès accomplis dans l’atteinte de ces résultats seront {{gl_tt "mesurés" "RESULTS_STATUS"}} au moyen de **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicateurs" "IND_RESULT"}}.
+
+result_counts_dp_prog:
+  transform: [handlebars,markdown]
+  en: |
+    **{{subj_name subject}}** is seeking to achieve **{{fmt_big_int_real num_results}}** {{plural_branch num_results "result" "results"}} in {{planning_year_1}}. Progress towards meeting these results will be {{gl_tt "measured" "RESULTS_STATUS"}} using **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicators" "IND_RESULT"}}.
+  fr: |
+    **{{subj_name subject}}** cherche à rencontrer **{{fmt_big_int_real num_results}}** {{plural_branch num_results "résultat" "résultats"}} en {{planning_year_1}}. Les progrès accomplis dans l’atteinte de ces résultats seront {{gl_tt "mesurés" "RESULTS_STATUS"}} à l’aide de **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicateurs" "IND_RESULT"}}.
+
+result_counts_dp_cr:
+  transform: [handlebars,markdown]
+  en: |
+    In {{planning_year_1}}, **{{subj_name subject.dept}}** is seeking to achieve **{{fmt_big_int_real num_results}}** {{plural_branch num_results "result" "results"}} under the {{gl_tt "Core Responsibility" "CR"}} **"{{subj_name subject}}"** comprised of **{{fmt_big_int_real num_programs}}** {{plural_branch num_programs "program" "programs"}}.
+  fr: |
+    En {{planning_year_1}}, **{{subj_name subject.dept}}** cherche à rencontrer **{{fmt_big_int_real num_results}}** {{plural_branch num_results "résultat" "résultats"}} sous la {{gl_tt "responsabilité essentielle" "CR"}} **«{{subj_name subject}}»** appuyé par **{{fmt_big_int_real num_programs}}** {{plural_branch num_programs "programme" "programmes"}}.
+    
+
+
+DP_results_option_title:
+  transform: [handlebars]
+  en: Planned Results for {{planning_year_1}}
+  fr: Résultats planifiés pour {{planning_year_1}}
+
+DRR_results_option_title:
+  transform: [handlebars]
+  en: Actual Results for {{pa_last_year}}
+  fr: Résultats actuels pour {{pa_last_year}}
+
+  
+
+    

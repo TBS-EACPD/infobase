@@ -1,0 +1,141 @@
+@import "../common_css/common-variables";
+
+.explorer-focus-mount {
+  outline: none !important;
+  border: none !important;
+}
+
+.ExplorerNode.ExplorerNode--secondary-color {
+  border-color: #a1adba;
+  background-color: #FFF;
+}
+
+
+.ExplorerNode {
+  padding-top: 12px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+
+  /* default borders that are overridden by even/odd/is-search_match */
+  border-radius: 10px;
+  border-width: 1px;
+  border-style: solid;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  
+
+  border-color: rgb(123, 123, 123);
+  background-color: rgba(123, 123, 123, 0.05);
+
+  font-size: 12pt;
+}
+
+
+
+
+.ExplorerNode--search-match {
+  border-color: #599b17;
+  background-color: hsla(90, 100%, 35%, 0.1);
+}
+
+/* everything right of the caret-container */
+.ExplorerNode__ContentContainer {
+  flex: 1 1 auto;
+}
+
+
+/* this is the clickable portion, what is seen when collapsed */
+.ExplorerNode__RowContainer:not(.ExplorerNode__RowContainer--no-click) {
+  cursor: pointer;
+}
+
+.ExplorerNode__ExpanderContainer {
+  width: 45px;
+  flex: 0 0 45px; /* never grow or shrink, and set the default flex width */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; 
+
+  &:not(.ExplorerNode__ExpanderContainer--no-expand){
+    cursor:pointer;
+  }
+}
+
+/* to be combined with .button-unstyled */
+.ExplorerNode__Expander {
+  border: 1px solid rgba(0,0,0,0);
+  background-color: rgba(0,0,0,0); /*make bg transparent because of common css issue*/
+
+  text-decoration:none;
+  font-size: 12px;
+  padding-top: 3px;
+  /* define an invisible border so that :focus/:active doesn't make ancestor elements change size*/
+}
+
+// .explorer-node-inner-collapsible-content { 
+/*
+  Supplementary, non-column based content
+*/ 
+.ExplorerNode__SuppContent {
+  margin-top: 5px;
+}
+
+
+//bottom-right link container
+//good for quick infographic links
+.ExplorerNode__BRLinkContainer { 
+  text-align: right;
+  padding: 1px 10px 2px 0px;
+}
+
+.ExplorerNode__List { 
+  @include unstyled-list;
+}
+
+
+// .explorer-collapsible-children-container {
+.ExplorerNodeContainer__ChildrenContainer {
+  margin-bottom: 30px; 
+}
+
+.ExplorerNodeContainer__ChildrenList,
+.ExplorerRootList {
+  margin: 5px 0;
+  padding-left: 0;
+  list-style: none;
+
+}
+
+.ExplorerNodeContainer__ChildrenGroupHeader {
+  margin-top: 15px;
+  font-weight: 700;
+  font-size: 12pt;
+}
+ 
+
+.ExplorerRow {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  padding-right: 5px;
+  padding-bottom: 3px;
+}
+
+.ExplorerRow_Cell {
+  width: "100%"; /* IE */ 
+}
+
+
+.ExplorerHeader {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 10px;
+
+  &.ExplorerHeader--blue {
+    background-color: $secondaryColor;
+    color: $backgroundColor;
+  }
+
+}

@@ -1,0 +1,32 @@
+.budget-panel-controls-and-graph {
+  width: 100%;
+
+  & > .centerer {
+    @media(max-width: 599px){
+      flex-direction: column;
+    }
+
+    label {
+      padding: 0px 15px;
+      text-align: center;
+
+      & > select {
+        display: block;
+        margin: 10px auto;
+      }
+    }
+  }
+
+  & > .budget-panel-graph-label {
+    position: absolute;
+    font-weight: 700;
+    font-size: 12px;
+    margin-left: 20px;
+  }
+
+  & > .budget-panel-graph {
+    max-height: 750px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
