@@ -120,4 +120,3 @@ workflows:
             branches:
               only:
                 - master
-                - d3_v5
