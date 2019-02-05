@@ -19,7 +19,7 @@ const get_rules = ({
         loader: 'babel-loader',
         options: {
           cacheDirectory: true,
-          sourceType: "unambiguous",
+          sourceType: "unambiguous", // needed if we've still got CommonJS modules being shared by src and build_code
           plugins: ["@babel/plugin-proposal-object-rest-spread", "@babel/plugin-syntax-dynamic-import"],
           presets: [
             ["@babel/preset-env", {
@@ -33,7 +33,7 @@ const get_rules = ({
                 {
                   Chrome: "66",
                 },
-              forceAllTransforms: is_prod,
+              forceAllTransforms: is_prod, // need to forceAllTransforms when uglifying
             }],
             "@babel/preset-react",
           ],
@@ -65,18 +65,7 @@ const get_rules = ({
     ],
   },
   {
-    test: /\.ib.yaml$/, //consider having webpack create a split bundle for the result.
-    use: [
-      { loader: "./node_loaders/ib-text-loader.js" },
-      { loader: "json-loader" },
-      { 
-        loader: "./node_loaders/yaml-lang-loader.js",
-        options: {lang: language},
-      },
-    ],
-  }, 
-  {
-    test: /^((?!\.ib).)*\.yaml$/, //consider having webpack create a split bundle for the result.
+    test: /\.yaml$/,
     use: [
       { loader: "json-loader" },
       { 
