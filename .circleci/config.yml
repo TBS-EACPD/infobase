@@ -125,3 +125,4 @@ workflows:
             branches:
               only:
                 - master
+                - results_from_api
