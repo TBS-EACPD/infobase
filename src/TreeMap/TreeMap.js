@@ -119,16 +119,16 @@ function result_color_scale(node){
 
 // need this slightly tricky formulation because we only want to use part of the Blues scale (darkest colours
 // are too dark for good contrast with the text)
-const d3_color_scale = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeBlues[9].slice(0,7).reverse()))
-  .domain([0, innerWidth/2]);
+const d3_color_scale = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeBlues[9].slice(3,7)));
+
+//debugger;
 d3_color_scale.clamp(true);
-const neg_d3_color_scale =  d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeReds[9].slice(0,5)))
-  .domain([0, innerWidth/2])
-function standard_color_scale(node, chart_scale){
+const neg_d3_color_scale =  d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeReds[9].slice(3,5)));
+function standard_color_scale(node, colour_val){
   if(node.data.amount < 0){
-    return neg_d3_color_scale( chart_scale(node.x0) );
+    return neg_d3_color_scale( -colour_val );
   }
-  return d3_color_scale( chart_scale(node.x0) );
+  return d3_color_scale( colour_val );
 }
 
 function std_tooltip_render(tooltip_sel){

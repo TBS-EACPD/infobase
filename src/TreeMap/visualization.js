@@ -331,7 +331,7 @@ export class TreeMap extends React.PureComponent {
         top: `${y(d.y0)}px`,
         width: `${x(d.x1) - x(d.x0)}px`,
         height: `${y(d.y1) - y(d.y0)}px`,
-        "background-color": colourScale(d, x),
+        "background-color": d.data.parent_amount? colourScale(d,d.data.amount/d.data.parent_amount*2) : colourScale(d,0),
       }));
     }
 

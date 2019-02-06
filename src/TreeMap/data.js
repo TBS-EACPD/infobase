@@ -222,18 +222,18 @@ export async function get_data(type,org_id){
           _.first(orgs)
       ))
       .value(); 
-    _.each(data, prep_nodes);
-    const grouped_data = group_smallest(
-      data, 
+    const root = {
+      name: "Government",
+      children: data,
+      amount: _.sumBy(data, "amount"),
+    };
+    prep_nodes(root);
+    root.children = group_smallest(
+      root.children, 
       children => ({ name: smaller_items_text, children }),
       true,
       0.007,
     );
-    const root = {
-      name: "Government",
-      children: grouped_data,
-      amount: _.sumBy(data, "amount"),
-    };
     return d3.hierarchy(root);
   } else if(type === "tp"){
     const tp_table = Table.lookup('orgTransferPayments');
@@ -253,18 +253,18 @@ export async function get_data(type,org_id){
       .value();
       
     data = orgs;
-    _.each(data, prep_nodes);
-    const grouped_data = group_smallest(
-      data, 
+    const root = {
+      name: "Government",
+      children: data,
+      amount: _.sumBy(data, "amount"),
+    };
+    prep_nodes(root);
+    root.children = group_smallest(
+      root.children, 
       children => ({ name: smaller_items_text, children }),
       true,
       0.007
     );
-    const root = {
-      name: "Government",
-      children: grouped_data,
-      amount: _.sumBy(data, "amount"),
-    };
     return d3.hierarchy(root);
 
   } else if(type === "vote_stat"){
@@ -288,18 +288,18 @@ export async function get_data(type,org_id){
 
     
     data = orgs;
-    _.each(data, prep_nodes);
-    const grouped_data = group_smallest(
-      data, 
+    const root = {
+      name: "Government",
+      children: data,
+      amount: _.sumBy(data, "amount"),
+    };
+    prep_nodes(root);
+    root.children = group_smallest(
+      root.children, 
       children => ({ name: smaller_items_text, children }),
       true,
       0.005,
     );
-    const root = {
-      name: "Government",
-      children: grouped_data,
-      amount: _.sumBy(data, "amount"),
-    };
     return d3.hierarchy(root);
   }
 
