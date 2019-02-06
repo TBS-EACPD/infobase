@@ -175,7 +175,7 @@ export async function get_data(type,org_id){
       children => ({ name: smaller_items_text, children })
     );
     const root = {
-      name: org.name,
+      name: org.fancy_name? org.fancy_name : org.name,
       children: grouped_data,
       amount: _.sumBy(data, "amount"),
     };
@@ -188,15 +188,15 @@ export async function get_data(type,org_id){
     const orgs = _.chain(Dept.get_all())
       .map(org => ({
         subject: org,
-        name: org.name,
+        name: org.fancy_name,
         children: _.chain(org.crsos)
           .map(crso => ({
             subject: crso,
-            name: crso.name,
+            name: crso.fancy_name,
             children: _.chain(crso.programs)
               .map(prog => ({
                 subject: prog,
-                name: prog.name,
+                name: prog.fancy_name,
                 amount: program_spending_table.q(prog).sum(exp_col),
               }))
               .filter(has_non_zero_or_non_zero_children)
@@ -240,7 +240,7 @@ export async function get_data(type,org_id){
     const orgs = _.chain(Dept.get_all())
       .map(org => ({
         subject: org,
-        name: org.name,
+        name: org.fancy_name,
         children: _.chain(tp_table.q(org).data)
           .map(row => ({
             name: row.tp,
@@ -272,7 +272,7 @@ export async function get_data(type,org_id){
     const orgs = _.chain(Dept.get_all())
       .map(org => ({
         subject: org,
-        name: org.name,
+        name: org.fancy_name,
         children: _.chain(vote_stat_table.q(org).data)
           .groupBy('desc')
           .toPairs()

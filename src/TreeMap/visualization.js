@@ -82,9 +82,9 @@ export class TreeMap extends React.PureComponent {
                 <li>
                   <a href="#treemap/vote_stat"> Vote stat items </a>
                 </li>
-                <li>
+                <!-- <li>
                   <a href="#treemap/org_results"> Organization results </a>
-                </li>
+                </li> -->
               </ul>
             </div>
             <div class="TreeMap_SideBar__Title">
