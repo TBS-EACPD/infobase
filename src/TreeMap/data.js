@@ -1,12 +1,9 @@
 import { Table } from '../core/TableClass.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
+import { trivial_text_maker } from '../models/text.js';
 
+export const smaller_items_text = trivial_text_maker("see_the_infographic");
 
-export const smaller_items_text = "Smaller Items" //(
-//APPLICATION_LANGUAGE === "en" ? 
-//"Smaller Items" :
-//"Objets plus petits"
-//)
 
 import { Subject } from '../models/subject.js';
 
