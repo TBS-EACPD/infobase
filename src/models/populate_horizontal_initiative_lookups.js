@@ -1,4 +1,4 @@
-import { get_static_url, make_request } from '../core/request_utils';
+import { get_static_url, make_request } from '../request_utils.js';
 import { Subject } from './subject.js';
 
 const { Tag } = Subject;
