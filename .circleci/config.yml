@@ -26,11 +26,14 @@ jobs:
     docker:
       - image: gcr.io/ib-static-content/ib-client-ci-build:latest
         <<: *gcloud_auth
+    working_directory: "~/InfoBase/client"
     steps:
-      - checkout
-      - run: chmod +x ./.circleci/chmod_scripts.sh
-      - run: ./.circleci/chmod_scripts.sh
-      - run: ./.circleci/create_envs.sh
+      - checkout:
+          path: "~/InfoBase"
+      - run: pwd
+      - run: chmod +x ./ci_scripts/chmod_scripts.sh
+      - run: ./ci_scripts/chmod_scripts.sh
+      - run: ./ci_scripts/create_envs.sh
       - restore_cache:
           keys:
             - ib-client-dependencies-{{ checksum "package-lock.json" }}
@@ -59,7 +62,7 @@ jobs:
             - ./build
             - ./node_modules
             - ./browser-tests
-            - ./.circleci
+            - ./ci_scripts
             - ./deploy_build_scripts
             - ./package.json
 
@@ -73,10 +76,11 @@ jobs:
     docker:
       - image: gcr.io/ib-static-content/ib-client-ci-test:latest
         <<: *gcloud_auth
+    working_directory: "~/InfoBase/client"
     steps:
       - attach_workspace:
-          at: ./
-      - run: sh ./.circleci/create_envs.sh
+          at: ./client
+      - run: sh ./ci_scripts/create_envs.sh
       - run: sed -i "s#${CDN_URL}#.#g" ./build/InfoBase/app/*.js # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
       - run: sed -i "s#${CDN_URL}#.#g" ./build/InfoBase/*.html # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
       - run: 
@@ -88,18 +92,19 @@ jobs:
 
   # Deploy job steps:
   #  1) mount workspace (meaning this job must be run in a workflow where it is proceeded by a build job)
-  #  2) make ./.circleci/authenticate-gcloud.sh executable
-  #  3) execute ./.circleci/authenticate-gcloud.sh (authenticate with google cloud using env variable securely stored with CircleCI)
+  #  2) make ./ci_scripts/authenticate-gcloud.sh executable
+  #  3) execute ./ci_scripts/authenticate-gcloud.sh (authenticate with google cloud using env variable securely stored with CircleCI)
   #  4) rsync the built IB to the InfoBase static bucket
   # Note: the image used for this job is provided by google
   deploy:
+    working_directory: "~/InfoBase/client"
     docker:
       - image: google/cloud-sdk:slim
     steps:
       - attach_workspace:
-          at: ./
-      - run: ./.circleci/create_envs.sh
-      - run: ./.circleci/authenticate-gcloud.sh
+          at: ./client
+      - run: ./ci_scripts/create_envs.sh
+      - run: ./ci_scripts/authenticate-gcloud.sh
       - run: ./deploy_build_scripts/push_to_gcloud_bucket.sh
       
 
