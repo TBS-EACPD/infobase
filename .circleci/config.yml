@@ -102,7 +102,7 @@ jobs:
       - image: google/cloud-sdk:slim
     steps:
       - attach_workspace:
-          at: ./client
+          at: ./
       - run: ./ci_scripts/create_envs.sh
       - run: ./ci_scripts/authenticate-gcloud.sh
       - run: ./deploy_build_scripts/push_to_gcloud_bucket.sh
