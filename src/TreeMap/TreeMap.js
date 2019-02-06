@@ -131,25 +131,47 @@ function standard_color_scale(node, chart_scale){
 
 function std_tooltip_render(tooltip_sel){
   tooltip_sel.html(function(d){
+    let tooltip_html = `<div>
+    <div>${d.data.name}</div>
+    <hr class="BlueHLine">
+    <div>${formats.compact1(d.data.amount)}</div>`;
     if(d.data.parent_amount){
-      return `<div>
-      <div>${d.data.name}</div>
-      <hr class="BlueHLine">
-      <div>${formats.compact1(d.data.amount)}</div>
-      <div>${formats.percentage1(d.data.amount/d.data.parent_amount)} of ${d.data.parent_name}</div>
-      ${generate_infograph_href(d)}
-    </div>`
-    } else {
-      return `<div>
-      <div>${d.data.name}</div>
-      <hr class="BlueHLine">
-      <div>${formats.compact1(d.data.amount)}</div>
-      ${generate_infograph_href(d)}
-    </div>`
+      tooltip_html = tooltip_html + `
+      <div>${formats.percentage1(d.data.amount/d.data.parent_amount)} of ${d.data.parent_name}</div>`;
     }
+    tooltip_html = tooltip_html + `
+    ${generate_infograph_href(d)}
+    </div>`;
+    return tooltip_html;
   })
+
 }
 
+function mobile_tooltip_render(tooltip_sel){
+  tooltip_sel.html(function(d){
+    let tooltip_html = `<div>
+    <div>${d.data.name}</div>
+    <hr class="BlueHLine">
+    <div>${formats.compact1(d.data.amount)}</div>`;
+    if(d.data.parent_amount){
+      tooltip_html = tooltip_html + `
+      <div>${formats.percentage1(d.data.amount/d.data.parent_amount)} of ${d.data.parent_name}</div>`;
+    }
+    tooltip_html = tooltip_html + `
+    ${generate_infograph_href(d)}`
+    if(d3.select(this.parentNode).classed("TreeMapNode__ContentBoxContainer--has-children")){
+      tooltip_html = tooltip_html + `
+      <button class="btn-primary">Zoom in</button>`
+    }
+    tooltip_html = tooltip_html + `
+    </div>`;
+    return tooltip_html;
+  })
+  .select("button")
+  .on("click", function(d){
+    d3.select(d).transition();
+  })
+}
 
 function generate_infograph_href(d){
   if (d.data.subject ){
@@ -303,7 +325,7 @@ export default class TreeMapper extends React.Component {
               tooltip_render={
                 perspective === "org_results" ?
                 results_tooltip_render :
-                std_tooltip_render
+                window.feature_detection.is_mobile() ? mobile_tooltip_render : std_tooltip_render
               }
               node_render={
                 perspective === "org_results" ?
