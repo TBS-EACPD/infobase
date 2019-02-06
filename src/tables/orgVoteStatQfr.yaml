@@ -8,7 +8,7 @@ orgVoteStatQfr_short:
    Using {{gl_tt "Quarterly Financial Reports (QFR)" "QFR"}}, this table presents 
    net budgetary {{gl_tt "authorities" "AUTH"}} and {{gl_tt "expenditures" "BUD_EXP"}} by {{gl_tt "vote" "VOTED"}} and 
    {{gl_tt "statutory" "STAT"}} item for the quarter and year-to-date for each organization that produces a QFR. Data from the previous fiscal year is also presented 
-   for  comparison.
+   for comparison.
 
   fr: |
    Selon les {{gl_tt "rapports financiers trimestriels (RFT)" "QFR"}}, ce tableau présente
@@ -28,9 +28,7 @@ orgVoteStatQfr:
 
    All figures presented reflect information published in the {{qfr_in_year}} Departmental and Agency {{gl_tt "Quarterly Financial Reports" "QFR"}}, 
    although totals may not match or agree with those presented in these documents due to rounding. 
-   In cases where machinery of government changes (such 
-   as the merging or elimination of organizations) have occurred, the data has 
-   not been adjusted. 
+   In cases where machinery of government changes (such as the merging or elimination of organizations) have occurred, the data has not been adjusted. 
   fr: |
    {{{gt "orgVoteStatQfr_short"}}}
 

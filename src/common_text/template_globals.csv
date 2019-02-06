@@ -1,11 +1,10 @@
 key,en,fr
-qfr_month_name,June 30,30 juin
+qfr_month_name,September 30,30 septembre
 qfr_in_year_end,"March 31st, 2019",31 mars 2019
 qfr_last_year_end,"March 31st, 2018",31 mars 2018
 last_estimates,Supplementary Estimates B,Budget supplémentaire des dépenses B
-quarter_name,Q1,premier trimestre
-qfr_month_quarter_names,April to June,avril à juin
-in_year_month_name,April,April
+quarter_name,Q2,deuxième trimestre
+qfr_month_quarter_names,July to September,juillet à septembre
 qfr_last_year,2017-18,2017-2018
 qfr_in_year,2018-19,2018-2019
 pa_last_year,2017-18,2017-2018
