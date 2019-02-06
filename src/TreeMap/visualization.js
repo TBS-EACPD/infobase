@@ -3,6 +3,8 @@ import { create_text_maker } from '../models/text.js';
 import { formats } from '../core/format.js';
 import classNames from "classnames";
 import { smaller_items_text } from './data.js';
+import { get_static_url } from '../request_utils.js';
+
 
 const text_maker = create_text_maker(text);
 
@@ -358,7 +360,7 @@ function zoom_ctrl_text(d) {
 }
 
 
-const chevron_html = `<span class="TreeMap__SideBar__Chevron glyphicon glyphicon-chevron-down"></span>`;
+const chevron_html = `<img class="TreeMap__SideBar__Chevron" src=${get_static_url("svg/chevron.svg")}/>`;
 const sidebar_item_html = function(d){
   return (`
   ${ d.parent ? chevron_html : ""}
