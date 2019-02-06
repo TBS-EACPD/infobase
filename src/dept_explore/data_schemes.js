@@ -54,7 +54,7 @@ export function by_min_dept(){
       subj_obj: dept,
       min: dept.ministry.name,
       unique_id: dept.unique_id,
-      name: dept.sexy_name,
+      name: dept.fancy_name,
       __value__: last_year,
       value: Math.abs(last_year),
     }))
@@ -107,7 +107,7 @@ export function by_dept_type(){
         subj_obj: dept,
         type: dept.type,
         unique_id: dept.unique_id,
-        name: dept.sexy_name,
+        name: dept.fancy_name,
         __value__: total,
         value: Math.abs(total),
       };
@@ -169,7 +169,7 @@ export function by_this_year_emp(){
       return {
         subj_obj: dept,
         unique_id: dept.unique_id,
-        name: dept.sexy_name,
+        name: dept.fancy_name,
         __value__: total,
         value: Math.abs(total),
       };

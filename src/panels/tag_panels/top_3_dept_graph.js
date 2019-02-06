@@ -112,8 +112,8 @@ new PanelGraph({
                       <ProgressDonut
                         height={80}
                         data={[
-                          { label: subject.sexy_name, value: tag_spent },
-                          { label: dept.sexy_name, value: total_spent },
+                          { label: subject.fancy_name, value: tag_spent },
+                          { label: dept.fancy_name, value: total_spent },
                         ]}
                       />
                     </div>

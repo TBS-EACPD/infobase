@@ -339,7 +339,7 @@ Statistics.create_and_register({
 
     var last_year = _.map(
       q.get_top_x(["dept","activity_code","{{pa_last_year}}exp"],Infinity,{zip: true,sort_col: "{{pa_last_year}}exp"}),
-      ([ org_id, ac, val]) => [ `${Dept.lookup(org_id).sexy_name} - ${Program.get_from_activity_code(org_id, ac).name}`, val]
+      ([ org_id, ac, val]) => [ `${Dept.lookup(org_id).fancy_name} - ${Program.get_from_activity_code(org_id, ac).name}`, val]
     )
     stats.one_year_top3(add, "prg", last_year);
     

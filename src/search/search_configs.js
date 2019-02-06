@@ -186,7 +186,7 @@ const datasets = {
 
 const programs = {
   header_function: () => trivial_text_maker('programs'),
-  name_function: program => `${program.name} (${program.dept.sexy_name})`,
+  name_function: program => `${program.name} (${program.dept.fancy_name})`,
   get_data: () => Program.get_all(),
   filter: (query, datum) => memoized_re_matchers(query, ['name'], "programs")(datum),
   menu_content_function: function(program, search){
@@ -213,7 +213,7 @@ const programs = {
 //only include CRs because SO's have really really long names
 const crsos = {
   header_function: () => trivial_text_maker('core_resps'),
-  name_function: crso => `${crso.name} (${crso.dept.sexy_name})`,
+  name_function: crso => `${crso.name} (${crso.dept.fancy_name})`,
   get_data: () => _.filter(CRSO.get_all(), 'is_cr'),
   filter: (query, datum) => memoized_re_matchers(query, ['name'], "crsos")(datum),
 };

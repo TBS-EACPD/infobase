@@ -39,7 +39,7 @@ Subject.Gov = {
   // the following name-like fields are for compatibility with old APIs and to ensure it's searchable in org-searches
   title: gov_name,
   legal_name: gov_name, //hacky thing to include gov in the search
-  sexy_name: gov_name,
+  fancy_name: gov_name,
 };
 
 
@@ -156,7 +156,7 @@ Subject.Dept = class Dept extends common(){
       return false;
     }
   }
-  get sexy_name(){
+  get fancy_name(){
     return this.applied_title || this.name;
   }
   get tables(){
@@ -345,7 +345,7 @@ Subject.Tag = class Tag extends common(){
       .sortBy("name")
       .value();
   }
-  get sexy_name(){
+  get fancy_name(){
     return this.name;
   }
   get is_m2m(){
@@ -395,7 +395,7 @@ Subject.CRSO = class CRSO extends common(){
       return trivial_text_maker("strategic_outcomes");
     }
   }
-  get sexy_name(){
+  get fancy_name(){
     return this.name;
   }
   get has_planned_spending(){ 
@@ -452,7 +452,7 @@ Subject.Program = class Program extends common(){
   get link_to_infographic(){
     return `#orgs/program/${this.id}/infograph`
   }
-  get sexy_name(){
+  get fancy_name(){
     return this.name;
   }
   get is_first_wave(){

@@ -36,7 +36,7 @@ function create_rooted_resource_hierarchy({doc,root_subject}){
         }
 
         return _.chain(subject.programs)
-          .groupBy(prog => prog.dept.sexy_name)
+          .groupBy(prog => prog.dept.fancy_name)
           .map( (progs, org_name) => (
             _.map(progs, prog => ({
               id: `${parent_id}-${prog.guid}`,

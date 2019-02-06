@@ -63,7 +63,7 @@ new PanelGraph({
                 colors={colors}
                 formater={formats.compact1}
                 font_size="16"
-                title={subject.sexy_name}
+                title={subject.fancy_name}
                 data={graph_args.data2}
               />
             </Col>

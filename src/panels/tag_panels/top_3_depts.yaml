@@ -17,12 +17,12 @@ tag_top_3_depts_text:
    Of the maximum **{{fmt_compact1_written tag_exp_pa_last_year}}** spent on the tag "**{{subj_name subject}}**", the three largest contributing 
    organizations in {{pa_last_year}} were:
    {{#each top_3_depts}}
-    * **{{dept.sexy_name}}**
+    * **{{dept.fancy_name}}**
    {{/each}}
 
   fr: |
    Les trois organisations qui ont le plus contribué au montant maximal de **{{fmt_compact1_written tag_exp_pa_last_year}}** dépensé
    sur l'étiquette «**{{subj_name subject}}**» en {{pa_last_year}} étaient:
    {{#each top_3_depts}}
-    * **{{dept.sexy_name}}**
+    * **{{dept.fancy_name}}**
    {{/each}}

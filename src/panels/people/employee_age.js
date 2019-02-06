@@ -73,7 +73,7 @@ const calculate_funcs_by_level = {
     
     const avg_age = _.chain(orgEmployeeAvgAge.q(dept).data)
       .map(row => ({
-        label: Subject.Dept.lookup(row.dept).sexy_name,
+        label: Subject.Dept.lookup(row.dept).fancy_name,
         data: people_years.map(year =>row[year]),
         active: true,
       }))

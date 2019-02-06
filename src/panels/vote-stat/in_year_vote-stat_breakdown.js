@@ -39,7 +39,7 @@ const planned_vote_or_stat_render = vs => function({calculations, footnotes, sou
   const total_amt = d3.sum(data, _.property(col) );
 
   const rows= _.map(top_10_rows, obj => ({
-    name: Subject.Dept.lookup(obj.dept).sexy_name,
+    name: Subject.Dept.lookup(obj.dept).fancy_name,
     rpb_link: infograph_href_template(Subject.Dept.lookup(obj.dept)),
     voted_stat: obj.desc, 
     amount: obj[col],
@@ -96,7 +96,7 @@ const planned_vote_or_stat_render = vs => function({calculations, footnotes, sou
 
                 if (d.depth === 0){ return; }
                 if (d.dept){
-                  text += Subject.Dept.lookup(d.dept).sexy_name + " - ";
+                  text += Subject.Dept.lookup(d.dept).fancy_name + " - ";
                 }
                 
                 text += d.data.desc + " - " + formats.compact1(d.value);
@@ -129,7 +129,7 @@ const planned_vote_or_stat_calculate = vs => function(subject, info){
 
     if (d.data.dept){
 
-      text = `${Subject.Dept.lookup(d.data.dept).sexy_name} -  ${text}`;
+      text = `${Subject.Dept.lookup(d.data.dept).fancy_name} -  ${text}`;
     }
     const estimated_string_size = (d.zoom_r*1.2/5) * d.zoom_r/18; 
     return text_abbrev(text, estimated_string_size);

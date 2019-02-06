@@ -91,7 +91,7 @@ p.build_graphic = function(data,depts,formater){
           Pack.navigate_packing(
             chart.dispatch,
             chart.root,
-            d => d.data.name === subject.sexy_name,
+            d => d.data.name === subject.fancy_name,
             750
           );
         }

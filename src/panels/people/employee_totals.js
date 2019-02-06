@@ -79,7 +79,7 @@ const info_deps_by_level = {
                 label_col_header = {text_maker("org")} 
                 data_col_headers = {ticks}
                 data = {[{
-                  label: subject.sexy_name, 
+                  label: subject.fancy_name, 
                   data: series[""],
                 }]}
               />
