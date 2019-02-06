@@ -116,12 +116,14 @@ function result_color_scale(node){
   return "#eee";
 }
 
-const d3_color_scale = d3.scaleLinear()
-  .range(["#1499FF","#b8e0ff"])
+
+// need this slightly tricky formulation because we only want to use part of the Blues scale (darkest colours
+// are too dark for good contrast with the text)
+const d3_color_scale = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeBlues[9].slice(0,7).reverse()))
+  .domain([0, innerWidth/2]);
+d3_color_scale.clamp(true);
+const neg_d3_color_scale =  d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeReds[9].slice(0,5)))
   .domain([0, innerWidth/2])
-const neg_d3_color_scale = d3.scaleLinear()
-  .range(["#FF6661","#ff8985"])
-  .domain([0, innerWidth/4])
 function standard_color_scale(node, chart_scale){
   if(node.data.amount < 0){
     return neg_d3_color_scale( chart_scale(node.x0) );

@@ -14,7 +14,7 @@
   }
   .TreeMap__SideBar__Chevron.glyphicon.glyphicon-chevron-down{
     padding-top: 10px;
-    color: #78c3fc;
+    color: #9ecae1;
   }
   
   .TreeMap__ZoomControl {
@@ -24,7 +24,7 @@
     padding: 1rem;
     &.TreeMap__ZoomControl--has-zoom-out {
       &:hover {
-        background-color: #78c3fc !important;
+        background-color: #9ecae1 !important;
       }
       cursor: pointer;
     }
@@ -63,7 +63,7 @@
   .TreeMapNode__ContentBoxContainer {
     &:hover{
       background-color: rgba(200, 200, 200, 0.1);
-      border: 2px solid #056bba;
+      border: 2px solid #4292c6;
     }
     position: absolute;
   
@@ -74,7 +74,7 @@
 
   .TreeMapNode__ContentBoxContainer--tapped {
     background-color: rgba(200, 200, 200, 0.1);
-    border: 2px solid #056bba;
+    border: 2px solid #4292c6;
   }
 
   .TreeMapNode__ContentBox {
@@ -177,7 +177,7 @@
       border-color: transparent transparent #767f89 transparent;
     }
     .TM_Tooltip__link {
-      color: #78c3fc
+      color: #9ecae1
     }
   }
 
@@ -185,6 +185,6 @@
   .BlueHLine {
     display: block;
     height: 1px;
-    border-top: 3px solid #78c3fc;
+    border-top: 3px solid #9ecae1;
     margin-top: 2px;  
   }
