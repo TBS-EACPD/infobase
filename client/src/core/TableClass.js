@@ -123,7 +123,7 @@ export class Table extends mix().with(staticStoreMixin){
       })
       .value();
   
-    this.keycs = to_chain
+    this.keys = to_chain
       .filter(function(h){ return h.key;})
       .map(function(h){return h.nick || h.header.en;})
       .value();
