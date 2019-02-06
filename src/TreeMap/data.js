@@ -101,6 +101,12 @@ function prep_nodes(node){
     node.size = _.sumBy(children, "size")
     _.each(children, n => { _.set(n, "parent_amount", node.amount)});
     _.each(children, n => { _.set(n, "parent_name", node.name)});
+    if(_.chain(children)
+      .every()
+      .has("ftes")
+      .values() ){
+      node.ftes = _.sumBy(children, "ftes")
+    }
   } else {
     //leaf node, already has amount but no size
     node.size = Math.abs(node.amount);
@@ -198,6 +204,7 @@ export async function get_data(type,org_id){
                 subject: prog,
                 name: prog.fancy_name,
                 amount: program_spending_table.q(prog).sum(exp_col),
+                ftes: program_ftes_table.q(prog).sum(exp_col),
               }))
               .filter(has_non_zero_or_non_zero_children)
               .value(),
