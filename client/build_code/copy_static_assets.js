@@ -31,7 +31,7 @@ PROJ -> {
   copy entire svg directory, src/svg, to build/PROJ.name/svg
 }
 */
-const public_data_dir = "data/";
+const public_data_dir = "../data/";
 
 const public_dir_prefixer = file_name => public_data_dir+file_name;
 
