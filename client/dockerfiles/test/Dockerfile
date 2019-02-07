@@ -4,5 +4,7 @@ RUN apk update && apk upgrade && \
     udev \
     xvfb \
     chromium \
-    ca-certificates
+    ca-certificates \ 
+    mongodb
+RUN mkdir -p /data/db # create default mongodb data directory
 RUN apk add --no-cache bash
