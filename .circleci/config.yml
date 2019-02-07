@@ -223,3 +223,9 @@ workflows:
           requires:
             - deploy_server
           <<: *deploy_filter
+          filters:
+            branches:
+              only:
+                - master
+                - nivo_bar_graph
+

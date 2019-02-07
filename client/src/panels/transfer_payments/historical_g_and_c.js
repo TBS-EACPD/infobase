@@ -1,9 +1,11 @@
 import {Fragment } from 'react';
+import { ResponsiveLine } from '@nivo/line';
 import {
   text_maker,
   TM,
 } from './gnc_text_provider.js';
 import {
+  formats,
   dollar_formats,
   run_template,
   PanelGraph,
@@ -131,7 +133,6 @@ class HistTPTypes extends React.Component {
       text_split,
     } = this.props;
     const { active_types } = this.state;
-
     const filtered_series = _.chain(series)
       .pick(active_types)
       .mapKeys( (val,key) => tp_type_name(key) )
@@ -144,8 +145,6 @@ class HistTPTypes extends React.Component {
       .reverse()
       .fromPairs()
       .value();
-
-
 
     const colors = infobase_colors();
 
@@ -182,8 +181,24 @@ class HistTPTypes extends React.Component {
         label_col_header={text_maker("transfer_payment_type")}
       />;
     } else {
+      
+      let expData = _.map(filtered_series, function(value, key ){
+        const id = key;
+        let data = value.map((d,i) =>{
+          const date = `${2013+i}-${14+i}`;
+          let result = {};
+          result ["y"] = d;
+          result["x"]=date;
+          return result;
+        });
+        let result ={};
+        result["id"] = key;
+        result["data"]=data;
+        return result;
+      });
+    
       content = <Fragment>
-        <div className="legend-container">
+        {/* <div className="legend-container">
           <GraphLegend
             items={legend_items}
             isHorizontal
@@ -191,17 +206,42 @@ class HistTPTypes extends React.Component {
               active_types: _.toggle_list(active_types, id),
             })}
           />  
+        </div> */}
+        <div style ={{height: '400px'}}>
+          <ResponsiveLine
+            data={expData}
+            margin={{
+              "top": 50,
+              "right": 50,
+              "bottom": 50,
+              "left": 90
+            }}
+            xScale={{
+              "type": "point"
+            }}
+            yScale={{
+              "type": "linear",
+              "stacked": true,
+              "min": "0",
+              "max": "auto"
+            }}
+            axisLeft={{
+              "format":d => formats.compact1(d,{raw:true})
+            }}
+            axisTop={null}
+            axisRight={null}
+          dotSize={0}
+          dotColor="inherit:darker(0.3)"
+          dotBorderWidth={2}
+          dotBorderColor="#ffffff"
+          enableDotLabel={false}          
+          animate={true}
+          motionStiffness={90}
+          motionDamping={15}
+          enableArea={true}
+          colors="paired"
+    />
         </div>
-        <Line
-          formatters={dollar_formats}
-          y_axis="($)"
-          height={375}
-          stacked
-          series={filtered_series}
-          colors={colors}
-          ticks={_.map(std_years,run_template)}
-          
-        />
       </Fragment>
     }
 

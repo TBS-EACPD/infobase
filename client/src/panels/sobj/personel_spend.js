@@ -105,8 +105,7 @@ new PanelGraph({
           animate={true}
           motionStiffness={90}
           motionDamping={15}
-          // curve="monotoneX"
-          tooltipFormat={d=> `$${formats.big_int_real(d, {raw: true})}`}
+          tooltipFormat={d=> <span>{`$${formats.big_int_real(d, {raw: true})}`}</span>}
         />
       </div>;
     }
