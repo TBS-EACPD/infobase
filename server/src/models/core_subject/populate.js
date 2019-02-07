@@ -10,7 +10,7 @@ export default async function({models}){
 
   const url_lookups = _.keyBy(get_standard_csv_file_rows("url_lookups.csv"), 'id');
 
-  const org_objs = _.chain(get_standard_csv_file_rows("IGOC.csv"))
+  const org_objs = _.chain(get_standard_csv_file_rows("igoc.csv"))
     .map(obj=> ({
       ...obj,
       name_en: obj.applied_title_en || obj.legal_title_en,
@@ -26,12 +26,12 @@ export default async function({models}){
 
   await Org.insertMany(org_objs)
 
-  const crso_objs = _.chain(get_standard_csv_file_rows("CRSO.csv"))
+  const crso_objs = _.chain(get_standard_csv_file_rows("crso.csv"))
     .map( obj => ({ 
       ..._.omit(obj, 'id'),
       crso_id: obj.id,
       is_active: obj.is_active === "1",
-      ...bilingual_remap("description", "desc"),
+      ...bilingual_remap(obj, "description", "desc"),
     }))
     .map(obj => new Crso(obj) )
     .value()
