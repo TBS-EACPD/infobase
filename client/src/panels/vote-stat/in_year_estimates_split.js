@@ -111,7 +111,6 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
             "tickSize": 3,
             "tickRotation": -30,
           }}
-
           axisLeft={null}
           labelTextColor="inherit:darker(1.6)"
           motionStiffness={90}

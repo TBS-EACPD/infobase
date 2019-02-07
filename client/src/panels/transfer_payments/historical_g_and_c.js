@@ -198,7 +198,6 @@ class HistTPTypes extends React.Component {
       });
     
       content = <Fragment>
-
         <div style ={{height: '400px'}}>
           <ResponsiveLine
             data={expData}
