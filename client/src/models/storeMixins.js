@@ -80,3 +80,23 @@ export const SubjectMixin = superclass => {
     }
   };
 };
+
+export const CanHaveResultsMixin = superclass => {
+  const baseclass = superclass || BaseClass;
+  return class SubjectMixin extends baseclass{
+    constructor(){ 
+      super(); 
+      this._has_results = null;
+    }
+    set_has_results(has_results){
+      this._has_results = has_results;
+    }
+    get has_results(){
+      if ( _.isNull(this._has_results) ){
+        throw '"Has results" status has yet to be loaded!';
+      } else {
+        return this._has_results;
+      }
+    }
+  };
+};
