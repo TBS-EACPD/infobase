@@ -67,7 +67,7 @@ export class App extends React.Component {
               <Route path="/graph/:level?/:graph?/:id?" component={GraphInventory} />
               <Route path="/compare_estimates" component={EstimatesComparison} />
               <Route path="/privacy" component={PrivacyStatement} />
-              <Route path="/treemap" component={TreeMap} />
+              <Route path="/treemap/:perspective?/:colour_var?/:year?/:org_id?" component={TreeMap} />
               <Route path="/" component={Home} />
             </Switch>
             <PageDetails />

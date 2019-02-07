@@ -112,23 +112,40 @@ function results_node_render(foreign_sel){
   })
 }
 
+
 function result_color_scale(node){
   return "#eee";
 }
 
-
 // need this slightly tricky formulation because we only want to use part of the Blues scale (darkest colours
 // are too dark for good contrast with the text)
-const d3_color_scale = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeBlues[9].slice(3,7)));
-
-//debugger;
-d3_color_scale.clamp(true);
+const pos_d3_color_scale = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeBlues[9].slice(3,7)));
+pos_d3_color_scale.clamp(true); // I'm not sure if this is the default
 const neg_d3_color_scale =  d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeReds[9].slice(3,5)));
-function standard_color_scale(node, colour_val){
+neg_d3_color_scale.clamp(true);
+function standard_color_scale (node){
+  let color_val;
+  node.data.parent_amount ? color_val = node.data.amount/node.data.parent_amount * 2 : color_val = 0;
   if(node.data.amount < 0){
-    return neg_d3_color_scale( -colour_val );
+    return neg_d3_color_scale( -color_val );
   }
-  return d3_color_scale( colour_val );
+  return pos_d3_color_scale( color_val );
+}
+
+const d3_fte_scale = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeGreens[9].slice(3,7)));
+d3_fte_scale.clamp(true);
+function fte_color_scale(node){
+  return d3_fte_scale(node.data.ftes/node.data.parent_ftes * 2 );
+}
+
+function get_colour_scale(type,colour_var){
+  if(type === "org_results"){
+    return result_color_scale;
+  } else if(type === "drf" && colour_var && colour_var === "ftes"){
+    return fte_color_scale;
+  } else {
+    return standard_color_scale;
+  }
 }
 
 function std_tooltip_render(tooltip_sel){
@@ -227,9 +244,7 @@ export default class TreeMapper extends React.Component {
     this.state = {
       loading: true,
     };
-
-    this.results_tooltip_render = create_results_tooltip_render_func(_.bind(this.activateModal,this));
-
+    //this.results_tooltip_render = create_results_tooltip_render_func(_.bind(this.activateModal,this));
   }
   componentWillMount(){
     this.set_data(this.props);
@@ -242,22 +257,24 @@ export default class TreeMapper extends React.Component {
       this.set_data(nextProps);
     }
   }
-  activateModal(modal_args){
+/*   activateModal(modal_args){
     this.setState({
       modal_args: modal_args,
     });
-  }
+  } */
   set_data(props){
     const {
       match: {
-        params : {
+        params: {
           perspective,
           org_id,
+          year,
+          color_var,
         },
       },
     } = props; 
 
-    get_data(perspective,org_id).then( data => {
+    get_data(perspective,org_id,year).then( data => {
       this.setState({
         loading: false,
         data,
@@ -267,19 +284,15 @@ export default class TreeMapper extends React.Component {
   render(){
     const {
       match: {
-        params : {
+        params: {
           perspective,
+          color_var,
         },
       },
     } = this.props; 
     const { loading, data, modal_args } = this.state;
-    const colourScale = (
-      perspective === "org_results" ?
-      result_color_scale : 
-      standard_color_scale 
-    );
-
-    const { results_tooltip_render }  = this; 
+    const colorScale = get_colour_scale(perspective, color_var);
+    const { results_tooltip_render } = this; 
 
     return (
       <StandardRouteContainer 
@@ -292,8 +305,8 @@ export default class TreeMapper extends React.Component {
           getApplicationNode={()=>document.getElementById('app')}
           verticallyCenter={true}
           underlayStyle={{
-            paddingTop:"50px",
-            paddingBottom:"50px",
+            paddingTop: "50px",
+            paddingBottom: "50px",
           }}
           focusDialog={true}
           onExit={()=> this.setState({modal_args: null})}
@@ -307,7 +320,7 @@ export default class TreeMapper extends React.Component {
               style={{
                 backgroundColor: 'white',
                 overflow: 'auto',
-                lineHeight : 1.5,
+                lineHeight: 1.5,
                 padding: "0px 20px 0px 20px",
                 borderRadius: "5px",
                 fontWeight: 400,
@@ -323,7 +336,7 @@ export default class TreeMapper extends React.Component {
             <TreeMap 
               side_bar_title={"2018-19"}
               data={data}
-              colourScale={colourScale}
+              colorScale={colorScale}
               tooltip_render={
                 perspective === "org_results" ?
                 results_tooltip_render :

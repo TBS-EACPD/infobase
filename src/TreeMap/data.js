@@ -12,7 +12,6 @@ import { get_root } from '../gen_expl/hierarchy_tools.js';
 
 const { Dept } = Subject;
 
-const exp_col = "{{planning_year_1}}";
 
 
 function has_non_zero_or_non_zero_children(node){
@@ -20,6 +19,42 @@ function has_non_zero_or_non_zero_children(node){
     return Math.abs(node.amount) > 0;
   } else {
     return _.some(node.children, has_non_zero_or_non_zero_children);
+  }
+}
+
+function header_col(type,year){
+  if (type === "drf"){
+    switch(year) {
+      case -5: return "{{pa_last_year_5_exp}}";
+      case -4: return "{{pa_last_year_4_exp}}";
+      case -3: return "{{pa_last_year_3_exp}}";
+      case -2: return "{{pa_last_year_2_exp}}";
+      case -1: return "{{pa_last_year_exp}}";
+      case 1: return "{{planning_year_1}}";
+      case 2: return "{{planning_year_2}}";
+      case 3: return "{{planning_year_3}}";
+      case 4: return "{{planning_year_4}}";
+      case 5: return "{{planning_year_5}}";
+    }
+  } else if (type === "tp" || type === "vote_stat"){
+    switch(year) {
+      case -5: return "{{pa_last_year_5_exp}}";
+      case -4: return "{{pa_last_year_4_exp}}";
+      case -3: return "{{pa_last_year_2_exp}}";
+      case -2: return "{{pa_last_year_2_exp}}";
+      case -1: return "{{pa_last_year_exp}}";
+    }
+  } else if (type === "ftes"){
+    switch(year) {
+      case -5: return "{{pa_last_year_5}}";
+      case -4: return "{{pa_last_year_4}}";
+      case -3: return "{{pa_last_year_3}}";
+      case -2: return "{{pa_last_year_2}}";
+      case -1: return "{{pa_last_year}}";
+      case 1: return "{{planning_year_1}}";
+      case 2: return "{{planning_year_2}}";
+      case 3: return "{{planning_year_3}}";
+    }
   }
 }
 
@@ -149,43 +184,12 @@ function result_h7y_mapper(node){
 
 }
 
-export async function get_data(type,org_id){
+export async function get_data(type, org_id, year){
   await ensure_loaded({table_keys: ["orgVoteStatEstimates","orgTransferPayments","programSpending","programFtes"]});
 
   let data;
 
-  if(type==="org_results"){
-    const org = Dept.lookup(org_id || 'ND');
-    await ensure_loaded({
-      subject: org,
-      results: true,
-    });
-
-    const result_hierarchy = create_full_results_hierarchy({
-      subject_guid: org.guid,
-      doc: "drr17",
-      allow_no_result_branches: true,
-    });
-
-    data = _.map(
-      get_root(result_hierarchy).children,
-      result_h7y_mapper
-    );  
-
-    _.each(data, prep_nodes);
-    const grouped_data = group_smallest(
-      data, 
-      children => ({ name: smaller_items_text, children })
-    );
-    const root = {
-      name: org.fancy_name? org.fancy_name : org.name,
-      children: grouped_data,
-      amount: _.sumBy(data, "amount"),
-    };
-    return d3.hierarchy(root)
-    
-  }
-  else if(type === "drf"){
+  if(type === "drf"){
     const program_ftes_table = Table.lookup('programFtes');
     const program_spending_table = Table.lookup('programSpending');
     const orgs = _.chain(Dept.get_all())
@@ -200,8 +204,8 @@ export async function get_data(type,org_id){
               .map(prog => ({
                 subject: prog,
                 name: prog.fancy_name,
-                amount: program_spending_table.q(prog).sum(exp_col),
-                ftes: program_ftes_table.q(prog).sum(exp_col),
+                amount: program_spending_table.q(prog).sum(header_col(type,year)),
+                ftes: program_ftes_table.q(prog).sum("ftes",year),
               }))
               .filter(has_non_zero_or_non_zero_children)
               .value(),
@@ -212,8 +216,6 @@ export async function get_data(type,org_id){
       .filter(has_non_zero_or_non_zero_children)
       .value();
 
-      // TODO: this is the bit that makes it so that ministries don't have acronyms and we can't display acronyms for the top level
-      // of the hierarchy.
     data = _.chain(orgs)
       .groupBy('subject.ministry.name')
       .toPairs()
@@ -305,9 +307,35 @@ export async function get_data(type,org_id){
       0.005,
     );
     return d3.hierarchy(root);
+  }else if(type==="org_results"){
+    const org = Dept.lookup(org_id || 'ND');
+    await ensure_loaded({
+      subject: org,
+      results: true,
+    });
+
+    const result_hierarchy = create_full_results_hierarchy({
+      subject_guid: org.guid,
+      doc: "drr17",
+      allow_no_result_branches: true,
+    });
+
+    data = _.map(
+      get_root(result_hierarchy).children,
+      result_h7y_mapper
+    );  
+
+    _.each(data, prep_nodes);
+    const grouped_data = group_smallest(
+      data, 
+      children => ({ name: smaller_items_text, children })
+    );
+    const root = {
+      name: org.fancy_name? org.fancy_name : org.name,
+      children: grouped_data,
+      amount: _.sumBy(data, "amount"),
+    };
+    return d3.hierarchy(root)
+    
   }
-
-  
-
-
 }
