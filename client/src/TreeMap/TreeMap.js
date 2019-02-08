@@ -1,7 +1,11 @@
 //https://gist.github.com/guglielmo/16d880a6615da7f502116220cb551498
 
 import { StandardRouteContainer } from '../core/NavComponents.js';
-import { Format, TM } from '../util_components.js';
+import {
+  Format,
+  TM,
+  SpinnerWrapper
+} from '../util_components.js';
 import { get_data } from './data.js';
 import { formats } from '../core/format.js';
 import './TreeMap.scss';
@@ -12,8 +16,10 @@ import { infograph_href_template } from '../link_utils.js';
 import {
   trivial_text_maker,
   run_template
- } from '../models/text.js';
+} from '../models/text.js';
 
+
+/* NODE RENDERING FUNCTIONS */
 
 function std_node_render(foreign_sel){
   foreign_sel.html(function(node){
@@ -115,8 +121,10 @@ function results_node_render(foreign_sel){
   })
 }
 
+/* COLOUR SCALES */
 
-function result_color_scale(node){
+
+/* function result_color_scale(node){
   return "#eee";
 } */
 
@@ -152,6 +160,8 @@ function get_color_scale(type,color_var){
     return standard_color_scale;
   }
 }
+
+/* TOOLTIPS */
 
 function std_tooltip_render(tooltip_sel){
   tooltip_sel.html(function(d){
@@ -219,6 +229,8 @@ function generate_infograph_href(d){
   } else { return ''}
 }
 
+/* OLD RESULTS STUFF */
+
 /* function create_results_tooltip_render_func(activate_modal){
   return function results_tooltip_render(tooltip_sel){
     tooltip_sel.html(d => `
@@ -271,7 +283,8 @@ export default class TreeMapper extends React.Component {
   componentWillUpdate(nextProps){
     if(
       this.props.match.params.perspective !== nextProps.match.params.perspective ||
-      this.props.match.params.org_id !== nextProps.match.params.org_id
+      this.props.match.params.org_id !== nextProps.match.params.org_id ||
+      this.props.match.params.year !== nextProps.match.params.year
     ){
       this.set_data(nextProps);
     }
@@ -288,7 +301,6 @@ export default class TreeMapper extends React.Component {
           perspective,
           org_id,
           year,
-          color_var,
         },
       },
     } = props; 
@@ -352,7 +364,7 @@ export default class TreeMapper extends React.Component {
           }
         </AriaModal> */}
         { loading ? 
-          <p> Loading... </p> : 
+          <SpinnerWrapper ref="spinner" config_name={"route"} /> : 
           <div>
             <TreeMap 
               side_bar_title={display_year}

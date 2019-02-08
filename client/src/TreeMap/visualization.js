@@ -70,22 +70,6 @@ export class TreeMap extends React.PureComponent {
             class="TreeMap__SideBar"
             style="min-height:100%"
           >
-            <div>
-              <ul>
-                <li>
-                  <a href="#treemap/drf"> DRF spending </a>
-                </li>
-                <li>
-                  <a href="#treemap/tp"> Transfer Payments </a>
-                </li>
-                <li>
-                  <a href="#treemap/vote_stat"> Vote stat items </a>
-                </li>
-                <!-- <li>
-                  <a href="#treemap/org_results"> Organization results </a>
-                </li> -->
-              </ul>
-            </div>
             <div class="TreeMap_SideBar__Title">
               ${side_bar_title}
               <hr class="BlueHLine"/>
@@ -99,7 +83,6 @@ export class TreeMap extends React.PureComponent {
 
     const html_root = d3.select(el).select('div');
 
-    
     // the actual treemap div
     const zoom_ctrl = html_root.select('.TreeMap__ZoomControl');
     const viz_root = html_root.select('.viz-root');
@@ -120,9 +103,7 @@ export class TreeMap extends React.PureComponent {
       .tile(d3.treemapSquarify.ratio(1))
       .size([width / ratio, height]);
 
-    
     let transitioning;
-    
   
     // d3 creating the treemap using the data
     const root = data;
@@ -152,7 +133,6 @@ export class TreeMap extends React.PureComponent {
         .on('click', transition)
         .select('.TreeMap__ZoomControl__Text')
         .html(zoom_ctrl_text(d));
-
 
       //sidebar
       const side_bar_text_items = side_menu
@@ -277,7 +257,7 @@ export class TreeMap extends React.PureComponent {
           .call(treemap_node_content_container)
       }
       
-        
+      
       function transition(d) {
         if (transitioning || !d) return;
         transitioning = true;
@@ -367,4 +347,5 @@ const sidebar_item_html = function(d){
   <div> ${formats.compact1(d.data.amount)} </div>
 `)
 }
+
 
