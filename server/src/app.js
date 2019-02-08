@@ -15,11 +15,11 @@ const log_query = (req) => {
   const request_content = (!_.isEmpty(req.body) && req.body) || (!_.isEmpty(req.query) && req.query);
   request_content && 
     console.log( /* eslint-disable-line no-console */
-      `${
+      `query: ${
         request_content.query
       }${
-        request_content.variables ? 
-          `\n\n${request_content.variables}` : 
+        !_.isEmpty(request_content.variables) ? 
+          `\nvariables: ${JSON.stringify(request_content.variables)}` : 
           ''
       }`
     );

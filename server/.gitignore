@@ -1,6 +1,7 @@
 *.DS_Store
 *.swp
 *.swo
+/scripts/write_envs.sh
 /node_modules
 .vscode/
 npm-debug*
