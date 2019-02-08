@@ -9,3 +9,12 @@ click_rect_to_zoom_in:
 smaller_items_text:
   en: Smaller Items
   fr: Objets plus petits
+
+
+treemap_display_value_label:
+  en: See values for
+  fr: Voir les valeurs pour
+
+treemap_color_by_label:
+  en: Colour items by
+  fr: Colorer par

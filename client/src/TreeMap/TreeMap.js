@@ -10,6 +10,7 @@ import { get_data } from './data.js';
 import { formats } from '../core/format.js';
 import './TreeMap.scss';
 import { TreeMap } from './visualization.js';
+import { TreeMapControls } from './TreeMapControls.js';
 import AriaModal from 'react-aria-modal';
 import { IndicatorDisplay } from '../panels/result_graphs/components.js'
 import { infograph_href_template } from '../link_utils.js';
@@ -17,6 +18,7 @@ import {
   trivial_text_maker,
   run_template
 } from '../models/text.js';
+import { Fragment } from 'react';
 
 
 /* NODE RENDERING FUNCTIONS */
@@ -326,7 +328,6 @@ export default class TreeMapper extends React.Component {
     const { results_tooltip_render } = this; 
 
     const display_year = run_template("{{" + year + "}}");
-
     return (
       <StandardRouteContainer 
         route_key='start'
@@ -366,21 +367,29 @@ export default class TreeMapper extends React.Component {
         { loading ? 
           <SpinnerWrapper ref="spinner" config_name={"route"} /> : 
           <div>
-            <TreeMap 
-              side_bar_title={display_year}
-              data={data}
-              colorScale={colorScale}
-              tooltip_render={
-                perspective === "org_results" ?
-                results_tooltip_render :
-                window.feature_detection.is_mobile() ? mobile_tooltip_render : std_tooltip_render
-              }
-              node_render={
-                perspective === "org_results" ?
-                null : //results_node_render :
-                std_node_render
-              }
-            />
+            <Fragment>
+              <TreeMapControls
+                perspective={perspective}
+                color_var={color_var}
+                year={year}
+                history = { this.props.history }
+              /> 
+              <TreeMap 
+                side_bar_title={display_year}
+                data={data}
+                colorScale={colorScale}
+                tooltip_render={
+                  perspective === "org_results" ?
+                  results_tooltip_render :
+                  window.feature_detection.is_mobile() ? mobile_tooltip_render : std_tooltip_render
+                }
+                node_render={
+                  perspective === "org_results" ?
+                  null : //results_node_render :
+                  std_node_render
+                }
+              />
+            </Fragment>
             <div style={{marginBottom: "200px"}} />
           </div>
         }
