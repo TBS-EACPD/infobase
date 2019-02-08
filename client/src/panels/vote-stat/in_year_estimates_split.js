@@ -1,5 +1,5 @@
 import { text_maker, TM } from './vote-stat-text-prodiver.js';
-import { ResponsiveBar } from '@nivo/bar';
+import { ResponsiveBar } from '../../../src/nivo-bar.js';
 import {
   formats,
   PanelGraph,
@@ -8,7 +8,6 @@ import {
   declarative_charts,
   StdPanel,
   Col,
-  dollar_formats,
 } from "../shared";
 
 const { Format } = util_components;
@@ -105,24 +104,22 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
           }}
           labelFormat={d => <tspan y={ -4 }> {formats.compact1(d, {raw: true})} </tspan>}
           padding={0.3}
-          labelSkipHeight="0"
           colors="paired"
           borderColor="inherit:darker(1.6)"
           axisBottom={{
             "tickSize": 3,
             "tickRotation": -30,
           }}
-        
+
           axisLeft={null}
           labelTextColor="inherit:darker(1.6)"
           motionStiffness={90}
-          motionDamping={15}    
+          motionDamping={50}    
           tooltipFormat={d=> `\n$${formats.big_int_real(d, {raw: true})}`}          
         />
       </div>
     );
   }
-  
 
   return (
     <StdPanel

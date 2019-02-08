@@ -2,7 +2,6 @@ import { text_maker, TM } from './vote-stat-text-prodiver.js';
 import { ResponsivePie } from '@nivo/pie';
 import {
   formats,
-  CommonDonut,
   PanelGraph,
   StdPanel,
   Col,
@@ -38,12 +37,12 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
         <Col isGraph size={graph_col}>
           <div style={{height: "400px"}}>
             <ResponsivePie
-              data={ dataVoteStat }
+              data={dataVoteStat}
               margin={{
                 "top": 30,
                 "right": 80,
                 "bottom": 60,
-                "left": 50
+                "left": 50,
               }}
               innerRadius={0.5}
               colors="paired"
@@ -68,13 +67,13 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
                   "itemHeight": 25,
                   "itemTextColor": "#999",
                   "symbolSize": 20,
-                  "font": 100,
+                  "font-size":30,
                   "symbolShape": "circle",
                   "effects": [
                     {
                       "on": "hover",
                       "style": {
-                        "itemTextColor": "#000"
+                        "itemTextColor": "#000",
                       }
                     },
                   ]

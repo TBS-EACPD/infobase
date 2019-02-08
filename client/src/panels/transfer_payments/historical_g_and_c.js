@@ -198,15 +198,7 @@ class HistTPTypes extends React.Component {
       });
     
       content = <Fragment>
-        {/* <div className="legend-container">
-          <GraphLegend
-            items={legend_items}
-            isHorizontal
-            onClick={id=> this.setState({
-              active_types: _.toggle_list(active_types, id),
-            })}
-          />  
-        </div> */}
+
         <div style ={{height: '400px'}}>
           <ResponsiveLine
             data={expData}
@@ -214,38 +206,48 @@ class HistTPTypes extends React.Component {
               "top": 50,
               "right": 50,
               "bottom": 50,
-              "left": 90
-            }}
-            xScale={{
-              "type": "point"
+              "left": 90,
             }}
             yScale={{
               "type": "linear",
               "stacked": true,
               "min": "0",
-              "max": "auto"
             }}
             axisLeft={{
-              "format":d => formats.compact1(d,{raw:true})
+              "format": d => formats.compact1(d,{raw: true}),
             }}
             axisTop={null}
             axisRight={null}
-          dotSize={0}
-          dotColor="inherit:darker(0.3)"
-          dotBorderWidth={2}
-          dotBorderColor="#ffffff"
-          enableDotLabel={false}          
-          animate={true}
-          motionStiffness={90}
-          motionDamping={15}
-          enableArea={true}
-          colors="paired"
-    />
+            dotSize={0}
+            enableDotLabel={false}          
+            animate={true}
+            motionStiffness={30}
+            motionDamping={15}
+            enableArea={true}
+            areaOpacity={.70}
+            colors={d3.schemeCategory10}
+            tooltipFormat={ d =>`$${formats.big_int_real(d,{raw: true})}`}
+            legends={[
+              {
+                "anchor": "top",
+                "direction": "row",
+                "justify": false,
+                "translateX": -30,
+                "translateY": -20,
+                "itemsSpacing": 30,
+                "itemDirection": "left-to-right",
+                "itemWidth": 80,
+                "itemHeight": 20,
+                "itemOpacity": 0.75,
+                "symbolSize": 12,
+                "symbolShape": "circle",
+                "symbolBorderColor": "rgba(0, 0, 0, .5)",
+              }
+            ]}
+          />
         </div>
       </Fragment>
     }
-
-
     return <div className="frow middle-xs">
       <div className={`fcol-md-${text_split}`}>
         <div className="medium_panel_text">
@@ -268,6 +270,7 @@ class DetailedHistTPItems extends React.Component {
       active_indices: [0],
       active_type: _.first(rows, "type_id").type_id,
     };
+    
     this.color_scale = infobase_colors();
 
   }

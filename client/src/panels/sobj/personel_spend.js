@@ -2,11 +2,9 @@ import { text_maker, TM } from './sobj_text_provider.js';
 import { ResponsiveLine } from '@nivo/line';
 import {
   formats,
-  dollar_formats,
   PanelGraph,
   years,
   businessConstants,
-  charts_index,
   util_components,
   declarative_charts,
   StdPanel,
@@ -99,10 +97,10 @@ new PanelGraph({
           dotSize={10}
           dotColor="inherit:darker(0.3)"
           enableDotLabel={false}
-          colors="paired"
           dotLabel="y"
           dotLabelYOffset={-12}
           animate={true}
+          colors={d3.schemeCategory10}
           motionStiffness={90}
           motionDamping={15}
           tooltipFormat={d=> <span>{`$${formats.big_int_real(d, {raw: true})}`}</span>}
