@@ -1,3 +1,5 @@
+@import '../common_css/common-variables';
+
 .TreeMap__SideBar {
     background-color: #767f89;
     color: #fff;
@@ -187,4 +189,59 @@
     height: 1px;
     border-top: 3px solid #9ecae1;
     margin-top: 2px;  
+  }
+
+  $controlsColor: #767f89;
+  $controlsColorLighter: #2171b5;
+
+  .treemap-controls {
+    margin-bottom: -20px;
+    padding: 8px 0px 13px 0px;
+  
+    & > .labeled-box {
+      margin-bottom: 8px;
+      border-radius: 0px;
+  
+      & > .labeled-box-label {
+        background-color: $controlsColorLighter;
+        color: #FFFFFF;
+        font-size: 18px;
+        padding: 13px 13px 13px 20px;
+        min-height: 0px;
+        border-radius: 0px;
+      }
+    
+      & > .labeled-box-content {
+        border-color: $controlsColorLighter;
+        padding-left: 10px;
+        color: $controlsColorLighter;
+        border-width: 2px;
+        border-radius: 0px;
+      }
+
+      & > .labeled-box-content > .centerer > .radio-buttons {
+        border-color: $controlsColorLighter;
+        & > .radio-buttons__option {
+          color: $controlsColorLighter;
+          padding: 5px 10px;
+        }
+        
+        & > .radio-buttons__option.radio-buttons__option--active {
+          color: #FFFFFF;
+          background-color: $controlsColorLighter;
+        }
+        
+        & > .radio-buttons__option:not(:last-child):after,
+        & > .radio-buttons__option:not(:first-child):before {
+          border-color: $controlsColorLighter;
+        }
+        
+        & > .radio-buttons__option:not(.radio-buttons__option--active):hover,
+        & > .radio-buttons__option:not(.radio-buttons__option--active):active,
+        & > .radio-buttons__option:not(.radio-buttons__option--active):focus { 
+          background-color: change-color($color: $controlsColorLighter, $alpha: 0.75);
+          color: #FFFFFF !important;
+        }
+      }
+    }
   }

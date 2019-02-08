@@ -20,6 +20,7 @@ import {
 import treemap_text from './TreeMap.yaml';
 import { create_text_maker } from '../models/text.js';
 
+
 const text_maker = create_text_maker([treemap_text]);
 
 const years = [
@@ -55,11 +56,11 @@ export class TreeMapControls extends React.Component {
       history,
     } = this.props;
     return (
-      <div>
+      <div className="treemap-controls">
         <LabeledBox
           label={text_maker("treemap_display_value_label")}
           content={
-            <div>
+            <div className="centerer">
               <RadioButtons
                 options={_.map(size_controls, ({ id, display }) => ({ id, display, active: id === perspective }))}
                 onChange={id => {
@@ -77,7 +78,7 @@ export class TreeMapControls extends React.Component {
           <LabeledBox
             label={text_maker("treemap_color_by_label")}
             content={
-              <div>
+              <div className="centerer">
                 <RadioButtons
                   options={_.map(color_controls, ({ id, display }) => ({ id, display, active: id === color_var }))}
                   onChange={id => {
@@ -95,7 +96,7 @@ export class TreeMapControls extends React.Component {
         <LabeledBox
           label={text_maker("year")}
           content={
-            <div>
+            <div className="centerer">
               <RadioButtons
                 options={_.map(years, (id => ({ id: id, display: run_template("{{" + id + "}}"), active: id === year })))}
                 onChange={id => {
