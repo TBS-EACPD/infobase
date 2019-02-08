@@ -1,36 +1,20 @@
 # InfoBaseAPI
-[![CircleCI](https://circleci.com/gh/TBS-EACPD/InfoBaseModern.svg?style=svg)](https://circleci.com/gh/TBS-EACPD/InfoBaseModern)
 
-GraphQL API for InfoBase data. In development, and currently on pause.
+GraphQL API for InfoBase data. In development.
 
 ## How to get started
 
 ### Testing with local GraphiQl
 
-(After installing node ^9.0.0 and npm ^5.7.1)
+(After installing node ^9.0.0, npm ^5.7.1, and mongo)
 
+* leave `mongod` running in the background during development
 * `npm ci`
+* `npm run load_models`
+* `npm run build`
 * `npm start`
   * visit `http://localhost:1337` for GraphiQl instance
-  
 
-### Starting the app with docker
-
-(After installing docker)
-
-```bash
-  docker build -t ib-api .
-  docker images # test that it works, you should see at least 2 images: ib-api and node 9.2
-
-  docker swarm init
-  docker stack deploy -c docker-compose.yml
-  # visit localhost:4000
-
-  #to take down, 
-  docker stack rm ib-api-multi
-  docker swarm leave --force
-```
-  
   
 ## File structure
 
@@ -47,11 +31,14 @@ GraphQL API for InfoBase data. In development, and currently on pause.
   
 ## Cloud stuff
 
+### Mongodb Atlas
+TODO
+
+### Google Cloud Function
 TODO
 
 
 ## Roadmap
-
 
 ### Add ability to easily deal with gov-level information
 
