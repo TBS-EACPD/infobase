@@ -10,6 +10,7 @@ import AriaModal from 'react-aria-modal';
 import { IndicatorDisplay } from '../panels/result_graphs/components.js'
 import { infograph_href_template } from '../link_utils.js';
 import { trivial_text_maker } from '../models/text.js';
+import { run_template } from '../models/text.js';
 
 
 function std_node_render(foreign_sel){
@@ -53,7 +54,7 @@ function std_node_render(foreign_sel){
   });
 }
 
-const result_square_className = status_color => {
+/* const result_square_className = status_color => {
   if(status_color === "success"){
     return "TreeMap_IndicatorGrid__Item TreeMap_IndicatorGrid__Item--success";
   } else if(status_color === "failure"){
@@ -115,7 +116,7 @@ function results_node_render(foreign_sel){
 
 function result_color_scale(node){
   return "#eee";
-}
+} */
 
 // need this slightly tricky formulation because we only want to use part of the Blues scale (darkest colours
 // are too dark for good contrast with the text)
@@ -133,15 +134,17 @@ function standard_color_scale (node){
 }
 
 const d3_fte_scale = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeGreens[9].slice(3,7)));
+d3_fte_scale.domain([0,10000]);
 d3_fte_scale.clamp(true);
 function fte_color_scale(node){
-  return d3_fte_scale(node.data.ftes/node.data.parent_ftes * 2 );
+  //return d3_fte_scale(node.data.ftes/node.data.parent_ftes * 2 );
+  return d3_fte_scale(node.data.ftes);
 }
 
-function get_colour_scale(type,colour_var){
+function get_color_scale(type,color_var){
   if(type === "org_results"){
-    return result_color_scale;
-  } else if(type === "drf" && colour_var && colour_var === "ftes"){
+    return null; //result_color_scale;
+  } else if(type === "drf" && color_var === "ftes"){
     return fte_color_scale;
   } else {
     return standard_color_scale;
@@ -152,11 +155,25 @@ function std_tooltip_render(tooltip_sel){
   tooltip_sel.html(function(d){
     let tooltip_html = `<div>
     <div>${d.data.name}</div>
-    <hr class="BlueHLine">
-    <div>${formats.compact1(d.data.amount)}</div>`;
+    <hr class="BlueHLine">`;
     if(d.data.parent_amount){
       tooltip_html = tooltip_html + `
-      <div>${formats.percentage1(d.data.amount/d.data.parent_amount)} of ${d.data.parent_name}</div>`;
+      <div>${formats.compact1(d.data.amount)}
+      (${formats.percentage1(d.data.amount/d.data.parent_amount)} of ${d.data.parent_name})</div>`;
+    } else{
+      tooltip_html = tooltip_html + `
+      <div>${formats.compact1(d.data.amount)}</div>`
+    }
+    if(d.data.ftes){
+      if(d.data.parent_ftes){
+        tooltip_html = tooltip_html + `
+        <div>${d.data.ftes} ${trivial_text_maker("fte")}
+        (${formats.percentage1(d.data.ftes/d.data.parent_ftes)} of ${d.data.parent_name})</div>`
+
+      } else{
+        tooltip_html = tooltip_html + `
+        <div>${formats.compact1(d.data.ftes)}</div>`
+      }
     }
     tooltip_html = tooltip_html + `
     ${generate_infograph_href(d)}
@@ -200,7 +217,7 @@ function generate_infograph_href(d){
   } else { return ''}
 }
 
-function create_results_tooltip_render_func(activate_modal){
+/* function create_results_tooltip_render_func(activate_modal){
   return function results_tooltip_render(tooltip_sel){
     tooltip_sel.html(d => `
       <div class="TM_Tooltip">
@@ -218,9 +235,9 @@ function create_results_tooltip_render_func(activate_modal){
         activate_modal(d);
       })
   }
-}
+} */
 
-const render_modal = (node) => {
+/* const render_modal = (node) => {
   const { 
     name,
     indicators,
@@ -235,7 +252,7 @@ const render_modal = (node) => {
       <IndicatorDisplay indicators={indicators} />
     </div>
   </div>
-}
+} */
 
 
 export default class TreeMapper extends React.Component {
@@ -273,7 +290,6 @@ export default class TreeMapper extends React.Component {
         },
       },
     } = props; 
-
     get_data(perspective,org_id,year).then( data => {
       this.setState({
         loading: false,
@@ -287,19 +303,22 @@ export default class TreeMapper extends React.Component {
         params: {
           perspective,
           color_var,
+          year,
         },
       },
     } = this.props; 
     const { loading, data, modal_args } = this.state;
-    const colorScale = get_colour_scale(perspective, color_var);
+    const colorScale = get_color_scale(perspective, color_var);
     const { results_tooltip_render } = this; 
+
+    const display_year = run_template("{{" + year + "}}");
 
     return (
       <StandardRouteContainer 
         route_key='start'
         title='tree map development'
       >
-        <AriaModal
+{/*         <AriaModal
           mounted={ !!modal_args }
           titleText="More details"
           getApplicationNode={()=>document.getElementById('app')}
@@ -329,12 +348,12 @@ export default class TreeMapper extends React.Component {
               { render_modal(modal_args) }
             </div>
           }
-        </AriaModal>
+        </AriaModal> */}
         { loading ? 
           <p> Loading... </p> : 
           <div>
             <TreeMap 
-              side_bar_title={"2018-19"}
+              side_bar_title={display_year}
               data={data}
               colorScale={colorScale}
               tooltip_render={
@@ -344,7 +363,7 @@ export default class TreeMapper extends React.Component {
               }
               node_render={
                 perspective === "org_results" ?
-                results_node_render :
+                null : //results_node_render :
                 std_node_render
               }
             />

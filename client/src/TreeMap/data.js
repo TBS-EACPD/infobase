@@ -1,8 +1,11 @@
 import { Table } from '../core/TableClass.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
-import { trivial_text_maker } from '../models/text.js';
+import treemap_text from './TreeMap.yaml';
+import { create_text_maker } from '../models/text.js';
 
-export const smaller_items_text = trivial_text_maker("see_the_infographic");
+
+const tm = create_text_maker([treemap_text]);
+export const smaller_items_text = tm("smaller_items_text");
 
 
 import { Subject } from '../models/subject.js';
@@ -22,19 +25,21 @@ function has_non_zero_or_non_zero_children(node){
   }
 }
 
+
 function header_col(type,year){
+  if ( !year ) { year = -1 };
   if (type === "drf"){
     switch(year) {
-      case -5: return "{{pa_last_year_5_exp}}";
-      case -4: return "{{pa_last_year_4_exp}}";
-      case -3: return "{{pa_last_year_3_exp}}";
-      case -2: return "{{pa_last_year_2_exp}}";
-      case -1: return "{{pa_last_year_exp}}";
-      case 1: return "{{planning_year_1}}";
-      case 2: return "{{planning_year_2}}";
-      case 3: return "{{planning_year_3}}";
-      case 4: return "{{planning_year_4}}";
-      case 5: return "{{planning_year_5}}";
+      case "pa_last_year_5": return "{{pa_last_year_5}}exp";
+      case "pa_last_year_2": return "{{pa_last_year_4}}exp";
+      case "pa_last_year_3": return "{{pa_last_year_3}}exp";
+      case "pa_last_year_4": return "{{pa_last_year_2}}exp";
+      case "pa_last_year": return "{{pa_last_year}}exp";
+      case "planning_year_1": return "{{planning_year_1}}";
+      case "planning_year_2": return "{{planning_year_2}}";
+      case "planning_year_3": return "{{planning_year_3}}";
+      case "planning_year_4": return "{{planning_year_4}}";
+      case "planning_year_5": return "{{planning_year_5}}";
     }
   } else if (type === "tp" || type === "vote_stat"){
     switch(year) {
@@ -46,17 +51,19 @@ function header_col(type,year){
     }
   } else if (type === "ftes"){
     switch(year) {
-      case -5: return "{{pa_last_year_5}}";
-      case -4: return "{{pa_last_year_4}}";
-      case -3: return "{{pa_last_year_3}}";
-      case -2: return "{{pa_last_year_2}}";
-      case -1: return "{{pa_last_year}}";
-      case 1: return "{{planning_year_1}}";
-      case 2: return "{{planning_year_2}}";
-      case 3: return "{{planning_year_3}}";
+      case "pa_last_year_5": return "{{pa_last_year_5}}";
+      case "pa_last_year_4": return "{{pa_last_year_4}}";
+      case "pa_last_year_3": return "{{pa_last_year_3}}";
+      case "pa_last_year_2": return "{{pa_last_year_2}}";
+      case "pa_last_year": return "{{pa_last_year}}";
+      case "planning_year_1": return "{{planning_year_1}}";
+      case "planning_year_2": return "{{planning_year_2}}";
+      case "planning_year_3": return "{{planning_year_3}}";
     }
-  }
+  }  
+  return;
 }
+
 
 
 
@@ -89,6 +96,13 @@ function group_smallest(node_list, node_creator, shouldRecurse=true, perc_cutoff
     new_node.size = _.sumBy(tiny_nodes,"size")
     new_node.is_negative = new_node.amount < 0;
     
+    if(_.chain(tiny_nodes)
+      .every()
+      .has("ftes")
+      .values() ){
+      new_node.ftes = _.sumBy(tiny_nodes, "ftes")
+    }
+
     if (new_node.size < cutoff){
       _.set(new_node, 'size', cutoff);
       _.each(new_node.children, child => {recurse_adjust_size(child,cutoff/new_node.amount)});
@@ -131,14 +145,18 @@ function prep_nodes(node){
     _.each(children, prep_nodes);
     node.amount = _.sumBy(children,"amount")
     node.size = _.sumBy(children, "size")
-    _.each(children, n => { _.set(n, "parent_amount", node.amount)});
-    _.each(children, n => { _.set(n, "parent_name", node.name)});
     if(_.chain(children)
       .every()
       .has("ftes")
       .values() ){
       node.ftes = _.sumBy(children, "ftes")
     }
+    _.each(children, n => { 
+      _.set(n, "parent_amount", node.amount);
+      _.set(n, "parent_name", node.name);
+      if(node.ftes) { _.set(n, "parent_ftes", node.ftes) };
+    });
+
   } else {
     //leaf node, already has amount but no size
     node.size = Math.abs(node.amount);
@@ -192,6 +210,7 @@ export async function get_data(type, org_id, year){
   if(type === "drf"){
     const program_ftes_table = Table.lookup('programFtes');
     const program_spending_table = Table.lookup('programSpending');
+
     const orgs = _.chain(Dept.get_all())
       .map(org => ({
         subject: org,
@@ -205,7 +224,7 @@ export async function get_data(type, org_id, year){
                 subject: prog,
                 name: prog.fancy_name,
                 amount: program_spending_table.q(prog).sum(header_col(type,year)),
-                ftes: program_ftes_table.q(prog).sum("ftes",year),
+                ftes: program_ftes_table.q(prog).sum(header_col("ftes",year)) || 0, // if NA 
               }))
               .filter(has_non_zero_or_non_zero_children)
               .value(),
@@ -215,7 +234,6 @@ export async function get_data(type, org_id, year){
       }))
       .filter(has_non_zero_or_non_zero_children)
       .value();
-
     data = _.chain(orgs)
       .groupBy('subject.ministry.name')
       .toPairs()

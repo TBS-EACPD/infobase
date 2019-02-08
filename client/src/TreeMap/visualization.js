@@ -44,7 +44,6 @@ export class TreeMap extends React.PureComponent {
       node_render,
       side_bar_title,
     } = this.props;
-
     const el = this.el;
 
     let height=700;
