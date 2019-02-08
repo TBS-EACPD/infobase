@@ -8,7 +8,6 @@ import {
   declarative_charts,
   StdPanel,
   Col,
-  dollar_formats,
 } from "../shared";
 
 const { Format } = util_components;
@@ -113,7 +112,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
             "tickRotation": -45,
             "tickPadding": 10
           }}
-        
+
           axisLeft={null}
           labelTextColor="inherit:darker(1.6)"
           motionStiffness={90}
@@ -123,7 +122,6 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
       </div>
     );
   }
-  
 
   return (
     <StdPanel

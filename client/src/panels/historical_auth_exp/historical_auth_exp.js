@@ -151,12 +151,11 @@ const render = function({calculations, footnotes, sources}) {
             tooltipFormat={d=> `$${formats.big_int_real(d, {raw: true})}`}
             legends={[
               {
-                
                 "dataFrom": "keys",
                 "direction": "row",
                 "anchor": "top",
                 "justify": false,
-                "itemsSpacing": 50,
+                "itemsSpacing": 0,
                 "itemWidth": 100,
                 "itemHeight": -55,
                 "itemOpacity": 0.75,
