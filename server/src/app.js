@@ -11,6 +11,21 @@ import {
 import { connect_db } from "./db.js"
 import { connect } from 'net';
 
+const log_query = (req) => {
+  /* eslint-disable no-console */
+  req.body.query && 
+    console.log(
+      `${
+        req.body.query
+      }${
+        req.body.variables ? 
+          `\n\n${req.body.variables}` : 
+          ''
+      }`
+    );
+};
+
+
 create_models();
 connect_db();
 const schema = create_schema();
@@ -26,6 +41,7 @@ app.use("/", function (req, res, next) {
   if (req.method === 'OPTIONS') {
     res.sendStatus(200);
   } else {
+    log_query(req);
     next();
   }
 });
