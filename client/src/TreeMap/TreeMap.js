@@ -9,8 +9,10 @@ import { TreeMap } from './visualization.js';
 import AriaModal from 'react-aria-modal';
 import { IndicatorDisplay } from '../panels/result_graphs/components.js'
 import { infograph_href_template } from '../link_utils.js';
-import { trivial_text_maker } from '../models/text.js';
-import { run_template } from '../models/text.js';
+import {
+  trivial_text_maker,
+  run_template
+ } from '../models/text.js';
 
 
 function std_node_render(foreign_sel){
