@@ -1,5 +1,6 @@
 #!/bin/bash
 # must run this scripts in root of api project
+set -e # will exit if any command has non-zero exit value
 
 npm run build
 
