@@ -18,3 +18,20 @@ treemap_display_value_label:
 treemap_color_by_label:
   en: Colour items by
   fr: Colorer par
+
+treemap_vstype_filter:
+  en: Filter by Vote / Statutory type
+  fr: Filtrer par crédit / poste législatif
+
+
+DRF:
+  en: Departmental Results Framework
+  fr: Cadre ministériel des résultats
+
+TP:
+  en: Transfer payments
+  fr: Paiements de transfert
+
+EVS:
+  en: Estimates by Vote / Statutory type
+  fr: Budgets des dépenses par crédit / poste législatif

@@ -30,17 +30,17 @@ const years = {
 }
 
 const size_controls = [
-  { id: "drf", display: "DRF" },
-  { id: "tp", display: "TP" },
-  { id: "vote_stat", display: "Estimates (voted/stat)" },
+  { id: "drf", display: text_maker("DRF") },
+  { id: "tp", display: text_maker("TP") },
+  { id: "vote_stat", display: text_maker("EVS") },
 ]
 const color_controls = [
-  { id: "spending", display: "Spending" },
-  { id: "ftes", display: "FTEs" },
+  { id: "spending", display: text_maker("spending") },
+  { id: "ftes", display: text_maker("fte") },
 ]
 
 const vs_type_controls = [
-  { id: "None", display: "None" },
+  { id: "All", display: "All" },
   { id: "1", display: text_maker("vstype1") },
   { id: "2", display: text_maker("vstype2") },
   { id: "3", display: text_maker("vstype3") },
@@ -103,11 +103,11 @@ export class TreeMapControls extends React.Component {
         }
         {perspective === "vote_stat" &&
           <LabeledBox
-            label={"filter by VS type"}
+            label={text_maker("treemap_vstype_filter")}
             content={
               <div className="centerer">
                 <RadioButtons
-                  options={_.map(vs_type_controls, ({ id, display }) => ({ id, display, active: (!vote_stat_type && id === "None") || id === vote_stat_type }))}
+                  options={_.map(vs_type_controls, ({ id, display }) => ({ id, display, active: (!vote_stat_type && id === "All") || id === vote_stat_type }))}
                   onChange={id => {
                     const new_path = `/treemap/${perspective}/${color_var}/${year}/${id}`;
                     if (history.location.pathname !== new_path) {
