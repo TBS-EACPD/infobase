@@ -38,17 +38,16 @@ const color_controls = [
   { id: "spending", display: "Spending" },
   { id: "ftes", display: "FTEs" },
 ]
+
 const vs_type_controls = [
   { id: "None", display: "None" },
-  { id: "1", display: "1" },
-  { id: "2", display: "2" },
-  { id: "3", display: "3" },
-  { id: "4", display: "4" },
-  { id: "5", display: "5" },
-  { id: "6", display: "6" },
-  { id: "7", display: "7" },
-  { id: "8", display: "8" },
-  { id: "9", display: "9" },
+  { id: "1", display: text_maker("vstype1") },
+  { id: "2", display: text_maker("vstype2") },
+  { id: "3", display: text_maker("vstype3") },
+  { id: "4", display: text_maker("vstype4") },
+  { id: "5", display: text_maker("vstype5") },
+  { id: "6", display: text_maker("vstype6") },
+  { id: "9", display: text_maker("vstype9")},
 ]
 
 export class TreeMapControls extends React.Component {

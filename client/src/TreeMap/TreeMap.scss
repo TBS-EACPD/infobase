@@ -221,9 +221,11 @@
 
       & > .labeled-box-content > .centerer > .radio-buttons {
         border-color: $controlsColorLighter;
+        width: 800px;
         & > .radio-buttons__option {
           color: $controlsColorLighter;
           padding: 5px 10px;
+          font-size: 14px;
         }
         
         & > .radio-buttons__option.radio-buttons__option--active {
