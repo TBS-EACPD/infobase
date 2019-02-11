@@ -1,7 +1,7 @@
 @import "../common_css/common-variables";
 
 #ib-site-header-area {
-  border-bottom: 4px solid #335175;
+  border-bottom: 3px solid #335175;
   background-color: #f8f8f8;
 }
 
@@ -69,4 +69,8 @@
   & > .alert {
     margin-bottom: 15px;
   }
+}
+
+#wb-info > .brand {
+  border-top-width: 3px;
 }
