@@ -27,7 +27,7 @@ function has_non_zero_or_non_zero_children(node) {
 
 
 function header_col(perspective, year) {
-  if (!year) { year = -1 };
+  if (!year) { year = -1 }; // error, but this should never happen
   if (perspective === "drf" || perspective === "tp") {
     switch (year) {
       case "pa_last_year_5": return "{{pa_last_year_5}}exp";
@@ -245,6 +245,7 @@ export async function get_data(perspective, org_id, year, vote_stat_type) {
           _.first(orgs)
       ))
       .value();
+
     const root = {
       name: "Government",
       children: data,
@@ -314,6 +315,7 @@ export async function get_data(perspective, org_id, year, vote_stat_type) {
       }))
       .filter(has_non_zero_or_non_zero_children)
       .value();
+
 
 
     data = orgs;
