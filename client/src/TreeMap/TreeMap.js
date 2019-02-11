@@ -13,7 +13,7 @@ import { TreeMap } from './visualization.js';
 import { TreeMapControls } from './TreeMapControls.js';
 import AriaModal from 'react-aria-modal';
 import { IndicatorDisplay } from '../panels/result_graphs/components.js'
-import { infograph_href_template } from '../link_utils.js';
+import { infograph_href_template } from '../infographic/routes.js';
 import {
   trivial_text_maker,
   run_template
@@ -165,7 +165,7 @@ function get_color_scale(type,color_var){
 
 /* TOOLTIPS */
 
-function std_tooltip_render(tooltip_sel){
+function std_tooltip_render(tooltip_sel,color_var){
   tooltip_sel.html(function(d){
     let tooltip_html = `<div>
     <div>${d.data.name}</div>
@@ -189,12 +189,17 @@ function std_tooltip_render(tooltip_sel){
         <div>${formats.compact1(d.data.ftes)}</div>`
       }
     }
-    tooltip_html = tooltip_html + `
-    ${generate_infograph_href(d)}
-    </div>`;
+    if(color_var=="ftes"){
+      tooltip_html = tooltip_html + `
+      ${generate_infograph_href(d,"people")}
+      </div>`;
+    } else {
+      tooltip_html = tooltip_html + `
+      ${generate_infograph_href(d,"financial")}
+      </div>`;
+    }
     return tooltip_html;
   })
-
 }
 
 function mobile_tooltip_render(tooltip_sel){
@@ -223,10 +228,10 @@ function mobile_tooltip_render(tooltip_sel){
     })
 }
 
-function generate_infograph_href(d){
+function generate_infograph_href(d, data_area){
   if (d.data.subject ){
     return `<div style="padding-top: 10px">
-      <a class="TM_Tooltip__link" href=${infograph_href_template(d.data.subject)}> ${ trivial_text_maker("see_the_infographic") } </a>
+      <a class="TM_Tooltip__link" href=${infograph_href_template(d.data.subject, data_area)}> ${ trivial_text_maker("see_the_infographic") } </a>
     </div>`;
   } else { return ''}
 }
@@ -382,6 +387,7 @@ export default class TreeMapper extends React.Component {
                 side_bar_title={display_year}
                 data={data}
                 colorScale={colorScale}
+                color_var = { color_var }
                 tooltip_render={
                   perspective === "org_results" ?
                   results_tooltip_render :

@@ -39,6 +39,7 @@ export class TreeMap extends React.PureComponent {
 
     const { 
       data,
+      color_var,
       colorScale,
       tooltip_render,
       node_render,
@@ -210,7 +211,7 @@ export class TreeMap extends React.PureComponent {
               tool.transition()
                 .style("opacity", 1);
               tool
-                .call(tooltip_render)
+                .call(tooltip_render, color_var)
             }, 300)
           })
           .on("mouseleave", function(d) {
