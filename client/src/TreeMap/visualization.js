@@ -123,9 +123,12 @@ export class TreeMap extends React.PureComponent {
     const main = display(root);
     //node_render is special, we call it once on first render (here) 
     //and after transitions
-    main.selectAll('.TreeMapNode__ContentBoxContainer').call(node_render);
+    if(main) { main.selectAll('.TreeMapNode__ContentBoxContainer').call(node_render) }
 
     function display(d) {
+      if(!d.children){
+        return;
+      }
       // inserts text on the top bar
       zoom_ctrl
         .datum(d.parent)

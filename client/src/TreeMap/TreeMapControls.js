@@ -1,21 +1,10 @@
-import { StandardRouteContainer } from '../core/NavComponents.js';
 import {
-  Format,
-  TM,
-  SpinnerWrapper,
   LabeledBox,
-  RadioButtons
+  RadioButtons,
 } from '../util_components.js';
-import { get_data } from './data.js';
-import { formats } from '../core/format.js';
 import './TreeMap.scss';
-import { TreeMap } from './visualization.js';
-import AriaModal from 'react-aria-modal';
-import { IndicatorDisplay } from '../panels/result_graphs/components.js'
-import { infograph_href_template } from '../link_utils.js';
 import {
-  trivial_text_maker,
-  run_template
+  run_template,
 } from '../models/text.js';
 import treemap_text from './TreeMap.yaml';
 import { create_text_maker } from '../models/text.js';
@@ -23,7 +12,7 @@ import { create_text_maker } from '../models/text.js';
 
 const text_maker = create_text_maker([treemap_text]);
 
-const years = [
+const all_years = [
   "pa_last_year_5",
   "pa_last_year_4",
   "pa_last_year_3",
@@ -34,14 +23,32 @@ const years = [
   "planning_year_3",
 ];
 
+const years = {
+  "drf": all_years,
+  "tp": all_years.slice(0,5),
+  "vote_stat": all_years.slice(1,6),
+}
+
 const size_controls = [
   { id: "drf", display: "DRF" },
   { id: "tp", display: "TP" },
-  { id: "vote_stat", display: "Voted/stat" },
+  { id: "vote_stat", display: "Estimates (voted/stat)" },
 ]
 const color_controls = [
   { id: "spending", display: "Spending" },
   { id: "ftes", display: "FTEs" },
+]
+const vs_type_controls = [
+  { id: "None", display: "None" },
+  { id: "1", display: "1" },
+  { id: "2", display: "2" },
+  { id: "3", display: "3" },
+  { id: "4", display: "4" },
+  { id: "5", display: "5" },
+  { id: "6", display: "6" },
+  { id: "7", display: "7" },
+  { id: "8", display: "8" },
+  { id: "9", display: "9" },
 ]
 
 export class TreeMapControls extends React.Component {
@@ -53,6 +60,7 @@ export class TreeMapControls extends React.Component {
       perspective,
       color_var,
       year,
+      vote_stat_type,
       history,
     } = this.props;
     return (
@@ -93,12 +101,31 @@ export class TreeMapControls extends React.Component {
             }
           />
         }
+        {perspective === "vote_stat" &&
+          <LabeledBox
+            label={"filter by VS type"}
+            content={
+              <div className="centerer">
+                <RadioButtons
+                  options={_.map(vs_type_controls, ({ id, display }) => ({ id, display, active: (!vote_stat_type && id === "None") || id === vote_stat_type }))}
+                  onChange={id => {
+                    const new_path = `/treemap/${perspective}/${color_var}/${year}/${id}`;
+                    if (history.location.pathname !== new_path) {
+                      // the first_column prop, and thus this button's active id, is updated through this route push
+                      history.push(new_path);
+                    }
+                  }}
+                />
+              </div>
+            }
+          />
+        }
         <LabeledBox
           label={text_maker("year")}
           content={
             <div className="centerer">
               <RadioButtons
-                options={_.map(years, (id => ({ id: id, display: run_template("{{" + id + "}}"), active: id === year })))}
+                options={_.map(years[perspective], (id => ({ id: id, display: run_template("{{" + id + "}}"), active: id === year })))}
                 onChange={id => {
                   const new_path = `/treemap/${perspective}/${color_var}/${id}`;
                   if (history.location.pathname !== new_path) {
