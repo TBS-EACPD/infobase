@@ -10,7 +10,7 @@ export default async function({models}){
 
   const url_lookups = _.keyBy(get_standard_csv_file_rows("url_lookups.csv"), 'id');
 
-  const org_objs = _.chain(get_standard_csv_file_rows("igoc.csv"))
+  const org_objs = _.chain( get_standard_csv_file_rows("igoc.csv") )
     .map(obj=> ({
       ...obj,
       name_en: obj.applied_title_en || obj.legal_title_en,
@@ -21,24 +21,24 @@ export default async function({models}){
       ...bilingual_remap(url_lookups[obj.qfr_url_id], "qfr_url", "url"),
       ...bilingual_remap(url_lookups[obj.eval_url_id], "eval_url", "url"),
     }))
-    .map(rec => new Org(rec))
-    .value()
+    .map( rec => new Org(rec) )
+    .value();
 
-  await Org.insertMany(org_objs)
+  await Org.insertMany(org_objs);
 
-  const crso_objs = _.chain(get_standard_csv_file_rows("crso.csv"))
+  const crso_objs = _.chain( get_standard_csv_file_rows("crso.csv") )
     .map( obj => ({ 
       ..._.omit(obj, 'id'),
       crso_id: obj.id,
       is_active: obj.is_active === "1",
       ...bilingual_remap(obj, "description", "desc"),
     }))
-    .map(obj => new Crso(obj) )
-    .value()
+    .map( obj => new Crso(obj) )
+    .value();
 
-  await Crso.insertMany(crso_objs)
+  await Crso.insertMany(crso_objs);
 
-  const program_objs = _.chain(get_standard_csv_file_rows("program.csv"))
+  const program_objs = _.chain( get_standard_csv_file_rows("program.csv") )
     .map(obj => ({
       ...obj,
       program_id: create_program_id(obj),
@@ -47,15 +47,11 @@ export default async function({models}){
       is_internal_service: obj.is_internal_service === "1",
       ...bilingual_remap(obj, "description", "desc"),
     }))
-    .map(obj => new Program(obj))
-    .value()
+    .map( obj => new Program(obj) )
+    .value();
 
-  return await Program.insertMany(program_objs)
-
-
+  return await Program.insertMany(program_objs);
 }
-
-
 
 export function old({models}){
 
@@ -70,8 +66,6 @@ export function old({models}){
   } = models;
 
   const org_csv_records = get_standard_csv_file_rows("IGOC.csv");
-  
-  
 
   const crso_csv_records = get_standard_csv_file_rows("CRSO.csv");
   const program_csv_records = get_standard_csv_file_rows("program.csv");
@@ -84,20 +78,25 @@ export function old({models}){
 
   const org_to_minister_csv = get_standard_csv_file_rows("org_to_minister.csv");
 
-  const org_records = org_csv_records.map(obj=> _.assign({
-    name_en: obj.applied_title_en || obj.legal_title_en,
-    name_fr: obj.applied_title_fr || obj.legal_title_fr,
-  }, obj));
+  const org_records = org_csv_records.map(
+    obj => _.assign(
+      {
+        name_en: obj.applied_title_en || obj.legal_title_en,
+        name_fr: obj.applied_title_fr || obj.legal_title_fr,
+      }, 
+      obj
+    )
+  );
 
 
   UrlLookups.set_lookups(url_lookups);
 
 
-  _.each(ministries_csv, obj => Ministry.register(obj) );
+  _.each( ministries_csv, obj => Ministry.register(obj) );
   
-  _.each(ministers_csv, obj => Minister.register(obj) );
+  _.each( ministers_csv, obj => Minister.register(obj) );
 
-  _.each(inst_forms_csv, record => InstForm.register(record) );
+  _.each( inst_forms_csv, record => InstForm.register(record) );
 
   //once they're all created, create bi-directional parent-children links
   _.each(inst_forms_csv, ({id, parent_id}) => {
@@ -116,13 +115,13 @@ export function old({models}){
 
     const { inst_form_id, ministry_id } = org;
     
-    if(!_.isEmpty(ministry_id)){
+    if( !_.isEmpty(ministry_id) ){
       const ministry = Ministry.lookup(ministry_id);
       inst.ministry = ministry;
       ministry.orgs.push(inst);
     }
 
-    if(!_.isEmpty(inst_form_id)){
+    if( !_.isEmpty(inst_form_id) ){
       const inst_form = InstForm.lookup(inst_form_id)
       inst.inst_form = inst_form;
     }
@@ -144,10 +143,7 @@ export function old({models}){
     is_internal_service: obj.is_internal_service === "1",
   }));
 
-  
-  _.each(crso_records,crso => Crso.register(crso));
+
+  _.each(crso_records, crso => Crso.register(crso));
   _.each(program_records, org => Program.register(org));
-
 }
-
-

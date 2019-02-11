@@ -41,21 +41,23 @@ export function create_models(){
 }
 
 //populate_models is responsible for controlling the order in which modules are populated
-export function populate_models(){
-  _.each([
-    core_subject,
-    // results,
-    // resources,
-    // sobjs,
-    // pses,
-    // search,
-    // people,
-    // vote_stat,
-    // transfer_payments,
-    // budget_measures,
-    // transfer_payments_loc,
-  ], async _module => _.isFunction(_module.populate_models) && _module.populate_models(model_singleton)
-  );
+export async function populate_models(){
+  return Promise.all(_.map(
+    [
+      core_subject,
+      // results,
+      // resources,
+      // sobjs,
+      // pses,
+      // search,
+      // people,
+      // vote_stat,
+      // transfer_payments,
+      // budget_measures,
+      // transfer_payments_loc,
+    ], 
+    async _module => _.isFunction(_module.populate_models) && await _module.populate_models(model_singleton)
+  ));
 }
 
 
