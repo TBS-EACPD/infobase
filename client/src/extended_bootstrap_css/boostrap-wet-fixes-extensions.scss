@@ -12,7 +12,7 @@ body {
   font-size: 16px;
   line-height: 1.4375;
   color: #333333;
-  background-color: #fdfdfd;
+  background-color: $backgroundColor;
   margin: 0; }
 
 h1 {
@@ -403,7 +403,7 @@ ol.breadcrumb {
 }
 
 .breadcrumb {
-  background-color: #f8f8f8;
+  background-color: $backgroundColor;
 }
 
 dl.dl-horizontal.dl-long-terms {
@@ -649,5 +649,5 @@ section.panel > .panel-body {
 
 
 #wb-bc {
-  background-color: #f8f8f8 !important;
+  background-color: $backgroundColor !important;
 }
