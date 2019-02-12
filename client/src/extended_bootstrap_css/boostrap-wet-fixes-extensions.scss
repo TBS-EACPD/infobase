@@ -224,7 +224,7 @@ div.label {
 
 /* our app-wide a:visited: black is overriding all the bootstrap white on dark blue styles...  */
 .nav-pills > li.active > a {
-  background-color: #284162 !important;
+  background-color: $primaryColor !important;
   color: white !important;
 }
 
@@ -650,4 +650,8 @@ section.panel > .panel-body {
 
 #wb-bc {
   background-color: $backgroundColor !important;
+}
+
+#wb-info > .brand {
+  border-color: 4px solid $primaryColor;
 }
