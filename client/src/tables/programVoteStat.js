@@ -62,7 +62,7 @@ export default {
         "fr": "Crédit / législatif",
       },
     });
-    const years = _.takeRight(std_years,2);
+    const years = _.takeRight(std_years, 3);
     years.forEach(yr=> {
       this.add_col({
         "type": "big_int",
