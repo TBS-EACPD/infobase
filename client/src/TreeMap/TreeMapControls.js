@@ -25,12 +25,14 @@ const all_years = [
 
 const years = {
   "drf": all_years,
+  "drf_ftes": all_years,
   "tp": all_years.slice(0,5),
   "vote_stat": all_years.slice(1,6),
 }
 
 const size_controls = [
   { id: "drf", display: text_maker("DRF") },
+  { id: "drf_ftes", display: text_maker("fte") },
   { id: "tp", display: text_maker("TP") },
   { id: "vote_stat", display: text_maker("EVS") },
 ]
@@ -82,7 +84,7 @@ export class TreeMapControls extends React.Component {
             </div>
           }
         />
-        {perspective === "drf" &&
+        { ( perspective === "drf" || perspective === "drf_ftes" ) &&
           <LabeledBox
             label={text_maker("treemap_color_by_label")}
             content={

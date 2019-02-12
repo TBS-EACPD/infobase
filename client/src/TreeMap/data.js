@@ -138,10 +138,10 @@ function recurse_adjust_size(node, parent_ratio) {
 
 
 
-function prep_nodes(node) {
+function prep_nodes(node, perspective) {
   const { children } = node;
   if (!_.isEmpty(children)) {
-    _.each(children, prep_nodes);
+    _.each(children, child => { prep_nodes(child, perspective) });
     node.amount = _.sumBy(children, "amount")
     node.size = _.sumBy(children, "size")
     if (_.chain(children)
@@ -158,7 +158,11 @@ function prep_nodes(node) {
 
   } else {
     //leaf node, already has amount but no size
-    node.size = Math.abs(node.amount);
+    if(perspective==="drf_ftes"){
+      node.size = node.ftes;
+    } else {
+      node.size = Math.abs(node.amount);
+    }
   }
 
   if (node.amount < 0) {
@@ -202,11 +206,12 @@ function result_h7y_mapper(node) {
 }
 
 export async function get_data(perspective, org_id, year, vote_stat_type) {
+
   await ensure_loaded({ table_keys: ["orgVoteStatEstimates", "orgTransferPayments", "programSpending", "programFtes"] });
 
   let data;
 
-  if (perspective === "drf") {
+  if (perspective === "drf" || perspective === "drf_ftes") {
     const program_ftes_table = Table.lookup('programFtes');
     const program_spending_table = Table.lookup('programSpending');
 
@@ -222,7 +227,7 @@ export async function get_data(perspective, org_id, year, vote_stat_type) {
               .map(prog => ({
                 subject: prog,
                 name: prog.fancy_name,
-                amount: program_spending_table.q(prog).sum(header_col(perspective, year)),
+                amount: program_spending_table.q(prog).sum(header_col("drf", year)),
                 ftes: program_ftes_table.q(prog).sum(header_col("ftes", year)) || 0, // if NA 
               }))
               .filter(has_non_zero_or_non_zero_children)
@@ -246,13 +251,12 @@ export async function get_data(perspective, org_id, year, vote_stat_type) {
     //   ))
     //   .value();
     data = orgs;
-
     const root = {
       name: "Government",
       children: data,
       amount: _.sumBy(data, "amount"),
     };
-    prep_nodes(root);
+    prep_nodes(root, perspective);
     root.children = group_smallest(
       root.children,
       children => ({ name: smaller_items_text, children }),
@@ -282,7 +286,7 @@ export async function get_data(perspective, org_id, year, vote_stat_type) {
       children: data,
       amount: _.sumBy(data, "amount"),
     };
-    prep_nodes(root);
+    prep_nodes(root, perspective);
     root.children = group_smallest(
       root.children,
       children => ({ name: smaller_items_text, children }),
@@ -325,7 +329,7 @@ export async function get_data(perspective, org_id, year, vote_stat_type) {
       children: data,
       amount: _.sumBy(data, "amount"),
     };
-    prep_nodes(root);
+    prep_nodes(root, perspective);
     root.children = group_smallest(
       root.children,
       children => ({ name: smaller_items_text, children }),
@@ -351,7 +355,7 @@ export async function get_data(perspective, org_id, year, vote_stat_type) {
       result_h7y_mapper
     );
 
-    _.each(data, prep_nodes);
+    _.each(data, node => { prep_nodes(node, perspective) });
     const grouped_data = group_smallest(
       data,
       children => ({ name: smaller_items_text, children })

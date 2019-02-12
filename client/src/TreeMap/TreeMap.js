@@ -132,9 +132,9 @@ function results_node_render(foreign_sel){
 
 // need this slightly tricky formulation because we only want to use part of the Blues scale (darkest colours
 // are too dark for good contrast with the text)
-const pos_d3_color_scale = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeBlues[9].slice(3,7)));
+const pos_d3_color_scale = d3.scaleSequentialPow(d3.interpolateRgbBasis(d3.schemeBlues[9].slice(2,7)));
 pos_d3_color_scale.clamp(true); // I'm not sure if this is the default
-const neg_d3_color_scale = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeReds[9].slice(3,5)));
+const neg_d3_color_scale = d3.scaleSequentialPow(d3.interpolateRgbBasis(d3.schemeReds[9].slice(3,5)));
 neg_d3_color_scale.clamp(true);
 function standard_color_scale (node){
   let color_val;
@@ -156,7 +156,7 @@ function fte_color_scale(node){
 function get_color_scale(type,color_var){
   if(type === "org_results"){
     return null; //result_color_scale;
-  } else if(type === "drf" && color_var === "ftes"){
+  } else if(color_var && color_var === "ftes"){
     return fte_color_scale;
   } else {
     return standard_color_scale;
