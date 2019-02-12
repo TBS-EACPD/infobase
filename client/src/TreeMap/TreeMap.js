@@ -29,7 +29,18 @@ function std_node_render(foreign_sel){
 
     const name_to_display = ( node.data.subject && node.data.subject.fancy_acronym && this.offsetWidth < 150 ? node.data.subject.fancy_acronym : node.data.name );
     
-    if(this.offsetHeight > 100){
+    if(this.offsetHeight > 150){
+      return `
+        <div class="TreeMapNode__ContentBox TreeMapNode__ContentBox--standard">
+        <div class="TreeMapNode__ContentTitle TreeMapNode__ContentTitle--large">
+          ${name_to_display}
+        </div>
+        <div class="TreeMapNode__ContentText TreeMapNode__ContentText--large">
+          ${formats.compact1(node.data.amount)}
+        </div>
+      </div>
+    `
+    } else if(this.offsetHeight > 100){
       return `
         <div class="TreeMapNode__ContentBox TreeMapNode__ContentBox--standard">
         <div class="TreeMapNode__ContentTitle">

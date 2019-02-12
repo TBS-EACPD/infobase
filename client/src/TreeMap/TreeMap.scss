@@ -99,6 +99,10 @@
     overflow: hidden;
     margin-bottom: 0.5em;
     font-weight: bold;
+    &.TreeMapNode__ContentTitle--large {
+      font-size:1.2em;
+      margin-bottom: 0.2em;
+    }
     &.TreeMapNode__ContentTitle--small {
       font-size:0.8em;
       margin-bottom: 0.2em;
@@ -108,6 +112,9 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    &.TreeMapNode__ContentText--large {
+      font-size:1.2em;
+    }
     &.TreeMapNode__ContentText--small {
       font-size:0.8em;
     }
