@@ -99,6 +99,7 @@ function get_plugins({ is_prod, language, a11y_client, commit_sha, envs }){
   const plugins = [
     new webpack.DefinePlugin({
       SHA: JSON.stringify(commit_sha),
+      BUILD_DATE: JSON.stringify( new Date().toISOString().replace(/T.+/, '') ),
       DEV: !is_prod,
       APPLICATION_LANGUAGE: JSON.stringify(language),
       IS_A11Y_MODE: !!a11y_client,

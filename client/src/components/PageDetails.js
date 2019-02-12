@@ -1,8 +1,8 @@
 import text from './PageDetails.yaml'
-import { create_text_maker_component } from '../util_components.js';
+import { create_text_maker } from '../models/text.js';
 import { log_standard_event } from '../core/analytics.js';
 
-const { TM } = create_text_maker_component(text);
+const text_maker = create_text_maker(text);
 
 class ReportAProblem extends React.Component {
   constructor(){
@@ -16,14 +16,18 @@ class ReportAProblem extends React.Component {
 class VersionNumber extends React.Component {
   render(){
     return (
-      <dl id="wb-dtmd">
-        <dt>
-          TODO: Version number:
-        </dt>
-        <dd>
-          {`${window.sha} (TODO: Released: ${"TODO: set date during builds?"})`}
-        </dd>
-      </dl>
+      <span>
+        {
+          `${
+            text_maker("infobase_version_number")
+          } ${
+            window.sha
+          } ${
+            window.build_date && 
+              text_maker("infobase_build_date", {build_date: window.build_date}) 
+          }`
+        }
+      </span>
     );
   }
 }

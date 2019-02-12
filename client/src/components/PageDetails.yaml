@@ -1,0 +1,10 @@
+infobase_version_number:
+  en: |
+    Version number:
+  fr: |
+    Numéro de version:
+
+infobase_build_date:
+  transform: [handlebars]
+  en: (built {{build_date}})
+  fr: (TODO {{build_date}})

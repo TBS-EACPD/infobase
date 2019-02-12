@@ -15,6 +15,7 @@ import { InsertRuntimeFooterLinks } from '../core/InsertRuntimeFooterLinks.js';
 import { ReactUnmounter } from '../core/NavComponents';
 import { EasyAccess } from '../core/EasyAccess';
 import { SpinnerWrapper } from '../components/SpinnerWrapper.js';
+import { PageDetails } from '../components/PageDetails.js';
 
 const Home = retrying_react_lazy( () => import('../home/a11y_home.js') );
 const GraphInventory = retrying_react_lazy( () => import('../graph_route/GraphInventory.js') );
@@ -61,6 +62,7 @@ export class App extends React.Component {
               <Route path="/" component={Home} />
             </Switch>
           </Suspense>
+          <PageDetails />
         </ErrorBoundary>
       </div>
     );

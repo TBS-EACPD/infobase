@@ -9,6 +9,9 @@ if(typeof SHA !== "undefined"){
   window.long_sha = SHA;
   window.sha = SHA.substr(0,7);
 }
+if(typeof BUILD_DATE !== "undefined"){
+  window.build_date = BUILD_DATE;
+}
 if(typeof PRE_PUBLIC_ACCOUNTS !== "undefined"){
   window.pre_public_accounts = PRE_PUBLIC_ACCOUNTS;
 }
