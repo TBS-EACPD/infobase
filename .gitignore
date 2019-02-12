@@ -2,3 +2,15 @@
 .vscode/
 *.swp
 *.swo
+*.~lock*
+*.pyc
+*.DS_Store
+._*
+*.sql
+*.bak
+*.vim
+*.xlsx
+*.xls
+*.png
+*.dot
+*.log
