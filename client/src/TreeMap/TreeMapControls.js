@@ -49,7 +49,7 @@ const vs_type_controls = [
   { id: "4", display: text_maker("vstype4") },
   { id: "5", display: text_maker("vstype5") },
   { id: "6", display: text_maker("vstype6") },
-  { id: "9", display: text_maker("vstype9") },
+  //{ id: "9", display: text_maker("vstype9") }, // Other
   { id: "999", display: text_maker("vstype999") },
 ]
 
