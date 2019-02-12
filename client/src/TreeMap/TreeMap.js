@@ -181,7 +181,7 @@ function std_tooltip_render(tooltip_sel,color_var){
     if(d.data.ftes){
       if(d.data.parent_ftes){
         tooltip_html = tooltip_html + `
-        <div>${d.data.ftes} ${trivial_text_maker("fte")}
+        <div>${formats.int(d.data.ftes)} ${trivial_text_maker("fte")}
         (${formats.percentage1(d.data.ftes/d.data.parent_ftes)} of ${d.data.parent_name})</div>`
 
       } else{
