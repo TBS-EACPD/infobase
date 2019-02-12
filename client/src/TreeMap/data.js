@@ -238,19 +238,22 @@ export async function get_data(perspective, org_id, year, vote_stat_type) {
       }))
       .filter(has_non_zero_or_non_zero_children)
       .value();
-    // data = _.chain(orgs)
-    //   .groupBy('subject.ministry.name')
-    //   .toPairs()
-    //   .map(([min_name, orgs]) => (
-    //     orgs.length > 1 ?
-    //       {
-    //         name: min_name,
-    //         children: orgs,
-    //       } :
-    //       _.first(orgs)
-    //   ))
-    //   .value();
-    data = orgs;
+    data = _.chain(orgs)
+      .groupBy('subject.ministry.name')
+      .toPairs()
+      .map(([min_name, orgs]) => (
+        {
+          name: min_name,
+          children: orgs,
+        }
+        //orgs.length > 1 ?
+        //  {
+        //    name: min_name,
+        //    children: orgs,
+        //  } :
+        //  _.first(orgs)
+      ))
+      .value();
     const root = {
       name: "Government",
       children: data,
