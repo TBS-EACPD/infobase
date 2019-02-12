@@ -482,17 +482,14 @@ border: 1px solid #bfbfbf;
 
 
 // Link styles from flat redesign
-a, a:visited {
+a {
   text-decoration: none;
-  color: $ibLinkColor;
-}
-
-#wb-lng > .row > div > ul > li > a,
-#wb-info > .wb-navcurr > ul > li > a,
-#wb-info > .brand > .container > .row > nav > ul > li > a {
-  color: darken($wetLinkColor, 5%);
+  color: $linkColor;
+  &:focus, &:hover {
+    color: $linkFocusColor;
+  }
   &:visited {
-    color: darken($wetLinkVisitedColor, 5%);
+    color: $linkVisitedColor;
   }
 }
 

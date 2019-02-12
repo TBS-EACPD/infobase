@@ -174,10 +174,12 @@ h1, h2, h3, h4, h5, h6, .header, .h1, .h2, .h3, .h4, .h5, .h6 {
 .link-styled {
   cursor: pointer;
   text-decoration: none;
-  color: $ibLinkColor;
+  color: $linkColor;
   background-color: transparent;
+  &:focus, &:hover {
+    color: $linkFocusColor;
+  }
 }
-
 
 .text-only-page-root {
   h2, h3, h4 {

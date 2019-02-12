@@ -9,9 +9,9 @@ $highlightColor: #da3a38;
 $buttonPrimaryColor: #176dde;
 $buttonSecondaryColor: #76a4df;
 
-$wetLinkColor: #1E75E8;
-$wetLinkVisitedColor: #7834bc;
-$ibLinkColor: #0059b3;
+$linkColor: #2b4380;
+$linkFocusColor: #0535d2;
+$linkVisitedColor: #7834bc;
 
 $headerFontFamily: 'Loto', sans-serif;
 $defaultFontFamily: 'Noto Sans', sans-serif;
@@ -37,7 +37,7 @@ $heavyFontWeight: 700;
   }
 }
 @mixin unstyled-link {
-    &, &:link, &:visited, &:hover {
+    &, &:link, &:visited, &:hover, &:focus {
       color: inherit;
       text-decoration: inherit;
   }

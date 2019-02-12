@@ -49,7 +49,7 @@
 
     & > a {
       white-space: normal;
-      color: $ibLinkColor;
+      color: $linkColor;
     }
   }
 }
@@ -59,10 +59,11 @@
 .rbt-menu.dropdown-menu > li:focus:not(.dropdown-header),
 .rbt-menu.dropdown-menu > li:hover:not(.dropdown-header),
 .rbt-menu.dropdown-menu > li > a:focus,
-.rbt-menu.dropdown-menu > li > a:hover, {
+.rbt-menu.dropdown-menu > li > a:hover {
   &:not(.disabled){
     background-color: #aec8d8;
-    color: $ibLinkColor;
+    color: $linkFocusColor;
+    text-decoration: underline;
   }
 }
 
