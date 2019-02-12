@@ -1,256 +1,257 @@
 @import '../common_css/common-variables';
 
 .TreeMap__SideBar {
-    background-color: #767f89;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-  }
-  .TreeMap_SideBar__Title {
-    padding: 20px;
-    font-size: 2em;
-  }
-  .TreeMap_SideBar__Text {
-    line-height: 2em;
-    font-size: 1em;
-  }
-  .TreeMap__SideBar__Chevron {
-    width: 10px;
-    color: #9ecae1;
-  }
+  background-color: #767f89;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+.TreeMap_SideBar__Title {
+  padding: 20px;
+  font-size: 2em;
+}
+.TreeMap_SideBar__Text {
+  line-height: 2em;
+  font-size: 1em;
+}
+.TreeMap__SideBar__Chevron {
+  width: 10px;
+  color: #9ecae1;
+}
   
-  .TreeMap__ZoomControl {
-    border: 2px solid #fff;
-    border-top-width: 0;
-    background-color: #D9D9D9;
-    padding: 1rem;
-    &.TreeMap__ZoomControl--has-zoom-out {
-      &:hover {
-        background-color: #9ecae1 !important;
-      }
-      cursor: pointer;
+.TreeMap__ZoomControl {
+  border: 2px solid #fff;
+  border-top-width: 0;
+  background-color: #D9D9D9;
+  padding: 1rem;
+  &.TreeMap__ZoomControl--has-zoom-out {
+    &:hover {
+      background-color: #9ecae1 !important;
     }
+    cursor: pointer;
   }
+}
+.TreeMap__ZoomControl__Text{
+  color: black;
+}
+.TreeMap__ZoomControl__Title{
+  font-weight: bold;
+}
 
-  .TreeMap__ZoomControl__Text{
-    color: black;
-  }
-  .TreeMap__ZoomControl__Title{
-    font-weight: bold;
-  }
+.TreeMap__Rectangle {
+  position: absolute;
+  border: 1px solid #fff;
 
-  .TreeMap__Rectangle {
-    position: absolute;
-    border: 1px solid #fff;
+  &.TreeMap__Rectangle--is-parent {
+    border-width: 2px;
+  }
+  &.TreeMap__Rectangle--is-child {
+    opacity: 0;
+  }
+}
   
-    &.TreeMap__Rectangle--is-parent {
-      border-width: 2px;
-    }
-    &.TreeMap__Rectangle--is-child {
-      opacity: 0;
-    }
+/* division contains the rectangle (parent and children) as well as the overlaid content boxes */
+.TreeMap__Division:hover { // I dont think a mobile version is necessary for this
+  .TreeMap__Rectangle--is-child {
+    opacity: 0.8;
+    border-width: 1px;
   }
-  
-  /* division contains the rectangle (parent and children) as well as the overlaid content boxes */
-  .TreeMap__Division:hover { // I dont think a mobile version is necessary for this
-    .TreeMap__Rectangle--is-child {
-      opacity: 0.8;
-      border-width: 1px;
-    }
-    .TreeMap__Rectangle--is-parent {
-      opacity: 0.2;
-    }
+  .TreeMap__Rectangle--is-parent {
+    opacity: 0.2;
   }
+}
 
-  .TreeMapNode__ContentBoxContainer {
-    &:hover{
-      background-color: rgba(66, 146, 198, 0.4); //rgba(200, 200, 200, 0.1);
-      border: 2px solid #4292c6;
-    }
-    position: absolute;
-  
-    &.TreeMapNode__ContentBoxContainer--has-children {
-      cursor: pointer;
-    }
-  }
+// TODO: this is a mess, need to reorganize
 
-  .TreeMapNode__ContentBoxContainer--tapped {
+.TreeMapNode__ContentBoxContainer {
+  &:hover{
     background-color: rgba(66, 146, 198, 0.4); //rgba(200, 200, 200, 0.1);
     border: 2px solid #4292c6;
   }
+  position: absolute;
 
-  .TreeMapNode__ContentBox {
-    &.TreeMapNode__ContentBox--standard {
-      font-size:1em;
-      vertical-align: middle;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%,-50%);
-      max-width: 90%;
-      max-height: 90%;
-      overflow:hidden;
-      text-align: center;
-    }
+  &.TreeMapNode__ContentBoxContainer--has-children {
+    cursor: pointer;
   }
-  .TreeMapNode__ContentTitle {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    margin-bottom: 0.5em;
-    font-weight: bold;
-    &.TreeMapNode__ContentTitle--large {
-      font-size:1.2em;
-      margin-bottom: 0.2em;
-    }
-    &.TreeMapNode__ContentTitle--small {
-      font-size:0.8em;
-      margin-bottom: 0.2em;
-    }
-  }
-  .TreeMapNode__ContentText {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    &.TreeMapNode__ContentText--large {
-      font-size:1.2em;
-    }
-    &.TreeMapNode__ContentText--small {
-      font-size:0.8em;
-    }
-  }
-  
-  .TreeMap_IndicatorGrid {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
-    width: 100%;
-    height: 100%;
+}
+
+.TreeMapNode__ContentBoxContainer--tapped {
+  background-color: rgba(66, 146, 198, 0.4); //rgba(200, 200, 200, 0.1);
+  border: 2px solid #4292c6;
+}
+
+.TreeMapNode__ContentBox {
+  &.TreeMapNode__ContentBox--standard {
+    font-size:1em;
+    vertical-align: middle;
     position: absolute;
-    opacity: 0.35;
-    overflow: hidden;
-    border: 2px solid black;
-  }
-  .TreeMap_IndicatorGrid__Item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid white;
-    flex: 1 1 auto;
-    &.TreeMap_IndicatorGrid__Item--success {
-      background-color: #33FF33;
-    }
-    &.TreeMap_IndicatorGrid__Item--failure {
-      background-color: #FF6666;
-    }
-    &.TreeMap_IndicatorGrid__Item--other {
-      background-color: #c2c2c2;
-    }
-  }
-  
-  .TM_TooltipContainer {
-    position: absolute;
-    width: 250px;
-    height: auto;
-    border-radius:5px;
-    border: 2px solid white;
-    background: none repeat scroll 0 0 #767f89;
-    color: white;
-    font-size: 1em;
-    padding: 10px;
-    text-align: center;
-    z-index: 10;
-    transform: translate(-50%, 0);
-    top: 75%;
+    top: 50%;
     left: 50%;
-    &:before {
-      text-shadow: 1px 1px 0px white;
-      content: " ";
-      position: absolute;
-      bottom: 100%;  /* At the top of the tooltip */
-      left: 50%;
-      margin-left: -10px;
-      border-width: 10px;
-      border-style: solid;
-      border-color: transparent transparent white transparent;
-    }
-    &:after {
-      text-shadow: 1px 1px 0px white;
-      content: " ";
-      position: absolute;
-      bottom: 100%;  /* At the top of the tooltip */
-      left: 50%;
-      margin-left: -7px;
-      border-width: 7px;
-      border-style: solid;
-      border-color: transparent transparent #767f89 transparent;
-    }
-    .TM_Tooltip__link {
-      color: #9ecae1
-    }
+    transform: translate(-50%,-50%);
+    max-width: 90%;
+    max-height: 90%;
+    overflow:hidden;
+    text-align: center;
   }
-
-
-  .BlueHLine {
-    display: block;
-    height: 1px;
-    border-top: 3px solid #9ecae1;
-    margin-top: 2px;  
+}
+.TreeMapNode__ContentTitle {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+  &.TreeMapNode__ContentTitle--large {
+    font-size:1.2em;
+    margin-bottom: 0.2em;
   }
+  &.TreeMapNode__ContentTitle--small {
+    font-size:0.8em;
+    margin-bottom: 0.2em;
+  }
+}
+.TreeMapNode__ContentText {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  &.TreeMapNode__ContentText--large {
+    font-size:1.2em;
+  }
+  &.TreeMapNode__ContentText--small {
+    font-size:0.8em;
+  }
+}
 
-  $controlsColor: #767f89;
-  $controlsColorLighter: #2171b5;
+.TreeMap_IndicatorGrid {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 0.35;
+  overflow: hidden;
+  border: 2px solid black;
+}
+.TreeMap_IndicatorGrid__Item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid white;
+  flex: 1 1 auto;
+  &.TreeMap_IndicatorGrid__Item--success {
+    background-color: #33FF33;
+  }
+  &.TreeMap_IndicatorGrid__Item--failure {
+    background-color: #FF6666;
+  }
+  &.TreeMap_IndicatorGrid__Item--other {
+    background-color: #c2c2c2;
+  }
+}
 
-  .treemap-controls {
-    margin-bottom: -20px;
-    padding: 8px 0px 13px 0px;
-  
-    & > .labeled-box {
-      margin-bottom: 8px;
+.TM_TooltipContainer {
+  position: absolute;
+  width: 250px;
+  height: auto;
+  border-radius:5px;
+  border: 2px solid white;
+  background: none repeat scroll 0 0 #767f89;
+  color: white;
+  font-size: 1em;
+  padding: 10px;
+  text-align: center;
+  z-index: 10;
+  transform: translate(-50%, 0);
+  top: 75%;
+  left: 50%;
+  &:before {
+    text-shadow: 1px 1px 0px white;
+    content: " ";
+    position: absolute;
+    bottom: 100%;  /* At the top of the tooltip */
+    left: 50%;
+    margin-left: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent white transparent;
+  }
+  &:after {
+    text-shadow: 1px 1px 0px white;
+    content: " ";
+    position: absolute;
+    bottom: 100%;  /* At the top of the tooltip */
+    left: 50%;
+    margin-left: -7px;
+    border-width: 7px;
+    border-style: solid;
+    border-color: transparent transparent #767f89 transparent;
+  }
+  .TM_Tooltip__link {
+    color: #9ecae1
+  }
+}
+
+
+.BlueHLine {
+  display: block;
+  height: 1px;
+  border-top: 3px solid #9ecae1;
+  margin-top: 2px;  
+}
+
+$controlsColor: #767f89;
+$controlsColorLighter: #2171b5;
+
+.treemap-controls {
+  margin-bottom: -20px;
+  padding: 8px 0px 13px 0px;
+
+  & > .labeled-box {
+    margin-bottom: 8px;
+    border-radius: 0px;
+
+    & > .labeled-box-label {
+      background-color: $controlsColorLighter;
+      color: #FFFFFF;
+      font-size: 18px;
+      padding: 13px 13px 13px 20px;
+      min-height: 0px;
       border-radius: 0px;
+    }
   
-      & > .labeled-box-label {
-        background-color: $controlsColorLighter;
-        color: #FFFFFF;
-        font-size: 18px;
-        padding: 13px 13px 13px 20px;
-        min-height: 0px;
-        border-radius: 0px;
-      }
-    
-      & > .labeled-box-content {
-        border-color: $controlsColorLighter;
-        padding-left: 10px;
-        color: $controlsColorLighter;
-        border-width: 2px;
-        border-radius: 0px;
-      }
+    & > .labeled-box-content {
+      border-color: $controlsColorLighter;
+      padding-left: 10px;
+      color: $controlsColorLighter;
+      border-width: 2px;
+      border-radius: 0px;
+    }
 
-      & > .labeled-box-content > .centerer > .radio-buttons {
+    & > .labeled-box-content > .centerer > .radio-buttons {
+      border-color: $controlsColorLighter;
+      width: 800px;
+      & > .radio-buttons__option {
+        color: $controlsColorLighter;
+        padding: 5px 10px;
+        font-size: 14px;
+      }
+      
+      & > .radio-buttons__option.radio-buttons__option--active {
+        color: #FFFFFF;
+        background-color: $controlsColorLighter;
+      }
+      
+      & > .radio-buttons__option:not(:last-child):after,
+      & > .radio-buttons__option:not(:first-child):before {
         border-color: $controlsColorLighter;
-        width: 800px;
-        & > .radio-buttons__option {
-          color: $controlsColorLighter;
-          padding: 5px 10px;
-          font-size: 14px;
-        }
-        
-        & > .radio-buttons__option.radio-buttons__option--active {
-          color: #FFFFFF;
-          background-color: $controlsColorLighter;
-        }
-        
-        & > .radio-buttons__option:not(:last-child):after,
-        & > .radio-buttons__option:not(:first-child):before {
-          border-color: $controlsColorLighter;
-        }
-        
-        & > .radio-buttons__option:not(.radio-buttons__option--active):hover,
-        & > .radio-buttons__option:not(.radio-buttons__option--active):active,
-        & > .radio-buttons__option:not(.radio-buttons__option--active):focus { 
-          background-color: change-color($color: $controlsColorLighter, $alpha: 0.75);
-          color: #FFFFFF !important;
-        }
+      }
+      
+      & > .radio-buttons__option:not(.radio-buttons__option--active):hover,
+      & > .radio-buttons__option:not(.radio-buttons__option--active):active,
+      & > .radio-buttons__option:not(.radio-buttons__option--active):focus { 
+        background-color: change-color($color: $controlsColorLighter, $alpha: 0.75);
+        color: #FFFFFF !important;
       }
     }
   }
+}
