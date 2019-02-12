@@ -257,7 +257,7 @@ export async function get_data(perspective, org_id, year, vote_stat_type) {
       root.children,
       children => ({ name: smaller_items_text, children }),
       true,
-      0.007,
+      0.005,
     );
     return d3.hierarchy(root);
   } else if (perspective === "tp") {
@@ -287,7 +287,7 @@ export async function get_data(perspective, org_id, year, vote_stat_type) {
       root.children,
       children => ({ name: smaller_items_text, children }),
       true,
-      0.007
+      0.005
     );
     return d3.hierarchy(root);
 
