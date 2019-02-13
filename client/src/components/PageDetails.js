@@ -1,4 +1,6 @@
-import text from './PageDetails.yaml'
+import './PageDetails.scss';
+import text from './PageDetails.yaml';
+import { Details } from './Details.js';
 import { create_text_maker } from '../models/text.js';
 import { log_standard_event } from '../core/analytics.js';
 
@@ -9,7 +11,16 @@ class ReportAProblem extends React.Component {
     super();
   }
   render(){
-    return null;
+    return (
+      <Details
+        summary_content={text_maker("report_a_problem")}
+        content={
+          <div>
+            TODO
+          </div>
+        }
+      />
+    );
   }
 }
 
@@ -34,14 +45,15 @@ class VersionNumber extends React.Component {
 
 
 export class PageDetails extends React.Component {
-  constructor(){
-    super();
-  }
   render(){
     return (
       <div className="pagedetails">
-        <ReportAProblem />
-        <VersionNumber />
+        <div className="pagedetails__report-a-problem">
+          <ReportAProblem />
+        </div>
+        <div className="pagedetails__version-number">
+          <VersionNumber />
+        </div>
       </div>
     );
   }

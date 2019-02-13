@@ -1,0 +1,17 @@
+@import '../common_css/common-variables';
+
+.pagedetails {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+
+  & > .pagedetails__report-a-problem {
+
+  }
+  & > .pagedetails__version-number {
+    background-color: $backgroundColor;
+    border-radius: 11px;
+    padding: 3px;
+  }
+}
