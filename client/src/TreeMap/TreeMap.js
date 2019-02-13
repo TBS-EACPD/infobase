@@ -305,7 +305,7 @@ export default class TreeMapper extends React.Component {
       this.props.match.params.perspective !== nextProps.match.params.perspective ||
       this.props.match.params.org_id !== nextProps.match.params.org_id ||
       this.props.match.params.year !== nextProps.match.params.year ||
-      this.props.match.params.vote_stat_type !== nextProps.match.params.vote_stat_type
+      this.props.match.params.filter_var !== nextProps.match.params.filter_var
     ){
       this.set_data(nextProps);
     }
@@ -322,11 +322,11 @@ export default class TreeMapper extends React.Component {
           perspective,
           org_id,
           year,
-          vote_stat_type,
+          filter_var,
         },
       },
     } = props; 
-    get_data(perspective,org_id,year,vote_stat_type).then( data => {
+    get_data(perspective,org_id,year,filter_var).then( data => {
       this.setState({
         loading: false,
         data,
@@ -340,7 +340,7 @@ export default class TreeMapper extends React.Component {
           perspective,
           color_var,
           year,
-          vote_stat_type,
+          filter_var,
         },
       },
     } = this.props; 
@@ -394,7 +394,7 @@ export default class TreeMapper extends React.Component {
                 perspective={perspective}
                 color_var={color_var}
                 year={year}
-                vote_stat_type={vote_stat_type}
+                filter_var={filter_var}
                 history = { this.props.history }
               /> 
               <TreeMap 

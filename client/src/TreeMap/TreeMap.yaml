@@ -23,6 +23,9 @@ treemap_vstype_filter:
   en: Filter by Vote / Statutory type
   fr: Filtrer par crédit / poste législatif
 
+treemap_so_filter:
+  en: Filter by Standard Object
+  fr: Filtrer par article courant
 
 DRF:
   en: Departmental Results Framework
@@ -35,3 +38,59 @@ TP:
 EVS:
   en: Estimates by Vote / Statutory type
   fr: Budgets des dépenses par crédit / poste législatif
+
+SO:
+  en: Expenditures by Standard Object
+  fr: Dépenses par article courant
+
+all:
+  en: all
+  fr: Tous
+
+SOBJ1:
+  en: Personnel
+  fr: Personnel
+
+SOBJ2:
+  en: Transportation and communications
+  fr: Transports et communications
+
+SOBJ3:
+  en: Information
+  fr: Information
+
+SOBJ4:
+  en: Professional and special services
+  fr: Services professionnels et spéciaux
+
+SOBJ5:
+  en: Rentals
+  fr: Location
+
+SOBJ6:
+  en: Purchased repairs and maintenance
+  fr: Achat de services de réparation et d'entretien
+
+SOBJ7:
+  en: Utilities, material and supplies
+  fr: Services publics, fournitures et approvisionnements
+
+SOBJ8:
+  en: Acquisition of land, buildings and works
+  fr: Acquisition de terrains, de bâtiments et d'ouvrages
+
+SOBJ9:
+  en: Acquisition of machinery and equipment
+  fr: Acquisition de machines et de matériel
+
+SOBJ10:
+  en: Transfer payments
+  fr: Paiements de transfert
+
+SOBJ11:
+  en: Public debt charge
+  fr: Service de la dette publique
+
+SOBJ12:
+  en: Other subsidies and payments
+  fr: Autres subventions et paiements
