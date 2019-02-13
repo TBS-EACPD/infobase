@@ -27,6 +27,10 @@ treemap_so_filter:
   en: Filter by Standard Object categories
   fr: Filtrer par regroupement d'article courants
 
+treemap_gc_type_filter:
+  en: Filter by grants / contributions
+  fr: Filtrer par subventions / contributions
+
 DRF:
   en: Departmental Results Framework
   fr: Cadre ministériel des résultats
@@ -94,3 +98,11 @@ SOBJ11:
 SOBJ12:
   en: Other subsidies and payments
   fr: Autres subventions et paiements
+
+grants:
+  en: Grants
+  fr: Subventions
+
+contributions:
+  en: Contributions
+  fr: Contributions

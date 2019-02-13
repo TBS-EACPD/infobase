@@ -104,11 +104,11 @@ function group_smallest(node_list, node_creator, shouldRecurse = true, perc_cuto
     new_node.size = _.sumBy(tiny_nodes, "size")
     new_node.is_negative = new_node.amount < 0;
 
-    // if (new_node.size < cutoff) {
-    //   const old_size = new_node.size;
-    //   _.set(new_node, 'size', cutoff);
-    //   _.each(new_node.children, child => { recurse_adjust_size(child, cutoff / old_size) });
-    // }
+    if (new_node.size < cutoff) {
+      const old_size = new_node.size;
+      _.set(new_node, 'size', cutoff);
+      _.each(new_node.children, child => { recurse_adjust_size(child, cutoff / old_size) });
+    }
 
     if (shouldRecurse) {
       //the newly split up children might be able to get grouped again!
@@ -122,11 +122,11 @@ function group_smallest(node_list, node_creator, shouldRecurse = true, perc_cuto
     // we want to avoid cases where there are nodes that are too tiny to see
     // e.g. DRF > treasury board > PSIC
     const old_node_list = _.without(node_list, ...tiny_nodes);
-    // tiny_nodes = _.each(tiny_nodes, function (item) {
-    //   const old_size = item.size;
-    //   _.set(item, 'size', cutoff);
-    //   _.each(item.children, child => { recurse_adjust_size(child, cutoff / old_size) });
-    // });
+    tiny_nodes = _.each(tiny_nodes, function (item) {
+      const old_size = item.size;
+      _.set(item, 'size', cutoff);
+      _.each(item.children, child => { recurse_adjust_size(child, cutoff / old_size) });
+    });
 
     return old_node_list.concat(tiny_nodes);
   } else {
@@ -281,7 +281,7 @@ export async function get_data(perspective, org_id, year, filter_var) {
       root.children,
       children => ({ name: smaller_items_text, children }),
       true,
-      0.005,
+      0.01,
     );
     return d3.hierarchy(root);
   } else if (perspective === "so") {
@@ -345,10 +345,11 @@ export async function get_data(perspective, org_id, year, filter_var) {
       root.children,
       children => ({ name: smaller_items_text, children }),
       true,
-      0.005,
+      0.01,
     );
     return d3.hierarchy(root);
   } else if (perspective === "tp") {
+    const filtering = filter_var && filter_var !== "All" && (filter_var === "g" || filter_var === "c");
     const tp_table = Table.lookup('orgTransferPayments');
     const all_orgs = _.chain(Dept.get_all())
       .map(org => ({
@@ -357,7 +358,7 @@ export async function get_data(perspective, org_id, year, filter_var) {
         children: _.chain(tp_table.q(org).data)
           .map(row => ({
             name: row.tp,
-            amount: row[header_col(perspective, year)],
+            amount: (!filtering || row.type_id === filter_var) ? row[header_col(perspective, year)] : 0,
           }))
           .filter(has_non_zero_or_non_zero_children)
           .value(),

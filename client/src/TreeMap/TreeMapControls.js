@@ -26,9 +26,9 @@ const all_years = [
 const years = {
   "drf": all_years,
   "drf_ftes": all_years,
-  "tp": all_years.slice(0,5),
-  "vote_stat": all_years.slice(1,6),
-  "so": all_years.slice(2,5),
+  "tp": all_years.slice(0, 5),
+  "vote_stat": all_years.slice(1, 6),
+  "so": all_years.slice(2, 5),
 }
 
 const size_controls = [
@@ -41,6 +41,12 @@ const size_controls = [
 const color_controls = [
   { id: "spending", display: text_maker("spending") },
   { id: "ftes", display: text_maker("fte") },
+]
+
+const gc_type_controls = [
+  { id: "All", display: text_maker("all") },
+  { id: "g", display: text_maker("grants") },
+  { id: "c", display: text_maker("contributions") },
 ]
 
 const vs_type_controls = [
@@ -56,28 +62,28 @@ const vs_type_controls = [
 ]
 
 const so_type_controls_old = [
-  {id: "All", display: text_maker("all") },
-  {id: "1", display: text_maker("SOBJ1") },
-  {id: "2", display: text_maker("SOBJ2") },
-  {id: "3", display: text_maker("SOBJ3") },
-  {id: "4", display: text_maker("SOBJ4") },
-  {id: "5", display: text_maker("SOBJ5") },
-  {id: "6", display: text_maker("SOBJ6") },
-  {id: "7", display: text_maker("SOBJ7") },
-  {id: "8", display: text_maker("SOBJ8") },
-  {id: "9", display: text_maker("SOBJ9") },
-  {id: "10", display: text_maker("SOBJ10") },
-  {id: "11", display: text_maker("SOBJ11") },
-  {id: "12", display: text_maker("SOBJ12") },
+  { id: "All", display: text_maker("all") },
+  { id: "1", display: text_maker("SOBJ1") },
+  { id: "2", display: text_maker("SOBJ2") },
+  { id: "3", display: text_maker("SOBJ3") },
+  { id: "4", display: text_maker("SOBJ4") },
+  { id: "5", display: text_maker("SOBJ5") },
+  { id: "6", display: text_maker("SOBJ6") },
+  { id: "7", display: text_maker("SOBJ7") },
+  { id: "8", display: text_maker("SOBJ8") },
+  { id: "9", display: text_maker("SOBJ9") },
+  { id: "10", display: text_maker("SOBJ10") },
+  { id: "11", display: text_maker("SOBJ11") },
+  { id: "12", display: text_maker("SOBJ12") },
 ]
 
 const so_type_controls = [
   { id: "All", display: text_maker("all") },
   { id: "1", display: text_maker("op_spending") },
   { id: "2", display: text_maker("capital_spending") },
-  {id: "10", display: text_maker("SOBJ10") },
-  {id: "11", display: text_maker("SOBJ11") },
-  {id: "12", display: text_maker("SOBJ12") },
+  { id: "10", display: text_maker("SOBJ10") },
+  { id: "11", display: text_maker("SOBJ11") },
+  { id: "12", display: text_maker("SOBJ12") },
   { id: "3", display: text_maker("revenues") },
 ]
 
@@ -104,8 +110,8 @@ export class TreeMapControls extends React.Component {
                 options={_.map(size_controls, ({ id, display }) => ({ id, display, active: id === perspective }))}
                 onChange={id => {
                   let new_path;
-                  ( id === "drf" || id === "drf_ftes" ) ?
-                    new_path = `/treemap/${id}/${color_var}/${year}` : 
+                  (id === "drf" || id === "drf_ftes") ?
+                    new_path = `/treemap/${id}/${color_var}/${year}` :
                     new_path = `/treemap/${id}/spending/${year}` // force to spending for other ones
                   if (history.location.pathname !== new_path) {
                     // the first_column prop, and thus this button's active id, is updated through this route push
@@ -116,7 +122,7 @@ export class TreeMapControls extends React.Component {
             </div>
           }
         />
-        { ( perspective === "drf" || perspective === "drf_ftes" ) &&
+        {(perspective === "drf" || perspective === "drf_ftes") &&
           <LabeledBox
             label={text_maker("treemap_color_by_label")}
             content={
@@ -125,6 +131,26 @@ export class TreeMapControls extends React.Component {
                   options={_.map(color_controls, ({ id, display }) => ({ id, display, active: id === color_var }))}
                   onChange={id => {
                     const new_path = `/treemap/${perspective}/${id}/${year}`;
+                    if (history.location.pathname !== new_path) {
+                      // the first_column prop, and thus this button's active id, is updated through this route push
+                      history.push(new_path);
+                    }
+                  }}
+                />
+              </div>
+            }
+          />
+        }
+
+        {perspective === "tp" &&
+          <LabeledBox
+            label={text_maker("treemap_gc_type_filter")}
+            content={
+              <div className="centerer">
+                <RadioButtons
+                  options={_.map(gc_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
+                  onChange={id => {
+                    const new_path = `/treemap/${perspective}/spending/${year}/${id}`;
                     if (history.location.pathname !== new_path) {
                       // the first_column prop, and thus this button's active id, is updated through this route push
                       history.push(new_path);
