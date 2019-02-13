@@ -103,7 +103,10 @@ export class TreeMapControls extends React.Component {
               <RadioButtons
                 options={_.map(size_controls, ({ id, display }) => ({ id, display, active: id === perspective }))}
                 onChange={id => {
-                  const new_path = `/treemap/${id}/${color_var}/${year}`;
+                  let new_path;
+                  ( id === "drf" || id === "drf_ftes" ) ?
+                    new_path = `/treemap/${id}/${color_var}/${year}` : 
+                    new_path = `/treemap/${id}/spending/${year}` // force to spending for other ones
                   if (history.location.pathname !== new_path) {
                     // the first_column prop, and thus this button's active id, is updated through this route push
                     history.push(new_path);
@@ -140,7 +143,7 @@ export class TreeMapControls extends React.Component {
                 <RadioButtons
                   options={_.map(vs_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
                   onChange={id => {
-                    const new_path = `/treemap/${perspective}/${color_var}/${year}/${id}`;
+                    const new_path = `/treemap/${perspective}/spending/${year}/${id}`;
                     if (history.location.pathname !== new_path) {
                       // the first_column prop, and thus this button's active id, is updated through this route push
                       history.push(new_path);
@@ -159,7 +162,7 @@ export class TreeMapControls extends React.Component {
                 <RadioButtons
                   options={_.map(so_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
                   onChange={id => {
-                    const new_path = `/treemap/${perspective}/${color_var}/${year}/${id}`;
+                    const new_path = `/treemap/${perspective}/spending/${year}/${id}`;
                     if (history.location.pathname !== new_path) {
                       // the first_column prop, and thus this button's active id, is updated through this route push
                       history.push(new_path);
@@ -177,7 +180,7 @@ export class TreeMapControls extends React.Component {
               <RadioButtons
                 options={_.map(years[perspective], (id => ({ id: id, display: run_template("{{" + id + "}}"), active: id === year })))}
                 onChange={id => {
-                  const new_path = `/treemap/${perspective}/${color_var}/${id}`;
+                  const new_path = `/treemap/${perspective}/spending/${id}`;
                   if (history.location.pathname !== new_path) {
                     // the first_column prop, and thus this button's active id, is updated through this route push
                     history.push(new_path);

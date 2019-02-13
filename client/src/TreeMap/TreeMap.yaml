@@ -24,8 +24,8 @@ treemap_vstype_filter:
   fr: Filtrer par crédit / poste législatif
 
 treemap_so_filter:
-  en: Filter by Standard Object
-  fr: Filtrer par article courant
+  en: Filter by Standard Object categories
+  fr: Filtrer par regroupement d'article courants
 
 DRF:
   en: Departmental Results Framework
