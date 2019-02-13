@@ -346,6 +346,7 @@ export default class TreeMapper extends React.Component {
     const colorScale = get_color_scale(perspective, color_var);
     const { results_tooltip_render } = this; 
 
+
     const display_year = run_template("{{" + year + "}}");
     return (
       <StandardRouteContainer 
