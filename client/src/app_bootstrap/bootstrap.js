@@ -64,10 +64,7 @@ const table_defs = [
 const load_fonts = () => (
   WebFont.load({
     google: {
-      families: [
-        "Loto:300,400",
-        "Noto Sans:400,400i,700,700i",
-      ],
+      families: ["Roboto:300,300i,400,400i,700,700i"],
     },
   })
 );

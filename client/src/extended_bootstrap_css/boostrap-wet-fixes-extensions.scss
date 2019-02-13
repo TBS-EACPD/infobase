@@ -516,12 +516,12 @@ ol.breadcrumb > li:last-child > :last-child {
 }
 
 #app, #wb-bc, .app-font, .easy-access, wb-lng {
-  font-family: $defaultFontFamily;
+  font-family: 'Roboto', sans-serif;
   font-weight: 300;
 }
 
 #app, #wb-bc, .app-font {
-  font-family: $defaultFontFamily;
+  font-family: 'Roboto', sans-serif;
   font-weight: $mediumFontWeight;
 }
 
