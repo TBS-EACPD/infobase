@@ -1,15 +1,24 @@
 import _ from 'lodash';
-import { bilingual_field } from '../schema_utils';
+import { 
+  bilingual_field,
+  create_resource_by_foreignkey_attr_dataloader,
+  create_resource_by_id_attr_dataloader,
+} from '../schema_utils';
 
 const schema = `
-  extend type Program implements RppEntity {
+  extend type Crso {
+    results(doc:String): [Result]
+  }
+
+  extend type Program{
     sub_programs: [SubProgram]
     results(doc: String): [Result]
     # special departmental results to which this programs 'contributes' to
     drs: [Result]
+    pidrlinks: [PIDRLink]
   }
 
-  type SubProgram implements RppEntity {
+  type SubProgram {
     id: String
     name: String
     description: String
@@ -40,6 +49,7 @@ const schema = `
 
   type Result {
     id: String
+    parent_id: String
     name: String
     doc: String
     indicators(doc: String): [Indicator]
@@ -47,6 +57,7 @@ const schema = `
 
   type Indicator {
     id: String
+    result_id: String
     name: String
     
     target_year: String
@@ -68,26 +79,46 @@ const schema = `
     status_key:String
   }
 
-  interface RppEntity {
-    id: String
-    name: String
-    results(doc: String): [Result]
-    sub_programs: [SubProgram]
+  # this is a graphql anti-pattern but fits in the existing client stores nicely
+  type PIDRLink {
+    program_id: String
+    result_id: String
   }
+
+
 `;
 
 
 export default function({models}){
 
-  const { 
+  const {
+    Crso,
+    Program,
     SubProgram,
     Result,
+    Indicator,
+    PIDRLink,
   } = models;
 
-  function get_results(subject, { doc }){
+  const result_by_subj_loader = create_resource_by_foreignkey_attr_dataloader(Result,'subject_id');
+  const indicator_by_result_loader = create_resource_by_foreignkey_attr_dataloader(Result,'result_id');
+  const program_link_loader = create_resource_by_foreignkey_attr_dataloader(PIDRLink, "program_id");
+  const sub_program_loader = create_resource_by_foreignkey_attr_dataloader(SubProgram, "parent_id");
+
+  async function get_results(subject, { doc }){
     const { id } = subject;
 
-    let records = Result.get_by_parent_id(id);
+    let id_val;
+    if(subject instanceof Crso){
+      id_val = subject.crso_id;
+    } else if(subject instanceof Program){
+      id_val = subject.program_id;
+    } else if (subject instanceof SubProgram){
+      id_val = subject.sub_program_id;
+    } else {
+      throw "bad subject"
+    }
+    let records =  await result_by_subj_loader.load(id_val)
 
     if(doc){
       records = _.filter(records, {doc});
@@ -95,14 +126,19 @@ export default function({models}){
     return records;
   }
 
+
   const resolvers = {
+    Crso: {
+      results: get_results,
+    },
     Program: {
       results: get_results,
-      sub_programs: prog => SubProgram.get_by_parent_id(prog.id),
-      drs: prog => prog.get_drs(),
+      sub_programs: ({program_id}) => sub_program_loader.load(program_id),
+      drs: ({program_id}) => program_link_loader.load(program_id),
     },
     SubProgram: {
-      sub_programs: _.property('sub_programs'),
+      id: _.property('sub_program_id'),
+      sub_programs: ({sub_program_id}) => sub_program_loader.load(sub_program_id),
       results: get_results,
       name: bilingual_field("name"),
       description: bilingual_field("description"),
@@ -127,6 +163,7 @@ export default function({models}){
       name: bilingual_field("name"),
     },
     Indicator: {
+      id: _.property('indicator_id'),
       name: bilingual_field("name"),
       explanation:bilingual_field("explanation"),
       target_narrative: bilingual_field("target_narrative"),

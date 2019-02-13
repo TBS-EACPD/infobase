@@ -1,7 +1,9 @@
 import _ from "lodash";
 import { get_standard_csv_file_rows } from '../load_utils.js';
 
-export default function({models}){
+export default async function({models}){
+  const { SubProgram, Result, Indicator, PIDRLink } = models
+
 
   const sub_program_records = get_standard_csv_file_rows("subprograms.csv");
 
@@ -27,6 +29,13 @@ export default function({models}){
     ], key => {
       obj[key] = _.isNaN(obj[key]) ? null : +obj[key];
     });
+    obj.sub_program_id = obj.id;
+    obj.id = null;
+  });
+    
+  _.each(result_records, obj => {
+    obj.result_id = obj.id;
+    obj.id = null;
   });
 
   _.each(indicator_records, obj => {
@@ -38,21 +47,16 @@ export default function({models}){
       status_period, 
     } = obj;
 
+    obj.indicator_id = obj.id;
+    obj.id = null;
     obj.target_year = _.isNaN(parseInt(target_year)) ? null : parseInt(target_year);
     obj.target_month= _.isEmpty(target_month) ? null : +target_month;
     obj.status_key = status_period && `${status_period}_${status_color}`;
   });
 
 
-  const {
-    SubProgram,
-    Result,
-    Indicator,
-    PI_DR_Links,
-  } = models;
-
-  _.each(sub_program_records, sub => SubProgram.register(sub));
-  _.each(result_records, res => Result.register(res));
-  _.each(indicator_records, ind => Indicator.register(ind));
-  _.each(pi_dr_links, ({program_id, result_id}) => PI_DR_Links.add(program_id, result_id) );
+  await SubProgram.insertMany(sub_program_records);
+  await Result.insertMany(result_records)
+  await Indicator.insertMany(indicator_records);
+  return await PIDRLink.insertMany(pi_dr_links);
 }

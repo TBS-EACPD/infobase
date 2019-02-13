@@ -53,7 +53,7 @@ app.use(
     graphiql: true,
     schema: schema,
     context: {},
-    validationRules: [ depthLimit(10) ],
+    validationRules: [ depthLimit(15) ],
   }))
 );
 

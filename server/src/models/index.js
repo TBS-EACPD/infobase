@@ -5,7 +5,7 @@ import root_schema from './schema_root';
 
 //each sub-module is included here
 import core_subject from './core_subject';
-// import results from './results';
+import results from './results';
 // import resources from './finances';
 // import pses from './pses';
 // import sobjs from './standard_objects';
@@ -19,7 +19,7 @@ import core_subject from './core_subject';
 
 const sub_module_defs = [
   core_subject,
-  // results,
+  results,
   // resources,
   // pses,
   // sobjs,
@@ -45,7 +45,7 @@ export async function populate_models(){
   return Promise.all(_.map(
     [
       core_subject,
-      // results,
+      results,
       // resources,
       // sobjs,
       // pses,
