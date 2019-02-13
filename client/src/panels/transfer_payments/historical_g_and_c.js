@@ -131,6 +131,7 @@ class HistTPTypes extends React.Component {
       series,
       text_split,
     } = this.props;
+
     const { active_types } = this.state;
     const filtered_series = _.chain(series)
       .pick(active_types)
@@ -144,6 +145,7 @@ class HistTPTypes extends React.Component {
       .reverse()
       .fromPairs()
       .value();
+
 
     const colors = infobase_colors();
 
