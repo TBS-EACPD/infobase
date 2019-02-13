@@ -216,6 +216,16 @@ function result_h7y_mapper(node) {
 
 }
 
+function filter_sobj_categories(so_cat, row){
+  if (row.so_num > 0 && row.so_num <= 7){
+    return so_cat === 1;
+  } else if (row.so_num > 7 && row.so_num <= 9) {
+    return so_cat === 2;
+  } else if (row.so_num === 21 || row.so_num === 22) {
+    return so_cat === 3;
+  }
+  return so_cat === row.so_num;
+}
 
 
 export async function get_data(perspective, org_id, year, filter_var) {
@@ -297,7 +307,7 @@ export async function get_data(perspective, org_id, year, filter_var) {
                       name: so_name,
                       amount: parseInt(filter_var) ?
                       _.chain(rows)
-                        .filter({ so_num: parseInt(filter_var) })
+                        .filter(row => filter_sobj_categories(parseInt(filter_var), row) )
                         .sumBy(header_col(perspective, year))
                         .value() :
                       _.chain(rows)
