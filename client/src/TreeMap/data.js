@@ -216,8 +216,8 @@ function result_h7y_mapper(node) {
 
 }
 
-function filter_sobj_categories(so_cat, row){
-  if (row.so_num > 0 && row.so_num <= 7){
+function filter_sobj_categories(so_cat, row) {
+  if (row.so_num > 0 && row.so_num <= 7) {
     return so_cat === 1;
   } else if (row.so_num > 7 && row.so_num <= 9) {
     return so_cat === 2;
@@ -306,13 +306,13 @@ export async function get_data(perspective, org_id, year, filter_var) {
                     ([so_name, rows]) => ({
                       name: so_name,
                       amount: parseInt(filter_var) ?
-                      _.chain(rows)
-                        .filter(row => filter_sobj_categories(parseInt(filter_var), row) )
-                        .sumBy(header_col(perspective, year))
-                        .value() :
-                      _.chain(rows)
-                        .sumBy(header_col(perspective, year))
-                        .value(),
+                        _.chain(rows)
+                          .filter(row => filter_sobj_categories(parseInt(filter_var), row))
+                          .sumBy(header_col(perspective, year))
+                          .value() :
+                        _.chain(rows)
+                          .sumBy(header_col(perspective, year))
+                          .value(),
                     }))
                   .filter(n => has_non_zero_or_non_zero_children(n, perspective))
                   .value(),
@@ -365,7 +365,16 @@ export async function get_data(perspective, org_id, year, filter_var) {
       }))
       .filter(has_non_zero_or_non_zero_children)
       .value();
-    data = all_orgs;
+    data = _.chain(all_orgs)
+      .groupBy('subject.ministry.name')
+      .toPairs()
+      .map(([min_name, orgs]) => (
+        {
+          name: min_name,
+          children: orgs,
+        }
+      ))
+      .value();
     const root = {
       name: "Government",
       children: data,
@@ -376,7 +385,7 @@ export async function get_data(perspective, org_id, year, filter_var) {
       root.children,
       children => ({ name: smaller_items_text, children }),
       true,
-      0.005
+      0.01
     );
     return d3.hierarchy(root);
 
@@ -405,10 +414,16 @@ export async function get_data(perspective, org_id, year, filter_var) {
       }))
       .filter(has_non_zero_or_non_zero_children)
       .value();
-
-
-
-    data = orgs;
+    data = _.chain(orgs)
+      .groupBy('subject.ministry.name')
+      .toPairs()
+      .map(([min_name, orgs]) => (
+        {
+          name: min_name,
+          children: orgs,
+        }
+      ))
+      .value();
     const root = {
       name: "Government",
       children: data,
@@ -419,7 +434,7 @@ export async function get_data(perspective, org_id, year, filter_var) {
       root.children,
       children => ({ name: smaller_items_text, children }),
       true,
-      0.005,
+      0.01,
     );
     return d3.hierarchy(root);
   } else if (perspective === "org_results") {
