@@ -51,6 +51,10 @@ all:
   en: all
   fr: Tous
 
+treemap_vstype999:
+  en: Statutory Items
+  fr: Postes législatifs
+
 SOBJ1:
   en: Personnel
   fr: Personnel
