@@ -1,5 +1,6 @@
 import {Fragment } from 'react';
 import { ResponsiveLine } from '@nivo/line';
+import { infobaseCategory10Colors } from '../../core/color_schemes.js';
 import {
   text_maker,
   TM,
@@ -132,11 +133,12 @@ class HistTPTypes extends React.Component {
       series,
       text_split,
     } = this.props;
+
     const { active_types } = this.state;
     const filtered_series = _.chain(series)
       .pick(active_types)
       .mapKeys( (val,key) => tp_type_name(key) )
-      
+        
       //HACKY: make sure the object's key are sorted 
       //sorting an object doesn't really exist, but it works and it's the
       // only way to get the Line chart to display in the right order...
@@ -145,6 +147,7 @@ class HistTPTypes extends React.Component {
       .reverse()
       .fromPairs()
       .value();
+
 
     const colors = infobase_colors();
 
@@ -163,7 +166,6 @@ class HistTPTypes extends React.Component {
       })
       .value();
 
-
     let content; 
     if(window.is_a11y_mode){
       const a11y_data = _.chain(filtered_series)
@@ -181,9 +183,9 @@ class HistTPTypes extends React.Component {
         label_col_header={text_maker("transfer_payment_type")}
       />;
     } else {
-      
+
       let expData = _.map(filtered_series, function(value, key ){
-        const id = key;
+        const id = _.replace(key,/ /g,'\n');
         let data = value.map((d,i) =>{
           const date = `${2013+i}-${14+i}`;
           let result = {};
@@ -192,11 +194,11 @@ class HistTPTypes extends React.Component {
           return result;
         });
         let result ={};
-        result["id"] = key;
+        result["id"] = id;
         result["data"]=data;
         return result;
       });
-    
+
       content = <Fragment>
         <div style ={{height: '400px'}}>
           <ResponsiveLine
@@ -204,7 +206,7 @@ class HistTPTypes extends React.Component {
             margin={{
               "top": 50,
               "right": 50,
-              "bottom": 50,
+              "bottom": 30,
               "left": 90,
             }}
             yScale={{
@@ -214,35 +216,21 @@ class HistTPTypes extends React.Component {
             }}
             axisLeft={{
               "format": d => formats.compact1(d,{raw: true}),
+              "tickValues": 5,
             }}
             axisTop={null}
             axisRight={null}
-            dotSize={0}
-            enableDotLabel={false}          
-            animate={true}
-            motionStiffness={30}
+            dotSize={10}
+            enableDotLabel={false}   
+            dotBorderWidth={2}
+            dotBorderColor="#ffffff"   
+            lineWidth={2}
+            motionStiffness={60}
             motionDamping={15}
             enableArea={true}
-            areaOpacity={.70}
-            colors={d3.schemeCategory10}
+            areaOpacity={.20}
+            colors={infobaseCategory10Colors}
             tooltipFormat={ d =>`$${formats.big_int_real(d,{raw: true})}`}
-            legends={[
-              {
-                "anchor": "top",
-                "direction": "row",
-                "justify": false,
-                "translateX": -30,
-                "translateY": -20,
-                "itemsSpacing": 30,
-                "itemDirection": "left-to-right",
-                "itemWidth": 80,
-                "itemHeight": 20,
-                "itemOpacity": 0.75,
-                "symbolSize": 12,
-                "symbolShape": "circle",
-                "symbolBorderColor": "rgba(0, 0, 0, .5)",
-              }
-            ]}
           />
         </div>
       </Fragment>
@@ -340,7 +328,6 @@ class DetailedHistTPItems extends React.Component {
         <select
           style={{margin: "2rem 0"}}
           className="form-control"
-          value={this.state.active_type}
           onChange={evt => {
             //reset colour scale for new items
             this.color_scale = infobase_colors();
@@ -372,22 +359,12 @@ class DetailedHistTPItems extends React.Component {
             <GraphLegend
               onClick={id => this.setState({active_indices: _.toggle_list(active_indices, id)})}
               items={legend_items}
-            />
+            />  
           </div>
-        </div>
-        <div className="fcol-md-8">
-          <Line
-            height={400}
-            series={graph_series}
-            formatters={dollar_formats}
-            y_axis="($)"
-            colors={color_scale}
-            ticks={_.map(std_years,run_template)}
-          />
         </div>
       </div>
     </div>;
-
   }
 }
+
 

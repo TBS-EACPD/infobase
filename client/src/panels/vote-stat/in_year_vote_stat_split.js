@@ -67,16 +67,8 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
                   "itemHeight": 25,
                   "itemTextColor": "#999",
                   "symbolSize": 20,
-                  "font-size":30,
+                  "font-size": 30,
                   "symbolShape": "circle",
-                  "effects": [
-                    {
-                      "on": "hover",
-                      "style": {
-                        "itemTextColor": "#000",
-                      }
-                    },
-                  ]
                 }
               ]}
             />
@@ -86,6 +78,8 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
     </StdPanel>
   );
 };
+
+
 
 
 new PanelGraph({

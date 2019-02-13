@@ -169,11 +169,11 @@ const render = function({calculations, footnotes, sources}) {
                 "direction": "row",
                 "anchor": "top",
                 "justify": false,
-                "itemsSpacing": 0,
+                "itemsSpacing": 50,
                 "itemWidth": 100,
                 "itemHeight": -55,
                 "itemOpacity": 0.75,
-                "symbolSize": 30,
+                "symbolSize": 20,
                 "effects": [
                   {
                     "on": "hover",
