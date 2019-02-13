@@ -156,12 +156,14 @@ function standard_color_scale (node){
   return pos_d3_color_scale( color_val );
 }
 
-const d3_fte_scale = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeGreens[9].slice(3,7)));
-d3_fte_scale.domain([0,10000]);
+const d3_fte_scale = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeGreens[9].slice(2,7)));
+//d3_fte_scale.domain([0,10000]);
 d3_fte_scale.clamp(true);
 function fte_color_scale(node){
-  //return d3_fte_scale(node.data.ftes/node.data.parent_ftes * 2 );
-  return d3_fte_scale(node.data.ftes);
+  let color_val = 0;
+  if ( node.data.parent_ftes ){ color_val = node.data.ftes/node.data.parent_ftes * 3 }
+  return d3_fte_scale( color_val );
+  //return d3_fte_scale(node.data.ftes);
 }
 
 function get_color_scale(type,color_var){
