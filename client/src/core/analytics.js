@@ -39,7 +39,7 @@ function initialize_analytics(){
     const client_id = tracker.get("clientId");   
     tracker.set(dimensions.CLIENT_ID, client_id);
     tracker.set(dimensions.DEV, String(is_dev));
-    tracker.set(dimensions.SHA, String(window.sha));
+    tracker.set(dimensions.SHA, window.sha);
 
     const originalBuildHitTask = tracker.get('buildHitTask');
     tracker.set("buildHitTask", model => {
@@ -64,6 +64,12 @@ const dummy_event_obj = _.chain([
   'SUBJECT_GUID',
   'MISC1',
   'MISC2',
+  'Q1',
+  'Q2',
+  'Q3',
+  'Q4',
+  'Q5',
+  'Q6',
 ])
   .map( key => [ dimensions[key], 'N/A' ] )
   .fromPairs()
