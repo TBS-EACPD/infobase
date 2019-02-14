@@ -33,6 +33,17 @@ report_a_problem_option_6:
   en: Other issue not in this list
   fr: Autre problème qui ne figure pas sur cette liste
 
+report_a_problem_send:
+  en: Submit
+  fr: TODO
+report_a_problem_has_sent:
+  en: Report submitted
+  fr: TODO
+report_a_problem_reset:
+  en: Reset this form
+  fr: TODO
+
+
 infobase_version_number:
   en: |
     Version number:

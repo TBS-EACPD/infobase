@@ -16,7 +16,7 @@ class ReportAProblem extends React.Component {
   constructor(){
     super();
 
-    this.state = {
+    this.initial_state = { 
       has_been_sent: false,
       fields: _.map(
         report_a_problem_field_text_keys,
@@ -28,6 +28,8 @@ class ReportAProblem extends React.Component {
         })
       ),
     };
+
+    this.state = this.initial_state;
   }
   render(){
     const {
@@ -66,7 +68,6 @@ class ReportAProblem extends React.Component {
                                 () => {
                                   const current_field = field;
                                   this.setState({
-                                    has_been_sent,
                                     fields: _.map(
                                       fields,
                                       (field) => field.key !== current_field.key ?
@@ -94,7 +95,6 @@ class ReportAProblem extends React.Component {
                                 (event) => {
                                   const current_field = field;
                                   this.setState({
-                                    has_been_sent,
                                     fields: _.map(
                                       fields,
                                       (field) => field.key !== current_field.key ?
@@ -114,13 +114,28 @@ class ReportAProblem extends React.Component {
                     )
                   )
                 }
-                <div>
-                  TODO: send button, deactivated after having been sent
-                </div> 
+                <button 
+                  className="btn-sm btn btn-ib-primary"
+                  disabled={has_been_sent}
+                  onClick={ (event) => {
+                    event.preventDefault();
+                    // TODO: ... how to actually send report, google analytics character limits may prevent us?
+                    this.setState({has_been_sent: true});
+                  }}
+                >
+                  {text_maker(!has_been_sent ? "report_a_problem_send" : "report_a_problem_has_sent")}
+                </button> 
                 { has_been_sent &&
-                  <div>
-                    TODO: reset button
-                  </div>
+                  <button 
+                    className="btn-sm btn btn-ib-primary"
+                    style={{float: "right"}}
+                    onClick={ (event) => {
+                      event.preventDefault();
+                      this.setState(this.initial_state);
+                    }}
+                  >
+                    {text_maker("report_a_problem_reset")}
+                  </button>
                 }
               </fieldset>
             </form>
