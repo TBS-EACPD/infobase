@@ -54,34 +54,34 @@ const index_lang_lookups = {
   },
   bonus_footer_lis: {
     en: `
-     <li><a href="https://www.canada.ca/en/contact.html">Contact us</a></li>
-     <li><a href="https://www.canada.ca/en/government/dept.html">Departments and agencies</a></li>
-     <li><a href="https://www.canada.ca/en/government/publicservice.html">Public service and military</a></li>
-     <li><a href="https://www.canada.ca/en/news.html">News</a></li>
-     <li><a href="https://www.canada.ca/en/government/system/laws.html">Treaties, laws and regulations</a></li>
-     <li><a href="https://www.canada.ca/en/transparency/reporting.html">Government-wide reporting</a></li>
-     <li><a href="https://pm.gc.ca/eng">Prime Minister</a></li>
-     <li><a href="https://www.canada.ca/en/government/system.html">How government works</a></li>
-     <li><a href="https://open.canada.ca/en/">Open government</a></li>
+     <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/contact.html">Contact us</a></li>
+     <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/government/dept.html">Departments and agencies</a></li>
+     <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/government/publicservice.html">Public service and military</a></li>
+     <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/news.html">News</a></li>
+     <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/government/system/laws.html">Treaties, laws and regulations</a></li>
+     <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/transparency/reporting.html">Government-wide reporting</a></li>
+     <li><a target="_blank" rel="noopener noreferrer" href="https://pm.gc.ca/eng">Prime Minister</a></li>
+     <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/government/system.html">How government works</a></li>
+     <li><a target="_blank" rel="noopener noreferrer" href="https://open.canada.ca/en/">Open government</a></li>
     `,
     fr: `
-      <li><a href="https://www.canada.ca/fr/contact.html">Contactez-nous</a></li>
-      <li><a href="https://www.canada.ca/fr/gouvernement/min.html">Ministères et organismes</a></li>
-      <li><a href="https://www.canada.ca/fr/gouvernement/fonctionpublique.html">Fonction publique et force militaire</a></li>
-      <li><a href="https://www.canada.ca/fr/nouvelles.html">Nouvelles</a></li>
-      <li><a href="https://www.canada.ca/fr/gouvernement/systeme/lois.html">Traités, lois et règlements</a></li>
-      <li><a href="https://www.canada.ca/fr/transparence/rapports.html">Rapports à l'échelle du gouvernement</a></li>
-      <li><a href="https://pm.gc.ca/fra">Premier ministre</a></li>
-      <li><a href="https://www.canada.ca/fr/gouvernement/systeme.html">Comment le gouvernement fonctionne</a></li>
-      <li><a href="https://ouvert.canada.ca/">Gouvernement ouvert</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/contact.html">Contactez-nous</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/gouvernement/min.html">Ministères et organismes</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/gouvernement/fonctionpublique.html">Fonction publique et force militaire</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/nouvelles.html">Nouvelles</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/gouvernement/systeme/lois.html">Traités, lois et règlements</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/transparence/rapports.html">Rapports à l'échelle du gouvernement</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://pm.gc.ca/fra">Premier ministre</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/gouvernement/systeme.html">Comment le gouvernement fonctionne</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://ouvert.canada.ca/">Gouvernement ouvert</a></li>
     `,
   },
   footer_lis: {
     en: `
-      <li><a href="https://www.canada.ca/en.html">Visit Canada.ca</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en.html">Visit Canada.ca</a></li>
     `,
     fr: `
-      <li><a href="https://www.canada.ca/fr.html">Visiter Canada.ca</a></li>
+      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr.html">Visiter Canada.ca</a></li>
     `,
   },
   script_url: {
