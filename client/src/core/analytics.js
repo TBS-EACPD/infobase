@@ -39,7 +39,7 @@ function initialize_analytics(){
     const client_id = tracker.get("clientId");   
     tracker.set(dimensions.CLIENT_ID, client_id);
     tracker.set(dimensions.DEV, String(is_dev));
-    tracker.set(dimensions.SHA, String(window.SHA));
+    tracker.set(dimensions.SHA, String(window.sha));
 
     const originalBuildHitTask = tracker.get('buildHitTask');
     tracker.set("buildHitTask", model => {
