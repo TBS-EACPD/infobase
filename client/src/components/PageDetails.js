@@ -15,7 +15,7 @@ class ReportAProblem extends React.Component {
       <Details
         summary_content={text_maker("report_a_problem")}
         content={
-          <div>
+          <div className="report-a-problem-menu">
             TODO
           </div>
         }
@@ -48,7 +48,7 @@ export class PageDetails extends React.Component {
   render(){
     return (
       <div className="pagedetails">
-        <div className="pagedetails__report-a-problem col-sm-6 col-md-5 col-lg-4">
+        <div className="pagedetails__report-a-problem col-sm-6 col-lg-5">
           <ReportAProblem />
         </div>
         <div className="pagedetails__version-number">
