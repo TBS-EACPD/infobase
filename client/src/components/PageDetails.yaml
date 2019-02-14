@@ -10,9 +10,10 @@ report_a_problem_legend:
 
 report_a_problem_details:
   en: |
-    Provide more details (optional):
+    Provide more details (optional, maximum 125 characters):
   fr: |
-    Fournissez plus de détails (optionnel) :
+    Fournissez plus de détails (optionnel, maximum 125 caractères) :
+
 
 report_a_problem_option_1:
   en: A link, button or video is not working

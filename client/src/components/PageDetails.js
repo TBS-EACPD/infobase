@@ -89,6 +89,7 @@ class ReportAProblem extends React.Component {
                             {text_maker("report_a_problem_details")}
                             <textarea
                               className="form-control"
+                              maxLength="125"
                               value={field.additional_detail_input}
                               disabled={has_been_sent}
                               onChange={
