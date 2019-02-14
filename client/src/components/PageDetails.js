@@ -119,7 +119,19 @@ class ReportAProblem extends React.Component {
                   disabled={has_been_sent}
                   onClick={ (event) => {
                     event.preventDefault();
-                    // TODO: ... how to actually send report, google analytics character limits may prevent us?
+                    log_standard_event({
+                      SUBAPP: window.location.hash.replace('#',''),
+                      MISC1: "REPORT_A_PROBLEM",
+                      ..._.chain(fields)
+                        .map(
+                          (field, ix) => [
+                            `Q${ix+1}`,
+                            field.is_checked ? field.additional_detail_input || "No details" : "Unchecked",
+                          ]
+                        )
+                        .fromPairs()
+                        .value(),
+                    });
                     this.setState({has_been_sent: true});
                   }}
                 >

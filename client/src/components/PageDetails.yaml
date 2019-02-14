@@ -37,10 +37,10 @@ report_a_problem_send:
   en: Submit
   fr: TODO
 report_a_problem_has_sent:
-  en: Report submitted
+  en: Report submitted, thank you!
   fr: TODO
 report_a_problem_reset:
-  en: Reset this form
+  en: Reset
   fr: TODO
 
 
