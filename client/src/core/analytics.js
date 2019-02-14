@@ -17,6 +17,12 @@ const dimensions = {
   MISC1: "dimension7",
   MISC2: "dimension8",
   DEV: "dimension9",
+  Q1: "dimension10",
+  Q2: "dimension11",
+  Q3: "dimension12",
+  Q4: "dimension13",
+  Q5: "dimension14",
+  Q6: "dimension15",
 };
 
 
