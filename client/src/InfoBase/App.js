@@ -68,8 +68,8 @@ export class App extends React.Component {
               <Route path="/privacy" component={PrivacyStatement} />
               <Route path="/" component={Home} />
             </Switch>
+            <PageDetails />
           </Suspense>
-          <PageDetails />
         </ErrorBoundary>
       </div>
     );

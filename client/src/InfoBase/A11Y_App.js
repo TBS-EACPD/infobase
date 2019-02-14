@@ -61,8 +61,8 @@ export class App extends React.Component {
               <Route path="/start/:no_basic_equiv?" component={Home} />
               <Route path="/" component={Home} />
             </Switch>
+            <PageDetails />
           </Suspense>
-          <PageDetails />
         </ErrorBoundary>
       </div>
     );
