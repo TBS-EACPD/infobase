@@ -2,7 +2,6 @@ import { Fragment } from 'react'
 import withRouter from 'react-router/withRouter';
 import { reactAdapter } from './reactAdapter.js';
 import { log_page_view } from './analytics.js';
-import { get_static_url } from '../request_utils.js';
 import { index_lang_lookups } from '../InfoBase/index_data.js';
 
 
@@ -69,15 +68,17 @@ class BreadCrumbs extends React.Component {
         </li>
         {_.map(crumbs, (display,ix) => 
           <Fragment key={ix} >
-            <li aria-hidden="true">
-              <img 
-                src={get_static_url("svg/arrow.svg")} 
-                style={{
-                  width: "20px",
-                  height: "20px", 
-                  margin: "-3px 2px 0px 3px",
-                }}
-              />
+            <li 
+              style={{
+                position: "relative",
+                top: "-3px",
+                padding: "0px 15px",
+                fontSize: "0.7em",
+                fontFamily: "Glyphicons Halflings",
+              }}
+              aria-hidden="true"
+            >
+              {">"}
             </li>
             <li className="infobase-home-breadcrumb-link">
               {
