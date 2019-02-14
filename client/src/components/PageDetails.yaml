@@ -14,6 +14,25 @@ report_a_problem_details:
   fr: |
     Fournissez plus de détails (optionnel) :
 
+report_a_problem_option_1:
+  en: A link, button or video is not working
+  fr: Un lien, un bouton ou une vidéo ne fonctionne pas
+report_a_problem_option_2:
+  en: It has a spelling mistake
+  fr: Il y a une erreur d'orthographe ou de grammaire
+report_a_problem_option_3:
+  en: Information is missing
+  fr: Les renseignements sont incomplets
+report_a_problem_option_4:
+  en: Information is outdated or wrong
+  fr: L'information n'est plus à jour ou est erronée
+report_a_problem_option_5:
+  en: I can't find what I'm looking for
+  fr: Je n'arrive pas à trouver ce que je cherche
+report_a_problem_option_6:
+  en: Other issue not in this list
+  fr: Autre problème qui ne figure pas sur cette liste
+
 infobase_version_number:
   en: |
     Version number:

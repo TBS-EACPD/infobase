@@ -7,9 +7,10 @@ import { Fragment } from 'react';
 
 const text_maker = create_text_maker(text);
 
-const report_a_problem_field_text_keys = [
-  "report_a_problem",
-];
+const report_a_problem_field_text_keys = _.chain()
+  .range(6)
+  .map(number => `report_a_problem_option_${number+1}`)
+  .value();
 
 class ReportAProblem extends React.Component {
   constructor(){
