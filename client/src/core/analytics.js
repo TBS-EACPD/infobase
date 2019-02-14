@@ -23,6 +23,7 @@ const dimensions = {
   Q4: "dimension13",
   Q5: "dimension14",
   Q6: "dimension15",
+  SHA: "dimension16",
 };
 
 
