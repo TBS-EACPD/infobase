@@ -110,3 +110,16 @@ grants:
 contributions:
   en: Contributions
   fr: Contributions
+
+treemap_definitions_title:
+  en: Definitions
+  fr: Définitions
+
+treemap_vstype_definitions:
+  transform: [handlebars, markdown]
+  en: |
+    &nbsp;&nbsp;**Definitions**
+
+    * **asdf title here** {{gl_tt "internal services" "INT_SERVICES"}} omg wtf
+  fr: |
+    French goes here

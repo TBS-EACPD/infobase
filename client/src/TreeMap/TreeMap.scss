@@ -253,5 +253,12 @@ $controlsColorLighter: #2171b5;
         color: #FFFFFF !important;
       }
     }
+
+
+    & > .labeled-box-content > .centerer > .IBDetails {
+      background-color: red;
+      display: block;
+    }
   }
 }
+

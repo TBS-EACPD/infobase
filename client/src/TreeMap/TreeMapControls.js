@@ -1,6 +1,7 @@
 import {
   LabeledBox,
   RadioButtons,
+  Details
 } from '../util_components.js';
 import './TreeMap.scss';
 import {
@@ -8,6 +9,7 @@ import {
 } from '../models/text.js';
 import treemap_text from './TreeMap.yaml';
 import { create_text_maker } from '../models/text.js';
+import { Fragment } from 'react';
 
 
 const text_maker = create_text_maker([treemap_text]);
@@ -166,16 +168,22 @@ export class TreeMapControls extends React.Component {
             label={text_maker("treemap_vstype_filter")}
             content={
               <div className="centerer">
-                <RadioButtons
-                  options={_.map(vs_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
-                  onChange={id => {
-                    const new_path = `/treemap/${perspective}/spending/${year}/${id}`;
-                    if (history.location.pathname !== new_path) {
-                      // the first_column prop, and thus this button's active id, is updated through this route push
-                      history.push(new_path);
-                    }
-                  }}
-                />
+                <Fragment>
+                  <RadioButtons
+                    options={_.map(vs_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
+                    onChange={id => {
+                      const new_path = `/treemap/${perspective}/spending/${year}/${id}`;
+                      if (history.location.pathname !== new_path) {
+                        // the first_column prop, and thus this button's active id, is updated through this route push
+                        history.push(new_path);
+                      }
+                    }}
+                  />
+                  <Details
+                    summary_content={text_maker("treemap_definitions_title")}
+                    content={text_maker("treemap_vstype_definitions")}
+                  />
+                  </Fragment>
               </div>
             }
           />
