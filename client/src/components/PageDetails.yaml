@@ -2,6 +2,13 @@ report_a_problem:
   en: Report a problem or mistake on this page
   fr: Signaler un problème ou une erreur sur cette page
 
+report_a_problem_legend:
+  en: |
+    Please select all that apply:
+  fr: |
+    Veuillez sélectionner toutes les cases qui s'appliquent :
+
+
 infobase_version_number:
   en: |
     Version number:
