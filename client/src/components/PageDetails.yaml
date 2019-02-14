@@ -8,6 +8,11 @@ report_a_problem_legend:
   fr: |
     Veuillez sélectionner toutes les cases qui s'appliquent :
 
+report_a_problem_details:
+  en: |
+    Provide more details (optional):
+  fr: |
+    Fournissez plus de détails (optionnel) :
 
 infobase_version_number:
   en: |

@@ -41,3 +41,12 @@
   border-top: 1px solid $tertiaryColor;
   padding-top: 8px;
 }
+
+.report-a-problem-menu__text-label {
+  padding-left: 35px;
+  width: 100%;
+
+  & > textarea {
+    width: 100%;
+  }
+}

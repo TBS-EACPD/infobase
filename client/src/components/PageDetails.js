@@ -3,6 +3,7 @@ import text from './PageDetails.yaml';
 import { Details } from './Details.js';
 import { create_text_maker } from '../models/text.js';
 import { log_standard_event } from '../core/analytics.js';
+import { Fragment } from 'react';
 
 const text_maker = create_text_maker(text);
 
@@ -22,7 +23,7 @@ class ReportAProblem extends React.Component {
           key: text_key,
           label: text_maker(text_key),
           is_checked: false,
-          additional_details: "",
+          additional_detail_input: "",
         })
       ),
     };
@@ -52,40 +53,63 @@ class ReportAProblem extends React.Component {
                   _.map(
                     fields,
                     (field) => (
-                      <div className="checkbox">
-                        <label key={field.text_key} htmlFor={field.text_key}>
-                          <input 
-                            id={field.text_key} 
-                            type="checkbox" 
-                            checked={field.is_checked} 
-                            disabled={has_been_sent}
-                            onChange={
-                              () => {
-                                const current_field = field;
-
-                                this.setState({
-                                  has_been_sent,
-                                  fields: _.map(
-                                    fields,
-                                    (field) => field.key !== current_field.key ?
-                                      field :
-                                      {
-                                        ...field,
-                                        is_checked: !field.is_checked,
-                                      }
-                                  ),
-                                })
+                      <Fragment key={`${field.key}`}>
+                        <div key={`${field.key}_check`} className="checkbox">
+                          <label htmlFor={field.text_key}>
+                            <input 
+                              id={field.text_key} 
+                              type="checkbox" 
+                              checked={field.is_checked} 
+                              disabled={has_been_sent}
+                              onChange={
+                                () => {
+                                  const current_field = field;
+                                  this.setState({
+                                    has_been_sent,
+                                    fields: _.map(
+                                      fields,
+                                      (field) => field.key !== current_field.key ?
+                                        field :
+                                        {
+                                          ...field,
+                                          is_checked: !field.is_checked,
+                                        }
+                                    ),
+                                  })
+                                }
                               }
-                            }
-                          />
-                          {field.label}
-                        </label>
+                            />
+                            {field.label}
+                          </label>
+                        </div>
                         { field.is_checked &&
-                          <div>
-                            TODO: text field for additional info
-                          </div> 
+                          <label key={`${field.key}_text`} className="report-a-problem-menu__text-label">
+                            {text_maker("report_a_problem_details")}
+                            <textarea
+                              className="form-control"
+                              value={field.additional_detail_input}
+                              disabled={has_been_sent}
+                              onChange={
+                                (event) => {
+                                  const current_field = field;
+                                  this.setState({
+                                    has_been_sent,
+                                    fields: _.map(
+                                      fields,
+                                      (field) => field.key !== current_field.key ?
+                                        field :
+                                        {
+                                          ...field,
+                                          additional_detail_input: event.target.value,
+                                        }
+                                    ),
+                                  });
+                                }
+                              }
+                            />
+                          </label>
                         }
-                      </div>
+                      </Fragment>
                     )
                   )
                 }
