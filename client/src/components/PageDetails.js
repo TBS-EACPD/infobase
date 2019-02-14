@@ -115,40 +115,47 @@ class ReportAProblem extends React.Component {
                     )
                   )
                 }
-                <button 
-                  className="btn-sm btn btn-ib-primary"
-                  disabled={has_been_sent}
-                  onClick={ (event) => {
-                    event.preventDefault();
-                    log_standard_event({
-                      SUBAPP: window.location.hash.replace('#',''),
-                      MISC1: "REPORT_A_PROBLEM",
-                      ..._.chain(fields)
-                        .map(
-                          (field, ix) => [
-                            `Q${ix+1}`,
-                            field.is_checked ? field.additional_detail_input || "No details" : "Unchecked",
-                          ]
-                        )
-                        .fromPairs()
-                        .value(),
-                    });
-                    this.setState({has_been_sent: true});
-                  }}
-                >
-                  {text_maker(!has_been_sent ? "report_a_problem_send" : "report_a_problem_has_sent")}
-                </button> 
-                { has_been_sent &&
+                { !has_been_sent &&
                   <button 
                     className="btn-sm btn btn-ib-primary"
-                    style={{float: "right"}}
+                    disabled={!_.some(fields, "is_checked")}
                     onClick={ (event) => {
                       event.preventDefault();
-                      this.setState(this.initial_state);
+                      log_standard_event({
+                        SUBAPP: window.location.hash.replace('#',''),
+                        MISC1: "REPORT_A_PROBLEM",
+                        ..._.chain(fields)
+                          .map(
+                            (field, ix) => [
+                              `Q${ix+1}`,
+                              field.is_checked ? field.additional_detail_input || "No details" : "Unchecked",
+                            ]
+                          )
+                          .fromPairs()
+                          .value(),
+                      });
+                      this.setState({has_been_sent: true});
                     }}
                   >
-                    {text_maker("report_a_problem_reset")}
+                    {text_maker("report_a_problem_send")}
                   </button>
+                }
+                { has_been_sent &&
+                  <Fragment>
+                    <span tabIndex="0">
+                      {text_maker("report_a_problem_has_sent")}
+                    </span>
+                    <button 
+                      className="btn-sm btn btn-ib-primary"
+                      style={{float: "right"}}
+                      onClick={ (event) => {
+                        event.preventDefault();
+                        this.setState(this.initial_state);
+                      }}
+                    >
+                      {text_maker("report_a_problem_reset")}
+                    </button>
+                  </Fragment>
                 }
               </fieldset>
             </form>

@@ -38,7 +38,7 @@ report_a_problem_send:
   en: Submit
   fr: TODO
 report_a_problem_has_sent:
-  en: Report submitted, thank you!
+  en: Your report has been submitted. Thank you! To submit another report, reset this form with the following button.
   fr: TODO
 report_a_problem_reset:
   en: Reset
