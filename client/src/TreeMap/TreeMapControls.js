@@ -1,7 +1,7 @@
 import {
   LabeledBox,
   RadioButtons,
-  Details
+  Details,
 } from '../util_components.js';
 import './TreeMap.scss';
 import {
