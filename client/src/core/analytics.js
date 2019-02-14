@@ -31,7 +31,8 @@ function initialize_analytics(){
 
     const client_id = tracker.get("clientId");   
     tracker.set(dimensions.CLIENT_ID, client_id);
-    tracker.set(dimensions.DEV, String(is_dev))
+    tracker.set(dimensions.DEV, String(is_dev));
+    tracker.set(dimensions.SHA, String(window.SHA));
 
     const originalBuildHitTask = tracker.get('buildHitTask');
     tracker.set("buildHitTask", model => {
@@ -66,25 +67,24 @@ function log_standard_event(dims){
     throw "analytics is uninitialized";
   }
 
-  const send_obj = 
-    { hitType: 'event',
-      eventCategory: 'content-browse',
-      eventAction: 'content-browse',
-      eventLabel: 'content-browse',
-      ...dummy_event_obj,  
-      ..._.chain(dims)
-        .map( (val, key) => [
-          dimensions[key],
-          val,
-        ])
-        .fromPairs()
-        .value(),
-    };
-
+  const send_obj = { 
+    hitType: 'event',
+    eventCategory: 'content-browse',
+    eventAction: 'content-browse',
+    eventLabel: 'content-browse',
+    ...dummy_event_obj,  
+    ..._.chain(dims)
+      .map( (val, key) => [
+        dimensions[key],
+        val,
+      ])
+      .fromPairs()
+      .value(),
+  };
 
   ga('send',send_obj);
-
 }
+
 
 
 function log_page_view(page){
