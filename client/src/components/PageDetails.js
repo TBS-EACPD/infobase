@@ -121,47 +121,50 @@ class ReportAProblem extends React.Component {
                     )
                   )
                 }
-                <div className="report-a-problem-menu__submit-button-area">
-                  <div className="checkbox">
-                    { any_active_additional_detail_input &&
-                      <label htmlFor={"report_a_problem_privacy"}>
-                        <input 
-                          id={"report_a_problem_privacy"} 
-                          type="checkbox" 
-                          checked={privacy_acknowledged} 
-                          disabled={has_been_sent}
-                          onChange={ () => this.setState({privacy_acknowledged: !privacy_acknowledged }) }
-                        />
-                        {text_maker("report_a_problem_privacy")}
-                      </label>
-                    }
+                { any_active_additional_detail_input &&
+                  <div className="report-a-problem-menu__privacy-note">
+                    <p>{text_maker("report_a_problem_privacy_note")}</p>
+                    <div className="checkbox">
+                      { any_active_additional_detail_input &&
+                        <label htmlFor={"report_a_problem_privacy"}>
+                          <input 
+                            id={"report_a_problem_privacy"} 
+                            type="checkbox" 
+                            checked={privacy_acknowledged} 
+                            disabled={has_been_sent}
+                            onChange={ () => this.setState({privacy_acknowledged: !privacy_acknowledged }) }
+                          />
+                          {text_maker("report_a_problem_privacy_ack")}
+                        </label>
+                      }
+                    </div>
                   </div>
-                  { !has_been_sent &&
-                    <button 
-                      className="btn-sm btn btn-ib-primary"
-                      disabled={ !ready_to_send }
-                      onClick={ (event) => {
-                        event.preventDefault();
-                        log_standard_event({
-                          SUBAPP: window.location.hash.replace('#',''),
-                          MISC1: "REPORT_A_PROBLEM",
-                          ..._.chain(fields)
-                            .map(
-                              (field, ix) => [
-                                `Q${ix+1}`,
-                                field.is_checked ? field.additional_detail_input || "No details" : "Unchecked",
-                              ]
-                            )
-                            .fromPairs()
-                            .value(),
-                        });
-                        this.setState({has_been_sent: true});
-                      }}
-                    >
-                      {text_maker("report_a_problem_send")}
-                    </button>
-                  }
-                </div>
+                }
+                { !has_been_sent &&
+                  <button 
+                    className="btn-sm btn btn-ib-primary"
+                    disabled={ !ready_to_send }
+                    onClick={ (event) => {
+                      event.preventDefault();
+                      log_standard_event({
+                        SUBAPP: window.location.hash.replace('#',''),
+                        MISC1: "REPORT_A_PROBLEM",
+                        ..._.chain(fields)
+                          .map(
+                            (field, ix) => [
+                              `Q${ix+1}`,
+                              field.is_checked ? field.additional_detail_input || "No details" : "Unchecked",
+                            ]
+                          )
+                          .fromPairs()
+                          .value(),
+                      });
+                      this.setState({has_been_sent: true});
+                    }}
+                  >
+                    {text_maker("report_a_problem_send")}
+                  </button>
+                }
                 { has_been_sent &&
                   <Fragment>
                     <span tabIndex="0">

@@ -34,8 +34,16 @@ report_a_problem_option_6:
   en: Other issue not in this list
   fr: Autre problème qui ne figure pas sur cette liste
 
-report_a_problem_privacy:
-  en: Do not include personal or identifying information when submitting additional details. 
+report_a_problem_privacy_note:
+  en: |
+    Do not submit personal or identifying information when providing additional details.
+    These reports are temporarily stored on Google servers alongside anonymously collected analytics data.
+    Any personal information submitted here could serve to de-anonymize these analytics.
+  fr: |
+    TODO
+
+report_a_problem_privacy_ack:
+  en: I acknowledge
   fr: TODO
 
 report_a_problem_send:

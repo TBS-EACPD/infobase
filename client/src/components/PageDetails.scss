@@ -52,14 +52,21 @@
   }
 }
 
-.report-a-problem-menu__submit-button-area {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+.report-a-problem-menu__privacy-note {
+  border: 1px solid $highlightColor;
+  margin: 5px;
+  padding: 5px;
 
-  & > button {
-    min-width: 100px;
-    max-height: 45px;
-    margin: auto 0px;
+  & > p {
+    margin: 0px;
+  }
+
+  & > .checkbox {
+    margin: 0px;
+    text-align: center;
+
+    & > label {
+      font-weight: $heavyFontWeight;
+    }
   }
 }
