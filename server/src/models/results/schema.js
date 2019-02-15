@@ -41,7 +41,6 @@ const schema = `
   type Result {
     id: String
     name: String
-    is_efficiency: Boolean
     doc: String
     indicators(doc: String): [Indicator]
   }
@@ -85,14 +84,11 @@ export default function({models}){
     Result,
   } = models;
 
-  function get_results(subject, { include_efficiency, doc }){
+  function get_results(subject, { doc }){
     const { id } = subject;
 
     let records = Result.get_by_parent_id(id);
 
-    if(include_efficiency === false){
-      records = _.reject(records, "is_efficiency");
-    }
     if(doc){
       records = _.filter(records, {doc});
     }
@@ -120,12 +116,9 @@ export default function({models}){
       dp_no_spending_expl: bilingual_field("dp_no_spending_expl"),
     },
     Result: {
-      indicators: (result, {doc, include_efficiency} ) => {
+      indicators: (result, {doc} ) => {
         let records = result.indicators;
     
-        if(include_efficiency === false){
-          records = _.reject(records, "is_efficiency");
-        }
         if(doc){
           records = _.filter(records, {doc});
         }

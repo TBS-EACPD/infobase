@@ -24,7 +24,6 @@ id
 results(doc: $doc) {
   id
   name
-  is_efficiency
   indicators(doc: $doc) {
     id
     name

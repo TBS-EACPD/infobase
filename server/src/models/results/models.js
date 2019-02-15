@@ -12,12 +12,11 @@ import {
 
 export default function(model_singleton){
 
-  //"id","subject_id","name_en","name_fr","is_efficiency","doc"
+  //"id","subject_id","name_en","name_fr","doc"
   const ResultSchema = mongoose.Schema({
     result_id: pkey_type(),
     subject_id: parent_fkey_type(),
     doc: { ...str_type },
-    is_efficiency: { type: Boolean },
     ...bilingual('name',str_type),
   });
 

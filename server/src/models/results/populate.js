@@ -28,10 +28,6 @@ export default function({models}){
       obj[key] = _.isNaN(obj[key]) ? null : +obj[key];
     });
   });
-    
-  _.each(result_records, obj => {
-    obj.is_efficiency = obj.is_efficiency === "1";
-  });
 
   _.each(indicator_records, obj => {
     const { 

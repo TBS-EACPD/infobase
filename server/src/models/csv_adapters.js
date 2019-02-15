@@ -56,13 +56,12 @@ function sub_program_csv_adapter(csv_row){
 
 
 function result(csv_row){
-  const [ id, subject_id, name, is_efficiency, doc ] = csv_row;
+  const [ id, subject_id, name, doc ] = csv_row;
 
   return {
     id,
     subject_id,
     name,
-    is_efficiency: is_efficiency === "1",
     doc,
   };
 }
