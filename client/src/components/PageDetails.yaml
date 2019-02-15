@@ -34,6 +34,10 @@ report_a_problem_option_6:
   en: Other issue not in this list
   fr: Autre problème qui ne figure pas sur cette liste
 
+report_a_problem_privacy:
+  en: Do not include personal or identifying information when submitting additional details. 
+  fr: TODO
+
 report_a_problem_send:
   en: Submit
   fr: TODO

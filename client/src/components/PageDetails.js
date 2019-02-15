@@ -18,6 +18,7 @@ class ReportAProblem extends React.Component {
 
     this.initial_state = { 
       has_been_sent: false,
+      privacy_acknowledged: false,
       fields: _.map(
         report_a_problem_field_text_keys,
         (text_key) => ({
@@ -34,8 +35,13 @@ class ReportAProblem extends React.Component {
   render(){
     const {
       has_been_sent,
+      privacy_acknowledged,
       fields,
     } = this.state;
+
+    const any_fields_checked = _.some(fields, "is_checked");
+    const any_active_additional_detail_input = _.some( fields, (field) => field.is_checked && !_.isEmpty(field.additional_detail_input) );
+    const ready_to_send = any_fields_checked && (!any_active_additional_detail_input || privacy_acknowledged);
 
     return (
       <Details
@@ -115,31 +121,47 @@ class ReportAProblem extends React.Component {
                     )
                   )
                 }
-                { !has_been_sent &&
-                  <button 
-                    className="btn-sm btn btn-ib-primary"
-                    disabled={!_.some(fields, "is_checked")}
-                    onClick={ (event) => {
-                      event.preventDefault();
-                      log_standard_event({
-                        SUBAPP: window.location.hash.replace('#',''),
-                        MISC1: "REPORT_A_PROBLEM",
-                        ..._.chain(fields)
-                          .map(
-                            (field, ix) => [
-                              `Q${ix+1}`,
-                              field.is_checked ? field.additional_detail_input || "No details" : "Unchecked",
-                            ]
-                          )
-                          .fromPairs()
-                          .value(),
-                      });
-                      this.setState({has_been_sent: true});
-                    }}
-                  >
-                    {text_maker("report_a_problem_send")}
-                  </button>
-                }
+                <div className="report-a-problem-menu__submit-button-area">
+                  <div className="checkbox">
+                    { any_active_additional_detail_input &&
+                      <label htmlFor={"report_a_problem_privacy"}>
+                        <input 
+                          id={"report_a_problem_privacy"} 
+                          type="checkbox" 
+                          checked={privacy_acknowledged} 
+                          disabled={has_been_sent}
+                          onChange={ () => this.setState({privacy_acknowledged: !privacy_acknowledged }) }
+                        />
+                        {text_maker("report_a_problem_privacy")}
+                      </label>
+                    }
+                  </div>
+                  { !has_been_sent &&
+                    <button 
+                      className="btn-sm btn btn-ib-primary"
+                      disabled={ !ready_to_send }
+                      onClick={ (event) => {
+                        event.preventDefault();
+                        log_standard_event({
+                          SUBAPP: window.location.hash.replace('#',''),
+                          MISC1: "REPORT_A_PROBLEM",
+                          ..._.chain(fields)
+                            .map(
+                              (field, ix) => [
+                                `Q${ix+1}`,
+                                field.is_checked ? field.additional_detail_input || "No details" : "Unchecked",
+                              ]
+                            )
+                            .fromPairs()
+                            .value(),
+                        });
+                        this.setState({has_been_sent: true});
+                      }}
+                    >
+                      {text_maker("report_a_problem_send")}
+                    </button>
+                  }
+                </div>
                 { has_been_sent &&
                   <Fragment>
                     <span tabIndex="0">

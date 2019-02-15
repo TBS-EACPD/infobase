@@ -51,3 +51,15 @@
     width: 100%;
   }
 }
+
+.report-a-problem-menu__submit-button-area {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  & > button {
+    min-width: 100px;
+    max-height: 45px;
+    margin: auto 0px;
+  }
+}
