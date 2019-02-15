@@ -319,6 +319,53 @@ function write_summary_bundle(data_by_dept, data_by_tag, all_data, dir){
   fs.writeFileSync(file_name, csv);
 }
 
+function write_granular_summary_bundle(data_by_dept, dir){
+  const data_grouped_by_crso_and_program = _.chain(data_by_dept)
+    .map(
+      ({results, indicators, sub_programs}, dept_code) => {
+        const crso_ids = crso_by_deptcode[dept_code];
+        const subprogram_ids_to_program_ids = _.chain(sub_programs)
+          .map(({id, parent_id}) => [id, parent_id])
+          .fromPairs()
+          .value();
+  
+        const grouped_results = _.groupBy(
+          results, 
+          (result) => _.includes(crso_ids, result.subject_id) ? "crso" : "program"
+        );
+
+        const crso_data = _.chain(grouped_results.crso)
+          .map(
+            result => [
+              result.subject_id, 
+              {
+                results: result, 
+                indicators: indicatorsByResultId[result.id]
+              },
+            ]
+          )
+          .fromPairs()
+          .value();
+        
+        const program_data = ["TODO"];
+
+        return {
+          crso: crso_data,
+          program: crso_data,
+        };
+      }
+    )
+    .thru( array_of_objects => _.merge(...array_of_objects) )
+    .value();
+
+  const counts_for_crso = _.map( data_grouped_by_crso_and_program.crso, (data, crso_id) => Object.assign( {id: crso_id, level: 'crso'}, compute_counts_from_set(data) ) );
+  const counts_for_program = _.map( data_grouped_by_crso_and_program.program, (data, program_id) => Object.assign( {id: program_id, level: 'program'}, compute_counts_from_set(data) ) );
+  
+  const csv = d3_dsv.csvFormat([...counts_for_crso, counts_for_program ]);
+  const file_name = `${dir}/results_summary_granular.json.js`; 
+  fs.writeFileSync(file_name, csv);
+}
+
 
 function write_result_bundles(file_obj, dir){
   populate_stores(file_obj);
@@ -348,6 +395,8 @@ function write_result_bundles(file_obj, dir){
   );
 
   write_summary_bundle(data_by_dept, data_by_tag, all_data, dir);
+
+  write_granular_summary_bundle(data_by_dept, dir);
 }
 
 module.exports = exports = { write_result_bundles };
