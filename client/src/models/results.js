@@ -339,9 +339,6 @@ class Indicator {
   get guid(){
     return `indicator_${this.id}`;
   }
-  get is_efficiency(){
-    return Result.lookup(this.result_id).is_efficiency;
-  }
   get target_date(){
     const { target_month, target_year } = this;
     if( _.isNumber(target_month) && _.isNumber(target_year) ){

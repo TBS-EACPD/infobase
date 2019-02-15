@@ -105,11 +105,7 @@ function populate_results_info(data){
     SubProgramEntity.create_and_register(obj);
   });
 
-  _.each(results, obj => {
-    obj.is_efficiency = obj.is_efficiency === "1";
-    
-    Result.create_and_register(obj);
-  });
+  _.each(results, obj => Result.create_and_register(obj) );
 
   _.each(indicators, obj => {
     
