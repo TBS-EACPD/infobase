@@ -1,6 +1,4 @@
 import {
-  LabeledBox,
-  RadioButtons,
   Details,
 } from '../util_components.js';
 import './TreeMap.scss';
@@ -10,6 +8,7 @@ import {
 import treemap_text from './TreeMap.yaml';
 import { create_text_maker } from '../models/text.js';
 import { Fragment } from 'react';
+import classNames from 'classnames';
 
 
 const text_maker = create_text_maker([treemap_text]);
@@ -100,6 +99,7 @@ export class TreeMapControls extends React.Component {
       color_var,
       year,
       filter_var,
+      location,
       history,
     } = this.props;
     return (
@@ -115,7 +115,7 @@ export class TreeMapControls extends React.Component {
                   (id === "drf" || id === "drf_ftes") ?
                     new_path = `/treemap/${id}/${color_var}/${year}` :
                     new_path = `/treemap/${id}/spending/${year}` // force to spending for other ones
-                  if (history.location.pathname !== new_path) {
+                  if (location.pathname !== new_path) {
                     // the first_column prop, and thus this button's active id, is updated through this route push
                     history.push(new_path);
                   }
@@ -143,7 +143,6 @@ export class TreeMapControls extends React.Component {
             }
           />
         }
-
         {perspective === "tp" &&
           <LabeledBox
             label={text_maker("treemap_gc_type_filter")}
@@ -228,3 +227,39 @@ export class TreeMapControls extends React.Component {
     )
   }
 }
+
+class LabeledBox extends React.Component {
+  render(){
+    const {
+      label,
+      content,
+    } = this.props;
+
+    return (
+      <div className="treemap-labeled-box">
+        <div className='treemap-labeled-box-label '>
+          <div className='treemap-labeled-box-label-text '>
+            { label }
+          </div>
+        </div>
+        <div className="treemap-labeled-box-content">
+          { content }
+        </div>
+      </div>
+    );
+  }
+}
+
+
+const RadioButtons = ({ options, onChange }) => <div className="treemap-options">
+  {options.map( ({ display, id, active })=> 
+    <button 
+      key={id}
+      aria-pressed={active}
+      className={classNames("treemap-options__option", active && "treemap-options__option--active")}
+      onClick={()=>{ onChange(id)}}
+    >
+      {display}
+    </button>
+  )}
+</div>;

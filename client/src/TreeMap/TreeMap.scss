@@ -1,10 +1,18 @@
 @import '../common_css/common-variables';
 
+.TreeMap__Wrapper {
+  background-color: green;
+}
+
+
 .TreeMap__SideBar {
   background-color: #767f89;
   color: #fff;
   padding: 10px;
   text-align: center;
+  min-height: 100%;
+  //padding-left: 1px;
+  //padding-bottom: 2px
 }
 .TreeMap_SideBar__Title {
   padding: 20px;
@@ -18,7 +26,11 @@
   width: 10px;
   color: #9ecae1;
 }
-  
+
+.TreeMap__TopBar {
+  background-color: #55ca22;
+}
+
 .TreeMap__ZoomControl {
   border: 2px solid #fff;
   border-top-width: 0;
@@ -36,6 +48,11 @@
 }
 .TreeMap__ZoomControl__Title{
   font-weight: bold;
+}
+
+
+.TreeMap__Mainviz{
+  background-color: blue;
 }
 
 .TreeMap__Rectangle {
@@ -121,7 +138,7 @@
   }
 }
 
-.TreeMap_IndicatorGrid {
+/* .TreeMap_IndicatorGrid {
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
@@ -147,7 +164,7 @@
   &.TreeMap_IndicatorGrid__Item--other {
     background-color: #c2c2c2;
   }
-}
+} */
 
 .TM_TooltipContainer {
   position: absolute;
@@ -191,7 +208,6 @@
   }
 }
 
-
 .BlueHLine {
   display: block;
   height: 1px;
@@ -199,66 +215,66 @@
   margin-top: 2px;  
 }
 
-$controlsColor: #767f89;
-$controlsColorLighter: #2171b5;
+$controlsColor: #2970b3;
+$controlsColorMid: #5097c7;
+$controlsColorLight: #c7dbee;
 
 .treemap-controls {
-  margin-bottom: -20px;
-  padding: 8px 0px 13px 0px;
+  //margin-bottom: -20px;
+  //padding: 8px 0px 13px 0px;
 
-  & > .labeled-box {
-    margin-bottom: 8px;
-    border-radius: 0px;
+  & > .treemap-labeled-box {
+    //margin-bottom: 8px;
+    //border-radius: 0px;
 
-    & > .labeled-box-label {
-      background-color: $controlsColorLighter;
-      color: #FFFFFF;
+    & > .treemap-labeled-box-label {
+      background-color: $controlsColor;
+      color: #FFF;
       font-size: 18px;
       padding: 13px 13px 13px 20px;
       min-height: 0px;
       border-radius: 0px;
     }
   
-    & > .labeled-box-content {
-      border-color: $controlsColorLighter;
-      padding-left: 10px;
-      color: $controlsColorLighter;
-      border-width: 2px;
-      border-radius: 0px;
+    & > .treemap-labeled-box-content {
+      width: 100%;
     }
 
-    & > .labeled-box-content > .centerer > .radio-buttons {
-      border-color: $controlsColorLighter;
-      width: 800px;
-      & > .radio-buttons__option {
-        color: $controlsColorLighter;
-        padding: 5px 10px;
-        font-size: 14px;
+    & > .treemap-labeled-box-content > .centerer > .treemap-options {
+      display: block;
+      line-height: normal;
+      & > .treemap-options__option {
+        border-color: #ffffff;
+        border-width: 2px;
+        background-color: $controlsColorLight;
+        color: #000000;
+        padding: 5px;
+        font-size: 12px;
+        width: 100%;
       }
       
-      & > .radio-buttons__option.radio-buttons__option--active {
-        color: #FFFFFF;
-        background-color: $controlsColorLighter;
+      & > .treemap-options__option.treemap-options__option--active {
+        color: #000000;
+        background-color: $controlsColorMid;
       }
       
-      & > .radio-buttons__option:not(:last-child):after,
-      & > .radio-buttons__option:not(:first-child):before {
+/*       & > .treemap-options__option:not(:last-child):after,
+      & > .treemap-options__option:not(:first-child):before {
         border-color: $controlsColorLighter;
-      }
+      } */
       
-      & > .radio-buttons__option:not(.radio-buttons__option--active):hover,
-      & > .radio-buttons__option:not(.radio-buttons__option--active):active,
-      & > .radio-buttons__option:not(.radio-buttons__option--active):focus { 
-        background-color: change-color($color: $controlsColorLighter, $alpha: 0.75);
-        color: #FFFFFF !important;
+      & > .treemap-options__option:not(.treemap-options__option--active):hover,
+      & > .treemap-options__option:not(.treemap-options__option--active):active,
+      & > .treemap-options__option:not(.treemap-options__option--active):focus { 
+        background-color: change-color($color: $controlsColorMid, $alpha: 0.50);
+        color: #000000;
       }
     }
 
-
-    & > .labeled-box-content > .centerer > .IBDetails {
+    & > .treemap-labeled-box-content > .centerer > .IBDetails {
       background-color: red;
       display: block;
     }
   }
-}
 
+}
