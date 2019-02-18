@@ -5,6 +5,7 @@ import {
   SubProgramEntity, 
   PI_DR_Links, 
   ResultCounts,
+  GranularResultCounts,
 } from './results.js';
 
 let _loaded_dept_or_tag_codes = {};
@@ -68,6 +69,27 @@ export function load_results_counts(){
         });
         ResultCounts.set_data(rows); 
         is_results_count_loaded = true;
+      });
+  }
+}
+
+let is_granular_results_count_loaded = false;
+export function load_granular_results_counts(){
+  if(is_granular_results_count_loaded){
+    return Promise.resolve();
+  } else {
+    return make_request( get_static_url(`results/results_summary_granular.json.js` ))
+      .then(response => {
+        const rows = d3.csvParse(response);
+        _.each(rows, row => {
+          _.each(row, (val,key) => {
+            if(!_.isNaN(+val)){
+              row[key] = +val;
+            }
+          });
+        });
+        GranularResultCounts.set_data(rows); 
+        is_granular_results_count_loaded = true;
       });
   }
 }

@@ -1,7 +1,7 @@
 import { Table } from './TableClass.js';
 import { PanelGraph, tables_for_graph } from './PanelGraph.js';
 import { Statistics, tables_for_statistics } from './Statistics.js';
-import { load_results_bundle, load_results_counts } from '../models/populate_results.js';
+import { load_results_bundle, load_results_counts, load_granular_results_counts } from '../models/populate_results.js';
 import { load_footnotes_bundle } from '../models/populate_footnotes.js';
 import { load_budget_measures } from '../models/populate_budget_measures.js';
 import { Subject } from '../models/subject.js';
@@ -25,7 +25,8 @@ function ensure_loaded({
   subject_level, 
   results, 
   subject,
-  require_result_counts, 
+  require_result_counts,
+  require_granular_result_counts,
   footnotes_for: footnotes_subject,
 }){
   const table_set = _.chain( table_keys )
@@ -76,6 +77,21 @@ function ensure_loaded({
       .value()
   );
 
+  const should_load_granular_result_counts = (
+    require_granular_result_counts ||
+    _.chain(graph_keys)
+      .map(key => PanelGraph.lookup(key, subject_level))
+      .map('requires_granular_result_counts')
+      .concat( 
+        _.chain(stat_keys)
+          .map(key => Statistics.lookup(key))
+          .map('requires_granular_result_counts')
+          .value()
+      )
+      .some()
+      .value()
+  );
+
   const should_load_budget_measures = (
     (
       subject && subject.type_name === "budget_measure" ||
@@ -101,6 +117,12 @@ function ensure_loaded({
       Promise.resolve()
   );
 
+  const granular_result_counts_prom = (
+    should_load_granular_result_counts ?
+      load_granular_results_counts() :
+      Promise.resolve()
+  );
+
   const footnotes_prom = (
     footnotes_subject ?
       load_footnotes_bundle(footnotes_subject) :
@@ -117,6 +139,7 @@ function ensure_loaded({
     load(table_set),
     results_prom,
     result_counts_prom,
+    granular_result_counts_prom,
     footnotes_prom,
     budget_measures_prom,
   ]);

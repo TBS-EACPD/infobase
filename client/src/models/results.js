@@ -429,6 +429,7 @@ const ResultCounts = {
     if(_.isEmpty(this.data)){
       throw results_counts_not_loaded_error;
     }
+    return this.data;
   },
   set_data(data){
     if(!_.isEmpty(this.data)){
@@ -443,8 +444,39 @@ const ResultCounts = {
   get_all_tag_counts(){
     return _.filter(this.data, {level: 'tag'}); 
   },
-}
+};
 
+//assumes ensure_loaded: results_summary has been called
+const granular_results_counts_not_loaded_error = "granular result counts have not yet been loaded!";
+const GranularResultCounts = {
+  data: null,
+  get_subject_counts(subject_id){
+    if(_.isEmpty(this.data)){
+      throw granular_results_counts_not_loaded_error;
+    }
+    return _.chain(this.data)
+      .find({ id: subject_id })
+      .value();
+  },
+  get_data(){
+    if(_.isEmpty(this.data)){
+      throw granular_results_counts_not_loaded_error;
+    }
+    return this.data;
+  },
+  set_data(data){
+    if(!_.isEmpty(this.data)){
+      throw "data has already been set";
+    }
+    this.data = data;
+  },
+  get_all_crso_counts(){
+    return _.filter(this.data, {level: 'crso'}); 
+  },
+  get_all_program_counts(){
+    return _.filter(this.data, {level: 'program'}); 
+  },
+};
 
 const ordered_status_keys = ['met', 'not_met', 'not_available', 'future'];
 const status_key_to_glossary_key = {
@@ -466,6 +498,7 @@ export {
   SubProgramEntity,
   PI_DR_Links,
   ResultCounts,
+  GranularResultCounts,
   status_key_to_glossary_key,
   status_key_to_svg_name,
   ordered_status_keys,
@@ -477,4 +510,5 @@ Object.assign(window._DEV_HELPERS, {
   SubProgramEntity,
   PI_DR_Links,
   ResultCounts,
+  GranularResultCounts,
 });
