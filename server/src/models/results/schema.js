@@ -4,6 +4,21 @@ import {
 } from '../schema_utils';
 
 const schema = `
+  type ResultCount {
+    results: Int
+
+    dp: Int
+    
+    met: Int 
+    not_available: Int
+    not_met: Int
+    future: Int
+  }
+
+  extend type Org {
+    target_counts(doc:String): ResultCount
+  }
+
   extend type Crso {
     results(doc:String): [Result]
   }
@@ -90,6 +105,7 @@ const schema = `
 export default function({models,loaders}){
 
   const {
+    Org,
     Crso,
     Program,
     SubProgram,
@@ -99,13 +115,68 @@ export default function({models,loaders}){
   } = models;
 
   const {
+    prog_dept_code_loader,
+    crso_from_deptcode_loader,
+    
     result_by_subj_loader,
     indicator_by_result_loader,
     program_link_loader,
     sub_program_loader,
   } = loaders;
 
-  async function get_results(subject, { doc }){
+
+  //this should take 6 DB queries, but the first 2 can be done in paralel
+  const result_count_defaults = {
+    results: 0,
+    
+    dp: 0,
+
+    not_met: 0,
+    not_available: 0,
+    met: 0,
+    future: 0,
+  };
+
+  async function get_target_counts(org, doc){
+
+
+    const [crsos, progs] = await Promise.all([
+      crso_from_deptcode_loader.load(org.dept_code),
+      prog_dept_code_loader.load(org.dept_code),
+    ]);
+
+
+    const flatmap_to_attr = (list_of_lists, attr) => _.chain(list_of_lists)
+      .compact()
+      .flatten()
+      .map(attr)
+      .compact()
+      .value();
+
+    const sub_programs = await sub_program_loader.loadMany(_.map(progs, 'program_id'));
+    const sub_subs = await sub_program_loader.loadMany(flatmap_to_attr(sub_programs, 'sub_program_id'));
+    
+    const results = await result_by_subj_loader.loadMany([
+      ..._.map(crsos, 'crso_id'),
+      ..._.map(progs, 'program_id'),
+      ...flatmap_to_attr(sub_programs, 'sub_program_id'),
+      ...flatmap_to_attr(sub_subs, 'sub_program_id'),
+    ]);
+
+    const all_indicators = await indicator_by_result_loader.loadMany(flatmap_to_attr(results,'result_id'))
+
+    const doc_indicators = _.chain(all_indicators)
+      .flatten()
+      .filter({doc})
+      .value();
+
+    return _.defaults({
+      ..._.countBy(doc_indicators, 'status_key'),
+      results: _.chain(results).compact().flatten().filter({doc}).value().length,
+    }, result_count_defaults);
+  }
+
+  async function get_results(subject, { include_efficiency, doc }){
     const { id } = subject;
 
     let id_val;
@@ -128,6 +199,9 @@ export default function({models,loaders}){
 
 
   const resolvers = {
+    Org:{
+      target_counts: (org, {doc}) => get_target_counts(org,doc),
+    },
     Crso: {
       results: get_results,
     },

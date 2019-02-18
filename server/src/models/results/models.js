@@ -79,7 +79,7 @@ export default function(model_singleton){
 
   const { SubProgram, Result, Indicator, PIDRLink } = model_singleton.models;
   const result_by_subj_loader = create_resource_by_foreignkey_attr_dataloader(Result,'subject_id');
-  const indicator_by_result_loader = create_resource_by_foreignkey_attr_dataloader(Result,'result_id');
+  const indicator_by_result_loader = create_resource_by_foreignkey_attr_dataloader(Indicator,'result_id');
   const program_link_loader = create_resource_by_foreignkey_attr_dataloader(PIDRLink, "program_id");
   const sub_program_loader = create_resource_by_foreignkey_attr_dataloader(SubProgram, "parent_id");
   _.each(

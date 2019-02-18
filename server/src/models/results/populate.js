@@ -51,7 +51,9 @@ export default async function({models}){
     obj.id = null;
     obj.target_year = _.isNaN(parseInt(target_year)) ? null : parseInt(target_year);
     obj.target_month= _.isEmpty(target_month) ? null : +target_month;
-    obj.status_key = status_period && `${status_period}_${status_color}`;
+    if(!obj.status_key){
+      obj.status_key = "dp";
+    }
   });
 
 
