@@ -79,7 +79,7 @@ const IndicatorResultDisplay = ({
         <Fragment>
           <span> 
             <Format type="result_num" content={+min} />
-            <TextMaker text_key="to" />
+            <span>{` ${trivial_text_maker("to")} `}</span>
             <Format type="result_num" content={+max} />
           </span> 
           {measure_display}
@@ -93,7 +93,7 @@ const IndicatorResultDisplay = ({
         <Fragment>
           <span> 
             <Format type="result_percentage" content={min} />
-            <TextMaker text_key="to" />
+            <span>{` ${trivial_text_maker("to")} `}</span>
             <Format type="result_percentage" content={max} />
           </span> 
           {measure_display}
@@ -107,7 +107,7 @@ const IndicatorResultDisplay = ({
         <Fragment>
           <span> 
             <Format type="compact1" content={+min} />  
-            <TextMaker text_key="to" />
+            <span>{` ${trivial_text_maker("to")} `}</span>
             <Format type="compact1" content={+min} />
           </span> 
           {measure_display}
