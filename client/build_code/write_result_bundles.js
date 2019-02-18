@@ -322,7 +322,7 @@ function write_summary_bundle(data_by_dept, data_by_tag, all_data, dir){
 function write_granular_summary_bundle(data_by_dept, dir){
   const data_grouped_by_crso_and_program = _.chain(data_by_dept)
     .map(
-      ({results, indicators, sub_programs}, dept_code) => {
+      ({results, sub_programs}, dept_code) => {
         const crso_ids = crso_by_deptcode[dept_code];
         const subprogram_ids_to_program_ids = _.chain(sub_programs)
           .map(({id, parent_id}) => [id, parent_id])
@@ -334,24 +334,41 @@ function write_granular_summary_bundle(data_by_dept, dir){
           (result) => _.includes(crso_ids, result.subject_id) ? "crso" : "program"
         );
 
-        const crso_data = _.chain(grouped_results.crso)
+        const all_crso_data = _.chain(grouped_results.crso)
           .map(
-            result => [
-              result.subject_id, 
-              {
-                results: result, 
-                indicators: indicatorsByResultId[result.id]
-              },
-            ]
+            result => ({
+              results: result, 
+              indicators: indicatorsByResultId[result.id],
+            })
           )
-          .fromPairs()
+          .groupBy( data => data.results.subject_id )
+          .mapValues( 
+            crso_data => ({
+              results: _.map(crso_data, data => data.results),
+              indicators: _.flatMap(crso_data, data => data.indicators),
+            })
+          )
           .value();
         
-        const program_data = ["TODO"];
+        const all_program_data = _.chain(grouped_results.program)
+          .map(
+            result => ({
+              results: result, 
+              indicators: indicatorsByResultId[result.id],
+            })
+          )
+          .groupBy( data => subprogram_ids_to_program_ids[data.results.subject_id] || data.results.subject_id )
+          .mapValues( 
+            program_data => ({
+              results: _.map(program_data, data => data.results),
+              indicators: _.flatMap(program_data, data => data.indicators),
+            })
+          )
+          .value();
 
         return {
-          crso: crso_data,
-          program: crso_data,
+          crso: all_crso_data,
+          program: all_program_data,
         };
       }
     )
@@ -361,7 +378,7 @@ function write_granular_summary_bundle(data_by_dept, dir){
   const counts_for_crso = _.map( data_grouped_by_crso_and_program.crso, (data, crso_id) => Object.assign( {id: crso_id, level: 'crso'}, compute_counts_from_set(data) ) );
   const counts_for_program = _.map( data_grouped_by_crso_and_program.program, (data, program_id) => Object.assign( {id: program_id, level: 'program'}, compute_counts_from_set(data) ) );
   
-  const csv = d3_dsv.csvFormat([...counts_for_crso, counts_for_program ]);
+  const csv = d3_dsv.csvFormat([...counts_for_crso, ...counts_for_program ]);
   const file_name = `${dir}/results_summary_granular.json.js`; 
   fs.writeFileSync(file_name, csv);
 }
