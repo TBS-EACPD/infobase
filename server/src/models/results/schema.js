@@ -241,9 +241,10 @@ export default function({models,loaders}){
       dp_no_spending_expl: bilingual_field("dp_no_spending_expl"),
     },
     Result: {
-      indicators: (result, {doc} ) => {
-        let records = result.indicators;
-    
+      id: _.property('result_id'),
+      indicators: async (result, {doc} ) => {
+        let records = await indicator_by_result_loader.load(result.result_id);
+        
         if(doc){
           records = _.filter(records, {doc});
         }
