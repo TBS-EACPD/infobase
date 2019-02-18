@@ -328,7 +328,7 @@ function write_granular_summary_bundle(data_by_dept, dir){
           .map(({id, parent_id}) => [id, parent_id])
           .fromPairs()
           .value();
-  
+
         const grouped_results = _.groupBy(
           results, 
           (result) => _.includes(crso_ids, result.subject_id) ? "crso" : "program"
@@ -357,7 +357,7 @@ function write_granular_summary_bundle(data_by_dept, dir){
               indicators: indicatorsByResultId[result.id],
             })
           )
-          .groupBy( data => subprogram_ids_to_program_ids[data.results.subject_id] || data.results.subject_id )
+          .groupBy( data => subprogram_ids_to_program_ids[subprogram_ids_to_program_ids[data.results.subject_id]] || subprogram_ids_to_program_ids[data.results.subject_id] || data.results.subject_id )
           .mapValues( 
             program_data => ({
               results: _.map(program_data, data => data.results),
