@@ -119,7 +119,7 @@ const schema = `
 `;
 
 
-export default function({models}){
+export default function({models,loaders}){
 
   const { Org, Program, Crso } = models;
 
@@ -134,13 +134,15 @@ export default function({models}){
   //   return _.map(dept_codes, code => orgs_by_deptcode[code]);
   // })
 
-  const org_deptcode_loader = create_resource_by_id_attr_dataloader(Org,'dept_code');
-  const org_id_loader = create_resource_by_id_attr_dataloader(Org,'org_id');
-  const prog_dept_code_loader = create_resource_by_foreignkey_attr_dataloader(Program, "dept_code");
-  const prog_crso_id_loader = create_resource_by_foreignkey_attr_dataloader(Program, "crso_id");
-  const prog_id_loader= create_resource_by_id_attr_dataloader(Program,'program_id'); 
-  const crso_from_deptcode_loader = create_resource_by_foreignkey_attr_dataloader(Crso, 'dept_code');
-  const crso_id_loader = create_resource_by_id_attr_dataloader(Program,'crso_id'); 
+  const { 
+    org_deptcode_loader,
+    org_id_loader,
+    prog_dept_code_loader,
+    prog_crso_id_loader,
+    prog_id_loader,
+    crso_from_deptcode_loader,
+    crso_id_loader,
+  } = loaders;
 
   const gov = {
     guid: "gov_gov",
@@ -159,9 +161,9 @@ export default function({models}){
       orgs: ()=> Org.find({}),
       org: (_x, {dept_code, org_id}) => {
         if(org_id){
-          return Org.findOne({org_id});
+          return org_id_loader.load(org_id);
         } else {
-          return Org.findOne({dept_code});
+          return org_deptcode_loader.load(dept_code);
         }
       },
       gov: _.constant(gov),

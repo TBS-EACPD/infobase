@@ -8,7 +8,13 @@ import {
   parent_fkey_type,
 } from '../model_utils.js';
 
+import { 
+  create_resource_by_foreignkey_attr_dataloader, 
+  create_resource_by_id_attr_dataloader,
+} from '../loader_utils.js';
+
 export default function define_core_subjects(model_singleton){
+
   const OrgSchema = new mongoose.Schema({
     org_id: pkey_type(),
     dept_code: {
@@ -76,4 +82,18 @@ export default function define_core_subjects(model_singleton){
   model_singleton.define_model("Org",OrgSchema);
   model_singleton.define_model("Program",ProgramSchema);
   model_singleton.define_model("Crso",CrsoSchema);
+
+  const { Org, Program, Crso } = model_singleton.models;
+
+  
+  const loaders = {
+    org_deptcode_loader: create_resource_by_id_attr_dataloader(Org,'dept_code'),
+    org_id_loader: create_resource_by_id_attr_dataloader(Org,'org_id'),
+    prog_dept_code_loader: create_resource_by_foreignkey_attr_dataloader(Program, "dept_code"),
+    prog_crso_id_loader: create_resource_by_foreignkey_attr_dataloader(Program, "crso_id"),
+    prog_id_loader: create_resource_by_id_attr_dataloader(Program,'program_id'),
+    crso_from_deptcode_loader: create_resource_by_foreignkey_attr_dataloader(Crso, 'dept_code'),
+    crso_id_loader: create_resource_by_id_attr_dataloader(Program,'crso_id'), 
+  };
+  _.each(loaders, (val,key) =>  model_singleton.define_loader(key,val) )
 }

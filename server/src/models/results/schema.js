@@ -1,8 +1,6 @@
 import _ from 'lodash';
 import { 
   bilingual_field,
-  create_resource_by_foreignkey_attr_dataloader,
-  create_resource_by_id_attr_dataloader,
 } from '../schema_utils';
 
 const schema = `
@@ -89,7 +87,7 @@ const schema = `
 `;
 
 
-export default function({models}){
+export default function({models,loaders}){
 
   const {
     Crso,
@@ -100,10 +98,12 @@ export default function({models}){
     PIDRLink,
   } = models;
 
-  const result_by_subj_loader = create_resource_by_foreignkey_attr_dataloader(Result,'subject_id');
-  const indicator_by_result_loader = create_resource_by_foreignkey_attr_dataloader(Result,'result_id');
-  const program_link_loader = create_resource_by_foreignkey_attr_dataloader(PIDRLink, "program_id");
-  const sub_program_loader = create_resource_by_foreignkey_attr_dataloader(SubProgram, "parent_id");
+  const {
+    result_by_subj_loader,
+    indicator_by_result_loader,
+    program_link_loader,
+    sub_program_loader,
+  } = loaders;
 
   async function get_results(subject, { doc }){
     const { id } = subject;

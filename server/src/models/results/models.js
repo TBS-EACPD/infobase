@@ -10,6 +10,10 @@ import {
   bilingual_str,
 } from '../model_utils.js';
 
+import {
+  create_resource_by_foreignkey_attr_dataloader,
+} from '../loader_utils.js';
+
 
 export default function(model_singleton){
 
@@ -72,5 +76,23 @@ export default function(model_singleton){
   model_singleton.define_model("Result",ResultSchema);
   model_singleton.define_model("Indicator",IndicatorSchema);
   model_singleton.define_model("PIDRLink",PIDRLinkSchema);
+
+  const { SubProgram, Result, Indicator, PIDRLink } = model_singleton.models;
+  const result_by_subj_loader = create_resource_by_foreignkey_attr_dataloader(Result,'subject_id');
+  const indicator_by_result_loader = create_resource_by_foreignkey_attr_dataloader(Result,'result_id');
+  const program_link_loader = create_resource_by_foreignkey_attr_dataloader(PIDRLink, "program_id");
+  const sub_program_loader = create_resource_by_foreignkey_attr_dataloader(SubProgram, "parent_id");
+  _.each(
+    { 
+      result_by_subj_loader,
+      indicator_by_result_loader,
+      program_link_loader,
+      sub_program_loader,
+    }, 
+    (val,key) =>  model_singleton.define_loader(key,val)
+  )
+
+
+
   
 }

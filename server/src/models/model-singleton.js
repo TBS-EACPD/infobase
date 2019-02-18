@@ -11,6 +11,11 @@ const model_singleton = {
   define_model(name, mongoose_schema){
     this.models[name] = mongoose.model(name, mongoose_schema);
   },
+
+  loaders: {},
+  define_loader(name, loader){
+    this.loaders[name] = loader;
+  },
 };
 
 export default model_singleton;
