@@ -1,8 +1,6 @@
 import _ from 'lodash';
 import { 
   bilingual_field, 
-  create_resource_by_foreignkey_attr_dataloader, 
-  create_resource_by_id_attr_dataloader,
 } from '../schema_utils';
 
 
@@ -199,9 +197,7 @@ export default function({models,loaders}){
       eval_url: (org, _args, {lang}) => org.eval_url(lang),
       website_url: (org, _args, {lang}) => org.website_url(lang),
 
-      programs: org => {
-        return org.dept_code ? prog_dept_code_loader.load(org.dept_code) : null;
-      },
+      programs: org => org.dept_code && prog_dept_code_loader.load(org.dept_code),
       crsos: ({dept_code}) => dept_code && crso_from_deptcode_loader.load(dept_code),
     },
     Program: {
@@ -209,12 +205,14 @@ export default function({models,loaders}){
       description: bilingual_field("desc"),
       org: prog => org_deptcode_loader.load(prog.dept_code),
       crso: prog => crso_id_loader.load(prog.crso_id),
+      id: _.property('program_id'),
     },
     Crso: {
       name: bilingual_field("name"),
       description: bilingual_field("desc"),
       programs: ({crso_id}) => prog_crso_id_loader.load(crso_id),
       org: ({ dept_code }) => org_deptcode_loader.load(dept_code),  
+      id: _.property('crso_id'),
     },
     SubjectI :{
       __resolveType(obj){
