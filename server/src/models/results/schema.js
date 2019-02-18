@@ -20,10 +20,12 @@ const schema = `
   }
 
   extend type Crso {
+    target_counts(doc:String): ResultCount
     results(doc:String): [Result]
   }
 
   extend type Program{
+    target_counts(doc:String): ResultCount
     sub_programs: [SubProgram]
     results(doc: String): [Result]
     # special departmental results to which this programs 'contributes' to
@@ -137,7 +139,7 @@ export default function({models,loaders}){
     future: 0,
   };
 
-  async function get_target_counts(org, doc){
+  async function get_org_target_counts(org, doc){
 
 
     const [crsos, progs] = await Promise.all([
@@ -146,6 +148,18 @@ export default function({models,loaders}){
     ]);
 
 
+    return await get_target_counts(
+      [ ..._.map(crsos, 'crso_id'), ..._.map(progs, 'program_id') ],
+      doc
+    );
+
+  }
+
+    
+
+  async function get_target_counts(cr_or_program_ids,doc){
+    
+    // turns [ [ { [attr]: val, ... }, undef ... ], undef ... ] into [ val, ... ] w/out undefs 
     const flatmap_to_attr = (list_of_lists, attr) => _.chain(list_of_lists)
       .compact()
       .flatten()
@@ -153,12 +167,11 @@ export default function({models,loaders}){
       .compact()
       .value();
 
-    const sub_programs = await sub_program_loader.loadMany(_.map(progs, 'program_id'));
+    const sub_programs = await sub_program_loader.loadMany(cr_or_program_ids);
     const sub_subs = await sub_program_loader.loadMany(flatmap_to_attr(sub_programs, 'sub_program_id'));
     
     const results = await result_by_subj_loader.loadMany([
-      ..._.map(crsos, 'crso_id'),
-      ..._.map(progs, 'program_id'),
+      ...cr_or_program_ids,
       ...flatmap_to_attr(sub_programs, 'sub_program_id'),
       ...flatmap_to_attr(sub_subs, 'sub_program_id'),
     ]);
@@ -200,15 +213,17 @@ export default function({models,loaders}){
 
   const resolvers = {
     Org:{
-      target_counts: (org, {doc}) => get_target_counts(org,doc),
+      target_counts: (org, {doc}) => get_org_target_counts(org,doc),
     },
     Crso: {
       results: get_results,
+      target_counts: ({crso_id}, {doc}) => get_target_counts([crso_id], doc),
     },
     Program: {
       results: get_results,
       sub_programs: ({program_id}) => sub_program_loader.load(program_id),
       drs: ({program_id}) => program_link_loader.load(program_id),
+      target_counts: ({program_id}, {doc}) => get_target_counts([program_id], doc),
     },
     SubProgram: {
       id: _.property('sub_program_id'),
