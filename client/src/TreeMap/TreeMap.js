@@ -6,7 +6,10 @@ import {
   TM,
   SpinnerWrapper
 } from '../util_components.js';
-import { get_data } from './data.js';
+import {
+  get_data,
+  load_data
+} from './data.js';
 import { formats } from '../core/format.js';
 import './TreeMap.scss';
 import { TreeMap } from './TreeMapViz.js';
@@ -271,19 +274,22 @@ function generate_infograph_href(d, data_area) {
 } */
 
 
-export default class TreeMapper extends React.Component {
+export default class TreeMapper extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true,
+      loading1: true,
+      loading2: true,
       org_route: [],
     };
+    load_data(props).then(() => {
+      this.setState({loading1: false});
+      this.set_data(props);
+    })
     this.setRoute = this.setRoute.bind(this);
     //this.results_tooltip_render = create_results_tooltip_render_func(_.bind(this.activateModal,this));
   }
-  componentWillMount() {
-    this.set_data(this.props);
-  }
+
   componentWillUpdate(nextProps) {
     if (
       this.props.match.params.perspective !== nextProps.match.params.perspective ||
@@ -310,16 +316,16 @@ export default class TreeMapper extends React.Component {
         },
       },
     } = props;
-    get_data(perspective, org_id, year, filter_var).then(data => {
-      this.setState({
-        loading: false,
-        data,
-      });
-    })
+    const data = get_data(perspective, org_id, year, filter_var);
+    this.setState({
+      loading2: false,
+      data: data,
+      org_route: [],
+    });
   }
   setRoute(new_route) {
     this.setState({
-      org_route: this.state.org_route.concat([new_route])
+      org_route: this.state.org_route.concat([new_route]),
     })
   }
   render() {
@@ -336,7 +342,7 @@ export default class TreeMapper extends React.Component {
       },
     } = this.props;
     const {
-      loading,
+      loading2,
       data,
       modal_args,
       org_route,
@@ -352,7 +358,7 @@ export default class TreeMapper extends React.Component {
         route_key='start'
         title='tree map development'
       >
-        {loading ?
+        {loading2 ?
           <SpinnerWrapper ref="spinner" config_name={"route"} /> :
           <div>
             <div className="TreeMap__Wrapper">
@@ -365,14 +371,17 @@ export default class TreeMapper extends React.Component {
                       setRouteCallback={this.setRoute}
                     />
                     <TreeMap
-                      data={ data }
-                      colorScale={ colorScale }
-                      color_var={ color_var }
-                      setRouteCallback={ this.setRoute }
+                      data={data}
+                      colorScale={colorScale}
+                      color_var={color_var}
+                      org_route={this.state.org_route}
+                      setRouteCallback={this.setRoute}
+                      perspective={perspective}
+                      year={year}
                       tooltip_render={
-                          window.feature_detection.is_mobile() ? mobile_tooltip_render : std_tooltip_render
+                        window.feature_detection.is_mobile() ? mobile_tooltip_render : std_tooltip_render
                       }
-                      node_render={ std_node_render }
+                      node_render={std_node_render}
                     />
                   </div>
                 </div>
@@ -381,10 +390,10 @@ export default class TreeMapper extends React.Component {
                     side_bar_title={display_year}
                     perspective={perspective}
                     color_var={color_var}
-                    year={ year }
-                    filter_var={ filter_var }
-                    history={ history }
-                    location={ location }
+                    year={year}
+                    filter_var={filter_var}
+                    history={history}
+                    location={location}
                   />
                 </div>
               </div>

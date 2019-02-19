@@ -228,13 +228,16 @@ function filter_sobj_categories(so_cat, row) {
 }
 
 
-export async function get_data(perspective, org_id, year, filter_var) {
+export async function load_data() {
+  await ensure_loaded({ table_keys: ["programSpending", "programFtes", "programSobjs", "orgTransferPayments", "orgVoteStatEstimates"] });
+}
 
-  await ensure_loaded({ table_keys: ["orgVoteStatEstimates", "orgTransferPayments", "programSpending", "programFtes", "programSobjs"] });
 
+export function get_data(perspective, org_id, year, filter_var) {
   let data;
 
   if (perspective === "drf" || perspective === "drf_ftes") {
+    //await ensure_loaded({ table_keys: ["programSpending", "programFtes"] });
     const program_ftes_table = Table.lookup('programFtes');
     const program_spending_table = Table.lookup('programSpending');
 
@@ -283,8 +286,9 @@ export async function get_data(perspective, org_id, year, filter_var) {
       true,
       0.01,
     );
-    return d3.hierarchy(root);
+    return root;
   } else if (perspective === "so") {
+    //await ensure_loaded({ table_keys: ["programSobjs"] });
     const program_sobj_table = Table.lookup('programSobjs');
 
     const all_orgs = _.chain(Dept.get_all())
@@ -347,8 +351,9 @@ export async function get_data(perspective, org_id, year, filter_var) {
       true,
       0.01,
     );
-    return d3.hierarchy(root);
+    return root;
   } else if (perspective === "tp") {
+    //await ensure_loaded({ table_keys: ["orgTransferPayments"] });
     const filtering = filter_var && filter_var !== "All" && (filter_var === "g" || filter_var === "c");
     const tp_table = Table.lookup('orgTransferPayments');
     const all_orgs = _.chain(Dept.get_all())
@@ -387,9 +392,10 @@ export async function get_data(perspective, org_id, year, filter_var) {
       true,
       0.01
     );
-    return d3.hierarchy(root);
+    return root;
 
   } else if (perspective === "vote_stat") {
+    //await ensure_loaded({ table_keys: ["orgVoteStatEstimates"] });
     const vote_stat_table = Table.lookup('orgVoteStatEstimates');
     const orgs = _.chain(Dept.get_all())
       .map(org => ({
@@ -436,36 +442,36 @@ export async function get_data(perspective, org_id, year, filter_var) {
       true,
       0.01,
     );
-    return d3.hierarchy(root);
+    return root;
   } else if (perspective === "org_results") {
-    const org = Dept.lookup(org_id || 'ND');
-    await ensure_loaded({
-      subject: org,
-      results: true,
-    });
+    // const org = Dept.lookup(org_id || 'ND');
+    // await ensure_loaded({
+    //   subject: org,
+    //   results: true,
+    // });
 
-    const result_hierarchy = create_full_results_hierarchy({
-      subject_guid: org.guid,
-      doc: "drr17",
-      allow_no_result_branches: true,
-    });
+    // const result_hierarchy = create_full_results_hierarchy({
+    //   subject_guid: org.guid,
+    //   doc: "drr17",
+    //   allow_no_result_branches: true,
+    // });
 
-    data = _.map(
-      get_root(result_hierarchy).children,
-      result_h7y_mapper
-    );
+    // data = _.map(
+    //   get_root(result_hierarchy).children,
+    //   result_h7y_mapper
+    // );
 
-    _.each(data, node => { prep_nodes(node, perspective) });
-    const grouped_data = group_smallest(
-      data,
-      children => ({ name: smaller_items_text, children })
-    );
-    const root = {
-      name: org.fancy_name ? org.fancy_name : org.name,
-      children: grouped_data,
-      amount: _.sumBy(data, "amount"),
-    };
-    return d3.hierarchy(root)
+    // _.each(data, node => { prep_nodes(node, perspective) });
+    // const grouped_data = group_smallest(
+    //   data,
+    //   children => ({ name: smaller_items_text, children })
+    // );
+    // const root = {
+    //   name: org.fancy_name ? org.fancy_name : org.name,
+    //   children: grouped_data,
+    //   amount: _.sumBy(data, "amount"),
+    // };
+    // return root;
 
   }
 }
