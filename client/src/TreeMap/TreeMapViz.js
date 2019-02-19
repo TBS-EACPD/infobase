@@ -13,7 +13,7 @@ function updateMousePositionVars(evt) {
   currentMouseX = evt.clientX;
   currentMouseY = evt.clientY;
 }
-export class TreeMap extends React.PureComponent {
+export class TreeMap extends React.Component {
   constructor(props){
     super();
     this.my_state = { my_org_route: [...props.org_route] };

@@ -16,7 +16,6 @@ import { TreeMap } from './TreeMapViz.js';
 import { TreeMapControls } from './TreeMapControls.js';
 import { TreeMapSidebar } from './TreeMapSidebar.js';
 import { TreeMapTopbar } from './TreeMapTopbar.js';
-import AriaModal from 'react-aria-modal';
 import { IndicatorDisplay } from '../panels/result_graphs/components.js'
 import { infograph_href_template } from '../infographic/routes.js';
 import {
@@ -234,77 +233,42 @@ function generate_infograph_href(d, data_area) {
   } else { return '' }
 }
 
-/* OLD RESULTS STUFF */
 
-/* function create_results_tooltip_render_func(activate_modal){
-  return function results_tooltip_render(tooltip_sel){
-    tooltip_sel.html(d => `
-      <div class="TM_Tooltip">
-        <div>${d.data.name}</div>
-        <hr class="BlueHLine">
-        <div>${formats.compact1(d.data.amount)}</div>
-        <div style="padding-bottom: 20px">
-          <button class="btn-primary">Show more details</button>
-        </div>
-      </div>
-    `)
-      .select("button")
-      .on("click", function(d){
-        d3.event.stopPropagation();
-        activate_modal(d);
-      })
-  }
-} */
-
-/* const render_modal = (node) => {
-  const { 
-    name,
-    indicators,
-    resources,
-  } = node.data;
-
-  return <div>
-    <div>{name}</div>
-    <div> <TM k="drr_spending" /> : <Format type="compact_written" content={resources.spending} />  </div>
-    <div> <TM k="drr_ftes" /> : <Format type="big_int_real" content={resources.ftes} /> </div>
-    <div>
-      <IndicatorDisplay indicators={indicators} />
-    </div>
-  </div>
-} */
-
-
-export default class TreeMapper extends React.PureComponent {
+export default class TreeMapper extends React.Component {
   constructor(props) {
     super(props);
+    this.setRoute = this.setRoute.bind(this);
+
     this.state = {
-      loading1: true,
-      loading2: true,
+      loading: true,
+      data: false,
+      route_params: props.match.params,
       org_route: [],
     };
+
     load_data(props).then(() => {
-      this.setState({loading1: false});
       this.set_data(props);
     })
-    this.setRoute = this.setRoute.bind(this);
-    //this.results_tooltip_render = create_results_tooltip_render_func(_.bind(this.activateModal,this));
   }
-
-  componentWillUpdate(nextProps) {
-    if (
-      this.props.match.params.perspective !== nextProps.match.params.perspective ||
-      this.props.match.params.org_id !== nextProps.match.params.org_id ||
-      this.props.match.params.year !== nextProps.match.params.year ||
-      this.props.match.params.filter_var !== nextProps.match.params.filter_var
-    ) {
-      this.set_data(nextProps);
+  static getDerivedStateFromProps(props, state) {
+    return {
+      route_params: props.match.params,
+      data: _.isEqual(props.match.params, state.route_params) ? state.data : false,
     }
   }
-  /* activateModal(modal_args){
-    this.setState({
-      modal_args: modal_args,
-    });
-  } */
+  componentDidUpdate() {
+    const {
+      loading,
+      data,
+    } = this.state;
+    if (loading){
+      load_data(this.props).then(
+        () => this.setState({loading: false})
+      );
+    } else if (!data){
+      this.set_data(this.props);
+    }
+  }
   set_data(props) {
     const {
       match: {
@@ -318,7 +282,6 @@ export default class TreeMapper extends React.PureComponent {
     } = props;
     const data = get_data(perspective, org_id, year, filter_var);
     this.setState({
-      loading2: false,
       data: data,
       org_route: [],
     });
@@ -342,9 +305,8 @@ export default class TreeMapper extends React.PureComponent {
       },
     } = this.props;
     const {
-      loading2,
+      loading,
       data,
-      modal_args,
       org_route,
     } = this.state;
 
@@ -358,7 +320,7 @@ export default class TreeMapper extends React.PureComponent {
         route_key='start'
         title='tree map development'
       >
-        {loading2 ?
+        { loading || !data ?
           <SpinnerWrapper ref="spinner" config_name={"route"} /> :
           <div>
             <div className="TreeMap__Wrapper">
