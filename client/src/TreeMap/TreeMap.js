@@ -246,9 +246,8 @@ export default class TreeMapper extends React.Component {
       org_route: [],
     };
 
-    load_data(props).then(() => {
-      this.set_data(props);
-    })
+    load_data(this.props)
+      .then( () => this.setState({loading: false}) );
   }
   static getDerivedStateFromProps(props, state) {
     return {
@@ -262,9 +261,8 @@ export default class TreeMapper extends React.Component {
       data,
     } = this.state;
     if (loading){
-      load_data(this.props).then(
-        () => this.setState({loading: false})
-      );
+      load_data(this.props)
+        .then( () => this.setState({loading: false}) );
     } else if (!data){
       this.set_data(this.props);
     }
