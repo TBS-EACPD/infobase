@@ -33,7 +33,8 @@ export class TreeMapTopbar extends React.Component {
       <div className="TreeMap__ZoomControl">
         <ol className="breadcrumb" style={{
           background: "none",
-          padding: "10px 10px 0px 10px" }}
+          padding: "10px", 
+          margin: "0px"}}
         >
           {_.isEmpty(org_route) ?
             <li className="TreeMap__ZoomControl--no-zoom-out">

@@ -253,7 +253,7 @@ export default class TreeMapper extends React.Component {
     if (window.feature_detection.is_mobile()) {
       app_height = Math.ceil(0.8 * screen.height);
     }
-    const topbar_height = 54;
+    const topbar_height = 55;
 
 
     const display_year = run_template("{{" + year + "}}");
@@ -292,7 +292,7 @@ export default class TreeMapper extends React.Component {
                     />
                   </div>
                 </div>
-                <div className="col-md-2 TreeMap__SideBar" style={{ padding: "0px", "min-height": `${app_height}px`}}>
+                <div className="col-md-2 TreeMap__SideBar" style={{ padding: "0px", "min-height": `${app_height+9}px`}}>
                   <TreeMapSidebar
                     side_bar_title={display_year}
                     perspective={perspective}
