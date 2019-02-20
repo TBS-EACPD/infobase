@@ -53,7 +53,7 @@ export class TreeMapTopbar extends React.Component {
                   style={{
                     width: "20px",
                     height: "20px",
-                    margin: "-3px 2px 0px 3px",
+                    margin: "-12px 2px 0px 3px",
                   }}
                 />
               </li>
@@ -74,7 +74,7 @@ export class TreeMapTopbar extends React.Component {
                   style={{
                     width: "20px",
                     height: "20px",
-                    margin: "-3px 2px 0px 3px",
+                    margin: "-12px 2px 0px 3px",
                   }}
                 />
               </li>

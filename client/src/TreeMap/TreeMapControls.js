@@ -124,15 +124,15 @@ export class TreeMapControls extends React.Component {
             </div>
           }
         />
-        {(perspective === "drf" || perspective === "drf_ftes") &&
+        {perspective === "tp" &&
           <LabeledBox
-            label={text_maker("treemap_color_by_label")}
+            label={text_maker("treemap_gc_type_filter")}
             content={
               <div className="centerer">
                 <RadioButtons
-                  options={_.map(color_controls, ({ id, display }) => ({ id, display, active: id === color_var }))}
+                  options={_.map(gc_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
                   onChange={id => {
-                    const new_path = `/treemap/${perspective}/${id}/${year}`;
+                    const new_path = `/treemap/${perspective}/spending/${year}/${id}`;
                     if (history.location.pathname !== new_path) {
                       // the first_column prop, and thus this button's active id, is updated through this route push
                       history.push(new_path);
@@ -143,15 +143,15 @@ export class TreeMapControls extends React.Component {
             }
           />
         }
-        {perspective === "tp" &&
+        {(perspective === "drf" || perspective === "drf_ftes") &&
           <LabeledBox
-            label={text_maker("treemap_gc_type_filter")}
+            label={text_maker("treemap_color_by_label")}
             content={
               <div className="centerer">
                 <RadioButtons
-                  options={_.map(gc_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
+                  options={_.map(color_controls, ({ id, display }) => ({ id, display, active: id === color_var }))}
                   onChange={id => {
-                    const new_path = `/treemap/${perspective}/spending/${year}/${id}`;
+                    const new_path = `/treemap/${perspective}/${id}/${year}`;
                     if (history.location.pathname !== new_path) {
                       // the first_column prop, and thus this button's active id, is updated through this route push
                       history.push(new_path);
