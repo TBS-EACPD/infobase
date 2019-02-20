@@ -7,10 +7,15 @@ const {
   create_schema,
 } = require('./models/index.js');
 
+const { connect_db } = require("./db.js");
 
+
+global.IS_DEV_SERVER = true;
 create_models();
-populate_models();
+connect_db();
+// populate_models();
 const schema = create_schema();
+
 
 global.execQuery = async function(query, vars={}){
   if(!vars.lang){

@@ -50,16 +50,12 @@ query IgocTestQuery ($lang: String!){
       }
       article_1
       article_2
-      dp_url
-      qfr_url
-      eval_url
       enabling_instrument
       auditor
       notes
       faa_schedule_institutional
       incorp_yr
       
-      website_url
       
       ministry {
         name
