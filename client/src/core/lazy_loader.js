@@ -1,7 +1,11 @@
 import { Table } from './TableClass.js';
 import { PanelGraph, tables_for_graph } from './PanelGraph.js';
 import { Statistics, tables_for_statistics } from './Statistics.js';
-import { load_results_bundle, load_results_counts, load_granular_results_counts } from '../models/populate_results.js';
+import { 
+  load_results_bundle, load_results_counts,
+  api_load_results_bundle, api_load_results_counts,
+  load_granular_results_counts,
+} from '../models/populate_results.js';
 import { load_footnotes_bundle } from '../models/populate_footnotes.js';
 import { load_budget_measures } from '../models/populate_budget_measures.js';
 import { Subject } from '../models/subject.js';
@@ -28,6 +32,7 @@ function ensure_loaded({
   require_result_counts,
   require_granular_result_counts,
   footnotes_for: footnotes_subject,
+  use_api_for_results,
 }){
   const table_set = _.chain( table_keys )
     .union(
@@ -107,13 +112,17 @@ function ensure_loaded({
 
   const results_prom = (
     should_load_results ?
-      load_results_bundle(subject) :
+      use_api_for_results ? 
+        api_load_results_bundle(subject) : 
+        load_results_bundle(subject) :
       Promise.resolve()
   ) 
 
   const result_counts_prom = (
     should_load_result_counts ?
-      load_results_counts() :
+      use_api_for_results ? 
+        api_load_results_counts() : 
+        load_results_counts() :
       Promise.resolve()
   );
 

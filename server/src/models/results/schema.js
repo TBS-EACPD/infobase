@@ -16,7 +16,7 @@ const schema = `
   }
 
   extend type Gov {
-    target_counts(doc:String): [ResultCount]
+    target_counts(doc:String): ResultCount
   }
 
   extend type Org {
