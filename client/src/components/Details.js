@@ -23,16 +23,23 @@ export class Details extends React.Component {
       },
     };
 
+    const label_id = _.uniqueId("IBDetails__a11yLabel");
+
     return <div className="IBDetails"> 
       <button
         className={classNames("IBDetails__Summary", isOpen && "IBDetails__Summary--open")}
         onClick={()=> this.setState({isOpen: !isOpen})}
-        aria-label={aria_labels[window.lang][isOpen ? "open" : "closed"]}
+        aria-labelledby={label_id}
       >
-        <span aria-disabled className="IBDetails__TogglerIcon">
+        <span aria-hidden className="IBDetails__TogglerIcon">
           { isOpen ? "▼" : "►" }
         </span>
-        { summary_content }
+        <span id={label_id}>
+          { summary_content }
+          <span className="sr-only">
+            {aria_labels[window.lang][isOpen ? "open" : "closed"]}
+          </span>
+        </span>
       </button>
       <div className="IBDetails__Content">
         { isOpen && content}
