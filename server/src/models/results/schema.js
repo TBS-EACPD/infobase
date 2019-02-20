@@ -146,11 +146,20 @@ export default function({models,loaders}){
   async function get_gov_target_counts(doc){
     const orgs = await Org.find({});
 
-    return Promise.all(
+    const all_counts = await Promise.all(
       _.chain(orgs)
         .filter("dept_code")
         .map(async org => await get_org_target_counts(org, doc) )
         .value()
+    );
+
+    return _.reduce(
+      all_counts,
+      (memo, counts) => _.mapValues(
+        memo,
+        (memo_value, key) => memo_value + counts[key]
+      ),
+      result_count_defaults
     );
   }
 
