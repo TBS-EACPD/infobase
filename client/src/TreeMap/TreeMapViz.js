@@ -69,6 +69,7 @@ export class TreeMap extends React.Component {
       tooltip_render,
       node_render,
       setRouteCallback,
+      viz_height,
     } = this.props;
     let org_route = this.my_state.my_org_route;
     //debugger;
@@ -79,21 +80,13 @@ export class TreeMap extends React.Component {
     }
     const el = this.el;
 
-    let height = 500;
-    if (window.feature_detection.is_mobile()) {
-      height = Math.ceil(0.8 * screen.height);
-    }
+
 
     el.innerHTML = `
         <div  class="TreeMap__Mainviz">
-          <div
-              class="viz-root"
-              style="
-                position:relative;
-                min-height: ${height}px;"
-              >
+          <div class="viz-root" style="min-height: ${viz_height}px; position: relative;" >
             </div>
-    </div>`;
+        </div>`;
 
     const html_root = d3.select(el).select('div');
 
@@ -103,7 +96,8 @@ export class TreeMap extends React.Component {
     const side_menu = html_root.select('.TreeMap__SideBar');
 
     const width = viz_root.node().offsetWidth;
-    const ratio = 1;
+    let height = viz_height;
+    
 
     // sets x and y scale to determine size of visible boxes
     const x = d3.scaleLinear()

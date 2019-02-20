@@ -32,7 +32,7 @@ export class TreeMapSidebar extends React.Component {
       history,
     } = this.props;
     return (
-      <div className="TreeMap__SideBar">
+      <div>
         {/* <div className="TreeMap_SideBar__Title">
           {side_bar_title}
           <hr className="BlueHLine" />
@@ -51,34 +51,3 @@ export class TreeMapSidebar extends React.Component {
     )
   }
 }
-
-// style="" className=" fcol-md-2 sm-hide">
-
-
-const chevron_html = `<img class="TreeMap__SideBar__Chevron" src=${get_static_url("svg/chevron.svg")}/>`;
-const sidebar_item_html = function (d) {
-  return (`
-  ${ d.parent ? chevron_html : ""}
-  <div> ${d.data.name} </div>
-  <div> ${formats.compact1(d.data.amount)} </div>
-`)
-}
-
-/* const side_bar_text_items = side_menu
-  .selectAll(".TreeMap_SideBar__Text")
-  .data( _.uniq(d.ancestors().reverse().concat([d])) )
-
-side_bar_text_items.exit().remove();
-side_bar_text_items.enter()
-  .append("div")
-  .attr("class","TreeMap_SideBar__Text")
-  .merge(side_bar_text_items)
-  .html(sidebar_item_html)
-  .style("cursor", sidebar_data_el => d === sidebar_data_el ? "normal" : "pointer" )
-  .classed("TreeMap__ZoomControl--has-zoom-out", !!d.parent)
-  .on('click', function(sidebar_data_el){
-    if(d === sidebar_data_el){
-      return;
-    }
-    transition.call(this, ...arguments)
-  }); */

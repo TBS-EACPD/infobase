@@ -178,11 +178,7 @@ export class TreeMapControls extends React.Component {
                       }
                     }}
                   />
-                  <Details
-                    summary_content={text_maker("treemap_definitions_title")}
-                    content={text_maker("treemap_vstype_definitions")}
-                  />
-                  </Fragment>
+                </Fragment>
               </div>
             }
           />

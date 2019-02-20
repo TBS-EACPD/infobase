@@ -59,71 +59,7 @@ function std_node_render(foreign_sel) {
   });
 }
 
-/* const result_square_className = status_color => {
-  if(status_color === "success"){
-    return "TreeMap_IndicatorGrid__Item TreeMap_IndicatorGrid__Item--success";
-  } else if(status_color === "failure"){
-    return "TreeMap_IndicatorGrid__Item TreeMap_IndicatorGrid__Item--failure";
-  } else {
-    return "TreeMap_IndicatorGrid__Item TreeMap_IndicatorGrid__Item--other";
-  }
-}
-function results_node_render(foreign_sel){
-  foreign_sel.html(function(d){
-    const el = this;
-    const { 
-      offsetHeight: height,
-      offsetWidth: width,
-    } = el;
-    const { indicators, name, resources } = d.data;
-
-    let html;
-    if(height < 20 || width < 50){//TODO pick a better cutoff, maybe based on height*width
-      html = "";
-    } else 
-    if(_.isEmpty(indicators)){
-      html = "no indicators";
-    } else {
-      const statuses = _.map(indicators, "status_color");
-
-      let flexDirection = "row";
-      if(height > width){
-        flexDirection = "column";
-      }
-
-      html= `
-        <div 
-          class="TreeMap_IndicatorGrid"
-          style="flex-direction: ${flexDirection};"
-        >
-          ${_.map(statuses, status_color => `
-            <div class="${result_square_className(status_color)}"></div>
-          `).join("")}
-        </div>
-        <div class="TreeMapNode__ContentBox TreeMapNode__ContentBox--standard" style="z-index:5">
-          <div class="TreeMapNode__ContentTitle">
-            ${name}
-          </div>
-          <div class="TreeMapNode__ContentText">
-            ${formats.compact1(resources.spending)}
-          </div>
-        </div>
-        </div>
-        
-      `;
-
-    }
-    return html;
-
-  })
-}
-
 /* COLOUR SCALES */
-
-
-/* function result_color_scale(node){
-  return "#eee";
-} */
 
 // need this slightly tricky formulation because we only want to use part of the Blues scale (darkest colours
 // are too dark for good contrast with the text)
@@ -313,6 +249,12 @@ export default class TreeMapper extends React.Component {
     const colorScale = get_color_scale(perspective, color_var);
     const { results_tooltip_render } = this;
 
+    let app_height = 800;
+    if (window.feature_detection.is_mobile()) {
+      app_height = Math.ceil(0.8 * screen.height);
+    }
+    const topbar_height = 54;
+
 
     const display_year = run_template("{{" + year + "}}");
     return (
@@ -322,16 +264,18 @@ export default class TreeMapper extends React.Component {
       >
         {loading || !data ?
           <SpinnerWrapper ref="spinner" config_name={"route"} /> :
-          <div>
+          <div> 
             <div className="TreeMap__Wrapper">
               <div className="row">
                 <div className="col-md-10">
                   <div className="row">
-                    <TreeMapTopbar
-                      history={history}
-                      org_route={this.state.org_route}
-                      setRouteCallback={this.setRoute}
-                    />
+                    <div className="TreeMap__TopBar" style={{"min-height": `${topbar_height}px`}}>
+                      <TreeMapTopbar
+                        history={history}
+                        org_route={this.state.org_route}
+                        setRouteCallback={this.setRoute}
+                      />
+                    </div>
                     <TreeMap
                       data={data}
                       colorScale={colorScale}
@@ -344,10 +288,11 @@ export default class TreeMapper extends React.Component {
                         window.feature_detection.is_mobile() ? mobile_tooltip_render : std_tooltip_render
                       }
                       node_render={std_node_render}
+                      viz_height={app_height-topbar_height}
                     />
                   </div>
                 </div>
-                <div className="col-md-2" style={{ padding: "0px" }}>
+                <div className="col-md-2 TreeMap__SideBar" style={{ padding: "0px", "min-height": `${app_height}px`}}>
                   <TreeMapSidebar
                     side_bar_title={display_year}
                     perspective={perspective}
