@@ -15,7 +15,7 @@ import './TreeMap.scss';
 import { TreeMap } from './TreeMapViz.js';
 import { TreeMapControls } from './TreeMapControls.js';
 import { TreeMapSidebar } from './TreeMapSidebar.js';
-import { TreeMapTopbar } from './TreeMapTopbar.js';
+import { TreeMapTopbar } from './TreeMapTopBar.js';
 import { IndicatorDisplay } from '../panels/result_graphs/components.js'
 import { infograph_href_template } from '../infographic/routes.js';
 import {
