@@ -1,3 +1,6 @@
+import { CSSTransitionGroup } from 'react-transition-group';
+import { Fragment } from 'react';
+
 import './infographic.scss';
 import text from "./infographic.yaml";
 
@@ -343,7 +346,7 @@ const InfoGraph = ({
       description={ desc_key && text_maker(desc_key)}
       route_key={sub_app_name}
     >
-      <h1 dangerouslySetInnerHTML={{__html: title }} />
+      <TransitionText text={title} />
       <InfoGraph_
         level={level}
         subject={subject}
@@ -352,4 +355,27 @@ const InfoGraph = ({
     </StandardRouteContainer>
   );
 };
+
+
+class TransitionText extends React.Component {
+  render(){
+    return (
+      <CSSTransitionGroup 
+        component="h1"
+        transitionAppear={true}
+        transitionAppearTimeout={500}
+        transitionName="transi-fade"
+        transitionEnterTimeout={1500}
+        transitionLeaveTimeout={1500}
+      >
+        <Fragment>
+          <span key={this.props.text}>
+            { this.props.text }
+          </span>
+        </Fragment>
+      </CSSTransitionGroup>
+    )
+  }
+}
+
 export { InfoGraph as default }
