@@ -15,6 +15,10 @@ const schema = `
     future: Int
   }
 
+  extend type Gov {
+    target_counts(doc:String): [ResultCount]
+  }
+
   extend type Org {
     target_counts(doc:String): ResultCount
   }
@@ -139,25 +143,33 @@ export default function({models,loaders}){
     future: 0,
   };
 
+  async function get_gov_target_counts(doc){
+    const orgs = await Org.find({});
+
+    return Promise.all(
+      _.chain(orgs)
+        .filter("dept_code")
+        .map(async org => await get_org_target_counts(org, doc) )
+        .value()
+    );
+  }
+
   async function get_org_target_counts(org, doc){
-
-
     const [crsos, progs] = await Promise.all([
       crso_from_deptcode_loader.load(org.dept_code),
       prog_dept_code_loader.load(org.dept_code),
     ]);
 
-
     return await get_target_counts(
-      [ ..._.map(crsos, 'crso_id'), ..._.map(progs, 'program_id') ],
+      [ 
+        ..._.map(crsos, 'crso_id'), 
+        ..._.map(progs, 'program_id'),
+      ],
       doc
     );
-
   }
 
-    
-
-  async function get_target_counts(cr_or_program_ids,doc){
+  async function get_target_counts(cr_or_program_ids, doc){
     
     // turns [ [ { [attr]: val, ... }, undef ... ], undef ... ] into [ val, ... ] w/out undefs 
     const flatmap_to_attr = (list_of_lists, attr) => _.chain(list_of_lists)
@@ -190,8 +202,6 @@ export default function({models,loaders}){
   }
 
   async function get_results(subject, { include_efficiency, doc }){
-    const { id } = subject;
-
     let id_val;
     if(subject instanceof Crso){
       id_val = subject.crso_id;
@@ -202,7 +212,7 @@ export default function({models,loaders}){
     } else {
       throw "bad subject"
     }
-    let records =  await result_by_subj_loader.load(id_val)
+    let records = await result_by_subj_loader.load(id_val);
 
     if(doc){
       records = _.filter(records, {doc});
@@ -212,8 +222,11 @@ export default function({models,loaders}){
 
 
   const resolvers = {
-    Org:{
-      target_counts: (org, {doc}) => get_org_target_counts(org,doc),
+    Gov: {
+      target_counts: (_x, {doc}) => get_gov_target_counts(doc),
+    },
+    Org: {
+      target_counts: (org, {doc}) => get_org_target_counts(org, doc),
     },
     Crso: {
       results: get_results,
