@@ -36,8 +36,8 @@ const post_traversal_modifications = (node, selected_value) => {
   if ( _.isNaN(node.value) && node.children && node.children.length > 0 ){
     node.value = roll_up_children_values(node);
   }
-  
-  if (node.depth > 1){
+
+  if (node.depth > 1 || node.data.id === "net_adjust"){
     node.submeasures = get_node_submeasures(node, selected_value);
   }
 
@@ -67,13 +67,16 @@ const get_node_submeasures = (node, selected_value) => {
     } else if (node.data.type === "dept"){
       org_id = node.data.id;
       measure_id = node.parent.data.id;
+    } else if (node.data.id === "net_adjust") {
+      org_id = "net_adjust";
+      measure_id = "net_adjust";
     } else {
       return [];
     }
   }
   
   const node_submeasures = _.chain( BudgetMeasure.lookup(measure_id).submeasures )
-    .filter(submeasure => submeasure.data.org_id !== org_id)
+    .filter(submeasure => org_id === "net_adjust" || submeasure.data.org_id !== org_id)
     .map( submeasure => ({
       ...submeasure, 
       value: program_or_crso_id ? 
