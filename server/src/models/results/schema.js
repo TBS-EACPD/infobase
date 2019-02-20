@@ -147,23 +147,29 @@ export default function({models,loaders}){
     const orgs = await Org.find({});
 
     const all_counts = await Promise.all(
-      _.chain(orgs)
-        .filter("dept_code")
-        .map(async org => await get_org_target_counts(org, doc) )
-        .value()
+      _.map(
+        orgs,
+        async org => await get_org_target_counts(org, doc) 
+      )
     );
 
     return _.reduce(
       all_counts,
-      (memo, counts) => _.mapValues(
+      (memo, counts) => !_.isEmpty(counts) ? 
+        _.mapValues(
+          memo,
+          (memo_value, key) => memo_value + counts[key]
+        ) :
         memo,
-        (memo_value, key) => memo_value + counts[key]
-      ),
       result_count_defaults
     );
   }
 
   async function get_org_target_counts(org, doc){
+    if (_.isNull(org.dept_code)){
+      return null;
+    }
+
     const [crsos, progs] = await Promise.all([
       crso_from_deptcode_loader.load(org.dept_code),
       prog_dept_code_loader.load(org.dept_code),
