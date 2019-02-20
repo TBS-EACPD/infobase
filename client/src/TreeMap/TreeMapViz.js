@@ -40,6 +40,7 @@ export class TreeMap extends React.Component {
     window.removeEventListener("mousemove", updateMousePositionVars);
   }
   shouldComponentUpdate(nextProps,nextState){
+    //debugger;
     // if(!_.isEqual(this.my_state.my_org_route.sort(), nextState.my_org_route.sort()) )
     // {
     //   return false; // don't update on state change (controlled from within the viz)
@@ -52,8 +53,8 @@ export class TreeMap extends React.Component {
     {
       return true;
     }
-    if (!_.isEqual(this.my_state.my_org_route.sort(), nextProps.org_route.sort()) &&
-        nextProps.org_route.length < this.my_state.my_org_route)
+    if (!_.isEqual(this.my_state.my_org_route, nextProps.org_route) &&
+        nextProps.org_route.length < this.my_state.my_org_route.length)
     {
       return true; // only override with zoomed out view
     }
@@ -126,12 +127,7 @@ export class TreeMap extends React.Component {
       for(let i = 0; i < route_length; i++){ // TODO: rewrite to use lodash and return original root if any of them fail
         const next_name = org_route.shift();
         const next_item = _.filter(root.children, d => d.name==next_name);
-        //debugger;
-        if (next_item.length != 1){
-          debugger;
-        } else {
-          root = next_item[0];
-        }
+        root = next_item[0];
       }
     }
 
@@ -201,7 +197,7 @@ export class TreeMap extends React.Component {
           .classed('TreeMap__Division', true)
           .on('click', d => {
             this.my_state.my_org_route.push(d.data.name);
-            setRouteCallback(d.data.name);
+            setRouteCallback(d.data.name, false);
             transition(d);
             //this.setState({my_org_route: this.state.my_org_route.concat(d.data.name)}, () => {
             //  setRouteCallback(this.state.my_org_route);

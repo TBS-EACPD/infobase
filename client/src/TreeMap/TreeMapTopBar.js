@@ -20,6 +20,9 @@ export class TreeMapTopbar extends React.Component {
   constructor() {
     super();
   }
+  handleClick(ix) {
+    this.props.setRouteCallback(this.props.org_route.slice(0, ix + 1), true)
+  }
   render() {
     const {
       setRouteCallback,
@@ -29,13 +32,20 @@ export class TreeMapTopbar extends React.Component {
     return (
       <div className="TreeMap__TopBar">
         <div className="TreeMap__ZoomControl">
-          <ol className="breadcrumb">
-            <li className="TreeMap__ZoomControl--has-zoom-out">
-              {_.isEmpty(org_route) ?
-                <span>GovernmentTM</span> :
-                <a href="#start">GovernmentTM</a>
-              }
-            </li>
+          <ol className="breadcrumb" style={{
+            background: "none",
+            padding: "10px 10px 0px 10px" }}
+          >
+            {_.isEmpty(org_route) ?
+              <li className="TreeMap__ZoomControl--no-zoom-out">
+                <span dangerouslySetInnerHTML={{ __html: text_maker("government_stats") }} />
+              </li> :
+              <li className="TreeMap__ZoomControl--has-zoom-out">
+                <span dangerouslySetInnerHTML={{ __html: text_maker("government_stats") }}
+                  onClick={() => { this.handleClick(-1) }}
+                />
+              </li>
+            }
             {_.map(org_route.slice(0, -1), (display, ix) =>
               <Fragment key={ix} >
                 <li aria-hidden="true">
@@ -50,28 +60,33 @@ export class TreeMapTopbar extends React.Component {
                 </li>
                 <li className="TreeMap__ZoomControl--has-zoom-out">
                   {
-                    <a href="#start">
-                      <span dangerouslySetInnerHTML={{ __html: display }} />
-                    </a>
+                    <span dangerouslySetInnerHTML={{ __html: display }}
+                      onClick={() => { this.handleClick(ix) }}
+                    />
                   }
                 </li>
               </Fragment>
             )}
-            <li aria-hidden="true">
-              <img
-                src={get_static_url("svg/arrow.svg")}
-                style={{
-                  width: "20px",
-                  height: "20px",
-                  margin: "-3px 2px 0px 3px",
-                }}
-              />
-            </li>
-            <li className="TreeMap__ZoomControl--has-zoom-out">
-              {
-                <span dangerouslySetInnerHTML={{ __html: org_route[org_route.length - 1] }} />
-              }
-            </li>
+            {!_.isEmpty(org_route) ?
+              <Fragment>
+                <li aria-hidden="true">
+                  <img
+                    src={get_static_url("svg/arrow.svg")}
+                    style={{
+                      width: "20px",
+                      height: "20px",
+                      margin: "-3px 2px 0px 3px",
+                    }}
+                  />
+                </li>
+                <li className="TreeMap__ZoomControl--no-zoom-out">
+                  {
+                    <span dangerouslySetInnerHTML={{ __html: org_route[org_route.length - 1] }} />
+                  }
+                </li>
+              </Fragment>
+              : <div />
+            }
           </ol>
         </div>
       </div>

@@ -3,6 +3,12 @@
 .TreeMap__Wrapper {
   background-color: green;
 }
+.TreeMap__TopBar {
+  background-color: #55ca22;
+}
+.TreeMap__Mainviz{
+  background-color: blue;
+}
 
 
 .TreeMap__SideBar {
@@ -27,33 +33,26 @@
   color: #9ecae1;
 }
 
-.TreeMap__TopBar {
-  background-color: #55ca22;
-}
+
 
 .TreeMap__ZoomControl {
   border: 2px solid #fff;
-  border-top-width: 0;
   background-color: #D9D9D9;
-  padding: 1rem;
-  &.TreeMap__ZoomControl--has-zoom-out {
-    &:hover {
-      background-color: #9ecae1 !important;
-    }
-    cursor: pointer;
-  }
 }
-.TreeMap__ZoomControl__Text{
+.TreeMap__ZoomControl--has-zoom-out {
+  color: black;
+  text-decoration: underline;
+  cursor: pointer;
+  max-width: 150px;
+  overflow: hidden;
+  white-space: nowrap; 
+  text-overflow: ellipsis; 
+}
+.TreeMap__ZoomControl--no-zoom-out {
   color: black;
 }
-.TreeMap__ZoomControl__Title{
-  font-weight: bold;
-}
 
 
-.TreeMap__Mainviz{
-  background-color: blue;
-}
 
 .TreeMap__Rectangle {
   position: absolute;

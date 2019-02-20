@@ -247,7 +247,7 @@ export default class TreeMapper extends React.Component {
     };
 
     load_data(this.props)
-      .then( () => this.setState({loading: false}) );
+      .then(() => this.setState({ loading: false }));
   }
   static getDerivedStateFromProps(props, state) {
     return {
@@ -260,10 +260,10 @@ export default class TreeMapper extends React.Component {
       loading,
       data,
     } = this.state;
-    if (loading){
+    if (loading) {
       load_data(this.props)
-        .then( () => this.setState({loading: false}) );
-    } else if (!data){
+        .then(() => this.setState({ loading: false }));
+    } else if (!data) {
       this.set_data(this.props);
     }
   }
@@ -284,9 +284,11 @@ export default class TreeMapper extends React.Component {
       org_route: [],
     });
   }
-  setRoute(new_route) {
+  setRoute(new_route, reset = false) {
+    let next_route = this.state.org_route;
+    reset ? next_route = new_route : next_route = this.state.org_route.concat([new_route])
     this.setState({
-      org_route: this.state.org_route.concat([new_route]),
+      org_route: next_route,
     })
   }
   render() {
@@ -318,7 +320,7 @@ export default class TreeMapper extends React.Component {
         route_key='start'
         title='tree map development'
       >
-        { loading || !data ?
+        {loading || !data ?
           <SpinnerWrapper ref="spinner" config_name={"route"} /> :
           <div>
             <div className="TreeMap__Wrapper">
