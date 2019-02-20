@@ -76,7 +76,7 @@ function header_col(perspective, year) {
 
 
 //asumes real_value is set on all nodes
-function group_smallest(node_list, node_creator, shouldRecurse = true, perc_cutoff = 0.02) {
+function group_smallest(node_list, node_creator, shouldRecurse = true, perc_cutoff = 0.02, shouldAdjustSize = true) {
   if (_.isEmpty(node_list)) {
     return node_list;
   }
@@ -104,7 +104,7 @@ function group_smallest(node_list, node_creator, shouldRecurse = true, perc_cuto
     new_node.size = _.sumBy(tiny_nodes, "size")
     new_node.is_negative = new_node.amount < 0;
 
-    if (new_node.size < cutoff) {
+    if (new_node.size < cutoff && shouldAdjustSize) {
       const old_size = new_node.size;
       _.set(new_node, 'size', cutoff);
       _.each(new_node.children, child => { recurse_adjust_size(child, cutoff / old_size) });
@@ -118,7 +118,7 @@ function group_smallest(node_list, node_creator, shouldRecurse = true, perc_cuto
     const old_node_list = _.without(node_list, ...tiny_nodes);
 
     return old_node_list.concat(new_node);
-  } else if (tiny_nodes.length > 0) {
+  } else if (tiny_nodes.length > 0 && shouldAdjustSize) {
     // we want to avoid cases where there are nodes that are too tiny to see
     // e.g. DRF > treasury board > PSIC
     const old_node_list = _.without(node_list, ...tiny_nodes);
@@ -339,19 +339,20 @@ export function get_data(perspective, org_id, year, filter_var) {
         }
       ))
       .value();
-    const root = {
+    const data_root = {
       name: "Government",
       children: data,
       amount: _.sumBy(data, "amount"),
     };
-    prep_nodes(root, perspective);
-    root.children = group_smallest(
-      root.children,
+    prep_nodes(data_root, perspective);
+    data_root.children = group_smallest(
+      data_root.children,
       children => ({ name: smaller_items_text, children }),
       true,
-      0.01,
+      0.005,
+      false
     );
-    return root;
+    return data_root;
   } else if (perspective === "tp") {
     //await ensure_loaded({ table_keys: ["orgTransferPayments"] });
     const filtering = filter_var && filter_var !== "All" && (filter_var === "g" || filter_var === "c");
