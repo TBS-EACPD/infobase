@@ -1,7 +1,7 @@
 privacy_body_text:
   transform: [handlebars, markdown]
   en: |
-    ## Protection of personal information
+    # Privacy
 
     The Government of Canada is committed to protecting the privacy of visitors on its websites. This Privacy Notice summarizes the privacy policy and practices on the GC InfoBase website, a website under the responsibility of the {{ext_link "Treasury Board Secretariat (TBS)" "https://www.canada.ca/en/treasury-board-secretariat.html"}}.
     
@@ -83,8 +83,8 @@ privacy_body_text:
     
     Any questions, comments, concerns or complaints you may have regarding this Statement, your privacy rights and the Privacy Act may be directed to the TBS Access to Information and Privacy Coordinator by email at ATIP.AIPRP@tbs-sct.gc.ca or by telephone at 1-866-312-1511. You may also wish to contact the Office of the Privacy Commissioner of Canada by email at info@priv.gc.ca or by telephone at 1-800-282-1376. You have the right to complain to the Office of the Privacy Commissioner of Canada about the handling of your personal information by TBS.
   fr: |
-    ## Protection des renseignements personnels
-    
+    # Protection des renseignements personnels
+
     Le gouvernement du Canada s'engage à protéger les renseignements personnels des visiteurs de ses sites Web. Le présent Avis de confidentialité résume la politique et les pratiques de protection des renseignements personnels dans l’InfoBase du GC, un site Web sous la responsabilité du {{ext_link "Secrétariat du Conseil du Trésor (SCT)" "https://www.canada.ca/en/treasury-board-secretariat.html"}}.
 
 

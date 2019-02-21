@@ -5,7 +5,7 @@ import { create_text_maker } from '../models/text.js';
 
 const text_maker = create_text_maker(privacy_text_bundle);
 
-export default class About extends React.Component {
+export default class PrivacyStatement extends React.Component {
   render(){
     return (
       <StandardRouteContainer

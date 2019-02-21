@@ -16,7 +16,7 @@ export default class About extends React.Component {
         //description={} TODO
         route_key="_about"
       >
-        <div className="medium_panel_text .text-only-page-root">
+        <div className="medium_panel_text text-only-page-root">
           <TextMaker text_maker_func={custom_tm} el="div" text_key="about_body_text" />
         </div>
       </StandardRouteContainer>
