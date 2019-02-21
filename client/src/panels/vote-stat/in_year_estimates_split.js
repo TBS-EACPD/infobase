@@ -79,15 +79,6 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
     });
 
 
-    // const static_bar_args = {
-    //   add_xaxis: true,
-    //   x_axis_line: true,
-    //   add_yaxis: false,
-    //   add_labels: true,
-    //   colors: infobase_colors(),
-    //   margin: {top: 20, right: 20, left: 20, bottom: 80},
-    //   formater: formats.compact1,
-    // };
     content = (
       <div className="keenansucks" style={{
         height: "450px",

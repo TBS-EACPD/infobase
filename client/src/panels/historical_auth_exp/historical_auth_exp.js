@@ -64,7 +64,6 @@ const render = function({calculations, footnotes, sources}) {
   const ticks = _.map(std_years, run_template);
   const {exp,auth,stacked} = graph_args;
   
-  
   const series_labels = (
     stacked ? 
     [text_maker("expenditures"),text_maker("unused_authorities" )] : 
@@ -116,8 +115,8 @@ const render = function({calculations, footnotes, sources}) {
       const value = d;
       const value2 = auth[i];
       let result = {};
-      result[keys[0]]=value;
-      result[keys[1]]=value2;
+      result[series_labels[0]]=value;
+      result[series_labels[1]]=value2;
       result["years"]=`${2013+i}-${14+i}`;
       return result;
     });
@@ -129,7 +128,7 @@ const render = function({calculations, footnotes, sources}) {
         {
           <ResponsiveBar
             data={dataExp}
-            keys={keys}
+            keys={series_labels}
             indexBy="years"
             margin={{
               "top": 50,
@@ -144,17 +143,15 @@ const render = function({calculations, footnotes, sources}) {
             axisRight={null}
             axisBottom={{
               "tickSize": 5,
-              "tickPadding": 5,
+              "tickPadding": 10,
               "tickRotation": -15,
-              "legendPosition": "middle",
-              "legendOffset": 32,
 
             }}
             axisLeft={
               {
                 "tickValues": 6,
-                "format": d => formats.compact1(d,{raw: true})}
-            }
+                "format": d => formats.compact1(d,{raw: true}),
+              }}
             label={null}
             labelSkipWidth={12}
             labelSkipHeight={12}
@@ -168,20 +165,11 @@ const render = function({calculations, footnotes, sources}) {
                 "dataFrom": "keys",
                 "direction": "row",
                 "anchor": "top",
-                "justify": false,
-                "itemsSpacing": 50,
+                "itemsSpacing": 90,
                 "itemWidth": 100,
                 "itemHeight": -55,
                 "itemOpacity": 0.75,
                 "symbolSize": 20,
-                "effects": [
-                  {
-                    "on": "hover",
-                    "style": {
-                      "itemOpacity": 1,
-                    },
-                  },
-                ],
               },
             ]}
           />}
