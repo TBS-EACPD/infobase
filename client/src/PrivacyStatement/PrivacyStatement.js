@@ -14,7 +14,7 @@ export default class About extends React.Component {
         //description={} TODO  
         route_key="_privacy"
       >
-        <div className="medium_panel_text">
+        <div className="medium_panel_text text-only-page-root">
           <TextMaker text_maker_func={text_maker} el="div" text_key="privacy_body_text" />
         </div>
       </StandardRouteContainer>
