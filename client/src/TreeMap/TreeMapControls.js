@@ -25,10 +25,10 @@ const all_years = [
 ];
 
 const all_year_changes = [
-  "pa_last_year_4:pa_last_year_5",
-  "pa_last_year_3:pa_last_year_4",
-  "pa_last_year_2:pa_last_year_3",
-  "pa_last_year:pa_last_year_2",
+  "pa_last_year_5:pa_last_year_4",
+  "pa_last_year_4:pa_last_year_3",
+  "pa_last_year_3:pa_last_year_2",
+  "pa_last_year_2:pa_last_year",
 ]
 
 const years = {
@@ -233,7 +233,7 @@ export class TreeMapControls extends React.Component {
           content={
             <div className="centerer">
               <RadioButtons
-                options={_.map(years[perspective], (id => ({ id: id, display: run_template("{{" + id.split(":")[1] + "}}") + " to " + run_template("{{" + id.split(":")[0] + "}}"), active: id === year })))}
+                options={_.map(years[perspective], (id => ({ id: id, display: run_template("{{" + id.split(":")[0] + "}}") + " to " + run_template("{{" + id.split(":")[1] + "}}"), active: id === year })))}
                 onChange={id => {
                   const new_path = `/treemap/${perspective}/spending/${id}`;
                   if (history.location.pathname !== new_path) {
