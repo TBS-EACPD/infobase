@@ -3,7 +3,7 @@ privacy_body_text:
   en: |
     ## Protection of personal information
 
-    The Government of Canada is committed to protecting the privacy of visitors on its websites. This Privacy Notice summarizes the privacy policy and practices on the GC InfoBase website, a website under the responsibility of the [Treasury Board Secretariat (TBS)](https://www.canada.ca/en/treasury-board-secretariat.html) (TBS).
+    The Government of Canada is committed to protecting the privacy of visitors on its websites. This Privacy Notice summarizes the privacy policy and practices on the GC InfoBase website, a website under the responsibility of the {{ext_link "Treasury Board Secretariat (TBS)" "https://www.canada.ca/en/treasury-board-secretariat.html"}}.
     
     ### Your Privacy and the Internet
     
@@ -13,7 +13,7 @@ privacy_body_text:
     
     In cases where services are provided by organizations outside of the Government of Canada, such as social media platforms, search or mobile applications, IP addresses may be recorded by the third-party service provider.
     
-    All personal information created, held or collected by the Government of Canada is protected under the federal _[Privacy Act](http://laws-lois.justice.gc.ca/eng/acts/P-21/index.html)_.Whenever collection is to occur, you will be advised of the purpose and authority for such collection. You will also be informed of the uses and disclosures of your personal information, any impacts for not providing your personal information, and how to exercise your right of access to, and correction of, that information. In such cases, how your personal information is handled is described in a Personal Information Bank.
+    All personal information created, held or collected by the Government of Canada is protected under the federal _{{ext_link "Privacy Act" "http://laws-lois.justice.gc.ca/eng/acts/P-21/index.html"}}_.Whenever collection is to occur, you will be advised of the purpose and authority for such collection. You will also be informed of the uses and disclosures of your personal information, any impacts for not providing your personal information, and how to exercise your right of access to, and correction of, that information. In such cases, how your personal information is handled is described in a Personal Information Bank.
     
     Visitors' personal information is not usually disclosed to anyone except those Government of Canada personnel who need the information to carry out their responsibilities. Any further disclosure of the personal information you provide would be in accordance with the federal _Privacy Act_.
 
@@ -24,7 +24,7 @@ privacy_body_text:
     
     Emails and other electronic methods used to communicate with the Government of Canada are not secure unless is specifically stated to be. Therefore, it is recommended that you **do not** send sensitive personal information, such as your Social Insurance Number or your date of birth, through any electronic means not clearly identified as secure.
     
-    Personal information from emails is collected pursuant to section 7 of the _Financial Administration Act_. Such information may be used for statistical, evaluation, and reporting purposes and is described in Personal Information Bank [Public Communications (PSU 914)](http://www.infosource.gc.ca/emp/emp03-eng.asp#psu914).
+    Personal information from emails is collected pursuant to section 7 of the _Financial Administration Act_. Such information may be used for statistical, evaluation, and reporting purposes and is described in Personal Information Bank {{ext_link "Public Communications (PSU 914)" "http://www.infosource.gc.ca/emp/emp03-eng.asp#psu914"}}.
 
 
     ### Third-Party Social Media
@@ -34,7 +34,7 @@ privacy_body_text:
 
     ### Improving your Experience on the GC InfoBase
     
-    **Digital Markers (including cookies)**
+    #### Digital Markers (including cookies)
     
     A digital marker is a resource created by the visitors' browser in order to remember certain pieces of information to be referenced by the Web server during the same or subsequent visits to the website. Examples of digital markers are "cookies" or HTML5 web storage. Some examples of what digital markers do are as follows:
       * they allow a website to recognize a visitor who has previously accessed the site;
@@ -45,7 +45,7 @@ privacy_body_text:
     You may adjust your browser settings to reject digital markers, including cookies, if you so choose. However, it may affect your ability to interact with the GC InfoBase website.
 
 
-    ### Web Analytics
+    #### Web Analytics
     
     Web analytics is the collection, analysis, measurement, and reporting of data about Web traffic and usage for the purposes of understanding the needs of users and optimizing for their experience. Information in digital markers may be used in conjunction with the details of requests made by your browser to the GC InfoBase’s servers to classify and track your online interactions with the GC InfoBase website.
     
@@ -56,9 +56,9 @@ privacy_body_text:
       * the page(s) visited
       * referral website
     
-    If you wish, you may opt out of being tracked by Google Analytics by using the [Google Analytics Opt-Out Browser Add-On](https://tools.google.com/dlpage/gaoptout?hl=en). Disabling Google Analytics will still permit you to access our website.
+    If you wish, you may opt out of being tracked by Google Analytics by using the {{ext_link "Google Analytics Opt-Out Browser Add-On" "https://tools.google.com/dlpage/gaoptout?hl=en"}}. Disabling Google Analytics will still permit you to access our website.
     
-    Data collected for Web analytics purposes goes outside of Canada to Google servers and may be processed in any country where Google operates servers. Data may be subject to the governing legislation of that country, [for example the USA Patriot Act]. For further information about Google Analytics, please refer to the [Google Analytics terms of service](https://www.google.com/policies/privacy/partners/).
+    Data collected for Web analytics purposes goes outside of Canada to Google servers and may be processed in any country where Google operates servers. Data may be subject to the governing legislation of that country, for example the _USA Patriot Act_ For further information about Google Analytics, please refer to the {{ext_link "Google Analytics terms of service" "https://www.google.com/policies/privacy/partners/"}}.
     
     Information used for the purpose of Web analytics is collected pursuant to section 7 of the _Financial Administration Act_. Such data may be used for communications and information technology statistical purposes, audit, and evaluation, research, planning and reporting. For more information on how your privacy is safeguarded in relation to web analytics, see the _Standard on Privacy and Web Analytics_.
     
@@ -76,7 +76,7 @@ privacy_body_text:
     
     In most circumstances, this is anonymous statistical data and no attempt is made to link this data, nor the IP addresses of the computers that have contacted our website, with the identity of individuals visiting our site unless an attempt to damage the site has been detected. The programs are never used to gather specific personal information such as your name, your phone number or your email address.
     
-    When a threat to the GC InfoBase site or computer systems of the Government of Canada is detected, information is collected pursuant to [section 161 of the Financial Administration Act](http://laws-lois.justice.gc.ca/eng/acts/F-11/page-70.html#s-161). The information may be shared with appropriate law enforcement authorities if suspected criminal activities are detected. Such information may be used for network security related statistical purposes, audit, evaluation, research, planning and reporting and is described in Personal Information Bank [Security Incidents (PSU 939)](http://www.infosource.gc.ca/emp/emp03-eng.asp#psu939).
+    When a threat to the GC InfoBase site or computer systems of the Government of Canada is detected, information is collected pursuant to {{ext_link "section 161 of the Financial Administration Act" "http://laws-lois.justice.gc.ca/eng/acts/F-11/page-70.html#s-161"}}. The information may be shared with appropriate law enforcement authorities if suspected criminal activities are detected. Such information may be used for network security related statistical purposes, audit, evaluation, research, planning and reporting and is described in Personal Information Bank {{ext_link "Security Incidents (PSU 939)" "http://www.infosource.gc.ca/emp/emp03-eng.asp#psu939"}}.
     
     
     ### Inquiring about these Practices
@@ -85,7 +85,7 @@ privacy_body_text:
   fr: |
     ## Protection des renseignements personnels
     
-    Le gouvernement du Canada s'engage à protéger les renseignements personnels des visiteurs de ses sites Web. Le présent Avis de confidentialité résume la politique et les pratiques de protection des renseignements personnels dans l’InfoBase du GC, un site Web sous la responsabilité du [Secrétariat du Conseil du Trésor (SCT)] (https://www.canada.ca/en/treasury-board-secretariat.html) (SCT).
+    Le gouvernement du Canada s'engage à protéger les renseignements personnels des visiteurs de ses sites Web. Le présent Avis de confidentialité résume la politique et les pratiques de protection des renseignements personnels dans l’InfoBase du GC, un site Web sous la responsabilité du {{ext_link "Secrétariat du Conseil du Trésor (SCT)" "https://www.canada.ca/en/treasury-board-secretariat.html"}}.
 
 
     #### Vos renseignements personnels et Internet
@@ -96,7 +96,7 @@ privacy_body_text:
 
     Dans les cas où les services sont fournis par des organisations de l'extérieur du gouvernement du Canada, comme les plateformes de médias sociaux, les applications de recherche ou les applications mobiles, les adresses IP peuvent être enregistrées par le tiers fournisseur de services.
 
-    Tous les renseignements personnels créés, conservés ou recueillis par le gouvernement du Canada sont protégés en vertu de la _[Loi sur la protection des renseignements personnels](http://laws-lois.justice.gc.ca/eng/acts/P-21/index.html)_. Chaque fois qu'une collecte doit avoir lieu, vous serez informé de son objet et de l'autorisation connexe. Vous serez également informé de toute utilisation ou toute divulgation de vos renseignements personnels, des conséquences d’une non-divulgation et de la façon d'exercer votre droit d'accès à ces renseignements et de les corriger. Le cas échéant, le traitement de vos renseignements personnels est décrit dans un fichier de données personnelles.
+    Tous les renseignements personnels créés, conservés ou recueillis par le gouvernement du Canada sont protégés en vertu de la _{{ext_link "Loi sur la protection des renseignements personnels" "http://laws-lois.justice.gc.ca/eng/acts/P-21/index.html"}}_. Chaque fois qu'une collecte doit avoir lieu, vous serez informé de son objet et de l'autorisation connexe. Vous serez également informé de toute utilisation ou toute divulgation de vos renseignements personnels, des conséquences d’une non-divulgation et de la façon d'exercer votre droit d'accès à ces renseignements et de les corriger. Le cas échéant, le traitement de vos renseignements personnels est décrit dans un fichier de données personnelles.
 
     Les renseignements personnels des visiteurs ne sont habituellement divulgués à personne, sauf aux fonctionnaires fédéraux qui en ont besoin pour s'acquitter de leurs responsabilités. Si vous divulguez d'autres renseignements de cette nature, vous le ferez conformément à la _Loi sur la protection des renseignements personnels_.
     
@@ -107,7 +107,7 @@ privacy_body_text:
 
     Les courriels et autres moyens électroniques utilisés pour communiquer avec le gouvernement du Canada ne sont pas sécurisés, sauf indication contraire. Par conséquent, il est recommandé de **ne pas** envoyer de renseignements personnels de nature délicate, comme votre numéro d'assurance sociale ou votre date de naissance, par tout moyen électronique non clairement identifié comme étant sécuritaire.
 
-    Les renseignements personnels provenant des courriels sont recueillis conformément à l'article 7 de la _Loi sur la gestion des finances publiques_. Ces renseignements, qui peuvent servir à des fins statistiques, redditionnelles et d'évaluation, sont décrits dans le fichier de données personnelles. [Communications publiques (POU 914)](http://www.infosource.gc.ca/emp/emp03-eng.asp#psu914).
+    Les renseignements personnels provenant des courriels sont recueillis conformément à l'article 7 de la _Loi sur la gestion des finances publiques_. Ces renseignements, qui peuvent servir à des fins statistiques, redditionnelles et d'évaluation, sont décrits dans le fichier de données personnelles. {{ext_link "Communications publiques (POU 914)" "http://www.infosource.gc.ca/emp/emp03-eng.asp#psu914"}}.
 
 
     #### Les médias sociaux tiers
@@ -115,9 +115,9 @@ privacy_body_text:
     L'utilisation des médias sociaux par le gouvernement du Canada est un prolongement de sa présence sur le Web. Les comptes de médias sociaux sont publics et ne sont pas hébergés sur les serveurs du gouvernement du Canada. Les utilisateurs qui choisissent d'interagir avec le gouvernement du Canada par le biais des médias sociaux, y compris l'InfoBase du GC, devraient prendre connaissance des conditions de service et des politiques de confidentialité de ces tiers fournisseurs et des applications utilisées pour y accéder.
     
 
-    ###Améliorer votre expérience sur l'InfoBase du GC
+    ### Améliorer votre expérience sur l'InfoBase du GC
     
-    **Marqueurs numériques (y compris les cookies)**.
+    #### Marqueurs numériques (y compris les cookies)
     
     Un marqueur numérique est une ressource créée par le navigateur du visiteur afin de mémoriser certains éléments d'information qui seront référencés par le serveur Web lors de la même visite ou de visites ultérieures sur le site. Des exemples de marqueurs numériques sont les « cookies » ou le stockage Web HTML5. Voici quelques exemples de ce que font les marqueurs numériques :
       * ils permettent à un site Web de reconnaître un visiteur qui a déjà accédé au site;
@@ -139,11 +139,11 @@ privacy_body_text:
       * les pages visitées
       * le site Web de référence
     
-    Si vous le souhaitez, vous pouvez choisir de ne pas être suivi par _Google Analytics_ en utilisant le _[Google Analytics Opt-Out Browser Add-On](https://tools.google.com/dlpage/gaoptout?hl=fr)_. Désactiver _Google Analytics_ vous permettra toujours d'accéder à notre site Web.
+    Si vous le souhaitez, vous pouvez choisir de ne pas être suivi par _Google Analytics_ en utilisant le _{{ext_link "Google Analytics Opt-Out Browser Add-On" "https://tools.google.com/dlpage/gaoptout?hl=fr"}}_. Désactiver _Google Analytics_ vous permettra toujours d'accéder à notre site Web.
     
-    Les données recueillies à des fins d'analyse Web sont transmises à des serveurs Google à l'extérieur du Canada et peuvent être traitées dans tout pays où Google exploite des serveurs. Les données peuvent être soumises aux lois en vigueur dans ce pays, par exemple le _USA Patriot Act_. Pour obtenir de plus amples renseignements sur _Google Analytics_, consultez les [Conditions générales de service de Google Analytics] (https://www.google.com/policies/privacy/partners/).
+    Les données recueillies à des fins d'analyse Web sont transmises à des serveurs Google à l'extérieur du Canada et peuvent être traitées dans tout pays où Google exploite des serveurs. Les données peuvent être soumises aux lois en vigueur dans ce pays, par exemple le _USA Patriot Act_. Pour obtenir de plus amples renseignements sur _Google Analytics_ , consultez les {{ext_link "Conditions générales de service de Google Analytics" "https://www.google.com/policies/privacy/partners/"}}.
 
-    Les renseignements utilisés aux fins de l'analyse Web sont recueillis conformément à l'article 7 de la _Loi sur la gestion des finances publiques_. Ces données peuvent être utilisées à des fins statistiques, d’audit, d'évaluation, de recherche, de planification et de production des rapports dans le domaine des communications et des technologies de l'information. Pour plus d’information sur la façon dont vos renseignements personnels sont protégés par rapport à l'analyse Web, consultez la _Norme sur la vie privée et le Web analytique _.
+    Les renseignements utilisés aux fins de l'analyse Web sont recueillis conformément à l'article 7 de la _Loi sur la gestion des finances publiques_. Ces données peuvent être utilisées à des fins statistiques, d’audit, d'évaluation, de recherche, de planification et de production des rapports dans le domaine des communications et des technologies de l'information. Pour plus d’information sur la façon dont vos renseignements personnels sont protégés par rapport à l'analyse Web, consultez la _Norme sur la vie privée et le Web analytique_.
     
 
     ### Protéger la sécurité des sites Web du gouvernement du Canada
@@ -159,7 +159,7 @@ privacy_body_text:
     
     Dans la plupart des cas, il s'agit de données statistiques anonymes et aucune tentative n'est faite pour établir un lien entre ces données ou les adresses IP des ordinateurs qui ont contacté notre site Web, et l'identité des visiteurs sur notre site, sauf lorsqu’on a détecté une tentative d'endommager le site. Les programmes ne sont jamais utilisés pour recueillir des renseignements personnels tels que votre nom, votre numéro de téléphone ou votre adresse électronique.
     
-    Lorsqu'une menace est constatée dans le site de l’InfoBase du GC ou les systèmes informatiques du gouvernement du Canada, les renseignements sont recueillis conformément à _[l'article 161 de la Loi sur la gestion des finances publiques](http://laws-lois.justice.gc.ca/eng/acts/F-11/page-70.html#s-161)_. L’information peut être communiquée aux autorités policières compétentes lorsque des activités criminelles suspectes sont constatées. Ces renseignements peuvent être utilisés à des fins statistiques, de vérification, d'évaluation, de recherche, de planification et de production de rapports liés à la sécurité du réseau et sont décrits dans le fichier de données personnelles [Incidents de sécurité (POU 939)](http://www.infosource.gc.ca/emp/emp03-eng.asp#psu939).
+    Lorsqu'une menace est constatée dans le site de l’InfoBase du GC ou les systèmes informatiques du gouvernement du Canada, les renseignements sont recueillis conformément à _{{ext_link "l'article 161 de la Loi sur la gestion des finances publiques" "http://laws-lois.justice.gc.ca/eng/acts/F-11/page-70.html#s-161"}}_. L’information peut être communiquée aux autorités policières compétentes lorsque des activités criminelles suspectes sont constatées. Ces renseignements peuvent être utilisés à des fins statistiques, de vérification, d'évaluation, de recherche, de planification et de production de rapports liés à la sécurité du réseau et sont décrits dans le fichier de données personnelles {{ext_link "Incidents de sécurité (POU 939)" "http://www.infosource.gc.ca/emp/emp03-eng.asp#psu939"}}.
     
 
     #### Enquêter sur ces pratiques
