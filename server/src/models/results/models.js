@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import mongoose from "mongoose";
-const { Schema } = mongoose;
 
 import { 
   str_type, 
@@ -22,7 +21,7 @@ export default function(model_singleton){
     result_id: pkey_type(),
     subject_id: parent_fkey_type(),
     doc: str_type,
-    ...bilingual('name',str_type),
+    ...bilingual('name', str_type),
   });
 
 
@@ -31,15 +30,14 @@ export default function(model_singleton){
     indicator_id: pkey_type(),
     result_id: parent_fkey_type(),
     ...bilingual_str("name"),
-    target_year: { type: Number },
-    target_month: { type: Number },
+    target_year: {type: Number},
+    target_month: {type: Number},
     ...bilingual_str("explanation"),
     target_type: str_type,
     target_min: {type: Number},
     target_max: {type: Number},
     ...bilingual_str("target_narrative"),
     doc: str_type,
-    // actual_datatype","actual_result_en","actual_result_fr","status_key","status_period","methodology_en","methodology_fr","measure_en","measure_fr"
     actual_datatype: str_type,
     ...bilingual_str("actual_result"),
     status_key: str_type,
@@ -48,11 +46,7 @@ export default function(model_singleton){
     ...bilingual_str("measure"),
   });
 
-  "id",
-  "parent_id",
-  "name_en",
-  "name_fr",
-  "description_en","description_fr","planned_spend_pa_last_year","spend_pa_last_year","drr_spend_expl_en","drr_spend_expl_fr","planned_fte_pa_last_year","fte_pa_last_year","drr_fte_expl_en","drr_fte_expl_fr"
+  //"id","parent_id","name_en","name_fr","description_en","description_fr","planned_spend_pa_last_year","spend_pa_last_year","drr_spend_expl_en","drr_spend_expl_fr","planned_fte_pa_last_year","fte_pa_last_year","drr_fte_expl_en","drr_fte_expl_fr"
   const SubProgramSchema = mongoose.Schema({
     sub_program_id: pkey_type(),
     parent_id: parent_fkey_type(),
@@ -72,10 +66,10 @@ export default function(model_singleton){
     result_id: parent_fkey_type(),
   });
 
-  model_singleton.define_model("SubProgram",SubProgramSchema);
-  model_singleton.define_model("Result",ResultSchema);
-  model_singleton.define_model("Indicator",IndicatorSchema);
-  model_singleton.define_model("PIDRLink",PIDRLinkSchema);
+  model_singleton.define_model("SubProgram", SubProgramSchema);
+  model_singleton.define_model("Result", ResultSchema);
+  model_singleton.define_model("Indicator", IndicatorSchema);
+  model_singleton.define_model("PIDRLink", PIDRLinkSchema);
 
   const { SubProgram, Result, Indicator, PIDRLink } = model_singleton.models;
   const result_by_subj_loader = create_resource_by_foreignkey_attr_dataloader(Result,'subject_id');

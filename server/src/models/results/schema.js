@@ -176,10 +176,10 @@ export default function({models,loaders}){
     ]);
 
     return await get_target_counts(
-      [ 
+      _.uniq([ 
         ..._.map(crsos, 'crso_id'), 
         ..._.map(progs, 'program_id'),
-      ],
+      ]),
       doc
     );
   }
