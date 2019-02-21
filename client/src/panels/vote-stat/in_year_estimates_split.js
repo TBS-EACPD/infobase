@@ -79,15 +79,6 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
     });
 
 
-    // const static_bar_args = {
-    //   add_xaxis: true,
-    //   x_axis_line: true,
-    //   add_yaxis: false,
-    //   add_labels: true,
-    //   colors: infobase_colors(),
-    //   margin: {top: 20, right: 20, left: 20, bottom: 80},
-    //   formater: formats.compact1,
-    // };
     content = (
       <div className="keenansucks" style={{
         height: "450px",
@@ -99,7 +90,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
           margin={{
             "top": 50,
             "right": 55,
-            "bottom": 80,
+            "bottom": 120,
             "left": 40,
           }}
           labelFormat={d => <tspan y={ -4 }> {formats.compact1(d, {raw: true})} </tspan>}
@@ -107,14 +98,16 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
           colors="paired"
           borderColor="inherit:darker(1.6)"
           axisBottom={{
+            "format" : d => `${(_.words(d).length>3)? d.substring(0,20)+'...':d}`,
             "tickSize": 3,
-            "tickRotation": -30,
+            "tickRotation": -45,
+            "tickPadding": 10
           }}
           axisLeft={null}
           labelTextColor="inherit:darker(1.6)"
           motionStiffness={90}
           motionDamping={50}    
-          tooltipFormat={d=> `\n$${formats.big_int_real(d, {raw: true})}`}          
+          isInteractive={false}
         />
       </div>
     );

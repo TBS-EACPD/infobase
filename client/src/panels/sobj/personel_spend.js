@@ -94,11 +94,10 @@ new PanelGraph({
             "format": d => formats.compact1(d,{raw: true}),
             "tickValues": 5,
           }}
+          axisBottom={{ "tickPadding": 10 }}
           dotSize={10}
-          dotColor="inherit:darker(0.3)"
           enableDotLabel={false}
           dotLabel="y"
-          dotLabelYOffset={-12}
           animate={true}
           colors={d3.schemeCategory10}
           motionStiffness={90}

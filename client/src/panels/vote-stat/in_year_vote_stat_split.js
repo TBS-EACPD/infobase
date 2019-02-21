@@ -9,12 +9,18 @@ import {
 
 const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,footnotes,sources}) => {
   const { 
+    graph_args,
     info,
   } = calculations;
 
   let stat = calculations.info.gov_stat_est_in_year;
   let vote = calculations.info.gov_voted_est_in_year;
-  let keys = ["Statutory\nItem", "Voted"];
+  let keys = graph_args.map(d =>{
+    let ar = [];
+    ar.push(d.label);
+    return ar;
+  })
+
   let dataVoteStat = keys.map((d, i) =>{
     const label = d;
     const value = (i? vote: stat);
@@ -65,9 +71,7 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
                   "translateX": 50,
                   "itemWidth": 150,
                   "itemHeight": 25,
-                  "itemTextColor": "#999",
                   "symbolSize": 20,
-                  "font-size": 30,
                   "symbolShape": "circle",
                 }
               ]}
@@ -78,9 +82,6 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
     </StdPanel>
   );
 };
-
-
-
 
 new PanelGraph({
   level: "dept",

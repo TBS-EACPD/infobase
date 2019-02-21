@@ -7,7 +7,6 @@ import {
 } from './gnc_text_provider.js';
 import {
   formats,
-  dollar_formats,
   run_template,
   PanelGraph,
   years,
@@ -22,7 +21,6 @@ const { std_years } = years;
 const { Format } = util_components;
 
 const { 
-  Line,
   GraphLegend,
   A11YTable,
 } = declarative_charts;
@@ -183,14 +181,13 @@ class HistTPTypes extends React.Component {
         label_col_header={text_maker("transfer_payment_type")}
       />;
     } else {
-
       let expData = _.map(filtered_series, function(value, key ){
-        const id = _.replace(key,/ /g,'\n');
+        let years=_.map(std_years,run_template)
+        const id = key;
         let data = value.map((d,i) =>{
-          const date = `${2013+i}-${14+i}`;
           let result = {};
           result ["y"] = d;
-          result["x"]=date;
+          result["x"]=years[i];
           return result;
         });
         let result ={};
@@ -212,12 +209,12 @@ class HistTPTypes extends React.Component {
             yScale={{
               "type": "linear",
               "stacked": true,
-              "min": "0",
             }}
             axisLeft={{
               "format": d => formats.compact1(d,{raw: true}),
               "tickValues": 5,
             }}
+            axisBottom={{ "tickPadding": 10 }}
             axisTop={null}
             axisRight={null}
             dotSize={10}
