@@ -2,7 +2,7 @@ import './igoc_explorer.scss';
 import { StandardRouteContainer } from '../core/NavComponents.js';
 import { createSelector } from 'reselect';
 
-//treemap stuff
+//drilldown stuff
 import { combineReducers, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import { create_igoc_hierarchy } from './hierarchies.js';

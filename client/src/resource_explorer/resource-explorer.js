@@ -11,7 +11,7 @@ import classNames from 'classnames';
 
 const { Tag } = Subject;
 
-//treemap stuff
+//drilldown stuff
 import { combineReducers, createStore } from 'redux';
 
 import { Provider, connect } from 'react-redux';

@@ -1,4 +1,4 @@
-import text from "./result_treemap.yaml";
+import text from "./result_drilldown.yaml";
 import {
   create_text_maker_component,
 } from '../shared.js';

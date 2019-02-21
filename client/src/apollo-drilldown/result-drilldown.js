@@ -30,7 +30,7 @@ fragment result_info on RppEntity {
 
 
 const query = gql`
-query ResultTreemapQuery($dept_code: String!, $doc:String!, $lang: String!){
+query ResultdrilldownQuery($dept_code: String!, $doc:String!, $lang: String!){
   root(lang: $lang){
     org(dept_code: $dept_code){
       programs {
@@ -142,7 +142,7 @@ const get_type_header = node => {
 };
 
 
-class ResultTreeMapContainer extends React.Component {
+class ResultdrilldownContainer extends React.Component {
   render(){
     const { 
       data,
@@ -177,16 +177,16 @@ const Component = ({ gql_props: {variables } }) => {
     query,
     variables: ({doc: "drr17", ...variables}),
     data_to_props,
-    Component: ResultTreeMapContainer,
+    Component: ResultdrilldownContainer,
   });
   return <Comp />;
 }
 
 
 export const panel_def = {
-  key: "result_treemap",
+  key: "result_drilldown",
   query: query,
-  component: ResultTreeMapContainer,
+  component: ResultdrilldownContainer,
   data_to_props, //we don't use the data at this layer, we just take advantage of the side-effect for cache to be pre-loaded
   vars: {
     doc: "drr17",

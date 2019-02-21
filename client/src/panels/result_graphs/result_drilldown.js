@@ -14,7 +14,7 @@ import { StatusIconTable, InlineStatusIconList } from './components.js';
 
 const { SpinnerWrapper, Format, TextAbbrev } = util_components;
 
-//treemap stuff
+//drilldown stuff
 import { combineReducers, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import { get_root } from '../../gen_expl/hierarchy_tools.js';
@@ -455,7 +455,7 @@ _.each(['program','dept','crso'], lvl => {
       } = calculations;
 
       return (
-        <Panel title={text_maker("result_treemap_title", { has_dp_data, has_drr_data})}>
+        <Panel title={text_maker("result_drilldown_title", { has_dp_data, has_drr_data})}>
           <SingleSubjResultsContainer
             {...{
               subject,
