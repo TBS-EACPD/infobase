@@ -252,7 +252,7 @@ const load_results_counts_query = gql`
 query($lang: String!, $doc: String) {
   root(lang: $lang) {
     orgs{
-      id
+      dept_code
       target_counts(doc: $doc) {
         results
         dp
@@ -275,28 +275,100 @@ export function api_load_results_counts(){
       client.query({ query: load_results_counts_query, variables: {lang: window.lang, doc: "drr17"} }),
       client.query({ query: load_results_counts_query, variables: {lang: window.lang, doc: "dp18"} }),
     ])
-      .then(function([drr17_counts, dp18_counts]){
-        const resp_time = Date.now() - time_at_request
+      .then(function([drr17_resp, dp18_resp]){
+        const resp_time = Date.now() - time_at_request;
 
+        const drr17_counts_by_dept = drr17_resp && _.chain(drr17_resp.data.root.orgs)
+          .filter( data => !_.isNull(data.target_counts) )
+          .map(
+            ({
+              dept_code, 
+              target_counts,
+            }) => ({
+              id: dept_code,
+              level: "dept",
+              drr17_results: target_counts.results,
+              ..._.chain(target_counts)
+                .omit(["__typename", "results", "dp"])
+                .mapKeys( (value, key) => `drr17_indicators_${key}` )
+                .value(),
+              drr17_past_total: _.chain(target_counts)
+                .omit(["__typename", "results", "dp", "future"])
+                .reduce( (memo, count) => memo + count, 0 )
+                .value(),
+              drr17_future_total: target_counts.future,
+              drr17_total: _.chain(target_counts)
+                .omit(["__typename", "results", "dp"])
+                .reduce( (memo, count) => memo + count, 0 )
+                .value(),
+            })
+          )
+          .value();
 
-        //if(_.get(data, "data.root.org.name") == window._DEV_HELPERS.Subject.Dept.lookup(1).applied_title){
-        //  log_standard_event({
-        //    SUBAPP: window.location.hash.replace('#',''),
-        //    MISC1: "API_QUERY_SUCCESS",
-        //    MISC2: `Results counts, took ${resp_time} ms`,
-        //  });
-        //} else {
-        //  log_standard_event({
-        //    SUBAPP: window.location.hash.replace('#',''),
-        //    MISC1: "API_QUERY_UNEXPECTED",
-        //    MISC2: `Results counts, took ${resp_time} ms - ${JSON.stringify(data.data)}`,
-        //  });  
-        //}
+        const dp18_counts_by_dept = dp18_resp && _.chain(dp18_resp.data.root.orgs)
+          .filter( data => !_.isNull(data.target_counts) )
+          .map(
+            ({
+              dept_code, 
+              target_counts: {
+                results,
+                dp,
+              },
+            }) => ({
+              id: dept_code,
+              level: "dept",
+              dp18_results: results,
+              dp18_indicators: dp,
+            })
+          )
+          .value();
+
+        if( !_.isEmpty(drr17_counts_by_dept) && !_.isEmpty(dp18_counts_by_dept) ){
+          // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
+          log_standard_event({
+            SUBAPP: window.location.hash.replace('#',''),
+            MISC1: "API_QUERY_SUCCESS",
+            MISC2: `Results counts, took ${resp_time} ms`,
+          });
+        } else {
+          log_standard_event({
+            SUBAPP: window.location.hash.replace('#',''),
+            MISC1: "API_QUERY_UNEXPECTED",
+            MISC2: `Results counts, took ${resp_time} ms`,
+          });  
+        }
         
-      
+        const rows = _.chain([...drr17_counts_by_dept, ...dp18_counts_by_dept])
+          .groupBy("id")
+          .map( dept_data => _.merge(...dept_data) )
+          .thru(all_dept_rows => [
+            ...all_dept_rows,
+            {
+              id: "total",
+              level: "all",
+              ..._.reduce(
+                all_dept_rows,
+                (memo, row) => _.mapValues(
+                  memo,
+                  (memo_value, key) => memo_value + row[key]
+                ),
+                _.chain({
+                  ...drr17_counts_by_dept[0], 
+                  ...dp18_counts_by_dept[0],
+                })
+                  .omit(["id", "level"])
+                  .mapValues( () => 0 )
+                  .value()
+              ),
+            },
+          ])
+          .value();
+
+        ResultCounts.set_data(rows); 
+        api_is_results_count_loaded = true;
       })
       .catch(function(error){
-        const resp_time = Date.now() - time_at_request      
+        const resp_time = Date.now() - time_at_request;     
         log_standard_event({
           SUBAPP: window.location.hash.replace('#',''),
           MISC1: "API_QUERY_FAILURE",
