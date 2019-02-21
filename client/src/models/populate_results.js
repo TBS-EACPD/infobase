@@ -156,12 +156,12 @@ function populate_results_info(data){
 
 let _api_loaded_dept_or_tag_codes = {};
 const results_fragment = (doc) => `
-results {
+results(doc: ${doc}) {
   id
   parent_id
   name
   doc
-  indicators(doc: ${doc}) {
+  indicators {
     id
     result_id
     name
@@ -185,33 +185,77 @@ results {
   }
 }
 `;
-const common_load_results_bundle_fragment = `
+const common_crso_load_results_bundle_fragment = `
 dept_code
-  crsos {
-    id
-    drr17_results: ${results_fragment('"drr17"')}
-    dp18_results: ${results_fragment('"dp18"')}
-  }
-  programs {
-    id
-    drr17_results: ${results_fragment('"drr17"')}
-    dp18_results: ${results_fragment('"dp18"')}
-  }
-`
-const all_load_results_bundle_query = gql`
+crsos {
+  id
+  drr17_results: ${results_fragment('"drr17"')}
+  dp18_results: ${results_fragment('"dp18"')}
+}
+`;
+const all_crso_load_results_bundle_query = gql`
 query($lang: String!) {
   root(lang: $lang) {
     orgs {
-      ${common_load_results_bundle_fragment}
+      ${common_crso_load_results_bundle_fragment}
     }
   }
 }
 `;
-const dept_load_results_bundle_query = gql`
+const dept_crso_load_results_bundle_query = gql`
 query($lang: String!, $dept_code: String) {
   root(lang: $lang) {
     org(dept_code: $dept_code) {
-      ${common_load_results_bundle_fragment}
+      ${common_crso_load_results_bundle_fragment}
+    }
+  }
+}
+`;
+const common_program_load_results_bundle_fragment = `
+programs {
+  id
+  drr17_results: ${results_fragment('"drr17"')}
+  dp18_results: ${results_fragment('"dp18"')}
+  sub_programs {
+    id
+    drr17_results: ${results_fragment('"drr17"')}
+    name
+    description
+    drr_fte_expl
+    drr_spend_expl
+    dp_fte_trend_expl
+    dp_spend_trend_expl
+    dp_no_fte_expl
+    dp_no_spending_expl
+    sub_programs {
+      id
+      drr17_results: ${results_fragment('"drr17"')}
+      name
+      description
+      drr_fte_expl
+      drr_spend_expl
+      dp_fte_trend_expl
+      dp_spend_trend_expl
+      dp_no_fte_expl
+      dp_no_spending_expl
+    }
+  }
+}
+`;
+const all_program_load_results_bundle_query = gql`
+query($lang: String!) {
+  root(lang: $lang) {
+    orgs {
+      ${common_program_load_results_bundle_fragment}
+    }
+  }
+}
+`;
+const dept_program_load_results_bundle_query = gql`
+query($lang: String!, $dept_code: String) {
+  root(lang: $lang) {
+    org(dept_code: $dept_code) {
+      ${common_program_load_results_bundle_fragment}
     }
   }
 }
@@ -240,22 +284,34 @@ export function api_load_results_bundle(subject){
   }
 
   const client = get_client();
-  return client.query({ 
-    query: subject_code === 'all' ?
-      all_load_results_bundle_query :
-      dept_load_results_bundle_query, 
-    variables: {
-      lang: window.lang, 
-      dept_code: subject_code,
-    },
-  })
+  return Promise.all([
+    client.query({ 
+      query: subject_code === 'all' ?
+        all_crso_load_results_bundle_query :
+        dept_crso_load_results_bundle_query, 
+      variables: {
+        lang: window.lang, 
+        dept_code: subject_code,
+      },
+    }),
+    client.query({ 
+      query: subject_code === 'all' ?
+        all_program_load_results_bundle_query :
+        dept_program_load_results_bundle_query, 
+      variables: {
+        lang: window.lang, 
+        dept_code: subject_code,
+      },
+    }),
+  ])
     .then( (response) => {
       api_populate_results_info(response);
       _api_loaded_dept_or_tag_codes[subject_code] = true;
     });
 }
 
-function api_populate_results_info(response){
+function api_populate_results_info([crso_response, program_response]){
+  debugger
   //todo
 }
 

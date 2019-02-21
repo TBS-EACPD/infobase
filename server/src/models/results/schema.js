@@ -195,7 +195,7 @@ export default function({models,loaders}){
       .value();
 
     const sub_programs = await sub_program_loader.loadMany(cr_or_program_ids);
-    const sub_subs = await sub_program_loader.loadMany(flatmap_to_attr(sub_programs, 'sub_program_id'));
+    const sub_subs = await sub_program_loader.loadMany( flatmap_to_attr(sub_programs, 'sub_program_id') );
     
     const results = await result_by_subj_loader.loadMany([
       ...cr_or_program_ids,
@@ -203,7 +203,7 @@ export default function({models,loaders}){
       ...flatmap_to_attr(sub_subs, 'sub_program_id'),
     ]);
 
-    const all_indicators = await indicator_by_result_loader.loadMany(flatmap_to_attr(results,'result_id'))
+    const all_indicators = await indicator_by_result_loader.loadMany( flatmap_to_attr(results, 'result_id') );
 
     const doc_indicators = _.chain(all_indicators)
       .flatten()
@@ -225,7 +225,7 @@ export default function({models,loaders}){
     } else if (subject instanceof SubProgram){
       id_val = subject.sub_program_id;
     } else {
-      throw "bad subject"
+      throw "bad subject";
     }
     let records = await result_by_subj_loader.load(id_val);
 
