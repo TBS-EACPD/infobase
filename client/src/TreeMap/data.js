@@ -497,19 +497,18 @@ export function get_data(perspective, org_id, year, filter_var) {
         }
       ))
       .value();
-    const asdf_root = {
+    const root = {
       name: "Government",
       children: data,
       amount: _.sumBy(data, "amount"),
     };
-    prep_nodes(asdf_root, perspective);
-    asdf_root.children = group_smallest(
-      asdf_root.children,
+    prep_nodes(root, perspective);
+    root.children = group_smallest(
+      root.children,
       children => ({ name: smaller_items_text, children }),
       true,
       0.005,
     );
-    debugger;
-    return asdf_root;
+    return root;
   }
 }
