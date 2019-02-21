@@ -70,7 +70,7 @@ export class FlatTreeMapViz extends React.Component {
       .tile(d3.treemapSquarify.ratio(1))
 
     treemap(root
-      .sum(d => _.isEmpty(d.children) ? d.size : 0) // ternary to avoid double counting
+      .sum(d => _.isEmpty(d.children) ? d.ftes : 0) // ternary to avoid double counting
       .sort((a, b) => {
         return b.value - a.value || b.height - a.height
       })
@@ -157,6 +157,7 @@ export class FlatTreeMapViz extends React.Component {
         .html(`
           Name: ${d.data.name} <br/>
           Amount: ${d.data.amount} <br/>
+          FTEs: ${d.data.ftes} <br/>
           Total indicators: ${d.data.drr17_total} <br/>
           Indicators met: ${d.data.drr17_met}
           `)

@@ -10,17 +10,32 @@ const { CRSO } = Subject;
 const tm = create_text_maker();
 
 
-function header_col(year) {
+function header_col(perspective, year) {
   if (!year) { return -1 }; // error, but this should never happen
-  switch (year) {
-    case "pa_last_year_5": return "{{pa_last_year_5}}exp";
-    case "pa_last_year_4": return "{{pa_last_year_4}}exp";
-    case "pa_last_year_3": return "{{pa_last_year_3}}exp";
-    case "pa_last_year_2": return "{{pa_last_year_2}}exp";
-    case "pa_last_year": return "{{pa_last_year}}exp";
-    case "planning_year_1": return "{{planning_year_1}}";
-    case "planning_year_2": return "{{planning_year_2}}";
-    case "planning_year_3": return "{{planning_year_3}}";
+  if (perspective === "amount") {
+    switch (year) {
+      case "pa_last_year_5": return "{{pa_last_year_5}}exp";
+      case "pa_last_year_4": return "{{pa_last_year_4}}exp";
+      case "pa_last_year_3": return "{{pa_last_year_3}}exp";
+      case "pa_last_year_2": return "{{pa_last_year_2}}exp";
+      case "pa_last_year": return "{{pa_last_year}}exp";
+      case "planning_year_1": return "{{planning_year_1}}";
+      case "planning_year_2": return "{{planning_year_2}}";
+      case "planning_year_3": return "{{planning_year_3}}";
+    }
+  } else if (perspective === "ftes") {
+    switch (year) {
+      case "pa_last_year_5": return "{{pa_last_year_5}}";
+      case "pa_last_year_4": return "{{pa_last_year_4}}";
+      case "pa_last_year_3": return "{{pa_last_year_3}}";
+      case "pa_last_year_2": return "{{pa_last_year_2}}";
+      case "pa_last_year": return "{{pa_last_year}}";
+      case "planning_year_1": return "{{planning_year_1}}";
+      case "planning_year_2": return "{{planning_year_2}}";
+      case "planning_year_3": return "{{planning_year_3}}";
+    }
+  } else {
+    return -1;
   }
 }
 
@@ -35,7 +50,7 @@ function has_non_zero_or_non_zero_children(node) {
 
 function prep_nodes(node, perspective, ministry_name) {
   const { children } = node;
-  if (node.subject === "Ministry"){
+  if (node.subject === "Ministry") {
     node.ministry_name = node.name;
     node.is_ministry = true;
   } else {
@@ -47,10 +62,12 @@ function prep_nodes(node, perspective, ministry_name) {
     if (!node.amount) {
       node.amount = _.sumBy(children, "amount");
       node.size = _.sumBy(children, "size");
+      node.ftes = _.sumBy(children, "ftes");
     }
     _.each(children, n => {
       _.set(n, "parent_amount", node.amount);
       _.set(n, "parent_name", node.name);
+      _.set(n, "parent_ftes", node.ftes);
     });
   } else {
     //leaf node, already has amount but no size
@@ -77,7 +94,7 @@ export async function get_data(perspective, org_id, year, filter_var) {
   const progs_by_crso = _.chain(all_progs).groupBy('crso.id').value();
   const all_crsos = CRSO.get_all();
   const crsos_by_dept = _.chain(all_crsos).groupBy('dept.id').value();
-  
+
 
   const orgs = _.chain(Dept.get_all())
     .map(org => ({
@@ -91,8 +108,8 @@ export async function get_data(perspective, org_id, year, filter_var) {
             .map(prog => ({
               subject: prog,
               name: prog.fancy_name,
-              amount: program_spending_table.q(prog).sum(header_col(year)),
-              ftes: program_ftes_table.q(prog).sum(header_col(year)) || 0, // if NA 
+              amount: program_spending_table.q(prog).sum(header_col("amount",year)),
+              ftes: program_ftes_table.q(prog).sum(header_col("ftes",year)) || 0, // if NA 
               prog_id: prog.id,
               drr17_total: _.chain(counts)
                 .filter({ id: prog.id })
