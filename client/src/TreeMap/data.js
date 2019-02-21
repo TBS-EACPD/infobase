@@ -148,7 +148,9 @@ function prep_nodes(node, perspective) {
     _.each(children, child => { prep_nodes(child, perspective) });
     if (!node.amount) {
       node.amount = _.sumBy(children, "amount");
-      node.size = _.sumBy(children, "size");
+      perspective === "spending_change" ?
+        node.size = Math.abs(node.amount) :
+        node.size = _.sumBy(children, "size");
     }
     if (!node.ftes) {
       // ok this is terrible but I swear to god nothing I tried that was more concise worked
@@ -232,9 +234,19 @@ export async function load_data() {
   await ensure_loaded({ table_keys: ["programSpending", "programFtes", "programSobjs", "orgTransferPayments", "orgVoteStatEstimates"] });
 }
 
+function spending_change_year_split(year_string) {
+  return year_string.split(":")
+}
 
 export function get_data(perspective, org_id, year, filter_var) {
-  let data;
+  let data = [];
+  // check the year format
+  if (perspective === "spending_change" && spending_change_year_split(year).length !== 2) {
+    return data;
+  }
+  if (perspective !== "spending_change" && spending_change_year_split(year).length !== 1) {
+    return data;
+  }
 
   if (perspective === "drf" || perspective === "drf_ftes") {
     //await ensure_loaded({ table_keys: ["programSpending", "programFtes"] });
@@ -444,35 +456,60 @@ export function get_data(perspective, org_id, year, filter_var) {
       0.01,
     );
     return root;
-  } else if (perspective === "org_results") {
-    // const org = Dept.lookup(org_id || 'ND');
-    // await ensure_loaded({
-    //   subject: org,
-    //   results: true,
-    // });
+  } else if (perspective === "spending_change") {
+    const years = spending_change_year_split(year);
+    const year_1 = years[0];
+    const year_2 = years[1];
+    //await ensure_loaded({ table_keys: ["programSpending", "programFtes"] });
+    const program_ftes_table = Table.lookup('programFtes');
+    const program_spending_table = Table.lookup('programSpending');
 
-    // const result_hierarchy = create_full_results_hierarchy({
-    //   subject_guid: org.guid,
-    //   doc: "drr17",
-    //   allow_no_result_branches: true,
-    // });
-
-    // data = _.map(
-    //   get_root(result_hierarchy).children,
-    //   result_h7y_mapper
-    // );
-
-    // _.each(data, node => { prep_nodes(node, perspective) });
-    // const grouped_data = group_smallest(
-    //   data,
-    //   children => ({ name: smaller_items_text, children })
-    // );
-    // const root = {
-    //   name: org.fancy_name ? org.fancy_name : org.name,
-    //   children: grouped_data,
-    //   amount: _.sumBy(data, "amount"),
-    // };
-    // return root;
-
+    const orgs = _.chain(Dept.get_all())
+      .map(org => ({
+        subject: org,
+        name: org.fancy_name,
+        children: _.chain(org.crsos)
+          .map(crso => ({
+            subject: crso,
+            name: crso.fancy_name,
+            children: _.chain(crso.programs)
+              .map(prog => ({
+                subject: prog,
+                name: prog.fancy_name,
+                amount: program_spending_table.q(prog).sum(header_col("drf", year_2)) - program_spending_table.q(prog).sum(header_col("drf", year_1)),
+                ftes: program_ftes_table.q(prog).sum(header_col("ftes", year_2)) - program_ftes_table.q(prog).sum(header_col("ftes", year_1)) || 0, // if NA 
+              }))
+              .filter(n => has_non_zero_or_non_zero_children(n, perspective))
+              .value(),
+          }))
+          .filter(n => has_non_zero_or_non_zero_children(n, perspective))
+          .value(),
+      }))
+      .filter(n => has_non_zero_or_non_zero_children(n, perspective))
+      .value();
+    data = _.chain(orgs)
+      .groupBy('subject.ministry.name')
+      .toPairs()
+      .map(([min_name, orgs]) => (
+        {
+          name: min_name,
+          children: orgs,
+        }
+      ))
+      .value();
+    const asdf_root = {
+      name: "Government",
+      children: data,
+      amount: _.sumBy(data, "amount"),
+    };
+    prep_nodes(asdf_root, perspective);
+    asdf_root.children = group_smallest(
+      asdf_root.children,
+      children => ({ name: smaller_items_text, children }),
+      true,
+      0.005,
+    );
+    debugger;
+    return asdf_root;
   }
 }

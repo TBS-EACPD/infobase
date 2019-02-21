@@ -128,7 +128,7 @@ export class TreeMap extends React.Component {
     root = d3.hierarchy(root);
 
     treemap(root
-      .sum(d => _.isEmpty(d.children) ? d.size : 0) // ternary to avoid double counting
+      .sum(d => _.isEmpty(d.children) ? d.size : 0 ) // ternary to avoid double counting
       .sort((a, b) => {
         if (a.data.name === smaller_items_text) {
           return 9999999

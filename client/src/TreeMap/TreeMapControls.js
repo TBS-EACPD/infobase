@@ -24,12 +24,20 @@ const all_years = [
   "planning_year_3",
 ];
 
+const all_year_changes = [
+  "pa_last_year_4:pa_last_year_5",
+  "pa_last_year_3:pa_last_year_4",
+  "pa_last_year_2:pa_last_year_3",
+  "pa_last_year:pa_last_year_2",
+]
+
 const years = {
   "drf": all_years,
   "drf_ftes": all_years,
   "tp": all_years.slice(0, 5),
   "vote_stat": all_years.slice(1, 6),
   "so": all_years.slice(2, 5),
+  "spending_change": all_year_changes,
 }
 
 const size_controls = [
@@ -38,6 +46,7 @@ const size_controls = [
   { id: "tp", display: text_maker("TP") },
   { id: "vote_stat", display: text_maker("EVS") },
   { id: "so", display: text_maker("SO") },
+  { id: "spending_change", display: "spending change" },
 ]
 const color_controls = [
   { id: "spending", display: text_maker("spending") },
@@ -143,7 +152,7 @@ export class TreeMapControls extends React.Component {
             }
           />
         }
-        {(perspective === "drf" || perspective === "drf_ftes") &&
+        {(perspective === "drf" || perspective === "drf_ftes" || perspective === "spending_change") &&
           <LabeledBox
             label={text_maker("treemap_color_by_label")}
             content={
@@ -202,7 +211,7 @@ export class TreeMapControls extends React.Component {
             }
           />
         }
-        <LabeledBox
+        {perspective !== "spending_change" && <LabeledBox
           label={text_maker("year")}
           content={
             <div className="centerer">
@@ -218,7 +227,24 @@ export class TreeMapControls extends React.Component {
               />
             </div>
           }
-        />
+        />}
+        {perspective === "spending_change" && <LabeledBox
+          label={text_maker("year")}
+          content={
+            <div className="centerer">
+              <RadioButtons
+                options={_.map(years[perspective], (id => ({ id: id, display: run_template("{{" + id.split(":")[1] + "}}") + " to " + run_template("{{" + id.split(":")[0] + "}}"), active: id === year })))}
+                onChange={id => {
+                  const new_path = `/treemap/${perspective}/spending/${id}`;
+                  if (history.location.pathname !== new_path) {
+                    // the first_column prop, and thus this button's active id, is updated through this route push
+                    history.push(new_path);
+                  }
+                }}
+              />
+            </div>
+          }
+        />}
       </div>
     )
   }

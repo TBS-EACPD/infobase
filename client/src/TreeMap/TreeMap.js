@@ -86,9 +86,36 @@ function fte_color_scale(node) {
   //return d3_fte_scale(node.data.ftes);
 }
 
+const pos_d3_color_scale_log = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeGreens[9].slice(1, 7)));
+pos_d3_color_scale_log.clamp(true); // I'm not sure if this is the default
+const neg_d3_color_scale_log = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeReds[9].slice(1, 7)));
+neg_d3_color_scale_log.clamp(true);
+function spending_change_color_scale(node) {
+  if (node.data.amount < 0) {
+    neg_d3_color_scale_log.domain([0, 1000000000]);
+    return neg_d3_color_scale_log(-node.data.amount);
+  }
+  pos_d3_color_scale_log.domain([0, 1000000000]);
+  return pos_d3_color_scale_log(node.data.amount);
+}
+function fte_change_color_scale(node) {
+  if (node.data.ftes < 0) {
+    neg_d3_color_scale_log.domain([0, 1000]);
+    return neg_d3_color_scale_log(-node.data.ftes);
+  }
+  pos_d3_color_scale_log.domain([0, 1000]);
+  return pos_d3_color_scale_log(node.data.ftes);
+}
+
 function get_color_scale(type, color_var) {
   if (type === "org_results") {
     return null; //result_color_scale;
+  } else if (type === "spending_change") {
+    if (color_var && color_var === "ftes") {
+      return fte_change_color_scale;
+    } else {
+      return spending_change_color_scale;
+    }
   } else if (color_var && color_var === "ftes") {
     return fte_color_scale;
   } else {
@@ -264,12 +291,12 @@ export default class TreeMapper extends React.Component {
       >
         {loading || !data ?
           <SpinnerWrapper ref="spinner" config_name={"route"} /> :
-          <div> 
+          <div>
             <div className="TreeMap__Wrapper">
               <div className="row">
                 <div className="col-md-10">
                   <div className="row">
-                    <div className="TreeMap__TopBar" style={{"min-height": `${topbar_height}px`}}>
+                    <div className="TreeMap__TopBar" style={{ "min-height": `${topbar_height}px` }}>
                       <TreeMapTopbar
                         history={history}
                         org_route={this.state.org_route}
@@ -288,11 +315,11 @@ export default class TreeMapper extends React.Component {
                         window.feature_detection.is_mobile() ? mobile_tooltip_render : std_tooltip_render
                       }
                       node_render={std_node_render}
-                      viz_height={app_height-topbar_height}
+                      viz_height={app_height - topbar_height}
                     />
                   </div>
                 </div>
-                <div className="col-md-2 TreeMap__SideBar" style={{ padding: "0px", "min-height": `${app_height+9}px`}}>
+                <div className="col-md-2 TreeMap__SideBar" style={{ padding: "0px", "min-height": `${app_height + 9}px` }}>
                   <TreeMapSidebar
                     side_bar_title={display_year}
                     perspective={perspective}
