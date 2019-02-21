@@ -2,6 +2,7 @@
 import classNames from "classnames";
 import { make_unique } from "../general_utils";
 import common_charts_utils from '../charts/common_charts_utils';
+import './TreeMap.scss';
 
 let currentMouseX, currentMouseY;
 function updateMousePositionVars(evt) {
@@ -75,7 +76,7 @@ export class FlatTreeMapViz extends React.Component {
       })
     );
 
-    d3.select('svg g')
+    const programs = d3.select('svg g')
       .selectAll('rect')
       .data(root.descendants())
       .enter()
@@ -89,7 +90,7 @@ export class FlatTreeMapViz extends React.Component {
           "none" :
           d.data.drr17_total ? colorScale(d.data.drr17_met / d.data.drr17_total) : "grey",
         opacity: 1,
-        stroke: "none",
+        stroke: "white",
       }))
 
     // d3.selectAll("rect")
@@ -104,18 +105,73 @@ export class FlatTreeMapViz extends React.Component {
     //     stroke: "red",
     //   }))
 
-    d3.select('svg g')
-      .data(root.descendants())
+    // d3.select('svg g')
+    //   .data(root.descendants())
+    //   .enter()
+    //   .append('rect')
+    //   .attr('x', function (d) { return d.x0; })
+    //   .attr('y', function (d) { return d.y0; })
+    //   .attr('width', function (d) { return d.x1 - d.x0; })
+    //   .attr('height', function (d) { return d.y1 - d.y0; })
+    //   .styles(d => ({
+    //     fill: "none",
+    //     stroke: "red",
+    //   }))
+    const nodes = d3.selectAll('svg g')
+      .selectAll('g')
+      .data(root.children)
       .enter()
+      .append('g')
+      .attr('transform', function (d) { return 'translate(' + [d.x0, d.y0] + ')' })
+
+    nodes
       .append('rect')
-      .attr('x', function (d) { return d.x0; })
-      .attr('y', function (d) { return d.y0; })
       .attr('width', function (d) { return d.x1 - d.x0; })
       .attr('height', function (d) { return d.y1 - d.y0; })
       .styles(d => ({
         fill: "none",
-        stroke: "red",
+        stroke: "white",
+        "stroke-Width": 3,
       }))
+
+    nodes
+      .append('text')
+      .attr('dx', 10)
+      .attr('dy', 20)
+      .text(function (d) {
+        return d.data.name;
+      })
+
+
+    const tt = viz_root.append("div")   
+      .attr("class", "FlatTreeMap__ToolTip")               
+      .style("opacity", 0);
+  
+
+    programs.on("mouseover", function (d) {
+      tt
+        .transition()
+        .duration(1)
+        .style("opacity", .9);
+      tt
+        .html(`
+          Name: ${d.data.name} <br/>
+          Amount: ${d.data.amount} <br/>
+          Total indicators: ${d.data.drr17_total} <br/>
+          Indicators met: ${d.data.drr17_met}
+          `)
+        .styles(() => ({
+          left: (d.x0) + "px",
+          top: (d.y0) + "px",
+          "max-width": "200px",
+        }))
+    })
+      .on("mouseout", function (d) {
+        tt.transition()
+          .duration(1)
+          .style("opacity", 0);
+      });
+
 
     return viz_root;
   }

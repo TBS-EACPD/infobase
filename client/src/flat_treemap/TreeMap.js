@@ -9,15 +9,17 @@ import { formats } from '../core/format.js';
 const pos_d3_color_scale = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeBlues[9]));
 pos_d3_color_scale.clamp(true); // I'm not sure if this is the default
 const cat_scale = d3.scaleOrdinal(d3.schemeCategory10);
+const viridis_scale = d3.scaleSequential(d3.interpolateViridis);
 
 function get_color_scale(d) {
-  return pos_d3_color_scale(d);
+  //return pos_d3_color_scale(d);
   //return cat_scale(d);
+  return viridis_scale(d);
 }
 
 export default class FlatTreeMap extends React.PureComponent {
   constructor(props) {
-    super(props);
+    super(props); 
     this.state = {
       loading: true,
     };
