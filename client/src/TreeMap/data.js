@@ -141,7 +141,6 @@ function recurse_adjust_size(node, parent_ratio) {
 }
 
 
-
 function prep_nodes(node, perspective) {
   const { children } = node;
   if (!_.isEmpty(children)) {
@@ -507,7 +506,7 @@ export function get_data(perspective, org_id, year, filter_var) {
       root.children,
       children => ({ name: smaller_items_text, children }),
       true,
-      0.005,
+      0.01
     );
     return root;
   }

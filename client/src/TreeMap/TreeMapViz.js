@@ -4,6 +4,7 @@ import { formats } from '../core/format.js';
 import classNames from "classnames";
 import { smaller_items_text } from './data.js';
 import { get_static_url } from '../request_utils.js';
+import TreeMapper from './TreeMap';
 
 
 const text_maker = create_text_maker(text);
@@ -14,14 +15,14 @@ function updateMousePositionVars(evt) {
   currentMouseY = evt.clientY;
 }
 export class TreeMap extends React.Component {
-  constructor(props){
+  constructor(props) {
     super();
     this.my_state = { my_org_route: [...props.org_route] };
   }
   render() {
     return <div ref={div => this.el = div} />
   }
-  _update() { 
+  _update() {
     this._imperative_render();
   }
   componentDidMount() {
@@ -39,7 +40,7 @@ export class TreeMap extends React.Component {
     //window.removeEventListener("resize", this._update)
     window.removeEventListener("mousemove", updateMousePositionVars);
   }
-  shouldComponentUpdate(nextProps,nextState){
+  shouldComponentUpdate(nextProps, nextState) {
     //debugger;
     // if(!_.isEqual(this.my_state.my_org_route.sort(), nextState.my_org_route.sort()) )
     // {
@@ -49,13 +50,11 @@ export class TreeMap extends React.Component {
       this.props.perspective !== nextProps.perspective ||
       this.props.year !== nextProps.year ||
       this.props.color_var !== nextProps.color_var ||
-      this.props.filter_var !== nextProps.filter_var )
-    {
+      this.props.filter_var !== nextProps.filter_var) {
       return true;
     }
     if (!_.isEqual(this.my_state.my_org_route, nextProps.org_route) &&
-        nextProps.org_route.length < this.my_state.my_org_route.length)
-    {
+      nextProps.org_route.length < this.my_state.my_org_route.length) {
       return true; // only override with zoomed out view
     }
     return false;
@@ -74,8 +73,7 @@ export class TreeMap extends React.Component {
     let org_route = this.my_state.my_org_route;
     //debugger;
     if (!_.isEqual(this.my_state.my_org_route.sort(), this.props.org_route.sort()) &&
-      this.props.org_route.length < this.my_state.my_org_route)
-    {
+      this.props.org_route.length < this.my_state.my_org_route) {
       org_route = this.props.org_route;
     }
     const el = this.el;
@@ -97,7 +95,7 @@ export class TreeMap extends React.Component {
 
     const width = viz_root.node().offsetWidth;
     let height = viz_height;
-    
+
 
     // sets x and y scale to determine size of visible boxes
     const x = d3.scaleLinear()
@@ -109,7 +107,9 @@ export class TreeMap extends React.Component {
 
     const treemap = d3.treemap()
       .tile(d3.treemapSquarify.ratio(1))
+      .round(true)
       .size([width, height]);
+
 
     let transitioning;
 
@@ -118,17 +118,34 @@ export class TreeMap extends React.Component {
 
     if (!transitioning && !_.isEmpty(org_route)) {
       const route_length = org_route.length;
-      for(let i = 0; i < route_length; i++){ // TODO: rewrite to use lodash and return original root if any of them fail
+      for (let i = 0; i < route_length; i++) { // TODO: rewrite to use lodash and return original root if any of them fail
         const next_name = org_route.shift();
-        const next_item = _.filter(root.children, d => d.name==next_name);
+        const next_item = _.filter(root.children, d => d.name == next_name);
         root = next_item[0];
       }
     }
 
     root = d3.hierarchy(root);
 
+    root.each(d => { d.data.value2 = d.data.size });
+    
+    root.eachBefore(d => {
+      if (d.children && d.data.value2 !== _.sumBy(d.children, "data.value2")) {
+        const difference = d.data.value2 - _.sumBy(d.children, "data.value2");
+        //debugger;
+        const total_sum = _.sumBy(d.children, "data.value2");
+        _.each(d.children, child => {
+          const frac_of_total = child.data.value2 / total_sum;
+          child.data.value2 += difference * frac_of_total;
+        })
+      }
+    })
+    root.each(d => { d.value = d.data.value2});
+
+
+
     treemap(root
-      .sum(d => _.isEmpty(d.children) ? d.size : 0 ) // ternary to avoid double counting
+      //.sum(d => _.isEmpty(d.children) ? d.size : d.size - _.sumBy(d.children, "size"))
       .sort((a, b) => {
         if (a.data.name === smaller_items_text) {
           return 9999999
@@ -138,42 +155,12 @@ export class TreeMap extends React.Component {
         }
         return b.value - a.value || b.height - a.height
       })
-    );
-
+    )
 
     const display = d => {
-      //debugger;
       if (!d.children) {
         return;
       }
-      // inserts text on the top bar
-      /*       zoom_ctrl
-              .datum(d.parent)
-              .classed("TreeMap__ZoomControl--has-zoom-out", !!d.parent)
-              .on('click', transition)
-              .select('.TreeMap__ZoomControl__Text')
-              .html(zoom_ctrl_text(d)); */
-
-      //sidebar
-      /* const side_bar_text_items = side_menu
-        .selectAll(".TreeMap_SideBar__Text")
-        .data( _.uniq(d.ancestors().reverse().concat([d])) ) 
-
-      side_bar_text_items.exit().remove();
-      side_bar_text_items.enter()
-        .append("div")
-        .attr("class","TreeMap_SideBar__Text")
-        .merge(side_bar_text_items)
-        .html(sidebar_item_html)
-        .style("cursor", sidebar_data_el => d === sidebar_data_el ? "normal" : "pointer" )
-        .classed("TreeMap__ZoomControl--has-zoom-out", !!d.parent)
-        .on('click', function(sidebar_data_el){
-          if(d === sidebar_data_el){
-            return;
-          }
-          transition.call(this, ...arguments)
-        }); */
-
       const g1 = viz_root.insert('div')
         .datum(d)
         .attr('class', 'depth');
@@ -193,11 +180,7 @@ export class TreeMap extends React.Component {
             this.my_state.my_org_route.push(d.data.name);
             setRouteCallback(d.data.name, false);
             transition(d);
-            //this.setState({my_org_route: this.state.my_org_route.concat(d.data.name)}, () => {
-            //  setRouteCallback(this.state.my_org_route);
-            //})
-            //org_route.push(d.data.name);
-            
+
           })
       } else {
         main
