@@ -155,13 +155,13 @@ function populate_results_info(data){
 
 
 let _api_loaded_dept_or_tag_codes = {};
-const results_fragment = `
+const results_fragment = (doc) => `
 results {
   id
   parent_id
   name
   doc
-  indicators(doc: $doc) {
+  indicators(doc: ${doc}) {
     id
     result_id
     name
@@ -185,36 +185,33 @@ results {
   }
 }
 `;
+const common_load_results_bundle_fragment = `
+dept_code
+  crsos {
+    id
+    drr17_results: ${results_fragment('"drr17"')}
+    dp18_results: ${results_fragment('"dp18"')}
+  }
+  programs {
+    id
+    drr17_results: ${results_fragment('"drr17"')}
+    dp18_results: ${results_fragment('"dp18"')}
+  }
+`
 const all_load_results_bundle_query = gql`
-query($lang: String!, $doc: String) {
+query($lang: String!) {
   root(lang: $lang) {
     orgs {
-      dept_code
-      programs {
-        id
-        ${results_fragment}
-      }
-      crsos {
-        id
-        ${results_fragment}
-      }
+      ${common_load_results_bundle_fragment}
     }
   }
 }
 `;
 const dept_load_results_bundle_query = gql`
-query($lang: String!, $doc: String, $dept_code: String) {
+query($lang: String!, $dept_code: String) {
   root(lang: $lang) {
     org(dept_code: $dept_code) {
-      dept_code
-      programs {
-        id
-        ${results_fragment}
-      }
-      crsos {
-        id
-        ${results_fragment}
-      }
+      ${common_load_results_bundle_fragment}
     }
   }
 }
@@ -243,85 +240,23 @@ export function api_load_results_bundle(subject){
   }
 
   const client = get_client();
-  return Promise.all([
-    client.query({ 
-      query: subject_code === 'all' ?
-        all_load_results_bundle_query :
-        dept_load_results_bundle_query, 
-      variables: {
-        lang: window.lang, 
-        doc: "drr17", 
-        dept_code: subject_code,
-      },
-    }),
-    client.query({ 
-      query: subject_code === 'all' ?
-        all_load_results_bundle_query :
-        dept_load_results_bundle_query, 
-      variables: {
-        lang: window.lang, 
-        doc: "dp18", 
-        dept_code: subject_code,
-      },
-    }),
-  ])
+  return client.query({ 
+    query: subject_code === 'all' ?
+      all_load_results_bundle_query :
+      dept_load_results_bundle_query, 
+    variables: {
+      lang: window.lang, 
+      dept_code: subject_code,
+    },
+  })
     .then( (response) => {
       api_populate_results_info(response);
       _api_loaded_dept_or_tag_codes[subject_code] = true;
     });
 }
 
-function api_populate_results_info([drr17_resp, dp18_resp]){
-  //most of the results data is csv-row based, without headers.
-  //_.each(['results', 'indicators', 'pi_dr_links', 'sub_programs'], key => {
-  //  data[key] = d3.csvParse(data[key]);
-  //})
-//
-  //const {
-  //  results,
-  //  sub_programs,
-  //  indicators,
-  //  pi_dr_links,
-  //} = data;
-//
-  //_.each(sub_programs, obj => {
-//
-  //  _.each([
-  //    "spend_planning_year_1",
-  //    "spend_planning_year_2",
-  //    "spend_planning_year_3",
-  //    "fte_planning_year_1",
-  //    "fte_planning_year_2",
-  //    "fte_planning_year_3",
-  //    "spend_pa_last_year",
-  //    "fte_pa_last_year",
-  //    "planned_spend_pa_last_year",
-  //    "planned_fte_pa_last_year",
-  //  ], key => {
-  //    obj[key] = _.isNaN(obj[key]) ? null : +obj[key];
-  //  });
-//
-  //  SubProgramEntity.create_and_register(obj);
-  //});
-//
-  //_.each(results, obj => Result.create_and_register(obj) );
-//
-  //_.each(indicators, obj => {
-  //  
-  //  const {
-  //    actual_result,
-  //    target_year,
-  //    target_month,
-  //  } = obj;
-//
-  //  obj.actual_result = _.isNull(actual_result) || actual_result === '.' ? null : actual_result;
-  //  obj.target_year = _.isNaN(parseInt(target_year)) ? null : parseInt(target_year);
-  //  obj.target_month = _.isEmpty(target_month) ? null : +target_month;
-//
-  //  Indicator.create_and_register(obj);
-  //})
-//
-  //_.each( pi_dr_links, ({program_id, result_id}) => PI_DR_Links.add(program_id, result_id) );
+function api_populate_results_info(response){
+  //todo
 }
 
 
