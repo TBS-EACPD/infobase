@@ -21,7 +21,6 @@ export function get_client(){
       //  `/graphql` endpoint on the same host
       link: new HttpLink({
         uri: api_url,
-        fetchOptions: { method: "GET" },
       }),
       cache: new InMemoryCache(),
       defaultOptions: {
