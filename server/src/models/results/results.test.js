@@ -22,14 +22,14 @@ fragment everything on Org {
     id
     programs {
 			id
-      results {
+      results(doc: "drr17") {
         id
         indicators {
           id
         }
       }
     }
-    results {
+    results(doc: "dp18") {
       indicators {
         id
       }
