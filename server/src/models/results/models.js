@@ -11,6 +11,7 @@ import {
 
 import {
   create_resource_by_foreignkey_attr_dataloader,
+  create_resource_by_id_attr_dataloader,
 } from '../loader_utils.js';
 
 

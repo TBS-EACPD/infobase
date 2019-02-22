@@ -197,6 +197,10 @@ programs {
   id
   drr17_results: ${results_fragment('"drr17"')}
   dp18_results: ${results_fragment('"dp18"')}
+  pidrlinks {
+    program_id
+    result_id
+  }
   sub_programs {
     id
     drr17_results: ${results_fragment('"drr17"')}
@@ -319,13 +323,19 @@ function extract_flat_data_from_results_hierarchies(org_result_hierarchies){
           _.each(
             result.indicators,
             (indicator) => {
-              pi_dr_links.push( [subject.id, indicator.id] );
               indicators.push( _.omit(indicator, "__typename") );
             }
           );
         }
       );
       
+      if ( !_.isEmpty(subject.pidrlinks) ){
+        _.each(
+          subject.pidrlinks,
+          ({program_id, result_id}) => pi_dr_links.push([program_id, result_id])
+        );
+      }
+
       if ( !_.isEmpty(subject.sub_programs) ){
         _.each(
           subject.sub_programs,

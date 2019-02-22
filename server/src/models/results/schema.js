@@ -252,6 +252,13 @@ export default function({models,loaders}){
       results: get_results,
       sub_programs: ({program_id}) => sub_program_loader.load(program_id),
       drs: ({program_id}) => program_link_loader.load(program_id),
+      pidrlinks: async ({program_id}) => {
+        const linked_results = await program_link_loader.load(program_id);
+        return _.map(
+          linked_results,
+          ({result_id}) => ({program_id, result_id})
+        );
+      },
       target_counts: ({program_id}, {doc}) => get_target_counts([program_id], doc),
     },
     SubProgram: {
