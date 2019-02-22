@@ -224,7 +224,7 @@ programs {
     }
   }
 }
-`
+`;
 const all_load_results_bundle_query = gql`
 query($lang: String!) {
   root(lang: $lang) {
@@ -277,62 +277,86 @@ export function api_load_results_bundle(subject){
     },
   })
     .then( (response) => {
-      api_populate_results_info(response);
+      const org_result_hierarchies = subject_code === 'all' ?
+        response.data.root.orgs :
+        [ response.data.root.org ];
+
+      const {
+        sub_programs,
+        results,
+        indicators,
+        pi_dr_links,
+      } = extract_flat_data_from_results_hierarchies(org_result_hierarchies);
+
+      _.each( sub_programs, obj => SubProgramEntity.create_and_register(obj) );
+      _.each( results, obj => Result.create_and_register(obj) );
+      _.each( indicators, obj => Indicator.create_and_register(obj) )
+      _.each( pi_dr_links, ({program_id, result_id}) => PI_DR_Links.add(program_id, result_id) );
+
       _api_loaded_dept_or_tag_codes[subject_code] = true;
     });
 }
 
-function api_populate_results_info(response){
+function extract_flat_data_from_results_hierarchies(org_result_hierarchies){
+  const sub_programs = [],
+    results = [],
+    indicators = [],
+    pi_dr_links = [];
 
-  //_.each(['results', 'indicators', 'pi_dr_links', 'sub_programs'], key => {
-  //  data[key] = d3.csvParse(data[key]);
-  //})
-//
-  //const {
-  //  results,
-  //  sub_programs,
-  //  indicators,
-  //  pi_dr_links,
-  //} = data;
-//
-  //_.each(sub_programs, obj => {
-//
-  //  _.each([
-  //    "spend_planning_year_1",
-  //    "spend_planning_year_2",
-  //    "spend_planning_year_3",
-  //    "fte_planning_year_1",
-  //    "fte_planning_year_2",
-  //    "fte_planning_year_3",
-  //    "spend_pa_last_year",
-  //    "fte_pa_last_year",
-  //    "planned_spend_pa_last_year",
-  //    "planned_fte_pa_last_year",
-  //  ], key => {
-  //    obj[key] = _.isNaN(obj[key]) ? null : +obj[key];
-  //  });
-//
-  //  SubProgramEntity.create_and_register(obj);
-  //});
-//
-  //_.each(results, obj => Result.create_and_register(obj) );
-//
-  //_.each(indicators, obj => {
-  //  
-  //  const {
-  //    actual_result,
-  //    target_year,
-  //    target_month,
-  //  } = obj;
-//
-  //  obj.actual_result = _.isNull(actual_result) || actual_result === '.' ? null : actual_result;
-  //  obj.target_year = _.isNaN(parseInt(target_year)) ? null : parseInt(target_year);
-  //  obj.target_month = _.isEmpty(target_month) ? null : +target_month;
-//
-  //  Indicator.create_and_register(obj);
-  //})
-//
-  //_.each( pi_dr_links, ({program_id, result_id}) => PI_DR_Links.add(program_id, result_id) );
+  const crawl_hierachy_level = (subject_node) => _.each(
+    subject_node,
+    subject => {
+      _.each(
+        [...subject.drr17_results, ...subject.dp18_results],
+        (result) => {
+          results.push({
+            id: result.id,
+            subject_id: subject.id,
+            name: result.name,
+            doc: result.doc,
+          });
+
+          _.each(
+            result.indicators,
+            (indicator) => {
+              pi_dr_links.push( [subject.id, indicator.id] );
+              indicators.push( _.omit(indicator, "__typename") );
+            }
+          );
+        }
+      );
+      
+      if ( !_.isEmpty(subject.sub_programs) ){
+        _.each(
+          subject.sub_programs,
+          (sub_program) => {
+            sub_programs.push({
+              ..._.omit(sub_program, "__typename"),
+              parent_id: subject.id,
+            });
+          }
+        );
+
+        crawl_hierachy_level(subject.sub_programs);
+      }
+    }
+  );
+
+  _.each(
+    org_result_hierarchies,
+    org_result_hierarchy => {
+      crawl_hierachy_level(org_result_hierarchy.crsos);
+
+      crawl_hierachy_level(org_result_hierarchy.programs);
+    }
+  );
+
+  return {
+    sub_programs,
+    results,
+    indicators,
+    pi_dr_links,
+  }
 }
 
 
