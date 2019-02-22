@@ -4,13 +4,13 @@ const _ = require("lodash");
 const crso_query  = `
 query CRSOTestQuery ($lang: String!){
   root(lang: $lang){
-    org(org_id:"128"){
+    org(org_id:"133"){
       acronym
       crsos {
         id
       }
     }
-    crso(id:"HRSD-SO0491"){
+    crso(id:"ND-SO00227"){
       name
       programs {
         id
@@ -19,7 +19,7 @@ query CRSOTestQuery ($lang: String!){
         id
       }
     }
-    program(id:"HRSD-AMQ00"){
+    program(id:"ND-SO00224"){
       crso {
         id
       }
@@ -44,7 +44,7 @@ const org_fields_query = `
 query IgocTestQuery ($lang: String!){
   root(lang: $lang){
     
-    org(org_id:"128"){
+    org(org_id:"133"){
       inst_form {
         id
       }
@@ -69,19 +69,19 @@ query IgocTestQuery ($lang: String!){
         name
       }
     }
-    org_with_notes: org(org_id: "10"){
+    org_with_notes: org(org_id: "326"){
       notes
     }
-    org_with_auditor: org(org_id: "97"){
+    org_with_auditor: org(org_id: "15"){
       auditor
     }
-    org_with_end_date: org(org_id:"291"){
+    org_with_end_date: org(org_id:"326"){
       end_yr
     }
-    org_with_faa_hr: org(org_id:"296"){
+    org_with_faa_hr: org(org_id:"552"){
       faa_schedule_hr_status
     }
-    org_with_fed_ownership: org(org_id: "285"){
+    org_with_fed_ownership: org(org_id: "326"){
       fed_ownership
     }
   }
@@ -100,14 +100,14 @@ describe("igoc linkage and fields", function(){
 const program_query = `
 query ProgramTestQuery ($lang: String!){
   root(lang: $lang){
-    program(id: "AGR-AAA00"){
+    program(id: "ND-ATT00"){
       id
       activity_code
       is_internal_service
       description
       
     }
-    internal_service_program: program(id:"AGR-ISC00"){
+    internal_service_program: program(id:"TBC-BXD01"){
       is_internal_service
     }
     inactive_program: program(id: "TBC-DAC00"){

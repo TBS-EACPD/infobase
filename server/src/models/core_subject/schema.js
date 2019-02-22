@@ -35,7 +35,7 @@ const schema = `
     acronym: String
     mandate: String
     description: String
-    
+  
     ministry: Ministry
     ministers: [Minister]
     inst_form: InstForm
@@ -199,6 +199,7 @@ export default function({models,loaders}){
 
       programs: org => org.dept_code && prog_dept_code_loader.load(org.dept_code),
       crsos: ({dept_code}) => dept_code && crso_from_deptcode_loader.load(dept_code),
+
     },
     Program: {
       name: bilingual_field("name"),
@@ -206,6 +207,7 @@ export default function({models,loaders}){
       org: prog => org_deptcode_loader.load(prog.dept_code),
       crso: prog => crso_id_loader.load(prog.crso_id),
       id: _.property('program_id'),
+
     },
     Crso: {
       name: bilingual_field("name"),
