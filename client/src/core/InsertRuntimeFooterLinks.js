@@ -5,6 +5,10 @@ const footer_link_items = [
     href: trivial_text_maker("survey_link_href"),
     text: trivial_text_maker("survey_link_text") + " " + trivial_text_maker("survey_link_icon"),
   },
+  {
+    href: "#privacy",
+    text: trivial_text_maker("privacy_title"),
+  },
 ];
 
 export class InsertRuntimeFooterLinks extends React.Component {
