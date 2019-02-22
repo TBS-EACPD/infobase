@@ -47,6 +47,7 @@ SO:
   en: Expenditures by Standard Object
   fr: Dépenses par article courant
 
+
 all:
   en: all
   fr: Tous
@@ -123,3 +124,10 @@ treemap_vstype_definitions:
     * **asdf title here** {{gl_tt "internal services" "INT_SERVICES"}} omg wtf
   fr: |
     French goes here
+
+
+treemap_none_selected_summary:
+  en: To see data, select a year
+  fr: Pour voir des données, veuillez choisir une année 
+
+

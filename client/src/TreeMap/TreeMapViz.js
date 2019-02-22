@@ -4,7 +4,6 @@ import { formats } from '../core/format.js';
 import classNames from "classnames";
 import { smaller_items_text } from './data.js';
 import { get_static_url } from '../request_utils.js';
-import TreeMapper from './TreeMap';
 
 
 const text_maker = create_text_maker(text);
@@ -128,11 +127,10 @@ export class TreeMap extends React.Component {
     root = d3.hierarchy(root);
 
     root.each(d => { d.data.value2 = d.data.size });
-    
+
     root.eachBefore(d => {
       if (d.children && d.data.value2 !== _.sumBy(d.children, "data.value2")) {
         const difference = d.data.value2 - _.sumBy(d.children, "data.value2");
-        //debugger;
         const total_sum = _.sumBy(d.children, "data.value2");
         _.each(d.children, child => {
           const frac_of_total = child.data.value2 / total_sum;

@@ -141,13 +141,14 @@ function recurse_adjust_size(node, parent_ratio) {
 }
 
 
-function prep_nodes(node, perspective) {
+function prep_nodes(node, perspective, get_changes) {
   const { children } = node;
+
   if (!_.isEmpty(children)) {
-    _.each(children, child => { prep_nodes(child, perspective) });
+    _.each(children, child => { prep_nodes(child, perspective, get_changes) });
     if (!node.amount) {
       node.amount = _.sumBy(children, "amount");
-      perspective === "spending_change" ?
+      get_changes ?
         node.size = Math.abs(node.amount) :
         node.size = _.sumBy(children, "size");
     }
@@ -180,43 +181,6 @@ function prep_nodes(node, perspective) {
   }
 }
 
-
-
-function result_h7y_mapper(node) {
-  const { children, data } = node;
-  const { name, type } = data;
-  if (_.includes(["result", "indicator"], type)) {
-    return null; //will just get filtered out
-  } else {
-    const amount = _.get(data, "resources.spending");
-
-    const indicators = _.chain(children)
-      .filter(child => child.data.type === "result")
-      .flatMap(result_node => _.map(result_node.children, "data.indicator"))
-      .value();
-
-    const new_children = _.chain(children)
-      .map(result_h7y_mapper)
-      .compact()
-      .value();
-
-    const flat_indicators = indicators.concat(_.flatMap(new_children, "flat_indicators"));
-
-    return {
-      amount: amount,
-      size: Math.abs(amount),
-      children: new_children,
-
-      name,
-      resources: data.resources,
-      type,
-      indicators,
-      flat_indicators,
-    }
-  }
-
-}
-
 function filter_sobj_categories(so_cat, row) {
   if (row.so_num > 0 && row.so_num <= 7) {
     return so_cat === 1;
@@ -237,18 +201,21 @@ function spending_change_year_split(year_string) {
   return year_string.split(":")
 }
 
-export function get_data(perspective, org_id, year, filter_var) {
-  let data = [];
+export function get_data(perspective, org_id, year, filter_var, get_changes) {
+  // abandon all hope, ye you enter here
+
+  let data = [],
+    year_1, year_2;
   // check the year format
-  if (perspective === "spending_change" && spending_change_year_split(year).length !== 2) {
+  if ( !year || year === "undefined" || (get_changes && spending_change_year_split(year).length !== 2) || (!get_changes && spending_change_year_split(year).length !== 1) ){
     return data;
   }
-  if (perspective !== "spending_change" && spending_change_year_split(year).length !== 1) {
-    return data;
+  if (get_changes) {
+    year_1 = spending_change_year_split(year)[0];
+    year_2 = spending_change_year_split(year)[1];
   }
 
   if (perspective === "drf" || perspective === "drf_ftes") {
-    //await ensure_loaded({ table_keys: ["programSpending", "programFtes"] });
     const program_ftes_table = Table.lookup('programFtes');
     const program_spending_table = Table.lookup('programSpending');
 
@@ -261,12 +228,20 @@ export function get_data(perspective, org_id, year, filter_var) {
             subject: crso,
             name: crso.fancy_name,
             children: _.chain(crso.programs)
-              .map(prog => ({
-                subject: prog,
-                name: prog.fancy_name,
-                amount: program_spending_table.q(prog).sum(header_col("drf", year)),
-                ftes: program_ftes_table.q(prog).sum(header_col("ftes", year)) || 0, // if NA 
-              }))
+              .map(prog => {
+                return get_changes ?
+                  {
+                    subject: prog,
+                    name: prog.fancy_name,
+                    amount: program_spending_table.q(prog).sum(header_col("drf", year_2)) - program_spending_table.q(prog).sum(header_col("drf", year_1)),
+                    ftes: program_ftes_table.q(prog).sum(header_col("ftes", year_2)) - program_ftes_table.q(prog).sum(header_col("ftes", year_1)) || 0, // if NA 
+                  } : {
+                    subject: prog,
+                    name: prog.fancy_name,
+                    amount: program_spending_table.q(prog).sum(header_col("drf", year)),
+                    ftes: program_ftes_table.q(prog).sum(header_col("ftes", year)) || 0, // if NA 
+                  }
+              })
               .filter(n => has_non_zero_or_non_zero_children(n, perspective))
               .value(),
           }))
@@ -294,7 +269,7 @@ export function get_data(perspective, org_id, year, filter_var) {
       children: data,
       amount: _.sumBy(data, "amount"),
     };
-    prep_nodes(root, perspective);
+    prep_nodes(root, perspective, get_changes);
     root.children = group_smallest(
       root.children,
       children => ({ name: smaller_items_text, children }),
@@ -303,9 +278,7 @@ export function get_data(perspective, org_id, year, filter_var) {
     );
     return root;
   } else if (perspective === "so") {
-    //await ensure_loaded({ table_keys: ["programSobjs"] });
     const program_sobj_table = Table.lookup('programSobjs');
-
     const all_orgs = _.chain(Dept.get_all())
       .map(org => ({
         subject: org,
@@ -318,23 +291,29 @@ export function get_data(perspective, org_id, year, filter_var) {
               .map(prog => ({
                 subject: prog,
                 name: prog.fancy_name,
-                children: _.chain(program_sobj_table.q(prog).data)
-                  .groupBy('so')
-                  .toPairs()
-                  .map(
-                    ([so_name, rows]) => ({
-                      name: so_name,
-                      amount: parseInt(filter_var) ?
-                        _.chain(rows)
-                          .filter(row => filter_sobj_categories(parseInt(filter_var), row))
-                          .sumBy(header_col(perspective, year))
-                          .value() :
-                        _.chain(rows)
-                          .sumBy(header_col(perspective, year))
-                          .value(),
+                asdf: program_sobj_table.q(prog).data,
+                children: parseInt(filter_var) ?
+                  _.chain(program_sobj_table.q(prog).data)
+                    .filter({ so_num: parseInt(filter_var) })
+                    .map(s => ({
+                      name: s.so,
+                      so_num: s.so_num,
+                      amount: get_changes ?
+                        s[header_col(perspective, year_2)] - s[header_col(perspective, year_1)] :
+                        s[header_col(perspective, year)],
                     }))
-                  .filter(n => has_non_zero_or_non_zero_children(n, perspective))
-                  .value(),
+                    .filter(n => has_non_zero_or_non_zero_children(n, perspective))
+                    .value() :
+                  _.chain(program_sobj_table.q(prog).data)
+                    .map(s => ({
+                      name: s.so,
+                      so_num: s.so_num,
+                      amount: get_changes ?
+                        s[header_col(perspective, year_2)] - s[header_col(perspective, year_1)] :
+                        s[header_col(perspective, year)],
+                    }))
+                    .filter(n => has_non_zero_or_non_zero_children(n, perspective))
+                    .value(),
               }))
               .filter(n => has_non_zero_or_non_zero_children(n, perspective))
               .value(),
@@ -344,7 +323,6 @@ export function get_data(perspective, org_id, year, filter_var) {
       }))
       .filter(n => has_non_zero_or_non_zero_children(n, perspective))
       .value();
-
     data = _.concat(
       _.chain(all_orgs)
         .filter(o => { return o.subject.ministry })
@@ -364,7 +342,7 @@ export function get_data(perspective, org_id, year, filter_var) {
       children: data,
       amount: _.sumBy(data, "amount"),
     };
-    prep_nodes(data_root, perspective);
+    prep_nodes(data_root, perspective, get_changes);
     data_root.children = group_smallest(
       data_root.children,
       children => ({ name: smaller_items_text, children }),
@@ -374,7 +352,6 @@ export function get_data(perspective, org_id, year, filter_var) {
     );
     return data_root;
   } else if (perspective === "tp") {
-    //await ensure_loaded({ table_keys: ["orgTransferPayments"] });
     const filtering = filter_var && filter_var !== "All" && (filter_var === "g" || filter_var === "c");
     const tp_table = Table.lookup('orgTransferPayments');
     const all_orgs = _.chain(Dept.get_all())
@@ -384,14 +361,17 @@ export function get_data(perspective, org_id, year, filter_var) {
         children: _.chain(tp_table.q(org).data)
           .map(row => ({
             name: row.tp,
-            amount: (!filtering || row.type_id === filter_var) ? row[header_col(perspective, year)] : 0,
+            amount: (!filtering || row.type_id === filter_var) ?
+              get_changes ?
+                row[header_col(perspective, year_2)] - row[header_col(perspective, year_1)] :
+                row[header_col(perspective, year)]
+              : 0,
           }))
           .filter(has_non_zero_or_non_zero_children)
           .value(),
       }))
       .filter(has_non_zero_or_non_zero_children)
       .value();
-
     data = _.concat(
       _.chain(all_orgs)
         .filter(o => { return o.subject.ministry })
@@ -411,7 +391,7 @@ export function get_data(perspective, org_id, year, filter_var) {
       children: data,
       amount: _.sumBy(data, "amount"),
     };
-    prep_nodes(root, perspective);
+    prep_nodes(root, perspective, get_changes);
     root.children = group_smallest(
       root.children,
       children => ({ name: smaller_items_text, children }),
@@ -419,9 +399,7 @@ export function get_data(perspective, org_id, year, filter_var) {
       0.01
     );
     return root;
-
   } else if (perspective === "vote_stat") {
-    //await ensure_loaded({ table_keys: ["orgVoteStatEstimates"] });
     const vote_stat_table = Table.lookup('orgVoteStatEstimates');
     const orgs = _.chain(Dept.get_all())
       .map(org => ({
@@ -432,14 +410,19 @@ export function get_data(perspective, org_id, year, filter_var) {
           .toPairs()
           .map(([desc, rows]) => ({
             name: desc,
-            amount: parseInt(filter_var) ?
-              _.chain(rows)
-                .filter({ votestattype: parseInt(filter_var) })
-                .sumBy(header_col(perspective, year))
-                .value() :
-              _.chain(rows)
-                .sumBy(header_col(perspective, year))
-                .value(),
+            amount: parseInt(filter_var) ? // chaining ternary statements, why the heck not???????
+              get_changes ?
+                _.chain(rows).filter({ votestattype: parseInt(filter_var) }).sumBy(header_col(perspective, year_2)).value() - 
+                  _.chain(rows).filter({ votestattype: parseInt(filter_var) }).sumBy(header_col(perspective, year_1)).value() :
+                _.chain(rows)
+                  .filter({ votestattype: parseInt(filter_var) })
+                  .sumBy(header_col(perspective, year))
+                  .value()
+              : get_changes ?
+                _.sumBy(rows,header_col(perspective, year_2)) - _.sumBy(rows, header_col(perspective, year_1)) :
+                _.chain(rows)
+                  .sumBy(header_col(perspective, year))
+                  .value(),
           }))
           .filter(has_non_zero_or_non_zero_children)
           .value(),
@@ -465,70 +448,12 @@ export function get_data(perspective, org_id, year, filter_var) {
       children: data,
       amount: _.sumBy(data, "amount"),
     };
-    prep_nodes(root, perspective);
+    prep_nodes(root, perspective, get_changes);
     root.children = group_smallest(
       root.children,
       children => ({ name: smaller_items_text, children }),
       true,
       0.01,
-    );
-    return root;
-  } else if (perspective === "spending_change") {
-    const years = spending_change_year_split(year);
-    const year_1 = years[0];
-    const year_2 = years[1];
-    //await ensure_loaded({ table_keys: ["programSpending", "programFtes"] });
-    const program_ftes_table = Table.lookup('programFtes');
-    const program_spending_table = Table.lookup('programSpending');
-
-    const orgs = _.chain(Dept.get_all())
-      .map(org => ({
-        subject: org,
-        name: org.fancy_name,
-        children: _.chain(org.crsos)
-          .map(crso => ({
-            subject: crso,
-            name: crso.fancy_name,
-            children: _.chain(crso.programs)
-              .map(prog => ({
-                subject: prog,
-                name: prog.fancy_name,
-                amount: program_spending_table.q(prog).sum(header_col("drf", year_2)) - program_spending_table.q(prog).sum(header_col("drf", year_1)),
-                ftes: program_ftes_table.q(prog).sum(header_col("ftes", year_2)) - program_ftes_table.q(prog).sum(header_col("ftes", year_1)) || 0, // if NA 
-              }))
-              .filter(n => has_non_zero_or_non_zero_children(n, perspective))
-              .value(),
-          }))
-          .filter(n => has_non_zero_or_non_zero_children(n, perspective))
-          .value(),
-      }))
-      .filter(n => has_non_zero_or_non_zero_children(n, perspective))
-      .value();
-    data = _.concat(
-      _.chain(orgs)
-        .filter(o => { return o.subject.ministry })
-        .groupBy('subject.ministry.name')
-        .toPairs()
-        .map(([min_name, orgs]) => (
-          {
-            name: min_name,
-            children: orgs,
-          }
-        ))
-        .value(),
-      _.filter(orgs, o => { return !o.subject.ministry })
-    );
-    const root = {
-      name: "Government",
-      children: data,
-      amount: _.sumBy(data, "amount"),
-    };
-    prep_nodes(root, perspective);
-    root.children = group_smallest(
-      root.children,
-      children => ({ name: smaller_items_text, children }),
-      true,
-      0.01
     );
     return root;
   }

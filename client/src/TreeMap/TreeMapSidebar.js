@@ -27,22 +27,19 @@ export class TreeMapSidebar extends React.Component {
       color_var,
       year,
       filter_var,
-      side_bar_title,
+      get_changes,
       location,
       history,
     } = this.props;
     return (
       <div>
-        {/* <div className="TreeMap_SideBar__Title">
-          {side_bar_title}
-          <hr className="BlueHLine" />
-        </div> */}
         <div className="TreeMap_SideBar__Text">
           <TreeMapControls
             perspective={ perspective }
             color_var={ color_var }
             year={ year }
             filter_var={ filter_var }
+            get_changes={ get_changes }
             location={ location }
             history={history}
           />

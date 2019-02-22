@@ -238,10 +238,11 @@ export default class TreeMapper extends React.Component {
           org_id,
           year,
           filter_var,
+          get_changes,
         },
       },
     } = props;
-    const data = get_data(perspective, org_id, year, filter_var);
+    const data = get_data(perspective, org_id, year, filter_var, get_changes);
     this.setState({
       data: data,
       org_route: [],
@@ -262,8 +263,9 @@ export default class TreeMapper extends React.Component {
         params: {
           perspective,
           color_var,
-          year,
           filter_var,
+          year,
+          get_changes,
         },
       },
     } = this.props;
@@ -274,7 +276,6 @@ export default class TreeMapper extends React.Component {
     } = this.state;
 
     const colorScale = get_color_scale(perspective, color_var);
-    const { results_tooltip_render } = this;
 
     let app_height = 800;
     if (window.feature_detection.is_mobile()) {
@@ -304,13 +305,13 @@ export default class TreeMapper extends React.Component {
                       />
                     </div>
                     <TreeMap
-                      data={data}
-                      colorScale={colorScale}
-                      color_var={color_var}
-                      org_route={this.state.org_route}
-                      setRouteCallback={this.setRoute}
-                      perspective={perspective}
-                      year={year}
+                      data = { data }
+                      colorScale = { colorScale }
+                      color_var = { color_var }
+                      year = { year }
+                      org_route = { this.state.org_route }
+                      setRouteCallback = { this.setRoute }
+                      perspective = { perspective }
                       tooltip_render={
                         window.feature_detection.is_mobile() ? mobile_tooltip_render : std_tooltip_render
                       }
@@ -324,8 +325,9 @@ export default class TreeMapper extends React.Component {
                     side_bar_title={display_year}
                     perspective={perspective}
                     color_var={color_var}
-                    year={year}
                     filter_var={filter_var}
+                    year={year}
+                    get_changes={get_changes}
                     history={history}
                     location={location}
                   />

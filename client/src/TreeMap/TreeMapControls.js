@@ -9,6 +9,7 @@ import treemap_text from './TreeMap.yaml';
 import { create_text_maker } from '../models/text.js';
 import { Fragment } from 'react';
 import classNames from 'classnames';
+import { infobaseGraphColors } from '../core/color_schemes.js';
 
 
 const text_maker = create_text_maker([treemap_text]);
@@ -52,6 +53,11 @@ const color_controls = [
   { id: "spending", display: text_maker("spending") },
   { id: "ftes", display: text_maker("fte") },
 ]
+const year_type_controls = [
+  { id: "false", display: "single year" },
+  { id: "true", display: "1-year changes" },
+]
+
 
 const gc_type_controls = [
   { id: "All", display: text_maker("all") },
@@ -97,6 +103,46 @@ const so_type_controls = [
   { id: "3", display: text_maker("revenues") },
 ]
 
+function create_new_path(cur_params, new_param, new_val) {
+  let new_perspective = cur_params.perspective; // default
+  let new_color_var = cur_params.color_var;
+  let new_filter_var = cur_params.filter_var;
+  let new_year = cur_params.year;
+  let new_get_changes = cur_params.get_changes || '';
+  switch(new_param){
+    case("perspective"):
+      new_perspective = new_val;
+      new_filter_var = "All"
+      if(new_val !== "drf" && new_val !== "drf_ftes") new_color_var = "spending";
+      break;
+    case("color_var"):
+      new_color_var = new_val; break;
+    case("filter_var"):
+      new_filter_var = new_val; break;
+    case("year"):
+      new_year = new_val; break;
+    case("get_changes"):
+      new_val ? new_get_changes = new_val : new_get_changes = '';
+      new_val ? new_year = year_changes[cur_params.year] : new_year = cur_params.year.split(":")[1];
+      break;
+  }
+  // check here to see if the year matches
+  const new_path = `/treemap/${new_perspective}/${new_color_var}/${new_filter_var}/${new_year}/${new_get_changes}`;
+  //debugger;
+  return new_path;
+}
+
+const year_changes = {
+  pa_last_year_5: "pa_last_year_5:pa_last_year_4",
+  pa_last_year_4: "pa_last_year_4:pa_last_year_3",
+  pa_last_year_3: "pa_last_year_3:pa_last_year_2",
+  pa_last_year_2: "pa_last_year_2:pa_last_year",
+  pa_last_year: "pa_last_year",
+  planning_year_1: "pa_last_year",
+  planning_year_2: "pa_last_year",
+  planning_year_3: "pa_last_year",
+}
+
 
 export class TreeMapControls extends React.Component {
   constructor() {
@@ -108,6 +154,7 @@ export class TreeMapControls extends React.Component {
       color_var,
       year,
       filter_var,
+      get_changes,
       location,
       history,
     } = this.props;
@@ -120,12 +167,75 @@ export class TreeMapControls extends React.Component {
               <RadioButtons
                 options={_.map(size_controls, ({ id, display }) => ({ id, display, active: id === perspective }))}
                 onChange={id => {
-                  let new_path;
-                  (id === "drf" || id === "drf_ftes") ?
-                    new_path = `/treemap/${id}/${color_var}/${year}` :
-                    new_path = `/treemap/${id}/spending/${year}` // force to spending for other ones
+                  const new_path = create_new_path({
+                    perspective: perspective,
+                    color_var: color_var,
+                    year: year,
+                    get_changes: get_changes,
+                    filter_var: filter_var,
+                  }, 
+                  "perspective", id);
                   if (location.pathname !== new_path) {
-                    // the first_column prop, and thus this button's active id, is updated through this route push
+                    history.push(new_path);
+                  }
+                }}
+              />
+            </div>
+          }
+        />
+        <LabeledBox
+          label={"year select"}
+          content={
+            <div className="centerer">
+              <RadioButtons
+                options={[
+                  {
+                    id: "single_year",
+                    active: !get_changes,
+                    display: "single year",
+                  },
+                  {
+                    id: "year_changes",
+                    active: get_changes,
+                    display: "year over year changes",
+                  },
+                ]}
+                onChange={id => {
+                  const new_path = create_new_path({
+                    perspective: perspective,
+                    color_var: color_var,
+                    year: year,
+                    get_changes: get_changes,
+                    filter_var: filter_var,
+                  }, 
+                  "get_changes", id==="year_changes");
+                  if (location.pathname !== new_path) {
+                    history.push(new_path);
+                  }
+                }}
+              />
+            </div>
+          }
+        />
+        <LabeledBox
+          label={text_maker("year")}
+          content={
+            <div className="centerer">
+              <RadioButtons
+                options={get_changes ?
+                  _.map(all_year_changes, (id => ({ id: id, display: run_template("{{" + id.split(":")[0] + "}}") + " to " + run_template("{{" + id.split(":")[1] + "}}"), active: id === year }))) :
+                  _.map(years[perspective], (id => ({ id: id, display: run_template("{{" + id + "}}"), active: id === year })))
+                }
+                onChange={id => {
+                  const new_path = create_new_path({
+                    perspective: perspective,
+                    color_var: color_var,
+                    year: year,
+                    get_changes: get_changes,
+                    filter_var: filter_var,
+                  }, 
+                  "year", id);
+                  if (location.pathname !== new_path) {
                     history.push(new_path);
                   }
                 }}
@@ -141,9 +251,15 @@ export class TreeMapControls extends React.Component {
                 <RadioButtons
                   options={_.map(gc_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
                   onChange={id => {
-                    const new_path = `/treemap/${perspective}/spending/${year}/${id}`;
-                    if (history.location.pathname !== new_path) {
-                      // the first_column prop, and thus this button's active id, is updated through this route push
+                    const new_path = create_new_path({
+                      perspective: perspective,
+                      color_var: color_var,
+                      year: year,
+                      get_changes: get_changes,
+                      filter_var: filter_var,
+                    }, 
+                    "filter_var", id);
+                    if (location.pathname !== new_path) {
                       history.push(new_path);
                     }
                   }}
@@ -160,9 +276,15 @@ export class TreeMapControls extends React.Component {
                 <RadioButtons
                   options={_.map(color_controls, ({ id, display }) => ({ id, display, active: id === color_var }))}
                   onChange={id => {
-                    const new_path = `/treemap/${perspective}/${id}/${year}`;
-                    if (history.location.pathname !== new_path) {
-                      // the first_column prop, and thus this button's active id, is updated through this route push
+                    const new_path = create_new_path({
+                      perspective: perspective,
+                      color_var: color_var,
+                      year: year,
+                      get_changes: get_changes,
+                      filter_var: filter_var,
+                    }, 
+                    "color_var", id);
+                    if (location.pathname !== new_path) {
                       history.push(new_path);
                     }
                   }}
@@ -180,9 +302,15 @@ export class TreeMapControls extends React.Component {
                   <RadioButtons
                     options={_.map(vs_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
                     onChange={id => {
-                      const new_path = `/treemap/${perspective}/spending/${year}/${id}`;
-                      if (history.location.pathname !== new_path) {
-                        // the first_column prop, and thus this button's active id, is updated through this route push
+                      const new_path = create_new_path({
+                        perspective: perspective,
+                        color_var: color_var,
+                        year: year,
+                        get_changes: get_changes,
+                        filter_var: filter_var,
+                      }, 
+                      "filter_var", id);
+                      if (location.pathname !== new_path) {
                         history.push(new_path);
                       }
                     }}
@@ -200,9 +328,15 @@ export class TreeMapControls extends React.Component {
                 <RadioButtons
                   options={_.map(so_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
                   onChange={id => {
-                    const new_path = `/treemap/${perspective}/spending/${year}/${id}`;
-                    if (history.location.pathname !== new_path) {
-                      // the first_column prop, and thus this button's active id, is updated through this route push
+                    const new_path = create_new_path({
+                      perspective: perspective,
+                      color_var: color_var,
+                      year: year,
+                      get_changes: get_changes,
+                      filter_var: filter_var,
+                    }, 
+                    "filter_var", id);
+                    if (location.pathname !== new_path) {
                       history.push(new_path);
                     }
                   }}
@@ -211,47 +345,13 @@ export class TreeMapControls extends React.Component {
             }
           />
         }
-        {perspective !== "spending_change" && <LabeledBox
-          label={text_maker("year")}
-          content={
-            <div className="centerer">
-              <RadioButtons
-                options={_.map(years[perspective], (id => ({ id: id, display: run_template("{{" + id + "}}"), active: id === year })))}
-                onChange={id => {
-                  const new_path = `/treemap/${perspective}/spending/${id}`;
-                  if (history.location.pathname !== new_path) {
-                    // the first_column prop, and thus this button's active id, is updated through this route push
-                    history.push(new_path);
-                  }
-                }}
-              />
-            </div>
-          }
-        />}
-        {perspective === "spending_change" && <LabeledBox
-          label={text_maker("year")}
-          content={
-            <div className="centerer">
-              <RadioButtons
-                options={_.map(years[perspective], (id => ({ id: id, display: run_template("{{" + id.split(":")[0] + "}}") + " to " + run_template("{{" + id.split(":")[1] + "}}"), active: id === year })))}
-                onChange={id => {
-                  const new_path = `/treemap/${perspective}/spending/${id}`;
-                  if (history.location.pathname !== new_path) {
-                    // the first_column prop, and thus this button's active id, is updated through this route push
-                    history.push(new_path);
-                  }
-                }}
-              />
-            </div>
-          }
-        />}
       </div>
     )
   }
 }
 
 class LabeledBox extends React.Component {
-  render(){
+  render() {
     const {
       label,
       content,
@@ -261,11 +361,11 @@ class LabeledBox extends React.Component {
       <div className="treemap-labeled-box">
         <div className='treemap-labeled-box-label '>
           <div className='treemap-labeled-box-label-text '>
-            { label }
+            {label}
           </div>
         </div>
         <div className="treemap-labeled-box-content">
-          { content }
+          {content}
         </div>
       </div>
     );
@@ -274,12 +374,12 @@ class LabeledBox extends React.Component {
 
 
 const RadioButtons = ({ options, onChange }) => <div className="treemap-options">
-  {options.map( ({ display, id, active })=> 
-    <button 
+  {options.map(({ display, id, active }) =>
+    <button
       key={id}
       aria-pressed={active}
       className={classNames("treemap-options__option", active && "treemap-options__option--active")}
-      onClick={()=>{ onChange(id)}}
+      onClick={() => { onChange(id) }}
     >
       {display}
     </button>
