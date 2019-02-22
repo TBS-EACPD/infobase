@@ -9,8 +9,9 @@ const {
 
 const { connect_db } = require("./db.js");
 
-
+global.USE_TEST_DATA = true;
 global.IS_DEV_SERVER = true;
+
 create_models();
 connect_db();
 // populate_models();
@@ -24,4 +25,3 @@ global.execQuery = async function(query, vars={}){
   const result = await graphql(schema, query, null, {} ,vars);
   return result;
 };
-  
