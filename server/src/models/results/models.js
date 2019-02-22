@@ -41,7 +41,6 @@ export default function(model_singleton){
     actual_datatype: str_type,
     ...bilingual_str("actual_result"),
     status_key: str_type,
-    status_period: str_type,
     ...bilingual_str("methodology"),
     ...bilingual_str("measure"),
   });

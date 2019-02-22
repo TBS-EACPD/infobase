@@ -80,22 +80,23 @@ const schema = `
     name: String
     
     target_year: String
-    target_month:String
-    target_type:String
-    target_min:String
-    target_max:String
-    target_narrative:String
-    doc:String
+    target_month: String
+    target_type: String
+    target_min: String
+    target_max: String
+    target_narrative: String
+    doc: String
 
-    explanation:String
+    explanation: String
 
-    actual_result:String
-    actual_datatype:String
+    actual_result: String
+    actual_datatype: String
     actual_result: String
     
-    status_color:String
-    status_period:String
-    status_key:String
+    status_key: String
+
+    methodology: String
+    measure: String
   }
 
   # this is a graphql anti-pattern but fits in the existing client stores nicely
@@ -286,6 +287,8 @@ export default function({models,loaders}){
       explanation:bilingual_field("explanation"),
       target_narrative: bilingual_field("target_narrative"),
       actual_result: bilingual_field("actual_result"),
+      methodology: bilingual_field("methodology"),
+      measure: bilingual_field("measure"),
     },
   };
 

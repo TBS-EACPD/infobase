@@ -179,9 +179,10 @@ results(doc: ${doc}) {
     actual_datatype
     actual_result
     
-    status_color
-    status_period
     status_key
+
+    methodology
+    measure
   }
 }
 `;
@@ -282,8 +283,56 @@ export function api_load_results_bundle(subject){
 }
 
 function api_populate_results_info(response){
-  debugger
-  //todo
+
+  //_.each(['results', 'indicators', 'pi_dr_links', 'sub_programs'], key => {
+  //  data[key] = d3.csvParse(data[key]);
+  //})
+//
+  //const {
+  //  results,
+  //  sub_programs,
+  //  indicators,
+  //  pi_dr_links,
+  //} = data;
+//
+  //_.each(sub_programs, obj => {
+//
+  //  _.each([
+  //    "spend_planning_year_1",
+  //    "spend_planning_year_2",
+  //    "spend_planning_year_3",
+  //    "fte_planning_year_1",
+  //    "fte_planning_year_2",
+  //    "fte_planning_year_3",
+  //    "spend_pa_last_year",
+  //    "fte_pa_last_year",
+  //    "planned_spend_pa_last_year",
+  //    "planned_fte_pa_last_year",
+  //  ], key => {
+  //    obj[key] = _.isNaN(obj[key]) ? null : +obj[key];
+  //  });
+//
+  //  SubProgramEntity.create_and_register(obj);
+  //});
+//
+  //_.each(results, obj => Result.create_and_register(obj) );
+//
+  //_.each(indicators, obj => {
+  //  
+  //  const {
+  //    actual_result,
+  //    target_year,
+  //    target_month,
+  //  } = obj;
+//
+  //  obj.actual_result = _.isNull(actual_result) || actual_result === '.' ? null : actual_result;
+  //  obj.target_year = _.isNaN(parseInt(target_year)) ? null : parseInt(target_year);
+  //  obj.target_month = _.isEmpty(target_month) ? null : +target_month;
+//
+  //  Indicator.create_and_register(obj);
+  //})
+//
+  //_.each( pi_dr_links, ({program_id, result_id}) => PI_DR_Links.add(program_id, result_id) );
 }
 
 

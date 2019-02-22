@@ -42,9 +42,6 @@ export default async function({models}){
     const { 
       target_year, 
       target_month,
-
-      status_color, 
-      status_period, 
     } = obj;
 
     obj.indicator_id = obj.id;
@@ -54,6 +51,8 @@ export default async function({models}){
     if(!obj.status_key){
       obj.status_key = "dp";
     }
+
+    obj = _.omit(["status_color","status_period"]);
   });
 
 
