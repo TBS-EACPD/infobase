@@ -323,6 +323,9 @@ function extract_flat_data_from_results_hierarchies(org_result_hierarchies){
           _.each(
             result.indicators,
             (indicator) => {
+              indicator.target_year = _.isNaN(parseInt(indicator.target_year)) ? null : parseInt(indicator.target_year);
+              indicator.target_month = _.isEmpty(indicator.target_month) ? null : +indicator.target_month;
+
               indicators.push( _.omit(indicator, "__typename") );
             }
           );
@@ -332,7 +335,7 @@ function extract_flat_data_from_results_hierarchies(org_result_hierarchies){
       if ( !_.isEmpty(subject.pidrlinks) ){
         _.each(
           subject.pidrlinks,
-          ({program_id, result_id}) => pi_dr_links.push([program_id, result_id])
+          (pidrlink) => pi_dr_links.push(pidrlink)
         );
       }
 
@@ -340,6 +343,21 @@ function extract_flat_data_from_results_hierarchies(org_result_hierarchies){
         _.each(
           subject.sub_programs,
           (sub_program) => {
+            _.each([
+              "spend_planning_year_1",
+              "spend_planning_year_2",
+              "spend_planning_year_3",
+              "fte_planning_year_1",
+              "fte_planning_year_2",
+              "fte_planning_year_3",
+              "spend_pa_last_year",
+              "fte_pa_last_year",
+              "planned_spend_pa_last_year",
+              "planned_fte_pa_last_year",
+            ], key => {
+              sub_program[key] = _.isNaN(sub_program[key]) ? null : +sub_program[key];
+            });
+
             sub_programs.push({
               ..._.omit(sub_program, "__typename"),
               parent_id: subject.id,
