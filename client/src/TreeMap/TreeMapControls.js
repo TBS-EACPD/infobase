@@ -32,13 +32,31 @@ const all_year_changes = [
   "pa_last_year_2:pa_last_year",
 ]
 
+const year_to_year_changes = {
+  pa_last_year_5: "pa_last_year_5:pa_last_year_4",
+  pa_last_year_4: "pa_last_year_4:pa_last_year_3",
+  pa_last_year_3: "pa_last_year_3:pa_last_year_2",
+  pa_last_year_2: "pa_last_year_2:pa_last_year",
+  pa_last_year: "pa_last_year",
+  planning_year_1: "pa_last_year",
+  planning_year_2: "pa_last_year",
+  planning_year_3: "pa_last_year",
+}
+
+const year_changes = {
+  "drf": all_year_changes,
+  "drf_ftes": all_year_changes,
+  "tp": all_year_changes,
+  "vote_stat": all_year_changes.slice(1, 4),
+  "so": all_year_changes.slice(2, 4),
+}
+
 const years = {
   "drf": all_years,
   "drf_ftes": all_years,
   "tp": all_years.slice(0, 5),
   "vote_stat": all_years.slice(1, 6),
   "so": all_years.slice(2, 5),
-  "spending_change": all_year_changes,
 }
 
 const size_controls = [
@@ -47,17 +65,11 @@ const size_controls = [
   { id: "tp", display: text_maker("TP") },
   { id: "vote_stat", display: text_maker("EVS") },
   { id: "so", display: text_maker("SO") },
-  { id: "spending_change", display: "spending change" },
 ]
 const color_controls = [
   { id: "spending", display: text_maker("spending") },
   { id: "ftes", display: text_maker("fte") },
 ]
-const year_type_controls = [
-  { id: "false", display: "single year" },
-  { id: "true", display: "1-year changes" },
-]
-
 
 const gc_type_controls = [
   { id: "All", display: text_maker("all") },
@@ -123,7 +135,7 @@ function create_new_path(cur_params, new_param, new_val) {
       new_year = new_val; break;
     case("get_changes"):
       new_val ? new_get_changes = new_val : new_get_changes = '';
-      new_val ? new_year = year_changes[cur_params.year] : new_year = cur_params.year.split(":")[1];
+      new_val ? new_year = year_to_year_changes[cur_params.year] : new_year = cur_params.year.split(":")[1];
       break;
   }
   // check here to see if the year matches
@@ -132,16 +144,7 @@ function create_new_path(cur_params, new_param, new_val) {
   return new_path;
 }
 
-const year_changes = {
-  pa_last_year_5: "pa_last_year_5:pa_last_year_4",
-  pa_last_year_4: "pa_last_year_4:pa_last_year_3",
-  pa_last_year_3: "pa_last_year_3:pa_last_year_2",
-  pa_last_year_2: "pa_last_year_2:pa_last_year",
-  pa_last_year: "pa_last_year",
-  planning_year_1: "pa_last_year",
-  planning_year_2: "pa_last_year",
-  planning_year_3: "pa_last_year",
-}
+
 
 
 export class TreeMapControls extends React.Component {
@@ -223,7 +226,7 @@ export class TreeMapControls extends React.Component {
             <div className="centerer">
               <RadioButtons
                 options={get_changes ?
-                  _.map(all_year_changes, (id => ({ id: id, display: run_template("{{" + id.split(":")[0] + "}}") + " to " + run_template("{{" + id.split(":")[1] + "}}"), active: id === year }))) :
+                  _.map(year_changes[perspective], (id => ({ id: id, display: run_template("{{" + id.split(":")[0] + "}}") + " to " + run_template("{{" + id.split(":")[1] + "}}"), active: id === year }))) :
                   _.map(years[perspective], (id => ({ id: id, display: run_template("{{" + id + "}}"), active: id === year })))
                 }
                 onChange={id => {
@@ -268,7 +271,7 @@ export class TreeMapControls extends React.Component {
             }
           />
         }
-        {(perspective === "drf" || perspective === "drf_ftes" || perspective === "spending_change") &&
+        {(perspective === "drf" || perspective === "drf_ftes" ) &&
           <LabeledBox
             label={text_maker("treemap_color_by_label")}
             content={
