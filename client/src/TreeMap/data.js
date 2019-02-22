@@ -275,16 +275,20 @@ export function get_data(perspective, org_id, year, filter_var) {
       }))
       .filter(n => has_non_zero_or_non_zero_children(n, perspective))
       .value();
-    data = _.chain(orgs)
-      .groupBy('subject.ministry.name')
-      .toPairs()
-      .map(([min_name, orgs]) => (
-        {
-          name: min_name,
-          children: orgs,
-        }
-      ))
-      .value();
+    data = _.concat(
+      _.chain(orgs)
+        .filter(o => { return o.subject.ministry })
+        .groupBy('subject.ministry.name')
+        .toPairs()
+        .map(([min_name, orgs]) => (
+          {
+            name: min_name,
+            children: orgs,
+          }
+        ))
+        .value(),
+      _.filter(orgs, o => { return !o.subject.ministry })
+    );
     const root = {
       name: "Government",
       children: data,
@@ -340,16 +344,21 @@ export function get_data(perspective, org_id, year, filter_var) {
       }))
       .filter(n => has_non_zero_or_non_zero_children(n, perspective))
       .value();
-    data = _.chain(all_orgs)
-      .groupBy('subject.ministry.name')
-      .toPairs()
-      .map(([min_name, orgs]) => (
-        {
-          name: min_name,
-          children: orgs,
-        }
-      ))
-      .value();
+
+    data = _.concat(
+      _.chain(all_orgs)
+        .filter(o => { return o.subject.ministry })
+        .groupBy('subject.ministry.name')
+        .toPairs()
+        .map(([min_name, orgs]) => (
+          {
+            name: min_name,
+            children: orgs,
+          }
+        ))
+        .value(),
+      _.filter(all_orgs, o => { return !o.subject.ministry })
+    );
     const data_root = {
       name: "Government",
       children: data,
@@ -382,16 +391,21 @@ export function get_data(perspective, org_id, year, filter_var) {
       }))
       .filter(has_non_zero_or_non_zero_children)
       .value();
-    data = _.chain(all_orgs)
-      .groupBy('subject.ministry.name')
-      .toPairs()
-      .map(([min_name, orgs]) => (
-        {
-          name: min_name,
-          children: orgs,
-        }
-      ))
-      .value();
+
+    data = _.concat(
+      _.chain(all_orgs)
+        .filter(o => { return o.subject.ministry })
+        .groupBy('subject.ministry.name')
+        .toPairs()
+        .map(([min_name, orgs]) => (
+          {
+            name: min_name,
+            children: orgs,
+          }
+        ))
+        .value(),
+      _.filter(all_orgs, o => { return !o.subject.ministry })
+    );
     const root = {
       name: "Government",
       children: data,
@@ -432,16 +446,20 @@ export function get_data(perspective, org_id, year, filter_var) {
       }))
       .filter(has_non_zero_or_non_zero_children)
       .value();
-    data = _.chain(orgs)
-      .groupBy('subject.ministry.name')
-      .toPairs()
-      .map(([min_name, orgs]) => (
-        {
-          name: min_name,
-          children: orgs,
-        }
-      ))
-      .value();
+    data = _.concat(
+      _.chain(orgs)
+        .filter(o => { return o.subject.ministry })
+        .groupBy('subject.ministry.name')
+        .toPairs()
+        .map(([min_name, orgs]) => (
+          {
+            name: min_name,
+            children: orgs,
+          }
+        ))
+        .value(),
+      _.filter(orgs, o => { return !o.subject.ministry })
+    );
     const root = {
       name: "Government",
       children: data,
@@ -486,16 +504,20 @@ export function get_data(perspective, org_id, year, filter_var) {
       }))
       .filter(n => has_non_zero_or_non_zero_children(n, perspective))
       .value();
-    data = _.chain(orgs)
-      .groupBy('subject.ministry.name')
-      .toPairs()
-      .map(([min_name, orgs]) => (
-        {
-          name: min_name,
-          children: orgs,
-        }
-      ))
-      .value();
+    data = _.concat(
+      _.chain(orgs)
+        .filter(o => { return o.subject.ministry })
+        .groupBy('subject.ministry.name')
+        .toPairs()
+        .map(([min_name, orgs]) => (
+          {
+            name: min_name,
+            children: orgs,
+          }
+        ))
+        .value(),
+      _.filter(orgs, o => { return !o.subject.ministry })
+    );
     const root = {
       name: "Government",
       children: data,
