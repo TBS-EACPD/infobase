@@ -1,9 +1,9 @@
 import _ from "lodash";
 import { get_standard_csv_file_rows } from '../load_utils.js';
+import { get_crso_objs, get_program_objs } from '../core_subject/populate.js';
 
 export default async function({models}){
-  const { SubProgram, Result, Indicator, PIDRLink } = models
-
+  const { SubProgram, Result, ResultCount, Indicator, PIDRLink } = models
 
   const sub_program_records = get_standard_csv_file_rows("subprograms.csv");
 
@@ -37,7 +37,7 @@ export default async function({models}){
     obj.result_id = obj.id;
     obj.id = null;
   });
-
+  
   _.each(indicator_records, obj => {
     const { 
       target_year, 
@@ -55,9 +55,91 @@ export default async function({models}){
     obj = _.omit(["status_color","status_period"]);
   });
 
+  const result_count_records = get_result_count_records(sub_program_records, result_records, indicator_records);
 
   await SubProgram.insertMany(sub_program_records);
-  await Result.insertMany(result_records)
+  await Result.insertMany(result_records);
+  await ResultCount.insertMany(result_count_records);
   await Indicator.insertMany(indicator_records);
   return await PIDRLink.insertMany(pi_dr_links);
 }
+
+
+const get_result_count_records = (sub_programs, results, indicators) => {
+  const crsos = get_crso_objs();
+  const programs = get_program_objs();
+
+  const sub_program_id_to_program_id = _.chain(sub_programs)
+    .map(({id, parent_id}) => [id, parent_id])
+    .fromPairs()
+    .thru(
+      sub_program_id_to_parent_id => _.mapValues(
+        sub_program_id_to_parent_id,
+        (parent_id) => sub_program_id_to_parent_id[parent_id] || parent_id
+      )
+    )
+    .value();
+
+  const indicators_by_result_id = _.groupBy(indicators, 'result_id');
+
+  const results_by_crso_or_prog_id = _.groupBy(
+    results, 
+    ({subject_id}) => sub_program_id_to_program_id[subject_id] || subject_id,
+  );
+
+  // todo: group indicators by dept and parent prog/crso, run through counts_from_indicators
+  
+  const gov_row = {
+    subject_id: 'total',
+    level: 'all',
+    ...counts_from_indicators(indicators),
+  };
+
+  return [
+    gov_row,
+  ];
+};
+
+const counts_from_indicators = (indicators) => _.chain(indicators)
+  .map(
+    indicator => indicator.status_key === 'dp' ?
+      {
+        [`${indicator.doc}_results`]: indicator.result_id,
+        [`${indicator.doc}_indicators`]: 1,
+      } :
+      {
+        [`${indicator.doc}_results`]: indicator.result_id,
+        [`${indicator.doc}_indicators_${indicator.status_key}`]: 1,
+      }
+  )
+  .thru(
+    indicator_count_fragments => {
+      const count_keys = _.chain(indicator_count_fragments)
+        .flatMap( _.keys )
+        .uniq()
+        .value();
+
+      return _.chain(indicator_count_fragments)
+        .reduce(
+          (memo, count_fragment) => {
+            _.each(
+              count_fragment,
+              (value, key) => _.isArray(memo[key]) ? 
+                memo[key].push(value) :
+                memo[key]++
+            );
+            return memo;
+          },
+          _.chain(count_keys)
+            .map( key => _.endsWith(key, '_results') ?
+              [ key, [] ] :
+              [key, 0]
+            )
+            .fromPairs()
+            .value()
+        )
+        .mapValues( value => _.isArray(value) ? _.uniq(value).length : value )
+        .value()
+    }
+  )
+  .value();

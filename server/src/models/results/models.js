@@ -25,6 +25,17 @@ export default function(model_singleton){
     ...bilingual('name', str_type),
   });
 
+  const ResultCountSchema = mongoose.Schema({
+    subject_id: parent_fkey_type(),
+    level: {type: String},
+    drr17_results: {type: Number},
+    drr17_indicators_met: {type: Number},
+    drr17_indicators_not_met: {type: Number},
+    drr17_indicators_not_available: {type: Number},
+    drr17_indicators_future: {type: Number},
+    dp18_results: {type: Number},
+    dp18_indicators: {type: Number},
+  });
 
   // "id","result_id","name_en","name_fr","target_year","target_month","explanation_en","explanation_fr","target_type","target_min","target_max","target_narrative_en","target_narrative_fr","doc","actual_datatype","actual_result_en","actual_result_fr","status_key","status_period","methodology_en","methodology_fr","measure_en","measure_fr"
   const IndicatorSchema = mongoose.Schema({
@@ -60,15 +71,15 @@ export default function(model_singleton){
     ...bilingual_str("drr_fte_expl"),
   });
 
-
   const PIDRLinkSchema = mongoose.Schema({
     program_id: parent_fkey_type(),
     result_id: parent_fkey_type(),
   });
 
-  model_singleton.define_model("SubProgram", SubProgramSchema);
   model_singleton.define_model("Result", ResultSchema);
+  model_singleton.define_model("ResultCount", ResultCountSchema);
   model_singleton.define_model("Indicator", IndicatorSchema);
+  model_singleton.define_model("SubProgram", SubProgramSchema);
   model_singleton.define_model("PIDRLink", PIDRLinkSchema);
 
   const { SubProgram, Result, Indicator, PIDRLink } = model_singleton.models;
