@@ -2,13 +2,13 @@ import "./welcome-mat.scss";
 import text from './welcome_mat.yaml';
 import { Fragment } from 'react';
 import classNames from 'classnames';
+import { ResponsiveLine } from '@nivo/line';
 import {
   Table,
   Panel,
   formats,
   PanelGraph,
   years,
-  declarative_charts,
   create_text_maker_component,
   util_components,
   get_planned_fte_source_link,
@@ -18,11 +18,6 @@ import {
 } from "../shared.js" 
 
 const { Format } = util_components;
-
-const {
-  Bar,
-  Line,
-} = declarative_charts;
 
 const {std_years, planning_years} = years;
 const exp_cols = _.map(std_years, yr => `${yr}exp`);
@@ -74,21 +69,74 @@ const get_historical_fte_source_link = subject => {
 };
 
 
+let dataFormatter = (data) =>{
+  let formatData = _.map(data, (d,i)=>{
+    let result = {};
+    result ["x"] = i.toString();
+    result ["y"] = d;
+    return result;
+  })
+  return formatData;
+}
+
 const Chart = ({
   is_fte,
   use_line,
   data,
+  isMoney,
   is_light,
-}) => React.createElement(use_line ? Line : Bar, {
-  margin: {top: 5, bottom: 5, left: 75, right: 5},
-  height: 200,
-  add_xaxis: false,
-  hide_gridlines: true,
-  ticks: _.range(0,data.length),
-  colors: _.constant(is_light ? "#335075" : 'black'),
-  formatter: formats[ is_fte ? "big_int_real_raw" : "compact1_raw" ],
-  series: {"0": data},
-})
+}) => <div style ={{height: '250px'}}>
+  <ResponsiveLine
+    data={[
+      {
+        "data": data}]}
+    margin={{
+      "top": 30,
+      "right": 30,
+      "bottom": 30,
+      "left": 70
+    }}
+    xScale={{
+      "type": "point"
+    }}
+    yScale={{
+      "type": "linear",
+      "stacked": true,
+      "min": "auto",
+      "max": "auto"
+    }}
+    axisTop={null}
+    axisRight={null}
+    axisBottom={null}
+    axisLeft={{
+      "orient": "left",
+      "tickSize": 5,
+      "tickPadding": 5,
+      "tickRotation": 0,
+      "tickValues": 4,
+      "format": d => isMoney? formats.compact1(d,{raw: true}) : formats.big_int_real(d,{raw:true}),
+    }}
+    dotSize={10}
+    enableGridX={false}
+    enableGridY={false}
+    enableDotLabel={false}
+    animate={true}
+    motionStiffness={90}
+    motionDamping={15}
+    tooltipFormat={d => <tspan>{isMoney? formats.compact1(d,{raw: true}) : formats.big_int_real(d,{raw:true})}</tspan>}
+    colors="#000"
+  />
+</div>
+  //   React.createElement(use_line ? Line : Bar, {
+  // margin: {top: 5, bottom: 5, left: 75, right: 5},
+  // height: 200,
+  // add_xaxis: false,
+  // hide_gridlines: true,
+  // ticks: _.range(0,data.length),
+  // colors: _.constant(is_light ? "#335075" : 'black'),
+  // formater: formats[ is_fte ? "big_int_real_raw" : "compact1_raw" ],
+  // series: {"0": data},
+// })
 
 
 const Pane = ({ size, children, is_header, noPadding }) => (
@@ -619,7 +667,8 @@ const WelcomeMat = (props) => {
           <Pane noPadding key="d" size={40}>
             <Chart 
               use_line 
-              data={spend_data}
+              data={dataFormatter(spend_data)}
+              isMoney={true}
             />
           </Pane>,
         ]}
@@ -667,7 +716,8 @@ const WelcomeMat = (props) => {
           <Pane noPadding key="d" size={40}>
             <Chart 
               use_line 
-              data={fte_data}
+              data={dataFormatter(fte_data)}
+              isMoney={false}
               is_fte
             />
           </Pane>,
