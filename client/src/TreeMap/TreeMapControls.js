@@ -166,7 +166,7 @@ export class TreeMapControls extends React.Component {
         <LabeledBox
           label={text_maker("treemap_display_value_label")}
           content={
-            <div className="centerer">
+            <div className="cent">
               <RadioButtons
                 options={_.map(size_controls, ({ id, display }) => ({ id, display, active: id === perspective }))}
                 onChange={id => {
@@ -189,7 +189,7 @@ export class TreeMapControls extends React.Component {
         <LabeledBox
           label={text_maker("year_format")}
           content={
-            <div className="centerer">
+            <div className="cent">
               <RadioButtons
                 options={[
                   {
@@ -223,7 +223,7 @@ export class TreeMapControls extends React.Component {
         <LabeledBox
           label={text_maker("year")}
           content={
-            <div className="centerer">
+            <div className="cent">
               <RadioButtons
                 options={get_changes ?
                   _.map(year_changes[perspective], (id => ({ id: id, display: run_template("{{" + id.split(":")[0] + "}}") + " to " + run_template("{{" + id.split(":")[1] + "}}"), active: id === year }))) :
@@ -250,7 +250,7 @@ export class TreeMapControls extends React.Component {
           <LabeledBox
             label={text_maker("treemap_gc_type_filter")}
             content={
-              <div className="centerer">
+              <div className="cent">
                 <RadioButtons
                   options={_.map(gc_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
                   onChange={id => {
@@ -275,7 +275,7 @@ export class TreeMapControls extends React.Component {
           <LabeledBox
             label={text_maker("treemap_color_by_label")}
             content={
-              <div className="centerer">
+              <div className="cent">
                 <RadioButtons
                   options={_.map(color_controls, ({ id, display }) => ({ id, display, active: id === color_var }))}
                   onChange={id => {
@@ -300,7 +300,7 @@ export class TreeMapControls extends React.Component {
           <LabeledBox
             label={text_maker("treemap_vstype_filter")}
             content={
-              <div className="centerer">
+              <div className="cent">
                 <Fragment>
                   <RadioButtons
                     options={_.map(vs_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
@@ -327,7 +327,7 @@ export class TreeMapControls extends React.Component {
           <LabeledBox
             label={text_maker("treemap_so_filter")}
             content={
-              <div className="centerer">
+              <div className="cent">
                 <RadioButtons
                   options={_.map(so_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
                   onChange={id => {

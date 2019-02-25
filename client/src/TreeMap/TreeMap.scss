@@ -193,31 +193,29 @@
 }
 
 $controlsColor: #2970b3;
-$controlsColorMid: #5097c7;
+$controlsColorMid: #6baed6;
 $controlsColorLight: #c7dbee;
 
 .treemap-controls {
   //margin-bottom: -20px;
-  //padding: 8px 0px 13px 0px;
 
   & > .treemap-labeled-box {
     margin-bottom: 8px;
-    //border-radius: 0px;
 
     & > .treemap-labeled-box-label {
       background-color: $controlsColor;
       color: #FFF;
       font-size: 18px;
       padding: 13px 13px 13px 20px;
-      min-height: 0px;
       border-radius: 5px 5px 0px 0px;
+      min-height: 0px;
     }
   
     & > .treemap-labeled-box-content {
       width: 100%;
     }
 
-    & > .treemap-labeled-box-content > .centerer > .treemap-options {
+    & > .treemap-labeled-box-content > .cent > .treemap-options {
       display: block;
       line-height: normal;
       & > .treemap-options__option {
@@ -228,7 +226,6 @@ $controlsColorLight: #c7dbee;
         padding: 5px;
         font-size: 14x;
         width: 100%;
-        min-width: 171px;
       }
       & > .treemap-options__option:last-child {
         border-radius: 0px 0px 5px 5px;
@@ -239,15 +236,10 @@ $controlsColorLight: #c7dbee;
         background-color: $controlsColorMid;
       }
       
-/*       & > .treemap-options__option:not(:last-child):after,
-      & > .treemap-options__option:not(:first-child):before {
-        border-color: $controlsColorLighter;
-      } */
-      
       & > .treemap-options__option:not(.treemap-options__option--active):hover,
       & > .treemap-options__option:not(.treemap-options__option--active):active,
       & > .treemap-options__option:not(.treemap-options__option--active):focus { 
-        background-color: change-color($color: $controlsColorMid, $alpha: 0.50);
+        background-color: $controlsColorLight;
         color: #000000;
       }
     }
