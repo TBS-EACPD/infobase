@@ -75,12 +75,14 @@ d3_purple.clamp(true);
 // spending % of parent
 function standard_color_scale(node) {
   let color_val;
+  let scale = d3_blue;
   node.data.parent_amount ? color_val = node.data.amount / node.data.parent_amount * 3 : color_val = 0;
-  //debugger;
   if (node.data.amount < 0) {
-    return d3_red(-color_val);
+    color_val = -color_val
+    scale = d3_red;
   }
-  return d3_blue(color_val);
+  scale.domain([0, 1]);
+  return scale(color_val);
 }
 
 // FTE % of parent
@@ -230,7 +232,6 @@ export default class TreeMapper extends React.Component {
     } else if (!data) {
       this.set_data(this.props);
     }
-    get_color_scale(this.props.match.params.color_var, this.props.match.params.get_changes)
   }
   set_data(props) {
     const {
@@ -276,7 +277,6 @@ export default class TreeMapper extends React.Component {
       data,
       org_route,
     } = this.state;
-
     let colorScale = get_color_scale(color_var, get_changes);
 
     let app_height = 800;
