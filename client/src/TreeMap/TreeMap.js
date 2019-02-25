@@ -61,56 +61,59 @@ function std_node_render(foreign_sel) {
 
 /* COLOUR SCALES */
 
-// need this slightly tricky formulation because we only want to use part of the Blues scale (darkest colours
-// are too dark for good contrast with the text)
-const pos_d3_color_scale = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeBlues[9].slice(2, 7)));
-pos_d3_color_scale.clamp(true); // I'm not sure if this is the default
-const neg_d3_color_scale = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeReds[9].slice(3, 5)));
-neg_d3_color_scale.clamp(true);
+// need this slightly tricky formulation because we only want to use part of the scale
+// (darkest colours are too dark for good contrast with the text)
+const d3_blue = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeBlues[9].slice(2, 7)));
+d3_blue.clamp(true);
+const d3_red = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeReds[9].slice(2, 7)));
+d3_red.clamp(true);
+const d3_green = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeGreens[9].slice(2, 7)));
+d3_green.clamp(true);
+const d3_purple = d3.scaleSequential(d3.interpolateRgbBasis(["#e7d4e8","#c2a5cf","#9970ab","#994d97"]));
+d3_purple.clamp(true);
+
+// spending % of parent
 function standard_color_scale(node) {
   let color_val;
   node.data.parent_amount ? color_val = node.data.amount / node.data.parent_amount * 3 : color_val = 0;
+  //debugger;
   if (node.data.amount < 0) {
-    return neg_d3_color_scale(-color_val);
+    return d3_red(-color_val);
   }
-  return pos_d3_color_scale(color_val);
+  return d3_blue(color_val);
 }
 
-const d3_fte_scale = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeGreens[9].slice(2, 7)));
-//d3_fte_scale.domain([0,10000]);
-d3_fte_scale.clamp(true);
+// FTE % of parent
 function fte_color_scale(node) {
   let color_val = 0;
   if (node.data.parent_ftes) { color_val = node.data.ftes / node.data.parent_ftes * 3 }
-  return d3_fte_scale(color_val);
-  //return d3_fte_scale(node.data.ftes);
+  return d3_green(color_val);
 }
 
-const pos_d3_color_scale_log = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeGreens[9].slice(1, 7)));
-pos_d3_color_scale_log.clamp(true); // I'm not sure if this is the default
-const neg_d3_color_scale_log = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeReds[9].slice(1, 7)));
-neg_d3_color_scale_log.clamp(true);
+// divergent scales (absolute val)
 function spending_change_color_scale(node) {
-  if (node.data.amount < 0) {
-    neg_d3_color_scale_log.domain([0, 1000000000]);
-    return neg_d3_color_scale_log(-node.data.amount);
+  let colour_val = node.data.amount;
+  let scale = d3_blue;
+  if (colour_val < 0) {
+    colour_val = -colour_val;
+    scale = d3_red;
   }
-  pos_d3_color_scale_log.domain([0, 1000000000]);
-  return pos_d3_color_scale_log(node.data.amount);
+  scale.domain([0, 1000000000]);
+  return scale(colour_val);
 }
 function fte_change_color_scale(node) {
-  if (node.data.ftes < 0) {
-    neg_d3_color_scale_log.domain([0, 1000]);
-    return neg_d3_color_scale_log(-node.data.ftes);
+  let colour_val = node.data.ftes;
+  let scale = d3_green;
+  if (colour_val < 0) {
+    colour_val = -colour_val;
+    scale = d3_purple;
   }
-  pos_d3_color_scale_log.domain([0, 1000]);
-  return pos_d3_color_scale_log(node.data.ftes);
+  scale.domain([0, 10000]);
+  return scale(colour_val);
 }
 
-function get_color_scale(type, color_var) {
-  if (type === "org_results") {
-    return null; //result_color_scale;
-  } else if (type === "spending_change") {
+function get_color_scale(color_var, get_changes) {
+  if (get_changes) {
     if (color_var && color_var === "ftes") {
       return fte_change_color_scale;
     } else {
@@ -227,6 +230,7 @@ export default class TreeMapper extends React.Component {
     } else if (!data) {
       this.set_data(this.props);
     }
+    get_color_scale(this.props.match.params.color_var, this.props.match.params.get_changes)
   }
   set_data(props) {
     const {
@@ -273,7 +277,7 @@ export default class TreeMapper extends React.Component {
       org_route,
     } = this.state;
 
-    const colorScale = get_color_scale(perspective, color_var);
+    let colorScale = get_color_scale(color_var, get_changes);
 
     let app_height = 800;
     if (window.feature_detection.is_mobile()) {

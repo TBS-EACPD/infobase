@@ -19,10 +19,7 @@ const { Dept } = Subject;
 
 function has_non_zero_or_non_zero_children(node, perspective = "drf") {
   if (_.isEmpty(node.children)) {
-    if (perspective === "drf_ftes") {
-      return node.ftes && node.ftes > 0;
-    }
-    return Math.abs(node.amount) > 0;
+    return Math.abs(node.amount) > 0 || (node.ftes && node.ftes != 0);
   } else {
     return _.some(node.children, has_non_zero_or_non_zero_children);
   }
@@ -175,9 +172,6 @@ function prep_nodes(node, perspective, get_changes) {
       node.size = Math.abs(node.amount);
     }
   }
-  if (node.amount < 0) {
-    node.is_negative = true;
-  }
 }
 
 function filter_sobj_categories(so_cat, row) {
@@ -233,7 +227,11 @@ export function get_data(perspective, org_id, year, filter_var, get_changes) {
                     subject: prog,
                     name: prog.fancy_name,
                     amount: program_spending_table.q(prog).sum(header_col("drf", year_2)) - program_spending_table.q(prog).sum(header_col("drf", year_1)),
-                    ftes: program_ftes_table.q(prog).sum(header_col("ftes", year_2)) - program_ftes_table.q(prog).sum(header_col("ftes", year_1)) || 0, // if NA 
+                    ftes: program_ftes_table.q(prog).sum(header_col("ftes", year_2)) - program_ftes_table.q(prog).sum(header_col("ftes", year_1)), 
+                    amount_1: program_spending_table.q(prog).sum(header_col("drf", year_1)),
+                    amount_2: program_spending_table.q(prog).sum(header_col("drf", year_2)),
+                    ftes_2: program_ftes_table.q(prog).sum(header_col("ftes", year_2)),
+                    ftes_1: program_ftes_table.q(prog).sum(header_col("ftes", year_1)), 
                   } : {
                     subject: prog,
                     name: prog.fancy_name,
