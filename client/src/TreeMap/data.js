@@ -31,7 +31,7 @@ function has_non_zero_or_non_zero_children(node, perspective = "drf") {
 
 function header_col(perspective, year) {
   if (!year) { year = -1 }; // error, but this should never happen
-  if (perspective === "drf" || perspective === "tp") {
+  if (perspective === "drf" || perspective === "tp" || perspective === "vote_stat") {
     switch (year) {
       case "pa_last_year_5": return "{{pa_last_year_5}}exp";
       case "pa_last_year_4": return "{{pa_last_year_4}}exp";
@@ -42,15 +42,15 @@ function header_col(perspective, year) {
       case "planning_year_2": return "{{planning_year_2}}";
       case "planning_year_3": return "{{planning_year_3}}";
     }
-  } else if (perspective === "vote_stat") {
-    switch (year) {
-      case "pa_last_year_4": return "{{est_last_year_4}}_estimates";
-      case "pa_last_year_3": return "{{est_last_year_3}}_estimates";
-      case "pa_last_year_2": return "{{est_last_year_2}}_estimates";
-      case "pa_last_year": return "{{est_last_year}}_estimates";
-      case "planning_year_1": return "{{est_in_year}}_estimates";
-      case "planning_year_2": return "{{est_next_year}}_estimates";
-    }
+  // } else if (perspective === "vote_stat") {
+  //   switch (year) {
+  //     case "pa_last_year_4": return "{{est_last_year_4}}_estimates";
+  //     case "pa_last_year_3": return "{{est_last_year_3}}_estimates";
+  //     case "pa_last_year_2": return "{{est_last_year_2}}_estimates";
+  //     case "pa_last_year": return "{{est_last_year}}_estimates";
+  //     case "planning_year_1": return "{{est_in_year}}_estimates";
+  //     case "planning_year_2": return "{{est_next_year}}_estimates";
+  //   }
   } else if (perspective === "ftes") {
     switch (year) {
       case "pa_last_year_5": return "{{pa_last_year_5}}";
@@ -194,7 +194,7 @@ function filter_sobj_categories(so_cat, row) {
 
 
 export async function load_data() {
-  await ensure_loaded({ table_keys: ["programSpending", "programFtes", "programSobjs", "orgTransferPayments", "orgVoteStatEstimates"] });
+  await ensure_loaded({ table_keys: ["programSpending", "programFtes", "programSobjs", "orgTransferPayments", "orgVoteStatPa"] });
 }
 
 function spending_change_year_split(year_string) {
@@ -400,7 +400,7 @@ export function get_data(perspective, org_id, year, filter_var, get_changes) {
     );
     return root;
   } else if (perspective === "vote_stat") {
-    const vote_stat_table = Table.lookup('orgVoteStatEstimates');
+    const vote_stat_table = Table.lookup('orgVoteStatPa');
     const orgs = _.chain(Dept.get_all())
       .map(org => ({
         subject: org,

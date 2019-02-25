@@ -55,7 +55,7 @@ const years = {
   "drf": all_years,
   "drf_ftes": all_years,
   "tp": all_years.slice(0, 5),
-  "vote_stat": all_years.slice(1, 6),
+  "vote_stat": all_years.slice(0, 5),
   "so": all_years.slice(2, 5),
 }
 
@@ -84,7 +84,7 @@ const vs_type_controls = [
   { id: "3", display: text_maker("vstype3") },
   { id: "4", display: text_maker("vstype4") },
   { id: "5", display: text_maker("vstype5") },
-  { id: "6", display: text_maker("vstype6") },
+  //{ id: "6", display: text_maker("vstype6") },
   //{ id: "9", display: text_maker("vstype9") }, // Other
   { id: "999", display: text_maker("treemap_vstype999") },
 ]
