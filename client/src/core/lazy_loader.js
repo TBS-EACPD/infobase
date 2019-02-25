@@ -106,8 +106,7 @@ function ensure_loaded({
         .some()
         .value()
     ) &&
-      _.isEmpty(BudgetMeasure.get_all())
-      
+      _.isEmpty( BudgetMeasure.get_all() )
   );
 
   const results_prom = (
@@ -116,7 +115,7 @@ function ensure_loaded({
         api_load_results_bundle(subject) : 
         load_results_bundle(subject) :
       Promise.resolve()
-  ) 
+  );
 
   const result_counts_prom = (
     should_load_result_counts ?
@@ -152,7 +151,6 @@ function ensure_loaded({
     footnotes_prom,
     budget_measures_prom,
   ]);
-
 }
 
 window._DEV_HELPERS.ensure_loaded = ensure_loaded;

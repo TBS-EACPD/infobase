@@ -104,8 +104,6 @@ const schema = `
     program_id: String
     result_id: String
   }
-
-
 `;
 
 
@@ -132,28 +130,28 @@ export default function({models,loaders}){
   } = loaders;
 
 
-  //this should take 6 DB queries, but the first 2 can be done in paralel
   const result_count_defaults = {
     results: 0,
     
     dp: 0,
-
+    
     not_met: 0,
     not_available: 0,
     met: 0,
     future: 0,
   };
-
+  
   async function get_gov_target_counts(doc){
     const orgs = await Org.find({});
-
+    
     return await get_org_target_counts(orgs, doc);
   }
-
+  
+  //this should take 6 DB queries, but the first 2 can be done in paralel
   async function get_org_target_counts(orgs, doc){
     const dept_codes = _.chain(orgs)
       .map('dept_code')
-      .filter()
+      .compact()
       .value();
 
     if ( _.isEmpty(dept_codes) ){
@@ -206,7 +204,7 @@ export default function({models,loaders}){
     }, result_count_defaults);
   }
 
-  async function get_results(subject, { include_efficiency, doc }){
+  async function get_results(subject, { doc }){
     let id_val;
     if(subject instanceof Crso){
       id_val = subject.crso_id;
@@ -267,7 +265,7 @@ export default function({models,loaders}){
     },
     Result: {
       id: _.property('result_id'),
-      indicators: async (result, {doc} ) => {
+      indicators: async (result, {doc}) => {
         let records = await indicator_by_result_loader.load(result.result_id);
         
         if(doc){
@@ -290,5 +288,3 @@ export default function({models,loaders}){
 
   return { schema, resolvers };
 }
-
-

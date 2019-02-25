@@ -488,7 +488,7 @@ export function api_load_results_counts(){
                 .value()
             ),
           },
-        ]
+        ];
         
         ResultCounts.set_data(rows); 
         api_is_results_count_loaded = true;
