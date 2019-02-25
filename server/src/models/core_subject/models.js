@@ -87,13 +87,13 @@ export default function define_core_subjects(model_singleton){
 
   
   const loaders = {
-    org_deptcode_loader: create_resource_by_id_attr_dataloader(Org,'dept_code'),
-    org_id_loader: create_resource_by_id_attr_dataloader(Org,'org_id'),
-    prog_dept_code_loader: create_resource_by_foreignkey_attr_dataloader(Program, "dept_code"),
-    prog_crso_id_loader: create_resource_by_foreignkey_attr_dataloader(Program, "crso_id"),
+    org_deptcode_loader: create_resource_by_id_attr_dataloader(Org, 'dept_code'),
+    org_id_loader: create_resource_by_id_attr_dataloader(Org, 'org_id'),
+    prog_dept_code_loader: create_resource_by_foreignkey_attr_dataloader(Program, 'dept_code'),
+    prog_crso_id_loader: create_resource_by_foreignkey_attr_dataloader(Program, 'crso_id'),
     prog_id_loader: create_resource_by_id_attr_dataloader(Program,'program_id'),
     crso_from_deptcode_loader: create_resource_by_foreignkey_attr_dataloader(Crso, 'dept_code'),
-    crso_id_loader: create_resource_by_id_attr_dataloader(Program,'crso_id'), 
+    crso_id_loader: create_resource_by_id_attr_dataloader(Crso, 'crso_id'), 
   };
-  _.each(loaders, (val,key) =>  model_singleton.define_loader(key,val) )
+  _.each( loaders, (val, key) =>  model_singleton.define_loader(key, val) )
 }
