@@ -144,9 +144,6 @@ function prep_nodes(node, perspective, get_changes) {
     _.each(children, child => { prep_nodes(child, perspective, get_changes) });
     if (!node.amount) {
       node.amount = _.sumBy(children, "amount");
-      get_changes ?
-        node.size = Math.abs(node.amount) :
-        node.size = _.sumBy(children, "size");
     }
     if (!node.ftes) {
       // ok this is terrible but I swear to god nothing I tried that was more concise worked
@@ -159,6 +156,11 @@ function prep_nodes(node, perspective, get_changes) {
           }
         }, 0).value();
     }
+    if(get_changes){
+      perspective === "drf_ftes" ? node.size = Math.abs(node.ftes) : node.size = Math.abs(node.amount) ;
+    } else{
+      node.size = _.sumBy(children, "size");
+    }
     _.each(children, n => {
       _.set(n, "parent_amount", node.amount);
       _.set(n, "parent_name", node.name);
@@ -167,7 +169,7 @@ function prep_nodes(node, perspective, get_changes) {
   } else {
     //leaf node, already has amount but no size
     if (perspective === "drf_ftes") {
-      node.size = node.ftes;
+      node.size = Math.abs(node.ftes);
     } else {
       node.size = Math.abs(node.amount);
     }
@@ -228,10 +230,6 @@ export function get_data(perspective, org_id, year, filter_var, get_changes) {
                     name: prog.fancy_name,
                     amount: program_spending_table.q(prog).sum(header_col("drf", year_2)) - program_spending_table.q(prog).sum(header_col("drf", year_1)),
                     ftes: program_ftes_table.q(prog).sum(header_col("ftes", year_2)) - program_ftes_table.q(prog).sum(header_col("ftes", year_1)), 
-                    amount_1: program_spending_table.q(prog).sum(header_col("drf", year_1)),
-                    amount_2: program_spending_table.q(prog).sum(header_col("drf", year_2)),
-                    ftes_2: program_ftes_table.q(prog).sum(header_col("ftes", year_2)),
-                    ftes_1: program_ftes_table.q(prog).sum(header_col("ftes", year_1)), 
                   } : {
                     subject: prog,
                     name: prog.fancy_name,

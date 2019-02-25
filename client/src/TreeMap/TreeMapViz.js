@@ -40,11 +40,6 @@ export class TreeMap extends React.Component {
     window.removeEventListener("mousemove", updateMousePositionVars);
   }
   shouldComponentUpdate(nextProps, nextState) {
-    //debugger;
-    // if(!_.isEqual(this.my_state.my_org_route.sort(), nextState.my_org_route.sort()) )
-    // {
-    //   return false; // don't update on state change (controlled from within the viz)
-    // }
     if (
       this.props.perspective !== nextProps.perspective ||
       this.props.year !== nextProps.year ||
@@ -70,7 +65,7 @@ export class TreeMap extends React.Component {
     } = this.props;
     let org_route = this.my_state.my_org_route;
     //debugger;
-    if (!_.isEqual(this.my_state.my_org_route.sort(), this.props.org_route.sort()) &&
+    if (!_.isEqual(this.my_state.my_org_route, this.props.org_route) &&
       this.props.org_route.length < this.my_state.my_org_route) {
       org_route = this.props.org_route;
     }
@@ -115,9 +110,10 @@ export class TreeMap extends React.Component {
     let root = data;
 
     if (!transitioning && !_.isEmpty(org_route)) {
+      //debugger;
       const route_length = org_route.length;
       for (let i = 0; i < route_length; i++) { // TODO: rewrite to use lodash and return original root if any of them fail
-        const next_name = org_route.shift();
+        const next_name = org_route[i];
         const next_item = _.filter(root.children, d => d.name == next_name);
         root = next_item[0];
       }
