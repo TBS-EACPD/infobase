@@ -71,8 +71,10 @@ const d3_red = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeReds[9].slice(
 d3_red.clamp(true);
 const d3_green = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeGreens[9].slice(2, 7)));
 d3_green.clamp(true);
-const d3_purple = d3.scaleSequential(d3.interpolateRgbBasis(["#e7d4e8","#c2a5cf","#9970ab","#994d97"]));
+const d3_purple = d3.scaleSequential(d3.interpolateRgbBasis(["#e7d4e8","#c2a5cf","#ab6fc3","#9c4cbc"]));
 d3_purple.clamp(true);
+
+//#9c4cbc
 
 // spending % of parent
 function standard_color_scale(node) {
