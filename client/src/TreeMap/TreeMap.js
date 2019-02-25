@@ -92,8 +92,9 @@ function standard_color_scale(node) {
 // FTE % of parent
 function fte_color_scale(node) {
   let color_val = 0;
+  const scale = d3_green.domain([0,1]);
   if (node.data.parent_ftes) { color_val = node.data.ftes / node.data.parent_ftes * 3 }
-  return d3_green(color_val);
+  return scale(color_val);
 }
 
 // divergent scales (absolute val)
