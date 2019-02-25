@@ -112,7 +112,7 @@ function fte_change_color_scale(node) {
     colour_val = -colour_val;
     scale = d3_purple;
   }
-  scale.domain([0, 10000]);
+  scale.domain([0, 1000]);
   return scale(colour_val);
 }
 
