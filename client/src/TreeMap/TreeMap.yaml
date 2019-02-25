@@ -31,9 +31,9 @@ treemap_gc_type_filter:
   en: Filter by grants / contributions
   fr: Filtrer par subventions / contributions
 
-DRF:
-  en: Departmental Results Framework
-  fr: Cadre ministériel des résultats
+DRF_spending:
+  en: Program spending
+  fr: Dépenses de programmes
 
 TP:
   en: Transfer payments
@@ -130,4 +130,14 @@ treemap_none_selected_summary:
   en: To see data, select a year
   fr: Pour voir des données, veuillez choisir une année 
 
+single_year:
+  en: Single year
+  fr: Une année seulement
 
+year_changes:
+  en: Annual change
+  fr: Changement annuel
+
+year_format:
+  en: Year format
+  fr: Format annuel

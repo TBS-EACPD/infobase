@@ -60,7 +60,7 @@ const years = {
 }
 
 const size_controls = [
-  { id: "drf", display: text_maker("DRF") },
+  { id: "drf", display: text_maker("DRF_spending") },
   { id: "drf_ftes", display: text_maker("fte") },
   { id: "tp", display: text_maker("TP") },
   { id: "vote_stat", display: text_maker("EVS") },
@@ -187,7 +187,7 @@ export class TreeMapControls extends React.Component {
           }
         />
         <LabeledBox
-          label={"year select"}
+          label={text_maker("year_format")}
           content={
             <div className="centerer">
               <RadioButtons
@@ -195,12 +195,12 @@ export class TreeMapControls extends React.Component {
                   {
                     id: "single_year",
                     active: !get_changes,
-                    display: "single year",
+                    display: text_maker("single_year"),
                   },
                   {
                     id: "year_changes",
                     active: get_changes,
-                    display: "year over year changes",
+                    display: text_maker("year_changes"),
                   },
                 ]}
                 onChange={id => {

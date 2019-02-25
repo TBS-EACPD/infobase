@@ -125,12 +125,14 @@ function get_color_scale(type, color_var) {
 
 /* TOOLTIPS */
 
-function std_tooltip_render(tooltip_sel, color_var) {
+function std_tooltip_render(tooltip_sel, year) {
+  let get_changes = false;
+  if ( year.includes(":") ){ get_changes = true }
   tooltip_sel.html(function (d) {
     let tooltip_html = `<div>
     <div>${d.data.name}</div>
     <hr class="BlueHLine">`;
-    if (d.data.parent_amount) {
+    if (!get_changes && d.data.parent_amount) {
       tooltip_html = tooltip_html + `
       <div>${formats.compact1(d.data.amount)}
       (${formats.percentage1(d.data.amount / d.data.parent_amount)} of ${d.data.parent_name})</div>`;
@@ -139,7 +141,7 @@ function std_tooltip_render(tooltip_sel, color_var) {
       <div>${formats.compact1(d.data.amount)}</div>`
     }
     if (d.data.ftes) {
-      if (d.data.parent_ftes) {
+      if (!get_changes && d.data.parent_ftes) {
         tooltip_html = tooltip_html + `
         <div>${Math.round(d.data.ftes)} ${trivial_text_maker("fte")}
         (${formats.percentage1(d.data.ftes / d.data.parent_ftes)} of ${d.data.parent_name})</div>`
@@ -149,26 +151,22 @@ function std_tooltip_render(tooltip_sel, color_var) {
         <div>${Math.round(d.data.ftes)} ${trivial_text_maker("fte")}</div>`
       }
     }
-    if (color_var == "ftes") {
-      tooltip_html = tooltip_html + `
-      ${generate_infograph_href(d, "people")}
-      </div>`;
-    } else {
-      tooltip_html = tooltip_html + `
-      ${generate_infograph_href(d, "financial")}
-      </div>`;
-    }
+    tooltip_html = tooltip_html + `
+    ${generate_infograph_href(d)}
+    </div>`;
     return tooltip_html;
   })
 }
 
-function mobile_tooltip_render(tooltip_sel) {
+function mobile_tooltip_render(tooltip_sel, year) {
+  let get_changes = false;
+  if ( year.includes(":") ){ get_changes = true }
   tooltip_sel.html(function (d) {
     let tooltip_html = `<div>
     <div>${d.data.name}</div>
     <hr class="BlueHLine">
     <div>${formats.compact1(d.data.amount)}</div>`;
-    if (d.data.parent_amount) {
+    if (!get_changes && d.data.parent_amount) {
       tooltip_html = tooltip_html + `
       <div>${formats.percentage1(d.data.amount / d.data.parent_amount)} of ${d.data.parent_name}</div>`;
     }
@@ -307,7 +305,6 @@ export default class TreeMapper extends React.Component {
                     <TreeMap
                       data = { data }
                       colorScale = { colorScale }
-                      color_var = { color_var }
                       year = { year }
                       org_route = { this.state.org_route }
                       setRouteCallback = { this.setRoute }

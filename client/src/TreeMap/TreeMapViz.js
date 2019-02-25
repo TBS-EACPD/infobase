@@ -48,7 +48,6 @@ export class TreeMap extends React.Component {
     if (
       this.props.perspective !== nextProps.perspective ||
       this.props.year !== nextProps.year ||
-      this.props.color_var !== nextProps.color_var ||
       this.props.filter_var !== nextProps.filter_var) {
       return true;
     }
@@ -62,8 +61,8 @@ export class TreeMap extends React.Component {
   _imperative_render() {
     const {
       data,
-      color_var,
       colorScale,
+      year,
       tooltip_render,
       node_render,
       setRouteCallback,
@@ -217,7 +216,7 @@ export class TreeMap extends React.Component {
               tool.transition()
                 .style("opacity", 1);
               tool
-                .call(tooltip_render, color_var)
+                .call(tooltip_render, year)
             }, 300)
           })
           .on("mouseleave", function (d) {

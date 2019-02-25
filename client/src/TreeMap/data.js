@@ -143,7 +143,6 @@ function recurse_adjust_size(node, parent_ratio) {
 
 function prep_nodes(node, perspective, get_changes) {
   const { children } = node;
-
   if (!_.isEmpty(children)) {
     _.each(children, child => { prep_nodes(child, perspective, get_changes) });
     if (!node.amount) {
