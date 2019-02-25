@@ -147,39 +147,28 @@ export default function({models,loaders}){
   async function get_gov_target_counts(doc){
     const orgs = await Org.find({});
 
-    const all_counts = await Promise.all(
-      _.map(
-        orgs,
-        async org => await get_org_target_counts(org, doc) 
-      )
-    );
-
-    return _.reduce(
-      all_counts,
-      (memo, counts) => !_.isEmpty(counts) ? 
-        _.mapValues(
-          memo,
-          (memo_value, key) => memo_value + counts[key]
-        ) :
-        memo,
-      result_count_defaults
-    );
+    return await get_org_target_counts(orgs, doc);
   }
 
-  async function get_org_target_counts(org, doc){
-    if (_.isNull(org.dept_code)){
+  async function get_org_target_counts(orgs, doc){
+    const dept_codes = _.chain(orgs)
+      .map('dept_code')
+      .filter()
+      .value();
+
+    if ( _.isEmpty(dept_codes) ){
       return null;
     }
 
     const [crsos, progs] = await Promise.all([
-      crso_from_deptcode_loader.load(org.dept_code),
-      prog_dept_code_loader.load(org.dept_code),
+      crso_from_deptcode_loader.loadMany(dept_codes),
+      prog_dept_code_loader.loadMany(dept_codes),
     ]);
 
     return await get_target_counts(
       _.uniq([ 
-        ..._.map(crsos, 'crso_id'), 
-        ..._.map(progs, 'program_id'),
+        ..._.chain(crsos).flatten().map('crso_id').filter().value(), 
+        ..._.chain(progs).flatten().map('program_id').filter().value(),
       ]),
       doc
     );
