@@ -11,6 +11,7 @@ import {
   load_data
 } from './data.js';
 import { formats } from '../core/format.js';
+import treemap_text from './TreeMap.yaml';
 import './TreeMap.scss';
 import { TreeMap } from './TreeMapViz.js';
 import { TreeMapControls } from './TreeMapControls.js';
@@ -19,13 +20,14 @@ import { TreeMapTopbar } from './TreeMapTopBar.js';
 import { IndicatorDisplay } from '../panels/result_graphs/components.js'
 import { infograph_href_template } from '../infographic/routes.js';
 import {
-  trivial_text_maker,
+  create_text_maker,
   run_template
 } from '../models/text.js';
 import { Fragment } from 'react';
 import { createBrowserHistory } from 'history';
 
 
+const text_maker = create_text_maker([treemap_text]);
 
 /* NODE RENDERING FUNCTIONS */
 
@@ -148,12 +150,12 @@ function std_tooltip_render(tooltip_sel, year) {
     if (d.data.ftes) {
       if (!get_changes && d.data.parent_ftes) {
         tooltip_html = tooltip_html + `
-        <div>${Math.round(d.data.ftes)} ${trivial_text_maker("fte")}
+        <div>${Math.round(d.data.ftes)} ${text_maker("fte")}
         (${formats.percentage1(d.data.ftes / d.data.parent_ftes)} of ${d.data.parent_name})</div>`
 
       } else {
         tooltip_html = tooltip_html + `
-        <div>${Math.round(d.data.ftes)} ${trivial_text_maker("fte")}</div>`
+        <div>${Math.round(d.data.ftes)} ${text_maker("fte")}</div>`
       }
     }
     tooltip_html = tooltip_html + `
@@ -194,7 +196,7 @@ function mobile_tooltip_render(tooltip_sel, year) {
 function generate_infograph_href(d, data_area) {
   if (d.data.subject) {
     return `<div style="padding-top: 10px">
-      <a class="TM_Tooltip__link" href=${infograph_href_template(d.data.subject, data_area)}> ${trivial_text_maker("see_the_infographic")} </a>
+      <a class="TM_Tooltip__link" href=${infograph_href_template(d.data.subject, data_area)}> ${text_maker("see_the_infographic")} </a>
     </div>`;
   } else { return '' }
 }
@@ -289,8 +291,9 @@ export default class TreeMapper extends React.Component {
     const display_year = run_template("{{" + year + "}}");
     return (
       <StandardRouteContainer
-        route_key='start'
-        title='tree map development'
+        title={text_maker("treemap_title")}
+        breadcrumbs={[text_maker("treemap_breadcrumbs")]}
+        description={text_maker("treemap_meta_desc")}
       >
         {loading || !data ?
           <SpinnerWrapper ref="spinner" config_name={"route"} /> :

@@ -1,3 +1,15 @@
+treemap_title:
+  en: TreeMap Explorer
+  fr: Carte Proportionelle
+
+treemap_breadcrumbs:
+  en: TreeMap Explorer
+  fr: Carte Proportionelle
+
+treemap_meta_desc:
+  en: TreeMap visualization of Government of Canada organizations by how much they spend and how many people they employ
+  fr: Carte Proportionelle de dépenses des organisations du gouvernement du Canada et le nombre d'employés à leur service
+
 click_to_zoom_out:
   en: Click to zoom out
   fr: Cliquez pour dézoomer
