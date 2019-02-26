@@ -2,7 +2,6 @@ import { StandardRouteContainer } from '../core/NavComponents.js';
 import { get_data } from './data.js';
 import { SpinnerWrapper } from '../util_components.js';
 import { FlatTreeMapViz } from './TreeMapViz.js';
-import { infograph_href_template } from '../infographic/routes.js';
 import { formats } from '../core/format.js';
 
 
@@ -13,8 +12,8 @@ const viridis_scale = d3.scaleSequential(d3.interpolateViridis);
 
 function get_color_scale(d) {
   //return pos_d3_color_scale(d);
-  //return cat_scale(d);
-  return viridis_scale(d);
+  return cat_scale(d);
+  //return viridis_scale(d);
 }
 
 export default class FlatTreeMap extends React.PureComponent {
@@ -27,7 +26,6 @@ export default class FlatTreeMap extends React.PureComponent {
       year: "pa_last_year",
       perspective: undefined,
       org_id: undefined,
-      filter_var: undefined,
     }
   }
   componentDidMount() {
@@ -41,11 +39,10 @@ export default class FlatTreeMap extends React.PureComponent {
           perspective,
           org_id,
           year,
-          filter_var,
         },
       },
     } = props;
-    get_data(perspective, org_id, year, filter_var).then(data => {
+    get_data(perspective, org_id, year).then(data => {
       this.setState({
         loading: false,
         data,
@@ -62,7 +59,6 @@ export default class FlatTreeMap extends React.PureComponent {
           perspective,
           color_var,
           year,
-          filter_var,
         },
       },
     } = this.props;
