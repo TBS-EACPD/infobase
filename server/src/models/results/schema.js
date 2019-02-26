@@ -4,32 +4,23 @@ import {
 } from '../schema_utils';
 
 const schema = `
-  type ResultCount {
-    results: Int
-
-    dp: Int
-    
-    met: Int 
-    not_available: Int
-    not_met: Int
-    future: Int
-  }
-
   extend type Gov {
-    target_counts(doc:String): ResultCount
+    all_target_counts_summary: [ResultCount]
+    all_target_counts_granular: [ResultCount]
+    target_counts(doc:String): SimpleResultCount
   }
 
   extend type Org {
-    target_counts(doc:String): ResultCount
+    target_counts(doc:String): SimpleResultCount
   }
 
   extend type Crso {
-    target_counts(doc:String): ResultCount
+    target_counts(doc:String): SimpleResultCount
     results(doc:String): [Result]
   }
 
   extend type Program{
-    target_counts(doc:String): ResultCount
+    target_counts(doc:String): SimpleResultCount
     sub_programs: [SubProgram]
     results(doc: String): [Result]
     # special departmental results to which this programs 'contributes' to
@@ -64,6 +55,32 @@ const schema = `
     program: Program
     sub_programs: [SubProgram]
     results(doc: String): [Result]
+  }
+
+
+  type ResultCount {
+    subject_id: String
+    level: String
+
+    drr17_results: Int
+    drr17_indicators_met: Int
+    drr17_indicators_not_available: Int
+    drr17_indicators_not_met: Int
+    drr17_indicators_future: Int
+
+    dp18_results: Int
+    dp18_indicators: Int
+  }
+
+  type SimpleResultCount {
+    results: Int
+
+    dp: Int
+    
+    met: Int 
+    not_available: Int
+    not_met: Int
+    future: Int
   }
 
   type Result {
@@ -115,6 +132,7 @@ export default function({models,loaders}){
     Program,
     SubProgram,
     Result,
+    ResultCount,
     Indicator,
     PIDRLink,
   } = models;
@@ -140,6 +158,10 @@ export default function({models,loaders}){
     met: 0,
     future: 0,
   };
+
+  async function get_all_target_counts(levels){
+    return await ResultCount.find( { level: { '$in': levels } });
+  }
   
   async function get_gov_target_counts(doc){
     const orgs = await Org.find({});
@@ -226,6 +248,8 @@ export default function({models,loaders}){
 
   const resolvers = {
     Gov: {
+      all_target_counts_summary: () => get_all_target_counts(['all','dept']),
+      all_target_counts_granular: () => get_all_target_counts(['crso_or_program']),
       target_counts: (_x, {doc}) => get_gov_target_counts(doc),
     },
     Org: {
