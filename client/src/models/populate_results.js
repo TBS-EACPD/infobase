@@ -449,7 +449,11 @@ export function api_load_results_counts(level = "summary"){
           })
         );
 
-        ResultCounts.set_data(mapped_rows); 
+        if (level === "summary"){
+          ResultCounts.set_data(mapped_rows);
+        } else if (level === "granular"){
+          GranularResultCounts.set_data(mapped_rows); 
+        }
         api_is_results_count_loaded[level] = true;
       })
       .catch(function(error){
