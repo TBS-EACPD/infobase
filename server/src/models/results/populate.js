@@ -129,7 +129,7 @@ const counts_from_indicators = (indicators) => _.chain(indicators)
   .map(
     ({doc, result_id, status_key}) => ({
       [`${doc}_results`]: result_id,
-      [`${doc}_indicators${ status_key !== "DP" && `_${status_key}` }`]: 1,
+      [`${doc}_indicators${ status_key === 'dp' ? '' : `_${status_key}` }`]: 1,
     })
   )
   .thru(
