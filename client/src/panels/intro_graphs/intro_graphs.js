@@ -77,6 +77,7 @@ _.each(['gov', 'dept', 'program', 'tag', 'crso'], lvl => {
         'what_are_exps',
         'what_is_fy',
         'why_cant_i_see_prov_spend',
+        'what_spending_is_included',
       ],
     }),
   });
