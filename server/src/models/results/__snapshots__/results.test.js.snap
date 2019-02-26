@@ -1,5 +1,68 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`results data Test departments ResultCount snapshot 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "CPCC": Object {
+        "dp18": Object {
+          "indicators_dp": 11,
+          "indicators_future": 0,
+          "indicators_met": 0,
+          "indicators_not_available": 0,
+          "indicators_not_met": 0,
+          "results": 6,
+        },
+        "drr17": Object {
+          "indicators_dp": 0,
+          "indicators_future": 28,
+          "indicators_met": 0,
+          "indicators_not_available": 0,
+          "indicators_not_met": 0,
+          "results": 6,
+        },
+      },
+      "ND": Object {
+        "dp18": Object {
+          "indicators_dp": 138,
+          "indicators_future": 0,
+          "indicators_met": 0,
+          "indicators_not_available": 0,
+          "indicators_not_met": 0,
+          "results": 92,
+        },
+        "drr17": Object {
+          "indicators_dp": 0,
+          "indicators_future": 1,
+          "indicators_met": 78,
+          "indicators_not_available": 41,
+          "indicators_not_met": 30,
+          "results": 107,
+        },
+      },
+      "TBC": Object {
+        "dp18": Object {
+          "indicators_dp": 97,
+          "indicators_future": 0,
+          "indicators_met": 0,
+          "indicators_not_available": 0,
+          "indicators_not_met": 0,
+          "results": 37,
+        },
+        "drr17": Object {
+          "indicators_dp": 0,
+          "indicators_future": 48,
+          "indicators_met": 26,
+          "indicators_not_available": 12,
+          "indicators_not_met": 15,
+          "results": 35,
+        },
+      },
+    },
+  },
+}
+`;
+
 exports[`results data Test departments result snapshot 1`] = `
 Object {
   "data": Object {
