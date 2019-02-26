@@ -2,9 +2,8 @@ import { Table } from './TableClass.js';
 import { PanelGraph, tables_for_graph } from './PanelGraph.js';
 import { Statistics, tables_for_statistics } from './Statistics.js';
 import { 
-  load_results_bundle, load_results_counts,
+  load_results_bundle, load_results_counts, load_granular_results_counts, 
   api_load_results_bundle, api_load_results_counts,
-  load_granular_results_counts,
 } from '../models/populate_results.js';
 import { load_footnotes_bundle } from '../models/populate_footnotes.js';
 import { load_budget_measures } from '../models/populate_budget_measures.js';
@@ -120,14 +119,16 @@ function ensure_loaded({
   const result_counts_prom = (
     should_load_result_counts ?
       use_api_for_results ? 
-        api_load_results_counts() : 
+        api_load_results_counts("summary") : 
         load_results_counts() :
       Promise.resolve()
   );
 
   const granular_result_counts_prom = (
     should_load_granular_result_counts ?
-      load_granular_results_counts() :
+      use_api_for_results ? 
+        api_load_results_counts("granular") : 
+        load_granular_results_counts() :
       Promise.resolve()
   );
 

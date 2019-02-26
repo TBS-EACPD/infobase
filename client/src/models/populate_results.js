@@ -388,75 +388,42 @@ function extract_flat_data_from_results_hierarchies(org_result_hierarchies){
 }
 
 
-let api_is_results_count_loaded = false;
-const load_results_counts_query = gql`
+let api_is_results_count_loaded = {
+  summary: false,
+  granular: false,
+};
+const load_results_counts_query = (level = "summary") => gql`
 query($lang: String!) {
   root(lang: $lang) {
-    orgs{
-      dept_code
-      drr17_counts: target_counts(doc: "drr17") {
-        results
-        met
-        not_available
-        not_met
-        future
-      }
-      dp18_counts: target_counts(doc: "dp18") {
-        results
-        dp
+    gov {
+      all_target_counts_${level} {
+        subject_id
+        level
+        drr17_results
+        drr17_indicators_met
+        drr17_indicators_not_available
+        drr17_indicators_not_met
+        drr17_indicators_future
+        dp18_results
+        dp18_indicators
       }
     }
   }
 }
 `;
-export function api_load_results_counts(){
-  if(api_is_results_count_loaded){
+export function api_load_results_counts(level = "summary"){
+  if(api_is_results_count_loaded[level]){
     return Promise.resolve();
   } else {
     const time_at_request = Date.now()
     const client = get_client();
-    return client.query({ query: load_results_counts_query, variables: {lang: window.lang} })
-      .then( (response) =>{
+    return client.query({ query: load_results_counts_query(level), variables: {lang: window.lang} })
+      .then( (response) => {
         const resp_time = Date.now() - time_at_request;
 
-        const format_drr17_counts = (drr17_counts) => ({
-          drr17_results: drr17_counts.results,
-          ..._.chain(drr17_counts)
-            .omit(["__typename", "results"])
-            .mapKeys( (value, key) => `drr17_indicators_${key}` )
-            .value(),
-          drr17_past_total: _.chain(drr17_counts)
-            .omit(["__typename", "results", "future"])
-            .reduce( (memo, count) => memo + count, 0 )
-            .value(),
-          drr17_future_total: _.isNull(drr17_counts) ? 0 : drr17_counts.future,
-          drr17_total: _.chain(drr17_counts)
-            .omit(["__typename", "results"])
-            .reduce( (memo, count) => memo + count, 0 )
-            .value(),
-        });
-        const format_dp18_counts = (dp18_counts) => ({
-          dp18_results: _.isNull(dp18_counts) ? 0 : dp18_counts.results,
-          dp18_indicators: _.isNull(dp18_counts) ? 0 : dp18_counts.dp,
-        });
+        const response_rows = response && response.data.root.gov[`all_target_counts_${level}`];
 
-        const counts_by_dept = response && _.chain(response.data.root.orgs)
-          .filter( data => !_.isNull(data.drr17_counts) || !_.isNull(data.dp18_counts) )
-          .map(
-            ({
-              dept_code, 
-              drr17_counts,
-              dp18_counts,
-            }) => ({
-              id: dept_code,
-              level: "dept",
-              ...format_drr17_counts(drr17_counts),
-              ...format_dp18_counts(dp18_counts),
-            })
-          )
-          .value();
-
-        if( !_.isEmpty(counts_by_dept) ){
+        if( !_.isEmpty(response_rows) ){
           // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
           log_standard_event({
             SUBAPP: window.location.hash.replace('#',''),
@@ -471,27 +438,19 @@ export function api_load_results_counts(){
           });  
         }
         
-        const rows = [
-          ...counts_by_dept,
-          {
-            id: "total",
-            level: "all",
-            ..._.reduce(
-              counts_by_dept,
-              (memo, row) => _.mapValues(
-                memo,
-                (memo_value, key) => memo_value + row[key]
-              ),
-              _.chain({ ...counts_by_dept[0] })
-                .omit(["id", "level"])
-                .mapValues( () => 0 )
-                .value()
-            ),
-          },
-        ];
-        
-        ResultCounts.set_data(rows); 
-        api_is_results_count_loaded = true;
+        const mapped_rows = _.map(
+          response_rows,
+          row => ({
+            ...row,
+            id: row.subject_id,
+            drr17_past_total: row.drr17_indicators_met + row.drr17_indicators_not_met + row.drr17_indicators_not_available,
+            drr17_future_total: row.drr17_indicators_future,
+            drr17_total: row.drr17_indicators_met + row.drr17_indicators_not_met + row.drr17_indicators_not_available + row.drr17_indicators_future,
+          })
+        );
+
+        ResultCounts.set_data(mapped_rows); 
+        api_is_results_count_loaded[level] = true;
       })
       .catch(function(error){
         const resp_time = Date.now() - time_at_request;     
