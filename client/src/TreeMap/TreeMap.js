@@ -67,7 +67,7 @@ function std_node_render(foreign_sel) {
 // (darkest colours are too dark for good contrast with the text)
 const d3_blue = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeBlues[9].slice(2, 7)));
 d3_blue.clamp(true);
-const d3_red = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeReds[9].slice(2, 7)));
+const d3_red = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeReds[9].slice(2, 6)));
 d3_red.clamp(true);
 const d3_green = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeGreens[9].slice(2, 7)));
 d3_green.clamp(true);
@@ -75,7 +75,7 @@ const d3_purple = d3.scaleSequential(d3.interpolateRgbBasis(["#e7d4e8","#c2a5cf"
 d3_purple.clamp(true);
 
 
-// spending % of parent
+// spending % of parent -- 33% is enough for the colour to be maxed out
 function standard_color_scale(node) {
   let color_val;
   let scale = d3_blue;
@@ -104,7 +104,7 @@ function spending_change_color_scale(node) {
     colour_val = -colour_val;
     scale = d3_red;
   }
-  scale.domain([0, 1000000000]);
+  scale.domain([0, 2000000000]);
   return scale(colour_val);
 }
 function fte_change_color_scale(node) {
