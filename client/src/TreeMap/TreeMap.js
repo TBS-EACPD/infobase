@@ -134,14 +134,12 @@ function get_color_scale(color_var, get_changes) {
 
 /* TOOLTIPS */
 
-function std_tooltip_render(tooltip_sel, year) {
-  let get_changes = false;
-  if ( year.includes(":") ){ get_changes = true }
+function std_tooltip_render(tooltip_sel) {
   tooltip_sel.html(function (d) {
     let tooltip_html = `<div>
     <div>${d.data.name}</div>
     <hr class="BlueHLine">`;
-    if (!get_changes && d.data.parent_amount) {
+    if (d.data.parent_amount) {
       tooltip_html = tooltip_html + `
       <div>${formats.compact1(d.data.amount)}
       (${formats.percentage1(d.data.amount / d.data.parent_amount)} of ${d.data.parent_name})</div>`;
@@ -150,7 +148,7 @@ function std_tooltip_render(tooltip_sel, year) {
       <div>${formats.compact1(d.data.amount)}</div>`
     }
     if (d.data.ftes) {
-      if (!get_changes && d.data.parent_ftes) {
+      if (d.data.parent_ftes) {
         tooltip_html = tooltip_html + `
         <div>${Math.round(d.data.ftes)} ${text_maker("fte")}
         (${formats.percentage1(d.data.ftes / d.data.parent_ftes)} of ${d.data.parent_name})</div>`
@@ -167,17 +165,44 @@ function std_tooltip_render(tooltip_sel, year) {
   })
 }
 
+function std_tooltip_render_changes(tooltip_sel) {
+  tooltip_sel.html(function (d) {
+    let tooltip_html = `<div>
+    <div>${d.data.name}</div>
+    <hr class="BlueHLine">
+    <div>${formats.compact1(d.data.amount)}</div>`
+    if (d.data.ftes) {
+      tooltip_html = tooltip_html + `
+      <div>${Math.round(d.data.ftes)} ${text_maker("fte")}</div>`
+
+    }
+    tooltip_html = tooltip_html + `
+    ${generate_infograph_href(d)}
+    </div>`;
+    return tooltip_html;
+  })
+}
+
 function mobile_tooltip_render(tooltip_sel, year) {
-  let get_changes = false;
-  if ( year.includes(":") ){ get_changes = true }
   tooltip_sel.html(function (d) {
     let tooltip_html = `<div>
     <div>${d.data.name}</div>
     <hr class="BlueHLine">
     <div>${formats.compact1(d.data.amount)}</div>`;
-    if (!get_changes && d.data.parent_amount) {
+    if( d.data.parent_amount) {
       tooltip_html = tooltip_html + `
       <div>${formats.percentage1(d.data.amount / d.data.parent_amount)} of ${d.data.parent_name}</div>`;
+    }
+    if (d.data.ftes) {
+      if (d.data.parent_ftes) {
+        tooltip_html = tooltip_html + `
+        <div>${Math.round(d.data.ftes)} ${text_maker("fte")}
+        (${formats.percentage1(d.data.ftes / d.data.parent_ftes)} of ${d.data.parent_name})</div>`
+
+      } else {
+        tooltip_html = tooltip_html + `
+        <div>${Math.round(d.data.ftes)} ${text_maker("fte")}</div>`
+      }
     }
     tooltip_html = tooltip_html + `
     ${generate_infograph_href(d)}`
@@ -194,6 +219,34 @@ function mobile_tooltip_render(tooltip_sel, year) {
       d3.select(d).transition();
     })
 }
+
+function mobile_tooltip_render_changes(tooltip_sel) {
+  tooltip_sel.html(function (d) {
+    let tooltip_html = `<div>
+    <div>${d.data.name}</div>
+    <hr class="BlueHLine">
+    <div>${formats.compact1(d.data.amount)}</div>`;
+    if (d.data.ftes) {
+      tooltip_html = tooltip_html + `
+      <div>${Math.round(d.data.ftes)} ${text_maker("fte")}</div>`
+    }
+    tooltip_html = tooltip_html + `
+    ${generate_infograph_href(d)}`
+    if (d3.select(this.parentNode).classed("TreeMapNode__ContentBoxContainer--has-children")) {
+      tooltip_html = tooltip_html + `
+      <button class="btn-primary">Zoom in</button>`
+    }
+    tooltip_html = tooltip_html + `
+    </div>`;
+    return tooltip_html;
+  })
+    .select("button")
+    .on("click", function (d) {
+      d3.select(d).transition();
+    })
+}
+
+
 
 function generate_infograph_href(d, data_area) {
   if (d.data.subject) {
@@ -319,7 +372,12 @@ export default class TreeMapper extends React.Component {
                       setRouteCallback = { this.setRoute }
                       perspective = { perspective }
                       tooltip_render={
-                        window.feature_detection.is_mobile() ? mobile_tooltip_render : std_tooltip_render
+                        get_changes ?
+                        window.feature_detection.is_mobile() ?
+                          mobile_tooltip_render_changes : std_tooltip_render_changes
+                        :
+                        window.feature_detection.is_mobile() ? 
+                          mobile_tooltip_render : std_tooltip_render
                       }
                       node_render={std_node_render}
                       viz_height={app_height - topbar_height}

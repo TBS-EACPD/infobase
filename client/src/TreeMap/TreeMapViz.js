@@ -133,7 +133,7 @@ export class TreeMap extends React.Component {
         })
       }
     })
-    root.each(d => { d.value = d.data.value2});
+    root.each(d => { d.value = d.data.value2 });
 
 
 
@@ -173,7 +173,6 @@ export class TreeMap extends React.Component {
             this.my_state.my_org_route.push(d.data.name);
             setRouteCallback(d.data.name, false);
             transition(d);
-
           })
       } else {
         main
@@ -223,20 +222,21 @@ export class TreeMap extends React.Component {
           })
           .call(treemap_node_content_container)
       } else {
+        const that = this;
         main.append('div')
           .attr('class', d => classNames('TreeMapNode__ContentBoxContainer', !_.isEmpty(d.children) && "TreeMapNode__ContentBoxContainer--has-children"))
           .on("click", function (d) {
             if (d.toolTipped) {
-              d3.select(this)
-                .selectAll('.TM_TooltipContainer')
+              d3.selectAll('.TM_TooltipContainer')
                 .remove();
-              d3.select(this).classed("TreeMapNode__ContentBoxContainer--tapped", false);
+              d3.selectAll().classed("TreeMapNode__ContentBoxContainer--tapped", false);
               d.toolTipped = false;
-              if (d.children) {
+              if (d.children) { // do the transition
+                that.my_state.my_org_route.push(d.data.name);
+                setRouteCallback(d.data.name, false);
                 transition(d);
               }
             } else {
-              //remove others first
               d3.selectAll('.TM_TooltipContainer')
                 .remove();
               d3.selectAll('.TreeMapNode__ContentBoxContainer')
