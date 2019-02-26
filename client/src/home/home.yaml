@@ -42,6 +42,14 @@ planet_home_text:
   en: Compare organizations by how much they spend and how many people they employ
   fr: Comparer les dépenses des organisations et le nombre d'employés à leur service
 
+treemap_home_title:
+  en: Treemap Explorer
+  fr: Carte proportionelle
+
+treemap_home_text:
+  en: Compare organizations by how much they spend and how many people they employ
+  fr: Comparer les dépenses des organisations et le nombre d'employés à leur service
+
 home_search_bar_title:
   en: Jump to an infographic
   fr: Infographie rapide

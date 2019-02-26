@@ -256,10 +256,21 @@ function generate_infograph_href(d, data_area) {
   } else { return '' }
 }
 
+function check_props(props){
+  props.match.params.perspective = props.match.params.perspective || "drf";
+  props.match.params.year = props.match.params.year || "pa_last_year";
+  props.match.params.color_var = props.match.params.color_var || "spending";
+  props.match.params.filter_var = props.match.params.filter_var || "All";
+  props.match.params.get_changes = props.match.params.get_changes || '';
+
+  return props;
+}
 
 export default class TreeMapper extends React.Component {
   constructor(props) {
     super(props);
+    this.props = check_props(props);
+
     this.setRoute = this.setRoute.bind(this);
 
     this.state = {

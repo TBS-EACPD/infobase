@@ -187,10 +187,10 @@ const HomeLayout = props => (
           <div className="fcol-md-4 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
-              img_src={get_static_url("svg/bubbles.svg")}
-              title_key="planet_home_title"
-              text_key="planet_home_text"
-              link_href="#explore-dept"
+              img_src={get_static_url("svg/treemap.svg")}
+              title_key="treemap_home_title"
+              text_key="treemap_home_text"
+              link_href="#treemap"
             />
           </div>
           <div className="fcol-md-4 fcol-sm-6 linkcard">
