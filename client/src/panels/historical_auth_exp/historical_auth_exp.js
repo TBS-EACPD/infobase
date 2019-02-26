@@ -94,36 +94,16 @@ const render = function({calculations, footnotes, sources}) {
 
 
   } else {
-
-
-    const colors = infobase_colors();
-    const legend_items = [
-      {
-        id: "x",
-        label: series_labels[0],
-        color: colors(series_labels[0]),
-      },
-      {
-        id: "y",
-        label: series_labels[1],
-        color: colors(series_labels[1]),
-      },
-    ];
-
-    let keys = ["Expenditures","Unused Authorities"];
     let dataExp = exp.map((d,i) =>{
       const value = d;
       const value2 = auth[i];
       let result = {};
       result[series_labels[0]]=value;
       result[series_labels[1]]=value2;
-      result["years"]=`${2013+i}-${14+i}`;
+      result["years"] = ticks[i];
       return result;
     });
-
-
-    // const colors = infobase_colors();
-    graph_content = <div>
+    graph_content = 
       <div style={{height: 400}}>
         {
           <ResponsiveBar
@@ -174,7 +154,6 @@ const render = function({calculations, footnotes, sources}) {
             ]}
           />}
       </div>
-    </div>;
   }
 
   return (

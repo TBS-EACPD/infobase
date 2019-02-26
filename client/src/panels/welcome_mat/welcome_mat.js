@@ -89,21 +89,21 @@ const Chart = ({
   <ResponsiveLine
     data={[
       {
-        "data": data}]}
+        "data": dataFormatter(data)}]}
     margin={{
-      "top": 30,
+      "top": 20,
       "right": 30,
-      "bottom": 30,
-      "left": 70
+      "bottom": 20,
+      "left": 70,
     }}
     xScale={{
-      "type": "point"
+      "type": "point",
     }}
     yScale={{
       "type": "linear",
       "stacked": true,
-      "min": "auto",
-      "max": "auto"
+      "min": _.min(data)*0.97,
+      "max": _.max(data)*1.03,
     }}
     axisTop={null}
     axisRight={null}
@@ -113,8 +113,8 @@ const Chart = ({
       "tickSize": 5,
       "tickPadding": 5,
       "tickRotation": 0,
-      "tickValues": 4,
-      "format": d => isMoney? formats.compact1(d,{raw: true}) : formats.big_int_real(d,{raw:true}),
+      "tickValues": 6,
+      "format": d => isMoney? formats.compact1(d,{raw: true}) : formats.big_int_real(d,{raw: true}),
     }}
     dotSize={10}
     enableGridX={false}
@@ -123,7 +123,7 @@ const Chart = ({
     animate={true}
     motionStiffness={90}
     motionDamping={15}
-    tooltipFormat={d => <tspan>{isMoney? formats.compact1(d,{raw: true}) : formats.big_int_real(d,{raw:true})}</tspan>}
+    tooltipFormat={d => <tspan>{isMoney? formats.compact1(d,{raw: true}) : formats.big_int_real(d,{raw: true})}</tspan>}
     colors="#000"
   />
 </div>
@@ -667,7 +667,7 @@ const WelcomeMat = (props) => {
           <Pane noPadding key="d" size={40}>
             <Chart 
               use_line 
-              data={dataFormatter(spend_data)}
+              data={spend_data}
               isMoney={true}
             />
           </Pane>,
@@ -716,7 +716,7 @@ const WelcomeMat = (props) => {
           <Pane noPadding key="d" size={40}>
             <Chart 
               use_line 
-              data={dataFormatter(fte_data)}
+              data={fte_data}
               isMoney={false}
               is_fte
             />

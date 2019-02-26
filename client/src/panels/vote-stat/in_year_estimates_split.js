@@ -66,9 +66,9 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
     );
   
   } else {    
-    let keenanSuckss = calculations.info.gov_in_year_estimates_split
+    let data = calculations.info.gov_in_year_estimates_split
     let keys = [];
-    keenanSuckss = keenanSuckss.map((d,i) =>{
+    data = data.map((d,i) =>{
       const label = d[0];
       const value = d[1];
       keys.push(label);
@@ -84,7 +84,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
         height: "450px",
       }} >
         <ResponsiveBar
-          data={keenanSuckss}
+          data={data}
           keys={keys}
           indexBy="title"
           margin={{
