@@ -226,7 +226,7 @@ export class TreeMapControls extends React.Component {
             <div className="cent">
               <RadioButtons
                 options={get_changes ?
-                  _.map(year_changes[perspective], (id => ({ id: id, display: run_template("{{" + id.split(":")[0] + "}}") + " to " + run_template("{{" + id.split(":")[1] + "}}"), active: id === year }))) :
+                  _.map(year_changes[perspective], (id => ({ id: id, display: `${run_template("{{" + id.split(":")[0] + "}}")} ${text_maker("to")} ${run_template("{{" + id.split(":")[1] + "}}")}`, active: id === year }))) :
                   _.map(years[perspective], (id => ({ id: id, display: run_template("{{" + id + "}}"), active: id === year })))
                 }
                 onChange={id => {

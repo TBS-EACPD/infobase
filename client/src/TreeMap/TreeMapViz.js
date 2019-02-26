@@ -76,6 +76,7 @@ export class TreeMap extends React.Component {
     el.innerHTML = `
         <div  class="TreeMap__Mainviz">
           <div class="viz-root" style="min-height: ${viz_height}px; position: relative;" >
+          ${text_maker("treemap_none_selected_summary")}
             </div>
         </div>`;
 
