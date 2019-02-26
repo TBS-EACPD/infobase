@@ -72,15 +72,10 @@ _.each(['gov', 'dept', 'program', 'tag', 'crso'], lvl => {
     render: curried_render({
       q_a_keys: [
         'where_does_authority_come_from',
-        'what_are_voted_auth',
-        'what_are_stat_auth',
         'what_are_mains',
         'what_are_supps',
         'what_are_exps',
-        'what_is_prog',
-        'what_is_so',
         'what_is_fy',
-        'what_are_ftes',
         'why_cant_i_see_prov_spend',
       ],
     }),
