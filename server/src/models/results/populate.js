@@ -66,7 +66,7 @@ export default async function({models}){
 
 const get_result_count_records = (sub_programs, results, indicators) => {
   const sub_program_id_to_program_id = _.chain(sub_programs)
-    .map(({id, parent_id}) => [id, parent_id])
+    .map(({sub_program_id, parent_id}) => [sub_program_id, parent_id])
     .fromPairs()
     .thru(
       sub_program_id_to_parent_id => _.mapValues(
