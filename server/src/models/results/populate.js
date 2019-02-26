@@ -102,7 +102,7 @@ const get_result_count_records = (sub_programs, results, indicators) => {
     .value();
 
   const crso_or_prog_rows = _.chain(results)
-    .groupBy( ({subject_id}) => sub_program_id_to_program_id[subject_id] || subject_id, '-' )
+    .groupBy( ({subject_id}) => sub_program_id_to_program_id[subject_id] || subject_id )
     .mapValues(
       results => _.flatMap(
         results,
