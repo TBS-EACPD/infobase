@@ -5,22 +5,22 @@ import {
 
 const schema = `
   extend type Gov {
-    all_target_counts_summary: [ResultCount]
-    all_target_counts_granular: [ResultCount]
-    target_counts(doc:String): SimpleResultCount
+    all_target_counts_summary: [AllDocResultCount]
+    all_target_counts_granular: [AllDocResultCount]
+    target_counts(doc: String): ResultCount
   }
 
   extend type Org {
-    target_counts(doc:String): SimpleResultCount
+    target_counts(doc: String): ResultCount
   }
 
   extend type Crso {
-    target_counts(doc:String): SimpleResultCount
+    target_counts(doc: String): ResultCount
     results(doc:String): [Result]
   }
 
   extend type Program{
-    target_counts(doc:String): SimpleResultCount
+    target_counts(doc: String): ResultCount
     sub_programs: [SubProgram]
     results(doc: String): [Result]
     # special departmental results to which this programs 'contributes' to
@@ -54,11 +54,11 @@ const schema = `
 
     program: Program
     sub_programs: [SubProgram]
-    results(doc: String): [Result]
+    results(doc: String): [ResultCount]
   }
 
 
-  type ResultCount {
+  type AllDocResultCount {
     subject_id: String
     level: String
 
@@ -72,15 +72,17 @@ const schema = `
     dp18_indicators: Int
   }
 
-  type SimpleResultCount {
+  type ResultCount {
+    doc: String
+
     results: Int
 
-    dp: Int
-    
-    met: Int 
-    not_available: Int
-    not_met: Int
-    future: Int
+    indicators_dp: Int
+
+    indicators_met: Int 
+    indicators_not_available: Int
+    indicators_not_met: Int
+    indicators_future: Int
   }
 
   type Result {
@@ -148,17 +150,6 @@ export default function({models,loaders}){
   } = loaders;
 
 
-  const result_count_defaults = {
-    results: 0,
-    
-    dp: 0,
-    
-    not_met: 0,
-    not_available: 0,
-    met: 0,
-    future: 0,
-  };
-
   async function get_all_target_counts(levels){
     return await ResultCount.find( { level: { '$in': levels } });
   }
@@ -221,9 +212,23 @@ export default function({models,loaders}){
       .value();
 
     return _.defaults({
-      ..._.countBy(doc_indicators, 'status_key'),
+      ..._.chain(doc_indicators)
+        .countBy('status_key')
+        .mapKeys( (value, key) => `indicators_${key}`)
+        .value(),
       results: _.chain(results).compact().flatten().filter({doc}).value().length,
-    }, result_count_defaults);
+      doc: doc,
+    }, 
+    {
+      results: 0,
+  
+      indicators_dp: 0,
+  
+      indicators_met: 0,
+      indicators_not_available: 0,
+      indicators_not_met: 0,
+      indicators_future: 0,
+    });
   }
 
   async function get_results(subject, { doc }){

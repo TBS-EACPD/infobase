@@ -1,21 +1,52 @@
-const query = `
-query entire_4_orgs{
-  
-	root(lang:"en"){
-    tbs: org(org_id:"326"){
+const { execQuery } = global;
+
+const dept_results_data_query = `
+query entire_4_orgs {
+	root(lang:"en") {
+    tbs: org(org_id:"326") {
       ...everything
     }
-    dnd: org(org_id:"133"){
+    dnd: org(org_id:"133") {
       ...everything
     }
-    polar: org(org_id:"552"){
+    polar: org(org_id:"552") {
       ...everything
     }
-    bank: org(org_id:"15"){
+    bank: org(org_id:"15") {
       ...everything
     }
   }
-  
+}
+
+fragment result_and_indicator_fields on Result {
+  id
+  parent_id
+  name
+  doc
+
+  indicators {
+    result_id
+    name
+    
+    target_year
+    target_month
+    target_type
+    target_min
+    target_max
+    target_narrative
+    doc
+    
+    explanation
+    
+    actual_result
+    actual_datatype
+    actual_result
+    
+    status_key
+    
+    methodology
+    measure
+  }
 }
 fragment everything on Org {
   crsos {
@@ -23,54 +54,19 @@ fragment everything on Org {
     programs {
 			id
       results(doc: "drr17") {
-        id
-        indicators {
-          id
-        }
+        ...result_and_indicator_fields
       }
     }
     results(doc: "dp18") {
-      indicators {
-        id
-      }
+      ...result_and_indicator_fields
     }
   }
 }
-`
-
-const { execQuery } = global;
-
+`;
 describe("results data", function(){
 
-  it("TBS drr snapshot", async ()=> {
-    const variables = {
-      org_id: "326",
-    };
-    const data = await execQuery(query, variables);
-    return expect(data).toMatchSnapshot();
-  });
-  
-  it("TBS dp snapshot", async ()=> {
-    const variables = {
-      org_id: "326",
-    };
-    const data = await execQuery(query, variables);
-    return expect(data).toMatchSnapshot();
-  });
-  
-  it("TBS drr snapshot", async ()=> {
-    const variables = {
-      org_id: "326",
-    };
-    const data = await execQuery(query, variables);
-    return expect(data).toMatchSnapshot();
-  });
-  
-  it("TBS dp snapshot", async ()=> {
-    const variables = {
-      org_id: "326",
-    };
-    const data = await execQuery(query, variables);
+  it("Test departments result snapshot", async ()=> {
+    const data = await execQuery(dept_results_data_query);
     return expect(data).toMatchSnapshot();
   });
 })
