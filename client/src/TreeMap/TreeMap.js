@@ -31,9 +31,15 @@ function std_node_render(foreign_sel) {
       node.data.subject.fancy_acronym :
       node.data.name;
 
-    let text_size = "";
-    if (this.offsetHeight > 150 && this.offsetWidth > 300) { text_size = "--large" }
-    if (this.offsetHeight < 100 || this.offsetWidth < 100 ) { text_size = "--small" }
+    const text_size = (() => {
+      if (this.offsetHeight > 150 && this.offsetWidth > 300) { 
+        return "--large";
+      } else if (this.offsetHeight < 100 || this.offsetWidth < 150 ) {
+        return "--small";
+      } else {
+        return false; // extra small case, no text will be displayed
+      }
+    });
 
     const show_amount = this.offsetHeight > 50;
 
