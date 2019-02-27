@@ -39,7 +39,7 @@ function std_node_render(foreign_sel) {
       } else {
         return false; // extra small case, no text will be displayed
       }
-    });
+    })();
 
     const show_amount = this.offsetHeight > 50;
 
