@@ -25,37 +25,56 @@ const text_maker = create_text_maker([treemap_text]);
 
 function std_node_render(foreign_sel) {
   foreign_sel.html(function (node) {
-    if (this.offsetHeight <= 30 || this.offsetWidth <= 50) { return }
-
-    const name_to_display = node.data.subject && node.data.subject.fancy_acronym && this.offsetWidth < 150 ?
-      node.data.subject.fancy_acronym :
-      node.data.name;
-
-    const text_size = (() => {
-      if (this.offsetHeight > 150 && this.offsetWidth > 300) { 
-        return "--large";
-      } else if (this.offsetHeight < 100 || this.offsetWidth < 150 ) {
-        return "--small";
-      } else {
-        return false; // extra small case, no text will be displayed
-      }
-    })();
-
-    const show_amount = this.offsetHeight > 50;
-
-    return `
-    <div class="TreeMapNode__ContentBox TreeMapNode__ContentBox--standard">
-      <div class="TreeMapNode__ContentTitle ${text_size && `TreeMapNode__ContentTitle${text_size}` || ''}">
-        ${name_to_display}
-      </div>
-      ${ show_amount && `
-      <div class="TreeMapNode__ContentText ${text_size && `TreeMapNode__ContentText${text_size}` || ''}">
-        ${formats.compact1(node.data.amount)}
-      </div>` || '' }
-    </div>
-    `;
+    const nsize = node_size.bind(this)();
+    if (node_size === "tiny") { return } //no contents on tiny nodes
+    const text_size = nsize === "medium" ? "" : `--${nsize}`;
+    const display_name = node_name(node);
+    const display_number = this.offsetHeight > 50 ? formats.compact1(node.data.amount) : '';
+    return node_html(node, display_name, text_size, display_number);
   });
 }
+
+function fte_node_render(foreign_sel) {
+  foreign_sel.html(function (node) {
+    const nsize = node_size.bind(this)();
+    if (node_size === "tiny") { return } //no contents on tiny nodes
+    const text_size = nsize === "medium" ? "" : `--${nsize}`;
+    const display_name = node_name(node);
+    const display_number = this.offsetHeight > 50 ? `${Math.round(node.data.ftes)} ${text_maker("fte")}` : '';
+    return node_html(node, display_name, text_size, display_number);
+  });
+}
+
+
+function node_html(node, display_name, text_size, display_number){
+  return `
+  <div class="TreeMapNode__ContentBox TreeMapNode__ContentBox--standard">
+    <div class="TreeMapNode__ContentTitle ${text_size && `TreeMapNode__ContentTitle${text_size}` || ''}">
+      ${display_name}
+    </div>
+    ${ display_number && `
+    <div class="TreeMapNode__ContentText ${text_size && `TreeMapNode__ContentText${text_size}` || ''}">
+      ${display_number}
+    </div>` || '' }
+  </div>
+  `;
+
+}
+
+function node_name(node){
+  if(node.data.subject && node.data.subject.fancy_acronym && this.offsetWidth < 150 ){
+    return node.data.subject.fancy_acronym
+  }
+  return node.data.name;
+}
+
+function node_size(node){
+  if (this.offsetHeight <= 30 || this.offsetWidth <= 50) { return "tiny" }
+  else if (this.offsetHeight < 100 || this.offsetWidth < 150 ) { return "small" }
+  else if (this.offsetHeight > 150 && this.offsetWidth > 300) { return "large" }
+  else { return "medium" }
+}
+
 
 /* COLOUR SCALES */
 
@@ -374,7 +393,7 @@ export default class TreeMapper extends React.Component {
                         window.feature_detection.is_mobile() ? 
                           mobile_tooltip_render : std_tooltip_render
                       }
-                      node_render={std_node_render}
+                      node_render={ perspective === "drf_ftes" ? fte_node_render : std_node_render }
                       viz_height={app_height - topbar_height}
                     />
                   </div>
