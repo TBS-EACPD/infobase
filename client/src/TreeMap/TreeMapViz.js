@@ -1,9 +1,7 @@
 import text from './TreeMap.yaml';
 import { create_text_maker } from '../models/text.js';
-import { formats } from '../core/format.js';
 import classNames from "classnames";
 import { smaller_items_text } from './data.js';
-import { get_static_url } from '../request_utils.js';
 
 
 const text_maker = create_text_maker(text);
@@ -83,9 +81,7 @@ export class TreeMap extends React.Component {
     const html_root = d3.select(el).select('div');
 
     // the actual treemap div
-    const zoom_ctrl = html_root.select('.TreeMap__ZoomControl');
     const viz_root = html_root.select('.viz-root');
-    const side_menu = html_root.select('.TreeMap__SideBar');
 
     const width = viz_root.node().offsetWidth;
     let height = viz_height;
@@ -341,14 +337,4 @@ export class TreeMap extends React.Component {
 
   }
 }
-
-function zoom_ctrl_text(d) {
-  return (
-    d.parent ?
-      `<span class="TreeMap__ZoomControl__Title">${d.data.name} - </span>${text_maker("click_to_zoom_out")}` :
-      text_maker("click_rect_to_zoom_in")
-  );
-}
-
-
 

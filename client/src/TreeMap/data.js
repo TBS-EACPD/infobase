@@ -132,18 +132,6 @@ function prep_nodes(node, perspective, get_changes) {
   }
 }
 
-function filter_sobj_categories(so_cat, row) {
-  if (row.so_num > 0 && row.so_num <= 7) {
-    return so_cat === 1;
-  } else if (row.so_num > 7 && row.so_num <= 9) {
-    return so_cat === 2;
-  } else if (row.so_num === 21 || row.so_num === 22) {
-    return so_cat === 3;
-  }
-  return so_cat === row.so_num;
-}
-
-
 export async function load_data() {
   await ensure_loaded({ table_keys: ["programSpending", "programFtes", "programSobjs", "orgTransferPayments", "orgVoteStatPa"] });
 }

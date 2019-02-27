@@ -4,7 +4,7 @@ import { StandardRouteContainer } from '../core/NavComponents.js';
 import { SpinnerWrapper } from '../util_components.js';
 import {
   get_data,
-  load_data
+  load_data,
 } from './data.js';
 import { formats } from '../core/format.js';
 import treemap_text from './TreeMap.yaml';
@@ -15,7 +15,7 @@ import { TreeMapTopbar } from './TreeMapTopBar.js';
 import { infograph_href_template } from '../infographic/routes.js';
 import {
   create_text_maker,
-  run_template
+  run_template,
 } from '../models/text.js';
 
 
@@ -326,7 +326,6 @@ export default class TreeMapper extends React.Component {
     const {
       loading,
       data,
-      org_route,
     } = this.state;
     let colorScale = get_color_scale(color_var, get_changes);
 

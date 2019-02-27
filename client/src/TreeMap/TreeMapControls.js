@@ -85,21 +85,6 @@ const vs_type_controls = [
   { id: "999", display: text_maker("treemap_vstype999") },
 ]
 
-const so_type_controls_old = [
-  { id: "All", display: text_maker("all") },
-  { id: "1", display: text_maker("SOBJ1") },
-  { id: "2", display: text_maker("SOBJ2") },
-  { id: "3", display: text_maker("SOBJ3") },
-  { id: "4", display: text_maker("SOBJ4") },
-  { id: "5", display: text_maker("SOBJ5") },
-  { id: "6", display: text_maker("SOBJ6") },
-  { id: "7", display: text_maker("SOBJ7") },
-  { id: "8", display: text_maker("SOBJ8") },
-  { id: "9", display: text_maker("SOBJ9") },
-  { id: "10", display: text_maker("SOBJ10") },
-  { id: "11", display: text_maker("SOBJ11") },
-  { id: "12", display: text_maker("SOBJ12") },
-]
 
 const so_type_controls = [
   { id: "All", display: text_maker("all") },
