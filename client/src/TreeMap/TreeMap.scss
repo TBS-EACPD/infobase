@@ -1,22 +1,31 @@
 @import '../common_css/common-variables';
 
+$treeMapBackgroundColor: #D9D9D9;
+
+$treeMapSelectedBorder: #4292c6;
+$treeMapSelectedColor: rgba(66, 146, 198, 0.4);
+
+$treeMapControlsColor: #2970b3;
+$treeMapControlsColorMid: #6baed6;
+$treeMapControlsColorLight: #c7dbee;
+
+$treeMapTooltipColor: #767f89;
+
 .TreeMap__Wrapper {
   background: none;
 }
 .TreeMap__TopBar {
-  background-color: #D9D9D9;
+  background-color: $treeMapBackgroundColor;
   height: 100%;
   border: 2px solid #fff;
 }
 .TreeMap__Mainviz{
-  background-color: #D9D9D9;
+  background-color: $treeMapBackgroundColor;
 }
 
 
-
-
 .TreeMap__SideBar {
-  background-color: #D9D9D9;// #767f89;
+  background-color: $treeMapBackgroundColor;
   border: 2px solid #fff;
   color: #fff;
   text-align: center;
@@ -30,15 +39,11 @@
   line-height: 2em;
   font-size: 1em;
 }
-.TreeMap__SideBar__Chevron {
-  width: 10px;
-  color: #9ecae1;
-}
 
 
 
 .TreeMap__ZoomControl {
-  background-color: #D9D9D9;
+  background-color: $treeMapBackgroundColor;
   height: 100%;
   color: black;
   font-size: 16px;
@@ -86,8 +91,8 @@
 
 .TreeMapNode__ContentBoxContainer {
   &:hover{
-    background-color: rgba(66, 146, 198, 0.4); //rgba(200, 200, 200, 0.1);
-    border: 2px solid #4292c6;
+    background-color: $treeMapSelectedColor;
+    border: 2px solid $treeMapSelectedBorder;
   }
   position: absolute;
 
@@ -97,8 +102,8 @@
 }
 
 .TreeMapNode__ContentBoxContainer--tapped {
-  background-color: rgba(66, 146, 198, 0.4); //rgba(200, 200, 200, 0.1);
-  border: 2px solid #4292c6;
+  background-color: $treeMapSelectedColor;
+  border: 2px solid $treeMapSelectedBorder;
 }
 
 .TreeMapNode__ContentBox {
@@ -149,7 +154,7 @@
   height: auto;
   border-radius:5px;
   border: 2px solid white;
-  background: none repeat scroll 0 0 #767f89;
+  background: none repeat scroll 0 0 $treeMapTooltipColor;
   color: white;
   font-size: 1em;
   padding: 10px;
@@ -178,7 +183,7 @@
     margin-left: -7px;
     border-width: 7px;
     border-style: solid;
-    border-color: transparent transparent #767f89 transparent;
+    border-color: transparent transparent $treeMapTooltipColor transparent;
   }
   .TM_Tooltip__link {
     color: #9ecae1
@@ -192,10 +197,6 @@
   margin-top: 2px;  
 }
 
-$controlsColor: #2970b3;
-$controlsColorMid: #6baed6;
-$controlsColorLight: #c7dbee;
-
 .treemap-controls {
   //margin-bottom: -20px;
 
@@ -203,7 +204,7 @@ $controlsColorLight: #c7dbee;
     margin-bottom: 8px;
 
     & > .treemap-labeled-box-label {
-      background-color: $controlsColor;
+      background-color: $treeMapControlsColor;
       color: #FFF;
       font-size: 18px;
       padding: 13px 13px 13px 20px;
@@ -219,10 +220,10 @@ $controlsColorLight: #c7dbee;
       display: block;
       line-height: normal;
       & > .treemap-options__option {
-        border-color: $controlsColor;
+        border-color: $treeMapControlsColor;
         border-width: 2px;
         background-color: #ffffff;
-        color: $controlsColor;
+        color: $treeMapControlsColor;
         padding: 5px;
         font-size: 14x;
         width: 100%;
@@ -233,13 +234,13 @@ $controlsColorLight: #c7dbee;
       
       & > .treemap-options__option.treemap-options__option--active {
         color: #000000;
-        background-color: $controlsColorMid;
+        background-color: $treeMapControlsColorMid;
       }
       
       & > .treemap-options__option:not(.treemap-options__option--active):hover,
       & > .treemap-options__option:not(.treemap-options__option--active):active,
       & > .treemap-options__option:not(.treemap-options__option--active):focus { 
-        background-color: $controlsColorLight;
+        background-color: $treeMapControlsColorLight;
         color: #000000;
       }
     }

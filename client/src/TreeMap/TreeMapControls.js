@@ -119,9 +119,7 @@ function create_new_path(cur_params, new_param, new_val) {
       new_val ? new_year = year_to_year_changes[cur_params.year] : new_year = cur_params.year.split(":")[1];
       break;
   }
-  // check here to see if the year matches
   const new_path = `/treemap/${new_perspective}/${new_color_var}/${new_filter_var}/${new_year}/${new_get_changes}`;
-  //debugger;
   return new_path;
 }
 
@@ -151,14 +149,7 @@ export class TreeMapControls extends React.Component {
               <TreeMapRadioButtons
                 options={_.map(size_controls, ({ id, display }) => ({ id, display, active: id === perspective }))}
                 onChange={id => {
-                  const new_path = create_new_path({
-                    perspective: perspective,
-                    color_var: color_var,
-                    year: year,
-                    get_changes: get_changes,
-                    filter_var: filter_var,
-                  }, 
-                  "perspective", id);
+                  const new_path = create_new_path({perspective,color_var, year,get_changes, filter_var}, "perspective", id);
                   if (location.pathname !== new_path) {
                     history.push(new_path);
                   }
@@ -185,14 +176,7 @@ export class TreeMapControls extends React.Component {
                   },
                 ]}
                 onChange={id => {
-                  const new_path = create_new_path({
-                    perspective: perspective,
-                    color_var: color_var,
-                    year: year,
-                    get_changes: get_changes,
-                    filter_var: filter_var,
-                  }, 
-                  "get_changes", id==="year_changes");
+                  const new_path = create_new_path({perspective,color_var, year,get_changes, filter_var}, "get_changes", id==="year_changes");
                   if (location.pathname !== new_path) {
                     history.push(new_path);
                   }
@@ -207,18 +191,19 @@ export class TreeMapControls extends React.Component {
             <div className="cent">
               <TreeMapRadioButtons
                 options={get_changes ?
-                  _.map(year_changes[perspective], (id => ({ id: id, display: `${run_template("{{" + id.split(":")[0] + "}}")} ${text_maker("to")} ${run_template("{{" + id.split(":")[1] + "}}")}`, active: id === year }))) :
-                  _.map(years[perspective], (id => ({ id: id, display: run_template("{{" + id + "}}"), active: id === year })))
+                  _.map(year_changes[perspective], (id => ({ 
+                    id, 
+                    display: `${run_template("{{" + id.split(":")[0] + "}}")} ${text_maker("to")} ${run_template("{{" + id.split(":")[1] + "}}")}`,
+                    active: id === year 
+                  }))) :
+                  _.map(years[perspective], (id => ({
+                    id,
+                    display: run_template("{{" + id + "}}"),
+                    active: id === year
+                  })))
                 }
                 onChange={id => {
-                  const new_path = create_new_path({
-                    perspective: perspective,
-                    color_var: color_var,
-                    year: year,
-                    get_changes: get_changes,
-                    filter_var: filter_var,
-                  }, 
-                  "year", id);
+                  const new_path = create_new_path({perspective,color_var, year,get_changes, filter_var}, "year", id);
                   if (location.pathname !== new_path) {
                     history.push(new_path);
                   }
@@ -235,14 +220,7 @@ export class TreeMapControls extends React.Component {
                 <TreeMapRadioButtons
                   options={_.map(gc_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
                   onChange={id => {
-                    const new_path = create_new_path({
-                      perspective: perspective,
-                      color_var: color_var,
-                      year: year,
-                      get_changes: get_changes,
-                      filter_var: filter_var,
-                    }, 
-                    "filter_var", id);
+                    const new_path = create_new_path({perspective,color_var, year,get_changes, filter_var}, "filter_var", id);
                     if (location.pathname !== new_path) {
                       history.push(new_path);
                     }
@@ -260,14 +238,7 @@ export class TreeMapControls extends React.Component {
                 <TreeMapRadioButtons
                   options={_.map(color_controls, ({ id, display }) => ({ id, display, active: id === color_var }))}
                   onChange={id => {
-                    const new_path = create_new_path({
-                      perspective: perspective,
-                      color_var: color_var,
-                      year: year,
-                      get_changes: get_changes,
-                      filter_var: filter_var,
-                    }, 
-                    "color_var", id);
+                    const new_path = create_new_path({perspective,color_var, year,get_changes, filter_var}, "color_var", id);
                     if (location.pathname !== new_path) {
                       history.push(new_path);
                     }
@@ -286,14 +257,7 @@ export class TreeMapControls extends React.Component {
                   <TreeMapRadioButtons
                     options={_.map(vs_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
                     onChange={id => {
-                      const new_path = create_new_path({
-                        perspective: perspective,
-                        color_var: color_var,
-                        year: year,
-                        get_changes: get_changes,
-                        filter_var: filter_var,
-                      }, 
-                      "filter_var", id);
+                      const new_path = create_new_path({perspective,color_var, year,get_changes, filter_var}, "filter_var", id);
                       if (location.pathname !== new_path) {
                         history.push(new_path);
                       }
@@ -312,14 +276,7 @@ export class TreeMapControls extends React.Component {
                 <TreeMapRadioButtons
                   options={_.map(so_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
                   onChange={id => {
-                    const new_path = create_new_path({
-                      perspective: perspective,
-                      color_var: color_var,
-                      year: year,
-                      get_changes: get_changes,
-                      filter_var: filter_var,
-                    }, 
-                    "filter_var", id);
+                    const new_path = create_new_path({perspective,color_var, year,get_changes, filter_var}, "filter_var", id);
                     if (location.pathname !== new_path) {
                       history.push(new_path);
                     }

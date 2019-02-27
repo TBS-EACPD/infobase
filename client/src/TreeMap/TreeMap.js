@@ -234,9 +234,11 @@ function mobile_tooltip_render_changes(tooltip_sel) {
 
 function generate_infograph_href(d, data_area) {
   if (d.data.subject) {
-    return `<div style="padding-top: 10px">
+    return `
+    <div style="padding-top: 10px">
       <a class="TM_Tooltip__link" href=${infograph_href_template(d.data.subject, data_area)}> ${text_maker("see_the_infographic")} </a>
-    </div>`;
+    </div>
+    `;
   } else { return '' }
 }
 
@@ -327,7 +329,7 @@ export default class TreeMapper extends React.Component {
       loading,
       data,
     } = this.state;
-    let colorScale = get_color_scale(color_var, get_changes);
+    const colorScale = get_color_scale(color_var, get_changes);
 
     let app_height = 800;
     if (window.feature_detection.is_mobile()) {
