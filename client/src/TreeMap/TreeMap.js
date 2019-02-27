@@ -28,7 +28,7 @@ function std_node_render(foreign_sel) {
     const nsize = node_size.bind(this)();
     if (node_size === "tiny") { return } //no contents on tiny nodes
     const text_size = nsize === "medium" ? "" : `--${nsize}`;
-    const display_name = node_name(node);
+    const display_name = node_name(node, this.offsetWidth);
     const display_number = this.offsetHeight > 50 ? formats.compact1(node.data.amount) : '';
     return node_html(node, display_name, text_size, display_number);
   });
@@ -39,7 +39,7 @@ function fte_node_render(foreign_sel) {
     const nsize = node_size.bind(this)();
     if (node_size === "tiny") { return } //no contents on tiny nodes
     const text_size = nsize === "medium" ? "" : `--${nsize}`;
-    const display_name = node_name(node);
+    const display_name = node_name(node, this.offsetWidth);
     const display_number = this.offsetHeight > 50 ? `${Math.round(node.data.ftes)} ${text_maker("fte")}` : '';
     return node_html(node, display_name, text_size, display_number);
   });
@@ -61,8 +61,8 @@ function node_html(node, display_name, text_size, display_number){
 
 }
 
-function node_name(node){
-  if(node.data.subject && node.data.subject.fancy_acronym && this.offsetWidth < 150 ){
+function node_name(node, width){
+  if(node.data.subject && node.data.subject.fancy_acronym && width < 150 ){
     return node.data.subject.fancy_acronym
   }
   return node.data.name;
