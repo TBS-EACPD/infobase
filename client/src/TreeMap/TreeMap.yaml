@@ -59,7 +59,6 @@ SO:
   en: Expenditures by Standard Object
   fr: Dépenses par article courant
 
-
 all:
   en: all
   fr: Tous
@@ -67,54 +66,6 @@ all:
 treemap_vstype999:
   en: Statutory Items
   fr: Postes législatifs
-
-SOBJ1:
-  en: Personnel
-  fr: Personnel
-
-SOBJ2:
-  en: Transportation and communications
-  fr: Transports et communications
-
-SOBJ3:
-  en: Information
-  fr: Information
-
-SOBJ4:
-  en: Professional and special services
-  fr: Services professionnels et spéciaux
-
-SOBJ5:
-  en: Rentals
-  fr: Location
-
-SOBJ6:
-  en: Purchased repairs and maintenance
-  fr: Achat de services de réparation et d'entretien
-
-SOBJ7:
-  en: Utilities, material and supplies
-  fr: Services publics, fournitures et approvisionnements
-
-SOBJ8:
-  en: Acquisition of land, buildings and works
-  fr: Acquisition de terrains, de bâtiments et d'ouvrages
-
-SOBJ9:
-  en: Acquisition of machinery and equipment
-  fr: Acquisition de machines et de matériel
-
-SOBJ10:
-  en: Transfer payments
-  fr: Paiements de transfert
-
-SOBJ11:
-  en: Public debt charge
-  fr: Service de la dette publique
-
-SOBJ12:
-  en: Other subsidies and payments
-  fr: Autres subventions et paiements
 
 grants:
   en: Grants
@@ -136,7 +87,6 @@ treemap_vstype_definitions:
     * **asdf title here** {{gl_tt "internal services" "INT_SERVICES"}} omg wtf
   fr: |
     French goes here
-
 
 treemap_none_selected_summary:
   en: To see data, select a year

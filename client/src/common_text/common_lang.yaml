@@ -989,8 +989,6 @@ non_active_program:
   en: non-active program
   fr: programme non actif
 
-
-
 temp_qfr_late_depts_note:
   en: |
     The 2018-19 Quarterly Financial Reports (QFR) dataset does not include all data for the Canadian Centre for Occupational Health and Safety, 
@@ -1001,3 +999,48 @@ temp_qfr_late_depts_note:
     Services aux Autochtones Canada, Centre d’analyse des opérations et déclarations financières du Canada, 
     Commissariats à l’information et à la protection de la vie privée du Canada et Bureau du surintendant des institutions financières. 
     L’information sera mise-à-jour dès que les données seront disponible.
+
+
+SOBJ1: 
+    text: Personnel
+SOBJ2:
+    en: Transportation and Telecommunications
+    fr: Transports et communications
+SOBJ3: 
+    text: Information
+SOBJ4:
+    en: Professional and Special Services
+    fr: Services professionnels et spéciaux
+SOBJ5:
+    en: Rentals
+    fr: Location
+SOBJ6:
+    en: Purchased Repair and Maintenance
+    fr: Achat de services de réparation et d'entretien
+SOBJ7:
+    en: Utilities, Materials and Supplies
+    fr: Services publics, fournitures et approvisionnements
+SOBJ8:
+    en: Acquisition of Land, Buildings, and Works
+    fr: Acquisition de terrains, de bâtiments et d'ouvrages
+SOBJ9: 
+    en: Acquisition of Machinery and Equipment
+    fr: Acquisition de machines et de matériel
+SOBJ10:
+    en: Transfer Payments
+    fr: Paiements de transfert
+SOBJ11:
+    en: Public Debt Charges
+    fr: Frais de la dette
+SOBJ12:
+    en: Other Subsidies and Payments
+    fr: Autres subventions et paiements
+SOBJ20:
+    en: Revenues
+    fr: Revenus
+SOBJ21:
+    en: External Revenues
+    fr: Revenus externes
+SOBJ22:
+    en: Internal Revenues
+    fr: Revenus internes
