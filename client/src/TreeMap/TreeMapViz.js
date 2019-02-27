@@ -151,12 +151,12 @@ export class TreeMap extends React.Component {
       if (!d.children) {
         return;
       }
-      const g1 = viz_root.insert('div')
+      const main_group = viz_root.insert('div')
         .datum(d)
         .attr('class', 'depth');
 
-      g1.html("");
-      const main = g1.selectAll('.TreeMap__Division')
+      main_group.html("");
+      const main = main_group.selectAll('.TreeMap__Division')
         .data(d.children)
         .enter()
         .append('div')
@@ -269,9 +269,9 @@ export class TreeMap extends React.Component {
           .select('.TM_TooltipContainer')
           .remove();
 
-        const g2 = display(d);
-        const t1 = g1.transition().duration(650);
-        const t2 = g2.transition().duration(650);
+        const zoomed_group = display(d);
+        const main_trans = main_group.transition().duration(650);
+        const zoomed_trans = zoomed_group.transition().duration(650);
 
         x.domain([d.x0, d.x1]);
         y.domain([d.y0, d.y1]);
@@ -283,26 +283,25 @@ export class TreeMap extends React.Component {
         viz_root.selectAll('.depth').sort((a, b) => a.depth - b.depth);
 
         // Transition to the new view.
-        t1.selectAll('.TreeMap__Rectangle').call(rectan);
-        t2.selectAll('.TreeMap__Rectangle').call(rectan);
+        main_trans.selectAll('.TreeMap__Rectangle').call(rectan);
+        zoomed_trans.selectAll('.TreeMap__Rectangle').call(rectan);
 
         // Remove text when transitioning, then display again
-        t1.selectAll('.TreeMapNode__ContentBox').style('display', 'none');
-        t1.selectAll('.TreeMapNode__ContentBoxContainer').call(treemap_node_content_container);
-        t2.selectAll('.TreeMapNode__ContentBox').style('display', 'block');
-        t2.selectAll('.TreeMapNode__ContentBoxContainer').call(treemap_node_content_container);
+        main_trans.selectAll('.TreeMapNode__ContentBox').style('display', 'none');
+        main_trans.selectAll('.TreeMapNode__ContentBoxContainer').call(treemap_node_content_container);
+        zoomed_trans.selectAll('.TreeMapNode__ContentBox').style('display', 'block');
+        zoomed_trans.selectAll('.TreeMapNode__ContentBoxContainer').call(treemap_node_content_container);
 
-        t2.selectAll('.TreeMapNode__ContentBoxContainer').call(treemap_node_content_container); // TODO: why is this here?
+        zoomed_trans.selectAll('.TreeMapNode__ContentBoxContainer').call(treemap_node_content_container); // TODO: why is this here?
 
         // Remove the old node when the transition is finished.
-        t1.on('end.remove', function () {
+        main_trans.on('end.remove', function () {
           this.remove();
           transitioning = false;
           viz_root.style("overflow", "visible");
-          g2.selectAll('.TreeMapNode__ContentBoxContainer').call(node_render);
+          zoomed_group.selectAll('.TreeMapNode__ContentBoxContainer').call(node_render);
         });
       }
-
       return main;
     }
 
