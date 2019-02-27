@@ -1,4 +1,4 @@
-import { _ } from 'lodash';
+import _ from 'lodash';
 const { execQuery } = global;
 
 const dept_results_data_query = `
