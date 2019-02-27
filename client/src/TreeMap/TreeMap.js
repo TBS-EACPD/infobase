@@ -116,7 +116,7 @@ function spending_change_color_scale(node) {
 }
 function fte_change_color_scale(node) {
   const color_val = node.data.ftes < 0 ? -node.data.ftes : node.data.ftes;
-  const scale = node.data.ftes < 0 ? d3_green : d3_purple;
+  const scale = node.data.ftes < 0 ? d3_purple : d3_green;
   scale.domain([0, 1000]);
   return scale(color_val);
 }
