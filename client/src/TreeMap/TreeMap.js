@@ -1,11 +1,7 @@
 //https://gist.github.com/guglielmo/16d880a6615da7f502116220cb551498
 
 import { StandardRouteContainer } from '../core/NavComponents.js';
-import {
-  Format,
-  TM,
-  SpinnerWrapper
-} from '../util_components.js';
+import { SpinnerWrapper } from '../util_components.js';
 import {
   get_data,
   load_data
@@ -14,17 +10,13 @@ import { formats } from '../core/format.js';
 import treemap_text from './TreeMap.yaml';
 import './TreeMap.scss';
 import { TreeMap } from './TreeMapViz.js';
-import { TreeMapControls } from './TreeMapControls.js';
 import { TreeMapSidebar } from './TreeMapSidebar.js';
 import { TreeMapTopbar } from './TreeMapTopBar.js';
-import { IndicatorDisplay } from '../panels/result_graphs/components.js'
 import { infograph_href_template } from '../infographic/routes.js';
 import {
   create_text_maker,
   run_template
 } from '../models/text.js';
-import { Fragment } from 'react';
-import { createBrowserHistory } from 'history';
 
 
 const text_maker = create_text_maker([treemap_text]);
@@ -35,29 +27,27 @@ function std_node_render(foreign_sel) {
   foreign_sel.html(function (node) {
     if (this.offsetHeight <= 30 || this.offsetWidth <= 50) { return }
 
-    const name_to_display = (node.data.subject && node.data.subject.fancy_acronym && this.offsetWidth < 150 ? node.data.subject.fancy_acronym : node.data.name);
+    const name_to_display = node.data.subject && node.data.subject.fancy_acronym && this.offsetWidth < 150 ?
+      node.data.subject.fancy_acronym :
+      node.data.name;
 
     let text_size = "";
     if (this.offsetHeight > 150 && this.offsetWidth > 300) { text_size = "--large" }
-    if (this.offsetHeight > 50 && this.offsetWidth > 50 && this.offsetHeight <= 100) { text_size = "--small" }
+    if (this.offsetHeight < 100 || this.offsetWidth < 100 ) { text_size = "--small" }
 
-    let show_amount = true;
-    if (this.offsetHeight <= 50) { show_amount = false }
+    const show_amount = this.offsetHeight > 50;
 
-    let ret = `
-      <div class="TreeMapNode__ContentBox TreeMapNode__ContentBox--standard">
-      <div class="TreeMapNode__ContentTitle TreeMapNode__ContentTitle${text_size}">
+    return `
+    <div class="TreeMapNode__ContentBox TreeMapNode__ContentBox--standard">
+      <div class="TreeMapNode__ContentTitle ${text_size && `TreeMapNode__ContentTitle${text_size}` || ''}">
         ${name_to_display}
       </div>
-    `
-    if (show_amount) {
-      ret = ret + `
-      <div class="TreeMapNode__ContentText TreeMapNode__ContentText${text_size}">
+      ${ show_amount && `
+      <div class="TreeMapNode__ContentText ${text_size && `TreeMapNode__ContentText${text_size}` || ''}">
         ${formats.compact1(node.data.amount)}
-      </div>
-      `
-    }
-    return ret + '</div>';
+      </div>` || '' }
+    </div>
+    `;
   });
 }
 
@@ -75,47 +65,35 @@ const d3_purple = d3.scaleSequential(d3.interpolateRgbBasis(["#e7d4e8","#c2a5cf"
 d3_purple.clamp(true);
 
 
-// spending % of parent -- 33% is enough for the colour to be maxed out
+// spending % of parent -- 30% is enough for the colour to be maxed out
 function standard_color_scale(node) {
-  let color_val;
-  let scale = d3_blue;
-  node.data.parent_amount ? color_val = node.data.amount / node.data.parent_amount * 3 : color_val = 0;
-  if (node.data.amount < 0) {
-    color_val = -color_val
-    scale = d3_red;
-  }
-  scale.domain([0, 1]);
-  return scale(color_val);
+  const color_val = node.data.parent_amount ? node.data.amount / node.data.parent_amount : 0; // smaller_items nodes don't have parents, set them to 0
+  const scale = node.data.amount < 0 ? d3_red : d3_blue
+  scale.domain([0, .3]);
+  if(node.amount < 0){
+    return scale(-color_val)
+  } else return scale(color_val);
 }
 
 // FTE % of parent
 function fte_color_scale(node) {
-  let color_val = 0;
-  const scale = d3_green.domain([0,1]);
-  if (node.data.parent_ftes) { color_val = node.data.ftes / node.data.parent_ftes * 3 }
+  const color_val = node.data.parent_ftes ? node.data.ftes / node.data.parent_ftes : 0; // smaller_items nodes don't have parents, set them to 0
+  const scale = d3_green.domain([0,.3]);
   return scale(color_val);
 }
 
 // divergent scales (absolute val)
 function spending_change_color_scale(node) {
-  let colour_val = node.data.amount;
-  let scale = d3_blue;
-  if (colour_val < 0) {
-    colour_val = -colour_val;
-    scale = d3_red;
-  }
+  const color_val = node.data.amount < 0 ? -node.data.amount : node.data.amount;
+  const scale = node.data.amount < 0 ? d3_red : d3_blue;
   scale.domain([0, 2000000000]);
-  return scale(colour_val);
+  return scale(color_val);
 }
 function fte_change_color_scale(node) {
-  let colour_val = node.data.ftes;
-  let scale = d3_green;
-  if (colour_val < 0) {
-    colour_val = -colour_val;
-    scale = d3_purple;
-  }
+  const color_val = node.data.ftes < 0 ? -node.data.ftes : node.data.ftes;
+  const scale = node.data.ftes < 0 ? d3_green : d3_purple;
   scale.domain([0, 1000]);
-  return scale(colour_val);
+  return scale(color_val);
 }
 
 function get_color_scale(color_var, get_changes) {
@@ -306,14 +284,13 @@ export default class TreeMapper extends React.Component {
       match: {
         params: {
           perspective,
-          org_id,
           year,
           filter_var,
           get_changes,
         },
       },
     } = props;
-    const data = get_data(perspective, org_id, year, filter_var, get_changes);
+    const data = get_data(perspective, year, filter_var, get_changes);
     this.setState({
       data: data,
       org_route: [],

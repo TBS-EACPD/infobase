@@ -1,6 +1,3 @@
-import {
-  Details,
-} from '../util_components.js';
 import './TreeMap.scss';
 import {
   run_template,
@@ -9,7 +6,6 @@ import treemap_text from './TreeMap.yaml';
 import { create_text_maker } from '../models/text.js';
 import { Fragment } from 'react';
 import classNames from 'classnames';
-import { infobaseGraphColors } from '../core/color_schemes.js';
 
 
 const text_maker = create_text_maker([treemap_text]);
@@ -163,11 +159,11 @@ export class TreeMapControls extends React.Component {
     } = this.props;
     return (
       <div className="treemap-controls">
-        <LabeledBox
+        <TreeMapLabeledBox
           label={text_maker("treemap_display_value_label")}
           content={
             <div className="cent">
-              <RadioButtons
+              <TreeMapRadioButtons
                 options={_.map(size_controls, ({ id, display }) => ({ id, display, active: id === perspective }))}
                 onChange={id => {
                   const new_path = create_new_path({
@@ -186,11 +182,11 @@ export class TreeMapControls extends React.Component {
             </div>
           }
         />
-        <LabeledBox
+        <TreeMapLabeledBox
           label={text_maker("year_format")}
           content={
             <div className="cent">
-              <RadioButtons
+              <TreeMapRadioButtons
                 options={[
                   {
                     id: "single_year",
@@ -220,11 +216,11 @@ export class TreeMapControls extends React.Component {
             </div>
           }
         />
-        <LabeledBox
+        <TreeMapLabeledBox
           label={text_maker("year")}
           content={
             <div className="cent">
-              <RadioButtons
+              <TreeMapRadioButtons
                 options={get_changes ?
                   _.map(year_changes[perspective], (id => ({ id: id, display: `${run_template("{{" + id.split(":")[0] + "}}")} ${text_maker("to")} ${run_template("{{" + id.split(":")[1] + "}}")}`, active: id === year }))) :
                   _.map(years[perspective], (id => ({ id: id, display: run_template("{{" + id + "}}"), active: id === year })))
@@ -247,11 +243,11 @@ export class TreeMapControls extends React.Component {
           }
         />
         {perspective === "tp" &&
-          <LabeledBox
+          <TreeMapLabeledBox
             label={text_maker("treemap_gc_type_filter")}
             content={
               <div className="cent">
-                <RadioButtons
+                <TreeMapRadioButtons
                   options={_.map(gc_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
                   onChange={id => {
                     const new_path = create_new_path({
@@ -272,11 +268,11 @@ export class TreeMapControls extends React.Component {
           />
         }
         {(perspective === "drf" || perspective === "drf_ftes" ) &&
-          <LabeledBox
+          <TreeMapLabeledBox
             label={text_maker("treemap_color_by_label")}
             content={
               <div className="cent">
-                <RadioButtons
+                <TreeMapRadioButtons
                   options={_.map(color_controls, ({ id, display }) => ({ id, display, active: id === color_var }))}
                   onChange={id => {
                     const new_path = create_new_path({
@@ -297,12 +293,12 @@ export class TreeMapControls extends React.Component {
           />
         }
         {perspective === "vote_stat" &&
-          <LabeledBox
+          <TreeMapLabeledBox
             label={text_maker("treemap_vstype_filter")}
             content={
               <div className="cent">
                 <Fragment>
-                  <RadioButtons
+                  <TreeMapRadioButtons
                     options={_.map(vs_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
                     onChange={id => {
                       const new_path = create_new_path({
@@ -324,11 +320,11 @@ export class TreeMapControls extends React.Component {
           />
         }
         {perspective === "so" &&
-          <LabeledBox
+          <TreeMapLabeledBox
             label={text_maker("treemap_so_filter")}
             content={
               <div className="cent">
-                <RadioButtons
+                <TreeMapRadioButtons
                   options={_.map(so_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
                   onChange={id => {
                     const new_path = create_new_path({
@@ -353,7 +349,7 @@ export class TreeMapControls extends React.Component {
   }
 }
 
-class LabeledBox extends React.Component {
+class TreeMapLabeledBox extends React.Component {
   render() {
     const {
       label,
@@ -376,7 +372,7 @@ class LabeledBox extends React.Component {
 }
 
 
-const RadioButtons = ({ options, onChange }) => <div className="treemap-options">
+const TreeMapRadioButtons = ({ options, onChange }) => <div className="treemap-options">
   {options.map(({ display, id, active }) =>
     <button
       key={id}
