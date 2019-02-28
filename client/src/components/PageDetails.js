@@ -140,6 +140,11 @@ class ReportAProblem extends React.Component {
                     </div>
                   </div>
                 }
+                <div>
+                  <a href="#privacy" target="_blank" rel="noopener noreferrer">
+                    {text_maker("privacy_title")}
+                  </a>
+                </div>
                 { !has_been_sent &&
                   <button 
                     className="btn-sm btn btn-ib-primary"
