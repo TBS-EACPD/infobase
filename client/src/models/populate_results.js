@@ -247,7 +247,7 @@ query($lang: String!, $dept_code: String) {
   }
 }
 `;
-export function api_load_results_bundle(subject){
+export function api_load_results_bundle(subject){ // TODO: optimize
   let subject_code;
   if(subject){
     switch(subject.level){
