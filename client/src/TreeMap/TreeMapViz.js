@@ -14,7 +14,7 @@ function updateMousePositionVars(evt) {
 export class TreeMap extends React.Component {
   constructor(props) {
     super();
-    this.my_state = { my_org_route: [...props.org_route] };
+    this.state = { org_route: [...props.org_route] };
   }
   render() {
     return <div ref={div => this.el = div} />
@@ -30,7 +30,7 @@ export class TreeMap extends React.Component {
   }
   componentDidUpdate() {
     // reset the state to match the props
-    this.my_state.my_org_route = [...this.props.org_route];
+    this.setState({org_route: [...this.props.org_route]});
     this._update();
   }
   componentWillUnmount() {
@@ -44,8 +44,8 @@ export class TreeMap extends React.Component {
       this.props.filter_var !== nextProps.filter_var) {
       return true;
     }
-    if (!_.isEqual(this.my_state.my_org_route, nextProps.org_route) &&
-      nextProps.org_route.length < this.my_state.my_org_route.length) {
+    if (!_.isEqual(this.state.org_route, nextProps.org_route) &&
+      nextProps.org_route.length < this.state.org_route.length) {
       return true; // only override with zoomed out view
     }
     return false;
@@ -62,10 +62,10 @@ export class TreeMap extends React.Component {
       viz_height,
     } = this.props;
 
-    const org_route = (!_.isEqual(this.my_state.my_org_route, this.props.org_route) &&
-                      this.props.org_route.length < this.my_state.my_org_route.length) ?
+    const org_route = (!_.isEqual(this.state.org_route, this.props.org_route) &&
+                      this.props.org_route.length < this.state.org_route.length) ?
       this.props.org_route :
-      this.my_state.my_org_route;
+      this.state.org_route;
 
     const el = this.el;
     el.innerHTML = `
@@ -160,7 +160,7 @@ export class TreeMap extends React.Component {
           .filter(d => d.children)
           .classed('TreeMap__Division', true)
           .on('click', d => {
-            this.my_state.my_org_route.push(d.data.name);
+            this.state.org_route.push(d.data.name);
             setRouteCallback(d.data.name, false);
             transition(d);
           })
@@ -221,7 +221,7 @@ export class TreeMap extends React.Component {
               d3.selectAll().classed("TreeMapNode__ContentBoxContainer--tapped", false);
               d.toolTipped = false;
               if (d.children) { // do the transition
-                that.my_state.my_org_route.push(d.data.name);
+                that.state.org_route.push(d.data.name);
                 setRouteCallback(d.data.name, false);
                 transition(d);
               }
@@ -318,7 +318,7 @@ export class TreeMap extends React.Component {
           height: `${y(d.y1) - y(d.y0)}px`,
         }))
     }
-    
+
     const main = display(root);
     //node_render is special, we call it once on first render (here) 
     //and after transitions
