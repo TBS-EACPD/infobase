@@ -125,4 +125,3 @@ workflows:
             branches:
               only:
                 - master
-                - canada-dot-ca-redesign
