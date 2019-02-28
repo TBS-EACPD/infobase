@@ -29,21 +29,19 @@ function header_col(perspective, year) {
   return;
 }
 
-function group_smallest(node_list, node_creator, shouldRecurse = true, perc_cutoff = 0.02, shouldAdjustSize = true) {
+function group_smallest(node_list, node_creator, should_recurse = true, perc_cutoff = 0.02, should_adjust_size = true) {
   if (_.isEmpty(node_list)) {
     return node_list;
   }
-  if (shouldRecurse) {
+  if (should_recurse) {
     //apply recursion first
     _.each(node_list, child => {
-      child.children = group_smallest(child.children, node_creator, shouldRecurse, perc_cutoff);
+      child.children = group_smallest(child.children, node_creator, should_recurse, perc_cutoff);
     });
   }
 
   const total = _.sumBy(node_list, "size");
   const cutoff = (
-    //window.is_mobile ? 
-    //total*(3/100) : 
     total * perc_cutoff
   ); //TODO: modify cutoff based on screenWidth, mobile should have more nesting for visibility...
   let tiny_nodes = _.filter(node_list, ({ size }) => size < cutoff)
@@ -57,21 +55,21 @@ function group_smallest(node_list, node_creator, shouldRecurse = true, perc_cuto
     new_node.size = _.sumBy(tiny_nodes, "size")
     new_node.is_negative = new_node.amount < 0;
 
-    if (new_node.size < cutoff && shouldAdjustSize) {
+    if (new_node.size < cutoff && should_adjust_size) {
       const old_size = new_node.size;
       _.set(new_node, 'size', cutoff);
       _.each(new_node.children, child => { recurse_adjust_size(child, cutoff / old_size) });
     }
 
-    if (shouldRecurse) {
+    if (should_recurse) {
       //the newly split up children might be able to get grouped again!
-      new_node.children = group_smallest(tiny_nodes, node_creator, shouldRecurse, perc_cutoff);
+      new_node.children = group_smallest(tiny_nodes, node_creator, should_recurse, perc_cutoff);
     }
 
     const old_node_list = _.without(node_list, ...tiny_nodes);
 
     return old_node_list.concat(new_node);
-  } else if (tiny_nodes.length > 0 && shouldAdjustSize) {
+  } else if (tiny_nodes.length > 0 && should_adjust_size) {
     // we want to avoid cases where there are nodes that are too tiny to see
     // e.g. DRF > treasury board > PSIC
     const old_node_list = _.without(node_list, ...tiny_nodes);

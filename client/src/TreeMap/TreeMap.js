@@ -23,27 +23,29 @@ const text_maker = create_text_maker([treemap_text]);
 
 /* NODE RENDERING FUNCTIONS */
 
-function std_node_render(foreign_sel) {
-  foreign_sel.html(function (node) {
-    const nsize = node_size.bind(this)();
-    if (node_size === "tiny") { return } //no contents on tiny nodes
-    const text_size = nsize === "medium" ? "" : `--${nsize}`;
-    const display_name = node_name(node, this.offsetWidth);
-    const display_number = this.offsetHeight > 50 ? formats.compact1(node.data.amount) : '';
-    return node_html(node, display_name, text_size, display_number);
-  });
+function format_display_number(value,is_fte=false){
+  if( !is_fte ){
+    return formats.compact1(value);
+  }
+  return `${Math.round(value)} ${text_maker("fte")}`;
 }
 
-function fte_node_render(foreign_sel) {
+
+function std_node_render(is_fte,foreign_sel) {
   foreign_sel.html(function (node) {
     const nsize = node_size.bind(this)();
-    if (node_size === "tiny") { return } //no contents on tiny nodes
+    if (nsize === "tiny") { return } //no contents on tiny nodes
     const text_size = nsize === "medium" ? "" : `--${nsize}`;
     const display_name = node_name(node, this.offsetWidth);
-    const display_number = this.offsetHeight > 50 ? `${Math.round(node.data.ftes)} ${text_maker("fte")}` : '';
+    const display_number = this.offsetHeight > 50 ? 
+      is_fte ? 
+        format_display_number(node.data.ftes, true) :
+        format_display_number(node.data.amount) :
+      '';
     return node_html(node, display_name, text_size, display_number);
   });
 }
+const curried_node_render = _.curry(std_node_render);
 
 
 function node_html(node, display_name, text_size, display_number){
@@ -144,21 +146,21 @@ function std_tooltip_render(tooltip_sel) {
     <hr class="BlueHLine">`;
     if (d.data.parent_amount) {
       tooltip_html = tooltip_html + `
-      <div>${formats.compact1(d.data.amount)}
+      <div>${format_display_number(d.data.amount)}
       (${formats.percentage1(d.data.amount / d.data.parent_amount)} of ${d.data.parent_name})</div>`;
     } else {
       tooltip_html = tooltip_html + `
-      <div>${formats.compact1(d.data.amount)}</div>`
+      <div>${format_display_number(d.data.amount)}</div>`
     }
     if (d.data.ftes) {
       if (d.data.parent_ftes) {
         tooltip_html = tooltip_html + `
-        <div>${Math.round(d.data.ftes)} ${text_maker("fte")}
+        <div>${format_display_number(d.data.ftes, true)}
         (${formats.percentage1(d.data.ftes / d.data.parent_ftes)} of ${d.data.parent_name})</div>`
 
       } else {
         tooltip_html = tooltip_html + `
-        <div>${Math.round(d.data.ftes)} ${text_maker("fte")}</div>`
+        <div>${format_display_number(d.data.ftes, true)}</div>`
       }
     }
     tooltip_html = tooltip_html + `
@@ -173,7 +175,7 @@ function std_tooltip_render_changes(tooltip_sel) {
     let tooltip_html = `<div>
     <div>${d.data.name}</div>
     <hr class="BlueHLine">
-    <div>${formats.compact1(d.data.amount)}</div>`
+    <div>${format_display_number(d.data.amount)}</div>`
     if (d.data.ftes) {
       tooltip_html = tooltip_html + `
       <div>${Math.round(d.data.ftes)} ${text_maker("fte")}</div>`
@@ -191,7 +193,7 @@ function mobile_tooltip_render(tooltip_sel, year) {
     let tooltip_html = `<div>
     <div>${d.data.name}</div>
     <hr class="BlueHLine">
-    <div>${formats.compact1(d.data.amount)}</div>`;
+    <div>${format_display_number(d.data.amount)}</div>`;
     if( d.data.parent_amount) {
       tooltip_html = tooltip_html + `
       <div>${formats.percentage1(d.data.amount / d.data.parent_amount)} of ${d.data.parent_name}</div>`;
@@ -199,12 +201,12 @@ function mobile_tooltip_render(tooltip_sel, year) {
     if (d.data.ftes) {
       if (d.data.parent_ftes) {
         tooltip_html = tooltip_html + `
-        <div>${Math.round(d.data.ftes)} ${text_maker("fte")}
+        <div>${format_display_number(d.data.ftes, true)}
         (${formats.percentage1(d.data.ftes / d.data.parent_ftes)} of ${d.data.parent_name})</div>`
 
       } else {
         tooltip_html = tooltip_html + `
-        <div>${Math.round(d.data.ftes)} ${text_maker("fte")}</div>`
+        <div>${format_display_number(d.data.ftes, true)}</div>`
       }
     }
     tooltip_html = tooltip_html + `
@@ -228,10 +230,10 @@ function mobile_tooltip_render_changes(tooltip_sel) {
     let tooltip_html = `<div>
     <div>${d.data.name}</div>
     <hr class="BlueHLine">
-    <div>${formats.compact1(d.data.amount)}</div>`;
+    <div>${format_display_number(d.data.amount)}</div>`;
     if (d.data.ftes) {
       tooltip_html = tooltip_html + `
-      <div>${Math.round(d.data.ftes)} ${text_maker("fte")}</div>`
+      <div>${format_display_number(d.data.ftes,true)}</div>`
     }
     tooltip_html = tooltip_html + `
     ${generate_infograph_href(d)}`
@@ -393,7 +395,9 @@ export default class TreeMapper extends React.Component {
                         window.feature_detection.is_mobile() ? 
                           mobile_tooltip_render : std_tooltip_render
                       }
-                      node_render={ perspective === "drf_ftes" ? fte_node_render : std_node_render }
+                      node_render={ perspective === "drf_ftes" ? 
+                      curried_node_render(true) : 
+                      curried_node_render(false) }
                       viz_height={app_height - topbar_height}
                     />
                   </div>

@@ -61,16 +61,13 @@ export class TreeMap extends React.Component {
       setRouteCallback,
       viz_height,
     } = this.props;
-    let org_route = this.my_state.my_org_route;
-    //debugger;
-    if (!_.isEqual(this.my_state.my_org_route, this.props.org_route) &&
-      this.props.org_route.length < this.my_state.my_org_route) {
-      org_route = this.props.org_route;
-    }
+
+    const org_route = (!_.isEqual(this.my_state.my_org_route, this.props.org_route) &&
+                      this.props.org_route.length < this.my_state.my_org_route.length) ?
+      this.props.org_route :
+      this.my_state.my_org_route;
+
     const el = this.el;
-
-
-
     el.innerHTML = `
         <div  class="TreeMap__Mainviz">
           <div class="viz-root" style="min-height: ${viz_height}px; position: relative;" >
@@ -100,26 +97,25 @@ export class TreeMap extends React.Component {
       .round(true)
       .size([width, height]);
 
-
     let transitioning;
 
     // d3 creating the treemap using the data
-    let root = data;
+    let data_root = data;
 
     if (!transitioning && !_.isEmpty(org_route)) {
-      //debugger;
       const route_length = org_route.length;
       for (let i = 0; i < route_length; i++) { // TODO: rewrite to use lodash and return original root if any of them fail
         const next_name = org_route[i];
-        const next_item = _.filter(root.children, d => d.name == next_name);
-        root = next_item[0];
+        const next_item = _.filter(data_root.children, d => d.name == next_name);
+        data_root = next_item[0];
       }
     }
 
-    root = d3.hierarchy(root);
+    const root = d3.hierarchy(data_root);
 
+    // set up the node values to be the size, and adjust for cases where the size != sum of children's sizes
+    // this avoids having to call d3's sum()
     root.each(d => { d.data.value2 = d.data.size });
-
     root.eachBefore(d => {
       if (d.children && d.data.value2 !== _.sumBy(d.children, "data.value2")) {
         const difference = d.data.value2 - _.sumBy(d.children, "data.value2");
@@ -132,10 +128,7 @@ export class TreeMap extends React.Component {
     })
     root.each(d => { d.value = d.data.value2 });
 
-
-
     treemap(root
-      //.sum(d => _.isEmpty(d.children) ? d.size : d.size - _.sumBy(d.children, "size"))
       .sort((a, b) => {
         if (a.data.name === smaller_items_text) {
           return 9999999
@@ -159,9 +152,9 @@ export class TreeMap extends React.Component {
       const main = main_group.selectAll('.TreeMap__Division')
         .data(d.children)
         .enter()
-        .append('div')
+        .append('div');
 
-      // add class and click handler to all g's with children
+      // add class and click handler to all divs with children
       if (!window.feature_detection.is_mobile()) {
         main
           .filter(d => d.children)
@@ -182,13 +175,12 @@ export class TreeMap extends React.Component {
         .enter()
         .append('div')
         .attr('class', 'TreeMap__Rectangle TreeMap__Rectangle--is-child')
-        .call(rectan)
+        .call(rectan);
 
       main.append('div')
         .attr('class', 'TreeMap__Rectangle TreeMap__Rectangle--is-parent')
-        .call(rectan)
+        .call(rectan);
 
-      //TODO: some of this needs to be put into functions
       if (!window.feature_detection.is_mobile()) {
         main.append('div')
           .attr('class', d => classNames('TreeMapNode__ContentBoxContainer', !_.isEmpty(d.children) && "TreeMapNode__ContentBoxContainer--has-children"))
@@ -217,7 +209,7 @@ export class TreeMap extends React.Component {
               .filter(tooltip_data => tooltip_data === d)
               .remove();
           })
-          .call(treemap_node_content_container)
+          .call(treemap_node_content_container);
       } else {
         const that = this;
         main.append('div')
@@ -325,10 +317,8 @@ export class TreeMap extends React.Component {
           width: `${x(d.x1) - x(d.x0)}px`,
           height: `${y(d.y1) - y(d.y0)}px`,
         }))
-      // .select('.textdiv').style('opacity', d=> (y(d.y1) - y(d.y0)) < 45 ? 0 : 1) //TODO do we still need this? 
     }
-
-
+    
     const main = display(root);
     //node_render is special, we call it once on first render (here) 
     //and after transitions
