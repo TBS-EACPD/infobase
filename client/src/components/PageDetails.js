@@ -201,8 +201,7 @@ class VersionNumber extends React.Component {
           } ${
             window.sha
           } ${
-            window.build_date && 
-              text_maker("infobase_build_date", {build_date: window.build_date}) 
+            window.build_date && text_maker("infobase_build_date", {build_date: window.build_date}) || ''
           }`
         }
       </span>
