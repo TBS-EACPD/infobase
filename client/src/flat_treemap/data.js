@@ -3,11 +3,12 @@ import { ensure_loaded } from '../core/lazy_loader.js';
 import { create_text_maker } from '../models/text.js';
 import { GranularResultCounts } from '../models/results.js'
 import { Subject } from '../models/subject.js';
+import { formats } from '../core/format.js';
 
 const { Dept } = Subject;
 const { Program } = Subject;
 const { CRSO } = Subject;
-const tm = create_text_maker();
+const text_maker = create_text_maker();
 
 
 function header_col(perspective, year) {
@@ -76,6 +77,51 @@ function prep_nodes(node, perspective, ministry_name) {
   if (node.amount < 0) {
     node.is_negative = true;
   }
+}
+
+export async function get_vs_top10_data(){
+  await ensure_loaded({
+    table_keys: ["orgVoteStatEstimates"],
+    require_granular_result_counts: true
+  });
+
+  const vs = 'voted';
+
+  const main_col = "{{est_in_year}}_estimates";
+  const text = text_maker(vs);
+
+  const orgVoteStatEstimates = Table.lookup('orgVoteStatEstimates');
+
+  const all_rows = _.chain(orgVoteStatEstimates.voted_stat(main_col,false,false)[text])
+    .sortBy(x => -x[main_col] )
+    .map(d => _.pick(d,"desc",'dept',main_col) )               
+    .value();
+
+  // const ret = {};
+  // ret.text_func = d => {
+  //   const val = formats.compact1(d.value);
+  //   let text = `${d.data.desc}: ${val}`;
+
+  //   if (d.data.dept){
+
+  //     text = `${Subject.Dept.lookup(d.data.dept).fancy_name} -  ${text}`;
+  //   }
+  //   const estimated_string_size = (d.zoom_r*1.2/5) * d.zoom_r/18; 
+  //   return text_abbrev(text, estimated_string_size);
+  // };
+  const data = _.take(all_rows,10);
+  if (vs === 'voted'){
+    //vote descriptions are of the form "<vote desc> - <vote num>"
+    //lets strip out the hyphen and everything that follows
+    data.forEach(row => row.desc = row.desc.replace(/-.+$/,""));
+  }
+  data.push({
+    desc: text_maker(`all_other_${vs}_items`),
+    others: true,
+    [main_col]: d3.sum(_.tail(all_rows,10), d => d[main_col]),
+  });
+
+  return data;
 }
 
 export async function get_data(perspective, org_id, year, filter_var) {
