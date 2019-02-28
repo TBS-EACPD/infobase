@@ -21,15 +21,10 @@ import {
 
 const text_maker = create_text_maker([treemap_text]);
 
+const format_display_number = (value,is_fte=false) => 
+  is_fte ? `${Math.round(value)} ${text_maker("fte")}` : formats.compact1(value);
+
 /* NODE RENDERING FUNCTIONS */
-
-function format_display_number(value,is_fte=false){
-  if( !is_fte ){
-    return formats.compact1(value);
-  }
-  return `${Math.round(value)} ${text_maker("fte")}`;
-}
-
 
 function std_node_render(is_fte,foreign_sel) {
   foreign_sel.html(function (node) {
