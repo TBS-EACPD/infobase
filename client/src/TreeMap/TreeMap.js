@@ -28,9 +28,9 @@ const format_display_number = (value,is_fte=false) =>
 
 function std_node_render(is_fte,foreign_sel) {
   foreign_sel.html(function (node) {
-    const nsize = node_size.bind(this)();
-    if (nsize === "tiny") { return } //no contents on tiny nodes
-    const text_size = nsize === "medium" ? "" : `--${nsize}`;
+    const node_size = get_node_size.bind(this)();
+    if (node_size === "tiny") { return } //no contents on tiny nodes
+    const text_size = node_size === "medium" ? "" : `--${node_size}`;
     const display_name = node_name(node, this.offsetWidth);
     const display_number = this.offsetHeight > 50 ? 
       is_fte ? 
@@ -65,7 +65,7 @@ function node_name(node, width){
   return node.data.name;
 }
 
-function node_size(node){
+function get_node_size(node){
   if (this.offsetHeight <= 30 || this.offsetWidth <= 50) { return "tiny" }
   else if (this.offsetHeight < 100 || this.offsetWidth < 150 ) { return "small" }
   else if (this.offsetHeight > 150 && this.offsetWidth > 300) { return "large" }
@@ -93,8 +93,10 @@ function standard_color_scale(node) {
   const scale = node.data.amount < 0 ? d3_red : d3_blue
   scale.domain([0, .3]);
   if(node.amount < 0){
-    return scale(-color_val)
-  } else return scale(color_val);
+    return scale(-color_val);
+  } else {
+    return scale(color_val);
+  }
 }
 
 // FTE % of parent
@@ -142,7 +144,7 @@ function std_tooltip_render(tooltip_sel) {
     if (d.data.parent_amount) {
       tooltip_html = tooltip_html + `
       <div>${format_display_number(d.data.amount)}
-      (${formats.percentage1(d.data.amount / d.data.parent_amount)} of ${d.data.parent_name})</div>`;
+      (${formats.percentage1(d.data.amount / d.data.parent_amount)} ${text_maker("of")} ${d.data.parent_name})</div>`;
     } else {
       tooltip_html = tooltip_html + `
       <div>${format_display_number(d.data.amount)}</div>`
@@ -151,7 +153,7 @@ function std_tooltip_render(tooltip_sel) {
       if (d.data.parent_ftes) {
         tooltip_html = tooltip_html + `
         <div>${format_display_number(d.data.ftes, true)}
-        (${formats.percentage1(d.data.ftes / d.data.parent_ftes)} of ${d.data.parent_name})</div>`
+        (${formats.percentage1(d.data.ftes / d.data.parent_ftes)} ${text_maker("of")} ${d.data.parent_name})</div>`
 
       } else {
         tooltip_html = tooltip_html + `
@@ -191,13 +193,13 @@ function mobile_tooltip_render(tooltip_sel, year) {
     <div>${format_display_number(d.data.amount)}</div>`;
     if( d.data.parent_amount) {
       tooltip_html = tooltip_html + `
-      <div>${formats.percentage1(d.data.amount / d.data.parent_amount)} of ${d.data.parent_name}</div>`;
+      <div>${formats.percentage1(d.data.amount / d.data.parent_amount)} ${text_maker("of")} ${d.data.parent_name}</div>`;
     }
     if (d.data.ftes) {
       if (d.data.parent_ftes) {
         tooltip_html = tooltip_html + `
         <div>${format_display_number(d.data.ftes, true)}
-        (${formats.percentage1(d.data.ftes / d.data.parent_ftes)} of ${d.data.parent_name})</div>`
+        (${formats.percentage1(d.data.ftes / d.data.parent_ftes)} ${text_maker("of")} ${d.data.parent_name})</div>`
 
       } else {
         tooltip_html = tooltip_html + `
