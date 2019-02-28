@@ -102,12 +102,14 @@ export class TreeMap extends React.Component {
     // d3 creating the treemap using the data
     let data_root = data;
 
-    if (!transitioning && !_.isEmpty(org_route)) {
+    if (!_.isEmpty(org_route)) {
       const route_length = org_route.length;
       for (let i = 0; i < route_length; i++) { // TODO: rewrite to use lodash and return original root if any of them fail
         const next_name = org_route[i];
-        const next_item = _.filter(data_root.children, d => d.name == next_name);
-        data_root = next_item[0];
+        const next_item = _.filter(data_root.children, d => d.name === next_name);
+        if(!_.isEmpty(next_item)) {
+          data_root = next_item[0];
+        }
       }
     }
 
@@ -247,7 +249,6 @@ export class TreeMap extends React.Component {
 
             }
           })
-
           .call(treemap_node_content_container)
       }
 

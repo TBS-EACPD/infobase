@@ -103,3 +103,7 @@ year_changes:
 year_format:
   en: Year format
   fr: Format annuel
+
+of:
+  en: of
+  fr: de

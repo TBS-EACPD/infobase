@@ -56,7 +56,7 @@ export class TreeMapTopbar extends React.Component {
               </li>
             </Fragment>
           )}
-          {!_.isEmpty(org_route) ?
+          {!_.isEmpty(org_route) &&
             <Fragment>
               <li aria-hidden="true">
                 <img
@@ -74,7 +74,6 @@ export class TreeMapTopbar extends React.Component {
                 }
               </li>
             </Fragment>
-            : <div />
           }
         </ol>
       </div>

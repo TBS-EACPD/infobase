@@ -130,6 +130,8 @@ export class TreeMapControls extends React.Component {
   constructor() {
     super();
   }
+
+
   render() {
     const {
       perspective,
