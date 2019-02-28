@@ -66,4 +66,4 @@ infobase_version_number:
 infobase_build_date:
   transform: [handlebars]
   en: (built {{build_date}})
-  fr: (TODO {{build_date}})
+  fr: (publiée {{build_date}})

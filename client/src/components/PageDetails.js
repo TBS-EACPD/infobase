@@ -220,7 +220,7 @@ export class PageDetails extends React.Component {
     return (
       <div className="pagedetails">
         {
-          // Temporarily disabeld
+          // Temporarily disabled, FINALIZE TEXT AND TRANSLATION BEFORE ENABLING!
           false &&
           <div className="pagedetails__report-a-problem col-sm-6 col-lg-5">
             <ReportAProblem />
