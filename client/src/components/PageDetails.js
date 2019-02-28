@@ -219,9 +219,17 @@ export class PageDetails extends React.Component {
   render(){
     return (
       <div className="pagedetails">
-        <div className="pagedetails__report-a-problem col-sm-6 col-lg-5">
-          <ReportAProblem />
-        </div>
+        {
+          // Temporarily disabeld
+          false &&
+          <div className="pagedetails__report-a-problem col-sm-6 col-lg-5">
+            <ReportAProblem />
+          </div>
+        }
+        {
+          // Line below's just to keep the positioning right while the ReportAProblem div's missing
+          <div className="col-sm-6 col-lg-5"/>
+        }
         <div className="pagedetails__version-number">
           <VersionNumber />
         </div>
