@@ -54,7 +54,7 @@ const schema = `
 
     program: Program
     sub_programs: [SubProgram]
-    results(doc: String): [ResultCount]
+    results(doc: String): [Result]
   }
 
 
