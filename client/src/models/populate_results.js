@@ -429,10 +429,19 @@ function extract_flat_data_from_results_hierarchies(hierarchical_response_data){
 
   _.each(
     hierarchical_response_data,
-    org_result_hierarchy => {
-      crawl_hierachy_level(org_result_hierarchy.crsos);
-
-      crawl_hierachy_level(org_result_hierarchy.programs);
+    response => {
+      switch(response.__typename){
+        case 'Program':
+          crawl_hierachy_level([ response ]);
+          break;
+        case 'Crso':
+          crawl_hierachy_level([ response ]);
+          crawl_hierachy_level(response.programs);
+          break;
+        default:
+          crawl_hierachy_level(response.crsos);
+          crawl_hierachy_level(response.programs);
+      }
     }
   );
 
