@@ -1,4 +1,4 @@
-﻿"id","name_en","def_en"
+﻿id,name_en,def_en
 "ACT","Activity","An activity is an operation or work process internal to a department which uses inputs to produce outputs, e.g., training, research, construction, negotiation, investigation, etc."
 "ACTIV_PEOPLE","Active employees","Active employees are employees who are not on leave without pay."
 "ADJUS","Adjustments, warrants and transfers","Adjustments, warrants and transfers include:
@@ -20,6 +20,10 @@ Appropriation acts begin as supply bills. Supply bills are prepared for Main and
 An organization’s expenditure authority received through appropriation acts may be supplemented by allocations from Treasury Board Central Votes 5, 10, 15, 25, 30 and 33.
 "
 "AVAIL","Available from Previous Years","Funds available from previous years are spending authorities allowed to be brought forward from the previous fiscal year. These amounts are available for spending in the current fiscal year without further approval from Parliament. These funds include only those authorities where there is a specified dollar limit on total spending or on the accumulated outstanding balance of items where revenues and receipts are available for spending. Usually these items represent revolving funds, proceeds from the disposal of surplus Crown assets or loans authorities."
+"BIV_ALLO","Allocated","Funding approved by the Treasury Board, to be transferred from the Budget Implementation vote to an organization’s votes for operating or capital expenditures, grants or contributions upon receipt of full supply."
+"BIV_FUND","Budget 2018 Funding","New spending measures listed in Table A2.11 of the 2018 Budget Plan."
+"BIV_REMA","Remaining","Balance of funding that remains unallocated in the Budget Implementation vote."
+"BIV_WITH","Withheld","Expenditures to be made through other authorities, such as statutory expenditures for Employee Benefits Plans, or amounts set aside to cover the costs of office accommodation and information technology services."
 "BUD_AUTH_CURRENT","Budgetary authority used in the current year","Budgetary authority used in the current year refers to the amounts spent in the current year (net of actual revenues and receipts available for spending)."
 "BUD_EXP","Budgetary expenditures","Budgetary expenditures are expenditures made in accordance with specific votes or other authorities in the Estimates, or to statutory appropriations or other authorities included in various statutes and elsewhere. Budgetary expenditures consist of the cost of servicing the public debt; operating and capital expenditures; transfer payments to other levels of government, organizations or individuals; and payments to Crown corporations."
 "BUD_REV","Budgetary revenue","Budgetary revenue refers to revenue related to tax revenue and user charges, payable or charged based on specific legislation, regulations or contracting authority. All tax revenue are statutory and the non-tax revenue authority codes identify the basis under which departments charge users for the provision of products or services and includes goods, regulatory and optional services, information products, use of public facilities and rights and privileges (licences, permits, patents, copyrights, etc.)."
@@ -31,6 +35,7 @@ An organization’s expenditure authority received through appropriation acts ma
 "CONT_TP","Contribution","Contributions are transfer payments subject to performance conditions specified in a funding agreement. Each contribution is to be accounted for by recipients and is subject to audit."
 "CPA","Core Public Administration (CPA)","Core Public Administration (CPA) refers to the organizations set out in Schedules I and IV of the Financial Administration Act (FAA). Over 75 departments, agencies and commissions are included in CPA. The Treasury Board is identified as the employer of this part of the Public Service."
 "CR","Core Responsibility","An enduring function or role performed by a department. The intentions of the department with respect to a Core Responsibility are reflected in one or more related Departmental Results that the department seeks to contribute to or influence."
+"CRF","Consolidated Revenue Fund","The aggregate of all public moneys that are on deposit at the credit of the Receiver General."
 "CROWN_SA","Appropriated Crown Corporations","Appropriated Crown corporations include any Crown corporation that receives an appropriation in a given year."
 "DP","Departmental Plans (DP)","Departmental Plans (DPs) – previously named Reports on Plans and Priorities (RPP) – are forward-looking documents that provide plans for each department and agency (excluding Crown corporations). They describe departmental priorities, results and associated resource requirements covering three fiscal years. The first year of this document supplements information contained in the Main Estimates.
 
@@ -75,8 +80,7 @@ Through DRRs, individual departments and agencies provide information on how the
 "
 "ETYPE_PEOPLE","Employee Type","Employee Type refers to the nature of the appointment to the Public Service. There are four employee types: casual, student, term, indeterminate (including seasonal indeterminate)."
 "EXP","Expenditures","Expenditures represent charges for work performed, goods received, services rendered, and transfer payments, such as grants and contributions made to outside parties, as well as charges internal to government."
-"EXT_REV","Internal Expenditures","Internal expenditures refer to expenditures where the transaction has been made with another department or agency that is part of the Government of Canada accounting entity."
-"EXT_REV","External Revenues","Fees or charges paid by external users, i.e., those other than government departments and agencies"
+"EXT_REV","External Revenues","Charges or fees paid by external users i.e., those other than government departments and agencies."
 "FAA_HR_IGOC","FAA HR Schedule","The pair of Schedules in the _Financial Administration Act_ that identify a portion of the Core Public Administration*(i.e., Schedule IV) and Separate Agencies (i.e., Schedule V) for HR purposes. 
 
 
@@ -84,21 +88,61 @@ Note: the remaining portion of the Core Public Administration consists of organi
 "FAA_IGOC","FAA Institution Schedule","The set of Schedules in the _Financial Administration Act_ that makes a distinction between different institutional forms for financial administration purposes."
 "FB_IGOC","Federal Board Representation","Government of Canada representation on a corporate interest’s governing body (e.g., a board of directors), either through nomination or appointment."
 "FIN_DATA","Financial Data","Financial data describes spending authorities voted by Parliament along with the resulting actual expenditures as recorded in the Public Accounts of Canada."
+"FOL","First Official Language","The official language (English or French) with which an employee has a primary personal identification (that is, the official language in which a person is generally more proficient)."
 "FPS","Federal Public Service (FPS)","Federal Public Service (FPS) refers to the collection of departments and agencies in the Core Public Administration (departments and agencies named in Schedules I and IV of the Financial Administration Act (FAA), for which the Treasury Board Secretariat is the employer), and Separate Agencies (organizations named in Schedule V of the FAA)."
 "FTE","Full-Time Equivalent (FTE)","Full-time equivalent (FTE) measures the extent to which an employee represents a full person-year charge against a departmental budget. FTEs are calculated as a ratio of assigned hours of work to scheduled hours of work, as set out in collective agreements. For term and seasonal employees, the FTE calculation is also adjusted for the proportion of paid weeks in a year."
 "FULL_PEOPLE","Full-time Employee","Full-time employees are persons appointed to the Public Service who are ordinarily required to work the standard number of hours per week prescribed by the relevant collective bargaining agreement or the employer, as applicable."
 "FY","Fiscal Year","The fiscal year of the Government of Canada runs from April 1 to March 31. Some organizations may vary (e.g., Crown corporations)."
-"G_AND_C","Grants and Contribution Vote","Grants and contribution votes refer to the non-statutory expenditure vote authorities (pursuant to an Appropriation Act) which provide for grants and contribution expenditures (i.e., a program where grants and contributions equal or exceed $5 million)."
+"GOC001","Government of Canada Activities: Employment and Income Security","Program activities that aim to improve the financial situation of Canadians and to provide basic income support to the most vulnerable of Canadian society. This activity area also includes Employment Insurance."
+"GOC002","Government of Canada Activities: Economic Development","Program activities that aim to create an environment conducive to economic growth and to promote the development of all sectors of the economy and in all regions of Canada."
+"GOC003","Government of Canada Activities: Research and Development","Program activities that aim to prepare Canada for future challenges by investing in innovative research and development and in specialized education and training."
+"GOC004","Government of Canada Activities: Environment","Program activities that aim to ensure that Canada's environment is restored and protected, and that natural resources are used in a sustainable manner for future generations."
+"GOC005","Government of Canada Activities: Market integrity, regulation, and competition","Program activities that aim to stimulate private investment and business activities and to maintain the integrity of the Canadian marketplace."
+"GOC006","Government of Canada Activities: Health","Program activities that aim to create a responsible, accessible, and sustainable health system. This activity area also includes the Canada Health Transfer."
+"GOC007","Government of Canada Activities: Safety and Security","Program activities that aim to maintain the safety and security of Canada and its citizens through crime prevention, law enforcement, the securing of Canadian borders, and emergency preparedness."
+"GOC008","Government of Canada Activities: Social Inclusion","Program activities that aim to promote and protect Canada’s official languages, human rights (including basic living standards), and the participation of all groups in Canadian society."
+"GOC009","Government of Canada Activities: Heritage and Culture","Program activities that aim to support Canadian culture and enhance knowledge of Canada’s history and heritage, such as military history and national heritage sites."
+"GOC010","Government of Canada Activities: International Engagement","Program activities that aim both to promote peace and security, freedom, democracy, human rights and the rule of law throughout the world, and to provide Canadian representation abroad. This is achieved through the provision of military and police support, services to Canadians abroad, and international diplomacy. Where and when the focus of program activities is primarily in a domestic context, that is, within Canadian borders, those program activities should then be identified within the A Safe and Secure Canada activity area."
+"GOC011","Government of Canada Activities: International Development","Program activities that aim to support sustainable development in developing countries. This includes supporting social and economic development and food security activities; providing emergency international development assistance and debt relief; strengthening the effectiveness of public, non-governmental and international institutions; engaging Canadians; and influencing the global aid agenda."
+"GOC012","Government of Canada Activities: North American Partnership","Program activities that aim to improve the socio-economic well-being and security of citizens across the continent. Canada’s efforts in this activity area touch on issues, such as security, trade facilitation, transportation, the environment and public health."
+"GOC013","Government of Canada Activities: International Trade and Investment","Program activities that aim to promote and sustain international trade and investment for Canada and Canadian businesses through the promotion of Canadian goods and services abroad, the negotiation of international trade agreements, and the regulation of Canadian products to meet international market requirements."
+"GOC014","Government of Canada Activities: Democratic Institutions","Program activities that include the functions performed by the three arms of government – the judiciary, the legislature, and the executive – and activities that aim to support these institutions and to maintain their independence. This is achieved through the provision of services and advice to the judiciary, the legislature and the executive, as well as the implementation of various Acts and Codes."
+"GOC015","Government of Canada Activities: Transparency and Accountability","Program activities that aim to safeguard public trust in government and strengthen the interaction between the government and Canadian citizens. This is done through the delivery of services that are responsive to citizens’ needs, and through public accountability, compliance and recourse measures."
+"GOC016","Government of Canada Activities: Government Operations","Program activities that aim to support the government in delivering its core operations, and to maintain rigorous stewardship over financial resources, assets and human resources. This includes the federal treasury, tax collection, public service recruitment and development, the provision of linguistic and procurement services, and administrative tribunals."
+"GOCA","Government of Canada Spending areas and Activities","All federal organizations receiving appropriations must plan and manage their operations and report their performance against strategic outcomes or departmental results framework.
+
+
+As a complement, organizations are required to indicate the alignment of their programs to a set of 16 high-level Government of Canada activities within four Government of Canada spending areas: 
+* Economic Affairs, 
+* Social Affairs,
+* International Affairs and, 
+* Government Affairs. 
+
+For the purposes of the InfoBase, Internal Services and Crown Corporations are presented as areas of government spending.
+
+
+**Alignment of program to high-level Government of Canada activities **
+
+Departments and agencies are required to indicate the alignment of programs to the Government of Canada high-level activities. Because this alignment is intended to make it possible to calculate spending by activity, while correctly totaling all government spending, a program can only be aligned to one Government of Canada major activity area. A Core Responsibility and a Strategic Outcome, however, can contribute to more than one activity.
+
+
+Note: As you navigate the InfoBase, you will notice that the tool uses ""Areas of Work"" and ""Activities"" in place of Spending Areas and Government Activities, respectively. This is done for illustrative purposes only."
 "GOV_FRAM","Whole-of-government framework","The Whole-of-government framework maps the financial and non-financial contributions of departments, agencies, and Crown corporations receiving appropriations to a set of 16 high-level Government of Canada activities within four Government of Canada spending areas—Economic, Social, International, and Government Affairs."
 "GRANT_TP","Grant","A grant is a transfer payment subject to pre-established eligibility and other entitlement criteria. A grant is not subject to being accounted for by a recipient, nor is it normally subject to audit by the department. The recipient may be required to report on results achieved."
+"G_AND_C","Grants and Contribution Vote","Grants and contribution votes refer to the non-statutory expenditure vote authorities (pursuant to an Appropriation Act) which provide for grants and contribution expenditures (i.e., a program where grants and contributions equal or exceed $5 million)."
 "HEAD","Employee Headcount","Employee Headcount corresponds to the counts of employees of all tenures (Indeterminate, Term, Casual and Student) as well as Governor-in-Council appointees, deputy ministers, and federal judges as of March 31 of each year. Employees on leave without pay are not included. The counts include employees working in organizations in Schedules I, IV, and V of the Financial Administration Act. No adjustments are made to account for hours of work."
-"IF_IGOC","Institutional Form","A term used to classify different types of federal organizations and interests."
+"HWM","Method of Intervention","‘Method of Intervention’ refers to the means by which policy objectives are pursued. It is the method used by a Program to achieve a desired outcome (e.g., regulations, transfer payments, services, etc.). 
+
+
+Each program should have one primary method of intervention. However, in some cases, there is a secondary method of intervention, e.g. if a program maintains both grants and a contributions.
+"
 "IFORM_APARL","Institutional Forms : Agent of Parliament","Agents of Parliament are a specialized form of Departmental Agencies that are made up of a unique group of independent statutory officers who scrutinize the activities of government. They serve Parliament in relation to its oversight role, reporting directly to Parliament and not to an individual minister. Agents account for their own activities normally by reporting to Parliament; their institutional heads are typically appointed through special resolutions of the House of Commons and the Senate. To maintain the agent’s independence, the degree of influence exercised by the executive arm of government is minimal."
 "IFORM_CC","Institutional Forms : Crown corporations","Crown corporations are federal organizations that operate following a private sector model, but usually have a mixture of commercial and public policy objectives. Parent Crown corporations are directly owned by the Government of Canada and are established through legislation, letters patent, or articles of incorporation under the Canada Business Corporations Act."
 "IFORM_CCACC","Institutional Forms : Crown corporations - Agent Crown corporations","Agent Crown corporations are defined by Part X of the FAA to be Crown corporations that are expressly declared by, or pursuant to, any other Act of Parliament to be agents of the Crown. Agency status is generally intended by Parliament to confer the privileges and immunities of the Crown. For example, agent Crown corporations are free from provincial and municipal taxing statutes and charges."
 "IFORM_CCS","Institutional Forms : Crown corporations - Subsidiaries","Crown corporation subsidiaries are corporate entities that are owned, in whole or in part, by one or more parent Crown corporations and that can be incorporated through provincial or federal legislation. All subsidiaries are managed by their parent Crown corporation. They report to their parent Crown corporation and other shareholders, and not directly to the government, with the exception of wholly owned subsidiaries that have been directed by the government to report as a parent Crown corporation."
 "IFORM_DEPT","Institutional Forms: Ministerial departments","Ministerial Departments are government organizations established through legislation and led by a Minister. Often referred to as a portfolio department, their mandate typically covers a broad area of public policy, such as industry, justice, and health. Departments are financed through parliamentary appropriations and are organized in different ways to meet various policy and administrative needs."
 "IFORM_DEPTCORP","Institutional Forms : Departmental corporations","Departmental corporations are specialized entities, established through legislation, that deliver services, or perform research or regulatory functions. Departmental corporations are financed largely through parliamentary appropriations (and some user fees) and typically have a governing council or other form of management board."
+"IFORM_INT","Interests","Interests are entities in which the federal government holds an interest (via share ownership) or participates in oversight (via the right to appoint or nominate a member of the organization’s governing body)."
 "IFORM_IO","Institutional Forms : International organizations","International organizations are corporate entities created pursuant to international agreements under which Canada either holds shares or has a right to appoint or elect a number of members to a governing body. A minister represents the government in executing the rights and responsibilities accorded to Canada through the agreement."
 "IFORM_JE","Institutional Forms : Joint enterprises","Joint enterprises are corporate entities whose shares are partially owned by the Government of Canada with the balance of shares owned by another level of government. A minister represents the federal government as a shareholder, executing the corresponding rights and responsibilities."
 "IFORM_ME","Institutional Forms : Mixed enterprises","Mixed enterprises are corporate entities whose shares are partially owned by the Government of Canada with the balance of shares owned by private sector parties. A minister represents the government as a shareholder, executing the corresponding rights and responsibilities."
@@ -106,12 +150,13 @@ Note: the remaining portion of the Core Public Administration consists of organi
 "IFORM_SGC","Institutional Forms : Shared-governance corporations","Shared-governance corporations are corporate entities without share capital for which Canada, either directly or through a Crown corporation, has a right to appoint or nominate one or more members to a governing body."
 "IFORM_SOA","Institutional Forms : Special operating agencies","Special operating agencies are units within a department or agency that have some management flexibility, independence and separate accountability. They function within a framework agreement approved by the departmental Deputy Minister, the Minister and the Treasury Board, without legislation. These agencies have a clear mandate, provide services that are readily available and identifiable, and form part of the departmental legislative framework. They are considered part of the host department, and not as separate legal entities."
 "IFORM_STATOA","Institutional Forms: Departmental agencies","Departmental agencies refer to entities with more narrowly defined mandates than ministerial departments, generally specified in the constituent Acts or other instruments. Their specific functions vary widely but tend to be operational in nature, and they usually operate at a distance from government with varying degrees of autonomy. These agencies include organizations listed in Schedule I.1."
+"IF_IGOC","Institutional Form","A term used to classify different types of federal organizations and interests."
 "INACT_PEOPLE","Inactive employees","Inactive employees are employees who have been hired to the Public Service but who are not currently remunerated. The employee may be on leave without pay for various reasons (such as Parental Leave, Sick Leave-Without-Pay, Income-Averaging leave, etc.) or their pay may have been stopped for other reasons such as Seasonal Layoffs, or Seasonal layoff periods (i.e. House of Commons, Off-duty status, and unpaid surplus status (12 months))."
+"INDET_PEOPLE","Employee Type :  Indeterminate / Permanent Employee","Indeterminate / Permanent employees are persons appointed to the Public Service whose tenure in the position is of an unspecified duration."
 "IND_RESULT","Indicator","A qualitative or quantitative means of measuring an output or outcome, with the intention of gauging the performance of an organization, program, policy or initiative with respect to an intended result, which includes: 
 * Expected result indicators – used for programs reporting under the Program Alignment Architecture until full transition in fiscal year 2018-19 to the Program Inventory format, as per the Policy on Results;
 * Program outcome indicators – used for programs reporting under the Program Inventory format, as per the Policy on Results; and 
 * Departmental result indicators – used for reporting under the Departmental Results Framework, as per the Policy on Results."
-"INDET_PEOPLE","Employee Type :  Indeterminate / Permanent Employee","Indeterminate / Permanent employees are persons appointed to the Public Service whose tenure in the position is of an unspecified duration."
 "INFORM_FED_INS","Institutional Forms : Federal organizations","Federal organizations include Parliamentary Entities and the scope of organizations grouped under Schedules I, I.1, II and III of the _Financial Administration Act (FAA)_:
 * Ministerial departments—FAA, Schedule I;
 * Departmental agencies—FAA, Schedule I.1;
@@ -119,6 +164,33 @@ Note: the remaining portion of the Core Public Administration consists of organi
 * Departmental corporations—FAA, Schedule II;
  * Service agencies (a subset of Departmental corporations)—FAA, Schedule II; and
 * Parent Crown corporations—FAA, Schedule III (although there are 9 additional parent Crown corporations whose governance is primarily dictated by constituent legislation and, to a lesser extent, by the FAA, Part X)."
+"INTER_EST","Interim Estimates","In June 2017, the House of Commons approved a motion to change Standing Order 81. This means that, for the duration of this parliament :
+* On or by March 1, the Government will table an Interim Estimates to support Parliament’s scrutiny of interim supply;
+* The deadline for the tabling of Main Estimates is delayed to April 16, increasing the likelihood that the Budget will precede rather than follow it.
+
+
+These changes address the government’s commitment to provide more coherent information to Parliament and to align the federal budget and the estimates.
+
+
+Given that voted spending authorities expire at the end of each fiscal year, the Government must seek sufficient spending authorities to begin the fiscal year. This will be done through a first appropriation act, for approval by the end of March. The first appropriation act will be supported by this new document, called “Interim Estimates”.
+
+
+These **Interim Estimates** include:
+* an overview of spending requirements for the first three months of the fiscal year as they compare to last year's Estimates;
+* a listing of planned grants to allow organizations to make grant payments effective April 1 st; and,
+* the proposed schedules to the first appropriation bill.
+
+
+This funding supports the government’s financial requirements for the first three months of the fiscal year. In March, the Government will introduce a supply bill and Parliament will vote on appropriations for the Interim Estimates.
+
+
+The Government will table a full Main Estimates, including planned voted and statutory expenditures for the full fiscal year, on or by April 16. The Government will introduce another appropriation act in June to reflect the additional amounts requested in the Main Estimates.  
+
+
+Supplementary Estimates will continue to present information on additional spending requirements which were either not sufficiently developed in time for inclusion in the Main Estimates, or have subsequently been refined to account for developments in particular programs and services. 
+
+
+"
 "INT_REV","Internal Revenues","Internal revenues are a department or agency's earned revenues that involve another department or agency that is also part of the Government of Canada."
 "INT_SERVICES","Internal Services","Internal Services are groups of related activities and resources that are administered to support the needs of programs and other corporate obligations of an organization. 
 
@@ -147,8 +219,12 @@ Internal Services include only those activities and resources that apply across 
 "
 "MAINS","Main Estimates","The Main Estimates is a document that directly supports the appropriation act for the beginning of a fiscal year. It provides a listing of the resources required by individual departments and agencies for the upcoming fiscal year in order to deliver the programs for which they are responsible. It identifies the spending authorities (votes) and the amounts to be included in subsequent appropriation bills that Parliament will be asked to approve to enable the government to proceed with its spending plans. It is traditionally known as the “Blue Book”."
 "MAN_IGOC","Description / Raison d’être","The purpose or reason for which an organization exists."
+"MRRS","Policy on Management, Resources and Results Structures","The Policy on Management, Resources and Results Structures (MRRS) supports the development of a common government-wide approach to the identification of programs and to the collection, management, and reporting of financial and non-financial information relative to those programs. The policy provides departments with the flexibility and discretion they need to design and manage their programs in a manner that best achieves results for Canadians."
+"MYA","Multi-Year Appropriation","A multi-year appropriation is an appropriation with a specific purpose and monetary limit granted by Parliament that can be utilized over more than one fiscal year."
 "NB_AUTH","Non-Budgetary authorities","Non-Budgetary authorities are authorities for assets and liabilities transactions for loans, investments and advances, or specified purpose accounts, which have been established under specific statutes or under non-statutory authorities in the Estimates and elsewhere. Non-budgetary transactions are those expenditures and receipts related to the government's financial claims on, and obligations to, outside parties. These transactions include loans, investments and advances; in cash and accounts receivable; and in public money received or collected for specified purposes."
+"NB_EXP","Non-budgetary expenditures","Non-budgetary expenditures – or loans, investments and advances – are outlays that represent changes in the composition of the Government’s financial assets. Negative figures indicate that recoveries exceed expenditures."
 "NONE_STAT","Non-statutory expenditures","Non-statutory expenditures are expenditures that Parliament approves annually through an Appropriation Act. Once approved the vote wording and the expenditure authority attributable to each vote become the governing conditions under which these expenditures may be made."
+"OC_PEOPLE","Occupational category","A generalized classification system of each employee's type of work. An individual employee's classification is determined by their collective agreement and, as such, may not precisely or entirely describe their work."
 "OP","Program Expenditures or Operating Expenditures Vote","Program and operating expenditure votes are the expenditure vote authorities (pursuant to an Appropriation Act) which provide for departments' program and/or operating expenditures (includes capital or grants and contributions if, within a program, neither element equals or exceeds $5 million)."
 "OTHER_TP","Other transfer payment","Other transfer payment is a transfer payment, other than a grant or contribution, based on legislation or other arrangement, that may be determined by a formula. Examples of other transfer payments are transfers to other orders of government such as Equalization payments as well as Canada Health and Canada Social Transfer payments."
 "OUT","Outcome","An outcome is an external consequence attributed, in part, to an organization, policy, program or initiative."
@@ -163,8 +239,9 @@ Each department and agency is responsible for reconciling its accounts to the co
 "
 "PAA","Program Alignment Architecture","The Program Alignment Architecture is an inventory of all the programs undertaken by a department. The programs are depicted in their logical relationship to each other and to the strategic outcome(s) to which they contribute. The Program Alignment Architecture is the initial document for the establishment of a Management, Resources and Results Structure. By the 2018-19 fiscal year, the Program Alignment Architecture format for reporting results will be fully replaced by the new Departmental Results Framework and Program Inventory."
 "PARL_ORG","Appropriated Parliamentary Entities","Organizations covered by the Parliament of Canada Act."
-"PART_PEOPLE","Part-time Employee","Part-time employees are persons employed to work less than the normally scheduled daily or weekly hours of work, prescribed by the relevant collective bargaining agreement or the employer, established for full-time employees of the same occupational group and level."
 "PART1","Government Expenditure Plan","The Government Expenditure Plan corresponds to Part I of the Estimates process. It provides a summary and highlights of year-over-year changes in departmental spending and transfer payments in order to provide perspective on the major issues influencing government planned spending."
+"PART_PEOPLE","Part-time Employee","Part-time employees are persons employed to work less than the normally scheduled daily or weekly hours of work, prescribed by the relevant collective bargaining agreement or the employer, established for full-time employees of the same occupational group and level."
+"PAY_CC","Payments to Crown Corporation","The Payments to Crown Corporations includes all the voted and statutory authorities approved by Parliament through Appropriations Acts and legislation to Crown Corporation"
 "PEOPLE_DATA","People Management","People Management data presents key demographics of the Federal Public Service (FPS) workforce."
 "PERC_IGOC","Percentage Share of Federal Ownership","The share ownership by the Government of Canada of a corporate interest."
 "PI","Program Inventory","Identifies all of the department’s programs and describes how resources are organized to contribute to the department’s Core Responsibilities and Results.
@@ -183,6 +260,8 @@ Note: In the 2017-18 fiscal year, a new reporting format consisting of a Departm
 By the 2018-19 fiscal year this new format will be adopted by all organizations, replacing the Program Alignment Architecture instituted by the rescinded TBS Policy on Management, Resources and Results Structure."
 "PLANNED_EXP","Planned Spending","For Departmental Plans (DPs) and Departmental Results Reports (DRRs), planned spending refers to those amounts that receive Treasury Board approval by February 1. Therefore, planned spending (including voted and statutory items) may include amounts incremental to planned expenditures presented in the Main Estimates."
 "PLANNED_FTE","Planned Full-Time Equivalents (FTEs)","Planned FTEs is a measure of the extent to which an employee represents a full person-year charge against the departmental budget for future spending years. Full-time equivalents are calculated as a ratio of assigned hours of work to scheduled hours of work. Scheduled hours of work are set out in collective agreements."
+"PLANNED_SPEND_FTE","Planned Spending and Planned Full-Time Equivalents (FTEs)","For Departmental Plans (DPs) and Departmental Results Reports (DRRs), planned spending refers to those amounts that receive Treasury Board approval by February 1. Therefore, planned spending (including voted and statutory items) may include amounts incremental to planned expenditures presented in the Main Estimates.
+Planned FTEs is a measure of the extent to which an employee represents a full person-year charge against the departmental budget for future spending years. Full-time equivalents are calculated as a ratio of assigned hours of work to scheduled hours of work. Scheduled hours of work are set out in collective agreements."
 "PO","Program Outcome","A change or consequence attributable to outputs or to which outputs or other outcomes of the program contribute. Program outcomes may be a hierarchy of short-, medium-, or long-term, and are generally more directly influenced by departments and within their immediate control than Departmental Results. Program outcomes are found at the Program level, whereas Departmental Results are found at the Core Responsibility level."
 "POL_RES","Policy on Results","Identifies all of the organization's programs and describes how resources are organized to contribute to the department’s Core Responsibilities and Results."
 "POP_IGOC","Population Code","A legacy code used for HR classification purposes."
@@ -206,9 +285,24 @@ Under section 2 of the FAA: “Department” means
 * Expected results – used for programs reporting under the Program Alignment Architecture until full transition in fiscal year 2018-19 to the Program Inventory format, as per the Policy on Results; 
 * Program outcomes – used for programs reporting under the Program Inventory format, as per the Policy on Results; and
 * Departmental results – used for reporting under the Departmental Results Framework, as per the Policy on Results."
+"RESULTS_COUNT","Count of Indicators"," "
+"RESULTS_MET","Result Status: Target Met","The date to achieve the target is before or by the end of fiscal year 2017-18 (March 31, 2018) **and** the result is higher than the minimum target; lower than the maximum target; within the target range; or is exactly equal to the unique target value."
+"RESULTS_NOT_AVAILABLE","Result Status: Result not available","The date to achieve the target is before or by the end of fiscal year 2017-18 (March 31, 2018) **and**  the result has not been collected or is not available for any other reason. Includes cases when no target was set or when the target is no longer relevant due to changes in policy or other circumstances (e.g. dissolution of a department, change in government direction, etc.)."
+"RESULTS_NOT_MET","Result Status: Target not met","The date to achieve the target is before or by the end of fiscal year 2017-18 (March 31, 2018) **and** the result is lower than the minimum target; higher than the maximum target; outside the target range; or is not equal to the target value"
+"RESULTS_ONGOING","Result Status: Result to be achieved in the future","The date to achieve target is after the end of fiscal year 2017-18 (after March 31, 2018)."
+"RESULTS_STATUS","Result Status","If the date to achieve the target is **before or by the end of fiscal year 2017-18 (March 31, 2018)** and:
+* Target met: The result is higher than the minimum target; lower than the maximum target; within the target range; or is exactly equal to the unique target value.
+* Target Not met: The result is lower than the minimum target; higher than the maximum target; outside the target range; or is not equal to the target value.  
+* Result not available: The result has not been collected or is not available for any other reason. Includes cases when no target was set or when the target is no longer relevant due to changes in policy or other circumstances (e.g. dissolution of a department, change in government direction, etc.).
+
+
+If the date to achieve target is after the end of fiscal year 2017-18 (after March 31, 2018)**:
+* Result to be achieved in the future"
+"RG","Receiver General","The Receiver General for Canada is the central Treasurer and Accountant of the federal government. The Receiver General is Canada's oldest position. The role existed even before the country officially did. As the government's accountant and custodian of the Consolidated Revenue Fund, the Receiver General maintains the accounts of Canada and prepares the Public Accounts of Canada as required by law. The Public Accounts include the annual audited financial statements of the Government of Canada."
+"RPS","Regional Pay System (RPS)","Regional Pay System (RPS) serves as the main data source for central HR reporting including demographic reports, analyses, open data and data extracts in response to people management information requests. In 2011, the Office of the Chief Human Resources Officer (OCHRO) of the Treasury Board of Canada, Secretariat (TBS) repatriated nine legacy Human Resources (HR) data files from Public Works and Government Services Canada (PWGSC). These files collectively identified as the HR Data Integration Broker (HRDIB). Some HRDIB data is also provided to multiple users within TBS and sent to multiple departments and agencies, bargaining agents, and other organizations."
 "SA","Government of Canada Spending areas","Government of Canada spending areas refer to the four spending areas defined for the government as a whole against which budgetary expenditures are aligned."
-"SE_PEOPLE","Separate Agencies","Separate Agencies are organizations for which the Treasury Board is not the employer, but for which the Public Service Commission has exclusive authority to make appointments. They represent a portion of the federal public administration named in Schedule V of the Financial Administration Act (FAA)."
 "SEAS_PEOPLE","Employee Type : Seasonal Employee","Seasonal employees are persons employed to work a portion of a year (season) each year."
+"SE_PEOPLE","Separate Agencies","Separate Agencies are organizations for which the Treasury Board is not the employer, but for which the Public Service Commission has exclusive authority to make appointments. They represent a portion of the federal public administration named in Schedule V of the Financial Administration Act (FAA)."
 "SO","Strategic Outcome","A strategic outcome is a long-term and enduring benefit to Canadians that stems from a department's mandate and vision. It represents the difference a department intends to make for Canadians and should be measurable and within the department's sphere of influence."
 "SOBJ","Standard Objects","Standard objects are the highest level of classification for categorizing expenditures and are used for Parliamentary and organizational management purposes. All departments, agencies and Crown corporations must register their expenditures for purchases to one of twelve expenditure categories. They are as follows:
 1. Personnel
@@ -309,6 +403,7 @@ Miscellaneous expenditures include licences, permits and payments for dockage, t
 * Expenditures for the acquisition of all machinery, equipment, office furniture and furnishings, electronic data processing and electronic or other office equipment. 
 * Microfilming equipment and supplies, inter–office communication equipment, postal meter machines, machine records and all other office equipment. 
 * Motor vehicles, aeroplanes, tractors, road equipment, telecommunications and related equipment, laboratory and other scientific equipment, vessels, icebreakers and other aids to navigation and all other types of light and heavy equipment; includes ammunition and various types of equipment for National Defence, such as ships, aircraft, mechanical equipment, fighting vehicles, weapons, engines and such spare parts and supplies as are normally acquired with that equipment at the time of purchase."
+"SPA","Budgetary Planned Specified Purpose Accounts","Specified purpose accounts is a classification of accounts established in the Accounts of Canada used to record revenues deposited into, and money payable out of, the Consolidated Revenue Fund under statutory authorities for specified purposes."
 "SPEC_WARR","Governor General’s Special Warrants","Governor General’s Special Warrants are the established processes for obtaining funds urgently required for the public good when Parliament is dissolved for a general election."
 "SSP","Sub-program (or sub-sub-program)","Sub-program represents smaller identifiable programs that are logically part of the Program under the Program Alignment Architecture. Similarly, below the Sub-Program are the Sub-Sub-Programs, which represent the lowest-level programs that are logically part of the Sub-Program. 
 
@@ -321,9 +416,9 @@ A similar situation occurs for the relationship between the Sub-Program and the 
 
 Note: by the 2018-19 fiscal year the Program Alignment Architecture format for reporting results will be fully replaced by the new Departmental Results Framework and Program Inventory. This will bring greater clarity to presenting what organizations achieve and how they assess success across a single line of program-based reporting."
 "STAT","Statutory authorities","Statutory authorities are the expenditure authorities approved by Parliament through legislation (other than Appropriations Acts). The legislation sets out the purpose of the expenditures and the terms and conditions under which they may be made."
-"STAT_EXP","Statutory expenditures","Statutory expenditures are expenditures approved by Parliament through legislation (other than Appropriations Acts). The legislation sets out the purpose of the expenditures and the terms and conditions under which they may be made."
 "STATUS_IGOC","Status","The status of an organization (e.g., active)."
 "STATUS_PEOPLE","Employee status","Employee Status is the identifier to classify whether an employee is active or inactive."
+"STAT_EXP","Statutory expenditures","Statutory expenditures are expenditures approved by Parliament through legislation (other than Appropriations Acts). The legislation sets out the purpose of the expenditures and the terms and conditions under which they may be made."
 "STUD_PEOPLE","Employee Type : Student Employee","Student employees are employees of the federal government hired under one of the government's student employment programs. To qualify as a student employee, a person must be:
 * registered as a full-time secondary or post-secondary student in an accredited institution;
 * currently recognized as having full-time status by the academic institution; and
@@ -363,100 +458,3 @@ Program metadata, which comprises: (1) linkage tags that identify the connection
 "TP","Transfer payment","A transfer payment is a monetary payment, or a transfer of goods, services or assets made, on the basis of an appropriation, to a third party, including a Crown corporation, that does not result in the acquisition by the Government of Canada of any goods, services or assets. Transfer payments are categorized as grants, contributions and other transfer payments. Transfer payments do not include investments, loans or loan guarantees."
 "VOTED","Voted amounts","Voted amounts refer to the amounts approved in appropriation acts."
 "YI_IGOC","Year of Incorporation","The year in which an organization was legally established."
-"MRRS","Policy on Management, Resources and Results Structures","The Policy on Management, Resources and Results Structures (MRRS) supports the development of a common government-wide approach to the identification of programs and to the collection, management, and reporting of financial and non-financial information relative to those programs. The policy provides departments with the flexibility and discretion they need to design and manage their programs in a manner that best achieves results for Canadians."
-"OC_PEOPLE","Occupational category","A generalized classification system of each employee's type of work. An individual employee's classification is determined by their collective agreement and, as such, may not precisely or entirely describe their work."
-"RPS","Regional Pay System (RPS)","Regional Pay System (RPS) serves as the main data source for central HR reporting including demographic reports, analyses, open data and data extracts in response to people management information requests. In 2011, the Office of the Chief Human Resources Officer (OCHRO) of the Treasury Board of Canada, Secretariat (TBS) repatriated nine legacy Human Resources (HR) data files from Public Works and Government Services Canada (PWGSC). These files collectively identified as the HR Data Integration Broker (HRDIB). Some HRDIB data is also provided to multiple users within TBS and sent to multiple departments and agencies, bargaining agents, and other organizations."
-"FOL","First Official Language","The official language (English or French) with which an employee has a primary personal identification (that is, the official language in which a person is generally more proficient)."
-"GOCA","Government of Canada Spending areas and Activities","All federal organizations receiving appropriations must plan and manage their operations and report their performance against strategic outcomes or departmental results framework.
-
-
-As a complement, organizations are required to indicate the alignment of their programs to a set of 16 high-level Government of Canada activities within four Government of Canada spending areas: 
-* Economic Affairs, 
-* Social Affairs,
-* International Affairs and, 
-* Government Affairs. 
-
-For the purposes of the InfoBase, Internal Services and Crown Corporations are presented as areas of government spending.
-
-
-**Alignment of program to high-level Government of Canada activities **
-
-Departments and agencies are required to indicate the alignment of programs to the Government of Canada high-level activities. Because this alignment is intended to make it possible to calculate spending by activity, while correctly totaling all government spending, a program can only be aligned to one Government of Canada major activity area. A Core Responsibility and a Strategic Outcome, however, can contribute to more than one activity.
-
-
-Note: As you navigate the InfoBase, you will notice that the tool uses ""Areas of Work"" and ""Activities"" in place of Spending Areas and Government Activities, respectively. This is done for illustrative purposes only."
-"GOC001","Government of Canada Activities: Employment and Income Security","Program activities that aim to improve the financial situation of Canadians and to provide basic income support to the most vulnerable of Canadian society. This activity area also includes Employment Insurance."
-"GOC002","Government of Canada Activities: Economic Development","Program activities that aim to create an environment conducive to economic growth and to promote the development of all sectors of the economy and in all regions of Canada."
-"GOC003","Government of Canada Activities: Research and Development","Program activities that aim to prepare Canada for future challenges by investing in innovative research and development and in specialized education and training."
-"GOC004","Government of Canada Activities: Environment","Program activities that aim to ensure that Canada's environment is restored and protected, and that natural resources are used in a sustainable manner for future generations."
-"GOC005","Government of Canada Activities: Market integrity, regulation, and competition","Program activities that aim to stimulate private investment and business activities and to maintain the integrity of the Canadian marketplace."
-"GOC006","Government of Canada Activities: Health","Program activities that aim to create a responsible, accessible, and sustainable health system. This activity area also includes the Canada Health Transfer."
-"GOC007","Government of Canada Activities: Safety and Security","Program activities that aim to maintain the safety and security of Canada and its citizens through crime prevention, law enforcement, the securing of Canadian borders, and emergency preparedness."
-"GOC008","Government of Canada Activities: Social Inclusion","Program activities that aim to promote and protect Canada’s official languages, human rights (including basic living standards), and the participation of all groups in Canadian society."
-"GOC009","Government of Canada Activities: Heritage and Culture","Program activities that aim to support Canadian culture and enhance knowledge of Canada’s history and heritage, such as military history and national heritage sites."
-"GOC010","Government of Canada Activities: International Engagement","Program activities that aim both to promote peace and security, freedom, democracy, human rights and the rule of law throughout the world, and to provide Canadian representation abroad. This is achieved through the provision of military and police support, services to Canadians abroad, and international diplomacy. Where and when the focus of program activities is primarily in a domestic context, that is, within Canadian borders, those program activities should then be identified within the A Safe and Secure Canada activity area."
-"GOC011","Government of Canada Activities: International Development","Program activities that aim to support sustainable development in developing countries. This includes supporting social and economic development and food security activities; providing emergency international development assistance and debt relief; strengthening the effectiveness of public, non-governmental and international institutions; engaging Canadians; and influencing the global aid agenda."
-"GOC012","Government of Canada Activities: North American Partnership","Program activities that aim to improve the socio-economic well-being and security of citizens across the continent. Canada’s efforts in this activity area touch on issues, such as security, trade facilitation, transportation, the environment and public health."
-"GOC013","Government of Canada Activities: International Trade and Investment","Program activities that aim to promote and sustain international trade and investment for Canada and Canadian businesses through the promotion of Canadian goods and services abroad, the negotiation of international trade agreements, and the regulation of Canadian products to meet international market requirements."
-"GOC014","Government of Canada Activities: Democratic Institutions","Program activities that include the functions performed by the three arms of government – the judiciary, the legislature, and the executive – and activities that aim to support these institutions and to maintain their independence. This is achieved through the provision of services and advice to the judiciary, the legislature and the executive, as well as the implementation of various Acts and Codes."
-"GOC015","Government of Canada Activities: Transparency and Accountability","Program activities that aim to safeguard public trust in government and strengthen the interaction between the government and Canadian citizens. This is done through the delivery of services that are responsive to citizens’ needs, and through public accountability, compliance and recourse measures."
-"GOC016","Government of Canada Activities: Government Operations","Program activities that aim to support the government in delivering its core operations, and to maintain rigorous stewardship over financial resources, assets and human resources. This includes the federal treasury, tax collection, public service recruitment and development, the provision of linguistic and procurement services, and administrative tribunals."
-"IFORM_INT","Interests","Interests are entities in which the federal government holds an interest (via share ownership) or participates in oversight (via the right to appoint or nominate a member of the organization’s governing body)."
-"RESULTS_STATUS","Result Status","If the date to achieve the target is **before or by the end of fiscal year 2017-18 (March 31, 2018)** and:
-* Target met: The result is higher than the minimum target; lower than the maximum target; within the target range; or is exactly equal to the unique target value.
-* Target Not met: The result is lower than the minimum target; higher than the maximum target; outside the target range; or is not equal to the target value.  
-* Result not available: The result has not been collected or is not available for any other reason. Includes cases when no target was set or when the target is no longer relevant due to changes in policy or other circumstances (e.g. dissolution of a department, change in government direction, etc.).
-
-
-If the date to achieve target is after the end of fiscal year 2017-18 (after March 31, 2018)**:
-* Result to be achieved in the future"
-"RESULTS_MET","Result Status: Target Met","The date to achieve the target is before or by the end of fiscal year 2017-18 (March 31, 2018) **and** the result is higher than the minimum target; lower than the maximum target; within the target range; or is exactly equal to the unique target value."
-"RESULTS_NOT_MET","Result Status: Target not met","The date to achieve the target is before or by the end of fiscal year 2017-18 (March 31, 2018) **and** the result is lower than the minimum target; higher than the maximum target; outside the target range; or is not equal to the target value"
-"RESULTS_NOT_AVAILABLE","Result Status: Result not available","The date to achieve the target is before or by the end of fiscal year 2017-18 (March 31, 2018) **and**  the result has not been collected or is not available for any other reason. Includes cases when no target was set or when the target is no longer relevant due to changes in policy or other circumstances (e.g. dissolution of a department, change in government direction, etc.)."
-"RESULTS_ONGOING","Result Status: Result to be achieved in the future","The date to achieve target is after the end of fiscal year 2017-18 (after March 31, 2018)."
-"HWM","Method of Intervention","‘Method of Intervention’ refers to the means by which policy objectives are pursued. It is the method used by a Program to achieve a desired outcome (e.g., regulations, transfer payments, services, etc.). 
-
-
-Each program should have one primary method of intervention. However, in some cases, there is a secondary method of intervention, e.g. if a program maintains both grants and a contributions.
-"
-"RESULTS_COUNT","Count of Indicators",""
-"MYA","Multi-Year Appropriation","A multi-year appropriation is an appropriation with a specific purpose and monetary limit granted by Parliament that can be utilized over more than one fiscal year."
-"PAY_CC","Payments to Crown Corporation","The Payments to Crown Corporations includes all the voted and statutory authorities approved by Parliament through Appropriations Acts and legislation to Crown Corporation"
-"INTER_EST","Interim Estimates","In June 2017, the House of Commons approved a motion to change Standing Order 81. This means that, for the duration of this parliament :
-* On or by March 1, the Government will table an Interim Estimates to support Parliament’s scrutiny of interim supply;
-* The deadline for the tabling of Main Estimates is delayed to April 16, increasing the likelihood that the Budget will precede rather than follow it.
-
-
-These changes address the government’s commitment to provide more coherent information to Parliament and to align the federal budget and the estimates.
-
-
-Given that voted spending authorities expire at the end of each fiscal year, the Government must seek sufficient spending authorities to begin the fiscal year. This will be done through a first appropriation act, for approval by the end of March. The first appropriation act will be supported by this new document, called “Interim Estimates”.
-
-
-These **Interim Estimates** include:
-* an overview of spending requirements for the first three months of the fiscal year as they compare to last year's Estimates;
-* a listing of planned grants to allow organizations to make grant payments effective April 1 st; and,
-* the proposed schedules to the first appropriation bill.
-
-
-This funding supports the government’s financial requirements for the first three months of the fiscal year. In March, the Government will introduce a supply bill and Parliament will vote on appropriations for the Interim Estimates.
-
-
-The Government will table a full Main Estimates, including planned voted and statutory expenditures for the full fiscal year, on or by April 16. The Government will introduce another appropriation act in June to reflect the additional amounts requested in the Main Estimates.  
-
-
-Supplementary Estimates will continue to present information on additional spending requirements which were either not sufficiently developed in time for inclusion in the Main Estimates, or have subsequently been refined to account for developments in particular programs and services. 
-
-
-"
-"NB_EXP","Non-budgetary expenditures","Non-budgetary expenditures – or loans, investments and advances – are outlays that represent changes in the composition of the Government’s financial assets. Negative figures indicate that recoveries exceed expenditures."
-"SPA","Budgetary Planned Specified Purpose Accounts","Specified purpose accounts is a classification of accounts established in the Accounts of Canada used to record revenues deposited into, and money payable out of, the Consolidated Revenue Fund under statutory authorities for specified purposes."
-"CRF","Consolidated Revenue Fund","The aggregate of all public moneys that are on deposit at the credit of the Receiver General."
-"RG","Receiver General","The Receiver General for Canada is the central Treasurer and Accountant of the federal government. The Receiver General is Canada's oldest position. The role existed even before the country officially did. As the government's accountant and custodian of the Consolidated Revenue Fund, the Receiver General maintains the accounts of Canada and prepares the Public Accounts of Canada as required by law. The Public Accounts include the annual audited financial statements of the Government of Canada."
-"BIV_FUND","Budget 2018 Funding","New spending measures listed in Table A2.11 of the 2018 Budget Plan."
-"BIV_ALLO","Allocated","Funding approved by the Treasury Board, to be transferred from the Budget Implementation vote to an organization’s votes for operating or capital expenditures, grants or contributions upon receipt of full supply."
-"BIV_WITH","Withheld","Expenditures to be made through other authorities, such as statutory expenditures for Employee Benefits Plans, or amounts set aside to cover the costs of office accommodation and information technology services."
-"BIV_REMA","Remaining","Balance of funding that remains unallocated in the Budget Implementation vote."
-"PLANNED_SPEND_FTE","Planned Spending and Planned Full-Time Equivalents (FTEs)","For Departmental Plans (DPs) and Departmental Results Reports (DRRs), planned spending refers to those amounts that receive Treasury Board approval by February 1. Therefore, planned spending (including voted and statutory items) may include amounts incremental to planned expenditures presented in the Main Estimates.
-Planned FTEs is a measure of the extent to which an employee represents a full person-year charge against the departmental budget for future spending years. Full-time equivalents are calculated as a ratio of assigned hours of work to scheduled hours of work. Scheduled hours of work are set out in collective agreements."
-
