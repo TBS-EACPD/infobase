@@ -288,10 +288,12 @@ export function api_load_results_bundle(subject){
     query,
     response_data_accessor,
   } = (() => {
-    const all_is_loaded = () => _api_subject_ids_with_loaded_results['all'];
-    const dept_is_loaded = (org) => all_is_loaded() || _.get(_api_subject_ids_with_loaded_results, `dept.${org.id}`);
-    const crso_is_loaded = (crso) => dept_is_loaded(crso.dept) || _.get(_api_subject_ids_with_loaded_results, `crso.${crso.id}`);
-    const program_is_loaded = (program) => crso_is_loaded(program.crso) || _.get(_api_subject_ids_with_loaded_results, `program.${program.id}`);
+    const subject_is_loaded = ({level, id}) => _.get(_api_subject_ids_with_loaded_results, `${level}.${id}`);
+
+    const all_is_loaded = () => subject_is_loaded({level: 'all', id: 'all'});
+    const dept_is_loaded = (org) => all_is_loaded() || subject_is_loaded(org);
+    const crso_is_loaded = (crso) => dept_is_loaded(crso.dept) || subject_is_loaded(crso);
+    const program_is_loaded = (program) => crso_is_loaded(program.crso) || subject_is_loaded(program);
 
     switch(level){
       case 'program':
@@ -378,8 +380,8 @@ function extract_flat_data_from_results_hierarchies(hierarchical_response_data){
           _.each(
             result.indicators,
             (indicator) => {
-              indicator.target_year = _.isNaN(parseInt(indicator.target_year)) ? null : parseInt(indicator.target_year);
-              indicator.target_month = _.isEmpty(indicator.target_month) ? null : +indicator.target_month;
+              indicator.target_year = _.isEmpty(indicator.target_year) ? null : parseInt(indicator.target_year);
+              indicator.target_month = _.isEmpty(indicator.target_month) ? null : parseInt(indicator.target_month);
 
               indicators.push( _.omit(indicator, "__typename") );
             }
