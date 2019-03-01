@@ -52,7 +52,7 @@ const index_lang_lookups = {
     en: "Skip to main content",
     fr: "Passer au contenu principal",
   },
-  bonus_footer_lis: {
+  bonus_footer_list: {
     en: `
      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/contact.html">Contact us</a></li>
      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/government/dept.html">Departments and agencies</a></li>
@@ -76,7 +76,7 @@ const index_lang_lookups = {
       <li><a target="_blank" rel="noopener noreferrer" href="https://ouvert.canada.ca/">Gouvernement ouvert</a></li>
     `,
   },
-  footer_lis: {
+  footer_list: {
     en: `
       <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en.html">Visit Canada.ca</a></li>
     `,
