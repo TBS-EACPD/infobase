@@ -22,7 +22,7 @@ import {
 const text_maker = create_text_maker([treemap_text]);
 
 const format_display_number = (value,is_fte=false) => 
-  is_fte ? `${Math.round(value)} ${text_maker("fte")}` : formats.compact1(value);
+  is_fte ? `${formats.big_int_real(Math.round(value))} ${text_maker("fte")}` : formats.compact1(value);
 
 /* NODE RENDERING FUNCTIONS */
 
