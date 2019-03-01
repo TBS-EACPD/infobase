@@ -7,6 +7,8 @@ import { get_static_url } from '../request_utils.js';
 
 const text_maker = create_text_maker([treemap_text]);
 
+const top_level_title = `${text_maker("government_stats")} (${text_maker("by_portfolio")})`;
+
 export class TreeMapTopbar extends React.Component {
   constructor() {
     super();
@@ -27,10 +29,10 @@ export class TreeMapTopbar extends React.Component {
         >
           {_.isEmpty(org_route) ?
             <li className="TreeMap__ZoomControl--no-zoom-out">
-              <span dangerouslySetInnerHTML={{ __html: text_maker("government_stats") }} />
+              <span dangerouslySetInnerHTML={{ __html: top_level_title }} />
             </li> :
             <li className="TreeMap__ZoomControl--has-zoom-out">
-              <span dangerouslySetInnerHTML={{ __html: text_maker("government_stats") }}
+              <span dangerouslySetInnerHTML={{ __html: top_level_title }}
                 onClick={() => { this.handleClick(-1) }}
               />
             </li>
