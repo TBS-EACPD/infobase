@@ -138,14 +138,11 @@ const get_col_defs = createSelector(
                   _.filter(
                     (
                       result ?
-                      result.indicators :
-                      Indicator.get_flat_indicators(subject)
+                        result.indicators :
+                        Indicator.get_flat_indicators(subject)
                     ),
-                    (
-                      is_status_filter_enabled ? 
-                      ind => _.includes(status_status_key_whitelist, ind.status_key) :
-                      _.constant(true)
-                    )
+                    (indicator) => indicator.doc === doc && 
+                      ( !is_status_filter_enabled || _.includes(status_status_key_whitelist, indicator.status_key) )
                   )
                 } 
               />
