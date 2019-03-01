@@ -12,6 +12,7 @@ import './TreeMap.scss';
 import { TreeMap } from './TreeMapViz.js';
 import { TreeMapSidebar } from './TreeMapSidebar.js';
 import { TreeMapTopbar } from './TreeMapTopBar.js';
+import { TreeMapInstructions } from './TreeMapInstructions.js';
 import { infograph_href_template } from '../infographic/routes.js';
 import {
   create_text_maker,
@@ -368,6 +369,7 @@ export default class TreeMapper extends React.Component {
           <SpinnerWrapper ref="spinner" config_name={"route"} /> :
           <div>
             <div className="TreeMap__Wrapper">
+              <TreeMapInstructions/>
               <div className="row">
                 <div className="col-md-10">
                   <div className="row">

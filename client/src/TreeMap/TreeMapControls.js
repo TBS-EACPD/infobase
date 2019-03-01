@@ -57,7 +57,7 @@ const years = {
 
 const size_controls = [
   { id: "drf", display: text_maker("DRF_spending") },
-  { id: "drf_ftes", display: text_maker("fte") },
+  { id: "drf_ftes", display: text_maker("treemap_fte") },
   { id: "tp", display: text_maker("TP") },
   { id: "vote_stat", display: text_maker("EVS") },
   { id: "so", display: text_maker("SO") },

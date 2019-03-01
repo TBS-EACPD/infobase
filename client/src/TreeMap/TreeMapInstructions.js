@@ -1,0 +1,28 @@
+import './TreeMap.scss';
+import treemap_text from './TreeMap.yaml';
+import { create_text_maker } from '../models/text.js';
+import { Fragment } from 'react';
+import { get_static_url } from '../request_utils.js';
+
+
+const text_maker = create_text_maker([treemap_text]);
+
+const top_level_title = `${text_maker("government_stats")} (${text_maker("by_portfolio")})`;
+
+export class TreeMapInstructions extends React.Component {
+  constructor() {
+    super();
+  }
+  render() {
+    return (
+      <Fragment>
+        <h1> {text_maker("treemap_title")} </h1>
+        <div className='row'>
+          <div className="col-sm-12 col-md-12">
+            <div className='explore_description' dangerouslySetInnerHTML={{ __html: text_maker("treemap_instructions") }} />
+          </div>
+        </div>
+      </Fragment>
+    )
+  }
+}

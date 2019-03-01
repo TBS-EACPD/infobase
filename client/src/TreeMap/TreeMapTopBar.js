@@ -7,7 +7,7 @@ import { get_static_url } from '../request_utils.js';
 
 const text_maker = create_text_maker([treemap_text]);
 
-const top_level_title = `${text_maker("government_stats")} (${text_maker("by_portfolio")})`;
+const top_level_title = `${text_maker("government_stats")}`;
 
 export class TreeMapTopbar extends React.Component {
   constructor() {
@@ -31,17 +31,20 @@ export class TreeMapTopbar extends React.Component {
             <li className="TreeMap__ZoomControl--no-zoom-out">
               <span dangerouslySetInnerHTML={{ __html: top_level_title }} />
             </li> :
-            <li className="TreeMap__ZoomControl--has-zoom-out">
-              <span tabIndex="0" dangerouslySetInnerHTML={{ __html: top_level_title }}
-                onClick={() => { this.handleClick(-1) }}
-                onKeyDown={() => {
-                  if (event.keyCode != 13) { 
-                    return;
-                  }
-                  this.handleClick(-1);
-                }}
-              />
-            </li>
+            <Fragment>
+              <li className="TreeMap__ZoomControl--no-zoom-out" style={{paddingRight: "10px"}}>{text_maker("click_to_zoom_out")}:</li>
+              <li className="TreeMap__ZoomControl--has-zoom-out">
+                <span tabIndex="0" dangerouslySetInnerHTML={{ __html: top_level_title }}
+                  onClick={() => { this.handleClick(-1) }}
+                  onKeyDown={() => {
+                    if (event.keyCode != 13) {
+                      return;
+                    }
+                    this.handleClick(-1);
+                  }}
+                />
+              </li>
+            </Fragment>
           }
           {_.map(org_route.slice(0, -1), (display, ix) =>
             <Fragment key={ix} >
