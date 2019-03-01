@@ -199,18 +199,17 @@ function mobile_tooltip_render(tooltip_sel, year) {
       if (d.data.parent_ftes) {
         tooltip_html = tooltip_html + `
         <div>${format_display_number(d.data.ftes, true)}
-        (${formats.percentage1(d.data.ftes / d.data.parent_ftes)} ${text_maker("of")} ${d.data.parent_name})</div>`
-
+        (${formats.percentage1(d.data.ftes / d.data.parent_ftes)} ${text_maker("of")} ${d.data.parent_name})</div>`;
       } else {
         tooltip_html = tooltip_html + `
-        <div>${format_display_number(d.data.ftes, true)}</div>`
+        <div>${format_display_number(d.data.ftes, true)}</div>`;
       }
     }
     tooltip_html = tooltip_html + `
     ${generate_infograph_href(d)}`
     if (d3.select(this.parentNode).classed("TreeMapNode__ContentBoxContainer--has-children")) {
       tooltip_html = tooltip_html + `
-      <button class="btn-primary">Zoom in</button>`
+      <button class="btn-primary">Zoom in</button>`;
     }
     tooltip_html = tooltip_html + `
     </div>`;
@@ -254,7 +253,9 @@ function generate_infograph_href(d, data_area) {
   if (d.data.subject) {
     return `
     <div style="padding-top: 10px">
-      <a class="TM_Tooltip__link" href=${infograph_href_template(d.data.subject, data_area)}> ${text_maker("see_the_infographic")} </a>
+      <a class="TM_Tooltip__link" href=${infograph_href_template(d.data.subject, data_area)} >
+        ${text_maker("see_the_infographic")}
+      </a>
     </div>
     `;
   } else { return '' }

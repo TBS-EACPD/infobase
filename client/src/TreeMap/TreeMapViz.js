@@ -6,11 +6,7 @@ import { smaller_items_text } from './data.js';
 
 const text_maker = create_text_maker(text);
 
-let currentMouseX, currentMouseY;
-function updateMousePositionVars(evt) {
-  currentMouseX = evt.clientX;
-  currentMouseY = evt.clientY;
-}
+
 export class TreeMap extends React.Component {
   constructor(props) {
     super();
@@ -24,18 +20,12 @@ export class TreeMap extends React.Component {
   }
   componentDidMount() {
     this._update = _.bind(this._update, this);
-    //window.addEventListener("resize", this._update)
-    window.addEventListener("mousemove", updateMousePositionVars);
     this._update();
   }
   componentDidUpdate() {
     // reset the state to match the props
     this.setState({org_route: [...this.props.org_route]});
     this._update();
-  }
-  componentWillUnmount() {
-    //window.removeEventListener("resize", this._update)
-    window.removeEventListener("mousemove", updateMousePositionVars);
   }
   shouldComponentUpdate(nextProps, nextState) {
     if (
@@ -166,6 +156,12 @@ export class TreeMap extends React.Component {
             setRouteCallback(d.data.name, false);
             transition(d);
           })
+          .on('keydown', d=> {
+            if (d3.event.keyCode != 13) { return; }
+            this.state.org_route.push(d.data.name);
+            setRouteCallback(d.data.name, false);
+            transition(d);
+          })
       } else {
         main
           .filter(d => d.children)
@@ -186,16 +182,14 @@ export class TreeMap extends React.Component {
       if (!window.feature_detection.is_mobile()) {
         main.append('div')
           .attr('class', d => classNames('TreeMapNode__ContentBoxContainer', !_.isEmpty(d.children) && "TreeMapNode__ContentBoxContainer--has-children"))
-          .on("mouseenter", function (d) {
-            const el = this;
+          .attr("tabindex", "0")
+          .on("mouseenter focus", function (d) {
+            d3.select(this)
+              .selectAll('.TM_TooltipContainer')
+              .remove();
             setTimeout(() => {
-              const coords = el.getBoundingClientRect();
-              if (!(
-                currentMouseX >= coords.left && currentMouseX <= coords.right &&
-                currentMouseY >= coords.top && currentMouseY <= coords.bottom
-              )) {
-                return;
-              }
+              d3.selectAll('.TM_TooltipContainer')
+                .remove();
               var tool = d3.select(this).append("div")
                 .attr("class", "TM_TooltipContainer")
                 .style("opacity", 0);
@@ -208,7 +202,6 @@ export class TreeMap extends React.Component {
           .on("mouseleave", function (d) {
             d3.select(this)
               .selectAll('.TM_TooltipContainer')
-              .filter(tooltip_data => tooltip_data === d)
               .remove();
           })
           .call(treemap_node_content_container);
@@ -216,7 +209,8 @@ export class TreeMap extends React.Component {
         const that = this;
         main.append('div')
           .attr('class', d => classNames('TreeMapNode__ContentBoxContainer', !_.isEmpty(d.children) && "TreeMapNode__ContentBoxContainer--has-children"))
-          .on("click", function (d) {
+          .attr("tabindex", "0")
+          .on("click focus", function (d) {
             if (d.toolTipped) {
               d3.selectAll('.TM_TooltipContainer')
                 .remove();

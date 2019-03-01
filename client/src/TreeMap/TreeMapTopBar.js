@@ -32,8 +32,14 @@ export class TreeMapTopbar extends React.Component {
               <span dangerouslySetInnerHTML={{ __html: top_level_title }} />
             </li> :
             <li className="TreeMap__ZoomControl--has-zoom-out">
-              <span dangerouslySetInnerHTML={{ __html: top_level_title }}
+              <span tabIndex="0" dangerouslySetInnerHTML={{ __html: top_level_title }}
                 onClick={() => { this.handleClick(-1) }}
+                onKeyDown={() => {
+                  if (event.keyCode != 13) { 
+                    return;
+                  }
+                  this.handleClick(-1);
+                }}
               />
             </li>
           }
@@ -51,8 +57,14 @@ export class TreeMapTopbar extends React.Component {
               </li>
               <li className="TreeMap__ZoomControl--has-zoom-out">
                 {
-                  <span dangerouslySetInnerHTML={{ __html: display }}
+                  <span tabIndex="0" dangerouslySetInnerHTML={{ __html: display }}
                     onClick={() => { this.handleClick(ix) }}
+                    onKeyDown={() => {
+                      if (event.keyCode != 13) { 
+                        return;
+                      }
+                      this.handleClick(ix);
+                    }}
                   />
                 }
               </li>
