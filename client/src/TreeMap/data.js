@@ -13,7 +13,9 @@ const { Dept } = Subject;
 
 function has_non_zero_or_non_zero_children(node, perspective = "drf") {
   if (_.isEmpty(node.children)) {
-    return Math.abs(node.amount) > 0 || (node.ftes && node.ftes != 0);
+    return perspective === "drf_ftes" ?
+      node.ftes && node.ftes != 0 :
+    Math.abs(node.amount) > 0;
   } else {
     return _.some(node.children, has_non_zero_or_non_zero_children);
   }
