@@ -155,7 +155,7 @@ function populate_results_info(data){
 
 
 let _api_subject_ids_with_loaded_results = {};
-const results_fragment = (doc) => `
+const results_fields_fragment = (doc) => `
 results(doc: ${doc}) {
   id
   parent_id
@@ -186,25 +186,30 @@ results(doc: ${doc}) {
   }
 }
 `;
-const common_load_results_bundle_fragment = `
-dept_code
-crsos {
-  id
-  drr17_results: ${results_fragment('"drr17"')}
-  dp18_results: ${results_fragment('"dp18"')}
+const program_results_fragment = `
+id
+drr17_results: ${results_fields_fragment('"drr17"')}
+dp18_results: ${results_fields_fragment('"dp18"')}
+pidrlinks {
+  program_id
+  result_id
 }
-programs {
+sub_programs {
   id
-  drr17_results: ${results_fragment('"drr17"')}
-  dp18_results: ${results_fragment('"dp18"')}
-  pidrlinks {
-    program_id
-    result_id
-  }
+  drr17_results: ${results_fields_fragment('"drr17"')}
+  dp18_results: ${results_fields_fragment('"dp18"')}
+  name
+  description
+  drr_fte_expl
+  drr_spend_expl
+  dp_fte_trend_expl
+  dp_spend_trend_expl
+  dp_no_fte_expl
+  dp_no_spending_expl
   sub_programs {
     id
-    drr17_results: ${results_fragment('"drr17"')}
-    dp18_results: ${results_fragment('"dp18"')}
+    drr17_results: ${results_fields_fragment('"drr17"')}
+    dp18_results: ${results_fields_fragment('"dp18"')}
     name
     description
     drr_fte_expl
@@ -213,18 +218,48 @@ programs {
     dp_spend_trend_expl
     dp_no_fte_expl
     dp_no_spending_expl
-    sub_programs {
+  }
+}
+`;
+const crso_load_results_bundle_fragment = `
+id
+drr17_results: ${results_fields_fragment('"drr17"')}
+dp18_results: ${results_fields_fragment('"dp18"')}
+`;
+const program_load_results_bundle_query = gql`
+query($lang: String!, $id: String) {
+  root(lang: $lang) {
+    program(id: $id) {
       id
-      drr17_results: ${results_fragment('"drr17"')}
-      dp18_results: ${results_fragment('"dp18"')}
-      name
-      description
-      drr_fte_expl
-      drr_spend_expl
-      dp_fte_trend_expl
-      dp_spend_trend_expl
-      dp_no_fte_expl
-      dp_no_spending_expl
+      ${program_results_fragment}
+    }
+  }
+}
+`;
+const crso_load_results_bundle_query = gql`
+query($lang: String!, $id: String) {
+  root(lang: $lang) {
+    crso(id: $id) {
+      id
+      ${crso_load_results_bundle_fragment}
+      programs {
+        ${program_results_fragment}
+      }
+    }
+  }
+}
+`;
+const dept_load_results_bundle_query = gql`
+query($lang: String!, $id: String) {
+  root(lang: $lang) {
+    org(org_id: $id) {
+      id
+      crsos {
+        ${crso_load_results_bundle_fragment}
+      }
+      programs {
+        ${program_results_fragment}
+      }
     }
   }
 }
@@ -233,56 +268,64 @@ const all_load_results_bundle_query = gql`
 query($lang: String!) {
   root(lang: $lang) {
     orgs {
-      ${common_load_results_bundle_fragment}
+      id
+      crsos {
+        ${crso_load_results_bundle_fragment}
+      }
+      programs {
+        ${program_results_fragment}
+      }
     }
   }
 }
 `;
-const dept_load_results_bundle_query = gql`
-query($lang: String!, $subject_id: String) {
-  root(lang: $lang) {
-    org(dept_code: $subject_id) {
-      ${common_load_results_bundle_fragment}
-    }
-  }
-}
-`;
-export function api_load_results_bundle(subject){ // TODO: optimize
-  const { 
-    subject_code,
+export function api_load_results_bundle(subject){
+  const level = subject && subject.level || 'all';
+
+  const {
+    is_loaded,
+    id,
     query,
     response_data_accessor,
   } = (() => {
-    const all_case = {
-      subject_code: 'all',
-      query: all_load_results_bundle_query,
-      response_data_accessor: (response) => response.data.root.orgs,
-    };
+    const all_is_loaded = () => _api_subject_ids_with_loaded_results['all'];
+    const dept_is_loaded = (org) => all_is_loaded() || _.get(_api_subject_ids_with_loaded_results, `dept.${org.id}`);
+    const crso_is_loaded = (crso) => dept_is_loaded(crso.dept) || _.get(_api_subject_ids_with_loaded_results, `crso.${crso.id}`);
+    const program_is_loaded = (program) => crso_is_loaded(program.crso) || _.get(_api_subject_ids_with_loaded_results, `program.${program.id}`);
 
-    if(subject){
-      switch(subject.level){
-        case 'dept':
-          return {
-            subject_code: subject.acronym,
-            query: dept_load_results_bundle_query,
-            response_data_accessor: (response) => [ response.data.root.org ],
-          };
-        case 'crso':
-        case 'program':
-          return {
-            subject_code: subject.dept.acronym,
-            query: dept_load_results_bundle_query,
-            response_data_accessor: (response) => [ response.data.root.org ],
-          };
-        default:
-          return all_case;
-      }
-    } else {
-      return all_case;
+    switch(level){
+      case 'program':
+        return {
+          is_loaded: program_is_loaded(subject),
+          id: subject.id,
+          query: program_load_results_bundle_query,
+          response_data_accessor: (response) => [ response.data.root.program ],
+        };
+      case 'crso':
+        return {
+          is_loaded: crso_is_loaded(subject),
+          id: subject.id,
+          query: crso_load_results_bundle_query,
+          response_data_accessor: (response) => [ response.data.root.crso ],
+        };
+      case 'dept':
+        return {
+          is_loaded: dept_is_loaded(subject),
+          id: subject.id,
+          query: dept_load_results_bundle_query,
+          response_data_accessor: (response) => [ response.data.root.org ],
+        };
+      default:
+        return {
+          is_loaded: all_is_loaded(subject),
+          id: 'all',
+          query: all_load_results_bundle_query,
+          response_data_accessor: (response) => response.data.root.orgs,
+        };
     }
   })();
 
-  if(_api_subject_ids_with_loaded_results[subject_code] || _api_subject_ids_with_loaded_results['all']){
+  if( is_loaded ){
     return Promise.resolve();
   }
 
@@ -291,7 +334,7 @@ export function api_load_results_bundle(subject){ // TODO: optimize
     query,
     variables: {
       lang: window.lang, 
-      subject_id: subject_code,
+      id,
     },
   })
     .then( (response) => {
@@ -309,7 +352,7 @@ export function api_load_results_bundle(subject){ // TODO: optimize
       _.each( indicators, obj => Indicator.create_and_register(obj) );
       _.each( pi_dr_links, ({program_id, result_id}) => PI_DR_Links.add(program_id, result_id) );
 
-      _api_subject_ids_with_loaded_results[subject_code] = true;
+      _.set(_api_subject_ids_with_loaded_results, `${level}.${id}`, true);
     });
 }
 
@@ -427,7 +470,7 @@ export function api_load_results_counts(level = "summary"){
   if(api_is_results_count_loaded[level]){
     return Promise.resolve();
   } else {
-    const time_at_request = Date.now()
+    const time_at_request = Date.now();
     const client = get_client();
     return client.query({ query: load_results_counts_query(level), variables: {lang: window.lang} })
       .then( (response) => {
