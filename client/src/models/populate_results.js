@@ -154,7 +154,7 @@ function populate_results_info(data){
 
 
 
-let _api_loaded_dept_or_tag_codes = {};
+let _api_subject_ids_with_loaded_results = {};
 const results_fragment = (doc) => `
 results(doc: ${doc}) {
   id
@@ -239,69 +239,81 @@ query($lang: String!) {
 }
 `;
 const dept_load_results_bundle_query = gql`
-query($lang: String!, $dept_code: String) {
+query($lang: String!, $subject_id: String) {
   root(lang: $lang) {
-    org(dept_code: $dept_code) {
+    org(dept_code: $subject_id) {
       ${common_load_results_bundle_fragment}
     }
   }
 }
 `;
 export function api_load_results_bundle(subject){ // TODO: optimize
-  let subject_code;
-  if(subject){
-    switch(subject.level){
-      case 'dept':
-        subject_code = subject.acronym;
-        break;
-      case 'crso':
-      case 'program':
-        subject_code = subject.dept.acronym;
-        break;
-      default:
-        subject_code = 'all';
-        break;
-    }
-  } else {
-    subject_code = 'all';
-  }
+  const { 
+    subject_code,
+    query,
+    response_data_accessor,
+  } = (() => {
+    const all_case = {
+      subject_code: 'all',
+      query: all_load_results_bundle_query,
+      response_data_accessor: (response) => response.data.root.orgs,
+    };
 
-  if(_api_loaded_dept_or_tag_codes[subject_code] || _api_loaded_dept_or_tag_codes['all']){
+    if(subject){
+      switch(subject.level){
+        case 'dept':
+          return {
+            subject_code: subject.acronym,
+            query: dept_load_results_bundle_query,
+            response_data_accessor: (response) => [ response.data.root.org ],
+          };
+        case 'crso':
+        case 'program':
+          return {
+            subject_code: subject.dept.acronym,
+            query: dept_load_results_bundle_query,
+            response_data_accessor: (response) => [ response.data.root.org ],
+          };
+        default:
+          return all_case;
+      }
+    } else {
+      return all_case;
+    }
+  })();
+
+  if(_api_subject_ids_with_loaded_results[subject_code] || _api_subject_ids_with_loaded_results['all']){
     return Promise.resolve();
   }
 
   const client = get_client();
   return client.query({ 
-    query: subject_code === 'all' ?
-      all_load_results_bundle_query :
-      dept_load_results_bundle_query, 
+    query,
     variables: {
       lang: window.lang, 
-      dept_code: subject_code,
+      subject_id: subject_code,
     },
   })
     .then( (response) => {
-      const org_result_hierarchies = subject_code === 'all' ?
-        response.data.root.orgs :
-        [ response.data.root.org ];
+      const hierarchical_response_data = response_data_accessor(response);
 
       const {
         sub_programs,
         results,
         indicators,
         pi_dr_links,
-      } = extract_flat_data_from_results_hierarchies(org_result_hierarchies);
+      } = extract_flat_data_from_results_hierarchies(hierarchical_response_data);
 
       _.each( sub_programs, obj => SubProgramEntity.create_and_register(obj) );
       _.each( results, obj => Result.create_and_register(obj) );
-      _.each( indicators, obj => Indicator.create_and_register(obj) )
+      _.each( indicators, obj => Indicator.create_and_register(obj) );
       _.each( pi_dr_links, ({program_id, result_id}) => PI_DR_Links.add(program_id, result_id) );
 
-      _api_loaded_dept_or_tag_codes[subject_code] = true;
+      _api_subject_ids_with_loaded_results[subject_code] = true;
     });
 }
 
-function extract_flat_data_from_results_hierarchies(org_result_hierarchies){
+function extract_flat_data_from_results_hierarchies(hierarchical_response_data){
   const sub_programs = [],
     results = [],
     indicators = [],
@@ -371,7 +383,7 @@ function extract_flat_data_from_results_hierarchies(org_result_hierarchies){
   );
 
   _.each(
-    org_result_hierarchies,
+    hierarchical_response_data,
     org_result_hierarchy => {
       crawl_hierachy_level(org_result_hierarchy.crsos);
 
@@ -384,7 +396,7 @@ function extract_flat_data_from_results_hierarchies(org_result_hierarchies){
     results,
     indicators,
     pi_dr_links,
-  }
+  };
 }
 
 
