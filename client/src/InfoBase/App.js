@@ -24,7 +24,6 @@ const Home = retrying_react_lazy( () => import('../home/home.js') );
 const GraphInventory = retrying_react_lazy( () => import('../graph_route/GraphInventory.js') );
 const PartitionRoute = retrying_react_lazy( () => import('../partition/partition_subapp/PartitionRoute.js') );
 const BudgetMeasuresRoute = retrying_react_lazy( () => import('../partition/budget_measures_subapp/BudgetMeasuresRoute.js') );
-const BubbleExplore = retrying_react_lazy( () => import('../dept_explore/dept_explore.js') );
 const About = retrying_react_lazy( () => import('../about/about.js') );
 const MetaData = retrying_react_lazy( () => import('../metadata/metadata.js') );
 const IgocExplorer = retrying_react_lazy( () => import('../igoc_explorer/igoc_explorer.js') );
