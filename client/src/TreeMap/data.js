@@ -15,7 +15,7 @@ function has_non_zero_or_non_zero_children(node, perspective = "drf") {
   if (_.isEmpty(node.children)) {
     return perspective === "drf_ftes" ?
       node.ftes && node.ftes != 0 :
-    Math.abs(node.amount) > 0;
+      Math.abs(node.amount) > 0;
   } else {
     return _.some(node.children, has_non_zero_or_non_zero_children);
   }
@@ -228,7 +228,8 @@ function get_data_drf(perspective, year, year_1, year_2, filter_var, get_changes
   return root;
 }
 
-function get_data_so(perspective, year, year_1, year_2, filter_var, get_changes) {
+
+function get_data_so_old(perspective, year, year_1, year_2, filter_var, get_changes) {
   const program_sobj_table = Table.lookup('programSobjs');
   const all_orgs = _.chain(Dept.get_all())
     .map(org => ({
@@ -265,6 +266,79 @@ function get_data_so(perspective, year, year_1, year_2, filter_var, get_changes)
                   }))
                   .filter(n => has_non_zero_or_non_zero_children(n, perspective))
                   .value(),
+            }))
+            .filter(n => has_non_zero_or_non_zero_children(n, perspective))
+            .value(),
+        }))
+        .filter(n => has_non_zero_or_non_zero_children(n, perspective))
+        .value(),
+    }))
+    .filter(n => has_non_zero_or_non_zero_children(n, perspective))
+    .value();
+  const data = _.concat(
+    _.chain(all_orgs)
+      .filter(o => { return o.subject.ministry })
+      .groupBy('subject.ministry.name')
+      .toPairs()
+      .map(([min_name, orgs]) => (
+        {
+          name: min_name,
+          children: orgs,
+        }
+      ))
+      .value(),
+    _.filter(all_orgs, o => { return !o.subject.ministry })
+  );
+  const data_root = {
+    name: "Government",
+    children: data,
+    amount: _.sumBy(data, "amount"),
+  };
+  prep_nodes(data_root, perspective, get_changes);
+  data_root.children = group_smallest(
+    data_root.children,
+    children => ({ name: smaller_items_text, children }),
+    true,
+    0.005,
+    false
+  );
+  return data_root;
+}
+
+const so_nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 20, 21, 22];
+
+function get_data_so(perspective, year, year_1, year_2, filter_var, get_changes) {
+  const so_nums_to_get = parseInt(filter_var) ? [parseInt(filter_var)] : so_nums;
+  const program_sobj_table = Table.lookup('programSobjs');
+  const all_orgs = _.chain(Dept.get_all())
+    .map(org => ({
+      subject: org,
+      name: org.fancy_name,
+      children: _.chain(so_nums_to_get)
+        .map(so => ({
+          name: tm(`SOBJ${so}`),
+          children: _.chain(org.crsos)
+            .map(crso => ({
+              subject: crso,
+              name: crso.fancy_name,
+              children: _.chain(crso.programs)
+                .map(prog => ({
+                  subject: prog,
+                  name: prog.fancy_name,
+                  children: _.chain(program_sobj_table.q(prog).data)
+                    .filter({ so_num: so })
+                    .map(s => ({
+                      name: s.so,
+                      so_num: s.so_num,
+                      amount: get_changes ?
+                        s[header_col(perspective, year_2)] - s[header_col(perspective, year_1)] :
+                        s[header_col(perspective, year)],
+                    }))
+                    .filter(n => has_non_zero_or_non_zero_children(n, perspective))
+                    .value(),
+                }))
+                .filter(n => has_non_zero_or_non_zero_children(n, perspective))
+                .value(),
             }))
             .filter(n => has_non_zero_or_non_zero_children(n, perspective))
             .value(),

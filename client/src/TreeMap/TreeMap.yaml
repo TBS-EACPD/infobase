@@ -111,7 +111,7 @@ treemap_instructions:
    * By **Total Employees** shows federal organizations by total {{gl_tt "Full-Time Equivalents (FTE)" "FTE"}}. Boxes can be coloured by expenditure amounts or by FTEs.
    * By **Transfer Payments** shows federal organizations by total {{gl_tt "Transfer Payments" "TP"}}, filterable by {{gl_tt "grants" "GRANT_TP"}} or a {{gl_tt "contributions" "CONT_TP"}}.
    * By **Expenditures by Vote / Statutory type** shows federal organizations by total expenditures, filterable by {{gl_tt "Vote" "VOTED"}} / {{gl_tt "Statutory" "STAT_EXP"}} status.
-   * By **Expenditures by Standard Object** shows federal organizations by total expenditures, filterable by {{gl_tt "Standard Object" "SOBJ"}}.
+   * By **Expenditures by Standard Object** shows total expenditures by {{gl_tt "Standard Object" "SOBJ"}}, filterable by Standard Object category.
 
   fr: |
    Cliquez sur les boîtes ci-dessous pour comparer visuellement combien les organisations dépensent et combien de personnes elles emploient.
@@ -122,4 +122,4 @@ treemap_instructions:
    * Par **nombre total d’employés** – montre les organisations fédérales groupées selon le {{gl_tt "nombre total d’employés" "FTE"}} qu'elles emploient. Les boîtes peuvent etre couleurées par dépenses ou par ETP.
    * Par **paiements de transfert** – montre les organisations fédérales groupées par {{gl_tt "paiements de transfert" "TP"}} totales, avec la possibilité de filtrer les données selon le type de paiement.
    * Par **dépenses par crédit / poste législatif** – montre les organisations fédérales groupées par dépenses totales, avec la possibilité de filtrer les données entre des {{gl_tt "dépenses votées" "VOTED"}} et des {{gl_tt "dépenses législatives" "STAT_EXP"}}. 
-   * Par **dépenses par article courant**  – montre les organisations fédérales groupées par dépenses totales, avec la possibilité de filtrer les données selon les {{gl_tt "articles courants" "SOBJ"}}.
+   * Par **dépenses par article courant**  – montre les dépenses totales selon les {{gl_tt "articles courants" "SOBJ"}} avec la possibilité de filtrer.
