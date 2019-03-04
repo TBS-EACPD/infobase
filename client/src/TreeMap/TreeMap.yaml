@@ -117,8 +117,9 @@ treemap_instructions:
    Cliquez sur les boîtes ci-dessous pour comparer visuellement combien les organisations dépensent et combien de personnes elles emploient.
    Organisations sont groupées par portefeuille ministériel, et les organisations plus petits sont grouper ensemble pour visualization plus facile.
    
-   Pour commencer, choisissez à partir de l’une des perspectives d’exploration suivantes, et ensuite choisissez une année ou une période de deux années pour comparer : 
-   * TODO FINISH THIS !!!!
-   * Par **dépenses totales** – montre les organisations fédérales groupées par portefeuille ministériel et {{gl_tt "dépenses" "EXP"}} totales.
-   * Par **nombre total d’employés** – montre les organisations fédérales groupées selon le nombre total d’employés qu'elles emploient.
-   * Par **types d’organisations** – montre les organisations fédérales groupées par leur type d’organisation (p. ex. ministères, sociétés d’État).
+   Pour commencer, choisissez à partir de l’une des perspectives d’exploration suivantes, et ensuite choisissez une année ou une période de deux années pour comparer :
+   * Par **dépenses totales** – montre les organisations fédérales groupées par {{gl_tt "dépenses" "EXP"}} totales. Les boîtes peuvent être couleurées par dépenses ou par ETP.
+   * Par **nombre total d’employés** – montre les organisations fédérales groupées selon le {{gl_tt "nombre total d’employés" "FTE"}} qu'elles emploient. Les boîtes peuvent etre couleurées par dépenses ou par ETP.
+   * Par **paiements de transfert** – montre les organisations fédérales groupées par {{gl_tt "paiements de transfert" "TP"}} totales, avec la possibilité de filtrer les données selon le type de paiement.
+   * Par **dépenses par crédit / poste législatif** – montre les organisations fédérales groupées par dépenses totales, avec la possibilité de filtrer les données entre des {{gl_tt "dépenses votées" "VOTED"}} et des {{gl_tt "dépenses législatives" "STAT_EXP"}}. 
+   * Par **dépenses par article courant**  – montre les organisations fédérales groupées par dépenses totales, avec la possibilité de filtrer les données selon les {{gl_tt "articles courants" "SOBJ"}}.
