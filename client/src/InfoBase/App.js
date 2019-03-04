@@ -60,7 +60,6 @@ export class App extends React.Component {
               <Route path="/glossary/:active_key?" component={Glossary} />
               <Route path="/partition/:perspective?/:data_type?" component={PartitionRoute} />
               <Route path="/budget-measures/:first_column?/:selected_value?" component={BudgetMeasuresRoute} />
-              <Route path="/explore-:perspective?" component={BubbleExplore} />
               <Route path="/rpb/:config?" component={ReportBuilder} />
               <Route path="/about" component={About} />
               <Route path="/graph/:level?/:graph?/:id?" component={GraphInventory} />
