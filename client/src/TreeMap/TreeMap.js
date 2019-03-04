@@ -1,7 +1,7 @@
 //https://gist.github.com/guglielmo/16d880a6615da7f502116220cb551498
 
 import { StandardRouteContainer } from '../core/NavComponents.js';
-import { SpinnerWrapper } from '../util_components.js';
+import { SpinnerWrapper, TM } from '../util_components.js';
 import {
   get_data,
   load_data,
@@ -13,6 +13,7 @@ import { TreeMap } from './TreeMapViz.js';
 import { TreeMapSidebar } from './TreeMapSidebar.js';
 import { TreeMapTopbar } from './TreeMapTopBar.js';
 import { TreeMapInstructions } from './TreeMapInstructions.js';
+import { TreeMapLegend } from './TreeMapLegend.js';
 import { infograph_href_template } from '../infographic/routes.js';
 import {
   create_text_maker,
@@ -22,19 +23,21 @@ import {
 
 const text_maker = create_text_maker([treemap_text]);
 
-const format_display_number = (value,is_fte=false) => 
-  is_fte ? `${formats.big_int_real(Math.round(value))} ${text_maker("fte")}` : formats.compact1(value);
+const format_display_number = (value, is_fte = false, raw = false) =>
+  raw ?
+    is_fte ? `${formats.big_int_real_raw(Math.round(value))} ${text_maker("fte")}` : formats.compact1_raw(value):
+    is_fte ? `${formats.big_int_real(Math.round(value))} ${text_maker("fte")}` : formats.compact1(value);
 
 /* NODE RENDERING FUNCTIONS */
 
-function std_node_render(is_fte,foreign_sel) {
+function std_node_render(is_fte, foreign_sel) {
   foreign_sel.html(function (node) {
     const node_size = get_node_size.bind(this)();
     if (node_size === "tiny") { return } //no contents on tiny nodes
     const text_size = node_size === "medium" ? "" : `--${node_size}`;
     const display_name = node_name(node, this.offsetWidth);
-    const display_number = this.offsetHeight > 50 ? 
-      is_fte ? 
+    const display_number = this.offsetHeight > 50 ?
+      is_fte ?
         format_display_number(node.data.ftes, true) :
         format_display_number(node.data.amount) :
       '';
@@ -44,7 +47,7 @@ function std_node_render(is_fte,foreign_sel) {
 const curried_node_render = _.curry(std_node_render);
 
 
-function node_html(node, display_name, text_size, display_number){
+function node_html(node, display_name, text_size, display_number) {
   return `
   <div class="TreeMapNode__ContentBox TreeMapNode__ContentBox--standard">
     <div class="TreeMapNode__ContentTitle ${text_size && `TreeMapNode__ContentTitle${text_size}` || ''}">
@@ -53,28 +56,33 @@ function node_html(node, display_name, text_size, display_number){
     ${ display_number && `
     <div class="TreeMapNode__ContentText ${text_size && `TreeMapNode__ContentText${text_size}` || ''}">
       ${display_number}
-    </div>` || '' }
+    </div>` || ''}
   </div>
   `;
 
 }
 
-function node_name(node, width){
-  if(node.data.subject && node.data.subject.fancy_acronym && width < 150 ){
+function node_name(node, width) {
+  if (node.data.subject && node.data.subject.fancy_acronym && width < 150) {
     return node.data.subject.fancy_acronym
   }
   return node.data.name;
 }
 
-function get_node_size(node){
+function get_node_size(node) {
   if (this.offsetHeight <= 30 || this.offsetWidth <= 50) { return "tiny" }
-  else if (this.offsetHeight < 100 || this.offsetWidth < 150 ) { return "small" }
+  else if (this.offsetHeight < 100 || this.offsetWidth < 150) { return "small" }
   else if (this.offsetHeight > 150 && this.offsetWidth > 300) { return "large" }
   else { return "medium" }
 }
 
 
 /* COLOUR SCALES */
+
+//what values should be the darkest colour?
+const raw_spending_limit = 2000000000;
+const perc_limit = 0.3;
+const raw_fte_limit = 1000;
 
 // need this slightly tricky formulation because we only want to use part of the scale
 // (darkest colours are too dark for good contrast with the text)
@@ -84,7 +92,7 @@ const d3_red = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeReds[9].slice(
 d3_red.clamp(true);
 const d3_green = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeGreens[9].slice(2, 7)));
 d3_green.clamp(true);
-const d3_purple = d3.scaleSequential(d3.interpolateRgbBasis(["#e7d4e8","#c2a5cf","#ab6fc3","#9c4cbc"]));
+const d3_purple = d3.scaleSequential(d3.interpolateRgbBasis(["#e7d4e8", "#c2a5cf", "#ab6fc3", "#9c4cbc"]));
 d3_purple.clamp(true);
 
 
@@ -92,8 +100,8 @@ d3_purple.clamp(true);
 function standard_color_scale(node) {
   const color_val = node.data.parent_amount ? node.data.amount / node.data.parent_amount : 0; // smaller_items nodes don't have parents, set them to 0
   const scale = node.data.amount < 0 ? d3_red : d3_blue
-  scale.domain([0, .3]);
-  if(node.amount < 0){
+  scale.domain([0, perc_limit]);
+  if (node.amount < 0) {
     return scale(-color_val);
   } else {
     return scale(color_val);
@@ -103,7 +111,7 @@ function standard_color_scale(node) {
 // FTE % of parent
 function fte_color_scale(node) {
   const color_val = node.data.parent_ftes ? node.data.ftes / node.data.parent_ftes : 0; // smaller_items nodes don't have parents, set them to 0
-  const scale = d3_green.domain([0,.3]);
+  const scale = d3_green.domain([0, perc_limit]);
   return scale(color_val);
 }
 
@@ -111,13 +119,13 @@ function fte_color_scale(node) {
 function spending_change_color_scale(node) {
   const color_val = node.data.amount < 0 ? -node.data.amount : node.data.amount;
   const scale = node.data.amount < 0 ? d3_red : d3_blue;
-  scale.domain([0, 2000000000]);
+  scale.domain([0, raw_spending_limit]);
   return scale(color_val);
 }
 function fte_change_color_scale(node) {
   const color_val = node.data.ftes < 0 ? -node.data.ftes : node.data.ftes;
   const scale = node.data.ftes < 0 ? d3_purple : d3_green;
-  scale.domain([0, 1000]);
+  scale.domain([0, raw_fte_limit]);
   return scale(color_val);
 }
 
@@ -133,6 +141,48 @@ function get_color_scale(color_var, get_changes) {
   } else {
     return standard_color_scale;
   }
+}
+
+const n_legend_vals = 4;
+
+// this is super complicated and hacky but it's because it's hard to get diverging color
+// scales to look like how you want.
+function get_legend_cols(color_var,get_changes,colorScale){
+  const increase = get_changes ?
+    color_var==="ftes" ?
+      2*(raw_fte_limit/n_legend_vals) :
+      2*(raw_spending_limit/n_legend_vals) :
+    perc_limit/n_legend_vals;
+  let raw_vals = get_changes ?
+    color_var==="ftes" ?
+      _.concat(-raw_fte_limit-increase, _.range(-raw_fte_limit, raw_fte_limit+increase, increase)) :
+      _.concat(-raw_spending_limit-increase, _.range(-raw_spending_limit, raw_spending_limit+increase, increase)) :
+      _.range(0, perc_limit+increase, increase);
+  const processed_vals = _.map(raw_vals, v=>{
+    return v < 0 ? v + increase-increase/2 : v;
+  });
+  const nodes = _.map(processed_vals, v => ({data: {ftes:v, parent_ftes: 1, amount: v, parent_amount: 1}}));
+  const color_vals = _.map(nodes, n => colorScale(n));
+  const output = _.map(_.zip(raw_vals, color_vals), pair => ({
+    val: get_changes ?
+      format_display_number(pair[0],color_var==="ftes",true) :
+      formats.percentage_raw(Math.round(pair[0]*100)/100),
+    col: pair[1],
+  }));
+  if(get_changes){ output[0].val = undefined; }
+  return output;
+}
+
+function get_legend_measure_text(perspective,get_changes){
+  return get_changes ?
+    perspective==="drf_fte" ?
+      text_maker("fte") :
+    `${text_maker("expenditures")} ($)` :
+  perspective==="drf_fte" ?
+    `${text_maker("fte")}
+    (${text_maker("percent_of_parent")})` :
+  `${text_maker("expenditures")}
+  (${text_maker("percent_of_parent")})`
 }
 
 /* TOOLTIPS */
@@ -192,7 +242,7 @@ function mobile_tooltip_render(tooltip_sel, year) {
     <div>${d.data.name}</div>
     <hr class="BlueHLine">
     <div>${format_display_number(d.data.amount)}</div>`;
-    if( d.data.parent_amount) {
+    if (d.data.parent_amount) {
       tooltip_html = tooltip_html + `
       <div>${formats.percentage1(d.data.amount / d.data.parent_amount)} ${text_maker("of")} ${d.data.parent_name}</div>`;
     }
@@ -230,7 +280,7 @@ function mobile_tooltip_render_changes(tooltip_sel) {
     <div>${format_display_number(d.data.amount)}</div>`;
     if (d.data.ftes) {
       tooltip_html = tooltip_html + `
-      <div>${format_display_number(d.data.ftes,true)}</div>`
+      <div>${format_display_number(d.data.ftes, true)}</div>`
     }
     tooltip_html = tooltip_html + `
     ${generate_infograph_href(d)}`
@@ -262,7 +312,7 @@ function generate_infograph_href(d, data_area) {
   } else { return '' }
 }
 
-function check_props(props){
+function check_props(props) {
   props.match.params.perspective = props.match.params.perspective || "drf";
   props.match.params.year = props.match.params.year || "pa_last_year";
   props.match.params.color_var = props.match.params.color_var || "spending";
@@ -369,7 +419,13 @@ export default class TreeMapper extends React.Component {
           <SpinnerWrapper ref="spinner" config_name={"route"} /> :
           <div>
             <div className="TreeMap__Wrapper">
-              <TreeMapInstructions/>
+              <TreeMapInstructions />
+              <TreeMapLegend
+                perspective={perspective}
+                legend_cols={get_legend_cols(color_var,get_changes,colorScale)}
+                legend_measure_text={get_legend_measure_text(perspective,get_changes)}
+                n_legend_vals={n_legend_vals}
+              />
               <div className="row">
                 <div className="col-md-10">
                   <div className="row">
@@ -381,23 +437,23 @@ export default class TreeMapper extends React.Component {
                       />
                     </div>
                     <TreeMap
-                      data = { data }
-                      colorScale = { colorScale }
-                      year = { year }
-                      org_route = { this.state.org_route }
-                      setRouteCallback = { this.setRoute }
-                      perspective = { perspective }
+                      data={data}
+                      colorScale={colorScale}
+                      year={year}
+                      org_route={this.state.org_route}
+                      setRouteCallback={this.setRoute}
+                      perspective={perspective}
                       tooltip_render={
                         get_changes ?
-                        window.feature_detection.is_mobile() ?
-                          mobile_tooltip_render_changes : std_tooltip_render_changes
-                        :
-                        window.feature_detection.is_mobile() ? 
-                          mobile_tooltip_render : std_tooltip_render
+                          window.feature_detection.is_mobile() ?
+                            mobile_tooltip_render_changes : std_tooltip_render_changes
+                          :
+                          window.feature_detection.is_mobile() ?
+                            mobile_tooltip_render : std_tooltip_render
                       }
-                      node_render={ perspective === "drf_ftes" ? 
-                      curried_node_render(true) : 
-                      curried_node_render(false) }
+                      node_render={perspective === "drf_ftes" ?
+                        curried_node_render(true) :
+                        curried_node_render(false)}
                       viz_height={app_height - topbar_height}
                     />
                   </div>

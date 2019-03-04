@@ -100,6 +100,10 @@ of:
   en: of
   fr: de
 
+percent_of_parent:
+  en: "% of parent"
+  fr: "% de l'organisation mère"
+
 treemap_instructions:
   transform: [handlebars, markdown]
   en: |
