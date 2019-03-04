@@ -98,7 +98,7 @@ export const single_subj_results_scheme = {
       payload: ensure_loaded({
         subject: subject,
         results: true,
-        result_doc: doc,
+        result_docs: [doc],
         use_api_for_results,
       }).then( () => doc ),
     }),

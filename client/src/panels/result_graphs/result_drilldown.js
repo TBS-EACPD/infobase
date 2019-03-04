@@ -406,7 +406,7 @@ class SingleSubjResultsContainer extends React.Component {
     ensure_loaded({
       subject,
       results: true,
-      result_doc: doc,
+      result_docs: [doc],
       use_api_for_results,
     })
       .then( () => this.setState({loading: false}) );

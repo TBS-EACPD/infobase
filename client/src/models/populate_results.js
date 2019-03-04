@@ -155,8 +155,9 @@ function populate_results_info(data){
 
 
 let _api_subject_ids_with_loaded_results = {};
-const results_fields_fragment = (doc) => `
-results(doc: ${doc}) {
+const results_fields_fragment = (docs_to_load) => _.chain(docs_to_load)
+  .map(doc =>`
+${doc}_results: results(doc: "${doc}") {
   id
   parent_id
   name
@@ -184,20 +185,21 @@ results(doc: ${doc}) {
     methodology
     measure
   }
-}
-`;
-const program_results_fragment = `
+}`)
+  .reduce( (memo, fragment) => `
+${memo}
+${fragment}`)
+  .value();
+const program_results_fragment = (docs_to_load) => `
 id
-drr17_results: ${results_fields_fragment('"drr17"')}
-dp18_results: ${results_fields_fragment('"dp18"')}
+${results_fields_fragment(docs_to_load)}
 pidrlinks {
   program_id
   result_id
 }
 sub_programs {
   id
-  drr17_results: ${results_fields_fragment('"drr17"')}
-  dp18_results: ${results_fields_fragment('"dp18"')}
+  ${results_fields_fragment(docs_to_load)}
   name
   description
   drr_fte_expl
@@ -208,8 +210,7 @@ sub_programs {
   dp_no_spending_expl
   sub_programs {
     id
-    drr17_results: ${results_fields_fragment('"drr17"')}
-    dp18_results: ${results_fields_fragment('"dp18"')}
+    ${results_fields_fragment(docs_to_load)}
     name
     description
     drr_fte_expl
@@ -221,65 +222,66 @@ sub_programs {
   }
 }
 `;
-const crso_load_results_bundle_fragment = `
+const crso_load_results_bundle_fragment = (docs_to_load) => `
 id
-drr17_results: ${results_fields_fragment('"drr17"')}
-dp18_results: ${results_fields_fragment('"dp18"')}
+${results_fields_fragment(docs_to_load)}
 `;
-const program_load_results_bundle_query = gql`
+const get_program_load_results_bundle_query = (docs_to_load) => gql`
 query($lang: String!, $id: String) {
   root(lang: $lang) {
     program(id: $id) {
       id
-      ${program_results_fragment}
+      ${program_results_fragment(docs_to_load)}
     }
   }
 }
 `;
-const crso_load_results_bundle_query = gql`
+const get_crso_load_results_bundle_query = (docs_to_load) => gql`
 query($lang: String!, $id: String) {
   root(lang: $lang) {
     crso(id: $id) {
       id
-      ${crso_load_results_bundle_fragment}
+      ${crso_load_results_bundle_fragment(docs_to_load)}
       programs {
-        ${program_results_fragment}
+        ${program_results_fragment(docs_to_load)}
       }
     }
   }
 }
 `;
-const dept_load_results_bundle_query = gql`
+const get_dept_load_results_bundle_query = (docs_to_load) => gql`
 query($lang: String!, $id: String) {
   root(lang: $lang) {
     org(org_id: $id) {
       id
       crsos {
-        ${crso_load_results_bundle_fragment}
+        ${crso_load_results_bundle_fragment(docs_to_load)}
       }
       programs {
-        ${program_results_fragment}
+        ${program_results_fragment(docs_to_load)}
       }
     }
   }
 }
 `;
-const all_load_results_bundle_query = gql`
+const get_all_load_results_bundle_query = (docs_to_load) => gql`
 query($lang: String!) {
   root(lang: $lang) {
     orgs {
       id
       crsos {
-        ${crso_load_results_bundle_fragment}
+        ${crso_load_results_bundle_fragment(docs_to_load)}
       }
       programs {
-        ${program_results_fragment}
+        ${program_results_fragment(docs_to_load)}
       }
     }
   }
 }
 `;
-export function api_load_results_bundle(subject){
+export function api_load_results_bundle(subject, result_docs){
+  const docs_to_load = !_.isEmpty(result_docs) ? result_docs : ["drr17", "dp18"];
+
   const level = subject && subject.level || 'all';
 
   const {
@@ -288,7 +290,10 @@ export function api_load_results_bundle(subject){
     query,
     response_data_accessor,
   } = (() => {
-    const subject_is_loaded = ({level, id}) => _.get(_api_subject_ids_with_loaded_results, `${level}.${id}`);
+    const subject_is_loaded = ({level, id}) => _.every(
+      docs_to_load,
+      doc => _.get(_api_subject_ids_with_loaded_results, `${doc}.${level}.${id}`)
+    );
 
     const all_is_loaded = () => subject_is_loaded({level: 'all', id: 'all'});
     const dept_is_loaded = (org) => all_is_loaded() || subject_is_loaded(org);
@@ -300,28 +305,28 @@ export function api_load_results_bundle(subject){
         return {
           is_loaded: program_is_loaded(subject),
           id: subject.id,
-          query: program_load_results_bundle_query,
+          query: get_program_load_results_bundle_query(docs_to_load),
           response_data_accessor: (response) => [ response.data.root.program ],
         };
       case 'crso':
         return {
           is_loaded: crso_is_loaded(subject),
           id: subject.id,
-          query: crso_load_results_bundle_query,
+          query: get_crso_load_results_bundle_query(docs_to_load),
           response_data_accessor: (response) => [ response.data.root.crso ],
         };
       case 'dept':
         return {
           is_loaded: dept_is_loaded(subject),
           id: subject.id,
-          query: dept_load_results_bundle_query,
+          query: get_dept_load_results_bundle_query(docs_to_load),
           response_data_accessor: (response) => [ response.data.root.org ],
         };
       default:
         return {
           is_loaded: all_is_loaded(subject),
           id: 'all',
-          query: all_load_results_bundle_query,
+          query: get_all_load_results_bundle_query(docs_to_load),
           response_data_accessor: (response) => response.data.root.orgs,
         };
     }
@@ -354,7 +359,10 @@ export function api_load_results_bundle(subject){
       _.each( indicators, obj => Indicator.create_and_register(obj) );
       _.each( pi_dr_links, ({program_id, result_id}) => PI_DR_Links.add(program_id, result_id) );
 
-      _.set(_api_subject_ids_with_loaded_results, `${level}.${id}`, true);
+      _.each(
+        docs_to_load,
+        doc => _.set(_api_subject_ids_with_loaded_results, `${doc}.${level}.${id}`, true)
+      );
     });
 }
 
@@ -368,7 +376,7 @@ function extract_flat_data_from_results_hierarchies(hierarchical_response_data){
     subject_node,
     subject => {
       _.each(
-        [...subject.drr17_results, ...subject.dp18_results],
+        [ ...(subject.drr17_results || []), ...(subject.dp18_results || [])],
         (result) => {
           results.push({
             id: result.id,

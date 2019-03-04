@@ -26,12 +26,13 @@ function ensure_loaded({
   stat_keys, 
   table_keys, 
   subject_level, 
-  results, 
   subject,
+  use_api_for_results,
+  results,
+  result_docs,
   require_result_counts,
   require_granular_result_counts,
   footnotes_for: footnotes_subject,
-  use_api_for_results,
 }){
   const table_set = _.chain( table_keys )
     .union(
@@ -111,7 +112,7 @@ function ensure_loaded({
   const results_prom = (
     should_load_results ?
       use_api_for_results ? 
-        api_load_results_bundle(subject) : 
+        api_load_results_bundle(subject, result_docs) : 
         load_results_bundle(subject) :
       Promise.resolve()
   );
