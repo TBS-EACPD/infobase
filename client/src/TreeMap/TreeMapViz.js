@@ -24,7 +24,7 @@ export class TreeMap extends React.Component {
   }
   componentDidUpdate() {
     // reset the state to match the props
-    this.setState({org_route: [...this.props.org_route]});
+    this.setState({ org_route: [...this.props.org_route] });
     this._update();
   }
   shouldComponentUpdate(nextProps, nextState) {
@@ -53,17 +53,25 @@ export class TreeMap extends React.Component {
     } = this.props;
 
     const org_route = (!_.isEqual(this.state.org_route, this.props.org_route) &&
-                      this.props.org_route.length < this.state.org_route.length) ?
+      this.props.org_route.length < this.state.org_route.length) ?
       this.props.org_route :
       this.state.org_route;
 
     const el = this.el;
-    el.innerHTML = `
-        <div  class="TreeMap__Mainviz">
-          <div class="viz-root" style="min-height: ${viz_height}px; position: relative;" >
-          ${text_maker("treemap_none_selected_summary")}
-            </div>
-        </div>`;
+    if (data.length == 0) {
+      el.innerHTML = `
+    <div  class="TreeMap__Mainviz">
+      <div class="viz-root" style="min-height: ${viz_height}px; position: relative;" >
+      ${text_maker("treemap_none_selected_summary")}
+        </div>
+    </div>`;
+    } else {
+      el.innerHTML = `
+    <div  class="TreeMap__Mainviz">
+      <div class="viz-root" style="min-height: ${viz_height}px; position: relative;" >
+      </div>
+    </div>`;
+    }
 
     const html_root = d3.select(el).select('div');
 
@@ -97,7 +105,7 @@ export class TreeMap extends React.Component {
       for (let i = 0; i < route_length; i++) { // TODO: rewrite to use lodash and return original root if any of them fail
         const next_name = org_route[i];
         const next_item = _.filter(data_root.children, d => d.name === next_name);
-        if(!_.isEmpty(next_item)) {
+        if (!_.isEmpty(next_item)) {
           data_root = next_item[0];
         }
       }
@@ -156,7 +164,7 @@ export class TreeMap extends React.Component {
             setRouteCallback(d.data.name, false);
             transition(d);
           })
-          .on('keydown', d=> {
+          .on('keydown', d => {
             if (d3.event.keyCode != 13) { return; }
             this.state.org_route.push(d.data.name);
             setRouteCallback(d.data.name, false);
