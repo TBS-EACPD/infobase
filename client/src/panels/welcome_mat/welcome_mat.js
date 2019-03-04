@@ -2,12 +2,11 @@ import "./welcome-mat.scss";
 import text from './welcome_mat.yaml';
 import { Fragment } from 'react';
 import classNames from 'classnames';
-import { ResponsiveLine } from '@nivo/line';
 import {
   Table,
   Panel,
-  formats,
   PanelGraph,
+  formats,
   years,
   create_text_maker_component,
   util_components,
@@ -16,13 +15,14 @@ import {
   rpb_link,
   get_appropriate_rpb_subject,
 } from "../shared.js" 
+import { TBS_responsive_line } from '../../charts/TBS_nivo_chart';
+import { ResponsiveLine } from '@nivo/line';
 
 const { Format } = util_components;
 
 const {std_years, planning_years} = years;
 const exp_cols = _.map(std_years, yr => `${yr}exp`);
 const { text_maker, TM } = create_text_maker_component(text);
-
 
 const SpendFormat = ({amt}) => <Format type="compact1" content={amt} />
 const FteFormat = ({amt}) => <Format type="big_int_real" content={amt} />
@@ -68,28 +68,29 @@ const get_historical_fte_source_link = subject => {
   }
 };
 
-
-let dataFormatter = (data) =>{
-  let formatData = _.map(data, (d,i)=>{
-    let result = {};
-    result ["x"] = i.toString();
-    result ["y"] = d;
-    return result;
+const welcome_data = (data) =>{
+  return data.map((value,index)=>{
+    return {
+      x: index.toString(),
+      y: value,
+    }
   })
-  return formatData;
 }
 
 const Chart = ({
-  is_fte,
-  use_line,
   data,
-  isMoney,
-  is_light,
+  is_money,
 }) => <div style ={{height: '250px'}}>
+  {/* <TBS_responsive_line
+    data = {data}
+    data_formatter = {welcome_data}
+    centered = {false}
+    is_money={is_money}
+  /> */}
   <ResponsiveLine
     data={[
       {
-        "data": dataFormatter(data)}]}
+        "data": welcome_data(data)}]}
     margin={{
       "top": 20,
       "right": 30,
@@ -102,8 +103,8 @@ const Chart = ({
     yScale={{
       "type": "linear",
       "stacked": true,
-      "min": _.min(data)*0.97,
-      "max": _.max(data)*1.03,
+      "max": _.max(data)*1.05,
+      "min": _.min(data)*0.95,
     }}
     axisTop={null}
     axisRight={null}
@@ -112,9 +113,8 @@ const Chart = ({
       "orient": "left",
       "tickSize": 5,
       "tickPadding": 5,
-      "tickRotation": 0,
       "tickValues": 6,
-      "format": d => isMoney? formats.compact1(d,{raw: true}) : formats.big_int_real(d,{raw: true}),
+      "format": d => is_money? formats.compact1(d,{raw: true}) : formats.big_int_real(d,{raw: true}),
     }}
     dotSize={10}
     enableGridX={false}
@@ -123,21 +123,33 @@ const Chart = ({
     animate={true}
     motionStiffness={90}
     motionDamping={15}
-    tooltipFormat={d => <tspan>{isMoney? formats.compact1(d,{raw: true}) : formats.big_int_real(d,{raw: true})}</tspan>}
+    tooltipFormat={d => <tspan>{formats.compact1(d,{raw: true})}</tspan>}
     colors="#000"
+    theme={{
+      axis: {
+        ticks: {
+          text: { 
+            fontSize: 12.5,
+            fill: '#000',
+          },
+        },
+      },
+    }}
   />
+  {/* <TBS_responsive_line
+    data={data}
+    data_formatter={welcome_data}
+    is_money={is_money}
+    centered={true}
+    margin={{
+      "top": 20,
+      "right": 30,
+      "bottom": 20,
+      "left": 70,
+    }}
+    remove_bttm_axis={true}
+  /> */}
 </div>
-  //   React.createElement(use_line ? Line : Bar, {
-  // margin: {top: 5, bottom: 5, left: 75, right: 5},
-  // height: 200,
-  // add_xaxis: false,
-  // hide_gridlines: true,
-  // ticks: _.range(0,data.length),
-  // colors: _.constant(is_light ? "#335075" : 'black'),
-  // formater: formats[ is_fte ? "big_int_real_raw" : "compact1_raw" ],
-  // series: {"0": data},
-// })
-
 
 const Pane = ({ size, children, is_header, noPadding }) => (
   <div className={`mat-grid__lg-panel${size} mat-grid__sm-panel`}>
@@ -668,7 +680,7 @@ const WelcomeMat = (props) => {
             <Chart 
               use_line 
               data={spend_data}
-              isMoney={true}
+              is_money={true}
             />
           </Pane>,
         ]}
@@ -717,8 +729,7 @@ const WelcomeMat = (props) => {
             <Chart 
               use_line 
               data={fte_data}
-              isMoney={false}
-              is_fte
+              is_money={false}
             />
           </Pane>,
         ]}

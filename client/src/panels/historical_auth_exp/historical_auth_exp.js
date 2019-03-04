@@ -14,7 +14,6 @@ import {
 } from "../shared";
 
 const { 
-  // GraphLegend,
   A11YTable,
 } = declarative_charts;
 
@@ -34,7 +33,6 @@ const text_keys_by_level = {
 
 const calculate = function( subject,info,options ) {
   const { orgVoteStatPa } = this.tables;
-
   let stacked = false;
   let auth,exp;
 
@@ -67,7 +65,7 @@ const render = function({calculations, footnotes, sources}) {
   const series_labels = (
     stacked ? 
     [text_maker("expenditures"),text_maker("unused_authorities" )] : 
-    [text_maker("authorities"),text_maker("expenditures")]
+    [text_maker("expenditures"),text_maker("authorities")]
   );
 
   let graph_content;
@@ -94,24 +92,23 @@ const render = function({calculations, footnotes, sources}) {
 
 
   } else {
-    let dataExp = exp.map((d,i) =>{
-      const value = d;
-      const value2 = auth[i];
-      let result = {};
-      result[series_labels[0]]=value;
-      result[series_labels[1]]=value2;
-      result["years"] = ticks[i];
-      return result;
+    const data_exp = exp.map((exp_value,year_index) =>{
+      return {
+        [series_labels[0]]: stacked? exp_value : auth[year_index],
+        [series_labels[1]]: stacked? auth[year_index] : exp_value,
+        years: ticks[year_index],
+      };
     });
+
     graph_content = 
       <div style={{height: 400}}>
         {
           <ResponsiveBar
-            data={dataExp}
+            data={data_exp}
             keys={series_labels}
             indexBy="years"
             margin={{
-              "top": 50,
+              "top": 60,
               "right": 55,
               "bottom": 40,
               "left": 65,
@@ -119,18 +116,18 @@ const render = function({calculations, footnotes, sources}) {
             padding={0.3}
             colors="paired"
             axisTop={null}
-            maxValue={`${_.max(exp)*1.1}`}
             axisRight={null}
             axisBottom={{
               "tickSize": 5,
               "tickPadding": 10,
-              "tickRotation": -15,
 
             }}
             axisLeft={
               {
                 "tickValues": 6,
                 "format": d => formats.compact1(d,{raw: true}),
+                "min": "auto",
+                "max": "auto", 
               }}
             label={null}
             labelSkipWidth={12}
@@ -142,16 +139,33 @@ const render = function({calculations, footnotes, sources}) {
             tooltipFormat={d=> `$${formats.big_int_real(d, {raw: true})}`}
             legends={[
               {
+                "translateX": -9,
                 "dataFrom": "keys",
                 "direction": "row",
                 "anchor": "top",
-                "itemsSpacing": 90,
+                "itemsSpacing": 120,
                 "itemWidth": 100,
                 "itemHeight": -55,
                 "itemOpacity": 0.75,
                 "symbolSize": 20,
+                "fill": '#000',
               },
             ]}
+            theme={{
+              axis: {
+                ticks: {
+                  text: { 
+                    fontSize: 12.5,
+                    fill: '#000',
+                  },
+                },
+              },
+              legends: {
+                text: {
+                  fontSize: 14,
+                },
+              },
+            }}
           />}
       </div>
   }

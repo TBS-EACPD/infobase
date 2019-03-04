@@ -20,15 +20,12 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
     ar.push(d.label);
     return ar;
   })
-
-  let dataVoteStat = keys.map((d, i) =>{
-    const label = d;
-    const value = (i? vote: stat);
-    let result = {};
-    result["id"] = label;
-    result["label"] = label;
-    result["value"] = value;
-    return result;
+  const vote_stat_data = keys.map((vote_stat_label, value_index) =>{
+    return{
+      id: vote_stat_label,
+      value: value_index? vote:stat,
+      label: vote_stat_label,
+    }
   })
 
   return (
@@ -43,7 +40,7 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
         <Col isGraph size={graph_col}>
           <div style={{height: "400px"}}>
             <ResponsivePie
-              data={dataVoteStat}
+              data={vote_stat_data}
               margin={{
                 "top": 30,
                 "right": 80,
@@ -55,26 +52,33 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
               colorBy="id"
               borderWidth={1}
               borderColor="inherit:darker(0.2)"
-              radialLabelsSkipAngle={100}
-              radialLabelsTextXOffset={6}
+              radialLabelsSkipAngle={0}
               startAngle={-120}
               enableSlicesLabels = {false}
+              enableRadialLabels={false}
               animate={true}
               motionStiffness={30}
               motionDamping={15}
-              tooltipFormat={d=> `$${formats.big_int_real(d, {raw: true})}`}           
+              tooltipFormat={d=> `$${formats.big_int_real(d, {raw: true})}`}    
               legends={[
                 {
                   "anchor": "bottom",
                   "direction": "row",
                   "translateY": 60,
-                  "translateX": 50,
+                  "translateX": 40,
                   "itemWidth": 150,
                   "itemHeight": 25,
                   "symbolSize": 20,
                   "symbolShape": "circle",
-                }
+                },
               ]}
+              theme={{
+                legends: {
+                  text: {
+                    fontSize: 15,
+                  },
+                },
+              }}
             />
           </div>
         </Col>

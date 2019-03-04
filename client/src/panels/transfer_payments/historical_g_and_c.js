@@ -10,6 +10,7 @@ import {
   run_template,
   PanelGraph,
   years,
+  dollar_formats,
   businessConstants,
   declarative_charts,
   Panel,
@@ -21,6 +22,7 @@ const { std_years } = years;
 const { Format } = util_components;
 
 const { 
+  Line,
   GraphLegend,
   A11YTable,
 } = declarative_charts;
@@ -30,7 +32,6 @@ const exp_years = std_years.map(year=> year+'exp');
 new PanelGraph({
   level: "gov",
   key: "historical_g_and_c",
-
   info_deps: [
     'orgTransferPayments_gov_info',
   ],
@@ -181,30 +182,28 @@ class HistTPTypes extends React.Component {
         label_col_header={text_maker("transfer_payment_type")}
       />;
     } else {
-      let expData = _.map(filtered_series, function(value, key ){
-        let years=_.map(std_years,run_template)
-        const id = key;
-        let data = value.map((d,i) =>{
-          let result = {};
-          result ["y"] = d;
-          result["x"]=years[i];
-          return result;
-        });
-        let result ={};
-        result["id"] = id;
-        result["data"]=data;
-        return result;
+      const expenditure_data = _.map(filtered_series, (expenditure_array,expenditure_label)=>{
+        const years=_.map(std_years,run_template)
+        return {
+          id: expenditure_label,
+          data: expenditure_array.map((expenditure_value,year_index) =>{
+            return {
+              x: years[year_index],
+              y: expenditure_value,
+            }
+          }),
+        }
       });
 
       content = <Fragment>
         <div style ={{height: '400px'}}>
           <ResponsiveLine
-            data={expData}
+            data={expenditure_data}
             margin={{
               "top": 50,
-              "right": 50,
-              "bottom": 30,
-              "left": 90,
+              "right": 30,
+              "bottom": 50,
+              "left": 70,
             }}
             yScale={{
               "type": "linear",
@@ -214,7 +213,9 @@ class HistTPTypes extends React.Component {
               "format": d => formats.compact1(d,{raw: true}),
               "tickValues": 5,
             }}
-            axisBottom={{ "tickPadding": 10 }}
+            axisBottom={{ 
+              "tickPadding": 10,
+            }}
             axisTop={null}
             axisRight={null}
             dotSize={10}
@@ -228,6 +229,16 @@ class HistTPTypes extends React.Component {
             areaOpacity={.20}
             colors={infobaseCategory10Colors}
             tooltipFormat={ d =>`$${formats.big_int_real(d,{raw: true})}`}
+            theme={{
+              axis: {
+                ticks: {
+                  text: { 
+                    fontSize: 12.5,
+                    fill: '#000',
+                  },
+                },
+              },
+            }}
           />
         </div>
       </Fragment>
@@ -241,7 +252,6 @@ class HistTPTypes extends React.Component {
       <div className={`fcol-md-${12-text_split}`}>
         {content}
       </div>
-    
     </div>;
   }
 }
@@ -269,6 +279,7 @@ class DetailedHistTPItems extends React.Component {
       .reverse()
       .value();
 
+    
     const graph_series = _.chain(prepped_rows)
       .map(row => [
         row.tp,
@@ -278,12 +289,27 @@ class DetailedHistTPItems extends React.Component {
       .fromPairs()
       .value();
 
+    
     const legend_items = _.map(prepped_rows, (row,ix) => ({
       id: ix,
       label: row.tp,
       color: color_scale(row.tp),
       active: _.includes(active_indices, ix),
     }));
+
+    const detail_expend_data = _.map(graph_series, (expend_array, expend_label)=>{
+      return {
+        id: expend_label,
+        data: expend_array.map((expend_value, year_index)=>{
+          const years = _.map(std_years, run_template);
+          return{
+            y: expend_value,
+            x: years[year_index],
+          }
+        })
+
+      }
+    })
 
     const title_el = <header className="h3">
       <TM k="historical_g_and_c_detailed_title" />
@@ -302,7 +328,7 @@ class DetailedHistTPItems extends React.Component {
           ),
         }
       });
-
+    
       return <div>
         {title_el}
         <A11YTable 
@@ -358,6 +384,54 @@ class DetailedHistTPItems extends React.Component {
               items={legend_items}
             />  
           </div>
+        </div>
+        <div className="fcol-md-8" style={{height:'400px'}}>
+
+          {/* <ResponsiveLine
+            data={detail_expend_data}
+            margin={{
+              "top": 50,
+              "right": 110,
+              "bottom": 50,
+              "left": 60,
+            }}
+            xScale={{
+              "type": "point",
+            }}
+            yScale={{
+              "type": "linear",
+              "stacked": true,
+              "min": "auto",
+              "max": "auto",
+            }}
+            axisTop={null}
+            axisRight={null}
+            axisBottom={{
+              "tickSize": 5,
+              "tickPadding": 5,
+            }}
+            axisLeft={{
+              "tickSize": 5,
+              "tickPadding": 5,
+              "format": d => formats.compact1(d, {raw: true}),
+            }}
+            dotSize={10}
+            dotBorderWidth={2}
+            dotBorderColor="#ffffff"
+            colorBy={d=>color_scale(d.id)}
+            enableDotLabel={false}
+            animate={true}
+            motionStiffness={90}
+            motionDamping={15}
+          /> */}
+          <Line
+            height={400}
+            series={graph_series}
+            formaters={dollar_formats}
+            y_axis="($)"
+            colors={color_scale}
+            ticks={_.map(std_years,run_template)}
+          />
         </div>
       </div>
     </div>;

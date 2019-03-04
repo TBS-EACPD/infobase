@@ -68,47 +68,47 @@ function result(csv_row){
 
 function indicator(row){
   
-    const [
-      id,
-      result_id,
-      name,
-      target_year,
-      target_month,
-      explanation, //"ExpResultsorTarget_EN",
-      target_type,
-      min,
-      max,
-      planned_target_str,
-      doc,
-      actual_datatype,
-      actual_target_str,
-      status_color_code,
-      status_period_code,
-    ] = row;
+  const [
+    id,
+    result_id,
+    name,
+    target_year,
+    target_month,
+    explanation, //"ExpResultsorTarget_EN",
+    target_type,
+    min,
+    max,
+    planned_target_str,
+    doc,
+    actual_datatype,
+    actual_target_str,
+    status_color_code,
+    status_period_code,
+  ] = row;
   
-    const status_color= status_color_code; //status_colors[status_color_code];
-    const status_period= status_period_code; //status_periods[status_period_code];
-    const status_key = status_color && status_period && `${status_period}_${status_color}`;
+  const status_color= status_color_code; //status_colors[status_color_code];
+  const status_period= status_period_code; //status_periods[status_period_code];
+  const status_key = status_color && status_period && `${status_period}_${status_color}`;
   
-    return {
-      id,
-      result_id,
-      name,
-      target_year: _.isNaN(parseInt(target_year)) ? target_year : parseInt(target_year),
-      target_month: _.isEmpty(target_month) ? null : +target_month,
-      explanation,
-      target_type,
-      min,
-      max,
-      planned_target_str,
-      doc,
-      actual_target_str,
-      actual_datatype,
-      status_color,
-      status_period,
-      status_key,
-    }
+  return {
+    id,
+    result_id,
+    name,
+    target_year: _.isNaN(parseInt(target_year)) ? target_year : parseInt(target_year),
+    target_month: _.isEmpty(target_month) ? null : +target_month,
+    explanation,
+    target_type,
+    min,
+    max,
+    planned_target_str,
+    doc,
+    actual_target_str,
+    actual_datatype,
+    status_color,
+    status_period,
+    status_key,
   }
+}
 
 module.exports = exports = {
   sub_program_csv_adapter,

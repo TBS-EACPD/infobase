@@ -66,25 +66,19 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
     );
   
   } else {    
-    let data = calculations.info.gov_in_year_estimates_split
     let keys = [];
-    data = data.map((d,i) =>{
-      const label = d[0];
-      const value = d[1];
-      keys.push(label);
-      let result = {};
-      result[label]=value;
-      result["title"]=label;
-      return result;
+    const estimate_data = calculations.info.gov_in_year_estimates_split.map(estimate_data_label =>{
+      keys.push(estimate_data_label[0])
+      return {
+        title: estimate_data_label[0],
+        [estimate_data_label[0]]: estimate_data_label[1],
+      }
     });
 
-
     content = (
-      <div className="keenansucks" style={{
-        height: "450px",
-      }} >
+      <div style={{ height: "450px" }} >
         <ResponsiveBar
-          data={data}
+          data={estimate_data}
           keys={keys}
           indexBy="title"
           margin={{
@@ -98,10 +92,10 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
           colors="paired"
           borderColor="inherit:darker(1.6)"
           axisBottom={{
-            "format" : d => `${(_.words(d).length>3)? d.substring(0,20)+'...':d}`,
+            "format": d => `${(_.words(d).length>3)? d.substring(0,20)+'...':d}`,
             "tickSize": 3,
             "tickRotation": -45,
-            "tickPadding": 10
+            "tickPadding": 10,
           }}
 
           axisLeft={null}
@@ -109,6 +103,16 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
           motionStiffness={90}
           motionDamping={50}    
           isInteractive={false}
+          theme={{
+            axis: {
+              ticks: {
+                text: { 
+                  fontSize: 12.5,
+                  fill: '#000',
+                },
+              },
+            },
+          }}
         />
       </div>
     );
@@ -128,7 +132,6 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
     </StdPanel>
   )
 };
-window._
 
 new PanelGraph({
   level: "dept",
@@ -145,7 +148,6 @@ new PanelGraph({
   render: estimates_split_render_w_text_key("dept_in_year_estimates_split_text"),
 });
 
-//change this back after
 new PanelGraph({
   level: "gov",
   machinery_footnotes: false,

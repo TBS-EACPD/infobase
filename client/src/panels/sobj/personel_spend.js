@@ -77,7 +77,7 @@ new PanelGraph({
           margin={{
             "top": 50,
             "right": 40,
-            "bottom": 40,
+            "bottom": 50,
             "left": 65,
           }}
           xScale={{
@@ -94,7 +94,10 @@ new PanelGraph({
             "format": d => formats.compact1(d,{raw: true}),
             "tickValues": 5,
           }}
-          axisBottom={{ "tickPadding": 10 }}
+          axisBottom={{ 
+            "tickPadding": 10,
+            // "tickRotation": -35
+          }}
           dotSize={10}
           enableDotLabel={false}
           dotLabel="y"
@@ -103,6 +106,16 @@ new PanelGraph({
           motionStiffness={90}
           motionDamping={15}
           tooltipFormat={d=> <span>{`$${formats.big_int_real(d, {raw: true})}`}</span>}
+          theme={{
+            axis: {
+              ticks: {
+                text: { 
+                  fontSize: 12.5,
+                  fill: '#000',
+                },
+              },
+            },
+          }}
         />
       </div>;
     }

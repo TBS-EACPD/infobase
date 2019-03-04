@@ -11,6 +11,7 @@
     "node": "^9.0"
   },
   "dependencies": {
+    "@nivo/circle-packing": "^0.52.1",
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
     "d3-dsv": "^1.0.8",

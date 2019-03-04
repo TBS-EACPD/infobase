@@ -120,7 +120,7 @@ export default function({models}){
         } else {
           return null;
         }
-      }
+      },
     },
     SpecialFundingCase: {
       name: bilingual_field("name"),

@@ -2,25 +2,22 @@ import {
   PanelGraph,
   businessConstants,
   years,
-  dollar_formats,
+  formats,
   util_components,
   Panel,
   declarative_charts,
   run_template,
 } from "../shared.js";
 import { text_maker, TM } from './sobj_text_provider.js';
-
+import { ResponsiveLine } from '@nivo/line';
+import { TBS_responsive_line } from "../../charts/TBS_nivo_chart.js";
 const { 
-  Line,
   GraphLegend,
   A11YTable,
 } = declarative_charts;
 const { sos } = businessConstants;
 const { std_years } = years;
 const { Format } = util_components;
-
-
-
 
 new PanelGraph({
   level: "dept",
@@ -84,8 +81,6 @@ new PanelGraph({
         </div>
       </Panel>
     );
-  
-    
   },   
   
 });
@@ -110,13 +105,24 @@ class SobjLine extends React.Component {
       color: colors(label),
     }));
 
-
     const graph_series = _.chain(data)
       .filter( ({label}) => _.includes(active_sobjs, label ))
       .map( ({label, data}) => [label, data] )
       .fromPairs()
       .value();
 
+    const spending_data = _.map(graph_series, (spending_array,spending_label)=>{
+      return{
+        id: spending_label,
+        data: spending_array.map((spending_value,year_index)=>{
+          const years = _.map(std_years,run_template);
+          return{
+            x: years[year_index],
+            y: spending_value,
+          }
+        }),
+      }
+    })
 
     return (
       <div className="frow">
@@ -125,20 +131,72 @@ class SobjLine extends React.Component {
             <GraphLegend
               items={legend_items}
               onClick={id => 
-                this.setState({
+                `${(spending_data.length===1 && spending_data.map(o =>{return o.id}).includes(id))? null :this.setState({
                   active_sobjs: _.toggle_list(active_sobjs, id),
-                })
+                })}`
               }
             />
           </div>
         </div>
-        <div className="fcol-md-8">
-          <Line
-            series={graph_series}
-            ticks={_.map(std_years, run_template)}
-            y_axis="($)"
-            formatters={dollar_formats}
-            colors={colors}
+        <div className="fcol-md-8" style={{height: '500px'}}>
+          {/* <TBS_responsive_line
+            data={spending_data}
+            margin={{"top": 10,
+              "right": 30,
+              "bottom": 90,
+              "left": 70,
+            }}
+          /> */}
+          <ResponsiveLine
+            data={spending_data}
+            margin={{
+              "top": 10,
+              "right": 30,
+              "bottom": 90,
+              "left": 70,
+            }}
+            xScale={{
+              "type": "point",
+            }}
+            yScale={{
+              "type": "linear",
+              "stacked": true,
+              "min": "auto",
+              "max": "auto",
+            }}
+            axisTop={null}
+            axisRight={null}
+            axisBottom={{
+              "tickSize": 5,
+              "tickPadding": 5,
+            }}
+            axisLeft={{
+              "tickSize": 5,
+              "tickPadding": 5,
+              "tickRotation": 0,
+              "format": d => formats.compact1(d , {raw: true}),
+              "tickValues": 5,
+            }}
+            dotSize={10}
+            colorBy={d=> {return colors(d.id)}}
+            dotColor="inherit:darker(0.3)"
+            dotBorderWidth={2}
+            dotBorderColor="#ffffff"
+            enableDotLabel={false}
+            animate={true}
+            motionStiffness={90}
+            motionDamping={15}
+            tooltipFormat={ d =>`$${formats.big_int_real(d,{raw: true})}`}
+            theme={{
+              axis: {
+                ticks: {
+                  text: { 
+                    fontSize: 12.5,
+                    fill: '#000',
+                  },
+                },
+              },
+            }}
           />
         </div>
       </div>

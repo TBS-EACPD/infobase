@@ -67,7 +67,7 @@ export default function({models}){
             auth: _.sumBy(group, "auth"),
           }))
           .value();
-      }
+      },
     },
     Org: {
       transfer_payments_data: _.identity,

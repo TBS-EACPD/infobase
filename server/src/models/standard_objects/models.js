@@ -33,7 +33,7 @@ function top_n_with_other(flat_data, year, n=3){
       so_num: 0, //convention to mean 'other' sobjs 
       amount: _.sumBy(others, 'amount'),
       year,
-    }
+    },
   ];
 } 
 

@@ -58,7 +58,7 @@ export default function({models}){
         } else if(level === "program"){
           return ProgSobj.get_top_n_sobjs(subject.id, year, n);
         }
-      }
+      },
       
     },
     Org: {
@@ -69,7 +69,7 @@ export default function({models}){
     },
     Gov: {
       standard_object_data: _.identity,
-    }
+    },
   };
 
   return {
