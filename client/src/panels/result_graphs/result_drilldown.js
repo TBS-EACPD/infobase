@@ -168,15 +168,6 @@ class SingleSubjExplorer extends React.Component {
     this.state = { query: "" };
     this.debounced_set_query = _.debounce(this.debounced_set_query, 500);
   }
-  componentDidMount(){
-    const {
-      doc,
-      subject,
-      set_doc,
-    } = this.props;
-
-    set_doc(doc, subject, use_api_for_results);
-  }
   handleQueryChange(new_query){
     this.setState({
       query: new_query,
@@ -396,48 +387,6 @@ const map_state_to_props_from_memoized_funcs = memoized_funcs => {
 
 
 class SingleSubjResultsContainer extends React.Component {
-  render(){
-    const { 
-      subject,
-      has_dp_data,
-      has_drr_data,
-    } = this.props;
-
-    const scheme = single_subj_results_scheme;
-    const scheme_key = scheme.key;
-
-    const reducer = combineReducers({
-      root: root_reducer, 
-      [scheme_key]: scheme.reducer,
-    });
-
-    const mapDispatchToProps = dispatch =>({ 
-      ...map_dispatch_to_root_props(dispatch),
-      ...scheme.dispatch_to_props(dispatch),
-    });
-
-    const mapStateToProps = map_state_to_props_from_memoized_funcs(get_memoized_funcs([ scheme ]));
-
-    const initialState = {
-      root: ({...initial_root_state, scheme_key}),
-      [scheme_key]: get_initial_single_subj_results_state({ subj_guid: subject.guid, has_drr_data, has_dp_data }),
-    };
-
-    const Container = connect(mapStateToProps, mapDispatchToProps)(SingleSubjExplorer);
-    
-    return (
-      <Provider store={createStore( reducer, initialState, applyMiddleware(redux_promise_middleware) )}>
-        <Container 
-          subject={subject}
-          has_dp_data={has_dp_data}
-          has_drr_data={has_drr_data}
-        />
-      </Provider>
-    );
-  }
-}
-
-class EnsureDataForInitialStateIsLoaded extends React.Component {
   constructor(){
     super();
 
@@ -463,7 +412,11 @@ class EnsureDataForInitialStateIsLoaded extends React.Component {
       .then( () => this.setState({loading: false}) );
   }
   render(){
-    const { children } = this.props;
+    const { 
+      subject,
+      has_dp_data,
+      has_drr_data,
+    } = this.props;
     const { loading } = this.state;
 
     if (loading) {
@@ -473,7 +426,37 @@ class EnsureDataForInitialStateIsLoaded extends React.Component {
         </div>
       );
     } else {
-      return children;
+      const scheme = single_subj_results_scheme;
+      const scheme_key = scheme.key;
+  
+      const reducer = combineReducers({
+        root: root_reducer, 
+        [scheme_key]: scheme.reducer,
+      });
+  
+      const mapDispatchToProps = dispatch =>({ 
+        ...map_dispatch_to_root_props(dispatch),
+        ...scheme.dispatch_to_props(dispatch),
+      });
+  
+      const mapStateToProps = map_state_to_props_from_memoized_funcs(get_memoized_funcs([ scheme ]));
+  
+      const initialState = {
+        root: ({...initial_root_state, scheme_key}),
+        [scheme_key]: get_initial_single_subj_results_state({ subj_guid: subject.guid, has_drr_data, has_dp_data }),
+      };
+  
+      const Container = connect(mapStateToProps, mapDispatchToProps)(SingleSubjExplorer);
+      
+      return (
+        <Provider store={createStore( reducer, initialState, applyMiddleware(redux_promise_middleware) )}>
+          <Container 
+            subject={subject}
+            has_dp_data={has_dp_data}
+            has_drr_data={has_drr_data}
+          />
+        </Provider>
+      );
     }
   }
 }
@@ -531,21 +514,13 @@ _.each(['program','dept','crso'], lvl => {
 
       return (
         <Panel title={text_maker("result_drilldown_title", { has_dp_data, has_drr_data })}>
-          <EnsureDataForInitialStateIsLoaded
+          <SingleSubjResultsContainer
             {...{
               subject,
               has_dp_data,
               has_drr_data,
             }}
-          >
-            <SingleSubjResultsContainer
-              {...{
-                subject,
-                has_dp_data,
-                has_drr_data,
-              }}
-            />
-          </EnsureDataForInitialStateIsLoaded>
+          />
         </Panel>
       );
 
