@@ -83,6 +83,7 @@
     "react-router-redux": "^5.0.0-alpha.9",
     "react-transition-group": "^1.0",
     "redux": "^3.7.1",
+    "redux-promise-middleware": "^6.1.0",
     "reselect": "^3.0.1",
     "sass-loader": "^6.0.6",
     "script-loader": "^0.7.0",

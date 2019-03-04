@@ -9,13 +9,16 @@ import {
   Panel,
 } from '../shared';
 import { Details } from '../../components/Details.js';
-import { Indicator } from './results_common.js';
+import { 
+  Indicator,
+  ResultCounts,
+} from './results_common.js';
 import { StatusIconTable, InlineStatusIconList } from './components.js';
-
 const { SpinnerWrapper, Format, TextAbbrev } = util_components;
 
 //drilldown stuff
-import { combineReducers, createStore } from 'redux';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
+import redux_promise_middleware from 'redux-promise-middleware';
 import { Provider, connect } from 'react-redux';
 import { get_root } from '../../gen_expl/hierarchy_tools.js';
 import { single_subj_results_scheme, get_initial_single_subj_results_state } from '../../gen_expl/results_scheme.js';
@@ -24,7 +27,7 @@ import {
   ResultNodeContent, 
   spending_header, 
   fte_header, 
-  ResultCounts,
+  ResultCounts as ResultCountsComponent,
 } from '../../gen_expl/result_displays.js';
 import { 
   get_memoized_funcs, 
@@ -34,6 +37,9 @@ import {
   map_dispatch_to_root_props, 
 } from '../../gen_expl/state_and_memoizing';
 
+import { ensure_loaded } from '../../core/lazy_loader.js';
+
+const use_api_for_results = false;
 
 const get_non_col_content_func = createSelector(
   _.property('doc'),
@@ -78,7 +84,7 @@ const get_non_col_content_func = createSelector(
 
 const get_children_grouper = createSelector(
   _.identity,
-  ()=> {
+  () => {
 
     return (node,children) => {
       if(node.data.result){ //results render their children manually through the non-col content
@@ -101,8 +107,8 @@ const get_children_grouper = createSelector(
 const get_col_defs = createSelector(
   _.property('doc'),
   _.property('is_status_filter_enabled'),
-  _.property('status_status_key_whitelist'),
-  (doc, is_status_filter_enabled, status_status_key_whitelist) => {
+  _.property('status_key_whitelist'),
+  (doc, is_status_filter_enabled, status_key_whitelist) => {
     return [
       {
         id: "name",
@@ -142,7 +148,7 @@ const get_col_defs = createSelector(
                         Indicator.get_flat_indicators(subject)
                     ),
                     (indicator) => indicator.doc === doc && 
-                      ( !is_status_filter_enabled || _.includes(status_status_key_whitelist, indicator.status_key) )
+                      ( !is_status_filter_enabled || _.includes(status_key_whitelist, indicator.status_key) )
                   )
                 } 
               />
@@ -159,13 +165,22 @@ const get_col_defs = createSelector(
 class SingleSubjExplorer extends React.Component {
   constructor(){
     super()
-    this.state = { _query: "" };
+    this.state = { query: "" };
     this.debounced_set_query = _.debounce(this.debounced_set_query, 500);
+  }
+  componentDidMount(){
+    const {
+      doc,
+      subject,
+      set_doc,
+    } = this.props;
+
+    set_doc(doc, subject, use_api_for_results);
   }
   handleQueryChange(new_query){
     this.setState({
-      _query: new_query,
-      loading: new_query.length > 3 ? true : undefined,
+      query: new_query,
+      loading_query: new_query.length > 3 ? true : undefined,
     });
     this.debounced_set_query(new_query);
   } 
@@ -173,17 +188,17 @@ class SingleSubjExplorer extends React.Component {
     this.props.set_query(new_query);
     this.timedOutStateChange = setTimeout(()=>{
       this.setState({
-        loading: false,
+        loading_query: false,
       });
     }, 500);
+  }
+  clearQuery(){
+    this.setState({query: ""});
+    this.props.clear_query("");
   }
   componentWillUnmount(){
     !_.isUndefined(this.debounced_set_query) && this.debounced_set_query.cancel();
     !_.isUndefined(this.timedOutStateChange) && clearTimeout(this.timedOutStateChange);
-  }
-  clearQuery(){
-    this.setState({_query: ""});
-    this.props.clear_query("");
   }
   render(){
     const {
@@ -196,8 +211,11 @@ class SingleSubjExplorer extends React.Component {
 
       set_query,
       toggle_node,
+
+      subject,
       
       //...scheme_props
+      data_loading,
       doc,
       set_doc,
       has_subs,
@@ -205,115 +223,125 @@ class SingleSubjExplorer extends React.Component {
       toggle_status_status_key,
       clear_status_filter,
       is_status_filter_enabled,
-      status_status_key_whitelist,              
+      status_key_whitelist,              
     } = this.props;
-    const { loading } = this.state;
+    const { 
+      loading_query,
+      query,
+    } = this.state;
 
-
-    const root = get_root(flat_nodes);
-
-    const explorer_config = {
-      children_grouper: get_children_grouper({doc}),
-      column_defs: get_col_defs({doc, is_status_filter_enabled, status_status_key_whitelist}),
-      shouldHideHeader: true,
-      zebra_stripe: true,
-      onClickExpand: id => toggle_node(id),
-      get_non_col_content: get_non_col_content_func({doc}),
-    };
-
-    const inner_content = <div>
-
-      <div style={{ marginTop: "10px" }}>
-        <ResultCounts {...this.props} />
+    let inner_content = (
+      <div style={{ paddingTop: "100px", marginBottom: "-40px" }}>
+        <SpinnerWrapper config_name={"sub_route"} />
       </div>
-      {doc==='drr17' &&  
-        <div 
-          style={{
-            padding: '10px 10px',
-            marginTop: "20px",
-            marginBottom: "20px",
-          }}
-        >
-          <StatusIconTable 
-            active_list={status_status_key_whitelist}
-            icon_counts={icon_counts} 
-            onIconClick={toggle_status_status_key}
-            onClearClick={clear_status_filter}
-          />
-        </div>
-      }
-      { has_subs && 
-        <Details
-          summary_content={
-            <TM k="where_can_find_subs_question" />
-          }
-          content={
-            <div style={{margin: "10px 0"}}>
-              <TM k="where_can_find_subs_answer" />
-            </div>
-          }
-        />
-      }
+    );
 
-
-      { _.get(base_hierarchy, "length") > 30 && 
-        <div style={{marginTop: '15px'}}>
-          <form
-
-            style={{marginBottom: "15px"}}
-            onSubmit={evt => {
-              evt.preventDefault()
-              evt.stopPropagation()
-              set_query(evt.target.querySelector('input').value);
-              this.refs.focus_mount.focus();
-            }}
-          >
-            <input 
-              aria-label={text_maker("explorer_search_is_optional")}
-              className="form-control input-lg"
-              type="text"
-              style={{width: "100%"}}
-              placeholder={text_maker("filter_results")}
-              onChange={evt => this.handleQueryChange(evt.target.value)}
-            />
-            {
-              window.is_a11y_mode &&
-              <input 
-                type="submit"
-                name="search"
-                value={text_maker("explorer_search")}
+    if (!data_loading){
+      const root = get_root(flat_nodes);
+  
+      const explorer_config = {
+        children_grouper: get_children_grouper({doc}),
+        column_defs: get_col_defs({doc, is_status_filter_enabled, status_key_whitelist}),
+        shouldHideHeader: true,
+        zebra_stripe: true,
+        onClickExpand: id => toggle_node(id),
+        get_non_col_content: get_non_col_content_func({doc}),
+      };
+  
+      inner_content = (
+        <div>
+          <div style={{ marginTop: "10px" }}>
+            <ResultCountsComponent {...this.props} />
+          </div>
+          {doc==='drr17' &&  
+            <div 
+              style={{
+                padding: '10px 10px',
+                marginTop: "20px",
+                marginBottom: "20px",
+              }}
+            >
+              <StatusIconTable 
+                active_list={status_key_whitelist}
+                icon_counts={icon_counts} 
+                onIconClick={toggle_status_status_key}
+                onClearClick={clear_status_filter}
               />
-            }
-          </form>
-        </div>
-      }
-      <div 
-        tabIndex={-1}
-        className="explorer-focus-mount"
-        ref="focus_mount" 
-        style={{position: 'relative'}}
-        aria-label={text_maker("explorer_focus_mount")}
-      >
-        {loading && 
-          <div className="loading-overlay">
-            <div style={{height: '200px', position: 'relative'}}>
-              <SpinnerWrapper config_name={"sub_route"} /> 
             </div>
+          }
+          { has_subs && 
+            <Details
+              summary_content={
+                <TM k="where_can_find_subs_question" />
+              }
+              content={
+                <div style={{margin: "10px 0"}}>
+                  <TM k="where_can_find_subs_answer" />
+                </div>
+              }
+            />
+          }
+          { _.get(base_hierarchy, "length") > 30 && 
+            <div style={{marginTop: '15px'}}>
+              <form
+    
+                style={{marginBottom: "15px"}}
+                onSubmit={evt => {
+                  evt.preventDefault()
+                  evt.stopPropagation()
+                  set_query(evt.target.querySelector('input').value);
+                  this.refs.focus_mount.focus();
+                }}
+              >
+                <input 
+                  aria-label={text_maker("explorer_search_is_optional")}
+                  className="form-control input-lg"
+                  type="text"
+                  style={{width: "100%"}}
+                  placeholder={text_maker("filter_results")}
+                  onChange={evt => this.handleQueryChange(evt.target.value)}
+                  value={query}
+                />
+                {
+                  window.is_a11y_mode &&
+                  <input 
+                    type="submit"
+                    name="search"
+                    value={text_maker("explorer_search")}
+                  />
+                }
+              </form>
+            </div>
+          }
+          <div 
+            tabIndex={-1}
+            className="explorer-focus-mount"
+            ref="focus_mount" 
+            style={{position: 'relative'}}
+            aria-label={text_maker("explorer_focus_mount")}
+          >
+            {loading_query && 
+              <div className="loading-overlay">
+                <div style={{height: '200px', position: 'relative'}}>
+                  <SpinnerWrapper config_name={"sub_route"} /> 
+                </div>
+              </div>
+            }
+            {is_filtering && _.isEmpty(root.children) &&
+              <div style={{fontWeight: '500', fontSize: '1.5em', textAlign: 'center'}}>  
+                <TM k="search_no_results" />
+              </div>
+            }
+            <Explorer
+              config={explorer_config}
+              root={root}
+            />
           </div>
-        }
-        {is_filtering && _.isEmpty(root.children) &&
-          <div style={{fontWeight: '500', fontSize: '1.5em', textAlign: 'center'}}>  
-            <TM k="search_no_results" />
-          </div>
-        }
-        <Explorer
-          config={explorer_config}
-          root={root}
-        />
-      </div>
-    </div>;
+        </div>
+      );
+    }
 
-    const tab_on_click = (doc)=> set_doc!==doc && set_doc(doc);
+    const tab_on_click = (doc) => set_doc !== doc && set_doc(doc, subject, use_api_for_results);
 
     if(!has_dp_data || !has_drr_data){ //don't wrap the inner content in a tab layout
       return inner_content;
@@ -349,12 +377,9 @@ class SingleSubjExplorer extends React.Component {
           {inner_content}
         </div>
       </div>;
-
     }
-
   }
 }
-
 
 
 const map_state_to_props_from_memoized_funcs = memoized_funcs => {
@@ -398,10 +423,10 @@ class SingleSubjResultsContainer extends React.Component {
       [scheme_key]: get_initial_single_subj_results_state({ subj_guid: subject.guid, has_drr_data, has_dp_data }),
     };
 
-    const Container = connect(mapStateToProps, mapDispatchToProps)(SingleSubjExplorer)
-
+    const Container = connect(mapStateToProps, mapDispatchToProps)(SingleSubjExplorer);
+    
     return (
-      <Provider store={createStore(reducer,initialState)}>
+      <Provider store={createStore( reducer, initialState, applyMiddleware(redux_promise_middleware) )}>
         <Container 
           subject={subject}
           has_dp_data={has_dp_data}
@@ -409,11 +434,49 @@ class SingleSubjResultsContainer extends React.Component {
         />
       </Provider>
     );
-
   }
-
 }
 
+class EnsureDataForInitialStateIsLoaded extends React.Component {
+  constructor(){
+    super();
+
+    this.state = {
+      loading: true,
+    };
+  }
+  componentDidMount(){
+    const { 
+      subject,
+      has_dp_data,
+      has_drr_data,
+    } = this.props;
+
+    const { doc } = get_initial_single_subj_results_state({ subj_guid: subject.guid, has_drr_data, has_dp_data });
+
+    ensure_loaded({
+      subject,
+      results: true,
+      result_doc: doc,
+      use_api_for_results,
+    })
+      .then( () => this.setState({loading: false}) );
+  }
+  render(){
+    const { children } = this.props;
+    const { loading } = this.state;
+
+    if (loading) {
+      return (
+        <div style={{position: "relative", height: "80px", marginBottom: "-10px"}}>
+          <SpinnerWrapper config_name={"sub_route"} />
+        </div>
+      );
+    } else {
+      return children;
+    }
+  }
+}
 
 _.each(['program','dept','crso'], lvl => {
 
@@ -422,24 +485,39 @@ _.each(['program','dept','crso'], lvl => {
     level: lvl,
     footnotes: false,
     depends_on: ["programSpending", "programFtes"],
-    requires_results: true,
+    requires_results: !use_api_for_results,
+    requires_result_counts: use_api_for_results,
     key: "explore_results",
     calculate(subject){
+      if (!use_api_for_results) {
+        const indicators = Indicator.get_flat_indicators(subject);
 
-      const indicators = Indicator.get_flat_indicators(subject);
+        const has_dp_data = _.find(indicators, {doc: 'dp18'});
+        const has_drr_data = _.find(indicators, {doc: 'drr17'});
 
-      const has_dp_data = _.find(indicators, {doc: 'dp18'});
-      const has_drr_data = _.find(indicators, {doc: 'drr17'});
+        if(!has_dp_data && !has_drr_data){
+          return false;
+        }
 
-      if(!has_dp_data && !has_drr_data){
-        return false;
+        return {
+          has_dp_data,
+          has_drr_data,
+        };
+      } else {
+        const subject_result_counts = ResultCounts.get_dept_counts(lvl === 'dept' ? subject.acronym : subject.id);
+
+        const has_dp_data = !_.isNull(subject_result_counts.dp18_indicators) && subject_result_counts.dp18_indicators > 0;
+        const has_drr_data = !_.isNull(subject_result_counts.drr17_total) && subject_result_counts.drr17_total > 0;
+
+        if(!has_dp_data && !has_drr_data){
+          return false;
+        }
+
+        return {
+          has_dp_data,
+          has_drr_data,
+        };
       }
-
-      return {
-        has_dp_data,
-        has_drr_data,
-      };
-
     },
 
     render({calculations}){
@@ -452,14 +530,22 @@ _.each(['program','dept','crso'], lvl => {
       } = calculations;
 
       return (
-        <Panel title={text_maker("result_drilldown_title", { has_dp_data, has_drr_data})}>
-          <SingleSubjResultsContainer
+        <Panel title={text_maker("result_drilldown_title", { has_dp_data, has_drr_data })}>
+          <EnsureDataForInitialStateIsLoaded
             {...{
               subject,
               has_dp_data,
               has_drr_data,
             }}
-          />
+          >
+            <SingleSubjResultsContainer
+              {...{
+                subject,
+                has_dp_data,
+                has_drr_data,
+              }}
+            />
+          </EnsureDataForInitialStateIsLoaded>
         </Panel>
       );
 
