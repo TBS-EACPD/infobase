@@ -213,6 +213,7 @@ function get_data_drf(perspective, year, year_1, year_2, filter_var, get_changes
       .value(),
     _.filter(orgs, o => { return !o.subject.ministry })
   );
+  if (data.length == 0){return data}
   const root = {
     name: "Government",
     children: data,
@@ -266,6 +267,7 @@ function get_data_so(perspective, year, year_1, year_2, filter_var, get_changes)
       .value(),
     _.filter(all_orgs, o => { return !o.subject.ministry })
   );
+  if (data.length == 0){return data}
   const data_root = {
     name: "Government",
     children: data,
@@ -317,6 +319,7 @@ function get_data_tp(perspective, year, year_1, year_2, filter_var, get_changes)
       .value(),
     _.filter(all_orgs, o => { return !o.subject.ministry })
   );
+  if (data.length == 0){return data}
   const root = {
     name: "Government",
     children: data,
@@ -376,6 +379,7 @@ function get_data_vs(perspective, year, year_1, year_2, filter_var, get_changes)
       .value(),
     _.filter(orgs, o => { return !o.subject.ministry })
   );
+  if (data.length == 0){return data}
   const root = {
     name: "Government",
     children: data,
