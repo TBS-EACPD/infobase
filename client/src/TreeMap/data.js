@@ -241,7 +241,11 @@ function get_data_so(perspective, year, year_1, year_2, filter_var, get_changes)
         .map(so => ({
           name: tm(`SOBJ${so}`),
           so_num: so,
-          amount: _.filter(org_sobj_table.q(org).data, {so_num: so}).length ? _.chain(org_sobj_table.q(org).data).filter({so_num: so}).head().value()[header_col(perspective,year)] : 0,
+          amount: _.filter(org_sobj_table.q(org).data, {so_num: so}).length ? 
+            get_changes ? 
+            _.chain(org_sobj_table.q(org).data).filter({so_num: so}).head().value()[header_col(perspective,year_2)] - _.chain(org_sobj_table.q(org).data).filter({so_num: so}).head().value()[header_col(perspective,year_1)] :
+            _.chain(org_sobj_table.q(org).data).filter({so_num: so}).head().value()[header_col(perspective,year)] :
+          0,
         }))
         .filter(n => has_non_zero_or_non_zero_children(n, perspective))
         .value(),
