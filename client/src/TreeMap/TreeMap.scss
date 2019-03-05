@@ -94,8 +94,6 @@ $treeMapTooltipColor: #767f89;
   }
 }
 
-// TODO: this is a mess, need to reorganize
-
 .TreeMapNode__ContentBoxContainer {
   &:hover{
     background-color: $treeMapSelectedColor;
