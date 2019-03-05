@@ -218,19 +218,19 @@ class VersionNumber extends React.Component {
 export class PageDetails extends React.Component {
   render(){
     return (
-      <div className="pagedetails">
+      <div className="pagedetails frow">
         {
           // Temporarily disabled, FINALIZE TEXT AND TRANSLATION BEFORE ENABLING!
           false &&
-          <div className="pagedetails__report-a-problem col-sm-6 col-lg-5">
+          <div className="pagedetails__report-a-problem fcol-md-8 fcol-sm-12">
             <ReportAProblem />
           </div>
         }
         {
           // Line below's just to keep the positioning right while the ReportAProblem div's missing
-          <div className="col-sm-6 col-lg-5"/>
+          <div className="fcol-md-8 fcol-sm-12"/>
         }
-        <div className="pagedetails__version-number">
+        <div className="pagedetails__version-number fcol-md-4 fcol-sm-6">
           <VersionNumber />
         </div>
       </div>
