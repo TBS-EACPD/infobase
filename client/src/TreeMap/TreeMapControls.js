@@ -199,12 +199,12 @@ export class TreeMapControls extends React.Component {
                   _.map(year_changes[perspective], (id => ({ 
                     id, 
                     display: `${run_template("{{" + id.split(":")[0] + "}}")} ${text_maker("to")} ${run_template("{{" + id.split(":")[1] + "}}")}`,
-                    active: id === year 
+                    active: id === year,
                   }))) :
                   _.map(years[perspective], (id => ({
                     id,
                     display: run_template("{{" + id + "}}"),
-                    active: id === year
+                    active: id === year,
                   })))
                 }
                 onChange={id => {this.handle_click("year",id)}}
