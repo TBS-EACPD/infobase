@@ -8,7 +8,7 @@ treemap_breadcrumbs:
 
 treemap_meta_desc:
   en: TreeMap visualization of Government of Canada organizations by how much they spend and how many people they employ
-  fr: Carte proportionelle de dépenses des organisations du gouvernement du Canada et le nombre d'employés à leur service
+  fr: Carte proportionelle des dépenses des organisations du gouvernement du Canada et le nombre d'employés à leur service
 
 click_to_zoom_out:
   en: Click to zoom out
@@ -16,7 +16,7 @@ click_to_zoom_out:
 
 click_rect_to_zoom_in:
   en: Click a rectangle to zoom in
-  fr: Cliquez un rectangle pour approfondir
+  fr: Cliquez un rectangle pour l'approfondir
 
 smaller_items_text:
   en: Smaller Items
@@ -29,7 +29,7 @@ treemap_display_value_label:
 
 treemap_color_by_label:
   en: Colour items by
-  fr: Colorer par
+  fr: Colorier par
 
 treemap_vstype_filter:
   en: Filter by Vote / Statutory type
@@ -122,17 +122,16 @@ treemap_instructions:
    * By **Expenditures by Standard Object** shows total expenditures by {{gl_tt "Standard Object" "SOBJ"}}, filterable by Standard Object category.
 
   fr: |
-   Cliquez sur les boîtes ci-dessous pour comparer visuellement combien les organisations dépensent et combien de personnes elles emploient.
-   Organisations sont groupées par portefeuille ministériel, et les organisations plus petits sont grouper ensemble pour visualization plus facile.
+   Cliquez sur les boîtes ci-dessous pour comparer visuellement comment les organisations dépensent et combien de personnes elles emploient.
+   Les organisations sont regroupées par portefeuille ministériel, et les plus pettites sont groupées ensemble pour faciliter leur visibilité.
    
    Pour commencer, choisissez à partir de l’une des perspectives d’exploration suivantes, et ensuite choisissez une année ou une période de deux années pour comparer :
-   * Par **dépenses totales** – montre les organisations fédérales groupées par {{gl_tt "dépenses" "EXP"}} totales. Les boîtes peuvent être couleurées par dépenses ou par ETP.
-   * Par **nombre total d’employés** – montre les organisations fédérales groupées selon le {{gl_tt "nombre total d’employés" "FTE"}} qu'elles emploient. Les boîtes peuvent etre couleurées par dépenses ou par ETP.
+   * Par **dépenses totales** – montre les organisations fédérales groupées par {{gl_tt "dépenses" "EXP"}} totales. Les boîtes peuvent être colorées par dépenses ou par ETP.
+   * Par **nombre total d’employés** – montre les organisations fédérales groupées selon le {{gl_tt "nombre total d’employés" "FTE"}} qu'elles emploient. Les boîtes peuvent etre colorées par dépenses ou par ETP.
    * Par **paiements de transfert** – montre les organisations fédérales groupées par {{gl_tt "paiements de transfert" "TP"}} totales, avec la possibilité de filtrer les données selon le type de paiement.
    * Par **dépenses par crédit / poste législatif** – montre les organisations fédérales groupées par dépenses totales, avec la possibilité de filtrer les données entre des {{gl_tt "dépenses votées" "VOTED"}} et des {{gl_tt "dépenses législatives" "STAT_EXP"}}. 
    * Par **dépenses par article courant**  – montre les dépenses totales selon les {{gl_tt "articles courants" "SOBJ"}} avec la possibilité de filtrer.
 
-skip_to_main_content: {
-  en: "Skip to main content",
-  fr: "Passer au contenu principal",
-}
+skip_to_main_content:
+  en: "Skip to main content"
+  fr: "Passer au contenu principal"
