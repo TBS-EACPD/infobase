@@ -1,5 +1,7 @@
 import { text_maker, TM } from './vote-stat-text-prodiver.js';
-import { ResponsiveBar } from '../../../src/nivo-bar.js';
+import { TBS_responsive_bar } from '../../charts/TBS_nivo_chart';
+
+
 import {
   formats,
   PanelGraph,
@@ -77,41 +79,25 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
 
     content = (
       <div style={{ height: "450px" }} >
-        <ResponsiveBar
-          data={estimate_data}
-          keys={keys}
-          indexBy="title"
-          margin={{
+        <TBS_responsive_bar
+          data = {estimate_data}
+          keys = {keys}
+          label_format = { d=><tspan y={ -4 }> {formats.compact1(d, {raw: true})} </tspan>}
+          is_interactive = {false}
+          enable_label = {true}
+          index_by = "title"
+          colors = "paired"
+          margin = {{            
             "top": 50,
             "right": 55,
             "bottom": 120,
-            "left": 40,
+            "left": 80,
           }}
-          labelFormat={d => <tspan y={ -4 }> {formats.compact1(d, {raw: true})} </tspan>}
-          padding={0.3}
-          colors="paired"
-          borderColor="inherit:darker(1.6)"
-          axisBottom={{
+          bttm_axis= {{
             "format": d => `${(_.words(d).length>3)? d.substring(0,20)+'...':d}`,
             "tickSize": 3,
             "tickRotation": -45,
             "tickPadding": 10,
-          }}
-
-          axisLeft={null}
-          labelTextColor="inherit:darker(1.6)"
-          motionStiffness={90}
-          motionDamping={50}    
-          isInteractive={false}
-          theme={{
-            axis: {
-              ticks: {
-                text: { 
-                  fontSize: 12.5,
-                  fill: '#000',
-                },
-              },
-            },
           }}
         />
       </div>

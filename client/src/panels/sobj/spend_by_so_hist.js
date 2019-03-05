@@ -2,14 +2,12 @@ import {
   PanelGraph,
   businessConstants,
   years,
-  formats,
   util_components,
   Panel,
   declarative_charts,
   run_template,
 } from "../shared.js";
 import { text_maker, TM } from './sobj_text_provider.js';
-import { ResponsiveLine } from '@nivo/line';
 import { TBS_responsive_line } from "../../charts/TBS_nivo_chart.js";
 const { 
   GraphLegend,
@@ -139,64 +137,16 @@ class SobjLine extends React.Component {
           </div>
         </div>
         <div className="fcol-md-8" style={{height: '500px'}}>
-          {/* <TBS_responsive_line
-            data={spending_data}
-            margin={{"top": 10,
-              "right": 30,
-              "bottom": 90,
-              "left": 70,
-            }}
-          /> */}
-          <ResponsiveLine
-            data={spending_data}
-            margin={{
+          <TBS_responsive_line
+            data = {spending_data}
+            margin = {{
               "top": 10,
               "right": 30,
               "bottom": 90,
               "left": 70,
             }}
-            xScale={{
-              "type": "point",
-            }}
-            yScale={{
-              "type": "linear",
-              "stacked": true,
-              "min": "auto",
-              "max": "auto",
-            }}
-            axisTop={null}
-            axisRight={null}
-            axisBottom={{
-              "tickSize": 5,
-              "tickPadding": 5,
-            }}
-            axisLeft={{
-              "tickSize": 5,
-              "tickPadding": 5,
-              "tickRotation": 0,
-              "format": d => formats.compact1(d , {raw: true}),
-              "tickValues": 5,
-            }}
-            dotSize={10}
             colorBy={d=> {return colors(d.id)}}
-            dotColor="inherit:darker(0.3)"
-            dotBorderWidth={2}
-            dotBorderColor="#ffffff"
-            enableDotLabel={false}
-            animate={true}
-            motionStiffness={90}
-            motionDamping={15}
-            tooltipFormat={ d =>`$${formats.big_int_real(d,{raw: true})}`}
-            theme={{
-              axis: {
-                ticks: {
-                  text: { 
-                    fontSize: 12.5,
-                    fill: '#000',
-                  },
-                },
-              },
-            }}
+            is_money = {true}
           />
         </div>
       </div>

@@ -6,7 +6,6 @@ import {
   Table,
   Panel,
   PanelGraph,
-  formats,
   years,
   create_text_maker_component,
   util_components,
@@ -16,7 +15,6 @@ import {
   get_appropriate_rpb_subject,
 } from "../shared.js" 
 import { TBS_responsive_line } from '../../charts/TBS_nivo_chart';
-import { ResponsiveLine } from '@nivo/line';
 
 const { Format } = util_components;
 
@@ -68,87 +66,38 @@ const get_historical_fte_source_link = subject => {
   }
 };
 
+
 const welcome_data = (data) =>{
-  return data.map((value,index)=>{
-    return {
-      x: index.toString(),
-      y: value,
-    }
-  })
+  return {
+    "data": data.map((value,index)=>{
+      return {
+        x: index.toString(),
+        y: value,
+      }
+    })}
 }
 
 const Chart = ({
   data,
   is_money,
 }) => <div style ={{height: '250px'}}>
-  {/* <TBS_responsive_line
-    data = {data}
-    data_formatter = {welcome_data}
-    centered = {false}
+  <TBS_responsive_line
+    id = {false}
+    data = {[welcome_data(data)]}
+    max = {_.max(data)*1.05}
+    enableGridX = {false}
+    enableGridY = {false}
+    min = {_.min(data)*0.95}
     is_money={is_money}
-  /> */}
-  <ResponsiveLine
-    data={[
-      {
-        "data": welcome_data(data)}]}
+    tick_amount={5}
+    remove_bottom_axis = {true}
     margin={{
       "top": 20,
       "right": 30,
       "bottom": 20,
       "left": 70,
-    }}
-    xScale={{
-      "type": "point",
-    }}
-    yScale={{
-      "type": "linear",
-      "stacked": true,
-      "max": _.max(data)*1.05,
-      "min": _.min(data)*0.95,
-    }}
-    axisTop={null}
-    axisRight={null}
-    axisBottom={null}
-    axisLeft={{
-      "orient": "left",
-      "tickSize": 5,
-      "tickPadding": 5,
-      "tickValues": 6,
-      "format": d => is_money? formats.compact1(d,{raw: true}) : formats.big_int_real(d,{raw: true}),
-    }}
-    dotSize={10}
-    enableGridX={false}
-    enableGridY={false}
-    enableDotLabel={false}
-    animate={true}
-    motionStiffness={90}
-    motionDamping={15}
-    tooltipFormat={d => <tspan>{formats.compact1(d,{raw: true})}</tspan>}
-    colors="#000"
-    theme={{
-      axis: {
-        ticks: {
-          text: { 
-            fontSize: 12.5,
-            fill: '#000',
-          },
-        },
-      },
     }}
   />
-  {/* <TBS_responsive_line
-    data={data}
-    data_formatter={welcome_data}
-    is_money={is_money}
-    centered={true}
-    margin={{
-      "top": 20,
-      "right": 30,
-      "bottom": 20,
-      "left": 70,
-    }}
-    remove_bttm_axis={true}
-  /> */}
 </div>
 
 const Pane = ({ size, children, is_header, noPadding }) => (

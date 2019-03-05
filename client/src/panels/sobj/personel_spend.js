@@ -1,5 +1,6 @@
 import { text_maker, TM } from './sobj_text_provider.js';
 import { ResponsiveLine } from '@nivo/line';
+import { TBS_responsive_line } from '../../charts/TBS_nivo_chart';
 import {
   formats,
   PanelGraph,
@@ -72,50 +73,19 @@ new PanelGraph({
       graphData["data"] = personnelData;
 
       graph_content = <div style={{height: 400}}>
-        <ResponsiveLine
-          data={[graphData]}
-          margin={{
+        <TBS_responsive_line
+          data = {[graphData]}
+          margin = {{
             "top": 50,
             "right": 40,
             "bottom": 50,
             "left": 65,
           }}
-          xScale={{
-            "type": "point",
-          }}
-          yScale={{
-            "type": "linear",
-            "min": `${_.min(values)*.90}`,
-            "max": `${_.max(values)*1.05}`,
-          }}
-          axisTop={null}
-          axisRight={null}
-          axisLeft={{
-            "format": d => formats.compact1(d,{raw: true}),
-            "tickValues": 5,
-          }}
-          axisBottom={{ 
-            "tickPadding": 10,
-            // "tickRotation": -35
-          }}
-          dotSize={10}
-          enableDotLabel={false}
-          dotLabel="y"
-          animate={true}
+          max = {_.max(values)*1.05}
+          min = {_.min(values)*.90}
+          is_money = {true}
           colors={d3.schemeCategory10}
-          motionStiffness={90}
-          motionDamping={15}
-          tooltipFormat={d=> <span>{`$${formats.big_int_real(d, {raw: true})}`}</span>}
-          theme={{
-            axis: {
-              ticks: {
-                text: { 
-                  fontSize: 12.5,
-                  fill: '#000',
-                },
-              },
-            },
-          }}
+          bttm_axis ={{ "tickPadding": 10}}
         />
       </div>;
     }

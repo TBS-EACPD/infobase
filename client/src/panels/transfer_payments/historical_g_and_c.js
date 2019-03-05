@@ -1,16 +1,14 @@
 import {Fragment } from 'react';
-import { ResponsiveLine } from '@nivo/line';
 import { infobaseCategory10Colors } from '../../core/color_schemes.js';
+import { TBS_responsive_line } from '../../charts/TBS_nivo_chart';
 import {
   text_maker,
   TM,
 } from './gnc_text_provider.js';
 import {
-  formats,
   run_template,
   PanelGraph,
   years,
-  dollar_formats,
   businessConstants,
   declarative_charts,
   Panel,
@@ -22,7 +20,6 @@ const { std_years } = years;
 const { Format } = util_components;
 
 const { 
-  Line,
   GraphLegend,
   A11YTable,
 } = declarative_charts;
@@ -182,6 +179,7 @@ class HistTPTypes extends React.Component {
         label_col_header={text_maker("transfer_payment_type")}
       />;
     } else {
+      
       const expenditure_data = _.map(filtered_series, (expenditure_array,expenditure_label)=>{
         const years=_.map(std_years,run_template)
         return {
@@ -197,48 +195,12 @@ class HistTPTypes extends React.Component {
 
       content = <Fragment>
         <div style ={{height: '400px'}}>
-          <ResponsiveLine
-            data={expenditure_data}
-            margin={{
-              "top": 50,
-              "right": 30,
-              "bottom": 50,
-              "left": 70,
-            }}
-            yScale={{
-              "type": "linear",
-              "stacked": true,
-            }}
-            axisLeft={{
-              "format": d => formats.compact1(d,{raw: true}),
-              "tickValues": 5,
-            }}
-            axisBottom={{ 
-              "tickPadding": 10,
-            }}
-            axisTop={null}
-            axisRight={null}
-            dotSize={10}
-            enableDotLabel={false}   
-            dotBorderWidth={2}
-            dotBorderColor="#ffffff"   
-            lineWidth={2}
-            motionStiffness={60}
-            motionDamping={15}
-            enableArea={true}
-            areaOpacity={.20}
+          <TBS_responsive_line
+            min = {0}
+            enableArea = {true}
+            data = {expenditure_data}
             colors={infobaseCategory10Colors}
-            tooltipFormat={ d =>`$${formats.big_int_real(d,{raw: true})}`}
-            theme={{
-              axis: {
-                ticks: {
-                  text: { 
-                    fontSize: 12.5,
-                    fill: '#000',
-                  },
-                },
-              },
-            }}
+            is_money = {true}
           />
         </div>
       </Fragment>
@@ -307,7 +269,6 @@ class DetailedHistTPItems extends React.Component {
             x: years[year_index],
           }
         })
-
       }
     })
 
@@ -386,51 +347,16 @@ class DetailedHistTPItems extends React.Component {
           </div>
         </div>
         <div className="fcol-md-8" style={{height:'400px'}}>
-
-          {/* <ResponsiveLine
-            data={detail_expend_data}
-            margin={{
+          <TBS_responsive_line
+            data = {detail_expend_data}
+            margin = {{
               "top": 50,
-              "right": 110,
+              "right": 30,
               "bottom": 50,
-              "left": 60,
+              "left": 70,
             }}
-            xScale={{
-              "type": "point",
-            }}
-            yScale={{
-              "type": "linear",
-              "stacked": true,
-              "min": "auto",
-              "max": "auto",
-            }}
-            axisTop={null}
-            axisRight={null}
-            axisBottom={{
-              "tickSize": 5,
-              "tickPadding": 5,
-            }}
-            axisLeft={{
-              "tickSize": 5,
-              "tickPadding": 5,
-              "format": d => formats.compact1(d, {raw: true}),
-            }}
-            dotSize={10}
-            dotBorderWidth={2}
-            dotBorderColor="#ffffff"
             colorBy={d=>color_scale(d.id)}
-            enableDotLabel={false}
-            animate={true}
-            motionStiffness={90}
-            motionDamping={15}
-          /> */}
-          <Line
-            height={400}
-            series={graph_series}
-            formaters={dollar_formats}
-            y_axis="($)"
-            colors={color_scale}
-            ticks={_.map(std_years,run_template)}
+            is_money = {true}
           />
         </div>
       </div>

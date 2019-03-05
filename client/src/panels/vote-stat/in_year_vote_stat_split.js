@@ -1,5 +1,7 @@
 import { text_maker, TM } from './vote-stat-text-prodiver.js';
 import { ResponsivePie } from '@nivo/pie';
+import { TBS_responsive_pie } from '../../charts/TBS_nivo_chart';
+
 import {
   formats,
   PanelGraph,
@@ -20,11 +22,12 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
     ar.push(d.label);
     return ar;
   })
+  
   const vote_stat_data = keys.map((vote_stat_label, value_index) =>{
     return{
-      id: vote_stat_label,
+      id: vote_stat_label[0],
       value: value_index? vote:stat,
-      label: vote_stat_label,
+      label: vote_stat_label[0],
     }
   })
 
@@ -39,28 +42,11 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
       {!window.is_a11y_mode &&
         <Col isGraph size={graph_col}>
           <div style={{height: "400px"}}>
-            <ResponsivePie
-              data={vote_stat_data}
-              margin={{
-                "top": 30,
-                "right": 80,
-                "bottom": 60,
-                "left": 50,
-              }}
-              innerRadius={0.5}
-              colors="paired"
-              colorBy="id"
-              borderWidth={1}
-              borderColor="inherit:darker(0.2)"
-              radialLabelsSkipAngle={0}
-              startAngle={-120}
-              enableSlicesLabels = {false}
-              enableRadialLabels={false}
-              animate={true}
-              motionStiffness={30}
-              motionDamping={15}
-              tooltipFormat={d=> `$${formats.big_int_real(d, {raw: true})}`}    
-              legends={[
+            <TBS_responsive_pie
+              data = {vote_stat_data}
+              colors = "paired"
+              tooltip_format = {d=> `$${formats.big_int_real(d, {raw: true})}`}
+              legend = {[
                 {
                   "anchor": "bottom",
                   "direction": "row",
@@ -72,7 +58,7 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
                   "symbolShape": "circle",
                 },
               ]}
-              theme={{
+              theme = {{
                 legends: {
                   text: {
                     fontSize: 15,

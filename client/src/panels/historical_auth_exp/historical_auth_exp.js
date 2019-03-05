@@ -1,5 +1,5 @@
 import text from './historical_auth_exp.yaml';
-import { ResponsiveBar } from '../../../src/nivo-bar.js';
+import { TBS_responsive_bar } from '../../charts/TBS_nivo_chart';
 
 import {
   formats,
@@ -103,41 +103,13 @@ const render = function({calculations, footnotes, sources}) {
     graph_content = 
       <div style={{height: 400}}>
         {
-          <ResponsiveBar
-            data={data_exp}
+          <TBS_responsive_bar
+            data = {data_exp}
             keys={series_labels}
-            indexBy="years"
-            margin={{
-              "top": 60,
-              "right": 55,
-              "bottom": 40,
-              "left": 65,
-            }}
-            padding={0.3}
-            colors="paired"
-            axisTop={null}
-            axisRight={null}
-            axisBottom={{
-              "tickSize": 5,
-              "tickPadding": 10,
-
-            }}
-            axisLeft={
-              {
-                "tickValues": 6,
-                "format": d => formats.compact1(d,{raw: true}),
-                "min": "auto",
-                "max": "auto", 
-              }}
-            label={null}
-            labelSkipWidth={12}
-            labelSkipHeight={12}
-            labelTextColor="inherit:darker(1.6)"
-            animate={true}
-            motionStiffness={90}
-            motionDamping={15}
-            tooltipFormat={d=> `$${formats.big_int_real(d, {raw: true})}`}
-            legends={[
+            index_by = "years"
+            colors = "paired"
+            tooltip_format={d=> `$${formats.big_int_real(d, {raw: true})}`}
+            legend = {[
               {
                 "translateX": -9,
                 "dataFrom": "keys",
@@ -166,7 +138,8 @@ const render = function({calculations, footnotes, sources}) {
                 },
               },
             }}
-          />}
+          />
+        }
       </div>
   }
 
