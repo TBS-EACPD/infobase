@@ -67,7 +67,8 @@ $treeMapTooltipColor: #767f89;
   text-decoration: none;
   white-space: nowrap; 
   overflow: hidden;
-  text-overflow: normal; 
+  text-overflow: ellipsis; 
+  max-width: 100%;
 }
 
 
