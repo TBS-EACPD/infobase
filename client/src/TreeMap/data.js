@@ -243,7 +243,6 @@ function get_data_so_old(perspective, year, year_1, year_2, filter_var, get_chan
             .map(prog => ({
               subject: prog,
               name: prog.fancy_name,
-              asdf: program_sobj_table.q(prog).data,
               children: parseInt(filter_var) ?
                 _.chain(program_sobj_table.q(prog).data)
                   .filter({ so_num: parseInt(filter_var) })

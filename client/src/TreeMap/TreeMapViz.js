@@ -102,7 +102,7 @@ export class TreeMap extends React.Component {
 
     if (!_.isEmpty(org_route)) {
       const route_length = org_route.length;
-      for (let i = 0; i < route_length; i++) { // TODO: rewrite to use lodash and return original root if any of them fail
+      for (let i = 0; i < route_length; i++) {
         const next_name = org_route[i];
         const next_item = _.filter(data_root.children, d => d.name === next_name);
         if (!_.isEmpty(next_item)) {
