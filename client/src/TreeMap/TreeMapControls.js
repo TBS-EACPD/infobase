@@ -78,8 +78,8 @@ const vs_type_controls = [
   { id: "1", display: text_maker("vstype1") },
   { id: "2", display: text_maker("vstype2") },
   { id: "3", display: text_maker("vstype3") },
-  { id: "4", display: text_maker("vstype4") },
-  { id: "5", display: text_maker("vstype5") },
+  //{ id: "4", display: text_maker("vstype4") },
+  //{ id: "5", display: text_maker("vstype5") },
   //{ id: "6", display: text_maker("vstype6") },
   //{ id: "9", display: text_maker("vstype9") }, // Other
   { id: "999", display: text_maker("treemap_vstype999") },
