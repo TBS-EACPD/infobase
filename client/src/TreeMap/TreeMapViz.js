@@ -219,8 +219,7 @@ export class TreeMap extends React.Component {
         const that = this;
         main.append('div')
           .attr('class', d => classNames('TreeMapNode__ContentBoxContainer', !_.isEmpty(d.children) && "TreeMapNode__ContentBoxContainer--has-children"))
-          .attr("tabindex", "0")
-          .on("click focus", function (d) {
+          .on("click", function (d) {
             if (d.toolTipped) {
               d3.selectAll('.TM_TooltipContainer')
                 .remove();

@@ -239,7 +239,7 @@ function std_tooltip_render_changes(tooltip_sel) {
 function mobile_tooltip_render(tooltip_sel, year) {
   tooltip_sel.html(function (d) {
     let tooltip_html = `<div>
-    <div>${d.data.name}</div>
+    <div>${d.data.name}: ${year}</div>
     <hr class="BlueHLine">
     <div>${format_display_number(d.data.amount)}</div>`;
     if (d.data.parent_amount) {

@@ -95,15 +95,16 @@ $treeMapTooltipColor: #767f89;
 }
 
 .TreeMapNode__ContentBoxContainer {
-  &:hover{
+  &:hover,
+  &:focus {
     background-color: $treeMapSelectedColor;
     border: 2px solid $treeMapSelectedBorder;
   }
-  position: absolute;
-
   &.TreeMapNode__ContentBoxContainer--has-children {
     cursor: pointer;
   }
+  position: absolute;
+
 }
 
 .TreeMapNode__ContentBoxContainer--tapped {
