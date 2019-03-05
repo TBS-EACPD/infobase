@@ -116,7 +116,7 @@ function create_new_path(cur_params, new_param, new_val) {
       new_year = new_val; break;
     case("get_changes"):
       new_val ? new_get_changes = new_val : new_get_changes = '';
-      new_val ? new_year = year_to_year_changes[cur_params.year] : new_year = cur_params.year.split(":")[1];
+      new_val ? new_year = year_to_year_changes[cur_params.year] : new_year = cur_params.year.split(":")[0];
       break;
   }
   const new_path = `/treemap/${new_perspective}/${new_color_var}/${new_filter_var}/${new_year}/${new_get_changes}`;
