@@ -28,42 +28,32 @@ export class TreeMapLegend extends React.Component {
     return (
       <Fragment>
         <div className='row'>
-          <div className="col-sm-12">
-            <h5>Reading the chart</h5>
-          </div>
-        </div>
-        <div className='row'>
           <div className="col-sm-5">
             <div className="row">
-              <div className="col-sm-6">Boxes are scaled proportionally according to {size_controls[perspective]}</div>
-              <div className="col-sm-6">
-                <svg width="110" height="110">
-                  <g transform="translate(5,5)">
-                    <rect className="mutLegendBG" fill="white" stroke="black" strokeWidth="2" width="100" height="100" />
-                    <rect className="mutLegendBG" fill="white" stroke="black" strokeWidth="2" width="50" height="50" />
-                    <text className="breakLabels" x="45" y="45" style={{ textAnchor: "end", display: "block" }} >
-                      {`${formats.big_int_real_raw(25000)}`}
-                    </text>
-                    <text className="breakLabels" x="95" y="95" style={{ textAnchor: "end", display: "block" }} >
-                      {`${formats.big_int_real_raw(100000)}`}
-                    </text>
-                  </g>
-                </svg>
+              <div className="col-sm-4" style={{textAlign: "right", paddingRight: "0px"}}>
+                {proportional_block()}
+              </div>
+              <div className="col-sm-8">
+                {`${text_maker("treemap_legend_text")} ${size_controls[perspective]}.`}
               </div>
             </div>
           </div>
           <div className="col-sm-7">
-            <div className="row">
-              {legend_measure_text}
-              <svg width="500" height="66">
+            <div className="row" style={{textAlign: "center"}}>
+              <svg width={`${legend_cols.length*80+10}`} height="50">
                 <g className="mutLegendGroup" transform="translate(0,0)">
-                  <rect className="mutLegendBG" fill="white" stroke="black" width="500" height="66" />
+                  <rect className="mutLegendBG" fill="rgb(253, 253, 253)" stroke="none" width="500" height="50" />
                   {_.map(legend_cols, (o, ix) => {
                     return legend_block(o.val, o.col, ix);
                   })
                   }
                 </g>
               </svg>
+            </div>
+            <div className="row" style={{textAlign: "center"}}>
+              <span style={{paddingTop: "40px", paddingBottom: "40px"}}>
+                {legend_measure_text}
+              </span>
             </div>
           </div>
         </div>
@@ -72,8 +62,22 @@ export class TreeMapLegend extends React.Component {
   }
 }
 
+const proportional_block = () =>
+  <svg width="70" height="70">
+    <g transform="translate(5,5)">
+      <rect className="mutLegendBG" fill="white" stroke="black" strokeWidth="2" width="60" height="60" />
+      <rect className="mutLegendBG" fill="white" stroke="black" strokeWidth="2" width="30" height="30" />
+      <text className="breakLabels" x="25" y="25" style={{ textAnchor: "end", display: "block" }} >
+        {`${formats.big_int_real_raw(25)}`}
+      </text>
+      <text className="breakLabels" x="55" y="55" style={{ textAnchor: "end", display: "block" }} >
+        {`${formats.big_int_real_raw(100)}`}
+      </text>
+    </g>
+  </svg>;
+
 const legend_block = (val, col, ix) =>
-  <g className="legendCells" transform={`translate(${ix * 80 + 20},20)`}>
+  <g className="legendCells" transform={`translate(${ix * 80 + 10},5)`}>
     <rect className="breakRect" height="25" width="80" fill={col} stroke="black" />
     {val &&
       <text className="breakLabels" x="0" y="40" style={{ textAnchor: "middle", display: "block" }} >

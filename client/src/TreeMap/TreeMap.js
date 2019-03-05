@@ -25,7 +25,7 @@ const text_maker = create_text_maker([treemap_text]);
 
 const format_display_number = (value, is_fte = false, raw = false) =>
   raw ?
-    is_fte ? `${formats.big_int_real_raw(Math.round(value))} ${text_maker("fte")}` : formats.compact1_raw(value):
+    is_fte ? `${formats.big_int_real_raw(Math.round(value))} ${text_maker("fte")}` : formats.compact1_raw(value) :
     is_fte ? `${formats.big_int_real(Math.round(value))} ${text_maker("fte")}` : formats.compact1(value);
 
 /* NODE RENDERING FUNCTIONS */
@@ -147,41 +147,41 @@ const n_legend_vals = 4;
 
 // this is super complicated and hacky but it's because it's hard to get diverging color
 // scales to look like how you want.
-function get_legend_cols(color_var,get_changes,colorScale){
+function get_legend_cols(color_var, get_changes, colorScale) {
   const increase = get_changes ?
-    color_var==="ftes" ?
-      2*(raw_fte_limit/n_legend_vals) :
-      2*(raw_spending_limit/n_legend_vals) :
-    perc_limit/n_legend_vals;
+    color_var === "ftes" ?
+      2 * (raw_fte_limit / n_legend_vals) :
+      2 * (raw_spending_limit / n_legend_vals) :
+    perc_limit / n_legend_vals;
   let raw_vals = get_changes ?
-    color_var==="ftes" ?
-      _.concat(-raw_fte_limit-increase, _.range(-raw_fte_limit, raw_fte_limit+increase, increase)) :
-      _.concat(-raw_spending_limit-increase, _.range(-raw_spending_limit, raw_spending_limit+increase, increase)) :
-      _.range(0, perc_limit+increase, increase);
-  const processed_vals = _.map(raw_vals, v=>{
-    return v < 0 ? v + increase-increase/2 : v;
+    color_var === "ftes" ?
+      _.concat(-raw_fte_limit - increase, _.range(-raw_fte_limit, raw_fte_limit + increase, increase)) :
+      _.concat(-raw_spending_limit - increase, _.range(-raw_spending_limit, raw_spending_limit + increase, increase)) :
+    _.range(0, perc_limit + increase, increase);
+  const processed_vals = _.map(raw_vals, v => {
+    return v < 0 ? v + increase - increase / 2 : v;
   });
-  const nodes = _.map(processed_vals, v => ({data: {ftes:v, parent_ftes: 1, amount: v, parent_amount: 1}}));
+  const nodes = _.map(processed_vals, v => ({ data: { ftes: v, parent_ftes: 1, amount: v, parent_amount: 1 } }));
   const color_vals = _.map(nodes, n => colorScale(n));
   const output = _.map(_.zip(raw_vals, color_vals), pair => ({
     val: get_changes ?
-      format_display_number(pair[0],color_var==="ftes",true) :
-      formats.percentage_raw(Math.round(pair[0]*100)/100),
+      format_display_number(pair[0], color_var === "ftes", true) :
+      formats.percentage_raw(Math.round(pair[0] * 100) / 100),
     col: pair[1],
   }));
-  if(get_changes){ output[0].val = undefined; }
+  if (get_changes) { output[0].val = undefined; }
   return output;
 }
 
-function get_legend_measure_text(perspective,get_changes){
+function get_legend_measure_text(color_var, get_changes) {
   return get_changes ?
-    perspective==="drf_fte" ?
+  color_var === "ftes" ?
       text_maker("fte") :
-    `${text_maker("expenditures")} ($)` :
-  perspective==="drf_fte" ?
-    `${text_maker("fte")}
+      `${text_maker("expenditures")} ($)` :
+      color_var === "ftes" ?
+      `${text_maker("fte")}
     (${text_maker("percent_of_parent")})` :
-  `${text_maker("expenditures")}
+      `${text_maker("expenditures")}
   (${text_maker("percent_of_parent")})`
 }
 
@@ -420,12 +420,6 @@ export default class TreeMapper extends React.Component {
           <div>
             <div className="TreeMap__Wrapper">
               <TreeMapInstructions />
-              <TreeMapLegend
-                perspective={perspective}
-                legend_cols={get_legend_cols(color_var,get_changes,colorScale)}
-                legend_measure_text={get_legend_measure_text(perspective,get_changes)}
-                n_legend_vals={n_legend_vals}
-              />
               <div className="row">
                 <div className="col-md-10">
                   <div className="row">
@@ -455,6 +449,14 @@ export default class TreeMapper extends React.Component {
                         curried_node_render(true) :
                         curried_node_render(false)}
                       viz_height={app_height - topbar_height}
+                    />
+                  </div>
+                  <div className="row">
+                    <TreeMapLegend
+                      perspective={perspective}
+                      legend_cols={get_legend_cols(color_var, get_changes, colorScale)}
+                      legend_measure_text={get_legend_measure_text(color_var, get_changes)}
+                      n_legend_vals={n_legend_vals}
                     />
                   </div>
                 </div>

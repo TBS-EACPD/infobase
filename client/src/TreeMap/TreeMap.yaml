@@ -104,6 +104,10 @@ percent_of_parent:
   en: "% of parent"
   fr: "% de l'organisation mère"
 
+treemap_legend_text:
+  en: Boxes are scaled proportionally according to
+  fr: Les boîes sont proportionelle selon les
+
 treemap_instructions:
   transform: [handlebars, markdown]
   en: |
