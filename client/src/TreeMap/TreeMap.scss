@@ -98,12 +98,13 @@ $treeMapTooltipColor: #767f89;
   &:hover,
   &:focus {
     background-color: $treeMapSelectedColor;
-    border: 2px solid $treeMapSelectedBorder;
+    border-color: $treeMapSelectedBorder;
   }
   &.TreeMapNode__ContentBoxContainer--has-children {
     cursor: pointer;
   }
   position: absolute;
+  border: 2px solid rgba(0,0,0,0);
 
 }
 
