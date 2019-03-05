@@ -175,10 +175,10 @@ function get_legend_cols(color_var, get_changes, colorScale) {
 
 function get_legend_measure_text(color_var, get_changes) {
   return get_changes ?
-  color_var === "ftes" ?
+    color_var === "ftes" ?
       text_maker("fte") :
       `${text_maker("expenditures")} ($)` :
-      color_var === "ftes" ?
+    color_var === "ftes" ?
       `${text_maker("fte")}
     (${text_maker("percent_of_parent")})` :
       `${text_maker("expenditures")}
@@ -322,6 +322,11 @@ function check_props(props) {
   return props;
 }
 
+
+function skip(){
+  document.querySelector("#TreeMap__Main").focus();
+};
+
 export default class TreeMapper extends React.Component {
   constructor(props) {
     super(props);
@@ -407,7 +412,6 @@ export default class TreeMapper extends React.Component {
     }
     const topbar_height = 55;
 
-
     const display_year = run_template("{{" + year + "}}");
     return (
       <StandardRouteContainer
@@ -419,6 +423,8 @@ export default class TreeMapper extends React.Component {
           <SpinnerWrapper ref="spinner" config_name={"route"} /> :
           <div>
             <div className="TreeMap__Wrapper">
+              <h1> {text_maker("treemap_title")} </h1>
+              <button className="TreeMap__SkipLink button-unstyled a11y-version-link" tabIndex="0" onClick={skip}>{text_maker("skip_to_main_content")}</button>
               <TreeMapInstructions />
               <div className="row">
                 <div className="col-md-10">

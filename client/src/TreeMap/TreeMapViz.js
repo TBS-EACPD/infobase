@@ -60,14 +60,14 @@ export class TreeMap extends React.Component {
     const el = this.el;
     if (data.length == 0) {
       el.innerHTML = `
-    <div  class="TreeMap__Mainviz">
+    <div class="TreeMap__Mainviz">
       <div class="viz-root" style="min-height: ${viz_height}px; position: relative;" >
       ${text_maker("treemap_none_selected_summary")}
         </div>
     </div>`;
     } else {
       el.innerHTML = `
-    <div  class="TreeMap__Mainviz">
+    <div tabindex="0" id="TreeMap__Main" class="TreeMap__Mainviz">
       <div class="viz-root" style="min-height: ${viz_height}px; position: relative;" >
       </div>
     </div>`;

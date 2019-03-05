@@ -131,3 +131,8 @@ treemap_instructions:
    * Par **paiements de transfert** – montre les organisations fédérales groupées par {{gl_tt "paiements de transfert" "TP"}} totales, avec la possibilité de filtrer les données selon le type de paiement.
    * Par **dépenses par crédit / poste législatif** – montre les organisations fédérales groupées par dépenses totales, avec la possibilité de filtrer les données entre des {{gl_tt "dépenses votées" "VOTED"}} et des {{gl_tt "dépenses législatives" "STAT_EXP"}}. 
    * Par **dépenses par article courant**  – montre les dépenses totales selon les {{gl_tt "articles courants" "SOBJ"}} avec la possibilité de filtrer.
+
+skip_to_main_content: {
+  en: "Skip to main content",
+  fr: "Passer au contenu principal",
+}

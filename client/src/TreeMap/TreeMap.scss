@@ -23,6 +23,9 @@ $treeMapTooltipColor: #767f89;
   background-color: $treeMapBackgroundColor;
 }
 
+.TreeMap__SkipLink:focus {
+  outline: -webkit-focus-ring-color auto 5px;
+}
 
 .TreeMap__SideBar {
   background-color: $treeMapBackgroundColor;

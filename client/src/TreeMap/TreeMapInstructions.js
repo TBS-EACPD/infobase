@@ -12,7 +12,6 @@ export class TreeMapInstructions extends React.Component {
   render() {
     return (
       <Fragment>
-        <h1> {text_maker("treemap_title")} </h1>
         <div className='row'>
           <div className="col-sm-12 col-md-12">
             <div className='explore_description' dangerouslySetInnerHTML={{ __html: text_maker("treemap_instructions") }} />
