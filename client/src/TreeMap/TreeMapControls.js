@@ -43,7 +43,7 @@ const year_changes = {
   "drf": all_year_changes,
   "drf_ftes": all_year_changes,
   "tp": all_year_changes,
-  "vote_stat": all_year_changes.slice(1, 4),
+  "vote_stat": all_year_changes.slice(0, 4),
   "so": all_year_changes.slice(2, 4),
 }
 
