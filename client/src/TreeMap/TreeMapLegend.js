@@ -27,9 +27,9 @@ export class TreeMapLegend extends React.Component {
     } = this.props;
     return (
       <Fragment>
-        <div className='row'>
+        <div className='row' style={{marginLeft: "0px", marginRight: "0px"}}>
           <div className="col-sm-5">
-            <div className="row">
+            <div className="row" style={{marginLeft: "0px", marginRight: "0px"}}>
               <div className="col-sm-4" style={{textAlign: "right", paddingRight: "0px"}}>
                 {proportional_block()}
               </div>
@@ -40,7 +40,7 @@ export class TreeMapLegend extends React.Component {
           </div>
           <div className="col-sm-7">
             <div className="row" style={{textAlign: "center"}}>
-              <svg width={`${legend_cols.length*80+10}`} height="50">
+              <svg width={`${legend_cols.length*60+10}`} height="50">
                 <g className="mutLegendGroup" transform="translate(0,0)">
                   <rect className="mutLegendBG" fill="rgb(253, 253, 253)" stroke="none" width="500" height="50" />
                   {_.map(legend_cols, (o, ix) => {
@@ -77,8 +77,8 @@ const proportional_block = () =>
   </svg>;
 
 const legend_block = (val, col, ix) =>
-  <g className="legendCells" transform={`translate(${ix * 80 + 10},5)`}>
-    <rect className="breakRect" height="25" width="80" fill={col} stroke="black" />
+  <g className="legendCells" transform={`translate(${ix * 60 + 10},5)`}>
+    <rect className="breakRect" height="25" width="60" fill={col} stroke="black" />
     {val &&
       <text className="breakLabels" x="0" y="40" style={{ textAnchor: "middle", display: "block" }} >
         {val}
