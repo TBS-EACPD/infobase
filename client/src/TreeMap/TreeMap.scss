@@ -228,7 +228,7 @@ $treeMapTooltipColor: #767f89;
       line-height: normal;
       & > .treemap-options__option {
         border-color: $treeMapControlsColor;
-        border-width: 2px;
+        border-width: 1px 2px 1px 2px;
         background-color: #ffffff;
         color: $treeMapControlsColor;
         padding: 5px;
@@ -237,18 +237,21 @@ $treeMapTooltipColor: #767f89;
       }
       & > .treemap-options__option:last-child {
         border-radius: 0px 0px 5px 5px;
+        border-width: 1px 2px 2px 2px;
       }
       
-      & > .treemap-options__option.treemap-options__option--active {
-        color: #000000;
+      & > .treemap-options__option.treemap-options__option--active,
+      & > .treemap-options__option.treemap-options__option--active:active {
+        border-color: $treeMapControlsColor;
         background-color: $treeMapControlsColorMid;
+        color: #000;
       }
-      
       & > .treemap-options__option:not(.treemap-options__option--active):hover,
       & > .treemap-options__option:not(.treemap-options__option--active):active,
       & > .treemap-options__option:not(.treemap-options__option--active):focus { 
         background-color: $treeMapControlsColorLight;
-        color: #000000;
+        border-color: $treeMapControlsColor;
+        color: #000;
       }
     }
 
