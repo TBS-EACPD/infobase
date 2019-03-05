@@ -12,6 +12,7 @@ import { Details } from '../../components/Details.js';
 import { 
   Indicator,
   ResultCounts,
+  GranularResultCounts,
 } from './results_common.js';
 import { StatusIconTable, InlineStatusIconList } from './components.js';
 const { SpinnerWrapper, Format, TextAbbrev } = util_components;
@@ -469,7 +470,8 @@ _.each(['program','dept','crso'], lvl => {
     footnotes: false,
     depends_on: ["programSpending", "programFtes"],
     requires_results: !use_api_for_results,
-    requires_result_counts: use_api_for_results,
+    requires_result_counts: use_api_for_results && lvl === 'dept',
+    requires_granular_result_counts: use_api_for_results && lvl !== 'dept',
     key: "explore_results",
     calculate(subject){
       if (!use_api_for_results) {
@@ -487,7 +489,9 @@ _.each(['program','dept','crso'], lvl => {
           has_drr_data,
         };
       } else {
-        const subject_result_counts = ResultCounts.get_dept_counts(lvl === 'dept' ? subject.acronym : subject.id);
+        const subject_result_counts = lvl === 'dept' ?
+          ResultCounts.get_dept_counts(subject.acronym) :
+          GranularResultCounts.get_subject_counts(subject.id);
 
         const has_dp_data = !_.isNull(subject_result_counts.dp18_indicators) && subject_result_counts.dp18_indicators > 0;
         const has_drr_data = !_.isNull(subject_result_counts.drr17_total) && subject_result_counts.drr17_total > 0;
