@@ -481,7 +481,6 @@ export default class TreeMapper extends React.Component {
                 </div>
               </div>
             </div>
-            <div style={{ marginBottom: "200px" }} />
           </div>
         }
       </StandardRouteContainer>
