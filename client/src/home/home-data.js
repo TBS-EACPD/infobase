@@ -10,6 +10,11 @@ const featured_content_items = _.compact([
     is_link_out: true,
     is_youtube: true,
   },
+  !window.is_a11y_mode && {
+    text_key: "treemap_home_title",
+    href: "#treemap",
+    is_new: true,
+  },
   {
     text_key: "interim_mains",
     href: (
@@ -25,7 +30,7 @@ const featured_content_items = _.compact([
         }) :
         "#partition/est_doc_ie/planned_exp"
     ),
-    is_new: true,
+    is_new: false,
   },
   {
     text_key: "supps_b",
@@ -42,7 +47,7 @@ const featured_content_items = _.compact([
         }) :
         "#compare_estimates"
     ),
-    is_new: true,
+    is_new: false,
   },
   {
     text_key: 'quick_link_DRR_1718',
@@ -66,13 +71,6 @@ const featured_content_items = _.compact([
     text_key: 'quick_link_spending_by_program',
     href: rpb_link({ 
       table: 'programSpending', 
-      mode: 'details',
-    }),
-  },
-  {
-    text_key: 'quick_link_transfer_payment',
-    href: rpb_link({ 
-      table: 'orgTransferPayments', 
       mode: 'details',
     }),
   },
