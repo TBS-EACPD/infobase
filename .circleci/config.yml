@@ -38,7 +38,7 @@ jobs:
             - ib-client-dependencies-{{ checksum "client/package-lock.json" }}
       - run: 
           command: |
-            [ -e "client/node_modules" ] || cd client && npm ci
+            [ -e "client/node_modules" ] || (cd client && npm ci)
       
       - save_cache:
           paths:
