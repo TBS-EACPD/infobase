@@ -26,7 +26,7 @@ jobs:
     docker:
       - image: gcr.io/ib-static-content/ib-client-ci-build:latest
         <<: *gcloud_auth
-    working_directory: "~/InfoBase/client"
+    working_directory: "~/InfoBase"
     steps:
       - checkout:
           path: "~/InfoBase"
@@ -38,7 +38,7 @@ jobs:
             - ib-client-dependencies-{{ checksum "package-lock.json" }}
       - run: 
           command: |
-            [ -e "node_modules" ] || npm ci
+            [ -e "client/node_modules" ] || npm ci
       
       - save_cache:
           paths:
@@ -49,7 +49,7 @@ jobs:
             - ib-prod-build-{{ .Branch }}-{{ .Revision }}
       - run:
           command: |
-            [ -f "build/InfoBase/app/app-a11y-en.min.js" ] || ./deploy_build_scripts/build_all.sh
+            [ -f "client/build/InfoBase/app/app-a11y-en.min.js" ] || ./deploy_build_scripts/build_all.sh
 
       - save_cache:
           paths:
@@ -58,12 +58,12 @@ jobs:
       - persist_to_workspace:
           root: ./
           paths:
-            - ./build
-            - ./node_modules
-            - ./browser-tests
             - ./ci_scripts
-            - ./deploy_build_scripts
-            - ./package.json
+            - ./client/build
+            - ./client/node_modules
+            - ./client/browser-tests
+            - ./client/deploy_build_scripts
+            - ./client/package.json
 
   
   # Test job steps:
@@ -79,7 +79,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
-      - run: sh ./ci_scripts/create_envs.sh
+      - run: sh ../ci_scripts/create_envs.sh
       - run: sed -i "s#${CDN_URL}#.#g" ./build/InfoBase/app/*.js # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
       - run: sed -i "s#${CDN_URL}#.#g" ./build/InfoBase/*.html # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
       - run: 
@@ -102,8 +102,8 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
-      - run: ./ci_scripts/create_envs.sh
-      - run: ./ci_scripts/authenticate-gcloud.sh
+      - run: ../ci_scripts/create_envs.sh
+      - run: ../ci_scripts/authenticate-gcloud.sh
       - run: ./deploy_build_scripts/push_to_gcloud_bucket.sh
       
 
