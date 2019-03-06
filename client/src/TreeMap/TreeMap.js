@@ -430,7 +430,7 @@ export default class TreeMapper extends React.Component {
               <div className="row">
                 <div className="col-md-10">
                   <div className="row">
-                    <div className="TreeMap__TopBar" style={{ "min-height": `${topbar_height}px` }}>
+                    <div className="TreeMap__TopBar" style={{ minHeight: `${topbar_height}px` }}>
                       <TreeMapTopbar
                         history={history}
                         org_route={this.state.org_route}
@@ -467,7 +467,7 @@ export default class TreeMapper extends React.Component {
                     />
                   </div>
                 </div>
-                <div className="col-md-2 TreeMap__SideBar" style={{ padding: "0px", "min-height": `${app_height + 9}px` }}>
+                <div className="col-md-2 TreeMap__SideBar" style={{ padding: "0px", minHeight: `${app_height + 9}px` }}>
                   <TreeMapSidebar
                     side_bar_title={display_year}
                     perspective={perspective}

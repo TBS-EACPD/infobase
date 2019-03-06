@@ -77,7 +77,7 @@ const proportional_block = () =>
   </svg>;
 
 const legend_block = (val, col, ix) =>
-  <g className="legendCells" transform={`translate(${ix * 60 + 10},5)`}>
+  <g key={ix} className="legendCells" transform={`translate(${ix * 60 + 10},5)`}>
     <rect className="breakRect" height="25" width="60" fill={col} stroke="black" />
     {val &&
       <text className="breakLabels" x="0" y="40" style={{ textAnchor: "middle", display: "block" }} >
