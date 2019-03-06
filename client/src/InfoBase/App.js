@@ -65,12 +65,9 @@ export class App extends React.Component {
               <Route path="/about" component={About} />
               <Route path="/graph/:level?/:graph?/:id?" component={GraphInventory} />
               <Route path="/compare_estimates" component={EstimatesComparison} />
-<<<<<<< HEAD
               <Route path="/privacy" component={PrivacyStatement} />
               <Route path="/treemap/:perspective?/:color_var?/:filter_var?/:year?/:get_changes?" component={TreeMap} />
-=======
               <Route path="/flat_treemap" component={FlatTreeMap} />
->>>>>>> flat, non-browseable treemap
               <Route path="/" component={Home} />
             </Switch>
             <PageDetails />

@@ -11,6 +11,9 @@ export class FlatTreeMapViz extends React.Component {
   render() {
     return <div ref={div => this.el = div} />
   }
+  componentDidMount() {
+    this._imperative_render();
+  }
   componentDidUpdate() {
     this._imperative_render();
   }
