@@ -30,7 +30,6 @@ jobs:
     steps:
       - checkout:
           path: "~/InfoBase"
-      - run: pwd
       - run: chmod +x ./ci_scripts/chmod_scripts.sh
       - run: ./ci_scripts/chmod_scripts.sh
       - run: ./ci_scripts/create_envs.sh
@@ -61,10 +60,7 @@ jobs:
           paths:
             - ./build
             - ./node_modules
-            - ./browser-tests
             - ./ci_scripts
-            - ./deploy_build_scripts
-            - ./package.json
 
   
   # Test job steps:
