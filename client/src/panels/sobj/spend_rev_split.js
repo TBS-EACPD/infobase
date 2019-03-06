@@ -1,4 +1,5 @@
 import text from './spend_rev_split.yaml';
+import { TBS_responsive_bar } from '../../charts/TBS_nivo_chart';
 import {
   Statistics,
   formats,
@@ -56,6 +57,14 @@ function render({calculations, footnotes, sources}) {
     _ticks.push('net');
   }
   const ticks = _ticks.map(text_maker);
+  
+  // debugger
+  const spend_rev_data = series[""].map((spend_rev_value,tick_index)=>{
+    return {
+      title: ticks[tick_index],
+      [ticks[tick_index]]: spend_rev_value,
+    }
+  })
 
   let graph_content;
   if(window.is_a11y_mode){
@@ -63,19 +72,17 @@ function render({calculations, footnotes, sources}) {
     graph_content = null;
   } else {
     graph_content = (
-      <Bar
-        {...{
-          series,
-          ticks,
-          add_xaxis: true,
-          add_yaxis: false,
-          add_labels: true,                                  
-          x_axis_line: true,                                
-          colors: infobase_colors(),
-          formatter: formats.compact1_raw,
-          margin: {top: 20, right: 20, left: 60, bottom: 80},
-        }}
-      />
+      <div style = {{height:'400px'}}>
+        <TBS_responsive_bar
+          data = {spend_rev_data}
+          keys = {ticks}
+          index_by = "title"
+          enable_label = {true}
+          is_interactive = {false}
+          label_format = { d=><tspan y={ -4 }> {formats.compact1(d, {raw: true})} </tspan>}
+          colors = "paired"
+        />
+      </div>
     );
       
   }
@@ -117,6 +124,7 @@ new PanelGraph({
 
   render,
 });
+
 
 
 Statistics.create_and_register({

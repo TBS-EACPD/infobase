@@ -141,6 +141,7 @@ export class TBS_responsive_line extends React.Component {
       enable_dot_label = false,
       remove_bottom_axis = false,
       bttm_axis,
+      stacked = false,
       theme,
     } = this.props;
 
@@ -158,7 +159,7 @@ export class TBS_responsive_line extends React.Component {
         }}
         yScale={_.isUndefined(yScale)?{
           "type": "linear",
-          "stacked": true,
+          "stacked": stacked,
           "max": max,
           "min": min,
         }: yScale}

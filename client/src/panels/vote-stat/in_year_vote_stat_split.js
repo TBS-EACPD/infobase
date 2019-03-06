@@ -1,5 +1,4 @@
 import { text_maker, TM } from './vote-stat-text-prodiver.js';
-import { ResponsivePie } from '@nivo/pie';
 import { TBS_responsive_pie } from '../../charts/TBS_nivo_chart';
 
 import {

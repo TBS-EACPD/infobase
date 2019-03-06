@@ -194,6 +194,14 @@ class HistTPTypes extends React.Component {
       });
 
       content = <Fragment>
+        <div className="legend-container">
+          <GraphLegend
+            items={legend_items}
+            isHorizontal
+            onClick={id=> {(!!filtered_series[tp_type_name(id)] && _.size(filtered_series)===1)? null : this.setState({active_types: _.toggle_list(active_types, id) })}}
+          />  
+        </div>
+
         <div style ={{height: '400px'}}>
           <TBS_responsive_line
             min = {0}
@@ -341,7 +349,7 @@ class DetailedHistTPItems extends React.Component {
             }}
           >
             <GraphLegend
-              onClick={id => this.setState({active_indices: _.toggle_list(active_indices, id)})}
+              onClick={id => {active_indices.length===1 && active_indices.includes(id)? null:this.setState({active_indices: _.toggle_list(active_indices, id)})}}
               items={legend_items}
             />  
           </div>
