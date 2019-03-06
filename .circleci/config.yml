@@ -35,15 +35,15 @@ jobs:
       - run: ./ci_scripts/create_envs.sh
       - restore_cache:
           keys:
-            - ib-client-dependencies-{{ checksum "package-lock.json" }}
+            - ib-client-dependencies-{{ checksum "client/package-lock.json" }}
       - run: 
           command: |
             [ -e "client/node_modules" ] || npm ci
       
       - save_cache:
           paths:
-            - node_modules
-          key: ib-client-dependencies-{{ checksum "package-lock.json" }}
+            - client/node_modules
+          key: ib-client-dependencies-{{ checksum "client/package-lock.json" }}
       - restore_cache:
           keys:
             - ib-prod-build-{{ .Branch }}-{{ .Revision }}
