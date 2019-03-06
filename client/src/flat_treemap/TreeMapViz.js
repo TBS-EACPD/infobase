@@ -4,12 +4,6 @@ import { make_unique } from "../general_utils";
 import common_charts_utils from '../charts/common_charts_utils';
 import './TreeMap.scss';
 
-let currentMouseX, currentMouseY;
-function updateMousePositionVars(evt) {
-  currentMouseX = evt.clientX;
-  currentMouseY = evt.clientY;
-}
-
 export class FlatTreeMapViz extends React.Component {
   constructor(props) {
     super(props);
@@ -17,17 +11,11 @@ export class FlatTreeMapViz extends React.Component {
   render() {
     return <div ref={div => this.el = div} />
   }
-  componentDidMount() {
-    window.addEventListener("mousemove", updateMousePositionVars);
-    this._imperative_render();
-  }
   componentDidUpdate() {
     this._imperative_render();
   }
-  componentWillUnmount() {
-    window.removeEventListener("mousemove", updateMousePositionVars);
-  }
   _imperative_render() {
+    debugger;
     const {
       data,
       colorScale,
@@ -70,11 +58,12 @@ export class FlatTreeMapViz extends React.Component {
       .tile(d3.treemapSquarify.ratio(1))
 
     treemap(root
-      .sum(d => _.isEmpty(d.children) ? d.ftes : 0) // ternary to avoid double counting
       .sort((a, b) => {
         return b.value - a.value || b.height - a.height
       })
     );
+
+    debugger;
 
     const programs = d3.select('svg g')
       .selectAll('rect')

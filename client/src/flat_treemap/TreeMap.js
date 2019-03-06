@@ -1,5 +1,5 @@
 import { StandardRouteContainer } from '../core/NavComponents.js';
-import { get_data } from './data.js';
+import { get_vs_top10_data } from './data.js';
 import { SpinnerWrapper } from '../util_components.js';
 import { FlatTreeMapViz } from './TreeMapViz.js';
 import { formats } from '../core/format.js';
@@ -42,7 +42,7 @@ export default class FlatTreeMap extends React.PureComponent {
         },
       },
     } = props;
-    get_data(perspective, org_id, year).then(data => {
+    get_vs_top10_data('voted').then(data => {
       this.setState({
         loading: false,
         data,
