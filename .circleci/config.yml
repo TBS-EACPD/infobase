@@ -33,30 +33,28 @@ jobs:
       - run: chmod +x ./ci_scripts/chmod_scripts.sh
       - run: ./ci_scripts/chmod_scripts.sh
       - run: ./ci_scripts/create_envs.sh
-      - run: cd client
       - restore_cache:
           keys:
-            - ib-client-dependencies-{{ checksum "package-lock.json" }}
+            - ib-client-dependencies-{{ checksum "client/package-lock.json" }}
       - run: 
           command: |
-            [ -e "node_modules" ] || npm ci
+            [ -e "client/node_modules" ] || cd client && npm ci
       
       - save_cache:
           paths:
             - node_modules
-          key: ib-client-dependencies-{{ checksum "package-lock.json" }}
+          key: ib-client-dependencies-{{ checksum "client/package-lock.json" }}
       - restore_cache:
           keys:
             - ib-prod-build-{{ .Branch }}-{{ .Revision }}
       - run:
           command: |
-            [ -f "build/InfoBase/app/app-a11y-en.min.js" ] || ./deploy_build_scripts/build_all.sh
+            [ -f "client/build/InfoBase/app/app-a11y-en.min.js" ] || ./client/deploy_build_scripts/build_all.sh
 
       - save_cache:
           paths:
-            - build
+            - client/build
           key: ib-prod-build-{{ .Branch }}-{{ .Revision }}
-      - run: cd ..
       - persist_to_workspace:
           root: ./
           paths:
