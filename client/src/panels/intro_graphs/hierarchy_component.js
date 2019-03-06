@@ -110,9 +110,9 @@ const _HierarchyPeek = ({root}) => (
                   {
                     root.level === "crso" ? 
                       (
-                        (root.cr_or_so === "fw" && !root.dead) ? 
-                          (window.lang == "en" ? root.name + " (Core Responsibility) " : root.name + " (Responsabilité Essentielle)" ) :
-                          (window.lang == "en" ? root.name + " (Strategic Outcome)" : root.name + " (Résultat Stratégique)" )
+                        (root.is_cr && !root.dead) ? 
+                          (window.lang == "en" ? `Core Responsibility : ${root.name}` : `Responsabilité Essentielle : ${root.name}`) :
+                          (window.lang == "en" ? `Strategic Outcome : ${root.name}` : `Résultat Stratégique : ${root.name}`)
                       ) : 
                       root.name
                   } 
@@ -211,7 +211,7 @@ export const org_internal_hierarchy = ({subject, href_generator, show_dead_sos, 
     .filter( show_dead_sos ? _.constant(true) : 'is_active' )
     .map(crso => ({
       name: (label_crsos ? crso.singular()+" : " : "") + crso.name,
-      cr_or_so: subject.dp_status,
+      is_cr: crso.is_cr,
       href: crso.is_cr && href_generator(crso),
       dead: !crso.is_active,
       children: _.chain(crso.programs)
@@ -353,7 +353,7 @@ export const crso_hierarchy = ({subject, href_generator, show_siblings, show_unc
               crso => ({
                 level: crso.level,
                 name: crso.name,
-                cr_or_so: crso.dept.dp_status,
+                is_cr: crso.is_cr,
                 href: crso.is_cr && href_generator(crso),
                 active: is_subject(crso),
                 dead: !crso.is_active,
@@ -393,7 +393,7 @@ export const crso_pi_hierarchy = ({subject, href_generator, show_siblings, show_
           level: subject.level,
           name: subject.name,
           active: true,
-          cr_or_so: subject.dept.dp_status,
+          is_cr: subject.is_cr,
           href: href_generator(subject),
           children: // program
             _.chain(subject.programs)
