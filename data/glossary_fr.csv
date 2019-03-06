@@ -1,4 +1,4 @@
-﻿id,name_fr,def_fr
+﻿"id","name_fr","def_fr"
 "ACT","Activité","Une activité est un processus de travail interne d'un ministère qui utilise des intrants pour produire des extrants, comme la formation, la recherche, la construction, la négociation et les enquêtes."
 "ACTIV_PEOPLE","Employés actifs","Par « employés actifs », on entend les employés qui ne sont pas en congé non payé."
 "ADJUS","Redressements, mandats et virements","Redressements, mandats et virements comprennent :
@@ -282,7 +282,7 @@ Selon l'article 2 de la LGFP, s'entend de « ministère » :
 * résultat escomptés : utilisés pour la reddition de compte des programmes sous l’architecture d’alignement des programmes jusqu’à la fin de la transition vers la structure des répertoires  des programmes, aux termes de la Politique sur les résultats, en 2018-2019;
 * extrants de programme : utilisés pour la reddition de compte des programmes sous la structure des répertoires  des programmes, aux termes de la Politique sur les résultats;
 * résultats ministériels : utilisés pour la reddition de compte sous le Cadre ministériel des résultats, aux termes de la Politique sur les résultats."
-"RESULTS_COUNT","Décompte d'indicateurs"," "
+"RESULTS_COUNT","Décompte d'indicateurs",
 "RESULTS_MET","Statut du résultat: Cible atteinte","La date butoir d’atteinte de la cible est avant ou d’ici la fin de l’exercice 2017-2018 (31 mars 2018) **et**  le résultat est supérieur à la cible minimale, inférieur à la cible maximale, dans la fourchette cible ou exactement égal à la valeur unique de la cible."
 "RESULTS_NOT_AVAILABLE","Statut du résultat: Résultat non disponible","La date butoir d’atteinte de la cible est avant ou d’ici la fin de l’exercice 2017-2018 (31 mars 2018) **et** le résultat n’a pas été consigné ou n’est pas disponible pour toute autre raison. La cible n'est pas disponible ou n’est plus pertinente parce que la politique a été modifiée ou en raison des circonstances (p. ex. la dissolution d’un ministère, le changement d’orientation du gouvernement)."
 "RESULTS_NOT_MET","Statut du résultat: Cible non atteinte","La date butoir d’atteinte de la cible est avant ou d’ici la fin de l’exercice 2017-2018 (31 mars 2018) **et**  le résultat est inférieur à la cible minimale, supérieur à la cible maximal, hors de la fourchette cible ou n’est pas égal à la valeur unique de la cible."
@@ -455,3 +455,4 @@ Programme de métadonnées, comprenant ce qui suit : 1) des étiquettes de lien 
 "TP","Paiement de transfert","Par « paiement de transfert », on entend un paiement monétaire ou un transfert de biens, de services ou d'actifs effectué en fonction de crédits à une tierce partie bénéficiaire, y compris une société d'État, et qui n'a pas pour résultat l'acquisition de biens, de services ou d'actifs par le gouvernement du Canada. Les paiements de transfert comportent les catégories suivantes : les subventions, les contributions et les autres paiements de transfert. Les paiements de transfert n'incluent pas les investissements, les prêts ni les garanties d'emprunt."
 "VOTED","Montants votés","Par «  votés », on entend les montants autorisés aux termes des lois de crédits"
 "YI_IGOC","Année de constitution en société","Année au cours de laquelle l’organisation a été légalement constituée en société."
+

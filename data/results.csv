@@ -1,4 +1,4 @@
-﻿id,subject_id,name_en,name_fr,doc
+﻿"id","subject_id","name_en","name_fr","doc"
 "DR-1","OAG-BGX00","Well-managed and accountable government","Un gouvernement bien géré et responsable","dp18"
 "DR-10","PSEP-BVU00","Canada can effectively mitigate, prepare for, respond to and recover from all-hazards events","Le Canada peut efficacement atténuer les événements tous risques, s’y préparer, intervenir, le cas échéant, et se rétablir","dp18"
 "DR-100","EA-BVE00","Canadians have timely access to information and services that keeps them safer abroad.","Les Canadiens ont accès en temps opportun à de l’information et à des services qui permettent d’améliorer leur sécurité à l’étranger.","dp18"
@@ -13,9 +13,9 @@
 "DR-109","FIN-BUV00","The Government of Canada effectively supports provinces, territories and Indigenous governments.","Le gouvernement du Canada appuie de façon efficace les provinces, les territoires et les gouvernements autochtones.","dp18"
 "DR-11","HRSD-BGM00","Homelessness in Canada is prevented and reduced.","L’itinérance au Canada est prévenue et réduite","dp18"
 "DR-110","FIN-BUV00","Canada maintains its leadership and engagement globally and deepens its trading relationships.","Le Canada maintient son leadership et sa participation dans le monde et renforce ses relations commerciales.","dp18"
-"DR-111","WDO-BNW00","Communities are economically diversified in western Canada","Les entreprises de l'Ouest canadien sont innovantes et en croissance","dp18"
-"DR-112","WDO-BNW00","Businesses invest in the development and commercialization of innovative technologies in western Canada","Les collectivités de l'Ouest canadien sont économiquement diversifiées","dp18"
-"DR-113","WDO-BNW00","Businesses are innovative and growing in western Canada","Les entreprises de l'Ouest Canadien investissent dans le développement et la commercialisation des technologies","dp18"
+"DR-111","WDO-BNW00","Communities are economically diversified in western Canada.","Les collectivités de l'Ouest canadien sont économiquement diversifiées.","dp18"
+"DR-112","WDO-BNW00","Businesses invest in the development and commercialization of innovative technologies in western Canada.","Les entreprises de l'Ouest Canadien investissent dans le développement et la commercialisation des technologies.","dp18"
+"DR-113","WDO-BNW00","Businesses are innovative and growing in western Canada","Les entreprises de l'Ouest canadien sont innovantes et en croissance.","dp18"
 "DR-114","EC-BGR00","Canadian greenhouse gas and short-lived climate pollutant emissions are reduced","Réduction des émissions de gaz à effet de serre et de polluants de courte durée","dp18"
 "DR-115","EC-BGR00","Indigenous Peoples are engaged in clean growth and climate change","Peuples autochtones sont impliqués à la croissance propre et aux changements climatiques","dp18"
 "DR-116","EC-BGR00","Canada contributes to reducing greenhouse gas emissions and increasing climate resilience globally","Le Canada contribue à réduire les émissions de gaz à effet de serre et à augmenter la résilience mondiale aux changements climatiques","dp18"
@@ -3591,3 +3591,4 @@ délinquants.","drr17"
 "NR016-0031-2017","CRTC-CPA00","Canadian communication services contribute to the protection and safety of Canadians","Services de communication canadiens contribuant à la protection et à la sécurité des Canadiens","drr17"
 "NR016-0026-2017","CRTC-CAB00","The communications system provides quality and affordable communication service options to Canadians.","Le système de communications offre aux Canadiens des choix de services de communications de qualité et abordables.","drr17"
 "NR016-0024-2017","CRTC-CAA00","The broadcasting system provides Canadians with a wealth of Canadian programming.","Le système de radiodiffusion fournit aux Canadiens une vaste gamme d’émissions canadiennes.","drr17"
+

@@ -1,4 +1,4 @@
-﻿id,name_en,def_en
+﻿"id","name_en","def_en"
 "ACT","Activity","An activity is an operation or work process internal to a department which uses inputs to produce outputs, e.g., training, research, construction, negotiation, investigation, etc."
 "ACTIV_PEOPLE","Active employees","Active employees are employees who are not on leave without pay."
 "ADJUS","Adjustments, warrants and transfers","Adjustments, warrants and transfers include:
@@ -285,7 +285,7 @@ Under section 2 of the FAA: “Department” means
 * Expected results – used for programs reporting under the Program Alignment Architecture until full transition in fiscal year 2018-19 to the Program Inventory format, as per the Policy on Results; 
 * Program outcomes – used for programs reporting under the Program Inventory format, as per the Policy on Results; and
 * Departmental results – used for reporting under the Departmental Results Framework, as per the Policy on Results."
-"RESULTS_COUNT","Count of Indicators"," "
+"RESULTS_COUNT","Count of Indicators",
 "RESULTS_MET","Result Status: Target Met","The date to achieve the target is before or by the end of fiscal year 2017-18 (March 31, 2018) **and** the result is higher than the minimum target; lower than the maximum target; within the target range; or is exactly equal to the unique target value."
 "RESULTS_NOT_AVAILABLE","Result Status: Result not available","The date to achieve the target is before or by the end of fiscal year 2017-18 (March 31, 2018) **and**  the result has not been collected or is not available for any other reason. Includes cases when no target was set or when the target is no longer relevant due to changes in policy or other circumstances (e.g. dissolution of a department, change in government direction, etc.)."
 "RESULTS_NOT_MET","Result Status: Target not met","The date to achieve the target is before or by the end of fiscal year 2017-18 (March 31, 2018) **and** the result is lower than the minimum target; higher than the maximum target; outside the target range; or is not equal to the target value"
@@ -458,3 +458,4 @@ Program metadata, which comprises: (1) linkage tags that identify the connection
 "TP","Transfer payment","A transfer payment is a monetary payment, or a transfer of goods, services or assets made, on the basis of an appropriation, to a third party, including a Crown corporation, that does not result in the acquisition by the Government of Canada of any goods, services or assets. Transfer payments are categorized as grants, contributions and other transfer payments. Transfer payments do not include investments, loans or loan guarantees."
 "VOTED","Voted amounts","Voted amounts refer to the amounts approved in appropriation acts."
 "YI_IGOC","Year of Incorporation","The year in which an organization was legally established."
+

@@ -1,4 +1,4 @@
-﻿dept_code,type,name_en,name_frpa_last_year_5_auth,pa_last_year_5_exp,pa_last_year_4_auth,pa_last_year_4_exp,pa_last_year_3_auth,pa_last_year_3_exp,pa_last_year_2_auth,pa_last_year_2_exp,pa_last_year_1_auth,pa_last_year_1_exp
+﻿"dept_code","type","name_en","name_fr","pa_last_year_5_auth","pa_last_year_5_exp","pa_last_year_4_auth","pa_last_year_4_exp","pa_last_year_3_auth","pa_last_year_3_exp","pa_last_year_2_auth","pa_last_year_2_exp","pa_last_year_1_auth","pa_last_year_1_exp"
 "ACOA","c","Canada 150 Community Infrastructure Program","Programme d'infrastructures communautaires de Canada 150",0,0,0,0,3481221,3481221,12535250,12535250,16600000,17168340
 "ACOA","c","Contributions to promote and coordinate economic development throughout Cape Breton Island","Contributions pour promouvoir et coordonner le développement économique dans l'île du Cap-Breton",0,0,4093435,4093435,2557053,2557053,992752,992752,126793,13381
 "ACOA","c","Contributions for the Community Infrastructure Improvement Fund","Contributions pour le Fond d'amélioration d'infrastructure communautaire",12319305,12319305,0,0,0,0,0,0,0,0
@@ -907,3 +907,4 @@
 "WDO","c","Contributions under the Community Futures Program","Contributions en vertu du Programme de développement des collectivités",29525097,29525097,27036417,26502066,29790691,29790691,28228125,28228125,26365978,26365978
 "WDO","c","Contributions under the Women's Enterprise Initiative","Contributions en vertu de l'Initiative pour les femmes entrepreneurs",5987145,5987145,3901435,3901435,3802500,3802500,4105575,4105575,3573917,3573917
 "WDO","c","Contributions under the Western Diversification Program","Contributions en vertu du Programme de diversification de l'économie de l'Ouest",81837602,81837602,91294174,91294174,88654928,82739434,85026224,84983794,93840800,93798745
+

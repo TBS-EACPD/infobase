@@ -1,4 +1,4 @@
-﻿dept_code,so_num,in_year_auth,in_year_quarter_exp,in_year_cumul_exp,last_year_auth,last_year_quarter_exp,last_year_cumul_exp
+﻿"dept_code","so_num","in_year_auth","in_year_quarter_exp","in_year_cumul_exp","last_year_auth","last_year_quarter_exp","last_year_cumul_exp"
 "ACOA",1,61910000,15198000,30425000,58738000,19618000,35861000
 "ACOA",2,2891000,531000,1220000,2900000,547000,1110000
 "ACOA",3,539000,85000,138000,541000,72000,143000
@@ -857,3 +857,4 @@
 "WDO",9,774000,26000,56000,1049000,13000,42000
 "WDO",10,117773000,72416000,92406000,173158000,18614000,39073000
 "WDO",12,0,167000,363000,0,-67000,27000
+

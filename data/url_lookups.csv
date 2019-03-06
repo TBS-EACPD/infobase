@@ -1,4 +1,4 @@
-﻿id,url_en,url_fr
+﻿"id","url_en","url_fr"
 1,"ciec-ccie.parl.gc.ca/EN/Pages/default.aspx","ciec-ccie.parl.gc.ca/FR/Pages/default.aspx"
 2,"en-corporate.canada.travel","fr-corporate.canada.travel"
 3,"https://www.canada.ca/content/dam/pch/documents/corporate/publications/evaluations/chin_jan-eng.pdf","https://www.canada.ca/content/dam/pch/documents/corporate/publications/evaluations/chin_jan-fra.pdf"
@@ -249,3 +249,4 @@
 248,"www.yvr.ca","www.yvr.ca"
 249,"www.yxe.ca","www.yxe.ca"
 250,"www.yyc.com","www.yyc.com"
+
