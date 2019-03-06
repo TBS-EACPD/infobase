@@ -60,7 +60,10 @@ jobs:
           paths:
             - ./build
             - ./node_modules
+            - ./browser-tests
             - ./ci_scripts
+            - ./deploy_build_scripts
+            - ./package.json
 
   
   # Test job steps:
