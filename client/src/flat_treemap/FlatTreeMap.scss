@@ -1,0 +1,52 @@
+.FlatTreeMap__GraphArea {  
+  background: #fff;
+}
+
+.FlatTreeMap__ContentBox {
+  position: absolute;
+  border: 2px solid white;
+  box-sizing: border-box;
+  &:hover,
+  &:focus {
+    background-color: red;
+  }
+}
+
+.FlatTreeMap__TextBox {
+  vertical-align: middle;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  max-width: 90%;
+  max-height: 90%;
+  color: #000;
+}
+
+.FlatTreeMap__ContentTitle {
+  font-size:1em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+
+.FlatTreeMap__ContentText {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+
+.FlatTreeMap__ToolTip {   
+    position: absolute;           
+    text-align: center;                 
+    padding: 2px;             
+    font-size: 1em;        
+    background: #c7dbee;   
+    border: 1px solid #000;      
+    border-radius: 5px;           
+    pointer-events: none;         
+  }

@@ -96,8 +96,7 @@ export async function get_vs_top10_data(vs) {
     .value();
 
   const text_func = d => {
-    const val = formats.compact1(d.value);
-    const text = d.dept ? `${Subject.Dept.lookup(d.dept).fancy_name} -  ${val}` : `${d.desc}: ${val}`;
+    const text = d.dept ? `${Subject.Dept.lookup(d.dept).fancy_name} -  ${d.desc}` : d.desc;
     return text;
   }
   const data = _.take(all_rows, 10);
@@ -112,9 +111,14 @@ export async function get_vs_top10_data(vs) {
   });
   
   data.push({
-    desc: text_maker(`all_other_${vs}_items`),
+    name: text_maker(`all_other_${vs}_items`),
     others: true,
-    [main_col]: d3.sum(_.tail(all_rows, 10), d => d[main_col]),
+    value: d3.sum(_.tail(all_rows, 10), d => d[main_col]),
   });
-  return data;
+
+  const root = {
+    name: "Government",
+    children: data,
+  };
+  return root;
 }
