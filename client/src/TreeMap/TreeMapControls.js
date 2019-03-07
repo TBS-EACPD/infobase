@@ -106,6 +106,7 @@ function create_new_path(cur_params, new_param, new_val) {
     case("perspective"):
       new_perspective = new_val;
       new_filter_var = "All"
+      if(new_val === "drf_ftes") new_color_var = "ftes";
       if(new_val !== "drf" && new_val !== "drf_ftes") new_color_var = "spending";
       break;
     case("color_var"):

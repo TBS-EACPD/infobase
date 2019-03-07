@@ -45,7 +45,7 @@ treemap_gc_type_filter:
 
 DRF_spending:
   en: Program spending
-  fr: Dépenses par programmes
+  fr: Dépenses par programme
 
 TP:
   en: Transfer payments
