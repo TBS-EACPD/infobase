@@ -49,7 +49,7 @@ jobs:
             - ib-prod-build-{{ .Branch }}-{{ .Revision }}
       - run:
           command: |
-            [ -f "client/build/InfoBase/app/app-a11y-en.min.js" ] || ./client/deploy_build_scripts/build_all.sh
+            [ -f "client/build/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./deploy_build_scripts/build_all.sh)
 
       - save_cache:
           paths:
