@@ -20,6 +20,7 @@
     "test:watch": "jest --watch",
     "debug": "babel-node --inspect src/server.js",
     "start": "babel-node src/server.js",
+    "transpiled_start": "babel-node transpiled_build/server.js",
     "debug-brk": "babel-node --inspect-brk src/server.js",
     "load_models": "babel-node src/models/populate_models.js",
     "transpiled_load_models": "babel-node transpiled_build/models/populate_models.js",
