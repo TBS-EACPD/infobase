@@ -6,9 +6,9 @@ export default async function({models}){
 
   const sub_program_records = get_standard_csv_file_rows("subprograms.csv");
 
-  const result_records = get_standard_csv_file_rows("Results.csv");
+  const result_records = get_standard_csv_file_rows("results.csv");
 
-  const indicator_records = get_standard_csv_file_rows("Indicators.csv");
+  const indicator_records = get_standard_csv_file_rows("indicators.csv");
 
   const pi_dr_links = get_standard_csv_file_rows("pi_dr_links.csv");
   
