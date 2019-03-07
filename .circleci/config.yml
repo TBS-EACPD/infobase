@@ -33,37 +33,71 @@ jobs:
       - run: chmod +x ./ci_scripts/chmod_scripts.sh
       - run: ./ci_scripts/chmod_scripts.sh
       - run: ./ci_scripts/create_envs.sh
+
       - restore_cache:
           keys:
             - ib-client-dependencies-{{ checksum "client/package-lock.json" }}
       - run: 
           command: |
             [ -e "client/node_modules" ] || (cd client && npm ci)
-      
       - save_cache:
           paths:
             - node_modules
           key: ib-client-dependencies-{{ checksum "client/package-lock.json" }}
+
       - restore_cache:
           keys:
             - ib-prod-build-{{ .Branch }}-{{ .Revision }}
       - run:
           command: |
             [ -f "client/build/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./deploy_build_scripts/build_all.sh)
-
       - save_cache:
           paths:
             - client/build
           key: ib-prod-build-{{ .Branch }}-{{ .Revision }}
+
+
+      - restore_cache:
+          keys:
+            - ib-server-dependencies-{{ checksum "server/package-lock.json" }}
+      - run: 
+          command: |
+            [ -e "server/node_modules" ] || (cd server && npm ci)
+      - save_cache:
+          paths:
+            - node_modules
+          key: ib-server-dependencies-{{ checksum "server/package-lock.json" }}
+
+      - restore_cache:
+          keys:
+            - ib-server-transpiled-build-{{ .Branch }}-{{ .Revision }}
+      - run:
+          command: |
+            [ -f "server/transpiled_build/app.js" ] || (cd server && npm run build)
+      - save_cache:
+          paths:
+            - server/transpiled_build
+          key: ib-server-transpiled-build-{{ .Branch }}-{{ .Revision }}
+
+
       - persist_to_workspace:
           root: ./
           paths:
             - ./ci_scripts
+            
             - ./client/build
-            - ./client/node_modules
             - ./client/browser-tests
             - ./client/deploy_build_scripts
+            - ./client/node_modules
             - ./client/package.json
+
+            - ./server/transpiled_build
+            - ./server/scripts
+            - ./server/src
+            - ./server/.gcloudignore
+            - ./server/jest.config.js
+            - ./server/node_modules
+            - ./server/package.json
 
   
   # Test job steps:
