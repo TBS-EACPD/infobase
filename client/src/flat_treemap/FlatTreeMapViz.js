@@ -22,8 +22,6 @@ export class FlatTreeMapViz extends React.Component {
     const {
       data,
       colorScale,
-      tooltip_render,
-      node_render,
       width,
       height,
     } = this.props;
@@ -89,7 +87,7 @@ export class FlatTreeMapViz extends React.Component {
       .enter()
       .append('div')
       .attr("class", "FlatTreeMap__ContentBox")
-      .attr("tabindex",0)
+      .attr("tabindex", 0)
       .call(treemap_node_content_container)
       .styles((d) => ({
         "background-color": colorScale(d.data.name),
@@ -124,30 +122,71 @@ export class FlatTreeMapViz extends React.Component {
       .style("opacity", 0);
 
 
-    vs_items.on("mouseenter", function (d) {
-      tt
-        .transition()
-        .duration(300)
-        .style("opacity", 1);
-      tt
-        .html(`
+    vs_items
+      .on("mouseenter", function (d) {
+        tt
+          .transition()
+          .duration(100)
+          .style("opacity", 1);
+        tt
+          .html(`
           ${d.data.name} <br/>
           ${formats.compact1(d.data.value)}
           `)
-        .styles(() => ({
-          left: (d.x0+25) + "px",
-          top: (d.y0-25) + "px",
-          "max-width": "300px",
-        }))
-    })
-      .on("mouseexit", function (d) {
+          .styles(() => ({
+            left: tooltip_pos(d)[0] + "px",
+            top: tooltip_pos(d)[1] + "px",
+            "max-width": "300px",
+          }))
+      })
+      .on("mouseleave", function (d) {
         tt.transition()
           .duration(1)
           .style("opacity", 0);
       });
 
+    function tooltip_pos(d){
+      let tx = d.x1 - 50;
+      let ty = d.y0 - 25;
+      if (tx + 300 > width) {
+        tx = width-300;
+      }
+      return [tx,ty];
+    }
 
     return viz_root;
   }
+}
+
+
+function node_render(foreign_sel) {
+  foreign_sel.html(function (node) {
+    if (this.offsetHeight <= 30 || this.offsetWidth <= 50) { return }
+
+    // const name_to_display = (node.data.subject && node.data.subject.fancy_acronym && this.offsetWidth < 150 ? node.data.subject.fancy_acronym : node.data.name);
+
+    // let text_size = "";
+    // if (this.offsetHeight > 150 && this.offsetWidth > 300) { text_size = "--large" }
+    // if (this.offsetHeight > 50 && this.offsetWidth > 50 && this.offsetHeight <= 100) { text_size = "--small" }
+
+    let show_amount = true;
+    //if (this.offsetHeight <= 50) { show_amount = false }
+
+    let ret = `
+      <div class="FlatTreeMap__TextBox">
+        <div class="FlatTreeMap__ContentTitle">
+          ${node.data.name}
+        </div>
+    `
+    if (show_amount) {
+      ret = ret + `
+        <div class="FlatTreeMap__ContentText">
+          ${formats.compact1(node.data.value)}
+        </div>
+      </div>
+      `
+    }
+    return ret;
+  });
 }
 

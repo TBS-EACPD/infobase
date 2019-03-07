@@ -96,8 +96,11 @@ export async function get_vs_top10_data(vs) {
     .value();
 
   const text_func = d => {
-    const text = d.dept ? `${Subject.Dept.lookup(d.dept).fancy_name} -  ${d.desc}` : d.desc;
-    return text;
+    if(vs=='voted'){
+      return d.dept ? `${Subject.Dept.lookup(d.dept).fancy_name} -  ${d.desc}` : d.desc;
+    } else {
+      return d.dept ? `${d.desc} (${Subject.Dept.lookup(d.dept).fancy_name})` : d.desc;
+    }
   }
   const data = _.take(all_rows, 10);
   data.forEach(row => {
