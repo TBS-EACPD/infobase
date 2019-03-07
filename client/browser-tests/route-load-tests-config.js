@@ -15,8 +15,8 @@ module.exports.route_load_tests_config = [
     test_on: ["eng", "basic-eng"],
   },
   {
-    name: "Bubble Explorer",
-    route: "explore-dept",
+    name: "Treemap Explorer",
+    route: "treemap",
     test_on: ["eng"],
   },
   {
