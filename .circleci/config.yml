@@ -119,7 +119,7 @@ jobs:
           name: mongod
           command: mongod
           background: true
-      - run: (cd server && npm run load_models)
+      - run: (cd server && npm run transpiled_load_models)
       - run: 
           name: start_api_server
           command: (cd server && npm run start)

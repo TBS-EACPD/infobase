@@ -22,6 +22,7 @@
     "start": "babel-node src/server.js",
     "debug-brk": "babel-node --inspect-brk src/server.js",
     "load_models": "babel-node src/models/populate_models.js",
+    "transpiled_load_models": "babel-node transpiled_build/models/populate_models.js",
     "debug_load_models": "babel-node --inspect-brk src/models/populate_models.js",
     "prebuild": "rm -rf transpiled_build",
     "build": "babel src/ --out-dir transpiled_build --copy-files --ignore node_modules"
