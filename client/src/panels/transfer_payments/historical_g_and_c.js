@@ -209,6 +209,7 @@ class HistTPTypes extends React.Component {
             data = {expenditure_data}
             colors={infobaseCategory10Colors}
             is_money = {true}
+            stacked = {true}
           />
         </div>
       </Fragment>
@@ -276,7 +277,7 @@ class DetailedHistTPItems extends React.Component {
             y: expend_value,
             x: years[year_index],
           }
-        })
+        }),
       }
     })
 
