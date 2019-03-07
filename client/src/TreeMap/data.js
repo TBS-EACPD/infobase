@@ -231,8 +231,19 @@ function get_data_drf(perspective, year, year_1, year_2, filter_var, get_changes
 
 const so_nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 20, 21, 22];
 
+const so_cat = (so) => {
+  if (so > 0 && so <= 7){
+    return 1;
+  } else if (so > 7 && so <= 9) {
+    return 2;
+  } else if (so === 21 || so === 22) {
+    return 3;
+  }
+  else return so;
+};
+
 function get_data_so(perspective, year, year_1, year_2, filter_var, get_changes) {
-  const so_nums_to_get = parseInt(filter_var) ? [parseInt(filter_var)] : so_nums;
+  const so_nums_to_get = parseInt(filter_var) ? _.filter(so_nums,so => so_cat(so) === parseInt(filter_var) ) : so_nums;
   const org_sobj_table = Table.lookup('orgSobjs');
   const all_orgs = _.chain(Dept.get_all())
     .map(org => ({
