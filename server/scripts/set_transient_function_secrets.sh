@@ -23,7 +23,7 @@ trap cleanup EXIT
 echo $(lpass show API_SERVICE_KEY --notes) | base64 -D > $scratch/key.json
 gcloud auth activate-service-account --key-file=$scratch/key.json
 gcloud config set project $APP_PROJ_ID
-gcloud config set compute/zone us-central1-c
+gcloud config set compute/zone us-central1
 
 touch $scratch/envs.yaml
 echo "SHOULD_USE_REMOTE_DB: '$SHOULD_USE_REMOTE_DB'" >> $scratch/envs.yaml
