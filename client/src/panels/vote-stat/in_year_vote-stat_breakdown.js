@@ -4,17 +4,12 @@ import {
   Subject,
   formats,
   PanelGraph,
-  general_utils,
-  charts_index,
   util_components,
-  declarative_charts,
   infograph_href_template,
   StdPanel,
   Col,
 } from '../shared';
-import { FlatTreeMapViz } from '../../flat_treemap/FlatTreeMapViz.js'
-const { text_abbrev } = general_utils;
-const { tbs_color } = charts_index.common_charts_utils;
+import { FlatTreeMapViz } from '../../charts/flat_treemap/FlatTreeMapViz.js'
 const { Format } = util_components;
 
 

@@ -1,8 +1,3 @@
-
-import classNames from "classnames";
-import { make_unique } from "../general_utils";
-import common_charts_utils from '../charts/common_charts_utils';
-import { formats } from '../core/format.js';
 import './FlatTreeMap.scss';
 
 export class FlatTreeMapViz extends React.Component {
