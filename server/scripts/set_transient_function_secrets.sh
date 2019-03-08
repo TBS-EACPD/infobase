@@ -29,7 +29,9 @@ touch $scratch/envs.yaml
 echo "SHOULD_USE_REMOTE_DB: '$SHOULD_USE_REMOTE_DB'" >> $scratch/envs.yaml
 echo "MDB_NAME: '$MDB_NAME'" >> $scratch/envs.yaml
 
+export MDB_CONNECT_STRING=$(lpass show MDB_CONNECT_STRING --notes)
 export MDB_USERNAME=$(lpass show MDB_READ_USER --notes)
 export MDB_PW=$(lpass show MDB_READ_PW --notes)
+echo "MDB_CONNECT_STRING: '$MDB_CONNECT_STRING'" >> $scratch/envs.yaml
 echo "MDB_USERNAME: '$MDB_USERNAME'" >> $scratch/envs.yaml
 echo "MDB_PW: '$MDB_PW'" >> $scratch/envs.yaml
