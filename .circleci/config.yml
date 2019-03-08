@@ -10,7 +10,7 @@ deploy_filter: &deploy_filter
     branches:
       only:
         - master
-
+        - api-cd
 
 version: 2
 jobs:
@@ -164,6 +164,7 @@ workflows:
       - deploy_data:
           requires:
             - build
+          <<: *deploy_filter
       - deploy:
           requires:
             - test
