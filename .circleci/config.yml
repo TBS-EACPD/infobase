@@ -4,6 +4,13 @@ gcloud_auth: &gcloud_auth
     username: _json_key
     password: $GCLOUD_JSON_AUTH
 
+# yaml fragment for list of branches to deploy dev builds on
+deploy_filter: &deploy_filter 
+  filters:
+    branches:
+      only:
+        - master
+
 
 version: 2
 jobs:
@@ -118,6 +125,19 @@ jobs:
       - run: (cd client && npm run ci_route_load_tests)
 
 
+  # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
+  deploy_data:
+    working_directory: "~/InfoBase"
+    docker:
+      - image: gcr.io/ib-static-content/ib-client-ci-test:latest
+        <<: *gcloud_auth
+    steps:
+      - attach_workspace:
+          at: ./
+      - run: ./ci_scripts/create_envs.sh
+      #TODO
+
+
   # Note: the image used for this job is provided by google
   deploy:
     working_directory: "~/InfoBase"
@@ -141,10 +161,10 @@ workflows:
       - test:
           requires:
             - build
+      - deploy_data:
+          requires:
+            - build
       - deploy:
           requires:
             - test
-          filters:
-            branches:
-              only:
-                - master
+          <<: *deploy_filter
