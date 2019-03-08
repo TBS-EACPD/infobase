@@ -103,6 +103,7 @@ jobs:
       - attach_workspace:
           at: ./
       - run: sh ./ci_scripts/create_envs.sh
+      - run: sh ./ci_scripts/create_test_envs.sh
 
       - run: 
           name: mongod
@@ -136,7 +137,10 @@ jobs:
       - attach_workspace:
           at: ./
       - run: ./ci_scripts/create_envs.sh
-      #TODO database with branch-specific name, only if data has changed
+      - run: sh ./ci_scripts/create_deploy_envs.sh
+
+      #TODO only if data has changed
+      - run: (cd server && npm run transpiled_load_models)
 
 
   # Note: the image used for this job is provided by google
@@ -148,6 +152,8 @@ jobs:
       - attach_workspace:
           at: ./
       - run: ./ci_scripts/create_envs.sh
+      - run: sh ./ci_scripts/create_deploy_envs.sh
+
       - run: ./ci_scripts/authenticate-server-gcloud.sh
       #TODO deploy gcloud func with branch-specific name, connecting to branch-specific database, only if trasnpilied build has changed
 
