@@ -22,10 +22,10 @@ export class FlatTreeMapViz extends React.Component {
     const {
       data,
       colorScale,
-      width,
       height,
+      node_render,
+      tooltip_render,
     } = this.props;
-
 
     const el = this.el;
     el.innerHTML = `
@@ -39,16 +39,17 @@ export class FlatTreeMapViz extends React.Component {
       </div>
     </div>`;
 
-    const root = d3.hierarchy(data);
+    const width = height;
 
+    const root = d3.hierarchy(data);
 
     const treemap = d3.treemap();
     treemap
       .size([width, height])
-      .paddingOuter(0)
+      .paddingOuter(10)
       .tile(d3.treemapSquarify.ratio(1))
     treemap(root
-      .sum(function (d) { return d.value; })
+      .sum(function (d) { return d["{{est_in_year}}_estimates"]; })
       .sort((a, b) => {
         if (a.data.others) {
           return 9999999
@@ -73,15 +74,16 @@ export class FlatTreeMapViz extends React.Component {
     // the actual treemap div
     const viz_root = html_root.select('.viz-root');
 
+
     viz_root
       .append("div")
       .attr("class", "FlatTreeMap__GraphArea")
       .styles(() => ({
         width: `${x(width)}px`,
         height: `${y(height)}px`,
-      }))
+      }));
 
-    const vs_items = d3.select('.FlatTreeMap__GraphArea')
+    const vs_items = viz_root.select('.FlatTreeMap__GraphArea')
       .selectAll('div')
       .data(root.children)
       .enter()
@@ -90,7 +92,7 @@ export class FlatTreeMapViz extends React.Component {
       .attr("tabindex", 0)
       .call(treemap_node_content_container)
       .styles((d) => ({
-        "background-color": colorScale(d.data.name),
+        "background-color": colorScale(d.data.desc),
       }));
 
     vs_items
@@ -129,10 +131,7 @@ export class FlatTreeMapViz extends React.Component {
           .duration(100)
           .style("opacity", 1);
         tt
-          .html(`
-          ${d.data.name} <br/>
-          ${formats.compact1(d.data.value)}
-          `)
+          .call(tooltip_render,d)
           .styles(() => ({
             left: tooltip_pos(d)[0] + "px",
             top: tooltip_pos(d)[1] + "px",
@@ -156,37 +155,5 @@ export class FlatTreeMapViz extends React.Component {
 
     return viz_root;
   }
-}
-
-
-function node_render(foreign_sel) {
-  foreign_sel.html(function (node) {
-    if (this.offsetHeight <= 30 || this.offsetWidth <= 50) { return }
-
-    // const name_to_display = (node.data.subject && node.data.subject.fancy_acronym && this.offsetWidth < 150 ? node.data.subject.fancy_acronym : node.data.name);
-
-    // let text_size = "";
-    // if (this.offsetHeight > 150 && this.offsetWidth > 300) { text_size = "--large" }
-    // if (this.offsetHeight > 50 && this.offsetWidth > 50 && this.offsetHeight <= 100) { text_size = "--small" }
-
-    let show_amount = true;
-    //if (this.offsetHeight <= 50) { show_amount = false }
-
-    let ret = `
-      <div class="FlatTreeMap__TextBox">
-        <div class="FlatTreeMap__ContentTitle">
-          ${node.data.name}
-        </div>
-    `
-    if (show_amount) {
-      ret = ret + `
-        <div class="FlatTreeMap__ContentText">
-          ${formats.compact1(node.data.value)}
-        </div>
-      </div>
-      `
-    }
-    return ret;
-  });
 }
 

@@ -12,10 +12,10 @@ import {
   StdPanel, 
   Col,
 } from '../shared';
+import { FlatTreeMapViz } from '../../flat_treemap/FlatTreeMapViz.js'
 const { text_abbrev } = general_utils;
 const { tbs_color } = charts_index.common_charts_utils;
 const { Format } = util_components;
-const { CirclePack } = declarative_charts;
 
 
 const main_col = "{{est_in_year}}_estimates";
@@ -25,13 +25,6 @@ const planned_vote_or_stat_render = vs => function({calculations, footnotes, sou
   const isVoted = vs === "voted";
 
   const { data, text_func } = graph_args;
-
-  // return graph_top({
-  //   panel, 
-  //   calculations,
-  //   isVoted,
-  // });
-
 
   const col = "{{est_in_year}}_estimates";  
   const top_10_rows = _.take(data, 10);
@@ -81,36 +74,62 @@ const planned_vote_or_stat_render = vs => function({calculations, footnotes, sou
       </Col>
       {show_pack && 
         <Col isGraph size={7}>
-          <CirclePack
-            {...{
-              zoomable: true,
-              data: packing_data,
-              value_attr: main_col,
-              colors: tbs_color(),
-              height: 500,
-              cycle_colours: true,
-              invisible_grand_parent: false,
-              top_font_size: 12,
-              hover_text_func(d){
-                let text = "";
-
-                if (d.depth === 0){ return; }
-                if (d.dept){
-                  text += Subject.Dept.lookup(d.dept).fancy_name + " - ";
-                }
-                
-                text += d.data.desc + " - " + formats.compact1(d.value);
-
-                return text;
-              },
-              text_func,
-            }}
+          <FlatTreeMapViz 
+            data={packing_data}
+            colorScale={
+              d3.scaleOrdinal(_.chain(d3.schemeCategory10)
+                .concat("#bbbbbb")
+                .map(
+                  c => {
+                    const d = d3.color(c);
+                    d.opacity = 0.7;
+                    return d
+                  })
+                .value())
+            }
+            height={500}
+            node_render = {node_render(vs)}
+            tooltip_render = {tooltip_render(vs)}
           />
         </Col>
       }
     </StdPanel>
   );
 
+};
+
+const tooltip_render = vs => function(html_node,node){
+  html_node.html(`
+  ${text_func(vs, node.data)} <br/>
+  ${formats.compact1(node.data["{{est_in_year}}_estimates"])}
+  `);
+}
+
+const node_render = vs => function(foreign_sel){
+  foreign_sel.html(function (node) {
+    if (this.offsetHeight <= 30 || this.offsetWidth <= 50) { return }
+
+    const ret = `
+      <div class="FlatTreeMap__TextBox">
+        <div class="FlatTreeMap__ContentTitle">
+          ${text_func(vs, node.data)}
+        </div>
+        <div class="FlatTreeMap__ContentText">
+          ${formats.compact1(node.data["{{est_in_year}}_estimates"])}
+        </div>
+      </div>
+      `
+    return ret;
+  });
+}
+
+
+const text_func = (vs, d) => {
+  if(vs=='voted'){
+    return d.dept ? `${Subject.Dept.lookup(d.dept).fancy_name} -  ${d.desc}` : d.desc;
+  } else {
+    return d.dept ? `${d.desc} <br/> ${Subject.Dept.lookup(d.dept).fancy_name}` : d.desc;
+  }
 };
 
 const planned_vote_or_stat_calculate = vs => function(subject, info){
@@ -123,21 +142,10 @@ const planned_vote_or_stat_calculate = vs => function(subject, info){
     .value();
 
   const ret = {};
-  ret.text_func = d => {
-    const val = formats.compact1(d.value);
-    let text = `${d.data.desc}: ${val}`;
-
-    if (d.data.dept){
-
-      text = `${Subject.Dept.lookup(d.data.dept).fancy_name} -  ${text}`;
-    }
-    const estimated_string_size = (d.zoom_r*1.2/5) * d.zoom_r/18; 
-    return text_abbrev(text, estimated_string_size);
-  };
   ret.data = _.take(all_rows,10);
   if (vs === 'voted'){
     //vote descriptions are of the form "<vote desc> - <vote num>"
-    //lets strip out the hiphen and everything that follows
+    //lets strip out the hyphen and everything that follows
     ret.data.forEach(row => row.desc = row.desc.replace(/-.+$/,""));
   }
   ret.data.push({
