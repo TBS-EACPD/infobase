@@ -118,6 +118,7 @@ jobs:
 
       - run: sed -i "s#${CDN_URL}#.#g" ./client/build/InfoBase/app/*.js # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
       - run: sed -i "s#${CDN_URL}#.#g" ./client/build/InfoBase/*.html # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
+      #TODO replace gcloud func api url with branch-specific url
       - run: 
           name: start_http_server
           command: (cd client && npm run ci_serve)
@@ -135,11 +136,24 @@ jobs:
       - attach_workspace:
           at: ./
       - run: ./ci_scripts/create_envs.sh
-      #TODO
+      #TODO database with branch-specific name, only if data has changed
 
 
   # Note: the image used for this job is provided by google
-  deploy:
+  deploy_server:
+    working_directory: "~/InfoBase"
+    docker:
+      - image: google/cloud-sdk:slim
+    steps:
+      - attach_workspace:
+          at: ./
+      - run: ./ci_scripts/create_envs.sh
+      - run: ./ci_scripts/authenticate-server-gcloud.sh
+      #TODO deploy gcloud func with branch-specific name, connecting to branch-specific database, only if trasnpilied build has changed
+
+
+  # Note: the image used for this job is provided by google
+  deploy_client:
     working_directory: "~/InfoBase"
     docker:
       - image: google/cloud-sdk:slim
@@ -148,11 +162,12 @@ jobs:
           at: ./
       - run: ./ci_scripts/create_envs.sh
       - run: ./ci_scripts/authenticate-client-gcloud.sh
+      #TODO replace gcloud func api url with branch-specific url
       - run: (cd client && ./deploy_build_scripts/push_to_gcloud_bucket.sh)
-      
 
-# One workflow that runs all three jobs (build -> test -> deploy), each requiring the previous to have passed
-# Note that deploy is filtered by branch to only run on master
+
+# One workflow that runs all three jobs (build -> test -> deploy_data/server/client), each requiring the previous to have passed
+# Note that deploy steps are filtered by branch to only run on master
 workflows:
   version: 2
   build_test_deploy:
@@ -163,9 +178,13 @@ workflows:
             - build
       - deploy_data:
           requires:
-            - build
-          <<: *deploy_filter
-      - deploy:
-          requires:
             - test
+          <<: *deploy_filter
+      - deploy_server:
+          requires:
+            - deploy_data
+          <<: *deploy_filter
+      - deploy_client:
+          requires:
+            - deploy_server
           <<: *deploy_filter
