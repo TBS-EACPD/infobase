@@ -169,7 +169,7 @@ jobs:
       - run: ./ci_scripts/authenticate-server-gcloud.sh
 
       # Checksum all files in data dir
-      - run: cksum ./server/transpiled_build/** > server-checksums.txt
+      - run: find ./server/transpiled_build -name "*.js" | xargs cksum > server-checksums.txt
 
       # Use this cached file to tell if the api needs to be redeployed
       - restore_cache:
