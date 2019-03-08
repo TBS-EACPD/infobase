@@ -19,7 +19,7 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
   const { info, graph_args } = calculations;
   const isVoted = vs === "voted";
 
-  const { data, text_func } = graph_args;
+  const { data } = graph_args;
 
   const col = "{{est_in_year}}_estimates";
   const top_10_rows = _.take(data, 10);
