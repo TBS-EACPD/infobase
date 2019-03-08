@@ -25,6 +25,7 @@ export class FlatTreeMapViz extends React.Component {
       height,
       node_render,
       tooltip_render,
+      value_string,
     } = this.props;
 
     const el = this.el;
@@ -49,7 +50,7 @@ export class FlatTreeMapViz extends React.Component {
       .paddingOuter(10)
       .tile(d3.treemapSquarify.ratio(1))
     treemap(root
-      .sum(function (d) { return d["{{est_in_year}}_estimates"]; })
+      .sum(function (d) { return d[value_string]; })
       .sort((a, b) => {
         if (a.data.others) {
           return 9999999
@@ -74,7 +75,6 @@ export class FlatTreeMapViz extends React.Component {
     // the actual treemap div
     const viz_root = html_root.select('.viz-root');
 
-
     viz_root
       .append("div")
       .attr("class", "FlatTreeMap__GraphArea")
@@ -83,8 +83,7 @@ export class FlatTreeMapViz extends React.Component {
         height: `${y(height)}px`,
       }));
 
-
-    const vs_items = viz_root.select('.FlatTreeMap__GraphArea')
+    const items = viz_root.select('.FlatTreeMap__GraphArea')
       .selectAll('div')
       .data(root.children)
       .enter()
@@ -96,11 +95,13 @@ export class FlatTreeMapViz extends React.Component {
         "background-color": colorScale(d.data),
       }));
 
-    vs_items
+    items
       .append('div')
       .attr("class", "FlatTreeMap__TextBox")
       .call(treemap_node_text_container)
-      .call(node_render)
+      .call(node_render);
+
+    items.each(tooltip_render);
 
     function treemap_node_content_container(sel) {
       sel
@@ -119,9 +120,6 @@ export class FlatTreeMapViz extends React.Component {
           height: `${y(d.y1) - y(d.y0)}px`,
         }))
     }
-
-    vs_items.each(tooltip_render);
-
 
     return viz_root;
   }
