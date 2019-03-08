@@ -1,7 +1,6 @@
 #!/bin/bash
 # CI scripts
 chmod +x ./ci_scripts/create_envs.sh
-chmod +x ./ci_scripts/create_test_envs.sh
 chmod +x ./ci_scripts/create_deploy_envs.sh
 chmod +x ./ci_scripts/authenticate-client-gcloud.sh
 chmod +x ./ci_scripts/authenticate-server-gcloud.sh

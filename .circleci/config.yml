@@ -103,7 +103,6 @@ jobs:
       - attach_workspace:
           at: ./
       - run: sh ./ci_scripts/create_envs.sh
-      - run: sh ./ci_scripts/create_test_envs.sh
 
       - run: 
           name: mongod
