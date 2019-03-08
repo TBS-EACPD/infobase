@@ -167,7 +167,22 @@ jobs:
       - run: ./ci_scripts/create_deploy_envs.sh
 
       - run: ./ci_scripts/authenticate-server-gcloud.sh
-      #TODO deploy gcloud func with branch-specific name, connecting to branch-specific database, only if trasnpilied build has changed
+
+      # Checksum all files in data dir
+      - run: cksum ./server/transpiled_build/** > server-checksums.txt
+
+      # Use this cached file to tell if the api needs to be redeployed
+      - restore_cache:
+          keys:
+            - ib-api-is-deployed-{{ .Branch }}-{{ checksum "./server-checksums.txt" }}-{{ checksum "./server/package-lock.json" }}
+      - run:
+          command: |
+            [ -f "./this-api-is-deployed.txt" ] || (cd server && ../ci_scripts/deploy_server.sh)
+      - run: touch ./this-api-is-deployed.txt
+      - save_cache:
+          paths:
+            - ./this-api-is-deployed.txt
+          key: ib-api-is-deployed--{{ .Branch }}-{{ checksum "./server-checksums.txt" }}-{{ checksum "./server/package-lock.json" }}
 
 
   # Note: the image used for this job is provided by google
@@ -180,7 +195,7 @@ jobs:
           at: ./
       - run: ./ci_scripts/create_envs.sh
       - run: ./ci_scripts/authenticate-client-gcloud.sh
-      - run: sed -i "s#https://us-central1-ib-serverless-api-dev.cloudfunctions.net/app/graphql#https://us-central1-ib-serverless-api-dev.cloudfunctions.net/$CIRCLE_BRANCH/graphq#g" ./client/build/InfoBase/app/*.js # Replace prod API URL with local URL so these tests use the local server# replace prod gcloud func api url with branch-specific url
+      - run: sed -i "s#https://us-central1-ib-serverless-api-dev.cloudfunctions.net/app/graphql#https://us-central1-ib-serverless-api-dev.cloudfunctions.net/$CIRCLE_BRANCH/graphql#g" ./client/build/InfoBase/app/*.js # Replace prod API URL with local URL so these tests use the local server# replace prod gcloud func api url with branch-specific url
       - run: (cd client && ./deploy_build_scripts/push_to_gcloud_bucket.sh)
 
 

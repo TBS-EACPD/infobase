@@ -1,5 +1,5 @@
 #!/bin/bash
-echo $GCLOUD_JSON_AUTH > ${HOME}/server-gcloud-service-key.json
+echo $API_GCLOUD_JSON_AUTH > ${HOME}/server-gcloud-service-key.json
 # if gcloud doesn't work, try sudo /opt/google-cloud-sdk/bin/gcloud
 # gcloud components update
 gcloud auth activate-service-account --key-file=${HOME}/server-gcloud-service-key.json
