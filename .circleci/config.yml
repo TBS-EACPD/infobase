@@ -127,7 +127,7 @@ jobs:
       - attach_workspace:
           at: ./
       - run: ./ci_scripts/create_envs.sh
-      - run: ./ci_scripts/authenticate-gcloud.sh
+      - run: ./ci_scripts/authenticate-client-gcloud.sh
       - run: (cd client && ./deploy_build_scripts/push_to_gcloud_bucket.sh)
       
 
