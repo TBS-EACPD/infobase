@@ -102,7 +102,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
-      - run: sh ./ci_scripts/create_envs.sh
+      - run: ./ci_scripts/create_envs.sh
 
       - run: 
           name: mongod
@@ -136,10 +136,23 @@ jobs:
       - attach_workspace:
           at: ./
       - run: ./ci_scripts/create_envs.sh
-      - run: sh ./ci_scripts/create_deploy_envs.sh
+      - run: ./ci_scripts/create_deploy_envs.sh
 
-      #TODO only if data has changed
-      - run: (cd server && npm run transpiled_load_models)
+      # Checksum all files in data dir
+      - run: shasum ../data/* > data-checksums.txt
+
+      # Use this cached file to tell if the data needs to be loaded to mongodb 
+      - restore_cache:
+          keys:
+            - ib-data-is-deployed-{{ .Branch }}-{{ checksum "./data-checksums.txt" }}
+      - run:
+          command: |
+            [ -f "./this-data-is-deployed.txt" ] || (cd server && npm run transpiled_load_models)
+      - run: ("" > this-data-is-deployed.txt)
+      - save_cache:
+          paths:
+            - ./this-data-is-deployed.txt
+          key: ib-data-is-deployed--{{ .Branch }}-{{ checksum "./data-checksums.txt" }}
 
 
   # Note: the image used for this job is provided by google
@@ -151,7 +164,7 @@ jobs:
       - attach_workspace:
           at: ./
       - run: ./ci_scripts/create_envs.sh
-      - run: sh ./ci_scripts/create_deploy_envs.sh
+      - run: ./ci_scripts/create_deploy_envs.sh
 
       - run: ./ci_scripts/authenticate-server-gcloud.sh
       #TODO deploy gcloud func with branch-specific name, connecting to branch-specific database, only if trasnpilied build has changed
