@@ -83,6 +83,7 @@ export class FlatTreeMapViz extends React.Component {
         height: `${y(height)}px`,
       }));
 
+
     const vs_items = viz_root.select('.FlatTreeMap__GraphArea')
       .selectAll('div')
       .data(root.children)
@@ -92,7 +93,7 @@ export class FlatTreeMapViz extends React.Component {
       .attr("tabindex", 0)
       .call(treemap_node_content_container)
       .styles((d) => ({
-        "background-color": colorScale(d.data.desc),
+        "background-color": colorScale(d.data),
       }));
 
     vs_items
@@ -119,39 +120,8 @@ export class FlatTreeMapViz extends React.Component {
         }))
     }
 
-    const tt = viz_root.append("div")
-      .attr("class", "FlatTreeMap__ToolTip")
-      .style("opacity", 0);
+    vs_items.each(tooltip_render);
 
-
-    vs_items
-      .on("mouseenter", function (d) {
-        tt
-          .transition()
-          .duration(100)
-          .style("opacity", 1);
-        tt
-          .call(tooltip_render,d)
-          .styles(() => ({
-            left: tooltip_pos(d)[0] + "px",
-            top: tooltip_pos(d)[1] + "px",
-            "max-width": "300px",
-          }))
-      })
-      .on("mouseleave", function (d) {
-        tt.transition()
-          .duration(1)
-          .style("opacity", 0);
-      });
-
-    function tooltip_pos(d){
-      let tx = d.x1 - 50;
-      let ty = d.y0 - 25;
-      if (tx + 300 > width) {
-        tx = width-300;
-      }
-      return [tx,ty];
-    }
 
     return viz_root;
   }
