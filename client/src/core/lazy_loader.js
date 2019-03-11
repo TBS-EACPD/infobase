@@ -27,13 +27,15 @@ function ensure_loaded({
   table_keys, 
   subject_level, 
   subject,
-  use_api_for_results,
+  //use_api_for_results,
   results,
   result_docs,
   require_result_counts,
   require_granular_result_counts,
   footnotes_for: footnotes_subject,
 }){
+  const use_api_for_results = true;
+
   const table_set = _.chain( table_keys )
     .union(
       _.chain(graph_keys)

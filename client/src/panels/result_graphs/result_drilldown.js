@@ -40,7 +40,7 @@ import {
 
 import { ensure_loaded } from '../../core/lazy_loader.js';
 
-const use_api_for_results = false;
+const use_api_for_results = true;
 
 const get_non_col_content_func = createSelector(
   _.property('doc'),
