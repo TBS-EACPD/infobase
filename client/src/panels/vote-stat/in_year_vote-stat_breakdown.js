@@ -69,7 +69,7 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
       </Col>
       {show_pack &&
         <Col isGraph size={6}>
-          <div className="centerer" style={{width: "100%"}}>
+          <div className="centerer" style={{ width: "100%" }}>
             <FlatTreeMapViz
               data={packing_data}
               colorScale={color_scale(vs)}
@@ -115,13 +115,14 @@ const tooltip_render = vs => function (d) {
     "aria-hidden": "true",
     // this can't be called "title" (what tooltip.js uses) because of some other hover effects that fire on titles.
     IB_tooltip_text: ` 
-      ${text_func(vs, d.data, "<br/>")} <br/>
-      ${formats.compact1(d.data["{{est_in_year}}_estimates"])}
-      `,
+      <div class="FlatTreeMap__ToolTip">
+        ${text_func(vs, d.data, "<br/>", true)} <br/>
+        <span class="FlatTreeMap__ToolTip--amount">${formats.compact1(d.data["{{est_in_year}}_estimates"])}</span>
+      </div>`,
     "data-toggle": "tooltip",
     "data-html": "true",
     "data-container": "body",
-  })
+  });
 }
 
 const d3_scale = d3.scaleOrdinal(_.chain(d3.schemeCategory10)

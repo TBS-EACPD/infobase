@@ -38,12 +38,9 @@
 
 
 .FlatTreeMap__ToolTip {   
-    position: absolute;           
-    text-align: center;                 
-    padding: 2px;             
-    font-size: 13px;        
-    background: #c7dbee;   
-    border: 1px solid #000;      
-    border-radius: 5px;           
-    pointer-events: none;         
-  }
+  text-align: left;  
+}
+
+.FlatTreeMap__ToolTip--amount {
+  font-size: 16px;     
+}
