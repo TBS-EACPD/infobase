@@ -5,7 +5,7 @@ export class FlatTreeMapViz extends React.Component {
     super(props);
   }
   render() {
-    return <div ref={div => this.el = div} />
+    return <div className="centerer" style={{width: "100%"}} ref={div => this.el = div} />
   }
   componentDidMount() {
     this._imperative_render();
@@ -17,32 +17,34 @@ export class FlatTreeMapViz extends React.Component {
     const {
       data,
       colorScale,
-      height,
       node_render,
       tooltip_render,
       value_string,
     } = this.props;
 
     const el = this.el;
+    const margin = {
+      right: 50,
+      left: 50};
+    const width = el.offsetWidth - margin.left - margin.right;
+    const height = width;
+
     el.innerHTML = `
-    <div  class="TreeMap__Mainviz">
-      <div
-          class="viz-root"
-          style="
-            position:relative;
-            min-height: ${height}px;"
-          >
-      </div>
+    <div
+        class="viz-root"
+        style="
+          position: relative;
+          height: ${height}px;
+          width: ${width}px;"
+        >
     </div>`;
 
-    const width = height;
 
     const root = d3.hierarchy(data);
 
     const treemap = d3.treemap();
     treemap
       .size([width, height])
-      .paddingOuter(10)
       .tile(d3.treemapSquarify.ratio(1))
     treemap(root
       .sum(function (d) { return d[value_string]; })
@@ -57,28 +59,18 @@ export class FlatTreeMapViz extends React.Component {
       })
     );
 
-    // sets x and y scale to determine size of visible boxes
-    const x = d3.scaleLinear()
-      .domain([0, width])
-      .range([0, width]);
-    const y = d3.scaleLinear()
-      .domain([0, height])
-      .range([0, height]);
+    // // sets x and y scale to determine size of visible boxes
+    // const x = d3.scaleLinear()
+    //   .domain([0, width])
+    //   .range([0, width]);
+    // const y = d3.scaleLinear()
+    //   .domain([0, height])
+    //   .range([0, height]);
+
 
     const html_root = d3.select(el).select('div');
 
-    // the actual treemap div
-    const viz_root = html_root.select('.viz-root');
-
-    viz_root
-      .append("div")
-      .attr("class", "FlatTreeMap__GraphArea")
-      .styles(() => ({
-        width: `${x(width)}px`,
-        height: `${y(height)}px`,
-      }));
-
-    const items = viz_root.select('.FlatTreeMap__GraphArea')
+    const items = html_root
       .selectAll('div')
       .data(root.children)
       .enter()
@@ -101,22 +93,22 @@ export class FlatTreeMapViz extends React.Component {
     function treemap_node_content_container(sel) {
       sel
         .styles(d => ({
-          left: `${x(d.x0)}px`,
-          top: `${y(d.y0)}px`,
-          width: `${x(d.x1) - x(d.x0)}px`,
-          height: `${y(d.y1) - y(d.y0)}px`,
+          left: `${(d.x0)}px`,
+          top: `${(d.y0)}px`,
+          width: `${(d.x1) - (d.x0)}px`,
+          height: `${(d.y1) - (d.y0)}px`,
         }))
     }
 
     function treemap_node_text_container(sel) {
       sel
         .styles(d => ({
-          width: `${x(d.x1) - x(d.x0)}px`,
-          height: `${y(d.y1) - y(d.y0)}px`,
+          width: `${(d.x1) - (d.x0)}px`,
+          height: `${(d.y1) - (d.y0)}px`,
         }))
     }
 
-    return viz_root;
+    return html_root;
   }
 }
 

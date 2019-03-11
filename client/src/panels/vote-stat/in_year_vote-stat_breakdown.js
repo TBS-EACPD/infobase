@@ -59,7 +59,7 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
           args={info}
         />
       </Col>
-      <Col isGraph size={5}>
+      <Col isGraph size={6}>
         <TopTenTable
           rows={rows}
           complement_amt={complement_amt}
@@ -68,8 +68,8 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
         />
       </Col>
       {show_pack &&
-        <Col isGraph size={7}>
-          <div className="centerer">
+        <Col isGraph size={6}>
+          <div className="centerer" style={{width: "100%"}}>
             <FlatTreeMapViz
               data={packing_data}
               colorScale={color_scale(vs)}
