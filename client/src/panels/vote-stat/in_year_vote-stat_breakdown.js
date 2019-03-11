@@ -9,7 +9,7 @@ import {
   StdPanel,
   Col,
 } from '../shared';
-import { FlatTreeMapViz } from '../../charts/flat_treemap/FlatTreeMapViz.js'
+import { FlatTreeMapViz } from '../../charts/flat_treemap/FlatTreeMapViz.js';
 const { Format } = util_components;
 
 
@@ -73,7 +73,6 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
             <FlatTreeMapViz
               data={packing_data}
               colorScale={color_scale(vs)}
-              height={500}
               node_render={node_render(vs)}
               tooltip_render={tooltip_render(vs)}
               value_string="{{est_in_year}}_estimates"
@@ -90,7 +89,7 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
 
 const node_render = vs => function (foreign_sel) {
   foreign_sel.html(function (node) {
-    if (this.offsetHeight <= 30 || this.offsetWidth <= 50) { return }
+    if (this.offsetHeight <= 30 || this.offsetWidth <= 50) { return; }
 
     const ret = `
       <div class="FlatTreeMap__TextBox">
@@ -98,9 +97,9 @@ const node_render = vs => function (foreign_sel) {
           ${text_func(vs, node.data, "-")}
         </div>
         ${ this.offsetHeight > 50 ?
-        `<div class="FlatTreeMap__ContentText">
-          ${formats.compact1(node.data["{{est_in_year}}_estimates"])}
-        </div>` : ""}
+          `<div class="FlatTreeMap__ContentText">
+            ${formats.compact1(node.data["{{est_in_year}}_estimates"])}
+          </div>` : ""}
       </div>
       `
     return ret;
@@ -131,11 +130,11 @@ const d3_scale = d3.scaleOrdinal(_.chain(d3.schemeCategory10)
     c => {
       const d = d3.color(c);
       d.opacity = 0.7; // lighten them slightly so the text shows up
-      return d
+      return d;
     })
-  .value())
+  .value());
 const color_scale = vs => function (d) {
-  return d3_scale(text_func(vs, d, ""))
+  return d3_scale(text_func(vs, d, ""));
 }
 
 
@@ -164,7 +163,6 @@ const planned_vote_or_stat_calculate = vs => function (subject, info) {
     //lets strip out the hyphen and everything that follows
     ret.data.forEach(row => row.desc = row.desc.replace(/-.+$/, ""));
   }
-  // ret.data.forEach(row => row.id = `${vs}_${row.}`)
   ret.data.push({
     desc: text_maker(`all_other_${vs}_items`),
     others: true,
@@ -234,21 +232,20 @@ const TopTenTable = ({ rows, total_amt, complement_amt, isVoted }) => (
       </tr>
     </tbody>
   </table>
-)
+);
 
-const row_cells = ({ name, rpb_link, voted_stat, amount }) =>
+const row_cells = ({ name, rpb_link, voted_stat, amount }) => (
   <Fragment>
-    {rpb_link ? (
+    { rpb_link ? 
       <td className="left-text_plain">
         <a href={rpb_link}>
           {name}
         </a>
+      </td> :
+      <td className="left-text_plain">
+        {name}
       </td>
-    ) : (
-        <td className="left-text_plain">
-          {name}
-        </td>
-      )}
+    }
     <td className="left-text_plain">
       {voted_stat}
     </td>
@@ -259,3 +256,4 @@ const row_cells = ({ name, rpb_link, voted_stat, amount }) =>
       />
     </td>
   </Fragment>
+);

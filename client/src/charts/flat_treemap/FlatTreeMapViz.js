@@ -5,7 +5,7 @@ export class FlatTreeMapViz extends React.Component {
     super(props);
   }
   render() {
-    return <div className="centerer" style={{width: "100%"}} ref={div => this.el = div} />
+    return <div className="centerer" style={{width: "100%"}} ref={div => this.el = div} />;
   }
   componentDidMount() {
     this._imperative_render();
@@ -25,7 +25,8 @@ export class FlatTreeMapViz extends React.Component {
     const el = this.el;
     const margin = {
       right: 50,
-      left: 50};
+      left: 50,
+    };
     const width = el.offsetWidth - margin.left - margin.right;
     const height = width;
 
@@ -45,28 +46,20 @@ export class FlatTreeMapViz extends React.Component {
     const treemap = d3.treemap();
     treemap
       .size([width, height])
-      .tile(d3.treemapSquarify.ratio(2))
+      .tile(d3.treemapSquarify.ratio(2));
+
     treemap(root
       .sum(function (d) { return d[value_string]; })
       .sort((a, b) => {
         if (a.data.others) {
-          return 9999999
+          return 9999999;
         }
         if (b.data.others) {
-          return -9999999
+          return -9999999;
         }
-        return b.value - a.value || b.height - a.height
+        return b.value - a.value || b.height - a.height;
       })
     );
-
-    // // sets x and y scale to determine size of visible boxes
-    // const x = d3.scaleLinear()
-    //   .domain([0, width])
-    //   .range([0, width]);
-    // const y = d3.scaleLinear()
-    //   .domain([0, height])
-    //   .range([0, height]);
-
 
     const html_root = d3.select(el).select('div');
 
@@ -91,21 +84,23 @@ export class FlatTreeMapViz extends React.Component {
     items.each(tooltip_render);
 
     function treemap_node_content_container(sel) {
-      sel
-        .styles(d => ({
+      sel.styles(
+        d => ({
           left: `${(d.x0)}px`,
           top: `${(d.y0)}px`,
           width: `${(d.x1) - (d.x0)}px`,
           height: `${(d.y1) - (d.y0)}px`,
-        }))
+        })
+      );
     }
 
     function treemap_node_text_container(sel) {
-      sel
-        .styles(d => ({
+      sel.styles(
+        d => ({
           width: `${(d.x1) - (d.x0)}px`,
           height: `${(d.y1) - (d.y0)}px`,
-        }))
+        })
+      )
     }
 
     return html_root;
