@@ -59,8 +59,8 @@ const tt_params_from_node = (node) => ({
   placement: node.getAttribute('data-ibtt-placement') ? node.getAttribute('data-ibtt-placement') : 'bottom',
   container: node.getAttribute('data-ibtt-container') ? node.getAttribute('data-ibtt-container') : body,
   html: node.getAttribute('data-ibtt-html') ? node.getAttribute('data-ibtt-html') : true,
-  arrowSelector: node.getAttribute('data-ibtt-arrowSelector') ? node.getAttribute('data-ibtt-arrowSelector') : '.tooltip-arrow',
-  innerSelector: node.getAttribute('data-ibtt-innerSelector') ? node.getAttribute('data-ibtt-innerSelector') : '.tooltip-inner',
+  arrowSelector: node.getAttribute('data-ibtt-arrowselector') ? node.getAttribute('data-ibtt-arrowselector') : '.tooltip-inner, .tooltip__inner',
+  innerSelector: node.getAttribute('data-ibtt-innerselector') ? node.getAttribute('data-ibtt-innerselector') : '.tooltip-inner, .tooltip__inner',
   delay: node.getAttribute('data-ibtt-delay') ? node.getAttribute('data-ibtt-delay') : 0,
 })
 
@@ -111,9 +111,7 @@ const TooltipActivator = _.isUndefined(MutationObserver) ?
       );
     }
     componentDidUpdate() {
-
       const { current_tooltip_nodes } = this.state;
-
       if (_.isEmpty(this.tooltip_instances)) {
         this.tooltip_instances = _.map(
           current_tooltip_nodes,
