@@ -17,7 +17,7 @@ function get_connection_str(){
     MDB_NAME, //using different databases on the same 'cluster' will be how we stage deployments 
   } = process.env;
 
-  //tried short connection string, but it didn't work in the lambda for some reason
+  //MDB_CONNECT_STRING is the pre-3.0 verson because the gcloud function node.js has old mongodb drivers
   return MDB_CONNECT_STRING
     .replace('{MDB_USERNAME}', MDB_USERNAME)
     .replace('{MDB_PW}', MDB_PW)
