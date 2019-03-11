@@ -5,7 +5,6 @@ import { Line as D3Line } from './line.js';
 import { HBarComposition } from './hbar_composition.js';
 import { PieOrBar } from './pie_or_bar.js';
 import { SafeProgressDonut } from './safe_progress_donut.js';
-import { Pack } from './pack.js';
 import { CirclePieChart as D3CirclePieChart } from './circle_chart.js';
 import { TwoSeriesBar } from './two_series_bar.js';
 
@@ -339,27 +338,6 @@ class A11YTable extends React.PureComponent {
   }
 
 }
-
-class CirclePack extends React.Component {
-  render(){
-    return <div ref="graph_area" style={{position: 'relative'}} />
-  }
-  _render(){
-    this.graph_instance.render(_.clone(this.props));
-  }
-  componentDidMount(){
-    this.graph_instance = new Pack(
-      d3.select(this.refs.graph_area),
-      _.clone(this.props)
-    );
-    this._render()
-
-  }
-  componentDidUpdate(){
-    this._render();
-  }
-}
-
 class CirclePieChart extends React.Component {
   render(){
     return <div ref="graph_area" style={{position: 'relative'}} />
@@ -410,7 +388,6 @@ export {
   TabularPercentLegend,
   SafePie,
   ProgressDonut,
-  CirclePack,
   CirclePieChart,
   DualAxisBarChart,
 };

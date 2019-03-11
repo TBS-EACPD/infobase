@@ -24,7 +24,6 @@ import { ConceptExplorer } from '../charts/concept-explorer.js';
 import { HBarComposition } from '../charts/hbar_composition.js';
 import { ProgressDonut } from '../charts/progress_donut.js';
 import { TwoSeriesBar } from '../charts/two_series_bar.js';
-import * as Pack from '../charts/pack.js';
 
 
 var formats = FORMAT.formats;
@@ -138,7 +137,6 @@ export {
   Line, 
   Canada, 
   Arrow, 
-  Pack, 
   heatmap, 
   ConceptExplorer, 
   HBarComposition, 
