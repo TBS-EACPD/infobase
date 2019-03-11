@@ -94,6 +94,10 @@
   }
 }
 
+.tooltip-inner{
+  background-color: red;
+}
+
 .tag-glossary-item:hover > .tag-tooltip-text,
 .tag-button-helper:focus > .tag-glossary-item > .tag-tooltip-text {
   visibility: visible;

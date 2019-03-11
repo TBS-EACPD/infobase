@@ -229,8 +229,13 @@ class TaggedItemCloud extends React.Component {
           width={18}
           aria-hidden="true"
           src={get_static_url('svg/not-available-white.svg')} 
+          tabIndex="0"
+          data-glossary-key={concept_id}
+          data-toggle="tooltip"
+          data-html="true"
+          data-container="body"
         />
-        <div className="tag-tooltip-text" dangerouslySetInnerHTML={{ __html: get_glossary_item_tooltip_html(concept_id) }} />
+        {/* <div className="tag-tooltip-text" dangerouslySetInnerHTML={{ __html: get_glossary_item_tooltip_html(concept_id) }} /> */}
       </div>
     );
 
