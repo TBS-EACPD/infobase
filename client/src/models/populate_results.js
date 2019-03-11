@@ -155,6 +155,27 @@ function populate_results_info(data){
 
 
 let _api_subject_ids_with_loaded_results = {};
+const sub_program_fields = `
+id
+name
+description
+spend_planning_year_1
+spend_planning_year_2
+spend_planning_year_3
+fte_planning_year_1
+fte_planning_year_2
+fte_planning_year_3
+dp_no_spending_expl
+dp_spend_trend_expl
+dp_no_fte_expl
+dp_fte_trend_expl
+spend_pa_last_year
+fte_pa_last_year
+planned_spend_pa_last_year
+planned_fte_pa_last_year
+drr_spend_expl
+drr_fte_expl
+`;
 const results_fields_fragment = (docs_to_load) => _.chain(docs_to_load)
   .map(doc =>`
 ${doc}_results: results(doc: "${doc}") {
@@ -198,27 +219,11 @@ pidrlinks {
   result_id
 }
 sub_programs {
-  id
+  ${sub_program_fields}
   ${results_fields_fragment(docs_to_load)}
-  name
-  description
-  drr_fte_expl
-  drr_spend_expl
-  dp_fte_trend_expl
-  dp_spend_trend_expl
-  dp_no_fte_expl
-  dp_no_spending_expl
   sub_programs {
-    id
+    ${sub_program_fields}
     ${results_fields_fragment(docs_to_load)}
-    name
-    description
-    drr_fte_expl
-    drr_spend_expl
-    dp_fte_trend_expl
-    dp_spend_trend_expl
-    dp_no_fte_expl
-    dp_no_spending_expl
   }
 }
 `;
@@ -408,25 +413,37 @@ function extract_flat_data_from_results_hierarchies(hierarchical_response_data){
         _.each(
           subject.sub_programs,
           (sub_program) => {
-            _.each([
-              "spend_planning_year_1",
-              "spend_planning_year_2",
-              "spend_planning_year_3",
-              "fte_planning_year_1",
-              "fte_planning_year_2",
-              "fte_planning_year_3",
-              "spend_pa_last_year",
-              "fte_pa_last_year",
-              "planned_spend_pa_last_year",
-              "planned_fte_pa_last_year",
-            ], key => {
-              sub_program[key] = _.isNaN(sub_program[key]) ? null : +sub_program[key];
-            });
 
-            sub_programs.push({
-              ..._.omit(sub_program, "__typename"),
-              parent_id: subject.id,
-            });
+            const cleaned_sub_program = _.chain(sub_program)
+              .cloneDeep()
+              .omit("__typename")
+              .thru( sub_program => {
+                _.each(
+                  [
+                    "spend_planning_year_1",
+                    "spend_planning_year_2",
+                    "spend_planning_year_3",
+                    "fte_planning_year_1",
+                    "fte_planning_year_2",
+                    "fte_planning_year_3",
+                    "spend_pa_last_year",
+                    "fte_pa_last_year",
+                    "planned_spend_pa_last_year",
+                    "planned_fte_pa_last_year",
+                  ], 
+                  key => {
+                    sub_program[key] = _.isNaN(sub_program[key]) ? null : +sub_program[key];
+                  }
+                );
+
+                return {
+                  ...sub_program,
+                  parent_id: subject.id,
+                };
+              })
+              .value();
+
+            sub_programs.push(cleaned_sub_program);
           }
         );
 
