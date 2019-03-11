@@ -57,7 +57,7 @@ const get_tooltip_title = (tooltip_node) => {
   if( tooltip_node.getAttribute('data-glossary-key') ){
     return get_glossary_item_tooltip_html( tooltip_node.getAttribute('data-glossary-key') );
   } else {
-    return tooltip_node.getAttribute('title');
+    return tooltip_node.getAttribute('IB_tooltip_text');
   }
 };
 

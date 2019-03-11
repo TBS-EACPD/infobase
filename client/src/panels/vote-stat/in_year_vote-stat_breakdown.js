@@ -113,7 +113,8 @@ const tooltip_render = vs => function (d) {
     className: "link-unstyled",
     tabIndex: "0",
     "aria-hidden": "true",
-    title: `
+    // this can't be called "title" (what tooltip.js uses) because of some other hover effects that fire on titles.
+    IB_tooltip_text: ` 
       ${text_func(vs, d.data, "<br/>")} <br/>
       ${formats.compact1(d.data["{{est_in_year}}_estimates"])}
       `,
