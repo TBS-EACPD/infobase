@@ -45,7 +45,7 @@ export class FlatTreeMapViz extends React.Component {
     const treemap = d3.treemap();
     treemap
       .size([width, height])
-      .tile(d3.treemapSquarify.ratio(1))
+      .tile(d3.treemapSquarify.ratio(2))
     treemap(root
       .sum(function (d) { return d[value_string]; })
       .sort((a, b) => {

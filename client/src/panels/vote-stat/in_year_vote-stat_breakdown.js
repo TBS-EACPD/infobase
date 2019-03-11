@@ -97,9 +97,10 @@ const node_render = vs => function (foreign_sel) {
         <div class="FlatTreeMap__ContentTitle">
           ${text_func(vs, node.data, "-")}
         </div>
-        <div class="FlatTreeMap__ContentText">
+        ${ this.offsetHeight > 50 ?
+        `<div class="FlatTreeMap__ContentText">
           ${formats.compact1(node.data["{{est_in_year}}_estimates"])}
-        </div>
+        </div>` : ""}
       </div>
       `
     return ret;

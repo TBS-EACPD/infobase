@@ -21,15 +21,16 @@
 }
 
 .FlatTreeMap__ContentTitle {
-  font-size:1em;
+  font-size: 14px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.2em;
   font-weight: bold;
 }
 
 .FlatTreeMap__ContentText {
+  font-size: 13px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -40,7 +41,7 @@
     position: absolute;           
     text-align: center;                 
     padding: 2px;             
-    font-size: 1em;        
+    font-size: 13px;        
     background: #c7dbee;   
     border: 1px solid #000;      
     border-radius: 5px;           
