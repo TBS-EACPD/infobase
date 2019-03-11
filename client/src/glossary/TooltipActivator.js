@@ -1,10 +1,10 @@
-import {get_glossary_item_tooltip_html} from '../models/glossary.js';
+import { get_glossary_item_tooltip_html } from '../models/glossary.js';
 
 import Tooltip from 'tooltip.js';
 
 // Patch over Tooltip's _scheduleShow and _scheduleHide to not use setTimeout with a 0 second delay
 // The 0 second delay could still result in the _show call being stuck pending for extended periods (was consistently > 1 second on mobile Chrome)
-Tooltip._scheduleShow = function(reference, delay, options /*, evt */){
+Tooltip._scheduleShow = function (reference, delay, options /*, evt */) {
   this._isOpening = true;
   const computedDelay = delay && delay.show || delay || 0;
   if (computedDelay === 0) {
@@ -13,9 +13,9 @@ Tooltip._scheduleShow = function(reference, delay, options /*, evt */){
     this._showTimeout = window.setTimeout(() => this._show(reference, options), computedDelay);
   }
 }
-Tooltip._scheduleHide = function(reference, delay, options, evt){
+Tooltip._scheduleHide = function (reference, delay, options, evt) {
   this._isOpening = false;
-  
+
   const cleanup_and_hide = () => {
     window.clearTimeout(this._showTimeout);
     if (this._isOpen === false) {
@@ -24,19 +24,19 @@ Tooltip._scheduleHide = function(reference, delay, options, evt){
     if (!document.body.contains(this._tooltipNode)) {
       return;
     }
-  
+
     // if we are hiding because of a mouseleave, we must check that the new
     // reference isn't the tooltip, because in this case we don't want to hide it
     if (evt.type === 'mouseleave') {
       const isSet = this._setTooltipNodeEvent(evt, reference, delay, options);
-  
+
       // if we set the new event, don't hide the tooltip yet
       // the new event will take care to hide it if necessary
       if (isSet) {
         return;
       }
     }
-  
+
     this._hide(reference, options);
   }
 
@@ -53,52 +53,54 @@ Tooltip._scheduleHide = function(reference, delay, options, evt){
 const body = document.body;
 const app = document.querySelector('#app');
 
-const get_tooltip_title = (tooltip_node) => {
-  if( tooltip_node.getAttribute('data-glossary-key') ){
-    return get_glossary_item_tooltip_html( tooltip_node.getAttribute('data-glossary-key') );
-  } else {
-    return tooltip_node.getAttribute('IB_tooltip_text');
-  }
-};
 
+const tt_params_from_node = (node) => ({
+  title: node.getAttribute('data-ibtt-glossary-key') ? get_glossary_item_tooltip_html(node.getAttribute('data-ibtt-glossary-key')) : node.getAttribute('data-ibtt-text'),
+  placement: node.getAttribute('data-ibtt-placement') ? node.getAttribute('data-ibtt-placement') : 'bottom',
+  container: node.getAttribute('data-ibtt-container') ? node.getAttribute('data-ibtt-container') : body,
+  html: node.getAttribute('data-ibtt-html') ? node.getAttribute('data-ibtt-html') : true,
+  arrowSelector: node.getAttribute('data-ibtt-arrowSelector') ? node.getAttribute('data-ibtt-arrowSelector') : '.tooltip-arrow',
+  innerSelector: node.getAttribute('data-ibtt-innerSelector') ? node.getAttribute('data-ibtt-innerSelector') : '.tooltip-inner',
+  delay: node.getAttribute('data-ibtt-delay') ? node.getAttribute('data-ibtt-delay') : 0,
+})
 
-const TooltipActivator = _.isUndefined(MutationObserver) ? 
+const TooltipActivator = _.isUndefined(MutationObserver) ?
   _.constant(false) :
   class TooltipActivator extends React.Component {
-    constructor(){
+    constructor() {
       super();
-  
+
       this.state = {
         current_tooltip_nodes: [],
       };
       this.tooltip_instances = [];
-  
+
       this.debounced_mutation_callback = _.debounce(
         (mutationList, observer) => {
-          const previous_tooltip_nodes = _.map( this.tooltip_instances, tooltip_instance => tooltip_instance.node );
+          const previous_tooltip_nodes = _.map(this.tooltip_instances, tooltip_instance => tooltip_instance.node);
           const current_tooltip_nodes = document.querySelectorAll('[data-toggle=tooltip]') || [];
-  
+
           const tooltip_nodes_have_changed = (
-            !( _.isEmpty(previous_tooltip_nodes) && _.isEmpty(current_tooltip_nodes) ) && 
+            !(_.isEmpty(previous_tooltip_nodes) && _.isEmpty(current_tooltip_nodes)) &&
             (
               previous_tooltip_nodes.length !== current_tooltip_nodes.length ||
               !_.chain(previous_tooltip_nodes)
                 .zip(current_tooltip_nodes)
-                .find( nodes_to_compare => nodes_to_compare[0] !== nodes_to_compare[1] )
+                .find(nodes_to_compare => nodes_to_compare[0] !== nodes_to_compare[1])
                 .isUndefined()
                 .value()
             )
           );
-  
-          if (tooltip_nodes_have_changed){
+
+          if (tooltip_nodes_have_changed) {
             this.setState({ current_tooltip_nodes });
           }
         },
         250
       );
-      
+
       this.observer = new MutationObserver(this.debounced_mutation_callback);
-  
+
       this.observer.observe(
         app,
         {
@@ -108,76 +110,66 @@ const TooltipActivator = _.isUndefined(MutationObserver) ?
         }
       );
     }
-    componentDidUpdate(){
-  
+    componentDidUpdate() {
+
       const { current_tooltip_nodes } = this.state;
-      
-      if ( _.isEmpty(this.tooltip_instances) ){
+
+      if (_.isEmpty(this.tooltip_instances)) {
         this.tooltip_instances = _.map(
-          current_tooltip_nodes, 
+          current_tooltip_nodes,
           (node) => ({
             node,
             tooltip: new Tooltip(
               node,
-              {
-                container: body,
-                html: true,
-                placement: 'bottom',
-                title: get_tooltip_title(node),
-              }
+              tt_params_from_node(node),
             ),
           }),
         );
-  
+
       } else {
         const remaining_tooltips = [];
         const outgoing_tooltips = [];
-  
-        this.tooltip_instances.forEach( tooltip_instance => {
+
+        this.tooltip_instances.forEach(tooltip_instance => {
           const is_remaining_tooltip = _.chain(current_tooltip_nodes)
-            .map( node => node !== tooltip_instance.node )
+            .map(node => node !== tooltip_instance.node)
             .some()
             .value();
-  
-          if (is_remaining_tooltip){
+
+          if (is_remaining_tooltip) {
             remaining_tooltips.push(tooltip_instance);
           } else {
             outgoing_tooltips.push(tooltip_instance);
           }
         });
-  
-        outgoing_tooltips.forEach( outgoing_instance => outgoing_instance.tooltip.dispose() );
-  
+
+        outgoing_tooltips.forEach(outgoing_instance => outgoing_instance.tooltip.dispose());
+
         const incoming_tooltips = _.chain(current_tooltip_nodes)
-          .without( ..._.map(remaining_tooltips, tooltip => tooltip.node) )
-          .map( 
+          .without(..._.map(remaining_tooltips, tooltip => tooltip.node))
+          .map(
             node => ({
               node,
               tooltip: new Tooltip(
                 node,
-                {
-                  container: body,
-                  html: true,
-                  placement: 'bottom',
-                  title: get_tooltip_title(node),
-                }
+                tt_params_from_node(node),
               ),
-            }) 
+            })
           )
           .value();
-  
+
         this.tooltip_instances = [
           ...remaining_tooltips,
           ...incoming_tooltips,
         ];
       }
     }
-    componentWillUnmount(){
+    componentWillUnmount() {
       this.observer.disconnect();
       this.debounced_mutation_callback.cancel();
-      this.tooltip_instances.forEach( tooltip_instance => tooltip_instance.tooltip.dispose() );
+      this.tooltip_instances.forEach(tooltip_instance => tooltip_instance.tooltip.dispose());
     }
-    render(){
+    render() {
       return null;
     }
   };

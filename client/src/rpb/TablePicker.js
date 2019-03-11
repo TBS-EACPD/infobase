@@ -120,7 +120,7 @@ class TablePicker extends React.Component {
       .value()
 
 
-    return <div ref="main">
+    return <div ref="main" id="tbp-main">
       <h2 id="tbp-title"> <TextMaker text_key="table_picker_title" /> </h2>
       <p className="medium_panel_text"><TextMaker text_key="table_picker_top_instructions" /></p>
       <div>
@@ -223,19 +223,17 @@ class TaggedItemCloud extends React.Component {
         .flatten()
         .value()]));
     
-    const generate_glossary_tooltip = (concept_id) => (
+    const generate_glossary_tooltip = (concept_id, container) => (
       <div className="tag-glossary-item">
         <img className="tag-glossary-icon"
           width={18}
           aria-hidden="true"
           src={get_static_url('svg/not-available-white.svg')} 
           tabIndex="0"
-          data-glossary-key={concept_id}
           data-toggle="tooltip"
-          data-html="true"
-          data-container="body"
+          data-ibtt-glossary-key={concept_id}
+          data-ibtt-html="true"
         />
-        {/* <div className="tag-tooltip-text" dangerouslySetInnerHTML={{ __html: get_glossary_item_tooltip_html(concept_id) }} /> */}
       </div>
     );
 
@@ -264,7 +262,7 @@ class TaggedItemCloud extends React.Component {
                     </button>
                     { GlossaryEntry.lookup(id) &&
                       <span className="tag-button-helper" tabIndex="0" >
-                        {generate_glossary_tooltip(id)}
+                        {generate_glossary_tooltip(id, document.getElementById("tbp-main"))}
                       </span>
                     }
                   </li>

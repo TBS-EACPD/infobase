@@ -287,10 +287,10 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
                 className="link-unstyled"
                 tabIndex={0}
                 aria-hidden="true"
-                data-glossary-key={status_key_to_glossary_key[status_key]}
                 data-toggle="tooltip"
-                data-html="true"
-                data-container="body"
+                data-ibtt-glossary-key={status_key_to_glossary_key[status_key]}
+                data-ibtt-html="true"
+                data-ibtt-container="body"
               >
                 {result_simple_statuses[status_key].text}
               </span>

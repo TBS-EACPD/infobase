@@ -534,7 +534,7 @@ Handlebars.registerHelper("gl", function glossary_link(key){
 //produces a link with glossary tooltip
 function glossary_tooltip(display, key){
   return new Handlebars.SafeString(
-    `<span class="nowrap glossary-tooltip-link" tabindex="0" aria-hidden="true" data-glossary-key="${key}" data-toggle="tooltip" data-html="true" data-container="body">${display}</span>`
+    `<span class="nowrap glossary-tooltip-link" tabindex="0" aria-hidden="true" data-ibtt-glossary-key="${key}" data-toggle="tooltip" data-ibtt-html="true" data-ibtt-container="body">${display}</span>`
   );
 }
 

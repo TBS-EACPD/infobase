@@ -95,7 +95,10 @@
 }
 
 .tooltip-inner{
-  background-color: red;
+  background-color: rgb(38, 55, 74);
+}
+.tooltip-arrow{
+  border-bottom-color:rgb(38, 55, 74) !important;
 }
 
 .tag-glossary-item:hover > .tag-tooltip-text,
