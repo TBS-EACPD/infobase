@@ -177,7 +177,7 @@ jobs:
             - ib-api-is-deployed-{{ .Branch }}-{{ checksum "./server-checksums.txt" }}-{{ checksum "./server/package-lock.json" }}
       - run:
           command: |
-            [ -f "./this-api-is-deployed.txt" ] || (cd server && ../ci_scripts/deploy_server.sh)
+            [ -f "./this-api-is-deployed.txt" ] || (cd server && ./deploy_scripts/ci_deploy_function.sh)
       - run: touch ./this-api-is-deployed.txt
       - save_cache:
           paths:

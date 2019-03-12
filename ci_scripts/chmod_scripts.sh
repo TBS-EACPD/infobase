@@ -9,3 +9,6 @@ chmod +x ./ci_scripts/deploy_server.sh
 # Client scripts
 chmod +x ./client/deploy_scripts/build_all.sh
 chmod +x ./client/deploy_scripts/push_to_gcloud_bucket.sh
+
+# Server scripts
+chmod +x ./server/deploy_scripts/ci_deploy_function.sh
