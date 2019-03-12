@@ -461,6 +461,9 @@ Subject.Program = class Program extends common(){
   get dead_program(){
     return !this.is_active;
   }
+  get is_fake(){
+    return !this.is_fake_program;
+  }
 };
 
 

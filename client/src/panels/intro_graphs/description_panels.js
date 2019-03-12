@@ -1,4 +1,4 @@
-import { text_maker, TM } from './intro_graph_text_provider.js';
+import { text_maker } from './intro_graph_text_provider.js';
 import {
   PanelGraph,
   TextPanel,
@@ -24,28 +24,11 @@ _.each(['tag','crso','program'], level => {
       
       const {subject} = calculations;
 
-      let link_content = null;
-      if(subject.level==='program' && !_.isEmpty(subject.web_links)){
-        link_content = (
-          <div>
-            <TM k="additional_links" />
-            <ul>
-              {_.map(subject.web_links, href => 
-                <li key={href}>
-                  <a target="_blank" rel="noopener noreferrer" href={href}>
-                    {_.truncate(href, {length: 150})}
-                  </a>
-                </li>
-              )}
-            </ul>
-          </div>
-        );
-      }
-      
-      return <TextPanel title={text_maker(title_keys[level])}>
-        <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(subject.description)} />
-        { link_content }
-      </TextPanel>
+      return (
+        <TextPanel title={text_maker(title_keys[level])}>
+          <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(subject.description)} />
+        </TextPanel>
+      );
 
     },
   });
