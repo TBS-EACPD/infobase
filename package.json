@@ -1,0 +1,17 @@
+{
+  "name": "infobase-monorepo",
+  "private": true,
+  "description": "",
+  "devDependencies": {},
+  "scripts": {
+    "prod_deploy_data": "(cd server && sh deploy_scripts/prod_deploy_data.sh)",
+    "prod_deploy_function": "(cd server && sh deploy_scripts/prod_deploy_function.sh)",
+    "prod_deploy_client": "(cd client && sh deploy_scripts/prod_deploy_script.sh)"
+  },
+  "authors": [
+    "Alex Cousineau-Leduc",
+    "Stephen O'Neil",
+    "Kate Cook"
+  ],
+  "license": "BSD-2-Clause"
+}
