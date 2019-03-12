@@ -291,7 +291,7 @@ export class TwoSeriesBar {
       .enter()
       .append("div")
       .attr("class", "__label center-text")
-      .html((d) => d.value !== 0 ? d.display_value : null)
+      .html(d => d.display_value)
       .styles({
         "padding": "0px",
         "position": "absolute",
