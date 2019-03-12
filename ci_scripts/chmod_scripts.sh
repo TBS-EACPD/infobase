@@ -7,5 +7,5 @@ chmod +x ./ci_scripts/authenticate-server-gcloud.sh
 chmod +x ./ci_scripts/deploy_server.sh
 
 # Client scripts
-chmod +x ./client/deploy_build_scripts/build_all.sh
-chmod +x ./client/deploy_build_scripts/push_to_gcloud_bucket.sh
+chmod +x ./client/deploy_scripts/build_all.sh
+chmod +x ./client/deploy_scripts/push_to_gcloud_bucket.sh
