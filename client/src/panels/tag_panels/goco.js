@@ -190,7 +190,7 @@ class Goco {
 
     graph.dispatch.on( "dataClick.fade_out", fade_out.bind(graph) );
     graph.dispatch.on( "dataClick.render", this.render_goco.bind(this) );
-    graph.dispatch.on( "dataHover", highlight.bind(graph)  );
+    graph.dispatch.on( "dataHover", highlight.bind(graph) );
     graph.dispatch.on( "dataHoverOut", reset_highlight.bind(graph) );
 
     graph.render();

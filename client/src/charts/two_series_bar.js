@@ -96,7 +96,7 @@ export class TwoSeriesBar {
 
     smaller.mapper_to_larger = d3.scaleLinear()
       .domain(smaller.extent)
-      .range(larger.extent);
+      .range((smaller.extent[0]-smaller.extent[1] === 0) ? smaller.extent : larger.extent);
 
     smaller.y = larger.y;
 
@@ -220,10 +220,12 @@ export class TwoSeriesBar {
       .attr("x", (d) => x1(d.label) + (x1.bandwidth() - bar_width) / 2 + "px")
       .attr("width", bar_width)
       .attr("height", function (d) {
-        if (d.value >= 0) {
+        if (d.value > 0) {
           return larger.y(0) - larger.y(d.value);
-        } else {
+        } else if (d.value < 0) {
           return larger.y(d.value) - larger.y(0);
+        } else {
+          return 0;
         }
       })
       .on("end", this.dispatch.call("renderEnd"));
