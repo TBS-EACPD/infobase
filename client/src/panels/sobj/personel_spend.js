@@ -1,8 +1,6 @@
 import { text_maker, TM } from './sobj_text_provider.js';
-import { ResponsiveLine } from '@nivo/line';
 import { TBS_responsive_line } from '../../charts/TBS_nivo_chart';
 import {
-  formats,
   PanelGraph,
   years,
   businessConstants,

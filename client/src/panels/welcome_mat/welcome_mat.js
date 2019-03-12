@@ -7,6 +7,7 @@ import {
   Panel,
   PanelGraph,
   years,
+  formats,
   create_text_maker_component,
   util_components,
   get_planned_fte_source_link,
@@ -14,7 +15,8 @@ import {
   rpb_link,
   get_appropriate_rpb_subject,
 } from "../shared.js" 
-import { TBS_responsive_line } from '../../charts/TBS_nivo_chart';
+import { TBS_responsive_line, TBS_responsive_bar } from '../../charts/TBS_nivo_chart';
+import { run_template } from "../../models/text";
 
 const { Format } = util_components;
 
@@ -66,30 +68,45 @@ const get_historical_fte_source_link = subject => {
   }
 };
 
+const ticks = _.chain(std_years)
+  .union(planning_years)
+  .map(run_template)
+  .value();
 
-const welcome_data = (data) =>{
-  return {
-    "data": data.map((value,index)=>{
-      return {
-        x: index.toString(),
+const welcome_data_line = (data) =>{
+  return [{
+    "data": data.map((value, index) =>{
+      return{
+        x: ticks[index],
         y: value,
       }
-    })}
+    }),
+  }]
+}
+const welcome_data_bar = (data) =>{
+  return data.map((value, year_index) => {
+    return {
+      "year": ticks[year_index],
+      "0": value,
+    }
+  })
 }
 
 const Chart = ({
   data,
   is_money,
-}) => <div style ={{height: '250px'}}>
+  use_line,
+  is_light,
+}) => use_line?<div style ={{height: '250px'}}>
   <TBS_responsive_line
     id = {false}
-    data = {[welcome_data(data)]}
+    data = {welcome_data_line(data)}
     max = {_.max(data)*1.05}
     enableGridX = {false}
     enableGridY = {false}
     min = {_.min(data)*0.95}
     is_money={is_money}
-    tick_amount={5}
+    tick_amount={4}
     remove_bottom_axis = {true}
     margin={{
       "top": 20,
@@ -98,7 +115,27 @@ const Chart = ({
       "left": 70,
     }}
   />
-</div>
+</div> :
+ <div style = {{height: '250px'}}>
+   <TBS_responsive_bar
+     data = {welcome_data_bar(data)}
+     keys= {["0"]}
+     index_by = {"year"}
+     margin={{
+       "top": 20,
+       "right": 30,
+       "bottom": 20,
+       "left": 80,
+     }}
+     enableGridX = {false}
+     enableGridY = {false}
+     remove_bottom_axis={true}
+     is_money ={is_money}
+     colors = {is_light?"#335075":"#000000"}
+     tooltip = { d => <div>{d.indexValue}: <strong>{is_money?formats.compact1(d.value, {raw: true}):formats.big_int_real(d.value, {raw: true})}</strong></div>}
+     tick_value = {5}
+   />
+ </div>
 
 const Pane = ({ size, children, is_header, noPadding }) => (
   <div className={`mat-grid__lg-panel${size} mat-grid__sm-panel`}>
@@ -257,6 +294,7 @@ const WelcomeMat = (props) => {
             <Chart 
               use_line
               data={_.take(spend_data,5)}
+              is_money = {false}
             />
           </Pane>,
         ]}
@@ -284,7 +322,7 @@ const WelcomeMat = (props) => {
           <Pane noPadding key="d" size={40}>
             <Chart 
               use_line
-              is_fte
+              is_money = {true}
               data={_.take(fte_data,5)}
             />
           </Pane>,
@@ -352,6 +390,7 @@ const WelcomeMat = (props) => {
             <Chart 
               data={_.takeRight(spend_data, 3)}
               is_light
+              is_money = {true}
             />
           </Pane>,
         ]}
@@ -380,8 +419,8 @@ const WelcomeMat = (props) => {
           <Pane noPadding key="c" size={40}>
             <Chart  
               data={_.takeRight(fte_data,3)}
-              is_fte
               is_light
+              is_money = {false}
             />
           </Pane>,
         ]}
@@ -629,7 +668,7 @@ const WelcomeMat = (props) => {
             <Chart 
               use_line 
               data={spend_data}
-              is_money={true}
+              is_money
             />
           </Pane>,
         ]}
@@ -678,7 +717,7 @@ const WelcomeMat = (props) => {
             <Chart 
               use_line 
               data={fte_data}
-              is_money={false}
+              is_money = {false}
             />
           </Pane>,
         ]}

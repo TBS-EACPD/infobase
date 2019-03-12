@@ -5,14 +5,11 @@ import {
   formats,
   create_text_maker_component,
   PanelGraph,
-  declarative_charts,
   StdPanel,
   Col,
 } from "../shared";
 
 const { text_maker, TM } = create_text_maker_component(text);
-
-const { Bar } = declarative_charts;
 
 const is_revenue = so_num => +so_num > 19;
 const last_year_col = "{{pa_last_year}}";
@@ -72,7 +69,7 @@ function render({calculations, footnotes, sources}) {
     graph_content = null;
   } else {
     graph_content = (
-      <div style = {{height:'400px'}}>
+      <div style = {{height: '400px'}}>
         <TBS_responsive_bar
           data = {spend_rev_data}
           keys = {ticks}
@@ -81,6 +78,7 @@ function render({calculations, footnotes, sources}) {
           is_interactive = {false}
           label_format = { d=><tspan y={ -4 }> {formats.compact1(d, {raw: true})} </tspan>}
           colors = "paired"
+          enableGridX={false}
         />
       </div>
     );

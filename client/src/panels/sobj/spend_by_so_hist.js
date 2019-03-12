@@ -102,18 +102,18 @@ class SobjLine extends React.Component {
       active: _.includes(active_sobjs, label),
       color: colors(label),
     }));
-
+    
     const graph_series = _.chain(data)
       .filter( ({label}) => _.includes(active_sobjs, label ))
       .map( ({label, data}) => [label, data] )
       .fromPairs()
       .value();
 
+    const years = _.map(std_years,run_template);
     const spending_data = _.map(graph_series, (spending_array,spending_label)=>{
       return{
         id: spending_label,
         data: spending_array.map((spending_value,year_index)=>{
-          const years = _.map(std_years,run_template);
           return{
             x: years[year_index],
             y: spending_value,

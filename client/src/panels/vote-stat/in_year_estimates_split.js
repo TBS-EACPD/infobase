@@ -89,9 +89,9 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
           colors = "paired"
           margin = {{            
             "top": 50,
-            "right": 55,
+            "right": 40,
             "bottom": 120,
-            "left": 80,
+            "left": 40,
           }}
           bttm_axis= {{
             "format": d => `${(_.words(d).length>3)? d.substring(0,20)+'...':d}`,
@@ -99,6 +99,8 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
             "tickRotation": -45,
             "tickPadding": 10,
           }}
+          enableGridX = {false}
+          remove_left_axis = {true}
         />
       </div>
     );
