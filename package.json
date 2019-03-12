@@ -2,11 +2,15 @@
   "name": "infobase-monorepo",
   "private": true,
   "description": "",
-  "devDependencies": {},
   "scripts": {
-    "prod_deploy_data": "(cd server && sh deploy_scripts/prod_deploy_data.sh)",
+    "prod_deploy_data_and_function": "(cd server && sh deploy_scripts/prod_deploy_data_and_function.sh)",
     "prod_deploy_function": "(cd server && sh deploy_scripts/prod_deploy_function.sh)",
-    "prod_deploy_client": "(cd client && sh deploy_scripts/prod_deploy_script.sh)"
+    "prod_deploy_client": "(cd client && sh deploy_scripts/prod_deploy_client.sh)",
+    "prod_deploy_all": "(cd server && sh deploy_scripts/prod_deploy_data_and_function.sh) && (cd client && sh deploy_scripts/prod_deploy_client.sh)",
+
+    "prod_rollback_data": "(cd server && sh deploy_scripts/prod_rollback_data.sh)",
+    "prod_rollback_client": "(cd client && sh deploy_scripts/prod_rollback_client.sh)",
+    "prod_rollback_all": "(cd server && sh deploy_scripts/prod_rollback_data.sh) && (cd client && sh deploy_scripts/prod_rollback_client.sh)"
   },
   "authors": [
     "Alex Cousineau-Leduc",
