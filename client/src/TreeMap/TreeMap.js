@@ -323,7 +323,7 @@ function check_props(props) {
 }
 
 
-function skip(){
+function skip() {
   document.querySelector("#TreeMap__Main").focus();
 };
 
@@ -465,6 +465,9 @@ export default class TreeMapper extends React.Component {
                       legend_measure_text={get_legend_measure_text(color_var, get_changes)}
                       n_legend_vals={n_legend_vals}
                     />
+                  </div>
+                  <div className='explore_description'>
+                    <a href="#rpb">{text_maker("rbp_link_text")}</a>
                   </div>
                 </div>
                 <div className="col-md-2 TreeMap__SideBar" style={{ padding: "0px", minHeight: `${app_height + 9}px` }}>
