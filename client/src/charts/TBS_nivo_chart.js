@@ -42,7 +42,7 @@ export class TBS_responsive_pie extends React.Component{
         animate={true}
         motionStiffness={30}
         motionDamping={15}
-        tooltipFormat={d => _.isUndefined(tooltip_format)?is_money?formats.compact1(d,{raw: true}):formats.big_int_real(d,{raw: true}): tooltip_format}
+        tooltipFormat={ _.isUndefined(tooltip_format)?( d => is_money?"$"+formats.big_int_real(d,{raw: true}):formats.big_int_real(d,{raw: true})): tooltip_format}
         legends={legend}
         theme= {theme}
       />
@@ -107,7 +107,7 @@ export class TBS_responsive_bar extends React.Component{
         labelTextColor="inherit:darker(1.6)"
         motionStiffness={90}
         tooltip = {tooltip}
-        tooltipFormat={d => _.isUndefined(tooltip_format)?is_money?formats.compact1(d,{raw: true}):formats.big_int_real(d,{raw: true}): tooltip_format}
+        tooltipFormat={ _.isUndefined(tooltip_format)?( d => is_money?"$"+formats.big_int_real(d,{raw: true}):formats.big_int_real(d,{raw: true})): tooltip_format}
         enableLabel = {enable_label}
         enableGridX = {enableGridX}
         enableGridY = {enableGridY}
@@ -196,7 +196,7 @@ export class TBS_responsive_line extends React.Component {
         motionStiffness={90}
         motionDamping={15}
         tooltip = {tooltip}
-        tooltipFormat={d => _.isUndefined(tooltip_format)?is_money?formats.compact1(d,{raw: true}):formats.big_int_real(d,{raw: true}): tooltip_format}
+        tooltipFormat={ _.isUndefined(tooltip_format)?( d => is_money?"$"+formats.big_int_real(d,{raw: true}):formats.big_int_real(d,{raw: true})): tooltip_format}
         colors = {_.isUndefined(colors)? '#000000' : colors}
         theme={_.isUndefined(theme)?{
           axis: {

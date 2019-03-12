@@ -97,7 +97,7 @@ const Chart = ({
   is_money,
   use_line,
   is_light,
-}) => use_line?<div style ={{height: '250px'}}>
+}) => use_line?<div style ={{height: '230px'}}>
   <TBS_responsive_line
     id = {false}
     data = {welcome_data_line(data)}
@@ -116,7 +116,7 @@ const Chart = ({
     }}
   />
 </div> :
- <div style = {{height: '250px'}}>
+ <div style = {{height: '230px'}}>
    <TBS_responsive_bar
      data = {welcome_data_bar(data)}
      keys= {["0"]}

@@ -109,7 +109,6 @@ const render = function({calculations, footnotes, sources}) {
             index_by = "years"
             colors = "paired"
             enableGridX = {false}
-            tooltip_format={d=> `$${formats.big_int_real(d, {raw: true})}`}
             legend = {[
               {
                 "translateX": -9,
