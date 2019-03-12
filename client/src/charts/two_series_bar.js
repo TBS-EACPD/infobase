@@ -1,13 +1,13 @@
 import common_charts_utils from './common_charts_utils';
 
 export class TwoSeriesBar {
-  constructor(container,options){
-  // data in the format of
-  // ```javascript
-  // "series 1" : [y1,y2,y3],
-  // "series 2" : [y1,y2,y3],
-  // ticks = ["tick1","tick2"."tick3"]
-  // ```
+  constructor(container, options) {
+    // data in the format of
+    // ```javascript
+    // "series 1" : [y1,y2,y3],
+    // "series 2" : [y1,y2,y3],
+    // ticks = ["tick1","tick2"."tick3"]
+    // ```
 
     common_charts_utils.setup_graph_instance(this, d3.select(container), options);
 
@@ -16,7 +16,7 @@ export class TwoSeriesBar {
     this.graph_area = _graph_area.append("g").attr("class", "inner_graph_area");
   }
 
-  render(options){
+  render(options) {
     this.options = _.extend(this.options, options);
     this.margin = this.options.margin || {
       top: 25,
@@ -74,11 +74,11 @@ export class TwoSeriesBar {
     smaller.has_pos = smaller.extent[1] >= 0;
     smaller.has_neg = smaller.extent[0] < 0;
     const larger_abs_span = larger.extent[1] - larger.extent[0];
-    const smaller_abs_span = smaller.extent[1] - smaller.extent[0]; 
-    const larger_pos_proportion = larger.extent[1]/larger_abs_span;
-    const smaller_pos_proportion = smaller.extent[1]/smaller_abs_span; 
-    const larger_neg_proportion = larger.extent[0]/larger_abs_span;
-    const smaller_neg_proportion = smaller.extent[0]/smaller_abs_span; 
+    const smaller_abs_span = smaller.extent[1] - smaller.extent[0];
+    const larger_pos_proportion = larger.extent[1] / larger_abs_span;
+    const smaller_pos_proportion = smaller.extent[1] / smaller_abs_span;
+    const larger_neg_proportion = larger.extent[0] / larger_abs_span;
+    const smaller_neg_proportion = smaller.extent[0] / smaller_abs_span;
     if (smaller_pos_proportion > larger_pos_proportion) {
       larger.extent[1] = smaller_pos_proportion * larger_abs_span;
     }
@@ -89,7 +89,7 @@ export class TwoSeriesBar {
       const smaller_positive_proportion = smaller.extent[1] / smaller_abs_span;
       larger.extent[1] = smaller_positive_proportion * larger_pos_proportion;
     }
-    
+
     larger.y = d3.scaleLinear()
       .domain(larger.extent)
       .range([height, 0]);
@@ -110,13 +110,13 @@ export class TwoSeriesBar {
       var metrics = context.measureText(label);
       return {
         width: metrics.width,
-        height: label_font_size*1.3333,
+        height: label_font_size * 1.3333,
       };
     };
 
     // add the title
     this.html.select("div.title").remove();
-    
+
     this.html.append("div.title")
       .styles({
         "position": "absolute",
@@ -134,7 +134,7 @@ export class TwoSeriesBar {
       .graph_area
       .selectAll("g.tick-group")
       .data(ticks);
-    
+
     groups.exit().remove();
 
     const new_groups = groups
@@ -154,21 +154,21 @@ export class TwoSeriesBar {
 
     const bar_width = Math.min(x1.bandwidth(), this.max_width || 100);
 
-    const data = _.map(ticks, (tick,i) => {
+    const data = _.map(ticks, (tick, i) => {
       return {
         tick,
         data: [
           {
-            tick, 
-            label: larger.label,name, 
-            value: larger.data[i], 
+            tick,
+            label: larger.label, name,
+            value: larger.data[i],
             display_value: larger.formater(larger.data[i]),
             labelSize: get_label_size_actual(larger.formater(larger.data[i]).replace(/<[^>]*>/g, '')),
           },
           {
-            tick, 
-            label: smaller.label,name, 
-            value: smaller.mapper_to_larger(smaller.data[i]), 
+            tick,
+            label: smaller.label, name,
+            value: smaller.mapper_to_larger(smaller.data[i]),
             display_value: smaller.formater(smaller.data[i]),
             labelSize: get_label_size_actual(smaller.formater(smaller.data[i]).replace(/<[^>]*>/g, '')),
           },
@@ -178,29 +178,29 @@ export class TwoSeriesBar {
 
     const labels_should_be_rotated = _.chain(data)
       .flatMap(data_item => data_item.data)
-      .some(data_item_data => data_item_data.labelSize.width >= bar_width*1.25)
+      .some(data_item_data => data_item_data.labelSize.width >= bar_width * 1.25)
       .value();
 
     // create the grouped bars
     const bars = new_groups
       .selectAll("rect")
-      .data( (d,i) => data[i].data, (d,i) => i + d.display_value );
-    
+      .data((d, i) => data[i].data, (d, i) => i + d.display_value);
+
     const new_bars = bars
       .enter()
       .append("rect")
-      .attr( "width", 1)
+      .attr("width", 1)
       .attr("height", 1)
       .attr("y", larger.y(0))
       .styles(
-        { 
+        {
           "fill-opacity": 1,
           "cursor": this.options.has_callback ? "pointer" : "default",
         }
       )
       .on("click", d => this.dispatch.call("dataClick", this, d.tick))
-      .on("mouseover", this.dispatch.call("dataHover"))
-      .on("mouseout", this.dispatch.call("dataHoverOut"));
+      .on("mouseover", d => this.dispatch.call("dataHover", this, d.tick))
+      .on("mouseout", d => this.dispatch.call("dataHoverOut", this, d.tick));
 
     bars.exit().remove();
 
@@ -210,23 +210,23 @@ export class TwoSeriesBar {
       .styles({
         "fill": (d) => colors(d.label),
       })
-      .attr("y", function(d) {
-        if (d.value > 0){
+      .attr("y", function (d) {
+        if (d.value > 0) {
           return larger.y(d.value);
         } else {
           return larger.y(0);
         }
       })
-      .attr("x", (d) => x1(d.label) + (x1.bandwidth()-bar_width)/2 + "px")
+      .attr("x", (d) => x1(d.label) + (x1.bandwidth() - bar_width) / 2 + "px")
       .attr("width", bar_width)
-      .attr("height", function(d) {
-        if (d.value >= 0){
+      .attr("height", function (d) {
+        if (d.value >= 0) {
           return larger.y(0) - larger.y(d.value);
         } else {
           return larger.y(d.value) - larger.y(0);
         }
       })
-      .on( "end", this.dispatch.call("renderEnd") );
+      .on("end", this.dispatch.call("renderEnd"));
 
     this.graph_area.selectAll(".x.axis").remove();
     this.graph_area.selectAll("div.__labels").remove();
@@ -262,16 +262,16 @@ export class TwoSeriesBar {
       .append("a")
       .attr("tabindex", 0)
       .on("click", d => {
-        this.dispatch.call("dataClick", "render", d), 
+        this.dispatch.call("dataClick", "render", d),
         this.dispatch.call("dataClick", "fade_out", d)
       })
-      .on("keydown", (d)=>{
+      .on("keydown", (d) => {
         if (d3.event.keyCode === 13) {
           this.dispatch.call("dataClick", d);
         }
       })
       .html(ticks_formatter);
-    
+
     this.html.selectAll("div.__labels")
       .data(data)
       .enter()
@@ -282,14 +282,14 @@ export class TwoSeriesBar {
         "top": "0px",
         "height": "10px",
         "width": x0.bandwidth() + "px",
-        "left": d => x0(d.tick) + this.margin.left + "px", 
+        "left": d => x0(d.tick) + this.margin.left + "px",
       })
       .selectAll("div.__label")
-      .data( (d) => d.data )
+      .data((d) => d.data)
       .enter()
       .append("div")
       .attr("class", "__label center-text")
-      .html( (d) => d.value !== 0 ? d.display_value : null )
+      .html((d) => d.value !== 0 ? d.display_value : null)
       .styles({
         "padding": "0px",
         "position": "absolute",
@@ -298,26 +298,26 @@ export class TwoSeriesBar {
         "width": bar_width + "px",
         "font-size": label_font_size + "px",
         "height": "10px",
-        "top": (d,ix) => {
-          if (d.value === 0){
+        "top": (d, ix) => {
+          if (d.value === 0) {
             return larger.y(d.value) + "px";
           }
-          else if (d.value > 0){
+          else if (d.value > 0) {
             let top_position = this.margin.top - 16 + larger.y(d.value) - 5;
             if (labels_should_be_rotated) {
               // labels are rotated for small bars, in which case the vertical position is adjusted (relative to bar_width) to accomodate
-              top_position -= 0.15*bar_width;
+              top_position -= 0.15 * bar_width;
             }
             return top_position + "px";
           } else {
             return larger.y(d.value) + 20 + "px";
           }
         },
-        "left": (d,ix) => {
-          let left_position = x1(d.label) + (x1.bandwidth() - bar_width)/2;
+        "left": (d, ix) => {
+          let left_position = x1(d.label) + (x1.bandwidth() - bar_width) / 2;
           if (labels_should_be_rotated) {
             // labels are rotated for small bars, in which case the position of the left bar's label is adjusted to accomodate
-            left_position += (ix === 0 ? -0.5 : 0)*(bar_width+d.labelSize.height);
+            left_position += (ix === 0 ? -0.5 : 0) * (bar_width + d.labelSize.height);
           }
           return left_position + "px";
         },

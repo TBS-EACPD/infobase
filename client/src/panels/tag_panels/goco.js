@@ -53,6 +53,24 @@ const fade_out = function(d){
     });
 };
 
+const highlight = function(d){
+  this.svg.selectAll("g.tick-group")
+    .filter(dd => d === dd)
+    .selectAll("rect")
+    .transition()
+    .duration(10)
+    .style("fill-opacity", 0.2);
+}
+
+const reset_highlight = function(d){
+  this.svg.selectAll("g.tick-group")
+    .filter(dd => d === dd)
+    .selectAll("rect")
+    .transition()
+    .duration(10)
+    .style("fill-opacity", 1);
+}
+
 
 new PanelGraph({
   key: 'gocographic',
@@ -172,6 +190,8 @@ class Goco {
 
     graph.dispatch.on( "dataClick.fade_out", fade_out.bind(graph) );
     graph.dispatch.on( "dataClick.render", this.render_goco.bind(this) );
+    graph.dispatch.on( "dataHover", highlight.bind(graph)  );
+    graph.dispatch.on( "dataHoverOut", reset_highlight.bind(graph) );
 
     graph.render();
     if (state.active_spend_area) {
