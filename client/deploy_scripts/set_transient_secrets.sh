@@ -13,8 +13,7 @@ function cleanup {
   rm -rf "$scratch"
   
   #log out the service user
-  serviceaccount=$(gcloud auth list --filter="account:$projectname.iam.gserviceaccount.com" --format="value(account)")
-  gcloud auth revoke $serviceaccount
+  gcloud auth revoke
 
   unset SCRATCH
   unset CLOUDFLARE_KEY

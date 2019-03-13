@@ -15,5 +15,5 @@ metadata_db.metadata.insertOne({
   rollback: previous_metadata.prod,
 });
 
-// Drop the previoud rollback db
-db.getSiblingDB(previous_metadata.rollback).drop();
+// Drop the previous rollback db
+db.getSiblingDB(previous_metadata.rollback).dropDatabase();

@@ -8,7 +8,7 @@
     "build": "transpilied_build"
   },
   "engines": {
-    "node": "6.16.0"
+    "node": "^9.0"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
