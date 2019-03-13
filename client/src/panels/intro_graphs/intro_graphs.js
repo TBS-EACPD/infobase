@@ -120,7 +120,6 @@ _.each(['gov', 'dept'], lvl => {
         'who_is_fps',
         'what_are_ftes',
         'what_are_headcounts',
-        'fte_headcounts_difference',
         'what_are_emp_tenures',
         'what_ppl_are_included',
         'what_ppl_arent_included',
