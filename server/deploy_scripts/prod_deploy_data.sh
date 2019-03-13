@@ -8,3 +8,5 @@ source deploy_scripts/set_transient_data_secrets.sh # these trap EXIT to handle 
 babel-node src/models/populate_models.js
 
 source deploy_scripts/unset_prod_env_vars.sh
+
+exit

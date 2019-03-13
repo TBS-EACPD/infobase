@@ -21,3 +21,5 @@ gsutil -m rsync -a public-read -r -d $STAGING_BUCKET $PROD_BUCKET
 
 #clear certain cloudflare caches
 ./deploy_scripts/selectively_clear_cloudflare_cache.sh
+
+exit
