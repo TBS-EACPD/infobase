@@ -8,7 +8,7 @@ MDB_NAME=prod-db-$(git rev-parse HEAD | cut -c1-7)
 
 (cd ../client && sh deploy_scripts/prod_deploy_client.sh)
 
-# --eval "...script" seems to be the go-to way to passing args in to a JS mongo script
+# --eval seems to be the go-to way to passing args in to a JS mongo script
 mongo $(lpass show MDB_SHELL_CONNECT_STRING --notes) \
   --username $(lpass show MDB_WRITE_USER --notes) --password $(lpass show MDB_WRITE_PW --notes) \
   --eval "const new_prod_db_name = '$MDB_NAME';" \ 

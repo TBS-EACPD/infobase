@@ -1,6 +1,6 @@
 const metadata_db = db.getSiblingDB('metadata');
 
-const current_metadata_collection = db.getSiblingDB('metadata').metadata;
+const current_metadata_collection = metadata_db.metadata;
 
 const current_metadata = current_metadata_collection.findOne({});
 
