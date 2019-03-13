@@ -113,13 +113,13 @@ const tooltip_render = vs => function (d) {
     tabIndex: "0",
     "aria-hidden": "true",
     // this can't be called "title" (what tooltip.js uses) because of some other hover effects that fire on titles.
-    IB_tooltip_text: ` 
+    "data-ibtt-text": ` 
       <div class="FlatTreeMap__ToolTip">
         ${text_func(vs, d.data, "<br/>", true)} <br/>
         <span class="FlatTreeMap__ToolTip--amount">${formats.compact1(d.data["{{est_in_year}}_estimates"])}</span>
       </div>`,
     "data-toggle": "tooltip",
-    "data-html": "true",
+    "data-ibtt-html": "true",
     "data-container": "body",
   });
 }
