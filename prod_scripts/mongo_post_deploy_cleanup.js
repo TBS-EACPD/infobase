@@ -1,6 +1,14 @@
-// TODO 
-// 1) get current prod db name
-// 2) get current rollback db name
-// 3) change prod db to latest deployed
-// 4) change rollback db to previous prod db
-// 5) drop previous rollback
+const metadata_db = db.getSiblingDB('metadata');
+
+const current_metadata_collection = db.getSiblingDB('metadata').metadata;
+
+const current_metadata = current_metadata_collection.findOne({});
+
+current_metadata_collection.drop();
+
+metadata_db.metadata.insertOne({
+  prod: new_prod_db_name,
+  rollback: current_metadata.prod,
+});
+
+db.getSiblingDB(current_metadata.rollback).drop();
