@@ -118,7 +118,7 @@ jobs:
 
       - run: sed -i "s#${CDN_URL}#.#g" ./client/build/InfoBase/app/*.js # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
       - run: sed -i "s#${CDN_URL}#.#g" ./client/build/InfoBase/*.html # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
-      - run: sed -i "s#https://us-central1-ib-serverless-api-dev.cloudfunctions.net/prod-api-${window.sha}#http://127.0.0.1:1337#g" ./client/build/InfoBase/app/*.js # Replace prod API URL with local URL so these tests use the local server
+      - run: sed -i "s#https://us-central1-ib-serverless-api-dev.cloudfunctions.net/prod-api-\${window.sha}#http://127.0.0.1:1337#g" ./client/build/InfoBase/app/*.js # Replace prod API URL with local URL so these tests use the local server
       - run: 
           name: start_http_server
           command: (cd client && npm run ci_serve)
@@ -195,7 +195,7 @@ jobs:
           at: ./
       - run: ./ci_scripts/create_envs.sh
       - run: ./ci_scripts/authenticate-client-gcloud.sh
-      - run: sed -i "s#us-central1-ib-serverless-api-dev.cloudfunctions.net/prod-api-${window.sha}#us-central1-ib-serverless-api-dev.cloudfunctions.net/$CIRCLE_BRANCH#g" ./client/build/InfoBase/app/*.js # Replace prod API URL with branch specific API URL
+      - run: sed -i "s#us-central1-ib-serverless-api-dev.cloudfunctions.net/prod-api-\${window.sha}#us-central1-ib-serverless-api-dev.cloudfunctions.net/$CIRCLE_BRANCH#g" ./client/build/InfoBase/app/*.js # Replace prod API URL with branch specific API URL
       - run: (cd client && ./deploy_scripts/push_to_gcloud_bucket.sh)
 
 
