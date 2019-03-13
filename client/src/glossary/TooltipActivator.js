@@ -54,15 +54,30 @@ const body = document.body;
 const app = document.querySelector('#app');
 
 
-const tt_params_from_node = (node) => ({
-  title: node.getAttribute('data-ibtt-glossary-key') ? get_glossary_item_tooltip_html(node.getAttribute('data-ibtt-glossary-key')) : node.getAttribute('data-ibtt-text'),
-  placement: node.getAttribute('data-ibtt-placement') ? node.getAttribute('data-ibtt-placement') : 'bottom',
-  container: node.getAttribute('data-ibtt-container') ? node.getAttribute('data-ibtt-container') : body,
-  html: node.getAttribute('data-ibtt-html') ? node.getAttribute('data-ibtt-html') : true,
-  arrowSelector: node.getAttribute('data-ibtt-arrowselector') ? node.getAttribute('data-ibtt-arrowselector') : '.tooltip-inner, .tooltip__inner',
-  innerSelector: node.getAttribute('data-ibtt-innerselector') ? node.getAttribute('data-ibtt-innerselector') : '.tooltip-inner, .tooltip__inner',
-  delay: node.getAttribute('data-ibtt-delay') ? node.getAttribute('data-ibtt-delay') : 0,
-})
+const tt_params_from_node = (node) => {
+
+  const tt_obj = {
+    title: node.getAttribute('data-ibtt-glossary-key') ? get_glossary_item_tooltip_html(node.getAttribute('data-ibtt-glossary-key')) : node.getAttribute('data-ibtt-text'),
+    placement: node.getAttribute('data-ibtt-placement') ? node.getAttribute('data-ibtt-placement') : 'bottom',
+    container: node.getAttribute('data-ibtt-container') ? node.getAttribute('data-ibtt-container') : body,
+    html: node.getAttribute('data-ibtt-html') ? node.getAttribute('data-ibtt-html') : true,
+    arrowSelector: node.getAttribute('data-ibtt-arrowselector') ? node.getAttribute('data-ibtt-arrowselector') : '.tooltip-arrow, .tooltip__arrow',
+    innerSelector: node.getAttribute('data-ibtt-innerselector') ? node.getAttribute('data-ibtt-innerselector') : '.tooltip-inner, .tooltip__inner',
+    delay: node.getAttribute('data-ibtt-delay') ? node.getAttribute('data-ibtt-delay') : 0,
+  };
+
+  // if we've modified the selectors, need to change the template
+  // why, I don't know
+  if ( node.getAttribute('data-ibtt-arrowselector') || node.getAttribute('data-ibtt-innerselector') ){
+    tt_obj.template = `
+    <div class="tooltip" role="tooltip">
+      <div class="tooltip-arrow tooltip__arrow ${tt_obj.arrowSelector.substr(1)}"></div>
+      <div class="tooltip-inner tooltip__inner ${tt_obj.innerSelector.substr(1)}"></div>
+    </div>`
+  }
+
+  return tt_obj;
+}
 
 const TooltipActivator = _.isUndefined(MutationObserver) ?
   _.constant(false) :

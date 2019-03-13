@@ -97,9 +97,31 @@
 .TablePicker__tooltip-inner{
   background-color: rgb(38, 55, 74);
 }
-.TablePicker__tooltip-inner{
-  border-bottom-color:rgb(38, 55, 74) !important;
+.tooltip[x-placement^="right"]>.TablePicker__tooltip-arrow {
+  border-right-color: rgb(38, 55, 74);
+  border-left-color: transparent;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
 }
+.tooltip[x-placement^="left"]>.TablePicker__tooltip-arrow {
+  border-left-color: rgb(38, 55, 74);
+  border-right-color: transparent;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+}
+.tooltip[x-placement^="bottom"]>.TablePicker__tooltip-arrow {
+  border-bottom-color: rgb(38, 55, 74);
+  border-right-color: transparent;
+  border-top-color: transparent;
+  border-left-color: transparent;
+}
+.tooltip[x-placement^="top"]>.TablePicker__tooltip-arrow {
+  border-top-color: rgb(38, 55, 74);
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+}
+
 
 .tag-glossary-item:hover > .tag-tooltip-text,
 .tag-button-helper:focus > .tag-glossary-item > .tag-tooltip-text {
