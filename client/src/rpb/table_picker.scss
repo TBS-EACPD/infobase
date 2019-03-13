@@ -34,10 +34,10 @@
     padding: 3px 15px;
     border-radius: 8px;
   }
-  @media (max-width: 600px){
-    padding: 3px 15px;
-    border-radius: 8px;
-  }
+  // @media (max-width: 600px){
+  //   padding: 3px 15px;
+  //   border-radius: 8px;
+  // }
 }
 
 .tag-cloud-main > li > span.tag-button-helper {
@@ -48,11 +48,11 @@
   border:none;
   color: #fff;
 
-  @media (max-width: 600px){
-    padding: 0px;
-    visibility: hidden;
-    width: 0px;
-  }
+  // @media (max-width: 600px){
+  //   padding: 0px;
+  //   visibility: hidden;
+  //   width: 0px;
+  // }
 
   // Fix inconsistent sub-pixel white gaps in IE11
   padding-left: 1px;
