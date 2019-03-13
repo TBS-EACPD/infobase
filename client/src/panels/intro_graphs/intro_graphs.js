@@ -97,7 +97,6 @@ _.each(['gov', 'dept', 'program', 'crso'], lvl => {
         'what_is_policy_on_results',
         'what_is_diff_with_mrrs',
         'what_is_a_drf',
-        'what_are_ftes',//notice this one is re-used from the financial defs
         'how_do_orgs_measure_perf',
         'what_are_DPs_and_DRRs',
       ],
