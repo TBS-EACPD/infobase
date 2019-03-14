@@ -218,6 +218,29 @@ const types_to_format = {
   "wide-str": (val) => val,
   "short-str": (val) => val,
   "date": (val) => val,
+  "dollar": (val, lang, options) => {
+    options.precision = options.precision || 2;
+    let format;
+    if (options.raw){
+      format = {
+        en: "$%v", 
+        fr: "%v $", 
+      };
+    }else {
+      format = {
+        en: "<span class='text-nowrap'>$%v</span>", 
+        fr: "<span class='text-nowrap'>%v $</span>", 
+      };
+    }
+    return accounting.formatMoney(
+      val,
+      {
+        precision: options.precision, 
+        format: format[lang],
+        ...lang_options[lang],
+      }
+    );
+  },
 };
 
 

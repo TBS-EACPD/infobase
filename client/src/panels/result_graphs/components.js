@@ -54,7 +54,7 @@ const IndicatorResultDisplay = ({
       return (
         <Fragment>
           <span> 
-            <Format type="compact1" content={+min || +max} />
+            <Format type="dollar" content={+min || +max} />
           </span> 
           {measure_display}
         </Fragment>
@@ -106,9 +106,9 @@ const IndicatorResultDisplay = ({
       return (
         <Fragment>
           <span> 
-            <Format type="compact1" content={+min} />  
+            <Format type="dollar" content={+min} />  
             <span>{` ${trivial_text_maker("to")} `}</span>
-            <Format type="compact1" content={+min} />
+            <Format type="dollar" content={+min} />
           </span> 
           {measure_display}
         </Fragment>
