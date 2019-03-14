@@ -24,6 +24,9 @@ if(typeof IS_DEV_LINK !== "undefined"){
 if(typeof DEV !== "undefined"){
   window.is_dev_build = DEV;
 }
+if(window.is_dev_build && typeof LOCAL_IP !== "undefined"){
+  window.local_ip = LOCAL_IP;
+}
 /* eslint-enable no-undef */
 
 

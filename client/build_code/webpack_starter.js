@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const path = require('path');
 const gitsha = require('git-bundle-sha');
 const { create_config } = require('./webpack_common.js');
+const ip = require('ip');
 
 const build_dir_name = process.env.BUILD_DIR || "build";
 const args = process.argv;
@@ -61,6 +62,7 @@ gitsha(function(err, commit_sha){
     language: lang,
     a11y_client,
     is_prod: prod,
+    local_ip: ip.address(),
     should_use_babel: babel,
     entry: app_options.entry,
     output: app_options.get_output(lang),

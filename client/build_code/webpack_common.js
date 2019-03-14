@@ -94,7 +94,7 @@ const prod_plugins = [
   new webpack.optimize.ModuleConcatenationPlugin(),
 ]
 
-function get_plugins({ is_prod, language, a11y_client, commit_sha, envs }){
+function get_plugins({ is_prod, language, a11y_client, commit_sha, local_ip }){
   
   const plugins = [
     new webpack.DefinePlugin({
@@ -105,6 +105,7 @@ function get_plugins({ is_prod, language, a11y_client, commit_sha, envs }){
       IS_A11Y_MODE: !!a11y_client,
       CDN_URL: JSON.stringify(CDN_URL),
       IS_DEV_LINK,
+      LOCAL_IP: JSON.stringify(local_ip),
     }),
     new CircularDependencyPlugin({
       exclude: /node_modules/,
@@ -151,6 +152,7 @@ function create_config({
   a11y_client,
   commit_sha,
   is_prod,
+  local_ip,
   should_use_babel,
 }){
 
@@ -174,6 +176,7 @@ function create_config({
       language,
       a11y_client,
       commit_sha,
+      local_ip,
     }),
     optimization: get_optimizations(is_prod),
     devtool: (
