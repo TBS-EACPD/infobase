@@ -9,7 +9,7 @@ let api_url;
 if(window.is_dev_build){
   api_url = "http://127.0.0.1:1337/graphql";
 } else {
-  api_url = `https://us-central1-ib-serverless-api-dev.cloudfunctions.net/prod-api-${window.sha}/graphql`;
+  api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${window.sha}/graphql`;
 }
 
 let client = null;
