@@ -19,7 +19,7 @@ function cleanup {
 trap cleanup EXIT
 
 
-echo $(lpass show API_SERVICE_KEY --notes) | base64 -D > $scratch/key.json
+echo $(lpass show PROD_API_SERVICE_KEY --notes) | base64 -D > $scratch/key.json
 gcloud auth activate-service-account --key-file=$scratch/key.json
 gcloud config set project $APP_PROJ_ID
 gcloud config set compute/zone us-central1

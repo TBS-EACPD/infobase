@@ -3,8 +3,8 @@
   "private": true,
   "description": "",
   "scripts": {
-    "prod_deploy_all": "sh prod_scripts/prod_deploy.sh",
-    "prod_rollback_all": "sh prod_scripts/prod_rollback.sh"
+    "prod_deploy": "sh prod_scripts/prod_deploy.sh",
+    "prod_rollback": "sh prod_scripts/prod_rollback.sh"
   },
   "authors": [
     "Alex Cousineau-Leduc",
