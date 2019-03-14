@@ -10,7 +10,6 @@ const gitsha = require('git-bundle-sha');
 
 global._ = _; //global is the 'window' on the node environment
 
-const { write_result_bundles } = require('./write_result_bundles.js');
 const { get_footnote_file_defs } = require('./write_footnote_bundles.js');
 const { bundle_extended_bootstrap_css } = require('./bundle_extended_bootstrap_css.js');
 const { index_lang_lookups } = require("../src/InfoBase/index_data.js");
@@ -184,12 +183,11 @@ function build_proj(PROJ){
   
   const dir = `${build_dir_name}/InfoBase`;
   const app_dir = `${dir}/app`;
-  const results_dir = `${dir}/results`;
   const footnotes_dir = `${dir}/footnotes`;
   const well_known_dir = `${dir}/.well-known`;
 
   _.each(
-    [build_dir_name, dir, app_dir, results_dir, footnotes_dir], 
+    [build_dir_name, dir, app_dir, footnotes_dir], 
     name => make_dir_if_exists(name)
   )
 
@@ -199,11 +197,6 @@ function build_proj(PROJ){
     tag_prog_links: "tags_to_programs.csv",
     programs: "program.csv",
 
-    sub_programs: "subprograms.csv",
-    results: "results.csv",
-    indicators: "indicators.csv",
-    PI_DR_links: "pi_dr_links.csv",
-
     footnotes: "footnotes.csv",
   };
 
@@ -212,8 +205,6 @@ function build_proj(PROJ){
       _.trim(file_to_str(public_dir_prefixer(file_name)))
     )
   ));
-
-  write_result_bundles(parsed_bilingual_models, results_dir);
 
   write_gitsha_file(dir);
 

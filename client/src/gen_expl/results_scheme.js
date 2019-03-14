@@ -93,13 +93,12 @@ export const single_subj_results_scheme = {
     };
   },
   dispatch_to_props: dispatch => ({ 
-    set_doc: (doc, subject, use_api_for_results) => dispatch({
+    set_doc: (doc, subject) => dispatch({
       type: 'set_doc', 
       payload: ensure_loaded({
         subject: subject,
         results: true,
         result_docs: [doc],
-        use_api_for_results,
       }).then( () => doc ),
     }),
     toggle_status_status_key: key => dispatch({type: "status_click", payload: key}),

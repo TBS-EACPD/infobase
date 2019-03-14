@@ -40,8 +40,6 @@ import {
 
 import { ensure_loaded } from '../../core/lazy_loader.js';
 
-const use_api_for_results = false;
-
 const get_non_col_content_func = createSelector(
   _.property('doc'),
   doc => {
@@ -333,7 +331,7 @@ class SingleSubjExplorer extends React.Component {
       );
     }
 
-    const tab_on_click = (doc) => set_doc !== doc && set_doc(doc, subject, use_api_for_results);
+    const tab_on_click = (doc) => set_doc !== doc && set_doc(doc, subject);
 
     if(!has_dp_data || !has_drr_data){ //don't wrap the inner content in a tab layout
       return inner_content;
@@ -408,7 +406,6 @@ class SingleSubjResultsContainer extends React.Component {
       subject,
       results: true,
       result_docs: [doc],
-      use_api_for_results,
     })
       .then( () => this.setState({loading: false}) );
   }
@@ -469,42 +466,25 @@ _.each(['program','dept','crso'], lvl => {
     level: lvl,
     footnotes: false,
     depends_on: ["programSpending", "programFtes"],
-    requires_results: !use_api_for_results,
-    requires_result_counts: use_api_for_results && lvl === 'dept',
-    requires_granular_result_counts: use_api_for_results && lvl !== 'dept',
+    requires_result_counts: lvl === 'dept',
+    requires_granular_result_counts: lvl !== 'dept',
     key: "explore_results",
     calculate(subject){
-      if (!use_api_for_results) {
-        const indicators = Indicator.get_flat_indicators(subject);
+      const subject_result_counts = lvl === 'dept' ?
+        ResultCounts.get_dept_counts(subject.acronym) :
+        GranularResultCounts.get_subject_counts(subject.id);
 
-        const has_dp_data = _.find(indicators, {doc: 'dp18'});
-        const has_drr_data = _.find(indicators, {doc: 'drr17'});
+      const has_dp_data = !_.isNull(subject_result_counts.dp18_indicators) && subject_result_counts.dp18_indicators > 0;
+      const has_drr_data = !_.isNull(subject_result_counts.drr17_total) && subject_result_counts.drr17_total > 0;
 
-        if(!has_dp_data && !has_drr_data){
-          return false;
-        }
-
-        return {
-          has_dp_data,
-          has_drr_data,
-        };
-      } else {
-        const subject_result_counts = lvl === 'dept' ?
-          ResultCounts.get_dept_counts(subject.acronym) :
-          GranularResultCounts.get_subject_counts(subject.id);
-
-        const has_dp_data = !_.isNull(subject_result_counts.dp18_indicators) && subject_result_counts.dp18_indicators > 0;
-        const has_drr_data = !_.isNull(subject_result_counts.drr17_total) && subject_result_counts.drr17_total > 0;
-
-        if(!has_dp_data && !has_drr_data){
-          return false;
-        }
-
-        return {
-          has_dp_data,
-          has_drr_data,
-        };
+      if(!has_dp_data && !has_drr_data){
+        return false;
       }
+
+      return {
+        has_dp_data,
+        has_drr_data,
+      };
     },
 
     render({calculations}){
