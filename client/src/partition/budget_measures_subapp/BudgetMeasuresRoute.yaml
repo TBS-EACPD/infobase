@@ -51,7 +51,7 @@ budget_summary_stats:
     * **{{fmt_compact2_written total_remaining}}** **remains** (**{{fmt_percentage1 total_remaining_share}}** of the total funding)
     * **{{fully_withheld_funds_count}}** budget measures have had their {{gt "budget_route_year"}} funding amount centrally withheld in full
     * **{{totally_funded_count}}** budget measures have received all of their funding for {{gt "budget_route_year"}}
-    * **{{less_one_percent_remaining_funds_count}}** budget measures have a **non-zero** remaining balance which is **less than 1%** of their total funding for the fiscal year; these measures have effectively received all of their funding for {{gt "budget_route_year"}}
+    * **{{less_one_percent_remaining_funds_count}}** additional budget measures have a **non-zero** remaining balance which is **less than 1%** of their total funding for the fiscal year; these measures have effectively received all of their funding for {{gt "budget_route_year"}}
   fr: |
     &nbsp;&nbsp;**{{gt "budget_name_header"}}** prévoit un financement pouvant atteindre **{{fmt_compact2_written total_funding}}** à l'appui de la mise en œuvre des **{{measure_count}}** mesures budgétaires en **{{gt "budget_route_year"}}**.  
 
