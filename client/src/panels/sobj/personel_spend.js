@@ -1,5 +1,4 @@
 import { text_maker, TM } from './sobj_text_provider.js';
-import { TBS_responsive_line } from '../../charts/TBS_nivo_chart';
 import {
   PanelGraph,
   years,
@@ -8,6 +7,7 @@ import {
   declarative_charts,
   StdPanel,
   Col,
+  NivoResponsiveLine,
 } from "../shared";
 const { 
   A11YTable,
@@ -55,32 +55,26 @@ new PanelGraph({
         />
       );
 
-    } else {      
-      let values = graph_args.series[0];
-      let labels = calculations.info.last_years;
-      let personnelData = values.map((d,i) =>{
-        const value2 = d;
-        const label2 = labels[i]; 
-        let result = {}
-        result["x"] = label2;
-        result["y"] = value2;
-        return result;
-      });
-      let graphData = {};
-      graphData["id"] = "Personnel";
-      graphData["data"] = personnelData;
-
+    } else {  
+      
+      const personnel_data = () =>[{
+        id: "Personnel",
+        data: _.map(graph_args.series[0],
+          (spending_data,year_index) =>({
+            y: spending_data,
+            x: calculations.info.last_years[year_index],
+          })),
+      }]
+      
       graph_content = <div style={{height: 400}}>
-        <TBS_responsive_line
-          data = {[graphData]}
+        <NivoResponsiveLine
+          data = {personnel_data()}
           margin = {{
             "top": 50,
             "right": 40,
             "bottom": 50,
             "left": 65,
           }}
-          max = {_.max(values)*1.05}
-          min = {_.min(values)*.90}
           is_money = {true}
           colors={d3.schemeCategory10}
           bttm_axis ={{ "tickPadding": 10}}

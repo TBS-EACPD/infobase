@@ -1,5 +1,4 @@
 import text from './spend_rev_split.yaml';
-import { TBS_responsive_bar } from '../../charts/TBS_nivo_chart';
 import {
   Statistics,
   formats,
@@ -7,6 +6,7 @@ import {
   PanelGraph,
   StdPanel,
   Col,
+  NivoResponsiveBar,
 } from "../shared";
 
 const { text_maker, TM } = create_text_maker_component(text);
@@ -46,31 +46,31 @@ function render({calculations, footnotes, sources}) {
   const { graph_args, info, subject } = calculations;       
   const { neg_exp, gross_exp, net_exp } = graph_args; 
   
-  const series = { "": [ gross_exp, neg_exp] };
+  const series = [gross_exp, neg_exp];
   const _ticks = [ 'gross', 'revenues' ];
+
   // if neg_exp is 0, then no point in showing the net bar
   if (neg_exp !== 0){
-    series[""].push(net_exp);
+    series.push(net_exp);
     _ticks.push('net');
   }
   const ticks = _ticks.map(text_maker);
   
-  // debugger
-  const spend_rev_data = series[""].map((spend_rev_value,tick_index)=>{
-    return {
+  const spend_rev_data = series.map(
+    (spend_rev_value,tick_index)=>({
       title: ticks[tick_index],
       [ticks[tick_index]]: spend_rev_value,
-    }
-  })
+    }))
 
   let graph_content;
   if(window.is_a11y_mode){
     //all information is contained in text
     graph_content = null;
   } else {
+    
     graph_content = (
       <div style = {{height: '400px'}}>
-        <TBS_responsive_bar
+        <NivoResponsiveBar
           data = {spend_rev_data}
           keys = {ticks}
           index_by = "title"

@@ -1,6 +1,5 @@
 import {Fragment } from 'react';
 import { infobaseCategory10Colors } from '../../core/color_schemes.js';
-import { TBS_responsive_line } from '../../charts/TBS_nivo_chart';
 import {
   text_maker,
   TM,
@@ -13,6 +12,7 @@ import {
   declarative_charts,
   Panel,
   util_components,
+  NivoResponsiveLine,
 } from "../shared.js";
 
 const { transfer_payments } = businessConstants;
@@ -56,8 +56,6 @@ new PanelGraph({
           series={series}
         />
       </Panel>
-
-
     );
   },
 });
@@ -179,31 +177,30 @@ class HistTPTypes extends React.Component {
         label_col_header={text_maker("transfer_payment_type")}
       />;
     } else {
-      
-      const expenditure_data = _.map(filtered_series, (expenditure_array,expenditure_label)=>{
-        const years=_.map(std_years,run_template)
-        return {
+
+      const years=_.map(std_years,run_template)
+      const expenditure_data = _.map(filtered_series, 
+        (expenditure_array,expenditure_label)=>({
           id: expenditure_label,
-          data: expenditure_array.map((expenditure_value,year_index) =>{
-            return {
+          data: expenditure_array.map(
+            (expenditure_value,year_index) =>({
               x: years[year_index],
               y: expenditure_value,
-            }
-          }),
-        }
-      });
+            })),
+        }));
 
       content = <Fragment>
         <div className="legend-container">
           <GraphLegend
             items={legend_items}
             isHorizontal
-            onClick={id=> {(!!filtered_series[tp_type_name(id)] && _.size(filtered_series)===1)? null : this.setState({active_types: _.toggle_list(active_types, id) })}}
+            onClick={id=> !(!!filtered_series[tp_type_name(id)] && _.size(filtered_series)===1)
+              && this.setState({active_types: _.toggle_list(active_types, id) })}
           />  
         </div>
 
         <div style ={{height: '400px'}}>
-          <TBS_responsive_line
+          <NivoResponsiveLine
             min = {0}
             enableArea = {true}
             data = {expenditure_data}
@@ -268,18 +265,16 @@ class DetailedHistTPItems extends React.Component {
       active: _.includes(active_indices, ix),
     }));
 
-    const detail_expend_data = _.map(graph_series, (expend_array, expend_label)=>{
-      return {
+    const years = _.map(std_years, run_template);
+    const detail_expend_data = _.map(graph_series, 
+      (expend_array, expend_label)=>({
         id: expend_label,
-        data: expend_array.map((expend_value, year_index)=>{
-          const years = _.map(std_years, run_template);
-          return{
+        data: expend_array.map(
+          (expend_value, year_index)=>({
             y: expend_value,
             x: years[year_index],
-          }
-        }),
-      }
-    })
+          })),
+      }))
 
     const title_el = <header className="h3">
       <TM k="historical_g_and_c_detailed_title" />
@@ -298,7 +293,6 @@ class DetailedHistTPItems extends React.Component {
           ),
         }
       });
-    
       return <div>
         {title_el}
         <A11YTable 
@@ -350,13 +344,14 @@ class DetailedHistTPItems extends React.Component {
             }}
           >
             <GraphLegend
-              onClick={id => {active_indices.length===1 && active_indices.includes(id)? null:this.setState({active_indices: _.toggle_list(active_indices, id)})}}
+              onClick={ id => !(active_indices.length==1 && active_indices.includes(id))
+              && this.setState({active_indices: _.toggle_list(active_indices,id)})}
               items={legend_items}
             />  
           </div>
         </div>
-        <div className="fcol-md-8" style={{height:'400px'}}>
-          <TBS_responsive_line
+        <div className="fcol-md-8" style={{height: '400px'}}>
+          <NivoResponsiveLine
             data = {detail_expend_data}
             margin = {{
               "top": 50,

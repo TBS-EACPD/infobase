@@ -1,8 +1,5 @@
 import text from './historical_auth_exp.yaml';
-import { TBS_responsive_bar } from '../../charts/TBS_nivo_chart';
-
 import {
-  formats,
   run_template,
   PanelGraph,
   years,
@@ -11,6 +8,7 @@ import {
   StdPanel,
   Col,
   create_text_maker_component,
+  NivoResponsiveBar,
 } from "../shared";
 
 const { 
@@ -92,18 +90,17 @@ const render = function({calculations, footnotes, sources}) {
 
 
   } else {
-    const data_exp = exp.map((exp_value,year_index) =>{
-      return {
+    const data_exp = exp.map(
+      (exp_value,year_index) =>({
         [series_labels[0]]: stacked? exp_value : auth[year_index],
         [series_labels[1]]: stacked? auth[year_index] : exp_value,
         years: ticks[year_index],
-      };
-    });
+      }))
 
     graph_content = 
       <div style={{height: 400}}>
         {
-          <TBS_responsive_bar
+          <NivoResponsiveBar
             data = {data_exp}
             keys={series_labels}
             index_by = "years"

@@ -1,16 +1,16 @@
 import text from './perspective_text.yaml';
+import { infobaseCategory10Colors } from '../../core/color_schemes.js';
 import {
   PanelGraph, 
-  formats,
   sum_a_tag_col,
   util_components,
   declarative_charts,
   Panel,
   create_text_maker_component,
+  NivoResponsivePie,
 } from "../shared";
 
 const {
-  SafePie,
   TabularPercentLegend,
 } = declarative_charts;
 
@@ -43,15 +43,16 @@ class SpendInTagPerspective extends React.Component {
     
     const { tag: active_tag, amount: active_tag_exp } = tag_exps[active_tag_index];
     
-
     const color_scale = infobase_colors();
 
     const data = [
       {
+        id: subject.fancy_name,
         label: subject.fancy_name, 
         value: prog_exp,
       },
       {
+        id: text_maker('other'),
         label: text_maker('other'), 
         value: active_tag_exp - prog_exp,
       },
@@ -124,16 +125,13 @@ class SpendInTagPerspective extends React.Component {
               />
             </div>
           }
-          <SafePie
-            data={data}
-            color={color_scale}
-            font_size={14}
-            showLabels={false}
-            pct_formatter={formats.percentage1}
-            inner_radius={true}
-            inner_text={true}
-            inner_text_fmt={formats.compact1_raw}
-          />
+          <div style={{height: '400px'}}>
+            <NivoResponsivePie
+              data = {data}
+              colors={infobaseCategory10Colors}
+              start_angle = {0}
+            />
+          </div>
           {legend_display}
         </div>
 

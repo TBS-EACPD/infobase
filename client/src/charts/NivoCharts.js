@@ -1,10 +1,15 @@
 import { ResponsiveLine } from '@nivo/line';
-import { ResponsiveBar } from '../nivo-bar.js';
+import { ResponsiveBar } from './nivo-bar.js';
 import { ResponsivePie } from '@nivo/pie'
-import { formats } from "../panels/shared.js";
+import { formats, dollar_formats } from "../panels/shared.js";
 
+const get_formatter = (is_money) =>(
+  graph_value =>(
+    is_money? dollar_formats.compact2_raw(graph_value)
+    : formats.big_int_real(graph_value,{raw: true}))
+)
 
-export class TBS_responsive_pie extends React.Component{
+export class NivoResponsivePie extends React.Component{
   constructor (props){
     super(props)
   }
@@ -42,7 +47,7 @@ export class TBS_responsive_pie extends React.Component{
         animate={true}
         motionStiffness={30}
         motionDamping={15}
-        tooltipFormat={ _.isUndefined(tooltip_format)?( d => is_money?"$"+formats.big_int_real(d,{raw: true}):formats.big_int_real(d,{raw: true})): tooltip_format}
+        tooltipFormat={_.isUndefined(tooltip_format)?get_formatter(is_money):tooltip_format}
         legends={legend}
         theme= {theme}
       />
@@ -50,7 +55,7 @@ export class TBS_responsive_pie extends React.Component{
 
   }
 }
-export class TBS_responsive_bar extends React.Component{
+export class NivoResponsiveBar extends React.Component{
   constructor(props){
     super(props)
   }
@@ -94,20 +99,21 @@ export class TBS_responsive_bar extends React.Component{
         padding={0.3}
         colors = {colors}
         borderColor="inherit:darker(1.6)"
-        axisBottom={remove_bottom_axis? null:_.isUndefined(bttm_axis)?({
-          "tickSize": 3,
-          "tickPadding": 10,
-        }):bttm_axis}
-        axisLeft={remove_left_axis? null:_.isUndefined(left_axis)?({
-          "tickValues": _.isUndefined(tick_value)? 6 : tick_value,
-          "min": "auto",
-          "format": d => is_money? formats.compact1(d,{raw: true}) : formats.big_int_real(d,{raw: true}),
-          "max": "auto", 
-        }):left_axis}
+        axisBottom={remove_bottom_axis? null:
+          _.isUndefined(bttm_axis)?({
+            "tickSize": 3,
+            "tickPadding": 10,
+          }):bttm_axis}
+        axisLeft={remove_left_axis? null:
+          _.isUndefined(left_axis)?({
+            "tickValues": _.isUndefined(tick_value)? 6 : tick_value,
+            "min": "auto",
+            "format": get_formatter(is_money),
+            "max": "auto", 
+          }):left_axis}
         labelTextColor="inherit:darker(1.6)"
         motionStiffness={90}
-        tooltip = {tooltip}
-        tooltipFormat={ _.isUndefined(tooltip_format)?( d => is_money?"$"+formats.big_int_real(d,{raw: true}):formats.big_int_real(d,{raw: true})): tooltip_format}
+        tooltipFormat={_.isUndefined(tooltip_format)?get_formatter(is_money):tooltip_format}
         enableLabel = {enable_label}
         enableGridX = {enableGridX}
         enableGridY = {enableGridY}
@@ -118,7 +124,7 @@ export class TBS_responsive_bar extends React.Component{
           axis: {
             ticks: {
               text: { 
-                fontSize: 12.5,
+                fontSize: 12,
                 fill: '#000',
               },
             },
@@ -128,7 +134,7 @@ export class TBS_responsive_bar extends React.Component{
     )
   }
 };
-export class TBS_responsive_line extends React.Component {
+export class NivoResponsiveLine extends React.Component {
   constructor(props){
     super(props)
   }
@@ -175,16 +181,17 @@ export class TBS_responsive_line extends React.Component {
         }: yScale}
         axisTop={null}
         axisRight={null}
-        axisBottom={remove_bottom_axis?null:(_.isUndefined(bttm_axis)?{
-          "tickSize": 5,
-          "tickPadding": 5,
-        }:bttm_axis)}
+        axisBottom={remove_bottom_axis?null:(
+          _.isUndefined(bttm_axis)?{
+            "tickSize": 5,
+            "tickPadding": 5,
+          }:bttm_axis)}
         axisLeft={{
           "orient": "left",
           "tickSize": 5,
           "tickPadding": 5,
           "tickValues": _.isUndefined(tick_amount)? 6 : tick_amount,
-          "format": d => is_money? formats.compact1(d,{raw: true}) : formats.big_int_real(d,{raw: true}),
+          "format": get_formatter(is_money),
         }}
         dotSize={10}
         enableGridX={enableGridX}
@@ -196,13 +203,13 @@ export class TBS_responsive_line extends React.Component {
         motionStiffness={90}
         motionDamping={15}
         tooltip = {tooltip}
-        tooltipFormat={ _.isUndefined(tooltip_format)?( d => is_money?"$"+formats.big_int_real(d,{raw: true}):formats.big_int_real(d,{raw: true})): tooltip_format}
+        tooltipFormat={_.isUndefined(tooltip_format)? get_formatter(is_money):tooltip_format}
         colors = {_.isUndefined(colors)? '#000000' : colors}
         theme={_.isUndefined(theme)?{
           axis: {
             ticks: {
               text: { 
-                fontSize: 12.5,
+                fontSize: 12,
                 fill: '#000',
               },
             },

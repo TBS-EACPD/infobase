@@ -1,11 +1,10 @@
 import { text_maker, TM } from './vote-stat-text-prodiver.js';
-import { TBS_responsive_pie } from '../../charts/TBS_nivo_chart';
 
 import {
-  formats,
   PanelGraph,
   StdPanel,
   Col,
+  NivoResponsivePie,
 } from "../shared";
 
 const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,footnotes,sources}) => {
@@ -14,21 +13,14 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
     info,
   } = calculations;
 
-  let stat = calculations.info.gov_stat_est_in_year;
-  let vote = calculations.info.gov_voted_est_in_year;
-  let keys = graph_args.map(d =>{
-    let ar = [];
-    ar.push(d.label);
-    return ar;
-  })
-  
-  const vote_stat_data = keys.map((vote_stat_label, value_index) =>{
-    return{
-      id: vote_stat_label[0],
-      value: value_index? vote:stat,
-      label: vote_stat_label[0],
-    }
-  })
+  const keys = [];
+  graph_args.map( d => {keys.push(d.label)})
+  const vote_stat_data = keys.map(
+    (vote_stat_label, value_index) =>({
+      id: vote_stat_label,
+      label: vote_stat_label,
+      value: value_index? calculations.info.gov_voted_est_in_year:calculations.info.gov_stat_est_in_year,
+    }))
 
   return (
     <StdPanel 
@@ -41,10 +33,9 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
       {!window.is_a11y_mode &&
         <Col isGraph size={graph_col}>
           <div style={{height: "400px"}}>
-            <TBS_responsive_pie
+            <NivoResponsivePie
               data = {vote_stat_data}
               colors = "paired"
-              tooltip_format = {d=> `$${formats.big_int_real(d, {raw: true})}`}
               legend = {[
                 {
                   "anchor": "bottom",

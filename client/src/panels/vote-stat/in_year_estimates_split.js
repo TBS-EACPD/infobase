@@ -1,7 +1,4 @@
 import { text_maker, TM } from './vote-stat-text-prodiver.js';
-import { TBS_responsive_bar } from '../../charts/TBS_nivo_chart';
-
-
 import {
   formats,
   PanelGraph,
@@ -10,7 +7,9 @@ import {
   declarative_charts,
   StdPanel,
   Col,
+  NivoResponsiveBar,
 } from "../shared";
+import { dollar_formats } from '../../core/format.js';
 
 const { Format } = util_components;
 
@@ -68,7 +67,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
     );
   
   } else {    
-    let keys = [];
+    const keys = [];
     const estimate_data = calculations.info.gov_in_year_estimates_split.map(estimate_data_label =>{
       keys.push(estimate_data_label[0])
       return {
@@ -79,10 +78,10 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
 
     content = (
       <div style={{ height: "450px" }} >
-        <TBS_responsive_bar
+        <NivoResponsiveBar
           data = {estimate_data}
           keys = {keys}
-          label_format = { d=><tspan y={ -4 }> {formats.compact1(d, {raw: true})} </tspan>}
+          label_format = { d=><tspan y={ -4 }> {dollar_formats.compact2_raw(d)} </tspan>}
           is_interactive = {false}
           enable_label = {true}
           index_by = "title"
@@ -120,7 +119,6 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
     </StdPanel>
   )
 };
-
 new PanelGraph({
   level: "dept",
   machinery_footnotes: false,

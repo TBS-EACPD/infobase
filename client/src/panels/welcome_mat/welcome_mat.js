@@ -7,15 +7,15 @@ import {
   Panel,
   PanelGraph,
   years,
-  formats,
   create_text_maker_component,
   util_components,
   get_planned_fte_source_link,
   get_planned_spending_source_link,
   rpb_link,
   get_appropriate_rpb_subject,
+  NivoResponsiveBar,
+  NivoResponsiveLine,
 } from "../shared.js" 
-import { TBS_responsive_line, TBS_responsive_bar } from '../../charts/TBS_nivo_chart';
 import { run_template } from "../../models/text";
 
 const { Format } = util_components;
@@ -73,24 +73,18 @@ const ticks = _.chain(std_years)
   .map(run_template)
   .value();
 
-const welcome_data_line = (data) =>{
-  return [{
-    "data": data.map((value, index) =>{
-      return{
-        x: ticks[index],
-        y: value,
-      }
-    }),
-  }]
-}
-const welcome_data_bar = (data) =>{
-  return data.map((value, year_index) => {
-    return {
-      "year": ticks[year_index],
-      "0": value,
-    }
-  })
-}
+const welcome_data_line = (data) =>([{
+  "data": data.map((value,year_index)=>({
+    x: ticks[year_index],
+    y: value,
+  })),
+}])
+
+const welcome_data_bar = (data) =>
+  data.map((value, year_index) => ({
+    "year": ticks[year_index],
+    "0": value,
+  }))
 
 const Chart = ({
   data,
@@ -98,7 +92,7 @@ const Chart = ({
   use_line,
   is_light,
 }) => use_line?<div style ={{height: '230px'}}>
-  <TBS_responsive_line
+  <NivoResponsiveLine
     id = {false}
     data = {welcome_data_line(data)}
     max = {_.max(data)*1.05}
@@ -116,26 +110,27 @@ const Chart = ({
     }}
   />
 </div> :
- <div style = {{height: '230px'}}>
-   <TBS_responsive_bar
-     data = {welcome_data_bar(data)}
-     keys= {["0"]}
-     index_by = {"year"}
-     margin={{
-       "top": 20,
-       "right": 30,
-       "bottom": 20,
-       "left": 80,
-     }}
-     enableGridX = {false}
-     enableGridY = {false}
-     remove_bottom_axis={true}
-     is_money ={is_money}
-     colors = {is_light?"#335075":"#000000"}
-     tooltip = { d => <div>{d.indexValue}: <strong>{is_money?formats.compact1(d.value, {raw: true}):formats.big_int_real(d.value, {raw: true})}</strong></div>}
-     tick_value = {5}
-   />
- </div>
+//keys have to have the empty key in the array 
+//or else it won't display the bar for negative values
+<div style = {{height: '230px'}}>
+  <NivoResponsiveBar
+    data = {welcome_data_bar(data)}
+    keys= {["","0"]}
+    index_by = {"year"}
+    margin={{
+      "top": 20,
+      "right": 30,
+      "bottom": 20,
+      "left": 80,
+    }}
+    enableGridX = {false}
+    enableGridY = {false}
+    remove_bottom_axis={true}
+    is_money ={is_money}
+    colors = {is_light?"#335075":"#000000"}
+    tick_value = {5}
+  />
+</div>
 
 const Pane = ({ size, children, is_header, noPadding }) => (
   <div className={`mat-grid__lg-panel${size} mat-grid__sm-panel`}>
@@ -717,7 +712,6 @@ const WelcomeMat = (props) => {
             <Chart 
               use_line 
               data={fte_data}
-              is_money = {false}
             />
           </Pane>,
         ]}
