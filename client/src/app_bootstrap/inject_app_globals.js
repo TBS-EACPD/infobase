@@ -27,6 +27,9 @@ if(typeof DEV !== "undefined"){
 if(window.is_dev_build && typeof LOCAL_IP !== "undefined"){
   window.local_ip = LOCAL_IP;
 }
+if(typeof IS_CI !== "undefined"){
+  window.is_ci = IS_CI;
+}
 /* eslint-enable no-undef */
 
 

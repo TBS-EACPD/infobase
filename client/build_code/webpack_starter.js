@@ -8,6 +8,8 @@ const ip = require('ip');
 const build_dir_name = process.env.BUILD_DIR || "build";
 const args = process.argv;
 
+const is_ci = process.env.CI && (typeof process.env.CI !== 'string' || process.env.CI.toLowerCase() !== 'false');
+
 function choose(name){
   return (args.indexOf(name) > -1) && name;
 }
@@ -63,6 +65,7 @@ gitsha(function(err, commit_sha){
     a11y_client,
     is_prod: prod,
     local_ip: ip.address(),
+    is_ci,
     should_use_babel: babel,
     entry: app_options.entry,
     output: app_options.get_output(lang),
