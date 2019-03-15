@@ -76,7 +76,7 @@ function render({calculations, footnotes, sources}) {
           index_by = "title"
           enable_label = {true}
           is_interactive = {false}
-          label_format = { d=><tspan y={ -4 }> {formats.compact1(d, {raw: true})} </tspan>}
+          label_format = { d=><tspan y={-4}> {formats.compact1(d, {raw: true})} </tspan>}
           colors = "paired"
           enableGridX={false}
         />

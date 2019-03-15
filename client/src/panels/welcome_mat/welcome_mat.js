@@ -15,6 +15,8 @@ import {
   get_appropriate_rpb_subject,
   NivoResponsiveBar,
   NivoResponsiveLine,
+  formats,
+  dollar_formats,
 } from "../shared.js" 
 import { run_template } from "../../models/text";
 
@@ -68,53 +70,71 @@ const get_historical_fte_source_link = subject => {
   }
 };
 
-const ticks = _.chain(std_years)
-  .union(planning_years)
+const ticks =(has_planned, has_hist)=> _.chain(has_hist?std_years:null)
+  .union(has_planned?planning_years:null)
   .map(run_template)
   .value();
 
-const welcome_data_line = (data) =>([{
+const welcome_data_line = (data, has_planned, has_hist,) =>([{
   "data": data.map((value,year_index)=>({
-    x: ticks[year_index],
+    x: ticks(has_planned,has_hist)[year_index],
     y: value,
   })),
 }])
 
-const welcome_data_bar = (data) =>
+const welcome_data_bar = (data, has_planned, has_hist,) =>
   data.map((value, year_index) => ({
-    "year": ticks[year_index],
+    "year": ticks(has_planned,has_hist)[year_index],
     "0": value,
   }))
 
+const format_value = (value, is_money) => (
+  is_money?dollar_formats.compact2_raw(value):formats.big_int_real(value, {raw: true})
+)
 const Chart = ({
   data,
-  is_money,
-  use_line,
+  is_money = false,
+  use_line = false,
   is_light,
+  has_hist,
+  has_planned,
 }) => use_line?<div style ={{height: '230px'}}>
   <NivoResponsiveLine
     id = {false}
-    data = {welcome_data_line(data)}
+    data = {welcome_data_line(data, has_planned, has_hist)}
     max = {_.max(data)*1.05}
     enableGridX = {false}
     enableGridY = {false}
     min = {_.min(data)*0.95}
     is_money={is_money}
-    tick_amount={4}
+    tick_amount={5}
     remove_bottom_axis = {true}
     margin={{
       "top": 20,
       "right": 30,
       "bottom": 20,
-      "left": 70,
+      "left": 80,
     }}
+    tooltip={
+      slice => {
+        return (
+          <div>
+            {slice.data.map((e,i) => (
+              <p key={i} style={{margin:'0'}}> 
+                {slice.id}: <strong>{format_value(e.data['y'], is_money)}</strong>
+              </p>
+            ))}
+          </div>
+        )
+      }
+    }
   />
 </div> :
 //keys have to have the empty key in the array 
 //or else it won't display the bar for negative values
 <div style = {{height: '230px'}}>
   <NivoResponsiveBar
-    data = {welcome_data_bar(data)}
+    data = {welcome_data_bar(data, has_planned, has_hist)}
     keys= {["","0"]}
     index_by = {"year"}
     margin={{
@@ -128,7 +148,12 @@ const Chart = ({
     remove_bottom_axis={true}
     is_money ={is_money}
     colors = {is_light?"#335075":"#000000"}
-    tick_value = {5}
+    tick_value = {4}
+    tooltip = { d=> <div>
+      <p style={{margin:'0'}}>
+        {d.indexValue}: <strong>{format_value(d.value, is_money)}</strong>
+      </p>
+    </div>}
   />
 </div>
 
@@ -251,6 +276,9 @@ const WelcomeMat = (props) => {
       fte_last_year,
       fte_data,
       hist_fte_diff,
+
+      has_hist,
+      has_planned,
     } = calcs;
 
 
@@ -289,7 +317,9 @@ const WelcomeMat = (props) => {
             <Chart 
               use_line
               data={_.take(spend_data,5)}
-              is_money = {false}
+              is_money
+              has_hist={calcs.has_hist}
+              has_planned={calcs.has_planned}
             />
           </Pane>,
         ]}
@@ -317,8 +347,10 @@ const WelcomeMat = (props) => {
           <Pane noPadding key="d" size={40}>
             <Chart 
               use_line
-              is_money = {true}
               data={_.take(fte_data,5)}
+              has_hist={calcs.has_hist}
+              has_planned={calcs.has_planned}
+
             />
           </Pane>,
         
@@ -385,7 +417,9 @@ const WelcomeMat = (props) => {
             <Chart 
               data={_.takeRight(spend_data, 3)}
               is_light
-              is_money = {true}
+              is_money
+              has_hist={calcs.has_hist}
+              has_planned={calcs.has_planned}
             />
           </Pane>,
         ]}
@@ -415,7 +449,8 @@ const WelcomeMat = (props) => {
             <Chart  
               data={_.takeRight(fte_data,3)}
               is_light
-              is_money = {false}
+              has_hist={calcs.has_hist}
+              has_planned={calcs.has_planned}
             />
           </Pane>,
         ]}
@@ -543,6 +578,9 @@ const WelcomeMat = (props) => {
             <Chart 
               use_line
               data={_.take(spend_data,5)}
+              is_money
+              has_hist={calcs.has_hist}
+              has_planned={calcs.has_planned}
             />
           </Pane>,
         ]}
@@ -663,6 +701,8 @@ const WelcomeMat = (props) => {
             <Chart 
               use_line 
               data={spend_data}
+              has_hist={calcs.has_hist}
+              has_planned={calcs.has_planned}
               is_money
             />
           </Pane>,
@@ -712,6 +752,8 @@ const WelcomeMat = (props) => {
             <Chart 
               use_line 
               data={fte_data}
+              has_hist={calcs.has_hist}
+              has_planned={calcs.has_planned}
             />
           </Pane>,
         ]}

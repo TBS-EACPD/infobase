@@ -93,7 +93,7 @@ export class NivoResponsiveBar extends React.Component{
           "top": 50,
           "right": 40,
           "bottom": 50,
-          "left": 65,
+          "left": 70,
         }:margin}
         labelFormat={_.isUndefined(label_format)? null : label_format}
         padding={0.3}
@@ -113,6 +113,7 @@ export class NivoResponsiveBar extends React.Component{
           }):left_axis}
         labelTextColor="inherit:darker(1.6)"
         motionStiffness={90}
+        tooltip = {tooltip}
         tooltipFormat={_.isUndefined(tooltip_format)?get_formatter(is_money):tooltip_format}
         enableLabel = {enable_label}
         enableGridX = {enableGridX}
@@ -168,7 +169,7 @@ export class NivoResponsiveLine extends React.Component {
           "top": 50,
           "right": 40,
           "bottom": 50,
-          "left": 65,
+          "left": 70,
         }:margin}
         xScale={{
           "type": "point",
@@ -201,9 +202,9 @@ export class NivoResponsiveLine extends React.Component {
         colorBy ={colorBy}
         animate={true}
         motionStiffness={90}
-        motionDamping={15}
-        tooltip = {tooltip}
-        tooltipFormat={_.isUndefined(tooltip_format)? get_formatter(is_money):tooltip_format}
+        motionDamping={15}      
+        tooltip = {tooltip}   
+        tooltipFormat = {_.isUndefined(tooltip_format)? get_formatter(is_money):tooltip_format}
         colors = {_.isUndefined(colors)? '#000000' : colors}
         theme={_.isUndefined(theme)?{
           axis: {
