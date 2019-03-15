@@ -105,9 +105,24 @@ function ensure_loaded({
       _.isEmpty( BudgetMeasure.get_all() )
   );
 
+  const result_docs_to_load = !_.isEmpty(result_docs) ?
+    result_docs :
+    _.chain(graph_keys)
+      .map(key => PanelGraph.lookup(key, subject_level))
+      .map('required_result_docs')
+      .concat( 
+        _.chain(stat_keys)
+          .map(key => Statistics.lookup(key))
+          .map('required_result_docs')
+          .value()
+      )
+      .uniq()
+      .compact()
+      .value();
+
   const results_prom = (
     should_load_results ?
-      api_load_results_bundle(subject, result_docs) :
+      api_load_results_bundle(subject, result_docs_to_load) :
       Promise.resolve()
   );
 

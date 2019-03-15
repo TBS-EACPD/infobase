@@ -244,6 +244,7 @@ new PanelGraph({
 new PanelGraph({
   level: 'program',
   requires_results: true,
+  required_result_docs: ["drr17"],
   key: "drr_summary",
   footnotes: ["RESULTS_COUNTS", "RESULTS"],
 
