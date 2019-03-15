@@ -222,7 +222,9 @@ export function api_load_results_bundle(subject, result_docs){
 
       _.each(
         docs_to_load,
-        doc => _.set(_api_subject_ids_with_loaded_results, `${doc}.${level}.${id}`, true)
+        // Need to use _.setWith and pass Object as the customizer function to account for keys that may be numbers (e.g. dept id's)
+        // Just using _.set makes large empty arrays when using a number as an accessor in the target string, bleh
+        doc => _.setWith(_api_subject_ids_with_loaded_results, `${doc}.${level}.${id}`, true, Object)
       );
     });
 }

@@ -401,7 +401,7 @@ class SingleSubjResultsContainer extends React.Component {
     } = this.props;
 
     const { doc } = get_initial_single_subj_results_state({ subj_guid: subject.guid, has_drr_data, has_dp_data });
-
+   
     ensure_loaded({
       subject,
       results: true,
