@@ -366,15 +366,6 @@ let api_is_results_count_loaded = {
   summary: false,
   granular: false,
 };
-const result_count_fields = [
-  "drr17_results",
-  "drr17_indicators_met",
-  "drr17_indicators_not_available",
-  "drr17_indicators_not_met",
-  "drr17_indicators_future",
-  "dp18_results",
-  "dp18_indicators",
-];
 const load_results_counts_query = (level = "summary") => gql`
 query($lang: String!) {
   root(lang: $lang) {
@@ -382,8 +373,13 @@ query($lang: String!) {
       all_target_counts_${level} {
         subject_id
         level
-        ${_.reduce(result_count_fields, (memo, fragment) => `${memo}
-          ${fragment}`, "")}
+        drr17_results
+        drr17_indicators_met
+        drr17_indicators_not_available
+        drr17_indicators_not_met
+        drr17_indicators_future
+        dp18_results
+        dp18_indicators
       }
     }
   }
@@ -416,26 +412,19 @@ export function api_load_results_counts(level = "summary"){
           });  
         }
         
-        const mapped_rows = _.chain(response_rows)
-          .map( 
-            row => ({
-              ..._.chain(result_count_fields)
-                .map( result_count_field => [result_count_field, 0] )
-                .fromPairs()
-                .value(),
-              ..._.pickBy( row, value => !_.isNull(value) ),
-            })
-          )
-          .map(
-            row_without_nulls => ({
-              ...row_without_nulls,
-              id: row_without_nulls.subject_id,
-              drr17_past_total: row_without_nulls.drr17_indicators_met + row_without_nulls.drr17_indicators_not_met + row_without_nulls.drr17_indicators_not_available,
-              drr17_future_total: row_without_nulls.drr17_indicators_future,
-              drr17_total: row_without_nulls.drr17_indicators_met + row_without_nulls.drr17_indicators_not_met + row_without_nulls.drr17_indicators_not_available + row_without_nulls.drr17_indicators_future,
-            })
-          )
-          .value();
+        const mapped_rows = _.map(
+          response_rows,
+          row => {
+            const null_zeroed_row = _.mapValues(row, (value) => _.isNull(value) ? 0 : value );
+            return {
+              ...null_zeroed_row,
+              id: null_zeroed_row.subject_id,
+              drr17_past_total: null_zeroed_row.drr17_indicators_met + null_zeroed_row.drr17_indicators_not_met + null_zeroed_row.drr17_indicators_not_available,
+              drr17_future_total: null_zeroed_row.drr17_indicators_future,
+              drr17_total: null_zeroed_row.drr17_indicators_met + null_zeroed_row.drr17_indicators_not_met + null_zeroed_row.drr17_indicators_not_available + null_zeroed_row.drr17_indicators_future,
+            };
+          }
+        );
 
         if (level === "summary"){
           ResultCounts.set_data(mapped_rows);
