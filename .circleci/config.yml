@@ -11,6 +11,7 @@ deploy_filter: &deploy_filter
       only:
         - master
 
+
 version: 2
 jobs:
 
@@ -118,7 +119,7 @@ jobs:
 
       - run: sed -i "s#${CDN_URL}#.#g" ./client/build/InfoBase/app/*.js # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
       - run: sed -i "s#${CDN_URL}#.#g" ./client/build/InfoBase/*.html # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
-      - run: sed -i "s#hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls#http://127.0.0.1:1337/graphql#g" ./client/build/InfoBase/app/*.js # Replace prod API URL with local URL so these tests use the local server
+      - run: sed -i "s#hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls#http://127.0.0.1:1337/graphql#g" ./client/build/InfoBase/app/*.js # Replace CI API URL placeholder with local URL so these tests use the local server
       - run: 
           name: start_http_server
           command: (cd client && npm run ci_serve)
@@ -138,10 +139,10 @@ jobs:
       - run: ./ci_scripts/create_envs.sh
       - run: ./ci_scripts/create_deploy_envs.sh
 
-      # Checksum all files in data dir
+      # Checksum all files in data dir, used to determine if the database needs to be populated
       - run: cksum ./data/* > data-checksums.txt
 
-      # Use this cached file to tell if the data needs to be loaded to mongodb
+      # Use this cached file to tell if the data needs to be loaded to mongodb (if on a new branch or if data has changed)
       - restore_cache:
           keys:
             - ib-data-is-deployed-{{ .Branch }}-{{ checksum "./data-checksums.txt" }}
@@ -168,10 +169,10 @@ jobs:
 
       - run: ./ci_scripts/authenticate-server-gcloud.sh
 
-      # Checksum all files in data dir
+      # Checksum all JS files in transpiled_build, used to determine if the function needs to be redeployed
       - run: find ./server/transpiled_build -name "*.js" | xargs cksum > server-checksums.txt
 
-      # Use this cached file to tell if the api needs to be redeployed
+      # Use this cached file to tell if the api needs to be redeployed (if on a new branch, if function code's changed, or if server node modules have changed)
       - restore_cache:
           keys:
             - ib-api-is-deployed-{{ .Branch }}-{{ checksum "./server-checksums.txt" }}-{{ checksum "./server/package-lock.json" }}
@@ -195,7 +196,7 @@ jobs:
           at: ./
       - run: ./ci_scripts/create_envs.sh
       - run: ./ci_scripts/authenticate-client-gcloud.sh
-      - run: sed -i "s#hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls#https://us-central1-ib-serverless-api-dev.cloudfunctions.net/$CIRCLE_BRANCH/graphql#g" ./client/build/InfoBase/app/*.js # Replace prod API URL with branch specific API URL
+      - run: sed -i "s#hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls#https://us-central1-ib-serverless-api-dev.cloudfunctions.net/$CIRCLE_BRANCH/graphql#g" ./client/build/InfoBase/app/*.js # Replace Replace CI API URL placeholder with branch specific API URL
       - run: (cd client && ./deploy_scripts/push_to_gcloud_bucket.sh)
 
 
