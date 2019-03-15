@@ -12,7 +12,6 @@ import { ensure_loaded } from '../core/lazy_loader.js';
 import { get_panels_for_subject } from './get_panels_for_subject.js';
 import { bubble_defs } from './bubble_definitions.js'; 
 import { ReactPanelGraph } from '../core/PanelCollectionView.js';
-import { test_api_query } from '../graphql_utils.js';
 import {
   create_text_maker_component,
   SpinnerWrapper,
@@ -284,12 +283,6 @@ class InfoGraph_ extends React.Component {
 
   loadGraphDeps({bubble, subject, level}){
     const panel_keys = panels_for_subj_bubble({subject, bubble});
-
-    //test code that calls API and logs failures to analytics
-    //TODO: remove this once we integrate API
-    if(bubble=="results"){
-      test_api_query()
-    }
 
     ensure_loaded({
       graph_keys: panel_keys,

@@ -1,9 +1,7 @@
 import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import gql from 'graphql-tag';
 import { graphql as apollo_connect } from 'react-apollo';
-import { log_standard_event } from './core/analytics.js';
 
 let api_url;
 if(window.is_dev_build){
@@ -58,50 +56,4 @@ export const LoadingHoc = ({Component,query,data_to_props=_.identity,variables})
 })(InnerLoadingHoc({Component,data_to_props}))
 
 
-
-
-const query = gql`
-query {
-  root(lang:"${window.lang}"){
-    org(org_id:"1") {
-      name
-    }
-  }
-}
-`;
-
-window.query_client = () => {
-  return client.query({ query });
-}
-
-
-export function test_api_query(){
-  const time_at_request = Date.now()
-  get_client().query({query})
-    .then(function(data){
-      const resp_time = Date.now() - time_at_request
-      if(_.get(data, "data.root.org.name") == window._DEV_HELPERS.Subject.Dept.lookup(1).applied_title){
-        log_standard_event({
-          SUBAPP: window.location.hash.replace('#',''),
-          MISC1: "API_QUERY_SUCCESS",
-          MISC2: `took ${resp_time} ms`,
-        });
-      } else {
-        log_standard_event({
-          SUBAPP: window.location.hash.replace('#',''),
-          MISC1: "API_QUERY_UNEXPECTED",
-          MISC2: `took  ${resp_time} ms - ${JSON.stringify(data.data)}`,
-        });  
-      }
-      
-    
-    })
-    .catch(function(error){
-      const resp_time = Date.now() - time_at_request      
-      log_standard_event({
-        SUBAPP: window.location.hash.replace('#',''),
-        MISC1: "API_QUERY_FAILURE",
-        MISC2: `took  ${resp_time} ms - ${error.toString()}`,
-      });
-    });
-}
+window._DEV_HELPERS.query_api = (query) => client.query({ query });
