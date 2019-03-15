@@ -197,6 +197,7 @@ export function api_load_results_bundle(subject, result_docs){
     return Promise.resolve();
   }
 
+  const time_at_request = Date.now();
   const client = get_client();
   return client.query({ 
     query,
@@ -207,6 +208,22 @@ export function api_load_results_bundle(subject, result_docs){
   })
     .then( (response) => {
       const hierarchical_response_data = response_data_accessor(response);
+
+      const resp_time = Date.now() - time_at_request; 
+      if( !_.isEmpty(hierarchical_response_data) ){
+        // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
+        log_standard_event({
+          SUBAPP: window.location.hash.replace('#',''),
+          MISC1: "API_QUERY_SUCCESS",
+          MISC2: `Results, took ${resp_time} ms`,
+        });
+      } else {
+        log_standard_event({
+          SUBAPP: window.location.hash.replace('#',''),
+          MISC1: "API_QUERY_UNEXPECTED",
+          MISC2: `Results, took ${resp_time} ms`,
+        });  
+      }
 
       const {
         sub_programs,
@@ -226,6 +243,14 @@ export function api_load_results_bundle(subject, result_docs){
         // Just using _.set makes large empty arrays when using a number as an accessor in the target string, bleh
         doc => _.setWith(_api_subject_ids_with_loaded_results, `${doc}.${level}.${id}`, true, Object)
       );
+    })
+    .catch(function(error){
+      const resp_time = Date.now() - time_at_request;     
+      log_standard_event({
+        SUBAPP: window.location.hash.replace('#',''),
+        MISC1: "API_QUERY_FAILURE",
+        MISC2: `Results, took  ${resp_time} ms - ${error.toString()}`,
+      });
     });
 }
 
