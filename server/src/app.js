@@ -9,7 +9,6 @@ import {
   create_schema,
 } from './models/index.js';
 import { connect_db } from "./db.js";
-import { connect } from 'net';
 
 const log_query = (req) => {
   const request_content = (!_.isEmpty(req.body) && req.body) || (!_.isEmpty(req.query) && req.query);
@@ -37,10 +36,14 @@ app.use( compression() );
 app.use("/", function (req, res, next) {
   res.header('cache-control', 'public, max-age=31536000');
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, url-encoded-query');
   if (req.method === 'OPTIONS') {
     res.sendStatus(200);
   } else {
+    if ( req.method === "GET" && !_.isEmpty(req.headers['url-encoded-query']) ){
+      req.url = `${req.url.split('?')[0]}?${req.headers['url-encoded-query']}`;
+    }
+
     !global.IS_DEV_SERVER && log_query(req);
     next();
   }

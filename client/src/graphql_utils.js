@@ -1,7 +1,8 @@
 import { ApolloClient } from 'apollo-client';
-import { HttpLink } from 'apollo-link-http';
+import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { graphql as apollo_connect } from 'react-apollo';
+import string_hash from "string-hash";
 
 let api_url;
 if(window.is_dev_build){
@@ -12,13 +13,31 @@ if(window.is_dev_build){
   api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${window.sha}/graphql`;
 }
 
+const query_length_tolerant_fetch = (uri, options) => {
+  const url_encoded_query = uri.split("?")[1];
+  const query_string_hash = string_hash(url_encoded_query);
+
+  const short_uri = `${api_url}?${query_string_hash}`
+
+  const new_options = {
+    ...options,
+    headers: {
+      ...options.headers,
+      "url-encoded-query": url_encoded_query,
+    },
+  };
+
+  return fetch(short_uri, new_options);
+}
+
 let client = null;
 export function get_client(){
   if(!client){
     client = new ApolloClient({
-      link: new HttpLink({
+      link: createHttpLink({
         uri: api_url,
         fetchOptions: { method: "GET" },
+        fetch: query_length_tolerant_fetch,
       }),
       cache: new InMemoryCache(),
       defaultOptions: {
