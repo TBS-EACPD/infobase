@@ -13,14 +13,12 @@ if(window.is_dev_build){
 }
 
 let client = null;
-
 export function get_client(){
   if(!client){
     client = new ApolloClient({
-      // By default, this client will send queries to the
-      //  `/graphql` endpoint on the same host
       link: new HttpLink({
         uri: api_url,
+        fetchOptions: { method: "GET" },
       }),
       cache: new InMemoryCache(),
       defaultOptions: {

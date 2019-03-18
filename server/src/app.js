@@ -35,6 +35,7 @@ app.use( body_parser.json({ limit: '50mb' }) );
 app.use( compression() );
 
 app.use("/", function (req, res, next) {
+  res.header('cache-control', 'public, max-age=31536000');
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
   if (req.method === 'OPTIONS') {
