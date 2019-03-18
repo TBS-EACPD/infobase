@@ -137,8 +137,10 @@
 139,"MLP011","Repeal the recent changes made to the Employment Insurance (EI) system that have been punitive to unemployed workers.","Éliminer les récents changements apportés au régime d'assurance-emploi qui sont néfastes pour les travailleurs au chômage.",,
 140,"MLP011","Reduce Employment Insurance (EI) premiums.","Réduire les cotisations à l'assurance-emploi (AE).",,
 141,"MLP011","Improve the Employment Insurance (EI) system that currently leaves too many unemployed workers with no safety net.","Moderniser le régime d'assurance-emploi qui prive trop de travailleurs du filet de sécurité que constitue l'assurance-emploi.",,
+144,"MLP011","Improve Canadians' access to good quality job training.","Améliorer l'accès des travailleurs à des programmes de formation de qualité.",,
 145,"MLP011","Rationalize and expand the intergovernmental agreements that support skills training.","Rationaliser et élargir les ententes intergouvernementales portant sur la formation professionnelle.",,
 146,"MLP011","Develop a framework to fund training facilities delivered in partnership with labour unions.","Élaborer un cadre visant à financer les centres de formation administrés en partenariat avec les syndicats.",,
+148,"MLP011","Change the Repayment Assistance Plan so that graduates are required to repay only once they earn at least $25,000 per year.","Modifier le programme d'aide au remboursement afin que les diplômés remboursent seulement quand ils gagnent au moins 25 000 dollars par an.",,
 149,"MLP011","Increase take up rates of Registered Education Savings Plans (RESPs) and the Canada Learning Bonds by making registration easier.","Augmenter les inscriptions aux régimes enregistrés d'épargne d'études et au Bon d'études canadien en facilitant l'inscription.",,
 150,"MLP011","Collaborate with provinces and territories on the Canada Student Loans Program, and compensate provinces and territories that do not participate in it.","Collaborer avec les provinces et les territoires au Programme canadien de prêts aux étudiants, et verser une indemnité aux provinces et territoires qui n'y participent pas.",,
 151,"MLP008","Increase annual support to the Post-Secondary Student Support Program.","Augmenter le financement annuel au Programme d'aide aux étudiants de niveau postsecondaire.",,
@@ -295,19 +297,21 @@
 374,"MLP007","Improve the delivery of child welfare and health care under Jordan's Principle to focus on the best interests of the child.","Améliorer la prestation de services d’aide à l’enfance et de soins de santé pour les enfants, conformément au principe de Jordan, en l'axant sur les intérêts véritables de l’enfant.",,
 375,"MLP008","Implement the United Nations Declaration on the Rights of Indigenous Peoples (UNDRIP) in full partnership with Indigenous peoples.","Mettre en œuvre la Déclaration des Nations Unies sur les droits des peuples autochtones en partenariat avec les peuples autochtones.",,
 376,"MLP010","Undertake modernization efforts to improve the efficiency and effectiveness of the criminal justice system.","Déployer des efforts de modernisation afin d’accroître l’efficacité du système de justice pénale.",,
-396,"MLP003","Implement the G7 Charlevoix Blueprint for Healthy Oceans, Seas and Resilient Coastal Communities and the G7 Ocean Plastics Charter.","Diriger la mise en œuvre du Plan d’action de Charlevoix pour la santé des océans et des mers et des communautés côtières résilientes et de la Charte du G7 sur les plastiques dans les océans.",,
-434,"MLP003","Implement and further develop the Oceans Protection Plan.","Mettre en œuvre et élaborer le Plan de protection des océans.",,
+416,"MLP010","Reduce the smuggling of opioids across Canadian borders in partnership with provinces, territories, and municipalities, and the United States.","Réduire la contrebande d’opioïdes à la frontière, et travailler en partenariat avec les provinces, les territoires, les municipalités et les États-Unis.",,
 1006,"HI","Chemicals Management Plan","Plan de gestion des produits chimiques",,
 1017,"HI","Major Projects Management Office Initiative","Initiative du Bureau de gestion des grands projets",,
 1021,"HI","Investing in Canada Plan","Plan Investir dans le Canada",,
+1023,"HI","Syrian Refugee Crisis","Crise des réfugiés syriens",,
 1027,"HI","Youth Employment Strategy","Stratégie emploi jeunesse",,
 1028,"HI","Federal Contaminated Sites Action Plan (FCSAP)","Plan d'action pour les sites contaminés fédéraux",,
 1029,"HI","Horizontal Management Framework (HMF) for Clean Growth and Climate Change","Cadre de gestion horizontal en matière de croissance propre et de changements climatiques",,
 1030,"HI","Addressing Air Pollution","Lutte contre la pollution atmosphérique",,
 1032,"HI","Canadian Drug and Substances Strategy","Stratégie canadienne sur les drogues et autres substances",,
 1033,"HI","Oceans Protection Plan","Plan de protection des océans",,
+1035,"HI","Framework for the Legalization and Regulation of Cannabis","Mettre en oeuvre un nouveau cadre fédéral pour la législation et la réglementation du cannabis",,
 1037,"HI","Addressing the Opioid Crisis","Gérer la crise des opioïdes",,
 1038,"HI","Initiative to Protect and Recover Endangered Whale Populations","Initiative de protection et de rétablissement des populations de baleines menacées",,
+1039,"HI","Taking Action Against Guns and Gangs","Prendre des mesures contre les armes à feu et les gangs de rue",,
 1043,"HI","Impact Assessment","Évaluation d'impact",,
 1044,"HI","Canada's Nature Legacy","Patrimoine naturel du Canada",,
 "39_1","MLP003","Implement the Pan-Canadian framework, including targeted federal funding and a flexible national carbon pollution pricing policy.","Mettre en œuvre le Cadre pancanadien, incluant un financement fédéral ciblé et une politique nationale flexible d'établissement du prix du carbone.",,
@@ -595,6 +599,8 @@
 "TGT061","TGC001","Performing arts sector","Secteur des arts d'interprétation","A sector of our society engaged in the artistic and cultural entertainment of people.","Segment de la société oeuvrant dans le domaine artistique et du divertissement culturel."
 "TGT062","TGC001","Sports and/or recreation industry","Secteur des sports et loisirs","A sector of our society engaged in the entertainment and leisure of people. I.e. Amusement parks, casinos, professional sports teams, parks and trails, etc.","Segment de la société associé aux divertissements et aux loisirs pour les personnes (p. ex. parcs d'attractions, casinos, équipes sportives professionnelles, parcs et sentiers)."
 "TGT063","TGC001","Hospitality and/or food services industry","Secteurs de l'accueil et des services alimentaires","A sector of our economy engaged primarily in the provision of lodging and restaurant services to people. This industry depends upon the availability of leisure time and disposable income of people.","Segment de notre économie associé principalement aux services de logement et de restauration pour les personnes. Ce secteur est tributaire du temps de loisir et du revenu dont disposent les personnes."
+"TGT065","TGC001","Small sized businesses","Petites entreprises","Is typically an enterprise that has less than 50 employees and less than $5 million in annual sales.","S'entend habituellement d'une entreprise comptant moins de 50 employés et générant moins de 5 millions de dollars de ventes annuelles."
+"TGT066","TGC001","Medium sized businesses","Moyennes entreprises","Is typically an enterprise that has between 50 and 500 employees and between $5 million and $50 million in annual sales.","S'entend habituellement d'une entreprise comptant entre 50 et 500 employés et générant entre de 5 millions de dollars et 50 millions de dollars de ventes annuelles."
 "TGT067","TGC001","Large sized businesses","Grandes entreprises","The part of the Canadian economy which is run by private individuals or groups, usually as a means of enterprise for profit, and is not controlled by the government.","La partie de l'économie canadienne qui est géré par des individus ou des groupes privés, généralement à but lucratif, et non contrôlée par le gouvernement."
 "TGT068","TGC001","Indigenous/northern businesses","Autochtones/ entreprises du Nord","An enterprise that is owned by aboriginals.","Une entreprise qui appartient aux autochtones"
 "TGT069","TGC005","Colleges and/or universities","Collèges ou universités","An institution for higher learning generally with teaching and research facilities. I.e. Academia.","Institution d'enseignement supérieur comportant généralement des établissements d'enseignement et de recherche."

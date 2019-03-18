@@ -87,7 +87,7 @@
 "CCOHS",20,1,"Operating/Program","Fonctionnement/Programme",4619460.00,4129766.00,,,,,,,,
 "CCOHS","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",1117425.00,1117425.00,1052919,1052919.00,1045780,1045780,1069997,1069997,1028903.00,1028903.11
 "CCOHS","S",999,"Spending of Revenues pursuant to Section 6(1)(g) of the Canadian Centre for Occupational Health and Safety Act","Dépenses des recettes conformément au paragraphe 6(1)(g) de la Loi sur le Centre canadien d'hygiène et de sécurité au travail",,,,,5851187,4568153,6350345,4752648,7478763.00,4804790.52
-"CCRA",1,1,"Operating/Program","Fonctionnement/Programme",3392504128.00,3097500944.00,3391869712,3167429873.00,3268071716,3034034552,3589123987,3378439921,3823713925.00,3692875683.00
+"CCRA",1,1,"Operating/Program","Fonctionnement/Programme",3392504128.00,3097500944.00,3391869712,3167429873.00,3268071716,3034034552,3589123987,3378439921,3823713925.00,3692875684.00
 "CCRA",5,2,"Capital","Capital",110011806.00,63301048.00,123413805,76291182.00,128692837,78803100,96310566,74872686,80801558.00,73594724.00
 "CCRA","S",999,"Children's special allowance payments","Versements d'allocations spéciales pour enfants",235403434.00,235403434.00,214761199,214761199.00,309173282,309173282,319659267,319659267,333553349.00,333553349.38
 "CCRA","S",999,"Collection Agency Fees","Honoraires - Agence de recouvrement",,,,,,,,,124.00,123.86
@@ -290,8 +290,8 @@
 "ECBC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,12384000,9865841.00,,,,,,
 "ECBC",10,5,"Payments to Crown Corps","Paiement aux sociétés d'É",52848000.00,50844000.00,,,,,,,,
 "EDC","S",999,"Administrative fees","Frais administratif",5533173.99,5533173.99,2597096,2597096.00,3699980,3699980,8210494,8210494,5588461.00,5588461.31
+"EDC","S",999,"Losses on Foreign Exchange","Pertes d'opérations de change",,,,,,,,,45610229.00,45610228.99
 "EDC","S",999,"Payments to Export Development Canada to discharge obligations incurred pursuant to Section 23 of the Export Development Act (Canada Account) for the purpose of facilitating and developing trade between Canada and other countries (S.C., 2001, c. 33) - Transfer from non-budgetary authority related to section 24","Versements à Exportation et développement Canada pour acquitter ses obligations encourues en vertu de l'article 23 de la Loi sur le développement des exportations (Compte du Canada) afin de faciliter et d'accroître les échanges commerciaux entre le Canada et les autres pays (L.C. (2001), ch.33) - Virement de l'autorisation non budgétaire reliée à l'article 24",116862707.00,116862707.00,,,,,,,,
-"EDC","S",999,"S0796","S0796",,,,,,,,,45610229.00,45610228.99
 "ERC",1,1,"Operating/Program","Fonctionnement/Programme",,,1610094,1430085.00,1491043,1363839,1490040,1368145,1722980.00,1443436.00
 "ERC",60,1,"Operating/Program","Fonctionnement/Programme",1639562.00,1445271.00,,,,,,,,
 "ERC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",160657.00,160657.00,154521,154521.00,154130,154130,156133,156133,132988.00,132987.62
@@ -462,11 +462,11 @@
 "INDSC",7,2,"Capital","Capital",,,,,,,,,4380354.00,3915458.00
 "INDSC",13,3,"Grants & Contributions","Subventions et Contributions",,,,,,,,,3600228503.00,3528465874.00
 "INDSC","S",999,"Contributions in connection with First Nations infrastructure","Contributions relatives à l'infrastructure des Premières Nations",,,,,,,,,19518645.60,19518645.60
-"INDSC","S",999,"Contributions to employee benefit plans","S0790",,,,,,,,,29939140.00,29939139.67
-"INDSC","S",999,"Court Awards","S0788",,,,,,,,,19000.00,19000.00
+"INDSC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",,,,,,,,,29939140.00,29939139.67
+"INDSC","S",999,"Court Awards","Montants adjugés par une cour",,,,,,,,,19000.00,19000.00
 "INDSC","S",999,"Indian Annuities Treaty payments","Rentes versées aux Indiens - Paiements en vertu de traités",,,,,,,,,10.00,10.00
 "INDSC","S",999,"Payment from the Consolidated Revenue Fund of guaranteed loans issued out of the Indian economic development account (authorized limit $60,000,000). Change in Ministry responsibility (Indian Affairs and Northern Development)","Paiement sur le Trésor en vertu de prêts garantis émis du Compte d'expansion économique des Indiens (limite autorisée 60 000 000 $). Changement de responsabilité du portefeuille ministériel (Affaires indiennes et du Nord canadien)",,,,,,,,,32490796.00,
-"INDSC","S",999,"Spending of proceeds from the disposal of surplus Crown assets","S0789",,,,,,,,,64771.00,2184.12
+"INDSC","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",,,,,,,,,64771.00,2184.12
 "INVIC",3,1,"Operating/Program","Fonctionnement/Programme",,,,,,,,,11103293.00,2032683.00
 "IPC",1,1,"Operating/Program","Fonctionnement/Programme",,,10626443,10487222.00,10076401,9731861,13574140,11818752,12634041.00,12507692.00
 "IPC",5,1,"Operating/Program","Fonctionnement/Programme",,,23728093,23065873.00,22571076,21834186,22910623,21295678,23879678.00,23237576.00
@@ -552,7 +552,7 @@
 "NPA",1,1,"Operating/Program","Fonctionnement/Programme",,,701325,478845.00,701215,425969,701095,250994,465000.00,221805.00
 "NPA",30,1,"Operating/Program","Fonctionnement/Programme",3003000.00,1038693.00,,,,,,,,
 "NPA","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",133931.00,133931.00,37465,37465.00,30086,30086,3337,3337,4001.00,4000.85
-"NPA","S",999,"S0797","S0797",,,,,,,,,5315360.00,5315359.96
+"NPA","S",999,"Expenditures pursuant to Paragraph 29.1(1) of Financial Administration Act","Dépenses aux termes du paragraphe 29.1(1) de la Loi sur la gestion des finances publiques",,,,,,,,,5315360.00,5315359.96
 "NPB",1,1,"Operating/Program","Fonctionnement/Programme",,,45467757,43796720.00,42801791,40375622,42954435,41050204,44294350.00,42038492.00
 "NPB",35,1,"Operating/Program","Fonctionnement/Programme",45801033.00,43721153.00,,,,,,,,
 "NPB","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",6664960.00,6664960.00,6299845,6299845.00,5928196,5928196,5754607,5754607,5679207.00,5679206.61
@@ -752,8 +752,7 @@
 "SWC",30,3,"Grants & Contributions","Subventions et Contributions",19033333.00,19033333.00,,,,,,,,
 "SWC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",1325490.00,1325490.00,1273336,1273336.00,1265383,1265383,1459269,1459269,1745077.00,1745076.78
 "SWC","S",999,"Salary and Motor Car Allowance","Traitement et allocation pour automobile",,,,,,,,,2000.00,2000.04
-"SWC","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",2129.00,0.00,2004,2004.00,89,0,89,,,
-"SWC","S",999,"Spending of proceeds from the disposal of surplus Crown assets","S0567",,,,,,,,,58.00,
+"SWC","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",2129.00,0.00,2004,2004.00,89,0,89,,58.00,
 "TBC",1,1,"Operating/Program","Fonctionnement/Programme",246327900.00,234224053.00,321758616,295850911.00,303094237,248942508,366807216,290703748,309299504.00,272955611.00
 "TBC",5,6,"Treasury Board Central","Crédit du Conseil du Tréso",749998884.00,0.00,750000000,0.00,750000000,0,635642771,0,530274898.00,0.00
 "TBC",10,6,"Treasury Board Central","Crédit du Conseil du Tréso",2093000.00,0.00,103000,0.00,2090470,0,693000,0,693000.00,0.00
