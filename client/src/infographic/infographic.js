@@ -372,7 +372,6 @@ class TransitionText extends React.Component {
         */
         transitionLeaveTimeout={0.0001}
       >
-
         {
           <span key={this.props.text}>
             { this.props.text }
