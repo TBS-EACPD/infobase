@@ -384,4 +384,3 @@ class TransitionText extends React.Component {
 }
 
 export { InfoGraph as default }
-
