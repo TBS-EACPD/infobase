@@ -1,7 +1,7 @@
 import text from './crso_by_prog.yaml';
 import {
-  formats,
   PanelGraph,
+  NivoResponsiveBar,
   years,
   declarative_charts,
   util_components,
@@ -18,7 +18,6 @@ const {
 } = util_components;
 
 const {
-  Bar,
   GraphLegend,
   A11YTable,
 } = declarative_charts;
@@ -131,6 +130,16 @@ class PlannedProgramResources extends React.Component {
       .map( ({label, data}) => [ label, data ])
       .fromPairs()
       .value();
+    
+    const keys = Object.keys(graph_data)
+    const data_by_year = ticks.map((year, year_index) =>(
+      _.fromPairs(_.map(graph_data, (data, label) =>(
+        [label,data[year_index]])
+      ))
+    ))
+    data_by_year.map((stacked_data, index) =>{
+      stacked_data["year"] = ticks[index]
+    })
 
     return <div>
       <div className="medium_panel_text mrgn-bttm-lg">
@@ -149,7 +158,7 @@ class PlannedProgramResources extends React.Component {
                 active: _.includes(active_programs, label),
                 color: colors(label),
               }))}
-              onClick={id => {
+              onClick={id => {!(active_programs.length === 1 && active_programs.includes(id)) &&
                 this.setState({
                   active_programs: _.toggle_list(active_programs, id),
                 })
@@ -157,19 +166,13 @@ class PlannedProgramResources extends React.Component {
             />
           </div>
         </div>
-        <div className="fcol-md-8" style={{ width: "100%" }}>
-          <Bar
-            series={graph_data}
-            ticks={ticks}
-            stacked={true}
-            margin={{ top: 20, right: 20, left: 60, bottom: 20 }}
-            formatter={ 
-              is_fte ? 
-              formats.big_int_real_raw : 
-              formats.compact1_raw
-            }
-            y_axis={ is_fte ? text_maker("ftes") : "($)" }
-            colors={colors}
+        <div className="fcol-md-8" style={{ height: '400px'}}>
+          <NivoResponsiveBar
+            data = {data_by_year}
+            keys = {keys}
+            index_by = "year"
+            colorBy = { d => colors(d.id)}
+            is_money = {!is_fte}
           />
         </div>
       </div>

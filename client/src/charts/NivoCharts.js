@@ -78,6 +78,7 @@ export class NivoResponsiveBar extends React.Component{
       legend,
       tick_value,
       theme,
+      colorBy,
       tooltip,
       enableGridX = true,
       enableGridY = true,
@@ -112,7 +113,6 @@ export class NivoResponsiveBar extends React.Component{
           }):left_axis}
         labelTextColor="inherit:darker(1.6)"
         motionStiffness={90}
-        // tooltip={tooltip}
         tooltip = { _.isUndefined(tooltip)?(d=> <div>
           <p style={{margin: '0'}}>
             <svg style ={{backgroundColor: d.color, height: '12px', width: '12px'}}></svg>&nbsp;&nbsp;&nbsp;
@@ -123,9 +123,10 @@ export class NivoResponsiveBar extends React.Component{
         enableLabel = {enable_label}
         enableGridX = {enableGridX}
         enableGridY = {enableGridY}
-        motionDamping={50}    
+        motionDamping={30}    
         isInteractive={is_interactive}
         legends={legend}
+        colorBy={colorBy}
         theme={_.isUndefined(theme)?{
           axis: {
             ticks: {

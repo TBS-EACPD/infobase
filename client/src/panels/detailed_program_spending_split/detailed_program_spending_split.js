@@ -1,5 +1,6 @@
 import text from './detailed_program_spending_split.yaml';
 import {
+  NivoResponsiveBar,
   Subject,
   formats,
   run_template,
@@ -23,7 +24,6 @@ const {
 } = util_components
 
 const {
-  Bar,
   GraphLegend,
   StackedHbarChart,
   A11YTable,
@@ -243,6 +243,17 @@ class HistoricalProgramBars extends React.Component {
       .map( ({label, data }) => [ label, data ])
       .fromPairs()
       .value();
+
+    const keys = Object.keys(graph_data)
+    const data_by_year = ticks.map((year, year_index) =>(
+      _.fromPairs(_.map(graph_data, (data, label) =>(
+        [label,data[year_index]])
+      ))
+    ))
+    data_by_year.map((stacked_data, index) =>{
+      stacked_data["year"] = ticks[index]
+    })
+
     
     if(window.is_a11y_mode){
       return <div>
@@ -282,23 +293,20 @@ class HistoricalProgramBars extends React.Component {
                 }))
                 .value()
               }
-              onClick={id => {
+              onClick={id => {!(selected.length===1 && selected.includes(id)) &&
                 this.setState({
                   selected: _.toggle_list(selected, id),
-                });
+                })
               }}
             />
           </div>
         </div>
-        <div className="fcol-md-8" style={{ width: "100%" }}>
-          <Bar
-            series={graph_data}
-            ticks={ticks}
-            stacked={true}
-            margin={{ top: 20, right: 20, left: 60, bottom: 20 }}
-            formatter={formats.compact1_raw}
-            y_axis="($)"
-            colors={colors}
+        <div className="fcol-md-8" style={{ height: '400px' }}>
+          <NivoResponsiveBar
+            data = {data_by_year}
+            keys = {keys}
+            index_by = "year"
+            colorBy ={d => colors(d.id)}
           />
         </div>
       </div>

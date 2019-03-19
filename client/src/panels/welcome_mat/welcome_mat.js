@@ -122,7 +122,7 @@ const Chart = ({
           <div>
             {slice.data.map((e,i) => (
               <p key={i} style={{margin: '0'}}> 
-                <svg style={{backgroundColor:e.serie["color"], height: '12px', width: '12px'}}></svg>&nbsp;&nbsp;&nbsp; 
+                <svg style={{backgroundColor: e.serie["color"], height: '12px', width: '12px'}}></svg>&nbsp;&nbsp;&nbsp; 
                 {slice.id}: <strong>{format_value(e.data['y'], is_money)}</strong>
               </p>
             ))}
@@ -149,6 +149,12 @@ const Chart = ({
     enableGridY = {false}
     remove_bottom_axis={true}
     is_money ={is_money}
+    tooltip={d=> <div>
+      <p style={{margin: '0'}}>
+        <svg style ={{backgroundColor: d.color, height: '12px', width: '12px'}}></svg>&nbsp;&nbsp;&nbsp;
+        {d.indexValue}: <strong>{format_value(d.value, is_money)}</strong>
+      </p>
+    </div>}
     colors = {is_light?"#335075":"#000000"}
     tick_value = {4}
   />
