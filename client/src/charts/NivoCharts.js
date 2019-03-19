@@ -3,10 +3,9 @@ import { ResponsiveBar } from './nivo-bar.js';
 import { ResponsivePie } from '@nivo/pie'
 import { formats, dollar_formats } from "../panels/shared.js";
 
-const get_formatter = (is_money) =>(
-  graph_value =>(
-    is_money? dollar_formats.compact2_raw(graph_value)
-    : formats.big_int_real(graph_value,{raw: true}))
+const get_formatter = (value, is_money) =>(
+    is_money? dollar_formats.compact2_raw(value)
+    : formats.big_int_real(value,{raw: true})
 )
 
 export class NivoResponsivePie extends React.Component{
@@ -47,7 +46,7 @@ export class NivoResponsivePie extends React.Component{
         animate={true}
         motionStiffness={30}
         motionDamping={15}
-        tooltipFormat={_.isUndefined(tooltip_format)?get_formatter(is_money):tooltip_format}
+        tooltipFormat={_.isUndefined(tooltip_format)?(d=>get_formatter(d,is_money)):tooltip_format}
         legends={legend}
         theme= {theme}
       />
@@ -108,13 +107,19 @@ export class NivoResponsiveBar extends React.Component{
           _.isUndefined(left_axis)?({
             "tickValues": _.isUndefined(tick_value)? 6 : tick_value,
             "min": "auto",
-            "format": get_formatter(is_money),
+            "format": d=> get_formatter(d,is_money),
             "max": "auto", 
           }):left_axis}
         labelTextColor="inherit:darker(1.6)"
         motionStiffness={90}
-        tooltip = {tooltip}
-        tooltipFormat={_.isUndefined(tooltip_format)?get_formatter(is_money):tooltip_format}
+        // tooltip={tooltip}
+        tooltip = { _.isUndefined(tooltip)?(d=> <div>
+          <p style={{margin: '0'}}>
+            <svg style ={{backgroundColor: d.color, height: '12px', width: '12px'}}></svg>&nbsp;&nbsp;&nbsp;
+            {d.id} - {d.indexValue}: <strong>{get_formatter(d.value, is_money)}</strong>
+          </p>
+        </div>):tooltip}        
+        tooltipFormat={_.isUndefined(tooltip_format)?(d=>get_formatter(d,is_money)):tooltip_format}
         enableLabel = {enable_label}
         enableGridX = {enableGridX}
         enableGridY = {enableGridY}
@@ -192,7 +197,7 @@ export class NivoResponsiveLine extends React.Component {
           "tickSize": 5,
           "tickPadding": 5,
           "tickValues": _.isUndefined(tick_amount)? 6 : tick_amount,
-          "format": get_formatter(is_money),
+          "format": d=> get_formatter(d,is_money),
         }}
         dotSize={10}
         enableGridX={enableGridX}
@@ -204,7 +209,7 @@ export class NivoResponsiveLine extends React.Component {
         motionStiffness={90}
         motionDamping={15}      
         tooltip = {tooltip}   
-        tooltipFormat = {_.isUndefined(tooltip_format)? get_formatter(is_money):tooltip_format}
+        tooltipFormat={_.isUndefined(tooltip_format)?(d=>get_formatter(d,is_money)):tooltip_format}
         colors = {_.isUndefined(colors)? '#000000' : colors}
         theme={_.isUndefined(theme)?{
           axis: {

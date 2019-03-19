@@ -243,7 +243,7 @@ class HistoricalProgramBars extends React.Component {
       .map( ({label, data }) => [ label, data ])
       .fromPairs()
       .value();
-
+    
     if(window.is_a11y_mode){
       return <div>
         <A11YTable 

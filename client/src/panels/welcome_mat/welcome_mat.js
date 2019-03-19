@@ -76,6 +76,7 @@ const ticks =(has_planned, has_hist)=> _.chain(has_hist?std_years:null)
   .value();
 
 const welcome_data_line = (data, has_planned, has_hist,) =>([{
+  id: '0',
   "data": data.map((value,year_index)=>({
     x: ticks(has_planned,has_hist)[year_index],
     y: value,
@@ -120,7 +121,8 @@ const Chart = ({
         return (
           <div>
             {slice.data.map((e,i) => (
-              <p key={i} style={{margin:'0'}}> 
+              <p key={i} style={{margin: '0'}}> 
+                <svg style={{backgroundColor:e.serie["color"], height: '12px', width: '12px'}}></svg>&nbsp;&nbsp;&nbsp; 
                 {slice.id}: <strong>{format_value(e.data['y'], is_money)}</strong>
               </p>
             ))}
@@ -149,11 +151,6 @@ const Chart = ({
     is_money ={is_money}
     colors = {is_light?"#335075":"#000000"}
     tick_value = {4}
-    tooltip = { d=> <div>
-      <p style={{margin:'0'}}>
-        {d.indexValue}: <strong>{format_value(d.value, is_money)}</strong>
-      </p>
-    </div>}
   />
 </div>
 
