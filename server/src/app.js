@@ -3,12 +3,28 @@ import body_parser from 'body-parser';
 import expressGraphQL from 'express-graphql'; 
 import compression from 'compression';
 import depthLimit from 'graphql-depth-limit';
+import { decompressFromBase64 } from 'lz-string';
 
 import {
   create_models,
   create_schema,
 } from './models/index.js';
 import { connect_db } from "./db.js";
+
+
+const convert_get_with_compressed_query_to_post_request = (get_with_compressed_query) => {
+  const decoded_decompressed_query = decompressFromBase64( get_with_compressed_query.headers['encoded-compressed-query']);
+  const [query, variables] = decoded_decompressed_query.split("&variables=");
+  return {
+    ...get_with_compressed_query,
+    method: "POST",
+    body: {
+      query,
+      variables: JSON.parse(variables),
+      operationName: null,
+    },
+  };
+};
 
 const log_query = (req) => {
   const request_content = (!_.isEmpty(req.body) && req.body) || (!_.isEmpty(req.query) && req.query);
@@ -36,12 +52,12 @@ app.use( compression() );
 app.use("/", function (req, res, next) {
   res.header('cache-control', 'public, max-age=31536000');
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, url-encoded-query');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, encoded-compressed-query');
   if (req.method === 'OPTIONS') {
     res.sendStatus(200);
   } else {
-    if ( req.method === "GET" && !_.isEmpty(req.headers['url-encoded-query']) ){
-      req.url = `${req.url.split('?')[0]}?${req.headers['url-encoded-query']}`;
+    if ( req.method === "GET" && !_.isEmpty(req.headers['encoded-compressed-query']) ){
+      req = convert_get_with_compressed_query_to_post_request(req)
     }
 
     !global.IS_DEV_SERVER && log_query(req);

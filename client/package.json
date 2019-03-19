@@ -61,6 +61,7 @@
     "json-loader": "^0.5.2",
     "jsurl": "^0.1.5",
     "lodash": "^4.17.11",
+    "lz-string": "^1.4.4",
     "marked": "^0.5.2",
     "mini-css-extract-plugin": "^0.4.5",
     "node-sass": "^4.11.0",
