@@ -19,7 +19,7 @@ const query_length_tolerant_fetch = (uri, options) => {
   const url_encoded_query = uri.split("?query=")[1];
   const query_string_hash = string_hash(url_encoded_query);
 
-  const short_uri = `${api_url}?${query_string_hash}`
+  const short_uri = `${api_url}?queryHash=${query_string_hash}`
 
   const new_options = {
     ...options,

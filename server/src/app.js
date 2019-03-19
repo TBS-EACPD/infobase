@@ -12,17 +12,15 @@ import {
 import { connect_db } from "./db.js";
 
 
-const convert_get_with_compressed_query_to_post_request = (get_with_compressed_query) => {
-  const decoded_decompressed_query = decompressFromBase64( get_with_compressed_query.headers['encoded-compressed-query']);
+const convert_get_with_compressed_query_to_post_request = (req) => {
+  const decoded_decompressed_query = decompressFromBase64( req.headers['encoded-compressed-query']);
   const [query, variables] = decoded_decompressed_query.split("&variables=");
-  return {
-    ...get_with_compressed_query,
-    method: "POST",
-    body: {
-      query,
-      variables: JSON.parse(variables),
-      operationName: null,
-    },
+  
+  req.method = "POST";
+  req.body = {
+    query,
+    variables: JSON.parse(variables),
+    operationName: null,
   };
 };
 
@@ -57,7 +55,7 @@ app.use("/", function (req, res, next) {
     res.sendStatus(200);
   } else {
     if ( req.method === "GET" && !_.isEmpty(req.headers['encoded-compressed-query']) ){
-      req = convert_get_with_compressed_query_to_post_request(req)
+      convert_get_with_compressed_query_to_post_request(req);
     }
 
     !global.IS_DEV_SERVER && log_query(req);
