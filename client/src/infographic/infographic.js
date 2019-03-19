@@ -368,11 +368,13 @@ class TransitionText extends React.Component {
         transitionEnterTimeout={1500}
         transitionLeaveTimeout={1500}
       >
-        <Fragment>
+      
+        {
           <span key={this.props.text}>
             { this.props.text }
           </span>
-        </Fragment>
+        }
+
       </CSSTransitionGroup>
     )
   }
