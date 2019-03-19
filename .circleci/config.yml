@@ -10,6 +10,7 @@ deploy_filter: &deploy_filter
     branches:
       only:
         - master
+        - nivo_bar_graph
 
 
 version: 2
@@ -223,9 +224,4 @@ workflows:
           requires:
             - deploy_server
           <<: *deploy_filter
-          filters:
-            branches:
-              only:
-                - master
-                - nivo_bar_graph
-
+          
