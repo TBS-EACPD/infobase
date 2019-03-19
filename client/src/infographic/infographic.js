@@ -366,9 +366,13 @@ class TransitionText extends React.Component {
         transitionAppearTimeout={500}
         transitionName="transi-fade"
         transitionEnterTimeout={1500}
-        transitionLeaveTimeout={1500}
+        /* 
+        Functionally a disabled exit transition,
+        Dependancy of CSSTransitionGroup
+        */
+        transitionLeaveTimeout={0.0001}
       >
-      
+
         {
           <span key={this.props.text}>
             { this.props.text }

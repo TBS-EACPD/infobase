@@ -76,11 +76,14 @@ of the advanced search for mobile */
   transition: opacity 1500ms ease-in;
 }
 
+/* 
+Functionally a disabled exit transition,
+Dependancy of a React component
+*/
 .transi-fade-leave {
   opacity: 1;
 }
-
 .transi-fade-leave-active {
   opacity: 0.01;
-  transition: opacity 1500ms ease-out;
+  transition: opacity 0.0001s ease-out;
 }
