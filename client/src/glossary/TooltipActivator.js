@@ -57,13 +57,13 @@ const app = document.querySelector('#app');
 const tt_params_from_node = (node) => {
 
   const tt_obj = {
-    title: node.getAttribute('data-ibtt-glossary-key') ? get_glossary_item_tooltip_html(node.getAttribute('data-ibtt-glossary-key')) : node.getAttribute('data-ibtt-text'),
-    placement: node.getAttribute('data-ibtt-placement') ? node.getAttribute('data-ibtt-placement') : 'bottom',
-    container: node.getAttribute('data-ibtt-container') ? node.getAttribute('data-ibtt-container') : body,
-    html: node.getAttribute('data-ibtt-html') ? node.getAttribute('data-ibtt-html') : true,
-    arrowSelector: node.getAttribute('data-ibtt-arrowselector') ? node.getAttribute('data-ibtt-arrowselector') : '.tooltip-arrow, .tooltip__arrow',
-    innerSelector: node.getAttribute('data-ibtt-innerselector') ? node.getAttribute('data-ibtt-innerselector') : '.tooltip-inner, .tooltip__inner',
-    delay: node.getAttribute('data-ibtt-delay') ? node.getAttribute('data-ibtt-delay') : 0,
+    title: node.getAttribute('data-ibtt-glossary-key') || node.getAttribute('data-ibtt-text'),
+    placement: node.getAttribute('data-ibtt-placement') || 'bottom',
+    container: node.getAttribute('data-ibtt-container') || body,
+    html: node.getAttribute('data-ibtt-html') || true,
+    arrowSelector: node.getAttribute('data-ibtt-arrowselector') ? '.'+node.getAttribute('data-ibtt-arrowselector') : '.tooltip-arrow',
+    innerSelector: node.getAttribute('data-ibtt-innerselector') ? '.'+node.getAttribute('data-ibtt-innerselector') : '.tooltip-inner',
+    delay: node.getAttribute('data-ibtt-delay') || 0,
   };
 
   // if we've modified the selectors, need to change the template
@@ -71,8 +71,8 @@ const tt_params_from_node = (node) => {
   if ( node.getAttribute('data-ibtt-arrowselector') || node.getAttribute('data-ibtt-innerselector') ){
     tt_obj.template = `
     <div class="tooltip" role="tooltip">
-      <div class="tooltip-arrow tooltip__arrow ${tt_obj.arrowSelector.substr(1)}"></div>
-      <div class="tooltip-inner tooltip__inner ${tt_obj.innerSelector.substr(1)}"></div>
+      <div class="tooltip-arrow ${node.getAttribute('data-ibtt-arrowselector')}"></div>
+      <div class="tooltip-inner ${node.getAttribute('data-ibtt-innerselector')}"></div>
     </div>`
   }
 
@@ -96,7 +96,7 @@ const TooltipActivator = _.isUndefined(MutationObserver) ?
           const current_tooltip_nodes = document.querySelectorAll('[data-toggle=tooltip]') || [];
 
           const tooltip_nodes_have_changed = (
-            !(_.isEmpty(previous_tooltip_nodes) && _.isEmpty(current_tooltip_nodes)) &&
+            !( _.isEmpty(previous_tooltip_nodes) && _.isEmpty(current_tooltip_nodes) ) &&
             (
               previous_tooltip_nodes.length !== current_tooltip_nodes.length ||
               !_.chain(previous_tooltip_nodes)
@@ -156,7 +156,7 @@ const TooltipActivator = _.isUndefined(MutationObserver) ?
           }
         });
 
-        outgoing_tooltips.forEach(outgoing_instance => outgoing_instance.tooltip.dispose());
+        outgoing_tooltips.forEach( outgoing_instance => outgoing_instance.tooltip.dispose() );
 
         const incoming_tooltips = _.chain(current_tooltip_nodes)
           .without(..._.map(remaining_tooltips, tooltip => tooltip.node))
