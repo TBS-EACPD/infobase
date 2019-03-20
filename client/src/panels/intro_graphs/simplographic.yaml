@@ -5,13 +5,13 @@ simplographic_spending_title:
 simplographic_spending_text:
   transform: [handlebars,markdown]
   en: |
-    In **{{pa_last_year}}**, the government spent **<a href="{{t4_link}}">{{fmt_compact1_written gov_exp_pa_last_year}}</a>**. The three largest items in terms of spending were:
+    In **{{pa_last_year}}**, the government spent **<a href="{{org_vote_stat_pa_link}}">{{fmt_compact1_written gov_exp_pa_last_year}}</a>**. The three largest items in terms of spending were:
 
     {{#each largest_items}} 
       * {{this.desc}} - {{infograph_link this.subject}}
     {{/each}}
   fr : |
-      En **{{pa_last_year}}**, le gouvernement a dépensé **<a href="{{t4_link}}">{{fmt_compact1_written gov_exp_pa_last_year}}</a>**. Les trois items suivant représentaient la plus grande partie des dépenses :
+      En **{{pa_last_year}}**, le gouvernement a dépensé **<a href="{{org_vote_stat_pa_link}}">{{fmt_compact1_written gov_exp_pa_last_year}}</a>**. Les trois items suivant représentaient la plus grande partie des dépenses :
 
       {{#each largest_items}} 
         * {{this.desc}} - {{infograph_link this.subject}}
@@ -25,9 +25,9 @@ simplographic_people_title:
 simplographic_people_text:
   transform: [handlebars,markdown]
   en: |
-    As of **{{ppl_last_year_end_ticks}}** there were **<a href="{{t9_link}}">{{fmt_big_int_real empl_count_total}}</a>** employees in the {{gl_tt "Federal Public Service" "FPS"}}, with **<a href="{{t10_link}}">{{fmt_percentage1 empl_count_ncr_ratio}}</a>** located in the National Capital Region.
+    As of **{{ppl_last_year_end_ticks}}** there were **<a href="{{org_employee_type_link}}">{{fmt_big_int_real empl_count_total}}</a>** employees in the {{gl_tt "Federal Public Service" "FPS"}}, with **<a href="{{org_employee_region_link}}">{{fmt_percentage1 empl_count_ncr_ratio}}</a>** located in the National Capital Region.
   fr: |
-    Au **31 mars {{ppl_last_year_short_second}}**, il y avait **<a href="{{t9_link}}">{{fmt_big_int_real empl_count_total}}</a>** employés au sein de la {{gl_tt "fonction publique générale" "FPS"}}, dont **<a href="{{t10_link}}">{{fmt_percentage1 empl_count_ncr_ratio}}</a>** travaillaient dans la région de la capitale nationale.
+    Au **31 mars {{ppl_last_year_short_second}}**, il y avait **<a href="{{org_employee_type_link}}">{{fmt_big_int_real empl_count_total}}</a>** employés au sein de la {{gl_tt "fonction publique générale" "FPS"}}, dont **<a href="{{org_employee_region_link}}">{{fmt_percentage1 empl_count_ncr_ratio}}</a>** travaillaient dans la région de la capitale nationale.
 
 simplographic_struct_title:
   en: How we're structured

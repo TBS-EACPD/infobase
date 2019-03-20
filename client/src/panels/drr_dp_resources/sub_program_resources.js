@@ -349,10 +349,10 @@ new PanelGraph({
   source: false,
   calculate(subject){
     
-    const t12_q = this.tables.programFtes.q(subject);
+    const program_ftes_q = this.tables.programFtes.q(subject);
 
-    const dp_ftes = t12_q.sum("{{planning_year_1}}");
-    const drr_ftes = t12_q.sum("{{pa_last_year}}");
+    const dp_ftes = program_ftes_q.sum("{{planning_year_1}}");
+    const drr_ftes = program_ftes_q.sum("{{pa_last_year}}");
 
     const subs = SubProgramEntity.sub_programs(subject.id);
 

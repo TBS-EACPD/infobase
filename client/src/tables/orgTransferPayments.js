@@ -209,7 +209,7 @@ Statistics.create_and_register({
   compute: (subject, table_deps, info_deps, add, c) => {
     const orgTransferPayments = table_deps.orgTransferPayments;
     const gov_info = info_deps.orgTransferPayments_gov_info;
-    const t4_info = info_deps.orgVoteStatPa_dept_info;
+    const org_vote_stat_pa_info = info_deps.orgVoteStatPa_dept_info;
     const q = orgTransferPayments.q(subject);
 
     const cols = _.map(std_years, year => year+"exp");
@@ -267,7 +267,7 @@ Statistics.create_and_register({
     //});
 
     add({
-      "value": c.dept_tp_exp_pa_last_year/ t4_info.dept_exp_pa_last_year,
+      "value": c.dept_tp_exp_pa_last_year/ org_vote_stat_pa_info.dept_exp_pa_last_year,
       "key": "tp_exp_ratio_pa_last_year",
       "type": "percentage1",
     });

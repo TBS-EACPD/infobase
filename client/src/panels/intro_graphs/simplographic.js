@@ -69,12 +69,12 @@ new PanelGraph({
       }))
       .value();
 
-    const t9_link = rpb_link({ table: 'orgEmployeeType' });
-    const t10_link = rpb_link({ 
+    const org_employee_type_link = rpb_link({ table: 'orgEmployeeType' });
+    const org_employee_region_link = rpb_link({ 
       table: 'orgEmployeeRegion', 
       preferDeptBreakout: false,
     });
-    const t4_link = rpb_link({ table: 'orgVoteStatPa' });
+    const org_vote_stat_pa_link = rpb_link({ table: 'orgVoteStatPa' });
 
     const results_link = infograph_href_template(Gov, 'results');
 
@@ -100,9 +100,9 @@ new PanelGraph({
       num_met,
       pct_met,
 
-      t4_link,
-      t9_link,
-      t10_link,
+      org_vote_stat_pa_link,
+      org_employee_type_link,
+      org_employee_region_link,
       results_link,
       ...info,
     };
