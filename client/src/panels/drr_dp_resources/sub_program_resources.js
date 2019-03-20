@@ -2,7 +2,6 @@ import '../../gen_expl/explorer-styles.scss';
 import text from "./sub_program_resources.yaml";
 
 import { createSelector } from 'reselect';
-import classNames from 'classnames';
 import { combineReducers, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 
@@ -19,6 +18,7 @@ import {
   general_utils,
   Panel,
   create_text_maker_component,
+  TabbedControls,
 } from "../shared";
 
 
@@ -255,25 +255,29 @@ class SubProgramResourceTree extends React.Component {
     if(!has_dp_data || !has_drr_data){ //don't wrap the inner content in a tab layout
       return inner_content;
     } else {
-      return <div className="tabbed_content">
-        <ul className="tabbed_content_label_bar">
-          <li className={classNames("tab_label", doc==="drr17" && "active_tab")} onClick={()=> tab_on_click('drr17')}>
-            <span tabIndex={0} role="button" aria-pressed={doc === "drr17"} className="tab_label_text" onClick={()=> tab_on_click('drr17')} onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('drr17')}>
-              <TM k="sub_program_DRR_title" />
-            </span>
-          </li>
-          <li className={classNames("tab_label", doc==="dp18" && "active_tab")} onClick={()=> tab_on_click('dp18')}>
-            <span tabIndex={0} role="button" aria-pressed={doc === "dp18"} className="tab_label_text" onClick={()=> tab_on_click('dp18')} onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('dp18')}>
-              <TM k="sub_program_DP_title" />
-            </span>
-          </li>
-        </ul>
-        <div className="tabbed_content_pane">
-          {inner_content}
+      return (
+        <div className = "tabbed-content">
+          <TabbedControls
+            tab_callback = { tab_on_click }
+            tab_options = {[
+              {
+                key: "drr17", 
+                label: <TM k="sub_program_DRR_title" />,
+                is_open: doc === "drr17",
+              },
+              {
+                key: "dp18", 
+                label: <TM k="sub_program_DP_title" />,
+                is_open: doc === "dp18",
+              },
+            ]}
+          />
+          <div className = "tabbed-content__pane">
+            {inner_content}
+          </div>
         </div>
-      </div>;
+      );
     }
-
   }
 }
 

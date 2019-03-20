@@ -28,7 +28,14 @@ const {
   Line,
 } = declarative_charts;
 
-const { Format, HeightClipper, TabbedContent, TM, create_text_maker_component } = util_components;
+const {
+  Format,
+  HeightClipper,
+  TabbedControls,
+  TabbedContent,
+  TM, 
+  create_text_maker_component,
+} = util_components;
 
 export const PplSharePie = ({graph_args, label_col_header, sort_func}) => {
   sort_func = sort_func || ((a,b) => b.value-a.value);
@@ -511,7 +518,8 @@ export {
   Panel, 
   Col, 
   layout_types, 
-  TabbedContent, 
+  TabbedControls,
+  TabbedContent,
   TM,
   create_text_maker_component,
 };

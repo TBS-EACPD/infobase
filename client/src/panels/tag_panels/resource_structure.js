@@ -1,6 +1,5 @@
 import '../../gen_expl/explorer-styles.scss';
 import text from './resource_structure.yaml';
-import classNames from 'classnames';
 import { combineReducers, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import { infograph_href_template } from '../../link_utils.js';
@@ -13,6 +12,7 @@ import {
   PanelGraph,
   Panel,
   create_text_maker_component,
+  TabbedControls,
 } from "../shared";
 
 
@@ -115,32 +115,30 @@ class RootedResourceExplorer extends React.Component {
       return inner_content;
     }
  
-    const tab_on_click = (doc)=> set_doc!==doc && set_doc(doc);
+    const tab_on_click = (doc)=> set_doc !== doc && set_doc(doc);
 
-    return <div>
-      <div className="tabbed_content">
-        <ul className="tabbed_content_label_bar">
-          { has_drr_data &&
-            <li className={classNames("tab_label", doc==="drr17" && "active_tab")} onClick={()=> tab_on_click('drr17')}>
-              <span tabIndex={0} role="button" aria-pressed={doc === "drr17"} className="tab_label_text" onClick={()=> tab_on_click('drr17')} onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('drr17')}>
-                <TM k="DRR_resources" />
-              </span>
-            </li>
-          }
-          { has_dp_data &&
-            <li className={classNames("tab_label", doc==="dp18" && "active_tab")} onClick={()=> tab_on_click('dp18')}>
-              <span tabIndex={0} role="button" aria-pressed={doc === "dp18"} className="tab_label_text" onClick={()=> tab_on_click('dp18')} onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && tab_on_click('dp18')}>
-                <TM k="DP_resources" />
-              </span>
-            </li>
-          }
-        </ul>
-        <div className="tabbed_content_pane">
+    return (
+      <div className="tabbed-content">
+        <TabbedControls
+          tab_callback={ tab_on_click }
+          tab_options={ _.compact([
+            has_drr_data && {
+              label: <TM k="DRR_resources" />,
+              key: "drr17", 
+              is_open: doc === "drr17",
+            },
+            has_dp_data && {
+              key: "dp18", 
+              label: <TM k="DP_resources" />,
+              is_open: doc === "dp18",
+            },
+          ])}
+        />
+        <div className="tabbed-content__pane">
           {inner_content}
         </div>
       </div>
-    </div>;
-
+    );
   }
 }
 

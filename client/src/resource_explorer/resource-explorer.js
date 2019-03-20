@@ -5,8 +5,13 @@ import { infograph_href_template } from '../link_utils.js';
 import { StandardRouteContainer } from '../core/NavComponents';
 import { get_col_defs } from '../gen_expl/resource-explorer-common.js';
 import { Subject } from '../models/subject.js';
-import { create_text_maker_component, SpinnerWrapper, KeyConceptList } from '../util_components.js';
-import { Details } from '../components/Details.js';
+import { 
+  create_text_maker_component,
+  SpinnerWrapper,
+  KeyConceptList,
+  TabbedControls,
+  Details,
+} from '../util_components.js';
 import classNames from 'classnames';
 
 const { Tag } = Subject;
@@ -263,20 +268,34 @@ class ExplorerPage extends React.Component {
           content={<TM k="where_can_find_subs_answer" />}
         />
       </div>
-      <div className="tabbed_content">
-        <ul className="tabbed_content_label_bar">
-          <li className={classNames("tab_label", doc==="drr17" && "active_tab")} onClick={()=> this.refs.drr17_link.click()}>
-            <a href={`#resource-explorer/${_.includes(dp_only_schemes, hierarchy_scheme) ? "min" : hierarchy_scheme }/drr17`} role="button" aria-pressed={doc === "drr17"} className="tab_label_text" ref="drr17_link">
-              <TM k="DRR_resources" />
-            </a>
-          </li>
-          <li className={classNames("tab_label", doc==="dp18" && "active_tab")} aria-pressed={doc === "dp18"} onClick={()=> this.refs.dp18_link.click()}>
-            <a href={`#resource-explorer/${hierarchy_scheme}/dp18`} role="button" className="tab_label_text" ref="dp18_link">
-              <TM k="DP_resources" />
-            </a>
-          </li>
-        </ul>
-        <div className="tabbed_content_pane">
+      <div className="tabbed-content">
+        <TabbedControls
+          tab_callback = {
+            (key) => {
+              const route_base = window.location.href.split('#')[0];
+
+              const new_route = {
+                drr17: `#resource-explorer/${_.includes(dp_only_schemes, hierarchy_scheme) ? "min" : hierarchy_scheme }/drr17`,
+                dp18: `#resource-explorer/${hierarchy_scheme}/dp18`,
+              }[key];
+
+              window.location.href = `${route_base}${new_route}`;
+            }
+          }
+          tab_options = {[
+            {
+              key: "drr17", 
+              label: <TM k="DRR_resources" />,
+              is_open: doc === "drr17",
+            },
+            {
+              key: "dp18", 
+              label: <TM k="DP_resources" />,
+              is_open: doc === "dp18",
+            },
+          ]}
+        />
+        <div className="tabbed-content__pane">
           <div className="hierarchy-selection" style={{marginTop: "20px"}}>
             <header className="hierarchy-selection-header">
               <TM k="choose_explore_point" />
@@ -290,9 +309,7 @@ class ExplorerPage extends React.Component {
                 />
               )}
             </div>
-            
           </div>
-      
           { is_m2m &&
             <div className='bs-callout bs-callout-danger'>
               <KeyConceptList 
