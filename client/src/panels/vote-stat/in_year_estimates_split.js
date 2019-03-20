@@ -34,7 +34,6 @@ const estimates_split_calculate = function(subject, info,options){
     },
   };
 };
-
 //NOTE: Once supps A comes out, we'll need to switch all the est_last_year to est_in_year, here, in the titles and in the text.
 
 const estimates_split_render_w_text_key = text_key => ({calculations, footnotes, sources}) => {
@@ -67,14 +66,11 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
     );
   
   } else {    
-    const keys = [];
-    const estimate_data = calculations.info.gov_in_year_estimates_split.map(estimate_data_label =>{
-      keys.push(estimate_data_label[0])
-      return {
-        title: estimate_data_label[0],
-        [estimate_data_label[0]]: estimate_data_label[1],
-      }
-    });
+    const keys = in_year_bar_args.ticks
+    const estimate_data = in_year_bar_args.series[""].map((data, index) => ({
+      "label": keys[index],
+      [keys[index]]: data,
+    }))
 
     content = (
       <div style={{ height: "450px" }} >
@@ -84,7 +80,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
           label_format = { d=><tspan y={ -4 }> {dollar_formats.compact2_raw(d)} </tspan>}
           is_interactive = {false}
           enable_label = {true}
-          index_by = "title"
+          index_by = "label"
           colors = "paired"
           margin = {{            
             "top": 50,
@@ -143,4 +139,3 @@ new PanelGraph({
   calculate: estimates_split_calculate,
   render: estimates_split_render_w_text_key("gov_in_year_estimates_split_text"),
 });
-

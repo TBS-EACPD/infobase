@@ -10,7 +10,6 @@ deploy_filter: &deploy_filter
     branches:
       only:
         - master
-        - nivo_bar_graph
 
 
 version: 2

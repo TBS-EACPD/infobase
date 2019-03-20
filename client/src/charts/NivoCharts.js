@@ -21,6 +21,7 @@ export class NivoResponsivePie extends React.Component{
       enable_radial_labels = false,
       enable_slice_labels = false,
       tooltip_format,
+      tooltip,
       margin,
       legend,
       start_angle = -120,
@@ -46,6 +47,12 @@ export class NivoResponsivePie extends React.Component{
         animate={true}
         motionStiffness={30}
         motionDamping={15}
+        tooltip = { _.isUndefined(tooltip)?(d=> <div>
+          <p style={{margin: '0'}}>
+            <svg style ={{backgroundColor: d.color, height: '12px', width: '12px'}}></svg>&nbsp;&nbsp;&nbsp;
+            {d.id}: <strong>{get_formatter(d.value, is_money)}</strong>
+          </p>
+        </div>):tooltip}  
         tooltipFormat={_.isUndefined(tooltip_format)?(d=>get_formatter(d,is_money)):tooltip_format}
         legends={legend}
         theme= {theme}

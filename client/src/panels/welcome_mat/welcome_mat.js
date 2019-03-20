@@ -257,9 +257,6 @@ const WelcomeMat = (props) => {
   const no_hist_spending = <TM k="no_historical_spending__new" />;
   // const no_hist_ftes = <TM k="no_historical_fte__new" />;
   const spending_auths_are = <TM k="spending_authorities_are" />
-  
-
-
 
   if(type==="hist"){
     //hist-only, old program or org
@@ -279,11 +276,7 @@ const WelcomeMat = (props) => {
       fte_last_year,
       fte_data,
       hist_fte_diff,
-
-      has_hist,
-      has_planned,
     } = calcs;
-
 
     //note that it may or may not have FTEs...
     

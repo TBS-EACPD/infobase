@@ -13,14 +13,9 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
     info,
   } = calculations;
 
-  const keys = [];
-  graph_args.map( d => {keys.push(d.label)})
-  const vote_stat_data = keys.map(
-    (vote_stat_label, value_index) =>({
-      id: vote_stat_label,
-      label: vote_stat_label,
-      value: value_index? calculations.info.gov_voted_est_in_year:calculations.info.gov_stat_est_in_year,
-    }))
+  calculations.graph_args.map((data_set, index) =>{
+    data_set["id"] = data_set["label"]
+  })
 
   return (
     <StdPanel 
@@ -34,7 +29,7 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
         <Col isGraph size={graph_col}>
           <div style={{height: "400px"}}>
             <NivoResponsivePie
-              data = {vote_stat_data}
+              data = {graph_args}
               colors = "paired"
               legend = {[
                 {
