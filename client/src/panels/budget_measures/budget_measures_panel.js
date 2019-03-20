@@ -183,7 +183,7 @@ const budget_measure_render = function({calculations, footnotes, sources}){
     footnotes: false,
     source: (subject) => [{
       html: text_maker("budget_route_title"),
-      href: "#budget-measures/budget-measure/overview",
+      href: "#budget-tracker/budget-measure/overview",
     }],
     calculate: calculate_functions[level_name],
     render: budget_measure_render,

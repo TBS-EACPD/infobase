@@ -27,6 +27,8 @@ const { BudgetMeasure } = Subject;
 
 const { budget_values } = businessConstants;
 
+const selected_value_options = [..._.keys(budget_values), "overview"];
+
 const first_column_options = [
   {
     id: "budget-measure",
@@ -37,24 +39,40 @@ const first_column_options = [
     display: text_maker("org"),
   },
 ];
-
 const first_column_ids = _.map(first_column_options, option => option.id );
 
-const validate_route = (first_column, selected_value, history) => {
-  const first_column_is_valid = _.indexOf(first_column_ids, first_column) !== -1;
-  const selected_value_is_valid = _.indexOf([..._.keys(budget_values), "overview"], selected_value) !== -1;
+const budget_year_options = ["budget-2018", "budget-2019"];
+
+
+const validate_route = (props) => {
+  const {
+    history,
+    match: {
+      params: {
+        first_column,
+        selected_value,
+        budget_year,
+      },
+    },
+  } = props;
+
+  const first_column_is_valid = _.includes(first_column_ids, first_column);
+  const selected_value_is_valid = _.includes(selected_value_options, selected_value);
+  const budget_year_is_valid = _.includes(budget_year_options, selected_value);
 
   if (first_column_is_valid && selected_value_is_valid){
     return true;
   } else {
     const valid_first_column = first_column_is_valid ? first_column : first_column_options[0].id;
     const valid_value = selected_value_is_valid ? selected_value : "overview";
-    const corrected_route = `/budget-measures/${valid_first_column}/${valid_value}`;
+    const valid_year = budget_year_is_valid ? budget_year : _.last(budget_year_options);
+
+    const corrected_route = `/budget-tracker/${valid_first_column}/${valid_value}/${valid_year}`;
     history.push(corrected_route);
 
     return false;
   }
-}
+};
 
 export default class BudgetMeasuresRoute extends React.Component {
   constructor(props){
@@ -65,10 +83,10 @@ export default class BudgetMeasuresRoute extends React.Component {
       filter_string: false,
     };
 
-    validate_route(props.match.params.first_column, props.match.params.selected_value, props.history);
+    validate_route(props);
   }
   shouldComponentUpdate(nextProps){
-    return validate_route(nextProps.match.params.first_column, nextProps.match.params.selected_value, this.props.history);
+    return validate_route(nextProps);
   }
   componentDidMount(){
     ensure_loaded({
@@ -96,6 +114,7 @@ export default class BudgetMeasuresRoute extends React.Component {
         params: {
           first_column,
           selected_value,
+          budget_year,
         },
       },
     } = this.props;

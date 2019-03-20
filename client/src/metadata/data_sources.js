@@ -199,12 +199,12 @@ const sources = _.mapValues({
         {
           id: 'budget_dept',
           text: tm("budget_dept_item_name"),
-          inline_link: "#budget-measures/budget-measure/overview",
+          inline_link: "#budget-tracker/budget-measure/overview",
         },
         {
           id: 'budget_program',
           text: tm("budget_program_item_name"),
-          inline_link: "#budget-measures/budget-measure/overview",
+          inline_link: "#budget-tracker/budget-measure/overview",
         },
       ];
     },

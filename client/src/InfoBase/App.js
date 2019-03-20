@@ -59,7 +59,8 @@ export class App extends React.Component {
               <Route path="/orgs/:level/:subject_id/infograph/:bubble?/" component={InfoGraph} />
               <Route path="/glossary/:active_key?" component={Glossary} />
               <Route path="/partition/:perspective?/:data_type?" component={PartitionRoute} />
-              <Route path="/budget-measures/:first_column?/:selected_value?" component={BudgetMeasuresRoute} />
+              <Route path="/budget-measures/:first_column?/:selected_value?/:budget_year?" component={BudgetMeasuresRoute} />
+              <Route path="/budget-tracker/:first_column?/:selected_value?/:budget_year?" component={BudgetMeasuresRoute} />
               <Route path="/rpb/:config?" component={ReportBuilder} />
               <Route path="/about" component={About} />
               <Route path="/graph/:level?/:graph?/:id?" component={GraphInventory} />

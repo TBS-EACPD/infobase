@@ -110,7 +110,7 @@ const HomeLayout = props => (
                 title_key="budget_home_title"
                 text_key="budget_home_text"
                 link_key="check_home_link"
-                link_href="#budget-measures/budget-measure/overview"
+                link_href="#budget-tracker/budget-measure/overview"
               />
             </div>     
           </div>
