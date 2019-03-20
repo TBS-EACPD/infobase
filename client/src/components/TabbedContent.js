@@ -1,60 +1,46 @@
 import './TabbedContent.scss';
+import { TabbedControls } from './TabbedControls.js';
 
 /*props: 
-  tabKeys: array of keys associated with tabs,
-  tabLabels: object, tab label strings stored by tab key (corresponding to each of tabKeys),
-  tabPaneContents: object, tab pane contents as JSX stored by tab key (corresponding to each of tabKeys),
+  tab_keys: array of keys associated with tabs,
+  tab_labels: object, tab label strings stored by tab key (corresponding to each of tabKeys),
+  tab_pane_contents: object, tab pane contents as JSX stored by tab key (corresponding to each of tabKeys),
 */
 export class TabbedContent extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      openTabKey: props.tabKeys[0],
+      open_tab_key: props.tab_keys[0], // Starts with first tab open
     };
   }
   render(){
     const {
-      tabKeys,
-      tabLabels,
-      tabPaneContents,
+      tab_keys,
+      tab_labels,
+      tab_pane_contents,
     } = this.props;
     
-    const openTabKey = this.state.openTabKey; // Open to first tab by default
-    const tabPaneContent = tabPaneContents[openTabKey];
+    const open_tab_key = this.state.open_tab_key;
+    const tabPaneContent = tab_pane_contents[open_tab_key];
     
-    // Horizontal bar of tab labels (ul and li's) above a tab content pane (div). 
-    // Clicking on a tab label "opens" that tab pane (renders it's contents in the content pane)
+    const tab_options = _.map(
+      tab_keys,
+      (key) => ({
+        key,
+        label: tab_labels[key],
+        is_open: open_tab_key === key,
+      })
+    );
+
+    const tab_callback = (key) => this.setState({open_tab_key: key});
+
     return (
-      <div className={"tabbed_content"} aria-hidden={"true"}>
-        <ul className={"tabbed_content_label_bar"}>
-          {_.map(tabKeys, key => 
-            (<li 
-              className={key === openTabKey ? "tab_label active_tab" : "tab_label"}
-              id={key + "_tab"}
-              key={key + "_tab"}
-              onClick={()=>{
-                this.setState({openTabKey: key});
-              }}
-            > 
-              <p 
-                tabIndex={0} 
-                className={"tab_label_text"}
-                role="button"
-                aria-pressed={key === openTabKey}
-                onClick={()=>{
-                  this.setState({openTabKey: key});
-                }}
-                onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && this.setState({openTabKey: key})}
-              >
-                {tabLabels[key]}
-              </p>
-            </li>)
-          )}
-        </ul>
+      <div className={"tabbed-content"} aria-hidden={"true"}>
+        <TabbedControls { ...{tab_options, tab_callback} } />
         <div 
-          className={"tabbed_content_pane"}
-          ref={openTabKey+"_tabbed_content_pane"}
-          key={_.uniqueId()} // React, trying to be smart, sees this as not needing to be re-rendered (causing tabPaneContent to not update). Setting a new key each time forces the re-render
+          className={"tabbed-content__pane"}
+          ref={open_tab_key+"_tabbed_content_pane"}
+          key={open_tab_key+"_tabbed_content_pane"}
         > 
           {tabPaneContent}
         </div>

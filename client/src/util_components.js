@@ -8,6 +8,7 @@ import { HeightClipper } from './components/HeightClipper.js';
 import { RadioButtons } from './components/RadioButtons.js';
 import { Select } from './components/Select.js';
 import { SortIndicators } from './components/SortIndicators.js';
+import { TabbedControls } from './components/TabbedControls.js';
 import { TabbedContent } from './components/TabbedContent.js';
 import { LabeledBox } from './components/LabeledBox.js';
 import { TextMaker, TM } from './components/TextMaker.js';
@@ -94,6 +95,7 @@ export {
   StatelessPullDownAccordion,
   AutoAccordion,
   HeightClipper,
+  TabbedControls,
   TabbedContent,
   LabeledBox,
   Format,

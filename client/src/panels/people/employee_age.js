@@ -164,12 +164,12 @@ const calculate_funcs_by_level = {
           { !window.is_a11y_mode &&
             <Col size={12} isGraph extraClasses="zero-padding"> 
               <TabbedContent
-                tabKeys={["age_group", "avgage"]}
-                tabLabels={{
+                tab_keys={["age_group", "avgage"]}
+                tab_labels={{
                   age_group: text_maker("age_group"),
                   avgage: text_maker("avgage"),
                 }}
-                tabPaneContents={{
+                tab_pane_contents={{
                   age_group: (
                     <div id={"emp_age_tab_pane"}>
                       <LineBarToggleGraph {...age_group_options} />

@@ -9,6 +9,7 @@ import {
   SpinnerWrapper,
   Details,
   EmbeddedVideo,
+  TabbedContent,
 } from '../../util_components';
 
 import {
@@ -39,7 +40,7 @@ const first_column_options = [
     display: text_maker("org"),
   },
 ];
-const first_column_ids = _.map(first_column_options, option => option.id );
+const first_column_ids = _.map( first_column_options, option => option.id );
 
 const budget_year_options = ["budget-2018", "budget-2019"];
 
@@ -63,7 +64,7 @@ const validate_route = (props) => {
   if (first_column_is_valid && selected_value_is_valid){
     return true;
   } else {
-    const valid_first_column = first_column_is_valid ? first_column : first_column_options[0].id;
+    const valid_first_column = first_column_is_valid ? first_column : _.first(first_column_options).id;
     const valid_value = selected_value_is_valid ? selected_value : "overview";
     const valid_year = budget_year_is_valid ? budget_year : _.last(budget_year_options);
 
@@ -137,6 +138,9 @@ export default class BudgetMeasuresRoute extends React.Component {
         { loading && <SpinnerWrapper ref="spinner" config_name={"route"} /> }
         { !loading &&
           <div className="budget-measures">
+            { budget_year_options.length > 1 &&
+              <div >
+            }
             <div className="budget-measures-top-text">
               <EmbeddedVideo
                 title={ text_maker("budget_alignment_video_title") }
