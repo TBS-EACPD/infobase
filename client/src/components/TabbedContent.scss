@@ -1,5 +1,62 @@
 @import "../common_css/common-variables";
 
+@mixin active-tab-mixin {
+  border: 1px solid $primaryColor;
+  background-color: $backgroundColor;
+  transition: background-color 200ms ease, border-radius 400ms ease;
+  color: #333;
+}
+
+ul.tabbed-controls {
+  position: relative;
+  left: -38px;
+  z-index: 1;
+  margin-left: 15px;
+  overflow: hidden;
+}
+
+li.tabbed-controls__label {
+  display: inline-block;
+  padding: 5px 20px 3px 20px;
+  margin-left: -2px;
+  margin-right: 1px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border: 1px solid change-color($color: $backgroundColor, $alpha: 0.5);
+  background-color: $primaryColor;
+  transition: background-color 125ms ease, border-radius 250ms ease;
+  color: $backgroundColor;
+  height: 28px;
+  padding-bottom: 200%;
+  margin-bottom: -200%;
+  cursor: pointer;
+
+  & > .tabbed-controls__label-text {
+    text-decoration: none !important;
+    color: inherit !important;
+    cursor: pointer;
+    font-size: 15.6px;
+    font-weight: $mediumFontWeight;
+  }
+
+  &:hover, &:focus {
+    @include active-tab-mixin;
+  }
+}
+
+li.tabbed-controls__label--active {
+  @include active-tab-mixin;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  cursor: default;
+
+  & > .tabbed-controls__label-text {
+    cursor: default;
+    font-weight: $heavyFontWeight;
+  }
+}
+
+
 .tabbed-content {
   margin: 0px -15px;
 }
