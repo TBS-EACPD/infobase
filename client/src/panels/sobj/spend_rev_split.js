@@ -9,6 +9,7 @@ import {
   NivoResponsiveBar,
 } from "../shared";
 
+
 const { text_maker, TM } = create_text_maker_component(text);
 
 const is_revenue = so_num => +so_num > 19;
@@ -77,7 +78,7 @@ function render({calculations, footnotes, sources}) {
           enable_label = {true}
           is_interactive = {false}
           label_format = { d=><tspan y={-4}> {formats.compact1(d, {raw: true})} </tspan>}
-          colors = "paired"
+          colors = "#335075"
           enableGridX={false}
         />
       </div>

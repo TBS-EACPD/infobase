@@ -10,6 +10,8 @@ import {
   create_text_maker_component,
   NivoResponsiveBar,
 } from "../shared";
+import { infobaseCategory10Colors } from '../../core/color_schemes.js';
+
 
 const { 
   A11YTable,
@@ -104,7 +106,7 @@ const render = function({calculations, footnotes, sources}) {
             data = {data_exp}
             keys={series_labels}
             index_by = "years"
-            colors = "paired"
+            colors = {infobaseCategory10Colors}
             enableGridX = {false}
             legend = {[
               {
@@ -124,7 +126,7 @@ const render = function({calculations, footnotes, sources}) {
               axis: {
                 ticks: {
                   text: { 
-                    fontSize: 12.5,
+                    fontSize: 12,
                     fill: '#000',
                   },
                 },

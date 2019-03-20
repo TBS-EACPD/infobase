@@ -6,6 +6,8 @@ import {
   Col,
   NivoResponsivePie,
 } from "../shared";
+import { infobaseCategory10Colors } from '../../core/color_schemes.js';
+
 
 const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,footnotes,sources}) => {
   const { 
@@ -30,7 +32,7 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
           <div style={{height: "400px"}}>
             <NivoResponsivePie
               data = {graph_args}
-              colors = "paired"
+              colors = {infobaseCategory10Colors}
               legend = {[
                 {
                   "anchor": "bottom",

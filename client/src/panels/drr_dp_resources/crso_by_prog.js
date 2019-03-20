@@ -131,7 +131,8 @@ class PlannedProgramResources extends React.Component {
       .fromPairs()
       .value();
     
-    const keys = Object.keys(graph_data)
+    let keys = ['']
+    keys = _.union(Object.keys(graph_data))
     const data_by_year = ticks.map((year, year_index) =>(
       _.fromPairs(_.map(graph_data, (data, label) =>(
         [label,data[year_index]])

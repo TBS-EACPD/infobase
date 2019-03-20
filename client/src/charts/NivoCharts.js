@@ -48,10 +48,10 @@ export class NivoResponsivePie extends React.Component{
         motionStiffness={30}
         motionDamping={15}
         tooltip = { _.isUndefined(tooltip)?(d=> <div>
-          <p style={{margin: '0'}}>
-            <svg style ={{backgroundColor: d.color, height: '12px', width: '12px'}}></svg>&nbsp;&nbsp;&nbsp;
+          <div style={{margin: '0'}}>
+            <div style ={{backgroundColor: d.color, height: '12px', width: '12px', display: 'inline-block'}}></div>&nbsp;&nbsp;&nbsp;
             {d.id}: <strong>{get_formatter(d.value, is_money)}</strong>
-          </p>
+          </div>
         </div>):tooltip}  
         tooltipFormat={_.isUndefined(tooltip_format)?(d=>get_formatter(d,is_money)):tooltip_format}
         legends={legend}
@@ -121,10 +121,10 @@ export class NivoResponsiveBar extends React.Component{
         labelTextColor="inherit:darker(1.6)"
         motionStiffness={90}
         tooltip = { _.isUndefined(tooltip)?(d=> <div>
-          <p style={{margin: '0'}}>
-            <svg style ={{backgroundColor: d.color, height: '12px', width: '12px'}}></svg>&nbsp;&nbsp;&nbsp;
+          <div style={{margin: '0'}}>
+            <div style ={{backgroundColor: d.color, height: '12px', width: '12px', display: 'inline-block'}}></div>&nbsp;&nbsp;&nbsp;
             {d.id} - {d.indexValue}: <strong>{get_formatter(d.value, is_money)}</strong>
-          </p>
+          </div>
         </div>):tooltip}        
         tooltipFormat={_.isUndefined(tooltip_format)?(d=>get_formatter(d,is_money)):tooltip_format}
         enableLabel = {enable_label}

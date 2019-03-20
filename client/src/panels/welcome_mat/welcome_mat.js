@@ -101,7 +101,6 @@ const Chart = ({
   has_planned,
 }) => use_line?<div style ={{height: '230px'}}>
   <NivoResponsiveLine
-    id = {false}
     data = {welcome_data_line(data, has_planned, has_hist)}
     max = {_.max(data)*1.05}
     enableGridX = {false}
@@ -121,10 +120,10 @@ const Chart = ({
         return (
           <div>
             {slice.data.map((e,i) => (
-              <p key={i} style={{margin: '0'}}> 
-                <svg style={{backgroundColor: e.serie["color"], height: '12px', width: '12px'}}></svg>&nbsp;&nbsp;&nbsp; 
+              <div key={i} style={{margin: '0'}}> 
+                <div style={{backgroundColor: e.serie["color"], height: '12px', width: '12px', display: 'inline-block'}}></div>&nbsp;&nbsp;&nbsp; 
                 {slice.id}: <strong>{format_value(e.data['y'], is_money)}</strong>
-              </p>
+              </div>
             ))}
           </div>
         )
@@ -150,10 +149,10 @@ const Chart = ({
     remove_bottom_axis={true}
     is_money ={is_money}
     tooltip={d=> <div>
-      <p style={{margin: '0'}}>
-        <svg style ={{backgroundColor: d.color, height: '12px', width: '12px'}}></svg>&nbsp;&nbsp;&nbsp;
+      <div style={{margin: '0'}}>
+        <div style ={{backgroundColor: d.color, height: '12px', width: '12px', display: 'inline-block'}}></div>&nbsp;&nbsp;&nbsp;
         {d.indexValue}: <strong>{format_value(d.value, is_money)}</strong>
-      </p>
+      </div>
     </div>}
     colors = {is_light?"#335075":"#000000"}
     tick_value = {4}

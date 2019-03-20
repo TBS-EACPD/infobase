@@ -1,6 +1,5 @@
 import { text_maker, TM } from './vote-stat-text-prodiver.js';
 import {
-  formats,
   PanelGraph,
   util_components,
   run_template,
@@ -10,6 +9,7 @@ import {
   NivoResponsiveBar,
 } from "../shared";
 import { dollar_formats } from '../../core/format.js';
+
 
 const { Format } = util_components;
 
@@ -81,7 +81,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
           is_interactive = {false}
           enable_label = {true}
           index_by = "label"
-          colors = "paired"
+          colors = "#335075"
           margin = {{            
             "top": 50,
             "right": 40,

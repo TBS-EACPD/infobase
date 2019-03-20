@@ -76,7 +76,7 @@ new PanelGraph({
             "left": 65,
           }}
           is_money = {true}
-          colors={d3.schemeCategory10}
+          colors = "#335075"
           bttm_axis ={{ "tickPadding": 10}}
         />
       </div>;
