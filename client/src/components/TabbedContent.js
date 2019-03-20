@@ -8,30 +8,36 @@ export class TabbedControls extends React.Component {
     } = this.props;
     
     return (
-      <ul className={"tabbed-controls"}>
-        {_.map(tab_options, ({key, label, is_open}) => 
-          (<li
-            className={is_open ? "tabbed-controls__label tabbed-controls__label--active" : "tabbed-controls__label"}
-            id={key + "_tab"}
-            key={key + "_tab"}
-            onClick={ () => tab_callback(key) }
-          > 
-            <span
-              tabIndex={0} 
-              className={"tabbed-controls__label-text"}
-              role="button"
-              aria-pressed={is_open}
-              onClick={ () => tab_callback(key) }
-              onKeyDown={ (e) => (e.keyCode===13 || e.keyCode===32) && tab_callback(key) }
-            >
-              {label}
-            </span>
-          </li>)
-        )}
-      </ul>
+      <div className = "tabbed-controls">
+        <ul>
+          {_.map(tab_options, 
+            ({key, label, is_open}) => (
+              <li
+                className = { `tabbed-controls__label${ is_open && " tabbed-controls__label--active" || ""}` }
+                id = {key + "_tab"}
+                key = {key + "_tab"}
+                onClick = { () => tab_callback(key) }
+              > 
+                <span
+                  tabIndex = {0} 
+                  className = "tabbed-controls__label-text"
+                  role = "button"
+                  aria-pressed = { is_open }
+                  onClick = { () => tab_callback(key) }
+                  onKeyDown = { (e) => (e.keyCode===13 || e.keyCode===32) && tab_callback(key) }
+                >
+                  {label}
+                </span>
+              </li>
+            )
+          )}
+        </ul>
+        <div className = "tabbed-controls__bottom-border"/>
+      </div>
     );
   }
 }
+
 
 /*props: 
   tab_keys: array of keys associated with tabs,
@@ -67,12 +73,12 @@ export class TabbedContent extends React.Component {
     const tab_callback = (key) => this.setState({open_tab_key: key});
 
     return (
-      <div className={"tabbed-content"} aria-hidden={"true"}>
+      <div className="tabbed-content" aria-hidden="true">
         <TabbedControls { ...{tab_options, tab_callback} } />
         <div 
-          className={"tabbed-content__pane"}
-          ref={open_tab_key+"_tabbed_content_pane"}
-          key={open_tab_key+"_tabbed_content_pane"}
+          className="tabbed-content__pane"
+          ref = { open_tab_key+"_tabbed_content_pane" }
+          key = { open_tab_key+"_tabbed_content_pane" }
         > 
           {tabPaneContent}
         </div>

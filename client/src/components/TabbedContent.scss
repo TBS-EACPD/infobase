@@ -7,11 +7,9 @@
   color: #333;
 }
 
-ul.tabbed-controls {
+.tabbed-controls > ul {
   position: relative;
-  left: -38px;
   z-index: 1;
-  margin-left: 15px;
   overflow: hidden;
 }
 
@@ -56,6 +54,13 @@ li.tabbed-controls__label--active {
   }
 }
 
+.tabbed-controls__bottom-border {
+  position: relative;
+  top: -13px;
+  border-top: 1px solid $primaryColor;
+  border-radius: 0px 0px 5px 5px;
+}
+
 
 .tabbed-content {
   margin: 0px -15px;
@@ -63,9 +68,8 @@ li.tabbed-controls__label--active {
 
 .tabbed-content__pane {
   position: relative;
+  margin: 0px 15px;
   top: -13px;
-  border-top: 1px solid $primaryColor;
-  border-radius: 0px 0px 5px 5px;
   padding: 15px 35px 0px 35px;
   background-color: $backgroundColor;
 
