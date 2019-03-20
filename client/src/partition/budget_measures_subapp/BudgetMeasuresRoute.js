@@ -9,7 +9,7 @@ import {
   SpinnerWrapper,
   Details,
   EmbeddedVideo,
-  TabbedContent,
+  TabbedControls,
 } from '../../util_components';
 
 import {
@@ -59,9 +59,9 @@ const validate_route = (props) => {
 
   const first_column_is_valid = _.includes(first_column_ids, first_column);
   const selected_value_is_valid = _.includes(selected_value_options, selected_value);
-  const budget_year_is_valid = _.includes(budget_year_options, selected_value);
+  const budget_year_is_valid = _.includes(budget_year_options, budget_year);
 
-  if (first_column_is_valid && selected_value_is_valid){
+  if (first_column_is_valid && selected_value_is_valid && budget_year_is_valid){
     return true;
   } else {
     const valid_first_column = first_column_is_valid ? first_column : _.first(first_column_options).id;
@@ -139,18 +139,37 @@ export default class BudgetMeasuresRoute extends React.Component {
         { !loading &&
           <div className="budget-measures">
             { budget_year_options.length > 1 &&
-              <div >
+              <TabbedControls 
+                tab_callback = {
+                  (key) => {
+                    const new_path = `/budget-tracker/${first_column}/${selected_value}/${key}`;
+                    if ( history.location.pathname !== new_path ){
+                      history.push(new_path);
+                    }
+                  } 
+                }
+                tab_options = { 
+                  _.map(
+                    budget_year_options, 
+                    (budget_year_option) => ({
+                      key: budget_year_option,
+                      label: budget_year_option,
+                      is_open: budget_year_option === budget_year,
+                    })
+                  )
+                }
+              />
             }
             <div className="budget-measures-top-text">
               <EmbeddedVideo
-                title={ text_maker("budget_alignment_video_title") }
-                video_source={ text_maker("budget_alignment_video_src") }
-                transcript={ text_maker("budget_alignment_video_transcript") }
+                title = { text_maker("budget_alignment_video_title") }
+                video_source = { text_maker("budget_alignment_video_src") }
+                transcript = { text_maker("budget_alignment_video_transcript") }
               />
               <TextMaker text_key="budget_route_top_text" />
               <Details
-                summary_content={ <TextMaker text_key="budget_stats_title" /> }
-                content={ <TextMaker text_key="budget_summary_stats" args={this.summary_stats} /> }
+                summary_content = { <TextMaker text_key="budget_stats_title" /> }
+                content = { <TextMaker text_key="budget_summary_stats" args={this.summary_stats} /> }
               />
             </div>
             { !window.is_a11y_mode &&
@@ -159,6 +178,7 @@ export default class BudgetMeasuresRoute extends React.Component {
                   selected_value = { selected_value }
                   first_column = { first_column }
                   history = { history }
+                  budget_year = { budget_year }
                   group_by_items = { first_column_options }
                   filtered_chapter_keys = { filtered_chapter_keys }
                   setFilteredChapterKeysCallback = { this.setFilteredChapterKeys.bind(this) }
@@ -168,6 +188,7 @@ export default class BudgetMeasuresRoute extends React.Component {
                 <BudgetMeasuresPartition
                   selected_value = { selected_value }
                   first_column = { first_column }
+                  budget_year = { budget_year }
                   filtered_chapter_keys = { filtered_chapter_keys }
                   filter_string = { filter_string }
                 />

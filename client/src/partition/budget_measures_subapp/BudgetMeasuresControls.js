@@ -40,6 +40,7 @@ export class BudgetMeasuresControls extends React.Component {
     const {
       selected_value,
       first_column,
+      budget_year,
       history,
       group_by_items,
       filtered_chapter_keys,
@@ -89,9 +90,9 @@ export class BudgetMeasuresControls extends React.Component {
           content = {
             <div className="centerer">
               <RadioButtons
-                options = { _.map( budget_value_options, ({id, display }) => ({ id, display, active: id === selected_value }) ) }
+                options = { _.map( budget_value_options, ({id, display}) => ({ id, display, active: id === selected_value }) ) }
                 onChange = { id => {
-                  const new_path = `/budget-tracker/${first_column}/${id}`;
+                  const new_path = `/budget-tracker/${first_column}/${id}/${budget_year}`;
                   if ( history.location.pathname !== new_path ){
                     // the first_column prop, and thus this button's active id, is updated through this route push
                     history.push(new_path);
@@ -109,7 +110,7 @@ export class BudgetMeasuresControls extends React.Component {
                 <RadioButtons
                   options = { _.map( group_by_items, ({id, display }) => ({ id, display, active: id === first_column }) ) }
                   onChange = { id => {
-                    const new_path = `/budget-tracker/${id}/${selected_value}`;
+                    const new_path = `/budget-tracker/${id}/${selected_value}/${budget_year}`;
                     if ( history.location.pathname !== new_path ){
                       // the first_column prop, and thus this button's active id, is updated through this route push
                       history.push(new_path);
