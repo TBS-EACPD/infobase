@@ -71,8 +71,8 @@ const tt_params_from_node = (node) => {
   if ( node.getAttribute('data-ibtt-arrowselector') || node.getAttribute('data-ibtt-innerselector') ){
     tt_obj.template = `
     <div class="tooltip" role="tooltip">
-      <div class="tooltip-arrow ${node.getAttribute('data-ibtt-arrowselector')}"></div>
-      <div class="tooltip-inner ${node.getAttribute('data-ibtt-innerselector')}"></div>
+      <div class="tooltip-arrow ${node.getAttribute('data-ibtt-arrowselector') || ''}"></div>
+      <div class="tooltip-inner ${node.getAttribute('data-ibtt-innerselector') || ''}"></div>
     </div>`
   }
 
