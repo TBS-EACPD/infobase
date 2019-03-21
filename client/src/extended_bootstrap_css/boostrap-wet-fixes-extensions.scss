@@ -74,8 +74,8 @@ hr {
 .glossary-tooltip-link:visited {
   text-decoration: none !important;
   border-bottom: 1px dotted #135bbb !important;
-  color: #135bbb !important;
   transition: width 2s;
+  opacity: 0.8;
 }
 
 /* reseting WET styles*/
