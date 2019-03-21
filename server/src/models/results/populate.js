@@ -50,8 +50,6 @@ export default async function({models}){
     if(!obj.status_key){
       obj.status_key = "dp";
     }
-
-    obj = _.omit(["status_color","status_period"]);
   });
 
   const result_count_records = get_result_count_records(sub_program_records, result_records, indicator_records);

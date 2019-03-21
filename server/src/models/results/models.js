@@ -9,10 +9,7 @@ import {
   bilingual_str,
 } from '../model_utils.js';
 
-import {
-  create_resource_by_foreignkey_attr_dataloader,
-  create_resource_by_id_attr_dataloader,
-} from '../loader_utils.js';
+import { create_resource_by_foreignkey_attr_dataloader } from '../loader_utils.js';
 
 
 export default function(model_singleton){
@@ -21,8 +18,8 @@ export default function(model_singleton){
   const ResultSchema = mongoose.Schema({
     result_id: pkey_type(),
     subject_id: parent_fkey_type(),
-    doc: str_type,
     ...bilingual('name', str_type),
+    doc: str_type,
   });
 
   const ResultCountSchema = mongoose.Schema({
@@ -33,8 +30,12 @@ export default function(model_singleton){
     drr17_indicators_not_met: {type: Number},
     drr17_indicators_not_available: {type: Number},
     drr17_indicators_future: {type: Number},
+
     dp18_results: {type: Number},
     dp18_indicators: {type: Number},
+
+    dp19_results: {type: Number},
+    dp19_indicators: {type: Number},
   });
 
   // "id","result_id","name_en","name_fr","target_year","target_month","explanation_en","explanation_fr","target_type","target_min","target_max","target_narrative_en","target_narrative_fr","doc","actual_datatype","actual_result_en","actual_result_fr","status_key","status_period","methodology_en","methodology_fr","measure_en","measure_fr"
