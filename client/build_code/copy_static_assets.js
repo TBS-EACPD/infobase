@@ -104,9 +104,9 @@ const table_csvs = _.map(
 
 const other_csvs = _.map(
   [
-    'budget_measure_data.csv',
-    'budget_measure_lookups_en.csv',
-    'budget_measure_lookups_fr.csv',
+    'budget_2018_measure_data.csv',
+    'budget_2018_measure_lookups_en.csv',
+    'budget_2018_measure_lookups_fr.csv',
   ],
   public_dir_prefixer
 );

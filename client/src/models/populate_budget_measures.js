@@ -57,8 +57,8 @@ const populate_budget_measures = (budget_measure_lookups, budget_measure_data) =
 }
 
 export function load_budget_measures(){
-  const lookups_prom = load_csv("budget_measure_lookups_"+window.lang);
-  const data_prom = load_csv("budget_measure_data");
+  const lookups_prom = load_csv("budget_2018_measure_lookups_"+window.lang);
+  const data_prom = load_csv("budget_2018_measure_data");
   return Promise.all([
     lookups_prom,
     data_prom,
