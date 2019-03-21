@@ -42,7 +42,7 @@ const first_column_options = [
 ];
 const first_column_ids = _.map( first_column_options, option => option.id );
 
-const budget_year_options = ["budget-2018", "budget-2019"];
+const budget_year_options = ["budget-2018"];//, "budget-2019"];
 
 
 const validate_route = (props) => {
