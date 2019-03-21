@@ -55,7 +55,10 @@ function render({calculations, footnotes, sources}) {
     series.push(net_exp);
     _ticks.push('net');
   }
-  const ticks = _ticks.map(text_maker);
+  
+  //have to have an empty string in key to make sure
+  //that negative bars will be displayed
+  const ticks = _.union([''],_ticks.map(text_maker));
   
   const spend_rev_data = series.map(
     (spend_rev_value,tick_index)=>({

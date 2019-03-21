@@ -243,7 +243,9 @@ class HistoricalProgramBars extends React.Component {
       .map( ({label, data }) => [ label, data ])
       .fromPairs()
       .value();
-
+    
+    //have to have an empty string in key to make sure
+    //that negative bars will be displayed
     let keys = ['']
     keys = _.union(keys, Object.keys(graph_data))
     const data_by_year = ticks.map((year, year_index) =>(

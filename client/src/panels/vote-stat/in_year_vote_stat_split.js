@@ -15,7 +15,7 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
     info,
   } = calculations;
 
-  calculations.graph_args.map((data_set, index) =>{
+  calculations.graph_args.map((data_set) =>{
     data_set["id"] = data_set["label"]
   })
 

@@ -1,13 +1,18 @@
 import { text_maker, TM } from './vote-stat-text-prodiver.js';
 import {
   PanelGraph,
-  CommonDonut,
   StdPanel,
   Col,
+  NivoResponsivePie,
 } from "../shared";
+import { infobaseCategory10Colors } from '../../core/color_schemes.js';
 
 const render_w_options = ({text_key,graph_col,text_col}) => ({calculations, sources, footnotes}) => {
   const { info, graph_args } = calculations;
+
+  graph_args.map((data_set) =>{
+    data_set["id"] = data_set["label"]
+  })
 
   return (
     <StdPanel
@@ -19,7 +24,31 @@ const render_w_options = ({text_key,graph_col,text_col}) => ({calculations, sour
       </Col>
       { !window.is_a11y_mode &&
         <Col isGraph size={graph_col}>
-          <CommonDonut data={graph_args} />
+          <div style = {{height: '400px'}}>
+            <NivoResponsivePie
+              data = {graph_args}
+              colors = {infobaseCategory10Colors}
+              legend = {[
+                {
+                  "anchor": "bottom",
+                  "direction": "row",
+                  "translateY": 60,
+                  "translateX": 40,
+                  "itemWidth": 150,
+                  "itemHeight": 25,
+                  "symbolSize": 20,
+                  "symbolShape": "circle",
+                },
+              ]}
+              theme = {{
+                legends: {
+                  text: {
+                    fontSize: 15,
+                  },
+                },
+              }}
+            />
+          </div>
         </Col>
       }
     </StdPanel>

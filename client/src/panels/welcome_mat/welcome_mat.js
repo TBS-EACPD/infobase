@@ -122,7 +122,7 @@ const Chart = ({
             {slice.data.map((e,i) => (
               <div key={i} style={{margin: '0'}}> 
                 <div style={{backgroundColor: e.serie["color"], height: '12px', width: '12px', display: 'inline-block'}}></div>&nbsp;&nbsp;&nbsp; 
-                {slice.id}: <strong>{format_value(e.data['y'], is_money)}</strong>
+                {slice.id}: {format_value(e.data['y'], is_money)}
               </div>
             ))}
           </div>
@@ -151,7 +151,7 @@ const Chart = ({
     tooltip={d=> <div>
       <div style={{margin: '0'}}>
         <div style ={{backgroundColor: d.color, height: '12px', width: '12px', display: 'inline-block'}}></div>&nbsp;&nbsp;&nbsp;
-        {d.indexValue}: <strong>{format_value(d.value, is_money)}</strong>
+        {d.indexValue}: {format_value(d.value, is_money)}
       </div>
     </div>}
     colors = {is_light?"#335075":"#000000"}

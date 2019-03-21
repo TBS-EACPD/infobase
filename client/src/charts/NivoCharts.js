@@ -49,8 +49,8 @@ export class NivoResponsivePie extends React.Component{
         motionDamping={15}
         tooltip = { _.isUndefined(tooltip)?(d=> <div>
           <div style={{margin: '0'}}>
-            <div style ={{backgroundColor: d.color, height: '12px', width: '12px', display: 'inline-block'}}></div>&nbsp;&nbsp;&nbsp;
-            {d.id}: <strong>{get_formatter(d.value, is_money)}</strong>
+            <div style ={{backgroundColor: d.color, height: '12px', width: '12px', display: 'inline-block', whiteSpace: 'nowrap'}}></div>&nbsp;&nbsp;&nbsp;
+            {d.id}: {get_formatter(d.value, is_money)}
           </div>
         </div>):tooltip}  
         tooltipFormat={_.isUndefined(tooltip_format)?(d=>get_formatter(d,is_money)):tooltip_format}
@@ -123,7 +123,7 @@ export class NivoResponsiveBar extends React.Component{
         tooltip = { _.isUndefined(tooltip)?(d=> <div>
           <div style={{margin: '0'}}>
             <div style ={{backgroundColor: d.color, height: '12px', width: '12px', display: 'inline-block'}}></div>&nbsp;&nbsp;&nbsp;
-            {d.id} - {d.indexValue}: <strong>{get_formatter(d.value, is_money)}</strong>
+            {d.id}: {get_formatter(d.value, is_money)}
           </div>
         </div>):tooltip}        
         tooltipFormat={_.isUndefined(tooltip_format)?(d=>get_formatter(d,is_money)):tooltip_format}

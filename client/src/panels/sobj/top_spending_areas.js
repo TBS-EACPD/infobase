@@ -7,12 +7,13 @@ import {
   run_template,
   years,
   Statistics,
-  CommonDonut,
+  NivoResponsivePie,
   StdPanel,
   Col,
   declarative_charts,
   create_text_maker_component,
 } from "../shared";
+import { infobaseCategory10Colors } from '../../core/color_schemes.js';
 
 const { std_years } = years;
 const { Format } = util_components;
@@ -93,6 +94,12 @@ Statistics.create_and_register({
 const render_w_options = ({text_key}) => ({calculations, footnotes, sources}) => {
   const { graph_args, info } = calculations;
   const { top_3_sos_and_remainder } = graph_args;
+
+  const graph_data = graph_args.map(d => ({
+    label: d["label"],
+    id: d["label"],
+    value: d["value"],
+  }))
   
   return (
     <StdPanel
@@ -117,10 +124,38 @@ const render_w_options = ({text_key}) => ({calculations, footnotes, sources}) =>
               data_col_headers: [ `${run_template(_.last(std_years))} ${text_maker("spending")}` ],
             }}
           /> : 
-          <CommonDonut 
-            data={graph_args} 
-            height={300}
-          />
+          <div style = {{height: '450px'}}>
+            <NivoResponsivePie
+              data = {graph_data}
+              margin = {{
+                "top": 30,
+                "bottom": 150,
+                "right": 80,
+                "left": 50,
+              }}
+              colors = {infobaseCategory10Colors}
+              legend = {[
+                {
+                  "anchor": "bottom",
+                  "direction": "column",
+                  "translateY": 120,
+                  "translateX": -60,
+                  "itemWidth": 150,
+                  "itemHeight": 25,
+                  "symbolSize": 20,
+                  "symbolShape": "circle",
+                },
+              ]}
+              theme = {{
+                legends: {
+                  text: {
+                    fontSize: 15,
+                    overflow: 'hidden',
+                  },
+                },
+              }}
+            />
+          </div>
         }
       </Col>
     </StdPanel>
