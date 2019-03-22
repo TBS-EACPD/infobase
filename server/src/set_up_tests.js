@@ -1,10 +1,13 @@
 const { graphql } = require("graphql");
 
-const { create_schema } = require('./models/index.js');
+const { connect_db } = require("./db.js");
+const { create_schema, create_models } = require('./models/index.js');
 
 global.USE_TEST_DATA = true;
 global.IS_DEV_SERVER = true;
 
+connect_db();
+create_models();
 const schema = create_schema();
 global.execQuery = async function(query, vars={}){
   if(!vars.lang){

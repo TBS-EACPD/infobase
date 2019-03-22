@@ -1,9 +1,9 @@
 {
   "plugins": [
-    "transform-object-rest-spread",
-    "transform-es2015-modules-commonjs"
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-transform-modules-commonjs"
   ],
   "presets": [
-      ["env", { "targets": { "node": "6.0.0" } }]
+      ["@babel/preset-env", { "targets": { "node": "6.0.0" } }]
     ]
 }
