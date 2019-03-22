@@ -3,10 +3,10 @@ import { ResponsiveBar } from './nivo-bar.js';
 import { ResponsivePie } from '@nivo/pie'
 import { formats, dollar_formats } from "../panels/shared.js";
 
-const get_formatter = (value, is_money) =>(
-    is_money? dollar_formats.compact2_raw(value)
-    : formats.big_int_real(value,{raw: true})
-)
+const get_formatter = (value, is_money, raw = true) =>(
+    is_money? (raw? dollar_formats.compact2_raw(value): formats.compact2(value))
+    : (raw? formats.big_int_real(value,{raw: true}):formats.big_int_real(value)))
+
 
 export class NivoResponsivePie extends React.Component{
   constructor (props){
@@ -49,8 +49,9 @@ export class NivoResponsivePie extends React.Component{
         motionDamping={15}
         tooltip = { _.isUndefined(tooltip)?(d=> <div>
           <div style={{margin: '0'}}>
-            <div style ={{backgroundColor: d.color, height: '12px', width: '12px', display: 'inline-block', whiteSpace: 'nowrap'}}></div>&nbsp;&nbsp;&nbsp;
-            {d.id}: {get_formatter(d.value, is_money)}
+            <div style ={{backgroundColor: d.color, height: '12px', width: '12px', display: 'inline-block'}}></div>&nbsp;&nbsp;&nbsp;
+            {d.id}: <div style = {{display: 'inline-block'}} dangerouslySetInnerHTML={{__html: 
+            get_formatter(d.value,is_money, false)}}></div>{}
           </div>
         </div>):tooltip}  
         tooltipFormat={_.isUndefined(tooltip_format)?(d=>get_formatter(d,is_money)):tooltip_format}
@@ -123,7 +124,7 @@ export class NivoResponsiveBar extends React.Component{
         tooltip = { _.isUndefined(tooltip)?(d=> <div>
           <div style={{margin: '0'}}>
             <div style ={{backgroundColor: d.color, height: '12px', width: '12px', display: 'inline-block'}}></div>&nbsp;&nbsp;&nbsp;
-            {d.id}: {get_formatter(d.value, is_money)}
+            {d.id}: <div style = {{display: 'inline-block'}} dangerouslySetInnerHTML = {{ __html: get_formatter(d.value,is_money, false)}}></div>
           </div>
         </div>):tooltip}        
         tooltipFormat={_.isUndefined(tooltip_format)?(d=>get_formatter(d,is_money)):tooltip_format}
@@ -215,14 +216,30 @@ export class NivoResponsiveLine extends React.Component {
         colorBy ={colorBy}
         animate={true}
         motionStiffness={90}
-        motionDamping={15}      
-        tooltip = {tooltip}   
+        motionDamping={15}     
+        tooltip = {_.isUndefined(tooltip)?(slice => (
+          <div style ={{color: '#000'}}>
+            <table style = {{width: '100%', borderCollapse: 'collapse' }}>
+              <tbody>
+                {slice.data.map(d =>(
+                  <tr key = {d.serie.id}>
+                    <td style= {{padding: '3px 5px'}}>
+                      <div style ={{height: '12px', width: '12px', backgroundColor: d.serie.color}}></div>
+                    </td>
+                    <td style= {{padding: '3px 5px'}}>{d.serie.id}</td>
+                    <td style= {{padding: '3px 5px'}} dangerouslySetInnerHTML = {{ __html: get_formatter(d.data.y,is_money, false)}}></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )): tooltip}
         tooltipFormat={_.isUndefined(tooltip_format)?(d=>get_formatter(d,is_money)):tooltip_format}
         colors = {_.isUndefined(colors)? '#000000' : colors}
         theme={_.isUndefined(theme)?{
           axis: {
             ticks: {
-              text: { 
+              text: {
                 fontSize: 12,
                 fill: '#000',
               },

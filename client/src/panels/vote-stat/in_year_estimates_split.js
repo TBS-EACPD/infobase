@@ -96,6 +96,17 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
           }}
           enableGridX = {false}
           remove_left_axis = {true}
+          theme={{
+            axis: {
+              ticks: {
+                text: { 
+                  fontSize: 12,
+                  fill: '#000',
+                  fontWeight: '550',
+                },
+              },
+            },
+          }}
         />
       </div>
     );

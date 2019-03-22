@@ -110,14 +110,14 @@ const render = function({calculations, footnotes, sources}) {
             enableGridX = {false}
             legend = {[
               {
-                "translateX": -9,
+                "translateY": -35,
+                "translateX": -20,
                 "dataFrom": "keys",
                 "direction": "row",
                 "anchor": "top",
                 "itemsSpacing": 120,
                 "itemWidth": 100,
-                "itemHeight": -55,
-                "itemOpacity": 0.75,
+                "itemHeight": 25,
                 "symbolSize": 20,
                 "fill": '#000',
               },
