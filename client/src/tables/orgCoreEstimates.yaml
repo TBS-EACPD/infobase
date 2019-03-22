@@ -1,0 +1,16 @@
+orgCoreEstimates_short:
+  transform: [handlebars,embeded-markdown,markdown]
+  en: |
+    This is a test
+
+  fr: |
+    This is a test
+
+orgCoreEstimates:
+  transform: [handlebars,embeded-markdown,markdown]
+  en: |
+    This is a test
+
+  fr: |
+    This is a test
+

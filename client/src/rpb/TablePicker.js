@@ -47,6 +47,7 @@ class TablePicker extends React.Component {
       }))
       .value();
     
+
     //note that a concept without tables will not get included here.
     this.linkage = _.chain(Table.get_all())
       .reject('reference_table')

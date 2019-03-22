@@ -92,6 +92,7 @@ const table_csvs = _.map(
     'org_sobjs_qfr',
     'org_transfer_payments',
     'org_vote_stat_estimates',
+    'org_core_estimates',
     'org_vote_stat_pa',
     'org_vote_stat_qfr',
     'program_ftes',
