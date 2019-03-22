@@ -36,8 +36,13 @@
     "jest-cli": "^22.0.4"
   },
   "scripts": {
-    "test": "jest --coverage --forceExit; npm run load_models",
+    "pretest": "(USE_TEST_DATA=true; npm run load_models)",
+    "test": "jest --coverage --forceExit",
+    "posttest": "npm run load_models",
+
+    "preci_test": "(USE_TEST_DATA=true; npm run load_models)",
     "ci_test": "jest --coverage --forceExit",
+
     "test:watch": "jest --watch",
     "debug": "babel-node --inspect src/server.js",
     "start": "babel-node src/server.js",
