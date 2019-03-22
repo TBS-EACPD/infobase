@@ -94,25 +94,21 @@ export default {
   },
 
   "mapper": function (row) {	 
-    debugger;
+    console.log(row)
     if (row[3] in map_helper) { 
       row[3] = map_helper[row[3]]; 
     }
-    row.splice(6, 0, estimates_docs[row[3]][window.lang]);
+    console.log(row)
+    row.splice(4, 0, estimates_docs[row[3]][window.lang]);
 	
+    console.log(row)
     if (this.lang === 'en') {
       row.splice(2, 1);
     } else {
       row.splice(3, 1);
     }
-    if ( _.isNaN(+row[1]) ){
-      row[1] = 'S';
-      row[2] = 999;
-    } else {
-      row[3] = row[3] + " - " + row[1];
-    }
-
-    // remove acronym and vote type
+    console.log(row)
+    debugger;
     return row;
   },
 
