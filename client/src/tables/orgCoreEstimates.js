@@ -95,11 +95,11 @@ export default {
 
   "mapper": function (row) {	 
     console.log(row)
-    if (row[3] in map_helper) { 
-      row[3] = map_helper[row[3]]; 
+    if (row[2] in map_helper) { 
+      row[2] = map_helper[row[2]]; 
     }
     console.log(row)
-    row.splice(4, 0, estimates_docs[row[3]][window.lang]);
+    row.splice(4, 0, estimates_docs[row[2]][window.lang]);
 	
     console.log(row)
     if (this.lang === 'en') {
