@@ -115,7 +115,7 @@ jobs:
           command: (cd server && npm run transpiled_start)
           background: true
       - run: sed -i "s#src#transpiled_build#g" ./server/jest.config.js # Switch the jest config from testing src to testing transpiled_build
-      - run: (cd server && npm run test)
+      - run: (cd server && npm run ci_test)
 
       - run: sed -i "s#${CDN_URL}#.#g" ./client/build/InfoBase/app/*.js # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
       - run: sed -i "s#${CDN_URL}#.#g" ./client/build/InfoBase/*.html # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
