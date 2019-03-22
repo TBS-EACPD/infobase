@@ -282,20 +282,25 @@ class InfoGraph_ extends React.Component {
   }
 
   loadGraphDeps({bubble, subject, level}){
-    const panel_keys = panels_for_subj_bubble({subject, bubble});
-
     ensure_loaded({
-      graph_keys: panel_keys,
-      subject_level: level,
       subject: subject,
-      footnotes_for: subject,
+      has_results: true,
     }).then(()=> {
-      if ( shallowEqualObjectsOverKeys({bubble, subject, level}, this.state, ['subject','bubble','level']) ){
-        this.setState({
-          loading: false,
-        });
-      }
-    });
+      const panel_keys = panels_for_subj_bubble({subject, bubble});
+
+      ensure_loaded({
+        graph_keys: panel_keys,
+        subject_level: level,
+        subject: subject,
+        footnotes_for: subject,
+      }).then(()=> {
+        if ( shallowEqualObjectsOverKeys({bubble, subject, level}, this.state, ['subject','bubble','level']) ){
+          this.setState({
+            loading: false,
+          });
+        }
+      });
+    })
   }
 }
 

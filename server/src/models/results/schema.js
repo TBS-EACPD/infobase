@@ -254,13 +254,13 @@ export default function({models,loaders}){
   }
 
   const org_has_results = (org_id) => {
-
+    return true; //TODO
   };
   const program_has_results = (program_id) => {
-
+    return true; //TODO
   };
   const crso_has_results = (crso_id) => {
-
+    return true; //TODO
   };
 
   const resolvers = {

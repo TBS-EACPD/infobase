@@ -135,8 +135,8 @@ function ensure_loaded({
 
   const has_results_prom = (
     has_results ?
-    subject_has_results(subject) :
-    Promise.resolve()
+      subject_has_results(subject) :
+      Promise.resolve()
   );
 
   const granular_result_counts_prom = (

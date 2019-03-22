@@ -63,21 +63,16 @@ export const CanHaveResultsMixin = superclass => {
   return class SubjectMixin extends baseclass{
     constructor(){ 
       super(); 
-      Object.assign(
-        this, 
-        {
-          has_results: undefined,
-        }
-      );
+      this._has_results = null;
     }
     set_has_results(has_results){
-      this.has_results = has_results;
+      this._has_results = has_results;
     }
     get has_results(){
-      if ( _.isUndefined(this.has_results) ){
+      if ( _.isNull(this._has_results) ){
         throw '"Has results" status has yet to be loaded!';
       } else {
-        return this.has_results;
+        return this._has_results;
       }
     }
   };

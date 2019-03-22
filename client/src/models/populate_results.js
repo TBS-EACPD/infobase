@@ -12,7 +12,7 @@ import {
 
 
 const has_results_query = (level, id_key) => gql`
-query($lang: String!) {
+query($lang: String!, $id: String) {
   root(lang: $lang) {
     ${level}(${id_key}: $id) {
       has_results
@@ -22,7 +22,9 @@ query($lang: String!) {
 `;
 const _subject_has_results = {}; // This is also populated as a side effect of api_load_results_bundle and api_load_results_counts calls
 export function subject_has_results(subject){
-  const { level, id } = subject;
+  const { id } = subject;
+
+  const level = subject.level === "dept" ? "org" : subject.level;
 
   if ( !_.isUndefined(subject.is_internal_service) && subject.is_internal_service){
     subject.set_has_results(false);
