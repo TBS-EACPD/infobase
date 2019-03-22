@@ -232,8 +232,8 @@ class TaggedItemCloud extends React.Component {
           data-toggle="tooltip"
           data-ibtt-glossary-key={concept_id}
           data-ibtt-html="true"
-          data-ibtt-arrowselector=".TablePicker__tooltip-arrow"
-          data-ibtt-innerselector=".TablePicker__tooltip-inner"
+          data-ibtt-arrowselector="TablePicker__tooltip-arrow"
+          data-ibtt-innerselector="TablePicker__tooltip-inner"
         />
       </div>
     );
