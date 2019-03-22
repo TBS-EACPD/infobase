@@ -6,7 +6,7 @@ Object {
     "root": Object {
       "org": Object {
         "article_1": null,
-        "article_2": null,
+        "article_2": "de",
         "auditor": null,
         "enabling_instrument": "National Defence Act, R.S.C. 1985, c. N-5",
         "faa_schedule_institutional": null,
@@ -61,7 +61,26 @@ exports[`subject linkage crso root, up and down linkage 1`] = `
 Object {
   "data": Object {
     "root": Object {
-      "crso": null,
+      "crso": Object {
+        "name": "Defence operations improve peace, stability and security wherever deployed",
+        "org": Object {
+          "id": "133",
+        },
+        "programs": Array [
+          Object {
+            "id": "ND-AUW00",
+          },
+          Object {
+            "id": "ND-AUX00",
+          },
+          Object {
+            "id": "ND-AUY00",
+          },
+          Object {
+            "id": "ND-AUZ00",
+          },
+        ],
+      },
       "org": Object {
         "acronym": null,
         "crsos": Array [
@@ -87,25 +106,25 @@ Object {
             "id": "ND-ISS00",
           },
           Object {
-            "id": "ND-SO217",
+            "id": "ND-SO00224",
           },
           Object {
-            "id": "ND-SO218",
+            "id": "ND-SO00225",
           },
           Object {
-            "id": "ND-SO219",
+            "id": "ND-SO00226",
           },
           Object {
-            "id": "ND-SO220",
+            "id": "ND-SO00227",
           },
           Object {
-            "id": "ND-SO221",
+            "id": "ND-SO00228",
           },
           Object {
-            "id": "ND-SO222",
+            "id": "ND-SO00229",
           },
           Object {
-            "id": "ND-SO223",
+            "id": "ND-SO00230",
           },
         ],
       },

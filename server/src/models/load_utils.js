@@ -3,7 +3,7 @@ const fs = require('fs');
 const { csvParseRows, csvParse } = require('d3-dsv');
 const path = require('path');
 
-const data_dir_path = global.USE_TEST_DATA ? "../test-data" : "../data/";
+const data_dir_path = global.USE_TEST_DATA || !_.isUndefined(process.env.USE_TEST_DATA) ? "../test-data" : "../data/";
 
 function get_file_from_data_dir(file_name){
   return fs.readFileSync( path.join(data_dir_path, file_name) )
