@@ -12,20 +12,23 @@ const schema = `
 
   extend type Org {
     target_counts(doc: String): ResultCount
+    has_results: Boolean
   }
 
   extend type Crso {
     target_counts(doc: String): ResultCount
     results(doc:String): [Result]
+    has_results: Boolean
   }
 
-  extend type Program{
+  extend type Program {
     target_counts(doc: String): ResultCount
     sub_programs: [SubProgram]
     results(doc: String): [Result]
     # special departmental results to which this programs 'contributes' to
     drs: [Result]
     pidrlinks: [PIDRLink]
+    has_results: Boolean
   }
 
   type SubProgram {
@@ -250,6 +253,15 @@ export default function({models,loaders}){
     return records;
   }
 
+  const org_has_results = (org_id) => {
+
+  };
+  const program_has_results = (program_id) => {
+
+  };
+  const crso_has_results = (crso_id) => {
+
+  };
 
   const resolvers = {
     Gov: {
@@ -259,10 +271,12 @@ export default function({models,loaders}){
     },
     Org: {
       target_counts: (org, {doc}) => get_org_target_counts(org, doc),
+      has_results: ({org_id}) => org_has_results(org_id),
     },
     Crso: {
       results: get_results,
       target_counts: ({crso_id}, {doc}) => get_target_counts([crso_id], doc),
+      has_results: ({crso_id}) => crso_has_results(org_id),
     },
     Program: {
       results: get_results,
@@ -276,6 +290,7 @@ export default function({models,loaders}){
         );
       },
       target_counts: ({program_id}, {doc}) => get_target_counts([program_id], doc),
+      has_results: ({program_id}) => program_has_results(program_id),
     },
     SubProgram: {
       id: _.property('sub_program_id'),

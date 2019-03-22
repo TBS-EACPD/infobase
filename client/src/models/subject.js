@@ -3,13 +3,13 @@ import {
   staticStoreMixin, 
   PluralSingular, 
   SubjectMixin,
+  CanHaveResultsMixin,
 } from './staticStoreMixin.js';
 import { trivial_text_maker } from '../models/text.js';
 
-
-
-
 const common = () => mix().with(staticStoreMixin, PluralSingular, SubjectMixin);
+
+const can_have_results = () => mix().with(staticStoreMixin, PluralSingular, SubjectMixin, CanHaveResultsMixin);
 
 const gov_name = ( 
   window.lang === 'en' ? 
@@ -69,7 +69,7 @@ Subject.Ministry = class Ministry extends common(){
   }
 };
 
-Subject.Dept = class Dept extends common(){
+Subject.Dept = class Dept extends can_have_results(){
   static lookup(org_id){
     return super.lookup(
       _.isNaN(+org_id) ?
@@ -362,7 +362,7 @@ Subject.Tag = class Tag extends common(){
   }
 };
 
-Subject.CRSO = class CRSO extends common(){
+Subject.CRSO = class CRSO extends can_have_results(){
   static get singular(){ return trivial_text_maker("");}
   static get plural(){ return trivial_text_maker(""); }
   static get type_name() { return 'crso'; }
@@ -416,7 +416,7 @@ Subject.CRSO = class CRSO extends common(){
   }
 };
 
-Subject.Program = class Program extends common(){
+Subject.Program = class Program extends can_have_results(){
   static get type_name(){ return 'program'; }
   static get singular(){ return trivial_text_maker("program") }
   static get plural(){ return trivial_text_maker("programs") }

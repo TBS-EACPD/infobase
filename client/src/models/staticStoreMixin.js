@@ -57,3 +57,28 @@ export const SubjectMixin = superclass => {
     }
   };
 };
+
+export const CanHaveResultsMixin = superclass => {
+  const baseclass = superclass || BaseClass;
+  return class SubjectMixin extends baseclass{
+    constructor(){ 
+      super(); 
+      Object.assign(
+        this, 
+        {
+          has_results: undefined,
+        }
+      );
+    }
+    set_has_results(has_results){
+      this.has_results = has_results;
+    }
+    get has_results(){
+      if ( _.isUndefined(this.has_results) ){
+        throw '"Has results" status has yet to be loaded!';
+      } else {
+        return this.has_results;
+      }
+    }
+  };
+};

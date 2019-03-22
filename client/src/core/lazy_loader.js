@@ -1,7 +1,7 @@
 import { Table } from './TableClass.js';
 import { PanelGraph, tables_for_graph } from './PanelGraph.js';
 import { Statistics, tables_for_statistics } from './Statistics.js';
-import { api_load_results_bundle, api_load_results_counts } from '../models/populate_results.js';
+import { api_load_results_bundle, api_load_results_counts, subject_has_results } from '../models/populate_results.js';
 import { load_footnotes_bundle } from '../models/populate_footnotes.js';
 import { load_budget_measures } from '../models/populate_budget_measures.js';
 import { Subject } from '../models/subject.js';
@@ -24,6 +24,7 @@ function ensure_loaded({
   table_keys, 
   subject_level, 
   subject,
+  has_results,
   results,
   result_docs,
   require_result_counts,
@@ -132,6 +133,12 @@ function ensure_loaded({
       Promise.resolve()
   );
 
+  const has_results_prom = (
+    has_results ?
+    subject_has_results(subject) :
+    Promise.resolve()
+  );
+
   const granular_result_counts_prom = (
     should_load_granular_result_counts ?
       api_load_results_counts("granular") :
@@ -154,6 +161,7 @@ function ensure_loaded({
     load(table_set),
     results_prom,
     result_counts_prom,
+    has_results_prom,
     granular_result_counts_prom,
     footnotes_prom,
     budget_measures_prom,
