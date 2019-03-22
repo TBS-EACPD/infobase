@@ -125,6 +125,7 @@ jobs:
           command: (cd client && npm run ci_serve)
           background: true
       - run: (cd client && npm run ci_route_load_tests)
+      - run: circleci step halt # stops and returns successful, once route load tests end, since the mongod and api otherwise hold this job open a couple minutes long
 
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
