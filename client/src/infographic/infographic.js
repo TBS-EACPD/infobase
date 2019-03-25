@@ -287,25 +287,19 @@ class InfoGraph_ extends React.Component {
     };
   }
 
-  loadBubbleMenuDeps({subject, level}){
-    if (level === "gov"){
+  loadBubbleMenuDeps({subject}){
+    ensure_loaded({
+      subject: subject,
+      has_results: true,
+    }).then( () => {
       this.setState({
         bubble_menu_loading: false,
       });
-    } else {
-      ensure_loaded({
-        subject: subject,
-        has_results: true,
-      }).then( () => {
-        this.setState({
-          bubble_menu_loading: false,
-        });
-      });
-    }
+    });
   }
   loadGraphDeps({bubble, subject, level}){
     const panel_keys = panels_for_subj_bubble({subject, bubble});
-
+    
     ensure_loaded({
       graph_keys: panel_keys,
       subject_level: level,
