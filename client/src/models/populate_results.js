@@ -72,6 +72,7 @@ export function subject_has_results(subject){
           MISC1: "API_QUERY_FAILURE",
           MISC2: `Has results, took  ${resp_time} ms - ${error.toString()}`,
         });
+        throw error;
       });
   }
 }
@@ -322,6 +323,7 @@ export function api_load_results_bundle(subject, result_docs){
         MISC1: "API_QUERY_FAILURE",
         MISC2: `Results, took  ${resp_time} ms - ${error.toString()}`,
       });
+      throw error;
     });
 }
 
@@ -513,6 +515,7 @@ export function api_load_results_counts(level = "summary"){
           MISC1: "API_QUERY_FAILURE",
           MISC2: `Results counts, took  ${resp_time} ms - ${error.toString()}`,
         });
+        throw error;
       });
   }
 }
