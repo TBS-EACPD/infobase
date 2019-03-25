@@ -32,7 +32,7 @@ const name_for_title = subject => {
   } else {
     return subject.name;
   }
-}
+};
 
 class AnalyticsSynchronizer extends React.Component {
   render(){ return null; }
@@ -109,16 +109,18 @@ class InfoGraph_ extends React.Component {
   constructor(props){
     super();
     this.state = {
-      loading: true,
+      bubble_menu_loading: true,
+      infographic_loading: true,
       subject: props.subject,
       bubble: props.bubble,
       level: props.level,
     };
   }
   static getDerivedStateFromProps(nextProps, prevState){
-    if( !shallowEqualObjectsOverKeys(nextProps, prevState, ['subject','bubble','level']) ){
+    if ( !shallowEqualObjectsOverKeys(nextProps, prevState, ['subject','bubble','level']) ){
       return {
-        loading: true,
+        bubble_menu_loading: true,
+        infographic_loading: true,
         subject: nextProps.subject,
         bubble: nextProps.bubble,
         level: nextProps.level,
@@ -128,24 +130,28 @@ class InfoGraph_ extends React.Component {
     }
   }
   componentDidMount(){
-    this.loadGraphDeps(this.props);
+    this.loadBubbleMenuDeps(this.props);
   }
   componentDidUpdate(prevProps){
-    if(this.state.loading){
+    if (this.state.bubble_menu_loading){
+      this.loadBubbleMenuDeps(this.props);
+    } else if(this.state.infographic_loading){
       this.loadGraphDeps(this.props);
     }
-    if(this.props.subject !== prevProps.subject){
+    if (this.props.subject !== prevProps.subject){
       reset_scroll();
     }
   }
   render(){
     const { subject, bubble } = this.props;
-    const { loading } = this.state;
+    const { bubble_menu_loading, infographic_loading } = this.state;
 
-    const sorted_bubbles = sorted_bubbles_for_subj(this.props);
-    const panel_keys = panels_for_subj_bubble({subject, bubble});
+    const loading = bubble_menu_loading || infographic_loading;
 
-    const { prev, next } = this.get_previous_and_next_bubbles();
+    // Shortcircuit these to false when bubble menu is loading because the sorted bubbles can't be known yet
+    const sorted_bubbles = bubble_menu_loading || sorted_bubbles_for_subj(this.props);
+    const panel_keys = bubble_menu_loading || panels_for_subj_bubble({subject, bubble});
+    const { prev, next } = bubble_menu_loading || this.get_previous_and_next_bubbles();
 
     return <div>
       <AnalyticsSynchronizer {...this.props} />
@@ -204,7 +210,7 @@ class InfoGraph_ extends React.Component {
             </div>
           }
           {
-            window.is_a11y_mode ? 
+            !loading && window.is_a11y_mode ? 
               <AccessibleBubbleMenu items={sorted_bubbles} /> : 
               <BubbleMenu items={sorted_bubbles} />
           }
@@ -281,26 +287,37 @@ class InfoGraph_ extends React.Component {
     };
   }
 
-  loadGraphDeps({bubble, subject, level}){
-    ensure_loaded({
-      subject: subject,
-      has_results: true,
-    }).then(()=> {
-      const panel_keys = panels_for_subj_bubble({subject, bubble});
-
-      ensure_loaded({
-        graph_keys: panel_keys,
-        subject_level: level,
-        subject: subject,
-        footnotes_for: subject,
-      }).then(()=> {
-        if ( shallowEqualObjectsOverKeys({bubble, subject, level}, this.state, ['subject','bubble','level']) ){
-          this.setState({
-            loading: false,
-          });
-        }
+  loadBubbleMenuDeps({subject, level}){
+    if (level === "gov"){
+      this.setState({
+        bubble_menu_loading: false,
       });
-    })
+    } else {
+      ensure_loaded({
+        subject: subject,
+        has_results: true,
+      }).then( () => {
+        this.setState({
+          bubble_menu_loading: false,
+        });
+      });
+    }
+  }
+  loadGraphDeps({bubble, subject, level}){
+    const panel_keys = panels_for_subj_bubble({subject, bubble});
+
+    ensure_loaded({
+      graph_keys: panel_keys,
+      subject_level: level,
+      subject: subject,
+      footnotes_for: subject,
+    }).then( () => {
+      if ( shallowEqualObjectsOverKeys({bubble, subject, level}, this.state, ['subject','bubble','level']) ){
+        this.setState({
+          infographic_loading: false,
+        });
+      }
+    });
   }
 }
 
