@@ -96,8 +96,4 @@ export default function(model_singleton){
     }, 
     (val,key) =>  model_singleton.define_loader(key,val)
   )
-
-
-
-  
 }

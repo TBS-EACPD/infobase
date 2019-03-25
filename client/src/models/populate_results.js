@@ -33,7 +33,7 @@ export function subject_has_results(subject){
 
   if( !_.isUndefined(_subject_has_results[id]) ){
     subject.set_has_results(_subject_has_results[id]); // if _subject_has_results was populated by sie effect, subject may not have had value set yet 
-    return Promise.resolve(_subject_has_results[id]);
+    return Promise.resolve();
   } else {
     const time_at_request = Date.now();
     const client = get_client();

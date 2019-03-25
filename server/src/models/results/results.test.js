@@ -96,12 +96,15 @@ const dept_results_count_query = `
 query test_org_count {
 	root(lang:"en") {
     TBC: org(org_id:"326") {
+      id
       ...everything
     }
     ND: org(org_id:"133") {
+      id
       ...everything
     }
     CPCC: org(org_id:"552") {
+      id
       ...everything
     }
   }
@@ -144,12 +147,13 @@ describe("results data", function(){
     const dept_result_counts_result = await execQuery(dept_results_count_query);
     
     const counts_by_dept_code = _.chain(all_result_counts_result.data.root.gov.all_target_counts_summary)
-      .map( counts => [counts.subject_id, _.omit(counts, 'subject_id')] )
+      .map( counts => [counts.subject_id, counts] )
       .fromPairs()
       .value();
 
-    const combine_docs_and_rekey = ({drr17, dp18}) => _.mapValues(
+    const combine_docs_and_rekey = ({id, drr17, dp18}) => _.mapValues(
       {
+        subject_id: id,
         ..._.chain(drr17)
           .omit("indicators_dp")
           .map( (value, key) => [`drr17_${key}`, value] )
@@ -164,7 +168,7 @@ describe("results data", function(){
     const result_counts_match = _.chain(dept_result_counts_result.data.root)
       .mapValues( combine_docs_and_rekey )
       .every(
-        (counts, dept_code) => _.isEqual(counts_by_dept_code[dept_code], counts)
+        (counts) => _.isEqual(counts_by_dept_code[counts.subject_id], counts)
       )
       .value();
    

@@ -400,12 +400,12 @@ const PI_DR_Links = {
 const results_counts_not_loaded_error = "result counts have not yet been loaded!";
 const ResultCounts = {
   data: null,
-  get_dept_counts(dept_code){
+  get_dept_counts(org_id){
     if(_.isEmpty(this.data)){
       throw results_counts_not_loaded_error;
     }
     return _.chain(this.data)
-      .find({ id: dept_code })
+      .find({ id: org_id.toString() })
       .value();
   },
   get_gov_counts(){
@@ -414,15 +414,6 @@ const ResultCounts = {
     }
     return _.chain(this.data)
       .find({ id: 'total' })
-      .value();
-  },
-  get_tag_counts(tag_id){
-    if(_.isEmpty(this.data)){
-      throw results_counts_not_loaded_error;
-    }
-
-    return _.chain(this.data)
-      .find({ id: tag_id })
       .value();
   },
   get_data(){
@@ -440,9 +431,6 @@ const ResultCounts = {
   },
   get_all_dept_counts(){
     return _.filter(this.data, {level: 'dept'}); 
-  },
-  get_all_tag_counts(){
-    return _.filter(this.data, {level: 'tag'}); 
   },
 };
 

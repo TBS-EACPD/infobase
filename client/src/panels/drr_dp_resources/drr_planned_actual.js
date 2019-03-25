@@ -32,9 +32,9 @@ _.each(['dept','program','crso'], level => {
   
       let counts;
       if(subject.level === 'dept'){
-        counts = ResultCounts.get_dept_counts(subject.acronym);
+        counts = ResultCounts.get_dept_counts(subject.id);
       } else {
-        counts = ResultCounts.get_dept_counts(subject.dept.acronym);
+        counts = ResultCounts.get_dept_counts(subject.dept.id);
       }
       if(!counts || counts.drr17_total < 1){
         return false;

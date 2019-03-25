@@ -371,7 +371,7 @@ new PanelGraph({
       return false;
     }
 
-    const counts = ResultCounts.get_dept_counts(subject.dept.acronym);
+    const counts = ResultCounts.get_dept_counts(subject.dept.id);
     const has_drr_data = counts && counts.drr17_total > 0 && _.nonEmpty(drr_subs);
     const has_dp_data = _.nonEmpty(dp_subs) && !subject.dead_program;
 

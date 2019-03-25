@@ -463,7 +463,7 @@ _.each(['program','dept','crso'], lvl => {
     key: "explore_results",
     calculate(subject){
       const subject_result_counts = lvl === 'dept' ?
-        ResultCounts.get_dept_counts(subject.acronym) :
+        ResultCounts.get_dept_counts(subject.id) :
         GranularResultCounts.get_subject_counts(subject.id);
 
       const has_dp_data = !_.isUndefined(subject_result_counts) && !_.isNull(subject_result_counts.dp18_indicators) && subject_result_counts.dp18_indicators > 0;

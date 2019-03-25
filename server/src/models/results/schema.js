@@ -282,7 +282,7 @@ export default function({models,loaders}){
     },
     Org: {
       target_counts: (org, {doc}) => get_org_target_counts(org, doc),
-      has_results: ({dept_code}) => subject_has_results(dept_code),
+      has_results: ({org_id}) => subject_has_results(org_id),
     },
     Crso: {
       results: get_results,

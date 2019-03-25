@@ -226,7 +226,7 @@ new PanelGraph({
   footnotes: ["RESULTS_COUNTS", "RESULTS"],
 
   calculate(subject){
-    const verbose_counts = ResultCounts.get_dept_counts(subject.acronym);
+    const verbose_counts = ResultCounts.get_dept_counts(subject.id);
     const counts = row_to_drr_status_counts(verbose_counts);
 
     if(verbose_counts.drr17_total < 1){

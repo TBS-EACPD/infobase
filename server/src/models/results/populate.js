@@ -84,6 +84,7 @@ const get_result_count_records = (sub_programs, results, indicators) => {
     ...counts_from_indicators(indicators),
   };
 
+  const igoc_rows = get_standard_csv_file_rows("igoc.csv");
   const dept_rows = _.chain(results)
     .groupBy( ({subject_id}) => _.split(sub_program_id_to_program_id[subject_id] || subject_id, '-')[0] )
     .mapValues(
@@ -94,7 +95,7 @@ const get_result_count_records = (sub_programs, results, indicators) => {
     )
     .map(
       (indicators, dept_code) => ({
-        subject_id: dept_code,
+        subject_id: _.find(igoc_rows, (igoc_row) => igoc_row.dept_code === dept_code).org_id,
         level: 'dept',
         ...counts_from_indicators(indicators),
       })
@@ -110,8 +111,8 @@ const get_result_count_records = (sub_programs, results, indicators) => {
       )
     )
     .map(
-      (indicators, dept_code) => ({
-        subject_id: dept_code,
+      (indicators, subject_id) => ({
+        subject_id,
         level: 'crso_or_program',
         ...counts_from_indicators(indicators),
       })
