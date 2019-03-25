@@ -51,7 +51,7 @@ export class NivoResponsivePie extends React.Component{
           <div style={{margin: '0'}}>
             <div style ={{backgroundColor: d.color, height: '12px', width: '12px', display: 'inline-block'}}></div>&nbsp;&nbsp;&nbsp;
             {d.id}: <div style = {{display: 'inline-block'}} dangerouslySetInnerHTML={{__html: 
-            get_formatter(d.value,is_money, false)}}></div>{}
+            get_formatter(d.value,is_money, false)}}></div>
           </div>
         </div>):tooltip}  
         tooltipFormat={_.isUndefined(tooltip_format)?(d=>get_formatter(d,is_money)):tooltip_format}

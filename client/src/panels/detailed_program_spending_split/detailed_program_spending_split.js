@@ -246,8 +246,7 @@ class HistoricalProgramBars extends React.Component {
     
     //have to have an empty string in key to make sure
     //that negative bars will be displayed
-    let keys = ['']
-    keys = _.union(keys, Object.keys(graph_data))
+    const keys = Object.keys(graph_data)
     const data_by_year = ticks.map((year, year_index) =>(
       _.fromPairs(_.map(graph_data, (data, label) =>(
         [label,data[year_index]])
@@ -307,7 +306,7 @@ class HistoricalProgramBars extends React.Component {
         <div className="fcol-md-8" style={{ height: '400px' }}>
           <NivoResponsiveBar
             data = {data_by_year}
-            keys = {keys}
+            keys = {_.union([''],keys)}
             index_by = "year"
             colorBy ={d => colors(d.id)}
           />

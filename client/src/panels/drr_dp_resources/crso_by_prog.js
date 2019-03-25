@@ -133,8 +133,7 @@ class PlannedProgramResources extends React.Component {
       
     //have to have an empty string in key to make sure
     //that negative bars will be displayed
-    let keys = ['']
-    keys = _.union(Object.keys(graph_data))
+    const keys = _.union([''],Object.keys(graph_data))
     const data_by_year = ticks.map((year, year_index) =>(
       _.fromPairs(_.map(graph_data, (data, label) =>(
         [label,data[year_index]])

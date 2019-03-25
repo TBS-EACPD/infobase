@@ -90,7 +90,7 @@ const welcome_data_bar = (data, has_planned, has_hist,) =>
   }))
 
 const format_value = (value, is_money) => (
-  is_money?dollar_formats.compact2_raw(value):formats.big_int_real(value, {raw: true})
+  is_money?formats.compact2(value):formats.big_int_real(value)
 )
 const Chart = ({
   data,
@@ -122,7 +122,7 @@ const Chart = ({
             {slice.data.map((e,i) => (
               <div key={i} style={{margin: '0'}}> 
                 <div style={{backgroundColor: e.serie["color"], height: '12px', width: '12px', display: 'inline-block'}}></div>&nbsp;&nbsp;&nbsp; 
-                {slice.id}: {format_value(e.data['y'], is_money)}
+                {slice.id}: <div style = {{display: 'inline-block'}} dangerouslySetInnerHTML = {{__html: format_value(e.data['y'], is_money)}}></div>
               </div>
             ))}
           </div>
@@ -151,7 +151,7 @@ const Chart = ({
     tooltip={d=> <div>
       <div style={{margin: '0'}}>
         <div style ={{backgroundColor: d.color, height: '12px', width: '12px', display: 'inline-block'}}></div>&nbsp;&nbsp;&nbsp;
-        {d.indexValue}: {format_value(d.value, is_money)}
+        {d.indexValue}: <div style = {{display: 'inline-block'}}dangerouslySetInnerHTML = {{__html: format_value(d.value, is_money)}}></div>
       </div>
     </div>}
     colors = {is_light?"#335075":"#000000"}
