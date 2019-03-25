@@ -47,13 +47,19 @@ export class NivoResponsivePie extends React.Component{
         animate={true}
         motionStiffness={30}
         motionDamping={15}
-        tooltip = { _.isUndefined(tooltip)?(d=> <div>
-          <div style={{margin: '0'}}>
-            <div style ={{backgroundColor: d.color, height: '12px', width: '12px', display: 'inline-block'}}></div>&nbsp;&nbsp;&nbsp;
-            {d.id}: <div style = {{display: 'inline-block'}} dangerouslySetInnerHTML={{__html: 
-            get_formatter(d.value,is_money, false)}}></div>
-          </div>
-        </div>):tooltip}  
+        tooltip = {_.isUndefined(tooltip)?d => (<div style = {{color: '#000'}}>
+          <table style = {{width: '100%', borderCollapse: 'collapse'}}>
+            <tbody>
+              <tr>
+                <td>
+                  <div style = {{height: '12px', width: '12px', backgroundColor:d.color}}></div>
+                </td>
+                <td style = {{padding: '3px 5px'}}>{d.id} </td>
+                <td style = {{padding: '3px 5px'}} dangerouslySetInnerHTML = {{__html: get_formatter(d.value,is_money, false)}}></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>):tooltip}
         tooltipFormat={_.isUndefined(tooltip_format)?(d=>get_formatter(d,is_money)):tooltip_format}
         legends={legend}
         theme= {theme}
@@ -121,17 +127,24 @@ export class NivoResponsiveBar extends React.Component{
           }):left_axis}
         labelTextColor="inherit:darker(1.6)"
         motionStiffness={90}
-        tooltip = { _.isUndefined(tooltip)?(d=> <div>
-          <div style={{margin: '0'}}>
-            <div style ={{backgroundColor: d.color, height: '12px', width: '12px', display: 'inline-block'}}></div>&nbsp;&nbsp;&nbsp;
-            {d.id}: <div style = {{display: 'inline-block'}} dangerouslySetInnerHTML = {{ __html: get_formatter(d.value,is_money, false)}}></div>
-          </div>
-        </div>):tooltip}        
+        tooltip = {_.isUndefined(tooltip)?d => (<div style = {{color: '#000'}}>
+          <table style = {{width: '100%', borderCollapse: 'collapse'}}>
+            <tbody>
+              <tr>
+                <td>
+                  <div style = {{height: '12px', width: '12px', backgroundColor:d.color}}></div>
+                </td>
+                <td style = {{padding: '3px 5px'}}>{d.id} </td>
+                <td style = {{padding: '3px 5px'}} dangerouslySetInnerHTML = {{__html: get_formatter(d.value,is_money, false)}}></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>):tooltip}
         tooltipFormat={_.isUndefined(tooltip_format)?(d=>get_formatter(d,is_money)):tooltip_format}
         enableLabel = {enable_label}
         enableGridX = {enableGridX}
         enableGridY = {enableGridY}
-        motionDamping={30}    
+        motionDamping={30}
         isInteractive={is_interactive}
         legends={legend}
         colorBy={colorBy}
