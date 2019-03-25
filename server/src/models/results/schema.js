@@ -1,7 +1,6 @@
 import _ from 'lodash';
-import { 
-  bilingual_field,
-} from '../schema_utils';
+import { bilingual_field } from '../schema_utils.js';
+import { first_true_promise } from '../general_utils.js'
 
 const schema = `
   extend type Gov {
@@ -145,6 +144,7 @@ export default function({models,loaders}){
   const {
     prog_dept_code_loader,
     crso_from_deptcode_loader,
+    prog_crso_id_loader,
     
     result_by_subj_loader,
     indicator_by_result_loader,
@@ -253,14 +253,25 @@ export default function({models,loaders}){
     return records;
   }
 
-  const org_has_results = (org_id) => {
-    return true; //TODO
+  const subject_has_results = async (subject_id) => {
+    const has_result = await ResultCount.findOne( { subject_id: subject_id });
+    return !_.isNull( has_result );
   };
-  const program_has_results = (program_id) => {
-    return true; //TODO
-  };
-  const crso_has_results = (crso_id) => {
-    return true; //TODO
+  const crso_has_results = async (crso_id) => {
+    const crso_has_own_results = await ResultCount.findOne( { subject_id: crso_id });
+
+    if ( !_.isNull(crso_has_own_results) ){
+      return true;
+    } else {
+      const programs = await prog_crso_id_loader.loadMany(crso_id);
+
+      return first_true_promise( 
+        _.map( 
+          programs, 
+          ({program_id}) => subject_has_results(program_id) 
+        ) 
+      );
+    }
   };
 
   const resolvers = {
@@ -271,12 +282,12 @@ export default function({models,loaders}){
     },
     Org: {
       target_counts: (org, {doc}) => get_org_target_counts(org, doc),
-      has_results: ({org_id}) => org_has_results(org_id),
+      has_results: ({dept_code}) => subject_has_results(dept_code),
     },
     Crso: {
       results: get_results,
       target_counts: ({crso_id}, {doc}) => get_target_counts([crso_id], doc),
-      has_results: ({crso_id}) => crso_has_results(org_id),
+      has_results: ({crso_id}) => crso_has_results(crso_id),
     },
     Program: {
       results: get_results,
@@ -290,7 +301,7 @@ export default function({models,loaders}){
         );
       },
       target_counts: ({program_id}, {doc}) => get_target_counts([program_id], doc),
-      has_results: ({program_id}) => program_has_results(program_id),
+      has_results: ({program_id}) => subject_has_results(program_id),
     },
     SubProgram: {
       id: _.property('sub_program_id'),
