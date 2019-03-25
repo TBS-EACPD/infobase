@@ -134,7 +134,7 @@ function ensure_loaded({
   );
 
   const has_results_prom = (
-    has_results && !_.isUndefined(subject.has_results) ?
+    has_results && _.isFunction( subject.set_has_results ) ?
       subject_has_results(subject) :
       Promise.resolve()
   );
