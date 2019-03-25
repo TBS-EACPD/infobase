@@ -1,4 +1,4 @@
-import { first_true_promise } from './models/general_utils.js/index.js';
+import { first_true_promise } from './general_utils.js';
 
 describe("first_true_promise", function(){
 

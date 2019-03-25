@@ -69,43 +69,53 @@ Object {
     "root": Object {
       "bank": Object {
         "crsos": null,
+        "has_results": false,
+        "id": "15",
       },
       "dnd": Object {
         "crsos": Array [
           Object {
+            "has_results": true,
             "id": "ND-BUN00",
             "programs": Array [
               Object {
+                "has_results": true,
                 "id": "ND-BUN01",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUN02",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUN03",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUN04",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUN05",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUN06",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUN07",
                 "results": Array [],
                 "sub_programs": null,
@@ -367,59 +377,71 @@ Notes/definitions:  Operational Objective:  A clearly defined and attainable goa
             ],
           },
           Object {
+            "has_results": true,
             "id": "ND-BUO00",
             "programs": Array [
               Object {
+                "has_results": true,
                 "id": "ND-BUO01",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUO02",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUO03",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUO04",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUO05",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUO06",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUO07",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUO08",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUO09",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUO10",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUO11",
                 "results": Array [],
                 "sub_programs": null,
@@ -564,54 +586,65 @@ Primary Force Generator:  Royal Canadian Air Force",
             ],
           },
           Object {
+            "has_results": true,
             "id": "ND-BUP00",
             "programs": Array [
               Object {
+                "has_results": true,
                 "id": "ND-BUP01",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUP02",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUP03",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUP04",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUP05",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUP06",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUP07",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUP08",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUP09",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUP10",
                 "results": Array [],
                 "sub_programs": null,
@@ -1070,44 +1103,53 @@ Notes/definitions: None",
             ],
           },
           Object {
+            "has_results": true,
             "id": "ND-BUQ00",
             "programs": Array [
               Object {
+                "has_results": true,
                 "id": "ND-BUQ01",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUQ02",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUQ03",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUQ04",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUQ05",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUQ06",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUQ07",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUQ08",
                 "results": Array [],
                 "sub_programs": null,
@@ -1245,29 +1287,35 @@ Notes/definitions: None",
             ],
           },
           Object {
+            "has_results": true,
             "id": "ND-BUR00",
             "programs": Array [
               Object {
+                "has_results": true,
                 "id": "ND-BUR01",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUR02",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUR03",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUR04",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUR05",
                 "results": Array [],
                 "sub_programs": null,
@@ -1547,69 +1595,83 @@ Notes/definitions: None
             ],
           },
           Object {
+            "has_results": true,
             "id": "ND-BUS00",
             "programs": Array [
               Object {
+                "has_results": true,
                 "id": "ND-BUS01",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUS02",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUS03",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUS04",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUS05",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUS06",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUS07",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUS08",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUS09",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUS10",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUS11",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUS12",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "ND-BUS13",
                 "results": Array [],
                 "sub_programs": null,
@@ -1766,54 +1828,65 @@ Notes/definitions: DEES – Defence Energy and Environment Strategy",
             ],
           },
           Object {
+            "has_results": false,
             "id": "ND-ISS00",
             "programs": Array [
               Object {
+                "has_results": false,
                 "id": "ND-ISS01",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "ND-ISS02",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "ND-ISS03",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "ND-ISS04",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "ND-ISS05",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "ND-ISS06",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "ND-ISS07",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "ND-ISS08",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "ND-ISS09",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "ND-ISS0Z",
                 "results": Array [],
                 "sub_programs": null,
@@ -1822,24 +1895,29 @@ Notes/definitions: DEES – Defence Energy and Environment Strategy",
             "results": Array [],
           },
           Object {
+            "has_results": false,
             "id": "ND-SO00224",
             "programs": Array [
               Object {
+                "has_results": false,
                 "id": "ND-AVI00",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "ND-AVJ00",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "ND-AVM00",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "ND-AVR00",
                 "results": Array [],
                 "sub_programs": null,
@@ -1848,9 +1926,11 @@ Notes/definitions: DEES – Defence Energy and Environment Strategy",
             "results": Array [],
           },
           Object {
+            "has_results": true,
             "id": "ND-SO00225",
             "programs": Array [
               Object {
+                "has_results": true,
                 "id": "ND-CQA00",
                 "results": Array [
                   Object {
@@ -1892,6 +1972,7 @@ Notes/definitions: DEES – Defence Energy and Environment Strategy",
                 ],
               },
               Object {
+                "has_results": true,
                 "id": "ND-CQB00",
                 "results": Array [
                   Object {
@@ -1936,9 +2017,11 @@ Notes/definitions: DEES – Defence Energy and Environment Strategy",
             "results": Array [],
           },
           Object {
+            "has_results": true,
             "id": "ND-SO00226",
             "programs": Array [
               Object {
+                "has_results": true,
                 "id": "ND-CQC00",
                 "results": Array [
                   Object {
@@ -2000,6 +2083,7 @@ Notes/definitions: DEES – Defence Energy and Environment Strategy",
                 ],
               },
               Object {
+                "has_results": true,
                 "id": "ND-CQD00",
                 "results": Array [
                   Object {
@@ -2044,6 +2128,7 @@ Notes/definitions: DEES – Defence Energy and Environment Strategy",
                 ],
               },
               Object {
+                "has_results": true,
                 "id": "ND-CQE00",
                 "results": Array [
                   Object {
@@ -2085,24 +2170,29 @@ Notes/definitions: DEES – Defence Energy and Environment Strategy",
             "results": Array [],
           },
           Object {
+            "has_results": false,
             "id": "ND-SO00227",
             "programs": Array [
               Object {
+                "has_results": false,
                 "id": "ND-AUW00",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "ND-AUX00",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "ND-AUY00",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "ND-AUZ00",
                 "results": Array [],
                 "sub_programs": null,
@@ -2111,9 +2201,11 @@ Notes/definitions: DEES – Defence Energy and Environment Strategy",
             "results": Array [],
           },
           Object {
+            "has_results": false,
             "id": "ND-SO00228",
             "programs": Array [
               Object {
+                "has_results": false,
                 "id": "ND-ISC00",
                 "results": Array [],
                 "sub_programs": null,
@@ -2122,24 +2214,29 @@ Notes/definitions: DEES – Defence Energy and Environment Strategy",
             "results": Array [],
           },
           Object {
+            "has_results": false,
             "id": "ND-SO00229",
             "programs": Array [
               Object {
+                "has_results": false,
                 "id": "ND-AUN00",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "ND-AUO00",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "ND-AUR00",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "ND-AUS00",
                 "results": Array [],
                 "sub_programs": null,
@@ -2148,24 +2245,29 @@ Notes/definitions: DEES – Defence Energy and Environment Strategy",
             "results": Array [],
           },
           Object {
+            "has_results": false,
             "id": "ND-SO00230",
             "programs": Array [
               Object {
+                "has_results": false,
                 "id": "ND-ATT00",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "ND-ATU00",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "ND-ATW00",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "ND-AUG00",
                 "results": Array [],
                 "sub_programs": null,
@@ -2174,18 +2276,23 @@ Notes/definitions: DEES – Defence Energy and Environment Strategy",
             "results": Array [],
           },
         ],
+        "has_results": true,
+        "id": "133",
       },
       "polar": Object {
         "crsos": Array [
           Object {
+            "has_results": true,
             "id": "CPCC-BWX00",
             "programs": Array [
               Object {
+                "has_results": true,
                 "id": "CPCC-BWX01",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "CPCC-BWX02",
                 "results": Array [],
                 "sub_programs": null,
@@ -2380,9 +2487,11 @@ Notes/definitions: DEES – Defence Energy and Environment Strategy",
             ],
           },
           Object {
+            "has_results": false,
             "id": "CPCC-ISS00",
             "programs": Array [
               Object {
+                "has_results": false,
                 "id": "CPCC-ISS00",
                 "results": Array [],
                 "sub_programs": null,
@@ -2391,9 +2500,11 @@ Notes/definitions: DEES – Defence Energy and Environment Strategy",
             "results": Array [],
           },
           Object {
+            "has_results": true,
             "id": "CPCC-SO00113",
             "programs": Array [
               Object {
+                "has_results": true,
                 "id": "CPCC-DAT00",
                 "results": Array [
                   Object {
@@ -2500,6 +2611,7 @@ Notes/definitions: DEES – Defence Energy and Environment Strategy",
                 ],
               },
               Object {
+                "has_results": true,
                 "id": "CPCC-DAU00",
                 "results": Array [
                   Object {
@@ -2553,9 +2665,11 @@ information disseminated through website, social media, blog posts with the Cana
             "results": Array [],
           },
           Object {
+            "has_results": false,
             "id": "CPCC-SO00114",
             "programs": Array [
               Object {
+                "has_results": false,
                 "id": "CPCC-AMW00",
                 "results": Array [],
                 "sub_programs": null,
@@ -2564,9 +2678,11 @@ information disseminated through website, social media, blog posts with the Cana
             "results": Array [],
           },
           Object {
+            "has_results": false,
             "id": "CPCC-SO00115",
             "programs": Array [
               Object {
+                "has_results": false,
                 "id": "CPCC-ISC00",
                 "results": Array [],
                 "sub_programs": null,
@@ -2575,13 +2691,17 @@ information disseminated through website, social media, blog posts with the Cana
             "results": Array [],
           },
         ],
+        "has_results": true,
+        "id": "552",
       },
       "tbs": Object {
         "crsos": Array [
           Object {
+            "has_results": true,
             "id": "TBC-BXA00",
             "programs": Array [
               Object {
+                "has_results": true,
                 "id": "TBC-BXA01",
                 "results": Array [
                   Object {
@@ -2630,6 +2750,7 @@ information disseminated through website, social media, blog posts with the Cana
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "TBC-BXA02",
                 "results": Array [
                   Object {
@@ -2737,6 +2858,7 @@ information disseminated through website, social media, blog posts with the Cana
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "TBC-BXA03",
                 "results": Array [
                   Object {
@@ -2802,6 +2924,7 @@ information disseminated through website, social media, blog posts with the Cana
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "TBC-BXA04",
                 "results": Array [
                   Object {
@@ -2972,9 +3095,11 @@ Notes/definitions: Survey respondents will have the option of identifying upon w
             ],
           },
           Object {
+            "has_results": true,
             "id": "TBC-BXB00",
             "programs": Array [
               Object {
+                "has_results": true,
                 "id": "TBC-BXB01",
                 "results": Array [
                   Object {
@@ -3082,6 +3207,7 @@ Notes/definitions: Survey respondents will have the option of identifying upon w
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "TBC-BXB02",
                 "results": Array [
                   Object {
@@ -3223,6 +3349,7 @@ Notes/definitions: Survey respondents will have the option of identifying upon w
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "TBC-BXB03",
                 "results": Array [
                   Object {
@@ -3322,6 +3449,7 @@ Notes/definitions: Survey respondents will have the option of identifying upon w
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "TBC-BXB04",
                 "results": Array [
                   Object {
@@ -3655,9 +3783,11 @@ Baseline: 28% below 2005 levels.",
             ],
           },
           Object {
+            "has_results": true,
             "id": "TBC-BXC00",
             "programs": Array [
               Object {
+                "has_results": true,
                 "id": "TBC-BXC01",
                 "results": Array [
                   Object {
@@ -3706,6 +3836,7 @@ Baseline: 28% below 2005 levels.",
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "TBC-BXC02",
                 "results": Array [
                   Object {
@@ -3779,6 +3910,7 @@ Baseline: 28% below 2005 levels.",
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "TBC-BXC03",
                 "results": Array [
                   Object {
@@ -4200,6 +4332,7 @@ Baseline: 28% below 2005 levels.",
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "TBC-BXC04",
                 "results": Array [
                   Object {
@@ -4569,9 +4702,11 @@ Baseline: No complaints of bad faith bargaining were filed in relation to the 20
             ],
           },
           Object {
+            "has_results": true,
             "id": "TBC-BXD00",
             "programs": Array [
               Object {
+                "has_results": true,
                 "id": "TBC-BXD01",
                 "results": Array [
                   Object {
@@ -4637,6 +4772,7 @@ Baseline: No complaints of bad faith bargaining were filed in relation to the 20
                 "sub_programs": null,
               },
               Object {
+                "has_results": true,
                 "id": "TBC-BXD02",
                 "results": Array [
                   Object {
@@ -4805,54 +4941,65 @@ Measurement strategy: The indicator is based on information in the RIAS for high
             ],
           },
           Object {
+            "has_results": false,
             "id": "TBC-ISS00",
             "programs": Array [
               Object {
+                "has_results": false,
                 "id": "TBC-ISS01",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "TBC-ISS02",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "TBC-ISS03",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "TBC-ISS04",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "TBC-ISS05",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "TBC-ISS06",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "TBC-ISS07",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "TBC-ISS08",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "TBC-ISS09",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "TBC-ISS0Z",
                 "results": Array [],
                 "sub_programs": null,
@@ -4861,24 +5008,29 @@ Measurement strategy: The indicator is based on information in the RIAS for high
             "results": Array [],
           },
           Object {
+            "has_results": false,
             "id": "TBC-SO00330",
             "programs": Array [
               Object {
+                "has_results": false,
                 "id": "TBC-BJV00",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "TBC-DAC00",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "TBC-DAD00",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "TBC-DAE00",
                 "results": Array [],
                 "sub_programs": null,
@@ -4887,24 +5039,29 @@ Measurement strategy: The indicator is based on information in the RIAS for high
             "results": Array [],
           },
           Object {
+            "has_results": false,
             "id": "TBC-SO00331",
             "programs": Array [
               Object {
+                "has_results": false,
                 "id": "TBC-BKG00",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "TBC-BKH00",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "TBC-BKI00",
                 "results": Array [],
                 "sub_programs": null,
               },
               Object {
+                "has_results": false,
                 "id": "TBC-BKJ00",
                 "results": Array [],
                 "sub_programs": null,
@@ -4913,9 +5070,11 @@ Measurement strategy: The indicator is based on information in the RIAS for high
             "results": Array [],
           },
           Object {
+            "has_results": false,
             "id": "TBC-SO00332",
             "programs": Array [
               Object {
+                "has_results": false,
                 "id": "TBC-ISC00",
                 "results": Array [],
                 "sub_programs": null,
@@ -4924,6 +5083,8 @@ Measurement strategy: The indicator is based on information in the RIAS for high
             "results": Array [],
           },
         ],
+        "has_results": true,
+        "id": "326",
       },
     },
   },

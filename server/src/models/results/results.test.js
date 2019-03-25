@@ -50,10 +50,14 @@ fragment result_and_indicator_fields on Result {
   }
 }
 fragment everything on Org {
+  id
+  has_results
   crsos {
     id
+    has_results
     programs {
-			id
+      id
+      has_results
       results(doc: "drr17") {
         ...result_and_indicator_fields
       }

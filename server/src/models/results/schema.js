@@ -263,7 +263,7 @@ export default function({models,loaders}){
     if ( !_.isNull(crso_has_own_results) ){
       return true;
     } else {
-      const programs = await prog_crso_id_loader.loadMany(crso_id);
+      const programs = await prog_crso_id_loader.load(crso_id);
 
       return first_true_promise( 
         _.map( 
