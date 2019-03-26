@@ -250,7 +250,7 @@ class SubProgramResourceTree extends React.Component {
       </div>
     </div>;
     
-    const tab_on_click = (doc)=> set_doc!==doc && set_doc(doc);
+    const tab_on_click = (doc) => set_doc!==doc && set_doc(doc);
 
     if(!has_dp_data || !has_drr_data){ //don't wrap the inner content in a tab layout
       return inner_content;
@@ -264,11 +264,6 @@ class SubProgramResourceTree extends React.Component {
                 key: "drr17", 
                 label: <TM k="sub_program_DRR_title" />,
                 is_open: doc === "drr17",
-              },
-              {
-                key: "dp18", 
-                label: <TM k="sub_program_DP_title_last_year_1" />,
-                is_open: doc === "dp18",
               },
               {
                 key: "dp19", 

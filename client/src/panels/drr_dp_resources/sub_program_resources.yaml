@@ -7,10 +7,6 @@ sub_program_DP_title:
   transform: [handlebars]
   en: Planned Resources for {{planning_year_1}}
   fr: Resources planifiés pour {{planning_year_1}}
-sub_program_DP_title_last_year_1:
-  transform: [handlebars]
-  en: Planned Resources for {{planning_last_year_1}}
-  fr: Resources planifiés pour {{planning_last_year_1}}
 
 sub_program_resources_drr_text:
   transform: [handlebars,markdown]

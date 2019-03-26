@@ -925,11 +925,6 @@ DP_resources:
   en: |
     {{planning_year_1}} Planned Resources
   fr: Resources prévues en {{planning_year_1}}
-DP_resources_last_year:
-  transform: [handlebars]
-  en: |
-    {{planning_last_year_1}} Planned Resources
-  fr: Resources prévues en {{planning_last_year_1}}
 
 DRR_resources:
   transform: [handlebars]
