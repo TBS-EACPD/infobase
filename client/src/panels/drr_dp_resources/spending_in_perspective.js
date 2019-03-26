@@ -1,5 +1,4 @@
 import text from './perspective_text.yaml';
-import { infobaseCategory10Colors } from '../../core/color_schemes.js';
 import {
   PanelGraph, 
   sum_a_tag_col,
@@ -8,6 +7,7 @@ import {
   Panel,
   create_text_maker_component,
   NivoResponsivePie,
+  infobaseCategory10Colors,
 } from "../shared";
 
 const {

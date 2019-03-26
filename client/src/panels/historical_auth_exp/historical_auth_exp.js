@@ -9,8 +9,8 @@ import {
   Col,
   create_text_maker_component,
   NivoResponsiveBar,
+  infobaseCategory10Colors,
 } from "../shared";
-import { infobaseCategory10Colors } from '../../core/color_schemes.js';
 
 
 const { 

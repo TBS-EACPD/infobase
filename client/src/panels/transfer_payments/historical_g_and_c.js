@@ -1,5 +1,4 @@
 import {Fragment } from 'react';
-import { infobaseCategory10Colors } from '../../core/color_schemes.js';
 import {
   text_maker,
   TM,
@@ -13,6 +12,7 @@ import {
   Panel,
   util_components,
   NivoResponsiveLine,
+  infobaseCategory10Colors,
 } from "../shared.js";
 
 const { transfer_payments } = businessConstants;

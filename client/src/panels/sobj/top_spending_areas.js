@@ -12,8 +12,8 @@ import {
   Col,
   declarative_charts,
   create_text_maker_component,
+  infobaseCategory10Colors,
 } from "../shared";
-import { infobaseCategory10Colors } from '../../core/color_schemes.js';
 
 const { std_years } = years;
 const { Format } = util_components;

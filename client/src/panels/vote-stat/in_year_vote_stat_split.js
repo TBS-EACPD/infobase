@@ -5,8 +5,8 @@ import {
   StdPanel,
   Col,
   NivoResponsivePie,
+  infobaseCategory10Colors,
 } from "../shared";
-import { infobaseCategory10Colors } from '../../core/color_schemes.js';
 
 
 const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,footnotes,sources}) => {
