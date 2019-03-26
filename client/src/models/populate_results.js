@@ -209,7 +209,7 @@ query($lang: String!) {
 }
 `;
 export function api_load_results_bundle(subject, result_docs){
-  const docs_to_load = !_.isEmpty(result_docs) ? result_docs : ["drr17", "dp18"];
+  const docs_to_load = !_.isEmpty(result_docs) ? result_docs : ["drr17", "dp18", "dp19"];
 
   const level = subject && subject.level || 'all';
 
@@ -337,7 +337,13 @@ function extract_flat_data_from_results_hierarchies(hierarchical_response_data){
     subject_node,
     subject => {
       _.each(
-        [ ...(subject.drr17_results || []), ...(subject.dp18_results || [])],
+        _.chain(subject)
+          .pickBy( (value, key) => /(drr|dp)[0-9][0-9]_results/.test(key) )
+          .reduce( 
+            (memo, doc_results) => [ ...memo, ...doc_results],
+            []
+          )
+          .value(),
         (result) => {
           results.push({
             id: result.id,
@@ -451,8 +457,12 @@ query($lang: String!) {
         drr17_indicators_not_available
         drr17_indicators_not_met
         drr17_indicators_future
+
         dp18_results
         dp18_indicators
+        
+        dp19_results
+        dp19_indicators
       }
     }
   }
