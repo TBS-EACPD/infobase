@@ -17,6 +17,9 @@ const years = {
     "{{est_in_year}}",
     "{{est_next_year}}",
   ],
+  cr_estimates_years: [
+    "{{est_in_year}}",
+  ],
   planning_years: [
     '{{planning_year_1}}',
     '{{planning_year_2}}',
