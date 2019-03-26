@@ -1,78 +1,104 @@
 import { ResponsiveLine } from '@nivo/line';
 import { ResponsiveBar } from './nivo-bar.js';
 import { ResponsivePie } from '@nivo/pie'
-import { formats, dollar_formats } from "../panels/shared.js";
+import { formats, dollar_formats } from "../core/format.js";
 
-const get_formatter = (value, is_money, raw = true) =>(
-    is_money? (raw? dollar_formats.compact2_raw(value): formats.compact2(value))
-    : (raw? formats.big_int_real(value,{raw: true}):formats.big_int_real(value)))
+const get_formatter = (is_money, raw = true) => (
+  !is_money ? 
+    (value) => formats.big_int_real(value, {raw}) :
+    raw ? 
+      (value) => dollar_formats.compact2_raw(value) : 
+      (value) => formats.compact2(value)
+);
+
+const default_tooltip = (tooltip_items, formatter) => (
+  <div style={{color: '#000'}}>
+    <table style={{width: '100%', borderCollapse: 'collapse'}}>
+      <tbody>
+        { tooltip_items.map(
+          tooltip_item => (
+            <tr key = {tooltip_item.id}>
+              <td style= {{padding: '3px 5px'}}>
+                <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.color}} />
+              </td>
+              <td style={{padding: '3px 5px'}}> {tooltip_item.id} </td>
+              <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
+            </tr>
+          )
+        )}
+      </tbody>
+    </table>
+  </div>
+);
+
+const general_default_props = {
+  tooltip_format: (d, is_money) => get_formatter(is_money)(d),
+  tooltip: (d, tooltip_formatter) => default_tooltip(d, tooltip_formatter),
+  is_money: true,
+  margin: {
+    top: 50,
+    right: 40,
+    bottom: 50,
+    left: 70,
+  },
+};
 
 
 export class NivoResponsivePie extends React.Component{
-  constructor (props){
-    super(props)
-  }
-
-  render (){
+  render(){
     const {
       data,
       colors,
       theme,
-      enable_radial_labels = false,
-      enable_slice_labels = false,
+      enable_radial_labels,
+      enable_slice_labels,
       tooltip_format,
       tooltip,
       margin,
       legend,
-      start_angle = -120,
-      is_money = true,
+      start_angle,
+      is_money,
     } = this.props
-    return(
+
+    return (
       <ResponsivePie
         data={data}
-        margin={_.isUndefined(margin)?{
-          "top": 30,
-          "right": 80,
-          "bottom": 60,
-          "left": 50,
-        } : margin}
-        innerRadius={0.5}
+        margin={margin}
         colors={colors}
+        startAngle={start_angle}
+        enableSlicesLabels={enable_slice_labels}
+        enableRadialLabels={enable_radial_labels}
+        legends={legend}
+        theme={theme}
+        tooltipFormat={ (d) => tooltip_format(d, is_money) }
+        tooltip={ (d) => tooltip( [d], get_formatter(is_money, false) ) }
+        
+        innerRadius={0.5}
         borderWidth={1}
         borderColor="inherit:darker(0.2)"
         radialLabelsSkipAngle={0}
-        startAngle={start_angle}
-        enableSlicesLabels = {enable_slice_labels}
-        enableRadialLabels={enable_radial_labels}
         animate={true}
         motionStiffness={30}
         motionDamping={15}
-        tooltip = {_.isUndefined(tooltip)?d => (<div style = {{color: '#000'}}>
-          <table style = {{width: '100%', borderCollapse: 'collapse'}}>
-            <tbody>
-              <tr>
-                <td>
-                  <div style = {{height: '12px', width: '12px', backgroundColor:d.color}}></div>
-                </td>
-                <td style = {{padding: '3px 5px'}}>{d.id} </td>
-                <td style = {{padding: '3px 5px'}} dangerouslySetInnerHTML = {{__html: get_formatter(d.value,is_money, false)}}></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>):tooltip}
-        tooltipFormat={_.isUndefined(tooltip_format)?(d=>get_formatter(d,is_money)):tooltip_format}
-        legends={legend}
-        theme= {theme}
       />
-    )
-
+    );
   }
 }
-export class NivoResponsiveBar extends React.Component{
-  constructor(props){
-    super(props)
-  }
+NivoResponsivePie.defaultProps = {
+  ...general_default_props,
+  margin: {
+    top: 30,
+    right: 80,
+    bottom: 60,
+    left: 50,
+  },
 
+  enable_radial_labels: false,
+  enable_slice_labels: false,
+  start_angle: -120,
+};
+
+export class NivoResponsiveBar extends React.Component{
   render(){
     const{
       data,
@@ -82,20 +108,20 @@ export class NivoResponsiveBar extends React.Component{
       colors,
       bttm_axis,
       left_axis,
-      is_interactive = true,
+      is_interactive,
       tooltip_format,
       index_by,
-      remove_bottom_axis = false,
-      remove_left_axis = false,
-      enable_label = false,
-      is_money = true,
+      remove_bottom_axis,
+      remove_left_axis,
+      enable_label,
+      is_money,
       legend,
       tick_value,
       theme,
       colorBy,
       tooltip,
-      enableGridX = true,
-      enableGridY = true,
+      enableGridX,
+      enableGridY,
     } = this.props;
 
     return (
@@ -103,65 +129,64 @@ export class NivoResponsiveBar extends React.Component{
         data={data}
         keys={keys}
         indexBy={index_by}
-        margin={_.isUndefined(margin)?{
-          "top": 50,
-          "right": 40,
-          "bottom": 50,
-          "left": 70,
-        }:margin}
-        labelFormat={_.isUndefined(label_format)? null : label_format}
-        padding={0.3}
-        colors = {colors}
-        borderColor="inherit:darker(1.6)"
-        axisBottom={remove_bottom_axis? null:
-          _.isUndefined(bttm_axis)?({
-            "tickSize": 3,
-            "tickPadding": 10,
-          }):bttm_axis}
-        axisLeft={remove_left_axis? null:
-          _.isUndefined(left_axis)?({
-            "tickValues": _.isUndefined(tick_value)? 6 : tick_value,
-            "min": "auto",
-            "format": d=> get_formatter(d,is_money),
-            "max": "auto", 
-          }):left_axis}
-        labelTextColor="inherit:darker(1.6)"
-        motionStiffness={90}
-        tooltip = {_.isUndefined(tooltip)?d => (<div style = {{color: '#000'}}>
-          <table style = {{width: '100%', borderCollapse: 'collapse'}}>
-            <tbody>
-              <tr>
-                <td>
-                  <div style = {{height: '12px', width: '12px', backgroundColor:d.color}}></div>
-                </td>
-                <td style = {{padding: '3px 5px'}}>{d.id} </td>
-                <td style = {{padding: '3px 5px'}} dangerouslySetInnerHTML = {{__html: get_formatter(d.value,is_money, false)}}></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>):tooltip}
-        tooltipFormat={_.isUndefined(tooltip_format)?(d=>get_formatter(d,is_money)):tooltip_format}
-        enableLabel = {enable_label}
-        enableGridX = {enableGridX}
-        enableGridY = {enableGridY}
-        motionDamping={30}
+        margin={margin}
+        colors={colors}
+        enableLabel={enable_label}
+        enableGridX={enableGridX}
+        enableGridY={enableGridY}
         isInteractive={is_interactive}
         legends={legend}
         colorBy={colorBy}
-        theme={_.isUndefined(theme)?{
-          axis: {
-            ticks: {
-              text: { 
-                fontSize: 12,
-                fill: '#000',
-              },
-            },
-          },
-        }:theme}
+        theme={theme}
+        labelFormat={_.isUndefined(label_format) ? null : label_format}
+        tooltipFormat={ (d) => tooltip_format(d, is_money) }
+        tooltip={ (d) => tooltip( [d], get_formatter(is_money, false) ) }
+        axisBottom={remove_bottom_axis ? null : bttm_axis}
+        axisLeft={
+          remove_left_axis ?
+            null :
+            left_axis || {
+              tickValues: tick_value || 6,
+              format: (d) => get_formatter(is_money)(d),
+              min: "auto",
+              max: "auto",
+            }
+        }
+        
+        padding={0.3}
+        borderColor="inherit:darker(1.6)"
+        labelTextColor="inherit:darker(1.6)"
+        motionDamping={30}
+        motionStiffness={90}
       />
-    )
+    );
   }
 };
+NivoResponsiveBar.defaultProps = {
+  ...general_default_props,
+
+  bttm_axis: {
+    tickSize: 3,
+    tickPadding: 10,
+  },
+  theme: {
+    axis: {
+      ticks: {
+        text: { 
+          fontSize: 12,
+          fill: '#000',
+        },
+      },
+    },
+  },
+  is_interactive: true,
+  remove_bottom_axis: false,
+  remove_left_axis: false,
+  enable_label: false,
+  enableGridX: true,
+  enableGridY: true,
+};
+
 export class NivoResponsiveLine extends React.Component {
   constructor(props){
     super(props)
@@ -169,21 +194,21 @@ export class NivoResponsiveLine extends React.Component {
   render(){
     const { 
       data,
-      is_money = false,
+      is_money,
       margin,
       tick_amount,
       colors,
-      colorBy = undefined,
-      max = "auto",
-      min = "auto",
-      enableArea = false,
-      enableGridX = true,
-      enableGridY = true,
+      colorBy,
+      max,
+      min,
+      enableArea,
+      enableGridX,
+      enableGridY,
       yScale,
-      enable_dot_label = false,
-      remove_bottom_axis = false,
+      enable_dot_label,
+      remove_bottom_axis,
       bttm_axis,
-      stacked = false,
+      stacked,
       theme,
       tooltip_format,
       tooltip,
@@ -191,79 +216,81 @@ export class NivoResponsiveLine extends React.Component {
 
     return (
       <ResponsiveLine
-        data = {data}
-        margin={_.isUndefined(margin)?{
-          "top": 50,
-          "right": 40,
-          "bottom": 50,
-          "left": 70,
-        }:margin}
-        xScale={{
-          "type": "point",
-        }}
-        yScale={_.isUndefined(yScale)?{
-          "type": "linear",
-          "stacked": stacked,
-          "max": max,
-          "min": min,
-        }: yScale}
-        axisTop={null}
-        axisRight={null}
-        axisBottom={remove_bottom_axis?null:(
-          _.isUndefined(bttm_axis)?{
-            "tickSize": 5,
-            "tickPadding": 5,
-          }:bttm_axis)}
-        axisLeft={{
-          "orient": "left",
-          "tickSize": 5,
-          "tickPadding": 5,
-          "tickValues": _.isUndefined(tick_amount)? 6 : tick_amount,
-          "format": d=> get_formatter(d,is_money),
-        }}
-        dotSize={10}
+        data={data}
+        margin={margin}
         enableGridX={enableGridX}
         enableGridY={enableGridY}
         enableDotLabel={enable_dot_label}
-        enableArea = {enableArea}
-        colorBy ={colorBy}
+        enableArea={enableArea}
+        colorBy={colorBy}
+        colors={colors}
+        theme={theme}
+        tooltipFormat={tooltip_format}
+        tooltip={ (d) => tooltip( d, get_formatter(is_money, false) ) }
+        yScale={ 
+          yScale || 
+          {
+            type: "linear",
+            stacked: stacked,
+            max: max,
+            min: min,
+          }
+        }
+        axisBottom={remove_bottom_axis ? null : bttm_axis}
+        axisLeft={{
+          orient: "left",
+          tickSize: 5,
+          tickPadding: 5,
+          tickValues: tick_amount || 6,
+          format: d => get_formatter(is_money)(d),
+        }}
+        
+        axisTop={null}
+        axisRight={null}
+        xScale={{ type: "point" }}
         animate={true}
         motionStiffness={90}
-        motionDamping={15}     
-        tooltip = {_.isUndefined(tooltip)?(slice => (
-          <div style ={{color: '#000'}}>
-            <table style = {{width: '100%', borderCollapse: 'collapse' }}>
-              <tbody>
-                {slice.data.map(d =>(
-                  <tr key = {d.serie.id}>
-                    <td style= {{padding: '3px 5px'}}>
-                      <div style ={{height: '12px', width: '12px', backgroundColor: d.serie.color}}></div>
-                    </td>
-                    <td style= {{padding: '3px 5px'}}>{d.serie.id}</td>
-                    <td style= {{padding: '3px 5px'}} dangerouslySetInnerHTML = {{ __html: get_formatter(d.data.y,is_money, false)}}></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )): tooltip}
-        tooltipFormat={_.isUndefined(tooltip_format)?(d=>get_formatter(d,is_money)):tooltip_format}
-        colors = {_.isUndefined(colors)? '#000000' : colors}
-        theme={_.isUndefined(theme)?{
-          axis: {
-            ticks: {
-              text: {
-                fontSize: 12,
-                fill: '#000',
-              },
-            },
-          },
-        }: theme}
+        motionDamping={15}
+        dotSize={10}
       />
-    )
+    );
   }
 }
-  
-  
+NivoResponsiveLine.defaultProps = {
+  ...general_default_props,
+  tooltip: (slice, tooltip_formatter) => default_tooltip(
+    slice.data.map( 
+      (d) => ({
+        id: d.serie.id,
+        color: d.serie.color,
+        value: d.data.y,
+      })
+    ), 
+    tooltip_formatter,
+  ),
 
-  
+  colors: '#000000',
+  bttm_axis: {
+    tickSize: 5,
+    tickPadding: 5,
+  },
+  theme: {
+    axis: {
+      ticks: {
+        text: { 
+          fontSize: 12,
+          fill: '#000',
+        },
+      },
+    },
+  },
+  remove_bottom_axis: false,
+  enable_dot_label: false,
+  stacked: false,
+  enable_label: false,
+  enableGridX: true,
+  enableGridY: true,
+  enableArea: false,
+  max: "auto",
+  min: "auto",
+};

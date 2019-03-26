@@ -205,7 +205,6 @@ class HistTPTypes extends React.Component {
             enableArea = {true}
             data = {expenditure_data}
             colors={infobaseCategory10Colors}
-            is_money = {true}
             stacked = {true}
           />
         </div>
@@ -360,7 +359,6 @@ class DetailedHistTPItems extends React.Component {
               "left": 70,
             }}
             colorBy={d=>color_scale(d.id)}
-            is_money = {true}
           />
         </div>
       </div>

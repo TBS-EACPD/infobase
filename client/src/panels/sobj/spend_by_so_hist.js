@@ -141,7 +141,6 @@ class SobjLine extends React.Component {
               "left": 70,
             }}
             colorBy={d=> {return colors(d.id)}}
-            is_money = {true}
           />
         </div>
       </div>

@@ -75,7 +75,6 @@ new PanelGraph({
             "bottom": 50,
             "left": 65,
           }}
-          is_money = {true}
           colors = "#335075"
           bttm_axis ={{ "tickPadding": 10}}
         />
