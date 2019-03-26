@@ -1877,6 +1877,7 @@
 "TRC","org_vote_stat_pa"
 "TRC","program_sobjs"
 "TRC","program_spending"
+"TRC","program_vote_stat"
 "VAC","crso"
 "VAC","org_employee_age_group"
 "VAC","org_employee_avg_age"
