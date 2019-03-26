@@ -51,24 +51,35 @@ const fade_out = function(d){
       "opacity": 1,
       "font-weight": "500",
     });
+
+
+  this.svg.selectAll("g.tick-group")
+    .filter(dd => d !== dd)
+    .classed("tick-group-selected", false);
+
+  this.svg.selectAll("g.tick-group")
+    .filter(dd => d === dd)
+    .classed("tick-group-selected", true);
 };
 
 const highlight = function(d){
-  this.svg.selectAll("g.tick-group")
+  const goco_is_open = d3.select('.goco-diagram').selectAll("rect").data().length > 0;
+  this.svg.selectAll("g.tick-group:not(.tick-group-selected)")
     .filter(dd => d === dd)
     .selectAll("rect")
     .transition()
     .duration(10)
-    .style("fill-opacity", 0.2);
+    .style("fill-opacity", goco_is_open ? 1 : 0.2 ); 
 }
 
 const reset_highlight = function(d){
-  this.svg.selectAll("g.tick-group")
+  const goco_is_open = d3.select('.goco-diagram').selectAll("rect").data().length > 0;
+  this.svg.selectAll("g.tick-group:not(.tick-group-selected)")
     .filter(dd => d === dd)
     .selectAll("rect")
     .transition()
     .duration(10)
-    .style("fill-opacity", 1);
+    .style("fill-opacity", goco_is_open ? 0.2 : 1 ); 
 }
 
 
