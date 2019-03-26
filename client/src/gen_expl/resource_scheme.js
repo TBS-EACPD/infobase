@@ -238,7 +238,7 @@ function create_resource_hierarchy({hierarchy_scheme, doc}){
 
 const get_initial_resource_state = ({hierarchy_scheme, doc}) => ({
   hierarchy_scheme: hierarchy_scheme || "min",
-  doc: doc || 'dp18',
+  doc: doc || 'dp19',
   sort_col: 'spending',
   is_descending: true,
 });

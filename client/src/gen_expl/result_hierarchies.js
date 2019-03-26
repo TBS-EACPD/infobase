@@ -159,7 +159,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
             }, 
           }));
 
-        } else if ( (subject.is_first_wave && doc === 'drr17') || doc === 'dp18'){
+        } else if ( (subject.is_first_wave && doc === 'drr17') || /dp/.test(doc) ){
 
           return _.chain(subject.crsos)
             .filter('is_cr')

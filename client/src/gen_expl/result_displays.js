@@ -94,12 +94,12 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
 
 export const spending_header = createSelector(
   doc => doc, 
-  doc => <TM k={doc === 'dp18' ? "dp_spending" : "drr_spending"} />
+  doc => <TM k={ /dp/.test(doc) ? "dp_spending" : "drr_spending"} />
 );
 
 export const fte_header = createSelector(
   doc => doc,
-  doc => <TM k={doc === "dp18" ? "dp_ftes" : "drr_ftes"} />
+  doc => <TM k={/dp/.test(doc) ? "dp_ftes" : "drr_ftes"} />
 );
 
 

@@ -349,8 +349,13 @@ class SingleSubjExplorer extends React.Component {
               },
               {
                 key: "dp18", 
-                label: <TM k="DP_results_option_title" />,
+                label: <TM k="DP_results_option_title_last_year" />,
                 is_open: doc === "dp18",
+              },
+              {
+                key: "dp19", 
+                label: <TM k="DP_results_option_title" />,
+                is_open: doc === "dp19",
               },
             ]}
           />
@@ -466,7 +471,7 @@ _.each(['program','dept','crso'], lvl => {
         ResultCounts.get_dept_counts(subject.id) :
         GranularResultCounts.get_subject_counts(subject.id);
 
-      const has_dp_data = !_.isUndefined(subject_result_counts) && !_.isNull(subject_result_counts.dp18_indicators) && subject_result_counts.dp18_indicators > 0;
+      const has_dp_data = !_.isUndefined(subject_result_counts) && !_.isNull(subject_result_counts.dp19_indicators) && subject_result_counts.dp19_indicators > 0;
       const has_drr_data = !_.isUndefined(subject_result_counts) && !_.isNull(subject_result_counts.drr17_total) && subject_result_counts.drr17_total > 0;
 
       if(!has_dp_data && !has_drr_data){

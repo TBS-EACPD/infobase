@@ -124,7 +124,7 @@ function create_rooted_resource_hierarchy({doc,root_subject}){
 const get_initial_resource_state = ({subject, has_drr_data, has_dp_data }) => ({
   sort_col: 'spending',
   is_descending: true,
-  doc: has_drr_data ? 'drr17' : 'dp18',
+  doc: has_dp_data ? 'dp19' : 'drr17',
 });
 
 const partial_scheme = {

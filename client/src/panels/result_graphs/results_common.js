@@ -36,7 +36,7 @@ const get_rows_for_subject_from_table = _.memoize( (subject, type,doc) => {
     } else {
       return [ rows_or_record ];
     }
-  } else if( doc==="dp18" && _.includes(["dept", "crso"], subject.level)){
+  } else if( doc==="dp19" && _.includes(["dept", "crso"], subject.level)){
     return table.q(subject).data;
   } else if(!_.isEmpty(subject.programs)){
     return _.chain(subject.programs)

@@ -129,8 +129,13 @@ class RootedResourceExplorer extends React.Component {
             },
             has_dp_data && {
               key: "dp18", 
-              label: <TM k="DP_resources" />,
+              label: <TM k="DP_resources_last_year" />,
               is_open: doc === "dp18",
+            },
+            has_dp_data && {
+              key: "dp19", 
+              label: <TM k="DP_resources" />,
+              is_open: doc === "dp19",
             },
           ])}
         />

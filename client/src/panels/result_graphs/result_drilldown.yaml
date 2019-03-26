@@ -105,6 +105,10 @@ DP_results_option_title:
   transform: [handlebars]
   en: Planned Results for {{planning_year_1}}
   fr: Résultats planifiés pour {{planning_year_1}}
+DP_results_option_title_last_year:
+  transform: [handlebars]
+  en: Planned Results for {{planning_last_year_1}}
+  fr: Résultats planifiés pour {{planning_last_year_1}}
 
 DRR_results_option_title:
   transform: [handlebars]

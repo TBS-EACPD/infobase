@@ -77,7 +77,7 @@ class SubProgramEntity {
   resource_notes(doc){
     return _.chain(this)
       .pick(
-        doc === 'dp18' ? 
+        /dp/.test(doc) ? 
           [
             'dp_no_spending_expl',
             'dp_spend_trend_expl',

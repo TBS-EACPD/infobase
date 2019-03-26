@@ -12,10 +12,13 @@ function compute_counts_from_set({results, indicators}){
     drr17_total = drr17_past_total + drr17_future_total;
 
   return {
+    dp19_results: _.filter(results, { doc: 'dp19' }).length,
+    dp19_indicators: _.filter(indicators, { doc: 'dp19' }).length,
+
     dp18_results: _.filter(results, { doc: 'dp18' }).length,
     dp18_indicators: _.filter(indicators, { doc: 'dp18' }).length,
-    drr17_results: _.filter(results, { doc: 'drr17' }).length,
 
+    drr17_results: _.filter(results, { doc: 'drr17' }).length,
     drr17_indicators_met,
     drr17_indicators_not_met,
     drr17_indicators_not_available,
