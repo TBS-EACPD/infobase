@@ -141,8 +141,8 @@ export const ExplorerHeader = ({column_defs, is_sortable, sort_col, is_descendin
             className="ExplorerRow__Cell"
             style={
               ix === 0 ? 
-              {...computed_col_styles[id], textAlign: "center"}:
-              computed_col_styles[id]
+                {...computed_col_styles[id], textAlign: "center"} :
+                computed_col_styles[id]
             }
             onClick={()=>col_click(id)}
             tabIndex={0}
@@ -273,15 +273,15 @@ export const ExplorerNode = ({
                 key={id}
                 className="ExplorerRow__Cell"
                 style={
-                  ix===0 ? 
-                  { ...computed_col_styles[id], flex: `1 0 ${width-depth*INDENT_SIZE}px`} :
-                  computed_col_styles[id]
+                  ix === 0 ? 
+                    { ...computed_col_styles[id], flex: `1 0 ${width-depth*INDENT_SIZE}px`} :
+                    computed_col_styles[id]
                 }
               >
                 {
                   _.isFunction(val_display) ? 
-                  val_display(get_val(node)) :
-                  get_val(node)
+                    val_display(get_val(node)) :
+                    get_val(node)
                 }
               </div>
             )}
@@ -331,16 +331,17 @@ function get_mod_class(node, sibling_index, explorer_context){
   }
 
   return null;
-
 }
 
-const ExplorerRoot = ({root, explorer_context}) => <div>
-  {get_children_content({
-    node: root,
-    explorer_context,
-    depth: 0,
-  })}
-</div>
+const ExplorerRoot = ({root, explorer_context}) => (
+  <div>
+    {get_children_content({
+      node: root,
+      explorer_context,
+      depth: 0,
+    })}
+  </div>
+);
 
 
 // api
@@ -371,7 +372,7 @@ const compute_col_styles = createSelector(_.identity, col_defs => {
       let marginLeft = null;
       let padding = "0 5px 0 0";
       let flex = `0 1 ${width}px`;
-      if(ix===0){
+      if(ix === 0){
         flex = `1 1 ${width}px`;  
         if(col_defs.length > 5){
           flex = `1 1 ${width+300}px`;    
@@ -396,12 +397,9 @@ const compute_col_styles = createSelector(_.identity, col_defs => {
           width: "100%", //IE
         },
       ];
-
-
     })
     .fromPairs()
     .value();
-
 });
 
 export class Explorer extends React.Component {
@@ -422,7 +420,6 @@ export class Explorer extends React.Component {
     } else {
       width_setter_el.style.minWidth = null;
     }
-
   }
   render(){
 

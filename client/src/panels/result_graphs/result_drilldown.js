@@ -63,21 +63,25 @@ const get_non_col_content_func = createSelector(
         );
       }
 
-      return <div>
-        <dl className={classNames("dl-horizontal dl-no-bold-dts", window.lang === "en" ? "dl-long-terms" : "dl-really-long-terms")}>
-          <dt> <span className="nowrap">{spending_header(doc) }</span> </dt>
-          <dd> <Format type="compact1" content={resources ? resources.spending : 0} /> </dd>
-          <dt> <span className="nowrap">{fte_header(doc) }</span> </dt>
-          <dd> <Format type="big_int_real" content={resources ? resources.ftes : 0} /> </dd>
-        </dl>
-        {_.includes(['program','dept','cr'],type) && 
-          <div className="ExplorerNode__BRLinkContainer">
-            <a href={infograph_href_template(subject)}> 
-              <TM k="see_infographic" />    
-            </a>
-          </div>
-        }
-      </div>
+      return (
+        <div>
+          { doc !== "dp18" &&
+            <dl className={classNames("dl-horizontal dl-no-bold-dts", window.lang === "en" ? "dl-long-terms" : "dl-really-long-terms")}>
+              <dt> <span className="nowrap">{spending_header(doc) }</span> </dt>
+              <dd> <Format type="compact1" content={resources ? resources.spending : 0} /> </dd>
+              <dt> <span className="nowrap">{fte_header(doc) }</span> </dt>
+              <dd> <Format type="big_int_real" content={resources ? resources.ftes : 0} /> </dd>
+            </dl>
+          }
+          {_.includes(['program','dept','cr'],type) && 
+            <div className="ExplorerNode__BRLinkContainer">
+              <a href={infograph_href_template(subject)}> 
+                <TM k="see_infographic" />    
+              </a>
+            </div>
+          }
+        </div>
+      );
     }
   }
 )
@@ -276,11 +280,10 @@ class SingleSubjExplorer extends React.Component {
           { _.get(base_hierarchy, "length") > 30 && 
             <div style={{marginTop: '15px'}}>
               <form
-    
                 style={{marginBottom: "15px"}}
                 onSubmit={evt => {
-                  evt.preventDefault()
-                  evt.stopPropagation()
+                  evt.preventDefault();
+                  evt.stopPropagation();
                   set_query(evt.target.querySelector('input').value);
                   this.refs.focus_mount.focus();
                 }}
