@@ -377,6 +377,7 @@ Subject.CRSO = class CRSO extends can_have_results(){
   static create_and_register(def){
     const inst = new CRSO(def);
     this.register(inst.id, inst);
+    return inst;
   }
   constructor(attrs){
     super();

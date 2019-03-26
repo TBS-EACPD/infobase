@@ -194,7 +194,6 @@ const reducer = (state=initial_state, action) => {
 }
 
 function create_mapStateToProps(){
-
   const get_table = createSelector(_.property('table'), table => Table.lookup(table));
   
   const get_subject = createSelector(_.property('subject'), guid => Subject.get_by_guid(guid) );
@@ -323,8 +322,8 @@ function create_mapStateToProps(){
   const get_canGraph = createSelector(
     [get_table, get_subject, get_sorted_columns, _.property('preferDeptBreakout'), _.property('filter') ],
     (table, subject, columns, preferDeptBreakout, filter ) => {
-      if(columns.length > 1){ 
-        return false; 
+      if(columns.length > 1){
+        return false;
       } else {
         // the only case we can't graph a single column is when we're trying to 
         //  show a dept breakout with no filters on a non-linearly lined column 
@@ -506,6 +505,7 @@ function create_mapStateToProps(){
       def_ready_columns: !_.isEmpty(state.columns) && get_def_ready_cols(state),
       all_data_columns: !_.isEmpty(state.columns) && get_all_data_columns(state),
       flat_data: state.table && get_flat_data(state),
+
 
       //simple view props,
       deptBreakoutMode: get_deptBreakoutMode(state),

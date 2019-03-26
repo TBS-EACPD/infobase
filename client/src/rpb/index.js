@@ -140,7 +140,6 @@ class RPB extends React.Component {
     }).then( ()=> {
       this.props.on_switch_table(table_id);
       this.setState({ loading: false });
-
       setTimeout(()=> {
         slowScrollDown();
       })

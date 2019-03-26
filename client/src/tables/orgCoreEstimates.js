@@ -75,7 +75,7 @@ export default {
     });
     _.each(cr_estimates_years, (yr, ix) => { 
       this.add_col({
-        "simple_default": ix === 4, // TODO: I think this changes if the number of years changes???
+        "simple_default": ix === 0, // TODO: this probably changes if the number of years changes
         type: "big_int",
         nick: yr+"_estimates",
         description: {
