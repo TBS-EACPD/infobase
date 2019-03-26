@@ -7,8 +7,8 @@ import {
   StdPanel,
   Col,
   NivoResponsiveBar,
+  dollar_formats,
 } from "../shared";
-import { dollar_formats } from '../../core/format.js';
 
 
 const { Format } = util_components;
@@ -17,7 +17,7 @@ const {
   A11YTable,
 } = declarative_charts;
 
-const estimates_split_calculate = function(subject, info,options){
+const estimates_split_calculate = function(subject, info, options){
   const in_year_estimates_split = info[subject.level+"_in_year_estimates_split"];
   const last_year_estimates_split = info[subject.level+"_last_year_estimates_split"];
   if (_.isEmpty(in_year_estimates_split)){
@@ -67,32 +67,34 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
   
   } else {    
     const keys = in_year_bar_args.ticks
-    const estimate_data = in_year_bar_args.series[""].map((data, index) => ({
-      "label": keys[index],
-      [keys[index]]: data,
-    }))
+    const estimate_data = in_year_bar_args.series[""].map(
+      (data, index) => ({
+        "label": keys[index],
+        [keys[index]]: data,
+      })
+    );
 
     content = (
       <div style={{ height: "450px" }} >
         <NivoResponsiveBar
           data = {estimate_data}
-          keys = {_.union(keys,[''])}
-          label_format = { d=><tspan y={ -4 }> {dollar_formats.compact2_raw(d)} </tspan>}
+          keys = {_.union(keys, [''])}
+          label_format = { d => <tspan y={ -4 }> {dollar_formats.compact2_raw(d)} </tspan>}
           is_interactive = {false}
           enable_label = {true}
           index_by = "label"
           colors = "#335075"
           margin = {{            
-            "top": 50,
-            "right": 40,
-            "bottom": 120,
-            "left": 40,
+            top: 50,
+            right: 40,
+            bottom: 120,
+            left: 40,
           }}
           bttm_axis= {{
-            "format": d => `${(_.words(d).length>3)? d.substring(0,20)+'...':d}`,
-            "tickSize": 3,
-            "tickRotation": -45,
-            "tickPadding": 10,
+            format: d => (_.words(d).length > 3) ? d.substring(0,20)+'...' : d,
+            tickSize: 3,
+            tickRotation: -45,
+            tickPadding: 10,
           }}
           enableGridX = {false}
           remove_left_axis = {true}

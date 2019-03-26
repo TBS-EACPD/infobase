@@ -110,15 +110,18 @@ class SobjLine extends React.Component {
       .value();
 
     const years = _.map(std_years,run_template);
-    const spending_data = _.map(graph_series, 
-      (spending_array,spending_label)=>({
+    const spending_data = _.map(
+      graph_series,
+      (spending_array, spending_label) => ({
         id: spending_label,
         data: spending_array.map(
-          (spending_value,year_index)=>({
+          (spending_value, year_index) => ({
             x: years[year_index],
             y: spending_value,
-          })),
-      }))
+          })
+        ),
+      })
+    );
 
     return (
       <div className="frow">
@@ -126,8 +129,14 @@ class SobjLine extends React.Component {
           <div className="legend-container">
             <GraphLegend
               items={legend_items}
-              onClick={ id => !( spending_data.length === 1 && spending_data.map(o => {return o.id}).includes(id)) &&
-              this.setState({ active_sobjs: _.toggle_list(active_sobjs, id) })}
+              onClick={ 
+                id => {
+                  !(
+                    spending_data.length === 1 && 
+                    spending_data.map(o => o).includes(id) 
+                  ) && this.setState({ active_sobjs: _.toggle_list(active_sobjs, id) })
+                }
+              }
             />
           </div>
         </div>
@@ -135,12 +144,12 @@ class SobjLine extends React.Component {
           <NivoResponsiveLine
             data = {spending_data}
             margin = {{
-              "top": 10,
-              "right": 30,
-              "bottom": 90,
-              "left": 70,
+              top: 10,
+              right: 30,
+              bottom: 90,
+              left: 70,
             }}
-            colorBy={d=> {return colors(d.id)}}
+            colorBy={d => colors(d.id)}
           />
         </div>
       </div>

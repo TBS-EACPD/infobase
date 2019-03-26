@@ -26,6 +26,8 @@ const {
 
 const exp_years = std_years.map(year=> year+'exp');
 
+const text_years = _.map(std_years, run_template);
+
 new PanelGraph({
   level: "gov",
   key: "historical_g_and_c",
@@ -36,7 +38,7 @@ new PanelGraph({
   depends_on: ['orgTransferPayments'],
   calculate(subject){
     const {orgTransferPayments} = this.tables;
-    return orgTransferPayments.payment_type_ids(exp_years,false);
+    return orgTransferPayments.payment_type_ids(exp_years, false);
   },
   render({calculations, footnotes, sources}){
     const { 
@@ -132,12 +134,11 @@ class HistTPTypes extends React.Component {
     const filtered_series = _.chain(series)
       .pick(active_types)
       .mapKeys( (val,key) => tp_type_name(key) )
-        
       //HACKY: make sure the object's key are sorted 
       //sorting an object doesn't really exist, but it works and it's the
       // only way to get the Line chart to display in the right order...
       .toPairs()
-      .sortBy( ([_k, vals]) => _.sum(vals))
+      .sortBy( ([_k, vals]) => _.sum(vals) )
       .reverse()
       .fromPairs()
       .value();
@@ -172,30 +173,36 @@ class HistTPTypes extends React.Component {
 
 
       content = <A11YTable
-        data_col_headers={_.map(std_years, run_template)}
+        data_col_headers={text_years}
         data={a11y_data}
         label_col_header={text_maker("transfer_payment_type")}
       />;
     } else {
 
-      const years=_.map(std_years,run_template)
-      const expenditure_data = _.map(filtered_series, 
-        (expenditure_array,expenditure_label)=>({
+      const expenditure_data = _.map(
+        filtered_series, 
+        (expenditure_array, expenditure_label) => ({
           id: expenditure_label,
           data: expenditure_array.map(
-            (expenditure_value,year_index) =>({
-              x: years[year_index],
+            (expenditure_value, year_index) => ({
+              x: text_years[year_index],
               y: expenditure_value,
-            })),
-        }));
+            })
+          ),
+        })
+      );
 
       content = <Fragment>
         <div className="legend-container">
           <GraphLegend
             items={legend_items}
             isHorizontal
-            onClick={id=> !(!!filtered_series[tp_type_name(id)] && _.size(filtered_series)===1)
-              && this.setState({active_types: _.toggle_list(active_types, id) })}
+            onClick={ id => 
+              !(
+                !!filtered_series[tp_type_name(id)] && 
+                _.size(filtered_series) === 1
+              ) && this.setState({active_types: _.toggle_list(active_types, id) })
+            }
           />  
         </div>
 
@@ -264,16 +271,18 @@ class DetailedHistTPItems extends React.Component {
       active: _.includes(active_indices, ix),
     }));
 
-    const years = _.map(std_years, run_template);
-    const detail_expend_data = _.map(graph_series, 
-      (expend_array, expend_label)=>({
+    const detail_expend_data = _.map(
+      graph_series, 
+      (expend_array, expend_label) => ({
         id: expend_label,
         data: expend_array.map(
-          (expend_value, year_index)=>({
+          (expend_value, year_index) => ({
             y: expend_value,
-            x: years[year_index],
-          })),
-      }))
+            x: text_years[year_index],
+          })
+        ),
+      })
+    );
 
     const title_el = <header className="h3">
       <TM k="historical_g_and_c_detailed_title" />
@@ -297,7 +306,7 @@ class DetailedHistTPItems extends React.Component {
         <A11YTable 
           data={a11y_data}
           label_col_header={text_maker("transfer_payment")}
-          data_col_headers={_.map(std_years, run_template)}
+          data_col_headers={text_years}
         />
       </div>
     }

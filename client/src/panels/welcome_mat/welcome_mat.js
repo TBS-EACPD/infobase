@@ -16,7 +16,6 @@ import {
   NivoResponsiveBar,
   NivoResponsiveLine,
   formats,
-  dollar_formats,
 } from "../shared.js" 
 import { run_template } from "../../models/text";
 
@@ -26,8 +25,8 @@ const {std_years, planning_years} = years;
 const exp_cols = _.map(std_years, yr => `${yr}exp`);
 const { text_maker, TM } = create_text_maker_component(text);
 
-const SpendFormat = ({amt}) => <Format type="compact1" content={amt} />
-const FteFormat = ({amt}) => <Format type="big_int_real" content={amt} />
+const SpendFormat = ({amt}) => <Format type="compact1" content={amt} />;
+const FteFormat = ({amt}) => <Format type="big_int_real" content={amt} />;
 
 const get_estimates_source_link = subject => {
   const table = Table.lookup('orgVoteStatEstimates');
@@ -70,28 +69,32 @@ const get_historical_fte_source_link = subject => {
   }
 };
 
-const ticks =(has_planned, has_hist)=> _.chain(has_hist?std_years:null)
-  .union(has_planned?planning_years:null)
+const ticks = (has_planned, has_hist) => _.chain(has_hist ? std_years : null)
+  .union(has_planned ? planning_years : null)
   .map(run_template)
   .value();
 
-const welcome_data_line = (data, has_planned, has_hist,) =>([{
-  id: '0',
-  "data": data.map((value,year_index)=>({
-    x: ticks(has_planned,has_hist)[year_index],
-    y: value,
-  })),
-}])
+const welcome_data_line = (data, has_planned, has_hist) => (
+  [{
+    id: '0',
+    "data": data.map(
+      (value,year_index) => ({
+        x: ticks(has_planned,has_hist)[year_index],
+        y: value,
+      })
+    ),
+  }]
+);
 
-const welcome_data_bar = (data, has_planned, has_hist,) =>
-  data.map((value, year_index) => ({
-    "year": ticks(has_planned,has_hist)[year_index],
+const welcome_data_bar = (data, has_planned, has_hist) => data.map( 
+  (value, year_index) => ({
+    "year": ticks(has_planned, has_hist)[year_index],
     "0": value,
-  }))
+  })
+);
 
-const format_value = (value, is_money) => (
-  is_money?formats.compact2(value):formats.big_int_real(value)
-)
+const format_value = (value, is_money) => is_money ? formats.compact2(value) : formats.big_int_real(value);
+
 const Chart = ({
   data,
   is_money = false,
@@ -99,65 +102,70 @@ const Chart = ({
   is_light,
   has_hist,
   has_planned,
-}) => use_line?<div style ={{height: '230px'}}>
-  <NivoResponsiveLine
-    data = {welcome_data_line(data, has_planned, has_hist)}
-    max = {_.max(data)*1.05}
-    enableGridX = {false}
-    enableGridY = {false}
-    min = {_.min(data)*0.95}
-    is_money={is_money}
-    tick_amount={5}
-    remove_bottom_axis = {true}
-    margin={{
-      "top": 20,
-      "right": 30,
-      "bottom": 20,
-      "left": 80,
-    }}
-    tooltip={
-      slice => {
-        return (
-          <div>
-            {slice.data.map((e,i) => (
-              <div key={i} style={{margin: '0'}}> 
-                <div style={{backgroundColor: e.serie["color"], height: '12px', width: '12px', display: 'inline-block'}}></div>&nbsp;&nbsp;&nbsp; 
-                {slice.id}: <div style = {{display: 'inline-block'}} dangerouslySetInnerHTML = {{__html: format_value(e.data['y'], is_money)}}></div>
-              </div>
-            ))}
-          </div>
-        )
+}) => use_line ? (
+  <div style ={{height: '230px'}}>
+    <NivoResponsiveLine
+      data = {welcome_data_line(data, has_planned, has_hist)}
+      max = {_.max(data)*1.05}
+      enableGridX = {false}
+      enableGridY = {false}
+      min = {_.min(data)*0.95}
+      is_money={is_money}
+      tick_amount={5}
+      remove_bottom_axis = {true}
+      margin={{
+        "top": 20,
+        "right": 30,
+        "bottom": 20,
+        "left": 80,
+      }}
+      tooltip={
+        slice => {
+          return (
+            <div>
+              {slice.data.map((e,i) => (
+                <div key={i} style={{margin: '0'}}> 
+                  <div style={{backgroundColor: e.serie["color"], height: '12px', width: '12px', display: 'inline-block'}}></div>&nbsp;&nbsp;&nbsp; 
+                  {slice.id}: <div style = {{display: 'inline-block'}} dangerouslySetInnerHTML = {{__html: format_value(e.data['y'], is_money)}}></div>
+                </div>
+              ))}
+            </div>
+          )
+        }
       }
-    }
-  />
-</div> :
+    />
+  </div>
+) : (
 //keys have to have the empty key in the array 
 //or else it won't display the bar for negative values
 <div style = {{height: '230px'}}>
   <NivoResponsiveBar
     data = {welcome_data_bar(data, has_planned, has_hist)}
-    keys= {["","0"]}
+    keys = {["", "0"]}
     index_by = {"year"}
     margin={{
-      "top": 20,
-      "right": 30,
-      "bottom": 20,
-      "left": 80,
+      top: 20,
+      right: 30,
+      bottom: 20,
+      left: 80,
     }}
     enableGridX = {false}
     enableGridY = {false}
     remove_bottom_axis={true}
-    is_money ={is_money}
-    tooltip={d=> <div>
-      <div style={{margin: '0'}}>
-        <div style ={{backgroundColor: d.color, height: '12px', width: '12px', display: 'inline-block'}}></div>&nbsp;&nbsp;&nbsp;
-        {d.indexValue}: <div style = {{display: 'inline-block'}}dangerouslySetInnerHTML = {{__html: format_value(d.value, is_money)}}></div>
+    is_money = {is_money}
+    tooltip = { d => (
+      <div>
+        <div style={{margin: '0'}}>
+          <div style ={{backgroundColor: d.color, height: '12px', width: '12px', display: 'inline-block'}} />&nbsp;&nbsp;&nbsp;
+          {d.indexValue}: <div style = {{display: 'inline-block'}} dangerouslySetInnerHTML = {{__html: format_value(d.value, is_money)}}></div>
+        </div>
       </div>
-    </div>}
-    colors = {is_light?"#335075":"#000000"}
+    )}
+    colors = {is_light ? "#335075" : "#000000"}
     tick_value = {4}
   />
 </div>
+);
 
 const Pane = ({ size, children, is_header, noPadding }) => (
   <div className={`mat-grid__lg-panel${size} mat-grid__sm-panel`}>
@@ -173,7 +181,7 @@ const Pane = ({ size, children, is_header, noPadding }) => (
   </div>
 );
 
-const HeaderPane = props => <Pane is_header {...props} />
+const HeaderPane = props => <Pane is_header {...props} />;
 
 const PaneItem = ({ hide_a11y, children, textSize, hide_lg }) => (
   <div 
@@ -206,7 +214,7 @@ const WelcomeMatShell = ({ header_row, spend_row, fte_row, text_row }) => (
       </div>
     }
   </div>
-)
+);
 
 
 /*
@@ -353,8 +361,6 @@ const WelcomeMat = (props) => {
       />
     );
 
-
-  
   } else if(type==="planned"){
     //only planned data available (new DP orgs, all active CRs and programs)
     //has FTEs
@@ -376,8 +382,6 @@ const WelcomeMat = (props) => {
 
     const planned_spend_diff = spend_plan_3 && ( (spend_plan_3-spend_plan_1)/spend_plan_1);
     const planned_fte_diff = fte_plan_3 && ( (fte_plan_3-fte_plan_1)/fte_plan_1);
-
-
 
     return (
       <WelcomeMatShell
@@ -450,9 +454,7 @@ const WelcomeMat = (props) => {
           </Pane>,
         ]}
       />
-      
-    )
-
+    );
 
   } else if(type === "estimates"){
     //new, non-DP org, CR or program
@@ -460,7 +462,6 @@ const WelcomeMat = (props) => {
     const { 
       spend_plan_1,
     } = calcs;
-
 
     return (
       <WelcomeMatShell
@@ -502,7 +503,6 @@ const WelcomeMat = (props) => {
         ]}
       />
     );
-    
 
   } else if(type === "hist_estimates"){
     //active, non-DP org, CR or program
@@ -519,7 +519,6 @@ const WelcomeMat = (props) => {
     } = calcs;
 
     const hist_spend_diff = spend_last_year_5 && ( (spend_last_year-spend_last_year_5)/spend_last_year_5);
-
 
     return (
       <WelcomeMatShell
@@ -595,8 +594,7 @@ const WelcomeMat = (props) => {
       />
     );
 
-    
-
+  
   } else if(type==="hist_planned"){
     //an active DP org
     //has FTEs
@@ -781,11 +779,8 @@ const WelcomeMat = (props) => {
             </Pane>,
         ]}
       />
-      
-    )
-
+    );
   }
-
 };
 
 const MobileOrA11YContent = ({ children }) => [
@@ -821,7 +816,7 @@ function render({calculations, footnotes, sources}){
     sources_override = [
       get_planned_fte_source_link(subject),
       get_planned_spending_source_link(subject),
-    ]
+    ];
   }
 
   return (
@@ -836,7 +831,7 @@ function render({calculations, footnotes, sources}){
 }
 
 //assumes programSpending/12 are loaded
-function has_hist_data(subject,q6){
+function has_hist_data(subject, q6){
   return _.chain(exp_cols)
     .map(yr => q6.sum(yr) || 0)
     .some()
@@ -1026,7 +1021,7 @@ new PanelGraph({
         return {
           type: "hist_planned",
           calcs,
-        }
+        };
       } else {
         return {
           type: "hist",

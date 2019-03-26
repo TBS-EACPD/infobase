@@ -10,9 +10,13 @@ import {
 const render_w_options = ({text_key,graph_col,text_col}) => ({calculations, sources, footnotes}) => {
   const { info, graph_args } = calculations;
 
-  graph_args.map((data_set) =>{
-    data_set["id"] = data_set["label"]
-  })
+  const data = _.map(
+    graph_args,
+    (data_set) => ({
+      ...data_set,
+      id: data_set.label,
+    })
+  );
 
   return (
     <StdPanel
@@ -26,18 +30,18 @@ const render_w_options = ({text_key,graph_col,text_col}) => ({calculations, sour
         <Col isGraph size={graph_col}>
           <div style = {{height: '400px'}}>
             <NivoResponsivePie
-              data = {graph_args}
+              data = {data}
               colors = {infobaseCategory10Colors}
               legend = {[
                 {
-                  "anchor": "bottom",
-                  "direction": "row",
-                  "translateY": 60,
-                  "translateX": 40,
-                  "itemWidth": 150,
-                  "itemHeight": 25,
-                  "symbolSize": 20,
-                  "symbolShape": "circle",
+                  anchor: "bottom",
+                  direction: "row",
+                  translateY: 60,
+                  translateX: 40,
+                  itemWidth: 150,
+                  itemHeight: 25,
+                  symbolSize: 20,
+                  symbolShape: "circle",
                 },
               ]}
               theme = {{
