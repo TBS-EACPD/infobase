@@ -72,6 +72,9 @@ const schema = `
 
     dp18_results: Int
     dp18_indicators: Int
+
+    dp19_results: Int
+    dp19_indicators: Int
   }
 
   type ResultCount {
