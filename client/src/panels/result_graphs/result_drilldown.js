@@ -195,6 +195,7 @@ class SingleSubjExplorer extends React.Component {
     const {
       has_drr_data,
       has_dp_data,
+      has_dp_last_year_data,
 
       base_hierarchy, 
       flat_nodes,
@@ -334,30 +335,32 @@ class SingleSubjExplorer extends React.Component {
 
     const tab_on_click = (doc) => set_doc !== doc && set_doc(doc, subject);
 
-    if(!has_dp_data || !has_drr_data){ //don't wrap the inner content in a tab layout
+    if( _.compact([has_drr_data, has_dp_data, has_dp_last_year_data]).length === 1){ //don't wrap the inner content in a tab layout
       return inner_content;
     } else {
       return (
         <div className="tabbed-content">
           <TabbedControls
             tab_callback={ tab_on_click }
-            tab_options={[
-              {
-                key: "drr17", 
-                label: <TM k="DRR_results_option_title" />,
-                is_open: doc === "drr17",
-              },
-              {
-                key: "dp18", 
-                label: <TM k="DP_results_option_title_last_year" />,
-                is_open: doc === "dp18",
-              },
-              {
-                key: "dp19", 
-                label: <TM k="DP_results_option_title" />,
-                is_open: doc === "dp19",
-              },
-            ]}
+            tab_options={
+              _.compact([
+                has_drr_data && {
+                  key: "drr17", 
+                  label: <TM k="DRR_results_option_title" />,
+                  is_open: doc === "drr17",
+                },
+                has_dp_last_year_data && {
+                  key: "dp18", 
+                  label: <TM k="DP_results_option_title_last_year" />,
+                  is_open: doc === "dp18",
+                },
+                has_dp_data && {
+                  key: "dp19", 
+                  label: <TM k="DP_results_option_title" />,
+                  is_open: doc === "dp19",
+                },
+              ])
+            }
           />
           <div className="tabbed-content__pane">
             {inner_content}
@@ -410,6 +413,7 @@ class SingleSubjResultsContainer extends React.Component {
     const { 
       subject,
       has_dp_data,
+      has_dp_last_year_data,
       has_drr_data,
     } = this.props;
     const { loading } = this.state;
@@ -448,6 +452,7 @@ class SingleSubjResultsContainer extends React.Component {
           <Container 
             subject={subject}
             has_dp_data={has_dp_data}
+            has_dp_last_year_data={has_dp_last_year_data}
             has_drr_data={has_drr_data}
           />
         </Provider>
@@ -472,6 +477,7 @@ _.each(['program','dept','crso'], lvl => {
         GranularResultCounts.get_subject_counts(subject.id);
 
       const has_dp_data = !_.isUndefined(subject_result_counts) && !_.isNull(subject_result_counts.dp19_indicators) && subject_result_counts.dp19_indicators > 0;
+      const has_dp_last_year_data = !_.isUndefined(subject_result_counts) && !_.isNull(subject_result_counts.dp18_indicators) && subject_result_counts.dp18_indicators > 0;
       const has_drr_data = !_.isUndefined(subject_result_counts) && !_.isNull(subject_result_counts.drr17_total) && subject_result_counts.drr17_total > 0;
 
       if(!has_dp_data && !has_drr_data){
@@ -480,6 +486,7 @@ _.each(['program','dept','crso'], lvl => {
 
       return {
         has_dp_data,
+        has_dp_last_year_data,
         has_drr_data,
       };
     },
@@ -489,6 +496,7 @@ _.each(['program','dept','crso'], lvl => {
         subject, 
         graph_args: {
           has_dp_data,
+          has_dp_last_year_data,
           has_drr_data,
         },
       } = calculations;
@@ -499,6 +507,7 @@ _.each(['program','dept','crso'], lvl => {
             {...{
               subject,
               has_dp_data,
+              has_dp_last_year_data,
               has_drr_data,
             }}
           />

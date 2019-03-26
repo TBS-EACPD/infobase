@@ -267,7 +267,7 @@ class SubProgramResourceTree extends React.Component {
               },
               {
                 key: "dp18", 
-                label: <TM k="sub_program_DP_title_last_year" />,
+                label: <TM k="sub_program_DP_title_last_year_1" />,
                 is_open: doc === "dp18",
               },
               {
