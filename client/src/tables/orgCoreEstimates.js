@@ -2,11 +2,12 @@ import text from './orgCoreEstimates.yaml';
 import * as FORMAT from '../core/format';
 import {
   trivial_text_maker, 
-  major_vote_big_stat, 
   Statistics, 
+  Subject,
   years,
   businessConstants,
 } from './table_common';
+const { CRSO } = Subject;
 const { estimates_years } = years;
 const est_cols = _.map(estimates_years, yr => yr+"_estimates");
 const in_year_col = est_cols[4];
@@ -60,14 +61,13 @@ export default {
       "hidden": true,
       "nick": "crso_id",
     });
-    this.add_col({
+    this.add_col({ // TODO: why is this here?
       "type": "wide-str",
       "key": true,
-      "hidden": true,
-      "nick": "est_doc_code",
+      "nick": "cr_name",
       "header": {
-        "en": "Estimates",
-        "fr": "Budget des dépenses",
+        "en": "Core Responsibility",
+        "fr": "Responsabilité Essentielle",
       },
     });
     this.add_col({
@@ -81,7 +81,7 @@ export default {
     });
     _.each(estimates_years, (yr, ix) => { 
       this.add_col({
-        "simple_default": ix === 4,
+        "simple_default": ix === 4, // TODO: I think this changes if the number of years changes
         type: "big_int",
         nick: yr+"_estimates",
         description: {
@@ -94,26 +94,20 @@ export default {
   },
 
   "mapper": function (row) {	 
-    console.log(row)
     if (row[2] in map_helper) { 
       row[2] = map_helper[row[2]]; 
     }
-    console.log(row)
-    row.splice(4, 0, estimates_docs[row[2]][window.lang]);
-	
-    console.log(row)
-    if (this.lang === 'en') {
-      row.splice(2, 1);
-    } else {
-      row.splice(3, 1);
-    }
-    console.log(row)
-    debugger;
+    row.splice(2, 1, estimates_docs[row[2]][window.lang]);
+
+    const cr = CRSO.get_from_id(row[1]);
+    row.splice(2,0,cr.name);
     return row;
   },
 
   "queries": {
+    // TODO: check if this works properly
     "estimates_split": function(options,format){
+      debugger;
       format = format || false;
       const col = options.col || in_year_col;
       var filter = options.filter;
@@ -168,12 +162,11 @@ export default {
     },
   },
 
+  // TODO: fix this
   "sort": function (mapped_rows, lang) {
     var grps = _.groupBy(mapped_rows, function (row) { 
       return _.isNumber(row.votenum);
     });
-      // grps[true]  ==> voted rows
-      // grps[false] ==> stat rows
     if ( _.has(grps, false) ){
       grps[false] = _.sortBy(grps[false], function (row) { return row[0]; });
     } else {
@@ -211,34 +204,12 @@ Statistics.create_and_register({
     c.dept = subject;
     const table = tables.orgVoteStatEstimates;
     const q = table.q(subject);
-    const voted = trivial_text_maker("voted");
-    const stat = trivial_text_maker("stat");
-    add("voted_est_in_year",table.voted_stat(in_year_col,c.dept, true)[voted] || 0);
-    add("stat_est_in_year",table.voted_stat(in_year_col,c.dept, true)[stat] || 0);
     _.each(est_cols, yr => {
       add("tabled_"+yr, q.sum(yr));
     })
 
-    const voted_in_mains = d3.sum(
-      _.filter(q.data, row => _.isNumber(row.votenum) && row.est_doc_code === "MAINS"),
-      _.property(in_year_col)
-    );
-
-    add('tabled_voted_mains_est_in_year', voted_in_mains)
-
     add('in_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: in_year_col}) )
     add('last_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: last_year_col}) )
-  
-    add({
-      "key": "voted_percent_est_in_year" ,
-      "value": c.dept_voted_est_in_year/c.dept_tabled_est_in_year_estimates,
-      "type": "percentage1",
-    });
-    add({
-      "key": "stat_percent_est_in_year" ,
-      "value": c.dept_stat_est_in_year/c.dept_tabled_est_in_year_estimates,
-      "type": "percentage1",                                    
-    });
   },
 });
 
@@ -250,34 +221,13 @@ Statistics.create_and_register({
     c.dept = subject;
     const table = tables.orgVoteStatEstimates;
     const q = table.q(subject);
-    const voted = trivial_text_maker("voted");
-    const stat = trivial_text_maker("stat");
-    add("voted_est_in_year",table.voted_stat(in_year_col,c.dept, true)[voted] || 0);
-    add("stat_est_in_year",table.voted_stat(in_year_col,c.dept, true)[stat] || 0);
     _.each(est_cols, yr => {
       add("tabled_"+yr, q.sum(yr));
     })
 
-    const voted_in_mains = d3.sum(
-      _.filter(q.data, row => _.isNumber(row.votenum) && row.est_doc_code === "MAINS"),
-      _.property(in_year_col)
-    );
-
-    add('tabled_voted_mains_est_in_year', voted_in_mains)
-
     add('in_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: in_year_col}) )
     add('last_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: last_year_col}) )
   
-    add({
-      "key": "voted_percent_est_in_year" ,
-      "value": c.dept_voted_est_in_year/c.dept_tabled_est_in_year_estimates,
-      "type": "percentage1",
-    });
-    add({
-      "key": "stat_percent_est_in_year" ,
-      "value": c.dept_stat_est_in_year/c.dept_tabled_est_in_year_estimates,
-      "type": "percentage1",                                    
-    });
   },
 });
 
@@ -288,8 +238,6 @@ Statistics.create_and_register({
   compute: (subject, tables, infos, add, c) => {
     const table = tables.orgVoteStatEstimates;
     const q = table.q(subject);
-    const voted = trivial_text_maker("voted");
-    const stat = trivial_text_maker("stat");
     const dept_number = _.chain(table.depts)
       .keys()
       .filter(function(key){
@@ -297,38 +245,9 @@ Statistics.create_and_register({
       })
       .value()
       .length;
-    const _voted_num_in_year = _.chain(table.voted_stat("est_in_year_estimates", false,false)[voted]) 
-      .filter(function(row){
-        return row.est_in_year_estimates !== 0;
-      })
-      .groupBy(function(row){
-        return row.dept +row.votenum;
-      });
-    const voted_num_in_year = _voted_num_in_year
-      .keys()
-      .value()
-      .length;
-    const voted_central_num_in_year = _voted_num_in_year
-      .filter(function(lines, key){
-        return lines[0].votestattype === 6;
-      })
-      .value()
-      .length;
 
-    const voted_in_mains = d3.sum(
-      _.filter(table.data, row => _.isNumber(row.votenum) && row.est_doc_code === "MAINS"),
-      _.property(in_year_col)
-    );
-    add('tabled_voted_mains_est_in_year', voted_in_mains);
 
     add("dept_number", dept_number);
-    add("voted_num_est_in_year",voted_num_in_year);
-
-    add("voted_central_num_est_in_year",voted_central_num_in_year);
-    add("voted_non_centralnum_est_in_year",voted_num_in_year - voted_central_num_in_year);
-
-    add("voted_est_in_year",table.voted_stat(in_year_col,false)[voted] || 0);
-    add("stat_est_in_year",table.voted_stat(in_year_col,false)[stat] || 0);
 
     add('in_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: in_year_col}) )
     add('last_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: last_year_col}) )

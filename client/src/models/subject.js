@@ -371,10 +371,12 @@ Subject.CRSO = class CRSO extends can_have_results(){
   static get singular(){ return trivial_text_maker("");}
   static get plural(){ return trivial_text_maker(""); }
   static get type_name() { return 'crso'; }
+  static get_from_id(crso_id){
+    return this.lookup(crso_id);
+  }
   static create_and_register(def){
     const inst = new CRSO(def);
     this.register(inst.id, inst);
-    return inst;
   }
   constructor(attrs){
     super();

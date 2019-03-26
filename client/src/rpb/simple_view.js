@@ -49,7 +49,6 @@ class SimpleView extends React.Component {
       on_toggle_preferTable,
       on_toggle_deptBreakout,
     } = this.props;
-
     return (
       <div> 
         <LabeledBox
@@ -60,7 +59,7 @@ class SimpleView extends React.Component {
                 <div className="rpb-config-item col-selection simple">
                   <label className="rpb-config-header" > <TextMaker text_key="select_columns" /> </label>
                   <SelectList 
-                    items={ _.map(all_data_columns, obj => ({id: obj.nick, display: obj.fully_qualified_name }) ) }
+                    items={_.map(all_data_columns, obj => ({id: obj.nick, display: obj.fully_qualified_name }) ) }
                     selected={ _.map(columns,'nick') }
                     is_multi_select={true}
                     onSelect={id=> on_toggle_col_nick(id) }
@@ -211,7 +210,6 @@ class SimpleView extends React.Component {
       { nick: deptBreakoutMode ? 'dept' : dimension, display: text_maker(deptBreakoutMode ? 'org' : dimension) },
       ...columns.map( col => ({ nick: col.nick, display: col.fully_qualified_name }) ),
     ];
-
     return (
       <table 
         className="medium_panel_text border infobase-table table-rpb table-rpb-simple table-condensed table-dark-blue"
