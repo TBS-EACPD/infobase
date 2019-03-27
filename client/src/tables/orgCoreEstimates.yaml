@@ -1,16 +1,46 @@
-orgCoreEstimates_short:
-  transform: [handlebars,embeded-markdown,markdown]
-  en: |
-    This is a test
 
+orgCoreEstimates_short:
+  transform: [handlebars,embeded-markdown, markdown]
+  en: |
+   This table presents net budgetary {{gl_tt "authorities" "AUTH"}} by {{gl_tt "Estimates documents" "EST_DOC"}} and by {{gl_tt "Core Responsibility" "CR"}}.
+  
   fr: |
-    This is a test
+   Ce tableau présente les {{gl_tt "autorisations" "AUTH"}} par {{gl_tt "documents budgétaires" "EST_DOC"}} et par {{gl_tt "responsabilité essentielle" "CR"}}.
+
 
 orgCoreEstimates:
-  transform: [handlebars,embeded-markdown,markdown]
+  transform: [handlebars,embeded-markdown, markdown]
   en: |
-    This is a test
+   {{{gt "orgCoreEstimates_short"}}}
+
+
+   Expenditures made by the government require the authority of Parliament. This authority is provided in two ways:
+   * Annual appropriation acts for voted amounts; and
+   * Other specific legislative authorities for statutory payments.
+   Estimates documents are prepared to support appropriation acts.
+
+
+   **Notes**:
+   * Further details on the composition of Main Estimates may be found in Part I of the Estimates process ({{gl_tt "Government Expenditure Plan" "PART1"}}).
+   * The tabling of an estimate does not guarantee its approval by Parliament. Only after an appropriation act is introduced to Parliament, approved and granted royal assent, does it become law.
+
+
 
   fr: |
-    This is a test
+   {{{gt "orgCoreEstimates_short"}}}
+
+
+   Les dépenses effectuées par le gouvernement doivent être autorisées par le Parlement. Cette {{gl_tt "approbation" "AUTH"}} est donnée de deux façons :
+   * {{gl_tt "lois annuelles de crédits" "APP_ACT"}} pour les montants {{gl_tt "votés" "VOTED"}}; 
+   * autres autorisations particulières prévues par la loi pour les paiements {{gl_tt "législatifs" "STAT"}}. 
+   Les documents budgétaires sont préparés pour appuyer les lois de crédits.
+
+
+   **Remarques:**
+   * De plus amples détails sur la composition du Budget principal des dépenses se trouvent dans la partie I du processus budgétaire 
+   {{gl_tt "(Plan de dépenses du gouvernement)" "PART1"}}. 
+   * Le dépôt d'un budget des dépenses ne signifie pas qu'il est approuvé par le Parlement. Une loi de crédits n’entre en vigueur qu’après avoir été présentée 
+   et dûment adoptée par le Parlement, et reçue la sanction royale. 
+
+
 
