@@ -211,7 +211,7 @@ query($lang: String!) {
 }
 `;
 export function api_load_results_bundle(subject, result_docs){
-  const docs_to_load = !_.isEmpty(result_docs) ? result_docs : _.keys(result_doc_keys);
+  const docs_to_load = !_.isEmpty(result_docs) ? result_docs : result_doc_keys;
 
   const level = subject && subject.level || 'all';
 
