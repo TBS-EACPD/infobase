@@ -115,6 +115,7 @@ function populate_igoc_models({
       fancy_acronym,
       legal_name,
       applied_title,
+      old_applied_title,
       status,
       _legislation,
       mandate,
@@ -157,6 +158,7 @@ function populate_igoc_models({
       fancy_acronym,
       legal_name,
       applied_title,
+      old_applied_title,
       status: statuses[status],
       _legislation, //no longer array based
       raw_mandate: mandate,
@@ -283,7 +285,7 @@ function populate_socr_tags(rows){
 function populate_programs(rows){
   //TODO what do we use is_crown for ? 
   /* eslint-disable no-unused-vars */
-  const [ dept_code, crso_id, activity_code, name, desc, is_crown, is_active, is_internal_service, is_fake] = [0,1,2,3,4,5,6,7,8];
+  const [ dept_code, crso_id, activity_code, name, old_name, desc, is_crown, is_active, is_internal_service, is_fake_program] = [0,1,2,3,4,5,6,7,8,9,10];
   _.each(rows,row => {
     const crso = CRSO.lookup(row[crso_id]);
     const instance = Program.create_and_register({
@@ -293,6 +295,7 @@ function populate_programs(rows){
       data: {},
       description: _.trim(row[desc].replace(/^<p>/i,"").replace(/<\/p>$/i,"")),
       name: row[name],
+      old_name: row[old_name],
       is_active: !!(+row[is_active]),
       is_internal_service: row[is_internal_service] === "1",
       is_fake: row[is_fake] === "1",

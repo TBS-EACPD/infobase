@@ -32,6 +32,7 @@ export default function define_core_subjects(model_singleton){
     ...bilingual("name", { ...str_type, required: true }),
     ...bilingual("legal_title", { ...str_type, required: true }),
     ...bilingual("applied_title", str_type),
+    ...bilingual("old_applied_title", str_type),
     ...bilingual("acronym", str_type),
     ...bilingual("description", str_type),
     ...bilingual("notes", str_type),
@@ -57,7 +58,8 @@ export default function define_core_subjects(model_singleton){
     is_internal_service: { type: Boolean },
     is_crown: { type: Boolean },
     is_active: { type: Boolean },
-    ...bilingual("name", str_type),
+    ...bilingual("name", { ...str_type, required: true }),
+    ...bilingual("old_name", str_type),
     ...bilingual("description", str_type),
   });
   

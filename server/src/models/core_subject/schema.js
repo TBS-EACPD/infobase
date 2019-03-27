@@ -32,6 +32,7 @@ const schema = `
     name: String
     legal_title: String
     applied_title: String
+    old_applied_title: String
     acronym: String
     mandate: String
     description: String
@@ -65,6 +66,7 @@ const schema = `
     id: String
     level: String
     name: String
+    old_name: String
     is_internal_service: Boolean
     description: String
     activity_code: String
