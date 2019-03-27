@@ -80,9 +80,9 @@ result_counts_dp_dept:
 result_counts_dp_prog:
   transform: [handlebars,markdown]
   en: |
-    **{{subj_name subject}}** is seeking to achieve **{{fmt_big_int_real num_results}}** {{plural_branch num_results "result" "results"}} in {{planning_year_1}}. Progress towards meeting these results will be {{gl_tt "measured" "RESULTS_STATUS"}} using **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicators" "IND_RESULT"}}.
+    **{{subj_name subject}}** is seeking to achieve **{{fmt_big_int_real num_results}}** {{plural_branch num_results "result" "results"}} in {{doc_year}}. Progress towards meeting these results will be {{gl_tt "measured" "RESULTS_STATUS"}} using **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicators" "IND_RESULT"}}.
   fr: |
-    **{{subj_name subject}}** cherche à rencontrer **{{fmt_big_int_real num_results}}** {{plural_branch num_results "résultat" "résultats"}} en {{planning_year_1}}. Les progrès accomplis dans l’atteinte de ces résultats seront {{gl_tt "mesurés" "RESULTS_STATUS"}} à l’aide de **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicateurs" "IND_RESULT"}}.
+    **{{subj_name subject}}** cherche à rencontrer **{{fmt_big_int_real num_results}}** {{plural_branch num_results "résultat" "résultats"}} en {{doc_year}}. Les progrès accomplis dans l’atteinte de ces résultats seront {{gl_tt "mesurés" "RESULTS_STATUS"}} à l’aide de **{{fmt_big_int_real num_indicators}}** {{gl_tt "indicateurs" "IND_RESULT"}}.
 
 result_counts_dp_cr:
   transform: [handlebars,markdown]
