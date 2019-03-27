@@ -345,6 +345,7 @@ new PanelGraph({
   key: "sub_program_resources",
   level: 'program',
   requires_results: true,
+  required_result_docs: ['drr17','dp19'],
   requires_result_counts: true,
   footnotes: false,
   depends_on: ['programFtes'],
