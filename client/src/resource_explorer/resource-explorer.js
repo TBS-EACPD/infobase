@@ -452,7 +452,7 @@ export default class ResourceExplorer extends React.Component {
     doc = (
       _.includes(['drr17','dp19'], doc) ? 
         doc :
-        'drr17'
+        'dp19'
     );
 
     //additional validation
