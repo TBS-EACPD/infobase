@@ -8,8 +8,10 @@ import {
   PI_DR_Links, 
   ResultCounts,
   GranularResultCounts,
+  result_docs,
 } from './results.js';
 
+const result_doc_keys = _.keys(result_docs);
 
 const has_results_query = (level, id_key) => gql`
 query($lang: String!, $id: String) {
@@ -209,7 +211,7 @@ query($lang: String!) {
 }
 `;
 export function api_load_results_bundle(subject, result_docs){
-  const docs_to_load = !_.isEmpty(result_docs) ? result_docs : ["drr17", "dp18", "dp19"];
+  const docs_to_load = !_.isEmpty(result_docs) ? result_docs : _.keys(result_doc_keys);
 
   const level = subject && subject.level || 'all';
 
@@ -452,17 +454,24 @@ query($lang: String!) {
       all_target_counts_${level} {
         subject_id
         level
-        drr17_results
-        drr17_indicators_met
-        drr17_indicators_not_available
-        drr17_indicators_not_met
-        drr17_indicators_future
-
-        dp18_results
-        dp18_indicators
-        
-        dp19_results
-        dp19_indicators
+${ // Weird indentation ahead, so that the template output has the right spacing
+  _.chain(result_doc_keys)
+    .map(
+      (doc_key) => /drr/.test(doc_key) ?
+        `
+        ${doc_key}_results
+        ${doc_key}_indicators_met
+        ${doc_key}_indicators_not_available
+        ${doc_key}_indicators_not_met
+        ${doc_key}_indicators_future` :
+        `
+        ${doc_key}_results
+        ${doc_key}_indicators`
+    )
+    .reduce( (memo, fragment) => `${memo}
+${fragment}`)
+    .value()
+}
       }
     }
   }

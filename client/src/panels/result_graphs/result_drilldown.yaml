@@ -12,7 +12,7 @@ result_drilldown_title:
     {{/if}}
 
   fr: |
-    {{#if has_drr_data}}
+    {{#if last_year}}
       {{gt "result_drilldown_title_part"}} ({{first_year}} et {{last_year}})
     {{else}}
       {{gt "result_drilldown_title_part"}} ({{first_year}})

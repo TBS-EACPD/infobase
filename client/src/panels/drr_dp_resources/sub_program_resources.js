@@ -21,7 +21,6 @@ import {
   TabbedControls,
 } from "../shared";
 
-
 import {
   get_root,
   filter_hierarchy,
@@ -64,7 +63,7 @@ const sub_to_node = (sub,doc) => ({
     description: sub.description,
     notes: sub.resource_notes(doc),
     subject: sub,
-    resource_table_props: doc==="drr17" && {
+    resource_table_props: doc === "drr17" && {
       actual_spend: sub.spend_pa_last_year,
       planned_spend: sub.planned_spend_pa_last_year,
       diff_spend: sub.spend_pa_last_year - sub.planned_spend_pa_last_year,
@@ -177,7 +176,7 @@ const sub_program_resource_scheme = {
       const mods = clicked_col === sort_col ? { is_descending: !is_descending } : { is_descending: true, sort_col: clicked_col };
 
       return {...state, ...mods};
-    } else if(type==="set_doc"){
+    } else if(type === "set_doc"){
       return {...state, doc: payload };
     } else {
       return state;
@@ -250,7 +249,7 @@ class SubProgramResourceTree extends React.Component {
       </div>
     </div>;
     
-    const tab_on_click = (doc) => set_doc!==doc && set_doc(doc);
+    const tab_on_click = (doc) => set_doc !== doc && set_doc(doc);
 
     if(!has_dp_data || !has_drr_data){ //don't wrap the inner content in a tab layout
       return inner_content;
@@ -290,7 +289,7 @@ const map_state_to_props_from_memoized_funcs = memoized_funcs => {
     ...mapRootStateToRootProps(state),
     ...get_scheme_props(state),
   });
-}
+};
 
 const SubProgramResourceTreeContainer = ({
   subject, 
@@ -339,7 +338,6 @@ const SubProgramResourceTreeContainer = ({
       />
     </Provider>
   );
-
 };
 
 
@@ -424,12 +422,12 @@ new PanelGraph({
           get_text={doc => 
             <TM
               k={
-                doc === 'drr17' ? 
-                "sub_program_resources_drr_text" : 
-                "sub_program_resources_dp_text" 
+                /drr/.test(doc) ? 
+                  "sub_program_resources_drr_text" : 
+                  "sub_program_resources_dp_text" 
               }
               args={
-                doc === 'drr17' ?
+                /drr/.test(doc) ?
                 {
                   subject,
                   num_subs: drr_subs.length,
