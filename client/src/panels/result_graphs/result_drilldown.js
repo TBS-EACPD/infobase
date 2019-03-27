@@ -8,6 +8,7 @@ import {
   infograph_href_template, 
   Panel,
   TabbedControls,
+  DlItem,
 } from '../shared';
 import { Details } from '../../components/Details.js';
 import { 
@@ -64,14 +65,35 @@ const get_non_col_content_func = createSelector(
         );
       }
 
+      const detail_items = _.compact([
+        result_docs[doc].has_resources && (
+          <DlItem
+            key={1}
+            term={<span className="nowrap">{spending_header(doc) }</span>}
+            def={<Format type="compact1" content={resources ? resources.spending : 0} />}
+          />
+        ),
+        result_docs[doc].has_resources && (
+          <DlItem
+            key={2}
+            term={<span className="nowrap">{fte_header(doc) }</span>}
+            def={<Format type="big_int_real" content={resources ? resources.ftes : 0} />}
+          />
+        ),
+        _.nonEmpty(subject.old_name) && (
+          <DlItem
+            key={3}
+            term={<TM k="previously_named" />}
+            def={subject.old_name}
+          />
+        ),
+      ]);
+
       return (
         <div>
-          { result_docs[doc].has_resources &&
+          { detail_items.length &&
             <dl className={classNames("dl-horizontal dl-no-bold-dts", window.lang === "en" ? "dl-long-terms" : "dl-really-long-terms")}>
-              <dt> <span className="nowrap">{spending_header(doc) }</span> </dt>
-              <dd> <Format type="compact1" content={resources ? resources.spending : 0} /> </dd>
-              <dt> <span className="nowrap">{fte_header(doc) }</span> </dt>
-              <dd> <Format type="big_int_real" content={resources ? resources.ftes : 0} /> </dd>
+              { detail_items }
             </dl>
           }
           {_.includes(['program','dept','cr'],type) && 

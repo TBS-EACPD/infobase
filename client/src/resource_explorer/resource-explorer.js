@@ -80,12 +80,20 @@ function render_non_col_content({node}){
       defs,
     },
   } = node;
+  
+  const extended_defs = _.compact([
+    ...(defs || []),
+    subject.old_name && {
+      term: text_maker("previously_named"),
+      def: subject.old_name,
+    },
+  ]);
 
   return (
     <div>
-      { !_.isEmpty(defs) && 
+      { !_.isEmpty(extended_defs) && 
         <dl className="dl-horizontal">
-          {_.map(defs, ({ term, def },ix) => !_.isEmpty(def) &&
+          {_.map(extended_defs, ({ term, def }, ix) => !_.isEmpty(def) &&
             <Fragment key={ix}> 
               <dt> { term } </dt>
               <dd> { def } </dd>
@@ -101,9 +109,8 @@ function render_non_col_content({node}){
         </div>
       }
     </div>
-  )
+  );
 }
-
 
 
 class ExplorerPage extends React.Component {
@@ -161,7 +168,7 @@ class ExplorerPage extends React.Component {
       get_non_col_content: render_non_col_content,
       children_grouper,
       col_click,
-    } 
+    } ;
 
     const { loading } = this.state;
 

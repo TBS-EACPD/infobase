@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { Fragment } from 'react';
 import { run_template, trivial_text_maker, create_text_maker } from './models/text.js';
 import { formats } from './core/format.js';
 
@@ -88,6 +89,13 @@ const create_text_maker_component = (text) => {
   return {text_maker, TM: (props) => <TM tmf={text_maker} {...props}/>};
 };
 
+const DlItem = ({ term, def }) => (
+  <Fragment>
+    <dt> {term} </dt>
+    <dd> {def} </dd>
+  </Fragment>
+);
+
 export {
   FirstChild,
   AccordionEnterExit,
@@ -130,4 +138,5 @@ export {
   LabeledTombstone,
   TextAbbrev,
   create_text_maker_component,
+  DlItem,
 };

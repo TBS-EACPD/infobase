@@ -16,7 +16,7 @@ const title_keys = {
 _.each(['crso','program'], level => {
   new PanelGraph({
     level,
-    key: "previously_known_as",
+    key: "previously_named",
     footnotes: false,
     calculate: subject => _.nonEmpty(subject.old_name),
 
@@ -25,7 +25,7 @@ _.each(['crso','program'], level => {
       const {subject} = calculations;
 
       return (
-        <TextPanel title={text_maker("previously_known_as")}>
+        <TextPanel title={text_maker("previously_named")}>
           <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(subject.old_name)} />
         </TextPanel>
       );

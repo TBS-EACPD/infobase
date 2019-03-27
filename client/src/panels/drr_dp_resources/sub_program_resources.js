@@ -143,7 +143,6 @@ const get_non_col_renderer = ({doc}) => ({node}) => {
           </ul>
         </div>
       }
-      
     </div>
   );
 }

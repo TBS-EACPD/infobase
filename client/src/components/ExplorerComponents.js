@@ -265,10 +265,10 @@ export const ExplorerNode = ({
       <div className="ExplorerNode__ContentContainer">
         <div
           className={classNames("ExplorerNode__RowContainer", noExpand && "ExplorerNode__RowContainer--no-click")}
-          onClick={noExpand ? null : ()=>onClickExpand(node)}
+          onClick={noExpand ? null : () => onClickExpand(node)}
         >
           <div className="ExplorerRow">
-            {_.map(column_defs, ({id, width, get_val, val_display },ix) =>
+            {_.map(column_defs, ({id, width, get_val, val_display }, ix) =>
               <div 
                 key={id}
                 className="ExplorerRow__Cell"

@@ -5,20 +5,12 @@ import classNames from 'classnames';
 import { infograph_href_template } from '../link_utils.js';
 import { get_root } from '../gen_expl/hierarchy_tools.js';
 import { igoc_tmf as text_maker, TM } from './igoc_explorer_text.js';
-import { SpinnerWrapper } from '../util_components.js';
+import { SpinnerWrapper, DlItem } from '../util_components.js';
 import { sanitized_dangerous_inner_html } from '../general_utils.js';
 import { Explorer } from '../components/ExplorerComponents.js';
 import { Subject } from '../models/subject.js';
 
 const { InstForm } = Subject;
-
-const DlItem = ({ term, def }) =>
-  <Fragment>
-    <dt> {term} </dt>
-    <dd> {def} </dd>
-  </Fragment>
-;
-
 
 function get_org_count(node){
   if( _.get(node, "data.type") === "org"){
@@ -33,51 +25,54 @@ function get_org_count(node){
   }
 }
 
-const SubjectFields = ({ subject, grouping }) => <div style={{marginTop: "2em"}}>
-  <dl className="dl-horizontal">
-    { 
-      _.nonEmpty(subject.applied_title) && 
-      subject.applied_title !== subject.legal_name &&
-      <DlItem
-        term={<TM k="applied_title" />}
-        def={subject.applied_title}
-      />
-    }
-    { subject.is_dead && 
-      <Fragment>
+const SubjectFields = ({ subject, grouping }) => (
+  <div style={{marginTop: "2em"}}>
+    <dl className="dl-horizontal dl-no-bold-dts dl-really-long-terms">
+      { _.nonEmpty(subject.applied_title) && subject.applied_title !== subject.legal_name &&
         <DlItem
-          term={<TM k="status" />}
-          def={subject.status}
+          term={<TM k="applied_title" />}
+          def={subject.applied_title}
         />
+      }
+      { _.nonEmpty(subject.old_name) && 
         <DlItem
-          term={<TM k="end_yr" />}
-          def={subject.end_yr}
+          term={<TM k="previous_known_as" />}
+          def={subject.old_name}
         />
-      </Fragment>}
-    {
-      _.nonEmpty(subject.ministers) && 
-      <DlItem
-        term={<TM k="padded_minister_span"/>}
-        def={ _.map(subject.ministers,'name').join(", ") }
-      />
-    }
-    {
-      _.nonEmpty(subject.mandate) && 
-      <DlItem
-        term={<TM k="mandate" />}
-        def={ <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(subject.mandate)} /> }
-      />
-    }
-    {
-      _.nonEmpty(subject.notes) && 
-      <DlItem
-        term={<TM k ="notes"/>}
-        def={subject.notes}
-      />
-    }
-
-  </dl>
-</div>;
+      }
+      { subject.is_dead && 
+        <Fragment>
+          <DlItem
+            term={<TM k="status" />}
+            def={subject.status}
+          />
+          <DlItem
+            term={<TM k="end_yr" />}
+            def={subject.end_yr}
+          />
+        </Fragment>
+      }
+      { _.nonEmpty(subject.ministers) && 
+        <DlItem
+          term={<TM k="padded_minister_span"/>}
+          def={ _.map(subject.ministers,'name').join(", ") }
+        />
+      }
+      { _.nonEmpty(subject.mandate) && 
+        <DlItem
+          term={<TM k="mandate" />}
+          def={ <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(subject.mandate)} /> }
+        />
+      }
+      { _.nonEmpty(subject.notes) && 
+        <DlItem
+          term={<TM k ="notes"/>}
+          def={subject.notes}
+        />
+      }
+    </dl>
+  </div>
+);
 
 
 const inst_form_sort_order = [

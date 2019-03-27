@@ -45,7 +45,7 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
         text_key = "result_counts_drr_dept_no_subs";
       }
     } else {
-      text_key = "result_counts_dp_dept"
+      text_key = "result_counts_dp_dept";
     }
 
   } else if(subject.level === 'program'){

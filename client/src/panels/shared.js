@@ -35,6 +35,7 @@ const {
   TabbedContent,
   TM, 
   create_text_maker_component,
+  DlItem,
 } = util_components;
 
 export const PplSharePie = ({graph_args, label_col_header, sort_func}) => {
@@ -426,7 +427,6 @@ export const CommonDonut = function({data, height}){
       }
     </div>
   );
-
 };
 
 export const PlannedActualTable = ({
@@ -522,4 +522,5 @@ export {
   TabbedContent,
   TM,
   create_text_maker_component,
+  DlItem,
 };

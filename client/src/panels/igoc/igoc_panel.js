@@ -29,7 +29,7 @@ new PanelGraph({
         ["end_yr", subject.end_yr],
         ["notes", subject.notes],
         ["applied_title", subject.applied_title],
-        ["previous_applied_title", subject.old_applied_title],
+        ["previous_applied_title", subject.old_name],
         ["incorp_yr", subject.incorp_yr],
         ["type", subject.type],
         ["website", !subject.is_dead && subject.website_url && <ExternalLink href={`https://${subject.website_url}`} display={subject.website_url} />],

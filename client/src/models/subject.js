@@ -159,6 +159,9 @@ Subject.Dept = class Dept extends can_have_results(){
   get fancy_name(){
     return this.applied_title || this.name;
   }
+  get old_name(){
+    return this.old_applied_title;
+  }
   get tables(){
     return this.table_ids; 
   }

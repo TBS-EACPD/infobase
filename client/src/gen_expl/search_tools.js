@@ -16,16 +16,17 @@ function node_to_match_tokens(node){
   if(_.includes(["result", "dr"], type)){
     return _.chain(node.children)
       .map('data.indicator')
-      .map( indicator => [ indicator.name, indicator.explanation, indicator.narrative, indicator.measure ])
+      .map( indicator => [ indicator.name, indicator.explanation, indicator.narrative, indicator.measure ] )
       .flatten()
       .compact()
-      .concat([ name ])
-      .value()
+      .concat([name])
+      .value();
   } else if(subject){
 
     return _.chain(subject)
       .pick([
         'name',
+        'old_name',
         'legal_name',
         'applied_title',
         'acronym',
@@ -47,7 +48,7 @@ function node_to_match_tokens(node){
       .values()
       .concat( 
         _.chain(table.tags)
-          .map(id => GlossaryEntry.lookup(id))
+          .map( id => GlossaryEntry.lookup(id) )
           .compact()
           .map('title')
           .value()
@@ -66,9 +67,7 @@ function node_to_match_tokens(node){
       .concat( _.chain(node).pick(['name','description']).values().value() )
       .compact()
       .value();
-
   }
-
 }
 
 function substr_search_generator(flat_nodes){
@@ -92,9 +91,7 @@ function substr_search_generator(flat_nodes){
       .value();
 
     return node => matches_by_id[node.id];
-
   };
-
 }
 
 export {
