@@ -27,7 +27,7 @@ _.each(["dept","crso","program"], level => {
     key: 'dp_rev_split',
     depends_on: ['programSpending'],
     machinery_footnotes: false,
-    footnotes: ["PLANNED_GROSS"],
+    footnotes: ["PLANNED_GROSS", "PLANNED_EXP", "PLANNED_FTE"],
     calculate(subject,info){
       const { programSpending } = this.tables;
       const q = programSpending.q(subject);
