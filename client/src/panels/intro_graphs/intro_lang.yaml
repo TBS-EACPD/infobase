@@ -46,6 +46,10 @@ program_desc_title:
   en: Program Description
   fr: Description du Programme 
 
+previously_known_as:
+  en: Previously Known As
+  fr: Auparavant connu sous le nom
+
 program_fed_structure_title:
   en: Where does this Program fit in the government structure?
   fr: Où s'inscrit ce Programme dans la structure gouvernementale?

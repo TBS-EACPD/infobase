@@ -13,6 +13,27 @@ const title_keys = {
   program: 'program_desc_title',
 };
 
+_.each(['crso','program'], level => {
+  new PanelGraph({
+    level,
+    key: "previously_known_as",
+    footnotes: false,
+    calculate: subject => _.nonEmpty(subject.old_name),
+
+    render({calculations}){
+      
+      const {subject} = calculations;
+
+      return (
+        <TextPanel title={text_maker("previously_known_as")}>
+          <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(subject.old_name)} />
+        </TextPanel>
+      );
+
+    },
+  });
+});
+
 _.each(['tag','crso','program'], level => {
   new PanelGraph({
     level,

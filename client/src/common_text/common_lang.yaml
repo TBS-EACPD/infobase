@@ -148,6 +148,9 @@ of:
 applied_title:
   en: Applied Title
   fr: Titre appliqué
+previous_applied_title:
+  en: Previous Applied Title
+  fr: Titre appliqué précédent
 approp_by_auth:
   en: Appropriation by Authority
   fr: Crédit par autorisation

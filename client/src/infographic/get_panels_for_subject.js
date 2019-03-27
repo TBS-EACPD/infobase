@@ -149,6 +149,7 @@ const get_program_panels = subject => {
   return {
     intro: [
       "dead_program_warning",
+      'previously_known_as',
       'description',
       'program_fed_structure',
     ],
@@ -185,6 +186,7 @@ const get_crso_panels = subject => {
   return {
     intro: [
       "dead_crso_warning",
+      'previously_known_as',
       'description',
       'crso_in_gov',
     ],
