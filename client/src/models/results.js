@@ -1,7 +1,7 @@
 import { sanitized_marked } from '../general_utils.js';
 import { businessConstants } from './businessConstants.js';
 import { Subject } from '../models/subject.js';
-import { trivial_text_maker } from './text.js';
+import { trivial_text_maker, run_template } from './text.js';
 
 const { Program, CRSO } = Subject;
 const { months } = businessConstants;
@@ -480,6 +480,24 @@ const status_key_to_svg_name = {
   future: "on-track",
 };
 
+const result_docs = {
+  drr17: {
+    year: run_template('{{pa_last_year}}'),
+    year_short: run_template('{{pa_last_year_short_second}}'),
+    has_resources: true,
+  },
+  dp18: {
+    year: run_template('{{planning_last_year_1}}'),
+    year_short: run_template('{{planning_last_year_1_short_second}}'),
+    has_resources: false,
+  },
+  dp19: {
+    year: run_template('{{planning_year_1}}'),
+    year_short: run_template('{{planning_year_1_short_second}}'),
+    has_resources: true,
+  },
+};
+
 export {
   Result,
   Indicator,
@@ -490,6 +508,7 @@ export {
   status_key_to_glossary_key,
   status_key_to_svg_name,
   ordered_status_keys,
+  result_docs,
 };
 
 Object.assign(window._DEV_HELPERS, {

@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 
 import { TM, text_maker } from '../panels/result_graphs/result_text_provider.js';
 import { infograph_href_template } from '../link_utils.js';
-import { Indicator } from '../models/results.js';
+import { Indicator, result_docs } from '../models/results.js';
 import { IndicatorDisplay } from '../panels/result_graphs/components.js';
 
 
@@ -32,7 +32,7 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
 
   let text_key = "";
   if(subject.level === 'dept'){
-    if(doc === 'drr17'){
+    if( /drr/.test(doc) ){
       if (count_items.cr > 0){
         text_key = "result_counts_drr_dept_first_wave";
       } else if(count_items.sub_program > 0){
@@ -49,7 +49,7 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
     }
 
   } else if(subject.level === 'program'){
-    if(doc==='drr17'){
+    if( /drr/.test(doc) ){
       if(count_items.sub_program > 0){
         if(count_items.sub_sub_program > 0){
           text_key = "result_counts_drr_prog_paa_sub_sub";
@@ -74,6 +74,8 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
         k={text_key}
         args={{
           subject,
+
+          doc_year: result_docs[doc].year,
 
           num_programs: count_items.program,
           num_prog_results: count_items.result,

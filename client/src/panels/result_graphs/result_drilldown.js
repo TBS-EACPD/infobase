@@ -14,6 +14,7 @@ import {
   Indicator,
   ResultCounts,
   GranularResultCounts,
+  result_docs,
 } from './results_common.js';
 import { StatusIconTable, InlineStatusIconList } from './components.js';
 const { SpinnerWrapper, Format, TextAbbrev } = util_components;
@@ -65,7 +66,7 @@ const get_non_col_content_func = createSelector(
 
       return (
         <div>
-          { doc !== "dp18" &&
+          { result_docs[doc].has_resources &&
             <dl className={classNames("dl-horizontal dl-no-bold-dts", window.lang === "en" ? "dl-long-terms" : "dl-really-long-terms")}>
               <dt> <span className="nowrap">{spending_header(doc) }</span> </dt>
               <dd> <Format type="compact1" content={resources ? resources.spending : 0} /> </dd>
@@ -103,7 +104,7 @@ const get_children_grouper = createSelector(
           display: get_type_name(type_key), 
           node_group,
         }))
-        .value()
+        .value();
     }
   }
 );
@@ -134,11 +135,7 @@ const get_col_defs = createSelector(
             },
           } = node;
 
-          if(doc !== 'drr17'){
-            return null;
-          }
-
-          return (
+          return /drr/.test(doc) && (
             <div
               aria-hidden={true}
               className="status-icon-array"
@@ -197,9 +194,7 @@ class SingleSubjExplorer extends React.Component {
   }
   render(){
     const {
-      has_drr_data,
-      has_dp_data,
-      has_dp_last_year_data,
+      docs_with_data,
 
       base_hierarchy, 
       flat_nodes,
@@ -249,7 +244,7 @@ class SingleSubjExplorer extends React.Component {
           <div style={{ marginTop: "10px" }}>
             <ResultCountsComponent {...this.props} />
           </div>
-          {doc==='drr17' &&  
+          { /drr/.test(doc) &&  
             <div 
               style={{
                 padding: '10px 10px',
@@ -338,7 +333,7 @@ class SingleSubjExplorer extends React.Component {
 
     const tab_on_click = (doc) => set_doc !== doc && set_doc(doc, subject);
 
-    if( _.compact([has_drr_data, has_dp_data, has_dp_last_year_data]).length === 1){ //don't wrap the inner content in a tab layout
+    if( docs_with_data.length === 1){ //don't wrap the inner content in a tab layout if only one option
       return inner_content;
     } else {
       return (
@@ -346,23 +341,16 @@ class SingleSubjExplorer extends React.Component {
           <TabbedControls
             tab_callback={ tab_on_click }
             tab_options={
-              _.compact([
-                has_drr_data && {
-                  key: "drr17", 
-                  label: <TM k="DRR_results_option_title" />,
-                  is_open: doc === "drr17",
-                },
-                has_dp_last_year_data && {
-                  key: "dp18", 
-                  label: <TM k="DP_results_option_title_last_year" />,
-                  is_open: doc === "dp18",
-                },
-                has_dp_data && {
-                  key: "dp19", 
-                  label: <TM k="DP_results_option_title" />,
-                  is_open: doc === "dp19",
-                },
-              ])
+              _.map(
+                docs_with_data,
+                (doc_with_data) => ({
+                  key: doc_with_data,
+                  label: /drr/.test(doc_with_data) ? 
+                    <TM k="DRR_results_option_title" args={{doc_year: result_docs[doc_with_data].year}} /> :
+                    <TM k="DP_results_option_title" args={{doc_year: result_docs[doc_with_data].year}} />,
+                  is_open: doc_with_data === doc,
+                })
+              )
             }
           />
           <div className="tabbed-content__pane">
@@ -399,11 +387,10 @@ class SingleSubjResultsContainer extends React.Component {
   componentDidMount(){
     const { 
       subject,
-      has_dp_data,
-      has_drr_data,
+      docs_with_data,
     } = this.props;
 
-    const { doc } = get_initial_single_subj_results_state({ subj_guid: subject.guid, has_drr_data, has_dp_data });
+    const { doc } = get_initial_single_subj_results_state({ subj_guid: subject.guid, docs_with_data });
    
     ensure_loaded({
       subject,
@@ -415,9 +402,7 @@ class SingleSubjResultsContainer extends React.Component {
   render(){
     const { 
       subject,
-      has_dp_data,
-      has_dp_last_year_data,
-      has_drr_data,
+      docs_with_data,
     } = this.props;
     const { loading } = this.state;
 
@@ -445,7 +430,7 @@ class SingleSubjResultsContainer extends React.Component {
   
       const initialState = {
         root: ({...initial_root_state, scheme_key}),
-        [scheme_key]: get_initial_single_subj_results_state({ subj_guid: subject.guid, has_drr_data, has_dp_data }),
+        [scheme_key]: get_initial_single_subj_results_state({ subj_guid: subject.guid, docs_with_data }),
       };
   
       const Container = connect(mapStateToProps, mapDispatchToProps)(SingleSubjExplorer);
@@ -454,9 +439,7 @@ class SingleSubjResultsContainer extends React.Component {
         <Provider store={createStore( reducer, initialState, applyMiddleware(redux_promise_middleware) )}>
           <Container 
             subject={subject}
-            has_dp_data={has_dp_data}
-            has_dp_last_year_data={has_dp_last_year_data}
-            has_drr_data={has_drr_data}
+            docs_with_data={docs_with_data}
           />
         </Provider>
       );
@@ -479,39 +462,51 @@ _.each(['program','dept','crso'], lvl => {
         ResultCounts.get_dept_counts(subject.id) :
         GranularResultCounts.get_subject_counts(subject.id);
 
-      const has_dp_data = !_.isUndefined(subject_result_counts) && !_.isNull(subject_result_counts.dp19_indicators) && subject_result_counts.dp19_indicators > 0;
-      const has_dp_last_year_data = !_.isUndefined(subject_result_counts) && !_.isNull(subject_result_counts.dp18_indicators) && subject_result_counts.dp18_indicators > 0;
-      const has_drr_data = !_.isUndefined(subject_result_counts) && !_.isNull(subject_result_counts.drr17_total) && subject_result_counts.drr17_total > 0;
+      const had_doc_data = (doc) => {
+        const count_key = /drr/.test(doc) ? `${doc}_total` : `${doc}_indicators`;
+        return (
+          !_.isUndefined(subject_result_counts) && 
+          !_.isNull(subject_result_counts[count_key]) && 
+          subject_result_counts[count_key] > 0
+        );
+      }
 
-      if(!has_dp_data && !has_drr_data){
+      const docs_with_data = _.chain(result_docs)
+        .keys()
+        .filter( had_doc_data )
+        .value();
+
+      if( _.isEmpty(docs_with_data) ){
         return false;
       }
 
-      return {
-        has_dp_data,
-        has_dp_last_year_data,
-        has_drr_data,
-      };
+      return { docs_with_data };
     },
 
     render({calculations}){
       const { 
         subject, 
         graph_args: {
-          has_dp_data,
-          has_dp_last_year_data,
-          has_drr_data,
+          docs_with_data,
         },
       } = calculations;
 
+      const year_range_with_data = _.chain(docs_with_data)
+        .map( doc => result_docs[doc].year)
+        .thru( 
+          years_with_data => ({
+            first_year: years_with_data[0],
+            last_year: years_with_data.length > 1 && _.last(years_with_data),
+          })
+        )
+        .value();
+
       return (
-        <Panel title={text_maker("result_drilldown_title", { has_dp_data, has_drr_data })}>
+        <Panel title={text_maker("result_drilldown_title", { ...year_range_with_data })}>
           <SingleSubjResultsContainer
             {...{
               subject,
-              has_dp_data,
-              has_dp_last_year_data,
-              has_drr_data,
+              docs_with_data,
             }}
           />
         </Panel>

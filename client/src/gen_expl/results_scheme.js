@@ -15,9 +15,9 @@ const {
 } = Subject;
 
 
-export const get_initial_single_subj_results_state = ({subj_guid, doc, mode, has_drr_data, has_dp_data }) => ({
+export const get_initial_single_subj_results_state = ({subj_guid, doc, mode, docs_with_data }) => ({
   data_loading: false, // smoother if responsibility for loading initial state data falls outside redux, so assume start with data loaded
-  doc: has_dp_data ? "dp19" : 'drr17',
+  doc: _.last(docs_with_data),
   subject_guid: subj_guid || 'dept_1',
   status_key_whitelist: [],
 });
