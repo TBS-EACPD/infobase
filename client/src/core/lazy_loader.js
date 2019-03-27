@@ -117,6 +117,7 @@ function ensure_loaded({
           .map('required_result_docs')
           .value()
       )
+      .flatten()
       .uniq()
       .compact()
       .value();
