@@ -135,6 +135,7 @@ export class LineBarToggleGraph extends React.Component {
         bar: false,
         stacked: false,
         normalized: false,
+        is_money: false,
 
       },
       line_stacked: {
@@ -142,7 +143,7 @@ export class LineBarToggleGraph extends React.Component {
         stacked: true,
         enableArea: true,
         normalized: false,
-
+        is_money: false,
       },
     };
     this.graph_modes = _.keys(this.extra_options_by_graph_mode);
@@ -239,6 +240,17 @@ export class LineBarToggleGraph extends React.Component {
       index_by: extra_graph_options.index,
       is_money: extra_graph_options.is_money,
       groupMode: extra_graph_options.groupMode,
+      margin: {
+        top: 30,
+        right: 20,
+        bottom: 65,
+        left: 50,
+      },
+      bttm_axis: {
+        tickSize: 3,
+        tickRotation: -45,
+        tickPadding: 10,
+      },
     };
 
     const extended_graph_options_line = {
@@ -249,6 +261,19 @@ export class LineBarToggleGraph extends React.Component {
         stacked: extra_graph_options.stacked,
       },
       enableArea: extra_graph_options.enableArea,
+      is_money: extra_graph_options.is_money,
+      text_formatter: extra_graph_options.formatter,
+      margin: {
+        top: 30,
+        right: 20,
+        bottom: 65,
+        left: 50,
+      },
+      bttm_axis: {
+        tickSize: 3,
+        tickRotation: -45,
+        tickPadding: 10,
+      },
     };
 
 

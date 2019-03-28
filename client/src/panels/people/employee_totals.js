@@ -76,6 +76,7 @@ const info_deps_by_level = {
                  <NivoResponsiveLine
                    data = { data_formatter()}
                    colors = "#335075"
+                   is_money = {false}
                    tooltip = {slice =>  
                      <div style={{color: '#000'}}>
                        <table style={{width: '100%', borderCollapse: 'collapse'}}>
@@ -88,7 +89,7 @@ const info_deps_by_level = {
                                  </td>
                                  <td style={{padding: '3px 5px'}}> {tooltip_item.serie.id} </td>
                                  <td style = {{padding: '3px 5px'}}> {tooltip_item.data.x}</td>
-                                 <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: formats.compact2(tooltip_item.data.y)}} />
+                                 <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: formats.big_int_real(tooltip_item.data.y)}} />
                                </tr>
                              )
                            )}
