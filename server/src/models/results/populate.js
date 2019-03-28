@@ -4,15 +4,15 @@ import { get_standard_csv_file_rows } from '../load_utils.js';
 export default async function({models}){
   const { SubProgram, Result, ResultCount, Indicator, PIDRLink } = models
 
+  
   const sub_program_records = get_standard_csv_file_rows("subprograms.csv");
 
   const result_records = get_standard_csv_file_rows("results.csv");
 
   const indicator_records = get_standard_csv_file_rows("indicators.csv");
-
+ 
   const pi_dr_links = get_standard_csv_file_rows("pi_dr_links.csv");
   
-
   _.each(sub_program_records, obj => {
     _.each([
       "spend_planning_year_1",
@@ -28,21 +28,56 @@ export default async function({models}){
     ], key => {
       obj[key] = _.isNaN(obj[key]) ? null : +obj[key];
     });
+
+    // FAKING OUT 2019 DATA vvv
+    _.each([
+      "fte_planning_year_1",
+      "fte_planning_year_2",
+      "fte_planning_year_3",
+    ], key => {
+      obj[key] = +obj["fte_pa_last_year"];
+    });
+    _.each([
+      "spend_planning_year_1",
+      "spend_planning_year_2",
+      "spend_planning_year_3",
+    ], key => {
+      obj[key] = +obj["spend_pa_last_year"];
+    });
+    // FAKING OUT 2019 DATA ^^^
+
     obj.sub_program_id = obj.id;
     obj.id = null;
   });
     
+  const faked_dp19_result_records_records = [];
   _.each(result_records, obj => {
     obj.result_id = obj.id;
     obj.id = null;
+
+    // FAKING OUT 2019 DATA vvv
+    if (obj.doc === "dp18"){
+      faked_dp19_result_records_records.push({
+        ...obj,
+        result_id: `${obj.result_id}_dp19`,
+        doc: "dp19",
+      });
+    } else if (obj.doc === "dp19"){
+      _.chain(obj)
+        .keys()
+        .each( key => obj[key] = null )
+        .value();
+    }
+    // FAKING OUT 2019 DATA ^^^
   });
   
+  const faked_dp19_indicator_records = [];
   _.each(indicator_records, obj => {
     const { 
       target_year, 
       target_month,
     } = obj;
-
+    
     obj.indicator_id = obj.id;
     obj.id = null;
     obj.target_year = _.isNaN(parseInt(target_year)) ? null : parseInt(target_year);
@@ -50,14 +85,48 @@ export default async function({models}){
     if(!obj.status_key){
       obj.status_key = "dp";
     }
+
+    // FAKING OUT 2019 DATA vvv
+    if (obj.doc === "dp18"){
+      faked_dp19_indicator_records.push({
+        ...obj,
+        result_id: `${obj.result_id}_dp19`,
+        indicator_id: `${obj.indicator_id}_dp19`,
+        doc: "dp19",
+      });
+    } else if (obj.doc === "dp19"){
+      _.chain(obj)
+        .keys()
+        .each( key => obj[key] = null )
+        .value();
+    }
+    // FAKING OUT 2019 DATA ^^^
   });
+  
+  // FAKING OUT 2019 DATA vvv
+  const faked_sub_program_records = sub_program_records;
+  const faked_result_records = [
+    ..._.filter(
+      result_records,
+      record => _.chain(record).values().some().value()
+    ),
+    ...faked_dp19_result_records_records,
+  ];
+  const faked_indicator_records = [
+    ..._.filter(
+      indicator_records,
+      record => _.chain(record).values().some().value()
+    ),
+    ...faked_dp19_indicator_records,
+  ];
+  // FAKING OUT 2019 DATA ^^^
 
-  const result_count_records = get_result_count_records(sub_program_records, result_records, indicator_records);
+  const result_count_records = get_result_count_records(faked_sub_program_records, faked_result_records, faked_indicator_records);
 
-  await SubProgram.insertMany(sub_program_records);
-  await Result.insertMany(result_records);
+  await SubProgram.insertMany(faked_sub_program_records);
+  await Result.insertMany(faked_result_records);
   await ResultCount.insertMany(result_count_records);
-  await Indicator.insertMany(indicator_records);
+  await Indicator.insertMany(faked_indicator_records);
   return await PIDRLink.insertMany(pi_dr_links);
 }
 
