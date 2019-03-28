@@ -14,25 +14,27 @@ import {
 
 const { Dept, Gov, Program, Tag, CRSO } = Subject;
 
+const get_re_matcher = (accessors, reg_exps) => (obj) => _.chain(accessors)
+  .map(accessor => (
+    _.isString(accessor) ? 
+      obj[accessor] :
+      accessor(obj)
+  ))
+  .some(str => {
+    if( !_.isString(str) ){
+      return false;
+    } else { 
+      str = _.deburr(str)
+      return _.every( reg_exps, re => str.match(re) )
+    }
+  })
+  .value();
+
 function create_re_matcher(query, accessors, config_name){
 
   const reg_exps = query_to_reg_exps(query);
 
-  const re_matcher = obj => _.chain(accessors)
-    .map(accessor => (
-      _.isString(accessor) ? 
-        obj[accessor] :
-        accessor(obj)
-    ))
-    .some(str => {
-      if( !_.isString(str) ){
-        return false;
-      } else { 
-        str = _.deburr(str)
-        return _.every( reg_exps, re => str.match(re) )
-      }
-    })
-    .value();
+  const re_matcher = get_re_matcher(accessors, reg_exps);
   
   const nonce = _.random(0.1, 1.1);
   let nonce_use_count = 0;
@@ -50,24 +52,52 @@ const memoized_re_matchers = _.memoize(
 const org_attributes_to_match = [ 
   'legal_name', 
   'applied_title',
+  'old_name',
   'fancy_acronym',
   'other_lang_fancy_acronym',
   'other_lang_applied_title',
 ];
-
+const LimitedDataDisplay = (search, name) => (
+  <span className="search-grayed-out-hint">
+    <InfoBaseHighlighter 
+      search={search} 
+      content={`${name} (${trivial_text_maker("limited_data")})`} 
+    />
+  </span>
+);
 const org_templates = {
   header_function: () => Dept.plural,
   name_function: org => org.applied_title ? `${org.name} (${org.applied_title})` : org.name,
   menu_content_function: function(org, search){
-    if ( org.level !== "gov" && _.isEmpty(org.tables) ){
-      return (
-        <span className="search-grayed-out-hint">
-          <InfoBaseHighlighter 
-            search={search} 
-            content={`${org.name} (${trivial_text_maker("limited_data")})`} 
-          />
-        </span>
+    if (org.level !== "gov" && org.old_name){
+      const reg_exps = query_to_reg_exps(search);
+
+      const re_matcher_without_old_name = get_re_matcher(
+        _.filter(org_attributes_to_match, (attribute) => attribute !== 'old_name'),
+        reg_exps
       );
+      const matched_on_attr_other_than_old_name = re_matcher_without_old_name(org);
+
+      const matched_on_old_name = _.every( reg_exps, re => _.deburr(org.old_name).match(re) );
+
+      const menu_content_with_old_name = `${org.fancy_name} (${trivial_text_maker("previously_named")}: ${org.old_name})`;
+
+      if ( matched_on_old_name && !matched_on_attr_other_than_old_name){
+        if ( _.isEmpty(org.tables) ){
+          return LimitedDataDisplay(search, menu_content_with_old_name);
+        } else {
+          return (
+            <InfoBaseHighlighter 
+              search={search}
+              content={menu_content_with_old_name}
+            />
+          );
+        }
+      }
+    }
+
+    if ( org.level !== "gov" && _.isEmpty(org.tables) ){
+      return LimitedDataDisplay(search, org.name);
     } else {
       return (
         <InfoBaseHighlighter 
