@@ -217,15 +217,28 @@ const datasets = {
 const programs = {
   header_function: () => trivial_text_maker('programs'),
   name_function: program => `${program.name} (${program.dept.fancy_name})`,
-  get_data: () => Program.get_all().filter( program => !program.is_fake),
-  filter: (query, datum) => memoized_re_matchers(query, ['name'], "programs")(datum),
+  get_data: () => Program.get_all(),
+  filter: (query, datum) => memoized_re_matchers(query, ['name', 'old_name'], "programs")(datum),
   menu_content_function: function(program, search){
+    let display_name = this.name_function(program);
+
+    if (program.old_name){
+      const reg_exps = query_to_reg_exps(search);
+
+      const matched_on_current_name = _.every( reg_exps, re => _.deburr(program.name).match(re) );
+      const matched_on_old_name = _.every( reg_exps, re => _.deburr(program.old_name).match(re) );
+
+      if ( matched_on_old_name && !matched_on_current_name){
+        display_name = `${display_name} (${trivial_text_maker("previously_named")}: ${program.old_name})`;
+      }
+    }
+
     if ( program.dead_program ){
       return (
         <span className="search-grayed-out-hint">
           <InfoBaseHighlighter 
             search={search} 
-            content={`${program.name} (${program.dept.fancy_acronym}) (${trivial_text_maker("non_active_program")})`} 
+            content={`${display_name} (${trivial_text_maker("non_active_program")})`} 
           />
         </span>
       );
@@ -233,7 +246,7 @@ const programs = {
       return (
         <InfoBaseHighlighter 
           search={search}
-          content={ this.name_function(program) }
+          content={display_name}
         />
       );
     }
