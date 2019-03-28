@@ -102,7 +102,6 @@ function render({calculations, footnotes, sources}) {
       </Col>
     </StdPanel>
   );
-  
 }
 
 const key = "spend_rev_split";

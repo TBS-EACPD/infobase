@@ -3,12 +3,14 @@ import { ResponsiveBar } from './nivo-bar.js';
 import { ResponsivePie } from '@nivo/pie'
 import { formats, dollar_formats } from "../core/format.js";
 
-const get_formatter = (is_money, raw = true) => (
-  !is_money ? 
-    (value) => formats.big_int_real(value, {raw}) :
-    raw ? 
-      (value) => dollar_formats.compact2_raw(value) : 
-      (value) => formats.compact2(value)
+const get_formatter = (is_money, formatter, raw = true) => (
+  _.isUndefined(formatter)?
+    (!is_money ? 
+      (value) => formats.big_int_real(value, {raw}) :
+      raw ? 
+        (value) => dollar_formats.compact2_raw(value) : 
+        (value) => formats.compact2(value)) :
+    ((value) => raw?formatter(value, {raw: true}) : formatter(value))
 );
 
 const default_tooltip = (tooltip_items, formatter) => (
@@ -16,7 +18,7 @@ const default_tooltip = (tooltip_items, formatter) => (
     <table style={{width: '100%', borderCollapse: 'collapse'}}>
       <tbody>
         { tooltip_items.map(
-          tooltip_item => (
+          tooltip_item => ( 
             <tr key = {tooltip_item.id}>
               <td style= {{padding: '3px 5px'}}>
                 <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.color}} />
@@ -32,7 +34,6 @@ const default_tooltip = (tooltip_items, formatter) => (
 );
 
 const general_default_props = {
-  tooltip_format: (d, is_money) => get_formatter(is_money)(d),
   tooltip: (d, tooltip_formatter) => default_tooltip(d, tooltip_formatter),
   is_money: true,
   margin: {
@@ -52,9 +53,10 @@ export class NivoResponsivePie extends React.Component{
       theme,
       enable_radial_labels,
       enable_slice_labels,
-      tooltip_format,
       tooltip,
       margin,
+      text_formatter,
+      color_by,
       legend,
       start_angle,
       is_money,
@@ -70,9 +72,8 @@ export class NivoResponsivePie extends React.Component{
         enableRadialLabels={enable_radial_labels}
         legends={legend}
         theme={theme}
-        tooltipFormat={ (d) => tooltip_format(d, is_money) }
-        tooltip={ (d) => tooltip( [d], get_formatter(is_money, false) ) }
-        
+        tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
+        colorBy = {color_by}
         innerRadius={0.5}
         borderWidth={1}
         borderColor="inherit:darker(0.2)"
@@ -109,7 +110,6 @@ export class NivoResponsiveBar extends React.Component{
       bttm_axis,
       left_axis,
       is_interactive,
-      tooltip_format,
       index_by,
       remove_bottom_axis,
       remove_left_axis,
@@ -117,10 +117,12 @@ export class NivoResponsiveBar extends React.Component{
       is_money,
       legend,
       tick_value,
+      text_formatter,
       theme,
       colorBy,
       tooltip,
       enableGridX,
+      groupMode,
       enableGridY,
     } = this.props;
 
@@ -131,6 +133,7 @@ export class NivoResponsiveBar extends React.Component{
         indexBy={index_by}
         margin={margin}
         colors={colors}
+        groupMode = {groupMode}
         enableLabel={enable_label}
         enableGridX={enableGridX}
         enableGridY={enableGridY}
@@ -139,20 +142,18 @@ export class NivoResponsiveBar extends React.Component{
         colorBy={colorBy}
         theme={theme}
         labelFormat={_.isUndefined(label_format) ? null : label_format}
-        tooltipFormat={ (d) => tooltip_format(d, is_money) }
-        tooltip={ (d) => tooltip( [d], get_formatter(is_money, false) ) }
+        tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
         axisBottom={remove_bottom_axis ? null : bttm_axis}
         axisLeft={
           remove_left_axis ?
             null :
             left_axis || {
               tickValues: tick_value || 6,
-              format: (d) => get_formatter(is_money)(d),
+              format: (d) => get_formatter(is_money, text_formatter)(d),
               min: "auto",
               max: "auto",
             }
         }
-        
         padding={0.3}
         borderColor="inherit:darker(1.6)"
         labelTextColor="inherit:darker(1.6)"
@@ -208,9 +209,9 @@ export class NivoResponsiveLine extends React.Component {
       enable_dot_label,
       remove_bottom_axis,
       bttm_axis,
+      text_formatter,
       stacked,
       theme,
-      tooltip_format,
       tooltip,
     } = this.props;
 
@@ -225,8 +226,7 @@ export class NivoResponsiveLine extends React.Component {
         colorBy={colorBy}
         colors={colors}
         theme={theme}
-        tooltipFormat={tooltip_format}
-        tooltip={ (d) => tooltip( d, get_formatter(is_money, false) ) }
+        tooltip={ (d) => tooltip( d, get_formatter(is_money, text_formatter, false) ) }
         yScale={ 
           yScale || 
           {

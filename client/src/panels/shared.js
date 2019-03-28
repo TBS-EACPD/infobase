@@ -49,6 +49,7 @@ export const PplSharePie = ({graph_args, label_col_header, sort_func}) => {
       ({
         value: d.five_year_percent, 
         label: d.label,
+        id: d.label,
       })
     ).sort(function (a, b) {
       return sort_func(a,b);
@@ -64,19 +65,18 @@ export const PplSharePie = ({graph_args, label_col_header, sort_func}) => {
   }));
 
   return <div aria-hidden={true}
-    className="ppl-share-pie-area"
-  >
-    <div className="ppl-share-pie-graph">
-      <SafePie 
-        label_attr={false}
-        showLabels={false}
-        color={color_scale}
-        pct_formatter={formats.percentage1}
-        data={data}
-        inner_radius={true}
-        inner_text={true}
-        inner_text_fmt={formats.compact1_raw}
-        inner_text_content={label_col_header}
+    className="ppl-share-pie-area">
+    <div className="ppl-share-pie-graph" style = {{height: '350px'}}>
+      <NivoResponsivePie
+        data = {data}
+        color_by = {d => color_scale(d.id)}
+        margin = {{
+          'top': 30,
+          'right': 40,
+          'left': 50,
+          'bottom': 40,
+        }}
+        text_formatter = {formats.percentage1}
       />
     </div>
     <div className="ppl-share-pie-legend">
@@ -107,26 +107,42 @@ export class LineBarToggleGraph extends React.Component {
     this.extra_options_by_graph_mode = {
       bar_stacked: {
         bar: true,
-        stacked: true,
+        index: 'date',
+        groupMode: 'stacked',
+        formatter: undefined,
+        is_money: false,
+        normalized: false,
+
       },
       bar_normalized: {
         bar: true,
-        stacked: true,
         normalized: true,
-        y_axis: "%",
-        formatter: formats.percentage_raw,
+        formatter: formats.percentage1,
+        groupMode: 'stacked',
+        index: 'date',
+        is_money: false,
       },
       bar_grouped: {
         bar: true,
-        stacked: false,
+        groupMode: 'grouped',
+        index: 'date',
+        formatter: undefined,
+        is_money: false,
+        enableArea: false,
+        normalized: false,
       },
       line: {
         bar: false,
         stacked: false,
+        normalized: false,
+
       },
       line_stacked: {
         bar: false,
         stacked: true,
+        enableArea: true,
+        normalized: false,
+
       },
     };
     this.graph_modes = _.keys(this.extra_options_by_graph_mode);
@@ -178,12 +194,63 @@ export class LineBarToggleGraph extends React.Component {
       .fromPairs()
       .value();
 
-    const extended_graph_options = {
-      ...graph_options,
-      colors,
-      series,
-      ...extra_graph_options,
+    const data_bar = graph_options.ticks.map((date, date_index) =>(
+      _.fromPairs(
+        _.map(series, (data, label) =>(
+          [label,data[date_index]]
+        ))
+      )
+    ));
+
+    const data_formatter_bar = (data) => _.map(
+      data,
+      (stacked_data, index) => ({
+        ...stacked_data,
+        date: graph_options.ticks[index],
+      })
+    ); 
+
+    const normalize = (data) =>(
+      _.forEach(data, (value, index) =>{
+        var sum = d3.sum(_.map(value, (data) => data)
+        );
+        _.each(value, (d, i) => value[i]/=sum)
+      })
+    )
+
+    const data_formatter_line = _.map(
+      series,(data_array, data_label) => ({
+        id: data_label,
+        data: data_array.map(
+          (spending_value, tick_index) => ({
+            x: graph_options.ticks[tick_index],
+            y: spending_value,
+          })
+        ),
+      })
+    )
+
+    const extended_graph_options_bar = {
+      keys: Object.keys(series),
+      data: extra_graph_options.normalized?data_formatter_bar(normalize(data_bar)) : 
+            data_formatter_bar(data_bar),
+      colorBy: d => colors(d.id),
+      text_formatter: extra_graph_options.formatter,
+      index_by: extra_graph_options.index,
+      is_money: extra_graph_options.is_money,
+      groupMode: extra_graph_options.groupMode,
     };
+
+    const extended_graph_options_line = {
+      data: data_formatter_line,
+      colorBy: d => colors(d.id),
+      yScale: { 
+        type: "linear",
+        stacked: extra_graph_options.stacked,
+      },
+      enableArea: extra_graph_options.enableArea,
+    };
+
 
     return (
       <div className="frow">
@@ -212,10 +279,11 @@ export class LineBarToggleGraph extends React.Component {
                   })
                 )
               }
-              onClick={label => {
-                this.setState({
-                  selected: _.toggle_list(selected, label),
-                });
+              onClick={label =>{
+                !(selected.length == 1 && selected.includes(label)) &&
+                  (this.setState({
+                    selected: _.toggle_list(selected, label),
+                  }))
               }}
             />
             { !disable_toggle &&
@@ -244,8 +312,8 @@ export class LineBarToggleGraph extends React.Component {
           style={{ width: "100%", position: "relative" }}
           tabIndex="-1"
         >
-          { extra_graph_options.bar && <Bar {...extended_graph_options}/> }
-          { !extra_graph_options.bar && <Line {...extended_graph_options}/> }
+          { extra_graph_options.bar && <div style ={{height: '400px'}}><NivoResponsiveBar {...extended_graph_options_bar}/></div>}
+          { !extra_graph_options.bar && <div style = {{height: '400px'}}><NivoResponsiveLine {...extended_graph_options_line}/></div>}
         </div>
       </div>
     );

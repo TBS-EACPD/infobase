@@ -251,12 +251,16 @@ class HistoricalProgramBars extends React.Component {
       _.fromPairs(_.map(graph_data, (data, label) =>(
         [label,data[year_index]])
       ))
-    ))
-    data_by_year.map((stacked_data, index) =>{
-      stacked_data["year"] = ticks[index]
-    })
+    ));
 
-    
+    const data_formatter = _.map(
+      data_by_year,
+      (stacked_data, index) =>({
+        ...stacked_data,
+        year: ticks[index],
+      })
+    );
+     
     if(window.is_a11y_mode){
       return <div>
         <A11YTable 
@@ -305,7 +309,7 @@ class HistoricalProgramBars extends React.Component {
         </div>
         <div className="fcol-md-8" style={{ height: '400px' }}>
           <NivoResponsiveBar
-            data = {data_by_year}
+            data = {data_formatter}
             keys = {_.union([''],keys)}
             index_by = "year"
             colorBy ={d => colors(d.id)}

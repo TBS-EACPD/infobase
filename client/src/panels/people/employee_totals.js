@@ -8,6 +8,7 @@ import {
   declarative_charts,
   StdPanel,
   Col,
+  NivoResponsiveLine,
 } from "../shared"; 
 
 import { businessConstants } from '../../models/businessConstants';
@@ -23,7 +24,6 @@ const {
 
 const {
   A11YTable,
-  Line,
 } = declarative_charts;
 
 const info_deps_by_level = {
@@ -45,14 +45,22 @@ const info_deps_by_level = {
       const {orgEmployeeType} = this.tables;
       const q = orgEmployeeType.q(subject);
       return { 
-        series: { '': people_years.map(y => q.sum(y)) },
-        ticks: _.map(people_years_short_second, y => `${months[3].text}<br>${run_template(y)}`),
+        series: people_years.map(y => q.sum(y)),
+        ticks: _.map(people_years_short_second, y => `${run_template(y)}`),
       };
     },
 
     render({calculations, footnotes, sources}){
       const { subject, info, graph_args } = calculations;
       const { series, ticks } = graph_args;
+
+      const data_formatter = () =>([{
+        id: months[3].text,
+        data: _.map(series, (data, index) =>({
+          x: ticks[index],
+          y: data,
+        })),
+      }]);
       
       return (
         <StdPanel
@@ -64,13 +72,31 @@ const info_deps_by_level = {
           </Col>
           { !window.is_a11y_mode &&
              <Col size={8} isGraph>
-               <Line
-                 series = {series}
-                 ticks = {ticks}
-                 colors = {infobase_colors()}
-                 y_axis = {text_maker("employees")}
-                 formatter = {formats["big_int_real_raw"]}
-               />
+               <div style ={{height: '400px'}}>
+                 <NivoResponsiveLine
+                   data = { data_formatter()}
+                   colors = "#335075"
+                   tooltip = {slice =>  
+                     <div style={{color: '#000'}}>
+                       <table style={{width: '100%', borderCollapse: 'collapse'}}>
+                         <tbody>
+                           { slice.data.map(
+                             tooltip_item => ( 
+                               <tr key = {tooltip_item.serie.id}>
+                                 <td style= {{padding: '3px 5px'}}>
+                                   <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.serie.color}} />
+                                 </td>
+                                 <td style={{padding: '3px 5px'}}> {tooltip_item.serie.id} </td>
+                                 <td style = {{padding: '3px 5px'}}> {tooltip_item.data.x}</td>
+                                 <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: formats.compact2(tooltip_item.data.y)}} />
+                               </tr>
+                             )
+                           )}
+                         </tbody>
+                       </table>
+                     </div>}
+                 />
+               </div>
              </Col>
           }
           { window.is_a11y_mode &&
