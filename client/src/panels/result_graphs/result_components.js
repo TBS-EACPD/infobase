@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { trivial_text_maker, util_components } from '../shared.js';
+import { util_components } from '../shared.js';
 import { businessConstants } from '../../models/businessConstants.js';
 import { GlossaryEntry } from '../../models/glossary.js';
 import { get_static_url } from '../../request_utils.js';
@@ -112,7 +112,7 @@ const IndicatorResultDisplay = ({
     }
 
     case 'TBD': {
-      return <TM k="TBD_result_text" />;
+      return <TM k="tbd_result_text" />;
     }
 
     default: {
@@ -179,7 +179,7 @@ const Drr17IndicatorResultDisplay = ({
         <Fragment>
           <span> 
             <Format type="result_num" content={+min} />
-            <span>{` ${trivial_text_maker("to")} `}</span>
+            <span>{` ${text_maker("to")} `}</span>
             <Format type="result_num" content={+max} />
           </span> 
           {measure_display}
@@ -193,7 +193,7 @@ const Drr17IndicatorResultDisplay = ({
         <Fragment>
           <span> 
             <Format type="result_percentage" content={min} />
-            <span>{` ${trivial_text_maker("to")} `}</span>
+            <span>{` ${text_maker("to")} `}</span>
             <Format type="result_percentage" content={max} />
           </span> 
           {measure_display}
@@ -207,7 +207,7 @@ const Drr17IndicatorResultDisplay = ({
         <Fragment>
           <span> 
             <Format type="dollar" content={+min} />  
-            <span>{` ${trivial_text_maker("to")} `}</span>
+            <span>{` ${text_maker("to")} `}</span>
             <Format type="dollar" content={+min} />
           </span> 
           {measure_display}
@@ -355,23 +355,25 @@ const SingleIndicatorDisplay = ({indicator}) => {
 
 
 //must have only 4 elements
-const QuadrantDefList = ({defs} ) => <div>
-  <dl className="quadrant-dl">
-    { 
-      defs.map( ({key,val}, ix) => (
-        <div key={key} className="number-box">
-          <dt> {key} </dt>
-          <dd> 
-            <div>
-              {val} 
-            </div>
-          </dd>
-        </div>
-      ))
-    }
-  </dl>
-  <div className="clearfix" />
-</div>
+const QuadrantDefList = ({defs} ) => (
+<div>
+    <dl className="quadrant-dl">
+      { 
+        defs.map( ({key,val}, ix) => (
+          <div key={key} className="number-box">
+            <dt> {key} </dt>
+            <dd> 
+              <div>
+                {val} 
+              </div>
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+    <div className="clearfix" />
+  </div>
+);
 
 
 const make_status_icons = (width) => {
@@ -389,74 +391,76 @@ const large_status_icons = make_status_icons('41px');
 const status_icons = make_status_icons('25px');
 
 
-const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }) => <div>
-  <div 
-    aria-hidden={true}
-    className="status-icon-table"
-  >
-    <FilterTable
-      items={
-        _.map(ordered_status_keys, status_key => ({
-          key: status_key,
-          active: active_list.length === 0 || _.indexOf(active_list, status_key) !== -1,
-          count: icon_counts[status_key] || 0,
-          text: !window.is_a11y ? 
-            (
-              <span
-                className="link-unstyled"
-                tabIndex={0}
-                aria-hidden="true"
-                data-toggle="tooltip"
-                data-ibtt-glossary-key={status_key_to_glossary_key[status_key]}
-                data-ibtt-html="true"
-                data-ibtt-container="body"
-              >
-                {result_simple_statuses[status_key].text}
-              </span>
-            ) :
-            (
+const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }) => (
+  <div>
+    <div 
+      aria-hidden={true}
+      className="status-icon-table"
+    >
+      <FilterTable
+        items={
+          _.map(ordered_status_keys, status_key => ({
+            key: status_key,
+            active: active_list.length === 0 || _.indexOf(active_list, status_key) !== -1,
+            count: icon_counts[status_key] || 0,
+            text: !window.is_a11y ? 
+              (
+                <span
+                  className="link-unstyled"
+                  tabIndex={0}
+                  aria-hidden="true"
+                  data-toggle="tooltip"
+                  data-ibtt-glossary-key={status_key_to_glossary_key[status_key]}
+                  data-ibtt-html="true"
+                  data-ibtt-container="body"
+                >
+                  {result_simple_statuses[status_key].text}
+                </span>
+              ) :
+              (
+                <a 
+                  href={ glossary_href( GlossaryEntry.lookup(status_key_to_glossary_key[status_key]) )} 
+                  title={text_maker("glossary_link_title")}
+                >
+                  {result_simple_statuses[status_key].text}
+                </a>
+              ),
+            icon: large_status_icons[status_key],
+          }) )
+        }
+        item_component_order={["count", "icon", "text"]}
+        click_callback={(status_key) => onIconClick(status_key)}
+        show_eyes_override={active_list.length === ordered_status_keys.length}
+      />
+    </div>
+    <table className="sr-only">
+      <thead>
+        <tr>
+          {_.map(icon_counts, (count, status_key) => 
+            <th key={status_key}>
               <a 
-                href={ glossary_href( GlossaryEntry.lookup(status_key_to_glossary_key[status_key]) )} 
-                title={trivial_text_maker("glossary_link_title")}
+                href={`#glossary/${status_key_to_glossary_key[status_key]}`}
+                className="sr-only"
+                title={text_maker('glossary_link_title')}
               >
                 {result_simple_statuses[status_key].text}
               </a>
-            ),
-          icon: large_status_icons[status_key],
-        }) )
-      }
-      item_component_order={["count", "icon", "text"]}
-      click_callback={(status_key) => onIconClick(status_key)}
-      show_eyes_override={active_list.length === ordered_status_keys.length}
-    />
+            </th>
+          )}
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          {_.map(icon_counts, (count, status_key) => 
+            <td key={status_key}>
+              {count}
+            </td>
+          )}
+        </tr>
+      </tbody>
+    </table>
   </div>
-  <table className="sr-only">
-    <thead>
-      <tr>
-        {_.map(icon_counts, (count, status_key) => 
-          <th key={status_key}>
-            <a 
-              href={`#glossary/${status_key_to_glossary_key[status_key]}`}
-              className="sr-only"
-              title={trivial_text_maker('glossary_link_title')}
-            >
-              {result_simple_statuses[status_key].text}
-            </a>
-          </th>
-        )}
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        {_.map(icon_counts, (count, status_key) => 
-          <td key={status_key}>
-            {count}
-          </td>
-        )}
-      </tr>
-    </tbody>
-  </table>
-</div>
+);
 
 const InlineStatusIconList = ({indicators}) => {
   return _.chain(indicators)
@@ -487,18 +491,20 @@ const StatusDisplay = ({
   indicator: {
     status_key, 
   },  
-}) => <div>
-  <span className="nowrap">
-    <span style={{paddingRight: "5px"}}> { status_icons[status_key] } </span>
-    <TM
-      text_key="result_status_with_gl"
-      args={{
-        text: result_statuses[status_key].text,
-        glossary_key: status_key_to_glossary_key[status_key],
-      }}
-    />
-  </span>
-</div>
+}) => (
+  <div>
+    <span className="nowrap">
+      <span style={{paddingRight: "5px"}}> { status_icons[status_key] } </span>
+      <TM
+        k="result_status_with_gl"
+        args={{
+          text: result_statuses[status_key].text,
+          glossary_key: status_key_to_glossary_key[status_key],
+        }}
+      />
+    </span>
+  </div>
+);
 
 
 function indicators_period_span_str(indicators){

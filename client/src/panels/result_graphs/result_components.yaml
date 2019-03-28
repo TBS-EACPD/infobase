@@ -22,6 +22,6 @@ result_exact_text:
   fr: |
     TODO :
 
-TBD_result_text:
+tbd_result_text:
   en: TBD text TODO
   fr: TBD text TODO
