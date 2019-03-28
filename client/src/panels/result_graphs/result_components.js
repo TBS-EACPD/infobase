@@ -356,7 +356,7 @@ const SingleIndicatorDisplay = ({indicator}) => {
 
 //must have only 4 elements
 const QuadrantDefList = ({defs} ) => (
-<div>
+  <div>
     <dl className="quadrant-dl">
       { 
         defs.map( ({key,val}, ix) => (
