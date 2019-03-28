@@ -91,7 +91,7 @@ const get_non_col_content_func = createSelector(
 
       return (
         <div>
-          { detail_items.length &&
+          { _.nonEmpty(detail_items) &&
             <dl className={classNames("dl-horizontal dl-no-bold-dts", ( window.lang === "fr" || /dp/.test(doc) ) ? "dl-really-long-terms" :"dl-long-terms")}>
               { detail_items }
             </dl>
