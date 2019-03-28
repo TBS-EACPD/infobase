@@ -1,5 +1,4 @@
 import { CSSTransitionGroup } from 'react-transition-group';
-import { Fragment } from 'react';
 
 import './infographic.scss';
 import text from "./infographic.yaml";
@@ -362,21 +361,14 @@ class TransitionText extends React.Component {
     return (
       <CSSTransitionGroup 
         component="h1"
-        transitionAppear={true}
         transitionAppearTimeout={500}
         transitionName="transi-fade"
         transitionEnterTimeout={800}
-        /* 
-        Functionally a disabled exit transition,
-        Dependancy of CSSTransitionGroup
-        */
         transitionLeaveTimeout={0.0001}
       >
-        {
-          <span key={this.props.text}>
-            { this.props.text }
-          </span>
-        }
+        <span key={this.props.text}>
+          { this.props.text }
+        </span>
 
       </CSSTransitionGroup>
     )
