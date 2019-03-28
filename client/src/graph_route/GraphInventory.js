@@ -2,6 +2,10 @@ import {createSelector } from 'reselect';
 import { StandardRouteContainer } from '../core/NavComponents';
 import { ReactPanelGraph } from '../core/PanelCollectionView';
 import { Link } from 'react-router-dom';
+import { create_text_maker } from '../models/text.js';
+import graph_text from "./GraphInventory.yaml";
+
+const tm = create_text_maker(graph_text);
 
 /* eslint-disable no-unused-vars */
 import { get_panels_for_subject } from '../infographic/get_panels_for_subject';
@@ -18,6 +22,8 @@ const {
 import { ensure_loaded } from '../core/lazy_loader';
 import { EverythingSearch, SpinnerWrapper } from '../util_components';
 import { PanelGraph } from '../core/PanelGraph';
+
+
 
 function url_template(subject, graph){
   return `/graph/${subject.level}/${graph.key}/${subject.id}`
@@ -124,7 +130,7 @@ const RelatedInfo = ({ subject, panel, related_graphs }) => {
   } = related_graphs;
 
   return <div>
-    <h2> Related Panels </h2>
+    <h2> {tm("related_panels")} </h2>
     <table className="table table-bordered">
       <thead>
         <tr>
@@ -248,7 +254,7 @@ export default class GraphInventory extends React.Component {
       content = <SpinnerWrapper config_name={"sub_route"} />;
     } else {
       content = <div>
-        <h1> graph inventory </h1>
+        <h1> {tm("graph_inventory")} </h1>
         <div className="mrgn-bttm-lg">
           <EverythingSearch
             placeholder="See this graph with another subject"
@@ -259,8 +265,13 @@ export default class GraphInventory extends React.Component {
           />
         </div>
         <div>
-          <p> Selected subject: {subject.name} ({subject.level}) </p>
-          <p> selected graph: {panel.key} </p>
+          <TestSubjectLinks
+            href_template={ subj => url_template(subj, panel) }
+          />
+        </div>
+        <div>
+          <p> {tm("selected_subject")}: {subject.name} ({subject.level}) </p>
+          <p> {tm("selected_graph")}: {panel.key} </p>
         </div>
         <div id="main">
           <ReactPanelGraph 
@@ -270,7 +281,7 @@ export default class GraphInventory extends React.Component {
           />
           {_.isEmpty(panel.notes) && 
             <div>
-              <h3> Notes </h3>
+              <h3> {tm("notes")} </h3>
               { panel.notes }
             </div>
           }
@@ -288,8 +299,8 @@ export default class GraphInventory extends React.Component {
 
     return (
       <StandardRouteContainer 
-        title="graph inventory"
-        breadcrumbs={["graph inventory"]}
+        title={tm("graph_inventory")}
+        breadcrumbs={[tm("graph_inventory")]}
         description={null}
         route_key={"graph_inventory"}
       >
@@ -297,5 +308,21 @@ export default class GraphInventory extends React.Component {
       </StandardRouteContainer>
     );
 
+  }
+}
+
+class TestSubjectLinks extends React.Component {
+  render(){
+    const { 
+      panel,
+      href_template,
+    } = this.props;
+
+    return (
+      <div>
+        <div><Link to={href_template(Gov, panel)}> {tm("goc_total")} </Link></div>
+        <div><Link to={href_template(Gov, panel)}> {tm("goc_total")} </Link></div>
+      </div>
+    )
   }
 }

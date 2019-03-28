@@ -1,0 +1,19 @@
+selected_graph:
+  en: Selected graph
+  fr: Graphique sélectionné
+
+selected_subject:
+  en: Selected subject
+  fr: Sujet sélectionné
+
+graph_inventory:
+  en: Graph inventory
+  fr: Répertoire des graphiques
+
+notes:
+  en: Notes
+  fr: Notes
+
+related_panels:
+  en: Related Panels
+  fr: Graphiques reliées
