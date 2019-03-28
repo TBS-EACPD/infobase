@@ -17,7 +17,7 @@ import {
   GranularResultCounts,
   result_docs,
 } from './results_common.js';
-import { StatusIconTable, InlineStatusIconList } from './components.js';
+import { StatusIconTable, InlineStatusIconList } from './result_components.js';
 const { SpinnerWrapper, Format, TextAbbrev } = util_components;
 
 //drilldown stuff

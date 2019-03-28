@@ -1,0 +1,27 @@
+result_min_text:
+  en: |
+    No more than:
+  fr: |
+    TODO :
+
+result_max_text:
+  en: |
+    At least:
+  fr: |
+    TODO :
+
+result_range_text:
+  en: |
+    Between:
+  fr: |
+    TODO :
+
+result_exact_text:
+  en: |
+    Exactly:
+  fr: |
+    TODO :
+
+TBD_result_text:
+  en: TBD text TODO
+  fr: TBD text TODO

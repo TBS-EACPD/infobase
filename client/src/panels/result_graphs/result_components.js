@@ -12,17 +12,117 @@ import {
 
 const { result_statuses, result_simple_statuses } = businessConstants;
 const { 
-  TextMaker,
-  TM,
   Format,
   HeightClipper,
   FilterTable,
 } = util_components;
 
+import { TM, text_maker } from './result_text_provider.js';
+
 const get_svg_url = (status_key) => get_static_url(`svg/${status_key_to_svg_name[status_key]}.svg`);
 
-/* to be used with planned targets and actual result */
+
 const IndicatorResultDisplay = ({
+  data_type,
+  min, 
+  max,
+  narrative,
+  measure,
+}) => {
+
+  const target_unspecified_display = <TM k="unspecified_target"/>;
+  
+  const measure_display = !_.isEmpty(measure) && <span> ( {measure} )</span>;
+
+  const display_type_by_data_type = {
+    num: "result_num",
+    num_range: "result_num",
+    dollar: "dollar",
+    dollar_range: "dollar",
+    percent: "result_percentage",
+    percent_range: "result_percentage",
+  };
+
+  const min_display = (data_type, min) =>(
+    <Fragment>
+      <span>
+        <span>{`${text_maker("result_min_text")} `}</span>
+        <Format type={display_type_by_data_type[data_type]} content={+min} /> 
+      </span> 
+      {measure_display}
+    </Fragment>
+  );
+  const max_display = (data_type, max) =>(
+    <Fragment>
+      <span>
+        <span>{`${text_maker("result_max_text")} `}</span>
+        <Format type={display_type_by_data_type[data_type]} content={+max} /> 
+      </span> 
+      {measure_display}
+    </Fragment>
+  );
+  const exact_display = (data_type, exact) =>(
+    <Fragment>
+      <span>
+        <span>{`${text_maker("result_exact_text")} `}</span>
+        <Format type={display_type_by_data_type[data_type]} content={+exact} /> 
+      </span> 
+      {measure_display}
+    </Fragment>
+  );
+  const range_display = (data_type, min, max) =>(
+    <Fragment>
+      <span> 
+        <span>{`${text_maker("result_range_text")} `}</span>
+        <Format type={display_type_by_data_type[data_type]} content={+min} />
+        <span>{` ${text_maker("to")} `}</span>
+        <Format type={display_type_by_data_type[data_type]} content={+max} />
+      </span> 
+      {measure_display}
+    </Fragment>
+  );
+
+  switch(data_type){
+    case 'num':
+    case 'num_range':
+    case 'dollar':
+    case 'dollar_range':
+    case 'percent':
+    case 'percent_range': {
+      if ( /range/.test(data_type) && (min && max) ){
+        return range_display(data_type, min, max);
+      } else if (min && max && min === max){
+        return exact_display(data_type, min);
+      } else if (min && !max){
+        return min_display(data_type, min);
+      } else if (!min && max){
+        return max_display(data_type, max);
+      } else {
+        return target_unspecified_display; 
+      }
+    }
+
+    case 'text': {
+      if ( _.isEmpty(narrative) ){ return target_unspecified_display; }
+      return (
+        <span>
+          {narrative}
+        </span>
+      );
+    }
+
+    case 'TBD': {
+      return <TM k="TBD_result_text" />;
+    }
+
+    default: {
+      //certain indicators have no targets
+      return null;
+    }
+  }
+};
+
+const Drr17IndicatorResultDisplay = ({
   data_type,
   min, 
   max,
@@ -131,9 +231,7 @@ const IndicatorResultDisplay = ({
       return null;
     }
   }
-
-}
-
+};
 
 const IndicatorList = ({ indicators }) => (
   <ul className="indicator-list">
@@ -146,92 +244,113 @@ const IndicatorList = ({ indicators }) => (
 );
 
 const SingleIndicatorDisplay = ({indicator}) => {
-  const is_drr = indicator.doc === "drr17";
-  return <div className="indicator-item">
-    <dl className="dl-horizontal indicator-item__dl">
+  const is_drr = /drr/.test(indicator.doc);
+  return (
+    <div className="indicator-item">
+      <dl className="dl-horizontal indicator-item__dl">
 
-      <dt>
-        <TM k="indicator" />
-      </dt>
-      <dd>
-        {indicator.name}
-      </dd>
+        <dt>
+          <TM k="indicator" />
+        </dt>
+        <dd>
+          {indicator.name}
+        </dd>
 
-      <dt>
-        <TM k="date_to_achieve" />
-      </dt>
-      <dd>
-        {indicator.target_date}
-      </dd>
+        <dt>
+          <TM k="date_to_achieve" />
+        </dt>
+        <dd>
+          {indicator.target_date}
+        </dd>
 
-      <dt>
-        <TM k="target" />
-      </dt>
-      <dd>
-        <IndicatorResultDisplay
-          data_type={indicator.target_type}
-          min={indicator.target_min}
-          max={indicator.target_max}
-          narrative={indicator.target_narrative}
-          measure={indicator.measure}
-        />
-      </dd>
-
-      { is_drr && indicator.actual_result &&
-        <Fragment>
-          <dt>
-            <TM k="target_result" />
-          </dt>
-          <dd>
+        <dt>
+          <TM k="target" />
+        </dt>
+        <dd>
+          { indicator.doc === "drr17" ?
+            <Drr17IndicatorResultDisplay
+              data_type={indicator.target_type}
+              min={indicator.target_min}
+              max={indicator.target_max}
+              narrative={indicator.target_narrative}
+              measure={indicator.measure}
+            /> :
             <IndicatorResultDisplay
-              data_type={ indicator.actual_datatype }
-              min={ indicator.actual_result }
-              narrative={ indicator.actual_result }
+              data_type={indicator.target_type}
+              min={indicator.target_min}
+              max={indicator.target_max}
+              narrative={indicator.target_narrative}
+              measure={indicator.measure}
             />
-          </dd>
-        </Fragment>
-      }
+          }
+        </dd>
 
-      { is_drr && 
-        <Fragment>
-          <dt>
-            <TM k="status" />
-          </dt>
-          <dd>
-            <StatusDisplay indicator={indicator} /> 
-          </dd>
-        </Fragment>
-      }
+        { is_drr && indicator.actual_result &&
+          <Fragment>
+            <dt>
+              <TM k="target_result" />
+            </dt>
+            <dd>
+              { indicator.doc === "drr17" ?
+                <Drr17IndicatorResultDisplay
+                  data_type={indicator.target_type}
+                  min={indicator.target_min}
+                  max={indicator.target_max}
+                  narrative={indicator.target_narrative}
+                  measure={indicator.measure}
+                /> :
+                <IndicatorResultDisplay
+                  data_type={indicator.target_type}
+                  min={indicator.target_min}
+                  max={indicator.target_max}
+                  narrative={indicator.target_narrative}
+                  measure={indicator.measure}
+                />
+              }
+            </dd>
+          </Fragment>
+        }
 
-      { !_.isEmpty(indicator.explanation) && 
-        <Fragment>
-          <dt>
-            <TM k="notes" />
-          </dt>
-          <dd>
-            {indicator.explanation}  
-          </dd>
-        </Fragment>
-      }
+        { is_drr && 
+          <Fragment>
+            <dt>
+              <TM k="status" />
+            </dt>
+            <dd>
+              <StatusDisplay indicator={indicator} /> 
+            </dd>
+          </Fragment>
+        }
 
+        { !_.isEmpty(indicator.explanation) && 
+          <Fragment>
+            <dt>
+              <TM k="notes" />
+            </dt>
+            <dd>
+              {indicator.explanation}  
+            </dd>
+          </Fragment>
+        }
 
-      { !_.isEmpty(indicator.methodology) && 
-        <Fragment>
-          <dt>
-            <TM k="methodology" />
-          </dt>
-          <dd>
-            { window.is_a11y_mode ? 
-              indicator.methodology : 
-              <HeightClipper clipHeight={100}>
-                {indicator.methodology}  
-              </HeightClipper>
-            }
-          </dd>
-        </Fragment>
-      }
-    </dl>
-  </div>
+        { !_.isEmpty(indicator.methodology) && 
+          <Fragment>
+            <dt>
+              <TM k="methodology" />
+            </dt>
+            <dd>
+              { window.is_a11y_mode ? 
+                indicator.methodology : 
+                <HeightClipper clipHeight={100}>
+                  {indicator.methodology}  
+                </HeightClipper>
+              }
+            </dd>
+          </Fragment>
+        }
+      </dl>
+    </div>
+  );
 }
 
 
@@ -371,7 +490,7 @@ const StatusDisplay = ({
 }) => <div>
   <span className="nowrap">
     <span style={{paddingRight: "5px"}}> { status_icons[status_key] } </span>
-    <TextMaker
+    <TM
       text_key="result_status_with_gl"
       args={{
         text: result_statuses[status_key].text,

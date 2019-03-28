@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 import { TM, text_maker } from '../panels/result_graphs/result_text_provider.js';
 import { infograph_href_template } from '../link_utils.js';
 import { Indicator, result_docs } from '../models/results.js';
-import { IndicatorDisplay } from '../panels/result_graphs/components.js';
+import { IndicatorDisplay } from '../panels/result_graphs/result_components.js';
 
 
 export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
