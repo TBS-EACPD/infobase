@@ -43,25 +43,25 @@ const IndicatorResultDisplay = ({
     percent_range: "result_percentage",
   };
 
-  const min_display = (data_type, min) =>(
+  const upper_target_display = (data_type, max) => (
     <Fragment>
       <span>
-        <span>{`${text_maker("result_min_text")} `}</span>
-        <Format type={display_type_by_data_type[data_type]} content={+min} /> 
-      </span> 
-      {measure_display}
-    </Fragment>
-  );
-  const max_display = (data_type, max) =>(
-    <Fragment>
-      <span>
-        <span>{`${text_maker("result_max_text")} `}</span>
+        <span>{`${text_maker("result_upper_target_text")} `}</span>
         <Format type={display_type_by_data_type[data_type]} content={+max} /> 
       </span> 
       {measure_display}
     </Fragment>
   );
-  const exact_display = (data_type, exact) =>(
+  const lower_target_display = (data_type, min) => (
+    <Fragment>
+      <span>
+        <span>{`${text_maker("result_lower_target_text")} `}</span>
+        <Format type={display_type_by_data_type[data_type]} content={+min} /> 
+      </span> 
+      {measure_display}
+    </Fragment>
+  );
+  const exact_display = (data_type, exact) => (
     <Fragment>
       <span>
         <span>{`${text_maker("result_exact_text")} `}</span>
@@ -70,7 +70,7 @@ const IndicatorResultDisplay = ({
       {measure_display}
     </Fragment>
   );
-  const range_display = (data_type, min, max) =>(
+  const range_display = (data_type, min, max) => (
     <Fragment>
       <span> 
         <span>{`${text_maker("result_range_text")} `}</span>
@@ -94,9 +94,9 @@ const IndicatorResultDisplay = ({
       } else if (min && max && min === max){
         return exact_display(data_type, min);
       } else if (min && !max){
-        return min_display(data_type, min);
+        return lower_target_display(data_type, min);
       } else if (!min && max){
-        return max_display(data_type, max);
+        return upper_target_display(data_type, max);
       } else {
         return target_unspecified_display; 
       }

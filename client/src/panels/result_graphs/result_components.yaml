@@ -1,10 +1,10 @@
-result_min_text:
+result_upper_target_text:
   en: |
     No more than:
   fr: |
     TODO :
 
-result_max_text:
+result_lower_target_text:
   en: |
     At least:
   fr: |
