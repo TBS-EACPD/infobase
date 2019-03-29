@@ -30,20 +30,20 @@ export default async function({models}){
     });
 
     // FAKING OUT 2019 DATA vvv
-    _.each([
-      "fte_planning_year_1",
-      "fte_planning_year_2",
-      "fte_planning_year_3",
-    ], key => {
-      obj[key] = +obj["fte_pa_last_year"];
-    });
-    _.each([
-      "spend_planning_year_1",
-      "spend_planning_year_2",
-      "spend_planning_year_3",
-    ], key => {
-      obj[key] = +obj["spend_pa_last_year"];
-    });
+    //_.each([
+    //  "fte_planning_year_1",
+    //  "fte_planning_year_2",
+    //  "fte_planning_year_3",
+    //], key => {
+    //  obj[key] = +obj["fte_pa_last_year"];
+    //});
+    //_.each([
+    //  "spend_planning_year_1",
+    //  "spend_planning_year_2",
+    //  "spend_planning_year_3",
+    //], key => {
+    //  obj[key] = +obj["spend_pa_last_year"];
+    //});
     // FAKING OUT 2019 DATA ^^^
 
     obj.sub_program_id = obj.id;
@@ -56,18 +56,18 @@ export default async function({models}){
     obj.id = null;
 
     // FAKING OUT 2019 DATA vvv
-    if (obj.doc === "dp18"){
-      faked_dp19_result_records_records.push({
-        ...obj,
-        result_id: `${obj.result_id}_dp19`,
-        doc: "dp19",
-      });
-    } else if (obj.doc === "dp19"){
-      _.chain(obj)
-        .keys()
-        .each( key => obj[key] = null )
-        .value();
-    }
+    //if (obj.doc === "dp18"){
+    //  faked_dp19_result_records_records.push({
+    //    ...obj,
+    //    result_id: `${obj.result_id}_dp19`,
+    //    doc: "dp19",
+    //  });
+    //} else if (obj.doc === "dp19"){
+    //  _.chain(obj)
+    //    .keys()
+    //    .each( key => obj[key] = null )
+    //    .value();
+    //}
     // FAKING OUT 2019 DATA ^^^
   });
   
@@ -87,19 +87,19 @@ export default async function({models}){
     }
 
     // FAKING OUT 2019 DATA vvv
-    if (obj.doc === "dp18"){
-      faked_dp19_indicator_records.push({
-        ...obj,
-        result_id: `${obj.result_id}_dp19`,
-        indicator_id: `${obj.indicator_id}_dp19`,
-        doc: "dp19",
-      });
-    } else if (obj.doc === "dp19"){
-      _.chain(obj)
-        .keys()
-        .each( key => obj[key] = null )
-        .value();
-    }
+    //if (obj.doc === "dp18"){
+    //  faked_dp19_indicator_records.push({
+    //    ...obj,
+    //    result_id: `${obj.result_id}_dp19`,
+    //    indicator_id: `${obj.indicator_id}_dp19`,
+    //    doc: "dp19",
+    //  });
+    //} else if (obj.doc === "dp19"){
+    //  _.chain(obj)
+    //    .keys()
+    //    .each( key => obj[key] = null )
+    //    .value();
+    //}
     // FAKING OUT 2019 DATA ^^^
   });
   
