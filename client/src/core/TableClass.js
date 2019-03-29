@@ -336,10 +336,13 @@ export class Table extends mix().with(staticStoreMixin){
         const [key,val] = pair;
         const type = this.col_from_nick(key).type ;
         // in case we have numbers represented as string, we'll convert them to integers
+        // need to handle special case of '.'
         if ( (type === 'percentage' || type==='decimal' || type==='decimal1' || type==='percentage1' || type==='percentage2') && !_.isNaN(parseFloat(val)) ){
           row_obj[key]=parseFloat(val);
-        } else if ( (type === 'big_int' || type === "big_int_real" || type === 'int') && !_.isNaN(parseInt(val,10)) ){
+        } else if ( (type === 'big_int' || type === "big_int_real" || type === 'int') && !_.isNaN(parseInt(val,10))){
           row_obj[key]=parseInt(val,10);
+        } else if (val === "." && ( type === 'percentage' || type==='decimal' || type==='decimal1' || type==='percentage1' || type==='percentage2' || type === 'big_int' || type === "big_int_real" || type === 'int' )){
+          row_obj[key]=0;
         }
       });
       _.toPairs(row_obj).forEach( ([key, val]) => {
