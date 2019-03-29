@@ -24,7 +24,7 @@ import {
   make_planned_spend_vs_type_perspective,
   make_planned_spend_est_doc_mains_perspective,
   make_planned_spend_org_planned_spend_perspective,
-  make_planned_spend_est_doc_im_perspective,
+  //make_planned_spend_est_doc_im_perspective,
 } from './planned_spend_perspectives.js';
 
 import { data_types } from './perspective_utils.js';
@@ -58,7 +58,7 @@ const get_all_perspectives = () => {
     make_planned_spend_vs_type_perspective(),
     make_planned_spend_est_type_perspective(),
     make_planned_spend_org_planned_spend_perspective(),
-    make_planned_spend_est_doc_im_perspective(),
+    //make_planned_spend_est_doc_im_perspective(),
   ];
 };
 

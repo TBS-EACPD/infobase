@@ -361,8 +361,8 @@ const planned_exp_popup_template = function(presentation_scheme, d){
 
 const get_year = (presentation_scheme) => {
   switch (presentation_scheme){
-    case "est_doc_ie" : return "{{est_next_year}}";
-    default : return "{{est_in_year}}";
+    case "est_doc_mains" : return "{{est_in_year}}";
+    default : return "{{est_last_year}}";
   }
 }
 
