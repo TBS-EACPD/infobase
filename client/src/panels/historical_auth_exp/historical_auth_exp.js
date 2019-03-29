@@ -108,6 +108,12 @@ const render = function({calculations, footnotes, sources}) {
             index_by = "years"
             colors = {infobaseCategory10Colors}
             enableGridX = {false}
+            margin = {{
+              top: 50,
+              right: 30,
+              bottom: 50,
+              left: 65,
+            }}
             legend = {[
               {
                 "translateY": -35,
@@ -126,7 +132,7 @@ const render = function({calculations, footnotes, sources}) {
               axis: {
                 ticks: {
                   text: { 
-                    fontSize: 12,
+                    fontSize: 11.5,
                     fill: '#000',
                   },
                 },

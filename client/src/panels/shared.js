@@ -27,8 +27,6 @@ const {
   SafePie,
   TabularPercentLegend,
   GraphLegend,
-  Bar,
-  Line,
 } = declarative_charts;
 
 const {
@@ -109,10 +107,6 @@ export class LineBarToggleGraph extends React.Component {
         bar: true,
         index: 'date',
         groupMode: 'stacked',
-        formatter: undefined,
-        is_money: false,
-        normalized: false,
-
       },
       bar_normalized: {
         bar: true,
@@ -120,30 +114,20 @@ export class LineBarToggleGraph extends React.Component {
         formatter: formats.percentage1,
         groupMode: 'stacked',
         index: 'date',
-        is_money: false,
       },
       bar_grouped: {
         bar: true,
         groupMode: 'grouped',
         index: 'date',
-        formatter: undefined,
-        is_money: false,
-        enableArea: false,
-        normalized: false,
       },
       line: {
         bar: false,
         stacked: false,
-        normalized: false,
-        is_money: false,
-
       },
       line_stacked: {
         bar: false,
         stacked: true,
         enableArea: true,
-        normalized: false,
-        is_money: false,
       },
     };
     this.graph_modes = _.keys(this.extra_options_by_graph_mode);
@@ -213,11 +197,11 @@ export class LineBarToggleGraph extends React.Component {
 
     const normalize = (data) =>(
       _.forEach(data, (value, index) =>{
-        var sum = d3.sum(_.map(value, (data) => data)
+        const sum = d3.sum(_.map(value, (data) => data)
         );
         _.each(value, (d, i) => value[i]/=sum)
       })
-    )
+    );
 
     const data_formatter_line = _.map(
       series,(data_array, data_label) => ({
@@ -229,22 +213,23 @@ export class LineBarToggleGraph extends React.Component {
           })
         ),
       })
-    )
+    );
 
     const extended_graph_options_bar = {
       keys: Object.keys(series),
-      data: extra_graph_options.normalized?data_formatter_bar(normalize(data_bar)) : 
-            data_formatter_bar(data_bar),
+      data: extra_graph_options.normalized ? 
+        data_formatter_bar(normalize(data_bar)) : 
+        data_formatter_bar(data_bar),
       colorBy: d => colors(d.id),
       text_formatter: extra_graph_options.formatter,
       index_by: extra_graph_options.index,
-      is_money: extra_graph_options.is_money,
+      is_money: !!extra_graph_options.is_money,
       groupMode: extra_graph_options.groupMode,
       margin: {
         top: 30,
         right: 20,
         bottom: 65,
-        left: 50,
+        left: 65,
       },
       bttm_axis: {
         tickSize: 3,
@@ -260,14 +245,14 @@ export class LineBarToggleGraph extends React.Component {
         type: "linear",
         stacked: extra_graph_options.stacked,
       },
-      enableArea: extra_graph_options.enableArea,
-      is_money: extra_graph_options.is_money,
+      enableArea: !!extra_graph_options.enableArea,
+      is_money: !!extra_graph_options.is_money,
       text_formatter: extra_graph_options.formatter,
       margin: {
         top: 30,
         right: 20,
         bottom: 65,
-        left: 50,
+        left: 65,
       },
       bttm_axis: {
         tickSize: 3,
@@ -275,7 +260,6 @@ export class LineBarToggleGraph extends React.Component {
         tickPadding: 10,
       },
     };
-
 
     return (
       <div className="frow">
@@ -305,7 +289,7 @@ export class LineBarToggleGraph extends React.Component {
                 )
               }
               onClick={label =>{
-                !(selected.length == 1 && selected.includes(label)) &&
+                !(selected.length === 1 && selected.includes(label)) &&
                   (this.setState({
                     selected: _.toggle_list(selected, label),
                   }))
@@ -319,7 +303,6 @@ export class LineBarToggleGraph extends React.Component {
                     () => {
                       const current_mode_index = _.indexOf(this.graph_modes, graph_mode);
                       const name_of_next_graph_mode = this.graph_modes[(current_mode_index+1) % this.graph_modes.length];
-
                       this.setState({
                         graph_mode: name_of_next_graph_mode,
                       });
@@ -337,8 +320,11 @@ export class LineBarToggleGraph extends React.Component {
           style={{ width: "100%", position: "relative" }}
           tabIndex="-1"
         >
-          { extra_graph_options.bar && <div style ={{height: '400px'}}><NivoResponsiveBar {...extended_graph_options_bar}/></div>}
-          { !extra_graph_options.bar && <div style = {{height: '400px'}}><NivoResponsiveLine {...extended_graph_options_line}/></div>}
+          <div style = {{height: '400px'}}>
+            { extra_graph_options.bar?
+              <NivoResponsiveBar { ...extended_graph_options_bar}/> :
+              <NivoResponsiveLine {...extended_graph_options_line} /> }
+          </div>
         </div>
       </div>
     );
