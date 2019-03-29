@@ -16,8 +16,8 @@ const last_year_col = "{{est_last_year}}_estimates";
 const row_identifier_func = row => `${row.dept}-${row.votenum}-${row.desc}`; 
 
 
-export const current_doc_is_mains = false; // Update this when switching between displaying mains and sups!
-export const current_sups_letter = "B"; // Update this on each new sups release!
+export const current_doc_is_mains = true; // Update this when switching between displaying mains and sups!
+export const current_sups_letter = ""; // Update this on each new sups release!
 
 const current_doc_code = current_doc_is_mains ? "MAINS" : `SE${current_sups_letter}`;
 const ordered_est_docs = ["MAINS", "VA", "SA", "SEA", "SEB", "SEC"];
