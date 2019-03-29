@@ -156,8 +156,8 @@ const Chart = ({
     tooltip = { d => (
       <div>
         <div style={{margin: '0'}}>
-          <div style ={{backgroundColor: d.color, height: '12px', width: '12px', display: 'inline-block'}} />&nbsp;&nbsp;&nbsp;
-          {d.indexValue}: <div style = {{display: 'inline-block'}} dangerouslySetInnerHTML = {{__html: format_value(d.value, is_money)}}></div>
+          <div style ={{backgroundColor: d[0].color, height: '12px', width: '12px', display: 'inline-block'}} />&nbsp;&nbsp;&nbsp;
+          {d[0].indexValue}: <div style = {{display: 'inline-block'}} dangerouslySetInnerHTML = {{__html: format_value(d[0].value, is_money)}}></div>
         </div>
       </div>
     )}

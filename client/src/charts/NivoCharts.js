@@ -10,7 +10,7 @@ const get_formatter = (is_money, formatter, raw = true) => (
       raw ? 
         (value) => dollar_formats.compact2_raw(value) : 
         (value) => formats.compact2(value)) :
-    ((value) => raw?formatter(value, {raw: true}) : formatter(value))
+    ((value) => raw ? formatter(value, {raw: true}) : formatter(value))
 );
 
 const default_tooltip = (tooltip_items, formatter) => (
