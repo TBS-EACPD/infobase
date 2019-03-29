@@ -1,4 +1,3 @@
-import accounting from 'accounting';
 import { get_static_url, make_request } from '../request_utils';
 import { query_adapter } from './tables/queries.js';
 import { 
@@ -337,9 +336,9 @@ export class Table extends mix().with(staticStoreMixin){
         const [key,val] = pair;
         const type = this.col_from_nick(key).type ;
         // in case we have numbers represented as string, we'll convert them to integers
-        if ( type === 'big_int' || type === "big_int_real" || type === 'percentage' || type==='decimal' || type==='decimal1' || type==='percentage1' || type==='percentage2'){
-          row_obj[key]=accounting.unformat(_.trim(val));
-        } else if (type === 'int' && !_.isNaN(parseInt(val,10))){
+        if ( (type === 'percentage' || type==='decimal' || type==='decimal1' || type==='percentage1' || type==='percentage2') && !_.isNaN(parseFloat(val)) ){
+          row_obj[key]=parseFloat(val);
+        } else if ( (type === 'big_int' || type === "big_int_real" || type === 'int') && !_.isNaN(parseInt(val,10)) ){
           row_obj[key]=parseInt(val,10);
         }
       });
