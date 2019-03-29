@@ -48,13 +48,13 @@ export default {
           "header": '',
         },
         {
-          "type": "int",
+          "type": "str",
           "hidden": true,
           "key": true,
           "nick": "type_id",
         },
         {
-          "type": "int",
+          "type": "str",
           "key": true,
           "nick": "type",
           "header": {
