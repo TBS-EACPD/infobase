@@ -26,6 +26,15 @@ const lang_percent_symbol = {
   fr: " %",
 };
 
+const number_formater = {
+  en: new Intl.NumberFormat('en-CA'),
+  fr: new Intl.NumberFormat('fr-CA'),
+}
+const money_formater = {
+  en: new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }),
+  fr: new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD' }),
+}
+
 const compact = (val, lang, abbrev, precision) => {
   const abs = Math.abs(val);
 
@@ -50,7 +59,7 @@ const compact = (val, lang, abbrev, precision) => {
     new_val = val;
     symbol = abbrev[999][lang];
   }
-
+  debugger;
   return accounting.formatMoney(
     new_val,
     {
