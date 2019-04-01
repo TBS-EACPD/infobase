@@ -5,11 +5,12 @@ const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 const CDN_URL = process.env.CDN_URL || ".";
 const IS_DEV_LINK = process.env.IS_DEV_LINK || false;
+const IS_PROD_RELEASE = process.env.IS_PRODUCTION || false;
 
 const get_rules = ({ 
   should_use_babel,
   language,
-  is_prod,
+  is_prod_build,
 }) => [
   {
     test: /\.js$/, 
@@ -33,7 +34,7 @@ const get_rules = ({
                 {
                   Chrome: "66",
                 },
-              forceAllTransforms: is_prod, // need to forceAllTransforms when uglifying
+              forceAllTransforms: is_prod_build, // need to forceAllTransforms when uglifying
             }],
             "@babel/preset-react",
           ],
@@ -94,19 +95,19 @@ const prod_plugins = [
   new webpack.optimize.ModuleConcatenationPlugin(),
 ]
 
-function get_plugins({ is_prod, language, a11y_client, commit_sha, local_ip, is_ci }){
+function get_plugins({ is_prod_build, language, a11y_client, commit_sha, local_ip, is_ci }){
   
   const plugins = [
     new webpack.DefinePlugin({
+      CDN_URL: JSON.stringify(CDN_URL),
       SHA: JSON.stringify(commit_sha),
       BUILD_DATE: JSON.stringify( new Date().toISOString().replace(/T.+/, '') ),
-      DEV: !is_prod,
       APPLICATION_LANGUAGE: JSON.stringify(language),
       IS_A11Y_MODE: !!a11y_client,
-      CDN_URL: JSON.stringify(CDN_URL),
+      IS_DEV: !IS_PROD_RELEASE,
       IS_DEV_LINK,
-      LOCAL_IP: JSON.stringify(local_ip),
       IS_CI: JSON.stringify(is_ci),
+      LOCAL_IP: JSON.stringify(local_ip),
     }),
     new CircularDependencyPlugin({
       exclude: /node_modules/,
@@ -127,15 +128,15 @@ function get_plugins({ is_prod, language, a11y_client, commit_sha, local_ip, is_
     }),
   ];
 
-  if(is_prod){
+  if(is_prod_build){
     return plugins.concat(prod_plugins);
   }
 
   return plugins;
 };
 
-function get_optimizations(is_prod){
-  if(is_prod){
+function get_optimizations(is_prod_build){
+  if(is_prod_build){
     return {
       minimizer: [
         new UglifyJSPlugin({ sourceMap: false }),
@@ -152,7 +153,7 @@ function create_config({
   language,
   a11y_client,
   commit_sha,
-  is_prod,
+  is_prod_build,
   local_ip,
   is_ci,
   should_use_babel,
@@ -166,24 +167,24 @@ function create_config({
 
   return {
     name: language,
-    mode: is_prod ? 'production' : 'development',
+    mode: is_prod_build ? 'production' : 'development',
     entry,
     output: new_output,
     module: {
-      rules: get_rules({ should_use_babel, language, is_prod}),
+      rules: get_rules({ should_use_babel, language, is_prod_build}),
       noParse: /\.csv$/,
     },
     plugins: get_plugins({
-      is_prod,
+      is_prod_build,
       language,
       a11y_client,
       commit_sha,
       local_ip,
       is_ci,
     }),
-    optimization: get_optimizations(is_prod),
+    optimization: get_optimizations(is_prod_build),
     devtool: (
-      is_prod ? 
+      is_prod_build ? 
         false : 
         'inline-source-map'
     ),

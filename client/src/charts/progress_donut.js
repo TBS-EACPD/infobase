@@ -41,7 +41,7 @@ export class ProgressDonut {
 
     const TAU = 2*Math.PI;
 
-    if(window.is_dev_build && this.options.data.length !== 2) { 
+    if(window.is_dev && this.options.data.length !== 2) { 
       /* eslint-disable no-console */
       console.error("progress donut not being used properly") 
     }

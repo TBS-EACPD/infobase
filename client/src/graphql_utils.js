@@ -6,10 +6,10 @@ import string_hash from 'string-hash';
 import { compressToBase64 } from 'lz-string';
 
 let api_url;
-if(window.is_dev_build){
-  api_url = `http://${ window.local_ip || "127.0.0.1" }:1337/graphql`;
-} else if(window.is_ci){
+if(window.is_ci){
   api_url = `hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls`;
+} else if (window.is_dev){
+  api_url = `http://${ window.local_ip || "127.0.0.1" }:1337/graphql`;
 } else {
   api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${window.sha}/graphql`;
 }

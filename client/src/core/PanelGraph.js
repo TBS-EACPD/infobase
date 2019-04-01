@@ -23,7 +23,7 @@ class PanelGraph {
 
   static lookup(key,level){
     const lookup = create_graph_key(key,level);
-    if (window.is_dev_build && !graphs[lookup]) {
+    if (window.is_dev && !graphs[lookup]) {
       /* eslint-disable no-console */
       console.error(`bad graph key - ${lookup} for level ${level && level.type}`);
       return null;
@@ -68,7 +68,7 @@ class PanelGraph {
   }
 
   new_api_warnings(){
-    if(this.is_old_api || !window.is_dev_build){
+    if(this.is_old_api || !window.is_dev){
       return;
     }
     _.each(["layout_def", "text", "title"], property => {

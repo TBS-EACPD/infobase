@@ -42,11 +42,7 @@ const get_single_info = _.memoize(
     }
     return stats.report_on(report_subject);
   }, 
-  ( 
-    window.is_dev_build ?  
-    (stats_key, subject) => `${stats_key}_${subject.guid}_${Date.now()}`:
-    (stats_key, subject) => `${stats_key}_${subject.guid}`
-  )
+  (stats_key, subject) => `${stats_key}_${subject.guid}`
 )
 
 //  //gov infos should only run once, no matter the subject
@@ -124,7 +120,7 @@ class Statistics extends mix().with(staticStoreMixin){
     try {
       this.compute.call(null, subject, tables, infos, add, stats);
     } catch (e){ 
-      if(window.is_dev_build){
+      if(window.is_dev){
         /* eslint-disable no-console */
         console.error(`missing values for ${subject.name}`)
       }

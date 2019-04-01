@@ -21,10 +21,10 @@ if(typeof CDN_URL !== "undefined"){
 if(typeof IS_DEV_LINK !== "undefined"){
   window.is_dev_link = IS_DEV_LINK;
 }
-if(typeof DEV !== "undefined"){
-  window.is_dev_build = DEV;
+if(typeof IS_DEV !== "undefined"){
+  window.is_dev = IS_DEV;
 }
-if(window.is_dev_build && typeof LOCAL_IP !== "undefined"){
+if(window.is_dev && typeof LOCAL_IP !== "undefined"){
   window.local_ip = LOCAL_IP;
 }
 if(typeof IS_CI !== "undefined"){

@@ -26,7 +26,7 @@ export class ErrorBoundary extends React.Component {
       .then( build_sha => {
         const local_sha_matches_remote_sha = build_sha.search(`^${window.sha}`) !== -1;
     
-        if (!local_sha_matches_remote_sha && !window.is_dev_build) {
+        if (!local_sha_matches_remote_sha && !window.is_dev) {
           window.location.reload(true);
         } else {
           this.log_error_and_display_error_page();
@@ -37,7 +37,7 @@ export class ErrorBoundary extends React.Component {
       });
   }
   log_error_and_display_error_page(){
-    if (!window.is_dev_build){
+    if (!window.is_dev){
       log_standard_event({
         SUBAPP: window.location.hash.replace('#',''),
         MISC1: "ERROR_IN_PROD",

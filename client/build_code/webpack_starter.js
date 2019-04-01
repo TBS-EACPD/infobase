@@ -63,7 +63,7 @@ gitsha(function(err, commit_sha){
     commit_sha,
     language: lang,
     a11y_client,
-    is_prod: prod,
+    is_prod_build: prod,
     local_ip: ip.address(),
     is_ci,
     should_use_babel: babel,

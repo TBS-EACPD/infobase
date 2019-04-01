@@ -413,7 +413,7 @@ class BudgetMeasureHBars extends React.Component {
                 data: {"allocated": program_allocation},
               };
             } else {
-              window.is_dev_build && console.warn(`Budget panel: missing program ${program_id}`); // eslint-disable-line
+              window.is_dev && console.warn(`Budget panel: missing program ${program_id}`); // eslint-disable-line
 
               return {
                 key: program_id,

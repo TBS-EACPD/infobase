@@ -22,7 +22,7 @@ const linked_stylesheets_loaded = () => {
 // No decent fix, but reloading page seems to be enough when it happens within the team, so doing that programatically in prod
 const ensure_linked_stylesheets_load = () => {
 
-  if ( !linked_stylesheets_loaded() && !window.is_dev_build){
+  if ( !linked_stylesheets_loaded() && !window.is_dev){
     log_standard_event({
       SUBAPP: window.location.hash.replace('#',''),
       MISC1: "ERROR_IN_PROD",
