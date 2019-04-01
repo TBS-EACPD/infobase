@@ -435,7 +435,7 @@ partition_spending_data:
 partition_planned_spending_data:
   transform: [handlebars]
   text: |
-    {{gt "planned_spending"}} ($)
+    {{gt "estimates"}} ($)
 partition_vote_stat_perspective:
   transform: [handlebars]
   en: |

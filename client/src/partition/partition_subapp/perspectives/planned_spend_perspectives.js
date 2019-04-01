@@ -435,7 +435,7 @@ const get_root_text_key = (presentation_scheme) => {
     case "est_doc_ie" : return "partition_spending_will_be_by_est_doc";
     default : return "partition_spending_will_be_variable_year";
   }
-}
+};
 
 const planned_exp_perspective_factory = (presentation_scheme) => new PartitionPerspective({
   id: presentation_scheme,
@@ -457,7 +457,7 @@ const planned_exp_perspective_factory = (presentation_scheme) => new PartitionPe
   ),
   level_headers: get_level_headers(presentation_scheme),
   diagram_note_content: presentation_scheme === "est_doc_ie" ? <TextMaker text_key={"partition_interim_estimates_def"} /> : false,
-})
+});
 
 
 const make_planned_spend_est_doc_mains_perspective = () => planned_exp_perspective_factory("est_doc_mains");

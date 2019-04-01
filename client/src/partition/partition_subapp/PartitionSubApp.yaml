@@ -70,7 +70,7 @@ partition_intro_popup:
           [Actual Spending]{{gl "EXP"}} ⟹ how much we spent;
         </li>
         <li>
-          [Planned Spending]{{gl "AUTH"}} ⟹ how much we plan to spend;
+          [Estimates]{{gl "AUTH"}} ⟹ how much we plan to spend;
         <li>
           [Full-Time Equivalents (FTEs)]{{gl "FTE"}} ⟹ how many people we employed; and,
         </li>
@@ -144,7 +144,7 @@ partition_intro_popup:
           [Dépenses réelles]{{gl "EXP"}} ⟹ Combien nous dépensons
         </li>
         <li>
-          [Dépenses prévues]{{gl "AUTH"}} ⟹ combien nous prévoyons dépenser
+          [Budgets des dépenses]{{gl "AUTH"}} ⟹ combien nous prévoyons dépenser
         <li>
           [Équivalents temps plein (ETP)]{{gl "FTE"}} ⟹ combien de personnes étaient employées
         </li>
