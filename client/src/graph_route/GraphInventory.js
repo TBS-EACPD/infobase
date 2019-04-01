@@ -265,11 +265,6 @@ export default class GraphInventory extends React.Component {
           />
         </div>
         <div>
-          <TestSubjectLinks
-            href_template={ subj => url_template(subj, panel) }
-          />
-        </div>
-        <div>
           <p> {tm("selected_subject")}: {subject.name} ({subject.level}) </p>
           <p> {tm("selected_graph")}: {panel.key} </p>
         </div>
@@ -279,12 +274,17 @@ export default class GraphInventory extends React.Component {
             subject={subject}
             key={`${panel.key}-${subject.guid}`}
           />
-          {_.isEmpty(panel.notes) && 
+          {!_.isEmpty(panel.notes) && 
             <div>
               <h3> {tm("notes")} </h3>
               { panel.notes }
             </div>
           }
+        </div>
+        <div>
+          <TestSubjectLinks
+            href_template={ subj => url_template(subj, panel) }
+          />
         </div>
         <div id="meta">
           <RelatedInfo {...{
@@ -317,11 +317,13 @@ class TestSubjectLinks extends React.Component {
       panel,
       href_template,
     } = this.props;
-
     return (
       <div>
+        <h3> {tm("test_subjects")} </h3>
         <div><Link to={href_template(Gov, panel)}> {tm("goc_total")} </Link></div>
-        <div><Link to={href_template(Gov, panel)}> {tm("goc_total")} </Link></div>
+        <div><Link to={href_template(Dept.lookup(151), panel)}>FCAC</Link></div>
+        <div><Link to={href_template(Dept.lookup(94), panel)}>CSIS</Link></div>
+        <div><Link to={href_template(Program.lookup("AECB-AUA00"), panel)}>AECB-AUA00 ({tm("non_active_program")})</Link></div>
       </div>
     )
   }
