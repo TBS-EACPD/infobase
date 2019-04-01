@@ -324,6 +324,7 @@ class TestSubjectLinks extends React.Component {
         <div><Link to={href_template(Dept.lookup(151), panel)}>FCAC</Link></div>
         <div><Link to={href_template(Dept.lookup(94), panel)}>CSIS</Link></div>
         <div><Link to={href_template(Program.lookup("AECB-AUA00"), panel)}>AECB-AUA00 ({tm("non_active_program")})</Link></div>
+        <div><Link to={href_template(Program.lookup("LAC-LJO00"), panel)}>LAC-LJO00 ({tm("small_numbers")})</Link></div>
       </div>
     )
   }

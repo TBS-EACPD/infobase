@@ -21,3 +21,7 @@ related_panels:
 test_subjects:
   en: Test subjects
   fr: Autres sujets
+
+small_numbers:
+  en: Small numbers
+  fr: Petits nombres
