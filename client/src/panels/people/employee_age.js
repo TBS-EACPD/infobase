@@ -151,6 +151,7 @@ const calculate_funcs_by_level = {
         disable_toggle: true,
         initial_graph_mode: "line",
         data: graph_args.avg_age,
+        formatter: formats.decimal1,
       };
       
       return (

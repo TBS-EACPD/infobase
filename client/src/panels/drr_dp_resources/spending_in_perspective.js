@@ -129,7 +129,6 @@ class SpendInTagPerspective extends React.Component {
             <NivoResponsivePie
               data = {data}
               colors={infobaseCategory10Colors}
-              start_angle = {0}
             />
           </div>
           {legend_display}

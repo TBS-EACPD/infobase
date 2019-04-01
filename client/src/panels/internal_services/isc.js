@@ -23,6 +23,7 @@ import {
   create_text_maker_component,
   years, 
   declarative_charts,
+  NivoResponsiveBar,
 } from '../shared';
 
 const { Gov, Tag } = Subject;
@@ -92,13 +93,26 @@ new PanelGraph({
     const more_footnotes = [{
       text: GlossaryEntry.lookup("INT_SERVICES").definition,
     }].concat(footnotes);
-
+    const years = _.map(std_years, yr => run_template(yr));
     const isc_label=text_maker("internal_services");
     const other_label = text_maker("other_programs");
     const bar_series = _.fromPairs([
       [ isc_label, _.map(series, 'isc') ],
       [ other_label, _.map(series, "non_isc") ],
     ]);
+
+    const bar_data = years.map((date, date_index) => (
+      _.fromPairs(
+        _.map(bar_series, (data, label) => (
+          [label,data[date_index]]
+        ))
+      )
+    ));
+    const data_formatter = _.map(bar_data, (stacked_data, index)=>({
+      ...stacked_data,
+      date: years[index],
+    }));
+  
     const colors = infobase_colors();
 
     const to_render = <div>
@@ -131,16 +145,18 @@ new PanelGraph({
             />
           </div>
         </div>
-        <div className="fcol-md-9">
-          <Bar
-            {...{
-              colors: window.infobase_colors(),
-              height: 300,
-              series: bar_series,
-              stacked: true,
-              ticks: _.map(std_years, yr => run_template(yr)),
-              formatter: formats.big_int_real_raw,
-              y_axis: text_maker("ftes"),
+        <div className="fcol-md-9" style = {{height: '300px'}}>
+          <NivoResponsiveBar
+            data = {data_formatter}
+            indexBy = "date"
+            colorBy = {d => colors(d.id)}
+            keys = {['', isc_label, other_label]}
+            is_money = {false}
+            margin = {{
+              top: 15,
+              right: 30,
+              bottom: 40,
+              left: 50,
             }}
           />
         </div>

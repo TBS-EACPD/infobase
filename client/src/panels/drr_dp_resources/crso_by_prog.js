@@ -172,7 +172,7 @@ class PlannedProgramResources extends React.Component {
           <NivoResponsiveBar
             data = {data_by_year}
             keys = {keys}
-            index_by = "year"
+            indexBy = "year"
             colorBy = { d => colors(d.id)}
             is_money = {!is_fte}
           />

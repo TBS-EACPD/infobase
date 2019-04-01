@@ -311,7 +311,7 @@ class HistoricalProgramBars extends React.Component {
           <NivoResponsiveBar
             data = {data_formatter}
             keys = {_.union([''],keys)}
-            index_by = "year"
+            indexBy = "year"
             colorBy ={d => colors(d.id)}
           />
         </div>

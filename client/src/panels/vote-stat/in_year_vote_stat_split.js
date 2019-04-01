@@ -37,7 +37,7 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
             <NivoResponsivePie
               data = {data}
               colors = {infobaseCategory10Colors}
-              legend = {[
+              legends = {[
                 {
                   anchor: "bottom",
                   direction: "row",

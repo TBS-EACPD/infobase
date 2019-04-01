@@ -80,15 +80,15 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
           data = {estimate_data}
           keys = {_.union(keys, [''])}
           label_format = { d => <tspan y={ -4 }> {dollar_formats.compact2_raw(d)} </tspan>}
-          is_interactive = {false}
-          enable_label = {true}
-          index_by = "label"
+          isInteractive = {false}
+          enableLabel = {true}
+          indexBy = "label"
           colors = "#335075"
           margin = {{            
             top: 50,
             right: 40,
             bottom: 120,
-            left: 40,
+            left: 40, 
           }}
           bttm_axis= {{
             format: d => (_.words(d).length > 3) ? d.substring(0,20)+'...' : d,

@@ -142,7 +142,7 @@ const Chart = ({
   <NivoResponsiveBar
     data = {welcome_data_bar(data, has_planned, has_hist)}
     keys = {["", "0"]}
-    index_by = {"year"}
+    indexBy = {"year"}
     margin={{
       top: 20,
       right: 30,

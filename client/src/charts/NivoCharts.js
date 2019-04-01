@@ -51,29 +51,30 @@ export class NivoResponsivePie extends React.Component{
       data,
       colors,
       theme,
-      enable_radial_labels,
-      enable_slice_labels,
+      enableRadialLabels,
+      enableSlicesLabels,
       tooltip,
       margin,
       text_formatter,
-      color_by,
-      legend,
-      start_angle,
+      colorBy,
+      legends,
+      startAngle,
       is_money,
     } = this.props
 
     return (
       <ResponsivePie
-        data={data}
-        margin={margin}
-        colors={colors}
-        startAngle={start_angle}
-        enableSlicesLabels={enable_slice_labels}
-        enableRadialLabels={enable_radial_labels}
-        legends={legend}
-        theme={theme}
+        {...{data,
+          margin,
+          colors,
+          theme,
+          startAngle,
+          enableSlicesLabels,
+          enableRadialLabels,
+          legends,
+          colorBy,
+        }}
         tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
-        colorBy = {color_by}
         innerRadius={0.5}
         borderWidth={1}
         borderColor="inherit:darker(0.2)"
@@ -94,8 +95,8 @@ NivoResponsivePie.defaultProps = {
     left: 50,
   },
 
-  enable_radial_labels: false,
-  enable_slice_labels: false,
+  enableRadialLabels: false,
+  enableSlicesLabels: false,
 };
 
 export class NivoResponsiveBar extends React.Component{
@@ -108,13 +109,13 @@ export class NivoResponsiveBar extends React.Component{
       colors,
       bttm_axis,
       left_axis,
-      is_interactive,
-      index_by,
+      isInteractive,
+      indexBy,
       remove_bottom_axis,
       remove_left_axis,
-      enable_label,
+      enableLabel,
       is_money,
-      legend,
+      legends,
       tick_value,
       text_formatter,
       theme,
@@ -129,30 +130,32 @@ export class NivoResponsiveBar extends React.Component{
 
     return (
       <ResponsiveBar
-        data={data}
-        keys={keys}
-        indexBy={index_by}
-        margin={margin}
-        colors={colors}
-        groupMode = {groupMode}
-        enableLabel={enable_label}
-        enableGridX={enableGridX}
-        enableGridY={enableGridY}
-        isInteractive={is_interactive}
-        legends={legend}
-        colorBy={colorBy}
-        theme={theme}
+        {...{data,
+          keys,
+          margin,
+          colors,
+          groupMode,
+          enableGridX,
+          enableGridY,
+          colorBy,
+          theme, 
+          indexBy, 
+          enableLabel, 
+          legends,
+          isInteractive,
+        }}
         labelFormat={_.isUndefined(label_format) ? null : label_format}
         tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
         axisBottom={remove_bottom_axis ? null : bttm_axis}
         axisLeft={
           remove_left_axis ?
             null :
-            left_axis || {
+            {
               tickValues: tick_value || 6,
               format: (d) => get_formatter(is_money, text_formatter)(d),
               min: "auto",
               max: "auto",
+              ...(left_axis || {}),
             }
         }
         padding={0.3}
@@ -181,10 +184,10 @@ NivoResponsiveBar.defaultProps = {
       },
     },
   },
-  is_interactive: true,
+  isInteractive: true,
   remove_bottom_axis: false,
   remove_left_axis: false,
-  enable_label: false,
+  enableLabel: false,
   enableGridX: true,
   enableGridY: true,
 };
@@ -206,10 +209,11 @@ export class NivoResponsiveLine extends React.Component {
       enableArea,
       enableGridX,
       enableGridY,
+      left_axis,
       yScale,
       motion_damping,
       motion_stiffness,
-      enable_dot_label,
+      enableDotLabel,
       remove_bottom_axis,
       bttm_axis,
       text_formatter,
@@ -220,15 +224,16 @@ export class NivoResponsiveLine extends React.Component {
 
     return (
       <ResponsiveLine
-        data={data}
-        margin={margin}
-        enableGridX={enableGridX}
-        enableGridY={enableGridY}
-        enableDotLabel={enable_dot_label}
-        enableArea={enableArea}
-        colorBy={colorBy}
-        colors={colors}
-        theme={theme}
+        {...{data,
+          margin,
+          enableGridX,
+          enableGridY,
+          enableArea,
+          colorBy,
+          colors,
+          theme,
+          enableDotLabel,
+        }}
         tooltip={ (d) => tooltip( d, get_formatter(is_money, text_formatter, false) ) }
         yScale={ 
           {
@@ -245,9 +250,9 @@ export class NivoResponsiveLine extends React.Component {
           tickSize: 5,
           tickPadding: 5,
           tickValues: tick_amount || 6,
-          format: d => get_formatter(is_money)(d),
+          format: d => get_formatter(is_money, text_formatter)(d),
+          ...(left_axis || {}),
         }}
-        
         axisTop={null}
         axisRight={null}
         xScale={{ type: "point" }}
@@ -288,7 +293,7 @@ NivoResponsiveLine.defaultProps = {
     },
   },
   remove_bottom_axis: false,
-  enable_dot_label: false,
+  enableDotLabel: false,
   stacked: false,
   enable_label: false,
   enableGridX: true,

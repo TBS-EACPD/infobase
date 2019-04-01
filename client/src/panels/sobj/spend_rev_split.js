@@ -77,9 +77,9 @@ function render({calculations, footnotes, sources}) {
         <NivoResponsiveBar
           data = {spend_rev_data}
           keys = {ticks}
-          index_by = "title"
-          enable_label = {true}
-          is_interactive = {false}
+          indexBy = "title"
+          enableLabel = {true}
+          isInteractive = {false}
           label_format = { d=><tspan y={-4}> {formats.compact1(d, {raw: true})} </tspan>}
           colors = "#335075"
           enableGridX={false}

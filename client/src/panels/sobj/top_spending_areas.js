@@ -134,7 +134,7 @@ const render_w_options = ({text_key}) => ({calculations, footnotes, sources}) =>
                 "left": 50,
               }}
               colors = {infobaseCategory10Colors}
-              legend = {[
+              legends = {[
                 {
                   "anchor": "bottom",
                   "direction": "column",

@@ -160,7 +160,7 @@ export class LineBarToggleGraph extends React.Component {
       graph_col_class,
 
       disable_toggle,
-
+      formatter,
       graph_options,
     } = this.props;
 
@@ -220,8 +220,8 @@ export class LineBarToggleGraph extends React.Component {
         data_formatter_bar(normalize(data_bar)) : 
         data_formatter_bar(data_bar),
       colorBy: d => colors(d.id),
-      text_formatter: extra_graph_options.formatter,
-      index_by: extra_graph_options.index,
+      text_formatter: formatter || extra_graph_options.formatter,
+      indexBy: extra_graph_options.index,
       is_money: !!extra_graph_options.is_money,
       groupMode: extra_graph_options.groupMode,
       margin: {
@@ -246,7 +246,7 @@ export class LineBarToggleGraph extends React.Component {
       },
       enableArea: !!extra_graph_options.enableArea,
       is_money: !!extra_graph_options.is_money,
-      text_formatter: extra_graph_options.formatter,
+      text_formatter: formatter || extra_graph_options.formatter,
       margin: {
         top: 30,
         right: 20,

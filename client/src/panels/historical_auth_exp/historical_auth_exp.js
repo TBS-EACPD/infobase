@@ -105,7 +105,7 @@ const render = function({calculations, footnotes, sources}) {
           <NivoResponsiveBar
             data = {data_exp}
             keys={_.union([''], series_labels)}
-            index_by = "years"
+            indexBy = "years"
             colors = {infobaseCategory10Colors}
             enableGridX = {false}
             margin = {{
@@ -114,7 +114,7 @@ const render = function({calculations, footnotes, sources}) {
               bottom: 50,
               left: 65,
             }}
-            legend = {[
+            legends = {[
               {
                 "translateY": -35,
                 "translateX": -20,
