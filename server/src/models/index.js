@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { makeExecutableSchema } from 'graphql-tools';
-import model_singleton from './model-singleton';
-import root_schema from './schema_root';
+import model_singleton from './model_singleton.js';
+import root_schema from './schema_root.js';
 
 //each sub-module is included here
 import core_subject from './core_subject';
@@ -11,7 +11,7 @@ import results from './results';
 // import sobjs from './standard_objects';
 // import people from './people';
 // import search from './search';
-// import vote_stat from './vote-stat';
+// import vote_stat from './vote_stat';
 // import transfer_payments from './transfer_payments';
 // import budget_measures from './budget_measures';
 // import transfer_payments_loc from './transfer_payments_loc';
