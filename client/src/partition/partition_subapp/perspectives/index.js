@@ -27,7 +27,7 @@ import {
   //make_estimates_est_doc_im_perspective,
 } from './estimates_perspectives.js';
 
-import { data_types } from './perspective_utils.js';
+import { data_types, remapped_data_types } from './perspective_utils.js';
 
 const all_data_types = data_types;
 
@@ -64,5 +64,6 @@ const get_all_perspectives = () => {
 
 export {
   all_data_types,
+  remapped_data_types,
   get_all_perspectives,
 };

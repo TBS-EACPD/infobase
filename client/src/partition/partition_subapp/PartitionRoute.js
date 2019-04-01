@@ -1,5 +1,5 @@
 import { PartitionSubApp } from './PartitionSubApp.js';
-import { get_all_perspectives, all_data_types } from './perspectives/index.js';
+import { get_all_perspectives, all_data_types, remapped_data_types } from './perspectives/index.js';
 import { ensure_loaded } from '../../core/lazy_loader.js';
 import { StandardRouteContainer } from '../../core/NavComponents.js';
 import { 
@@ -29,7 +29,7 @@ export default class PartitionRoute extends React.Component {
   }
   componentDidMount(){
     ensure_loaded({
-      table_keys: ['programSpending', 'orgVoteStatEstimates', 'programFtes','programSobjs'],
+      table_keys: ['programSpending', 'orgVoteStatEstimates', 'programFtes', 'programSobjs'],
     }).then( () => {
       this.all_perspectives = get_all_perspectives();
       this.setState({loading: false});
@@ -79,7 +79,7 @@ export default class PartitionRoute extends React.Component {
   }
   getValidatedRouteParams(props){
     const route_perspective = props.match.params.perspective;
-    const route_data_type = props.match.params.data_type;
+    const route_data_type = remapped_data_types[props.match.params.data_type] || props.match.params.data_type;
 
     const route_data_type_and_perspective_combination_is_valid = !_.chain(this.all_perspectives)
       .filter( perspective => perspective.data_type === route_data_type && perspective.id === route_perspective )

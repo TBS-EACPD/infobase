@@ -49,10 +49,14 @@ const data_types = [
     name: text_maker("orgs"),
   },
 ];
+const remapped_data_types = {
+  planned_exp: "estimates",
+};
 
 export { 
   get_common_popup_options, 
   wrap_in_brackets, 
   formats_by_data_type, 
   data_types,
+  remapped_data_types,
 };
