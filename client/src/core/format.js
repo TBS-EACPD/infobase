@@ -1,14 +1,4 @@
-// for properly formating numbers in multiple formats in both English and French
-// * [compact written](#compact1_written) -> 2000000000 -> 2.0 billion
-// * [compact1 ](#compact1) : 2100000000 -> 2.1 B
-// * [compact0](#compact0) : 2100000000 -> 2.0 B
-// * [percentage](#percentage) : 0.234231 -> 23.4%
-// * [big_int](#big_int) : 2000000000 -> 2,000,000
-// * [big_int_real](#big_int_real) : 2000000000 -> 2,000,000,000
-// * [int](#int) : 2000000000 ->  2000000000 ->  2000000000
-// * [str](#str) : 2000000000 -> "zero" -> "zero"
-// * [wide-str](#wide-str) : "some long string" -> "some long string" 
-//
+//  for properly formating numbers in multiple formats in both English and French
 //  relates to the column type attribute as of the table class
 //  site.scss also establishes the widths for displaying each of the data types
 
