@@ -321,10 +321,18 @@ class TestSubjectLinks extends React.Component {
       <div>
         <h3> {tm("test_subjects")} </h3>
         <div><Link to={href_template(Gov, panel)}> {tm("goc_total")} </Link></div>
+        <div><h5>Dept</h5></div>
         <div><Link to={href_template(Dept.lookup(151), panel)}>FCAC</Link></div>
         <div><Link to={href_template(Dept.lookup(94), panel)}>CSIS</Link></div>
+        <div><Link to={href_template(Dept.lookup(249), panel)}>GG</Link></div>
+        <div><Link to={href_template(Dept.lookup(219), panel)}>NCC (crown)</Link></div>
+        <div><h5>CRSO</h5></div>
+        <div><Link to={href_template(CRSO.lookup("NSERC-BNR00"), panel)}>NSERC-BNR00 (CR)</Link></div>
+        <div><Link to={href_template(CRSO.lookup("INDSC-ISS00"), panel)}>INDSC-ISS00 (CR, Internal Services)</Link></div>
+        <div><h5>Prog</h5></div>
         <div><Link to={href_template(Program.lookup("AECB-AUA00"), panel)}>AECB-AUA00 ({tm("non_active_program")})</Link></div>
         <div><Link to={href_template(Program.lookup("LAC-LJO00"), panel)}>LAC-LJO00 ({tm("small_numbers")})</Link></div>
+        <div><Link to={href_template(Program.lookup("NCC-BSN00"), panel)}>NCC-BSN00 (crown)</Link></div>
       </div>
     )
   }
