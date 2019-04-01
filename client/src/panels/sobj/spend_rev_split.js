@@ -72,7 +72,7 @@ function render({calculations, footnotes, sources}) {
           add_labels: true,                                  
           x_axis_line: true,                                
           colors: infobase_colors(),
-          formater: formats.compact1_raw,
+          formatter: formats.compact1_raw,
           margin: {top: 20, right: 20, left: 60, bottom: 80},
         }}
       />

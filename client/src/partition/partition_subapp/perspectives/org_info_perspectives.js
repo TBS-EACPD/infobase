@@ -136,7 +136,7 @@ const org_info_data_wrapper_node_rules = (node) => {
 }
 
 
-const value_formater = function(node_data){
+const value_formatter = function(node_data){
   return !node_data.data.is("dept") ?
     wrap_in_brackets(
       formats_by_data_type["org_info"](node_data["org_info"]) + " " + 
@@ -180,7 +180,7 @@ const make_org_info_ministry_perspective = () => new PartitionPerspective({
   id: "org_info_by_ministry",
   name: text_maker("partition_org_info_by_min"),
   data_type: "org_info",
-  formater: value_formater,
+  formatter: value_formatter,
   hierarchy_factory: () => create_org_info_ministry_hierarchy("org_info"),
   data_wrapper_node_rules: org_info_data_wrapper_node_rules,
   popup_template: org_info_perspective_popup_template,
@@ -196,7 +196,7 @@ const make_org_info_federal_perspective = () => new PartitionPerspective({
   id: "org_info_federal_orgs_by_inst_form",
   name: text_maker("partition_org_info_federal_orgs_by_inst_form"),
   data_type: "org_info",
-  formater: value_formater,
+  formatter: value_formatter,
   hierarchy_factory: () => create_org_info_inst_form_hierarchy("org_info", "fed_int_gp"),
   data_wrapper_node_rules: org_info_data_wrapper_node_rules,
   popup_template: org_info_perspective_popup_template,
@@ -211,7 +211,7 @@ const make_org_info_interests_perspective = () => new PartitionPerspective({
   id: "org_info_interests_by_inst_form",
   name: text_maker("partition_org_info_interests_by_inst_form"),
   data_type: "org_info",
-  formater: value_formater,
+  formatter: value_formatter,
   hierarchy_factory: () => create_org_info_inst_form_hierarchy("org_info", "corp_int_gp"),
   data_wrapper_node_rules: org_info_data_wrapper_node_rules,
   popup_template: org_info_perspective_popup_template,

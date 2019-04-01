@@ -159,7 +159,7 @@ export class PartitionSubApp {
       data: hierarchy,
       data_wrapper_node_rules: data_wrapper_node_rules,
       dont_fade: this.dont_fade,
-      formatter: this.current_perspective.formater,
+      formatter: this.current_perspective.formatter,
       level_headers: this.current_perspective.level_headers,
       root_text_func: this.current_perspective.root_text_func,
       popup_template: this.current_perspective.popup_template,

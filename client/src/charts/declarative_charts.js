@@ -23,8 +23,8 @@ const { create_a11y_table } = charts_index;
         
     }, ... ],
   }, ...],
-  formater: to format the NUMBERS
-  bar_label_formater: item => string NOT FOR THE NUMBERS
+  formatter: to format the NUMBERS
+  bar_label_formatter: item => string NOT FOR THE NUMBERS
   bar_height: int
   font_size : font-size string (e.g. 12px, 1em, 1rem)
   colors: label => color
@@ -107,7 +107,7 @@ class StackedHbarChart extends React.Component {
   _render(){
     const {
       data,
-      formater,
+      formatter,
       colors,
       percentage_mode,
       paginate,
@@ -133,22 +133,22 @@ class StackedHbarChart extends React.Component {
 
     this.graph_instance.render({
       data: prepared_data,
-      formater,
+      formatter,
       colors,
       percentage_mode,
     });
   }
   componentDidMount(){
     let {
-      formater,
+      formatter,
       font_size,
       bar_height,
-      bar_label_formater,
+      bar_label_formatter,
     } = this.props;
 
-    const default_bar_label_formater = ({ label, href, is_link_out}) => `<a ${href ? `href=${href}` : ''} ${is_link_out ? 'target="_blank" rel="noopener noreferrer"' : ''}>${label}</a>`;
+    const default_bar_label_formatter = ({ label, href, is_link_out}) => `<a ${href ? `href=${href}` : ''} ${is_link_out ? 'target="_blank" rel="noopener noreferrer"' : ''}>${label}</a>`;
 
-    bar_label_formater = bar_label_formater || default_bar_label_formater;
+    bar_label_formatter = bar_label_formatter || default_bar_label_formatter;
     bar_height = bar_height || 50;
     font_size = font_size || "14px";
 
@@ -156,10 +156,10 @@ class StackedHbarChart extends React.Component {
     this.graph_instance = new HBarComposition(
       d3.select(this.refs.graph_area).node(),
       {
-        bar_label_formater,
+        bar_label_formatter,
         bar_height,
         font_size,
-        formater,
+        formatter,
       }
     );
       

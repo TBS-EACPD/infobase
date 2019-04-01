@@ -135,7 +135,7 @@ const calculate_funcs_by_level = {
         graph_options: {
           ticks: ticks,
           y_axis: text_maker("employees"),
-          formater: formats.big_int_real_raw,
+          formatter: formats.big_int_real_raw,
         },
         initial_graph_mode: "bar_grouped",
         data: graph_args.age_group,
@@ -146,7 +146,7 @@ const calculate_funcs_by_level = {
         graph_options: {
           ticks: ticks,
           y_axis: text_maker("avgage"),
-          formater: formats.int,
+          formatter: formats.int,
         },
         disable_toggle: true,
         initial_graph_mode: "line",

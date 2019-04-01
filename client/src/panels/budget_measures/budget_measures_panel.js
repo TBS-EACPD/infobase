@@ -735,7 +735,7 @@ class BudgetMeasureHBars extends React.Component {
                 font_size="12px"
                 bar_height={60} 
                 data = {graph_ready_data}
-                formater = {formats.compact1}
+                formatter = {formats.compact1}
                 colors = {bar_colors}
                 paginate = {true}
                 items_per_page = {10}

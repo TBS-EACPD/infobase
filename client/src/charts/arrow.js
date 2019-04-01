@@ -32,7 +32,7 @@ export class Arrow {
       bottom: 30, 
       left: 10};
     var color = this.options.color || common_charts_utils.tbs_color();
-    var formater = this.options.formater;
+    var formatter = this.options.formatter;
     var arrow_width = 60;
     var arrow_height = 100;
     var padding = 30;
@@ -149,7 +149,7 @@ export class Arrow {
         "font-weight": "500",
       })
       .text(function(d){
-        return formater(d.value);
+        return formatter(d.value);
       });
 
     var bottomtext = html

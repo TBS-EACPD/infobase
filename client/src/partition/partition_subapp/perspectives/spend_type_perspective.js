@@ -160,7 +160,7 @@ const make_spend_type_perspective = () => new PartitionPerspective({
   id: "st",
   name: text_maker("type_of_spending"),
   data_type: "exp",
-  formater: node_data => wrap_in_brackets(formats_by_data_type["exp"](node_data["exp"])),
+  formatter: node_data => wrap_in_brackets(formats_by_data_type["exp"](node_data["exp"])),
   hierarchy_factory: () => create_spend_type_hierarchy(),
   data_wrapper_node_rules: spend_type_data_wrapper_node_rules,
   popup_template: spend_type_perspective_popup_template,

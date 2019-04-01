@@ -110,7 +110,7 @@ export class LineBarToggleGraph extends React.Component {
         stacked: true,
         normalized: true,
         y_axis: "%",
-        formater: formats.percentage_raw,
+        formatter: formats.percentage_raw,
       },
       bar_grouped: {
         bar: true,

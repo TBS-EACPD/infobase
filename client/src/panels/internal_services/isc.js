@@ -139,7 +139,7 @@ new PanelGraph({
               series: bar_series,
               stacked: true,
               ticks: _.map(std_years, yr => run_template(yr)),
-              formater: formats.big_int_real_raw,
+              formatter: formats.big_int_real_raw,
               y_axis: text_maker("ftes"),
             }}
           />

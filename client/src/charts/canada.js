@@ -58,7 +58,7 @@ export class Canada {
     const height = scale * y_scale_factor;
     const padding = ( this.outside_width - (scale * x_scale_factor) ) / 2;
     const color_scale = this.options.color_scale;
-    const formater = this.options.formater;
+    const formatter = this.options.formatter;
     
     const data = this.options.data;
     const last_year_data = _.last(data);
@@ -209,7 +209,7 @@ export class Canada {
         d3.select(this)
           .append("p")
           .style("margin-bottom", "0px")
-          .html( formater(last_year_data[prov_key]) )
+          .html( formatter(last_year_data[prov_key]) )
       });
 
 

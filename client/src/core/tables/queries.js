@@ -91,7 +91,7 @@ class Queries {
       _.each(cols, col=>{
         // jump to [col_from_nick](base_tables.html#col_from_nick)
         var type = this.table.col_from_nick(col).type;
-        vals[col]= FORMAT.formater(type,vals[col]);
+        vals[col]= FORMAT.formatter(type,vals[col]);
       });
     }
     if (!as_object){
@@ -168,10 +168,10 @@ class Queries {
     if (format){
       _.each(cols, col => {
         var type = this.table.col_from_nick(col).type;
-        vals[col]= FORMAT.formater(type,vals[col]);
+        vals[col]= FORMAT.formatter(type,vals[col]);
       });
       if (gross_percentage){
-        vals[gp_colname]= FORMAT.formater("percentage",vals[gp_colname]);
+        vals[gp_colname]= FORMAT.formatter("percentage",vals[gp_colname]);
       }
     }
     if (options.pop_single && cols.length === 1){

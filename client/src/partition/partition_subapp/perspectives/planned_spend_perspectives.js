@@ -441,7 +441,7 @@ const planned_exp_perspective_factory = (presentation_scheme) => new PartitionPe
   id: presentation_scheme,
   name: get_name(presentation_scheme),
   data_type: "planned_exp",
-  formater: node_data => wrap_in_brackets(formats_by_data_type["planned_exp"](node_data["planned_exp"])),
+  formatter: node_data => wrap_in_brackets(formats_by_data_type["planned_exp"](node_data["planned_exp"])),
   hierarchy_factory: () => create_planned_spending_hierarchy("planned_exp", presentation_scheme),
   popup_template: _.curry(planned_exp_popup_template)(presentation_scheme),
   root_text_func: root_value => text_maker(

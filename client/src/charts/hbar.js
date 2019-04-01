@@ -75,7 +75,7 @@ export class HBar {
     var extent = d3.extent(data, (d) => d.value);
     var x_left = extent[0] > 0 ? 0 : extent[0];
     var x_right = extent[1] < 0 ? 0 : extent[1];
-    var formater = this.options.formater || _.identity;
+    var formatter = this.options.formatter || _.identity;
     var tick_number = this.options.tick_number;
     var pos_color = this.options.pos_color || this.pos_color;
     var neg_color = this.options.neg_color || this.neg_color;
@@ -118,8 +118,8 @@ export class HBar {
     if (this.ticks){
       xAxis.ticks(this.ticks);
     }
-    if (this.options.axisFormater){
-      xAxis.tickFormat(this.options.axisFormater);
+    if (this.options.axisFormatter){
+      xAxis.tickFormat(this.options.axisFormatter);
     }
 
     this.graph_area
@@ -200,11 +200,11 @@ export class HBar {
 
       if (href) {
         single.selectAll("a")
-          .html(d.name + ": " + formater(d.value))
+          .html(d.name + ": " + formatter(d.value))
           .attr("href", href);
       } else {
         single.selectAll("span")
-          .html(d.name + ": " + formater(d.value));
+          .html(d.name + ": " + formatter(d.value));
       }
     });
 

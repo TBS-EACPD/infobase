@@ -5,7 +5,7 @@ export class PartitionPerspective {
       id: args.id,
       name: args.name,
       data_type: args.data_type,
-      formater: args.formater,
+      formatter: args.formatter,
       hierarchy_factory: args.hierarchy_factory,
       popup_template: args.popup_template,
       root_text_func: args.root_text_func,

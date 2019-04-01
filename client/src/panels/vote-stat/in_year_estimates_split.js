@@ -77,7 +77,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
       add_labels: true,
       colors: infobase_colors(),
       margin: {top: 20, right: 20, left: 20, bottom: 80},
-      formater: formats.compact1,
+      formatter: formats.compact1,
     };
 
     content = (

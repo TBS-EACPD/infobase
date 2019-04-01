@@ -137,7 +137,7 @@ class SobjLine extends React.Component {
             series={graph_series}
             ticks={_.map(std_years, run_template)}
             y_axis="($)"
-            formaters={dollar_formats}
+            formatters={dollar_formats}
             colors={colors}
           />
         </div>

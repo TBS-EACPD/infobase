@@ -176,14 +176,15 @@ const types_to_format = {
   },
 };
 
-const formater = (format, val, options) => {
+
+const formatter = (format, val, options) => {
   options = options || {};
   if ( _.has(types_to_format, format) ){
     if ( _.isArray(val) ){
-      return _.map(val, v => formater(format, v, options) );
+      return _.map(val, v => formatter(format, v, options) );
     } else if (_.isObject(val)){
       return _.chain(val)
-        .map( (v, k) => [k, formater(format, v, options)] )
+        .map( (v, k) => [k, formatter(format, v, options)] )
         .fromPairs()
         .value();
     } else if ( _.isNaN(+val) && _.isString(val) ){
@@ -196,11 +197,11 @@ const formater = (format, val, options) => {
 };
 
 // formats can be either an array of formats (of equal length to vals) or one format one which will be applied to all values
-const list_formater = (formats, vals) => _.map(
+const list_formatter = (formats, vals) => _.map(
   vals, 
   (value, ix) => !_.isArray(formats) ? 
-    formater(formats[ix], value) : 
-    formater(formats, value)
+    formatter(formats[ix], value) : 
+    formatter(formats, value)
 );
 
 // setup all the Handlebars formatter functions based on the available formats
@@ -214,7 +215,7 @@ _.each(
       if ( !_.isObject(options) || _.isUndefined(options) ){
         options = {};
       }
-      return formater(key, val, options);
+      return formatter(key, val, options);
     };
 
     formats[key+"_raw"] = (val, options) => {
@@ -222,7 +223,7 @@ _.each(
         options = {};
       }
       options.raw = true;
-      return formater(key, val, options);
+      return formatter(key, val, options);
     };
 
     Handlebars.registerHelper("fmt_"+key, amount => new Handlebars.SafeString(formats[key](amount)));
@@ -232,8 +233,8 @@ _.each(
 
 const dollar_formats = _.pickBy( formats, (format, key) => /^compact([0-9?]?)+_raw$/.test(key) );
 export { 
-  formater, 
-  list_formater, 
+  formatter, 
+  list_formatter, 
   formats,
   dollar_formats,
 };

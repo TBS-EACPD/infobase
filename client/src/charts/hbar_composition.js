@@ -26,8 +26,8 @@ export class HBarComposition {
 
   render(options){
     this.options = _.extend(this.options,options);
-    const formater = this.options.formater;
-    const non_std_formater = this.options.non_std_formater;
+    const formatter = this.options.formatter;
+    const non_std_formatter = this.options.non_std_formatter;
     const bar_height = this.options.bar_height || 30;
     const font_size = this.options.font_size || "10px";
     const percentage_mode = this.options.percentage_mode;
@@ -37,7 +37,7 @@ export class HBarComposition {
       right: 20,
       bottom: 30,
       left: 20};
-    const bar_label_formater = _.isFunction(this.options.bar_label_formater) ? this.options.bar_label_formater : _.identity;
+    const bar_label_formatter = _.isFunction(this.options.bar_label_formatter) ? this.options.bar_label_formatter : _.identity;
     const get_series_label = d => d.label;
     let x_max = -Infinity;
     let x_min = Infinity;
@@ -79,10 +79,10 @@ export class HBarComposition {
     const width = this.outside_width - margin.left - margin.right;
 
     const neg_x_min_bar_pct = x_min < 0 ? 
-      (get_el_width(formater(x_min)) + 30)/width :
+      (get_el_width(formatter(x_min)) + 30)/width :
       0;
     const right_margin_pct = 0.075;
-    const left_margin_pct = non_std_formater || neg_x_min_bar_pct < right_margin_pct ? 
+    const left_margin_pct = non_std_formatter || neg_x_min_bar_pct < right_margin_pct ? 
       right_margin_pct :
       neg_x_min_bar_pct;
 
@@ -240,7 +240,7 @@ export class HBarComposition {
             "text-align": "right",
             "padding-right": "5px",
           })
-          .html(bar_label_formater);
+          .html(bar_label_formatter);
 
         if ( d.positive_sum > 0) {
           d3.select(this)
@@ -260,12 +260,12 @@ export class HBarComposition {
             })
             .classed("bar-amount-pos", true)
             .html(
-              non_std_formater ? 
-                non_std_formater({ 
+              non_std_formatter ? 
+                non_std_formatter({ 
                   positive_sum: d.positive_sum, 
                   data: d, 
                 }) : 
-                formater(d.positive_sum)
+                formatter(d.positive_sum)
             );
         }
 
@@ -289,9 +289,9 @@ export class HBarComposition {
             })
             .classed("bar-amount-neg", true)
             .html(
-              non_std_formater ? 
+              non_std_formatter ? 
                 "" : 
-                formater(d.negative_sum)
+                formatter(d.negative_sum)
             );
         }
       })

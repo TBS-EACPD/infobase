@@ -121,7 +121,7 @@ const render = function({calculations, footnotes, sources}) {
             series_labels,
             ticks,
             stacked, 
-            formater: formats.compact_raw,
+            formatter: formats.compact_raw,
             height: 400,
             series: {
               [series_labels[0]]: stacked ? exp : auth,

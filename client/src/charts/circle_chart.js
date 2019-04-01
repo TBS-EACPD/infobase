@@ -25,7 +25,7 @@ export class CirclePieChart {
     var width = this.outside_width - margin.left - margin.right;
     var height = this.outside_height - margin.top - margin.bottom;
     var min_dim = Math.min(height, width);
-    var formater = this.options.formater || _.identity;
+    var formatter = this.options.formatter || _.identity;
     var font_size = this.options.font_size || 16;
     var title = this.options.title;
     var data = this.options.data;
@@ -108,7 +108,7 @@ export class CirclePieChart {
       .append("div");
 
     text.merge(new_text)
-      .html(function(d){ return formater(d.value);})
+      .html(function(d){ return formatter(d.value);})
       .styles({
         "text-align": "center",
         "position": "absolute",

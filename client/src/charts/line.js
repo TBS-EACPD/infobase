@@ -34,8 +34,8 @@ export class Line {
 
     this.x_axis_line = this.options.x_axis_line === undefined ? true : this.options.x_axis_line;
 
-    this.formaters = _.map(this.options.formaters); 
-    this.formater = !_.isEmpty(this.formaters) ? this.formaters[0] : this.options.formater;
+    this.formatters = _.map(this.options.formatters); 
+    this.formatter = !_.isEmpty(this.formatters) ? this.formatters[0] : this.options.formatter;
 
     // resize the svg if necessary
     this.svg
@@ -55,7 +55,7 @@ export class Line {
     // restrict either the beginning or end of the ticks
     // if there are no associated values  
     this.all_ticks = this.options.ticks;
-    this.ticks_formater = _.isFunction(this.options.ticks_formater) ? this.options.ticks_formater : _.identity;
+    this.ticks_formatter = _.isFunction(this.options.ticks_formatter) ? this.options.ticks_formatter : _.identity;
     this.ticks = (
       _.filter(
         this.all_ticks, 
@@ -384,7 +384,7 @@ export class Line {
           "width": this.tick_width+"px",
           "left": d => this.x(d)-this.tick_width/2+this.margin.left+"px",
         })
-        .html(this.ticks_formater);
+        .html(this.ticks_formatter);
       
       if (!this.x_axis_line){
         this.graph_area.select(".x.axis path").remove();
@@ -399,19 +399,19 @@ export class Line {
 
       this.graph_area.select(".y.axis").remove();
 
-      const formater_gives_unique_ticks = (formater) => _.chain( this.y.ticks(5) )
-        .map(formater)
+      const formatter_gives_unique_ticks = (formatter) => _.chain( this.y.ticks(5) )
+        .map(formatter)
         .uniq()
         .value().length === this.y.ticks(5).length;
-      const pick_best_formater_option = () => {
-        if ( _.isEmpty(this.formaters) ){
-          return this.formater;
+      const pick_best_formatter_option = () => {
+        if ( _.isEmpty(this.formatters) ){
+          return this.formatter;
         } else {
-          const good_formaters = _.filter(this.formaters, formater_gives_unique_ticks);
-          if ( !_.isEmpty(good_formaters) ){
-            return good_formaters[0];
+          const good_formatters = _.filter(this.formatters, formatter_gives_unique_ticks);
+          if ( !_.isEmpty(good_formatters) ){
+            return good_formatters[0];
           } else {
-            return this.formater;
+            return this.formatter;
           }
         }
       };
@@ -420,7 +420,7 @@ export class Line {
         .scale(this.y)
         .ticks(5)
         .tickSizeOuter(0)
-        .tickFormat( pick_best_formater_option() );
+        .tickFormat( pick_best_formatter_option() );
 
       var yaxis_node = this.graph_area.select(".y.axis");
 

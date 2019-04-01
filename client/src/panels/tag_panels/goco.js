@@ -162,12 +162,12 @@ class Goco {
     const series1 = {
       label: text_maker("spending"), 
       data: _.map(this.data,"spending"),
-      formater: formats.compact1,
+      formatter: formats.compact1,
     };
     const series2 = {
       label: text_maker("ftes") , 
       data: _.map(this.data,"ftes"),
-      formater: formats.big_int_real,
+      formatter: formats.big_int_real,
     };
 
     reactAdapter.render(
@@ -231,12 +231,12 @@ class Goco {
         series1: {
           label: text_maker("spending"), 
           data: _.map(this.goco_data, "spending"),
-          formater: formats.compact1,
+          formatter: formats.compact1,
         },
         series2: {
           label: text_maker("ftes"), 
           data: _.map(this.goco_data,"ftes"),
-          formater: formats.big_int_real,
+          formatter: formats.big_int_real,
         },
         has_callback: true,
       }

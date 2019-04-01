@@ -105,7 +105,7 @@ const goca_perspective_factory = (data_type) => new PartitionPerspective({
   id: "goca",
   name: text_maker("spending_area_plural"),
   data_type: data_type,
-  formater: node_data => wrap_in_brackets(formats_by_data_type[data_type](node_data[data_type])),
+  formatter: node_data => wrap_in_brackets(formats_by_data_type[data_type](node_data[data_type])),
   hierarchy_factory: () => create_tag_hierarchy("GOCO", data_type),
   data_wrapper_node_rules: tag_data_wrapper_node_rules,
   popup_template: goca_perspective_popup_template,
@@ -124,7 +124,7 @@ const hwh_perspective_factory = (data_type) => new PartitionPerspective({
   id: "hwh",
   name: Subject.Tag.tag_roots.HWH.name,
   data_type: data_type,
-  formater: node_data => {
+  formatter: node_data => {
     return node_data.data.is("tag") ?
       wrap_in_brackets(text_maker("up_to") + " " + formats_by_data_type[data_type](node_data[data_type])) :
       wrap_in_brackets(formats_by_data_type[data_type](node_data[data_type]))

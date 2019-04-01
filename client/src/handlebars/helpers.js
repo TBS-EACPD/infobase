@@ -145,57 +145,57 @@ const change_map = {
 const calc_direction = function(val){
   return val === 0 ? "constant" : (val > 0 ? "increase" : "decrease");
 };
-const en_master_change = function(val,formater,preposition,tense){
+const en_master_change = function(val,formatter,preposition,tense){
   const direction = calc_direction(val);
   let return_value = change_map[tense][preposition]["en"][direction];
-  if (direction !== 'constant' && formater.length>0){
-    return_value += " " + Handlebars.helpers[formater](Math.abs(val));
+  if (direction !== 'constant' && formatter.length>0){
+    return_value += " " + Handlebars.helpers[formatter](Math.abs(val));
   }
   return new Handlebars.SafeString(return_value);
 };
-const fr_master_change = function(val,formater,preposition,temps,genre, nombre){
+const fr_master_change = function(val,formatter,preposition,temps,genre, nombre){
   const direction = calc_direction(val);
   if (temps === 'future' && direction !== 'constant'){
     genre = "";
   }
   let return_value=change_map[temps][preposition]["fr"][direction][genre+nombre];
-  if ( direction !== 'constant' && formater.length>0){
-    return_value += " " + Handlebars.helpers[formater](Math.abs(val));
+  if ( direction !== 'constant' && formatter.length>0){
+    return_value += " " + Handlebars.helpers[formatter](Math.abs(val));
   }
   return new Handlebars.SafeString(return_value);
 };
-Handlebars.registerHelper("changed_to",function(val,formater,context){
-  return en_master_change(val,formater,"to","past");
+Handlebars.registerHelper("changed_to",function(val,formatter,context){
+  return en_master_change(val,formatter,"to","past");
 });
-Handlebars.registerHelper("changed_by",function(val,formater,context){
-  return en_master_change(val,formater,"by","past");
+Handlebars.registerHelper("changed_by",function(val,formatter,context){
+  return en_master_change(val,formatter,"by","past");
 });
 // Dom code:
-Handlebars.registerHelper("changing_by",function(val,formater,context){
-  return en_master_change(val,formater,"ing","past");
+Handlebars.registerHelper("changing_by",function(val,formatter,context){
+  return en_master_change(val,formatter,"ing","past");
 });
 
-Handlebars.registerHelper("will_change_to",function(val,formater,context){
-  return en_master_change(val,formater,"to","future");
+Handlebars.registerHelper("will_change_to",function(val,formatter,context){
+  return en_master_change(val,formatter,"to","future");
 });
-Handlebars.registerHelper("will_change_by",function(val,formater,context){
-  return en_master_change(val,formater,"by","future");
+Handlebars.registerHelper("will_change_by",function(val,formatter,context){
+  return en_master_change(val,formatter,"by","future");
 });
-Handlebars.registerHelper("fr_changed_to",function(val, genre, nombre,formater,context){
-  return fr_master_change(val,formater,"to","past",genre,nombre);
+Handlebars.registerHelper("fr_changed_to",function(val, genre, nombre,formatter,context){
+  return fr_master_change(val,formatter,"to","past",genre,nombre);
 });
-Handlebars.registerHelper("fr_changed_by",function(val, genre, nombre,formater,context){
-  return fr_master_change(val,formater,"by","past",genre,nombre);
+Handlebars.registerHelper("fr_changed_by",function(val, genre, nombre,formatter,context){
+  return fr_master_change(val,formatter,"by","past",genre,nombre);
 });
 // Dom code:
-Handlebars.registerHelper("fr_changing_by",function(val, genre, nombre,formater,context){
-  return fr_master_change(val,formater,"ing","past",genre,nombre);
+Handlebars.registerHelper("fr_changing_by",function(val, genre, nombre,formatter,context){
+  return fr_master_change(val,formatter,"ing","past",genre,nombre);
 });
-Handlebars.registerHelper("fr_will_change_by",function(val, genre, nombre,formater,context){
-  return fr_master_change(val,formater,"by","future",genre,nombre);
+Handlebars.registerHelper("fr_will_change_by",function(val, genre, nombre,formatter,context){
+  return fr_master_change(val,formatter,"by","future",genre,nombre);
 });
-Handlebars.registerHelper("fr_will_change_to",function(val, genre, nombre,formater,context){
-  return fr_master_change(val,formater,"to","future",genre,nombre);
+Handlebars.registerHelper("fr_will_change_to",function(val, genre, nombre,formatter,context){
+  return fr_master_change(val,formatter,"to","future",genre,nombre);
 });
 
 // Two value change helpers (Ex. "increased/decreased from val1 to val2")
@@ -230,10 +230,10 @@ const two_value_change_map = {
     },
   },
 };
-const two_value_calc_direction = function(val1,val2,formater){
+const two_value_calc_direction = function(val1,val2,formatter){
   // Compare with formatting for equality, as formatting may effectively round two numbers TO equality
   // Don't format for lesser than test, as formatting may mess that up
-  return Handlebars.helpers[formater](val1).string === Handlebars.helpers[formater](val2).string ? 
+  return Handlebars.helpers[formatter](val1).string === Handlebars.helpers[formatter](val2).string ? 
            "constant" : 
            (
              val1 < val2 ? 
@@ -241,56 +241,56 @@ const two_value_calc_direction = function(val1,val2,formater){
                "decrease"
            );
 };
-const en_master_two_value_change = function(val1,val2,formater,preposition,tense){
-  let return_value = "INVALID FORMATER"; // Will only be returned if passed formater invalid
-  if(formater.length>0){
-    const direction = two_value_calc_direction(val1,val2,formater);
+const en_master_two_value_change = function(val1,val2,formatter,preposition,tense){
+  let return_value = "INVALID FORMATTER"; // Will only be returned if passed formatter invalid
+  if(formatter.length>0){
+    const direction = two_value_calc_direction(val1,val2,formatter);
     const two_value_change_text_components = two_value_change_map[tense][preposition]["en"][direction];
     if (direction !== 'constant'){
       return_value = (
         two_value_change_text_components[0] + " " + 
-                        Handlebars.helpers[formater](val1) + " " + 
+                        Handlebars.helpers[formatter](val1) + " " + 
                         two_value_change_text_components[1] + " " + 
-                        Handlebars.helpers[formater](val2)
+                        Handlebars.helpers[formatter](val2)
       );
     } else {
-      return_value = two_value_change_text_components + " " + Handlebars.helpers[formater](val1); 
+      return_value = two_value_change_text_components + " " + Handlebars.helpers[formatter](val1); 
     }
   }
   return new Handlebars.SafeString(return_value);
 };
-const fr_master_two_value_change = function(val1,val2,formater,preposition,temps,genre,nombre){
-  let return_value = "INVALID FORMATER"; // Will only be returned if passed formater is invalid
-  if(formater.length>0){
-    const direction = two_value_calc_direction(val1,val2,formater);
+const fr_master_two_value_change = function(val1,val2,formatter,preposition,temps,genre,nombre){
+  let return_value = "INVALID FORMATTER"; // Will only be returned if passed formatter is invalid
+  if(formatter.length>0){
+    const direction = two_value_calc_direction(val1,val2,formatter);
     const two_value_change_text_components = two_value_change_map[temps][preposition]["fr"][direction][genre+nombre];
     if (direction !== 'constant'){
       return_value = (
         two_value_change_text_components[0] + " " + 
-                        Handlebars.helpers[formater](val1) + " " + 
+                        Handlebars.helpers[formatter](val1) + " " + 
                         two_value_change_text_components[1] + " " + 
-                        Handlebars.helpers[formater](val2)
+                        Handlebars.helpers[formatter](val2)
       );
     } else {
-      return_value = two_value_change_text_components + " " + Handlebars.helpers[formater](val1); 
+      return_value = two_value_change_text_components + " " + Handlebars.helpers[formatter](val1); 
     }
   }
   return new Handlebars.SafeString(return_value);
 };
-Handlebars.registerHelper("two_value_changed_to",function(val1,val2,formater,context){
-  return en_master_two_value_change(val1,val2,formater,"to","past");
+Handlebars.registerHelper("two_value_changed_to",function(val1,val2,formatter,context){
+  return en_master_two_value_change(val1,val2,formatter,"to","past");
 });
-Handlebars.registerHelper("fr_two_value_changed_to",function(val1,val2,genre,nombre,formater,context){
-  return fr_master_two_value_change(val1,val2,formater,"to","past",genre,nombre);
+Handlebars.registerHelper("fr_two_value_changed_to",function(val1,val2,genre,nombre,formatter,context){
+  return fr_master_two_value_change(val1,val2,formatter,"to","past",genre,nombre);
 });
 
 // Helper to expand positive negative values to "[+/-]abs(value)"
-Handlebars.registerHelper("plus_or_minus_val",function(val,formater,context){
+Handlebars.registerHelper("plus_or_minus_val",function(val,formatter,context){
   return (val >= 0 ?
            "+":
            "-"
   ) +
-         Handlebars.helpers[formater](Math.abs(val));
+         Handlebars.helpers[formatter](Math.abs(val));
 });
 
 // {{gt "key"}} -> looks up the key and returns 

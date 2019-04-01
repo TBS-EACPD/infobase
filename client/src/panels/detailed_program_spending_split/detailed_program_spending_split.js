@@ -296,7 +296,7 @@ class HistoricalProgramBars extends React.Component {
             ticks={ticks}
             stacked={true}
             margin={{ top: 20, right: 20, left: 60, bottom: 20 }}
-            formater={formats.compact1_raw}
+            formatter={formats.compact1_raw}
             y_axis="($)"
             colors={colors}
           />
@@ -448,7 +448,7 @@ class DetailedProgramSplit extends React.Component {
               font_size="12px"
               bar_height={60} 
               data={graph_ready_data}
-              formater={formats.compact1}
+              formatter={formats.compact1}
               colors={colors}
             />
           </div>

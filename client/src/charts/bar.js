@@ -42,7 +42,7 @@ export class Bar {
       .select("._graph_area")
       .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
   
-    this.formater = this.options.formater;
+    this.formatter = this.options.formatter;
     var normalized = this.options.normalized || false;
 
     let data;
@@ -95,7 +95,7 @@ export class Bar {
     const yAxis = d3.axisLeft()
       .scale(y)
       .ticks(5)
-      .tickFormat(this.formater);
+      .tickFormat(this.formatter);
   
     const html = this.html;
   
@@ -314,7 +314,7 @@ export class Bar {
             .attr("class","__label center-text")
             .html( (d) =>{ 
               if (d.value !== 0) {
-                return that.formater(d.value);
+                return that.formatter(d.value);
               }
             } )
             .styles({

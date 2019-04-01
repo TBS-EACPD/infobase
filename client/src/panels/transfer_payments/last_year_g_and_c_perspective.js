@@ -51,7 +51,7 @@ new PanelGraph({
               <CirclePieChart 
                 height={300}
                 colors={colors}
-                formater={formats.compact1}
+                formatter={formats.compact1}
                 font_size="16"
                 title={Subject.Gov.name}
                 data={graph_args.data1}
@@ -61,7 +61,7 @@ new PanelGraph({
               <CirclePieChart
                 height={300}
                 colors={colors}
-                formater={formats.compact1}
+                formatter={formats.compact1}
                 font_size="16"
                 title={subject.fancy_name}
                 data={graph_args.data2}

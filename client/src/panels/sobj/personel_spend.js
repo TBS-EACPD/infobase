@@ -67,7 +67,7 @@ new PanelGraph({
             add_yaxis: true,
             add_xaxis: true,
             y_axis: "($)",
-            formaters: dollar_formats,
+            formatters: dollar_formats,
           }}
 
         />

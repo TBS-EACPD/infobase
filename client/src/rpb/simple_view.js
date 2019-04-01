@@ -383,7 +383,7 @@ class SimpleView extends React.Component {
             font_size="14px"
             bar_height={50} 
             data={data_with_links}
-            formater={formats[num_format_type]}
+            formatter={formats[num_format_type]}
             colors={colors}
           />
         </div>

@@ -166,7 +166,7 @@ export default {
       if (!format){
         return data;
       }
-      return FORMAT.list_formater(['big_int','big_int',"percentage"], data);
+      return FORMAT.list_formatter(['big_int','big_int',"percentage"], data);
     },
     "exp_change": function(format) {
       // returns last year, this year, and change
@@ -178,7 +178,7 @@ export default {
       if (!format){
         return data;
       }
-      return FORMAT.list_formater(['big_int','big_int',"percentage"], data);
+      return FORMAT.list_formatter(['big_int','big_int',"percentage"], data);
     },
   },
 

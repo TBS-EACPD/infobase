@@ -163,7 +163,7 @@ class PlannedProgramResources extends React.Component {
             ticks={ticks}
             stacked={true}
             margin={{ top: 20, right: 20, left: 60, bottom: 20 }}
-            formater={ 
+            formatter={ 
               is_fte ? 
               formats.big_int_real_raw : 
               formats.compact1_raw

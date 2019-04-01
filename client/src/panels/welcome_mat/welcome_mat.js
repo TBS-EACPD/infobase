@@ -86,7 +86,7 @@ const Chart = ({
   hide_gridlines: true,
   ticks: _.range(0,data.length),
   colors: _.constant(is_light ? "#335075" : 'black'),
-  formater: formats[ is_fte ? "big_int_real_raw" : "compact1_raw" ],
+  formatter: formats[ is_fte ? "big_int_real_raw" : "compact1_raw" ],
   series: {"0": data},
 })
 

@@ -25,7 +25,7 @@ const prov_split_render = function(legend_area, graph_area, graph_args){
 
   const { years_by_province, color_scale } = graph_args;
 
-  const formater = formats["big_int_real_raw"];
+  const formatter = formats["big_int_real_raw"];
 
   const ticks = _.map(people_years, y => `${run_template(y)}`);
   
@@ -34,7 +34,7 @@ const prov_split_render = function(legend_area, graph_area, graph_args){
     data: years_by_province,
     ticks: ticks,
     color_scale: color_scale,
-    formater: formater,
+    formatter: formatter,
   })
 
   const historical_graph_container = d3.select( legend_area.node() ).append("div");
@@ -97,7 +97,7 @@ const prov_split_render = function(legend_area, graph_area, graph_args){
         container.select("div").node(),
         {
           colors: ()=>"#1f77b4",
-          formater: formater,
+          formatter: formatter,
           series: {"": prov_data},
           height: 200,
           ticks: ticks,
@@ -112,8 +112,8 @@ const prov_split_render = function(legend_area, graph_area, graph_args){
         container.select("div").node(),
         {
           x_scale: d3.scaleLinear(),
-          axisFormater: formater,
-          formater: formater,
+          axisFormatter: formatter,
+          formatter: formatter,
           tick_number: 5,
           data: ticks.map((tick,i) => ({value: prov_data[i], name: tick}) ),
         }

@@ -194,9 +194,9 @@ export default {
         .map(function(row){
           if (format) {
             if (add_percentage) {
-              return FORMAT.list_formater(["", "big-int", "percentage"], row);
+              return FORMAT.list_formatter(["", "big-int", "percentage"], row);
             } else {
-              return FORMAT.list_formater(["", "big-int"], row);
+              return FORMAT.list_formatter(["", "big-int"], row);
             }
           }
           return row;

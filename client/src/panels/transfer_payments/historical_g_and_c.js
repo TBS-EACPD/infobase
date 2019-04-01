@@ -193,7 +193,7 @@ class HistTPTypes extends React.Component {
           />  
         </div>
         <Line
-          formaters={dollar_formats}
+          formatters={dollar_formats}
           y_axis="($)"
           height={375}
           stacked
@@ -337,7 +337,7 @@ class DetailedHistTPItems extends React.Component {
           <Line
             height={400}
             series={graph_series}
-            formaters={dollar_formats}
+            formatters={dollar_formats}
             y_axis="($)"
             colors={color_scale}
             ticks={_.map(std_years,run_template)}

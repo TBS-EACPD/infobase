@@ -60,7 +60,7 @@ const DeptEstimatesPerspective = ({subject, dept_total, gov_total}) => {
     <CirclePieChart
       height={250}
       colors={infobase_colors()}
-      formater={formats.compact1}
+      formatter={formats.compact1}
       font_size="16"
       data={[
         { name: "x", value: gov_total },

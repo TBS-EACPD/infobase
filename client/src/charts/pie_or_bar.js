@@ -8,7 +8,7 @@ const bar_options = {
   add_yaxis: false,                                  
   add_labels: true,                                  
   margin: {top: 20, right: 20, left: 60, bottom: 80} ,
-  formater: common_charts_utils.formats.compact1,
+  formatter: common_charts_utils.formats.compact1,
 };
 
 export class PieOrBar {

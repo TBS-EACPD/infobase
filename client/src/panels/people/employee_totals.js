@@ -69,7 +69,7 @@ const info_deps_by_level = {
                  ticks = {ticks}
                  colors = {infobase_colors()}
                  y_axis = {text_maker("employees")}
-                 formater = {formats["big_int_real_raw"]}
+                 formatter = {formats["big_int_real_raw"]}
                />
              </Col>
           }
