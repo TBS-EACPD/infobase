@@ -13,11 +13,6 @@
 //  site.scss also establishes the widths for displaying each of the data types
 
 
-const lang_percent_symbol = {
-  en: "%",
-  fr: " %",
-};
-
 const number_formatter = {
   en: _.map(Array(4), (val,ix) => new Intl.NumberFormat('en-CA', {style: 'decimal', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
   fr: _.map(Array(4), (val,ix) => new Intl.NumberFormat('fr-CA', {style: 'decimal', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
