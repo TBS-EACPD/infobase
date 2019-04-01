@@ -6,12 +6,12 @@ partition_popup_top_row:
       {{> "partition_popup_year"}}
       {{> "partition_popup_spending_and_fte_values"}}
     </div>
-partition_popup_planned_spending_top_row:
+partition_popup_estimates_top_row:
   handlebars_partial: true
   text: |
     <div class='mrgn-bttm-md popup-row-top popup-font-m popup-row-bottom-border'>
       {{> "partition_popup_year"}}
-      {{> "partition_popup_planned_spending_value"}}
+      {{> "partition_popup_estimates_value"}}
     </div>
 partition_popup_year:
   handlebars_partial: true
@@ -38,18 +38,18 @@ partition_popup_spending_value_split:
   text: |
     <span class='stat2 stat-split popup-font-m'>
     {{> "partition_popup_spending_value_common"}}
-partition_popup_planned_spending_value:
+partition_popup_estimates_value:
   handlebars_partial: true
   text: |
     <span class='stat1 popup-font-m'>
       {{gt "planned_spending_of"}}
       </br>
-      {{#if planned_exp_is_negative}}
+      {{#if estimates_is_negative}}
         <text style='color:red;'>
-          {{fmt_compact1 planned_exp}}
+          {{fmt_compact1 estimates}}
         </text>
       {{else}}
-        {{fmt_compact1 planned_exp}}
+        {{fmt_compact1 estimates}}
       {{/if}}
     </span>
 partition_popup_spending_value_common:
@@ -237,19 +237,19 @@ partition_org_info_ministry_or_inst_form_groups_popup:
     {{> "partition_popup_org_info_child_org_count"}}
     {{> "partition_popup_focus_button"}}
 
-partition_planned_spending_org_popup:
+partition_estimates_spending_org_popup:
   transform: [handlebars]
   text: |
-    {{> "partition_popup_planned_spending_top_row"}}
+    {{> "partition_popup_estimates_top_row"}}
     {{> "partition_popup_name"}}
     {{> "partition_popup_description"}}
     {{> "partition_popup_rpb_link"}}
     {{> "partition_popup_infograph_link"}}
     {{> "partition_popup_focus_button"}}
-partition_planned_vs_type_or_est_type:
+partition_estimates_vs_type_or_est_type:
   transform: [handlebars]
   text: |
-    {{> "partition_popup_planned_spending_top_row"}}
+    {{> "partition_popup_estimates_top_row"}}
     {{> "partition_popup_name"}}
     {{#if show_parent_dept_name}}
       {{> "partition_popup_parent_dept_name"}}
@@ -257,10 +257,10 @@ partition_planned_vs_type_or_est_type:
     {{> "partition_popup_description"}}
     {{> "partition_popup_rpb_link"}}
     {{> "partition_popup_focus_button"}}
-partition_planned_vote_popup:
+partition_estimates_vote_popup:
   transform: [handlebars]
   text: |
-    {{> "partition_popup_planned_spending_top_row"}}
+    {{> "partition_popup_estimates_top_row"}}
     {{> "partition_popup_name"}}
     {{> "partition_popup_description"}}
     {{> "partition_popup_rpb_link"}}
@@ -388,7 +388,7 @@ partition_spending_will_be_value_and_rpb_link_partial:
         {{rawfmt_compact1 x}}
       </a>
     </p>
-partiton_planned_spending_was:
+partiton_estimates_was:
   transform: [handlebars]
   en: |
     in planned budgetary expenditures have been tabled in
@@ -398,11 +398,11 @@ partition_spending_will_be_variable_year:
   transform: [handlebars]
   en: |
     {{> "partition_spending_will_be_value_and_rpb_link_partial"}}
-      {{gt "partiton_planned_spending_was"}}
+      {{gt "partiton_estimates_was"}}
     <span class='text-nowrap'>{{rt year}}</span>
   fr: |
     {{> "partition_spending_will_be_value_and_rpb_link_partial"}}
-    {{gt "partiton_planned_spending_was"}}
+    {{gt "partiton_estimates_was"}}
     en
     <span class='text-nowrap'>{{rt year}}</span>
 partition_spending_will_be_by_est_doc:
@@ -432,7 +432,7 @@ partition_spending_data:
   transform: [handlebars]
   text: |
     {{gt "spending"}} ($)
-partition_planned_spending_data:
+partition_estimates_spending_data:
   transform: [handlebars]
   text: |
     {{gt "estimates"}} ($)

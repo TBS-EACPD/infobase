@@ -27,7 +27,7 @@ const { compact1, big_int_real } = formats;
 const formats_by_data_type = {
   "exp": compact1,
   "fte": big_int_real,
-  "planned_exp": compact1,
+  "estimates": compact1,
   "org_info": big_int_real,
 };
 
@@ -39,15 +39,15 @@ const data_types = [
   {
     id: "fte",
     name: text_maker("fte_written"),
-  }, 
+  },
   {
-    id: "planned_exp",
-    name: text_maker("partition_planned_spending_data"),
-  }, 
+    id: "estimates",
+    name: text_maker("partition_estimates_spending_data"),
+  },
   {
     id: "org_info",
     name: text_maker("orgs"),
-  }, 
+  },
 ];
 
 export { 

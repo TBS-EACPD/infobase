@@ -33,7 +33,7 @@ const featured_content_items = _.compact([
             fr: "Budget provisoire des dépenses",
           })[window.lang],
         }) :
-        "#partition/est_doc_ie/planned_exp"
+        "#partition/est_doc_ie/estimates"
     ),
   },
   {

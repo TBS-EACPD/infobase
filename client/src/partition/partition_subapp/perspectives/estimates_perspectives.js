@@ -187,7 +187,7 @@ const est_type_node_to_vs_type_nodes = (node) => {
   );
 }
 
-const orgs_with_planned_spending = () => { 
+const orgs_with_estimates = () => { 
   return _.chain(Subject.Ministry.get_all())
     .map(ministry => ministry.orgs)
     .flatten()
@@ -224,9 +224,9 @@ const vs_type_node_rules = (node) => {
   }
 }
 
-const org_planned_spend_node_rules = (node) => {
+const org_estimates_node_rules = (node) => {
   if ( node.is("gov") ){
-    return orgs_with_planned_spending();
+    return orgs_with_estimates();
   } else if ( node.is("dept") ){
     return subject_to_est_type_nodes(node);
   } else if ( node.is("est_type") ){
@@ -243,7 +243,7 @@ const specific_est_doc_node_rules = (node, est_doc_code) => {
 }
 
 const get_rpb_subject_code_from_context = (node, presentation_scheme) => {
-  if ( node.depth !== 0 && (presentation_scheme === "org_planned_spend" || presentation_scheme.startsWith("est_doc_")) ) {
+  if ( node.depth !== 0 && (presentation_scheme === "org_estimates" || presentation_scheme.startsWith("est_doc_")) ) {
     return "dept_" + ( node.data.is("dept") ?
       node.data.id :
       node.parent.data.is("dept") ?
@@ -254,7 +254,7 @@ const get_rpb_subject_code_from_context = (node, presentation_scheme) => {
   }
 }
 
-const planned_spending_post_traversal_rule_set = (node,data_type, presentation_scheme) => {
+const estimates_post_traversal_rule_set = (node,data_type, presentation_scheme) => {
   const orgVoteStatEstimates = Table.lookup('orgVoteStatEstimates');
   
   const default_rpb_link_options = { 
@@ -291,7 +291,7 @@ const planned_spending_post_traversal_rule_set = (node,data_type, presentation_s
   }
 }
 
-const create_planned_spending_hierarchy = function(data_type, presentation_scheme){
+const create_estimates_hierarchy = function(data_type, presentation_scheme){
   set_year_by_presentation_scheme(presentation_scheme);
 
   return d3.hierarchy(Subject.gov,
@@ -300,31 +300,31 @@ const create_planned_spending_hierarchy = function(data_type, presentation_schem
         return est_type_node_rules(node);
       } else if (presentation_scheme === "vs_type") {
         return vs_type_node_rules(node);
-      } else if (presentation_scheme === "org_planned_spend") {
-        return org_planned_spend_node_rules(node);
+      } else if (presentation_scheme === "org_estimates") {
+        return org_estimates_node_rules(node);
       } else if ( presentation_scheme.startsWith("est_doc_") ) {
         const est_doc_code = presentation_scheme.replace("est_doc_", "").toUpperCase();
         return specific_est_doc_node_rules(node, est_doc_code);
       }
     })
     .eachAfter(node =>{
-      planned_spending_post_traversal_rule_set(node, data_type, presentation_scheme);
+      estimates_post_traversal_rule_set(node, data_type, presentation_scheme);
       post_traversal_search_string_set(node);
     })
     .sort(absolute_value_sort);
 }
 
 
-const planned_exp_popup_template = function(presentation_scheme, d){
+const estimates_popup_template = function(presentation_scheme, d){
   const common_popup_options = {
     ...get_common_popup_options(d),
     year: run_template( get_year(presentation_scheme) ),
-    planned_exp: d.value,
-    planned_exp_is_negative: d.value < 0,
+    estimates: d.value,
+    estimates_is_negative: d.value < 0,
     rpb_link: d.data.rpb_link,
   };
-  if (d.data.is("stat_item")) {
-    return text_maker("partition_planned_vs_type_or_est_type", 
+  if ( d.data.is("stat_item") ) {
+    return text_maker("partition_estimates_vs_type_or_est_type", 
       _.extend(common_popup_options, {
         description: d.data.description,
         dept_name: d.parent.data.name,
@@ -333,25 +333,25 @@ const planned_exp_popup_template = function(presentation_scheme, d){
     );
   } else if ( d.data.is("vs_type") || d.data.is("est_type") ) {
     let dept_name, dept_id;
-    if (presentation_scheme === "org_planned_spend") {
-      if (d.data.is("vs_type")) {
+    if (presentation_scheme === "org_estimates") {
+      if ( d.data.is("vs_type") ) {
         dept_name = d.parent.parent.data.name;
         dept_id = d.parent.parent.data.id;
-      } else if (d.data.is("est_type")) {
+      } else if ( d.data.is("est_type") ) {
         dept_name = d.parent.data.name;
         dept_id = d.parent.data.id;
       }
     }
-    return text_maker("partition_planned_vs_type_or_est_type", 
+    return text_maker("partition_estimates_vs_type_or_est_type", 
       _.extend(common_popup_options, {
         description: d.data.description,
-        show_parent_dept_name: presentation_scheme === "org_planned_spend",
+        show_parent_dept_name: presentation_scheme === "org_estimates",
         dept_name,
         dept_id,
       })
     );
-  } else if (d.data.is("dept")) {
-    return text_maker("partition_planned_spending_org_popup", 
+  } else if ( d.data.is("dept") ) {
+    return text_maker("partition_estimates_spending_org_popup", 
       _.extend(common_popup_options, {
         description: d.data.mandate,
       })
@@ -367,12 +367,12 @@ const get_year = (presentation_scheme) => {
 }
 
 const year_text_fragment = (presentation_scheme) => {
-  return "(" + run_template( get_year(presentation_scheme) ) + ")";
+  return `(${run_template( get_year(presentation_scheme) )})`;
 }
 
 const get_name_text_fragment = (presentation_scheme) => {
   switch (presentation_scheme){
-    case "org_planned_spend" : return text_maker("orgs");
+    case "org_estimates" : return text_maker("orgs");
     case "est_type" : return text_maker("partition_est_type_perspective");
     case "vs_type" : return text_maker("partition_vote_stat_perspective");
     case "est_doc_mains" : return text_maker("est_doc_mains");
@@ -405,7 +405,7 @@ const get_rpb_filter = (presentation_scheme) => {
 
 const get_level_headers = (presentation_scheme) => {
   switch (presentation_scheme){
-    case "org_planned_spend" : return {
+    case "org_estimates" : return {
       "1": text_maker("org"),
       "2": text_maker("partition_est_type_perspective"),
       "3": text_maker("partition_vote_stat_perspective"),
@@ -437,13 +437,13 @@ const get_root_text_key = (presentation_scheme) => {
   }
 };
 
-const planned_exp_perspective_factory = (presentation_scheme) => new PartitionPerspective({
+const estimates_perspective_factory = (presentation_scheme) => new PartitionPerspective({
   id: presentation_scheme,
   name: get_name(presentation_scheme),
-  data_type: "planned_exp",
-  formatter: node_data => wrap_in_brackets(formats_by_data_type["planned_exp"](node_data["planned_exp"])),
-  hierarchy_factory: () => create_planned_spending_hierarchy("planned_exp", presentation_scheme),
-  popup_template: _.curry(planned_exp_popup_template)(presentation_scheme),
+  data_type: "estimates",
+  formater: node_data => wrap_in_brackets( formats_by_data_type["estimates"](node_data["estimates"]) ),
+  hierarchy_factory: () => create_estimates_hierarchy("estimates", presentation_scheme),
+  popup_template: _.curry(estimates_popup_template)(presentation_scheme),
   root_text_func: root_value => text_maker(
     get_root_text_key(presentation_scheme), 
     {
@@ -451,7 +451,7 @@ const planned_exp_perspective_factory = (presentation_scheme) => new PartitionPe
       name: get_name_text_fragment(presentation_scheme),
       year: get_year(presentation_scheme), 
       clean_year: get_year(presentation_scheme).replace(/(\{)|(\})/g,""),
-      past_tense: get_year(presentation_scheme) !== "{{est_in_year}}",
+      past_tense: !/est_in_year/.test(get_year(presentation_scheme)),
       rpb_filter: get_rpb_filter(presentation_scheme),
     }
   ),
@@ -460,22 +460,22 @@ const planned_exp_perspective_factory = (presentation_scheme) => new PartitionPe
 });
 
 
-const make_planned_spend_est_doc_mains_perspective = () => planned_exp_perspective_factory("est_doc_mains");
-const make_planned_spend_est_doc_sea_perspective = () => planned_exp_perspective_factory("est_doc_sea");
-const make_planned_spend_est_doc_seb_perspective = () => planned_exp_perspective_factory("est_doc_seb");
-const make_planned_spend_est_doc_sec_perspective = () => planned_exp_perspective_factory("est_doc_sec");
-const make_planned_spend_est_doc_im_perspective = () => planned_exp_perspective_factory("est_doc_ie");
-const make_planned_spend_est_type_perspective = () => planned_exp_perspective_factory("est_type");
-const make_planned_spend_vs_type_perspective = () => planned_exp_perspective_factory("vs_type");
-const make_planned_spend_org_planned_spend_perspective = () => planned_exp_perspective_factory("org_planned_spend");
+const make_estimates_est_doc_mains_perspective = () => estimates_perspective_factory("est_doc_mains");
+const make_estimates_est_doc_sea_perspective = () => estimates_perspective_factory("est_doc_sea");
+const make_estimates_est_doc_seb_perspective = () => estimates_perspective_factory("est_doc_seb");
+const make_estimates_est_doc_sec_perspective = () => estimates_perspective_factory("est_doc_sec");
+const make_estimates_est_doc_im_perspective = () => estimates_perspective_factory("est_doc_ie");
+const make_estimates_est_type_perspective = () => estimates_perspective_factory("est_type");
+const make_estimates_vs_type_perspective = () => estimates_perspective_factory("vs_type");
+const make_estimates_org_estimates_perspective = () => estimates_perspective_factory("org_estimates");
 
 export {
-  make_planned_spend_est_doc_mains_perspective,
-  make_planned_spend_est_doc_sea_perspective,
-  make_planned_spend_est_doc_seb_perspective,
-  make_planned_spend_est_doc_sec_perspective,
-  make_planned_spend_est_doc_im_perspective,
-  make_planned_spend_est_type_perspective,
-  make_planned_spend_vs_type_perspective,
-  make_planned_spend_org_planned_spend_perspective,
+  make_estimates_est_doc_mains_perspective,
+  make_estimates_est_doc_sea_perspective,
+  make_estimates_est_doc_seb_perspective,
+  make_estimates_est_doc_sec_perspective,
+  make_estimates_est_doc_im_perspective,
+  make_estimates_est_type_perspective,
+  make_estimates_vs_type_perspective,
+  make_estimates_org_estimates_perspective,
 };
