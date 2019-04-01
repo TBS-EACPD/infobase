@@ -10,6 +10,9 @@ igoc_search_text:
 org_profile:
   en: Organizational Profile
   fr: Profil organisationnel
+profile:
+  en: Profile
+  fr: Profil
 org_links:
   en: Organizational Links
   fr: Liens organisationnel

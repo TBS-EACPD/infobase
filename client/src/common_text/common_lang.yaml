@@ -383,6 +383,9 @@ people_data:
 results_data:
   en: Planning Data
   fr: Données relatives à la planification
+activity_code:
+  en: Activity Code
+  fr: Code d'activité
 
 #######################################
 # Data types

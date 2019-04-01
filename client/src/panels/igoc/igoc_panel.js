@@ -16,7 +16,6 @@ const { sanitized_dangerous_inner_html } = general_utils;
 
 new PanelGraph({
   level: 'dept',
-  title: "org_profile",
   key: "igoc_fields",
   calculate: _.constant(true),
   render({calculations}){
@@ -29,7 +28,7 @@ new PanelGraph({
         ["end_yr", subject.end_yr],
         ["notes", subject.notes],
         ["applied_title", subject.applied_title],
-        ["previous_applied_title", subject.old_name],
+        ["previously_named", subject.old_name],
         ["incorp_yr", subject.incorp_yr],
         ["type", subject.type],
         ["website", !subject.is_dead && subject.website_url && <ExternalLink href={`https://${subject.website_url}`} display={subject.website_url} />],
@@ -55,7 +54,7 @@ new PanelGraph({
           item,
         ];
       })
-      .filter( ([key, item]) => item )
+      .filter( ([label, item]) => item )
       .value();
 
     return (

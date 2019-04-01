@@ -105,144 +105,127 @@ const get_gov_panels = subject => ({
   all_data: ["links_to_rpb" ],
 });
 
-const get_dept_panels = subject => {
-  return {
-    intro: [
-      'portfolio_structure_intro',
-      'igoc_fields',
-      'igoc_links',
-    ],
-    financial: _.includes(subject.tables, 'programSpending') && [
-      "financial_intro",
-      "welcome_mat",
-      "budget_measures_panel",
-      "estimates_in_perspective",
-      "historical_auth_exp",
-      "in_year_estimates_split",//turned off until supps A
-      "in_year_voted_stat_split",
-      "spend_by_so_hist",
-      "last_year_g_and_c_perspective",
-      "historical_g_and_c",
-      "spend_rev_split",
-      'detailed_program_spending_split',
-      'drr_planned_actual',
-      "dp_rev_split",
-    ],
-    people: _.includes(subject.tables, 'orgEmployeeType') && get_people_panels(subject),
-    results: subject.has_results && [
-      "results_intro",
-      "drr_summary",
-      "explore_results",
-    ],
-    related: _.nonEmpty(subject.programs) && [
-      "portfolio_structure_related",
-      "tags_of_interest",
-    ],
-    all_data: _.nonEmpty(subject.tables) && [
-      "links_to_rpb",
-    ],
-  }
+const get_dept_panels = subject => ({
+  intro: [
+    'portfolio_structure_intro',
+    'igoc_fields',
+    'igoc_links',
+  ],
+  financial: _.includes(subject.tables, 'programSpending') && [
+    "financial_intro",
+    "welcome_mat",
+    "budget_measures_panel",
+    "estimates_in_perspective",
+    "historical_auth_exp",
+    "in_year_estimates_split",//turned off until supps A
+    "in_year_voted_stat_split",
+    "spend_by_so_hist",
+    "last_year_g_and_c_perspective",
+    "historical_g_and_c",
+    "spend_rev_split",
+    'detailed_program_spending_split',
+    'drr_planned_actual',
+    "dp_rev_split",
+  ],
+  people: _.includes(subject.tables, 'orgEmployeeType') && get_people_panels(subject),
+  results: subject.has_results && [
+    "results_intro",
+    "drr_summary",
+    "explore_results",
+  ],
+  related: _.nonEmpty(subject.programs) && [
+    "portfolio_structure_related",
+    "tags_of_interest",
+  ],
+  all_data: _.nonEmpty(subject.tables) && [
+    "links_to_rpb",
+  ],
+});
 
-};
+const get_program_panels = subject => ({
+  intro: [
+    "dead_program_warning",
+    'profile',
+    'program_fed_structure',
+  ],
+  financial: [
+    'dead_program_warning',
+    "financial_intro",
+    "welcome_mat",
+    "budget_measures_panel",
+    'vote_stat_split',
+    'spend_rev_split',
+    'top_spending_areas',
+    "spending_in_tag_perspective",
+  
+    'drr_planned_actual',
+    'sub_program_resources',
+    "dp_rev_split",
+  ],
+  results: !subject.is_internal_service && subject.has_results && [
+    "results_intro",
+    "drr_summary",
+    "explore_results",
+  ],
+  related: [
+    "related_program_structure",
+    'tags_of_interest',
+  ],
+});
 
-const get_program_panels = subject => {
-  return {
-    intro: [
-      "dead_program_warning",
-      'previously_named',
-      'description',
-      'program_fed_structure',
-    ],
-    financial: [
-      'dead_program_warning',
-      "financial_intro",
-      "welcome_mat",
-      "budget_measures_panel",
+const get_crso_panels = subject => ({
+  intro: [
+    "dead_crso_warning",
+    'profile',
+    'crso_in_gov',
+  ],
+  financial: [
+    'dead_crso_warning',
+    'financial_intro',
+    'welcome_mat',
+    'budget_measures_panel',
+    'drr_planned_actual',
+    'crso_by_prog_exp',
+    'crso_by_prog_fte',
+    "dp_rev_split",
+  ],
+  results: !subject.is_internal_service && subject.has_results && [
+    "results_intro",
+    "explore_results",
+  ],
+  related: [
+    'crso_links_to_other_crso',
+    'tags_of_interest',
+  ],
+});
 
-      'vote_stat_split',
-      'spend_rev_split',
-      'top_spending_areas',
-      "spending_in_tag_perspective",
-    
-      'drr_planned_actual',
-      'sub_program_resources',
-      "dp_rev_split",
-    ],
-    results: !subject.is_internal_service && subject.has_results && [
-      "results_intro",
-      "drr_summary",
-      "explore_results",
-    ],
-    related: [
-      "related_program_structure",
-      'tags_of_interest',
-    ],
-  };
-
-};
-
-const get_crso_panels = subject => {
-
-  return {
-    intro: [
-      "dead_crso_warning",
-      'previously_named',
-      'description',
-      'crso_in_gov',
-    ],
-    financial: [
-      'dead_crso_warning',
-      'financial_intro',
-      'welcome_mat',
-      'budget_measures_panel',
-      'drr_planned_actual',
-      'crso_by_prog_exp',
-      'crso_by_prog_fte',
-      "dp_rev_split",
-    ],
-    results: !subject.is_internal_service && subject.has_results && [
-      "results_intro",
-      "explore_results",
-    ],
-    related: [
-      'crso_links_to_other_crso',
-      'tags_of_interest',
-    ],
-  };
-
-};
-
-const get_tag_panels = subject => {
-  return {
-    intro: [
-      'tagging_key_concepts',
-      'description',
-      'tag_fed_structure',
-      'tag_progs_by_dept',
-    ],
-    structure: [ 
-      'm2m_warning',
-      'resource_structure',
-    ],
-    //Financial turned off indefinitely
-    // financial: [
-    //   'm2m_warning',
-    //   "financial_intro", 
-    //   "welcome_mat",
-    //   'tag_top_3_depts',
-    //   "vote_stat_split",
-    //   'spend_rev_split',
-    //   'top_spending_areas',
-    //   'detailed_program_spending_split',
-    // ],
-    related: [
-      'related_tags',
-      'sibling_tags',
-    ],
-  };
-
-
-}
+const get_tag_panels = subject => ({
+  intro: [
+    'tagging_key_concepts',
+    'description',
+    'tag_fed_structure',
+    'tag_progs_by_dept',
+  ],
+  structure: [ 
+    'm2m_warning',
+    'resource_structure',
+  ],
+  //Financial turned off indefinitely
+  // financial: [
+  //   'm2m_warning',
+  //   "financial_intro", 
+  //   "welcome_mat",
+  //   'tag_top_3_depts',
+  //   "vote_stat_split",
+  //   'spend_rev_split',
+  //   'top_spending_areas',
+  //   'detailed_program_spending_split',
+  // ],
+  related: [
+    'related_tags',
+    'sibling_tags',
+  ],
+});
 
 
 export function get_panels_for_subject(subject){
@@ -284,5 +267,4 @@ export function get_panels_for_subject(subject){
     .fromPairs()
     .pickBy(_.nonEmpty) //filter out empty bubbles 
     .value();
-  
 }

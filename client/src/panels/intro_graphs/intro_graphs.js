@@ -7,7 +7,7 @@ import './tag_intro_graphs.js';
 import './program_meta_graphs.js';
 import './hierarchy_panels.js';
 import './tags_related_to_subject_panels.js';
-import './description_panels.js';
+import './profile_panels.js';
 import MediaQuery from 'react-responsive';
 import classNames from 'classnames';
 
