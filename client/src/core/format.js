@@ -139,9 +139,9 @@ const types_to_format = {
   "percentage2": _.curry(percentage)(2),
   "result_percentage": (val, lang) => result_percent_formatter[lang].format(val/100),
   "result_num": (val, lang) => result_number_formatter[lang].format(val),
-  "decimal1": (val, lang, options) => number_formatter[lang][1](val),
-  "decimal2": (val, lang, options) => number_formatter[lang][2](val),
-  "decimal": (val, lang, options) => number_formatter[lang][3](val),
+  "decimal1": (val, lang, options) => number_formatter[lang][1].format(val),
+  "decimal2": (val, lang, options) => number_formatter[lang][2].format(val),
+  "decimal": (val, lang, options) => number_formatter[lang][3].format(val),
   "big_int": (val, lang, options) => {
     const value = _.isArray(val) ?
       _.map(val, x => x/1000) :
