@@ -17,6 +17,7 @@ import results from './results';
 // import transfer_payments_loc from './transfer_payments_loc';
 
 
+//the order of sub_module_defs controls the order of model creation and database population, which potentially matters
 const sub_module_defs = [
   core_subject,
   results,
@@ -33,31 +34,20 @@ const sub_module_defs = [
 
 
 export function create_models(){
-  _.each(sub_module_defs, ({ define_models }) => {
-    if( _.isFunction(define_models) ){
-      define_models(model_singleton);
-    }
-  });
+  _.each(
+    sub_module_defs, 
+    ({ define_models }) =>  _.isFunction(define_models) && define_models(model_singleton)
+  );
 }
 
-//populate_models is responsible for controlling the order in which modules are populated
+
 export async function populate_models(){
-  return Promise.all(_.map(
-    [
-      core_subject,
-      results,
-      // resources,
-      // sobjs,
-      // pses,
-      // search,
-      // people,
-      // vote_stat,
-      // transfer_payments,
-      // budget_measures,
-      // transfer_payments_loc,
-    ], 
-    async _module => _.isFunction(_module.populate_models) && await _module.populate_models(model_singleton)
-  ));
+  return Promise.all(
+    _.map(
+      sub_module_defs, 
+      async _module => _.isFunction(_module.populate_models) && await _module.populate_models(model_singleton)
+    )
+  );
 }
 
 

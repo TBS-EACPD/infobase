@@ -11,16 +11,15 @@ function get_file_from_data_dir(file_name){
     .trim(); //auto trim to reduce csv head-aches
 }
 
-export const empties_to_nulls = obj => _.mapValues(obj, val => 
-  _.includes(["","."], val) ? 
-  null : 
-  val
+export const empties_to_nulls = (obj) => _.mapValues(
+  obj, 
+  val => _.includes(["","."], val) ? null : val
 );
 
 function get_standard_csv_file_rows(file_name){
   const file = get_file_from_data_dir(file_name);
   const rows = csvParse(file);
-  return rows.map(obj => empties_to_nulls(obj)); 
+  return rows.map( obj => empties_to_nulls(obj) ); 
 }
 
 const create_program_id = ({ dept_code, activity_code }) => `${dept_code}-${activity_code}`;
@@ -40,5 +39,4 @@ module.exports = exports = {
 
   create_program_id,
   bilingual_remap,
-}
-
+};

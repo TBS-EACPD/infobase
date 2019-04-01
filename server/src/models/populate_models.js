@@ -1,5 +1,5 @@
 import { create_models, populate_models } from "./index.js";
-import { connect_db, drop_db } from "../db.js";
+import { connect_db, drop_db } from "../db_utils.js";
 global.IS_DEV_SERVER = !process.env.SHOULD_USE_REMOTE_DB;
 global.USE_TEST_DATA = process.env.USE_TEST_DATA;
 

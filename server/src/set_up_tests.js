@@ -1,6 +1,6 @@
 const { graphql } = require("graphql");
 
-const { connect_db } = require("./db.js");
+const { connect_db } = require("./db_utils.js");
 const { create_schema, create_models } = require('./models/index.js');
 
 global.USE_TEST_DATA = true;

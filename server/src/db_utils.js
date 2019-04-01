@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 /* eslint-disable no-console */
 
@@ -14,10 +14,10 @@ function get_connection_str(){
     MDB_CONNECT_STRING,
     MDB_USERNAME, // different usernames in read-mode vs populate-mode
     MDB_PW,
-    MDB_NAME, //using different databases on the same 'cluster' will be how we stage deployments 
+    MDB_NAME,
   } = process.env;
 
-  //MDB_CONNECT_STRING is the pre-3.0 verson because the gcloud function node.js has old mongodb drivers
+  //MDB_CONNECT_STRING is the pre-3.0 verson because the gcloud function version of node.js (6) has old mongodb drivers
   return MDB_CONNECT_STRING
     .replace('{MDB_USERNAME}', MDB_USERNAME)
     .replace('{MDB_PW}', MDB_PW)

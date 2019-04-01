@@ -9,11 +9,11 @@ import {
   create_models,
   create_schema,
 } from './models/index.js';
-import { connect_db } from "./db.js";
+import { connect_db } from "./db_utils.js";
 
 
 const convert_get_with_compressed_query_to_post_request = (req) => {
-  const decoded_decompressed_query = decompressFromBase64( req.headers['encoded-compressed-query']);
+  const decoded_decompressed_query = decompressFromBase64(req.headers['encoded-compressed-query']);
   const [query, variables] = decoded_decompressed_query.split("&variables=");
   
   req.method = "POST";
