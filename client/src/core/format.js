@@ -1,26 +1,8 @@
-<<<<<<< HEAD
 //  for properly formating numbers in multiple formats in both English and French
-=======
-import accounting from 'accounting';
-
-
-// for properly formating numbers in multiple formats in both English and French
-// * [compact written](#compact1_written) -> 2000000000 -> 2.0 billion
-// * [compact1 ](#compact1) : 2100000000 -> 2.1 B
-// * [compact0](#compact0) : 2100000000 -> 2.0 B
-// * [percentage](#percentage) : 0.234231 -> 23.4%
-// * [big_int](#big_int) : 2000000000 -> 2,000,000
-// * [big_int_real](#big_int_real) : 2000000000 -> 2,000,000,000
-// * [int](#int) : 2000000000 ->  2000000000 ->  2000000000
-// * [str](#str) : 2000000000 -> "zero" -> "zero"
-// * [wide-str](#wide-str) : "some long string" -> "some long string" 
-//
->>>>>>> add option to remove precision for larger numbers
 //  relates to the column type attribute as of the table class
 //  site.scss also establishes the widths for displaying each of the data types
 
 
-<<<<<<< HEAD
 const number_formatter = {
   en: _.map(Array(4), (val,ix) => new Intl.NumberFormat('en-CA', {style: 'decimal', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
   fr: _.map(Array(4), (val,ix) => new Intl.NumberFormat('fr-CA', {style: 'decimal', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
@@ -54,14 +36,6 @@ const compact = (precision, val, lang, options) => {
     1000: {en: 'K', fr: 'k'},
     999: {en: '', fr: ''},
   };
-=======
-const compact = (val, lang, abbrev, precision, max_full = 999) => {
-  const abs = Math.abs(val);
-
-  const format = abbrev.format ?
-    abbrev.format[lang] :
-    "%v %s";
->>>>>>> add option to remove precision for larger numbers
 
   const abs = Math.abs(val);
   let symbol;
@@ -82,73 +56,16 @@ const compact = (val, lang, abbrev, precision, max_full = 999) => {
     symbol = abbrev[999][lang];
   }
 
-<<<<<<< HEAD
   // for now, can't use the money formatter if we want to insert
   // custom symbols in the string. There is an experimental
   // formatToParts function that may be useful in the future
   const rtn = number_formatter[lang][precision].format(new_val);
-=======
-  if(new_val > max_full){
-    precision = 0;
-  }
-
-  return accounting.formatMoney(
-    new_val,
-    {
-      symbol: symbol, 
-      precision: precision, 
-      format: format,
-      ...lang_options[lang],
-    }
-  );
-};
-
-/* 
-  '0.00' -> '0'
-  '1.0' -> '1'
-  '2000' -> '2000'
-*/
-const trailing_zeroes_regex = (
-  window.lang === 'en' ?
-    new RegExp(/\.0+$/) :
-    /* eslint-disable no-useless-escape */
-    new RegExp(/\,0+$/)
-);
-const remove_trailing_zeroes_from_string = str => _.isString(str) && str.replace(trailing_zeroes_regex, "");
->>>>>>> add option to remove precision for larger numbers
 
   if (options.raw){
-<<<<<<< HEAD
     return lang === 'fr' ? `${rtn} ${symbol}$` : `$${rtn} ${symbol}`; 
   }else {
     return lang === 'fr' ? `<span class='text-nowrap'>${rtn} ${symbol}$</span>` : `<span class='text-nowrap'>$${rtn} ${symbol}</span>`;
   }
-=======
-    format = {
-      en: "$%v %s", 
-      fr: "%v %s de dollars", 
-    };
-  } else {
-    format = {
-      en: "<span class='text-nowrap'>$%v</span> %s", 
-      fr: "<span class='text-nowrap'>%v</span> %s de dollars", 
-    };
-  }
-
-  return compact(
-    val,
-    lang,
-    {
-      format: format,
-      1000000000: {en: 'billion', fr: 'milliards'},
-      1000000: {en: 'million', fr: 'millions'},
-      1000: {en: 'thousand', fr: 'milliers'},
-      999: {en: '', fr: ''},
-    },
-    precision,
-    99,
-  );
->>>>>>> add option to remove precision for larger numbers
 };
 
 const compact_written = (precision, val, lang, options) => {
