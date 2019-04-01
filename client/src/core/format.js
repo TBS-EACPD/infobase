@@ -72,7 +72,7 @@ const compact_written = (precision, val, lang, options) => {
 
   // the rules for this are going to be different from compact(),
   // emphasizing readability.
-  // specifically, small numbers (< 50,000) are treated differently
+  // specifically, small numbers are treated differently
 
   const abbrevs = {
     1000000000: {en: ' billion', fr: ' milliards'},
