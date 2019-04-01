@@ -66,7 +66,7 @@ export const PplSharePie = ({graph_args, label_col_header, sort_func}) => {
     <div className="ppl-share-pie-graph" style = {{height: '350px'}}>
       <NivoResponsivePie
         data = {data}
-        color_by = {d => color_scale(d.id)}
+        colorBy = {d => color_scale(d.id)}
         margin = {{
           'top': 30,
           'right': 40,

@@ -17,7 +17,6 @@ import { GlossaryEntry } from '../../models/glossary.js';
 import { 
   Panel, 
   Subject, 
-  formats, 
   run_template, 
   PanelGraph, 
   create_text_maker_component,
@@ -28,7 +27,7 @@ import {
 
 const { Gov, Tag } = Subject;
 const { std_years } = years;
-const { Bar, GraphLegend } = declarative_charts;
+const { GraphLegend } = declarative_charts;
 
 const { text_maker, TM } = create_text_maker_component(text);
 
