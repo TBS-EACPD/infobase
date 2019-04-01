@@ -1,5 +1,3 @@
-import accounting from 'accounting';
-
 // for properly formating numbers in multiple formats in both English and French
 // * [compact written](#compact1_written) -> 2000000000 -> 2.0 billion
 // * [compact1 ](#compact1) : 2100000000 -> 2.1 B
@@ -14,34 +12,36 @@ import accounting from 'accounting';
 //  relates to the column type attribute as of the table class
 //  site.scss also establishes the widths for displaying each of the data types
 
-const lang_options = {
-  en: {},
-  fr: {
-    decimal: ',', 
-    thousand: ' ',
-  },
-};
+
 const lang_percent_symbol = {
   en: "%",
   fr: " %",
 };
 
 const number_formater = {
-  en: new Intl.NumberFormat('en-CA'),
-  fr: new Intl.NumberFormat('fr-CA'),
+  en: _.map(Array(4), (val,ix) => new Intl.NumberFormat('en-CA', {style: 'decimal', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
+  fr: _.map(Array(4), (val,ix) => new Intl.NumberFormat('fr-CA', {style: 'decimal', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
 }
 const money_formater = {
-  en: new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }),
-  fr: new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD' }),
+  en: _.map(Array(3), (val,ix) => new Intl.NumberFormat('en-CA', {style: 'currency', currency: 'CAD', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
+  fr: _.map(Array(3), (val,ix) => new Intl.NumberFormat('fr-CA', {style: 'currency', currency: 'CAD', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
+}
+const percent_formater = {
+  en: _.map(Array(3), (val,ix) => new Intl.NumberFormat('en-CA', {style: 'percent', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
+  fr: _.map(Array(3), (val,ix) => new Intl.NumberFormat('fr-CA', {style: 'percent', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
 }
 
-const compact = (val, lang, abbrev, precision) => {
+const compact = (precision, val, lang, options) => {  
+  precision = precision || 0;
+
+  const abbrev = {
+    1000000000: {en: 'B', fr: 'G'},
+    1000000: {en: 'M', fr: 'M'},
+    1000: {en: 'K', fr: 'k'},
+    999: {en: '', fr: ''},
+  };
+
   const abs = Math.abs(val);
-
-  const format = abbrev.format ?
-    abbrev.format[lang] :
-    "%v %s";
-
   let symbol;
   let new_val;
   if (val === 0){ 
@@ -59,17 +59,77 @@ const compact = (val, lang, abbrev, precision) => {
     new_val = val;
     symbol = abbrev[999][lang];
   }
-  debugger;
-  return accounting.formatMoney(
-    new_val,
-    {
-      symbol: symbol, 
-      precision: precision, 
-      format: format,
-      ...lang_options[lang],
-    }
-  );
+
+  // for now, can't use the money formater if we want to insert
+  // custom symbols in the string. There is an experimental
+  // formatToParts function that may be useful in the future
+  const rtn = number_formater[lang][options.precision].format(new_val);
+
+  if (options.raw){
+    return lang === 'fr' ? `${rtn} ${symbol}$` : `$${rtn} ${symbol}`; 
+  }else {
+    return lang === 'fr' ? `<span class='text-nowrap'>${rtn} ${symbol}$</span>` : `<span class='text-nowrap'>$${rtn} ${symbol}</span>`;
+  }
 };
+
+const compact_written = (precision, val, lang, options) => {
+
+  // the rules for this are going to be different from compact(),
+  // emphasizing readability.
+  // specifically, small numbers (< 50,000) are treated differently
+
+  const abbrevs = {
+    1000000000: {en: ' billion', fr: ' milliards'},
+    1000000: {en: ' million', fr: ' millions'},
+    1000: {en: ' thousand', fr: ' milliers'},
+    999: {en: '', fr: ''},
+  };
+
+  const abs = Math.abs(val);
+  let rtn = '0';
+  let abbrev = '';
+  if (abs >= 50000){
+    let reduced_val;
+
+    if (abs >= 1000000000){
+      reduced_val = val/1000000000;
+      abbrev = abbrevs[1000000000][lang];
+    } else if (abs >= 1000000){
+      reduced_val = val/1000000;
+      abbrev = abbrevs[1000000][lang];
+    } else {
+      reduced_val = val/1000;
+      abbrev = abbrevs[1000][lang];
+      if (precision < 2){
+        precision = 0;
+      }
+    }
+    rtn = number_formater[lang][precision].format(reduced_val);
+
+  } else {
+    if (precision < 2){
+      precision = 0;
+    }
+    abbrev = abbrevs[999][lang];
+    rtn = number_formater[lang][precision].format(val);
+  }
+
+  if (options.raw){
+    return lang === 'fr' ? `${rtn}${abbrev} de dollars` : `$${rtn}${abbrev}`; 
+  }else {
+    return lang === 'fr' ? `<span class='text-nowrap'>${rtn}${abbrev}</span> de dollars` : `<span class='text-nowrap'>$${rtn}</span>${abbrev}`;
+  }
+};
+
+const percentage = (precision, val, lang, options) => {
+  precision = precision || 0;
+  const rtn = percent_formater[lang][precision](val)
+  if (options.raw){
+    return rtn;
+  }else {
+    return `<span class='text-nowrap'>${rtn}</span>`;
+  }
+}
 
 /* 
   '0.00' -> '0'
@@ -84,134 +144,27 @@ const trailing_zeroes_regex = (
 );
 const remove_trailing_zeroes_from_string = str => _.isString(str) && str.replace(trailing_zeroes_regex, "");
 
-const compact_written = (precision, val, lang, options) => {
-  let format;
-  if (options.raw){
-    format = {
-      en: "$%v %s", 
-      fr: "%v %s de dollars", 
-    };
-  } else {
-    format = {
-      en: "<span class='text-nowrap'>$%v</span> %s", 
-      fr: "<span class='text-nowrap'>%v %s</span> de dollars", 
-    };
-  }
-
-  return compact(
-    val,
-    lang,
-    {
-      format: format,
-      1000000000: {en: 'billion', fr: 'milliards'},
-      1000000: {en: 'million', fr: 'millions'},
-      1000: {en: 'thousand', fr: 'milliers'},
-      999: {en: '', fr: ''},
-    },
-    precision
-  );
-};
-
 const types_to_format = {
+  "compact": (val, lang, options) => compact(options.precision, val, lang, options),
+  "compact1": _.curry(compact)(1),
+  "compact2": _.curry(compact)(2),
+  "compact_written": (val, lang, options) => compact_written(options.precision, val, lang, options),
   "compact1_written": _.curry(compact_written)(1),
   "compact2_written": _.curry(compact_written)(2),
-  "compact": (val, lang, options) => {
-    let format;
-    if (options.raw){
-      format = {
-        en: "$%v %s", 
-        fr: "%v %s$", 
-      };
-    }else {
-      format = {
-        en: "<span class='text-nowrap'>$%v %s</span>", 
-        fr: "<span class='text-nowrap'>%v %s$</span>", 
-      };
-    }
-    
-    options.precision = options.precision || 0;
-
-    return compact(
-      val,
-      lang,
-      {
-        format: format,
-        1000000000: {en: 'B', fr: 'G'},
-        1000000: {en: 'M', fr: 'M'},
-        1000: {en: 'K', fr: 'k'},
-        999: {en: '', fr: ''},
-      },
-      options.precision 
-    );
-  },
-  "compact1": function(val, lang, options){ return this.compact(val, lang, {...options, precision: 1}); },
-  "compact2": function(val, lang, options){ return this.compact(val, lang, {...options, precision: 2}); },
-  "percentage": (val, lang, options) => {
-    options.precision = options.precision || 0;
-
-    const format = options.raw ?
-      "%v%s" :
-      "<span class='text-nowrap'>%v%s</span>";
-    
-    const _options = {
-      symbol: lang_percent_symbol[lang],
-      format: format,
-      precision: options.precision || 0,
-    };
-
-    const val00 = _.isArray(val) ?
-      _.map(val, x => x*100) :
-      val * 100;
-
-    return accounting.formatMoney(
-      val00,
-      {
-        ..._options,
-        ...lang_options[lang],
-      }
-    );
-  },
-  "percentage1": function(val, lang, options){ return this.percentage(val, lang, {...options, precision: 1}); },
-  "percentage2": function(val, lang, options){ return this.percentage(val, lang, {...options, precision: 2}); },
+  "percentage": (val, lang, options) => percentage(options.precision, val, lang, options),
+  "percentage1": _.curry(percentage)(1),
+  "percentage2": _.curry(percentage)(2),
   "result_percentage": (val, lang) => (+val).toString() + lang_percent_symbol[lang],
   "result_num": function(val){ return remove_trailing_zeroes_from_string( formats.decimal.call(this, val) ); },
-  "decimal": (val, lang, options) => accounting.formatMoney(
-    val, 
-    {
-      symbol: "",
-      precision: 3,
-      ...lang_options[lang],
-    }
-  ),
-  "decimal1": (val, lang, options) => accounting.formatMoney(
-    val, 
-    {
-      symbol: "",
-      precision: 1,
-      ...lang_options[lang],
-    }
-  ),
-  "decimal2": (val, lang, options) => accounting.formatMoney(
-    val, 
-    {
-      symbol: "",
-      precision: 2,
-      ...lang_options[lang],
-    }
-  ),
+  "decimal1": (val, lang, options) => number_formater[lang][1](val),
+  "decimal2": (val, lang, options) => number_formater[lang][2](val),
+  "decimal": (val, lang, options) => number_formater[lang][3](val),
   "big_int": (val, lang, options) => {
-    
     const value = _.isArray(val) ?
       _.map(val, x => x/1000) :
       val/1000;
     
-    let rtn = accounting.formatNumber(
-      value,
-      {
-        precision: 0,
-        ...lang_options[lang],
-      }
-    );
+    const rtn = number_formater[lang][0].format(value);
 
     if (options.raw){
       return rtn;
@@ -229,29 +182,16 @@ const types_to_format = {
   "date": (val) => val,
   "dollar": (val, lang, options) => {
     options.precision = options.precision || 2;
-    let format;
+    
+    const rtn = money_formater[lang][options.precision].format(val);
+
     if (options.raw){
-      format = {
-        en: "$%v", 
-        fr: "%v $", 
-      };
-    }else {
-      format = {
-        en: "<span class='text-nowrap'>$%v</span>", 
-        fr: "<span class='text-nowrap'>%v $</span>", 
-      };
+      return rtn;
+    } else {
+      return "<span class='text-nowrap'>"+rtn+"</span>";
     }
-    return accounting.formatMoney(
-      val,
-      {
-        precision: options.precision, 
-        format: format[lang],
-        ...lang_options[lang],
-      }
-    );
   },
 };
-
 
 const formater = (format, val, options) => {
   options = options || {};
