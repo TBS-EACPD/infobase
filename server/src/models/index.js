@@ -41,7 +41,7 @@ export function create_models(){
 }
 
 
-export async function populate_models(){
+export async function populate_all_models(){
   return Promise.all(
     _.map(
       sub_module_defs, 
