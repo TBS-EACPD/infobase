@@ -133,7 +133,7 @@ class SobjLine extends React.Component {
                 id => {
                   !(
                     spending_data.length === 1 && 
-                    spending_data.map(o => o).includes(id) 
+                    spending_data.map(o => o.id).includes(id) 
                   ) && this.setState({ active_sobjs: _.toggle_list(active_sobjs, id) })
                 }
               }

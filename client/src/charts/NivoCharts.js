@@ -96,7 +96,6 @@ NivoResponsivePie.defaultProps = {
 
   enable_radial_labels: false,
   enable_slice_labels: false,
-  start_angle: -120,
 };
 
 export class NivoResponsiveBar extends React.Component{
@@ -120,6 +119,8 @@ export class NivoResponsiveBar extends React.Component{
       text_formatter,
       theme,
       colorBy,
+      motion_damping,
+      motion_stiffness,
       tooltip,
       enableGridX,
       groupMode,
@@ -157,8 +158,8 @@ export class NivoResponsiveBar extends React.Component{
         padding={0.3}
         borderColor="inherit:darker(1.6)"
         labelTextColor="inherit:darker(1.6)"
-        motionDamping={30}
-        motionStiffness={90}
+        motionDamping={motion_damping || 15}
+        motionStiffness={motion_stiffness || 95}
       />
     );
   }
@@ -206,6 +207,8 @@ export class NivoResponsiveLine extends React.Component {
       enableGridX,
       enableGridY,
       yScale,
+      motion_damping,
+      motion_stiffness,
       enable_dot_label,
       remove_bottom_axis,
       bttm_axis,
@@ -228,12 +231,12 @@ export class NivoResponsiveLine extends React.Component {
         theme={theme}
         tooltip={ (d) => tooltip( d, get_formatter(is_money, text_formatter, false) ) }
         yScale={ 
-          yScale || 
           {
             type: "linear",
             stacked: stacked,
             max: max,
-            min: min,
+            min: enableArea? 0: min,
+            ...(yScale || {}),
           }
         }
         axisBottom={remove_bottom_axis ? null : bttm_axis}
@@ -249,8 +252,8 @@ export class NivoResponsiveLine extends React.Component {
         axisRight={null}
         xScale={{ type: "point" }}
         animate={true}
-        motionStiffness={90}
-        motionDamping={15}
+        motionStiffness={motion_stiffness || 100}
+        motionDamping={motion_damping || 19}
         dotSize={10}
       />
     );
