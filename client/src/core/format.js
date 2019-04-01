@@ -31,6 +31,17 @@ const percent_formatter = {
   fr: _.map(Array(3), (val,ix) => new Intl.NumberFormat('fr-CA', {style: 'percent', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
 }
 
+// results need to be displayed with the number of digits they are entered in. We don't do any rounding!
+const result_number_formatter = {
+  en: new Intl.NumberFormat('en-CA', {style: 'decimal', maximumFractionDigits: 20, minimumFractionDigits: 0}),
+  fr: new Intl.NumberFormat('fr-CA', {style: 'decimal', maximumFractionDigits: 20, minimumFractionDigits: 0}),
+}
+const result_percent_formatter = {
+  en: new Intl.NumberFormat('en-CA', {style: 'percent', maximumFractionDigits: 20, minimumFractionDigits: 0}),
+  fr: new Intl.NumberFormat('fr-CA', {style: 'percent', maximumFractionDigits: 20, minimumFractionDigits: 0}),
+}
+
+
 const compact = (precision, val, lang, options) => {  
   precision = precision || 0;
 
@@ -131,19 +142,6 @@ const percentage = (precision, val, lang, options) => {
   }
 }
 
-/* 
-  '0.00' -> '0'
-  '1.0' -> '1'
-  '2000' -> '2000'
-*/
-const trailing_zeroes_regex = (
-  window.lang === 'en' ?
-    new RegExp(/\.0+$/) :
-    /* eslint-disable no-useless-escape */
-    new RegExp(/\,0+$/)
-);
-const remove_trailing_zeroes_from_string = str => _.isString(str) && str.replace(trailing_zeroes_regex, "");
-
 const types_to_format = {
   "compact": (val, lang, options) => compact(options.precision, val, lang, options),
   "compact1": _.curry(compact)(1),
@@ -154,8 +152,8 @@ const types_to_format = {
   "percentage": (val, lang, options) => percentage(options.precision, val, lang, options),
   "percentage1": _.curry(percentage)(1),
   "percentage2": _.curry(percentage)(2),
-  "result_percentage": (val, lang) => (+val).toString() + lang_percent_symbol[lang],
-  "result_num": function(val){ return remove_trailing_zeroes_from_string( formats.decimal.call(this, val) ); },
+  "result_percentage": (val, lang) => result_percent_formatter[lang].format(val),
+  "result_num": (val, lang) => result_number_formatter[lang].format(val),
   "decimal1": (val, lang, options) => number_formatter[lang][1](val),
   "decimal2": (val, lang, options) => number_formatter[lang][2](val),
   "decimal": (val, lang, options) => number_formatter[lang][3](val),
@@ -248,7 +246,6 @@ _.each(
 );
 
 const dollar_formats = _.pickBy( formats, (format, key) => /^compact([0-9?]?)+_raw$/.test(key) );
-
 export { 
   formater, 
   list_formater, 
