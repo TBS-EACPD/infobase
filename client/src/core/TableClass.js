@@ -337,11 +337,11 @@ export class Table extends mix().with(staticStoreMixin){
         const type = this.col_from_nick(key).type ;
         // in case we have numbers represented as string, we'll convert them to integers
         // need to handle special cases of '.', '', and '-'
-        if ( (type === 'percentage' || type==='decimal' || type==='decimal1' || type==='percentage1' || type==='percentage2') && !_.isNaN(parseFloat(val)) ){
+        if ( _.includes(['percentage', 'decimal', 'decimal1', 'percentage1', 'percentage2'], type) && !_.isNaN(parseFloat(val)) ){
           row_obj[key]=parseFloat(val);
         } else if ( (type === 'big_int' || type === "big_int_real" || type === 'int') && !_.isNaN(parseInt(val,10))){
           row_obj[key]=parseInt(val,10);
-        } else if ((val === "." || val === "" || val === "-") && ( type === 'percentage' || type==='decimal' || type==='decimal1' || type==='percentage1' || type==='percentage2' || type === 'big_int' || type === "big_int_real" || type === 'int' )){
+        } else if (_.includes(['.','','-'], val) && _.includes(['percentage', 'decimal', 'decimal1', 'percentage1', 'percentage2', 'big_int', 'big_int_real', 'int'], type) ){
           row_obj[key]=0;
         }
       });

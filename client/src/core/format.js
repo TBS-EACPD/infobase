@@ -152,7 +152,7 @@ const types_to_format = {
     if (options.raw){
       return rtn;
     } else {
-      return "<span class='text-nowrap'>"+rtn+"</span>";
+      return `<span class='text-nowrap'>${rtn}</span>`;
     }
   },
   "big_int_real": (val, lang, options) => types_to_format["big_int"](val*1000, lang, options),
@@ -171,7 +171,7 @@ const types_to_format = {
     if (options.raw){
       return rtn;
     } else {
-      return "<span class='text-nowrap'>"+rtn+"</span>";
+      return `<span class='text-nowrap'>${rtn}</span>`;
     }
   },
 };
