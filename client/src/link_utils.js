@@ -3,7 +3,7 @@ import { rpb_link } from './rpb/rpb_link.js';
 import { Table } from './core/TableClass.js';
 import { GlossaryEntry } from './models/glossary.js';
 
-const glossary_href = glossary_item => "/glossary/"+glossary_item.id;
+const glossary_href = glossary_item => "#glossary/"+glossary_item.id;
 
 const general_href_for_item = item => {
 
