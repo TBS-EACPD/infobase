@@ -84,7 +84,7 @@ const compact_written = (precision, val, lang, options) => {
   const abs = Math.abs(val);
   let rtn = '0';
   let abbrev = '';
-  if (abs >= 50000){
+  if (abs >= 50000){ // "small numbers" is arbitrarily defined as < 50,000
     let reduced_val;
 
     if (abs >= 1000000000){
