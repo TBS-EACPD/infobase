@@ -18,15 +18,15 @@ const lang_percent_symbol = {
   fr: " %",
 };
 
-const number_formater = {
+const number_formatter = {
   en: _.map(Array(4), (val,ix) => new Intl.NumberFormat('en-CA', {style: 'decimal', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
   fr: _.map(Array(4), (val,ix) => new Intl.NumberFormat('fr-CA', {style: 'decimal', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
 }
-const money_formater = {
+const money_formatter = {
   en: _.map(Array(3), (val,ix) => new Intl.NumberFormat('en-CA', {style: 'currency', currency: 'CAD', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
   fr: _.map(Array(3), (val,ix) => new Intl.NumberFormat('fr-CA', {style: 'currency', currency: 'CAD', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
 }
-const percent_formater = {
+const percent_formatter = {
   en: _.map(Array(3), (val,ix) => new Intl.NumberFormat('en-CA', {style: 'percent', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
   fr: _.map(Array(3), (val,ix) => new Intl.NumberFormat('fr-CA', {style: 'percent', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
 }
@@ -60,10 +60,10 @@ const compact = (precision, val, lang, options) => {
     symbol = abbrev[999][lang];
   }
 
-  // for now, can't use the money formater if we want to insert
+  // for now, can't use the money formatter if we want to insert
   // custom symbols in the string. There is an experimental
   // formatToParts function that may be useful in the future
-  const rtn = number_formater[lang][options.precision].format(new_val);
+  const rtn = number_formatter[lang][options.precision].format(new_val);
 
   if (options.raw){
     return lang === 'fr' ? `${rtn} ${symbol}$` : `$${rtn} ${symbol}`; 
@@ -104,14 +104,14 @@ const compact_written = (precision, val, lang, options) => {
         precision = 0;
       }
     }
-    rtn = number_formater[lang][precision].format(reduced_val);
+    rtn = number_formatter[lang][precision].format(reduced_val);
 
   } else {
     if (precision < 2){
       precision = 0;
     }
     abbrev = abbrevs[999][lang];
-    rtn = number_formater[lang][precision].format(val);
+    rtn = number_formatter[lang][precision].format(val);
   }
 
   if (options.raw){
@@ -123,7 +123,7 @@ const compact_written = (precision, val, lang, options) => {
 
 const percentage = (precision, val, lang, options) => {
   precision = precision || 0;
-  const rtn = percent_formater[lang][precision](val)
+  const rtn = percent_formatter[lang][precision](val)
   if (options.raw){
     return rtn;
   }else {
@@ -156,15 +156,15 @@ const types_to_format = {
   "percentage2": _.curry(percentage)(2),
   "result_percentage": (val, lang) => (+val).toString() + lang_percent_symbol[lang],
   "result_num": function(val){ return remove_trailing_zeroes_from_string( formats.decimal.call(this, val) ); },
-  "decimal1": (val, lang, options) => number_formater[lang][1](val),
-  "decimal2": (val, lang, options) => number_formater[lang][2](val),
-  "decimal": (val, lang, options) => number_formater[lang][3](val),
+  "decimal1": (val, lang, options) => number_formatter[lang][1](val),
+  "decimal2": (val, lang, options) => number_formatter[lang][2](val),
+  "decimal": (val, lang, options) => number_formatter[lang][3](val),
   "big_int": (val, lang, options) => {
     const value = _.isArray(val) ?
       _.map(val, x => x/1000) :
       val/1000;
     
-    const rtn = number_formater[lang][0].format(value);
+    const rtn = number_formatter[lang][0].format(value);
 
     if (options.raw){
       return rtn;
@@ -183,7 +183,7 @@ const types_to_format = {
   "dollar": (val, lang, options) => {
     options.precision = options.precision || 2;
     
-    const rtn = money_formater[lang][options.precision].format(val);
+    const rtn = money_formatter[lang][options.precision].format(val);
 
     if (options.raw){
       return rtn;
@@ -224,8 +224,8 @@ const list_formater = (formats, vals) => _.map(
 const formats = {};
 _.each(
   _.toPairs(types_to_format), 
-  (key_formater) => {
-    const key = key_formater[0];
+  (key_formatter) => {
+    const key = key_formatter[0];
 
     formats[key] = (val, options) => {
       if ( !_.isObject(options) || _.isUndefined(options) ){
