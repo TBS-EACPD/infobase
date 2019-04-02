@@ -325,14 +325,13 @@ const InfoGraph = ({
       bubble,
     },
   },
-  history,
 }) => {
 
   const SubjectModel = Subject[level];
   const subject = SubjectModel.lookup(subject_id);
   const bubble_id = bubble_defs[bubble] ? bubble : null;
 
-  const title = text_maker("infographic_for",{ name: name_for_title(subject) });
+  const title = text_maker("infographic_for", { name: name_for_title(subject) });
   const desc_key = {
     financial: "finance_infograph_desc_meta_attr",
     people: "ppl_infograph_desc_meta_attr",
@@ -366,12 +365,9 @@ class TransitionText extends React.Component {
         transitionEnterTimeout={800}
         transitionLeaveTimeout={0.0001}
       >
-        <span key={this.props.text}>
-          { this.props.text }
-        </span>
-
+        <span key={this.props.text} dangerouslySetInnerHTML={{__html: this.props.text}} />
       </CSSTransitionGroup>
-    )
+    );
   }
 }
 
