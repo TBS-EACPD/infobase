@@ -254,10 +254,20 @@ class EstimatesExplorer extends React.Component {
     this.setState({_query: ""});
     this.props.clear_query("");
   }
+  componentDidUpdate(){
+    const {
+      route_grouping_layout,
+      h7y_layout,
+      set_h7y_layout,
+    } = this.props;
+
+    if (route_grouping_layout !== h7y_layout){
+      set_h7y_layout(route_grouping_layout);
+    }
+  }
   render(){
     const {
       history,
-      route_grouping_layout,
 
       flat_nodes,
       is_filtering,
@@ -273,13 +283,8 @@ class EstimatesExplorer extends React.Component {
       show_stat,
       toggle_stat_filter,
       h7y_layout,
-      set_h7y_layout,
     } = this.props;
     const { loading } = this.state;
-
-    if (route_grouping_layout !== h7y_layout){
-      history.push(`/compare_estimates/${h7y_layout}`);
-    }
 
     const root = get_root(flat_nodes);
 
@@ -321,7 +326,7 @@ class EstimatesExplorer extends React.Component {
                       display: <TM k="by_item_type" />,
                     },
                   ]}
-                  onChange={ id => set_h7y_layout(id) }
+                  onChange={ id => history.push(`/compare_estimates/${id}`) }
                 />
               </div>
             }
