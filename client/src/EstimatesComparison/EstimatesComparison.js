@@ -29,7 +29,7 @@ import { Explorer } from '../components/ExplorerComponents.js';
 import {
   estimates_diff_scheme,
   col_defs,
-  initial_state as initial_scheme_state,
+  get_initial_state as get_initial_scheme_state,
   current_doc_is_mains,
   current_sups_letter,
 } from './scheme.js';
@@ -51,7 +51,17 @@ export default class EstimatesComparison extends React.Component {
     });
   }
   render(){
+    const {
+      history,
+      match: {
+        params: {
+          grouping_layout,
+        },
+      },
+    } = this.props;
+
     const title = text_maker("diff_view_title");
+    
     return (
       <StandardRouteContainer
         title={title}
@@ -62,7 +72,10 @@ export default class EstimatesComparison extends React.Component {
         <h1><TM k="diff_view_title"/></h1>
         { this.state.loading ? 
           <SpinnerWrapper config_name={"sub_route"} /> :
-          <ExplorerContainer />
+          <ExplorerContainer
+            history={history}
+            route_grouping_layout={grouping_layout}
+          />
         }
       </StandardRouteContainer>
     );
@@ -81,8 +94,10 @@ const map_state_to_props_from_memoized_funcs = memoized_funcs => {
 }
 
 class ExplorerContainer extends React.Component {
-  constructor(){
+  constructor(props){
     super();
+
+    const { route_grouping_layout } = props
 
     const scheme = estimates_diff_scheme;
     const scheme_key = estimates_diff_scheme.key;
@@ -92,7 +107,7 @@ class ExplorerContainer extends React.Component {
       [scheme_key]: scheme.reducer,
     });
 
-    const mapStateToProps = map_state_to_props_from_memoized_funcs(get_memoized_funcs([scheme]));
+    const mapStateToProps = map_state_to_props_from_memoized_funcs( get_memoized_funcs([scheme]) );
 
     const mapDispatchToProps = dispatch => _.immutate(
       map_dispatch_to_root_props(dispatch),
@@ -101,12 +116,12 @@ class ExplorerContainer extends React.Component {
 
     const initialState = {
       root: _.immutate(initial_root_state, {scheme_key}),
-      [scheme_key]: initial_scheme_state,
+      [scheme_key]: get_initial_scheme_state(route_grouping_layout),
     };
 
     const connecter = connect(mapStateToProps, mapDispatchToProps);
     const Container = connecter(EstimatesExplorer);
-    const store = createStore(reducer,initialState);
+    const store = createStore(reducer, initialState);
 
     this.Container = Container;
     this.store = store;
@@ -115,16 +130,15 @@ class ExplorerContainer extends React.Component {
     const { store, Container } = this;
     return (
       <Provider store={store}>
-        <Container />
+        <Container {...this.props}/>
       </Provider>
     );
   }
-
 }
 
 const DetailedAmountsByDoc = ({amounts_by_doc}) => {
 
-  const sorted_items = _.sortBy(amounts_by_doc, ({doc_code}) => estimates_docs[doc_code].order );
+  const sorted_items = _.sortBy( amounts_by_doc, ({doc_code}) => estimates_docs[doc_code].order );
 
   return (
     <section className="LastYearEstimatesSection"><div>
@@ -188,7 +202,9 @@ const get_non_col_content = ({node}) => {
             allowReclip={true} 
             clipHeight={150}
           >
-            <header className="agnostic-header"><TM k="notes" /></header>
+            <header className="agnostic-header">
+              <TM k="notes" />
+            </header>
             <FootnoteList
               footnotes={footnotes}
             />
@@ -221,11 +237,14 @@ class EstimatesExplorer extends React.Component {
   } 
   debounced_set_query(new_query){
     this.props.set_query(new_query);
-    this.timedOutStateChange = setTimeout(()=>{
-      this.setState({
-        loading: false,
-      });
-    }, 500)
+    this.timedOutStateChange = setTimeout(
+      () => {
+        this.setState({
+          loading: false,
+        });
+      }, 
+      500
+    );
   }
   componentWillUnmount(){
     !_.isUndefined(this.debounced_set_query) && this.debounced_set_query.cancel();
@@ -237,6 +256,9 @@ class EstimatesExplorer extends React.Component {
   }
   render(){
     const {
+      history,
+      route_grouping_layout,
+
       flat_nodes,
       is_filtering,
 
@@ -255,6 +277,10 @@ class EstimatesExplorer extends React.Component {
     } = this.props;
     const { loading } = this.state;
 
+    if (route_grouping_layout !== h7y_layout){
+      history.push(`/compare_estimates/${h7y_layout}`);
+    }
+
     const root = get_root(flat_nodes);
 
     const explorer_config = {
@@ -266,7 +292,7 @@ class EstimatesExplorer extends React.Component {
       //un-used features...
       get_non_col_content,
       children_grouper: null,
-    }
+    };
 
     return (
       <div>
@@ -379,7 +405,7 @@ class EstimatesExplorer extends React.Component {
         >
           <TM 
             k="estimates_source_link"
-            args={{href: sources.ESTIMATES.open_data[window.lang] }}
+            args={{ href: sources.ESTIMATES.open_data[window.lang] }}
           />
         </div>
       </div>

@@ -57,7 +57,7 @@ export class App extends React.Component {
               <Route path="/rpb/:config?" component={ReportBuilder} />
               <Route path="/about" component={About} />
               <Route path="/graph/:level?/:graph?/:id?" component={GraphInventory} />
-              <Route path="/compare_estimates" component={EstimatesComparison} />
+              <Route path="/compare_estimates/:grouping_layout?" component={EstimatesComparison} />
               <Route path="/privacy" component={PrivacyStatement} />
               <Route path="/start/:no_basic_equiv?" component={Home} />
               <Route path="/" component={Home} />

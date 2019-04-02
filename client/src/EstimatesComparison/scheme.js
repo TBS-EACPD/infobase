@@ -285,7 +285,6 @@ function get_data_by_item_types(){
 
   const d3_h7y = d3.hierarchy(root, _.property('children'));
   return convert_d3_hierarchy_to_explorer_hierarchy(d3_h7y);
-
 }
 
 
@@ -364,13 +363,15 @@ function get_footnotes_for_votestat_item({desc, org_id, votenum}){
   return ;
 }
 
+
 const scheme_key = "estimates_diff";
-export const initial_state = {
+const h7y_layout_options = ["org", "item_type"]
+export const get_initial_state = (intitial_h7y_layout) => ({
   sort_col: "current_value",
   is_descending: true,
   show_stat: true,
-  h7y_layout: "item_type",
-};
+  h7y_layout: _.includes(h7y_layout_options, intitial_h7y_layout) ? intitial_h7y_layout : h7y_layout_options[0],
+});
 export const estimates_diff_scheme = {
   key: scheme_key,
   get_sort_func_selector: () => {
@@ -396,7 +397,7 @@ export const estimates_diff_scheme = {
     toggle_stat_filter: () => dispatch({type: "toggle_stat_filter"}),
     set_h7y_layout: layout_key => dispatch({type: "set_h7y_layout", payload: layout_key}),
   }),
-  reducer: (state=initial_state, action) => {
+  reducer: (state=get_initial_state(), action) => {
     const { type, payload } = action;
 
     if(type === "set_h7y_layout"){ //this should always reset the show_stat filter 
