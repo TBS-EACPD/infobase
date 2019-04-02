@@ -9,25 +9,17 @@ import '../charts/charts.scss';
 import * as FORMAT from './format.js';
 import common_charts_utils from '../charts/common_charts_utils.js';
 import { trivial_text_maker } from '../models/text.js';
-
 import { Bar } from '../charts/bar.js';
 import { HBar } from '../charts/hbar.js';
 import { CirclePieChart as CirclePieChart } from '../charts/circle_chart.js';
-import { Pie } from '../charts/pie.js';
-import { PieOrBar as PieOrBar } from '../charts/pie_or_bar.js';
-import { SafeProgressDonut as SafeProgressDonut } from '../charts/safe_progress_donut.js';
-import { Line } from '../charts/line.js';
 import { Canada } from '../charts/canada.js';
 import { Arrow } from '../charts/arrow.js';
 import { heatmap } from '../charts/heatmap.js';
 import { ConceptExplorer } from '../charts/concept-explorer.js';
 import { HBarComposition } from '../charts/hbar_composition.js';
-import { ProgressDonut } from '../charts/progress_donut.js';
 import { TwoSeriesBar } from '../charts/two_series_bar.js';
 
-
 var formats = FORMAT.formats;
-
 
 import { reactAdapter } from './reactAdapter.js';
 import { TextMaker } from '../util_components.js';
@@ -131,16 +123,11 @@ export {
   formats,
   HBar, 
   CirclePieChart, 
-  Pie, 
-  PieOrBar, 
-  SafeProgressDonut, 
-  Line, 
   Canada, 
   Arrow, 
   heatmap, 
   ConceptExplorer, 
   HBarComposition, 
-  ProgressDonut, 
   TwoSeriesBar,
   common_charts_utils, 
 };

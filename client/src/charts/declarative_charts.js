@@ -1,10 +1,7 @@
 import classNames from 'classnames';
 import * as charts_index from '../core/charts_index.js';
 import { Bar as D3Bar } from './bar.js';
-import { Line as D3Line } from './line.js';
 import { HBarComposition } from './hbar_composition.js';
-import { PieOrBar } from './pie_or_bar.js';
-import { SafeProgressDonut } from './safe_progress_donut.js';
 import { CirclePieChart as D3CirclePieChart } from './circle_chart.js';
 import { TwoSeriesBar } from './two_series_bar.js';
 
@@ -170,26 +167,6 @@ class StackedHbarChart extends React.Component {
   }
 }
 
-class ProgressDonut extends React.Component {
-  render(){
-    return <div ref="graph_area" style={{position: 'relative'}} />
-  }
-  _render(){
-    this.graph_instance.render(_.clone(this.props));
-  }
-  componentDidMount(){
-    this.graph_instance = new SafeProgressDonut(
-      this.refs.graph_area,
-      _.clone(this.props)
-    );
-    this._render()
-
-  }
-  componentDidUpdate(){
-    this._render();
-  }
-}
-
 class Bar extends React.Component {
   render(){
     return <div ref="graph_area" style={{position: 'relative'}} />
@@ -199,46 +176,6 @@ class Bar extends React.Component {
   }
   componentDidMount(){
     this.graph_instance = new D3Bar(
-      d3.select(this.refs.graph_area).node(),
-      _.clone(this.props)
-    );
-    this._render()
-
-  }
-  componentDidUpdate(){
-    this._render();
-  }
-}
-
-class SafePie extends React.Component {
-  render(){
-    return <div ref="graph_area" style={{position: 'relative'}} />
-  }
-  _render(){
-    this.graph_instance.render(_.clone(this.props));
-  }
-  componentDidMount(){
-    this.graph_instance = new PieOrBar( 
-      this.refs.graph_area,
-      _.clone(this.props)
-    );
-    this._render()
-
-  }
-  componentDidUpdate(){
-    this._render();
-  }
-}
-
-class Line extends React.Component {
-  render(){
-    return <div ref="graph_area" style={{position: 'relative'}} />
-  }
-  _render(){
-    this.graph_instance.render(_.clone(this.props));
-  }
-  componentDidMount(){
-    this.graph_instance = new D3Line(
       d3.select(this.refs.graph_area).node(),
       _.clone(this.props)
     );
@@ -358,36 +295,11 @@ class CirclePieChart extends React.Component {
   }
 }
 
-class DualAxisBarChart extends React.Component {
-  render(){
-    return <div ref="graph_area" style={{position: 'relative'}} />
-  }
-  _render(){
-    this.graph_instance.render(_.clone(this.props));
-  }
-  componentDidMount(){
-
-    this.graph_instance = new TwoSeriesBar(
-      this.refs.graph_area,
-      _.clone(this.props)
-    )
-    this._render()
-
-  }
-  componentDidUpdate(){
-    this._render();
-  }
-}
-
 export {
   StackedHbarChart,
   GraphLegend,
   Bar,
-  Line,
   A11YTable,
   TabularPercentLegend,
-  SafePie,
-  ProgressDonut,
   CirclePieChart,
-  DualAxisBarChart,
 };
