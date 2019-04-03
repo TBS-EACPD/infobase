@@ -178,13 +178,15 @@ export class LineBarToggleGraph extends React.Component {
       .fromPairs()
       .value();
 
-    const data_bar = graph_options.ticks.map((date, date_index) =>(
-      _.fromPairs(
-        _.map(series, (data, label) =>(
-          [label,data[date_index]]
-        ))
-      )
-    ));
+    const data_bar = _.map(
+      graph_options.ticks,
+      (date, date_index) => ({
+        ..._.chain(series)
+          .map(series, (data,label) => [label, data[date_index]])
+          .fromPairs()
+          .value(),
+      })
+    );
 
     const data_formatter_bar = (data) => _.map(
       data,
@@ -195,17 +197,19 @@ export class LineBarToggleGraph extends React.Component {
     ); 
 
     const normalize = (data) =>(
-      _.forEach(data, (value, index) =>{
+      _.each(data, (value, index) =>{
         const sum = d3.sum(_.map(value, (data) => data)
         );
-        _.each(value, (d, i) => value[i]/=sum)
+        _.map(value, (d, i) => value[i]/=sum)
       })
     );
 
     const data_formatter_line = _.map(
-      series,(data_array, data_label) => ({
+      series,
+      (data_array, data_label) => ({
         id: data_label,
-        data: data_array.map(
+        data: _.map(
+          data_array,
           (spending_value, tick_index) => ({
             x: graph_options.ticks[tick_index],
             y: spending_value,
@@ -217,8 +221,8 @@ export class LineBarToggleGraph extends React.Component {
     const extended_graph_options_bar = {
       keys: Object.keys(series),
       data: extra_graph_options.normalized ? 
-        data_formatter_bar(normalize(data_bar)) : 
-        data_formatter_bar(data_bar),
+       normalize(data_formatter_bar(data_bar)) : 
+       data_formatter_bar(data_bar),
       colorBy: d => colors(d.id),
       text_formatter: formatter || extra_graph_options.formatter,
       indexBy: extra_graph_options.index,

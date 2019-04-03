@@ -3,8 +3,6 @@ import * as charts_index from '../core/charts_index.js';
 import { Bar as D3Bar } from './bar.js';
 import { HBarComposition } from './hbar_composition.js';
 import { CirclePieChart as D3CirclePieChart } from './circle_chart.js';
-import { TwoSeriesBar } from './two_series_bar.js';
-
 import { Fragment } from 'react';
 
 const { create_a11y_table } = charts_index;

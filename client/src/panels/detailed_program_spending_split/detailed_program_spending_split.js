@@ -211,7 +211,6 @@ const footnote_topics = [ 'PROG', 'SOBJ' ];
           </div>
         </Panel>
       );
-
     },
   });
 });
@@ -247,20 +246,18 @@ class HistoricalProgramBars extends React.Component {
     //have to have an empty string in key to make sure
     //that negative bars will be displayed
     const keys = Object.keys(graph_data)
-    const data_by_year = ticks.map((year, year_index) =>(
-      _.fromPairs(_.map(graph_data, (data, label) =>(
-        [label,data[year_index]])
-      ))
-    ));
 
     const data_formatter = _.map(
-      data_by_year,
-      (stacked_data, index) =>({
-        ...stacked_data,
-        year: ticks[index],
+      ticks,
+      (year, year_index) => ({
+        year,
+        ..._.chain(graph_data)
+          .map( (data, label) => [ label, data[year_index] ] )
+          .fromPairs()
+          .value(),
       })
     );
-     
+  
     if(window.is_a11y_mode){
       return <div>
         <A11YTable 
