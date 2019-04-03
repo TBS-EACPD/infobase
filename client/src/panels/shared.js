@@ -221,7 +221,7 @@ export class LineBarToggleGraph extends React.Component {
     const extended_graph_options_bar = {
       keys: Object.keys(series),
       data: extra_graph_options.normalized ? 
-       normalize(data_formatter_bar(data_bar)) : 
+       data_formatter_bar(normalize(data_bar)) : 
        data_formatter_bar(data_bar),
       colorBy: d => colors(d.id),
       text_formatter: formatter || extra_graph_options.formatter,
