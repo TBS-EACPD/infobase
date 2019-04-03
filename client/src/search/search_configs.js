@@ -187,7 +187,7 @@ const datasets = {
 const programs = {
   header_function: () => trivial_text_maker('programs'),
   name_function: program => `${program.name} (${program.dept.fancy_name})`,
-  get_data: () => Program.get_all(),
+  get_data: () => Program.get_all().filter( program => !program.is_fake),
   filter: (query, datum) => memoized_re_matchers(query, ['name'], "programs")(datum),
   menu_content_function: function(program, search){
     if ( program.dead_program ){
