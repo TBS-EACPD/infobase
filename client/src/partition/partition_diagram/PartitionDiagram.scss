@@ -91,6 +91,10 @@
   margin: 0px;
   & > a {
     color: #fff !important;
+    text-decoration: underline dashed;
+    &:hover, &:focus, &:active {
+      text-decoration: underline !important;
+    }
   }
 }
 
