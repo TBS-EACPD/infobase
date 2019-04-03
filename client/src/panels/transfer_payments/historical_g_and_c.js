@@ -208,7 +208,6 @@ class HistTPTypes extends React.Component {
 
         <div style ={{height: '400px'}}>
           <NivoResponsiveLine
-            min = {0}
             enableArea = {true}
             data = {expenditure_data}
             colors={infobaseCategory10Colors}

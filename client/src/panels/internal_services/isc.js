@@ -100,17 +100,16 @@ new PanelGraph({
       [ other_label, _.map(series, "non_isc") ],
     ]);
 
-    const bar_data = years.map((date, date_index) => (
-      _.fromPairs(
-        _.map(bar_series, (data, label) => (
-          [label,data[date_index]]
-        ))
-      )
-    ));
-    const data_formatter = _.map(bar_data, (stacked_data, index)=>({
-      ...stacked_data,
-      date: years[index],
-    }));
+    const bar_data = _.map(
+      years,
+      (date, date_index) =>({
+        date,
+        ..._.chain(bar_series)
+          .map((data, label) => [label, data[date_index]])
+          .fromPairs()
+          .value(),
+      })
+    );
   
     const colors = infobase_colors();
 
@@ -146,7 +145,7 @@ new PanelGraph({
         </div>
         <div className="fcol-md-9" style = {{height: '300px'}}>
           <NivoResponsiveBar
-            data = {data_formatter}
+            data = {bar_data}
             indexBy = "date"
             colorBy = {d => colors(d.id)}
             keys = {['', isc_label, other_label]}

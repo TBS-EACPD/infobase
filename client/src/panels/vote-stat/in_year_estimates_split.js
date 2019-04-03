@@ -25,11 +25,11 @@ const estimates_split_calculate = function(subject, info, options){
   }
   return {
     in_year: {
-      series: {'': _.map(in_year_estimates_split,1) },
+      series: _.map(in_year_estimates_split,1),
       ticks: _.map(in_year_estimates_split,0),
     },
     last_year: {
-      series: {'': _.map(last_year_estimates_split,1) },
+      series: _.map(last_year_estimates_split,1),
       ticks: _.map(last_year_estimates_split,0),
     },
   };
@@ -48,7 +48,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
   if(window.is_a11y_mode){
     const { series, ticks } = in_year_bar_args;
     const data = _.chain(ticks)
-      .zip(series[""])
+      .zip(series)
       .map( ([label, amt])=> ({
         label,
         data: <Format type="compact1" content={amt} />,
@@ -67,7 +67,8 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
   
   } else {    
     const keys = in_year_bar_args.ticks
-    const estimate_data = in_year_bar_args.series[""].map(
+    const estimate_data = _.map(
+      in_year_bar_args.series,
       (data, index) => ({
         "label": keys[index],
         [keys[index]]: data,

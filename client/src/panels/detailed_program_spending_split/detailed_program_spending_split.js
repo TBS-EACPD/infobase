@@ -245,8 +245,6 @@ class HistoricalProgramBars extends React.Component {
     
     //have to have an empty string in key to make sure
     //that negative bars will be displayed
-    const keys = Object.keys(graph_data)
-
     const data_formatter = _.map(
       ticks,
       (year, year_index) => ({
@@ -296,7 +294,7 @@ class HistoricalProgramBars extends React.Component {
                 }))
                 .value()
               }
-              onClick={id => {!(selected.length===1 && selected.includes(id)) &&
+              onClick={id => {!(selected.length === 1 && selected.includes(id)) &&
                 this.setState({
                   selected: _.toggle_list(selected, id),
                 })
@@ -307,7 +305,7 @@ class HistoricalProgramBars extends React.Component {
         <div className="fcol-md-8" style={{ height: '400px' }}>
           <NivoResponsiveBar
             data = {data_formatter}
-            keys = {_.union([''],keys)}
+            keys = {_.union([''],Object.keys(graph_data))}
             indexBy = "year"
             colorBy ={d => colors(d.id)}
           />

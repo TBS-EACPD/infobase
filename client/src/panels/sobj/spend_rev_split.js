@@ -60,7 +60,8 @@ function render({calculations, footnotes, sources}) {
   //that negative bars will be displayed
   const ticks = _.union(_ticks.map(text_maker),[''])
   
-  const spend_rev_data = series.map(
+  const spend_rev_data = _.map(
+    series,
     (spend_rev_value,tick_index)=>({
       title: ticks[tick_index],
       [ticks[tick_index]]: spend_rev_value,

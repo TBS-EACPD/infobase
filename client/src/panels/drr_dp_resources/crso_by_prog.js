@@ -133,15 +133,16 @@ class PlannedProgramResources extends React.Component {
       
     //have to have an empty string in key to make sure
     //that negative bars will be displayed
-    const keys = _.union([''],Object.keys(graph_data))
-    const data_by_year = ticks.map((year, year_index) =>(
-      _.fromPairs(_.map(graph_data, (data, label) =>(
-        [label,data[year_index]])
-      ))
-    ))
-    data_by_year.map((stacked_data, index) =>{
-      stacked_data["year"] = ticks[index]
-    })
+    const data_by_year = _.map(
+      ticks,
+      (year,year_index) =>({
+        year,
+        ..._.chain(graph_data)
+          .map((data,label) => [label, data[year_index]])
+          .fromPairs()
+          .value(),
+      })
+    )
 
     return <div>
       <div className="medium_panel_text mrgn-bttm-lg">
@@ -171,7 +172,7 @@ class PlannedProgramResources extends React.Component {
         <div className="fcol-md-8" style={{ height: '400px'}}>
           <NivoResponsiveBar
             data = {data_by_year}
-            keys = {keys}
+            keys = {_.union([''],Object.keys(graph_data))}
             indexBy = "year"
             colorBy = { d => colors(d.id)}
             is_money = {!is_fte}
