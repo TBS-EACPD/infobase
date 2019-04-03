@@ -441,7 +441,7 @@ const estimates_perspective_factory = (presentation_scheme) => new PartitionPers
   id: presentation_scheme,
   name: get_name(presentation_scheme),
   data_type: "estimates",
-  formater: node_data => wrap_in_brackets( formats_by_data_type["estimates"](node_data["estimates"]) ),
+  formatter: node_data => wrap_in_brackets( formats_by_data_type["estimates"](node_data["estimates"]) ),
   hierarchy_factory: () => create_estimates_hierarchy("estimates", presentation_scheme),
   popup_template: _.curry(estimates_popup_template)(presentation_scheme),
   root_text_func: root_value => text_maker(
