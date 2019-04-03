@@ -462,7 +462,7 @@ Subject.Program = class Program extends can_have_results(){
     return !this.is_active;
   }
   get is_fake(){
-    return !this.is_fake_program;
+    return this.is_fake_program;
   }
 };
 
