@@ -1,7 +1,7 @@
 import './non-a11y-styles.scss';
 
 import { Suspense } from 'react';
-import { Route, Switch } from 'react-router';
+import { Route, Switch, Redirect } from 'react-router';
 import { initialize_analytics } from '../core/analytics.js';
 
 import { ensure_linked_stylesheets_load, retrying_react_lazy } from './common_app_component_utils.js'
@@ -59,7 +59,10 @@ export class App extends React.Component {
               <Route path="/orgs/:level/:subject_id/infograph/:bubble?/" component={InfoGraph} />
               <Route path="/glossary/:active_key?" component={Glossary} />
               <Route path="/partition/:perspective?/:data_type?" component={PartitionRoute} />
-              <Route path="/budget-measures/:first_column?/:selected_value?/:budget_year?" component={BudgetMeasuresRoute} />
+              <Redirect 
+                from="/budget-measures/:first_column?/:selected_value?/:budget_year?" 
+                to="/budget-tracker/:first_column?/:selected_value?/:budget_year?"
+              />
               <Route path="/budget-tracker/:first_column?/:selected_value?/:budget_year?" component={BudgetMeasuresRoute} />
               <Route path="/rpb/:config?" component={ReportBuilder} />
               <Route path="/about" component={About} />
