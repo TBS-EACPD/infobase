@@ -308,6 +308,12 @@ class HistoricalProgramBars extends React.Component {
             keys = {_.union([''],Object.keys(graph_data))}
             indexBy = "year"
             colorBy ={d => colors(d.id)}
+            margin = {{
+              top: 50,
+              right: 20,
+              bottom: 50,
+              left: 70,
+            }}
           />
         </div>
       </div>

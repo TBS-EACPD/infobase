@@ -182,7 +182,7 @@ export class LineBarToggleGraph extends React.Component {
       graph_options.ticks,
       (date, date_index) => ({
         ..._.chain(series)
-          .map(series, (data,label) => [label, data[date_index]])
+          .map((data,label) => [label, data[date_index]])
           .fromPairs()
           .value(),
       })
