@@ -317,43 +317,91 @@ class InfoGraph_ extends React.Component {
   }
 }
 
-const InfoGraph = ({ 
-  match: {
-    params: {
-      level, 
-      subject_id, 
-      bubble,
+const is_fake_infographic = (subject) => !_.isUndefined(subject.is_fake) && subject.is_fake;
+const handle_fake_inforgraphic = (props) => {
+  // Fake programs have infographics and are linked to all over the place, we want to bounce any
+  // user landing on a fake program's infographic up to the corresponding CRSO infographic
+  const {
+    match: {
+      params: {
+        level, 
+        subject_id, 
+        bubble,
+      },
     },
-  },
-}) => {
+    history,
+  } = props;
 
   const SubjectModel = Subject[level];
   const subject = SubjectModel.lookup(subject_id);
   const bubble_id = bubble_defs[bubble] ? bubble : null;
 
-  const title = text_maker("infographic_for", { name: name_for_title(subject) });
-  const desc_key = {
-    financial: "finance_infograph_desc_meta_attr",
-    people: "ppl_infograph_desc_meta_attr",
-    results: "results_infograph_desc_meta_attr",
-  }[bubble_id];
-  return (
-    <StandardRouteContainer 
-      title={title}
-      breadcrumbs={[title]}
-      description={ desc_key && text_maker(desc_key)}
-      route_key={sub_app_name}
-    >
-      <TransitionText text={title} />
-      <InfoGraph_
-        level={level}
-        subject={subject}
-        bubble={bubble_id}
-      />
-    </StandardRouteContainer>
-  );
-};
+  const subject_parent = (
+    () => {
+      switch (level){
+        case 'program':
+          return subject.crso;
+        case 'crso':
+          return subject.dept;
+        default: 
+          return Subject.Gov;
+      }
+    }
+  )();
 
+  if ( is_fake_infographic(subject) ){
+    history.replace( infograph_href_template(subject_parent, bubble_id, true) );
+  }
+};
+class InfoGraph extends React.Component {
+  componentDidUpdate(){
+    handle_fake_inforgraphic(this.props)
+  }
+  componentDidMount(){
+    handle_fake_inforgraphic(this.props)
+  }
+  render(){
+    const { 
+      match: {
+        params: {
+          level, 
+          subject_id, 
+          bubble,
+        },
+      },
+    } = this.props
+    
+    const SubjectModel = Subject[level];
+    const subject = SubjectModel.lookup(subject_id);
+    const bubble_id = bubble_defs[bubble] ? bubble : null;
+
+    if ( is_fake_infographic(subject) ){
+      return null; // render nothing, lifecycle methods will bounce user away from fake infographics
+    }
+
+    const title = text_maker("infographic_for", { name: name_for_title(subject) });
+    const desc_key = {
+      financial: "finance_infograph_desc_meta_attr",
+      people: "ppl_infograph_desc_meta_attr",
+      results: "results_infograph_desc_meta_attr",
+    }[bubble_id];
+    return (
+      <StandardRouteContainer 
+        title={title}
+        breadcrumbs={[title]}
+        description={ desc_key && text_maker(desc_key)}
+        route_key={sub_app_name}
+      >
+        <TransitionText text={title} />
+        <InfoGraph_
+          level={level}
+          subject={subject}
+          bubble={bubble_id}
+        />
+      </StandardRouteContainer>
+    );
+  }
+}
 
 class TransitionText extends React.Component {
   render(){
