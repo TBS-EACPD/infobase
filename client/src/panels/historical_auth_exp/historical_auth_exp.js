@@ -104,7 +104,7 @@ const render = function({calculations, footnotes, sources}) {
         {
           <NivoResponsiveBar
             data = {data_exp}
-            keys={_.union([''], series_labels)}
+            keys={series_labels}
             indexBy = "years"
             colors = {infobaseCategory10Colors}
             enableGridX = {false}

@@ -305,7 +305,7 @@ class HistoricalProgramBars extends React.Component {
         <div className="fcol-md-8" style={{ height: '400px' }}>
           <NivoResponsiveBar
             data = {data_formatter}
-            keys = {_.union([''],Object.keys(graph_data))}
+            keys = {Object.keys(graph_data)}
             indexBy = "year"
             colorBy ={d => colors(d.id)}
             margin = {{

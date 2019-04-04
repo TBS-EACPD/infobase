@@ -196,12 +196,13 @@ export class LineBarToggleGraph extends React.Component {
       })
     ); 
 
-    const normalize = (data) =>(
-      _.each(data, (value, index) =>{
-        const sum = d3.sum(_.map(value, (data) => data)
-        );
-        _.map(value, (d, i) => value[i]/=sum)
-      })
+    const normalize = (data) => _.map(
+      data,
+      (series, index) => {
+        const series_total = _.reduce(series, (sum, value) => sum + value, 0);
+        const normalized_series = _.map(series, (value) => value/series_total);
+        return normalized_series;
+      }
     );
 
     const data_formatter_line = _.map(

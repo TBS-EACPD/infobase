@@ -148,7 +148,7 @@ new PanelGraph({
             data = {bar_data}
             indexBy = "date"
             colorBy = {d => colors(d.id)}
-            keys = {['', isc_label, other_label]}
+            keys = {[isc_label, other_label]}
             is_money = {false}
             margin = {{
               top: 15,

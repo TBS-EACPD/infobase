@@ -129,9 +129,10 @@ export class NivoResponsiveBar extends React.Component{
     } = this.props;
 
     return (
+      //have to have an empty string in key to make sure
+      //that negative bars will be displayed
       <ResponsiveBar
         {...{data,
-          keys,
           margin,
           colors,
           groupMode,
@@ -144,6 +145,7 @@ export class NivoResponsiveBar extends React.Component{
           legends,
           isInteractive,
         }}
+        keys = {_.union([''],keys)}
         labelFormat={_.isUndefined(label_format) ? null : label_format}
         tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
         axisBottom={remove_bottom_axis ? null : bttm_axis}
@@ -171,7 +173,7 @@ NivoResponsiveBar.defaultProps = {
   ...general_default_props,
 
   bttm_axis: {
-    tickSize: 3,
+    tickSize: 7,
     tickPadding: 10,
   },
   theme: {
@@ -224,7 +226,7 @@ export class NivoResponsiveLine extends React.Component {
 
     return (
       <ResponsiveLine
-        {...{data,
+        {...{
           margin,
           enableGridX,
           enableGridY,
@@ -234,6 +236,7 @@ export class NivoResponsiveLine extends React.Component {
           theme,
           enableDotLabel,
         }}
+        data = {data.reverse()}
         tooltip={ (d) => tooltip( d, get_formatter(is_money, text_formatter, false) ) }
         yScale={ 
           {
@@ -279,8 +282,8 @@ NivoResponsiveLine.defaultProps = {
 
   colors: '#000000',
   bttm_axis: {
-    tickSize: 5,
-    tickPadding: 5,
+    tickSize: 7,
+    tickPadding: 12,
   },
   theme: {
     axis: {

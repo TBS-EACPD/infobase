@@ -76,7 +76,6 @@ new PanelGraph({
             "left": 65,
           }}
           colors = "#335075"
-          bttm_axis ={{ "tickPadding": 10}}
         />
       </div>;
     }
