@@ -40,11 +40,11 @@ new PanelGraph({
             </a>
           ),
         ],
-        ["hi_governance", hi_lookups.governance],
         ["hi_start_year", hi_lookups.start_year],
         ["hi_end_year", hi_lookups.end_year],
-        ["hi_spending_planned", hi_lookups.spending_planned && formats.compact_raw(hi_lookups.spending_planned, {precision: 2})],
-        ["hi_website", hi_lookups.website && <ExternalLink href={hi_lookups.website} display={hi_lookups.website}/>],
+        ["hi_total_allocated_amount", hi_lookups.total_allocated_amount && formats.compact_raw(hi_lookups.total_allocated_amount, {precision: 2})],
+        ["hi_website", hi_lookups.website_url && <ExternalLink href={hi_lookups.website_url} display={hi_lookups.website_url}/>],
+        ["hi_dr_link", hi_lookups.dr_url && <ExternalLink href={hi_lookups.dr_url} display={hi_lookups.dr_url}/>],
       ]
     )
       .map( ([label_key, item]) => [text_maker(label_key), item] )

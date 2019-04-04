@@ -17,9 +17,10 @@ function extend_hi_tags(hi_lookups){
         'lead_dept',
         'start_year',
         'end_year',
-        'spending_planned',
+        'total_allocated_amount',
         'governance',
-        'website',
+        'website_url',
+        'dr_url',
       ])
         .zip( lookups )
         .fromPairs()

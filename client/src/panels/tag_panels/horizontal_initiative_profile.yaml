@@ -8,30 +8,21 @@ hi_name:
 hi_lead_dept:
   en: Lead department
   fr: TODO
-hi_governance:
-  en: Governance summary
-  fr: TODO
 hi_start_year:
   en: Started in
-  fr: TODO
-hi_renewal_year:
-  en: Last renewed in
   fr: TODO
 hi_end_year:
   en: Ending in
   fr: TODO
-hi_eval_year:
-  en: Evaluation to occur in
-  fr: TODO
-hi_spending_actual:
-  en: Actual spending
-  fr: TODO
-hi_spending_planned:
-  en: Planned spending
+hi_total_allocated_amount:
+  en: Total allocated amount
   fr: TODO 
 hi_spending_cumulative:
   en: Lifetime total spending
   fr: TODO
 hi_website:
   en: Website
+  fr: TODO
+hi_dr_link:
+  en: Horizontal Initiative Reporting
   fr: TODO
