@@ -1,5 +1,6 @@
 import { CSSTransitionGroup } from 'react-transition-group';
-import { Redirect } from 'react-router'
+import { Redirect } from 'react-router';
+import JSURL from 'jsurl';
 
 import './infographic.scss';
 import text from "./infographic.yaml";
@@ -118,6 +119,7 @@ class InfoGraph_ extends React.Component {
       bubble: props.bubble,
       level: props.level,
     };
+    this.options = JSURL.parse(props.options);
   }
   static getDerivedStateFromProps(nextProps, prevState){
     if ( !shallowEqualObjectsOverKeys(nextProps, prevState, ['subject','bubble','level']) ){
@@ -140,9 +142,14 @@ class InfoGraph_ extends React.Component {
       this.loadBubbleMenuDeps(this.props);
     } else if(this.state.infographic_loading){
       this.loadGraphDeps(this.props);
-    }
-    if (this.props.subject !== prevProps.subject){
-      reset_scroll();
+    } else {
+      if (this.props.subject !== prevProps.subject){
+        reset_scroll();
+      }
+      const panel_keys = this.state.bubble_menu_loading || panels_for_subj_bubble({subject: this.state.subject, bubble: this.state.bubble});
+      if ( this.options && this.options.panel_key && _.includes(panel_keys, this.options.panel_key) && document.querySelector("#"+this.options.panel_key) ){
+        document.querySelector("#"+this.options.panel_key).focus();
+      }
     }
   }
   render(){
@@ -325,6 +332,7 @@ const InfoGraph = ({
       level, 
       subject_id, 
       bubble,
+      options,
     },
   },
 }) => {
@@ -366,6 +374,7 @@ const InfoGraph = ({
         level={level}
         subject={subject}
         bubble={bubble_id}
+        options={options}
       />
     </StandardRouteContainer>
   );

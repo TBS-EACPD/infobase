@@ -56,7 +56,7 @@ export class App extends React.Component {
               <Route path="/metadata/:data_source?" component={MetaData}/>
               <Route path="/igoc/:grouping?" component={IgocExplorer} />
               <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={ResourceExplorer} />
-              <Route path="/orgs/:level/:subject_id/infograph/:bubble?/" component={InfoGraph} />
+              <Route path="/orgs/:level/:subject_id/infograph/:bubble?/:options?/" component={InfoGraph} />
               <Route path="/glossary/:active_key?" component={Glossary} />
               <Route path="/partition/:perspective?/:data_type?" component={PartitionRoute} />
               <Redirect 

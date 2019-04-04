@@ -22,7 +22,7 @@ export const ReactPanelGraph = withRouter(
       if(!calculations){
         return null;
       }
-      return <div id={graph_key}>
+      return <div id={graph_key} tabIndex="0">
         {graph_obj.render(calculations, graph_options)}
       </div>
 
