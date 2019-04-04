@@ -1,26 +1,18 @@
 result_upper_target_text:
-  en: |
-    No more than:
-  fr: |
-    TODO :
+  en: No more than
+  fr: TODO
 
 result_lower_target_text:
-  en: |
-    At least:
-  fr: |
-    TODO :
+  en: At least
+  fr: TODO
 
 result_range_text:
-  en: |
-    Between:
-  fr: |
-    TODO :
+  en: Between
+  fr: TODO
 
 result_exact_text:
-  en: |
-    Exactly:
-  fr: |
-    TODO :
+  en: Exactly
+  fr: TODO
 
 tbd_result_text:
   en: Target to be determined
