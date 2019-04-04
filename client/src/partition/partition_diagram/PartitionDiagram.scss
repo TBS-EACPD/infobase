@@ -90,10 +90,10 @@
   font-size: 48px;
   margin: 0px;
   & > a {
-    color: #fff !important;
+    color: #fff;
     text-decoration: underline dashed;
     &:hover, &:focus, &:active {
-      text-decoration: underline !important;
+      text-decoration: underline;
     }
   }
 }
