@@ -193,11 +193,12 @@ const how_we_help = {
   filter: (query, datum) => memoized_re_matchers(query, ['name'], "how_we_help")(datum),
 };
 
+
 const horizontal_initiative = {
-  header_function: () => `${Tag.plural} - ${Tag.tag_roots.HI.name}`,
+  header_function: () => "",//`${Tag.plural} - ${Tag.tag_roots.HI.name}`, HI_TODO
   name_function: _.property('name'),
-  get_data: () => _.filter(Tag.get_all(), tag => tag.root.id === "HI"),
-  filter: (query, datum) => memoized_re_matchers(query, ['name'], "horizontal_initiative")(datum),
+  get_data: () => [],//_.filter(Tag.get_all(), tag => tag.root.id === "HI"), HI_TODO
+  filter: (query, datum) => false,//memoized_re_matchers(query, ['name'], "horizontal_initiative")(datum), HI_TODO
 };
 
 

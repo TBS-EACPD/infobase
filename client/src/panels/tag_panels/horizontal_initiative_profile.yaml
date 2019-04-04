@@ -1,28 +1,28 @@
 horizontal_initiative_profile:
   en: Horizontal Initiative Profile
-  fr: TODO
+  fr: HI_TODO
 
 hi_name:
   en: Horizontal Initiative
-  fr: TODO
+  fr: HI_TODO
 hi_lead_dept:
   en: Lead department
-  fr: TODO
+  fr: HI_TODO
 hi_start_year:
   en: Started in
-  fr: TODO
+  fr: HI_TODO
 hi_end_year:
   en: Ending in
-  fr: TODO
+  fr: HI_TODO
 hi_total_allocated_amount:
   en: Total allocated amount
-  fr: TODO 
+  fr: HI_TODO 
 hi_spending_cumulative:
   en: Lifetime total spending
-  fr: TODO
+  fr: HI_TODO
 hi_website:
   en: Website
-  fr: TODO
+  fr: HI_TODO
 hi_dr_link:
   en: Horizontal Initiative Reporting
-  fr: TODO
+  fr: HI_TODO

@@ -114,6 +114,7 @@ function ensure_loaded({
     _.isUndefined(subject.lookups)
   );
 
+
   const result_docs_to_load = !_.isEmpty(result_docs) ?
     result_docs :
     _.chain(graph_keys)
@@ -129,7 +130,6 @@ function ensure_loaded({
       .uniq()
       .compact()
       .value();
-
   const results_prom = (
     should_load_results ?
       api_load_results_bundle(subject, result_docs_to_load) :
