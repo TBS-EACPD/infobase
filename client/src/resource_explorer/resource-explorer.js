@@ -310,7 +310,7 @@ class ExplorerPage extends React.Component {
               <TM k="choose_explore_point" />
             </header>
             <div role="radiogroup" className="hierarchy-selection-items">
-              {_.map([ min_props, dept_props, goco_props, hwh_props, /*hi_props, HI_TODO*/ ...(doc === "dp19" && INCLUDE_OTHER_TAGS ? [wwh_props /*, mlt_props*/] : []) ],props =>
+              {_.map([ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp19" && INCLUDE_OTHER_TAGS ? [wwh_props /*hi_props, HI_TODO*/ /*, mlt_props*/] : []) ],props =>
                 <HierarchySelectionItem 
                   key={props.id} 
                   url={`#resource-explorer/${props.id}/${doc}`}
