@@ -109,8 +109,6 @@ const other_csv_names_bilingual = _.flatMap(
   [
     'budget_2018_measure_lookups',
     "hi_lookups",
-    "hi_to_shared_outcomes",
-    "hi_to_dept_ha",
   ],
   (name) => [`${name}_en.csv`, `${name}_fr.csv`] 
 );

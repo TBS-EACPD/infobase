@@ -11,7 +11,7 @@ import { trivial_text_maker } from '../models/text.js';
 const static_subject_store = () => mix().with(staticStoreMixin, PluralSingular, SubjectMixin);
 const extensible_subject_store = () => mix().with(exstensibleStoreMixin, PluralSingular, SubjectMixin);
 
-const can_have_results = () => mix().with(storeMixins, PluralSingular, SubjectMixin, CanHaveResultsMixin);
+const can_have_results = () => mix().with(staticStoreMixin, PluralSingular, SubjectMixin, CanHaveResultsMixin);
 
 const gov_name = ( 
   window.lang === 'en' ? 
