@@ -15,11 +15,11 @@ const featured_content_items = _.compact([
     href: "#treemap",
     is_new: true,
   },
-  {
-    text_key: 'quick_link_hi_tags',
-    href: '#resource-explorer/HI/drr17',
-    is_new: true,
-  },
+  //{ HI_TODO
+  //  text_key: 'quick_link_hi_tags',
+  //  href: '#resource-explorer/HI/drr17',
+  //  is_new: true,
+  //},
   {
     text_key: "interim_mains",
     href: (
