@@ -82,7 +82,7 @@ function render({calculations, footnotes, sources}) {
           enableLabel = {true}
           isInteractive = {false}
           label_format = { d=><tspan y={-4}> {formats.compact1(d, {raw: true})} </tspan>}
-          colors = "#335075"
+          colorBy = {d => d.data[d.id] < 0 ? "#C92525": "#335075"}
           enableGridX={false}
         />
       </div>

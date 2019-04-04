@@ -84,7 +84,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
           isInteractive = {false}
           enableLabel = {true}
           indexBy = "label"
-          colors = "#335075"
+          colorBy = {d => d.data[d.id] < 0 ? "#C92525": "#335075"}
           margin = {{            
             top: 50,
             right: 40,
