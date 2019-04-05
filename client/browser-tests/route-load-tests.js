@@ -102,7 +102,7 @@ fixture \`${app}\`
   .page \`http://localhost:8080/build/InfoBase/index-${app}.html#${route}\`;
 
 test(
-  '${name} route loads without error (route: index-${app}.html#${route})', 
+  "${name} route loads without error (route: index-${app}.html#${route})", 
   async test_controller => {
     // Checks that the route loads anying (appends any children to the #app element), that the spinner eventually ends, and that the post-spinner page isn't the error page
     await test_controller.expect( Selector('#app').childElementCount ).notEql( 0, {timeout: 20000} )
