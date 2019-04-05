@@ -7,6 +7,7 @@ import {
   create_text_maker_component,
 } from '../util_components.js';
 import { Details } from '../components/Details.js';
+import { get_static_url } from '../request_utils.js';
 
 const { TM } = create_text_maker_component(text);
 
@@ -40,7 +41,7 @@ const PanelSource = ({links}) => {
   );
 }
 
-export const Panel = ({ title, sources, footnotes, children, subtitle, allowOverflow }) => (
+export const Panel = ({ title, sources, footnotes, children, subtitle, allowOverflow, permalink_href }) => (
   <section className={classNames('panel panel-info mrgn-bttm-md', allowOverflow && "panel-overflow")}>
     {title && <header className='panel-heading'>
       <header className="panel-title"> {title} </header>
@@ -48,6 +49,17 @@ export const Panel = ({ title, sources, footnotes, children, subtitle, allowOver
         <div className="panel-sub-title">
           {subtitle}
         </div>
+      }
+      {permalink_href && 
+        <a href={permalink_href}>
+          <img src={get_static_url("svg/permalink.svg")} 
+            style={{ 
+              width: "20px", 
+              height: "20px",
+              textAlign: "right",
+            }}
+          />
+        </a>
       }
     </header>
     }
@@ -111,7 +123,7 @@ Col.propTypes = {
 
 //Dummy component that will be remapped to flexboxgrid columns 
 
-const StdPanel = ({ title, sources, footnotes, children }) => {
+const StdPanel = ({ title, sources, footnotes, children, permalink_href }) => {
   const mapped_children = _.chain(children)
     .flatMap( child => {
       if ( child.type && child.type === Fragment ){
@@ -122,7 +134,6 @@ const StdPanel = ({ title, sources, footnotes, children }) => {
     })
     .filter( child => child && child.type )
     .map( ({ props }, ix) => {
-  
       const { size, isText, isGraph, extraClasses, passedRef } = props;
      
       return (
@@ -145,7 +156,7 @@ const StdPanel = ({ title, sources, footnotes, children }) => {
     .value();
 
   return (
-    <Panel {...{title, sources, footnotes}}>
+    <Panel {...{title, sources, footnotes, permalink_href}}>
       <div className="frow middle-xs">
         {mapped_children}
       </div>

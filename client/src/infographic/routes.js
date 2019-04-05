@@ -1,4 +1,6 @@
-var infograph_href_template = (subj, data_area, useRouterFormat) => {
+import JSURL from 'jsurl';
+
+const infograph_href_template = (subj, data_area, useRouterFormat) => {
   const str = `#orgs/${subj.level}/${subj.id}/infograph/${data_area ? data_area : ''}`;
   if(useRouterFormat){
     return str.replace("#","/");
@@ -6,6 +8,14 @@ var infograph_href_template = (subj, data_area, useRouterFormat) => {
   return str;
 };
 
-export { infograph_href_template };
+const panel_href_template = (subj, data_area, panel_key, useRouterFormat) => {
+  const str = `#orgs/${subj.level}/${subj.id}/infograph/${data_area ? data_area : ''}/${panel_key ? JSURL.stringify({panel_key: panel_key}) : ''}`;
+  if(useRouterFormat){
+    return str.replace("#","/");
+  }
+  return str;
+}
+
+export { infograph_href_template, panel_href_template };
 
 

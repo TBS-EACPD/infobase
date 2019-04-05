@@ -13,6 +13,7 @@ import {
   Col,
   LineBarToggleGraph,
 } from "../shared"; 
+import { panel_href_template } from '../../infographic/routes.js';
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -124,7 +125,7 @@ const calculate_funcs_by_level = {
     calculate: calculate_funcs_by_level[level],
   
     render({calculations, footnotes, sources}){
-      const { info, graph_args } = calculations;
+      const { subject, info, graph_args } = calculations;
       
       const ticks = _.map(people_years, y => `${run_template(y)}`);
       
@@ -156,6 +157,7 @@ const calculate_funcs_by_level = {
       return (
         <StdPanel
           title={text_maker("employee_age_title")}
+          permalink_href={panel_href_template(subject, "people", "employee_age")}
           {...{footnotes, sources}}
         >
           <Col size={12} isText>

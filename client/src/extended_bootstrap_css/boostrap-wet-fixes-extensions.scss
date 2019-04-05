@@ -604,6 +604,9 @@ section.panel  > .panel-heading {
   color: $backgroundColor;
   background-color: inherit;
   border: none;
+  display: inline-flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 section.panel > .panel-body {
