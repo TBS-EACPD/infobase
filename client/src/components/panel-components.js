@@ -68,7 +68,7 @@ const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOv
           {subtitle}
         </div>
       }
-      {!context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) && 
+      {context && !context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) && 
         <a href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
           <img src={get_static_url("svg/permalink.svg")} 
             style={{ 
