@@ -48,16 +48,17 @@ const PanelSource = ({links}) => {
 
 export const Panel = props => {
   const { Consumer } = panel_context;
-  return <Consumer>{ctx=>
-    <Panel_
-      context={ctx}
-      {...props}
-    />
-  }
-  </Consumer>
+  return (
+    <Consumer>
+      {(ctx)=>
+        <Panel_
+          context={ctx}
+          {...props}
+        />
+      }
+    </Consumer>
+  )
 }
-
-
 
 const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOverflow}) => (
   <section className={classNames('panel panel-info mrgn-bttm-md', allowOverflow && "panel-overflow")}>
@@ -141,7 +142,7 @@ Col.propTypes = {
 
 //Dummy component that will be remapped to flexboxgrid columns 
 
-const StdPanel = ({ title, sources, footnotes, children, permalink_href }) => {
+const StdPanel = ({ title, sources, footnotes, children }) => {
   const mapped_children = _.chain(children)
     .flatMap( child => {
       if ( child.type && child.type === Fragment ){
@@ -174,7 +175,7 @@ const StdPanel = ({ title, sources, footnotes, children, permalink_href }) => {
     .value();
 
   return (
-    <Panel {...{title, sources, footnotes, permalink_href}}>
+    <Panel {...{title, sources, footnotes}}>
       <div className="frow middle-xs">
         {mapped_children}
       </div>
