@@ -161,9 +161,17 @@ home_desc_meta_attr:
 
 ## Featured content titles
 
+quick_link_main_estimates:
+  en: 2019-20 Main Estimates
+  fr: Budget principal des dépenses 2018-2019
+
 quick_link_hi_tags:
   en: 2019-20 Horizontal Initiatives
   fr: Initiatives horizontals de 2019-2020
+
+quick_link_DP_1920:
+  en: 2019-20 Departmental Plans
+  fr: Plans Ministériels de 2019-2020
 
 quick_link_DRR_1718:
   en: 2017-18 Departmental Results Reports
@@ -173,25 +181,13 @@ quick_link_auth_and_exp:
   en: 2017-18 Authorities and Expenditures
   fr: Autorisations et dépenses de 2017-2018
 
-quick_link_exp_by_so:
-  en: 2017-18 Expenditures by Standard Object
-  fr: Dépenses par article courant de 2017-2018
+quick_link_planned_spending_by_program:
+  en: 2019-20 Planned Spending by Program
+  fr: Dépenses prévues par programme de 2019-2020
 
-quick_link_spending_by_program:
-  en: 2017-18 Spending by Program
-  fr: Dépenses par Programme de 2017-2018
-
-quick_link_transfer_payment:
-  en: 2017-18 Transfer Payments
-  fr: Paiements de transfert de 2017-2018
-
-quick_link_prog_by_vote_stat:
-  en: 2017-18 Program expenditures by authority type
-  fr: Dépenses de programme par type d'autorisation de 2017-2018
-
-quick_link_prog_by_so:
-  en: 2017-18 Program expenditures by standard object
-  fr: Dépenses de programme par articles courants de 2017-2018
+quick_link_planned_ftes_by_program:
+  en: 2019-20 Planned full time equivalents (FTE) by Program
+  fr: Équivalents temps plein (ETP) prévus par Programme de 2019-2020
 
 quick_link_youtube_video:
   en: GC InfoBase at a glance (introduction video)
