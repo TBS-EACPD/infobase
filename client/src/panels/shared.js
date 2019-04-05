@@ -198,10 +198,12 @@ export class LineBarToggleGraph extends React.Component {
 
     const normalize = (data) => _.map(
       data,
-      (series, index) => {
+      (series) => {
         const series_total = _.reduce(series, (sum, value) => sum + value, 0);
-        const normalized_series = _.map(series, (value) => value/series_total);
-        return normalized_series;
+        return( _.chain(series)
+          .map((value, label) => [label, value/series_total])
+          .fromPairs()
+          .value());
       }
     );
 
