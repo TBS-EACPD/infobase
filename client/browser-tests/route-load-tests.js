@@ -93,16 +93,16 @@ const test_configs_from_route_config = (route_config) => _.map(
   })
 );
 
-const test_config_to_test_file_object = (test_config) => ({
-  file_name: `${test_config.app}-${_.kebabCase(test_config.name)}-test.js`,
+const test_config_to_test_file_object = ({app, name, route}) => ({
+  file_name: `${app}-${_.kebabCase(name)}-test.js`,
   js_string: `
 import { Selector } from 'testcafe';
 
-fixture \`${test_config.app}\`
-  .page \`http://localhost:8080/build/InfoBase/index-${test_config.app}.html#${test_config.route}\`;
+fixture \`${app}\`
+  .page \`http://localhost:8080/build/InfoBase/index-${app}.html#${route}\`;
 
 test(
-  '${test_config.name} route loads without error', 
+  '${name} route loads without error (route: index-${app}.html#${route})', 
   async test_controller => {
     // Checks that the route loads anying (appends any children to the #app element), that the spinner eventually ends, and that the post-spinner page isn't the error page
     await test_controller.expect( Selector('#app').childElementCount ).notEql( 0, {timeout: 20000} )
