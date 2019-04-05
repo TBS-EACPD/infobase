@@ -88,6 +88,8 @@ class Infograph_ extends React.Component {
     const { loading } = data;
     const name = _.get(data, "root.org.name");
 
+    const InfographContext = React.createContext();
+    <InfographContext.Provider value={bubble}/>
 
     const bubbles_menu_args = bubbles.map( ({name, key}) => ({
       name,

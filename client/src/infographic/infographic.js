@@ -245,6 +245,7 @@ class InfoGraph_ extends React.Component {
             <ReactPanelGraph 
               graph_key={graph_key}
               subject={subject}
+              bubble={bubble}
               key={graph_key + subject.guid}
             />
           )  

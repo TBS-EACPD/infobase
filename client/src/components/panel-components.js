@@ -8,6 +8,9 @@ import {
 } from '../util_components.js';
 import { Details } from '../components/Details.js';
 import { get_static_url } from '../request_utils.js';
+import { panel_href_template } from '../infographic/routes.js';
+import { panel_context } from '../infographic/context.js';
+
 
 const { TM } = create_text_maker_component(text);
 
@@ -41,7 +44,22 @@ const PanelSource = ({links}) => {
   );
 }
 
-export const Panel = ({ title, sources, footnotes, children, subtitle, allowOverflow, permalink_href }) => (
+
+
+export const Panel = props => {
+  const { Consumer } = panel_context;
+  return <Consumer>{ctx=>
+    <Panel_
+      context={ctx}
+      {...props}
+    />
+  }
+  </Consumer>
+}
+
+
+
+const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOverflow}) => (
   <section className={classNames('panel panel-info mrgn-bttm-md', allowOverflow && "panel-overflow")}>
     {title && <header className='panel-heading'>
       <header className="panel-title"> {title} </header>
@@ -50,8 +68,8 @@ export const Panel = ({ title, sources, footnotes, children, subtitle, allowOver
           {subtitle}
         </div>
       }
-      {permalink_href && 
-        <a href={permalink_href}>
+      {!context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) && 
+        <a href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
           <img src={get_static_url("svg/permalink.svg")} 
             style={{ 
               width: "20px", 
