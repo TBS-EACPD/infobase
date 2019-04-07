@@ -1,6 +1,8 @@
 import _ from "lodash";
 import { get_standard_csv_file_rows } from '../load_utils.js';
 
+import { dp_docs } from './results_utils.js';
+
 export default async function({models}){
   const { SubProgram, Result, ResultCount, Indicator, PIDRLink } = models
 
@@ -13,7 +15,7 @@ export default async function({models}){
  
   const pi_dr_links = get_standard_csv_file_rows("pi_dr_links.csv");
   
-  _.each(sub_program_records, obj => {
+  _.each(sub_program_records, sub_program => {
     _.each([
       "spend_planning_year_1",
       "spend_planning_year_2",
@@ -26,7 +28,7 @@ export default async function({models}){
       "planned_spend_pa_last_year",
       "planned_fte_pa_last_year",
     ], key => {
-      obj[key] = _.isNaN(obj[key]) ? null : +obj[key];
+      sub_program[key] = _.isNaN(sub_program[key]) ? null : +sub_program[key];
     });
 
     // FAKING OUT 2019 DATA vvv
@@ -35,69 +37,94 @@ export default async function({models}){
     //  "fte_planning_year_2",
     //  "fte_planning_year_3",
     //], key => {
-    //  obj[key] = +obj["fte_pa_last_year"];
+    //  sub_program[key] = +sub_program["fte_pa_last_year"];
     //});
     //_.each([
     //  "spend_planning_year_1",
     //  "spend_planning_year_2",
     //  "spend_planning_year_3",
     //], key => {
-    //  obj[key] = +obj["spend_pa_last_year"];
+    //  sub_program[key] = +sub_program["spend_pa_last_year"];
     //});
     // FAKING OUT 2019 DATA ^^^
 
-    obj.sub_program_id = obj.id;
-    obj.id = null;
+    sub_program.sub_program_id = sub_program.id;
+    sub_program.id = null;
   });
     
   const faked_dp19_result_records_records = [];
-  _.each(result_records, obj => {
-    obj.result_id = obj.id;
-    obj.id = null;
+  _.each(result_records, result => {
+    result.result_id = result.id;
+    result.id = null;
 
     // FAKING OUT 2019 DATA vvv
-    //if (obj.doc === "dp18"){
+    //if (result.doc === "dp18"){
     //  faked_dp19_result_records_records.push({
-    //    ...obj,
-    //    result_id: `${obj.result_id}_dp19`,
+    //    ...result,
+    //    result_id: `${result.result_id}_dp19`,
     //    doc: "dp19",
     //  });
-    //} else if (obj.doc === "dp19"){
-    //  _.chain(obj)
+    //} else if (result.doc === "dp19"){
+    //  _.chain(result)
     //    .keys()
-    //    .each( key => obj[key] = null )
+    //    .each( key => result[key] = null )
     //    .value();
     //}
     // FAKING OUT 2019 DATA ^^^
   });
   
   const faked_dp19_indicator_records = [];
-  _.each(indicator_records, obj => {
+  _.each(indicator_records, indicator => {
     const { 
       target_year, 
       target_month,
-    } = obj;
+      doc,
+      stable_id,
+    } = indicator;
     
-    obj.indicator_id = obj.id;
-    obj.id = null;
-    obj.target_year = _.isNaN(parseInt(target_year)) ? null : parseInt(target_year);
-    obj.target_month= _.isEmpty(target_month) ? null : +target_month;
-    if(!obj.status_key){
-      obj.status_key = "dp";
+    indicator.indicator_id = indicator.id;
+    indicator.id = null;
+    indicator.target_year = _.isNaN(parseInt(target_year)) ? null : parseInt(target_year);
+    indicator.target_month = _.isEmpty(target_month) ? null : +target_month;
+    if(!indicator.status_key){
+      indicator.status_key = "dp";
+    }
+
+    const dp_doc_index = _.indexOf(dp_docs, doc);
+    if ( dp_doc_index > 0 ){
+      // Look for corresponding indicator, by stable_id, from previous DP. Embed previous year target fields here
+      const previous_year_indicator_instance = _.find(
+        indicator_records,
+        (indicator) => indicator.stable_id === stable_id &&
+          indicator.doc === dp_docs[dp_doc_index-1]
+      );
+
+      if ( !_.isUndefined(previous_year_indicator_instance) ){
+        _.assign(
+          indicator,
+          {
+            previous_year_target_type: previous_year_indicator_instance.target_type,
+            previous_year_target_min: previous_year_indicator_instance.target_min,
+            previous_year_target_max: previous_year_indicator_instance.target_max,
+            previous_year_target_narrative_en: previous_year_indicator_instance.target_narrative_en,
+            previous_year_target_narrative_fr: previous_year_indicator_instance.target_narrative_fr,
+          }
+        )
+      }
     }
 
     // FAKING OUT 2019 DATA vvv
-    //if (obj.doc === "dp18"){
+    //if (indicator.doc === "dp18"){
     //  faked_dp19_indicator_records.push({
-    //    ...obj,
-    //    result_id: `${obj.result_id}_dp19`,
-    //    indicator_id: `${obj.indicator_id}_dp19`,
+    //    ...indicator,
+    //    result_id: `${indicator.result_id}_dp19`,
+    //    indicator_id: `${indicator.indicator_id}_dp19`,
     //    doc: "dp19",
     //  });
-    //} else if (obj.doc === "dp19"){
-    //  _.chain(obj)
+    //} else if (indicator.doc === "dp19"){
+    //  _.chain(indicator)
     //    .keys()
-    //    .each( key => obj[key] = null )
+    //    .each( key => indicator[key] = null )
     //    .value();
     //}
     // FAKING OUT 2019 DATA ^^^
