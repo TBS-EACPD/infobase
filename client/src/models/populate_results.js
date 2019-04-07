@@ -106,20 +106,31 @@ const results_fields_fragment = (docs_to_load) => _.chain(docs_to_load)
   .map(doc =>`
 ${doc}_results: results(doc: "${doc}") {
   id
+  stable_id
   parent_id
   name
   doc
+
   indicators {
     id
+    stable_id
     result_id
     name
+    doc
+
     target_year
     target_month
+
     target_type
     target_min
     target_max
     target_narrative
-    doc
+
+    previous_year_target_type
+    previous_year_target_min
+    previous_year_target_max
+    previous_year_target_narrative_en
+    previous_year_target_narrative_fr
 
     explanation
 
