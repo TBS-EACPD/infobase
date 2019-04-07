@@ -145,6 +145,12 @@ to:
 of:
   en: of
   fr: de
+and:
+  en: and
+  fr: et
+inclusive:
+  en: inclusive
+  fr: inclus
 previously_named:
   en: Previously Named
   fr: Précédemment nommé

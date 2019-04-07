@@ -75,8 +75,9 @@ const IndicatorResultDisplay = ({
       <span> 
         <span>{`${text_maker("result_range_text")} `}</span>
         <Format type={display_type_by_data_type[data_type]} content={+min} />
-        <span>{` ${text_maker("to")} `}</span>
+        <span>{` ${text_maker("and")} `}</span>
         <Format type={display_type_by_data_type[data_type]} content={+max} />
+        <span>{` (${text_maker("inclusive")})`}</span>
       </span> 
       {measure_display}
     </Fragment>
@@ -192,9 +193,9 @@ const Drr17IndicatorResultDisplay = ({
       return (
         <Fragment>
           <span> 
-            <Format type="result_percentage" content={min} />
+            <Format type="result_percentage" content={+min} />
             <span>{` ${text_maker("to")} `}</span>
-            <Format type="result_percentage" content={max} />
+            <Format type="result_percentage" content={+max} />
           </span> 
           {measure_display}
         </Fragment>
