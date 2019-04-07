@@ -62,6 +62,11 @@ export default function(model_singleton){
     target_year: number_type,
     target_month: number_type,
     ...bilingual_str("explanation"),
+    doc: str_type,
+    actual_datatype: str_type,
+    ...bilingual_str("actual_result"),
+    status_key: str_type,
+    ...bilingual_str("methodology"),
     // Want to populate certain indicator fields with their previous year value as available
     // Could use stable_id's to query for this from reducers, but embedding at populate time's much more efficient
     ..._.reduce(
@@ -70,6 +75,7 @@ export default function(model_singleton){
         target_min: number_type,
         target_max: number_type,
         ...bilingual_str("target_narrative"),
+        ...bilingual_str("measure"),
       },
       (cross_year_target_fields, field_type, field_key) => ({
         ...cross_year_target_fields,
@@ -78,12 +84,6 @@ export default function(model_singleton){
       }),
       {},
     ),
-    doc: str_type,
-    actual_datatype: str_type,
-    ...bilingual_str("actual_result"),
-    status_key: str_type,
-    ...bilingual_str("methodology"),
-    ...bilingual_str("measure"),
   });
 
   //"id","parent_id","name_en","name_fr","description_en","description_fr","planned_spend_pa_last_year","spend_pa_last_year","drr_spend_expl_en","drr_spend_expl_fr","planned_fte_pa_last_year","fte_pa_last_year","drr_fte_expl_en","drr_fte_expl_fr"

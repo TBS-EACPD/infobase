@@ -106,8 +106,21 @@ export default async function({models}){
             previous_year_target_type: previous_year_indicator_instance.target_type,
             previous_year_target_min: previous_year_indicator_instance.target_min,
             previous_year_target_max: previous_year_indicator_instance.target_max,
-            previous_year_target_narrative_en: previous_year_indicator_instance.target_narrative_en,
-            previous_year_target_narrative_fr: previous_year_indicator_instance.target_narrative_fr,
+            ..._.chain(["target_narrative", "measure"])
+              .flatMap( 
+                billingual_field_key => [
+                  [
+                    `previous_year_${billingual_field_key}_en`,
+                    previous_year_indicator_instance[`${billingual_field_key}_en`],
+                  ],
+                  [
+                    `previous_year_${billingual_field_key}_fr`,
+                    previous_year_indicator_instance[`${billingual_field_key}_fr`],
+                  ],
+                ]
+              )
+              .fromPairs()
+              .value(),
           }
         );
       }

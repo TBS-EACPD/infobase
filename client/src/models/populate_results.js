@@ -129,8 +129,7 @@ ${doc}_results: results(doc: "${doc}") {
     previous_year_target_type
     previous_year_target_min
     previous_year_target_max
-    previous_year_target_narrative_en
-    previous_year_target_narrative_fr
+    previous_year_target_narrative
 
     explanation
 
@@ -142,6 +141,7 @@ ${doc}_results: results(doc: "${doc}") {
 
     methodology
     measure
+    previous_year_measure
   }
 }`)
   .reduce( (memo, fragment) => `
