@@ -1,94 +1,57 @@
 import _ from "lodash";
+import mongoose from "mongoose";
 
-export default function define_resource_models(model_singleton){
+import { 
+  str_type, 
+  bilingual, 
+  pkey_type,
+  parent_fkey_type,
+  bilingual_str,
+} from '../model_utils.js';
 
-  const _budget_measures_by_measure_id = {};
+import {
+  create_resource_by_foreignkey_attr_dataloader,
+  create_resource_by_id_attr_dataloader,
+} from '../loader_utils.js';
 
-  class BudgetMeasures {
-    constructor(obj){
-      Object.assign(this,obj)
-    }
-    static register(obj){
-      const { measure_id } = obj;
+export default function(model_singleton){
 
-      const inst = new BudgetMeasures(obj);
+  const BudgetProgramAllocationSchema = mongoose.Schema({
+    activity_code: pkey_type(),
+    allocated: {type: Number},
+  });
 
-      _budget_measures_by_measure_id[measure_id] = inst;
-    }
-    static get_measure_by_id(measure_id){
-      return _budget_measures_by_measure_id[measure_id] || [];
-    }
-    static get_all_measures(){
-      return _.flatMap(_budget_measures_by_measure_id) || [];
-    }
-  }
+  const BudgetDataSchema = mongoose.Schema({
+    subject_id: pkey_type(),
+    funding: {type: Number},
+    allocated: {type: Number},
+    remaining: {type: Number},
+    withheld: {type: Number},
+
+    ...bilingual('description', str_type),
+
+    program_allocations: [BudgetProgramAllocationSchema],
+  });
+
+  const BudgetMeasuresSchema = mongoose.Schema({
+    measure_id: pkey_type(),
+    parent_measure_id: str_type,
+    
+    budget_year: str_type,
+    ...bilingual('name', str_type),
+    chapter_key: str_type,
+    ...bilingual('budget_section_id', str_type),
+    ...bilingual('description', str_type),
+
+    data: [BudgetDataSchema],
+  });
+
+
+  model_singleton.define_model("BudgetMeasures", BudgetMeasuresSchema);
+
+  const { BudgetMeasures } = model_singleton.models;
   
-  BudgetMeasures.prototype.level = "budget_measure";
-
-  model_singleton.define('BudgetMeasures', BudgetMeasures);
-
-
-  const _budget_funds_records_by_measure_id = {};
-  const _budget_funds_records_by_org_id = {};
-
-  class BudgetFunds {
-    constructor(obj){
-      Object.assign(this,obj)
-    }
-    static register(obj){
-      const { measure_id, org_id } = obj;
-
-      const inst = new BudgetFunds(obj);
-
-      if(!_budget_funds_records_by_measure_id[measure_id]){
-        _budget_funds_records_by_measure_id[measure_id] = [];
-      }
-      _budget_funds_records_by_measure_id[measure_id].push(inst);
-
-      if(!_budget_funds_records_by_org_id[org_id]){
-        _budget_funds_records_by_org_id[org_id] = [];
-      }
-      _budget_funds_records_by_org_id[org_id].push(inst);
-
-    }
-    static get_measure_records(measure_id){
-      return _budget_funds_records_by_measure_id[measure_id] || [];
-    }
-    static get_org_records(org_id){
-      return _budget_funds_records_by_org_id[org_id] || [];
-    }
-    static get_all_records(){
-      return _.flatMap(_budget_funds_records_by_org_id) || [];
-    }
-  }
-
-  model_singleton.define('BudgetFunds', BudgetFunds);
-
-
-  const _special_funding_case_records_by_id = {};
-
-  class SpecialFundingCase {
-    constructor(obj){
-      Object.assign(this,obj)
-    }
-    static register(obj){
-      const { id } = obj;
-
-      const inst = new SpecialFundingCase(obj);
-
-      if(!_special_funding_case_records_by_id[id]){
-        _special_funding_case_records_by_id[id] = {};
-      }
-      _special_funding_case_records_by_id[id] = inst;
-
-    }
-    static get_by_id(id){
-      return _special_funding_case_records_by_id[id] || [];
-    }
-    static get_all_records(org_id){
-      return _.flatMap(_special_funding_case_records_by_id) || [];
-    }
-  }
-
-  model_singleton.define('SpecialFundingCase', SpecialFundingCase);
+  // TODO Dataloaders...
+  // ... can I do dataloaders by sub documents? Probably, right?
+  // Otherwise, stick an array of org ids on BudgetMeasuresSchema I guess
 }
