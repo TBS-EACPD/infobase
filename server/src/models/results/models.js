@@ -13,7 +13,7 @@ import {
 import { 
   drr_docs,
   dp_docs,
-} from '../constants.js';
+} from './results_utils.js';
 
 import { create_resource_by_foreignkey_attr_dataloader } from '../loader_utils.js';
 
