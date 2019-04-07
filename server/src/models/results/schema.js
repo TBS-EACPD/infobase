@@ -139,7 +139,6 @@ ${
 
     explanation: String
 
-    actual_result: String
     actual_datatype: String
     actual_result: String
     

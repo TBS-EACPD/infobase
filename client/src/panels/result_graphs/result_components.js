@@ -28,6 +28,12 @@ const IndicatorResultDisplay = ({
   max,
   narrative,
   measure,
+
+  previous_data_type,
+  previous_min, 
+  previous_max,
+  previous_narrative,
+  previous_measure,
 }) => {
 
   const target_unspecified_display = <TM k="unspecified_target"/>;
@@ -264,23 +270,6 @@ const SingleIndicatorDisplay = ({indicator}) => {
           {indicator.target_date}
         </dd>
 
-        { !_.isNull(indicator.previous_year_target_type) && 
-          <Fragment>
-            <dt>
-              <TM k="previous_year_target" />
-            </dt>
-            <dd>
-              <IndicatorResultDisplay
-                data_type={indicator.previous_year_target_type}
-                min={indicator.previous_year_target_min}
-                max={indicator.previous_year_target_max}
-                narrative={indicator.previous_year_target_narrative}
-                measure={indicator.previous_year_measure}
-              />
-            </dd>
-          </Fragment>
-        }
-
         <dt>
           <TM k="target" />
         </dt>
@@ -294,11 +283,19 @@ const SingleIndicatorDisplay = ({indicator}) => {
               measure={indicator.measure}
             /> :
             <IndicatorResultDisplay
+              doc={indicator.doc}
+
               data_type={indicator.target_type}
               min={indicator.target_min}
               max={indicator.target_max}
               narrative={indicator.target_narrative}
               measure={indicator.measure}
+
+              previous_data_type={indicator.previous_year_target_type}
+              previous_min={indicator.previous_year_target_min}
+              previous_max={indicator.previous_year_target_max}
+              previous_narrative={indicator.previous_year_target_narrative}
+              previous_measure={indicator.previous_year_measure}
             />
           }
         </dd>
@@ -311,18 +308,26 @@ const SingleIndicatorDisplay = ({indicator}) => {
             <dd>
               { indicator.doc === "drr17" ?
                 <Drr17IndicatorResultDisplay
-                  data_type={indicator.target_type}
-                  min={indicator.target_min}
-                  max={indicator.target_max}
-                  narrative={indicator.target_narrative}
+                  data_type={indicator.actual_datatype}
+                  min={indicator.actual_result}
+                  max={indicator.actual_result}
+                  narrative={indicator.actual_result}
                   measure={indicator.measure}
                 /> :
                 <IndicatorResultDisplay
-                  data_type={indicator.target_type}
-                  min={indicator.target_min}
-                  max={indicator.target_max}
-                  narrative={indicator.target_narrative}
+                  doc={indicator.doc}
+
+                  data_type={indicator.actual_datatype}
+                  min={indicator.actual_result}
+                  max={indicator.actual_result}
+                  narrative={indicator.actual_result}
                   measure={indicator.measure}
+
+                  previous_data_type={indicator.previous_year_actual_result}
+                  previous_min={indicator.previous_year_actual_result}
+                  previous_max={indicator.previous_year_actual_result}
+                  previous_narrative={indicator.previous_year_actual_result}
+                  previous_measure={indicator.previous_year_measure}
                 />
               }
             </dd>

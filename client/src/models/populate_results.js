@@ -133,7 +133,6 @@ ${doc}_results: results(doc: "${doc}") {
 
     explanation
 
-    actual_result
     actual_datatype
     actual_result
     
