@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { get_standard_csv_file_rows } from '../load_utils.js';
 
-import { dp_docs } from './results_utils.js';
+import { dp_docs } from './results_common.js';
 
 export default async function({models}){
   const { SubProgram, Result, ResultCount, Indicator, PIDRLink } = models
@@ -86,12 +86,12 @@ export default async function({models}){
     indicator.id = null;
     indicator.target_year = _.isNaN(parseInt(target_year)) ? null : parseInt(target_year);
     indicator.target_month = _.isEmpty(target_month) ? null : +target_month;
-    if(!indicator.status_key){
+    if (!indicator.status_key){
       indicator.status_key = "dp";
     }
 
     const dp_doc_index = _.indexOf(dp_docs, doc);
-    if ( dp_doc_index > 0 ){
+    if (dp_doc_index > 0){
       // Look for corresponding indicator, by stable_id, from previous DP. Embed previous year target fields here
       const previous_year_indicator_instance = _.find(
         indicator_records,
@@ -109,7 +109,7 @@ export default async function({models}){
             previous_year_target_narrative_en: previous_year_indicator_instance.target_narrative_en,
             previous_year_target_narrative_fr: previous_year_indicator_instance.target_narrative_fr,
           }
-        )
+        );
       }
     }
 

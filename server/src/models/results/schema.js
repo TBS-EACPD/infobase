@@ -5,7 +5,7 @@ import { first_true_promise } from '../general_utils.js'
 import { 
   drr_docs,
   dp_docs,
-} from './results_utils.js';
+} from './results_common.js';
 
 const schema = `
   extend type Gov {
