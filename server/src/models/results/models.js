@@ -2,7 +2,8 @@ import _ from 'lodash';
 import mongoose from "mongoose";
 
 import { 
-  str_type, 
+  str_type,
+  number_type,
   bilingual, 
   pkey_type,
   parent_fkey_type,
@@ -17,6 +18,7 @@ export default function(model_singleton){
   //"id","subject_id","name_en","name_fr","doc"
   const ResultSchema = mongoose.Schema({
     result_id: pkey_type(),
+    stable_id: str_type,
     subject_id: parent_fkey_type(),
     ...bilingual('name', str_type),
     doc: str_type,
@@ -24,32 +26,45 @@ export default function(model_singleton){
 
   const ResultCountSchema = mongoose.Schema({
     subject_id: parent_fkey_type(),
-    level: {type: String},
-    drr17_results: {type: Number},
-    drr17_indicators_met: {type: Number},
-    drr17_indicators_not_met: {type: Number},
-    drr17_indicators_not_available: {type: Number},
-    drr17_indicators_future: {type: Number},
+    level: str_type,
+    drr17_results: number_type,
+    drr17_indicators_met: number_type,
+    drr17_indicators_not_met: number_type,
+    drr17_indicators_not_available: number_type,
+    drr17_indicators_future: number_type,
 
-    dp18_results: {type: Number},
-    dp18_indicators: {type: Number},
+    dp18_results: number_type,
+    dp18_indicators: number_type,
 
-    dp19_results: {type: Number},
-    dp19_indicators: {type: Number},
+    dp19_results: number_type,
+    dp19_indicators: number_type,
   });
 
   // "id","result_id","name_en","name_fr","target_year","target_month","explanation_en","explanation_fr","target_type","target_min","target_max","target_narrative_en","target_narrative_fr","doc","actual_datatype","actual_result_en","actual_result_fr","status_key","status_period","methodology_en","methodology_fr","measure_en","measure_fr"
   const IndicatorSchema = mongoose.Schema({
     indicator_id: pkey_type(),
+    stable_id: str_type,
     result_id: parent_fkey_type(),
     ...bilingual_str("name"),
-    target_year: {type: Number},
-    target_month: {type: Number},
+    target_year: number_type,
+    target_month: number_type,
     ...bilingual_str("explanation"),
-    target_type: str_type,
-    target_min: {type: Number},
-    target_max: {type: Number},
-    ...bilingual_str("target_narrative"),
+    // Want to populate certain indicator fields with their previous year value as available
+    // Could use stable_id's to query for this from reducers, but embedding at populate time's much more efficient
+    ..._.reduce(
+      { 
+        target_type: str_type,
+        target_min: number_type,
+        target_max: number_type,
+        ...bilingual_str("target_narrative"),
+      },
+      (cross_year_target_fields, field_type, field_key) => ({
+        ...cross_year_target_fields,
+        [field_key]: field_type,
+        [`previous_year_${field_key}`]: field_type,
+      }),
+      {},
+    ),
     doc: str_type,
     actual_datatype: str_type,
     ...bilingual_str("actual_result"),

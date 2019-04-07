@@ -1,5 +1,6 @@
 
 export const str_type = { type: String };
+export const number_type = { type: Number };
 export const bilingual = (name,type) => ({
   [`${name}_en`] : type,
   [`${name}_fr`] : type,
