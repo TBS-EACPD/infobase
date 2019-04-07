@@ -13,18 +13,17 @@ const clean_budget_measure_description = (description) => {
   }
 }
 
-export default function({models}){
-  const {
+export default async function({models}){
+  const { 
     BudgetMeasures,
-    BudgetFunds,
-    SpecialFundingCase,
+    SpecialFundingSubject,
   } = models;
 
-  const budget_funds = get_standard_csv_file_rows("budget_measure_funds.csv");
-  const budget_measures = get_standard_csv_file_rows("budget_measure_lookups.csv");
+  const budget_2018_funds = get_standard_csv_file_rows("budget_2018_measure_funds.csv");
+  const budget_2018_lookups = get_standard_csv_file_rows("budget_2018_measure_lookups.csv");
 
 
-  const orgs_funded_by_measure_id = _.chain(budget_funds)
+  const orgs_funded_by_measure_id = _.chain(budget_2018_funds)
     .groupBy("measure_id")
     .mapValues( grouped_fund_rows => _.flatMap(grouped_fund_rows, fund_row => fund_row.org_id) )
     .value();
@@ -63,29 +62,30 @@ export default function({models}){
     )
     .value();
 
-  _.each( processed_budget_funds, budget_fund_row => BudgetFunds.register(budget_fund_row) );
 
-  const net_adjust_measure = BudgetMeasures.get_measure_by_id("net_adjust");
-  const special_funding_case_net_adjust = {
-    id: net_adjust_measure.measure_id,
-    org_id: net_adjust_measure.measure_id,
-    level: "special_funding_case",
-    name_en: net_adjust_measure.measure_en,
-    name_fr: net_adjust_measure.measure_fr,
-    description_en: "",
-    description_fr: "",
-  };
-  SpecialFundingCase.register(special_funding_case_net_adjust);
-
-  const special_funding_case_non_allocated = {
-    id: "non_allocated",
-    org_id: "non_allocated",
-    level: "special_funding_case",
-    name_en: "Allocation to be determined",
-    name_fr: "Affectation à determiner",
-    description_en: "",
-    description_fr: "",
-  };
-  SpecialFundingCase.register(special_funding_case_non_allocated);
-
+  const net_adjust_lookup = _.find(
+    budget_2018_lookups,
+    (budget_measure_lookup) => budget_measure_lookup.measure_id === "net_adjust"
+  );
+  const special_funding_subject = [
+    {
+      subject_id: "net_adjust",
+      level: "special_funding_case",
+      name_en: net_adjust_lookup.measure_en,
+      name_fr: net_adjust_lookup.measure_fr,
+      description_en: "",
+      description_fr: "",
+    },
+    {
+      subject_id: "non_allocated",
+      level: "special_funding_case",
+      name_en: "Allocation to be determined",
+      name_fr: "Affectation à determiner",
+      description_en: "",
+      description_fr: "",
+    },
+  ];
+  
+  await BudgetMeasures.insertMany(budget_measures);
+  return await SpecialFundingSubject.insertMany(special_funding_subject);
 }

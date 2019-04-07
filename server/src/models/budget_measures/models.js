@@ -21,7 +21,7 @@ export default function(model_singleton){
     allocated: {type: Number},
   });
 
-  const BudgetDataSchema = mongoose.Schema({
+  const BudgetFundsSchema = mongoose.Schema({
     subject_id: pkey_type(),
     funding: {type: Number},
     allocated: {type: Number},
@@ -43,13 +43,25 @@ export default function(model_singleton){
     ...bilingual('budget_section_id', str_type),
     ...bilingual('description', str_type),
 
-    data: [BudgetDataSchema],
+    data: [BudgetFundsSchema],
+  });
+
+
+  const SpecialFundingSubjectSchema = mongoose.Schema({
+    subject_id: pkey_type(),
+    level: str_type,
+    ...bilingual('name', str_type),
+    ...bilingual('description', str_type),
   });
 
 
   model_singleton.define_model("BudgetMeasures", BudgetMeasuresSchema);
+  model_singleton.define_model("SpecialFundingSubject", SpecialFundingSubjectSchema);
 
-  const { BudgetMeasures } = model_singleton.models;
+  const { 
+    BudgetMeasures,
+    SpecialFundingSubject,
+  } = model_singleton.models;
   
   // TODO Dataloaders...
   // ... can I do dataloaders by sub documents? Probably, right?
