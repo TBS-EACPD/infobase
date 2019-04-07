@@ -2,6 +2,11 @@ import _ from 'lodash';
 import { bilingual_field } from '../schema_utils.js';
 import { first_true_promise } from '../general_utils.js'
 
+import { 
+  drr_docs,
+  dp_docs,
+} from '../constants.js';
+
 const schema = `
   extend type Gov {
     all_target_counts_summary: [AllDocResultCount]
@@ -64,17 +69,30 @@ const schema = `
     subject_id: String
     level: String
 
-    drr17_results: Int
-    drr17_indicators_met: Int
-    drr17_indicators_not_available: Int
-    drr17_indicators_not_met: Int
-    drr17_indicators_future: Int
+${
+  _.reduce(
+    drr_docs,
+    (drr_fields, drr_doc) => `${drr_fields}
+    ${drr_doc}_results: Int
+    ${drr_doc}_indicators_met: Int
+    ${drr_doc}_indicators_not_available: Int
+    ${drr_doc}_indicators_not_met: Int
+    ${drr_doc}_indicators_future: Int
+    `,
+    '',
+  )
+}
 
-    dp18_results: Int
-    dp18_indicators: Int
-
-    dp19_results: Int
-    dp19_indicators: Int
+${
+  _.reduce(
+    dp_docs,
+    (dp_fields, dp_doc) => `${dp_fields}
+    ${dp_doc}_results: Int
+    ${dp_doc}_indicators: Int
+    `,
+    '',
+  )
+}
   }
 
   type ResultCount {

@@ -22,6 +22,15 @@ export const people_years = [
   "ppl_last_year",
 ];
 
+export const drr_docs = [
+  "drr17",
+];
+
+export const dp_docs = [
+  "dp18",
+  "dp19",
+];
+
 export const public_account_years_auth_exp = _.flatMap(public_account_years, year => [ `${year}_auth`, `${year}_exp` ]);
 
 export const auth_exp_year_to_pa_year = year_with_suffix => {

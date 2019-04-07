@@ -10,6 +10,11 @@ import {
   bilingual_str,
 } from '../model_utils.js';
 
+import { 
+  drr_docs,
+  dp_docs,
+} from '../constants.js';
+
 import { create_resource_by_foreignkey_attr_dataloader } from '../loader_utils.js';
 
 
@@ -27,17 +32,25 @@ export default function(model_singleton){
   const ResultCountSchema = mongoose.Schema({
     subject_id: parent_fkey_type(),
     level: str_type,
-    drr17_results: number_type,
-    drr17_indicators_met: number_type,
-    drr17_indicators_not_met: number_type,
-    drr17_indicators_not_available: number_type,
-    drr17_indicators_future: number_type,
 
-    dp18_results: number_type,
-    dp18_indicators: number_type,
+    ..._.chain(drr_docs)
+      .flatMap( (drr_doc) => [
+        [`${drr_doc}_results`, number_type],
+        [`${drr_doc}_indicators_met`, number_type],
+        [`${drr_doc}_indicators_not_met`, number_type],
+        [`${drr_doc}_indicators_not_available`, number_type],
+        [`${drr_doc}_indicators_future`, number_type],
+      ])
+      .fromPairs()
+      .value(),
 
-    dp19_results: number_type,
-    dp19_indicators: number_type,
+    ..._.chain(dp_docs)
+      .flatMap( (dp_doc) => [
+        [`${dp_doc}_results`, number_type],
+        [`${dp_doc}_indicators`, number_type],
+      ])
+      .fromPairs()
+      .value(),
   });
 
   // "id","result_id","name_en","name_fr","target_year","target_month","explanation_en","explanation_fr","target_type","target_min","target_max","target_narrative_en","target_narrative_fr","doc","actual_datatype","actual_result_en","actual_result_fr","status_key","status_period","methodology_en","methodology_fr","measure_en","measure_fr"
