@@ -8,7 +8,13 @@ import {
   status_key_to_glossary_key,
   status_key_to_svg_name,
   ordered_status_keys,
+  result_docs,
 } from './results_common.js';
+
+const dp_docs = _.chain(result_docs)
+  .keys()
+  .filter( doc => /dp/.test(doc) )
+  .value();
 
 const { result_statuses, result_simple_statuses } = businessConstants;
 const { 
@@ -23,6 +29,8 @@ const get_svg_url = (status_key) => get_static_url(`svg/${status_key_to_svg_name
 
 
 const IndicatorResultDisplay = ({
+  doc,
+
   data_type,
   min, 
   max,
@@ -89,44 +97,68 @@ const IndicatorResultDisplay = ({
     </Fragment>
   );
 
-  switch(data_type){
-    case 'num':
-    case 'num_range':
-    case 'dollar':
-    case 'dollar_range':
-    case 'percent':
-    case 'percent_range': {
-      if ( /range/.test(data_type) && (min && max) ){
-        return range_display(data_type, min, max);
-      } else if (min && max && min === max){
-        return exact_display(data_type, min);
-      } else if (min && !max){
-        return lower_target_display(data_type, min);
-      } else if (!min && max){
-        return upper_target_display(data_type, max);
-      } else {
-        return target_unspecified_display; 
+  const get_display_case = (data_type, min, max, narrative) => {
+    switch(data_type){
+      case 'num':
+      case 'num_range':
+      case 'dollar':
+      case 'dollar_range':
+      case 'percent':
+      case 'percent_range': {
+        if ( /range/.test(data_type) && (min && max) ){
+          return range_display(data_type, min, max);
+        } else if (min && max && min === max){
+          return exact_display(data_type, min);
+        } else if (min && !max){
+          return lower_target_display(data_type, min);
+        } else if (!min && max){
+          return upper_target_display(data_type, max);
+        } else {
+          return target_unspecified_display; 
+        }
+      }
+  
+      case 'text': {
+        if ( _.isEmpty(narrative) ){ return target_unspecified_display; }
+        return (
+          <span>
+            {narrative}
+          </span>
+        );
+      }
+  
+      case 'TBD': {
+        return <TM k="tbd_result_text" />;
+      }
+  
+      default: {
+        //certain indicators have no targets
+        return null;
       }
     }
+  };
 
-    case 'text': {
-      if ( _.isEmpty(narrative) ){ return target_unspecified_display; }
-      return (
-        <span>
-          {narrative}
-        </span>
-      );
-    }
+  const should_display_previous_year_target = _.indexOf(dp_docs, doc) > 0;
 
-    case 'TBD': {
-      return <TM k="tbd_result_text" />;
-    }
-
-    default: {
-      //certain indicators have no targets
-      return null;
-    }
-  }
+  return (
+    <Fragment>
+      { get_display_case(data_type, min, max, narrative) }
+      { should_display_previous_year_target &&
+        <Fragment>
+          {' ('}
+          { !_.isNull(previous_data_type) ?
+            <Fragment>
+              <TM k="previous_year_target_collon" el="strong"/>
+              {' '}
+              {get_display_case(previous_data_type, previous_min, previous_max, previous_narrative)}
+            </Fragment> :
+            <TM k="new_indicator" el="strong" />
+          }
+          {')'}
+        </Fragment>
+      }
+    </Fragment>
+  );
 };
 
 const Drr17IndicatorResultDisplay = ({

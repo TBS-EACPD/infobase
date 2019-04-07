@@ -20,8 +20,8 @@ const { result_statuses } = businessConstants;
 function pick_table(subject,type,doc){
   return Table.lookup(
     type === "spending" ?
-    "programSpending" :
-    "programFtes"
+      "programSpending" :
+      "programFtes"
   );
 }
 
