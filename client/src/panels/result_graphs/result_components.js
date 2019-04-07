@@ -263,6 +263,23 @@ const SingleIndicatorDisplay = ({indicator}) => {
           {indicator.target_date}
         </dd>
 
+        { !_.isNull(indicator.previous_year_target_type) && 
+          <Fragment>
+            <dt>
+              <TM k="previous_year_target" />
+            </dt>
+            <dd>
+              <IndicatorResultDisplay
+                data_type={indicator.previous_year_target_type}
+                min={indicator.previous_year_target_min}
+                max={indicator.previous_year_target_max}
+                narrative={indicator.previous_year_target_narrative}
+                measure={indicator.previous_year_measure}
+              />
+            </dd>
+          </Fragment>
+        }
+
         <dt>
           <TM k="target" />
         </dt>

@@ -15,6 +15,9 @@ indicators:
   en: Indicators
   fr: Indicateurs
 
+previous_year_target:
+  en: Last year's target
+  fr: Cible de l'an dernier
 
 target:
   en: Target
