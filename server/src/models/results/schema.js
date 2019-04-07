@@ -110,6 +110,7 @@ ${
 
   type Result {
     id: String
+    stable_id: String
     parent_id: String
     name: String
     doc: String
@@ -118,16 +119,24 @@ ${
 
   type Indicator {
     id: String
+    stable_id: String
     result_id: String
     name: String
+    doc: String
     
     target_year: String
     target_month: String
+
     target_type: String
     target_min: String
     target_max: String
     target_narrative: String
-    doc: String
+
+    previous_year_target_type: String
+    previous_year_target_min: String
+    previous_year_target_max: String
+    previous_year_target_narrative_en: String
+    previous_year_target_narrative_fr: String
 
     explanation: String
 
