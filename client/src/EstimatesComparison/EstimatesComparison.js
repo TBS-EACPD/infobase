@@ -55,7 +55,7 @@ export default class EstimatesComparison extends React.Component {
       history,
       match: {
         params: {
-          grouping_layout,
+          h7y_layout,
         },
       },
     } = this.props;
@@ -74,7 +74,7 @@ export default class EstimatesComparison extends React.Component {
           <SpinnerWrapper config_name={"sub_route"} /> :
           <ExplorerContainer
             history={history}
-            route_grouping_layout={grouping_layout}
+            route_h7y_layout={h7y_layout}
           />
         }
       </StandardRouteContainer>
@@ -97,7 +97,7 @@ class ExplorerContainer extends React.Component {
   constructor(props){
     super();
 
-    const { route_grouping_layout } = props
+    const { route_h7y_layout } = props
 
     const scheme = estimates_diff_scheme;
     const scheme_key = estimates_diff_scheme.key;
@@ -116,7 +116,7 @@ class ExplorerContainer extends React.Component {
 
     const initialState = {
       root: _.immutate(initial_root_state, {scheme_key}),
-      [scheme_key]: get_initial_scheme_state(route_grouping_layout),
+      [scheme_key]: get_initial_scheme_state(route_h7y_layout),
     };
 
     const connecter = connect(mapStateToProps, mapDispatchToProps);
@@ -256,13 +256,13 @@ class EstimatesExplorer extends React.Component {
   }
   componentDidUpdate(){
     const {
-      route_grouping_layout,
+      route_h7y_layout,
       h7y_layout,
       set_h7y_layout,
     } = this.props;
 
-    if (route_grouping_layout && route_grouping_layout !== h7y_layout){
-      set_h7y_layout(route_grouping_layout);
+    if (route_h7y_layout && route_h7y_layout !== h7y_layout){
+      set_h7y_layout(route_h7y_layout);
     }
   }
   render(){
