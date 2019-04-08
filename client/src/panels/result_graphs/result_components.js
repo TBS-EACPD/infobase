@@ -46,7 +46,7 @@ const IndicatorResultDisplay = ({
 
   const target_unspecified_display = <TM k="unspecified_target"/>;
   
-  const measure_display = !_.isEmpty(measure) && <span> ( {measure} )</span>;
+  const measure_display = (measure) => !_.isEmpty(measure) && <span> ( {measure} )</span>;
 
   const display_type_by_data_type = {
     num: "result_num",
@@ -57,34 +57,34 @@ const IndicatorResultDisplay = ({
     percent_range: "result_percentage",
   };
 
-  const upper_target_display = (data_type, max) => (
+  const upper_target_display = (data_type, measure, max) => (
     <Fragment>
       <span>
         <span>{`${text_maker("result_upper_target_text")} `}</span>
         <Format type={display_type_by_data_type[data_type]} content={+max} /> 
       </span> 
-      {measure_display}
+      {measure_display(measure)}
     </Fragment>
   );
-  const lower_target_display = (data_type, min) => (
+  const lower_target_display = (data_type, measure, min) => (
     <Fragment>
       <span>
         <span>{`${text_maker("result_lower_target_text")} `}</span>
         <Format type={display_type_by_data_type[data_type]} content={+min} /> 
       </span> 
-      {measure_display}
+      {measure_display(measure)}
     </Fragment>
   );
-  const exact_display = (data_type, exact) => (
+  const exact_display = (data_type, measure, exact) => (
     <Fragment>
       <span>
         <span>{`${text_maker("result_exact_text")} `}</span>
         <Format type={display_type_by_data_type[data_type]} content={+exact} /> 
       </span> 
-      {measure_display}
+      {measure_display(measure)}
     </Fragment>
   );
-  const range_display = (data_type, min, max) => (
+  const range_display = (data_type, measure, min, max) => (
     <Fragment>
       <span> 
         <span>{`${text_maker("result_range_text")} `}</span>
@@ -93,11 +93,11 @@ const IndicatorResultDisplay = ({
         <Format type={display_type_by_data_type[data_type]} content={+max} />
         <span>{` (${text_maker("inclusive")})`}</span>
       </span> 
-      {measure_display}
+      {measure_display(measure)}
     </Fragment>
   );
 
-  const get_display_case = (data_type, min, max, narrative) => {
+  const get_display_case = (data_type, min, max, narrative, measure) => {
     switch(data_type){
       case 'num':
       case 'num_range':
@@ -106,13 +106,13 @@ const IndicatorResultDisplay = ({
       case 'percent':
       case 'percent_range': {
         if ( /range/.test(data_type) && (min && max) ){
-          return range_display(data_type, min, max);
+          return range_display(data_type, measure, min, max);
         } else if (min && max && min === max){
-          return exact_display(data_type, min);
+          return exact_display(data_type, measure, min);
         } else if (min && !max){
-          return lower_target_display(data_type, min);
+          return lower_target_display(data_type, measure, min);
         } else if (!min && max){
-          return upper_target_display(data_type, max);
+          return upper_target_display(data_type, measure, max);
         } else {
           return target_unspecified_display; 
         }
@@ -142,7 +142,7 @@ const IndicatorResultDisplay = ({
 
   return (
     <Fragment>
-      { get_display_case(data_type, min, max, narrative) }
+      { get_display_case(data_type, min, max, narrative, measure) }
       { should_display_previous_year_target &&
         <Fragment>
           {' ('}
@@ -150,7 +150,7 @@ const IndicatorResultDisplay = ({
             <Fragment>
               <TM k="previous_year_target_collon" el="strong"/>
               {' '}
-              {get_display_case(previous_data_type, previous_min, previous_max, previous_narrative)}
+              {get_display_case(previous_data_type, previous_min, previous_max, previous_narrative, previous_measure)}
             </Fragment> :
             <TM k="new_indicator" el="strong" />
           }
