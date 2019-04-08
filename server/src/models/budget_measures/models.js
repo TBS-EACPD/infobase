@@ -21,6 +21,16 @@ export default function(model_singleton){
     allocated: {type: Number},
   });
 
+  const BudgetSubmeasureFundsSchema = mongoose.Schema({
+    measure_id: pkey_type(),
+    ...bilingual('name', str_type),
+
+    allocated: {type: Number},
+    withheld: {type: Number},
+
+    program_allocations: [BudgetProgramAllocationSchema],
+  });
+
   const BudgetFundsSchema = mongoose.Schema({
     subject_id: pkey_type(),
     funding: {type: Number},
@@ -31,6 +41,8 @@ export default function(model_singleton){
     ...bilingual('description', str_type),
 
     program_allocations: [BudgetProgramAllocationSchema],
+
+    submeasure_breakout: [BudgetSubmeasureFundsSchema],
   });
 
   const BudgetMeasuresSchema = mongoose.Schema({
@@ -64,6 +76,6 @@ export default function(model_singleton){
   } = model_singleton.models;
   
   // TODO Dataloaders...
-  // ... can I do dataloaders by sub documents? Probably, right?
+  // ... can I do dataloaders by fields in subdocuments? Probably, right?
   // Otherwise, stick an array of org ids on BudgetMeasuresSchema I guess
 }
