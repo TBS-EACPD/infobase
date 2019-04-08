@@ -1,9 +1,10 @@
 import _ from "lodash";
 import mongoose from "mongoose";
 
+import { budget_years } from './budget_measures_common.js';
+
 import { 
-  str_type, 
-  bilingual, 
+  str_type,
   pkey_type,
   parent_fkey_type,
   bilingual_str,
@@ -66,14 +67,11 @@ export default function(model_singleton){
     ...bilingual_str('description'),
   });
 
-
-  model_singleton.define_model("BudgetMeasures", BudgetMeasuresSchema);
+  _.each(
+    budget_years,
+    budget_year => model_singleton.define_model(`Budget${budget_year}Measures`, BudgetMeasuresSchema),
+  );
   model_singleton.define_model("SpecialFundingSubject", SpecialFundingSubjectSchema);
-
-  const { 
-    BudgetMeasures,
-    SpecialFundingSubject,
-  } = model_singleton.models;
   
   // TODO Dataloaders...
   // ... can I do dataloaders by fields in subdocuments? Probably, right?
