@@ -1,5 +1,5 @@
 
-orgCoreEstimates_short:
+orgActivityEstimates_short:
   transform: [handlebars,embeded-markdown, markdown]
   en: |
    This table presents net budgetary {{gl_tt "authorities" "AUTH"}} by {{gl_tt "Estimates documents" "EST_DOC"}} and by {{gl_tt "Core Responsibility" "CR"}}.
@@ -8,10 +8,10 @@ orgCoreEstimates_short:
    Ce tableau présente les {{gl_tt "autorisations" "AUTH"}} par {{gl_tt "documents budgétaires" "EST_DOC"}} et par {{gl_tt "responsabilité essentielle" "CR"}}.
 
 
-orgCoreEstimates:
+orgActivityEstimates:
   transform: [handlebars,embeded-markdown, markdown]
   en: |
-   {{{gt "orgCoreEstimates_short"}}}
+   {{{gt "orgActivityEstimates_short"}}}
 
 
    Expenditures made by the government require the authority of Parliament. This authority is provided in two ways:
@@ -27,7 +27,7 @@ orgCoreEstimates:
 
 
   fr: |
-   {{{gt "orgCoreEstimates_short"}}}
+   {{{gt "orgActivityEstimates_short"}}}
 
 
    Les dépenses effectuées par le gouvernement doivent être autorisées par le Parlement. Cette {{gl_tt "approbation" "AUTH"}} est donnée de deux façons :

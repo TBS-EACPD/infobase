@@ -1,4 +1,4 @@
-import text from './orgCoreEstimates.yaml';
+import text from './orgActivityEstimates.yaml';
 import {
   Subject,
   years,
@@ -15,7 +15,7 @@ const map_helper = {
 
 export default {
   text,
-  id: "orgCoreEstimates",
+  id: "orgActivityEstimates",
   legacy_id: "",
   tags: [
     "AUTH",

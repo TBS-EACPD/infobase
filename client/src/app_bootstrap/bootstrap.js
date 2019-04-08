@@ -29,7 +29,7 @@ import orgSobjs from "../tables/orgSobjs.js";
 import programSpending from "../tables/programSpending.js";
 import orgTransferPayments from "../tables/orgTransferPayments.js";
 import orgVoteStatEstimates from "../tables/orgVoteStatEstimates.js";
-import orgCoreEstimates from "../tables/orgCoreEstimates.js";
+import orgActivityEstimates from "../tables/orgActivityEstimates.js";
 import orgEmployeeType from "../tables/orgEmployeeType.js";
 import orgEmployeeRegion from "../tables/orgEmployeeRegion.js";
 import orgEmployeeAgeGroup from "../tables/orgEmployeeAgeGroup.js";
@@ -49,7 +49,7 @@ const table_defs = [
   programSpending,
   orgTransferPayments,
   orgVoteStatEstimates,
-  orgCoreEstimates,
+  orgActivityEstimates,
   orgEmployeeType,
   orgEmployeeRegion,
   orgEmployeeAgeGroup,
