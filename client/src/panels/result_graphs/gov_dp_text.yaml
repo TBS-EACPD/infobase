@@ -1,8 +1,9 @@
 gov_dp_summary_title:
   transform: [handlebars]
-  en: Summary of planned results ({{planning_year_1}})
-  fr: Sommaire des résultats escomptés ({{planning_year_1}})
-
+  en: |
+    {{planning_year_1}} Departmental Plans Summary
+  fr: |
+    Sommaire des plans ministériels de {{planning_year_1}}
 
 gov_dp_text:
   transform: [handlebars,markdown]
