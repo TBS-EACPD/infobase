@@ -1,18 +1,18 @@
 result_upper_target_text:
-  en: No more than
-  fr: TODO
+  en: Equal to or under
+  fr: Égal ou sous
 
 result_lower_target_text:
   en: At least
-  fr: TODO
+  fr: Au moins
 
 result_range_text:
   en: Between
-  fr: TODO
+  fr: Entre
 
 result_exact_text:
   en: Exactly
-  fr: TODO
+  fr: Exactement
 
 tbd_result_text:
   en: Target to be determined
