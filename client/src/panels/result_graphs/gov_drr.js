@@ -4,6 +4,7 @@ import {
   PanelGraph,
   Panel,
   util_components,
+  get_source_links,
 } from "../shared.js";
 import {
   link_to_results_infograph,
@@ -22,6 +23,7 @@ new PanelGraph({
   requires_result_counts: true,
   key: "gov_drr",
   footnotes: ["RESULTS_COUNTS"],
+  source: (subject) => get_source_links(["DRR"]),
 
   calculate(){
     const verbose_gov_counts = ResultCounts.get_gov_counts();
@@ -46,10 +48,9 @@ new PanelGraph({
       verbose_gov_counts,
       num_depts,
     };
-    
   },
 
-  render({calculations,footnotes}){
+  render({calculations, footnotes, sources}){
     const {
       graph_args,
     } = calculations;
@@ -57,7 +58,7 @@ new PanelGraph({
     return (
       <Panel
         title={text_maker("drr_summary_title")}
-        { ...{footnotes} }
+        { ...{footnotes, sources} }
       >
         <GovDRR {...graph_args} />
       </Panel>

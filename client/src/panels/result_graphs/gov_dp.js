@@ -8,6 +8,7 @@ import {
   Panel,
   rpb_link,
   infograph_href_template,
+  get_source_links,
 } from "../shared";
 
 import { DeptSearch } from '../../util_components.js';
@@ -82,12 +83,14 @@ new PanelGraph({
   key: "gov_dp",
   calculate: _.constant(true),
   footnotes: false,
-  render(panel, calculations){
+  source: (subject) => get_source_links(["DP"]),
+  render({sources}){
     const counts = ResultCounts.get_gov_counts();
     const { spend, ftes } = get_dp_rpb_links();
     return (
       <Panel
         title={text_maker("gov_dp_summary_title")}
+        sources={sources}
         allowOverflow
       >
         <ResultsIntroPanel 

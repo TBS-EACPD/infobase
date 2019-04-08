@@ -9,7 +9,8 @@ import {
   Panel,
   TabbedControls,
   DlItem,
-} from '../shared';
+  get_source_links,
+} from '../shared.js';
 import { Details } from '../../components/Details.js';
 import { 
   Indicator,
@@ -472,10 +473,10 @@ class SingleSubjResultsContainer extends React.Component {
 _.each(['program','dept','crso'], lvl => {
 
   new PanelGraph({
-    source: false,
     level: lvl,
     footnotes: false,
     depends_on: ["programSpending", "programFtes"],
+    source: (subject) => get_source_links(["DRR"]),
     requires_result_counts: lvl === 'dept',
     requires_granular_result_counts: lvl !== 'dept',
     key: "explore_results",
@@ -505,7 +506,7 @@ _.each(['program','dept','crso'], lvl => {
       return { docs_with_data };
     },
 
-    render({calculations}){
+    render({calculations, sources}){
       const { 
         subject, 
         graph_args: {
@@ -524,7 +525,7 @@ _.each(['program','dept','crso'], lvl => {
         .value();
 
       return (
-        <Panel title={text_maker("result_drilldown_title", { ...year_range_with_data })}>
+        <Panel title={text_maker("result_drilldown_title", { ...year_range_with_data })} sources={sources}>
           <SingleSubjResultsContainer
             {...{
               subject,

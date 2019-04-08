@@ -19,6 +19,7 @@ import { infograph_href_template as infograph_href_template } from '../infograph
 import { glossary_href } from '../link_utils.js';
 import { Statistics } from '../core/Statistics.js';
 import classNames from 'classnames';
+import { get_source_links } from '../metadata/data_sources.js';
 
 const {
   SafePie,
@@ -523,4 +524,5 @@ export {
   TM,
   create_text_maker_component,
   DlItem,
+  get_source_links,
 };

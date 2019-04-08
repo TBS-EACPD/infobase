@@ -211,6 +211,20 @@ const sources = _.mapValues({
   },
 }, (obj, key) => ({...obj, key}));
 
+
+const get_source_links = (source_keys) => _.chain(source_keys)
+  .map(
+    source_key => (sources[source_key] && 
+      {
+        html: sources[source_key].title(),
+        href: `#metadata/${source_key}`,
+      }
+    )
+  )
+  .compact()
+  .value();
+
 export { 
   sources,
+  get_source_links,
 };

@@ -5,7 +5,8 @@ import {
   declarative_charts,
   Panel,
   businessConstants,
-} from "../shared";
+  get_source_links,
+} from "../shared.js";
 import { IconArray } from '../../charts/IconArray.js';
 import { 
   row_to_drr_status_counts,
@@ -203,14 +204,14 @@ export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts 
   </Fragment>;
 };
 
-const render = ({calculations, footnotes}) => {
+const render = ({calculations, footnotes, sources}) => {
   const {
     graph_args,
     subject,
   } = calculations;
 
   return (
-    <Panel title={text_maker("drr_summary_title")} footnotes={footnotes}>
+    <Panel title={text_maker("drr_summary_title")} footnotes={footnotes} sources={sources}>
       <DrrSummary
         subject={subject}
         {...graph_args}
@@ -224,7 +225,7 @@ new PanelGraph({
   requires_result_counts: true,
   key: "drr_summary",
   footnotes: ["RESULTS_COUNTS", "RESULTS"],
-
+  source: (subject) => get_source_links(["DRR"]),
   calculate(subject){
     const verbose_counts = ResultCounts.get_dept_counts(subject.id);
     const counts = row_to_drr_status_counts(verbose_counts);
@@ -247,7 +248,7 @@ new PanelGraph({
   required_result_docs: ["drr17"],
   key: "drr_summary",
   footnotes: ["RESULTS_COUNTS", "RESULTS"],
-
+  source: (subject) => get_source_links(["DRR"]),
   calculate(subject){
     const all_results = Result.get_flat_results(subject);
     const all_indicators = Indicator.get_flat_indicators(subject);

@@ -7,7 +7,8 @@ import {
   run_template,
   Panel,
   create_text_maker_component,
-} from "../shared";
+  get_source_links,
+} from "../shared.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -28,6 +29,7 @@ _.each(["dept","crso","program"], level => {
     depends_on: ['programSpending'],
     machinery_footnotes: false,
     footnotes: ["PLANNED_GROSS", "PLANNED_EXP", "PLANNED_FTE"],
+    source: (subject) => get_source_links(["DP"]),
     calculate(subject,info){
       const { programSpending } = this.tables;
       const q = programSpending.q(subject);
@@ -59,7 +61,7 @@ _.each(["dept","crso","program"], level => {
       });
 
     },
-    render({calculations, footnotes}){
+    render({calculations, footnotes, sources}){
       const {
         graph_args: data,
         info,
@@ -73,6 +75,7 @@ _.each(["dept","crso","program"], level => {
         <Panel
           title={text_maker("dp_rev_split_title")}
           footnotes={new_footnotes}
+          sources={sources}
         >
           <div>
             <TM k="dp_rev_split_text" args={info} />
