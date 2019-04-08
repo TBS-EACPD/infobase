@@ -6,7 +6,7 @@ export const bilingual = (name,type) => ({
   [`${name}_fr`] : type,
 });
 
-export const bilingual_str = name => bilingual(name,str_type);
+export const bilingual_str = name => bilingual(name, str_type);
 
 export const pkey_type = () => ({
   ...str_type,

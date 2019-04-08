@@ -17,13 +17,14 @@ import {
 export default function(model_singleton){
 
   const BudgetProgramAllocationSchema = mongoose.Schema({
-    activity_code: pkey_type(),
+    program_id: pkey_type(),
     allocated: {type: Number},
   });
 
-  const BudgetSubmeasureFundsSchema = mongoose.Schema({
-    measure_id: pkey_type(),
-    ...bilingual('name', str_type),
+  const BudgetSubmeasureSchema = mongoose.Schema({
+    submeasure_id: pkey_type(),
+    parent_measure_id: parent_fkey_type(),
+    ...bilingual_str('name'),
 
     allocated: {type: Number},
     withheld: {type: Number},
@@ -38,22 +39,21 @@ export default function(model_singleton){
     remaining: {type: Number},
     withheld: {type: Number},
 
-    ...bilingual('description', str_type),
+    ...bilingual_str('description'),
 
     program_allocations: [BudgetProgramAllocationSchema],
 
-    submeasure_breakout: [BudgetSubmeasureFundsSchema],
+    submeasures: [BudgetSubmeasureSchema],
   });
 
   const BudgetMeasuresSchema = mongoose.Schema({
     measure_id: pkey_type(),
-    parent_measure_id: str_type,
     
     budget_year: str_type,
-    ...bilingual('name', str_type),
+    ...bilingual_str('name'),
     chapter_key: str_type,
-    ...bilingual('budget_section_id', str_type),
-    ...bilingual('description', str_type),
+    ...bilingual_str('budget_section_id'),
+    ...bilingual_str('description'),
 
     data: [BudgetFundsSchema],
   });
@@ -62,8 +62,8 @@ export default function(model_singleton){
   const SpecialFundingSubjectSchema = mongoose.Schema({
     subject_id: pkey_type(),
     level: str_type,
-    ...bilingual('name', str_type),
-    ...bilingual('description', str_type),
+    ...bilingual_str('name'),
+    ...bilingual_str('description'),
   });
 
 

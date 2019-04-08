@@ -19,9 +19,38 @@ export default async function({models}){
     SpecialFundingSubject,
   } = models;
 
-  const budget_2018_funds = get_standard_csv_file_rows("budget_2018_measure_funds.csv");
+  const budget_2018_funds = get_standard_csv_file_rows("budget_2018_measure_data.csv");
   const budget_2018_lookups = get_standard_csv_file_rows("budget_2018_measure_lookups.csv");
 
+
+  const submeasures_by_parent_measure_id = _.chain(budget_2018_lookups)
+    .filter("parent_measure_id")
+    .groupBy("parent_measure_id")
+    .mapValues( 
+      grouped_submeasure_rows => _.map(
+        grouped_submeasure_rows, 
+        "measure_id"
+      ) 
+    )
+    .value();
+  const submeasure_ids = _.flatMap(submeasures_by_parent_measure_id, _.identity);
+  
+  const {
+    true: budget_2018_measure_funds,
+    false: budget_2018_submeasure_funds,
+  } = _.groupBy(
+    budget_2018_funds,
+    ({measure_id}) => !_.includes(submeasure_ids, measure_id)
+  );
+  const {
+    true: budget_2018_measure_lookups,
+    false: budget_2018_submeasure_lookups,
+  } = _.groupBy(
+    budget_2018_lookups,
+    ({parent_measure_id}) => _.isNull(parent_measure_id)
+  );
+
+  debugger
 
   const orgs_funded_by_measure_id = _.chain(budget_2018_funds)
     .groupBy("measure_id")
