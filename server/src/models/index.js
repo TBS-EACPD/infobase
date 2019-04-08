@@ -6,6 +6,7 @@ import root_schema from './schema_root.js';
 //each sub-module is included here
 import core_subject from './core_subject';
 import results from './results';
+import budget_measures from './budget_measures';
 // import resources from './finances';
 // import pses from './pses';
 // import sobjs from './standard_objects';
@@ -13,7 +14,6 @@ import results from './results';
 // import search from './search';
 // import vote_stat from './vote_stat';
 // import transfer_payments from './transfer_payments';
-// import budget_measures from './budget_measures';
 // import transfer_payments_loc from './transfer_payments_loc';
 
 
@@ -21,6 +21,7 @@ import results from './results';
 const sub_module_defs = [
   core_subject,
   results,
+  budget_measures,
   // resources,
   // pses,
   // sobjs,
@@ -28,7 +29,6 @@ const sub_module_defs = [
   // people,
   // vote_stat,
   // transfer_payments,
-  // budget_measures,
   // transfer_payments_loc,
 ];
 
