@@ -18,7 +18,7 @@ import {
 export default function(model_singleton){
 
   const BudgetProgramAllocationSchema = mongoose.Schema({
-    program_id: pkey_type(),
+    subject_id: pkey_type(), // program id or CRSO id
     allocated: {type: Number},
   });
 
@@ -34,7 +34,7 @@ export default function(model_singleton){
   });
 
   const BudgetFundsSchema = mongoose.Schema({
-    subject_id: pkey_type(),
+    subject_id: pkey_type(), // org id or SpecialFundingSubject id
     funding: {type: Number},
     allocated: {type: Number},
     remaining: {type: Number},
@@ -44,7 +44,7 @@ export default function(model_singleton){
 
     program_allocations: [BudgetProgramAllocationSchema],
 
-    submeasures: [BudgetSubmeasureSchema],
+    submeasure_breakouts: [BudgetSubmeasureSchema],
   });
 
   const BudgetMeasuresSchema = mongoose.Schema({
@@ -60,6 +60,7 @@ export default function(model_singleton){
   });
 
 
+  // These are artifacts of the Budget 2018 process, shouldn't show up in other years
   const SpecialFundingSubjectSchema = mongoose.Schema({
     subject_id: pkey_type(),
     level: str_type,
