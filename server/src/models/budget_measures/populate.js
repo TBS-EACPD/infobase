@@ -16,13 +16,15 @@ const clean_budget_measure_description = (description) => {
   }
 }
 
-export default async function({models}){
+export default async function({models, loaders}){
   const { 
     BudgetMeasures,
     SpecialFundingSubject,
 
     Org,
   } = models;
+
+  const { org_id_loader } = loaders;
 
   const special_funding_subjects = [
     {
@@ -45,30 +47,10 @@ export default async function({models}){
   
   return await Promise.all([
     SpecialFundingSubject.insertMany(special_funding_subjects),
-    ..._.map( budget_years, (budget_year) => {
+    ..._.map( budget_years, async (budget_year) => {
       const budget_funds = get_standard_csv_file_rows(`budget_${budget_year}_measure_data.csv`);
       const budget_lookups = get_standard_csv_file_rows(`budget_${budget_year}_measure_lookups.csv`);
     
-    
-      const submeasures_by_parent_measure_id = _.chain(budget_lookups)
-        .filter("parent_measure_id")
-        .groupBy("parent_measure_id")
-        .mapValues(
-          grouped_submeasure_rows => _.map(
-            grouped_submeasure_rows,
-            "measure_id"
-          )
-        )
-        .value();
-      const submeasure_ids = _.flatMap(submeasures_by_parent_measure_id, _.identity);
-      
-      const {
-        true: measure_funds,
-        false: submeasure_funds,
-      } = _.groupBy(
-        budget_funds,
-        ({measure_id}) => !_.includes(submeasure_ids, measure_id)
-      );
       const {
         true: measure_lookups,
         false: submeasure_lookups,
@@ -76,8 +58,32 @@ export default async function({models}){
         budget_lookups,
         ({parent_measure_id}) => _.isNull(parent_measure_id)
       );
+      const submeasure_ids = _.map(submeasure_lookups, "measure_id");
+      const {
+        true: measure_funds,
+        false: submeasure_funds,
+      } = _.groupBy(
+        budget_funds,
+        ({measure_id}) => !_.includes(submeasure_ids, measure_id)
+      );
     
       const submeasure_program_allocations = [];
+      await Promise.all(
+        _.chain(submeasure_funds)
+          .filter( ({allocated}) => +allocated !== 0 )
+          .flatMap(
+            async ({measure_id, org_id, funding, allocated, withheld, remaining, ...program_columns}) => {
+              const parent_org = await org_id_loader.load(org_id);
+
+              const program_allocations = _.chain(program_columns)
+                // ugh, program_columns aren't in order anymore at this point, need to sort them out here
+                .value()
+
+              submeasure_program_allocations.push(...program_allocations);
+            }
+          )
+          .value()
+      );
 
       debugger
 
