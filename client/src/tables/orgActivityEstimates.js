@@ -6,8 +6,11 @@ import {
 } from './table_common';
 const { CRSO } = Subject;
 const { cr_estimates_years } = years;
+import { create_text_maker } from '../models/text.js';
 
 const { estimates_docs } = businessConstants;
+
+const text_maker = create_text_maker(text);
 
 const map_helper = {
   "ME": "MAINS",
@@ -25,7 +28,7 @@ export default {
 
   source: ["ESTIMATES"],
 
-  "name": { 
+  "name": {
     "en": "Tabled Estimates by Core Responsibility",
     "fr": "Budgets déposés TODO TODO",
   },
@@ -75,7 +78,7 @@ export default {
     });
     _.each(cr_estimates_years, (yr, ix) => { 
       this.add_col({
-        "simple_default": ix === 0, // TODO: this probably changes if the number of years changes
+        "simple_default": ix === 4, // TODO: I'm not 100% clear if this is right
         type: "big_int",
         nick: yr+"_estimates",
         description: {
@@ -93,8 +96,13 @@ export default {
     }
     row.splice(2, 1, estimates_docs[row[2]][window.lang]);
 
-    const cr = CRSO.get_from_id(row[1]);
-    row.splice(2,0,cr.name);
+    // fake CRSO id for budget items
+    if(row[1].split('-')[1]==="BUDIM"){
+      row.splice(2,0,text_maker("budget_measure"));
+    } else {
+      const cr = CRSO.get_from_id(row[1]);
+      row.splice(2,0,cr.name);
+    }
     return row;
   },
 
