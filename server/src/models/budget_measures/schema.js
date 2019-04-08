@@ -1,6 +1,5 @@
 import _ from "lodash";
 
-import { make_budget_link } from './budget_measure_utils.js';
 import { bilingual_field } from '../schema_utils.js';
 
 const schema = `
@@ -15,7 +14,6 @@ const schema = `
     name: String
     chapter_key: ChapterKey
     desc: String
-    budget_link: String
     funded_org_ids: [String]
     funded_orgs: [OrgOrSpecialFundingCase]
     budget_funds_data: [BudgetFundsData]
@@ -99,7 +97,6 @@ export default function({models}){
     BudgetMeasure: {
       name: bilingual_field("measure"),
       desc: bilingual_field("description"),
-      budget_link: (budget_measure, _args, context) => make_budget_link(budget_measure, context),
       funded_orgs: (budget_measure) => budget_measure.funded_org_ids.map( 
         org_id => get_org_or_special_funding_case_by_id(org_id)
       ),
