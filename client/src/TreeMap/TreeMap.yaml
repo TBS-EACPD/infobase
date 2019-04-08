@@ -96,9 +96,6 @@ year_format:
   en: Year format
   fr: Format des années
 
-of:
-  en: of
-  fr: de
 
 percent_of_parent:
   en: "% of parent"

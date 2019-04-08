@@ -35,7 +35,15 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
 
   const packing_data = {
     name: "",
-    children: _.map(data, (d, i) => _.extend({ id: i }, d)),
+    children: _.map(data, (d, i) => _.extend({
+      id: i,
+      total: total_amt,
+      total_of: text_maker(
+        isVoted ?
+          'all_voted_items' :
+          'all_stat_items'
+      ),
+    }, d)),
   };
 
   const show_pack = !window.is_a11y_mode;
@@ -116,7 +124,7 @@ const tooltip_render = vs => function (d) {
     "data-ibtt-text": ` 
       <div class="FlatTreeMap__ToolTip">
         ${text_func(vs, d.data, "<br/>", true)} <br/>
-        <span class="FlatTreeMap__ToolTip--amount">${formats.compact1(d.data["{{est_in_year}}_estimates"])}</span>
+        ${formats.compact1(d.data["{{est_in_year}}_estimates"])} (${formats.percentage(d.data["{{est_in_year}}_estimates"]/d.data.total)} ${text_maker("of")} ${d.data.total_of})
       </div>`,
     "data-toggle": "tooltip",
     "data-ibtt-html": "true",

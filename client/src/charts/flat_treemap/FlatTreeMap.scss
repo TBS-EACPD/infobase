@@ -9,6 +9,7 @@
 }
 
 .FlatTreeMap__TextBox {
+  font-size: 13px;
   vertical-align: middle;
   text-align: center;
   position: absolute;
@@ -21,7 +22,6 @@
 }
 
 .FlatTreeMap__ContentTitle {
-  font-size: 14px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -30,7 +30,6 @@
 }
 
 .FlatTreeMap__ContentText {
-  font-size: 13px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -38,9 +37,6 @@
 
 
 .FlatTreeMap__ToolTip {   
+  font-size: 13px;     
   text-align: left;  
-}
-
-.FlatTreeMap__ToolTip--amount {
-  font-size: 16px;     
 }
