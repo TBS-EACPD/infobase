@@ -370,7 +370,9 @@ export const get_initial_state = (intitial_h7y_layout) => ({
   sort_col: "current_value",
   is_descending: true,
   show_stat: true,
-  h7y_layout: _.includes(h7y_layout_options, intitial_h7y_layout) ? intitial_h7y_layout : h7y_layout_options[0],
+  h7y_layout: _.includes(h7y_layout_options, intitial_h7y_layout) ? 
+    intitial_h7y_layout : 
+    h7y_layout_options[0],
 });
 export const estimates_diff_scheme = {
   key: scheme_key,
@@ -434,10 +436,10 @@ export const estimates_diff_scheme = {
     _.property("estimates_diff.show_stat"),
     _.property("estimates_diff.h7y_layout"),
     (should_show_stat, h7y_layout) => {
-      if(h7y_layout === "org"){
-        return get_data_by_org(should_show_stat);
-      } else {
+      if(h7y_layout === "item_type"){
         return get_data_by_item_types();
+      } else {
+        return get_data_by_org(should_show_stat);
       }
     }
   ),

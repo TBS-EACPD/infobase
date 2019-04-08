@@ -261,7 +261,7 @@ class EstimatesExplorer extends React.Component {
       set_h7y_layout,
     } = this.props;
 
-    if (route_grouping_layout !== h7y_layout){
+    if (route_grouping_layout && route_grouping_layout !== h7y_layout){
       set_h7y_layout(route_grouping_layout);
     }
   }
