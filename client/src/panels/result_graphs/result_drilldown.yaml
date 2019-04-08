@@ -6,14 +6,14 @@ result_drilldown_title:
   transform: [handlebars]
   en: |
     {{#if last_year}}
-      {{gt "result_drilldown_title_part"}} ({{first_year}} and {{last_year}})
+      {{gt "result_drilldown_title_part"}} ({{first_year}} to {{last_year}})
     {{else}}
       {{gt "result_drilldown_title_part"}} ({{first_year}})
     {{/if}}
 
   fr: |
     {{#if last_year}}
-      {{gt "result_drilldown_title_part"}} ({{first_year}} et {{last_year}})
+      {{gt "result_drilldown_title_part"}} ({{first_year}} à {{last_year}})
     {{else}}
       {{gt "result_drilldown_title_part"}} ({{first_year}})
     {{/if}}
