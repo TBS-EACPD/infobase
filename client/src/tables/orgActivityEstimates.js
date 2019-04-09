@@ -101,7 +101,7 @@ export default {
       row.splice(2,0,text_maker("budget_measure"));
     } else {
       const cr = CRSO.get_from_id(row[1]);
-      row.splice(2,0,cr.name);
+      cr && row.splice(2,0,cr.name);
     }
     return row;
   },
