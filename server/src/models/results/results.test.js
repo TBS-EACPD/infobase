@@ -1,4 +1,8 @@
 import _ from 'lodash';
+
+const drr_docs_to_test = ["drr17"];
+const dp_docs_to_test = ["dp18", "dp19"];
+
 const { execQuery } = global;
 
 const dept_results_data_query = `
@@ -28,15 +32,23 @@ fragment result_and_indicator_fields on Result {
   indicators {
     result_id
     name
+    doc
     
     target_year
     target_month
+
     target_type
     target_min
     target_max
     target_narrative
-    doc
-    
+    measure
+
+    previous_year_target_type
+    previous_year_target_min
+    previous_year_target_max
+    previous_year_target_narrative
+    previous_year_measure
+
     explanation
     
     actual_result
@@ -46,7 +58,6 @@ fragment result_and_indicator_fields on Result {
     status_key
     
     methodology
-    measure
   }
 }
 fragment everything on Org {
@@ -67,7 +78,12 @@ fragment everything on Org {
         }
       }
     }
-    results(doc: "dp18") {
+
+    dp18_results: results(doc: "dp18") {
+      ...result_and_indicator_fields
+    }
+
+    dp19_results: results(doc: "dp19") {
       ...result_and_indicator_fields
     }
   }
@@ -85,8 +101,12 @@ query results_counts {
         drr17_indicators_not_available
         drr17_indicators_not_met
         drr17_indicators_future
+
         dp18_results
         dp18_indicators
+
+        dp19_results
+        dp19_indicators
       }
     }
   }
@@ -127,6 +147,9 @@ fragment everything on Org {
   dp18: target_counts(doc: "dp18") {
     ...result_counts
   }
+  dp19: target_counts(doc: "dp19") {
+    ...result_counts
+  }
 }
 `;
 
@@ -151,16 +174,40 @@ describe("results data", function(){
       .fromPairs()
       .value();
 
-    const combine_docs_and_rekey = ({id, drr17, dp18}) => _.mapValues(
+    const combine_docs_and_rekey = (dept_query_response) => _.mapValues(
       {
-        subject_id: id,
-        ..._.chain(drr17)
-          .omit("indicators_dp")
-          .map( (value, key) => [`drr17_${key}`, value] )
-          .fromPairs()
+        subject_id: dept_query_response.id,
+        ..._.chain(drr_docs_to_test)
+          .flatMap(
+            drr_doc => _.chain(dept_query_response[drr_doc])
+              .omit("indicators_dp")
+              .map( (value, key) => [`${drr_doc}_${key}`, value] )
+              .fromPairs()
+              .value()
+          )
+          .reduce(
+            (all_drr_doc_counts, drr_doc_counts) => ({
+              ...all_drr_doc_counts,
+              ...drr_doc_counts,
+            }),
+            {}
+          )
           .value(),
-        dp18_results: dp18.results,
-        dp18_indicators: dp18.indicators_dp,
+        ..._.chain(dp_docs_to_test)
+          .flatMap(
+            dp_doc => ({
+              [`${dp_doc}_results`]: dept_query_response[dp_doc].results,
+              [`${dp_doc}_indicators`]:dept_query_response[dp_doc].indicators_dp,
+            })
+          )
+          .reduce(
+            (all_dp_doc_counts, dp_doc_counts) => ({
+              ...all_dp_doc_counts,
+              ...dp_doc_counts,
+            }),
+            {}
+          )
+          .value(),
       },
       (value) => value === 0 ? null : value 
     );
@@ -171,7 +218,7 @@ describe("results data", function(){
         (counts) => _.isEqual(counts_by_dept_code[counts.subject_id], counts)
       )
       .value();
-   
+
     return expect(result_counts_match).toEqual(true);
   });
 });

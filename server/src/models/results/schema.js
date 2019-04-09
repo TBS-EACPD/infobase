@@ -131,11 +131,13 @@ ${
     target_min: String
     target_max: String
     target_narrative: String
+    measure: String
 
     previous_year_target_type: String
     previous_year_target_min: String
     previous_year_target_max: String
     previous_year_target_narrative: String
+    previous_year_measure: String
 
     explanation: String
 
@@ -145,8 +147,6 @@ ${
     status_key: String
 
     methodology: String
-    measure: String
-    previous_year_measure: String
   }
 
   # this is a graphql anti-pattern but fits in the existing client stores nicely
