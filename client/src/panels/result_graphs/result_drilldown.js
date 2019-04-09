@@ -476,7 +476,7 @@ _.each(['program','dept','crso'], lvl => {
     level: lvl,
     footnotes: false,
     depends_on: ["programSpending", "programFtes"],
-    source: (subject) => get_source_links(["DRR"]),
+    source: (subject) => get_source_links(["DP","DRR"]),
     requires_result_counts: lvl === 'dept',
     requires_granular_result_counts: lvl !== 'dept',
     key: "explore_results",
