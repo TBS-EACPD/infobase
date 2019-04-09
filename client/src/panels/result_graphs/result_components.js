@@ -92,7 +92,6 @@ const IndicatorResultDisplay = ({
         <Format type={display_type_by_data_type[data_type]} content={+min} />
         <span>{` ${text_maker("and")} `}</span>
         <Format type={display_type_by_data_type[data_type]} content={+max} />
-        <span>{` (${text_maker("inclusive")})`}</span>
       </span> 
       {measure_display(measure)}
     </Fragment>

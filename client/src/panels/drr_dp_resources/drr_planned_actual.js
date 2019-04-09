@@ -6,6 +6,7 @@ import {
   PlannedActualTable,
   create_text_maker_component,
   TextPanel,
+  get_source_links,
 } from '../shared.js';
 
 import { ResultCounts } from '../result_graphs/results_common.js';
@@ -20,6 +21,7 @@ _.each(['dept','program','crso'], level => {
     //used as as a fail mechanism. If result counts aren't present, bail
     requires_result_counts: true,
     level,
+    source: (subject) => get_source_links(["DP","DRR"]),
     title: "drr_planned_actual_title",
     calculate(subject, info){
       if(subject.level === 'dept'){
@@ -74,7 +76,7 @@ _.each(['dept','program','crso'], level => {
 
     },
 
-    render({calculations}){
+    render({calculations, sources}){
       const { graph_args, subject, info } = calculations;
       
       const { 
@@ -89,7 +91,7 @@ _.each(['dept','program','crso'], level => {
 
 
       return (
-        <TextPanel title={text_maker("drr_planned_actual_title")} footnotes={footnotes}>
+        <TextPanel title={text_maker("drr_planned_actual_title")} footnotes={footnotes} sources={sources}>
           <TM 
             k={ `${subject.level}_drr_planned_actual_text` }
             args={{
