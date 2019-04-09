@@ -15,7 +15,10 @@ import { infograph_href_template } from '../../link_utils.js';
 const link_to_results_infograph = subj => infograph_href_template(subj, 'results');
 import { businessConstants } from '../../models/businessConstants';
 
-const { result_statuses } = businessConstants;
+const {
+  result_statuses,
+  result_simple_statuses,
+} = businessConstants;
 
 function pick_table(subject,type,doc){
   return Table.lookup(
@@ -126,4 +129,5 @@ export {
   isDeptWithoutResults,
   row_to_drr_status_counts,
   result_statuses,
+  result_simple_statuses,
 };

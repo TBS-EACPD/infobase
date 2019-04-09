@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
 import { util_components, general_utils } from '../shared.js';
-import { businessConstants } from '../../models/businessConstants.js';
 import { GlossaryEntry } from '../../models/glossary.js';
 import { get_static_url } from '../../request_utils.js';
 import { glossary_href } from '../../link_utils.js';
@@ -9,6 +8,9 @@ import {
   status_key_to_svg_name,
   ordered_status_keys,
   result_docs,
+  link_to_results_infograph,
+  result_statuses,
+  result_simple_statuses,
 } from './results_common.js';
 
 const dp_docs = _.chain(result_docs)
@@ -16,11 +18,11 @@ const dp_docs = _.chain(result_docs)
   .filter( doc => /dp/.test(doc) )
   .value();
 
-const { result_statuses, result_simple_statuses } = businessConstants;
 const { 
   Format,
   HeightClipper,
   FilterTable,
+  SortIndicators,
 } = util_components;
 const { sanitized_marked } = general_utils;
 
@@ -582,6 +584,142 @@ function indicators_period_span_str(indicators){
 
 const IndicatorDisplay = IndicatorList;
 
+class HorizontalStatusTable extends React.Component {
+  constructor(props){
+    super();
+    this.state = {
+      sort_by: _.keys(props.status_columns)[0],
+      descending: true,
+      show_all: false,
+    };
+  }
+
+  header_click(col_name){
+    this.setState({
+      sort_by: col_name,
+      descending: (
+        this.state.sort_by === col_name ?
+          !this.state.descending :
+          true
+      ),
+    });
+  }
+
+  render(){
+    const {
+      counts_by_dept,
+      gov_counts,
+      status_columns,
+      doc, 
+    } = this.props;
+    const { sort_by, descending, show_all } = this.state;
+
+    const status_column_keys = _.keys(status_columns);
+
+    const sorted_filtered_counts = _.chain(counts_by_dept)
+      .reject( ({counts}) => counts[`${doc}_total`] === 0)
+      .sortBy(row => row.counts[`${doc}_total`] )
+      .reverse()
+      .pipe( show_all ? _.identity : list => _.take(list, 15) )
+      .sortBy( 
+        sort_by ==='subject' ? 
+          ({subject}) => subject.name : 
+          row => row.counts[sort_by]
+      )
+      .pipe( descending ? arr => arr.reverse() : _.identity )
+      .value();
+
+    return (
+      <div style={{overflowX: "auto"}}>
+        <table className="table table-dark-blue table-dark-bordered no-total-row">
+          <caption className="sr-only">
+            <TM k="indicator_targets" />
+          </caption>
+          <thead>
+            <tr className="table-header">
+              <th 
+                className="center-text" 
+                role="col"
+                onClick={ () => this.header_click("subject") }
+              >
+                <TM k="org" />
+                <SortIndicators 
+                  asc={!descending && sort_by === "subject"} 
+                  desc={descending && sort_by === "subject"}
+                />
+              </th>
+              {
+                _.map(status_columns, (column_header, column_key) => {
+                  return (
+                    <th 
+                      key={column_key} 
+                      className="center-text" 
+                      role="col"
+                      onClick={ () => this.header_click(column_key) }
+                    >
+                      { column_header }
+                      <SortIndicators 
+                        asc={!descending && sort_by === column_key} 
+                        desc={descending && sort_by === column_key}
+                      />
+                    </th>
+                  );
+                })
+              }
+            </tr>
+          </thead>
+          <tbody>
+            {_.map(sorted_filtered_counts, ({ subject, counts }) => 
+              <tr key={subject.id}>
+                <td>
+                  { subject.level === "gov" && <TM k="goc_total"/> }
+                  { subject.level === "dept" &&
+                    <a href={link_to_results_infograph(subject)}>
+                      {subject.name}
+                    </a>
+                  }
+                </td> 
+  
+                {_.map(
+                  status_column_keys, 
+                  status => (
+                    <td key={status} className="right_number">
+                      {counts[status]}
+                    </td>
+                  )
+                )}
+              </tr>
+            )}
+            <tr>
+              <td>
+                <TM k="goc_total"/>
+              </td>
+              {_.map(
+                status_column_keys, 
+                status => (
+                  <td key={status} className="right_number">
+                    {gov_counts[status]}
+                  </td>
+                )
+              )}
+            </tr>
+          </tbody>
+        </table>
+        { !show_all && 
+          <div style={{textAlign: 'right'}}>
+            <button 
+              className="btn btn-ib-primary"
+              onClick={() => { this.setState({ show_all: true }) }}
+            >
+              <TM k="show_all_orgs" />
+            </button>
+          </div>
+        }
+      </div>
+    );
+  }
+}
+
 export {
   IndicatorDisplay,
   QuadrantDefList,
@@ -589,4 +727,5 @@ export {
   indicators_period_span_str,
   StatusIconTable,
   InlineStatusIconList,
+  HorizontalStatusTable,
 }; 

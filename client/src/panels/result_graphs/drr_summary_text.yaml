@@ -56,11 +56,6 @@ gov_drr_summary_org_table_text:
     Pour en savoir plus sur les résultats et les indicateurs de rendement d'une organisation, 
     il suffit de cliquer sur le nom de l'organisation pour être dirigé vers l'infographie où figurent ses résultats particuliers.
 
-
-show_all_orgs:
-  en: Show all organizations
-  fr: Montrer toutes les organisations
-
 results_icon_array_title:
   transform: [handlebars]
   en: |
