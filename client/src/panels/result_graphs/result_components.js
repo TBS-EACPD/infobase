@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { util_components } from '../shared.js';
+import { util_components, general_utils } from '../shared.js';
 import { businessConstants } from '../../models/businessConstants.js';
 import { GlossaryEntry } from '../../models/glossary.js';
 import { get_static_url } from '../../request_utils.js';
@@ -22,6 +22,7 @@ const {
   HeightClipper,
   FilterTable,
 } = util_components;
+const { sanitized_marked } = general_utils;
 
 import { TM, text_maker } from './result_text_provider.js';
 
@@ -395,9 +396,9 @@ const SingleIndicatorDisplay = ({indicator}) => {
             </dt>
             <dd>
               { window.is_a11y_mode ? 
-                indicator.methodology : 
+                <div dangerouslySetInnerHTML={{ __html: sanitized_marked(indicator.methodology) }} /> : 
                 <HeightClipper clipHeight={100}>
-                  {indicator.methodology}  
+                  <div dangerouslySetInnerHTML={{ __html: sanitized_marked(indicator.methodology) }} /> 
                 </HeightClipper>
               }
             </dd>
