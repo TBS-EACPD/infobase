@@ -617,8 +617,19 @@ class HorizontalStatusTable extends React.Component {
     const status_column_keys = _.keys(status_columns);
 
     const sorted_filtered_counts = _.chain(counts_by_dept)
-      .reject( ({counts}) => counts[`${doc}_total`] === 0)
-      .sortBy(row => row.counts[`${doc}_total`] )
+      .each( ({counts}) => {
+        counts[`${doc}_total`] = counts[`${doc}_total`] || _.reduce(
+          counts,
+          (total, count, count_key) => total + (
+            _.startsWith(count_key, doc) ?
+            count :
+            0
+          ),
+          0,
+        )
+      })
+      .reject( ({counts}) => counts[`${doc}_total`] === 0 )
+      .sortBy( ({counts}) => counts[`${doc}_total`] )
       .reverse()
       .pipe( show_all ? _.identity : list => _.take(list, 15) )
       .sortBy( 
