@@ -244,8 +244,9 @@ class SingleSubjExplorer extends React.Component {
       query,
     } = this.state;
 
+    // Weird padding and margins here to get the spinner centered well and cover the "see the data" text while loading
     let inner_content = (
-      <div style={{ paddingTop: "100px", marginBottom: "-40px" }}>
+      <div style={{ paddingTop: "100px", paddingBottom: "30px", marginBottom: "-70px" }}>
         <SpinnerWrapper config_name={"sub_route"} />
       </div>
     );
