@@ -127,7 +127,7 @@ const IndicatorResultDisplay = ({
         );
       }
   
-      case 'TBD': {
+      case 'tbd': {
         return <TM k="tbd_result_text" />;
       }
   
