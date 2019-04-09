@@ -73,6 +73,7 @@ export const PplSharePie = ({graph_args, label_col_header, sort_func}) => {
           'left': 50,
           'bottom': 40,
         }}
+        include_percent = {false}
         text_formatter = {formats.percentage1}
       />
     </div>

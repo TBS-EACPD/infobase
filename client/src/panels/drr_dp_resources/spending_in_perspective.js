@@ -129,6 +129,7 @@ class SpendInTagPerspective extends React.Component {
             <NivoResponsivePie
               data = {data}
               colors={infobaseCategory10Colors}
+              total = {d3.sum( data, _.property('value') )}
             />
           </div>
           {legend_display}

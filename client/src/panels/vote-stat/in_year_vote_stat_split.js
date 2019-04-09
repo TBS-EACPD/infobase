@@ -6,7 +6,9 @@ import {
   Col,
   NivoResponsivePie,
   infobaseCategory10Colors,
+  formats,
 } from "../shared";
+
 
 
 const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,footnotes,sources}) => {
@@ -36,6 +38,7 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
           <div style={{height: "400px"}}>
             <NivoResponsivePie
               data = {data}
+              total = {d3.sum( data, _.property('value') )}
               colors = {infobaseCategory10Colors}
               legends = {[
                 {

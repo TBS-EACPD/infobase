@@ -210,7 +210,7 @@ class HistTPTypes extends React.Component {
           <NivoResponsiveLine
             enableArea = {true}
             data = {expenditure_data}
-            colors={infobaseCategory10Colors}
+            colorBy={d => colors(d.id)}
             stacked = {true}
           />
         </div>

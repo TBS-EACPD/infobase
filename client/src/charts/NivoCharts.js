@@ -33,6 +33,24 @@ const default_tooltip = (tooltip_items, formatter) => (
   </div>
 );
 
+const percent_value_tooltip = (tooltip_items, formatter, total) => (
+  <div>
+    <table>
+      <tbody>{ tooltip_items.map( d =>(
+        <tr key = {d.id}>
+          <td style = {{padding: '3px 5px'}}>
+            <div style = {{height: '12px', width: '12px', backgroundColor: d.color}}/>
+          </td>
+          <td style = {{padding: '3px 5px'}}>{d.id}</td>
+          <td style = {{padding: '3px 5px'}} dangerouslySetInnerHTML = {{__html: formatter(d.value)}}/>
+          <td style = {{padding: '3px 5px'}} dangerouslySetInnerHTML = {{__html: formats.percentage1(d.value/total)}}/>
+        </tr>
+      ))}
+      </tbody>
+    </table>
+  </div>
+)
+
 const general_default_props = {
   tooltip: (d, tooltip_formatter) => default_tooltip(d, tooltip_formatter),
   is_money: true,
@@ -54,6 +72,8 @@ export class NivoResponsivePie extends React.Component{
       enableRadialLabels,
       enableSlicesLabels,
       tooltip,
+      include_percent,
+      total,
       margin,
       text_formatter,
       colorBy,
@@ -74,7 +94,9 @@ export class NivoResponsivePie extends React.Component{
           legends,
           colorBy,
         }}
-        tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
+        tooltip={ (d) => include_percent? 
+          percent_value_tooltip( [d], get_formatter(is_money, text_formatter, false), total) :
+          tooltip([d], get_formatter(is_money, text_formatter, false)) }
         innerRadius={0.5}
         borderWidth={1}
         borderColor="inherit:darker(0.2)"
@@ -94,6 +116,8 @@ NivoResponsivePie.defaultProps = {
     bottom: 60,
     left: 50,
   },
+
+  include_percent: true,
 
   enableRadialLabels: false,
   enableSlicesLabels: false,

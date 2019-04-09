@@ -32,6 +32,7 @@ const render_w_options = ({text_key,graph_col,text_col}) => ({calculations, sour
             <NivoResponsivePie
               data = {data}
               colors = {infobaseCategory10Colors}
+              total = {d3.sum( data, _.property('value') )}
               legends = {[
                 {
                   anchor: "bottom",

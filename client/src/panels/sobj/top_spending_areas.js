@@ -133,6 +133,7 @@ const render_w_options = ({text_key}) => ({calculations, footnotes, sources}) =>
                 "right": 80,
                 "left": 50,
               }}
+              total = {d3.sum( graph_data, _.property('value') )}
               colors = {infobaseCategory10Colors}
               legends = {[
                 {
