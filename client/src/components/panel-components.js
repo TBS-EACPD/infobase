@@ -10,6 +10,7 @@ import { Details } from '../components/Details.js';
 import { get_static_url } from '../request_utils.js';
 import { panel_href_template } from '../infographic/routes.js';
 import { panel_context } from '../infographic/context.js';
+import './panel-components.scss';
 
 
 const { TM } = create_text_maker_component(text);
