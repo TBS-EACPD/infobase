@@ -14,7 +14,10 @@ import {
 import { DeptSearch } from '../../util_components.js';
 
 
-import { ResultCounts } from './results_common.js';
+import {
+  ResultCounts,
+  result_docs,
+} from './results_common.js';
 
 const get_dp_rpb_links = () => ({
   spend: rpb_link({
@@ -32,10 +35,10 @@ const get_dp_rpb_links = () => ({
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const ResultsIntroPanel = ({counts}) => <Fragment>
+const ResultsIntroPanel = ({counts, depts_with_dps}) => <Fragment>
   <div className="frow middle-xs">
     <div className="fcol-md-7 medium_panel_text">
-      <TM k="gov_dp_text" args={counts} />
+      <TM k="gov_dp_text" args={{...counts, depts_with_dps}} />
     </div>
     {!window.is_a11y_mode &&
       <div className="fcol-md-5">
@@ -81,12 +84,31 @@ new PanelGraph({
   level: 'gov',
   requires_result_counts: true,
   key: "gov_dp",
-  calculate: _.constant(true),
+  calculate: () => {
+    const latests_dp_doc = _.chain(result_docs)
+      .keys()
+      .filter( doc_key => /dp/.test(doc_key) )
+      .last()
+      .value();
+
+    const depts_with_dps = _.filter( 
+      ResultCounts.get_all_dept_counts(),
+      counts => counts[`${latests_dp_doc}_results`]
+    ).length;
+
+    return { depts_with_dps };
+  },
   footnotes: false,
   source: (subject) => get_source_links(["DP"]),
-  render({sources}){
+  render({ calculations, sources}){
+    const {
+      graph_args: {
+        depts_with_dps,
+      },
+    } = calculations;
     const counts = ResultCounts.get_gov_counts();
     const { spend, ftes } = get_dp_rpb_links();
+
     return (
       <Panel
         title={text_maker("gov_dp_summary_title")}
@@ -95,6 +117,7 @@ new PanelGraph({
       >
         <ResultsIntroPanel 
           counts={counts}
+          depts_with_dps={depts_with_dps}
           spend_link={spend}
           fte_link={ftes}
         />
