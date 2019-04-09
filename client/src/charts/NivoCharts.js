@@ -251,6 +251,7 @@ export class NivoResponsiveLine extends React.Component {
     return (
       <ResponsiveLine
         {...{
+          data,
           margin,
           enableGridX,
           enableGridY,
@@ -260,7 +261,7 @@ export class NivoResponsiveLine extends React.Component {
           theme,
           enableDotLabel,
         }}
-        data = {data.reverse()}
+        // data = {data.reverse()}
         tooltip={ (d) => tooltip( d, get_formatter(is_money, text_formatter, false) ) }
         yScale={ 
           {

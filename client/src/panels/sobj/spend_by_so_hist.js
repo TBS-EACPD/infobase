@@ -142,7 +142,7 @@ class SobjLine extends React.Component {
         </div>
         <div className="fcol-md-8" style={{height: '500px'}}>
           <NivoResponsiveLine
-            data = {spending_data}
+            data = {spending_data.reverse()}
             margin = {{
               top: 10,
               right: 30,
