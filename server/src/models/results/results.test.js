@@ -197,7 +197,7 @@ describe("results data", function(){
           .flatMap(
             dp_doc => ({
               [`${dp_doc}_results`]: dept_query_response[dp_doc].results,
-              [`${dp_doc}_indicators`]:dept_query_response[dp_doc].indicators_dp,
+              [`${dp_doc}_indicators`]: dept_query_response[dp_doc].indicators_dp,
             })
           )
           .reduce(
