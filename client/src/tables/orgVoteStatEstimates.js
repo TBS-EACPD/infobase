@@ -4,8 +4,7 @@
 import text from './orgVoteStatEstimates.yaml';
 import * as FORMAT from '../core/format';
 import { 
-  vote_stat_dimension, 
-  major_vote_stat, 
+  vote_stat_dimension,
   trivial_text_maker, 
   major_vote_big_stat, 
   Statistics, 
@@ -240,11 +239,6 @@ export default {
       title_key: "voted_stat",
       include_in_report_builder: true,
       filter_func: vote_stat_dimension,
-    },
-    {
-      title_key: "major_voted_stat",
-      include_in_report_builder: true,
-      filter_func: major_vote_stat,
     },
     {
       title_key: "major_voted_big_stat",

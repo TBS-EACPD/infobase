@@ -273,7 +273,7 @@ const estimates_post_traversal_rule_set = (node,data_type, presentation_scheme) 
     if ( node.data.is("vs_type") ) {
       node.data.rpb_link = rpb_link( 
         _.extend({}, default_rpb_link_options, {
-          dimension: node.data.id === 999 ? "voted_stat" : "major_voted_stat",
+          dimension: "voted_stat",
           filter: node.data.id === 999 ? text_maker("stat") : node.data.name,
         }) 
       );
