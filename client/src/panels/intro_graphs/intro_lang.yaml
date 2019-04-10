@@ -254,5 +254,5 @@ late_dps_warning_crso:
 
 late_dps_warning_gov:
   transform: [handlebars]
-  en: The count of results and indicators does not include indicators for {{late_dp_departments}}. Information will be updated as soon as the data is submitted.
-  fr: Le nombre de résultats et d’indicateurs n’inclus pas les indicateurs pour {{late_dp_departments}}. L’information sera mise-à-jour dès que les données auront été soumises.
+  en: The count of results and indicators does not include indicators for {{array_to_grammatical_list late_dp_department_names}}. Information will be updated as soon as the data is submitted.
+  fr: Le nombre de résultats et d’indicateurs n’inclus pas les indicateurs pour {{array_to_grammatical_list late_dp_department_names}}. L’information sera mise-à-jour dès que les données auront été soumises.

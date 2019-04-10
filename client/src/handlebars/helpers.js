@@ -624,10 +624,33 @@ Handlebars.registerHelper("divide",function(numerator, denominator){
   return numerator/denominator;
 });
 
-Handlebars.registerHelper("ext_link",function(display,url){
+Handlebars.registerHelper("ext_link",function(display, url){
   return new Handlebars.SafeString(
     `<a target="_blank" rel="noopener noreferrer" href="${url}">${display}</a>`
   );
-})
+});
 
+Handlebars.registerHelper('array_to_grammatical_list', function(options) {
+  const and_et = {
+    en: "and",
+    fr: "et",
+  }[window.lang];
 
+  const item_array = _.chain(options)
+    .values()
+    .flatten()
+    .value()
+
+  return item_array.length === 1 ?
+    item_array[0]:
+    _.chain(item_array)
+      .take(item_array.length-1)
+      .reduce(
+        (list_fragment, item) => `${list_fragment}${item}, `,
+        ''
+      )
+      .thru(
+        list_fragment => `${list_fragment}${and_et} ${_.last(item_array)}`
+      )
+      .value();
+});

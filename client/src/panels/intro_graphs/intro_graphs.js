@@ -189,10 +189,10 @@ _.each(['gov', 'dept'], lvl => {
 
 
 const late_dp_departments = [
-  129, // Crown-Indigenous Relations and Northern Affairs Canada
-  348, // Department of Indigenous Services Canada
-  128, // Employment and Social Development Canada
-  237, // Infrastructure Canada
+  //129, // Crown-Indigenous Relations and Northern Affairs Canada
+  //348, // Department of Indigenous Services Canada
+  //128, // Employment and Social Development Canada
+  //237, // Infrastructure Canada
 ];
 _.each(['dept','crso','program'], lvl => {
   new PanelGraph({
@@ -224,13 +224,16 @@ new PanelGraph({
   source: false,
   info_deps: [],
   key: "late_dps_warning",
-  calculate: () => !_.isEmpty(late_dp_departments) && _.chain(late_dp_departments)
-    .map( (org_id) => Dept.lookup(org_id).fancy_name )
-    .value(),
-  render() {
+  calculate: () => !_.isEmpty(late_dp_departments) && {
+    late_dp_department_names: _.map(
+      late_dp_departments,
+      (org_id) => Dept.lookup(org_id).fancy_name
+    ),
+  },
+  render({ calculations: { graph_args: late_dp_department_names } }) {
     return (
       <div className="alert alert-info alert-no-symbol alert--is-bordered large_panel_text">
-        <TM k="late_dps_warning_gov" args={{late_dp_departments}}/>
+        <TM k="late_dps_warning_gov" args={{late_dp_department_names}}/>
       </div>
     );
   },
