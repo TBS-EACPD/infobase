@@ -34,7 +34,7 @@ const featured_content_items = _.compact([
   },
   {
     text_key: 'quick_link_DP_1920',
-    href: '#orgs/gov/gov/infograph/results',
+    href: "#orgs/gov/gov/infograph/results/~(panel_key~'gov_dp)",
     is_new: true,
   },
   {
@@ -62,7 +62,7 @@ const featured_content_items = _.compact([
   },
   {
     text_key: 'quick_link_DRR_1718',
-    href: '#orgs/gov/gov/infograph/results',
+    href: "#orgs/gov/gov/infograph/results/~(panel_key~'gov_drr)",
   },
   {
     text_key: 'quick_link_auth_and_exp',
