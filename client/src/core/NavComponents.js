@@ -110,7 +110,7 @@ const HeaderBanner = withRouter(
 
       const banner_container = document.getElementById("banner-container");
       
-      const should_show_banner = !_.isFunction(route_filter) || route_filter(match, history);
+      const should_show_banner = _.isFunction(route_filter) && route_filter(match, history);
 
       if (banner_container){
         return ReactDOM.createPortal(
@@ -122,11 +122,6 @@ const HeaderBanner = withRouter(
           </div>,
           banner_container
         );
-      } else {
-        // This shouldn't happen, unless someone has cached an old version of the index html or some other code has mangled our header html
-        // ... leaving this in as a quiet fail over though, because I suspect, immediately following the update, many users had cached index html files 
-        // (??? the files are served with no-cache, but I guess some sys admins may be forcing all html to cache as a messy optimization)
-        return null;
       }
     }
   }
@@ -155,7 +150,30 @@ export class StandardRouteContainer extends React.Component {
         <DocumentTitle title_str={title} />
         <DocumentDescription description_str={description} />
         <BreadCrumbs crumbs={breadcrumbs} />
-        <HeaderBanner route_filter={_.constant(false)} />
+        <HeaderBanner 
+          route_filter={({path}) => _.includes(["/","/start"], path)}
+          banner_class="alert-info center-text"
+          banner_content={{
+            en: (
+              <div>
+                {"The 2019-20 Departmental Plan were tabled on TODO-DATE."}
+                <br/>
+                <a href="#orgs/gov/gov/infograph/results/~(panel_key~'gov_dp)">
+                  {"Explore the data to see what results departments and agencies are seeking to achieve."}
+                </a>
+              </div>
+            ),
+            fr: (
+              <div>
+                {"Les plans ministériel 2019-2020 ont été déposés au Parlement le TODO-DATE."}
+                <br/>
+                <a href="#orgs/gov/gov/infograph/results/~(panel_key~'gov_dp)">
+                  {"Explorer les données pour voir les résultats que les ministères et organismes cherchent à atteindre."}
+                </a>
+              </div>
+            ),
+          }[window.lang]}
+        />
         <AnalyticsSynchronizer route_key={route_key} />
         { shouldSyncLang !== false &&
           <LangSynchronizer /> 
