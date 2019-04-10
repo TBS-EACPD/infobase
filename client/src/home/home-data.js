@@ -62,7 +62,6 @@ const featured_content_items = _.compact([
   !window.is_a11y_mode && {
     text_key: "treemap_home_title",
     href: "#treemap",
-    is_new: true,
   },
   {
     text_key: 'quick_link_DRR_1718',
