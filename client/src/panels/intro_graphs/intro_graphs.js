@@ -1,4 +1,4 @@
-import { PanelGraph, util_components } from '../shared';
+import { PanelGraph, util_components, Subject } from '../shared';
 import { text_maker, TM } from './intro_graph_text_provider.js';
 import './simplographic.js';
 import './gov_related.js';
@@ -11,6 +11,7 @@ import './profile_panels.js';
 import MediaQuery from 'react-responsive';
 import classNames from 'classnames';
 
+const { Dept } = Subject;
 
 const {
   AutoAccordion,
@@ -184,5 +185,53 @@ _.each(['gov', 'dept'], lvl => {
       </div>
     ),
   });
+});
 
+
+const late_dp_departments = [
+  129, // Crown-Indigenous Relations and Northern Affairs Canada
+  348, // Department of Indigenous Services Canada
+  128, // Employment and Social Development Canada
+  237, // Infrastructure Canada
+];
+_.each(['dept','crso','program'], lvl => {
+  new PanelGraph({
+    level: lvl,
+    static: true,
+    footnotes: false,
+    source: false,
+    info_deps: [],
+    key: "late_dps_warning",
+    calculate: (subject) => _.includes(
+      late_dp_departments, 
+      lvl === 'dept' ?
+        subject.id :
+        subject.dept.id
+    ),
+    render() {
+      return (
+        <div className="alert alert-info alert-no-symbol alert--is-bordered large_panel_text">
+          <TM k={`late_dps_warning_${lvl}`} />
+        </div>
+      );
+    },
+  });
+});
+new PanelGraph({
+  level: "gov",
+  static: true,
+  footnotes: false,
+  source: false,
+  info_deps: [],
+  key: "late_dps_warning",
+  calculate: () => !_.isEmpty(late_dp_departments) && _.chain(late_dp_departments)
+    .map( (org_id) => Dept.lookup(org_id).fancy_name )
+    .value(),
+  render() {
+    return (
+      <div className="alert alert-info alert-no-symbol alert--is-bordered large_panel_text">
+        <TM k="late_dps_warning_gov" args={{late_dp_departments}}/>
+      </div>
+    );
+  },
 });

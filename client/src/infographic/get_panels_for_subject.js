@@ -99,6 +99,7 @@ const get_gov_panels = subject => ({
   people: get_people_panels(subject),
   results: [
     "results_intro",
+    'late_dps_warning',
     "gov_dp",
     "gov_drr",
   ],
@@ -131,6 +132,7 @@ const get_dept_panels = subject => ({
   people: _.includes(subject.tables, 'orgEmployeeType') && get_people_panels(subject),
   results: subject.has_results && [
     "results_intro",
+    'late_dps_warning',
     "drr_summary",
     "explore_results",
   ],
@@ -165,6 +167,7 @@ const get_program_panels = subject => ({
   ],
   results: !subject.is_internal_service && subject.has_results && [
     "results_intro",
+    'late_dps_warning',
     "drr_summary",
     "explore_results",
   ],
@@ -192,6 +195,7 @@ const get_crso_panels = subject => ({
   ],
   results: !subject.is_internal_service && subject.has_results && [
     "results_intro",
+    'late_dps_warning',
     "explore_results",
   ],
   related: [

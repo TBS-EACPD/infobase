@@ -241,3 +241,18 @@ what_are_ftes_a:
     Full-time equivalent (FTE) measures the extent to which an employee represents a full person-year charge against a departmental budget. FTEs are calculated as a ratio of assigned hours of work to scheduled hours of work, as set out in collective agreements. For term and seasonal employees, the FTE calculation is also adjusted for the proportion of paid weeks in a year.
   fr: |
     Les équivalents temps plein (ETP) sont la mesure utilisée pour représenter une année-personne complète d'un employé dans le budget ministériel. Les ETP sont calculés en fonction du coefficient des heures de travail assignées et des heures de travail prescrites, tel que stipulé dans les conventions collectives. Dans le cas des employés nommés pour une période déterminée et des employés saisonniers, le calcul des ETP est rajusté en fonction de la proportion des semaines payées dans une année.
+
+late_dps_warning_dept:
+  en: The 2019-20 Departmental Plan data is not available for this organization. Information will be updated as soon as the data is submitted.
+  fr: L'information des plans ministériel 2019-2020 n’est pas disponible pour cette organisation.  L’information sera mise-à-jour dès que les données auront été soumises.
+late_dps_warning_program:
+  en: The 2019-20 Departmental Plan data is not available for this Program. Information will be updated as soon as the data is submitted.
+  fr: L'information des plans ministériel 2019-2020 n’est pas disponible pour ce programme.  L’information sera mise-à-jour dès que les données auront été soumises.
+late_dps_warning_crso:
+  en: The 2019-20 Departmental Plan data is not available for this Core Responsibility. Information will be updated as soon as the data is submitted.
+  fr: L'information des plans ministériel 2019-2020 n’est pas disponible pour cette responsabilité essentielle.  L’information sera mise-à-jour dès que les données auront été soumises.
+
+late_dps_warning_gov:
+  transform: [handlebars]
+  en: The count of results and indicators does not include indicators for {{late_dp_departments}}. Information will be updated as soon as the data is submitted.
+  fr: Le nombre de résultats et d’indicateurs n’inclus pas les indicateurs pour {{late_dp_departments}}. L’information sera mise-à-jour dès que les données auront été soumises.
