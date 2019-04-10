@@ -189,10 +189,11 @@ _.each(['gov', 'dept'], lvl => {
 
 
 const late_dp_departments = [
-  //129, // Crown-Indigenous Relations and Northern Affairs Canada
   //348, // Department of Indigenous Services Canada
   //128, // Employment and Social Development Canada
   //237, // Infrastructure Canada
+  //350, // Leaders’ Debates Commission
+  //302, // Security Intelligence Review Committee
 ];
 _.each(['dept','crso','program'], lvl => {
   new PanelGraph({
