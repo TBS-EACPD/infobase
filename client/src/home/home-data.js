@@ -34,25 +34,29 @@ const featured_content_items = _.compact([
   },
   {
     text_key: 'quick_link_DP_1920',
-    href: "#orgs/gov/gov/infograph/results/~(panel_key~'gov_dp)",
+    href: "#orgs/gov/gov/infograph/results",
     is_new: true,
   },
   {
     text_key: 'quick_link_planned_spending_by_program',
-    href: rpb_link({ 
-      table: 'programSpending', 
-      columns: ["{{planning_year_1}}","{{planning_year_2}}","{{planning_year_3}}"],
-      mode: 'details',
-    }),
+    href: window.is_a11y_mode ? 
+      rpb_link({ 
+        table: 'programSpending', 
+        columns: ["{{planning_year_1}}","{{planning_year_2}}","{{planning_year_3}}"],
+        mode: 'details',
+      }) :
+      "#treemap/drf/spending/All/planning_year_1",
     is_new: true,
   },
   {
     text_key: 'quick_link_planned_ftes_by_program',
-    href: rpb_link({ 
-      table: 'programFtes', 
-      columns: ["{{planning_year_1}}","{{planning_year_2}}","{{planning_year_3}}"],
-      mode: 'details',
-    }),
+    href: window.is_a11y_mode ?
+      rpb_link({ 
+        table: 'programFtes', 
+        columns: ["{{planning_year_1}}","{{planning_year_2}}","{{planning_year_3}}"],
+        mode: 'details',
+      }) :
+      "#treemap/drf_ftes/ftes/All/planning_year_1",
     is_new: true,
   },
   !window.is_a11y_mode && {

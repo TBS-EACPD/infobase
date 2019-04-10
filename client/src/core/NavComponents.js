@@ -158,7 +158,7 @@ export class StandardRouteContainer extends React.Component {
               <div>
                 {"The 2019-20 Departmental Plan were tabled on TODO-DATE."}
                 <br/>
-                <a href="#orgs/gov/gov/infograph/results/~(panel_key~'gov_dp)">
+                <a href="#orgs/gov/gov/infograph/results">
                   {"Explore the data to see what results departments and agencies are seeking to achieve."}
                 </a>
               </div>
@@ -167,7 +167,7 @@ export class StandardRouteContainer extends React.Component {
               <div>
                 {"Les plans ministériel 2019-2020 ont été déposés au Parlement le TODO-DATE."}
                 <br/>
-                <a href="#orgs/gov/gov/infograph/results/~(panel_key~'gov_dp)">
+                <a href="#orgs/gov/gov/infograph/results">
                   {"Explorer les données pour voir les résultats que les ministères et organismes cherchent à atteindre."}
                 </a>
               </div>
