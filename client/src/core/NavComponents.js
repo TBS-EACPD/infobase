@@ -150,30 +150,7 @@ export class StandardRouteContainer extends React.Component {
         <DocumentTitle title_str={title} />
         <DocumentDescription description_str={description} />
         <BreadCrumbs crumbs={breadcrumbs} />
-        <HeaderBanner 
-          route_filter={({path}) => _.includes(["/","/start"], path)}
-          banner_class="alert-info center-text"
-          banner_content={{
-            en: (
-              <div>
-                {"The 2019-20 Departmental Plans were tabled on TODO-DATE."}
-                <br/>
-                <a href="#orgs/gov/gov/infograph/results">
-                  {"Explore the data to see what results departments and agencies are seeking to achieve."}
-                </a>
-              </div>
-            ),
-            fr: (
-              <div>
-                {"Les plans ministériel 2019-2020 ont été déposés au Parlement le TODO-DATE."}
-                <br/>
-                <a href="#orgs/gov/gov/infograph/results">
-                  {"Explorer les données pour voir les résultats que les ministères et organismes cherchent à atteindre."}
-                </a>
-              </div>
-            ),
-          }[window.lang]}
-        />
+        <HeaderBanner route_filter={_.constant(false)} />
         <AnalyticsSynchronizer route_key={route_key} />
         { shouldSyncLang !== false &&
           <LangSynchronizer /> 
