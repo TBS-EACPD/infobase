@@ -72,9 +72,9 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
       (data, index) => ({
         "label": keys[index],
         [keys[index]]: data,
-      })
+      }) 
     );
-
+ 
     content = (
       <div style={{ height: "450px" }} >
         <NivoResponsiveBar
