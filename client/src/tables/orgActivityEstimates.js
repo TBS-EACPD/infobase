@@ -24,21 +24,21 @@ export default {
     "AUTH",
     "EST_PROC",
     "PLANNED_EXP_TAG",
+    "CR",
   ],
 
   source: ["ESTIMATES"],
 
   "name": {
     "en": "Tabled Estimates by Core Responsibility",
-    "fr": "Budgets déposés TODO TODO",
+    "fr": "Budgets déposés par responsabilité essentielle",
   },
 
   "title": {
     "en": "Tabled Estimates by Core Responsibility ($000)",
-    "fr": "Budgets déposés TODO TODO (en milliers de dollars)",
+    "fr": "Budgets déposés par responsabilité essentielle (en milliers de dollars)",
   },
 
-  // TODO: check if this is still right--do we need to recategorize footnotes?
   "footnote-topics": {
     "group": ["mains_text"],
     "table": ["~main_text","mains_text_gov"],
