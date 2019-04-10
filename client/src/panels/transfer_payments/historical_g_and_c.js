@@ -206,7 +206,7 @@ class HistTPTypes extends React.Component {
           />  
         </div>
 
-        <div style ={{height: '400px'}}>
+        <div style ={{height: '400px'}} aria-hidden = {true}>
           <NivoResponsiveLine
             enableArea = {true}
             data = {expenditure_data}
@@ -357,7 +357,7 @@ class DetailedHistTPItems extends React.Component {
             />  
           </div>
         </div>
-        <div className="fcol-md-8" style={{height: '400px'}}>
+        <div className="fcol-md-8" style={{height: '400px'}} aria-hidden = {true}>
           <NivoResponsiveLine
             data = {detail_expend_data}
             margin = {{

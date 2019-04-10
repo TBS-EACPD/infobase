@@ -143,7 +143,7 @@ new PanelGraph({
             />
           </div>
         </div>
-        <div className="fcol-md-9" style = {{height: '300px'}}>
+        <div className="fcol-md-9" style = {{height: '300px'}} aria-hidden = {true}>
           <NivoResponsiveBar
             data = {bar_data}
             indexBy = "date"

@@ -28,7 +28,7 @@ const render_w_options = ({text_key,graph_col,text_col}) => ({calculations, sour
       </Col>
       { !window.is_a11y_mode &&
         <Col isGraph size={graph_col}>
-          <div style = {{height: '400px'}}>
+          <div style = {{height: '400px'}} aria-hidden = {true}>
             <NivoResponsivePie
               data = {data}
               colors = {infobaseCategory10Colors}

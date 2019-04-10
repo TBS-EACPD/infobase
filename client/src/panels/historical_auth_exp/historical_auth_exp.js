@@ -100,7 +100,7 @@ const render = function({calculations, footnotes, sources}) {
       }))
 
     graph_content = 
-      <div style={{height: 400}}>
+      <div style={{height: 400}} aria-hidden = {true}>
         {
           <NivoResponsiveBar
             data = {data_exp}

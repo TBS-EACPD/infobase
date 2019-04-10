@@ -72,7 +72,7 @@ function render({calculations, footnotes, sources}) {
   } else {
     
     graph_content = (
-      <div style = {{height: '400px'}}>
+      <div style = {{height: '400px'}} aria-hidden = {true}>
         <NivoResponsiveBar
           data = {spend_rev_data}
           keys = {ticks}

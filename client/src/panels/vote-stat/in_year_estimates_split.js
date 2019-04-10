@@ -76,7 +76,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
     );
  
     content = (
-      <div style={{ height: "450px" }} >
+      <div style={{ height: "450px" }} aria-hidden = {true}>
         <NivoResponsiveBar
           data = {estimate_data}
           keys = {keys}

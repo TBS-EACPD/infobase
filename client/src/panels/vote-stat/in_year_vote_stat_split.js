@@ -35,7 +35,7 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
       </Col>
       {!window.is_a11y_mode &&
         <Col isGraph size={graph_col}>
-          <div style={{height: "400px"}}>
+          <div style={{height: "400px"}} aria-hidden = {true}>
             <NivoResponsivePie
               data = {data}
               total = {d3.sum( data, _.property('value') )}

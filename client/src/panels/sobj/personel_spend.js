@@ -66,7 +66,7 @@ new PanelGraph({
           })),
       }]
       
-      graph_content = <div style={{height: 400}}>
+      graph_content = <div style={{height: 400}} aria-hidden = {true}>
         <NivoResponsiveLine
           data = {personnel_data()}
           margin = {{

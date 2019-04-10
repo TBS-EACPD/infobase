@@ -103,7 +103,7 @@ const Chart = ({
   has_hist,
   has_planned,
 }) => use_line ? (
-  <div style ={{height: '230px'}}>
+  <div style ={{height: '230px'}} aria-hidden = {true}>
     <NivoResponsiveLine
       data = {welcome_data_line(data, has_planned, has_hist)}
       max = {_.max(data)*1.05}
@@ -138,7 +138,7 @@ const Chart = ({
 ) : (
 //keys have to have the empty key in the array 
 //or else it won't display the bar for negative values
-<div style = {{height: '230px'}}>
+<div style = {{height: '230px'}} aria-hidden = {true}>
   <NivoResponsiveBar
     data = {welcome_data_bar(data, has_planned, has_hist)}
     keys = {["0"]}

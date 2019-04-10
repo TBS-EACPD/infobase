@@ -302,7 +302,7 @@ class HistoricalProgramBars extends React.Component {
             />
           </div>
         </div>
-        <div className="fcol-md-8" style={{ height: '400px' }}>
+        <div className="fcol-md-8" style={{ height: '400px' }} aria-hidden = {true}>
           <NivoResponsiveBar
             data = {data_formatter}
             keys = {Object.keys(graph_data)}

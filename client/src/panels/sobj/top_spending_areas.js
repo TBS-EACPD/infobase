@@ -124,7 +124,7 @@ const render_w_options = ({text_key}) => ({calculations, footnotes, sources}) =>
               data_col_headers: [ `${run_template(_.last(std_years))} ${text_maker("spending")}` ],
             }}
           /> : 
-          <div style = {{height: '450px'}}>
+          <div style = {{height: '450px'}} aria-hidden = {true}>
             <NivoResponsivePie
               data = {graph_data}
               margin = {{

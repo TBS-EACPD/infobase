@@ -72,7 +72,7 @@ const info_deps_by_level = {
           </Col>
           { !window.is_a11y_mode &&
              <Col size={8} isGraph>
-               <div style ={{height: '400px'}}>
+               <div style ={{height: '400px'}} aria-hidden = {true}>
                  <NivoResponsiveLine
                    data = { data_formatter()}
                    colors = "#335075"
