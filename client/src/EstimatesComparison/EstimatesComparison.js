@@ -304,6 +304,10 @@ class EstimatesExplorer extends React.Component {
         <div className="medium_panel_text mrgn-tp-lg">
           <TM k="diff_view_top_text" args={{current_doc_is_mains, current_sups_letter}} />
         </div>
+        <h3><TM k="general_info" /></h3>
+        <div className="medium_panel_text">
+          <TM k="estimates_expl" />
+        </div>
         <div 
           style={{
             marginBottom: "15px",
