@@ -3,6 +3,7 @@ import _ from "lodash";
 import { budget_years } from './budget_measures_common.js';
 
 import { get_standard_csv_file_rows } from '../load_utils.js';
+import { rejects } from "assert";
 
 const clean_budget_measure_description = (description) => {
   if ( !_.isNull(description) ){
@@ -16,15 +17,17 @@ const clean_budget_measure_description = (description) => {
   }
 }
 
-export default async function({models, loaders}){
+export default async function({models}){
   const { 
     BudgetMeasures,
     SpecialFundingSubject,
-
-    Org,
   } = models;
 
-  const { org_id_loader } = loaders;
+  const igoc_rows = get_standard_csv_file_rows(`igoc.csv`);
+  const dept_codes_by_org_ids = _.chain(igoc_rows)
+    .map( ({org_id, dept_code}) => [org_id, dept_code])
+    .fromPairs()
+    .value();
 
   const special_funding_subjects = [
     {
@@ -50,7 +53,7 @@ export default async function({models, loaders}){
     ..._.map( budget_years, async (budget_year) => {
       const budget_funds = get_standard_csv_file_rows(`budget_${budget_year}_measure_data.csv`);
       const budget_lookups = get_standard_csv_file_rows(`budget_${budget_year}_measure_lookups.csv`);
-    
+
       const {
         true: measure_lookups,
         false: submeasure_lookups,
@@ -67,23 +70,44 @@ export default async function({models, loaders}){
         ({measure_id}) => !_.includes(submeasure_ids, measure_id)
       );
     
-      const submeasure_program_allocations = [];
-      await Promise.all(
-        _.chain(submeasure_funds)
-          .filter( ({allocated}) => +allocated !== 0 )
-          .flatMap(
-            async ({measure_id, org_id, funding, allocated, withheld, remaining, ...program_columns}) => {
-              const parent_org = await org_id_loader.load(org_id);
+      const submeasure_program_allocations = _.chain(submeasure_funds)
+        .filter( ({allocated}) => +allocated !== 0 )
+        .map(
+          ({measure_id, org_id, funding, allocated, withheld, remaining, ...program_columns}) => {
+            if ( !_.every(program_columns, _.isNull) ){
+              const dept_code = dept_codes_by_org_ids[org_id];
 
               const program_allocations = _.chain(program_columns)
-                // ugh, program_columns aren't in order anymore at this point, need to sort them out here
-                .value()
+                .thru(
+                  program_columns => {
+                    let grouped_columns = {};
+                    _.each(
+                      program_columns,
+                      (value, key) => {
+                        const column_group = key.replace(/[0-9]+/, '');
+                        if ( _.isUndefined(grouped_columns[column_group]) ){
+                          grouped_columns[column_group] = [value];
+                        } else {
+                          grouped_columns[column_group].push(value);
+                        }
+                      }
+                    );
+                    return grouped_columns;
+                  }
+                )
+                .values()
+                .thru( ([activity_codes, allocation_values]) => _.zip(activity_codes, allocation_values) )
+                .fromPairs()
+                .omit("null")
+                .mapKeys( (allocation_value, activity_code) => `${dept_code}-${activity_code}`)
+                .value();
 
-              submeasure_program_allocations.push(...program_allocations);
+              return [measure_id, program_allocations];
             }
-          )
-          .value()
-      );
+          }
+        )
+        .fromPairs()
+        .value();
 
       debugger
 
