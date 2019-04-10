@@ -78,7 +78,7 @@ export default {
     });
     _.each(cr_estimates_years, (yr, ix) => { 
       this.add_col({
-        "simple_default": ix === 4, // TODO: I'm not 100% clear if this is right
+        "simple_default": ix === 1,
         type: "big_int",
         nick: yr+"_estimates",
         description: {
@@ -90,7 +90,7 @@ export default {
     });
   },
 
-  "mapper": function (row) {	 
+  "mapper": function (row) {	
     if (row[2] in map_helper) { 
       row[2] = map_helper[row[2]]; 
     }
