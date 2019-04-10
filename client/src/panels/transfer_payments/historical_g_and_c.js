@@ -12,7 +12,6 @@ import {
   Panel,
   util_components,
   NivoResponsiveLine,
-  infobaseCategory10Colors,
 } from "../shared.js";
 
 const { transfer_payments } = businessConstants;

@@ -6,7 +6,6 @@ import {
   Col,
   NivoResponsivePie,
   infobaseCategory10Colors,
-  formats,
 } from "../shared";
 
 
