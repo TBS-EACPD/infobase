@@ -156,7 +156,7 @@ export class StandardRouteContainer extends React.Component {
           banner_content={{
             en: (
               <div>
-                {"The 2019-20 Departmental Plan were tabled on TODO-DATE."}
+                {"The 2019-20 Departmental Plans were tabled on TODO-DATE."}
                 <br/>
                 <a href="#orgs/gov/gov/infograph/results">
                   {"Explore the data to see what results departments and agencies are seeking to achieve."}
