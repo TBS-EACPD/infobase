@@ -74,9 +74,17 @@ new PanelGraph({
   footnotes: ['SOBJ10'],
   calculate(dept){
     const {orgTransferPayments} = this.tables;
+  
+    const rolled_up_transfer_payments = orgTransferPayments.payment_type_ids(exp_years, dept.unique_id);
 
-    return {
-      rolled_up: orgTransferPayments.payment_type_ids(exp_years,dept.unique_id),
+    const has_transfer_payments = _.chain(rolled_up_transfer_payments)
+      .values()
+      .flatten()
+      .some( value => value !== 0)
+      .value();
+
+    return has_transfer_payments && {
+      rolled_up: rolled_up_transfer_payments,
       rows: _.chain(orgTransferPayments.q(dept).data)
         .sortBy("{{pa_last_year}}exp")
         .reverse()

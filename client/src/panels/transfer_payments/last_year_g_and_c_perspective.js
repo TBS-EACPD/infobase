@@ -21,7 +21,7 @@ new PanelGraph({
   footnotes: ['SOBJ10'],
   info_deps: ['orgTransferPayments_gov_info', 'orgTransferPayments_dept_info', 'orgVoteStatPa_dept_info'],
   calculate(subject, info, options){
-    return {
+    const graph_args = {
       data1: [
         { value: info.gov_tp_exp_pa_last_year, name: 'y'},
         { value: info.dept_tp_exp_pa_last_year, name: 'x'},
@@ -30,7 +30,11 @@ new PanelGraph({
         { value: info.dept_exp_pa_last_year, name: 'z'},
         { value: info.dept_tp_exp_pa_last_year, name: 'x'},
       ],
-    }
+    };
+
+    const has_transfer_payments = info.dept_tp_exp_pa_last_year !== 0;
+
+    return has_transfer_payments && graph_args;
   },
   render({calculations, footnotes, sources}){
     const { subject, graph_args, info } = calculations; 
