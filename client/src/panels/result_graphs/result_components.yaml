@@ -1,6 +1,6 @@
 result_upper_target_text:
-  en: Equal to or under
-  fr: Égal ou sous
+  en: At most
+  fr: Au plus
 
 result_lower_target_text:
   en: At least
