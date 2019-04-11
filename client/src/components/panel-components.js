@@ -11,9 +11,11 @@ import { get_static_url } from '../request_utils.js';
 import { panel_href_template } from '../infographic/routes.js';
 import { panel_context } from '../infographic/context.js';
 import './panel-components.scss';
+import { create_text_maker } from '../models/text.js';
 
 
 const { TM } = create_text_maker_component(text);
+const text_maker = create_text_maker(text);
 
 const PanelSource = ({links}) => {
   if(_.isEmpty(links)){
@@ -72,7 +74,8 @@ const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOv
       }
       {context && !context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) && 
         <a href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
-          <img src={get_static_url("svg/permalink.svg")} 
+          <img src={get_static_url("svg/permalink.svg")}
+            alt={text_maker("a11y_permalink")}
             style={{ 
               width: "20px", 
               height: "20px",

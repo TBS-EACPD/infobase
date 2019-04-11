@@ -7,3 +7,7 @@ source_link_text:
 a11y_source_expl:
   en: To see the data in a tabular format, see the following links
   fr: Pour voir les donées en forme tabulaire, veuillez voir les liens suivants
+
+a11y_permalink:
+  en: Permalink to this panel
+  fr: Lien direct à ce graphique
