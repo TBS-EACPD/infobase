@@ -109,8 +109,6 @@ const HomeLayout = props => (
                 img_src={get_static_url("svg/DPs.svg")}
                 title_key="mains_dps_home_title"
                 text_key="mains_dps_home_text"
-                link_key="check_home_link"
-                link_href="#orgs/gov/gov/infograph/results"
               />
             </div>   
             <div className="col-content featured-col-content">
