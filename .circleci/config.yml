@@ -9,7 +9,6 @@ deploy_filter: &deploy_filter
   filters:
     branches:
       only:
-        - mainshome
         - master
 
 
