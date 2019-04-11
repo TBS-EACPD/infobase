@@ -367,6 +367,7 @@ function get_footnotes_for_votestat_item({desc, org_id, votenum}){
 const scheme_key = "estimates_diff";
 const h7y_layout_options = ["org", "item_type"]
 export const get_initial_state = (intitial_h7y_layout) => ({
+  doc_code: current_doc_code,
   sort_col: "current_value",
   is_descending: true,
   show_stat: true,

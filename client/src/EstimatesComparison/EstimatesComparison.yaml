@@ -114,11 +114,15 @@ choose_grouping_scheme:
   en: Item grouping scheme
   fr: Regroupement des objets
 
+estimates_rpb_link:
+  transform: [handlebars]
+  en: See the <a href={{href}}>data</a>
+  fr: Voir les <a href={{href}}>données</a>
 
 estimates_source_link:
   transform: [handlebars]
-  en: Data available on <a href={{href}}> Open Data</a>
-  fr: Les données sont disponibles sur <a href={{href}}>données ouvertes</a>
+  en: Download the data from {{ext_link "Open Data" href}}
+  fr: Télécharger les données des {{ext_link "données ouvertes" href}}
 
 
 estimates_comparison_desc_meta_attr:

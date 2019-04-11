@@ -4,7 +4,7 @@ import { text_maker, TM } from './text-provider.js';
 import { combineReducers, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import { StandardRouteContainer } from '../core/NavComponents';
-import { infograph_href_template } from '../link_utils.js';
+import { infograph_href_template, rpb_link } from '../link_utils.js';
 import { sources } from '../metadata/data_sources.js';
 import {
   SpinnerWrapper,
@@ -280,6 +280,7 @@ class EstimatesExplorer extends React.Component {
       col_click,
 
       //scheme props
+      doc_code,
       show_stat,
       toggle_stat_filter,
       h7y_layout,
@@ -412,6 +413,16 @@ class EstimatesExplorer extends React.Component {
           className="h3"
           style={{textAlign: "center"}}
         >
+          <TM 
+            k="estimates_rpb_link"
+            args={{ href: rpb_link({ 
+              table: 'table8', 
+              columns: [doc_code === "IM" ? "{{est_next_year}}_estimates" : "{{est_in_year}}_estimates"], 
+              dimension: 'by_estimates_doc', 
+              filter: estimates_docs[doc_code][window.lang],
+            }) }}
+          />
+          <br/>
           <TM 
             k="estimates_source_link"
             args={{ href: sources.ESTIMATES.open_data[window.lang] }}

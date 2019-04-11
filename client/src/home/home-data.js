@@ -25,7 +25,7 @@ const featured_content_items = _.compact([
           dimension: 'by_estimates_doc', 
           filter: ({ //TODO: D.R.Y this against table8
             en: "Main Estimates",
-            fr: "Budget principal des dépenses",
+            fr: "Budget principal",
           })[window.lang],
         }) :
         "#compare_estimates"
