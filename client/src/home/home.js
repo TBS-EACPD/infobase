@@ -8,7 +8,7 @@ import {
   EverythingSearch,
   create_text_maker_component,
   CardTopImage,
-  CardCenteredImage,
+  CardLeftImage,
   CardBackgroundImage,
   ContainerEscapeHatch,
 } from '../util_components.js';
@@ -104,7 +104,17 @@ const HomeLayout = props => (
         <div className="frow home-cols">
           <div className="fcol-md-7">
             <div className="col-content featured-col-content">
-              <CardCenteredImage
+              <CardLeftImage
+                tmf={home_tm}
+                img_src={get_static_url("svg/DPs.svg")}
+                title_key="mains_dps_home_title"
+                text_key="mains_dps_home_text"
+                link_key="check_home_link"
+                link_href="#orgs/gov/gov/infograph/results"
+              />
+            </div>   
+            <div className="col-content featured-col-content">
+              <CardLeftImage
                 tmf={home_tm}
                 img_src={get_static_url("svg/partition-budget.svg")}
                 title_key="budget_home_title"

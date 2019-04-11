@@ -31,11 +31,15 @@ const CardLeftImage = ({
         <div className="left-img-card__text">
           <TM k={text_key} tmf={tmf} args={text_args} />
         </div>
-        <div className="left-img-card__bottom-right">
-          <a href={link_href}>
-            <TM k={link_key} tmf={tmf} args={text_args} />
-          </a>
-        </div>
+        { link_key &&
+            <div className="left-img-card__bottom-right">
+              <a className="link-unstyled" href={link_href}>
+                <div tabIndex={0} className="left-img-card__badge">
+                  <TM k={link_key} tmf={tmf} args={text_args} />
+                </div>
+              </a>
+            </div>
+        }
       </div>
     </div>
   </div>

@@ -12,18 +12,17 @@ const CardCenteredImage = ({
   text_args,
   tmf,
 }) => (
-  <a className="link-unstyled" href={link_href}>
-    <div className="centered-img-card">
-      <div className="centered-img-card__left">
-        <header className="centered-img-card__title">
-          <TM k={title_key} tmf={tmf} args={text_args} />
-        </header>
-        <div className="centered-img-card__text">
-          <TM k={text_key} tmf={tmf} args={text_args} />
-        </div>
+  <div className="centered-img-card">
+    <div className="centered-img-card__left">
+      <header className="centered-img-card__title">
+        <TM k={title_key} tmf={tmf} args={text_args} />
+      </header>
+      <div className="centered-img-card__text">
+        <TM k={text_key} tmf={tmf} args={text_args} />
       </div>
+    </div>
+    <div>
       { img_src &&
-        <div>
           <div className="centered-img-card__right">
             <img
               aria-hidden="true"
@@ -31,15 +30,18 @@ const CardCenteredImage = ({
               className={classNames("centered-img-card__img")}
             />
           </div>
+      }
+      { link_key &&
           <div className="centered-img-card__bottom-right">
-            <div tabIndex={0} className="centered-img-card__badge">
-              <TM k={link_key} tmf={tmf} args={text_args} />
-            </div>
+            <a className="link-unstyled" href={link_href}>
+              <div tabIndex={0} className="centered-img-card__badge">
+                <TM k={link_key} tmf={tmf} args={text_args} />
+              </div>
+            </a>
           </div>
-        </div>
       }
     </div>
-  </a>
+  </div>
 )
 
 export { CardCenteredImage }

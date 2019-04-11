@@ -36,8 +36,8 @@
 
 .left-img-card__left { 
   flex: 0 0 30%;
-  border-right: 1px solid #333;
-  padding: 5px;
+  color: white;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -63,6 +63,7 @@
   display: flex;
   width: 100%;
   max-width: 100%;
+  color: white;
 }
 
 .left-img-card__right {
@@ -76,24 +77,22 @@
 }
 
 .left-img-card__title {
-  font-size: 1.6em;
+  font-size: 1.75em;
   font-weight: $mediumFontWeight;
-  text-align: center;
+  padding: 15px 15px 10px 15px;
+  text-transform: uppercase;
   width: 100%;
   max-width: 100%;
-  padding: 8px;
 }
 
 .left-img-card__text {
-  font-size: 1.2em;
+  font-size: 1.25em;
   font-weight: $mediumFontWeight;
-  width: 100%;
-  max-width: 100%;
-  margin-top: 10px;
+  text-align: left;
+  padding: 0px 10px 0px 15px;
   width: 100%;
   max-width: 100%;
   text-align: left;
-  padding: 0 20px;
 }
 
 .left-img-card__bottom-right {
@@ -103,5 +102,26 @@
   margin-top: auto;
   padding-top: 10px;
   font-size: 1.2em;
-  padding: 15px 10px 10px 10px;
+  padding: 15px;
+}
+
+.left-img-card__badge {
+  color: white;
+  text-align: center;
+  font-size: 1em;
+  padding: 15px 0 15px 0;
+  background-color: #da3a38;
+  border-radius: 10px;
+  width: 30%;
+  min-width: 120px;
+  max-width: 190px;
+  margin-right: 25px;
+
+  @media(max-width:610px){
+    padding: 10px 0 10px 0;
+  }
+
+  &:hover, &:focus {
+    background-color: #B3302E;
+  }
 }
