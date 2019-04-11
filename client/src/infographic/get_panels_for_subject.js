@@ -116,9 +116,9 @@ const get_dept_panels = subject => ({
     "financial_intro",
     "welcome_mat",
     "estimates_in_perspective",
-    "historical_auth_exp",
     //"in_year_estimates_split",//turned off until supps A
     "in_year_voted_stat_split",
+    "historical_auth_exp",
     "budget_measures_panel",
     "spend_by_so_hist",
     "last_year_g_and_c_perspective",
