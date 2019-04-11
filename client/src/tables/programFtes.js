@@ -23,7 +23,7 @@ export default {
     "FTE",
     "PROG",
     "ANNUAL",
-    "PLANNED_EXP_TAG",
+    "PLANNED_EXP",
     "DP",
     "DRR",
   ],

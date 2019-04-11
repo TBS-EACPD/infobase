@@ -23,7 +23,7 @@ export default {
   tags: [
     "AUTH",
     "EST_PROC",
-    "PLANNED_EXP_TAG",
+    "PLANNED_EXP",
     "CR",
   ],
 

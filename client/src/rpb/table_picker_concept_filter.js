@@ -1,5 +1,5 @@
 const concept_categories = {
-  concept_category_money: ["AUTH", "EXP", "VOTED", "STAT", "SOBJ", "PLANNED_EXP_TAG", "SOBJ10"],
+  concept_category_money: ["AUTH", "EXP", "VOTED", "STAT", "SOBJ", "PLANNED_EXP", "SOBJ10"],
   concept_category_people: ["PEOPLE", "FTE", "GENDER", "AGE", "FOL", "GEO"],
   concept_category_source: ["QFR", "PA", "EST_PROC", "DP", "DRR"],
   concept_category_other: ["ANNUAL", "QUARTERLY", "PROG"],

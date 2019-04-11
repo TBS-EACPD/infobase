@@ -18,7 +18,7 @@ export default {
   source: [ "PA" , "DP", "DRR" ],
   "tags": [
     "GOCA",
-    "PLANNED_EXP_TAG",
+    "PLANNED_EXP",
     "PA",
     "EXP",
     "AUTH",
