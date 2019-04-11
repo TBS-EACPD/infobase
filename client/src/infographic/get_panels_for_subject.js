@@ -86,13 +86,12 @@ const get_gov_panels = subject => ({
   financial: [
     "financial_intro", 
     "welcome_mat",
-    "budget_measures_panel",
-    'gocographic',
-    "historical_auth_exp",
     //"in_year_estimates_split",//turned off until supps A
     "in_year_voted_stat_split",
     "in_year_stat_breakdown",
-    "in_year_voted_breakdown",
+    "budget_measures_panel",
+    'gocographic',
+    "historical_auth_exp",
     "historical_g_and_c",
     "personnel_spend",
   ],
@@ -116,11 +115,11 @@ const get_dept_panels = subject => ({
   financial: _.includes(subject.tables, 'programSpending') && [
     "financial_intro",
     "welcome_mat",
-    "budget_measures_panel",
     "estimates_in_perspective",
     "historical_auth_exp",
     //"in_year_estimates_split",//turned off until supps A
     "in_year_voted_stat_split",
+    "budget_measures_panel",
     "spend_by_so_hist",
     "last_year_g_and_c_perspective",
     "historical_g_and_c",
@@ -155,12 +154,11 @@ const get_program_panels = subject => ({
     'dead_program_warning',
     "financial_intro",
     "welcome_mat",
-    "budget_measures_panel",
     'vote_stat_split',
+    "budget_measures_panel",
     'spend_rev_split',
     'top_spending_areas',
     "spending_in_tag_perspective",
-  
     'drr_planned_actual',
     'sub_program_resources',
     "dp_rev_split",
