@@ -140,8 +140,8 @@ dept_in_year_estimates_split_text:
 
 estimates_perspective_title:
   transform: [handlebars]
-  en: Planned Spending in Perspective ({{est_in_year}})
-  fr: Dépenses prévues en perspective ({{est_in_year}})
+  en: Estimates in Perspective ({{est_in_year}})
+  fr: Budget des dépenses en perspective ({{est_in_year}})
 
 estimates_perspective_text:
   transform: [handlebars,markdown]
