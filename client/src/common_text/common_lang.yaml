@@ -950,7 +950,7 @@ DRR_resources:
 
 see_an_infograph_for:
   transform: [handlebars]
-  en: See an infograph for {{subj_name subject}}
+  en: See an infographic for {{subj_name subject}}
   fr: Voir une infographie pour {{subj_name subject}}
 
 

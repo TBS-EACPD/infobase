@@ -104,7 +104,7 @@ export default {
       if(cr){
         row.splice(2,0,cr.name);
       } else{
-        console.log(`DATA error! no CR for id ${row[1]}`);
+        console.log(`DATA error! no CR for id ${row[1]}`); // eslint-disable-line
         row.splice(2,0,"");
       }
     }
