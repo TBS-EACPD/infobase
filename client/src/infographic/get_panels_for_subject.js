@@ -89,6 +89,7 @@ const get_gov_panels = subject => ({
     //"in_year_estimates_split",//turned off until supps A
     "in_year_voted_stat_split",
     "in_year_stat_breakdown",
+    "in_year_voted_breakdown",
     "budget_measures_panel",
     'gocographic',
     "historical_auth_exp",
