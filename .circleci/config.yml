@@ -9,7 +9,7 @@ deploy_filter: &deploy_filter
   filters:
     branches:
       only:
-        - 2019mains-home
+        - mainshome
         - master
 
 
