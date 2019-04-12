@@ -2,6 +2,7 @@ import '../gen_expl/explorer-styles.scss';
 import explorer_text from './explorer.yaml';
 import { Fragment } from 'react';
 import { infograph_href_template } from '../link_utils.js';
+import { LabeledTable } from '../components/LabeledTable.js'
 import { StandardRouteContainer } from '../core/NavComponents';
 import { get_col_defs } from '../gen_expl/resource-explorer-common.js';
 import { Subject } from '../models/subject.js';
@@ -305,20 +306,17 @@ class ExplorerPage extends React.Component {
           ]}
         />
         <div className="tabbed-content__pane">
-          <div className="hierarchy-selection" style={{marginTop: "20px"}}>
-            <header className="hierarchy-selection-header">
-              <TM k="choose_explore_point" />
-            </header>
-            <div role="radiogroup" className="hierarchy-selection-items">
-              {_.map([ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp19" && INCLUDE_OTHER_TAGS ? [wwh_props, hi_props /*, mlt_props*/] : []) ],props =>
-                <HierarchySelectionItem 
-                  key={props.id} 
-                  url={`#resource-explorer/${props.id}/${doc}`}
-                  {...props} 
-                />
-              )}
-            </div>
-          </div>
+          <LabeledTable
+            title={text_maker("choose_explore_point")}
+            content={_.map([ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp19" && INCLUDE_OTHER_TAGS ? [wwh_props, hi_props] : []) ], props =>
+              ({
+                title: props.title,
+                desc: props.text,
+                href: `#resource-explorer/${props.id}/${doc}`,
+              })
+            )}
+            styles={{header: "link-styled"}}
+          />
           { is_m2m &&
             <div className='bs-callout bs-callout-danger'>
               <KeyConceptList 
@@ -479,3 +477,19 @@ export default class ResourceExplorer extends React.Component {
   }
 }
 
+
+
+      //     <div className="hierarchy-selection" style={{marginTop: "20px"}}>
+      //       <header className="hierarchy-selection-header">
+      //         <TM k="choose_explore_point" />
+      //       </header>
+      //       <div role="radiogroup" className="hierarchy-selection-items">
+      //         {_.map([ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp19" && INCLUDE_OTHER_TAGS ? [wwh_props /*hi_props, HI_TODO*/ /*, mlt_props*/] : []) ],props =>
+      //         <HierarchySelectionItem 
+      //         key={props.id} 
+      //         url={`#resource-explorer/${props.id}/${doc}`}
+      //         {...props} 
+      //       />
+      //     )}
+      //   </div>
+      // </div>

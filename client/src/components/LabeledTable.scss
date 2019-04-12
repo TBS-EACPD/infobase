@@ -1,0 +1,102 @@
+@import "../common_css/common-variables";
+
+
+/* copied from resource-explorer */
+.displayTable {
+    border-radius: 5px;
+    border: 1px solid $primaryColor;
+    margin-bottom: 30px;
+    background-color: $primaryColor;
+  }
+  
+  .displayTable__header {
+    color: #fcfcfc;
+    padding: 10px 0 10px 0;
+    font-size: 1.4em;
+    text-align: center;
+  }
+
+  .displayTable__item:focus,
+  .displayTable__item:active {
+    outline: 2px solid #222;
+  }
+  
+  .displayTable__item {
+    @include unstyled-link;
+    background-color: #fcfcfc;
+    color: #222;
+    padding: 10px;
+    
+    /* make the <button> act like a div */
+    display: block; 
+    min-width:100%;
+    text-align: left;
+    border-radius: 0;
+  
+    &button {
+      cursor: pointer;
+    }
+  }
+  .displayTable__item.active {
+    background-color: #dedede;
+  }
+  .displayTable__item:not(:last-child){
+    border-bottom: 1px solid $primaryColor;
+  }
+  
+  @media(min-width:992px){
+    .displayTable__item {
+      display: flex;
+      align-items: stretch;
+      justify-content: flex-start; 
+      padding: 0;
+    }
+  
+    .displayTable__item > .displayTable__item--header,
+    .displayTable__item > .displayTable__item--description {
+      padding: 15px 10px 15px 25px;
+  
+    }
+  
+    .displayTable__item > .displayTable__item--header {
+      flex: 0 0 30%;
+      width: 100%;
+      max-width:100%;
+      font-size: 1.2em;
+      border-right: 1px solid $primaryColor;
+    }
+  
+    .displayTable__item > .displayTable__item--description {
+      width: 100%;
+      max-width:100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+  
+  .displayTable__items { }
+
+  @media(max-width:992px){
+    .displayTable__items {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .displayTable__item > .displayTable__item--header,
+    .displayTable__item > .displayTable__item--description {
+      padding: 5px;
+    }
+  
+    .displayTable__item > .displayTable__item--header {
+      font-size: 1.2em;
+      font-weight: $heavyFontWeight;
+    }
+
+  }
+  
+  .displayTable__item:last-child {
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  

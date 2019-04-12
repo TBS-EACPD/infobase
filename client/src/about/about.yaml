@@ -110,17 +110,33 @@ principle_4_desc:
   en: Employing open sources technologies; the GC InfoBase is always evolving and adapting to meet user needs and offer a better experience.
   fr: Usage de technologies à libre accès; l’InfoBase du GC évolue sans cesse, s’adapte aux besoins des utilisateurs et leur offre une meilleure expérience.
 
+about_sub_title:
+  en: About Us
+  fr: Qui sommes-nous
+
+about_intro_section:
+  transform: [handlebars, markdown]
+  en: The GC InfoBase is an interactive data-visualization tool, transforming complex federal data into simple visual stories for Canadians.
+
+    Since its creation in 2013, the GC InfoBase has been recognized as the authoritative source of Government expenditure information by the
+    {{ext_link "Parliamentary Budget Officer (PBO)" "http://www.pbo-dpb.gc.ca/web/default/files/Documents/Reports/2016/Mains 2016-17/Main Estimates 2016-17_EN.pdf"}} and was identified as a
+    public sector innovation by the Organisation for Economic Co-operation and Development (OECD)
+    {{ext_link "Observatory of Public Sector Innovation (OPSI)" "https://www.oecd.org/governance/observatory-public-sector-innovation/innovations/"}}. The tool contains years’ worth of
+    federal government data, bringing together information previously scattered across over 500 government reports.
+  fr: L’InfoBase du GC est un outil interactif de visualisation de données, qui traduit en termes simples l’information complexe du gouvernement fédéral au profit des Canadiens.
+
+    Depuis sa création en 2013, l’InfoBase du GC a été reconnue par le
+    {{ext_link "directeur parlementaire du budget (DPB)" "http://www.pbo-dpb.gc.ca/web/default/files/Documents/Reports/2016/Mains 2016-17/Main Estimates 2016-17_FR.pdf"}} comme étant
+    la source d’information faisant autorité en matière de dépenses gouvernementales et est considérée comme une innovation dans le secteur public par
+    {{ext_link "l’Observatoire sur l’innovation dans le secteur public (OISP)" "https://www.oecd.org/governance/observatory-public-sector-innovation/innovations/ "}} de l’Organisation de
+    coopération et de développement économiques (OCDE). L’outil contient plusieurs années de renseignements gouvernementaux, auparavant éparpillés dans plus de 500 rapports à l’échelle de
+    la fonction publique fédérale.
+    
+
 
 about_body_text:
   transform: [handlebars, markdown]
   en: |
-    # About Us
-
-
-    The GC InfoBase is an interactive data-visualization tool, transforming complex federal data into simple visual stories for Canadians.
-
-
-    Since its creation in 2013, the GC InfoBase has been recognized as the authoritative source of Government expenditure information by the {{ext_link "Parliamentary Budget Officer (PBO)" "http://www.pbo-dpb.gc.ca/web/default/files/Documents/Reports/2016/Mains 2016-17/Main Estimates 2016-17_EN.pdf"}} and was identified as a public sector innovation by the Organisation for Economic Co-operation and Development (OECD) {{ext_link "Observatory of Public Sector Innovation (OPSI)" "https://www.oecd.org/governance/observatory-public-sector-innovation/innovations/"}}. The tool contains years’ worth of federal government data, bringing together information previously scattered across over 500 government reports.
 
     <div>
     {{{gt "about_principles_table"}}}
@@ -202,14 +218,7 @@ about_body_text:
     We are always looking for ideas and suggestions to help us improve the current version of the InfoBase. If you would like to share some ideas or comments regarding your experience with the tool, please take a few minutes to complete our <a href="{{{survey_link}}}" target="_blank" rel="noopener noreferrer">online survey</a>.
 
   fr: |  
-    # Qui sommes-nous
 
-
-    L’InfoBase du GC est un outil interactif de visualisation de données, qui traduit en termes simples l’information complexe du gouvernement fédéral au profit des Canadiens.
-
-
-    Depuis sa création en 2013, l’InfoBase du GC a été reconnue par le {{ext_link "directeur parlementaire du budget (DPB)" "http://www.pbo-dpb.gc.ca/web/default/files/Documents/Reports/2016/Mains 2016-17/Main Estimates 2016-17_FR.pdf"}} comme étant la source d’information faisant autorité en matière de dépenses gouvernementales et est considérée comme une innovation dans le secteur public par {{ext_link "l’Observatoire sur l’innovation dans le secteur public (OISP)" "https://www.oecd.org/governance/observatory-public-sector-innovation/innovations/ "}} de l’Organisation de coopération et de développement économiques (OCDE). L’outil contient plusieurs années de renseignements gouvernementaux, auparavant éparpillés dans plus de 500 rapports à l’échelle de la fonction publique fédérale.
-    
 
     <div>
     {{{gt "about_principles_table"}}}
