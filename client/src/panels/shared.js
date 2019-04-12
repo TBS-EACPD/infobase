@@ -97,7 +97,66 @@ export const PplSharePie = ({graph_args, label_col_header, sort_func}) => {
   </div>;
 };
 
+export const CommonDonut = function({graph_data, legend_data, graph_height}){
+  const color_scale = infobase_colors();
 
+  const has_neg = _.chain(legend_data)
+    .map('value')
+    .min()
+    .value() < 0;
+
+  const legend_items = !has_neg && _.chain(legend_data)
+    .sortBy('value')
+    .reverse()
+    .map( ({value, label }) => ({ 
+      value,
+      label,
+      color: color_scale(label),
+      id: label,
+    }))
+    .value();
+
+  const total = d3.sum( legend_data, _.property('value') );
+
+  return(
+    <div aria-hidden = {true}>
+      <div style = {{height: graph_height}}>
+        <NivoResponsivePie
+          data = {graph_data}
+          colors = {infobaseCategory10Colors}
+          total = {total}
+        />
+      </div>
+      {!has_neg && 
+      <div className="centerer" style={{marginTop: "-40px"}}>
+        <div 
+          style={{
+            width: "100%", /* IE 11 */ 
+            maxWidth: '400px', 
+            flexGrow: 1,
+          }}
+        >
+          <TabularPercentLegend
+            items={legend_items}
+            get_right_content={item => 
+              <div style={{width: "120px", display: "flex"}}>
+                <div style={{width: "60px"}}>
+                  <Format type="compact1" content={item.value} />
+                </div>
+                <div style={{width: "60px"}}>
+                  (<Format type="percentage1" content={(item.value)*Math.pow(total,-1)} />)
+                </div>
+              </div>
+            }
+          />
+        </div>
+      </div>
+      }
+    </div>
+     
+  );
+  
+}
 export class LineBarToggleGraph extends React.Component {
   constructor(props){
     super(props);

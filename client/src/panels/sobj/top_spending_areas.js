@@ -7,12 +7,11 @@ import {
   run_template,
   years,
   Statistics,
-  NivoResponsivePie,
   StdPanel,
   Col,
   declarative_charts,
   create_text_maker_component,
-  infobaseCategory10Colors,
+  CommonDonut,
 } from "../shared";
 
 const { std_years } = years;
@@ -124,39 +123,11 @@ const render_w_options = ({text_key}) => ({calculations, footnotes, sources}) =>
               data_col_headers: [ `${run_template(_.last(std_years))} ${text_maker("spending")}` ],
             }}
           /> : 
-          <div style = {{height: '450px'}} aria-hidden = {true}>
-            <NivoResponsivePie
-              data = {graph_data}
-              margin = {{
-                "top": 30,
-                "bottom": 150,
-                "right": 80,
-                "left": 50,
-              }}
-              total = {d3.sum( graph_data, _.property('value') )}
-              colors = {infobaseCategory10Colors}
-              legends = {[
-                {
-                  "anchor": "bottom",
-                  "direction": "column",
-                  "translateY": 120,
-                  "translateX": -60,
-                  "itemWidth": 150,
-                  "itemHeight": 25,
-                  "symbolSize": 20,
-                  "symbolShape": "circle",
-                },
-              ]}
-              theme = {{
-                legends: {
-                  text: {
-                    fontSize: 15,
-                    overflow: 'hidden',
-                  },
-                },
-              }}
-            />
-          </div>
+          <CommonDonut
+            graph_data = {graph_data}
+            legend_data = {graph_data}
+            graph_height = '450px'
+          />
         }
       </Col>
     </StdPanel>

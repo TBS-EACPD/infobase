@@ -1,11 +1,9 @@
 import { text_maker, TM } from './vote-stat-text-prodiver.js';
-
 import {
   PanelGraph,
   StdPanel,
   Col,
-  NivoResponsivePie,
-  infobaseCategory10Colors,
+  CommonDonut,
 } from "../shared";
 
 
@@ -34,32 +32,11 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
       </Col>
       {!window.is_a11y_mode &&
         <Col isGraph size={graph_col}>
-          <div style={{height: "400px"}} aria-hidden = {true}>
-            <NivoResponsivePie
-              data = {data}
-              total = {d3.sum( data, _.property('value') )}
-              colors = {infobaseCategory10Colors}
-              legends = {[
-                {
-                  anchor: "bottom",
-                  direction: "row",
-                  translateY: 60,
-                  translateX: 40,
-                  itemWidth: 150,
-                  itemHeight: 25,
-                  symbolSize: 20,
-                  symbolShape: "circle",
-                },
-              ]}
-              theme = {{
-                legends: {
-                  text: {
-                    fontSize: 15,
-                  },
-                },
-              }}
-            />
-          </div>
+          <CommonDonut
+            graph_data = {data}
+            legend_data ={data}
+            graph_height = '400px'
+          /> 
         </Col>
       }
     </StdPanel>

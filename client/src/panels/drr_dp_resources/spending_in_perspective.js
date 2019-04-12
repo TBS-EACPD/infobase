@@ -130,6 +130,7 @@ class SpendInTagPerspective extends React.Component {
               data = {data}
               colors={infobaseCategory10Colors}
               total = {d3.sum( data, _.property('value') )}
+              height = '400px'
             />
           </div>
           {legend_display}

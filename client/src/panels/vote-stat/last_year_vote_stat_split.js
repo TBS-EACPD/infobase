@@ -3,13 +3,12 @@ import {
   PanelGraph,
   StdPanel,
   Col,
-  NivoResponsivePie,
-  infobaseCategory10Colors,
+  CommonDonut,
 } from "../shared";
 
 const render_w_options = ({text_key,graph_col,text_col}) => ({calculations, sources, footnotes}) => {
   const { info, graph_args } = calculations;
-
+ 
   const data = _.map(
     graph_args,
     (data_set) => ({
@@ -28,32 +27,11 @@ const render_w_options = ({text_key,graph_col,text_col}) => ({calculations, sour
       </Col>
       { !window.is_a11y_mode &&
         <Col isGraph size={graph_col}>
-          <div style = {{height: '400px'}} aria-hidden = {true}>
-            <NivoResponsivePie
-              data = {data}
-              colors = {infobaseCategory10Colors}
-              total = {d3.sum( data, _.property('value') )}
-              legends = {[
-                {
-                  anchor: "bottom",
-                  direction: "row",
-                  translateY: 60,
-                  translateX: 40,
-                  itemWidth: 150,
-                  itemHeight: 25,
-                  symbolSize: 20,
-                  symbolShape: "circle",
-                },
-              ]}
-              theme = {{
-                legends: {
-                  text: {
-                    fontSize: 15,
-                  },
-                },
-              }}
-            />
-          </div>
+          <CommonDonut
+            graph_data = {data}
+            legend_data = {data}
+            height = '400px'
+          />
         </Col>
       }
     </StdPanel>
