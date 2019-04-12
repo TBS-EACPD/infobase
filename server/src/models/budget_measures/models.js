@@ -17,13 +17,22 @@ import {
 
 export default function(model_singleton){
 
+  // These models are very hierarchical, each being used as an embedded-document in other models up to BudgetMeasureSchema
+  // Independant collections will also be populated from each layer of embedded-document. The redundancy is safe becase
+  // we'll NEVER update data in-place. The data size trade off's negligible, and it should give room for some efficiency
+  // when querying (... or is it actually at odds with using dataloaders? This is a test case for embedded-document heavy models)
+
   const BudgetProgramAllocationSchema = mongoose.Schema({
     subject_id: pkey_type(), // program id or CRSO id
+    org_id: parent_fkey_type(), // org id or SpecialFundingSubject id
+    measure_id: parent_fkey_type(),
+
     allocated: {type: Number},
   });
 
   const BudgetSubmeasureSchema = mongoose.Schema({
     submeasure_id: pkey_type(),
+    subject_id: parent_fkey_type(), // org id or SpecialFundingSubject id
     parent_measure_id: parent_fkey_type(),
     ...bilingual_str('name'),
 
@@ -33,8 +42,9 @@ export default function(model_singleton){
     program_allocations: [BudgetProgramAllocationSchema],
   });
 
-  const BudgetFundsSchema = mongoose.Schema({
+  const BudgetDataSchema = mongoose.Schema({
     subject_id: pkey_type(), // org id or SpecialFundingSubject id
+    measure_id: parent_fkey_type(),
     funding: {type: Number},
     allocated: {type: Number},
     remaining: {type: Number},
@@ -47,7 +57,7 @@ export default function(model_singleton){
     submeasure_breakouts: [BudgetSubmeasureSchema],
   });
 
-  const BudgetMeasuresSchema = mongoose.Schema({
+  const BudgetMeasureSchema = mongoose.Schema({
     measure_id: pkey_type(),
     
     budget_year: str_type,
@@ -56,7 +66,7 @@ export default function(model_singleton){
     ...bilingual_str('budget_section_id'),
     ...bilingual_str('description'),
 
-    data: [BudgetFundsSchema],
+    data: [BudgetDataSchema],
   });
 
 
@@ -70,7 +80,12 @@ export default function(model_singleton){
 
   _.each(
     budget_years,
-    budget_year => model_singleton.define_model(`Budget${budget_year}Measures`, BudgetMeasuresSchema),
+    budget_year => {
+      model_singleton.define_model(`Budget${budget_year}Measures`, BudgetMeasureSchema);
+      model_singleton.define_model(`Budget${budget_year}Data`, BudgetDataSchema);
+      model_singleton.define_model(`Budget${budget_year}Submeasures`, BudgetSubmeasureSchema);
+      model_singleton.define_model(`Budget${budget_year}ProgramAllocation`, BudgetProgramAllocationSchema);
+    },
   );
   model_singleton.define_model("SpecialFundingSubject", SpecialFundingSubjectSchema);
   

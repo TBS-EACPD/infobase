@@ -18,10 +18,7 @@ const clean_budget_measure_description = (description) => {
 }
 
 export default async function({models}){
-  const { 
-    BudgetMeasures,
-    SpecialFundingSubject,
-  } = models;
+  const { SpecialFundingSubject } = models;
 
   const igoc_rows = get_standard_csv_file_rows(`igoc.csv`);
   const dept_codes_by_org_ids = _.chain(igoc_rows)
@@ -50,7 +47,7 @@ export default async function({models}){
   
   return await Promise.all([
     SpecialFundingSubject.insertMany(special_funding_subjects),
-    ..._.map( budget_years, async (budget_year) => {
+    ..._.flatMap( budget_years, async (budget_year) => {
       const budget_funds = get_standard_csv_file_rows(`budget_${budget_year}_measure_data.csv`);
       const budget_lookups = get_standard_csv_file_rows(`budget_${budget_year}_measure_lookups.csv`);
 
@@ -110,8 +107,13 @@ export default async function({models}){
         .value();
 
       debugger
-
-      return BudgetMeasures.insertMany(["todo"]);
+      
+      return [
+        models[`Budget${budget_year}Measures`].insertMany(["TODO"]),
+        models[`Budget${budget_year}Data`].insertMany(["TODO"]),
+        models[`Budget${budget_year}Submeasures`].insertMany(["TODO"]),
+        models[`Budget${budget_year}ProgramAllocation`].insertMany(["TODO"]),
+      ];
     
       // vvv OLD CODE, but parts of it will still apply to the new data loading process, so keeping around while working vvv
       /* eslint-disable */
