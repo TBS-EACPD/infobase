@@ -27,20 +27,27 @@ partition_home_text:
   fr: Voir comment les ressources gouvernementales sont distribuées d'un mécanisme à l'autre
 
 budget_home_title:
-  en: Budget 2018 Tracker
-  fr: Suivi budgétaire de 2018
+  en: Budget Tracker
+  fr: Suivi budgétaire
 
 budget_home_text:
-  en: Explore a breakout of the new Budget 2018 measures which are being funded through Estimates
-  fr: Découvrir une visualisation des nouvelles mesures du Budget 2018 qui seront financées par le Budget des dépenses
+  transform: [markdown]
+  en: |
+    BUDGET 2019 TRACKER COMING SOON.
+  
+    Explore a breakout of the Budget 2018 measures which are being funded through Estimates
+  fr: |
+    SUIVI BUDGÉTAIRE DE 2019 À VENIR.
+  
+    Découvrir une visualisation des mesures du Budget 2018 qui seront financées par le Budget des dépenses
 
 mains_dps_home_title:
   en: 2019-20 Departmental Plans
   fr: Plan ministériels de 2019-2020
 
 mains_dps_home_text:
-  en: The 2019-20 Departmental Plans were tabled on April 11 2019. Explore the data to see what results departments and agencies are seeking to achieve.
-  fr: Les plans ministériel 2019-2020 ont été déposés au Parlement le 11 avril 2019. Explorer les données pour voir les résultats que les ministères et organismes cherchent à atteindre.
+  en: The 2019-20 Departmental Plans were tabled on April 11 2019. Explore the data to see what results departments and agencies are seeking to achieve
+  fr: Les plans ministériel 2019-2020 ont été déposés au Parlement le 11 avril 2019. Explorer les données pour voir les résultats que les ministères et organismes cherchent à atteindre
 
 planet_home_title:
   en: Bubble Explorer
