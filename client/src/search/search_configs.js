@@ -195,10 +195,10 @@ const how_we_help = {
 
 
 const horizontal_initiative = {
-  header_function: () => "",//`${Tag.plural} - ${Tag.tag_roots.HI.name}`, HI_TODO
+  header_function: () => `${Tag.plural} - ${Tag.tag_roots.HI.name}`,
   name_function: _.property('name'),
-  get_data: () => [],//_.filter(Tag.get_all(), tag => tag.root.id === "HI"), HI_TODO
-  filter: (query, datum) => false,//memoized_re_matchers(query, ['name'], "horizontal_initiative")(datum), HI_TODO
+  get_data: () => _.filter(Tag.get_all(), tag => tag.root.id === "HI"),
+  filter: (query, datum) => memoized_re_matchers(query, ['name'], "horizontal_initiative")(datum),
 };
 
 

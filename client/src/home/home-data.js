@@ -10,11 +10,11 @@ const featured_content_items = _.compact([
     is_link_out: true,
     is_youtube: true,
   },
-  //{ HI_TODO
-  //  text_key: 'quick_link_hi_tags',
-  //  href: '#resource-explorer/HI/drr17',
-  //  is_new: true,
-  //},
+  {
+    text_key: 'quick_link_hi_tags',
+    href: '#resource-explorer/HI/drr17',
+    is_new: true,
+  },
   {
     text_key: "quick_link_main_estimates",
     href: (

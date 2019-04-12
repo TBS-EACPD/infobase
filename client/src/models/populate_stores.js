@@ -42,22 +42,13 @@ function process_lookups(data){
 
   populate_glossary(data[`glossary.csv`]);
 
-  // HI_TODO: temporary until HI tags are turned on
-  const filter_out_hi_tags = (csv) => _.filter(
-    csv,
-    (row) => !_.chain(row)
-      .take(2)
-      .some( (cell) => /^HI($ || [0-9]+$)/.test(cell) )
-      .value()
-  );
-
-  create_tag_branches( filter_out_hi_tags(data["program_tag_types.csv"]) );
-  populate_program_tags( filter_out_hi_tags(data["program_tags.csv"]) );
+  create_tag_branches( data["program_tag_types.csv"] );
+  populate_program_tags( data["program_tags.csv"] );
   populate_socr_tags(data["crso.csv"]);
   populate_programs(data["program.csv"]);
 
   //once all programs and tags are created, link them 
-  populate_program_tag_linkages( filter_out_hi_tags(data["tags_to_programs.csv"]) );
+  populate_program_tag_linkages( data["tags_to_programs.csv"] );
 
   populate_global_footnotes(data.global_footnotes);
 };
