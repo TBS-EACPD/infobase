@@ -125,11 +125,13 @@ ${doc}_results: results(doc: "${doc}") {
     target_min
     target_max
     target_narrative
+    measure
 
     previous_year_target_type
     previous_year_target_min
     previous_year_target_max
     previous_year_target_narrative
+    previous_year_measure
 
     explanation
 
@@ -139,8 +141,6 @@ ${doc}_results: results(doc: "${doc}") {
     status_key
 
     methodology
-    measure
-    previous_year_measure
   }
 }`)
   .reduce( (memo, fragment) => `

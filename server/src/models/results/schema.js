@@ -364,9 +364,11 @@ export default function({models,loaders}){
       name: bilingual_field("name"),
       explanation:bilingual_field("explanation"),
       target_narrative: bilingual_field("target_narrative"),
+      previous_year_target_narrative: bilingual_field("previous_year_target_narrative"),
       actual_result: bilingual_field("actual_result"),
       methodology: bilingual_field("methodology"),
       measure: bilingual_field("measure"),
+      previous_year_measure: bilingual_field("previous_year_measure"),
     },
   };
 
