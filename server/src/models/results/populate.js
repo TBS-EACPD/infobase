@@ -31,49 +31,15 @@ export default async function({models}){
       sub_program[key] = _.isNaN(sub_program[key]) ? null : +sub_program[key];
     });
 
-    // FAKING OUT 2019 DATA vvv
-    //_.each([
-    //  "fte_planning_year_1",
-    //  "fte_planning_year_2",
-    //  "fte_planning_year_3",
-    //], key => {
-    //  sub_program[key] = +sub_program["fte_pa_last_year"];
-    //});
-    //_.each([
-    //  "spend_planning_year_1",
-    //  "spend_planning_year_2",
-    //  "spend_planning_year_3",
-    //], key => {
-    //  sub_program[key] = +sub_program["spend_pa_last_year"];
-    //});
-    // FAKING OUT 2019 DATA ^^^
-
     sub_program.sub_program_id = sub_program.id;
     sub_program.id = null;
   });
     
-  const faked_dp19_result_records_records = [];
   _.each(result_records, result => {
     result.result_id = result.id;
     result.id = null;
-
-    // FAKING OUT 2019 DATA vvv
-    //if (result.doc === "dp18"){
-    //  faked_dp19_result_records_records.push({
-    //    ...result,
-    //    result_id: `${result.result_id}_dp19`,
-    //    doc: "dp19",
-    //  });
-    //} else if (result.doc === "dp19"){
-    //  _.chain(result)
-    //    .keys()
-    //    .each( key => result[key] = null )
-    //    .value();
-    //}
-    // FAKING OUT 2019 DATA ^^^
   });
   
-  const faked_dp19_indicator_records = [];
   _.each(indicator_records, indicator => {
     const { 
       target_year, 
@@ -125,48 +91,14 @@ export default async function({models}){
         );
       }
     }
-
-    // FAKING OUT 2019 DATA vvv
-    //if (indicator.doc === "dp18"){
-    //  faked_dp19_indicator_records.push({
-    //    ...indicator,
-    //    result_id: `${indicator.result_id}_dp19`,
-    //    indicator_id: `${indicator.indicator_id}_dp19`,
-    //    doc: "dp19",
-    //  });
-    //} else if (indicator.doc === "dp19"){
-    //  _.chain(indicator)
-    //    .keys()
-    //    .each( key => indicator[key] = null )
-    //    .value();
-    //}
-    // FAKING OUT 2019 DATA ^^^
   });
-  
-  // FAKING OUT 2019 DATA vvv
-  const faked_sub_program_records = sub_program_records;
-  const faked_result_records = [
-    ..._.filter(
-      result_records,
-      record => _.chain(record).values().some().value()
-    ),
-    ...faked_dp19_result_records_records,
-  ];
-  const faked_indicator_records = [
-    ..._.filter(
-      indicator_records,
-      record => _.chain(record).values().some().value()
-    ),
-    ...faked_dp19_indicator_records,
-  ];
-  // FAKING OUT 2019 DATA ^^^
 
-  const result_count_records = get_result_count_records(faked_sub_program_records, faked_result_records, faked_indicator_records);
+  const result_count_records = get_result_count_records(sub_program_records, result_records, indicator_records);
 
-  await SubProgram.insertMany(faked_sub_program_records);
-  await Result.insertMany(faked_result_records);
+  await SubProgram.insertMany(sub_program_records);
+  await Result.insertMany(result_records);
   await ResultCount.insertMany(result_count_records);
-  await Indicator.insertMany(faked_indicator_records);
+  await Indicator.insertMany(indicator_records);
   return await PIDRLink.insertMany(pi_dr_links);
 }
 
