@@ -24,7 +24,7 @@ export default function(model_singleton){
 
   const BudgetProgramAllocationSchema = mongoose.Schema({
     subject_id: pkey_type(), // program id or CRSO id
-    org_id: parent_fkey_type(), // org id or SpecialFundingSubject id
+    org_id: parent_fkey_type(), // org id or FakeBudgetOrgSubject id
     measure_id: parent_fkey_type(),
 
     allocated: {type: Number},
@@ -32,7 +32,7 @@ export default function(model_singleton){
 
   const BudgetSubmeasureSchema = mongoose.Schema({
     submeasure_id: pkey_type(),
-    subject_id: parent_fkey_type(), // org id or SpecialFundingSubject id
+    org_id: parent_fkey_type(), // org id or FakeBudgetOrgSubject id
     parent_measure_id: parent_fkey_type(),
     ...bilingual_str('name'),
 
@@ -43,7 +43,7 @@ export default function(model_singleton){
   });
 
   const BudgetDataSchema = mongoose.Schema({
-    subject_id: pkey_type(), // org id or SpecialFundingSubject id
+    org_id: pkey_type(), // org id or FakeBudgetOrgSubject id
     measure_id: parent_fkey_type(),
     funding: {type: Number},
     allocated: {type: Number},
@@ -71,8 +71,8 @@ export default function(model_singleton){
 
 
   // These are artifacts of the Budget 2018 process, shouldn't show up in other years
-  const SpecialFundingSubjectSchema = mongoose.Schema({
-    subject_id: pkey_type(),
+  const FakeBudgetOrgSubjectSchema = mongoose.Schema({
+    org_id: pkey_type(),
     level: str_type,
     ...bilingual_str('name'),
     ...bilingual_str('description'),
@@ -87,7 +87,7 @@ export default function(model_singleton){
       model_singleton.define_model(`Budget${budget_year}ProgramAllocation`, BudgetProgramAllocationSchema);
     },
   );
-  model_singleton.define_model("SpecialFundingSubject", SpecialFundingSubjectSchema);
+  model_singleton.define_model("FakeBudgetOrgSubject", FakeBudgetOrgSubjectSchema);
   
   // TODO Dataloaders...
   // ... can I do dataloaders by fields in subdocuments? Probably, right?
