@@ -110,20 +110,15 @@ export default async function({models}){
     )
     .value();
   
-  const program_allocations_by_measure_and_org_id_to_model = (program_allocations_by_measure_and_org_id) => _.flatMap(
-    program_allocations_by_measure_and_org_id,
-    (program_allocations_by_org_id, measure_id) => _.flatMap(
-      program_allocations_by_org_id,
-      (program_allocations, org_id) => _.flatMap(
-        program_allocations,
-        (allocated, subject_id) => ({
-          unique_id: `${measure_id}-${org_id}-${subject_id}`,
-
-          subject_id,
-          org_id,
-          measure_id,
-      
-          allocated,
+  const flatten_documents_by_measure_and_org_id = (documents_by_measure_and_org_id, uniq_id_func, fields_func) => _.flatMap(
+    documents_by_measure_and_org_id,
+    (documents_by_org_id, measure_id) => _.flatMap(
+      documents_by_org_id,
+      (documents, org_id) => _.flatMap(
+        documents,
+        (document, key) => ({
+          unique_id: uniq_id_func(measure_id, org_id, document, key),
+          ...fields_func(measure_id, org_id, document, key),
         })
       )
     )
@@ -236,19 +231,104 @@ export default async function({models}){
             .value()
         )
         .value();
-      
-      debugger
 
+
+      const submeasures_by_measure_and_org_id = {}; //TODO
+
+      const data_by_measure_and_org_id = {}; //TODO
+
+
+      const flatten_program_allocations_by_measure_and_org_id = (program_allocations_by_submeasure_and_org_id) => (
+        flatten_documents_by_measure_and_org_id(
+          program_allocations_by_submeasure_and_org_id,
+          (measure_id, org_id, document, key) => `${measure_id}-${org_id}-${key}`,
+          (measure_id, org_id, document, key) => ({
+            subject_id: key,
+            measure_id,
+            org_id,
+
+            allocated: document,
+          }),
+        )
+      );
+
+      const flatten_submeasures_by_measure_and_org_id = (submeasures_by_measure_and_org_id) => (
+        flatten_documents_by_measure_and_org_id(
+          submeasures_by_measure_and_org_id,
+          (measure_id, org_id, document, key) => `${measure_id}-${org_id}-${document.measure_id}`,
+          (measure_id, org_id, document, key) => ({
+            submeasure_id: document.measure_id,
+            parent_measure_id: measure_id,
+            org_id,
+
+            allocated: document.allocated,
+            withheld: document.withheld,
+
+            program_allocations: flatten_program_allocations_by_measure_and_org_id(
+              [{
+                [measure_id]: {
+                  [org_id]: _.get(
+                    submeasure_program_allocations_by_submeasure_and_org_id,
+                    `${measure_id}.${org_id}`,
+                  ),
+                },
+              }]
+            ),
+          }),
+        )
+      );
+
+      const ommit_unique_id = (documents) => _.map(
+        documents,
+        document => _.omit(document, "unique_id")
+      );
+      
       return [
-        //models[`Budget${budget_year}Measures`].insertMany([{TODO: "TODO"}]),
-        //models[`Budget${budget_year}Data`].insertMany([{TODO: "TODO"}]),
-        models[`Budget${budget_year}ProgramAllocations`].insertMany( 
-          program_allocations_by_measure_and_org_id_to_model(program_allocations_by_measure_and_org_id)
-        ),
-        //models[`Budget${budget_year}Submeasures`].insertMany([{TODO: "TODO"}]),
         models[`Budget${budget_year}SubmeasureProgramAllocations`].insertMany( 
-          program_allocations_by_measure_and_org_id_to_model(submeasure_program_allocations_by_submeasure_and_org_id)
+          flatten_program_allocations_by_measure_and_org_id(submeasure_program_allocations_by_submeasure_and_org_id)
         ),
+        models[`Budget${budget_year}ProgramAllocations`].insertMany( 
+          flatten_program_allocations_by_measure_and_org_id(program_allocations_by_measure_and_org_id)
+        ),
+        models[`Budget${budget_year}Submeasures`].insertMany(
+          flatten_submeasures_by_measure_and_org_id(submeasures_by_measure_and_org_id)
+        ),
+        models[`Budget${budget_year}Data`].insertMany(
+          flatten_documents_by_measure_and_org_id(
+            data_by_measure_and_org_id,
+            (measure_id, org_id, document, key) => `${measure_id}-${org_id}`,
+            (measure_id, org_id, document, key) => ({
+              ...document,
+
+              program_allocations: ommit_unique_id(
+                flatten_program_allocations_by_measure_and_org_id(
+                  [{
+                    [measure_id]: {
+                      [org_id]: _.get(
+                        program_allocations_by_measure_and_org_id,
+                        `${measure_id}.${org_id}`,
+                      ),
+                    },
+                  }]
+                )
+              ),
+
+              submeasure_breakouts: ommit_unique_id(
+                flatten_submeasures_by_measure_and_org_id(
+                  [{
+                    [measure_id]: {
+                      [org_id]: _.get(
+                        submeasures_by_measure_and_org_id,
+                        `${measure_id}.${org_id}`,
+                      ),
+                    },
+                  }]
+                ),
+              ),
+            }),
+          )
+        ),
+        models[`Budget${budget_year}Measures`].insertMany([{TODO: "TODO"}]),
       ];
     
       // vvv OLD CODE, but parts of it will still apply to the new data loading process, so keeping around while working vvv
