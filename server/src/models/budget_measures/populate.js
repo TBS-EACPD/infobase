@@ -4,40 +4,20 @@ import { budget_years } from './budget_measures_common.js';
 
 import { get_standard_csv_file_rows } from '../load_utils.js';
 
-const clean_budget_measure_description = (description) => {
-  if ( !_.isNull(description) ){
-    const corrected_description_markdown = description
-      .replace(/•/g, "\n\n* ")
-      .replace(/((\r\n){1}|\r{1}|\n{1})/gm, "\n\n");
-  
-    return corrected_description_markdown;
-  } else {
-    return "";
-  }
-}
-
 export default async function({models}){
   const { FakeBudgetOrgSubject } = models;
 
-  const special_funding_subjects = [
-    {
-      org_id: "net_adjust",
-      level: "special_funding_case",
-      name_en: "Net adjustment to be on a 2018-19 Estimates Basis",
-      name_fr: "Rajustement net selon le Budget des dépenses de 2018-2019",
-      description_en: "",
-      description_fr: "",
-    },
-    {
-      org_id: "non_allocated",
-      level: "special_funding_case",
-      name_en: "Allocation to be determined",
-      name_fr: "Affectation à determiner",
-      description_en: "",
-      description_fr: "",
-    },
-  ];
-
+  const clean_budget_measure_description = (description) => {
+    if ( !_.isNull(description) ){
+      const corrected_description_markdown = description
+        .replace(/•/g, "\n\n* ")
+        .replace(/((\r\n){1}|\r{1}|\n{1})/gm, "\n\n");
+    
+      return corrected_description_markdown;
+    } else {
+      return "";
+    }
+  };
 
   const igoc_rows = get_standard_csv_file_rows(`igoc.csv`);
   const dept_codes_by_org_ids = _.chain(igoc_rows)
@@ -124,6 +104,26 @@ export default async function({models}){
     )
   );
   
+
+  const special_funding_subjects = [
+    {
+      org_id: "net_adjust",
+      level: "special_funding_case",
+      name_en: "Net adjustment to be on a 2018-19 Estimates Basis",
+      name_fr: "Rajustement net selon le Budget des dépenses de 2018-2019",
+      description_en: "",
+      description_fr: "",
+    },
+    {
+      org_id: "non_allocated",
+      level: "special_funding_case",
+      name_en: "Allocation to be determined",
+      name_fr: "Affectation à determiner",
+      description_en: "",
+      description_fr: "",
+    },
+  ];
+
   return await Promise.all([
     FakeBudgetOrgSubject.insertMany(special_funding_subjects),
     ..._.flatMap( budget_years, async (budget_year) => {
@@ -133,10 +133,17 @@ export default async function({models}){
       const {
         true: measure_lookups,
         false: submeasure_lookups,
-      } = _.groupBy(
-        budget_lookups,
-        ({parent_measure_id}) => _.isNull(parent_measure_id)
-      );
+      } = _.chain(budget_lookups)
+        .map( budget_lookup => ({
+          ...budget_lookup,
+          description_en: clean_budget_measure_description(budget_lookup.description_en),
+          description_fr: clean_budget_measure_description(budget_lookup.description_fr),
+        }))
+        .groupBy(
+          budget_lookups,
+          ({parent_measure_id}) => _.isNull(parent_measure_id)
+        )
+        .value();
 
       const submeasure_ids = _.map(submeasure_lookups, "measure_id");
       const submeasure_ids_by_parent_measure = _.chain(submeasure_lookups)
@@ -171,6 +178,7 @@ export default async function({models}){
         )
         .groupBy( ({measure_id}) => !_.includes(submeasure_ids, measure_id) )
         .value();
+
     
       const submeasure_ids_by_parent_measure_and_org_id = _.mapValues(
         submeasure_ids_by_parent_measure,
@@ -278,6 +286,42 @@ export default async function({models}){
         )
       );
 
+      const flatten_data_by_measure_and_org_id = (data_by_measure_and_org_id) => (
+        flatten_documents_by_measure_and_org_id(
+          data_by_measure_and_org_id,
+          (measure_id, org_id, document, key) => `${measure_id}-${org_id}`,
+          (measure_id, org_id, document, key) => ({
+            ...document,
+
+            program_allocations: ommit_unique_id(
+              flatten_program_allocations_by_measure_and_org_id(
+                [{
+                  [measure_id]: {
+                    [org_id]: _.get(
+                      program_allocations_by_measure_and_org_id,
+                      `${measure_id}.${org_id}`,
+                    ),
+                  },
+                }]
+              )
+            ),
+
+            submeasure_breakouts: ommit_unique_id(
+              flatten_submeasures_by_measure_and_org_id(
+                [{
+                  [measure_id]: {
+                    [org_id]: _.get(
+                      submeasures_by_measure_and_org_id,
+                      `${measure_id}.${org_id}`,
+                    ),
+                  },
+                }]
+              ),
+            ),
+          }),
+        )
+      );
+
       const ommit_unique_id = (documents) => _.map(
         documents,
         document => _.omit(document, "unique_id")
@@ -294,83 +338,28 @@ export default async function({models}){
           flatten_submeasures_by_measure_and_org_id(submeasures_by_measure_and_org_id)
         ),
         models[`Budget${budget_year}Data`].insertMany(
-          flatten_documents_by_measure_and_org_id(
-            data_by_measure_and_org_id,
-            (measure_id, org_id, document, key) => `${measure_id}-${org_id}`,
-            (measure_id, org_id, document, key) => ({
-              ...document,
+          flatten_data_by_measure_and_org_id(data_by_measure_and_org_id)
+        ),
+        models[`Budget${budget_year}Measures`].insertMany(
+          _.map(
+            measure_data,
+            measure => ({
+              ...measure,
 
-              program_allocations: ommit_unique_id(
-                flatten_program_allocations_by_measure_and_org_id(
+              data: _.map(
+                flatten_data_by_measure_and_org_id(
                   [{
-                    [measure_id]: {
-                      [org_id]: _.get(
-                        program_allocations_by_measure_and_org_id,
-                        `${measure_id}.${org_id}`,
-                      ),
-                    },
-                  }]
-                )
-              ),
-
-              submeasure_breakouts: ommit_unique_id(
-                flatten_submeasures_by_measure_and_org_id(
-                  [{
-                    [measure_id]: {
-                      [org_id]: _.get(
-                        submeasures_by_measure_and_org_id,
-                        `${measure_id}.${org_id}`,
-                      ),
+                    [measure.measure_id]: {
+                      ...submeasures_by_measure_and_org_id[measure.measure_id],
                     },
                   }]
                 ),
+                ommit_unique_id
               ),
-            }),
+            })
           )
         ),
-        models[`Budget${budget_year}Measures`].insertMany([{TODO: "TODO"}]),
       ];
-    
-      // vvv OLD CODE, but parts of it will still apply to the new data loading process, so keeping around while working vvv
-      /* eslint-disable */
-      const orgs_funded_by_measure_id = _.chain(budget_data)
-        .groupBy("measure_id")
-        .mapValues( grouped_fund_rows => _.flatMap(grouped_fund_rows, fund_row => fund_row.org_id) )
-        .value();
-
-      const processed_budget_measures = _.chain(budget_measures)
-        .clone()
-        .each(budget_measures, 
-          budget_measure => _.each(budget_measure, 
-            (value, key) => key.includes("description") ? budget_measure[key] = clean_budget_measure_description(value) : null
-          )
-        )
-        .value();
-
-      const processed_budget_measures_with_funded_orgs_lists = _.map(processed_budget_measures, 
-        budget_measure => _.assign(
-          {}, 
-          budget_measure, 
-          {
-            id: budget_measure.measure_id,
-            funded_org_ids: orgs_funded_by_measure_id[budget_measure.measure_id],
-          }
-        )
-      );
-
-      _.each( processed_budget_measures_with_funded_orgs_lists, budget_measure => BudgetMeasures.register(budget_measure) );
-
-
-      const processed_budget_data = _.chain(budget_data)
-        .clone()
-        .each(
-          (budget_fund_row, index) => {
-            _.each(budget_fund_row, 
-              (value, key) => (key.startsWith("budget_") ? budget_fund_row[key] = +value : null)
-            )
-          }
-        )
-        .value();
     }),
   ]);
 }
