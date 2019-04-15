@@ -103,29 +103,32 @@ export default async function({models}){
       )
     )
   );
+
+  const ommit_unique_id = (documents) => _.map(
+    documents,
+    document => _.omit(document, "unique_id")
+  );
   
 
-  const special_funding_subjects = [
-    {
-      org_id: "net_adjust",
-      level: "special_funding_case",
-      name_en: "Net adjustment to be on a 2018-19 Estimates Basis",
-      name_fr: "Rajustement net selon le Budget des dépenses de 2018-2019",
-      description_en: "",
-      description_fr: "",
-    },
-    {
-      org_id: "non_allocated",
-      level: "special_funding_case",
-      name_en: "Allocation to be determined",
-      name_fr: "Affectation à determiner",
-      description_en: "",
-      description_fr: "",
-    },
-  ];
-
   return await Promise.all([
-    FakeBudgetOrgSubject.insertMany(special_funding_subjects),
+    FakeBudgetOrgSubject.insertMany([
+      {
+        org_id: "net_adjust",
+        level: "special_funding_case",
+        name_en: "Net adjustment to be on a 2018-19 Estimates Basis",
+        name_fr: "Rajustement net selon le Budget des dépenses de 2018-2019",
+        description_en: "",
+        description_fr: "",
+      },
+      {
+        org_id: "non_allocated",
+        level: "special_funding_case",
+        name_en: "Allocation to be determined",
+        name_fr: "Affectation à determiner",
+        description_en: "",
+        description_fr: "",
+      },
+    ]),
     ..._.flatMap( budget_years, async (budget_year) => {
       const budget_data = get_standard_csv_file_rows(`budget_${budget_year}_measure_data.csv`);
       const budget_lookups = get_standard_csv_file_rows(`budget_${budget_year}_measure_lookups.csv`);
@@ -241,11 +244,6 @@ export default async function({models}){
         .value();
 
 
-      const submeasures_by_measure_and_org_id = {}; //TODO
-
-      const data_by_measure_and_org_id = {}; //TODO
-
-
       const flatten_program_allocations_by_measure_and_org_id = (program_allocations_by_submeasure_and_org_id) => (
         flatten_documents_by_measure_and_org_id(
           program_allocations_by_submeasure_and_org_id,
@@ -260,6 +258,9 @@ export default async function({models}){
         )
       );
 
+
+      const submeasures_by_measure_and_org_id = {}; //TODO
+
       const flatten_submeasures_by_measure_and_org_id = (submeasures_by_measure_and_org_id) => (
         flatten_documents_by_measure_and_org_id(
           submeasures_by_measure_and_org_id,
@@ -272,19 +273,24 @@ export default async function({models}){
             allocated: document.allocated,
             withheld: document.withheld,
 
-            program_allocations: flatten_program_allocations_by_measure_and_org_id(
-              [{
-                [measure_id]: {
-                  [org_id]: _.get(
-                    submeasure_program_allocations_by_submeasure_and_org_id,
-                    `${measure_id}.${org_id}`,
-                  ),
-                },
-              }]
+            program_allocations: ommit_unique_id(
+              flatten_program_allocations_by_measure_and_org_id(
+                [{
+                  [measure_id]: {
+                    [org_id]: _.get(
+                      submeasure_program_allocations_by_submeasure_and_org_id,
+                      `${measure_id}.${org_id}`,
+                    ),
+                  },
+                }]
+              ),
             ),
           }),
         )
       );
+
+
+      const data_by_measure_and_org_id = {}; //TODO
 
       const flatten_data_by_measure_and_org_id = (data_by_measure_and_org_id) => (
         flatten_documents_by_measure_and_org_id(
@@ -321,11 +327,7 @@ export default async function({models}){
           }),
         )
       );
-
-      const ommit_unique_id = (documents) => _.map(
-        documents,
-        document => _.omit(document, "unique_id")
-      );
+      
       
       return [
         models[`Budget${budget_year}SubmeasureProgramAllocations`].insertMany( 
@@ -346,15 +348,14 @@ export default async function({models}){
             measure => ({
               ...measure,
 
-              data: _.map(
+              data: ommit_unique_id(
                 flatten_data_by_measure_and_org_id(
                   [{
                     [measure.measure_id]: {
                       ...submeasures_by_measure_and_org_id[measure.measure_id],
                     },
                   }]
-                ),
-                ommit_unique_id
+                )
               ),
             })
           )
