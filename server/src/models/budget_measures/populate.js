@@ -3,7 +3,6 @@ import _ from "lodash";
 import { budget_years } from './budget_measures_common.js';
 
 import { get_standard_csv_file_rows } from '../load_utils.js';
-import { rejects } from "assert";
 
 const clean_budget_measure_description = (description) => {
   if ( !_.isNull(description) ){
@@ -111,6 +110,24 @@ export default async function({models}){
     )
     .value();
   
+  const program_allocations_by_measure_and_org_id_to_model = (program_allocations_by_measure_and_org_id) => _.flatMap(
+    program_allocations_by_measure_and_org_id,
+    (program_allocations_by_org_id, measure_id) => _.flatMap(
+      program_allocations_by_org_id,
+      (program_allocations, org_id) => _.flatMap(
+        program_allocations,
+        (allocated, subject_id) => ({
+          unique_id: `${measure_id}-${org_id}-${subject_id}`,
+
+          subject_id,
+          org_id,
+          measure_id,
+      
+          allocated,
+        })
+      )
+    )
+  );
   
   return await Promise.all([
     FakeBudgetOrgSubject.insertMany(special_funding_subjects),
@@ -225,8 +242,13 @@ export default async function({models}){
       return [
         //models[`Budget${budget_year}Measures`].insertMany([{TODO: "TODO"}]),
         //models[`Budget${budget_year}Data`].insertMany([{TODO: "TODO"}]),
+        models[`Budget${budget_year}ProgramAllocations`].insertMany( 
+          program_allocations_by_measure_and_org_id_to_model(program_allocations_by_measure_and_org_id)
+        ),
         //models[`Budget${budget_year}Submeasures`].insertMany([{TODO: "TODO"}]),
-        //models[`Budget${budget_year}ProgramAllocation`].insertMany([{TODO: "TODO"}]),
+        models[`Budget${budget_year}SubmeasureProgramAllocations`].insertMany( 
+          program_allocations_by_measure_and_org_id_to_model(submeasure_program_allocations_by_submeasure_and_org_id)
+        ),
       ];
     
       // vvv OLD CODE, but parts of it will still apply to the new data loading process, so keeping around while working vvv

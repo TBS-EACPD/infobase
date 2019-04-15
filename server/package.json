@@ -51,7 +51,7 @@
     "debug-brk": "babel-node --inspect-brk src/server.js",
     "populate_db": "babel-node src/populate_db.js",
     "transpiled_populate_db": "babel-node transpiled_build/populate_db.js",
-    "debug_populate_db": "babel-node --inspect-brk src/populate_db.js",
+    "debug_populate_db": "babel-node --inspect src/populate_db.js",
     "prebuild": "rm -rf transpiled_build",
     "build": "babel src/ --out-dir transpiled_build --copy-files --ignore node_modules"
   },
