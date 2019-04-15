@@ -1,0 +1,14 @@
+.icon-block {
+    font-size: 1.8em;
+  
+    @media(min-width: 992px){
+      float: right;
+      padding-left: 1.2em;
+      max-width: 5em;
+    }
+  
+    @media(max-width:991px){
+      margin: 1.2em auto;
+      text-align: center;
+    }
+  }

@@ -1,79 +1,10 @@
-
-
-
+about_page_title:
+  en: About Us
+  fr: Qui sommes-nous
 
 principles_title: 
   en: GC InfoBase Principles
   fr: Principes de l’InfoBase du GC
-
-
-dev_icon_block:
-  text: |
-    <div aria-hidden="true" class="about__icon-block">
-      <svg class="icon--svg-inline icon--fixed" style="width: 0.875em" aria-hidden="true" data-prefix="fab" data-icon="html5" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
-        <path fill="currentColor" d="M0 32l34.9 395.8L191.5 480l157.6-52.2L384 32H0zm308.2 127.9H124.4l4.1 49.4h175.6l-13.6 148.4-97.9 27v.3h-1.1l-98.7-27.3-6-75.8h47.7L138 320l53.5 14.5 53.7-14.5 6-62.2H84.3L71.5 112.2h241.1l-4.4 47.7z"></path>
-      </svg>
-      <svg class="icon--svg-inline icon--fixed" style="width: 0.875em" aria-hidden="true" data-prefix="fab" data-icon="node-js" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-        <path fill="currentColor" d="M224 508c-6.7 0-13.5-1.8-19.4-5.2l-61.7-36.5c-9.2-5.2-4.7-7-1.7-8 12.3-4.3 14.8-5.2 27.9-12.7 1.4-.8 3.2-.5 4.6.4l47.4 28.1c1.7 1 4.1 1 5.7 0l184.7-106.6c1.7-1 2.8-3 2.8-5V149.3c0-2.1-1.1-4-2.9-5.1L226.8 37.7c-1.7-1-4-1-5.7 0L36.6 144.3c-1.8 1-2.9 3-2.9 5.1v213.1c0 2 1.1 4 2.9 4.9l50.6 29.2c27.5 13.7 44.3-2.4 44.3-18.7V167.5c0-3 2.4-5.3 5.4-5.3h23.4c2.9 0 5.4 2.3 5.4 5.3V378c0 36.6-20 57.6-54.7 57.6-10.7 0-19.1 0-42.5-11.6l-48.4-27.9C8.1 389.2.7 376.3.7 362.4V149.3c0-13.8 7.4-26.8 19.4-33.7L204.6 9c11.7-6.6 27.2-6.6 38.8 0l184.7 106.7c12 6.9 19.4 19.8 19.4 33.7v213.1c0 13.8-7.4 26.7-19.4 33.7L243.4 502.8c-5.9 3.4-12.6 5.2-19.4 5.2zm149.1-210.1c0-39.9-27-50.5-83.7-58-57.4-7.6-63.2-11.5-63.2-24.9 0-11.1 4.9-25.9 47.4-25.9 37.9 0 51.9 8.2 57.7 33.8.5 2.4 2.7 4.2 5.2 4.2h24c1.5 0 2.9-.6 3.9-1.7s1.5-2.6 1.4-4.1c-3.7-44.1-33-64.6-92.2-64.6-52.7 0-84.1 22.2-84.1 59.5 0 40.4 31.3 51.6 81.8 56.6 60.5 5.9 65.2 14.8 65.2 26.7 0 20.6-16.6 29.4-55.5 29.4-48.9 0-59.6-12.3-63.2-36.6-.4-2.6-2.6-4.5-5.3-4.5h-23.9c-3 0-5.3 2.4-5.3 5.3 0 31.1 16.9 68.2 97.8 68.2 58.4-.1 92-23.2 92-63.4z"></path>
-      </svg>
-      <svg class="icon--svg-inline icon--fixed" style="width: 0.875em" aria-hidden="true" data-prefix="fab" data-icon="react" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
-        <path fill="currentColor" d="M418.2 177.2c-5.4-1.8-10.8-3.5-16.2-5.1.9-3.7 1.7-7.4 2.5-11.1 12.3-59.6 4.2-107.5-23.1-123.3-26.3-15.1-69.2.6-112.6 38.4-4.3 3.7-8.5 7.6-12.5 11.5-2.7-2.6-5.5-5.2-8.3-7.7-45.5-40.4-91.1-57.4-118.4-41.5-26.2 15.2-34 60.3-23 116.7 1.1 5.6 2.3 11.1 3.7 16.7-6.4 1.8-12.7 3.8-18.6 5.9C38.3 196.2 0 225.4 0 255.6c0 31.2 40.8 62.5 96.3 81.5 4.5 1.5 9 3 13.6 4.3-1.5 6-2.8 11.9-4 18-10.5 55.5-2.3 99.5 23.9 114.6 27 15.6 72.4-.4 116.6-39.1 3.5-3.1 7-6.3 10.5-9.7 4.4 4.3 9 8.4 13.6 12.4 42.8 36.8 85.1 51.7 111.2 36.6 27-15.6 35.8-62.9 24.4-120.5-.9-4.4-1.9-8.9-3-13.5 3.2-.9 6.3-1.9 9.4-2.9 57.7-19.1 99.5-50 99.5-81.7 0-30.3-39.4-59.7-93.8-78.4zM282.9 92.3c37.2-32.4 71.9-45.1 87.7-36 16.9 9.7 23.4 48.9 12.8 100.4-.7 3.4-1.4 6.7-2.3 10-22.2-5-44.7-8.6-67.3-10.6-13-18.6-27.2-36.4-42.6-53.1 3.9-3.7 7.7-7.2 11.7-10.7zm-130 189.1c4.6 8.8 9.3 17.5 14.3 26.1 5.1 8.7 10.3 17.4 15.8 25.9-15.6-1.7-31.1-4.2-46.4-7.5 4.4-14.4 9.9-29.3 16.3-44.5zm0-50.6c-6.3-14.9-11.6-29.5-16-43.6 14.4-3.2 29.7-5.8 45.6-7.8-5.3 8.3-10.5 16.8-15.4 25.4-4.9 8.5-9.7 17.2-14.2 26zm11.4 25.3c6.6-13.8 13.8-27.3 21.4-40.6 7.6-13.3 15.8-26.2 24.4-38.9 15-1.1 30.3-1.7 45.9-1.7 15.6 0 31 .6 45.9 1.7 8.5 12.6 16.6 25.5 24.3 38.7 7.7 13.2 14.9 26.7 21.7 40.4-6.7 13.8-13.9 27.4-21.6 40.8-7.6 13.3-15.7 26.2-24.2 39-14.9 1.1-30.4 1.6-46.1 1.6-15.7 0-30.9-.5-45.6-1.4-8.7-12.7-16.9-25.7-24.6-39-7.7-13.3-14.8-26.8-21.5-40.6zm180.6 51.2c5.1-8.8 9.9-17.7 14.6-26.7 6.4 14.5 12 29.2 16.9 44.3-15.5 3.5-31.2 6.2-47 8 5.4-8.4 10.5-17 15.5-25.6zm14.4-76.5c-4.7-8.8-9.5-17.6-14.5-26.2-4.9-8.5-10-16.9-15.3-25.2 16.1 2 31.5 4.7 45.9 8-4.6 14.8-10 29.2-16.1 43.4zM256.2 118.3c10.5 11.4 20.4 23.4 29.6 35.8-19.8-.9-39.7-.9-59.5 0 9.8-12.9 19.9-24.9 29.9-35.8zM140.2 57c16.8-9.8 54.1 4.2 93.4 39 2.5 2.2 5 4.6 7.6 7-15.5 16.7-29.8 34.5-42.9 53.1-22.6 2-45 5.5-67.2 10.4-1.3-5.1-2.4-10.3-3.5-15.5-9.4-48.4-3.2-84.9 12.6-94zm-24.5 263.6c-4.2-1.2-8.3-2.5-12.4-3.9-21.3-6.7-45.5-17.3-63-31.2-10.1-7-16.9-17.8-18.8-29.9 0-18.3 31.6-41.7 77.2-57.6 5.7-2 11.5-3.8 17.3-5.5 6.8 21.7 15 43 24.5 63.6-9.6 20.9-17.9 42.5-24.8 64.5zm116.6 98c-16.5 15.1-35.6 27.1-56.4 35.3-11.1 5.3-23.9 5.8-35.3 1.3-15.9-9.2-22.5-44.5-13.5-92 1.1-5.6 2.3-11.2 3.7-16.7 22.4 4.8 45 8.1 67.9 9.8 13.2 18.7 27.7 36.6 43.2 53.4-3.2 3.1-6.4 6.1-9.6 8.9zm24.5-24.3c-10.2-11-20.4-23.2-30.3-36.3 9.6.4 19.5.6 29.5.6 10.3 0 20.4-.2 30.4-.7-9.2 12.7-19.1 24.8-29.6 36.4zm130.7 30c-.9 12.2-6.9 23.6-16.5 31.3-15.9 9.2-49.8-2.8-86.4-34.2-4.2-3.6-8.4-7.5-12.7-11.5 15.3-16.9 29.4-34.8 42.2-53.6 22.9-1.9 45.7-5.4 68.2-10.5 1 4.1 1.9 8.2 2.7 12.2 4.9 21.6 5.7 44.1 2.5 66.3zm18.2-107.5c-2.8.9-5.6 1.8-8.5 2.6-7-21.8-15.6-43.1-25.5-63.8 9.6-20.4 17.7-41.4 24.5-62.9 5.2 1.5 10.2 3.1 15 4.7 46.6 16 79.3 39.8 79.3 58 0 19.6-34.9 44.9-84.8 61.4zM256 210.2c25.3 0 45.8 20.5 45.8 45.8 0 25.3-20.5 45.8-45.8 45.8-25.3 0-45.8-20.5-45.8-45.8 0-25.3 20.5-45.8 45.8-45.8"></path>
-      </svg>
-      <svg class="icon--svg-inline icon--fixed" style="width: 0.875em" aria-hidden="true" data-prefix="fab" data-icon="sass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg="">
-        <path fill="currentColor" d="M551.1 291.9c-22.4.1-41.8 5.5-58 13.5-5.9-11.9-12-22.3-13-30.1-1.2-9.1-2.5-14.5-1.1-25.3s7.7-26.1 7.6-27.2c-.1-1.1-1.4-6.6-14.3-6.7-12.9-.1-24 2.5-25.3 5.9-1.3 3.4-3.8 11.1-5.3 19.1-2.3 11.7-25.8 53.5-39.1 75.3-4.4-8.5-8.1-16-8.9-22-1.2-9.1-2.5-14.5-1.1-25.3s7.7-26.1 7.6-27.2c-.1-1.1-1.4-6.6-14.3-6.7-12.9-.1-24 2.5-25.3 5.9-1.3 3.4-2.7 11.4-5.3 19.1-2.6 7.7-33.9 77.3-42.1 95.4-4.2 9.2-7.8 16.6-10.4 21.6s-.2.3-.4.9c-2.2 4.3-3.5 6.7-3.5 6.7v.1c-1.7 3.2-3.6 6.1-4.5 6.1-.6 0-1.9-8.4.3-19.9 4.7-24.2 15.8-61.8 15.7-63.1-.1-.7 2.1-7.2-7.3-10.7-9.1-3.3-12.4 2.2-13.2 2.2-.8 0-1.4 2-1.4 2s10.1-42.4-19.4-42.4c-18.4 0-44 20.2-56.6 38.5-7.9 4.3-25 13.6-43 23.5-6.9 3.8-14 7.7-20.7 11.4-.5-.5-.9-1-1.4-1.5-35.8-38.2-101.9-65.2-99.1-116.5 1-18.7 7.5-67.8 127.1-127.4 98-48.8 176.4-35.4 189.9-5.6 19.4 42.5-41.9 121.6-143.7 133-38.8 4.3-59.2-10.7-64.3-16.3-5.3-5.9-6.1-6.2-8.1-5.1-3.3 1.8-1.2 7 0 10.1 3 7.9 15.5 21.9 36.8 28.9 18.7 6.1 64.2 9.5 119.2-11.8C367 196.5 415.1 130.2 401 74.7 386.6 18.3 293.1-.2 204.6 31.2 151.9 49.9 94.9 79.3 53.9 117.6 5.2 163.2-2.6 202.9.6 219.5c11.4 58.9 92.6 97.3 125.1 125.7-1.6.9-3.1 1.7-4.5 2.5-16.3 8.1-78.2 40.5-93.7 74.7-17.5 38.8 2.9 66.6 16.3 70.4 41.8 11.6 84.6-9.3 107.6-43.6s20.2-79.1 9.6-99.5c-.1-.3-.3-.5-.4-.8 4.2-2.5 8.5-5 12.8-7.5 8.3-4.9 16.4-9.4 23.5-13.3-4 10.8-6.9 23.8-8.4 42.6-1.8 22 7.3 50.5 19.1 61.7 5.2 4.9 11.5 5 15.4 5 13.8 0 20-11.4 26.9-25 8.5-16.6 16-35.9 16-35.9s-9.4 52.2 16.3 52.2c9.4 0 18.8-12.1 23-18.3v.1s.2-.4.7-1.2c1-1.5 1.5-2.4 1.5-2.4v-.3c3.8-6.5 12.1-21.4 24.6-46 16.2-31.8 31.7-71.5 31.7-71.5s1.4 9.7 6.2 25.8c2.8 9.5 8.7 19.9 13.4 30-3.8 5.2-6.1 8.2-6.1 8.2s0 .1.1.2c-3 4-6.4 8.3-9.9 12.5-12.8 15.2-28 32.6-30 37.6-2.4 5.9-1.8 10.3 2.8 13.7 3.4 2.6 9.4 3 15.7 2.5 11.5-.8 19.6-3.6 23.5-5.4 6.2-2.2 13.4-5.7 20.2-10.6 12.5-9.2 20.1-22.4 19.4-39.8-.4-9.6-3.5-19.2-7.3-28.2 1.1-1.6 2.3-3.3 3.4-5 19.8-28.9 35.1-60.6 35.1-60.6s1.4 9.7 6.2 25.8c2.4 8.1 7.1 17 11.4 25.7-18.6 15.1-30.1 32.6-34.1 44.1-7.4 21.3-1.6 30.9 9.3 33.1 4.9 1 11.9-1.3 17.1-3.5 6.5-2.2 14.3-5.7 21.6-11.1 12.5-9.2 24.6-22.1 23.8-39.6-.3-7.9-2.5-15.8-5.4-23.4 15.7-6.6 36.1-10.2 62.1-7.2 55.7 6.5 66.6 41.3 64.5 55.8-2.1 14.6-13.8 22.6-17.7 25-3.9 2.4-5.1 3.3-4.8 5.1.5 2.6 2.3 2.5 5.6 1.9 4.6-.8 29.2-11.8 30.3-38.7 1.6-34-31.1-71.4-89-71.1zM121.8 436.6c-18.4 20.1-44.2 27.7-55.3 21.3C54.6 451 59.3 421.4 82 400c13.8-13 31.6-25 43.4-32.4 2.7-1.6 6.6-4 11.4-6.9.8-.5 1.2-.7 1.2-.7.9-.6 1.9-1.1 2.9-1.7 8.3 30.4.3 57.2-19.1 78.3zm134.4-91.4c-6.4 15.7-19.9 55.7-28.1 53.6-7-1.8-11.3-32.3-1.4-62.3 5-15.1 15.6-33.1 21.9-40.1 10.1-11.3 21.2-14.9 23.8-10.4 3.5 5.9-12.2 49.4-16.2 59.2zm111 53c-2.7 1.4-5.2 2.3-6.4 1.6-.9-.5 1.1-2.4 1.1-2.4s13.9-14.9 19.4-21.7c3.2-4 6.9-8.7 10.9-13.9 0 .5.1 1 .1 1.6-.1 17.9-17.3 30-25.1 34.8zm85.6-19.5c-2-1.4-1.7-6.1 5-20.7 2.6-5.7 8.6-15.3 19-24.5 1.2 3.8 1.9 7.4 1.9 10.8-.1 22.5-16.2 30.9-25.9 34.4z"></path>
-      </svg>
-      <svg class="icon--svg-inline icon--fixed" style="width: 0.875em" aria-hidden="true" data-prefix="fab" data-icon="git" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-        <path fill="currentColor" d="M18.8 221.7c0 25.3 16.2 60 41.5 68.5v1c-18.8 8.3-24 50.6 1 65.8v1C34 367 16 384.3 16 414.2c0 51.5 48.8 65.8 91.5 65.8 52 0 90.7-18.7 90.7-76 0-70.5-101-44.5-101-82.8 0-13.5 7.2-18.7 19.7-21.3 41.5-7.7 67.5-40 67.5-82.2 0-7.3-1.5-14.2-4-21 6.7-1.5 13.2-3.3 19.7-5.5v-50.5c-17.2 6.8-35.7 11.8-54.5 11.8-53.8-31-126.8 1.3-126.8 69.2zm87.7 163.8c17 0 41.2 3 41.2 25 0 21.8-19.5 26.3-37.7 26.3-17.3 0-43.3-2.7-43.3-25.2.1-22.3 22.1-26.1 39.8-26.1zM103.3 256c-22 0-31.3-13-31.3-33.8 0-49.3 61-48.8 61-.5 0 20.3-8 34.3-29.7 34.3zM432 305.5v49c-13.3 7.3-30.5 9.8-45.5 9.8-53.5 0-59.8-42.2-59.8-85.7v-87.7h.5v-1c-7 0-7.3-1.6-24 1v-47.5h24c0-22.3.3-31-1.5-41.2h56.7c-2 13.8-1.5 27.5-1.5 41.2h51v47.5s-19.3-1-51-1V281c0 14.8 3.3 32.8 21.8 32.8 9.8 0 21.3-2.8 29.3-8.3zM286 68.7c0 18.7-14.5 36.2-33.8 36.2-19.8 0-34.5-17.2-34.5-36.2 0-19.3 14.5-36.7 34.5-36.7C272 32 286 50 286 68.7zm-6.2 74.5c-1.8 14.6-1.6 199.8 0 217.8h-55.5c1.6-18.1 1.8-203 0-217.8h55.5z"></path>
-      </svg>
-      <svg class="icon--svg-inline icon--fixed" style="width: 0.875em" aria-hidden="true" data-prefix="fab" data-icon="python" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-        <path fill="currentColor" d="M167.8 36.4c-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1zm-6.7 28.4c11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4zm185.2 81.4v47.5c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6-7.7-30.9-22.3-54.2-53.4-54.2h-40.1zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3z"></path>
-      </svg>
-    </div>
-
-
-about_principles_table: 
-  transform: [handlebars]
-  text: |
-    <div class="hierarchy-selection">
-      <header class="hierarchy-selection-header">
-        {{{gt "principles_title"}}}
-      </header>
-      <div class="hierarchy-selection-items">
-        <div class="hierarchy-selection-item">
-          <div class="hierarchy-selection-item__header">
-            {{{gt "principle_1_name"}}}
-          </div>
-          <div class="hierarchy-selection-item__description">
-            {{{gt "principle_1_desc"}}}
-          </div>
-        </div>
-        <div class="hierarchy-selection-item">
-          <div class="hierarchy-selection-item__header">
-            {{{gt "principle_2_name"}}}
-          </div>
-          <div class="hierarchy-selection-item__description">
-            {{{gt "principle_2_desc"}}}
-          </div>
-        </div>
-        <div class="hierarchy-selection-item">
-          <div class="hierarchy-selection-item__header">
-            {{{gt "principle_3_name"}}}
-          </div>
-          <div class="hierarchy-selection-item__description">
-            {{{gt "principle_3_desc"}}}
-          </div>
-        </div>
-        <div class="hierarchy-selection-item">
-          <div class="hierarchy-selection-item__header">
-            {{{gt "principle_4_name"}}}
-          </div>
-          <div class="hierarchy-selection-item__description">
-            {{{gt "principle_4_desc"}}}
-          </div>
-        </div>
-      </div>
-    </div>
-
 
 principle_1_name:
   en: Authoritative
@@ -83,7 +14,6 @@ principle_1_desc:
   en: Mirroring documents such as the Public Accounts, Estimates, and Departmental Plans in real-time, the data you find here will match what you find in public reports as they are tabled.
   fr: L’information correspond en temps réel aux données des documents déposés au Parlement, tels que les comptes publics, les budgets des dépenses et les plans ministériels.
 
-
 principle_2_name:
   en: Balanced and Comprehensive
   fr: Information nuancée et complète
@@ -91,7 +21,6 @@ principle_2_name:
 principle_2_desc:
   en: Offering you a balance between big picture and detailed views of spending, people management, and results for all federal government levels.
   fr: Juste milieu entre un aperçu général de l’administration et une vue détaillée des dépenses, de la gestion des personnes et des résultats à tous les paliers du gouvernement fédéral.
-
 
 principle_3_name:
   en: Objective and Data Driven
@@ -101,7 +30,6 @@ principle_3_desc:
   en: The data is allowed to tell its own story, the GC InfoBase does not editorialize in its reporting. Government organizations may submit footnotes for added contextual information, but data receives a consistent presentation within each level of reporting.
   fr: L’Infobase du GC n’interprète rien et ne donne pas d’opinion. Les données parlent d’elles-mêmes. Les organisations gouvernementales peuvent soumettre des renseignements contextuels au moyen de notes de bas de page, mais les données sont présentées de la même façon à chaque palier redditionnel.
 
-
 principle_4_name:
   en: User-driven
   fr: Information adaptée aux besoins des utilisateurs
@@ -110,9 +38,6 @@ principle_4_desc:
   en: Employing open sources technologies; the GC InfoBase is always evolving and adapting to meet user needs and offer a better experience.
   fr: Usage de technologies à libre accès; l’InfoBase du GC évolue sans cesse, s’adapte aux besoins des utilisateurs et leur offre une meilleure expérience.
 
-about_sub_title:
-  en: About Us
-  fr: Qui sommes-nous
 
 about_intro_section:
   transform: [handlebars, markdown]
@@ -132,181 +57,174 @@ about_intro_section:
     coopération et de développement économiques (OCDE). L’outil contient plusieurs années de renseignements gouvernementaux, auparavant éparpillés dans plus de 500 rapports à l’échelle de
     la fonction publique fédérale.
     
+our_story_title:
+  en: Our story
+  fr: Notre histoire
 
+our_story_sub_title_1:
+  en: How did the GC InfoBase begin?
+  fr: Comment l’InfoBase du GC a vu le jour?
 
-about_body_text:
+our_story_sub_text_1:
   transform: [handlebars, markdown]
   en: |
-
-    <div>
-    {{{gt "about_principles_table"}}}
-    </div>
+    The GC InfoBase was developed in response to a {{ext_link "Parliamentary request" "http://www.ourcommons.ca/DocumentViewer/en/41-1/OGGO/report-7/page-144"}} for better access to 
+    information on government finances. Its ongoing development seeks to meet a public demand for simpler government reporting.
 
 
-
-    ## Our story
-
-
-    ### How did the GC InfoBase begin?
-
-
-    The GC InfoBase was developed in response to a {{ext_link "Parliamentary request" "http://www.ourcommons.ca/DocumentViewer/en/41-1/OGGO/report-7/page-144"}} for better access to information on government finances. Its ongoing development seeks to meet a public demand for simpler government reporting.
+    The GC InfoBase was launched in April 2013 under the name Expenditure Database. As it grew to incorporate new data (such as people management and results data), the name was changed 
+    to reflect the broader content coverage.
+  fr: |
+    L’InfoBase du GC a été élaborée à la {{ext_link "demande du Parlement" "http://www.noscommunes.ca/DocumentViewer/fr/41-1/OGGO/rapport-7/page-144"}} d’améliorer l’accès à l’information 
+    sur les finances publiques. On cherche aussi à répondre aux souhaits du grand public de simplifier la reddition de compte gouvernementale.
 
 
-    The GC InfoBase was launched in April 2013 under the name Expenditure Database. As it grew to incorporate new data (such as people management and results data), the name was changed to reflect the broader content coverage.
+    L’InfoBase du GC a été inaugurée en avril 2013 sous le nom de « Base de données des dépenses ». Le nom a changé au cours de sa croissance pour refléter l’intégration de nouvelles données 
+    (p. ex. les données sur les résultats et la gestion des personnes) et l’élargissement du contenu.
 
+our_story_sub_title_2:
+  en: |
+    Who are we?
+  fr: |
+    Qui sommes-nous?
 
-    ### Who are we?
-
-
+our_story_sub_text_2:
+  en: |
     We are a small, multi-disciplinary team of policy analysts, economists, data scientists, and developers housed in the Expenditure Management Sector of the Treasury Board of Canada Secretariat. Our mandate is experimenting with innovative solutions for analyzing and presenting complex government data, seeking to make it accessible for everyone. Our efforts have brought us national and international recognition for our data management skills and ability to transform complex concepts into clear and understandable stories. We love data!
+  fr: |
+    Nous sommes une petite équipe multidisciplinaire du Secteur de la gestion des dépenses, du Secrétariat du Conseil du Trésor du Canada, composée d’analystes des politiques, d’économistes, de scientifiques des données et de développeurs. Notre mandat consiste à mettre à l’essai des solutions novatrices pour l’analyse et la présentation de données complexes sur la gestion gouvernementale afin de les rendre accessibles à tout le monde. Grâce à nos efforts, nos compétences en gestion des données et notre capacité à transformer des concepts complexes en textes clairs et compréhensibles sont réputés à l’échelle nationale et internationale. Bref, nous sommes des passionnés des données!
+
+our_data_title:
+  en: Our Data
+  fr: Nos données
+
+our_data_sub_title_1:
+  en: What are our sources?
+  fr: Quelles sont nos sources?
+
+our_data_sub_text_1:
+  transform: [markdown]
+  en: |
+    We rely on several governmental publications (i.e. Public Accounts, Estimates, Departmental Plans and Quarterly Financial Reports). A full listing can be found on our 
+    [Datasets page](#metadata).
+  fr: |
+    Nous comptons sur plusieurs publications gouvernementales (p. ex. les Comptes publics, les budgets des dépenses, les plans ministériels et les rapports financiers trimestriels). 
+    Vous trouverez la liste complète dans la [page sur les données](#metadata).
+
+our_data_sub_title_2:
+  en: What is our added value?
+  fr: Quelle est la valeur ajoutée?
+
+our_data_sub_text_2:
+  en: |
+    We bring data together from over 500 government reports. In doing so, we apply our data management expertise to align data across multiple years, accounting for government 
+    organizational changes (such as a name change or the creation of a new spending mechanism), allowing for the discovery and presentation of previously obscure trends. 
 
 
-    ## Our Data 
+    We are obsessed with data quality (you can ask our stakeholders!) and we believe it starts at the time of the collection. We put in place mechanisms to drive the quality, 
+    accuracy and reliability of all data in the tool.
 
 
-    ### What are our sources? 
+    We know a number doesn’t always tell the full story! This is where GC InfoBase helps users by presenting contextual information alongside the data. We work with government 
+    organizations to explain interesting data such as a spending spike, a decline, or the status of a particular result.
+  fr: |
+    Nous rassemblons des données tirées de plus de 500 rapports gouvernementaux. Notre expertise consiste en un alignement des données sur plusieurs années qui prend en compte 
+    les changements organisationnels, tels qu’un changement de nom ou la création d’un nouveau mécanisme de dépenses. Cela permet de découvrir et de faire la présentation de tendances 
+    autrefois obscures.
 
 
-    We rely on several governmental publications (i.e. Public Accounts, Estimates, Departmental Plans and Quarterly Financial Reports). A full listing can be found on our [Datasets page](#metadata).
+    Selon les intervenants, nous sommes obsédés par qualité des données et, à notre avis, cela commence dès la collecte. Nous mettons en place des mécanismes qui favoriseront 
+    la qualité, l’exactitude et la fiabilité de toutes les données comprises dans l’outil.
 
 
-    ### What is our added value?
+    Les chiffres ne disent pas tout! L’InfoBase du GC s’avère utile aux utilisateurs en présentant de l’information contextuelle avec les données. On s’efforce, de concert avec les 
+    organisations gouvernementales, à expliquer des données intéressantes, telles qu’une hausse ou une baisse des dépenses, ou l’état d’un résultat escompté.
 
+our_data_sub_title_3:
+  en: How can I download the raw data?
+  fr: Comment puis-je télécharger les données brutes?
 
-    We bring data together from over 500 government reports. In doing so, we apply our data management expertise to align data across multiple years, accounting for government organizational changes (such as a name change or the creation of a new spending mechanism), allowing for the discovery and presentation of previously obscure trends. 
-
-
-    We are obsessed with data quality (you can ask our stakeholders!) and we believe it starts at the time of the collection. We put in place mechanisms to drive the quality, accuracy and reliability of all data in the tool.
-
-
-    We know a number doesn’t always tell the full story! This is where GC InfoBase helps users by presenting contextual information alongside the data. We work with government organizations to explain interesting data such as a spending spike, a decline, or the status of a particular result.
-
-
-    ### How can I download the raw data?
-
-
-    The GC InfoBase presents its data in many different ways, but we know that some people prefer to access the data directly for the sake of their own more focused analysis. For these brave souls, we ensure that all InfoBase data is also available in raw form on the {{ext_link "Government of Canada Open Data Portal" "https://open.canada.ca/data/en/dataset?portal_type=dataset"}}.
+our_data_sub_text_3:
+  transform: [handlebars, markdown]
+  en: |
+    The GC InfoBase presents its data in many different ways, but we know that some people prefer to access the data directly for the sake of their own more focused analysis. 
+    For these brave souls, we ensure that all InfoBase data is also available in raw form on the 
+    {{ext_link "Government of Canada Open Data Portal" "https://open.canada.ca/data/en/dataset?portal_type=dataset"}}.
 
 
     Individual links to the corresponding Open Data datasets for each dataset in the GC InfoBase can be found on our [Datasets page](#metadata).
-
-
-    ## Behind the Scene
-
-
-    ### What technologies are used in the GC InfoBase?
-
-
-    {{{gt "dev_icon_block"}}}
-
-    The GC InfoBase is a single-page web application, built in-house and from scratch. It was developed using open-source libraries and standards (such as Bootstrap, webpack, YAML, handlebars.js, D3.js and React). The team keeps the iteration time between prototypes and production short. Having built it from the ground-up gives us the flexibility to experiment with new ways of displaying information and allows the GC InfoBase to be constantly evolving, meeting user’s growing needs and expectations.
-
-
-    ### Who inspires us?
-
-
-    We draw inspiration from work done across the globe, in both the public and private sectors. Our [Government at a Glance diagram](#partition/dept/exp) was inspired by the excellent work of the {{ext_link "USAFacts.org" "https://usafacts.org/the-big-picture/spending"}} team. Our minimal page header and footer were inspired by our colleagues at the {{ext_link "Canadian Digital Service" "https://digital.canada.ca"}}. We are regularly inspired to push our data visualizations even further by the D3 community at large, and through resources like the {{ext_link "D3 gallery" "https://github.com/d3/d3/wiki/Gallery"}}.
-
-    ### Credits
-
-    Certain icons are © [Fork Awesome](https://forkaweso.me), licensed under SIL OFL 1.1. Others are from [Material Design](https://material.io/) © Google, licensed under Apache license version 2.0.
-
-    {{{gt "feedback_h2"}}}
-
-
-    We are always looking for ideas and suggestions to help us improve the current version of the InfoBase. If you would like to share some ideas or comments regarding your experience with the tool, please take a few minutes to complete our <a href="{{{survey_link}}}" target="_blank" rel="noopener noreferrer">online survey</a>.
-
-  fr: |  
-
-
-    <div>
-    {{{gt "about_principles_table"}}}
-    </div>
-
-
-    ## Notre histoire 
-
-
-    ### Comment l’InfoBase du GC a vu le jour?
-
-
-    L’InfoBase du GC a été élaborée à la {{ext_link "demande du Parlement" "http://www.noscommunes.ca/DocumentViewer/fr/41-1/OGGO/rapport-7/page-144"}} d’améliorer l’accès à l’information sur les finances publiques. On cherche aussi à répondre aux souhaits du grand public de simplifier la reddition de compte gouvernementale.
-
-
-    L’InfoBase du GC a été inaugurée en avril 2013 sous le nom de « Base de données des dépenses ». Le nom a changé au cours de sa croissance pour refléter l’intégration de nouvelles données (p. ex. les données sur les résultats et la gestion des personnes) et l’élargissement du contenu.
-
-
-    ### Qui sommes-nous?
-
-
-    Nous sommes une petite équipe multidisciplinaire du Secteur de la gestion des dépenses, du Secrétariat du Conseil du Trésor du Canada, composée d’analystes des politiques, d’économistes, de scientifiques des données et de développeurs. Notre mandat consiste à mettre à l’essai des solutions novatrices pour l’analyse et la présentation de données complexes sur la gestion gouvernementale afin de les rendre accessibles à tout le monde. Grâce à nos efforts, nos compétences en gestion des données et notre capacité à transformer des concepts complexes en textes clairs et compréhensibles sont réputés à l’échelle nationale et internationale. Bref, nous sommes des passionnés des données!
-
-
-
-    ## Nos donées
-
-    ### Quelles sont nos sources? 
-
-
-    Nous comptons sur plusieurs publications gouvernementales (p. ex. les Comptes publics, les budgets des dépenses, les plans ministériels et les rapports financiers trimestriels). Vous trouverez la liste complète dans la [page sur les données](#metadata).
-
-
-    ### Quelle est la valeur ajoutée?
-
-
-    Nous rassemblons des données tirées de plus de 500 rapports gouvernementaux. Notre expertise consiste en un alignement des données sur plusieurs années qui prend en compte les changements organisationnels, tels qu’un changement de nom ou la création d’un nouveau mécanisme de dépenses. Cela permet de découvrir et de faire la présentation de tendances autrefois obscures.
-
-
-    Selon les intervenants, nous sommes obsédés par qualité des données et, à notre avis, cela commence dès la collecte. Nous mettons en place des mécanismes qui favoriseront la qualité, l’exactitude et la fiabilité de toutes les données comprises dans l’outil.
-
-
-    Les chiffres ne disent pas tout! L’InfoBase du GC s’avère utile aux utilisateurs en présentant de l’information contextuelle avec les données. On s’efforce, de concert avec les organisations gouvernementales, à expliquer des données intéressantes, telles qu’une hausse ou une baisse des dépenses, ou l’état d’un résultat escompté.
-
-
-    ### Comment puis-je télécharger les données brutes?
-
-
-    L’InfoBase présente les données de diverses façons, mais nous savons que certains préfèrent avoir un accès direct aux données pour mener leur propre analyse. C’est pourquoi on veille à ce que toutes les données contenues dans l’outil figurent aussi sous forme brute dans le {{ext_link "Portail de données ouvertes du gouvernement du Canada" "https://ouvert.canada.ca/data/fr/dataset?portal_type=dataset"}}.
+  fr: |
+    L’InfoBase présente les données de diverses façons, mais nous savons que certains préfèrent avoir un accès direct aux données pour mener leur propre analyse. C’est pourquoi 
+    on veille à ce que toutes les données contenues dans l’outil figurent aussi sous forme brute dans le 
+    {{ext_link "Portail de données ouvertes du gouvernement du Canada" "https://ouvert.canada.ca/data/fr/dataset?portal_type=dataset"}}.
 
 
     Les liens vers les ensembles de données ouvertes correspondant à chaque tableau de l’InfoBase se trouvent dans la [page sur les données](#metadata).
 
+behind_scenes_title:
+  en: Behind the Scenes
+  fr: Derrière la scène
 
-    ## Derrière la scène
+behind_scenes_sub_title_1:
+  en: What technologies are used in the GC InfoBase?
+  fr: Quelles sont les technologies utilisées dans l’InfoBase du GC?
 
-  
-    ### Quelles sont les technologies utilisées dans l’InfoBase du GC?
+behind_scenes_sub_text_1:
+  en: |
+    The GC InfoBase is a single-page web application, built in-house and from scratch. It was developed using open-source libraries and standards (such as Bootstrap, webpack, YAML, 
+    handlebars.js, D3.js and React). The team keeps the iteration time between prototypes and production short. Having built it from the ground-up gives us the flexibility to experiment 
+    with new ways of displaying information and allows the GC InfoBase to be constantly evolving, meeting user’s growing needs and expectations.
+  fr: |
+    L’InfoBase du GC est une application Web-maison d’une seule page montée de toutes pièces. Elle a été développée à l’aide de normes et de bibliothèques logicielles en libre accès 
+    (comme Bootstrap, Webpack, YAML, handlebars.js, D3.js et React). L’équipe maintient un court délai d’itération entre les prototypes et la production. Comme la page est montée de toutes 
+    pièces, nous sommes en mesure de mettre à l’essai de nouvelles présentations de l’information et de constamment faire évoluer l’InfoBase du GC pour répondre aux attentes et besoins 
+    croissants des utilisateurs.
 
+behind_scenes_sub_title_2:
+  en: Who inspires us?
+  fr: Quelle est notre source d’inspiration?
 
-    {{{gt "dev_icon_block"}}}
+behind_scenes_sub_text_2:
+  transform: [handlebars, markdown]
+  en: |
+    We draw inspiration from work done across the globe, in both the public and private sectors. Our [Government at a Glance diagram](#partition/dept/exp) was inspired by the excellent 
+    work of the {{ext_link "USAFacts.org" "https://usafacts.org/the-big-picture/spending"}} team. Our minimal page header and footer were inspired by our colleagues at the 
+    {{ext_link "Canadian Digital Service" "https://digital.canada.ca"}}. We are regularly inspired to push our data visualizations even further by the D3 community at large, and through 
+    resources like the {{ext_link "D3 gallery" "https://github.com/d3/d3/wiki/Gallery"}}.
+  fr: |
+    Notre source d’inspiration est le travail effectué à l’échelle mondiale, tant dans le secteur public que privé. Pour le
+    [diagramme Panorama de l'administration publique](#partition/dept/exp), nous sommes inspirés par l’excellent travail accompli par l’équipe 
+    {{ext_link "USAFacts.org" "https://usafacts.org/the-big-picture/spending"}}. L’inspiration pour la taille minimale de l’en-tête et du bas de page nous vient de nos collègues à 
+    {{ext_link "Service numérique canadien" "https://numerique.canada.ca/"}}. Enfin, nous sommes régulièrement inspirés par la grande collectivité D3 qui nous incite à peaufiner encore 
+    davantage les visualisations de données, au moyen de ressources comme la {{ext_link "galerie D3" "https://github.com/d3/d3/wiki/Gallery"}}.
 
-    L’InfoBase du GC est une application Web-maison d’une seule page montée de toutes pièces. Elle a été développée à l’aide de normes et de bibliothèques logicielles en libre accès (comme Bootstrap, Webpack, YAML, handlebars.js, D3.js et React). L’équipe maintient un court délai d’itération entre les prototypes et la production. Comme la page est montée de toutes pièces, nous sommes en mesure de mettre à l’essai de nouvelles présentations de l’information et de constamment faire évoluer l’InfoBase du GC pour répondre aux attentes et besoins croissants des utilisateurs.
+behind_scenes_sub_title_3:
+  en: Credits
+  fr: Crédits
 
+behind_scenes_sub_text_3:
+  transform: [handlebars, markdown]
+  en: |
+    Certain icons are © {{ext_link "Font Awesome" "https://github.com/FortAwesome/Font-Awesome"}}, licensed under 
+    {{ext_link "CC BY 4.0 License" "https://creativecommons.org/licenses/by/4.0/"}}. Others are from {{ext_link "Material Design" "https://material.io/"}} © Google Inc, licensed under
+    {{ext_link "Apache license version 2.0" "https://www.apache.org/licenses/LICENSE-2.0"}}, or © {{ext_link "The Wikimedia Foundation, Inc" "https://commons.wikimedia.org/wiki/Main_Page"}}, licensed 
+    under the {{ext_link "MIT license" "https://opensource.org/licenses/MIT"}}. All svg images used under license indicate the copyright holder and license terms in the svg source code.
+  fr: |
+    Certaines icônes sont © {{ext_link "Font Awesome" "https://github.com/FortAwesome/Font-Awesome"}}, sous license {{ext_link "CC BY 4.0" "https://creativecommons.org/licenses/by/4.0/"}}.
+    D'autres proviennent de {{ext_link "Material Design" "https://material.io/"}} © Google Inc, sous license {{ext_link "Apache version 2.0" "https://www.apache.org/licenses/LICENSE-2.0"}},
+    ou © {{ext_link "Wikimedia Foundation, Inc" "https://commons.wikimedia.org/wiki/Main_Page"}}, sous license {{ext_link "MIT" "https://opensource.org/licenses/MIT"}}. Toutes les images svg
+    utilisées sous licence indiquent le détenteur des droits d'auteur et les conditions de la licence dans le code source svg.
 
-    ### Quelle est notre source d’inspiration?
-
-
-    Notre source d’inspiration est le travail effectué à l’échelle mondiale, tant dans le secteur public que privé. Pour le [diagramme Panorama de l'administration publique](#partition/dept/exp), nous sommes inspirés par l’excellent travail accompli par l’équipe {{ext_link "USAFacts.org" "https://usafacts.org/the-big-picture/spending"}}. L’inspiration pour la taille minimale de l’en-tête et du bas de page nous vient de nos collègues à {{ext_link "Service numérique canadien" "https://numerique.canada.ca/"}}. Enfin, nous sommes régulièrement inspirés par la grande collectivité D3 qui nous incite à peaufiner encore davantage les visualisations de données, au moyen de ressources comme la {{ext_link "galerie D3" "https://github.com/d3/d3/wiki/Gallery"}}.
-
-    ### Credits
-
-    TODO TODO TODO
-
-    {{{gt "feedback_h2"}}}
-
-
-    Nous sommes constamment à la recherche d’idées et de suggestions pour améliorer la version actuelle de l’InfoBase. Le cas échéant, veuillez prendre quelques minutes pour remplir notre <a href="{{{survey_link}}}" target="_blank" rel="noopener noreferrer">sondage en ligne</a>.
-
-
-feedback_h2:
-  transform: [handlebars]
-  text: | 
-    <h2> 
-      {{gt "feedback_header_text"}} 
-      {{{gt "survey_link_icon"}}}
-    </h2>
-
-feedback_header_text: 
+feedback_title:
   en: We want to hear from you!
   fr: La parole est à vous!
+
+feedback_text:
+  en: |
+    We are always looking for ideas and suggestions to help us improve the current version of the InfoBase. If you would like to share some ideas or comments regarding your experience 
+    with the tool, please take a few minutes to complete our <a href="{{{survey_link}}}" target="_blank" rel="noopener noreferrer">online survey</a>.
+  fr: |
+    Nous sommes constamment à la recherche d’idées et de suggestions pour améliorer la version actuelle de l’InfoBase. Le cas échéant, veuillez prendre quelques minutes pour remplir 
+    notre <a href="{{{survey_link}}}" target="_blank" rel="noopener noreferrer">sondage en ligne</a>.
+
+

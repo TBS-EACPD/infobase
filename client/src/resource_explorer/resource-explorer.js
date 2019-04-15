@@ -13,7 +13,6 @@ import {
   TabbedControls,
   Details,
 } from '../util_components.js';
-import classNames from 'classnames';
 
 const { Tag } = Subject;
 
@@ -35,25 +34,6 @@ import { Explorer } from '../components/ExplorerComponents.js';
 
 const INCLUDE_OTHER_TAGS = true;
 const { text_maker, TM } = create_text_maker_component(explorer_text);
-
-const HierarchySelectionItem = ({title, text, active, url }) => (
-  <a 
-    role="radio"
-    title={title}
-    className={classNames("hierarchy-selection-item", active && "active")}
-    tabIndex={0}
-    aria-checked={active}
-    href={url}
-  >
-    <div className="hierarchy-selection-item__header">
-      <span className="link-styled">{title}</span>
-    </div>
-    <div className="hierarchy-selection-item__description">
-      {text}
-    </div>
-  </a>
-);
-
 
 const dp_only_schemes = ["MLT"];
 
@@ -196,7 +176,6 @@ class ExplorerPage extends React.Component {
         id,
       }))
       .value()
-
     const min_props = {
       title: text_maker("how_were_accountable"),
       text: text_maker("portfolio_description"),
@@ -310,8 +289,9 @@ class ExplorerPage extends React.Component {
             title={text_maker("choose_explore_point")}
             content={_.map([ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp19" && INCLUDE_OTHER_TAGS ? [wwh_props, hi_props] : []) ], props =>
               ({
-                title: props.title,
+                name: props.title,
                 desc: props.text,
+                active: props.active,
                 href: `#resource-explorer/${props.id}/${doc}`,
               })
             )}
@@ -476,20 +456,3 @@ export default class ResourceExplorer extends React.Component {
 
   }
 }
-
-
-
-      //     <div className="hierarchy-selection" style={{marginTop: "20px"}}>
-      //       <header className="hierarchy-selection-header">
-      //         <TM k="choose_explore_point" />
-      //       </header>
-      //       <div role="radiogroup" className="hierarchy-selection-items">
-      //         {_.map([ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp19" && INCLUDE_OTHER_TAGS ? [wwh_props /*hi_props, HI_TODO*/ /*, mlt_props*/] : []) ],props =>
-      //         <HierarchySelectionItem 
-      //         key={props.id} 
-      //         url={`#resource-explorer/${props.id}/${doc}`}
-      //         {...props} 
-      //       />
-      //     )}
-      //   </div>
-      // </div>
