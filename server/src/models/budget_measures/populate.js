@@ -143,7 +143,6 @@ export default async function({models}){
           description_fr: clean_budget_measure_description(budget_lookup.description_fr),
         }))
         .groupBy(
-          budget_lookups,
           ({parent_measure_id}) => _.isNull(parent_measure_id)
         )
         .value();
@@ -182,7 +181,7 @@ export default async function({models}){
         .groupBy( ({measure_id}) => !_.includes(submeasure_ids, measure_id) )
         .value();
 
-    
+
       const submeasure_ids_by_parent_measure_and_org_id = _.mapValues(
         submeasure_ids_by_parent_measure,
         (submeasure_ids) => _.chain(submeasure_data)
