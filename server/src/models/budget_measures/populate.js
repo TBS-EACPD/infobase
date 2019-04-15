@@ -22,7 +22,7 @@ export default async function({models}){
 
   const special_funding_subjects = [
     {
-      subject_id: "net_adjust",
+      org_id: "net_adjust",
       level: "special_funding_case",
       name_en: "Net adjustment to be on a 2018-19 Estimates Basis",
       name_fr: "Rajustement net selon le Budget des dépenses de 2018-2019",
@@ -30,7 +30,7 @@ export default async function({models}){
       description_fr: "",
     },
     {
-      subject_id: "non_allocated",
+      org_id: "non_allocated",
       level: "special_funding_case",
       name_en: "Allocation to be determined",
       name_fr: "Affectation à determiner",
@@ -42,12 +42,12 @@ export default async function({models}){
 
   const igoc_rows = get_standard_csv_file_rows(`igoc.csv`);
   const dept_codes_by_org_ids = _.chain(igoc_rows)
-    .map( ({org_id, dept_code}) => [org_id, dept_code])
+    .map( ({org_id, dept_code}) => [org_id, dept_code] )
     .fromPairs()
     .value();
 
-  const get_program_allocations = (data) => _.chain(data)
-    .filter( ({allocated}) => +allocated !== 0 )
+  const get_program_allocations_by_measure_and_org_id = (data) => _.chain(data)
+    .filter( ({allocated, withheld}) => allocated || withheld )
     .map(
       ({measure_id, org_id, funding, allocated, withheld, remaining, ...program_columns}) => {
         if ( !_.every(program_columns, _.isNull) ){
@@ -73,7 +73,7 @@ export default async function({models}){
             )
             .values()
             .thru( ([activity_codes, allocation_values]) => {
-              const actual_activity_codes = _.compact(activity_codes)
+              const actual_activity_codes = _.compact(activity_codes);
 
               const has_more_allocation_values_than_activity_codes = !_.chain(allocation_values)
                 .drop(actual_activity_codes.length)
@@ -91,11 +91,24 @@ export default async function({models}){
             .mapKeys( (allocation_value, activity_code) => `${dept_code}-${activity_code}`)
             .value();
   
-          return [measure_id, program_allocations];
+          return [measure_id, {[org_id]: program_allocations}];
         }
       }
     )
-    .fromPairs()
+    .compact()
+    .groupBy( ([measure_id]) => measure_id )
+    .mapValues(
+      (rows) => _.chain(rows)
+        .map( ([measure_id, program_allocations_by_org_id]) => program_allocations_by_org_id )
+        .reduce(
+          (program_allocations_by_org_ids, program_allocations_by_org_id) => ({
+            ...program_allocations_by_org_ids,
+            ...program_allocations_by_org_id,
+          }),
+          {},
+        )
+        .value()
+    )
     .value();
   
   
@@ -113,16 +126,17 @@ export default async function({models}){
         ({parent_measure_id}) => _.isNull(parent_measure_id)
       );
 
-      const submeasure_ids = _.map(submeasure_lookups, "measure_id")
-      const submeasure_ids_by_parent_measure_and_subject = _.chain(submeasure_lookups)
+      const submeasure_ids = _.map(submeasure_lookups, "measure_id");
+      const submeasure_ids_by_parent_measure = _.chain(submeasure_lookups)
         .groupBy("parent_measure_id")
-        .mapValues( submeasures => _.chain(submeasures)
-          .groupBy("subject_id")
-          .mapValues("measure_id")
-          .value()
-        )
+        .mapValues( submeasures => _.map(submeasures, "measure_id") )
         .value();
-
+      
+      // In the csv, parent measures do NOT contain the allocated, withheld, and program allocation values of their submeasures (I gather
+      // that's done so, in the open data set, people summing by columns readily see the correct totals). That means, before loading the csv data
+      // in to the database, we have to go around rolling up the submeasure values in to their parents.
+      // Because we do that here, in the final model, submeasures don't have values that contribute to the total; they just represent granular breakouts of 
+      // certain real measures.
       const {
         true: measure_data,
         false: submeasure_data,
@@ -146,27 +160,66 @@ export default async function({models}){
         .groupBy( ({measure_id}) => !_.includes(submeasure_ids, measure_id) )
         .value();
     
-      const submeasure_program_allocations_by_submeasure = get_program_allocations(submeasure_data);
-
-      // WIP, also sum of get_program_allocations(submeasure_data) + get_program_allocations(measure_data) !== total allocations, so something else is wrong
-      const program_allocations_by_measure = _.mapValues( 
-        get_program_allocations(measure_data),
-        (direct_program_allocations, measure_id) => {
-          const submeasure_ids = submeasure_ids_by_parent_measure_and_subject[measure_id];
-          const submeasure_program_allocations = _.map(submeasure_ids, submeasure_id => submeasure_program_allocations_by_submeasure[submeasure_id]);
-
-          if ( !_.isEmpty(submeasure_program_allocations) ){
-            _.mergeWith(
-              direct_program_allocations,
-              ...submeasure_program_allocations,
-              (program_allocation_ammount, submeasure_allocation_ammount) => (program_allocation_ammount || 0) + submeasure_allocation_ammount,
-            );
-          }
-          
-          return direct_program_allocations;
-        }
+      const submeasure_ids_by_parent_measure_and_org_id = _.mapValues(
+        submeasure_ids_by_parent_measure,
+        (submeasure_ids) => _.chain(submeasure_data)
+          .filter( ({measure_id}) => _.includes(submeasure_ids, measure_id) )
+          .groupBy("org_id")
+          .mapValues( submeasures => _.map(submeasures, "measure_id") )
+          .value()
       );
 
+      const direct_program_allocations_by_measure_and_org_id = get_program_allocations_by_measure_and_org_id(measure_data);
+      const submeasure_program_allocations_by_submeasure_and_org_id = get_program_allocations_by_measure_and_org_id(submeasure_data);
+
+      const program_allocations_by_measure_and_org_id = _.chain(measure_data)
+        .groupBy("measure_id")
+        .mapValues(
+          (rows_for_measure_id, measure_id) => _.chain(rows_for_measure_id)
+            .groupBy("org_id")
+            .mapValues(
+              (measure_data, org_id) => {
+                const direct_program_allocations = _.get(
+                  direct_program_allocations_by_measure_and_org_id,
+                  `${measure_id}.${org_id}`
+                );
+
+                const submeasure_ids = _.get(
+                  submeasure_ids_by_parent_measure_and_org_id, 
+                  `${measure_id}.${org_id}`
+                );
+                const submeasure_program_allocations = _.map(
+                  submeasure_ids, 
+                  submeasure_id => _.get(
+                    submeasure_program_allocations_by_submeasure_and_org_id, 
+                    `${submeasure_id}.${org_id}`
+                  )
+                );
+
+                if ( !_.isEmpty(direct_program_allocations) && !_.isEmpty(submeasure_program_allocations) ){
+                  return _.chain(direct_program_allocations)
+                    .cloneDeep()
+                    .mergeWith(
+                      ...submeasure_program_allocations,
+                      (program_allocation_ammount, submeasure_allocation_ammount) => (program_allocation_ammount || 0) + submeasure_allocation_ammount,
+                    )
+                    .value();
+                } else {
+                  return {
+                    ...direct_program_allocations,
+                    ..._.mergeWith(
+                      {},
+                      ...submeasure_program_allocations,
+                      (program_allocation_ammount, submeasure_allocation_ammount) => (program_allocation_ammount || 0) + submeasure_allocation_ammount,
+                    ),
+                  };
+                }
+              }
+            )
+            .value()
+        )
+        .value();
+      
       debugger
 
       return [
