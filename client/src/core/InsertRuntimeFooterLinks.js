@@ -1,9 +1,10 @@
 import { trivial_text_maker } from '../models/text.js';
+import { get_static_url } from '../request_utils.js';
 
 const footer_link_items = [
   {
     href: trivial_text_maker("survey_link_href"),
-    text: trivial_text_maker("survey_link_text") + " " + trivial_text_maker("survey_link_icon"),
+    text: trivial_text_maker("survey_link_text") + " " + `<img style="stroke: currentColor; width: 20px; height: 20px; vertical-align: -12px; text-align: center;" src=${get_static_url("svg/feedback-icon.svg")} />`,
   },
   {
     href: "#privacy",
