@@ -258,30 +258,45 @@ export default async function({models}){
       );
 
 
-      const submeasures_by_measure_and_org_id = {}; //TODO
+      const submeasures_by_measure_and_org_id = _.mapValues(
+        submeasure_ids_by_parent_measure_and_org_id,
+        (submeasure_data_by_org_id, parent_measure_id) => _.mapValues(
+          submeasure_data_by_org_id,
+          (submeasure_ids, org_id) => _.map(
+            submeasure_ids,
+            submeasure_id => ({
+              submeasure_id,
+              parent_measure_id,
+              org_id,
+              ..._.chain(submeasure_data)
+                .find({measure_id: submeasure_id, org_id})
+                .pick([
+                  "allocated",
+                  "withheld",
+                ])
+                .value(),
+            })
+          )
+        )
+      );
 
       const flatten_submeasures_by_measure_and_org_id = (submeasures_by_measure_and_org_id) => (
         flatten_documents_by_measure_and_org_id(
           submeasures_by_measure_and_org_id,
-          (measure_id, org_id, document, key) => `${measure_id}-${org_id}-${document.measure_id}`,
+          (measure_id, org_id, document, key) => `${measure_id}-${org_id}-${document && document.submeasure_id}`,
           (measure_id, org_id, document, key) => ({
-            submeasure_id: document.measure_id,
-            parent_measure_id: measure_id,
-            org_id,
-
-            allocated: document.allocated,
-            withheld: document.withheld,
+            ...document,
 
             program_allocations: ommit_unique_id(
               flatten_program_allocations_by_measure_and_org_id(
-                [{
+                {
                   [measure_id]: {
                     [org_id]: _.get(
                       submeasure_program_allocations_by_submeasure_and_org_id,
-                      `${measure_id}.${org_id}`,
+                      `${document && document.submeasure_id}.${org_id}`,
                     ),
                   },
-                }]
+                }
               ),
             ),
           }),
@@ -289,7 +304,41 @@ export default async function({models}){
       );
 
 
-      const data_by_measure_and_org_id = {}; //TODO
+      const data_by_measure_and_org_id = _.chain(measure_data)
+        .map(
+          ({measure_id, org_id, funding, allocated, withheld, remaining}) => {
+            // TODO: add in org level measure descriptions here when avaialable
+
+            const submeasures = _.get(
+              submeasures_by_measure_and_org_id,
+              `${measure_id}.${org_id}`
+            );
+
+            const allocated_to_submeasures = _.reduce(
+              submeasures,
+              (sum, {allocated}) => sum + allocated,
+              0
+            );
+
+            const withheld_through_submeasures = _.reduce(
+              submeasures,
+              (sum, {withheld}) => sum + withheld,
+              0
+            );
+
+            return {
+              measure_id,
+              org_id,
+              funding,
+              allocated: allocated + allocated_to_submeasures,
+              withheld: withheld + withheld_through_submeasures,
+              remaining,
+            };
+          }
+        )
+        .groupBy("measure_id")
+        .mapValues( (measure_rows) => _.groupBy(measure_rows, "org_id") )
+        .value();
 
       const flatten_data_by_measure_and_org_id = (data_by_measure_and_org_id) => (
         flatten_documents_by_measure_and_org_id(
@@ -300,34 +349,34 @@ export default async function({models}){
 
             program_allocations: ommit_unique_id(
               flatten_program_allocations_by_measure_and_org_id(
-                [{
+                {
                   [measure_id]: {
                     [org_id]: _.get(
                       program_allocations_by_measure_and_org_id,
                       `${measure_id}.${org_id}`,
                     ),
                   },
-                }]
+                }
               )
             ),
 
             submeasure_breakouts: ommit_unique_id(
               flatten_submeasures_by_measure_and_org_id(
-                [{
+                {
                   [measure_id]: {
                     [org_id]: _.get(
                       submeasures_by_measure_and_org_id,
                       `${measure_id}.${org_id}`,
                     ),
                   },
-                }]
+                }
               ),
             ),
           }),
         )
       );
       
-      
+
       return [
         models[`Budget${budget_year}SubmeasureProgramAllocations`].insertMany( 
           flatten_program_allocations_by_measure_and_org_id(submeasure_program_allocations_by_submeasure_and_org_id)
@@ -341,24 +390,24 @@ export default async function({models}){
         models[`Budget${budget_year}Data`].insertMany(
           flatten_data_by_measure_and_org_id(data_by_measure_and_org_id)
         ),
-        models[`Budget${budget_year}Measures`].insertMany(
-          _.map(
-            measure_data,
-            measure => ({
-              ...measure,
-
-              data: ommit_unique_id(
-                flatten_data_by_measure_and_org_id(
-                  [{
-                    [measure.measure_id]: {
-                      ...submeasures_by_measure_and_org_id[measure.measure_id],
-                    },
-                  }]
-                )
-              ),
-            })
-          )
-        ),
+        //models[`Budget${budget_year}Measures`].insertMany(
+        //  _.map(
+        //    measure_lookups,
+        //    measure => ({
+        //      ...measure,
+//
+        //      data: ommit_unique_id(
+        //        flatten_data_by_measure_and_org_id(
+        //          [{
+        //            [measure.measure_id]: {
+        //              ...submeasures_by_measure_and_org_id[measure.measure_id],
+        //            },
+        //          }]
+        //        )
+        //      ),
+        //    })
+        //  )
+        //),
       ];
     }),
   ]);
