@@ -11,7 +11,7 @@ import { get_static_url } from '../request_utils.js';
 
 const text_maker = create_text_maker(about_text_bundle);
 
-const tech_icon_list = _.chain(['html5','node-js','react','git','github','python','sass','graphql','django'])
+const tech_icon_list = _.chain(['html5','node-js','react','git','github','python','sass','graphql','baseline-cloud'])
   .map(tech => get_static_url(`svg/tech-logos/${tech}.svg`))
   .map(svg => ({src: svg}))
   .value();
