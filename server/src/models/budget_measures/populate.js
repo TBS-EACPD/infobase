@@ -90,36 +90,35 @@ export default async function({models}){
     )
     .value();
   
-  const flatten_documents_by_measure_and_org_id = (documents_by_measure_and_org_id, uniq_id_func, fields_func) => _.flatMap(
-    documents_by_measure_and_org_id,
-    (documents_by_org_id, measure_id) => _.flatMap(
-      documents_by_org_id,
-      (documents, org_id) => _.flatMap(
-        documents,
-        (document, key) => ({
-          unique_id: uniq_id_func(measure_id, org_id, document, key),
-          ...fields_func(measure_id, org_id, document, key),
-        })
+  const flatten_documents_by_measure_and_org_id = (documents_by_measure_and_org_id, uniq_id_func, fields_func) => _.chain(documents_by_measure_and_org_id)
+    .flatMap(
+      (documents_by_org_id, measure_id) => _.flatMap(
+        documents_by_org_id,
+        (documents, org_id) => _.flatMap(
+          documents,
+          (document, key) => ({
+            unique_id: uniq_id_func(measure_id, org_id, document, key),
+            ...fields_func(measure_id, org_id, document, key),
+          })
+        )
       )
     )
-  );
+    .map(
+      document => _.omitBy(
+        document,
+        (field_value) => _.isEmpty(field_value) && 
+          ( 
+            _.isArray(field_value) || 
+            _.isObject(field_value) 
+          ) ||
+        _.isNull(field_value)
+      )
+    )
+    .value();
 
   const ommit_unique_id_fields = (documents) => _.map(
     documents,
     document => _.omit(document, "unique_id")
-  );
-
-  const ommit_empty_fields = (documents) => _.map(
-    documents,
-    document => _.omitBy(
-      document,
-      (field_value) => _.isEmpty(field_value) && 
-        ( 
-          _.isArray(field_value) || 
-          _.isObject(field_value) 
-        ) ||
-      _.isNull(field_value)
-    )
   );
   
 
@@ -300,19 +299,17 @@ export default async function({models}){
           (measure_id, org_id, document, key) => ({
             ...document,
 
-            program_allocations: ommit_empty_fields(
-              ommit_unique_id_fields(
-                flatten_program_allocations_by_measure_and_org_id(
-                  {
-                    [measure_id]: {
-                      [org_id]: _.get(
-                        submeasure_program_allocations_by_submeasure_and_org_id,
-                        `${document && document.submeasure_id}.${org_id}`,
-                      ),
-                    },
-                  }
-                ),
-              )
+            program_allocations: ommit_unique_id_fields(
+              flatten_program_allocations_by_measure_and_org_id(
+                {
+                  [measure_id]: {
+                    [org_id]: _.get(
+                      submeasure_program_allocations_by_submeasure_and_org_id,
+                      `${document && document.submeasure_id}.${org_id}`,
+                    ),
+                  },
+                }
+              ),
             ),
           }),
         )
@@ -362,34 +359,30 @@ export default async function({models}){
           (measure_id, org_id, document, key) => ({
             ...document,
 
-            program_allocations: ommit_empty_fields(
-              ommit_unique_id_fields(
-                flatten_program_allocations_by_measure_and_org_id(
-                  {
-                    [measure_id]: {
-                      [org_id]: _.get(
-                        program_allocations_by_measure_and_org_id,
-                        `${measure_id}.${org_id}`,
-                      ),
-                    },
-                  }
-                )
+            program_allocations: ommit_unique_id_fields(
+              flatten_program_allocations_by_measure_and_org_id(
+                {
+                  [measure_id]: {
+                    [org_id]: _.get(
+                      program_allocations_by_measure_and_org_id,
+                      `${measure_id}.${org_id}`,
+                    ),
+                  },
+                }
               )
             ),
 
-            submeasure_breakouts: ommit_empty_fields(
-              ommit_unique_id_fields(
-                flatten_submeasures_by_measure_and_org_id(
-                  {
-                    [measure_id]: {
-                      [org_id]: _.get(
-                        submeasures_by_measure_and_org_id,
-                        `${measure_id}.${org_id}`,
-                      ),
-                    },
-                  }
-                ),
-              )
+            submeasure_breakouts: ommit_unique_id_fields(
+              flatten_submeasures_by_measure_and_org_id(
+                {
+                  [measure_id]: {
+                    [org_id]: _.get(
+                      submeasures_by_measure_and_org_id,
+                      `${measure_id}.${org_id}`,
+                    ),
+                  },
+                }
+              ),
             ),
           }),
         )
@@ -415,15 +408,13 @@ export default async function({models}){
             measure => ({
               ...measure,
 
-              data: ommit_empty_fields(
-                ommit_unique_id_fields(
-                  flatten_data_by_measure_and_org_id(
-                    {
-                      [measure.measure_id]: {
-                        ...data_by_measure_and_org_id[measure.measure_id],
-                      },
-                    }
-                  )
+              data: ommit_unique_id_fields(
+                flatten_data_by_measure_and_org_id(
+                  {
+                    [measure.measure_id]: {
+                      ...data_by_measure_and_org_id[measure.measure_id],
+                    },
+                  }
                 )
               ),
             })
