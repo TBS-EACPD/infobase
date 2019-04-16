@@ -144,6 +144,8 @@ export class NivoResponsiveBar extends React.Component{
       text_formatter,
       theme,
       colorBy,
+      min,
+      max,
       motion_damping,
       motion_stiffness,
       tooltip,
@@ -179,8 +181,8 @@ export class NivoResponsiveBar extends React.Component{
             {
               tickValues: tick_value || 6,
               format: (d) => get_formatter(is_money, text_formatter)(d),
-              min: "auto",
-              max: "auto",
+              min: min,
+              max: max,
               ...(left_axis || {}),
             }
         }
@@ -324,6 +326,8 @@ NivoResponsiveHBar.defaultProps = {
   enableLabel: false,
   enableGridX: true,
   enableGridY: true,
+  max: "auto",
+  min: "auto",
 };
 
 export class NivoResponsiveLine extends React.Component {
@@ -334,6 +338,7 @@ export class NivoResponsiveLine extends React.Component {
     const { 
       data,
       is_money,
+      raw_data,
       margin,
       tick_amount,
       colors,
@@ -376,7 +381,7 @@ export class NivoResponsiveLine extends React.Component {
             type: "linear",
             stacked: stacked,
             max: max,
-            min: enableArea? 0: min,
+            min: (_.min(raw_data) >= 0 || enableArea)? 0: min,
             ...(yScale || {}),
           }
         }

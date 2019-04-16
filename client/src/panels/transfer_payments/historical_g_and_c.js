@@ -150,7 +150,6 @@ class HistTPTypes extends React.Component {
       .fromPairs()
       .value();
 
-
     const colors = infobase_colors();
 
     const legend_items = _.chain(series)
@@ -258,7 +257,6 @@ class DetailedHistTPItems extends React.Component {
       .sortBy(row => row["{{pa_last_year}}exp"])
       .reverse()
       .value();
-
     
     const graph_series = _.chain(prepped_rows)
       .map(row => [
@@ -268,8 +266,10 @@ class DetailedHistTPItems extends React.Component {
       .filter( (_val, ix)=> _.includes(active_indices, ix))
       .fromPairs()
       .value();
-
     
+    const raw_data =[].concat.apply([], _.map(graph_series, d => d));
+
+
     const legend_items = _.map(prepped_rows, (row,ix) => ({
       id: ix,
       label: row.tp,
@@ -367,6 +367,7 @@ class DetailedHistTPItems extends React.Component {
         <div className="fcol-md-8" style={{height: '400px'}} aria-hidden = {true}>
           <NivoResponsiveLine
             data = {detail_expend_data}
+            raw_data = {raw_data}
             margin = {{
               "top": 50,
               "right": 30,

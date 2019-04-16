@@ -236,6 +236,8 @@ export class LineBarToggleGraph extends React.Component {
       .map( ({label, data }) => [ label, data ])
       .fromPairs()
       .value();
+    
+    const raw_data =[].concat.apply([], _.map(series, d => d));
 
     const data_bar = _.map(
       graph_options.ticks,
@@ -290,6 +292,7 @@ export class LineBarToggleGraph extends React.Component {
       indexBy: extra_graph_options.index,
       is_money: !!extra_graph_options.is_money,
       groupMode: extra_graph_options.groupMode,
+      raw_data,
       margin: {
         top: 30,
         right: 20,
@@ -306,6 +309,7 @@ export class LineBarToggleGraph extends React.Component {
     const extended_graph_options_line = {
       data: data_formatter_line,
       colorBy: d => colors(d.id),
+      raw_data,
       yScale: { 
         type: "linear",
         stacked: extra_graph_options.stacked,

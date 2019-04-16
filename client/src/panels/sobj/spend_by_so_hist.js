@@ -109,6 +109,8 @@ class SobjLine extends React.Component {
       .fromPairs()
       .value();
 
+    const raw_data =[].concat.apply([], _.map(graph_series, d => d));
+
     const years = _.map(std_years,run_template);
     const spending_data = _.map(
       graph_series,
@@ -143,6 +145,7 @@ class SobjLine extends React.Component {
         <div className="fcol-md-8" style={{height: '500px'}} aria-hidden = {true}>
           <NivoResponsiveLine
             data = {spending_data.reverse()}
+            raw_data = {raw_data}
             margin = {{
               top: 10,
               right: 30,

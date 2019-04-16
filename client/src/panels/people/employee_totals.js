@@ -76,6 +76,7 @@ const info_deps_by_level = {
                <div style ={{height: '400px'}} aria-hidden = {true}>
                  <NivoResponsiveLine
                    data = { data_formatter()}
+                   raw_data = {series}
                    colors = "#335075"
                    is_money = {false}
                    tooltip = {slice =>  
