@@ -7,7 +7,7 @@ TODO: write a root level readme (and maybe update /client/README.md abd /server/
 ## Unoffical guide
 
 **Terminal 1    InfoBase/client**  
-> npm ci  
+> `npm ci`  
 > npm run IB_base  
 > npm run IB_q_both
 
@@ -15,7 +15,7 @@ TODO: write a root level readme (and maybe update /client/README.md abd /server/
 > npm run serve-loopback
 
 **Terminal 3    InfoBase/server**  
-> mongod 
+> mongod  
 	if errors occurs, kill the already running instance from activity monitor
 		
 **Terminal 4    InfoBaseserver**  
