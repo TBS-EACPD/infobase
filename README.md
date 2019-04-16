@@ -3,7 +3,8 @@
 TODO: write a root level readme (and maybe update /client/README.md abd /server/README.md, they're probably outdated ATM)
 
 -------------------------------------------------------------------------------------------------------------------------------
-						**Unoffical guide**
+						
+						##Unoffical guide
 
 **Terminal 1    InfoBase/client**
 > npm ci
