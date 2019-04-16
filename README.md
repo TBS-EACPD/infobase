@@ -8,17 +8,17 @@ TODO: write a root level readme (and maybe update /client/README.md abd /server/
 
 **Terminal 1    InfoBase/client**  
 > `npm ci`  
-> npm run IB_base  
-> npm run IB_q_both
+> `npm run IB_base`  
+> `npm run IB_q_both`
 
 **Terminal 2    InfoBase/client**  
-> npm run serve-loopback
+> `npm run serve-loopback`
 
 **Terminal 3    InfoBase/server**  
-> mongod  
+> `mongod`  
 	if errors occurs, kill the already running instance from activity monitor
 		
 **Terminal 4    InfoBaseserver**  
-> Npm ci  
-> npm run populate_db  
-> npm run start
+> `npm ci`  
+> `npm run populate_db`  
+> `npm run start`
