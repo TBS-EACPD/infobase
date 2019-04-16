@@ -104,9 +104,22 @@ export default async function({models}){
     )
   );
 
-  const ommit_unique_id = (documents) => _.map(
+  const ommit_unique_id_fields = (documents) => _.map(
     documents,
     document => _.omit(document, "unique_id")
+  );
+
+  const ommit_empty_fields = (documents) => _.map(
+    documents,
+    document => _.omitBy(
+      document,
+      (field_value) => _.isEmpty(field_value) && 
+        ( 
+          _.isArray(field_value) || 
+          _.isObject(field_value) 
+        ) ||
+      _.isNull(field_value)
+    )
   );
   
 
@@ -287,8 +300,8 @@ export default async function({models}){
           (measure_id, org_id, document, key) => ({
             ...document,
 
-            program_allocations: _.compact(
-              ommit_unique_id(
+            program_allocations: ommit_empty_fields(
+              ommit_unique_id_fields(
                 flatten_program_allocations_by_measure_and_org_id(
                   {
                     [measure_id]: {
@@ -349,8 +362,8 @@ export default async function({models}){
           (measure_id, org_id, document, key) => ({
             ...document,
 
-            program_allocations: _.compact(
-              ommit_unique_id(
+            program_allocations: ommit_empty_fields(
+              ommit_unique_id_fields(
                 flatten_program_allocations_by_measure_and_org_id(
                   {
                     [measure_id]: {
@@ -364,8 +377,8 @@ export default async function({models}){
               )
             ),
 
-            submeasure_breakouts: _.compact(
-              ommit_unique_id(
+            submeasure_breakouts: ommit_empty_fields(
+              ommit_unique_id_fields(
                 flatten_submeasures_by_measure_and_org_id(
                   {
                     [measure_id]: {
@@ -402,8 +415,8 @@ export default async function({models}){
             measure => ({
               ...measure,
 
-              data: _.compact(
-                ommit_unique_id(
+              data: ommit_empty_fields(
+                ommit_unique_id_fields(
                   flatten_data_by_measure_and_org_id(
                     {
                       [measure.measure_id]: {
