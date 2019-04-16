@@ -37,7 +37,10 @@ const post_traversal_modifications = (node, selected_value) => {
     node.value = roll_up_children_values(node);
   }
 
-  if (node.depth > 1 || node.data.id === "net_adjust"){
+  if ( 
+    !_.includes(["funding", "remaining"], selected_value) && 
+    (node.depth > 1 || node.data.id === "net_adjust") 
+  ){
     node.submeasures = get_node_submeasures(node, selected_value);
   }
 
