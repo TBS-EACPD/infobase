@@ -8,7 +8,7 @@ export default async function({models}){
   const { FakeBudgetOrgSubject } = models;
 
   const clean_budget_measure_description = (description) => {
-    if ( !_.isNull(description) ){
+    if ( description ){
       const corrected_description_markdown = description
         .replace(/•/g, "\n\n* ")
         .replace(/((\r\n){1}|\r{1}|\n{1})/gm, "\n\n");
@@ -375,7 +375,7 @@ export default async function({models}){
           }),
         )
       );
-      
+
 
       return [
         models[`Budget${budget_year}SubmeasureProgramAllocations`].insertMany( 
