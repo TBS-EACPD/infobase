@@ -287,17 +287,19 @@ export default async function({models}){
           (measure_id, org_id, document, key) => ({
             ...document,
 
-            program_allocations: ommit_unique_id(
-              flatten_program_allocations_by_measure_and_org_id(
-                {
-                  [measure_id]: {
-                    [org_id]: _.get(
-                      submeasure_program_allocations_by_submeasure_and_org_id,
-                      `${document && document.submeasure_id}.${org_id}`,
-                    ),
-                  },
-                }
-              ),
+            program_allocations: _.compact(
+              ommit_unique_id(
+                flatten_program_allocations_by_measure_and_org_id(
+                  {
+                    [measure_id]: {
+                      [org_id]: _.get(
+                        submeasure_program_allocations_by_submeasure_and_org_id,
+                        `${document && document.submeasure_id}.${org_id}`,
+                      ),
+                    },
+                  }
+                ),
+              )
             ),
           }),
         )
@@ -347,30 +349,34 @@ export default async function({models}){
           (measure_id, org_id, document, key) => ({
             ...document,
 
-            program_allocations: ommit_unique_id(
-              flatten_program_allocations_by_measure_and_org_id(
-                {
-                  [measure_id]: {
-                    [org_id]: _.get(
-                      program_allocations_by_measure_and_org_id,
-                      `${measure_id}.${org_id}`,
-                    ),
-                  },
-                }
+            program_allocations: _.compact(
+              ommit_unique_id(
+                flatten_program_allocations_by_measure_and_org_id(
+                  {
+                    [measure_id]: {
+                      [org_id]: _.get(
+                        program_allocations_by_measure_and_org_id,
+                        `${measure_id}.${org_id}`,
+                      ),
+                    },
+                  }
+                )
               )
             ),
 
-            submeasure_breakouts: ommit_unique_id(
-              flatten_submeasures_by_measure_and_org_id(
-                {
-                  [measure_id]: {
-                    [org_id]: _.get(
-                      submeasures_by_measure_and_org_id,
-                      `${measure_id}.${org_id}`,
-                    ),
-                  },
-                }
-              ),
+            submeasure_breakouts: _.compact(
+              ommit_unique_id(
+                flatten_submeasures_by_measure_and_org_id(
+                  {
+                    [measure_id]: {
+                      [org_id]: _.get(
+                        submeasures_by_measure_and_org_id,
+                        `${measure_id}.${org_id}`,
+                      ),
+                    },
+                  }
+                ),
+              )
             ),
           }),
         )
@@ -396,13 +402,15 @@ export default async function({models}){
             measure => ({
               ...measure,
 
-              data: ommit_unique_id(
-                flatten_data_by_measure_and_org_id(
-                  {
-                    [measure.measure_id]: {
-                      ...data_by_measure_and_org_id[measure.measure_id],
-                    },
-                  }
+              data: _.compact(
+                ommit_unique_id(
+                  flatten_data_by_measure_and_org_id(
+                    {
+                      [measure.measure_id]: {
+                        ...data_by_measure_and_org_id[measure.measure_id],
+                      },
+                    }
+                  )
                 )
               ),
             })
