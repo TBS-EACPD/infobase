@@ -4,7 +4,7 @@ TODO: write a root level readme (and maybe update /client/README.md abd /server/
 
 -------------------------------------------------------------------------------------------------------------------------------
 						
-						**Unoffical guide**
+## Unoffical guide
 
 **Terminal 1    InfoBase/client**
 > npm ci
