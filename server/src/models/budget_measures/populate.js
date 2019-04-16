@@ -143,7 +143,7 @@ export default async function({models}){
           description_fr: clean_budget_measure_description(budget_lookup.description_fr),
         }))
         .groupBy(
-          ({parent_measure_id}) => _.isNull(parent_measure_id)
+          ({parent_measure_id}) => !parent_measure_id
         )
         .value();
 
