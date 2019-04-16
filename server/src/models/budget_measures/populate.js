@@ -115,11 +115,6 @@ export default async function({models}){
       )
     )
     .value();
-
-  const ommit_unique_id_fields = (documents) => _.map(
-    documents,
-    document => _.omit(document, "unique_id")
-  );
   
 
   return await Promise.all([
@@ -299,17 +294,15 @@ export default async function({models}){
           (measure_id, org_id, document, key) => ({
             ...document,
 
-            program_allocations: ommit_unique_id_fields(
-              flatten_program_allocations_by_measure_and_org_id(
-                {
-                  [measure_id]: {
-                    [org_id]: _.get(
-                      submeasure_program_allocations_by_submeasure_and_org_id,
-                      `${document && document.submeasure_id}.${org_id}`,
-                    ),
-                  },
-                }
-              ),
+            program_allocations: flatten_program_allocations_by_measure_and_org_id(
+              {
+                [measure_id]: {
+                  [org_id]: _.get(
+                    submeasure_program_allocations_by_submeasure_and_org_id,
+                    `${document && document.submeasure_id}.${org_id}`,
+                  ),
+                },
+              }
             ),
           }),
         )
@@ -357,37 +350,35 @@ export default async function({models}){
           data_by_measure_and_org_id,
           (measure_id, org_id, document, key) => `${measure_id}-${org_id}`,
           (measure_id, org_id, document, key) => ({
-            ...document,
-
-            program_allocations: ommit_unique_id_fields(
-              flatten_program_allocations_by_measure_and_org_id(
-                {
-                  [measure_id]: {
-                    [org_id]: _.get(
-                      program_allocations_by_measure_and_org_id,
-                      `${measure_id}.${org_id}`,
-                    ),
-                  },
-                }
-              )
+            ..._.omit(
+              document,
+              "parent_measure_id"
             ),
 
-            submeasure_breakouts: ommit_unique_id_fields(
-              flatten_submeasures_by_measure_and_org_id(
-                {
-                  [measure_id]: {
-                    [org_id]: _.get(
-                      submeasures_by_measure_and_org_id,
-                      `${measure_id}.${org_id}`,
-                    ),
-                  },
-                }
-              ),
+            program_allocations: flatten_program_allocations_by_measure_and_org_id(
+              {
+                [measure_id]: {
+                  [org_id]: _.get(
+                    program_allocations_by_measure_and_org_id,
+                    `${measure_id}.${org_id}`,
+                  ),
+                },
+              }
+            ),
+
+            submeasure_breakouts: flatten_submeasures_by_measure_and_org_id(
+              {
+                [measure_id]: {
+                  [org_id]: _.get(
+                    submeasures_by_measure_and_org_id,
+                    `${measure_id}.${org_id}`,
+                  ),
+                },
+              }
             ),
           }),
         )
       );
-
 
       return [
         models[`Budget${budget_year}SubmeasureProgramAllocations`].insertMany( 
@@ -408,14 +399,12 @@ export default async function({models}){
             measure => ({
               ...measure,
 
-              data: ommit_unique_id_fields(
-                flatten_data_by_measure_and_org_id(
-                  {
-                    [measure.measure_id]: {
-                      ...data_by_measure_and_org_id[measure.measure_id],
-                    },
-                  }
-                )
+              data: flatten_data_by_measure_and_org_id(
+                {
+                  [measure.measure_id]: {
+                    ...data_by_measure_and_org_id[measure.measure_id],
+                  },
+                }
               ),
             })
           )

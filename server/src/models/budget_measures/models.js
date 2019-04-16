@@ -22,23 +22,18 @@ export default function(model_singleton){
   // we'll NEVER update data in-place. The data size trade off's negligible, and it should give room for some efficiency
   // when querying (... or is it actually at odds with using dataloaders? This is a test case for embedded-document-heavy models I guess)
 
-  const BudgetProgramAllocationSchemaObject = {
-    subject_id: pkey_type(), // program id or CRSO id
+  const BudgetProgramAllocationSchema = mongoose.Schema({
+    unique_id: pkey_type(),
+    subject_id: parent_fkey_type(), // program id or CRSO id
     org_id: parent_fkey_type(), // org id or FakeBudgetOrgSubject id
     measure_id: parent_fkey_type(),
 
     allocated: {type: Number},
-  };
-  const BudgetProgramAllocationSubdoc = mongoose.Schema(BudgetProgramAllocationSchemaObject);
-  const BudgetProgramAllocationsSchema = mongoose.Schema({
-    ...BudgetProgramAllocationSchemaObject,
-    subject_id: parent_fkey_type(),
-    unique_id: pkey_type(),
   });
 
-
-  const BudgetSubmeasureSchemaObject = {
-    submeasure_id: pkey_type(),
+  const BudgetSubmeasureSchema = mongoose.Schema({
+    unique_id: pkey_type(),
+    submeasure_id: parent_fkey_type(),
     org_id: parent_fkey_type(), // org id or FakeBudgetOrgSubject id
     parent_measure_id: parent_fkey_type(),
     ...bilingual_str('name'),
@@ -46,18 +41,12 @@ export default function(model_singleton){
     allocated: {type: Number},
     withheld: {type: Number},
 
-    program_allocations: [BudgetProgramAllocationSubdoc],
-  };
-  const BudgetSubmeasureSubdoc = mongoose.Schema(BudgetSubmeasureSchemaObject);
-  const BudgetSubmeasuresSchema= mongoose.Schema({
-    ...BudgetSubmeasureSchemaObject,
-    submeasure_id: parent_fkey_type(),
-    unique_id: pkey_type(),
+    program_allocations: [BudgetProgramAllocationSchema],
   });
 
-
-  const BudgetDataSchemaObject = {
-    org_id: pkey_type(), // org id or FakeBudgetOrgSubject id
+  const BudgetDataSchema = mongoose.Schema({
+    unique_id: pkey_type(),
+    org_id: parent_fkey_type(), // org id or FakeBudgetOrgSubject id
     measure_id: parent_fkey_type(),
     funding: {type: Number},
     allocated: {type: Number},
@@ -66,17 +55,10 @@ export default function(model_singleton){
 
     ...bilingual_str('description'),
 
-    program_allocations: [BudgetProgramAllocationSubdoc],
+    program_allocations: [BudgetProgramAllocationSchema],
 
-    submeasure_breakouts: [BudgetSubmeasureSubdoc],
-  };
-  const BudgetDataSubdoc = mongoose.Schema(BudgetDataSchemaObject);
-  const BudgetDataSchema = mongoose.Schema({
-    ...BudgetDataSchemaObject,
-    org_id: parent_fkey_type(),
-    unique_id: pkey_type(),
+    submeasure_breakouts: [BudgetSubmeasureSchema],
   });
-
 
   const BudgetMeasureSchema = mongoose.Schema({
     measure_id: pkey_type(),
@@ -87,9 +69,8 @@ export default function(model_singleton){
     ...bilingual_str('budget_section_id'),
     ...bilingual_str('description'),
 
-    data: [BudgetDataSubdoc],
+    data: [BudgetDataSchema],
   });
-
 
   // These are artifacts of the Budget 2018 process, shouldn't show up in other years
   const FakeBudgetOrgSubjectSchema = mongoose.Schema({
@@ -104,14 +85,14 @@ export default function(model_singleton){
     budget_year => {
       model_singleton.define_model(`Budget${budget_year}Measures`, BudgetMeasureSchema);
       model_singleton.define_model(`Budget${budget_year}Data`, BudgetDataSchema);
-      model_singleton.define_model(`Budget${budget_year}ProgramAllocations`, BudgetProgramAllocationsSchema);
-      model_singleton.define_model(`Budget${budget_year}Submeasures`, BudgetSubmeasuresSchema);
-      model_singleton.define_model(`Budget${budget_year}SubmeasureProgramAllocations`, BudgetProgramAllocationsSchema);
+      model_singleton.define_model(`Budget${budget_year}ProgramAllocations`, BudgetProgramAllocationSchema);
+      model_singleton.define_model(`Budget${budget_year}Submeasures`, BudgetSubmeasureSchema);
+      model_singleton.define_model(`Budget${budget_year}SubmeasureProgramAllocations`, BudgetProgramAllocationSchema);
     },
   );
   model_singleton.define_model("FakeBudgetOrgSubject", FakeBudgetOrgSubjectSchema);
   
   // TODO Dataloaders...
-  // ... can I do dataloaders by fields in subdocuments? Probably, right?
+  // ... can I do dataloaders by fields in Schemauments? Probably, right?
   // Otherwise, stick an array of org ids on BudgetMeasuresSchema I guess
 }
