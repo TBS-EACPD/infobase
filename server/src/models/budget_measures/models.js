@@ -93,6 +93,6 @@ export default function(model_singleton){
   model_singleton.define_model("FakeBudgetOrgSubject", FakeBudgetOrgSubjectSchema);
   
   // TODO Dataloaders...
-  // ... can I do dataloaders by fields in Schemauments? Probably, right?
+  // ... can I do dataloaders by fields in embedded documents? Probably, right?
   // Otherwise, stick an array of org ids on BudgetMeasuresSchema I guess
 }

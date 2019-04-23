@@ -106,12 +106,13 @@ export default async function({models}){
     .map(
       document => _.omitBy(
         document,
-        (field_value) => _.isEmpty(field_value) && 
+        (field_value) => (
+          _.isEmpty(field_value) && 
           ( 
             _.isArray(field_value) || 
             _.isObject(field_value) 
-          ) ||
-        _.isNull(field_value)
+          ) 
+        ) || _.isNull(field_value)
       )
     )
     .value();
