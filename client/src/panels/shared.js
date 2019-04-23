@@ -219,6 +219,7 @@ export class LineBarToggleGraph extends React.Component {
       graph_col_class,
 
       disable_toggle,
+      disable_scale_toggle,
       formatter,
       graph_options,
     } = this.props;
@@ -227,6 +228,7 @@ export class LineBarToggleGraph extends React.Component {
       colors,
       selected,
       graph_mode,
+      y_scale_zeroed,
     } = this.state;
 
     const extra_graph_options = this.extra_options_by_graph_mode[graph_mode];
@@ -313,6 +315,7 @@ export class LineBarToggleGraph extends React.Component {
       yScale: { 
         type: "linear",
         stacked: extra_graph_options.stacked,
+        min: y_scale_zeroed ? 0 : "auto",
       },
       enableArea: !!extra_graph_options.enableArea,
       is_money: !!extra_graph_options.is_money,
@@ -379,6 +382,22 @@ export class LineBarToggleGraph extends React.Component {
                   }
                 >
                   <TM k="toggle_graph"/>
+                </button>
+              </span>
+            }
+            { !disable_scale_toggle && !extra_graph_options.bar &&
+              <span className="centerer" style={{paddingBottom: "15px"}}>
+                <button 
+                  className="btn-ib-primary"
+                  onClick={ 
+                    () => {
+                      this.setState({
+                        y_scale_zeroed: !y_scale_zeroed,
+                      });
+                    }
+                  }
+                >
+                  <TM k="toggle_scale"/>
                 </button>
               </span>
             }

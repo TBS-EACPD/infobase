@@ -580,6 +580,9 @@ legend:
 toggle_graph:
   en: Toggle Graph Type
   fr: Changer le type de graphique
+toggle_scale:
+  en: Toggle Scale
+  fr: TODO TODO TODO
 alternate_view:
   en: Alternate View
   fr: Autre vue

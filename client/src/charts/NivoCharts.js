@@ -374,17 +374,14 @@ export class NivoResponsiveLine extends React.Component {
           theme,
           enableDotLabel,
         }}
-        // data = {data.reverse()}
         tooltip={ (d) => tooltip( d, get_formatter(is_money, text_formatter, false) ) }
-        yScale={ 
-          {
-            type: "linear",
-            stacked: stacked,
-            max: max,
-            min: (_.min(raw_data) >= 0 || enableArea)? 0: min,
-            ...(yScale || {}),
-          }
-        }
+        yScale={{
+          type: "linear",
+          stacked: stacked,
+          max: max,
+          min: (_.min(raw_data) >= 0 || enableArea)? 0: min,
+          ...(yScale || {}),
+        }}
         axisBottom={remove_bottom_axis ? null : bttm_axis}
         axisLeft={{
           orient: "left",
