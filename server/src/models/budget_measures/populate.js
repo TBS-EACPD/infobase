@@ -106,13 +106,12 @@ export default async function({models}){
     .map(
       document => _.omitBy(
         document,
-        (field_value) => (
-          _.isEmpty(field_value) && 
+        (field_value) => _.isEmpty(field_value) && 
           ( 
             _.isArray(field_value) || 
             _.isObject(field_value) 
-          ) 
-        ) || _.isNull(field_value)
+          ) ||
+        _.isNull(field_value)
       )
     )
     .value();
@@ -292,10 +291,8 @@ export default async function({models}){
         flatten_documents_by_measure_and_org_id(
           submeasures_by_measure_and_org_id,
           (measure_id, org_id, document, key) => `${measure_id}-${org_id}-${document && document.submeasure_id}`,
-          (measure_id, org_id, document, key) => ({
-            ...document,
-
-            program_allocations: flatten_program_allocations_by_measure_and_org_id(
+          (measure_id, org_id, document, key) => {
+            const program_allocations = flatten_program_allocations_by_measure_and_org_id(
               {
                 [measure_id]: {
                   [org_id]: _.get(
@@ -304,8 +301,13 @@ export default async function({models}){
                   ),
                 },
               }
-            ),
-          }),
+            );
+
+            return {
+              ...document,
+              ..._.isEmpty(program_allocations) && {program_allocations},
+            }
+          },
         )
       );
 
@@ -350,13 +352,8 @@ export default async function({models}){
         flatten_documents_by_measure_and_org_id(
           data_by_measure_and_org_id,
           (measure_id, org_id, document, key) => `${measure_id}-${org_id}`,
-          (measure_id, org_id, document, key) => ({
-            ..._.omit(
-              document,
-              "parent_measure_id"
-            ),
-
-            program_allocations: flatten_program_allocations_by_measure_and_org_id(
+          (measure_id, org_id, document, key) => {
+            const program_allocations = flatten_program_allocations_by_measure_and_org_id(
               {
                 [measure_id]: {
                   [org_id]: _.get(
@@ -365,9 +362,8 @@ export default async function({models}){
                   ),
                 },
               }
-            ),
-
-            submeasure_breakouts: flatten_submeasures_by_measure_and_org_id(
+            );
+            const submeasure_breakouts = flatten_submeasures_by_measure_and_org_id(
               {
                 [measure_id]: {
                   [org_id]: _.get(
@@ -376,8 +372,17 @@ export default async function({models}){
                   ),
                 },
               }
-            ),
-          }),
+            );
+
+            return {
+              ..._.omit(
+                document,
+                "parent_measure_id"
+              ),
+              ...!_.isEmpty(program_allocations) && {program_allocations},
+              ...!_.isEmpty(submeasure_breakouts) && {submeasure_breakouts},
+            };
+          },
         )
       );
 
