@@ -12,7 +12,7 @@ const featured_content_items = _.compact([
   },
   {
     text_key: 'quick_link_hi_tags',
-    href: '#resource-explorer/HI/drr17',
+    href: '#resource-explorer/HI/dp19',
     is_new: true,
   },
   {

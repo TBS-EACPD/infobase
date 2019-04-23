@@ -18,7 +18,6 @@ function extend_hi_tags(hi_lookups){
         'start_year',
         'end_year',
         'total_allocated_amount',
-        'governance',
         'website_url',
         'dr_url',
       ])
