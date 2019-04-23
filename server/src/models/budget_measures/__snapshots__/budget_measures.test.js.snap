@@ -1,0 +1,326 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Budget measure data budget measure snapshots: gov 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "gov": Object {
+        "fake_budget_orgs": Array [
+          Object {
+            "level": "special_funding_case",
+            "name": "Net adjustment to be on a 2018-19 Estimates Basis",
+            "org_id": "net_adjust",
+          },
+          Object {
+            "level": "special_funding_case",
+            "name": "Allocation to be determined",
+            "org_id": "non_allocated",
+          },
+        ],
+        "measures_2018": Array [
+          Object {
+            "chapter_key": "adv",
+            "description": "To provide Canadians with important programs and services, federal government organizations depend on Shared Services Canada to provide modern and reliable information technology (IT) infrastructure and services.  
+
+
+
+To modernize/enhance the Government’s digital services, Budget 2018 proposes significant investments in Shared Services Canada and the Communications Security Establishment to ensure that these organizations are properly resourced to address evolving IT needs and opportunities, and proactively address cyber security threats. This includes: 
+
+
+
+
+
+* $2.2 billion over six years, starting in 2018–19, with $349.8 million per year thereafter, to improve the management and provision of IT services and infrastructure within the Government of Canada, and to support related cyber security measures. 
+
+
+
+
+
+* $110 million over six years, starting in 2018–19, to be accessed by Shared Services Canada’s partner departments and agencies to help them migrate their applications from older data centres into more secure modern data centres or cloud solutions.
+
+
+
+A majority of the funding for these initiatives will be reallocated from federal organizations that receive mandatory services from Shared Services Canada. The ability of the Government’s IT systems to protect Canadians’ data and meet future demands will depend on a strong IT governance structure. To support this, the Government will redefine the role of the Government of Canada Chief Information Officer.
+
+",
+            "measure_id": "34",
+            "name": "Enabling Digital Services to Canadians",
+            "section_id": "Enabling-Digital-Services-to-Canadians",
+          },
+          Object {
+            "chapter_key": "adv",
+            "description": "To provide Canadians with important programs and services, federal government organizations depend on Shared Services Canada to provide modern and reliable information technology (IT) infrastructure and services.  
+
+
+
+To modernize/enhance the Government’s digital services, Budget 2018 proposes significant investments in Shared Services Canada and the Communications Security Establishment to ensure that these organizations are properly resourced to address evolving IT needs and opportunities, and proactively address cyber security threats. This includes: 
+
+
+
+
+
+* $2.2 billion over six years, starting in 2018–19, with $349.8 million per year thereafter, to improve the management and provision of IT services and infrastructure within the Government of Canada, and to support related cyber security measures. 
+
+
+
+
+
+* $110 million over six years, starting in 2018–19, to be accessed by Shared Services Canada’s partner departments and agencies to help them migrate their applications from older data centres into more secure modern data centres or cloud solutions.
+
+
+
+A majority of the funding for these initiatives will be reallocated from federal organizations that receive mandatory services from Shared Services Canada. The ability of the Government’s IT systems to protect Canadians’ data and meet future demands will depend on a strong IT governance structure. To support this, the Government will redefine the role of the Government of Canada Chief Information Officer.
+
+",
+            "measure_id": "35",
+            "name": "Enabling Digital Services to Canadians-Funding Sourced From Existing Departmental Resources",
+            "section_id": "Enabling-Digital-Services-to-Canadians",
+          },
+          Object {
+            "chapter_key": "grw",
+            "description": "From basic literacy and numeracy support to specific skilled trades training to financial supports and work experiences offered to students, the Government provides a wide range of skills programming to meet a variety of needs. To maximize the effectiveness of these programs, particularly in the way that they offer support to workers wishing to take advantage of emerging opportunities, the Government will undertake a horizontal review of skills programming over the next year. In support of this review, the Government proposes to provide $0.75 million in 2018–19 to the Treasury Board Secretariat. This, in conjunction with the Future Skills organization, will provide Canada’s labour force with the information and training needed to meet future challenges and opportunities head on.  ",
+            "measure_id": "55",
+            "name": "Horizontal Skills Review",
+            "section_id": "Horizontal-Skills-Review",
+          },
+          Object {
+            "chapter_key": "adv",
+            "description": "Canadians can be proud of our history of helping others around the world, including providing emergency and development assistance to the poorest and most vulnerable. We understand that a safer, more prosperous world means a safer and more prosperous Canada. 
+
+
+
+In 2015, Canada, along with all other United Nations member states, committed to implementing the 2030 Agenda for Sustainable Development, which set 17 goals (known as Sustainable Development Goals or SDGs) to eliminate poverty, protect the planet and ensure prosperity by the year 2030. These goals are universal, and apply to all countries. This means working to end all forms of poverty, fight inequalities, tackle climate change and support sustainable economic growth here at home, and helping other countries through our diplomacy, trade, peace and security, and international assistance efforts. 
+
+
+
+To reach these goals, in 2016, the Government of Canada began a comprehensive review of its international assistance support to improve the effectiveness of Canada’s international assistance. The result was a new Feminist International Assistance Policy, unveiled in June 2017, and centred around SDG 5: Gender Equality. 
+
+To support reporting and ensure continued progress and coordination of our efforts on the Sustainable Development Goals both domestically and internationally, the Government proposes to provide $49.4 million over 13 years, starting in 2018–19, to establish a Sustainable Development Goals Unit, and fund monitoring and reporting activities by Statistics Canada. This will enable better coordination among all levels of government, civil society organizations and the private sector on Canada’s efforts on the 2030 Agenda for Sustainable Development. It will also support the monitoring and reporting of Canada’s domestic and international efforts to ensure that all of the Sustainable Development Goals are achieved by 2030 and that no one is left behind. The Government is also proposing to provide, from existing departmental resources, up to $59.8 million over 13 years, starting in 2018–19, for programming to support the implementation of the Sustainable Development Goals.
+
+",
+            "measure_id": "56",
+            "name": "Implementing the 2030 Sustainable Development Agenda",
+            "section_id": "Implementing-the-2030-Agenda-for-Sustainable-Development",
+          },
+          Object {
+            "chapter_key": "prg",
+            "description": "In its December 2017 report, the Advisory Council on Economic Growth identified three priority areas for establishing an agile regulatory system designed for the new economy:
+
+
+
+
+
+* Catalyze innovation across the economy through regulations that accommodate emerging technologies and business models, especially in high-potential sectors. 
+
+
+
+
+
+* Drive coordination between agencies and jurisdictions, both within Canada and internationally. 
+
+
+
+
+
+* Promote efficient and predictable regulation.
+
+
+
+These priority areas were further supported by the early reports of the six Economic Strategy Tables.
+
+
+
+In response to these recommendations, Budget 2018 proposes to provide $11.5 million over three years, starting in 2018–19, for the Government to pursue a regulatory reform agenda focused on supporting innovation and business investment. The goal is to make the Canadian regulatory system more agile, transparent and responsive, so that businesses across the country can explore and act on new opportunities, resulting in benefits for all Canadians. The approach includes:
+
+
+
+
+
+* Targeted reviews, over the next three years, of regulatory requirements and practices that are bottlenecks to innovation and growth in Canada, with an initial focus on agri-food and aquaculture, health/bio-sciences, and transportation and infrastructure, including emerging technologies such as autonomous vehicles. 
+
+
+
+
+
+* Canada’s leadership on internal trade at the Canadian Free Trade Agreement Regulatory Reconciliation and Cooperation Table.
+
+
+
+
+
+* Developing an e-regulation system—an online platform modelled on the successful U.S. Office of Information and Regulatory Affairs website Regulations.gov—to engage Canadians on regulation in order to improve the transparency and efficiency of the overall rule-making process.
+
+
+
+The Government also proposes to introduce legislation to reduce the regulatory burden faced by businesses. This includes streamlining Canada’s Customs Tariff legislation in order to simplify its structure and administration. This measure will reduce the overall complexity of the legislation, which will ease administrative burden and reduce compliance costs for Canadian businesses and government.
+
+",
+            "measure_id": "78",
+            "name": "Modernizing Canada’s Regulatory Framework",
+            "section_id": "Modernizing-Canada-s-Regulatory-Frameworks",
+          },
+          Object {
+            "chapter_key": "prg",
+            "description": "With these ambitious reforms, to ensure business innovation programing is investing in the right place, supporting high-performing businesses and meeting economic objectives, the Government proposes to provide:
+
+
+
+
+
+* $1 million per year ongoing, starting in 2018–19, to Statistics Canada to improve performance evaluations for innovation-related programs. 
+
+
+
+
+
+* $2 million per year ongoing, starting in 2018–19 to the Treasury Board Secretariat to establish a central performance evaluation team to undertake innovation performance evaluations on an ongoing basis, including using the data developed by Statistics Canada. 
+
+
+
+To ensure that business innovation programming is also contributing to improved diversity outcomes, a national strategy will be developed outlining ways to boost the participation of underrepresented groups in an innovation-driven economy.
+
+",
+            "measure_id": "89",
+            "name": "Placing Evidence at the Centre of Program Evaluation and Design",
+            "section_id": "Placing-Evidence-at-the-Centre-of-Program-Evaluation-and-Design",
+          },
+          Object {
+            "chapter_key": "oth",
+            "description": "Funding proposed for the President of the Treasury Board to establish a Public Service Centre on Diversity, Inclusion and Wellness, to support departments and agencies in creating safe, healthy, diverse and inclusive workplaces.  Proposed funding includes ongoing funding of $3.6 million.",
+            "measure_id": "104",
+            "name": "Public Service Centre on Diversity, Inclusion and Wellness",
+            "section_id": "23-Other-Budget-2018-Measures-(Not-Included-in-Previous-Chapters)",
+          },
+          Object {
+            "chapter_key": "oth",
+            "description": "Funding proposed to ensure the ongoing sustainability of the long-term disability benefits plan for medically-released members of the Canadian Armed Forces and for employer-related costs of other employee benefit programs, such as the Public Service Health Care Plan.",
+            "measure_id": "123",
+            "name": "Service Income Security Insurance Plan and other Public Service Employee Benefits",
+            "section_id": "23-Other-Budget-2018-Measures-(Not-Included-in-Previous-Chapters)",
+          },
+          Object {
+            "chapter_key": "adv",
+            "description": "Canada’s public servants deserve to be paid properly and on time for their important work. In early 2016, the Phoenix pay system for federal public servants was implemented following years of planning and development as part of a broader initiative originally intended to save money. Since that time, it has been obvious that the outcomes have been unacceptable for both the Government and its employees. The Transformation of Pay Administration Initiative launched in 2009 was under-resourced and suffered from poor planning and implementation. The Government is doing everything it can to make this right. 
+
+
+
+To date, the Government has committed more than $460 million to implement the Phoenix pay system and resolve subsequent issues. Over the last year and a half, the Government has hired several hundred people to rebuild capacity that was lost due to the previously flawed business plan. In addition, action has also been taken to reimburse employees who have incurred personal expenses as a result of pay issues. However, serious issues and challenges with the Phoenix pay system continue, and too many federal public servants are not being properly paid.  
+
+
+
+Through Budget 2018, the Government is committing to the next steps in addressing the ongoing challenges of the Phoenix pay system, including announcing its intention to eventually move away from Phoenix and begin development of the next generation of the federal government’s pay system, one that is better aligned with the complexity of the federal government pay structure. In this context, the Government proposes to provide an additional investment of $16 million over two years, beginning in 2018–19, to work with experts, federal public sector unions and technology providers on a way forward for a new pay system. 
+
+
+
+In the interim, the Government will continue to address the existing pay challenges. To this end, Budget 2018 proposes an investment of $431.4 million over six years, starting in 2017–18, to continue making progress on Phoenix issues, including hiring additional staff to support the pay system, bringing the number of employees working on pay issues at the Pay Centre and satellite offices to more than 1,500. This compares to the 550 employees that were originally intended to handle all pay issues when the new pay system was launched. Furthermore, this additional funding would go towards hiring more staff within departments to better assist employees with payroll issues as they arise. This would mean that public servants also have better access to a broader range of supports in the workplace.   
+
+
+
+Budget 2018 also proposes to provide $5.5 million over two years, starting in 2017–18, to the Canada Revenue Agency for the processing of federal government employee individual income tax reassessments that are required due to Phoenix pay issues, and for handling related telephone enquiries. 
+
+
+
+While the Phoenix pay system has been underpaying some public servants, it has also been paying others too much. Under current legislation, any employee who receives an overpayment in respect of a previous year is required to pay back the gross amount to their employer and recover excess withholdings from the Canada Revenue Agency. Public servants in this situation can rest assured that they will not have to start repaying until after the Canada Revenue Agency processes their tax return and refunds the excess withholdings (or credits them against a tax liability). At the same time, the Government is reviewing the legislation and will engage key stakeholders to assess the feasibility of changes to the legislation that would permit any private or public sector employee in this situation to repay the amount net of withholdings, starting for the 2018 taxation year and forward. 
+
+
+
+Finally, to address the real mental and emotional stress and unacceptable financial impacts on public servants, the Government has initiated discussions with public service representatives to address the numerous grievances and legal actions. Similarly, the Government will also take action to reimburse missing and inaccurate dues that are owing to public sector unions. 
+
+",
+            "measure_id": "125",
+            "name": "Stabilizing and Future Transformation of the Federal Government's Pay Administration (Phoenix)",
+            "section_id": "Stabilizing-and-Future-Transformation-of-the-Federal-Governments-Pay-Administration-(Phoenix)",
+          },
+          Object {
+            "chapter_key": "adv",
+            "description": "As movements such as #MeToo and #TimesUp have demonstrated through the powerful stories of survivors, gender-based violence, harassment and discrimination continue to impact women at home, at work and throughout Canadian society. The Government has a vital role to play in helping to create a more equitable society, free from discrimination of any kind. 
+
+
+
+Everyone deserves to live a life free from violence. While gender-based violence is often thought of through the lens of violence against women and girls, many Canadians face violence every day simply because of their gender expression, gender identity or perceived gender. 
+
+
+
+The negative impacts of gender-based violence reach far beyond any specific population. While gender-based violence significantly influences the health, social and economic conditions of the individuals who directly experience it, it also has long-lasting and negative results for family members, friends and entire communities. 
+
+
+
+The Government proposes to provide an additional $86.0 million over five years, starting in 2018–19, and $20.0 million per year ongoing, to expand Canada’s Strategy to Address Gender-Based Violence. New investments will focus on:
+
+
+
+
+
+* Preventing teen dating violence.
+
+
+
+
+
+* Enhancing and developing preventative bullying and cyber bullying initiatives.
+
+
+
+
+
+* Equipping health professionals to provide appropriate care to victims.
+
+
+
+
+
+* Enhancing support for the National Child Exploitation Coordination Centre to increase investigative capacity of the RCMP.
+
+
+
+
+
+* Expanding the High Needs Victims Fund so that more organizations, such as rape crisis centres, are better able to help population groups who are at the highest risk of experiencing violence. This investment will double the support provided to this initiative in Budget 2017.
+
+
+
+
+
+* Providing support to sexual assault centres in close proximity to Canadian Forces bases so that members of the Canadian Armed Forces have access to a full spectrum of supports to address gender-based violence. This builds on other investments in family support services through Strong, Secure, Engaged, the Government’s new defence policy.
+
+",
+            "measure_id": "155",
+            "name": "Taking Action to Prevent and Address Gender-based Violence, Harassment and Discrimination",
+            "section_id": "Taking-Action-to-Prevent-and-Address-Gender-Based-Violence-Harassment-and-Discrimination",
+          },
+          Object {
+            "chapter_key": "oth",
+            "description": "",
+            "measure_id": "net_adjust",
+            "name": "Net adjustment to be on a 2018-19 Estimates Basis",
+            "section_id": null,
+          },
+        ],
+        "measures_2019": Array [
+          Object {
+            "chapter_key": null,
+            "description": "",
+            "measure_id": "9",
+            "name": "Ensuring Proper Payments for Public Servants",
+            "section_id": null,
+          },
+          Object {
+            "chapter_key": null,
+            "description": "",
+            "measure_id": "28",
+            "name": "Advancing Gender Equality",
+            "section_id": null,
+          },
+          Object {
+            "chapter_key": null,
+            "description": "",
+            "measure_id": "112",
+            "name": "Cost and Profit Assurance Program",
+            "section_id": null,
+          },
+        ],
+      },
+    },
+  },
+}
+`;
