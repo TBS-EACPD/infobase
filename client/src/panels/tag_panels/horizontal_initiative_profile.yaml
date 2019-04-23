@@ -9,10 +9,10 @@ hi_lead_dept:
   en: Lead department
   fr: Ministère responsable
 hi_start_year:
-  en: Started in
+  en: Started year
   fr: Annéé de début
 hi_end_year:
-  en: Ending in
+  en: Ending year
   fr: Année de fin
 hi_total_allocated_amount:
   en: Total allocated amount
