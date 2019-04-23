@@ -126,6 +126,7 @@ export default function({models}){
 
     BudgetMeasure: {
       name: bilingual_field("name"),
+      section_id: bilingual_field("section_id"),
       description: bilingual_field("description"),
 
       //data: ({year, measure_id}) => "todo",

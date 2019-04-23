@@ -1,4 +1,4 @@
-"measure_id","parent_measure_id","measure_en","measure_fr","chapter_key","id_en","id_fr","description_en","description_fr"
+"measure_id","parent_measure_id","name_en","name_fr","chapter_key","section_id_en","section_id_fr","description_en","description_fr"
 34,,"Enabling Digital Services to Canadians","Offrir des services numériques aux Canadiens","adv","Enabling-Digital-Services-to-Canadians","Offrir-des-services-numeriques-aux-Canadiens","To provide Canadians with important programs and services, federal government organizations depend on Shared Services Canada to provide modern and reliable information technology (IT) infrastructure and services.  
 
 To modernize/enhance the Government’s digital services, Budget 2018 proposes significant investments in Shared Services Canada and the Communications Security Establishment to ensure that these organizations are properly resourced to address evolving IT needs and opportunities, and proactively address cyber security threats. This includes: 

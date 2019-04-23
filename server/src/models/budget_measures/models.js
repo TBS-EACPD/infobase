@@ -66,7 +66,7 @@ export default function(model_singleton){
     budget_year: str_type,
     ...bilingual_str('name'),
     chapter_key: str_type,
-    ...bilingual_str('budget_section_id'),
+    ...bilingual_str('section_id'),
     ...bilingual_str('description'),
 
     data: [BudgetDataSchema],
