@@ -69,7 +69,7 @@ const validate_route = (props) => {
     const valid_year = budget_year_is_valid ? budget_year : _.last(budget_year_options);
 
     const corrected_route = `/budget-tracker/${valid_first_column}/${valid_value}/${valid_year}`;
-    history.push(corrected_route);
+    history.replace(corrected_route);
 
     return false;
   }
