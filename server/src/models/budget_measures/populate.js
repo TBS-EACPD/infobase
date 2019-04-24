@@ -249,20 +249,6 @@ export default async function({models}){
         )
         .value();
 
-
-      const flatten_program_allocations_by_submeasure_and_org_id = (program_allocations_by_submeasure_and_org_id) => (
-        flatten_documents_by_measure_and_org_id(
-          program_allocations_by_submeasure_and_org_id,
-          (measure_id, org_id, document, key) => `${measure_id}-${org_id}-${document && document.submeasure_id}-${key}`,
-          (measure_id, org_id, document, key) => ({
-            subject_id: key,
-            measure_id,
-            org_id,
-  
-            allocated: document,
-          }),
-        )
-      );
       
       const flatten_program_allocations_by_measure_and_org_id = (program_allocations_by_measure_and_org_id) => (
         flatten_documents_by_measure_and_org_id(
@@ -302,17 +288,17 @@ export default async function({models}){
       const flatten_submeasures_by_measure_and_org_id = (submeasures_by_measure_and_org_id) => (
         flatten_documents_by_measure_and_org_id(
           submeasures_by_measure_and_org_id,
-          (measure_id, org_id, document, key) => `${measure_id}-${org_id}-${document && document.submeasure_id}`,
+          (measure_id, org_id, document, key) => `${measure_id}-${org_id}-${document.submeasure_id}`,
           (measure_id, org_id, document, key) => (
             {
               ...document,
 
-              program_allocations: flatten_program_allocations_by_submeasure_and_org_id(
+              program_allocations: flatten_program_allocations_by_measure_and_org_id(
                 {
-                  [measure_id]: {
+                  [document.submeasure_id]: {
                     [org_id]: _.get(
                       submeasure_program_allocations_by_submeasure_and_org_id,
-                      `${document && document.submeasure_id}.${org_id}`,
+                      `${document.submeasure_id}.${org_id}`,
                     ),
                   },
                 }
@@ -396,7 +382,7 @@ export default async function({models}){
 
       return [
         models[`Budget${budget_year}SubmeasureProgramAllocation`].insertMany( 
-          flatten_program_allocations_by_submeasure_and_org_id(submeasure_program_allocations_by_submeasure_and_org_id)
+          flatten_program_allocations_by_measure_and_org_id(submeasure_program_allocations_by_submeasure_and_org_id)
         ),
         models[`Budget${budget_year}ProgramAllocation`].insertMany( 
           flatten_program_allocations_by_measure_and_org_id(program_allocations_by_measure_and_org_id)
