@@ -23,13 +23,6 @@ previous_year_target:
   en: Last year's target
   fr: Cible de l'an dernier
 
-previous_year_target_collon:
-  transform: [handlebars]
-  en: |
-    {{gt "previous_year_target"}}:
-  fr: |
-    {{gt "previous_year_target"}} :
-
 target:
   en: Target
   fr: Cible
@@ -39,8 +32,13 @@ targets:
   fr: Cibles 
 
 target_result:
-  en: Actual Result 
-  fr: Résultat Réel
+  en: Actual result 
+  fr: Résultat réel
+
+
+previous_year_target_result:
+  en: Last year's actual result 
+  fr: Résultat réel de l'année dernière
 
 date_to_achieve:
   en: Date to Achieve Target

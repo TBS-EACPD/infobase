@@ -17,6 +17,10 @@ const dp_docs = _.chain(result_docs)
   .keys()
   .filter( doc => /dp/.test(doc) )
   .value();
+const drr_docs = _.chain(result_docs)
+  .keys()
+  .filter( doc => /drr/.test(doc) )
+  .value();
 
 const { 
   Format,
@@ -40,11 +44,7 @@ const IndicatorResultDisplay = ({
   narrative,
   measure,
 
-  previous_data_type,
-  previous_min, 
-  previous_max,
-  previous_narrative,
-  previous_measure,
+  is_new,
 }) => {
 
   const target_unspecified_display = <TM k="unspecified_target"/>;
@@ -140,23 +140,15 @@ const IndicatorResultDisplay = ({
     }
   };
 
-  const should_display_previous_year_target = _.indexOf(dp_docs, doc) > 0;
-
+  const should_display_new_status = _.indexOf(dp_docs, doc) > 0 || _.indexOf(drr_docs, doc) > 0;
   return (
     <Fragment>
       { get_display_case(data_type, min, max, narrative, measure) }
-      { should_display_previous_year_target &&
+      { should_display_new_status && is_new &&
         <Fragment>
-          {' ('}
-          { !_.isNull(previous_data_type) ?
-            <Fragment>
-              <TM k="previous_year_target_collon" el="strong"/>
-              {' '}
-              {get_display_case(previous_data_type, previous_min, previous_max, previous_narrative, previous_measure)}
-            </Fragment> :
-            <TM k="new_indicator" el="strong" />
-          }
-          {')'}
+          {" ("}
+          <TM k="new_indicator" el="strong" />
+          {")"}
         </Fragment>
       }
     </Fragment>
@@ -286,6 +278,8 @@ const IndicatorList = ({ indicators }) => (
 
 const SingleIndicatorDisplay = ({indicator}) => {
   const is_drr = /drr/.test(indicator.doc);
+  const has_previous_year_target = !_.isNull(indicator.previous_year_target_type);
+  const has_previous_year_result = false; // previous year results aren't in the API right now, but they probably will be for DRR18 (if not, clean this out)
   return (
     <div className="indicator-item">
       <dl className="dl-horizontal indicator-item__dl">
@@ -325,11 +319,7 @@ const SingleIndicatorDisplay = ({indicator}) => {
               narrative={indicator.target_narrative}
               measure={indicator.measure}
 
-              previous_data_type={indicator.previous_year_target_type}
-              previous_min={indicator.previous_year_target_min}
-              previous_max={indicator.previous_year_target_max}
-              previous_narrative={indicator.previous_year_target_narrative}
-              previous_measure={indicator.previous_year_measure}
+              is_new={!has_previous_year_target}
             />
           }
         </dd>
@@ -357,13 +347,47 @@ const SingleIndicatorDisplay = ({indicator}) => {
                   narrative={indicator.actual_result}
                   measure={indicator.measure}
 
-                  previous_data_type={indicator.previous_year_actual_result}
-                  previous_min={indicator.previous_year_actual_result}
-                  previous_max={indicator.previous_year_actual_result}
-                  previous_narrative={indicator.previous_year_actual_result}
-                  previous_measure={indicator.previous_year_measure}
+                  is_new={has_previous_year_result}
                 />
               }
+            </dd>
+          </Fragment>
+        }
+
+        { has_previous_year_target &&
+          <Fragment>
+            <dt>
+              <TM k="previous_year_target"/>
+            </dt>
+            <dd>
+              <IndicatorResultDisplay
+                doc={indicator.doc}
+      
+                data_type={indicator.previous_year_target_type}
+                min={indicator.previous_year_target_min}
+                max={indicator.previous_year_target_max}
+                narrative={indicator.previous_year_target_narrative}
+                measure={indicator.previous_year_measure}
+              />
+            </dd>
+          </Fragment>
+        }
+
+        { is_drr && has_previous_year_result &&
+          <Fragment>
+            <dt>
+              <TM k="previous_year_target_result"/>
+            </dt>
+            <dd>
+              <IndicatorResultDisplay
+                doc={indicator.doc}
+      
+                data_type={indicator.previous_year_actual_result}
+                min={indicator.previous_year_actual_result}
+                max={indicator.previous_year_actual_result}
+                narrative={indicator.previous_year_actual_result}
+                measure={indicator.previous_year_measure}
+              />
             </dd>
           </Fragment>
         }
