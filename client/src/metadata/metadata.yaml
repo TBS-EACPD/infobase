@@ -40,7 +40,3 @@ rpb_link_text:
 datasets:
   en: Datasets
   fr: Tableaux de donées
-  
-last_refresh:
-  en: Last Updated
-  fr: Dernière mise à jour

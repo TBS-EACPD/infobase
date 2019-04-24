@@ -3,11 +3,6 @@ import { StandardRouteContainer, ScrollToTargetContainer } from '../core/NavComp
 import { create_text_maker_component, FancyUL } from '../util_components.js';
 import { sources } from './data_sources.js';
 import { Panel } from '../components/panel-components.js';
-import { businessConstants } from '../models/businessConstants';
-
-const { months } = businessConstants;
-
-const FormattedDate = ({ day, month, year}) => <span>{months[month].text} {year}</span>;
 
 const { text_maker, TM } = create_text_maker_component(metadata_text);
 
@@ -80,9 +75,6 @@ export default class MetaData extends React.Component {
                   ))}
                 </FancyUL>
                 <div className="fancy-ul-span-flex">
-                  <div style={{opacity: 0.8 }}> 
-                    <TM k="last_refresh" /> {FormattedDate(source.last_updated)}
-                  </div>
                   { source.open_data &&
                     <a 
                       style={{marginLeft: 'auto'}} //fix a flexbox bug
