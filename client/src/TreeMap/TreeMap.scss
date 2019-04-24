@@ -245,7 +245,7 @@ $treeMapTooltipColor: #767f89;
       & > .treemap-options__option.treemap-options__option--active:active {
         border-color: $treeMapControlsColor;
         background-color: $treeMapControlsColorMid;
-        color: #000;
+        color: $textColor;
         border-style: solid;
       }
       & > .treemap-options__option:not(.treemap-options__option--active):hover,
@@ -253,7 +253,7 @@ $treeMapTooltipColor: #767f89;
       & > .treemap-options__option:not(.treemap-options__option--active):focus { 
         background-color: $treeMapControlsColorLight;
         border-color: $treeMapControlsColor;
-        color: #000;
+        color: $textColor;
         border-style: solid;
       }
     }

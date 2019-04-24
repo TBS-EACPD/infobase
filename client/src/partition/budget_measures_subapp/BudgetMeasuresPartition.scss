@@ -12,7 +12,7 @@
   }
 
   & > .partition-content {
-    color: #333;
+    color: $textColor;
     & > .fat {
       color: #f0f8ff;
       font-weight: $mediumFontWeight !important ;
@@ -35,7 +35,7 @@
           font-size: 20px;
         }
         & > a {
-          color: #333;
+          color: $textColor;
         }
       }
     }
@@ -50,7 +50,7 @@
         color: $backgroundColor;
       }
       & > .btn {
-        color: #333;
+        color: $textColor;
       }
     }
   }

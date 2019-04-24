@@ -158,7 +158,7 @@
 .partition-popup > .popup-row-top > span > .popup-revenue-text {
   line-height: 1; 
   text-align: center; 
-  color: #333; 
+  color: $textColor; 
   width: 70%; 
   margin-left: auto; 
   margin-right: auto;
@@ -167,7 +167,7 @@
 .partition-popup > .popup-decription-text {
   max-height: 200px;
   overflow-y: auto;
-  color: #333;
+  color: $textColor;
   padding-right: 4px;
   font-weight: $mediumFontWeight;
   font-size: 14px;

@@ -11,7 +11,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.4375;
-  color: #333333;
+  color: $textColor;
   background-color: $backgroundColor;
   margin: 0; }
 
@@ -516,7 +516,7 @@ a {
 
 ol.breadcrumb > li:last-child > :last-child {
   text-decoration: none;
-  color: #333;
+  color: $textColor;
 }
 
 // Misc. styles from flat redesign

@@ -4,7 +4,7 @@
   border: 1px solid $primaryColor;
   background-color: $backgroundColor;
   transition: background-color 200ms ease, border-radius 400ms ease;
-  color: #333;
+  color: $textColor;
 }
 
 @mixin disabled-tab-mixin {
