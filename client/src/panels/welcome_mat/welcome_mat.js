@@ -106,7 +106,7 @@ const Chart = ({
   <div style ={{height: '230px'}} aria-hidden = {true}>
     <NivoResponsiveLine
       data = {welcome_data_line(data, has_planned, has_hist)}
-      yScale = {{zoomed: true}}
+      yScale = {{zoomed: false}}
       max = {_.max(data)*1.05}
       enableGridX = {false}
       enableGridY = {false}
