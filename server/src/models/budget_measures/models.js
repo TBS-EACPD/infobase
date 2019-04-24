@@ -42,12 +42,7 @@ export default function(model_singleton){
     allocated: {type: Number},
     withheld: {type: Number},
 
-    program_allocations: {
-      type: [get_budget_program_allocation_schema(true)],
-      // mongoose's default-default for any array type is an empty array, which causes grief with mongo 
-      // when the empty array is supposed to contain subdocuments with unique indicies. Setting an undefined default solves that
-      default: undefined, 
-    },
+    program_allocations: [get_budget_program_allocation_schema(true)],
   });
 
   const get_budget_data_schema = (is_subdocument) =>   mongoose.Schema({
@@ -61,15 +56,9 @@ export default function(model_singleton){
 
     ...bilingual_str('description'),
 
-    program_allocations: {
-      type: [get_budget_program_allocation_schema(true)],
-      default: undefined,
-    },
+    program_allocations: [get_budget_program_allocation_schema(true)],
 
-    submeasure_breakouts: {
-      type: [get_budget_submeasure_schema(true)],
-      default: undefined,
-    },
+    submeasure_breakouts: [get_budget_submeasure_schema(true)],
   });
 
   const BudgetMeasureSchema = mongoose.Schema({
@@ -81,10 +70,7 @@ export default function(model_singleton){
     ...bilingual_str('section_id'),
     ...bilingual_str('description'),
 
-    data: {
-      type: [get_budget_data_schema(true)],
-      default: undefined,
-    },
+    data: [get_budget_data_schema(true)],
   });
 
   // These are artifacts of the Budget 2018 process, shouldn't show up in other years
