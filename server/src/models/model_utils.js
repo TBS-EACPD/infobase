@@ -14,6 +14,18 @@ export const pkey_type = () => ({
   unique: true,
   index: true,
 });
+
+// This probably shouldn't be used outside of the case of optional subdocuments, but it IS required for subdocuments whenever
+// the subdocument schema needs a pkey but isn't itself a required field of the parent. If multiple parents ARE
+// missing a subdocument which has a required unique index then the database will throw a "dup key: { : null }" error.
+// The only solution is to not put unique indexes on the subdocuments or to make sure they're sparse.
+export const sparse_pkey_type = () => ({
+  ...str_type,
+  sparse: true,
+  unique: true,
+  index: true,
+});
+
 export const parent_fkey_type = () => ({
   ...str_type,
   required: true,

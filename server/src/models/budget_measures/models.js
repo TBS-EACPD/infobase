@@ -6,6 +6,7 @@ import { budget_years } from './budget_measures_common.js';
 import { 
   str_type,
   pkey_type,
+  sparse_pkey_type,
   parent_fkey_type,
   bilingual_str,
 } from '../model_utils.js';
@@ -22,8 +23,8 @@ export default function(model_singleton){
   // we'll NEVER update data in-place. The data size trade off's negligible, and it should give room for some efficiency
   // when querying (... or is it actually at odds with using dataloaders? This is a test case for embedded-document-heavy models I guess)
 
-  const BudgetProgramAllocationSchema = mongoose.Schema({
-    unique_id: pkey_type(),
+  const get_budget_program_allocation_schema = (is_subdocument) => mongoose.Schema({
+    unique_id: is_subdocument ? sparse_pkey_type() : pkey_type(),
     subject_id: parent_fkey_type(), // program id or CRSO id
     org_id: parent_fkey_type(), // org id or FakeBudgetOrgSubject id
     measure_id: parent_fkey_type(),
@@ -31,8 +32,8 @@ export default function(model_singleton){
     allocated: {type: Number},
   });
 
-  const BudgetSubmeasureSchema = mongoose.Schema({
-    unique_id: pkey_type(),
+  const get_budget_submeasure_schema = (is_subdocument) =>  mongoose.Schema({
+    unique_id: is_subdocument ? sparse_pkey_type() : pkey_type(),
     submeasure_id: parent_fkey_type(),
     org_id: parent_fkey_type(), // org id or FakeBudgetOrgSubject id
     parent_measure_id: parent_fkey_type(),
@@ -42,15 +43,15 @@ export default function(model_singleton){
     withheld: {type: Number},
 
     program_allocations: {
-      type: [BudgetProgramAllocationSchema],
+      type: [get_budget_program_allocation_schema(true)],
       // mongoose's default-default for any array type is an empty array, which causes grief with mongo 
       // when the empty array is supposed to contain subdocuments with unique indicies. Setting an undefined default solves that
       default: undefined, 
     },
   });
 
-  const BudgetDataSchema = mongoose.Schema({
-    unique_id: pkey_type(),
+  const get_budget_data_schema = (is_subdocument) =>   mongoose.Schema({
+    unique_id: is_subdocument ? sparse_pkey_type() : pkey_type(),
     org_id: parent_fkey_type(), // org id or FakeBudgetOrgSubject id
     measure_id: parent_fkey_type(),
     funding: {type: Number},
@@ -61,12 +62,12 @@ export default function(model_singleton){
     ...bilingual_str('description'),
 
     program_allocations: {
-      type: [BudgetProgramAllocationSchema],
+      type: [get_budget_program_allocation_schema(true)],
       default: undefined,
     },
 
     submeasure_breakouts: {
-      type: [BudgetSubmeasureSchema],
+      type: [get_budget_submeasure_schema(true)],
       default: undefined,
     },
   });
@@ -81,7 +82,7 @@ export default function(model_singleton){
     ...bilingual_str('description'),
 
     data: {
-      type: [BudgetDataSchema],
+      type: [get_budget_data_schema(true)],
       default: undefined,
     },
   });
@@ -97,11 +98,26 @@ export default function(model_singleton){
   _.each(
     budget_years,
     budget_year => {
-      model_singleton.define_model(`Budget${budget_year}Measure`, BudgetMeasureSchema);
-      model_singleton.define_model(`Budget${budget_year}Data`, BudgetDataSchema);
-      model_singleton.define_model(`Budget${budget_year}ProgramAllocation`, BudgetProgramAllocationSchema);
-      model_singleton.define_model(`Budget${budget_year}Submeasure`, BudgetSubmeasureSchema);
-      model_singleton.define_model(`Budget${budget_year}SubmeasureProgramAllocation`, BudgetProgramAllocationSchema);
+      model_singleton.define_model(
+        `Budget${budget_year}Measure`, 
+        BudgetMeasureSchema
+      );
+      model_singleton.define_model(
+        `Budget${budget_year}Data`,
+        get_budget_data_schema(false)
+      );
+      model_singleton.define_model(
+        `Budget${budget_year}ProgramAllocation`,
+        get_budget_program_allocation_schema(false)
+      );
+      model_singleton.define_model(
+        `Budget${budget_year}Submeasure`,
+        get_budget_submeasure_schema(false)
+      );
+      model_singleton.define_model(
+        `Budget${budget_year}SubmeasureProgramAllocation`,
+        get_budget_program_allocation_schema(false)
+      );
     },
   );
   model_singleton.define_model("FakeBudgetOrgSubject", FakeBudgetOrgSubjectSchema);
