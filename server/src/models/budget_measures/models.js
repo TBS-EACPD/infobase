@@ -43,7 +43,9 @@ export default function(model_singleton){
 
     program_allocations: {
       type: [BudgetProgramAllocationSchema],
-      default: undefined,
+      // mongoose's default-default for any array type is an empty array, which causes grief with mongo 
+      // when the empty array is supposed to contain subdocuments with unique indicies. Setting an undefined default solves that
+      default: undefined, 
     },
   });
 
