@@ -205,6 +205,7 @@ export class LineBarToggleGraph extends React.Component {
         .map( ({label}) => label )
         .value(),
       graph_mode: props.initial_graph_mode,
+      y_scale_zeroed: true,
     };
   }
   render(){
@@ -315,7 +316,7 @@ export class LineBarToggleGraph extends React.Component {
       yScale: { 
         type: "linear",
         stacked: extra_graph_options.stacked,
-        min: y_scale_zeroed ? 0 : "auto",
+        min: y_scale_zeroed || extra_graph_options.stacked ? 0 : "auto",
       },
       enableArea: !!extra_graph_options.enableArea,
       is_money: !!extra_graph_options.is_money,
@@ -332,6 +333,7 @@ export class LineBarToggleGraph extends React.Component {
         tickPadding: 10,
       },
     };
+
 
     return (
       <div className="frow">
@@ -385,7 +387,7 @@ export class LineBarToggleGraph extends React.Component {
                 </button>
               </span>
             }
-            { !disable_scale_toggle && !extra_graph_options.bar &&
+            { !disable_scale_toggle && !extra_graph_options.bar && !extra_graph_options.stacked &&
               <span className="centerer" style={{paddingBottom: "15px"}}>
                 <button 
                   className="btn-ib-primary"
