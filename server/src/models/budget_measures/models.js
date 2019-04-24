@@ -41,7 +41,10 @@ export default function(model_singleton){
     allocated: {type: Number},
     withheld: {type: Number},
 
-    program_allocations: [BudgetProgramAllocationSchema],
+    program_allocations: {
+      type: [BudgetProgramAllocationSchema],
+      default: undefined,
+    },
   });
 
   const BudgetDataSchema = mongoose.Schema({
@@ -55,9 +58,15 @@ export default function(model_singleton){
 
     ...bilingual_str('description'),
 
-    program_allocations: [BudgetProgramAllocationSchema],
+    program_allocations: {
+      type: [BudgetProgramAllocationSchema],
+      default: undefined,
+    },
 
-    submeasure_breakouts: [BudgetSubmeasureSchema],
+    submeasure_breakouts: {
+      type: [BudgetSubmeasureSchema],
+      default: undefined,
+    },
   });
 
   const BudgetMeasureSchema = mongoose.Schema({
@@ -69,7 +78,10 @@ export default function(model_singleton){
     ...bilingual_str('section_id'),
     ...bilingual_str('description'),
 
-    data: [BudgetDataSchema],
+    data: {
+      type: [BudgetDataSchema],
+      default: undefined,
+    },
   });
 
   // These are artifacts of the Budget 2018 process, shouldn't show up in other years
