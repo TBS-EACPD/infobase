@@ -282,6 +282,23 @@ a.btn-ib-light {
   background-color: $buttonPrimaryColor;
   color: $backgroundColor !important;
 }
+
+.btn-ib-toggle {
+  border: 2px solid $buttonPrimaryColor;
+  border-radius: 10px;
+}
+.btn-ib-toggle.btn-ib-toggle--on {
+  background-color: $buttonPrimaryColor;
+  color: $backgroundColor !important;
+}
+.btn-ib-toggle.btn-ib-toggle--off {
+  background-color: $backgroundColor;
+  color: $buttonPrimaryColor !important;
+
+}
+
+
+
 .btn-ib-info {
     color: #fff;
     background-color: #5bc0de;
