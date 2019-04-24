@@ -79,6 +79,7 @@ const info_deps_by_level = {
                    raw_data = {series}
                    colors = "#335075"
                    is_money = {false}
+                   yScale = {{toggle: true}}
                    tooltip = {slice =>  
                      <div style={{color: '#000'}}>
                        <table style={{width: '100%', borderCollapse: 'collapse'}}>

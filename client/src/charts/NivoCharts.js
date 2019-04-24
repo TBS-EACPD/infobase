@@ -2,6 +2,8 @@ import { ResponsiveLine } from '@nivo/line';
 import { ResponsiveBar } from './nivo-bar.js';
 import { ResponsivePie } from '@nivo/pie'
 import { formats, dollar_formats } from "../core/format.js";
+import { Fragment } from 'react';
+import { TM } from '../util_components.js';
 
 const get_formatter = (is_money, formatter, raw = true) => (
   _.isUndefined(formatter)?
@@ -362,43 +364,63 @@ export class NivoResponsiveLine extends React.Component {
     } = this.props;
 
     return (
-      <ResponsiveLine
-        {...{
-          data,
-          margin,
-          enableGridX,
-          enableGridY,
-          enableArea,
-          colorBy,
-          colors,
-          theme,
-          enableDotLabel,
-        }}
-        tooltip={ (d) => tooltip( d, get_formatter(is_money, text_formatter, false) ) }
-        yScale={{
-          type: "linear",
-          stacked: stacked,
-          max: max,
-          min: (_.min(raw_data) >= 0 || enableArea)? 0: min,
-          ...(yScale || {}),
-        }}
-        axisBottom={remove_bottom_axis ? null : bttm_axis}
-        axisLeft={{
-          orient: "left",
-          tickSize: 5,
-          tickPadding: 5,
-          tickValues: tick_amount || 6,
-          format: d => get_formatter(is_money, text_formatter)(d),
-          ...(left_axis || {}),
-        }}
-        axisTop={null}
-        axisRight={null}
-        xScale={{ type: "point" }}
-        animate={true}
-        motionStiffness={motion_stiffness || 100}
-        motionDamping={motion_damping || 19}
-        dotSize={10}
-      />
+      <Fragment>
+        <ResponsiveLine
+          {...{
+            data,
+            margin,
+            enableGridX,
+            enableGridY,
+            enableArea,
+            colorBy,
+            colors,
+            theme,
+            enableDotLabel,
+          }}
+          tooltip={ (d) => tooltip( d, get_formatter(is_money, text_formatter, false) ) }
+          yScale={{
+            type: "linear",
+            stacked: stacked,
+            min: min || get_scale_bounds(stacked, raw_data, yScale.zoomed).min,
+            max: max || get_scale_bounds(stacked, raw_data, yScale.zoomed).max,
+            ...(yScale || {}),
+          }}
+          axisBottom={remove_bottom_axis ? null : bttm_axis}
+          axisLeft={{
+            orient: "left",
+            tickSize: 5,
+            tickPadding: 5,
+            tickValues: tick_amount || 6,
+            format: d => get_formatter(is_money, text_formatter)(d),
+            ...(left_axis || {}),
+          }}
+          axisTop={null}
+          axisRight={null}
+          xScale={{ type: "point" }}
+          animate={true}
+          motionStiffness={motion_stiffness || 100}
+          motionDamping={motion_damping || 19}
+          dotSize={enableArea ? 0 : 10}
+          areaOpacity={1}
+        />
+        {yScale.toggle && 
+          <span className="centerer" style={{paddingBottom: "15px"}}>
+            <button 
+              className="btn-ib-primary"
+              onClick={ 
+                () => {
+                  yScale.zoomed = !yScale.zoomed;
+                  this.setState({
+                    yScale: {...yScale},
+                  });
+                }
+              }
+            >
+              <TM k="toggle_scale"/>
+            </button>
+          </span>
+        }
+      </Fragment>
     );
   }
 }
@@ -437,6 +459,27 @@ NivoResponsiveLine.defaultProps = {
   enableGridX: true,
   enableGridY: true,
   enableArea: false,
-  max: "auto",
-  min: "auto",
+  yScale: {
+    type: "linear",
+    zoomed: false,
+    toggle: false,
+  },
 };
+
+const get_scale_bounds = (stacked, raw_data, zoomed) => {
+  if(stacked){
+    return {
+      min: 0,
+      max: 'auto',
+    }
+  }
+  const min = _.min(raw_data);
+  const max = _.max(raw_data);
+  const scaled_min = min < 0 ? min * 1.1 : min * 0.9;
+  const scaled_max = max < 0 ? max * 0.9 : max * 1.1;
+  const bounds = {
+    min: zoomed ? scaled_min : 0,
+    max: scaled_max,
+  }
+  return bounds;
+}

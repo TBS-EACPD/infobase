@@ -205,7 +205,6 @@ export class LineBarToggleGraph extends React.Component {
         .map( ({label}) => label )
         .value(),
       graph_mode: props.initial_graph_mode,
-      y_scale_zeroed: true,
     };
   }
   render(){
@@ -229,7 +228,7 @@ export class LineBarToggleGraph extends React.Component {
       colors,
       selected,
       graph_mode,
-      y_scale_zeroed,
+      y_scale_zoomed,
     } = this.state;
 
     const extra_graph_options = this.extra_options_by_graph_mode[graph_mode];
@@ -316,7 +315,7 @@ export class LineBarToggleGraph extends React.Component {
       yScale: { 
         type: "linear",
         stacked: extra_graph_options.stacked,
-        min: y_scale_zeroed || extra_graph_options.stacked ? 0 : "auto",
+        zoomed: y_scale_zoomed,
       },
       enableArea: !!extra_graph_options.enableArea,
       is_money: !!extra_graph_options.is_money,
@@ -394,7 +393,7 @@ export class LineBarToggleGraph extends React.Component {
                   onClick={ 
                     () => {
                       this.setState({
-                        y_scale_zeroed: !y_scale_zeroed,
+                        y_scale_zoomed: !this.state.y_scale_zoomed,
                       });
                     }
                   }
