@@ -408,7 +408,7 @@ export class NivoResponsiveLine extends React.Component {
         {yScale.toggle && 
           <span className="centerer" style={{paddingBottom: "15px"}}>
             <button 
-              className = { yScale.zoomed ? "btn-ib-primary" : "btn-ib-primary--selected" }
+              className = { yScale.zoomed ? "btn-ib-primary" : "btn-ib-primary btn-ib-primary--selected" }
               onClick={ 
                 () => {
                   yScale.zoomed = !yScale.zoomed;

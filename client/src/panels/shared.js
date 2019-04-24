@@ -389,7 +389,7 @@ export class LineBarToggleGraph extends React.Component {
             { !disable_scale_toggle && !extra_graph_options.bar && !extra_graph_options.stacked &&
               <span className="centerer" style={{paddingBottom: "15px"}}>
                 <button 
-                  className = { y_scale_zoomed ? "btn-ib-primary" : "btn-ib-primary--selected" }
+                  className = { y_scale_zoomed ? "btn-ib-primary" : "btn-ib-primary btn-ib-primary--selected" }
                   onClick={ 
                     () => {
                       this.setState({
