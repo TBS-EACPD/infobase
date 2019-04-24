@@ -356,6 +356,7 @@ export class NivoResponsiveLine extends React.Component {
       motion_stiffness,
       enableDotLabel,
       remove_bottom_axis,
+      remove_left_axis,
       bttm_axis,
       text_formatter,
       stacked,
@@ -386,7 +387,8 @@ export class NivoResponsiveLine extends React.Component {
             ...(yScale || {}),
           }}
           axisBottom={remove_bottom_axis ? null : bttm_axis}
-          axisLeft={{
+          axisLeft={remove_left_axis ? null :
+          {
             orient: "left",
             tickSize: 5,
             tickPadding: 5,

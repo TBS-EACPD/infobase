@@ -106,6 +106,7 @@ const Chart = ({
   <div style ={{height: '230px'}} aria-hidden = {true}>
     <NivoResponsiveLine
       data = {welcome_data_line(data, has_planned, has_hist)}
+      yScale = {{zoomed: true}}
       max = {_.max(data)*1.05}
       enableGridX = {false}
       enableGridY = {false}
@@ -113,11 +114,12 @@ const Chart = ({
       is_money={is_money}
       tick_amount={5}
       remove_bottom_axis = {true}
+      remove_left_axis = {true}
       margin={{
-        "top": 20,
+        "top": 10,
         "right": 30,
-        "bottom": 20,
-        "left": 80,
+        "bottom": 10,
+        "left": 30,
       }}
       tooltip={
         slice => {
