@@ -83,11 +83,11 @@ export default function(model_singleton){
   _.each(
     budget_years,
     budget_year => {
-      model_singleton.define_model(`Budget${budget_year}Measures`, BudgetMeasureSchema);
+      model_singleton.define_model(`Budget${budget_year}Measure`, BudgetMeasureSchema);
       model_singleton.define_model(`Budget${budget_year}Data`, BudgetDataSchema);
-      model_singleton.define_model(`Budget${budget_year}ProgramAllocations`, BudgetProgramAllocationSchema);
-      model_singleton.define_model(`Budget${budget_year}Submeasures`, BudgetSubmeasureSchema);
-      model_singleton.define_model(`Budget${budget_year}SubmeasureProgramAllocations`, BudgetProgramAllocationSchema);
+      model_singleton.define_model(`Budget${budget_year}ProgramAllocation`, BudgetProgramAllocationSchema);
+      model_singleton.define_model(`Budget${budget_year}Submeasure`, BudgetSubmeasureSchema);
+      model_singleton.define_model(`Budget${budget_year}SubmeasureProgramAllocation`, BudgetProgramAllocationSchema);
     },
   );
   model_singleton.define_model("FakeBudgetOrgSubject", FakeBudgetOrgSubjectSchema);

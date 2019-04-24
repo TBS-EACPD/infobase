@@ -97,11 +97,11 @@ const schema = `
 `;
 
 export default function({models}){
-  const get_measure_model_by_year = (year) => models[`Budget${year}Measures`];
+  const get_measure_model_by_year = (year) => models[`Budget${year}Measure`];
   const get_budget_data_model_by_year = (year) => models[`Budget${year}Data`];
-  const get_program_allocation_model_by_year = (year) => models[`Budget${year}ProgramAllocations`];
-  const get_budget_submeasure_model_by_year = (year) => models[`Budget${year}Submeasures`];
-  const get_submeasure_program_allocation_model_by_year = (year) => models[`Budget${year}SubmeasureProgramAllocations`];
+  const get_program_allocation_model_by_year = (year) => models[`Budget${year}ProgramAllocation`];
+  const get_budget_submeasure_model_by_year = (year) => models[`Budget${year}Submeasure`];
+  const get_submeasure_program_allocation_model_by_year = (year) => models[`Budget${year}SubmeasureProgramAllocation`];
 
   const resolvers = {
     FakeBudgetOrg: {
