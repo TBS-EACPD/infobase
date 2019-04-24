@@ -581,8 +581,8 @@ toggle_graph:
   en: Toggle Graph Type
   fr: Changer le type de graphique
 toggle_scale:
-  en: Toggle Scale
-  fr: TODO TODO TODO
+  en: Start y-axis at zero
+  fr: Débuter l'axe vertical à zéro
 alternate_view:
   en: Alternate View
   fr: Autre vue

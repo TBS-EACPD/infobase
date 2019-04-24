@@ -278,10 +278,11 @@ a.btn-ib-light {
   background-color: $buttonPrimaryColor;
   color: $backgroundColor !important;
 }
-.btn-ib-primary.btn-ib-primary--selected { 
+.btn-ib-primary--selected { 
   background-color: $buttonPrimaryColor;
+  border: 2px solid $buttonPrimaryColor;
   color: $backgroundColor !important;
-  cursor: default;
+  border-radius: 10px;
 }
 .btn-ib-info {
     color: #fff;
