@@ -87,7 +87,19 @@ export default function(model_singleton){
   const { FakeBudgetOrgSubject } = model_singleton.models;
 
   const loaders = {
-    fake_budget_org_org_id_loader: create_resource_by_id_attr_dataloader(FakeBudgetOrgSubject, 'org_id'), 
+    fake_budget_org_id_loader: create_resource_by_id_attr_dataloader(FakeBudgetOrgSubject, 'org_id'),
+    ..._.chain(budget_years)
+      .map(
+        budget_year => [
+          `budget_${budget_year}_measure_id_loader`,
+          create_resource_by_id_attr_dataloader(
+            model_singleton.models[`Budget${budget_year}Measure`],
+            'measure_id'
+          ),
+        ]
+      )
+      .fromPairs()
+      .value(),
   };
   _.each( loaders, (val, key) =>  model_singleton.define_loader(key, val) );
 }
