@@ -86,28 +86,28 @@
 }
 
 .TablePicker__tooltip-inner{
-  background-color: rgb(38, 55, 74);
+  background-color: $primaryColor;
 }
 .tooltip[x-placement^="right"]>.TablePicker__tooltip-arrow {
-  border-right-color: rgb(38, 55, 74);
+  border-right-color: $primaryColor;
   border-left-color: transparent;
   border-top-color: transparent;
   border-bottom-color: transparent;
 }
 .tooltip[x-placement^="left"]>.TablePicker__tooltip-arrow {
-  border-left-color: rgb(38, 55, 74);
+  border-left-color: $primaryColor;
   border-right-color: transparent;
   border-top-color: transparent;
   border-bottom-color: transparent;
 }
 .tooltip[x-placement^="bottom"]>.TablePicker__tooltip-arrow {
-  border-bottom-color: rgb(38, 55, 74);
+  border-bottom-color: $primaryColor;
   border-right-color: transparent;
   border-top-color: transparent;
   border-left-color: transparent;
 }
 .tooltip[x-placement^="top"]>.TablePicker__tooltip-arrow {
-  border-top-color: rgb(38, 55, 74);
+  border-top-color: $primaryColor;
   border-right-color: transparent;
   border-left-color: transparent;
   border-bottom-color: transparent;
