@@ -136,7 +136,7 @@ export default async function({models}){
         description_fr: "",
       },
     ]),
-    ..._.flatMap( budget_years, async (budget_year) => {
+    ..._.map( budget_years, async (budget_year) => {
       const budget_data = get_standard_csv_file_rows(`budget_${budget_year}_measure_data.csv`);
       const budget_lookups = get_standard_csv_file_rows(`budget_${budget_year}_measure_lookups.csv`);
 
@@ -390,36 +390,22 @@ export default async function({models}){
         )
       );
 
-      return [
-        models[`Budget${budget_year}SubmeasureProgramAllocation`].insertMany( 
-          flatten_program_allocations_by_measure_and_org_id(submeasure_program_allocations_by_submeasure_and_org_id)
-        ),
-        models[`Budget${budget_year}ProgramAllocation`].insertMany( 
-          flatten_program_allocations_by_measure_and_org_id(program_allocations_by_measure_and_org_id)
-        ),
-        models[`Budget${budget_year}Submeasure`].insertMany(
-          flatten_submeasures_by_measure_and_org_id(submeasures_by_measure_and_org_id)
-        ),
-        models[`Budget${budget_year}Data`].insertMany(
-          flatten_data_by_measure_and_org_id(data_by_measure_and_org_id)
-        ),
-        models[`Budget${budget_year}Measure`].insertMany(
-          _.map(
-            measure_lookups,
-            measure => ({
-              ...measure,
+      return models[`Budget${budget_year}Measure`].insertMany(
+        _.map(
+          measure_lookups,
+          measure => ({
+            ...measure,
 
-              data: flatten_data_by_measure_and_org_id(
-                {
-                  [measure.measure_id]: {
-                    ...data_by_measure_and_org_id[measure.measure_id],
-                  },
-                }
-              ),
-            })
-          )
-        ),
-      ];
+            data: flatten_data_by_measure_and_org_id(
+              {
+                [measure.measure_id]: {
+                  ...data_by_measure_and_org_id[measure.measure_id],
+                },
+              }
+            ),
+          })
+        )
+      );
     }),
   ]);
 }

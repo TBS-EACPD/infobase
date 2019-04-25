@@ -18,13 +18,8 @@ import {
 
 export default function(model_singleton){
 
-  // These models are very hierarchical, each being used as an embedded-document in other models up to BudgetMeasureSchema
-  // Independant collections will also be populated from each layer of embedded-document. The redundancy is safe becase
-  // we'll NEVER update data in-place. The data size trade off's negligible, and it should give room for some efficiency
-  // when querying (... or is it actually at odds with using dataloaders? This is a test case for embedded-document-heavy models I guess)
-
-  const get_budget_program_allocation_schema = (is_subdocument) => mongoose.Schema({
-    unique_id: is_subdocument ? sparse_pkey_type() : pkey_type(),
+  const BudgetProgramAllocationSchema = mongoose.Schema({
+    unique_id: sparse_pkey_type(), // see note on sparse_pkey_type in ../model_utils.js
     subject_id: parent_fkey_type(), // program id or CRSO id
     org_id: parent_fkey_type(), // org id or FakeBudgetOrgSubject id
     measure_id: parent_fkey_type(),
@@ -32,8 +27,8 @@ export default function(model_singleton){
     allocated: {type: Number},
   });
 
-  const get_budget_submeasure_schema = (is_subdocument) =>  mongoose.Schema({
-    unique_id: is_subdocument ? sparse_pkey_type() : pkey_type(),
+  const BudgetSubmeasureSchema = mongoose.Schema({
+    unique_id: sparse_pkey_type(),
     submeasure_id: parent_fkey_type(),
     org_id: parent_fkey_type(), // org id or FakeBudgetOrgSubject id
     parent_measure_id: parent_fkey_type(),
@@ -42,11 +37,11 @@ export default function(model_singleton){
     allocated: {type: Number},
     withheld: {type: Number},
 
-    program_allocations: [get_budget_program_allocation_schema(true)],
+    program_allocations: [BudgetProgramAllocationSchema],
   });
 
-  const get_budget_data_schema = (is_subdocument) =>   mongoose.Schema({
-    unique_id: is_subdocument ? sparse_pkey_type() : pkey_type(),
+  const BudgetDataSchema = mongoose.Schema({
+    unique_id: sparse_pkey_type(),
     org_id: parent_fkey_type(), // org id or FakeBudgetOrgSubject id
     measure_id: parent_fkey_type(),
     funding: {type: Number},
@@ -56,9 +51,9 @@ export default function(model_singleton){
 
     ...bilingual_str('description'),
 
-    program_allocations: [get_budget_program_allocation_schema(true)],
+    program_allocations: [BudgetProgramAllocationSchema],
 
-    submeasure_breakouts: [get_budget_submeasure_schema(true)],
+    submeasure_breakouts: [BudgetSubmeasureSchema],
   });
 
   const BudgetMeasureSchema = mongoose.Schema({
@@ -70,7 +65,7 @@ export default function(model_singleton){
     ...bilingual_str('section_id'),
     ...bilingual_str('description'),
 
-    data: [get_budget_data_schema(true)],
+    data: [BudgetDataSchema],
   });
 
   // These are artifacts of the Budget 2018 process, shouldn't show up in other years
@@ -81,37 +76,18 @@ export default function(model_singleton){
     ...bilingual_str('description'),
   });
 
+
   _.each(
     budget_years,
-    budget_year => {
-      model_singleton.define_model(
-        `Budget${budget_year}Measure`, 
-        BudgetMeasureSchema
-      );
-      model_singleton.define_model(
-        `Budget${budget_year}Data`,
-        get_budget_data_schema(false)
-      );
-      model_singleton.define_model(
-        `Budget${budget_year}ProgramAllocation`,
-        get_budget_program_allocation_schema(false)
-      );
-      model_singleton.define_model(
-        `Budget${budget_year}Submeasure`,
-        get_budget_submeasure_schema(false)
-      );
-      model_singleton.define_model(
-        `Budget${budget_year}SubmeasureProgramAllocation`,
-        get_budget_program_allocation_schema(false)
-      );
-    },
+    budget_year => model_singleton.define_model(`Budget${budget_year}Measure`, BudgetMeasureSchema)
   );
   model_singleton.define_model("FakeBudgetOrgSubject", FakeBudgetOrgSubjectSchema);
+  
   
   const { FakeBudgetOrgSubject } = model_singleton.models;
 
   const loaders = {
     fake_budget_org_org_id_loader: create_resource_by_id_attr_dataloader(FakeBudgetOrgSubject, 'org_id'), 
   };
-  _.each( loaders, (val, key) =>  model_singleton.define_loader(key, val) )
+  _.each( loaders, (val, key) =>  model_singleton.define_loader(key, val) );
 }

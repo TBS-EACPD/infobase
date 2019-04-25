@@ -100,10 +100,6 @@ export default function({models, loaders}){
   };
 
   const get_measure_model_by_year = (year) => validate_year(year) && models[`Budget${year}Measure`];
-  const get_budget_data_model_by_year = (year) => validate_year(year) && models[`Budget${year}Data`];
-  const get_program_allocation_model_by_year = (year) => validate_year(year) && models[`Budget${year}ProgramAllocation`];
-  const get_budget_submeasure_model_by_year = (year) => validate_year(year) && models[`Budget${year}Submeasure`];
-  const get_submeasure_program_allocation_model_by_year = (year) => validate_year(year) && models[`Budget${year}SubmeasureProgramAllocation`];
 
   const resolvers = {
     Root: {
