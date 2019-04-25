@@ -161,7 +161,7 @@
 }
 
 .key_concept_term {
-  border-bottom: 1px solid $tertiaryColor;
+  border-bottom: 1px solid $separatorColor;
   display: flex;
   align-items: center;
   padding-left: 10px;
@@ -180,7 +180,7 @@
 }
 
 .key_concept_def {
-  border-bottom: 1px solid $tertiaryColor;
+  border-bottom: 1px solid $separatorColor;
   padding: 10px;
   padding-top: 20px;
   background-color: $backgroundColor;

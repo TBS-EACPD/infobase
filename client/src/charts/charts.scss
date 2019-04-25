@@ -59,7 +59,7 @@ div.d3-list {
 .legend-container {
   overflow-x: hidden;
   padding: 8px 10px 0px;
-  border: 1px solid $tertiaryColor;
+  border: 1px solid $separatorColor;
   background-color: $backgroundColor;
   border-radius: 10px;
 }
@@ -98,7 +98,7 @@ div.d3-list {
   padding: 5px 0;
 }
 .tabular-legend-list-el:not(:first-child){
-  border-top: 1px solid $tertiaryColor;
+  border-top: 1px solid $separatorColor;
 }
 
 .legend-color-checkbox {
