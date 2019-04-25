@@ -2,13 +2,10 @@
 @import "../common_css/common-variables";
 
 
-
-
-
 /* styles outside totally outside the explorer */
 .search-clear-container {
-  border: 1px solid #ccc;
-  background-color: #eee;
+  border: 1px solid $separatorColor;
+  background-color: lighten($tertiaryColor, 30%);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -21,7 +18,7 @@
 
 .loading-overlay {
   z-index:50;
-  background-color: rgba(200,200,200,0.5);
+  background-color: rgba($tertiaryColor,0.2);
   height: 100%;
   width: 100%;
   position:absolute;
@@ -42,7 +39,7 @@
 }
 
 .hierarchy-selection-header {
-  color: #fcfcfc;
+  color: lighten($tertiaryColor, 50%);
   padding: 10px 0 10px 0;
   font-size: 1.4em;
   text-align: center;
@@ -51,16 +48,15 @@
 
 }
 
-
 .hierarchy-selection-item:focus,
 .hierarchy-selection-item:active {
-  outline: 2px solid #222;
+  outline: 2px solid $textColor;
 }
 
 .hierarchy-selection-item {
   @include unstyled-link;
-  background-color: #fcfcfc;
-  color: #222;
+  background-color: lighten($tertiaryColor, 50%);
+  color: $textColor;
   padding: 10px;
   
   /* make the <button> act like a div */
@@ -74,7 +70,7 @@
   }
 }
 .hierarchy-selection-item.active {
-  background-color: #dedede;
+  background-color: lighten($tertiaryColor, 30%);
 }
 .hierarchy-selection-item:not(:last-child){
   border-bottom: 1px solid $primaryColor;
