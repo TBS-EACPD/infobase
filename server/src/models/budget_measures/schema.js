@@ -44,14 +44,11 @@ const schema = `
     data: [BudgetData]
   }
   
-  union OrgOrFakeBudgetOrg = Org | FakeBudgetOrg
   type BudgetData {
     unique_id: String
 
     org_id: String
-    org: OrgOrFakeBudgetOrg
     measure_id: String
-    measure: BudgetMeasure
 
     description: String
 
@@ -65,16 +62,12 @@ const schema = `
     submeasure_breakouts: [BudgetSubmeasure]
   }
 
-  union CrsoOrProgram = Crso | Program
   type BudgetProgramAllocation {
     unique_id: String
     subject_id: String
-    subject: CrsoOrProgram
 
     org_id: String
-    org_id: OrgOrFakeBudgetOrg
     measure_id: String
-    measure: BudgetMeasure
 
     allocated: Float
   }
@@ -85,9 +78,7 @@ const schema = `
     name: String
 
     org_id: String
-    org: OrgOrFakeBudgetOrg
     parent_measure_id: String
-    parent_measure: BudgetMeasure
 
     allocated: Float
     withheld: Float
@@ -96,7 +87,8 @@ const schema = `
   }
 `;
 
-export default function({models}){
+export default function({models, loaders}){
+
   const get_measure_model_by_year = (year) => models[`Budget${year}Measure`];
   const get_budget_data_model_by_year = (year) => models[`Budget${year}Data`];
   const get_program_allocation_model_by_year = (year) => models[`Budget${year}ProgramAllocation`];
@@ -106,7 +98,6 @@ export default function({models}){
   const resolvers = {
     FakeBudgetOrg: {
       name: bilingual_field("name"),
-
       //budget_measures: ({org_id}, {year}) => "todo",
     },
     Gov: {
@@ -130,20 +121,10 @@ export default function({models}){
       description: bilingual_field("description"),
     },
     BudgetData: {
-      description: bilingual_field("descriptionription"),
-
-      //org: ({org_id}) => "todo",
-      //measure: ({year, measure_id, org_id}) => "todo",
-    },
-    BudgetProgramAllocation: {
-      //subject: ({subject_id}) => "todo",
-      //org: ({org_id}) => "todo",
-      //measure: ({year, measure_id}) => "todo",
+      description: bilingual_field("description"),
     },
     BudgetSubmeasure: {
       name: bilingual_field("name"),
-      //org: ({org_id}) => "todo",
-      //parent_measure: ({year, measure_id}) => "todo",
     },
   };
   
