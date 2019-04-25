@@ -2,7 +2,6 @@
 
 /* styles from bootstrap */
 
-/*$borderColor: #e3e3e3;*/
 $borderColor: transparent;
 
 .IBDetails {
@@ -18,7 +17,7 @@ $borderColor: transparent;
   background-color: transparent; /* override unstyle-button's inherit because IE11 won't apply it */
   width: 100%;
 
-  color: #23406F;
+  color: $linkColor;
   font-weight: $heavyFontWeight;
   padding: 5px;
   cursor: pointer;
@@ -27,7 +26,7 @@ $borderColor: transparent;
   &:active,
   &:focus {
     background-color: transparent;
-    color: #0535d2;
+    color: $linkFocusColor;
     text-decoration: underline;
   }
 
