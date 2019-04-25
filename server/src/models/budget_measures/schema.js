@@ -100,14 +100,24 @@ export default function({models, loaders}){
   };
 
   const get_measure_model_by_year = (year) => validate_year(year) && models[`Budget${year}Measure`];
+  const get_measure_loader_by_year = (year) => validate_year(year) && loaders[`budget_${year}_measure_id_loader`];
 
   const resolvers = {
     Root: {
       fake_budget_orgs: () => models.FakeBudgetOrgSubject.find({}),
-      budget_measure: (_x, {year, measure_id}) => get_measure_model_by_year(year).findOne({measure_id}),
+      budget_measure: (_x, {year, measure_id}) => get_measure_loader_by_year(year).load(measure_id),
     },
     Gov: {
-      budget_measures: (_x, {year}) => get_measure_model_by_year(year).find({}),
+      budget_measures: async (_x, {year}) => {
+        const all_budget_measures = await get_measure_model_by_year(year).find({});
+
+        _.each(
+          all_budget_measures,
+          budget_measure => get_measure_loader_by_year(year).prime(budget_measure.measure_id, budget_measure)
+        );
+
+        return all_budget_measures;
+      },
     },
     FakeBudgetOrg: {
       name: bilingual_field("name"),
