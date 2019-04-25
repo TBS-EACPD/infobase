@@ -48,7 +48,7 @@ li.select-list-item {
 }
 
 .graph_report { 
-  border: 1px solid rgba(37,114,180,0.9) ;
+  border: 1px solid $secondaryColor ;
 }
 
 .rpb-config-item {
@@ -67,7 +67,7 @@ li.select-list-item {
   font-size: 12px;
   font-weight: $heavyFontWeight;
   line-height: 20px;
-  color: rgb(35, 68, 126);
+  color: $primaryColor;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   text-transform: uppercase;
 }
@@ -84,7 +84,7 @@ li.select-list-item {
 .graph_total_and_col_expl {
   overflow-x: hidden;
   overflow-y: auto;
-  border: 1px solid #7b8c9d;
+  border: 1px solid $tertiaryColor;
   background-color: $backgroundColor;
   border-radius: 10px;
   height: 240px; 
