@@ -20,7 +20,7 @@ $controlsColorLighter: lighten($controlsColor, 20%);
 .filter-table__item:hover,
 .filter-table__item:focus,
 .filter-table__item:active {
-  background-color: #e8e8e8;
+  background-color: lighten( $tertiaryColor, 30% );
 }
 
 
