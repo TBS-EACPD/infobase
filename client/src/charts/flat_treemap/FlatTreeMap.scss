@@ -4,10 +4,6 @@
   position: absolute;
   border: 2px solid white;
   box-sizing: border-box;
-  &:hover,
-  &:focus {
-    background-color: red;
-  }
 }
 
 .FlatTreeMap__TextBox {
