@@ -1,10 +1,12 @@
+@import '../common_css/common-variables';
+
 table.tombstone-table {
   background-color: transparent;
   width: 100%;
 }
 table.tombstone-table > tbody > tr > td {
   border: none;
-  border-bottom: 1px #ccc solid;
+  border-bottom: 1px $tertiaryColor solid;
   padding: 5px 0;
 }
 table.tombstone-table > tbody > tr:last-child > td {
