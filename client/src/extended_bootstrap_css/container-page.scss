@@ -76,13 +76,13 @@
 }
 
 .bonus-footer-landscape {
-  background: #26374a url(https://www.canada.ca/etc/designs/canada/wet-boew/assets/landscape.png) no-repeat right bottom;
+  background: $primaryColor url(https://www.canada.ca/etc/designs/canada/wet-boew/assets/landscape.png) no-repeat right bottom;
 }
 
 .bonus-footer-list {
   font-weight: $lightFontWeight;
 
   & > li > a {
-    color: #fff;
+    color: $textLightColor;
   }
 }
