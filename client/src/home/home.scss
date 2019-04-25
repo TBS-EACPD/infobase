@@ -8,8 +8,8 @@
 
 .intro-box {
   padding: 30px 0 0;
-  background-color: #3b4f68;
-  color: white;
+  background-color: $primaryColor;
+  color: $textLightColor;
   border-bottom: 10px solid $highlightColor;
 
   & > h1 {
@@ -40,7 +40,7 @@
 
 .col-content.featured-col-content {
   color: $textColor !important;
-  background-color: #3075d2;
+  background-color: $secondaryColor;
   border-radius: 10px;
   margin-top: 40px;
   height: auto;
@@ -81,18 +81,18 @@
 
 .col-content.misc-col-content {
   color: $textColor !important;
-  background-color: hsla(210, 45%, 82%, 1);
+  background-color: $tertiaryColor;
   border-radius: 10px;
 }
 
 .list-group-item--home {
-  background-color: #fafafa;
-  border-color: #ccc !important;
+  background-color: $backgroundColor;
+  border-color: $tertiaryColor !important;
 }
 
 .badge.badge--is-new {
-  background-color: #da3a38; 
-  color: #ffff;
+  background-color: $highlightColor; 
+  color: $textLightColor;
   font-size: 16px;
 }
 
@@ -132,7 +132,7 @@
 .TrinityItem {
   @include unstyled-link;
   height: 100%;
-  background-color: #767F89;
+  background-color: darken( $tertiaryColor, 10% );
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -140,7 +140,7 @@
   justify-content: space-between;
 
   &:hover, &:focus {
-    background-color: #565D64;
+    background-color: $tertiaryColor;
   }
 }
 
@@ -191,7 +191,7 @@
   padding: 0px;
   & > a.link-unstyled:hover, & > a.link-unstyled:focus {
     & > .top-img-card {
-      background-color: rgb(236, 236, 236) !important;
+      background-color: lighten( $tertiaryColor, 30% ) !important;
     }
   }
 }
