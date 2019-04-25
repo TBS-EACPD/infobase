@@ -11,7 +11,7 @@ div.decimal1 {
 }
 div.str {
   width: 150px;
-  color: #31708f; /* overide the WET standard for .str */
+  color: $textColor; /* overide the WET standard for .str */
 }
 div.wide-str {
   width: 300px;
@@ -150,7 +150,7 @@ ul.fancy-ul > li:last-child {
 }
 .text-overflow > span {
   font-weight: normal;
-  color: black;
+  color: $textColor;
 }
 
 a.source-link {
