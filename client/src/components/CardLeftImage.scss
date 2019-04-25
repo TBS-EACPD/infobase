@@ -110,7 +110,7 @@
   text-align: center;
   font-size: 1em;
   padding: 15px 0 15px 0;
-  background-color: #da3a38;
+  background-color: $highlightColor;
   border-radius: 10px;
   width: 30%;
   min-width: 120px;
@@ -122,6 +122,6 @@
   }
 
   &:hover, &:focus {
-    background-color: #B3302E;
+    background-color: darken($highlightColor, 10%);
   }
 }
