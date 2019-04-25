@@ -4,6 +4,37 @@ name
 chapter_key
 section_id
 description
+data {
+  unique_id
+  org_id
+  measure_id
+  description
+  funding
+  allocated
+  remaining
+  withheld
+  program_allocations {
+    unique_id
+    subject_id
+    measure_id
+    allocated
+  }
+  submeasure_breakouts {
+    unique_id
+    submeasure_id
+    name
+    org_id
+    parent_measure_id
+    allocated
+    withheld
+    program_allocations {
+      unique_id
+      subject_id
+      measure_id
+      allocated
+    }
+  }
+}
 `;
 
 const gov_budget_measure_query = `

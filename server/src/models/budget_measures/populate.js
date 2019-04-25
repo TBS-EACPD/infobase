@@ -293,6 +293,16 @@ export default async function({models}){
             {
               ...document,
 
+              ..._.chain(submeasure_lookups)
+                .find(
+                  submeasure_lookup => (
+                    submeasure_lookup.measure_id === document.submeasure_id &&
+                    submeasure_lookup.parent_measure_id === measure_id
+                  )
+                )
+                .pick(['name_en', 'name_fr'])
+                .value(),
+
               program_allocations: flatten_program_allocations_by_measure_and_org_id(
                 {
                   [document.submeasure_id]: {

@@ -86,11 +86,11 @@ const schema = `
 
     org_id: String
     org: OrgOrFakeBudgetOrg
-    measure_id: String
-    measure: BudgetMeasure
+    parent_measure_id: String
+    parent_measure: BudgetMeasure
 
     allocated: Float
-    remaining: Float
+    withheld: Float
 
     program_allocations: [BudgetProgramAllocation]
   }
@@ -128,27 +128,22 @@ export default function({models}){
       name: bilingual_field("name"),
       section_id: bilingual_field("section_id"),
       description: bilingual_field("description"),
-
-      //data: ({year, measure_id}) => "todo",
     },
     BudgetData: {
       description: bilingual_field("descriptionription"),
 
       //org: ({org_id}) => "todo",
       //measure: ({year, measure_id, org_id}) => "todo",
-      //program_allocations: ({year, measure_id, org_id}) => "todo",
-      //submeasure_breakouts: ({year, measure_id, org_id}) => "todo",
     },
     BudgetProgramAllocation: {
       //subject: ({subject_id}) => "todo",
-      //org_id: ({org_id}) => "todo",
+      //org: ({org_id}) => "todo",
       //measure: ({year, measure_id}) => "todo",
     },
     BudgetSubmeasure: {
+      name: bilingual_field("name"),
       //org: ({org_id}) => "todo",
-      //measure: ({year, measure_id}) => "todo",
-
-      //program_allocations: ({year, submeasure_id, org_id}) => "todo",
+      //parent_measure: ({year, measure_id}) => "todo",
     },
   };
   
