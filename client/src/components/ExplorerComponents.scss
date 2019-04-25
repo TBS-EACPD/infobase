@@ -6,8 +6,8 @@
 }
 
 .ExplorerNode.ExplorerNode--secondary-color {
-  border-color: #a1adba;
-  background-color: #FFF;
+  border-color: $separatorColor;
+  background-color: $backgroundColor;
 }
 
 
@@ -26,8 +26,8 @@
   flex-wrap: nowrap;
   
 
-  border-color: rgb(123, 123, 123);
-  background-color: rgba(123, 123, 123, 0.05);
+  border-color: $separatorColor;
+  background-color: rgba($separatorColor, 0.05);
 
   font-size: 12pt;
 }
@@ -36,8 +36,8 @@
 
 
 .ExplorerNode--search-match {
-  border-color: #599b17;
-  background-color: hsla(90, 100%, 35%, 0.1);
+  border-color: $successDarkColor;
+  background-color: $successLightColor;
 }
 
 /* everything right of the caret-container */
