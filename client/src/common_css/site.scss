@@ -38,13 +38,13 @@ div.ordinal {
   font-size: 11px;
   font-weight: bold;
   line-height: 20px;
-  color: rgb(35, 68, 126);
+  color: $primaryColor;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   text-transform: uppercase;
 }
 
 .success {
-  background-color: #dff0d8;
+  background-color: $successLightColor;
 }
 
 /* added for IE9, this adds a transparents 1x1 png file
@@ -85,8 +85,8 @@ ul.fancy-ul > li {
   display: block;
   padding: 10px 15px;
   margin-bottom: -1px;
-  background-color: #fff;
-  border: 1px solid #7b8b9e;
+  background-color: $backgroundColor;
+  border: 1px solid $tertiaryColor;
   font-size: 16px;
 }
 

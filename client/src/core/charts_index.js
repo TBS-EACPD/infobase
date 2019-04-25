@@ -15,7 +15,6 @@ import { CirclePieChart as CirclePieChart } from '../charts/circle_chart.js';
 import { Canada } from '../charts/canada.js';
 import { Arrow } from '../charts/arrow.js';
 import { heatmap } from '../charts/heatmap.js';
-import { ConceptExplorer } from '../charts/concept-explorer.js';
 import { HBarComposition } from '../charts/hbar_composition.js';
 import { TwoSeriesBar } from '../charts/two_series_bar.js';
 
@@ -126,7 +125,6 @@ export {
   Canada, 
   Arrow, 
   heatmap, 
-  ConceptExplorer, 
   HBarComposition, 
   TwoSeriesBar,
   common_charts_utils, 
