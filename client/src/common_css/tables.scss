@@ -16,11 +16,11 @@
 }
 
 .table-dark-blue > tbody > tr:nth-child(even) {
-  background-color: #f4f4f4;
+  background-color: lighten($tertiaryColor, 40%);
 }
 
 .table-dark-blue > tbody > tr:nth-child(odd) {
-  background-color: #a5aeb8;
+  background-color: lighten($tertiaryColor, 20%);
 }
 
 .table-dark-blue:not(.no-total-row) > tbody > tr:last-child {
@@ -32,7 +32,7 @@
 }
 
 .table-dark-blue:not(.no-total-row) > tbody > tr:last-child > td:not(:last-child) {
-  border-right: 1px solid #bbb !important;
+  border-right: 1px solid $separatorColor !important;
 }
 
 .table-dark-bordered, 
@@ -49,9 +49,7 @@
   font-weight: $heavyFontWeight;
 }
 
-table.table-blue > thead > tr {
-  background-color : #d9edf7;
-}
+
 table.table-blue > thead > tr > th {
   background-color: $secondaryColor;
   color: $backgroundColor;
@@ -63,9 +61,7 @@ tr.background-blue > td {
   background-color: $secondaryColor;
   color: $backgroundColor;
 }
-tr.background-blue > td > a {
-  color : #31708f;
-}
+
 
 table.infobase-table > thead > tr > th div.big_int{text-align: center;}
 table.infobase-table > thead > tr > th, 
@@ -81,7 +77,7 @@ tr.total-row {
   font-weight : bold;
 }
 tr.odd {
-  background-color: rgba(35, 68, 126,0.1);
+  background-color: lighten($tertiaryColor, 20%);
 }
 
 /* helper classes for alignment */
