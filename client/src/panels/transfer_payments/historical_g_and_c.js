@@ -110,7 +110,7 @@ new PanelGraph({
           text_split={6}
           series={rolled_up}
         />
-        <div className="results-separator" />
+        <div className="panel-separator" />
         <DetailedHistTPItems
           rows={rows}
         />

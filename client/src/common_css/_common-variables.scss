@@ -1,7 +1,7 @@
 /*color constants*/
 $primaryColor: #26374A;
 $secondaryColor: #4382d6;
-$tertiaryColor: rgb(140, 148, 158);
+$tertiaryColor: #8c949e; /* this one is used lots at varying alpha/darkness levels, should stay grey */
 
 $backgroundColor: #fff;
 $highlightColor: #da3a38;
@@ -17,7 +17,11 @@ $linkFocusColor: #0535d2;
 $linkVisitedColor: #7834bc;
 
 $successLightColor: #dff0d8;
-$successDarkColor: #dff0d8;
+$successDarkColor: #45a64d;
+$failLightColor: #f0d8d9;
+$failDarkColor: #fd3845;
+$warnLightColor: #f0e7d8;
+$warnDarkColor: #fdb84c;
 
 $fontFamily: 'Roboto', sans-serif;
 $lightFontWeight: 300;

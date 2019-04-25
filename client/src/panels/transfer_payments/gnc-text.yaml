@@ -77,7 +77,7 @@ dept_historical_g_and_c_text:
 historical_g_and_c_custom_new_row:
   transform: [handlebars]
   text: |
-    <div class='results-separator'></div>
+    <div class='panel-separator'></div>
     <div aria-hidden='true'>
       <div style='padding-bottom:10px'  class='center-text font-xlarge'>
        <strong>{{gt "historical_g_and_c_detailed_title"}}</strong>

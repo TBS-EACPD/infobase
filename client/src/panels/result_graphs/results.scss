@@ -30,16 +30,14 @@
 
 .number-box {
   height: 125px;
-  border: 1px solid #ccc;
   margin: 0;
-
   display: flex;
   text-align: center;
   flex-direction: column;
   justify-content: center;
-  color: white;
-  background-color: rgba(86, 134, 205, 0.9);
-  border: 1px solid rgba(37,114,180,0.9);
+  color: $textLightColor;
+  background-color: $buttonPrimaryColor;
+  border: 1px solid $buttonSecondaryColor;
 }
 .quadrant-dl > div > dt,
 .line-quadrant-dl > div > dt {
@@ -56,13 +54,6 @@
   font-size : 40px;
   margin-bottom: 0px;
 }
-
-/* TODO: get rid of this elsewhere and then delete it */
-.results-separator {
-  margin: 20px 60px 20px 60px;
-  border-top: 1px solid #ccc;
-}
-
 
 ul.indicator-list > li {
   @include unstyled-list;
@@ -133,19 +124,19 @@ dl.indicator-item__dl dt+dd {
 
 /* color classes for icon-array viz */
 .results-icon-array-pass {
-  background-color:hsla(120, 85%, 30%, 0.8);
+  background-color: $successDarkColor;
 }
 
 .results-icon-array-fail {
-  background-color: hsla(0, 100%, 55%, 0.8);
+  background-color: $failDarkColor;
 }
 
 .results-icon-array-na {
-  background-color:hsla(39, 100%, 50%, 0.8);
+  background-color: $warnDarkColor;
 }
 
 .results-icon-array-neutral {
-  background-color:hsla(39, 5%, 50%, 0.8);
+  background-color: $tertiaryColor;
 }
 
 //used in results-explorer 

@@ -87,4 +87,7 @@
     background-color: $backgroundColor;
   }
   
-  
+.panel-separator {
+  margin: 20px 60px 20px 60px;
+  border-top: 1px solid rgba($tertiaryColor, 0.5);
+}

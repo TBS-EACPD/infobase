@@ -272,7 +272,7 @@ class HistoricalProgramBars extends React.Component {
     }
 
     return <div>
-      <div className="results-separator" />
+      <div className="panel-separator" />
       <div style={{paddingBottom: '10px'}} className='center-text font-xlarge'>
         <strong><TM k="historical_prog_title" /></strong>
       </div>
@@ -389,7 +389,7 @@ class DetailedProgramSplit extends React.Component {
     if(window.is_a11y_mode){
       return (
         <div className="row">
-          <div className="results-separator" >
+          <div className="panel-separator" >
             <table className="table table-striped table-bordered">
               <caption><TM k="so_spend_by_prog" /></caption>
               <thead>
@@ -421,7 +421,7 @@ class DetailedProgramSplit extends React.Component {
     }
 
     return <div>
-      <div className="results-separator" />
+      <div className="panel-separator" />
       <div style={{paddingBottom: '10px'}} className='center-text font-xlarge'>
         <strong><TM k="so_spend_by_prog" /></strong>
       </div>
