@@ -1,6 +1,6 @@
 /*color constants*/
 $primaryColor: #26374A;
-$secondaryColor: #4382d6;
+$secondaryColor: #2C70C9;
 $tertiaryColor: #8c949e; /* this one is used lots at varying alpha/darkness levels, should stay grey */
 
 $backgroundColor: #fff;
@@ -11,17 +11,19 @@ $buttonPrimaryColor: #176dde;
 $buttonSecondaryColor: #76a4df;
 
 $textColor: #333;
-$textLightColor: #fff;
+$textLightColor: #f0f8ff;
 
 $linkColor: #2b4380;
 $linkFocusColor: #0535d2;
 $linkVisitedColor: #7834bc;
 
-$successLightColor: #dff0d8;
+
+/* dark and light colours don't have enough contrast between them for text, so don't use them that way! */
+$successLightColor: #cbedbd;
 $successDarkColor: #45a64d;
-$failLightColor: #f0d8d9;
+$failLightColor: #ffa8a8;
 $failDarkColor: #fd3845;
-$warnLightColor: #f0e7d8;
+$warnLightColor: #ffecce;
 $warnDarkColor: #fdb84c;
 
 $fontFamily: 'Roboto', sans-serif;

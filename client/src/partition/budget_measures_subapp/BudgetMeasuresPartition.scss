@@ -5,7 +5,7 @@
   border-radius: 10px;
 
   & > .header {
-    color: #f0f8ff;
+    color: $textLightColor;
     font-size: 22px;
     font-weight: $mediumFontWeight;
     margin-top: 10px;
@@ -14,7 +14,7 @@
   & > .partition-content {
     color: $textColor;
     & > .fat {
-      color: #f0f8ff;
+      color: $textLightColor;
       font-weight: $mediumFontWeight !important ;
     }
     & > .partition-content-title,
@@ -23,13 +23,13 @@
     }
     & > .partition-content-title.negative-value,
     & > .partition-negative-title-backing > .negative-value {
-      color: #FF8A8A;
+      color: $failLightColor;
     }
     &.root { 
       background-color: rgba(0, 0, 0, 0.3);
       & > .partition-content-title {
         font-weight: $heavyFontWeight;
-        color: #f0f8ff;
+        color: $textLightColor;
         & > .root-sub-note {
           margin-top: 22px;
           font-size: 20px;
@@ -42,9 +42,9 @@
 
     & > .partition-popup {
       color: $backgroundColor;
-      background-color: #01223b;
+      background-color: $primaryColor;
       & > .popup-pointer {
-      	border-right: 40px solid #01223b;
+      	border-right: 40px solid $primaryColor;
       }
       & > .popup-decription-text {
         color: $backgroundColor;

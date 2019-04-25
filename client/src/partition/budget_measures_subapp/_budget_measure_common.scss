@@ -1,6 +1,7 @@
+@import '../../common_css/common-variables';
 
-$controlsColor: #00233d;
-$controlsColorLighter: lighten($controlsColor, 20%);
+$controlsColor: $primaryColor;
+$controlsColorLighter: $secondaryColor;
 
 @mixin budget-controls-footer-mixin {
   background-color: $controlsColor;
@@ -10,7 +11,7 @@ $controlsColorLighter: lighten($controlsColor, 20%);
 
     & > .labeled-box-label {
       background-color: $controlsColorLighter;
-      color: #FFFFFF;
+      color: $textLightColor;
       font-size: 22px;
     }
   
