@@ -27,7 +27,7 @@
   background-color: $buttonPrimaryColor;
   padding: 3px 8px 3px 15px;
   border-radius: 8px 0px 0px 8px;
-  color: #fff;
+  color: $textLightColor;
   border: none;
 
   &:only-child {
@@ -43,7 +43,7 @@
   padding-right: 3px;
   border-radius: 0px 8px 8px 0px;
   border:none;
-  color: #fff;
+  color: $textLightColor;
 
   // Fix inconsistent sub-pixel white gaps in IE11
   padding-left: 1px;
@@ -61,7 +61,7 @@
 
   & > .tag-tooltip-text {
     visibility: hidden;
-    color: #fff;
+    color: $textLightColor;
     background-color: $primaryColor;
     text-align: left;
     border-radius: 5px;
@@ -180,7 +180,7 @@
   margin-bottom: -5px;
   font-weight: $mediumFontWeight;
   text-align:center;
-  color: #fff;
+  color: $textLightColor;
   background-color: $primaryColor;
   border-color: $primaryColor;
   border-radius: 8px 8px 0 0;
@@ -190,7 +190,7 @@
 
 .item-card > .item-title.active {
   font-weight: $mediumFontWeight;
-  color: #fff;
+  color: $textLightColor;
   background-color: $primaryColor;
 }
 
@@ -233,8 +233,8 @@
   display: inline;
   padding: 6px 7px;
   margin: 12px 12px 0 0;
-  color: black;
-  background-color: $tertiaryColor;
+  color: $textColor;
+  background-color: lighten($tertiaryColor, 20%);
   border-radius: 0px 5px 5px 0px;
   border-style: solid;
   border-width: 0 0 0 4px;
@@ -242,7 +242,7 @@
 }
 
 .item-tags > .item-tag.active {
-  color: #fff;
+  color: $textLightColor;
   background-color: $secondaryColor;
   border-color: $secondaryColor;
 }
@@ -283,5 +283,5 @@
 
 /* our app-wide a:visited: black is overriding all the bootstrap white on dark blue styles...  */
 .nav-pills > li.active > a {
-  color: white !important;
+  color: $textLightColor !important;
 }
