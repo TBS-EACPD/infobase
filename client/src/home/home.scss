@@ -85,8 +85,12 @@
   border-radius: 10px;
 }
 
-.list-group-item--home {
-  background-color: $backgroundColor;
+list-group--quick-links {
+  border: 2px solid $separatorColor;
+}
+
+.list-group-item--quick-links {
+  background-color: lighten($tertiaryColor, 40%);
   border-color: $tertiaryColor !important;
 }
 

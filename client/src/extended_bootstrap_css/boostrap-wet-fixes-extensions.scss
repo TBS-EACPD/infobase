@@ -20,8 +20,7 @@ h1 {
 }
 
 hr {
-  //default is #eee, a little too bright
-  border-color: #ddd;
+  border-color: $separatorColor;
 }
 
 /* tooltips */
@@ -34,7 +33,7 @@ hr {
     & > .tooltip-arrow {
       top: -6px;
       border-width: 0px 6px 6px 6px;
-      border-bottom-color: hsla(205, 40%, 50%, 1);
+      border-bottom-color: rgba($tooltipColor, 1);
     }
   }
 
@@ -44,14 +43,14 @@ hr {
     & > .tooltip-arrow {
       bottom: -6px;
       border-width: 6px 6px 0px 6px;
-      border-top-color: hsla(205, 40%, 50%, 1);
+      border-top-color: rgba($tooltipColor, 1);
     }
   }
 }
 
 .tooltip-inner {
-  color: #fff;
-  background-color: hsla(205, 40%, 50%, 1);
+  color: $textLightColor;
+  background-color: rgba($tooltipColor, 1);
   text-align: left !important;
   border: none;
   padding: 1px 20px;
@@ -78,7 +77,7 @@ hr {
 .glossary-tooltip-link,
 .glossary-tooltip-link:visited {
   text-decoration: none !important;
-  border-bottom: 1px dotted #135bbb !important;
+  border-bottom: 1px dotted $textColor !important;
   transition: width 2s;
   opacity: 0.8;
 }
@@ -189,7 +188,7 @@ table.border > tbody > tr > td {
   font-size: 13px;
 }
 .right-border {
-  border-right: 1px solid #CCC;
+  border-right: 1px solid $separatorColor;
 }                   
 .input-sm {
 height: 25px;
@@ -199,10 +198,10 @@ line-height: 1;
 div.label {
   border: none;
   line-height: 1.5;
-  color: black;
+  color: $textColor
 }
 .border-bottom {
- border-bottom: 1px solid #ccc;
+ border-bottom: 1px solid $separatorColor;
 }
 .paddng-bttm-md {
   padding-bottom: 10px;
@@ -236,16 +235,6 @@ div.label {
 .small_panel_text {
   font-size: 0.8em;
   line-height: normal;
-}
-
-.btn-success {
-    color: #fff;
-    background-color: #5cb85c;
-    border-color: #4cae4c;
-}
-
-.btn-success, .btn-info, .btn-ib-info, .btn-danger, .btn-warning {
-  color: white !important;
 }
 
 /* to be used with light-background */
@@ -297,24 +286,8 @@ a.btn-ib-light {
 
 }
 
-
-
-.btn-ib-info {
-    color: #fff;
-    background-color: #5bc0de;
-    border-color: #46b8da;
-}
-
-.btn-height-clipper {
-  background-color: rgb(202,219,228);
-  border-color: rgb(51, 80, 117);
-  padding: 0px 40px;
-  font-weight: $heavyFontWeight;
-  border-width: 2px;
-}
-
 li.list-group-item {
-  border: 1px solid #7b8b9e;
+  border: 1px solid $secondaryColor;
   &:first-child {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -326,11 +299,11 @@ li.list-group-item {
 }
 .list-group-item:hover:not(.active),
 .list-group-item:focus:not(.active) {
-  color: #555;
-  background-color: #f5f5f5;
+  color: $textColor;
+  background-color: lighten($tertiaryColor, 40%);
 }
 .list-group-item.active a {
-  color: white;
+  color: lighten($tertiaryColor, 40%);
 }
 
 /* for table striped header */
@@ -481,18 +454,10 @@ border-top-right-radius: 10px;
 background-color: $backgroundColor;
 }
 
-/* extending bootstrap nav style */
-ul.nav.nav-underline-active > li { 
-border-bottom: 3px solid rgba(0,0,0,0); /* invisible to remain same height as the active */
-}
-ul.nav.nav-underline-active > li.active {
-border-bottom: 3px solid #00BCD4;
-}
-
 /* extending bootstrap well which does not look good in regular GoC background */
 .well.dark-well {
-background-color: #ebebeb;
-border: 1px solid #bfbfbf;
+background-color: lighten($tertiaryColor, 40%);
+border: 1px solid $separatorColor;
 }
 
 .well {
@@ -521,15 +486,15 @@ ol.breadcrumb > li:last-child > :last-child {
 
 // Misc. styles from flat redesign
 .well-sm {
-  background-color: $tertiaryColor;
+  background-color: $secondaryColor;
   text-align: center;
-  border-color: $tertiaryColor;
+  border-color: $secondaryColor;
   border-radius: 10px 10px 0px 0px;
   padding: 10px;
 }
 
 .form-control.input-lg {
-  border: 2px solid #ccc;
+  border: 2px solid $separatorColor;
   border-radius: 10px;
   box-shadow: none !important;
   opacity: 1;
