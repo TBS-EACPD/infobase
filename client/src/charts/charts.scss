@@ -3,7 +3,6 @@
 svg {
  overflow : hidden;
 }
-
 div.tick,
 .axis > text {
   color: $textColor;
@@ -46,24 +45,11 @@ ul.legend.horizontal{
 }
 
 
-a.boxclose {
-  text-decoration: none;
-  cursor: pointer;
-  color: #F00;
-  font-size: 3em;
-  font-weight: $heavyFontWeight;
-  padding: 11px 3px;
-}
-
-.boxclose:before{
-  content: "\00d7";
-}
-
 .bar-amount-neg {
-  color: red;
+  color: $highlightColor;
 }
 
-div.d3-list, {
+div.d3-list {
   overflow-x: hidden;
   overflow-y: auto;
   padding-right: 10px;
@@ -72,9 +58,8 @@ div.d3-list, {
 
 .legend-container {
   overflow-x: hidden;
-  overflow-y: auto;
   padding: 8px 10px 0px;
-  border: 1px solid #7b8c9d;
+  border: 1px solid $tertiaryColor;
   background-color: $backgroundColor;
   border-radius: 10px;
 }
@@ -113,7 +98,7 @@ div.d3-list, {
   padding: 5px 0;
 }
 .tabular-legend-list-el:not(:first-child){
-  border-top: 1px solid #ccc;
+  border-top: 1px solid $tertiaryColor;
 }
 
 .legend-color-checkbox {
