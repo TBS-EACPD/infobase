@@ -12,10 +12,12 @@ const schema = `
     budget_measures(year: Int): [BudgetMeasure]
   }
 
-  extend type Gov {
+  extend type Root {
     fake_budget_orgs: [FakeBudgetOrg]
-    all_budget_measures(year: Int): [BudgetMeasure]
     budget_measure(year: Int, measure_id: String): BudgetMeasure
+  }
+  extend type Gov {
+    budget_measures(year: Int): [BudgetMeasure]
   }
   extend type Org {
     budget_measures(year: Int): [BudgetMeasure]
@@ -89,30 +91,40 @@ const schema = `
 
 export default function({models, loaders}){
 
-  const get_measure_model_by_year = (year) => models[`Budget${year}Measure`];
-  const get_budget_data_model_by_year = (year) => models[`Budget${year}Data`];
-  const get_program_allocation_model_by_year = (year) => models[`Budget${year}ProgramAllocation`];
-  const get_budget_submeasure_model_by_year = (year) => models[`Budget${year}Submeasure`];
-  const get_submeasure_program_allocation_model_by_year = (year) => models[`Budget${year}SubmeasureProgramAllocation`];
+  const validate_year = (year) => {
+    if ( _.includes( budget_years, _.toString(year) ) ){
+      return true;
+    } else {
+      throw `Invalid argument: ${year} is not a valid budget measure year. Valid years are ${budget_years.join(', ')}`;
+    }
+  };
+
+  const get_measure_model_by_year = (year) => validate_year(year) && models[`Budget${year}Measure`];
+  const get_budget_data_model_by_year = (year) => validate_year(year) && models[`Budget${year}Data`];
+  const get_program_allocation_model_by_year = (year) => validate_year(year) && models[`Budget${year}ProgramAllocation`];
+  const get_budget_submeasure_model_by_year = (year) => validate_year(year) && models[`Budget${year}Submeasure`];
+  const get_submeasure_program_allocation_model_by_year = (year) => validate_year(year) && models[`Budget${year}SubmeasureProgramAllocation`];
 
   const resolvers = {
-    FakeBudgetOrg: {
-      name: bilingual_field("name"),
-      //budget_measures: ({org_id}, {year}) => "todo",
+    Root: {
+      fake_budget_orgs: () => models.FakeBudgetOrgSubject.find({}),
+      budget_measure: (_x, {year, measure_id}) => get_measure_model_by_year(year).findOne({measure_id}),
     },
     Gov: {
-      fake_budget_orgs: async () => await models.FakeBudgetOrgSubject.find({}),
-      //budget_measures: (_x, {year}) => "todo",
-      all_budget_measures: async (_x, {year}) => await get_measure_model_by_year(year).find({}),
+      budget_measures: (_x, {year}) => get_measure_model_by_year(year).find({}),
+    },
+    FakeBudgetOrg: {
+      name: bilingual_field("name"),
+      budget_measures: ({org_id}, {year}) => get_measure_model_by_year(year).find({"data.org_id": org_id}),
     },
     Org: {
-      //budget_measures: ({org_id}, {year}) => "todo",
+      budget_measures: ({org_id}, {year}) => get_measure_model_by_year(year).find({"data.org_id": org_id}),
     },
     Crso: {
-      //budget_measures: ({crso_id}, {year}) => "todo",
+      budget_measures: ({crso_id}, {year}) => get_measure_model_by_year(year).find({"data.program_allocations.subject_id": crso_id}),
     },
     Program: {
-      //budget_measures: ({program_id}, {year}) => "todo",
+      budget_measures: ({program_id}, {year}) => get_measure_model_by_year(year).find({"data.program_allocations.subject_id": program_id}),
     },
 
     BudgetMeasure: {

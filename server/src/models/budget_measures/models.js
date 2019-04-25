@@ -108,7 +108,10 @@ export default function(model_singleton){
   );
   model_singleton.define_model("FakeBudgetOrgSubject", FakeBudgetOrgSubjectSchema);
   
-  // TODO Dataloaders...
-  // ... can I do dataloaders by fields in embedded documents? Probably, right?
-  // Otherwise, stick an array of org ids on BudgetMeasuresSchema I guess
+  const { FakeBudgetOrgSubject } = model_singleton.models;
+
+  const loaders = {
+    fake_budget_org_org_id_loader: create_resource_by_id_attr_dataloader(FakeBudgetOrgSubject, 'org_id'), 
+  };
+  _.each( loaders, (val, key) =>  model_singleton.define_loader(key, val) )
 }
