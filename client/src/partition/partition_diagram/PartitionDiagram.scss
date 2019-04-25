@@ -13,7 +13,7 @@
 .partition-diagram > .header{
   position: absolute;
   text-align: center;
-  color: #fff;
+  color: $textLightColor;
   font-size: 20px;
   font-weight: $lightFontWeight;
   top: 0px;
@@ -24,7 +24,7 @@
   display: flex;
   align-items: center;
   justify-content: left;
-  color: #efefef;
+  color: $textLightColor;
   cursor: pointer;
   font-size: 12px;
 }
@@ -58,7 +58,7 @@
   margin-left: 0px;
 }
 .partition-content-title.negative-value {
-  color: red;
+  color: $highlightColor;
 }
 
 .partition-right-ie-fix{
@@ -77,7 +77,7 @@
   cursor: default;
   text-align: center;
   font-size: 36px;
-  color: #fff;
+  color: $textLightColor;
   background-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -90,7 +90,7 @@
   font-size: 48px;
   margin: 0px;
   & > a {
-    color: #fff;
+    color: $textLightColor;
     border-bottom: 3px dashed;
     &:hover, &:focus, &:active {
       border-bottom: 3px solid;
@@ -104,10 +104,10 @@
 }
 
 .popup-row-bottom-border {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid $separatorColor;
 }
 .popup-row-top-border {
-  border-top: 1px solid #ccc;
+  border-top: 1px solid $separatorColor;
 }
 .popup-font-xl {
   font-size: 28px;
@@ -132,10 +132,10 @@
   border-radius: 10px;
   z-index: 100;
   text-align: left;
-  color: black;
+  color: $textColor;
   position: absolute;
   width: 400px;
-  background-color: #fefefe;
+  background-color: lighten($tertiaryColor, 40%);
   padding: 20px;
   cursor: default;
 }
@@ -153,7 +153,7 @@
   text-align: center;
 }
 .partition-popup > .popup-row-top > .stat-split {
-  border-right: 1px solid #ccc;
+  border-right: 1px solid $separatorColor;
 }
 .partition-popup > .popup-row-top > span > .popup-revenue-text {
   line-height: 1; 
@@ -173,7 +173,7 @@
   font-size: 14px;
 }
 .partition-popup > .btn {
-  color: #fefefe;
+  color: $textLightColor;
 }
 .partition-popup > .popup-pointer {
   position: absolute;
@@ -181,7 +181,7 @@
 	height: 0;
   left: -40px;
 	border-top: 25px solid transparent;
-	border-right: 40px solid #efefef;
+	border-right: 40px solid lighten($tertiaryColor, 40%);
 	border-bottom: 25px solid transparent;
 }
 
