@@ -1,5 +1,7 @@
+@import '../common_css/common-variables';
+
 .LastYearEstimatesSection {
-    border-top: 1px solid #ccc;
+    border-top: 1px solid $tertiaryColor;
     font-size: 0.8em;
   &>div {
     max-width: 650px;
