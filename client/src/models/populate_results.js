@@ -327,6 +327,8 @@ export function api_load_results_bundle(subject, result_docs){
           _subject_has_results[id] = _.nonEmpty(results); // side effect
         }
       );
+
+      return Promise.resolve();
     })
     .catch(function(error){
       const resp_time = Date.now() - time_at_request;     
@@ -536,6 +538,8 @@ export function api_load_results_counts(level = "summary"){
         api_is_results_count_loaded[level] = true;
 
         _.each( mapped_rows, ({id}) => _subject_has_results[id] = _.nonEmpty(mapped_rows) ); // side effect
+
+        return Promise.resolve();
       })
       .catch(function(error){
         const resp_time = Date.now() - time_at_request;     

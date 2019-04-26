@@ -3,11 +3,8 @@ import { PanelGraph, tables_for_graph } from './PanelGraph.js';
 import { Statistics, tables_for_statistics } from './Statistics.js';
 import { api_load_results_bundle, api_load_results_counts, subject_has_results } from '../models/populate_results.js';
 import { load_footnotes_bundle } from '../models/populate_footnotes.js';
-import { load_budget_measures } from '../models/populate_budget_measures.js';
+import { api_load_subject_has_measures, api_load_budget_measures } from '../models/populate_budget_measures.js';
 import { load_horizontal_initiative_lookups } from '../models/populate_horizontal_initiative_lookups.js';
-import { Subject } from '../models/subject.js';
-
-const { BudgetMeasure } = Subject;
 
 // given an array of tables, returns a promise when they are all loaded.
 function load(table_objs){
@@ -30,6 +27,9 @@ function ensure_loaded({
   result_docs,
   require_result_counts,
   require_granular_result_counts,
+  has_budget_measures,
+  budget_measures,
+  budget_years,
   footnotes_for: footnotes_subject,
 }){
   const table_set = _.chain( table_keys )
@@ -95,16 +95,22 @@ function ensure_loaded({
       .value()
   );
 
+  const should_load_has_budget_measures = (
+    has_budget_measures ||
+    _.chain(graph_keys)
+      .map(key => PanelGraph.lookup(key, subject_level))
+      .map('requires_has_budget_measures')
+      .some()
+      .value()
+  );
+
   const should_load_budget_measures = (
-    (
-      subject && subject.type_name === "budget_measure" ||
-      _.chain(graph_keys)
-        .map(key => PanelGraph.lookup(key, subject_level))
-        .map('requires_budget_measures')
-        .some()
-        .value()
-    ) &&
-      _.isEmpty( BudgetMeasure.get_all() )
+    budget_measures ||
+    _.chain(graph_keys)
+      .map(key => PanelGraph.lookup(key, subject_level))
+      .map('requires_budget_measures')
+      .some()
+      .value()
   );
 
   const should_load_horizontal_initiative_lookups = (
@@ -160,9 +166,15 @@ function ensure_loaded({
       Promise.resolve()
   );
 
+  const has_budget_measures_prom = (
+    should_load_budget_measures ?
+      api_load_subject_has_measures(subject, budget_years) :
+      Promise.resolve()
+  );
+
   const budget_measures_prom = (
     should_load_budget_measures ?
-      load_budget_measures() :
+      api_load_budget_measures(subject, budget_years) :
       Promise.resolve()
   );
 
@@ -180,6 +192,7 @@ function ensure_loaded({
     has_results_prom,
     granular_result_counts_prom,
     footnotes_prom,
+    has_budget_measures_prom,
     budget_measures_prom,
     horizontal_initiative_lookups_prom,
   ]);
