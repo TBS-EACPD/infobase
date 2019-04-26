@@ -7,7 +7,7 @@ const tertiaryColor = "#8c949e"; /* this one is used lots at varying alpha/darkn
 
 const backgroundColor = "#fff";
 const highlightColor = "#da3a38";
-const separatorColor = "#8c949e";
+const separatorColor = "#bbc1c9";
 
 const tooltipColor = "#4d88b3";
 

@@ -11,6 +11,7 @@ import {
   Col,
   declarative_charts,
   NivoResponsiveHBar,
+  hex_to_rgb,
 } from "../shared"; 
 import { Fragment } from 'react';
 
@@ -20,7 +21,12 @@ const { people_years } = years;
 const { provinces } = businessConstants;
 const { GraphLegend, A11YTable } = declarative_charts;
 
-const graph_color = (alpha) => `rgba(31, 119, 180, ${alpha || 1})`;
+const graph_color = window.infobase_color_constants.secondaryColor;
+
+const get_graph_color = (alpha) => {
+  const rgb = hex_to_rgb(graph_color);
+  return rgb && `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha || 1})`;
+}
 
 const format_prov_data = (prov, years_by_province) => {
   var prov_data;

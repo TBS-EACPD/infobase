@@ -57,6 +57,7 @@ export class Canada {
     const scale = Math.min(x_scale, y_scale);
     const height = scale * y_scale_factor;
     const padding = ( this.outside_width - (scale * x_scale_factor) ) / 2;
+    const main_color = this.options.color;
     const color_scale = this.options.color_scale;
     const formatter = this.options.formatter;
     
@@ -91,7 +92,7 @@ export class Canada {
         svg.select(`#CA-${previous_event_target_prov_key}`)
           .styles({
             "stroke-width": "2px",
-            stroke: "#1f77b4",
+            stroke: main_color,
           });
       }
       previous_event_target_prov_key = false;
@@ -102,7 +103,7 @@ export class Canada {
         svg.select(`#CA-${previous_event_target_prov_key}`)
           .styles({
             "stroke-width": "2px",
-            stroke: "#1f77b4",
+            stroke: main_color,
           });
       }
       if ( !_.isUndefined(last_year_data[prov_key]) ){
@@ -110,13 +111,12 @@ export class Canada {
         svg.select(`#CA-${prov_key}`)
           .styles({
             "stroke-width": (prov_key === "abroad" || prov_key === "na") ? "8px" : "15px",
-            stroke: "#1f77b4",
+            stroke: main_color,
           })
   
         graph_dispatcher.call("dataMouseEnter", "", prov_key);
       }
     };
-
 
     // Set province colours, attach event dispatchers
     svg.selectAll(".province")
@@ -126,13 +126,13 @@ export class Canada {
         d3.select(this).datum(prov_key);
       })
       .styles({
-        fill: "#1f77b4",
+        fill: main_color,
         "fill-opacity": function(prov_key, i){
           var val = last_year_data[prov_key];
           return color_scale(val || 0);
         },
         "stroke-width": "2px",
-        stroke: "#1f77b4",
+        stroke: main_color,
         "stroke-opacity": function(prov_key, i){
           var val = last_year_data[prov_key];
           return color_scale(val || 0);
@@ -181,7 +181,7 @@ export class Canada {
             "border-radius": "5px",
             "text-align": "center",
             "font-size": "10px",
-            "background-color": "#CCC",
+            "background-color": window.infobase_color_constants.separatorColor,
           }); 
 
         
