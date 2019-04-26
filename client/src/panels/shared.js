@@ -21,7 +21,7 @@ import { glossary_href } from '../link_utils.js';
 import { Statistics } from '../core/Statistics.js';
 import classNames from 'classnames';
 import { get_source_links } from '../metadata/data_sources.js';
-import { NivoResponsiveBar, NivoResponsiveLine, NivoResponsivePie } from '../charts/NivoCharts.js';
+import { NivoResponsiveBar, NivoResponsiveHBar, NivoResponsiveLine, NivoResponsivePie } from '../charts/NivoCharts.js';
 
 const {
   TabularPercentLegend,
@@ -541,6 +541,7 @@ export {
   get_source_links,
   infobaseCategory10Colors,
   NivoResponsiveBar,
+  NivoResponsiveHBar,
   NivoResponsiveLine,
   NivoResponsivePie,
 };

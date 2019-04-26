@@ -218,6 +218,104 @@ NivoResponsiveBar.defaultProps = {
   enableGridY: true,
 };
 
+
+
+export class NivoResponsiveHBar extends React.Component{
+  render(){
+    const{
+      data,
+      keys,
+      margin,
+      label_format,
+      colors,
+      bttm_axis,
+      left_axis,
+      isInteractive,
+      indexBy,
+      remove_bottom_axis,
+      remove_left_axis,
+      enableLabel,
+      is_money,
+      legends,
+      tick_value,
+      text_formatter,
+      theme,
+      colorBy,
+      motion_damping,
+      motion_stiffness,
+      tooltip,
+      enableGridX,
+      groupMode,
+      enableGridY,
+    } = this.props;
+
+    return (
+      //have to have an empty string in key to make sure
+      //that negative bars will be displayed
+      <ResponsiveBar
+        {...{data,
+          margin,
+          colors,
+          groupMode,
+          enableGridX,
+          enableGridY,
+          colorBy,
+          theme, 
+          indexBy, 
+          enableLabel, 
+          legends,
+          isInteractive,
+        }}
+        layout = 'horizontal'
+        keys = {_.union([''],keys)}
+        labelFormat={_.isUndefined(label_format) ? null : label_format}
+        tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
+        axisBottom={remove_bottom_axis ? null : bttm_axis}
+        axisLeft={
+          remove_left_axis ?
+            null :
+            {
+              tickValues: tick_value || 6,
+              format: (d) => get_formatter(is_money, text_formatter)(d),
+              min: "auto",
+              max: "auto",
+              ...(left_axis || {}),
+            }
+        }
+        padding={0.3}
+        borderColor="inherit:darker(1.6)"
+        labelTextColor="inherit:darker(1.6)"
+        motionDamping={motion_damping || 15}
+        motionStiffness={motion_stiffness || 95}
+      />
+    );
+  }
+};
+NivoResponsiveHBar.defaultProps = {
+  ...general_default_props,
+
+  bttm_axis: {
+    tickSize: 7,
+    tickPadding: 10,
+  },
+  theme: {
+    axis: {
+      ticks: {
+        text: { 
+          fontSize: 12,
+          fill: '#000',
+        },
+      },
+    },
+  },
+  isInteractive: true,
+  remove_bottom_axis: false,
+  remove_left_axis: false,
+  enableLabel: false,
+  enableGridX: true,
+  enableGridY: true,
+};
+
 export class NivoResponsiveLine extends React.Component {
   constructor(props){
     super(props)
