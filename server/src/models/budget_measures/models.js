@@ -91,10 +91,34 @@ export default function(model_singleton){
     ..._.chain(budget_years)
       .map(
         budget_year => [
-          `budget_${budget_year}_measure_id_loader`,
+          `budget_${budget_year}_measure_measure_id_loader`,
           create_resource_by_id_attr_dataloader(
             model_singleton.models[`Budget${budget_year}Measure`],
             'measure_id'
+          ),
+        ]
+      )
+      .fromPairs()
+      .value(),
+    ..._.chain(budget_years)
+      .map(
+        budget_year => [
+          `budget_${budget_year}_measure_org_id_loader`,
+          create_resource_by_foreignkey_attr_dataloader(
+            model_singleton.models[`Budget${budget_year}Measure`],
+            'data.org_id'
+          ),
+        ]
+      )
+      .fromPairs()
+      .value(),
+    ..._.chain(budget_years)
+      .map(
+        budget_year => [
+          `budget_${budget_year}_measure_subject_id_loader`,
+          create_resource_by_foreignkey_attr_dataloader(
+            model_singleton.models[`Budget${budget_year}Measure`],
+            'data.program_allocations.subject_id'
           ),
         ]
       )

@@ -100,12 +100,12 @@ export default function({models, loaders}){
   };
 
   const get_measure_model_by_year = (year) => validate_year(year) && models[`Budget${year}Measure`];
-  const get_measure_loader_by_year = (year) => validate_year(year) && loaders[`budget_${year}_measure_id_loader`];
+  const get_measure_loader_by_year = (loader_by, year) => validate_year(year) && loaders[`budget_${year}_measure_${loader_by}_loader`];
 
   const resolvers = {
     Root: {
       fake_budget_orgs: () => models.FakeBudgetOrgSubject.find({}),
-      budget_measure: (_x, {year, measure_id}) => get_measure_loader_by_year(year).load(measure_id),
+      budget_measure: (_x, {year, measure_id}) => get_measure_loader_by_year('measure_id', year).load(measure_id),
     },
     Gov: {
       budget_measures: async (_x, {year}) => {
@@ -113,7 +113,7 @@ export default function({models, loaders}){
 
         _.each(
           all_budget_measures,
-          budget_measure => get_measure_loader_by_year(year).prime(budget_measure.measure_id, budget_measure)
+          budget_measure => get_measure_loader_by_year('measure_id', year).prime(budget_measure.measure_id, budget_measure)
         );
 
         return all_budget_measures;
@@ -121,16 +121,16 @@ export default function({models, loaders}){
     },
     FakeBudgetOrg: {
       name: bilingual_field("name"),
-      budget_measures: ({org_id}, {year}) => get_measure_model_by_year(year).find({"data.org_id": org_id}),
+      budget_measures: ({org_id}, {year}) => get_measure_loader_by_year('org_id', year).load(org_id),
     },
     Org: {
-      budget_measures: ({org_id}, {year}) => get_measure_model_by_year(year).find({"data.org_id": org_id}),
+      budget_measures: ({org_id}, {year}) => get_measure_loader_by_year('org_id', year).load(org_id),
     },
     Crso: {
-      budget_measures: ({crso_id}, {year}) => get_measure_model_by_year(year).find({"data.program_allocations.subject_id": crso_id}),
+      budget_measures: ({crso_id}, {year}) => get_measure_loader_by_year('subject_id', year).load(crso_id),
     },
     Program: {
-      budget_measures: ({program_id}, {year}) => get_measure_model_by_year(year).find({"data.program_allocations.subject_id": program_id}),
+      budget_measures: ({program_id}, {year}) => get_measure_loader_by_year('subject_id', year).load(program_id),
     },
 
     BudgetMeasure: {
