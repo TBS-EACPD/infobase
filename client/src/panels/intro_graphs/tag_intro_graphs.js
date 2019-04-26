@@ -12,7 +12,7 @@ new PanelGraph({
   },
 
   render: () => (
-    <div className='bs-callout bs-callout-danger'>
+    <div className='alert alert-no-symbol alert--is-bordered alert-danger'>
       <KeyConceptList 
         question_answer_pairs={
           _.map( 

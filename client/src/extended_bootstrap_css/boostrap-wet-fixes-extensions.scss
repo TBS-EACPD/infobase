@@ -329,69 +329,6 @@ li.list-group-item {
   background-color: lighten($tertiaryColor, 20%);
 }
 
-/* 
-  The below callouts are part of the bootstrap documentation 
-  but for some reason are not included in bootstrap's bundle 
-*/
-.bs-callout {
-    padding: 20px;
-    margin: 20px 0;
-    border: 1px solid $tertiaryColor;
-    border-left-width: 5px;
-    border-radius: 3px;
-}
-.bs-callout h4 {
-    margin-top: 0;
-    margin-bottom: 5px;
-}
-.bs-callout p:last-child {
-    margin-bottom: 0;
-}
-.bs-callout code {
-    border-radius: 3px;
-}
-.bs-callout+.bs-callout {
-    margin-top: -5px;
-}
-.bs-callout-default {
-    border-left-color: darken($tertiaryColor, 10%);
-}
-.bs-callout-default h4 {
-    color: darken($tertiaryColor, 10%); // darkened slightly to increase contrast
-}
-.bs-callout-primary {
-    border-left-color: $secondaryColor;
-}
-.bs-callout-primary h4 {
-    color: $secondaryColor;
-}
-.bs-callout-success {
-    border-left-color: darken($successDarkColor, 10%);
-}
-.bs-callout-success h4 {
-    color: darken($successDarkColor, 10%); // darkened slightly to increase contrast
-}
-.bs-callout-danger {
-    border-left-color: $failDarkColor;
-}
-.bs-callout-danger h4 {
-    color: $failDarkColor;
-}
-.bs-callout-warning {
-    border-color: $warnDarkColor;
-    background: $warnLightColor;
-}
-.bs-callout-warning h4 {
-    color: $textColor; // yellow text isn't going to work
-}
-.bs-callout-info {
-    border-left-color: $infoDarkColor; 
-    background: $infoLightColor;
-    border-color: $infoDarkColor;
-}
-.bs-callout-info h4 {
-    color: $infoDarkColor;
-}
 
 ol, ul {
   margin-bottom: 12px;
@@ -466,6 +403,37 @@ border-top-right-radius: 10px;
 .alert { 
 background-color: $backgroundColor;
 }
+
+.label-default, .label-default[href]:hover, .label-default[href]:focus, .label-default[href]:active, .label-primary, .label-primary[href]:hover, .label-primary[href]:focus, .label-primary[href]:active, .label-success, .label-success[href]:hover, .label-success[href]:focus, .label-success[href]:active, .alert-success, .label-info, .label-info[href]:hover, .label-info[href]:focus, .label-info[href]:active, .alert-info, .label-warning, .label-warning[href]:hover, .label-warning[href]:focus, .label-warning[href]:active, .alert-warning, .label-danger, .label-danger[href]:hover, .label-danger[href]:focus, .label-danger[href]:active, .alert-danger {
+  color: $textColor; }
+
+.label-default[href]:hover, .label-default[href]:focus, .label-default[href]:active, .label-primary[href]:hover, .label-primary[href]:focus, .label-primary[href]:active, .label-success[href]:hover, .label-success[href]:focus, .label-success[href]:active, .label-info[href]:hover, .label-info[href]:focus, .label-info[href]:active, .label-warning[href]:hover, .label-warning[href]:focus, .label-warning[href]:active, .label-danger[href]:hover, .label-danger[href]:focus, .label-danger[href]:active {
+  text-decoration: underline; }
+
+.label-default, .label-default[href]:hover, .label-default[href]:focus, .label-default[href]:active {
+  background: $backgroundColor;
+  border-color: $separatorColor; }
+
+.label-primary, .label-primary[href]:hover, .label-primary[href]:focus, .label-primary[href]:active {
+  background: #e8f2f4;
+  border-color: $primaryColor; }
+
+.label-success, .label-success[href]:hover, .label-success[href]:focus, .label-success[href]:active, .alert-success, details.alert.alert-success, details.alert[open].alert-success {
+  background: $successLightColor;
+  border-color: $successDarkColor; }
+
+.label-info, .label-info[href]:hover, .label-info[href]:focus, .label-info[href]:active, .alert-info, details.alert.alert-info, details.alert[open].alert-info {
+  background: $infoLightColor;
+  border-color: $infoDarkColor; }
+
+.label-warning, .label-warning[href]:hover, .label-warning[href]:focus, .label-warning[href]:active, .alert-warning, details.alert.alert-warning, details.alert[open].alert-warning {
+  background: $warnLightColor;
+  border-color: $warnDarkColor; }
+
+.label-danger, .label-danger[href]:hover, .label-danger[href]:focus, .label-danger[href]:active, .alert-danger, details.alert.alert-danger, details.alert[open].alert-danger {
+  background: $backgroundColor;
+  border-color: $failDarkColor; }
+
 
 /* extending bootstrap well which does not look good in regular GoC background */
 .well.dark-well {

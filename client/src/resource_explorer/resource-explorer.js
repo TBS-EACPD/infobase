@@ -305,7 +305,7 @@ class ExplorerPage extends React.Component {
             { current_category && get_image_glossary_tooltip(current_category.id) }
           </h4>
           { is_m2m &&
-            <div style={{marginBottom: "10px"}} className='bs-callout bs-callout-danger'>
+            <div className='alert alert-no-symbol alert--is-bordered alert-danger'>
               <KeyConceptList 
                 question_answer_pairs={
                   _.map( 

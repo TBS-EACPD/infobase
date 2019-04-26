@@ -123,6 +123,7 @@ _.each(['gov', 'dept'], lvl => {
         'what_are_emp_tenures',
         'what_ppl_are_included',
         'what_ppl_arent_included',
+        'where_is_data',
       ],
     }),
   });
@@ -151,41 +152,6 @@ new PanelGraph({
   }),
 });
 
-
-_.each(['gov', 'dept'], lvl => {
-  new PanelGraph({
-    level: lvl,
-    static: true,
-    footnotes: false,
-    source: false,
-    info_deps: [],
-    key: "march_snapshot_warning",
-    calculate: _.constant(true),
-
-    render() {
-      return (
-        <div className="alert alert-info alert-no-symbol alert--is-bordered large_panel_text">
-          <TM k="march_snapshot_warning" />
-        </div>
-      );
-    },
-  });
-
-  new PanelGraph({
-    level: lvl,
-    static: true,
-    footnotes: false,
-    source: false,
-    info_deps: [],
-    key: "ppl_open_data_info",
-    calculate: _.constant(true),
-    render: () => (
-      <div className="alert alert-info alert-no-symbol alert--is-bordered large_panel_text">
-        <TM k="ppl_open_data_info" />
-      </div>
-    ),
-  });
-});
 
 
 const late_dp_departments = [

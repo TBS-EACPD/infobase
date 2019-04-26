@@ -66,7 +66,6 @@ const get_people_panels = subject => {
   const is_gov = subject.level === "gov";
   return [
     'people_intro',
-    "march_snapshot_warning",
     !is_gov && "employee_last_year_totals",
     "employee_totals",
     "employee_prov",
@@ -75,7 +74,6 @@ const get_people_panels = subject => {
     "employee_executive_level",
     "employee_fol",
     "employee_gender",
-    is_gov && "ppl_open_data_info",
   ];
 };
 

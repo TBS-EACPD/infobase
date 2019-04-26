@@ -20,12 +20,13 @@ what_are_headcounts_a:
   en: |
     Employee Headcount corresponds to the count of employees of all tenures (Indeterminate, Term, Casual and Student) as well as Governor-in-Council appointees, deputy ministers, and federal judges as of March 31 of each year. Employees on leave without pay are not included. The counts include employees working in organizations in Schedules I, IV, and V of the _Financial Administration Act_. No adjustments are made to account for hours of work.
     
-    Unless otherwise indicated, the people management data presented below is a snapshot of the Employee Headcount as of March 31.
+    Unless otherwise indicated, the people management data presented below is a snapshot of the Employee Headcount as of March 31. Note that averages provided for such data are also calculated using March 31 snapshots, and do not capture potential in-year fluctuations.
   fr: |
     Par relevé des effectifs, on entend le dénombrement des employés, quelle que soit leur période d’emploi (employés nommés pour une période indéterminée ou déterminée, occasionnels et étudiants), des  personnes nommées par décret, des sous-ministres et des juges nommés par le gouvernement fédéral au 31 mars de chaque année. Les employés en congé sans solde ne sont pas inclus. Le relevé comprend les employés des organisations figurant aux annexes I, IV, et V de la _Loi sur la gestion des finances publiques_. Aucun rajustement n’a été apporté pour les heures de travail.
     
-    Sauf indication contraire, les données ci-dessous sur la gestion des personnes sont un aperçu de l’effectif en date du 31 mars.
+    Sauf indication contraire, les données ci-dessous sur la gestion des personnes sont un aperçu de l’effectif en date du 31 mars, soit la dernière journée de l’exercice financier. Prière de retenir que le calcul de la moyenne est fondé sur les données du 31 mars et ne prennent pas en compte les fluctuations en cours d’exercice.
 
+  
 
 what_are_emp_tenures_q:
   en: What are "employment tenures"?
@@ -96,14 +97,11 @@ what_ppl_arent_included_a:
 
     De plus, les données pour les organismes distincts suivants ne sont pas inclues car les renseignements au sujet de leurs employés ne sont pas disponibles dans le système régional de paye : le Service canadien du renseignement de sécurité, la Commission de la capitale nationale, Placements Épargne Canada, et le Centre d’analyse des opérations et déclarations financières du Canada.
 
-    
-march_snapshot_warning:
-  en: |
-    Unless otherwise indicated, people management figures and values in the InfoBase represent data from the last day of each fiscal year, March 31. Note that averages provided for such data are also calculated using March 31 snapshots, and do not capture potential in-year fluctuations.
-  fr: |
-    À moins d’indication contraire, les chiffres et valeurs figurant à l’InfoBase pour la gestion des personnes représentent les données du 31 mars, soit la dernière journée de l’exercice financier. Prière de retenir que le calcul de la moyenne est fondé sur les données du 31 mars et ne prennent pas en compte les fluctuations en cours d’exercice.
+where_is_data_q:
+  en: Where can I find data for previous years?
+  fr: Où puis-je trouver de données pour les années precedentes?
 
-ppl_open_data_info:
+where_is_data_a:
   transform: [handlebars, markdown]
   en: |
     Each people management dataset in the InfoBase has a corresponding dataset available through the Open Data portal. These corresponding Open Data datasets contain quarterly snapshots from March 2008 onward. Open Data links are available from the InfoBase {{metadata_source_link "Datasets" "RPS"}} page.
