@@ -4,7 +4,6 @@ import {
   ReportDetails, 
   ReportDatasets, 
   NoDataMessage, 
-  AlertMessage,
 } from './shared.js';
 import { 
   Format, 
@@ -119,7 +118,6 @@ class GranularView extends React.Component {
           content={ <ReportDatasets {...this.props} /> }
         />
         <div id="rpb-main-content" >
-          <AlertMessage table={table} />
           { 
           _.isEmpty(flat_data) ? 
           <NoDataMessage /> :
