@@ -85,14 +85,15 @@
   border-radius: 10px;
 }
 
-list-group--quick-links {
-  border: 2px solid $separatorColor;
-}
+// .list-group--quick-links {
+//   border: 2px solid $separatorColor;
+//   border-radius: 10px;
+// }
 
-.list-group-item--quick-links {
-  background-color: lighten($tertiaryColor, 40%);
-  border-color: $tertiaryColor !important;
-}
+// .list-group-item--quick-links {
+//   background-color: lighten($tertiaryColor, 40%);
+//   border-color: $tertiaryColor !important;
+// }
 
 .badge.badge--is-new {
   background-color: $highlightColor; 

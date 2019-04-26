@@ -24,18 +24,11 @@ const WellList = ({ elements }) => <div>
             </span>
             }
           </div>
-          <ul className="list-group">
+          <ul className="list-group list-group--withheader">
             {_.map( children, ({display, href}, ix)=> 
               <li
                 key={ix}
                 className="list-group-item"
-                style={
-                  ix===0 ?
-                  {
-                    borderTopRightRadius: 0,
-                    borderTopLeftRadius: 0,
-                  } : {}
-                }
               >
                 {
                 href ? 

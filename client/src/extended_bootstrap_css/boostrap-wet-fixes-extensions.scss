@@ -94,7 +94,6 @@ hr {
   cursor: pointer;
 }
 
-
 .button-unstyled {
   border: none;
   background-color: inherit;
@@ -102,7 +101,6 @@ hr {
   padding: 0;
   border-radius: 0;
 }
-
 
 .breadcrumb-external-link {
   opacity: 0.7;
@@ -136,6 +134,8 @@ hr {
 div#app:focus {
   outline: none!important;
 }
+
+/* fonts */
 
 h1 {
   margin-top: 20px;
@@ -286,13 +286,27 @@ a.btn-ib-light {
 
 }
 
+.list-group {
+  border: 2px solid $separatorColor;
+  border-radius: 10px;
+}
+
+.list-group--withheader {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-width: 0px 2px 2px 2px;
+  border-color: $separatorColor;
+}
+
 li.list-group-item {
-  border: 1px solid $secondaryColor;
+  border-width: 1px 0px 1px 0px;
   &:first-child {
+    border-top-color: rgba(0,0,0,0);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
   &:last-child {
+    border-bottom-color: rgba(0,0,0,0);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
   }
@@ -308,11 +322,11 @@ li.list-group-item {
 
 /* for table striped header */
 .table-striped>tbody>tr:nth-child(odd) {
-  background-color: #f5f5f5;
+  background-color:lighten($tertiaryColor, 40%);
 }
 
 .table-striped>tbody>tr:nth-child(even) {
-  background-color: #a5aeb8;
+  background-color: lighten($tertiaryColor, 20%);
 }
 
 /* 
@@ -322,7 +336,7 @@ li.list-group-item {
 .bs-callout {
     padding: 20px;
     margin: 20px 0;
-    border: 1px solid #eee;
+    border: 1px solid $tertiaryColor;
     border-left-width: 5px;
     border-radius: 3px;
 }
@@ -340,44 +354,43 @@ li.list-group-item {
     margin-top: -5px;
 }
 .bs-callout-default {
-    border-left-color: #777;
+    border-left-color: darken($tertiaryColor, 10%);
 }
 .bs-callout-default h4 {
-    color: #777;
+    color: darken($tertiaryColor, 10%); // darkened slightly to increase contrast
 }
 .bs-callout-primary {
-    border-left-color: #428bca;
+    border-left-color: $secondaryColor;
 }
 .bs-callout-primary h4 {
-    color: #428bca;
+    color: $secondaryColor;
 }
 .bs-callout-success {
-    border-left-color: #5cb85c;
+    border-left-color: darken($successDarkColor, 10%);
 }
 .bs-callout-success h4 {
-    color: #5cb85c;
+    color: darken($successDarkColor, 10%); // darkened slightly to increase contrast
 }
 .bs-callout-danger {
-    border-left-color: #d9534f;
+    border-left-color: $failDarkColor;
 }
 .bs-callout-danger h4 {
-    color: #d9534f;
+    color: $failDarkColor;
 }
 .bs-callout-warning {
-    border-left-color: #f0ad4e;
-    background: #f9f4d4;
-    border-color: #f90;
+    border-color: $warnDarkColor;
+    background: $warnLightColor;
 }
 .bs-callout-warning h4 {
-    color: #f0ad4e;
+    color: $textColor; // yellow text isn't going to work
 }
 .bs-callout-info {
-    border-left-color: #5bc0de;
-    background: #d7faff; 
-    border-color: #269abc;
+    border-left-color: $infoDarkColor; 
+    background: $infoLightColor;
+    border-color: $infoDarkColor;
 }
 .bs-callout-info h4 {
-    color: #5bc0de;
+    color: $infoDarkColor;
 }
 
 ol, ul {

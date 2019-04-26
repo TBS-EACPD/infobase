@@ -9,8 +9,6 @@ $separatorColor: #8c949e;
 
 $tooltipColor: #4d88b3;
 
-
-
 $buttonPrimaryColor: #176dde;
 $buttonSecondaryColor: #76a4df;
 
@@ -26,9 +24,11 @@ $linkVisitedColor: #7834bc;
 $successLightColor: #cbedbd;
 $successDarkColor: #45a64d;
 $failLightColor: #ffa8a8;
-$failDarkColor: #fd3845;
+$failDarkColor: #da3a38;
 $warnLightColor: #ffecce;
 $warnDarkColor: #fdb84c;
+$infoLightColor: lighten($buttonSecondaryColor, 30%);
+$infoDarkColor: $buttonPrimaryColor; // setting these to so we don't have too many shades of blue, if the buttons change colour this should be set to a nice "info" blue
 
 $fontFamily: 'Roboto', sans-serif;
 $lightFontWeight: 300;
