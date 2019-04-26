@@ -4629,3 +4629,30 @@ Object {
   },
 }
 `;
+
+exports[`Budget measure data subject has budget measure snapshots 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "crso_with_measure": Object {
+        "has_budget_measures": true,
+      },
+      "crso_without_measure": Object {
+        "has_budget_measures": false,
+      },
+      "org_with_measure": Object {
+        "has_budget_measures": true,
+      },
+      "org_without_measure": Object {
+        "has_budget_measures": false,
+      },
+      "program_with_measure": Object {
+        "has_budget_measures": true,
+      },
+      "program_without_measure": Object {
+        "has_budget_measures": false,
+      },
+    },
+  },
+}
+`;

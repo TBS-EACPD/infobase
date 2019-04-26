@@ -390,22 +390,41 @@ export default async function({models}){
         )
       );
 
-      return models[`Budget${budget_year}Measure`].insertMany(
-        _.map(
-          measure_lookups,
-          measure => ({
-            ...measure,
 
-            data: flatten_data_by_measure_and_org_id(
-              {
-                [measure.measure_id]: {
-                  ...data_by_measure_and_org_id[measure.measure_id],
-                },
-              }
-            ),
-          })
-        )
+      const budget_measures = _.map(
+        measure_lookups,
+        measure => ({
+          ...measure,
+
+          data: flatten_data_by_measure_and_org_id(
+            {
+              [measure.measure_id]: {
+                ...data_by_measure_and_org_id[measure.measure_id],
+              },
+            }
+          ),
+        })
       );
+      const subjects_with_budget_measures = _.chain(budget_measures)
+        .flatMap(
+          budget_measure => _.flatMap(
+            budget_measure.data,
+            ({org_id, program_allocations}) => [
+              org_id,
+              ... _.map(
+                program_allocations,
+                'subject_id'
+              ),
+            ]
+          )
+        )
+        .uniq()
+        .map( subject_id => ({subject_id}) )
+        .value();
+      return [
+        models[`Budget${budget_year}Measure`].insertMany(budget_measures),
+        models[`SubjectsWithBudget${budget_year}Measure`].insertMany(subjects_with_budget_measures),
+      ];
     }),
   ]);
 }

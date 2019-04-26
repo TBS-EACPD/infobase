@@ -68,6 +68,10 @@ export default function(model_singleton){
     data: [BudgetDataSchema],
   });
 
+  const SubjectsWithMeasures = mongoose.Schema({
+    subject_id: pkey_type(), // org, fake budget org, crso, or program id
+  });
+
   // These are artifacts of the Budget 2018 process, shouldn't show up in other years
   const FakeBudgetOrgSubjectSchema = mongoose.Schema({
     org_id: pkey_type(),
@@ -79,7 +83,10 @@ export default function(model_singleton){
 
   _.each(
     budget_years,
-    budget_year => model_singleton.define_model(`Budget${budget_year}Measure`, BudgetMeasureSchema)
+    budget_year => {
+      model_singleton.define_model(`Budget${budget_year}Measure`, BudgetMeasureSchema)
+      model_singleton.define_model(`SubjectsWithBudget${budget_year}Measure`, SubjectsWithMeasures)
+    }
   );
   model_singleton.define_model("FakeBudgetOrgSubject", FakeBudgetOrgSubjectSchema);
   
@@ -119,6 +126,18 @@ export default function(model_singleton){
           create_resource_by_foreignkey_attr_dataloader(
             model_singleton.models[`Budget${budget_year}Measure`],
             'data.program_allocations.subject_id'
+          ),
+        ]
+      )
+      .fromPairs()
+      .value(),
+    ..._.chain(budget_years)
+      .map(
+        budget_year => [
+          `subject_with_budget_${budget_year}_measure_subject_id_loader`,
+          create_resource_by_id_attr_dataloader(
+            model_singleton.models[`SubjectsWithBudget${budget_year}Measure`],
+            'subject_id'
           ),
         ]
       )

@@ -109,7 +109,6 @@ query{
   }
 }`;
 
-
 const program_budget_measure_query = `
 query{
   root(lang: "en") {
@@ -125,38 +124,68 @@ query{
 }`;
 
 
+const has_budget_measures_queries = `
+query{
+  root(lang: "en") {
+    org_with_measure: org(org_id: "326") {
+      has_budget_measures(year: 2018)
+    }
+    org_without_measure: org(org_id: "552") {
+      has_budget_measures(year: 2018)
+    }
+    crso_with_measure: crso(id: "TBC-ISS00") {
+      has_budget_measures(year: 2018)
+    }
+    crso_without_measure: crso(id: "CPCC-BWX00") {
+      has_budget_measures(year: 2018)
+    }
+    program_with_measure: program(id: "TBC-BXA02") {
+      has_budget_measures(year: 2018)
+    }
+    program_without_measure: program(id: "CPCC-BWX01") {
+      has_budget_measures(year: 2018)
+    }
+  }
+}`;
+
 const { execQuery } = global;
 
 describe("Budget measure data", function(){
   
-  it("budget measure snapshot: direct measure query", async ()=> {
+  it("budget measure snapshot: direct measure query", async () => {
     const data = await execQuery(direct_budget_measure_query, {});
     return expect(data).toMatchSnapshot();
   });
 
-  it("budget measure snapshot: gov", async ()=> {
+  it("budget measure snapshot: gov", async () => {
     const data = await execQuery(gov_budget_measure_query, {});
     return expect(data).toMatchSnapshot();
   });
 
-  it("budget measure snapshot: org", async ()=> {
+  it("budget measure snapshot: org", async () => {
     const data = await execQuery(org_budget_measure_query, {});
     return expect(data).toMatchSnapshot();
   });
 
-  it("budget measure snapshot: fake org", async ()=> {
+  it("budget measure snapshot: fake org", async () => {
     const data = await execQuery(fake_org_budget_measure_query, {});
     return expect(data).toMatchSnapshot();
   });
 
-  it("budget measure snapshot: crso", async ()=> {
+  it("budget measure snapshot: crso", async () => {
     const data = await execQuery(crso_budget_measure_query, {});
     return expect(data).toMatchSnapshot();
   });
 
-  it("budget measure snapshot: program", async ()=> {
+  it("budget measure snapshot: program", async () => {
     const data = await execQuery(program_budget_measure_query, {});
     return expect(data).toMatchSnapshot();
   });
   
+
+  it("subject has budget measure snapshots", async () => {
+    const data = await execQuery(has_budget_measures_queries, {});
+    return expect(data).toMatchSnapshot();
+  });
+
 });

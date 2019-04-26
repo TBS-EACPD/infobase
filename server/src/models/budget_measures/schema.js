@@ -21,12 +21,15 @@ const schema = `
   }
   extend type Org {
     budget_measures(year: Int): [BudgetMeasure]
+    has_budget_measures(year: Int): Boolean
   }
   extend type Crso {
     budget_measures(year: Int): [BudgetMeasure]
+    has_budget_measures(year: Int): Boolean
   }
   extend type Program {
     budget_measures(year: Int): [BudgetMeasure]
+    has_budget_measures(year: Int): Boolean
   }
 
   enum ChapterKey {
@@ -101,6 +104,8 @@ export default function({models, loaders}){
 
   const get_measure_model_by_year = (year) => validate_year(year) && models[`Budget${year}Measure`];
   const get_measure_loader_by_year = (loader_by, year) => validate_year(year) && loaders[`budget_${year}_measure_${loader_by}_loader`];
+  
+  const get_subject_has_measure_loader_by_year = (year) => validate_year(year) && loaders[`subject_with_budget_${year}_measure_subject_id_loader`];
 
   const resolvers = {
     Root: {
@@ -125,12 +130,15 @@ export default function({models, loaders}){
     },
     Org: {
       budget_measures: ({org_id}, {year}) => get_measure_loader_by_year('org_id', year).load(org_id),
+      has_budget_measures: async ({org_id}, {year}) => !_.isUndefined( await get_subject_has_measure_loader_by_year(year).load(org_id) ),
     },
     Crso: {
       budget_measures: ({crso_id}, {year}) => get_measure_loader_by_year('subject_id', year).load(crso_id),
+      has_budget_measures: async ({crso_id}, {year}) => !_.isUndefined( await get_subject_has_measure_loader_by_year(year).load(crso_id) ),
     },
     Program: {
       budget_measures: ({program_id}, {year}) => get_measure_loader_by_year('subject_id', year).load(program_id),
+      has_budget_measures: async ({program_id}, {year}) => !_.isUndefined( await get_subject_has_measure_loader_by_year(year).load(program_id) ),
     },
 
     BudgetMeasure: {
