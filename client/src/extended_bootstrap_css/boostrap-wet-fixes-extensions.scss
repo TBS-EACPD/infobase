@@ -415,7 +415,7 @@ background-color: $backgroundColor;
   border-color: $separatorColor; }
 
 .label-primary, .label-primary[href]:hover, .label-primary[href]:focus, .label-primary[href]:active {
-  background: #e8f2f4;
+  background: $backgroundColor;
   border-color: $primaryColor; }
 
 .label-success, .label-success[href]:hover, .label-success[href]:focus, .label-success[href]:active, .alert-success, details.alert.alert-success, details.alert[open].alert-success {
