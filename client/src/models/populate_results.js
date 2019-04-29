@@ -17,6 +17,7 @@ const has_results_query = (level, id_key) => gql`
 query($lang: String!, $id: String) {
   root(lang: $lang) {
     ${level}(${id_key}: $id) {
+      id
       has_results
     }
   }
@@ -463,6 +464,7 @@ const load_results_counts_query = (level = "summary") => gql`
 query($lang: String!) {
   root(lang: $lang) {
     gov {
+      id
       all_target_counts_${level} {
         subject_id
         level
