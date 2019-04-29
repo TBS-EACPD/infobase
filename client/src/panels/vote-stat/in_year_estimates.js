@@ -42,12 +42,14 @@ new PanelGraph({
         <Col isText size={5}>
           <TM k="estimates_perspective_text" args={info} />
         </Col>
-        <Col isGraph size={7}>
-          <DeptEstimatesPerspective
-            subject={subject} 
-            {...graph_args} 
-          />
-        </Col>
+        {!window.is_a11y_mode &&
+          <Col isGraph size={7}>
+            <DeptEstimatesPerspective
+              subject={subject} 
+              {...graph_args} 
+            />
+          </Col>
+        }
       </StdPanel>
     );
   },
