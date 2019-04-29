@@ -538,13 +538,11 @@ Subject.InstForm = class InstForm extends static_subject_store(){
   }
 }
 
-const submeasures_by_parent_id = {};
 Subject.BudgetMeasure = class BudgetMeasure extends static_subject_store(){
   static get budget_years(){ return ["2018", "2019"]; }
   static get type_name(){ return 'budget_measure'; }
   static get singular(){ return trivial_text_maker("budget_measure"); }
   static get plural(){ return trivial_text_maker("budget_measures"); }
-  
   static make_budget_link(chapter_key, ref_id){
     const valid_chapter_keys_to_page_number = {
       grw: "01",
@@ -574,171 +572,20 @@ Subject.BudgetMeasure = class BudgetMeasure extends static_subject_store(){
       }
     }
   }
-  
-  static register_submeasure_by_parent({id, parent_id, name, data}){
-    const modified_data = _.cloneDeep(data[0]);
-    Object.defineProperty(
-      modified_data, 
-      'program_allocations', 
-      {
-        get: _.memoize(function() {
-          const dept = Subject.Dept.lookup(data[0].org_id);
-          if ( _.isUndefined(dept) ){
-            return [];
-          }
-
-          const dept_acronym = dept.acronym;
-
-          const program_allocations_by_subject_id = _.mapKeys(
-            data[0].program_allocations,
-            (value, key) => `${dept_acronym}-${key}`,
-          );
-
-          return program_allocations_by_subject_id;
-        }),
-      }
-    );
-
-    const submeasure = {
-      id,
-      parent_id,
-      name,
-      data: modified_data,
-    };
-    
-    const submeasures_of_parent = submeasures_by_parent_id[parent_id];
-    
-    if ( !_.isUndefined(submeasures_of_parent) && submeasures_of_parent.length > 0 ){
-      submeasures_by_parent_id[parent_id] = [
-        ...submeasures_of_parent,
-        submeasure,
-      ];
-    } else {
-      submeasures_by_parent_id[parent_id] = [submeasure];
-    }
-  }
-  get submeasures(){
-    const submeasures = submeasures_by_parent_id[this.id];
-    return _.isUndefined(submeasures) ? [] : submeasures;
-  }
-
-  constructor({id, name, chapter_key, ref_id, description, data}){
-    super();
-    this.id = id;
-    this.name = name;
-    this.chapter_key = chapter_key;
-    this.ref_id = ref_id;
-    this.description = description;
-    this.orgs = _.map(data, row => row.org_id);
-    this.data = _.map(data, row => {
-      // Need to roll up allocated, withheld, and program_allocations out of submeasures, do it at 
-      // call time with memoized getters since submeasures may not all be registered until then
-
-      const row_allocated = row.allocated;
-      const row_withheld = row.withheld;
-      const row_program_allocations = row.program_allocations;
-
-      const submeasure_data_for_this_row = _.memoize(
-        () => {
-          return _.chain(submeasures_by_parent_id[id])
-            .flatMap(submeasure => submeasure.data)
-            .filter(submeasure_data => submeasure_data.org_id === row.org_id)
-            .value() || [];
-        }
-      );
-
-      const modified_row = _.chain(row)
-        .cloneDeep()
-        .omit(["allocated", "withheld", "program_allocations"])
-        .value();
-
-      Object.defineProperty(
-        modified_row, 
-        'allocated', 
-        {
-          get: _.memoize(function() { 
-            return submeasure_data_for_this_row().length === 0 ?
-              row_allocated :
-              _.reduce(
-                submeasure_data_for_this_row(),
-                (memo, submeasure_data) => memo + submeasure_data.allocated,
-                row_allocated
-              ); 
-          }),
-        }
-      );
-      Object.defineProperty(
-        modified_row, 
-        'withheld', 
-        {
-          get: _.memoize(function() {
-            return submeasure_data_for_this_row().length === 0 ?
-              row_withheld :
-              _.reduce(
-                submeasure_data_for_this_row(),
-                (memo, submeasure_data) => memo + submeasure_data.withheld,
-                row_withheld
-              );
-          }),
-        }
-      );
-      Object.defineProperty(
-        modified_row, 
-        'program_allocations', 
-        {
-          get: _.memoize(function() {
-            const dept = Subject.Dept.lookup(row.org_id);
-            if ( _.isUndefined(dept) ){
-              return [];
-            }
-
-            const dept_acronym = dept.acronym;
-
-            const program_allocations_by_subject_id = _.mapKeys(
-              row_program_allocations,
-              (value, key) => `${dept_acronym}-${key}`,
-            );
-
-            const program_allocations_and_submeasures_by_activity_code = submeasure_data_for_this_row().length === 0 ?
-              program_allocations_by_subject_id :
-              _.chain( submeasure_data_for_this_row() )
-                .map(submeasures => submeasures.program_allocations)
-                .concat(program_allocations_by_subject_id)
-                .thru(all_program_allocations => {
-                  const keys = _.chain(all_program_allocations)
-                    .flatMap(_.keys)
-                    .uniq()
-                    .value();
-                  const merged_program_allocations = _.chain(keys)
-                    .map(key => _.chain(all_program_allocations)
-                      .map(program_allocations => program_allocations[key])
-                      .filter()
-                      .reduce( (memo, value) => memo + value, 0 )
-                      .thru(value => [key, value])
-                      .value()
-                    )
-                    .fromPairs()
-                    .value();
-                  return merged_program_allocations;
-                })
-                .value();
-            
-            return program_allocations_and_submeasures_by_activity_code;
-          }),
-        }
-      );
-
-      return modified_row;
-    });
-  }
 
   static create_and_register(args){
-    if ( args.parent_id !== "" ){
-      this.register_submeasure_by_parent(args);
-    } else {
-      const inst = new BudgetMeasure(args);
-      this.register(args.id, inst);
-    }
+    const inst = new BudgetMeasure(args);
+    this.register(args.measure_id, inst);
+  }
+  constructor({measure_id, name, chapter_key, section_id, description, data}){
+    super();
+    this.id = measure_id;
+    this.name = name;
+    this.chapter_key = chapter_key;
+    this.ref_id = section_id;
+    this.description = description;
+    this.orgs = _.map(data, row => row.org_id);
+    this.data = data;
   }
 };
 
