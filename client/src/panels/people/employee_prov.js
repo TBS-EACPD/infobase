@@ -36,7 +36,7 @@ const format_prov_data = (prov, years_by_province) => {
     prov_data = _.map(years_by_province,(data,ix) => ({year: run_template(people_years[ix]), value: data[prov]}));
   }
 
-  return prov_data;
+  return _.reverse(prov_data);
 }
 
 class CanadaGraphBarLegend extends React.Component {
@@ -55,7 +55,6 @@ class CanadaGraphBarLegend extends React.Component {
 
     const formatted_data = format_prov_data(prov,years_by_province);
     const formatter = formats["big_int_real_raw"];
-
     return (
       <Fragment>
         <p className="mrgn-bttm-0 mrgn-tp-0 nav-header centerer">
