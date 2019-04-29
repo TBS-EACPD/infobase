@@ -62,6 +62,7 @@ const info_deps_by_level = {
         })),
       }]);
       
+
       return (
         <StdPanel
           title={text_maker(level+"_employee_totals_title")}
@@ -107,7 +108,7 @@ const info_deps_by_level = {
                 data_col_headers = {ticks}
                 data = {[{
                   label: subject.fancy_name, 
-                  data: series[""],
+                  data: series,
                 }]}
               />
             </Col>
