@@ -2,8 +2,8 @@
 # Program Explorer related
 #######################################
 tag_nav:
-  en: Explorer
-  fr: Explorateur
+  en: Tag Explorer
+  fr: Explorer les étiquettes
 
 choose_explore_point:
   en: Select your exploration point
