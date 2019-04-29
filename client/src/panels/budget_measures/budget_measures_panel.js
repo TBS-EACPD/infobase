@@ -76,28 +76,18 @@ const calculate_stats_common = (data) => {
 
 const crso_program_calculate = (subject, info, options, years_with_data) => {
   const org_id_string = subject.dept.id.toString();
-
+  
   const get_program_measures_with_data_filtered = (year) => _.chain( BudgetMeasure.get_all() )
     .filter(measure => _.indexOf( measure.orgs, org_id_string ) !== -1)
-    .map( measure => ({
-      ...measure,
-      measure_data: _.chain(measure.data)
-        .filter( data => data.org_id === org_id_string )
-        .thru( nested_data => {
-          const program_allocations = nested_data[0].program_allocations;
-
-          return {
-            ...nested_data[0],
-            allocated: !_.isEmpty(program_allocations) ? 
-             _.chain(nested_data[0].program_allocations)
-               .filter( (value, key) => key === subject.id )
-               .reduce( (memo, value) => memo + value, 0)
-               .value() :
-              0,
-          };
-        })
-        .value(),
-    }))
+    .map( measure => 
+      ({
+        ...measure,
+        measure_data: _.chain(measure.data)
+          .filter( data => data.org_id === org_id_string )
+          .thru( ([program_allocations]) => program_allocations )
+          .value(),
+      })
+    )
     .filter(measure => measure.measure_data.allocated !== 0)
     .value();
 
@@ -495,9 +485,9 @@ class BudgetMeasureHBars extends React.Component {
           (memo, program_allocations) => {
             _.each(
               program_allocations, 
-              (program_allocation, program_id) => {
-                const memo_value = memo[program_id] || 0;
-                memo[program_id] = memo_value + program_allocation;
+              ({subject_id, allocated}) => {
+                const memo_value = memo[subject_id] || 0;
+                memo[subject_id] = memo_value + allocated;
               }
             )
             return memo;

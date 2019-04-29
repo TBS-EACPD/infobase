@@ -11,6 +11,7 @@ const get_subject_has_measures_query = (level, id_arg_name, years_to_load) => gq
 query($lang: String! $id: String) {
   root(lang: $lang) {
     ${level}(${id_arg_name}: $id){
+      id
   ${_.map(
     years_to_load,
     budget_year => `
@@ -36,7 +37,7 @@ export function api_load_subject_has_measures(subject, years){
       years_to_load,
       year => _.get(_subject_has_measures, `${year}.${level}.${id}`)
     );
-    
+
     switch(level){
       case 'program':
         return {
@@ -142,6 +143,7 @@ const get_budget_measures_query = (level, id_arg_name, years_to_load) => gql`
 query($lang: String! ${id_arg_name ? `, $id: String` : ''}) {
   root(lang: $lang) {
     ${level}${id_arg_name ? `(${id_arg_name}: $id)` : ''} {
+    id
   ${_.map(
     years_to_load,
     budget_year => `
