@@ -491,7 +491,7 @@ Subject.Minister = class Minister extends static_subject_store(){
   }
 };
 
-
+const get_id_for_measure = (measure) => `${measure.year}_${measure.measure_id}`;
 Subject.InstForm = class InstForm extends static_subject_store(){
   static grandparent_forms(){
     return _.filter(
@@ -573,19 +573,21 @@ Subject.BudgetMeasure = class BudgetMeasure extends static_subject_store(){
     }
   }
 
-  static create_and_register(args){
-    const inst = new BudgetMeasure(args);
-    this.register(args.measure_id, inst);
+  static create_and_register(measure){
+    const inst = new BudgetMeasure(measure);
+    this.register( get_id_for_measure(measure), inst );
   }
-  constructor({measure_id, name, chapter_key, section_id, description, data}){
+  constructor(measure){
     super();
-    this.id = measure_id;
-    this.name = name;
-    this.chapter_key = chapter_key;
-    this.ref_id = section_id;
-    this.description = description;
-    this.orgs = _.map(data, row => row.org_id);
-    this.data = data;
+
+    _.assign(
+      this,
+      {
+        ...measure,
+        id: get_id_for_measure(measure),
+        orgs: _.map(measure.data, measure_data => measure_data.org_id),
+      }
+    );
   }
 };
 

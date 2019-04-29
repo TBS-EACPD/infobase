@@ -78,7 +78,7 @@ const crso_program_calculate = (subject, info, options, years_with_data) => {
   const org_id_string = subject.dept.id.toString();
   
   const get_program_measures_with_data_filtered = (year) => _.chain( BudgetMeasure.get_all() )
-    .filter(measure => _.indexOf( measure.orgs, org_id_string ) !== -1)
+    .filter(measure => _.indexOf( measure.orgs, org_id_string ) !== -1 && measure.year === year)
     .map( measure => 
       ({
         ...measure,
@@ -101,23 +101,25 @@ const crso_program_calculate = (subject, info, options, years_with_data) => {
 
 const calculate_functions = {
   gov: function(subject, info, options, years_with_data){
-    const get_all_measures_with_data_rolled_up = (year) => _.map(
-      BudgetMeasure.get_all(), 
-      measure => ({
-        ...measure,
-        measure_data: _.chain(budget_values)
-          .keys()
-          .map( key => [
-            key,
-            _.reduce(measure.data, (total, data_row) => total + data_row[key], 0),
-          ])
-          .fromPairs()
-          .assign({
-            measure_id: measure.id,
-          })
-          .value(),
-      })
-    );
+    const get_all_measures_with_data_rolled_up = (year) => _.chain( BudgetMeasure.get_all() )
+      .filter( measure => measure.year === year)
+      .map( 
+        measure => ({
+          ...measure,
+          measure_data: _.chain(budget_values)
+            .keys()
+            .map( key => [
+              key,
+              _.reduce(measure.data, (total, data_row) => total + data_row[key], 0),
+            ])
+            .fromPairs()
+            .assign({
+              measure_id: measure.id,
+            })
+            .value(),
+        })
+      )
+      .value();
 
     return {
       years_with_data,
@@ -130,7 +132,7 @@ const calculate_functions = {
     const org_id_string = subject.id.toString();
 
     const get_org_measures_with_data_filtered = (year) => _.chain( BudgetMeasure.get_all() )
-      .filter(measure => _.indexOf( measure.orgs, org_id_string ) !== -1)
+      .filter(measure => _.indexOf( measure.orgs, org_id_string ) !== -1 && measure.year === year)
       .map( measure => ({
         ...measure,
         measure_data: _.filter( measure.data, data => data.org_id === org_id_string )[0],
