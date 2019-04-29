@@ -20,7 +20,7 @@ query($lang: String! $id: String) {
   }
 }
 `;
-const _subject_has_measures = {}
+const _subject_has_measures = {};
 export function api_load_subject_has_measures(subject, years){
   const years_to_load = !_.isEmpty(years) ? years : budget_years;
 
@@ -36,33 +36,28 @@ export function api_load_subject_has_measures(subject, years){
       years_to_load,
       year => _.get(_subject_has_measures, `${year}.${level}.${id}`)
     );
-
-    const all_is_loaded = () => subject_is_loaded({level: 'gov', id: 'gov'});
-    const dept_is_loaded = (org) => all_is_loaded() || subject_is_loaded(org);
-    const crso_is_loaded = (crso) => dept_is_loaded(crso.dept) || subject_is_loaded(crso);
-    const program_is_loaded = (program) => crso_is_loaded(program.crso) || subject_is_loaded(program);
-
+    
     switch(level){
       case 'program':
         return {
-          is_loaded: program_is_loaded(subject),
+          is_loaded: subject_is_loaded(subject),
           id: subject.id,
-          query: get_subject_has_measures_query(level, 'id', years_to_load),
-          response_data_accessor: (response) => [ response.data.root.program ],
+          query: get_subject_has_measures_query('program', 'id', years_to_load),
+          response_data_accessor: (response) => response.data.root.program,
         };
       case 'crso':
         return {
-          is_loaded: crso_is_loaded(subject),
+          is_loaded: subject_is_loaded(subject),
           id: subject.id,
-          query: get_subject_has_measures_query(level, 'id', years_to_load),
-          response_data_accessor: (response) => [ response.data.root.crso ],
+          query: get_subject_has_measures_query('crso', 'id', years_to_load),
+          response_data_accessor: (response) => response.data.root.crso,
         };
       case 'dept':
         return {
-          is_loaded: dept_is_loaded(subject),
+          is_loaded: subject_is_loaded(subject),
           id: subject.id,
-          query: get_subject_has_measures_query(level, 'org_id', years_to_load),
-          response_data_accessor: (response) => [ response.data.root.org ],
+          query: get_subject_has_measures_query('org', 'org_id', years_to_load),
+          response_data_accessor: (response) => response.data.root.org,
         };
       default:
         return {
@@ -72,6 +67,16 @@ export function api_load_subject_has_measures(subject, years){
   })();
 
   if( is_loaded ){
+
+    // ensure that subject.has_data matches _subject_has_measures, since _subject_has_measures hay have been updated via side-effect
+    _.each(
+      years_to_load,
+      year => subject.set_has_data(
+        `budget${year}_data`, 
+        _.get(_subject_has_measures, `${year}.${level}.${id}`)
+      )
+    );
+
     return Promise.resolve();
   }
 
@@ -80,7 +85,7 @@ export function api_load_subject_has_measures(subject, years){
   return client.query({ 
     query,
     variables: {
-      lang: window.lang, 
+      lang: window.lang,
       id,
     },
   })
@@ -210,40 +215,34 @@ export function api_load_budget_measures(subject, years){
         return {
           is_loaded: program_is_loaded(subject),
           id: subject.id,
-          query: get_budget_measures_query(level, 'id', years_to_load),
-          response_data_accessor: (response) => [ response.data.root.program ],
+          query: get_budget_measures_query('program', 'id', years_to_load),
+          response_data_accessor: (response) => response.data.root.program,
         };
       case 'crso':
         return {
           is_loaded: crso_is_loaded(subject),
           id: subject.id,
-          query: get_budget_measures_query(level, 'id', years_to_load),
-          response_data_accessor: (response) => [ response.data.root.crso ],
+          query: get_budget_measures_query('crso', 'id', years_to_load),
+          response_data_accessor: (response) => response.data.root.crso,
         };
       case 'dept':
         return {
           is_loaded: dept_is_loaded(subject),
           id: subject.id,
-          query: get_budget_measures_query(level, 'org_id', years_to_load),
-          response_data_accessor: (response) => [ response.data.root.org ],
+          query: get_budget_measures_query('org', 'org_id', years_to_load),
+          response_data_accessor: (response) => response.data.root.org,
         };
       default:
         return {
           is_loaded: all_is_loaded(subject),
           id: 'gov',
           query: get_budget_measures_query('gov', false, years_to_load),
-          response_data_accessor: (response) => response.data.root.orgs,
+          response_data_accessor: (response) => response.data.root.gov,
         };
     }
   })();
 
-  if (
-    is_loaded || 
-    ( 
-      !_.isNull(subject.has_measures(years_to_load)) && 
-      !subject.has_measures(years_to_load) 
-    ) 
-  ){
+  if (is_loaded){
     return Promise.resolve();
   }
 
@@ -280,7 +279,7 @@ export function api_load_budget_measures(subject, years){
         year => {
           const measures_in_year = response_data[`measures${year}`];
 
-          if ( _.isEmpty(measures_in_year) ){
+          if ( !_.isEmpty(measures_in_year) ){
             _.each(
               measures_in_year,
               measure => BudgetMeasure.create_and_register({...measure, year}),
