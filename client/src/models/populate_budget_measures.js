@@ -106,7 +106,7 @@ export function api_load_subject_has_measures(subject, years){
       _.each(
         years_to_load,
         year => {
-          subject.set_has_measures(year, response_data[`hasMeasures${year}`]);
+          subject.set_has_data(`budget${year}_data`, response_data[`hasMeasures${year}`]);
 
           // Need to use _.setWith and pass Object as the customizer function to account for keys that may be numbers (e.g. dept id's)
           // Just using _.set makes large empty arrays when using a number as an accessor in the target string, bleh

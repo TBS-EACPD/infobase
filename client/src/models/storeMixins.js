@@ -88,7 +88,8 @@ export const CanHaveAPIData = superclass => {
       super(); 
       this._has_data = {
         results_data: null,
-        budget_data: null,
+        budget2018_data: null,
+        budget2019_data: null,
       };
       this._API_data_types = _.keys(this._has_data);
     }
@@ -96,7 +97,7 @@ export const CanHaveAPIData = superclass => {
       if ( _.includes(this._API_data_types, data_type) ){
         this._has_data[data_type] = has_data;
       } else {
-        throw `"${data_type}" is not a valid API data type for "has data" checks`
+        throw `"${data_type}" is not a valid API data type for "has data" checks`;
       }
     }
     has_data(data_type){
@@ -107,7 +108,7 @@ export const CanHaveAPIData = superclass => {
           return this._has_data[data_type];
         }
       } else {
-        throw `"${data_type}" is not a valid API data type for "has data" checks`
+        throw `"${data_type}" is not a valid API data type for "has data" checks`;
       }
     }
   };

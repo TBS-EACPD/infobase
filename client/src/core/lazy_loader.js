@@ -167,7 +167,7 @@ function ensure_loaded({
   );
 
   const has_budget_measures_prom = (
-    should_load_budget_measures && _.isFunction( subject.set_has_data ) ?
+    should_load_has_budget_measures && _.isFunction( subject.set_has_data ) ?
       api_load_subject_has_measures(subject, budget_years) :
       Promise.resolve()
   );
