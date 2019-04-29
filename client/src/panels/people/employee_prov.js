@@ -87,6 +87,7 @@ class CanadaGraphBarLegend extends React.Component {
             add_top_axis={true}
             enableGridX={false}
             enableGridY={false}
+            isInteractive={false}
           />
         </div>
       </Fragment>
