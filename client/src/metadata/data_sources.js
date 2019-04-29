@@ -197,6 +197,11 @@ const sources = _.mapValues({
           text: tm("budget_program_item_name"),
           inline_link: "#budget-tracker/budget-measure/overview",
         },
+        {
+          id: 'budget_supplemental',
+          text: tm("budget_program_supplemental_name"),
+          inline_link: "#budget-tracker/budget-measure/overview",
+        },
       ];
     },
   },
