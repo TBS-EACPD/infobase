@@ -2,6 +2,9 @@
 ##################################
 # General Section
 ##################################
+new:
+  en: New
+  fr: Nouveau
 notapplicable:
   en: Not Applicable
   fr: Sans objet

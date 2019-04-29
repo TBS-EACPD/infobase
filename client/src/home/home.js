@@ -43,7 +43,7 @@ export default class Home extends React.Component {
 }
 
 const FeaturedContentItem = ({ text_key, href, is_link_out, is_new, is_youtube }) => <li className="list-group-item list-group-item--home">
-  { is_new && <span className="badge badge--is-new"> new </span> }
+  { is_new && <span className="badge badge--is-new"> <TM k={"new"} /> </span> }
   { is_youtube && <img aria-hidden="true" style={{float: "right", height: "25px", margin: "-2px 4px 0px 0px"}} src={get_static_url("svg/youtube-icon.svg")}/>}
   <a href={href} target={is_link_out ? "_blank" : "_self"} rel={is_link_out ? "noopener noreferrer" : ""}> 
     <TM k={text_key} /> 
