@@ -4,14 +4,14 @@ import {
   exstensibleStoreMixin,
   PluralSingular, 
   SubjectMixin,
-  CanHaveResultsMixin,
+  CanHaveAPIData,
 } from './storeMixins.js';
 import { trivial_text_maker } from '../models/text.js';
 
 const static_subject_store = () => mix().with(staticStoreMixin, PluralSingular, SubjectMixin);
+const static_subject_store_with_API_data = () => mix().with(staticStoreMixin, PluralSingular, SubjectMixin, CanHaveAPIData);
 const extensible_subject_store = () => mix().with(exstensibleStoreMixin, PluralSingular, SubjectMixin);
 
-const can_have_results = () => mix().with(staticStoreMixin, PluralSingular, SubjectMixin, CanHaveResultsMixin);
 
 const gov_name = ( 
   window.lang === 'en' ? 
@@ -71,7 +71,7 @@ Subject.Ministry = class Ministry extends static_subject_store(){
   }
 };
 
-Subject.Dept = class Dept extends can_have_results(){
+Subject.Dept = class Dept extends static_subject_store_with_API_data(){
   static lookup(org_id){
     return super.lookup(
       _.isNaN(+org_id) ?
@@ -367,7 +367,7 @@ Subject.Tag = class Tag extends extensible_subject_store(){
   }
 };
 
-Subject.CRSO = class CRSO extends can_have_results(){
+Subject.CRSO = class CRSO extends static_subject_store_with_API_data(){
   static get singular(){ return trivial_text_maker("");}
   static get plural(){ return trivial_text_maker(""); }
   static get type_name() { return 'crso'; }
@@ -424,7 +424,7 @@ Subject.CRSO = class CRSO extends can_have_results(){
   }
 };
 
-Subject.Program = class Program extends can_have_results(){
+Subject.Program = class Program extends static_subject_store_with_API_data(){
   static get type_name(){ return 'program'; }
   static get singular(){ return trivial_text_maker("program") }
   static get plural(){ return trivial_text_maker("programs") }

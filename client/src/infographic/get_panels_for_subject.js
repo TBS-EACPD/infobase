@@ -130,7 +130,7 @@ const get_dept_panels = subject => ({
     "dp_rev_split",
   ],
   people: _.includes(subject.tables, 'orgEmployeeType') && get_people_panels(subject),
-  results: subject.has_results && [
+  results: subject.has_data('results_data') && [
     "results_intro",
     'late_dps_warning',
     "drr_summary",
@@ -164,7 +164,7 @@ const get_program_panels = subject => ({
     'sub_program_resources',
     "dp_rev_split",
   ],
-  results: !subject.is_internal_service && subject.has_results && [
+  results: !subject.is_internal_service && subject.has_data('results_data') && [
     "results_intro",
     'late_dps_warning',
     "drr_summary",
@@ -192,7 +192,7 @@ const get_crso_panels = subject => ({
     'crso_by_prog_fte',
     "dp_rev_split",
   ],
-  results: !subject.is_internal_service && subject.has_results && [
+  results: !subject.is_internal_service && subject.has_data('results_data') && [
     "results_intro",
     'late_dps_warning',
     "explore_results",

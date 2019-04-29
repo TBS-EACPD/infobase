@@ -81,21 +81,33 @@ export const SubjectMixin = superclass => {
   };
 };
 
-export const CanHaveResultsMixin = superclass => {
+export const CanHaveAPIData = superclass => {
   const baseclass = superclass || BaseClass;
   return class SubjectMixin extends baseclass{
     constructor(){ 
       super(); 
-      this._has_results = null;
+      this._has_data = {
+        results_data: null,
+        budget_data: null,
+      };
+      this._API_data_types = _.keys(this._has_data);
     }
-    set_has_results(has_results){
-      this._has_results = has_results;
-    }
-    get has_results(){
-      if ( _.isNull(this._has_results) ){
-        throw '"Has results" status has yet to be loaded!';
+    set_has_data(data_type, has_data){
+      if ( _.includes(this._API_data_types, data_type) ){
+        this._has_data[data_type] = has_data;
       } else {
-        return this._has_results;
+        throw `"${data_type}" is not a valid API data type for "has data" checks`
+      }
+    }
+    has_data(data_type){
+      if ( _.includes(this._API_data_types, data_type) ){
+        if ( _.isNull(this._has_data[data_type]) ){
+          throw `"has data" status for data type "${data_type}" has yet to be loaded!`;
+        } else {
+          return this._has_data[data_type];
+        }
+      } else {
+        throw `"${data_type}" is not a valid API data type for "has data" checks`
       }
     }
   };

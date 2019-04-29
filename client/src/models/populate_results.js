@@ -29,12 +29,12 @@ export function subject_has_results(subject){
   const level = subject.level === "dept" ? "org" : subject.level;
 
   if ( !_.isUndefined(subject.is_internal_service) && subject.is_internal_service){
-    subject.set_has_results(false);
+    subject.set_has_data('results_data', false);
     return Promise.resolve();
   }
 
   if( !_.isUndefined(_subject_has_results[id]) ){
-    subject.set_has_results(_subject_has_results[id]); // if _subject_has_results was populated by sie effect, subject may not have had value set yet 
+    subject.set_has_data('results_data', _subject_has_results[id]); // if _subject_has_results was populated by sie effect, subject may not have had value set yet 
     return Promise.resolve();
   } else {
     const time_at_request = Date.now();
@@ -63,7 +63,7 @@ export function subject_has_results(subject){
         }
 
         _subject_has_results[id] = has_results;
-        subject.set_has_results(has_results);
+        subject.set_has_data('results_data', has_results);
 
         return Promise.resolve();
       })
