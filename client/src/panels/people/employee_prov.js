@@ -36,9 +36,7 @@ const format_prov_data = (prov, years_by_province) => {
     prov_data = _.map(years_by_province,(data,ix) => ({year: run_template(people_years[ix]), value: data[prov]}));
   }
 
-  const ticks = _.map(people_years, y => `${run_template(y)}`);
-
-  return {prov_data, ticks};
+  return prov_data;
 }
 
 class CanadaGraphBarLegend extends React.Component {
@@ -56,6 +54,7 @@ class CanadaGraphBarLegend extends React.Component {
     }
 
     const formatted_data = format_prov_data(prov,years_by_province);
+    const formatter = formats["big_int_real_raw"];
 
     return (
       <Fragment>
@@ -64,11 +63,11 @@ class CanadaGraphBarLegend extends React.Component {
         </p>
         <div style={{ height: "200px", width: "100%" }}>
           <NivoResponsiveHBar
-            data = {formatted_data.prov_data}
+            data = {formatted_data}
             indexBy = "year"
             keys = {["value"]}
             enableLabel = {true}
-            label={d => `${d.data.year}: ${d.value}`}
+            label={d => `${d.data.year}: ${formatter(d.value)}`}
             colorBy ={d => graph_color(0.5)}
             margin = {{
               top: 50,
@@ -197,7 +196,7 @@ class ProvPanel extends React.Component {
                     items={legend_items}
                   />
                 </div>
-                <div className="legend-container" style={{ maxHeight: "400px", width: "100%" }}>
+                <div className="legend-container" style={{ maxHeight: "400px", width: "100%", overflowY: "hidden"}}>
                   <CanadaGraphBarLegend
                     prov={this.state.prov}
                     years_by_province={graph_args.years_by_province}
