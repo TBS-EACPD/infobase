@@ -230,10 +230,12 @@ export class NivoResponsiveHBar extends React.Component{
       colors,
       bttm_axis,
       left_axis,
+      top_axis,
       isInteractive,
       indexBy,
       remove_bottom_axis,
       remove_left_axis,
+      add_top_axis,
       enableLabel,
       is_money,
       legends,
@@ -247,8 +249,9 @@ export class NivoResponsiveHBar extends React.Component{
       enableGridX,
       groupMode,
       enableGridY,
+      padding,
+      label,
     } = this.props;
-
     return (
       //have to have an empty string in key to make sure
       //that negative bars will be displayed
@@ -263,6 +266,7 @@ export class NivoResponsiveHBar extends React.Component{
           theme, 
           indexBy, 
           enableLabel, 
+          label,
           legends,
           isInteractive,
         }}
@@ -271,6 +275,7 @@ export class NivoResponsiveHBar extends React.Component{
         labelFormat={_.isUndefined(label_format) ? null : label_format}
         tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
         axisBottom={remove_bottom_axis ? null : bttm_axis}
+        axisTop={add_top_axis ? top_axis : null}
         axisLeft={
           remove_left_axis ?
             null :
@@ -282,11 +287,11 @@ export class NivoResponsiveHBar extends React.Component{
               ...(left_axis || {}),
             }
         }
-        padding={0.3}
+        padding={padding || 0.3}
         borderColor="inherit:darker(1.6)"
-        labelTextColor="inherit:darker(1.6)"
         motionDamping={motion_damping || 15}
         motionStiffness={motion_stiffness || 95}
+        labelTextColor={"black"} // TODO: use infobase colour constant
       />
     );
   }
@@ -298,6 +303,7 @@ NivoResponsiveHBar.defaultProps = {
     tickSize: 7,
     tickPadding: 10,
   },
+  top_axis: null,
   theme: {
     axis: {
       ticks: {
@@ -311,6 +317,7 @@ NivoResponsiveHBar.defaultProps = {
   isInteractive: true,
   remove_bottom_axis: false,
   remove_left_axis: false,
+  add_top_axis: false,
   enableLabel: false,
   enableGridX: true,
   enableGridY: true,

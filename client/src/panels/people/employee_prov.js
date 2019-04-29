@@ -10,7 +10,9 @@ import {
   StdPanel,
   Col,
   declarative_charts,
+  NivoResponsiveHBar,
 } from "../shared"; 
+import { Fragment } from 'react';
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -20,137 +22,135 @@ const { GraphLegend, A11YTable } = declarative_charts;
 
 const graph_color = (alpha) => `rgba(31, 119, 180, ${alpha || 1})`;
 
-
-const prov_split_render = function(legend_area, graph_area, graph_args){
-
-  const { years_by_province, color_scale } = graph_args;
-
-  const formatter = formats["big_int_real_raw"];
+const format_prov_data = (prov, years_by_province) => {
+  var prov_data;
+  if(prov==="Canada"){
+    prov_data = _.map(years_by_province,(data,ix) => ({
+      year: run_template(people_years[ix]),
+      value: _.chain(data)
+        .values()
+        .sum()
+        .value(),
+    }));
+  } else {
+    prov_data = _.map(years_by_province,(data,ix) => ({year: run_template(people_years[ix]), value: data[prov]}));
+  }
 
   const ticks = _.map(people_years, y => `${run_template(y)}`);
-  
-  const canada_graph = new charts_index.Canada(graph_area.node(), {
-    color: graph_color(1),
-    data: years_by_province,
-    ticks: ticks,
-    color_scale: color_scale,
-    formatter: formatter,
-  })
 
-  const historical_graph_container = d3.select( legend_area.node() ).append("div");
-  if ( !window.feature_detection.is_mobile() ){
-    // if it's not mobile, then the graph can go next to the map , under the legend
+  return {prov_data, ticks};
+}
 
-    // copy the class names and style properties of the legend to ensure the graph fits in nicely
-    const legend_container = legend_area.select(".legend-container");
-    historical_graph_container.node().className = legend_container.node().className;
-    historical_graph_container.node().style.cssText = legend_container.node().style.cssText;
-    
-    historical_graph_container.styles({ "margin-top": "10px" });
-  }
-
-  const province_graph_title = function(prov){
-    if (prov === 'on' || prov === 'qc'){
-      prov += "lessncr";
-    }
-    return `${text_maker("five_year_history")} ${prov === "Canada" ? prov : provinces[prov].text}`;
-  }
-
-  let active_prov;
-  const add_graph = function(prov){
-
-    var prov_data;
-    var container = historical_graph_container;
-
-    var no_data = false;
-    if (prov !== "Canada") {
-      prov_data = _.map(years_by_province, prov);
-      no_data = _.every(prov_data, _.isUndefined);
-    } else 
-    
-    if (prov === 'Canada' || no_data) {
-      prov = 'Canada';
-      prov_data = _.map(years_by_province, (year_data) => d3.sum( _.values(year_data) ) );
-    }
-
-    if (container.datum() === prov){
-      return;
-    } else {
-      container.datum(prov);
-    }
-    //empty out the group
-    container.selectAll("*").remove();
-    // add title
-    container.append("p")
-      .classed("mrgn-bttm-0 mrgn-tp-0 centerer", true)
-      .html( province_graph_title(prov) );
-    // add in the require div with relative positioning so the
-    // labels will line up with the graphics
-    container.append("div")
-      .styles({ 
-        "margin-bottom": "10px",
-        position: "relative",
-      });
-
-    if( window.feature_detection.is_mobile() ){ // create a bar graph
-      (new charts_index.Bar(
-        container.select("div").node(),
-        {
-          colors: ()=>"#1f77b4",
-          formatter: formatter,
-          series: {"": prov_data},
-          height: 200,
-          ticks: ticks,
-          margins: {top: 10, bottom: 10, left: 10, right: 10},
-        }
-      )).render();
-
-      container.selectAll("rect").styles({ "opacity": color_scale(_.last(prov_data)) }); 
-      container.selectAll(".x.axis .tick text").styles({ 'font-size': "10px" });
-    } else { //use hbar
-      (new charts_index.HBar(
-        container.select("div").node(),
-        {
-          x_scale: d3.scaleLinear(),
-          axisFormatter: formatter,
-          formatter: formatter,
-          tick_number: 5,
-          data: ticks.map((tick,i) => ({value: prov_data[i], name: tick}) ),
-        }
-      )).render();
-    }
-  };
-
-  canada_graph.dispatch.on('dataMouseEnter', prov => {
-    active_prov = true;
-    add_graph(prov);    
-  });
-  canada_graph.dispatch.on('dataMouseLeave', () => {
-    _.delay(() => {
-      if (!active_prov) {
-        add_graph("Canada");
-      }
-    }, 200);
-    active_prov = false;
-  });
-
-  canada_graph.render();
-  add_graph("Canada");
-};
-
-
-class ProvPanel extends React.Component {
+class CanadaGraphBarLegend extends React.Component {
   constructor(){
     super();
-    this.legend_area = React.createRef();
+  }
+  render() {
+    const { prov, years_by_province } = this.props;
+
+    const province_graph_title = function(prov){
+      if (prov === 'on' || prov === 'qc'){
+        prov += "lessncr";
+      }
+      return `${text_maker("five_year_history")} ${prov === "Canada" ? prov : provinces[prov].text}`;
+    }
+
+    const formatted_data = format_prov_data(prov,years_by_province);
+
+    return (
+      <Fragment>
+        <p className="mrgn-bttm-0 mrgn-tp-0 nav-header centerer">
+          {province_graph_title(prov)}
+        </p>
+        <div style={{ height: "200px", width: "100%" }}>
+          <NivoResponsiveHBar
+            data = {formatted_data.prov_data}
+            indexBy = "year"
+            keys = {["value"]}
+            enableLabel = {true}
+            label={d => `${d.data.year}: ${d.value}`}
+            colorBy ={d => graph_color(0.5)}
+            margin = {{
+              top: 50,
+              right: 20,
+              bottom: 20,
+              left: 20,
+            }}
+            padding = {0.1}
+            is_money = {false}
+            top_axis={{
+              "tickSize": 5,
+              "tickPadding": 5,
+              "tickRotation": -90,
+            }}
+            remove_bottom_axis={true}
+            remove_left_axis={true}
+            add_top_axis={true}
+            enableGridX={false}
+            enableGridY={false}
+          />
+        </div>
+      </Fragment>
+    );
+  }
+
+}
+
+
+class CanadaGraph extends React.Component {
+  constructor(){
+    super();
     this.graph_area = React.createRef();
   }
-  componentDidMount(){
-    if (!window.is_a11y_mode){
-      const { graph_args } = this.props.render_args.calculations;
-      const legend_area = d3.select( ReactDOM.findDOMNode(this.legend_area.current) );
-      const graph_area = d3.select( ReactDOM.findDOMNode(this.graph_area.current) );
-      prov_split_render(legend_area, graph_area, graph_args);
+  render() {
+    return <div ref={this.graph_area}/>;
+  }
+  componentDidMount() {
+    this._render();
+  }
+  componentDidUpdate() {
+    this._render();
+  }
+  _render() {
+    const { graph_args, prov_callback } = this.props;
+    const { years_by_province, color_scale } = graph_args;
+
+    const graph_area_sel = d3.select( ReactDOM.findDOMNode(this.graph_area.current) );
+
+    const formatter = formats["big_int_real_raw"];
+    const ticks = _.map(people_years, y => `${run_template(y)}`);
+    
+    const canada_graph = new charts_index.Canada(graph_area_sel.node(), {
+      color: graph_color(1),
+      data: years_by_province,
+      ticks: ticks,
+      color_scale: color_scale,
+      formatter: formatter,
+    })
+
+    let active_prov = false;
+    canada_graph.dispatch.on('dataMouseEnter', prov => {
+      active_prov = true;
+      prov_callback(prov);    
+    });
+    canada_graph.dispatch.on('dataMouseLeave', () => {
+      _.delay(() => {
+        if (!active_prov) {
+          prov_callback("Canada");
+        }
+      }, 200);
+      active_prov = false;
+    });
+
+    canada_graph.render();
+  }
+}
+
+class ProvPanel extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      prov: "Canada",
     }
   }
   render(){
@@ -164,6 +164,19 @@ class ProvPanel extends React.Component {
     const { info, graph_args } = calculations;
     const { years_by_province, color_scale } = graph_args;
 
+    const prov_callback = (new_prov) => {
+      if(new_prov !== this.state.prov){
+        this.setState({prov: new_prov});
+      }
+    }
+
+    const legend_items = _.map( color_scale.ticks(5).reverse(), (tick) => ({
+      label: `${formats["big_int_real_raw"](tick)}+`,
+      active: true,
+      id: tick,
+      color: graph_color( color_scale(tick) ),
+    }))
+
     return (
       <StdPanel
         title={text_maker("employee_prov_title")}
@@ -175,30 +188,28 @@ class ProvPanel extends React.Component {
         { !window.is_a11y_mode &&
           <Col size={12} isGraph>
             <div className="frow no-container">
-              <div className="fcol-md-3 fcol-xs-12" ref={this.legend_area}>
-                <div
-                  className="legend-container"
-                  style={{ maxHeight: "400px", width: "100%" }}
-                >
+              <div className="fcol-md-3">
+                <div className="legend-container" style={{ maxHeight: "400px", width: "100%" }}>
                   <p className="mrgn-bttm-0 mrgn-tp-0 nav-header centerer">
                     {text_maker("legend")}
                   </p>
                   <GraphLegend
-                    items={
-                      _.map( 
-                        color_scale.ticks(5).reverse(),
-                        (tick) => ({
-                          label: `${formats["big_int_real_raw"](tick)}+`,
-                          active: true,
-                          id: tick,
-                          color: graph_color( color_scale(tick) ),
-                        })
-                      )
-                    }
+                    items={legend_items}
+                  />
+                </div>
+                <div className="legend-container" style={{ maxHeight: "400px", width: "100%" }}>
+                  <CanadaGraphBarLegend
+                    prov={this.state.prov}
+                    years_by_province={graph_args.years_by_province}
                   />
                 </div>
               </div>
-              <div className="fcol-md-9 fcol-xs-12" style={{position: "relative"}} ref={this.graph_area}/>
+              <div className="fcol-md-9" style={{position: "relative"}}>
+                <CanadaGraph
+                  graph_args={graph_args}
+                  prov_callback={prov_callback}
+                />
+              </div>
             </div>
           </Col>
         }
