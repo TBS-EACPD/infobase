@@ -292,6 +292,7 @@ export class NivoResponsiveHBar extends React.Component{
         motionDamping={motion_damping || 15}
         motionStiffness={motion_stiffness || 95}
         labelTextColor={"black"} // TODO: use infobase colour constant
+        labelSkipWidth={10}
       />
     );
   }
