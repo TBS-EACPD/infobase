@@ -44,7 +44,10 @@ const first_column_options = [
 const first_column_ids = _.map( first_column_options, option => option.id );
 
 const budget_year_options = budget_years.map(year => `budget-${year}`);
-
+const get_year_value_from_budget_year = (budget_year) => _.chain(budget_year_options)
+  .indexOf(budget_year)
+  .thru( year_index => budget_years[year_index] )
+  .value();
 
 const validate_route = (props) => {
   const {
@@ -121,12 +124,7 @@ export default class BudgetMeasuresRoute extends React.Component {
     if ( loading && !_.includes(loaded_years, budget_year) ){
       ensure_loaded({
         budget_measures: true,
-        budget_years: [
-          _.chain(budget_year_options)
-            .indexOf(budget_year)
-            .thru( year_index => budget_years[year_index] )
-            .value(),
-        ],
+        budget_years: [ get_year_value_from_budget_year(budget_year) ],
       }).then( () => {
         this.setState({
           loading: false,
@@ -164,10 +162,6 @@ export default class BudgetMeasuresRoute extends React.Component {
       },
     } = this.props;
 
-    if ( !loading && _.isUndefined(this.summary_stats) ){
-      this.summary_stats = calculate_budget_stats();
-    }
-
     const inner_content = (
       <Fragment>
         { loading && <SpinnerWrapper ref="spinner" config_name={"route"} /> }
@@ -182,7 +176,7 @@ export default class BudgetMeasuresRoute extends React.Component {
               <TextMaker text_key="budget_route_top_text" />
               <Details
                 summary_content = { <TextMaker text_key="budget_stats_title" /> }
-                content = { <TextMaker text_key="budget_summary_stats" args={this.summary_stats} /> }
+                content = { <TextMaker text_key="budget_summary_stats" args={calculate_budget_stats( get_year_value_from_budget_year(budget_year) )} /> }
               />
             </div>
             { !window.is_a11y_mode &&

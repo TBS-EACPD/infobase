@@ -5,8 +5,12 @@ const { BudgetMeasure } = Subject;
 
 const { budget_values } = businessConstants;
 
-const calculate_budget_stats = () => {
-  const all_budget_measures = BudgetMeasure.get_all();
+const calculate_budget_stats = (year) => {
+  const all_budget_measures = _.filter(
+    BudgetMeasure.get_all(),
+    measure => measure.year === year
+  );
+
   const reduce_by_budget_value = (data) => _.chain(budget_values)
     .keys()
     .map( key => [
@@ -15,19 +19,22 @@ const calculate_budget_stats = () => {
     ])
     .fromPairs()
     .value()
-  const rolled_up_data_rows = _.map(all_budget_measures, budget_measure => reduce_by_budget_value(budget_measure.data) );
+  const rolled_up_data_rows = _.map(
+    all_budget_measures,
+    budget_measure => reduce_by_budget_value(budget_measure.data)
+  );
 
   const total_allocations_by_programs_and_internal_services = _.chain(all_budget_measures)
     .flatMap( budget_measure => _.map(
       budget_measure.data, 
       data_row => _.map(
         data_row.program_allocations,
-        (program_allocation, program_id) => [program_id, program_allocation] 
+        ({subject_id, allocated}) => [subject_id, allocated] 
       )
     ))
     .filter( program_allocation_pairs => !_.isEmpty(program_allocation_pairs) )
     .flatten()
-    .groupBy( program_allocation_pairs => program_allocation_pairs[0].includes("ISS00") ?
+    .groupBy( program_allocation_pairs => /ISS/.test(program_allocation_pairs[0]) ?
       "internal_services" :
       "programs"
     )
