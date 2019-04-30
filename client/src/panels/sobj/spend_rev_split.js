@@ -80,7 +80,7 @@ function render({calculations, footnotes, sources}) {
           enableLabel = {true}
           isInteractive = {false}
           label_format = { d=><tspan y={-4}> {formats.compact1(d, {raw: true})} </tspan>}
-          colorBy = {d => d.data[d.id] < 0 ? "#C92525": "#335075"}
+          colorBy = {d => d.data[d.id] < 0 ? window.infobase_color_constants.highlightColor : window.infobase_color_constants.secondaryColor}
           enableGridX={false}
         />
       </div>
