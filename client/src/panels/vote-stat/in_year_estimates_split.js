@@ -1,4 +1,4 @@
-import { text_maker, TM } from './vote-stat-text-prodiver.js';
+import { text_maker, TM } from './vote-stat-text-provider.js';
 import {
   PanelGraph,
   util_components,
@@ -84,7 +84,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
           isInteractive = {false}
           enableLabel = {true}
           indexBy = "label"
-          colorBy = {d => d.data[d.id] < 0 ? "#C92525": "#335075"}
+          colorBy = {d => d.data[d.id] < 0 ? window.infobase_color_constants.highlightColor : window.infobase_color_constants.secondaryColor}
           margin = {{            
             top: 50,
             right: 40,
@@ -104,7 +104,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
               ticks: {
                 text: { 
                   fontSize: 12,
-                  fill: '#000',
+                  fill: window.infobase_color_constants.textColor,
                   fontWeight: '550',
                 },
               },
