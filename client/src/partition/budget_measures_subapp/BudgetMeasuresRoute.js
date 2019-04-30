@@ -196,6 +196,7 @@ export default class BudgetMeasuresRoute extends React.Component {
                   selected_value = { selected_value }
                   first_column = { first_column }
                   budget_year = { budget_year }
+                  year_value = { get_year_value_from_budget_year(budget_year) }
                   filtered_chapter_keys = { filtered_chapter_keys }
                   filter_string = { filter_string }
                 />
