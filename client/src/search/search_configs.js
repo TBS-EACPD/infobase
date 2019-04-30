@@ -145,21 +145,11 @@ const glossary = {
   menu_content_function: (glossaryItem, search) => (
     <Fragment>
       <div 
-        style={{
-          fontSize: "14px",
-          lineHeight: "1.8em",
-          padding: "5px 0px",
-        }}
+        className="search__glossary-title"
         dangerouslySetInnerHTML={{ __html: highlight_search_match(search, glossaryItem.title) }}
       /> 
       <div 
-        style={{
-          fontSize: "12px",
-          lineHeight: "1",
-          padding: "0px 20px 20px 20px",
-          borderBottom: "1px solid #CCC",
-          color: "#333",
-        }}
+        className="search__glossary-text"
         dangerouslySetInnerHTML={{ __html: highlight_search_match(search, glossaryItem.definition) }}
       />
     </Fragment>
