@@ -253,7 +253,7 @@ export default async function({models}){
       const flatten_program_allocations_by_measure_and_org_id = (program_allocations_by_measure_and_org_id) => (
         flatten_documents_by_measure_and_org_id(
           program_allocations_by_measure_and_org_id,
-          (measure_id, org_id, document, key) => `${measure_id}-${org_id}-${key}`,
+          (measure_id, org_id, document, key) => `${budget_year}-${measure_id}-${org_id}-${key}`,
           (measure_id, org_id, document, key) => ({
             subject_id: key,
             measure_id,
@@ -288,7 +288,7 @@ export default async function({models}){
       const flatten_submeasures_by_measure_and_org_id = (submeasures_by_measure_and_org_id) => (
         flatten_documents_by_measure_and_org_id(
           submeasures_by_measure_and_org_id,
-          (measure_id, org_id, document, key) => `${measure_id}-${org_id}-${document.submeasure_id}`,
+          (measure_id, org_id, document, key) => `${budget_year}-${measure_id}-${org_id}-${document.submeasure_id}`,
           (measure_id, org_id, document, key) => (
             {
               ...document,
@@ -356,7 +356,7 @@ export default async function({models}){
       const flatten_data_by_measure_and_org_id = (data_by_measure_and_org_id) => (
         flatten_documents_by_measure_and_org_id(
           data_by_measure_and_org_id,
-          (measure_id, org_id, document, key) => `${measure_id}-${org_id}`,
+          (measure_id, org_id, document, key) => `${budget_year}-${measure_id}-${org_id}`,
           (measure_id, org_id, document, key) => (
             {
               ..._.omit(

@@ -249,11 +249,14 @@ const update_with_search = (diagram, props) => {
 }
 
 const render_diagram = (diagram, props, data, data_wrapper_node_rules, dont_fade) => {
-  const displayed_measure_count = _.filter(BudgetMeasure.get_all(), measure => {
-    const measure_is_filtered_out_for_year = props.year_value === measure.year;
-    const measure_is_filtered_out_for_value = props.selected_value !== "funding" && !_.some(measure.data, (row) => row[props.selected_value] !== 0);
-    return !measure_is_filtered_out_for_year && !measure_is_filtered_out_for_value;
-  }).length;
+  const displayed_measure_count = _.filter(
+    BudgetMeasure.get_all(), 
+    measure => {
+      const measure_is_filtered_out_for_year = props.year_value !== measure.year;
+      const measure_is_filtered_out_for_value = props.selected_value !== "funding" && !_.some(measure.data, (row) => row[props.selected_value] !== 0);
+      return !measure_is_filtered_out_for_year && !measure_is_filtered_out_for_value;
+    }
+  ).length;
 
   diagram.configure_then_render({
     data,

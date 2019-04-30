@@ -491,7 +491,6 @@ Subject.Minister = class Minister extends static_subject_store(){
   }
 };
 
-const get_id_for_measure = (measure) => `${measure.year}_${measure.measure_id}`;
 Subject.InstForm = class InstForm extends static_subject_store(){
   static grandparent_forms(){
     return _.filter(
@@ -538,6 +537,7 @@ Subject.InstForm = class InstForm extends static_subject_store(){
   }
 }
 
+const get_id_for_measure = (measure) => `${measure.year}_${measure.measure_id}`;
 Subject.BudgetMeasure = class BudgetMeasure extends static_subject_store(){
   static get budget_years(){ return ["2018"]; } //, "2019"]; }
   static get type_name(){ return 'budget_measure'; }
@@ -572,6 +572,7 @@ Subject.BudgetMeasure = class BudgetMeasure extends static_subject_store(){
       }
     }
   }
+  static lookup_measure(year, measure_id){ return this.lookup(`${year}_${measure_id}`); }
 
   static create_and_register(measure){
     const inst = new BudgetMeasure(measure);

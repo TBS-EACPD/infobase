@@ -30,18 +30,15 @@ const get_total_budget_measure_funds = (year_value, selected_value) => {
     .value();
 };
 
-const post_traversal_modifications = (node, selected_value) => {
+const post_traversal_modifications = (node, year_value, selected_value) => {
   node.value_type = selected_value;
 
   if ( _.isNaN(node.value) && node.children && node.children.length > 0 ){
     node.value = roll_up_children_values(node);
   }
 
-  if ( 
-    !_.includes(["funding", "remaining"], selected_value) && 
-    (node.depth > 1 || node.data.id === "net_adjust") 
-  ){
-    node.submeasures = get_node_submeasures(node, selected_value);
+  if (node.depth > 1 || node.data.id === "net_adjust"){
+    node.submeasures = get_node_submeasures(node, year_value, selected_value);
   }
 
   post_traversal_children_filter(node);
@@ -52,7 +49,7 @@ const roll_up_children_values = (node) => {
   return _.reduce(node.children, (sum, child_node) => sum + child_node.value, 0);
 };
 
-const get_node_submeasures = (node, selected_value) => {
+const get_node_submeasures = (node, year_value, selected_value) => {
   let org_id, measure_id, program_or_crso_id;
 
   if (node.data.type === "program_allocation"){
@@ -61,15 +58,15 @@ const get_node_submeasures = (node, selected_value) => {
       node.parent.data.id :
       node.parent.parent.data.id;
     measure_id = node.parent.data.type === "budget_measure" ? 
-      node.parent.data.id :
-      node.parent.parent.data.id;
+      node.parent.data.measure_id :
+      node.parent.parent.data.measure_id;
   } else {
     if (node.data.type === "budget_measure"){
       org_id = node.parent.data.id;
-      measure_id = node.data.id;
+      measure_id = node.data.measure_id;
     } else if (node.data.type === "dept"){
       org_id = node.data.id;
-      measure_id = node.parent.data.id;
+      measure_id = node.parent.data.measure_id;
     } else if (node.data.id === "net_adjust") {
       org_id = "net_adjust";
       measure_id = "net_adjust";
@@ -78,7 +75,7 @@ const get_node_submeasures = (node, selected_value) => {
     }
   }
   
-  const node_submeasures = _.chain( BudgetMeasure.lookup(measure_id).submeasures )
+  const node_submeasures = _.chain( BudgetMeasure.lookup_measure(year_value, measure_id).submeasures )
     .filter(submeasure => org_id === "net_adjust" || submeasure.data.org_id !== org_id)
     .map( submeasure => ({
       ...submeasure, 
@@ -118,16 +115,16 @@ const post_traversal_search_string_set = (node) => {
   }
 }
 
-const make_program_allocation_nodes = (measure_id, org_id) => {
-  const program_allocations = _.chain( BudgetMeasure.lookup(measure_id).data )
+const make_program_allocation_nodes = (year_value, measure_id, org_id) => {
+  const program_allocations = _.chain( BudgetMeasure.lookup_measure(year_value, measure_id).data )
     .filter( data_row => +data_row.org_id === org_id && !_.isEmpty(data_row.program_allocations) )
     .flatMap(data_row => data_row.program_allocations)
-    .value()[0];
-  
+    .value();
+
   if ( _.isEmpty(program_allocations) ){
     return null;
   } else {
-    const program_allocation_nodes = _.map(program_allocations, (allocation_value, subject_id) => {
+    const program_allocation_nodes = _.map(program_allocations, ({subject_id, allocated}) => {
       const program = Program.lookup(subject_id);
       const crso = CRSO.lookup(subject_id);
   
@@ -135,7 +132,7 @@ const make_program_allocation_nodes = (measure_id, org_id) => {
 
       const type_and_value = {
         type: "program_allocation",
-        value: allocation_value,
+        value: allocated,
       };
   
       if ( !_.isUndefined(program_or_crso) ){
@@ -179,10 +176,8 @@ const budget_measure_first_hierarchy_factory = (year_value, selected_value) => {
 
             return {
               ...budgetMeasure, 
-              type: budgetMeasure.id === "net_adjust" ? "net_adjust" : "budget_measure",
-              description: has_no_description ?
-                    text_maker("not_available") :
-                    budgetMeasure.description,
+              type: /net_adjust/.test(budgetMeasure.id) ? "net_adjust" : "budget_measure",
+              description: has_no_description ? text_maker("not_available") : budgetMeasure.description,
               notes: !has_no_description ? text_maker("budget_measure_description_values_clarification") : false,
               chapter_key: budgetMeasure.chapter_key,
               value: _.reduce(budgetMeasure.data, (sum, data_row) => sum + (data_row[selected_value]), 0),
@@ -201,7 +196,7 @@ const budget_measure_first_hierarchy_factory = (year_value, selected_value) => {
                 type: "dept",
                 id: 9999,
                 value: data_row[selected_value],
-                parent_measure_id: node.id,
+                parent_measure_id: node.measure_id,
               };
             } else {
               const dept = Dept.lookup(data_row.org_id);
@@ -210,7 +205,7 @@ const budget_measure_first_hierarchy_factory = (year_value, selected_value) => {
                 type: "dept",
                 description: dept.mandate,
                 value: data_row[selected_value],
-                parent_measure_id: node.id,
+                parent_measure_id: node.measure_id,
               };
             }
           })
@@ -219,10 +214,10 @@ const budget_measure_first_hierarchy_factory = (year_value, selected_value) => {
       } else if (selected_value === "allocated" && node.type === "dept"){
         const measure_id = node.parent_measure_id;
         const org_id = node.id;
-        return make_program_allocation_nodes(measure_id, org_id);
+        return make_program_allocation_nodes(year_value, measure_id, org_id);
       }
     })
-    .eachAfter( node => post_traversal_modifications(node, selected_value) )
+    .eachAfter( node => post_traversal_modifications(node, year_value, selected_value) )
     .sort(absolute_value_sort_net_adjust_biased);
 }
 
@@ -252,7 +247,7 @@ const dept_first_hierarchy_factory = (year_value, selected_value) => {
               data_rows,
             };
           } else if (org_id === "net_adjust"){
-            const net_adjust_measure = BudgetMeasure.lookup("net_adjust");
+            const net_adjust_measure = BudgetMeasure.lookup_measure(year_value, `net_adjust`);
 
             return {
               ...net_adjust_measure,
@@ -274,7 +269,7 @@ const dept_first_hierarchy_factory = (year_value, selected_value) => {
         return deptNodes;
       } else if (node.type === "dept"){
         const budgetMeasureNodes = _.map(node.data_rows, data_row => {
-          const budgetMeasure = BudgetMeasure.lookup(data_row.measure_id);
+          const budgetMeasure = BudgetMeasure.lookup_measure(year_value, data_row.measure_id);
 
           const has_no_description = _.isEmpty(budgetMeasure.description);
 
@@ -292,12 +287,12 @@ const dept_first_hierarchy_factory = (year_value, selected_value) => {
         });
         return budgetMeasureNodes;
       } else if (selected_value === "allocated" && node.type === "budget_measure"){
-        const measure_id = node.id;
+        const measure_id = node.measure_id;
         const org_id = node.parent_org_id;
-        return make_program_allocation_nodes(measure_id, org_id);
+        return make_program_allocation_nodes(year_value, measure_id, org_id);
       }
     })
-    .eachAfter(node => post_traversal_modifications(node, selected_value) )
+    .eachAfter(node => post_traversal_modifications(node, year_value, selected_value) )
     .sort(absolute_value_sort_net_adjust_biased);
 }
 
@@ -312,14 +307,14 @@ const budget_overview_hierarchy_factory = (year_value) => {
     node => {
       if (node.id === "root"){
         const measure_funding_nodes = _.chain( BudgetMeasure.get_all() )
-          .filter( budgetMeasure => budgetMeasure === year_value )
+          .filter( budgetMeasure => budgetMeasure.year === year_value )
           .map( budgetMeasure => {
             
             const has_no_description = _.isEmpty(budgetMeasure.description);
 
             return {
               ...budgetMeasure,
-              type: budgetMeasure.id === "net_adjust" ? "net_adjust" : "budget_measure",
+              type: /net_adjust/.test(budgetMeasure.id) ? "net_adjust" : "budget_measure",
               value_type: "funding",
               description: has_no_description ?
                     text_maker("not_available") :
@@ -345,7 +340,7 @@ const budget_overview_hierarchy_factory = (year_value) => {
                 value_type: "allocated",
                 id: 9999,
                 value: data_row.allocated,
-                parent_measure_id: node.id,
+                parent_measure_id: node.measure_id,
               };
             } else {
               const dept = Dept.lookup(data_row.org_id);
@@ -355,7 +350,7 @@ const budget_overview_hierarchy_factory = (year_value) => {
                 value_type: "allocated",
                 description: dept.mandate,
                 value: data_row.allocated,
-                parent_measure_id: node.id,
+                parent_measure_id: node.measure_id,
               };
             }
           })
@@ -369,11 +364,11 @@ const budget_overview_hierarchy_factory = (year_value) => {
           name: budget_values.withheld.text,
           description: GlossaryEntry.lookup("BIV_WITH").definition,
           value: _.reduce(
-            BudgetMeasure.lookup(node.id).data,
+            BudgetMeasure.lookup_measure(year_value, node.measure_id).data,
             (memo, data_row) => memo + data_row.withheld,
             0
           ),
-          parent_measure_id: node.id,
+          parent_measure_id: node.measure_id,
         };
 
         const measure_remaining_node = {
@@ -383,11 +378,11 @@ const budget_overview_hierarchy_factory = (year_value) => {
           name: budget_values.remaining.text,
           description: GlossaryEntry.lookup("BIV_REMA").definition,
           value: _.reduce(
-            BudgetMeasure.lookup(node.id).data,
+            BudgetMeasure.lookup_measure(year_value, node.measure_id).data,
             (memo, data_row) => memo + data_row.remaining,
             0
           ),
-          parent_measure_id: node.id,
+          parent_measure_id: node.measure_id,
         };
 
         if (measure_remaining_node.value !== node.value){
@@ -406,7 +401,7 @@ const budget_overview_hierarchy_factory = (year_value) => {
         const measure_id = node.parent_measure_id;
         const org_id = node.id;
         return _.sortBy(
-          make_program_allocation_nodes(measure_id, org_id),
+          make_program_allocation_nodes(year_value, measure_id, org_id),
           node => -Math.abs(node.value),
         );
       }
@@ -418,7 +413,7 @@ const budget_overview_hierarchy_factory = (year_value) => {
         node.value_type = node.data.value_type;
       }
       if (node.data.type === "dept" || node.data.type === "program_allocation"){
-        node.submeasures = get_node_submeasures(node, "allocated");
+        node.submeasures = get_node_submeasures(node, year_value, "allocated");
       }
       post_traversal_children_filter(node);
       post_traversal_search_string_set(node);
