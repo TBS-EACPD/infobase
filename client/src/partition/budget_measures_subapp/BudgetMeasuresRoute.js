@@ -120,7 +120,7 @@ export default class BudgetMeasuresRoute extends React.Component {
       loaded_years,
     } = this.state;
 
-    if ( loading && !_.includes(loaded_years, budget_year) ){
+    if ( loading && !_.isUndefined(budget_year) && !_.includes(loaded_years, budget_year) ){
       ensure_loaded({
         budget_measures: true,
         budget_years: [ get_year_value_from_budget_year(budget_year) ],
