@@ -22,9 +22,9 @@ const absolute_value_sort_net_adjust_biased = (a,b) => {
   }
 };
 
-const get_total_budget_measure_funds = (year_value, selected_value, filtered_chapter_keys) => {
+const get_total_budget_measure_funds = (year_value, selected_value) => {
   return _.chain( BudgetMeasure.get_all() )
-    .filter( budgetMeasure => budgetMeasure.year === year_value && _.indexOf(filtered_chapter_keys, budgetMeasure.chapter_key) === -1 )
+    .filter( budgetMeasure => budgetMeasure.year === year_value )
     .flatMap( budgetMeasure => budgetMeasure.data )
     .reduce( (sum, data_row) => sum + (data_row[selected_value]), 0 )
     .value();
@@ -162,23 +162,17 @@ const make_program_allocation_nodes = (measure_id, org_id) => {
 }
 
 
-const budget_measure_first_hierarchy_factory = (year_value, selected_value, filtered_chapter_keys) => {
+const budget_measure_first_hierarchy_factory = (year_value, selected_value) => {
   return d3.hierarchy(
     {
       id: "root",
       type: "root", 
-      value: get_total_budget_measure_funds(year_value, selected_value, filtered_chapter_keys),
+      value: get_total_budget_measure_funds(year_value, selected_value),
     },
     node => {
       if (node.id === "root"){
         const budgetMeasureNodes = _.chain( BudgetMeasure.get_all() )
-          .filter( budgetMeasure => budgetMeasure.year === year_value &&
-            (
-              _.isUndefined(filtered_chapter_keys) ||
-              filtered_chapter_keys.length === 0 ||
-              _.indexOf(filtered_chapter_keys, budgetMeasure.chapter_key) === -1
-            )
-          )
+          .filter( budgetMeasure => budgetMeasure.year === year_value )
           .map( budgetMeasure => {
             
             const has_no_description = _.isEmpty(budgetMeasure.description);
@@ -233,15 +227,9 @@ const budget_measure_first_hierarchy_factory = (year_value, selected_value, filt
 }
 
 
-const dept_first_hierarchy_factory = (year_value, selected_value, filtered_chapter_keys) => {
+const dept_first_hierarchy_factory = (year_value, selected_value) => {
   const filtered_budget_measure_funds_by_org_id = _.chain( BudgetMeasure.get_all() )
-    .filter( budgetMeasure => budgetMeasure.year === year_value &&
-      (
-        _.isUndefined(filtered_chapter_keys) || 
-        filtered_chapter_keys.length === 0 ||
-        _.indexOf(filtered_chapter_keys, budgetMeasure.chapter_key) === -1
-      )
-    )
+    .filter( budgetMeasure => budgetMeasure.year === year_value )
     .flatMap( budgetMeasure => budgetMeasure.data )
     .groupBy( data_row => data_row.org_id )
     .value();
@@ -250,7 +238,7 @@ const dept_first_hierarchy_factory = (year_value, selected_value, filtered_chapt
     {
       id: "root",
       type: "root", 
-      value: get_total_budget_measure_funds(year_value, selected_value, filtered_chapter_keys),
+      value: get_total_budget_measure_funds(year_value, selected_value),
     },
     node => {
       if (node.id === "root"){
@@ -314,23 +302,17 @@ const dept_first_hierarchy_factory = (year_value, selected_value, filtered_chapt
 }
 
 
-const budget_overview_hierarchy_factory = (year_value, filtered_chapter_keys) => {
+const budget_overview_hierarchy_factory = (year_value) => {
   return d3.hierarchy(
     {
       id: "root",
       type: "root", 
-      value: get_total_budget_measure_funds(year_value, "funding", filtered_chapter_keys),
+      value: get_total_budget_measure_funds(year_value, "funding"),
     },
     node => {
       if (node.id === "root"){
         const measure_funding_nodes = _.chain( BudgetMeasure.get_all() )
-          .filter( budgetMeasure => budgetMeasure === year_value &&
-            (
-              _.isUndefined(filtered_chapter_keys) ||
-              filtered_chapter_keys.length === 0 ||
-              _.indexOf(filtered_chapter_keys, budgetMeasure.chapter_key) === -1
-            )
-          )
+          .filter( budgetMeasure => budgetMeasure === year_value )
           .map( budgetMeasure => {
             
             const has_no_description = _.isEmpty(budgetMeasure.description);
@@ -443,14 +425,14 @@ const budget_overview_hierarchy_factory = (year_value, filtered_chapter_keys) =>
     });
 }
 
-export function budget_measures_hierarchy_factory(year_value, selected_value, first_column, filtered_chapter_keys){
+export function budget_measures_hierarchy_factory(year_value, selected_value, first_column){
   if (selected_value === "overview"){
-    return budget_overview_hierarchy_factory(year_value, filtered_chapter_keys);
+    return budget_overview_hierarchy_factory(year_value);
   } else {
     if (first_column === "budget-measure"){
-      return budget_measure_first_hierarchy_factory(year_value, selected_value, filtered_chapter_keys);
+      return budget_measure_first_hierarchy_factory(year_value, selected_value);
     } else if (first_column === "dept"){
-      return dept_first_hierarchy_factory(year_value, selected_value, filtered_chapter_keys);
+      return dept_first_hierarchy_factory(year_value, selected_value);
     }
   }
 }

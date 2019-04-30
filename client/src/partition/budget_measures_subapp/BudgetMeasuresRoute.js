@@ -85,7 +85,6 @@ export default class BudgetMeasuresRoute extends React.Component {
     this.state = {
       loading: true,
       loaded_years: [],
-      filtered_chapter_keys: [],
       filter_string: false,
     };
 
@@ -138,16 +137,12 @@ export default class BudgetMeasuresRoute extends React.Component {
   }
   componentDidMount(){ this.conditionallyLoadOnMountAndUpdate() }
   componentDidUpdate(){ this.conditionallyLoadOnMountAndUpdate() }
-  setFilteredChapterKeys(new_filtered_chapter_keys){
-    this.setState({filtered_chapter_keys: new_filtered_chapter_keys});
-  }
   setFilterString(new_filter_string){
     this.setState({filter_string: new_filter_string});
   }
   render(){
     const {
       loading,
-      filtered_chapter_keys,
       filter_string,
     } = this.state;
 
@@ -187,8 +182,6 @@ export default class BudgetMeasuresRoute extends React.Component {
                   history = { history }
                   budget_year = { budget_year }
                   group_by_items = { first_column_options }
-                  filtered_chapter_keys = { filtered_chapter_keys }
-                  setFilteredChapterKeysCallback = { this.setFilteredChapterKeys.bind(this) }
                   filter_string = { filter_string }
                   setFilterString = { this.setFilterString.bind(this) }
                 />
@@ -197,7 +190,6 @@ export default class BudgetMeasuresRoute extends React.Component {
                   first_column = { first_column }
                   budget_year = { budget_year }
                   year_value = { get_year_value_from_budget_year(budget_year) }
-                  filtered_chapter_keys = { filtered_chapter_keys }
                   filter_string = { filter_string }
                 />
                 <BudgetMeasuresFooter/>

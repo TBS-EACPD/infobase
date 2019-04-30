@@ -1,5 +1,4 @@
 import './BudgetMeasuresControls.scss';
-import { Fragment } from 'react';
 
 import { 
   text_maker,
@@ -9,17 +8,11 @@ import {
   LabeledBox,
   RadioButtons,
   DebouncedTextInput,
-  FilterTable,
 } from '../../util_components.js';
 
-import { Subject } from '../../models/subject';
 import { businessConstants } from '../../models/businessConstants.js';
 
-const { BudgetMeasure } = Subject;
-const {
-  budget_chapters,
-  budget_values,
-} = businessConstants;
+const { budget_values } = businessConstants;
 
 const budget_value_options = [
   {
@@ -43,36 +36,10 @@ export class BudgetMeasuresControls extends React.Component {
       budget_year,
       history,
       group_by_items,
-      filtered_chapter_keys,
-      setFilteredChapterKeysCallback,
       filter_string,
       setFilterString,
     } = this.props;
     
-    const all_chapter_keys = _.keys(budget_chapters);
-    const active_list = _.xor(all_chapter_keys, filtered_chapter_keys);
-
-    // For selected_values other than funding, only show counts for measures with data for that selected_value
-    const measure_counts_by_chapter_key = _.chain( BudgetMeasure.get_all() )
-      .filter( measure => selected_value === "funding" || _.some(measure.data, (row) => row[selected_value] !== 0) )
-      .countBy("chapter_key")
-      .value();
-
-    const update_filtered_chapter_keys = (chapter_key) => {
-
-      const new_filtered_chapter_keys = filtered_chapter_keys.length === 0 ?
-        _.xor(all_chapter_keys, [chapter_key]) :
-        _.xor(filtered_chapter_keys, [chapter_key]);
-
-      if (new_filtered_chapter_keys.length === all_chapter_keys.length){
-        // Don't let everything be filtered at once
-        // User likely wanted un-do filtering in this case, so just clear filtered items
-        setFilteredChapterKeysCallback([]);
-      } else {
-        setFilteredChapterKeysCallback(new_filtered_chapter_keys);
-      }
-    }
-
     const update_filter_string = (filter_string) => {
       if (filter_string === ""){
         setFilterString(false);
@@ -80,8 +47,6 @@ export class BudgetMeasuresControls extends React.Component {
         setFilterString(filter_string);
       }
     }
-
-    const we_want_chapter_filtering_right_now = false;
 
     return (
       <div className="budget-measures-partition-controls">
@@ -125,39 +90,6 @@ export class BudgetMeasuresControls extends React.Component {
           label = { <TextMaker text_key="budget_measure_filter_by_label" /> }
           content = {
             <div>
-              { we_want_chapter_filtering_right_now &&
-                <Fragment>
-                  <div className="centerer" style={{fontSize: "26px"}}>
-                    <TextMaker text_key="budget_chapters" />
-                  </div>
-                  <div className="chapter-key-table">
-                    <FilterTable
-                      items={
-                        _.chain(all_chapter_keys)
-                          .map( chapter_key => ({
-                            chapter_key, 
-                            count: measure_counts_by_chapter_key[chapter_key] || 0,
-                          }) )
-                          .map( ({chapter_key, count }) => ({
-                            key: chapter_key,
-                            active: _.includes(active_list, chapter_key),
-                            count: (
-                              <Fragment>
-                                {count}
-                                <br/>
-                                { text_maker("budget_measures_short") }
-                              </Fragment>
-                            ),
-                            text: budget_chapters[chapter_key].text,
-                          }) )
-                          .value()
-                      }
-                      item_component_order={ ["text", "count"] }
-                      click_callback={ update_filtered_chapter_keys }
-                    />
-                  </div>
-                </Fragment>
-              }
               <div className="centerer" style={{fontSize: "26px"}}>
                 <TextMaker text_key="budget_measure_filter_by_name_and_desc_label" />
               </div>
