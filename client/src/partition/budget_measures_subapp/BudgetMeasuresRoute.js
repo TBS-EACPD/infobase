@@ -195,7 +195,11 @@ export default class BudgetMeasuresRoute extends React.Component {
                 <BudgetMeasuresFooter/>
               </Fragment>
             }
-            { window.is_a11y_mode && <BudgetMeasuresA11yContent/> }
+            { window.is_a11y_mode && 
+              <BudgetMeasuresA11yContent 
+                year_value = { get_year_value_from_budget_year(budget_year) }
+              />
+            }
           </div>
         }
       </Fragment>
