@@ -280,7 +280,7 @@ class GranularView extends React.Component {
                 >
                   <span
                     tabIndex={0}
-                    style={ix===page_num ? {color: '#fcfcfc'} : null }
+                    style={ix===page_num ? {color: window.infobase_color_constants.textLightColor} : null }
                     disabled={page_num === ix}
                     role="button" 
                     onClick={ 

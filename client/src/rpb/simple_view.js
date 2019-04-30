@@ -303,7 +303,7 @@ class SimpleView extends React.Component {
     const colors = ( 
       shouldShowLegend ? 
       infobase_colors() : 
-      _.constant('#005172')
+      _.constant(window.infobase_color_constants.primaryColor)
     );
 
     const total = column.formula(flat_data);
@@ -322,9 +322,9 @@ class SimpleView extends React.Component {
       <div className="fcontainer">
         <div className="mrgn-tp-md frow">
           <div className="fcol-md-6 fcol-xs-12">
-            <div className="graph_total_and_col_expl well" >
+            <div className="graph_total_and_col_expl legend-container well">
               <dl> 
-                <dt style={{borderBottom: '1px solid #ccc'}}> 
+                <dt className="rpb-separator"> 
                   <div className="rpb-config-header">
                     <TextMaker text_key="showing_numbers_for_col" /> 
                   </div>
@@ -333,7 +333,7 @@ class SimpleView extends React.Component {
                   <strong> {column.fully_qualified_name} </strong> (<span dangerouslySetInnerHTML={{__html: table.column_description(column.nick)}} />)
                 </dd>
 
-                <dt style={{borderBottom: '1px solid #ccc'}}> 
+                <dt className="rpb-separator"> 
                   <div className="rpb-config-header">
                     <TextMaker text_key="graph_total" el="span" /> 
                   </div>

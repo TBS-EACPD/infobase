@@ -29,6 +29,11 @@
   }
 }
 
+.labeled-box-content.labeled-box-large {
+  padding: 10px 0px 0px 10px;
+  border: 2px solid $primaryColor;
+}
+
 /* hacky flexbox bug, even in chrome! */
 .labeled-box-content > div {
   width: 100%;

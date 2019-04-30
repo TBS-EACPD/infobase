@@ -248,7 +248,7 @@ class TaggedItemCloud extends React.Component {
                 <TextMaker text_key={cat} />
               </div>
             </div>
-            <div className="labeled-box-content" style={{'padding': '10px 0px 0px 10px', 'border': '2px solid #26374A'}}>
+            <div className="labeled-box-content labeled-box-large">
               <ul className="tag-cloud-main">
                 {_.map(tags_by_category[cat],({id, active}) => 
                   <li 

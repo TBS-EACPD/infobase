@@ -87,9 +87,7 @@ const ReportDetails = ({
           </tbody>
         </table>
       </section>
-      <div
-        style={{borderTop: "1px solid #ccc"}} 
-      />
+      <div className="rpb-separator" />
       {!_.isEmpty(footnotes) && 
       <div 
         className="mrgn-tp-lg"

@@ -329,6 +329,11 @@ li.list-group-item {
   background-color: lighten($tertiaryColor, 20%);
 }
 
+/* for default table header */
+.table>thead>tr>th {
+  border-bottom: 1px solid $separatorColor;
+}
+
 
 ol, ul {
   margin-bottom: 12px;

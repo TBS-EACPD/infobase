@@ -84,11 +84,9 @@ li.select-list-item {
 .graph_total_and_col_expl {
   overflow-x: hidden;
   overflow-y: auto;
-  border: 1px solid $tertiaryColor;
   background-color: $backgroundColor;
-  border-radius: 10px;
   height: 240px; 
-  padding: 25px; 
+  padding: 25px !important; 
 }
 
 
@@ -125,4 +123,8 @@ li.select-list-item {
 .row-opition-content-search > div > div > .input-lg {
   height: 38px;
   line-height: 0.9;
+}
+
+.rpb-separator {
+  border-bottom: 1px solid $separatorColor;
 }
