@@ -322,9 +322,9 @@
 "OICC",1,1,"Operating and Program","Fonctionnement et Programme",103361000,24987000,41022000,132419000,24366000,34088000
 "OICC",5,2,"Capital","Capital",766979000,46205000,61545000,548223000,3893000,5698000
 "OICC",10,3,"Grants & Contributions","Subventions et Contributions",3111504000,317281000,522035000,4282963000,171909000,251236000
-"OICC","S",999,"Gas Tax Fund","Fonds fédéral de la taxe sur l'essence",2170596000,1085298000,1085298000,2071933000,1035966000,1035966000
+"OICC","S",999,"– Gas Tax Fund","Fonds fédéral de la taxe sur l'essence",2170596000,1085298000,1085298000,2071933000,1035966000,1035966000
 "OICC","S",999,"Minister's Salary and Motor Car Allowance","Traitement et allocation pour automobile du ministre",86000,21000,43000,84000,21000,42000
-"OICC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",7782000,1946000,3891000,6106000,1527000,3053000
+"OICC","S",999,"– Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",7782000,1946000,3891000,6106000,1527000,3053000
 "OPSIC",1,1,"Operating and Program","Fonctionnement et Programme",5255779,1017811,1765219,5202663,770854,1693333
 "OPSIC","S",999,"Statutory Authorities","Autorisations législatives",476051,119013,238026,483539,120885,241770
 "ORL",1,1,"Operating and Program","Fonctionnement et Programme",5761000,862000,1686000,4157000,1091000,1923000
@@ -382,7 +382,7 @@
 "SWC","S",999,"Minister's Salary and Motor Car Allowance","Traitement et allocation pour automobile du ministre",86000,1000,1000,2000,1000,1000
 "SWC","S",999,"Contributions to Employee Benefit Plans","Contributions aux régimes d'avantages sociaux des employés",3135000,697000,1394000,1787000,447000,894000
 "TBC",1,1,"Operating and Program","Fonctionnement et Programme",254807787,55735762,116095334,260482035,67400126,118193830
-"TBC",20,6,"Treasury Board Central","Crédit du Conseil du Tréso",2952919397,630304687,1299721941,2398570604,601545239,1222213178
+"TBC",20,6,"Treasury Board Central","Crédit du Conseil du Trésor",2952919397,630304687,1299721941,2398570604,601545239,1222213178
 "TBC","S",999,"A681 - Payments under the Public Service Pension Adjustment Act","A681 - Versements en vertu de la Loi sur la mise au point des pensions du service public",0,13,26,0,40,107
 "TBC","S",999,"A145 - Unallocated employer contributions made under the PSSA and other retirement acts and the Employment Act (EI)","A145 - Contributions de l’employeur non affectées et versées en vertu de la LPFP, d’autres lois concernant la retraite et la Loi sur l’assurance-emploi",340000000,-104450741,-101525955,340000000,-104623227,-186362752
 "TBC","S",999,"Contributions to Employee Benefit Plans","Contributions aux régimes d'avantages sociaux des employés",28589290,6974326,13948652,27342934,6775186,13550372

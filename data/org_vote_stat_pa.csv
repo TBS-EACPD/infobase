@@ -10,8 +10,8 @@
 "AECB","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",15830839,15830839,13657948,13657948,13363785,13363785,13103856,13103856,13577597,13577597
 "AECB","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",20058,0,49602,19968,58000,29634,56449,56368,11443,
 "AECB","S",999,"Spending of the revenues pursuant to section 21(3) of the Nuclear Safety and Control Act","Dépense des recettes conformément à l'article 21(3) de la Loi sur la sûreté et la réglementation nucléaires",85973334,83655382,86936223,84410163,89967267,84740022,93887126,86026695,98923804,94591668
-"AECL",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,332428000,325643000,552126692,491064000,968615589,784133000,971355163,826595000
-"AECL",15,5,"Payments to Crown Corps","Paiement aux sociétés d'É",378062900,351762900,,,,,,,,
+"AECL",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,332428000,325643000,552126692,491064000,968615589,784133000,971355163,826595000
+"AECL",15,5,"Payments to Crown Corps","Paiement aux sociétés d'État",378062900,351762900,,,,,,,,
 "AECL","S",999,"Pursuant to section 2146 of the Jobs and Economic Growth Act, for the divestiture of Atomic Energy of Canada Limited","Conformément à l'article 2146 de la Loi sur l'emploi et la croissance, pour la dissolution d'Énergie atomique du Canada limitée",33700000,33700000,1100000,1100000,,,,,,
 "AGR",1,1,"Operating/Program","Fonctionnement/Programme",730683812,703004588,585461462,577712678,577702019,546207488,913242023,889616909,606696605,591991077
 "AGR",5,2,"Capital","Capital",34848685,30768006,33375973,25835661,55489423,49307846,97479066,91107007,80136193,56866815
@@ -55,17 +55,17 @@
 "CAT",55,1,"Operating/Program","Fonctionnement/Programme",1380467,1340954,,,,,,,,
 "CAT","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",130083,130083,70397,70397,,,,,,
 "CAT","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",39,0,,,,,,,,
-"CATSA",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,676185743,623896764,711734134,656747273,766278268,725303977,760684214,723429207
-"CATSA",20,5,"Payments to Crown Corps","Paiement aux sociétés d'É",598286200,559065861,,,,,,,,
+"CATSA",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,676185743,623896764,711734134,656747273,766278268,725303977,760684214,723429207
+"CATSA",20,5,"Payments to Crown Corps","Paiement aux sociétés d'État",598286200,559065861,,,,,,,,
 "CB",1,1,"Operating/Program","Fonctionnement/Programme",,,2996987,2790199,2962198,2573491,2954587,2854524,3088584,2972383
 "CB",45,1,"Operating/Program","Fonctionnement/Programme",2890321,2531986,,,,,,,,
 "CB","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",247686,247686,279307,279307,255214,255214,241204,241204,258616,258617
-"CBC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,929283798,929283798,928331798,928331798,1002306798,1002306798,1110262485,1110262485
-"CBC",5,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000
-"CBC",10,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,104740000,104740000,105692000,105692000,106717000,106717000,107821000,107821000
-"CBC",15,5,"Payments to Crown Corps","Paiement aux sociétés d'É",975617798,975617798,,,,,,,,
-"CBC",20,5,"Payments to Crown Corps","Paiement aux sociétés d'É",4000000,4000000,,,,,,,,
-"CBC",25,5,"Payments to Crown Corps","Paiement aux sociétés d'É",103856000,103856000,,,,,,,,
+"CBC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,929283798,929283798,928331798,928331798,1002306798,1002306798,1110262485,1110262485
+"CBC",5,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000
+"CBC",10,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,104740000,104740000,105692000,105692000,106717000,106717000,107821000,107821000
+"CBC",15,5,"Payments to Crown Corps","Paiement aux sociétés d'État",975617798,975617798,,,,,,,,
+"CBC",20,5,"Payments to Crown Corps","Paiement aux sociétés d'État",4000000,4000000,,,,,,,,
+"CBC",25,5,"Payments to Crown Corps","Paiement aux sociétés d'État",103856000,103856000,,,,,,,,
 "CBSA",1,1,"Operating/Program","Fonctionnement/Programme",,,1694360707,1628333847,1512906266,1449717812,1559660142,1421329862,1757949134,1500393332
 "CBSA",5,2,"Capital","Capital",,,277531637,174709785,251430453,159136387,194757418,105128994,296525673,108227899
 "CBSA",10,1,"Operating/Program","Fonctionnement/Programme",1770005090,1540450182,,,,,,,,
@@ -74,10 +74,10 @@
 "CBSA","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",187286618,187286618,197492314,197492314,186800563,186800563,171549821,171549821,159697622,159697621
 "CBSA","S",999,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs",32237,32237,140081,140081,8742,8742,15355,15355,45504,45504
 "CBSA","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",577473,410284,623167,468343,656087,629727,1016181,926789,120069,70985
-"CC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,182224388,182224388,182224388,182224388,222574389,222574389,258714308,258714308
-"CC",10,5,"Payments to Crown Corps","Paiement aux sociétés d'É",181974388,181974388,,,,,,,,
-"CCC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,15656400,14240000,8880000,8880000,3510000,3510000,,
-"CCC",20,5,"Payments to Crown Corps","Paiement aux sociétés d'É",15656400,15656400,,,,,,,,
+"CC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,182224388,182224388,182224388,182224388,222574389,222574389,258714308,258714308
+"CC",10,5,"Payments to Crown Corps","Paiement aux sociétés d'État",181974388,181974388,,,,,,,,
+"CCC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,15656400,14240000,8880000,8880000,3510000,3510000,,
+"CCC",20,5,"Payments to Crown Corps","Paiement aux sociétés d'État",15656400,15656400,,,,,,,,
 "CCMD",1,1,"Operating/Program","Fonctionnement/Programme",,,42349312,37933386,55790496,50823726,71454306,68461554,68247875,67189658
 "CCMD",40,1,"Operating/Program","Fonctionnement/Programme",45979928,42820558,,,,,,,,
 "CCMD","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",8682903,8682903,8280320,8280320,8479837,8479837,22255363,14318308,6453976,6453976
@@ -114,8 +114,8 @@
 "CEO","S",999,"Expenses under Electoral Boundary Readjustment Act","Dépenses en vertu de la Loi sur révision des limites des circonscriptions électorales",1205240,1205240,,,,,,,,
 "CEO","S",999,"Salary of the Chief Electoral Officer","Traitement du directeur général des élections",310361,310361,318290,318290,344565,344565,232832,232832,199026,199026
 "CEO","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",11358,11358,2289,2289,1065,1065,656,656,183,183
-"CFDC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,95453551,95453551,95453551,95453551,97453551,97453551,103572036,103572036
-"CFDC",115,5,"Payments to Crown Corps","Paiement aux sociétés d'É",99975111,99975111,,,,,,,,
+"CFDC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,95453551,95453551,95453551,95453551,97453551,97453551,103572036,103572036
+"CFDC",115,5,"Payments to Crown Corps","Paiement aux sociétés d'État",99975111,99975111,,,,,,,,
 "CFGB",1,1,"Operating/Program","Fonctionnement/Programme",,,6482571,5621968,6452536,5595299,6467559,5383550,7183457,6179818
 "CFGB",15,1,"Operating/Program","Fonctionnement/Programme",6436749,5356375,,,,,,,,
 "CFGB","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",624630,624630,627937,627937,656299,656299,602252,602252,545546,545546
@@ -190,28 +190,28 @@
 "CITT",25,1,"Operating/Program","Fonctionnement/Programme",9790997,9622575,,,,,,,,
 "CITT","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",1272647,1272647,683255,683255,,,,,,
 "CITT","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",903,903,119,0,,,,,,
-"CLVM",10,5,"Payments to Crown Corps","Paiement aux sociétés d'É",24472000,17196000,,,,,,,,
-"CMC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,68923716,68923716,83587255,83587255,77746477,77746477,74013063,74013063
-"CMC",35,5,"Payments to Crown Corps","Paiement aux sociétés d'É",62850567,62850567,,,,,,,,
-"CMHC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,2097353000,2053213063,2025629000,2008369383,3176101049,3129131175,2778055809,2689239574
-"CMHC",15,5,"Payments to Crown Corps","Paiement aux sociétés d'É",2100578000,2054849627,,,,,,,,
+"CLVM",10,5,"Payments to Crown Corps","Paiement aux sociétés d'État",24472000,17196000,,,,,,,,
+"CMC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,68923716,68923716,83587255,83587255,77746477,77746477,74013063,74013063
+"CMC",35,5,"Payments to Crown Corps","Paiement aux sociétés d'État",62850567,62850567,,,,,,,,
+"CMHC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,2097353000,2053213063,2025629000,2008369383,3176101049,3129131175,2778055809,2689239574
+"CMHC",15,5,"Payments to Crown Corps","Paiement aux sociétés d'État",2100578000,2054849627,,,,,,,,
 "CMHC","S",999,"Pursuant to Section 129 of the Economic Action Plan 2013 Act, No. 1, a payment to CHC to provide funding to Nunavut for housing in a sum not exceeding $30,000,000","En vertu de l'article 129 À la Loi no 1 sur le plan d'action économique de 2013, un paiement à la SCHL afin de fournir du financement au Nunavut pour le logement d'une somme n'excédant pas 30 000 000 $",30000000,30000000,,,,,,,,
-"CMHR",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,21700000,21700000,21700000,21700000,33604000,33604000,25352335,25352335
-"CMHR",30,5,"Payments to Crown Corps","Paiement aux sociétés d'É",32016180,32016180,,,,,,,,
-"CMI",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,9900000,9900000,7700000,7700000,7900000,7900000,7962724,7962724
-"CMI",40,5,"Payments to Crown Corps","Paiement aux sociétés d'É",18450000,18450000,,,,,,,,
-"CMN",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,26276818,26276818,26452593,26452593,29770297,29770297,33268608,33268608
-"CMN",45,5,"Payments to Crown Corps","Paiement aux sociétés d'É",26770876,26770876,,,,,,,,
+"CMHR",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,21700000,21700000,21700000,21700000,33604000,33604000,25352335,25352335
+"CMHR",30,5,"Payments to Crown Corps","Paiement aux sociétés d'État",32016180,32016180,,,,,,,,
+"CMI",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,9900000,9900000,7700000,7700000,7900000,7900000,7962724,7962724
+"CMI",40,5,"Payments to Crown Corps","Paiement aux sociétés d'État",18450000,18450000,,,,,,,,
+"CMN",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,26276818,26276818,26452593,26452593,29770297,29770297,33268608,33268608
+"CMN",45,5,"Payments to Crown Corps","Paiement aux sociétés d'État",26770876,26770876,,,,,,,,
 "CNEDA",1,1,"Operating/Program","Fonctionnement/Programme",,,14605534,13538591,14971158,13317446,14263757,13618933,14229425,13632362
 "CNEDA",3,1,"Operating/Program","Fonctionnement/Programme",14221003,12849474,,,,,,,,
 "CNEDA",5,3,"Grants & Contributions","Subventions et Contributions",,,36617328,34119582,35064622,32291373,40187121,38647536,40037297,39552941
 "CNEDA",7,3,"Grants & Contributions","Subventions et Contributions",38664119,36499299,,,,,,,,
 "CNEDA","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",1430705,1430705,1462388,1462388,1339601,1339601,1372580,1372580,1234750,1234750
 "CNEDA","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",81,0,503,0,481,0,59,,5228,
-"CNMI",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,127484000,127484000,374331000,350859000,146222000,98967000,213734000,146682515
-"CNMI",30,5,"Payments to Crown Corps","Paiement aux sociétés d'É",154430000,154430000,,,,,,,,
-"CPC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,22210000,22210000,22210000,22210000,22210000,22210000,22210000,22210000
-"CPC",15,5,"Payments to Crown Corps","Paiement aux sociétés d'É",22210000,22210000,,,,,,,,
+"CNMI",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,127484000,127484000,374331000,350859000,146222000,98967000,213734000,146682515
+"CNMI",30,5,"Payments to Crown Corps","Paiement aux sociétés d'État",154430000,154430000,,,,,,,,
+"CPC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,22210000,22210000,22210000,22210000,22210000,22210000,22210000,22210000
+"CPC",15,5,"Payments to Crown Corps","Paiement aux sociétés d'État",22210000,22210000,,,,,,,,
 "CPCC",1,1,"Operating/Program","Fonctionnement/Programme",,,2469953,2236843,1264603,1264603,19215842,15363078,22086483,20769053
 "CPCC",3,1,"Operating/Program","Fonctionnement/Programme",,,,,9476139,7896157,,,,
 "CPCC",7,2,"Capital","Capital",,,,,0,0,,,,
@@ -273,7 +273,7 @@
 "EA","S",999,"Passport Canada Revolving Fund (Revolving Funds Act)","Fonds renouvelable de Passeport Canada (Loi sur les fonds renouvelables)",13578219,13578219,,,,,,,,
 "EA","S",999,"Payments to International Financial Institutions - Direct payments","Paiements aux institutions financières internationales - Paiements directs",29205000,29205000,239022627,239022627,287539955,287539955,240772641,240772641,232251950,232251950
 "EA","S",999,"Payments under the Diplomatic Service (Special) Superannuation Act","Paiements en vertu de la Loi sur la pension spéciale du service diplomatique",119775,119775,202230,202230,241205,241205,381467,381467,443832,443832
-"EA","S",999,"Pursuant to section 24.1 of the Financial Administration Act, to forgive an amount up to $449,533,044 owed by the Government of the Islamic Republic of Pakistan, in relation to loan agreements, subject to the conditions described in the Memorandum of Understanding signed on April 20, 2006 between the Government of Canada and the Government of the Islamic Republic of Pakistan","Conformément à l'article 24.1 de la Loi sur la gestion des finances publiques, faire grâce d'un montant jusqu'à concurrence de 449 533 044 $ que doit le gouvernement de la République islamique du Pakistan relativement à des ententes de prêt, sous réserve des conditions énoncées dans le protocole d'entente signé le 20 avril 2006 entre le gouvernement du Canada et le gouvernement de la République islamique",262183705,89931699,172252006,47612029,124639977,0,124639977,39946304,84693673,24584115
+"EA","S",999,"Pursuant to section 24.1 of the Financial Administration Act, to forgive an amount up to $449,533,044 owed by the Government of the Islamic Republic of Pakistan, in relation to loan agreements, subject to the conditions described in the Memorandum of Understanding signed on April 20, 2006 between the Government of Canada and the Government of the Islamic Republic of Pakistan","Conformément à l'article 24.1 de la Loi sur la gestion des finances publiques, faire grâce d'un montant jusqu'à concurrence de 449 533 044 $ que doit le gouvernement de la République islamique du Pakistan relativement à des ententes de prêt, sous réserve des conditions énoncées dans le protocole d'entente signé le 20 avril 2006 entre le gouvernement du Canada et le gouvernement de la République islamique du Pakistan",262183705,89931699,172252006,47612029,124639977,0,124639977,39946304,84693673,24584115
 "EA","S",999,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs",50492,50492,16086,16086,20116,20116,58256,58256,90366,90366
 "EA","S",999,"Salary and Motor Car Allowance","Traitement et allocation pour automobile",218431,218431,236759,236759,248173,248173,250500,250500,253200,253200
 "EA","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",2863373,1572733,3304887,3051055,3747716,1233188,4572788,2000000,3521831,
@@ -287,16 +287,16 @@
 "EC","S",999,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs",407218,407218,546668,546668,845530,845530,,,,
 "EC","S",999,"Salary and Motor Car Allowance","Traitement et allocation pour automobile",75315,75315,80300,80300,82100,82100,83500,83500,84600,84600
 "EC","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",2920733,369754,2698781,1943452,1686334,1096384,1939146,1511743,1223505,427403
-"ECBC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,12384000,9865841,,,,,,
-"ECBC",10,5,"Payments to Crown Corps","Paiement aux sociétés d'É",52848000,50844000,,,,,,,,
+"ECBC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,12384000,9865841,,,,,,
+"ECBC",10,5,"Payments to Crown Corps","Paiement aux sociétés d'État",52848000,50844000,,,,,,,,
 "EDC","S",999,"Administrative fees","Frais administratif",5533174,5533174,2597096,2597096,3699980,3699980,8210494,8210494,5588461,5588461
 "EDC","S",999,"Losses on Foreign Exchange","Pertes d'opérations de change",,,,,,,,,45610229,45610229
 "EDC","S",999,"Payments to Export Development Canada to discharge obligations incurred pursuant to Section 23 of the Export Development Act (Canada Account) for the purpose of facilitating and developing trade between Canada and other countries (S.C., 2001, c. 33) - Transfer from non-budgetary authority related to section 24","Versements à Exportation et développement Canada pour acquitter ses obligations encourues en vertu de l'article 23 de la Loi sur le développement des exportations (Compte du Canada) afin de faciliter et d'accroître les échanges commerciaux entre le Canada et les autres pays (L.C. (2001), ch.33) - Virement de l'autorisation non budgétaire reliée à l'article 24",116862707,116862707,,,,,,,,
 "ERC",1,1,"Operating/Program","Fonctionnement/Programme",,,1610094,1430085,1491043,1363839,1490040,1368145,1722980,1443436
 "ERC",60,1,"Operating/Program","Fonctionnement/Programme",1639562,1445271,,,,,,,,
 "ERC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",160657,160657,154521,154521,154130,154130,156133,156133,132988,132988
-"FBCL",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,21040000,8138200,35281996,20119299,41781864,41781858,23583887,20047538
-"FBCL",45,5,"Payments to Crown Corps","Paiement aux sociétés d'É",14338293,13190982,,,,,,,,
+"FBCL",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,21040000,8138200,35281996,20119299,41781864,41781858,23583887,20047538
+"FBCL",45,5,"Payments to Crown Corps","Paiement aux sociétés d'État",14338293,13190982,,,,,,,,
 "FCAC","S",999,"Payments under section 13 of the Financial Consumer Agency of Canada Act","Paiements en vertu de l'article 13 de la Loi sur l'Agence de la consommation en matière financière du Canada",14719789,14719789,17890076,17890076,16272429,16272429,17426626,17426626,21517840,21517840
 "FCAC","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",129,129,290,290,136,136,38,38,,
 "FEDSO",1,1,"Operating/Program","Fonctionnement/Programme",,,27318530,26659973,27160948,26703067,26869850,25451659,27610896,27091325
@@ -434,8 +434,8 @@
 "HRSD","S",999,"Transfer Payments in Connection with the Budget Implementation Act","Financement pluriannuel initial à Passeport pour ma réussite Canada afin d'appuyer ses programmes d'intervention précoce communautaires qui aideront les jeunes défavorisés à accéder aux études postsecondaires au Canada",9000000,9000000,,,,,,,,
 "HRSD","S",999,"Universal Child Care Benefit (Universal Child Care Benefit Act)","Prestation universelle pour la garde d'enfants (Loi sur la prestation universelle pour la garde d'enfants)",2740095187,2740095187,2738493220,2738493220,8758825034,8758825034,1976071992,1976071992,12517048,12517048
 "HRSD","S",999,"Wage Earner Protection Program payments to eligible applicants owed wages and vacation pay, severance pay and termination pay from employers who are either bankrupt or in receivership as well as payments to trustees and receivers who will provide the necessary information to determine eligibility","Paiements en vertu du Programme de protection des salariés aux personnes admissibles pour les salaires et les indemnités de vacances, les indemnités de départ et les indemnités de cessation d'emploi qui sont dus par les employeurs en faillite ou mis sous séquestre, de même que les paiements aux syndics et aux séquestres qui fourniront les renseignements nécessaires pour déterminer l'admissibilité",32131039,32131039,22830715,22830715,23401319,23401319,18971126,18971126,16088897,16088897
-"IDRC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,190023783,190023783,183478242,183478242,149205625,147474006,139951886,139951886
-"IDRC",45,5,"Payments to Crown Corps","Paiement aux sociétés d'É",226416279,202416279,,,,,,,,
+"IDRC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,190023783,190023783,183478242,183478242,149205625,147474006,139951886,139951886
+"IDRC",45,5,"Payments to Crown Corps","Paiement aux sociétés d'État",226416279,202416279,,,,,,,,
 "IJC",1,1,"Operating/Program","Fonctionnement/Programme",,,6714405,6275459,6515840,6132731,6727679,5986508,9866742,6924451
 "IJC",50,1,"Operating/Program","Fonctionnement/Programme",6663750,6045036,,,,,,,,
 "IJC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",624859,624859,489493,489493,485992,485992,464115,464115,494837,494837
@@ -492,8 +492,8 @@
 "ISC","S",999,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs",388371,388371,358031,358031,1021245,1021245,690349,690349,316337,316338
 "ISC","S",999,"Salary and Motor Car Allowance","Traitement et allocation pour automobile",82700,82700,84300,84300,86339,86339,87500,87500,88600,88600
 "ISC","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",512498,230676,419008,277488,375510,192901,341500,222266,386331,231465
-"JCCB",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,432832159,244957619,426801000,247328089,367525000,284286532,331777000,179229642
-"JCCB",50,5,"Payments to Crown Corps","Paiement aux sociétés d'É",274566409,189218871,,,,,,,,
+"JCCB",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,432832159,244957619,426801000,247328089,367525000,284286532,331777000,179229642
+"JCCB",50,5,"Payments to Crown Corps","Paiement aux sociétés d'État",274566409,189218871,,,,,,,,
 "JUS",1,1,"Operating/Program","Fonctionnement/Programme",326037485,308287237,296462847,282434401,279767291,260403258,270507779,245298460,272264040,252800841
 "JUS",5,3,"Grants & Contributions","Subventions et Contributions",356435223,345578345,356435223,348763264,358445530,349694923,383816278,374462688,394315319,387257144
 "JUS","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",83064980,83064980,77566150,77566150,73027604,73027604,69973539,69973539,66857913,66857913
@@ -513,16 +513,16 @@
 "MPCC",25,1,"Operating/Program","Fonctionnement/Programme",10883288,5159799,,,,,,,,
 "MPCC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",360406,360406,346272,346272,375364,375364,370830,370830,359735,359735
 "MPCC","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",4,0,,,287,0,376,,154,
-"NAC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,35321395,35321395,54897056,54897056,135309431,135309431,141324356,141324356
-"NAC",65,5,"Payments to Crown Corps","Paiement aux sociétés d'É",34647720,34647720,,,,,,,,
+"NAC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,35321395,35321395,54897056,54897056,135309431,135309431,141324356,141324356
+"NAC",65,5,"Payments to Crown Corps","Paiement aux sociétés d'État",34647720,34647720,,,,,,,,
 "NBC",1,1,"Operating/Program","Fonctionnement/Programme",,,12262644,9427867,11356526,10818552,6999736,6635647,7935815,6756994
 "NBC",70,1,"Operating/Program","Fonctionnement/Programme",7755964,7435086,,,,,,,,
 "NBC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",553281,553281,506589,506589,485720,485720,486422,486422,477747,477747
 "NBC","S",999,"Expenditures pursuant to Paragraph 29.1(1) of Financial Administration Act","Dépenses aux termes du paragraphe 29.1(1) de la Loi sur la gestion des finances publiques",2166480,2166477,2162923,2162922,2196075,2196074,2201505,2201505,2516943,2516943
-"NCC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,68781209,68781209,71357471,68344322,67834325,67834325,68366358,66130358
-"NCC",5,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,23665000,23665000,22665000,22665000,22789114,22789114,24894870,23499870
-"NCC",55,5,"Payments to Crown Corps","Paiement aux sociétés d'É",78189680,78189680,,,,,,,,
-"NCC",60,5,"Payments to Crown Corps","Paiement aux sociétés d'É",37008494,27971494,,,,,,,,
+"NCC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,68781209,68781209,71357471,68344322,67834325,67834325,68366358,66130358
+"NCC",5,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,23665000,23665000,22665000,22665000,22789114,22789114,24894870,23499870
+"NCC",55,5,"Payments to Crown Corps","Paiement aux sociétés d'État",78189680,78189680,,,,,,,,
+"NCC",60,5,"Payments to Crown Corps","Paiement aux sociétés d'État",37008494,27971494,,,,,,,,
 "ND",1,1,"Operating/Program","Fonctionnement/Programme",14135439177,13992664687,13817379847,13396436118,14164551726,13775156234,14304175878,13919219357,16050430318,15560133719
 "ND",5,2,"Capital","Capital",3618939713,2855755116,4835557782,3316468475,4105468232,3182342740,3504237773,3055226195,3885528229,3722931316
 "ND",10,3,"Grants & Contributions","Subventions et Contributions",184691220,164625402,178764886,134877030,165552299,150998684,162992820,150784806,177003422,152820308
@@ -543,12 +543,12 @@
 "NFB",1,1,"Operating/Program","Fonctionnement/Programme",,,64418342,61031382,63724159,59832360,66506336,63154534,79913025,67346477
 "NFB",75,1,"Operating/Program","Fonctionnement/Programme",69288514,66587103,,,,,,,,
 "NFB","S",999,"National Film Board Revolving Fund","Fonds renouvelable de l'Office national du film",5766725,278962,5487763,1531134,5064251,88829,4975422,759892,4215530,-992186
-"NGC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,36308269,36308269,37776761,37776761,38127385,38127385,47063243,41413243
-"NGC",5,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,8000000,8000000,8000000,8000000,8000000,8000000,8000000,8000000
-"NGC",80,5,"Payments to Crown Corps","Paiement aux sociétés d'É",36193242,36193242,,,,,,,,
-"NGC",85,5,"Payments to Crown Corps","Paiement aux sociétés d'É",8000000,8000000,,,,,,,,
-"NMST",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,33370395,33370395,59600577,59600577,108428274,108103274,145277576,145277576
-"NMST",90,5,"Payments to Crown Corps","Paiement aux sociétés d'É",27003126,27003126,,,,,,,,
+"NGC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,36308269,36308269,37776761,37776761,38127385,38127385,47063243,41413243
+"NGC",5,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,8000000,8000000,8000000,8000000,8000000,8000000,8000000,8000000
+"NGC",80,5,"Payments to Crown Corps","Paiement aux sociétés d'État",36193242,36193242,,,,,,,,
+"NGC",85,5,"Payments to Crown Corps","Paiement aux sociétés d'État",8000000,8000000,,,,,,,,
+"NMST",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,33370395,33370395,59600577,59600577,108428274,108103274,145277576,145277576
+"NMST",90,5,"Payments to Crown Corps","Paiement aux sociétés d'État",27003126,27003126,,,,,,,,
 "NPA",1,1,"Operating/Program","Fonctionnement/Programme",,,701325,478845,701215,425969,701095,250994,465000,221805
 "NPA",30,1,"Operating/Program","Fonctionnement/Programme",3003000,1038693,,,,,,,,
 "NPA","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",133931,133931,37465,37465,30086,30086,3337,3337,4001,4001
@@ -669,11 +669,11 @@
 "PMPRB","S",999,"Court Awards","Montants adjugés par une cour",70628,70628,,,,,,,,
 "PMPRB","S",999,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs",2801285,2801285,,,,,,,,
 "PMPRB","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",213,213,114,114,47,47,448,448,472,472
-"PPP",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,11800000,11800000,11800000,11800000,11800000,11800000,11800000,5900000
-"PPP",3,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,197700000,197700000,,,,,,
-"PPP",5,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,,,219400000,0,267700000,0,267700000,0
-"PPP",40,5,"Payments to Crown Corps","Paiement aux sociétés d'É",12300000,12300000,,,,,,,,
-"PPP",45,5,"Payments to Crown Corps","Paiement aux sociétés d'É",252900000,252900000,,,,,,,,
+"PPP",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,11800000,11800000,11800000,11800000,11800000,11800000,11800000,5900000
+"PPP",3,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,197700000,197700000,,,,,,
+"PPP",5,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,,,219400000,0,267700000,0,267700000,0
+"PPP",40,5,"Payments to Crown Corps","Paiement aux sociétés d'État",12300000,12300000,,,,,,,,
+"PPP",45,5,"Payments to Crown Corps","Paiement aux sociétés d'État",252900000,252900000,,,,,,,,
 "PPS",1,1,"Operating/Program","Fonctionnement/Programme",,,,,,,65150492,59599369,79617983,71748117
 "PPS",3,1,"Operating/Program","Fonctionnement/Programme",,,,,48752033,47100237,,,,
 "PPS","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",,,,,3370694,3370694,5180957,5180957,5436172,5436172
@@ -717,8 +717,8 @@
 "SC",105,1,"Operating/Program","Fonctionnement/Programme",429489878,403702440,,,,,,,,
 "SC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",67783916,67783916,66562622,66562622,70827594,70827594,70693538,70693538,70193033,70193033
 "SC","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",25419,25419,20504,20504,13105,13105,23463,23463,27300,27300
-"SCA",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,12889535,12889535,10194937,10194937,10515380,10515380,13828495,13828495
-"SCA",100,5,"Payments to Crown Corps","Paiement aux sociétés d'É",10081241,8081241,,,,,,,,
+"SCA",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,12889535,12889535,10194937,10194937,10515380,10515380,13828495,13828495
+"SCA",100,5,"Payments to Crown Corps","Paiement aux sociétés d'État",10081241,8081241,,,,,,,,
 "SCC",1,1,"Operating/Program","Fonctionnement/Programme",,,23585872,22699824,23732571,21815595,25933544,23513974,28048976,26681784
 "SCC",50,1,"Operating/Program","Fonctionnement/Programme",23589974,22419896,,,,,,,,
 "SCC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",2855531,2855531,2721883,2721883,2590341,2590341,2587860,2587860,2744204,2744204
@@ -754,13 +754,13 @@
 "SWC","S",999,"Salary and Motor Car Allowance","Traitement et allocation pour automobile",,,,,,,,,2000,2000
 "SWC","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",2129,0,2004,2004,89,0,89,,58,
 "TBC",1,1,"Operating/Program","Fonctionnement/Programme",246327900,234224053,321758616,295850911,303094237,248942508,366807216,290703748,309299504,272955611
-"TBC",5,6,"Treasury Board Central","Crédit du Conseil du Tréso",749998884,0,750000000,0,750000000,0,635642771,0,530274898,0
-"TBC",10,6,"Treasury Board Central","Crédit du Conseil du Tréso",2093000,0,103000,0,2090470,0,693000,0,693000,0
-"TBC",15,6,"Treasury Board Central","Crédit du Conseil du Tréso",0,0,0,0,,,0,0,0,0
-"TBC",20,6,"Treasury Board Central","Crédit du Conseil du Tréso",2268179661,2186132708,2506134407,2454311704,2719270604,2690624377,2460070604,2406697551,3274680578,3164665468
-"TBC",25,6,"Treasury Board Central","Crédit du Conseil du Tréso",173453875,0,460111826,0,451599384,0,504827064,0,222997692,0
-"TBC",30,6,"Treasury Board Central","Crédit du Conseil du Tréso",487698916,0,608191976,0,747466679,0,922128220,0,249426761,0
-"TBC",33,6,"Treasury Board Central","Crédit du Conseil du Tréso",0,0,137334311,0,108778145,0,73858716,0,42220019,0
+"TBC",5,6,"Treasury Board Central","Crédit du Conseil du Trésor",749998884,0,750000000,0,750000000,0,635642771,0,530274898,0
+"TBC",10,6,"Treasury Board Central","Crédit du Conseil du Trésor",2093000,0,103000,0,2090470,0,693000,0,693000,0
+"TBC",15,6,"Treasury Board Central","Crédit du Conseil du Trésor",0,0,0,0,,,0,0,0,0
+"TBC",20,6,"Treasury Board Central","Crédit du Conseil du Trésor",2268179661,2186132708,2506134407,2454311704,2719270604,2690624377,2460070604,2406697551,3274680578,3164665468
+"TBC",25,6,"Treasury Board Central","Crédit du Conseil du Trésor",173453875,0,460111826,0,451599384,0,504827064,0,222997692,0
+"TBC",30,6,"Treasury Board Central","Crédit du Conseil du Trésor",487698916,0,608191976,0,747466679,0,922128220,0,249426761,0
+"TBC",33,6,"Treasury Board Central","Crédit du Conseil du Trésor",0,0,137334311,0,108778145,0,73858716,0,42220019,0
 "TBC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",28996563,28996563,27397562,27397562,26233735,26233735,27019489,27019489,27932725,27932725
 "TBC","S",999,"Employer contributions made under the Public Service Superannuation Act and other retirement acts and the Employment Insurance Act","Contributions aux régimes d'avantages sociaux des employés",443000000,443000000,444043497,444043497,1162000000,1162000000,339743644,339743644,341250848,341250848
 "TBC","S",999,"Payments for the Pay Equity Settlement","Paiements au titre de l'entente sur la parité salariale",84322,84322,,,2556,2556,-39653,-39653,-3072,-3072
@@ -780,8 +780,8 @@
 "TC","S",999,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs",15105,15105,7396,7396,7364,7364,1020,1020,32749,32749
 "TC","S",999,"Salary and Motor Car Allowance","Traitement et allocation pour automobile",131748,131748,80300,80300,82328,82328,83500,83500,84600,84600
 "TC","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",4706943,4614601,1302845,0,3734208,3539016,3209842,,6337296,6157764
-"TOUR",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,57975770,57975770,62975770,62975770,95475770,95475770,95744873,95475770
-"TOUR",40,5,"Payments to Crown Corps","Paiement aux sociétés d'É",57975770,57975770,,,,,,,,
+"TOUR",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,57975770,57975770,62975770,62975770,95475770,95475770,95744873,95475770
+"TOUR",40,5,"Payments to Crown Corps","Paiement aux sociétés d'État",57975770,57975770,,,,,,,,
 "TRC",1,1,"Operating/Program","Fonctionnement/Programme",,,10538831,5788405,6451251,5922532,,,,
 "TRC",30,1,"Operating/Program","Fonctionnement/Programme",12972461,6501067,,,,,,,,
 "TRC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",360329,360329,206332,206332,59401,59401,,,,
@@ -795,13 +795,13 @@
 "VAC","S",999,"Salary and Motor Car Allowance","Traitement et allocation pour automobile",78700,78700,79436,79436,82328,82328,83500,83500,84600,84600
 "VAC","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",13167,13167,18765,18765,23213,23213,16945,16945,9380,9380
 "VAC","S",999,"Veterans Insurance Actuarial Liability Adjustment","Rajustement des engagements actuariels de l'assurance des anciens combattants",,,354187,354187,46936,46936,42398,42398,65017,65017
-"VIA",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,433261756,406210121,395067134,365500460,425450000,348387317,456402731,357536154
-"VIA",60,5,"Payments to Crown Corps","Paiement aux sociétés d'É",439383000,405661000,,,,,,,,
+"VIA",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,433261756,406210121,395067134,365500460,425450000,348387317,456402731,357536154
+"VIA",60,5,"Payments to Crown Corps","Paiement aux sociétés d'État",439383000,405661000,,,,,,,,
 "VRAB",1,1,"Operating/Program","Fonctionnement/Programme",,,10129316,10080688,9934657,9677602,9924194,9068086,10102793,9734537
 "VRAB",10,1,"Operating/Program","Fonctionnement/Programme",10693187,10022700,,,,,,,,
 "VRAB","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",1435388,1435388,1342611,1342611,1324763,1324763,1167203,1167203,1117832,1117832
-"WDBA",1,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,,,461094912,138500000,569181753,334500000,317817400,184000000
-"WDBA",3,5,"Payments to Crown Corps","Paiement aux sociétés d'É",,,8064384,8059104,,,,,,
+"WDBA",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,,,461094912,138500000,569181753,334500000,317817400,184000000
+"WDBA",3,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,8064384,8059104,,,,,,
 "WDO",1,1,"Operating/Program","Fonctionnement/Programme",42799950,40153739,39107069,36056455,38841639,35329465,36720314,33928250,38617715,37029259
 "WDO",5,3,"Grants & Contributions","Subventions et Contributions",147133550,143006398,122232026,121697675,122248119,116332625,163559924,152743516,189690082,186283470
 "WDO","S",999,"Collection Agency Fees","Honoraires - Agence de recouvrement",,,3802,3802,,,,,,
