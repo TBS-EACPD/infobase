@@ -75,14 +75,20 @@ const get_node_submeasures = (node, year_value, selected_value) => {
     }
   }
   
-  const node_submeasures = _.chain( BudgetMeasure.lookup_measure(year_value, measure_id).submeasures )
-    .filter(submeasure => org_id === "net_adjust" || submeasure.data.org_id !== org_id)
-    .map( submeasure => ({
-      ...submeasure, 
-      value: program_or_crso_id ? 
-        submeasure.data.program_allocations[program_or_crso_id]: 
-        submeasure.data[selected_value],
-    }))
+  const node_submeasures = _.chain( BudgetMeasure.lookup_measure(year_value, measure_id).data )
+    .filter( (data_row) => org_id !== "net_adjust" && org_id !== data_row.org_id )
+    .flatMap( ({submeasure_breakouts}) => submeasure_breakouts )
+    .map( 
+      (submeasure_breakout) => ({
+        ...submeasure_breakout, 
+        value: program_or_crso_id ?
+          _.chain(submeasure_breakout.program_allocations)
+            .find( ({subject_id}) => subject_id === program_or_crso_id )
+            .thru( program_allocation => _.get(program_allocation, selected_value) )
+            .value() : 
+          submeasure_breakout[selected_value],
+      })
+    )
     .filter( submeasure => !_.isUndefined(submeasure.value) && submeasure.value !== 0 )
     .sortBy( submeasure => -submeasure.value )
     .value();
