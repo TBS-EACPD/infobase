@@ -25,6 +25,7 @@ import { BudgetMeasuresFooter } from './BudgetMeasuresFooter.js';
 import { BudgetMeasuresA11yContent } from './BudgetMeasuresA11yContent.js';
 
 const { BudgetMeasure } = Subject;
+const { budget_years } = BudgetMeasure;
 
 const { budget_values } = businessConstants;
 
@@ -42,7 +43,7 @@ const first_column_options = [
 ];
 const first_column_ids = _.map( first_column_options, option => option.id );
 
-const budget_year_options = ["budget-2018"];//, "budget-2019"];
+const budget_year_options = budget_years.map(year => `budget-${year}`);
 
 
 const validate_route = (props) => {
@@ -80,22 +81,65 @@ export default class BudgetMeasuresRoute extends React.Component {
     super();
     this.state = {
       loading: true,
+      loaded_years: [],
       filtered_chapter_keys: [],
       filter_string: false,
     };
 
     validate_route(props);
   }
+  static getDerivedStateFromProps(props, state){
+    const {
+      match: {
+        params: {
+          budget_year,
+        },
+      },
+    } = props;
+
+    const { loaded_years } = state;
+
+    return {loading: !_.includes(loaded_years, budget_year)};
+  }
   shouldComponentUpdate(nextProps){
     return validate_route(nextProps);
   }
-  componentDidMount(){
-    ensure_loaded({
-      subject: BudgetMeasure,
-    }).then( () => {
-      this.setState({loading: false});
-    });
+  conditionallyLoadOnMountAndUpdate(){
+    const {
+      match: {
+        params: {
+          budget_year,
+        },
+      },
+    } = this.props;
+
+    const {
+      loading,
+      loaded_years,
+    } = this.state;
+
+    if ( loading && !_.includes(loaded_years, budget_year) ){
+      ensure_loaded({
+        budget_measures: true,
+        budget_years: [
+          _.chain(budget_year_options)
+            .indexOf(budget_year)
+            .thru( year_index => budget_years[year_index] )
+            .value(),
+        ],
+      }).then( () => {
+        this.setState({
+          loading: false,
+          loaded_years: [
+            ...loaded_years,
+            budget_year,
+          ],
+        });
+      });
+    }
   }
+  componentDidMount(){ this.conditionallyLoadOnMountAndUpdate() }
+  componentDidUpdate(){ this.conditionallyLoadOnMountAndUpdate() }
   setFilteredChapterKeys(new_filtered_chapter_keys){
     this.setState({filtered_chapter_keys: new_filtered_chapter_keys});
   }
@@ -124,42 +168,11 @@ export default class BudgetMeasuresRoute extends React.Component {
       this.summary_stats = calculate_budget_stats();
     }
 
-    return (
-      <StandardRouteContainer
-        ref = "container"
-        title = { text_maker("budget_route_title") }
-        description = { text_maker("budget_measures_desc_meta_attr") }
-        breadcrumbs = { [text_maker("budget_route_title")] }
-        route_key = "budget-measures"
-      >
-        <h1>
-          {text_maker("budget_route_title")}
-        </h1>
+    const inner_content = (
+      <Fragment>
         { loading && <SpinnerWrapper ref="spinner" config_name={"route"} /> }
         { !loading &&
           <div className="budget-measures">
-            { budget_year_options.length > 1 &&
-              <TabbedControls 
-                tab_callback = {
-                  (key) => {
-                    const new_path = `/budget-tracker/${first_column}/${selected_value}/${key}`;
-                    if ( history.location.pathname !== new_path ){
-                      history.push(new_path);
-                    }
-                  } 
-                }
-                tab_options = { 
-                  _.map(
-                    budget_year_options, 
-                    (budget_year_option) => ({
-                      key: budget_year_option,
-                      label: budget_year_option,
-                      is_open: budget_year_option === budget_year,
-                    })
-                  )
-                }
-              />
-            }
             <div className="budget-measures-top-text">
               <EmbeddedVideo
                 title = { text_maker("budget_alignment_video_title") }
@@ -197,6 +210,46 @@ export default class BudgetMeasuresRoute extends React.Component {
             }
             { window.is_a11y_mode && <BudgetMeasuresA11yContent/> }
           </div>
+        }
+      </Fragment>
+    );
+
+    return (
+      <StandardRouteContainer
+        ref = "container"
+        title = { text_maker("budget_route_title") }
+        description = { text_maker("budget_measures_desc_meta_attr") }
+        breadcrumbs = { [text_maker("budget_route_title")] }
+        route_key = "budget-measures"
+      >
+        <h1>
+          {text_maker("budget_route_title")}
+        </h1>
+        { budget_years.length === 1 && inner_content }
+        { budget_years.length > 1 && 
+          <Fragment>
+            <TabbedControls 
+              tab_callback = {
+                (key) => {
+                  const new_path = `/budget-tracker/${first_column}/${selected_value}/${key}`;
+                  if ( history.location.pathname !== new_path ){
+                    history.push(new_path);
+                  }
+                } 
+              }
+              tab_options = { 
+                _.map(
+                  budget_year_options, 
+                  (budget_year_option) => ({
+                    key: budget_year_option,
+                    label: budget_year_option,
+                    is_open: budget_year_option === budget_year,
+                  })
+                )
+              }
+            />
+            {inner_content}
+          </Fragment>
         }
       </StandardRouteContainer>
     );
