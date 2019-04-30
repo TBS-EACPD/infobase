@@ -539,7 +539,7 @@ Subject.InstForm = class InstForm extends static_subject_store(){
 
 const get_id_for_measure = (measure) => `${measure.year}_${measure.measure_id}`;
 Subject.BudgetMeasure = class BudgetMeasure extends static_subject_store(){
-  static get budget_years(){ return ["2018"]; } //, "2019"]; }
+  static get budget_years(){ return ["2018", "2019"]; }
   static get type_name(){ return 'budget_measure'; }
   static get singular(){ return trivial_text_maker("budget_measure"); }
   static get plural(){ return trivial_text_maker("budget_measures"); }
