@@ -15,7 +15,7 @@ const get_formatter = (is_money, formatter, raw = true) => (
 );
 
 const default_tooltip = (tooltip_items, formatter) => (
-  <div style={{color: '#000'}}>
+  <div style={{color: window.infobase_color_constants.textColor}}>
     <table style={{width: '100%', borderCollapse: 'collapse'}}>
       <tbody>
         { tooltip_items.map(
@@ -208,7 +208,7 @@ NivoResponsiveBar.defaultProps = {
       ticks: {
         text: { 
           fontSize: 12,
-          fill: '#000',
+          fill: window.infobase_color_constants.textColor,
         },
       },
     },
@@ -315,7 +315,7 @@ NivoResponsiveHBar.defaultProps = {
       ticks: {
         text: { 
           fontSize: 12,
-          fill: '#000',
+          fill: window.infobase_color_constants.textColor,
         },
       },
     },
@@ -422,7 +422,7 @@ NivoResponsiveLine.defaultProps = {
     tooltip_formatter,
   ),
 
-  colors: '#000000',
+  colors: window.infobase_color_constants.textColor,
   bttm_axis: {
     tickSize: 7,
     tickPadding: 12,

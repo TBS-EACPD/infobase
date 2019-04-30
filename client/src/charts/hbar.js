@@ -47,8 +47,8 @@ export class HBar {
         "font-weight": "500",
       });
 
-    this.pos_color = "#1f77b4";
-    this.neg_color = '#A52A2A';
+    this.pos_color = window.infobase_color_constants.secondaryColor;
+    this.neg_color = window.infobase_color_constants.highlightColor;
 
     this.x_scale = this.options.x_scale;
   };

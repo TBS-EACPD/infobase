@@ -718,6 +718,18 @@ class BudgetMeasureHBars extends React.Component {
         }
       </div>;
     } else {
+      const biv_value_colors = infobase_colors();
+      const bar_colors = (data_label) => {
+        if (effective_selected_value === 'funding_overview'){
+          return biv_value_colors(data_label);
+        } else {
+          if ( data_label.includes("__negative_valued") ){
+            return biv_value_colors(1);
+          } else {
+            return biv_value_colors(2);
+          }
+        }
+      }
 
       const nivo_default_props = {
         data: data,
