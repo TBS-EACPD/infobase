@@ -210,7 +210,7 @@ class ExplorerPage extends React.Component {
             aria-label={text_maker("explorer_search_is_optional")}
             className="form-control input-lg"
             type="text"
-            style={{width: "100%", backgroundColor: "#fafafa"}}
+            style={{width: "100%"}}
             placeholder={text_maker('everything_search_placeholder')}
             onChange={evt => this.handleQueryChange(evt.target.value)}
           />

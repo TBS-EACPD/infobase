@@ -1,4 +1,4 @@
-import { TM, text_maker } from './vote-stat-text-prodiver.js';
+import { TM, text_maker } from './vote-stat-text-provider.js';
 import {
   formats,
   PanelGraph,
