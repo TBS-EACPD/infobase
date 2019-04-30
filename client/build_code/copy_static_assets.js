@@ -103,12 +103,9 @@ const table_csvs = _.map(
   name => public_dir_prefixer(`${name}.csv`)
 );
 
-const other_csv_names_unilingual = [
-  'budget_2018_measure_data.csv',
-];
+const other_csv_names_unilingual = [];
 const other_csv_names_bilingual = _.flatMap(
   [
-    'budget_2018_measure_lookups',
     "hi_lookups",
   ],
   (name) => [`${name}_en.csv`, `${name}_fr.csv`] 
