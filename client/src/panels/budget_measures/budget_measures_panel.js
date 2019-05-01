@@ -25,10 +25,7 @@ const {
   CRSO,
 } = Subject;
 const { budget_years } = BudgetMeasure;
-const { 
-  budget_chapters,
-  budget_values,
-} = businessConstants;
+const { budget_values } = businessConstants;
 
 const {
   Select,
@@ -58,19 +55,11 @@ const calculate_stats_common = (data) => {
 
   const measure_count = data.length;
 
-  const chapter_count = _.chain(data)
-    .map( budget_measure => budget_measure.chapter_key )
-    .uniq()
-    .value()
-    .length;
-
   return {
     total_funding,
     total_allocated,
     measure_count,
-    chapter_count,
     multiple_measures: measure_count > 1,
-    multiple_chapters: chapter_count > 1,
   }
 }
 
@@ -196,10 +185,6 @@ const get_grouping_options = (subject, data) =>{
     {
       name: text_maker('budget_measures'),
       id: 'measures',
-    },
-    {
-      name: text_maker('budget_chapters'),
-      id: 'chapters',
     },
   ];
 
@@ -432,6 +417,8 @@ class BudgetMeasureHBars extends React.Component {
       'allocated' :
       selected_value;
 
+    const has_budget_links = selected_year === "2018";
+
     const biv_values = _.chain(budget_values)
       .keys()
       .filter(key => key !== "funding")
@@ -528,36 +515,11 @@ class BudgetMeasureHBars extends React.Component {
         budget_measure_item => ({
           key: budget_measure_item.id,
           label: budget_measure_item.name,
-          href: BudgetMeasure.make_budget_link(budget_measure_item.chapter_key, budget_measure_item.ref_id),
+          href: has_budget_links && BudgetMeasure.make_budget_link(budget_measure_item.chapter_key, budget_measure_item.ref_id),
           is_link_out: true,
           data: budget_measure_item.measure_data,
         })
       );
-    } else if (selected_grouping === 'chapters'){
-      data_by_selected_group = _.chain(data)
-        .groupBy("chapter_key")
-        .map(
-          (chapter_group, chapter_key) => ({
-            key: chapter_key,
-            label: budget_chapters[chapter_key].text,
-            chapter_key: chapter_key,
-            href: BudgetMeasure.make_budget_link(chapter_key, false),
-            is_link_out: true,
-            data: _.reduce(
-              chapter_group,
-              (memo, measure) => _.mapValues(
-                memo,
-                (value, key) => value + measure.measure_data[key]
-              ),
-              _.chain(budget_values)
-                .keys()
-                .map(value_key => [value_key, 0])
-                .fromPairs()
-                .value()
-            ),  
-          })
-        )
-        .value();
     } else if (selected_grouping === 'orgs'){
       data_by_selected_group = get_org_budget_data_from_all_measure_data(data);
     } else if (selected_grouping === 'programs'){
@@ -649,32 +611,29 @@ class BudgetMeasureHBars extends React.Component {
             (budget_measure_item) => ({
               label: budget_measure_item.name,
               data: _.filter([
-                <div key = { budget_measure_item.id + "col2" } >
-                  { budget_chapters[budget_measure_item.chapter_key].text }
-                </div>,
                 !treatAsProgram(subject) && <Format
-                  key = { budget_measure_item.id + "col3" } 
+                  key = { budget_measure_item.id + "col2" } 
                   type = "compact1" 
                   content = { budget_measure_item.measure_data.funding } 
                 />,
                 <Format
-                  key = { budget_measure_item.id + (treatAsProgram(subject) ? "col3" : "col4") } 
+                  key = { budget_measure_item.id + (treatAsProgram(subject) ? "col2" : "col3") } 
                   type = "compact1"
                   content = { budget_measure_item.measure_data.allocated } 
                 />,
                 !treatAsProgram(subject) && <Format
-                  key = { budget_measure_item.id + "col5" } 
+                  key = { budget_measure_item.id + "col4" } 
                   type = "compact1"
                   content = { budget_measure_item.measure_data.withheld } 
                 />,
                 !treatAsProgram(subject) && <Format
-                  key = { budget_measure_item.id + "col6" } 
+                  key = { budget_measure_item.id + "col5" } 
                   type = "compact1"
                   content = { budget_measure_item.measure_data.remaining } 
                 />,
-                <a 
-                  key = { budget_measure_item.id + (treatAsProgram(subject) ? "col4" : "col7") }
-                  href={BudgetMeasure.make_budget_link(budget_measure_item.chapter_key, budget_measure_item.ref_id)}
+                has_budget_links && <a 
+                  key = { budget_measure_item.id + (treatAsProgram(subject) ? "col3" : "col6") }
+                  href = { BudgetMeasure.make_budget_link(budget_measure_item.chapter_key, budget_measure_item.ref_id) }
                 >
                   { text_maker("link") }
                 </a>,
@@ -683,12 +642,11 @@ class BudgetMeasureHBars extends React.Component {
           )}
           label_col_header = { text_maker("budget_measure") }
           data_col_headers = {_.filter([
-            text_maker("budget_chapter"),
             !treatAsProgram(subject) && budget_values.funding.text,
             budget_values.allocated.text,
             !treatAsProgram(subject) && budget_values.withheld.text,
             !treatAsProgram(subject) && budget_values.remaining.text,
-            text_maker("budget_panel_a11y_link_header"),
+            has_budget_links && text_maker("budget_panel_a11y_link_header"),
           ])}
         />
         { subject.level === "gov" &&
