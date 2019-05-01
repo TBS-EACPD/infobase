@@ -224,7 +224,7 @@ budget_measure_popup_year_line:
         {{gt "single_word_in"}}
       </span>
       <span class='popup-text-cells-right popup-text-cells-large'>
-        {{budget_year}}
+        {{fmt_year_to_fiscal_year budget_year}}
       </span>
     </div>
 
