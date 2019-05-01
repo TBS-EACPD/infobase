@@ -63,13 +63,15 @@ const selected_value_specifier_by_selected_value = {
   "withheld": text_maker("withheld_from"),
   "remaining": text_maker("remaining_for"),
 };
-const budget_sourced_date_note = text_maker("budget_sourced_date_note");
-const additional_root_note_by_selected_value = {
-  "overview": "",
-  "funding": "",
-  "allocated": budget_sourced_date_note,
-  "withheld": budget_sourced_date_note,
-  "remaining": budget_sourced_date_note,
+const get_additional_root_note = (selected_value, year_value) => {
+  if ( _.includes(["allocated", "withheld", "remaining"], selected_value) ) {
+    return text_maker(
+      "budget_sourced_date_note", 
+      {budget_data_source_date: budget_data_source_dates[year_value]}
+    );
+  } else {
+    return "";
+  } 
 };
 const root_text_func = (displayed_measure_count, selected_value, year_value, root_value) => {
   return text_maker(
@@ -77,9 +79,9 @@ const root_text_func = (displayed_measure_count, selected_value, year_value, roo
     {
       root_value, 
       displayed_measure_count,
-      budget_year: year_value, 
+      budget_year: year_value,
       selected_value_specifier: selected_value_specifier_by_selected_value[selected_value],
-      additional_root_note: additional_root_note_by_selected_value[selected_value],
+      additional_root_note: get_additional_root_note(selected_value, year_value),
     }
   );
 }
