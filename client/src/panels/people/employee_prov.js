@@ -72,7 +72,7 @@ class CanadaGraphBarLegend extends React.Component {
             colorBy ={d => graph_color(0.5)}
             margin = {{
               top: 40,
-              right: 20,
+              right: 30,
               bottom: 20,
               left: 20,
             }}
@@ -200,7 +200,7 @@ class ProvPanel extends React.Component {
                     items={legend_items}
                   />
                 </div>
-                <div className="legend-container" style={{ maxHeight: "400px", width: "100%", overflowY: "hidden"}}>
+                <div className="legend-container" style={{ maxHeight: "400px", width: "100%", overflowY: "hidden", marginTop: "10px"}}>
                   <CanadaGraphBarLegend
                     prov={this.state.prov}
                     years_by_province={graph_args.years_by_province}
