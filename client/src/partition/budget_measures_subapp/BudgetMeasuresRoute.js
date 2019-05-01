@@ -25,7 +25,11 @@ import { BudgetMeasuresFooter } from './BudgetMeasuresFooter.js';
 import { BudgetMeasuresA11yContent } from './BudgetMeasuresA11yContent.js';
 
 const { BudgetMeasure } = Subject;
-const { budget_years } = BudgetMeasure;
+const { 
+  budget_years,
+  budget_data_source_dates,
+  main_estimates_budget_links,
+} = BudgetMeasure;
 
 const { budget_values } = businessConstants;
 
@@ -157,23 +161,41 @@ export default class BudgetMeasuresRoute extends React.Component {
       },
     } = this.props;
 
+    const year_value = get_year_value_from_budget_year(budget_year);
+
     const inner_content = (
       <Fragment>
         { loading && <SpinnerWrapper ref="spinner" config_name={"route"} /> }
         { !loading &&
           <div className="budget-measures">
             <div className="budget-measures-top-text">
-              {
+              { year_value === "2018" &&
                 <EmbeddedVideo
                   title = { text_maker("budget_alignment_video_title") }
                   video_source = { text_maker("budget_alignment_video_src") }
                   transcript = { text_maker("budget_alignment_video_transcript") }
                 />
               }
-              <TextMaker text_key={`budget${budget_year}_route_top_text`} />
+              <TextMaker 
+                text_key={`budget${year_value}_route_top_text`}
+                args={{
+                  budget_year: year_value,
+                  budget_data_source_date: budget_data_source_dates[year_value],
+                  main_estimates_budget_link: main_estimates_budget_links[year_value],
+                }}
+              />
               <Details
                 summary_content = { <TextMaker text_key="budget_stats_title" /> }
-                content = { <TextMaker text_key="budget_summary_stats" args={{ ...calculate_budget_stats( get_year_value_from_budget_year(budget_year) ), budget_year}} /> }
+                content = { 
+                  <TextMaker 
+                    text_key="budget_summary_stats" 
+                    args={{
+                      ...calculate_budget_stats( get_year_value_from_budget_year(budget_year) ),
+                      budget_year: get_year_value_from_budget_year(budget_year),
+                      budget_data_source_date: budget_data_source_dates[year_value],
+                    }}
+                  /> 
+                }
               />
             </div>
             { !window.is_a11y_mode &&
@@ -191,7 +213,7 @@ export default class BudgetMeasuresRoute extends React.Component {
                   selected_value = { selected_value }
                   first_column = { first_column }
                   budget_year = { budget_year }
-                  year_value = { get_year_value_from_budget_year(budget_year) }
+                  year_value = { year_value }
                   filter_string = { filter_string }
                 />
                 <BudgetMeasuresFooter/>
@@ -199,7 +221,7 @@ export default class BudgetMeasuresRoute extends React.Component {
             }
             { window.is_a11y_mode && 
               <BudgetMeasuresA11yContent 
-                year_value = { get_year_value_from_budget_year(budget_year) }
+                year_value = { year_value }
               />
             }
           </div>
@@ -235,7 +257,7 @@ export default class BudgetMeasuresRoute extends React.Component {
                   budget_year_options, 
                   (budget_year_option) => ({
                     key: budget_year_option,
-                    label: budget_year_option,
+                    label: `${text_maker("budget_name_header")} ${get_year_value_from_budget_year(budget_year_option)}`,
                     is_open: budget_year_option === budget_year,
                   })
                 )

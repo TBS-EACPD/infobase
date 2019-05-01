@@ -76,12 +76,12 @@ dept_budget_measures_panel_text:
 program_crso_budget_measures_panel_text:
   transform: [handlebars, markdown]
   en: |
-    As of {{budget_data_sourced_date}}, **{{subj_name subject}}** has been {{gl_tt "allocated" "BIV_ALLO"}} **{{fmt_compact1_written total_allocated}}** to support the 
+    As of {{budget_data_source_date}}, **{{subj_name subject}}** has been {{gl_tt "allocated" "BIV_ALLO"}} **{{fmt_compact1_written total_allocated}}** to support the 
     implementation of **{{measure_count}}** {{gt "budget_name"}} {{budget_year}} {{#if multiple_measures}}measures{{else}}measure{{/if}} in **{{fmt_year_to_fiscal_year budget_year}}**.
     These values are on a cash basis as per {{ext_link "Main Estimates 2018-19" "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates/2018-19-estimates/2018-19-sources-uses-budget-implementation-vote-department.html"}}.
     {{> "budget_measure_panel_tracker_link_en"}}
   fr: |
-    En date du {{budget_data_sourced_date}}, **{{fmt_compact1_written total_allocated}}** ont été {{gl_tt "affectés" "BIV_ALLO"}} au **{{subj_name subject}}** pour la mise en œuvre 
+    En date du {{budget_data_source_date}}, **{{fmt_compact1_written total_allocated}}** ont été {{gl_tt "affectés" "BIV_ALLO"}} au **{{subj_name subject}}** pour la mise en œuvre 
     {{#if multiple_measures}}de **{{measure_count}}**{{else}}d'**une**{{/if}} mesure budgétaire de **{{fmt_year_to_fiscal_year budget_year}}**. 
     Ces valeurs sont calculées selon la comptabilité de caisse, conformément au {{ext_link "Budget principal des dépenses 2018-2019" "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal/2018-19-budget-depenses/2018-2019-provenance-utilisation-credit-execution-budget-ministere.html"}}..
     {{> "budget_measure_panel_tracker_link_fr"}}

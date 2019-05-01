@@ -586,7 +586,7 @@ class BudgetMeasureHBars extends React.Component {
       subject, 
       ...info, 
       budget_year: selected_year, 
-      budget_data_sourced_date: budget_data_source_dates[selected_year],
+      budget_data_source_date: budget_data_source_dates[selected_year],
       main_estimates_budget_link: main_estimates_budget_links[selected_year],
     };
 

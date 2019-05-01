@@ -12,7 +12,10 @@ const {
   BudgetMeasure,
   CRSO,
 } = Subject;
-const year = text_maker("budget_route_year");
+
+const {
+  budget_data_source_dates,
+} = BudgetMeasure;
 
 const formatter = node => {
   const in_billions = node.__value__ >= Math.pow(10, 9);
@@ -68,19 +71,20 @@ const additional_root_note_by_selected_value = {
   "withheld": budget_sourced_date_note,
   "remaining": budget_sourced_date_note,
 };
-const root_text_func = (displayed_measure_count, selected_value, root_value) => {
+const root_text_func = (displayed_measure_count, selected_value, year_value, root_value) => {
   return text_maker(
     "budget_measures_partition_root", 
     {
       root_value, 
       displayed_measure_count,
+      budget_year: year_value, 
       selected_value_specifier: selected_value_specifier_by_selected_value[selected_value],
       additional_root_note: additional_root_note_by_selected_value[selected_value],
     }
   );
 }
 
-const popup_template = node => {
+const popup_template = (year_value, node) => {
   const dept_is_first_column = (node.depth === 1 && node.data.type === "dept") || 
     (node.depth === 2 && node.parent.data.type === "dept") || 
     (node.depth === 3 && node.parent.data.type === "budget_measure");
@@ -127,7 +131,6 @@ const popup_template = node => {
     .value();
 
   const popup_options = {
-    year,
     dept_is_first_column,
     is_budget_measure,
     is_dept,
@@ -140,6 +143,8 @@ const popup_template = node => {
     program_name,
     notes,
     is_first_column,
+    budget_year: year_value,
+    budget_data_source_date: budget_data_source_dates[year_value],
     selected_value_is_funding: node.value_type === "funding",
     selected_value_is_allocated: node.value_type === "allocated",
     selected_value_is_withheld: node.value_type === "withheld",
@@ -262,8 +267,8 @@ const render_diagram = (diagram, props, data, data_wrapper_node_rules, dont_fade
     data,
     formatter,
     level_headers: get_level_headers(props.first_column, props.selected_value),
-    root_text_func: _.curry(root_text_func)(displayed_measure_count, props.selected_value),
-    popup_template,
+    root_text_func: _.curry(root_text_func)(displayed_measure_count, props.selected_value, props.year_value),
+    popup_template: _.curry(popup_template)(props.year_value),
     data_wrapper_node_rules,
     dont_fade,
     colors: [

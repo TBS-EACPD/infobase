@@ -87,7 +87,7 @@ budget_measure_submeasure_note:
 budget_sourced_date_note:
   transform: [handlebars]
   text: |
-    ({{gt "as_of"}} {{budget_data_sourced_date}})
+    ({{gt "as_of"}} {{budget_data_source_date}})
 
 budget_measures_partition_root:
   transform: [handlebars]
@@ -224,7 +224,7 @@ budget_measure_popup_year_line:
         {{gt "single_word_in"}}
       </span>
       <span class='popup-text-cells-right popup-text-cells-large'>
-        {{year}}
+        {{budget_year}}
       </span>
     </div>
 
@@ -236,7 +236,7 @@ budget_measure_popup_sourced_date_line:
         {{gt "as_of"}}
       </span>
       <span class='popup-text-cells-right popup-text-cells-large'>
-        {{budget_data_sourced_date}}
+        {{budget_data_source_date}}
       </span>
     </div>
 
