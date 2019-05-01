@@ -59,11 +59,11 @@ budget_source_desc:
     Cette information inclut des détails sur les mesures budgétaires et montrent comment le Conseil du Trésor affecte les fonds aux ministères pour des mesures budgétaires précises ainsi que les programmes financés pour exécuter chacune des mesures. 
 
 budget_dept_item_name:
-  en: Sources and Uses of the Budget Implementation vote by Department (2018-19)
-  fr: Provenance et utilisation du crédit d’exécution du budget par ministère (2018-2019)
+  en: Sources and Uses of the Budget Implementation Votes by Department (2018-19)
+  fr: Provenance et utilisation du crédits d’exécution du budget par ministère (2018-2019)
 
 budget_program_item_name:
-  en: Budget Implementation vote allocations by Program (2018-19)
+  en: Budget Implementation Votes allocations by Program (2018-19)
   fr: Affectations du vote sur l’exécution du budget par programme (2018-2019)
 
 budget_program_supplemental_name:

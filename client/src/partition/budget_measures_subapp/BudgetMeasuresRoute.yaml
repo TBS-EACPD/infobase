@@ -1,7 +1,7 @@
 ## text common to standard and a11y versions of route
 budget_route_title:
-  en: Budget Tracker
-  fr: Suivi budgétaire
+  en: Budget Implementation Votes
+  fr: Crédits d’exécution du budget
 
 budget_name_header:
   en: Budget
@@ -72,7 +72,7 @@ budget2018_route_top_text:
   transform: [handlebars, markdown]
   en: |
     Presented below are the new spending measures listed in {{ext_link "Table A2.11 of the 2018 Budget Plan" "https://www.budget.gc.ca/2018/docs/plan/anx-02-en.html#41-Policy-Actions-and-Budget-Investments-by-Department-(Cash-Basis)"}}.
-    These measures, totalling **$7.04 billion** in **{{fmt_year_to_fiscal_year budget_year}}**, are also listed in {{ext_link "Main Estimates 2018-19: Sources and Uses of the Budget Implementation vote by Department" "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates/2018-19-estimates/2018-19-sources-uses-budget-implementation-vote-department.html"}},
+    These measures, totalling **$7.04 billion** in **{{fmt_year_to_fiscal_year budget_year}}**, are also listed in {{ext_link "Main Estimates 2018-19: Sources and Uses of the Budget Implementation Vote by Department" "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates/2018-19-estimates/2018-19-sources-uses-budget-implementation-vote-department.html"}},
     thereby establishing a clear link between the Budget Plan and the Main Estimates.  
 
     {{{gt "budget_route_top_text_notes"}}}
@@ -86,7 +86,7 @@ budget2018_route_top_text:
 budget2019_route_top_text:
   transform: [handlebars, markdown]
   en: |
-    The 2018–19 Main Estimates included a centrally-managed Budget Implementation vote (TB Vote 40) to capture new Budget 2018 measures.
+    The 2018–19 Main Estimates included a centrally-managed Budget Implementation Vote (TB Vote 40) to capture new Budget 2018 measures.
     Funding in this vote was tied directly to the Budget Plan, which outlined exactly how much funding was allocated to each measure in each department.
     Like other centrally-managed votes, access to funds for these Budget measures was subject to approval by the Treasury Board.  
 
@@ -113,12 +113,12 @@ budget2019_route_top_text:
 budget2018_measure_description_values_clarification:
   transform: [handlebars]
   en: |
-    Spending amounts presented in the description are in accrual terms and therefore may not match cash amounts presented on an Estimates basis as per the Main Estimates 2018-19: Sources and Uses of the Budget Implementation vote by Department.
+    Spending amounts presented in the description are in accrual terms and therefore may not match cash amounts presented on an Estimates basis as per the Main Estimates 2018-19: Sources and Uses of the Budget Implementation Vote by Department.
   fr: |
     Les dépenses présentées dans la description sont présentées en termes de comptabilité d’exercise et donc elles pourraient ne pas correspondre aux montants présenté en termes du budget des depenses selon le Budget principal des dépenses de 2018-2019 : Provenance et utilisation du crédit d’exécution du budget par ministère.
 
 budget_measures_desc_meta_attr:
-  en: This map shows where public funds are going and how they will be spent. It is the link between the Budget Plan’s budget measures and the Main Estimates’ budget implementation vote.
+  en: This graph shows where public funds are going and how they will be spent. It is the link between the Budget Plan’s budget measures and the Main Estimates’ Budget Implementation Votes.
   fr: Cette carte montre où vont les fonds publics et comment ils seront dépensés. Elle relie les mesures du Plan budgétaire au crédit d'exécution du budget dans le budget principal des dépenses.
 
 budget_alignment_video_title:

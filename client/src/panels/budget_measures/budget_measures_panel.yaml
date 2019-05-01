@@ -37,11 +37,11 @@ budget_measure_stats_partial_fr:
 budget_measure_panel_tracker_link_en:
   handlebars_partial: true
   text: |
-    For additional government-wide information on budget measures, see our [Budget Tracker](#budget-tracker/budget-measure) page.
+    For additional government-wide information on budget measures, see our [Budget Implementation Votes](#budget-tracker/budget-measure) page.
 budget_measure_panel_tracker_link_fr:
   handlebars_partial: true
   text: |
-    Pour obtenir de plus amples renseignements sur les mesures budgétaires du gouvernement, consultez la page « [Suivi budgétaire](#budget-tracker/budget-measure/overview) ».
+    Pour obtenir de plus amples renseignements sur les mesures budgétaires du gouvernement, consultez la page « [Crédits d’exécution du budget](#budget-tracker/budget-measure/overview) ».
 
 gov_budget_measures_panel_text:
   transform: [handlebars, markdown]

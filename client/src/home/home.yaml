@@ -27,19 +27,13 @@ partition_home_text:
   fr: Voir comment les ressources gouvernementales sont distribuées d'un mécanisme à l'autre
 
 budget_home_title:
-  en: Budget Tracker
-  fr: Suivi budgétaire
+  en: Budget Implementation Votes
+  fr: Crédits d’exécution du budget
 
 budget_home_text:
   transform: [markdown]
-  en: |
-    BUDGET 2019 TRACKER COMING SOON.
-  
-    Explore a breakout of the Budget 2018 measures which are being funded through Estimates
-  fr: |
-    SUIVI BUDGÉTAIRE DE 2019 À VENIR.
-  
-    Découvrir une visualisation des mesures du Budget 2018 qui seront financées par le Budget des dépenses
+  en: Explore a breakout of the Budget Implementation Votes which are being funded through Estimates
+  fr: Découvrir une visualisation des crédits d’exécution du budget 2018 qui seront financées par le Budget des dépenses
 
 mains_dps_home_title:
   en: 2019-20 Departmental Plans
