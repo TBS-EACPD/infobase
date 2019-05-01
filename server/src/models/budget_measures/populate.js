@@ -139,6 +139,13 @@ export default async function({models}){
     ..._.map( budget_years, async (budget_year) => {
       const budget_data = get_standard_csv_file_rows(`budget_${budget_year}_measure_data.csv`);
       const budget_lookups = get_standard_csv_file_rows(`budget_${budget_year}_measure_lookups.csv`);
+      const budget_descriptions = (() => {
+        try {
+          return get_standard_csv_file_rows(`budget_${budget_year}_measure_descriptions.csv`);
+        } catch(error) {
+          return [];
+        }
+      })();
 
       const {
         true: measure_lookups,
@@ -321,8 +328,6 @@ export default async function({models}){
       const data_by_measure_and_org_id = _.chain(measure_data)
         .map(
           ({measure_id, org_id, funding, allocated, withheld, remaining}) => {
-            // TODO: add in org level measure descriptions here when avaialable
-
             const submeasures = _.get(
               submeasures_by_measure_and_org_id,
               `${measure_id}.${org_id}`
@@ -340,6 +345,11 @@ export default async function({models}){
               0
             );
 
+            const descriptions = _.chain(budget_descriptions)
+              .find( (budget_description_row) => budget_description_row.measure_id === measure_id && budget_description_row.org_id === org_id )
+              .pick(["description_en", "description_fr"])
+              .value();
+
             return {
               measure_id,
               org_id,
@@ -347,6 +357,7 @@ export default async function({models}){
               allocated: allocated + allocated_to_submeasures,
               withheld: withheld + withheld_through_submeasures,
               remaining,
+              ...descriptions,
             };
           }
         )
