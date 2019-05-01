@@ -174,6 +174,8 @@ const types_to_format = {
       return `<span class='text-nowrap'>${rtn}</span>`;
     }
   },
+  "year_to_fiscal_year": (year) => `${year}-${ window.lang === "en" ? year-2000+1 : year+1}`,
+  "fiscal_year_to_year": (fiscal_year) => _.chain(fiscal_year).split("-").head().value(),
 };
 
 

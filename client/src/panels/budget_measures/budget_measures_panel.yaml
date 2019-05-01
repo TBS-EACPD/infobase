@@ -1,6 +1,6 @@
 budget_measures_panel_title:
-  en: Budget 2018
-  fr: Le budget de 2018
+  en: Budget
+  fr: Le budget
 
 budget_measure_a11y_table_title:
   en: Overview by Budget Measure
@@ -46,13 +46,13 @@ budget_measure_panel_tracker_link_fr:
 gov_budget_measures_panel_text:
   transform: [handlebars, markdown]
   en: |
-    Budget 2018 provides **{{fmt_compact1_written total_funding}}** in additional funding for **{{gt "budget_route_year"}}**.
+    **Budget {{budget_year}}** provides **{{fmt_compact1_written total_funding}}** in additional funding for **{{fmt_year_to_fiscal_year budget_year}}**.
     {{> "budget_measure_stats_partial_en"}}
     {{> "budget_measure_panel_tracker_link_en"}}  
 
     {{{gt "budget_route_top_text_notes"}}}
   fr: |
-    Le budget de 2018 prévoit accorder **{{fmt_compact1_written total_funding}}** de fonds pour {{gt "budget_route_year"}}.
+    **Le budget de {{budget_year}}** prévoit accorder **{{fmt_compact1_written total_funding}}** de fonds pour {{fmt_year_to_fiscal_year budget_year}}.
     {{> "budget_measure_stats_partial_fr"}}
     {{> "budget_measure_panel_tracker_link_fr"}}  
 
@@ -61,13 +61,13 @@ gov_budget_measures_panel_text:
 dept_budget_measures_panel_text:
   transform: [handlebars, markdown]
   en: |
-    Budget 2018 provides **{{subj_name subject}}** with up to **{{fmt_compact1_written total_funding}}** in additional funding for **{{gt "budget_route_year"}}**.
+    **Budget {{budget_year}}** provides **{{subj_name subject}}** with up to **{{fmt_compact1_written total_funding}}** in additional funding for **{{fmt_year_to_fiscal_year budget_year}}**.
     {{> "budget_measure_stats_partial_en"}}
     {{> "budget_measure_panel_tracker_link_en"}}  
 
     {{{gt "budget_route_top_text_notes"}}}
   fr: |
-    Le budget de 2018 prévoit accorder jusqu’à **{{fmt_compact1_written total_funding}}** de fonds supplémentaires à **{{subj_name subject}}** pour {{gt "budget_route_year"}}.
+    **Le budget de {{budget_year}}** prévoit accorder jusqu’à **{{fmt_compact1_written total_funding}}** de fonds supplémentaires à **{{subj_name subject}}** pour {{fmt_year_to_fiscal_year budget_year}}.
     {{> "budget_measure_stats_partial_fr"}}
     {{> "budget_measure_panel_tracker_link_fr"}}  
 
@@ -76,13 +76,13 @@ dept_budget_measures_panel_text:
 program_crso_budget_measures_panel_text:
   transform: [handlebars, markdown]
   en: |
-    As of {{gt "budget_data_sourced_date"}}, **{{subj_name subject}}** has been {{gl_tt "allocated" "BIV_ALLO"}} **{{fmt_compact1_written total_allocated}}** to support the 
-    implementation of **{{measure_count}}** {{gt "budget_name"}} {{#if multiple_measures}}measures{{else}}measure{{/if}} in **{{gt "budget_route_year"}}**.
+    As of {{budget_data_sourced_date}}, **{{subj_name subject}}** has been {{gl_tt "allocated" "BIV_ALLO"}} **{{fmt_compact1_written total_allocated}}** to support the 
+    implementation of **{{measure_count}}** {{gt "budget_name"}} {{budget_year}} {{#if multiple_measures}}measures{{else}}measure{{/if}} in **{{fmt_year_to_fiscal_year budget_year}}**.
     These values are on a cash basis as per {{ext_link "Main Estimates 2018-19" "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates/2018-19-estimates/2018-19-sources-uses-budget-implementation-vote-department.html"}}.
     {{> "budget_measure_panel_tracker_link_en"}}
   fr: |
-    En date du {{gt "budget_data_sourced_date"}}, **{{fmt_compact1_written total_allocated}}** ont été {{gl_tt "affectés" "BIV_ALLO"}} au **{{subj_name subject}}** pour la mise en œuvre 
-    {{#if multiple_measures}}de **{{measure_count}}**{{else}}d'**une**{{/if}} mesure budgétaire de **{{gt "budget_route_year"}}**. 
+    En date du {{budget_data_sourced_date}}, **{{fmt_compact1_written total_allocated}}** ont été {{gl_tt "affectés" "BIV_ALLO"}} au **{{subj_name subject}}** pour la mise en œuvre 
+    {{#if multiple_measures}}de **{{measure_count}}**{{else}}d'**une**{{/if}} mesure budgétaire de **{{fmt_year_to_fiscal_year budget_year}}**. 
     Ces valeurs sont calculées selon la comptabilité de caisse, conformément au {{ext_link "Budget principal des dépenses 2018-2019" "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal/2018-19-budget-depenses/2018-2019-provenance-utilisation-credit-execution-budget-ministere.html"}}..
     {{> "budget_measure_panel_tracker_link_fr"}}
 

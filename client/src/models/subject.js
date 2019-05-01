@@ -540,6 +540,30 @@ Subject.InstForm = class InstForm extends static_subject_store(){
 const get_id_for_measure = (measure) => `${measure.year}_${measure.measure_id}`;
 Subject.BudgetMeasure = class BudgetMeasure extends static_subject_store(){
   static get budget_years(){ return ["2018", "2019"]; }
+  static get budget_data_source_dates(){
+    return {
+      2018: {
+        en: "March 31, 2019",
+        fr: "31 mars 2019",
+      }[window.lang],
+      2019: {
+        en: "TODO, 2019",
+        fr: "TODO 2019",
+      }[window.lang],
+    };
+  }
+  static get main_estimates_budget_links(){
+    return {
+      2018: {
+        en: "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates/2018-19-estimates/2018-19-sources-uses-budget-implementation-vote-department.html",
+        fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal/2018-19-budget-depenses/2018-2019-provenance-utilisation-credit-execution-budget-ministere.html",
+      }[window.lang],
+      2019: {
+        en: "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates/supplementary-information-report-2019-20-budget-implementation-votes.html",
+        fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal/rapport-information-supplementaire-votes-execution-budget-2019-20.html",
+      }[window.lang],
+    };
+  }
   static get type_name(){ return 'budget_measure'; }
   static get singular(){ return trivial_text_maker("budget_measure"); }
   static get plural(){ return trivial_text_maker("budget_measures"); }

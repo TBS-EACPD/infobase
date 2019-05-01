@@ -184,7 +184,7 @@ const budget_measure_first_hierarchy_factory = (year_value, selected_value) => {
               ...budgetMeasure, 
               type: /net_adjust/.test(budgetMeasure.id) ? "net_adjust" : "budget_measure",
               description: has_no_description ? text_maker("not_available") : budgetMeasure.description,
-              notes: !has_no_description ? text_maker("budget_measure_description_values_clarification") : false,
+              notes: !has_no_description && year_value === "2018" ? text_maker("budget2018_measure_description_values_clarification") : false,
               chapter_key: budgetMeasure.chapter_key,
               value: _.reduce(budgetMeasure.data, (sum, data_row) => sum + (data_row[selected_value]), 0),
             };
@@ -286,7 +286,7 @@ const dept_first_hierarchy_factory = (year_value, selected_value) => {
             description: has_no_description ?
                   text_maker("not_available") :
                   budgetMeasure.description,
-            notes: !has_no_description ? text_maker("budget_measure_description_values_clarification") : false,
+            notes: !has_no_description && year_value === "2018" ? text_maker("budget2018_measure_description_values_clarification") : false,
             value: data_row[selected_value],
             parent_org_id: node.id,
           };
@@ -325,7 +325,7 @@ const budget_overview_hierarchy_factory = (year_value) => {
               description: has_no_description ?
                     text_maker("not_available") :
                     budgetMeasure.description,
-              notes: !has_no_description ? text_maker("budget_measure_description_values_clarification") : false,
+              notes: !has_no_description && year_value === "2018" ? text_maker("budget2018_measure_description_values_clarification") : false,
               value: _.reduce(budgetMeasure.data, (sum, data_row) => sum + data_row.funding, 0),
               chapter_key: budgetMeasure.chapter_key,
             };

@@ -18,14 +18,22 @@ import { infograph_href_template } from '../../link_utils.js';
 
 import { Fragment } from 'react';
 
+const { budget_values } = businessConstants;
+
 const { 
   BudgetMeasure,
   Dept,
   Program,
   CRSO,
 } = Subject;
-const { budget_years } = BudgetMeasure;
-const { budget_values } = businessConstants;
+
+const { 
+  budget_years, 
+  budget_data_source_dates,
+  main_estimates_budget_links,
+} = BudgetMeasure;
+
+
 
 const {
   Select,
@@ -292,7 +300,7 @@ class BudgetMeasurePanel extends React.Component {
               years_with_data,
               (year) => ({
                 key: year,
-                label: selected_year, // TODO
+                label: `${text_maker("budget_name_header")} ${year}`,
                 is_open: selected_year === year,
               })
             )
@@ -573,25 +581,33 @@ class BudgetMeasureHBars extends React.Component {
         .filter( item => _.reduce(item.data, (memo, data_item) => memo + data_item.data[0], 0) !== 0 )
         .value();
     }
-      
+    
+    const panel_text_args = {
+      subject, 
+      ...info, 
+      budget_year: selected_year, 
+      budget_data_sourced_date: budget_data_source_dates[selected_year],
+      main_estimates_budget_link: main_estimates_budget_links[selected_year],
+    };
+
     const text_area = <div className = "frow" >
       <div className = "fcol-md-12 fcol-xs-12 medium_panel_text text">
         { subject.level === "gov" &&
             <TM 
               k={"gov_budget_measures_panel_text"} 
-              args={{subject, ...info, year: selected_year}} 
+              args={panel_text_args} 
             />
         }
         { subject.level === "dept" &&
             <TM
               k={"dept_budget_measures_panel_text"} 
-              args={{subject, ...info, year: selected_year}} 
+              args={panel_text_args} 
             />
         }
         { treatAsProgram(subject) &&
             <TM
               k={"program_crso_budget_measures_panel_text"} 
-              args={{subject, ...info, year: selected_year}} 
+              args={panel_text_args} 
             />
         }
       </div>

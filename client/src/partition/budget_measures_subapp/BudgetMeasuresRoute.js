@@ -163,15 +163,17 @@ export default class BudgetMeasuresRoute extends React.Component {
         { !loading &&
           <div className="budget-measures">
             <div className="budget-measures-top-text">
-              <EmbeddedVideo
-                title = { text_maker("budget_alignment_video_title") }
-                video_source = { text_maker("budget_alignment_video_src") }
-                transcript = { text_maker("budget_alignment_video_transcript") }
-              />
-              <TextMaker text_key="budget_route_top_text" />
+              {
+                <EmbeddedVideo
+                  title = { text_maker("budget_alignment_video_title") }
+                  video_source = { text_maker("budget_alignment_video_src") }
+                  transcript = { text_maker("budget_alignment_video_transcript") }
+                />
+              }
+              <TextMaker text_key={`budget${budget_year}_route_top_text`} />
               <Details
                 summary_content = { <TextMaker text_key="budget_stats_title" /> }
-                content = { <TextMaker text_key="budget_summary_stats" args={calculate_budget_stats( get_year_value_from_budget_year(budget_year) )} /> }
+                content = { <TextMaker text_key="budget_summary_stats" args={{ ...calculate_budget_stats( get_year_value_from_budget_year(budget_year) ), budget_year}} /> }
               />
             </div>
             { !window.is_a11y_mode &&

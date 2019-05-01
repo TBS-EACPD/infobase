@@ -298,9 +298,9 @@ Handlebars.registerHelper("plus_or_minus_val",function(val,formatter,context){
 Handlebars.registerHelper("gt",function(context, other_arg){
   //handlebars will change the "this" if a helper is called within an #each block
   if(!_.isFunction(this.__text_maker_func__)){
-    return other_arg.data.root.__text_maker_func__(context);
+    return other_arg.data.root.__text_maker_func__(context, other_arg.data.root);
   }
-  return this.__text_maker_func__(context);
+  return this.__text_maker_func__(context, this);
 });
 
 // {{rt "key"}} -> runs template 

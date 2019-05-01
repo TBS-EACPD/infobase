@@ -76,23 +76,23 @@ submeasures_table_title:
 budget_measure_submeasure_note:
   transform: [handlebars]
   en: |
-    Sub-measures are part of the allocation process and do not appear {{gt "budget_name"}}. Unlike Budget Measures, sub-measures are not shared across organizations.
+    Sub-measures are part of the allocation process and do not appear in {{gt "budget_name"}} {{budget_year}}. Unlike Budget Measures, sub-measures are not shared across organizations.
     Sub-measures serve only to provide a further breakout of allocated and withheld amounts for specific measures under specific organizations;
     they do not have values for budget funding or remaining funds.
   fr: |
-    Les sous-mesures font partie du processus d'affectation et ne figurent pas dans le {{gt "budget_name"}}. Contrairement aux mesures budgétaires, les sous-mesures ne sont pas communes à toutes les organisations.
+    Les sous-mesures font partie du processus d'affectation et ne figurent pas dans le {{gt "budget_name"}} {{budget_year}}. Contrairement aux mesures budgétaires, les sous-mesures ne sont pas communes à toutes les organisations.
     Elles ne servent qu'à ventiler davantage les montants affectés et retenus de certaines organisations pour des mesures précises;
     les sous-mesures n'ont pas de valeur en ce qui a trait au fonds du budget de 2018 ou aux fonds restants.
 
 budget_sourced_date_note:
   transform: [handlebars]
   text: |
-    ({{gt "as_of"}} {{gt "budget_data_sourced_date"}})
+    ({{gt "as_of"}} {{budget_data_sourced_date}})
 
 budget_measures_partition_root:
   transform: [handlebars]
   text: |
-    {{gt "budget_name_header"}}:
+    {{gt "budget_name_header"}} {{budget_year}}:
     <p class='amount'>
       {{rawfmt_compact2 root_value}}
     </p>
@@ -102,7 +102,7 @@ budget_measures_partition_root:
     </span>
     {{gt "budget_measures"}}
     {{gt "single_word_in_lowercase"}} 
-    {{gt "budget_route_year"}}
+    {{fmt_year_to_fiscal_year budget_year}}
     </br>
     </br>
     {{additional_root_note}}
@@ -236,7 +236,7 @@ budget_measure_popup_sourced_date_line:
         {{gt "as_of"}}
       </span>
       <span class='popup-text-cells-right popup-text-cells-large'>
-        {{gt "budget_data_sourced_date"}}
+        {{budget_data_sourced_date}}
       </span>
     </div>
 
@@ -313,7 +313,7 @@ budget_measure_popup_template:
     <div class='mrgn-bttm-md popup-row-top popup-font-m'>
       <span class='stat1 popup-font-m'>
         <text class='popup-font-l' style='color:#fdfdfd;'>
-          {{gt "budget_name"}}:
+          {{gt "budget_name"}} {{budget_year}}:
         </text>
         </br>
         {{> budget_measure_popup_top_line_cases}}
