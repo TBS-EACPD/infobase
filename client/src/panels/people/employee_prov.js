@@ -66,10 +66,12 @@ class CanadaGraphBarLegend extends React.Component {
             indexBy = "year"
             keys = {["value"]}
             enableLabel = {true}
+            label_format = { d=><tspan x={100} y={16}> {formatter(d)} </tspan>}
             label={d => `${d.data.year}: ${formatter(d.value)}`}
+            labelSkipWidth={null}
             colorBy ={d => graph_color(0.5)}
             margin = {{
-              top: 50,
+              top: 40,
               right: 20,
               bottom: 20,
               left: 20,
@@ -77,9 +79,11 @@ class CanadaGraphBarLegend extends React.Component {
             padding = {0.1}
             is_money = {false}
             top_axis={{
-              "tickSize": 5,
-              "tickPadding": 5,
-              "tickRotation": -90,
+              tickSize: 5,
+              tickPadding: 5,
+              tickRotation: -30,
+              tickValues: 4,
+              format: (d) => formatter(d),
             }}
             remove_bottom_axis={true}
             remove_left_axis={true}
