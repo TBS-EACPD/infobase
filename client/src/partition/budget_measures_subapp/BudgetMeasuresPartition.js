@@ -156,9 +156,14 @@ const popup_template = (year_value, node) => {
     value: node.__value__,
     value_is_negative: node.__value__ < 0,
     value_is_zero: node.__value__ === 0,
-    description: !_.isUndefined(node.data.description) && !_.isEmpty(node.data.description) && node.data.description,
-    chapter: !_.isUndefined(node.data.chapter_key) && budget_chapters[node.data.chapter_key].text,
-    budget_link: !_.isUndefined(node.data.chapter_key) && ( (node.data.chapter_key === "oth" && node.data.type !== "net_adjust") || !_.isEmpty(node.data.ref_id) ) && 
+    description: node.data.description && !_.isEmpty(node.data.description) && node.data.description,
+    chapter: node.data.chapter_key && budget_chapters[node.data.chapter_key].text,
+    budget_link: node.data.chapter_key && 
+      ( 
+        (node.data.chapter_key === "oth" && 
+        node.data.type !== "net_adjust") || 
+        !_.isEmpty(node.data.ref_id) 
+      ) && 
       BudgetMeasure.make_budget_link(node.data.chapter_key, node.data.ref_id),
     id: node.data.id,
     submeasures: node.submeasures,

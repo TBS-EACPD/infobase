@@ -244,9 +244,11 @@ budget_measure_popup_bottom_rows:
   handlebars_partial: true
   text: |
     {{#if is_budget_measure}}
-      <div class='mrgn-bttm-sm popup-row-top-border popup-font-m'>
-        <text style='color:#fdfdfd'> {{gt "budget_chapter"}}: </text> {{chapter}}
-      </div>
+      {{#if chapter}}
+        <div class='mrgn-bttm-sm popup-row-top-border popup-font-m'>
+          <text style='color:#fdfdfd'> {{gt "budget_chapter"}}: </text> {{chapter}}
+        </div>
+      {{/if}}
     {{/if}}
     {{#if description}}
       <div class='popup-font-ml popup-row-top-border'>
