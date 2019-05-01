@@ -111,9 +111,6 @@ class CanadaGraph extends React.Component {
   componentDidMount() {
     this._render();
   }
-  componentDidUpdate() {
-    this._render();
-  }
   _render() {
     const { graph_args, prov_callback } = this.props;
     const { years_by_province, color_scale } = graph_args;
