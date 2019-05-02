@@ -36,29 +36,276 @@ export class BudgetMeasuresA11yContent extends React.Component {
   
     const hierarchical_budget_measures_overview = budget_measures_hierarchy_factory(year_value, "overview", "budget-measure");
 
-    const ordered_col_header_text_keys = [
-      "budget_measures",
-      "budget_measure_descriptions",
-      "budget_measure_link_header",
-      "funding_decisions_header",
-      "program_allocations",
-    ];
+    const ordered_col_header_text_keys = year_value === "2018" ?
+      [
+        "budget_measures",
+        "budget_measure_descriptions",
+        "budget_measure_link_header",
+        "funding_decisions_header",
+        "program_allocations",
+      ] :
+      [
+        "budget_measures",
+        "funding_decisions_header",
+        "budget_measure_descriptions",
+        "program_allocations",
+      ];
   
+    const make_budget_2018_table = () => _.map(hierarchical_budget_measures_overview.children, budget_measure => {
+      const has_children = !_.isUndefined(budget_measure.children) && budget_measure.children.length > 0;
+      const has_grandchildren = has_children && budget_measure.children[0].data.value_type === "allocated";
+
+      const rows_to_span = !has_children ? 1 : !has_grandchildren ? 
+          budget_measure.children.length:
+          _.reduce(
+            budget_measure.children, 
+            (memo, dept_node) => memo + (!_.isUndefined(dept_node.children) ? dept_node.children.length : 1), 
+            0
+          );
+
+      const main_row = <tr key={ `measure${budget_measure.data.id}` }>
+        <th
+          scope="row"
+          rowSpan={ rows_to_span }
+        >
+          { name_and_value_cell_formatter(budget_measure) }
+        </th>
+        <td
+          key={ `measure_description${budget_measure.data.id}` }
+          rowSpan={ rows_to_span }
+        >
+          { !_.isEmpty(budget_measure.data.description) && 
+            <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(budget_measure.data.description)} />
+          }
+        </td>
+        <td
+          key={ `measure_link${budget_measure.data.id}` }
+          rowSpan={ rows_to_span }
+        >
+          { ( (budget_measure.data.chapter_key === "oth" && budget_measure.data.type !== "net_adjust") || !_.isEmpty(budget_measure.data.ref_id) ) && 
+            <a
+              href = { BudgetMeasure.make_budget_link(budget_measure.data.chapter_key, budget_measure.data.ref_id) }
+            >
+              { text_maker("link") }
+            </a>
+          }
+          { budget_measure.data.chapter_key !== "oth" && _.isEmpty(budget_measure.data.ref_id) && 
+            text_maker("not_found_in_budget_text") 
+          }
+        </td>
+        { has_children &&
+          <td 
+            rowSpan={ !has_grandchildren ? 1 : budget_measure.children[0].children.length }
+            key={ `measure${budget_measure.data.id }-org${budget_measure.children[0].data.id}` }
+          >
+            { name_and_value_cell_formatter(budget_measure.children[0]) }
+          </td>
+        }
+        { !has_children &&
+          <td>
+            {
+              `${value_formatter(budget_measure.value)} ${budget_measure.data.type !== "net_adjust" ?
+                budget_values.remaining.text :
+                budget_values.withheld.text}`
+            }
+          </td>
+        }
+        { has_grandchildren &&
+          <td 
+            key={ `measure${budget_measure.data.id}-org${budget_measure.children[0].data.id}-prog${budget_measure.children[0].children[0].data.id}` }
+          >
+            { name_and_value_cell_formatter(budget_measure.children[0].children[0]) }
+          </td>
+
+        }
+        { !has_grandchildren && <td>{ text_maker("notapplicable") }</td> }
+      </tr>;
+
+      if ( !has_children ){
+        return main_row;
+      } else {
+        const sub_rows = _.chain(budget_measure.children)
+          .map( (org, ix) => {
+            const has_program_allocations = !_.isUndefined(org.children) && org.children.length > 0;
+
+            return (
+              <Fragment key={ix}>
+                { ix !== 0 &&
+                  <tr 
+                    key={ `measure${budget_measure.data.id }-org${org.data.id}` }
+                    rowSpan={ has_program_allocations ? org.children.length : 1 }
+                  >
+                    <td
+                      rowSpan={ has_program_allocations ? org.children.length : 1 }
+                    >
+                      { name_and_value_cell_formatter(org) }
+                    </td>
+                    { has_program_allocations &&
+                      <td>
+                        { name_and_value_cell_formatter(org.children[0]) }
+                      </td>
+                    }
+                    { !has_program_allocations && <td>{ text_maker("notapplicable") }</td> }
+                  </tr>
+                }
+                { has_program_allocations &&
+                  _.chain(org.children)
+                    .tail()
+                    .map( program_allocation => (
+                      <tr key={ `measure${budget_measure.data.id }-org${org.data.id}-prog${program_allocation.data.id}` } >
+                        <td>
+                          { name_and_value_cell_formatter(program_allocation) }
+                        </td>
+                      </tr>
+                    ))
+                    .value()
+                }
+              </Fragment>
+            );
+          })
+          .value();
+
+        return [
+          main_row,
+          ...sub_rows,
+        ];
+      }
+    });
+
+    const make_budget_2019_table = () => _.map(hierarchical_budget_measures_overview.children, budget_measure => {
+      const has_children = !_.isUndefined(budget_measure.children) && budget_measure.children.length > 0;
+      const has_grandchildren = has_children && budget_measure.children[0].data.value_type === "allocated";
+
+      const rows_to_span = !has_children ? 1 : !has_grandchildren ? 
+          budget_measure.children.length:
+          _.reduce(
+            budget_measure.children, 
+            (memo, dept_node) => memo + (!_.isUndefined(dept_node.children) ? dept_node.children.length : 1), 
+            0
+          );
+
+      const main_row = <tr key={ `measure${budget_measure.data.id}` }>
+        <th
+          scope="row"
+          rowSpan={ rows_to_span }
+        >
+          { name_and_value_cell_formatter(budget_measure) }
+        </th>
+        { has_children &&
+          <Fragment>
+            <td
+              key={ `measure_description${budget_measure.data.id}` }
+              rowSpan={ rows_to_span }
+            >
+              { !_.isEmpty(budget_measure.children[0].data.description) && 
+                <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(budget_measure.children[0].data.description)} />
+              }
+            </td>
+            <td
+              rowSpan={ !has_grandchildren ? 1 : budget_measure.children[0].children.length }
+              key={ `measure${budget_measure.data.id }-org${budget_measure.children[0].data.id}` }
+            >
+              { name_and_value_cell_formatter(budget_measure.children[0]) }
+            </td>
+          </Fragment>
+        }
+        { !has_children &&
+          <Fragment>
+            <td>
+              {
+                `${value_formatter(budget_measure.value)} ${budget_measure.data.type !== "net_adjust" ?
+                  budget_values.remaining.text :
+                  budget_values.withheld.text}`
+              }
+            </td>
+            <td>
+              { text_maker("notapplicable") }
+            </td>
+          </Fragment>
+        }
+        { has_grandchildren &&
+          <td 
+            key={ `measure${budget_measure.data.id}-org${budget_measure.children[0].data.id}-prog${budget_measure.children[0].children[0].data.id}` }
+          >
+            { name_and_value_cell_formatter(budget_measure.children[0].children[0]) }
+          </td>
+
+        }
+        { !has_grandchildren && <td>{ text_maker("notapplicable") }</td> }
+      </tr>;
+
+      if ( !has_children ){
+        return main_row;
+      } else {
+        const sub_rows = _.chain(budget_measure.children)
+          .map( (org, ix) => {
+            const has_program_allocations = !_.isUndefined(org.children) && org.children.length > 0;
+
+            return (
+              <Fragment key={ix}>
+                { ix !== 0 &&
+                  <tr
+                    key={ `measure${budget_measure.data.id }-org${org.data.id}` }
+                    rowSpan={ has_program_allocations ? org.children.length : 1 }
+                  >
+                    <td
+                      key={ `measure_description${budget_measure.data.id}` }
+                      rowSpan={ has_program_allocations ? org.children.length : 1 }
+                    >
+                      { !_.isEmpty(org.data.description) && 
+                        <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(org.data.description)} />
+                      }
+                    </td>
+                    <td
+                      rowSpan={ has_program_allocations ? org.children.length : 1 }
+                    >
+                      { name_and_value_cell_formatter(org) }
+                    </td>
+                    { has_program_allocations &&
+                      <td>
+                        { name_and_value_cell_formatter(org.children[0]) }
+                      </td>
+                    }
+                    { !has_program_allocations && <td>{ text_maker("notapplicable") }</td> }
+                  </tr>
+                }
+                { has_program_allocations &&
+                  _.chain(org.children)
+                    .tail()
+                    .map( program_allocation => (
+                      <tr key={ `measure${budget_measure.data.id }-org${org.data.id}-prog${program_allocation.data.id}` } >
+                        <td>
+                          { name_and_value_cell_formatter(program_allocation) }
+                        </td>
+                      </tr>
+                    ))
+                    .value()
+                }
+              </Fragment>
+            );
+          })
+          .value();
+
+        return [
+          main_row,
+          ...sub_rows,
+        ];
+      }
+    });
+
     return (
       <div style={{overflow: "auto"}}>
         <table className="table table-striped table-bordered" >
           <caption>
             <TextMaker text_key="budget_measures_partition_a11y_chapter_table_caption" />
             <br/>
-            { year_value === "2018" &&
-              <Fragment>
-                <TextMaker text_key="notes"/>: 
-                <ul>
-                  <li> <TextMaker text_key="budget2018_measure_description_values_clarification"/> </li>
-                  <li> <TextMaker text_key="budget_measure_a11y_table_open_data_link"/> </li>
-                </ul>
-              </Fragment>
-            }
+            <TextMaker text_key="notes"/>: 
+            <ul>
+              { year_value === "2018" &&
+                <li> <TextMaker text_key="budget2018_measure_description_values_clarification"/> </li>
+              }
+              <li> <TextMaker text_key="budget_measure_a11y_table_open_data_link"/> </li>
+            </ul>
           </caption>
           <thead>
             <tr>
@@ -73,128 +320,8 @@ export class BudgetMeasuresA11yContent extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {
-              _.map(hierarchical_budget_measures_overview.children, budget_measure => {
-                const has_children = !_.isUndefined(budget_measure.children) && budget_measure.children.length > 0;
-                const has_grandchildren = has_children && budget_measure.children[0].data.value_type === "allocated";
-  
-                const rows_to_span = !has_children ? 1 : !has_grandchildren ? 
-                    budget_measure.children.length:
-                    _.reduce(
-                      budget_measure.children, 
-                      (memo, dept_node) => memo + (!_.isUndefined(dept_node.children) ? dept_node.children.length : 1), 
-                      0
-                    );
-  
-                const main_row = <tr key={ `measure${budget_measure.data.id}` }>
-                  <th
-                    scope="row"
-                    rowSpan={ rows_to_span }
-                  >
-                    { name_and_value_cell_formatter(budget_measure) }
-                  </th>
-                  <td
-                    key={ `measure_description${budget_measure.data.id}` }
-                    rowSpan={ rows_to_span }
-                  >
-                    { !_.isEmpty(budget_measure.data.description) && 
-                      <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(budget_measure.data.description)} />
-                    }
-                  </td>
-                  <td
-                    key={ `measure_link${budget_measure.data.id}` }
-                    rowSpan={ rows_to_span }
-                  >
-                    { ( (budget_measure.data.chapter_key === "oth" && budget_measure.data.type !== "net_adjust") || !_.isEmpty(budget_measure.data.ref_id) ) && 
-                      <a
-                        href = { BudgetMeasure.make_budget_link(budget_measure.data.chapter_key, budget_measure.data.ref_id) }
-                      >
-                        { text_maker("link") }
-                      </a>
-                    }
-                    { budget_measure.data.chapter_key !== "oth" && _.isEmpty(budget_measure.data.ref_id) && 
-                      text_maker("not_found_in_budget_text") 
-                    }
-                  </td>
-                  { has_children &&
-                    <td 
-                      rowSpan={ !has_grandchildren ? 1 : budget_measure.children[0].children.length }
-                      key={ `measure${budget_measure.data.id }-org${budget_measure.children[0].data.id}` }
-                    >
-                      { name_and_value_cell_formatter(budget_measure.children[0]) }
-                    </td>
-                  }
-                  { !has_children &&
-                    <td>
-                      {
-                        `${value_formatter(budget_measure.value)} ${budget_measure.data.type !== "net_adjust" ?
-                          budget_values.remaining.text :
-                          budget_values.withheld.text}`
-                      }
-                    </td>
-                  }
-                  { has_grandchildren &&
-                    <td 
-                      key={ `measure${budget_measure.data.id}-org${budget_measure.children[0].data.id}-prog${budget_measure.children[0].children[0].data.id}` }
-                    >
-                      { name_and_value_cell_formatter(budget_measure.children[0].children[0]) }
-                    </td>
-  
-                  }
-                  { !has_grandchildren && <td>{ text_maker("notapplicable") }</td> }
-                </tr>;
-    
-                if ( !has_children){
-                  return main_row;
-                } else {
-                  const sub_rows = _.chain(budget_measure.children)
-                    .map( (org, ix) => {
-                      const has_program_allocations = !_.isUndefined(org.children) && org.children.length > 0;
-  
-                      return (
-                        <Fragment key={ix}>
-                          { ix !== 0 &&
-                            <tr 
-                              key={ `measure${budget_measure.data.id }-org${org.data.id}` }
-                              rowSpan={ has_program_allocations ? org.children.length : 1 }
-                            >
-                              <td
-                                rowSpan={ has_program_allocations ? org.children.length : 1 }
-                              >
-                                { name_and_value_cell_formatter(org) }
-                              </td>
-                              { has_program_allocations &&
-                                <td>
-                                  { name_and_value_cell_formatter(org.children[0]) }
-                                </td>
-                              }
-                              { !has_program_allocations && <td>{ text_maker("notapplicable") }</td> }
-                            </tr>
-                          }
-                          { has_program_allocations &&
-                            _.chain(org.children)
-                              .tail()
-                              .map( program_allocation => (
-                                <tr key={ `measure${budget_measure.data.id }-org${org.data.id}-prog${program_allocation.data.id}` } >
-                                  <td>
-                                    { name_and_value_cell_formatter(program_allocation) }
-                                  </td>
-                                </tr>
-                              ))
-                              .value()
-                          }
-                        </Fragment>
-                      );
-                    })
-                    .value();
-    
-                  return [
-                    main_row,
-                    ...sub_rows,
-                  ];
-                }
-              })
-            }
+            { year_value === "2018" && make_budget_2018_table() }
+            { year_value !== "2018" && make_budget_2019_table() }
           </tbody>
         </table>
       </div>
