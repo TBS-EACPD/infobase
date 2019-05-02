@@ -7,18 +7,6 @@ import { get_standard_csv_file_rows } from '../load_utils.js';
 export default async function({models}){
   const { FakeBudgetOrgSubject } = models;
 
-  const clean_budget_measure_description = (description) => {
-    if ( description ){
-      const corrected_description_markdown = description
-        .replace(/•/g, "\n\n* ")
-        .replace(/((\r\n){1}|\r{1}|\n{1})/gm, "\n\n");
-    
-      return corrected_description_markdown;
-    } else {
-      return "";
-    }
-  };
-
   const igoc_rows = get_standard_csv_file_rows(`igoc.csv`);
   const dept_codes_by_org_ids = _.chain(igoc_rows)
     .map( ({org_id, dept_code}) => [org_id, dept_code] )
@@ -153,8 +141,8 @@ export default async function({models}){
       } = _.chain(budget_lookups)
         .map( budget_lookup => ({
           ...budget_lookup,
-          description_en: clean_budget_measure_description(budget_lookup.description_en),
-          description_fr: clean_budget_measure_description(budget_lookup.description_fr),
+          description_en: budget_lookup.description_en || "",
+          description_fr: budget_lookup.description_fr || "",
         }))
         .groupBy(
           ({parent_measure_id}) => !parent_measure_id

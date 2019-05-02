@@ -6,6 +6,7 @@ import { ContainerEscapeHatch } from '../../util_components';
 import { Subject } from '../../models/subject';
 import { businessConstants } from '../../models/businessConstants.js';
 import { formats } from '../../core/format.js';
+import { sanitized_marked } from '../../general_utils.js';
 
 const { budget_chapters } = businessConstants;
 const { 
@@ -156,7 +157,7 @@ const popup_template = (year_value, node) => {
     value: node.__value__,
     value_is_negative: node.__value__ < 0,
     value_is_zero: node.__value__ === 0,
-    description: node.data.description && !_.isEmpty(node.data.description) && node.data.description,
+    description: node.data.description && !_.isEmpty(node.data.description) && sanitized_marked(node.data.description),
     chapter: node.data.chapter_key && budget_chapters[node.data.chapter_key].text,
     budget_link: node.data.chapter_key && 
       ( 
