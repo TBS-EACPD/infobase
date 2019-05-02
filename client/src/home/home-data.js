@@ -11,6 +11,11 @@ const featured_content_items = _.compact([
     is_youtube: true,
   },
   {
+    text_key: 'quick_link_budget_2019',
+    href: '#budget-tracker/budget-measure/overview/budget-2019',
+    is_new: true,
+  },
+  {
     text_key: 'quick_link_hi_tags',
     href: '#resource-explorer/HI/dp19',
     is_new: true,
@@ -30,12 +35,10 @@ const featured_content_items = _.compact([
         }) :
         "#compare_estimates"
     ),
-    is_new: true,
   },
   {
     text_key: 'quick_link_DP_1920',
     href: "#orgs/gov/gov/infograph/results",
-    is_new: true,
   },
   {
     text_key: 'quick_link_planned_spending_by_program',
@@ -46,7 +49,6 @@ const featured_content_items = _.compact([
         mode: 'details',
       }) :
       "#treemap/drf/spending/All/planning_year_1",
-    is_new: true,
   },
   {
     text_key: 'quick_link_planned_ftes_by_program',
@@ -57,22 +59,10 @@ const featured_content_items = _.compact([
         mode: 'details',
       }) :
       "#treemap/drf_ftes/ftes/All/planning_year_1",
-    is_new: true,
   },
   !window.is_a11y_mode && {
     text_key: "treemap_home_title",
     href: "#treemap",
-  },
-  {
-    text_key: 'quick_link_DRR_1718',
-    href: "#orgs/gov/gov/infograph/results/~(panel_key~'gov_drr)",
-  },
-  {
-    text_key: 'quick_link_auth_and_exp',
-    href: rpb_link({ 
-      table: 'orgVoteStatPa', 
-      mode: 'details',
-    }),
   },
 ]);
 
