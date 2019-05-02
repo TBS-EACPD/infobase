@@ -89,7 +89,7 @@ budget2018_route_top_text:
 budget2019_route_top_text:
   transform: [handlebars, markdown]
   en: |
-    The 2018–19 Main Estimates included a centrally-managed Budget Implementation Vote (TB Vote 40) to capture new Budget 2018 measures.
+    Last year, the 2018–19 Main Estimates included a centrally-managed Budget Implementation Vote (TB Vote 40) to capture new Budget 2018 measures.
     Funding in this vote was tied directly to the Budget Plan, which outlined exactly how much funding was allocated to each measure in each department.
     Like other centrally-managed votes, access to funds for these Budget measures was subject to approval by the Treasury Board.  
 
@@ -100,7 +100,7 @@ budget2019_route_top_text:
     As in 2018–19, the funds will be held centrally until supporting policy and program approvals are in place. Allocations will continue to be regularly 
     posted online and reported in Estimates documents and the GC InfoBase.
   fr: |
-    Le Budget principal des dépenses 2018-2019 comprenait un crédit d’exécution du budget géré centralement (crédit 40 du Conseil du Trésor) visant
+    L'année dernière, le Budget principal des dépenses 2018-2019 comprenait un crédit d’exécution du budget géré centralement (crédit 40 du Conseil du Trésor) visant
     à tenir compte des nouvelles mesures énoncées dans le budget fédéral de 2018. Le financement de ce crédit était directement lié au Plan budgétaire,
     qui indiquait le montant exact des fonds alloués à chaque mesure dans chaque ministère. Comme pour les autres crédits gérés de façon centralisée,
     l’accès aux fonds pour ces mesures budgétaires était assujetti à l’approbation du Conseil du Trésor.  
