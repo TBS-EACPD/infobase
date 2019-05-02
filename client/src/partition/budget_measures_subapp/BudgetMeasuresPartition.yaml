@@ -84,6 +84,10 @@ budget_measure_submeasure_note:
     Elles ne servent qu'à ventiler davantage les montants affectés et retenus de certaines organisations pour des mesures précises;
     les sous-mesures n'ont pas de valeur en ce qui a trait au fonds du budget de 2018 ou aux fonds restants.
 
+budget_2019_measure_descriptions_note:
+  en: Budget 2019 measure descriptions are not available at this level. Click on an item in this diagram's second column for descriptions of how a specific organization will be implementing a specific budget measure.
+  fr: BUDGET-TODO
+
 budget_sourced_date_note:
   transform: [handlebars]
   text: |
