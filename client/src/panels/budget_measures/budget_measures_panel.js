@@ -168,10 +168,16 @@ const budget_measure_render = function({calculations, footnotes, sources}){
     key: "budget_measures_panel",
     requires_has_budget_measures: true,
     footnotes: false,
-    source: (subject) => [{
-      html: text_maker("budget_route_title"),
-      href: "#budget-tracker/budget-measure/overview",
-    }],
+    source: (subject) => [
+      {
+        html: text_maker("budget_route_title"),
+        href: "#budget-tracker/budget-measure/overview",
+      },
+      {
+        html: "Budget",
+        href: "#metadata/BUDGET",
+      },
+    ],
     calculate: (subject, info, options) => {
       const years_with_data = level_name === "gov" ?
         budget_years :

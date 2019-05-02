@@ -261,6 +261,9 @@ no_data:
 open_data_link:
   en: Open Data Link
   fr: Lien vers les données ouvertes
+open_data_datasets:
+  en: Open Data Datasets
+  fr: Données ouvertes
 link:
   en: Link
   fr: Lien
