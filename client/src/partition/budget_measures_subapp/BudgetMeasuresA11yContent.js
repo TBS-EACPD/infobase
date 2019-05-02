@@ -12,11 +12,8 @@ import { sanitized_dangerous_inner_html } from '../../general_utils.js';
 const { budget_values } = businessConstants;
 const { BudgetMeasure } = Subject;
 
-const value_formatter = value => {
-  const in_billions = value >= 1*Math.pow(10,9);
-  const format = in_billions ? formats.compact1 : formats.compact;
-  return format(value, {raw: true});
-}
+const value_formatter = value => formats.compact1(value, {raw: true});
+
 const name_and_value_cell_formatter = node => {
   if (node.data.type === "budget_measure" || node.data.type === "net_adjust"){
     return `${node.data.name} (${value_formatter(node.value)} ${budget_values.funding.text})`;
@@ -194,18 +191,18 @@ export class BudgetMeasuresA11yContent extends React.Component {
         { has_children &&
           <Fragment>
             <td
-              key={ `measure_description${budget_measure.data.id}` }
-              rowSpan={ rows_to_span }
-            >
-              { !_.isEmpty(budget_measure.children[0].data.description) && 
-                <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(budget_measure.children[0].data.description)} />
-              }
-            </td>
-            <td
               rowSpan={ !has_grandchildren ? 1 : budget_measure.children[0].children.length }
               key={ `measure${budget_measure.data.id }-org${budget_measure.children[0].data.id}` }
             >
               { name_and_value_cell_formatter(budget_measure.children[0]) }
+            </td>
+            <td
+              key={ `measure_description${budget_measure.data.id}` }
+              rowSpan={ !has_grandchildren ? 1 : budget_measure.children[0].children.length }
+            >
+              { !_.isEmpty(budget_measure.children[0].data.description) && 
+                <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(budget_measure.children[0].data.description)} />
+              }
             </td>
           </Fragment>
         }
@@ -219,7 +216,7 @@ export class BudgetMeasuresA11yContent extends React.Component {
               }
             </td>
             <td>
-              { text_maker("notapplicable") }
+              { text_maker("not_available") }
             </td>
           </Fragment>
         }
@@ -249,17 +246,17 @@ export class BudgetMeasuresA11yContent extends React.Component {
                     rowSpan={ has_program_allocations ? org.children.length : 1 }
                   >
                     <td
+                      rowSpan={ has_program_allocations ? org.children.length : 1 }
+                    >
+                      { name_and_value_cell_formatter(org) }
+                    </td>
+                    <td
                       key={ `measure_description${budget_measure.data.id}` }
                       rowSpan={ has_program_allocations ? org.children.length : 1 }
                     >
                       { !_.isEmpty(org.data.description) && 
                         <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(org.data.description)} />
                       }
-                    </td>
-                    <td
-                      rowSpan={ has_program_allocations ? org.children.length : 1 }
-                    >
-                      { name_and_value_cell_formatter(org) }
                     </td>
                     { has_program_allocations &&
                       <td>
