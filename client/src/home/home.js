@@ -106,23 +106,23 @@ const HomeLayout = props => (
             <div className="col-content featured-col-content">
               <CardLeftImage
                 tmf={home_tm}
-                img_src={get_static_url("svg/DPs.svg")}
-                title_key="mains_dps_home_title"
-                text_key="mains_dps_home_text"
-                link_key="check_home_link"
-                link_href="#orgs/gov/gov/infograph/results"
-              />
-            </div>   
-            <div className="col-content featured-col-content">
-              <CardLeftImage
-                tmf={home_tm}
                 img_src={get_static_url("svg/partition-budget.svg")}
                 title_key="budget_home_title"
                 text_key="budget_home_text"
                 link_key="check_home_link"
                 link_href="#budget-tracker/budget-measure/overview"
               />
-            </div>     
+            </div> 
+            <div className="col-content featured-col-content">
+              <CardLeftImage
+                tmf={home_tm}
+                img_src={get_static_url("svg/DPs.svg")}
+                title_key="mains_dps_home_title"
+                text_key="mains_dps_home_text"
+                link_key="check_home_link"
+                link_href="#orgs/gov/gov/infograph/results"
+              />
+            </div>       
           </div>
           <div className="fcol-md-5">
             <header className="h3 home-search-header">
