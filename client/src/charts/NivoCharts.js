@@ -251,6 +251,7 @@ export class NivoResponsiveHBar extends React.Component{
       enableGridY,
       padding,
       label,
+      labelSkipWidth,
     } = this.props;
     return (
       //have to have an empty string in key to make sure
@@ -269,6 +270,7 @@ export class NivoResponsiveHBar extends React.Component{
           label,
           legends,
           isInteractive,
+          labelSkipWidth,
         }}
         layout = 'horizontal'
         keys = {_.union([''],keys)}
@@ -292,7 +294,7 @@ export class NivoResponsiveHBar extends React.Component{
         motionDamping={motion_damping || 15}
         motionStiffness={motion_stiffness || 95}
         labelTextColor={"black"} // TODO: use infobase colour constant
-        labelSkipWidth={10}
+        labelSkipWidth={labelSkipWidth || 10}
       />
     );
   }

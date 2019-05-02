@@ -10,7 +10,10 @@ import {
   declarative_charts,
   create_text_maker_component,
   Panel,
+  NivoResponsiveHBar,
 } from "../shared";
+
+import { lightCategory10Colors } from '../../core/color_schemes.js';
 
 import { ensure_loaded } from '../../core/lazy_loader.js';
 
@@ -410,11 +413,12 @@ class BudgetMeasureHBars extends React.Component {
       .reverse()
       .value()
   
-    const top = 10;
+    const top = 25;
 
     const top_data = _.take(sorted_data,top);
 
     const others = {
+      measure_id: 99999,
       chapter_key: null,
       description: "",
       measure_data: {
@@ -439,13 +443,34 @@ class BudgetMeasureHBars extends React.Component {
       section_id: null,
       year: "2019",
     };
+  
+    const sums = {};
+    _.each(
+      _.chain(sorted_data)
+        .tail(top)
+        .map(measure => ({...measure, ...measure.measure_data}))
+        .value(),
+      item => {
+        _.each(['allocated','withheld'], amount => {
+          sums[amount] = (sums[amount] || 0) + item[amount];
+        }
+      }
+    );
 
-    const top_and_others = _.concat(top_data,others);
-    
+
     debugger;
 
+    const top_and_others = _.reverse( _.concat(top_data,others) );
+
+    let formatted_data;
+
+    if(selected_value === "funding_overview"){
+      formatted_data = _.map(top_and_others, measure => ({...measure, ...measure.measure_data}))
+    }
+
+    
     return {
-      top_and_others,
+      data: formatted_data,
       info,
       grouping_options,
       selected_grouping: valid_selected_grouping,
@@ -454,6 +479,66 @@ class BudgetMeasureHBars extends React.Component {
     };
   }
   render(){
+    const { 
+      graph_args: {
+        subject,
+      },
+      selected_year,
+    } = this.props;
+
+    const {
+      selected_grouping,
+      selected_value,
+      grouping_options,
+      value_options,
+      data,
+      info,
+    } = this.state;
+
+
+    const formatter = formats.compact1_raw;
+
+    const biv_value_colors = d3.scaleOrdinal().range(lightCategory10Colors);
+
+    return (
+      <div style={{height: "800px"}}>
+        <NivoResponsiveHBar
+          data={data}
+          indexBy = "name"
+          keys = {["allocated","withheld","remaining"]}
+          enableLabel = {true}
+          label={d => {return formatter(d.value)} }
+          colorBy = {d => biv_value_colors(d.id)}
+          margin = {{
+            top: 20,
+            right: 20,
+            bottom: 100,
+            left: 300,
+          }}
+          bttm_axis={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickValues: 6,
+            format: (d) => formatter(d),
+          }}
+          left_axis={{
+            tickSize: 5,
+            tickPadding: 5,
+            format: (d) => wrap(d, 50),
+          }}
+          padding = {0.1}
+          is_money = {true}
+          enableGridX={false}
+          enableGridY={false}
+          isInteractive={true}
+          labelSkipWidth={50}
+        />
+      </div>
+    )
+  }
+
+
+  old_render(){
     const { 
       graph_args: {
         subject,
@@ -864,4 +949,30 @@ class BudgetMeasureHBars extends React.Component {
       </div>;
     }
   }
+}
+
+
+function wrap(text, width) {
+  const words = text.split(/\s+/).reverse();
+  let word;
+  let line = [];
+  let lineHeight = 1; // em
+  const x = 0;
+  const y = 0;
+  const dy = 0;
+  const lines = [];
+  word = words.pop();
+  while (word) {
+    line.push(word);
+    const line_str = line.join(" ");
+    if ( line_str.length > width ){
+      line.pop();
+      lines.push(line.join(" "))
+      line = [word];
+    }
+    word = words.pop();
+  }
+  lines.push(line.join(" "));
+  const tspans = _.map(lines, (line,ix) => <tspan key={ix} x={x} y={y} dy={ix > 0 ? lineHeight + dy + "em" : "0em"}>{line}</tspan> );
+  return <Fragment>{ tspans }</Fragment>;
 }
