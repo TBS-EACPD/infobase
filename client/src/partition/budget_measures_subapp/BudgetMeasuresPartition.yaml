@@ -51,6 +51,9 @@ remaining_for:
 as_of:
   en: As of
   fr: Á partir du
+measure_description:
+  en: Measure Description
+  fr: Description de la mesure
 # Misc
 lang_formated_zero:
   en: $0
@@ -83,10 +86,6 @@ budget_measure_submeasure_note:
     Les sous-mesures font partie du processus d'affectation et ne figurent pas dans le {{gt "budget_name"}} {{budget_year}}. Contrairement aux mesures budgétaires, les sous-mesures ne sont pas communes à toutes les organisations.
     Elles ne servent qu'à ventiler davantage les montants affectés et retenus de certaines organisations pour des mesures précises;
     les sous-mesures n'ont pas de valeur en ce qui a trait au fonds du budget de 2018 ou aux fonds restants.
-
-budget_2019_measure_descriptions_note:
-  en: Budget 2019 measure descriptions are not available at this level. Click on an item in this diagram's second column for descriptions of how a specific organization will be implementing a specific budget measure.
-  fr: BUDGET-TODO
 
 budget_sourced_date_note:
   transform: [handlebars]
@@ -256,7 +255,11 @@ budget_measure_popup_bottom_rows:
     {{/if}}
     {{#if description}}
       <div class='popup-font-ml popup-row-top-border'>
-        {{gt "description"}}:
+        {{#isEqual budget_year "2018"}}
+          {{gt "description"}}:
+        {{else}}
+          {{gt "measure_description"}}:
+        {{/isEqual}}
       </div>
       <div class='mrgn-bttm-sm popup-row-bottom-border popup-decription-text' style='min-height:20px;'>
         {{{description}}}
