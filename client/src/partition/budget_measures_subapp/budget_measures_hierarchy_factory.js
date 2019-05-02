@@ -74,10 +74,10 @@ const get_node_submeasures = (node, year_value, selected_value) => {
       return [];
     }
   }
-  
+
   const node_submeasures = _.chain( BudgetMeasure.lookup_measure(year_value, measure_id).data )
-    .filter( (data_row) => org_id !== "net_adjust" && org_id !== data_row.org_id )
     .flatMap( ({submeasure_breakouts}) => submeasure_breakouts )
+    .filter( (submeasure_breakout) => org_id !== "net_adjust" && _.toString(org_id) === submeasure_breakout.org_id )
     .map( 
       (submeasure_breakout) => ({
         ...submeasure_breakout, 
