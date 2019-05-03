@@ -408,15 +408,10 @@ class BudgetMeasureHBars extends React.Component {
         selected_value :
         value_options[0].id;
     
-    const selected_sort_map = {
-      funding_overview: 'funding',
-      funding: 'funding',
-      remaining: 'remaining',
-    }
 
     const sorted_data = _.chain(data)
       .map(measure => ({...measure, ...measure.measure_data}))
-      .sortBy(selected_sort_map[valid_selected_value])
+      .sortBy(valid_selected_value === "funding_overview" ? "funding" : valid_selected_value)
       .reverse()
       .value()
   
@@ -445,7 +440,7 @@ class BudgetMeasureHBars extends React.Component {
       }
     );
 
-    const top_and_others = _.reverse( _.concat(top_data,others) );
+    const top_and_others = _.reverse( sorted_data.length > top ? _.concat(top_data,others) : sorted_data );
 
     return {
       data: top_and_others,
@@ -517,7 +512,7 @@ class BudgetMeasureHBars extends React.Component {
             />
           </label>
         </div>
-        <div className="centerer" style={{height: "800px"}}>
+        <div className="centerer" style={{height: data.length < 25 ? "400px" : "800px"}}>
           <NivoResponsiveHBar
             data={data}
             indexBy = "name"
