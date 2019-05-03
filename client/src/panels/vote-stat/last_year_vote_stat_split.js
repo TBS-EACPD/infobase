@@ -6,9 +6,9 @@ import {
   CommonDonut,
 } from "../shared";
 
-const render_w_options = ({text_key,graph_col,text_col}) => ({calculations, sources, footnotes}) => {
+const render_w_options = ({text_key, graph_col, text_col}) => ({calculations, sources, footnotes}) => {
   const { info, graph_args } = calculations;
- 
+
   const data = _.map(
     graph_args,
     (data_set) => ({
@@ -30,7 +30,7 @@ const render_w_options = ({text_key,graph_col,text_col}) => ({calculations, sour
           <CommonDonut
             graph_data = {data}
             legend_data = {data}
-            height = '400px'
+            graph_height = '400px'
           />
         </Col>
       }

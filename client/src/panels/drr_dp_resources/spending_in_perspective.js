@@ -128,7 +128,7 @@ class SpendInTagPerspective extends React.Component {
           <div style={{height: '400px'}} aria-hidden = {true}>
             <NivoResponsivePie
               data = {data}
-              colors={infobaseCategory10Colors}
+              colors = {infobaseCategory10Colors}
               total = {d3.sum( data, _.property('value') )}
               height = '400px'
             />

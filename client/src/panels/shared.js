@@ -153,10 +153,9 @@ export const CommonDonut = function({graph_data, legend_data, graph_height}){
       </div>
       }
     </div>
-     
   );
-  
 }
+
 export class LineBarToggleGraph extends React.Component {
   constructor(props){
     super(props);
