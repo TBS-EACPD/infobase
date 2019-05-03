@@ -625,9 +625,13 @@ Handlebars.registerHelper("divide",function(numerator, denominator){
 });
 
 Handlebars.registerHelper("ext_link",function(display, url){
-  return new Handlebars.SafeString(
-    `<a target="_blank" rel="noopener noreferrer" href="${url}">${display}</a>`
-  );
+  if (url){
+    return new Handlebars.SafeString(
+      `<a target="_blank" rel="noopener noreferrer" href="${url}">${display}</a>`
+    );
+  } else {
+    return display;
+  }
 });
 
 Handlebars.registerHelper('array_to_grammatical_list', function(options) {

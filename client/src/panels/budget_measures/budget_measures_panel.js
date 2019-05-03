@@ -33,8 +33,6 @@ const {
   main_estimates_budget_links,
 } = BudgetMeasure;
 
-
-
 const {
   Select,
   Format,
@@ -154,7 +152,13 @@ const budget_measure_render = function({calculations, footnotes, sources}){
   return (
     <Panel
       title={text_maker("budget_measures_panel_title")}
-      {...{sources,footnotes}}
+      {...{
+        sources, 
+        footnotes: [
+          ...footnotes,
+          {text: text_maker("budget2019_biv_includes_excludes_note")},
+        ],
+      }}
     >
       <BudgetMeasurePanel graph_args = { graph_args } />
     </Panel>

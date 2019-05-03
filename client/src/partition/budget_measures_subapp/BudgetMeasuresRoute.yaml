@@ -98,7 +98,7 @@ budget2019_route_top_text:
     with greater opportunity to examine individual Budget 2019 measures, as well as greater control over the funding related to Budget announcements.  
 
     As in 2018–19, the funds will be held centrally until supporting policy and program approvals are in place. Allocations will continue to be regularly 
-    posted online and reported in {{ext_link "Estimates documents" "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates/supplementary-information-report-2019-20-budget-implementation-votes.html"}}
+    posted online and reported in Estimates documents
     and the GC InfoBase.
   fr: |
     L'année dernière, le Budget principal des dépenses 2018-2019 comprenait un crédit d’exécution du budget géré centralement (crédit 40 du Conseil du Trésor) visant
@@ -111,7 +111,7 @@ budget2019_route_top_text:
     d’examiner plus facilement les mesures du budget fédéral de 2019 et d’exercer un plus grand contrôle sur le financement lié aux annonces du budget fédéral.  
 
     Comme en 2018-2019, les fonds seront conservés de façon centralisée jusqu’à ce que les politiques et les programmes soient approuvés.
-    Les affectations continueront d’être affichées régulièrement en ligne et de faire l’objet de rapports dans les {{ext_link "documents budgétaires" "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal/rapport-information-supplementaire-votes-execution-budget-2019-20.html"}}
+    Les affectations continueront d’être affichées régulièrement en ligne et de faire l’objet de rapports dans les documents budgétaires
     et l’InfoBase du GC.
 
 
@@ -121,6 +121,21 @@ budget2018_measure_description_values_clarification:
     Spending amounts presented in the description are in accrual terms and therefore may not match cash amounts presented on an Estimates basis as per the Main Estimates 2018-19: Sources and Uses of the Budget Implementation Vote by Department.
   fr: |
     Les dépenses présentées dans la description sont présentées en termes de comptabilité d’exercise et donc elles pourraient ne pas correspondre aux montants présenté en termes du budget des depenses selon le Budget principal des dépenses de 2018-2019 : Provenance et utilisation du crédit d’exécution du budget par ministère.
+
+budget2019_biv_includes_excludes_note:
+  transform: [markdown]
+  en: |
+    Budget Implementation Votes do not include the following measures presented in Table A2.11 of the 2019 Budget:  
+      1. Improving the Health and Safety of Canadian Workers (Canadian Centre for Occupational Health and Safety)
+      2. Insuring Income Replacement Benefits for Medically Released Members of the Forces (Department of National Defence)
+      3. Departmental Allocation To Be Determined
+      4. Other Budget 2019 Measures (Estimates Basis)
+  fr: |
+    Crédits d’exécution du budget ne comprennent pas les mesures suivantes qui figurent au tableau A2.11 du budget de 2019 :  
+      1. améliorer la santé et la sécurité des travailleurs canadiens (Centre canadien d'hygiène et de sécurité au travail)
+      2. garantir les prestations de remplacement du revenu des membres des Forces qui ont obtenu une libération pour des raisons médicales (ministère de la Défense nationale)
+      3. Affectation à déterminer
+      4. Autres mesures annoncées dans le budget de 2019 (budgets de dépenses)
 
 budget_measures_desc_meta_attr:
   en: This graph shows where public funds are going and how they will be spent. It is the link between the Budget Plan’s budget measures and the Main Estimates’ Budget Implementation Votes.

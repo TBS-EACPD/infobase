@@ -53,6 +53,11 @@ const get_year_value_from_budget_year = (budget_year) => _.chain(budget_year_opt
   .thru( year_index => budget_years[year_index] )
   .value();
 
+const footnotes_by_year = {
+  2018: [],
+  2019: [<TextMaker key={1} text_key="budget2019_biv_includes_excludes_note" />],
+};
+
 const validate_route = (props) => {
   const {
     history,
@@ -197,6 +202,23 @@ export default class BudgetMeasuresRoute extends React.Component {
                   /> 
                 }
               />
+              { !_.isEmpty(footnotes_by_year[year_value]) &&
+                <Details
+                  summary_content = { <TextMaker text_key="footnotes" /> }
+                  content = {
+                    <div style={{padding: "10px"}}>
+                      <ul>
+                        {
+                          _.map(
+                            footnotes_by_year[year_value],
+                            (footnote, ix) => <li key={ix}> {footnote} </li>
+                          )
+                        }
+                      </ul>
+                    </div>
+                  }
+                />
+              }
             </div>
             { !window.is_a11y_mode &&
               <Fragment>
