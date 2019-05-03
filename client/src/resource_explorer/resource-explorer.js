@@ -3,7 +3,6 @@ import explorer_text from './explorer.yaml';
 import { Fragment } from 'react';
 import classNames from 'classnames';
 import { infograph_href_template } from '../link_utils.js';
-import { LabeledTable } from '../components/LabeledTable.js'
 import { StandardRouteContainer } from '../core/NavComponents';
 import { get_col_defs } from '../gen_expl/resource-explorer-common.js';
 import { Subject } from '../models/subject.js';
