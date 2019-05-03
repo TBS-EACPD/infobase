@@ -65,6 +65,11 @@ hr {
   @media (max-width:899px){ max-width: 90vw !important }
 }
 
+.tooltip-inner a {
+  color: #fff;
+  text-decoration: none;
+}
+
 .pop.in, .fade.in {
   opacity: 1;
   visibility: visible; 
