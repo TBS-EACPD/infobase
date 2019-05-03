@@ -55,7 +55,6 @@ const app = document.querySelector('#app');
 
 
 const tt_params_from_node = (node) => {
-
   const tt_obj = {
     title: node.getAttribute('data-ibtt-glossary-key') ? get_glossary_item_tooltip_html(node.getAttribute('data-ibtt-glossary-key')) : node.getAttribute('data-ibtt-text'),
     placement: node.getAttribute('data-ibtt-placement') || 'bottom',

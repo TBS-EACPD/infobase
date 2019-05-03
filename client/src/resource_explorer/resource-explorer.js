@@ -1,11 +1,13 @@
 import '../gen_expl/explorer-styles.scss';
 import explorer_text from './explorer.yaml';
 import { Fragment } from 'react';
+import classNames from 'classnames';
 import { infograph_href_template } from '../link_utils.js';
 import { LabeledTable } from '../components/LabeledTable.js'
 import { StandardRouteContainer } from '../core/NavComponents';
 import { get_col_defs } from '../gen_expl/resource-explorer-common.js';
 import { Subject } from '../models/subject.js';
+import { get_static_url } from '../request_utils.js';
 import { 
   create_text_maker_component,
   SpinnerWrapper,
@@ -249,6 +251,9 @@ class ExplorerPage extends React.Component {
       </div>
     </div>;
     
+    const all_category_props = [ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp19" && INCLUDE_OTHER_TAGS ? [wwh_props, hi_props] : []) ];
+    const current_category = _.find(all_category_props, props => props.active)
+
     return <div>
       <div style={{marginBottom: '35px'}}>
         <TM k="tag_nav_intro_text" el="div" />
@@ -285,18 +290,18 @@ class ExplorerPage extends React.Component {
           ]}
         />
         <div className="tabbed-content__pane">
-          <LabeledTable
-            title={text_maker("choose_explore_point")}
-            content={_.map([ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp19" && INCLUDE_OTHER_TAGS ? [wwh_props, hi_props] : []) ], props =>
-              ({
-                name: props.title,
-                desc: props.text,
-                active: props.active,
-                href: `#resource-explorer/${props.id}/${doc}`,
-              })
-            )}
-            styles={{header: "link-styled"}}
-          />
+          <h2>{text_maker("choose_explore_point")}</h2>
+          <div>
+            <ul className="nav nav-justified nav-pills">
+              {_.map(all_category_props, props =>
+                <li key={props.id} className={classNames(props.active && 'active')}><a href={`#resource-explorer/${props.id}/${doc}`} >{props.title}</a></li>
+              )}
+            </ul>
+          </div>
+          <h4>
+            { current_category && current_category.text }
+            { current_category && current_category.id==="HI" && get_image_glossary_tooltip() }
+          </h4>
           { is_m2m &&
             <div className='bs-callout bs-callout-danger'>
               <KeyConceptList 
@@ -443,7 +448,7 @@ export default class ResourceExplorer extends React.Component {
     );
 
     //additional validation
-    if(doc == "drr17" && !_.includes(['min','dept','GOCO','HWH','HI'], hierarchy_scheme) ){
+    if(doc == "drr17" && !_.includes(['min','dept','GOCO','HWH'], hierarchy_scheme) ){
       hierarchy_scheme = "min";
     }
     
@@ -455,4 +460,20 @@ export default class ResourceExplorer extends React.Component {
     );
 
   }
+}
+
+const get_image_glossary_tooltip = () => {
+  const img = <img
+    style={{marginLeft: "10px", width: "24px"}}
+    aria-hidden="true"
+    src={get_static_url('svg/not-available.svg')} 
+    tabIndex="0"
+    data-toggle="tooltip"
+    data-ibtt-glossary-key="HI"
+    data-ibtt-html="true"
+  />
+  return window.feature_detection.is_mobile() ? img :
+    <a href= "#glossary/HI">
+      {img}
+    </a>
 }
