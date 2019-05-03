@@ -411,9 +411,10 @@ export class NivoResponsiveLine extends React.Component {
               className = { yScale.zoomed ? "btn-ib-toggle btn-ib-toggle--off" : "btn-ib-toggle btn-ib-toggle--on" }
               onClick={ 
                 () => {
-                  yScale.zoomed = !yScale.zoomed;
+                  const newScale = {...yScale};
+                  newScale.zoomed = !newScale.zoomed;
                   this.setState({
-                    yScale: {...yScale},
+                    yScale: newScale,
                   });
                 }
               }
