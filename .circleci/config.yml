@@ -10,7 +10,7 @@ deploy_filter: &deploy_filter
     branches:
       only:
         - master
-        - about_page_refactor
+        - HI_glossary
 
 
 version: 2
