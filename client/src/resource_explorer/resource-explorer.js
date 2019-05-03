@@ -290,7 +290,6 @@ class ExplorerPage extends React.Component {
           ]}
         />
         <div className="tabbed-content__pane">
-          <h2>{text_maker("choose_explore_point")}</h2>
           <div>
             <ul className="nav nav-justified nav-pills">
               {_.map(all_category_props, props =>
@@ -298,12 +297,12 @@ class ExplorerPage extends React.Component {
               )}
             </ul>
           </div>
-          <h4>
+          <h4 style={{marginBottom: "10px"}}>
             { current_category && current_category.text }
             { current_category && current_category.id==="HI" && get_image_glossary_tooltip() }
           </h4>
           { is_m2m &&
-            <div className='bs-callout bs-callout-danger'>
+            <div style={{marginBottom: "10px"}} className='bs-callout bs-callout-danger'>
               <KeyConceptList 
                 question_answer_pairs={
                   _.map( 
