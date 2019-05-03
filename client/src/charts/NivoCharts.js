@@ -363,7 +363,6 @@ export class NivoResponsiveLine extends React.Component {
       theme,
       tooltip,
     } = this.props;
-
     return (
       <Fragment>
         <ResponsiveLine
@@ -380,8 +379,8 @@ export class NivoResponsiveLine extends React.Component {
           }}
           tooltip={ (d) => tooltip( d, get_formatter(is_money, text_formatter, false) ) }
           yScale={{
+            stacked: !!stacked,
             type: "linear",
-            stacked: stacked,
             min: min || get_scale_bounds(stacked, raw_data, yScale.zoomed).min,
             max: max || get_scale_bounds(stacked, raw_data, yScale.zoomed).max,
             ...(yScale || {}),
@@ -402,8 +401,8 @@ export class NivoResponsiveLine extends React.Component {
           animate={true}
           motionStiffness={motion_stiffness || 100}
           motionDamping={motion_damping || 19}
-          dotSize={enableArea ? 0 : 10}
-          areaOpacity={1}
+          dotSize={10}
+          areaOpacity={0.2}
         />
         {yScale.toggle && 
           <span className="centerer" style={{paddingBottom: "15px"}}>
@@ -457,11 +456,11 @@ NivoResponsiveLine.defaultProps = {
   },
   remove_bottom_axis: false,
   enableDotLabel: false,
-  stacked: false,
   enable_label: false,
   enableGridX: true,
   enableGridY: true,
   enableArea: false,
+  stacked: false,
   yScale: {
     type: "linear",
     zoomed: false,

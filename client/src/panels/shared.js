@@ -314,10 +314,10 @@ export class LineBarToggleGraph extends React.Component {
       raw_data,
       yScale: { 
         type: "linear",
-        stacked: extra_graph_options.stacked,
         zoomed: y_scale_zoomed,
       },
       enableArea: !!extra_graph_options.enableArea,
+      stacked: !!extra_graph_options.stacked,
       is_money: !!extra_graph_options.is_money,
       text_formatter: formatter || extra_graph_options.formatter,
       margin: {
