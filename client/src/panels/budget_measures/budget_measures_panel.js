@@ -407,9 +407,16 @@ class BudgetMeasureHBars extends React.Component {
       _.filter(value_options, value_option => value_option.id === selected_value).length === 1 ?
         selected_value :
         value_options[0].id;
+    
+    const selected_sort_map = {
+      funding_overview: 'funding',
+      funding: 'funding',
+      remaining: 'remaining',
+    }
 
     const sorted_data = _.chain(data)
-      .sortBy('measure_data.funding')
+      .map(measure => ({...measure, ...measure.measure_data}))
+      .sortBy(selected_sort_map[valid_selected_value])
       .reverse()
       .value()
   
@@ -421,56 +428,27 @@ class BudgetMeasureHBars extends React.Component {
       measure_id: 99999,
       chapter_key: null,
       description: "",
-      measure_data: {
-        funding: _.chain(sorted_data)
-          .tail(top)
-          .sumBy('measure_data.funding')
-          .value(),
-        allocated: _.chain(sorted_data)
-          .tail(top)
-          .sumBy('measure_data.allocated')
-          .value(),
-        withheld: _.chain(sorted_data)
-          .tail(top)
-          .sumBy('measure_data.withheld')
-          .value(),
-        remaining: _.chain(sorted_data)
-          .tail(top)
-          .sumBy('measure_data.remaining')
-          .value(),
-      },
       name: "All other measures",
       section_id: null,
       year: "2019",
     };
-  
-    const sums = {};
+
     _.each(
       _.chain(sorted_data)
         .tail(top)
         .map(measure => ({...measure, ...measure.measure_data}))
         .value(),
       item => {
-        _.each(['allocated','withheld'], amount => {
-          sums[amount] = (sums[amount] || 0) + item[amount];
-        }
+        _.each(['funding','remaining','allocated','withheld'], amount => {
+          others[amount] = (others[amount] || 0) + item[amount];
+        })
       }
     );
 
-
-    debugger;
-
     const top_and_others = _.reverse( _.concat(top_data,others) );
 
-    let formatted_data;
-
-    if(selected_value === "funding_overview"){
-      formatted_data = _.map(top_and_others, measure => ({...measure, ...measure.measure_data}))
-    }
-
-    
     return {
-      data: formatted_data,
+      data: top_and_others,
       info,
       grouping_options,
       selected_grouping: valid_selected_grouping,
@@ -500,40 +478,94 @@ class BudgetMeasureHBars extends React.Component {
 
     const biv_value_colors = d3.scaleOrdinal().range(lightCategory10Colors);
 
+    const effective_selected_value = selected_grouping === "programs" ?
+      'allocated' :
+      selected_value;
+
+    const breakdown_keys = ['remaining','allocated','withheld']
+    const keys_to_show = effective_selected_value === "funding_overview" ? breakdown_keys : [effective_selected_value]
+
     return (
-      <div style={{height: "800px"}}>
-        <NivoResponsiveHBar
-          data={data}
-          indexBy = "name"
-          keys = {["allocated","withheld","remaining"]}
-          enableLabel = {true}
-          label={d => {return formatter(d.value)} }
-          colorBy = {d => biv_value_colors(d.id)}
-          margin = {{
-            top: 20,
-            right: 20,
-            bottom: 100,
-            left: 300,
-          }}
-          bttm_axis={{
-            tickSize: 5,
-            tickPadding: 5,
-            tickValues: 6,
-            format: (d) => formatter(d),
-          }}
-          left_axis={{
-            tickSize: 5,
-            tickPadding: 5,
-            format: (d) => wrap(d, 50),
-          }}
-          padding = {0.1}
-          is_money = {true}
-          enableGridX={false}
-          enableGridY={false}
-          isInteractive={true}
-          labelSkipWidth={50}
-        />
-      </div>
+      <Fragment>
+        <div className = 'centerer'>
+          <label>
+            <TM k="budget_panel_group_by" />
+            <Select 
+              selected = {selected_grouping}
+              options = {_.map(grouping_options, 
+                ({name, id}) => ({
+                  id,
+                  display: name,
+                })
+              )}
+              onSelect = { id => this.setState({selected_grouping: id}) }
+              className = "form-control"
+            />
+          </label>
+          <label>
+            <TM k="budget_panel_select_value" />
+            <Select 
+              selected = {effective_selected_value}
+              options = {_.map(value_options, 
+                ({name, id}) => ({ 
+                  id,
+                  display: name,
+                })
+              )}
+              onSelect = { id => this.setState({selected_value: id}) }
+              className = "form-control"
+            />
+          </label>
+        </div>
+        <div className="centerer" style={{height: "800px"}}>
+          <NivoResponsiveHBar
+            data={data}
+            indexBy = "name"
+            keys = {keys_to_show}
+            enableLabel = {true}
+            label={d => {return formatter(d.value)} }
+            colorBy = {d => biv_value_colors(d.id)}
+            margin = {{
+              top: 20,
+              right: 20,
+              bottom: 100,
+              left: 300,
+            }}
+            bttm_axis={{
+              tickSize: 5,
+              tickPadding: 5,
+              tickValues: 6,
+              format: (d) => formatter(d),
+            }}
+            left_axis={{
+              tickSize: 5,
+              tickPadding: 5,
+              format: (d) => wrap(d, 50),
+            }}
+            padding = {0.1}
+            is_money = {true}
+            enableGridX={false}
+            enableGridY={false}
+            isInteractive={true}
+            labelSkipWidth={50}
+            legends={[
+              {
+                dataFrom: "keys",
+                anchor: "top",
+                direction: "row",
+                justify: false,
+                translateX: 0,
+                translateY: -10,
+                itemsSpacing: 2,
+                itemWidth: 100,
+                itemHeight: 0,
+                itemDirection: "left-to-right",
+                symbolSize: 20,
+              },
+            ]}
+          />
+        </div>
+      </Fragment>
     )
   }
 
