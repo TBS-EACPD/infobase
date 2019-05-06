@@ -1,4 +1,5 @@
 import './TabbedContent.scss';
+import classNames from 'classnames';
 
 export class TabbedControls extends React.Component {
   render(){
@@ -11,20 +12,24 @@ export class TabbedControls extends React.Component {
       <div className = "tabbed-controls">
         <ul>
           {_.map(tab_options, 
-            ({key, label, is_open}) => (
+            ({key, label, is_open, is_disabled}) => (
               <li
-                className = { `tabbed-controls__label${ is_open && " tabbed-controls__label--active" || ""}` }
+                className = { classNames({
+                  'tabbed-controls__label': true,
+                  'tabbed-controls__label--active': !!is_open,
+                  'tabbed-controls__label--disabled': !!is_disabled,
+                }) }
                 id = {key + "_tab"}
                 key = {key + "_tab"}
-                onClick = { () => tab_callback(key) }
+                onClick = { () => !is_disabled && tab_callback(key) }
               > 
                 <span
                   tabIndex = {0} 
                   className = "tabbed-controls__label-text"
                   role = "button"
                   aria-pressed = { is_open }
-                  onClick = { () => tab_callback(key) }
-                  onKeyDown = { (e) => (e.keyCode===13 || e.keyCode===32) && tab_callback(key) }
+                  onClick = { () => !is_disabled && tab_callback(key) }
+                  onKeyDown = { (e) => !is_disabled && (e.keyCode===13 || e.keyCode===32) && tab_callback(key) }
                 >
                   {label}
                 </span>

@@ -43,11 +43,7 @@ const {
   SpinnerWrapper,
 } = util_components;
 
-const {
-  StackedHbarChart,
-  A11YTable,
-  GraphLegend,
-} = declarative_charts;
+const { A11YTable } = declarative_charts;
 
 const { text_maker, TM } = create_text_maker_component([text1,text2]);
 
@@ -72,30 +68,6 @@ const calculate_stats_common = (data) => {
   }
 }
 
-const crso_program_calculate = (subject, info, options, years_with_data) => {
-  const org_id_string = subject.dept.id.toString();
-  
-  const get_program_measures_with_data_filtered = (year) => _.chain( BudgetMeasure.get_all() )
-    .filter(measure => _.indexOf( measure.orgs, org_id_string ) !== -1 && measure.year === year)
-    .map( measure => 
-      ({
-        ...measure,
-        measure_data: _.chain(measure.data)
-          .filter( data => data.org_id === org_id_string )
-          .thru( ([program_allocations]) => program_allocations )
-          .value(),
-      })
-    )
-    .filter(measure => measure.measure_data.allocated !== 0)
-    .value();
-
-  return {
-    years_with_data,
-    get_data: get_program_measures_with_data_filtered,
-    get_info: calculate_stats_common,
-    subject,
-  };
-}
 
 const calculate_functions = {
   gov: function(subject, info, options, years_with_data){
@@ -145,8 +117,34 @@ const calculate_functions = {
     };
   },
   program: crso_program_calculate,
-  crso: crso_program_calculate,
+  crso: crso_program_calculate, // only count budget items allocated directly to CRSOs
 };
+
+
+const crso_program_calculate = (subject, info, options, years_with_data) => {
+  const org_id_string = subject.dept.id.toString();
+  
+  const get_program_measures_with_data_filtered = (year) => _.chain( BudgetMeasure.get_all() )
+    .filter(measure => _.indexOf( measure.orgs, org_id_string ) !== -1 && measure.year === year)
+    .map( measure => 
+      ({
+        ...measure,
+        measure_data: _.chain(measure.data)
+          .filter( data => data.org_id === org_id_string )
+          .thru( ([program_allocations]) => program_allocations )
+          .value(),
+      })
+    )
+    .filter(measure => measure.measure_data.allocated !== 0)
+    .value();
+
+  return {
+    years_with_data,
+    get_data: get_program_measures_with_data_filtered,
+    get_info: calculate_stats_common,
+    subject,
+  };
+}
 
 const budget_measure_render = function({calculations, footnotes, sources}){
 
@@ -200,45 +198,6 @@ const budget_measure_render = function({calculations, footnotes, sources}){
 ));
 
 
-const treatAsProgram = (subject) => _.indexOf(["program", "crso"], subject.level) !== -1;
-const get_grouping_options = (subject, data) =>{
-  const common_options = [
-    {
-      name: text_maker('budget_measures'),
-      id: 'measures',
-    },
-  ];
-
-  if (subject.level === "gov"){
-    return [
-      ...common_options,
-      {
-        name: text_maker('orgs'),
-        id: 'orgs',
-      },
-    ];
-  } else if (subject.level === "dept"){
-    const has_allocation_data = _.chain(data)
-      .flatMap(budget_measure => budget_measure.measure_data)
-      .filter(data => +data.org_id === subject.id)
-      .some(data => data.allocated !== 0)
-      .value();
-
-    if (has_allocation_data){
-      return [
-        ...common_options,
-        {
-          name: text_maker('programs'),
-          id: 'programs',
-        },
-      ];
-    } else {
-      return common_options;
-    }
-  } else {
-    return common_options;
-  }
-}
 
 class BudgetMeasurePanel extends React.Component {
   constructor(props){
@@ -300,21 +259,18 @@ class BudgetMeasurePanel extends React.Component {
       </Fragment>
     );
 
-    if ( years_with_data.length === 1) {
-      return inner_content;
-    }
-
     return (
       <div className="tabbed-content">
         <TabbedControls
           tab_callback={ (year) => this.setState({loading: true, selected_year: year}) }
           tab_options={
             _.map(
-              years_with_data,
+              budget_years,
               (year) => ({
                 key: year,
                 label: `${text_maker("budget_name_header")} ${year}`,
                 is_open: selected_year === year,
+                is_disabled: !(_.includes(years_with_data, year)),
               })
             )
           }
@@ -441,7 +397,6 @@ class BudgetMeasureHBars extends React.Component {
     );
 
     const top_and_others = _.reverse( sorted_data.length > top ? _.concat(top_data,others) : sorted_data );
-
 
     const get_program_allocation_data_from_dept_data = (data) => {
       return _.chain(data)
@@ -838,3 +793,46 @@ function wrap(text, width) {
 // } else if (selected_grouping === 'programs'){
 //   data_by_selected_group = get_program_allocation_data_from_dept_data(data);
 // }
+
+
+
+
+const treatAsProgram = (subject) => _.indexOf(["program", "crso"], subject.level) !== -1;
+const get_grouping_options = (subject, data) =>{
+  const common_options = [
+    {
+      name: text_maker('budget_measures'),
+      id: 'measures',
+    },
+  ];
+
+  if (subject.level === "gov"){
+    return [
+      ...common_options,
+      {
+        name: text_maker('orgs'),
+        id: 'orgs',
+      },
+    ];
+  } else if (subject.level === "dept"){
+    const has_allocation_data = _.chain(data)
+      .flatMap(budget_measure => budget_measure.measure_data)
+      .filter(data => +data.org_id === subject.id)
+      .some(data => data.allocated !== 0)
+      .value();
+
+    if (has_allocation_data){
+      return [
+        ...common_options,
+        {
+          name: text_maker('programs'),
+          id: 'programs',
+        },
+      ];
+    } else {
+      return common_options;
+    }
+  } else {
+    return common_options;
+  }
+}

@@ -7,6 +7,13 @@
   color: #333;
 }
 
+@mixin disabled-tab-mixin {
+  border: 1px solid $primaryColor;
+  background-color: #757575;
+  transition: background-color 200ms ease, border-radius 400ms ease;
+  color: #fff;
+}
+
 .tabbed-controls > ul {
   position: relative;
   z-index: 1;
@@ -36,7 +43,9 @@ li.tabbed-controls__label {
     font-size: 15.6px;
     font-weight: $mediumFontWeight;
   }
+}
 
+li.tabbed-controls__label:not(.tabbed-controls__label--disabled){
   &:hover, &:focus {
     @include active-tab-mixin;
   }
@@ -51,6 +60,17 @@ li.tabbed-controls__label--active {
   & > .tabbed-controls__label-text {
     cursor: default;
     font-weight: $heavyFontWeight;
+  }
+}
+
+li.tabbed-controls__label--disabled {
+  @include disabled-tab-mixin;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  cursor: default;
+
+  & > .tabbed-controls__label-text {
+    cursor: default;
   }
 }
 
