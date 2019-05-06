@@ -469,19 +469,18 @@ NivoResponsiveLine.defaultProps = {
 };
 
 const get_scale_bounds = (stacked, raw_data, zoomed) => {
-  if(stacked){
-    return {
-      min: 0,
-      max: 'auto',
-    }
-  }
   const min = _.min(raw_data);
   const max = _.max(raw_data);
   const scaled_min = min < 0 ? min * 1.1 : min * 0.9;
   const scaled_max = max < 0 ? max * 0.9 : max * 1.1;
-  const bounds = {
-    min: zoomed ? scaled_min : 0,
-    max: scaled_max,
+  if(stacked){
+    return {
+      min: min < 0 ? scaled_min : 0,
+      max: 'auto',
+    }
   }
-  return bounds;
+  return {
+    min: zoomed || min < 0 ? scaled_min : 0,
+    max: !zoomed && max < 0 ? 0 : scaled_max,
+  }
 }
