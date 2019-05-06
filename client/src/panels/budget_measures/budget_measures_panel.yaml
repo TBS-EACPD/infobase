@@ -88,6 +88,23 @@ dept_budget_measures_panel_text:
 
     {{{gt "budget_route_top_text_notes"}}}
 
+
+program_crso_budget_measures_above_tab_text:
+  transform: [handlebars, markdown]
+  en: |
+    {{#if funding_only_2018}}
+      Budget {{budget_year_2}} does not provide additional funding for {{subj_name subject}} for {{fmt_year_to_fiscal_year budget_year_2}}.
+    {{else}}
+      Budget {{budget_year_1}} did not provide additional funding for {{subj_name subject}} for {{fmt_year_to_fiscal_year budget_year_1}}.
+    {{/if}}
+  fr: |
+    {{#if funding_only_2018}}
+      Le budget de {{budget_year_2}} ne prévoit accorder aucun de fonds supplémentaires à {{subj_name subject}} pour {{fmt_year_to_fiscal_year budget_year_2}}.
+    {{else}}
+      Le budget de {{budget_year_1}} n'a prévu accorder aucun de fonds supplémentaires à {{subj_name subject}} pour {{fmt_year_to_fiscal_year budget_year_1}}.
+    {{/if}}
+
+
 program_crso_budget_measures_panel_text:
   transform: [handlebars, markdown]
   en: |

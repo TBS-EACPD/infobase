@@ -277,6 +277,12 @@ class BudgetMeasurePanel extends React.Component {
           { treatAsProgram(subject) &&
               <TM
                 k={"program_crso_budget_measures_above_tab_text"}
+                args={{
+                  subject,
+                  budget_year_1: budget_years[0],
+                  budget_year_2: budget_years[1],
+                  funding_only_2018: selected_year === "2018",
+                }}
               />
           }
         </div>
