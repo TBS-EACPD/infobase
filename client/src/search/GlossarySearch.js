@@ -19,7 +19,7 @@ const GlossarySearch = withRouter(
         placeholder = { glossary_placeholder }
         search_configs = { [ glossary_search_config ] }
         onSelect = {
-          ({id}) => history.push( glossary_href(id) )
+          ({id}) => history.push( glossary_href(id).replace("#","/") )
         }
         minLength = { 4 }
       />;
