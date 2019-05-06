@@ -442,163 +442,53 @@ class BudgetMeasureHBars extends React.Component {
 
     const top_and_others = _.reverse( sorted_data.length > top ? _.concat(top_data,others) : sorted_data );
 
-    return {
-      data: top_and_others,
-      info,
-      grouping_options,
-      selected_grouping: valid_selected_grouping,
-      selected_value: valid_selected_value,
-      value_options,
+
+    const get_program_allocation_data_from_dept_data = (data) => {
+      return _.chain(data)
+        .flatMap( measure => _.chain(measure.data)
+          .filter(measure_row => +measure_row.org_id === subject.id)
+          .map("program_allocations")
+          .value()
+        )
+        .reduce(
+          (memo, program_allocations) => {
+            _.each(
+              program_allocations, 
+              ({subject_id, allocated}) => {
+                const memo_value = memo[subject_id] || 0;
+                memo[subject_id] = memo_value + allocated;
+              }
+            )
+            return memo;
+          },
+          {},
+        )
+        .map(
+          (program_allocation, program_id) => {
+            const program = Program.lookup(program_id) || CRSO.lookup(program_id);
+    
+            if ( !_.isUndefined(program) ){
+              return {
+                key: program_id,
+                label: program.name,
+                href: infograph_href_template(program, "financial"),
+                data: {"allocated": program_allocation},
+              };
+            } else {
+                window.is_dev && console.warn(`Budget panel: missing program ${program_id}`); // eslint-disable-line
+    
+              return {
+                key: program_id,
+                label: program_id,
+                href: false,
+                data: {"allocated": program_allocation},
+              };
+            }
+          }
+        )
+        .value();
     };
-  }
-  render(){
-    const { 
-      graph_args: {
-        subject,
-      },
-      selected_year,
-    } = this.props;
 
-    const {
-      selected_grouping,
-      selected_value,
-      grouping_options,
-      value_options,
-      data,
-      info,
-    } = this.state;
-
-
-    const formatter = formats.compact1_raw;
-
-    const biv_value_colors = d3.scaleOrdinal().range(lightCategory10Colors);
-
-    const effective_selected_value = selected_grouping === "programs" ?
-      'allocated' :
-      selected_value;
-
-    const breakdown_keys = ['remaining','allocated','withheld']
-    const keys_to_show = effective_selected_value === "funding_overview" ? breakdown_keys : [effective_selected_value]
-
-    return (
-      <Fragment>
-        <div className = 'centerer'>
-          <label>
-            <TM k="budget_panel_group_by" />
-            <Select 
-              selected = {selected_grouping}
-              options = {_.map(grouping_options, 
-                ({name, id}) => ({
-                  id,
-                  display: name,
-                })
-              )}
-              onSelect = { id => this.setState({selected_grouping: id}) }
-              className = "form-control"
-            />
-          </label>
-          <label>
-            <TM k="budget_panel_select_value" />
-            <Select 
-              selected = {effective_selected_value}
-              options = {_.map(value_options, 
-                ({name, id}) => ({ 
-                  id,
-                  display: name,
-                })
-              )}
-              onSelect = { id => this.setState({selected_value: id}) }
-              className = "form-control"
-            />
-          </label>
-        </div>
-        <div className="centerer" style={{height: data.length < 25 ? "400px" : "800px"}}>
-          <NivoResponsiveHBar
-            data={data}
-            indexBy = "name"
-            keys = {keys_to_show}
-            enableLabel = {true}
-            label={d => {return formatter(d.value)} }
-            colorBy = {d => biv_value_colors(d.id)}
-            margin = {{
-              top: 20,
-              right: 20,
-              bottom: 100,
-              left: 300,
-            }}
-            bttm_axis={{
-              tickSize: 5,
-              tickPadding: 5,
-              tickValues: 6,
-              format: (d) => formatter(d),
-            }}
-            left_axis={{
-              tickSize: 5,
-              tickPadding: 5,
-              format: (d) => wrap(d, 50),
-            }}
-            padding = {0.1}
-            is_money = {true}
-            enableGridX={false}
-            enableGridY={false}
-            isInteractive={true}
-            labelSkipWidth={50}
-            legends={[
-              {
-                dataFrom: "keys",
-                anchor: "top",
-                direction: "row",
-                justify: false,
-                translateX: 0,
-                translateY: -10,
-                itemsSpacing: 2,
-                itemWidth: 100,
-                itemHeight: 0,
-                itemDirection: "left-to-right",
-                symbolSize: 20,
-              },
-            ]}
-          />
-        </div>
-      </Fragment>
-    )
-  }
-
-
-  old_render(){
-    const { 
-      graph_args: {
-        subject,
-      },
-      selected_year,
-    } = this.props;
-
-    const {
-      selected_grouping,
-      selected_value,
-      grouping_options,
-      value_options,
-      data,
-      info,
-    } = this.state;
-
-    const effective_selected_value = selected_grouping === "programs" ?
-      'allocated' :
-      selected_value;
-
-    const has_budget_links = selected_year === "2018";
-
-    const biv_values = _.chain(budget_values)
-      .keys()
-      .filter(key => key !== "funding")
-      .sortBy()
-      .value();
-
-    const label_value_indicator = (value) => value < 0 ? "__negative_valued" : "__positive_valued";
-    const strip_value_indicator_from_label = (label) => label
-      .replace("__negative_valued", "")
-      .replace("__positive_valued", "");
-      
     const get_org_budget_data_from_all_measure_data = (data) => {
       return _.chain(data)
         .flatMap( measure => measure.data)
@@ -632,117 +522,55 @@ class BudgetMeasureHBars extends React.Component {
         .filter()
         .value();
     };
-    const get_program_allocation_data_from_dept_data = (data) => {
-      return _.chain(data)
-        .flatMap( measure => _.chain(measure.data)
-          .filter(measure_row => +measure_row.org_id === subject.id)
-          .map("program_allocations")
-          .value()
-        )
-        .reduce(
-          (memo, program_allocations) => {
-            _.each(
-              program_allocations, 
-              ({subject_id, allocated}) => {
-                const memo_value = memo[subject_id] || 0;
-                memo[subject_id] = memo_value + allocated;
-              }
-            )
-            return memo;
-          },
-          {},
-        )
-        .map(
-          (program_allocation, program_id) => {
-            const program = Program.lookup(program_id) || CRSO.lookup(program_id);
 
-            if ( !_.isUndefined(program) ){
-              return {
-                key: program_id,
-                label: program.name,
-                href: infograph_href_template(program, "financial"),
-                data: {"allocated": program_allocation},
-              };
-            } else {
-                window.is_dev && console.warn(`Budget panel: missing program ${program_id}`); // eslint-disable-line
+    return {
+      data: top_and_others,
+      info,
+      grouping_options,
+      selected_grouping: valid_selected_grouping,
+      selected_value: valid_selected_value,
+      value_options,
+    };
+  }
+  render(){
+    const { 
+      graph_args: {
+        subject,
+      },
+      selected_year,
+    } = this.props;
 
-              return {
-                key: program_id,
-                label: program_id,
-                href: false,
-                data: {"allocated": program_allocation},
-              };
-            }
-          }
-        )
-        .value();
+    const {
+      selected_grouping,
+      selected_value,
+      grouping_options,
+      value_options,
+      data,
+      info,
+    } = this.state;
+
+
+    // table stuff
+    const has_budget_links = selected_year === "2018";
+
+    // graph stuff
+    const formatter = formats.compact1_raw;
+
+    const effective_selected_value = selected_grouping === "programs" ?
+      'allocated' :
+      selected_value;
+
+    const breakdown_keys = ['remaining','allocated','withheld']
+    const keys_to_show = effective_selected_value === "funding_overview" ? breakdown_keys : [effective_selected_value]
+
+    const biv_value_colors = id => {
+      const scale = _.includes(breakdown_keys, id) ?
+        d3.scaleOrdinal().domain(breakdown_keys).range(lightCategory10Colors) :
+        d3.scaleOrdinal().range(lightCategory10Colors);
+      return scale(id);
     };
 
-    let data_by_selected_group;
-    if (selected_grouping === 'measures'){
-      data_by_selected_group = _.map(data, 
-        budget_measure_item => ({
-          key: budget_measure_item.id,
-          label: budget_measure_item.name,
-          href: has_budget_links && BudgetMeasure.make_budget_link(budget_measure_item.chapter_key, budget_measure_item.ref_id),
-          is_link_out: true,
-          data: budget_measure_item.measure_data,
-        })
-      );
-    } else if (selected_grouping === 'orgs'){
-      data_by_selected_group = get_org_budget_data_from_all_measure_data(data);
-    } else if (selected_grouping === 'programs'){
-      data_by_selected_group = get_program_allocation_data_from_dept_data(data);
-    }
-      
-    let graph_ready_data;
-    if (effective_selected_value === 'funding_overview'){
-      graph_ready_data = _.chain(data_by_selected_group)
-        .map(item => {
-          const modified_data = _.chain(biv_values)
-            .flatMap( key => 
-              _.chain([item.data])
-                .map(data => {
-                  const value = data[key];
-                  return [
-                    key + label_value_indicator(value), 
-                    value,
-                  ]
-                })
-                .filter( pair => !_.isUndefined(pair[1]) )
-                .value()
-            )
-            .fromPairs()
-            .pickBy(value => value !== 0)
-            .map( (value, key) => ({
-              ...item,
-              label: strip_value_indicator_from_label(key),
-              data: [value],
-            }))
-            .sortBy("label")
-            .value();
-          const modified_item = {
-            ...item,
-            data: modified_data,
-          };
-          return modified_item;
-        })
-        .filter( item => _.reduce(item.data, (memo, data_item) => memo + data_item.data[0], 0) !== 0 )
-        .value();
-    } else {
-      graph_ready_data = _.chain(data_by_selected_group)
-        .map( item => ({
-          ...item,
-          data: [{
-            ...item,
-            label: item.label + label_value_indicator(item.data[effective_selected_value]),
-            data: [ item.data[effective_selected_value] ],
-          }],
-        }))
-        .filter( item => _.reduce(item.data, (memo, data_item) => memo + data_item.data[0], 0) !== 0 )
-        .value();
-    }
-    
+    // text stuff
     const panel_text_args = {
       subject, 
       ...info, 
@@ -773,11 +601,12 @@ class BudgetMeasureHBars extends React.Component {
         }
       </div>
     </div>;
-  
+
+
     if(window.is_a11y_mode){
 
       const program_allocation_data = subject.level === "dept" ?
-          get_program_allocation_data_from_dept_data(data) :
+          this.get_program_allocation_data_from_dept_data(data) :
           [];
 
       return <div>
@@ -791,22 +620,22 @@ class BudgetMeasureHBars extends React.Component {
                 !treatAsProgram(subject) && <Format
                   key = { budget_measure_item.id + "col2" } 
                   type = "compact1" 
-                  content = { budget_measure_item.measure_data.funding } 
+                  content = { budget_measure_item.funding } 
                 />,
                 <Format
                   key = { budget_measure_item.id + (treatAsProgram(subject) ? "col2" : "col3") } 
                   type = "compact1"
-                  content = { budget_measure_item.measure_data.allocated } 
+                  content = { budget_measure_item.allocated } 
                 />,
                 !treatAsProgram(subject) && <Format
                   key = { budget_measure_item.id + "col4" } 
                   type = "compact1"
-                  content = { budget_measure_item.measure_data.withheld } 
+                  content = { budget_measure_item.withheld } 
                 />,
                 !treatAsProgram(subject) && <Format
                   key = { budget_measure_item.id + "col5" } 
                   type = "compact1"
-                  content = { budget_measure_item.measure_data.remaining } 
+                  content = { budget_measure_item.remaining } 
                 />,
                 has_budget_links && <a 
                   key = { budget_measure_item.id + (treatAsProgram(subject) ? "col3" : "col6") }
@@ -829,7 +658,7 @@ class BudgetMeasureHBars extends React.Component {
         { subject.level === "gov" &&
             <A11YTable
               table_name = { text_maker("budget_org_a11y_table_title") }
-              data = {_.map( get_org_budget_data_from_all_measure_data(data),
+              data = {_.map( this.get_org_budget_data_from_all_measure_data(data),
                 (org_item) => ({
                   label: org_item.label,
                   data: _.filter([
@@ -888,96 +717,92 @@ class BudgetMeasureHBars extends React.Component {
         }
       </div>;
     } else {
-      const biv_value_colors = infobase_colors(biv_values);
-      const bar_colors = (data_label) => {
-        if (effective_selected_value === 'funding_overview'){
-          return biv_value_colors(data_label);
-        } else {
-          if ( data_label.includes("__negative_valued") ){
-            return "#ff7e0f";
-          } else {
-            return "#1f77b4";
-          }
-        }
-      }
-
-      return <div>
-        { text_area }
-        <div className = "frow">
-          <div className = "fcol-md-12 budget-panel-controls-and-graph">
-            <div className = 'centerer'>
-              <label>
-                <TM k="budget_panel_group_by" />
-                <Select 
-                  selected = {selected_grouping}
-                  options = {_.map(grouping_options, 
-                    ({name, id}) => ({
-                      id,
-                      display: name,
-                    })
-                  )}
-                  onSelect = { id => this.setState({selected_grouping: id}) }
-                  className = "form-control"
-                />
-              </label>
-              <label>
-                <TM k="budget_panel_select_value" />
-                <Select 
-                  selected = {effective_selected_value}
-                  options = {_.map(value_options, 
-                    ({name, id}) => ({ 
-                      id,
-                      display: name,
-                    })
-                  )}
-                  onSelect = { id => this.setState({selected_value: id}) }
-                  className = "form-control"
-                />
-              </label>
-            </div>
-            <div className = 'centerer'>
-              { effective_selected_value === 'funding_overview' &&
-                  <GraphLegend
-                    isHorizontal = {true}
-                    items = {
-                      _.map(biv_values, biv_value => ({
-                        id: biv_value,
-                        label: budget_values[biv_value].text,
-                        color: biv_value_colors(biv_value),
-                        active: true,
-                      }))
-                    }
-                  />
-              }
-            </div>
-            <div className = 'budget-panel-graph-label'>
-              <span>
-                { 
-                  _.chain(grouping_options)
-                    .filter(option => option.id === selected_grouping)
-                    .thru(nested_option => nested_option[0].name)
-                    .value()
-                }
-              </span>
-            </div>
-            <div className = 'budget-panel-graph'>
-              <StackedHbarChart
-                font_size="12px"
-                bar_height={60} 
-                data = {graph_ready_data}
-                formatter = {formats.compact1}
-                colors = {bar_colors}
-                paginate = {true}
-                items_per_page = {10}
+      return (
+        <Fragment>
+          {text_area}
+          <div className = 'centerer'>
+            <label style={{padding: "15px"}}>
+              <TM k="budget_panel_group_by" />
+              <Select 
+                selected = {selected_grouping}
+                options = {_.map(grouping_options, 
+                  ({name, id}) => ({
+                    id,
+                    display: name,
+                  })
+                )}
+                onSelect = { id => this.setState({selected_grouping: id}) }
+                className = "form-control"
               />
-            </div>
+            </label>
+            <label style={{padding: "15px"}}>
+              <TM k="budget_panel_select_value" />
+              <Select 
+                selected = {effective_selected_value}
+                options = {_.map(value_options, 
+                  ({name, id}) => ({ 
+                    id,
+                    display: name,
+                  })
+                )}
+                onSelect = { id => this.setState({selected_value: id}) }
+                className = "form-control"
+              />
+            </label>
           </div>
-        </div> 
-      </div>;
+          <div className="centerer" style={{height: `${data.length*30 + 150}px`}}>
+            <NivoResponsiveHBar
+              data={data}
+              indexBy = "name"
+              keys = {keys_to_show}
+              enableLabel = {true}
+              label={d => {return formatter(d.value)} }
+              colorBy = {d => biv_value_colors(d.id)}
+              margin = {{
+                top: 20,
+                right: 20,
+                bottom: 100,
+                left: 300,
+              }}
+              bttm_axis={{
+                tickSize: 5,
+                tickPadding: 5,
+                tickValues: 6,
+                format: (d) => formatter(d),
+              }}
+              left_axis={{
+                tickSize: 5,
+                tickPadding: 5,
+                format: (d) => wrap(d, 50),
+              }}
+              padding = {0.1}
+              is_money = {true}
+              enableGridX={false}
+              enableGridY={false}
+              isInteractive={true}
+              labelSkipWidth={50}
+              legends={[
+                {
+                  dataFrom: "keys",
+                  anchor: "top",
+                  direction: "row",
+                  justify: false,
+                  translateX: 0,
+                  translateY: -10,
+                  itemsSpacing: 2,
+                  itemWidth: 100,
+                  itemHeight: 0,
+                  itemDirection: "left-to-right",
+                  symbolSize: 20,
+                },
+              ]}
+            />
+          </div>
+        </Fragment>
+      )
     }
   }
 }
-
 
 function wrap(text, width) {
   const words = text.split(/\s+/).reverse();
@@ -1003,3 +828,13 @@ function wrap(text, width) {
   const tspans = _.map(lines, (line,ix) => <tspan key={ix} x={x} y={y} dy={ix > 0 ? lineHeight + dy + "em" : "0em"}>{line}</tspan> );
   return <Fragment>{ tspans }</Fragment>;
 }
+
+
+
+
+
+// else if (selected_grouping === 'orgs'){
+//   data_by_selected_group = get_org_budget_data_from_all_measure_data(data);
+// } else if (selected_grouping === 'programs'){
+//   data_by_selected_group = get_program_allocation_data_from_dept_data(data);
+// }
