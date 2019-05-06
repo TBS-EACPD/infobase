@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/TBS-EACPD/InfoBase.svg?style=svg&circle-token=a99b6b8309e5edd904b0386c4a92c10bf5f43e29)](https://circleci.com/gh/TBS-EACPD/InfoBase)
 
-GraphQL API for InfoBase data. In development.
+GraphQL API for InfoBase data.
 
 ## How to get started
 
