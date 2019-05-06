@@ -70,7 +70,7 @@ const dept_perspective_popup_template = function(d){
       })
     );
   } else if (d.data.is("dept")) {
-    return text_maker("partition_org_or_goca_popup", 
+    return text_maker("partition_org_or_goco_popup", 
       _.extend(common_popup_options, {
         description: d.data.mandate,
       })

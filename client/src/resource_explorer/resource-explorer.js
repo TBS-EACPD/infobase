@@ -161,7 +161,7 @@ class ExplorerPage extends React.Component {
     const root = get_root(flat_nodes);
 
     const get_glossary_key_by_subject_id = (id) => ({
-      GOCO: "GOCA",
+      GOCO: "GOCO",
       HI: "HI",
     }[id] || false);
 

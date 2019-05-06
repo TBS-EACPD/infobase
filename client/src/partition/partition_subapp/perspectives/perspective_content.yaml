@@ -186,7 +186,7 @@ partition_program_popup:
       {{/each}}
     </ul>
     {{> "partition_popup_infograph_link"}}
-partition_org_or_goca_popup:
+partition_org_or_goco_popup:
   transform: [handlebars]
   text: |
     {{> "partition_popup_top_row"}}

@@ -18,7 +18,7 @@ export default {
   source: [ "DP", "DRR" ],
   //"tags" : ["results", "expenditures", "FTE", "planning","report","RPP"],
   "tags": [
-    "GOCA",
+    "GOCO",
     "PA",
     "FTE",
     "PROG",

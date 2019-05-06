@@ -28,7 +28,7 @@ export default {
     "EXP",
     "PROG",
     "ANNUAL",
-    "GOCA",
+    "GOCO",
   ],
   "name": { 
     "en": "Program Expenditures by Standard Object",

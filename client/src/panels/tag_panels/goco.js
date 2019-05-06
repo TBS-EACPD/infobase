@@ -87,7 +87,7 @@ new PanelGraph({
   key: 'gocographic',
   level: 'gov',
   depends_on: ['programSpending', 'programFtes'],
-  footnotes: ["GOCA"],
+  footnotes: ["GOCO"],
   calculate: _.constant(true),
   render,
 });

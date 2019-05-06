@@ -3,8 +3,8 @@ import {
   make_dept_fte_perspective,
 } from './dept_perspectives.js';
 import {
-  make_goca_exp_perspective,
-  make_goca_fte_perspective,
+  make_goco_exp_perspective,
+  make_goco_fte_perspective,
   //make_hwh_exp_perspective,
   //make_hwh_fte_perspective,
 } from './tag_perspectives.js';
@@ -43,8 +43,8 @@ const get_all_perspectives = () => {
   return [
     make_dept_exp_perspective(),
     make_dept_fte_perspective(),
-    make_goca_exp_perspective(),
-    make_goca_fte_perspective(),
+    make_goco_exp_perspective(),
+    make_goco_fte_perspective(),
     //make_hwh_exp_perspective(),
     //make_hwh_fte_perspective(),
     make_spend_type_perspective(),

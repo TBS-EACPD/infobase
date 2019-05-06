@@ -75,7 +75,7 @@ const hwh_perspective_popup_template = function(d){
   }
 }
 
-const goca_perspective_popup_template = function(d){
+const goco_perspective_popup_template = function(d){
   const common_popup_options = get_common_popup_options(d);
   if (d.data.is("program")) {
     return text_maker("partition_program_popup", 
@@ -86,7 +86,7 @@ const goca_perspective_popup_template = function(d){
       })
     );
   } else if (d.data.is("tag") && d.children[0].data.is("program")) {
-    return text_maker("partition_org_or_goca_popup", 
+    return text_maker("partition_org_or_goco_popup", 
       _.extend(common_popup_options, {
         description: d.data.description,
       })
@@ -101,14 +101,14 @@ const goca_perspective_popup_template = function(d){
 }
 
 
-const goca_perspective_factory = (data_type) => new PartitionPerspective({
-  id: "goca",
+const goco_perspective_factory = (data_type) => new PartitionPerspective({
+  id: "goco",
   name: text_maker("spending_area_plural"),
   data_type: data_type,
   formatter: node_data => wrap_in_brackets(formats_by_data_type[data_type](node_data[data_type])),
   hierarchy_factory: () => create_tag_hierarchy("GOCO", data_type),
   data_wrapper_node_rules: tag_data_wrapper_node_rules,
-  popup_template: goca_perspective_popup_template,
+  popup_template: goco_perspective_popup_template,
   level_headers: {
     "1": text_maker("spend_area"),
     "2": text_maker("goco"),
@@ -156,15 +156,15 @@ const hwh_perspective_factory = (data_type) => new PartitionPerspective({
   ),
 })
 
-const make_goca_exp_perspective = () => goca_perspective_factory("exp");
-const make_goca_fte_perspective = () => goca_perspective_factory("fte");
+const make_goco_exp_perspective = () => goco_perspective_factory("exp");
+const make_goco_fte_perspective = () => goco_perspective_factory("fte");
 
 const make_hwh_exp_perspective = () => hwh_perspective_factory("exp");
 const make_hwh_fte_perspective = () => hwh_perspective_factory("fte");
 
 export {
-  make_goca_exp_perspective,
-  make_goca_fte_perspective,
+  make_goco_exp_perspective,
+  make_goco_fte_perspective,
   make_hwh_exp_perspective,
   make_hwh_fte_perspective,
 };

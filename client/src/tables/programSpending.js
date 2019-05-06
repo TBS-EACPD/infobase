@@ -17,7 +17,7 @@ export default {
   subject_type: "program",
   source: [ "PA" , "DP", "DRR" ],
   "tags": [
-    "GOCA",
+    "GOCO",
     "PLANNED_EXP",
     "PA",
     "EXP",
