@@ -160,11 +160,6 @@ class ExplorerPage extends React.Component {
 
     const root = get_root(flat_nodes);
 
-    const get_glossary_key_by_subject_id = (id) => ({
-      GOCO: "GOCO",
-      HI: "HI",
-    }[id] || false);
-
     const [
       goco_props, 
       hwh_props,
@@ -183,7 +178,6 @@ class ExplorerPage extends React.Component {
         title: name,
         text: description,  
         active: hierarchy_scheme === id,
-        glossary_key: get_glossary_key_by_subject_id(id),
         id,
       }))
       .value()
@@ -191,7 +185,6 @@ class ExplorerPage extends React.Component {
       title: text_maker("how_were_accountable"),
       text: text_maker("portfolio_description"),
       active: hierarchy_scheme === 'min',
-      glossary_key: get_glossary_key_by_subject_id('min'),
       id: 'min',
     };
 
@@ -199,7 +192,6 @@ class ExplorerPage extends React.Component {
       title: text_maker("organizations_public_funds"),
       text: text_maker("a_z_list_of_orgs"),
       active: hierarchy_scheme === 'dept',
-      glossary_key: get_glossary_key_by_subject_id('dept'),
       id: 'dept',
     };
 
@@ -310,7 +302,7 @@ class ExplorerPage extends React.Component {
           </div>
           <h4 style={{marginBottom: "10px"}}>
             { current_category && current_category.text }
-            { current_category && current_category.glossary_key && get_image_glossary_tooltip(current_category.glossary_key) }
+            { current_category && get_image_glossary_tooltip(current_category.id) }
           </h4>
           { is_m2m &&
             <div style={{marginBottom: "10px"}} className='bs-callout bs-callout-danger'>
@@ -472,8 +464,8 @@ export default class ResourceExplorer extends React.Component {
   }
 }
 
-const get_image_glossary_tooltip = (glossary_key) => {
-  const glossary_link = glossary_href(glossary_key);
+const get_image_glossary_tooltip = (id) => {
+  const glossary_link = glossary_href(id);
 
   const img = <img
     style={{marginLeft: "10px", width: "24px"}}
@@ -481,7 +473,7 @@ const get_image_glossary_tooltip = (glossary_key) => {
     src={get_static_url('svg/not-available.svg')} 
     tabIndex="0"
     data-toggle="tooltip"
-    data-ibtt-glossary-key={glossary_key}
+    data-ibtt-glossary-key={id}
     data-ibtt-html="true"
   />;
 
