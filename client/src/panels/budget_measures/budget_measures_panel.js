@@ -68,6 +68,31 @@ const calculate_stats_common = (data) => {
   }
 }
 
+const crso_program_calculate = (subject, info, options, years_with_data) => {
+  const org_id_string = subject.dept.id.toString();
+  
+  const get_program_measures_with_data_filtered = (year) => _.chain( BudgetMeasure.get_all() )
+    .filter(measure => _.indexOf( measure.orgs, org_id_string ) !== -1 && measure.year === year)
+    .map( measure => 
+      ({
+        ...measure,
+        measure_data: _.chain(measure.data)
+          .filter( data => data.org_id === org_id_string )
+          .thru( ([program_allocations]) => program_allocations )
+          .value(),
+      })
+    )
+    .filter(measure => measure.measure_data.allocated !== 0)
+    .value();
+
+  return {
+    years_with_data,
+    get_data: get_program_measures_with_data_filtered,
+    get_info: calculate_stats_common,
+    subject,
+  };
+}
+
 
 const calculate_functions = {
   gov: function(subject, info, options, years_with_data){
@@ -119,32 +144,6 @@ const calculate_functions = {
   program: crso_program_calculate,
   crso: crso_program_calculate, // only count budget items allocated directly to CRSOs
 };
-
-
-const crso_program_calculate = (subject, info, options, years_with_data) => {
-  const org_id_string = subject.dept.id.toString();
-  
-  const get_program_measures_with_data_filtered = (year) => _.chain( BudgetMeasure.get_all() )
-    .filter(measure => _.indexOf( measure.orgs, org_id_string ) !== -1 && measure.year === year)
-    .map( measure => 
-      ({
-        ...measure,
-        measure_data: _.chain(measure.data)
-          .filter( data => data.org_id === org_id_string )
-          .thru( ([program_allocations]) => program_allocations )
-          .value(),
-      })
-    )
-    .filter(measure => measure.measure_data.allocated !== 0)
-    .value();
-
-  return {
-    years_with_data,
-    get_data: get_program_measures_with_data_filtered,
-    get_info: calculate_stats_common,
-    subject,
-  };
-}
 
 const budget_measure_render = function({calculations, footnotes, sources}){
 
@@ -240,6 +239,8 @@ class BudgetMeasurePanel extends React.Component {
   render(){
     const { graph_args } = this.props;
 
+    const { subject } = graph_args;
+
     const {
       years_with_data,
       selected_year,
@@ -259,26 +260,52 @@ class BudgetMeasurePanel extends React.Component {
       </Fragment>
     );
 
-    return (
-      <div className="tabbed-content">
-        <TabbedControls
-          tab_callback={ (year) => this.setState({loading: true, selected_year: year}) }
-          tab_options={
-            _.map(
-              budget_years,
-              (year) => ({
-                key: year,
-                label: `${text_maker("budget_name_header")} ${year}`,
-                is_open: selected_year === year,
-                is_disabled: !(_.includes(years_with_data, year)),
-              })
-            )
+    const above_tab_text = <div className = "frow" >
+      { years_with_data.length === 1 && ( subject.level === "dept" || treatAsProgram(subject) ) &&
+        <div className = "fcol-md-12 fcol-xs-12 medium_panel_text text">
+          { graph_args.subject.level === "dept" &&
+              <TM
+                k={"dept_budget_measures_above_tab_text"} 
+                args={{
+                  subject,
+                  budget_year_1: budget_years[0],
+                  budget_year_2: budget_years[1],
+                  funding_only_2018: selected_year === "2018",
+                }}
+              />
           }
-        />
-        <div className="tabbed-content__pane">
-          {inner_content}
+          { treatAsProgram(subject) &&
+              <TM
+                k={"program_crso_budget_measures_above_tab_text"}
+              />
+          }
         </div>
-      </div>
+      }
+    </div>;
+
+    return (
+      <Fragment>
+        <div>{above_tab_text}</div>
+        <div className="tabbed-content">
+          <TabbedControls
+            tab_callback={ (year) => this.setState({loading: true, selected_year: year}) }
+            tab_options={
+              _.map(
+                budget_years,
+                (year) => ({
+                  key: year,
+                  label: `${text_maker("budget_name_header")} ${year}`,
+                  is_open: selected_year === year,
+                  is_disabled: !(_.includes(years_with_data, year)),
+                })
+              )
+            }
+          />
+          <div className="tabbed-content__pane">
+            {inner_content}
+          </div>
+        </div>
+      </Fragment>
     );
   }
 }
@@ -491,6 +518,7 @@ class BudgetMeasureHBars extends React.Component {
     const { 
       graph_args: {
         subject,
+        years_with_data,
       },
       selected_year,
     } = this.props;

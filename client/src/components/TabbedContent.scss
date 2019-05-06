@@ -9,9 +9,9 @@
 
 @mixin disabled-tab-mixin {
   border: 1px solid $primaryColor;
-  background-color: #757575;
+  background-color: $tertiaryColor;
   transition: background-color 200ms ease, border-radius 400ms ease;
-  color: #fff;
+  color: #333;
 }
 
 .tabbed-controls > ul {
