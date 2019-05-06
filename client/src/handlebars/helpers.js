@@ -524,7 +524,7 @@ Handlebars.registerHelper("stripes", function(index) {
 //  will produce:
 // `[link text](#glossary-key "en/fr explanation that this links to a glossary")`
 Handlebars.registerHelper("gl", function glossary_link(key){
-  const href = glossary_href(GlossaryEntry.lookup(key));
+  const href = glossary_href(key);
   var str = `(${href} "${trivial_text_maker('glossary_link_title')}")`;
   // SafeString is used to avoid having to use the [Handlebars triple bracket syntax](http://handlebarsjs.com/#html_escaping)
   return new Handlebars.SafeString(str);
@@ -539,7 +539,7 @@ function glossary_tooltip(display, key){
 }
 
 function tooltip_a11y_fallback(display, key){
-  const href = glossary_href(GlossaryEntry.lookup(key));
+  const href = glossary_href(key);
   return new Handlebars.SafeString(
     `<a href=${href} title="${trivial_text_maker("glossary_link_title")}">${display}</a>`
   );
@@ -557,7 +557,7 @@ Handlebars.registerHelper("gl_def",function(key){
 
 Handlebars.registerHelper("gl_title_and_link",function(key){
   const glos_item = GlossaryEntry.lookup(key);
-  const str = `<a href="${glossary_href(glos_item)}">${glos_item.title}</a>`;
+  const str = `<a href="${glossary_href(key)}">${glos_item.title}</a>`;
   // SafeString is used to avoid having to use the [Handlebars triple bracket syntax](http://handlebarsjs.com/#html_escaping)
   return new Handlebars.SafeString(str);
 });

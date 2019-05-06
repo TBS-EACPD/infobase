@@ -2,7 +2,10 @@ import '../gen_expl/explorer-styles.scss';
 import explorer_text from './explorer.yaml';
 import { Fragment } from 'react';
 import classNames from 'classnames';
-import { infograph_href_template } from '../link_utils.js';
+import { 
+  infograph_href_template,
+  glossary_href,
+} from '../link_utils.js';
 import { StandardRouteContainer } from '../core/NavComponents';
 import { get_col_defs } from '../gen_expl/resource-explorer-common.js';
 import { Subject } from '../models/subject.js';
@@ -14,6 +17,7 @@ import {
   TabbedControls,
   Details,
 } from '../util_components.js';
+
 
 const { Tag } = Subject;
 
@@ -156,6 +160,11 @@ class ExplorerPage extends React.Component {
 
     const root = get_root(flat_nodes);
 
+    const get_glossary_key_by_subject_id = (id) => ({
+      GOCO: "GOCA",
+      HI: "HI",
+    }[id] || false);
+
     const [
       goco_props, 
       hwh_props,
@@ -174,6 +183,7 @@ class ExplorerPage extends React.Component {
         title: name,
         text: description,  
         active: hierarchy_scheme === id,
+        glossary_key: get_glossary_key_by_subject_id(id),
         id,
       }))
       .value()
@@ -181,6 +191,7 @@ class ExplorerPage extends React.Component {
       title: text_maker("how_were_accountable"),
       text: text_maker("portfolio_description"),
       active: hierarchy_scheme === 'min',
+      glossary_key: get_glossary_key_by_subject_id('min'),
       id: 'min',
     };
 
@@ -188,6 +199,7 @@ class ExplorerPage extends React.Component {
       title: text_maker("organizations_public_funds"),
       text: text_maker("a_z_list_of_orgs"),
       active: hierarchy_scheme === 'dept',
+      glossary_key: get_glossary_key_by_subject_id('dept'),
       id: 'dept',
     };
 
@@ -251,7 +263,7 @@ class ExplorerPage extends React.Component {
     </div>;
     
     const all_category_props = [ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp19" && INCLUDE_OTHER_TAGS ? [wwh_props, hi_props] : []) ];
-    const current_category = _.find(all_category_props, props => props.active)
+    const current_category = _.find(all_category_props, props => props.active);
 
     return <div>
       <div style={{marginBottom: '35px'}}>
@@ -298,7 +310,7 @@ class ExplorerPage extends React.Component {
           </div>
           <h4 style={{marginBottom: "10px"}}>
             { current_category && current_category.text }
-            { current_category && current_category.id==="HI" && get_image_glossary_tooltip() }
+            { current_category && current_category.glossary_key && get_image_glossary_tooltip(current_category.glossary_key) }
           </h4>
           { is_m2m &&
             <div style={{marginBottom: "10px"}} className='bs-callout bs-callout-danger'>
@@ -460,18 +472,27 @@ export default class ResourceExplorer extends React.Component {
   }
 }
 
-const get_image_glossary_tooltip = () => {
+const get_image_glossary_tooltip = (glossary_key) => {
+  const glossary_link = glossary_href(glossary_key);
+
   const img = <img
     style={{marginLeft: "10px", width: "24px"}}
     aria-hidden="true"
     src={get_static_url('svg/not-available.svg')} 
     tabIndex="0"
     data-toggle="tooltip"
-    data-ibtt-glossary-key="HI"
+    data-ibtt-glossary-key={glossary_key}
     data-ibtt-html="true"
-  />
-  return window.feature_detection.is_mobile() ? img :
-    <a href= "#glossary/HI">
-      {img}
-    </a>
+  />;
+
+  return glossary_link && (
+    window.feature_detection.is_mobile() ? 
+      img :
+      <a 
+        href={glossary_link} 
+        style={{lineHeight: 1.5}}
+      >
+        {img}
+      </a>
+  );
 }

@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
 import { util_components, general_utils } from '../shared.js';
-import { GlossaryEntry } from '../../models/glossary.js';
 import { get_static_url } from '../../request_utils.js';
 import { glossary_href } from '../../link_utils.js';
 import {
@@ -500,7 +499,7 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
               ) :
               (
                 <a 
-                  href={ glossary_href( GlossaryEntry.lookup(status_key_to_glossary_key[status_key]) )} 
+                  href={glossary_href(status_key_to_glossary_key[status_key])} 
                   title={text_maker("glossary_link_title")}
                 >
                   {result_simple_statuses[status_key].text}

@@ -3,7 +3,12 @@ import { rpb_link } from './rpb/rpb_link.js';
 import { Table } from './core/TableClass.js';
 import { GlossaryEntry } from './models/glossary.js';
 
-const glossary_href = glossary_item => "#glossary/"+glossary_item.id;
+const glossary_href = (subject_or_id) => {
+  const id = _.isString(subject_or_id) ? subject_or_id : subject_or_id.id;
+  const is_valid_glossary_item = !_.isUndefined( GlossaryEntry.lookup(id) );
+
+  return is_valid_glossary_item && `#glossary/${id}`;
+}
 
 const general_href_for_item = item => {
 
