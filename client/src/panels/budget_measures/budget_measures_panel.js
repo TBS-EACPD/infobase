@@ -430,7 +430,6 @@ class BudgetMeasureHBars extends React.Component {
               return {
                 key: program_id,
                 name: program.name,
-                label: program.name,
                 href: infograph_href_template(program, "financial"),
                 allocated: program_allocation,
                 data: {"allocated": program_allocation},
@@ -441,7 +440,6 @@ class BudgetMeasureHBars extends React.Component {
               return {
                 key: program_id,
                 name: program_id,
-                label: program_id,
                 href: false,
                 allocated: program_allocation,
                 data: {"allocated": program_allocation},
@@ -466,7 +464,6 @@ class BudgetMeasureHBars extends React.Component {
               const summed = {
                 key: org_id,
                 name: dept.name,
-                label: dept.name, // a11ytable uses label, graph uses name
                 href: infograph_href_template(dept, "financial"),
               };
               _.each(
@@ -499,7 +496,6 @@ class BudgetMeasureHBars extends React.Component {
         chapter_key: null,
         description: "",
         name: text_maker("all_other_" + grouping),
-        label: text_maker("all_other_" + grouping),
         section_id: null,
         year: selected_year,
       };
@@ -669,7 +665,7 @@ class BudgetMeasureHBars extends React.Component {
               table_name = { text_maker("budget_org_a11y_table_title") }
               data = {_.map( get_org_budget_data_from_all_measure_data(data),
                 (org_item) => ({
-                  label: org_item.label,
+                  label: org_item.name,
                   data: _.filter([
                     <Format
                       key = { org_item.key + "col3" } 
@@ -708,7 +704,7 @@ class BudgetMeasureHBars extends React.Component {
               table_name = { text_maker("budget_program_a11y_table_title") }
               data = {_.map( program_allocation_data, 
                 (program_item) => ({
-                  label: program_item.label,
+                  label: program_item.name,
                   data: _.filter([
                     <Format
                       key = { program_item.key + "col3" } 
