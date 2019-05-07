@@ -154,10 +154,10 @@ const budget_measure_render = function({calculations, footnotes, sources}){
       title={text_maker("budget_measures_panel_title")}
       {...{
         sources, 
-        footnotes: [
+        footnotes: _.compact([
           ...footnotes,
-          {text: text_maker("budget2019_biv_includes_excludes_note")},
-        ],
+          (_.includes(["gov", 133, 55], graph_args.subject.id) && {text: text_maker("budget2019_biv_includes_excludes_note")}),
+        ]),
       }}
     >
       <BudgetMeasurePanel graph_args = { graph_args } />
