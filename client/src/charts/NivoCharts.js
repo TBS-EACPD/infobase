@@ -410,10 +410,9 @@ export class NivoResponsiveLine extends React.Component {
               className = { yScale.zoomed ? "btn-ib-toggle btn-ib-toggle--off" : "btn-ib-toggle btn-ib-toggle--on" }
               onClick={ 
                 () => {
-                  const newScale = {...yScale};
-                  newScale.zoomed = !newScale.zoomed;
+                  yScale.zoomed = !yScale.zoomed;
                   this.setState({
-                    yScale: newScale,
+                    yScale: {...yScale},
                   });
                 }
               }
@@ -426,6 +425,8 @@ export class NivoResponsiveLine extends React.Component {
     );
   }
 }
+
+
 NivoResponsiveLine.defaultProps = {
   ...general_default_props,
   tooltip: (slice, tooltip_formatter) => default_tooltip(
