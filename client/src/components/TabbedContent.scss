@@ -94,7 +94,7 @@ li.tabbed-controls__label--disabled {
   background-color: $backgroundColor;
 
   @media(max-width: 992px){
-    padding-right: 1rem;
-    padding-left: 1rem;
+    padding-right: 0px;
+    padding-left: 0px;
   }
 }
