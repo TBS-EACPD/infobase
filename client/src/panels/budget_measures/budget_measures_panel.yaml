@@ -129,3 +129,7 @@ budget_panel_select_value:
 budget_panel_a11y_link_header:
   en: Link to Budget 2018 section
   fr: Lien vers la section du budget 2018
+
+all_other_measures:
+  en: All other measures
+  fr: Toutes les autres mesures budgétaires

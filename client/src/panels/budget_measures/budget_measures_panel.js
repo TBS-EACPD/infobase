@@ -30,6 +30,7 @@ const {
   CRSO,
 } = Subject;
 
+
 const { 
   budget_years, 
   budget_data_source_dates,
@@ -412,9 +413,9 @@ class BudgetMeasureHBars extends React.Component {
       measure_id: 99999,
       chapter_key: null,
       description: "",
-      name: "All other measures",
+      name: text_maker("all_other_measures"),
       section_id: null,
-      year: "2019",
+      year: selected_year,
     };
 
     _.each(
@@ -423,7 +424,7 @@ class BudgetMeasureHBars extends React.Component {
         .map(measure => ({...measure, ...measure.measure_data}))
         .value(),
       item => {
-        _.each(['funding','remaining','allocated','withheld'], amount => {
+        _.each(_.keys(budget_values), amount => {
           others[amount] = (others[amount] || 0) + item[amount];
         })
       }
@@ -538,7 +539,6 @@ class BudgetMeasureHBars extends React.Component {
       info,
     } = this.state;
 
-
     // table stuff
     const has_budget_links = selected_year === "2018";
 
@@ -549,7 +549,7 @@ class BudgetMeasureHBars extends React.Component {
       'allocated' :
       selected_value;
 
-    const breakdown_keys = ['remaining','allocated','withheld']
+    const breakdown_keys = _.chain(budget_values).keys().filter(k => k !== 'funding').value();
     const keys_to_show = effective_selected_value === "funding_overview" ? breakdown_keys : [effective_selected_value]
 
     const biv_value_colors = id => {
@@ -814,7 +814,7 @@ function wrap(text, width) {
     word = words.pop();
   }
   lines.push(line.join(" "));
-  const tspans = _.map(lines, (line,ix) => <tspan key={ix} x={x} y={y} dy={ix > 0 ? lineHeight + dy + "em" : "0em"}>{line}</tspan> );
+  const tspans = _.map(lines, (line,ix) => <tspan key={ix} x={x} y={y} dy={ix > 0 ? lineHeight*ix + dy + "em" : "0em"}>{line}</tspan> );
   return <Fragment>{ tspans }</Fragment>;
 }
 
