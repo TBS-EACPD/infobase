@@ -67,10 +67,10 @@ li.tabbed-controls__label--disabled {
   @include disabled-tab-mixin;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
-  cursor: default;
+  cursor: not-allowed;
 
   & > .tabbed-controls__label-text {
-    cursor: default;
+    cursor: not-allowed;
   }
 }
 

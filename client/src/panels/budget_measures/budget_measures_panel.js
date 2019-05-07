@@ -51,7 +51,6 @@ const { text_maker, TM } = create_text_maker_component([text1,text2]);
 
 const TOP_TO_SHOW = 25;
 
-const wrap_size = window.feature_detection.is_mobile() ? 25 : 50;
 
 const calculate_stats_common = (data) => {
   const total_funding = _.reduce(data,
@@ -727,11 +726,68 @@ class BudgetMeasureHBars extends React.Component {
         }
       </div>;
     } else {
+
+      const nivo_default_props = {
+        data: data,
+        indexBy: "name",
+        keys: keys_to_show,
+        enableLabel: true,
+        label: d => formatter(d.value),
+        colorBy: d => biv_value_colors(d.id),
+        margin: {
+          top: 20,
+          right: 20,
+          bottom: 100,
+          left: 300,
+        },
+        bttm_axis: {
+          tickSize: 5,
+          tickPadding: 5,
+          tickValues: 6,
+          format: (d) => formatter(d),
+        },
+        left_axis: {
+          tickSize: 5,
+          tickPadding: 5,
+          format: (d) => wrap(d, 50),
+        },
+        padding: 0.1,
+        is_money: true,
+        enableGridX: false,
+        enableGridY: false,
+        isInteractive: true,
+        labelSkipWidth: 50,
+        legends: [
+          {
+            dataFrom: "keys",
+            anchor: "top",
+            direction: "row",
+            justify: false,
+            translateX: 0,
+            translateY: -10,
+            itemsSpacing: 2,
+            itemWidth: 100,
+            itemHeight: 0,
+            itemDirection: "left-to-right",
+            symbolSize: 20,
+          },
+        ],
+      };
+
+      const nivo_mobile_props = _.cloneDeep(nivo_default_props);
+      nivo_mobile_props.margin.right = 10;
+      nivo_mobile_props.margin.bottom = 25;
+      nivo_mobile_props.margin.left = 175;
+      nivo_mobile_props.bttm_axis.tickValues = 3;
+      nivo_mobile_props.left_axis.format = (d) => wrap(d, 28);
+      nivo_mobile_props.legends[0].translateX = -100;
+      nivo_mobile_props.legends[0].itemWidth = 80;
+      
       return (
         <Fragment>
           {text_area}
           <div className = 'centerer'>
-            <label style={{padding: "15px"}}>
+            <label style={{padding: "7px"}}>
               <TM k="budget_panel_group_by" />
               <Select 
                 selected = {selected_grouping}
@@ -743,9 +799,10 @@ class BudgetMeasureHBars extends React.Component {
                 )}
                 onSelect = { id => this.setState({selected_grouping: id}) }
                 className = "form-control"
+                style = {{padding: "5px"}}
               />
             </label>
-            <label style={{padding: "15px"}}>
+            <label style={{padding: "7px"}}>
               <TM k="budget_panel_select_value" />
               <Select 
                 selected = {effective_selected_value}
@@ -757,106 +814,21 @@ class BudgetMeasureHBars extends React.Component {
                 )}
                 onSelect = { id => this.setState({selected_value: id}) }
                 className = "form-control"
+                style = {{padding: "5px"}}
               />
             </label>
           </div>
           <MediaQuery minWidth={992}>
             <div className="centerer" style={{height: `${data.length*30 + 150}px`}}>
               <NivoResponsiveHBar
-                data={data}
-                indexBy = "name"
-                keys = {keys_to_show}
-                enableLabel = {true}
-                label={d => {return formatter(d.value)} }
-                colorBy = {d => biv_value_colors(d.id)}
-                margin = {{
-                  top: 20,
-                  right: 20,
-                  bottom: 100,
-                  left: 300,
-                }}
-                bttm_axis={{
-                  tickSize: 5,
-                  tickPadding: 5,
-                  tickValues: 6,
-                  format: (d) => formatter(d),
-                }}
-                left_axis={{
-                  tickSize: 5,
-                  tickPadding: 5,
-                  format: (d) => wrap(d, wrap_size),
-                }}
-                padding = {0.1}
-                is_money = {true}
-                enableGridX={false}
-                enableGridY={false}
-                isInteractive={true}
-                labelSkipWidth={50}
-                legends={[
-                  {
-                    dataFrom: "keys",
-                    anchor: "top",
-                    direction: "row",
-                    justify: false,
-                    translateX: 0,
-                    translateY: -10,
-                    itemsSpacing: 2,
-                    itemWidth: 100,
-                    itemHeight: 0,
-                    itemDirection: "left-to-right",
-                    symbolSize: 20,
-                  },
-                ]}
+                {...nivo_default_props}
               />
             </div>
           </MediaQuery>
           <MediaQuery maxWidth={992}>
             <div className="centerer" style={{height: `${data.length*40 + 150}px`}}>
               <NivoResponsiveHBar
-                data={data}
-                indexBy = "name"
-                keys = {keys_to_show}
-                enableLabel = {true}
-                label={d => {return formatter(d.value)} }
-                colorBy = {d => biv_value_colors(d.id)}
-                margin = {{
-                  top: 20,
-                  right: 10,
-                  bottom: 20,
-                  left: 150,
-                }}
-                bttm_axis={{
-                  tickSize: 5,
-                  tickPadding: 5,
-                  tickValues: 3,
-                  format: (d) => formatter(d),
-                }}
-                left_axis={{
-                  tickSize: 5,
-                  tickPadding: 5,
-                  format: (d) => wrap(d, 28),
-                }}
-                padding = {0.1}
-                is_money = {true}
-                enableGridX={false}
-                enableGridY={false}
-                isInteractive={true}
-                labelSkipWidth={50}
-                legends={[
-                  {
-                    dataFrom: "keys",
-                    anchor: "top",
-                    direction: "row",
-                    justify: false,
-                    translateX: 0,
-                    translateY: -10,
-                    itemsSpacing: 2,
-                    itemWidth: 100,
-                    itemHeight: 0,
-                    itemDirection: "left-to-right",
-                    symbolSize: 20,
-                  },
-                ]}
+                {...nivo_mobile_props}
               />
             </div>
           </MediaQuery>
@@ -865,6 +837,7 @@ class BudgetMeasureHBars extends React.Component {
     }
   }
 }
+
 
 function wrap(text, width) {
   const words = text.split(/\s+/).reverse();
