@@ -126,11 +126,18 @@ const TooltipActivator = _.isUndefined(MutationObserver) ?
     }
     componentDidUpdate() {
       const { current_tooltip_nodes } = this.state;
+
+      const compare_current_node_and_tooltip_instance = (node, instance) => (
+        node === instance.node &&
+        node.getAttribute("data-ibtt-glossary-key") === instance.glossary_key
+      );
+
       if (_.isEmpty(this.tooltip_instances)) {
         this.tooltip_instances = _.map(
           current_tooltip_nodes,
           (node) => ({
             node,
+            glossary_key: node.getAttribute("data-ibtt-glossary-key"),
             tooltip: new Tooltip(
               node,
               tt_params_from_node(node),
@@ -144,7 +151,7 @@ const TooltipActivator = _.isUndefined(MutationObserver) ?
 
         this.tooltip_instances.forEach(tooltip_instance => {
           const is_remaining_tooltip = _.chain(current_tooltip_nodes)
-            .map(node => node !== tooltip_instance.node)
+            .map( node => compare_current_node_and_tooltip_instance(node, tooltip_instance) )
             .some()
             .value();
 
@@ -162,6 +169,7 @@ const TooltipActivator = _.isUndefined(MutationObserver) ?
           .map(
             node => ({
               node,
+              glossary_key: node.getAttribute("data-ibtt-glossary-key"),
               tooltip: new Tooltip(
                 node,
                 tt_params_from_node(node),
