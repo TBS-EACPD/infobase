@@ -70,11 +70,15 @@ const FancyUL = ({children, ul_class})=> (
 
 const FootnoteList = ({ footnotes }) => <div style={{padding: "10px"}}>
   <ul>
-    {footnotes.map( ({text}, ix) => 
-      <li key={ix}>
-        <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(text)} />
-      </li>
-    )}
+    {_.chain(footnotes)
+      .uniqBy("text")
+      .map( ({text}, ix) => 
+        <li key={ix}>
+          <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(text)} />
+        </li>
+      )
+      .value()
+    }
   </ul>
 </div>;
 
