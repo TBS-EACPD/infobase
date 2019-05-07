@@ -267,8 +267,7 @@ class DetailedHistTPItems extends React.Component {
       .fromPairs()
       .value();
     
-    const raw_data =[].concat.apply([], _.map(graph_series, d => d));
-
+    const raw_data = _.flatMap(graph_series, value => value);
 
     const legend_items = _.map(prepped_rows, (row,ix) => ({
       id: ix,

@@ -239,7 +239,7 @@ export class LineBarToggleGraph extends React.Component {
       .fromPairs()
       .value();
     
-    const raw_data =[].concat.apply([], _.map(series, d => d));
+    const raw_data = _.flatMap(series, value => value);
 
     const data_bar = _.map(
       graph_options.ticks,

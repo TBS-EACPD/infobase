@@ -289,11 +289,11 @@ a.btn-ib-light {
 }
 .btn-ib-toggle.btn-ib-toggle--on {
   background-color: $buttonPrimaryColor;
-  color: $backgroundColor !important;
+  color: $backgroundColor;
 }
 .btn-ib-toggle.btn-ib-toggle--off {
   background-color: $backgroundColor;
-  color: $buttonPrimaryColor !important;
+  color: $buttonPrimaryColor;
 
 }
 
