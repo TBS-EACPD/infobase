@@ -48,6 +48,8 @@ const { A11YTable } = declarative_charts;
 
 const { text_maker, TM } = create_text_maker_component([text1,text2]);
 
+const TOP_TO_SHOW = 25;
+
 const calculate_stats_common = (data) => {
   const total_funding = _.reduce(data,
     (total, budget_measure) => total + budget_measure.measure_data.funding, 
@@ -397,40 +399,6 @@ class BudgetMeasureHBars extends React.Component {
       _.filter(value_options, value_option => value_option.id === selected_value).length === 1 ?
         selected_value :
         value_options[0].id;
-    
-
-    const sorted_data = _.chain(data)
-      .map(measure => ({...measure, ...measure.measure_data}))
-      .sortBy(valid_selected_value === "funding_overview" ? "funding" : valid_selected_value)
-      .reverse()
-      .value()
-  
-    const top = 25;
-
-    const top_data = _.take(sorted_data,top);
-
-    const others = {
-      measure_id: 99999,
-      chapter_key: null,
-      description: "",
-      name: text_maker("all_other_measures"),
-      section_id: null,
-      year: selected_year,
-    };
-
-    _.each(
-      _.chain(sorted_data)
-        .tail(top)
-        .map(measure => ({...measure, ...measure.measure_data}))
-        .value(),
-      item => {
-        _.each(_.keys(budget_values), amount => {
-          others[amount] = (others[amount] || 0) + item[amount];
-        })
-      }
-    );
-
-    const top_and_others = _.reverse( sorted_data.length > top ? _.concat(top_data,others) : sorted_data );
 
     const get_program_allocation_data_from_dept_data = (data) => {
       return _.chain(data)
@@ -459,8 +427,10 @@ class BudgetMeasureHBars extends React.Component {
             if ( !_.isUndefined(program) ){
               return {
                 key: program_id,
+                name: program.name,
                 label: program.name,
                 href: infograph_href_template(program, "financial"),
+                allocated: program_allocation,
                 data: {"allocated": program_allocation},
               };
             } else {
@@ -468,13 +438,16 @@ class BudgetMeasureHBars extends React.Component {
     
               return {
                 key: program_id,
+                name: program_id,
                 label: program_id,
                 href: false,
+                allocated: program_allocation,
                 data: {"allocated": program_allocation},
               };
             }
           }
         )
+        .sortBy("allocated")
         .value();
     };
 
@@ -488,23 +461,21 @@ class BudgetMeasureHBars extends React.Component {
             if ( _.isUndefined(dept) ){
               return false; // fake dept code case, "to be allocated" funds etc.
             } else {
-              return {
+              const summed = {
                 key: org_id,
-                label: dept.name,
+                name: dept.name,
+                label: dept.name, // a11ytable uses label, graph uses name
                 href: infograph_href_template(dept, "financial"),
-                data: _.reduce(
-                  org_group,
-                  (memo, measure_row) => _.mapValues(
-                    memo,
-                    (value, key) => value + measure_row[key]
-                  ),
-                  _.chain(budget_values)
-                    .keys()
-                    .map(value_key => [value_key, 0])
-                    .fromPairs()
-                    .value()
-                ),  
               };
+              _.each(
+                org_group,
+                item => {
+                  _.each(_.keys(budget_values), amount => {
+                    summed[amount] = (summed[amount] || 0) + item[amount];
+                  })
+                }
+              );
+              return summed;
             }
           }
         )
@@ -512,8 +483,52 @@ class BudgetMeasureHBars extends React.Component {
         .value();
     };
 
+    const get_top_data = (data, grouping, value) => {
+      const sorted_data = _.chain(data)
+        .map(measure => ({...measure, ...measure.measure_data}))
+        .sortBy(value === "funding_overview" ? "funding" : value)
+        .reverse()
+        .value();
+
+      const top_data = _.take(sorted_data,TOP_TO_SHOW);
+
+      const others = {
+        measure_id: 99999,
+        chapter_key: null,
+        description: "",
+        name: text_maker("all_other_" + grouping),
+        label: text_maker("all_other_" + grouping),
+        section_id: null,
+        year: selected_year,
+      };
+
+      _.each(
+        _.chain(sorted_data)
+          .tail(TOP_TO_SHOW)
+          .map(measure => ({...measure, ...measure.measure_data}))
+          .value(),
+        item => {
+          _.each(_.keys(budget_values), amount => {
+            others[amount] = (others[amount] || 0) + item[amount];
+          })
+        }
+      );
+      return _.reverse( sorted_data.length > TOP_TO_SHOW ? _.concat(top_data,others) : sorted_data );
+
+    }
+
+    let data_by_selected_group;
+    if(valid_selected_grouping === 'measures'){
+      data_by_selected_group = get_top_data(data, valid_selected_grouping, valid_selected_value)
+    } else if (valid_selected_grouping === 'orgs'){
+      data_by_selected_group = get_top_data(get_org_budget_data_from_all_measure_data(data), valid_selected_grouping, valid_selected_value);
+    } else if (valid_selected_grouping === 'programs'){
+      data_by_selected_group = get_program_allocation_data_from_dept_data(data);
+    }
+
+
     return {
-      data: top_and_others,
+      data: data_by_selected_group,
       info,
       grouping_options,
       selected_grouping: valid_selected_grouping,
@@ -527,7 +542,6 @@ class BudgetMeasureHBars extends React.Component {
     const { 
       graph_args: {
         subject,
-        years_with_data,
       },
       selected_year,
     } = this.props;
@@ -658,22 +672,22 @@ class BudgetMeasureHBars extends React.Component {
                     <Format
                       key = { org_item.key + "col3" } 
                       type = "compact1" 
-                      content = { org_item.data.funding } 
+                      content = { org_item.funding } 
                     />,
                     <Format
                       key = { org_item.key + "col4" } 
                       type = "compact1"
-                      content = { org_item.data.allocated } 
+                      content = { org_item.allocated } 
                     />,
                     <Format
                       key = { org_item.key + "col5" } 
                       type = "compact1"
-                      content = { org_item.data.withheld } 
+                      content = { org_item.withheld } 
                     />,
                     <Format
                       key = { org_item.key + "col6" } 
                       type = "compact1"
-                      content = { org_item.data.remaining } 
+                      content = { org_item.remaining } 
                     />,
                   ]),
                 })
@@ -697,7 +711,7 @@ class BudgetMeasureHBars extends React.Component {
                     <Format
                       key = { program_item.key + "col3" } 
                       type = "compact1" 
-                      content = { program_item.data.allocated } 
+                      content = { program_item.allocated } 
                     />,
                   ]),
                 })
@@ -821,18 +835,6 @@ function wrap(text, width) {
   const tspans = _.map(lines, (line,ix) => <tspan key={ix} x={x} y={y} dy={ix > 0 ? lineHeight*ix + dy + "em" : "0em"}>{line}</tspan> );
   return <Fragment>{ tspans }</Fragment>;
 }
-
-
-
-
-
-// else if (selected_grouping === 'orgs'){
-//   data_by_selected_group = get_org_budget_data_from_all_measure_data(data);
-// } else if (selected_grouping === 'programs'){
-//   data_by_selected_group = get_program_allocation_data_from_dept_data(data);
-// }
-
-
 
 
 const treatAsProgram = (subject) => _.indexOf(["program", "crso"], subject.level) !== -1;

@@ -133,3 +133,9 @@ budget_panel_a11y_link_header:
 all_other_measures:
   en: All other measures
   fr: Toutes les autres mesures budgétaires
+all_other_orgs:
+  en: All other organizations
+  fr: Tous les autres organismes
+all_other_programs:
+  en: All other programs
+  fr: Tous les autres programmes
