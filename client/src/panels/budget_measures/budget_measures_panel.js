@@ -12,6 +12,7 @@ import {
   Panel,
   NivoResponsiveHBar,
 } from "../shared";
+import MediaQuery from 'react-responsive';
 
 import { lightCategory10Colors } from '../../core/color_schemes.js';
 
@@ -49,6 +50,8 @@ const { A11YTable } = declarative_charts;
 const { text_maker, TM } = create_text_maker_component([text1,text2]);
 
 const TOP_TO_SHOW = 25;
+
+const wrap_size = window.feature_detection.is_mobile() ? 25 : 50;
 
 const calculate_stats_common = (data) => {
   const total_funding = _.reduce(data,
@@ -757,54 +760,106 @@ class BudgetMeasureHBars extends React.Component {
               />
             </label>
           </div>
-          <div className="centerer" style={{height: `${data.length*30 + 150}px`}}>
-            <NivoResponsiveHBar
-              data={data}
-              indexBy = "name"
-              keys = {keys_to_show}
-              enableLabel = {true}
-              label={d => {return formatter(d.value)} }
-              colorBy = {d => biv_value_colors(d.id)}
-              margin = {{
-                top: 20,
-                right: 20,
-                bottom: 100,
-                left: 300,
-              }}
-              bttm_axis={{
-                tickSize: 5,
-                tickPadding: 5,
-                tickValues: 6,
-                format: (d) => formatter(d),
-              }}
-              left_axis={{
-                tickSize: 5,
-                tickPadding: 5,
-                format: (d) => wrap(d, 50),
-              }}
-              padding = {0.1}
-              is_money = {true}
-              enableGridX={false}
-              enableGridY={false}
-              isInteractive={true}
-              labelSkipWidth={50}
-              legends={[
-                {
-                  dataFrom: "keys",
-                  anchor: "top",
-                  direction: "row",
-                  justify: false,
-                  translateX: 0,
-                  translateY: -10,
-                  itemsSpacing: 2,
-                  itemWidth: 100,
-                  itemHeight: 0,
-                  itemDirection: "left-to-right",
-                  symbolSize: 20,
-                },
-              ]}
-            />
-          </div>
+          <MediaQuery minWidth={992}>
+            <div className="centerer" style={{height: `${data.length*30 + 150}px`}}>
+              <NivoResponsiveHBar
+                data={data}
+                indexBy = "name"
+                keys = {keys_to_show}
+                enableLabel = {true}
+                label={d => {return formatter(d.value)} }
+                colorBy = {d => biv_value_colors(d.id)}
+                margin = {{
+                  top: 20,
+                  right: 20,
+                  bottom: 100,
+                  left: 300,
+                }}
+                bttm_axis={{
+                  tickSize: 5,
+                  tickPadding: 5,
+                  tickValues: 6,
+                  format: (d) => formatter(d),
+                }}
+                left_axis={{
+                  tickSize: 5,
+                  tickPadding: 5,
+                  format: (d) => wrap(d, wrap_size),
+                }}
+                padding = {0.1}
+                is_money = {true}
+                enableGridX={false}
+                enableGridY={false}
+                isInteractive={true}
+                labelSkipWidth={50}
+                legends={[
+                  {
+                    dataFrom: "keys",
+                    anchor: "top",
+                    direction: "row",
+                    justify: false,
+                    translateX: 0,
+                    translateY: -10,
+                    itemsSpacing: 2,
+                    itemWidth: 100,
+                    itemHeight: 0,
+                    itemDirection: "left-to-right",
+                    symbolSize: 20,
+                  },
+                ]}
+              />
+            </div>
+          </MediaQuery>
+          <MediaQuery maxWidth={992}>
+            <div className="centerer" style={{height: `${data.length*40 + 150}px`}}>
+              <NivoResponsiveHBar
+                data={data}
+                indexBy = "name"
+                keys = {keys_to_show}
+                enableLabel = {true}
+                label={d => {return formatter(d.value)} }
+                colorBy = {d => biv_value_colors(d.id)}
+                margin = {{
+                  top: 20,
+                  right: 10,
+                  bottom: 20,
+                  left: 150,
+                }}
+                bttm_axis={{
+                  tickSize: 5,
+                  tickPadding: 5,
+                  tickValues: 3,
+                  format: (d) => formatter(d),
+                }}
+                left_axis={{
+                  tickSize: 5,
+                  tickPadding: 5,
+                  format: (d) => wrap(d, 28),
+                }}
+                padding = {0.1}
+                is_money = {true}
+                enableGridX={false}
+                enableGridY={false}
+                isInteractive={true}
+                labelSkipWidth={50}
+                legends={[
+                  {
+                    dataFrom: "keys",
+                    anchor: "top",
+                    direction: "row",
+                    justify: false,
+                    translateX: 0,
+                    translateY: -10,
+                    itemsSpacing: 2,
+                    itemWidth: 100,
+                    itemHeight: 0,
+                    itemDirection: "left-to-right",
+                    symbolSize: 20,
+                  },
+                ]}
+              />
+            </div>
+          </MediaQuery>
         </Fragment>
       )
     }
