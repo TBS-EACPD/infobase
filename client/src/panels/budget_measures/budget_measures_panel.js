@@ -519,6 +519,8 @@ class BudgetMeasureHBars extends React.Component {
       selected_grouping: valid_selected_grouping,
       selected_value: valid_selected_value,
       value_options,
+      get_program_allocation_data_from_dept_data,
+      get_org_budget_data_from_all_measure_data,
     };
   }
   render(){
@@ -537,6 +539,8 @@ class BudgetMeasureHBars extends React.Component {
       value_options,
       data,
       info,
+      get_program_allocation_data_from_dept_data,
+      get_org_budget_data_from_all_measure_data,
     } = this.state;
 
     // table stuff
@@ -595,7 +599,7 @@ class BudgetMeasureHBars extends React.Component {
     if(window.is_a11y_mode){
 
       const program_allocation_data = subject.level === "dept" ?
-          this.get_program_allocation_data_from_dept_data(data) :
+          get_program_allocation_data_from_dept_data(data) :
           [];
 
       return <div>
@@ -647,7 +651,7 @@ class BudgetMeasureHBars extends React.Component {
         { subject.level === "gov" &&
             <A11YTable
               table_name = { text_maker("budget_org_a11y_table_title") }
-              data = {_.map( this.get_org_budget_data_from_all_measure_data(data),
+              data = {_.map( get_org_budget_data_from_all_measure_data(data),
                 (org_item) => ({
                   label: org_item.label,
                   data: _.filter([
