@@ -17,22 +17,35 @@ budget_program_a11y_table_title:
 budget_measure_stats_partial_en:
   handlebars_partial: true
   text: |
-    This funding comes from **{{measure_count}}**
+    This funding covers **{{measure_count}}**
     {{#if multiple_measures}}
-    budget measures.
+    {{gl_tt "budget measures" "BIV_MEASURE"}}
     {{else}}
-    budget measure.
+    {{gl_tt "budget measure" "BIV_MEASURE"}}
+    {{/if}}
+     managed through **{{vote_count}}**
+    {{#if multiple_votes}}
+    {{gl_tt "Budget Implementation Votes." "BIV_VOTE"}}
+    {{else}}
+    {{gl_tt "Budget Implementation Vote." "BIV_VOTE"}}
     {{/if}}
 
 budget_measure_stats_partial_fr:
   handlebars_partial: true
   text: |
-    Ces fonds proviennent de **{{measure_count}}**
+    Ces fonds couvre **{{measure_count}}**
     {{#if multiple_measures}}
-    mesures budgétaires.
+    {{gl_tt "mesures budgétaires" "BIV_MEASURE"}}
     {{else}}
-    mesure budgétaire.
+    {{gl_tt "mesure budgétaire" "BIV_MEASURE"}}
     {{/if}}
+    à gérer au moyen de **{{vote_count}}**
+    {{#if multiple_votes}}
+    {{gl_tt "crédits d’exécution du budget." "BIV_VOTE"}}
+    {{else}}
+    {{gl_tt "crédit d’exécution du budget." "BIV_VOTE"}}
+    {{/if}}
+
 
 budget_measure_panel_tracker_link_en:
   handlebars_partial: true
@@ -62,15 +75,15 @@ dept_budget_measures_above_tab_text:
   transform: [handlebars, markdown]
   en: |
     {{#if funding_only_2018}}
-      Budget {{budget_year_2}} does not provide additional funding for {{subj_name subject}} for {{fmt_year_to_fiscal_year budget_year_2}}.
+      The Budget Implementation Vote does not provide additional funding for {{subj_name subject}} for {{fmt_year_to_fiscal_year budget_year_2}}.
     {{else}}
-      Budget {{budget_year_1}} did not provide additional funding for {{subj_name subject}} for {{fmt_year_to_fiscal_year budget_year_1}}.
+      The Budget Implementation Vote did not provide additional funding for {{subj_name subject}} for {{fmt_year_to_fiscal_year budget_year_1}}.
     {{/if}}
   fr: |
     {{#if funding_only_2018}}
-      Le budget de {{budget_year_2}} ne prévoit accorder aucun de fonds supplémentaires à {{subj_name subject}} pour {{fmt_year_to_fiscal_year budget_year_2}}.
+      Le crédit d’exécution du budget ne prévoit accorder aucun de fonds supplémentaires à {{subj_name subject}} pour {{fmt_year_to_fiscal_year budget_year_2}}.
     {{else}}
-      Le budget de {{budget_year_1}} n'a prévu accorder aucun de fonds supplémentaires à {{subj_name subject}} pour {{fmt_year_to_fiscal_year budget_year_1}}.
+      Le crédit d’exécution du budget n'a prévu accorder aucun de fonds supplémentaires à {{subj_name subject}} pour {{fmt_year_to_fiscal_year budget_year_1}}.
     {{/if}}
 
 dept_budget_measures_panel_text:
@@ -93,15 +106,15 @@ program_crso_budget_measures_above_tab_text:
   transform: [handlebars, markdown]
   en: |
     {{#if funding_only_2018}}
-      Budget {{budget_year_2}} does not provide additional funding for {{subj_name subject}} for {{fmt_year_to_fiscal_year budget_year_2}}.
+      The Budget Implementation Vote does not provide additional funding for {{subj_name subject}} for {{fmt_year_to_fiscal_year budget_year_2}}.
     {{else}}
-      Budget {{budget_year_1}} did not provide additional funding for {{subj_name subject}} for {{fmt_year_to_fiscal_year budget_year_1}}.
+      The Budget Implementation Vote did not provide additional funding for {{subj_name subject}} for {{fmt_year_to_fiscal_year budget_year_1}}.
     {{/if}}
   fr: |
     {{#if funding_only_2018}}
-      Le budget de {{budget_year_2}} ne prévoit accorder aucun de fonds supplémentaires à {{subj_name subject}} pour {{fmt_year_to_fiscal_year budget_year_2}}.
+      Le crédit d’exécution du budget ne prévoit accorder aucun de fonds supplémentaires à {{subj_name subject}} pour {{fmt_year_to_fiscal_year budget_year_2}}.
     {{else}}
-      Le budget de {{budget_year_1}} n'a prévu accorder aucun de fonds supplémentaires à {{subj_name subject}} pour {{fmt_year_to_fiscal_year budget_year_1}}.
+      Le crédit d’exécution du budget n'a prévu accorder aucun de fonds supplémentaires à {{subj_name subject}} pour {{fmt_year_to_fiscal_year budget_year_1}}.
     {{/if}}
 
 
@@ -109,13 +122,13 @@ program_crso_budget_measures_panel_text:
   transform: [handlebars, markdown]
   en: |
     As of {{budget_data_source_date}}, **{{subj_name subject}}** has been {{gl_tt "allocated" "BIV_ALLO"}} **{{fmt_compact1_written total_allocated}}** to support the 
-    implementation of **{{measure_count}}** {{gt "budget_name"}} {{budget_year}} {{#if multiple_measures}}measures{{else}}measure{{/if}} in **{{fmt_year_to_fiscal_year budget_year}}**.
-    These values are on a cash basis as per {{ext_link "Main Estimates 2018-19" "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates/2018-19-estimates/2018-19-sources-uses-budget-implementation-vote-department.html"}}.
+    implementation of **{{measure_count}}** {{gt "budget_name"}} {{budget_year}} {{#if multiple_measures}}{{gl_tt "measures" "BIV_MEASURE"}}{{else}}{{gl_tt "measure" "BIV_MEASURE"}}{{/if}} in **{{fmt_year_to_fiscal_year budget_year}}**.
+    These amounts are on a cash basis as per {{ext_link "Main Estimates 2018-19" "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates/2018-19-estimates/2018-19-sources-uses-budget-implementation-vote-department.html"}}.
     {{> "budget_measure_panel_tracker_link_en"}}
   fr: |
     En date du {{budget_data_source_date}}, **{{fmt_compact1_written total_allocated}}** ont été {{gl_tt "affectés" "BIV_ALLO"}} au **{{subj_name subject}}** pour la mise en œuvre 
-    {{#if multiple_measures}}de **{{measure_count}}**{{else}}d'**une**{{/if}} mesure budgétaire de **{{fmt_year_to_fiscal_year budget_year}}**. 
-    Ces valeurs sont calculées selon la comptabilité de caisse, conformément au {{ext_link "Budget principal des dépenses 2018-2019" "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal/2018-19-budget-depenses/2018-2019-provenance-utilisation-credit-execution-budget-ministere.html"}}..
+    {{#if multiple_measures}}de **{{measure_count}}**{{else}}d'**une**{{/if}} {{gl_tt "mesure budgétaire" "BIV_MEASURE"}} de **{{fmt_year_to_fiscal_year budget_year}}**. 
+    Ces montants sont calculées selon la comptabilité de caisse, conformément au {{ext_link "Budget principal des dépenses 2018-2019" "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal/2018-19-budget-depenses/2018-2019-provenance-utilisation-credit-execution-budget-ministere.html"}}..
     {{> "budget_measure_panel_tracker_link_fr"}}
 
 budget_panel_group_by:
@@ -123,8 +136,8 @@ budget_panel_group_by:
   fr: Grouper
 
 budget_panel_select_value:
-  en: Select values to display
-  fr: Sélectionner les valeurs à afficher
+  en: Select amounts to display
+  fr: Sélectionner les montants à afficher
 
 budget_panel_a11y_link_header:
   en: Link to Budget 2018 section

@@ -63,13 +63,13 @@ budget_summary_stats:
 budget_route_top_text_notes:
   transform: [handlebars, markdown]
   en: |
-    All values displayed here are for **{{fmt_year_to_fiscal_year budget_year}}** funding and are on an Estimates basis as per {{ext_link "Main Estimates" main_estimates_budget_link}} {{fmt_year_to_fiscal_year budget_year}}.
-    {{gl_tt "Budget funding" "BIV_FUND"}} values were set in the {{budget_year}} budget plan.
-    Values for {{gl_tt "allocated" "BIV_ALLO"}}, {{gl_tt "centrally withheld" "BIV_WITH"}}, and {{gl_tt "remaining funds" "BIV_REMA"}} are current as of **{{budget_data_source_date}}**.
+    All amounts displayed here are for **{{fmt_year_to_fiscal_year budget_year}}** funding and are on an Estimates basis as per {{ext_link "Main Estimates" main_estimates_budget_link}} {{fmt_year_to_fiscal_year budget_year}}.
+    {{gl_tt "Budget funding" "BIV_FUND"}} amounts were set in the {{budget_year}} budget plan.
+    Amounts for {{gl_tt "allocated" "BIV_ALLO"}}, {{gl_tt "centrally withheld" "BIV_WITH"}}, and {{gl_tt "remaining funds" "BIV_REMA"}} are current as of **{{budget_data_source_date}}**.
   fr: |
-    Toutes les valeurs affichées dans le présent tableau correspondent au financement de **{{fmt_year_to_fiscal_year budget_year}}** figurant dans le {{ext_link "Budget principal des dépenses" main_estimates_budget_link}} de {{fmt_year_to_fiscal_year budget_year}}.
-    Les valeurs de {{gl_tt "fonds du budget" "BIV_FUND"}} ont été établies dans le Plan budgétaire de {{budget_year}}.
-    Les valeurs des {{gl_tt "fonds affectés" "BIV_ALLO"}}, des {{gl_tt "fonds retenus centralement" "BIV_WITH"}} et des {{gl_tt "fonds restants" "BIV_REMA"}} sont à jour en date du **{{budget_data_source_date}}**.
+    Toutes les sommes qui figurent dans le présent tableau correspondent au financement de **{{fmt_year_to_fiscal_year budget_year}}** figurant dans le {{ext_link "Budget principal des dépenses" main_estimates_budget_link}} de {{fmt_year_to_fiscal_year budget_year}}.
+    Les montants des {{gl_tt "fonds du budget" "BIV_FUND"}} ont été établies dans le Plan budgétaire de {{budget_year}}.
+    Le montant des {{gl_tt "fonds affectés" "BIV_ALLO"}}, des {{gl_tt "fonds retenus centralement" "BIV_WITH"}} et des {{gl_tt "fonds restants" "BIV_REMA"}} sont à jour en date du **{{budget_data_source_date}}**.
 
 budget2018_route_top_text:
   transform: [handlebars, markdown]

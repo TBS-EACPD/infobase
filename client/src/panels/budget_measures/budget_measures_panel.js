@@ -65,11 +65,16 @@ const calculate_stats_common = (data) => {
 
   const measure_count = data.length;
 
+  const year_from_data = _.first(data).year;
+  const vote_count = year_from_data === "2018" ? 1 : _.flatMap(data, d=>d.data).length;
+
   return {
     total_funding,
     total_allocated,
     measure_count,
+    vote_count,
     multiple_measures: measure_count > 1,
+    multiple_votes: vote_count > 1,
   }
 }
 

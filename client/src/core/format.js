@@ -174,7 +174,10 @@ const types_to_format = {
       return `<span class='text-nowrap'>${rtn}</span>`;
     }
   },
-  "year_to_fiscal_year": (year) => `${year}-${ window.lang === "en" ? year-2000+1 : year+1}`,
+  "year_to_fiscal_year": (year) => {
+    const year_int = parseInt(year);
+    return`${year_int}-${ window.lang === "en" ? year_int-2000+1 : year_int+1}`
+  },
   "fiscal_year_to_year": (fiscal_year) => _.chain(fiscal_year).split("-").head().value(),
 };
 
