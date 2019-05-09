@@ -461,4 +461,17 @@ Program metadata, which comprises: (1) linkage tags that identify the connection
 "TP","Transfer payment","A transfer payment is a monetary payment, or a transfer of goods, services or assets made, on the basis of an appropriation, to a third party, including a Crown corporation, that does not result in the acquisition by the Government of Canada of any goods, services or assets. Transfer payments are categorized as grants, contributions and other transfer payments. Transfer payments do not include investments, loans or loan guarantees."
 "VOTED","Voted amounts","Voted amounts refer to the amounts approved in appropriation acts."
 "YI_IGOC","Year of Incorporation","The year in which an organization was legally established."
+"BIV_VOTE","Budget Implementation Vote","A Treasury Board managed central vote for Budget Implementation. 
 
+ 
+
+In 2018-19, the Budget Implementation vote included all the funding that was set out in Table A2.11 of the 2018 Federal Budget, enabling the timely implementation of Budget measures for Canadians.
+
+ 
+
+In 2019-20, each voted budgetary measure included in Table A2.11 in the 2019 Federal Budget has a separate Budget Implementation vote in the department identified.
+
+ 
+
+Budget Implementation Votes do not include the following measures presented in Table A2.11 of the 2019 Budget: (1) Improving the Health and Safety of Canadian Workers (Canadian Centre for Occupational Health and Safety); and (2) Insuring Income Replacement Benefits for Medically Released Members of the Forces (Department of National Defence); (3) Departmental Allocation To Be Determined; and (4) Other Budget 2019 Measures (Estimates Basis)."
+"BIV_MEASURE","Budget measure","Spending measures implemented through Budget Implementation votes. A budget measure can be represented across multiple departments."
