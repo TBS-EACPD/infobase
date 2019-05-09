@@ -75,7 +75,7 @@ class CanadaGraphBarLegend extends React.Component {
             label_format = { d=><tspan x={100} y={16}> {formatter(d)} </tspan>}
             label={d => `${d.data.year}: ${formatter(d.value)}`}
             labelSkipWidth={null}
-            colorBy ={d => graph_color(0.5)}
+            colorBy ={d => get_graph_color(0.5)}
             margin = {{
               top: 40,
               right: 30,
@@ -127,7 +127,7 @@ class CanadaGraph extends React.Component {
     const ticks = _.map(people_years, y => `${run_template(y)}`);
     
     const canada_graph = new charts_index.Canada(graph_area_sel.node(), {
-      color: graph_color(1),
+      color: get_graph_color(1),
       data: years_by_province,
       ticks: ticks,
       color_scale: color_scale,
@@ -180,7 +180,7 @@ class ProvPanel extends React.Component {
       label: `${formats["big_int_real_raw"](tick)}+`,
       active: true,
       id: tick,
-      color: graph_color( color_scale(tick) ),
+      color: get_graph_color( color_scale(tick) ),
     }))
 
     return (

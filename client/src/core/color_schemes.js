@@ -1,4 +1,4 @@
-import * as color_defs from 'color_defs.js'
+import * as color_defs from './color_defs.js'
 
 //all colors from https://material.io/guidelines/style/color.html#color-color-palette
 //you can use these colors as backgrounds for dark text (#222 or darker)

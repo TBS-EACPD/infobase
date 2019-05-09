@@ -9,7 +9,6 @@ import {
 import { StandardRouteContainer } from '../core/NavComponents';
 import { get_col_defs } from '../gen_expl/resource-explorer-common.js';
 import { Subject } from '../models/subject.js';
-import { get_static_url } from '../request_utils.js';
 import { 
   create_text_maker_component,
   SpinnerWrapper,
