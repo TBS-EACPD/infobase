@@ -9,7 +9,7 @@ import {
   Col,
   create_text_maker_component,
   NivoResponsiveBar,
-  infobaseCategory10Colors,
+  get_IB_category_colors,
 } from "../shared";
 
 
@@ -106,7 +106,7 @@ const render = function({calculations, footnotes, sources}) {
             data = {data_exp}
             keys={series_labels}
             indexBy = "years"
-            colors = {infobaseCategory10Colors}
+            colors = {get_IB_category_colors().main}
             enableGridX = {false}
             margin = {{
               top: 50,

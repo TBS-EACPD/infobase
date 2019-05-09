@@ -70,39 +70,77 @@ const infobaseCategory20Colors = [
 
 
 const newIBCategoryColors = [
-  "#206bbd", // main blue
-  "#6fa341", // green (yellowish)
-  "#673c8f", // purple
-  "#16919c", // teal
-  "#c9ba28", // yellow
-  "#4f63d4", // purplish blue
-  "#23a170", // green (bluish)
-  "#8c949e", // grey
+  "#206BBD", // main blue
+  "#23A14D", // green
+  "#673C8F", // purple
+  "#16919C", // teal
+  "#DEB742", // yellow
+  "#7272D4", // purplish blue
+  "#93A341", // yellow-green
+  "#8C949E", // grey
 ]
 
-// for contrast against light text
+// for contrast against dark text
 const newIBLightCategoryColors = [
-  "#61a3eb", // main blue
-  "#a8d383", // green (yellowish)
-  "#d6beed", // purple
-  "#4abbc4", // teal
-  "#d6c951", // yellow
-  "#8d98d3", // purplish blue
-  "#6ad3aa", // green (bluish)
-  "#ccd3db", // grey
+  "#61A3EB", // main blue
+  "#78DB9A", // green
+  "#D6BEED", // purple
+  "#4ABBC4", // teal
+  "#D6CC6F", // yellow
+  "#8D98D3", // purplish blue
+  "#D7E39A", // yellow-green
+  "#CCD3DB", // grey
 ]
 
-const get_IB_category_scale = (num_colors, with_na=false, with_negative=false, pale=false) => {
-  const main_colors = pale ? newIBLightCategoryColors : newIBCategoryColors;
-  const add_colours = [
-    with_na && _.last(newIBCategoryColors),
-    with_negative && color_defs.highlightColor,
-  ]
+// for contrast against pale text
+const newIBDarkCategoryColors = [
+  "#195596", // main blue
+  "#1B793A", // green
+  "#673C8F", // purple
+  "#117078", // teal
+  "#8B6E18", // yellow
+  "#363687", // purplish blue
+  "#66712D", // yellow-green
+  "#555B62", // grey
+]
 
-  return {
-    negative: color_defs.highlightColor,
+const get_IB_category_colors = (options) => {
+  let main_colors, negative, na;
+  if(_.get(options,'pale')){
+    main_colors = [...newIBLightCategoryColors];
+  } else if(_.get(options,'dark')){
+    main_colors = [...newIBDarkCategoryColors];
+  } else {
+    main_colors = [...newIBCategoryColors];
   }
 
+  if(_.get(options,'negative')){
+    main_colors.splice(2); // remove green if we're including red
+    if(_.get(options,'pale')){
+      negative = color_defs.highlightPale;
+    } else if(_.get(options,'dark')){
+      negative = color_defs.highlightDark;
+    } else {
+      negative = color_defs.highlightColor;
+    }
+  }
+
+  if(_.get(options,'na')){
+    main_colors.splice(main_colors.length-1); // remove grey if we're including NA
+    if(_.get(options,'pale')){
+      na = _.last(newIBLightCategoryColors);
+    } else if(_.get(options,'dark')){
+      na = _.last(newIBDarkCategoryColors);
+    } else {
+      na = _.last(newIBCategoryColors);
+    }
+  }
+
+  return {
+    main: main_colors,
+    negative: _.get(options,'negative') && negative,
+    na: _.get(options,'na') && na,
+  }
 }
 
 
@@ -114,6 +152,6 @@ export {
   infobaseCategory20Colors,
   newIBCategoryColors,
   newIBLightCategoryColors,
-  get_IB_category_scale,
+  get_IB_category_colors,
 };
 

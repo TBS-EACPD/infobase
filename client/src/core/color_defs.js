@@ -9,6 +9,9 @@ const backgroundColor = "#fff";
 const highlightColor = "#da3a38";
 const separatorColor = "#bbc1c9";
 
+const highlightPale = "ffa8a8";
+const highlightDark = "#B12320";
+
 const tooltipColor = "#4d88b3";
 
 const buttonPrimaryColor = "#176dde";
@@ -25,7 +28,7 @@ const linkVisitedColor = "#7834bc";
 /* dark and light colours don't have enough contrast between them for text, so don't use them that way! Use black text on light, or (check contrast) white text on dark*/
 const successLightColor = "#cbedbd";
 const successDarkColor = "#45a64d";
-const failLightColor = "#ffa8a8";
+const failLightColor = highlightDark;
 const failDarkColor = highlightColor; // setting this to so we don't have too many shades of red, if the buttons change colour this should be changed
 const warnLightColor = "#ffecce";
 const warnDarkColor = "#fdb84c";
@@ -38,6 +41,8 @@ export {
   tertiaryColor,
   backgroundColor,
   highlightColor,
+  highlightPale,
+  highlightDark,
   separatorColor,
   tooltipColor,
   buttonPrimaryColor,
