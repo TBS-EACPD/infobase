@@ -7,7 +7,6 @@ import {
   Panel,
   create_text_maker_component,
   NivoResponsivePie,
-  infobaseCategory10Colors,
 } from "../shared";
 
 const {
@@ -128,7 +127,7 @@ class SpendInTagPerspective extends React.Component {
           <div style={{height: '400px'}} aria-hidden = {true}>
             <NivoResponsivePie
               data = {data}
-              colors = {infobaseCategory10Colors}
+              colorBy = {obj=>color_scale(obj.label)}
               total = {d3.sum( data, _.property('value') )}
               height = '400px'
             />
