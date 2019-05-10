@@ -8,6 +8,7 @@ import {
   infograph_href_template,
   StdPanel,
   Col,
+  get_IB_category_colors,
 } from '../shared';
 import { FlatTreeMapViz } from '../../charts/flat_treemap/FlatTreeMapViz.js';
 const { Format } = util_components;
@@ -132,15 +133,7 @@ const tooltip_render = vs => function (d) {
   });
 }
 
-const d3_scale = d3.scaleOrdinal(_.chain(d3.schemeCategory10)
-  .concat("#bbbbbb") // we need exactly 11 colours for this
-  .map(
-    c => {
-      const d = d3.color(c);
-      d.opacity = 0.7; // lighten them slightly so the text shows up
-      return d;
-    })
-  .value());
+const d3_scale = d3.scaleOrdinal( get_IB_category_colors({pale: true}).main );
 const color_scale = vs => function (d) {
   return d3_scale(text_func(vs, d, ""));
 }
