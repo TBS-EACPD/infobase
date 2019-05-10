@@ -123,7 +123,7 @@ export const CommonDonut = function({graph_data, legend_data, graph_height}){
       <div style = {{height: graph_height}}>
         <NivoResponsivePie
           data = {graph_data}
-          colors = {infobaseCategory10Colors}
+          colorBy = {d=>color_scale(d.label)}
           total = {total}
         />
       </div>
