@@ -419,6 +419,7 @@ export default class TreeMapper extends React.Component {
         breadcrumbs={[text_maker("treemap_breadcrumbs")]}
         description={text_maker("treemap_meta_desc")}
         non_a11y_route={true}
+        route_key={"treemap"}
       >
         {loading || !data ?
           <SpinnerWrapper ref="spinner" config_name={"route"} /> :
