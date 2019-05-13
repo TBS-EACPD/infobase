@@ -75,15 +75,15 @@ dept_budget_measures_above_tab_text:
   transform: [handlebars, markdown]
   en: |
     {{#if funding_only_2018}}
-      The Budget Implementation Vote does not provide additional funding for {{subj_name subject}} for {{fmt_year_to_fiscal_year budget_year_2}}.
+      The Budget Implementation Vote does not provide additional funding for {{subj_name subject}} in Budget {{budget_year_2}} for {{fmt_year_to_fiscal_year budget_year_2}}.
     {{else}}
-      The Budget Implementation Vote did not provide additional funding for {{subj_name subject}} for {{fmt_year_to_fiscal_year budget_year_1}}.
+      The Budget Implementation Vote did not provide additional funding for {{subj_name subject}} in Budget {{budget_year_1}} for {{fmt_year_to_fiscal_year budget_year_1}}.
     {{/if}}
   fr: |
     {{#if funding_only_2018}}
-      Le crédit d’exécution du budget ne prévoit accorder aucun de fonds supplémentaires à {{subj_name subject}} pour {{fmt_year_to_fiscal_year budget_year_2}}.
+      Le crédit d’exécution du budget ne prévoit accorder aucun de fonds supplémentaires à {{subj_name subject}} dans le budget de {{budget_year_2}} pour {{fmt_year_to_fiscal_year budget_year_2}}.
     {{else}}
-      Le crédit d’exécution du budget n'a prévu accorder aucun de fonds supplémentaires à {{subj_name subject}} pour {{fmt_year_to_fiscal_year budget_year_1}}.
+      Le crédit d’exécution du budget n'a prévu accorder aucun de fonds supplémentaires à {{subj_name subject}} dans le budget de {{budget_year_1}} pour {{fmt_year_to_fiscal_year budget_year_1}}.
     {{/if}}
 
 dept_budget_measures_panel_text:
