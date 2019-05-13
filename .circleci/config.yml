@@ -10,8 +10,6 @@ deploy_filter: &deploy_filter
     branches:
       only:
         - master
-        - budget_panel_2
-
 
 version: 2
 jobs:
