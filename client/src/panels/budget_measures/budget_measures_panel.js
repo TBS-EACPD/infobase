@@ -275,7 +275,7 @@ class BudgetMeasurePanel extends React.Component {
         <div className = "fcol-md-12 fcol-xs-12 medium_panel_text text">
           { graph_args.subject.level === "dept" &&
               <TM
-                k={"dept_budget_measures_above_tab_text"} 
+                k={"budget_measures_above_tab_text"} 
                 args={{
                   subject,
                   budget_year_1: budget_years[0],
@@ -286,7 +286,7 @@ class BudgetMeasurePanel extends React.Component {
           }
           { treatAsProgram(subject) &&
               <TM
-                k={"program_crso_budget_measures_above_tab_text"}
+                k={"budget_measures_above_tab_text"}
                 args={{
                   subject,
                   budget_year_1: budget_years[0],
