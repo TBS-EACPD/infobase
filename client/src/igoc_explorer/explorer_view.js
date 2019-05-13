@@ -36,7 +36,7 @@ const SubjectFields = ({ subject, grouping }) => (
       }
       { _.nonEmpty(subject.old_name) && 
         <DlItem
-          term={<TM k="previous_known_as" />}
+          term={<TM k="previously_named" />}
           def={subject.old_name}
         />
       }
