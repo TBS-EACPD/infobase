@@ -6,4 +6,4 @@ echo "MDB_CONNECT_STRING: '$MDB_CONNECT_STRING'" >> ./envs.yaml
 echo "MDB_USERNAME: '$MDB_USERNAME'" >> ./envs.yaml
 echo "MDB_PW: '$MDB_PW'" >> ./envs.yaml
 
-gcloud functions deploy $CIRCLE_BRANCH --entry-point app --stage-bucket api-staging-bucket --runtime nodejs6 --trigger-http --env-vars-file ./envs.yaml > /dev/null
+gcloud functions deploy $CIRCLE_BRANCH --entry-point app --stage-bucket api-staging-bucket --runtime nodejs8 --trigger-http --env-vars-file ./envs.yaml > /dev/null

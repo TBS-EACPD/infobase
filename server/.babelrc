@@ -4,6 +4,6 @@
     "@babel/plugin-transform-modules-commonjs"
   ],
   "presets": [
-      ["@babel/preset-env", { "targets": { "node": "6.0.0" } }]
+      ["@babel/preset-env", { "targets": { "node": "8.15.0" } }]
     ]
 }
