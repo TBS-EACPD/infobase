@@ -3,7 +3,6 @@ import { ResponsiveBar } from './nivo-bar.js';
 import { ResponsivePie } from '@nivo/pie'
 import { formats, dollar_formats } from "../core/format.js";
 import { Fragment } from 'react';
-import { TM } from '../util_components.js';
 
 const get_formatter = (is_money, formatter, raw = true) => (
   _.isUndefined(formatter)?
@@ -404,23 +403,6 @@ export class NivoResponsiveLine extends React.Component {
           dotSize={10}
           areaOpacity={0.2}
         />
-        {yScale.toggle && 
-          <span className="centerer" style={{paddingBottom: "15px"}}>
-            <button 
-              className = { yScale.zoomed ? "btn-ib-toggle btn-ib-toggle--off" : "btn-ib-toggle btn-ib-toggle--on" }
-              onClick={ 
-                () => {
-                  yScale.zoomed = !yScale.zoomed;
-                  this.setState({
-                    yScale: {...yScale},
-                  });
-                }
-              }
-            >
-              <TM k="toggle_scale"/>
-            </button>
-          </span>
-        }
       </Fragment>
     );
   }

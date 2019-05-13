@@ -219,7 +219,6 @@ export class LineBarToggleGraph extends React.Component {
       graph_col_class,
 
       disable_toggle,
-      disable_scale_toggle,
       formatter,
       graph_options,
     } = this.props;
@@ -383,22 +382,6 @@ export class LineBarToggleGraph extends React.Component {
                   }
                 >
                   <TM k="toggle_graph"/>
-                </button>
-              </span>
-            }
-            { !disable_scale_toggle && !extra_graph_options.bar && !extra_graph_options.stacked &&
-              <span className="centerer" style={{paddingBottom: "15px"}}>
-                <button 
-                  className = { y_scale_zoomed ? "btn-ib-toggle btn-ib-toggle--off" : "btn-ib-toggle btn-ib-toggle--on" }
-                  onClick={ 
-                    () => {
-                      this.setState({
-                        y_scale_zoomed: !this.state.y_scale_zoomed,
-                      });
-                    }
-                  }
-                >
-                  <TM k="toggle_scale"/>
                 </button>
               </span>
             }
