@@ -10,7 +10,6 @@ deploy_filter: &deploy_filter
     branches:
       only:
         - master
-        - gcf-node-8
 
 version: 2
 jobs:
