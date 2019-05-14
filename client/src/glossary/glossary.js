@@ -27,7 +27,9 @@ function get_glossary_items_by_letter(){
     .map( (items, letter)=> ({ items, letter}) )
     .sortBy('letter')
     .value();
-
+    _.forEach(glossary_items_by_letter, function(items){
+      items['items'] = _.sortBy(items['items'], 'title')
+    })
   return glossary_items_by_letter;
 }
 
