@@ -28,7 +28,7 @@ function get_glossary_items_by_letter(){
       const sorted_items = _.sortBy(items, 'title');
       return {
         items: sorted_items, 
-        letter
+        letter,
       };
     })
     .sortBy('letter')
