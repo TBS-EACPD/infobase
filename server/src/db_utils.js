@@ -17,7 +17,6 @@ function get_connection_str(){
     MDB_NAME,
   } = process.env;
 
-  //MDB_CONNECT_STRING is the pre-3.0 version because the gcloud function version of node.js (6) has old mongodb drivers
   return MDB_CONNECT_STRING
     .replace('{MDB_USERNAME}', MDB_USERNAME)
     .replace('{MDB_PW}', MDB_PW)
