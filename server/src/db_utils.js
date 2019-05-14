@@ -31,6 +31,7 @@ export async function connect_db(){
     { 
       useCreateIndex: true,
       useNewUrlParser: true,
+      poolSize: 10,
     }
   )
     .then( () => console.log("MongoDB connected") )
