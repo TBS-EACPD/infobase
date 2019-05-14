@@ -24,12 +24,12 @@ function get_glossary_items_by_letter(){
       }
       return first_letter;
     })
-    .map( (items, letter)=> ({ items, letter}) )
+    .map( function(items, letter){
+      items = _.sortBy(items, 'title')
+      return ({items, letter})
+    })
     .sortBy('letter')
     .value();
-    _.forEach(glossary_items_by_letter, function(items){
-      items['items'] = _.sortBy(items['items'], 'title')
-    })
   return glossary_items_by_letter;
 }
 
