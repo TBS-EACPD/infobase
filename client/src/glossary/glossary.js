@@ -24,9 +24,12 @@ function get_glossary_items_by_letter(){
       }
       return first_letter;
     })
-    .map( function(items, letter){
-      items = _.sortBy(items, 'title')
-      return ({items, letter})
+    .map( (items, letter) => {
+      const sorted_items = _.sortBy(items, 'title');
+      return {
+        items: sorted_items, 
+        letter
+      };
     })
     .sortBy('letter')
     .value();
