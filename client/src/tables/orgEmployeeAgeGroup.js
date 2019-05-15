@@ -174,7 +174,6 @@ export default {
   "sort": function(mapped_rows, lang){
     return _.sortBy(mapped_rows, function(row){
       var split = row.age.replace(/>|</,"").split("-");
-      //console.log(split);
       if (split.length === 2) {
         return +split[1];
       } else {
