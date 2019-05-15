@@ -400,8 +400,8 @@ export class NivoResponsiveLine extends React.Component {
           animate={true}
           motionStiffness={motion_stiffness || 100}
           motionDamping={motion_damping || 19}
-          dotSize={10}
-          areaOpacity={0.2}
+          dotSize={stacked ? 0 : 10}
+          areaOpacity={stacked ? 1 : 0}
         />
       </Fragment>
     );
