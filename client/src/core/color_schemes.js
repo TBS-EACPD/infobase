@@ -71,24 +71,21 @@ const infobaseCategory20Colors = [
 
 const newIBCategoryColors = [
   "#206BBD", // main blue
-  "#23A14D", // green
-  "#673C8F", // purple
-  "#16919C", // teal
-  "#DEB742", // yellow
+  "#4abbc4", // green
+  "#e8a840", // purple
+  "#15918b", // teal
+  "#a2d173", // yellow
   "#7272D4", // purplish blue
-  "#93A341", // yellow-green
   "#8C949E", // grey
 ]
 
 // for contrast against dark text
 const newIBLightCategoryColors = [
   "#61A3EB", // main blue
-  "#78DB9A", // green
-  "#D6BEED", // purple
-  "#4ABBC4", // teal
-  "#D6CC6F", // yellow
+  "#4abbc4", // green
+  "#e8a840", // purple
+  "#a2d173", // yellow
   "#8D98D3", // purplish blue
-  "#D7E39A", // yellow-green
   "#CCD3DB", // grey
 ]
 

@@ -132,5 +132,5 @@
 // this class doesn't follow BEM, but its usage is mixed up anyway
 .welcome-mat-rect {
   width: 100%; /* cross browser fix */
-  background-color: rgba(86, 134, 205, 0.3);
+  background-color: rgba($secondaryColor, .3);
 }
