@@ -88,12 +88,12 @@ export class CirclePieChart {
       .styles({
         "fill": function(d,i){ return colors(d.name);},
         "fill-opacity": function(d,i){
-          return i === 0 ? 0.5 : 1;
+          return 0.3;
         },
         "stroke": function(d,i){ return colors(d.name);},
         "stroke-width": "2px",
         "stroke-opacity": function(d,i){
-          return i === 0 ? 0.3 : 0.8;
+          return 1;
         },
       });
 
