@@ -14,8 +14,6 @@ import {
 } from "../shared";
 import MediaQuery from 'react-responsive';
 
-import { lightCategory10Colors } from '../../core/color_schemes.js';
-
 import { ensure_loaded } from '../../core/lazy_loader.js';
 
 import { infograph_href_template } from '../../link_utils.js';
@@ -564,13 +562,6 @@ class BudgetMeasureHBars extends React.Component {
     const breakdown_keys = _.chain(budget_values).keys().filter(k => k !== 'funding').value();
     const keys_to_show = effective_selected_value === "funding_overview" ? breakdown_keys : [effective_selected_value]
 
-    const biv_value_colors = id => {
-      const scale = _.includes(breakdown_keys, id) ?
-        d3.scaleOrdinal().domain(breakdown_keys).range(lightCategory10Colors) :
-        d3.scaleOrdinal().range(lightCategory10Colors);
-      return scale(id);
-    };
-
     // text stuff
     const panel_text_args = {
       subject,
@@ -719,17 +710,6 @@ class BudgetMeasureHBars extends React.Component {
       </div>;
     } else {
       const biv_value_colors = infobase_colors();
-      const bar_colors = (data_label) => {
-        if (effective_selected_value === 'funding_overview'){
-          return biv_value_colors(data_label);
-        } else {
-          if ( data_label.includes("__negative_valued") ){
-            return biv_value_colors(1);
-          } else {
-            return biv_value_colors(2);
-          }
-        }
-      }
 
       const nivo_default_props = {
         data: data,
