@@ -6,8 +6,6 @@ set -e # will exit if any command has non-zero exit value
 #get cloudflare secrets
 #adds a trap on EXIT to clean up and revoke the service worker account
 
-projectname='infobase-prod'
-
 scratch=$(mktemp -d -t tmp.XXXXXXXXXX)
 function cleanup {
   rm -rf "$scratch"
@@ -25,7 +23,8 @@ trap cleanup EXIT
 echo $(lpass show IB_SERVICE_KEY --notes) | base64 -D > $scratch/key.json
 gcloud auth activate-service-account --key-file=$scratch/key.json
 
-gcloud config set project $projectname
+project=$(lpass show PROD_CLIENT_PROJECT_ID --notes)
+gcloud config set project $project
 gcloud config set compute/zone northamerica-northeast1-a
 
 export CLOUDFLARE_ZONE=$(lpass show CLOUDFLARE_ZONE --notes)

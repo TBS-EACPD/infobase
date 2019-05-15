@@ -21,7 +21,8 @@ trap cleanup EXIT
 
 echo $(lpass show PROD_API_SERVICE_KEY --notes) | base64 -D > $scratch/key.json
 gcloud auth activate-service-account --key-file=$scratch/key.json
-gcloud config set project $APP_PROJ_ID
+project=$(lpass show PROD_API_PROJECT_ID --notes)
+gcloud config set project $project
 gcloud config set compute/zone us-central1
 
 touch $scratch/envs.yaml
