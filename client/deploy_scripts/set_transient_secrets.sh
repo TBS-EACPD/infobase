@@ -3,7 +3,7 @@ set -e # will exit if any command has non-zero exit value
 
 #meant to be called with source
 #get GCloud service worker json key and save it in a temp dir, authenticate as service worker
-#set CLOUDFLARE_KEY env var
+#get cloudflare secrets
 #adds a trap on EXIT to clean up and revoke the service worker account
 
 projectname='infobase-prod'
@@ -16,6 +16,8 @@ function cleanup {
   gcloud auth revoke
 
   unset SCRATCH
+  unset CLOUDFLARE_ZONE
+  unset CLOUDFLARE_USER
   unset CLOUDFLARE_KEY
 }
 trap cleanup EXIT
@@ -26,4 +28,6 @@ gcloud auth activate-service-account --key-file=$scratch/key.json
 gcloud config set project $projectname
 gcloud config set compute/zone northamerica-northeast1-a
 
+export CLOUDFLARE_ZONE=$(lpass show CLOUDFLARE_ZONE --notes)
+export CLOUDFLARE_USER=$(lpass show CLOUDFLARE_USER --notes)
 export CLOUDFLARE_KEY=$(lpass show CLOUDFLARE_KEY --notes)
