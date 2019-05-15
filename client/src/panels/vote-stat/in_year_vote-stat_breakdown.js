@@ -8,7 +8,7 @@ import {
   infograph_href_template,
   StdPanel,
   Col,
-  get_IB_category_colors,
+  newIBLightCategoryColors,
 } from '../shared';
 import { FlatTreeMapViz } from '../../charts/flat_treemap/FlatTreeMapViz.js';
 const { Format } = util_components;
@@ -133,11 +133,10 @@ const tooltip_render = vs => function (d) {
   });
 }
 
-const d3_scale = d3.scaleOrdinal( get_IB_category_colors({pale: true}).main );
+const d3_scale = d3.scaleOrdinal( newIBLightCategoryColors.slice(0,3) );
 const color_scale = vs => function (d) {
   return d3_scale(text_func(vs, d, ""));
 }
-
 
 
 const text_func = (vs, d, break_str) => {

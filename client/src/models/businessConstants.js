@@ -68,6 +68,16 @@ const emp_age_map = {
   'N.D.': compact_age_groups[5],
 };
 
+const NA_values = [
+  'Not Available',
+  'Non disponible',
+  'NA',
+  'N/A',
+  'na',
+  'n/a',
+  'Non-EX',
+]
+
 const emp_age_rev_map = _.chain(emp_age_map)
   .toPairs()
   .groupBy(([key,val]) => val)
@@ -187,7 +197,7 @@ const estimates_docs = {
 };
 
 
-const businessConstants = { ...yaml, ...emp_age_stuff, ...ex_level_stuff, estimates_docs};
+const businessConstants = { ...yaml, ...emp_age_stuff, ...ex_level_stuff, estimates_docs, NA_values};
 
 window._DEV_HELPERS.businessConstants = businessConstants;
 

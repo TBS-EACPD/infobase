@@ -52,10 +52,10 @@ window.Handlebars = Handlebars;
 import * as feature_detection from '../core/feature_detection.js';
 window.feature_detection = feature_detection;
 
-import * as infobase_colors from '../core/color_defs.js';
-window.infobase_color_constants = infobase_colors;
+import * as ib_colors from '../core/color_defs.js';
+window.infobase_color_constants = ib_colors;
 
-import { get_IB_category_colors } from '../core/color_schemes.js';
-window.infobase_colors = (options) => d3.scaleOrdinal().range(get_IB_category_colors().main);
+import { newIBCategoryColors } from '../core/color_schemes.js';
+window.infobase_colors = (options) => d3.scaleOrdinal().range(newIBCategoryColors);
 
 window._DEV_HELPERS = {};

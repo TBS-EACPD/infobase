@@ -101,45 +101,7 @@ const newIBDarkCategoryColors = [
   "#555B62", // grey
 ]
 
-const get_IB_category_colors = (options) => {
-  let main_colors, negative, na;
-  if(_.get(options,'pale')){
-    main_colors = [...newIBLightCategoryColors];
-  } else if(_.get(options,'dark')){
-    main_colors = [...newIBDarkCategoryColors];
-  } else {
-    main_colors = [...newIBCategoryColors];
-  }
-
-  if(_.get(options,'negative')){
-    main_colors.splice(2); // remove green if we're including red
-    if(_.get(options,'pale')){
-      negative = color_defs.highlightPale;
-    } else if(_.get(options,'dark')){
-      negative = color_defs.highlightDark;
-    } else {
-      negative = color_defs.highlightColor;
-    }
-  }
-
-  if(_.get(options,'na')){
-    main_colors.splice(main_colors.length-1); // remove grey if we're including NA
-    if(_.get(options,'pale')){
-      na = _.last(newIBLightCategoryColors);
-    } else if(_.get(options,'dark')){
-      na = _.last(newIBDarkCategoryColors);
-    } else {
-      na = _.last(newIBCategoryColors);
-    }
-  }
-
-  return {
-    main: main_colors,
-    negative: _.get(options,'negative') && negative,
-    na: _.get(options,'na') && na,
-  }
-}
-
+const NA_color = _.last(newIBCategoryColors);
 
 export {
   lightCategory10Colors,
@@ -149,6 +111,6 @@ export {
   infobaseCategory20Colors,
   newIBCategoryColors,
   newIBLightCategoryColors,
-  get_IB_category_colors,
+  NA_color,
 };
 

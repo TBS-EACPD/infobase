@@ -7,7 +7,7 @@ import * as Results from '../models/results.js';
 import { create_text_maker, trivial_text_maker, run_template } from '../models/text.js';
 import { formats, dollar_formats } from '../core/format.js';
 import { PanelGraph, layout_types } from '../core/PanelGraph.js';
-import { infobaseCategory10Colors, get_IB_category_colors } from '../core/color_schemes.js';
+import { infobaseCategory10Colors, newIBCategoryColors, newIBLightCategoryColors, NA_color } from '../core/color_schemes.js';
 import { Panel, StdPanel, TextPanel, Col } from '../components/panel-components.js';
 import { reactAdapter } from '../core/reactAdapter';
 import { Table } from '../core/TableClass.js';
@@ -38,6 +38,15 @@ const {
   DlItem,
 } = util_components;
 
+
+const infobase_colors_smart = (col_scale) => (label) => {
+  if ( _.includes(businessConstants.NA_values,label) ){
+    return NA_color;
+  }
+  return col_scale(label);
+}
+
+
 export const PplSharePie = ({graph_args, label_col_header, sort_func}) => {
   sort_func = sort_func || ((a,b) => b.value-a.value);
 
@@ -52,7 +61,7 @@ export const PplSharePie = ({graph_args, label_col_header, sort_func}) => {
       return sort_func(a,b);
     });
 
-  const color_scale = infobase_colors();
+  const color_scale = infobase_colors_smart( d3.scaleOrdinal().range(newIBCategoryColors) );
 
   const legend_items = _.map(data, ({value, label }) => ({
     value,
@@ -98,7 +107,8 @@ export const PplSharePie = ({graph_args, label_col_header, sort_func}) => {
 };
 
 export const CommonDonut = function({graph_data, legend_data, graph_height}){
-  const color_scale = infobase_colors();
+
+  const color_scale = infobase_colors_smart( d3.scaleOrdinal().range(newIBCategoryColors) );
 
   const has_neg = _.chain(legend_data)
     .map('value')
@@ -192,6 +202,9 @@ export class LineBarToggleGraph extends React.Component {
 
     const colors = props.colors || props.get_colors();
 
+    // d3 categorical scales memoize data --> color mappings
+    // so this ensures that the mapping will be the same for
+    // each sub-graph
     const set_graph_colors = (items) => _.each(
       items,
       (item) => colors(item.label)
@@ -407,7 +420,7 @@ LineBarToggleGraph.defaultProps = {
   graph_col_full_size: 8,
   legend_class: false,
   graph_col_class: false,
-  get_colors: () => infobase_colors(),
+  get_colors: () => infobase_colors_smart( d3.scaleOrdinal().range(newIBCategoryColors) ),
   initial_graph_mode: "bar_stacked",
 };
 
@@ -527,7 +540,6 @@ const hex_to_rgb = (hex) => {
   } : null;
 }
 
-
 export {
   charts_index, 
   Table, 
@@ -563,7 +575,9 @@ export {
   DlItem,
   get_source_links,
   infobaseCategory10Colors,
-  get_IB_category_colors,
+  newIBCategoryColors,
+  newIBLightCategoryColors,
+  infobase_colors_smart,
   NivoResponsiveBar,
   NivoResponsiveHBar,
   NivoResponsiveLine,
