@@ -1,7 +1,7 @@
 import JSURL from 'jsurl';
 
 const infograph_href_template = (subj, data_area, useRouterFormat) => {
-  const str = `#orgs/${subj.level}/${subj.id}/infograph/${data_area ? data_area : ''}`;
+  const str = `#orgs/${subj.level}/${subj.id}/infograph/${data_area ? data_area : 'intro'}`;
   if(useRouterFormat){
     return str.replace("#","/");
   }
