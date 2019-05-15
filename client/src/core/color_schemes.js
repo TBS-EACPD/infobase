@@ -92,12 +92,10 @@ const newIBLightCategoryColors = [
 // for contrast against pale text
 const newIBDarkCategoryColors = [
   "#195596",
-  "#1B793A",
-  "#673C8F",
   "#117078",
-  "#8B6E18",
+  "#8B5F18",
+  "#1B793A",
   "#363687", 
-  "#66712D", 
   "#555B62", 
 ]
 
@@ -111,6 +109,7 @@ export {
   infobaseCategory20Colors,
   newIBCategoryColors,
   newIBLightCategoryColors,
+  newIBDarkCategoryColors,
   NA_color,
 };
 

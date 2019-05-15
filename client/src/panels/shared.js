@@ -7,7 +7,7 @@ import * as Results from '../models/results.js';
 import { create_text_maker, trivial_text_maker, run_template } from '../models/text.js';
 import { formats, dollar_formats } from '../core/format.js';
 import { PanelGraph, layout_types } from '../core/PanelGraph.js';
-import { infobaseCategory10Colors, newIBCategoryColors, newIBLightCategoryColors, NA_color } from '../core/color_schemes.js';
+import { infobaseCategory10Colors, newIBCategoryColors, newIBLightCategoryColors, newIBDarkCategoryColors, NA_color } from '../core/color_schemes.js';
 import { Panel, StdPanel, TextPanel, Col } from '../components/panel-components.js';
 import { reactAdapter } from '../core/reactAdapter';
 import { Table } from '../core/TableClass.js';
@@ -577,6 +577,7 @@ export {
   infobaseCategory10Colors,
   newIBCategoryColors,
   newIBLightCategoryColors,
+  newIBDarkCategoryColors,
   infobase_colors_smart,
   NivoResponsiveBar,
   NivoResponsiveHBar,

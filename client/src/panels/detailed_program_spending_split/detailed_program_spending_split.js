@@ -12,8 +12,10 @@ import {
   businessConstants,
   Panel,
   FootNote,
+  newIBCategoryColors,
+  newIBLightCategoryColors,
+  newIBDarkCategoryColors,
 } from "../shared";
-import { infobaseCategory20Colors } from '../../core/color_schemes.js';
 
 const { std_years } = years; 
 
@@ -236,7 +238,7 @@ class HistoricalProgramBars extends React.Component {
     const ticks = std_years.map(yr => run_template(yr));
     const { selected } = this.state;
 
-    const colors = d3.scaleOrdinal().range(infobaseCategory20Colors);
+    const colors = d3.scaleOrdinal().range(_.concat(newIBCategoryColors, newIBLightCategoryColors, newIBDarkCategoryColors ));
     const graph_data = _.chain(data)
       .filter( ({id}) => _.includes(selected, id) )
       .map( ({label, data }) => [ label, data ])
