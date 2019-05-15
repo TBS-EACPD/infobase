@@ -232,6 +232,7 @@ export const A11yLinkSynchronizer = withRouter(
       }
 
       synchronize_link('#ib-site-header a.a11y-version-link', a11y_link_modifier);
+      synchronize_link('#footer-a11y-link', a11y_link_modifier);
     }
   }
 );

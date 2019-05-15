@@ -1,9 +1,15 @@
 import { trivial_text_maker } from '../models/text.js';
+import { index_lang_lookups } from '../InfoBase/index_data.js';
 
 const footer_link_items = [
   {
     href: "#privacy",
     text: trivial_text_maker("privacy_title"),
+  },
+  {
+    id: "footer-a11y-link",
+    href: index_lang_lookups.a11y_version_url[window.lang],
+    text: index_lang_lookups.a11y_version_text[window.lang],
   },
 ];
 
@@ -18,7 +24,7 @@ export class InsertRuntimeFooterLinks extends React.Component {
     const footer_survey_link_ul = document.querySelector('#footer_survey_link_area');
   
     const links_to_insert = _.chain(footer_link_items)
-      .map( link_item => `<li><a href="${link_item.href}" target="_blank" rel="noopener noreferrer">${link_item.text}</a></li>`)
+      .map( ({id, href, text}) => `<li><a ${id ? `id="${id}"` : ""} href="${href}" target="_blank" rel="noopener noreferrer">${text}</a></li>`)
       .reduce( (memo, link_html) => memo + link_html, this.state.static_footer_links)
       .value();
   
