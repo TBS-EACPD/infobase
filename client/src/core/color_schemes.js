@@ -70,35 +70,35 @@ const infobaseCategory20Colors = [
 
 
 const newIBCategoryColors = [
-  "#206BBD", // main blue
-  "#4abbc4", // green
-  "#e8a840", // purple
-  "#15918b", // teal
-  "#a2d173", // yellow
-  "#7272D4", // purplish blue
-  "#8C949E", // grey
+  "#206BBD",
+  "#4abbc4",
+  "#e8a840", 
+  "#15918b", 
+  "#a2d173", 
+  "#7272D4", 
+  "#8C949E",
 ]
 
 // for contrast against dark text
 const newIBLightCategoryColors = [
-  "#61A3EB", // main blue
-  "#4abbc4", // green
-  "#e8a840", // purple
-  "#a2d173", // yellow
-  "#8D98D3", // purplish blue
-  "#CCD3DB", // grey
+  "#61A3EB",
+  "#4abbc4",
+  "#e8a840",
+  "#a2d173", 
+  "#8D98D3", 
+  "#CCD3DB",
 ]
 
 // for contrast against pale text
 const newIBDarkCategoryColors = [
-  "#195596", // main blue
-  "#1B793A", // green
-  "#673C8F", // purple
-  "#117078", // teal
-  "#8B6E18", // yellow
-  "#363687", // purplish blue
-  "#66712D", // yellow-green
-  "#555B62", // grey
+  "#195596",
+  "#1B793A",
+  "#673C8F",
+  "#117078",
+  "#8B6E18",
+  "#363687", 
+  "#66712D", 
+  "#555B62", 
 ]
 
 const NA_color = _.last(newIBCategoryColors);

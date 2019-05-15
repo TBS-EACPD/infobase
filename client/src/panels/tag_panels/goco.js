@@ -11,6 +11,7 @@ import {
   charts_index,
   Panel,
   Table,
+  newIBCategoryColors,
 } from '../shared.js';
 
 const { GraphLegend } = declarative_charts;
@@ -102,7 +103,7 @@ class Goco {
     const fte_col = "{{pa_last_year}}";
     const legend_area = this.container.select(".legend_area");
 
-    this.colors = d3.scaleOrdinal(d3.schemeCategory10);
+    this.colors = d3.scaleOrdinal(newIBCategoryColors);
     const that = this;
 
     this.data = _.chain(Tag.gocos_by_spendarea)
