@@ -1,17 +1,17 @@
 import { trivial_text_maker } from '../models/text.js';
 import { index_lang_lookups } from '../InfoBase/index_data.js';
 
-const footer_link_items = [
+const footer_link_items = _.compact([
   {
     href: "#privacy",
     text: trivial_text_maker("privacy_title"),
   },
-  {
+  !window.is_a11y_mode && {
     id: "footer-a11y-link",
     href: index_lang_lookups.a11y_version_url[window.lang],
     text: index_lang_lookups.a11y_version_text[window.lang],
   },
-];
+]);
 
 export class InsertRuntimeFooterLinks extends React.Component {
   constructor(){
