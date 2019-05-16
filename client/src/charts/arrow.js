@@ -1,6 +1,5 @@
 import common_charts_utils from './common_charts_utils';
 
-
 function add_arrow(sel){
   return sel
     .append("path")
@@ -168,7 +167,7 @@ export class Arrow {
       .styles({
         "top": height+margin.bottom+"px",
         "position": "absolute",
-        "color": "#222",
+        "color": window.infobase_color_constants.textColor,
         "font-size": "16px",
         "font-weight": "500",
         "width": function(d){ return d.width+padding+"px";},

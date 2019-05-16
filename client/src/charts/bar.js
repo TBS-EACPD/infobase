@@ -321,7 +321,7 @@ export class Bar {
               "padding": "0px",
               "position": "absolute",
               "text-weight": "bold",
-              "color": (d) => d.value<0 ? "red" : "black",
+              "color": (d) => d.value<0 ? window.infobase_color_constants.highlightColor : window.infobase_color_constants.primaryColor,
               "width": bar_width + "px",
               "font-size": label_font_size + "px",
               "height": "10px",
@@ -399,7 +399,7 @@ export class Bar {
       .call(yAxis)
       .append("text")
       .attr("class","axis-label")
-      .attr("fill", "#000")
+      .attr("fill", window.infobase_color_constants.textColor)
       .attr("x", 0)
       .attr("y", -5)
       .text(y_axis);

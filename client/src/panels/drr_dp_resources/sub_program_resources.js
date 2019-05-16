@@ -123,16 +123,16 @@ const get_non_col_renderer = ({doc}) => ({node}) => {
 
   return (
     <div>
-      <div style={{padding: "10px 20px 10px 0", borderTop: "1px solid #ccc"}}>
+      <div style={{padding: "10px 20px 10px 0", borderTop: `1px solid ${window.infobase_color_constants.separatorColor}`}}>
         { description } 
       </div>
       { doc==='drr17' && 
-        <div style={{padding: "10px 20px 10px 0", borderTop: "1px solid #ccc"}}>
+        <div style={{padding: "10px 20px 10px 0", borderTop: `1px solid ${window.infobase_color_constants.separatorColor}`}}>
           <PlannedActualTable {...resource_table_props} />
         </div>
       }
       { !_.isEmpty(notes) &&
-        <div style={{padding: "10px 20px 10px 0", borderTop: "1px solid #ccc"}}>
+        <div style={{padding: "10px 20px 10px 0", borderTop: `1px solid ${window.infobase_color_constants.separatorColor}`}}>
           <header className="agnostic-header"> <TM k="notes" /> </header>
           <ul>
             {_.map(notes, note => 

@@ -147,7 +147,7 @@ export class HBar {
         "y": 0,
       })
       .styles({
-        "fill": "#e6e6e6",
+        "fill": window.infobase_color_constants.separatorColor,
       });
       
 

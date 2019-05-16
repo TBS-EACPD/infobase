@@ -88,7 +88,7 @@ const GradientBar = ({ series, startsPositive, height, width, labels }) => {
               <div style={{
                 position: "absolute",
                 width: "2px",
-                backgroundColor: "#333",
+                backgroundColor: window.infobase_color_constants.primaryColor,
                 left: `${val*100}%`,
                 height: "120%",
                 top: "-10%",
@@ -108,8 +108,8 @@ const QuestionDataVis = ({ org_data, gov_data, acronym, question_id }) => (
       { 
         null && (
         org_data.pct_agree === org_data.pct_negative ?
-        <div style={{color: 'red'}}> <Format type="percentage1" content={org_data.pct_agree} /> agree </div> :
-        <div style={{color: 'green'}}> <Format type="percentage1" content={org_data.pct_agree} /> agree </div>
+        <div style={{color: window.infobase_color_constants.failDarkColor}}> <Format type="percentage1" content={org_data.pct_agree} /> agree </div> :
+        <div style={{color: window.infobase_color_constants.successDarkColor}}> <Format type="percentage1" content={org_data.pct_agree} /> agree </div>
         )
       }
     </div>

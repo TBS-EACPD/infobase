@@ -111,7 +111,7 @@ export class HBarComposition {
         "x2": graph_start + x(-x_min),
         "y1": margin.top + 2,
         "y2": margin.top + height,
-        "stroke": "#000",
+        "stroke": "black",
         "stroke-width": 2,
       });
     this.graph_area.append("line")
@@ -121,7 +121,7 @@ export class HBarComposition {
         "x2": label_pct * width+1,
         "y1": margin.top + 2,
         "y2": margin.top + height,
-        "stroke": "#000",
+        "stroke": "black",
         "stroke-width": 2,
       });
 
@@ -229,7 +229,7 @@ export class HBarComposition {
             "height": bar_height + "px",
             "padding-right": "5px",
             "margin-left": margin.left + "px",
-            "background-color": "#f2f2f2",
+            "background-color": window.infobase_color_constants.backgroundColor,
           })
           .append("div")
           .styles({

@@ -114,7 +114,7 @@ heatmap.prototype.render = function(options){
         return y_scale(d)+ margin.top+"px" ;
       },
       "text-align": "right",
-      "border-bottom": "1px solid #ccc",
+      "border-bottom": `1px solid ${window.infobase_color_constants.separatorColor}`,
     })
     .append("div")
     .styles({
@@ -149,7 +149,7 @@ heatmap.prototype.render = function(options){
         return margin.left + x_scale(d)+"px" ;
       },
       "top": "0px",
-      "border-right": "1px solid #ccc",
+      "border-right": `1px solid ${window.infobase_color_constants.separatorColor}`,
       "text-align": "center",
     })
     .append("div")
@@ -180,10 +180,10 @@ heatmap.prototype.render = function(options){
       'position': 'absolute',
       'left': function(d){ return x_scale(d.x)+'px'},
       'top': function(d){ return y_scale(d.y)+'px'},
-      "border": "1px solid #ccc",
+      "border": `1px solid ${window.infobase_color_constants.separatorColor}`,
       "background": function(d){
         if (d.z === undefined){
-          return "#FFF";
+          return window.infobase_color_constants.backgroundColor;
         } else if (d.z >0) {
           return "rgba("+pos_color+","+pos_color_scale(d.z)+")"; 
         } else {
