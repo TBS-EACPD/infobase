@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
   <title>appicons</title>
-  <rect x="104.5" y="98.5" width="391" height="418" rx="12" ry="12" fill="none" stroke="#1e75e8" stroke-linecap="round" stroke-linejoin="round" stroke-width="25"/>
-  <line x1="104.5" y1="190.5" x2="494.5" y2="190.5" fill="none" stroke="#1e75e8" stroke-linecap="round" stroke-linejoin="round" stroke-width="25"/>
-  <line x1="104.5" y1="272.5" x2="495.5" y2="272.5" fill="none" stroke="#1e75e8" stroke-linecap="round" stroke-linejoin="round" stroke-width="25"/>
-  <line x1="104.5" y1="354.5" x2="495.5" y2="354.5" fill="none" stroke="#1e75e8" stroke-linecap="round" stroke-linejoin="round" stroke-width="25"/>
-  <line x1="104.5" y1="434.5" x2="495.5" y2="434.5" fill="none" stroke="#1e75e8" stroke-linecap="round" stroke-linejoin="round" stroke-width="25"/>
-  <line x1="234.5" y1="197.5" x2="234.5" y2="515.5" fill="none" stroke="#1e75e8" stroke-linecap="round" stroke-linejoin="round" stroke-width="25"/>
-  <line x1="365.5" y1="194.5" x2="365.5" y2="515.5" fill="none" stroke="#1e75e8" stroke-linecap="round" stroke-linejoin="round" stroke-width="25"/>
+  <rect x="104.5" y="98.5" width="391" height="418" rx="12" ry="12" fill="none" stroke="#2C70C9" stroke-linecap="round" stroke-linejoin="round" stroke-width="25"/>
+  <line x1="104.5" y1="190.5" x2="494.5" y2="190.5" fill="none" stroke="#2C70C9" stroke-linecap="round" stroke-linejoin="round" stroke-width="25"/>
+  <line x1="104.5" y1="272.5" x2="495.5" y2="272.5" fill="none" stroke="#2C70C9" stroke-linecap="round" stroke-linejoin="round" stroke-width="25"/>
+  <line x1="104.5" y1="354.5" x2="495.5" y2="354.5" fill="none" stroke="#2C70C9" stroke-linecap="round" stroke-linejoin="round" stroke-width="25"/>
+  <line x1="104.5" y1="434.5" x2="495.5" y2="434.5" fill="none" stroke="#2C70C9" stroke-linecap="round" stroke-linejoin="round" stroke-width="25"/>
+  <line x1="234.5" y1="197.5" x2="234.5" y2="515.5" fill="none" stroke="#2C70C9" stroke-linecap="round" stroke-linejoin="round" stroke-width="25"/>
+  <line x1="365.5" y1="194.5" x2="365.5" y2="515.5" fill="none" stroke="#2C70C9" stroke-linecap="round" stroke-linejoin="round" stroke-width="25"/>
 </svg>
