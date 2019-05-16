@@ -108,11 +108,11 @@ export class PartitionSubApp {
       .transition()
       .duration(200)
       .ease(d3.easeLinear)
-      .style("background-color", "#b8d3f9")
+      .style("background-color", window.infobase_color_constants.separatorColor)
       .transition()
       .duration(100)
       .ease(d3.easeLinear)
-      .style("background-color", "#ffffff");
+      .style("background-color", window.infobase_color_constants.backgroundColor);
 
     this.update();
   }

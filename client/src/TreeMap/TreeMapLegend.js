@@ -42,7 +42,7 @@ export class TreeMapLegend extends React.Component {
             <div className="row" style={{textAlign: "center"}}>
               <svg width={`${legend_cols.length*60+10}`} height="50">
                 <g className="mutLegendGroup" transform="translate(0,0)">
-                  <rect className="mutLegendBG" fill="rgb(253, 253, 253)" stroke="none" width="500" height="50" />
+                  <rect className="mutLegendBG" fill={window.infobase_color_constants.backgroundColor} stroke="none" width="500" height="50" />
                   {_.map(legend_cols, (o, ix) => {
                     return legend_block(o.val, o.col, ix);
                   })

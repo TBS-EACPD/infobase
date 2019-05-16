@@ -231,7 +231,7 @@ const GradientBar = ({ series, startsPositive, height, width, labels }) => {
               <div style={{
                 position: "absolute",
                 width: "2px",
-                backgroundColor: "#333",
+                backgroundColor: window.infobase_color_constants.primaryColor,
                 left: `${val*100}%`,
                 height: "120%",
                 top: "-10%",
