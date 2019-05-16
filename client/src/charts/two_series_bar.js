@@ -47,7 +47,7 @@ export class TwoSeriesBar {
     const smaller = larger === series1 ? series2 : series1;
     const series_labels = [larger.label, smaller.label];
     const label_font_size = 12; // this is in pt, not px
-    const colors = this.options.colors || common_charts_utils.tbs_color()
+    const colors = this.options.colors || infobase_colors();
     const ticks = this.options.ticks;
     const ticks_formatter = _.isFunction(this.options.ticks_formatter) ? this.options.ticks_formatter : _.identity;
 

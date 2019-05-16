@@ -52,7 +52,7 @@ export class Bar {
     const stacked = this.options.stacked;
     const label_font_size = 12;
     const add_labels = this.options.add_labels;
-    const colors = this.options.colors || common_charts_utils.tbs_color()
+    const colors = this.options.colors || infobase_colors();
     const title = this.options.title;
     const y_axis = this.options.y_axis || '';
     const ticks = this.options.ticks;

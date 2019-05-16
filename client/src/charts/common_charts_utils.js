@@ -1,16 +1,4 @@
-import { infobaseGraphColors } from '../core/color_schemes.js';
 import { formats } from '../core/format.js';
-
-const tbs_color = function(){
-//
-// return a d3 scale which will map an ordinal input domain
-// to 9 individual TBS corporate colours.  Handy for chart
-// legends without a large number of elements
-// 
-// For a large number of elements, use the infobase_colors global or d3.scale.category20
-//
-  return d3.scaleOrdinal().range(infobaseGraphColors);
-};
 
 const add_grid_lines = function(direction, grid_line_area, axis, tick_size){
   const axis_clone = _.cloneDeep(axis);
@@ -152,7 +140,6 @@ window._DEV_HELPERS.graph_registry = graph_registry;
 
 export default {
   formats,
-  tbs_color,
   add_grid_lines,
   graph_registry,
   setup_graph_instance,

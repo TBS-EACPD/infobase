@@ -20,7 +20,7 @@ export class CirclePieChart {
       bottom: 20,
       left: 10};
     var hide_labels = this.options.hide_labels;
-    var colors = this.options.colors || common_charts_utils.tbs_color();
+    var colors = this.options.colors || infobase_colors();
     var centre = this.options.centre || false;
     var width = this.outside_width - margin.left - margin.right;
     var height = this.outside_height - margin.top - margin.bottom;

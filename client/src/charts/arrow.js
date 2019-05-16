@@ -31,7 +31,7 @@ export class Arrow {
       right: 10, 
       bottom: 30, 
       left: 10};
-    var color = this.options.color || common_charts_utils.tbs_color();
+    var color = this.options.color || infobase_colors();
     var formatter = this.options.formatter;
     var arrow_width = 60;
     var arrow_height = 100;
