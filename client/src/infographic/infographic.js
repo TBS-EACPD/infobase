@@ -216,22 +216,7 @@ class InfoGraph_ extends React.Component {
       }
       <div>
         <div style={{position: 'relative'}}>
-          { loading && 
-            <div
-              className='no-cursor opaque-overlay'
-              style={{
-                position: 'absolute',
-                left: '0px',
-                top: '0px',
-                width: "100%",
-                height: "100%",
-                backgroundColor: 'rgba(204,204,204,.5)',
-                borderRadius: '5px',
-              }}
-            >
-              <SpinnerWrapper config_name={"route"} /> 
-            </div>
-          }
+          { loading && <SpinnerWrapper config_name={"route"} /> }
           {
             !loading && window.is_a11y_mode ? 
               <AccessibleBubbleMenu items={sorted_bubbles} /> : 
