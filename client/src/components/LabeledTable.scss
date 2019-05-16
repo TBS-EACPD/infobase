@@ -10,21 +10,16 @@
   }
   
   .displayTable__header {
-    color: #fcfcfc;
+    color: $textLightColor;
     padding: 10px 0 10px 0;
     font-size: 1.4em;
     text-align: center;
   }
 
-  .displayTable__item:focus,
-  .displayTable__item:active {
-    outline: 2px solid #222;
-  }
-  
   .displayTable__item {
     @include unstyled-link;
-    background-color:  #fcfcfc;
-    color: #222;
+    background-color: lighten($tertiaryColor,40);
+    color: $textColor;
     padding: 10px;
     
     /* make the <button> act like a div */
@@ -38,7 +33,7 @@
     }
   }
   .displayTable__item.active {
-    background-color: #dedede;
+    background-color: lighten($tertiaryColor,20);
   }
   .displayTable__item:not(:last-child){
     border-bottom: 1px solid $primaryColor;

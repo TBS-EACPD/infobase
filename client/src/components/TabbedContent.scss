@@ -11,7 +11,7 @@
   border: 1px solid $primaryColor;
   background-color: $tertiaryColor;
   transition: background-color 200ms ease, border-radius 400ms ease;
-  color: #333;
+  color: $textColor;
 }
 
 .tabbed-controls > ul {
