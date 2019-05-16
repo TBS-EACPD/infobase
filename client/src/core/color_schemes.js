@@ -30,17 +30,59 @@ const newIBDarkCategoryColors = [
   "#555B62", 
 ]
 
+// sequential colour schemes
+// dark text has sufficient contrast on the _last three_ colours only
+
+const sequentialBlues = [
+  "#206BBD",
+  "#4C89CC",
+  "#7BA8D9",
+  "#B8CEE6",
+  "#D1E7FF",
+]
+
+const sequentialReds = [
+  "#DA3A38",
+  "#DB5E5C",
+  "#F78D8C",
+  "#F7B6B4",
+  "#FFD2D1",
+]
+
+const sequentialGreens = [
+  "#62A123",
+  "#87BF4F",
+  "#A9D47D",
+  "#CFE6B8",
+  "#E8FFD1",
+]
+
+const sequentialPurples = [
+  "#673C8F",
+  "#9860CC",
+  "#B68FD9",
+  "#D0B8E6",
+  "#E9D1FF",
+]
+
+// this is here instead of in color_defs.js because it's a data-dependent color
 const NA_color = _.last(newIBCategoryColors); // color_defs.tertiaryColor
 
 export {
   newIBCategoryColors,
   newIBLightCategoryColors,
   newIBDarkCategoryColors,
+  sequentialBlues,
+  sequentialReds,
+  sequentialGreens,
+  sequentialPurples,
   NA_color,
 };
 
-// *** DO NOT USE ***
+// ***************************************************
+// ***************** DO NOT USE **********************
 // old infobase colour schemes kept here for posterity
+// ***************************************************
 
 
 //all colors from https://material.io/guidelines/style/color.html#color-color-palette
