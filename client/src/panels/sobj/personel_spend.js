@@ -76,7 +76,7 @@ new PanelGraph({
             "bottom": 50,
             "left": 65,
           }}
-          colors = "#335075"
+          colors = { window.infobase_color_constants.primaryColor }
         />
       </div>;
     }

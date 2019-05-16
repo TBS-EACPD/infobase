@@ -125,7 +125,7 @@ const render = function({calculations, footnotes, sources}) {
                 "itemWidth": 100,
                 "itemHeight": 25,
                 "symbolSize": 20,
-                "fill": '#000',
+                "fill": window.infobase_color_constants.textColor,
               },
             ]}
             theme={{
@@ -133,7 +133,7 @@ const render = function({calculations, footnotes, sources}) {
                 ticks: {
                   text: { 
                     fontSize: 11.5,
-                    fill: '#000',
+                    fill: window.infobase_color_constants.textColor,
                   },
                 },
               },

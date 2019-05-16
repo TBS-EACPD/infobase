@@ -163,7 +163,7 @@ const Chart = ({
         </div>
       </div>
     )}
-    colors = {is_light ? "#335075" : "#000000"}
+    colors = {is_light ? window.infobase_color_constants.primaryColor : window.infobase_color_constants.textColor }
     tick_value = {4}
   />
 </div>

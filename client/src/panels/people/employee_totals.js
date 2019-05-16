@@ -77,11 +77,11 @@ const info_deps_by_level = {
                  <NivoResponsiveLine
                    data = { data_formatter()}
                    raw_data = {series}
-                   colors = "#335075"
+                   colors = { window.infobase_color_constants.primaryColor }
                    is_money = {false}
                    yScale = {{toggle: true}}
                    tooltip = {slice =>  
-                     <div style={{color: '#000'}}>
+                     <div style={{color: window.infobase_color_constants.textColor}}>
                        <table style={{width: '100%', borderCollapse: 'collapse'}}>
                          <tbody>
                            { slice.data.map(

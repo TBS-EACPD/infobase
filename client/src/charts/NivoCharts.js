@@ -432,7 +432,7 @@ NivoResponsiveLine.defaultProps = {
       ticks: {
         text: { 
           fontSize: 12,
-          fill: '#000',
+          fill: window.infobase_color_constants.textColor,
         },
       },
     },
