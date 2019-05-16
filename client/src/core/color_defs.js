@@ -12,7 +12,7 @@ const separatorColor = "#bbc1c9";
 const highlightPale = "ffa8a8";
 const highlightDark = "#B12320";
 
-const tooltipColor = "#4d88b3";
+const tooltipColor = primaryColor;
 
 const buttonPrimaryColor = "#176dde";
 const buttonSecondaryColor = "#76a4df";

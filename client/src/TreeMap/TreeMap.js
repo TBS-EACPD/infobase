@@ -19,6 +19,12 @@ import {
   create_text_maker,
   run_template,
 } from '../models/text.js';
+import { 
+  sequentialBlues,
+  sequentialReds,
+  sequentialGreens,
+  sequentialPurples,
+} from '../core/color_schemes.js';
 
 
 const text_maker = create_text_maker([treemap_text]);
@@ -86,20 +92,20 @@ const raw_fte_limit = 1000;
 
 // need this slightly tricky formulation because we only want to use part of the scale
 // (darkest colours are too dark for good contrast with the text)
-const d3_blue = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeBlues[9].slice(2, 7)));
-d3_blue.clamp(true);
-const d3_red = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeReds[9].slice(2, 6)));
-d3_red.clamp(true);
-const d3_green = d3.scaleSequential(d3.interpolateRgbBasis(d3.schemeGreens[9].slice(2, 7)));
-d3_green.clamp(true);
-const d3_purple = d3.scaleSequential(d3.interpolateRgbBasis(["#e7d4e8", "#c2a5cf", "#ab6fc3", "#9c4cbc"]));
-d3_purple.clamp(true);
+const blue_scale = d3.scaleSequential(d3.interpolateRgbBasis(sequentialBlues.slice(0,4)));
+blue_scale.clamp(true);
+const red_scale = d3.scaleSequential(d3.interpolateRgbBasis(sequentialReds.slice(0,4)));
+red_scale.clamp(true);
+const green_scale = d3.scaleSequential(d3.interpolateRgbBasis(sequentialGreens.slice(0,4)));
+green_scale.clamp(true);
+const purple_scale = d3.scaleSequential(d3.interpolateRgbBasis(sequentialPurples.slice(0,4)));
+purple_scale.clamp(true);
 
 
 // spending % of parent -- 30% is enough for the colour to be maxed out
 function standard_color_scale(node) {
   const color_val = node.data.parent_amount ? node.data.amount / node.data.parent_amount : 0; // smaller_items nodes don't have parents, set them to 0
-  const scale = node.data.amount < 0 ? d3_red : d3_blue
+  const scale = node.data.amount < 0 ? red_scale : blue_scale
   scale.domain([0, perc_limit]);
   if (node.amount < 0) {
     return scale(-color_val);
@@ -111,20 +117,20 @@ function standard_color_scale(node) {
 // FTE % of parent
 function fte_color_scale(node) {
   const color_val = node.data.parent_ftes ? node.data.ftes / node.data.parent_ftes : 0; // smaller_items nodes don't have parents, set them to 0
-  const scale = d3_green.domain([0, perc_limit]);
+  const scale = green_scale.domain([0, perc_limit]);
   return scale(color_val);
 }
 
 // divergent scales (absolute val)
 function spending_change_color_scale(node) {
   const color_val = node.data.amount < 0 ? -node.data.amount : node.data.amount;
-  const scale = node.data.amount < 0 ? d3_red : d3_blue;
+  const scale = node.data.amount < 0 ? red_scale : blue_scale;
   scale.domain([0, raw_spending_limit]);
   return scale(color_val);
 }
 function fte_change_color_scale(node) {
   const color_val = node.data.ftes < 0 ? -node.data.ftes : node.data.ftes;
-  const scale = node.data.ftes < 0 ? d3_purple : d3_green;
+  const scale = node.data.ftes < 0 ? purple_scale : green_scale;
   scale.domain([0, raw_fte_limit]);
   return scale(color_val);
 }

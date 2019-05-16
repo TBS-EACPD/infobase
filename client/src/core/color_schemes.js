@@ -34,35 +34,35 @@ const newIBDarkCategoryColors = [
 // dark text has sufficient contrast on the _last three_ colours only
 
 const sequentialBlues = [
-  "#206BBD",
-  "#4C89CC",
-  "#7BA8D9",
-  "#B8CEE6",
   "#D1E7FF",
+  "#B8CEE6",
+  "#7BA8D9",
+  "#4C89CC",
+  "#206BBD",
 ]
 
 const sequentialReds = [
-  "#DA3A38",
-  "#DB5E5C",
-  "#F78D8C",
-  "#F7B6B4",
   "#FFD2D1",
+  "#F7B6B4",
+  "#F78D8C",
+  "#DB5E5C",
+  "#DA3A38",
 ]
 
 const sequentialGreens = [
-  "#62A123",
-  "#87BF4F",
-  "#A9D47D",
-  "#CFE6B8",
   "#E8FFD1",
+  "#CFE6B8",
+  "#A9D47D",
+  "#87BF4F",
+  "#62A123",
 ]
 
 const sequentialPurples = [
-  "#673C8F",
-  "#9860CC",
-  "#B68FD9",
-  "#D0B8E6",
   "#E9D1FF",
+  "#D0B8E6",
+  "#B68FD9",
+  "#9860CC",
+  "#673C8F",
 ]
 
 // this is here instead of in color_defs.js because it's a data-dependent color

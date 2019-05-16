@@ -1,15 +1,15 @@
 @import '../common_css/common-variables';
 
-$treeMapBackgroundColor: #D9D9D9;
+$treeMapBackgroundColor: $separatorColor;
 
-$treeMapSelectedBorder: #4292c6;
-$treeMapSelectedColor: rgba(66, 146, 198, 0.4);
+$treeMapSelectedBorder: $primaryColor;
+$treeMapSelectedColor: rgba($tertiaryColor, 0.4);
 
-$treeMapControlsColor: #2970b3;
-$treeMapControlsColorMid: #6baed6;
-$treeMapControlsColorLight: #c7dbee;
+$treeMapControlsColor: $secondaryColor;
+$treeMapControlsColorMid: lighten($secondaryColor, 20);
+$treeMapControlsColorLight: lighten($secondaryColor, 40);
 
-$treeMapTooltipColor: #767f89;
+$treeMapTooltipColor: $primaryColor;
 
 .TreeMap__Wrapper {
   background: none;
@@ -17,7 +17,7 @@ $treeMapTooltipColor: #767f89;
 .TreeMap__TopBar {
   background-color: $treeMapBackgroundColor;
   height: 100%;
-  border: 2px solid #fff;
+  border: 2px solid white;
 }
 .TreeMap__Mainviz{
   background-color: $treeMapBackgroundColor;
@@ -29,8 +29,8 @@ $treeMapTooltipColor: #767f89;
 
 .TreeMap__SideBar {
   background-color: $treeMapBackgroundColor;
-  border: 2px solid #fff;
-  color: #fff;
+  border: 2px solid white;
+  color: white;
   text-align: center;
 }
 .TreeMap_SideBar__Title {
@@ -48,7 +48,7 @@ $treeMapTooltipColor: #767f89;
 .TreeMap__ZoomControl {
   background-color: $treeMapBackgroundColor;
   height: 100%;
-  color: black;
+  color: $textColor;
   font-size: 16px;
 }
 .TreeMap__ZoomControl--instruction {
@@ -74,7 +74,7 @@ $treeMapTooltipColor: #767f89;
 
 .TreeMap__Rectangle {
   position: absolute;
-  border: 1px solid #fff;
+  border: 1px solid white;
 
   &.TreeMap__Rectangle--is-parent {
     border-width: 2px;
@@ -194,14 +194,14 @@ $treeMapTooltipColor: #767f89;
     border-color: transparent transparent $treeMapTooltipColor transparent;
   }
   .TM_Tooltip__link {
-    color: #9ecae1
+    color: $separatorColor;
   }
 }
 
 .BlueHLine {
   display: block;
   height: 1px;
-  border-top: 3px solid #5097c7;
+  border-top: 3px solid $secondaryColor;
   margin-top: 2px;  
 }
 
@@ -213,7 +213,7 @@ $treeMapTooltipColor: #767f89;
 
     & > .treemap-labeled-box-label {
       background-color: $treeMapControlsColor;
-      color: #FFF;
+      color: $textLightColor;
       font-size: 18px;
       padding: 5px;
       border-radius: 5px 5px 0px 0px;
@@ -230,8 +230,8 @@ $treeMapTooltipColor: #767f89;
       & > .treemap-options__option {
         border-color: $treeMapControlsColor;
         border-width: 1px 2px 1px 2px;
-        background-color: #ffffff;
-        color: $treeMapControlsColor;
+        background-color: $backgroundColor;
+        color: $textColor;
         padding: 5px;
         font-size: 14x;
         width: 100%;
