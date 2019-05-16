@@ -1,5 +1,48 @@
 import * as color_defs from './color_defs.js'
 
+const newIBCategoryColors = [
+  "#206BBD",
+  "#4abbc4",
+  "#e8a840", 
+  "#15918b", 
+  "#a2d173", 
+  "#7272D4", 
+  color_defs.tertiaryColor, // grey
+]
+
+// for contrast against dark text
+const newIBLightCategoryColors = [
+  "#61A3EB",
+  "#4abbc4",
+  "#e8a840",
+  "#a2d173", 
+  "#8D98D3", 
+  "#CCD3DB",
+]
+
+// for contrast against pale text
+const newIBDarkCategoryColors = [
+  "#195596",
+  "#117078",
+  "#8B5F18",
+  "#1B793A",
+  "#363687", 
+  "#555B62", 
+]
+
+const NA_color = _.last(newIBCategoryColors); // color_defs.tertiaryColor
+
+export {
+  newIBCategoryColors,
+  newIBLightCategoryColors,
+  newIBDarkCategoryColors,
+  NA_color,
+};
+
+// *** DO NOT USE ***
+// old infobase colour schemes kept here for posterity
+
+
 //all colors from https://material.io/guidelines/style/color.html#color-color-palette
 //you can use these colors as backgrounds for dark text (#222 or darker)
 //organized to mirror d3 category10
@@ -67,49 +110,3 @@ const infobaseCategory20Colors = [
   "#bcbd22", "#dbdb8d",
   "#17becf", "#9edae5",
 ];
-
-
-const newIBCategoryColors = [
-  "#206BBD",
-  "#4abbc4",
-  "#e8a840", 
-  "#15918b", 
-  "#a2d173", 
-  "#7272D4", 
-  "#8C949E",
-]
-
-// for contrast against dark text
-const newIBLightCategoryColors = [
-  "#61A3EB",
-  "#4abbc4",
-  "#e8a840",
-  "#a2d173", 
-  "#8D98D3", 
-  "#CCD3DB",
-]
-
-// for contrast against pale text
-const newIBDarkCategoryColors = [
-  "#195596",
-  "#117078",
-  "#8B5F18",
-  "#1B793A",
-  "#363687", 
-  "#555B62", 
-]
-
-const NA_color = _.last(newIBCategoryColors);
-
-export {
-  lightCategory10Colors,
-  darkCategory10Colors,
-  infobaseCategory10Colors,
-  infobaseGraphColors,
-  infobaseCategory20Colors,
-  newIBCategoryColors,
-  newIBLightCategoryColors,
-  newIBDarkCategoryColors,
-  NA_color,
-};
-

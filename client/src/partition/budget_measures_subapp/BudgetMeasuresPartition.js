@@ -7,6 +7,8 @@ import { Subject } from '../../models/subject';
 import { businessConstants } from '../../models/businessConstants.js';
 import { formats } from '../../core/format.js';
 import { sanitized_marked } from '../../general_utils.js';
+import { newIBLightCategoryColors } from '../../core/color_schemes.js';
+import * as color_defs from '../../core/color_defs.js'
 
 const { budget_chapters } = businessConstants;
 const { 
@@ -279,15 +281,8 @@ const render_diagram = (diagram, props, data, data_wrapper_node_rules, dont_fade
     popup_template: _.curry(popup_template)(props.year_value),
     data_wrapper_node_rules,
     dont_fade,
-    colors: [
-      "#81eeff",
-      "#53e492",
-      "#c388dd",
-      "#febb5d",
-      "#61c8ff",
-      "#fd62b5",
-    ],
-    background_color: "#00233d",
+    colors: newIBLightCategoryColors,
+    background_color: color_defs.primaryColor,
   });
 }
 

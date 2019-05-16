@@ -4,7 +4,7 @@ import { PartitionNotes } from "./PartitionNotes.js";
 import { PartitionDiagram } from "../partition_diagram/PartitionDiagram.js";
 import { reactAdapter } from '../../core/reactAdapter';
 import { get_static_url } from '../../request_utils.js';
-import { darkCategory10Colors } from '../../core/color_schemes.js';
+import { newIBDarkCategoryColors } from '../../core/color_schemes.js';
 
 export class PartitionSubApp {
   constructor(container, all_perspectives, all_data_types, initial_perspective_id, initial_data_type_id, url_update_callback){
@@ -163,7 +163,7 @@ export class PartitionSubApp {
       level_headers: this.current_perspective.level_headers,
       root_text_func: this.current_perspective.root_text_func,
       popup_template: this.current_perspective.popup_template,
-      colors: darkCategory10Colors,
+      colors: newIBDarkCategoryColors,
     });
   }
   enable_search_bar(){
