@@ -3,10 +3,10 @@ import * as color_defs from './color_defs.js'
 const newIBCategoryColors = [
   "#206BBD",
   "#4abbc4",
-  "#e89a40", 
-  "#15918b", 
-  "#a2d173", 
+  "#e89a40",
   "#7272D4", 
+  "#a2d173", 
+  "#15918b",  
   color_defs.tertiaryColor, // grey
 ]
 
@@ -15,8 +15,8 @@ const newIBLightCategoryColors = [
   "#61A3EB",
   "#4abbc4",
   "#e8a840",
-  "#a2d173", 
   "#8D98D3", 
+  "#a2d173", 
   "#CCD3DB",
 ]
 
@@ -25,9 +25,8 @@ const newIBDarkCategoryColors = [
   "#195596",
   "#117078",
   "#99552a",
+  "#554A9E", 
   "#1B793A",
-  "#363687", 
-  "#555B62", 
 ]
 
 // sequential colour schemes
