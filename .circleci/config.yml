@@ -10,7 +10,7 @@ deploy_filter: &deploy_filter
     branches:
       only:
         - master
-        - back-to-top
+        - glossary-back-to-top
 
 version: 2
 jobs:
