@@ -7,6 +7,8 @@ import {
   declarative_charts,
   run_template,
   NivoResponsiveLine,
+  newIBLightCategoryColors,
+  newIBDarkCategoryColors,
 } from "../shared.js";
 import { text_maker, TM } from './sobj_text_provider.js';
 const { 
@@ -89,7 +91,7 @@ class SobjLine extends React.Component {
     this.state = {
       active_sobjs: [_.first(props.data).label ],
     }
-    this.colors = infobase_colors();
+    this.colors = d3.scaleOrdinal().range(_.concat(newIBLightCategoryColors, newIBDarkCategoryColors ));;
   }
   render(){
     const { data } = this.props;

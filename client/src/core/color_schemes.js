@@ -3,7 +3,7 @@ import * as color_defs from './color_defs.js'
 const newIBCategoryColors = [
   "#206BBD",
   "#4abbc4",
-  "#e8a840", 
+  "#e89a40", 
   "#15918b", 
   "#a2d173", 
   "#7272D4", 
@@ -24,7 +24,7 @@ const newIBLightCategoryColors = [
 const newIBDarkCategoryColors = [
   "#195596",
   "#117078",
-  "#751d42",
+  "#99552a",
   "#1B793A",
   "#363687", 
   "#555B62", 
