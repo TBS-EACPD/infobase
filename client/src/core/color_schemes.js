@@ -24,7 +24,7 @@ const newIBLightCategoryColors = [
 const newIBDarkCategoryColors = [
   "#195596",
   "#117078",
-  "#8B5F18",
+  "#751d42",
   "#1B793A",
   "#363687", 
   "#555B62", 
