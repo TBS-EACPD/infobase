@@ -7,72 +7,16 @@ import { get_standard_csv_file_rows } from '../load_utils.js';
 export default async function({models}){
   const { FakeBudgetOrgSubject } = models;
 
-  const igoc_rows = get_standard_csv_file_rows(`igoc.csv`);
-  const dept_codes_by_org_ids = _.chain(igoc_rows)
-    .map( ({org_id, dept_code}) => [org_id, dept_code] )
-    .fromPairs()
-    .value();
-
-  const get_program_allocations_by_measure_and_org_id = (data) => _.chain(data)
-    .filter( ({allocated, withheld}) => allocated || withheld )
-    .map(
-      ({measure_id, org_id, funding, allocated, withheld, remaining, ...program_columns}) => {
-        if ( !_.every(program_columns, _.isNull) ){
-          const dept_code = dept_codes_by_org_ids[org_id];
-  
-          const program_allocations = _.chain(program_columns)
-            .thru(
-              program_columns => {
-                let grouped_columns = {};
-                _.each(
-                  program_columns,
-                  (value, key) => {
-                    const column_group = key.replace(/[0-9]+/, '');
-                    if ( _.isUndefined(grouped_columns[column_group]) ){
-                      grouped_columns[column_group] = [value];
-                    } else {
-                      grouped_columns[column_group].push(value);
-                    }
-                  }
-                );
-                return grouped_columns;
-              }
-            )
-            .values()
-            .thru( ([activity_codes, allocation_values]) => {
-              const actual_activity_codes = _.compact(activity_codes);
-
-              const has_more_allocation_values_than_activity_codes = !_.chain(allocation_values)
-                .drop(actual_activity_codes.length)
-                .compact()
-                .isEmpty()
-                .value();
-
-              if (has_more_allocation_values_than_activity_codes){
-                throw `Budget data error: the row for measure ${measure_id} and org ${org_id} has a missmatched number of activity codes and program allocation values`;
-              }
-
-              return _.zip( actual_activity_codes, _.take(allocation_values, actual_activity_codes.length) );
-            })
-            .fromPairs()
-            .mapKeys( (allocation_value, activity_code) => `${dept_code}-${activity_code}`)
-            .value();
-  
-          return [measure_id, {[org_id]: program_allocations}];
-        }
-      }
-    )
-    .compact()
-    .groupBy( ([measure_id]) => measure_id )
+  const get_program_allocations_by_measure_and_org_id = (program_allocation_rows) => _.chain(program_allocation_rows)
+    .groupBy('measure_id')
     .mapValues(
-      (rows) => _.chain(rows)
-        .map( ([measure_id, program_allocations_by_org_id]) => program_allocations_by_org_id )
-        .reduce(
-          (program_allocations_by_org_ids, program_allocations_by_org_id) => ({
-            ...program_allocations_by_org_ids,
-            ...program_allocations_by_org_id,
-          }),
-          {},
+      (grouped_program_allocation_rows) => _.chain(program_allocation_rows)
+        .groupBy('org_id')
+        .mapValues(
+          (program_allocation_rows) => _.chain(program_allocation_rows)
+            .map( ({subject_id, program_allocation}) => [subject_id, program_allocation])
+            .fromPairs()
+            .value()
         )
         .value()
     )
@@ -125,7 +69,8 @@ export default async function({models}){
       },
     ]),
     ..._.map( budget_years, async (budget_year) => {
-      const budget_data = get_standard_csv_file_rows(`budget_${budget_year}_measure_data.csv`);
+      const budget_measure_data = get_standard_csv_file_rows(`budget_${budget_year}_measure_data.csv`);
+      const budget_program_allocatios = get_standard_csv_file_rows(`budget_${budget_year}_program_allocations.csv`);
       const budget_lookups = get_standard_csv_file_rows(`budget_${budget_year}_measure_lookups.csv`);
       const budget_org_level_descriptions = (() => {
         try {
@@ -163,7 +108,7 @@ export default async function({models}){
       const {
         true: measure_data,
         false: submeasure_data,
-      } = _.chain(budget_data)
+      } = _.chain(budget_measure_data)
         .map( 
           ({measure_id, org_id, funding, allocated, withheld, remaining, ...program_columns}) => ({
             measure_id, 
@@ -172,18 +117,27 @@ export default async function({models}){
             allocated: +allocated,
             withheld: +withheld,
             remaining: +remaining,
-            ..._.mapValues(
-              program_columns,
-              (allocation_value_or_activity_code) => /[A-Z]/.test(allocation_value_or_activity_code) ?
-                allocation_value_or_activity_code :
-                +allocation_value_or_activity_code
-            ),
           })
         )
         .groupBy( ({measure_id}) => !_.includes(submeasure_ids, measure_id) )
         .value();
 
+      const {
+        true: direct_program_allocations,
+        false: submeasure_program_allocations,
+      } = _.chain(budget_program_allocatios)
+        .map( 
+          ({measure_id, org_id, subject_id, program_allocation}) => ({
+            measure_id, 
+            org_id, 
+            subject_id, 
+            program_allocation: +program_allocation,
+          })
+        )
+        .groupBy( ({measure_id}) => !_.includes(submeasure_ids, measure_id) )
+        .value();
 
+      
       const submeasure_ids_by_parent_measure_and_org_id = _.mapValues(
         submeasure_ids_by_parent_measure,
         (submeasure_ids) => _.chain(submeasure_data)
@@ -193,8 +147,8 @@ export default async function({models}){
           .value()
       );
 
-      const direct_program_allocations_by_measure_and_org_id = get_program_allocations_by_measure_and_org_id(measure_data);
-      const submeasure_program_allocations_by_submeasure_and_org_id = get_program_allocations_by_measure_and_org_id(submeasure_data);
+      const direct_program_allocations_by_measure_and_org_id = get_program_allocations_by_measure_and_org_id(direct_program_allocations);
+      const submeasure_program_allocations_by_submeasure_and_org_id = get_program_allocations_by_measure_and_org_id(submeasure_program_allocations);
 
       const program_allocations_by_measure_and_org_id = _.chain(measure_data)
         .groupBy("measure_id")
