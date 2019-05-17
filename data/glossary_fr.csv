@@ -22,7 +22,7 @@ Les lois de crédits commencent sous forme de projets de loi élaborés pour le 
 L'autorisation de dépenser accordée à une organisation au moyen de lois de crédit peut être complétée par des affectations des crédits centraux 5, 10, 15, 25, 30 et 33 du Conseil du Trésor."
 "AVAIL","Reports des exercices antérieurs","Autorisations de dépenses reportées des exercices antérieurs. Comprennent seulement les autorisations pour lesquelles il existe une limite spécifique quant au montant total à être dépensé, ou sur le solde cumulatif en circulation pour les crédits pour lesquels il est permis de dépenser les recettes et rentrées de fonds. Ces crédits représentent généralement soit des autorisations relatives à des fonds renouvelables, au produit de la vente de biens excédentaires de l'État ou à des prêts. Ces montants sont disponibles pour être dépensés sans aucune autre autorisation du Parlement."
 "BIV_ALLO","Affectés","Fonds approuvés par le Conseil du Trésor qui seront transférés du crédit d’exécution du budget aux crédits d’une organisation pour des dépenses de fonctionnement, des dépenses en capital, des subventions ou des contributions lors de l’obtention de la totalité des crédits pour le budget principal des dépenses."
-"BIV_FUND","Fonds du budget","Nouvelles mesures de dépenses figurant au tableau A2.11 du plan budgétaire."
+"BIV_FUND","Fonds du budget de 2018","Nouvelles mesures de dépenses figurant au tableau A2.11 du plan budgétaire de 2018."
 "BIV_REMA","Restants","Solde des fonds non affectés dans le crédit d’exécution du budget."
 "BIV_WITH","Retenus","Dépenses à engager en vertu d’autres autorisations, comme les dépenses législatives pour le Régime d’avantages sociaux des employés, les prestations et frais d’administration de l’assurance-emploi, les reports aux exercices suivants ou les montants réservés pour couvrir les coûts des locaux à bureaux et des services informatiques."
 "BUD_AUTH_CURRENT","Autorisation budgétaire utilisée dans l'exercice en cours","Montants dépensés pendant l’exercice en cours (moins les recettes et rentrées de fonds disponibles pour dépenser)."
@@ -109,7 +109,7 @@ Nota : le reste de l'administration publique centrale est composée d’organisa
 "GOC014","Activités du gouvernement du Canada: Institutions démocratiques","Les activités de programme qui comprennent les fonctions exercées par les trois pouvoirs du gouvernement  – le pouvoir judiciaire, le pouvoir législatif et le pouvoir exécutif – ainsi que les activités qui visent à appuyer ces institutions et à préserver leur indépendance. Cela se fait par la prestation de services et de conseils aux pouvoirs judiciaire, législatif et exécutif, et par la mise en œuvre de diverses lois et de divers codes."
 "GOC015","Activités du gouvernement du Canada: Transparent et responsable","Les activités de programme qui visent à maintenir la confiance du public et à renforcer l’interaction entre le gouvernement et les citoyens canadiens. Cela se fait par la prestation de services qui répondent aux besoins des citoyens et par des mesures visant à assurer la responsabilisation de l’administration publique, le respect des règles et la possibilité de demander des recours."
 "GOC016","Activités du gouvernement du Canada: Activités gouvernementales","Les activités de programme qui visent à appuyer le gouvernement dans l’exécution de ses activités essentielles et à assurer l’administration rigoureuse des ressources financières, des actifs et des ressources humaines. Cela comprend le Trésor fédéral, le recouvrement de l’impôt, le recrutement et le perfectionnement dans la fonction publique, la prestation de services linguistiques et de services d’approvisionnement, et les tribunaux administratifs."
-"GOCO","Secteurs de dépenses et d’activités du gouvernement du Canada","Les organisations fédérales qui reçoivent des crédits doivent planifier leurs opérations, les gérer et rendre compte de leur rendement par rapport à des résultats stratégiques ou des résultats ministériels.
+"GOCA","Secteurs de dépenses et d’activités du gouvernement du Canada","Les organisations fédérales qui reçoivent des crédits doivent planifier leurs opérations, les gérer et rendre compte de leur rendement par rapport à des résultats stratégiques ou des résultats ministériels.
 
 
 En plus, elles doivent indiquer comment leurs activités de programmes s’alignent avec les 16 grands secteurs d'activités faisant partie de quatre secteurs de dépenses du gouvernement du Canada. 
@@ -458,17 +458,4 @@ Programme de métadonnées, comprenant ce qui suit : 1) des étiquettes de lien 
 "TP","Paiement de transfert","Par « paiement de transfert », on entend un paiement monétaire ou un transfert de biens, de services ou d'actifs effectué en fonction de crédits à une tierce partie bénéficiaire, y compris une société d'État, et qui n'a pas pour résultat l'acquisition de biens, de services ou d'actifs par le gouvernement du Canada. Les paiements de transfert comportent les catégories suivantes : les subventions, les contributions et les autres paiements de transfert. Les paiements de transfert n'incluent pas les investissements, les prêts ni les garanties d'emprunt."
 "VOTED","Montants votés","Par «  votés », on entend les montants autorisés aux termes des lois de crédits"
 "YI_IGOC","Année de constitution en société","Année au cours de laquelle l’organisation a été légalement constituée en société."
-"BIV_VOTE","Crédit d’exécution du budget","Crédit central géré par le Conseil du Trésor pour l’exécution du budget.
 
- 
-
-En 2018-2019, le crédit d’exécution du budget incluait tous les fonds figurant dans le tableau A2.11 du budget fédéral de 2019, ce qui permettait la mise en œuvre rapide des mesures budgétaires pour les Canadiens.
-
- 
-
-En 2019-2020, chaque mesure budgétaire votée figurant dans le tableau A2.11 du budget fédéral de 2019 a son propre crédit d’exécution du budget dans le ministère concerné.
-
- 
-
-Crédits d’exécution du budget ne comprennent pas les mesures suivantes qui figurent au tableau A2.11 du budget de 2019 : (1) améliorer la santé et la sécurité des travailleurs canadiens (Centre canadien d'hygiène et de sécurité au travail); (2) garantir les prestations de remplacement du revenu des membres des Forces qui ont obtenu une libération pour des raisons médicales (ministère de la Défense nationale); (3) Affectation à déterminer; et (4) Autres mesures annoncées dans le budget de 2019 (budgets de dépenses)."
-"BIV_MEASURE","Mesure budgétaire","Mesures de dépenses activées par les crédits d'exécution du budget. Une mesure budgétaire peut être répartie parmi plusieurs ministères."
