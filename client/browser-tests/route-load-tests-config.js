@@ -136,22 +136,22 @@ module.exports.route_load_tests_config = [
   },
   {
     name: "Infographic - Program - About",
-    route: "orgs/program/TBC-BXA02/infograph/intro",
+    route: "orgs/program/TBC-BXC04/infograph/intro",
     test_on: ["eng", "basic-eng"],
   },
   {
     name: "Infographic - Program - Finance",
-    route: "orgs/program/TBC-BXA02/infograph/financial",
+    route: "orgs/program/TBC-BXC04/infograph/financial",
     test_on: ["eng", "basic-eng"],
   },
   {
     name: "Infographic - Program - Results",
-    route: "orgs/program/TBC-BXA02/infograph/results",
+    route: "orgs/program/TBC-BXC04/infograph/results",
     test_on: ["eng", "basic-eng"],
   },
   {
     name: "Infographic - Program - Where can I go from here?",
-    route: "orgs/program/TBC-BXA02/infograph/related",
+    route: "orgs/program/TBC-BXC04/infograph/related",
     test_on: ["eng", "basic-eng"],
   },
   {
