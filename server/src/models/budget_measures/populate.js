@@ -127,9 +127,9 @@ export default async function({models}){
     ..._.map( budget_years, async (budget_year) => {
       const budget_data = get_standard_csv_file_rows(`budget_${budget_year}_measure_data.csv`);
       const budget_lookups = get_standard_csv_file_rows(`budget_${budget_year}_measure_lookups.csv`);
-      const budget_descriptions = (() => {
+      const budget_org_level_descriptions = (() => {
         try {
-          return get_standard_csv_file_rows(`budget_${budget_year}_measure_descriptions.csv`);
+          return get_standard_csv_file_rows(`budget_${budget_year}_org_level_measure_descriptions.csv`);
         } catch(error) {
           return [];
         }
@@ -333,7 +333,7 @@ export default async function({models}){
               0
             );
 
-            const descriptions = _.chain(budget_descriptions)
+            const descriptions = _.chain(budget_org_level_descriptions)
               .find( (budget_description_row) => budget_description_row.measure_id === measure_id && budget_description_row.org_id === org_id )
               .pick(["description_en", "description_fr"])
               .value();
