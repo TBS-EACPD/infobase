@@ -98,7 +98,7 @@ const red_scale = d3.scaleSequential(d3.interpolateRgbBasis(sequentialReds.slice
 red_scale.clamp(true);
 const green_scale = d3.scaleSequential(d3.interpolateRgbBasis(sequentialGreens.slice(0,4)));
 green_scale.clamp(true);
-const purple_scale = d3.scaleSequential(d3.interpolateRgbBasis(sequentialPurples.slice(0,4)));
+const purple_scale = d3.scaleSequential(d3.interpolateRgbBasis(sequentialPurples.slice(0,3)));
 purple_scale.clamp(true);
 
 

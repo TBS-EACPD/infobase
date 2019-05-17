@@ -1,32 +1,33 @@
 import * as color_defs from './color_defs.js'
 
 const newIBCategoryColors = [
-  "#206BBD",
-  "#4abbc4",
-  "#e89a40",
-  "#7272D4", 
-  "#a2d173", 
-  "#15918b",  
+  "#206BBD", // blue
+  "#4abbc4", // teal
+  "#e89a40", // orange
+  "#7272D4", // purple
+  "#a2d173", // light green
+  "#15918b", // dark teal
   color_defs.tertiaryColor, // grey
 ]
 
 // for contrast against dark text
 const newIBLightCategoryColors = [
-  "#61A3EB",
-  "#4abbc4",
-  "#e8a840",
-  "#8D98D3", 
-  "#a2d173", 
-  "#CCD3DB",
+  "#61A3EB", // blue
+  "#4abbc4", // teal
+  "#e8a840", // orange
+  "#8D98D3", // purple
+  "#a2d173", // light green
+  "#CCD3DB", // grey
 ]
 
 // for contrast against pale text
 const newIBDarkCategoryColors = [
-  "#195596",
-  "#117078",
-  "#99552a",
-  "#554A9E", 
-  "#1B793A",
+  "#195596", // blue
+  "#117078", // dark teal
+  "#99552a", // brown
+  "#554A9E", // purple
+  "#1B793A", // green
+  "#555B62", // grey
 ]
 
 // sequential colour schemes
@@ -49,11 +50,11 @@ const sequentialReds = [
 ]
 
 const sequentialGreens = [
-  "#E8FFD1",
-  "#CFE6B8",
-  "#A9D47D",
-  "#87BF4F",
-  "#62A123",
+  "#D1FFE0",
+  "#B8E6C7",
+  "#7DD49A",
+  "#4FBF74",
+  "#23A14D",
 ]
 
 const sequentialPurples = [
