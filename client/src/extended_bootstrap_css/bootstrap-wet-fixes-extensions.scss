@@ -314,10 +314,10 @@ li.list-group-item {
 .list-group-item:hover:not(.active),
 .list-group-item:focus:not(.active) {
   color: $textColor;
-  background-color: lighten($tertiaryColor, 40%);
+  background-color: lighten($tertiaryColor, 30%);
 }
 .list-group-item.active a {
-  color: lighten($tertiaryColor, 40%);
+  color: lighten($tertiaryColor, 30%);
 }
 
 /* for table striped header */
@@ -485,7 +485,7 @@ ol.breadcrumb > li:last-child > :last-child {
   box-shadow: none !important;
   opacity: 1;
   background: none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255);
-  background-color: lighten($tertiaryColor, 40%);
+  background-color: lighten($tertiaryColor, 37%);
 }
 .form-control.input-lg:focus {
   background-color: $backgroundColor;

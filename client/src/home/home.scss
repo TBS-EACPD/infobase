@@ -86,7 +86,7 @@
 }
 
 li.list-group-item--home {
-  background-color: lighten($tertiaryColor, 40%);
+  background-color: lighten($tertiaryColor, 37%);
 }
 .list-group-item--home:hover:not(.active),
 .list-group-item--home:focus:not(.active) {
@@ -94,7 +94,7 @@ li.list-group-item--home {
   background-color: $backgroundColor;
 }
 .list-group-item--home.active a {
-  color: lighten($tertiaryColor, 40%);
+  color: lighten($tertiaryColor, 37%);
 }
 
 .badge.badge--is-new {
