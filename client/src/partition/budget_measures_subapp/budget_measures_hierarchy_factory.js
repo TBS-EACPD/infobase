@@ -325,7 +325,7 @@ const budget_overview_hierarchy_factory = (year_value) => {
               ...budgetMeasure,
               type: /net_adjust/.test(budgetMeasure.id) ? "net_adjust" : "budget_measure",
               value_type: "funding",
-              description: has_no_description ? text_maker("not_available") : budgetMeasure.description,
+              description: has_no_description ? year_value === "2018" && text_maker("not_available") : budgetMeasure.description,
               notes: !has_no_description && year_value === "2018" ? text_maker("budget2018_measure_description_values_clarification") : false,
               value: _.reduce(budgetMeasure.data, (sum, data_row) => sum + data_row.funding, 0),
               chapter_key: budgetMeasure.chapter_key,
