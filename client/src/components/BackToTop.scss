@@ -1,0 +1,38 @@
+@import '../common_css/common-variables';
+
+
+.back-to-top {
+    display: inline-block;
+    background-color: #3b4f68;
+    text-decoration: none;
+    text-align: center;
+    padding: 5px;
+    border-radius: 4px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    transition: background-color .3s, 
+      opacity .5s, visibility .5s;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+    color: white;
+  }
+ 
+  .back-to-top:hover {
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    background-color: #333;
+  }
+  .back-to-top:active {
+    background-color: #555;
+  }
+  #button.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  
+  
+  

@@ -24,6 +24,7 @@ import { Details } from './components/Details.js';
 import { EmbeddedVideo } from './components/EmbeddedVideo.js';
 import { SpinnerWrapper } from './components/SpinnerWrapper.js';
 import { KeyConceptList } from './components/KeyConceptList.js';
+import { BackToTop } from './components/BackToTop.js';
 import {
   UnlabeledTombstone,
   LabeledTombstone,
@@ -143,4 +144,5 @@ export {
   TextAbbrev,
   create_text_maker_component,
   DlItem,
+  BackToTop,
 };

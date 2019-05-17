@@ -9,11 +9,13 @@ import { GlossaryEntry } from '../models/glossary.js';
 import { 
   create_text_maker_component,
   GlossarySearch,
+  BackToTop,
 } from '../util_components.js';
 
 const { text_maker, TM } = create_text_maker_component(glossary_text);
 
 function get_glossary_items_by_letter(){
+  
   const glossary_items = GlossaryEntry.get_all();
 
   const glossary_items_by_letter = _.chain(glossary_items)
@@ -35,6 +37,8 @@ function get_glossary_items_by_letter(){
     .value();
   return glossary_items_by_letter;
 }
+
+
 
 
 //id tag is there for legacy styles 
@@ -108,7 +112,20 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
                 <div 
                   dangerouslySetInnerHTML={{__html: item.definition}}
                 />
+                
+                <div className='test'>
+                  <a className="glossary-top-link"
+                    onClick={evt => {
+                      evt.preventDefault();
+                      window.scrollTo(0,0);
+                      document.getElementById('glossary_search').focus();
+                      
+                    }}
+                    tabIndex='-1'
+                  >{text_maker("glossary_back_to_top")}</a>
+                </div>
               </dd>
+              
             </Fragment>))}
         </dl>
       </div>
@@ -137,6 +154,7 @@ export default class Glossary extends React.Component {
       >
         <h1> <TM k="glossary" /> </h1>
         <ScrollToTargetContainer target_id={active_key}>
+          <BackToTop />
           <Glossary_
             active_key={active_key}
             items_by_letter={items_by_letter}
