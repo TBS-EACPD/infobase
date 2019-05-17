@@ -85,15 +85,17 @@
   border-radius: 10px;
 }
 
-// .list-group--quick-links {
-//   border: 2px solid $separatorColor;
-//   border-radius: 10px;
-// }
-
-// .list-group-item--quick-links {
-//   background-color: lighten($tertiaryColor, 40%);
-//   border-color: $tertiaryColor !important;
-// }
+li.list-group-item--home {
+  background-color: lighten($tertiaryColor, 40%);
+}
+.list-group-item--home:hover:not(.active),
+.list-group-item--home:focus:not(.active) {
+  color: $textColor;
+  background-color: $backgroundColor;
+}
+.list-group-item--home.active a {
+  color: lighten($tertiaryColor, 40%);
+}
 
 .badge.badge--is-new {
   background-color: $highlightColor; 
