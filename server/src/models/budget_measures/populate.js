@@ -10,10 +10,10 @@ export default async function({models}){
   const get_program_allocations_by_measure_and_org_id = (program_allocation_rows) => _.chain(program_allocation_rows)
     .groupBy('measure_id')
     .mapValues(
-      (grouped_program_allocation_rows) => _.chain(program_allocation_rows)
+      (measure_program_allocation_rows) => _.chain(measure_program_allocation_rows)
         .groupBy('org_id')
         .mapValues(
-          (program_allocation_rows) => _.chain(program_allocation_rows)
+          (measure_and_org_program_allocation_rows) => _.chain(measure_and_org_program_allocation_rows)
             .map( ({subject_id, program_allocation}) => [subject_id, program_allocation])
             .fromPairs()
             .value()
