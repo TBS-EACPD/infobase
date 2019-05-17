@@ -223,7 +223,7 @@ export default class BudgetMeasuresRoute extends React.Component {
             { !window.is_a11y_mode &&
               <Fragment>
                 <BudgetMeasuresControls
-                  selected_value = { budget_year === "budget-2019" ? "funding" : selected_value } // TEMPORARILY lock the 2019 view to the funding value
+                  selected_value = { selected_value }
                   first_column = { first_column }
                   history = { history }
                   budget_year = { budget_year }
@@ -232,7 +232,7 @@ export default class BudgetMeasuresRoute extends React.Component {
                   setFilterString = { this.setFilterString.bind(this) }
                 />
                 <BudgetMeasuresPartition
-                  selected_value = { budget_year === "budget-2019" ? "funding" : selected_value } // TEMPORARILY lock the 2019 view to the funding value
+                  selected_value = { selected_value }
                   first_column = { first_column }
                   budget_year = { budget_year }
                   year_value = { year_value }

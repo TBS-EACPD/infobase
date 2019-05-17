@@ -50,25 +50,23 @@ export class BudgetMeasuresControls extends React.Component {
 
     return (
       <div className="budget-measures-partition-controls">
-        { budget_year !== "budget-2019" && // TEMPORARILY turn off value controls in 2019 view, so it can be locked to the funding value
-          <LabeledBox 
-            label = { <TextMaker text_key="budget_measure_display_value_label" /> }
-            content = {
-              <div className="centerer">
-                <RadioButtons
-                  options = { _.map( budget_value_options, ({id, display}) => ({ id, display, active: id === selected_value }) ) }
-                  onChange = { id => {
-                    const new_path = `/budget-tracker/${first_column}/${id}/${budget_year}`;
-                    if ( history.location.pathname !== new_path ){
-                      // the first_column prop, and thus this button's active id, is updated through this route push
-                      history.push(new_path);
-                    }
-                  }}
-                />
-              </div>
-            }
-          />
-        }
+        <LabeledBox 
+          label = { <TextMaker text_key="budget_measure_display_value_label" /> }
+          content = {
+            <div className="centerer">
+              <RadioButtons
+                options = { _.map( budget_value_options, ({id, display}) => ({ id, display, active: id === selected_value }) ) }
+                onChange = { id => {
+                  const new_path = `/budget-tracker/${first_column}/${id}/${budget_year}`;
+                  if ( history.location.pathname !== new_path ){
+                    // the first_column prop, and thus this button's active id, is updated through this route push
+                    history.push(new_path);
+                  }
+                }}
+              />
+            </div>
+          }
+        />
         { selected_value !== "overview" &&
           <LabeledBox 
             label = { <TextMaker text_key="budget_measure_group_by_label" /> }
