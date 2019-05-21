@@ -559,8 +559,8 @@ Subject.BudgetMeasure = class BudgetMeasure extends static_subject_store(){
         fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal/2018-19-budget-depenses/2018-2019-provenance-utilisation-credit-execution-budget-ministere.html",
       }[window.lang],
       2019: {
-        en: false,
-        fr: false,
+        en: "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/sources-uses-budget-measures-organization/sources-uses-budget-2019-measures-organization-04-april.html",
+        fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/provenance-utilisations-fonds-mesures-budget-organisation/provenance-utilisations-fonds-mesures-budget-2019-organisation-04-avril.html",
       }[window.lang],
     };
   }
