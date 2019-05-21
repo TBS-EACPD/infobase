@@ -86,12 +86,16 @@ const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOv
         const width = pdf.internal.pageSize.getWidth();
         const height = ratio * width
 
-        pdf.internal.pageSize.setHeight(height);
+        pdf.internal.pageSize.setHeight(height + 67);
         pdf.setFontStyle('bold');
         pdf.setLineWidth(2);
         pdf.text(2,10,title);
         pdf.line(0,12,width,12,'F');
         pdf.addImage(imgData, 'JPEG', 0, 12, width, height);
+
+        const footerImg = new Image();
+        footerImg.src = get_static_url("png/pdf_footer.png");
+        pdf.addImage(footerImg, 'png', -10, height + 30);
         pdf.save(file_name);
       });
   }
