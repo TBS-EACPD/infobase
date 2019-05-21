@@ -13,7 +13,7 @@ import { panel_context } from '../infographic/context.js';
 import './panel-components.scss';
 import { create_text_maker } from '../models/text.js';
 import * as html2canvas from 'html2canvas';
-import * as jsPDF from 'jsPDF';
+import * as jsPDF from 'jspdf';
 
 
 const { TM } = create_text_maker_component(text);
