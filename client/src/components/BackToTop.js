@@ -8,10 +8,10 @@ window.onscroll = function() {handleScroll()} ;
 
 function handleScroll() {
   if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-    document.getElementById('button').classList.add('show') ;
+    document.getElementById('back-to-top-button').classList.add('show') ;
   }
   else {
-    document.getElementById('button').classList.remove('show') ;
+    document.getElementById('back-to-top-button').classList.remove('show') ;
   }
 };
 
