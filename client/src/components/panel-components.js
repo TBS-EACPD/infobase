@@ -68,8 +68,10 @@ export const Panel = props => {
 const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOverflow}) => {
   const download_panel_pdf = () => {
     const panel_object = document.getElementById(context.graph_key);
-    const panel_title = panel_object.getElementsByClassName("panel-title")[0].innerHTML;
     const panel_body = panel_object.getElementsByClassName("panel-body")[0];
+    
+    const file_name_context = context.subject.constructor.name === 'Dept' ? context.subject.acronym: context.subject.id;
+    const file_name = file_name_context + '_' + title + ".pdf"
 
     html2canvas(panel_body)
       .then((canvas)=> {
@@ -87,10 +89,10 @@ const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOv
         pdf.internal.pageSize.setHeight(height);
         pdf.setFontStyle('bold');
         pdf.setLineWidth(2);
-        pdf.text(2,10,panel_title);
+        pdf.text(2,10,title);
         pdf.line(0,12,width,12,'F');
         pdf.addImage(imgData, 'JPEG', 0, 12, width, height);
-        pdf.save("example.pdf");
+        pdf.save(file_name);
       });
   }
   
