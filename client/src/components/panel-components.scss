@@ -54,6 +54,16 @@
       padding-left: 1rem;
     }
   }
+
+  .panel-heading-utils{
+    width: 30px;
+    height: 20px;
+    text-align: right;
+    margin-left: auto;
+    padding-left: 4px;
+    padding-right: 4px;
+    cursor: pointer;
+  }
   
   .panel.panel-info.panel-flat {
     margin-bottom: 23px;
@@ -79,7 +89,6 @@
     background-color: inherit;
     border: none;
     display: inline-flex;
-    justify-content: space-between;
     width: 100%;
   }
   

@@ -11,3 +11,7 @@ a11y_source_expl:
 a11y_permalink:
   en: Permalink to this panel
   fr: Lien direct à ce graphique
+
+a11y_download_panel:
+  en: Download this panel to PDF
+  fr: INSERT FR

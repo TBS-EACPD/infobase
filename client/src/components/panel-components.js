@@ -12,6 +12,8 @@ import { panel_href_template } from '../infographic/routes.js';
 import { panel_context } from '../infographic/context.js';
 import './panel-components.scss';
 import { create_text_maker } from '../models/text.js';
+import * as html2canvas from 'html2canvas';
+import * as jsPDF from 'jsPDF';
 
 
 const { TM } = create_text_maker_component(text);
@@ -63,52 +65,84 @@ export const Panel = props => {
   )
 }
 
-const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOverflow}) => (
-  <section className={classNames('panel panel-info mrgn-bttm-md', allowOverflow && "panel-overflow")}>
-    {title && <header className='panel-heading'>
-      <header className="panel-title"> {title} </header>
-      {subtitle &&
-        <div className="panel-sub-title">
-          {subtitle}
-        </div>
-      }
-      {context && !context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) && 
-        <a href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
-          <img src={get_static_url("svg/permalink.svg")}
-            alt={text_maker("a11y_permalink")}
-            style={{ 
-              width: "20px", 
-              height: "20px",
-              textAlign: "right",
-            }}
+const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOverflow}) => {
+  const download_panel_pdf = () => {
+    const panel_object = document.getElementById(context.graph_key);
+    const panel_title = panel_object.getElementsByClassName("panel-title")[0].innerHTML;
+    const panel_body = panel_object.getElementsByClassName("panel-body")[0];
+
+    html2canvas(panel_body)
+      .then((canvas)=> {
+        
+        const imgData = canvas.toDataURL('image/png');
+        const ratio =  canvas.height/canvas.width;
+
+        const pdf = new jsPDF({
+          compress: true,
+          format: 'letter',
+        });
+        const width = pdf.internal.pageSize.getWidth();
+        const height = ratio * width
+
+        pdf.internal.pageSize.setHeight(height);
+        pdf.setFontStyle('bold');
+        pdf.setLineWidth(2);
+        pdf.text(2,10,panel_title);
+        pdf.line(0,12,width,12,'F');
+        pdf.addImage(imgData, 'JPEG', 0, 12, width, height);
+        pdf.save("example.pdf");
+      });
+  }
+  
+  return(
+    <section className={classNames('panel panel-info mrgn-bttm-md', allowOverflow && "panel-overflow")}>
+      {title && <header className='panel-heading'>
+        <header className="panel-title"> {title} </header>
+        {subtitle &&
+          <div className="panel-sub-title">
+            {subtitle}
+          </div>
+        }
+        {context &&
+          <img src={get_static_url("svg/download.svg")}
+            className='panel-heading-utils'
+            onClick={() => download_panel_pdf()}
+            alt={text_maker("a11y_download_panel")}
           />
-        </a>
+        }
+        {context && !context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) && 
+          <a href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
+            <img src={get_static_url("svg/permalink.svg")}
+              alt={text_maker("a11y_permalink")}
+              className='panel-heading-utils'
+            />
+          </a>
+        }
+      </header>
       }
-    </header>
-    }
-    <div className='panel-body'>
-      { children }
-      <div className="mrgn-tp-md" />
-      {_.nonEmpty(sources) && 
-        <div>
-          <PanelSource links={sources} />
-        </div>
-      }
-      {_.nonEmpty(footnotes) && 
-        <div className="mrgn-tp-md">
-          <Details
-            summary_content={ <TM k="footnotes" /> }
-            content={
-              <FootnoteList
-                footnotes={footnotes}
-              />
-            }
-          />
-        </div>
-      }
-    </div>
-  </section>
-);
+      <div className='panel-body'>
+        { children }
+        <div className="mrgn-tp-md" />
+        {_.nonEmpty(sources) && 
+          <div>
+            <PanelSource links={sources} />
+          </div>
+        }
+        {_.nonEmpty(footnotes) && 
+          <div className="mrgn-tp-md">
+            <Details
+              summary_content={ <TM k="footnotes" /> }
+              content={
+                <FootnoteList
+                  footnotes={footnotes}
+                />
+              }
+            />
+          </div>
+        }
+      </div>
+    </section>
+  )};
 
 
 
