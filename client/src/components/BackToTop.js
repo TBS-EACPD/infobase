@@ -7,7 +7,7 @@ import './BackToTop.scss' ;
 window.onscroll = function() {handleScroll()} ;
 
 function handleScroll() {
-  if (document.documentElement.scrollTop > 300) {
+  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
     document.getElementById('button').classList.add('show') ;
   }
   else {
@@ -18,11 +18,11 @@ function handleScroll() {
 export class BackToTop extends React.Component {
   
   render() {
-    return <a className="back-to-top" id="button" onClick={() => this.handleClick()}>Back to top</a>
+    return <a className="back-to-top" id="back-to-top-button" tabIndex='-1' onClick={() => this.handleClick()}>Back to top</a>
   }
 
   handleClick() {
-    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
 
 }

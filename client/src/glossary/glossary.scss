@@ -21,8 +21,17 @@ dt.glossary-dt {
 
 .glossary-top-link {
   text-decoration: none;
+  position: absolute;
+  overflow: hidden;
+  height: 0px;
+  width: 0px;
 }
 
 .glossary-top-link:hover {
   cursor: pointer;
+}
+
+.glossary-top-link:focus {
+  overflow: inherit;
+  position: inherit;
 }

@@ -95,11 +95,7 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
                 `__${letter}` :
                 null 
                 }
-                tabIndex={
-                ix === 0 ?
-                0 :
-                null
-                }
+                tabIndex={0}
               >
                 <span
                   id={item.id}
@@ -115,13 +111,14 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
                 
                 <div className='test'>
                   <a className="glossary-top-link"
+                    href="#"
+                    tabIndex='0'
                     onClick={evt => {
                       evt.preventDefault();
-                      window.scrollTo(0,0);
-                      document.getElementById('glossary_search').focus();
+                      document.body.scrollTop = document.documentElement.scrollTop = 0;
+                      document.getElementById('back-to-top-button').focus();
                       
                     }}
-                    tabIndex='-1'
                   >{text_maker("glossary_back_to_top")}</a>
                 </div>
               </dd>
