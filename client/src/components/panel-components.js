@@ -67,15 +67,24 @@ export const Panel = props => {
 
 const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOverflow}) => {
   const download_panel_pdf = () => {
-    const panel_object = document.getElementById(context.graph_key);
-    const panel_body = panel_object.getElementsByClassName("panel-body")[0];
-    
     const file_name_context = context.subject.constructor.name === 'Dept' ? context.subject.acronym: context.subject.id;
     const file_name = file_name_context + '_' + title + ".pdf"
 
+    const panel_object = document.getElementById(context.graph_key);
+    const panel_body = panel_object.getElementsByClassName("panel-body")[0];
+    const legend_container_arr = panel_body.getElementsByClassName('legend-container');
+
+    const MAX_DIV_HEIGHT = "9999px"
+    const oldMaxHeights = _.map(legend_container_arr, legend_container => {
+      const oldMaxHeight = legend_container.style.maxHeight
+      const newMaxHeight = oldMaxHeight==="" ? "" : MAX_DIV_HEIGHT
+      legend_container.style.maxHeight = newMaxHeight
+
+      return oldMaxHeight;
+    });
+    
     html2canvas(panel_body)
-      .then((canvas)=> {
-        
+      .then((canvas) => {
         const imgData = canvas.toDataURL('image/png');
         const ratio =  canvas.height/canvas.width;
 
@@ -86,7 +95,10 @@ const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOv
         const width = pdf.internal.pageSize.getWidth();
         const height = ratio * width
 
-        pdf.internal.pageSize.setHeight(height + 67);
+        const FOOTER_HEIGHT = 37;
+        const EXTRA_HEIGHT = 30;
+
+        pdf.internal.pageSize.setHeight(height + FOOTER_HEIGHT + EXTRA_HEIGHT);
         pdf.setFontStyle('bold');
         pdf.setLineWidth(2);
         pdf.text(2,10,title);
@@ -95,8 +107,15 @@ const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOv
 
         const footerImg = new Image();
         footerImg.src = get_static_url("png/pdf_footer.png");
-        pdf.addImage(footerImg, 'png', -10, height + 30);
+        pdf.addImage(footerImg, 'png', -10, height + EXTRA_HEIGHT);
         pdf.save(file_name);
+      })
+      .then(() => {
+        _.forEach(legend_container_arr, legend_container => {
+          _.forEach(oldMaxHeights, oldMaxHeight => {
+            legend_container.style.maxHeight = oldMaxHeight;
+          })
+        });    
       });
   }
   
