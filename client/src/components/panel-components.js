@@ -106,7 +106,7 @@ const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOv
         pdf.addImage(imgData, 'JPEG', 0, 12, width, height);
 
         const footerImg = new Image();
-        footerImg.src = get_static_url("png/pdf_footer.png");
+        footerImg.src = get_static_url(`png/pdf-footer-${window.lang}.png`);
         pdf.addImage(footerImg, 'png', -10, height + EXTRA_HEIGHT);
         pdf.save(file_name);
       })

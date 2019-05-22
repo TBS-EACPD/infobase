@@ -76,7 +76,8 @@ const common_lookups_fr = _.map(
 );
 
 const common_png = _.map(['en', 'fr'], lang => `src/panels/result_graphs/result-taxonomy-${lang}.png`);
-common_png.push('src/components/pdf_footer.png');
+common_png.push('src/components/pdf-footer-en.png');
+common_png.push('src/components/pdf-footer-fr.png');
 
 const svg_path = 'src/svg';
 
