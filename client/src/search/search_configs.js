@@ -227,7 +227,7 @@ const programs = {
   header_function: () => trivial_text_maker('programs'),
   name_function: program => `${program.name} (${program.dept.fancy_name})`,
   get_data: () => Program.get_all(),
-  filter: (query, datum) => memoized_re_matchers(query, ['name', 'old_name'], "programs")(datum),
+  filter: (query, datum) => memoized_re_matchers(query, ['name', 'old_name', 'activity_code'], "programs")(datum),
   menu_content_function: function(program, search){
     let display_name = this.name_function(program);
 
@@ -267,7 +267,7 @@ const crsos = {
   header_function: () => trivial_text_maker('core_resps'),
   name_function: crso => `${crso.name} (${crso.dept.fancy_name})`,
   get_data: () => _.filter(CRSO.get_all(), 'is_cr'),
-  filter: (query, datum) => memoized_re_matchers(query, ['name'], "crsos")(datum),
+  filter: (query, datum) => memoized_re_matchers(query, ['name', 'activity_code'], "crsos")(datum),
 };
 
 export {
