@@ -506,21 +506,21 @@ class BudgetMeasureHBars extends React.Component {
         }
       );
       return _.reverse( sorted_data.length > TOP_TO_SHOW ? _.concat(top_data,others) : sorted_data );
+    };
 
-    }
-
-    let data_by_selected_group;
-    if(valid_selected_grouping === 'measures'){
-      data_by_selected_group = get_top_data(data, valid_selected_grouping, valid_selected_value)
-    } else if (valid_selected_grouping === 'orgs'){
-      data_by_selected_group = get_top_data(get_org_budget_data_from_all_measure_data(data), valid_selected_grouping, valid_selected_value);
-    } else if (valid_selected_grouping === 'programs'){
-      data_by_selected_group = get_program_allocation_data_from_dept_data(data);
-    }
-
+    const filtered_data_by_selected_group = _.filter(
+      {
+        measures: get_top_data(data, valid_selected_grouping, valid_selected_value),
+        orgs: get_top_data( get_org_budget_data_from_all_measure_data(data), valid_selected_grouping, valid_selected_value ),
+        programs: get_program_allocation_data_from_dept_data(data),
+      }[valid_selected_grouping],
+      row => valid_selected_value !== "funding_overview" ?
+        row[valid_selected_value] :
+        row.funding
+    );
 
     return {
-      data: data_by_selected_group,
+      data: filtered_data_by_selected_group,
       info,
       grouping_options,
       selected_grouping: valid_selected_grouping,
