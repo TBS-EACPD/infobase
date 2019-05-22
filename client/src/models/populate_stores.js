@@ -44,7 +44,7 @@ function process_lookups(data){
 
   create_tag_branches( data["program_tag_types.csv"] );
   populate_program_tags( data["program_tags.csv"] );
-  populate_socr_tags(data["crso.csv"]);
+  populate_crso_tags(data["crso.csv"]);
   populate_programs(data["program.csv"]);
 
   //once all programs and tags are created, link them 
@@ -264,13 +264,14 @@ function populate_program_tags(tag_rows){
   });
 };
 
-function populate_socr_tags(rows){
+function populate_crso_tags(rows){
   const [ id, dept_code, title, desc, is_active, is_drf, is_internal_service ] = [0,1,2,3,4,5,6,7];
   _.each(rows,row => {
     const dept = Dept.lookup(row[dept_code]);
     const instance = CRSO.create_and_register({
       dept,
       id: row[id],
+      activity_code: _.chain(row[id]).split('-').last().value(),
       name: row[title],
       description: row[desc],
       is_active: !!(+row[is_active]),
