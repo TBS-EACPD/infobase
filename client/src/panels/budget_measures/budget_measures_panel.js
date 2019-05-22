@@ -483,13 +483,13 @@ class BudgetMeasureHBars extends React.Component {
         .reverse()
         .value();
 
-      const top_data = _.take(sorted_data,TOP_TO_SHOW);
+      const top_data = _.take(sorted_data, TOP_TO_SHOW);
 
       const others = {
         measure_id: 99999,
         chapter_key: null,
         description: "",
-        name: text_maker("all_other_" + grouping),
+        name: text_maker("x_smaller_" + grouping, {smaller_items_count: sorted_data.length - TOP_TO_SHOW}),
         section_id: null,
         year: selected_year,
       };

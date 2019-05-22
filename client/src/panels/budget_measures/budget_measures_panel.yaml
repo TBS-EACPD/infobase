@@ -137,12 +137,21 @@ budget_panel_a11y_link_header:
   en: Link to Budget 2018 section
   fr: Lien vers la section du budget 2018
 
-all_other_measures:
-  en: All other measures
-  fr: Toutes les autres mesures budgétaires
-all_other_orgs:
-  en: All other organizations
-  fr: Tous les autres organismes
-all_other_programs:
-  en: All other programs
-  fr: Tous les autres programmes
+x_smaller_measures:
+  transform: [handlebars]
+  en: |
+    {{smaller_items_count}} smaller measures
+  fr: |
+    {{smaller_items_count}} petites mesures budgétaires
+x_smaller_orgs:
+  transform: [handlebars]
+  en: |
+    {{smaller_items_count}} smaller organizations
+  fr: |
+    {{smaller_items_count}} petites organismes
+x_smaller_programs:
+  transform: [handlebars]
+  en: |
+    {{smaller_items_count}} smaller programs
+  fr: |
+    {{smaller_items_count}} petites programmes
