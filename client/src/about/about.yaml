@@ -220,6 +220,7 @@ feedback_title:
   fr: La parole est à vous!
 
 feedback_text:
+  transform: [handlebars, markdown]
   en: |
     We are always looking for ideas and suggestions to help us improve the current version of the InfoBase. If you would like to share some ideas or comments regarding your experience 
     with the tool, please take a few minutes to complete our <a href="{{{survey_link}}}" target="_blank" rel="noopener noreferrer">online survey</a>.
