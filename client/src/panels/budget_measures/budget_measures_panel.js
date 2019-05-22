@@ -66,15 +66,15 @@ const calculate_stats_common = (data) => {
   const measure_count = data.length;
 
   const year_from_data = _.first(data).year;
-  const vote_count = year_from_data === "2018" ? 1 : _.flatMap(data, d=>d.data).length;
+  const gov_vote_count = year_from_data === "2018" ? 1 : _.flatMap(data, (d) => d.data).length;
 
   return {
     total_funding,
     total_allocated,
     measure_count,
-    vote_count,
+    gov_vote_count,
     multiple_measures: measure_count > 1,
-    multiple_votes: vote_count > 1,
+    multiple_votes: gov_vote_count > 1,
   }
 }
 
@@ -273,20 +273,9 @@ class BudgetMeasurePanel extends React.Component {
     const above_tab_text = <div className = "frow" >
       { years_with_data.length === 1 && ( subject.level === "dept" || treatAsProgram(subject) ) &&
         <div className = "fcol-md-12 fcol-xs-12 medium_panel_text text">
-          { graph_args.subject.level === "dept" &&
+          { ( graph_args.subject.level === "dept" || treatAsProgram(subject) ) &&
               <TM
                 k={"budget_measures_above_tab_text"} 
-                args={{
-                  subject,
-                  budget_year_1: budget_years[0],
-                  budget_year_2: budget_years[1],
-                  funding_only_2018: selected_year === "2018",
-                }}
-              />
-          }
-          { treatAsProgram(subject) &&
-              <TM
-                k={"budget_measures_above_tab_text"}
                 args={{
                   subject,
                   budget_year_1: budget_years[0],
@@ -582,7 +571,8 @@ class BudgetMeasureHBars extends React.Component {
 
     // text stuff
     const panel_text_args = {
-      subject, 
+      subject,
+      is_gov: subject.level === "gov",
       ...info, 
       budget_year: selected_year, 
       budget_data_source_date: budget_data_source_dates[selected_year],
