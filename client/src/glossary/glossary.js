@@ -109,15 +109,14 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
                   dangerouslySetInnerHTML={{__html: item.definition}}
                 />
                 
-                <div className='test'>
+                <div className='glossary-top-link-container'>
                   <a className="glossary-top-link"
                     href="#"
                     tabIndex='0'
                     onClick={evt => {
                       evt.preventDefault();
                       document.body.scrollTop = document.documentElement.scrollTop = 0;
-                      document.getElementById('back-to-top-button').focus();
-                      
+                      document.querySelector('#glossary_search > div > div > input').focus();
                     }}
                   >{text_maker("glossary_back_to_top")}</a>
                 </div>
@@ -151,7 +150,7 @@ export default class Glossary extends React.Component {
       >
         <h1> <TM k="glossary" /> </h1>
         <ScrollToTargetContainer target_id={active_key}>
-          <BackToTop />
+          <BackToTop focus="#glossary_search > div > div > input"/>
           <Glossary_
             active_key={active_key}
             items_by_letter={items_by_letter}

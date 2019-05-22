@@ -15,16 +15,16 @@ dt.glossary-dt {
   padding-left: 10px;
 }
 
-.test {
+.glossary-top-link-container {
   text-align: right;
 }
 
 .glossary-top-link {
+  color: yellow;
   text-decoration: none;
   position: absolute;
   overflow: hidden;
-  height: 0px;
-  width: 0px;
+  clip: rect(1px,1px,1px,1px);
 }
 
 .glossary-top-link:hover {
@@ -34,4 +34,5 @@ dt.glossary-dt {
 .glossary-top-link:focus {
   overflow: inherit;
   position: inherit;
+  
 }

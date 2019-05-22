@@ -1,10 +1,8 @@
 import './BackToTop.scss' ;
-//import glossary_text from '../glossary/glossary.yaml';
-//import {create_text_maker_component} from '../util_components.js';
+import text from "./BackToTop.yaml" ;
+import { create_text_maker } from '../models/text.js' ;
 
-//const { text_maker } = create_text_maker_component(glossary_text);
-
-window.onscroll = function() {handleScroll()} ;
+const text_maker = create_text_maker(text);
 
 function handleScroll() {
   if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
@@ -18,11 +16,19 @@ function handleScroll() {
 export class BackToTop extends React.Component {
   
   render() {
-    return <a className="back-to-top" id="back-to-top-button" tabIndex='-1' onClick={() => this.handleClick()}>Back to top</a>
+    return <a className="back-to-top" id="back-to-top-button" tabIndex='-1' onClick={() => this.handleClick()}>{text_maker("back_to_top")}</a>
   }
 
   handleClick() {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
+    document.querySelector(this.props.focus).focus();
   }
 
+  componentDidMount(){
+    window.addEventListener("scroll", handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", handleScroll);
+  }
 }
