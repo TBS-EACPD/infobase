@@ -55,7 +55,7 @@ const get_year_value_from_budget_year = (budget_year) => _.chain(budget_year_opt
 
 const footnotes_by_year = {
   2018: [],
-  2019: [<TextMaker key={1} text_key="budget2019_biv_includes_excludes_note" />],
+  2019: [<TextMaker key={1} text_key="budget2019_biv_includes_excludes_note" el="div"/>],
 };
 
 const validate_route = (props) => {
