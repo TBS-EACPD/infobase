@@ -20,7 +20,7 @@ function cleanup {
 }
 trap cleanup EXIT
 
-echo $(lpass show IB_SERVICE_KEY --notes) | base64 -D > $scratch/key.json
+echo $(lpass show IB_SERVICE_KEY --notes) | base64 --decode > $scratch/key.json
 gcloud auth activate-service-account --key-file=$scratch/key.json
 
 project=$(lpass show PROD_CLIENT_PROJECT_ID --notes)
