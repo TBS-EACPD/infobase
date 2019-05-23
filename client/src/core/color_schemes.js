@@ -4,7 +4,7 @@ const newIBCategoryColors = [
   "#206BBD", // blue
   "#4abbc4", // teal
   "#e89a40", // orange
-  "#7272D4", // purple
+  "#8D98D3", // purple
   "#a2d173", // light green
   "#15918b", // dark teal
   color_defs.tertiaryColor, // grey
@@ -24,7 +24,7 @@ const newIBLightCategoryColors = [
 const newIBDarkCategoryColors = [
   "#195596", // blue
   "#117078", // dark teal
-  "#99552a", // brown
+  "#862552", // pink (replacing brown)
   "#554A9E", // purple
   "#1B793A", // green
   "#555B62", // grey

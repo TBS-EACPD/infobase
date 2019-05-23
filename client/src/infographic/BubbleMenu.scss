@@ -13,7 +13,7 @@
 
   &:hover, &:focus {
     transform: scale(1.03);
-    background-color: rgba(202, 217, 240, 0.74);
+    background-color: lighten($tertiaryColor, 37%);
     color: $primaryColor;
   }
   
