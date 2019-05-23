@@ -35,6 +35,11 @@
     visibility: visible;
   }
 
+  .back-to-top:active {
+    text-decoration: none;
+    color: white;
+  }
+
   @media(max-width: 600px) {
     .back-to-top {
       width: 100%;
