@@ -68,17 +68,17 @@ export const Panel = props => {
 const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOverflow}) => {
   const download_panel_pdf = () => {
     const file_name_context = context.subject.constructor.name === 'Dept' ? context.subject.acronym: context.subject.id;
-    const file_name = file_name_context + '_' + title + ".pdf"
+    const file_name = file_name_context + '_' + title + ".pdf";
 
     const panel_object = document.getElementById(context.graph_key);
     const panel_body = panel_object.getElementsByClassName("panel-body")[0];
     const legend_container_arr = panel_body.getElementsByClassName('legend-container');
 
-    const MAX_DIV_HEIGHT = "9999px"
+    const MAX_DIV_HEIGHT = "9999px";
     const oldMaxHeights = _.map(legend_container_arr, legend_container => {
-      const oldMaxHeight = legend_container.style.maxHeight
-      const newMaxHeight = oldMaxHeight==="" ? "" : MAX_DIV_HEIGHT
-      legend_container.style.maxHeight = newMaxHeight
+      const oldMaxHeight = legend_container.style.maxHeight;
+      const newMaxHeight = oldMaxHeight==="" ? "" : MAX_DIV_HEIGHT;
+      legend_container.style.maxHeight = newMaxHeight;
 
       return oldMaxHeight;
     });
@@ -93,7 +93,7 @@ const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOv
           format: 'letter',
         });
         const width = pdf.internal.pageSize.getWidth();
-        const height = ratio * width
+        const height = ratio * width;
 
         const FOOTER_HEIGHT = 37;
         const EXTRA_HEIGHT = 30;
@@ -114,7 +114,7 @@ const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOv
         _.forEach(legend_container_arr, legend_container => {
           _.forEach(oldMaxHeights, oldMaxHeight => {
             legend_container.style.maxHeight = oldMaxHeight;
-          })
+          });
         });    
       });
   }
