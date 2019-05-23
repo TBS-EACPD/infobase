@@ -134,6 +134,7 @@ const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOv
               className='panel-heading-utils'
               onClick={() => download_panel_pdf()}
               alt={text_maker("a11y_download_panel")}
+              title={text_maker("a11y_download_panel")}
             />
           }
           {context && !context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) && 
@@ -141,6 +142,7 @@ const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOv
               <img src={get_static_url("svg/permalink.svg")}
                 alt={text_maker("a11y_permalink")}
                 className='panel-heading-utils'
+                title={text_maker("a11y_permalink")}
               />
             </a>
           }
