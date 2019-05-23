@@ -191,7 +191,6 @@ _.each(['gov', 'dept'], lvl => {
 const late_dp_departments = [
   128, // Employment and Social Development Canada
   237, // Infrastructure Canada
-  302, // Security Intelligence Review Committee
 ];
 _.each(['dept','crso','program'], lvl => {
   new PanelGraph({
