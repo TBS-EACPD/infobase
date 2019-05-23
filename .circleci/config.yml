@@ -2,7 +2,6 @@
 gcloud_auth: &gcloud_auth 
   auth:
     username: _json_key
-    password: $GCLOUD_JSON_AUTH
 
 # yaml fragment for list of branches to deploy dev builds on
 deploy_filter: &deploy_filter 
