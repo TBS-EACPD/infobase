@@ -128,21 +128,23 @@ const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOv
             {subtitle}
           </div>
         }
-        {context &&
-          <img src={get_static_url("svg/download.svg")}
-            className='panel-heading-utils'
-            onClick={() => download_panel_pdf()}
-            alt={text_maker("a11y_download_panel")}
-          />
-        }
-        {context && !context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) && 
-          <a href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
-            <img src={get_static_url("svg/permalink.svg")}
-              alt={text_maker("a11y_permalink")}
+        <div style={{marginLeft: 'auto'}}>
+          {context && !(false || !!document.documentMode) &&
+            <img src={get_static_url("svg/download.svg")}
               className='panel-heading-utils'
+              onClick={() => download_panel_pdf()}
+              alt={text_maker("a11y_download_panel")}
             />
-          </a>
-        }
+          }
+          {context && !context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) && 
+            <a href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
+              <img src={get_static_url("svg/permalink.svg")}
+                alt={text_maker("a11y_permalink")}
+                className='panel-heading-utils'
+              />
+            </a>
+          }
+        </div>
       </header>
       }
       <div className='panel-body'>
