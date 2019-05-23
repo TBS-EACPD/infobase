@@ -71,11 +71,11 @@ budget_summary_stats:
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**As of {{budget_data_source_date}}:**
     * **{{fmt_compact2_written total_allocated}}** has been **allocated** by the Treasury Board (**{{fmt_percentage1 total_allocated_share}}** of the total funding)
       * These allocations are going to **{{allocated_to_all_program_count}}** programs to support the implementation of **{{allocated_to_measure_count}}** budget {{budget_year}} measures; of those programs, **{{allocated_to_internal_services_count}}** {{gl_tt "internal services" "INT_SERVICES"}} programs have been allocated **{{fmt_compact2_written total_internal_service_allocated}}**
-    {{#if total_withheld}}
     * **{{fmt_compact2_written total_withheld}}** has been **centrally withheld** (**{{fmt_percentage1 total_withheld_share}}** of the total funding)
-    {{/if}}
     * **{{fmt_compact2_written total_remaining}}** **remains** (**{{fmt_percentage1 total_remaining_share}}** of the total funding)
+    {{#if fully_withheld_funds_count}}
     * **{{fully_withheld_funds_count}}** budget measures have had their {{fmt_year_to_fiscal_year budget_year}} funding amount centrally withheld in full
+    {{/if}}
     * **{{totally_funded_count}}** budget measures have received all of their funding for {{fmt_year_to_fiscal_year budget_year}}
     * **{{less_one_percent_remaining_funds_count}}** additional budget measures have a **non-zero** remaining balance which is **less than 1%** of their total funding for the fiscal year; these measures have effectively received all of their funding for {{fmt_year_to_fiscal_year budget_year}}
     {{/if}}
@@ -86,11 +86,11 @@ budget_summary_stats:
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**En date du {{budget_data_source_date}}:**
     *	**{{fmt_compact2_written total_allocated}}** ont été **affectés** par le Conseil du Trésor (**{{fmt_percentage1 total_allocated_share}}** du financement total)
       * Ces fonds ont été affectés à **{{allocated_to_all_program_count}}** programmes pour la mise en œuvre de **{{allocated_to_measure_count}}** mesures budgétaires de {{budget_year}}; parmi ces programmes, **{{fmt_compact2_written total_internal_service_allocated}}** ont été affectés à **{{allocated_to_internal_services_count}}** programmes de {{gl_tt "services internes" "INT_SERVICES"}}
-    {{#if total_withheld}}
     *	**{{fmt_compact2_written total_withheld}}** ont été **retenus centralement** (**{{fmt_percentage1 total_withheld_share}}** du financement total)
-    {{/if}}
     *	**{{fmt_compact2_written total_remaining}}** **restant** (**{{fmt_percentage1 total_remaining_share}}** du financement total)
+    {{#if fully_withheld_funds_count}}
     * L’administration centrale a retenu la totalité du financement prévu de **{{fully_withheld_funds_count}}** mesures budgétaires pour {{fmt_year_to_fiscal_year budget_year}}
+    {{/if}}
     * **{{totally_funded_count}}** mesures budgétaires ont reçu la totalité des fonds prévus pour {{fmt_year_to_fiscal_year budget_year}} 
     * **{{less_one_percent_remaining_funds_count}}** mesures budgétaires ont un solde restant **non nul** et **moins de 1 %** du financement prévu pour l'exercice en cours; ces mesures ont effectivement reçu la totalité de leur financement pour {{fmt_year_to_fiscal_year budget_year}}
     {{/if}}
