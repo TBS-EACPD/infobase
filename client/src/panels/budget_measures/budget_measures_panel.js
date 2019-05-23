@@ -66,12 +66,8 @@ const calculate_stats_common = (data, subject) => {
   const measure_count = data.length;
 
   const year_from_data = _.first(data).year;
-  const vote_count = subject.level === "gov" ?
-    (
-      year_from_data === "2018" ? 
-        1 : 
-        _.flatMap(data, (d) => d.data).length
-    ) :
+  const vote_count = subject.level === "gov" ? 
+    (year_from_data === "2018" ? 1 : _.flatMap(data, (d) => d.data).length) :
     1;
 
   return {

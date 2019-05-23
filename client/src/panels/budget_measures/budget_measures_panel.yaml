@@ -99,16 +99,16 @@ x_smaller_measures:
   en: |
     {{smaller_items_count}} smaller measures
   fr: |
-    {{smaller_items_count}} petites mesures budgétaires
+    {{smaller_items_count}} mesures budgétaires plus petites
 x_smaller_orgs:
   transform: [handlebars]
   en: |
     {{smaller_items_count}} smaller organizations
   fr: |
-    {{smaller_items_count}} petites organismes
+    {{smaller_items_count}} organismes plus petits
 x_smaller_programs:
   transform: [handlebars]
   en: |
     {{smaller_items_count}} smaller programs
   fr: |
-    {{smaller_items_count}} petites programmes
+    {{smaller_items_count}} programmes plus petits
