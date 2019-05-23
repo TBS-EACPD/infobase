@@ -20,7 +20,7 @@ import {
   create_text_maker_component,
   SpinnerWrapper,
   EverythingSearch,
-} from '../util_components';
+} from '../util_components.js';
 
 import { infograph_href_template } from './routes.js';
 
@@ -171,9 +171,19 @@ class InfoGraph_ extends React.Component {
       {
         window.is_a11y_mode ? 
         <div>
-          <a href="#resource-explorer">
-            <TM k="a11y_search_other_infographs" />
-          </a>
+          <TM k="a11y_search_other_infographs" />
+          <EverythingSearch 
+            include_gov={false} 
+            href_template={subj => infograph_href_template(subj, null, true)}
+            search_text={text_maker('subject_search_placeholder')}
+            large={true}
+            include_tags={true}
+            include_programs={true}
+            include_glossary={false}
+            include_crsos={true}
+            include_tables={false}
+            org_scope="all_orgs_with_gov"
+          />
         </div> :
         <div className="row mrgn-bttm-md infographic-search-container"> 
           <div 
