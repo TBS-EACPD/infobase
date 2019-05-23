@@ -52,7 +52,7 @@ const { text_maker, TM } = create_text_maker_component([text1,text2]);
 const TOP_TO_SHOW = 25;
 
 
-const calculate_stats_common = (data) => {
+const calculate_stats_common = (data, subject) => {
   const total_funding = _.reduce(data,
     (total, budget_measure) => total + budget_measure.measure_data.funding, 
     0
@@ -66,15 +66,21 @@ const calculate_stats_common = (data) => {
   const measure_count = data.length;
 
   const year_from_data = _.first(data).year;
-  const gov_vote_count = year_from_data === "2018" ? 1 : _.flatMap(data, (d) => d.data).length;
+  const vote_count = subject.level === "gov" ?
+    (
+      year_from_data === "2018" ? 
+        1 : 
+        _.flatMap(data, (d) => d.data).length
+    ) :
+    1;
 
   return {
     total_funding,
     total_allocated,
     measure_count,
-    gov_vote_count,
+    vote_count,
     multiple_measures: measure_count > 1,
-    multiple_votes: gov_vote_count > 1,
+    multiple_votes: vote_count > 1,
   }
 }
 
@@ -350,7 +356,7 @@ class BudgetMeasureHBars extends React.Component {
     } = state; 
 
     const data = get_data(selected_year);
-    const info = get_info(data); 
+    const info = get_info(data, subject); 
     
     const grouping_options = get_grouping_options(subject, data);
 
@@ -572,7 +578,6 @@ class BudgetMeasureHBars extends React.Component {
     // text stuff
     const panel_text_args = {
       subject,
-      is_gov: subject.level === "gov",
       ...info, 
       budget_year: selected_year, 
       budget_data_source_date: budget_data_source_dates[selected_year],

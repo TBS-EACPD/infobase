@@ -52,6 +52,10 @@ const calculate_budget_stats = (year) => {
   const funding_data_totals = reduce_by_budget_value(rolled_up_data_rows);
 
   const measure_count = all_budget_measures.length;
+  const multiple_measures = measure_count > 1;
+
+  const vote_count = year === "2018" ? 1 : _.flatMap(all_budget_measures, 'data').length;
+  const multiple_votes = vote_count > 1;
   
   const allocated_to_measure_count = _.filter(rolled_up_data_rows, data_row => data_row.allocated ).length;
 
@@ -88,6 +92,9 @@ const calculate_budget_stats = (year) => {
 
   return {
     measure_count,
+    multiple_measures,
+    vote_count,
+    multiple_votes,
     total_funding: funding_data_totals.funding,
     total_allocated: funding_data_totals.allocated,
     total_allocated_share: funding_data_totals.allocated/funding_data_totals.funding,

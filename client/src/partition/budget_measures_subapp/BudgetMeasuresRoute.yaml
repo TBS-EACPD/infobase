@@ -31,10 +31,41 @@ budget_stats_title:
   en: Summary statistics
   fr: Statistiques sommaires
 
+budget_measure_stats_partial_en:
+  handlebars_partial: true
+  text: |
+    This funding covers **{{measure_count}}**
+    {{#if multiple_measures}}
+    {{gl_tt "budget measures" "BIV_MEASURE"}}
+    {{else}}
+    {{gl_tt "budget measure" "BIV_MEASURE"}}
+    {{/if}}
+    managed through **{{vote_count}}**
+    {{#if multiple_votes}}
+    {{gl_tt "Budget Implementation Votes." "BIV_VOTE"}}
+    {{else}}
+    {{gl_tt "Budget Implementation Vote." "BIV_VOTE"}}
+    {{/if}}
+budget_measure_stats_partial_fr:
+  handlebars_partial: true
+  text: |
+    Ces fonds couvre **{{measure_count}}**
+    {{#if multiple_measures}}
+    {{gl_tt "mesures budgétaires" "BIV_MEASURE"}}
+    {{else}}
+    {{gl_tt "mesure budgétaire" "BIV_MEASURE"}}
+    {{/if}}
+    à gérer au moyen de **{{vote_count}}**
+    {{#if multiple_votes}}
+    {{gl_tt "crédits d’exécution du budget." "BIV_VOTE"}}
+    {{else}}
+    {{gl_tt "crédit d’exécution du budget." "BIV_VOTE"}}
+    {{/if}}
+
 budget_summary_stats:
   transform: [handlebars, markdown]
   en: |
-    &nbsp;&nbsp;**{{gt "budget_name_header"}}** **{{budget_year}}** provides funding totalling up to **{{fmt_compact2_written total_funding}}** to support the implementation of **{{measure_count}}** budget measures in **{{fmt_year_to_fiscal_year budget_year}}**.  
+    &nbsp;&nbsp;**{{gt "budget_name_header"}}** **{{budget_year}}** provides funding totalling up to **{{fmt_compact2_written total_funding}}** in **{{fmt_year_to_fiscal_year budget_year}}**. {{> budget_measure_stats_partial_en}}  
     
     {{#if total_allocated}}
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**As of {{budget_data_source_date}}:**
@@ -49,7 +80,7 @@ budget_summary_stats:
     * **{{less_one_percent_remaining_funds_count}}** additional budget measures have a **non-zero** remaining balance which is **less than 1%** of their total funding for the fiscal year; these measures have effectively received all of their funding for {{fmt_year_to_fiscal_year budget_year}}
     {{/if}}
   fr: |
-    &nbsp;&nbsp;**{{gt "budget_name_header"}}** **{{budget_year}}** prévoit un financement pouvant atteindre **{{fmt_compact2_written total_funding}}** à l'appui de la mise en œuvre des **{{measure_count}}** mesures budgétaires en **{{fmt_year_to_fiscal_year budget_year}}**.  
+    &nbsp;&nbsp;**{{gt "budget_name_header"}}** **{{budget_year}}** prévoit un financement pouvant atteindre **{{fmt_compact2_written total_funding}}** en **{{fmt_year_to_fiscal_year budget_year}}**. {{> budget_measure_stats_partial_fr}}  
 
     {{#if total_allocated}}
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**En date du {{budget_data_source_date}}:**

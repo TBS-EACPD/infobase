@@ -14,49 +14,6 @@ budget_program_a11y_table_title:
   en: Overview by Program
   fr: Aperçu par programme
 
-budget_measure_stats_partial_en:
-  handlebars_partial: true
-  text: |
-    This funding covers **{{measure_count}}**
-    {{#if multiple_measures}}
-    {{gl_tt "budget measures" "BIV_MEASURE"}}
-    {{else}}
-    {{gl_tt "budget measure" "BIV_MEASURE"}}
-    {{/if}}
-    managed through 
-    {{#if is_gov}}
-    **{{gov_vote_count}}**
-    {{else}}
-    **1**
-    {{/if}}
-    {{#if multiple_votes}}
-    {{gl_tt "Budget Implementation Votes." "BIV_VOTE"}}
-    {{else}}
-    {{gl_tt "Budget Implementation Vote." "BIV_VOTE"}}
-    {{/if}}
-
-budget_measure_stats_partial_fr:
-  handlebars_partial: true
-  text: |
-    Ces fonds couvre **{{measure_count}}**
-    {{#if multiple_measures}}
-    {{gl_tt "mesures budgétaires" "BIV_MEASURE"}}
-    {{else}}
-    {{gl_tt "mesure budgétaire" "BIV_MEASURE"}}
-    {{/if}}
-    à gérer au moyen de
-    {{#if is_gov}}
-    **{{gov_vote_count}}**
-    {{else}}
-    **1**
-    {{/if}}
-    {{#if multiple_votes}}
-    {{gl_tt "crédits d’exécution du budget." "BIV_VOTE"}}
-    {{else}}
-    {{gl_tt "crédit d’exécution du budget." "BIV_VOTE"}}
-    {{/if}}
-
-
 budget_measure_panel_tracker_link_en:
   handlebars_partial: true
   text: |
