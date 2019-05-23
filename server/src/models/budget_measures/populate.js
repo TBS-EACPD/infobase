@@ -74,7 +74,16 @@ export default async function({models}){
       const budget_lookups = get_standard_csv_file_rows(`budget_${budget_year}_measure_lookups.csv`);
       const budget_org_level_descriptions = (() => {
         try {
-          return get_standard_csv_file_rows(`budget_${budget_year}_org_level_measure_descriptions.csv`);
+          return _.map(
+            get_standard_csv_file_rows(`budget_${budget_year}_org_level_measure_descriptions.csv`),
+            (row) => ({
+              ...row,
+              ..._.chain(["en", "fr"])
+                .map(lang => [`description_${lang}`, row[`description_${lang}`].replace(/^-/, "*")])
+                .fromPairs()
+                .value(),
+            })
+          );
         } catch(error) {
           return [];
         }
