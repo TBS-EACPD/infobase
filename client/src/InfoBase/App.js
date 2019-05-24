@@ -34,6 +34,7 @@ const InfoGraph = retrying_react_lazy( () => import('../infographic/infographic.
 const EstimatesComparison = retrying_react_lazy( () => import('../EstimatesComparison/EstimatesComparison.js') );
 const PrivacyStatement = retrying_react_lazy( () => import('../PrivacyStatement/PrivacyStatement.js') );
 const TreeMap = retrying_react_lazy( () => import('../TreeMap/TreeMap.js') ); 
+const TextDiff = retrying_react_lazy( () => import('../diff/diff.js') ); 
 
 export class App extends React.Component {
   constructor(){
@@ -70,6 +71,7 @@ export class App extends React.Component {
               <Route path="/compare_estimates/:h7y_layout?" component={EstimatesComparison} />
               <Route path="/privacy" component={PrivacyStatement} />
               <Route path="/treemap/:perspective?/:color_var?/:filter_var?/:year?/:get_changes?" component={TreeMap} />
+              <Route path="/diff" component={TextDiff} />
               <Route path="/" component={Home} />
             </Switch>
             <PageDetails />
