@@ -98,6 +98,7 @@ export default class TextDiffApp extends React.Component {
             <TM k="diff_intro_text"/>
           </div>
           <div>
+            <TM k="select_dept"/>
             <Select
               selected={subject.id}
               onSelect={id => this.setState({loading: true, subject: Dept.lookup(id)})}
@@ -105,13 +106,13 @@ export default class TextDiffApp extends React.Component {
             />
           </div>
           <div>
-            Name differences
+            <TM k="name_diffs" el="h2" />
             <div className="row">
               {difference_report(this.name_differences)}
             </div>
           </div>
           <div>
-            Methodology differences
+            <TM k="methodology_diffs" el="h2" />
             <div className="row">
               {difference_report(this.methodology_differences)}
             </div>
