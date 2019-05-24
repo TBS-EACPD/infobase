@@ -1,4 +1,8 @@
 // Allows child content to use full screen width, escaping from gutters such as the main.container or any other .container elements
+
+// Implemented with JS because any css solutions use 100vw, but actual page widths are usually 100vw - vertical scroll bar width...
+// meaning most uses of 100vw expand your page by the width of the vertical scroll bar, giving it a horizontal scroll bar and ~16px of uggly right-padding.
+// Possible to do with CSS only for modern browsers with styleable scroll bars in theory, but that's out while we still support IE 11
 class ContainerEscapeHatch extends React.Component {
   constructor(){
     super();
