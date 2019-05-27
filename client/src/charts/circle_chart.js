@@ -87,14 +87,10 @@ export class CirclePieChart {
       })
       .styles({
         "fill": function(d,i){ return colors(d.name);},
-        "fill-opacity": function(d,i){
-          return 0.3;
-        },
+        "fill-opacity": "0.3",
         "stroke": function(d,i){ return colors(d.name);},
         "stroke-width": "2px",
-        "stroke-opacity": function(d,i){
-          return 1;
-        },
+        "stroke-opacity": "1",
       });
 
     var text = this.html
