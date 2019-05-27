@@ -75,9 +75,13 @@ const common_lookups_fr = _.map(
   public_dir_prefixer
 );
 
-const common_png = _.map(['en', 'fr'], lang => `src/panels/result_graphs/result-taxonomy-${lang}.png`);
-common_png.push('src/components/pdf-footer-en.png');
-common_png.push('src/components/pdf-footer-fr.png');
+const common_png = _.flatMap(
+  ['en', 'fr'],
+  (lang) => [
+    `src/panels/result_graphs/result-taxonomy-${lang}.png`,
+    `src/components/pdf-footer-${lang}.png`,
+  ]
+);
 
 const svg_path = 'src/svg';
 

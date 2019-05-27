@@ -68,19 +68,18 @@ export const Panel = props => {
 const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOverflow}) => {
   const download_panel_pdf = () => {
     const file_name_context = context.subject.constructor.name === 'Dept' ? context.subject.acronym: context.subject.id;
-    const file_name = file_name_context + '_' + title + ".pdf";
+    const file_name = `${file_name_context}_${title}.pdf`;
 
     const panel_object = document.getElementById(context.graph_key);
     const panel_body = panel_object.getElementsByClassName("panel-body")[0];
     const legend_container_arr = panel_body.getElementsByClassName('legend-container');
 
+    // When the list of legend items are too long such that the items don't all fit into the defined max height, scroll is created to contain them.
+    // Screenshotting that will cause items to overflow, hence below sets max height to a big arbitrary number which later gets set back to original.
     const MAX_DIV_HEIGHT = "9999px";
-    const oldMaxHeights = _.map(legend_container_arr, legend_container => {
-      const oldMaxHeight = legend_container.style.maxHeight;
-      const newMaxHeight = oldMaxHeight==="" ? "" : MAX_DIV_HEIGHT;
-      legend_container.style.maxHeight = newMaxHeight;
-
-      return oldMaxHeight;
+    var oldMaxHeights = _.map(legend_container_arr, legend_container => (legend_container.style.maxHeight));
+    _.forEach(legend_container_arr, legend_container => {
+      legend_container.style.maxHeight = MAX_DIV_HEIGHT;
     });
     
     html2canvas(panel_body)
@@ -129,7 +128,7 @@ const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOv
           </div>
         }
         <div style={{marginLeft: 'auto'}}>
-          {context && !(false || !!document.documentMode) &&
+          {context && !window.feature_detection.is_IE() &&
             <img src={get_static_url("svg/download.svg")}
               className='panel-heading-utils'
               onClick={() => download_panel_pdf()}
