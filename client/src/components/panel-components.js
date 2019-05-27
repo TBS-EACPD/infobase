@@ -5,6 +5,7 @@ import { Fragment } from 'react';
 import { 
   FootnoteList, 
   create_text_maker_component,
+  ShareModal,
 } from '../util_components.js';
 import { Details } from '../components/Details.js';
 import { get_static_url } from '../request_utils.js';
@@ -13,7 +14,6 @@ import { panel_context } from '../infographic/context.js';
 import './panel-components.scss';
 import { create_text_maker } from '../models/text.js';
 import { PDFGenerator } from './PDFGenerator.js';
-
 
 const { TM } = create_text_maker_component(text);
 const text_maker = create_text_maker(text);
@@ -49,6 +49,7 @@ const PanelSource = ({links}) => {
 };
 
 export const Panel = props => {
+
   const { Consumer } = panel_context;
   return (
     <Consumer>

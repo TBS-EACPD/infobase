@@ -5,7 +5,6 @@
   "scripts": {
     "prod_deploy": "sh prod_scripts/prod_deploy.sh",
     "prod_rollback": "sh prod_scripts/prod_rollback.sh",
-
     "refresh_pipeline_data": "(cd ../pipeline && git checkout master && git pull origin master && cp -f outputs/Infobase/* ../InfoBase/data)"
   },
   "authors": [
@@ -13,5 +12,6 @@
     "Stephen O'Neil",
     "Kate Cook"
   ],
-  "license": "BSD-2-Clause"
+  "license": "BSD-2-Clause",
+  "dependencies": {}
 }

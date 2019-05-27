@@ -34,6 +34,7 @@ import {
 import { DeptSearch, DeptSearchWithoutRouter } from './search/DeptSearch.js';
 import { EverythingSearch } from './search/EverythingSearch.js';
 import { GlossarySearch } from './search/GlossarySearch.js';
+import { ShareModal } from './components/ShareModal.js';
 
 import { 
   text_abbrev,
@@ -145,4 +146,5 @@ export {
   create_text_maker_component,
   DlItem,
   BackToTop,
+  ShareModal,
 };

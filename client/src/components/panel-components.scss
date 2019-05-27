@@ -77,6 +77,14 @@
     border: 2px solid $primaryColor;
   }
   
+  .panel-heading-utils{
+    width: 30px;
+    height: 20px;
+    padding-left: 4px;
+    padding-right: 4px;
+    cursor: pointer;
+  }
+
   .panel.panel-info.panel-flat > .panel-heading {
     color: $backgroundColor;
     background-color: $primaryColor;
