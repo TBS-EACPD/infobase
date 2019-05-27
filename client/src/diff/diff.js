@@ -28,13 +28,15 @@ const { TM } = create_text_maker_component(lab_text);
 const text_maker = create_text_maker(lab_text);
 
 
-
-
 export default class TextDiffApp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {subject: props.subject, loading: true}
+    this.state = {
+      loading: true,
+      subject: (props.match.params.org_id && Dept.lookup(props.match.params.org_id)) || props.subject, // default
+    };
   }
+
   componentDidMount(){
     const { 
       subject,
@@ -48,11 +50,32 @@ export default class TextDiffApp extends React.Component {
       .then( () => this.setState({subject: subject, loading: false}) );
   }
 
+  static getDerivedStateFromProps(props, state){
+    const {
+      match: {
+        params: {
+          org_id,
+        },
+      },
+    } = props;
+
+    const {
+      subject,
+    } = state;
+
+    const should_load = Dept.lookup(org_id) !== subject;
+    const new_subject = should_load ? Dept.lookup(org_id) : subject;
+
+    return {loading: should_load, subject: new_subject};
+  }
+
   componentDidUpdate(){
-    const { 
+    const {
       loading,
       subject,
     } = this.state;
+
+
     if(loading){
       ensure_loaded({
         subject,
@@ -68,6 +91,10 @@ export default class TextDiffApp extends React.Component {
       loading,
       subject,
     } = this.state;
+
+    const { 
+      history,
+    } = this.props;
 
     if(!loading){
       const matched_indicators = _.chain(Result.get_all())
@@ -98,11 +125,31 @@ export default class TextDiffApp extends React.Component {
             <TM k="diff_intro_text"/>
           </div>
           <div>
-            <TM k="select_dept"/>
+            <label htmlFor='select_dept'>
+              <TM k="select_dept" />
+            </label>
             <Select
+              name='select_dept'
               selected={subject.id}
-              onSelect={id => this.setState({loading: true, subject: Dept.lookup(id)})}
-              options={_.map(Dept.get_all(), (dept,ix) => ({id: dept.id, display: dept.fancy_name}) ) }
+              onSelect={id => {
+                const new_url = `/diff/${id}`;
+                history.push(new_url);
+              }}
+              options={_.chain(Dept.get_all()).sortBy('fancy_name').map(dept => ({id: dept.id, display: dept.fancy_name}) ).value() }
+            />
+          </div>
+          <div>
+            <label htmlFor='select_cr'>
+              <TM k="select_cr" />
+            </label>
+            <Select
+              name='select_cr'
+              selected='all'
+              onSelect={id => {
+                const new_url = `/diff/${subject.id}/${id}`;
+                history.push(new_url);
+              }}
+              options={_.chain(subject.crsos).map(crso => ({id: crso.id, display: crso.name})).concat([{id: 'all', display: text_maker('all_crsos')}]).value() }
             />
           </div>
           <div>

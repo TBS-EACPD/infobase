@@ -15,5 +15,17 @@ methodology_diffs:
   fr: TODO
 
 select_dept:
-  en: Select a department
-  fr: TODO
+  en: |
+    Select an organization:
+  fr: |
+    Sélectionner un organisme:
+
+select_cr:
+  en: |
+    Filter by core responsibility (optional):
+  fr: |
+    Filtrer par responsabilité essentielle (optionnel):
+
+all_crsos:
+  en: All core responsibilities
+  fr: Toutes les responsabilités essentielles
