@@ -18,7 +18,7 @@ export class ShareModal extends React.Component {
     return (
       <Modal show={this.props.show} onHide={this.props.toggleModal}>
         <Modal.Header>
-          <Modal.Title>Share</Modal.Title>
+          <Modal.Title>Share URL</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
