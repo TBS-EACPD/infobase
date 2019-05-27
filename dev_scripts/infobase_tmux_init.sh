@@ -2,7 +2,7 @@
 
 existing_IB_session=$(tmux list-sessions 2> /dev/null | grep -oh ^IB-[0-9] | head -1)
 
-cd /home/*/documents/InfoBase
+cd $HOME/*/InfoBase
 
 if [[ -n $existing_IB_session ]]; then
  tmux attach-session -t "$existing_IB_session"
