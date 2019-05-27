@@ -87,8 +87,8 @@ budget_panel_group_by:
   fr: Grouper
 
 budget_panel_select_value:
-  en: Select amounts to display
-  fr: Sélectionner les montants à afficher
+  en: See values for
+  fr: Voir les valeurs pour
 
 budget_panel_a11y_link_header:
   en: Link to Budget 2018 section
