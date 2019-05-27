@@ -110,11 +110,10 @@ const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOv
         pdf.save(file_name);
       })
       .then(() => {
-        _.forEach(legend_container_arr, legend_container => {
-          _.forEach(oldMaxHeights, oldMaxHeight => {
-            legend_container.style.maxHeight = oldMaxHeight;
-          });
-        });    
+        _.forEach(
+          legend_container_arr,
+          (legend_container, index) => legend_container.style.maxHeight = oldMaxHeights[index]
+        )
       });
   }
   
