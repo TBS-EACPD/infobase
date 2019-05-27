@@ -67,7 +67,7 @@ export const Panel = props => {
 
 const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOverflow}) => {
   const download_panel_pdf = () => {
-    const file_name_context = context.subject.constructor.name === 'Dept' ? context.subject.acronym: context.subject.id;
+    const file_name_context = context.subject.level === 'dept' ? context.subject.acronym: context.subject.id;
     const file_name = `${file_name_context}_${title}.pdf`;
 
     const panel_object = document.getElementById(context.graph_key);
