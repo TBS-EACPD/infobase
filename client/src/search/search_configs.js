@@ -170,7 +170,7 @@ const gocos = {
   header_function: () => `${Tag.plural} - ${Tag.tag_roots.GOCO.name}`,
   name_function: _.property('name'),
   get_data: () => _.chain(Tag.get_all())
-    .filter( ({root}) => root === Tag.tag_roots.GOCO )
+    .filter( (tag) => tag.root.id === "GOCO" )
     .filter('is_lowest_level_tag')
     .value(),
   filter: (query, datum) => memoized_re_matchers(query, ['name'], "gocos")(datum),
@@ -179,15 +179,20 @@ const gocos = {
 const how_we_help = {
   header_function: () => `${Tag.plural} - ${Tag.tag_roots.HWH.name}`,
   name_function: _.property('name'),
-  get_data: () => _.filter(Tag.get_all(), tag => tag.root.id === "HWH"),
+  get_data: () => _.chain(Tag.get_all())
+    .filter( tag => tag.root.id === "HWH")
+    .filter('is_lowest_level_tag')
+    .value(),
   filter: (query, datum) => memoized_re_matchers(query, ['name'], "how_we_help")(datum),
 };
-
 
 const horizontal_initiative = {
   header_function: () => `${Tag.plural} - ${Tag.tag_roots.HI.name}`,
   name_function: _.property('name'),
-  get_data: () => _.filter(Tag.get_all(), tag => tag.root.id === "HI"),
+  get_data: () => _.chain(Tag.get_all())
+    .filter( tag => tag.root.id === "HI")
+    .filter('is_lowest_level_tag')
+    .value(),
   filter: (query, datum) => memoized_re_matchers(query, ['name'], "horizontal_initiative")(datum),
 };
 
