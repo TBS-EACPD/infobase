@@ -79,7 +79,7 @@ const common_png = _.flatMap(
   ['en', 'fr'],
   (lang) => [
     `src/panels/result_graphs/result-taxonomy-${lang}.png`,
-    `src/components/pdf-footer-${lang}.png`,
+    `src/components/wmms-blk.png`,
   ]
 );
 

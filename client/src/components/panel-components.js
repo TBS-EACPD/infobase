@@ -12,6 +12,7 @@ import { panel_href_template } from '../infographic/routes.js';
 import { panel_context } from '../infographic/context.js';
 import './panel-components.scss';
 import { create_text_maker } from '../models/text.js';
+import * as qrcode from 'qrcode-generator';
 import * as html2canvas from 'html2canvas';
 import * as jsPDF from 'jspdf';
 
@@ -94,8 +95,8 @@ const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOv
         const width = pdf.internal.pageSize.getWidth();
         const height = ratio * width;
 
-        const FOOTER_HEIGHT = 37;
-        const EXTRA_HEIGHT = 30;
+        const FOOTER_HEIGHT = 27;
+        const EXTRA_HEIGHT = 20;
 
         pdf.internal.pageSize.setHeight(height + FOOTER_HEIGHT + EXTRA_HEIGHT);
         pdf.setFontStyle('bold');
@@ -104,9 +105,22 @@ const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOv
         pdf.line(0,12,width,12,'F');
         pdf.addImage(imgData, 'JPEG', 0, 12, width, height);
 
+        const panel_link = `https://canada.ca/gcinfobase${panel_href_template(context.subject, context.bubble, context.graph_key)}`;
+
+        const qr = qrcode(0, 'L');
+        qr.addData(panel_link);
+        qr.make();
+        const qrCodeImg = qr.createDataURL();
+        pdf.addImage(qrCodeImg, 'JPEG', 1, height + EXTRA_HEIGHT);
+
+        pdf.setFontStyle('normal');
+        pdf.setFontSize(10);
+        pdf.textWithLink('canada.ca/gcinfobase', 2.5, height + EXTRA_HEIGHT + 25, {url: panel_link});
+
         const footerImg = new Image();
-        footerImg.src = get_static_url(`png/pdf-footer-${window.lang}.png`);
-        pdf.addImage(footerImg, 'png', -10, height + EXTRA_HEIGHT);
+        footerImg.src = get_static_url(`png/wmms-blk.png`);
+        pdf.addImage(footerImg, 'png', 174.5, height + EXTRA_HEIGHT + 15);
+        
         pdf.save(file_name);
       })
       .then(() => {

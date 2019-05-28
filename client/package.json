@@ -73,6 +73,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "popper.js": "^1.14.6",
     "prop-types": "^15.6.2",
+    "qrcode-generator": "^1.4.3",
     "raw-loader": "^0.5.1",
     "react": "^16.7.0",
     "react-addons-shallow-compare": "^15.4.2",
