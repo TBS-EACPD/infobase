@@ -216,7 +216,7 @@ const target_report = (processed_indicator) =>
 
 const no_difference = (text) =>
   <div>
-    <TM k="no_diff" el="div"/>
+    <div className="textDiff--nochange">{text_maker("no_diff")}</div>
     <div>{text}</div>
   </div>
 
