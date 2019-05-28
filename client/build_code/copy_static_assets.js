@@ -75,14 +75,6 @@ const common_lookups_fr = _.map(
   public_dir_prefixer
 );
 
-const common_png = _.flatMap(
-  ['en', 'fr'],
-  (lang) => [
-    `src/panels/result_graphs/result-taxonomy-${lang}.png`,
-    `src/components/wmms-blk.png`,
-  ]
-);
-
 const svg_path = 'src/svg';
 
 const png_path = 'src/png';
