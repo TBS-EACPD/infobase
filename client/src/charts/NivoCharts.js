@@ -212,6 +212,11 @@ NivoResponsiveBar.defaultProps = {
         },
       },
     },
+    legends: {
+      text: {
+        fontSize: 12,
+      },
+    },
   },
   isInteractive: true,
   remove_bottom_axis: false,
@@ -313,10 +318,20 @@ NivoResponsiveHBar.defaultProps = {
   theme: {
     axis: {
       ticks: {
-        text: { 
+        text: {
           fontSize: 12,
           fill: window.infobase_color_constants.textColor,
         },
+      },
+    },
+    legends: {
+      text: {
+        fontSize: 14,
+      },
+    },
+    labels: {
+      text: {
+        fontSize: 14,
       },
     },
   },

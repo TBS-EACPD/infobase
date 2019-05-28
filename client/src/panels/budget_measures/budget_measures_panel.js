@@ -740,7 +740,7 @@ class BudgetMeasureHBars extends React.Component {
         enableGridX: false,
         enableGridY: false,
         isInteractive: true,
-        labelSkipWidth: 50,
+        labelSkipWidth: 60,
         legends: [
           {
             dataFrom: "keys",
@@ -762,18 +762,24 @@ class BudgetMeasureHBars extends React.Component {
       nivo_mobile_props.margin.right = 10;
       nivo_mobile_props.margin.bottom = 25;
       nivo_mobile_props.margin.left = 175;
+      nivo_mobile_props.margin.top = 80;
       nivo_mobile_props.bttm_axis.tickValues = 3;
       nivo_mobile_props.left_axis.format = (d) => wrap(d, 28);
+      nivo_mobile_props.legends[0].direction = "column",
       nivo_mobile_props.legends[0].translateX = -100;
-      nivo_mobile_props.legends[0].itemWidth = 80;
+      nivo_mobile_props.legends[0].translateY = -70;
+      nivo_mobile_props.legends[0].itemHeight = 20;
       
       return (
         <Fragment>
           {text_area}
-          <div className = 'centerer'>
-            <label style={{padding: "7px"}}>
-              <TM k="budget_panel_group_by" />
+          <div className = 'row' style={{marginBottom: "10px"}}>
+            <div className = 'col-sm-6' align="center">
+              <label style={{padding: "7px"}} htmlFor='select_grouping'>
+                {text_maker('budget_panel_group_by')}
+              </label>
               <Select 
+                name = 'select_grouping'
                 selected = {selected_grouping}
                 options = {_.map(grouping_options, 
                   ({name, id}) => ({
@@ -785,10 +791,13 @@ class BudgetMeasureHBars extends React.Component {
                 className = "form-control"
                 style = {{padding: "5px"}}
               />
-            </label>
-            <label style={{padding: "7px"}}>
-              <TM k="budget_panel_select_value" />
+            </div>
+            <div className = 'col-sm-6' align="center">
+              <label style={{padding: "7px"}} htmlFor='select_value'>
+                {text_maker('budget_panel_select_value')}
+              </label>
               <Select 
+                name = 'select_value'
                 selected = {effective_selected_value}
                 options = {_.map(value_options, 
                   ({name, id}) => ({ 
@@ -800,7 +809,7 @@ class BudgetMeasureHBars extends React.Component {
                 className = "form-control"
                 style = {{padding: "5px"}}
               />
-            </label>
+            </div>
           </div>
           <MediaQuery minWidth={992}>
             <div className="centerer" style={{height: `${data.length*30 + 150}px`}}>
