@@ -28,12 +28,27 @@ const { TM } = create_text_maker_component(lab_text);
 const text_maker = create_text_maker(lab_text);
 
 
+const get_subject_from_props = (props) => {
+  const {
+    match: {
+      params: { org_id, crso_id },
+    },
+  } = props;
+  if(crso_id && CRSO.lookup(crso_id)){
+    return CRSO.lookup(crso_id)
+  }
+  if (org_id && Dept.lookup(org_id)) {
+    return Dept.lookup(org_id)
+  }
+  return props.subject; // default
+}
+
 export default class TextDiffApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: true,
-      subject: (props.match.params.org_id && Dept.lookup(props.match.params.org_id)) || props.subject, // default
+      subject: get_subject_from_props(props)
     };
   }
 
@@ -55,6 +70,7 @@ export default class TextDiffApp extends React.Component {
       match: {
         params: {
           org_id,
+          crso_id,
         },
       },
     } = props;
@@ -63,9 +79,8 @@ export default class TextDiffApp extends React.Component {
       subject,
     } = state;
 
-    const should_load = Dept.lookup(org_id) !== subject;
-    const new_subject = should_load ? Dept.lookup(org_id) : subject;
-
+    const should_load = get_subject_from_props(props) !== subject;
+    const new_subject = should_load ? get_subject_from_props(props) : subject;
     return {loading: should_load, subject: new_subject};
   }
 
@@ -94,14 +109,19 @@ export default class TextDiffApp extends React.Component {
 
     const { 
       history,
+      org_id,
+      crso_id,
     } = this.props;
+
+    const all_depts = _.chain(Dept.get_all()).filter().sortBy('fancy_name').value();
+    const all_crsos_for_subj = 
 
     if(!loading){
       const matched_indicators = _.chain(Result.get_all())
         .filter(res => {
-          const subj = Program.lookup(res.subject_id) || CRSO.lookup(res.subject_id);
-          return subj.dept === subject;
-        }) // need to filter in case all results were already loaded
+          const res_subject = Program.lookup(res.subject_id) || CRSO.lookup(res.subject_id);
+          return subject.level === 'dept' ? res_subject.dept === subject : res_subject === subject;
+        })
         .map(res => res.indicators)
         .flatten()
         .groupBy("stable_id")
@@ -130,12 +150,12 @@ export default class TextDiffApp extends React.Component {
             </label>
             <Select
               name='select_dept'
-              selected={subject.id}
+              selected={org_id}
               onSelect={id => {
                 const new_url = `/diff/${id}`;
                 history.push(new_url);
               }}
-              options={_.chain(Dept.get_all()).sortBy('fancy_name').map(dept => ({id: dept.id, display: dept.fancy_name}) ).value() }
+              options={ _.map(all_depts, dept => ({id: dept.id, display: dept.fancy_name}) )}
             />
           </div>
           <div>
@@ -144,7 +164,7 @@ export default class TextDiffApp extends React.Component {
             </label>
             <Select
               name='select_cr'
-              selected='all'
+              selected={crso_id}
               onSelect={id => {
                 const new_url = `/diff/${subject.id}/${id}`;
                 history.push(new_url);
