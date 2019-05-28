@@ -26,6 +26,6 @@ select_cr:
   fr: |
     Filtrer par responsabilité essentielle (optionnel):
 
-all_crsos:
+all_crs:
   en: All core responsibilities
   fr: Toutes les responsabilités essentielles

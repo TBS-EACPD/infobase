@@ -48,7 +48,7 @@ export default class TextDiffApp extends React.Component {
     super(props);
     this.state = {
       loading: true,
-      subject: get_subject_from_props(props)
+      subject: get_subject_from_props(props),
     };
   }
 
@@ -109,12 +109,12 @@ export default class TextDiffApp extends React.Component {
 
     const { 
       history,
-      org_id,
-      crso_id,
     } = this.props;
 
-    const all_depts = _.chain(Dept.get_all()).filter().sortBy('fancy_name').value();
-    const all_crsos_for_subj = 
+    const all_depts = _.chain(Dept.get_all()).filter(dept => !!dept.dp_status).sortBy('fancy_name').value();
+    const all_crs_for_subj = _.filter(subject.level === 'dept' ? subject.crsos : subject.dept.crsos, cr => cr.is_cr);
+
+    const current_dept = subject.level === 'dept' ? subject : subject.dept;
 
     if(!loading){
       const matched_indicators = _.chain(Result.get_all())
@@ -150,9 +150,9 @@ export default class TextDiffApp extends React.Component {
             </label>
             <Select
               name='select_dept'
-              selected={org_id}
+              selected={current_dept.id}
               onSelect={id => {
-                const new_url = `/diff/${id}`;
+                const new_url = `/diff/${id}/all`;
                 history.push(new_url);
               }}
               options={ _.map(all_depts, dept => ({id: dept.id, display: dept.fancy_name}) )}
@@ -164,12 +164,12 @@ export default class TextDiffApp extends React.Component {
             </label>
             <Select
               name='select_cr'
-              selected={crso_id}
+              selected={subject.level === 'crso' ? subject.id : 'all'}
               onSelect={id => {
-                const new_url = `/diff/${subject.id}/${id}`;
+                const new_url = `/diff/${subject.level === 'dept' ? subject.id : subject.dept.id}/${id}`;
                 history.push(new_url);
               }}
-              options={_.chain(subject.crsos).map(crso => ({id: crso.id, display: crso.name})).concat([{id: 'all', display: text_maker('all_crsos')}]).value() }
+              options={_.chain(all_crs_for_subj).map(cr => ({id: cr.id, display: cr.name})).concat([{id: 'all', display: text_maker('all_crs')}]).value() }
             />
           </div>
           <div>
