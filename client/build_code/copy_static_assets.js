@@ -262,7 +262,7 @@ function build_proj(PROJ){
 
   copy_file_to_target_dir(svg_path, dir);
 
-  ['png', 'csv'].forEach(function(type){
+  ['csv'].forEach(function(type){
     var this_dir = dir+'/'+type;
     make_dir_if_exists(this_dir);
     PROJ[type].forEach( f_name => copy_file_to_target_dir(f_name, this_dir) );
