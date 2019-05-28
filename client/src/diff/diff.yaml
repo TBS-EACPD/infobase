@@ -29,3 +29,19 @@ select_cr:
 all_crs:
   en: All core responsibilities
   fr: Toutes les responsabilités essentielles
+
+indicator_name:
+  en: Indicator name
+  fr: TODO
+
+indicator_methodology:
+  en: Indicator methodology
+  fr: TODO
+
+indicator_target_narrative:
+  en: Indicator narrative target (where applicable)
+  fr: TODO
+
+no_diff:
+  en: No change between dp18 and dp19
+  fr: TODO

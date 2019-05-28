@@ -3,12 +3,23 @@
 
 
 .added{
-    color: #000;
-    background-color: rgba(#009900,0.3)
+  color: #000;
+  background-color: rgba(#009900,0.3)
 }
 
 
 .removed{
-    color: #000;
-    background-color: rgba(#990000,0.3)
+  color: #000;
+  background-color: rgba(#990000,0.3)
+}
+
+.textDiff--id-tag {
+  text-align: right;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+
+.textDiff--instructions {
+    margin-bottom: 10px;
 }

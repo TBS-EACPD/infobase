@@ -129,8 +129,16 @@ export default class TextDiffApp extends React.Component {
         .map(pair => _.sortBy(pair, "doc"))
         .value();
       
-      this.name_differences = _.map(matched_indicators, indicator_pair => Diff.diffWords(indicator_pair[0].name, indicator_pair[1].name) );
-      this.methodology_differences = _.map(matched_indicators, indicator_pair => Diff.diffWords(indicator_pair[0].methodology, indicator_pair[1].methodology) );
+      this.processed_indicators = _.map(matched_indicators, (indicator_pair, ix) => ({
+        indicator_pair,
+        name_diff: Diff.diffWords(indicator_pair[0].name, indicator_pair[1].name),
+        methodology_diff: Diff.diffWords(indicator_pair[0].methodology, indicator_pair[1].methodology),
+        has_target_narrative: indicator_pair[0].target_narrative || indicator_pair[1].target_narrative,
+        target_diff: (indicator_pair[0] || indicator_pair[1]) ? 
+          Diff.diffChars(indicator_pair[0].target_narrative || '', indicator_pair[1].target_narrative || '') :
+          undefined,
+      }));
+
     }
     return (
       loading ? <SpinnerWrapper ref="spinner" config_name={"sub_route"} /> :
@@ -141,7 +149,7 @@ export default class TextDiffApp extends React.Component {
           route_key="_diff"
         >
           <TM k="diff_title" el="h1" />
-          <div>
+          <div className="textDiff--instructions">
             <TM k="diff_intro_text"/>
           </div>
           <div>
@@ -173,16 +181,20 @@ export default class TextDiffApp extends React.Component {
             />
           </div>
           <div>
-            <TM k="name_diffs" el="h2" />
-            <div className="row">
-              {difference_report(this.name_differences)}
-            </div>
-          </div>
-          <div>
-            <TM k="methodology_diffs" el="h2" />
-            <div className="row">
-              {difference_report(this.methodology_differences)}
-            </div>
+            {_.map(this.processed_indicators, (processed_indicator,ix) =>
+              <div key={ix} style={{marginBottom: "10px", paddingBottom: "10px", borderBottom: "1px solid black"}}>
+                <TM k="indicator_name" el="h4" />
+                { processed_indicator.name_diff.length > 1 ?
+                  difference_report(processed_indicator.name_diff) :
+                  no_difference(processed_indicator.indicator_pair[0].name) }
+                <TM k="indicator_methodology" el="h4" />
+                { processed_indicator.methodology_diff.length > 1 ?
+                  difference_report(processed_indicator.methodology_diff) :
+                  no_difference(processed_indicator.indicator_pair[0].methodology) }
+                { processed_indicator.has_target_narrative && target_report(processed_indicator) }
+                <div className="textDiff--id-tag">{`ID: ${processed_indicator.indicator_pair[0].stable_id}`}</div>
+              </div>
+            )}
           </div>
         </StandardRouteContainer>
     );
@@ -194,32 +206,42 @@ TextDiffApp.defaultProps = {
   subject: Dept.lookup(326),
 }
 
-const difference_report = (diffs) => {
-  return _.chain(diffs).filter(indicator=>indicator.length>1).map((indicator,ix) =>
-    <div key={ix} className="row" style={{marginBottom: "10px", borderBottom: "1px solid black"}}>
-      <div className="col-md-6" >
-        {_.map(indicator, (part,iix) =>
-          <span
-            key={iix}
-            className={part.removed ? 'removed' : ''}
-            style={{display: part.added ? "none" : "inline"}}
-          >
-            {part.value}
-          </span>
-        )}
-      </div>
-      <div className="col-md-6" >
-        {_.map(indicator, (part,iix) =>
-          <span
-            key={iix}
-            className={ part.added ? 'added' : ''}
-            style={{display: part.removed ? "none" : "inline"}}
-          >
-            {part.value}
-          </span>
-        )}
-      </div>
+const target_report = (processed_indicator) => 
+  <div>
+    <TM k="indicator_target_narrative" el="h4" />
+    { processed_indicator.target_diff.length > 1 ?
+      difference_report(processed_indicator.target_diff) :
+      no_difference(processed_indicator.indicator_pair[0].target_narrative) }
+  </div>
+
+const no_difference = (text) =>
+  <div>
+    <TM k="no_diff" el="div"/>
+    <div>{text}</div>
+  </div>
+
+const difference_report = (diff) =>
+  <div className="row">
+    <div className="col-md-6" >
+      {_.map(diff, (part,iix) =>
+        <span
+          key={iix}
+          className={part.removed ? 'removed' : ''}
+          style={{display: part.added ? "none" : "inline"}}
+        >
+          {part.value}
+        </span>
+      )}
     </div>
-  )
-    .value();
-}
+    <div className="col-md-6" >
+      {_.map(diff, (part,iix) =>
+        <span
+          key={iix}
+          className={ part.added ? 'added' : ''}
+          style={{display: part.removed ? "none" : "inline"}}
+        >
+          {part.value}
+        </span>
+      )}
+    </div>
+  </div>
