@@ -135,7 +135,7 @@ export default class TextDiffApp extends React.Component {
         methodology_diff: Diff.diffWords(indicator_pair[0].methodology, indicator_pair[1].methodology),
         has_target_narrative: indicator_pair[0].target_narrative || indicator_pair[1].target_narrative,
         target_diff: (indicator_pair[0] || indicator_pair[1]) ? 
-          Diff.diffChars(indicator_pair[0].target_narrative || '', indicator_pair[1].target_narrative || '') :
+          Diff.diffWords(indicator_pair[0].target_narrative || '', indicator_pair[1].target_narrative || '') :
           undefined,
       }));
 

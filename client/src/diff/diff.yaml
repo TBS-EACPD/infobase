@@ -1,6 +1,6 @@
 diff_title:
-  en: Text Diffing
-  fr: Text Diffing
+  en: Indicator text comparison tool.
+  fr: TODO
 
 diff_intro_text:
   en: This is a tool to compare text in indicators between DP18 and DP19. Text in red on the left was deleted and text in green on the right was added.
