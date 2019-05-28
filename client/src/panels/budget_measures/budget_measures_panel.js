@@ -290,13 +290,13 @@ class BudgetMeasurePanel extends React.Component {
 
     return (
       <Fragment>
-        <div>{above_tab_text}</div>
+        {treatAsProgram(subject) || <div>{above_tab_text}</div>}
         <div className="tabbed-content">
           <TabbedControls
             tab_callback={ (year) => this.setState({loading: true, selected_year: year}) }
             tab_options={
               _.map(
-                budget_years,
+                treatAsProgram(subject) ? years_with_data : budget_years,
                 (year) => ({
                   key: year,
                   label: `${text_maker("budget_name_header")} ${year}`,
