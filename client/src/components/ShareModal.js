@@ -8,13 +8,19 @@ import {
   FacebookIcon,
   EmailShareButton,
   EmailIcon,
+  LinkedinShareButton,
+  LinkedinIcon,
 } from 'react-share';
 
 //const text_maker = create_text_maker(text);
 
+function modifyMetaData() {
+  
+}
+
 export class ShareModal extends React.Component {
   render() {
-   
+    modifyMetaData();
     return (
       <Modal show={this.props.show} onHide={this.props.toggleModal}>
         <Modal.Header>
@@ -30,7 +36,10 @@ export class ShareModal extends React.Component {
           </TwitterShareButton> 
           <EmailShareButton className='icons' url={this.props.url}> 
             <EmailIcon size={32}></EmailIcon>
-          </EmailShareButton> 
+          </EmailShareButton>
+          <LinkedinShareButton className='icons' url={this.props.url}>
+            <LinkedinIcon size={32}></LinkedinIcon>
+          </LinkedinShareButton> 
         </Modal.Body>
 
         <Modal.Footer>
