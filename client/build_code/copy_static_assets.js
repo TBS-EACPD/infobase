@@ -85,6 +85,8 @@ const common_png = _.flatMap(
 
 const svg_path = 'src/svg';
 
+const png_path = 'src/png';
+
 const table_csvs = _.map(
   [
     'org_employee_age_group',
@@ -129,7 +131,7 @@ var IB = {
   lookups_en: common_lookups.concat(common_lookups_en),
   lookups_fr: common_lookups.concat(common_lookups_fr),
   svg: svg_path,
-  png: common_png,
+  png: common_png, png_path,
   csv: table_csvs.concat(other_csvs),
   well_known: ['src/InfoBase/security.txt'],
   other: [

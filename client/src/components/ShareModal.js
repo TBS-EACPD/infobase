@@ -11,20 +11,18 @@ import {
   LinkedinShareButton,
   LinkedinIcon,
 } from 'react-share';
+import text from "./ShareModal.yaml" ;
+import { create_text_maker } from '../models/text.js' ;
 
-//const text_maker = create_text_maker(text);
-
-function modifyMetaData() {
-  
-}
+const text_maker = create_text_maker(text);
 
 export class ShareModal extends React.Component {
   render() {
-    modifyMetaData();
     return (
       <Modal show={this.props.show} onHide={this.props.toggleModal}>
+        <div id='focus-target' on></div>
         <Modal.Header>
-          <Modal.Title>Share URL</Modal.Title>
+          <Modal.Title>{text_maker("share")}</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
