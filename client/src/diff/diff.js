@@ -91,7 +91,7 @@ const get_target_from_indicator = (indicator) => {
       return text_maker('tbd_result_text');
     }
     default: {
-      return ''
+      return text_maker('unspecified_target')
     }
   }
 }
@@ -183,16 +183,28 @@ export default class TextDiffApp extends React.Component {
         .map(res => res.indicators)
         .flatten()
         .groupBy("stable_id")
-        .filter(pair => pair.length===2)
         .map(pair => _.sortBy(pair, "doc"))
         .value();
       
-      this.processed_indicators = _.map(matched_indicators, (indicator_pair, ix) => ({
-        indicator_pair,
-        name_diff: Diff.diffWords(indicator_pair[0].name, indicator_pair[1].name),
-        methodology_diff: Diff.diffWords(indicator_pair[0].methodology, indicator_pair[1].methodology),
-        target_diff: Diff.diffWords(format_target_string(indicator_pair[0]), format_target_string(indicator_pair[1])),
-      }));
+      this.processed_indicators = _.map(matched_indicators, (indicator_pair, ix) => {
+        if (indicator_pair.length===2){
+          return {
+            status: 'both',
+            indicator_pair,
+            name_diff: Diff.diffWords(indicator_pair[0].name, indicator_pair[1].name),
+            methodology_diff: Diff.diffWords(indicator_pair[0].methodology, indicator_pair[1].methodology),
+            target_diff: Diff.diffWords(format_target_string(indicator_pair[0]), format_target_string(indicator_pair[1])),
+          }
+        }
+        const indicator = indicator_pair[0];
+        return {
+          status: indicator.doc,
+          indicator,
+          name: indicator.name,
+          methodology: indicator.methodology,
+          target: format_target_string(indicator),
+        }
+      });
     }
     return (
       loading ? <SpinnerWrapper ref="spinner" config_name={"sub_route"} /> :
@@ -235,32 +247,59 @@ export default class TextDiffApp extends React.Component {
             />
           </div>
           <div>
-            {_.map(this.processed_indicators, (processed_indicator,ix) =>
-              <div key={ix} style={{marginBottom: "10px", paddingBottom: "10px", borderBottom: "1px solid black"}}>
-                <TM k="indicator_name" el="h4" />
-                { processed_indicator.name_diff.length > 1 ?
-                  difference_report(processed_indicator.name_diff) :
-                  no_difference(processed_indicator.indicator_pair[0].name) }
-                <TM k="indicator_methodology" el="h4" />
-                { processed_indicator.methodology_diff.length > 1 ?
-                  difference_report(processed_indicator.methodology_diff) :
-                  no_difference(processed_indicator.indicator_pair[0].methodology) }
-                <TM k="indicator_target" el="h4" />
-                { processed_indicator.target_diff.length > 1 ?
-                  difference_report(processed_indicator.target_diff) :
-                  no_difference(get_target_from_indicator(processed_indicator.indicator_pair[0])) }
-                <div className="textDiff--id-tag">{`ID: ${processed_indicator.indicator_pair[0].stable_id}`}</div>
-              </div>
-            )}
+            {_.map(this.processed_indicators, processed_indicator => indicator_report(processed_indicator) )}
           </div>
         </StandardRouteContainer>
     );
   }
-
 }
 
 TextDiffApp.defaultProps = {
   subject: Dept.lookup(326),
+}
+
+const indicator_report = (processed_indicator) => {
+  if(processed_indicator.status === 'both'){
+    return (
+      <div key={processed_indicator.indicator_pair[0].stable_id} className="textDiff--indicator-report" >
+        <TM k="indicator_name" el="h4" />
+        { processed_indicator.name_diff.length > 1 ?
+          difference_report(processed_indicator.name_diff) :
+          no_difference(processed_indicator.indicator_pair[0].name) }
+        <TM k="indicator_methodology" el="h4" />
+        { processed_indicator.methodology_diff.length > 1 ?
+          difference_report(processed_indicator.methodology_diff) :
+          no_difference(processed_indicator.indicator_pair[0].methodology) }
+        <TM k="indicator_target" el="h4" />
+        { processed_indicator.target_diff.length > 1 ?
+          difference_report(processed_indicator.target_diff) :
+          no_difference(get_target_from_indicator(processed_indicator.indicator_pair[0])) }
+        <div className="textDiff--id-tag">{`ID: ${processed_indicator.indicator_pair[0].stable_id}`}</div>
+      </div>
+    )
+  } else {
+    const add_remove_status = processed_indicator.status === "dp18" ? "indicator-removed" : "indicator-added";
+    return (
+      <div key={processed_indicator.indicator.stable_id} className="textDiff--indicator-report" >
+        <TM k="indicator_name" el="h4" />
+        <div>
+          <div className={`textDiff--${add_remove_status}`}>{text_maker(add_remove_status)}</div>
+          <div>{processed_indicator.name}</div>
+        </div>
+        <TM k="indicator_methodology" el="h4" />
+        <div>
+          <div className={`textDiff--${add_remove_status}`}>{text_maker(add_remove_status)}</div>
+          <div>{processed_indicator.methodology}</div>
+        </div>
+        <TM k="indicator_target" el="h4" />
+        <div>
+          <div className={`textDiff--${add_remove_status}`}>{text_maker(add_remove_status)}</div>
+          <div>{processed_indicator.target}</div>
+        </div>
+        <div className="textDiff--id-tag">{`ID: ${processed_indicator.indicator.stable_id}`}</div>
+      </div>
+    )
+  }
 }
 
 const no_difference = (text) =>

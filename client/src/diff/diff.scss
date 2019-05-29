@@ -24,10 +24,27 @@
   margin-bottom: 10px;
 }
 
-.textDiff--nochange {
+.textDiff--nochange, .textDiff--indicator-removed, .textDiff--indicator-added {
   border-width: 1px 1px 1px 3px;
-  border-color: #4488cc;
   border-style: solid;
   padding: 2px 2px 2px 4px;
   color: #000;
+}
+
+.textDiff--nochange {
+  border-color: #4488cc;
+}
+
+.textDiff--indicator-removed {
+  border-color: #990000;
+}
+
+.textDiff--indicator-added {
+  border-color: #009900;
+}
+
+.textDiff--indicator-report {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid black
 }

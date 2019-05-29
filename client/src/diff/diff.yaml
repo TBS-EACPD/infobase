@@ -49,3 +49,11 @@ indicator_target_narrative:
 no_diff:
   en: No change between dp18 and dp19
   fr: TODO
+
+indicator-added:
+  en: Indicator added
+  fr: TODO
+
+indicator-removed:
+  en: Indicator removed
+  fr: TODO
