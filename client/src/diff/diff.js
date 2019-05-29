@@ -101,6 +101,40 @@ const format_target_string = (indicator) => {
   return target + (indicator.measure ? `(${indicator.measure})` : '');
 }
 
+const process_indicators = (subject) => {
+  const matched_indicators = _.chain(Result.get_all())
+    .filter(res => {
+      const res_subject = Program.lookup(res.subject_id) || CRSO.lookup(res.subject_id);
+      return subject.level === 'dept' ? res_subject.dept === subject : res_subject === subject;
+    })
+    .map(res => res.indicators)
+    .flatten()
+    .groupBy("stable_id")
+    .map(pair => _.sortBy(pair, "doc"))
+    .value();
+
+  const processed_indicators = _.map(matched_indicators, (indicator_pair, ix) => {
+    if (indicator_pair.length===2){
+      return {
+        status: 'both',
+        indicator_pair,
+        name_diff: Diff.diffWords(indicator_pair[0].name, indicator_pair[1].name),
+        methodology_diff: Diff.diffWords(indicator_pair[0].methodology, indicator_pair[1].methodology),
+        target_diff: Diff.diffWords(format_target_string(indicator_pair[0]), format_target_string(indicator_pair[1])),
+      }
+    }
+    const indicator = indicator_pair[0];
+    return {
+      status: indicator.doc,
+      indicator,
+      name: indicator.name,
+      methodology: indicator.methodology,
+      target: format_target_string(indicator),
+    }
+  });
+  return processed_indicators;
+}
+
 export default class TextDiffApp extends React.Component {
   constructor(props) {
     super(props);
@@ -120,7 +154,10 @@ export default class TextDiffApp extends React.Component {
       results: true,
       result_docs: ['dp19','dp18'],
     })
-      .then( () => this.setState({subject: subject, loading: false}) );
+      .then( () => {
+        const processed_indicators = process_indicators(subject);
+        this.setState({subject: subject, loading: false, processed_indicators: processed_indicators});
+      });
   }
 
   static getDerivedStateFromProps(props, state){
@@ -155,7 +192,10 @@ export default class TextDiffApp extends React.Component {
         results: true,
         result_docs: ['dp19','dp18'],
       })
-        .then( () => this.setState({loading: false}) );
+        .then( () => {
+          const processed_indicators = process_indicators(subject);
+          this.setState({subject: subject, loading: false, processed_indicators: processed_indicators});
+        });
     }
   }
 
@@ -163,6 +203,7 @@ export default class TextDiffApp extends React.Component {
     const { 
       loading,
       subject,
+      processed_indicators,
     } = this.state;
 
     const { 
@@ -174,38 +215,6 @@ export default class TextDiffApp extends React.Component {
 
     const current_dept = subject.level === 'dept' ? subject : subject.dept;
 
-    if(!loading){
-      const matched_indicators = _.chain(Result.get_all())
-        .filter(res => {
-          const res_subject = Program.lookup(res.subject_id) || CRSO.lookup(res.subject_id);
-          return subject.level === 'dept' ? res_subject.dept === subject : res_subject === subject;
-        })
-        .map(res => res.indicators)
-        .flatten()
-        .groupBy("stable_id")
-        .map(pair => _.sortBy(pair, "doc"))
-        .value();
-      
-      this.processed_indicators = _.map(matched_indicators, (indicator_pair, ix) => {
-        if (indicator_pair.length===2){
-          return {
-            status: 'both',
-            indicator_pair,
-            name_diff: Diff.diffWords(indicator_pair[0].name, indicator_pair[1].name),
-            methodology_diff: Diff.diffWords(indicator_pair[0].methodology, indicator_pair[1].methodology),
-            target_diff: Diff.diffWords(format_target_string(indicator_pair[0]), format_target_string(indicator_pair[1])),
-          }
-        }
-        const indicator = indicator_pair[0];
-        return {
-          status: indicator.doc,
-          indicator,
-          name: indicator.name,
-          methodology: indicator.methodology,
-          target: format_target_string(indicator),
-        }
-      });
-    }
     return (
       loading ? <SpinnerWrapper ref="spinner" config_name={"sub_route"} /> :
         <StandardRouteContainer
@@ -247,7 +256,7 @@ export default class TextDiffApp extends React.Component {
             />
           </div>
           <div>
-            {_.map(this.processed_indicators, processed_indicator => indicator_report(processed_indicator) )}
+            {_.map(processed_indicators, processed_indicator => indicator_report(processed_indicator) )}
           </div>
         </StandardRouteContainer>
     );
