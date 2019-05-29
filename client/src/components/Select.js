@@ -1,7 +1,6 @@
 //expects options to be of the form [ { id, display } ]
-const Select = ({ id, selected, className, options, onSelect, disabled, style, name }) => (
+const Select = ({ id, selected, className, options, onSelect, disabled, style }) => (
   <select 
-    name={name}
     style={style}
     id={id}
     disabled={disabled}

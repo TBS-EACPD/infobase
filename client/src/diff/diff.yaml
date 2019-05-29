@@ -38,6 +38,10 @@ indicator_methodology:
   en: Indicator methodology
   fr: TODO
 
+indicator_target:
+  en: Indicator target
+  fr: TODO
+
 indicator_target_narrative:
   en: Indicator narrative target (where applicable)
   fr: TODO

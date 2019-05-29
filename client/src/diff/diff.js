@@ -4,7 +4,8 @@ import { create_text_maker } from '../models/text.js';
 import { 
   create_text_maker_component,
 } from '../util_components.js';
-import lab_text from './diff.yaml';
+import diff_text from './diff.yaml';
+import result_text from '../panels/result_graphs/result_components.yaml';
 import { get_static_url } from '../request_utils.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
 import { single_subj_results_scheme, get_initial_single_subj_results_state } from '../gen_expl/results_scheme.js';
@@ -20,12 +21,13 @@ import { Select } from '../components/Select.js';
 import { SpinnerWrapper } from '../components/SpinnerWrapper.js';
 import * as Diff from 'diff';
 import { Fragment } from 'react';
+import { formats } from '../core/format.js';
 
 const { Dept, CRSO, Program } = Subject;
 
 
-const { TM } = create_text_maker_component(lab_text);
-const text_maker = create_text_maker(lab_text);
+const { TM } = create_text_maker_component([diff_text, result_text]);
+const text_maker = create_text_maker([diff_text, result_text]);
 
 
 const get_subject_from_props = (props) => {
@@ -41,6 +43,67 @@ const get_subject_from_props = (props) => {
     return Dept.lookup(org_id)
   }
   return props.subject; // default
+}
+
+const get_target_from_indicator = (indicator) => {
+  const {
+    target_type,
+    target_min,
+    target_max,
+    target_measure,
+    target_narrative
+  } = indicator;
+
+  const display_type_by_data_type = {
+    num: "result_num",
+    num_range: "result_num",
+    dollar: "dollar",
+    dollar_range: "dollar",
+    percent: "result_percentage",
+    percent_range: "result_percentage",
+  };
+
+  switch(target_type){
+    case 'num':
+    case 'num_range':
+    case 'dollar':
+    case 'dollar_range':
+    case 'percent':
+    case 'percent_range': {
+      if ( /range/.test(target_type) && (target_min && target_max) ){
+        return `${text_maker("result_range_text")} ${formats[display_type_by_data_type[target_type]](target_min, {raw: true})} ${text_maker("and")} ${formats[display_type_by_data_type[target_type]](target_max, {raw: true})}`
+      } else if (target_min && target_max && target_min === target_max){
+        return formats[display_type_by_data_type[target_type]](target_min, {raw: true})
+      } else if (target_min && !target_max){
+        return `${text_maker("result_lower_target_text")} ${formats[display_type_by_data_type[target_type]](target_min, {raw: true})}` 
+      } else if (!target_min && target_max){
+        return `${text_maker("result_upper_target_text")} ${formats[display_type_by_data_type[target_type]](target_max, {raw: true})}` 
+      } else {
+        return text_maker('unspecified_target')
+      }
+    }
+    case 'text': {
+      if ( _.isEmpty(target_narrative) ){
+        return text_maker('unspecified_target')
+      } else {
+        return target_narrative
+      }
+    }
+    case 'tbd': {
+      return text_maker('tbd_result_text');
+    }
+    default: {
+      return ''
+    }
+  }
+}
+
+const format_target_string = (indicator) => {
+  const target = get_target_from_indicator(indicator)
+  if( indicator.stable_id === "DR-QUANT-318" ){
+    debugger;
+  }
+  return target + indicator.measure ? `(${indicator.measure})` : '';
 }
 
 export default class TextDiffApp extends React.Component {
@@ -133,12 +196,9 @@ export default class TextDiffApp extends React.Component {
         indicator_pair,
         name_diff: Diff.diffWords(indicator_pair[0].name, indicator_pair[1].name),
         methodology_diff: Diff.diffWords(indicator_pair[0].methodology, indicator_pair[1].methodology),
-        has_target_narrative: indicator_pair[0].target_narrative || indicator_pair[1].target_narrative,
-        target_diff: (indicator_pair[0] || indicator_pair[1]) ? 
-          Diff.diffWords(indicator_pair[0].target_narrative || '', indicator_pair[1].target_narrative || '') :
-          undefined,
+        target_diff: Diff.diffChars(format_target_string(indicator_pair[0]), format_target_string(indicator_pair[1])),
       }));
-
+      debugger;
     }
     return (
       loading ? <SpinnerWrapper ref="spinner" config_name={"sub_route"} /> :
@@ -191,7 +251,10 @@ export default class TextDiffApp extends React.Component {
                 { processed_indicator.methodology_diff.length > 1 ?
                   difference_report(processed_indicator.methodology_diff) :
                   no_difference(processed_indicator.indicator_pair[0].methodology) }
-                { processed_indicator.has_target_narrative && target_report(processed_indicator) }
+                <TM k="indicator_target" el="h4" />
+                { processed_indicator.target_diff.length > 1 ?
+                  difference_report(processed_indicator.target_diff) :
+                  no_difference(get_target_from_indicator(processed_indicator.indicator_pair[0])) }
                 <div className="textDiff--id-tag">{`ID: ${processed_indicator.indicator_pair[0].stable_id}`}</div>
               </div>
             )}
@@ -205,14 +268,6 @@ export default class TextDiffApp extends React.Component {
 TextDiffApp.defaultProps = {
   subject: Dept.lookup(326),
 }
-
-const target_report = (processed_indicator) => 
-  <div>
-    <TM k="indicator_target_narrative" el="h4" />
-    { processed_indicator.target_diff.length > 1 ?
-      difference_report(processed_indicator.target_diff) :
-      no_difference(processed_indicator.indicator_pair[0].target_narrative) }
-  </div>
 
 const no_difference = (text) =>
   <div>

@@ -430,7 +430,8 @@ class DetailedProgramSplit extends React.Component {
         <div className="fcol-md-4" style={{ width: "100%" }}>
           <label>
             <TM k="filter_by_so" />
-            <Select 
+            <Select
+              id="select_arrangement"
               selected={selected_arrangement}
               options={_.map(arrangements, ({id, label}) => ({ 
                 id,
