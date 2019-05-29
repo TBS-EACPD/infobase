@@ -50,8 +50,7 @@ const get_target_from_indicator = (indicator) => {
     target_type,
     target_min,
     target_max,
-    target_measure,
-    target_narrative
+    target_narrative,
   } = indicator;
 
   const display_type_by_data_type = {
@@ -62,7 +61,6 @@ const get_target_from_indicator = (indicator) => {
     percent: "result_percentage",
     percent_range: "result_percentage",
   };
-
   switch(target_type){
     case 'num':
     case 'num_range':
@@ -100,10 +98,7 @@ const get_target_from_indicator = (indicator) => {
 
 const format_target_string = (indicator) => {
   const target = get_target_from_indicator(indicator)
-  if( indicator.stable_id === "DR-QUANT-318" ){
-    debugger;
-  }
-  return target + indicator.measure ? `(${indicator.measure})` : '';
+  return target + (indicator.measure ? `(${indicator.measure})` : '');
 }
 
 export default class TextDiffApp extends React.Component {
@@ -196,9 +191,8 @@ export default class TextDiffApp extends React.Component {
         indicator_pair,
         name_diff: Diff.diffWords(indicator_pair[0].name, indicator_pair[1].name),
         methodology_diff: Diff.diffWords(indicator_pair[0].methodology, indicator_pair[1].methodology),
-        target_diff: Diff.diffChars(format_target_string(indicator_pair[0]), format_target_string(indicator_pair[1])),
+        target_diff: Diff.diffWords(format_target_string(indicator_pair[0]), format_target_string(indicator_pair[1])),
       }));
-      debugger;
     }
     return (
       loading ? <SpinnerWrapper ref="spinner" config_name={"sub_route"} /> :
