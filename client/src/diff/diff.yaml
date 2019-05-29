@@ -1,18 +1,10 @@
 diff_title:
-  en: Indicator text comparison tool.
+  en: Indicator text comparison tool
   fr: TODO
 
 diff_intro_text:
-  en: This is a tool to compare text in indicators between DP18 and DP19. Text in red on the left was deleted and text in green on the right was added.
-  fr: TODO
-
-name_diffs:
-  en: Name differences
-  fr: TODO
-
-methodology_diffs:
-  en: Methodology differences
-  fr: TODO
+  en: This is a tool to compare text portions of indicators between the 2018-19 and 2019-20 departmental plans. Text in red on the left was deleted and text in green on the right was added.
+  fr: Ceci est un outil en permettant comparer des portions d'indicateurs textuelles entre les plans ministériels 2018-2019 et 2019-2020. Le texte en rouge à gauche a été enlevé et le texte en vert à droite a été ajouté. 
 
 select_dept:
   en: |
@@ -31,29 +23,25 @@ all_crs:
   fr: Toutes les responsabilités essentielles
 
 indicator_name:
-  en: Indicator name
-  fr: TODO
+  en: Indicator
+  fr: Indicateur
 
 indicator_methodology:
-  en: Indicator methodology
-  fr: TODO
+  en: Methodology
+  fr: Méthodologie
 
 indicator_target:
-  en: Indicator target
-  fr: TODO
-
-indicator_target_narrative:
-  en: Indicator narrative target (where applicable)
-  fr: TODO
+  en: Target
+  fr: Cible
 
 no_diff:
   en: No change between dp18 and dp19
-  fr: TODO
+  fr: Aucun changement
 
 indicator-added:
   en: Indicator added
-  fr: TODO
+  fr: Indicateur ajouté
 
 indicator-removed:
   en: Indicator removed
-  fr: TODO
+  fr: Indicateur enlevé
