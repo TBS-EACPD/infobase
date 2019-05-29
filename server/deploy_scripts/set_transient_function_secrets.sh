@@ -13,6 +13,9 @@ function cleanup {
 
   unset SCRATCH
 
+  unset PROJECT
+
+  unset MDB_CONNECT_STRING
   unset MDB_USERNAME
   unset MDB_PW
 }
@@ -21,9 +24,8 @@ trap cleanup EXIT
 
 echo $(lpass show PROD_API_SERVICE_KEY --notes) | base64 --decode > $scratch/key.json
 gcloud auth activate-service-account --key-file=$scratch/key.json
-project=$(lpass show PROD_API_PROJECT_ID --notes)
-gcloud config set project $project
-gcloud config set compute/zone us-central1
+
+export PROJECT=$(lpass show PROD_API_PROJECT_ID --notes)
 
 touch $scratch/envs.yaml
 echo "SHOULD_USE_REMOTE_DB: '$SHOULD_USE_REMOTE_DB'" >> $scratch/envs.yaml

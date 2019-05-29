@@ -23,10 +23,6 @@ trap cleanup EXIT
 echo $(lpass show IB_SERVICE_KEY --notes) | base64 --decode > $scratch/key.json
 gcloud auth activate-service-account --key-file=$scratch/key.json
 
-project=$(lpass show PROD_CLIENT_PROJECT_ID --notes)
-gcloud config set project $project
-gcloud config set compute/zone northamerica-northeast1-a
-
 export CLOUDFLARE_ZONE=$(lpass show CLOUDFLARE_ZONE --notes)
 export CLOUDFLARE_USER=$(lpass show CLOUDFLARE_USER --notes)
 export CLOUDFLARE_KEY=$(lpass show CLOUDFLARE_KEY --notes)
