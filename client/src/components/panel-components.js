@@ -86,7 +86,7 @@ const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOv
     html2canvas(panel_body)
       .then((canvas) => {
         const imgData = canvas.toDataURL('image/png');
-        const ratio =  canvas.height/canvas.width;
+        const ratio = canvas.height/canvas.width;
 
         const pdf = new jsPDF({
           compress: true,
@@ -121,6 +121,7 @@ const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOv
         footerImg.src = get_static_url(`png/wmms-blk.png`);
         pdf.addImage(footerImg, 'png', 174.5, height + EXTRA_HEIGHT + 15);
         
+        pdf.output('dataurlnewwindow', {})
         pdf.save(file_name);
       })
       .then(() => {
