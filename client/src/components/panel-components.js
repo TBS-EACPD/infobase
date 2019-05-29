@@ -5,6 +5,7 @@ import { Fragment } from 'react';
 import { 
   FootnoteList, 
   create_text_maker_component,
+  SpinnerWrapper,
 } from '../util_components.js';
 import { Details } from '../components/Details.js';
 import { get_static_url } from '../request_utils.js';
@@ -66,8 +67,20 @@ export const Panel = props => {
   )
 }
 
-const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOverflow}) => {
-  const download_panel_pdf = () => {
+class Panel_ extends React.Component {
+  constructor(){
+    super();
+
+    this.state = {
+      generating_pdf: false,
+    };
+  }
+  download_panel_pdf(){
+    const {
+      context, 
+      title,
+    } = this.props;
+
     const file_name_context = context.subject.level === 'dept' ? context.subject.acronym: context.subject.id;
     const file_name = `${file_name_context}_${title}.pdf`;
 
@@ -121,7 +134,6 @@ const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOv
         footerImg.src = get_static_url(`png/wmms-blk.png`);
         pdf.addImage(footerImg, 'png', 174.5, height + EXTRA_HEIGHT + 15);
         
-        pdf.output('dataurlnewwindow', {})
         pdf.save(file_name);
       })
       .then(() => {
@@ -129,63 +141,84 @@ const Panel_ = ({context, title, sources, footnotes, children, subtitle, allowOv
           legend_container_arr,
           (legend_container, index) => legend_container.style.maxHeight = oldMaxHeights[index]
         )
+
+        this.setState({generating_pdf: false});
       });
   }
-  
-  return(
-    <section className={classNames('panel panel-info mrgn-bttm-md', allowOverflow && "panel-overflow")}>
-      {title && <header className='panel-heading'>
-        <header className="panel-title"> {title} </header>
-        {subtitle &&
-          <div className="panel-sub-title">
-            {subtitle}
-          </div>
-        }
-        <div style={{marginLeft: 'auto'}}>
-          {context && !window.feature_detection.is_IE() &&
-            <img src={get_static_url("svg/download.svg")}
-              className='panel-heading-utils'
-              onClick={() => download_panel_pdf()}
-              alt={text_maker("a11y_download_panel")}
-              title={text_maker("a11y_download_panel")}
-            />
+  componentDidUpdate(){
+    this.state.generating_pdf && this.download_panel_pdf();
+  }
+  render(){
+    const {
+      context,
+      title,
+      sources,
+      footnotes,
+      children,
+      subtitle,
+      allowOverflow,
+    } = this.props;
+
+    const { generating_pdf } = this.state;
+
+    return (
+      <section className={classNames('panel panel-info mrgn-bttm-md', allowOverflow && "panel-overflow")}>
+        {title && <header className='panel-heading'>
+          <header className="panel-title"> {title} </header>
+          {subtitle &&
+            <div className="panel-sub-title">
+              {subtitle}
+            </div>
           }
-          {context && !context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) && 
-            <a href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
-              <img src={get_static_url("svg/permalink.svg")}
-                alt={text_maker("a11y_permalink")}
+          <div style={{marginLeft: 'auto'}}>
+            { context && !window.feature_detection.is_IE() && !generating_pdf &&
+              <img src={get_static_url("svg/download.svg")}
                 className='panel-heading-utils'
-                title={text_maker("a11y_permalink")}
+                onClick={ () => this.setState({generating_pdf: true}) }
+                alt={text_maker("a11y_download_panel")}
+                title={text_maker("a11y_download_panel")}
               />
-            </a>
+            }
+            {context && !window.feature_detection.is_IE() && generating_pdf &&
+              <SpinnerWrapper config_name={"small_inline"} />
+            }
+            { context && !context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) && 
+              <a href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
+                <img src={get_static_url("svg/permalink.svg")}
+                  alt={text_maker("a11y_permalink")}
+                  className='panel-heading-utils'
+                  title={text_maker("a11y_permalink")}
+                />
+              </a>
+            }
+          </div>
+        </header>
+        }
+        <div className='panel-body'>
+          { children }
+          <div className="mrgn-tp-md" />
+          {_.nonEmpty(sources) && 
+            <div>
+              <PanelSource links={sources} />
+            </div>
+          }
+          {_.nonEmpty(footnotes) && 
+            <div className="mrgn-tp-md">
+              <Details
+                summary_content={ <TM k="footnotes" /> }
+                content={
+                  <FootnoteList
+                    footnotes={footnotes}
+                  />
+                }
+              />
+            </div>
           }
         </div>
-      </header>
-      }
-      <div className='panel-body'>
-        { children }
-        <div className="mrgn-tp-md" />
-        {_.nonEmpty(sources) && 
-          <div>
-            <PanelSource links={sources} />
-          </div>
-        }
-        {_.nonEmpty(footnotes) && 
-          <div className="mrgn-tp-md">
-            <Details
-              summary_content={ <TM k="footnotes" /> }
-              content={
-                <FootnoteList
-                  footnotes={footnotes}
-                />
-              }
-            />
-          </div>
-        }
-      </div>
-    </section>
-  )};
-
+      </section>
+    );
+  }
+}
 
 
 /* 
