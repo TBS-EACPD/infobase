@@ -1,17 +1,12 @@
 @import '../common_css/common-variables';
 
-
-
 .back-to-top {
   
     display: inline-block;
-    background-color: #3b4f68; 
     text-decoration: none;
     text-align: center;
     padding: 5px;
     border-radius: 4px;
-    position: fixed;
-    bottom: 30px;
     right: 30px;
     transition: background-color .3s, 
       opacity .5s, visibility .5s;
@@ -19,7 +14,6 @@
     visibility: hidden;
     z-index: 1000;
     color: white;
-      
   }
  
   
@@ -28,7 +22,6 @@
     color: white;
   }
   
-
   .show {
     opacity: 1;
     visibility: visible;
@@ -49,8 +42,9 @@
   @media(max-width: 600px) {
     .back-to-top {
       width: 100%;
-      bottom: 0;
-      left: 0;
+      position: fixed;
+      bottom: 0px;
+      left: 0px;
       border-radius: 0;
       padding: 10px;
     }
