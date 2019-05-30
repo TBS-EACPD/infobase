@@ -20,7 +20,6 @@ export class ShareModal extends React.Component {
   render() {
     return (
       <Modal show={this.props.show} onHide={this.props.toggleModal}>
-        <div id='focus-target' on></div>
         <Modal.Header>
           <Modal.Title>{text_maker("share")}</Modal.Title>
         </Modal.Header>
