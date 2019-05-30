@@ -1,8 +1,5 @@
 import './BackToTop.scss' ;
-import text from "./BackToTop.yaml" ;
-import { create_text_maker } from '../models/text.js' ;
-
-const text_maker = create_text_maker(text);
+import { trivial_text_maker } from '../models/text.js' ;
 
 export class BackToTop extends React.Component {
   constructor(props) {
@@ -12,8 +9,6 @@ export class BackToTop extends React.Component {
     this.handleScroll = this.handleScroll.bind(this);
     this.handleResize = this.handleResize.bind(this);
   }
-
-  
 
   handleScroll() {
     if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
@@ -66,8 +61,7 @@ export class BackToTop extends React.Component {
   }
   
   render() {
-    return <a className="back-to-top" style={{backgroundColor: window.infobase_color_constants.primaryColor}} ref={this.buttonRef} tabIndex='-1' onClick={() => this.handleClick()}>{text_maker("back_to_top")}</a>
+    return <a className="back-to-top" style={{backgroundColor: window.infobase_color_constants.primaryColor}} ref={this.buttonRef} tabIndex='-1' onClick={() => this.handleClick()}>{trivial_text_maker("back_to_top")}</a>
   }
-
   
 }

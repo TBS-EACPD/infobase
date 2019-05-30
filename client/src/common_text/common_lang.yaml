@@ -124,6 +124,9 @@ definition:
 glossary_link_title:
   en: Click here to find a definition in the glossary
   fr: Cliquez ici pour trouver une définition dans le glossaire
+back_to_top:
+  en: Back to top
+  fr: Retour au début
 data:
   en: Data
   fr: Données
