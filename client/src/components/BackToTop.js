@@ -4,20 +4,24 @@ import { create_text_maker } from '../models/text.js' ;
 
 const text_maker = create_text_maker(text);
 
-function handleScroll() {
-  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-    document.getElementById('back-to-top-button').classList.add('show') ;
-  }
-  else {
-    document.getElementById('back-to-top-button').classList.remove('show') ;
-  }
-};
+
 
 export class BackToTop extends React.Component {
-  
-  render() {
-    return <a className="back-to-top" id="back-to-top-button" tabIndex='-1' onClick={() => this.handleClick()}>{text_maker("back_to_top")}</a>
+  constructor(props) {
+    super(props);
+
+    this.buttonRef = React.createRef();
+    this.handleScroll = this.handleScroll.bind(this);
   }
+
+  handleScroll() {
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+      this.buttonRef.current.classList.add('show') ;
+    }
+    else {
+      this.buttonRef.current.classList.remove('show') ;
+    }
+  };
 
   handleClick() {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
@@ -25,10 +29,16 @@ export class BackToTop extends React.Component {
   }
 
   componentDidMount(){
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", this.handleScroll);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", handleScroll);
+    window.removeEventListener("scroll", this.handleScroll);
   }
+  
+  render() {
+    return <a className="back-to-top" ref={this.buttonRef} tabIndex='-1' onClick={() => this.handleClick()}>{text_maker("back_to_top")}</a>
+  }
+
+  
 }

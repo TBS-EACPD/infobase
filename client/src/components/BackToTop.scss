@@ -5,8 +5,7 @@
 .back-to-top {
   
     display: inline-block;
-    background-color: #3b4f68;
-    background: #3b4f68; 
+    background-color: #3b4f68; 
     text-decoration: none;
     text-align: center;
     padding: 5px;
@@ -30,7 +29,7 @@
   }
   
 
-  #back-to-top-button.show {
+  .show {
     opacity: 1;
     visibility: visible;
   }
@@ -38,6 +37,13 @@
   .back-to-top:active {
     text-decoration: none;
     color: white;
+  }
+
+  .back-to-top:hover {
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    background-color: #333;
   }
 
   @media(max-width: 600px) {
@@ -50,14 +56,8 @@
     }
   }
 
-  @media (hover: hover) { 
-    .back-to-top:hover {
-      cursor: pointer;
-      text-decoration: none;
-      color: white;
-      background-color: #333;
-    }
-  }
+    
+  
 
   
   
