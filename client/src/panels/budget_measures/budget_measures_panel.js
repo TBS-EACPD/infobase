@@ -11,6 +11,7 @@ import {
   create_text_maker_component,
   Panel,
   NivoResponsiveHBar,
+  newIBLightCategoryColors,
 } from "../shared";
 import MediaQuery from 'react-responsive';
 
@@ -709,7 +710,7 @@ class BudgetMeasureHBars extends React.Component {
         }
       </div>;
     } else {
-      const biv_value_colors = infobase_colors();
+      const biv_value_colors = d3.scaleOrdinal().range(newIBLightCategoryColors);
 
       const nivo_default_props = {
         data: data,
