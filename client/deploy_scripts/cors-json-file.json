@@ -9,6 +9,8 @@
       "https://tbs-sct.gc.ca",
       "http://authoring.publiservice.tbs-sct.gc.ca",
       "http://dev_internal.tbs-sct.gc.ca",
+      "http://dev.tbs-sct.gc.ca",
+      "https://dev.tbs-sct.gc.ca",
       "http://localhost:8080",
       "http://127.0.0.1:8080"
     ],
