@@ -94,6 +94,9 @@ class Panel_ extends React.Component {
                 download_button_class_name={"panel-heading-utils panel-heading-btn"}
               />
             }
+            {context && !window.feature_detection.is_IE() && generating_pdf &&
+              <Loader />
+            }
             { context && !context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) && 
               <a href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
                 <img src={get_static_url("svg/permalink.svg")}

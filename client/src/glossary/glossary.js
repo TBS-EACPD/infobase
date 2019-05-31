@@ -11,6 +11,7 @@ import {
   GlossarySearch,
   BackToTop,
 } from '../util_components.js';
+import { Loader } from '../components/Loader.js'
 
 const { text_maker, TM } = create_text_maker_component(glossary_text);
 
