@@ -13,8 +13,7 @@ export class BackToTop extends React.Component {
   handleScroll() {
     if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
       this.buttonRef.current.classList.add('show') ;
-    }
-    else {
+    } else {
       this.buttonRef.current.classList.remove('show') ;
     }
     
@@ -38,7 +37,7 @@ export class BackToTop extends React.Component {
       this.buttonRef.current.style.bottom = '';
     }
      
-    if(document.documentElement.scrollTop + window.innerHeight < document.getElementById('wb-info').offsetTop) {
+    if((document.documentElement.scrollTop || document.body.scrollTop) + window.innerHeight < document.getElementById('wb-info').offsetTop) {
       this.buttonRef.current.style.position = 'fixed';
       this.buttonRef.current.style.bottom = '30px';
       this.buttonRef.current.style.top = '';
@@ -61,7 +60,17 @@ export class BackToTop extends React.Component {
   }
   
   render() {
-    return <a className="back-to-top" style={{backgroundColor: window.infobase_color_constants.primaryColor}} ref={this.buttonRef} tabIndex='-1' onClick={() => this.handleClick()}>{trivial_text_maker("back_to_top")}</a>
+    return (
+      <a 
+        className="back-to-top" 
+        style={{backgroundColor: window.infobase_color_constants.primaryColor}} 
+        ref={this.buttonRef} 
+        tabIndex='-1' 
+        onClick={() => this.handleClick()}
+      >
+        {trivial_text_maker("back_to_top")}
+      </a> 
+    );
   }
   
 }

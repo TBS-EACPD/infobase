@@ -11,7 +11,6 @@ import {
   GlossarySearch,
   BackToTop,
 } from '../util_components.js';
-import { trivial_text_maker } from '../models/text.js';
 
 const { text_maker, TM } = create_text_maker_component(glossary_text);
 
@@ -119,7 +118,7 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
                       document.body.scrollTop = document.documentElement.scrollTop = 0;
                       document.querySelector('#glossary_search > div > div > input').focus();
                     }}
-                  >{trivial_text_maker("back_to_top")}</a>
+                  >{text_maker("back_to_top")}</a>
                 </div>
               </dd>
               
