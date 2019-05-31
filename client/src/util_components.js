@@ -23,6 +23,7 @@ import { FilterTable } from './components/FilterTable.js';
 import { Details } from './components/Details.js';
 import { EmbeddedVideo } from './components/EmbeddedVideo.js';
 import { SpinnerWrapper } from './components/SpinnerWrapper.js';
+import { Loader } from './components/Loader.js';
 import { KeyConceptList } from './components/KeyConceptList.js';
 import { BackToTop } from './components/BackToTop.js';
 import {
