@@ -261,6 +261,7 @@ function build_proj(PROJ){
   };
 
   copy_file_to_target_dir(svg_path, dir);
+  copy_file_to_target_dir(png_path, dir);
 
   ['csv'].forEach(function(type){
     var this_dir = dir+'/'+type;
