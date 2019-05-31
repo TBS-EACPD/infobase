@@ -40,7 +40,10 @@ class ReportAProblem extends React.Component {
     } = this.state;
 
     const any_fields_checked = _.some(fields, "is_checked");
-    const any_active_additional_detail_input = _.some( fields, (field) => field.is_checked && !_.isEmpty(field.additional_detail_input) );
+    const any_active_additional_detail_input = _.some(
+      fields, 
+      (field) => field.is_checked && !_.isEmpty(field.additional_detail_input)
+    );
     const ready_to_send = any_fields_checked && (!any_active_additional_detail_input || privacy_acknowledged);
 
     return (
