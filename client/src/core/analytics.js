@@ -17,15 +17,8 @@ const dimensions = {
   MISC1: "dimension7",
   MISC2: "dimension8",
   DEV: "dimension9",
-  Q1: "dimension10",
-  Q2: "dimension11",
-  Q3: "dimension12",
-  Q4: "dimension13",
-  Q5: "dimension14",
-  Q6: "dimension15",
   SHA: "dimension16",
 };
-
 
 
 function initialize_analytics(){
@@ -64,12 +57,6 @@ const dummy_event_obj = _.chain([
   'SUBJECT_GUID',
   'MISC1',
   'MISC2',
-  'Q1',
-  'Q2',
-  'Q3',
-  'Q4',
-  'Q5',
-  'Q6',
 ])
   .map( key => [ dimensions[key], 'N/A' ] )
   .fromPairs()
