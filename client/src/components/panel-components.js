@@ -13,6 +13,7 @@ import { panel_href_template } from '../infographic/routes.js';
 import { panel_context } from '../infographic/context.js';
 import './panel-components.scss';
 import { create_text_maker } from '../models/text.js';
+import { log_standard_event } from '../core/analytics.js';
 import * as qrcode from 'qrcode-generator';
 import * as html2canvas from 'html2canvas';
 import * as jsPDF from 'jspdf';
@@ -141,6 +142,12 @@ class Panel_ extends React.Component {
           legend_container_arr,
           (legend_container, index) => legend_container.style.maxHeight = oldMaxHeights[index]
         )
+
+        log_standard_event({
+          SUBAPP: window.location.hash.replace('#',''),
+          MISC1: "PDF_DOWNLOAD",
+          MISC2: title,
+        })
 
         this.setState({generating_pdf: false});
       });
