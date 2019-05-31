@@ -155,7 +155,6 @@ class Panel_ extends React.Component {
       sources,
       footnotes,
       children,
-      subtitle,
       allowOverflow,
     } = this.props;
 
@@ -165,11 +164,6 @@ class Panel_ extends React.Component {
       <section className={classNames('panel panel-info mrgn-bttm-md', allowOverflow && "panel-overflow")}>
         {title && <header className='panel-heading'>
           <header className="panel-title"> {title} </header>
-          {subtitle &&
-            <div className="panel-sub-title">
-              {subtitle}
-            </div>
-          }
           <div style={{marginLeft: 'auto'}}>
             { context && !window.feature_detection.is_IE() && !generating_pdf &&
               <img src={get_static_url("svg/download.svg")}

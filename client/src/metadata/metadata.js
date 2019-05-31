@@ -34,9 +34,6 @@ export default class MetaData extends React.Component {
             <div key={source.key} id={source.key}>
               <Panel
                 title={source.title()}
-                subtitle={
-                  <span><TM k="refresh_freq"/> {source.frequency.text}</span>
-                }
               >
                 <div>
                   { source.description() }
@@ -87,6 +84,7 @@ export default class MetaData extends React.Component {
                     </a>
                   }
                 </div>
+                <span><TM k="refresh_freq"/> {source.frequency.text}</span>
               </Panel>
             </div>
           ))}
