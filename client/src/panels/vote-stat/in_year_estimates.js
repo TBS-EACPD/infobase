@@ -7,7 +7,7 @@ import {
   Col,
 } from "../shared";
 
-const { CirclePieChart } = declarative_charts;
+const { LiquidFillGauge } = declarative_charts;
 
 new PanelGraph({
   level: "dept",
@@ -57,24 +57,11 @@ new PanelGraph({
 
 
 const DeptEstimatesPerspective = ({subject, dept_total, gov_total}) => {
-
   return (
-    <CirclePieChart
+    <LiquidFillGauge
       height={250}
-      colors={infobase_colors()}
-      formatter={formats.compact1}
-      font_size="16"
-      data={[
-        { name: "x", value: gov_total },
-        { name: "y", value: dept_total },
-      ]}
-      margin={{
-        top: 20,
-        left: 10,
-        bottom: 20,
-        right: 10,
-
-      }}
+      value={dept_total}
+      totalValue={gov_total}
     />
   );
 
