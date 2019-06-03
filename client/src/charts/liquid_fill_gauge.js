@@ -71,11 +71,14 @@ export class LiquidFillGauge{
 
     this.graph = this.svg.append("g")
       .attr("class","_graph_area")
-      .attr("transform", `translate(${locationX},${locationY})`)
+      .attr("transform", `translate(${locationX},${locationY})`);
 
     this.svg
       .attr("width", this.outside_width)
       .attr("height", this.outside_height)
+      .on("click", function(){
+        animateWaveFall();
+      })
 
     var arc = d3.arc()
       .startAngle(0)
@@ -136,31 +139,30 @@ export class LiquidFillGauge{
       .attr("font-size", textPixels + "px")
       .style("fill", waveTextColor)
       .attr('transform','translate('+radius+','+textRiseScaleY(textVertPosition)+')');
-    text.transition()
-      .duration(waveRiseTime)
-      .tween("text", textTween);
-    waveText.transition()
-      .duration(waveRiseTime)
-      .tween("text", textTween);
     var waveGroupXPosition = fillCircleMargin+fillCircleRadius*2-waveClipWidth;
     var waveRiseScale = d3.scaleLinear()
       .range([fillCircleMargin+fillCircleRadius*2+waveHeightValue,fillCircleMargin-waveHeightValue])
       .domain([0,1]);
-    console.log(waveRiseScale);
-    console.log(fillPercent);
-    console.log(fillCircleMargin+fillCircleRadius*2+waveHeightValue);
-    console.log(fillCircleMargin-waveHeightValue);
     
-    console.log(waveRiseScale(fillPercent));
-    waveGroup.attr('transform','translate('+waveGroupXPosition+','+waveRiseScale(waveIsFall)+')')
-      .transition()
-      .duration(waveRiseTime)
-      .attr('transform','translate('+waveGroupXPosition+','+waveRiseScale(fillPercent)+')')
     var waveAnimateScale = d3.scaleLinear()
       .range([0, waveClipWidth-fillCircleRadius*2])
       .domain([0,1]);
-    
+
+    animateWaveFall();
     animateWave();
+
+    function animateWaveFall(){
+      text.transition()
+        .duration(waveRiseTime)
+        .tween("text", textTween);
+      waveText.transition()
+        .duration(waveRiseTime)
+        .tween("text", textTween);
+      waveGroup.attr('transform','translate('+waveGroupXPosition+','+waveRiseScale(waveIsFall)+')')
+        .transition()
+        .duration(waveRiseTime)
+        .attr('transform','translate('+waveGroupXPosition+','+waveRiseScale(fillPercent)+')')
+    }
     
     function animateWave() {
       wave.attr('transform','translate('+waveAnimateScale(wave.attr('T'))+',0)');
