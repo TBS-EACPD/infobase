@@ -27,7 +27,7 @@ export class LiquidFillGauge{
     var fillPercent = this.options.value / this.options.totalValue;
     var textValue = parseFloat(fillPercent * 100).toFixed(1);
     var textPixels = (this.options.textSize*radius/2) || (radius/2);
-    var titleGap = this.options.titleGap || 20;
+    var titleGap = this.options.titleGap || 40;
     var circleThickness = this.options.circleThickness * radius || 0.05 * radius;
     var circleFillGap = this.options.circleFillGap * radius || 0.05 * radius;
     var fillCircleMargin = circleThickness + circleFillGap;
@@ -60,7 +60,7 @@ export class LiquidFillGauge{
           "position": "absolute",
           "font-weight": "500",
           "left": margin.left+"px",
-          "top": `-${titleGap}px`,
+          "top": `0px`,
           "width": width+"px",
         })
         .append("div")

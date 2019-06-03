@@ -54,7 +54,8 @@ new PanelGraph({
             <Col size={3} isGraph>
               <LiquidFillGauge 
                 height={200}
-                title="Department of Finance"
+                titleGap={65}
+                title={Subject.Gov.name}
                 totalValue={graph_args.data1[0].value}
                 value={graph_args.data1[1].value}
               />
@@ -62,7 +63,8 @@ new PanelGraph({
             <Col size={3} isGraph>
               <LiquidFillGauge
                 height={200}
-                title="Government"
+                title={subject.fancy_name}
+                titleGap={65}
                 totalValue={graph_args.data2[0].value}
                 value={graph_args.data2[1].value}
               />
