@@ -1,24 +1,19 @@
 @import "../common_css/common-variables";
 
 .loader-container{
-    left: 50% !important;
-    margin-left:-100px;
-    position: fixed !important;
-    top: 50% !important;
-    margin-top: -100px;
-    width: 45px;
-    z-index: 9000 !important;
-}
-
-.loader-container .loader {
-  position: relative;
-  margin: 0px auto;
-  width: 200px;
-  height:200px;
+    left: 50%;
+    margin-left:-50px;
+    position: absolute;
+    top: 50%;
+    margin-top: -50px;
+    z-index: 9000;
+    width: 100px;
+    height:100px;
 }
 
 .circular-loader {
   -webkit-animation: rotate 2s linear infinite;
+      -ms-animation: rotate 2s linear infinite;
           animation: rotate 2s linear infinite;
   height: 100%;
   -webkit-transform-origin: center center;
@@ -45,6 +40,7 @@
   stroke-dasharray: 150,200;
   stroke-dashoffset: -10;
   -webkit-animation: dash 1.5s ease-in-out infinite, ease-in-out infinite;
+      -ms-animation: dash 1.5s ease-in-out infinite, ease-in-out infinite;
           animation: dash 1.5s ease-in-out infinite, ease-in-out infinite;
   stroke-linecap: round;
 }
@@ -52,6 +48,7 @@
 @-webkit-keyframes rotate {
   100% {
     -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
             transform: rotate(360deg);
   }
 }
@@ -59,6 +56,7 @@
 @keyframes rotate {
   100% {
     -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
             transform: rotate(360deg);
   }
 }
@@ -76,6 +74,7 @@
     stroke-dashoffset: -124;
   }
 }
+
 @keyframes dash {
   0% {
     stroke-dasharray: 1,200;
