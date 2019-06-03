@@ -1,21 +1,22 @@
 import express from 'express';
 import body_parser from 'body-parser';
 import compression from 'compression';
+import _ from 'lodash';
 
-const log_email_request = (request) => {
-  const request_is_empty = (_.isEmpty(request.body) || !request.body) && (_.isEmpty(request.query) || !request.query);
-  if (request_is_empty){
-    console.log( /* eslint-disable-line no-console */
-      "Empty request"
-    );
-  } else {
-    console.log( /* eslint-disable-line no-console */
-      `
-        body: ${request.body},
-        query: ${request.query},
-      `
-    );
-  }
+import report_a_problem from '../templates/report_a_problem.json';
+
+const get_request_content = (request) => (!_.isEmpty(request.body) && request.body) || (!_.isEmpty(request.query) && request.query);
+
+const log_email_request = (request, log_message) => {
+  const request_content = get_request_content(request);
+  console.log( /* eslint-disable-line no-console */
+    JSON.stringify(
+      _.pickBy({
+        log_message,
+        request_content,
+      })
+    )
+  );
 };
 
 
@@ -31,18 +32,30 @@ email_server.use(function (request, response, next) {
   if (request.method === 'OPTIONS') {
     response.sendStatus(200);
   } else {
-    !global.IS_DEV_SERVER && log_email_request(request);
     next();
   }
 });
 
 
-// TODO: what can I do to prevent spam hammering? Is that in-scope right now?
+// TODO: what can I do to mitigate endpoint spam? Is that in-scope right now?
 
 
 email_server.get(
   'email_template',
-  (request, response) => "TODO" //TODO, function from some other module, take query param as argument for name of template
+  (request, response) => {
+    const {
+      lang,
+      template_name,
+    } = get_request_content(request);
+
+    // will need to re-implement if we ever need a second email template, but for now it's just the one version of report_a_problem
+    if (!_.includes(["en", "fr"], lang) || template_name !== "report_a_problem"){
+      log_email_request(request, "Error: email template request has invalid or missing lanuage or template_name value(s)");
+      response.sendStatus("400");
+    } else {
+      response.json(report_a_problem[lang]);
+    }
+  }
 );
 
 
