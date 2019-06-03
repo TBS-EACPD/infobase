@@ -10,7 +10,7 @@ import {
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const { CirclePieChart } = declarative_charts;
+const { LiquidFillGauge } = declarative_charts;
 
 new PanelGraph({
   key: "employee_last_year_totals",
@@ -47,14 +47,10 @@ new PanelGraph({
             <TM k="dept_employee_last_year_totals_text" args={info} />
           </Col>
           <Col size={7} isGraph>
-            <CirclePieChart
+            <LiquidFillGauge
               height = {300}
-              font_size = "16"
-              font_weight = "bold"
-              colors = {infobase_colors()}
-              formatter = {(d) => (formats["big_int_real_raw"](d) + "\n" + text_maker("employees"))}
-              data = {graph_args.vals}
-              center = {graph_args.center}
+              value={graph_args.vals[1].value}
+              totalValue = {graph_args.vals[0].value}
             />
           </Col>
         </StdPanel>

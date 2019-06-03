@@ -12,7 +12,7 @@ import {
   declarative_charts,
 } from "../shared";
 
-const { CirclePieChart } = declarative_charts;
+const { LiquidFillGauge } = declarative_charts;
 
 new PanelGraph({
   level: "dept",
@@ -52,23 +52,19 @@ new PanelGraph({
         { !window.is_a11y_mode &&
           <Fragment>
             <Col size={3} isGraph>
-              <CirclePieChart 
-                height={300}
-                colors={colors}
-                formatter={formats.compact1}
-                font_size="16"
-                title={Subject.Gov.name}
-                data={graph_args.data1}
+              <LiquidFillGauge 
+                height={200}
+                title="Department of Finance"
+                totalValue={graph_args.data1[0].value}
+                value={graph_args.data1[1].value}
               />
             </Col>
             <Col size={3} isGraph>
-              <CirclePieChart
-                height={300}
-                colors={colors}
-                formatter={formats.compact1}
-                font_size="16"
-                title={subject.fancy_name}
-                data={graph_args.data2}
+              <LiquidFillGauge
+                height={200}
+                title="Government"
+                totalValue={graph_args.data2[0].value}
+                value={graph_args.data2[1].value}
               />
             </Col>
           </Fragment>

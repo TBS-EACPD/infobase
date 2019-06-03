@@ -27,6 +27,7 @@ export class LiquidFillGauge{
     var fillPercent = this.options.value / this.options.totalValue;
     var textValue = parseFloat(fillPercent * 100).toFixed(1);
     var textPixels = (this.options.textSize*radius/2) || (radius/2);
+    var titleGap = this.options.titleGap || 20;
     var circleThickness = this.options.circleThickness * radius || 0.05 * radius;
     var circleFillGap = this.options.circleFillGap * radius || 0.05 * radius;
     var fillCircleMargin = circleThickness + circleFillGap;
@@ -49,10 +50,29 @@ export class LiquidFillGauge{
     var waveRiseTime = this.options.waveRiseTime || 2200
     var waveAnimateTime = this.options.waveAnimateTime || 2400
 
+    if(this.options.title){
+      locationY = locationY + titleGap;
+      this.outside_height = this.outside_height + titleGap;
+      this.html.append("div")
+        .attr("class", "title center-text")
+        .styles({
+          "font-size": textPixels/2 + "px",
+          "position": "absolute",
+          "font-weight": "500",
+          "left": margin.left+"px",
+          "top": `-${titleGap}px`,
+          "width": width+"px",
+        })
+        .append("div")
+        .styles({"width": "80%","margin": "auto"})
+        .html(this.options.title);
+    };
+
+
     this.graph = this.svg.append("g")
       .attr("class","_graph_area")
       .attr("transform", `translate(${locationX},${locationY})`)
-      
+
     this.svg
       .attr("width", this.outside_width)
       .attr("height", this.outside_height)
@@ -94,16 +114,17 @@ export class LiquidFillGauge{
     for(var i = 0; i <= 40*waveClipCount; i++){
       data.push({x: i/(40*waveClipCount), y: (i/(40))});
     }
+    const uniqueId = _.uniqueId("clipWave_");
     var waveGroup = this.graph.append("defs")
       .append("clipPath")
-      .attr("id", "clipWave" + "elementId");
+      .attr("id", uniqueId);
     var wave = waveGroup.append("path")
       .datum(data)
       .attr("d", clipArea)
       .attr("T", 0);
 
     var fillCircleGroup = this.graph.append("g")
-      .attr("clip-path", "url(#clipWave" + "elementId" + ")");
+      .attr("clip-path", `url(#${uniqueId})`);
     var circle = fillCircleGroup.append("circle")
       .attr("cx", radius)
       .attr("cy", radius)
@@ -125,6 +146,12 @@ export class LiquidFillGauge{
     var waveRiseScale = d3.scaleLinear()
       .range([fillCircleMargin+fillCircleRadius*2+waveHeightValue,fillCircleMargin-waveHeightValue])
       .domain([0,1]);
+    console.log(waveRiseScale);
+    console.log(fillPercent);
+    console.log(fillCircleMargin+fillCircleRadius*2+waveHeightValue);
+    console.log(fillCircleMargin-waveHeightValue);
+    
+    console.log(waveRiseScale(fillPercent));
     waveGroup.attr('transform','translate('+waveGroupXPosition+','+waveRiseScale(waveIsFall)+')')
       .transition()
       .duration(waveRiseTime)
