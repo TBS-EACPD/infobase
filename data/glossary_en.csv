@@ -22,7 +22,16 @@ An organization’s expenditure authority received through appropriation acts ma
 "AVAIL","Available from Previous Years","Funds available from previous years are spending authorities allowed to be brought forward from the previous fiscal year. These amounts are available for spending in the current fiscal year without further approval from Parliament. These funds include only those authorities where there is a specified dollar limit on total spending or on the accumulated outstanding balance of items where revenues and receipts are available for spending. Usually these items represent revolving funds, proceeds from the disposal of surplus Crown assets or loans authorities."
 "BIV_ALLO","Allocated","Funding approved by the Treasury Board, to be transferred from the Budget Implementation vote to an organization’s votes for operating or capital expenditures, grants or contributions upon receipt of full supply."
 "BIV_FUND","Budget Funding","New spending measures listed in Table A2.11 of the Budget Plan."
+"BIV_MEASURE","Budget measure","Spending measures implemented through Budget Implementation votes. A budget measure can be represented across multiple departments."
 "BIV_REMA","Remaining","Balance of funding that remains unallocated in the Budget Implementation vote."
+"BIV_VOTE","Budget Implementation Vote","A Treasury Board managed central vote for Budget Implementation.  
+
+In 2018-19, the Budget Implementation vote included all the funding that was set out in Table A2.11 of the 2018 Federal Budget, enabling the timely implementation of Budget measures for Canadians.
+
+In 2019-20, each voted budgetary measure included in Table A2.11 in the 2019 Federal Budget has a separate Budget Implementation vote in the department identified.
+
+Budget Implementation Votes do not include the following measures presented in Table A2.11 of the 2019 Budget: (1) Improving the Health and Safety of Canadian Workers (Canadian Centre for Occupational Health and Safety); and (2) Insuring Income Replacement Benefits for Medically Released Members of the Forces (Department of National Defence); (3) Departmental Allocation To Be Determined; and (4) Other Budget 2019 Measures (Estimates Basis).
+"
 "BIV_WITH","Withheld","Expenditures to be made through other authorities, such as statutory expenditures for Employee Benefits Plans, benefits and administration costs for Employment Insurance, reprofiles to subsequent fiscal years, or amounts set aside to cover the costs of office accommodation and information technology services."
 "BUD_AUTH_CURRENT","Budgetary authority used in the current year","Budgetary authority used in the current year refers to the amounts spent in the current year (net of actual revenues and receipts available for spending)."
 "BUD_EXP","Budgetary expenditures","Budgetary expenditures are expenditures made in accordance with specific votes or other authorities in the Estimates, or to statutory appropriations or other authorities included in various statutes and elsewhere. Budgetary expenditures consist of the cost of servicing the public debt; operating and capital expenditures; transfer payments to other levels of government, organizations or individuals; and payments to Crown corporations."
@@ -461,17 +470,4 @@ Program metadata, which comprises: (1) linkage tags that identify the connection
 "TP","Transfer payment","A transfer payment is a monetary payment, or a transfer of goods, services or assets made, on the basis of an appropriation, to a third party, including a Crown corporation, that does not result in the acquisition by the Government of Canada of any goods, services or assets. Transfer payments are categorized as grants, contributions and other transfer payments. Transfer payments do not include investments, loans or loan guarantees."
 "VOTED","Voted amounts","Voted amounts refer to the amounts approved in appropriation acts."
 "YI_IGOC","Year of Incorporation","The year in which an organization was legally established."
-"BIV_VOTE","Budget Implementation Vote","A Treasury Board managed central vote for Budget Implementation. 
 
- 
-
-In 2018-19, the Budget Implementation vote included all the funding that was set out in Table A2.11 of the 2018 Federal Budget, enabling the timely implementation of Budget measures for Canadians.
-
- 
-
-In 2019-20, each voted budgetary measure included in Table A2.11 in the 2019 Federal Budget has a separate Budget Implementation vote in the department identified.
-
- 
-
-Budget Implementation Votes do not include the following measures presented in Table A2.11 of the 2019 Budget: (1) Improving the Health and Safety of Canadian Workers (Canadian Centre for Occupational Health and Safety); and (2) Insuring Income Replacement Benefits for Medically Released Members of the Forces (Department of National Defence); (3) Departmental Allocation To Be Determined; and (4) Other Budget 2019 Measures (Estimates Basis)."
-"BIV_MEASURE","Budget measure","Spending measures implemented through Budget Implementation votes. A budget measure can be represented across multiple departments."

@@ -23,7 +23,16 @@ L'autorisation de dépenser accordée à une organisation au moyen de lois de cr
 "AVAIL","Reports des exercices antérieurs","Autorisations de dépenses reportées des exercices antérieurs. Comprennent seulement les autorisations pour lesquelles il existe une limite spécifique quant au montant total à être dépensé, ou sur le solde cumulatif en circulation pour les crédits pour lesquels il est permis de dépenser les recettes et rentrées de fonds. Ces crédits représentent généralement soit des autorisations relatives à des fonds renouvelables, au produit de la vente de biens excédentaires de l'État ou à des prêts. Ces montants sont disponibles pour être dépensés sans aucune autre autorisation du Parlement."
 "BIV_ALLO","Affectés","Fonds approuvés par le Conseil du Trésor qui seront transférés du crédit d’exécution du budget aux crédits d’une organisation pour des dépenses de fonctionnement, des dépenses en capital, des subventions ou des contributions lors de l’obtention de la totalité des crédits pour le budget principal des dépenses."
 "BIV_FUND","Fonds du budget","Nouvelles mesures de dépenses figurant au tableau A2.11 du plan budgétaire."
+"BIV_MEASURE","Mesure budgétaire","Mesures de dépenses activées par les crédits d'exécution du budget. Une mesure budgétaire peut être répartie parmi plusieurs ministères."
 "BIV_REMA","Restants","Solde des fonds non affectés dans le crédit d’exécution du budget."
+"BIV_VOTE","Crédit d’exécution du budget","Crédit central géré par le Conseil du Trésor pour l’exécution du budget.
+
+En 2018-2019, le crédit d’exécution du budget incluait tous les fonds figurant dans le tableau A2.11 du budget fédéral de 2019, ce qui permettait la mise en œuvre rapide des mesures budgétaires pour les Canadiens.
+
+En 2019-2020, chaque mesure budgétaire votée figurant dans le tableau A2.11 du budget fédéral de 2019 a son propre crédit d’exécution du budget dans le ministère concerné.
+
+Crédits d’exécution du budget ne comprennent pas les mesures suivantes qui figurent au tableau A2.11 du budget de 2019 : (1) améliorer la santé et la sécurité des travailleurs canadiens (Centre canadien d'hygiène et de sécurité au travail); (2) garantir les prestations de remplacement du revenu des membres des Forces qui ont obtenu une libération pour des raisons médicales (ministère de la Défense nationale); (3) Affectation à déterminer; et (4) Autres mesures annoncées dans le budget de 2019 (budgets de dépenses).
+"
 "BIV_WITH","Retenus","Dépenses à engager en vertu d’autres autorisations, comme les dépenses législatives pour le Régime d’avantages sociaux des employés, les prestations et frais d’administration de l’assurance-emploi, les reports aux exercices suivants ou les montants réservés pour couvrir les coûts des locaux à bureaux et des services informatiques."
 "BUD_AUTH_CURRENT","Autorisation budgétaire utilisée dans l'exercice en cours","Montants dépensés pendant l’exercice en cours (moins les recettes et rentrées de fonds disponibles pour dépenser)."
 "BUD_EXP","Dépenses budgétaires","Par « dépenses budgétaires », on entend les dépenses faites conformément à des crédits précis ou à d’autres autorisations figurant aux budgets des dépenses, ou encore à des crédits législatifs ou à d'autres autorisations figurant dans diverses lois et ailleurs. Les dépenses budgétaires comprennent les dépenses liées au service de la dette publique, les dépenses de fonctionnement et en capital, les paiements de transfert versés à d'autres ordres de gouvernement, à des organisations ou à des personnes, ainsi que les paiements versés à des sociétés d'État."
@@ -458,17 +467,4 @@ Programme de métadonnées, comprenant ce qui suit : 1) des étiquettes de lien 
 "TP","Paiement de transfert","Par « paiement de transfert », on entend un paiement monétaire ou un transfert de biens, de services ou d'actifs effectué en fonction de crédits à une tierce partie bénéficiaire, y compris une société d'État, et qui n'a pas pour résultat l'acquisition de biens, de services ou d'actifs par le gouvernement du Canada. Les paiements de transfert comportent les catégories suivantes : les subventions, les contributions et les autres paiements de transfert. Les paiements de transfert n'incluent pas les investissements, les prêts ni les garanties d'emprunt."
 "VOTED","Montants votés","Par «  votés », on entend les montants autorisés aux termes des lois de crédits"
 "YI_IGOC","Année de constitution en société","Année au cours de laquelle l’organisation a été légalement constituée en société."
-"BIV_VOTE","Crédit d’exécution du budget","Crédit central géré par le Conseil du Trésor pour l’exécution du budget.
 
- 
-
-En 2018-2019, le crédit d’exécution du budget incluait tous les fonds figurant dans le tableau A2.11 du budget fédéral de 2019, ce qui permettait la mise en œuvre rapide des mesures budgétaires pour les Canadiens.
-
- 
-
-En 2019-2020, chaque mesure budgétaire votée figurant dans le tableau A2.11 du budget fédéral de 2019 a son propre crédit d’exécution du budget dans le ministère concerné.
-
- 
-
-Crédits d’exécution du budget ne comprennent pas les mesures suivantes qui figurent au tableau A2.11 du budget de 2019 : (1) améliorer la santé et la sécurité des travailleurs canadiens (Centre canadien d'hygiène et de sécurité au travail); (2) garantir les prestations de remplacement du revenu des membres des Forces qui ont obtenu une libération pour des raisons médicales (ministère de la Défense nationale); (3) Affectation à déterminer; et (4) Autres mesures annoncées dans le budget de 2019 (budgets de dépenses)."
-"BIV_MEASURE","Mesure budgétaire","Mesures de dépenses activées par les crédits d'exécution du budget. Une mesure budgétaire peut être répartie parmi plusieurs ministères."
