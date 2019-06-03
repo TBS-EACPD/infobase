@@ -1,0 +1,56 @@
+{
+  "plugins": [
+    "react",
+    "node"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true
+    },
+    "ecmaVersion": 2017,
+    "sourceType": "module"
+  },
+  "env": {
+      "browser": true,
+      "commonjs": true
+  },
+  "extends": [ "eslint:recommended", "plugin:react/recommended", "plugin:node/recommended" ],
+  "rules": {
+      "node/no-unsupported-features": ["error", {"ignores": ["modules"]}],
+      "indent": [
+          "warn",
+          2,
+          {
+            "SwitchCase" : 1,
+            "ignoredNodes": ["ConditionalExpression"],
+            "flatTernaryExpressions": true
+          }
+      ],
+      "comma-dangle":[ "warn", "always-multiline" ],
+      "linebreak-style": [
+          "off",
+          "unix"
+      ],
+      "semi": [
+          "off",
+          "always"
+      ],
+      "no-unused-vars": [
+        "warn",
+        { "args": "none" }
+      ],
+      "no-extra-semi": ["off"],
+      "react/prop-types" : [ "off" ],
+      "react/no-string-refs" : [ "off" ],
+      "react/display-name" : [ "off" ],
+      "react/no-find-dom-node" : [ "off" ]
+  },
+  "globals": {
+    "_": true,
+    "describe": true,
+    "it": true,
+    "expect": true,
+    "process": true
+  }
+}

@@ -1,0 +1,15 @@
+.gcloudignore
+.git
+.gitignore
+
+node_modules
+*.DS_Store
+*.swp
+*.swo
+.vscode/
+npm-debug*
+coverage/
+*credentials*.json
+
+coverage/
+src/
