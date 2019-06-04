@@ -28,6 +28,7 @@ new PanelGraph({
         ["end_yr", subject.end_yr],
         ["notes", subject.notes],
         ["applied_title", subject.applied_title],
+        ["acronym", subject.fancy_acronym],
         ["previously_named", subject.old_name],
         ["incorp_yr", subject.incorp_yr],
         ["type", subject.type],

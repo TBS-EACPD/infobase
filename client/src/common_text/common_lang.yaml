@@ -160,6 +160,9 @@ previously_named:
 applied_title:
   en: Applied Title
   fr: Titre appliqué
+acronym:
+  en: Acronym
+  fr: Acronyme
 previous_applied_title:
   en: Previous Applied Title
   fr: Titre appliqué précédent
