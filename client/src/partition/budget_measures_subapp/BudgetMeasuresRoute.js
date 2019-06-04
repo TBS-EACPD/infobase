@@ -8,7 +8,6 @@ import { StandardRouteContainer } from '../../core/NavComponents.js';
 import { 
   SpinnerWrapper,
   Details,
-  EmbeddedVideo,
   TabbedControls,
 } from '../../util_components';
 
@@ -174,13 +173,6 @@ export default class BudgetMeasuresRoute extends React.Component {
         { !loading &&
           <div className="budget-measures">
             <div className="budget-measures-top-text">
-              { year_value === "2018" &&
-                <EmbeddedVideo
-                  title = { text_maker("budget_alignment_video_title") }
-                  video_source = { text_maker("budget_alignment_video_src") }
-                  transcript = { text_maker("budget_alignment_video_transcript") }
-                />
-              }
               <TextMaker 
                 text_key={`budget${year_value}_route_top_text`}
                 args={{
