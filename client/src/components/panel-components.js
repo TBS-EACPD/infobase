@@ -96,7 +96,7 @@ class Panel_ extends React.Component {
               />
             }
             {context && !window.feature_detection.is_IE() && generating_pdf &&
-              <SpinnerWrapper config_name={"small_inline"} />
+              <SpinnerWrapper config_name={"small_inline"} leaf={false} />
             }
             { context && !context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) && 
               <a href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
