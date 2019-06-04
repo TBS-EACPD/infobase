@@ -3,7 +3,6 @@ import leaf_loading_spinner from '../svg/leaf-loading-spinner.svg';
 
 export default function(){
   const app_el = document.querySelector('#app');
-  
   const containerDiv = document.createElement('div');
   containerDiv.className = 'faded-loading-container--true';
   containerDiv.style.position = 'fixed';
