@@ -49,8 +49,6 @@ const PanelSource = ({links}) => {
   );
 };
 
-
-
 export const Panel = props => {
   const { Consumer } = panel_context;
   return (

@@ -1,6 +1,4 @@
 import './Loader.scss' ;
-//import { logo } from '../svg/loader.svg'
-//import { get_static_url } from '../request_utils.js';
 
 export const Loader = ({scale}) => {
   return (
@@ -11,7 +9,7 @@ export const Loader = ({scale}) => {
       <svg className="circular-loader-two"viewBox="25 25 50 50" >
         <circle className="loader-path-two" cx="50" cy="50" r="20" fill="none" stroke={window.infobase_color_constants.secondaryColor} strokeWidth="1" />
       </svg>
-      <svg version="1.1" id="logo" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
         viewBox="0 0 650 650">
         <path className="leaf" d="M314.7,562l5.2-99.1c0.3-6-4.4-11.1-10.4-11.4c-0.8,0-1.6,0-2.4,0.1l-98.7,17.3l13.3-36.8
           c1.1-3,0.2-6.4-2.3-8.4l-108.1-87.5l24.4-11.4c3.4-1.6,5.1-5.5,3.9-9.1L118.2,250l62.3,13.2c3.5,0.7,7-1.1,8.4-4.4l12.1-28.4
