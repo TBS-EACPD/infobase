@@ -60,7 +60,7 @@ email_server.get(
 
 
 email_server.post(
-  'email', 
+  'submit_email', 
   (request, response) => {
     // request body will be JSON, containing name of template and filled out template
     // 1) validate template (check against template, also security/content check?)
