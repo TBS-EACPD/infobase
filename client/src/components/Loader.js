@@ -3,11 +3,13 @@ import './Loader.scss' ;
 //import { get_static_url } from '../request_utils.js';
 
 export const Loader = ({scale}) => {
-
   return (
     <div className="loader-container" style={{transform: `scale(${scale})`}}>
       <svg className="circular-loader"viewBox="25 25 50 50" >
-        <circle className="loader-path" cx="50" cy="50" r="20" fill="none" stroke={window.infobase_color_constants.primaryColor} strokeWidth="2" />
+        <circle className="loader-path" cx="50" cy="50" r="22" fill="none" stroke={window.infobase_color_constants.primaryColor} strokeWidth="2" />
+      </svg>
+      <svg className="circular-loader-two"viewBox="25 25 50 50" >
+        <circle className="loader-path-two" cx="50" cy="50" r="20" fill="none" stroke={window.infobase_color_constants.secondaryColor} strokeWidth="1" />
       </svg>
       <svg version="1.1" id="logo" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
         viewBox="0 0 650 650">
