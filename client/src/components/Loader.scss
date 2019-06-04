@@ -13,34 +13,33 @@
 
 .circular-loader {
   -webkit-animation: rotate 2s linear infinite reverse;
-      -ms-animation: rotate 2s linear infinite reverse;
-          animation: rotate 2s linear infinite reverse;
-  height: 100%;
-  -webkit-transform-origin: center center;
-      -ms-transform-origin: center center;
-          transform-origin: center center;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0.7;
-  
+  -ms-animation: rotate 2s linear infinite reverse;
+  -moz-animation: rotate 2s linear infinite reverse;
+  -webkit-animation: rotate 2s linear infinite reverse;
+  animation: rotate 2s linear infinite reverse; 
 }
 
 .circular-loader-two {
   -webkit-animation: rotate 2s linear infinite ;
-      -ms-animation: rotate 2s linear infinite ;
-          animation: rotate 2s linear infinite ; 
-  height: 100%;
+  -ms-animation: rotate 2s linear infinite ;
+  -moz-animation: rotate 2s linear infinite ;
+  -o-animation: rotate 2s linear infinite ;
+  animation: rotate 2s linear infinite ; 
+}
+
+.circular-loader, .circular-loader-two {
   -webkit-transform-origin: center center;
-      -ms-transform-origin: center center;
-          transform-origin: center center;
+  -ms-transform-origin: center center;
+  -moz-transform-origin: center center;
+  -o-transform-origin: center center;
+  transform-origin: center center;
+
+  height: 100%;
   width: 100%;
   position: absolute;
   top: 0;
   left: 0;
   opacity: 0.7;
-  
 }
 
 .leaf {
@@ -68,16 +67,20 @@
 @-webkit-keyframes rotate {
   100% {
     -webkit-transform: rotate(360deg);
-        -ms-transform: rotate(360deg);
-            transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
 @keyframes rotate {
   100% {
     -webkit-transform: rotate(360deg);
-        -ms-transform: rotate(360deg);
-            transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
