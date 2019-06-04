@@ -73,7 +73,6 @@ export class LiquidFillGauge{
     this.graph = this.svg.append("g")
       .attr("class","_graph_area")
       .attr("transform", `translate(${locationX},${locationY})`);
-    console.log(locationY);
     this.graph.append("svg:image")
       .attr("xlink:href", get_static_url("svg/replay.svg"))
       .attr("transform", `translate(0,0)`)
@@ -155,6 +154,7 @@ export class LiquidFillGauge{
       .domain([0,1]);
 
     const animateWaveRiseFall = () => {
+      waveGroup.interrupt();
       waveGroup.attr('transform',`translate(${waveGroupXPosition},${waveRiseScale(waveIsFall)})`)
         .transition()
         .duration(waveRiseFallTime)
@@ -165,7 +165,7 @@ export class LiquidFillGauge{
       waveText.transition()
         .duration(waveRiseFallTime)
         .tween("text", textTween);
-    }
+    };
 
     const animateWave = () => {
       wave.attr('transform',`translate(${waveAnimateScale(wave.attr('T'))},0)`);
