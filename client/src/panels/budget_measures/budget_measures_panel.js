@@ -710,7 +710,7 @@ class BudgetMeasureHBars extends React.Component {
         }
       </div>;
     } else {
-      const biv_value_colors = d3.scaleOrdinal().range(newIBLightCategoryColors);
+      const biv_value_colors = d3.scaleOrdinal().range(_.at(newIBLightCategoryColors, [0,2,4]));
 
       const nivo_default_props = {
         data: data,
