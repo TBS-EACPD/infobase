@@ -83,6 +83,10 @@ const get_rules = ({
     test: /\.json$/,
     use: [{loader: 'json-loader'}],
   },
+  {
+    test: /\.svg$/,
+    loader: 'svg-inline-loader',
+  },
 ];
 
 
