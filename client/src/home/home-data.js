@@ -1,15 +1,6 @@
 import { rpb_link } from '../rpb/rpb_link.js';
 
 const featured_content_items = _.compact([
-  !window.is_a11y_mode && {
-    text_key: 'quick_link_youtube_video',
-    href: {
-      en: "https://www.youtube.com/watch?v=WG1ngAI49Bw",
-      fr: "https://www.youtube.com/watch?v=RrvWQJsrSVk",
-    }[window.lang],
-    is_link_out: true,
-    is_youtube: true,
-  },
   {
     text_key: 'quick_link_budget_2019',
     href: '#budget-tracker/budget-measure/overview/budget-2019',

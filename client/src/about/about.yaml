@@ -228,4 +228,38 @@ feedback_text:
     Nous sommes constamment à la recherche d’idées et de suggestions pour améliorer la version actuelle de l’InfoBase. Le cas échéant, veuillez prendre quelques minutes pour remplir 
     notre <a href="{{{survey_link}}}" target="_blank" rel="noopener noreferrer">sondage en ligne</a>.
 
+about_video_title:
+  en: GC InfoBase at a glance (introduction video)
+  fr: InfoBase du GC en un coup d’œil (vidéo d'introduction)
 
+about_video_src:
+  en: https://www.youtube-nocookie.com/embed/WG1ngAI49Bw?rel=0
+  fr: https://www.youtube-nocookie.com/embed/RrvWQJsrSVk?rel=0
+
+about_video_transcript:
+  transform: [markdown]
+  en: |
+    **Welcome to GC InfoBase!**
+    * This is your go to source for information on government spending, employee statistics, and results against plans and priorities, to name a few.
+    * GC InfoBase answers your questions by transforming complex data into simple visual stories.
+    * Start with clicking on “Government at a Glance” to see how money flows from the Treasury Board toward a specific departmental program.
+    * From there, you can find links to customized infographics which are also available for all level of government, from the GoC down to specific programs.
+    * The Budget Tracker makes it possible to follow where public funds are going and how they will be spent!
+    * You can now track budget items as they move through the different approvals down to the programs delivering the services.
+    * InfoBase also allows you to find out how many organizations are part of the Government.
+    * The Report Builder allows you to filter, sort and export the data you want.
+    * As you can see, GC InfoBase can present data in whatever way works best for you.
+    * You can also find all the data in raw form on the Government of Canada Open Data Portal.
+    * Find more information on the team behind the tool, the technology used and ways to share your ideas.
+  fr: |
+    **Bienvenue dans l’InfoBase du GC.**
+    * L’InfoBase est votre première source d’information gouvernementale, entre autres sur les dépenses du gouvernement, les statistiques relatives aux employés et les résultats obtenus par rapport aux plans et aux priorités.
+    * L’InfoBase du GC répond à vos questions en transformant tout simplement des données complexes en descriptifs visuels.
+    * Commencez par cliquez sur « Panorama de l’administration publique » pour voir le cheminement de l’argent du centre vers un programme ministériel particulier.
+    * À partir de là, vous pouvez trouver des liens vers des infographies personnalisées, qui sont aussi à votre disposition à tous les paliers de l’administration publique, allant du gouvernement du Canada jusqu’à des programmes particuliers.
+    * Vous pouvez maintenant faire le suivi des postes budgétaires au fur et à mesure qu’ils passent d’une approbation à l’autre, jusqu’aux programmes de prestation de services.
+    * L’InfoBase vous permet également de savoir combien d’organisations font partie de l’appareil gouvernemental.
+    * Le générateur de rapports vous permet de filtrer, trier et exporter des données.
+    * Comme vous voyez, l’InfoBase du GC peut présenter les données de la façon qui vous convient le mieux.
+    * Vous pouvez également trouver toutes les données brutes sur le portail Gouvernement ouvert.
+    * Trouvez plus d’informations sur l’équipe derrière l’outil, la technologie et les moyens de nous transmettre vos idées.

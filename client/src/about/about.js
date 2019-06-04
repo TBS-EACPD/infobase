@@ -2,7 +2,10 @@ import about_text_bundle from "./about.yaml";
 import './about.scss';
 import '../gen_expl/explorer-styles.scss';
 import { StandardRouteContainer } from '../core/NavComponents.js';
-import { TM } from '../util_components.js';
+import { 
+  TM,
+  EmbeddedVideo,
+} from '../util_components.js';
 import { create_text_maker } from '../models/text.js';
 import { LabeledTable } from '../components/LabeledTable.js'
 import { IconGrid } from '../components/IconGrid.js'
@@ -27,6 +30,11 @@ export default class About extends React.Component {
       >
         <div className="medium_panel_text text-only-page-root">
           <TM tmf={text_maker} el="h1" k="about_page_title" />
+          <EmbeddedVideo
+            title = { text_maker("about_video_title") }
+            video_source = { text_maker("about_video_src") }
+            transcript = { text_maker("about_video_transcript") }
+          />
           <TM tmf={text_maker} el="div" k="about_intro_section" />
           <LabeledTable title={text_maker("principles_title")} content={[
             {name: text_maker("principle_1_name"), desc: text_maker("principle_1_desc")},
