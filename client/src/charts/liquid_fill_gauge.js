@@ -1,4 +1,5 @@
 import common_charts_utils from './common_charts_utils';
+import { get_static_url } from '../request_utils.js';
 
 export class LiquidFillGauge{
   constructor(container, options){
@@ -72,13 +73,18 @@ export class LiquidFillGauge{
     this.graph = this.svg.append("g")
       .attr("class","_graph_area")
       .attr("transform", `translate(${locationX},${locationY})`);
-
-    this.svg
-      .attr("width", this.outside_width)
-      .attr("height", this.outside_height)
+    console.log(locationY);
+    this.graph.append("svg:image")
+      .attr("xlink:href", get_static_url("svg/replay.svg"))
+      .attr("transform", `translate(0,0)`)
+      .style("cursor", "pointer")
       .on("click", (() => {
         animateWaveRiseFall();
       }));
+
+    this.svg
+      .attr("width", this.outside_width)
+      .attr("height", this.outside_height);
 
     const arc = d3.arc()
       .startAngle(0)
@@ -149,16 +155,16 @@ export class LiquidFillGauge{
       .domain([0,1]);
 
     const animateWaveRiseFall = () => {
+      waveGroup.attr('transform',`translate(${waveGroupXPosition},${waveRiseScale(waveIsFall)})`)
+        .transition()
+        .duration(waveRiseFallTime)
+        .attr('transform',`translate(${waveGroupXPosition},${waveRiseScale(fillPercent)})`)
       text.transition()
         .duration(waveRiseFallTime)
         .tween("text", textTween);
       waveText.transition()
         .duration(waveRiseFallTime)
         .tween("text", textTween);
-      waveGroup.attr('transform',`translate(${waveGroupXPosition},${waveRiseScale(waveIsFall)})`)
-        .transition()
-        .duration(waveRiseFallTime)
-        .attr('transform',`translate(${waveGroupXPosition},${waveRiseScale(fillPercent)})`)
     }
 
     const animateWave = () => {
