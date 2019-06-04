@@ -44,10 +44,12 @@ export class ErrorBoundary extends React.Component {
         MISC2: this.state.error.toString(),
       });
     }
-
+    
     this.setState({
       testing_for_stale_client: false,
     });
+
+    throw this.state.error;
   }
   render(){
     const {
