@@ -39,7 +39,7 @@ export class ShareModal extends React.Component {
           <LinkedinShareButton className='icons' url={this.props.url}>
             <LinkedinIcon size={32}></LinkedinIcon>
           </LinkedinShareButton> 
-          <RedditShareButton className='icons' url={this.props.url} title={'GC InfoBase'}>
+          <RedditShareButton className='icons' url={this.props.url}>
             <RedditIcon size={32}></RedditIcon>
           </RedditShareButton>
         </Modal.Body>
