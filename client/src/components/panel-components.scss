@@ -108,6 +108,10 @@
   section.panel > .panel-body {
     background-color: $backgroundColor;
   }
+
+  .panel-heading-utils:active {
+    transform: scale(1.15);
+  }
   
 .panel-separator {
   margin: 20px 60px 20px 60px;

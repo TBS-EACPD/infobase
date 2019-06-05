@@ -10,6 +10,8 @@ import {
   EmailIcon,
   LinkedinShareButton,
   LinkedinIcon,
+  RedditShareButton,
+  RedditIcon,
 } from 'react-share';
 import text from "./ShareModal.yaml" ;
 import { create_text_maker } from '../models/text.js' ;
@@ -37,6 +39,9 @@ export class ShareModal extends React.Component {
           <LinkedinShareButton className='icons' url={this.props.url}>
             <LinkedinIcon size={32}></LinkedinIcon>
           </LinkedinShareButton> 
+          <RedditShareButton className='icons' url={this.props.url} title={'GC InfoBase'}>
+            <RedditIcon size={32}></RedditIcon>
+          </RedditShareButton>
         </Modal.Body>
 
         <Modal.Footer>
