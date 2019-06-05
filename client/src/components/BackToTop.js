@@ -32,6 +32,8 @@ export class BackToTop extends React.Component {
 
   componentDidMount(){
     window.addEventListener("scroll", this.handleScroll);
+
+    // Resizing can reposition the page's scroll position without firing a scroll event, so watch for resizes too
     window.addEventListener("resize", this.handleScroll);
   }
   componentWillUnmount(){
@@ -59,7 +61,6 @@ export class BackToTop extends React.Component {
           caught_by_footer && 'back-to-top--caught'
         )}
         style={{
-          backgroundColor: window.infobase_color_constants.primaryColor,
           top: caught_by_footer ? `${this.page_footer.offsetTop - 50}px` : "auto",
         }} 
         tabIndex='-1' 
