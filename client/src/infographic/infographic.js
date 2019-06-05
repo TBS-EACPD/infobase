@@ -1,4 +1,3 @@
-import { CSSTransitionGroup } from 'react-transition-group';
 import { Redirect } from 'react-router';
 import JSURL from 'jsurl';
 
@@ -368,7 +367,7 @@ const InfoGraph = ({
       description={ desc_key && text_maker(desc_key)}
       route_key={sub_app_name}
     >
-      <TransitionText text={title} />
+      <span key={this.props.text} dangerouslySetInnerHTML={{__html: this.props.text}} />
       <InfoGraph_
         level={level}
         subject={subject}
@@ -377,22 +376,6 @@ const InfoGraph = ({
       />
     </StandardRouteContainer>
   );
-}
-
-class TransitionText extends React.Component {
-  render(){
-    return (
-      <CSSTransitionGroup 
-        component="h1"
-        transitionAppearTimeout={500}
-        transitionName="transi-fade"
-        transitionEnterTimeout={800}
-        transitionLeaveTimeout={0.0001}
-      >
-        <span key={this.props.text} dangerouslySetInnerHTML={{__html: this.props.text}} />
-      </CSSTransitionGroup>
-    );
-  }
 }
 
 export { InfoGraph as default }
