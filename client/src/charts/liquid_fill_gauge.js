@@ -4,7 +4,30 @@ import { get_static_url } from '../request_utils.js';
 export class LiquidFillGauge{
   constructor(container, options){
     common_charts_utils.setup_graph_instance(this, d3.select(container), options);
+    this.initElements();
   };
+  
+  initElements(){
+    this.graph = this.svg.append("g")
+      .attr("class","_graph_area");
+    this.replay = this.graph.append("svg:image")
+      .attr("xlink:href", get_static_url("svg/replay.svg"))
+      .attr("transform", `translate(0,0)`)
+      .style("cursor", "pointer");
+    this.arcPath = this.graph.append("path");
+    this.text = this.graph.append("text");
+
+    const uniqueId = _.uniqueId("clipWave_");
+    this.waveGroup = this.graph.append("defs")
+      .append("clipPath")
+      .attr("id", uniqueId);
+    this.fillCircleGroup = this.graph.append("g")
+      .attr("clip-path", `url(#${uniqueId})`);
+    
+    this.wave = this.waveGroup.append("path")
+    this.circle = this.fillCircleGroup.append("circle")
+    this.waveText = this.fillCircleGroup.append("text")
+  }
 
   render(options){
     this.options = _.extend(this.options,options);
@@ -23,7 +46,7 @@ export class LiquidFillGauge{
     
     const radius = Math.min(parseInt(width), parseInt(height))/2;
     const locationX = parseInt(width)/2 - radius;
-    var locationY = (parseInt(height) - radius)/22;
+    let locationY = (parseInt(height) - radius)/22;
 
     const fillPercent = this.options.value / this.options.totalValue;
     const textValue = parseFloat(fillPercent * 100).toFixed(1);
@@ -38,6 +61,7 @@ export class LiquidFillGauge{
     const waveCount = this.options.waveCount || 1
     const waveLength = fillCircleRadius*2 / waveCount;
     const waveClipCount = 1 + waveCount;
+    const waveClipCountModifier = this.options.waveClipModifier || 40;
     const waveClipWidth = waveLength * waveClipCount;
 
     const outerArcColor = this.options.outerArcColor || window.infobase_color_constants.secondaryColor;
@@ -47,7 +71,7 @@ export class LiquidFillGauge{
   
     const textVertPosition = this.options.textVertPosition || 0.5;
     const waveIsFall = this.options.waveIsFall || 1;
-    const waveDirection = waveIsFall ? 100:0;
+    const waveDirection = waveIsFall ? 100: 0;
     const waveRiseFallTime = this.options.waveRiseFallTime || 2200
     const waveAnimateTime = this.options.waveAnimateTime || 2400
 
@@ -68,15 +92,9 @@ export class LiquidFillGauge{
         .styles({"width": "80%","margin": "auto"})
         .html(this.options.title);
     };
-
-
-    this.graph = this.svg.append("g")
-      .attr("class","_graph_area")
-      .attr("transform", `translate(${locationX},${locationY})`);
-    this.graph.append("svg:image")
-      .attr("xlink:href", get_static_url("svg/replay.svg"))
-      .attr("transform", `translate(0,0)`)
-      .style("cursor", "pointer")
+    this.graph
+      .attr("transform", `translate(${locationX},${locationY})`)
+    this.replay
       .on("click", (() => {
         animateWaveRiseFall();
       }));
@@ -91,7 +109,7 @@ export class LiquidFillGauge{
       .innerRadius(radius)
       .outerRadius(radius+5);
 
-    this.graph.append("path")
+    this.arcPath
       .attr("d", arc)
       .attr("transform", `translate(${radius},${radius})`)
       .style("fill", outerArcColor);
@@ -100,11 +118,11 @@ export class LiquidFillGauge{
       .range([fillCircleMargin+fillCircleRadius*2,(fillCircleMargin+textPixels*0.7)])
       .domain([0,1]);
     const textTween = () =>{
-      var i = d3.interpolate(waveDirection, textValue);
-      return function(t) { this.textContent = `${parseFloat(i(t)).toFixed(1)}%`; }
+      const interpolate_text = d3.interpolate(waveDirection, textValue);
+      return function(t) { this.textContent = `${parseFloat(interpolate_text(t)).toFixed(1)}%`; }
     };
   
-    const text = this.graph.append("text")
+    this.text
       .text(`${textValue}%`)
       .attr("text-anchor", "middle")
       .attr("font-size", `${textPixels}px`)
@@ -114,36 +132,37 @@ export class LiquidFillGauge{
     const waveScaleX = d3.scaleLinear().range([0,waveClipWidth]).domain([0,1]);
     const waveScaleY = d3.scaleLinear().range([0,waveHeightValue]).domain([0,1]);
     const clipArea = d3.area()
-      .x((d) => { return waveScaleX(d.x); } )
-      .y0((d) => { return waveScaleY(Math.sin(d.y*2*Math.PI));} )
-      .y1((d) => { return (fillCircleRadius*2 + waveHeightValue); } );
+      .x((d) => waveScaleX(d.x) )
+      .y0((d) => waveScaleY(Math.sin(d.y*2*Math.PI)) )
+      .y1(() => (fillCircleRadius*2 + waveHeightValue) );
 
-    const data = [];
-    for(var i = 0; i <= 40*waveClipCount; i++){
-      data.push({x: i/(40*waveClipCount), y: (i/(40))});
-    }
-    const uniqueId = _.uniqueId("clipWave_");
-    const waveGroup = this.graph.append("defs")
-      .append("clipPath")
-      .attr("id", uniqueId);
-    const wave = waveGroup.append("path")
+    const data = _.chain(waveClipCountModifier*waveClipCount + 1)
+      .range()
+      .map(
+        ix => ({
+          x: ix/(waveClipCountModifier*waveClipCount),
+          y: ix/waveClipCountModifier,
+        }) 
+      )
+      .value()
+
+    this.wave
       .datum(data)
       .attr("d", clipArea)
       .attr("T", 0);
 
-    const fillCircleGroup = this.graph.append("g")
-      .attr("clip-path", `url(#${uniqueId})`);
-    fillCircleGroup.append("circle")
+    this.circle
       .attr("cx", radius)
       .attr("cy", radius)
       .attr("r", fillCircleRadius)
       .style("fill", circleColor);
-    const waveText = fillCircleGroup.append("text")
+    this.waveText
       .text(`${textValue}%`)
       .attr("text-anchor", "middle")
       .attr("font-size", `${textPixels}px`)
       .style("fill", waveTextColor)
-      .attr('transform',`translate(${radius},${textRiseScaleY(textVertPosition)})`);
+      .attr('transform', `translate(${radius},${textRiseScaleY(textVertPosition)})`);
+
     const waveGroupXPosition = fillCircleMargin+fillCircleRadius*2-waveClipWidth;
     const waveRiseScale = d3.scaleLinear()
       .range([fillCircleMargin+fillCircleRadius*2+waveHeightValue,fillCircleMargin-waveHeightValue])
@@ -154,28 +173,28 @@ export class LiquidFillGauge{
       .domain([0,1]);
 
     const animateWaveRiseFall = () => {
-      waveGroup.interrupt();
-      waveGroup.attr('transform',`translate(${waveGroupXPosition},${waveRiseScale(waveIsFall)})`)
+      this.waveGroup.interrupt();
+      this.waveGroup.attr('transform',`translate(${waveGroupXPosition},${waveRiseScale(waveIsFall)})`)
         .transition()
         .duration(waveRiseFallTime)
         .attr('transform',`translate(${waveGroupXPosition},${waveRiseScale(fillPercent)})`)
-      text.transition()
+      this.text.transition()
         .duration(waveRiseFallTime)
         .tween("text", textTween);
-      waveText.transition()
+      this.waveText.transition()
         .duration(waveRiseFallTime)
         .tween("text", textTween);
     };
 
     const animateWave = () => {
-      wave.attr('transform',`translate(${waveAnimateScale(wave.attr('T'))},0)`);
-      wave.transition()
-        .duration(waveAnimateTime * (1-wave.attr('T')))
+      this.wave.attr('transform',`translate(${waveAnimateScale(this.wave.attr('T'))},0)`);
+      this.wave.transition()
+        .duration(waveAnimateTime * (1-this.wave.attr('T')))
         .ease(d3.easeLinear)
         .attr('transform',`translate(${waveAnimateScale(1)},0)`)
         .attr('T', 1)
         .on('end', (() => {
-          wave.attr('T', 0);
+          this.wave.attr('T', 0);
           animateWave(waveAnimateTime);
         }));
     };
