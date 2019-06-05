@@ -1,4 +1,3 @@
-import { CSSTransitionGroup } from 'react-transition-group';
 import { Redirect } from 'react-router';
 import JSURL from 'jsurl';
 
