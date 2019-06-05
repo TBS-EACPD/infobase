@@ -1,69 +1,59 @@
 @import '../common_css/common-variables';
 
 .back-to-top {
-    display: inline-block;
-    text-decoration: none;
-    text-align: center;
-    padding: 5px;
-    border-radius: 4px;
-    right: 30px;
-    transition: background-color .3s, 
-      opacity .5s, visibility .5s;
-    opacity: 0;
-    visibility: hidden;
-    z-index: 1000;
-    color: white;
-  }
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  padding: 5px;
+  border-radius: 4px;
+  right: 30px;
+  transition: background-color .3s, opacity .5s, visibility .5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+  color: $backgroundColor;
+  background-color: $primaryColor;
 
-  .back-to-top--caught {
-    position: absolute;
-  }
-
-  .back-to-top--shown {
-    position: fixed;
-    bottom: 30px;
-  }
- 
-  .back-to-top:focus {
+  &:focus {
     text-decoration: none;
     color: white;
   }
-  
-  .show {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .back-to-top:active {
+  &:active {
     text-decoration: none;
     color: white;
   }
-
-  .back-to-top:hover {
+  &:hover {
     cursor: pointer;
     text-decoration: none;
     color: white;
     background-color: #333;
   }
 
-  @media(max-width: 600px) {
-    .back-to-top {
-      width: 100%;
-      position: fixed;
-      bottom: 0px;
-      left: 0px;
-      border-radius: 0;
-      padding: 10px;
-    }
-
-    .back-to-top--caught {
-      position: fixed;
-      bottom: 0px;
-    }
+  &.back-to-top--shown {
+    opacity: 1;
+    visibility: visible;
+  }
   
-    .back-to-top--shown {
-      position: fixed;
+  &.back-to-top--caught {
+    position: absolute;
+  }
+  
+  &.back-to-top--fixed {
+    position: fixed;
+    bottom: 30px;
+  }
+
+  @media(max-width: 600px) {
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    border-radius: 0;
+    padding: 10px;
+    border-top: $backgroundColor solid 1px;
+
+    &.back-to-top--fixed {
       bottom: 0px;
-      top: '';
     }
   }
+}

@@ -3,71 +3,48 @@ import { trivial_text_maker } from '../models/text.js';
 import classNames from 'classnames';
 
 export class BackToTop extends React.Component {
-  constructor(props) {
+  constructor(props){
     super(props);
 
     this.state = {
-      shown: true,
+      shown: false,
       caught_by_footer: false,
     };
 
-    this.buttonRef = React.createRef();
     this.handleScroll = this.handleScroll.bind(this);
-    this.handleResize = this.handleResize.bind(this);
+
+    this.page_header = document.getElementById('ib-site-header-area');
+    this.page_footer = document.getElementById('wb-info');
   }
 
-  handleScroll() {
-    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-      this.buttonRef.current.classList.add('show');
-    } else {
-      this.buttonRef.current.classList.remove('show');
-    }
+  handleScroll(){
+    const should_be_shown = window.pageYOffset > (this.page_header.offsetTop + this.page_header.offsetHeight);
     
-    if (window.innerWidth > 600) {
-      this.checkOffset();
-    }
+    const should_be_caught = (window.innerWidth > 600) && (
+      ( window.pageYOffset + window.innerHeight ) > (this.page_footer.offsetTop - 50)
+    );
+
+    this.setState({
+      shown: should_be_shown,
+      caught_by_footer: should_be_caught,
+    });
   };
-
-  handleResize() {
-    if (window.innerWidth < 600) {
-      this.buttonRef.current.style.top = '';
-    }
-  }
-
-  checkOffset() {
-    if(this.buttonRef.current.offsetTop + window.pageYOffset >= document.getElementById('wb-info').offsetTop - 50) { 
-      this.setState({
-        caught_by_footer: true,
-        shown: false,
-      });
-      this.buttonRef.current.style.top = document.getElementById('wb-info').offsetTop - 50+'px';
-    }
-     
-    if((document.documentElement.scrollTop || document.body.scrollTop) + window.innerHeight < document.getElementById('wb-info').offsetTop) {
-      this.setState({
-        caught_by_footer: false,
-        shown: true,
-      });
-      this.buttonRef.current.style.top = '';
-    }
-  }
 
   componentDidMount(){
     window.addEventListener("scroll", this.handleScroll);
-    //window.addEventListener("resize", this.handleResize);
+    window.addEventListener("resize", this.handleScroll);
   }
-
-  componentWillUnmount() {
+  componentWillUnmount(){
     window.removeEventListener("scroll", this.handleScroll);
-    //window.removeEventListener("resize", this.handleResize);
+    window.removeEventListener("resize", this.handleScroll);
   }
   
-  handleClick() {
+  handleClick(){
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     document.querySelector(this.props.focus).focus();
   }
 
-  render() {
+  render(){
     const {
       shown,
       caught_by_footer,
@@ -75,9 +52,16 @@ export class BackToTop extends React.Component {
   
     return (
       <a 
-        className={classNames("back-to-top", shown && 'back-to-top--shown', caught_by_footer && 'back-to-top--caught')}
-        style={{backgroundColor: window.infobase_color_constants.primaryColor}} 
-        ref={this.buttonRef} 
+        className={classNames(
+          "back-to-top", 
+          shown && 'back-to-top--shown',
+          !caught_by_footer && 'back-to-top--fixed',
+          caught_by_footer && 'back-to-top--caught'
+        )}
+        style={{
+          backgroundColor: window.infobase_color_constants.primaryColor,
+          top: caught_by_footer ? `${this.page_footer.offsetTop - 50}px` : "auto",
+        }} 
         tabIndex='-1' 
         onClick={() => this.handleClick()}
       >
