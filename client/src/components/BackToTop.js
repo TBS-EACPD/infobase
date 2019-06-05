@@ -53,8 +53,10 @@ export class BackToTop extends React.Component {
     } = this.state;
   
     return (
-      <a 
+      <button
         className={classNames(
+          "btn",
+          "btn-ib-primary",
           "back-to-top", 
           shown && 'back-to-top--shown',
           !caught_by_footer && 'back-to-top--fixed',
@@ -67,7 +69,7 @@ export class BackToTop extends React.Component {
         onClick={() => this.handleClick()}
       >
         {trivial_text_maker("back_to_top")}
-      </a> 
+      </button> 
     );
   }
 }

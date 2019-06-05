@@ -11,23 +11,6 @@
   opacity: 0;
   visibility: hidden;
   z-index: 1000;
-  color: $backgroundColor;
-  background-color: $primaryColor;
-
-  &:focus {
-    text-decoration: none;
-    color: white;
-  }
-  &:active {
-    text-decoration: none;
-    color: white;
-  }
-  &:hover {
-    cursor: pointer;
-    text-decoration: none;
-    color: white;
-    background-color: #333;
-  }
 
   &.back-to-top--shown {
     opacity: 1;
@@ -44,16 +27,12 @@
   }
 
   @media(max-width: 600px) {
-    width: 100%;
+    width: 90%;
+    margin-left: 5%;
     position: fixed;
-    bottom: 0px;
+    bottom: 0px !important;
     left: 0px;
     border-radius: 0;
     padding: 10px;
-    border-top: $backgroundColor solid 1px;
-
-    &.back-to-top--fixed {
-      bottom: 0px;
-    }
   }
 }
