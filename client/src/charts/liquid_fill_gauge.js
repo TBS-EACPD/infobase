@@ -1,6 +1,7 @@
 import common_charts_utils from './common_charts_utils';
 import { get_static_url } from '../request_utils.js';
 
+// Based on http://bl.ocks.org/brattonc/5e5ce9beee483220e2f6
 export class LiquidFillGauge{
   constructor(container, options){
     common_charts_utils.setup_graph_instance(this, d3.select(container), options);
