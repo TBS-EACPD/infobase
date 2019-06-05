@@ -1,6 +1,6 @@
-import './BackToTop.scss' ;
-import { trivial_text_maker } from '../models/text.js' ;
-import classNames from 'classnames' ;
+import './BackToTop.scss';
+import { trivial_text_maker } from '../models/text.js';
+import classNames from 'classnames';
 
 export class BackToTop extends React.Component {
   constructor(props) {
@@ -9,7 +9,7 @@ export class BackToTop extends React.Component {
     this.state = {
       shown: true,
       caught_by_footer: false,
-    }
+    };
 
     this.buttonRef = React.createRef();
     this.handleScroll = this.handleScroll.bind(this);
@@ -18,9 +18,9 @@ export class BackToTop extends React.Component {
 
   handleScroll() {
     if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-      this.buttonRef.current.classList.add('show') ;
+      this.buttonRef.current.classList.add('show');
     } else {
-      this.buttonRef.current.classList.remove('show') ;
+      this.buttonRef.current.classList.remove('show');
     }
     
     if (window.innerWidth > 600) {
@@ -52,11 +52,6 @@ export class BackToTop extends React.Component {
     }
   }
 
-  handleClick() {
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
-    document.querySelector(this.props.focus).focus();
-  }
-
   componentDidMount(){
     window.addEventListener("scroll", this.handleScroll);
     //window.addEventListener("resize", this.handleResize);
@@ -67,15 +62,20 @@ export class BackToTop extends React.Component {
     //window.removeEventListener("resize", this.handleResize);
   }
   
+  handleClick() {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+    document.querySelector(this.props.focus).focus();
+  }
+
   render() {
     const {
       shown,
       caught_by_footer,
-    } = this.state
+    } = this.state;
   
     return (
       <a 
-        className={classNames("back-to-top", shown && 'back-to-top--shown', caught_by_footer && 'back-to-top--caught' )}
+        className={classNames("back-to-top", shown && 'back-to-top--shown', caught_by_footer && 'back-to-top--caught')}
         style={{backgroundColor: window.infobase_color_constants.primaryColor}} 
         ref={this.buttonRef} 
         tabIndex='-1' 
@@ -85,5 +85,4 @@ export class BackToTop extends React.Component {
       </a> 
     );
   }
-  
 }
