@@ -62,20 +62,3 @@ of the advanced search for mobile */
   }
 }
 
-
-.transi-fade-enter {
-  opacity: 0.01;
-}
-
-.transi-fade-enter-active {
-  opacity: 1;
-  transition: opacity 800ms ease-in;
-}
-
-.transi-fade-leave {
-  opacity: 1;
-}
-.transi-fade-leave-active {
-  opacity: 0.01;
-  transition: opacity 0.0001s ease-out;
-}

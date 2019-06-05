@@ -1,3 +1,4 @@
+import { CSSTransitionGroup } from 'react-transition-group';
 import { Redirect } from 'react-router';
 import JSURL from 'jsurl';
 
@@ -367,7 +368,7 @@ const InfoGraph = ({
       description={ desc_key && text_maker(desc_key)}
       route_key={sub_app_name}
     >
-      <span key={this.props.text} dangerouslySetInnerHTML={{__html: this.props.text}} />
+      <h1 dangerouslySetInnerHTML={{__html: title }} />
       <InfoGraph_
         level={level}
         subject={subject}
@@ -377,6 +378,8 @@ const InfoGraph = ({
     </StandardRouteContainer>
   );
 }
+
+
 
 export { InfoGraph as default }
 
