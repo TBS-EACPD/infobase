@@ -1,32 +1,32 @@
 import { Spinner, spinner_configs } from '../core/Spinner.js';
-import { Loader } from './Loader.js';
+import { LeafSpinner } from './LeafSpinner.js';
 
 export class SpinnerWrapper extends React.Component {
   render(){ 
-    if (!this.props.leaf) {
-      return <div ref="main" /> 
-    } else {
-      return <Loader scale={this.props.scale}/>
-    }
+    return !this.props.use_leaf_spinner ? 
+      <div ref="main" /> : 
+      <LeafSpinner scale={this.props.scale} position={this.props.position} container={this.props.container}/>;
   }
   componentDidMount(){ 
     const { 
       scale,
       config_name,
-      leaf,
+      use_leaf_spinner,
     } = this.props;
 
     const config = !_.isUndefined(spinner_configs[config_name]) ? 
       spinner_configs[config_name] : 
       {scale};
 
-    if (!leaf) {
+    if (!use_leaf_spinner) {
       this.refs.main.appendChild( new Spinner(config).spin().el );
     }
   }
 }
 
 SpinnerWrapper.defaultProps = {
+  container: document.body,
+  position: 'fixed',
   scale: 2,
-  leaf: true,
+  use_leaf_spinner: true,
 }

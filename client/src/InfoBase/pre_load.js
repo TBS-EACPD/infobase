@@ -1,15 +1,18 @@
 //import { Spinner } from '../core/Spinner.js';
-import '../components/Loader.scss';
+import '../components/LeafSpinner.scss';
 import leaf_loading_spinner from '../svg/leaf-loading-spinner.svg';
 
 export default function(){
   const app_el = document.querySelector('#app');
   
   const containerDiv = document.createElement('div');
-  containerDiv.className = 'loader-container';
-  containerDiv.setAttribute('style', 'transform: scale(2)');
+  containerDiv.className = 'faded-loading-container';
+  const spinnerDiv = document.createElement('div');
+  spinnerDiv.className = 'leaf-spinner-container';
+  spinnerDiv.setAttribute('style', 'transform: scale(2); position: fixed');
 
-  containerDiv.innerHTML = leaf_loading_spinner;
+  spinnerDiv.innerHTML = leaf_loading_spinner;
+  containerDiv.appendChild(spinnerDiv);
 
   app_el.appendChild(containerDiv);
   
