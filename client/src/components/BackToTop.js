@@ -21,7 +21,7 @@ export class BackToTop extends React.Component {
     const should_be_shown = window.pageYOffset > (this.page_header.offsetTop + this.page_header.offsetHeight);
     
     const should_be_caught = (window.innerWidth > 600) && (
-      ( window.pageYOffset + window.innerHeight ) > (this.page_footer.offsetTop - 50)
+      ( window.pageYOffset + window.innerHeight ) > (this.page_footer.offsetTop + 15)
     );
 
     this.setState({
