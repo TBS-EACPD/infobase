@@ -28,6 +28,8 @@ export class SpinnerWrapper extends React.Component {
 }
 
 SpinnerWrapper.defaultProps = {
+  container: document.body,
+  position: 'fixed',
   scale: 2,
   use_leaf_spinner: true,
 }
