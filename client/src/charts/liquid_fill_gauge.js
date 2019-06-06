@@ -49,7 +49,7 @@ export class LiquidFillGauge{
     const locationX = parseInt(width)/2 - radius;
     let locationY = (parseInt(height) - radius)/22;
 
-    const fillPercent = this.options.value / this.options.totalValue;
+    let fillPercent = this.options.value / this.options.totalValue;
     const textValue = parseFloat(fillPercent * 100).toFixed(1);
     const textPixels = (this.options.textSize*radius/2) || (radius/2);
     const titleGap = this.options.titleGap || 40;
@@ -74,7 +74,11 @@ export class LiquidFillGauge{
     const waveIsFall = this.options.waveIsFall || 1;
     const waveDirection = waveIsFall ? 100: 0;
     const waveRiseFallTime = this.options.waveRiseFallTime || 2200
-    const waveAnimateTime = this.options.waveAnimateTime || 2400
+    let waveAnimateTime = this.options.waveAnimateTime || 2000
+
+    // A bit of viz lie: fill upto 1% if it's any lower and make wave animation faster
+    fillPercent = fillPercent<0.01 ? 0.01 : fillPercent;
+    waveAnimateTime = waveAnimateTime - (10/fillPercent);
 
     if(this.options.title){
       locationY = locationY + titleGap;
