@@ -96,7 +96,25 @@ class Panel_ extends React.Component {
     _.forEach(legend_container_arr, legend_container => {
       legend_container.style.maxHeight = MAX_DIV_HEIGHT;
     });
-    
+
+    // Img tags are not properly captured, hence needs to be converted to canvas
+    const imgElements = _.map(panel_body.getElementsByTagName("img"), _.identity);
+    _.forEach (imgElements, (img)=>{
+      const parentNode = img.parentNode;
+
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = img.width;
+      canvas.height = img.height;
+
+      ctx.drawImage(img, 0, 0, img.width, img.height);
+
+      parentNode.removeChild(img);
+      parentNode.appendChild(canvas);
+
+    });
+
     html2canvas(panel_body)
       .then((canvas) => {
         const imgData = canvas.toDataURL('image/png');
