@@ -110,6 +110,7 @@ class Panel_ extends React.Component {
       canvas.height = img.height;
       ctx.drawImage(img, 0, 0, img.width, img.height);
       
+      canvas.data = img.style.cssText;
       img.style.position = "absolute";
       img.style.zIndex = "1";
       img.style.visibility = 'hidden';
@@ -162,8 +163,7 @@ class Panel_ extends React.Component {
           const parentNode = img.parentNode;
           const canvas = parentNode.getElementsByClassName("canvas-temp")[0];
 
-          img.style.position = 'relative';
-          img.style.visibility = 'visible';
+          img.style.cssText = canvas.data;
           parentNode.removeChild(canvas);
         });
 
