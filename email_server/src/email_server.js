@@ -24,17 +24,19 @@ const email_server = express();
 
 email_server.use( body_parser.json({ limit: '50mb' }) );
 email_server.use( compression() );
-email_server.use(function (request, response, next) {
-
-  response.header('Access-Control-Allow-Origin', '*');
-  response.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-  
-  if (request.method === 'OPTIONS') {
-    response.sendStatus(200);
-  } else {
-    next();
+email_server.use(
+  function(request, response, next){
+    response.header('Access-Control-Allow-Origin', '*');
+    response.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+    response.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    
+    if (request.method === 'OPTIONS'){
+      response.sendStatus(200);
+    } else {
+      next();
+    }
   }
-});
+);
 
 
 // TODO: what can I do to mitigate endpoint spam? Is that in-scope right now?
@@ -48,7 +50,7 @@ email_server.get(
       template_name,
     } = get_request_content(request);
 
-    // will need to re-implement if we ever need a second email template, but for now it's just the one version of report_a_problem
+    // will need to re-implement if we ever need a second email template, but for now the only option's "report_a_problem"
     if (!_.includes(["en", "fr"], lang) || template_name !== "report_a_problem"){
       log_email_request(request, "Error: email template request has invalid or missing lanuage or template_name value(s)");
       response.sendStatus("400");
