@@ -173,7 +173,7 @@ class InfoGraph_ extends React.Component {
           <TM k="a11y_search_other_infographs" />
           <EverythingSearch 
             include_gov={false} 
-            href_template={subj => infograph_href_template(subj, null, true)}
+            href_template={subj => infograph_href_template(subj, bubble, true)}
             search_text={text_maker('subject_search_placeholder')}
             large={true}
             include_tags={true}
@@ -190,7 +190,7 @@ class InfoGraph_ extends React.Component {
           >
             <EverythingSearch 
               include_gov={false} 
-              href_template={subj => infograph_href_template(subj, null, true)}
+              href_template={subj => infograph_href_template(subj, bubble, true)}
               search_text={text_maker('subject_search_placeholder')}
               large={true}
               include_tags={true}
