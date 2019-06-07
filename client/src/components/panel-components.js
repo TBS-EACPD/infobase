@@ -97,22 +97,24 @@ class Panel_ extends React.Component {
       legend_container.style.maxHeight = MAX_DIV_HEIGHT;
     });
 
-    // Img tags are not properly captured, hence needs to be converted to canvas
+    // Img tags are not properly captured, hence needs to be temporarily converted to canvas for pdf purposes only
     const imgElements = _.map(panel_body.getElementsByTagName("img"), _.identity);
     _.forEach (imgElements, (img)=>{
       const parentNode = img.parentNode;
 
       const canvas = document.createElement('canvas');
+      canvas.className = "canvas-temp";
       const ctx = canvas.getContext("2d");
 
       canvas.width = img.width;
       canvas.height = img.height;
-
       ctx.drawImage(img, 0, 0, img.width, img.height);
+      
+      img.style.position = "absolute";
+      img.style.zIndex = "1";
+      img.style.visibility = 'hidden';
 
-      parentNode.removeChild(img);
       parentNode.appendChild(canvas);
-
     });
 
     html2canvas(panel_body)
@@ -156,6 +158,15 @@ class Panel_ extends React.Component {
         pdf.save(file_name);
       })
       .then(() => {
+        _.forEach (imgElements, (img)=>{
+          const parentNode = img.parentNode;
+          const canvas = parentNode.getElementsByClassName("canvas-temp")[0];
+
+          img.style.position = 'relative';
+          img.style.visibility = 'visible';
+          parentNode.removeChild(canvas);
+        });
+
         _.forEach(
           legend_container_arr,
           (legend_container, index) => legend_container.style.maxHeight = oldMaxHeights[index]

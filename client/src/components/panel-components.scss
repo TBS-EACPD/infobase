@@ -98,3 +98,8 @@
   margin: 20px 60px 20px 60px;
   border-top: 1px solid rgba($separatorColor, 0.5);
 }
+
+.canvas-temp{
+  position: relative;
+  z-index: 2
+}
