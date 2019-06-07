@@ -1,5 +1,4 @@
 import './ShareModal.scss' ;
-//import { create_text_maker } from '../models/text.js' ;
 import { Button, Modal } from 'react-bootstrap';
 import {
   TwitterShareButton,
@@ -27,19 +26,19 @@ export class ShareModal extends React.Component {
         </Modal.Header>
 
         <Modal.Body>
-          <FacebookShareButton className='icons' url={this.props.url}>
+          <FacebookShareButton className='share-icons' url={this.props.url}>
             <FacebookIcon size={32}></FacebookIcon>
           </FacebookShareButton> 
-          <TwitterShareButton className='icons' url={this.props.url}>
+          <TwitterShareButton className='share-icons' url={this.props.url}>
             <TwitterIcon size={32}></TwitterIcon >
           </TwitterShareButton> 
-          <EmailShareButton className='icons' url={this.props.url}> 
+          <EmailShareButton className='share-icons' url={this.props.url}> 
             <EmailIcon size={32}></EmailIcon>
           </EmailShareButton>
-          <LinkedinShareButton className='icons' url={this.props.url}>
+          <LinkedinShareButton className='share-icons' url={this.props.url}>
             <LinkedinIcon size={32}></LinkedinIcon>
           </LinkedinShareButton> 
-          <RedditShareButton className='icons' url={this.props.url}>
+          <RedditShareButton className='share-icons' url={this.props.url} title={this.props.title}>
             <RedditIcon size={32}></RedditIcon>
           </RedditShareButton>
         </Modal.Body>
@@ -50,5 +49,4 @@ export class ShareModal extends React.Component {
       </Modal>
     )
   }
-  
 }
