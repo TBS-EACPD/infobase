@@ -17,6 +17,7 @@ src/
 deploy_scripts
 deploy_scripts/
 
+.bablerc
+.eslintrc.json
 jest.config.js
-package.json
 README.md

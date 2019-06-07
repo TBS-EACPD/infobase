@@ -1,5 +1,6 @@
 {
   "name": "infobase-email-server",
+  "main": "transpiled_build/index.js",
   "engines": {
     "node": "^9.0"
   },
