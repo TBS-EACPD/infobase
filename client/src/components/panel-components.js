@@ -111,9 +111,8 @@ class Panel_ extends React.Component {
       ctx.drawImage(img, 0, 0, img.width, img.height);
       
       canvas.data = img.style.cssText;
-      img.style.position = "absolute";
-      img.style.zIndex = "1";
-      img.style.visibility = 'hidden';
+      img.style.width = 0;
+      img.style.height = 0;
 
       parentNode.appendChild(canvas);
     });
