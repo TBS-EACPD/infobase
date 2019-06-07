@@ -131,7 +131,6 @@ class Panel_ extends React.Component {
   }
 }
 
-
 /* 
   The below components allow to reduce some redundancy when addressing a particular use case: 
   
