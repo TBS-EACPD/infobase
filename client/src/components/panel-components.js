@@ -110,6 +110,7 @@ class Panel_ extends React.Component {
       canvas.height = img.height;
       ctx.drawImage(img, 0, 0, img.width, img.height);
       
+      // Save all img style to canvas
       canvas.data = img.style.cssText;
       img.style.width = 0;
       img.style.height = 0;
@@ -162,6 +163,7 @@ class Panel_ extends React.Component {
           const parentNode = img.parentNode;
           const canvas = parentNode.getElementsByClassName("canvas-temp")[0];
 
+          // Restore original img style
           img.style.cssText = canvas.data;
           parentNode.removeChild(canvas);
         });
