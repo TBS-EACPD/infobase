@@ -159,7 +159,7 @@ class Panel_ extends React.Component {
         pdf.save(file_name);
       })
       .then(() => {
-        _.forEach (imgElements, (img)=>{
+        _.forEach(imgElements, (img) => {
           const parentNode = img.parentNode;
           const canvas = parentNode.getElementsByClassName("canvas-temp")[0];
 
