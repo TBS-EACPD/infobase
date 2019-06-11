@@ -87,8 +87,8 @@ email_server.post(
 
       // send mail
       const transport_config = await get_transport_config();
-      let transporter = nodemailer.createTransport(transport_config);
-      let info = await transporter.sendMail({
+      const transporter = nodemailer.createTransport(transport_config);
+      const info = await transporter.sendMail({
         from: '"Fred Foo 👻" <foo@example.com>', // sender address
         to: "bar@example.com, baz@example.com", // list of receivers
         subject: "Hello ✔", // Subject line
