@@ -27,7 +27,10 @@
   },
   "scripts": {
     "prebuild": "rm -rf transpiled_build",
-    "build": "babel src/ --out-dir transpiled_build --copy-files --ignore node_modules"
+    "build": "babel src/ --out-dir transpiled_build --copy-files --ignore node_modules",
+
+    "start": "babel-node src/index.js",
+    "debug": "babel-node --inspect-brk src/index.js"
   },
   "authors": [
     "Stephen O'Neil"
