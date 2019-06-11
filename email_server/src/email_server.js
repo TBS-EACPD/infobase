@@ -4,6 +4,7 @@ import compression from 'compression';
 import _ from 'lodash';
 
 import report_a_problem from '../templates/report_a_problem.json';
+import { get_account } from './get_account.js';
 
 const get_request_content = (request) => (!_.isEmpty(request.body) && request.body) || (!_.isEmpty(request.query) && request.query);
 
@@ -39,7 +40,7 @@ email_server.use(
 );
 
 
-// TODO: what can I do to mitigate endpoint spam? Is that in-scope right now?
+// TODO: what can I do to mitigate endpoint spam? Is that in-scope right now? I want it to be, at least
 
 
 email_server.get(
@@ -63,11 +64,27 @@ email_server.get(
 
 email_server.post(
   'submit_email', 
-  (request, response) => {
+  async (request, response) => {
     // request body will be JSON, containing name of template and filled out template
-    // 1) validate template (check against template, also security/content check?)
-    // 2) if valid, construct email string from template, else log and respond with rejected
-    // 3) send and respond with accepted
+
+    const request_content = get_request_content(request);
+    const email_is_valid = ( // TODO
+      (request_content) => {
+        // will be its own module, get template based on name in request_content,
+        // validate the fields in request_content against the template
+        return true;
+      }
+    )();
+
+    if (!email_is_valid){
+      log_email_request(request, "Error: submitted email content either doesn't correspond to any templates, or does not validate aginst its corresponding template");
+      response.sendStatus("400");
+    } else {
+      const account = await get_account();
+
+      // construct email string from template and request_content
+      // send mail
+    }
   }
 );
 
