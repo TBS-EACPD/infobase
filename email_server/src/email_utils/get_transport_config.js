@@ -9,9 +9,9 @@ const get_dev_auth = async () => await nodemailer.createTestAccount();
 
 const get_auth = async () => {
   if (process.env.IS_PROD_SERVER){
-    return get_prod_account();
+    return get_prod_auth();
   } else {
-    return await get_dev_account();
+    return await get_dev_auth();
   }
 };
 

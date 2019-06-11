@@ -1,3 +1,11 @@
-// this file is the entry-point for GCF, it won't be used in dev
-import { email_server } from './email_server.js';
+// entry-point, for both dev and GCF
+import { make_email_server } from './email_server.js';
+import {
+  
+} from './template_utils';
+
+const templates = {}; //todo
+
+const email_server = make_email_server(templates);
+
 export { email_server };
