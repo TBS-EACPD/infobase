@@ -29,7 +29,9 @@
     "prebuild": "rm -rf transpiled_build",
     "build": "babel src/ --out-dir transpiled_build --copy-files --ignore node_modules",
 
+    "prestart": "npm run build",
     "start": "babel-node src/index.js",
+    
     "debug": "babel-node --inspect-brk src/index.js"
   },
   "authors": [

@@ -30,7 +30,6 @@ const log_email_request = (request, log_message) => {
 
 const make_email_server = (templates) => {
   const email_server = express();
-  
 
   email_server.use( body_parser.json({ limit: '50mb' }) );
   email_server.use( compression() );
