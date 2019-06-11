@@ -203,15 +203,22 @@ class Panel_ extends React.Component {
           <header className="panel-title"> {title} </header>
           <div style={{marginLeft: 'auto'}}>
             { context && !window.feature_detection.is_IE() && !generating_pdf &&
-              <img src={get_static_url("svg/download.svg")}
-                className='panel-heading-utils'
+              <button
                 onClick={ () => this.setState({generating_pdf: true}) }
-                alt={text_maker("a11y_download_panel")}
-                title={text_maker("a11y_download_panel")}
-              />
+                className='panel-heading-utils panel-heading-btn'>
+                <img
+                  src={get_static_url('svg/download.svg')}
+                  className='button-img'
+                  alt={text_maker("a11y_download_panel")}
+                  title={text_maker("a11y_download_panel")}/>
+              </button>
             }
             {context && !window.feature_detection.is_IE() && generating_pdf &&
-              <SpinnerWrapper config_name={"small_inline"} />
+              <SpinnerWrapper
+                config_name={"small_inline"}
+                title={text_maker("a11y_downloading_panel")}
+                alt={text_maker("a11y_downloading_panel")}
+              />
             }
             { context && !context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) && 
               <a href={panel_href_template(context.subject, context.bubble, context.graph_key)}>

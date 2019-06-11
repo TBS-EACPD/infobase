@@ -15,3 +15,7 @@ a11y_permalink:
 a11y_download_panel:
   en: Download this panel to PDF
   fr: Téléchargez la version PDF
+
+a11y_downloading_panel:
+  en: Downloading PDF in progress...
+  fr: Téléchargement de la version PDF en cours…
