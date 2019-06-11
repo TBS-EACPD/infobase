@@ -85,16 +85,24 @@ email_server.post(
       // construct email string from template and request_content
       // TODO
 
-      // send mail
+
       const transport_config = await get_transport_config();
       const transporter = nodemailer.createTransport(transport_config);
-      const info = await transporter.sendMail({
+
+      const sent_mail_info = await transporter.sendMail({
         from: '"Fred Foo 👻" <foo@example.com>', // sender address
         to: "bar@example.com, baz@example.com", // list of receivers
         subject: "Hello ✔", // Subject line
         text: "Hello world?", // plain text body
         html: "<b>Hello world?</b>" // html body
       });
+
+
+      if (process.env.IS_PROD_SERVER){
+        // TODO prod logging, particularily for mail that fails to send
+      } else {
+        console.log(`Test mail URL: ${nodemailer.getTestMessageUrl(sent_mail_info)}`);
+      }
     }
   }
 );
