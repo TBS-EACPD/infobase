@@ -53,6 +53,12 @@ const make_email_server = (templates) => {
 
   // TODO: what can I do to mitigate endpoint spam? Is that in-scope right now? I want it to be, at least
   
+
+  email_server.get(
+    'email_template_names',
+    (request, response) => response.status("200").send( _.keys(templates) )
+  );
+
   
   email_server.get(
     'email_template',
@@ -69,7 +75,7 @@ const make_email_server = (templates) => {
         log_email_request(request, error_message);
         response.status("400").send(error_message);
       } else {
-        response.json(templates[template_name][lang]);
+        response.status("200").json(templates[template_name][lang]);
       }
     }
   );
@@ -77,9 +83,7 @@ const make_email_server = (templates) => {
   
   email_server.post(
     'submit_email',
-    async (request, response) => {
-      // request body will be JSON, containing name of template and filled out template
-  
+    async (request, response) => {  
       const {
         lang,
         template_name,
@@ -92,7 +96,7 @@ const make_email_server = (templates) => {
         const error_message = "Bad Request: submitted email content either doesn't correspond to any templates, " + 
           "or does not validate aginst its corresponding template";
         log_email_request(request, error_message);
-        response.send("400", error_message);
+        response.status("400").send(error_message);
       } else {
         const email_body = make_email_body_from_completed_template(original_template, completed_template);
   
@@ -106,17 +110,28 @@ const make_email_server = (templates) => {
           text: email_body,
         });
   
-  
         if (process.env.IS_PROD_SERVER){
-          // TODO prod logging, particularily for mail that fails to send
-        } else {
-          //eslint-disable-next-line no-console
+          // eslint-disable-next-line no-console
           console.log(`Test mail URL: ${nodemailer.getTestMessageUrl(sent_mail_info)}`);
+        }
+
+        const mail_sent_successully = !sent_mail_info.err && _.isEmpty(sent_mail_info.rejected);
+        if (mail_sent_successully){
+          response.send("200");
+        } else {
+          const error_message = `Internal Server Error: mail was unable to send. ${ 
+            sent_mail_info.err ? 
+              `Had error: ${sent_mail_info.err}` : 
+              'Rejected'
+          }`;
+          log_email_request(request, error_message);
+          response.status("500").send(error_message);
         }
       }
     }
   );
 
+  
   return email_server;
 }
 
