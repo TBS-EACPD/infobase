@@ -53,8 +53,9 @@ email_server.get(
 
     // will need to re-implement if we ever need a second email template, but for now the only option's "report_a_problem"
     if (!_.includes(["en", "fr"], lang) || template_name !== "report_a_problem"){
-      log_email_request(request, "Error: email template request has invalid or missing lanuage or template_name value(s)");
-      response.sendStatus("400");
+      const error_message = "Bad Request: email template request has invalid or missing lanuage or template_name value(s)";
+      log_email_request(request, error_message);
+      response.status("400").send(error_message);
     } else {
       response.json(report_a_problem[lang]);
     }
@@ -77,8 +78,9 @@ email_server.post(
     )();
 
     if (!email_is_valid){
-      log_email_request(request, "Error: submitted email content either doesn't correspond to any templates, or does not validate aginst its corresponding template");
-      response.sendStatus("400");
+      const error_message = "Bad Request: submitted email content either doesn't correspond to any templates, or does not validate aginst its corresponding template";
+      log_email_request(request, error_message);
+      response.send("400", error_message);
     } else {
       // construct email string from template and request_content
       // TODO
