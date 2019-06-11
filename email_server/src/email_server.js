@@ -4,7 +4,7 @@ import compression from 'compression';
 import _ from 'lodash';
 
 import report_a_problem from '../templates/report_a_problem.json';
-import { get_account } from './get_account.js';
+import { get_transport_config } from './get_transport_config.js';
 
 const get_request_content = (request) => (!_.isEmpty(request.body) && request.body) || (!_.isEmpty(request.query) && request.query);
 
@@ -80,10 +80,19 @@ email_server.post(
       log_email_request(request, "Error: submitted email content either doesn't correspond to any templates, or does not validate aginst its corresponding template");
       response.sendStatus("400");
     } else {
-      const account = await get_account();
-
       // construct email string from template and request_content
+      // TODO
+
       // send mail
+      const transport_config = await get_transport_config();
+      let transporter = nodemailer.createTransport(transport_config);
+      let info = await transporter.sendMail({
+        from: '"Fred Foo 👻" <foo@example.com>', // sender address
+        to: "bar@example.com, baz@example.com", // list of receivers
+        subject: "Hello ✔", // Subject line
+        text: "Hello world?", // plain text body
+        html: "<b>Hello world?</b>" // html body
+      });
     }
   }
 );
