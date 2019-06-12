@@ -1,4 +1,8 @@
 {
-  "en": "TODO",
-  "fr": "TODO"
+  "en": {
+    "todo": "TODO"
+  },
+  "fr": {
+    "todo": "TODO"
+  }
 }
