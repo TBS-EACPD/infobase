@@ -2,6 +2,7 @@ import express from 'express';
 import body_parser from 'body-parser';
 import expressGraphQL from 'express-graphql'; 
 import compression from 'compression';
+import cors from 'cors';
 import depthLimit from 'graphql-depth-limit';
 import { decompressFromBase64 } from 'lz-string';
 
@@ -46,6 +47,7 @@ const app = express();
 
 app.use( body_parser.json({ limit: '50mb' }) );
 app.use( compression() );
+app.use( cors() );
 
 app.use("/", function (req, res, next) {
   res.header('cache-control', 'public, max-age=31536000');
