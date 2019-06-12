@@ -17,6 +17,7 @@ import { log_standard_event } from '../core/analytics.js';
 import * as qrcode from 'qrcode-generator';
 import * as html2canvas from 'html2canvas';
 import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 
 const { TM } = create_text_maker_component(text);
@@ -76,6 +77,15 @@ class Panel_ extends React.Component {
       generating_pdf: false,
     };
   }
+  pdf_end_util(title){
+    log_standard_event({
+      SUBAPP: window.location.hash.replace('#',''),
+      MISC1: "PDF_DOWNLOAD",
+      MISC2: title,
+    });
+    this.setState({generating_pdf: false});
+  }
+
   download_panel_pdf(){
     const {
       context, 
@@ -87,101 +97,146 @@ class Panel_ extends React.Component {
 
     const panel_object = document.getElementById(context.graph_key);
     const panel_body = panel_object.getElementsByClassName("panel-body")[0];
-    const legend_container_arr = panel_body.getElementsByClassName('legend-container');
 
-    // When the list of legend items are too long such that the items don't all fit into the defined max height, scroll is created to contain them.
-    // Screenshotting that will cause items to overflow, hence below sets max height to a big arbitrary number which later gets set back to original.
-    const MAX_DIV_HEIGHT = "9999px";
-    var oldMaxHeights = _.map(legend_container_arr, legend_container => (legend_container.style.maxHeight));
-    _.forEach(legend_container_arr, legend_container => {
-      legend_container.style.maxHeight = MAX_DIV_HEIGHT;
+    const pdf = new jsPDF({
+      compress: true,
+      format: 'letter',
     });
+    const width = pdf.internal.pageSize.getWidth();
+    const FOOTER_HEIGHT = 27;
+    const EXTRA_HEIGHT = 20;
 
-    // Img tags are not properly captured, hence needs to be temporarily converted to canvas for pdf purposes only
-    const imgElements = _.map(panel_body.getElementsByTagName("img"), _.identity);
-    _.forEach (imgElements, (img)=>{
-      const parentNode = img.parentNode;
+    const panel_link = `https://canada.ca/gcinfobase${panel_href_template(context.subject, context.bubble, context.graph_key)}`;
 
-      const canvas = document.createElement('canvas');
-      canvas.className = "canvas-temp";
-      const ctx = canvas.getContext("2d");
+    const qr = qrcode(0, 'L');
+    qr.addData(panel_link);
+    qr.make();
+    const qrCodeImg = qr.createDataURL();
+    const footerImg = new Image();
+    footerImg.src = get_static_url(`png/wmms-blk.png`)
 
-      canvas.width = img.width;
-      canvas.height = img.height;
-      ctx.drawImage(img, 0, 0, img.width, img.height);
+    if(window.is_a11y_mode){
+      pdf.setFontStyle('bold');
+      pdf.setLineWidth(1);
+      pdf.text(2,10,title);
+      pdf.line(0,12,width,12,'F');
+      let y = 14;
+      const textElements = _.map(panel_body.getElementsByTagName('p'), _.identity);
+      const ulElements = _.map(panel_body.getElementsByTagName('ul'), _.identity)
       
-      // Save all img style to canvas
-      canvas.data = img.style.cssText;
-      img.style.width = 0;
-      img.style.height = 0;
-
-      parentNode.appendChild(canvas);
-    });
-
-    html2canvas(panel_body)
-      .then((canvas) => {
-        const imgData = canvas.toDataURL('image/png');
-        const ratio = canvas.height/canvas.width;
-
-        const pdf = new jsPDF({
-          compress: true,
-          format: 'letter',
-        });
-        const width = pdf.internal.pageSize.getWidth();
-        const height = ratio * width;
-
-        const FOOTER_HEIGHT = 27;
-        const EXTRA_HEIGHT = 20;
-
-        pdf.internal.pageSize.setHeight(height + FOOTER_HEIGHT + EXTRA_HEIGHT);
-        pdf.setFontStyle('bold');
-        pdf.setLineWidth(2);
-        pdf.text(2,10,title);
-        pdf.line(0,12,width,12,'F');
-        pdf.addImage(imgData, 'JPEG', 0, 12, width, height);
-
-        const panel_link = `https://canada.ca/gcinfobase${panel_href_template(context.subject, context.bubble, context.graph_key)}`;
-
-        const qr = qrcode(0, 'L');
-        qr.addData(panel_link);
-        qr.make();
-        const qrCodeImg = qr.createDataURL();
-        pdf.addImage(qrCodeImg, 'JPEG', 1, height + EXTRA_HEIGHT);
-
-        pdf.setFontStyle('normal');
-        pdf.setFontSize(10);
-        pdf.textWithLink('canada.ca/gcinfobase', 2.5, height + EXTRA_HEIGHT + 25, {url: panel_link});
-
-        const footerImg = new Image();
-        footerImg.src = get_static_url(`png/wmms-blk.png`);
-        pdf.addImage(footerImg, 'png', 174.5, height + EXTRA_HEIGHT + 15);
-        
-        pdf.save(file_name);
-      })
-      .then(() => {
-        _.forEach(imgElements, (img) => {
-          const parentNode = img.parentNode;
-          const canvas = parentNode.getElementsByClassName("canvas-temp")[0];
-
-          // Restore original img style
-          img.style.cssText = canvas.data;
-          parentNode.removeChild(canvas);
-        });
-
-        _.forEach(
-          legend_container_arr,
-          (legend_container, index) => legend_container.style.maxHeight = oldMaxHeights[index]
-        )
-
-        log_standard_event({
-          SUBAPP: window.location.hash.replace('#',''),
-          MISC1: "PDF_DOWNLOAD",
-          MISC2: title,
-        })
-
-        this.setState({generating_pdf: false});
+      _.forEach(textElements, (text) => {
+        pdf.fromHTML(
+          text, 1, y, {'width': width}
+        );
+        const textHeight = pdf.getTextWidth(text.innerText)/25;
+        y+= textHeight < 10 ? 10 : textHeight > 10 && textHeight < 20 ? 20 : textHeight;
       });
-  }
+
+      _.forEach(_.slice(ulElements, 0, ulElements.length-1), (ul) => {
+        _.forEach(_.map(ul.children, _.identity), (li) => {
+          pdf.fromHTML(
+            li, 10, y, {'width': width}
+          );
+          const textHeight = pdf.getTextWidth(li.innerText)/25;
+          y+= textHeight < 10 ? 10 : textHeight > 10 && textHeight < 20 ? 20 : textHeight;
+        });
+      });
+
+      const tables = _.map(panel_body.getElementsByTagName("table"), _.identity);
+      _.forEach (tables, (tbl) => {
+        pdf.autoTable({
+          startY: y,
+          html: tbl,
+        });
+        y= pdf.previousAutoTable.finalY + 10
+      });
+      y = y + (pdf.internal.pageSize.getHeight() - y) - FOOTER_HEIGHT - EXTRA_HEIGHT;
+      pdf.addImage(qrCodeImg, 'JPEG', 1, y + EXTRA_HEIGHT);
+
+      pdf.setFontStyle('normal');
+      pdf.setFontSize(10);
+      pdf.textWithLink('canada.ca/gcinfobase', 2.5, y + EXTRA_HEIGHT + 25, {url: panel_link});
+
+      pdf.addImage(footerImg, 'png', 174.5, y + EXTRA_HEIGHT + 15);
+      pdf.save(file_name);
+      this.pdf_end_util(title);
+    }
+    else{
+      // When the list of legend items are too long such that the items don't all fit into the defined max height, scroll is created to contain them.
+      // Screenshotting that will cause items to overflow, hence below sets max height to a big arbitrary number which later gets set back to original.
+      const legend_container_arr = panel_body.getElementsByClassName('legend-container');
+
+      const MAX_DIV_HEIGHT = "9999px";
+      var oldMaxHeights = _.map(legend_container_arr, legend_container => (legend_container.style.maxHeight));
+      _.forEach(legend_container_arr, legend_container => {
+        legend_container.style.maxHeight = MAX_DIV_HEIGHT;
+      });
+
+      // Img tags are not properly captured, hence needs to be temporarily converted to canvas for pdf purposes only
+      const imgElements = _.map(panel_body.getElementsByTagName("img"), _.identity);
+      _.forEach (imgElements, (img)=>{
+        const parentNode = img.parentNode;
+
+        const canvas = document.createElement('canvas');
+        canvas.className = "canvas-temp";
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0, img.width, img.height);
+      
+        // Save all img style to canvas
+        canvas.data = img.style.cssText;
+        img.style.width = 0;
+        img.style.height = 0;
+
+        parentNode.appendChild(canvas);
+      });
+
+      html2canvas(panel_body)
+        .then((canvas) => {
+          const imgData = canvas.toDataURL('image/png');
+          const ratio = canvas.height/canvas.width;
+
+          const height = ratio * width;
+
+          pdf.internal.pageSize.setHeight(height + FOOTER_HEIGHT + EXTRA_HEIGHT);
+          pdf.setFontStyle('bold');
+          pdf.setLineWidth(2);
+          pdf.text(2,10,title);
+          pdf.line(0,12,width,12,'F');
+      
+          pdf.addImage(imgData, 'JPEG', 0, 12, width, height);
+          pdf.addImage(qrCodeImg, 'JPEG', 1, height + EXTRA_HEIGHT);
+
+          pdf.setFontStyle('normal');
+          pdf.setFontSize(10);
+          pdf.textWithLink('canada.ca/gcinfobase', 2.5, height + EXTRA_HEIGHT + 25, {url: panel_link});
+  
+          pdf.addImage(footerImg, 'png', 174.5, height + EXTRA_HEIGHT + 15);
+          
+          pdf.save(file_name);  
+        })
+        .then( () => {
+          _.forEach(imgElements, (img) => {
+            const parentNode = img.parentNode;
+            const canvas = parentNode.getElementsByClassName("canvas-temp")[0];
+  
+            // Restore original img style
+            img.style.cssText = canvas.data;
+            parentNode.removeChild(canvas);
+          });
+  
+          _.forEach(
+            legend_container_arr,
+            (legend_container, index) => legend_container.style.maxHeight = oldMaxHeights[index]
+          );
+
+          this.pdf_end_util(title);
+        });  
+    };
+  };
+
   componentDidUpdate(){
     this.state.generating_pdf && this.download_panel_pdf();
   }
