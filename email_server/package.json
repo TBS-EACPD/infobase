@@ -7,6 +7,7 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
+    "cors": "^2.8.5",
     "express": "^4.16.2",
     "lodash": "^4.17.11",
     "nodemailer": "^6.2.1"
@@ -28,11 +29,10 @@
   "scripts": {
     "prebuild": "rm -rf transpiled_build",
     "build": "babel src/ --out-dir transpiled_build --copy-files --ignore node_modules",
-
     "prestart": "npm run build",
-    "start": "babel-node src/index.js",
-    
-    "debug": "babel-node --inspect-brk src/index.js"
+    "start": "babel-node transpiled_build/index.js",
+    "debug": "babel-node --inspect-brk src/index.js",
+    "test": "jest --coverage --forceExit"
   },
   "authors": [
     "Stephen O'Neil"

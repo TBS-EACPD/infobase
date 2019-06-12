@@ -1,6 +1,7 @@
 import express from 'express';
 import body_parser from 'body-parser';
 import compression from 'compression';
+import cors from 'cors';
 import nodemailer from 'nodemailer';
 import _ from 'lodash';
 
@@ -10,6 +11,7 @@ import {
 } from './email_utils';
 
 import {
+
   validate_completed_template,
   make_email_body_from_completed_template,
 } from './template_utils';
@@ -34,6 +36,7 @@ const make_email_server = (templates) => {
 
   email_server.use( body_parser.json({ limit: '50mb' }) );
   email_server.use( compression() );
+  process.env.IS_PROD_SERVER && email_server.use( cors() );
   email_server.use(
     (request, response, next) => {
       response.header('Access-Control-Allow-Origin', '*');
@@ -56,13 +59,13 @@ const make_email_server = (templates) => {
   
 
   email_server.get(
-    'email_template_names',
+    '/email_template_names',
     (request, response) => response.status("200").send( _.keys(templates) )
   );
 
   
   email_server.get(
-    'email_template',
+    '/email_template',
     (request, response) => {
       const {
         lang,
@@ -83,7 +86,7 @@ const make_email_server = (templates) => {
   
   
   email_server.post(
-    'submit_email',
+    '/submit_email',
     async (request, response) => {  
       const {
         lang,
