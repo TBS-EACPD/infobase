@@ -109,7 +109,7 @@ const make_email_server = (templates) => {
           ...email_config,
           text: email_body,
         });
-  
+
         if (process.env.IS_PROD_SERVER){
           // eslint-disable-next-line no-console
           console.log(`Test mail URL: ${nodemailer.getTestMessageUrl(sent_mail_info)}`);
@@ -122,7 +122,7 @@ const make_email_server = (templates) => {
           const error_message = `Internal Server Error: mail was unable to send. ${ 
             sent_mail_info.err ? 
               `Had error: ${sent_mail_info.err}` : 
-              'Rejected'
+              'Rejected by recipient'
           }`;
           log_email_request(request, error_message);
           response.status("500").send(error_message);
