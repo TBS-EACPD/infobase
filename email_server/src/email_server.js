@@ -6,6 +6,7 @@ import _ from 'lodash';
 
 import { 
   get_transport_config,
+  get_email_config,
 } from './email_utils';
 
 import {
@@ -34,7 +35,7 @@ const make_email_server = (templates) => {
   email_server.use( body_parser.json({ limit: '50mb' }) );
   email_server.use( compression() );
   email_server.use(
-    function(request, response, next){
+    (request, response, next) => {
       response.header('Access-Control-Allow-Origin', '*');
       response.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
       response.header(
@@ -103,10 +104,9 @@ const make_email_server = (templates) => {
         const transport_config = await get_transport_config();
         const transporter = nodemailer.createTransport(transport_config);
   
+        const email_config = get_email_config();
         const sent_mail_info = await transporter.sendMail({
-          from: "TODO",
-          to: "TODO",
-          subject: "TODO",
+          ...email_config,
           text: email_body,
         });
   
@@ -131,7 +131,7 @@ const make_email_server = (templates) => {
     }
   );
 
-  
+
   return email_server;
 }
 
