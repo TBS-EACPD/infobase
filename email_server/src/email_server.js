@@ -43,7 +43,7 @@ const make_email_server = (templates) => {
       response.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
       response.header(
         'Access-Control-Allow-Headers',
-        'Content-Type, Authorization, Content-Length, X-Requested-With, lang, template_lang, completed_template'
+        'Content-Type, Authorization, Content-Length, X-Requested-With, lang, template_name, completed_template'
       );
       
       if (request.method === 'OPTIONS'){
