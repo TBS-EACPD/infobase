@@ -9,11 +9,11 @@ if [[ -n $existing_IB_session ]]; then
 else
   tmux new-session -t "IB" \; \
     split-window -h \; \
-    send-keys 'cd client && npm run IB_base && npm run IB_q' C-m \; \
+    send-keys 'cd client && npm ci && npm run IB_base && npm run IB_q' C-m \; \
     split-window -v \; \
     send-keys 'cd client && npm run serve-loopback' C-m \; \
     split-window -v \; \
-    send-keys 'cd server && npm start' C-m \; \
+    send-keys 'cd server && npm ci && npm start' C-m \; \
     split-window -v \; \
     send-keys 'cd server && mongod' C-m \; \
     selectp -t 0 \; \
