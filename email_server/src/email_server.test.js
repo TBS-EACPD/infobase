@@ -66,6 +66,7 @@ describe("End-to-end tests for email_server endpoints", () => {
     return expect([bad_lang_status, bad_template_name_status]).toEqual([400, 400]);
   });
   it("/submit_email returns status 200 a valid template is submitted", async () => {
+    // Flakes due to timeout if Ethereal can't be reached for test email delivery
     const { data: template_names } = await make_email_template_names_request();
     const { data: template } = await make_email_template_request( "en", _.head(template_names) );
 

@@ -113,12 +113,16 @@ const make_email_server = (templates) => {
           text: email_body,
         });
 
-        if (process.env.IS_PROD_SERVER){
+        if (!process.env.IS_PROD_SERVER){
           // eslint-disable-next-line no-console
           console.log(`Test mail URL: ${nodemailer.getTestMessageUrl(sent_mail_info)}`);
         }
 
-        const mail_sent_successully = !sent_mail_info.err && _.isEmpty(sent_mail_info.rejected);
+        const mail_sent_successully = (
+          sent_mail_info && 
+          /^2[0-9][0-9]/.test(sent_mail_info.response) && 
+          _.isEmpty(sent_mail_info.rejected)
+        );
         if (mail_sent_successully){
           response.send("200");
         } else {
