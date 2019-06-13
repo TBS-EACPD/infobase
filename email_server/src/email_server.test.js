@@ -7,13 +7,13 @@ describe("End-to-end tests for email_server endpoints", () => {
   // Repeating the same calls across tests is also intentional, if that causes something to flake THAT'S GOOD TO KNOW!
 
   const port = 7331;
-  const make_email_template_names_request = () => axios.get(`http://localhost:${port}/email_template_names`);
+  const make_email_template_names_request = () => axios.get(`http://127.0.0.1:${port}/email_template_names`);
   const make_email_template_request = (lang, template_name) => axios.get(
-    `http://localhost:${port}/email_template?lang=${lang}&template_name=${template_name}`,
+    `http://127.0.0.1:${port}/email_template?lang=${lang}&template_name=${template_name}`,
     { validateStatus: _.constant(true) } // Don't throw errors on ANY status values, will be intentionally getting some 400's
   );
   const make_submit_email_request = (lang, template_name, completed_template) => axios.post(
-    `http://localhost:${port}/submit_email`,
+    `http://127.0.0.1:${port}/submit_email`,
     {
       lang,
       template_name,

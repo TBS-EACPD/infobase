@@ -116,6 +116,9 @@ jobs:
           name: start_email_server
           command: (cd email_server && npm start)
           background: true
+      - run:
+          command: |
+            until [[ -n $(curl -I http://127.0.0.1:7331/email_template_names 2> /dev/null) ]]; do sleep 1; done
       - run: (cd email_server && npm test)
       - run: circleci step halt
 
