@@ -95,7 +95,7 @@ const make_email_server = (templates) => {
       } = get_request_content(request);
 
       const original_template = _.get(templates, `${template_name}.${lang}`);
-  
+
       if ( _.isUndefined(original_template) || !validate_completed_template(original_template, completed_template) ){
         const error_message = "Bad Request: submitted email content either doesn't correspond to any templates, " + 
           "or does not validate aginst its corresponding template";
@@ -103,7 +103,7 @@ const make_email_server = (templates) => {
         response.status("400").send(error_message);
       } else {
         const email_body = make_email_body_from_completed_template(original_template, completed_template);
-  
+
         const transport_config = await get_transport_config();
         const transporter = nodemailer.createTransport(transport_config);
   
