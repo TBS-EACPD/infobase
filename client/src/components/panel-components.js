@@ -98,6 +98,7 @@ class Panel_ extends React.Component {
     const panel_object = document.getElementById(context.graph_key);
     const panel_body = panel_object.getElementsByClassName("panel-body")[0];
 
+    const today = new Date();
     const pdf = new jsPDF({
       compress: true,
       format: 'letter',
@@ -156,6 +157,7 @@ class Panel_ extends React.Component {
       pdf.setFontStyle('normal');
       pdf.setFontSize(10);
       pdf.textWithLink('canada.ca/gcinfobase', 2.5, y + EXTRA_HEIGHT + 25, {url: panel_link});
+      pdf.text(`Retrieved on ${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`, (width/2)-25, y + EXTRA_HEIGHT + 25)
 
       pdf.addImage(footerImg, 'png', 174.5, y + EXTRA_HEIGHT + 15);
       pdf.save(file_name);
@@ -212,6 +214,7 @@ class Panel_ extends React.Component {
           pdf.setFontStyle('normal');
           pdf.setFontSize(10);
           pdf.textWithLink('canada.ca/gcinfobase', 2.5, height + EXTRA_HEIGHT + 25, {url: panel_link});
+          pdf.text(`Retrieved on ${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`, (width/2)-25, height + EXTRA_HEIGHT + 25)
   
           pdf.addImage(footerImg, 'png', 174.5, height + EXTRA_HEIGHT + 15);
           
