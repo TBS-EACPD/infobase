@@ -1,5 +1,4 @@
 ﻿"id","name_en","def_en"
-"ACT","Activity","An activity is an operation or work process internal to a department which uses inputs to produce outputs, e.g., training, research, construction, negotiation, investigation, etc."
 "ACTIV_PEOPLE","Active employees","Active employees are employees who are not on leave without pay."
 "ADJUS","Adjustments, warrants and transfers","Adjustments, warrants and transfers include:
 * transfers from or to other ministries such as Treasury Board Votes 5, 10, 15, 25, 30 and 33 or changes in ministry responsibility;
@@ -51,26 +50,12 @@ Budget Implementation Votes do not include the following measures presented in T
 
 DPs are tabled in Parliament by the President of the Treasury Board on behalf of the ministers who preside over the appropriation-dependent departments and agencies identified in Schedules I, I.1 and II of the _Financial Administration Act_, on or before March 31 each year. They are a component of Part III (Departmental Expenditure Plans) of the Estimates process, along with the Departmental Results Reports."
 "DR","Departmental Result","Departmental Results represent the changes departments seek to influence. Departmental Results are often outside departments’ immediate control, but they should be influenced by Program-level outcomes."
-"DRF","Departmental Results Framework","Consists of the department’s Core Responsibilities, Departmental Results and Departmental Result Indicators.
-
-
-Note: In the 2017-18 fiscal year, a new reporting format consisting of a Departmental Results Framework and Program Inventory was adopted by the following 7 departments to bring greater clarity to reporting what departments achieve and how they assess success, as per the new TBS Policy on Results:
-* Canadian Human Rights Commission
-* Canada Revenue Agency
-* National Energy Board
-* Office of the Commissioner of Lobbying
-* Parole Board of Canada
-* Treasury Board of Canada Secretariat
-* Transportation Safety Board of Canada
-
-
-By the 2018-19 fiscal year this new format will be adopted by all organizations, replacing the Program Alignment Architecture instituted by the rescinded TBS Policy on Management, Resources and Results Structure.
-"
+"DRF","Departmental Results Framework","Consists of the department’s Core Responsibilities, Departmental Results and Departmental Result Indicators."
 "DRR","Departmental Results Reports (DRR)","Departmental Results Reports (DRRs) – previously named Departmental Performance Reports (DPR) – are individual department and agency accounts of actual accomplishments against plans, priorities and results set out in their respective Departmental Plans (DPs). DPs and DRRs make up Part III (the Departmental Expenditure Plans) of the Estimates publications.
 
 
 Through DRRs, individual departments and agencies provide information on how they are progressing toward their strategic goals. DRRs cover the most recently completed fiscal year and are normally tabled in the fall."
-"EFF_ID","Efficiency","The extent to which resources are used such that a greater level of output/outcome is produced with the same level of input or, a lower level of input is used to produce the same level of output/outcome. The level of input and output/outcome could be increases or decreases in quantity, quality, or both."
+"EFF_ID","Efficiency Indicator","The extent to which resources are used such that a greater level of output/outcome is produced with the same level of input or, a lower level of input is used to produce the same level of output/outcome. The level of input and output/outcome could be increases or decreases in quantity, quality, or both."
 "EI_IGOC","Enabling Instrument(s)","The instrument used to create and enable an organization."
 "EMPLOYMENT_EQUITY","Employment Equity","The purpose of the Employment Equity Act is to achieve equity in Canadian workplaces by correcting conditions of disadvantage in employment through identifying and removing barriers experienced by members of the 4 employment equity designated groups:
 * women
@@ -166,7 +151,6 @@ Each program should have one primary method of intervention. However, in some ca
 "INACT_PEOPLE","Inactive employees","Inactive employees are employees who have been hired to the Public Service but who are not currently remunerated. The employee may be on leave without pay for various reasons (such as Parental Leave, Sick Leave-Without-Pay, Income-Averaging leave, etc.) or their pay may have been stopped for other reasons such as Seasonal Layoffs, or Seasonal layoff periods (i.e. House of Commons, Off-duty status, and unpaid surplus status (12 months))."
 "INDET_PEOPLE","Employee Type :  Indeterminate / Permanent Employee","Indeterminate / Permanent employees are persons appointed to the Public Service whose tenure in the position is of an unspecified duration."
 "IND_RESULT","Indicator","A qualitative or quantitative means of measuring an output or outcome, with the intention of gauging the performance of an organization, program, policy or initiative with respect to an intended result, which includes: 
-* Expected result indicators – used for programs reporting under the Program Alignment Architecture until full transition in fiscal year 2018-19 to the Program Inventory format, as per the Policy on Results;
 * Program outcome indicators – used for programs reporting under the Program Inventory format, as per the Policy on Results; and 
 * Departmental result indicators – used for reporting under the Departmental Results Framework, as per the Policy on Results."
 "INFORM_FED_INS","Institutional Forms : Federal organizations","Federal organizations include Parliamentary Entities and the scope of organizations grouped under Schedules I, I.1, II and III of the _Financial Administration Act (FAA)_:
@@ -231,7 +215,6 @@ Internal Services include only those activities and resources that apply across 
 "
 "MAINS","Main Estimates","The Main Estimates is a document that directly supports the appropriation act for the beginning of a fiscal year. It provides a listing of the resources required by individual departments and agencies for the upcoming fiscal year in order to deliver the programs for which they are responsible. It identifies the spending authorities (votes) and the amounts to be included in subsequent appropriation bills that Parliament will be asked to approve to enable the government to proceed with its spending plans. It is traditionally known as the “Blue Book”."
 "MAN_IGOC","Description / Raison d’être","The purpose or reason for which an organization exists."
-"MRRS","Policy on Management, Resources and Results Structures","The Policy on Management, Resources and Results Structures (MRRS) supports the development of a common government-wide approach to the identification of programs and to the collection, management, and reporting of financial and non-financial information relative to those programs. The policy provides departments with the flexibility and discretion they need to design and manage their programs in a manner that best achieves results for Canadians."
 "MYA","Multi-Year Appropriation","A multi-year appropriation is an appropriation with a specific purpose and monetary limit granted by Parliament that can be utilized over more than one fiscal year."
 "NB_AUTH","Non-Budgetary authorities","Non-Budgetary authorities are authorities for assets and liabilities transactions for loans, investments and advances, or specified purpose accounts, which have been established under specific statutes or under non-statutory authorities in the Estimates and elsewhere. Non-budgetary transactions are those expenditures and receipts related to the government's financial claims on, and obligations to, outside parties. These transactions include loans, investments and advances; in cash and accounts receivable; and in public money received or collected for specified purposes."
 "NB_EXP","Non-budgetary expenditures","Non-budgetary expenditures – or loans, investments and advances – are outlays that represent changes in the composition of the Government’s financial assets. Negative figures indicate that recoveries exceed expenditures."
@@ -294,21 +277,20 @@ Under section 2 of the FAA: “Department” means
 * (c) the staffs of the Senate, House of Commons, Library of Parliament, office of the Senate Ethics Officer and office of the Conflict of Interest and Ethics Commissioner, and
 * (d) any departmental corporation."
 "RESULT","Results","An external consequence attributed, in part, to an organization, policy, program or initiative. Results are set within various control areas of the organization and include: 
-* Expected results – used for programs reporting under the Program Alignment Architecture until full transition in fiscal year 2018-19 to the Program Inventory format, as per the Policy on Results; 
 * Program outcomes – used for programs reporting under the Program Inventory format, as per the Policy on Results; and
 * Departmental results – used for reporting under the Departmental Results Framework, as per the Policy on Results."
 "RESULTS_COUNT","Count of Indicators",
-"RESULTS_MET","Result Status: Target Met","The date to achieve the target is before or by the end of fiscal year 2017-18 (March 31, 2018) **and** the result is higher than the minimum target; lower than the maximum target; within the target range; or is exactly equal to the unique target value."
-"RESULTS_NOT_AVAILABLE","Result Status: Result not available","The date to achieve the target is before or by the end of fiscal year 2017-18 (March 31, 2018) **and**  the result has not been collected or is not available for any other reason. Includes cases when no target was set or when the target is no longer relevant due to changes in policy or other circumstances (e.g. dissolution of a department, change in government direction, etc.)."
-"RESULTS_NOT_MET","Result Status: Target not met","The date to achieve the target is before or by the end of fiscal year 2017-18 (March 31, 2018) **and** the result is lower than the minimum target; higher than the maximum target; outside the target range; or is not equal to the target value"
-"RESULTS_ONGOING","Result Status: Result to be achieved in the future","The date to achieve target is after the end of fiscal year 2017-18 (after March 31, 2018)."
-"RESULTS_STATUS","Result Status","If the date to achieve the target is **before or by the end of fiscal year 2017-18 (March 31, 2018)** and:
+"RESULTS_MET","Result Status: Target Met","The date to achieve the target is before or by the end of fiscal year (March 31) **and** the result is higher than the minimum target; lower than the maximum target; within the target range; or is exactly equal to the unique target value."
+"RESULTS_NOT_AVAILABLE","Result Status: Result not available","The date to achieve the target is before or by the end of fiscal year (March 31) **and**  the result has not been collected or is not available for any other reason. Includes cases when no target was set or when the target is no longer relevant due to changes in policy or other circumstances (e.g. dissolution of a department, change in government direction, etc.)."
+"RESULTS_NOT_MET","Result Status: Target not met","The date to achieve the target is before or by the end of fiscal year (March 31) **and** the result is lower than the minimum target; higher than the maximum target; outside the target range; or is not equal to the target value"
+"RESULTS_ONGOING","Result Status: Result to be achieved in the future","The date to achieve target is after the end of fiscal year (after March 31)."
+"RESULTS_STATUS","Result Status","If the date to achieve the target is **before or by the end of the fiscal year (March 31)** and:
 * Target met: The result is higher than the minimum target; lower than the maximum target; within the target range; or is exactly equal to the unique target value.
 * Target Not met: The result is lower than the minimum target; higher than the maximum target; outside the target range; or is not equal to the target value.  
 * Result not available: The result has not been collected or is not available for any other reason. Includes cases when no target was set or when the target is no longer relevant due to changes in policy or other circumstances (e.g. dissolution of a department, change in government direction, etc.).
 
 
-If the date to achieve target is after the end of fiscal year 2017-18 (after March 31, 2018)**:
+If the date to achieve target is after the end of fiscal year (after March 31)**:
 * Result to be achieved in the future"
 "RG","Receiver General","The Receiver General for Canada is the central Treasurer and Accountant of the federal government. The Receiver General is Canada's oldest position. The role existed even before the country officially did. As the government's accountant and custodian of the Consolidated Revenue Fund, the Receiver General maintains the accounts of Canada and prepares the Public Accounts of Canada as required by law. The Public Accounts include the annual audited financial statements of the Government of Canada."
 "RPS","Regional Pay System (RPS)","Regional Pay System (RPS) serves as the main data source for central HR reporting including demographic reports, analyses, open data and data extracts in response to people management information requests. In 2011, the Office of the Chief Human Resources Officer (OCHRO) of the Treasury Board of Canada, Secretariat (TBS) repatriated nine legacy Human Resources (HR) data files from Public Works and Government Services Canada (PWGSC). These files collectively identified as the HR Data Integration Broker (HRDIB). Some HRDIB data is also provided to multiple users within TBS and sent to multiple departments and agencies, bargaining agents, and other organizations."
