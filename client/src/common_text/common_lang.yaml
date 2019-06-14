@@ -568,6 +568,9 @@ vstype5:
 vstype6:
   en: T.B. Central Vote
   fr: Crédit central du CT
+vstype7:
+  en: Budget Implementation Vote
+  fr: Crédit d’exécution du budget
 vstype9:
   en: Other
   fr: Autre
