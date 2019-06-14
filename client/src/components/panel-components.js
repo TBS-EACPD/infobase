@@ -122,25 +122,24 @@ class Panel_ extends React.Component {
       pdf.text(2,10,title);
       pdf.line(0,12,width,12,'F');
       let y = 14;
-      const textElements = _.map(panel_body.getElementsByTagName('p'), _.identity);
-      const ulElements = _.map(panel_body.getElementsByTagName('ul'), _.identity)
-      
+      const textElements = _.map(panel_body.querySelectorAll('p,ul'), _.identity);
       _.forEach(textElements, (text) => {
-        pdf.fromHTML(
-          text, 1, y, {'width': width}
-        );
-        const textHeight = pdf.getTextWidth(text.innerText)/25;
-        y+= textHeight < 10 ? 10 : textHeight > 10 && textHeight < 20 ? 20 : textHeight;
-      });
-
-      _.forEach(_.slice(ulElements, 0, ulElements.length-1), (ul) => {
-        _.forEach(_.map(ul.children, _.identity), (li) => {
+        if(text.tagName==="UL"){
+          _.forEach(_.map(text.children, _.identity), (li) => {
+            pdf.fromHTML(
+              li, 10, y, {'width': width}
+            );
+            const textHeight = pdf.getTextWidth(li.innerText)/25;
+            y+= textHeight < 10 ? 10 : textHeight > 10 && textHeight < 20 ? 20 : textHeight;
+          });
+        }
+        else{
           pdf.fromHTML(
-            li, 10, y, {'width': width}
+            text, 1, y, {'width': width}
           );
-          const textHeight = pdf.getTextWidth(li.innerText)/25;
-          y+= textHeight < 10 ? 10 : textHeight > 10 && textHeight < 20 ? 20 : textHeight;
-        });
+          const textHeight = pdf.getTextWidth(text.innerText)/25;
+          y+= textHeight < 10 ? 10 : textHeight > 10 && textHeight < 20 ? 20 : textHeight;  
+        };
       });
 
       const tables = _.map(panel_body.getElementsByTagName("table"), _.identity);
@@ -151,15 +150,17 @@ class Panel_ extends React.Component {
         });
         y= pdf.previousAutoTable.finalY + 10
       });
-      y = y + (pdf.internal.pageSize.getHeight() - y) - FOOTER_HEIGHT - EXTRA_HEIGHT;
-      pdf.addImage(qrCodeImg, 'JPEG', 1, y + EXTRA_HEIGHT);
-
-      pdf.setFontStyle('normal');
-      pdf.setFontSize(10);
-      pdf.textWithLink('canada.ca/gcinfobase', 2.5, y + EXTRA_HEIGHT + 25, {url: panel_link});
-      pdf.text(`Retrieved on ${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`, (width/2)-25, y + EXTRA_HEIGHT + 25)
-
-      pdf.addImage(footerImg, 'png', 174.5, y + EXTRA_HEIGHT + 15);
+      if (!(pdf.internal.pageSize.getHeight() - y < FOOTER_HEIGHT)){
+        y = y + (pdf.internal.pageSize.getHeight() - y) - FOOTER_HEIGHT - EXTRA_HEIGHT;
+        pdf.addImage(qrCodeImg, 'JPEG', 1, y + EXTRA_HEIGHT);
+  
+        pdf.setFontStyle('normal');
+        pdf.setFontSize(10);
+        pdf.textWithLink('canada.ca/gcinfobase', 2.5, y + EXTRA_HEIGHT + 25, {url: panel_link});
+        pdf.text(`Retrieved on ${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`, (width/2)-25, y + EXTRA_HEIGHT + 25)
+  
+        pdf.addImage(footerImg, 'png', 174.5, y + EXTRA_HEIGHT + 15);  
+      };
       pdf.save(file_name);
       this.pdf_end_util(title);
     }
