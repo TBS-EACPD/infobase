@@ -11,7 +11,6 @@ import {
 } from './email_utils';
 
 import {
-
   validate_completed_template,
   make_email_body_from_completed_template,
 } from './template_utils';

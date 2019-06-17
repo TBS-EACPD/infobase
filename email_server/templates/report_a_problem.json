@@ -1,8 +1,40 @@
 {
-  "en": {
-    "todo": "TODO"
+  "meta": {
+    "subject_template": "TODO"
   },
-  "fr": {
-    "todo": "TODO"
+
+  "issue": {
+    "required": true,
+    "value_type": "string",
+    "form_type": "input",
+    "form_label": {
+      "en": "Issue description",
+      "fr": "TODO"
+    }
+  },
+  "sha": {
+    "required": true,
+    "value_type": "string",
+    "form_type": false
+  },
+  "route": {
+    "required": true,
+    "value_type": "string",
+    "form_type": false
+  },
+  "lang": {
+    "required": true,
+    "value_type": "string",
+    "form_type": false
+  },
+  "app_version": {
+    "required": true,
+    "value_type": "string",
+    "form_type": false
+  },
+  "user_id": {
+    "required": false,
+    "value_type": "string",
+    "form_type": false
   }
 }
