@@ -42,7 +42,7 @@ const make_email_server = (templates) => {
       response.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
       response.header(
         'Access-Control-Allow-Headers',
-        'Content-Type, Authorization, Content-Length, X-Requested-With, lang, template_name, completed_template'
+        'Content-Type, Authorization, Content-Length, X-Requested-With, template_name, completed_template'
       );
       
       if (request.method === 'OPTIONS'){
@@ -67,18 +67,17 @@ const make_email_server = (templates) => {
     '/email_template',
     (request, response) => {
       const {
-        lang,
         template_name,
       } = get_request_content(request);
   
-      const requested_template = _.get(templates, `${template_name}.${lang}`);
+      const requested_template = templates[template_name];
 
       if ( _.isUndefined(requested_template) ){
-        const error_message = "Bad Request: email template request has invalid or missing value for `lang` or `template_name`";
+        const error_message = "Bad Request: email template request has invalid or missing `template_name` value";
         log_email_request(request, error_message);
         response.status("400").send(error_message);
       } else {
-        response.status("200").json(templates[template_name][lang]);
+        response.status("200").json(templates[template_name]);
       }
     }
   );
@@ -88,12 +87,11 @@ const make_email_server = (templates) => {
     '/submit_email',
     async (request, response) => {  
       const {
-        lang,
         template_name,
         completed_template,
       } = get_request_content(request);
 
-      const original_template = _.get(templates, `${template_name}.${lang}`);
+      const original_template = templates[template_name];
 
       if ( _.isUndefined(original_template) || !validate_completed_template(original_template, completed_template) ){
         const error_message = "Bad Request: submitted email content either doesn't correspond to any templates, " + 

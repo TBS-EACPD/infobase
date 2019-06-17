@@ -8,14 +8,13 @@ describe("End-to-end tests for email_server endpoints", () => {
 
   const port = 7331;
   const make_email_template_names_request = () => axios.get(`http://127.0.0.1:${port}/email_template_names`);
-  const make_email_template_request = (lang, template_name) => axios.get(
-    `http://127.0.0.1:${port}/email_template?lang=${lang}&template_name=${template_name}`,
+  const make_email_template_request = (template_name) => axios.get(
+    `http://127.0.0.1:${port}/email_template?template_name=${template_name}`,
     { validateStatus: _.constant(true) } // Don't throw errors on ANY status values, will be intentionally getting some 400's
   );
-  const make_submit_email_request = (lang, template_name, completed_template) => axios.post(
+  const make_submit_email_request = (template_name, completed_template) => axios.post(
     `http://127.0.0.1:${port}/submit_email`,
     {
-      lang,
       template_name,
       completed_template,
     },
@@ -32,19 +31,15 @@ describe("End-to-end tests for email_server endpoints", () => {
   });    
 
 
-  it("/email_template returns status 400 for an invalid lang or invalid template_name", async () => {
-    const { data: template_names } = await make_email_template_names_request();
+  it("/email_template returns status 400 for an invalid invalid template_name", async () => {
+    const { status: bad_template_name_status } = await make_email_template_request("zzz_unlikely_name");
 
-    const { status: bad_lang_status } = await make_email_template_request( "Klingon", _.head(template_names) );
-    const { status: bad_template_name_status } = await make_email_template_request("en", "zzz_unlikely_name");
-    const { status: both_bad_template_status } = await make_email_template_request("Vulcan", "yyyImprobableName");
-
-    return expect([bad_lang_status, bad_template_name_status, both_bad_template_status]).toEqual([400, 400, 400]);
+    return expect(bad_template_name_status).toBe(400);
   });
-  it("/email_template returns a non-empty object when given a valid lang and template_name", async () => {
+  it("/email_template returns a non-empty object when given a valid template_name", async () => {
     const { data: template_names } = await make_email_template_names_request();
 
-    const { data: template } = await make_email_template_request( "en", _.head(template_names) );
+    const { data: template } = await make_email_template_request( _.head(template_names) );
 
     const template_is_valid = template && _.isObject(template) && !_.isEmpty(template);
 
@@ -52,29 +47,29 @@ describe("End-to-end tests for email_server endpoints", () => {
   });
 
 
-  it("/submit_email returns status 400 when a non-existant template is submitted", async () => {
+  it("/submit_email returns status 400 when a non-existant or template is submitted", async () => {
     const { data: template_names } = await make_email_template_names_request();
-    const { data: template } = await make_email_template_request( "en", _.head(template_names) );
+    const { data: template } = await make_email_template_request( _.head(template_names) );
 
     // TODO: have utility function that takes a template and returns a valid completed_template?
     // Ugh, might want to start mocking after all, even if these are "end-to-end"
     const completed_template = "TODO";
 
-    const { status: bad_lang_status } = await make_submit_email_request( "Klingon", _.head(template_names), completed_template);
-    const { status: bad_template_name_status } = await make_submit_email_request("en", "zzz_unlikely_name", completed_template);
+    const { status: bad_template_name_status } = await make_submit_email_request("zzz_unlikely_name", completed_template);
+    const { status: invalid_template_status } = await make_submit_email_request( _.head(template_names), {bleh: "bleh"} );
 
-    return expect([bad_lang_status, bad_template_name_status]).toEqual([400, 400]);
+    return expect([bad_template_name_status, invalid_template_status]).toEqual([400, 400]);
   });
   it("/submit_email returns status 200 when a valid template is submitted", async () => {
-    // Flakes due to timeout if Ethereal can't be reached for test email delivery
+    // Flakes due to timeout if Ethereal can't be reached for test email delivery, TODO mock Ethereal for this test
     const { data: template_names } = await make_email_template_names_request();
-    const { data: template } = await make_email_template_request( "en", _.head(template_names) );
+    const { data: template } = await make_email_template_request( _.head(template_names) );
 
     // TODO: have utility function that takes a template and returns a valid completed_template?
     // Ugh, might want to start mocking after all, even if these are "end-to-end"
     const completed_template = "TODO";
 
-    const { status: ok } = await make_submit_email_request( "en", _.head(template_names), completed_template);
+    const { status: ok } = await make_submit_email_request( _.head(template_names), completed_template);
 
     return expect(ok).toEqual(200);
   });
