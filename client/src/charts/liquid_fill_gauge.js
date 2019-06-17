@@ -16,7 +16,8 @@ export class LiquidFillGauge{
       .attr("transform", `translate(0,0)`)
       .style("cursor", "pointer");
     this.arcPath = this.graph.append("path");
-    this.text = this.graph.append("text");
+    this.percentText = this.graph.append("text");
+    this.descriptiveText = this.graph.append("text");
 
     const uniqueId = _.uniqueId("clipWave_");
     this.waveGroup = this.graph.append("defs")
@@ -25,9 +26,10 @@ export class LiquidFillGauge{
     this.fillCircleGroup = this.graph.append("g")
       .attr("clip-path", `url(#${uniqueId})`);
     
-    this.wave = this.waveGroup.append("path")
-    this.circle = this.fillCircleGroup.append("circle")
-    this.waveText = this.fillCircleGroup.append("text")
+    this.wave = this.waveGroup.append("path");
+    this.circle = this.fillCircleGroup.append("circle");
+    this.waveText = this.fillCircleGroup.append("text");
+    this.waveDescriptiveText = this.fillCircleGroup.append("text");
   }
 
   render(options){
@@ -52,14 +54,16 @@ export class LiquidFillGauge{
     let fillPercent = this.options.value / this.options.totalValue;
     const textValue = parseFloat(fillPercent * 100).toFixed(1);
     const textPixels = (this.options.textSize*radius/2) || (radius/2);
+    const descriptiveTextValue = this.options.descriptiveTextValue || "";
     const titleGap = this.options.titleGap || 40;
+    const title = this.options.title ? (this.options.title.length > 30 ? `${this.options.title.slice(0,30)}...` : this.options.title) : "";
     const circleThickness = this.options.circleThickness * radius || 0.05 * radius;
     const circleFillGap = this.options.circleFillGap * radius || 0.05 * radius;
     const fillCircleMargin = circleThickness + circleFillGap;
     const fillCircleRadius = radius - fillCircleMargin;
     const waveHeightValue = fillCircleRadius * waveHeightScale(textValue);
 
-    const waveCount = this.options.waveCount || 1
+    const waveCount = this.options.waveCount || 1;
     const waveLength = fillCircleRadius*2 / waveCount;
     const waveClipCount = 1 + waveCount;
     const waveClipCountModifier = this.options.waveClipModifier || 40;
@@ -73,14 +77,15 @@ export class LiquidFillGauge{
     const textVertPosition = this.options.textVertPosition || 0.5;
     const waveIsFall = this.options.waveIsFall || 1;
     const waveDirection = waveIsFall ? 100: 0;
-    const waveRiseFallTime = this.options.waveRiseFallTime || 2200
-    let waveAnimateTime = this.options.waveAnimateTime || 2000
+    const waveRiseFallTime = this.options.waveRiseFallTime || 2200;
+    const descriptiveTextAnimateTime = this.options.descriptiveTextAnimateTime || 1000;
+    let waveAnimateTime = this.options.waveAnimateTime || 2000;
 
     // A bit of viz lie: fill upto 1% if it's any lower and make wave animation faster
     fillPercent = fillPercent<0.01 ? 0.01 : fillPercent;
     waveAnimateTime = waveAnimateTime - (10/fillPercent);
 
-    if(this.options.title){
+    if(title){
       locationY = locationY + titleGap;
       this.outside_height = this.outside_height + titleGap;
       this.html.append("div")
@@ -95,10 +100,10 @@ export class LiquidFillGauge{
         })
         .append("div")
         .styles({"width": "80%","margin": "auto"})
-        .html(this.options.title);
+        .html(title);
     };
     this.graph
-      .attr("transform", `translate(${locationX},${locationY})`)
+      .attr("transform", `translate(${locationX},${locationY})`);
     this.replay
       .on("click", (() => {
         animateWaveRiseFall();
@@ -127,12 +132,18 @@ export class LiquidFillGauge{
       return function(t) { this.textContent = `${parseFloat(interpolate_text(t)).toFixed(1)}%`; }
     };
   
-    this.text
+    this.percentText
       .text(`${textValue}%`)
       .attr("text-anchor", "middle")
       .attr("font-size", `${textPixels}px`)
       .style("fill", textColor)
       .attr('transform',`translate(${radius},${textRiseScaleY(textVertPosition)})`);
+    this.descriptiveText
+      .text(descriptiveTextValue)
+      .attr("text-anchor", "middle")
+      .attr("font-size", `0px`)
+      .style("fill", textColor)
+      .attr('transform',`translate(${radius},${textRiseScaleY(textVertPosition-0.15)})`);
   
     const waveScaleX = d3.scaleLinear().range([0,waveClipWidth]).domain([0,1]);
     const waveScaleY = d3.scaleLinear().range([0,waveHeightValue]).domain([0,1]);
@@ -149,7 +160,7 @@ export class LiquidFillGauge{
           y: ix/waveClipCountModifier,
         }) 
       )
-      .value()
+      .value();
 
     this.wave
       .datum(data)
@@ -167,6 +178,12 @@ export class LiquidFillGauge{
       .attr("font-size", `${textPixels}px`)
       .style("fill", waveTextColor)
       .attr('transform', `translate(${radius},${textRiseScaleY(textVertPosition)})`);
+    this.waveDescriptiveText
+      .text(descriptiveTextValue)
+      .attr("text-anchor", "middle")
+      .attr("font-size", `0px`)
+      .style("fill", waveTextColor)
+      .attr('transform',`translate(${radius},${textRiseScaleY(textVertPosition-0.15)})`)
 
     const waveGroupXPosition = fillCircleMargin+fillCircleRadius*2-waveClipWidth;
     const waveRiseScale = d3.scaleLinear()
@@ -182,13 +199,27 @@ export class LiquidFillGauge{
       this.waveGroup.attr('transform',`translate(${waveGroupXPosition},${waveRiseScale(waveIsFall)})`)
         .transition()
         .duration(waveRiseFallTime)
-        .attr('transform',`translate(${waveGroupXPosition},${waveRiseScale(fillPercent)})`)
-      this.text.transition()
+        .attr('transform',`translate(${waveGroupXPosition},${waveRiseScale(fillPercent)})`);
+      this.percentText.transition()
         .duration(waveRiseFallTime)
         .tween("text", textTween);
       this.waveText.transition()
         .duration(waveRiseFallTime)
         .tween("text", textTween);
+      this.descriptiveText
+        .attr("font-size", `0px`)
+        .transition()
+        .delay(waveRiseFallTime-waveRiseFallTime/5)
+        .transition()
+        .duration(descriptiveTextAnimateTime)
+        .attr("font-size", `${textPixels/4}px`);
+      this.waveDescriptiveText
+        .attr("font-size", `0px`)
+        .transition()
+        .delay(waveRiseFallTime-waveRiseFallTime/5)
+        .transition()
+        .duration(descriptiveTextAnimateTime)
+        .attr("font-size", `${textPixels/4}px`);
     };
 
     const animateWave = () => {

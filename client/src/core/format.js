@@ -60,11 +60,11 @@ const compact = (precision, val, lang, options) => {
   // custom symbols in the string. There is an experimental
   // formatToParts function that may be useful in the future
   const rtn = number_formatter[lang][precision].format(new_val);
-
+  let compactStr = `${rtn} ${symbol}`
   if (options.raw){
-    return lang === 'fr' ? `${rtn} ${symbol}$` : `$${rtn} ${symbol}`; 
+    return options.noMoney ? compactStr : lang === 'fr' ? `${compactStr}$` : `$${compactStr}`; 
   }else {
-    return lang === 'fr' ? `<span class='text-nowrap'>${rtn} ${symbol}$</span>` : `<span class='text-nowrap'>$${rtn} ${symbol}</span>`;
+    return options.noMoney ? `<span class='text-nowrap'>${compactStr}</span>` : lang === 'fr' ? `<span class='text-nowrap'>${compactStr}$</span>` : `<span class='text-nowrap'>$${compactStr}</span>`;
   }
 };
 

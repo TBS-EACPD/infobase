@@ -5,7 +5,7 @@ import {
 } from './gnc_text_provider.js';
 import {
   Subject,
-  formats,
+  formatter,
   PanelGraph,
   StdPanel,
   Col,
@@ -38,7 +38,15 @@ new PanelGraph({
   },
   render({calculations, footnotes, sources}){
     const { subject, graph_args, info } = calculations; 
-    const colors = infobase_colors();
+    const data1_total = graph_args.data1[0].value
+    const data1_value = graph_args.data1[1].value
+    const data2_total= graph_args.data2[0].value
+    const data2_value = graph_args.data2[1].value
+
+    const data1_totalFmt = formatter("compact", data1_total, {raw: true, precision: 1})
+    const data1_valueFmt = formatter("compact", data1_value, {raw: true, precision: 1})
+    const data2_totalFmt = formatter("compact", data2_total, {raw: true, precision: 1})
+    const data2_valueFmt = formatter("compact", data2_value, {raw: true, precision: 1})
 
     return (
       <StdPanel
@@ -54,19 +62,21 @@ new PanelGraph({
             <Col size={3} isGraph>
               <LiquidFillGauge 
                 height={200}
-                titleGap={65}
+                titleGap={90}
                 title={Subject.Gov.name}
-                totalValue={graph_args.data1[0].value}
-                value={graph_args.data1[1].value}
+                totalValue={data1_total}
+                value={data1_value}
+                descriptiveTextValue={`${data1_valueFmt} of ${data1_totalFmt}`}
               />
             </Col>
             <Col size={3} isGraph>
               <LiquidFillGauge
                 height={200}
                 title={subject.fancy_name}
-                titleGap={65}
-                totalValue={graph_args.data2[0].value}
-                value={graph_args.data2[1].value}
+                titleGap={95}
+                totalValue={data2_total}
+                value={data2_value}
+                descriptiveTextValue={`${data2_valueFmt} of ${data2_totalFmt}`}
               />
             </Col>
           </Fragment>

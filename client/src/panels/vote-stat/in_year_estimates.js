@@ -1,6 +1,6 @@
 import { TM, text_maker } from './vote-stat-text-provider.js';
 import {
-  formats,
+  formatter,
   PanelGraph,
   declarative_charts,
   StdPanel,
@@ -62,6 +62,7 @@ const DeptEstimatesPerspective = ({subject, dept_total, gov_total}) => {
       height={250}
       value={dept_total}
       totalValue={gov_total}
+      descriptiveTextValue={`${formatter("compact1", dept_total, {raw: true})} of ${formatter("compact1", gov_total, {raw: true})}`}
     />
   );
 

@@ -1,7 +1,7 @@
 import text from "./employee_last_year_totals.yaml";
 import {
   PanelGraph,
-  formats,
+  formatter,
   create_text_maker_component,
   declarative_charts,
   StdPanel,
@@ -37,7 +37,11 @@ new PanelGraph({
       return;
     } else {
       const {info, graph_args} = calculations;
-
+      
+      const value = graph_args.vals[1].value;
+      const totalValue = graph_args.vals[0].value;
+      const fmt_value = formatter("compact", value, {raw: true, noMoney: true, precision: 1});
+      const fmt_total = formatter("compact", totalValue, {raw: true, noMoney: true, precision: 1});    
       return (
         <StdPanel
           title={text_maker("dept_employee_last_year_totals_title")}
@@ -49,8 +53,9 @@ new PanelGraph({
           <Col size={7} isGraph>
             <LiquidFillGauge
               height = {300}
-              value={graph_args.vals[1].value}
-              totalValue = {graph_args.vals[0].value}
+              value={value}
+              totalValue = {totalValue}
+              descriptiveTextValue={`${fmt_value} of ${fmt_total}`}
             />
           </Col>
         </StdPanel>
