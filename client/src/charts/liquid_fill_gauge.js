@@ -183,7 +183,7 @@ export class LiquidFillGauge{
       .attr("text-anchor", "middle")
       .attr("font-size", `0px`)
       .style("fill", waveTextColor)
-      .attr('transform',`translate(${radius},${textRiseScaleY(textVertPosition-0.15)})`)
+      .attr('transform',`translate(${radius},${textRiseScaleY(textVertPosition-0.15)})`);
 
     const waveGroupXPosition = fillCircleMargin+fillCircleRadius*2-waveClipWidth;
     const waveRiseScale = d3.scaleLinear()
