@@ -2,8 +2,7 @@ import {
   validate_completed_template,
   verify_meta_unchanged,
   verify_required_fields_present,
-  verify_values_match_value_types,
-  verify_no_unexpected_fields,
+  verify_values_are_expected_and_match_value_types,
 } from './validate_completed_template.js'
 import _ from 'lodash';
 
@@ -27,7 +26,7 @@ describe("Validation of completed templates", () => {
     return expect([
       verify_meta_unchanged(meta_one, meta_one_prime),
       verify_meta_unchanged(meta_one, meta_two),
-      verify_meta_unchanged(meta_one, meta_three)
+      verify_meta_unchanged(meta_one, meta_three),
     ]).toEqual([
       true,
       false,
@@ -110,32 +109,17 @@ describe("Validation of completed templates", () => {
     ]);
   });
 
-  it("verify_values_match_value_types checks that all present fields match the type expect of them by the original template", () => {
+  it("values_are_expected_and_match_value_types checks that all present fields are expected and match their type from the original template", () => {
     return expect(
       _.map(
         test_completed_fields,
-        (completed_fields) => verify_values_match_value_types(template_test_fields, completed_fields)
+        (completed_fields) => verify_values_are_expected_and_match_value_types(template_test_fields, completed_fields)
       )
     ).toEqual([
       true,
       true,
       true,
       false,
-      false,
-    ]);
-  });
-
-  it("verify_no_unexpected_fields checks that all of the supplied fields can be found in the original template", () => {
-    return expect(
-      _.map(
-        test_completed_fields,
-        (completed_fields) => verify_no_unexpected_fields(template_test_fields, completed_fields)
-      )
-    ).toEqual([
-      true,
-      true,
-      true,
-      true,
       false,
     ]);
   });

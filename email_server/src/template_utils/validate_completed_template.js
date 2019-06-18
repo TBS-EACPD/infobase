@@ -1,7 +1,8 @@
 import _ from "lodash";
 
-const validate_completed_template = (original_template, completed_template) => {
-  
+// TODO: would be more useful if this threw descriptive errors
+
+const validate_completed_template = (original_template, completed_template) => {  
   const {
     meta: original_meta,
     ...field_templates
@@ -16,11 +17,9 @@ const validate_completed_template = (original_template, completed_template) => {
 
   const required_fields_present = verify_required_fields_present(field_templates, completed_fields);
 
-  const values_match_value_types = verify_values_match_value_types(field_templates, completed_fields);
+  const values_are_expected_and_match_value_types = verify_values_are_expected_and_match_value_types(field_templates, completed_fields);
 
-  const no_unexpected_fields = verify_no_unexpected_fields(field_templates, completed_fields);
-
-  return meta_unchanged && required_fields_present && values_match_value_types && no_unexpected_fields;
+  return meta_unchanged && required_fields_present && values_are_expected_and_match_value_types;
 };
 
 const verify_meta_unchanged = (original_meta, completed_meta) => _.isEqual(original_meta, completed_meta);
@@ -32,34 +31,34 @@ const verify_required_fields_present = (field_templates, completed_fields) => _.
   .every()
   .value();
 
-const verify_values_match_value_types = (field_templates, completed_fields) => _.chain(completed_fields)
+const verify_values_are_expected_and_match_value_types = (field_templates, completed_fields) => _.chain(completed_fields)
   .map(
     (field_value, field_key) => {
       const expected_type = _.get(field_templates, `${field_key}.value_type`);
 
-      switch(expected_type){
-        case "string":
-          return _.isString(field_value);
-        case "number":
-          return _.isNumber(field_value);
-        case "json":
-          return _.isObject(field_value)
-        default:
-          return false; //unexpeected type in the json itself, or unexpected field
+      if (expected_type){
+        switch(expected_type){
+          case "string":
+            return _.isString(field_value);
+          case "number":
+            return _.isNumber(field_value);
+          case "json":
+            return _.isObject(field_value)
+          default:
+            return false; //unexpected type in the json itself
+        }
+      } else {
+        return false; //unexpected field in completed_fields
       }
     }
   )
   .every()
   .value();
 
-const verify_no_unexpected_fields = (field_templates, completed_fields) => {
-  return false; //todo
-};
 
 export { 
   validate_completed_template,
   verify_meta_unchanged,
   verify_required_fields_present,
-  verify_values_match_value_types,
-  verify_no_unexpected_fields,
+  verify_values_are_expected_and_match_value_types,
 };
