@@ -62,7 +62,6 @@ new PanelGraph({
             <Col size={3} isGraph>
               <LiquidFillGauge 
                 height={200}
-                titleGap={90}
                 title={Subject.Gov.name}
                 totalValue={data1_total}
                 value={data1_value}
@@ -73,7 +72,6 @@ new PanelGraph({
               <LiquidFillGauge
                 height={200}
                 title={subject.fancy_name}
-                titleGap={95}
                 totalValue={data2_total}
                 value={data2_value}
                 descriptiveTextValue={`${data2_valueFmt} of ${data2_totalFmt}`}

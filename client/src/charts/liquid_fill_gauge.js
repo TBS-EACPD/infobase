@@ -1,4 +1,5 @@
 import common_charts_utils from './common_charts_utils';
+import webkitLineClamp from 'webkit-line-clamp';
 import { get_static_url } from '../request_utils.js';
 
 // Based on http://bl.ocks.org/brattonc/5e5ce9beee483220e2f6
@@ -55,8 +56,8 @@ export class LiquidFillGauge{
     const textValue = parseFloat(fillPercent * 100).toFixed(1);
     const textPixels = (this.options.textSize*radius/2) || (radius/2);
     const descriptiveTextValue = this.options.descriptiveTextValue || "";
-    const titleGap = this.options.titleGap || 40;
-    const title = this.options.title ? (this.options.title.length > 30 ? `${this.options.title.slice(0,30)}...` : this.options.title) : "";
+    const titleGap = this.options.titleGap || 65;
+    const titleClumpLines = this.options.titleClumpLines || 2;
     const circleThickness = this.options.circleThickness * radius || 0.05 * radius;
     const circleFillGap = this.options.circleFillGap * radius || 0.05 * radius;
     const fillCircleMargin = circleThickness + circleFillGap;
@@ -85,10 +86,10 @@ export class LiquidFillGauge{
     fillPercent = fillPercent<0.01 ? 0.01 : fillPercent;
     waveAnimateTime = waveAnimateTime - (10/fillPercent);
 
-    if(title){
+    if(this.options.title){
       locationY = locationY + titleGap;
       this.outside_height = this.outside_height + titleGap;
-      this.html.append("div")
+      const titleContainer = this.html.append("div")
         .attr("class", "title center-text")
         .styles({
           "font-size": `${textPixels/2}px`,
@@ -97,10 +98,11 @@ export class LiquidFillGauge{
           "left": `${margin.left}px`,
           "top": `0px`,
           "width": `${width}px`,
-        })
-        .append("div")
+        });
+      const titleDiv = titleContainer.append("div")
         .styles({"width": "80%","margin": "auto"})
-        .html(title);
+        .html(this.options.title);
+      webkitLineClamp(titleDiv._groups[0][0], titleClumpLines);
     };
     this.graph
       .attr("transform", `translate(${locationX},${locationY})`);
