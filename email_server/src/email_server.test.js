@@ -47,13 +47,34 @@ describe("End-to-end tests for email_server endpoints", () => {
   });
 
 
-  it("/submit_email returns status 400 when a non-existant or template is submitted", async () => {
+  // TODO: Not great... could mock my way out of needing to do this, or just add a static test.json template to ../templates
+  const complete_template = (template) => _.chain(template)
+    .pickBy( ({required}, field_key) => field_key === "meta" || required )
+    .mapValues(
+      (field_values, field_key) => {
+        if (field_key === "meta"){
+          return field_values;
+        }
+
+        switch(field_values.value_type){
+          case "string":
+            return "a";
+          case "number":
+            return 1;
+          case "json":
+            return {a: 1};
+          default:
+            return false; //unexpected type in the json itself
+        }
+      }
+    )
+    .value();
+
+  it("/submit_email returns status 400 when a non-existant or invalid template is submitted", async () => {
     const { data: template_names } = await make_email_template_names_request();
     const { data: template } = await make_email_template_request( _.head(template_names) );
 
-    // TODO: have utility function that takes a template and returns a valid completed_template?
-    // Ugh, might want to start mocking after all, even if these are "end-to-end"
-    const completed_template = "TODO";
+    const completed_template = complete_template(template);
 
     const { status: bad_template_name_status } = await make_submit_email_request("zzz_unlikely_name", completed_template);
     const { status: invalid_template_status } = await make_submit_email_request( _.head(template_names), {bleh: "bleh"} );
@@ -65,9 +86,7 @@ describe("End-to-end tests for email_server endpoints", () => {
     const { data: template_names } = await make_email_template_names_request();
     const { data: template } = await make_email_template_request( _.head(template_names) );
 
-    // TODO: have utility function that takes a template and returns a valid completed_template?
-    // Ugh, might want to start mocking after all, even if these are "end-to-end"
-    const completed_template = "TODO";
+    const completed_template = complete_template(template);
 
     const { status: ok } = await make_submit_email_request( _.head(template_names), completed_template);
 

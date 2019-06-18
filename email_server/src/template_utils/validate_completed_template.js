@@ -43,7 +43,7 @@ const verify_values_are_expected_and_match_value_types = (field_templates, compl
           case "number":
             return _.isNumber(field_value);
           case "json":
-            return _.isObject(field_value)
+            return _.isObject(field_value);
           default:
             return false; //unexpected type in the json itself
         }
