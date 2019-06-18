@@ -65,7 +65,7 @@ describe("Validation of completed templates", () => {
     issue: "I don't think the line graphs should always start at 0",
     sha: "fenef8723hhf2h9jdj2j3d92093",
     id: '1234qwert',
-    additional: "{ bleh: blah, bluh: { blagh: blargh} }",
+    additional: { bleh: "blah", bluh: { blagh: "blargh" } },
   };
   const valid_completed_test_fields_incompletes = {
     issue: "I don't think the line graphs should always start at 0",
@@ -74,7 +74,7 @@ describe("Validation of completed templates", () => {
   const invalid_completed_test_fields_missing_required = {
     issue: "I think the line graphs should always start at 0",
     id: '1234qwert',
-    additional: "{ bleh: blah, bluh: { blagh: blargh} }",
+    additional: { bleh: "blah", bluh: { blagh: "blargh" } },
   };
   const invalid_completed_test_fields_bad_value_type = {
     issue: "I think the line graphs should always start at 0",
@@ -121,7 +121,7 @@ describe("Validation of completed templates", () => {
       true,
       true,
       false,
-      true,
+      false,
     ]);
   });
 

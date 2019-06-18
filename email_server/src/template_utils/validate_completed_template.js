@@ -32,9 +32,25 @@ const verify_required_fields_present = (field_templates, completed_fields) => _.
   .every()
   .value();
 
-const verify_values_match_value_types = (field_templates, completed_fields) => {
-  return false; //todo
-};
+const verify_values_match_value_types = (field_templates, completed_fields) => _.chain(completed_fields)
+  .map(
+    (field_value, field_key) => {
+      const expected_type = _.get(field_templates, `${field_key}.value_type`);
+
+      switch(expected_type){
+        case "string":
+          return _.isString(field_value);
+        case "number":
+          return _.isNumber(field_value);
+        case "json":
+          return _.isObject(field_value)
+        default:
+          return false; //unexpeected type in the json itself, or unexpected field
+      }
+    }
+  )
+  .every()
+  .value();
 
 const verify_no_unexpected_fields = (field_templates, completed_fields) => {
   return false; //todo
