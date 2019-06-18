@@ -25,9 +25,12 @@ const validate_completed_template = (original_template, completed_template) => {
 
 const verify_meta_unchanged = (original_meta, completed_meta) => _.isEqual(original_meta, completed_meta);
 
-const verify_required_fields_present = (field_templates, completed_fields) => {
-  return false; //todo
-};
+const verify_required_fields_present = (field_templates, completed_fields) => _.chain(field_templates)
+  .pickBy( _.property("required") )
+  .keys()
+  .map( (required_key) => completed_fields[required_key] )
+  .every()
+  .value();
 
 const verify_values_match_value_types = (field_templates, completed_fields) => {
   return false; //todo
