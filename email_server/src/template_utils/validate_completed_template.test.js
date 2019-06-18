@@ -4,7 +4,7 @@ import {
   verify_required_fields_present,
   verify_values_match_value_types,
   verify_no_unexpected_fields,
-} from 'validate_Completed_template.js'
+} from './validate_completed_template.js'
 import _ from 'lodash';
 
 describe("Validation of completed templates", () => {
@@ -24,31 +24,135 @@ describe("Validation of completed templates", () => {
       subject_template: "bluh",
     };
 
-    return expect(
+    return expect([
       verify_meta_unchanged(meta_one, meta_one_prime),
       verify_meta_unchanged(meta_one, meta_two),
       verify_meta_unchanged(meta_one, meta_three)
-    ).toEqual([
+    ]).toEqual([
       true,
       false,
       false,
     ]);
   });
 
-  it("verify_required_fields_present", () => {
-    return false;
+  const template_test_fields = {
+    issue: {
+      required: true,
+      value_type: "string",
+      form_type: "input",
+      form_label: {
+        en: "Issue description",
+        fr: "TODO",
+      },
+    },
+    sha: {
+      required: true,
+      value_type: "string",
+      form_type: false,
+    },
+    id: {
+      required: false,
+      value_type: "string",
+      form_type: false,
+    },
+    additional: {
+      required: false,
+      value_type: "json",
+      form_type: false,
+    },
+  };
+  const valid_completed_test_fields_complete = {
+    issue: "I don't think the line graphs should always start at 0",
+    sha: "fenef8723hhf2h9jdj2j3d92093",
+    id: '1234qwert',
+    additional: "{ bleh: blah, bluh: { blagh: blargh} }",
+  };
+  const valid_completed_test_fields_incompletes = {
+    issue: "I don't think the line graphs should always start at 0",
+    sha: "fenef8723hhf2h9jdj2j3d92093",
+  };
+  const invalid_completed_test_fields_missing_required = {
+    issue: "I think the line graphs should always start at 0",
+    id: '1234qwert',
+    additional: "{ bleh: blah, bluh: { blagh: blargh} }",
+  };
+  const invalid_completed_test_fields_bad_value_type = {
+    issue: "I think the line graphs should always start at 0",
+    sha: "fenef8723hhf2h9jdj2j3d92093",
+    additional: "1",
+  };
+  const invalid_completed_test_fields_bad_extra_field = {
+    issue: "I think the line graphs should always start at 0",
+    sha: "fenef8723hhf2h9jdj2j3d92093",
+    bonus: "Free real estate",
+  };
+
+  const test_completed_fields = [
+    valid_completed_test_fields_complete,
+    valid_completed_test_fields_incompletes,
+    invalid_completed_test_fields_missing_required,
+    invalid_completed_test_fields_bad_value_type,
+    invalid_completed_test_fields_bad_extra_field,
+  ];
+
+  it("verify_required_fields_present checks that all fields marked required in the template are in the completed fields", () => {
+    return expect(
+      _.map(
+        test_completed_fields,
+        (completed_fields) => verify_required_fields_present(template_test_fields, completed_fields)
+      )
+    ).toEqual([
+      true,
+      true,
+      false,
+      true,
+      true,
+    ]);
   });
 
-  it("verify_values_match_value_types", () => {
-    return false;
+  it("verify_values_match_value_types checks that all present fields match the type expect of them by the original template", () => {
+    return expect(
+      _.map(
+        test_completed_fields,
+        (completed_fields) => verify_values_match_value_types(template_test_fields, completed_fields)
+      )
+    ).toEqual([
+      true,
+      true,
+      true,
+      false,
+      true,
+    ]);
   });
 
-  it("verify_no_unexpected_fields", () => {
-    return false;
+  it("verify_no_unexpected_fields checks that all of the supplied fields can be found in the original template", () => {
+    return expect(
+      _.map(
+        test_completed_fields,
+        (completed_fields) => verify_no_unexpected_fields(template_test_fields, completed_fields)
+      )
+    ).toEqual([
+      true,
+      true,
+      true,
+      true,
+      false,
+    ]);
   });
 
   it("validate_completed_template works end-to-end", () => {
-    return false;
+    return expect(
+      _.map(
+        test_completed_fields,
+        (completed_fields) => validate_completed_template(template_test_fields, completed_fields)
+      )
+    ).toEqual([
+      true,
+      true,
+      false,
+      false,
+      false,
+    ]);
   });
 
 });
