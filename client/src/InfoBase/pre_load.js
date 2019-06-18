@@ -6,7 +6,8 @@ export default function(){
   const app_el = document.querySelector('#app');
   
   const containerDiv = document.createElement('div');
-  containerDiv.className = 'faded-loading-container';
+  containerDiv.className = 'faded-loading-container--true';
+  containerDiv.style.position = 'fixed';
   const spinnerDiv = document.createElement('div');
   spinnerDiv.className = 'leaf-spinner-container';
   spinnerDiv.setAttribute('style', 'transform: scale(2); position: fixed');

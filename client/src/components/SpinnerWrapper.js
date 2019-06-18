@@ -5,7 +5,7 @@ export class SpinnerWrapper extends React.Component {
   render(){ 
     return !this.props.use_leaf_spinner ? 
       <div ref="main" /> : 
-      <LeafSpinner scale={this.props.scale} position={this.props.position} container={this.props.container}/>;
+      <LeafSpinner scale={this.props.scale} position={this.props.position} container={this.props.container} faded={this.props.faded}/>;
   }
   componentDidMount(){ 
     const { 
@@ -25,6 +25,7 @@ export class SpinnerWrapper extends React.Component {
 }
 
 SpinnerWrapper.defaultProps = {
+  faded: true,
   container: document.body,
   position: 'fixed',
   scale: 2,
