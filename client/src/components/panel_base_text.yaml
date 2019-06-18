@@ -19,3 +19,7 @@ a11y_download_panel:
 a11y_downloading_panel:
   en: Downloading PDF in progress...
   fr: Téléchargement de la version PDF en cours…
+
+a11y_retrieved_date:
+  en: Retrieved on
+  fr: Récupéré le

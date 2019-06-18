@@ -77,14 +77,6 @@ class Panel_ extends React.Component {
       generating_pdf: false,
     };
   }
-  pdf_end_util(title){
-    log_standard_event({
-      SUBAPP: window.location.hash.replace('#',''),
-      MISC1: "PDF_DOWNLOAD",
-      MISC2: title,
-    });
-    this.setState({generating_pdf: false});
-  }
 
   download_panel_pdf(){
     const {
@@ -106,65 +98,82 @@ class Panel_ extends React.Component {
     const width = pdf.internal.pageSize.getWidth();
     const FOOTER_HEIGHT = 27;
     const EXTRA_HEIGHT = 20;
-
-    const panel_link = `https://canada.ca/gcinfobase${panel_href_template(context.subject, context.bubble, context.graph_key)}`;
+    const langUrl = window.lang==='en' ? 'gcinfobase' : 'infobasegc';
+    const panel_link = `https://canada.ca/${langUrl}${panel_href_template(context.subject, context.bubble, context.graph_key)}`;
 
     const qr = qrcode(0, 'L');
     qr.addData(panel_link);
     qr.make();
     const qrCodeImg = qr.createDataURL();
     const footerImg = new Image();
-    footerImg.src = get_static_url(`png/wmms-blk.png`)
+    footerImg.src = get_static_url(`png/wmms-blk.png`);
 
-    if(window.is_a11y_mode){
+    const get_text_height = (pdf, text) => {
+      const textHeight = pdf.getTextWidth(text)/25;
+      return textHeight < 10 ? 10 : textHeight > 10 && textHeight < 20 ? 20 : textHeight;
+    };
+
+    const setup_pdf_title = (pdf, title, width) => {
       pdf.setFontStyle('bold');
       pdf.setLineWidth(1);
       pdf.text(2,10,title);
       pdf.line(0,12,width,12,'F');
-      let y = 14;
+    };
+
+    const setup_pdf_footer = (pdf, width, height) => {
+      pdf.addImage(qrCodeImg, 'JPEG', 1, height + EXTRA_HEIGHT);
+  
+      pdf.setFontStyle('normal');
+      pdf.setFontSize(10);
+      pdf.textWithLink(`canada.ca/${langUrl}`, 2.5, height + EXTRA_HEIGHT + 25, {url: panel_link});
+      pdf.text(`${text_maker("a11y_retrieved_date")} ${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`, (width/2)-25, height + EXTRA_HEIGHT + 25);
+
+      pdf.addImage(footerImg, 'png', 174.5, height + EXTRA_HEIGHT + 15);
+    };
+    const pdf_end_util = (title) => {
+      log_standard_event({
+        SUBAPP: window.location.hash.replace('#',''),
+        MISC1: "PDF_DOWNLOAD",
+        MISC2: title,
+      });
+      this.setState({generating_pdf: false});
+    };
+  
+    if(window.is_a11y_mode){
+      setup_pdf_title(pdf, title, width);
+      let current_height = 14;
       const textElements = _.map(panel_body.querySelectorAll('p,ul'), _.identity);
       _.forEach(textElements, (text) => {
-        if(text.tagName==="UL"){
+        if(text.tagName === "UL"){
           _.forEach(_.map(text.children, _.identity), (li) => {
             pdf.fromHTML(
-              li, 10, y, {'width': width}
+              li, 10, current_height, {'width': width}
             );
-            const textHeight = pdf.getTextWidth(li.innerText)/25;
-            y+= textHeight < 10 ? 10 : textHeight > 10 && textHeight < 20 ? 20 : textHeight;
+            current_height += get_text_height(pdf, li.innerText);
           });
-        }
-        else{
+        } else{
           pdf.fromHTML(
-            text, 1, y, {'width': width}
+            text, 1, current_height, {'width': width}
           );
-          const textHeight = pdf.getTextWidth(text.innerText)/25;
-          y+= textHeight < 10 ? 10 : textHeight > 10 && textHeight < 20 ? 20 : textHeight;  
+          current_height += get_text_height(pdf, text.innerText);
         };
       });
 
       const tables = _.map(panel_body.getElementsByTagName("table"), _.identity);
       _.forEach (tables, (tbl) => {
         pdf.autoTable({
-          startY: y,
+          startY: current_height,
           html: tbl,
         });
-        y= pdf.previousAutoTable.finalY + 10
+        current_height = pdf.previousAutoTable.finalY + 10;
       });
-      if (!(pdf.internal.pageSize.getHeight() - y < FOOTER_HEIGHT)){
-        y = y + (pdf.internal.pageSize.getHeight() - y) - FOOTER_HEIGHT - EXTRA_HEIGHT;
-        pdf.addImage(qrCodeImg, 'JPEG', 1, y + EXTRA_HEIGHT);
-  
-        pdf.setFontStyle('normal');
-        pdf.setFontSize(10);
-        pdf.textWithLink('canada.ca/gcinfobase', 2.5, y + EXTRA_HEIGHT + 25, {url: panel_link});
-        pdf.text(`Retrieved on ${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`, (width/2)-25, y + EXTRA_HEIGHT + 25)
-  
-        pdf.addImage(footerImg, 'png', 174.5, y + EXTRA_HEIGHT + 15);  
+      if (!(pdf.internal.pageSize.getHeight() - current_height < FOOTER_HEIGHT)){
+        current_height = current_height + (pdf.internal.pageSize.getHeight() - current_height) - FOOTER_HEIGHT - EXTRA_HEIGHT;
+        setup_pdf_footer(pdf, width, current_height);
       };
       pdf.save(file_name);
-      this.pdf_end_util(title);
-    }
-    else{
+      pdf_end_util(title);
+    } else{
       // When the list of legend items are too long such that the items don't all fit into the defined max height, scroll is created to contain them.
       // Screenshotting that will cause items to overflow, hence below sets max height to a big arbitrary number which later gets set back to original.
       const legend_container_arr = panel_body.getElementsByClassName('legend-container');
@@ -177,7 +186,7 @@ class Panel_ extends React.Component {
 
       // Img tags are not properly captured, hence needs to be temporarily converted to canvas for pdf purposes only
       const imgElements = _.map(panel_body.getElementsByTagName("img"), _.identity);
-      _.forEach (imgElements, (img)=>{
+      _.forEach(imgElements, (img) => {
         const parentNode = img.parentNode;
 
         const canvas = document.createElement('canvas');
@@ -204,22 +213,12 @@ class Panel_ extends React.Component {
           const height = ratio * width;
 
           pdf.internal.pageSize.setHeight(height + FOOTER_HEIGHT + EXTRA_HEIGHT);
-          pdf.setFontStyle('bold');
-          pdf.setLineWidth(2);
-          pdf.text(2,10,title);
-          pdf.line(0,12,width,12,'F');
-      
-          pdf.addImage(imgData, 'JPEG', 0, 12, width, height);
-          pdf.addImage(qrCodeImg, 'JPEG', 1, height + EXTRA_HEIGHT);
 
-          pdf.setFontStyle('normal');
-          pdf.setFontSize(10);
-          pdf.textWithLink('canada.ca/gcinfobase', 2.5, height + EXTRA_HEIGHT + 25, {url: panel_link});
-          pdf.text(`Retrieved on ${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`, (width/2)-25, height + EXTRA_HEIGHT + 25)
-  
-          pdf.addImage(footerImg, 'png', 174.5, height + EXTRA_HEIGHT + 15);
-          
-          pdf.save(file_name);  
+          setup_pdf_title(pdf, title, width);
+
+          pdf.addImage(imgData, 'JPEG', 0, 12, width, height);
+          setup_pdf_footer(pdf, width, height);
+          pdf.save(file_name);
         })
         .then( () => {
           _.forEach(imgElements, (img) => {
@@ -236,7 +235,7 @@ class Panel_ extends React.Component {
             (legend_container, index) => legend_container.style.maxHeight = oldMaxHeights[index]
           );
 
-          this.pdf_end_util(title);
+          pdf_end_util(title);
         });  
     };
   };
