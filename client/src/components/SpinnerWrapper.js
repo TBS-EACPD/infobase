@@ -28,6 +28,7 @@ export class SpinnerWrapper extends React.Component {
 }
 
 SpinnerWrapper.defaultProps = {
+  faded: true,
   container: document.body,
   position: 'fixed',
   scale: 2,
