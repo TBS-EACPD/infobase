@@ -12,15 +12,35 @@ const validate_completed_template = (original_template, completed_template) => {
     ...completed_fields
   } = completed_template;
 
-  const meta_unchanged = _.isEqual(original_meta, completed_meta);
+  const meta_unchanged = verify_meta_unchanged(original_meta, completed_meta);
 
-  const required_fields_are_present = true; //todo
+  const required_fields_present = verify_required_fields_present(field_templates, completed_fields);
 
-  const values_match_value_types = true; //todo
+  const values_match_value_types = verify_values_match_value_types(field_templates, completed_fields);
 
-  const no_unexpected_fields = true; //todo
+  const no_unexpected_fields = verify_no_unexpected_fields(field_templates, completed_fields);
 
-  return meta_unchanged;
+  return meta_unchanged && required_fields_present && values_match_value_types && no_unexpected_fields;
 };
 
-export { validate_completed_template };
+const verify_meta_unchanged = (original_meta, completed_meta) => _.isEqual(original_meta, completed_meta);
+
+const verify_required_fields_present = (field_templates, completed_fields) => {
+  return false; //todo
+};
+
+const verify_values_match_value_types = (field_templates, completed_fields) => {
+  return false; //todo
+};
+
+const verify_no_unexpected_fields = (field_templates, completed_fields) => {
+  return false; //todo
+};
+
+export { 
+  validate_completed_template,
+  verify_meta_unchanged,
+  verify_required_fields_present,
+  verify_values_match_value_types,
+  verify_no_unexpected_fields,
+};
