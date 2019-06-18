@@ -37,7 +37,7 @@ const verify_values_are_expected_and_match_value_types = (field_templates, compl
       const expected_type = _.get(field_templates, `${field_key}.value_type`);
 
       if (expected_type){
-        switch(expected_type){
+        switch (expected_type){
           case "string":
             return _.isString(field_value);
           case "number":

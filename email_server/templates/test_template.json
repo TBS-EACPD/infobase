@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "subject_template": "TODO"
+  },
+
+  "text": {
+    "required": true,
+    "value_type": "string",
+    "form_type": "input",
+    "form_label": {
+      "en": "Text",
+      "fr": "Text"
+    }
+  },
+  "number": {
+    "required": true,
+    "value_type": "number",
+    "form_type": "input",
+    "form_label": {
+      "en": "Number",
+      "fr": "Number"
+    }
+  },
+  "json": {
+    "required": true,
+    "value_type": "json",
+    "form_type": "input",
+    "form_label": {
+      "en": "JSON",
+      "fr": "JSON"
+    }
+  },
+
+  "required_automatic": {
+    "required": true,
+    "value_type": "string",
+    "form_type": false
+  },
+  "optional_automatic": {
+    "required": false,
+    "value_type": "string",
+    "form_type": false
+  }
+}
