@@ -109,6 +109,7 @@ class Panel_ extends React.Component {
     footerImg.src = get_static_url(`png/wmms-blk.png`);
 
     const get_text_height = (pdf, text) => {
+      // Getting width of the text string to estimate the height of the text (number of lines)
       const textHeight = pdf.getTextWidth(text)/25;
       return textHeight < 10 ? 10 : textHeight > 10 && textHeight < 20 ? 20 : textHeight;
     };
