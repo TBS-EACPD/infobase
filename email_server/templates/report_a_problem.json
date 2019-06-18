@@ -32,7 +32,7 @@
     "value_type": "string",
     "form_type": false
   },
-  "id": {
+  "session_id": {
     "required": false,
     "value_type": "string",
     "form_type": false
