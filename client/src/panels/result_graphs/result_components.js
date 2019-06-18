@@ -408,7 +408,7 @@ const SingleIndicatorDisplay = ({indicator}) => {
               <TM k="notes" />
             </dt>
             <dd>
-              {indicator.explanation}  
+              <div dangerouslySetInnerHTML={{ __html: sanitized_marked(indicator.explanation) }} /> 
             </dd>
           </Fragment>
         }
