@@ -74,8 +74,8 @@ const make_email_server = (templates) => {
 
       if ( _.isUndefined(requested_template) ){
         const error_message = "Bad Request: email template request has invalid or missing `template_name` value";
-        log_email_request(request, error_message);
         response.status("400").send(error_message);
+        log_email_request(request, error_message);
       } else {
         response.status("200").json(templates[template_name]);
       }
@@ -96,8 +96,8 @@ const make_email_server = (templates) => {
       if ( _.isUndefined(original_template) || !validate_completed_template(original_template, completed_template) ){
         const error_message = "Bad Request: submitted email content either doesn't correspond to any templates, " + 
           "or does not validate aginst its corresponding template";
-        log_email_request(request, error_message);
         response.status("400").send(error_message);
+        log_email_request(request, error_message);
       } else {
         const email_body = make_email_body_from_completed_template(original_template, completed_template);
 
@@ -128,8 +128,8 @@ const make_email_server = (templates) => {
               `Had error: ${sent_mail_info.err}` : 
               'Rejected by recipient'
           }`;
-          log_email_request(request, error_message);
           response.status("500").send(error_message);
+          log_email_request(request, error_message);
         }
       }
     }
