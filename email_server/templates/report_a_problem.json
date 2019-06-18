@@ -32,9 +32,14 @@
     "value_type": "string",
     "form_type": false
   },
-  "user_id": {
+  "id": {
     "required": false,
     "value_type": "string",
+    "form_type": false
+  },
+  "additional": {
+    "required": false,
+    "value_type": "json",
     "form_type": false
   }
 }
