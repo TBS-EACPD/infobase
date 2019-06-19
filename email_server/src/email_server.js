@@ -21,12 +21,13 @@ const log_email_request = (request, log_message) => {
   const request_content = get_request_content(request);
   //eslint-disable-next-line no-console
   console.log(
-    JSON.stringify(
-      _.pickBy({
+    JSON.stringify({
+      ..._.pickBy({
         log_message,
         request_content,
-      })
-    )
+      }),
+      sha: process.env.CURRENT_SHA || "dev, no sha env var set",
+    })
   );
 };
 
@@ -115,7 +116,7 @@ const make_email_server = (templates) => {
           console.log(`Test mail URL: ${nodemailer.getTestMessageUrl(sent_mail_info)}`);
         }
 
-        const mail_sent_successully = (
+        const mail_sent_successully = ( 
           sent_mail_info && 
           /^2[0-9][0-9]/.test(sent_mail_info.response) && 
           _.isEmpty(sent_mail_info.rejected)
