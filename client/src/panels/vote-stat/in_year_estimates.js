@@ -62,7 +62,7 @@ const DeptEstimatesPerspective = ({subject, dept_total, gov_total}) => {
       height={250}
       value={dept_total}
       totalValue={gov_total}
-      descriptiveTextValue={`${formatter("compact1", dept_total, {raw: true})} of ${formatter("compact1", gov_total, {raw: true})}`}
+      descriptiveTextValue={`${formatter("compact1", dept_total, {raw: true})} ${text_maker("of")} ${formatter("compact1", gov_total, {raw: true})}`}
     />
   );
 

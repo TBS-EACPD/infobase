@@ -22,11 +22,11 @@ new PanelGraph({
   info_deps: ['orgTransferPayments_gov_info', 'orgTransferPayments_dept_info', 'orgVoteStatPa_dept_info'],
   calculate(subject, info, options){
     const graph_args = {
-      data1: [
+      dept_in_gov: [
         { value: info.gov_tp_exp_pa_last_year, name: 'y'},
         { value: info.dept_tp_exp_pa_last_year, name: 'x'},
       ],
-      data2: [
+      tp_in_exp: [
         { value: info.dept_exp_pa_last_year, name: 'z'},
         { value: info.dept_tp_exp_pa_last_year, name: 'x'},
       ],
@@ -38,15 +38,13 @@ new PanelGraph({
   },
   render({calculations, footnotes, sources}){
     const { subject, graph_args, info } = calculations; 
-    const data1_total = graph_args.data1[0].value
-    const data1_value = graph_args.data1[1].value
-    const data2_total= graph_args.data2[0].value
-    const data2_value = graph_args.data2[1].value
+    const gov_tp_exp_pa_last_year = graph_args.dept_in_gov[0].value;
+    const dept_tp_exp_pa_last_year = graph_args.dept_in_gov[1].value;
+    const dept_exp_pa_last_year= graph_args.tp_in_exp[0].value;
 
-    const data1_totalFmt = formatter("compact", data1_total, {raw: true, precision: 1})
-    const data1_valueFmt = formatter("compact", data1_value, {raw: true, precision: 1})
-    const data2_totalFmt = formatter("compact", data2_total, {raw: true, precision: 1})
-    const data2_valueFmt = formatter("compact", data2_value, {raw: true, precision: 1})
+    const fmt_gov_tp_exp_pa_last_year = formatter("compact", gov_tp_exp_pa_last_year, {raw: true, precision: 1})
+    const fmt_dept_tp_exp_pa_last_year = formatter("compact", dept_tp_exp_pa_last_year, {raw: true, precision: 1})
+    const fmt_dept_exp_pa_last_year = formatter("compact", dept_exp_pa_last_year, {raw: true, precision: 1})
 
     return (
       <StdPanel
@@ -63,18 +61,18 @@ new PanelGraph({
               <LiquidFillGauge 
                 height={200}
                 title={Subject.Gov.name}
-                totalValue={data1_total}
-                value={data1_value}
-                descriptiveTextValue={`${data1_valueFmt} of ${data1_totalFmt}`}
+                totalValue={gov_tp_exp_pa_last_year}
+                value={dept_tp_exp_pa_last_year}
+                descriptiveTextValue={`${fmt_dept_tp_exp_pa_last_year} ${text_maker("of")} ${fmt_gov_tp_exp_pa_last_year}`}
               />
             </Col>
             <Col size={3} isGraph>
               <LiquidFillGauge
                 height={200}
                 title={subject.fancy_name}
-                totalValue={data2_total}
-                value={data2_value}
-                descriptiveTextValue={`${data2_valueFmt} of ${data2_totalFmt}`}
+                totalValue={dept_exp_pa_last_year}
+                value={dept_tp_exp_pa_last_year}
+                descriptiveTextValue={`${fmt_dept_exp_pa_last_year} ${text_maker("of")} ${fmt_dept_tp_exp_pa_last_year}`}
               />
             </Col>
           </Fragment>

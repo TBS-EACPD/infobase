@@ -1,4 +1,5 @@
-import text from "./employee_last_year_totals.yaml";
+import text1 from "./employee_last_year_totals.yaml";
+import text2 from "../../common_text/common_lang.yaml";
 import {
   PanelGraph,
   formatter,
@@ -8,7 +9,7 @@ import {
   Col,
 } from "../shared"; 
 
-const { text_maker, TM } = create_text_maker_component(text);
+const { text_maker, TM } = create_text_maker_component([text1, text2]);
 
 const { LiquidFillGauge } = declarative_charts;
 
@@ -38,10 +39,10 @@ new PanelGraph({
     } else {
       const {info, graph_args} = calculations;
       
-      const value = graph_args.vals[1].value;
-      const totalValue = graph_args.vals[0].value;
-      const fmt_value = formatter("compact", value, {raw: true, noMoney: true, precision: 1});
-      const fmt_total = formatter("compact", totalValue, {raw: true, noMoney: true, precision: 1});    
+      const dept_emp_value = graph_args.vals[1].value;
+      const gov_emp_value = graph_args.vals[0].value;
+      const dept_emp_fmt = formatter("compact", dept_emp_value, {raw: true, noMoney: true, precision: 1});
+      const gov_emp_fmt = formatter("compact", gov_emp_value, {raw: true, noMoney: true, precision: 1});    
       return (
         <StdPanel
           title={text_maker("dept_employee_last_year_totals_title")}
@@ -53,9 +54,9 @@ new PanelGraph({
           <Col size={7} isGraph>
             <LiquidFillGauge
               height = {300}
-              value={value}
-              totalValue = {totalValue}
-              descriptiveTextValue={`${fmt_value} of ${fmt_total}`}
+              value={dept_emp_value}
+              totalValue = {gov_emp_value}
+              descriptiveTextValue={`${dept_emp_fmt} ${text_maker("of")} ${gov_emp_fmt}`}
             />
           </Col>
         </StdPanel>
