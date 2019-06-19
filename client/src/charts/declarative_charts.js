@@ -159,7 +159,7 @@ class StackedHbarChart extends React.Component {
       }
     );
       
-    this._render()
+    this._render();
   }
   componentDidUpdate(){
     this._render();
@@ -168,7 +168,7 @@ class StackedHbarChart extends React.Component {
 
 class Bar extends React.Component {
   render(){
-    return <div ref="graph_area" style={{position: 'relative'}} />
+    return <div ref="graph_area" style={{position: 'relative'}} />;
   }
   _render(){
     this.graph_instance.render(_.clone(this.props));
@@ -178,8 +178,7 @@ class Bar extends React.Component {
       d3.select(this.refs.graph_area).node(),
       _.clone(this.props)
     );
-    this._render()
-
+    this._render();
   }
   componentDidUpdate(){
     this._render();
@@ -256,7 +255,7 @@ const TabularPercentLegend = ({
 
 class A11YTable extends React.PureComponent {
   render(){
-    return <div ref="main" />
+    return <div ref="main" />;
   }
   componentDidMount(){
     this._render();
@@ -277,7 +276,7 @@ class A11YTable extends React.PureComponent {
 
 class LiquidFillGauge extends React.Component {
   render(){
-    return <div ref="graph_area" style={{position: 'relative'}} />
+    return <div ref="graph_area" style={{position: 'relative'}} />;
   }
   _render(){
     this.graph_instance.render(_.clone(this.props));
@@ -287,7 +286,7 @@ class LiquidFillGauge extends React.Component {
       this.refs.graph_area,
       _.clone(this.props)
     );
-    this._render()
+    this._render();
 
   }
   componentDidUpdate(){
@@ -297,7 +296,7 @@ class LiquidFillGauge extends React.Component {
 
 class CirclePieChart extends React.Component {
   render(){
-    return <div ref="graph_area" style={{position: 'relative'}} />
+    return <div ref="graph_area" style={{position: 'relative'}} />;
   }
   _render(){
     this.graph_instance.render(_.clone(this.props));
@@ -307,8 +306,7 @@ class CirclePieChart extends React.Component {
       this.refs.graph_area,
       _.clone(this.props)
     );
-    this._render()
-
+    this._render();
   }
   componentDidUpdate(){
     this._render();

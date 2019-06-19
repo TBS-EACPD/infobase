@@ -42,9 +42,9 @@ new PanelGraph({
     const dept_tp_exp_pa_last_year = graph_args.dept_in_gov[1].value;
     const dept_exp_pa_last_year= graph_args.tp_in_exp[0].value;
 
-    const fmt_gov_tp_exp_pa_last_year = formatter("compact", gov_tp_exp_pa_last_year, {raw: true, precision: 1})
-    const fmt_dept_tp_exp_pa_last_year = formatter("compact", dept_tp_exp_pa_last_year, {raw: true, precision: 1})
-    const fmt_dept_exp_pa_last_year = formatter("compact", dept_exp_pa_last_year, {raw: true, precision: 1})
+    const fmt_gov_tp_exp_pa_last_year = formatter("compact", gov_tp_exp_pa_last_year, {raw: true, precision: 1});
+    const fmt_dept_tp_exp_pa_last_year = formatter("compact", dept_tp_exp_pa_last_year, {raw: true, precision: 1});
+    const fmt_dept_exp_pa_last_year = formatter("compact", dept_exp_pa_last_year, {raw: true, precision: 1});
 
     return (
       <StdPanel

@@ -35,15 +35,17 @@ export class LiquidFillGauge{
 
   render(options){
     this.options = _.extend(this.options,options);
-    const waveHeight = this.options.waveHeight || 0.05
+    const waveHeight = this.options.waveHeight || 0.05;
     const waveHeightScale = d3.scaleLinear()
       .range([waveHeight, waveHeight])
       .domain([0,100]);
 
-    const margin = this.options.margin || {top: 10,
+    const margin = this.options.margin || {
+      top: 10,
       right: 0,
       bottom: 0,
-      left: 0};
+      left: 0,
+    };
 
     const width = this.outside_width - margin.left - margin.right;
     const height = this.outside_height - margin.top - margin.bottom;
@@ -57,7 +59,7 @@ export class LiquidFillGauge{
     const textPixels = (this.options.textSize*radius/2) || (radius/2);
     const descriptiveTextValue = this.options.descriptiveTextValue || "";
     const titleGap = this.options.titleGap || 65;
-    const titleClumpLines = this.options.titleClumpLines || 2;
+    const titleClampLines = this.options.titleClampLines || 2;
     const circleThickness = this.options.circleThickness * radius || 0.05 * radius;
     const circleFillGap = this.options.circleFillGap * radius || 0.05 * radius;
     const fillCircleMargin = circleThickness + circleFillGap;
@@ -102,7 +104,7 @@ export class LiquidFillGauge{
       const titleDiv = titleContainer.append("div")
         .styles({"width": "80%","margin": "auto"})
         .html(this.options.title);
-      webkitLineClamp(titleDiv._groups[0][0], titleClumpLines);
+      webkitLineClamp(titleDiv._groups[0][0], titleClampLines);
     };
     this.graph
       .attr("transform", `translate(${locationX},${locationY})`);
