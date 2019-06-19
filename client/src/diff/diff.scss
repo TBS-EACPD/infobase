@@ -3,14 +3,14 @@
 
 
 .added{
-  color: #000;
-  background-color: rgba(#009900,0.3)
+  color: $textColor;
+  background-color: rgba($successDarkColor,0.3)
 }
 
 
 .removed{
-  color: #000;
-  background-color: rgba(#990000,0.3)
+  color: $textColor;
+  background-color: rgba($failDarkColor,0.3)
 }
 
 .textDiff--id-tag {
@@ -28,19 +28,19 @@
   border-width: 1px 1px 1px 3px;
   border-style: solid;
   padding: 2px 2px 2px 4px;
-  color: #000;
+  color: $textColor;
 }
 
 .textDiff--nochange {
-  border-color: #4488cc;
+  border-color: $infoDarkColor;
 }
 
 .textDiff--indicator-removed {
-  border-color: #990000;
+  border-color: $failDarkColor;
 }
 
 .textDiff--indicator-added {
-  border-color: #009900;
+  border-color: $successDarkColor;
 }
 
 .textDiff--indicator-report {
