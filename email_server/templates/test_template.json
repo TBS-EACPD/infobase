@@ -3,10 +3,33 @@
     "subject_template": "TODO"
   },
 
+  "enum": {
+    "required": true,
+    "value_type": "enum",
+    "enum_values": {
+      "bug": {
+        "en": "Something is broken",
+        "fr": "Quelque chose ne fonctionne pas"
+      },
+      "typo": {
+        "en": "It has a spelling or grammar mistake",
+        "fr": "II y a une erreur d'orthographe ou de grammaire"
+      },
+      "other": {
+        "en": "Other",
+        "fr": "Autre"
+      }
+    },
+    "form_type": "checkbox",
+    "form_label": {
+      "en": "Select all that apply:",
+      "fr": "Sélectionner toutes les cases qui s'appliquent :"
+    }
+  },
   "text": {
     "required": true,
     "value_type": "string",
-    "form_type": "input",
+    "form_type": "textarea",
     "form_label": {
       "en": "Text",
       "fr": "Text"
@@ -15,7 +38,7 @@
   "number": {
     "required": true,
     "value_type": "number",
-    "form_type": "input",
+    "form_type": "test",
     "form_label": {
       "en": "Number",
       "fr": "Number"
@@ -24,7 +47,7 @@
   "json": {
     "required": true,
     "value_type": "json",
-    "form_type": "input",
+    "form_type": "textarea",
     "form_label": {
       "en": "JSON",
       "fr": "JSON"

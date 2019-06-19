@@ -3,13 +3,48 @@
     "subject_template": "TODO"
   },
 
-  "issue": {
+  "issue_type": {
     "required": true,
-    "value_type": "string",
-    "form_type": "input",
+    "value_type": "enum",
+    "enum_values": {
+      "bug": {
+        "en": "Something is broken",
+        "fr": "Quelque chose ne fonctionne pas"
+      },
+      "typo": {
+        "en": "It has a spelling or grammar mistake",
+        "fr": "II y a une erreur d'orthographe ou de grammaire"
+      },
+      "inaccurate": {
+        "en": "The information is wrong",
+        "fr": "L'information est erronée"
+      },
+      "outdated": {
+        "en": "The information is outdated",
+        "fr": "L'information n'est plus à jour"
+      },
+      "navigation": {
+        "en": "I can't find what I'm looking for",
+        "fr": "Je ne trouve pas ce que je cherche"
+      },
+      "other": {
+        "en": "other",
+        "fr": "Autre"
+      }
+    },
+    "form_type": "checkbox",
     "form_label": {
-      "en": "Issue description",
-      "fr": "TODO"
+      "en": "Select all that apply:",
+      "fr": "Sélectionner toutes les cases qui s'appliquent :"
+    }
+  },
+  "issue_details": {
+    "required": false,
+    "value_type": "string",
+    "form_type": "textarea",
+    "form_label": {
+      "en": "Details (optional)",
+      "fr": "Détails (optionnel)"
     }
   },
   "sha": {

@@ -44,6 +44,14 @@ const verify_values_are_expected_and_match_value_types = (field_templates, compl
             return _.isNumber(field_value);
           case "json":
             return _.isObject(field_value);
+          case "enum":
+            return _.every(
+              field_value,
+              (enum_key) => _.chain(field_templates)
+                .get(`${field_key}.enum_values`)
+                .has(enum_key)
+                .value()
+            );
           default:
             return false; //unexpected type in the json itself
         }

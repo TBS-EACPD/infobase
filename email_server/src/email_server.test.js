@@ -24,6 +24,7 @@ describe("End-to-end tests for email_server endpoints", () => {
       subject_template: "TODO", //Update this once I decide what these templates should look like
     },
   
+    enum: ["bug", "other"],
     text: "a",
     number: 1,
     json: {bleh: "bleh", a: 1},

@@ -35,6 +35,29 @@ describe("Validation of completed templates", () => {
   });
 
   const template_test_fields = {
+    enum: {
+      required: true,
+      value_type: "enum",
+      enum_values: {
+        bug: {
+          en: "Something is broken",
+          fr: "Quelque chose ne fonctionne pas",
+        },
+        typo: {
+          en: "It has a spelling or grammar mistake",
+          fr: "II y a une erreur d'orthographe ou de grammaire",
+        },
+        other: {
+          en: "Other",
+          fr: "Autre",
+        },
+      },
+      form_type: "checkbox",
+      form_label: {
+        en: "Select all that apply:",
+        fr: "Sélectionner toutes les cases qui s'appliquent :",
+      },
+    },
     issue: {
       required: true,
       value_type: "string",
@@ -61,12 +84,14 @@ describe("Validation of completed templates", () => {
     },
   };
   const valid_completed_test_fields_complete = {
+    enum: ["bug", "other"],
     issue: "I don't think the line graphs should always start at 0",
     sha: "fenef8723hhf2h9jdj2j3d92093",
     id: '1234qwert',
     additional: { bleh: "blah", bluh: { blagh: "blargh" } },
   };
-  const valid_completed_test_fields_incompletes = {
+  const valid_completed_test_fields_incomplete = {
+    enum: ["bug", "other"],
     issue: "I don't think the line graphs should always start at 0",
     sha: "fenef8723hhf2h9jdj2j3d92093",
   };
@@ -76,11 +101,13 @@ describe("Validation of completed templates", () => {
     additional: { bleh: "blah", bluh: { blagh: "blargh" } },
   };
   const invalid_completed_test_fields_bad_value_type = {
+    enum: "not a valid enum",
     issue: "I think the line graphs should always start at 0",
     sha: "fenef8723hhf2h9jdj2j3d92093",
     additional: "1",
   };
   const invalid_completed_test_fields_bad_extra_field = {
+    enum: ["bug", "other"],
     issue: "I think the line graphs should always start at 0",
     sha: "fenef8723hhf2h9jdj2j3d92093",
     bonus: "Free real estate",
@@ -88,7 +115,7 @@ describe("Validation of completed templates", () => {
 
   const test_completed_fields = [
     valid_completed_test_fields_complete,
-    valid_completed_test_fields_incompletes,
+    valid_completed_test_fields_incomplete,
     invalid_completed_test_fields_missing_required,
     invalid_completed_test_fields_bad_value_type,
     invalid_completed_test_fields_bad_extra_field,
