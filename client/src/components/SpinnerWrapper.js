@@ -23,14 +23,16 @@ export class SpinnerWrapper extends React.Component {
     if (!use_leaf_spinner) {
       this.refs.main.appendChild( new Spinner(config).spin().el );
     }
+
+    
+
+    //css(document.documentElement, {backgroundColor: 'red'}) ;
   }
 
 }
 
 SpinnerWrapper.defaultProps = {
   faded: true,
-  container: document.body,
-  position: 'fixed',
   scale: 2,
   use_leaf_spinner: true,
 }
