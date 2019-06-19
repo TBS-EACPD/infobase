@@ -41,7 +41,7 @@ describe("Validation of completed templates", () => {
       form_type: "input",
       form_label: {
         en: "Issue description",
-        fr: "TODO",
+        fr: "Issue description",
       },
     },
     sha: {

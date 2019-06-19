@@ -10,7 +10,7 @@ const get_email_config = () => ({
       "Recipient <recipient@example.com>"
   ),
   // Should subject be here? If so, will want to pass some args from the request in to generate an identifiable subject line
-  subject: "Bluh",
+  subject: "Bluh", //TODO
 });
 
 export { get_email_config };
