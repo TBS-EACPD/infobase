@@ -9,6 +9,7 @@
     "compression": "^1.7.1",
     "cors": "^2.8.5",
     "express": "^4.16.2",
+    "googleapis": "^40.0.0",
     "lodash": "^4.17.11",
     "nodemailer": "^6.2.1"
   },
