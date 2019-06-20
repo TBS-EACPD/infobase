@@ -409,10 +409,6 @@ Subject.CRSO = class CRSO extends static_subject_store_with_API_data(){
   get has_planned_spending(){ 
     return _.some(this.programs, program => program.has_planned_spending);
   }
-  //TODO: confirm old SO's are tagged internal service correctly
-  // get is_internal_service(){
-  //   return _.some(this.programs, 'is_internal_service');
-  // }
   get is_cr(){
     return this.is_drf;
   }

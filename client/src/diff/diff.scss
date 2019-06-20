@@ -24,7 +24,7 @@
   margin-bottom: 10px;
 }
 
-.textDiff--nochange, .textDiff--indicator-removed, .textDiff--indicator-added {
+.textDiff--nochange, .textDiff--indicator-removed, .textDiff--indicator-added, .textDiff--change {
   border-width: 1px 1px 1px 3px;
   border-style: solid;
   padding: 2px 2px 2px 4px;
@@ -33,6 +33,10 @@
 
 .textDiff--nochange {
   border-color: $infoDarkColor;
+}
+
+.textDiff--change {
+  border-color: $warnDarkColor;
 }
 
 .textDiff--indicator-removed {

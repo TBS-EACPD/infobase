@@ -117,19 +117,21 @@ const process_indicators = (subject) => {
     if (indicator_pair.length===2){
       return {
         status: 'both',
-        indicator_pair,
+        indicator1: indicator_pair[0],
+        indicator2: indicator_pair[1],
         name_diff: Diff.diffWords(indicator_pair[0].name, indicator_pair[1].name),
-        methodology_diff: Diff.diffWords(indicator_pair[0].methodology, indicator_pair[1].methodology),
+        methodology_diff: window.is_a11y_mode ? Diff.diffSentences(indicator_pair[0].methodology, indicator_pair[1].methodology) : Diff.diffWords(indicator_pair[0].methodology, indicator_pair[1].methodology),
         target_diff: Diff.diffWords(format_target_string(indicator_pair[0]), format_target_string(indicator_pair[1])),
       }
     }
     const indicator = indicator_pair[0];
     return {
       status: indicator.doc,
-      indicator,
-      name: indicator.name,
-      methodology: indicator.methodology,
-      target: format_target_string(indicator),
+      indicator1: indicator,
+      indicator2: indicator,
+      name_diff: [indicator.name],
+      methodology_diff: [indicator.methodology],
+      target_diff: [format_target_string(indicator)],
     }
   });
   return processed_indicators;
@@ -211,7 +213,7 @@ export default class TextDiffApp extends React.Component {
     } = this.props;
 
     const all_depts = _.chain(Dept.get_all()).filter(dept => !!dept.dp_status).sortBy('fancy_name').value();
-    const all_crs_for_subj = _.filter(subject.level === 'dept' ? subject.crsos : subject.dept.crsos, cr => cr.is_cr);
+    const crs_without_internal = _.filter(subject.level === 'dept' ? subject.crsos : subject.dept.crsos, cr => cr.is_cr && !(cr.is_internal_service));
 
     const current_dept = subject.level === 'dept' ? subject : subject.dept;
 
@@ -252,7 +254,7 @@ export default class TextDiffApp extends React.Component {
                 const new_url = `/diff/${subject.level === 'dept' ? subject.id : subject.dept.id}/${id}`;
                 history.push(new_url);
               }}
-              options={_.chain(all_crs_for_subj).map(cr => ({id: cr.id, display: cr.name})).concat([{id: 'all', display: text_maker('all_crs')}]).value() }
+              options={_.chain(crs_without_internal).map(cr => ({id: cr.id, display: cr.name})).concat([{id: 'all', display: text_maker('all_crs')}]).value() }
             />
           </div>
           <div>
@@ -267,78 +269,103 @@ TextDiffApp.defaultProps = {
   subject: Dept.lookup(326),
 }
 
-const indicator_report = (processed_indicator) => {
-  if(processed_indicator.status === 'both'){
+const status_flag = (status, length) => {
+  if(length > 1){
     return (
-      <div key={processed_indicator.indicator_pair[0].stable_id} className="textDiff--indicator-report" >
-        <TM k="indicator_name" el="h4" />
-        { processed_indicator.name_diff.length > 1 ?
-          difference_report(processed_indicator.name_diff) :
-          no_difference(processed_indicator.indicator_pair[0].name) }
-        <TM k="indicator_methodology" el="h4" />
-        { processed_indicator.methodology_diff.length > 1 ?
-          difference_report(processed_indicator.methodology_diff) :
-          no_difference(processed_indicator.indicator_pair[0].methodology) }
-        <TM k="indicator_target" el="h4" />
-        { processed_indicator.target_diff.length > 1 ?
-          difference_report(processed_indicator.target_diff) :
-          no_difference(get_target_from_indicator(processed_indicator.indicator_pair[0])) }
-        <div className="textDiff--id-tag">{`ID: ${processed_indicator.indicator_pair[0].stable_id}`}</div>
+      <div className="textDiff--change">
+        {text_maker("words_changed")}
       </div>
-    )
-  } else {
-    const add_remove_status = processed_indicator.status === "dp18" ? "indicator-removed" : "indicator-added";
+    );
+  }
+  if (status === 'both'){
     return (
-      <div key={processed_indicator.indicator.stable_id} className="textDiff--indicator-report" >
-        <TM k="indicator_name" el="h4" />
-        <div>
-          <div className={`textDiff--${add_remove_status}`}>{text_maker(add_remove_status)}</div>
-          <div>{processed_indicator.name}</div>
-        </div>
-        <TM k="indicator_methodology" el="h4" />
-        <div>
-          <div className={`textDiff--${add_remove_status}`}>{text_maker(add_remove_status)}</div>
-          <div>{processed_indicator.methodology}</div>
-        </div>
-        <TM k="indicator_target" el="h4" />
-        <div>
-          <div className={`textDiff--${add_remove_status}`}>{text_maker(add_remove_status)}</div>
-          <div>{processed_indicator.target}</div>
-        </div>
-        <div className="textDiff--id-tag">{`ID: ${processed_indicator.indicator.stable_id}`}</div>
+      <div className="textDiff--nochange">
+        {text_maker("no_diff")}
       </div>
     )
   }
+  if(status === 'dp18'){
+    return (
+      <div className="textDiff--indicator-removed">
+        {text_maker("indicator-removed")}
+      </div>
+    )
+  }
+  if(status === 'dp19'){
+    return (
+      <div className="textDiff--indicator-added">
+        {text_maker("indicator-added")}
+      </div>
+    )
+  }
+  return "";
 }
 
-const no_difference = (text) =>
-  <div>
-    <div className="textDiff--nochange">{text_maker("no_diff")}</div>
-    <div>{text}</div>
-  </div>
+const indicator_report = (processed_indicator) => {
+  return (
+    <div key={processed_indicator.indicator1.stable_id} className="textDiff--indicator-report" >
+      <h4>
+        {processed_indicator.indicator2.name}
+      </h4>
+      {status_flag(processed_indicator.status, _.max([processed_indicator.name_diff.length, processed_indicator.methodology_diff.length, processed_indicator.target_diff.length]))}
+      { processed_indicator.name_diff.length > 1 ?
+        difference_report(processed_indicator.name_diff, "indicator_name") :
+        no_difference(processed_indicator.indicator1.name, "indicator_name") }
+      { processed_indicator.methodology_diff.length > 1 ?
+        difference_report(processed_indicator.methodology_diff, "indicator_methodology") :
+        no_difference(processed_indicator.indicator1.methodology, "indicator_methodology") }
+      { processed_indicator.target_diff.length > 1 ?
+        difference_report(processed_indicator.target_diff, "indicator_target") :
+        no_difference(get_target_from_indicator(processed_indicator.indicator1), "indicator_target") }
+      <div className="textDiff--id-tag">{`ID: ${processed_indicator.indicator1.stable_id}`}</div>
+    </div>
+  )
+}
 
-const difference_report = (diff) =>
-  <div className="row">
-    <div className="col-md-6" >
-      {_.map(diff, (part,iix) =>
-        <span
-          key={iix}
-          className={part.removed ? 'removed' : ''}
-          style={{display: part.added ? "none" : "inline"}}
-        >
-          {part.value}
-        </span>
-      )}
+const no_difference = (text, key) =>
+  <Fragment>
+    <h5>
+      {`${text_maker(key)} (${text_maker("no_diff")})`}
+    </h5>
+    <div>
+      {/* <div className="textDiff--nochange">{text_maker("no_diff")}</div> */}
+      <div>{text}</div>
     </div>
-    <div className="col-md-6" >
-      {_.map(diff, (part,iix) =>
-        <span
-          key={iix}
-          className={ part.added ? 'added' : ''}
-          style={{display: part.removed ? "none" : "inline"}}
-        >
-          {part.value}
-        </span>
-      )}
+  </Fragment>
+
+const difference_report = (diff, key) =>
+  <Fragment>
+    <h5>
+      {text_maker(key)}
+    </h5>
+    <div className="row">
+      <div className="col-md-6" >
+        {_.map(diff, (part,iix) =>
+          <Fragment key={iix}>
+            {window.is_a11y_mode && part.removed && <span className='removed'> [{text_maker("a11y_begin_removed")}]</span>}
+            <span
+              className={part.removed ? 'removed' : ''}
+              style={{display: part.added ? "none" : "inline"}}
+            >
+              {part.value}
+            </span>
+            {window.is_a11y_mode && part.removed && <span className='removed'> [{text_maker("a11y_end_removed")}]</span>}
+          </Fragment>
+        )}
+      </div>
+      <div className="col-md-6" >
+        {_.map(diff, (part,iix) =>
+          <Fragment key={iix}>
+            {window.is_a11y_mode && part.added && <span className='added'> [{text_maker("a11y_begin_added")}]</span>}
+            <span
+              className={ part.added ? 'added' : ''}
+              style={{display: part.removed ? "none" : "inline"}}
+            >
+              {part.value}
+            </span>
+            {window.is_a11y_mode && part.added && <span className='added'> [{text_maker("a11y_end_added")}]</span>}
+          </Fragment>
+        )}
+      </div>
     </div>
-  </div>
+  </Fragment>
