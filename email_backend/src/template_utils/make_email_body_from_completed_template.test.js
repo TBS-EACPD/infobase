@@ -1,8 +1,8 @@
 import { make_email_body_from_completed_template } from './make_email_body_from_completed_template.js';
 
-describe("Completion of template email body from completed template", () => {
+describe("make_email_body_from_completed_template", () => {
 
-  it("make_email_body_from_completed_template properly generates body content", () => {
+  it("properly generates body content", () => {
     const original_test_template = {
       enums: {
         required: true,

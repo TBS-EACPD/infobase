@@ -5,7 +5,7 @@ import {
 } from './validate_completed_template.js'
 import _ from 'lodash';
 
-describe("Validation of completed templates", () => {
+describe("validate_completed_template", () => {
 
   const template_test_fields = {
     enums: {
