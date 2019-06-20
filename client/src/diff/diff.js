@@ -234,6 +234,7 @@ export default class TextDiffApp extends React.Component {
               <TM k="select_dept" />
             </label>
             <Select
+              className='textDiff--selector'
               name='select_dept'
               selected={current_dept.id}
               onSelect={id => {
@@ -248,6 +249,7 @@ export default class TextDiffApp extends React.Component {
               <TM k="select_cr" />
             </label>
             <Select
+              className='textDiff--selector'
               name='select_cr'
               selected={subject.level === 'crso' ? subject.id : 'all'}
               onSelect={id => {

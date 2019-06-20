@@ -50,5 +50,10 @@
 .textDiff--indicator-report {
   margin-bottom: 10px;
   padding-bottom: 10px;
-  border-bottom: 1px solid black
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+}
+
+.textDiff--selector {
+  margin: 10px;
 }
