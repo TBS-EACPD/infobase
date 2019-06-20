@@ -1,11 +1,10 @@
-import text from './panel_base_text.yaml'
+import text from './panel_base_text.yaml';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Fragment } from 'react';
 import { 
   FootnoteList, 
   create_text_maker_component,
-  SpinnerWrapper,
 } from '../util_components.js';
 import { Details } from '../components/Details.js';
 import { get_static_url } from '../request_utils.js';
@@ -13,11 +12,7 @@ import { panel_href_template } from '../infographic/routes.js';
 import { panel_context } from '../infographic/context.js';
 import './panel-components.scss';
 import { create_text_maker } from '../models/text.js';
-import { log_standard_event } from '../core/analytics.js';
-import * as qrcode from 'qrcode-generator';
-import * as html2canvas from 'html2canvas';
-import * as jsPDF from 'jspdf';
-import 'jspdf-autotable';
+import { PDFGenerator } from './pdf-generate.js';
 
 
 const { TM } = create_text_maker_component(text);
@@ -51,7 +46,7 @@ const PanelSource = ({links}) => {
       </ul>
     </span>
   );
-}
+};
 
 
 
@@ -66,184 +61,10 @@ export const Panel = props => {
         />
       }
     </Consumer>
-  )
-}
+  );
+};
 
 class Panel_ extends React.Component {
-  constructor(){
-    super();
-
-    this.state = {
-      generating_pdf: false,
-    };
-  }
-
-  download_panel_pdf(){
-    const {
-      context, 
-      title,
-    } = this.props;
-
-    const file_name_context = context.subject.level === 'dept' ? context.subject.acronym: context.subject.id;
-    const file_name = `${file_name_context}_${title}.pdf`;
-
-    const panel_object = document.getElementById(context.graph_key);
-    const panel_body = panel_object.getElementsByClassName("panel-body")[0];
-
-    const today = new Date();
-    const pdf = new jsPDF({
-      compress: true,
-      format: 'letter',
-    });
-    const width = pdf.internal.pageSize.getWidth();
-    const FOOTER_HEIGHT = 27;
-    const EXTRA_HEIGHT = 20;
-    const langUrl = window.lang==='en' ? 'gcinfobase' : 'infobasegc';
-    const panel_link = `https://canada.ca/${langUrl}${panel_href_template(context.subject, context.bubble, context.graph_key)}`;
-
-    const qr = qrcode(0, 'L');
-    qr.addData(panel_link);
-    qr.make();
-    const qrCodeImg = qr.createDataURL();
-    const footerImg = new Image();
-    footerImg.src = get_static_url(`png/wmms-blk.png`);
-
-    const get_text_height = (pdf, text) => {
-      // Getting width of the text string to estimate the height of the text (number of lines)
-      const textHeight = pdf.getTextWidth(text)/25;
-      return textHeight < 10 ? 10 : textHeight > 10 && textHeight < 20 ? 20 : textHeight;
-    };
-
-    const setup_pdf_title = (pdf, title, width) => {
-      pdf.setFontStyle('bold');
-      pdf.setLineWidth(1);
-      pdf.text(2,10,title);
-      pdf.line(0,12,width,12,'F');
-    };
-
-    const setup_pdf_footer = (pdf, width, height) => {
-      pdf.addImage(qrCodeImg, 'JPEG', 1, height + EXTRA_HEIGHT);
-  
-      pdf.setFontStyle('normal');
-      pdf.setFontSize(10);
-      pdf.textWithLink(`canada.ca/${langUrl}`, 2.5, height + EXTRA_HEIGHT + 25, {url: panel_link});
-      pdf.text(`${text_maker("a11y_retrieved_date")} ${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`, (width/2)-25, height + EXTRA_HEIGHT + 25);
-
-      pdf.addImage(footerImg, 'png', 174.5, height + EXTRA_HEIGHT + 15);
-    };
-    const pdf_end_util = (title) => {
-      log_standard_event({
-        SUBAPP: window.location.hash.replace('#',''),
-        MISC1: "PDF_DOWNLOAD",
-        MISC2: title,
-      });
-      this.setState({generating_pdf: false});
-    };
-  
-    if(window.is_a11y_mode){
-      setup_pdf_title(pdf, title, width);
-      let current_height = 14;
-      const textElements = _.map(panel_body.querySelectorAll('p,ul'), _.identity);
-      _.forEach(textElements, (text) => {
-        if(text.tagName === "UL"){
-          _.forEach(_.map(text.children, _.identity), (li) => {
-            pdf.fromHTML(
-              li, 10, current_height, {'width': width}
-            );
-            current_height += get_text_height(pdf, li.innerText);
-          });
-        } else{
-          pdf.fromHTML(
-            text, 1, current_height, {'width': width}
-          );
-          current_height += get_text_height(pdf, text.innerText);
-        };
-      });
-
-      const tables = _.map(panel_body.getElementsByTagName("table"), _.identity);
-      _.forEach (tables, (tbl) => {
-        pdf.autoTable({
-          startY: current_height,
-          html: tbl,
-        });
-        current_height = pdf.previousAutoTable.finalY + 10;
-      });
-      if (!(pdf.internal.pageSize.getHeight() - current_height < FOOTER_HEIGHT)){
-        current_height = current_height + (pdf.internal.pageSize.getHeight() - current_height) - FOOTER_HEIGHT - EXTRA_HEIGHT;
-        setup_pdf_footer(pdf, width, current_height);
-      };
-      pdf.save(file_name);
-      pdf_end_util(title);
-    } else{
-      // When the list of legend items are too long such that the items don't all fit into the defined max height, scroll is created to contain them.
-      // Screenshotting that will cause items to overflow, hence below sets max height to a big arbitrary number which later gets set back to original.
-      const legend_container_arr = panel_body.getElementsByClassName('legend-container');
-
-      const MAX_DIV_HEIGHT = "9999px";
-      var oldMaxHeights = _.map(legend_container_arr, legend_container => (legend_container.style.maxHeight));
-      _.forEach(legend_container_arr, legend_container => {
-        legend_container.style.maxHeight = MAX_DIV_HEIGHT;
-      });
-
-      // Img tags are not properly captured, hence needs to be temporarily converted to canvas for pdf purposes only
-      const imgElements = _.map(panel_body.getElementsByTagName("img"), _.identity);
-      _.forEach(imgElements, (img) => {
-        const parentNode = img.parentNode;
-
-        const canvas = document.createElement('canvas');
-        canvas.className = "canvas-temp";
-        const ctx = canvas.getContext("2d");
-
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0, img.width, img.height);
-      
-        // Save all img style to canvas
-        canvas.data = img.style.cssText;
-        img.style.width = 0;
-        img.style.height = 0;
-
-        parentNode.appendChild(canvas);
-      });
-
-      html2canvas(panel_body)
-        .then((canvas) => {
-          const imgData = canvas.toDataURL('image/png');
-          const ratio = canvas.height/canvas.width;
-
-          const height = ratio * width;
-
-          pdf.internal.pageSize.setHeight(height + FOOTER_HEIGHT + EXTRA_HEIGHT);
-
-          setup_pdf_title(pdf, title, width);
-
-          pdf.addImage(imgData, 'JPEG', 0, 12, width, height);
-          setup_pdf_footer(pdf, width, height);
-          pdf.save(file_name);
-        })
-        .then( () => {
-          _.forEach(imgElements, (img) => {
-            const parentNode = img.parentNode;
-            const canvas = parentNode.getElementsByClassName("canvas-temp")[0];
-  
-            // Restore original img style
-            img.style.cssText = canvas.data;
-            parentNode.removeChild(canvas);
-          });
-  
-          _.forEach(
-            legend_container_arr,
-            (legend_container, index) => legend_container.style.maxHeight = oldMaxHeights[index]
-          );
-
-          pdf_end_util(title);
-        });  
-    };
-  };
-
-  componentDidUpdate(){
-    this.state.generating_pdf && this.download_panel_pdf();
-  }
   render(){
     const {
       context,
@@ -254,30 +75,18 @@ class Panel_ extends React.Component {
       allowOverflow,
     } = this.props;
 
-    const { generating_pdf } = this.state;
+    const file_name_context = context.subject.level === 'dept' ? context.subject.acronym: context.subject.id;
+    const file_name = `${file_name_context}_${title}.pdf`;
+    const panel_link = window.location.href.replace(window.location.hash,
+      panel_href_template(context.subject, context.bubble, context.graph_key));
 
     return (
       <section className={classNames('panel panel-info mrgn-bttm-md', allowOverflow && "panel-overflow")}>
         {title && <header className='panel-heading'>
           <header className="panel-title"> {title} </header>
           <div style={{marginLeft: 'auto'}}>
-            { context && !window.feature_detection.is_IE() && !generating_pdf &&
-              <button
-                onClick={ () => this.setState({generating_pdf: true}) }
-                className='panel-heading-utils panel-heading-btn'>
-                <img
-                  src={get_static_url('svg/download.svg')}
-                  className='button-img'
-                  alt={text_maker("a11y_download_panel")}
-                  title={text_maker("a11y_download_panel")}/>
-              </button>
-            }
-            {context && !window.feature_detection.is_IE() && generating_pdf &&
-              <SpinnerWrapper
-                config_name={"small_inline"}
-                title={text_maker("a11y_downloading_panel")}
-                alt={text_maker("a11y_downloading_panel")}
-              />
+            { context && 
+              <PDFGenerator graph_key={context.graph_key} file_name={file_name} title={title} panel_link={panel_link}/>
             }
             { context && !context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) && 
               <a href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
@@ -392,7 +201,7 @@ const StdPanel = ({ title, sources, footnotes, children }) => {
     </Panel>
   );
 
-}
+};
 
 StdPanel.propTypes = {
   children: function (props) {
@@ -411,13 +220,13 @@ StdPanel.propTypes = {
         .value();
 
       return _.every(filtered_and_flattened_children, {type: Col});
-    }
+    };
 
     if( !are_children_valid(children) ){
       return new Error(`StdPanel expects all children to be either of the type 'Col', a fragment containing children of type 'Col', or false (in the case of a conditional child component)`);
     }
   },
-}
+};
 
 export { Col, StdPanel};
 
@@ -440,4 +249,4 @@ export const TextPanel = props => {
       {new_children}
     </Panel>
   );
-}
+};

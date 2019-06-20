@@ -1,0 +1,235 @@
+import text from './panel_base_text.yaml';
+import { get_static_url } from '../request_utils.js';
+import { log_standard_event } from '../core/analytics.js';
+import { 
+  create_text_maker_component,
+  SpinnerWrapper,
+} from '../util_components.js';
+import './panel-components.scss';
+
+import * as qrcode from 'qrcode-generator';
+import * as html2canvas from 'html2canvas';
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
+
+const { text_maker, TM } = create_text_maker_component(text);
+
+export class PDFGenerator extends React.Component{
+  constructor(props){
+    super();
+    this.props = props;
+    this.current_height = 0;
+
+    this.state = {
+      generating_pdf: false,
+    };
+  }
+
+  componentDidUpdate(){
+    this.state.generating_pdf && this.download_panel_pdf();
+  }
+
+  download_panel_pdf(){
+    const {
+      dom_element,
+      graph_key,
+      panel_link,
+      include_footer,
+      title,
+      file_name,
+    } = this.props;
+    const ss_element = !dom_element && graph_key ? document.getElementById(graph_key).getElementsByClassName("panel-body")[0] : dom_element;
+
+    const today = new Date();
+    const date_fmt = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
+    const pdf_file_name = file_name ? file_name : `${date_fmt}.pdf`;
+    
+    const pdf = new jsPDF({
+      compress: true,
+      format: 'letter',
+    });
+    const width = pdf.internal.pageSize.getWidth();
+    const FOOTER_HEIGHT = panel_link || include_footer ? 27 : 0;
+    const EXTRA_HEIGHT = 20;
+    const TITLE_HEIGHT = title ? 11 : 0;
+
+    const get_text_height = (pdf, text) => {
+      // Getting width of the text string to estimate the height of the text (number of lines)
+      const textHeight = pdf.getTextWidth(text)/25;
+      return textHeight < 10 ? 10 : textHeight > 10 && textHeight < 20 ? 20 : textHeight;
+    };
+
+    const setup_pdf_title = (pdf, title, width) => {
+      if(title){
+        pdf.setFontStyle('bold');
+        pdf.setLineWidth(1);
+        pdf.text(2,10,title);
+        pdf.line(0,12,width,12,'F');
+        this.current_height = TITLE_HEIGHT;
+      }
+    };
+
+    const setup_pdf_footer = (pdf, width) => {
+      if(panel_link || include_footer){
+        const footerImg = new Image();
+        footerImg.src = get_static_url(`png/wmms-blk.png`);
+        this.current_height += 15 + EXTRA_HEIGHT;
+        pdf.addImage(footerImg, 'png', 174.5, this.current_height);
+
+        this.current_height += 11;
+        pdf.setFontStyle('normal');
+        pdf.setFontSize(10);
+        pdf.text(`${text_maker("a11y_retrieved_date")} ${date_fmt}`, (width/2)-25, this.current_height);
+      }
+      if(panel_link){
+        const qr = qrcode(0, 'L');
+        qr.addData(panel_link);
+        qr.make();
+        const qrCodeImg = qr.createDataURL();
+        
+        this.current_height -= 26;
+        pdf.addImage(qrCodeImg, 'JPEG', 1, this.current_height);
+
+        const langUrl = window.lang==='en' ? 'gcinfobase' : 'infobasegc';
+        this.current_height += 26;
+        pdf.textWithLink(`canada.ca/${langUrl}`, 2.5, this.current_height, {url: panel_link});
+      }
+    };
+    const pdf_end_util = (name) => {
+      log_standard_event({
+        SUBAPP: window.location.hash.replace('#',''),
+        MISC1: "PDF_DOWNLOAD",
+        MISC2: name,
+      });
+      this.setState({generating_pdf: false});
+    };
+  
+    if(window.is_a11y_mode){
+      setup_pdf_title(pdf, title, width);
+      this.current_height += 2;
+      const textElements = _.map(ss_element.querySelectorAll('p,ul'), _.identity);
+      _.forEach(textElements, (text) => {
+        if(text.tagName === "UL"){
+          _.forEach(_.map(text.children, _.identity), (li) => {
+            pdf.fromHTML(
+              li, 10, this.current_height, {'width': width}
+            );
+            this.current_height += get_text_height(pdf, li.innerText);
+          });
+        } else{
+          pdf.fromHTML(
+            text, 1, this.current_height, {'width': width}
+          );
+          this.current_height += get_text_height(pdf, text.innerText);
+        };
+      });
+
+      const tables = _.map(ss_element.getElementsByTagName("table"), _.identity);
+      _.forEach (tables, (tbl) => {
+        pdf.autoTable({
+          startY: this.current_height,
+          html: tbl,
+        });
+        this.current_height = pdf.previousAutoTable.finalY + 10;
+      });
+      if (!(pdf.internal.pageSize.getHeight() - this.current_height < FOOTER_HEIGHT)){
+        this.current_height = this.current_height + (pdf.internal.pageSize.getHeight() - this.current_height) - FOOTER_HEIGHT - EXTRA_HEIGHT;
+        setup_pdf_footer(pdf, width);
+      };
+      pdf.save(pdf_file_name);
+      pdf_end_util(title);
+    } else{
+      // When the list of legend items are too long such that the items don't all fit into the defined max height, scroll is created to contain them.
+      // Screenshotting that will cause items to overflow, hence below sets max height to a big arbitrary number which later gets set back to original.
+      const legend_container_arr = ss_element.getElementsByClassName('legend-container');
+
+      const MAX_DIV_HEIGHT = "9999px";
+      var oldMaxHeights = _.map(legend_container_arr, legend_container => (legend_container.style.maxHeight));
+      _.forEach(legend_container_arr, legend_container => {
+        legend_container.style.maxHeight = MAX_DIV_HEIGHT;
+      });
+
+      // Img tags are not properly captured, hence needs to be temporarily converted to canvas for pdf purposes only
+      const imgElements = _.map(ss_element.getElementsByTagName("img"), _.identity);
+      _.forEach(imgElements, (img) => {
+        const parentNode = img.parentNode;
+
+        const canvas = document.createElement('canvas');
+        canvas.className = "canvas-temp";
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0, img.width, img.height);
+      
+        // Save all img style to canvas
+        canvas.data = img.style.cssText;
+        img.style.width = 0;
+        img.style.height = 0;
+
+        parentNode.appendChild(canvas);
+      });
+
+      html2canvas(ss_element)
+        .then((canvas) => {
+          const imgData = canvas.toDataURL('image/png');
+          const ratio = canvas.height/canvas.width;
+          const page_height = ratio * width;
+
+          pdf.internal.pageSize.setHeight(page_height + FOOTER_HEIGHT + EXTRA_HEIGHT + TITLE_HEIGHT);
+
+          setup_pdf_title(pdf, title, width);
+
+          this.current_height += page_height;
+          pdf.addImage(imgData, 'JPEG', 0, TITLE_HEIGHT + 1, width, this.current_height);
+          setup_pdf_footer(pdf, width);
+          pdf.save(pdf_file_name);
+        })
+        .then( () => {
+          _.forEach(imgElements, (img) => {
+            const parentNode = img.parentNode;
+            const canvas = parentNode.getElementsByClassName("canvas-temp")[0];
+  
+            // Restore original img style
+            img.style.cssText = canvas.data;
+            parentNode.removeChild(canvas);
+          });
+  
+          _.forEach(
+            legend_container_arr,
+            (legend_container, index) => legend_container.style.maxHeight = oldMaxHeights[index]
+          );
+
+          pdf_end_util(title);
+        });  
+    };
+  };
+
+  render(){
+    const { generating_pdf } = this.state;
+    return(
+      <div style={{display: 'inline'}}>
+        {!window.feature_detection.is_IE() && !generating_pdf &&
+        <button
+          onClick={ () => this.setState({generating_pdf: true}) }
+          className='panel-heading-utils panel-heading-btn'>
+          <img
+            src={get_static_url('svg/download.svg')}
+            className='button-img'
+            alt={text_maker("a11y_download_panel")}
+            title={text_maker("a11y_download_panel")}/>
+        </button>
+        } 
+        {!window.feature_detection.is_IE() && generating_pdf &&
+          <SpinnerWrapper
+            config_name={"small_inline"}
+            title={text_maker("a11y_downloading_panel")}
+            alt={text_maker("a11y_downloading_panel")}
+          />
+        }
+      </div>
+    );
+  }
+
+
+}
