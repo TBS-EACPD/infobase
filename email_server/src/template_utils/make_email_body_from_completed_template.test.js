@@ -45,7 +45,7 @@ describe("Completion of template email body from completed template", () => {
         required: true,
         value_type: "number",
         form_type: false,
-      }
+      },
     };
     const completed_test_template = {
       enums: ["bug", "typo"],
