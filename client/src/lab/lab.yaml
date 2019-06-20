@@ -1,0 +1,27 @@
+lab_title:
+  en: InfoLab
+  fr: InfoLab
+
+lab_intro_text:
+  en: Welcome to InfoLab! Here you will find "beta" version tools and fun (we hope) data toys. Sites linked here may contain bugs, may be incompletely documented or may disappear at any time.
+  fr: Bienvenue à l'InfoLab. Ici vous trouverez des outils de version "beta" et jouets de données amusants (nous esperons). Les sites liés ici peut contenir des bugs, peut avoir la documentation incomplète, ou pourrait disparaître à tout moment.
+
+text_diff_lab_title:
+  en: Indicator text comparison tool
+  fr: Outil de comparaison de texte des indicateurs
+
+text_diff_lab_text:
+  en: A tool to compare text portions of indicators between the 2018-19 and 2019-20 departmental plans.
+  fr: Un outil en permettant comparer des portions d'indicateurs textuelles entre les plans ministériels 2018-2019 et 2019-2020.
+
+link_text:
+  en: Check it out!
+  fr: Consultez-le!
+
+coming_soon_title:
+  en: Coming soon
+  fr: À venir
+
+coming_soon_text:
+  en: More to come! Check back here soon
+  fr: Plus à venir! Revenez ici bientôt

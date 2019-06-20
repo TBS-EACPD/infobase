@@ -1,0 +1,11 @@
+@import '../common_css/common-variables';
+
+
+.lab-content {
+    background-color: $secondaryColor;
+    border-radius: 10px;
+    width: 50%;
+    height: 180px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
