@@ -6,16 +6,8 @@ import {
 } from '../util_components.js';
 import diff_text from './diff.yaml';
 import result_text from '../panels/result_graphs/result_components.yaml';
-import { get_static_url } from '../request_utils.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
-import { single_subj_results_scheme, get_initial_single_subj_results_state } from '../gen_expl/results_scheme.js';
-import { 
-  Result,
-  Indicator,
-  ResultCounts,
-  GranularResultCounts,
-  result_docs,
-} from '../panels/result_graphs/results_common.js'
+import { Result } from '../panels/result_graphs/results_common.js'
 import { Subject } from '../models/subject.js';
 import { Select } from '../components/Select.js';
 import { SpinnerWrapper } from '../components/SpinnerWrapper.js';
@@ -164,15 +156,6 @@ export default class TextDiffApp extends React.Component {
 
   static getDerivedStateFromProps(props, state){
     const {
-      match: {
-        params: {
-          org_id,
-          crso_id,
-        },
-      },
-    } = props;
-
-    const {
       subject,
     } = state;
 
@@ -260,9 +243,9 @@ export default class TextDiffApp extends React.Component {
         </div>
 
         {loading ? <SpinnerWrapper ref="spinner" config_name={"sub_route"} /> :
-        <div>
-          {_.map(processed_indicators, processed_indicator => indicator_report(processed_indicator) )}
-        </div>}
+          <div>
+            {_.map(processed_indicators, processed_indicator => indicator_report(processed_indicator) )}
+          </div>}
       </StandardRouteContainer>
     );
   }
