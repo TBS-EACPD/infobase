@@ -3,14 +3,19 @@ import _ from 'lodash';
 
 describe("End-to-end tests for email_server endpoints", () => {
 
-  const port = 7331;
-  const make_email_template_names_request = () => axios.get(`http://127.0.0.1:${port}/email_template_names`);
+  const prod_test_url = "https://us-central1-report-a-problem-email-244220.cloudfunctions.net/prod-email-server";
+  const local_test_url = "http://127.0.0.1:7331";
+  
+  const test_against_prod = false;
+  const test_url = test_against_prod ? prod_test_url: local_test_url;
+
+  const make_email_template_names_request = () => axios.get(`${test_url}/email_template_names`);
   const make_email_template_request = (template_name) => axios.get(
-    `http://127.0.0.1:${port}/email_template?template_name=${template_name}`,
+    `${test_url}/email_template?template_name=${template_name}`,
     { validateStatus: _.constant(true) } // Don't throw errors on ANY status values, will be intentionally getting some 400's
   );
   const make_submit_email_request = (template_name, completed_template) => axios.post(
-    `http://127.0.0.1:${port}/submit_email`,
+    `${test_url}/submit_email`,
     {
       template_name,
       completed_template,
