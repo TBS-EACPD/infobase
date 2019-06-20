@@ -94,7 +94,7 @@ jobs:
 
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
-  test_email_server:
+  test_email_backend:
     docker:
       - image: gcr.io/ib-static-content/ib-client-ci-build:latest
         <<: *gcloud_auth
@@ -104,22 +104,22 @@ jobs:
           path: "~/InfoBase"
       - restore_cache:
           keys:
-            - ib-email-server-dependencies-{{ checksum "email_server/package-lock.json" }}
+            - ib-email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}
       - run: 
           command: |
-            [ -e "email_server/node_modules" ] || (cd email_server && npm ci)
+            [ -e "email_backend/node_modules" ] || (cd email_backend && npm ci)
       - save_cache:
           paths:
             - node_modules
-          key: ib-email-server-dependencies-{{ checksum "email_server/package-lock.json" }}
+          key: ib-email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}
       - run:
-          name: start_email_server
-          command: (cd email_server && npm start)
+          name: start_email_backend
+          command: (cd email_backend && npm start)
           background: true
       - run:
           command: |
             sleep 10 # Give server time to start before running tests
-      - run: (cd email_server && npm test)
+      - run: (cd email_backend && npm test)
       - run: circleci step halt
 
 
@@ -236,7 +236,7 @@ workflows:
   build_test_deploy:
     jobs:
       - build
-      - test_email_server
+      - test_email_backend
       - test:
           requires:
             - build
