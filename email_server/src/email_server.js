@@ -12,6 +12,7 @@ import {
 
 import {
   validate_completed_template,
+  make_email_subject_from_completed_template,
   make_email_body_from_completed_template,
 } from './template_utils';
 
@@ -100,14 +101,16 @@ const make_email_server = (templates) => {
         response.status("400").send(error_message);
         log_email_request(request, error_message);
       } else {
+        const email_config = get_email_config();
+        const email_subject = make_email_subject_from_completed_template(original_template, completed_template);
         const email_body = make_email_body_from_completed_template(original_template, completed_template);
 
         const transport_config = await get_transport_config();
         const transporter = nodemailer.createTransport(transport_config);
-  
-        const email_config = get_email_config();
+
         const sent_mail_info = await transporter.sendMail({
           ...email_config,
+          subject: email_subject,
           text: email_body,
         });
 
