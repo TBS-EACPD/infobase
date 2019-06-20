@@ -40,7 +40,7 @@ export const LeafSpinner = ({config_name}) => {
         .replace('faded-background--true', 'faded-background--false'),
     },
   };
-
+  
   const {
     outer_positioning,
     spinner_container_style,
