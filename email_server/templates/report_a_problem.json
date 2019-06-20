@@ -5,7 +5,7 @@
 
   "issue_type": {
     "required": true,
-    "value_type": "enum",
+    "value_type": "enums",
     "enum_values": {
       "bug": {
         "en": "Something is broken",

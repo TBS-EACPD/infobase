@@ -35,9 +35,9 @@ describe("Validation of completed templates", () => {
   });
 
   const template_test_fields = {
-    enum: {
+    enums: {
       required: true,
-      value_type: "enum",
+      value_type: "enums",
       enum_values: {
         bug: {
           en: "Something is broken",
@@ -84,14 +84,14 @@ describe("Validation of completed templates", () => {
     },
   };
   const valid_completed_test_fields_complete = {
-    enum: ["bug", "other"],
+    enums: ["bug", "other"],
     issue: "I don't think the line graphs should always start at 0",
     sha: "fenef8723hhf2h9jdj2j3d92093",
     id: '1234qwert',
     additional: { bleh: "blah", bluh: { blagh: "blargh" } },
   };
   const valid_completed_test_fields_incomplete = {
-    enum: ["bug", "other"],
+    enums: ["bug", "other"],
     issue: "I don't think the line graphs should always start at 0",
     sha: "fenef8723hhf2h9jdj2j3d92093",
   };
@@ -101,13 +101,13 @@ describe("Validation of completed templates", () => {
     additional: { bleh: "blah", bluh: { blagh: "blargh" } },
   };
   const invalid_completed_test_fields_bad_value_type = {
-    enum: "not a valid enum",
+    enums: "not a valid enum",
     issue: "I think the line graphs should always start at 0",
     sha: "fenef8723hhf2h9jdj2j3d92093",
     additional: "1",
   };
   const invalid_completed_test_fields_bad_extra_field = {
-    enum: ["bug", "other"],
+    enums: ["bug", "other"],
     issue: "I think the line graphs should always start at 0",
     sha: "fenef8723hhf2h9jdj2j3d92093",
     bonus: "Free real estate",

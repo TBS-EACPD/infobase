@@ -44,7 +44,7 @@ const verify_values_are_expected_and_match_value_types = (field_templates, compl
             return _.isNumber(field_value);
           case "json":
             return _.isObject(field_value);
-          case "enum":
+          case "enums":
             return _.every(
               field_value,
               (enum_key) => _.chain(field_templates)
