@@ -1,6 +1,6 @@
 {
   "meta": {
-    "subject_template": "TODO"
+    "subject_template": "Test subject: [${enums}], ${number}"
   },
 
   "enums": {
