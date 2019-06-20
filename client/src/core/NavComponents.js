@@ -3,6 +3,7 @@ import withRouter from 'react-router/withRouter';
 import { reactAdapter } from './reactAdapter.js';
 import { log_page_view } from './analytics.js';
 import { index_lang_lookups } from '../InfoBase/index_data.js';
+import classNames from 'classnames';
 
 
 const { page_title: default_title, meta_description: default_description } = index_lang_lookups;
@@ -128,6 +129,67 @@ const HeaderBanner = withRouter(
 );
 
 
+class BetaBanner extends React.Component {
+  render(){
+    const {
+      banner_content,
+    } = this.props;
+
+    const banner_container = document.getElementById("banner-container");
+
+    if (banner_container){
+      return ReactDOM.createPortal(
+        <div
+          className={classNames("alert","alert-info")}
+        >
+          { banner_content }
+        </div>,
+        banner_container
+      ); 
+    }
+  }
+}
+
+
+export class BetaRouteContainer extends React.Component {
+  componentDidMount(){
+    //unless a route's component is sufficiently complicated, it should never unmount/remount a StandardRouteContainer
+    //therefore, this component being unmounts/remounted implies a change between routes, which should always re-scroll
+    window.scrollTo(0, 0);
+  }
+  render(){
+    const {
+      description,
+      title,
+      breadcrumbs,
+      route_key,
+      children,
+      shouldSyncLang,
+      non_a11y_route,
+      beta_banner_content,
+    } = this.props;
+
+    return (
+      <div>
+        <DocumentTitle title_str={title} />
+        <DocumentDescription description_str={description} />
+        <BreadCrumbs crumbs={breadcrumbs} />
+        <BetaBanner banner_content={beta_banner_content}/>
+        <AnalyticsSynchronizer route_key={route_key} />
+        { shouldSyncLang !== false &&
+          <LangSynchronizer /> 
+        }
+        { !window.is_a11y_mode && 
+          <A11yLinkSynchronizer non_a11y_route={non_a11y_route}/>
+        }
+        <div>
+          {children}
+        </div>
+      </div>
+    );
+  }
+}
+
 export class StandardRouteContainer extends React.Component {
   componentDidMount(){
     //unless a route's component is sufficiently complicated, it should never unmount/remount a StandardRouteContainer
@@ -155,7 +217,7 @@ export class StandardRouteContainer extends React.Component {
         { shouldSyncLang !== false &&
           <LangSynchronizer /> 
         }
-        { !is_a11y_mode && 
+        { !window.is_a11y_mode && 
           <A11yLinkSynchronizer non_a11y_route={non_a11y_route}/>
         }
         <div>

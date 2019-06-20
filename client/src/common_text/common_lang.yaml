@@ -1030,6 +1030,9 @@ temp_qfr_late_depts_note:
     Commissariats à l’information et à la protection de la vie privée du Canada et Bureau du surintendant des institutions financières. 
     L’information sera mise-à-jour dès que les données seront disponible.
 
+beta_banner_content:
+  en: You're looking at a 'beta' version of GC InfoBase. Testing and improvement of this page will be continual, and it may not work for everyone at all times.
+  fr: Vous regardez une version 'beta' de l'InfoBase du GC. Les tests et l’amélioration de cette page seront continus et il se peut que cela ne fonctionne pas pour tout le monde à tout moment.
 
 SOBJ1: 
     text: Personnel
@@ -1074,3 +1077,4 @@ SOBJ21:
 SOBJ22:
     en: Internal Revenues
     fr: Revenus internes
+
