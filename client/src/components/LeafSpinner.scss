@@ -9,6 +9,10 @@
   z-index: 9999;
 }
 
+.faded-loading-container--false {
+  position: relative;
+}
+
 .leaf-spinner-container{
     left: 50%;
     margin-left:-50px;
@@ -55,7 +59,6 @@
   position: absolute;
   top: 0;
   left: 0;
-  fill: #FF0000;
   opacity: 1;
 }
 
