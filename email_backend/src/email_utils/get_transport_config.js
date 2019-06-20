@@ -4,10 +4,10 @@ const OAuth2 = google.auth.OAuth2;
 
 const get_prod_auth = async () => {
   const {
-    EMAIL_SERVER_SENDING_ADDRESS: email_address,
-    EMAIL_SERVER_CLIENT_ID: client_id,
-    EMAIL_SERVER_CLIENT_SECRET: client_secret,
-    EMAIL_SERVER_REFRESH_TOKEN: refresh_token,
+    EMAIL_BACKEND_SENDING_ADDRESS: email_address,
+    EMAIL_BACKEND_CLIENT_ID: client_id,
+    EMAIL_BACKEND_CLIENT_SECRET: client_secret,
+    EMAIL_BACKEND_REFRESH_TOKEN: refresh_token,
   } = process.env;
 
   const oauth2Client = new OAuth2(

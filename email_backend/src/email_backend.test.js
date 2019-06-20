@@ -1,9 +1,9 @@
 import axios from 'axios';
 import _ from 'lodash';
 
-describe("End-to-end tests for email_server endpoints", () => {
+describe("End-to-end tests for email_backend endpoints", () => {
 
-  const prod_test_url = "https://us-central1-report-a-problem-email-244220.cloudfunctions.net/prod-email-server";
+  const prod_test_url = "https://us-central1-report-a-problem-email-244220.cloudfunctions.net/prod-email-backend";
   const local_test_url = "http://127.0.0.1:7331";
   
   const test_against_prod = false;

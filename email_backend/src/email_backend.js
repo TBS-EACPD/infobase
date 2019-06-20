@@ -36,13 +36,13 @@ const log_email_request = (request, log_message) => {
   );
 };
 
-const make_email_server = (templates) => {
-  const email_server = express();
+const make_email_backend = (templates) => {
+  const email_backend = express();
 
-  email_server.use( body_parser.json({ limit: '50mb' }) );
-  email_server.use( compression() );
-  process.env.IS_PROD_SERVER && email_server.use( cors() );
-  email_server.use(
+  email_backend.use( body_parser.json({ limit: '50mb' }) );
+  email_backend.use( compression() );
+  process.env.IS_PROD_SERVER && email_backend.use( cors() );
+  email_backend.use(
     (request, response, next) => {
       response.header('Access-Control-Allow-Origin', '*');
       response.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
@@ -63,13 +63,13 @@ const make_email_server = (templates) => {
   // TODO: what can I do to mitigate endpoint spam? Is that in-scope right now? I want it to be, at least
   
 
-  email_server.get(
+  email_backend.get(
     '/email_template_names',
     (request, response) => response.status("200").send( _.keys(templates) )
   );
 
   
-  email_server.get(
+  email_backend.get(
     '/email_template',
     (request, response) => {
       const {
@@ -89,7 +89,7 @@ const make_email_server = (templates) => {
   );
   
   
-  email_server.post(
+  email_backend.post(
     '/submit_email',
     async (request, response) => {  
       const {
@@ -145,7 +145,7 @@ const make_email_server = (templates) => {
   );
 
 
-  return email_server;
+  return email_backend;
 }
 
-export { make_email_server };
+export { make_email_backend };
