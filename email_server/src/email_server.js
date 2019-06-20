@@ -22,13 +22,17 @@ const log_email_request = (request, log_message) => {
   const request_content = get_request_content(request);
   //eslint-disable-next-line no-console
   console.log(
-    JSON.stringify({
-      ..._.pickBy({
-        log_message,
-        request_content,
-      }),
-      sha: process.env.CURRENT_SHA || "dev, no sha env var set",
-    })
+    JSON.stringify(
+      {
+        ..._.pickBy({
+          log_message,
+          request_content,
+        }),
+        sha: process.env.CURRENT_SHA || "dev, no sha env var set",
+      },
+      null,
+      2
+    )
   );
 };
 

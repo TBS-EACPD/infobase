@@ -14,7 +14,7 @@ const make_email_body_from_completed_template = (original_template, completed_te
           () => {
             switch (value_type){
               case "json":
-                return JSON.stringify(field_value);
+                return JSON.stringify(field_value, null, 2);
               case "enums":
                 return _.join(field_value, ', ');
               default:
