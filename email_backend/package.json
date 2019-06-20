@@ -34,7 +34,7 @@
     "prestart": "npm run build",
     "start": "babel-node transpiled_build/index.js",
     "debug": "babel-node --inspect-brk src/index.js",
-    "test": "jest --coverage --forceExit"
+    "test": "jest --coverage"
   },
   "authors": [
     "Stephen O'Neil"
