@@ -218,51 +218,52 @@ export default class TextDiffApp extends React.Component {
     const current_dept = subject.level === 'dept' ? subject : subject.dept;
 
     return (
-      loading ? <SpinnerWrapper ref="spinner" config_name={"sub_route"} /> :
-        <StandardRouteContainer
-          title={text_maker("diff_title")}
-          breadcrumbs={[text_maker("diff_title")]}
-          //description={} TODO
-          route_key="_diff"
-        >
-          <TM k="diff_title" el="h1" />
-          <div className="textDiff--instructions">
-            <TM k="diff_intro_text"/>
-          </div>
-          <div>
-            <label htmlFor='select_dept'>
-              <TM k="select_dept" />
-            </label>
-            <Select
-              className='textDiff--selector'
-              name='select_dept'
-              selected={current_dept.id}
-              onSelect={id => {
-                const new_url = `/diff/${id}/all`;
-                history.push(new_url);
-              }}
-              options={ _.map(all_depts, dept => ({id: dept.id, display: dept.fancy_name}) )}
-            />
-          </div>
-          <div>
-            <label htmlFor='select_cr'>
-              <TM k="select_cr" />
-            </label>
-            <Select
-              className='textDiff--selector'
-              name='select_cr'
-              selected={subject.level === 'crso' ? subject.id : 'all'}
-              onSelect={id => {
-                const new_url = `/diff/${subject.level === 'dept' ? subject.id : subject.dept.id}/${id}`;
-                history.push(new_url);
-              }}
-              options={_.chain(crs_without_internal).map(cr => ({id: cr.id, display: cr.name})).concat([{id: 'all', display: text_maker('all_crs')}]).value() }
-            />
-          </div>
-          <div>
-            {_.map(processed_indicators, processed_indicator => indicator_report(processed_indicator) )}
-          </div>
-        </StandardRouteContainer>
+      <StandardRouteContainer
+        title={text_maker("diff_title")}
+        breadcrumbs={[text_maker("diff_title")]}
+        //description={} TODO
+        route_key="_diff"
+      >
+        <TM k="diff_title" el="h1" />
+        <div className="textDiff--instructions">
+          <TM k="diff_intro_text"/>
+        </div>
+        <div>
+          <label htmlFor='select_dept'>
+            <TM k="select_dept" />
+          </label>
+          <Select
+            className='textDiff--selector'
+            name='select_dept'
+            selected={current_dept.id}
+            onSelect={id => {
+              const new_url = `/diff/${id}/all`;
+              history.push(new_url);
+            }}
+            options={ _.map(all_depts, dept => ({id: dept.id, display: dept.fancy_name}) )}
+          />
+        </div>
+        <div>
+          <label htmlFor='select_cr'>
+            <TM k="select_cr" />
+          </label>
+          <Select
+            className='textDiff--selector'
+            name='select_cr'
+            selected={subject.level === 'crso' ? subject.id : 'all'}
+            onSelect={id => {
+              const new_url = `/diff/${subject.level === 'dept' ? subject.id : subject.dept.id}/${id}`;
+              history.push(new_url);
+            }}
+            options={_.chain(crs_without_internal).map(cr => ({id: cr.id, display: cr.name})).concat([{id: 'all', display: text_maker('all_crs')}]).value() }
+          />
+        </div>
+
+        {loading ? <SpinnerWrapper ref="spinner" config_name={"sub_route"} /> :
+        <div>
+          {_.map(processed_indicators, processed_indicator => indicator_report(processed_indicator) )}
+        </div>}
+      </StandardRouteContainer>
     );
   }
 }
