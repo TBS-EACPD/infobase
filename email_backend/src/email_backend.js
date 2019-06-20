@@ -16,6 +16,8 @@ import {
   make_email_body_from_completed_template,
 } from './template_utils';
 
+import { throttle_requests_by_ip } from './throttle_requests_by_ip.js';
+
 const get_request_content = (request) => (!_.isEmpty(request.body) && request.body) || (!_.isEmpty(request.query) && request.query);
 
 const log_email_request = (request, log_message) => {
@@ -42,6 +44,7 @@ const make_email_backend = (templates) => {
   email_backend.use( body_parser.json({ limit: '50mb' }) );
   email_backend.use( compression() );
   process.env.IS_PROD_SERVER && email_backend.use( cors() );
+  email_backend.enable('trust proxy');
   email_backend.use(
     (request, response, next) => {
       response.header('Access-Control-Allow-Origin', '*');
@@ -59,9 +62,6 @@ const make_email_backend = (templates) => {
     }
   );
 
-
-  // TODO: what can I do to mitigate endpoint spam? Is that in-scope right now? I want it to be, at least
-  
 
   email_backend.get(
     '/email_template_names',
@@ -88,7 +88,7 @@ const make_email_backend = (templates) => {
     }
   );
   
-  
+ 
   email_backend.post(
     '/submit_email',
     async (request, response) => {  
@@ -105,6 +105,14 @@ const make_email_backend = (templates) => {
         response.status("400").send(error_message);
         log_email_request(request, error_message);
       } else {
+        const this_ip_is_in_timeout = throttle_requests_by_ip(request.ip);
+        if (process.env.IS_PROD_SERVER && this_ip_is_in_timeout){
+          const error_message = "Bad Request: too many recent requests from your IP, try again later.";
+          response.status("400").send(error_message);
+          log_email_request(request, error_message);
+          return null;
+        }
+
         const email_config = get_email_config();
         const email_subject = make_email_subject_from_completed_template(original_template, completed_template);
         const email_body = make_email_body_from_completed_template(original_template, completed_template);
