@@ -112,6 +112,7 @@ const make_email_server = (templates) => {
           ...email_config,
           subject: email_subject,
           text: email_body,
+          // TODO: could use a more nicely formated HTML body here
         });
 
         if (!process.env.IS_PROD_SERVER){
