@@ -1,12 +1,16 @@
 @import "../common_css/common-variables";
 
 .faded-loading-container--true {
-  left: 0;
+  left: 50%;
+  margin-left:-100px;
+  top: 50%;
+  margin-top: -100px;
   position: fixed;
-  width: 100%;
-  height: 100%;
+  height: 200px;
+  width: 200px;
   background-color: rgba(255, 255, 255, 0.7);
   z-index: 9999;
+  border-radius: 50%;
 }
 
 .faded-loading-container--false {

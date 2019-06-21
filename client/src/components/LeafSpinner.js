@@ -40,7 +40,7 @@ export const LeafSpinner = ({config_name, faded}) => {
   }
 
   return (
-    <div className={`faded-loading-container--${faded}`} style={{top: topOffset}}>
+    <div className={`faded-loading-container--${faded}`}>
       <div 
         className="leaf-spinner-container" 
         style={leaf_spinner_configs[config_name]}
