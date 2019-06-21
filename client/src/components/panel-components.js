@@ -12,7 +12,7 @@ import { panel_href_template } from '../infographic/routes.js';
 import { panel_context } from '../infographic/context.js';
 import './panel-components.scss';
 import { create_text_maker } from '../models/text.js';
-import { PDFGenerator } from './pdf-generate.js';
+import { PDFGenerator } from './PDFGenerator.js';
 
 
 const { TM } = create_text_maker_component(text);
