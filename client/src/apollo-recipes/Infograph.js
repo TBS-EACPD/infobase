@@ -27,7 +27,7 @@ const BubbleMenu = ({ bubbles, onSelectBubble }) => {
         </li>
       )}
     </ul>
-  </div>
+  </div>;
 
 };
 

@@ -35,8 +35,8 @@ const render_w_options = ({text_key, graph_col, text_col}) => ({calculations, so
         </Col>
       }
     </StdPanel>
-  )
-}
+  );
+};
 
 new PanelGraph({
   key: 'vote_stat_split',
@@ -85,7 +85,7 @@ new PanelGraph({
         return {
           label: key,
           value: d3.sum( lines, _.property("{{pa_last_year}}") ),
-        }
+        };
       })
       .value();
   },

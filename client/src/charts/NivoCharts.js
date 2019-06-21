@@ -1,6 +1,6 @@
 import { ResponsiveLine } from '@nivo/line';
 import { ResponsiveBar } from './nivo-bar.js';
-import { ResponsivePie } from '@nivo/pie'
+import { ResponsivePie } from '@nivo/pie';
 import { formats, dollar_formats } from "../core/format.js";
 import { Fragment } from 'react';
 
@@ -50,7 +50,7 @@ const percent_value_tooltip = (tooltip_items, formatter, total) => (
       </tbody>
     </table>
   </div>
-)
+);
 
 const general_default_props = {
   tooltip: (d, tooltip_formatter) => default_tooltip(d, tooltip_formatter),
@@ -81,7 +81,7 @@ export class NivoResponsivePie extends React.Component{
       legends,
       startAngle,
       is_money,
-    } = this.props
+    } = this.props;
 
     return (
       <ResponsivePie
@@ -348,7 +348,7 @@ NivoResponsiveHBar.defaultProps = {
 
 export class NivoResponsiveLine extends React.Component {
   constructor(props){
-    super(props)
+    super(props);
   }
   render(){
     const { 
@@ -475,10 +475,10 @@ const get_scale_bounds = (stacked, raw_data, zoomed) => {
     return {
       min: min < 0 ? scaled_min : 0,
       max: 'auto',
-    }
+    };
   }
   return {
     min: zoomed || min < 0 ? scaled_min : 0,
     max: !zoomed && max < 0 ? 0 : scaled_max,
-  }
-}
+  };
+};

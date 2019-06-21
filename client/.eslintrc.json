@@ -37,7 +37,7 @@
           "unix"
       ],
       "semi": [
-          "off",
+          "warn",
           "always"
       ],
       "no-unused-vars": [

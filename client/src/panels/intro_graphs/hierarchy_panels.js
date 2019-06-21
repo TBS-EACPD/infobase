@@ -45,7 +45,7 @@ new PanelGraph({
   footnotes: false,
 
   calculate(subject){
-    return !_.isEmpty(subject.programs)
+    return !_.isEmpty(subject.programs);
   },
 
   render({calculations}){
@@ -88,7 +88,7 @@ new PanelGraph({
       <HeightClipper clipHeight={250} allowReclip={true}>
         <HierarchyPeek root={hierarchy}/>
       </HeightClipper>
-    </TextPanel>
+    </TextPanel>;
 
   },
 });
@@ -187,7 +187,7 @@ new PanelGraph({
     
     return <TextPanel title={text_maker("crso_in_gov_title")}>
       <HierarchyPeek root={hierarchy}/>
-    </TextPanel>
+    </TextPanel>;
 
   },
 });
@@ -213,7 +213,7 @@ new PanelGraph({
       <HeightClipper clipHeight={250} allowReclip={true}>
         <HierarchyPeek root={hierarchy}/>
       </HeightClipper>
-    </TextPanel>
+    </TextPanel>;
 
   },
 });

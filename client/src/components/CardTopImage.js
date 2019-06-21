@@ -33,6 +33,6 @@ const CardTopImage = ({
       </div>
     </div>
   </a>
-)
+);
 
-export { CardTopImage }
+export { CardTopImage };

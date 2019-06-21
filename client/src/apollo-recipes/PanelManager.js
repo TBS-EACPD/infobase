@@ -79,7 +79,7 @@ const Presentational = props => {
   const { panel_defs, subject_context, a11y_mode } = props;
 
   if(_.chain(panel_defs).map('key').uniq().value().length < panel_defs.length){
-    throw "error: panel keys are not unique"
+    throw "error: panel keys are not unique";
   }
 
   const { level } = subject_context;

@@ -102,7 +102,7 @@ const ReportDetails = ({
       }
     </section>
   );
-}
+};
 
 const ReportDatasets = ({
   table, 
@@ -168,7 +168,7 @@ const ReportDatasets = ({
       </FancyUL>
     </div>
   );
-}
+};
 
 //the parent flexbox styling screws stuff up and makes it impossible to center vertically,
 // a padding of 6px at the top seems to fix it ¯\_(ツ)_/¯
@@ -178,7 +178,7 @@ const SubjectFilterPicker = ({ subject, onSelect })=> <div style={{paddingTop: '
       onClick={
         subject.guid==="gov_gov" ? 
         null : 
-        ()=> { onSelect(Gov) } 
+        ()=> { onSelect(Gov); } 
       }
       className={classNames("btn btn-ib-primary", {"btn-ib-primary--selected": subject.guid==="gov_gov"})}
       style={{ 
@@ -192,7 +192,7 @@ const SubjectFilterPicker = ({ subject, onSelect })=> <div style={{paddingTop: '
   <div className="md-half-width md-gutter-left row-opition-content-search">
     <DeptSearch 
       include_gov={true} 
-      onSelect={ subject=> { onSelect(subject) }}
+      onSelect={ subject=> { onSelect(subject); }}
       search_text={
         text_maker(
           subject.guid==='gov_gov' ? 

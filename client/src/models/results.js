@@ -22,7 +22,7 @@ class SubProgramEntity {
       return;
     }
 
-    const inst = new SubProgramEntity(def)
+    const inst = new SubProgramEntity(def);
 
     if(!parent_indexed_sub_program_entities[parent_id]){
       parent_indexed_sub_program_entities[parent_id] = [];
@@ -361,7 +361,7 @@ class Indicator {
   }
   //dont use this on multiple indicators, it'll be super slow!
   get _result(){
-    return Result.lookup(this.result_id)
+    return Result.lookup(this.result_id);
   }
 
 }

@@ -38,7 +38,7 @@ const create_ministry_hierarchy = function(data_type, skip_crsos = true){
       post_traversal_search_string_set(node);
     })
     .sort(absolute_value_sort);
-}
+};
 
 const dept_data_wrapper_node_rules = (node) => {
   node.__value__ = node.value;
@@ -54,9 +54,9 @@ const dept_data_wrapper_node_rules = (node) => {
       const hide = _.tail(_node.children);
       const unhide = _.filter(hide, __node => Math.abs(__node.value) > root_value/50);
       return [show.concat(unhide), _.difference(hide, unhide)];
-    }
+    };
   }
-}
+};
 
 
 const dept_perspective_popup_template = function(d){
@@ -78,7 +78,7 @@ const dept_perspective_popup_template = function(d){
   } else if (d.data.is("ministry")) {
     return text_maker("partition_ministry_or_sa_popup", common_popup_options);
   }
-}
+};
 
 
 const dept_perspective_factory = (data_type) => new PartitionPerspective({
@@ -98,7 +98,7 @@ const dept_perspective_factory = (data_type) => new PartitionPerspective({
     const text_key = data_type === "exp" ? "partition_spending_was" : "partition_fte_was";
     return text_maker(text_key, {x: root_value});
   },
-})
+});
 
 const make_dept_exp_perspective = () => dept_perspective_factory("exp");
 

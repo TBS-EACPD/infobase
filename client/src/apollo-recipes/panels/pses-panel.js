@@ -7,7 +7,7 @@ import { Fragment } from 'react';
 
 const get_num_from_str = /\d+/;
 function getQuestionLabels(q_id){
-  const num = Number(_.first(get_num_from_str.exec(q_id)))
+  const num = Number(_.first(get_num_from_str.exec(q_id)));
   if(num < 12){
     return [ "Strongly Disagree", "Strongly Agree" ];
   } else if(num === 12){
@@ -99,7 +99,7 @@ const GradientBar = ({ series, startsPositive, height, width, labels }) => {
       </div>
     </div>
   );
-}
+};
 
 
 const QuestionDataVis = ({ org_data, gov_data, acronym, question_id }) => (
@@ -154,7 +154,7 @@ const Component = ({ data: { questions, acronym } }) =>
         </div>
       )}
     </div>
-  </Panel>
+  </Panel>;
 
 
 
@@ -172,7 +172,7 @@ const fragments = gql`
     answer_count
     average_1_to_5
   }
-`
+`;
 
 const query = gql`
   query($lang: String!, $id: String!) {
@@ -199,7 +199,7 @@ const query = gql`
   }
   ${fragments}
     
-`
+`;
 
 
 
@@ -240,7 +240,7 @@ const data_to_props = ({ root: {
     questions: joined_questions,
     acronym,
   };
-}
+};
 
 
 

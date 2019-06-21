@@ -431,7 +431,7 @@ const SingleIndicatorDisplay = ({indicator}) => {
       </dl>
     </div>
   );
-}
+};
 
 
 //must have only 4 elements
@@ -562,8 +562,8 @@ const InlineStatusIconList = ({indicators}) => {
         }
       </span>
     )
-    .value()
-}
+    .value();
+};
 
 
 
@@ -602,7 +602,7 @@ function indicators_period_span_str(indicators){
         return "";
       }
     })
-    .value()
+    .value();
 }
 
 const IndicatorDisplay = IndicatorList;
@@ -649,7 +649,7 @@ class HorizontalStatusTable extends React.Component {
             0
           ),
           0,
-        )
+        );
       })
       .reject( ({counts}) => counts[`${doc}_total`] === 0 )
       .sortBy( ({counts}) => counts[`${doc}_total`] )
@@ -743,7 +743,7 @@ class HorizontalStatusTable extends React.Component {
           <div style={{textAlign: 'right'}}>
             <button 
               className="btn btn-ib-primary"
-              onClick={() => { this.setState({ show_all: true }) }}
+              onClick={() => { this.setState({ show_all: true }); }}
             >
               <TM k="show_all_orgs" />
             </button>

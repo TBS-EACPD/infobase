@@ -60,4 +60,4 @@ export {
   warnDarkColor,
   infoLightColor,
   infoDarkColor,
-}
+};

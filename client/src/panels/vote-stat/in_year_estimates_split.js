@@ -66,7 +66,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
     );
   
   } else {    
-    const keys = in_year_bar_args.ticks
+    const keys = in_year_bar_args.ticks;
     const estimate_data = _.map(
       in_year_bar_args.series,
       (data, index) => ({
@@ -127,7 +127,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
         {content}
       </Col>
     </StdPanel>
-  )
+  );
 };
 new PanelGraph({
   level: "dept",

@@ -21,7 +21,7 @@ const value_functions = {
     }
     return _.first(programFtes.programs.get(node))["{{pa_last_year}}"];
   },
-}
+};
 
 const post_traversal_value_set = function(node, data_type){
   if (node.data.is("program")){
@@ -36,7 +36,7 @@ const post_traversal_value_set = function(node, data_type){
     node.fte = d3.sum(node.children, d => d.fte);
     node.value = d3.sum(node.children, d => d.value);
   }
-}
+};
 
 const post_traversal_search_string_set = function(node){
   node.data.search_string = "";
@@ -46,7 +46,7 @@ const post_traversal_search_string_set = function(node){
   if (node.data.description){
     node.data.search_string += _.deburr(node.data.description.replace(/<(?:.|\n)*?>/gm, '').toLowerCase());
   }
-}
+};
 
 export {
   absolute_value_sort,

@@ -28,7 +28,7 @@ import { BackToTop } from './components/BackToTop.js';
 import {
   UnlabeledTombstone,
   LabeledTombstone,
-} from './components/Tombstones.js'
+} from './components/Tombstones.js';
 
 
 import { DeptSearch, DeptSearchWithoutRouter } from './search/DeptSearch.js';
@@ -44,7 +44,7 @@ import {
 
 const ExternalLink = ({display, href}) => <a target="_blank" rel="noopener noreferrer" href={href}>{display}</a>;
 
-function lang(obj){ return obj[window.lang] || obj.text || "" }
+function lang(obj){ return obj[window.lang] || obj.text || ""; }
 
 class Format extends React.PureComponent {
   render(){

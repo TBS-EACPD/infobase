@@ -49,9 +49,9 @@ const tag_data_wrapper_node_rules = (node) => {
       const hide = _.tail(_node.children);
       const unhide = _.filter(hide, __node => __node.value > root_value/100);
       return [show.concat(unhide), _.difference(hide, unhide)];
-    }
+    };
   }
-}
+};
 
 
 const hwh_perspective_popup_template = function(d){
@@ -73,7 +73,7 @@ const hwh_perspective_popup_template = function(d){
       })
     );
   }
-}
+};
 
 const goco_perspective_popup_template = function(d){
   const common_popup_options = get_common_popup_options(d);
@@ -98,7 +98,7 @@ const goco_perspective_popup_template = function(d){
       })
     );
   }
-}
+};
 
 
 const goco_perspective_factory = (data_type) => new PartitionPerspective({
@@ -118,7 +118,7 @@ const goco_perspective_factory = (data_type) => new PartitionPerspective({
     const text_key = data_type === "exp" ? "partition_spending_was" : "partition_fte_was";
     return text_maker(text_key, {x: root_value});
   },
-})
+});
 
 const hwh_perspective_factory = (data_type) => new PartitionPerspective({
   id: "hwh",
@@ -127,7 +127,7 @@ const hwh_perspective_factory = (data_type) => new PartitionPerspective({
   formatter: node_data => {
     return node_data.data.is("tag") ?
       wrap_in_brackets(text_maker("up_to") + " " + formats_by_data_type[data_type](node_data[data_type])) :
-      wrap_in_brackets(formats_by_data_type[data_type](node_data[data_type]))
+      wrap_in_brackets(formats_by_data_type[data_type](node_data[data_type]));
   },
   hierarchy_factory: () => create_tag_hierarchy("HWH", data_type),
   data_wrapper_node_rules: tag_data_wrapper_node_rules, 
@@ -154,7 +154,7 @@ const hwh_perspective_factory = (data_type) => new PartitionPerspective({
       }
     />
   ),
-})
+});
 
 const make_goco_exp_perspective = () => goco_perspective_factory("exp");
 const make_goco_fte_perspective = () => goco_perspective_factory("fte");

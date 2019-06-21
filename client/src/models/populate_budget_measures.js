@@ -190,7 +190,7 @@ query($lang: String! ${id_arg_name ? `, $id: String` : ''}) {
   }
 }
 `;
-const _subject_ids_with_loaded_measures = {}
+const _subject_ids_with_loaded_measures = {};
 export function api_load_budget_measures(subject, years){
   const years_to_load = !_.isEmpty(years) ? years : budget_years;
 
@@ -285,7 +285,7 @@ export function api_load_budget_measures(subject, years){
             _.each(
               measures_in_year,
               measure => BudgetMeasure.create_and_register({...measure, year}),
-            )
+            );
           }
 
           // Need to use _.setWith and pass Object as the customizer function to account for keys that may be numbers (e.g. dept id's)

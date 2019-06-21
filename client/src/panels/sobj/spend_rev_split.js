@@ -57,13 +57,13 @@ function render({calculations, footnotes, sources}) {
   }
   
 
-  const ticks = _ticks.map(text_maker) 
+  const ticks = _ticks.map(text_maker); 
   const spend_rev_data = _.map(
     series,
     (spend_rev_value,tick_index)=>({
       title: ticks[tick_index],
       [ticks[tick_index]]: spend_rev_value,
-    }))
+    }));
 
   let graph_content;
   if(window.is_a11y_mode){
@@ -134,7 +134,7 @@ Statistics.create_and_register({
   compute: (subject, tables, infos, add, c) => {
     const {programSobjs} = tables;
     const prog_rows = programSobjs.q(subject).data;
-    const exp_rev_results = rows_to_rev_split(prog_rows)
+    const exp_rev_results = rows_to_rev_split(prog_rows);
 
     add({
       key: "exp_rev_gross", 
@@ -168,7 +168,7 @@ Statistics.create_and_register({
   compute: (subject, tables, infos, add, c) => {
     const programSobjs = tables.programSobjs;
     const prog_rows = programSobjs.programs.get(subject);
-    const exp_rev_results = rows_to_rev_split(prog_rows)
+    const exp_rev_results = rows_to_rev_split(prog_rows);
 
     add({
       key: "exp_rev_gross", 

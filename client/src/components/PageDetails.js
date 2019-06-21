@@ -86,7 +86,7 @@ class ReportAProblem extends React.Component {
                                           is_checked: !field.is_checked,
                                         }
                                     ),
-                                  })
+                                  });
                                 }
                               }
                             />

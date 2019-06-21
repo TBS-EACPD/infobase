@@ -116,7 +116,7 @@ class SpendInTagPerspective extends React.Component {
                   })
                 )}
                 onSelect={id=> {
-                  this.setState({active_tag_index: id}) 
+                  this.setState({active_tag_index: id}); 
                 }}
                 selected={active_tag_index}
                 className="form-control"

@@ -14,7 +14,7 @@ const Select = ({ id, selected, className, options, onSelect, disabled, style })
       </option>
     )}
   </select>
-)
+);
 
 export {
   Select,

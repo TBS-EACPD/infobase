@@ -24,7 +24,7 @@ export const make_unique_func = function(){
   var val = 0;
   return function(){
     return ++val;
-  }
+  };
 };
 
 
@@ -71,7 +71,7 @@ export class Select {
           </option>`
       ).join("")
     );
-    node.onchange = () => { onSelect(data[node.value]) };
+    node.onchange = () => { onSelect(data[node.value]); };
   }
 }
 
@@ -81,7 +81,7 @@ export const escapeRegExp = function(str) {
 };
 
 export const escapeSingleQuotes = function(str){
-  return str.replace(/'/g, "&#39;")
+  return str.replace(/'/g, "&#39;");
 };
 
 export const shallowEqualObjectsOverKeys = (obj1, obj2, keys_to_compare) => _.reduce(keys_to_compare, (memo, key) => ( memo && (obj1[key] === obj2[key]) ), true);

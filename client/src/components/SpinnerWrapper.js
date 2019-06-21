@@ -1,7 +1,7 @@
 import { Spinner, spinner_configs } from '../core/Spinner.js';
 
 export class SpinnerWrapper extends React.Component {
-  render(){ return <div ref="main" /> }
+  render(){ return <div ref="main" />; }
   componentDidMount(){ 
     const { 
       scale,
@@ -18,4 +18,4 @@ export class SpinnerWrapper extends React.Component {
 
 SpinnerWrapper.defaultProps = {
   scale: 2,
-}
+};

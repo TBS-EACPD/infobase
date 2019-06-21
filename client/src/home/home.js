@@ -132,7 +132,7 @@ const HomeLayout = props => (
               <div className="search-container home-search-container">
                 <EverythingSearch 
                   include_gov={false} 
-                  search_text={home_tm('everything_search_placeholder')}
+                  placeholder={home_tm('everything_search_placeholder')}
                   large={true}
                   include_tags={true}
                   include_programs={true}
@@ -167,7 +167,7 @@ const HomeLayout = props => (
       </div>
     </div>
 
-            
+    {/*             
     <div className="home-bg">
       <div className="container">
         <CardBackgroundImage
@@ -180,7 +180,7 @@ const HomeLayout = props => (
           is_ellen_image
         />
       </div>
-    </div>
+    </div> */}
 
     <div className="container">
       <div className="xtralinks">
@@ -237,6 +237,33 @@ const HomeLayout = props => (
               title_key="glossary_home_title"
               text_key="glossary_home_desc"
               link_href="#glossary"
+            />
+          </div>
+          <div className="fcol-md-4 fcol-sm-6 linkcard">
+            <CardTopImage
+              tmf={home_tm}
+              img_src={get_static_url("svg/partition-icon.svg")}
+              title_key="partition_home_title"
+              text_key="partition_home_text"
+              link_href="#rpb"
+            />
+          </div>
+          <div className="fcol-md-4 fcol-sm-6 linkcard">
+            <CardTopImage
+              tmf={home_tm}
+              img_src={get_static_url("svg/partition-icon-budget.svg")}
+              title_key="budget_home_title"
+              text_key="budget_home_text"
+              link_href="#igoc"
+            />
+          </div>
+          <div className="fcol-md-4 fcol-sm-6 linkcard">
+            <CardTopImage
+              tmf={home_tm}
+              img_src={get_static_url("svg/lab.svg")}
+              title_key="lab_home_title"
+              text_key="lab_home_text"
+              link_href="#lab"
             />
           </div>
           <div className="fcol-md-4 fcol-sm-6 linkcard">

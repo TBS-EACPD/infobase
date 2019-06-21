@@ -49,10 +49,10 @@ const RPBTitle = ({ table_name, subject_name }) => {
     return <h1> {title_prefix} - {table_name} </h1>;
   }
   return <h1> {title_prefix} - {table_name} - {subject_name} </h1>;
-}
+};
 
 function slowScrollDown(){
-  const el = document.getElementById('rpb-main-content')
+  const el = document.getElementById('rpb-main-content');
   if(!_.isElement(el)){ 
     return;
   }
@@ -73,7 +73,7 @@ class Root extends React.Component {
     const { state } = this.props;
     
     const mapStateToProps = create_mapStateToProps();
-    const Container = connect(mapStateToProps, mapDispatchToProps)(RPB)
+    const Container = connect(mapStateToProps, mapDispatchToProps)(RPB);
 
     const store = createStore(reducer, state);
 
@@ -90,7 +90,7 @@ class Root extends React.Component {
     return null;
   }
   shouldComponentUpdate(newProps){
-    return rpb_link(this.state.store.getState()) !== rpb_link(newProps.state)
+    return rpb_link(this.state.store.getState()) !== rpb_link(newProps.state);
   }
   render(){
 
@@ -142,7 +142,7 @@ class RPB extends React.Component {
       this.setState({ loading: false });
       setTimeout(()=> {
         slowScrollDown();
-      })
+      });
     });
   }
   
@@ -202,7 +202,7 @@ class RPB extends React.Component {
                     <button 
                       className="btn btn-ib-primary"
                       style={{width: '100%'}}
-                      onClick={()=>{ this.setState({table_picking: true})}}
+                      onClick={()=>{ this.setState({table_picking: true});}}
                     >
                       <TextMaker text_key={table ? 'select_another_table_button' : 'select_table_button'} /> 
                     </button>
@@ -221,7 +221,7 @@ class RPB extends React.Component {
                       if(sub_app_node !== null){
                         sub_app_node.focus();
                       }
-                    },200)
+                    },200);
                   }
                 }}
                 titleId="tbp-title"
@@ -276,7 +276,7 @@ class RPB extends React.Component {
                       {id: 'details', display: <TextMaker text_key="granular_view_title" />, active: mode==='details'}]}
                     
                     onChange={ id =>{
-                      on_switch_mode(id)} 
+                      on_switch_mode(id);} 
                     }
                   />
                 </div>
@@ -293,7 +293,7 @@ class RPB extends React.Component {
             }
           </Fragment>
       }
-    </div>
+    </div>;
 
   }
 }
@@ -328,7 +328,7 @@ class AnalyticsSynchronizer extends React.Component {
       SUBJECT_GUID: this.props.subject,
       MISC1: this.props.table,
       MISC2: this.props.mode,
-    })
+    });
 
 
   }
@@ -377,7 +377,7 @@ export default class ReportBuilder extends React.Component {
       loading: true,
       config_str: null,
       url_state: null,
-    }
+    };
   }
   loadDeps({table}){
     ensure_loaded({
@@ -395,7 +395,7 @@ export default class ReportBuilder extends React.Component {
 
     let loading = _.isNull(prevState.config_str) ||
       _.isNull(prevState.url_state) ||
-      (url_state.table && prevState.url_state.table !== url_state.table)
+      (url_state.table && prevState.url_state.table !== url_state.table);
 
 
     if(_.isEmpty(url_state.table)){
@@ -440,7 +440,7 @@ export default class ReportBuilder extends React.Component {
             <Root state={url_state} />
         }
       </StandardRouteContainer>
-    )
+    );
   }
 }
 

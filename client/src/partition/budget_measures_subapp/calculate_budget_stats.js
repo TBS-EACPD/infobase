@@ -18,7 +18,7 @@ const calculate_budget_stats = (year) => {
       _.reduce(data, (memo, data_row) => memo + data_row[key], 0),
     ])
     .fromPairs()
-    .value()
+    .value();
   const rolled_up_data_rows = _.map(
     all_budget_measures,
     budget_measure => reduce_by_budget_value(budget_measure.data)
@@ -110,6 +110,6 @@ const calculate_budget_stats = (year) => {
     fully_withheld_funds_count,
     less_one_percent_remaining_funds_count,
   };
-}
+};
 
 export { calculate_budget_stats };

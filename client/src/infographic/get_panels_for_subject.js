@@ -46,7 +46,7 @@ import '../panels/historical_auth_exp/historical_auth_exp.js';
 
 
 //tag-only panels
-import '../panels/tag_panels/resource_structure.js'
+import '../panels/tag_panels/resource_structure.js';
 import '../panels/tag_panels/goco.js';
 import '../panels/tag_panels/horizontal_initiative_profile.js';
 // import '../panels/tag_panels/top_3_dept_graph.js';

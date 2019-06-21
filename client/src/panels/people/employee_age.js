@@ -1,4 +1,4 @@
-import text from "./employee_age.yaml"
+import text from "./employee_age.yaml";
 import {
   formats,
   run_template,
@@ -59,7 +59,7 @@ const calculate_funcs_by_level = {
         data: yearly_values,
         five_year_percent: yearly_values.reduce(function(sum, val) { return sum + val;}, 0)/gov_five_year_total_head_count,
       };
-    })
+    });
     
     return {
       avg_age: avg_age,
@@ -193,7 +193,7 @@ const calculate_funcs_by_level = {
                 label_col_header = {text_maker("age_group")}
                 data_col_headers = {[...ticks, text_maker("five_year_percent_header")]}
                 data = {_.map(graph_args.age_group, dimension => { 
-                  return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]} 
+                  return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]}; 
                 })}
               />
             </Col>

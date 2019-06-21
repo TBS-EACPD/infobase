@@ -20,7 +20,7 @@ const TwoLevelSelect = ({ style, id, selected, className, grouped_options, onSel
       </optgroup>
     )} 
   </select>
-)
+);
 
 export {
   TwoLevelSelect,

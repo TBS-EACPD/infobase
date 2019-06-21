@@ -49,7 +49,7 @@ class AccordionEnterExit extends React.Component {
 
   }
   render(){
-    return <this.props.component {...(_.omit(this.props, ['component', 'expandDuration', 'expandDuration', 'collapseDuration', 'cancel']))} />
+    return <this.props.component {...(_.omit(this.props, ['component', 'expandDuration', 'expandDuration', 'collapseDuration', 'cancel']))} />;
   }
 }
 
@@ -99,7 +99,7 @@ class AutoAccordion extends React.Component {
     super(props);
     this.state = {
       isExpanded: props.isInitiallyExpanded,
-    }
+    };
   }
   render(){
     const { isExpanded } = this.state;

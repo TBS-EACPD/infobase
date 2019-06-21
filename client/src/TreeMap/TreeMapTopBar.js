@@ -14,7 +14,7 @@ export class TreeMapTopbar extends React.Component {
     super();
   }
   handleClick(ix) {
-    this.props.setRouteCallback(this.props.org_route.slice(0, ix + 1), true)
+    this.props.setRouteCallback(this.props.org_route.slice(0, ix + 1), true);
   }
   render() {
     const {
@@ -35,7 +35,7 @@ export class TreeMapTopbar extends React.Component {
               <li className="TreeMap__ZoomControl--no-zoom-out" style={{paddingRight: "10px"}}>{text_maker("click_to_zoom_out")}:</li>
               <li className="TreeMap__ZoomControl--has-zoom-out">
                 <span tabIndex="0" dangerouslySetInnerHTML={{ __html: top_level_title }}
-                  onClick={() => { this.handleClick(-1) }}
+                  onClick={() => { this.handleClick(-1); }}
                   onKeyDown={() => {
                     if (event.keyCode != 13) {
                       return;
@@ -61,7 +61,7 @@ export class TreeMapTopbar extends React.Component {
               <li className="TreeMap__ZoomControl--has-zoom-out">
                 {
                   <span tabIndex="0" dangerouslySetInnerHTML={{ __html: display }}
-                    onClick={() => { this.handleClick(ix) }}
+                    onClick={() => { this.handleClick(ix); }}
                     onKeyDown={() => {
                       if (event.keyCode != 13) { 
                         return;
@@ -94,7 +94,7 @@ export class TreeMapTopbar extends React.Component {
           }
         </ol>
       </div>
-    )
+    );
   }
 }
 

@@ -44,7 +44,7 @@ const infobase_colors_smart = (col_scale) => (label) => {
     return NA_color;
   }
   return col_scale(label);
-}
+};
 
 
 export const PplSharePie = ({graph_args, label_col_header, sort_func}) => {
@@ -164,7 +164,7 @@ export const CommonDonut = function({graph_data, legend_data, graph_height}){
       }
     </div>
   );
-}
+};
 
 export class LineBarToggleGraph extends React.Component {
   constructor(props){
@@ -377,7 +377,7 @@ export class LineBarToggleGraph extends React.Component {
                 !(selected.length === 1 && selected.includes(label)) &&
                   (this.setState({
                     selected: _.toggle_list(selected, label),
-                  }))
+                  }));
               }}
             />
             { !disable_toggle &&
@@ -538,7 +538,7 @@ const hex_to_rgb = (hex) => {
     g: parseInt(result[2], 16),
     b: parseInt(result[3], 16),
   } : null;
-}
+};
 
 export {
   charts_index, 

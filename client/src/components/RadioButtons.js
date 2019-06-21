@@ -7,7 +7,7 @@ export const RadioButtons = ({ options, onChange }) => <div className="radio-but
       key={id}
       aria-pressed={active}
       className={classNames("btn","radio-buttons__option", active && "radio-buttons__option--active")}
-      onClick={()=>{ onChange(id)}}
+      onClick={()=>{ onChange(id);}}
     >
       {display}
     </button>

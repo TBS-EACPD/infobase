@@ -133,7 +133,7 @@ export class LiquidFillGauge{
       .domain([0,1]);
     const textTween = () =>{
       const interpolate_text = d3.interpolate(waveDirection, textValue);
-      return function(t) { this.textContent = `${parseFloat(interpolate_text(t)).toFixed(1)}%`; }
+      return function(t) { this.textContent = `${parseFloat(interpolate_text(t)).toFixed(1)}%`; };
     };
   
     this.percentText

@@ -296,7 +296,7 @@ export class Table extends mix().with(staticStoreMixin){
   }
   populate_with_data(data){
     data= _.trim(data);
-    const row_transf = this.get_row_func()
+    const row_transf = this.get_row_func();
     const parsed_data = d3.csvParseRows(data);
 
     data = _.chain(parsed_data)
@@ -360,9 +360,9 @@ export class Table extends mix().with(staticStoreMixin){
   load(){
     return make_request( get_static_url( table_id_to_csv_path(this.id) ) )
       .then( data => { 
-        this.populate_with_data(data) 
+        this.populate_with_data(data); 
         this.loaded = true;
-      })
+      });
   }
   fill_dimension_columns(){
     //wrap it in an instance method 
@@ -421,7 +421,7 @@ class Mapper {
   }
   get key(){ return this.def.id; }
   get mapper(){ return this.def.mapper; }
-  get sort(){ return this.def.sort || _.identity }
+  get sort(){ return this.def.sort || _.identity; }
   get lang(){ //mappers deal with data entry, they need to know about language.
     return window.lang;
   }
@@ -434,7 +434,7 @@ class Mapper {
     return this.mapper(row.slice());
   }
   _non_default_map(row){
-    return this.mapper(row.slice())
+    return this.mapper(row.slice());
   }
 
 }

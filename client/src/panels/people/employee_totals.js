@@ -1,4 +1,4 @@
-import text from "./employee_totals.yaml"
+import text from "./employee_totals.yaml";
 import {
   formats,
   run_template,

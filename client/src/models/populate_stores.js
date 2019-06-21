@@ -23,7 +23,7 @@ function process_lookups(data){
       data[key] = d3.csvParseRows(_.trim(csv_str));
       data[key].shift(); // drop the header
     })
-    .value()
+    .value();
 
  
   //TODO: stop referring to data by the names of its csv, design an interface with copy_static_assets.js
@@ -84,7 +84,7 @@ function populate_igoc_models({
     const inst = InstForm.lookup(id);
     if(!_.isEmpty(parent_id)){
       const parent = InstForm.lookup(parent_id);
-      parent.children_forms.push(inst)
+      parent.children_forms.push(inst);
       inst.parent_form = parent;
     }
   });
@@ -150,7 +150,7 @@ function populate_igoc_models({
       eval_url_id,
       dp_url_id,
       website_url_id,
-    ], url_key => url_lookup[url_id(url_key)])
+    ], url_key => url_lookup[url_id(url_key)]);
 
     const def_obj = {
       unique_id: +org_id,
@@ -183,7 +183,7 @@ function populate_igoc_models({
       other_lang_applied_title, 
     };
 
-    const org_instance = Dept.create_and_register(def_obj)
+    const org_instance = Dept.create_and_register(def_obj);
 
     if(!_.isEmpty(ministry_id)){
       //create two way link to ministry
@@ -277,7 +277,7 @@ function populate_crso_tags(rows){
       is_active: !!(+row[is_active]),
       is_drf: !!(+row[is_drf]),
       is_internal_service: !!(+row[is_internal_service]),
-    })
+    });
     dept.crsos.push(instance);
 
   });
@@ -316,7 +316,7 @@ function populate_program_tag_linkages(programs_m2m_tags){
     if(tag_root_id === "CCOFOG" || tag_root_id === "MLT" ){
       return;
     }
-    program.tags.push(tag)
-    tag.programs.push(program)
+    program.tags.push(tag);
+    tag.programs.push(program);
   }); 
 };

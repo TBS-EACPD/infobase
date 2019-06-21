@@ -107,6 +107,6 @@ new PanelGraph({
           </div>
         </div>
       </TextPanel>
-    )
+    );
   },
 });

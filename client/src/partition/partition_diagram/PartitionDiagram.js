@@ -56,7 +56,7 @@ export class PartitionDiagram {
 
     this.colors = this.options.colors;
     this.background_color = this.options.background_color;
-    this.html.style("background-color", this.background_color)
+    this.html.style("background-color", this.background_color);
 
     this.dont_fade = this.options.dont_fade || [];
     
@@ -205,7 +205,7 @@ export class PartitionDiagram {
         const index = d.parent.children.indexOf(d);
 
         if ( index === 0 ){
-          return d.parent.top + "px"
+          return d.parent.top + "px";
         } else {
           return d.parent.children[index-0].top + d.parent.children[index-0].rendered_height + "px";
         }
@@ -349,7 +349,7 @@ export class PartitionDiagram {
   }
 
   add_polygons(target){
-    const source = target.parent
+    const source = target.parent;
     if (target === source.children.filter( c => _.isUndefined(c.no_polygon) || !c.no_polygon )[0]){
       // (re)set vertical counter to source.top if drawing first polygon for this source
       source.vertical_counter = source.top;
@@ -498,7 +498,7 @@ export class PartitionDiagram {
         .filter(d => links.length > 0 ? _.includes(links,d) : true)
         .classed("faded", false)
         .classed("highlighted", true);
-    }
+    };
     unfade_parent_polygons("polygon.partition-svg-link.root-polygon");
     unfade_parent_polygons("polygon.partition-svg-link");
 
@@ -535,7 +535,7 @@ export class PartitionDiagram {
         }
         pop_up_top = calculated_middle;
         return calculated_middle + "px";
-      })
+      });
 
     // Pointer triangle made with css
     const popup_pointer = pop_up
@@ -643,13 +643,13 @@ export class PartitionDiagram {
       this.remove_pop_up();
     } 
     
-    _.each(this.data.root.children, node => { if ( this.data.magnified(node) ){ this.data.unmagnify(node) } });
+    _.each(this.data.root.children, node => { if ( this.data.magnified(node) ){ this.data.unmagnify(node); } });
     if ( this.should_remove_unmagnify_all_button() ){
       this.remove_unmagnify_all_button();
     }
   }
   unmagnify(node){
-    this.data.unmagnify(node)
+    this.data.unmagnify(node);
     if ( this.should_remove_unmagnify_all_button() ){
       this.remove_unmagnify_all_button();
     }

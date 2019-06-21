@@ -28,7 +28,7 @@ new PanelGraph({
 
     const hi_lookups = subject.lookups || {};
 
-    const lead_dept = Dept.lookup(hi_lookups.lead_dept)
+    const lead_dept = Dept.lookup(hi_lookups.lead_dept);
 
     const labels_and_items = _.chain(
       [

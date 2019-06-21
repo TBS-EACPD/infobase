@@ -8,7 +8,7 @@ const glossary_href = (subject_or_id) => {
   const is_valid_glossary_item = !_.isUndefined( GlossaryEntry.lookup(id) );
 
   return is_valid_glossary_item && `#glossary/${id}`;
-}
+};
 
 const general_href_for_item = item => {
 
@@ -24,7 +24,7 @@ const general_href_for_item = item => {
     return glossary_href(item);
   }
 
-}
+};
 
 
 export {

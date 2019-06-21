@@ -117,7 +117,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
         const nodes_by_program_by_dept = _.chain(subject.programs)
           .groupBy(prog => prog.dept.id)
           .map( (progs,dept_id) => {
-            const org = Dept.lookup(dept_id)
+            const org = Dept.lookup(dept_id);
             const node_id = `${parent_id}-${org.guid}`;
             return {
               id: node_id,
@@ -286,7 +286,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
               type: 'indicator',
             },
           }))
-          .value()
+          .value();
 
       default:
         return null;

@@ -115,7 +115,7 @@ const Home = (props) => {
       </section>
 
     </StandardRouteContainer>
-  )
+  );
   
-}
-export { Home as default }
+};
+export { Home as default };

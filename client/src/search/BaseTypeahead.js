@@ -115,7 +115,7 @@ export class BaseTypeahead extends React.Component {
       this.query_matched_counter++;
 
       return is_on_displayed_page;
-    }
+    };
     
     const filterBy = (option, props) => {
       if (option.pagination_placeholder){
@@ -176,7 +176,7 @@ export class BaseTypeahead extends React.Component {
           (text) => {
             this.reset_pagination();
             this.refresh_dropdown_menu();
-            debounceOnNewQuery(text)
+            debounceOnNewQuery(text);
           }
         }
 
@@ -300,7 +300,7 @@ export class BaseTypeahead extends React.Component {
                                 <span className="aria-hidden">▼</span>
                               </MenuItem>
                             ),
-                          ]
+                          ];
                         }
                       )
                       .value()
@@ -321,4 +321,4 @@ BaseTypeahead.defaultProps = {
   minLength: 3,
   large: true,
   onNewQuery: _.noop,
-}
+};

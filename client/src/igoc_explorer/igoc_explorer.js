@@ -27,7 +27,7 @@ const map_state_to_props_from_memoized_funcs = memoized_funcs => {
     ...mapRootStateToRootProps(state),
     ...get_scheme_props(state),
   });
-}
+};
 
 const scheme = {
   key: 'igoc',
@@ -80,7 +80,7 @@ const scheme = {
     )
   ),
   
-}
+};
 
 
 //This code is a little strange. This components exists as an intermediary between redux and react-router. 
@@ -121,7 +121,7 @@ class ExplorerContainer extends React.Component {
     this.state = {
       store,
       Container,
-    }
+    };
   }
   static getDerivedStateFromProps(nextProps, prevState){
     const { grouping } = nextProps;
@@ -168,4 +168,4 @@ const IgocExplorer = ({match}) => {
     </StandardRouteContainer>
   );
 };
-export { IgocExplorer as default }
+export { IgocExplorer as default };

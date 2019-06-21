@@ -280,7 +280,7 @@ class SimpleView extends React.Component {
           </tr>
         </tbody>
       </table>
-    )
+    );
     
 
   }
@@ -298,7 +298,7 @@ class SimpleView extends React.Component {
     const [ column ] = columns;
 
 
-    const shouldShowLegend = deptBreakoutMode && filter === text_maker('all')
+    const shouldShowLegend = deptBreakoutMode && filter === text_maker('all');
 
     const colors = ( 
       shouldShowLegend ? 

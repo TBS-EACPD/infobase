@@ -1,10 +1,10 @@
 import ReactDOM from 'react-dom';
 class ReactContentRenderer {
   constructor(){
-    this.nodes = []
+    this.nodes = [];
   }
   render(component, node){
-    ReactDOM.render(component, node)
+    ReactDOM.render(component, node);
     this.nodes.push(node);
   }
   unmountAll(){

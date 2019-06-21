@@ -50,7 +50,7 @@ const get_appropriate_rpb_subject = subject => {
     appropriate_subject = Subject.Gov;
   }
   return appropriate_subject;
-}
+};
 
 export {
   rpb_link, 

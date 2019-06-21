@@ -57,7 +57,7 @@ _.each(["dept","crso","program"], level => {
           gross: _.find(year_data, ({col}) => _.endsWith(col, "_gross")).value,
           spa: _.find(year_data, ({col}) => _.endsWith(col, "_spa")).value,
           rev: _.find(year_data, ({col}) => _.endsWith(col, "_rev")).value,
-        }
+        };
       });
 
     },
@@ -113,6 +113,6 @@ _.each(["dept","crso","program"], level => {
 
     },
   });
-})
+});
 
 

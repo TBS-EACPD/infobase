@@ -10,5 +10,5 @@ export default function(){
   return function stop(){
     spinner.stop();
     app_el.removeAttribute('aria-busy');
-  }
+  };
 } 

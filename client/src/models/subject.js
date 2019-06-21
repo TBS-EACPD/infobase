@@ -34,7 +34,7 @@ Subject.Gov = {
     return this.constructor === comparator;
   },
   level: 'gov',
-  get has_planned_spending(){ return true},
+  get has_planned_spending(){ return true;},
   lookup(){ return this; },
   name: gov_name,
   description: gov_name,
@@ -54,8 +54,8 @@ Subject.Gov = {
 
 Subject.Ministry = class Ministry extends static_subject_store(){
   static get type_name() { return 'ministry'; }
-  static get singular(){ return trivial_text_maker("ministry") }
-  static get plural(){ return trivial_text_maker("ministries")}
+  static get singular(){ return trivial_text_maker("ministry"); }
+  static get plural(){ return trivial_text_maker("ministries");}
 
   static create_and_register(id,name){
     const inst = new Ministry(id,name);
@@ -80,9 +80,9 @@ Subject.Dept = class Dept extends static_subject_store_with_API_data(){
     );
   }
   static get type_name() { return 'dept'; }
-  static get singular(){ return trivial_text_maker("org") }
-  static get plural(){ return trivial_text_maker("orgs")}
-  static get dept_code(){ return this.acronym } //TODO: replace all .acronym with dept_code
+  static get singular(){ return trivial_text_maker("org"); }
+  static get plural(){ return trivial_text_maker("orgs");}
+  static get dept_code(){ return this.acronym; } //TODO: replace all .acronym with dept_code
   static depts_with_data(){ 
     //lazy initialized
     if(!this._depts_with_data){ 
@@ -94,8 +94,8 @@ Subject.Dept = class Dept extends static_subject_store_with_API_data(){
     return this._depts_with_data;
   }
   static create_and_register(def){
-    const inst = new Dept(def)
-    this.register(inst.id,inst)
+    const inst = new Dept(def);
+    this.register(inst.id,inst);
     if(!_.isEmpty(inst.acronym)){
       this.register(inst.acronym,inst);
     }
@@ -149,7 +149,7 @@ Subject.Dept = class Dept extends static_subject_store_with_API_data(){
     return this.dp_status !== false;
   }
   get dp_status(){
-    const val = this._dp_status
+    const val = this._dp_status;
     if(val === 1){ 
       return "fw";
     } else if(val === 0){
@@ -244,7 +244,7 @@ Subject.Dept = class Dept extends static_subject_store_with_API_data(){
       }
     }
   }
-}
+};
 
 const tag_roots = [];
 Subject.Tag = class Tag extends extensible_subject_store(){
@@ -255,8 +255,8 @@ Subject.Tag = class Tag extends extensible_subject_store(){
       .value();
   }
   static get type_name() { return 'tag'; }
-  static get singular(){ return trivial_text_maker("tag") }
-  static get plural(){ return trivial_text_maker("tag")+"s"}
+  static get singular(){ return trivial_text_maker("tag"); }
+  static get plural(){ return trivial_text_maker("tag")+"s";}
   static create_and_register(def){
     const inst = new Tag(def);
     this.register(inst.id, inst);
@@ -422,8 +422,8 @@ Subject.CRSO = class CRSO extends static_subject_store_with_API_data(){
 
 Subject.Program = class Program extends static_subject_store_with_API_data(){
   static get type_name(){ return 'program'; }
-  static get singular(){ return trivial_text_maker("program") }
-  static get plural(){ return trivial_text_maker("programs") }
+  static get singular(){ return trivial_text_maker("program"); }
+  static get plural(){ return trivial_text_maker("programs"); }
   static unique_id(dept, activity_code) { //dept can be an object, an acronym or a dept unique_id.
     const dept_acr = _.isObject(dept) ? dept.acronym : Subject.Dept.lookup(dept).acronym;
     return `${dept_acr}-${activity_code}`;
@@ -454,7 +454,7 @@ Subject.Program = class Program extends static_subject_store_with_API_data(){
     return this.dept.has_planned_spending;
   }
   get link_to_infographic(){
-    return `#orgs/program/${this.id}/infograph`
+    return `#orgs/program/${this.id}/infograph`;
   }
   get fancy_name(){
     return this.name;
@@ -471,8 +471,8 @@ Subject.Program = class Program extends static_subject_store_with_API_data(){
 //Currently doesnt do anything, not even link to other departments
 Subject.Minister = class Minister extends static_subject_store(){
   static get type_name() { return 'minister'; }
-  static get singular(){ return trivial_text_maker("minister") }
-  static get plural(){ return trivial_text_maker("minister")}
+  static get singular(){ return trivial_text_maker("minister"); }
+  static get plural(){ return trivial_text_maker("minister");}
 
   static create_and_register(id,name){
     const inst = new Minister(id,name);
@@ -531,7 +531,7 @@ Subject.InstForm = class InstForm extends static_subject_store(){
   plural(){
     throw "TODO";
   }
-}
+};
 
 const get_id_for_measure = (measure) => `${measure.year}_${measure.measure_id}`;
 Subject.BudgetMeasure = class BudgetMeasure extends static_subject_store(){
@@ -616,7 +616,7 @@ Subject.get_by_guid = function get_by_guid(guid){
   if(!_.isString(guid)){ return null; }
   let [model_type, model_id] = guid.split('_');
   return Subject[model_type] && Subject[model_type].lookup(model_id);
-}
+};
 
 // Duplicate keys in all lower case, for legacy reasons
 _.each(Subject, (subject_item, key) => {

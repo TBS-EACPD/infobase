@@ -48,7 +48,7 @@ const graph_registry = {
   },
   
   update_graphs(){
-    window_width_last_updated_at = window.innerWidth
+    window_width_last_updated_at = window.innerWidth;
 
     this.registry.forEach( (graph_obj) => {
       graph_obj.outside_width = graph_obj.html.node().offsetWidth;

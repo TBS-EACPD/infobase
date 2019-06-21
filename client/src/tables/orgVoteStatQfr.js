@@ -255,7 +255,7 @@ Statistics.create_and_register({
       type: "percentage1",
     });
   },
-})
+});
 
 Statistics.create_and_register({
   id: 'orgVoteStatQfr_gov_info', 

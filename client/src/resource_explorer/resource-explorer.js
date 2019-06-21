@@ -55,7 +55,7 @@ const children_grouper = (node, children) => {
       node_group,
     }))
     .value();
-}
+};
 
 
 function render_non_col_content({node}){
@@ -101,7 +101,7 @@ function render_non_col_content({node}){
 
 class ExplorerPage extends React.Component {
   constructor(){
-    super()
+    super();
     this.state = { _query: "" };
     this.debounced_set_query = _.debounce(this.debounced_set_query, 500);
   }
@@ -118,7 +118,7 @@ class ExplorerPage extends React.Component {
       this.setState({
         loading: false,
       });
-    }, 500)
+    }, 500);
   }
   componentWillUnmount(){
     !_.isUndefined(this.debounced_set_query) && this.debounced_set_query.cancel();
@@ -180,7 +180,7 @@ class ExplorerPage extends React.Component {
         active: hierarchy_scheme === id,
         id,
       }))
-      .value()
+      .value();
     const min_props = {
       title: text_maker("how_were_accountable"),
       text: text_maker("portfolio_description"),
@@ -200,8 +200,8 @@ class ExplorerPage extends React.Component {
         <form
           style={{marginBottom: "15px"}}
           onSubmit={evt => {
-            evt.preventDefault()
-            evt.stopPropagation()
+            evt.preventDefault();
+            evt.stopPropagation();
             set_query(evt.target.querySelector('input').value);
             this.refs.focus_mount.focus();
           }}
@@ -343,7 +343,7 @@ const map_state_to_props_from_memoized_funcs = memoized_funcs => {
     ...mapRootStateToRootProps(state),
     ...get_scheme_props(state),
   });
-}
+};
 
 
 class OldExplorerContainer extends React.Component {
@@ -487,4 +487,4 @@ const get_image_glossary_tooltip = (id) => {
         {img}
       </a>
   );
-}
+};

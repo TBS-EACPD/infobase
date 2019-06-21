@@ -82,7 +82,7 @@ const app_constants = {
   pre_public_accounts: window.pre_public_accounts,
   lang: window.lang,
   is_mobile: window.feature_detection.is_mobile(),
-}
+};
 
 //turn [{key,en,fr }, ... ] into a big object of { [key]: val of current lang, ... } 
 const template_globals = _.chain(full_template_global_records)
@@ -113,7 +113,7 @@ const run_template = function(s, extra_args={}){
     } else { //it's a function -> already compiled
       _template = s;
     }
-    return _.trim( _template(args) )
+    return _.trim( _template(args) );
   }
   return '';
 };
@@ -172,14 +172,14 @@ const add_text_bundle = (text_bundle) => {
 
 
   text_bundles_by_filename[__file_name__] = to_add;
-}
+};
 
 const combine_bundles = bundles => {
   return _.chain(bundles)
     .map(bundle => {
       const { __file_name__ } = bundle;
       if(!_.has(text_bundles_by_filename, __file_name__)){
-        add_text_bundle(bundle)
+        add_text_bundle(bundle);
       }
       return _.toPairs(text_bundles_by_filename[__file_name__]);
     })
@@ -201,11 +201,11 @@ const create_text_maker = bundles => {
 
   const combined = combine_bundles(bundles);
   _.extend(combined, combined_global_bundle);
-  const func = _create_text_maker(combined)
+  const func = _create_text_maker(combined);
   combined.__text_maker_func__ = func;
   
   return func;
-}
+};
 
 
 const _create_text_maker = (deps=template_store) => (key, context={}) => {
@@ -264,7 +264,7 @@ const _create_text_maker = (deps=template_store) => (key, context={}) => {
     });
   }
   return rtn;
-}
+};
 
 const trivial_text_maker = _create_text_maker(combined_global_bundle);
 

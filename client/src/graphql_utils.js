@@ -30,7 +30,7 @@ const query_length_tolerant_fetch = (uri, options) => {
   };
 
   return fetch(short_uri, new_options);
-}
+};
 
 let client = null;
 export function get_client(){
@@ -55,7 +55,7 @@ export function get_client(){
 
 const InnerLoadingHoc = ({Component, data_to_props}) => props => {
   if(props.data.loading){
-    return <div> Loading ... </div>
+    return <div> Loading ... </div>;
   } else {
     return (
       <Component
@@ -67,12 +67,12 @@ const InnerLoadingHoc = ({Component, data_to_props}) => props => {
       />
     );
   }
-}
+};
 
 //for use in development only
 export const LoadingHoc = ({Component,query,data_to_props=_.identity,variables}) => apollo_connect(query, {
   options: variables ? { variables } : {},
-})(InnerLoadingHoc({Component,data_to_props}))
+})(InnerLoadingHoc({Component,data_to_props}));
 
 
 window._DEV_HELPERS.query_api = (query) => client.query({ query });

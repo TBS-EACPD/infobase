@@ -67,7 +67,7 @@ heatmap.prototype.render = function(options){
           y: y,
           z: undefined,
         };
-      })
+      });
     })
     .flatten(true)
     .value();
@@ -92,18 +92,18 @@ heatmap.prototype.render = function(options){
       width: width+'px',
       top: margin.top+'px', 
       left: margin.left+'px',
-    })
+    });
   
   var y_labels = this.html
     .selectAll("div.y-label")
-    .data(y_values)
+    .data(y_values);
 
   y_labels.exit().remove();
 
   const new_y_labels = y_labels
     .enter()
     .append("div")
-    .classed("y-label",true)
+    .classed("y-label",true);
 
   y_labels.merge(new_y_labels)
     .styles({
@@ -131,14 +131,14 @@ heatmap.prototype.render = function(options){
 
   var x_labels = this.html
     .selectAll("div.x-label")
-    .data(x_values)
+    .data(x_values);
 
   x_labels.exit().remove();
 
   const new_x_labels = x_labels
     .enter()
     .append("div")
-    .classed("x-label",true)
+    .classed("x-label",true);
 
   x_labels.merge(new_x_labels)
     .styles({
@@ -173,13 +173,13 @@ heatmap.prototype.render = function(options){
   const new_cells = cells
     .enter()
     .append('div')
-    .classed('cell',true)
+    .classed('cell',true);
 
   cells.merge(new_cells)
     .styles({
       'position': 'absolute',
-      'left': function(d){ return x_scale(d.x)+'px'},
-      'top': function(d){ return y_scale(d.y)+'px'},
+      'left': function(d){ return x_scale(d.x)+'px';},
+      'top': function(d){ return y_scale(d.y)+'px';},
       "border": `1px solid ${window.infobase_color_constants.separatorColor}`,
       "background": function(d){
         if (d.z === undefined){
@@ -208,7 +208,7 @@ heatmap.prototype.render = function(options){
     .on('mouseenter',function(d){
       d3.select(this)
         .classed('hover',true)
-        .html(function(d){return hover_formatter(d.z)});
+        .html(function(d){return hover_formatter(d.z);});
       graph_dispatcher.call("dataMouseEnter",this,d);
     }) 
     .on('mouseout',function(d){
@@ -216,7 +216,7 @@ heatmap.prototype.render = function(options){
         .classed('hover',false)
         .html('');
       graph_dispatcher.call("dataMouseLeave",this,d);
-    })
+    });
        
   return this;
 };

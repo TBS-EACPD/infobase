@@ -6,7 +6,7 @@ import { rpb_link, get_appropriate_rpb_subject } from '../rpb/rpb_link.js';
 
 const subjects = _.keys(Subject);
 
-const graphs = {}
+const graphs = {};
 const create_graph_key = (key,level) => `${key}:${level}`;
 
 const default_args = {
@@ -75,7 +75,7 @@ class PanelGraph {
       if(this[property]){
         console.warning(`PanelGraph redundant property: ${property}`);
       }
-    })
+    });
   }
 
   constructor(def){
@@ -85,9 +85,9 @@ class PanelGraph {
     //Additionally, every graph only has one object like this, so this object contains nothing about 
 
     //we copy every thing except render and calculate, which follow a specific API
-    this._inner_calculate = def.calculate || (()=> true)
+    this._inner_calculate = def.calculate || (()=> true);
     this._inner_render = def.render;
-    const to_assign = _.omit(def, [ 'render', 'calculate' ])
+    const to_assign = _.omit(def, [ 'render', 'calculate' ]);
     const full_key = create_graph_key(def.key,def.level);
     Object.assign(
       this,  
@@ -112,7 +112,7 @@ class PanelGraph {
       return false;
     }
     const calc_func = this._inner_calculate;
-    const info = get_info(subject, this.info_deps)
+    const info = get_info(subject, this.info_deps);
     if(info.missing_values && this.missing_info !== 'ok'){ // dept is missing from table or an exception ocurred during one of the info_deps' computations
       return false; 
     }
@@ -148,7 +148,7 @@ class PanelGraph {
             }),
           };
         })
-        .value()
+        .value();
     }
   }
 

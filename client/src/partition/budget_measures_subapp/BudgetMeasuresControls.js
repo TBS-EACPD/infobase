@@ -46,7 +46,7 @@ export class BudgetMeasuresControls extends React.Component {
       } else {
         setFilterString(filter_string);
       }
-    }
+    };
 
     return (
       <div className="budget-measures-partition-controls">

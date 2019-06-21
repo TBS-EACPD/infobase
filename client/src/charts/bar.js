@@ -268,7 +268,7 @@ export class Bar {
       if (add_labels){
   
         let div_labels = html.selectAll("div.labels")
-          .data(data)
+          .data(data);
           
         div_labels
           .enter()
@@ -293,7 +293,7 @@ export class Bar {
   
         // labels can only be added for non-stacked data
         if (add_labels){
-          html.selectAll("div.__labels").remove()
+          html.selectAll("div.__labels").remove();
       
           html.selectAll("div.__labels")
             .data(data)
@@ -372,7 +372,7 @@ export class Bar {
       // replace the removed text elements with html divs
       // these allow for text wrapping
       var div_ticks = html.selectAll("div.tick")
-        .data(ticks)
+        .data(ticks);
         
       div_ticks
         .enter()

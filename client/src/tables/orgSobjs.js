@@ -157,7 +157,7 @@ Statistics.create_and_register({
     );
 
   },
-})
+});
 
 Statistics.create_and_register({
   id: 'orgSobjs_gov_info', 
@@ -175,4 +175,4 @@ Statistics.create_and_register({
     stats.one_year_top3(add, "so",last_year);
     stats.year_over_year_multi_stats(add,"so_five_year",all_years);
   },
-})
+});

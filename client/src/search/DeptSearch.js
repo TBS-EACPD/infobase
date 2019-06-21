@@ -23,7 +23,7 @@ class DeptSearchWithoutRouter extends React.Component {
     if(!onSelect && href_template && history){
       onSelect = item => { 
         history.push( href_template(item) );
-      }
+      };
     }
   
     let search_config = orgs_with_data_with_gov;

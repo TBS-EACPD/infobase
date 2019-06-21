@@ -43,7 +43,7 @@ function table_to_row_item(table){
       })
     ),
     external_link: table.link[window.lang],
-  }
+  };
 }
 
 const infobase_open_data_page = {
@@ -54,8 +54,8 @@ const infobase_open_data_page = {
 const sources = _.mapValues({
   PA: {
     ix: 1,
-    description(){ return desc_from_gloss_keys("PA") },
-    title(){ return tm("pa_title" )},
+    description(){ return desc_from_gloss_keys("PA"); },
+    title(){ return tm("pa_title" );},
     frequency: frequencies.y,
     open_data: infobase_open_data_page,
     report_link: {
@@ -71,8 +71,8 @@ const sources = _.mapValues({
   },
   QFR: {
     ix: 4,
-    description(){ return desc_from_gloss_keys("QFR") },
-    title(){ return tm("qfr_title" )},
+    description(){ return desc_from_gloss_keys("QFR"); },
+    title(){ return tm("qfr_title" );},
     frequency: frequencies.q,
     report_link: {
       en: "https://www.canada.ca/en/treasury-board-secretariat/services/reporting-government-spending/quarterly-financial-reporting.html",
@@ -87,8 +87,8 @@ const sources = _.mapValues({
   },
   ESTIMATES: {
     ix: 2,
-    description(){ return desc_from_gloss_keys("MAINS", "SUPPS") },
-    title(){ return tm("estimates_title" ) },
+    description(){ return desc_from_gloss_keys("MAINS", "SUPPS"); },
+    title(){ return tm("estimates_title" ); },
     frequency: frequencies.q,
     open_data: infobase_open_data_page,
     report_link: {
@@ -104,8 +104,8 @@ const sources = _.mapValues({
   },
   CFMRS: {
     ix: 3,
-    description(){ return desc_from_gloss_keys("CFMRS") },
-    title(){ return tm("cfmrs_title" ) },
+    description(){ return desc_from_gloss_keys("CFMRS"); },
+    title(){ return tm("cfmrs_title" ); },
     open_data: {
       en: "http://open.canada.ca/data/en/dataset/5e6dcf6b-dbed-4b51-84e5-1f4926ad7fdf",
       fr: "http://ouvert.canada.ca/data/fr/dataset/5e6dcf6b-dbed-4b51-84e5-1f4926ad7fdf",
@@ -119,9 +119,9 @@ const sources = _.mapValues({
     },
   },
   RPS: {
-    description(){ return desc_from_gloss_keys("PEOPLE_DATA") },
+    description(){ return desc_from_gloss_keys("PEOPLE_DATA"); },
     ix: 0,
-    title(){ return tm("rps_title" ) },
+    title(){ return tm("rps_title" ); },
     frequency: frequencies.y,
     items(){ 
       return _.map(
@@ -131,8 +131,8 @@ const sources = _.mapValues({
     },
   },
   DP: {
-    description(){ return desc_from_gloss_keys("DP") },
-    title(){ return tm("dp_title") },
+    description(){ return desc_from_gloss_keys("DP"); },
+    title(){ return tm("dp_title"); },
     frequency: frequencies.y,
     open_data: infobase_open_data_page,
     report_link: {
@@ -146,12 +146,12 @@ const sources = _.mapValues({
       ).concat([{
         id: 'dp_results',
         text: tm("dp_results_item_name"),
-      }])
+      }]);
     },
   },
   DRR: {
-    title(){ return tm("drr_title")},
-    description(){ return desc_from_gloss_keys("DRR") },
+    title(){ return tm("drr_title");},
+    description(){ return desc_from_gloss_keys("DRR"); },
     frequency: frequencies.y,
     open_data: infobase_open_data_page,
     report_link: {
@@ -169,8 +169,8 @@ const sources = _.mapValues({
     },
   }, 
   IGOC: {
-    title(){ return tm("igoc_source_title") },
-    description(){ return tm("igoc_source_desc") },
+    title(){ return tm("igoc_source_title"); },
+    description(){ return tm("igoc_source_desc"); },
     frequency: frequencies.y,
     open_data: infobase_open_data_page,
     items(){
@@ -181,7 +181,7 @@ const sources = _.mapValues({
     },
   },
   BUDGET: {
-    title(){ return tm("budget_source_title")},
+    title(){ return tm("budget_source_title");},
     description(){ return <div dangerouslySetInnerHTML={{ __html: tm("budget_source_desc") }}/>; },
     frequency: frequencies.m,
     open_data: infobase_open_data_page,

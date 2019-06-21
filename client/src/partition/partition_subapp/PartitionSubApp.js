@@ -254,7 +254,7 @@ export class PartitionSubApp {
       node.__value__ = node.value;
       node.open = true;
       node.how_many_to_show = how_many_to_be_shown;
-    }
+    };
 
     this.render_diagram(search_tree, search_data_wrapper_node_rules);
   }
@@ -318,7 +318,7 @@ export class PartitionSubApp {
         intro_popup.remove();
         intro_popup_fader.remove();
         tab_catch_after.remove();
-      }
+      };
    
       intro_popup_fader.on("click", intro_popup_cleanup);
       tab_catch_before.on("focusout", intro_popup_cleanup);

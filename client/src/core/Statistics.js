@@ -13,7 +13,7 @@ const some_constants = {
   planning_years: _.map(years.planning_years, e => run_template(e)),
   est_next_year: run_template("{{est_next_year}}"),
   est_in_year: run_template("{{est_in_year}}"),
-}
+};
 //this is the part of the module that gets consumed by those who want info, ie. core/graphs.js
 function get_info(subject, infokeys){
   const computed_separate = _.map( infokeys, key => get_single_info(key, subject));
@@ -43,7 +43,7 @@ const get_single_info = _.memoize(
     return stats.report_on(report_subject);
   }, 
   (stats_key, subject) => `${stats_key}_${subject.guid}`
-)
+);
 
 //  //gov infos should only run once, no matter the subject
 //  (stats_key, subject) => {
@@ -57,7 +57,7 @@ class Statistics extends mix().with(staticStoreMixin){
     Object.assign(this,def);
   }
   static create_and_register(def){
-    const instance = new Statistics(def)
+    const instance = new Statistics(def);
     this.register(def.id, instance);
   }
   report_on(subject){
@@ -122,7 +122,7 @@ class Statistics extends mix().with(staticStoreMixin){
     } catch (e){ 
       if(window.is_dev){
         /* eslint-disable no-console */
-        console.error(`missing values for ${subject.name}`)
+        console.error(`missing values for ${subject.name}`);
       }
       stats.missing_values = true;
     }

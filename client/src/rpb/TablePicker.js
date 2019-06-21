@@ -35,7 +35,7 @@ class TablePicker extends React.Component {
       active_concepts: [],
     };
   
-    this.fadeOutAndSelectTable = _.bind(this.fadeOutAndSelectTable, this)
+    this.fadeOutAndSelectTable = _.bind(this.fadeOutAndSelectTable, this);
 
 
     this.tables = _.chain(Table.get_all())
@@ -117,7 +117,7 @@ class TablePicker extends React.Component {
         tag_id: concept_id,
         item_id: table_id,
       }))
-      .value()
+      .value();
 
 
     return <div ref="main" id="tbp-main">
@@ -129,15 +129,15 @@ class TablePicker extends React.Component {
           items={tables_to_render} 
           tags={concepts_to_display}
           item_tag_linkage={relevant_linkage}
-          onSelectTag={concept_id=>{this.selectConcept(concept_id)}}
-          onSelectItem={table_id=>{this.fadeOutAndSelectTable(table_id)}}
+          onSelectTag={concept_id=>{this.selectConcept(concept_id);}}
+          onSelectItem={table_id=>{this.fadeOutAndSelectTable(table_id);}}
           noItemsMessage={ <TextMaker text_key="table_picker_no_tables_found" /> }
         />
       </div>
     </div>;
   }
   fadeOutAndSelectTable(table_id){
-    this.setState({ exiting: true })
+    this.setState({ exiting: true });
     const initialHeight = this.refs.main.offsetHeight;
     d3.select(this.refs.main)
       .style('max-height',initialHeight+'px')
@@ -152,12 +152,12 @@ class TablePicker extends React.Component {
 
   }
   selectConcept(concept_id){
-    const new_active_concepts = toggleArrayElement(this.state.active_concepts, concept_id)
-    this.setState({active_concepts: new_active_concepts})
+    const new_active_concepts = toggleArrayElement(this.state.active_concepts, concept_id);
+    this.setState({active_concepts: new_active_concepts});
   }
   selectTable(selected_table){
     const { onSelect } = this.props;
-    this.setState({ selected_table })
+    this.setState({ selected_table });
     if(_.isFunction(onSelect)){
       onSelect(selected_table); 
     }

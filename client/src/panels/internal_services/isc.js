@@ -159,7 +159,7 @@ new PanelGraph({
           />
         </div>
       </div>
-    </div>
+    </div>;
 
     return (
       <Panel

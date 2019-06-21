@@ -285,7 +285,7 @@ Statistics.create_and_register({
     //  }
     //});
   },
-})
+});
 
 
 

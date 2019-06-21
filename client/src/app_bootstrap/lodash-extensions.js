@@ -33,6 +33,6 @@ const funcs = {
   //simulate underscore's tail because lodash's doesn't allow to define a starting point (defaults to 1)
   tail: (arr, start=1) => _.isArray(arr) ? _.takeRight(arr, arr.length-start ) : [],
 
-}
+};
 
 _.mixin(funcs);

@@ -66,5 +66,5 @@ const DeptEstimatesPerspective = ({subject, dept_total, gov_total}) => {
     />
   );
 
-}
+};
 

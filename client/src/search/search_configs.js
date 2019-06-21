@@ -24,8 +24,8 @@ const get_re_matcher = (accessors, reg_exps) => (obj) => _.chain(accessors)
     if( !_.isString(str) ){
       return false;
     } else { 
-      str = _.deburr(str)
-      return _.every( reg_exps, re => str.match(re) )
+      str = _.deburr(str);
+      return _.every( reg_exps, re => str.match(re) );
     }
   })
   .value();

@@ -71,7 +71,7 @@ export class HBarComposition {
       const width = temp_el.node().firstChild.offsetWidth;
       temp_el.remove();
       return width;
-    }
+    };
     
     const number_of_rows = data.length;
     const y_position = (d,i) => margin.top + bar_height_dy + i*(bar_height + bar_height_dy);
@@ -135,10 +135,10 @@ export class HBarComposition {
         _d.width = x(Math.abs(_d.data));
         if (_d.data < 0) {
           _d.x = negBase;
-          negBase -= _d.width
+          negBase -= _d.width;
         } else {
           _d.x = posBase;
-          posBase += _d.width
+          posBase += _d.width;
         }
       });
     }); 

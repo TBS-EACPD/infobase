@@ -30,6 +30,6 @@ export class TreeMapSidebar extends React.Component {
           />
         </div>
       </div>
-    )
+    );
   }
 }

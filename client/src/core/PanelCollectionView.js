@@ -14,7 +14,7 @@ export const ReactPanelGraph = withRouter(
         bubble,
       } = this.props;  
 
-      const graph_obj = PanelGraph.lookup(graph_key, subject.level)
+      const graph_obj = PanelGraph.lookup(graph_key, subject.level);
 
       const graph_options = {history};
 
@@ -29,7 +29,7 @@ export const ReactPanelGraph = withRouter(
         <Provider value={ {bubble, graph_key, subject} }>
           { graph_obj.render(calculations, graph_options) }
         </Provider>
-      </div>
+      </div>;
 
       
     }

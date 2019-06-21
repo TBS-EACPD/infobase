@@ -94,7 +94,7 @@ const major_vote_big_stat = col_to_sum => (options) =>{
       return trivial_text_maker("vstype"+row.votestattype);
     }
   };
-}
+};
 
 
 function hist_major_vote_stat(options){

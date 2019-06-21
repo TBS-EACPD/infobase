@@ -97,7 +97,7 @@ const render = function({calculations, footnotes, sources}) {
         [series_labels[0]]: stacked? exp_value : auth[year_index],
         [series_labels[1]]: stacked? auth[year_index] : exp_value,
         years: ticks[year_index],
-      }))
+      }));
 
     graph_content = 
       <div style={{height: 400}} aria-hidden = {true}>
@@ -145,7 +145,7 @@ const render = function({calculations, footnotes, sources}) {
             }}
           />
         }
-      </div>
+      </div>;
   }
 
   return (

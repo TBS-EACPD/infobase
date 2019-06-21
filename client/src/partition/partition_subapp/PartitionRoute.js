@@ -25,7 +25,7 @@ export default class PartitionRoute extends React.Component {
           el_to_update.href = `${link}#${new_path}`;
         }
       }
-    }
+    };
   }
   componentDidMount(){
     ensure_loaded({

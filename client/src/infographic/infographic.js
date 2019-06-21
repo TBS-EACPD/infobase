@@ -29,7 +29,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const name_for_title = subject => {
   if(subject.level === 'program' && !_.isEmpty(subject.dept.fancy_acronym)){
-    return `${subject.name} (${subject.dept.fancy_acronym})`
+    return `${subject.name} (${subject.dept.fancy_acronym})`;
   } else if(subject.level === 'org'){
     return subject.legal_name;
   } else {
@@ -66,7 +66,7 @@ class AnalyticsSynchronizer extends React.Component {
       SUBJECT_GUID: guid, 
       MISC1: level,
       MISC2: bubble,
-    })
+    });
   }
 }
 
@@ -376,9 +376,9 @@ const InfoGraph = ({
       />
     </StandardRouteContainer>
   );
-}
+};
 
 
 
-export { InfoGraph as default }
+export { InfoGraph as default };
 

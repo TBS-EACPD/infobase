@@ -145,7 +145,7 @@ const get_non_col_renderer = ({doc}) => ({node}) => {
       }
     </div>
   );
-}
+};
 
 
 
@@ -197,11 +197,11 @@ const sub_program_resource_scheme = {
       ["doc"] 
     );
   },
-}
+};
 
 class SubProgramResourceTree extends React.Component {
   constructor(){
-    super()
+    super();
     this.state = { _query: "" };
   }
   render(){
@@ -229,7 +229,7 @@ class SubProgramResourceTree extends React.Component {
       zebra_stripe: true,
       get_non_col_content: get_non_col_renderer({doc}),
       col_click,
-    } 
+    }; 
 
     const inner_content = <div>
 
@@ -323,7 +323,7 @@ const SubProgramResourceTreeContainer = ({
     [scheme_key]: ({...initial_sub_program_state, ...initial_scheme_state_slice}),
   };
 
-  const Container = connect(mapStateToProps, mapDispatchToProps)(SubProgramResourceTree)
+  const Container = connect(mapStateToProps, mapDispatchToProps)(SubProgramResourceTree);
 
   return (
     <Provider store={createStore(reducer,initialState)}>

@@ -55,7 +55,7 @@ export class Arrow {
 
     this.svg
       .attr("width", this.outside_width+margin.left+margin.right)
-      .attr("height", this.outside_height+margin.top+margin.bottom)
+      .attr("height", this.outside_height+margin.top+margin.bottom);
     this.graph_area.attr("transform", "translate(" + x_offset + "," +margin.top + ")");
 
     var html = this.html;
@@ -83,7 +83,7 @@ export class Arrow {
     const new_arrow = arrow
       .enter()
       .append("g")
-      .attr("class","arrow")
+      .attr("class","arrow");
 
     new_arrow.merge(arrow)
       .attr("transform",function(d,i){

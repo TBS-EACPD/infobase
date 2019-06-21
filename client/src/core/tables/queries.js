@@ -229,7 +229,7 @@ class Queries {
           return obj[key] === criteria[key];
         }
       }))
-    )
+    );
     return _.filter(this.data, each_mapped_obj);
   }
 

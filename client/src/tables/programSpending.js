@@ -146,7 +146,7 @@ export default {
 
       filter_func: function(options){
         var func = function(row){
-          const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
+          const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) );
           const goco = _.get(prog, "tags_by_scheme.GOCO[0].name");
           return goco || trivial_text_maker('unknown');
         };
@@ -160,7 +160,7 @@ export default {
       filter_func: function(options){
         var func = function(row){
           //FIXME: this is because I found a program without a goco, 
-          const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
+          const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) );
           const sa = _.get(prog, "tags_by_scheme.GOCO[0].parent_tag.name");
           return sa || trivial_text_maker('unknown');
         };
@@ -171,8 +171,8 @@ export default {
       title_key: 'goco_id',
       filter_func: function(options){
         var func = function(row){
-          const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
-          const goco = _.first(prog.tags_by_scheme.GOCO)
+          const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) );
+          const goco = _.first(prog.tags_by_scheme.GOCO);
           return goco && goco.id;
         };
         return func;
@@ -239,10 +239,10 @@ Statistics.create_and_register({
 
     // Calculating CRSO numbers
     
-    const crsos = subject.crsos
+    const crsos = subject.crsos;
 
     const crso_num = subject.crsos
-      .length
+      .length;
 
     add("crso_num",crso_num);
 
@@ -250,12 +250,12 @@ Statistics.create_and_register({
       crso: crso,
       data: d3.sum(_.map(table.q(crso).data, prg => prg["{{planning_year_1}}"])),
     })
-    )
+    );
 
     const max_crso = _.first(_.chain(CRSO_data)
       .sortBy("data")
       .reverse()
-      .value())
+      .value());
 
     add("crso_max",max_crso);
 
@@ -311,14 +311,14 @@ Statistics.create_and_register({
 
     //CRSO Calculations
     // add("crso_exp_planning_year_1", infos.programSpending_crso_info.crso_exp_planning_year_1);
-    const crso = subject.crso
+    const crso = subject.crso;
 
     add("crso", crso);
 
-    const crso_exps = d3.sum(_.map(table.q(crso).data, prg => prg["{{planning_year_1}}"]))
+    const crso_exps = d3.sum(_.map(table.q(crso).data, prg => prg["{{planning_year_1}}"]));
     add("crso_exps", crso_exps);
 
-    add("crso_exp_prg_share", c.program_exp_planning_year_1/crso_exps)
+    add("crso_exp_prg_share", c.program_exp_planning_year_1/crso_exps);
 
   },
 });
@@ -340,7 +340,7 @@ Statistics.create_and_register({
     var last_year = _.map(
       q.get_top_x(["dept","activity_code","{{pa_last_year}}exp"],Infinity,{zip: true,sort_col: "{{pa_last_year}}exp"}),
       ([ org_id, ac, val]) => [ `${Dept.lookup(org_id).fancy_name} - ${Program.get_from_activity_code(org_id, ac).name}`, val]
-    )
+    );
     stats.one_year_top3(add, "prg", last_year);
     
     stats.add_all_years(add,"exp", std_years, (year,i) => q.sum(year+"exp"));
@@ -372,7 +372,7 @@ Statistics.create_and_register({
     
     const min_planning_yr = "{{planning_year_" + _.min(
       _.map(planning_years, yr => Number(yr.match(/\d+/)))
-    ) +"}}"
+    ) +"}}";
 
     const sorted_first_yr = q.get_top_x(["prgm",min_planning_yr],Infinity,{zip: true,sort_col: min_planning_yr});
 
@@ -387,7 +387,7 @@ Statistics.create_and_register({
     add("planned_exp_average", c.crso_exp_average);
     add("planned_exp_total", c.crso_exp_total);
 
-    const programSpending_data = q.data
+    const programSpending_data = q.data;
 
     const data = _.map(programSpending_data,
       d => ({ 
@@ -396,7 +396,7 @@ Statistics.create_and_register({
         id: d.activity_code,
         link: Program.lookup(Program.unique_id(d.dept, d.activity_code)).link_to_infographic,
       })
-    )
+    );
     add("program_list", data);
     
     add("parent", subject.dept.name);

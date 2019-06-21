@@ -76,8 +76,8 @@ const calculate_stats_common = (data, subject) => {
     vote_count,
     multiple_measures: measure_count > 1,
     multiple_votes: vote_count > 1,
-  }
-}
+  };
+};
 
 const crso_program_calculate = (subject, info, options, years_with_data) => {
   const org_id_string = subject.dept.id.toString();
@@ -102,7 +102,7 @@ const crso_program_calculate = (subject, info, options, years_with_data) => {
     get_info: calculate_stats_common,
     subject,
   };
-}
+};
 
 
 const calculate_functions = {
@@ -222,7 +222,7 @@ class BudgetMeasurePanel extends React.Component {
       years_with_data,
       selected_year: _.last(years_with_data),
       loading: true,
-    }
+    };
   }
   mountAndUpdate(){
     const { 
@@ -245,8 +245,8 @@ class BudgetMeasurePanel extends React.Component {
         .then( () => this.setState({loading: false}) );
     }
   }
-  componentDidMount(){ this.mountAndUpdate() }
-  componentDidUpdate(){ this.mountAndUpdate() }
+  componentDidMount(){ this.mountAndUpdate(); }
+  componentDidUpdate(){ this.mountAndUpdate(); }
   render(){
     const { graph_args } = this.props;
 
@@ -412,7 +412,7 @@ class BudgetMeasureHBars extends React.Component {
                 const memo_value = memo[subject_id] || 0;
                 memo[subject_id] = memo_value + allocated;
               }
-            )
+            );
             return memo;
           },
           {},
@@ -466,7 +466,7 @@ class BudgetMeasureHBars extends React.Component {
                 item => {
                   _.each(_.keys(budget_values), amount => {
                     summed[amount] = (summed[amount] || 0) + item[amount];
-                  })
+                  });
                 }
               );
               return summed;
@@ -503,7 +503,7 @@ class BudgetMeasureHBars extends React.Component {
         item => {
           _.each(_.keys(budget_values), amount => {
             others[amount] = (others[amount] || 0) + item[amount];
-          })
+          });
         }
       );
       return _.reverse( sorted_data.length > TOP_TO_SHOW ? _.concat(top_data,others) : sorted_data );
@@ -561,7 +561,7 @@ class BudgetMeasureHBars extends React.Component {
       selected_value;
 
     const breakdown_keys = _.chain(budget_values).keys().filter(k => k !== 'funding').value();
-    const keys_to_show = effective_selected_value === "funding_overview" ? breakdown_keys : [effective_selected_value]
+    const keys_to_show = effective_selected_value === "funding_overview" ? breakdown_keys : [effective_selected_value];
 
     // text stuff
     const panel_text_args = {
@@ -827,7 +827,7 @@ class BudgetMeasureHBars extends React.Component {
             </div>
           </MediaQuery>
         </Fragment>
-      )
+      );
     }
   }
 }
@@ -848,7 +848,7 @@ function wrap(text, width) {
     const line_str = line.join(" ");
     if ( line_str.length > width ){
       line.pop();
-      lines.push(line.join(" "))
+      lines.push(line.join(" "));
       line = [word];
     }
     word = words.pop();
@@ -897,4 +897,4 @@ const get_grouping_options = (subject, data) =>{
   } else {
     return common_options;
   }
-}
+};

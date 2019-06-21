@@ -103,7 +103,7 @@ _.each(['dept','crso','program'], level => {
   
     },
   });
-})
+});
 
 new PanelGraph({
   level: 'tag',

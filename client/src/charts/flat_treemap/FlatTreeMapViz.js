@@ -100,7 +100,7 @@ export class FlatTreeMapViz extends React.Component {
           width: `${(d.x1) - (d.x0)}px`,
           height: `${(d.y1) - (d.y0)}px`,
         })
-      )
+      );
     }
 
     return html_root;

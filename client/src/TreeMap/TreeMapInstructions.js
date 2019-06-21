@@ -18,6 +18,6 @@ export class TreeMapInstructions extends React.Component {
           </div>
         </div>
       </Fragment>
-    )
+    );
   }
 }

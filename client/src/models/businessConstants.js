@@ -12,7 +12,7 @@ const unlangify = (obj) => {
     delete obj.en;
     delete obj.fr;
   }
-}
+};
 
 //remove nested lang properties
 //there aren't enough to warrant 
@@ -76,7 +76,7 @@ const NA_values = [
   'na',
   'n/a',
   'Non-EX',
-]
+];
 
 const emp_age_rev_map = _.chain(emp_age_map)
   .toPairs()

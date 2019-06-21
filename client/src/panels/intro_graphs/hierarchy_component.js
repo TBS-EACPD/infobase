@@ -196,7 +196,7 @@ export const org_external_hierarchy = ({ subject, href_generator }) => {
         ),
       }],
   };
-} 
+}; 
 
 /*
   Ministry
@@ -226,7 +226,7 @@ export const org_internal_hierarchy = ({subject, href_generator, show_dead_sos, 
     }))
     .sortBy('dead')
     .value(),
-})
+});
 
 
 export const program_hierarchy = ({subject, href_generator, show_siblings, show_uncles, show_cousins, show_dead_sos, label_crsos }) => {
@@ -282,7 +282,7 @@ export const program_hierarchy = ({subject, href_generator, show_siblings, show_
     href: href_generator(Gov),
     children: ministry_node || dept_node,
   };
-}
+};
 
 /* 
   the following is hacky because we don't know how many levels there are between a tag and government.
@@ -334,7 +334,7 @@ export const tag_hierarchy = ({subject, showSiblings, showChildren, href_generat
     name: Gov.name,
     children: [ current_structure ],
   };
-}
+};
 
 export const crso_hierarchy = ({subject, href_generator, show_siblings, show_uncles, show_cousins, show_dead_sos, label_crsos }) => {
   //From Gov to programs under CRSO
@@ -380,7 +380,7 @@ export const crso_hierarchy = ({subject, href_generator, show_siblings, show_unc
       }],
     }],
   };
-}
+};
 
 export const crso_pi_hierarchy = ({subject, href_generator, show_siblings, show_uncles, show_cousins, show_dead_sos, label_crsos }) => (
   {

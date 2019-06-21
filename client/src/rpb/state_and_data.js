@@ -72,7 +72,7 @@ const get_filters_for_dim = _.memoize(
     ..._.keys(table[dim_key]('*',true)),
   ]), 
   (table,dim_key)=> `${table.id}-${dim_key}`
-)
+);
 
 //returns a the proposed new slice of state that will change when a new table is selected
 function get_default_state_for_new_table(table_id){
@@ -191,7 +191,7 @@ const reducer = (state=initial_state, action) => {
     default: 
       return state;
   }
-}
+};
 
 function create_mapStateToProps(){
   const get_table = createSelector(_.property('table'), table => Table.lookup(table));
@@ -281,7 +281,7 @@ function create_mapStateToProps(){
 
       let subj_filter = _.constant(true);
       if(subject.level === 'dept'){
-        subj_filter = { dept: subject.id }
+        subj_filter = { dept: subject.id };
 
       } else if(subject.level === 'program' && table.programs){
         subj_filter = { 
@@ -518,7 +518,7 @@ function create_mapStateToProps(){
       filters_by_dimension: state.table && state.mode === 'details' && get_filters_by_dimension(state),
       sorted_key_columns: !_.isEmpty(state.columns) && get_sorted_key_columns(state),
     };
-  }
+  };
 }
 
 function mapDispatchToProps(dispatch){

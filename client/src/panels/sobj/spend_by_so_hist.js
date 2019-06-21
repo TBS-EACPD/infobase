@@ -90,7 +90,7 @@ class SobjLine extends React.Component {
     super(props);
     this.state = {
       active_sobjs: [_.first(props.data).label ],
-    }
+    };
     this.colors = d3.scaleOrdinal().range(_.concat(newIBLightCategoryColors, newIBDarkCategoryColors ));;
   }
   render(){
@@ -138,7 +138,7 @@ class SobjLine extends React.Component {
                   !(
                     spending_data.length === 1 && 
                     spending_data.map(o => o.id).includes(id) 
-                  ) && this.setState({ active_sobjs: _.toggle_list(active_sobjs, id) })
+                  ) && this.setState({ active_sobjs: _.toggle_list(active_sobjs, id) });
                 }
               }
             />

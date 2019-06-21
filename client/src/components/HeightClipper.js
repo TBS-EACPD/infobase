@@ -30,7 +30,7 @@ export class HeightClipper extends React.Component {
         .forEach( node => {
           if ( !_.isUndefined(node.tabIndex) && !_.isNull(node.tabIndex) && node.tabIndex >= 0 ){
 
-            const tabindex_attr = node.getAttribute("tabindex")
+            const tabindex_attr = node.getAttribute("tabindex");
             if (tabindex_attr){
               node.setAttribute("prev-tabindex", tabindex_attr);
             }

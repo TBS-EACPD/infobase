@@ -71,7 +71,7 @@ const highlight = function(d){
     .transition()
     .duration(10)
     .style("fill-opacity", goco_is_open ? 1 : 0.2 ); 
-}
+};
 
 const reset_highlight = function(d){
   const goco_is_open = d3.select('.goco-diagram').selectAll("rect").data().length > 0;
@@ -81,7 +81,7 @@ const reset_highlight = function(d){
     .transition()
     .duration(10)
     .style("fill-opacity", goco_is_open ? 0.2 : 1 ); 
-}
+};
 
 
 new PanelGraph({
@@ -184,7 +184,7 @@ class Goco {
         }
       />,
       legend_area.node()
-    )
+    );
 
     const graph = new charts_index.TwoSeriesBar(
       this.container.select('.sa-diagram').node(),
@@ -198,7 +198,7 @@ class Goco {
         series2,
         has_callback: true,
       }
-    )
+    );
 
     graph.dispatch.on( "dataClick.fade_out", fade_out.bind(graph) );
     graph.dispatch.on( "dataClick.render", this.render_goco.bind(this) );
@@ -241,7 +241,7 @@ class Goco {
         },
         has_callback: true,
       }
-    )
+    );
     graph.render();
     graph.dispatch.on( "dataClick", this.nav_to_dashboard.bind(this) );
   }
@@ -290,7 +290,7 @@ function render({calculations, footnotes, sources }, { history }){
     max_sa_share: (_.first(_.map(fte_spend_data,"spending")) / d3.sum(_.map(fte_spend_data, "spending"))),
     spending: d3.sum(_.map(fte_spend_data, "spending")),
     ftes: d3.sum(_.map(fte_spend_data, "ftes")),
-  }
+  };
   return (
     <Panel
       title={text_maker("gocographic_title")}

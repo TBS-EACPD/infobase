@@ -166,7 +166,7 @@ function d3_build_table(options){
     .attr("class","table-header")
     .order();
   
-  headers.merge(new_headers)
+  headers.merge(new_headers);
 
   var ths = new_headers
     .selectAll("th")
@@ -176,7 +176,7 @@ function d3_build_table(options){
 
   const new_ths = ths
     .enter()
-    .append("th")
+    .append("th");
 
   ths.merge(new_ths)
     .html(function(d){
@@ -184,7 +184,7 @@ function d3_build_table(options){
     })
     .each(function(d){ 
       if(d.css)
-        d3.select(this).style(d.css)
+        d3.select(this).style(d.css);
     })
     .attr("id",function(d){
       return d.id;
@@ -216,7 +216,7 @@ function d3_build_table(options){
     .append("tr")
     .order();
    
-  rows.merge(new_rows)
+  rows.merge(new_rows);
 
   var tds = new_rows
     .selectAll("td")
@@ -226,7 +226,7 @@ function d3_build_table(options){
 
   const new_tds = tds
     .enter()
-    .append("td")
+    .append("td");
 
   tds.merge(new_tds)
     .html(function(d){return d.val;})
@@ -234,7 +234,7 @@ function d3_build_table(options){
     .attr("class",function(d){return d.__table_opts__["class"];})
     .each(function(d){ 
       if(d.__table_opts__.css)
-        d3.select(this).style(d.__table_opts__.css)
+        d3.select(this).style(d.__table_opts__.css);
     });
 
   if (options.stripe){

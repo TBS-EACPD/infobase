@@ -63,7 +63,7 @@ Statistics.create_and_register({
     add("top_so_spent", top_so_amount);
     add("top_so_pct", top_so_pct);
   },
-})
+});
 
 
 Statistics.create_and_register({
@@ -79,7 +79,7 @@ Statistics.create_and_register({
       value: top_so_amount,
     } = _.first(rows_by_so);
 
-    const total_spent = d3.sum(rows_by_so, _.property('value'))
+    const total_spent = d3.sum(rows_by_so, _.property('value'));
 
     const top_so_pct = top_so_amount/total_spent;
 
@@ -88,7 +88,7 @@ Statistics.create_and_register({
     add("top_so_spent", top_so_amount);
     add("top_so_pct", top_so_pct);
   },
-})
+});
 
 const render_w_options = ({text_key}) => ({calculations, footnotes, sources}) => {
   const { graph_args, info } = calculations;
@@ -98,7 +98,7 @@ const render_w_options = ({text_key}) => ({calculations, footnotes, sources}) =>
     label: d["label"],
     id: d["label"],
     value: d["value"],
-  }))
+  }));
   
   return (
     <StdPanel
@@ -131,8 +131,8 @@ const render_w_options = ({text_key}) => ({calculations, footnotes, sources}) =>
         }
       </Col>
     </StdPanel>
-  )
-}
+  );
+};
 
 new PanelGraph({
   key: 'top_spending_areas',

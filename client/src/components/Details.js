@@ -6,7 +6,7 @@ export class Details extends React.Component {
     super(props);
     this.state = {
       isOpen: props.initialOpen || false,
-    }
+    };
   }
   render(){
     const { summary_content, content } = this.props;
@@ -44,7 +44,7 @@ export class Details extends React.Component {
       <div className="IBDetails__Content">
         { isOpen && content}
       </div>
-    </div>
+    </div>;
   }
 
 }

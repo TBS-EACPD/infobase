@@ -43,7 +43,7 @@ const EverythingSearch = withRouter(
       if(!onSelect && href_template){
         onSelect = item => { 
           history.push( href_template(item) );
-        }
+        };
       }
     
       const search_configs = _.compact([

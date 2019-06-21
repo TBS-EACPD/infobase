@@ -13,7 +13,7 @@ export class TreeMap extends React.Component {
     this.state = { org_route: [...props.org_route] };
   }
   render() {
-    return <div ref={div => this.el = div} />
+    return <div ref={div => this.el = div} />;
   }
   _update() {
     this._imperative_render();
@@ -117,7 +117,7 @@ export class TreeMap extends React.Component {
 
     // set up the node values to be the size, and adjust for cases where the size != sum of children's sizes
     // this avoids having to call d3's sum()
-    root.each(d => { d.data.value2 = d.data.size });
+    root.each(d => { d.data.value2 = d.data.size; });
     root.eachBefore(d => {
       if (d.children && d.data.value2 !== _.sumBy(d.children, "data.value2")) {
         const difference = d.data.value2 - _.sumBy(d.children, "data.value2");
@@ -125,22 +125,22 @@ export class TreeMap extends React.Component {
         _.each(d.children, child => {
           const frac_of_total = child.data.value2 / total_sum;
           child.data.value2 += difference * frac_of_total;
-        })
+        });
       }
-    })
-    root.each(d => { d.value = d.data.value2 });
+    });
+    root.each(d => { d.value = d.data.value2; });
 
     treemap(root
       .sort((a, b) => {
         if (a.data.name === smaller_items_text) {
-          return 9999999
+          return 9999999;
         }
         if (b.data.name === smaller_items_text) {
-          return -9999999
+          return -9999999;
         }
-        return b.value - a.value || b.height - a.height
+        return b.value - a.value || b.height - a.height;
       })
-    )
+    );
 
     const display = d => {
       if (!d.children) {
@@ -171,11 +171,11 @@ export class TreeMap extends React.Component {
             this.state.org_route.push(d.data.name);
             setRouteCallback(d.data.name, false);
             transition(d);
-          })
+          });
       } else {
         main
           .filter(d => d.children)
-          .classed('TreeMap__Division', true)
+          .classed('TreeMap__Division', true);
       }
 
       main.selectAll('.TreeMap__Rectangle--is-child')
@@ -206,8 +206,8 @@ export class TreeMap extends React.Component {
               tool.transition()
                 .style("opacity", 1);
               tool
-                .call(tooltip_render, year)
-            }, 300)
+                .call(tooltip_render, year);
+            }, 300);
           })
           .on("mouseleave", function (d) {
             d3.select(this)
@@ -246,13 +246,13 @@ export class TreeMap extends React.Component {
                 tool.transition()
                   .style("opacity", 1);
                 tool
-                  .call(tooltip_render)
-              }, 100)
+                  .call(tooltip_render);
+              }, 100);
               d.toolTipped = true;
 
             }
           })
-          .call(treemap_node_content_container)
+          .call(treemap_node_content_container);
       }
 
       function transition(d) {
@@ -299,7 +299,7 @@ export class TreeMap extends React.Component {
         });
       }
       return main;
-    }
+    };
 
     // Draw the coloured rectangles
     function rectan(sel) {
@@ -320,13 +320,13 @@ export class TreeMap extends React.Component {
           top: `${y(d.y0)}px`,
           width: `${x(d.x1) - x(d.x0)}px`,
           height: `${y(d.y1) - y(d.y0)}px`,
-        }))
+        }));
     }
 
     const main = display(root);
     //node_render is special, we call it once on first render (here) 
     //and after transitions
-    if (main) { main.selectAll('.TreeMapNode__ContentBoxContainer').call(node_render) }
+    if (main) { main.selectAll('.TreeMapNode__ContentBoxContainer').call(node_render); }
 
   }
 }

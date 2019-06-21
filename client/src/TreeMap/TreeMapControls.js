@@ -26,7 +26,7 @@ const all_year_changes = [
   "pa_last_year_4:pa_last_year_3",
   "pa_last_year_3:pa_last_year_2",
   "pa_last_year_2:pa_last_year",
-]
+];
 
 const year_to_year_changes = {
   pa_last_year_5: "pa_last_year_5:pa_last_year_4",
@@ -37,7 +37,7 @@ const year_to_year_changes = {
   planning_year_1: "pa_last_year",
   planning_year_2: "pa_last_year",
   planning_year_3: "pa_last_year",
-}
+};
 
 const year_changes = {
   "drf": all_year_changes,
@@ -45,7 +45,7 @@ const year_changes = {
   "tp": all_year_changes,
   "vote_stat": all_year_changes.slice(0, 4),
   "so": all_year_changes.slice(2, 4),
-}
+};
 
 const years = {
   "drf": all_years,
@@ -53,7 +53,7 @@ const years = {
   "tp": all_years.slice(0, 5),
   "vote_stat": all_years.slice(0, 5),
   "so": all_years.slice(2, 5),
-}
+};
 
 const size_controls = [
   { id: "drf", display: text_maker("DRF_spending") },
@@ -61,17 +61,17 @@ const size_controls = [
   { id: "tp", display: text_maker("TP") },
   { id: "vote_stat", display: text_maker("EVS") },
   { id: "so", display: text_maker("SO") },
-]
+];
 const color_controls = [
   { id: "spending", display: text_maker("spending") },
   { id: "ftes", display: text_maker("fte") },
-]
+];
 
 const gc_type_controls = [
   { id: "All", display: text_maker("all") },
   { id: "g", display: text_maker("grants") },
   { id: "c", display: text_maker("contributions") },
-]
+];
 
 const vs_type_controls = [
   { id: "All", display: text_maker("all") },
@@ -83,7 +83,7 @@ const vs_type_controls = [
   //{ id: "6", display: text_maker("vstype6") },
   //{ id: "9", display: text_maker("vstype9") }, // Other
   { id: "999", display: text_maker("treemap_vstype999") },
-]
+];
 
 
 const so_type_controls = [
@@ -94,7 +94,7 @@ const so_type_controls = [
   { id: "11", display: text_maker("SOBJ11") },
   { id: "12", display: text_maker("SOBJ12") },
   { id: "3", display: text_maker("revenues") },
-]
+];
 
 function create_new_path(cur_params, new_param, new_val) {
   let new_perspective = cur_params.perspective; // default
@@ -105,7 +105,7 @@ function create_new_path(cur_params, new_param, new_val) {
   switch(new_param){
     case("perspective"):
       new_perspective = new_val;
-      new_filter_var = "All"
+      new_filter_var = "All";
       if(new_val === "drf_ftes") new_color_var = "ftes";
       if(new_val !== "drf" && new_val !== "drf_ftes") new_color_var = "spending";
       break;
@@ -164,7 +164,7 @@ export class TreeMapControls extends React.Component {
             <div className="cent">
               <TreeMapRadioButtons
                 options={_.map(size_controls, ({ id, display }) => ({ id, display, active: id === perspective }))}
-                onChange={id => {this.handle_click("perspective",id)}}
+                onChange={id => {this.handle_click("perspective",id);}}
               />
             </div>
           }
@@ -186,7 +186,7 @@ export class TreeMapControls extends React.Component {
                     display: text_maker("year_changes"),
                   },
                 ]}
-                onChange={id => {this.handle_click("get_changes",id==="year_changes")}}
+                onChange={id => {this.handle_click("get_changes",id==="year_changes");}}
               />
             </div>
           }
@@ -208,7 +208,7 @@ export class TreeMapControls extends React.Component {
                     active: id === year,
                   })))
                 }
-                onChange={id => {this.handle_click("year",id)}}
+                onChange={id => {this.handle_click("year",id);}}
               />
             </div>
           }
@@ -220,7 +220,7 @@ export class TreeMapControls extends React.Component {
               <div className="cent">
                 <TreeMapRadioButtons
                   options={_.map(gc_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
-                  onChange={id => {this.handle_click("filter_var",id)}}
+                  onChange={id => {this.handle_click("filter_var",id);}}
                 />
               </div>
             }
@@ -233,7 +233,7 @@ export class TreeMapControls extends React.Component {
               <div className="cent">
                 <TreeMapRadioButtons
                   options={_.map(color_controls, ({ id, display }) => ({ id, display, active: id === color_var }))}
-                  onChange={id => {this.handle_click("color_var",id)}}
+                  onChange={id => {this.handle_click("color_var",id);}}
                 />
               </div>
             }
@@ -247,7 +247,7 @@ export class TreeMapControls extends React.Component {
                 <Fragment>
                   <TreeMapRadioButtons
                     options={_.map(vs_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
-                    onChange={id => {this.handle_click("filter_var",id)}}
+                    onChange={id => {this.handle_click("filter_var",id);}}
                   />
                 </Fragment>
               </div>
@@ -261,14 +261,14 @@ export class TreeMapControls extends React.Component {
               <div className="cent">
                 <TreeMapRadioButtons
                   options={_.map(so_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
-                  onChange={id => {this.handle_click("filter_var",id)}}
+                  onChange={id => {this.handle_click("filter_var",id);}}
                 />
               </div>
             }
           />
         }
       </div>
-    )
+    );
   }
 }
 
@@ -301,7 +301,7 @@ const TreeMapRadioButtons = ({ options, onChange }) => <div className="treemap-o
       key={id}
       aria-pressed={active}
       className={classNames("treemap-options__option", active && "treemap-options__option--active")}
-      onClick={() => { onChange(id) }}
+      onClick={() => { onChange(id); }}
     >
       {display}
     </button>

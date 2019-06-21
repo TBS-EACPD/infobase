@@ -16,7 +16,7 @@ import {
   NivoResponsiveBar,
   NivoResponsiveLine,
   formats,
-} from "../shared.js" 
+} from "../shared.js"; 
 import { run_template } from "../../models/text";
 
 const { Format } = util_components;
@@ -38,7 +38,7 @@ const get_estimates_source_link = subject => {
       mode: 'details',
       columns: ['{{est_in_year}}_estimates'], 
     }),
-  }
+  };
 };
 
 const get_historical_spending_source_link = subject => {
@@ -52,7 +52,7 @@ const get_historical_spending_source_link = subject => {
       mode: 'details',
       columns: std_years.map(yr => `${yr}exp`), 
     }),
-  }
+  };
 };
 
 const get_historical_fte_source_link = subject => {
@@ -66,7 +66,7 @@ const get_historical_fte_source_link = subject => {
       mode: 'details',
       columns: std_years, 
     }),
-  }
+  };
 };
 
 const ticks = (has_planned, has_hist) => _.chain(has_hist ? std_years : null)
@@ -132,7 +132,7 @@ const Chart = ({
                 </div>
               ))}
             </div>
-          )
+          );
         }
       }
     />
@@ -265,7 +265,7 @@ const WelcomeMat = (props) => {
   const planned_trend = <TM k="3_year_trend" />;
   const no_hist_spending = <TM k="no_historical_spending__new" />;
   // const no_hist_ftes = <TM k="no_historical_fte__new" />;
-  const spending_auths_are = <TM k="spending_authorities_are" />
+  const spending_auths_are = <TM k="spending_authorities_are" />;
 
   if(type==="hist"){
     //hist-only, old program or org
@@ -946,7 +946,7 @@ const common_program_crso_calculate = function(subject, info, options){
 
   let type;
   if(has_hist && has_planned){
-    type = "hist_planned"
+    type = "hist_planned";
   } else if(has_planned){
     type = "planned";
   } else if (has_hist){

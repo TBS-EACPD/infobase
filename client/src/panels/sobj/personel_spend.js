@@ -64,7 +64,7 @@ new PanelGraph({
             y: spending_data,
             x: calculations.info.last_years[year_index],
           })),
-      }]
+      }];
       
       graph_content = <div style={{height: 400}} aria-hidden = {true}>
         <NivoResponsiveLine

@@ -18,7 +18,7 @@ import { Fragment } from 'react';
 
 const get_num_from_str = /\d+/;
 function getQuestionLabels(q_id){
-  const num = Number(_.first(get_num_from_str.exec(q_id)))
+  const num = Number(_.first(get_num_from_str.exec(q_id)));
   if(num < 12){
     return [ "Strongly Disagree", "Strongly Agree" ];
   } else if(num === 12){
@@ -77,7 +77,7 @@ export const QuestionGrid = ({ data: { questions, acronym } }) => <div className
       </div>
     </div>
   )}
-</div>
+</div>;
 
 
 
@@ -158,7 +158,7 @@ const data_to_props = ({ root: {
     questions: joined_questions,
     acronym,
   };
-}
+};
 
 
 const GradientBar = ({ series, startsPositive, height, width, labels }) => {
@@ -242,7 +242,7 @@ const GradientBar = ({ series, startsPositive, height, width, labels }) => {
       </div>
     </div>
   );
-}
+};
 
 export const QuestionGridConfig = {
   query,

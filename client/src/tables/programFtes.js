@@ -48,14 +48,14 @@ export default {
       "hidden": true,
       "nick": "dept",
       "header": '',
-    })
+    });
     this.add_col({
       "key": true,
       "hidden": true,
       "type": "str",
       'nick': 'activity_code',
       "header": "",
-    })
+    });
     this.add_col({
       "key": true,
       "hidden": true,
@@ -71,7 +71,7 @@ export default {
         "en": "Program",
         "fr": "Programme",
       },
-    })
+    });
     _.each(std_years, (header, ix) => {
       this.add_col(
         { "type": "big_int_real",
@@ -125,7 +125,7 @@ export default {
 
       filter_func: function(options){
         var func = function(row){
-          const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
+          const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) );
           //FIXME: this is because I found a program without a goco, 
           const goco = _.get(prog, "tags_by_scheme.GOCO[0].name");
           return goco || trivial_text_maker('unknown');
@@ -139,7 +139,7 @@ export default {
 
       filter_func: function(options){
         var func = function(row){
-          const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
+          const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) );
           //FIXME: this is because I found a program without a goco, 
           const sa = _.get(prog, "tags_by_scheme.GOCO[0].parent_tag.name");
           return sa || trivial_text_maker('unknown');
@@ -151,8 +151,8 @@ export default {
       title_key: 'goco_id',
       filter_func: function(options){
         var func = function(row){
-          const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
-          const goco = _.first(prog.tags_by_scheme.GOCO)
+          const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) );
+          const goco = _.first(prog.tags_by_scheme.GOCO);
           return goco && goco.id;
         };
         return func;
@@ -198,7 +198,7 @@ Statistics.create_and_register({
   level: 'program',
   compute: (subject, tables, infos, add, c) => {
     const table = tables.programFtes;
-    const row = _.first(table.programs.get(subject))
+    const row = _.first(table.programs.get(subject));
     stats.add_all_years(add,"fte",std_years, (year,i) => row[year] );
     stats.add_all_years(add,"fte",planning_years, (year,i) => row[year] );
   },
@@ -394,7 +394,7 @@ Statistics.create_and_register({
 
     const min_planning_yr = "{{planning_year_" + _.min(
       _.map(planning_years, XX => Number(XX.match(/\d+/)))
-    ) +"}}"
+    ) +"}}";
 
     const sorted_first_yr = q.get_top_x(
       ["prgm", min_planning_yr],

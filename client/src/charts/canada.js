@@ -97,7 +97,7 @@ export class Canada {
       }
       previous_event_target_prov_key = false;
       graph_dispatcher.call("dataMouseLeave");
-    }
+    };
     const dispatch_mouseEnter = function(prov_key){
       if (previous_event_target_prov_key) {
         svg.select(`#CA-${previous_event_target_prov_key}`)
@@ -112,7 +112,7 @@ export class Canada {
           .styles({
             "stroke-width": (prov_key === "abroad" || prov_key === "na") ? "8px" : "15px",
             stroke: main_color,
-          })
+          });
   
         graph_dispatcher.call("dataMouseEnter", "", prov_key);
       }
@@ -209,7 +209,7 @@ export class Canada {
         d3.select(this)
           .append("p")
           .style("margin-bottom", "0px")
-          .html( formatter(last_year_data[prov_key]) )
+          .html( formatter(last_year_data[prov_key]) );
       });
 
 

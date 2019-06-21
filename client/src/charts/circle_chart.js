@@ -38,7 +38,7 @@ export class CirclePieChart {
 
     this.svg
       .attr("width", width+margin.left+margin.right)
-      .attr("height", height+margin.bottom+margin.top)
+      .attr("height", height+margin.bottom+margin.top);
     this.graph_area
       .attr("transform", "translate(" + x_offset + "," + margin.top + ")");
 

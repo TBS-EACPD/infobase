@@ -39,7 +39,7 @@ const format_display_number = (value, is_fte = false, raw = false) =>
 function std_node_render(is_fte, foreign_sel) {
   foreign_sel.html(function (node) {
     const node_size = get_node_size.bind(this)();
-    if (node_size === "tiny") { return } //no contents on tiny nodes
+    if (node_size === "tiny") { return; } //no contents on tiny nodes
     const text_size = node_size === "medium" ? "" : `--${node_size}`;
     const display_name = node_name(node, this.offsetWidth);
     const display_number = this.offsetHeight > 50 ?
@@ -70,16 +70,16 @@ function node_html(node, display_name, text_size, display_number) {
 
 function node_name(node, width) {
   if (node.data.subject && node.data.subject.fancy_acronym && width < 150) {
-    return node.data.subject.fancy_acronym
+    return node.data.subject.fancy_acronym;
   }
   return node.data.name;
 }
 
 function get_node_size(node) {
-  if (this.offsetHeight <= 30 || this.offsetWidth <= 50) { return "tiny" }
-  else if (this.offsetHeight < 100 || this.offsetWidth < 150) { return "small" }
-  else if (this.offsetHeight > 150 && this.offsetWidth > 300) { return "large" }
-  else { return "medium" }
+  if (this.offsetHeight <= 30 || this.offsetWidth <= 50) { return "tiny"; }
+  else if (this.offsetHeight < 100 || this.offsetWidth < 150) { return "small"; }
+  else if (this.offsetHeight > 150 && this.offsetWidth > 300) { return "large"; }
+  else { return "medium"; }
 }
 
 
@@ -105,7 +105,7 @@ purple_scale.clamp(true);
 // spending % of parent -- 30% is enough for the colour to be maxed out
 function standard_color_scale(node) {
   const color_val = node.data.parent_amount ? node.data.amount / node.data.parent_amount : 0; // smaller_items nodes don't have parents, set them to 0
-  const scale = node.data.amount < 0 ? red_scale : blue_scale
+  const scale = node.data.amount < 0 ? red_scale : blue_scale;
   scale.domain([0, perc_limit]);
   if (node.amount < 0) {
     return scale(-color_val);
@@ -188,7 +188,7 @@ function get_legend_measure_text(color_var, get_changes) {
       `${text_maker("fte")}
     (${text_maker("percent_of_parent")})` :
       `${text_maker("expenditures")}
-  (${text_maker("percent_of_parent")})`
+  (${text_maker("percent_of_parent")})`;
 }
 
 /* TOOLTIPS */
@@ -204,24 +204,24 @@ function std_tooltip_render(tooltip_sel) {
       (${formats.percentage1(d.data.amount / d.data.parent_amount)} ${text_maker("of")} ${d.data.parent_name})</div>`;
     } else {
       tooltip_html = tooltip_html + `
-      <div>${format_display_number(d.data.amount)}</div>`
+      <div>${format_display_number(d.data.amount)}</div>`;
     }
     if (d.data.ftes) {
       if (d.data.parent_ftes) {
         tooltip_html = tooltip_html + `
         <div>${format_display_number(d.data.ftes, true)}
-        (${formats.percentage1(d.data.ftes / d.data.parent_ftes)} ${text_maker("of")} ${d.data.parent_name})</div>`
+        (${formats.percentage1(d.data.ftes / d.data.parent_ftes)} ${text_maker("of")} ${d.data.parent_name})</div>`;
 
       } else {
         tooltip_html = tooltip_html + `
-        <div>${format_display_number(d.data.ftes, true)}</div>`
+        <div>${format_display_number(d.data.ftes, true)}</div>`;
       }
     }
     tooltip_html = tooltip_html + `
     ${generate_infograph_href(d)}
     </div>`;
     return tooltip_html;
-  })
+  });
 }
 
 function std_tooltip_render_changes(tooltip_sel) {
@@ -229,17 +229,17 @@ function std_tooltip_render_changes(tooltip_sel) {
     let tooltip_html = `<div>
     <div>${d.data.name}</div>
     <hr class="BlueHLine">
-    <div>${format_display_number(d.data.amount)}</div>`
+    <div>${format_display_number(d.data.amount)}</div>`;
     if (d.data.ftes) {
       tooltip_html = tooltip_html + `
-      <div>${Math.round(d.data.ftes)} ${text_maker("fte")}</div>`
+      <div>${Math.round(d.data.ftes)} ${text_maker("fte")}</div>`;
 
     }
     tooltip_html = tooltip_html + `
     ${generate_infograph_href(d)}
     </div>`;
     return tooltip_html;
-  })
+  });
 }
 
 function mobile_tooltip_render(tooltip_sel) {
@@ -263,7 +263,7 @@ function mobile_tooltip_render(tooltip_sel) {
       }
     }
     tooltip_html = tooltip_html + `
-    ${generate_infograph_href(d)}`
+    ${generate_infograph_href(d)}`;
     if (d3.select(this.parentNode).classed("TreeMapNode__ContentBoxContainer--has-children")) {
       tooltip_html = tooltip_html + `
       <button class="btn-primary">Zoom in</button>`;
@@ -275,7 +275,7 @@ function mobile_tooltip_render(tooltip_sel) {
     .select("button")
     .on("click", function (d) {
       d3.select(d).transition();
-    })
+    });
 }
 
 function mobile_tooltip_render_changes(tooltip_sel) {
@@ -286,13 +286,13 @@ function mobile_tooltip_render_changes(tooltip_sel) {
     <div>${format_display_number(d.data.amount)}</div>`;
     if (d.data.ftes) {
       tooltip_html = tooltip_html + `
-      <div>${format_display_number(d.data.ftes, true)}</div>`
+      <div>${format_display_number(d.data.ftes, true)}</div>`;
     }
     tooltip_html = tooltip_html + `
-    ${generate_infograph_href(d)}`
+    ${generate_infograph_href(d)}`;
     if (d3.select(this.parentNode).classed("TreeMapNode__ContentBoxContainer--has-children")) {
       tooltip_html = tooltip_html + `
-      <button class="btn-primary">Zoom in</button>`
+      <button class="btn-primary">Zoom in</button>`;
     }
     tooltip_html = tooltip_html + `
     </div>`;
@@ -301,7 +301,7 @@ function mobile_tooltip_render_changes(tooltip_sel) {
     .select("button")
     .on("click", function (d) {
       d3.select(d).transition();
-    })
+    });
 }
 
 
@@ -315,7 +315,7 @@ function generate_infograph_href(d, data_area) {
       </a>
     </div>
     `;
-  } else { return '' }
+  } else { return ''; }
 }
 
 function check_props(props) {
@@ -354,7 +354,7 @@ export default class TreeMapper extends React.Component {
     return {
       route_params: props.match.params,
       data: _.isEqual(props.match.params, state.route_params) ? state.data : false,
-    }
+    };
   }
   componentDidUpdate() {
     const {
@@ -387,10 +387,10 @@ export default class TreeMapper extends React.Component {
   }
   setRoute(new_route, reset = false) {
     let next_route = this.state.org_route;
-    reset ? next_route = new_route : next_route = this.state.org_route.concat([new_route])
+    reset ? next_route = new_route : next_route = this.state.org_route.concat([new_route]);
     this.setState({
       org_route: next_route,
-    })
+    });
   }
   render() {
     const {

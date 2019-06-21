@@ -110,10 +110,10 @@ const node_render = vs => function (foreign_sel) {
             ${formats.compact1(node.data["{{est_in_year}}_estimates"])}
           </div>` : ""}
       </div>
-      `
+      `;
     return ret;
   });
-}
+};
 
 const tooltip_render = vs => function (d) {
   const sel = d3.select(this);
@@ -131,12 +131,12 @@ const tooltip_render = vs => function (d) {
     "data-ibtt-html": "true",
     "data-container": "body",
   });
-}
+};
 
 const d3_scale = d3.scaleOrdinal( newIBLightCategoryColors );
 const color_scale = vs => function (d) {
   return d3_scale(text_func(vs, d, ""));
-}
+};
 
 
 const text_func = (vs, d, break_str) => {

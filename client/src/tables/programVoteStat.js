@@ -90,7 +90,7 @@ export default {
   process_mapped_row(mapped_row){
     const program_obj = Program.get_from_activity_code(mapped_row.dept, mapped_row.activity_code);
     if(!this.programs.get(program_obj)){ 
-      this.programs.set(program_obj, []) 
+      this.programs.set(program_obj, []); 
     }
     this.programs.get(program_obj).push(mapped_row); 
   },
@@ -106,7 +106,7 @@ export default {
 
       filter_func: function(options){
         var func = function(row){
-          const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
+          const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) );
           const goco = prog.tags_by_scheme.GOCO && prog.tags_by_scheme.GOCO[0];
           return (goco && goco.name) || trivial_text_maker('unknown');
         };
@@ -120,7 +120,7 @@ export default {
       filter_func: function(options){
         var func = function(row){
           //FIXME: this is because I found a program without a goco, 
-          const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) )
+          const prog = Program.lookup( Program.unique_id(row.dept, row.activity_code) );
 
           const goco = prog.tags_by_scheme.GOCO && prog.tags_by_scheme.GOCO[0];
           return (goco && goco.parent_tag.name) || trivial_text_maker('unknown');
@@ -159,7 +159,7 @@ Statistics.create_and_register({
     add("total_exp", total);
 
   },
-})
+});
 
 
 Statistics.create_and_register({
@@ -191,4 +191,4 @@ Statistics.create_and_register({
     add("total_exp", total);
 
   },
-})
+});

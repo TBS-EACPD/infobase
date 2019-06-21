@@ -160,7 +160,7 @@ const partial_scheme = {
       ["doc"] 
     );
   },
-}
+};
 
 //given a subject, created a rooted scheme using the above scheme. Hierarchy scheme should be evident from the level of the subject 
 function create_rooted_resource_scheme({subject}){
@@ -173,7 +173,7 @@ function create_rooted_resource_scheme({subject}){
         root_subject: subject,
       })
     ),
-  }
+  };
 
 
 };

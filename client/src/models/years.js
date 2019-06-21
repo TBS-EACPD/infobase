@@ -53,4 +53,4 @@ const years = {
   ],
 };
 
-export { years }
+export { years };

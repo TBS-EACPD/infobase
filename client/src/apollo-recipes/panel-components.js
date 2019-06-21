@@ -98,7 +98,7 @@ const StdPanel = ({ title, sources, footnotes, children }) => {
     </Panel>
   );
 
-}
+};
 
 StdPanel.propTypes = {
   children: function (props) {
@@ -108,6 +108,6 @@ StdPanel.propTypes = {
       return new Error(`StdPanel expects all children to be of the type 'Col'`);
     }
   },
-}
+};
 
 export { Col, StdPanel};

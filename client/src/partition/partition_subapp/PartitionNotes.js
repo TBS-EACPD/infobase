@@ -3,7 +3,7 @@ import { text_maker } from "./partition_text_provider.js";
 
 export class PartitionNotes extends React.Component {
   constructor(){
-    super()
+    super();
   }
   componentDidMount(){
     const autoAccordion = d3.select(ReactDOM.findDOMNode(this.refs.autoAccordion));

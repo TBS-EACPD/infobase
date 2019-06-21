@@ -31,7 +31,7 @@ export const bubble_defs = {
       if(subject.level === 'tag'){
         return text_maker('tagged_programs');
       } else {
-        throw "TODO"
+        throw "TODO";
       }
     },
     description: _.constant(""),

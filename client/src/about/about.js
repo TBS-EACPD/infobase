@@ -7,8 +7,8 @@ import {
   EmbeddedVideo,
 } from '../util_components.js';
 import { create_text_maker } from '../models/text.js';
-import { LabeledTable } from '../components/LabeledTable.js'
-import { IconGrid } from '../components/IconGrid.js'
+import { LabeledTable } from '../components/LabeledTable.js';
+import { IconGrid } from '../components/IconGrid.js';
 import { get_static_url } from '../request_utils.js';
 
 

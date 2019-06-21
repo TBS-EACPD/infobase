@@ -86,7 +86,7 @@ class GranularView extends React.Component {
                     get_csv_string={ ()=> this.get_csv_string() }
                     get_excel_string={ ()=> {
                       const el = document.createElement('div');
-                      ReactDOM.render(this.get_plain_table_content(true), el)
+                      ReactDOM.render(this.get_plain_table_content(true), el);
                       const excel_str= el.querySelector('table').outerHTML;
                       ReactDOM.unmountComponentAtNode(el);
                       return excel_str;
@@ -125,7 +125,7 @@ class GranularView extends React.Component {
           }
         </div>
       </div>
-    )
+    );
 
 
   }
@@ -310,7 +310,7 @@ class GranularView extends React.Component {
           </div>
         }
       </div>
-    )
+    );
 
   }
 
@@ -400,7 +400,7 @@ class ExportButton extends React.Component {
     } = this.props;
     const { 
       success,
-    } = this.state
+    } = this.state;
 
 
     if( window.feature_detection.download_attr ){
@@ -408,11 +408,11 @@ class ExportButton extends React.Component {
         <button 
           id={id}
           className="btn btn-ib-primary btn-block"
-          onClick={ ()=> { this.triggerDownload() } }
+          onClick={ ()=> { this.triggerDownload(); } }
         >
           <TextMaker text_key="export_table" />
         </button>
-      </div>
+      </div>;
     } else if(window.feature_detection.clipboard_access){
       const buttonText = (
         success === false ? 
@@ -428,7 +428,7 @@ class ExportButton extends React.Component {
         <button 
           id={id}
           className="btn btn-ib-primary btn-block"
-          onClick={ ()=>{ this.clipBoardClickHandler() } }
+          onClick={ ()=>{ this.clipBoardClickHandler(); } }
         >
           { buttonText }
         </button>
@@ -467,7 +467,7 @@ class ExportButton extends React.Component {
 
     setTimeout(()=>{
       this.setState({success: null});
-    },3000)
+    },3000);
 
   }
 }

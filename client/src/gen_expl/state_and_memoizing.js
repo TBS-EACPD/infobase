@@ -130,13 +130,13 @@ const map_dispatch_to_root_props = dispatch => {
     dispatch({ 
       type: 'set_query',
       payload: { query },
-    })
+    });
 
     setTimeout(()=>{
       dispatch({ type: 'clear_loading' });
     }, 500);
 
-  }
+  };
 
   const toggle_node = node => dispatch({
     type: 'toggle_node',
@@ -159,7 +159,7 @@ const map_dispatch_to_root_props = dispatch => {
     clear_query, 
     enable_loading,
   };
-}
+};
 
 //state derivations and implementation details
 //wrapped in a function to allow for memoize caches to clear 
@@ -173,7 +173,7 @@ const scheme_defaults = {
   get_sort_func_selector: ()=> _.constant(_.identity),
   get_props_selector: () => _.constant({}),
   shouldUpdateFlatNodes: (oldSchemeState, newSchemeState) => oldSchemeState !== newSchemeState,
-}
+};
 
 const negative_search_relevance_func = ({ is_search_match }) => is_search_match ? 0 : 1;
 
@@ -186,7 +186,7 @@ function get_memoized_funcs(schemes){
     .fromPairs()
     .value();
 
-  const get_base_hierarchy = state => scheme_base_hierarchy_generators[state.root.scheme_key](state) 
+  const get_base_hierarchy = state => scheme_base_hierarchy_generators[state.root.scheme_key](state); 
 
   const scheme_props_generators = _.chain(schemes)
     .map(scheme => [ scheme.key, scheme.get_props_selector() ] )
@@ -199,7 +199,7 @@ function get_memoized_funcs(schemes){
     const base_hierarchy = get_base_hierarchy(state);
 
     return scheme_props_generators[state.root.scheme_key]({...state, query_filtered_hierarchy, base_hierarchy });
-  } 
+  }; 
 
   const scheme_filter_func_selectors = _.chain(schemes)
     .map(scheme => [ scheme.key, scheme.get_filter_func_selector() ] )
@@ -255,7 +255,7 @@ function get_memoized_funcs(schemes){
         .sortBy(negative_search_relevance_func) //search results always take precedence
         .value();
     }
-  )
+  );
 
 
 

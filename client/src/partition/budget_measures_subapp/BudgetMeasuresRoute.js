@@ -143,8 +143,8 @@ export default class BudgetMeasuresRoute extends React.Component {
       });
     }
   }
-  componentDidMount(){ this.conditionallyLoadOnMountAndUpdate() }
-  componentDidUpdate(){ this.conditionallyLoadOnMountAndUpdate() }
+  componentDidMount(){ this.conditionallyLoadOnMountAndUpdate(); }
+  componentDidUpdate(){ this.conditionallyLoadOnMountAndUpdate(); }
   setFilterString(new_filter_string){
     this.setState({filter_string: new_filter_string});
   }

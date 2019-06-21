@@ -54,7 +54,7 @@ new PanelGraph({
           .sortBy('display')
           .value(),
       }))
-      .value()
+      .value();
 
     return <TextPanel title={text_maker("links_to_rpb_title")}>
       <TM k="links_to_rpb_text"/>
@@ -85,7 +85,7 @@ new PanelGraph({
           .sortBy('display')
           .value(),
       }))
-      .value()
+      .value();
     
     return <TextPanel title={text_maker("links_to_rpb_title")}>
       <TM k="links_to_rpb_text"/>

@@ -91,13 +91,13 @@ const map_state_to_props_from_memoized_funcs = memoized_funcs => {
     mapRootStateToRootProps(state),
     get_scheme_props(state)
   );
-}
+};
 
 class ExplorerContainer extends React.Component {
   constructor(props){
     super();
 
-    const { route_h7y_layout } = props
+    const { route_h7y_layout } = props;
 
     const scheme = estimates_diff_scheme;
     const scheme_key = estimates_diff_scheme.key;
@@ -220,11 +220,11 @@ const get_non_col_content = ({node}) => {
       }
     </div>
   );
-}
+};
 
 class EstimatesExplorer extends React.Component {
   constructor(){
-    super()
+    super();
     this.state = { _query: "" };
     this.debounced_set_query = _.debounce(this.debounced_set_query, 500);
   }
@@ -341,8 +341,8 @@ class EstimatesExplorer extends React.Component {
           <form
             style={{marginBottom: "15px"}}
             onSubmit={evt => {
-              evt.preventDefault()
-              evt.stopPropagation()
+              evt.preventDefault();
+              evt.stopPropagation();
               set_query(evt.target.querySelector('input').value);
               this.refs.focus_mount.focus();
             }}

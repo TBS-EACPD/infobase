@@ -40,12 +40,12 @@ new PanelGraph({
       .filter(org => org.inst_form.parent_form.parent_form.id === 'fed_int_gp')
       .reject('end_yr')
       .reject({unique_id: "999"})
-      .value()
+      .value();
 
     const ministries = _.chain(federal_institutions)
       .map(org => org.ministry)
       .uniqBy()
-      .value()
+      .value();
 
 
     //People calcs
@@ -111,7 +111,7 @@ new PanelGraph({
   render({calculations}){
     const { graph_args: big_info } = calculations;
     const Row = props => {
-      const this_row_props = {className: "grid-row canada-intro-grid", style: {borderTop: 0, padding: "15px 0px", marginLeft: "-50px", marginRight: "-15px"}}
+      const this_row_props = {className: "grid-row canada-intro-grid", style: {borderTop: 0, padding: "15px 0px", marginLeft: "-50px", marginRight: "-15px"}};
       if (props.top_border){
         this_row_props.style.borderTop="#";
       }

@@ -175,7 +175,7 @@ class HistTPTypes extends React.Component {
           label, 
           data: _.map(data, num => <Format type="compact1_written" content={num} /> ),
         }) )
-        .value()
+        .value();
 
 
       content = <A11YTable
@@ -220,7 +220,7 @@ class HistTPTypes extends React.Component {
             stacked = {true}
           />
         </div>
-      </Fragment>
+      </Fragment>;
     }
     return <div className="frow middle-xs">
       <div className={`fcol-md-${text_split}`}>
@@ -304,7 +304,7 @@ class DetailedHistTPItems extends React.Component {
               content={record[`${yr}exp`] || 0}
             />
           ),
-        }
+        };
       });
       return <div>
         {title_el}
@@ -313,7 +313,7 @@ class DetailedHistTPItems extends React.Component {
           label_col_header={text_maker("transfer_payment")}
           data_col_headers={text_years}
         />
-      </div>
+      </div>;
     }
 
     return <div>

@@ -42,6 +42,6 @@ const CardCenteredImage = ({
       }
     </div>
   </div>
-)
+);
 
-export { CardCenteredImage }
+export { CardCenteredImage };

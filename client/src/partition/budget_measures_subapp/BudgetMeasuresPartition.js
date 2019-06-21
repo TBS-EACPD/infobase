@@ -8,7 +8,7 @@ import { businessConstants } from '../../models/businessConstants.js';
 import { formats } from '../../core/format.js';
 import { sanitized_marked } from '../../general_utils.js';
 import { newIBLightCategoryColors } from '../../core/color_schemes.js';
-import * as color_defs from '../../core/color_defs.js'
+import * as color_defs from '../../core/color_defs.js';
 
 const { budget_chapters } = businessConstants;
 const { 
@@ -24,7 +24,7 @@ const formatter = node => {
   const in_billions = node.__value__ >= Math.pow(10, 9);
   const format = in_billions ? formats.compact1 : formats.compact;
   return " (" + format(node.__value__) + ")";
-}
+};
 
 const get_level_headers = (first_column, selected_value) => {
   if (selected_value === "overview"){
@@ -56,7 +56,7 @@ const get_level_headers = (first_column, selected_value) => {
     ...first_two_headers,
     ...additional_headers,
   };
-}
+};
 
 
 const selected_value_specifier_by_selected_value = {
@@ -87,7 +87,7 @@ const root_text_func = (displayed_measure_count, selected_value, year_value, roo
       additional_root_note: get_additional_root_note(selected_value, year_value),
     }
   );
-}
+};
 
 const popup_template = (year_value, node) => {
   const dept_is_first_column = (node.depth === 1 && node.data.type === "dept") || 
@@ -173,7 +173,7 @@ const popup_template = (year_value, node) => {
     focus_text: node.magnified ? text_maker("partition_unfocus_button") : text_maker("partition_focus_button"),
   };
   return text_maker("budget_measure_popup_template", popup_options);
-}
+};
 
 const data_wrapper_node_rules_to_be_curried = (is_funding_overview, node) => {
   const root_value = _.last( node.ancestors() ).value;
@@ -195,8 +195,8 @@ const data_wrapper_node_rules_to_be_curried = (is_funding_overview, node) => {
       }
     );
     return [show.concat(unhide), _.difference(hide, unhide)];
-  }
-}
+  };
+};
 
 const update_diagram = (diagram, props) => {
   if (props.filter_string){
@@ -204,14 +204,14 @@ const update_diagram = (diagram, props) => {
   } else {
     standard_update(diagram, props);
   }
-}
+};
 
 const standard_update = (diagram, props) => {
   const data = budget_measures_hierarchy_factory(props.year_value, props.selected_value, props.first_column);
   const dont_fade = [];
   const data_wrapper_node_rules = _.curry(data_wrapper_node_rules_to_be_curried)(props.selected_value === "overview");
   render_diagram(diagram, props, data, data_wrapper_node_rules, dont_fade);
-}
+};
 
 const update_with_search = (diagram, props) => {
   const dont_fade = [];
@@ -258,10 +258,10 @@ const update_with_search = (diagram, props) => {
     node.__value__ = node.value;
     node.open = true;
     node.how_many_to_show = how_many_to_be_shown;
-  }
+  };
 
   render_diagram(diagram, props, search_tree, search_data_wrapper_node_rules, dont_fade);
-}
+};
 
 const render_diagram = (diagram, props, data, data_wrapper_node_rules, dont_fade) => {
   const displayed_measure_count = _.filter(
@@ -284,7 +284,7 @@ const render_diagram = (diagram, props, data, data_wrapper_node_rules, dont_fade
     colors: newIBLightCategoryColors,
     background_color: color_defs.primaryColor,
   });
-}
+};
 
 
 export class BudgetMeasuresPartition extends React.Component {

@@ -30,12 +30,12 @@ const glossary_entry_from_inst_form_type_id = (type_id) => {
     "serv_agency": "SA",
     "shared_gov_corp": "SGC",
     "spec_op_agency": "SOA",
-  }
+  };
   const glossary_key = type_id === "parl_ent" ?
     "PARL_ORG" :
     "IFORM_"+type_id_to_glossary_suffix_map[type_id];
   return get_glossary_entry(glossary_key);
-}
+};
 
 const orgs_to_inst_form_nodes = (orgs) => {
   return _.chain(orgs)
@@ -51,11 +51,11 @@ const orgs_to_inst_form_nodes = (orgs) => {
           is: __type__ => __type__ === "inst_form",
           orgs: orgs,
         }) )
-        .value()
+        .value();
     })
     .flatten()
     .value();
-}
+};
 
 const org_info_post_traversal_rule_set = (node, data_type) => {
   if ( node.data.is("dept") ){
@@ -64,7 +64,7 @@ const org_info_post_traversal_rule_set = (node, data_type) => {
     node.children = _.filter(node.children, d => d.value !== false && d.value !== 0);
     node[data_type] = node.value = d3.sum(node.children, d => d.value);
   }
-}
+};
 
 const create_org_info_ministry_hierarchy = function(data_type) {
   return d3.hierarchy(Subject.gov,
@@ -88,7 +88,7 @@ const create_org_info_ministry_hierarchy = function(data_type) {
         return absolute_value_sort(a, b);
       }
     });
-}
+};
 
 const create_org_info_inst_form_hierarchy = function(data_type, grandparent_inst_form_group) {
   return d3.hierarchy(Subject.gov,
@@ -115,14 +115,14 @@ const create_org_info_inst_form_hierarchy = function(data_type, grandparent_inst
         return absolute_value_sort(a, b);
       }
     });
-}
+};
 
 const org_info_data_wrapper_node_rules = (node) => {
   node.__value__ = node.value;
   node.open = true;
   if ( node.data.is("ministry") || node.data.is("inst_form") ){
     node.how_many_to_show = function(_node){
-      if (_node.children.length <= 2){ return [_node.children, []]}
+      if (_node.children.length <= 2){ return [_node.children, []];}
       const number_to_show = 1;
       const show = _.take(_node.children, number_to_show);
       const hide = _.slice(_node.children, number_to_show);
@@ -133,7 +133,7 @@ const org_info_data_wrapper_node_rules = (node) => {
       return [_node.children, []];
     };
   }
-}
+};
 
 
 const value_formatter = function(node_data){
@@ -146,7 +146,7 @@ const value_formatter = function(node_data){
       )
     ) :
     "";
-}
+};
 
 const org_info_perspective_popup_template = function(d){
   const common_popup_options = get_common_popup_options(d);
@@ -173,7 +173,7 @@ const org_info_perspective_popup_template = function(d){
       })
     );
   }
-}
+};
 
 
 const make_org_info_ministry_perspective = () => new PartitionPerspective({

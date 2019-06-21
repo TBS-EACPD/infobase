@@ -6,7 +6,7 @@ export class PartitionDataWrapper {
       node.__value__ = node.value;
       node.open = true;
       node.how_many_to_show = function(_node){
-        if (_node.children.length <= 2){ return [_node.children, []] }
+        if (_node.children.length <= 2){ return [_node.children, []]; }
         const show = [_.head(_node.children)];
         const hide = _.tail(_node.children);
         const unhide = _.filter(hide, 
@@ -14,8 +14,8 @@ export class PartitionDataWrapper {
               false :
               Math.abs(__node.value) > hierarchy.value/100 );
         return [show.concat(unhide), _.difference(hide, unhide)];
-      }
-    }
+      };
+    };
 
     const data_wrapper_node_rules = alternate_data_wrapper_node_rules ? alternate_data_wrapper_node_rules : default_data_wrapper_node_rules;
 
@@ -25,7 +25,7 @@ export class PartitionDataWrapper {
       } else {
         return "root:" + distinct_root_identifier;
       }
-    }
+    };
 
     hierarchy
       .each( node => data_wrapper_node_rules(node) )
@@ -117,7 +117,7 @@ export class PartitionDataWrapper {
 
       if ( !_.isUndefined(compressed.data.hidden_children) ){
         children = node.children.concat(compressed.data.hidden_children);
-        compressed.data.unhidden_children = compressed.data.hidden_children
+        compressed.data.unhidden_children = compressed.data.hidden_children;
         delete compressed.data.hidden_children;
         compressed.data.id = "minimize"+compressed.id_ancestry;
         compressed.value = 1;
@@ -138,7 +138,7 @@ export class PartitionDataWrapper {
             if (d.children){
               d.children = this.process_node_children_for_compression(d);
             }
-          })
+          });
         })
         .value();
 
@@ -179,7 +179,7 @@ export class PartitionDataWrapper {
         .forEach(d => {
           this.restore(d);
           this.unhide_all_children(d);
-        })
+        });
     } else {
       node.value = 0;
       this.hide_all_children(node);
@@ -205,7 +205,7 @@ export class PartitionDataWrapper {
     _.each(siblings, d => {
       d.value = "collapsed";
       this.hide_all_children(d);
-    })
+    });
   }
   resize_children(node,factor){
     node.value *= factor;
@@ -213,12 +213,12 @@ export class PartitionDataWrapper {
     if (node.children){
       _.each(node.children, d => {
         this.resize_children(d, factor);
-      })
+      });
     }
     if (node.data.hidden_children){
       _.each(node.data.hidden_children, d => {
         this.resize_children(d, factor);
-      })
+      });
     } 
   }
   is_placeholder(node){

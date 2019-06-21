@@ -1,4 +1,4 @@
-import text from "./employee_type.yaml"
+import text from "./employee_type.yaml";
 import {
   formats,
   run_template,
@@ -41,7 +41,7 @@ const calculate_funcs_by_level = {
         return {
           label: tenure_text,
           data: yearly_values,
-          five_year_percent: yearly_values.reduce(function(sum, val) { return sum + val }, 0)/info.gov_five_year_total_head_count,
+          five_year_percent: yearly_values.reduce(function(sum, val) { return sum + val; }, 0)/info.gov_five_year_total_head_count,
           active: true,
         };
       })
@@ -120,7 +120,7 @@ const calculate_funcs_by_level = {
                 data_col_headers = {[...ticks, text_maker("five_year_percent_header")]}
                 data = {_.map(graph_args, 
                   dimension => { 
-                    return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]} 
+                    return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]}; 
                   }
                 )}
               />

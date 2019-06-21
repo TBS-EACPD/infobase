@@ -10,7 +10,7 @@ export class EasyAccess extends React.Component {
 
       <EasyAccess_ />,
       document.getElementById("easy-access")
-    )
+    );
   }
 }
 const TM = TrivialTM;

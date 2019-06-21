@@ -58,7 +58,7 @@ const create_igoc_hierarchy = grouping => {
         }))
         .sortBy('data.name')
         .sortBy(node => node.data.name === text_maker("undef_ministry"))
-        .value()
+        .value();
       break;
     }
     case 'inst_form': {
@@ -196,7 +196,7 @@ const create_igoc_hierarchy = grouping => {
 
   return flat_nodes;
   
-}
+};
 
 export {
   create_igoc_hierarchy,

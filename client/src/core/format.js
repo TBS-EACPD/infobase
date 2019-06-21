@@ -6,25 +6,25 @@
 const number_formatter = {
   en: _.map(Array(4), (val,ix) => new Intl.NumberFormat('en-CA', {style: 'decimal', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
   fr: _.map(Array(4), (val,ix) => new Intl.NumberFormat('fr-CA', {style: 'decimal', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
-}
+};
 const money_formatter = {
   en: _.map(Array(3), (val,ix) => new Intl.NumberFormat('en-CA', {style: 'currency', currency: 'CAD', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
   fr: _.map(Array(3), (val,ix) => new Intl.NumberFormat('fr-CA', {style: 'currency', currency: 'CAD', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
-}
+};
 const percent_formatter = {
   en: _.map(Array(3), (val,ix) => new Intl.NumberFormat('en-CA', {style: 'percent', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
   fr: _.map(Array(3), (val,ix) => new Intl.NumberFormat('fr-CA', {style: 'percent', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
-}
+};
 
 // results need to be displayed with the number of digits they are entered in. We don't do any rounding!
 const result_number_formatter = {
   en: new Intl.NumberFormat('en-CA', {style: 'decimal', maximumFractionDigits: 10, minimumFractionDigits: 0}),
   fr: new Intl.NumberFormat('fr-CA', {style: 'decimal', maximumFractionDigits: 10, minimumFractionDigits: 0}),
-}
+};
 const result_percent_formatter = {
   en: new Intl.NumberFormat('en-CA', {style: 'percent', maximumFractionDigits: 10, minimumFractionDigits: 0}),
   fr: new Intl.NumberFormat('fr-CA', {style: 'percent', maximumFractionDigits: 10, minimumFractionDigits: 0}),
-}
+};
 
 
 const compact = (precision, val, lang, options) => {  
@@ -60,7 +60,7 @@ const compact = (precision, val, lang, options) => {
   // custom symbols in the string. There is an experimental
   // formatToParts function that may be useful in the future
   const rtn = number_formatter[lang][precision].format(new_val);
-  let compactStr = `${rtn} ${symbol}`
+  let compactStr = `${rtn} ${symbol}`;
   if (options.raw){
     return options.noMoney ? compactStr : lang === 'fr' ? `${compactStr}$` : `$${compactStr}`; 
   }else {
@@ -119,13 +119,13 @@ const compact_written = (precision, val, lang, options) => {
 
 const percentage = (precision, val, lang, options) => {
   precision = precision || 0;
-  const rtn = percent_formatter[lang][precision].format(val)
+  const rtn = percent_formatter[lang][precision].format(val);
   if (options.raw){
     return rtn;
   }else {
     return `<span class='text-nowrap'>${rtn}</span>`;
   }
-}
+};
 
 const types_to_format = {
   "compact": (val, lang, options) => compact(options.precision, val, lang, options),
@@ -176,7 +176,7 @@ const types_to_format = {
   },
   "year_to_fiscal_year": (year) => {
     const year_int = parseInt(year);
-    return`${year_int}-${ window.lang === "en" ? year_int-2000+1 : year_int+1}`
+    return`${year_int}-${ window.lang === "en" ? year_int-2000+1 : year_int+1}`;
   },
   "fiscal_year_to_year": (fiscal_year) => _.chain(fiscal_year).split("-").head().value(),
 };

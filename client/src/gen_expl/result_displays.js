@@ -8,7 +8,7 @@ import { IndicatorDisplay } from '../panels/result_graphs/result_components.js';
 
 export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
 
-  const indicators = _.filter(Indicator.get_flat_indicators(subject), {doc} )
+  const indicators = _.filter(Indicator.get_flat_indicators(subject), {doc} );
 
   const indicator_count_obj = { 
     count: indicators.length, 
@@ -91,7 +91,7 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
       />
     </div>
   );
-}
+};
 
 
 export const spending_header = createSelector(
@@ -119,7 +119,7 @@ const type_text_keys = {
 export const get_type_name = type_key => {
   const text_key = type_text_keys[type_key];
   return text_key ? text_maker(text_key) : null;
-}
+};
 
 export const ResultNodeContent = ({ 
   node: {

@@ -14,7 +14,7 @@ const linked_stylesheets_loaded = () => {
     // No other good way to test that the sheets loaded, so have to assume they did in that case
     return true;
   }
-}
+};
 
 // IE has an infrequent, unreproducable bug where it fails to load our linked stylesheets
 // Rare, but happens within our team often enough that it must happen to users too (at least to other TBS employees, if it's caused by our own network)
@@ -31,7 +31,7 @@ const ensure_linked_stylesheets_load = () => {
 
     window.location.reload();
   }
-}
+};
 
 
 const retrying_react_lazy = (import_promise) => React.lazy( () => retry_promise(import_promise) );

@@ -28,10 +28,10 @@ const subject_label = ({subject, subject_class}) => {
     return `All subjects of level: "${subject_class.type_name}"`;
   }
 
-}
+};
 
 ROUTER.add_container_route("footnotes/:mode:/:concept_or_graph_key:/:level:","_footnote_inventory",function(container, mode, concept_or_graph_key, level){
-  const title = "footnote inventory"
+  const title = "footnote inventory";
   const h1 = document.createElement('h1'); // Create a <button> element
   const txt_node = document.createTextNode(title); // Create a text node
   h1.appendChild(txt_node);       
@@ -77,13 +77,13 @@ ROUTER.add_container_route("footnotes/:mode:/:concept_or_graph_key:/:level:","_f
   );
 
   
-})
+});
 
 
 
 class FootnoteInspector extends React.Component {
   constructor(props){
-    super(props)
+    super(props);
 
     const { initialState, updateURL } = props;
 
@@ -115,7 +115,7 @@ class FootnoteInspector extends React.Component {
         )
       ))
       .groupBy(({subject, subject_class}) => subject_label({subject, subject_class}) )
-      .value()
+      .value();
       
   }
 
@@ -197,7 +197,7 @@ class FootnoteInspector extends React.Component {
             selected_graph: graph_key,
           });
         }}
-      />
+      />;
         
       body = <div>
         <p> selected graph: {selected_graph} ({selected_level})  {sel} </p>
@@ -233,7 +233,7 @@ class FootnoteInspector extends React.Component {
                 this.setState({
                   selected_concept: concept,
                   mode: 'concepts', 
-                })
+                });
               }}
             >
               {concept}
@@ -263,7 +263,7 @@ class FootnoteInspector extends React.Component {
             }
           </ul>
         </div>
-      </div>
+      </div>;
 
     } else {
       const sel = <Select
@@ -323,7 +323,7 @@ class FootnoteInspector extends React.Component {
             )}
           </ul>
         </div>
-      </div>
+      </div>;
 
 
     }

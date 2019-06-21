@@ -22,7 +22,7 @@ const {
   create_text_maker_component,
   Select,
   Format,
-} = util_components
+} = util_components;
 
 const {
   GraphLegend,
@@ -100,7 +100,7 @@ const footnote_topics = [ 'PROG', 'SOBJ' ];
           return text_maker('other_sos');
         }
         
-      }
+      };
 
       const exp_cols = _.map(std_years, yr=>yr+"exp");
       const programSpending_data = _.chain(programSpending.q(subject).data)
@@ -269,7 +269,7 @@ class HistoricalProgramBars extends React.Component {
           label_col_header={text_maker("program")}
           data_col_headers={ticks}
         />
-      </div>
+      </div>;
     }
 
     return <div>
@@ -298,7 +298,7 @@ class HistoricalProgramBars extends React.Component {
               onClick={id => {!(selected.length === 1 && selected.includes(id)) &&
                 this.setState({
                   selected: _.toggle_list(selected, id),
-                })
+                });
               }}
             />
           </div>
@@ -355,7 +355,7 @@ class DetailedProgramSplit extends React.Component {
         label,
         id: label,
         color: colors(label),
-      }))
+      }));
       //make sure 'other standard objects' comes last 
       legend_items = _.sortBy(legend_items, ({label}) => label === text_maker('other_sos') );
     }

@@ -256,7 +256,7 @@ function get_data_by_item_types(){
       const is_voted = ix === 0;
 
       const current_value = _.sumBy(categories, "data.current_value");
-      const comparison_value = _.sumBy(categories, "data.comparison_value")
+      const comparison_value = _.sumBy(categories, "data.comparison_value");
 
       if ( !current_value && !comparison_value ){
         return null;
@@ -288,8 +288,8 @@ function get_data_by_item_types(){
 }
 
 
-const Green = ({children}) => <span style={{color: "hsla(120, 100%, 25%, 1)"}}>{children}</span>
-const Red = ({children}) => <span style={{color: "hsla(0, 100%, 40%, 1)"}}>{children}</span>
+const Green = ({children}) => <span style={{color: "hsla(120, 100%, 25%, 1)"}}>{children}</span>;
+const Red = ({children}) => <span style={{color: "hsla(0, 100%, 40%, 1)"}}>{children}</span>;
 
 export const col_defs = [
   {
@@ -324,11 +324,11 @@ export const col_defs = [
       }
 
       if(val>0){
-        return <Green>+{content}</Green>
+        return <Green>+{content}</Green>;
       } else if(val===0){
         return content;
       } else {
-        return <Red>-{content}</Red>
+        return <Red>-{content}</Red>;
       }
     },
   },
@@ -365,7 +365,7 @@ function get_footnotes_for_votestat_item({desc, org_id, votenum}){
 
 
 const scheme_key = "estimates_diff";
-const h7y_layout_options = ["org", "item_type"]
+const h7y_layout_options = ["org", "item_type"];
 export const get_initial_state = (intitial_h7y_layout) => ({
   doc_code: current_doc_code,
   sort_col: "current_value",
@@ -427,7 +427,7 @@ export const estimates_diff_scheme = {
           { is_descending: !is_descending } :
           { is_descending: true, sort_col: clicked_col }
       );
-      return {...state, ...mods}
+      return {...state, ...mods};
     } else {
       return state;
     }

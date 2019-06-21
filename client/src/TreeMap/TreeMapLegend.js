@@ -13,7 +13,7 @@ const size_controls = {
   "tp": text_maker("SOBJ10_lower"),
   "vote_stat": text_maker("expenditures_lower"),
   "so": text_maker("expenditures_lower"),
-}
+};
 
 export class TreeMapLegend extends React.Component {
   constructor() {
@@ -58,7 +58,7 @@ export class TreeMapLegend extends React.Component {
           </div>
         </div>
       </Fragment>
-    )
+    );
   }
 }
 
@@ -83,4 +83,4 @@ const legend_block = (val, col, ix) =>
       <text className="breakLabels" x="0" y="40" style={{ textAnchor: "middle", display: "block" }} >
         {val}
       </text>}
-  </g>
+  </g>;

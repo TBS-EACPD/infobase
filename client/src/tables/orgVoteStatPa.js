@@ -6,8 +6,8 @@ import { stats, vote_stat_dimension, major_vote_stat, m, Statistics, years} from
 import { trivial_text_maker } from '../models/text.js';
 
 const { std_years } = years;
-const voted_label = trivial_text_maker("voted")
-const stat_label = trivial_text_maker("stat")
+const voted_label = trivial_text_maker("voted");
+const stat_label = trivial_text_maker("stat");
 
 export default {
   text,
@@ -236,7 +236,7 @@ Statistics.create_and_register({
 
     const unused_auth_sum = _.map(unused_auth_diff,d => d3.sum(d) );
 
-    const unused_auth_avg = d3.sum(unused_auth_sum)/ unused_auth_sum.length
+    const unused_auth_avg = d3.sum(unused_auth_sum)/ unused_auth_sum.length;
 
     add({
       key: "hist_diff_average", 
@@ -340,7 +340,7 @@ Statistics.create_and_register({
 
 
     add("stat_five_year_pct", c.gov_stat_total / (c.gov_stat_total+c.gov_voted_total)); //type percentage
-    add("voted_five_year_pct", c.gov_voted_total / (c.gov_stat_total+c.gov_voted_total)) //type : "percentage"
+    add("voted_five_year_pct", c.gov_voted_total / (c.gov_stat_total+c.gov_voted_total)); //type : "percentage"
   },
 });
 

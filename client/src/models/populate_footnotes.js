@@ -63,7 +63,7 @@ function load_footnotes_bundle(subject){
   if(subject){
     switch(subject.level){
       case 'gov':
-        return Promise.resolve()
+        return Promise.resolve();
       case 'dept':
         subject_code = subject.acronym;
         break;
@@ -91,7 +91,7 @@ function load_footnotes_bundle(subject){
   }
 
   if(_loaded_dept_or_tag_codes[subject_code] || _loaded_dept_or_tag_codes['all']){
-    return Promise.resolve()
+    return Promise.resolve();
   }
 
   return make_request(get_static_url(`footnotes/fn_${lang}_${subject_code}.json.js`))

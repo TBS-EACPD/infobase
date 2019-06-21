@@ -24,7 +24,7 @@ let year;
 
 const set_year_by_presentation_scheme = (presentation_scheme) => {
   year = get_year(presentation_scheme) + "_estimates";
-}
+};
 
 const estimates_common_node_mapping = ({data_for_node_mapping, is, glossary_entry_by_id_func}) => {
   return _.chain(data_for_node_mapping)
@@ -44,11 +44,11 @@ const estimates_common_node_mapping = ({data_for_node_mapping, is, glossary_entr
         value: value_sum,
         is,
         data_for_children,
-      }
+      };
     })
     .filter( node => node.value !== 0)
     .value();
-}
+};
 
 const vs_type_to_glossary_key_dictionary = {
   "1": "OP",
@@ -61,9 +61,9 @@ const vs_type_to_glossary_key_dictionary = {
   "999": "STAT",
 };
 const get_glossary_entry_by_vs_type = (vs_type) => {
-  const glossary_key = vs_type_to_glossary_key_dictionary[vs_type]
+  const glossary_key = vs_type_to_glossary_key_dictionary[vs_type];
   return glossary_key ? get_glossary_entry(glossary_key) : false;
-}
+};
 
 const vs_type_node_mapping_common_options = {
   is: __type__ => __type__ === "vs_type",
@@ -74,7 +74,7 @@ const subject_to_vs_type_nodes = (node) => {
   const orgVoteStatEstimates = Table.lookup('orgVoteStatEstimates');
   const estimates_data = orgVoteStatEstimates.q(node).data;
   return subject_to_vs_type_nodes_common(estimates_data);
-}
+};
 
 const subject_to_vs_type_nodes_filtered_by_est_doc_code = (node, est_doc_code) => {
   const orgVoteStatEstimates = Table.lookup('orgVoteStatEstimates');
@@ -83,7 +83,7 @@ const subject_to_vs_type_nodes_filtered_by_est_doc_code = (node, est_doc_code) =
     .value();
 
   return estimates_data.length === 0 ? false : subject_to_vs_type_nodes_common(estimates_data);
-}
+};
 
 const subject_to_vs_type_nodes_common = (estimates_data) => {
   const data_for_node_mapping = _.map(estimates_data, row => {
@@ -92,7 +92,7 @@ const subject_to_vs_type_nodes_common = (estimates_data) => {
       name: row.votestattype !== 999 ? text_maker("vstype"+row.votestattype) : text_maker("stat_items"),
       value: row[year],
       data_for_children: _.omit(row, ["csv_index", "votestattype", "votestattype"]),
-    }
+    };
   });
 
   return estimates_common_node_mapping(
@@ -102,7 +102,7 @@ const subject_to_vs_type_nodes_common = (estimates_data) => {
       vs_type_node_mapping_common_options
     )
   );
-}
+};
 
 const est_doc_code_to_glossary_key_dictionary = {
   MAINS: "MAINS",
@@ -115,9 +115,9 @@ const est_doc_code_to_glossary_key_dictionary = {
   IE: "INTER_EST",
 };
 const get_glossary_entry_by_est_doc_code = (est_doc_code) => {
-  const glossary_key = est_doc_code_to_glossary_key_dictionary[est_doc_code]
+  const glossary_key = est_doc_code_to_glossary_key_dictionary[est_doc_code];
   return glossary_key ? get_glossary_entry(glossary_key) : false;
-}
+};
 
 const est_type_node_mapping_common_options = {
   is: __type__ => __type__ === "est_type",
@@ -144,7 +144,7 @@ const subject_to_est_type_nodes = (node) => {
       est_type_node_mapping_common_options
     )
   );
-}
+};
 
 const est_type_or_vs_type_node_to_stat_item_nodes = (node) => {
   const data_for_node_mapping = _.chain(node.data_for_children)
@@ -166,7 +166,7 @@ const est_type_or_vs_type_node_to_stat_item_nodes = (node) => {
       is: __type__ => __type__ === "stat_item",
       glossary_entry_by_id_func: () => false,
     });
-}
+};
 
 const est_type_node_to_vs_type_nodes = (node) => {
   const data_for_node_mapping = _.map(node.data_for_children, row => {
@@ -185,7 +185,7 @@ const est_type_node_to_vs_type_nodes = (node) => {
       vs_type_node_mapping_common_options
     )
   );
-}
+};
 
 const orgs_with_estimates = () => { 
   return _.chain(Subject.Ministry.get_all())
@@ -193,7 +193,7 @@ const orgs_with_estimates = () => {
     .flatten()
     .filter( org => _.indexOf(org.table_ids, "orgVoteStatEstimates") !== -1)
     .value();
-}
+};
 
 const orgs_in_est_doc = (est_doc_code) => {
   const orgVoteStatEstimates = Table.lookup('orgVoteStatEstimates');
@@ -204,7 +204,7 @@ const orgs_in_est_doc = (est_doc_code) => {
     .filter( org => _.indexOf(org.table_ids, "orgVoteStatEstimates") !== -1)
     .filter( org => _.some(orgVoteStatEstimates.q(org).data, row => row.est_doc_code === est_doc_code))
     .value();
-}
+};
 
 const est_type_node_rules = (node) => {
   if ( node.is("gov") ){
@@ -214,7 +214,7 @@ const est_type_node_rules = (node) => {
   } else if ( node.is("vs_type") ){
     return est_type_or_vs_type_node_to_stat_item_nodes(node);
   }
-}
+};
 
 const vs_type_node_rules = (node) => {
   if ( node.is("gov") ){
@@ -222,7 +222,7 @@ const vs_type_node_rules = (node) => {
   } else if ( node.is("vs_type") ){
     return est_type_or_vs_type_node_to_stat_item_nodes(node);
   }
-}
+};
 
 const org_estimates_node_rules = (node) => {
   if ( node.is("gov") ){
@@ -232,7 +232,7 @@ const org_estimates_node_rules = (node) => {
   } else if ( node.is("est_type") ){
     return est_type_node_to_vs_type_nodes(node);
   }
-}
+};
 
 const specific_est_doc_node_rules = (node, est_doc_code) => {
   if ( node.is("gov") ){
@@ -240,7 +240,7 @@ const specific_est_doc_node_rules = (node, est_doc_code) => {
   } else if ( node.is("dept") ){
     return subject_to_vs_type_nodes_filtered_by_est_doc_code(node, est_doc_code);
   }
-}
+};
 
 const get_rpb_subject_code_from_context = (node, presentation_scheme) => {
   if ( node.depth !== 0 && (presentation_scheme === "org_estimates" || presentation_scheme.startsWith("est_doc_")) ) {
@@ -252,7 +252,7 @@ const get_rpb_subject_code_from_context = (node, presentation_scheme) => {
   } else {
     return "gov_gov";
   }
-}
+};
 
 const estimates_post_traversal_rule_set = (node,data_type, presentation_scheme) => {
   const orgVoteStatEstimates = Table.lookup('orgVoteStatEstimates');
@@ -266,7 +266,7 @@ const estimates_post_traversal_rule_set = (node,data_type, presentation_scheme) 
     table: orgVoteStatEstimates.id,
     preferDeptBreakout: true,
     descending: false,
-  }
+  };
 
   if ( node.data.is("vs_type") || node.data.is("est_type") || node.data.is("stat_item") ){
     node[data_type] = node.value = node.data.value;
@@ -289,7 +289,7 @@ const estimates_post_traversal_rule_set = (node,data_type, presentation_scheme) 
       node.data.rpb_link = rpb_link(default_rpb_link_options);
     }
   }
-}
+};
 
 const create_estimates_hierarchy = function(data_type, presentation_scheme){
   set_year_by_presentation_scheme(presentation_scheme);
@@ -312,7 +312,7 @@ const create_estimates_hierarchy = function(data_type, presentation_scheme){
       post_traversal_search_string_set(node);
     })
     .sort(absolute_value_sort);
-}
+};
 
 
 const estimates_popup_template = function(presentation_scheme, d){
@@ -357,18 +357,18 @@ const estimates_popup_template = function(presentation_scheme, d){
       })
     );
   }
-}
+};
 
 const get_year = (presentation_scheme) => {
   switch (presentation_scheme){
     case "est_doc_mains" : return "{{est_in_year}}";
     default : return "{{est_last_year}}";
   }
-}
+};
 
 const year_text_fragment = (presentation_scheme) => {
   return `(${run_template( get_year(presentation_scheme) )})`;
-}
+};
 
 const get_name_text_fragment = (presentation_scheme) => {
   switch (presentation_scheme){
@@ -381,11 +381,11 @@ const get_name_text_fragment = (presentation_scheme) => {
     case "est_doc_sec" : return text_maker("est_doc_sec");
     case "est_doc_ie" : return text_maker("est_doc_ie");
   }
-}
+};
 
 const get_name = (presentation_scheme) => {
   return get_name_text_fragment(presentation_scheme) + " " + year_text_fragment(presentation_scheme);
-}
+};
 
 const get_lang_specific_filter_name = (presentation_scheme) => {
   switch (presentation_scheme){
@@ -396,12 +396,12 @@ const get_lang_specific_filter_name = (presentation_scheme) => {
     case "est_doc_ie" : return text_maker("est_doc_ie");
     default : return "";
   }
-}
+};
 
 const get_rpb_filter = (presentation_scheme) => {
   const rpb_filter_name = get_lang_specific_filter_name(presentation_scheme);
   return !_.isEmpty(rpb_filter_name) ? `~filter~'${rpb_filter_name}` : rpb_filter_name;
-}
+};
 
 const get_level_headers = (presentation_scheme) => {
   switch (presentation_scheme){
@@ -424,7 +424,7 @@ const get_level_headers = (presentation_scheme) => {
       "2": text_maker("partition_vote_stat_perspective"),
     };
   }
-}
+};
 
 const get_root_text_key = (presentation_scheme) => {
   switch (presentation_scheme){

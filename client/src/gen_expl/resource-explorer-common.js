@@ -73,4 +73,4 @@ export const provide_sort_func_selector = (scheme_key) => {
         .value();
     }
   );
-}
+};

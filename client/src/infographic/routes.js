@@ -14,7 +14,7 @@ const panel_href_template = (subj, data_area, panel_key, useRouterFormat) => {
     return str.replace("#","/");
   }
   return str;
-}
+};
 
 export { infograph_href_template, panel_href_template };
 

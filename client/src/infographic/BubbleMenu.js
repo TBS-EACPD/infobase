@@ -33,4 +33,4 @@ class BubbleMenu extends React.Component {
   }
 }
 
-export { BubbleMenu }
+export { BubbleMenu };

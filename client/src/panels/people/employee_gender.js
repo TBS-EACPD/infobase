@@ -1,4 +1,4 @@
-import text from "./employee_gender.yaml"
+import text from "./employee_gender.yaml";
 import {
   formats,
   run_template,
@@ -44,7 +44,7 @@ const calculate_funcs_by_level = {
         return {
           label: gender_text,
           data: yearly_values,
-          five_year_percent: yearly_values.reduce(function(sum, val) { return sum + val }, 0)/gov_five_year_total_head_count,
+          five_year_percent: yearly_values.reduce(function(sum, val) { return sum + val; }, 0)/gov_five_year_total_head_count,
           active: true,
         };
       })
@@ -89,7 +89,7 @@ const calculate_funcs_by_level = {
         required_footnotes = _.filter(
           footnotes,
           footnote => !_.some(footnote.topic_keys, key => key === "SUPPRESSED_DATA")
-        )
+        );
       }
 
       return (

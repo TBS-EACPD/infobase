@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import { infograph_href_template } from '../link_utils.js';
 import { provide_sort_func_selector } from './resource-explorer-common.js';
 import { shallowEqualObjectsOverKeys, sanitized_dangerous_inner_html } from '../general_utils.js';
-import { HeightClipper } from '../util_components.js'
+import { HeightClipper } from '../util_components.js';
 import { get_resources_for_subject } from './resource_utils.js';
 import { Subject } from '../models/subject.js';
 import { trivial_text_maker as text_maker } from '../models/text.js';
@@ -43,8 +43,8 @@ const related_tags_row = (related_tags, subject_type) => {
   return {
     term,
     def,
-  }
-}
+  };
+};
 
 function create_resource_hierarchy({hierarchy_scheme,doc}){
 
@@ -109,7 +109,7 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
                 }))
                 .value(), 
             }))
-            .value()
+            .value();
 
         case 'dept':
           return _.chain(Dept.get_all())
@@ -121,7 +121,7 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
                 resources: get_resources(org),
               },
             }))
-            .value()
+            .value();
       }
     } 
 
@@ -200,7 +200,7 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
               ),
             }, 
           }))
-          .value()
+          .value();
       }
 
       case 'crso' : {
@@ -268,7 +268,7 @@ const resource_scheme = {
     const { type, payload } = action;
     if(type === 'set_hierarchy_and_doc'){
       const { hierarchy_scheme, doc } = payload;
-      return ({...state, hierarchy_scheme, doc })
+      return ({...state, hierarchy_scheme, doc });
     } else if(type === 'set_hierarchy_scheme'){
       return ({...state, hierarchy_scheme: payload });
     } else if(type === 'column_header_click'){
@@ -300,7 +300,7 @@ const resource_scheme = {
       ['hierarchy_scheme', 'doc' ] 
     );
   },
-}
+};
 
 
 export {

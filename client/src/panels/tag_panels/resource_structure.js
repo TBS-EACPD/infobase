@@ -151,7 +151,7 @@ const map_state_to_props_from_memoized_funcs = memoized_funcs => {
     ...mapRootStateToRootProps(state),
     ...get_scheme_props(state),
   });
-}
+};
 
 const children_grouper = (node, children) => {
   //this one only has one depth, so the root must group its children
@@ -162,7 +162,7 @@ const children_grouper = (node, children) => {
       node_group,
     }))
     .value();
-}
+};
 
   
 
@@ -196,7 +196,7 @@ class RootedResourceExplorerContainer extends React.Component {
       [scheme_key]: initial_rooted_resource_state,
     };
 
-    const Container = connect(mapStateToProps, mapDispatchToProps)(RootedResourceExplorer)
+    const Container = connect(mapStateToProps, mapDispatchToProps)(RootedResourceExplorer);
 
     return (
       <Provider store={createStore(reducer,initialState)}>

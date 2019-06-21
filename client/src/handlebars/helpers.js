@@ -566,7 +566,7 @@ Handlebars.registerHelper("gl_title",function(key){
   const glos_item = GlossaryEntry.lookup(key);
   const str = glos_item.title;
   return str;
-})
+});
 
 
 Handlebars.registerHelper("infograph_link",function(subject){
@@ -643,7 +643,7 @@ Handlebars.registerHelper('array_to_grammatical_list', function(options) {
   const item_array = _.chain(options)
     .values()
     .flatten()
-    .value()
+    .value();
 
   return item_array.length === 1 ?
     item_array[0]:

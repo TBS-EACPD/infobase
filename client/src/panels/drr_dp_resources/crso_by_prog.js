@@ -40,7 +40,7 @@ const render_resource_type = (is_fte) => ({calculations, footnotes}) => {
     .uniq()
     .value();
   const colors = infobase_colors();
-  _.each(all_program_names, name => colors(name))
+  _.each(all_program_names, name => colors(name));
 
   const text = (
     <TM 
@@ -79,17 +79,17 @@ const render_resource_type = (is_fte) => ({calculations, footnotes}) => {
       />
     </Panel>
   );
-}
+};
 
 class PlannedProgramResources extends React.Component {
   constructor(props){
-    super(props)
+    super(props);
     this.state = {
       active_programs: _.chain(props.programs)
         .map('label')
         .take(3)
         .value(),
-    }
+    };
   }
   render(){
     const { 
@@ -142,7 +142,7 @@ class PlannedProgramResources extends React.Component {
           .fromPairs()
           .value(),
       })
-    )
+    );
 
     return <div>
       <div className="medium_panel_text mrgn-bttm-lg">
@@ -164,7 +164,7 @@ class PlannedProgramResources extends React.Component {
               onClick={id => {!(active_programs.length === 1 && active_programs.includes(id)) &&
                 this.setState({
                   active_programs: _.toggle_list(active_programs, id),
-                })
+                });
               }}
             />
           </div>
@@ -192,8 +192,8 @@ const get_calculate_func = (is_fte) => {
   
     const {programSpending, programFtes} = this.tables;
   
-    const all_exp = _.sumBy(planning_years, col => programSpending.q(subject).sum(col) )
-    const all_fte = _.sumBy(planning_years, col => programFtes.q(subject).sum(col) )
+    const all_exp = _.sumBy(planning_years, col => programSpending.q(subject).sum(col) );
+    const all_fte = _.sumBy(planning_years, col => programFtes.q(subject).sum(col) );
   
     const should_bail = is_fte ? all_fte === 0 : all_exp === 0;
     if (should_bail){
@@ -218,8 +218,8 @@ const get_calculate_func = (is_fte) => {
       exp_data,
       fte_data,
     };
-  }
-}
+  };
+};
 
 _.each([true,false], is_fte => {
   new PanelGraph({

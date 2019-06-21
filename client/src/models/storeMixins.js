@@ -44,9 +44,9 @@ export const exstensibleStoreMixin = superclass => {
     }
     static extend_or_register(id, object){
       if ( this.lookup(id) ){
-        this.extend(id, object)
+        this.extend(id, object);
       } else {
-        this.register(id, object)
+        this.register(id, object);
       }
     }
   };

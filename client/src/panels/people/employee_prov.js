@@ -26,7 +26,7 @@ const graph_color = window.infobase_color_constants.secondaryColor;
 const get_graph_color = (alpha) => {
   const rgb = hex_to_rgb(graph_color);
   return rgb && `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha || 1})`;
-}
+};
 
 const format_prov_data = (prov, years_by_province) => {
   var prov_data;
@@ -43,7 +43,7 @@ const format_prov_data = (prov, years_by_province) => {
   }
 
   return _.reverse(prov_data);
-}
+};
 
 class CanadaGraphBarLegend extends React.Component {
   constructor(){
@@ -57,7 +57,7 @@ class CanadaGraphBarLegend extends React.Component {
         prov += "lessncr";
       }
       return `${text_maker("five_year_history")} ${prov === "Canada" ? prov : provinces[prov].text}`;
-    }
+    };
 
     const formatted_data = format_prov_data(prov,years_by_province);
     const formatter = formats["big_int_real_raw"];
@@ -132,7 +132,7 @@ class CanadaGraph extends React.Component {
       ticks: ticks,
       color_scale: color_scale,
       formatter: formatter,
-    })
+    });
 
     let active_prov = false;
     canada_graph.dispatch.on('dataMouseEnter', prov => {
@@ -157,7 +157,7 @@ class ProvPanel extends React.Component {
     super(props);
     this.state = {
       prov: "Canada",
-    }
+    };
   }
   render(){
     const {
@@ -174,14 +174,14 @@ class ProvPanel extends React.Component {
       if(new_prov !== this.state.prov){
         this.setState({prov: new_prov});
       }
-    }
+    };
 
     const legend_items = _.map( color_scale.ticks(5).reverse(), (tick) => ({
       label: `${formats["big_int_real_raw"](tick)}+`,
       active: true,
       id: tick,
       color: get_graph_color( color_scale(tick) ),
-    }))
+    }));
 
     return (
       <StdPanel

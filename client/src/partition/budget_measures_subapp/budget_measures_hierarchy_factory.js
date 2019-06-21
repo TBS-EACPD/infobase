@@ -109,7 +109,7 @@ const post_traversal_children_filter = (node) => {
         _.some(child_node.children, child_node_child => child_node_child.value !== 0);
     });
   }
-}
+};
 
 const post_traversal_search_string_set = (node) => {
   node.data.search_string = "";
@@ -119,7 +119,7 @@ const post_traversal_search_string_set = (node) => {
   if (node.data.description){
     node.data.search_string += _.deburr(node.data.description.replace(/<(?:.|\n)*?>/gm, '').toLowerCase());
   }
-}
+};
 
 const make_program_allocation_nodes = (year_value, measure_id, org_id) => {
   const program_allocations = _.chain( BudgetMeasure.lookup_measure(year_value, measure_id).data )
@@ -163,7 +163,7 @@ const make_program_allocation_nodes = (year_value, measure_id, org_id) => {
   
     return program_allocation_nodes;
   }
-}
+};
 
 
 const budget_measure_first_hierarchy_factory = (year_value, selected_value) => {
@@ -228,7 +228,7 @@ const budget_measure_first_hierarchy_factory = (year_value, selected_value) => {
     })
     .eachAfter( node => post_traversal_modifications(node, year_value, selected_value) )
     .sort(absolute_value_sort_net_adjust_biased);
-}
+};
 
 
 const dept_first_hierarchy_factory = (year_value, selected_value) => {
@@ -280,7 +280,7 @@ const dept_first_hierarchy_factory = (year_value, selected_value) => {
         const budgetMeasureNodes = _.map(node.data_rows, data_row => {
           const budgetMeasure = BudgetMeasure.lookup_measure(year_value, data_row.measure_id);
 
-          const description = budgetMeasure.description || data_row.description
+          const description = budgetMeasure.description || data_row.description;
 
           const has_no_description = _.isEmpty(description);
 
@@ -303,7 +303,7 @@ const dept_first_hierarchy_factory = (year_value, selected_value) => {
     })
     .eachAfter(node => post_traversal_modifications(node, year_value, selected_value) )
     .sort(absolute_value_sort_net_adjust_biased);
-}
+};
 
 
 const budget_overview_hierarchy_factory = (year_value) => {
@@ -425,7 +425,7 @@ const budget_overview_hierarchy_factory = (year_value) => {
       post_traversal_children_filter(node);
       post_traversal_search_string_set(node);
     });
-}
+};
 
 export function budget_measures_hierarchy_factory(year_value, selected_value, first_column){
   if (selected_value === "overview"){

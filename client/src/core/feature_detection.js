@@ -5,14 +5,14 @@ const is_IE = function(){
       parseInt(user_agent.split('msie')[1]) : 
       user_agent.indexOf('trident') !== -1
   );
-}
+};
 
 const is_mobile = function(){
   return (
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
     matchMedia("(max-width: 970px)").matches
   );
-}
+};
 
 const has_local_storage = (function(){
   const blah = "blah";

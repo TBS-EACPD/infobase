@@ -47,7 +47,7 @@ const WellList = ({ elements }) => <div>
       .value()
     }
   </ul>
-</div>
+</div>;
 
 
 export {

@@ -12,7 +12,7 @@ import {
   absolute_value_sort,
   get_glossary_entry,
   post_traversal_search_string_set,
-} from './data_hierarchy_utils.js'
+} from './data_hierarchy_utils.js';
 
 import { 
   get_common_popup_options, 
@@ -29,7 +29,7 @@ const mock_model = function(id, name, description, type, extra_attrs={}){
     name,
     is: __type__ => __type__ === type,
     ...extra_attrs};
-}
+};
 
 const create_spend_type_hierarchy = function(){
   return d3.hierarchy(Subject.gov,
@@ -108,7 +108,7 @@ const create_spend_type_hierarchy = function(){
       post_traversal_search_string_set(node);
     })
     .sort( absolute_value_sort );
-}
+};
 
 const spend_type_data_wrapper_node_rules = node => {
   node.__value__ = node.value;
@@ -119,14 +119,14 @@ const spend_type_data_wrapper_node_rules = node => {
     const root_value = _.last(node.ancestors()).value;
 
     node.how_many_to_show = function(_node){
-      if (_node.children.length <= 2){ return [_node.children, []] }
+      if (_node.children.length <= 2){ return [_node.children, []]; }
       const show = [_.head(_node.children)];
       const hide = _.tail(_node.children);
       const unhide = _.filter(hide, __node => Math.abs(__node.value) > root_value/100);
       return [show.concat(unhide), _.difference(hide,unhide)];
     };
   }
-}
+};
 
 
 const spend_type_perspective_popup_template = function(d){
@@ -153,7 +153,7 @@ const spend_type_perspective_popup_template = function(d){
       common_popup_options
     );
   }
-}
+};
 
 
 const make_spend_type_perspective = () => new PartitionPerspective({
@@ -172,6 +172,6 @@ const make_spend_type_perspective = () => new PartitionPerspective({
   root_text_func: root_value => text_maker("partition_spending_was", {x: root_value}),
   diagram_note_content: <TextMaker text_key={"program_SOBJ_warning"} />,
   disable_search_bar: true,
-})
+});
 
 export { make_spend_type_perspective };

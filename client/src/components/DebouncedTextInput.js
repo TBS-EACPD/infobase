@@ -14,7 +14,7 @@ class DebouncedTextInput extends React.Component {
     const handle_change = event => {
       event.persist();
       this.debounced_callback(event);
-    }
+    };
 
     const unique_id = _.uniqueId("input-");
 
@@ -46,4 +46,4 @@ class DebouncedTextInput extends React.Component {
 
 DebouncedTextInput.defaultProps= {debounceTime: 500};
 
-export { DebouncedTextInput }
+export { DebouncedTextInput };

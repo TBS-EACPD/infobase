@@ -43,6 +43,6 @@ const CardLeftImage = ({
       </div>
     </div>
   </div>
-)
+);
 
-export { CardLeftImage }
+export { CardLeftImage };

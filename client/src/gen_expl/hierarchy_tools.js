@@ -92,13 +92,13 @@ function ensureVisibility(nodes, shouldNodeBeVisible){
 //will also recurse over children
 function create_children_links(flat_nodes){
   const root = get_root(flat_nodes);
-  const nodes_by_parent_id = _.groupBy(flat_nodes,'parent_id')
+  const nodes_by_parent_id = _.groupBy(flat_nodes,'parent_id');
   _create_children_links(root, nodes_by_parent_id);
 }
 
 function _create_children_links(node, nodes_by_parent_id){
   node.children = nodes_by_parent_id[node.id] || null;
-  _.each(node.children, child => _create_children_links(child, nodes_by_parent_id) )
+  _.each(node.children, child => _create_children_links(child, nodes_by_parent_id) );
 }
 
 function flat_descendants(node){
@@ -131,13 +131,13 @@ function toggleExpandedFlat(flat_nodes, node, { toggleNode, expandAllChildren, c
 
     nodes_to_be_replaced.push(...node.children);
     replacement_node.children = _.map(node.children, obj => ({ ...obj, isExpanded: true }));
-    new_nodes.push(...replacement_node.children)
+    new_nodes.push(...replacement_node.children);
 
   } else if(collapseAllChildren){
 
     nodes_to_be_replaced.push(...node.children);
     replacement_node.children = _.map(replacement_node.children, obj => ({ ...obj, isExpanded: true }));
-    new_nodes.push(...replacement_node.children)
+    new_nodes.push(...replacement_node.children);
 
   } else { // default behavior: toggle the node.
     replacement_node.isExpanded = !node.isExpanded;
@@ -147,7 +147,7 @@ function toggleExpandedFlat(flat_nodes, node, { toggleNode, expandAllChildren, c
   let current_replacement = replacement_node;
   while(current_node.parent_id){
     
-    const parent_node = nodes_by_id[current_node.parent_id]
+    const parent_node = nodes_by_id[current_node.parent_id];
     const new_children = _.clone(parent_node.children);
 
     new_children[new_children.indexOf(current_node)] = current_replacement;
@@ -238,13 +238,13 @@ function simplify_hierarchy(flat_nodes, is_simple_parent, bottom_layer_filter){
   const new_leaves = _.chain(flat_nodes)
     .filter(bottom_layer_filter)
     .map(node => ({...node, parent_id: get_simple_parent(node).id }) )
-    .value()
+    .value();
 
   const simple_parents = _.chain( new_leaves )
     .map( ({parent_id}) => old_nodes_by_id[parent_id] )
     .uniqBy('id')
     .map(node => _.clone(node) )
-    .value()
+    .value();
 
   const ancestors_by_id = {};
   _.each(simple_parents, node => {

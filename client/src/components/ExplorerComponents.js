@@ -128,7 +128,7 @@ const example_data = {
       ],
     },
   ],
-}
+};
 
 export const ExplorerHeader = ({column_defs, is_sortable, sort_col, is_descending, computed_col_styles, col_click}) => {
 
@@ -481,7 +481,7 @@ export class DevStuff extends React.Component {
               node_group: nodes,
             }))
             .sortBy('display')
-            .value()
+            .value();
         }
         return [{node_group: children}];
       },

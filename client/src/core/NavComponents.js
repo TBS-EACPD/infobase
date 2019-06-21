@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment } from 'react';
 import withRouter from 'react-router/withRouter';
 import { reactAdapter } from './reactAdapter.js';
 import { log_page_view } from './analytics.js';

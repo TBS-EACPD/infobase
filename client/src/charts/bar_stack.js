@@ -31,7 +31,7 @@ export default function barStack(data) {
         })
       )
     )
-  )
+  );
   return data;
 };
 

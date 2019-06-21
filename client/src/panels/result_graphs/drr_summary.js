@@ -168,7 +168,7 @@ const StatusGrid = props => {
       </div>
     </div>
   );
-}
+};
 
 
 export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts }) => {

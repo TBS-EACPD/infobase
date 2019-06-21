@@ -131,12 +131,12 @@ const get_children_grouper = createSelector(
           display: InstForm.lookup(form_id).name,
           node_group,
         }))
-        .value()
+        .value();
     } else {
       return trivial_grouping;
     }
   }
-)
+);
 
 const get_non_col_content_func = createSelector(
   _.property('grouping'),
@@ -167,11 +167,11 @@ const get_non_col_content_func = createSelector(
       </div>
     );
   }
-)
+);
 
 class ExplorerForIgoc extends React.Component {
   constructor(){
-    super()
+    super();
     this.state = { _query: "" };
     this.debounced_set_query = _.debounce(this.debounced_set_query, 500);
   }
@@ -188,7 +188,7 @@ class ExplorerForIgoc extends React.Component {
       this.setState({
         loading: false,
       });
-    }, 500)
+    }, 500);
   }
   componentWillUnmount(){
     !_.isUndefined(this.debounced_set_query) && this.debounced_set_query.cancel();
@@ -227,7 +227,7 @@ class ExplorerForIgoc extends React.Component {
       zebra_stripe: true,
       onClickExpand: id => toggle_node(id),
       get_non_col_content: get_non_col_content_func({grouping}),
-    }
+    };
 
     return <div>
       <div>
@@ -247,8 +247,8 @@ class ExplorerForIgoc extends React.Component {
         <form
           style={{marginBottom: "5px"}}
           onSubmit={evt => {
-            evt.preventDefault()
-            evt.stopPropagation()
+            evt.preventDefault();
+            evt.stopPropagation();
             set_query(evt.target.querySelector('input').value);
             this.refs.focus_mount.focus();
           }}

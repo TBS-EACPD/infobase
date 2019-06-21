@@ -55,4 +55,4 @@ class ContainerEscapeHatch extends React.Component {
   }
 }
 
-export { ContainerEscapeHatch }
+export { ContainerEscapeHatch };

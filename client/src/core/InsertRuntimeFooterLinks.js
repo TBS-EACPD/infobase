@@ -18,7 +18,7 @@ export class InsertRuntimeFooterLinks extends React.Component {
     super();
     this.state = {
       static_footer_links: document.querySelector('#footer_survey_link_area').innerHTML,
-    }
+    };
   }
   render(){
     const footer_survey_link_ul = document.querySelector('#footer_survey_link_area');

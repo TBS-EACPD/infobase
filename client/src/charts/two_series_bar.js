@@ -265,7 +265,7 @@ export class TwoSeriesBar {
       .attr("tabindex", 0)
       .on("click", d => {
         this.dispatch.call("dataClick", "render", d),
-        this.dispatch.call("dataClick", "fade_out", d)
+        this.dispatch.call("dataClick", "fade_out", d);
       })
       .on("keydown", (d) => {
         if (d3.event.keyCode === 13) {

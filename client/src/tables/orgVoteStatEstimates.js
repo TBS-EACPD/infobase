@@ -160,7 +160,7 @@ export default {
       var dept = this.dept || false;
       var dimension = "by_estimates_doc";
       if (compress_carry_fws){
-        dimension = "by_estimates_doc_compressed"
+        dimension = "by_estimates_doc_compressed";
       }
       return _.chain(this.table[dimension](col,dept,false))
         .toPairs()
@@ -262,17 +262,17 @@ Statistics.create_and_register({
     add("stat_est_in_year",table.voted_stat(in_year_col,c.dept, true)[stat] || 0);
     _.each(est_cols, yr => {
       add("tabled_"+yr, q.sum(yr));
-    })
+    });
 
     const voted_in_mains = d3.sum(
       _.filter(q.data, row => _.isNumber(row.votenum) && row.est_doc_code === "MAINS"),
       _.property(in_year_col)
     );
 
-    add('tabled_voted_mains_est_in_year', voted_in_mains)
+    add('tabled_voted_mains_est_in_year', voted_in_mains);
 
-    add('in_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: in_year_col}) )
-    add('last_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: last_year_col}) )
+    add('in_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: in_year_col}) );
+    add('last_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: last_year_col}) );
   
     add({
       "key": "voted_percent_est_in_year" ,
@@ -336,10 +336,10 @@ Statistics.create_and_register({
     add("voted_est_in_year",table.voted_stat(in_year_col,false)[voted] || 0);
     add("stat_est_in_year",table.voted_stat(in_year_col,false)[stat] || 0);
 
-    add('in_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: in_year_col}) )
-    add('last_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: last_year_col}) )
+    add('in_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: in_year_col}) );
+    add('last_year_estimates_split', q.estimates_split({filter_zeros: true, as_tuple: true, col: last_year_col}) );
 
-    _.each(estimates_years, yr=> { add("tabled_"+yr, q.sum(yr+"_estimates")) } );
+    _.each(estimates_years, yr=> { add("tabled_"+yr, q.sum(yr+"_estimates")); } );
     
     add({
       "key": "voted_percent_est_in_year" ,

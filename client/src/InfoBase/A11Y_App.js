@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router';
 import { initialize_analytics } from '../core/analytics.js';
 
-import { ensure_linked_stylesheets_load, retrying_react_lazy } from './common_app_component_utils.js'
+import { ensure_linked_stylesheets_load, retrying_react_lazy } from './common_app_component_utils.js';
 
 export const app_reducer = (state={ lang: window.lang }, { type, payload }) => {
   //doesn't do anything yet...

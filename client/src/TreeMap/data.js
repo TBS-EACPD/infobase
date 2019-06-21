@@ -22,11 +22,11 @@ function has_non_zero_or_non_zero_children(node, perspective = "drf") {
 }
 
 function header_col(perspective, year) {
-  if (!year) { year = "pa_last_year" }; // this should never happen but want to avoid an error in data.js
+  if (!year) { year = "pa_last_year"; }; // this should never happen but want to avoid an error in data.js
   if (perspective === "drf" || perspective === "tp" || perspective === "vote_stat") {
-    return `{{${year}}}${year.startsWith("pa_") ? 'exp' : ''}` // ignore auth
+    return `{{${year}}}${year.startsWith("pa_") ? 'exp' : ''}`; // ignore auth
   } else if (perspective === "ftes" || perspective === "so") {
-    return `{{${year}}}`
+    return `{{${year}}}`;
   }
   return;
 }
@@ -46,21 +46,21 @@ function group_smallest(node_list, node_creator, should_recurse = true, perc_cut
   const cutoff = (
     total * perc_cutoff
   ); //TODO: modify cutoff based on screenWidth, mobile should have more nesting for visibility...
-  let tiny_nodes = _.filter(node_list, ({ size }) => size < cutoff)
+  let tiny_nodes = _.filter(node_list, ({ size }) => size < cutoff);
 
   // we want to avoid making another level to the hierarchy if unnecessary
   if (tiny_nodes.length > 3) {
     const new_node = node_creator(tiny_nodes);
 
-    new_node.amount = _.sumBy(tiny_nodes, "amount")
-    new_node.ftes = _.sumBy(tiny_nodes, "ftes")
-    new_node.size = _.sumBy(tiny_nodes, "size")
+    new_node.amount = _.sumBy(tiny_nodes, "amount");
+    new_node.ftes = _.sumBy(tiny_nodes, "ftes");
+    new_node.size = _.sumBy(tiny_nodes, "size");
     new_node.is_negative = new_node.amount < 0;
 
     if (new_node.size < cutoff && should_adjust_size) {
       const old_size = new_node.size;
       _.set(new_node, 'size', cutoff);
-      _.each(new_node.children, child => { recurse_adjust_size(child, cutoff / old_size) });
+      _.each(new_node.children, child => { recurse_adjust_size(child, cutoff / old_size); });
     }
 
     if (should_recurse) {
@@ -78,7 +78,7 @@ function group_smallest(node_list, node_creator, should_recurse = true, perc_cut
     tiny_nodes = _.each(tiny_nodes, function (item) {
       const old_size = item.size;
       _.set(item, 'size', cutoff);
-      _.each(item.children, child => { recurse_adjust_size(child, cutoff / old_size) });
+      _.each(item.children, child => { recurse_adjust_size(child, cutoff / old_size); });
     });
 
     return old_node_list.concat(tiny_nodes);
@@ -90,14 +90,14 @@ function group_smallest(node_list, node_creator, should_recurse = true, perc_cut
 function recurse_adjust_size(node, parent_ratio) {
   const new_size = node.size * parent_ratio;
   _.set(node, 'size', new_size);
-  _.each(node.children, child => { recurse_adjust_size(child, new_size / node.amount) });
+  _.each(node.children, child => { recurse_adjust_size(child, new_size / node.amount); });
 }
 
 
 function prep_nodes(node, perspective, get_changes) {
   const { children } = node;
   if (!_.isEmpty(children)) {
-    _.each(children, child => { prep_nodes(child, perspective, get_changes) });
+    _.each(children, child => { prep_nodes(child, perspective, get_changes); });
     if (!node.amount) {
       node.amount = _.sumBy(children, "amount");
     }
@@ -120,7 +120,7 @@ function prep_nodes(node, perspective, get_changes) {
     _.each(children, n => {
       _.set(n, "parent_amount", node.amount);
       _.set(n, "parent_name", node.name);
-      if (node.ftes) { _.set(n, "parent_ftes", node.ftes) };
+      if (node.ftes) { _.set(n, "parent_ftes", node.ftes); };
     });
   } else {
     //leaf node, already has amount but no size
@@ -137,7 +137,7 @@ export async function load_data() {
 }
 
 function spending_change_year_split(year_string) {
-  return year_string.split(":")
+  return year_string.split(":");
 }
 
 export function get_data(perspective, year, filter_var, get_changes) {
@@ -189,7 +189,7 @@ function get_data_drf(perspective, year, year_1, year_2, filter_var, get_changes
                   name: prog.fancy_name,
                   amount: program_spending_table.q(prog).sum(header_col("drf", year)),
                   ftes: program_ftes_table.q(prog).sum(header_col("ftes", year)) || 0, // if NA 
-                }
+                };
             })
             .filter(n => has_non_zero_or_non_zero_children(n, perspective))
             .value(),
@@ -201,7 +201,7 @@ function get_data_drf(perspective, year, year_1, year_2, filter_var, get_changes
     .value();
   const data = _.concat(
     _.chain(orgs)
-      .filter(o => { return o.subject.ministry })
+      .filter(o => { return o.subject.ministry; })
       .groupBy('subject.ministry.name')
       .toPairs()
       .map(([min_name, orgs]) => (
@@ -211,9 +211,9 @@ function get_data_drf(perspective, year, year_1, year_2, filter_var, get_changes
         }
       ))
       .value(),
-    _.filter(orgs, o => { return !o.subject.ministry })
+    _.filter(orgs, o => { return !o.subject.ministry; })
   );
-  if (data.length == 0){return data}
+  if (data.length == 0){return data;}
   const root = {
     name: "Government",
     children: data,
@@ -266,7 +266,7 @@ function get_data_so(perspective, year, year_1, year_2, filter_var, get_changes)
     .value();
   const data = _.concat(
     _.chain(all_orgs)
-      .filter(o => { return o.subject.ministry })
+      .filter(o => { return o.subject.ministry; })
       .groupBy('subject.ministry.name')
       .toPairs()
       .map(([min_name, orgs]) => (
@@ -276,9 +276,9 @@ function get_data_so(perspective, year, year_1, year_2, filter_var, get_changes)
         }
       ))
       .value(),
-    _.filter(all_orgs, o => { return !o.subject.ministry })
+    _.filter(all_orgs, o => { return !o.subject.ministry; })
   );
-  if (data.length == 0){return data}
+  if (data.length == 0){return data;}
   const data_root = {
     name: "Government",
     children: data,
@@ -318,7 +318,7 @@ function get_data_tp(perspective, year, year_1, year_2, filter_var, get_changes)
     .value();
   const data = _.concat(
     _.chain(all_orgs)
-      .filter(o => { return o.subject.ministry })
+      .filter(o => { return o.subject.ministry; })
       .groupBy('subject.ministry.name')
       .toPairs()
       .map(([min_name, orgs]) => (
@@ -328,9 +328,9 @@ function get_data_tp(perspective, year, year_1, year_2, filter_var, get_changes)
         }
       ))
       .value(),
-    _.filter(all_orgs, o => { return !o.subject.ministry })
+    _.filter(all_orgs, o => { return !o.subject.ministry; })
   );
-  if (data.length == 0){return data}
+  if (data.length == 0){return data;}
   const root = {
     name: "Government",
     children: data,
@@ -378,7 +378,7 @@ function get_data_vs(perspective, year, year_1, year_2, filter_var, get_changes)
     .value();
   const data = _.concat(
     _.chain(orgs)
-      .filter(o => { return o.subject.ministry })
+      .filter(o => { return o.subject.ministry; })
       .groupBy('subject.ministry.name')
       .toPairs()
       .map(([min_name, orgs]) => (
@@ -388,9 +388,9 @@ function get_data_vs(perspective, year, year_1, year_2, filter_var, get_changes)
         }
       ))
       .value(),
-    _.filter(orgs, o => { return !o.subject.ministry })
+    _.filter(orgs, o => { return !o.subject.ministry; })
   );
-  if (data.length == 0){return data}
+  if (data.length == 0){return data;}
   const root = {
     name: "Government",
     children: data,

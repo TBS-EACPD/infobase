@@ -1,1 +1,1 @@
-export const panel_context = React.createContext(null)
+export const panel_context = React.createContext(null);

@@ -12,7 +12,7 @@ Tooltip._scheduleShow = function (reference, delay, options /*, evt */) {
   } else {
     this._showTimeout = window.setTimeout(() => this._show(reference, options), computedDelay);
   }
-}
+};
 Tooltip._scheduleHide = function (reference, delay, options, evt) {
   this._isOpening = false;
 
@@ -38,7 +38,7 @@ Tooltip._scheduleHide = function (reference, delay, options, evt) {
     }
 
     this._hide(reference, options);
-  }
+  };
 
   // defaults to 0
   const computedDelay = delay && delay.hide || delay || 0;
@@ -48,7 +48,7 @@ Tooltip._scheduleHide = function (reference, delay, options, evt) {
   } else {
     window.setTimeout(cleanup_and_hide, computedDelay);
   }
-}
+};
 
 const body = document.body;
 const app = document.querySelector('#app');
@@ -72,11 +72,11 @@ const tt_params_from_node = (node) => {
     <div class="tooltip" role="tooltip">
       <div class="tooltip-arrow ${node.getAttribute('data-ibtt-arrowselector') || ''}"></div>
       <div class="tooltip-inner ${node.getAttribute('data-ibtt-innerselector') || ''}"></div>
-    </div>`
+    </div>`;
   }
 
   return tt_obj;
-}
+};
 
 const TooltipActivator = _.isUndefined(MutationObserver) ?
   _.constant(false) :

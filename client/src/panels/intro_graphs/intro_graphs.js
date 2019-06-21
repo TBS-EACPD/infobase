@@ -55,7 +55,7 @@ const curried_render = ({ q_a_keys, omit_name_item }) => function ({ calculation
       </AutoAccordion>
     </div>
     }
-  </MediaQuery>
+  </MediaQuery>;
 };
 
 const shouldAddOrgNameItem = subject => subject.is('dept') && subject.applied_title && subject.name !== subject.applied_title;
@@ -102,7 +102,7 @@ _.each(['gov', 'dept', 'program', 'crso'], lvl => {
         'what_are_DPs_and_DRRs',
       ],
     }),
-  })
+  });
 });
 
 _.each(['gov', 'dept'], lvl => {

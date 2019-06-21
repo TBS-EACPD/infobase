@@ -1,4 +1,4 @@
-import * as color_defs from './color_defs.js'
+import * as color_defs from './color_defs.js';
 
 const newIBCategoryColors = [
   "#206BBD", // blue
@@ -8,7 +8,7 @@ const newIBCategoryColors = [
   "#a2d173", // light green
   "#15918b", // dark teal
   color_defs.tertiaryColor, // grey
-]
+];
 
 // for contrast against dark text
 const newIBLightCategoryColors = [
@@ -18,7 +18,7 @@ const newIBLightCategoryColors = [
   "#8D98D3", // purple
   "#a2d173", // light green
   "#CCD3DB", // grey
-]
+];
 
 // for contrast against pale text
 const newIBDarkCategoryColors = [
@@ -28,7 +28,7 @@ const newIBDarkCategoryColors = [
   "#554A9E", // purple
   "#1B793A", // green
   "#555B62", // grey
-]
+];
 
 // sequential colour schemes
 // dark text has sufficient contrast on the _last three_ colours only
@@ -39,7 +39,7 @@ const sequentialBlues = [
   "#7BA8D9",
   "#4C89CC",
   "#206BBD",
-]
+];
 
 const sequentialReds = [
   "#FFD2D1",
@@ -47,7 +47,7 @@ const sequentialReds = [
   "#F78D8C",
   "#DB5E5C",
   "#DA3A38",
-]
+];
 
 const sequentialGreens = [
   "#D1FFE0",
@@ -55,7 +55,7 @@ const sequentialGreens = [
   "#7DD49A",
   "#4FBF74",
   "#23A14D",
-]
+];
 
 const sequentialPurples = [
   "#E9D1FF",
@@ -63,7 +63,7 @@ const sequentialPurples = [
   "#B68FD9",
   "#9860CC",
   "#673C8F",
-]
+];
 
 // this is here instead of in color_defs.js because it's a data-dependent color
 const NA_color = _.last(newIBCategoryColors); // color_defs.tertiaryColor

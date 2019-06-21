@@ -26,7 +26,7 @@ import { PanelGraph } from '../core/PanelGraph';
 
 
 function url_template(subject, graph){
-  return `/graph/${subject.level}/${graph.key}/${subject.id}`
+  return `/graph/${subject.level}/${graph.key}/${subject.id}`;
 }
 
 const defaultSubjectKeys = {
@@ -59,7 +59,7 @@ const getSubj = (level, id) => {
   }
   return subject;
 
-}
+};
 
 // Bring back footnotes inventory ??
 // const link_to_footnotes = ( graph_key, level) => `#footnotes/graph/${graph_key}/${level}`;
@@ -82,7 +82,7 @@ function graphs_of_interest(graph){
     .map()
     .difference([ graph, ...similar_dependencies ])
     .sortBy('key')
-    .value()
+    .value();
 
   return { same_key, similar_dependencies, rest };
 }
@@ -118,7 +118,7 @@ const get_derived_props = props => {
     panel: get_graph_obj(props),
     related_graphs: get_related_graphs(props), 
   };
-}
+};
 
 
 const RelatedInfo = ({ subject, panel, related_graphs }) => {
@@ -174,8 +174,8 @@ const RelatedInfo = ({ subject, panel, related_graphs }) => {
         )}
       </tbody>
     </table>
-  </div>
-}
+  </div>;
+};
 
 const PanelTableRow = ({ current_subject, panel, className }) => {
   const url = (
@@ -217,7 +217,7 @@ export default class GraphInventory extends React.Component {
       footnotes_for: subject,
     }).then(()=>{
       this.setState({loading: false});
-    })
+    });
   }
   static getDerivedStateFromProps(nextProps, prevState){
     const old_derived_props = prevState.derived_props;
@@ -294,7 +294,7 @@ export default class GraphInventory extends React.Component {
           }} />
         </div>
 
-      </div>
+      </div>;
     }
 
     return (
@@ -334,6 +334,6 @@ class TestSubjectLinks extends React.Component {
         <div><Link to={href_template(Program.lookup("LAC-LJO00"), panel)}>LAC-LJO00 ({tm("small_numbers")})</Link></div>
         <div><Link to={href_template(Program.lookup("NCC-BSN00"), panel)}>NCC-BSN00 (crown)</Link></div>
       </div>
-    )
+    );
   }
 }

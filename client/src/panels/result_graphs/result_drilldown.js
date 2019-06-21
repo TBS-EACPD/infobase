@@ -106,9 +106,9 @@ const get_non_col_content_func = createSelector(
           }
         </div>
       );
-    }
+    };
   }
-)
+);
 
 const get_children_grouper = createSelector(
   _.identity,
@@ -128,7 +128,7 @@ const get_children_grouper = createSelector(
           node_group,
         }))
         .value();
-    }
+    };
   }
 );
 
@@ -177,18 +177,18 @@ const get_col_defs = createSelector(
                 } 
               />
             </div>
-          )
+          );
         },
         width: 200,
         textAlign: "right",
       },
     ];
   }
-)
+);
 
 class SingleSubjExplorer extends React.Component {
   constructor(){
-    super()
+    super();
     this.state = { query: "" };
     this.debounced_set_query = _.debounce(this.debounced_set_query, 500);
   }
@@ -396,7 +396,7 @@ const map_state_to_props_from_memoized_funcs = memoized_funcs => {
     ...mapRootStateToRootProps(state),
     ...get_scheme_props(state),
   });
-}
+};
 
 
 
@@ -493,7 +493,7 @@ _.each(['program','dept','crso'], lvl => {
           !_.isNull(subject_result_counts[count_key]) && 
           subject_result_counts[count_key] > 0
         );
-      }
+      };
 
       const docs_with_data = _.chain(result_docs)
         .keys()

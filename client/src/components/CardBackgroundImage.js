@@ -31,6 +31,6 @@ const CardBackgroundImage = ({
       </div>
     </div>
   </a>
-)
+);
 
-export { CardBackgroundImage }
+export { CardBackgroundImage };

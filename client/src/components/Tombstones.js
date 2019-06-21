@@ -1,4 +1,4 @@
-import './Tombstones.scss'
+import './Tombstones.scss';
 
 import { Fragment } from 'react';
 

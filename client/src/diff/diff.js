@@ -7,7 +7,7 @@ import {
 import diff_text from './diff.yaml';
 import result_text from '../panels/result_graphs/result_components.yaml';
 import { ensure_loaded } from '../core/lazy_loader.js';
-import { Result } from '../panels/result_graphs/results_common.js'
+import { Result } from '../panels/result_graphs/results_common.js';
 import { Subject } from '../models/subject.js';
 import { Select } from '../components/Select.js';
 import { SpinnerWrapper } from '../components/SpinnerWrapper.js';
@@ -47,37 +47,37 @@ const get_target_from_indicator = (indicator) => {
     case 'percent':
     case 'percent_range': {
       if ( /range/.test(target_type) && (target_min && target_max) ){
-        return `${text_maker("result_range_text")} ${formats[display_type_by_data_type[target_type]](target_min, {raw: true})} ${text_maker("and")} ${formats[display_type_by_data_type[target_type]](target_max, {raw: true})}`
+        return `${text_maker("result_range_text")} ${formats[display_type_by_data_type[target_type]](target_min, {raw: true})} ${text_maker("and")} ${formats[display_type_by_data_type[target_type]](target_max, {raw: true})}`;
       } else if (target_min && target_max && target_min === target_max){
-        return formats[display_type_by_data_type[target_type]](target_min, {raw: true})
+        return formats[display_type_by_data_type[target_type]](target_min, {raw: true});
       } else if (target_min && !target_max){
-        return `${text_maker("result_lower_target_text")} ${formats[display_type_by_data_type[target_type]](target_min, {raw: true})}` 
+        return `${text_maker("result_lower_target_text")} ${formats[display_type_by_data_type[target_type]](target_min, {raw: true})}`; 
       } else if (!target_min && target_max){
-        return `${text_maker("result_upper_target_text")} ${formats[display_type_by_data_type[target_type]](target_max, {raw: true})}` 
+        return `${text_maker("result_upper_target_text")} ${formats[display_type_by_data_type[target_type]](target_max, {raw: true})}`; 
       } else {
-        return text_maker('unspecified_target')
+        return text_maker('unspecified_target');
       }
     }
     case 'text': {
       if ( _.isEmpty(target_narrative) ){
-        return text_maker('unspecified_target')
+        return text_maker('unspecified_target');
       } else {
-        return target_narrative
+        return target_narrative;
       }
     }
     case 'tbd': {
       return text_maker('tbd_result_text');
     }
     default: {
-      return text_maker('unspecified_target')
+      return text_maker('unspecified_target');
     }
   }
-}
+};
 
 const format_target_string = (indicator) => {
-  const target = get_target_from_indicator(indicator)
+  const target = get_target_from_indicator(indicator);
   return target + (indicator.measure ? `(${indicator.measure})` : '');
-}
+};
 
 const process_indicators = (subject) => {
   const matched_indicators = _.chain(Result.get_all())
@@ -100,7 +100,7 @@ const process_indicators = (subject) => {
         name_diff: Diff.diffWords(indicator_pair[0].name, indicator_pair[1].name),
         methodology_diff: window.is_a11y_mode ? Diff.diffSentences(indicator_pair[0].methodology, indicator_pair[1].methodology) : Diff.diffWords(indicator_pair[0].methodology, indicator_pair[1].methodology),
         target_diff: Diff.diffWords(format_target_string(indicator_pair[0]), format_target_string(indicator_pair[1])),
-      }
+      };
     }
     const indicator = indicator_pair[0];
     return {
@@ -110,10 +110,10 @@ const process_indicators = (subject) => {
       name_diff: [indicator.name],
       methodology_diff: [indicator.methodology],
       target_diff: [format_target_string(indicator)],
-    }
+    };
   });
   return processed_indicators;
-}
+};
 
 export default class TextDiffApp extends React.Component {
   constructor(props) {
@@ -245,7 +245,7 @@ export default class TextDiffApp extends React.Component {
 
 TextDiffApp.defaultProps = {
   subject: Dept.lookup(326),
-}
+};
 
 const get_subject_from_props = (props) => {
   const {
@@ -254,13 +254,13 @@ const get_subject_from_props = (props) => {
     },
   } = props;
   if(crso_id && CRSO.lookup(crso_id)){
-    return CRSO.lookup(crso_id)
+    return CRSO.lookup(crso_id);
   }
   if (org_id && Dept.lookup(org_id)) {
-    return Dept.lookup(org_id)
+    return Dept.lookup(org_id);
   }
   return props.subject; // default
-}
+};
 
 
 const status_flag = (status, length) => {
@@ -276,24 +276,24 @@ const status_flag = (status, length) => {
       <div className="textDiff--nochange">
         {text_maker("no_diff")}
       </div>
-    )
+    );
   }
   if(status === 'dp18'){
     return (
       <div className="textDiff--indicator-removed">
         {text_maker("indicator-removed")}
       </div>
-    )
+    );
   }
   if(status === 'dp19'){
     return (
       <div className="textDiff--indicator-added">
         {text_maker("indicator-added")}
       </div>
-    )
+    );
   }
   return "";
-}
+};
 
 const indicator_report = (processed_indicator) => {
   return (
@@ -313,8 +313,8 @@ const indicator_report = (processed_indicator) => {
         no_difference(get_target_from_indicator(processed_indicator.indicator1), "indicator_target") }
       <div className="textDiff--id-tag">{`ID: ${processed_indicator.indicator1.stable_id}`}</div>
     </div>
-  )
-}
+  );
+};
 
 const no_difference = (text, key) =>
   <Fragment>
@@ -325,7 +325,7 @@ const no_difference = (text, key) =>
       {/* <div className="textDiff--nochange">{text_maker("no_diff")}</div> */}
       <div>{text}</div>
     </div>
-  </Fragment>
+  </Fragment>;
 
 const difference_report = (diff, key) =>
   <Fragment>
@@ -362,4 +362,4 @@ const difference_report = (diff, key) =>
         )}
       </div>
     </div>
-  </Fragment>
+  </Fragment>;

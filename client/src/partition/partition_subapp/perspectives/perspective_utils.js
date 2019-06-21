@@ -18,7 +18,7 @@ const get_common_popup_options = d => {
     first_column: d.depth === 1,
     focus_text: d.magnified ? text_maker("partition_unfocus_button") : text_maker("partition_focus_button"),
   };
-}
+};
 
 const wrap_in_brackets = (text) => " (" + text + ")";
 

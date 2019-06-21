@@ -168,7 +168,7 @@ export const trivial_dimension = {
   title_key: "all" ,
   include_in_report_builder: true,
   filter_func: () => ()=> text_maker('all'),
-}
+};
 
 
 export function attach_dimensions(table){
