@@ -1,11 +1,11 @@
-import './lab.scss';
+import './InfoLab.scss';
 import { StandardRouteContainer } from '../core/NavComponents.js';
 import { create_text_maker } from '../models/text.js';
 import { 
   create_text_maker_component,
   CardLeftImage,
 } from '../util_components.js';
-import lab_text from './lab.yaml';
+import lab_text from './InfoLab.yaml';
 import { get_static_url } from '../request_utils.js';
 
 

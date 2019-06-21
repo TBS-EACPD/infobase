@@ -29,8 +29,8 @@ const ReportBuilder = retrying_react_lazy( () => import('../rpb/index.js') );
 const InfoGraph = retrying_react_lazy( () => import('../infographic/infographic.js') );
 const EstimatesComparison = retrying_react_lazy( () => import('../EstimatesComparison/EstimatesComparison.js') );
 const PrivacyStatement = retrying_react_lazy( () => import('../PrivacyStatement/PrivacyStatement.js') );
-const TextDiff = retrying_react_lazy( () => import('../diff/diff.js') ); 
-const Lab = retrying_react_lazy( () => import('../lab/lab.js') ); 
+const TextDiff = retrying_react_lazy( () => import('../diff/TextDiff.js') ); 
+const Lab = retrying_react_lazy( () => import('../lab/InfoLab.js') ); 
 
 export class App extends React.Component {
   constructor(){

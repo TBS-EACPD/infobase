@@ -1,10 +1,10 @@
-import './diff.scss';
+import './TextDiff.scss';
 import { StandardRouteContainer } from '../core/NavComponents.js';
 import { create_text_maker } from '../models/text.js';
 import { 
   create_text_maker_component,
 } from '../util_components.js';
-import diff_text from './diff.yaml';
+import diff_text from './TextDiff.yaml';
 import result_text from '../panels/result_graphs/result_components.yaml';
 import { ensure_loaded } from '../core/lazy_loader.js';
 import { Result } from '../panels/result_graphs/results_common.js';
@@ -14,6 +14,7 @@ import { SpinnerWrapper } from '../components/SpinnerWrapper.js';
 import * as Diff from 'diff';
 import { Fragment } from 'react';
 import { formats } from '../core/format.js';
+import { result_docs } from '../models/results.js';
 
 const { Dept, CRSO, Program } = Subject;
 
@@ -91,7 +92,7 @@ const process_indicators = (subject) => {
     .map(pair => _.sortBy(pair, "doc"))
     .value();
 
-  const processed_indicators = _.map(matched_indicators, (indicator_pair, ix) => {
+  const processed_indicators = _.map(matched_indicators, (indicator_pair) => {
     if (indicator_pair.length===2){
       return {
         status: 'both',
@@ -135,7 +136,7 @@ export default class TextDiffApp extends React.Component {
     ensure_loaded({
       subject,
       results: true,
-      result_docs: ['dp19','dp18'],
+      result_docs: _.chain(result_docs).keys().filter( doc => /^dp[0-9]+/ ).takeRight(2).value(),
     })
       .then( () => {
         const processed_indicators = process_indicators(subject);
@@ -166,7 +167,7 @@ export default class TextDiffApp extends React.Component {
       ensure_loaded({
         subject,
         results: true,
-        result_docs: ['dp19','dp18'],
+        result_docs: _.chain(result_docs).keys().filter( doc => /^dp[0-9]+/ ).takeRight(2).value(),
       })
         .then( () => {
           const processed_indicators = process_indicators(subject);
@@ -263,29 +264,29 @@ const get_subject_from_props = (props) => {
 };
 
 
-const status_flag = (status, length) => {
-  if(length > 1){
+const get_status_flag = (indicator_status, num_texts) => {
+  if(num_texts > 1){
     return (
       <div className="text-diff__indicator-status--change">
         {text_maker("words_changed")}
       </div>
     );
   }
-  if (status === 'both'){
+  if (indicator_status === 'both'){
     return (
       <div className="text-diff__indicator-status--nochange">
         {text_maker("no_diff")}
       </div>
     );
   }
-  if(status === 'dp18'){
+  if(indicator_status === 'dp18'){
     return (
       <div className="text-diff__indicator-status--removed">
         {text_maker("indicator-removed")}
       </div>
     );
   }
-  if(status === 'dp19'){
+  if(indicator_status === 'dp19'){
     return (
       <div className="text-diff__indicator-status--added">
         {text_maker("indicator-added")}
@@ -301,7 +302,7 @@ const indicator_report = (processed_indicator) => {
       <h4>
         {processed_indicator.indicator2.name}
       </h4>
-      {status_flag(processed_indicator.status, _.max([processed_indicator.name_diff.length, processed_indicator.methodology_diff.length, processed_indicator.target_diff.length]))}
+      {get_status_flag(processed_indicator.status, _.max([processed_indicator.name_diff.length, processed_indicator.methodology_diff.length, processed_indicator.target_diff.length]))}
       { processed_indicator.name_diff.length > 1 ?
         difference_report(processed_indicator.name_diff, "indicator_name") :
         no_difference(processed_indicator.indicator1.name, "indicator_name") }
