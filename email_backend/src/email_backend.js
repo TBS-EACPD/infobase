@@ -132,12 +132,12 @@ const make_email_backend = (templates) => {
           console.log(`Test mail URL: ${nodemailer.getTestMessageUrl(sent_mail_info)}`);
         }
 
-        const mail_sent_successully = ( 
+        const mail_sent_successfully = ( 
           sent_mail_info && 
           /^2[0-9][0-9]/.test(sent_mail_info.response) && 
           _.isEmpty(sent_mail_info.rejected)
         );
-        if (mail_sent_successully){
+        if (mail_sent_successfully){
           response.send("200");
         } else {
           const error_message = `Internal Server Error: mail was unable to send. ${ 

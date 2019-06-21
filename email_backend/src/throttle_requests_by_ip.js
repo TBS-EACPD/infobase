@@ -12,7 +12,7 @@ const throttle_requests_by_ip = (ip) => {
 
     const too_many_request = log.requests > 3;
 
-    const still_in_timeout = Date.now() - log.time_of_last_accepted_request < timeout_window;
+    const still_in_timeout = Date.now() - log.time_of_last_accepted_request < TIMEOUT_WINDOW;
 
     if (too_many_request && still_in_timeout){
       this_ip_is_in_timeout = true;
