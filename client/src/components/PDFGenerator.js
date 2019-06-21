@@ -12,7 +12,7 @@ import * as html2canvas from 'html2canvas';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
-const { text_maker, TM } = create_text_maker_component(text);
+const { text_maker } = create_text_maker_component(text);
 
 export class PDFGenerator extends React.Component{
   constructor(props){
