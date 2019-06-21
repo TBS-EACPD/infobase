@@ -1,4 +1,3 @@
-//import { Spinner } from '../core/Spinner.js';
 import '../components/LeafSpinner.scss';
 import leaf_loading_spinner from '../svg/leaf-loading-spinner.svg';
 
@@ -17,11 +16,9 @@ export default function(){
 
   app_el.appendChild(containerDiv);
   
-  //spinner.spin(app_el);
   app_el.setAttribute('aria-busy', 'true');
 
   return function stop(){
-    //spinner.stop();
     app_el.removeChild(containerDiv);
     app_el.removeAttribute('aria-busy');
   };

@@ -1,32 +1,24 @@
 @import "../common_css/common-variables";
 
-.faded-loading-container--true {
-  left: 50%;
-  margin-left:-100px;
-  top: 50%;
-  margin-top: -100px;
-  position: fixed;
-  height: 200px;
-  width: 200px;
-  background-color: rgba(255, 255, 255, 0.7);
-  z-index: 9999;
-  border-radius: 50%;
-}
-
-.faded-loading-container--false {
-  position: relative;
-}
-
 .leaf-spinner-container{
     left: 50%;
     margin-left:-50px;
     top: 50%;
     margin-top: -50px;
     z-index: 9000;
-    width: 100px;
-    height:100px;
 }
 
+.faded-background--true {
+  width: 100px;
+  height:100px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.faded-background--false {
+  width: 100px;
+  height:100px;
+}
 
 .leaf-spinner-outer-circle {
   -webkit-animation: leaf-spinner-rotate-reverse 2s linear infinite ;

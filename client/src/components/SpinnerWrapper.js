@@ -6,7 +6,7 @@ export class SpinnerWrapper extends React.Component {
   render(){ 
     return !this.props.use_leaf_spinner ? 
       <div ref="main" /> : 
-      <LeafSpinner config_name={this.props.config_name} faded={this.props.faded} />;
+      <LeafSpinner config_name={this.props.config_name} />;
   }
 
   componentDidMount(){ 
@@ -23,17 +23,11 @@ export class SpinnerWrapper extends React.Component {
     if (!use_leaf_spinner) {
       this.refs.main.appendChild( new Spinner(config).spin().el );
     }
-
-    
-
-    //css(document.documentElement, {backgroundColor: 'red'}) ;
   }
 
-  
 }
 
 SpinnerWrapper.defaultProps = {
-  faded: true,
   scale: 2,
   use_leaf_spinner: true,
 }

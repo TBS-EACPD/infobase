@@ -262,7 +262,7 @@ class BudgetMeasurePanel extends React.Component {
       <Fragment>
         { loading &&
           <div style={{position: "relative", height: "80px", marginBottom: "-10px"}}>
-            <SpinnerWrapper config_name={"tabbed_panel"} faded={false} />
+            <SpinnerWrapper config_name={"tabbed_panel"} />
           </div>
         }
         { !loading &&

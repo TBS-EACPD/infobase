@@ -1,9 +1,7 @@
 import './LeafSpinner.scss';
 import leaf_loading_spinner from '../svg/leaf-loading-spinner.svg';
 
-export const LeafSpinner = ({config_name, faded}) => {
-
-  const topOffset = faded ? document.getElementById('ib-site-header-area').offsetHeight : null;
+export const LeafSpinner = ({config_name}) => {
 
   const leaf_spinner_configs = {
     initial: {
@@ -32,15 +30,18 @@ export const LeafSpinner = ({config_name, faded}) => {
   };
 
   let loader = leaf_loading_spinner;
+  let setPosition = '';
   
   if (config_name === 'small_inline') {
-    loader = leaf_loading_spinner.replace('stroke="#26374A"', 'stroke="#FFF"');
-    loader = loader.replace('stroke="#2C70C9"', 'stroke="#FFF"');
+    loader = leaf_loading_spinner.replace(`stroke="${window.infobase_color_constants.primaryColor}"`, 'stroke="#FFF"');
+    loader = loader.replace(`stroke="${window.infobase_color_constants.secondaryColor}"`, 'stroke="#FFF"');
     loader = loader.replace('fill="#FF0000"', 'fill="#FFF"');
+    loader = loader.replace('faded-background--true', 'faded-background--false');
+    setPosition = 'relative';
   }
 
   return (
-    <div className={`faded-loading-container--${faded}`}>
+    <div style={{position: setPosition}}>
       <div 
         className="leaf-spinner-container" 
         style={leaf_spinner_configs[config_name]}
