@@ -27,7 +27,7 @@ describe("End-to-end tests for email_backend endpoints", () => {
   const test_template_name = "test_template";
   const completed_test_template = {
     meta: {
-      subject_template: "Test subject: [${enums}], ${number}", //Update this once I decide what these templates should look like
+      subject_template: "Test subject: [${enums}], ${number}",
     },
   
     enums: ["bug", "other"],
