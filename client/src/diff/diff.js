@@ -22,20 +22,6 @@ const { TM } = create_text_maker_component([diff_text, result_text]);
 const text_maker = create_text_maker([diff_text, result_text]);
 
 
-const get_subject_from_props = (props) => {
-  const {
-    match: {
-      params: { org_id, crso_id },
-    },
-  } = props;
-  if(crso_id && CRSO.lookup(crso_id)){
-    return CRSO.lookup(crso_id)
-  }
-  if (org_id && Dept.lookup(org_id)) {
-    return Dept.lookup(org_id)
-  }
-  return props.subject; // default
-}
 
 const get_target_from_indicator = (indicator) => {
   const {
@@ -132,17 +118,20 @@ const process_indicators = (subject) => {
 export default class TextDiffApp extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
+      first_load: true,
       loading: true,
       subject: get_subject_from_props(props),
     };
   }
 
   componentDidMount(){
-    const { 
+    const {
       subject,
     } = this.state;
-  
+
+
     ensure_loaded({
       subject,
       results: true,
@@ -150,16 +139,18 @@ export default class TextDiffApp extends React.Component {
     })
       .then( () => {
         const processed_indicators = process_indicators(subject);
-        this.setState({subject: subject, loading: false, processed_indicators: processed_indicators});
+        this.setState({first_load: false, subject: subject, loading: false, processed_indicators: processed_indicators});
       });
+
   }
 
   static getDerivedStateFromProps(props, state){
     const {
+      first_load,
       subject,
     } = state;
 
-    const should_load = get_subject_from_props(props) !== subject;
+    const should_load = first_load || get_subject_from_props(props) !== subject;
     const new_subject = should_load ? get_subject_from_props(props) : subject;
     return {loading: should_load, subject: new_subject};
   }
@@ -255,6 +246,22 @@ export default class TextDiffApp extends React.Component {
 TextDiffApp.defaultProps = {
   subject: Dept.lookup(326),
 }
+
+const get_subject_from_props = (props) => {
+  const {
+    match: {
+      params: { org_id, crso_id },
+    },
+  } = props;
+  if(crso_id && CRSO.lookup(crso_id)){
+    return CRSO.lookup(crso_id)
+  }
+  if (org_id && Dept.lookup(org_id)) {
+    return Dept.lookup(org_id)
+  }
+  return props.subject; // default
+}
+
 
 const status_flag = (status, length) => {
   if(length > 1){
