@@ -86,7 +86,13 @@ class Panel_ extends React.Component {
           <header className="panel-title"> {title} </header>
           <div style={{marginLeft: 'auto'}}>
             { context && 
-              <PDFGenerator target_id={context.graph_key} file_name={file_name} title={title} link={panel_link}/>
+              <PDFGenerator 
+                target_id={context.graph_key}
+                file_name={file_name}
+                title={title}
+                link={panel_link}
+                download_button_class_name={"panel-heading-utils panel-heading-btn"}
+              />
             }
             { context && !context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) && 
               <a href={panel_href_template(context.subject, context.bubble, context.graph_key)}>

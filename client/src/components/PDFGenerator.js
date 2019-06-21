@@ -1,11 +1,10 @@
-import text from './panel_base_text.yaml';
+import text from './PDFGenerator.yaml';
 import { get_static_url } from '../request_utils.js';
 import { log_standard_event } from '../core/analytics.js';
 import { 
   create_text_maker_component,
   SpinnerWrapper,
 } from '../util_components.js';
-import './panel-components.scss';
 
 import * as qrcode from 'qrcode-generator';
 import * as html2canvas from 'html2canvas';
@@ -92,7 +91,7 @@ export class PDFGenerator extends React.Component{
         this.current_height += 11;
         pdf.setFontStyle('normal');
         pdf.setFontSize(10);
-        pdf.text(`${text_maker("a11y_retrieved_date")} ${date_fmt}`, (width/2)-25, this.current_height);
+        pdf.text(`${text_maker("pdf_retrieved_date")} ${date_fmt}`, (width/2)-25, this.current_height);
       }
       if(link){
         const qr = qrcode(0, 'L');
@@ -220,24 +219,26 @@ export class PDFGenerator extends React.Component{
 
   render(){
     const { generating_pdf } = this.state;
+    const { download_button_class_name } = this.props;
     return(
       <div style={{display: 'inline'}}>
         {!window.feature_detection.is_IE() && !generating_pdf &&
-        <button
-          onClick={ () => this.setState({generating_pdf: true}) }
-          className='panel-heading-utils panel-heading-btn'>
-          <img
-            src={get_static_url('svg/download.svg')}
-            className='button-img'
-            alt={text_maker("a11y_download_panel")}
-            title={text_maker("a11y_download_panel")}/>
-        </button>
+          <button
+            onClick={ () => this.setState({generating_pdf: true}) }
+            className={download_button_class_name}
+          >
+            <img
+              src={get_static_url('svg/download.svg')}
+              className='button-img'
+              alt={text_maker("download_pdf")}
+              title={text_maker("download_pdf")}/>
+          </button>
         } 
         {!window.feature_detection.is_IE() && generating_pdf &&
           <SpinnerWrapper
             config_name={"small_inline"}
-            title={text_maker("a11y_downloading_panel")}
-            alt={text_maker("a11y_downloading_panel")}
+            title={text_maker("downloading_pdf")}
+            alt={text_maker("downloading_pdf")}
           />
         }
       </div>

@@ -1,0 +1,11 @@
+download_pdf:
+  en: Download this to PDF
+  fr: Téléchargez la version PDF
+
+downloading_pdf:
+  en: Downloading PDF in progress...
+  fr: Téléchargement de la version PDF en cours…
+
+a11y_retrieved_date:
+  en: Retrieved on
+  fr: Récupéré le
