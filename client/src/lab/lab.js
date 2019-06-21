@@ -1,5 +1,5 @@
 import './lab.scss';
-import { BetaRouteContainer } from '../core/NavComponents.js';
+import { StandardRouteContainer } from '../core/NavComponents.js';
 import { create_text_maker } from '../models/text.js';
 import { 
   create_text_maker_component,
@@ -20,12 +20,12 @@ export default class InfoLab extends React.Component {
   
   render() {
     return (
-      <BetaRouteContainer
+      <StandardRouteContainer
         title={text_maker("lab_title")}
         breadcrumbs={[text_maker("lab_title")]}
         //description={} TODO
         route_key="_lab"
-        beta_banner_content={text_maker("beta_banner_content")}
+        beta={true}
       >
         <TM k="lab_title" el="h1" />
         <div>
@@ -51,7 +51,7 @@ export default class InfoLab extends React.Component {
             />
           </div>
         </div>
-      </BetaRouteContainer>
+      </StandardRouteContainer>
     );
   }
 

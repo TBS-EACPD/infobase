@@ -1,5 +1,5 @@
 import './diff.scss';
-import { BetaRouteContainer } from '../core/NavComponents.js';
+import { StandardRouteContainer } from '../core/NavComponents.js';
 import { create_text_maker } from '../models/text.js';
 import { 
   create_text_maker_component,
@@ -192,12 +192,12 @@ export default class TextDiffApp extends React.Component {
     const current_dept = subject.level === 'dept' ? subject : subject.dept;
 
     return (
-      <BetaRouteContainer
+      <StandardRouteContainer
         title={text_maker("diff_title")}
         breadcrumbs={[text_maker("diff_title")]}
         //description={} TODO
         route_key="_diff"
-        beta_banner_content={text_maker("beta_banner_content")}
+        beta={true}
       >
         <TM k="diff_title" el="h1" />
         <div className="textDiff--instructions">
@@ -238,7 +238,7 @@ export default class TextDiffApp extends React.Component {
           <div>
             {_.map(processed_indicators, processed_indicator => indicator_report(processed_indicator) )}
           </div>}
-      </BetaRouteContainer>
+      </StandardRouteContainer>
     );
   }
 }
