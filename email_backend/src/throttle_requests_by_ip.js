@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const timeout_window = process.env.IS_PROD_SERVER ? 60000 : 999;
+const TIMEOUT_WINDOW = process.env.IS_PROD_SERVER ? 60000 : 999;
 
 const recent_ip_log = {};
 const throttle_requests_by_ip = (ip) => {
