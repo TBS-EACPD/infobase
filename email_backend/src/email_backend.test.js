@@ -24,7 +24,7 @@ describe("End-to-end tests for email_backend endpoints", () => {
     { validateStatus: _.constant(true) } // Don't throw errors on ANY status values, will be intentionally getting some 400's
   );
 
-  const test_template_name = "test_template";
+  const test_template_name = "test_template.test";
   const completed_test_template = {
     meta: {
       subject_template: "Test subject: [${enums}], ${number}",
@@ -54,7 +54,7 @@ describe("End-to-end tests for email_backend endpoints", () => {
     return expect(bad_template_name_status).toBe(400);
   });
   it("/email_template returns a non-empty object when given a valid template_name", async () => {
-    const { data: template } = await make_email_template_request( test_template_name );
+    const { data: template } = await make_email_template_request(test_template_name);
 
     const template_is_valid = template && _.isObject(template) && !_.isEmpty(template);
 
@@ -73,7 +73,7 @@ describe("End-to-end tests for email_backend endpoints", () => {
       // Check if Ethereal can be reached to test mail sending, this test will be skipped (passingly) if it can't be
       await nodemailer.createTestAccount();
     } catch(error){
-      if (/getaddrinfo/.test(error)){
+      if ( /getaddrinfo/.test(error) ){
         // eslint-disable-next-line no-console
         console.log("Didn't run end-to-end test on /submit_email because Ethereal could not be reached to mock sending mail.");
         return expect("Oops, this is flaky").toEqual("Oops, this is flaky");

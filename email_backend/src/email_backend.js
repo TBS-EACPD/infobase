@@ -65,7 +65,12 @@ const make_email_backend = (templates) => {
 
   email_backend.get(
     '/email_template_names',
-    (request, response) => response.status("200").send( _.keys(templates) )
+    (request, response) => response.status("200").send( 
+      _.chain(templates)
+        .keys()
+        .filter( (template_name) => !/\.test$/.test(template_name) )
+        .value()
+    )
   );
 
   
