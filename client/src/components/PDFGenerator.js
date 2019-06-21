@@ -14,6 +14,11 @@ import 'jspdf-autotable';
 
 const { text_maker } = create_text_maker_component(text);
 
+
+// USAGE NOTE:
+// This component is somewhat generalized, but was developed primarily for printing panels and is untested elsewhere.
+// Use with caution, and note that it already contains a lot of code for handling secial cases that occur in panels.
+// If you need to cover further special cases, do it carefully.
 export class PDFGenerator extends React.Component{
   constructor(props){
     super();
@@ -26,19 +31,21 @@ export class PDFGenerator extends React.Component{
   }
 
   componentDidUpdate(){
-    this.state.generating_pdf && this.download_panel_pdf();
+    this.state.generating_pdf && this.generate_and_download_pdf();
   }
 
-  download_panel_pdf(){
+  generate_and_download_pdf(){
     const {
       dom_element,
-      graph_key,
-      panel_link,
+      target_id,
+      link,
       include_footer,
       title,
       file_name,
     } = this.props;
-    const ss_element = !dom_element && graph_key ? document.getElementById(graph_key).getElementsByClassName("panel-body")[0] : dom_element;
+    const element_to_print = (!dom_element && target_id) ? 
+      document.getElementById(target_id).getElementsByClassName("panel-body")[0] :
+      dom_element;
 
     const today = new Date();
     const date_fmt = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
@@ -49,14 +56,20 @@ export class PDFGenerator extends React.Component{
       format: 'letter',
     });
     const width = pdf.internal.pageSize.getWidth();
-    const FOOTER_HEIGHT = panel_link || include_footer ? 27 : 0;
+    const FOOTER_HEIGHT = (link || include_footer) ? 27 : 0;
     const EXTRA_HEIGHT = 20;
     const TITLE_HEIGHT = title ? 11 : 0;
 
     const get_text_height = (pdf, text) => {
       // Getting width of the text string to estimate the height of the text (number of lines)
       const textHeight = pdf.getTextWidth(text)/25;
-      return textHeight < 10 ? 10 : textHeight > 10 && textHeight < 20 ? 20 : textHeight;
+      return (textHeight < 10) ? 
+        10 : 
+        (
+          (textHeight > 10 && textHeight < 20) ? 
+            20 : 
+            textHeight
+        );
     };
 
     const setup_pdf_title = (pdf, title, width) => {
@@ -70,7 +83,7 @@ export class PDFGenerator extends React.Component{
     };
 
     const setup_pdf_footer = (pdf, width) => {
-      if(panel_link || include_footer){
+      if(link || include_footer){
         const footerImg = new Image();
         footerImg.src = get_static_url(`png/wmms-blk.png`);
         this.current_height += 15 + EXTRA_HEIGHT;
@@ -81,9 +94,9 @@ export class PDFGenerator extends React.Component{
         pdf.setFontSize(10);
         pdf.text(`${text_maker("a11y_retrieved_date")} ${date_fmt}`, (width/2)-25, this.current_height);
       }
-      if(panel_link){
+      if(link){
         const qr = qrcode(0, 'L');
-        qr.addData(panel_link);
+        qr.addData(link);
         qr.make();
         const qrCodeImg = qr.createDataURL();
         
@@ -92,7 +105,7 @@ export class PDFGenerator extends React.Component{
 
         const langUrl = window.lang==='en' ? 'gcinfobase' : 'infobasegc';
         this.current_height += 26;
-        pdf.textWithLink(`canada.ca/${langUrl}`, 2.5, this.current_height, {url: panel_link});
+        pdf.textWithLink(`canada.ca/${langUrl}`, 2.5, this.current_height, {url: link});
       }
     };
     const pdf_end_util = (name) => {
@@ -107,7 +120,7 @@ export class PDFGenerator extends React.Component{
     if(window.is_a11y_mode){
       setup_pdf_title(pdf, title, width);
       this.current_height += 2;
-      const textElements = _.map(ss_element.querySelectorAll('p,ul'), _.identity);
+      const textElements = _.map(element_to_print.querySelectorAll('p,ul'), _.identity);
       _.forEach(textElements, (text) => {
         if(text.tagName === "UL"){
           _.forEach(_.map(text.children, _.identity), (li) => {
@@ -124,7 +137,7 @@ export class PDFGenerator extends React.Component{
         };
       });
 
-      const tables = _.map(ss_element.getElementsByTagName("table"), _.identity);
+      const tables = _.map(element_to_print.getElementsByTagName("table"), _.identity);
       _.forEach (tables, (tbl) => {
         pdf.autoTable({
           startY: this.current_height,
@@ -138,10 +151,10 @@ export class PDFGenerator extends React.Component{
       };
       pdf.save(pdf_file_name);
       pdf_end_util(title);
-    } else{
+    } else {
       // When the list of legend items are too long such that the items don't all fit into the defined max height, scroll is created to contain them.
       // Screenshotting that will cause items to overflow, hence below sets max height to a big arbitrary number which later gets set back to original.
-      const legend_container_arr = ss_element.getElementsByClassName('legend-container');
+      const legend_container_arr = element_to_print.getElementsByClassName('legend-container');
 
       const MAX_DIV_HEIGHT = "9999px";
       var oldMaxHeights = _.map(legend_container_arr, legend_container => (legend_container.style.maxHeight));
@@ -150,7 +163,7 @@ export class PDFGenerator extends React.Component{
       });
 
       // Img tags are not properly captured, hence needs to be temporarily converted to canvas for pdf purposes only
-      const imgElements = _.map(ss_element.getElementsByTagName("img"), _.identity);
+      const imgElements = _.map(element_to_print.getElementsByTagName("img"), _.identity);
       _.forEach(imgElements, (img) => {
         const parentNode = img.parentNode;
 
@@ -170,8 +183,8 @@ export class PDFGenerator extends React.Component{
         parentNode.appendChild(canvas);
       });
 
-      html2canvas(ss_element)
-        .then((canvas) => {
+      html2canvas(element_to_print)
+        .then( (canvas) => {
           const imgData = canvas.toDataURL('image/png');
           const ratio = canvas.height/canvas.width;
           const page_height = ratio * width;
@@ -201,7 +214,7 @@ export class PDFGenerator extends React.Component{
           );
 
           pdf_end_util(title);
-        });  
+        });
     };
   };
 
