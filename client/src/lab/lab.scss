@@ -4,7 +4,11 @@
 .lab-content {
     background-color: $secondaryColor;
     border-radius: 10px;
-    width: 50%;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+@media(min-width: 600px){
+    .lab-content {
+        width: 50%;
+    }
 }
