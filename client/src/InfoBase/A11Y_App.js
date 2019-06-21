@@ -30,6 +30,7 @@ const InfoGraph = retrying_react_lazy( () => import('../infographic/infographic.
 const EstimatesComparison = retrying_react_lazy( () => import('../EstimatesComparison/EstimatesComparison.js') );
 const PrivacyStatement = retrying_react_lazy( () => import('../PrivacyStatement/PrivacyStatement.js') );
 const TextDiff = retrying_react_lazy( () => import('../diff/diff.js') ); 
+const Lab = retrying_react_lazy( () => import('../lab/lab.js') ); 
 
 export class App extends React.Component {
   constructor(){
@@ -64,6 +65,7 @@ export class App extends React.Component {
               <Route path="/compare_estimates/:h7y_layout?" component={EstimatesComparison} />
               <Route path="/privacy" component={PrivacyStatement} />
               <Route path="/diff/:org_id?/:crso_id?" component={TextDiff} />
+              <Route path="/lab" component={Lab} />
               <Route path="/start/:no_basic_equiv?" component={Home} />
               <Route path="/" component={Home} />
             </Switch>

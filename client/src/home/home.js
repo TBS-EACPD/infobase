@@ -226,15 +226,6 @@ const HomeLayout = props => (
           <div className="fcol-md-4 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
-              img_src={get_static_url("svg/lab.svg")}
-              title_key="lab_home_title"
-              text_key="lab_home_text"
-              link_href="#lab"
-            />
-          </div>
-          <div className="fcol-md-4 fcol-sm-6 linkcard">
-            <CardTopImage
-              tmf={home_tm}
               img_src={get_static_url("svg/builder.svg")}
               title_key="home_build_a_report"
               text_key="report_builder_home_desc"
@@ -248,6 +239,15 @@ const HomeLayout = props => (
               title_key="glossary_home_title"
               text_key="glossary_home_desc"
               link_href="#glossary"
+            />
+          </div>
+          <div className="fcol-md-4 fcol-sm-6 linkcard">
+            <CardTopImage
+              tmf={home_tm}
+              img_src={get_static_url("svg/lab.svg")}
+              title_key="lab_home_title"
+              text_key="lab_home_text"
+              link_href="#lab"
             />
           </div>
           <div className="fcol-md-4 fcol-sm-6 linkcard">
