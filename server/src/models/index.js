@@ -7,7 +7,7 @@ import root_schema from './schema_root.js';
 import core_subject from './core_subject';
 import results from './results';
 import budget_measures from './budget_measures';
-// import resources from './finances';
+import resources from './finances';
 // import pses from './pses';
 // import sobjs from './standard_objects';
 // import people from './people';
@@ -22,7 +22,7 @@ const sub_module_defs = [
   core_subject,
   results,
   budget_measures,
-  // resources,
+  resources,
   // pses,
   // sobjs,
   // search,
