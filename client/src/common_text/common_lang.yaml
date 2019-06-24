@@ -500,7 +500,7 @@ programs:
   fr: Programmes
 program_slice:
   en: Program Slices
-  fr: Portions de Programe
+  fr: Portions de Programme
 program_slice_of:
   transform: [handlebars]
   en: |
