@@ -68,20 +68,23 @@ describe("End-to-end tests for email_backend endpoints", () => {
     return expect([bad_template_name_status, invalid_template_status]).toEqual([400, 400]);
   });
  
-  it("/submit_email returns status 200 when a valid template is submitted", async () => {
-    try {
-      // Check if Ethereal can be reached to test mail sending, this test will be skipped (passingly) if it can't be
-      await nodemailer.createTestAccount();
-    } catch(error){
-      if ( /getaddrinfo/.test(error) ){
-        // eslint-disable-next-line no-console
-        console.log("Didn't run end-to-end test on /submit_email because Ethereal could not be reached to mock sending mail.");
-        return expect("Oops, this is flaky").toEqual("Oops, this is flaky");
+  it("/submit_email returns status 200 when a valid template is submitted", 
+    async () => {
+      try {
+        // Check if Ethereal can be reached to test mail sending, this test will be skipped (passingly) if it can't be
+        await nodemailer.createTestAccount();
+      } catch(error){
+        if ( /getaddrinfo/.test(error) ){
+          // eslint-disable-next-line no-console
+          console.log("Didn't run end-to-end test on /submit_email because Ethereal could not be reached to mock sending mail.");
+          return expect("Oops, this is flaky").toEqual("Oops, this is flaky");
+        }
       }
-    }
 
-    const { status: ok } = await make_submit_email_request(test_template_name, completed_test_template);
+      const { status: ok } = await make_submit_email_request(test_template_name, completed_test_template);
 
-    return expect(ok).toBe(200);
-  });
+      return expect(ok).toBe(200);
+    },
+    10000 // longer than default timeout, had this flake because Ethereal was just a little slow
+  );
 });
