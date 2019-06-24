@@ -28,7 +28,18 @@ Responds with a status of 200 if the email was valid, was sent without error, an
 
 ## Documentation of JSON email templates
 
-TODO
+See `/templates/test_template.test.json` for an example template containing, in some combination, all possible options.
+  - There are two types of first level fields:
+    - "meta", a reserved key for additional information about the template
+      - currently the meta field only has one field under it, "subject_template". The value of subject_template is a template string with JS template string where the names of template values correspond to the names of other field keys in the json template. This string is interpolated with the corresponding values from a completed template to build the final email subject line.
+    - all other fields, which correspond to potential sections of a resulting email body. These fields have up to five sub-fields:
+      - "required": true if the field must be included for a completed template to be valid
+      - "value_type": the expected type for the completed field value, can be {string, number, json, enum}
+      - "enum_values": only used when value_type is enum, a list of value options (with display values keyed by lang)
+      - "form_type": the type of form element to be used by the client. A form_type of `false` is not displayed to the user, the client code needs to populate its value itself (for example, we want build sha's for Report a Problem, but shouldn't make the user input them manually)
+      - "form_label": the label the client should display for this form element (keyed by lang)
+
+A completed template is just a set of key-value pairs corresponding to all the fields that were completed on the client.
 
 ## Spam mitigation
 In deploy_scripts/prod_deploy_email_backend_function.sh, sets a max-instance of 1 (see Google Cloud docs on max-instances, it's in beta and has caveats). One Google Cloud Function is sufficient for our current needs, makes it easier for the backend to have a memory of who's recently sent email through it, and in the worst case acts as a capacity-based throttle on any attempt to seriously spam us.
