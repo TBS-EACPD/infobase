@@ -2,6 +2,13 @@
 
 Google Cloud Function email backend. More user-friendly and secure/configurable than a mail-to link. Acts as a source of email templates for use in the front end, validates completed email templates received from the front-end, and sends valid, formatted, emails on to recipient email accouts. The backend sending/receiving emails remain unknown to the clien submitting the email, to protect both the client's identity and our inboxes from spam. Also has mitigations in place for attempts to spam the receiving address through the send email API.
 
+## Development
+  0. Install node, npm, git. Clone the InfoBase repo 
+  1. `cd` to the `InfoBase/email_backend` dir
+  2. Run `npm ci`
+  3. Run `npm start` to start a local server on port 7331. Note: you'll need to restart this server whenever you want it to reflect changes to made in `src`
+  4. In a separate window run `npm test` to run unit tests in `src` as well as end-to-end test agaist the local server
+
 ## Endpoints
 
 ### get /email_template_names
