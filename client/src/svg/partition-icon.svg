@@ -4,16 +4,17 @@
 	 viewBox="0 0 450 323" style="enable-background:new 0 0 450 323;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:none;stroke:#2C70C9;stroke-width:7;stroke-miterlimit:10;}
-	.st1{fill:none;stroke:#2C70C9;stroke-width:13;stroke-miterlimit:10;}
+	.st1{fill:#2C70C9;stroke:#2C70C9;stroke-width:7;stroke-miterlimit:10;}
+	.st2{fill:none;stroke:#2C70C9;stroke-width:7;stroke-linejoin:round;stroke-miterlimit:10;}
 </style>
-<path id="path4491" class="st0" d="M15,13.1v112.1l102.9,54.6V67.5L15,13.1z"/>
-<path id="path4493" class="st0" d="M15,127v72.8l102.9,63.8v-73.3L15,127z"/>
+<path id="path4491" class="st0" d="M117.9,177V67.5L15,13.1v112.1L115.1,178L117.9,177"/>
+<path id="path4493" class="st0" d="M117.9,259.9v-66L15,127v72.8l100.2,61.3L117.9,259.9"/>
 <rect x="117.9" y="67.8" class="st1" width="112.7" height="110.2"/>
 <rect x="117.9" y="195.3" class="st1" width="112.7" height="66.7"/>
-<polygon class="st0" points="321.5,154.9 231.4,125.6 230.6,67.8 321.5,102.4 "/>
-<polygon class="st0" points="322.3,195.3 231.4,179.8 231.4,135.2 321.5,175.1 "/>
-<polygon class="st0" points="322.3,262 231.4,239.8 230.6,195.3 321.5,225.6 "/>
-<polygon class="st0" points="321.5,297.7 230.6,263.1 231.4,241.4 321.5,279.7 "/>
+<polygon class="st2" points="321.5,154.9 231.4,125.6 230.6,67.8 321.5,102.4 "/>
+<polygon class="st2" points="322.3,195.3 231.4,179.8 231.4,135.2 321.5,175.1 "/>
+<polygon class="st2" points="322.8,259.4 231.4,239.8 230.6,195.3 321.6,228.6 "/>
+<polygon class="st2" points="321.5,300.7 230.6,263.1 231.4,241.4 321.5,280.2 "/>
 <rect x="322.3" y="102.4" class="st1" width="112.7" height="52.6"/>
 <rect x="322.3" y="176.3" class="st1" width="112.7" height="19"/>
 <rect x="322.3" y="229.1" class="st1" width="112.7" height="30.3"/>
