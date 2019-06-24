@@ -201,17 +201,4 @@ li.list-group-item--home {
       background-color: lighten( $tertiaryColor, 30% ) !important;
     }
   }
-  & > a > .top-img-card > .top-img-card__top {
-    @media(min-width:600px) {
-      height: 200px;
-    }
-    @media(max-width:600px) {
-      height: 150px;
-    }
-    & > .top-img-card__img {
-      max-width:100%;
-      max-height:100%;
-    }
-  }
 }
-
