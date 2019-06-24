@@ -247,7 +247,7 @@ class SingleSubjExplorer extends React.Component {
     // Weird padding and margins here to get the spinner centered well and cover the "see the data" text while loading
     let inner_content = (
       <div style={{ paddingTop: "100px", paddingBottom: "30px", marginBottom: "-70px" }}>
-        <SpinnerWrapper config_name={"sub_route"} />
+        <SpinnerWrapper config_name={"tabbed_content"} />
       </div>
     );
 
@@ -337,7 +337,7 @@ class SingleSubjExplorer extends React.Component {
             {loading_query && 
               <div className="loading-overlay">
                 <div style={{height: '200px', position: 'relative'}}>
-                  <SpinnerWrapper config_name={"sub_route"} /> 
+                  <SpinnerWrapper config_name={"tabbed_content"} /> 
                 </div>
               </div>
             }
@@ -433,7 +433,7 @@ class SingleSubjResultsContainer extends React.Component {
     if (loading) {
       return (
         <div style={{position: "relative", height: "80px", marginBottom: "-10px"}}>
-          <SpinnerWrapper config_name={"sub_route"} />
+          <SpinnerWrapper config_name={"tabbed_content"} />
         </div>
       );
     } else {

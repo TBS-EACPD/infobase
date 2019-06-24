@@ -16,10 +16,10 @@ export const LeafSpinner = ({config_name}) => {
       transform: 'scale(2)',
       position: 'fixed',
     },
-    tabbed_panel: {
+    tabbed_content: {
       transform: 'scale(1)',
       position: 'absolute',
-      top: '40px',
+      top: '50%',
     },
     small_inline: {
       transform: 'scale(0.25)',

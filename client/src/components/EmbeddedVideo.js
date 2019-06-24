@@ -30,7 +30,7 @@ export class EmbeddedVideo extends React.Component {
     return (
       <div className = { container && "embedded-video-container" }>
         <div className = "embedded-video">
-          { loading && <SpinnerWrapper ref="spinner" config_name={"sub_route"} /> }
+          { loading && <SpinnerWrapper ref="spinner" config_name={"tabbed_content"} /> }
           <iframe
             title = { title }
             onLoad = { () => this.setState( { loading: false } ) }
