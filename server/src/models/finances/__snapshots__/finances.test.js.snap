@@ -4,7 +4,22 @@ exports[`finance data program fte snapshot 1`] = `
 Object {
   "data": Object {
     "root": Object {
-      "program": null,
+      "program": Object {
+        "program_fte": Array [
+          Object {
+            "pa_last_year": 3281,
+            "pa_last_year_2": 2870,
+            "pa_last_year_3": 3198,
+            "pa_last_year_4": 2967,
+            "pa_last_year_5": 5765,
+            "pa_last_year_planned": 3115,
+            "planning_year_1": null,
+            "planning_year_2": null,
+            "planning_year_3": null,
+            "program_id": "ND-ISC00",
+          },
+        ],
+      },
     },
   },
 }
@@ -14,7 +29,30 @@ exports[`finance data program spending snapshot 1`] = `
 Object {
   "data": Object {
     "root": Object {
-      "program": null,
+      "program": Object {
+        "program_spending": Array [
+          Object {
+            "pa_last_year_2_exp": 4296601.34,
+            "pa_last_year_3_exp": 1907996.87,
+            "pa_last_year_4_exp": 305329.74,
+            "pa_last_year_5_exp": 330773.1,
+            "pa_last_year_exp": 5003804.63,
+            "planning_year_1": null,
+            "planning_year_1_gross": null,
+            "planning_year_1_rev": null,
+            "planning_year_1_spa": null,
+            "planning_year_2": null,
+            "planning_year_2_gross": null,
+            "planning_year_2_rev": null,
+            "planning_year_2_spa": null,
+            "planning_year_3": null,
+            "planning_year_3_gross": null,
+            "planning_year_3_rev": null,
+            "planning_year_3_spa": null,
+            "program_id": "CPCC-ISC00",
+          },
+        ],
+      },
     },
   },
 }

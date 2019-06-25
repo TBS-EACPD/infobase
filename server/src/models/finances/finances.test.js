@@ -43,7 +43,7 @@ program_fte{
 const program_spending_query =`
 query ($lang: String = "en") {
   root(lang: $lang) {
-    program(id: "ACOA-ABH00") {
+    program(id: "CPCC-ISC00") {
       ${program_spending_field}
     }
   }
@@ -52,7 +52,7 @@ query ($lang: String = "en") {
 const program_fte_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
-    program(id: "ACOA-ABH00") {
+    program(id: "ND-ISC00") {
       ${program_fte_field}
     }
   }
