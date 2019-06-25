@@ -40,7 +40,11 @@ export const LeafSpinner = ({config_name}) => {
         .replace('faded-background--true', 'faded-background--false'),
     },
   };
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> Small style cleanup in LeafSpinner.scss and panel-components.js, tweak LeafSpinner.js configs and their usage
   const {
     outer_positioning,
     spinner_container_style,
