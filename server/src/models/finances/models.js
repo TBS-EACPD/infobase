@@ -53,8 +53,8 @@ export default function(model_singleton){
   const { ProgramSpending, ProgramFte } = model_singleton.models;
 
   const loaders = {
-    progSpending_program_id_loader: create_resource_by_foreignkey_attr_dataloader(ProgramSpending, 'program_id'),
-    progFte_program_id_loader: create_resource_by_foreignkey_attr_dataloader(ProgramFte, 'program_id'),
+    program_spending_program_id_loader: create_resource_by_foreignkey_attr_dataloader(ProgramSpending, 'program_id'),
+    program_fte_program_id_loader: create_resource_by_foreignkey_attr_dataloader(ProgramFte, 'program_id'),
   };
   _.each( loaders, (val, key) =>  model_singleton.define_loader(key, val) );
 }

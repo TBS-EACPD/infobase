@@ -23,6 +23,8 @@ export default async function({models}){
     .map(obj => new ProgramFte(obj))
     .value();
 
-  await ProgramSpending.insertMany(programSpending_records);
-  return await ProgramFte.insertMany(programFte_records);
+  return await Promise.all([
+    ProgramSpending.insertMany(programSpending_records),
+    ProgramFte.insertMany(programFte_records),
+  ]);
 }

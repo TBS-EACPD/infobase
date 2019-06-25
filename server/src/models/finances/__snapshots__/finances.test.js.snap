@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`finance data program fte snapshot 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "program": null,
+    },
+  },
+}
+`;
+
+exports[`finance data program spending snapshot 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "program": null,
+    },
+  },
+}
+`;

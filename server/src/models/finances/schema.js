@@ -46,14 +46,14 @@ const schema = `
 
 export default function({models, loaders}){
   const {
-    progSpending_program_id_loader,
-    progFte_program_id_loader,
+    program_spending_program_id_loader,
+    program_fte_program_id_loader,
   } = loaders;
 
   const resolvers = {
     Program: {
-      program_spending: (prog) => progSpending_program_id_loader.load(prog.program_id),
-      program_fte: (prog) => progFte_program_id_loader.load(prog.program_id),
+      program_spending: (prog) => program_spending_program_id_loader.load(prog.program_id),
+      program_fte: (prog) => program_fte_program_id_loader.load(prog.program_id),
     },
   };
 
